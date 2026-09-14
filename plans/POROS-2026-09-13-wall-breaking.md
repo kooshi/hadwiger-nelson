@@ -107,6 +107,7 @@ hunch: forcing-lives-at-a-level-of-the-prime
   falsifier: the 2-adic tower P_m over K(i) at four colours admits, at every m ≤ 8, a 4-colouring separating some pair of valuation 6 — then chunk forcing at valuation 6 is not tower-continuity and the frame is wrong on the calibrated bed
   registered: 2026-09-13
   status: open
+  verdict (2026-09-13, FS-38 close): REFUTED in its second clause and replaced by tightness. The 2-adic tower at four colours forces exactly depth ≥ 4 from level 5 (kernel at 5, derived for every m ≥ 5), never the fabric's depth 6, so chunk forcing at depth 6 is not tower-continuity; and the level is not the variable — the level-one plane's Hoffman tightness is (CLAUDE.md G54, ledger row 67), and it propagates up the tower, so a tight prime forces at every level and a slack one at none. The first clause (forcing at 2 is a matter of course) stands.
 
 hunch: the-two-primes-differ-at-level-one-and-agree-higher
   claim: P₁ is a clique at 2 and pairwise free at 11, but for k = 5 some level m ≥ 2 at 11 has every 5-colouring of P_m constant on 𝔭-cosets
@@ -114,6 +115,7 @@ hunch: the-two-primes-differ-at-level-one-and-agree-higher
   falsifier: a verified 5-colouring of P₂ = UD(ℤ/121, 2) separating the origin from some 11·v (a Separated model at the origin, self-certifying) — and the same at P₃ if P₂ separates
   registered: 2026-09-13
   status: open
+  verdict (2026-09-13, FS-38 close): DECIDED NO. The two primes differ at every level, by the classifier: 2 is tight at four colours (forced from level 5), 11 is slack at five colours, and a fan gap at level one pulls up the tower so every level at 11 is pairwise free — kernel (`zmodPow11_forces_eq`, `padicInt11_forces_eq`, `adjoin11_padicInt11_forces_eq`). The falsifier named here — a verified 5-colouring of UD(ℤ/121, 2) separating the origin from some 11·v — is `data/fs38/recolour-p11-level2.json`.
 
 hunch: the-sweeps-asked-the-wrong-object
   claim: a five-colour forced pair over a sealed field, if it exists, appears in deep 5-colourable fabric (the 11-adic analogue of the valuation dial), not in a critical 5-chromatic object; the four measured nulls are consistent with the frame and do not bear on it
@@ -121,6 +123,7 @@ hunch: the-sweeps-asked-the-wrong-object
   falsifier: a 5-colourable fabric over Heule's field whose 5-colourings, at every depth reachable, separate every pair with 11 ∣ d² — measured by the forced-distance table FS-6 §H (i) asked for and nobody built
   registered: 2026-09-13
   status: open
+  verdict (2026-09-13, FS-38 close): MOOT for sealed fields, by theorem (ledger row 66): no 5-colourable fabric over Heule's field, at any depth, forces a pair with 11 ∣ d² — or with any d² — so the forced-distance table this hunch would have read is refuted entry by entry before it is built. OPEN for 6-open fields, where no 5-colourable residue target exists and the nulls on the 1581 and the ρ₆₃ arena stay measured and unexplained.
 
 hunch: the-arena-null-is-thinness
   claim: ρ₆₃ and the 1581 read zero at arity 2 because both are near-critical (degree ~21 and ~10; "the object is thin", commit 217c0cb), and a compulsion at five colours needs density the way the 4-colour kills needed depth
@@ -128,6 +131,7 @@ hunch: the-arena-null-is-thinness
   falsifier: a dense 5-colourable object in a 6-open field (degree ≫ 21, depth ≥ 2 at some usable prime of a subfield) that still reads zero over a complete pair sweep
   registered: 2026-09-13
   status: open
+  verdict (2026-09-13, FS-38 close): unchanged by FS-38 (a 6-open object; the theorem does not reach it).
 
 hunch: the-bridge-is-classical-and-unstated
   claim: χ(ℝ²) = sup_F χ(F²) over real number fields, by de Bruijn–Erdős (finite subgraphs) plus the fact that the unit-edge variety of a finite graph is defined over ℚ and a real point yields a real-algebraic point (real closed fields; Tarski)
@@ -135,6 +139,7 @@ hunch: the-bridge-is-classical-and-unstated
   falsifier: a finite unit-distance graph in ℝ² with no drawing over any number field — impossible if the transfer principle applies, so the falsifier is a gap in the transfer argument found when it is written for the kernel
   registered: 2026-09-13
   status: open
+  verdict (2026-09-13, FS-38 close): unchanged; FS-39, rank 2 after the FS-38 close.
 
 ## Reading the wall
 
@@ -170,6 +175,7 @@ question: at-which-level-of-the-prime-does-a-sealed-plane-force
   hunch: continuity sets in — at 2 by level 3 in the lattice's depth units, and at 11 at level 2 or 3 for five colours; basis analogy from the clique at level one
   falsifier: a verified 5-colouring of UD(ℤ/121, 2) separating the origin from some 11·v
   rank: 1
+  verdict (2026-09-13, FS-38 close): ANSWERED. At 2 with k = 4: level 5, and the forced set is exactly 𝔓⁴/𝔓^m for every m ≥ 5 (kernel at 5, derived above; the tower stabilises at level 4). At 11 with k = 5: NO level forces — every level is pairwise free by the fan gap (kernel), so the branch "no level up to the affordable bound forces" fires with no bound at all: route A closes at its mechanism (CLAUDE.md G48).
 
 question: was-the-forced-pair-ever-sought-where-the-four-colour-one-was-found
   evidence: `plans/STUB-family-keeping-thickening.md:130-135` §H (i): the forced-distance table at residue norm 0 on Heule-510, its closure, W and its cross lattice — never built (`plans/BACKLOG-FOR-OPUS.md` B9 unbuilt; no `pullback-*.json` in `data/`); every five-colour sweep in the record ran on critical objects (`plans/M63-phaseH4-sweep.md` §0; M48; M54 §R)
@@ -180,6 +186,7 @@ question: was-the-forced-pair-ever-sought-where-the-four-colour-one-was-found
   answered by: run — `fpcompel.py filter --pairs` at residue norm 0 on Heule-510 ∪ gen-1 (M59's hub scan as the enumerator), then forced-equal asks under the jackpot protocol; the measurement B9 (i) specified
   cost: a day of CPU on the existing instruments; nothing new to build
   rank: 2
+  verdict (2026-09-13, FS-38 close): ANSWERED BY THEOREM (ledger row 66): every entry of the forced-distance table is refuted — no pair, with 11 ∣ d² or any other, is forced equal by every 5-colouring of any unit-distance graph over Heule's field — so the run is not needed; the "none at every depth" branch is the truth, and the rank-1 card says no depth suffices.
 
 question: is-the-programme-connected-to-the-plane
   evidence: `plans/M61-local-global-tightness.md:67-68` ("since de Grey's field has L = 8, [T2] is equivalent to χ(ℝ²) = 7"); `plans/PROGRAMME-ALGEBRAIC-PROOF.md` §4 line 1 ("de Bruijn–Erdős: χ(ℝ²) is the supremum of χ(F²) over such F"); grep of `Proofs/` for de Bruijn–Erdős and for an algebraic-drawing lemma: none
@@ -190,6 +197,7 @@ question: is-the-programme-connected-to-the-plane
   answered by: derivation — de Bruijn–Erdős (finite subgraphs; Mathlib has compactness of colourings? check `SimpleGraph.Colorable` and `Finset` API) plus the real-closed-field transfer for the unit-edge variety; one or two days of kernel work
   cost: one to two days; no compute
   rank: 3
+  verdict (2026-09-13, FS-38 close): unchanged (FS-39, rank 2).
 
 question: is-any-finite-plane-exactly-six
   evidence: `data/fplane/chi-p23-k5.json` … `chi-p47-k5.json` (`chi: None`, four solver-hours each); `BIBLIOGRAPHY.md:41,46` (no literature value above 19); `plans/STUB-first-digit-23.md` §3 D2 (the α route: refusing an independent set of 106 certifies χ ≥ 6 at 23 modulo the solver)
@@ -200,6 +208,7 @@ question: is-any-finite-plane-exactly-six
   answered by: run — the priced FS-17 routes, a desktop-day each; the α route's refusal is kernel-consumable through `card_le_mul_of_colorable`
   cost: one to two desktop-days per route
   rank: 4
+  verdict (2026-09-13, FS-38 close): unchanged (FS-17, rank 6, re-described: the plane at 23 is slack at five colours, which does not decide five-colourability); its 6-open sibling is FS-40, the first digit at 83, rank 1.
 
 ## The ruling (a recommendation, in four parts, with its default)
 

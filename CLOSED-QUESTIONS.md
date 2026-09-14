@@ -173,9 +173,25 @@ field tower lacks, so it stays a hand argument.
 **Prior art that constrains the claim.** The premise that `5/3` is monochromatic under every homomorphic
 colouring is `[Fischer1990]`'s `k·G = 0` obstruction at `k = 5`. The distance law is ours (ledger row 55).
 
-**Why it matters beyond the negative.** They had the right shape — the design target this project calls FS-6
-(`CLAUDE.md` G48: a pair forced equal at five colours, then spindled) — and no filter on the distance. The
-residue law is that filter: over a field where 11 is usable, look only at `11 ∣ d²`.
+**Answered at every distance, not only at `5/3` (FS-38, 2026-09-13; ledger row 66).** The plane at 11 has a
+five-colouring with a colour absent from one vertex's closed neighbourhood (`finitePlane11_fanGap`), and such a
+gap, repainted along the residue homomorphism, frees every pair above it from being forced equal
+(`not_forces_of_fanGap`, `Slack.forces_iff_of_hom`); a second table has one colour absent from the closed
+neighbourhoods of both ends of an edge, so a virtual edge is a unit edge (`not_separated_of_sharedGap`). Hence
+over every field where 11 is usable of residue degree one — every 5-sealed multiquadratic field containing
+ℚ(√3,√11), Gibbs's ℚ(√3,√5,√11) and ℚ(√3,√11,√247) among them — **no two distinct points of any unit-distance
+graph are forced equal by every five-colouring, at any distance, and the only pairs separated by every
+five-colouring are unit edges** (`forces_iff_of_hom_finitePlane11`, `separated_iff_adj_of_hom_finitePlane11`).
+Kernel for every `Valid` √7-free certificate with `11 ∤ D` (`UDCert.forces_eq_11`, `UDCert.separated_iff_adj_11`
+— every pair, no distance hypothesis) and unconditionally for Heule-510 (`heule510_forces_iff`,
+`heule510_separated_iff_adj`); the `ζ₂` graph over ℚ(√3,√11,√247) still needs M58's hand step, √247 being outside
+the kernel's tower. So the answer to Gibbs's question is no for every distance, and his design — a forced pair
+spindled for a sixth colour — has no instance over any such field (`CLAUDE.md` G48, G54); the residue law above
+survives as the level-one shadow of the theorem.
+
+**Why it matters beyond the negative.** They had the right shape — the design target this project called FS-6
+(`CLAUDE.md` G48: a pair forced equal at five colours, then spindled) — and no filter on the distance; the
+distance law was that filter, and the fan gap removes every distance at once.
 
 **Status:** not written up.
 
