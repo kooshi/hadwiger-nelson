@@ -78,9 +78,12 @@ our round trip of its 11 and 19 colourings through `ud_edges` are the reasons to
 nothing about six-colourability — a local search exhibits or does not; "not found" at this budget is a datum about the
 search, and the class structure is the reading (G21: the negative measures its enumeration). The next instrument on this
 side is a search for one independent set of size ≥ 1,149 (the necessary condition), and the certificate route is a refutation
-of that size with proof logs (χ ≥ 7). Caveat carried: ~8,100 moves/s per thread suggests the move evaluation is not
-O(degree); a faster search or a stronger algorithm (PartialCol, a hybrid evolutionary colourer) is the control on whether
-5.97% is the instance's floor or the search's.
+of that size with proof logs (χ ≥ 7). Caveat, confirmed by the engineer's closing report: the move evaluation scans the whole conflicting set (≈ 34,400
+candidates per iteration against 168 table updates; at the plateau 6,888 of 6,889 vertices sit on a monochromatic edge), so
+the plateau is partly the search's — and its best symmetric run, (2, (2,2,1,1)) at 17,025, **beat the whole-plane run on a
+strictly smaller space with one fifth of the budget**, which says the whole-plane search settles into a worse local optimum,
+not that the plane is richer. A stronger neighbourhood (PartialCol, a hybrid evolutionary colourer) and equivariant runs
+are the controls on whether ≈ 6% is the instance's floor.
 
 **The three minimal symmetric rows by local search** (`plane-colour-p83-k6-m2-tau-2-2-1-1.json`, `…-m2-tau-2-1-1-1-1.json`,
 `…-m3-tau-3-1-1-1.json`; the Rust colourer's rotation quotient, 16 threads, 120 s each): **not found**, best 17,025 / 17,527 /

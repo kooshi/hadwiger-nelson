@@ -1,0 +1,137 @@
+{
+ "kind": "fplane-theta",
+ "below": 84,
+ "rows": [
+  {
+   "p": 3,
+   "n": 9,
+   "theta": 2.9999999999999996,
+   "theta_prime": 2.9999999999999996,
+   "hoffman_alpha": 3.0000000000000004,
+   "theta_minus_hoffman": -8.881784197001252e-16,
+   "chi_floor": 3,
+   "alpha_needed_for_5": 2
+  },
+  {
+   "p": 7,
+   "n": 49,
+   "theta": 17.624837532146937,
+   "theta_prime": 17.62483753214694,
+   "hoffman_alpha": 17.62483753214692,
+   "theta_minus_hoffman": 1.7763568394002505e-14,
+   "chi_floor": 3,
+   "alpha_needed_for_5": 10
+  },
+  {
+   "p": 11,
+   "n": 121,
+   "theta": 34.54958326243918,
+   "theta_prime": 34.54958326243919,
+   "hoffman_alpha": 34.549583262439114,
+   "theta_minus_hoffman": 6.394884621840902e-14,
+   "chi_floor": 4,
+   "alpha_needed_for_5": 25
+  },
+  {
+   "p": 19,
+   "n": 361,
+   "theta": 99.49797307973623,
+   "theta_prime": 99.49797307973616,
+   "hoffman_alpha": 99.49797307973652,
+   "theta_minus_hoffman": -2.984279490192421e-13,
+   "chi_floor": 4,
+   "alpha_needed_for_5": 73
+  },
+  {
+   "p": 23,
+   "n": 529,
+   "theta": 131.76198299840956,
+   "theta_prime": 131.76198299840925,
+   "hoffman_alpha": 131.76198299840974,
+   "theta_minus_hoffman": -1.7053025658242404e-13,
+   "chi_floor": 5,
+   "alpha_needed_for_5": 106
+  },
+  {
+   "p": 31,
+   "n": 961,
+   "theta": 240.24736182798054,
+   "theta_prime": 240.24736182798048,
+   "hoffman_alpha": 240.24736182799342,
+   "theta_minus_hoffman": -1.2875034371973015e-11,
+   "chi_floor": 5,
+   "alpha_needed_for_5": 193
+  },
+  {
+   "p": 43,
+   "n": 1849,
+   "theta": 395.2337754987207,
+   "theta_prime": 395.2337754987204,
+   "hoffman_alpha": 395.2337754987169,
+   "theta_minus_hoffman": 3.808509063674137e-12,
+   "chi_floor": 5,
+   "alpha_needed_for_5": 370
+  },
+  {
+   "p": 47,
+   "n": 2209,
+   "theta": 466.38618176012125,
+   "theta_prime": 466.38618176012073,
+   "hoffman_alpha": 466.38618176012415,
+   "theta_minus_hoffman": -2.8990143619012088e-12,
+   "chi_floor": 5,
+   "alpha_needed_for_5": 442
+  },
+  {
+   "p": 59,
+   "n": 3481,
+   "theta": 693.1362121062147,
+   "theta_prime": 693.1362121062095,
+   "hoffman_alpha": 693.1362121062605,
+   "theta_minus_hoffman": -4.581579560181126e-11,
+   "chi_floor": 6,
+   "alpha_needed_for_5": 697
+  },
+  {
+   "p": 67,
+   "n": 4489,
+   "theta": 813.7758737249949,
+   "theta_prime": 813.7758737249982,
+   "hoffman_alpha": 813.7758737249956,
+   "theta_minus_hoffman": -6.821210263296962e-13,
+   "chi_floor": 6,
+   "alpha_needed_for_5": 898
+  },
+  {
+   "p": 71,
+   "n": 5041,
+   "theta": 829.0925480669179,
+   "theta_prime": 829.0925480669085,
+   "hoffman_alpha": 829.0925480669483,
+   "theta_minus_hoffman": -3.0468072509393096e-11,
+   "chi_floor": 7,
+   "alpha_needed_for_5": 1009
+  },
+  {
+   "p": 79,
+   "n": 6241,
+   "theta": 1099.1863745597277,
+   "theta_prime": 1099.1863745597038,
+   "hoffman_alpha": 1099.1863745596527,
+   "theta_minus_hoffman": 7.503331289626658e-11,
+   "chi_floor": 6,
+   "alpha_needed_for_5": 1249
+  },
+  {
+   "p": 83,
+   "n": 6889,
+   "theta": 1199.4587693975993,
+   "theta_prime": 1199.4587693975004,
+   "hoffman_alpha": 1199.4587693977555,
+   "theta_minus_hoffman": -1.5620571502950042e-10,
+   "chi_floor": 6,
+   "alpha_needed_for_5": 1378
+  }
+ ],
+ "claim_scope": "\u03d1(UD(F_p,2)) and Schrijver's \u03d1\u2032 by the LP over the p\u22121 norm classes of the translation scheme (its eigenmatrix the Kloosterman table), solved by HiGHS in floats; \u03b1 \u2264 \u03d1\u2032 \u2264 \u03d1, \u03c7 \u2265 \u2308n/\u03d1\u2032\u2309 \u2014 a derivation (Lov\u00e1sz 1979) plus a float LP; the Hoffman column is the control: for an arc-transitive graph \u03d1 equals the Hoffman ratio bound (Lov\u00e1sz, Thm 9), so theta_minus_hoffman must be ~0; no kernel content"
+}
