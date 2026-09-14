@@ -1,10 +1,10 @@
-# FS-41 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)
+# FS-44 — The fifth colour: what replaces residue rigidity for five-colourings over a 6-open field (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session)
 
 *Read beside: `plans/FS38-residue-tower.md` §S2 D0.6 (over a sealed field the mechanism's second act cannot exist; over a 6-open
 field no residue instrument sees anything), `plans/M56-arithmetic-of-tightness.md` §R1 (the four-colour colouring space of
 K-fabric: residue-rigid at 2-adic depth ≥ 3, the additive family, the 16-pair non-additive residue), `plans/STUB-kempe-classes.md`
 (FS-2, which this stub re-aims at K(√7)), `CLAUDE.md` G36 (the residue colouring is the canonical separating colouring), G41–G42
-(additive colourings and additive rigidity), G53 (the counting compulsion), `plans/STUB-arena-slack-census.md` (FS-40, whose
+(additive colourings and additive rigidity), G53 (the counting compulsion), `plans/STUB-arena-slack-census.md` (FS-43, whose
 frozen set is this stub's input).*
 
 ## 1. Mission context, in plain language
@@ -41,7 +41,7 @@ at 4 — so that a frozen vertex, and then a forced pair, is a statement about w
 | the arena's five-colourings are pairs `(f, g)`; `B(f) ∩ B(g) = ∅` on the circle; `L/count = 1/3` | derived; one provisional measurement | G53 |
 | every unit-distance object held is Kempe-open by orders of magnitude (gauge γ ≫ 0) | measured | M57 §R, H4 §15 |
 | no residue target for five-colourings over `K(√7)` | definition of 6-open; FS-38 D0.6 | G43; `plans/FS38-residue-tower.md` |
-| the frozen set `Φ` of the arena and of its thickenings | **FS-40's deliverable, not yet measured** | `plans/STUB-arena-slack-census.md` |
+| the frozen set `Φ` of the arena and of its thickenings | **FS-43's deliverable, not yet measured** | `plans/STUB-arena-slack-census.md` |
 
 ## 3. Derivations first (G46: name the object in its discipline)
 
@@ -68,9 +68,9 @@ it is what a six-forcer over `K(√7)` would be built from.
 | phase | what | cost | stop rule |
 |---|---|---|---|
 | PA | the prior-art gate under D3's names, two disciplines (reconfiguration; Cayley-graph colourings), before any run | half a day | anything found on frozen colourings of Cayley graphs or defect colourings of lattices is read before D1 |
-| A | the fifth-colour census on the arena: regenerate a few hundred five-colourings (the interface encoder; the explicit construction; FS-40's models), compute `S_f, S_g`, their residue-class pattern and 2-adic depth profile, and the surviving four-colour forced set on `B ∖ S_f` (M56's dial) | a day | a record of the distribution of `S` by residue class and depth; "S meets every class" or "S avoids class c" is the first structural fact |
+| A | the fifth-colour census on the arena: regenerate a few hundred five-colourings (the interface encoder; the explicit construction; FS-43's models), compute `S_f, S_g`, their residue-class pattern and 2-adic depth profile, and the surviving four-colour forced set on `B ∖ S_f` (M56's dial) | a day | a record of the distribution of `S` by residue class and depth; "S meets every class" or "S avoids class c" is the first structural fact |
 | B | D2 on the circle: enumerate admissible `(S_f, S_g)` circle patterns against the 66 constraints, and compare with the 19 circle patterns and 552 interface patterns the H2 certificate lists | a day | the pattern algebra written as a finite table; G53's `L` recomputed from it as a control |
-| C | D3: the reconfiguration graph of the arena's five-colourings at the interface (Kempe moves restricted to the 163 interface vertices), components, frozen vertices, against FS-40's `Φ` | a day | agreement with `Φ` is the control; a frozen vertex not in `Φ` is a defect in one of the two instruments |
+| C | D3: the reconfiguration graph of the arena's five-colourings at the interface (Kempe moves restricted to the 163 interface vertices), components, frozen vertices, against FS-43's `Φ` | a day | agreement with `Φ` is the control; a frozen vertex not in `Φ` is a defect in one of the two instruments |
 | D | derivation: the surviving-rigidity law of D1 on the bed U (M56's object, 1,953 points) with deletions of prescribed `S` — the four-colour law with an exceptional set | a day, capped | derived / not derived, stalls at … |
 
 ## 5. Registered predictions

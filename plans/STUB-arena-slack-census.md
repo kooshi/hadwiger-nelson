@@ -1,4 +1,4 @@
-# FS-40 — The slack census: where, if anywhere, can a five-colour compulsion live in the ρ₆₃ arena and its thickenings? (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session, from the fan-gap theorem of `plans/FS38-residue-tower.md` §S2)
+# FS-43 — The slack census: where, if anywhere, can a five-colour compulsion live in the ρ₆₃ arena and its thickenings? (STUB, 2026-09-13; minted by Kooshi in the FS-38 fork session, from the fan-gap theorem of `plans/FS38-residue-tower.md` §S2)
 
 *Read beside: `plans/FS38-residue-tower.md` §S2 (D0.2, the fan-gap theorem; D0.3, the arity-k filter), `plans/M63-phaseH4-sweep.md`
 (the 1.3-billion-pair null this stub explains or fails to), `plans/M63-phaseH2-plan.md` and `data/m62/m63-phaseH2-rho63-certificate.json`
@@ -35,7 +35,7 @@ points, `f(i) ≠ g(j)` on the 36 off-diagonal pairs"), with `f` restricted to f
 
 | fact | trust | where |
 |---|---|---|
-| a free colour at `v` in some `k`-colouring ⟹ `v` forced to nothing (`not_forces_of_fanGap` with `f = id`) | kernel skeleton, proof in progress (FS-38 K1) | `Proofs/HadwigerNelson/FanGap.lean` |
+| a free colour at `v` in some `k`-colouring ⟹ `v` forced to nothing (`not_forces_of_fanGap` with `f = id`) | **kernel** (row 66; FS-38 closed 2026-09-13) | `Proofs/HadwigerNelson/FanGap.lean` |
 | the arena: 51,133 vertices, 544,530 edges, χ = 5 exactly; 66 cross edges; base four-colourable in 0.35 s | solver-only (χ ≥ 5), verified colouring (χ ≤ 5) | row 64; `plans/M63-phaseH4-reduce-the-platform.md` §R |
 | 0 forced pairs of 1,307,266,278; 0 virtual edges of 1,306,721,748; 4,480 exhibited colourings, each verified | measured, complete; **the colourings were never committed** (`data/m63/README.md` "not recorded here") | `plans/M63-phaseH4-sweep.md` §8; `data/m63/m63-phaseH4-rho63-sweep.json` |
 | an explicit five-colouring of the arena, constructed in 0.7 s and verified on every edge | verified | `plans/M63-phaseH4-reduce-the-platform.md` line ~843; `data/m63/m63-phaseH4-rho63-k5.json` |
@@ -74,7 +74,7 @@ diagonal endpoint `v` needs `f(N_B(v)) ∪ {g(Rv)}` to be all four other colours
 ## 6. Failure and jackpot clauses
 
 Failure: P2 fails and the frozen pairs, re-asked, are all separated — then the arena carries frozen vertices with no forced pair,
-and the next question is D3's (what the interface forces at frozen vertices), which is FS-41's. Jackpot: a forced pair among
+and the next question is D3's (what the interface forces at frozen vertices), which is FS-44's. Jackpot: a forced pair among
 frozen vertices of thick K(√7)-fabric is HALT AND VERIFY (two encodings, the residue check that no residue target exists, the
 spindle radicand `4d² − 1` and its field, which stays 6-open by inheritance), then the spindled object's five-colour ask: a refusal
 in a 6-open field is the programme's target object, a candidate until certified.

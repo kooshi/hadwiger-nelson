@@ -1,5 +1,13 @@
 # The local–global tightness conjecture for unit-distance graphs over number fields
 
+> **Status (de Bruijn, 2026-09-14).** This is the statement as sent to the outside advisor on 2026-09-13, unchanged. The
+> advisor's response — hand proofs of the conjecture's two- and three-colour levels, the chain theorem that replaces the
+> spindle, the conditional five-level, an 18-vertex four-chromatic graph over ℚ(√2,√3) and eight copies over ℚ(√3,√7,√11) —
+> is filed under `reference/ChatGPT-local-global-tightness-conjecture/` with our verification note (`VERIFICATION.md`),
+> credited as **GPT Astra**, and consumed by stubs FS-45 and FS-46 (`plans/FRONTIER-STUBS.md`). Since the sending: Theorem 3
+> and Corollaries 3.1–3.2 are kernel-checked (`CLAUDE.md` ledger row 66, FS-38 closed 2026-09-13); the 2-adic tower's
+> stabilisation at level 4 is row 67; the frozen-vertex census of §7 is FS-43.
+
 *A statement prepared for external review, 2026-09-13. It is self-contained: nothing below assumes access to the research
 record it comes from. Every claim carries a trust tag.*
 
