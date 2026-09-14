@@ -7,6 +7,13 @@
 > that 23 seals is pairwise free at five colours by ledger row 66 (`Slack.forces_iff_of_hom`). The 6-open sibling is
 > FS-40 (`plans/STUB-first-digit-83.md`).
 
+> **Re-described 2026-09-14 (FS-50).** The α route (D2) is now bracketed exactly: `87 ≤ α(23) ≤ 108`, the upper bound an
+> exact certificate — and the triple-level relaxation that produced it has its own optimum at 108.55, so **it cannot reach
+> the 105 that would refute five colours**; CDCL cannot refute sizes above the ratio bound at 23 in 14 minutes
+> (`data/fs50/race23/`, `nscale/`); the finding side's best set is 87 (`plane-independent`, 300 s). The digit stays open on
+> both sides. What would move it: a set of 106 (the finder's plateau is 87), or a strictly stronger relaxation (a higher
+> Lasserre level, priced in `plans/STUB-triple-certificate-kernel.md`'s neighbourhood — not minted).
+
 > **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` B3):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
 
 *Read beside: `plans/M61-local-global-tightness.md` §S2–§S4 and §R3 (what was tried and what it cost), `plans/STUB-finite-plane-cores.md`
@@ -29,7 +36,7 @@ plane's is.
 |---|---|---|
 | χ ≥ 5 (Hoffman 4.015; ϑ = Hoffman) | a derivation + floats | `theta-below-83` |
 | χ ≤ 8 (a periodic colouring; the least periodic colouring needs exactly 8) | verified colouring; the refusal of 7 periodic is the solver's | `periodic-below-71` |
-| α ≥ 69 (three null lines); α ≤ 131 (Hoffman); α ≥ 106 = ⌈529/5⌉ UNDECIDED at 7200 s | verified / derivation / silence | `alpha-p23` |
+| **α(UD(𝔽₂₃,2)) ∈ [87, 108]** (2026-09-14, FS-50): 87 by a verified set (`data/fs50/alpha-p23-ge87.json`), **108 by an exact rational certificate of the triple-level SDP bound** (`data/fs50/cert-p23-N108.json`, checked by `tools/fplane_cert_check.py` from the number 23 alone); the five-colour threshold 106 is **not reached and cannot be by that relaxation** (its own optimum is 108.55), and no CDCL formulation refutes even sizes above the ratio bound at 23 (`data/fs50/race23/`) | verified set / exact-rational / the solver's silence | `data/fs50/` |
 | no equivariant 5-colouring under any rotation of order 3, 4, 6, 8, 12, 24, nor the half-turn with τ = id or one swap | the solver's (≤ 2 s each) | `build/m61/partF.log` (M61 §R3) |
 | the half-turn with a colour double-swap: REFUSED (external cadical, 1,110 s, the sound encoding) — **no 5-colouring at 23 has any rotational symmetry** | the solver's | `equivariant-p23-k5` |
 | ω = 3 (23 ≡ 11 mod 12: triangles exist); the origin's neighbourhood is four disjoint hexagons | exact | M59 |
