@@ -229,6 +229,13 @@ calibration (83 needs ≈ 10% of its gap) the line is live. Two facts for the to
 of scaled sparse terms catastrophically (254 s against 17 s for the identical problem as one linear map at 11), and SCS
 is fifteen times faster than Clarabel here at the accuracy a reading needs.
 
+**§S3.2 At 19 and 23 (2026-09-14, `data/fs50/sdp-p19-linear.json`, `sdp-p23-linear.json`): 85.67 at 19** (Hoffman 99.50,
+truth ≥ 76: 59% of the gap; `α(19) ≤ 85` if certified — 77 undecided) **and 108.55 at 23** (Hoffman 131.76, truth ≥ 87:
+52% of the gap; `α(23) ≤ 108` if certified — **the five-colour threshold 106 is missed by 2.5**, so FS-17's first digit stays
+open, bracketed `[87, 108]`). Both with every control green and the subgraph rows adding nothing (P8 met: more than a third).
+The fraction closed declines with `p` — 82%, 59%, 52% — and the advisor's calibration needs ≈ 10% at 83; the extrapolation is
+a reading, and phase E is the measurement. 673 / 1,167 orbits; SCS minutes at 23.
+
 **Phase D′, added by this number:** the exact rational dual and its checker are built at 11 first — certifying
 `α(UD(𝔽₁₁,2)) ≤ 29` exactly is one above the truth and is nevertheless the first bound below the ratio bound for any
 finite Euclidean plane with a stranger-checkable certificate, and 11 (151 orbits, two 121 × 121 blocks) is the right
@@ -257,6 +264,23 @@ per matrix (86 blocks ≤ 83 for the pair `Y`, `M − Y`) — a desktop job for 
 interior-point solver with an 18 GB Schur complement. **The control that the reduction is right is the direct solve at
 23** (529 × 529 blocks, no reduction): the block-diagonalised value at 23 must equal it to the bisection tolerance, and
 the verified 87-set must stay feasible in both.
+
+**D8′ — the reduction, concretely (the spec for phase E).** Fix a generator `ζ` of the rotation group (order `p+1`) and, on
+each circle `C_c`, a base point `u_c` and the angular coordinate `θ ∈ ℤ/(p+1)` with `x = u_c ζ^θ`. A `G`-invariant matrix `Y`
+is determined by its **angular profiles**: for each ordered pair of circles `(c, c′)` the function `f_{cc′}(θ) = Y[u_c, u_{c′} ζ^θ]`
+(`p+1` values, each an orbit variable), plus `Y[0, u_c]` and `Y[0,0]`. Its blocks are discrete Fourier transforms of the
+profiles: for the two-dimensional irreducible `ρ_j` (`1 ≤ j ≤ (p−1)/2`) the `(p−1) × (p−1)` block has entries
+`B_j[c, c′] = Σ_θ f_{cc′}(θ) cos(2π jθ/(p+1))` (the sine part agrees by Schur, and the reflection makes the profile even
+once the base points are chosen on a common reflection axis per circle type); the trivial block (`p × p`) is the `j = 0` sum
+bordered by the origin's row `Y[0, u_c]·√(p+1)`-normalised; the two `(p−1)/2 × (p−1)/2` blocks are the `j = (p+1)/2`
+alternating sums restricted to each circle type (the circles a given reflection meets — `c/Q(u)` a square — and the others).
+`M(y)` has the same form with `f^M_{cc′}(θ) = g(Q(u_c − u_{c′} ζ^θ))`. So the map from orbit variables to block entries is a
+sparse linear map with `p+1` nonzeros per entry — ≈ 24 M nonzeros at 83, built once — and `Y ⪰ 0 ⟺ every block ⪰ 0`.
+**Controls before 83:** the reduced solve at 11 and 23 must reproduce 29.18 and 108.55 to the solver's tolerance, and the
+reduced true-set `Y_S` blocks must be PSD. The certificate at 83 then lives in the blocks (`U_b` = the Fourier vectors,
+rational after clearing `ℚ(ζ_{p+1})⁺` — or, simpler for the checker, the blocks are verified PSD and the identity is checked
+on the full orbit coefficients through the same map, which needs no algebraic numbers if the map's entries are kept as
+exact cosines in `ℚ(ζ_{p+1})` — a detail phase E decides and records).
 
 **D9 — the kernel form is two stubs away, and this milestone states so.** Level one (an exact rational Delsarte dual,
 positive definite over ℚ-blocks grouped by the Galois orbits of `ℚ(ζ_p)`) is FS-41's "Hoffman's equality case in Fourier
@@ -292,7 +316,7 @@ the SDP's kernel form as its own line. **The server is not asked for at any bran
 | P5 | α(23) < 106 | kept, low-medium; the SDP at 23 (phase C) is its test |
 | **P6** (the advisor's hunch, registered) | α(83) ≤ 750 | falsifier: a verified set above 750; the SDP at 83 is its upper test |
 | **P7** (the advisor's) | the triple-level bound at 11 lies in `[28.5, 30]` | falsifier: a value `≥ 30.39` with both controls green |
-| **P8** (mine) | at 23 the triple level closes more than a third of the Hoffman-to-truth gap (`< 116.9` against 131.76 and 87) | falsifier: a value `≥ 116.9`; if met, 83 is predicted to clear 1,149 by the advisor's 10% reading |
+| **P8** (mine) | at 23 the triple level closes more than a third of the Hoffman-to-truth gap (`< 116.9` against 131.76 and 87) | **met: 108.55, 52%** (2026-09-14); 83 is predicted to clear 1,149 by the advisor's 10% reading — a reading, phase E measures it |
 
 ### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
 

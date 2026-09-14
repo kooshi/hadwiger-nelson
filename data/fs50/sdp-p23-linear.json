@@ -1,0 +1,29 @@
+{
+ "kind": "fplane-sdp",
+ "p": 23,
+ "n": 529,
+ "orbits": 1167,
+ "killed": 144,
+ "solver": "SCS",
+ "delsarte": 131.76198299840925,
+ "linear_bound": 108.54605872328267,
+ "linear_status": "optimal",
+ "linear_plus_lp_bound": 108.54648539356167,
+ "true_set_size": 87,
+ "true_set_checks": {
+  "s3_identity_on_raw_Y": true,
+  "swap_identity_on_raw_Y": true,
+  "trace": true,
+  "g0": true,
+  "killed_zero": true,
+  "nonneg": true,
+  "Y_psd": true,
+  "M_minus_Y_psd": true,
+  "rowsums": true,
+  "entry_le_diag": true
+ },
+ "feasible_at_true_size": "optimal",
+ "planted_wrong_sign_at_true_size": "infeasible",
+ "claim_scope": "float readings (SCS/Clarabel): the triple-level SDP bound is NOT a bound on alpha until an exact rational dual certificate is checked by tools/fplane_cert_check.py; the controls are the reasons to read the value",
+ "seconds": 1086.6333692073822
+}
