@@ -1,0 +1,42 @@
+{
+ "11": {
+  "delsarte": 34.54958326243919,
+  "single": {
+   "triangle": 31.948,
+   "rhombus": 34.55,
+   "wheel6": 34.55,
+   "spindle": 30.392,
+   "circle+centre": 34.55,
+   "wheelpair": 34.55,
+   "hex2+centre": 34.55,
+   "hexpatch19": 34.306
+  }
+ },
+ "23": {
+  "delsarte": 131.76198299840925,
+  "single": {
+   "triangle": 126.755,
+   "rhombus": 131.762,
+   "wheel6": 131.762,
+   "circle+centre": 131.762,
+   "wheelpair": 131.762,
+   "hex2+centre": 131.762,
+   "hex3+centre": 131.762,
+   "hexpatch19": 131.762
+  }
+ },
+ "83": {
+  "delsarte": 1199.4587693975004,
+  "single": {
+   "triangle": 1197.064,
+   "rhombus": 1199.459,
+   "wheel6": 1199.459,
+   "spindle": 1199.459,
+   "circle+centre": 1199.459,
+   "wheelpair": 1199.459,
+   "hex2+centre": 1199.459,
+   "hex3+centre": 1199.459,
+   "hexpatch19": 1199.459
+  }
+ }
+}

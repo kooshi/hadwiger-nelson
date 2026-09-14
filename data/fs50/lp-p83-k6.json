@@ -1,0 +1,91 @@
+{
+ "kind": "fplane-lp",
+ "p": 83,
+ "n": 6889,
+ "delsarte_theta_prime": 1199.4587693975004,
+ "graphs": {
+  "triangle": {
+   "vertices": 3,
+   "edges": 3,
+   "alpha": 1,
+   "rows": 1190
+  },
+  "rhombus": {
+   "vertices": 4,
+   "edges": 5,
+   "alpha": 2,
+   "rows": 1764
+  },
+  "wheel6": {
+   "vertices": 7,
+   "edges": 12,
+   "alpha": 3,
+   "rows": 616
+  },
+  "spindle": {
+   "vertices": 7,
+   "edges": 11,
+   "alpha": 2,
+   "rows": 3485
+  },
+  "circle+centre": {
+   "vertices": 85,
+   "edges": 168,
+   "alpha": 42,
+   "rows": 83
+  },
+  "wheelpair": {
+   "vertices": 10,
+   "edges": 19,
+   "alpha": 4,
+   "rows": 1764
+  },
+  "hex2+centre": {
+   "vertices": 13,
+   "edges": 24,
+   "alpha": 6,
+   "rows": 329
+  },
+  "hex3+centre": {
+   "vertices": 19,
+   "edges": 36,
+   "alpha": 9,
+   "rows": 1108
+  },
+  "hexpatch19": {
+   "vertices": 19,
+   "edges": 42,
+   "alpha": 7,
+   "rows": 616
+  }
+ },
+ "rows": {
+  "fourier": 83,
+  "subgraph:triangle": 1190,
+  "subgraph:rhombus": 1764,
+  "subgraph:wheel6": 616,
+  "subgraph:spindle": 3485,
+  "subgraph:circle+centre": 83,
+  "subgraph:wheelpair": 1764,
+  "subgraph:hex2+centre": 329,
+  "subgraph:hex3+centre": 1108,
+  "subgraph:hexpatch19": 616,
+  "szekely:wheel6": 1,
+  "szekely:circle+centre": 1
+ },
+ "strengthened_max": 1197.0635377634526,
+ "target": 1149,
+ "feasible_at_target_subgraph_szekely": true,
+ "atoms": {
+  "wheel6": {
+   "atoms": 19,
+   "feasible_at_target": true
+  },
+  "spindle": {
+   "atoms": 18,
+   "feasible_at_target": true
+  }
+ },
+ "seconds": 1.0969257354736328,
+ "claim_scope": "a relaxation: Delsarte's LP over the norm classes plus inclusion\u2013exclusion rows from small unit-distance subgraphs ([KMOR2016] (2) over all translates, (3) Sz\u00e9kely, [AmbrusEtAl2023] atoms); INFEASIBLE at a size certifies \u03b1 below it on the LP solver's word (floats, HiGHS); FEASIBLE certifies nothing"
+}
