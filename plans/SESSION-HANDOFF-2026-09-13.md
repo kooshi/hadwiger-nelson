@@ -1,3 +1,5 @@
+> **SUPERSEDED the same evening by `plans/SESSION-HANDOFF-2026-09-13-fs38.md`: FS-38 was executed and closed at `7decc60`. Kept as the record of the morning (deprecate, never delete).**
+
 # Session handoff — 2026-09-13 (de Bruijn; written before a compaction, for the session that opens FS-38)
 
 You are arriving with no conversation memory. This file is the letter. Read it, then the read order in §5, then
