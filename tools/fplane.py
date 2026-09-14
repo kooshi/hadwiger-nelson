@@ -855,48 +855,138 @@ def equivariant_colouring(p: int, k: int, g, tau, conf: int):
         assert all(col[gz_of[z]] == tau[col[z]] for z in range(n)), "INSTRUMENT CATASTROPHE: the model is not equivariant"
     return st, col
 
+def rotation_orbits(p: int, g, o: int):
+    """Orbits of the rotation ⟨g⟩ on F_p²: rep[z] (the orbit's representative, the smallest index) and exp[z] with
+    z = g^exp[z] rep[z]. Every orbit except the origin's has exactly o points (a rotation about the origin fixes only the
+    origin), which the walk asserts."""
+    n = p * p
+    def act(z):
+        x, y = divmod(z, p)
+        return ((g[0][0] * x + g[0][1] * y) % p) * p + (g[1][0] * x + g[1][1] * y) % p
+    rep = [-1] * n; exp = [0] * n
+    for z in range(n):
+        if rep[z] >= 0:
+            continue
+        w, jj = z, 0
+        while rep[w] < 0:
+            rep[w] = z; exp[w] = jj; w = act(w); jj += 1
+        assert w == z and (jj == o or z == 0 and jj == 1), f"INSTRUMENT CATASTROPHE: orbit of {z} has size {jj}, order {o}"
+    return rep, exp, act
+
+
+def equivariant_quotient(p: int, k: int, g, o: int, tau, conf: int, E=None):
+    """The quotient form of `equivariant_colouring`: one variable set per ⟨g⟩-orbit instead of per point, so the instance
+    is o times smaller (order 84 at p = 83 leaves 83 representatives against 6,889 points). A colouring with
+    col(g z) = τ(col z) is determined by its values on representatives — col(g^j z₀) = τ^j(col z₀) — so an edge
+    (g^a z₀, g^b w₀) is monochromatic iff τ^a(col z₀) = τ^b(col w₀), i.e. iff col z₀ = τ^(b−a)(col w₀): one clause
+    ¬(z₀ has τ^t c ∧ w₀ has c) per colour c, t = b − a mod o. An edge inside one orbit with τ^t c = c forbids c on that
+    representative outright. The origin is its own orbit and is pinned to a τ-fixed colour (none ⟹ trivially unsat).
+    The model is EXPANDED to the whole plane and verified proper on every edge AND equivariant before it is returned,
+    so the quotient is an instrument for finding and the verdict is the full plane's. Any single true colour per
+    representative expands to a proper colouring (the clauses forbid every monochromatic pair of choices), so
+    at-most-one is not needed for soundness; it is added because it is cheap on the quotient."""
+    from pysat.solvers import Cadical195
+    if not any(tau[c] == c for c in range(k)):
+        return "unsat", None
+    if E is None:
+        E, _ = ud_edges(p)
+    n = p * p
+    rep, exp, act = rotation_orbits(p, g, o)
+    reps = sorted(set(rep)); ridx = {r: i for i, r in enumerate(reps)}; R = len(reps)
+    taupow = [list(range(k))]
+    for _ in range(1, o):
+        taupow.append([tau[c] for c in taupow[-1]])
+    var = lambda r, c: r * k + c + 1
+    clauses = set()
+    for (u, v) in E:
+        ru, rv = ridx[rep[u]], ridx[rep[v]]; t = (exp[v] - exp[u]) % o
+        for c in range(k):
+            cl = (-var(ru, taupow[t][c]), -var(rv, c))
+            clauses.add(cl if cl[0] != cl[1] else (cl[0],))
+    s = Cadical195()
+    for r in range(R):
+        s.add_clause([var(r, c) for c in range(k)])
+        for c in range(k):
+            for d in range(c + 1, k):
+                s.add_clause([-var(r, c), -var(r, d)])
+    for cl in clauses:
+        s.add_clause(list(cl))
+    fixed = next(c for c in range(k) if tau[c] == c)
+    s.add_clause([var(ridx[0], fixed)])
+    s.conf_budget(conf)
+    ok = s.solve_limited()
+    if ok is None:
+        return "unknown", None
+    if not ok:
+        return "unsat", None
+    m = set(x for x in s.get_model() if x > 0)
+    colr = [next(c for c in range(k) if var(r, c) in m) for r in range(R)]
+    col = [taupow[exp[z]][colr[ridx[rep[z]]]] for z in range(n)]
+    assert all(col[u] != col[v] for (u, v) in E), "INSTRUMENT CATASTROPHE: the expanded model is not a proper colouring"
+    assert all(col[act(z)] == tau[col[z]] for z in range(n)), "INSTRUMENT CATASTROPHE: the expanded model is not equivariant"
+    return "sat", col
+
+
+def _equivariant_row(args):
+    p, k, o, g, ct, tau, conf, fat = args
+    t0 = time.time()
+    if fat:
+        st, col = equivariant_colouring(p, k, g, tau, conf)
+    else:
+        st, col = equivariant_quotient(p, k, g, o, tau, conf, E=_EQ_EDGES.get(p))
+    return dict(rotation_order=o, rotation=g, tau=list(tau), tau_cycle_type=list(ct), status=st,
+                seconds=round(time.time() - t0, 1), colouring=col)
+
+
+_EQ_EDGES = {}
+
+
 def cmd_equivariant(a):
+    """Rows are independent SAT asks and run --jobs at a time (a fork pool: the edge list is built once in the parent
+    and inherited; Python 3.14's default start method would re-import and rebuild it per worker). Each row is logged
+    the moment it completes; the record lists rows in (order, cycle type) order regardless."""
+    import multiprocessing as mp
     p, k = a.p, a.k
     by_order = {}
     for g, o in rotations(p):
         by_order.setdefault(o, g)
     reps = perm_class_reps(k)
-    rows = []
+    specs = []
     for o in sorted(by_order):
-        if o == 1:
+        if o == 1 or (a.orders and o not in a.orders):
             continue
         g = by_order[o]
         for ct, (tau, to) in reps.items():
             if o % to != 0:
                 continue
-            t0 = time.time()
-            st, col = equivariant_colouring(p, k, g, tau, a.conf)
-            secs = round(time.time() - t0, 1)
-            rows.append(dict(rotation_order=o, rotation=g, tau=list(tau), tau_cycle_type=list(ct), status=st, seconds=secs, colouring=col))
-            word = {"sat": "a colouring verified proper and equivariant", "unsat": ("no τ-fixed colour for the origin (trivial)" if not any(tau[c] == c for c in range(k)) else "the solver's refusal"), "unknown": f"unknown at {a.conf} conflicts"}[st]
-            print(f"[equivariant] p={p} k={k}: rotation of order {o:2d}, τ of cycle type {ct}: {st.upper():7s} — {word} [{secs}s]", flush=True)
-    out = dict(kind="fplane-equivariant", p=p, k=k, conflict_budget=a.conf, rows=rows,
+            specs.append((p, k, o, g, ct, tau, a.conf, a.fat))
+    if not a.fat:
+        _EQ_EDGES[p] = ud_edges(p)[0]
+    rows = []
+    def log(r):
+        st = r["status"]; tau = r["tau"]
+        word = {"sat": "a colouring verified proper and equivariant", "unsat": ("no τ-fixed colour for the origin (trivial)" if not any(tau[c] == c for c in range(k)) else "the solver's refusal"), "unknown": f"unknown at {a.conf} conflicts"}[st]
+        print(f"[equivariant] p={p} k={k}: rotation of order {r['rotation_order']:2d}, τ of cycle type {tuple(r['tau_cycle_type'])}: {st.upper():7s} — {word} [{r['seconds']}s]", flush=True)
+    t0 = time.time()
+    if a.jobs > 1:
+        with mp.get_context("fork").Pool(a.jobs) as pool:
+            for r in pool.imap_unordered(_equivariant_row, specs):
+                rows.append(r); log(r)
+    else:
+        for sp in specs:
+            r = _equivariant_row(sp); rows.append(r); log(r)
+    rows.sort(key=lambda r: (r["rotation_order"], [-x for x in r["tau_cycle_type"]]))
+    out = dict(kind="fplane-equivariant", p=p, k=k, conflict_budget=a.conf, formulation=("fat" if a.fat else "quotient"), jobs=a.jobs,
+               seconds=round(time.time() - t0, 1), rows=rows,
                claim_scope="colourings of UD(F_p,2) with col(r z) = τ(col z) for one rotation r of each order about the origin and one τ per "
                            "conjugacy class of S_k of compatible order (conjugate τ and the rotation's other generators give equivalent instances); "
-                           "sat: a colouring verified proper and equivariant; unsat: the solver's refusal at the conflict budget (untrusted); "
+                           "sat: a colouring verified proper and equivariant ON THE FULL PLANE (the quotient is only the instrument); unsat: the solver's refusal at the conflict budget (untrusted); "
                            "unknown: the budget ran out — a refusal of every class says a k-colouring has no rotational symmetry, not that none exists")
-    DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"equivariant-p{p}-k{k}.json"
-    path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
+    print(f"[equivariant] p={p} k={k}: {len(rows)} rows, {sum(r['status']=='sat' for r in rows)} sat / {sum(r['status']=='unsat' for r in rows)} unsat / {sum(r['status']=='unknown' for r in rows)} unknown, {out['seconds']}s wall, {a.jobs} jobs, {out['formulation']}", flush=True)
+    if a.out:
+        json.dump(out, open(a.out, "w"), indent=1); print(f"  wrote {a.out}")
     return out
 
-def field_q27():
-    """F_27 = F_3[t]/(t³ − t − 1): elements as coefficient triples; returns (elements, add, mul, one)"""
-    els = [(a, b, c) for a in range(3) for b in range(3) for c in range(3)]
-    def add(u, v): return tuple((x + y) % 3 for x, y in zip(u, v))
-    def mul(u, v):
-        r = [0] * 5
-        for i in range(3):
-            for j in range(3):
-                r[i + j] = (r[i + j] + u[i] * v[j]) % 3
-        r[2] = (r[2] + r[4]) % 3; r[1] = (r[1] + r[4]) % 3
-        r[1] = (r[1] + r[3]) % 3; r[0] = (r[0] + r[3]) % 3
-        return tuple(r[:3])
-    return els, add, mul, (1, 0, 0)
 
 def chi_q(q: int, k, conf: int):
     """the unit-quadrance graph over F_q for q = p^f, f odd (only 27 is built): χ by budgeted SAT"""
@@ -943,7 +1033,7 @@ def main():
     p = sub.add_parser("periodic"); p.add_argument("--below", type=int, default=100); p.add_argument("--conf", type=int, default=2_000_000); p.add_argument("--out"); p.set_defaults(f=cmd_periodic)
     p = sub.add_parser("theta"); p.add_argument("--below", type=int, default=100); p.add_argument("--out"); p.set_defaults(f=cmd_theta)
     p = sub.add_parser("alpha"); p.add_argument("--p", type=int, required=True); p.add_argument("--N", type=int); p.add_argument("--wall", type=float, default=3600); p.add_argument("--out"); p.set_defaults(f=cmd_alpha)
-    p = sub.add_parser("equivariant"); p.add_argument("--p", type=int, required=True); p.add_argument("--k", type=int, required=True); p.add_argument("--conf", type=int, default=5_000_000); p.add_argument("--out"); p.set_defaults(f=cmd_equivariant)
+    p = sub.add_parser("equivariant"); p.add_argument("--p", type=int, required=True); p.add_argument("--k", type=int, required=True); p.add_argument("--conf", type=int, default=5_000_000); p.add_argument("--out"); p.add_argument("--jobs", type=int, default=1, help="rows in parallel (a fork pool)"); p.add_argument("--fat", action="store_true", help="the pre-2026-09-14 full-plane formulation (the control for the quotient)"); p.add_argument("--orders", type=lambda x: [int(t) for t in x.split(",")], default=None, help="only these rotation orders"); p.set_defaults(f=cmd_equivariant)
     p = sub.add_parser("self-test"); p.set_defaults(f=lambda a: sys.exit(0 if self_test() else 1))
     a = ap.parse_args(); a.f(a)
 

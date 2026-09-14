@@ -38,3 +38,22 @@ k = 5 asks are recorded as they finish; at 59 the exact spectrum gives ≥ 6 (Ho
 
 **Not here:** the sieve's outputs (`fplane.py usable --rads …`, printed; `map` records them per field), the background
 logs (`build/m58/`), and the M31 closure the `--gen1` shadow regenerates (3 s, from `tools/closure.py`).
+
+## The plane at 83 at six colours — the equivariant census (FS-40 phase A, 2026-09-14)
+
+`equivariant-p83-k6-quotient.json` (`fplane.py equivariant --p 83 --k 6 --jobs 16`, the **quotient** formulation added
+2026-09-14: one variable set per orbit of the rotation, the model expanded to the full plane and verified proper and
+equivariant there; the pre-2026-09-14 full-plane formulation is `--fat` and is the control — the two agree on all 20 rows at
+(11, 5) and on 29 of 30 at (23, 5), where the hard half-turn row the record's external cadical refuted reads *unknown* on the
+quotient at the same 5 M-conflict budget, so the quotient is the faster instrument for the easy rows and not a stronger one
+for the hard ones). **63 rows: 0 sat, 58 unsat, 5 unknown**, 3,777 s wall on 16 cores (desktop). Of the 58 refusals, 22 are
+trivial (a τ with no fixed colour cannot colour the origin) and 36 are the solver's, every one under 3 s. The five unknowns
+are the rows with a fixed-colour τ at low rotation order — (2, (2,2,1,1)) 3,777 s, (2, (2,1,1,1,1)) 3,697 s, (3, (3,1,1,1))
+3,043 s, (4, (4,1,1)) 2,402 s, (6, (3,2,1)) 1,658 s — the largest quotients (3,445 / 2,297 / 1,723 / 1,149 representatives).
+They are not independent: a colouring equivariant under (g, τ) is equivariant under (g^j, τ^j), so (6, (3,2,1)) is implied by
+(2, (2,1,1,1,1)) and by (3, (3,1,1,1)), and (4, (4,1,1)) by (2, (2,2,1,1)); **the three minimal open rows are the two order-2
+rows and the order-3 row.** What the record licenses: *no six-colouring of UD(𝔽₈₃, 2) has a rotational symmetry of order 7,
+12, 14, 21, 28, 42 or 84, nor one of order 2, 3, 4 or 6 with a τ outside the five listed classes* (the solver's refusals,
+untrusted); nothing about the five open rows, and nothing about six-colourability itself. The full-plane formulation's run
+(`equivariant-p83-k6.json`, one row at a time) is the second instrument and is recorded when it finishes; its first hard
+rows read unknown at 1,567 s and 3,625 s.
