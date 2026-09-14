@@ -60,45 +60,52 @@ def omegaMul : EisMod n →+ EisMod n where
 
 @[simp]
 theorem norm_omegaMul (z : EisMod n) : norm (omegaMul z) = norm z := by
-  sorry
+  simp only [norm, omegaMul, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
+  ring
 
 @[simp]
 theorem trace_omegaMul_omegaMul (z w : EisMod n) : trace (omegaMul z) (omegaMul w) = trace z w := by
-  sorry
+  simp only [trace, omegaMul, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
+  ring
 
 @[simp]
 theorem norm_conj (z : EisMod n) : norm (conj z) = norm z := by
-  sorry
+  simp only [norm, conj, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
+  ring
 
 @[simp]
 theorem trace_conj_conj (z w : EisMod n) : trace (conj z) (conj w) = trace z w := by
-  sorry
+  simp only [trace, conj, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
+  ring
 
 /-- `ω³ = 1`: three applications of `omegaMul` are the identity — the source of its injectivity. -/
 theorem omegaMul_omegaMul_omegaMul (z : EisMod n) : omegaMul (omegaMul (omegaMul z)) = z := by
-  sorry
+  simp only [omegaMul, AddMonoidHom.coe_mk, ZeroHom.coe_mk]
+  ext <;> simp
+  ring
 
-theorem omegaMul_injective : Function.Injective (omegaMul : EisMod n → EisMod n) := by
-  sorry
+theorem omegaMul_injective : Function.Injective (omegaMul : EisMod n → EisMod n) :=
+  Function.LeftInverse.injective (g := fun z => omegaMul (omegaMul z)) omegaMul_omegaMul_omegaMul
 
 variable {n' : ℕ}
 
 /-- The norm commutes with a ring homomorphism applied to both components. -/
 @[simp]
 theorem norm_map (φ : ZMod n →+* ZMod n') (z : EisMod n) : norm (Prod.map φ φ z) = φ (norm z) := by
-  sorry
+  simp only [norm, Prod.map_fst, Prod.map_snd, map_sub, map_add, map_mul, map_pow]
 
 @[simp]
 theorem trace_map (φ : ZMod n →+* ZMod n') (z w : EisMod n) :
     trace (Prod.map φ φ z) (Prod.map φ φ w) = φ (trace z w) := by
-  sorry
+  simp only [trace, Prod.map_fst, Prod.map_snd, map_sub, map_add, map_mul, map_ofNat]
 
 /-- `ω`-multiplication commutes with a ring homomorphism applied to both components — oriented with the map inward
 and `ω` outward, so that `trace_omegaMul_omegaMul` fires next. -/
 @[simp]
 theorem omegaMul_map (φ : ZMod n →+* ZMod n') (z : EisMod n) :
     Prod.map φ φ (omegaMul z) = omegaMul (Prod.map φ φ z) := by
-  sorry
+  simp only [omegaMul, AddMonoidHom.coe_mk, ZeroHom.coe_mk, Prod.map_fst, Prod.map_snd, Prod.map_apply,
+    map_neg, map_sub]
 
 end EisMod
 
@@ -117,19 +124,39 @@ is the `A`-component of the level map `m + 1 → m`; at `m` it is the `B`-compon
 def castDown (m : ℕ) : ZMod (2 ^ ((m + 1) / 2)) →+* ZMod (2 ^ (m / 2)) :=
   ZMod.castHom (pow_dvd_pow 2 (by omega : m / 2 ≤ (m + 1) / 2)) _
 
+/-- `2^{⌊m/2⌋+1} = 0` in the `A`-ring, because `⌈m/2⌉ ≤ ⌊m/2⌋ + 1`. The one arithmetic fact behind both `dbl`'s
+additivity and its commutation with reduction: doubling kills the ambiguity in a `B`-ring representative. -/
+theorem two_pow_succ_eq_zero (m : ℕ) : (2 : ZMod (2 ^ ((m + 1) / 2))) ^ (m / 2 + 1) = 0 := by
+  have h : ((2 ^ (m / 2 + 1) : ℕ) : ZMod (2 ^ ((m + 1) / 2))) = 0 :=
+    (ZMod.natCast_eq_zero_iff _ _).mpr (pow_dvd_pow 2 (by omega))
+  simpa using h
+
+/-- `2·a` read in the `A`-ring does not see `a`'s reduction modulo `2^⌊m/2⌋` — the well-definedness of `dbl`,
+stated on natural-number representatives so both consumers can use it. -/
+theorem two_mul_natCast_mod (m a : ℕ) :
+    (2 : ZMod (2 ^ ((m + 1) / 2))) * ((a % 2 ^ (m / 2) : ℕ) : ZMod (2 ^ ((m + 1) / 2)))
+      = 2 * (a : ZMod (2 ^ ((m + 1) / 2))) := by
+  conv_rhs => rw [← Nat.mod_add_div a (2 ^ (m / 2))]
+  push_cast
+  rw [mul_add, ← mul_assoc, ← pow_succ', two_pow_succ_eq_zero, zero_mul, add_zero]
+
 /-- Doubling from the `B`-ring into the `A`-ring, `x ↦ 2·x̃`: well defined because `2·(x + 2^⌊m/2⌋ t) ≡ 2x` modulo
 `2^⌈m/2⌉` (`⌈m/2⌉ ≤ ⌊m/2⌋ + 1`). Additive, not multiplicative; the only place a representative (`ZMod.val`) is read. -/
 def dbl (m : ℕ) : ZMod (2 ^ (m / 2)) →+ ZMod (2 ^ ((m + 1) / 2)) where
   toFun x := 2 * (x.val : ZMod (2 ^ ((m + 1) / 2)))
   map_zero' := by simp
   map_add' x y := by
-    sorry
+    simp only [ZMod.val_add]
+    rw [two_mul_natCast_mod, Nat.cast_add, mul_add]
 
 /-- Doubling commutes with reduction: both sides are `2·x̃` read modulo `2^⌈m/2⌉`, and `2^⌈m/2⌉ ∣ 2^{⌊m/2⌋+1}`. -/
 @[simp]
 theorem castDown_dbl (m : ℕ) (x : ZMod (2 ^ ((m + 1) / 2))) :
     castDown (m + 1) (dbl (m + 1) x) = dbl m (castDown m x) := by
-  sorry
+  have hv : (castDown m x).val = x.val % 2 ^ (m / 2) := by
+    rw [castDown, ZMod.castHom_apply, ← ZMod.natCast_val, ZMod.val_natCast]
+  simp only [dbl, AddMonoidHom.coe_mk, ZeroHom.coe_mk, map_mul, map_ofNat, map_natCast, hv]
+  exact (two_mul_natCast_mod m x.val).symm
 
 /-- **The norm form** `N(A + πB) = (N(A) + 2N(B)) + π·(Tr(A, B) + 2N(B))`, from `π² = 2 + 2π` and the rationality of
 `N` and `Tr` (their `ω`-components vanish): valued in the `A`-ring and the `B`-ring respectively. -/
@@ -156,10 +183,10 @@ example : (Finset.univ.filter (· ∈ twoAdicCircle 3)).card = 12 := by decide
 
 /-- `|S_4| = 24`, `|S_5| = 48`: the same count at the two levels the instance modules use. -/
 theorem twoAdicCircle_four_card : (Finset.univ.filter (· ∈ twoAdicCircle 4)).card = 24 := by
-  sorry
+  decide +kernel
 
 theorem twoAdicCircle_five_card : (Finset.univ.filter (· ∈ twoAdicCircle 5)).card = 48 := by
-  sorry
+  decide +kernel
 
 /-! ### Symmetries -/
 
@@ -174,27 +201,44 @@ def twoAdicOmega (m : ℕ) : TwoAdicLevel m →+ TwoAdicLevel m :=
 /-- The norm form is `ω`-invariant: `norm_omegaMul`, `trace_omegaMul_omegaMul`, and `castDown` commutes with the
 linear map `omegaMul`. -/
 theorem normForm_twoAdicOmega (m : ℕ) (z : TwoAdicLevel m) : normForm m (twoAdicOmega m z) = normForm m z := by
-  sorry
+  simp [normForm, twoAdicOmega]
 
 theorem twoAdicOmega_mem_circle (m : ℕ) {z : TwoAdicLevel m} (h : z ∈ twoAdicCircle m) :
     twoAdicOmega m z ∈ twoAdicCircle m := by
-  sorry
+  rw [twoAdicCircle, Set.mem_setOf_eq, normForm_twoAdicOmega]
+  exact h
 
 theorem twoAdicOmega_injective (m : ℕ) : Function.Injective (twoAdicOmega m) := by
-  sorry
+  intro x y h
+  simp only [twoAdicOmega, AddMonoidHom.coe_prodMap] at h
+  have h1 := congrArg Prod.fst h
+  have h2 := congrArg Prod.snd h
+  simp only [Prod.map_fst, Prod.map_snd] at h1 h2
+  exact Prod.ext (EisMod.omegaMul_injective h1) (EisMod.omegaMul_injective h2)
 
 theorem normForm_twoAdicConj (m : ℕ) (z : TwoAdicLevel m) : normForm m (twoAdicConj m z) = normForm m z := by
-  sorry
+  have hcd : Prod.map (castDown m) (castDown m) (EisMod.conj z.1)
+      = EisMod.conj (Prod.map (castDown m) (castDown m) z.1) := by
+    refine Prod.ext ?_ ?_ <;>
+      simp only [EisMod.conj, AddMonoidHom.coe_mk, ZeroHom.coe_mk, Prod.map_fst, Prod.map_snd,
+        map_neg, map_sub]
+  simp only [normForm, twoAdicConj, AddMonoidHom.coe_prodMap, Prod.map_fst, Prod.map_snd,
+    EisMod.norm_conj, hcd, EisMod.trace_conj_conj]
 
 theorem twoAdicConj_mem_circle (m : ℕ) {z : TwoAdicLevel m} (h : z ∈ twoAdicCircle m) :
     twoAdicConj m z ∈ twoAdicCircle m := by
-  sorry
+  rw [twoAdicCircle, Set.mem_setOf_eq, normForm_twoAdicConj]
+  exact h
 
 /-- Multiplication by `ω` as a graph endomorphism (an automorphism; `Forces.map` consumes it). -/
 def twoAdicOmegaHom (m : ℕ) : twoAdicPlane m →g twoAdicPlane m where
   toFun := twoAdicOmega m
   map_rel' := by
-    sorry
+    intro u v h
+    rw [twoAdicPlane, addCayley_adj] at h ⊢
+    refine ⟨fun he => h.1 (twoAdicOmega_injective m he), ?_⟩
+    rw [← map_neg, ← map_add, ← map_neg, ← map_add]
+    exact h.2.imp (twoAdicOmega_mem_circle m) (twoAdicOmega_mem_circle m)
 
 @[simp] theorem twoAdicOmegaHom_apply (m : ℕ) (z : TwoAdicLevel m) : twoAdicOmegaHom m z = twoAdicOmega m z := rfl
 
@@ -209,37 +253,70 @@ def twoAdicLevelMap (m : ℕ) : TwoAdicLevel (m + 1) →+ TwoAdicLevel m :=
 theorem normForm_twoAdicLevelMap (m : ℕ) (z : TwoAdicLevel (m + 1)) :
     normForm m (twoAdicLevelMap m z) =
       (castDown (m + 1) (normForm (m + 1) z).1, castDown m (normForm (m + 1) z).2) := by
-  sorry
+  simp [normForm, twoAdicLevelMap, map_ofNat]
 
 /-- The circle reduces into the circle: `S_{m+1} → S_m`. -/
 theorem twoAdicLevelMap_mem_circle (m : ℕ) {z : TwoAdicLevel (m + 1)} (h : z ∈ twoAdicCircle (m + 1)) :
     twoAdicLevelMap m z ∈ twoAdicCircle m := by
-  sorry
+  rw [twoAdicCircle, Set.mem_setOf_eq, normForm_twoAdicLevelMap]
+  rw [twoAdicCircle, Set.mem_setOf_eq] at h
+  rw [h]
+  simp
 
 /-- **No fibre carries an edge**: a circle point of level `m + 2` reduces to a NONZERO point of level `m + 1` — its
 image lies on that level's circle, where `(1, 0) ≠ (0, 0)` because `2 ^ ((m + 2) / 2) ≥ 2`. (At level `0` the target ring
 is `ZMod 1` and this fails, which is why the level hom below starts one level up.) -/
 theorem twoAdicLevelMap_ne_zero_of_mem_circle (m : ℕ) {z : TwoAdicLevel (m + 2)}
     (h : z ∈ twoAdicCircle (m + 2)) : twoAdicLevelMap (m + 1) z ≠ 0 := by
-  sorry
+  haveI : Fact (1 < 2 ^ ((m + 2) / 2)) :=
+    ⟨lt_of_lt_of_le (by norm_num) (Nat.pow_le_pow_right (by norm_num) (by omega : 1 ≤ (m + 2) / 2))⟩
+  intro h0
+  have hc := twoAdicLevelMap_mem_circle (m + 1) h
+  rw [h0, twoAdicCircle, Set.mem_setOf_eq] at hc
+  simp [normForm, EisMod.norm, EisMod.trace, Prod.map_fst, Prod.map_snd] at hc
 
 /-- **The level map is a graph homomorphism** `P_{m+2} →g P_{m+1}` — the tower's structure maps. Indexed from level
 `1` upward: the map onto level `0` (one vertex, no edge) is no homomorphism, since `K₄` has edges. -/
 def twoAdicLevelHom (m : ℕ) : twoAdicPlane (m + 2) →g twoAdicPlane (m + 1) where
   toFun := twoAdicLevelMap (m + 1)
   map_rel' := by
-    sorry
+    intro u v h
+    rw [twoAdicPlane, addCayley_adj] at h ⊢
+    have key : ∀ {x y : TwoAdicLevel (m + 2)}, -x + y ∈ twoAdicCircle (m + 2) →
+        -twoAdicLevelMap (m + 1) x + twoAdicLevelMap (m + 1) y ∈ twoAdicCircle (m + 1) := by
+      intro x y hxy
+      rw [← map_neg, ← map_add]
+      exact twoAdicLevelMap_mem_circle (m + 1) hxy
+    refine ⟨?_, h.2.imp key key⟩
+    intro he
+    rcases h.2 with hs | hs
+    · exact twoAdicLevelMap_ne_zero_of_mem_circle m hs (by rw [map_add, map_neg, he]; simp)
+    · exact twoAdicLevelMap_ne_zero_of_mem_circle m hs (by rw [map_add, map_neg, he]; simp)
 
 @[simp] theorem twoAdicLevelHom_apply (m : ℕ) (z : TwoAdicLevel (m + 2)) :
     twoAdicLevelHom m z = twoAdicLevelMap (m + 1) z := rfl
 
+/-- **Why the tower's structure maps start at level one**, as a theorem rather than a remark: level `0` is a single
+point with no edge, level `1` is `K₄`, and an edge cannot map to a non-edge — so NO map at all from level `1` to
+level `0` respects adjacency, and `twoAdicLevelHom` is uninhabitable at `m = 0`. The negative control for this
+module's indexing: re-index `twoAdicLevelHom` to `m + 1 → m` and it is this statement that refutes it. -/
+theorem no_hom_twoAdicPlane_one_to_zero (f : TwoAdicLevel 1 → TwoAdicLevel 0) :
+    ¬ ∀ u v, (twoAdicPlane 1).Adj u v → (twoAdicPlane 0).Adj (f u) (f v) := by
+  intro h
+  have hsub : ∀ x y : TwoAdicLevel 0, x = y := by decide
+  have hadj : (twoAdicPlane 1).Adj 0 ((1, 0), (0, 0)) := by decide
+  exact (h _ _ hadj).ne (hsub _ _)
+
 /-! ### Level one is the clique, and it has no gap -/
 
+set_option synthInstance.maxSize 1000 in
+set_option synthInstance.maxHeartbeats 1000000 in
 /-- **Level one is `K₄` and has no gap at four colours**: every proper 4-colouring of `P₁` shows all three other
 colours on every neighbourhood — the 2-adic side of the dichotomy at level one (`decide` over the 256 functions). -/
 theorem twoAdicPlane_one_no_fanGap :
     ∀ f : TwoAdicLevel 1 → Fin 4, (∀ u v, (twoAdicPlane 1).Adj u v → f u ≠ f v) →
       ∀ γ : Fin 4, ¬ (γ ≠ f 0 ∧ ∀ w, (twoAdicPlane 1).Adj 0 w → f w ≠ γ) := by
-  sorry
+  decide +kernel
+
 
 end HadwigerNelson
