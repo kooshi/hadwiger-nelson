@@ -143,3 +143,353 @@ FS-40's certificate halves under one pipeline, calibrated where it is cheap.
 `plans/M63-phaseH2-solver.md` (cube-and-conquer with proof logs), `~/source/descent-engine/plans/WO-18-independent-set.md`,
 `~/source/descent-engine/crates/plane-colour/`; records to `data/fs50/` with a README row per file; checkpoints under
 `data/fs50/ckpt/`, never under `build/`.
+
+---
+
+## §PA. The prior-art gate — `plans/FS50-prior-art.md` (run 2026-09-14, before this subplan)
+
+In one sentence: nobody has computed the independence number of any finite Euclidean plane or bounded it below the ratio
+bound; every relaxation over the pair scheme is blind (Schrijver 1979 plus our measurement); the real-plane 1-avoiding-set
+LP with subgraph rows, transplanted (`tools/fplane_lp.py`), bites 12% at 11 and 0.2% at 83; the two literatures that could
+have held the answer do not cite each other. Everything below rests on that section and on the advisor's pass
+`plans/POROS-2026-09-14-fs50-planning.md`.
+
+## §S. The subplan (2026-09-14, de Bruijn as planner; the advisor's pass read first, per Kooshi's ordering)
+
+### §S0. State on disk at opening
+
+| what | where | trust |
+|---|---|---|
+| the finding side, shipped: `plane-independent` (WO-18), gate green, 46 records re-verified here from the definition | `~/source/descent-engine/crates/plane-independent/`, `plans/WO-18-outcome.md`; `data/fs50/wo18/` | the tool's word plus our re-verification of every set |
+| **α(UD(𝔽₈₃,2)) ≥ 597** (the order-6 quotient's 595 through `--start` into the plane search); the plane alone 574 in 600 s; the ladder over every divisor of 84 (566/543/541/595/589/541/589/589/533/589/505 at orders 2…84), the line quotient 581; the rotation classes at orders 84/42/28 and the line quotient **exhausted** (505/589/533/581, the engineer's branch and bound, origin included) | `data/fs50/wo18/p83-*.json` | verified sets; the exact class optima on the engineer's word (Python B&B, planning session) |
+| **α(UD(𝔽₂₃,2)) ≥ 87**; α(19) ≥ 76; α(11) = 28 | `data/fs50/alpha-p23-ge87.json`, `data/fplane/alpha-p{11,19}.json` | verified sets; the refusal at 11 cadical's |
+| the targets: 1,149 at 83 `not_found` (600 s, 16 threads); 106 at 23 `not_found` (300 s) | `data/fs50/wo18/p83-k6.json`, `p23-k5.json` | the search's word |
+| the relaxations: Delsarte = ϑ′ = Hoffman (1,199.459 at 83); + subgraph rows 1,197.064; the atom LP adds nothing | `data/fs50/lp-*.json` | float LP, controls green |
+| the CDCL negatives at 23 (size 106): six cardinality encodings undecided at 900 s; class cubes 0–10 undecided at 840 s, class 11 in 132 s, class 12 in 12 s; **the monolith undecided at every N from 110 to 140, above the ratio bound**; at 19 (size 77) the same shape, undecided at every N from 77 to 110; at 11 smooth (0.3–32 s) | `data/fs50/race23/`, `race19/`, `nscale/` | the solver's word |
+| core-guided MaxSAT (RC2): 28 at 11 in 0.44 s; stalls at 19 and 23 with upper bounds 110 and 151 after twenty minutes | `data/fs50/maxsat/` | the solver's word |
+| the advisor's pass: the residual-density threshold (≈ 0.41) behind the cube cliff; the Fourier-mass anomaly (the exact 28-set puts 70% of its mass on the λ_min class, the 87-set 51%, the 597-set 1.7%; a 1,149-set is forced to ≥ 76% on four classes); the triple-level SDP as the certificate's proof system; three reframings | `plans/POROS-2026-09-14-fs50-planning.md` | readings with falsifiers |
+| the kernel consumer: `not_colorable_of_mul_lt` (`k · a < card ⟹ ¬ Colorable k` from "every independent finset has ≤ a"), `finitePlane p`, `rotHom` | `LocalGlobal.lean:196`, `UnitQuadrance.lean:57`, `PlaneRotation.lean:85` | kernel |
+
+### §S1. Units — fixed once
+
+Points are `(x, y) ∈ 𝔽_p²`, vertex id `v = x·p + y`; the quadrance `Q(x, y) = x² + y²`; the plane `UD(𝔽_p, 2)` joins points at
+quadrance 1 of their difference; `p ≡ 3 (mod 4)` throughout, so no nonzero vector is isotropic, every nonzero class (a
+circle) has `p + 1` points, and the rotations (`rotHom`, the norm-one elements of `𝔽_p(i)`) act freely and transitively on
+each circle. "The ratio bound" is Hoffman's `n(−λ_min)/(d − λ_min)` on exact character sums; "the threshold" is `⌈n/k⌉`
+(1,149 at `(83, 6)`; 106 at `(23, 5)`); "a bound" is an upper bound on α, and the record separates float readings from
+exact certificates by name. A refutation is "on the solver's word" until its certificate is checked by an independent
+program; the kernel row is `not_colorable_of_mul_lt`.
+
+### §S2. What the day's measurements decided (the shape, from numbers, before any derivation)
+
+1. **The finding side is done and reads P2 as met**: the plateau at 83 is 597, 52% of the threshold, and every symmetric
+   family peaks near half of it. The remaining finding-side instrument is the advisor's spectral seeding (card 2), an hour
+   of the engineer's time — a *dial* on whether the near-Hoffman basin at 83 is empty, not a search for the set.
+2. **Resolution is the wrong proof system for the certificate**, measured three ways: the solver's reach is a residual
+   density (≈ 0.41 at both 19 and 23), so no assignment-shaped cube tree lifts 0.167 to it; at 19 and 23 the solver cannot
+   refute sizes the ratio bound refutes on paper; core-guided MaxSAT stalls above the ratio bound. Phases B–C as stubbed
+   (cube-and-conquer with LRAT) are **retired**, and P3/P4 with them (wrong instrument, scored in §S7).
+3. **The certificate, if any, is semidefinite**: the pair level is Hoffman (1,199) and closes nothing; the local LP rows
+   close 0.2%; the triple level (Schrijver 2005's shape in the commutant of the point stabiliser) is the one instrument
+   whose bounding power comes from the spectrum, and its value at 11 against the exact α = 28 decides the milestone's
+   shape — the advisor's thresholds: `< 29` go straight to 23 and 83; `29–30.39` beats every local row, go to 23 and read
+   the fraction of the Hoffman-to-truth gap closed; `≥ 30.39` the certificate side closes honestly.
+   **Measured at opening (§S3).**
+4. **The calibration runs backwards from the stub's intuition** (the advisor): deciding 11 needs 84% of its
+   Hoffman-to-truth gap closed, 23 about 67%, 83 about 10% if the truth is ≈ 600–750 — a modest instrument at 11 can be
+   decisive at 83, and the reading at 23 is the fraction of the gap, not the threshold.
+
+### §S3. The opening measurement: the triple-level SDP at 11 (`tools/fplane_sdp.py`, run at subplanning)
+
+**The formulation** (the tool's docstring is the derivation, one paragraph): for an independent `S ⊆ 𝔽_p²` and
+`x^z = 1_{S−z}`, `Y = (1/|S|) Σ_{z∈S} x^z x^zᵀ ⪰ 0` counts triples (`Y[u,v] = #{z ∈ S : u+z, v+z ∈ S}/|S|`), and
+`M − Y ⪰ 0` where `M[u,v] = g(Q(v−u))` is the pair autocorrelation (`M = (1/|S|) Σ_{z∈V} x^z x^zᵀ`); `Y ≥ 0`, zero on any
+pair touching a unit vector, `Y[u,u] = Y[0,u] = g(Q(u))`, `Σ_v Y[u,v] = |S| g(Q(u))`, `tr Y = |S|`, `Y[u,v] ≤ Y[u,u]`;
+`Y` averaged over the point stabiliser `O(2, p)` and identified under the swap and the S₃ relabelling
+`(u, v) ↦ (−u, v−u)`; with `|S| = s` fixed everything is linear, and the bound is the largest feasible `s` by bisection.
+At 11: **151 pair orbits, 36 killed by a unit vector**, two 121 × 121 PSD blocks — no block-diagonalisation needed below
+83. **Controls**: the pair-only reduction reproduces Delsarte (34.537 against 34.550 at bisection tolerance 0.05 —
+green); the verified 28-set's own `Y_S` satisfies every constraint (the load-bearing one, the advisor's trap 1); the
+second matrix mis-signed as a plant must make `s = 28` infeasible.
+
+**The decision rule, registered before the number** (the advisor's, adopted): `< 29` — the SDP decides 11 exactly: go
+straight to 23 and 83 and write the exact-certificate phase; `29 – 30.39` — beats every local row: go to 23, read the
+fraction of the Hoffman-to-truth gap closed, then 83; `≥ 30.39` — no better than local rows: the certificate side of
+FS-50 closes honestly ("beyond every instrument this project can name"), nothing is spent on the server, and the
+milestone's product is the finding side's ladder plus the negatives.
+
+**§S3.1 The number (2026-09-14, `data/fs50/sdp-p11-linear.json`): the triple-level bound at 11 is 29.18** (Schrijver's
+linear form, SCS and Clarabel agreeing to four decimals; with the 188 subgraph rows added 29.18 again — the local LP is
+subsumed by the triple level). Against Hoffman 34.55 and the truth 28 it closes **82% of the Hoffman-to-truth gap**;
+the rule's middle band: it beats every local row (30.39) and does not decide 11 exactly (an exact dual would certify
+`α(11) ≤ 29`). Controls: the pair-only form 34.54 (Delsarte); the verified 28-set's raw `Y_S` satisfies the swap and S₃
+identities exactly and, averaged, every constraint; the bisection form is feasible at 28 and infeasible with the second
+matrix mis-signed. **So: go to 23** (phase C, launched at once), reading the fraction of the gap closed; by the advisor's
+calibration (83 needs ≈ 10% of its gap) the line is live. Two facts for the tool's record: cvxpy canonicalises a chain
+of scaled sparse terms catastrophically (254 s against 17 s for the identical problem as one linear map at 11), and SCS
+is fifteen times faster than Clarabel here at the accuracy a reading needs.
+
+**Phase D′, added by this number:** the exact rational dual and its checker are built at 11 first — certifying
+`α(UD(𝔽₁₁,2)) ≤ 29` exactly is one above the truth and is nevertheless the first bound below the ratio bound for any
+finite Euclidean plane with a stranger-checkable certificate, and 11 (151 orbits, two 121 × 121 blocks) is the right
+size to develop the checker and its negative controls against before 23 and 83.
+
+### §S4. Derivations that fix the shape
+
+**D6 — the certificate's proof system.** The refutation "no independent set of size ≥ N" is, at every prime from 19 up
+and at every N tried, out of resolution's reach even where the ratio bound refutes it on paper (§S0); its natural proof
+is a degree-two sum of squares (the ratio bound is `A − λ_min I ⪰ 0` on the indicator's projection), which neither
+resolution nor cutting planes simulate. The proof system that carries it is Positivstellensatz/SOS; a certificate is a
+PSD Gram matrix (or a dual feasible point of the SDP) with rational entries, checked by exact linear algebra — the
+advisor's Q4. So the certificate phase produces **a list of rationals**, and the independent checker is a few hundred
+lines of exact arithmetic (as `wo18-recheck.py` is for sets), never an LRAT replayer.
+
+**D7 — what a reviewer who trusts none of our Python must check** (the acceptance of any certificate here): (i) the
+identities and the PSD-ness of every block of a rational dual, by an independent exact program; (ii) the one-page
+derivation that identities + PSD ⟹ `|S| ≤ N` for every independent `S` (Schrijver 2005 §2 transplanted to the Cayley
+graph on `𝔽_p²` with its point stabiliser — to be written out, not cited); (iii) the kernel's `not_colorable_of_mul_lt`
+for the step from α to χ. Smaller than any LRAT bundle this project has produced.
+
+**D8 — the symmetry reduction at 83** (the derivation the 83 phase needs, priced by the advisor): `Y` lives in the
+commutant of `O(2, 83)` on `ℂ^{V}`, `|V| = 6,889`; the orbit count on ordered pairs is 285,935 by Burnside before the S₃
+identities (≈ 48k after), and the commutant block-diagonalises into one 83 × 83, two 41 × 41 and forty-one 82 × 82 blocks
+per matrix (86 blocks ≤ 83 for the pair `Y`, `M − Y`) — a desktop job for a first-order solver in memory, hours for an
+interior-point solver with an 18 GB Schur complement. **The control that the reduction is right is the direct solve at
+23** (529 × 529 blocks, no reduction): the block-diagonalised value at 23 must equal it to the bisection tolerance, and
+the verified 87-set must stay feasible in both.
+
+**D9 — the kernel form is two stubs away, and this milestone states so.** Level one (an exact rational Delsarte dual,
+positive definite over ℚ-blocks grouped by the Galois orbits of `ℚ(ζ_p)`) is FS-41's "Hoffman's equality case in Fourier
+form" and would put `χ(UD(𝔽₈₃,2)) ≥ 6` in the kernel, **which is not there now** (row 53's floor is float-derived); level
+two is the triple certificate. Neither is this milestone's deliverable (§S7 D-4); the ledger row says exactly what is
+the solver's, what is exact-rational, and what is kernel — and the kernel content of FS-50 is the consumer
+`not_colorable_of_mul_lt` at `(k, a) = (6, 1148)` (§S9), no more.
+
+### §S5. Phases, costs, stop rules (replacing §4's B–E, which are retired by §S2.2)
+
+| phase | what | cost | stop rule / acceptance |
+|---|---|---|---|
+| A ✓ | WO-18 — done 2026-09-14 (§S0) | — | 597; P2 met |
+| B | **the triple-level SDP at 11** (§S3), controls green; the number scored against the decision rule | an hour (run) | the rule decides the branch below |
+| C | **at 23**: the direct SDP (529 × 529 blocks) — the bound, the fraction of the Hoffman-to-truth gap closed, the verified 87-set feasible; and, if the bound is `< 106`, α(23) ≤ 105 on the solver's word and FS-17's first digit is 6 or more | hours on the desktop; checkpoint = the bisection log (each feasibility verdict written to `data/fs50/ckpt/sdp-p23.json`, resume by re-reading it) | a value; `< 106` is a result for FS-17, `≥ 106` is the calibration only |
+| D | **the exact rational dual at the smallest prime the SDP decides** (11 if `< 29`; else 23 if `< 106`): round the dual, verify with an independent exact-arithmetic script (D7 (i)), write D7 (ii) as one page | a day | a certified `α ≤ N` that a stranger checks by exact linear algebra — the first bound below the ratio bound for any finite Euclidean plane |
+| E | **at 83**: D8's reduction, controlled at 23; the SDP solved; if `< 1,149`, the exact dual as in D — then **χ(UD(𝔽₈₃,2)) ≥ 7 on an exact certificate**, L(ℚ(√3,√7,√11)) = 7, G48's prediction 7 | two to four days (the reduction, the solve, the rounding); the desktop, no server (the advisor's trap 3) | a bound; `< 1,149` is the jackpot; `≥ 1,149` with the 597 floor is the honest bracket `[597, bound]` |
+| F | the finding-side dial: spectral seeding of the engineer's search from the bottom eigenspaces (the advisor's card 2) — WO-19, an hour of engineering, two hours of desktop time | small | a plateau near 600 says the near-Hoffman basin is empty (P1 to very high); a verified set above 700 re-reads everything |
+| G | the record: the ledger row (what is solver / exact-rational / kernel), G44/G48 rewritten, FS-17 and FS-40 re-scoped, the kernel stubs minted (D9), `CLAUDE.md` under 150,000 bytes | half a day | — |
+
+**If §S3's number is `≥ 30.39`**: phases C–E are cancelled, F runs, G records the closure honestly, and the stub FS-41 gains
+the SDP's kernel form as its own line. **The server is not asked for at any branch** — no instrument on this list needs it
+(the advisor's trap 3; P4 retired).
+
+### §S6. The stub's predictions, scored at subplanning; the advisor's, registered
+
+| id | prediction | status |
+|---|---|---|
+| P1 | α(83) < 1,149 | **high** now (was medium-high): every symmetric family peaks near half the threshold; the best set is 52% of it; the Fourier-mass anomaly says a 1,149-set lives in a regime no search has visited. Falsifier unchanged: a verified set of 1,149 |
+| P2 | WO-18's plateau below 1,000 | **met** (597; the plane alone 574) |
+| P3 | the 23 certificate by cube-and-conquer within a desktop-day | **retired — wrong instrument**: the monolith and every cube below class 11 are undecided at 840 s, and the solver cannot refute sizes above the ratio bound |
+| P4 | 83 needs the server | **retired — wrong instrument**; no branch of §S5 asks for it |
+| P5 | α(23) < 106 | kept, low-medium; the SDP at 23 (phase C) is its test |
+| **P6** (the advisor's hunch, registered) | α(83) ≤ 750 | falsifier: a verified set above 750; the SDP at 83 is its upper test |
+| **P7** (the advisor's) | the triple-level bound at 11 lies in `[28.5, 30]` | falsifier: a value `≥ 30.39` with both controls green |
+| **P8** (mine) | at 23 the triple level closes more than a third of the Hoffman-to-truth gap (`< 116.9` against 131.76 and 87) | falsifier: a value `≥ 116.9`; if met, 83 is predicted to clear 1,149 by the advisor's 10% reading |
+
+### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
+
+| # | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| D-1 | the certificate is semidefinite (the triple level), not CDCL | cube-and-conquer with a deeper split, as stubbed | measured three ways (§S2.2): resolution does not reach the spectral argument at 19 or 23 at any size | high |
+| D-2 | measure at 11 first and let the registered rule pick the branch | go to 23 directly | 11 has the exact α and two controls; an afternoon decides whether the line is live | high |
+| D-3 | the exact certificate is a rational dual checked by exact arithmetic; LRAT is not promised anywhere | LRAT cores per cube (the stub's D5) | there is no CDCL refutation to log, and a global statement's core is the whole graph | high |
+| D-4 | the kernel form is stubbed, not built: this milestone's kernel content is the consumer at `(6, 1148)` | prove `χ ≥ 7` at 83 in the kernel from an exact dual | level one alone (the ratio bound over ℚ-blocks) is FS-41's whole milestone and `χ ≥ 6` at 83 is not in the kernel today; promising the triple level would be a promise about hours nobody has measured | high |
+| D-5 | no planner subagent; the subplan and the modeling passes in the main session; implementers for phases C–E as Opus sessions one at a time | a planner subagent | Kooshi's halt; the shape is decided by one measurement, not by a long design | high |
+| D-6 | no server at any branch | keep P4's ask | the instruments that remain fit the desktop; a server-day returning "unknown" is the failure clause at full price | high |
+| D-7 | the product is offered to Kooshi as the *table* (certified bounds below the ratio bound at 11, 23, 83) with the 83 digit as its application — his call (the advisor's card 3) | the bit at 83 alone | the same computation produces the table for free, and a miss at 83 is then a row, not a failure | recommendation; medium on his answer |
+
+### §S8. Gap audit against the stub and the brief
+
+| promise | status |
+|---|---|
+| PA — half a day, a known bound closes it | done; nothing known; the LP transplant measured (0.2%) |
+| A — WO-18, run at 11/19/23/83, the curve | done, 597; controls; every set re-verified |
+| B — the certificate at 23 by cubes with logs, checkpoints under `data/fs50/ckpt/` | **changed**: the SDP at 23 (phase C), its bisection log as the checkpoint, no LRAT |
+| C — the certificate at 83, the server if needed | **changed**: the SDP at 83 (phase E) on the desktop; the server dropped |
+| D — the colouring seeded by a found set | **dropped with reason**: no set near the threshold exists to seed with (52% of it); the engineer's D87 (`--pin-class`) stays filed for the day one does |
+| E — the kernel form priced | **changed**: priced and declined for this milestone (D-4); two stubs minted at the close |
+| F — the record | kept (phase G) |
+| the advisor's cards 1–3 | card 1 = phase B; card 2 = phase F; card 3 = D-7, to Kooshi |
+
+### §S9. The skeleton — every statement, elaborating
+
+The kernel content of FS-50 is the consumer, stated at the plane and the numbers, with no `sorry` and an explicit vacuity
+declaration: its hypothesis *is* the milestone's question, so the gate must read it `UNKNOWN` (as `hexShell_plane6`), never
+`VACUOUS`.
+
+```lean
+/-- **The consumer of a certified `α(UD(𝔽₈₃, 2)) ≤ 1148`.** If every independent set of the finite plane at 83 has at most
+1,148 points, the plane is not six-colourable, and its chromatic number is at least 7. The hypothesis is FS-50's open
+question; VACUITY: `UNKNOWN` by design (a certificate is the milestone's deliverable, in the SDP proof system — not LRAT). -/
+theorem seven_le_chromaticNumber_finitePlane83_of_indep_le
+    (h : ∀ s : Finset (ZMod 83 × ZMod 83), (finitePlane 83).IsIndepSet (s : Set _) → s.card ≤ 1148) :
+    7 ≤ (finitePlane 83).chromaticNumber := by
+  -- `not_colorable_of_mul_lt h (by decide : 6 * 1148 < 6889)` and `SimpleGraph.le_chromaticNumber_of_not_colorable`
+  sorry
+```
+
+Beside it, `example : 6 * 1148 < Fintype.card (ZMod 83 × ZMod 83) := by decide` pins the arithmetic, and the same
+statement at 23 (`6 ≤ … of h : … ≤ 105`) for FS-17. Both close at implementation from `not_colorable_of_mul_lt`; nothing
+else is stated, because nothing else is provable from what the milestone can certify.
+
+## §M1. Domain-modeling pass (`debruijn-domain-modeling`, fresh invocation, 2026-09-14)
+
+**The three models, and what is intrinsic in each.**
+
+1. **The Lean consumer.** §S9's theorem is a correct instance where a theorem is available (G30's failure 6). The
+   intrinsic quantity is `indepNum`, and the general statement is one lemma:
+   `le_chromaticNumber_of_indepNum_le [Fintype V] (h : G.indepNum ≤ a) (hk : k * a < Fintype.card V) : k + 1 ≤ G.chromaticNumber`
+   (from `not_colorable_of_mul_lt` with `IsIndepSet.card_le_indepNum`, and the lower-bound face of Mathlib's
+   `chromaticNumber`; the names queried at implementation, not recalled). The 83 and 23 corollaries are one line each with
+   `h : (finitePlane 83).indepNum ≤ 1148` (resp. `≤ 105`), each carrying the vacuity declaration `UNKNOWN`: the hypothesis
+   is the milestone's question. §S9 is rewritten so.
+2. **The SDP.** Intrinsic: the *orbit algebra* — `Y` indexed by orbits of the point stabiliser `O(2, p)` on ordered pairs of
+   difference vectors, further identified under the swap and the S₃ relabelling of a triple's base point (the two
+   involutions `(u,v) ↦ (v,u)` and `(u,v) ↦ (−u, v−u)` generate S₃, checked: their product has order 3). Incidental, and a
+   choice to be measured: **the normalisation.** The bisection form divides by `|S|` and adds the row-sum identities
+   `Σ_v Y[u,v] = |S|·g(Q(u))`, which are bilinear and so need `|S|` fixed — ten solves per bound, but possibly a stronger
+   relaxation; Schrijver's **linear form** drops them, maximises `tr Y` in one solve, and has a clean dual — which is the
+   object the exact-certificate phase rounds. Decision rule: run both at 11 and 23; if the values agree to the tolerance,
+   the linear form is the instrument (one solve, one dual); if the bisection form is strictly smaller, its infeasibility
+   certificate at `s = N` (a Farkas dual, also a list of rationals) is the certificate and the extra cost is paid.
+   **A control the current tool lacks, added now:** the S₃ and swap identities must hold *exactly* on the verified set's own
+   raw `Y_S` (they are identities of the triple count, not consequences of averaging); only the `O(2)` symmetry is imposed
+   by averaging. A wrong S₃ map is invisible in a float value and visible here.
+3. **The block structure at 83, derived rather than cited.** `O(2, p)` is the dihedral group of order `2(p+1)`; on each
+   circle it acts as on the vertices of a `(p+1)`-gon (a reflection fixes a line, which meets a circle in two points when
+   `c/Q(u)` is a square and none otherwise, so the circles split into two types); the permutation character on
+   `V = {0} ∪ (p−1) circles` has `fix(id) = p²`, `fix(rotation) = 1`, `fix(reflection) = p`. Multiplicities: the trivial
+   representation `p` times (one per circle plus the origin), the two one-dimensional representations with the rotation
+   acting by `−1` each `(p−1)/2` times (one per circle of the matching type), and each of the `(p+1)/2 − 1` two-dimensional
+   representations `p − 1` times. Check at 11: `11² + 5² + 5² + 5·10² = 671 = ` the Burnside count of orbits on ordered
+   pairs `(1 + 10 + 10 + 100 + 550)`. So at 83 the commutant of one matrix is **one 83 × 83, two 41 × 41 and forty-one 82 × 82
+   blocks** — the advisor's numbers, with the count of two-dimensional blocks corrected to `(p+1)/2 − 1` (a formula slip
+   there; the 41 is right). The projectors are the isotypic projectors of the dihedral character table, computable exactly
+   over `ℚ(ζ_{p+1})⁺`; the control is the direct solve at 23 (D8).
+
+**The seams.** The unsampled member: `p ≡ 1 (mod 4)` (isotropic vectors, the circle with `p − 1` points) — out of scope by
+§S1 and refused by name in every tool. The adversarial member: a float SDP value that clears 1,149 by less than the solver's
+tolerance — the plan reads no float as a verdict (§S4 D6; the advisor's trap 1). The next lemma for free: the same
+`le_chromaticNumber_of_indepNum_le` at 23 with `(6, 105)` states in the existing vocabulary — it does.
+
+**Rewritten skeleton (replaces §S9's):**
+
+```lean
+/-- **From an independence-number bound to a chromatic lower bound.** `k` colour classes of size ≤ `a` cover at most
+`k·a` vertices. -/
+theorem le_chromaticNumber_of_indepNum_le [Fintype V] (h : G.indepNum ≤ a) (hk : k * a < Fintype.card V) :
+    (k + 1 : ℕ∞) ≤ G.chromaticNumber := by sorry
+/-- The consumer at 83: VACUITY DECLARED `UNKNOWN` — the hypothesis is FS-50's question. -/
+theorem seven_le_chromaticNumber_finitePlane83_of_indepNum_le (h : (finitePlane 83).indepNum ≤ 1148) :
+    7 ≤ (finitePlane 83).chromaticNumber := le_chromaticNumber_of_indepNum_le h (by decide)
+/-- The consumer at 23 (FS-17's first digit): VACUITY DECLARED `UNKNOWN`. -/
+theorem six_le_chromaticNumber_finitePlane23_of_indepNum_le (h : (finitePlane 23).indepNum ≤ 105) :
+    6 ≤ (finitePlane 23).chromaticNumber := le_chromaticNumber_of_indepNum_le h (by decide)
+```
+
+## §M2. Obligation-modeling pass (`debruijn-obligation-modeling`, fresh invocation, 2026-09-14)
+
+**The partition.** *Prove (kernel):* `le_chromaticNumber_of_indepNum_le` — three local obligations, no induction: (1) from
+`h : G.indepNum ≤ a` every independent finset has card `≤ a` (`IsIndepSet.card_le_indepNum` then `le_trans`); (2)
+`not_colorable_of_mul_lt` gives `¬ G.Colorable k`; (3) the lower-bound face of `chromaticNumber` —
+`¬ Colorable k ⟹ k < χ ⟹ k + 1 ≤ χ` in `ℕ∞` (the contrapositive of `chromaticNumber_le_iff_colorable` or its current
+name, then `Order.add_one_le_of_lt`; queried, not recalled). The instances' arithmetic `6 * 1148 < Fintype.card (ZMod 83 ×
+ZMod 83)` goes through `Fintype.card_prod` and `ZMod.card`, not bare `decide`. *Prove (hand, one page — D7 (ii)):* the
+certificate's soundness, derived below. *Test:* the pair-only reduction equals Delsarte (green at 11); the verified set's
+raw `Y_S` satisfies the swap and S₃ identities exactly and, averaged, every constraint; the mis-signed plant refuses the
+true size; the linear and bisection forms agree or the difference is recorded; at 83 the block-diagonalised value at 23
+equals the direct one. *Assume:* `p ≡ 3 (mod 4)`; floats are readings, the rational dual is the verdict.
+
+**The statement from which the soundness proof derives — a nonnegative-combination identity.** Write every constraint of
+the relaxation as `c_i(y) ≥ 0` (entrywise nonnegativity, the killed orbits as `−y_k ≥ 0` and `y_k ≥ 0`, `y[u,v] ≤ y[u,u]`,
+the subgraph rows) or `e_j(y) = 0` (`g(0) = 1`), all *affine in the orbit variables `y`*, and the two matrix constraints
+`Y(y) ⪰ 0`, `M(y) − Y(y) ⪰ 0` with `Y, M` *linear in `y`*. A **certificate for `N`** is: rational multipliers `λ_i ≥ 0`, `ν_j`
+(any sign), and rational PSD matrices `Z₁, Z₂` (given as PSD blocks `Z^b` with rational maps `U_b`, `Z := Σ_b U_b Z^b U_bᵀ` —
+PSD whatever the `U_b` are, so the block-diagonalisation need not be verified, only used) such that
+
+    N − tr Y(y)  ≡  ⟨Z₁, Y(y)⟩ + ⟨Z₂, M(y) − Y(y)⟩ + Σ_i λ_i c_i(y) + Σ_j ν_j e_j(y)     as affine functions of y.
+
+**Soundness** is then two lines: for an independent `S` of size `s`, its own `y_S` (the orbit-averaged triple counts)
+satisfies every constraint (the primal construction: `Y_S = (1/s) Σ_{z∈S} x^z x^zᵀ` is a sum of rank-one PSD matrices,
+`M_S − Y_S = (1/s) Σ_{z∉S} …` likewise, the zeros are independence, the identities are counting, the S₃ identity is the
+relabelling of a triple's base point, and averaging over `O(2, p)` preserves every constraint because each is convex and
+`G`-invariant), so every term on the right is `≥ 0` at `y_S`, hence `s = tr Y(y_S) ≤ N`. Weak duality, stated as the
+identity a stranger checks coefficient by coefficient in `ℚ`. **What the checker verifies:** (i) the affine identity —
+`≈ 48k` rational coefficients at 83, computed orbit-wise as `⟨Z, E_k⟩ = Σ_b tr(Z^b · U_bᵀ E_k U_b)` (the algebra's structure
+constants, a fixed cost); (ii) each `Z^b ⪰ 0` exactly (rational `LDLᵀ`, or a Gram factor `Z^b = BᵀB` — the form the
+kernel's GMP `Nat` checks in `O(1)` steps per entry by Kronecker packing, D9); (iii) `λ ≥ 0`. Nothing else. The
+block-diagonalisation's *correctness* is never on the trust surface: a wrong `U_b` can only make the certificate weaker
+or the identity fail, never unsound. **This is the statement the plan commits to**, and phase D's checker is written
+against it before any dual is rounded — so that rounding is judged by the checker, not by the solver's residual.
+
+**The measure of the burn-down.** Phase B–E each replace one obligation with finitely many smaller: B reads one number;
+C computes one bound and its checks; D closes the identity at one prime (the rounding may fail — then the certificate is
+for a weaker `N`, recorded as such, never patched by loosening the checker); E repeats D at 83 with the blocks. The kernel
+lemma is one `sorry` replaced by three named steps.
+
+**Mutation audit, registered.** Drop `hk` from the kernel lemma: unprovable (the conclusion is false for the complete
+graph on `a` vertices with `k = 1`). Replace `Z₂`'s sign in the identity: the true set's `y_S` violates the mis-signed
+matrix constraint (the plant of §S3, watched red). Delete the S₃ identification: the value rises (weaker relaxation) and
+the raw-`Y_S` control cannot catch it — which is why the raw control checks the identity and not the averaging.
+
+## §M3. Experience-modeling pass (`debruijn-experience-modeling`, fresh invocation, 2026-09-14)
+
+**Three consumers, and what each holds.** *The stranger with the certificate:* a file and a checker, nothing of ours;
+they hold the claim they are asked to believe (`α(UD(𝔽_p,2)) ≤ N`) and must be able to see, from the file alone, what
+is being checked and why it implies the claim. *The record's reader* (a ledger row, a README line): must never mistake
+a float value for a bound. *The Lean reader and `exact?`:* the lemma must be findable by its conclusion's shape.
+
+**The certificate's wire form** (`data/fs50/cert-p<p>-N<N>.json`; rationals as strings `"a/b"` — JSON has no rationals
+and a float on this wire is the wrong object): `kind: "fplane-alpha-certificate"`, `p`, `N`, `claim` in words,
+`vertex_index`, `edge_rule` (the same two sentences every record of this project carries), `symmetry` ("`O(2,p)` × swap
+× S₃ on ordered pairs of difference vectors"), `orbits` (one representative pair per orbit, as vertex ids — the checker
+recomputes the orbits from the group and refuses a mismatch), `constraints` (each with `kind` ∈ {`nonneg`, `killed`,
+`le_diag`, `subgraph_row`, `g0`}, its coefficients over orbits, its bound), `multipliers` (`lambda ≥ 0` per inequality,
+`nu` per equality), `psd` (for `Z1` and `Z2`: a list of blocks, each `{U, Z}` with `U` a rational map and `Z` a rational
+PSD block — or `gram: B` with `Z = BᵀB` when the producer can supply it, which is the kernel-friendly form), and
+`derivation: "plans/FS50-certificate-soundness.md"` (D7 (ii), one page). Nothing else; in particular no solver output,
+no residuals, no float value — those live in the SDP tool's record, a different file with a different `kind`.
+
+**The checker's conversation** (`tools/fplane_cert_check.py`, exact arithmetic only, `fractions.Fraction` and integer
+`LDLᵀ`; a few hundred lines, its own controls): it prints one line per check in the order of marginal evidence —
+(1) the group and the orbits rebuilt from `p` and compared to the file's representatives; (2) every multiplier `λ ≥ 0`;
+(3) every PSD block, by exact `LDLᵀ` (pivots ≥ 0) or by `Z = BᵀB`; (4) the affine identity, coefficient by coefficient
+over orbits — and on failure names the **first offending coefficient by its orbit's representative pair, with both sides
+as rationals** ("identity fails at orbit 37, representative (12, 95): lhs 3/8, rhs 5/16"), a PSD failure by its block and
+pivot, a multiplier by its index. The last line is one sentence, either `CERTIFIED: every independent set of UD(F_p, 2)
+has at most N points — exact arithmetic, no solver trusted` or `NOT A CERTIFICATE: <the first failure>`; and when
+`k·N < p²` for the `k` the caller names, a second sentence: `hence UD(F_p, 2) is not k-colourable (kernel consumer:
+le_chromaticNumber_of_indepNum_le)`. **Silence is never a pass**: a missing field, a non-rational string, an orbit count
+that disagrees, all refuse by name. Its negative controls ship with it: a certificate with one coefficient altered,
+one with a PSD block's pivot flipped, one with a multiplier negated — each refused naming the site.
+
+**The SDP tool's verdict words** (`tools/fplane_sdp.py`'s record, `kind: "fplane-sdp"`): every value carries
+`"a float reading (solver, status, tolerance); not a bound on α — a bound is a separate certificate file checked by
+fplane_cert_check.py"`; the controls are listed with their results (pair-only = Delsarte; the verified set's raw S₃/swap
+identities and averaged feasibility; the mis-signed plant); the two forms (linear, bisection) are both reported when run,
+with their difference. A value below the threshold prints the threshold beside it and the sentence "the certificate phase
+decides".
+
+**The ledger row's three trust levels, fixed in advance so the close cannot blur them:** `[solver]` — the local search's
+`not_found`, RC2's and cadical's verdicts, the exact class optima of the engineer's branch and bound; `[exact-rational]` —
+a certificate the checker accepted, with the checker and the one-page derivation as the trust surface; `[kernel]` — the
+consumer lemma and its two instances (`UNKNOWN` by declaration). The row's headline is the strongest *exact* statement
+held; a float SDP value appears only as "reads `v` (float)" beside the exact one or the words "no certificate".
+
+**Names, by convention, for `exact?`:** the conclusion first — `add_one_le_chromaticNumber_of_indepNum_le` (hypotheses
+`G.indepNum ≤ a`, `k * a < Fintype.card V`; the Mathlib shape queried at implementation, and if Mathlib already holds
+`card_le_chromaticNumber_mul_indepNum`'s consumer under another name, that name is used and ours is not minted); the
+instances `seven_le_chromaticNumber_finitePlane83_of_indepNum_le`, `six_le_chromaticNumber_finitePlane23_of_indepNum_le`.
+Docstrings state the implication and nothing stronger: they must not read as "χ ≥ 7".
+
+**The breakdown designed first:** the plausible mistakes — a certificate file for another `p` handed to a run at 83, a
+float where a rational should be, a checker run on the SDP record by mistake (`kind` mismatch) — each refused by name
+before any arithmetic, exactly as `plane-independent` refuses a start record from a foreign plane.
