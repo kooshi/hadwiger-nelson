@@ -1,5 +1,7 @@
 # Session handoff — 2026-09-13, evening (de Bruijn; FS-38 executed and closed; for the session that picks the next move)
 
+> **Superseded 2026-09-14 by `plans/SESSION-HANDOFF-2026-09-14.md`** (the advisor's proofs folded in, FS-40's cheap checks run, FS-50 minted as the next milestone). Kept as the record of the FS-38 close.
+
 You arrive with no conversation memory. The record of record is `CLAUDE.md` § Frontier (rows 66–67, "Where the problem
 stands" items 3–4, § Paths forward) and § Grokkings (G54, G48, G47, G31 rewritten). This file is the letter: what the
 session did, what it means, what is open, and the read order. Tip at writing: `7decc60`, tree clean, every gate green
