@@ -105,7 +105,12 @@ evidence, and the per-depth examples are the evidence.
   and seed, and the regenerating command. That is enough because the regeneration is **byte-identical**:
   checked here — `python3 tools/fs38_tower.py lrat` reproduced the proof with the same SHA-256, which is the
   same determinism `scripts/regen-check.sh` relies on for the committed witnesses (one thread, fixed seed).
-  A reader regenerates and compares against the manifest; nothing rests on a file that is absent.
+  A reader regenerates and compares against the manifest; nothing rests on a file that is absent. **The standing
+  recommendation is to leave it that way** (the advisor's, concurring with the engineer's): the reader's path is
+  complete without the bytes, and this is materially better than CLAUDE.md row 64, where the proof lived in
+  `/tmp` and is gone — the failure there was that nothing committed could reproduce it. If the bytes are wanted
+  anyway, the cheap form is one narrow exception, `!data/fs38/lrat/*.lrat`, with a line here saying why — never a
+  change to the global rule.
 * **Any kernel claim.** No file here is checked by Lean. The fan gap at 11 and 19, the level-4 cover and the
   level-5 refusal become theorems only in the modules that consume them.
 * **The 2-adic law at the field level.** Nothing here draws a `K`-certificate into `P_m`; that is FS-38
