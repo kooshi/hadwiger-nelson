@@ -462,6 +462,13 @@ parent with a dual cache and three cuts is recorded beside this table when it la
 --thresholds 1e-8 --denominators 10000000000 --weight-denominators 10000000000 --out <file>` (copy the iterate first: the run
 advances it), then `tools/fplane_cert_check.py <file> --k 6 --ldl`.
 
+**The colouring side, tried and open.** `plane-colour --p 83 --k 7 --threads 12 --seed 1 --max-seconds 300` (the Rust tabu
+search, FS-40's): **not found** — the best assignment leaves 12,054 of 289,338 edges monochromatic (4.17 %), class sizes
+944–1,036 against the 984 average (`colour-p83-k7.json`). The same at `--k 8`: not found, 8,537 edges (2.95 %) monochromatic, classes 821–890 against 861 (`colour-p83-k8.json`). A
+local search cannot say that no seven- or eight-colouring exists, and this one's plateau at both counts says as much about
+the search as about the plane (the symmetric census and quotient routes of FS-40 were not re-run at 7 or 8); the digit at 83
+is χ ≥ 7 by certificate and its exact value is open (FS-53's table).
+
 **Not claimed:** the converged value of the relaxation (the producer's iterate reads 1,064.5 at 38,500 iterations and is
 still moving; the exact bound will tighten toward it, and the table's entry is whatever the last certificate says); anything
 about seven-colourability (a 7-colouring of the plane has not been sought); the kernel form (FS-52).
