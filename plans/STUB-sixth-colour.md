@@ -506,3 +506,81 @@ instance modules (`Instances/FinitePlane<q>.lean`), which exist only for a membe
 written before. Build **only** through `./scripts/build.sh` (never `lake build`, bare or named); `lake env lean <file>` is
 for iteration and is not the gate. `./scripts/vacuity.sh` green, and the counts in `CLAUDE.md` § The gate updated in the
 same commit that changes them.
+
+### §S6. Expectations — the stub's, scored; the advisor's and the planner's, registered
+
+**The scorecard replaces P1.** The stub's P1 ("at least one window plane is exactly six-chromatic") had the falsifier
+"phase A's table reads five or ≥ 7 at all seven", which is **unreachable**: by §S2.2 the modal table has five or six
+members still bracketed. P1 becomes a **per-member verdict with a stated cause and a stopping rule**, so that "undecided"
+is a recorded outcome and not an escape hatch:
+
+| verdict | what it takes |
+|---|---|
+| **= 6** | a verified six-colouring **and** five refused (a checked certificate, or a solver refusal an independent checker holds) |
+| **≤ 6** | a verified six-colouring alone |
+| **≥ 7** | six refused by a checked certificate |
+| **≥ 6** | five refused by a checked certificate |
+| **undecided** | with its cause, in numbers: the relaxation's converged optimum `V` against the threshold `T`, and the finding side's best conflict fraction at its budget |
+
+**The stopping rule**, fixed now: a member closes as *undecided* when its certificate has met phase B's convergence rule
+with `V > T`, **and** the finding side has spent at least four CPU-hours across at least three distinct instruments (free
+tabu, equivariant, peel-and-colour or spectral seeding) with no hit. **And the cause is recorded in advance as independent
+of χ**: a member is undecidable here because `frac6` sits 10–25 % below the instrument's measured reach and because
+resolution's reach on these graphs is a residual density, not a size (§S2.5) — neither has anything to do with whether that
+plane is six-chromatic. So the undecided set is **not enriched for six**, and "six lives in the ones you could not decide"
+is closed before anyone reaches for it.
+
+| id | prediction | confidence · falsifier · both outcomes reachable? |
+|---|---|---|
+| **P2** *(replaced)* | ~~χ sits one above the spectral floor~~ — **dead**: false at `p = 3` (floor 3, χ 3), the one Hoffman-tight plane in the table, and its omission flattered the reading (G21). **The replacement, the advisor's:** `χ = ⌈q²/α⌉` at every decided plane — these graphs have integrality gap below one | medium. True at 3 (α = 3) and 11 (α = 28); consistent at 7 (needs α ≤ 16, known `[14,17]`) and 19 (needs α ≤ 90, known `≥ 76`). **Not automatic** — Kneser graphs are vertex-transitive with arbitrarily large gaps. Falsifier: a plane with α and χ both pinned and `χ > ⌈q²/α⌉`. The dead reading is not carried in prose anywhere |
+| **P3** *(widened)* | the certificate refuses **five** at 47 (frac5 0.9477), 43 (0.9362) **and 27** (0.9012) | high at 47 and 43, medium at 27 (0.4 % of margin over the worst measured reach). Falsifier: a converged `V ≥ ⌈q²/5⌉`. Both reachable |
+| **P4** *(now a theorem, and narrower than stated)* | no window plane is six-tight | **proved** for 23, 27, 31, 43, 47, 67 by divisibility (`5 ∤ q+1`); **at 59 and 79, where `5 ∣ q+1`, by the explicit spectrum** (−14.9176 ≠ −12; −17.1019 ≠ −16). So over any field a window plane seals at six, the residue mechanism forces no pair and a six-forcer there is built, not transported |
+| **P5** *(a control, not a prediction)* | for every real `F ⊇ ℚ(√3,√11)`, no prime in `(11, 83)` is usable | verified here; only 83 in `(11, 83]` has both `(3/p)` and `(11/p)` non-negative. It is the designer's **first self-test** (§S5 C.1) |
+| **P6** | for a field `F` the milestone names, `χ(F²) = 6` | the conjecture's exposed sentence; only live if a plane is decided. Falsifiers unchanged: a five-colouring of `F²` local at no prime and non-additive, or a seven-forcer in `F²` |
+| **Q1** *(planner; sharpens the advisor's "coin flip at 59")* | the certificate refuses six at **79 and 67 and not at 59** | medium-high. 59's `frac6` is 0.8382, below two of the three measured reaches, and the reach **worsens with q** (0.8238 → 0.8974 from 23 to 83), interpolating ≈ 0.87 at 59. Falsifier: a checked `N < 581` at 59. Both reachable |
+| **Q2** *(planner)* | **no six-colouring is found at any window member in phase A** | medium-high, and it is the modal outcome the milestone must be worth having. Falsifier: one verified six-colouring — which is also the jackpot, so both outcomes are reachable and the prediction costs nothing to be wrong about |
+| **Q3** *(the advisor's, adopted)* | `α(UD(𝔽₂₃,2)) ∈ {87, 88}`, so `χ(23) ≥ 7` — a **reading**, never reported as a bound | medium-high. Basis: 16 threads at 87 from second 2 to second 300 over 22,390 restarts, the same searcher's plateau equal to α exactly at 11, and 51 % of the 87-set's centred Fourier mass on the `λ_min` eigenspace against ~4 % for a uniform set. Falsifier: a verified 89-point independent set. One-sided: a local search can only raise α |
+| **Q4** *(the advisor's law, adopted)* | `α/Hoffman ≈ ln d/√d`, i.e. α ≈ **86 / 102 / 147 / 226 / 261 / 366 / 416 / 539** at 23 / 27 / 31 / 43 / 47 / 59 / 67 / 79 — against six-thresholds 89 / 122 / 161 / 309 / 369 / 581 / 749 / 1041, a shortfall of **3.4 % at 23**, 8.7 % at 31, 16 % at 27, and 27–48 % everywhere above | every α measured in phase A scores it. Falsifier: a measured α more than 15 % off at any member. **This is the milestone's durable product in the modal outcome** (card 5) |
+| **Q5** *(planner; measured at subplanning, §S3)* | no six-colouring of any window plane is constant on the cosets of a subgroup | measured exhaustively at `q = 27` for index 9 and 27, at a budget for 81 and 243; already known for the prime members' line families. Falsifier: a periodic six-colouring anywhere. The interest is that at 27 the family was 30,000 times larger than a line family and still empty |
+| **Q6** *(planner)* | with P3 at 27, the milestone ends with **`χ(UD(𝔽₂₇,2)) ∈ {6, 7}`**, the narrowest bracket any finite Euclidean plane has ever had above 11 | medium — it needs both the prime-power extension of the stack (card 1) and P3 at 27. Falsifier: either half failing |
+
+### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
+
+| # | choice | alternative | why this one | confidence |
+|---|---|---|---|---|
+| D-1 | the milestone's object is **α**; the table's rows are α brackets `[found, certified]` and χ is derived by `⌈q²/α⌉` | a table of χ, as stubbed | the same runs produce it, every cell is then informative instead of "undecided", and it is the one quantity both sides of the milestone bound — the finding side from below, the certificate from above | high |
+| D-2 | phase B runs **27, 79, 67, 47, 43, 59**, and never 23 or 31 for six | the stub's "23 and 47 first" | arithmetic, not preference: `frac6` at 23 and 31 is 0.675 and 0.670 against a best-ever reach of 0.824 — a GPU-day there returns a number that decides nothing, and the same day at 79, 67 and 27 returns verdicts | high |
+| D-3 | the **finding side runs first, on the CPU, before any GPU** | the stub's GPU-first phase A | the positive outcome is one colouring away and the negative needs eight refusals; the cheap side is the decisive side; and the GPUs are occupied by FS-50 until they are stopped at a checkpoint | high |
+| D-4 | a colouring certificate is a **packed Cayley `Bool`** — one `Nat` table, a circle list, `(q+1)·q²` checks | `FinitePlane11.lean`'s all-pairs `decide +kernel` | the all-pairs form is `q⁴`: 3.4 M tests at 43 against 81 k, and the Cayley hypothesis is what `addCayleyColoring` already consumes. The factor is `q²/(q+1)`, 22× at 23 and 42× at 47 | high on the shape; the constant is measured in K1's acceptance, not assumed |
+| D-5 | whether to extend the SDP producer, the block builder and the frozen checker from prime fields to **prime powers** is **Kooshi's** (card 1); the planner recommends yes | keep the stack prime-only and drop 27 from phase B | it is ~1.5 days of engineering against the narrowest bracket in the window and the only member where the certificate can raise a floor that is not already 6 — but it touches a frozen checker, which is a decision above the planner | recommendation; medium on the estimate |
+| D-6 | the tight/slack classification stays **`[hand]`**; nothing spectral enters the kernel | prove the divisibility theorem in Lean | there is no `λ_min`, no adjacency spectrum and no ratio bound in this library; that infrastructure is FS-41's entire milestone, and the divisibility argument is one line on paper | high |
+| D-7 | the field half's **ring-level reduction lands now** (unconditional, an hour per field); the `L(F) = 6` half waits on a digit | the stub's phase C as one block after phase A | the reduction needs no digit, and a phase that cannot start is a phase that quietly grows; the advisor's "the field half is an afternoon once a prime exists and a sink before" is right about the second half only | high |
+| D-8 | `q = 27`'s field half is priced at **about a day of Lean**, not an afternoon | take the advisor's "cheapest field half" at face value | `Adjoin d K` is `K[√d]` — quadratic — and `ℚ(√3, α)` with `α³ = α + 1` needs a cubic adjunction; and `unitQuadrance` needs a concrete `CommRing` with `DecidableEq` that the kernel can compute in, which `𝔽₂₇` has not got here. Cheap on paper, expensive in the kernel | high |
+| D-9 | exact maximum independent set at 23 (orbital branching) is **declined** | the advisor's "a real candidate for phase B" | the target is `α ≤ 88`, every node inherits a bound of 108.55 costing minutes to evaluate, and resolution is measured undecided at every size from 106 to 140. It returns only if the relaxation at 23 falls below ≈ 95 | high |
+| D-10 | the desktop only; **no server at any branch** | ask for the 256-core machine | nothing on the list is bound by cores: the certificate is one GPU stream, the searches are 12–16 threads, and a server-day returning "undecided" is the failure clause at full price | high |
+| D-11 | the stub's §0.4 conditional (`no six ⟹ χ(ℝ²) ∈ {5,7}`) is **not promised**, and the close says why | keep it as the headline | it needs all eight members decided; at most two refusals are available. Stating it and missing it is the rescoping the mission rule forbids — "not landed" is a complete sentence | high |
+| D-12 | one implementer at a time, phase by phase, each with its own checkpoint and resume line in this file | a single long implementation session | Kooshi's halt, the PROTECTED checkpointing rule, and FS-50's own record of what an unresumable multi-hour run costs | high |
+
+### §S8. Gap audit — every promise in the stub, and every card of the advisor's
+
+| promise | status |
+|---|---|
+| §1(A) the prime: a six-colouring **and** a refusal of five, per member | **planned, narrowed**: phase A (colouring) and phase B (refusal). The refusal of five is available at 27, 43, 47 and nowhere else in the window; at 23 and 31 it is out of reach and the subplan says so instead of budgeting for it (§S2.5) |
+| §1(A) the LRAT route for five, by cube-and-conquer over the rotation orbits | **dropped with reason**: FS-50 measured resolution's reach on these graphs as a residual density (≈ 0.41), not a size — at 23 the monolith is undecided at every `N` from 110 to 140, above the ratio bound. No cube tree lifts it |
+| §1(B) the field with `L(F) = 6` | **split**: the ring-level reduction is unconditional and lands in phase C.1; `L(F) = 6` is phase C.2 and waits on a digit |
+| §1(C) the six-forcer in `F` | **unchanged**: not promised; phase D, priced, only on Kooshi's word |
+| §2 the window table | **corrected**: eight members, not seven — `q = 27` added with its exact spectrum, its thresholds and the extra line the exclusion argument needs there. `CLAUDE.md` G56 and the stub's §2 both carry the seven-member list and are corrected at the close |
+| §2 the "+1 over the spectral floor" reading | **dead**, replaced by `χ = ⌈q²/α⌉` (P2); not carried in prose |
+| §4 A: "a GPU-day … starts with 23 and 47" | **re-ordered** to 27, 79, 67, 47, 43, 59, by §S2.2's arithmetic; and the finding side moves ahead of it (D-3) |
+| §4 A: both SDP formulations, "where the extra rows bind is itself a finding" | **already measured and settled at FS-50's close**: the extra `le_diag` rows are valid, new, and inactive at 11 and 23 (29.176799 both ways; 108.546073 both ways, one tool, one tolerance). Recorded as a known unexploited strengthening; revisited only if two solves at one member converge to different values at equal tolerance |
+| §4 B: `chromaticNumber (unitQuadrance (ZMod p)) = 6` per prime | **planned as K4**, written only for a member phase A decides; the schema and the sixteen conditional consumers (K2) land first and need no digit |
+| §4 C: `χ(F²) ≤ 6` in the kernel | **restated honestly**: the kernel holds the *ring* statement; the ring-to-field step is row 57's standing hand gap, marked, unchanged |
+| §4 D: the setting for a forcer | unchanged, priced |
+| §7 `data/fs53/window.md`, `cert-q<q>-N<N>.json`, `tools/fplane_field_design.py`, `Instances/FinitePlane<q>.lean`, the field module, the ledger row, the FRONTIER re-rank | all planned; **added**: `tools/fplane_periodic_subgroups.py` + `data/fs53/periodic-q27.json` (A0.2), the `field_q27` restore (A0.1), and two `descent-engine` work orders (A0.3) |
+| §PA.1 phase A′ at 17 | **planned as B′**, with the advisor's two changes (ask `k = 6` first; both halves in one sentence) |
+| §PA.3 item 4: the designer counts ramified primes as usable | **planned** as the designer's control (`ℚ(√23)` must see 23) |
+| the advisor's card 1 (is any window plane six-colourable?) | **answered in part and planned**: the first measurement ran before the planner (`data/fs53/README.md`, nulls at 23, 31, 43, 47); `q = 27`'s periodic family exhausted here (§S3); the rest is phase A.2 |
+| the advisor's card 2 (α at 23) | **phase A.1**, first member, first instrument |
+| the advisor's card 3 (does the window have eight members?) | **yes, adopted** — §S1, with the `q = 27` exclusion line |
+| the advisor's card 4 (where should the GPU-day go?) | **adopted and extended**: reordered, and 27 added at the front, which the card did not have |
+| the advisor's card 5 (the digits or the growth law?) | **to Kooshi** (§S10 card 5), with the planner's recommendation |
