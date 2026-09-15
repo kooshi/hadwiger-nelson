@@ -1066,7 +1066,12 @@ target 89) is the decisive instrument and runs first; the fixed-class colour sea
 is ever found.** The same test applies at every member before a fixed-class run is launched. *Pass:* one record per (member, k) with its budget; any `found` re-verified by the product
 owner from the definition and promoted to a `Cert` under K1 the same day; every `not_found` names its budget in `data/fs53/window.md`.
 
-**B — the certificate side** (R-3; one GPU-day; §S13.3 first). Per member in the order 27, 79, 67, 47, 43, 59:
+**B — the certificate side** (R-3; one GPU-day; §S13.3 first). **27 is DONE, delivered early by phase A0.4** — the
+prime-power extension had to solve it to prove itself, so `data/fs53/cert-q27-N147.json` is filed, CERTIFIED and
+converged (two formulations, three solvers, 147.5774–147.5780), and **B's remaining order is 79, 67, 47, 43, 59.** Note
+what 27 cost the expectations: B's product there was to have been a five-refusal (P3), and the converged optimum
+147.578 sits **above** the 146 five needs, so the cell reads `α ≤ 147 [cert]` and five stays open in a two-integer
+window. Per remaining member:
 `tools/fplane_sdp_blocks.py --real` (with `--q 27 --modulus t^3-t-1` at 27), then `tools/fplane_cert_round.py --p <q> --blocks
 --real --chunk 500 --linear-solver gpu_indirect --scs-ckpt data/fs53/ckpt/scs-q<q>-real.npz --ckpt data/fs53/ckpt/round-q<q>.jsonl
 …` (the FS-50 command line, `data/fs50/README.md` "Resume"), the anytime polish loop beside it; **the exact bound is rounded from a
