@@ -23,7 +23,7 @@ What a record licenses: `chi` = the solver's UNSAT (untrusted) plus a VERIFIED c
 the stage's edges land on the circle (a certificate of the homomorphism for that stage) and a VERIFIED pulled-back
 colouring (a certificate that χ(stage) ≤ k). UNTRUSTED like everything in tools/."""
 from __future__ import annotations
-import argparse, json, math, sys, time
+import argparse, hashlib, json, math, sys, time
 from fractions import Fraction as Fr
 from pathlib import Path
 
@@ -98,10 +98,51 @@ def clique_pins(p: int):
     return [(v, i) for i, v in enumerate(verts)], len(verts)
 
 
+def carry_prior_rows(out, path):
+    """Rows for k values THIS run did not ask are carried from the record already at `path`, loudly and with
+    their provenance.  Why: a null at a conflict budget is expensive (the k = 5 row at q = 27 cost 2,327.6 s of
+    one core) and re-running it is not free, but dropping it would delete the measurement the window table
+    cites.  Three guards, so a carry can never flatter a verdict: the prior record must be the SAME GRAPH (same
+    q and the same edges_sha256, a mismatch carries nothing and says so); a `sat` row is never carried (a
+    colouring claim must arrive with the colouring that was verified, not as a row); and `chi` / `exact` are
+    NOT recomputed over the union -- they describe this run's own rows, so a carried refusal cannot turn an
+    inexact verdict exact."""
+    if not path.exists():
+        return out
+    try:
+        prev = json.loads(path.read_text())
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"  [carry] {path.name} is unreadable ({e}); nothing carried")
+        return out
+    same_hash = prev.get("q") == out.get("q") and prev.get("edges_sha256") == out.get("edges_sha256")
+    # Records written before the hash was carried have no edges_sha256.  For a COLOURABILITY row an isomorphic
+    # graph is enough (k-colourability is isomorphism-invariant), so the legacy test is the structural one --
+    # same q, modulus, vertex count, edge count and degree -- and it says out loud that it is the weaker test.
+    legacy = (not same_hash and prev.get("edges_sha256") is None
+              and all(prev.get(f) == out.get(f) for f in ("q", "modulus", "n", "edges", "degree")))
+    if not (same_hash or legacy):
+        print(f"  [carry] {path.name} is a different graph (q, edges_sha256 or shape differ): nothing carried, the record holds only this run's rows")
+        return out
+    if legacy:
+        print(f"  [carry] {path.name} predates edges_sha256; matched structurally instead (q, modulus, n, edges, degree all agree), which is enough for colourability rows")
+    asked = {r["k"] for r in out["rows"]}
+    note = ("a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
+            + ("; that record predates edges_sha256, so the graphs were matched structurally (q, modulus, n, edges, degree), not by hash" if legacy else ""))
+    carried = [dict(r, carried_from=path.name, carried_note=note)
+               for r in prev.get("rows", []) if r["k"] not in asked and r["status"] != "sat"]
+    for r in carried:
+        print(f"  [carry] k={r['k']} {r['status'].upper()} at {r['seconds']}s carried from {path.name} (not re-run)")
+    if carried:
+        out["rows"] = sorted(out["rows"] + carried, key=lambda r: r["k"])
+        out["carried_rows"] = len(carried)
+    return out
+
+
 def cmd_chi(a):
     if getattr(a, "q", None):
         out = chi_q(a.q, a.k, a.conf)
         DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / f"chi-q{a.q}.json"
+        out = carry_prior_rows(out, path)
         path.write_text(json.dumps(out, indent=1)); print(f"  wrote {path}")
         return out
     p = a.p; E, deg = ud_edges(p); n = p * p
@@ -563,6 +604,44 @@ def self_test():
     check(f"equivariant: the order-3 rotation with τ a 3-cycle at 11 returns a verdict under at-most-one (got {st_3}; without AMO the model was proper but not equivariant)", st_3 in ("sat", "unsat"))
     st_i, _ = equivariant_colouring(11, 5, g2, (0, 1, 2, 3, 4), 5_000_000)
     check("planted red: a rotation-INVARIANT (τ = id) proper colouring is impossible (z ~ −z on the circle of norm 1/4)", st_i == "unsat")
+    # A0.1 (FS-53): the q = 27 plane's producer, restored.  The graph's identity is FIXED -- 729 vertices, a
+    # 28-point circle, 10,206 edges and one edge hash -- and the hash is a fact about the LABELLING as well as
+    # the shape, which the two plants below separate.
+    Q27_SHA = "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d"
+    V27, E27, circ27, h27 = graph_q27()
+    check(f"q=27: UD(F_27,2) is 729 vertices, degree 28, 10,206 edges, edges_sha256 {Q27_SHA[:16]}… (got {len(V27)}, {len(circ27)}, {len(E27)}, {h27[:16]}…)",
+          len(V27) == 729 and len(circ27) == 28 and len(E27) == 10206 and h27 == Q27_SHA)
+    st27, _ = sat_colour_budget(len(V27), E27, 3, conf=2_000_000)
+    check(f"q=27: k = 3 is refused by the solver on that edge list (χ ≥ 4; the k = 4 refusal is the record's, at 6.9 s) (got {st27})", st27 == "unsat")
+    # planted red 1: Z/27 is NOT F_27.  Same number, different graph -- the circle x² + y² = 1 over the RING has
+    # a different size, so the degree check fires before any hash is compared.  This is the trap A0.4 refuses by name.
+    circ_ring = [(a, b) for a in range(27) for b in range(27) if (a * a + b * b) % 27 == 1]
+    check(f"planted red: Z/27 is not F_27 — the ring's circle has {len(circ_ring)} points, not 28, so the ring graph fails the degree check", len(circ_ring) != 28)
+    # planted red 2: the OTHER irreducible cubic t³ − t + 1 gives an isomorphic field with a different labelling:
+    # the shape survives and the hash does not.  The mutation is applied to the shipped field_q27 and then
+    # RESTORED, and the restore is re-verified (a mutation harness that does not re-check its restore has
+    # certified nothing -- CLAUDE.md § Make the gate fail).
+    _true_field = field_q27
+    def _field_q27_other():
+        els = [(a, b, c) for a in range(3) for b in range(3) for c in range(3)]
+        def add(u, v): return tuple((x + y) % 3 for x, y in zip(u, v))
+        def mul(u, v):                                   # t³ = t − 1 instead of t³ = t + 1
+            r = [0] * 5
+            for i in range(3):
+                for j in range(3):
+                    r[i + j] = (r[i + j] + u[i] * v[j]) % 3
+            r[2] = (r[2] + r[4]) % 3; r[1] = (r[1] - r[4]) % 3
+            r[1] = (r[1] + r[3]) % 3; r[0] = (r[0] - r[3]) % 3
+            return tuple(r[:3])
+        return els, add, mul, (1, 0, 0)
+    globals()["field_q27"] = _field_q27_other
+    try:
+        Vb, Eb, cb, hb = graph_q27()
+    finally:
+        globals()["field_q27"] = _true_field
+    check(f"planted red: the modulus t³ − t + 1 keeps the shape ({len(Vb)}, {len(cb)}, {len(Eb)}) and changes the hash to {hb[:16]}… — the hash names the field, not only the graph's size",
+          (len(Vb), len(cb), len(Eb)) == (729, 28, 10206) and hb != h27)  # against the SHIPPED hash, never the constant
+    check("the mutation harness restored the shipped field: graph_q27() is back to the committed hash", graph_q27()[3] == Q27_SHA)
     ok = not fails
     print(f"[self-test] {'ALL GREEN' if ok else 'RED: ' + ', '.join(fails)}")
     return ok
@@ -988,14 +1067,39 @@ def cmd_equivariant(a):
     return out
 
 
+def field_q27():
+    """F_27 = F_3[t]/(t³ − t − 1): elements as coefficient triples; returns (elements, add, mul, one)"""
+    els = [(a, b, c) for a in range(3) for b in range(3) for c in range(3)]
+    def add(u, v): return tuple((x + y) % 3 for x, y in zip(u, v))
+    def mul(u, v):
+        r = [0] * 5
+        for i in range(3):
+            for j in range(3):
+                r[i + j] = (r[i + j] + u[i] * v[j]) % 3
+        r[2] = (r[2] + r[4]) % 3; r[1] = (r[1] + r[4]) % 3
+        r[1] = (r[1] + r[3]) % 3; r[0] = (r[0] + r[3]) % 3
+        return tuple(r[:3])
+    return els, add, mul, (1, 0, 0)
+
+
+def graph_q27():
+    """The plane UD(F_27, 2) as (vertices, edges, circle, edges_sha256).  Vertex (x, y) is indexed by the
+    base-3 digits of x followed by those of y, so this index is `enc` of tools/fplane_periodic_subgroups.py
+    with place values [243, 81, 27, 9, 3, 1] and the two tools' edge hashes are comparable.  The hash is over
+    `repr` of the sorted edge list of index pairs (min, max).  chi_q AND the self-test both call this, so the
+    self-test asserts on the graph the tool ships rather than on a second copy of the edge rule."""
+    els, add, mul, one = field_q27()
+    circ = [(s, t) for s in els for t in els if add(mul(s, s), mul(t, t)) == one]
+    assert len(circ) == 28, "the circle over F_27 must have q + 1 = 28 points (q ≡ 3 mod 4)"
+    V = [(x, y) for x in els for y in els]; idx = {v: i for i, v in enumerate(V)}
+    E = sorted({(min(idx[(x, y)], idx[(add(x, s), add(y, t))]), max(idx[(x, y)], idx[(add(x, s), add(y, t))])) for (x, y) in V for (s, t) in circ})
+    return V, E, circ, hashlib.sha256(repr(E).encode()).hexdigest()
+
+
 def chi_q(q: int, k, conf: int):
     """the unit-quadrance graph over F_q for q = p^f, f odd (only 27 is built): χ by budgeted SAT"""
     assert q == 27, "only F_27 = F_3[t]/(t^3 - t - 1) is implemented (the next odd-degree planes, 343 and 1331, are spectral: ≥ 6)"
-    els, add, mul, one = field_q27()
-    circ = [(s, t) for s in els for t in els if add(mul(s, s), mul(t, t)) == one]
-    assert len(circ) == q + 1, "the circle over F_q must have q + 1 points (q ≡ 3 mod 4)"
-    V = [(x, y) for x in els for y in els]; idx = {v: i for i, v in enumerate(V)}
-    E = sorted({(min(idx[(x, y)], idx[(add(x, s), add(y, t))]), max(idx[(x, y)], idx[(add(x, s), add(y, t))])) for (x, y) in V for (s, t) in circ})
+    V, E, circ, ehash = graph_q27()
     rows = []; chi = None; col = None
     for kk in ([k] if k else range(2, 12)):
         t0 = time.time(); st, c = sat_colour_budget(len(V), E, kk, conf=conf)
@@ -1007,8 +1111,8 @@ def chi_q(q: int, k, conf: int):
         if st == "unknown":
             break
     exact = chi is not None and any(r["k"] == chi - 1 and r["status"] == "unsat" for r in rows)
-    return dict(kind="fplane-chi-oddegree", q=q, p=3, f=3, modulus="t^3 - t - 1", n=len(V), edges=len(E), degree=len(circ), rows=rows, chi=chi, exact=exact,
-                colouring=col, claim_scope="the plane over the residue field F_27 (a cubic field's inert prime above 3 sees it): chi carries a verified colouring; "
+    return dict(kind="fplane-chi-oddegree", q=q, p=3, f=3, modulus="t^3 - t - 1", n=len(V), edges=len(E), degree=len(circ), edges_sha256=ehash,
+                conflict_budget=conf, rows=rows, chi=chi, exact=exact, colouring=col, claim_scope="the plane over the residue field F_27 (a cubic field's inert prime above 3 sees it): chi carries a verified colouring; "
                                             "chi − 1 refused is the solver's claim (untrusted); unknown at the conflict budget is silence")
 
 

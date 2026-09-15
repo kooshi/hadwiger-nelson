@@ -7,30 +7,39 @@
  "n": 729,
  "edges": 10206,
  "degree": 28,
+ "edges_sha256": "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d",
+ "conflict_budget": 20000000,
  "rows": [
   {
    "k": 2,
    "status": "unsat",
-   "seconds": 0.0
+   "seconds": 0.0,
+   "carried_from": "chi-q27.json",
+   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   },
   {
    "k": 3,
    "status": "unsat",
-   "seconds": 0.0
+   "seconds": 0.0,
+   "carried_from": "chi-q27.json",
+   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   },
   {
    "k": 4,
    "status": "unsat",
-   "seconds": 6.9
+   "seconds": 6.8
   },
   {
    "k": 5,
    "status": "unknown",
-   "seconds": 2327.6
+   "seconds": 2327.6,
+   "carried_from": "chi-q27.json",
+   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   }
  ],
  "chi": null,
  "exact": false,
  "colouring": null,
- "claim_scope": "the plane over the residue field F_27 (a cubic field's inert prime above 3 sees it): chi carries a verified colouring; chi \u2212 1 refused is the solver's claim (untrusted); unknown at the conflict budget is silence"
+ "claim_scope": "the plane over the residue field F_27 (a cubic field's inert prime above 3 sees it): chi carries a verified colouring; chi \u2212 1 refused is the solver's claim (untrusted); unknown at the conflict budget is silence",
+ "carried_rows": 3
 }
