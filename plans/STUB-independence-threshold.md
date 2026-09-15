@@ -535,3 +535,33 @@ ends on CERTIFIED; the display itself at p = 7 runs and ends on CERTIFIED. The w
 certificate re-checked with `--against` in 16.9 s, exit 0; the 11 certificate's display path unchanged. **Verification protocol
 at 83, consequently:** the untouched checker on the file first (it decides), then a second rounding from the same iterate at a
 different cut and denominator, then `--ldl`; the 597-set's independence is what `--against` does supply at 83.
+
+## §Close — 2026-09-15 (WORKFLOW step 9)
+
+**Outcome.** The question was "is α(UD(𝔽₈₃,2)) ≥ 1,149?" and the answer is **no**: α ≤ 1082, by two independent exact
+certificates (ledger row 68; `data/fs50/README.md` "The refusal of six at 83"; `data/fs50/p83-refusal/`). Trust levels:
+[solver] the local search's 597 and the relaxation's converged reading (the producer's iterate 1,064 at 41,000 iterations,
+still moving; recorded when it lands); [exact-rational] the certificates at 11, 23 and 83, checked by the stranger-checkable
+checker and its exact LDL; [kernel] `add_one_le_chromaticNumber_of_indepNum_le` and the three declared instances, whose
+hypothesis at 83 is discharged by the checker, not the kernel (FS-52). Consequence: L(K(√7)) = 7 and the conjecture's boldest
+prediction is pinned (G48); the window for six and reciprocity's exclusion of it (G56); FS-40 absorbed; FS-53 minted.
+
+**Predictions scored.** P1 (the refusal at 83) met. P2 met earlier. P3/P4 retired at the opening. P5 kept. **P6 (the
+advisor's α(83) ≤ 750): unscored and explicitly declined** — the instrument's ceiling is the relaxation's value (≈ 1,064),
+so 750 is out of its reach; it would need a stronger relaxation or exact search, both priced in FS-53 phase B; no stub of its
+own. P7 as recorded. P8 met.
+
+**Decisions.** D-1..D-6 as recorded. **D-7 / Kooshi's card 3** (the product as the table or the bit): both, in this order —
+the bit at 83 is this milestone's row, the table across the window is FS-53. **The third dominance row** (the reading tools'
+tighter relaxation): valid, new, inactive at 11 and 23 at equal tolerance; not adopted; revisit only if the two 83 solves
+converge to different values at equal tolerance (§1 item 10 of the 2026-09-15 handoff). **The checker changed once**, under
+the §M3 decision above (`--against` ends on the verdict). **The certificate recipe:** round a fresh short continuation's own
+dual at its chunk end, never a long-run iterate and never through `--round-only`'s nudge (the README's mechanism paragraph).
+
+**Conjecture sweep** (WORKFLOW step 9): every "conjecture" in this plan names the local–global conjecture (G48) or a
+registered prediction; the two unpursued items are P6 above (declined, with its reason) and the third-row strengthening
+(a recorded decision with its revisit condition). Nothing minted.
+
+**Left open, with their homes:** the converged reading at 83 (the producer; README); the deterministic reproduction of the
+Pardiso arm with other cuts (README, when it lands); whether χ(UD(𝔽₈₃,2)) is exactly 7 (a seven-colouring; FS-53's table);
+the certificate's kernel form (FS-52); the ratio bound's (FS-51); the field-level residue step (FS-47).

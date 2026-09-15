@@ -1,4 +1,4 @@
-# Session handoff — 2026-09-15, 04:10 (de Bruijn; FS-50 in flight: the 83 solve moved to the GPU — 10× per iteration — after Kooshi applied the killable-run rule; the first exact bound at 83 being rounded from a live iterate)
+# Session handoff — 2026-09-15, 06:40 (de Bruijn; FS-50 CLOSED: six colours refused at 83 by exact certificate; FS-53 the sixth colour stubbed as the next milestone)
 
 You arrive with no conversation memory. The record of record is `CLAUDE.md` § Frontier and § Grokkings; the milestone's
 plan is `plans/STUB-independence-threshold.md` (§PA, §S0–S9, §M1–M3 appended); every record `data/fs50/README.md`, one row
@@ -114,22 +114,30 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
 `setsid bash -c "echo \$\$ > <pidfile>; cd <repo> && exec env OPENBLAS_NUM_THREADS=4 stdbuf -oL <venv>/python <tool> …" > <log> 2>&1 &`
 — no `timeout`, ever, on a solve. Waiters: by a known pid (`kill -0`), never `pgrep -f` (it matches the waiter itself).
 
-## 3. What to do next, in order
+## 3. What to do next, in order (rewritten 06:40 after the close)
 
-1. When the implementer's report lands: review (the checker on its certificates; its README rows; the round-only bound
-   with its iteration count and residual beside it), push, thank it by name for the chunk-loop catch and the mechanism.
-2. Watch the GPU producer's chunk lines against the CPU trajectory; if `build/venv-sdp-mkl` times faster on card B bench,
-   move the producer to it at a checkpoint (`LD_LIBRARY_PATH=build/venv-sdp-mkl/lib`, same command). The reading IS the
-   producer's chunk lines; no separate reading run is relaunched.
-3. The **first exact bound at 83** (round-only): a README row and a ledger sentence — `[exact-rational]`, with the iterate's
-   residual — and, if `⌊N⌋ ≤ 1148`, HALT AND VERIFY per §1 item 12's order (checker first; second rounding; `--ldl`; no
-   `--against` at 83) before any sentence about χ.
-4. The close (WORKFLOW step 9), keyed on the outcome exactly as the previous letter's §3 lays out: the ledger row with the
-   three trust levels; rows 53/56; G44/G48; item 2 of "what the hunt has established"; `plans/FRONTIER-STUBS.md` re-ranked
-   with FS-51 and FS-52 added (assert every FS exactly once) and the mirror in `CLAUDE.md`; the conjecture sweep;
-   `BIBLIOGRAPHY.md` listings (Schrijver 2005, Gvozdenović–Laurent 2008); memory.
-5. Kooshi's open decision (the advisor's card 3): the product as the *table* of certified bounds (recommended, the default)
-   or the bit at 83.
+**FS-50 is closed** (ledger row 68, G56, `plans/STUB-independence-threshold.md` §Close, committed): six colours refused at 83
+by two independent exact certificates, α(UD(𝔽₈₃,2)) ≤ 1082 (`data/fs50/p83-refusal/`; the README's "refusal of six" section
+has the table, the mechanism and the reproduction command). The certificates came from the backend-honesty control's two
+arms — a fresh +500 continuation of one checkpoint on each backend, each rounding its own dual — where the live run's
+iterates rounded 200 above the objective (SCS's adaptive scale is not checkpointed) and `--round-only`'s nudge costs ~170.
+
+1. **When the reproduction rerun lands** (job tmp `sdp/repro.log`; the Pardiso arm from `iterate-5000-common-parent.npz`
+   with a dual cache and three cuts): its 10⁻⁸/10¹⁰ candidate must reproduce 1082.915378 to every digit; the other cuts round
+   the identical dual. Record the numbers in the README's refusal section.
+2. **The seven-colouring attempt at 83** (`~/source/descent-engine/target/release/plane-colour --p 83 --k 7`, a few
+   minutes): found ⟹ χ(UD(𝔽₈₃,2)) = 7 exactly (the colouring kernel-consumable); not found ⟹ "not found", nothing decided.
+   Either way a README row and a sentence in row 68.
+3. **The converged reading**: the producer (pid 2808409) prints its chunk lines and at convergence rounds its own dual and
+   checks the file; the polish loop (`sdp/anytime-loop2.sh`, pid in `sdp/pid-anytime-loop2`) rounds a fresh continuation
+   every ≈ 25 min into `sdp/anytime-loop.log`. The tightest certificate replaces the README's table entry; the reading goes
+   beside it as [solver]. Then kill card B reading run (2816615) — its value, the tighter relaxation's, is a reading only.
+4. **FS-53 the sixth colour** (`plans/STUB-sixth-colour.md`, rank 1): WORKFLOW step 3 — the §PA prior-art gate first (in the
+   disciplines' words: finite Euclidean graphs' chromatic and independence numbers; splitting conditions for number fields),
+   then the subplan (Poros planning-only, before the planner; one subagent at a time; Opus implementers), skeleton, modeling
+   passes; the table across the window on the GPU is phase A and starts with 23 and 47.
+5. Standing: the checker is frozen again (one recorded change, §M3); FS-52 is the kernel form of the certificate; a session
+   handoff before any compaction.
 
 ## 4. Kooshi's rulings today (2026-09-15)
 
