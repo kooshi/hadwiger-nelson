@@ -1440,6 +1440,28 @@ trust that these lines do not show. -/
 #print axioms five_mul_lt_card_finitePlane23
 #print axioms four_mul_lt_card_finitePlane11
 
+/-! ## FS-53 phase K1 — the packed Cayley colouring certificate
+
+An upper bound on a finite Euclidean plane's chromatic number as one `Bool` the kernel evaluates.
+`Cert.sound` is the whole trust surface: it turns a passing `check` into a `Colorable`, once,
+generically over an identifier arithmetic `IdArith R`, so the plane a certificate speaks about is
+the one its arithmetic names and never another. `colorable_finitePlane23_eight` is the first
+kernel-checked upper bound at a member of FS-53's eight-member window, and it is `decide +kernel`
+throughout — no native evaluation is bought anywhere in this module, which is the point of the
+packing. `colorable_finitePlane3` is the same pipeline on a plane small enough to read by hand. -/
+
+#print axioms CayleyCert.Cert.sound
+#print axioms CayleyCert.Cert.covers_iff
+#print axioms CayleyCert.IdArith.nverts_eq_card
+#print axioms CayleyCert.IdArith.zmod
+#print axioms CayleyCert.toId_lt
+#print axioms CayleyCert.ofId_toId
+#print axioms CayleyCert.toId_ofId
+#print axioms CayleyCert.toId_add
+#print axioms CayleyCert.mem_unitCircle_iff
+#print axioms CayleyCert.colorable_finitePlane3
+#print axioms CayleyCert.colorable_finitePlane23_eight
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
