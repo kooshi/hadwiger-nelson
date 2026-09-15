@@ -397,6 +397,31 @@ bound 29.176799 and `⌊N⌋ = 29`, with the exact `N` agreeing to 10⁻⁶** (t
 digits, as they must). `cpu_indirect` is the precedent that matters, being the same kind of method as
 the GPU backend.
 
+**A valid strengthening that does not bind, measured rather than assumed.** `canonical_constraints`
+emits one dominance row per orbit, `y_k ≤ y_{d(k)}` with `d(k)` the class of the representative's first
+endpoint. P6 is a containment of counting sets and holds at **each of the triangle's three edges**: the
+`z ∈ S` with `z + u, z + v ∈ S` inject into `{z : z + u ∈ S}` (class `Q(u)`), into `{z : z + v ∈ S}`
+(class `Q(v)`), and — by `z ↦ z + u` — into `{w : w + (v − u) ∈ S}` (class `Q(v − u)`). The other two
+rows are valid and are **not** implied by the S₃ identification: the orbit does contain representatives
+with each of the three classes at the first endpoint, but only one representative gets a row. The
+reading drivers impose all three; the certificate proves only one, so the certified relaxation is
+formally the weaker of the two.
+
+It makes no difference at either prime where both can be solved. Both formulations, in one tool at one
+tolerance (SCS, `eps 1e-9`, `optimal`):
+
+| p | canonical (what the certificate proves) | all three edges (what the readings solve) | further rows |
+|---|---|---|---|
+| 11 | 29.176799 | 29.176799 | 152 over 96 orbits |
+| 23 | 108.546073 | 108.546073 | 1,740 over 980 orbits |
+
+The rows are simply not active at the optimum. **The comparison that appeared to show otherwise differed
+in two things**: the reading tool's 108.5467 against the producer's 108.546073 is the tolerance, not the
+rows — at SCS's default 10⁻⁴ the producer's own formulation reads 108.621145. So the extra rows stay
+recorded as a known unexploited strengthening, not built: certifying them touches the multiplier
+construction (steps 1–3 of the derivation assume one row per orbit pointing at one target), the wire
+format's row list, and both existing certificates, for no measured gain.
+
 **Two traps this phase paid for, both now mechanisms rather than scars.** (i) **A `timeout` wrapper
 cannot be detached after the fact on this machine**: GNU coreutils 9.11's `timeout` arms
 `PR_SET_PDEATHSIG` on the command it monitors, so `kill -KILL <timeout-pid>` takes the child with it —
