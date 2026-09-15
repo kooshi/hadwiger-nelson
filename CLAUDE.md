@@ -1018,7 +1018,12 @@ hand-written module before starting a long generated build.
   grown by N applications costs O(N) to reach weak head normal form (a lookup in a table grown by `insert`
   went from 2.14 ms at 2,381 entries to 16.7 ms at 33,089). Emit big tables as literals (M04's `PtTable`
   pattern), never accumulate one during a kernel evaluation, and never build an index list with
-  `List.range` + `List.map` (~0.83 ms per element). A `Nat` literal costs ~2.3 KB of olean against ~145
+  `List.range` + `List.map` (~0.83 ms per element). **The figure is for `range` + `map`, and does not transfer to a
+  bare `List.range` re-evaluated in a loop** (measured 2026-09-15, FS-53 K1): a `check` that rebuilt `List.range 529`
+  once per circle point — 12,696 nodes, ~10 s by that figure — cost **4.19 s against 4.17 s** for the hoisted form,
+  inside run-to-run noise, because the kernel's cache absorbs the repeat. The hoisted shape was kept anyway (it is the
+  honest one and costs nothing), and the docstring that had asserted the order mattered was rewritten: **a rule you are
+  obeying is still a claim, and it is measured before it is written down.** A `Nat` literal costs ~2.3 KB of olean against ~145
   bytes per plain literal node, so pack many values into few big `Nat`s.
 - **A `∀ x ∈ l, P x` under `decide` costs an order of magnitude more than the same check as a `Bool`.** Measured
   (FS-38 K3): `∀ e ∈ (778 pairs), e.1 ≠ e.2` on a bare import cost 31.9 GB and timed out; `l.all f = true` on the real
@@ -1120,6 +1125,13 @@ sweep dumped its residual-candidate file only when the survivor list was non-emp
 file never appeared, and every waiter on it read like a hung run. Its sibling monitor had the same defect in the
 other costume — a `pgrep -f` liveness check that matched its own command line, so the process-gone branch could
 never fire. **Arm a waiter on a file the SUCCESS path always writes**, even if that file says "nothing found".
+
+**And a waiter's condition must be FALSE at the moment you arm it — check that, not just the condition** (2026-09-15,
+FS-53 K1). A wait-for-the-build loop watching for a line beginning `==> build:` fired **immediately**, printing
+"BUILD FINISHED" at batch 140 of 172, because `scripts/build.sh` prints exactly that as its *first* output. A waiter
+whose condition already holds at launch cannot tell you anything, and **it fails in the direction that looks like
+success** — the implementer caught it only because the rebuilt-module count came back zero. One line before arming:
+evaluate the condition and assert it is false.
 
 **And the rule the one above does not reach: state the uninformative outcome and confirm it is REACHABLE,
 before believing a control's pass or proposing a discriminator.** "Break it and watch it go red" assumes the
