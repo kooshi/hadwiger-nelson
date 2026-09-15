@@ -1014,12 +1014,41 @@ colouring so far and `partial: true`, and `--start <record>` resumes from it. *P
 valid record; the resumed run's best conflict count is monotone from it; the plant — a record with a corrupted colouring — is
 refused by name. WO-20: `--fix-class <independent-set record>` holds that set as colour class 0. *Pass:* at `(23, 6)` with
 `data/fs50/alpha-p23-ge87.json` the verifier confirms class 0 equals the set; the plant — a set that is not independent — is
-refused by name before any search. **Added to the work order by the product owner, 2026-09-15, with the arithmetic below
+refused by name before any search. **(Acceptance defect found by the engineer, 2026-09-15: the file this line names is
+`kind: fplane-alpha-lower` with its set under `independent_set`, not a `plane-independent` record with `best_set` — so
+`--fix-class` as specified would have refused the very case its acceptance demanded. It now reads three shapes: that one,
+`plane-independent`'s, and a plain id list. The acceptance named an artifact without opening it; opening it is the fix.)** **Added to the work order by the product owner, 2026-09-15, with the arithmetic below
 (§S13.2 A.2's note):** `--fix-class` computes `⌈q²/k⌉` and, when `|S|` is smaller, prints a note that the fixed class is below
 the size a `k`-colouring forces and that the remainder therefore needs an independent set of at least `⌈(q² − |S|)/(k − 1)⌉`,
 larger than the one fixed; both numbers go in the record. A note, never a refusal — the run is legitimate and a success would
 be a major finding — but a run whose failure was arithmetically predetermined must not be recorded as evidence about the graph. Both under the ferrous standard's own gate (its tests, its controls), reported with the test
 counts.
+
+**DONE 2026-09-15, reviewed by artifact and pushed** (13 commits, `~/source/descent-engine` through `f8e25f0`; the
+subplan `plans/WO-19-20-checkpoint-and-fix-class.md`). Verified by the product owner rather than read: the resumed run's
+own record shows its **first** trace sample at the killed run's best (118) and its last at 116, and **116 and 118 were
+re-counted from the definition here** by `tools/fplane_review_verify.py` against a graph rebuilt from the number 23;
+class 0 of the fixed-class record was re-derived **outside the tool** and equals the 87-set exactly; two plants built
+here — a set with a unit pair, and a record whose `best_conflicts` is one below its colouring's true count — were each
+refused by name with exit 1 before any search; and `./scripts/gate.sh` was **run here: GATE GREEN**.
+
+**Four findings of the engineer's, each a defect in something already shipped**, and the rulings on them:
+1. **The monitor never stopped when a thread won** — against its own docstring. At `(23, 8)`, 16 threads, the answer
+   arrived at 0.50 s and the run continued to 1.50 s; at `k = 6` on a hard graph that is fifteen threads grinding an hour
+   past the answer with the answer held only in RAM. Fixed and controlled. **Accepted** (decision A in its report): the
+   per-tick record makes the fix necessary rather than merely adjacent, since otherwise a `found` record is re-verified
+   and rewritten every interval for the rest of the budget.
+2. **An unwritable `--out` was discovered only after the budget was spent** — measured. The destination is now probed
+   before the search starts. **Accepted.**
+3. **`partial` (this tool) and `complete` (`plane-independent`) are the same fact with opposite signs** — a `jq` filter
+   written for one reads backwards on the other (its D90). **Ruling: keep both as they are for FS-53**; renaming either
+   strips a field from records already on disk, and the gate scores `partial` by name. The cost is a documented trap, and
+   `data/fs53/README.md` carries it.
+4. **`plane-independent` has three of the same defects** (its D91: no stop on a met target, a fixed `<path>.tmp` so two
+   runs sharing an `--out` can rename a hybrid, no destination probe). **Ruling: not fixed, and manageable by convention
+   in A.1** — one `--out` per member (never shared), the path checked before launch, and *not* stopping on a met target
+   is what A.1 actually wants, since the target is a floor and the phase wants the largest set the budget reaches, not
+   the first one over the line. Recorded so the convention is deliberate rather than lucky.
 
 **A0.4 — the certificate stack over prime powers** (R-1; a day and a half). The three tools accept `--q 27 --modulus t^3-t-1`
 (the field named explicitly, carried in every record and certificate; never inferred from the number). *Pass, all four:* (i) the
