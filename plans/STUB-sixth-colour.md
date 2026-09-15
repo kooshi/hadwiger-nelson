@@ -552,6 +552,37 @@ is closed before anyone reaches for it.
 | **Q5** *(planner; measured at subplanning, §S3)* | no six-colouring of any window plane is constant on the cosets of a subgroup | measured exhaustively at `q = 27` for index 9 and 27, at a budget for 81 and 243; already known for the prime members' line families. Falsifier: a periodic six-colouring anywhere. The interest is that at 27 the family was 30,000 times larger than a line family and still empty |
 | **Q6** *(planner)* | with P3 at 27, the milestone ends with **`χ(UD(𝔽₂₇,2)) ∈ {6, 7}`**, the narrowest bracket any finite Euclidean plane has ever had above 11 | medium — it needs both the prime-power extension of the stack (card 1) and P3 at 27. Falsifier: either half failing |
 
+**Q4 scored before phase A, against every plane where α is already known or bounded below** (the product owner,
+2026-09-15; `tools/fplane_review_verify.py` rebuilt each graph from `q` and re-verified each set from the definition —
+28 at 11, 76 at 19, 87 at 23, each 0 internal edges). One thing differs per row: the law's prediction against the same
+plane's α.
+
+| q | degree | Hoffman | `ln d/√d` | Q4 predicts α ≈ | α known | predicted ÷ α |
+|---|---|---|---|---|---|---|
+| 3 | 4 | 3.00 | 0.6931 | 2.1 | **3** `[exact]` | 0.693 |
+| 7 | 8 | 17.62 | 0.7352 | 13.0 | ≥ 14 | ≤ 0.926 |
+| 11 | 12 | 34.55 | 0.7173 | 24.8 | **28** `[exact]` | 0.885 |
+| 19 | 20 | 99.50 | 0.6699 | 66.7 | ≥ 76 | ≤ 0.877 |
+| 23 | 24 | 131.76 | 0.6487 | 85.5 | ≥ 87 | ≤ 0.982 |
+| 83 | 84 | 1199.46 | 0.4834 | 579.9 | ≥ 597 | ≤ 0.971 |
+
+**The law under-predicts at six of six, and the bias is one-sided.** Where α is only bounded below the true ratio is at
+most what is shown, so no row can rescue it. At the two planes where α is *exact* the shortfall is **11.5 % (q = 11)**
+and 30.7 % (q = 3, the one Hoffman-tight plane in the table, which killed the old P2 reading and is excluded from any
+fit here rather than leaned on). The residual **shrinks with `q`** — ≤ 2 % at 23 and ≤ 3 % at 83 — so the misfit is in
+the law's *shape* at small `q`, not only in a missing constant.
+
+**Registered before phase A.1 measures anything, with both outcomes reachable.** If the 11.5 % shortfall at `q = 11` is
+the law's typical small-`q` bias, then α(23) ≈ **96–97**, which **clears** the six-threshold 89 — and that contradicts
+**Q3** (α(23) ∈ {87, 88}, the advisor's 2:1 bet that 23 is empty) head-on. Phase A.1 at 23, targeting 89, separates them:
+* a **verified 89-point set** confirms the bias correction, kills Q3, and puts six at 23 back in play;
+* **another plateau at 87–88** confirms Q3 and shows the law's shape is wrong below `q ≈ 30`, so the close reports the
+  law with a stated range of validity rather than as one formula.
+
+Either way the close scores Q4 at eight new points **plus these six**, and the law's residual against `q` is the
+milestone's durable product (R-4). *What this does not say:* nothing here bounds α from above at any member, and a
+search plateau is never α — the exact points are 3 and 11 alone.
+
 ### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
 
 | # | choice | alternative | why this one | confidence |
