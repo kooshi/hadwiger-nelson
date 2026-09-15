@@ -441,6 +441,7 @@ the 98,894 canonical rows from the number 83 and trusts no solver; the kernel fo
 | `cert-p83-N1082-pardiso-arm.json` (15.1 MB) | 54145768919878014998796452705507433877093 / 5·10³⁷ = 1082.915378 | **1082** | the 5,000-iteration iterate resumed for +500 in a fresh solver on sequential MKL Pardiso (`build/venv-sdp`), its own dual at the chunk end | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
 | `cert-p83-N1082-gpu-arm.json` (15.1 MB) | 676848530876231948246514932098797470489039 / 6.25·10³⁸ = 1082.957649 | **1082** | the same parent iterate resumed for +500 in a fresh solver on `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
 | `cert-p83-N1076-polish-40500.json` (15.1 MB) | 42045564621001773194639845780964924918379 / 3.90625·10³⁷ = **1076.366454** | **1076** | the live run's 40,500-iteration checkpoint resumed for +500 in a fresh solver on `gpu_indirect`, its own dual at the chunk end — the polish loop's first output, the recipe reproduced | CERTIFIED, "not 6-colourable" | CERTIFIED, 2 m 10 s |
+| `cert-p83-N1051-polish-207500.json` (15.1 MB) | 328738901528986863518862025852983507024087 / 3.125·10³⁸ = **1051.964485** | **1051** | the producer's 207,500-iteration checkpoint resumed for +500 in a fresh solver on `gpu_indirect` (the polish loop, 2026-09-15 15:09), its own dual at the cut 10⁻⁸ / denominator 10¹⁰ — **the tightest checked bound, and the last: the FS-50 jobs were stopped here** (FS-53 §S13.3, brought forward because they had begun to block phase A's timings). Unchecked tighter ones the loop produced on the way: 1058.56 at 145,000; 1057.46 at 155,500; 1056.37 at 166,000; 1055.26 at 176,500; 1054.21 at 186,500; 1052.86 at 197,000 | CERTIFIED by the untouched checker (`--k 6`: "hence UD(F_83, 2) is not 6-colourable, 6 × 1051 = 6306 < 6889"); exact LDL green, all 86 blocks re-run clean (`ldl-N1051.log`); re-checked from the filed copy, not only from the scratch one |
 | `cert-p83-N1059-polish-134500.json` (15.1 MB) | 264958546274103037250271365816994009841637 / 2.5·10³⁸ = **1059.834185** | **1059** | the live run's 134,500-iteration checkpoint resumed for +500 in a fresh solver on `gpu_indirect` (the polish loop `sdp/anytime-loop2.sh`, 2026-09-15 11:19), its own dual at the cut 10⁻⁸ / denominator 10¹⁰; **the tightest checked bound** — the loop kept producing tighter ones every ≈ 25 min while the producer ran (1065.51 at 93,000; 1064.04 at 103,000; 1062.59 at 113,500; 1061.26 at 124,000), each unchecked | CERTIFIED by the untouched checker in 15 s (`--k 6`: "not 6-colourable"); exact LDL green (`ldl-N1059.log`, 2 min, "exact arithmetic, no solver trusted") |
 | `cert-p83-N1252-pardiso-arm-nudged.json`, `cert-p83-N1250-gpu-arm-nudged.json` | 1252.08, 1250.03 | 1252, 1250 | `--round-only` on the two 5,500-iterates (one nudge iteration from a fresh solver object, cut 10⁻⁶, denominators 10⁸) | CERTIFIED, say nothing about six | — |
 
@@ -494,3 +495,26 @@ checkpoint. (ii) **SCS ends every chunk with the status `solved (inaccurate - re
 because `max_iters` *is* the chunk size — so a `startswith("solved")` break stops after one chunk and
 reports whatever the iterate happened to be, with nothing to warn a reader. At 11 that read 29.2729
 against the true 29.1768 and looked like a clean success.
+
+
+## Where the two 83 solves were stopped, and why their values are NOT comparable (FS-53 §S13.3, 2026-09-15 15:10)
+
+Both GPU solves and the polish loop were stopped at a checkpoint under the killable-run rule: they had begun to block
+FS-53's phase A, whose budgets are wall-clock and whose nulls mean less on a contended machine. Their last chunk lines,
+as **`[solver]` readings with their residuals beside them** — never as values:
+
+| run | formulation | iterations | objective | res_pri | res_dual |
+|---|---|---|---|---|---|
+| producer (card A), the **certified** relaxation — one `le_diag` row per orbit, the checker's canonical list | `fplane_cert_round.py --blocks --real` | 209,500 | −1044.185534 | **9.83 × 10⁻¹** | 1.15 × 10⁻² |
+| reading (card B), the **tighter** relaxation — `le_diag` at all three edges of each orbit's triangle | `fplane_sdp_scs.py` | 182,000 | −1004.255770 | **2.26 × 10⁻³** | 3.31 × 10⁻³ |
+
+**They differ by about 40 in the objective and by a factor of ≈ 435 in primal residual — two things, where a comparison
+admits one.** The certified formulation's primal residual sat near 1.0 for more than 100,000 iterations while its
+objective crept up; it was never going to reach the other's tolerance on this solver and scaling. So **whether the extra
+`le_diag` rows bind at 83 is UNDECIDED here**, and nothing in these two numbers says they do. (At 11 and 23 the extra
+rows were measured **inactive** — identical to 10⁻⁶ at one tolerance, one thing differing.)
+
+**The cheap experiment that would settle it, recorded instead of run:** solve both formulations at a **small** member
+with one solver, one tolerance, one backend — `q = 27` is 1,847 orbit classes and 79 s in real blocks, now that the
+stack handles prime powers — and, for a second point at larger `q`, 47 or 59. That is minutes against the GPU-days these
+two spent failing to become comparable.
