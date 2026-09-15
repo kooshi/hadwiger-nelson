@@ -483,7 +483,7 @@ def solve_blocks_real(F, rows, solver="SCS", verbose=False, opts=None, plant=Non
 
 
 def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, ckpt=None,
-                              plant=None):
+                              plant=None, round_only=False):
     """The same solve, driven through SCS's OWN API in warm-started chunks, so that it is observable
     (one flushed line per chunk: iterations, residuals, gap, objective) and RESUMABLE (the iterate
     x, y, s goes to `ckpt` after every chunk; a relaunch continues from it).
@@ -514,6 +514,29 @@ def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, c
             raise SystemExit(f"[blocks] {ck} holds an iterate of shape {x0.shape}/{yv.shape}, but this "
                              f"problem is {A.shape}: wrong p, or a different formulation")
         print(f"[blocks] resumed from {ck}: {done} iterations already done", flush=True)
+    if round_only:
+        # ANYTIME: read the running solve's iterate and round a certificate from it, WITHOUT advancing
+        # or overwriting it.  Any dual yields a sound certificate (section 4 of the derivation), so a
+        # half-converged iterate gives a real bound -- weaker than the converged one, and available
+        # hours earlier.  One SCS iteration is taken only because cvxpy inverts a solver RESULT, not a
+        # bare vector; the checkpoint is not written back.
+        if x0 is None:
+            raise SystemExit(f"[blocks] --round-only wants an existing --scs-ckpt to round from")
+        print(f"[blocks] --round-only: rounding the iterate at {done} iterations; the checkpoint is "
+              f"NOT advanced and NOT rewritten", flush=True)
+        solver = scs_mod.SCS(dict(A=A, b=b, c=c), cone, eps_abs=eps, eps_rel=eps, max_iters=1,
+                             verbose=False, normalize=True)
+        t1 = time.time()
+        result = solver.solve(warm_start=True, x=x0, y=yv, s=sv)
+        info = result["info"]
+        print(f"[blocks] the iterate reads pobj {info['pobj']:.6f} dobj {info['dobj']:.6f} "
+              f"res_pri {info['res_pri']:.2e} res_dual {info['res_dual']:.2e} gap {info['gap']:.2e} "
+              f"({time.time() - t1:.0f} s)", flush=True)
+        prob.unpack_results(result, chain, inv)
+        push0 = lambda T, cc: T @ np.asarray(cc.dual_value) @ T.T
+        return (prob.value, f"iterate at {done} iterations ({info['status']})",
+                [push0(T, cc) for T, cc in zip(Ts, cY)],
+                [push0(T, cc) for T, cc in zip(Ts, cM)], weights)
     solver = scs_mod.SCS(dict(A=A, b=b, c=c), cone, eps_abs=eps, eps_rel=eps, max_iters=chunk,
                          verbose=False, normalize=True)
     result = None
@@ -684,7 +707,8 @@ def main_blocks(a):
         if a.real and a.chunk:
             val, status, Ws, Vs, weights = solve_blocks_real_chunked(
                 F, rows, eps=(a.eps if a.eps is not None else 1e-8), chunk=a.chunk,
-                max_iters=(a.max_iters or 200000), ckpt=a.scs_ckpt, plant=plant)
+                max_iters=(a.max_iters or 200000), ckpt=a.scs_ckpt, plant=plant,
+                round_only=a.round_only)
         elif a.real:
             val, status, Ws, Vs, weights = solve_blocks_real(F, rows, solver=a.solver,
                                                              verbose=a.verbose, opts=opts,
@@ -834,6 +858,10 @@ def main():
                          "so a long solve is observable and a kill costs one chunk")
     ap.add_argument("--scs-ckpt", help="where the chunked solve saves its iterate (npz); a relaunch "
                                        "with the same file continues from it")
+    ap.add_argument("--round-only", action="store_true",
+                    help="with --real --chunk --scs-ckpt: round a certificate from the checkpoint as "
+                         "it stands, without advancing or rewriting it -- a sound (weaker) bound from "
+                         "a solve still in flight")
     ap.add_argument("--check-real", action="store_true",
                     help="run the real form's controls at p and exit")
     a = ap.parse_args()
