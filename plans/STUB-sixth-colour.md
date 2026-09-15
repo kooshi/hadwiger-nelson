@@ -583,6 +583,37 @@ Either way the close scores Q4 at eight new points **plus these six**, and the l
 milestone's durable product (R-4). *What this does not say:* nothing here bounds α from above at any member, and a
 search plateau is never α — the exact points are 3 and 11 alone.
 
+**What the bias-corrected law nominates, and the re-aiming it buys.** Take the law's constant from the one
+**non-degenerate** plane where α is exact — `q = 11`, where α = 28 against the law's 24.78, so `c = 1.130` — and read
+the eight members against their six-thresholds:
+
+| q | law | × 1.130 | six needs α ≥ | margin |
+|---|---|---|---|---|
+| 23 | 85.5 | **96.6** | 89 | **+8.5 %** |
+| 27 | 102.0 | 115.3 | 122 | −5.5 % |
+| 31 | 147.2 | **166.3** | 161 | **+3.3 %** |
+| 43 | 225.5 | 254.8 | 309 | −17.5 % |
+| 47 | 260.6 | 294.5 | 369 | −20.2 % |
+| 59 | 366.4 | 414.0 | 581 | −28.7 % |
+| 67 | 416.4 | 470.5 | 749 | −37.2 % |
+| 79 | 538.5 | 608.5 | 1041 | −41.5 % |
+
+Read with Q4's own ±15 % falsifier band, this **nominates** rather than decides. Inside the band — so not excluded —
+are **23, 27 and 31**; **43 sits just outside** it and **47, 59, 67, 79 are far outside** (20–42 % short), so under the
+law those five cannot be six-chromatic at all and their finding side is predicted empty. **Two independent reasons now
+point the same way as R-3**: the certificate is the decisive instrument from 43 up, and the search is the decisive
+instrument at 23, 27 and 31 — which are exactly the members the certificate cannot reach for six (`frac6` 0.6755,
+0.7531, 0.6701 against a reach of 0.8836).
+
+**Consequence for §S13.2 A.1's order, fixed here:** the independent-set search runs **23 first (target 89), then 31
+(target 161), then 27 (target 122)** — the three the law leaves live — and only then the five it predicts empty, where
+a null is the expected outcome and costs the milestone nothing. α at 31 has never been searched at all.
+
+*The honesty on the constant:* it rests on **one** non-degenerate exact point. With only `q = 3` (degenerate,
+Hoffman-tight) and `q = 11` exact, a constant cannot be separated from a slope in `q`, and every other row is a lower
+bound that can only push `c` up. So `c = 1.130` is a floor read from the cleanest point, not a fit; phase A.1's eight
+measurements are what turn it into one.
+
 ### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
 
 | # | choice | alternative | why this one | confidence |
@@ -929,7 +960,9 @@ rebuilt under the cap (expect an hour of wall; do not raise `BATCH`).
 
 **A.1 — α at every member** (per member, an hour of one core; 27 through A0.1's graph exported in the engine's format). For each of
 the eight: `plane-independent` free, then rotation-order seeds over every divisor of `q + 1`, the line quotients, chaining through
-`--start`; at 23 the target is 89. *Pass:* `data/fs53/alpha-q<q>-ge<size>.json` per member, every set re-verified by the product
+`--start`. **Order: 23 (target 89), 31 (target 161), 27 (target 122) first** — the three members the
+bias-corrected growth law leaves live (§S6) — then 43, 47, 59, 67, 79, where the law predicts the search is empty
+and a null costs the milestone nothing. *Pass:* `data/fs53/alpha-q<q>-ge<size>.json` per member, every set re-verified by the product
 owner's script from the definition; the record states budget, threads, seed and `halt`; a plateau is reported as "plateau at N
 under budget B", never as α.
 
