@@ -167,8 +167,18 @@ def main():
         print(f"  independent set of size {len(S)}; internal edges {len(bad)}")
         if bad:
             sys.exit(f"NOT INDEPENDENT: e.g. {bad[:3]}")
-        print(f"  INDEPENDENT — verified from the definition; alpha >= {len(S)}, so chi >= ceil({n}/{len(S)}) "
-              f"= {-(-n // len(S))}")
+        # A LOWER bound on alpha gives NO lower bound on chi: chi >= n/alpha needs an UPPER bound on alpha.
+        # What a verified set says about colouring is the threshold direction: a k-colouring partitions the
+        # n vertices into k independent sets, so it needs alpha >= ceil(n/k) — necessary, never sufficient.
+        print(f"  INDEPENDENT — verified from the definition; alpha({n} vertices) >= {len(S)}")
+        for k in (5, 6, 7):
+            need = -(-n // k)
+            verdict = ("this set is at or above that size" if len(S) >= need
+                       else f"short by {need - len(S)}: SOME class of a {k}-colouring must be that big, and no "
+                            f"set that big is known here — nothing is refuted, the search is simply not there yet")
+            print(f"    a {k}-colouring needs alpha >= ceil({n}/{k}) = {need} — {verdict}")
+        print("    (the threshold is necessary and never sufficient: the classes must still partition; and a lower\n"
+              "     bound on alpha bounds chi from BELOW nowhere — that needs a certified upper bound on alpha)")
 
 
 # the committed table, data/fs53/window.md: q -> (lambda_min, ratio bound, six needs, frac6, five needs, frac5)
