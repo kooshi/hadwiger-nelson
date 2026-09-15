@@ -78,3 +78,42 @@ python3 tools/fplane_review_verify.py indep --q 23 --json <plant> --path best_se
 
 It refused by name, naming the offending pairs, before printing any threshold consequence. The same script
 verifies the real 87-set as INDEPENDENT with 0 internal edges, so both outcomes of the control are reachable.
+
+## The positive control: the instrument at the one plane whose α is known exactly
+
+`α(UD(𝔽₁₁,2)) = 28` exactly (FS-50: a search reaching 28 under a certificate of `α ≤ 29.18`). Pointed at it
+cold, **one thread reaches 28 in two seconds** and holds it for the rest of a 60-second budget across 378
+restarts (`rec/ctl-q11-known.json`). The instrument attains the true α where the true α is known — reach
+28/28. That is what licenses reading a plateau elsewhere as weak evidence about the graph rather than only
+about the search, and it is the control G21 demands before any zero is believed.
+
+**The comparison it does not license.** At 11 the search reaches 0.810 of the ratio bound (28/34.55) and at 23
+it reaches 0.660 (87/131.76), but those two numbers differ in **two** things — the plane and the search effort
+per vertex — so the drop is not evidence that α sits lower against its bound at 23. The 11-plane has 121
+vertices and the 23-plane 529; one thread saturates the first in seconds.
+
+## A.1 stage 1 — the free search, 900 s × 3 threads, seed 1, at every member
+
+Every set below was re-verified from the definition by the product owner's independent script
+(`tools/fplane_review_verify.py indep`), which shares no code with the search: **0 internal edges in all seven.**
+
+| q | plateau under this budget | six needs α ≥ | plateau / threshold | restarts | verdict |
+|---|---|---|---|---|---|
+| 23 | **87** | 89 | 0.978 | 9,330 | `not_found` at 900 s |
+| 31 | **146** | 161 | 0.907 | 8,658 | `not_found` at 900 s |
+| 43 | **258** | 309 | 0.835 | 5,978 | `not_found` at 900 s |
+| 47 | **265** | 369 | 0.718 | 6,049 | `not_found` at 900 s |
+| 59 | **363** | 581 | 0.625 | 4,139 | `not_found` at 900 s |
+| 67 | **422** | 749 | 0.563 | 4,015 | `not_found` at 900 s |
+| 79 | **523** | 1041 | 0.502 | 3,806 | `not_found` at 900 s |
+
+**Every row is a plateau at N under a budget of 900 seconds on 3 threads at seed 1, and none of them is α.**
+A local search bounds α from below only; nothing here refuses six colours anywhere.
+
+**Read the last column before the third.** The seven rows differ in **two** things at once — the plane and the
+search effort per vertex — because the budget is flat while the graph grows from 529 to 6,241 vertices. The
+23-plane gets 9,330 restarts and the 79-plane 3,806 on a graph 11.8× larger. So the fall-off of
+plateau/threshold with `q` is **not** a measurement of the planes; it is mostly a measurement of a flat budget
+spread over growing graphs. The one row where the plateau is near-converged is **23**, where all three threads
+independently sit at exactly 87 (`spread_low = spread_high = 87`), the best was reached in the first fifteen
+seconds, and 9,330 restarts over fifteen minutes never moved it.
