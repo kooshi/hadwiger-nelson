@@ -867,7 +867,11 @@ colouring so far and `partial: true`, and `--start <record>` resumes from it. *P
 valid record; the resumed run's best conflict count is monotone from it; the plant — a record with a corrupted colouring — is
 refused by name. WO-20: `--fix-class <independent-set record>` holds that set as colour class 0. *Pass:* at `(23, 6)` with
 `data/fs50/alpha-p23-ge87.json` the verifier confirms class 0 equals the set; the plant — a set that is not independent — is
-refused by name before any search. Both under the ferrous standard's own gate (its tests, its controls), reported with the test
+refused by name before any search. **Added to the work order by the product owner, 2026-09-15, with the arithmetic below
+(§S13.2 A.2's note):** `--fix-class` computes `⌈q²/k⌉` and, when `|S|` is smaller, prints a note that the fixed class is below
+the size a `k`-colouring forces and that the remainder therefore needs an independent set of at least `⌈(q² − |S|)/(k − 1)⌉`,
+larger than the one fixed; both numbers go in the record. A note, never a refusal — the run is legitimate and a success would
+be a major finding — but a run whose failure was arithmetically predetermined must not be recorded as evidence about the graph. Both under the ferrous standard's own gate (its tests, its controls), reported with the test
 counts.
 
 **A0.4 — the certificate stack over prime powers** (R-1; a day and a half). The three tools accept `--q 27 --modulus t^3-t-1`
@@ -900,7 +904,14 @@ under budget B", never as α.
 
 **A.2 — six-colourings at every member** (per member, the long budget WO-19 makes safe: an hour, checkpointed). `plane-colour
 --k 6` whole plane; `fplane.py equivariant --p q --k 6` for the prime members; WO-20's fixed-class search at 23 with the best set;
-`k = 5` after `k = 6` where five is open. *Pass:* one record per (member, k) with its budget; any `found` re-verified by the product
+`k = 5` after `k = 6` where five is open. **Peel-and-colour has an arithmetic precondition, and at 23 it is not met** (the
+product owner, 2026-09-15): a `k`-colouring partitions `q²` vertices into `k` independent sets, so some class has `≥ ⌈q²/k⌉`;
+fixing a class `S` with `|S| < ⌈q²/k⌉` leaves `q² − |S|` vertices needing `k − 1` classes, one of size `≥ ⌈(q² − |S|)/(k − 1)⌉`
+— **larger than `|S|`**. At `(23, 6)`: `⌈529/6⌉ = 89`, the best known set is **87**, and the remainder would need `⌈442/5⌉ = 89`.
+So the fixed-class run at 23 cannot succeed unless α(23) ≥ 89, which is the open question itself, and `plane-independent`
+targeting 89 answers it directly and more cheaply. **Consequence for the order of A.2 at 23: the independent-set ask (A.1,
+target 89) is the decisive instrument and runs first; the fixed-class colour search is run only with a set of size ≥ 89 if one
+is ever found.** The same test applies at every member before a fixed-class run is launched. *Pass:* one record per (member, k) with its budget; any `found` re-verified by the product
 owner from the definition and promoted to a `Cert` under K1 the same day; every `not_found` names its budget in `data/fs53/window.md`.
 
 **B — the certificate side** (R-3; one GPU-day; §S13.3 first). Per member in the order 27, 79, 67, 47, 43, 59:
