@@ -53,8 +53,12 @@ five. The certificate's reach has been measured exactly three times — **0.8445
 34.5496), **0.8238 at 23** (108.546075 against 131.7620) and **0.8836 at 83** (1059.834185 against 1199.4588) — so it
 should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59.
 
-**Measured at a window member for the first time (FS-53 phase A0.4): 0.9110 at `q = 27`** — `147.578 / 162.000`, a
-**converged** value (two formulations, three solvers, agreeing to 5 × 10⁻⁴), and the **worst reach measured anywhere**.
+**The worst reach measured anywhere, and the first at a prime power (FS-53 phase A0.4): 0.9110 at `q = 27`** —
+`147.578 / 162.000`, a **converged** value (two formulations, three solvers, agreeing to 5 × 10⁻⁴). It is *not* the
+first reach at a window member: **23 is in the window** and its 0.8238 is the best of the four. So the four
+measurements split two inside the window (23, 27) and two outside (11, 83), and the inside pair alone already spans
+0.8238 to 0.9110 — the reach is not a function of "window or not", and reading it as one would be comparing two things
+at once.
 It sits above `frac5` at 27 (0.9012), so **the certificate does not refuse five there and §S6's P3 is falsified at 27**;
 `data/fs53/cert-q27-N147.json` is the CERTIFIED artifact, `α ≤ 147` against the 146 five needs. Read against the other
 cells, a worst-case reach of 0.9110 leaves `frac5` at 43 (0.9362) and 47 (0.9477) refusable with 2.5 % and 3.7 % of

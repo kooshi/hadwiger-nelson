@@ -75,7 +75,10 @@ five at 27 is not refused, but it survives in a window **two integers wide**: a 
 its independence number to be 146 or 147, within one of the certified maximum. That is the narrowest any five-question
 has been anywhere in this project, and the finding side at 27 now has a second, sharper target than the six-threshold.
 
-**The instrument's reach at 27 is 147.578 / 162.000 = 0.9110 of the ratio bound** — the first reach measured at a window
-member, and the **worst** measured anywhere (0.8445 at 11, 0.8238 at 23, 0.8836 at 83). It is a converged value, not a
+**The instrument's reach at 27 is 147.578 / 162.000 = 0.9110 of the ratio bound — the worst measured anywhere**
+(0.8445 at 11, 0.8238 at 23, 0.8836 at 83). It is the first reach measured at a **prime power**; it is *not* the first
+at a window member — **23 is in the window and was measured at FS-50** (0.8238, the best of the four). Both the phase's
+implementer and the product owner wrote "first at a window member" before checking; the four measurements split two in
+the window (23, 27) and two outside it (11, 83), and the window half alone already spans 0.8238 to 0.9110. It is a converged value, not a
 compute artifact: two formulations and three solvers agree. `plans/STUB-sixth-colour.md` §S6 P3 predicted the
 certificate would refuse five at 27; **it does not, and P3 is falsified there.**
