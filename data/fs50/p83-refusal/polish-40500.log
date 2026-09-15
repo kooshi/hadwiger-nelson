@@ -1,0 +1,29 @@
+[blocks] p = 83: 6889 points, 82 circles, 564981 rotation orbits, 49447 pair orbits, 1764 killed, 98894 canonical constraints (1.4 s)
+[blocks] the real blocks: 43 of sizes 82-83 (against 330 embedded in the Hermitian form), 24576550 map entries, 10.5 s
+[blocks] SCS data: A (391718, 49447) nnz 18542967; 86 positive semidefinite blocks of size <= 83; built in 135 s
+[blocks] resumed from /home/kooshi/.claude/jobs/b1507518/tmp/sdp/ckpt-polish.npz: 40500 iterations already done
+[blocks] chunk 1: +500 it (41000 total) in 209 s; pobj -1067.434892 dobj -1067.433175 res_pri 1.06e+00 res_dual 1.38e+00 gap 1.72e-03 -- solved (inaccurate - reached max_iters)
+[blocks] the iteration cap 41000 was reached without convergence; the dual is used as it stands (sound, possibly weak)
+/home/kooshi/source/lean-dir/tools/fplane_cert_round.py:580: UserWarning: Solution may be inaccurate. Try another solver, adjusting the solver settings, or solve with verbose=True for more information.
+  prob.unpack_results(result, chain, inv)
+[blocks] the float bound: 1067.449253 (optimal_inaccurate, SCS, chunked, real blocks) in 360.2 s
+[blocks]   dual signs (+1,+1): N = 1076.366454  (13 s)
+[blocks]   dual signs (+1,-1): N = 55698.523434  (7 s)
+[blocks]   dual signs (-1,+1): N = 49421.569647  (7 s)
+[blocks]   dual signs (-1,-1): N = 6805.000000  (1 s)
+[blocks] taking the dual signs (+1,+1)
+[blocks]   cut 1e-08, gram denominator 10000000000, weight denominator 10000000000: N = 1076.366454  (from the checkpoint)  <- best so far
+[blocks] best exact N = 42045564621001773194639845780964924918379/39062500000000000000000000000000000000 = 1076.366454; alpha(UD(F_83, 2)) <= 1076
+[blocks] wrote /home/kooshi/.claude/jobs/b1507518/tmp/sdp/cert-polish-40500.json (15.13 MB)
+[blocks] handing it to the checker (a separate program, standard library only):
+[cert] file: /home/kooshi/.claude/jobs/b1507518/tmp/sdp/cert-polish-40500.json
+[cert] kind 'fplane-alpha-certificate', p = 83, N = '42045564621001773194639845780964924918379/39062500000000000000000000000000000000', alpha_bound = 1076
+[cert] the derivation it points at: plans/FS50-certificate-soundness.md
+check 1/4  group and orbits rebuilt from p = 83 alone: 6889 points, 49447 orbits of ordered pairs under O(2,83) x swap x S3, 1764 killed by a unit vector; the file's 49447 representatives agree, and the canonical constraint list (98894 rows: 1 g0, 1764 killed, 49447 nonneg, 47682 le_diag) agrees row for row
+check 2/4  multipliers: 98894 rationals, the 97129 attached to inequalities are all >= 0, the 1765 attached to equalities are free
+check 3/4  positive semidefiniteness:
+           Z1: 43 circulant block(s) over 165 slots (82 cosine, 82 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 25x165 (Z = B^T B); block 1: a rational Gram factor of shape 18x165 (Z = B^T B); ... (41 more, each checked the same way)
+           Z2: 43 circulant block(s) over 165 slots (82 cosine, 82 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 26x165 (Z = B^T B); block 1: a rational Gram factor of shape 21x165 (Z = B^T B); ... (41 more, each checked the same way)
+check 4/4  the affine identity N - tr Y(y) = <Z1,Y(y)> + <Z2,M(y)-Y(y)> + sum lambda_i c_i(y) + sum nu_j e_j(y): all 49447 orbit coefficients and the constant term agree exactly
+CERTIFIED: every independent set of UD(F_83, 2) has at most 42045564621001773194639845780964924918379/39062500000000000000000000000000000000 points, hence at most 1076 (a cardinality is an integer) -- exact arithmetic, no solver trusted
+hence UD(F_83, 2) is not 6-colourable (6 * 1076 = 6456 < 6889); kernel consumer: add_one_le_chromaticNumber_of_indepNum_le

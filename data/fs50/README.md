@@ -431,8 +431,8 @@ format's row list, and both existing certificates, for no measured gain.
 
 ### The refusal of six at 83 (2026-09-15, 06:05): α(UD(𝔽₈₃, 2)) ≤ 1082, two independent exact certificates
 
-**The claim, at the exact-rational level:** every independent set of UD(𝔽₈₃, 2) has at most 1082 points, so 6 × 1082 = 6,492
-< 6,889 and **the plane is not six-colourable**; with `add_one_le_chromaticNumber_of_indepNum_le` (kernel) that is
+**The claim, at the exact-rational level:** every independent set of UD(𝔽₈₃, 2) has at most **1076** points (the tightest
+certificate in the table below; 1082 was the first pair), so 6 × 1076 = 6,456 < 6,889 and **the plane is not six-colourable**; with `add_one_le_chromaticNumber_of_indepNum_le` (kernel) that is
 χ(UD(𝔽₈₃, 2)) ≥ 7. The certificate is checked by `tools/fplane_cert_check.py`, which rebuilds the group, its 49,447 orbits and
 the 98,894 canonical rows from the number 83 and trusts no solver; the kernel form of the certificate itself is FS-52.
 
@@ -440,6 +440,7 @@ the 98,894 canonical rows from the number 83 and trusts no solver; the kernel fo
 |---|---|---|---|---|---|
 | `cert-p83-N1082-pardiso-arm.json` (15.1 MB) | 54145768919878014998796452705507433877093 / 5·10³⁷ = 1082.915378 | **1082** | the 5,000-iteration iterate resumed for +500 in a fresh solver on sequential MKL Pardiso (`build/venv-sdp`), its own dual at the chunk end | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
 | `cert-p83-N1082-gpu-arm.json` (15.1 MB) | 676848530876231948246514932098797470489039 / 6.25·10³⁸ = 1082.957649 | **1082** | the same parent iterate resumed for +500 in a fresh solver on `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
+| `cert-p83-N1076-polish-40500.json` (15.1 MB) | 42045564621001773194639845780964924918379 / 3.90625·10³⁷ = **1076.366454** | **1076** | the live run's 40,500-iteration checkpoint resumed for +500 in a fresh solver on `gpu_indirect`, its own dual at the chunk end — the polish loop's first output, the recipe reproduced | CERTIFIED, "not 6-colourable" | CERTIFIED, 2 m 10 s |
 | `cert-p83-N1252-pardiso-arm-nudged.json`, `cert-p83-N1250-gpu-arm-nudged.json` | 1252.08, 1250.03 | 1252, 1250 | `--round-only` on the two 5,500-iterates (one nudge iteration from a fresh solver object, cut 10⁻⁶, denominators 10⁸) | CERTIFIED, say nothing about six | — |
 
 **How they came to exist, because the mechanism is the finding.** The two arms were the backend-honesty control: the same
