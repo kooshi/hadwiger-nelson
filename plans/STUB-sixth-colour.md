@@ -652,13 +652,22 @@ hypothesis has `cert3` as its named inhabitant in the same file.
 
 ### §S10. What is being put to Kooshi
 
-The five decision cards are in the planner's report, in the house format. In one line each, with the
-planner's recommendation: **(1)** extend the certificate stack from prime fields to prime powers so that
-`q = 27` can be certified — *yes*; **(2)** the two `descent-engine` work orders (a per-tick record for the
-colourer, `--pin-class`) — *yes*; **(3)** how long the finding side runs before a member is closed as
-undecided — *four CPU-hours across three instruments*; **(4)** whether phase D is priced or promised —
-*priced*; **(5)** whether the milestone's durable product is the digits or the growth law of α — *the
-law, with the digits as its corollary*.
+**Four** cards, in the planner's report in the house format. In one line each, with the planner's
+recommendation and the default if Kooshi says nothing:
+
+1. **Extend the certificate stack from prime fields to prime powers**, so `q = 27` can be certified —
+   *yes* (about 1.5 days, and it touches the frozen checker). Default: no; 27 gets the finding side only.
+2. **Two `descent-engine` work orders** — a per-tick record for the colourer (a live breach of the
+   PROTECTED checkpointing rule) and `--pin-class` for peel-and-colour — *yes, both* (about an hour each).
+   Default: neither; colour runs stay capped at 15 minutes and peel-and-colour is dropped.
+3. **Does the certificate phase run at all**, given that it can never *find* a six? — *yes, one to two
+   GPU-days, ordered 27, 79, 67, 47, 43, 59*. Default: it runs, after the finding side's first two days.
+4. **The milestone's durable product: the digits, or the growth law of α?** (the advisor's card 5) — *the
+   law, with "is six ever attained" as its corollary*. Default: record both, lead with the law.
+
+Two questions the stub left open are **settled here and not put to him**: how long the finding side runs
+before a member closes as undecided (§S6's stopping rule — four CPU-hours across three instruments), and
+whether phase D is priced or promised (priced, §S5).
 
 ### §S11. The data layout
 
