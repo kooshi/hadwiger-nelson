@@ -194,9 +194,26 @@ finding, credited: regenerating `chi-q27.json` with `--k 4` alone would have dro
   window member" was false — **23 is a window member and was measured at FS-50**, an error made independently by both
   the implementer and the product owner in the same direction.
 
-**In flight:** the `ferrous-engineer` on **A0.3** (WO-19 `plane-colour` checkpoints and resumes; WO-20 `--fix-class`) in
-`~/source/descent-engine`, briefed by `/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.3.md`. **Next after it:**
-K1/K2, briefed by
+**A0.3 IS DONE (14:15), reviewed by artifact and pushed** — `~/source/descent-engine` through `f8e25f0`, 13 commits, its
+subplan `plans/WO-19-20-checkpoint-and-fix-class.md`. `plane-colour` now rewrites its whole record at every progress tick
+through a temp file and a rename and resumes from one with `--start`; `--fix-class` holds a given independent set as
+colour class 0 and carries the pigeonhole numbers. Verified here, not read: 116 and 118 re-counted from the definition,
+class 0 re-derived outside the tool and equal to the 87-set, two plants of the product owner's own construction each
+refused by name with exit 1 before any search, and `./scripts/gate.sh` run here — GATE GREEN. Four of its findings are
+ruled on in §S13.2 A0.3; two more are now instances in `CLAUDE.md`'s PROTECTED kill paragraph (`nohup … & ; $!` names an
+intermediate shell, not the binary — **a kill is verified by what stopped changing, never by the exit status of the
+kill**; and `| head` can kill a producer before its cleanup while `| tail` reports success regardless, which is how a
+planted fault reached a commit). **A defect in the plan's own acceptance:** it named `data/fs50/alpha-p23-ge87.json` for
+`--fix-class` without opening it — that file is `kind: fplane-alpha-lower` with its set under `independent_set`, so the
+tool as specified would have refused its own acceptance case; it now reads three shapes.
+
+**A cross-toolchain trap, bridged:** the Python tools and `descent-engine` both write `edges_sha256` **by different
+conventions** (`repr(sorted [(min,max)])` against little-endian `u32` pairs), so one graph carries two digests and
+standing rule 5's comparison silently failed across the boundary. `tools/fplane_review_verify.py` now computes and
+accepts both, with a control reproducing `plane-colour`'s own digest at 23 from the definition: the two toolchains build
+the same graph. The table is in `data/fs53/README.md`.
+
+**Next:** K1/K2, briefed by
 `/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.md`. **Written and waiting, so the next phase costs no latency:**
 `brief-fs53-K1K2.md` (the kernel side) in the same directory.
 **Nothing is pushed above `origin/main` at `184e721`** while an unreviewed implementer commit sits in the stack — the
