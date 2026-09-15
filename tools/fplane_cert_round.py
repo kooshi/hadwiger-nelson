@@ -484,7 +484,7 @@ def solve_blocks_real(F, rows, solver="SCS", verbose=False, opts=None, plant=Non
 
 
 def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, ckpt=None,
-                              plant=None, round_only=False):
+                              plant=None, round_only=False, linear_solver="auto"):
     """The same solve, driven through SCS's OWN API in warm-started chunks, so that it is observable
     (one flushed line per chunk: iterations, residuals, gap, objective) and RESUMABLE (the iterate
     x, y, s goes to `ckpt` after every chunk; a relaunch continues from it).
@@ -526,7 +526,7 @@ def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, c
         print(f"[blocks] --round-only: rounding the iterate at {done} iterations; the checkpoint is "
               f"NOT advanced and NOT rewritten", flush=True)
         solver = scs_mod.SCS(dict(A=A, b=b, c=c), cone, eps_abs=eps, eps_rel=eps, max_iters=1,
-                             verbose=False, normalize=True)
+                             verbose=False, normalize=True, linear_solver=linear_solver)
         t1 = time.time()
         result = solver.solve(warm_start=True, x=x0, y=yv, s=sv)
         info = result["info"]
@@ -538,8 +538,12 @@ def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, c
         return (prob.value, f"iterate at {done} iterations ({info['status']})",
                 [push0(T, cc) for T, cc in zip(Ts, cY)],
                 [push0(T, cc) for T, cc in zip(Ts, cM)], weights)
+    # linear_solver: SCS's linear-system backend, a STRING keyword on this wheel ("qdldl", "mkl", "cpu_indirect",
+    # "gpu_indirect", "cudss"; "auto" = the wheel's choice, its sequential MKL here). Measured at 83 on 2026-09-15:
+    # 3.4 s/iteration on the sequential direct solvers, 0.33 s on gpu_indirect (graphics card A); the iterate warm-starts
+    # across backends unchanged (same data, same normalisation).
     solver = scs_mod.SCS(dict(A=A, b=b, c=c), cone, eps_abs=eps, eps_rel=eps, max_iters=chunk,
-                         verbose=False, normalize=True)
+                         verbose=False, normalize=True, linear_solver=linear_solver)
     result = None
     nch = 0
     while done < max_iters:
@@ -709,7 +713,7 @@ def main_blocks(a):
             val, status, Ws, Vs, weights = solve_blocks_real_chunked(
                 F, rows, eps=(a.eps if a.eps is not None else 1e-8), chunk=a.chunk,
                 max_iters=(a.max_iters or 200000), ckpt=a.scs_ckpt, plant=plant,
-                round_only=a.round_only)
+                round_only=a.round_only, linear_solver=a.linear_solver)
         elif a.real:
             val, status, Ws, Vs, weights = solve_blocks_real(F, rows, solver=a.solver,
                                                              verbose=a.verbose, opts=opts,
@@ -870,6 +874,9 @@ def main():
                     help="with --real: drive SCS in warm-started chunks of this many iterations, "
                          "printing one flushed line each and checkpointing the iterate to --scs-ckpt, "
                          "so a long solve is observable and a kill costs one chunk")
+    ap.add_argument("--linear-solver", default="auto",
+                    help="SCS linear-system backend for the chunked solve: auto (the wheel's default), qdldl, mkl, "
+                         "cpu_indirect, gpu_indirect, cudss (the last two need the source-built wheel in build/venv-sdp-gpu)")
     ap.add_argument("--scs-ckpt", help="where the chunked solve saves its iterate (npz); a relaunch "
                                        "with the same file continues from it")
     ap.add_argument("--round-only", action="store_true",

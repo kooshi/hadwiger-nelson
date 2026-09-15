@@ -896,17 +896,28 @@ recovery. The instances, each a clause of the rule:
    warm-started chunks, the iterate saved after every chunk and one residual line per chunk (`tools/fplane_sdp_scs.py`),
    never under a wall — and a process-model claim is tested on `sleep` before it is acted on or sent to anyone.
 
-**A run that blocks something is presumed killable** (Kooshi, 2026-09-12). When a live job stands in the way
+**A run that blocks something is presumed killable** (Kooshi, 2026-09-12). **[PROTECTED — never compress, trim or
+paraphrase this paragraph; rewrite it only to add an instance (Kooshi, 2026-09-15).]** When a live job stands in the way
 of anything — an edit to a module it imports, a core another task needs, a fix it would invalidate — weigh
 **the value of the run against the value of what it blocks, and the default is to kill the run.** The burden
 of proof is on keeping it, never on stopping it. Because every long run checkpoints (above), **the cost of
 being wrong is the time to redo, never the result** — so weigh the cost of being wrong, not the hours
 already spent. Three shapes met in one night, each of which looked like a reason to wait and was not:
-- **The run is blocking its own replacement.** Two reductions spent hours on an operation a new engine did 186× faster,
-  and `tools/` could not be edited while they held it open — "wait for them to finish" made the slow path
-  self-perpetuating. Ask by name: *is the thing I am waiting on the thing preventing the fix?*
-- **The run is producing records under code you are about to fix.** Finishing banks results from the broken version and
-  forces the redo anyway.
+- **The run is blocking its own replacement.** Two reductions spent hours on an operation a new engine did
+  186× faster, and `tools/` could not be edited while they held it open — so "wait for them to finish" made
+  the slow path self-perpetuating. Look for that circularity by name: *is the thing I am waiting on the
+  thing preventing the fix?* **Second instance, 2026-09-15 (FS-50), and this rule was on this page in full when it
+  happened:** four single-threaded semidefinite solves at 83, 3.4 s per iteration and a day to convergence, were kept
+  running while the timing of their replacement ran niced beside them — a threaded and a GPU linear-system backend of the
+  same solver, selectable the whole time by one keyword (`linear_solver=`) that had been misread the day before as
+  "unavailable in this wheel" because the wrong keyword was tried — and the product owner wrote "nothing else is runnable
+  until the measurements land". **Measuring the replacement is not a precondition for stopping the run**: with
+  checkpoints the redo is minutes on the fast path, so the runs are killed at their next checkpoint and relaunched on
+  whatever the measurement names; the two with no checkpoint on disk yet forfeited about 1,800 and 550 iterations of a
+  reading the surviving run's chunk lines already gave. The shape to recognise: *the measurement I am waiting on is the
+  measurement of the thing that replaces what I am protecting.*
+- **The run is producing records under code you are about to fix.** Finishing banks results from the broken
+  version and forces the redo anyway — and those records are the ones a later reader trusts.
 - **The fix makes the redo cheaper than the run being protected.** Then waiting costs twice.
 
 Two obligations when you do it. **Capture the run's state into the record before signalling** — a verdict
