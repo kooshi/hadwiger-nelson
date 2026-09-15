@@ -23,8 +23,10 @@ members remain, none decided.**
 | 67 | 4489 | −15.0567 | 813.78 | — | — | 6 `[exact]` | 12 `[search]` | 749 | **0.9204** | (refused) | 1.1035 |
 | 79 | 6241 | −17.1019 | 1099.19 | — | — | 6 `[exact]` | — | 1041 | **0.9471** | (refused) | 1.1363 |
 
-The ceiling 7 at `q = 27` is `data/fs53/periodic-q27.json`: a verified proper 7-colouring of a 27-vertex quotient of the
-plane, found by `tools/fplane_periodic_subgroups.py` and pulled back. The same sweep is **exhaustive** at subgroup indices
+The ceiling 7 at `q = 27` is `data/fs53/colour-q27-k7-quotient.json`: a proper 7-colouring of a 27-vertex quotient of the
+plane, pulled back and verified on every edge by an independent rebuild of the field (the sweep record
+`data/fs53/periodic-q27.json`, from `tools/fplane_periodic_subgroups.py`, names the subspace but carries no colouring at
+`best_k_found` — a defect A0.2 repairs). The same sweep is **exhaustive** at subgroup indices
 9 and 27 — 11,011 and 33,880 subspaces, 2,100 and 20,216 of them usable, **none six-colourable** — and a null at 40 DSATUR
 restarts at indices 81 and 243. So no six-colouring of `UD(𝔽₂₇,2)` is constant on the cosets of any subgroup of index 9 or
 27, and the finding side there must go non-periodic.

@@ -116,10 +116,18 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
 
 ## 3. What to do next, in order (rewritten 06:40 after the close)
 
-**GO (Kooshi, 2026-09-15 ~10:30): FS-53 subplanning is under way — WORKFLOW steps 3a (§PA), Poros planning-only, the planner
-(one subagent at a time), then the modeling passes; PAUSE before implementation (step 7). Every step commits as it lands and this letter's §3 says which step was reached. Progress ledger:** §PA — DONE (committed; `plans/STUB-sixth-colour.md` §PA, with the stub's §0/§2 corrected: 83 is only ≥ 7,
-the window's upper bounds are the line-periodic 8/8/8/10/10/12, five is CDCL-undecided at 23–47, Moorhouse's open cell at 17 is phase A′);
-Poros — DONE (`plans/POROS-2026-09-15-fs53-planning.md`, committed; verdict: the certificate cannot refuse six at 23–47 (reach 0.82–0.90 of the ratio bound against thresholds 0.67–0.79) and can at 67/79 and refuse five at 43/47; nobody has ever asked a window plane for six colours — the first measurement is `plane-colour --p 23 --k 6`; the window has EIGHT members, q = 27 (𝔽₂₇, field ℚ(√3, α), α³ = α + 1) was omitted from the stub and G56; `field_q27` was deleted by a3adc46 so `chi-q27.json` is unreproducible; the '+1 over the floor' reading is false at p = 3 (tight) and its repair is χ = ⌈q²/α⌉; Kooshi's asymptote inverted: χ_f = q²/α diverges like √q and crosses six once near 23–31); the first measurement DONE and committed (`data/fs53/README.md`: no window plane found six-colourable by the Rust colourer at 23/31/43/47, nor seven at 23; controls green); planner — RUNNING since ≈ 12:50 (Opus; writes §S into `plans/STUB-sixth-colour.md` and the skeleton, commits incrementally; brief at job tmp `planner-brief-fs53.md`); modeling passes — not started (de Bruijn runs them, fresh Skill invocations, after the planner's commit); then PAUSE before implementation (Kooshi).
+**GO (Kooshi, 2026-09-15 ~10:30): FS-53 subplanning — DONE through WORKFLOW step 5, PAUSED before step 7 (implementation) on
+Kooshi's instruction.** The ledger: §PA (82b47e9); the advisor's pass `plans/POROS-2026-09-15-fs53-planning.md` (0f1d6da); the first
+measurement — no window plane found six-colourable by the Rust colourer, `data/fs53/README.md` (3c80e02); the planner's subplan §S0–§S11
+in `plans/STUB-sixth-colour.md`, the skeleton `Proofs/HadwigerNelson/CayleyCertificate.lean` and `Instances/SixthColour.lean`
+(7868ccf…15e1bf4), the 27-plane's seven-colouring filed as a certificate on review (92c839b); the three modeling passes §S12.1–§S12.3
+(e0d68e9 and the closing commit), the window module trimmed to one `finitePlane` threshold statement; `./scripts/build.sh` green on the
+skeleton twice (3 modules rebuilt, warnings = the tracked `sorry`s). **Next, when Kooshi says go:** his four cards (§S10) — card 1 (extend
+the certificate stack to prime powers for q = 27) and card 2 (two Rust work orders: `plane-colour` checkpointing; a fixed-class search)
+must be decided before phase A; then one Opus implementer per phase per §S5 (A0 first, on the CPU; phase B only after FS-50's GPU jobs are
+stopped at a checkpoint — the kill command is in §3 item 3 below). The implementer's first acts: K1 under §S12.1 D-13 (the certificate
+generic over `IdArith R`), `cert23_8` as K1's inhabitant (§S12.2), D-15's move of the equality schema into `LocalGlobal.lean`.
+
 
 **FS-50 is closed** (ledger row 68, G56, `plans/STUB-independence-threshold.md` §Close, committed): six colours refused at 83
 by two independent exact certificates, α(UD(𝔽₈₃,2)) ≤ 1082 (`data/fs50/p83-refusal/`; the README's "refusal of six" section

@@ -703,3 +703,99 @@ number 27 rather than resting on the planner's word.
 **Seams validated.** The model of the hypotheses: `cert3` (the 3-plane, three colours) is the inhabitant of `Cert.check = true` and stays; under D-13 it becomes `IdArith (ZMod 3)`'s inhabitant. The unsampled member: a `Cert` with `k = 0` is refused by `check` (the `0 < k` conjunct), and a `Cert` over `ZMod 1` — every point is the origin and the circle is empty — is where `Fact (1 < q)` earns its place in `sound`. The adversarial member the planner already pinned: a circle list one point short **must** fail `covers` (negative control kept). The next theorem for free: with D-13 the same `sound` gives `χ(UD(𝔽₂₇,2)) ≤ 7` from `data/fs53/colour-q27-k7-quotient.json` the day `IdArith F27` exists, with no restatement — the test the incidental `ZMod q` shape fails.
 
 **Not changed by the pass.** The covering direction of `covers` (the planner's reasoning is right and the negative control is the right one); the packed-`Nat` table and `unpackColor` (M04's rule); the `ℕ`-identifier arithmetic itself (kernel cost, not model); α as the object with χ derived (D-1).
+
+**§S12.2 Obligation modeling — the proofs the skeleton owes, partitioned and localised.**
+
+*The partition.* **Prove:** `CayleyCert.sound` (once, generically under D-13); the identifier-arithmetic laws as the
+fields of `IdArith (ZMod q)`; the equality schema; the ring-level reduction (already closed: `h.of_hom
+(unitQuadrance.map O23.res)`). **Test:** `cert3` (`#guard cert3.check`), the two negative controls (a circle one point
+short, a table one bit off — each `#guard !check`), the four `#guard`s on `toId`/`addId`/`quadId`, and — added by this pass —
+**the model of `sound`'s hypothesis at a window prime:** `cert23_8 : Cert`, the line-periodic eight-colouring of the 23-plane
+(`data/fplane/periodic-below-71.json`, lifted) packed into a table, `#guard cert23_8.check`, and
+`example : (finitePlane 23).Colorable 8 := CayleyCert.sound …` — the first kernel-checked upper bound at any window member,
+a positive control for the whole K1 pipeline before any digit, and the inhabitant that keeps `colorable_unitQuadrance_O23`'s
+hypothesis from being vacuous (it is: χ(23) ≤ 8 is on record). **Assume:** `Fact (1 < q)` / `NeZero q` only; every threshold
+hypothesis `indepNum ≤ a` is the certificate's, discharged outside the kernel and stated as a hypothesis, never a `sorry`d
+conclusion (§S9's rule).
+
+*`sound`, derived — the statement from which the proof falls out.* `unitQuadrance R` is `addCayley (unitCircle R)` (the
+identification `unitQuadrance_colorable_of_quotient` already runs through; if it is not a named lemma it is one line from
+`unitQuadrance_adj`), so `sound` is `addCayleyColoring tab h` with `tab := colouring c hk` and the one local obligation
+`∀ s ∈ unitCircle, ∀ v, tab (v + s) ≠ tab v`. Its case table has one row: fix `s` on the true circle and `v`; **(i)** `covers`
+at `toId s` (which `List.range (q*q)` reaches by `toId_lt`) gives `toId s ∈ c.circle`, using `quadId (toId s) = 1` from the
+law `mem_unitCircle_iff`; **(ii)** `proper` at that listed `s` and at `toId v` gives
+`unpack (toId v) ≠ unpack (addId (toId v) (toId s))`; **(iii)** `toId_add` rewrites the right side to `unpack (toId (v + s))`.
+Three named `have`s, each two lines; `0 < k` is spent only in `colouring`'s `Fin c.k` and `Fact (1 < q)` only in `NeZero` and
+`ZMod.val_one`. The symmetric direction (`v = u − s`) is not a second case: the true circle is closed under negation, so
+`addCayleyColoring`'s hypothesis over the *true* circle already covers it — which is why `covers` quantifies over the true
+circle and `proper` over the listed one.
+
+*The laws of `IdArith (ZMod q)`, each local.* `toId_lt`: `val_lt` twice and `omega`. `ofId_toId` / `toId_ofId`:
+`Nat.add_mul_div_left`, `Nat.add_mul_mod_self_left`, `ZMod.val_lt`, `ZMod.natCast_zmod_val` (query, do not recall:
+`exact?` on each). `toId_add`: `ZMod.val_add` (`(a + b).val = (a.val + b.val) % q` under `NeZero q`) on each component, then
+the two identities above. `mem_unitCircle_iff`: `ZMod.val_add`, `ZMod.val_mul` (or `val_pow`), `ZMod.val_one` (needs `1 < q`),
+and `ZMod.val_injective`; the `%` on the identifier side matches the `val` of the sum. Every one is arithmetic over `ℕ` after
+the `val` lemmas and closes by `omega` or `simp only [...]` with the lemma named — no `unfold` at a use site (the definitions
+`toId`/`addId`/`quadId` are sealed by these five lemmas, their whole API).
+
+*The schema.* `le_antisymm (hcol.chromaticNumber_le) (add_one_le_chromaticNumber_of_indepNum_le hα hlt)` after the cast
+`((k + 1 : ℕ) : ℕ∞)` is normalised — two lines; if `Colorable.chromaticNumber_le`'s name has moved, `exact?` finds it.
+Under D-15 it lives in `LocalGlobal.lean`; moving it rebuilds that module's dependents, so the **implementer** moves it as
+part of K1, not the planner now.
+
+*The mutation audit, registered before any proof is written (each must break a named step).* Drop `covers` from `check` →
+`sound` fails at (i) and the short-circle control passes `check`, so the theorem would be false. Reverse `covers`'s direction
+(listed ⊆ true) → (i) fails: a true circle point may be unlisted. Drop `0 < k` → `colouring`'s `Fin c.k` is empty at `k = 0`.
+Drop `Fact (1 < q)` → `ZMod.val_one` fails and at `q = 1` the plane is a single loopless point where `check` passes for
+every table. Delete `toId_add` from the proof → (iii) fails and `proper` says nothing about `v + s`. A statement whose
+weakenings all still prove was vacuous; each of these must go red, and K1's acceptance says which line each one breaks.
+
+*Kernel cost, as an obligation.* `check` at 47 is `48 · 2,209 ≈ 106,000` `unpackColor` pairs (GMP shift-and-mask on one
+≈ 6,600-bit `Nat`) plus `2,209` `quadId`s each against a 48-element `List.contains` — seconds under `decide +kernel`, measured
+at K1's acceptance beside `FinitePlane11.lean`'s all-pairs cost (D-4's constant). `List.range (q*q)` is one `q²`-node list per
+`check`, never rebuilt inside the inner `all`; nothing here is `Nat.fold` or an `insert`-grown table (`CLAUDE.md` § The
+kernel's cost model).
+
+*Not obligations of this milestone:* the tight/slack sign and the `(k−1) ∣ (q+1)` divisibility (D-6, `[hand]`); the law
+`χ = ⌈q²/α⌉` (a registered reading scored by measurement); the field-level step from the order to the field (row 57's gap,
+FS-47).
+
+**§S12.3 Experience modeling — the surfaces a stranger, an implementer, Kooshi and the kernel each meet.**
+
+*The stranger who checks an upper bound* holds a colouring record and a definition. `plane-colour`'s records carry the
+vertex convention (`v = x·p + y`), the edge rule, the edge hash and the colouring, so a twenty-line script from the
+definition re-verifies them; the 𝔽₂₇ record `colour-q27-k7-quotient.json` carries its modulus and its own convention (base-3
+digits, `x` then `y`) for the same reason. **The defect this pass found:** `periodic-q27.json` reports `best_k_found = 7`
+and names the subspace but carries **no colouring**, so the ceiling it advertises was not checkable from the file — the
+review filed the colouring separately, `window.md` now cites that file, and **A0.2's acceptance gains a line: the tool
+writes the colouring behind `best_k_found` (a `best_witness` field), so every "χ ≤ k" a record states is re-checkable from
+that record alone.** The wire's one safety property, stated so it is not re-derived at every certificate: a vertex-convention
+mismatch between a record and `IdArith`'s `toId` can only make `check` refuse a good certificate (a permuted table is not a
+colouring; a table permuted by a plane automorphism such as `(x, y) ↦ (y, x)` is still a colouring), never make a false
+theorem true, because the kernel re-checks properness against the true circle.
+
+*The stranger who checks a lower bound* holds the FS-50 surface unchanged: the certificate JSON, `tools/fplane_cert_check.py`
+(frozen; one recorded change, FS-50 §M3), CERTIFIED restated last, `--k` printing the chromatic sentence. **It refuses a
+non-prime modulus by name today** (`certificate.p: 27 is not prime`), which is the breakdown behaving as a breakdown should;
+card 1's specification therefore keeps the field an **explicit** parameter (`--modulus t^3-t-1` beside `--q 27`, carried in the
+record), never inferred from the number — a certificate "at 27" with no modulus stays refused.
+
+*The reader of the table* holds `data/fs53/window.md`: one row per member, a trust tag on every cell with the legend on the
+page (`[exact]`, `[cert]`, `[solver]`, `[search]`, `[kernel]`, `[planner]`), `frac6`/`frac5` beside the reach, and the file
+names fixed. The verdict vocabulary differs per tool (found / not_found; hits / exact / best_k_found; sat / unsat / unknown;
+CERTIFIED / NOT A CERTIFICATE) and the legend is the one place that maps each to a trust tag — keep it the only place. A
+cell that reads "not found at budget B" carries the budget in the cell, never in prose elsewhere (the advisor's trap 1).
+
+*The implementer* holds §S5's phase table and K1–K4. The kernel surface they build is `CayleyCert.check` and `sound` (one
+theorem; the lemma API of `toId`/`addId`/`quadId` is the five laws, and no downstream proof unfolds them), plus the single
+`finitePlane` threshold form with its two spec `example`s — the sixteen per-member names they might have guessed are
+deliberately absent until a certificate exists (D-14), and the docstring says so. The one name that must be predictable:
+`add_one_le_chromaticNumber_finitePlane_of_indepNum_le` sits beside `add_one_le_chromaticNumber_of_indepNum_le` and reads
+as its `finitePlane` specialisation, which is what `exact?` will be asked for.
+
+*Kooshi* holds §S10's four cards in the house format, each with its default; the close's ledger row uses row 68's three-level
+shape (`[search]`/`[cert]`/`[kernel]` per cell) and its consequence sentence is written in advance as D-11 says: no headline
+conditional is promised, and "not landed" is a complete sentence.
+
+*Not changed:* the trust tags and file names (§S11), the designer's spec and its four named controls, `plane-colour`'s and the
+checker's verdict words.

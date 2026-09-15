@@ -13,8 +13,8 @@ This module holds the kernel content that does **not** wait on a digit:
 
 * the **equality schema** — a verified `(k+1)`-colouring together with a certified bound on the
   independence number pins `χ` exactly;
-* the **window's thresholds**, one conditional statement per prime member and per colour count, in the
-  shape `Instances/IndependenceThreshold.lean` established at 83, 23 and 11;
+* the **window's threshold**, one statement on `finitePlane q` with the vertex count folded in (a per-member
+  named form is minted only when its certificate exists — subplan §S12.1 D-14);
 * a **field's bound at the ring level**: a ring homomorphism from an order into `𝔽_q` is a graph
   homomorphism of unit-quadrance graphs, so every colouring of the plane colours the order's plane.
 
@@ -61,93 +61,31 @@ theorem chromaticNumber_eq_succ_of_colorable_of_indepNum_le {V : Type*} [Fintype
     (hlt : k * a < Fintype.card V) : G.chromaticNumber = (k + 1 : ℕ) := by
   sorry
 
-/-! ### The window's vertex counts
+/-! ### The window's thresholds, in one statement
 
-For every `q` coprime to 6 the count is exact: `6 · (⌈q²/6⌉ − 1) = q² − 1`, and likewise at five when
-`5 ∤ q`. So each arithmetic side condition below is `q² − 1 < q²`, decided by `norm_num`. -/
+`finitePlane q` has `q * q` vertices, so the side condition of `add_one_le_chromaticNumber_of_indepNum_le`
+is `k * a < q * q`; at every window member `6 · (⌈q²/6⌉ − 1) = q² − 1` (`q` coprime to 6) and
+`5 · (⌈q²/5⌉ − 1) = q² − 1` (`5 ∤ q`), so each is `norm_num` at use time. A per-member named statement is
+minted only when its certificate exists (subplan §S12.1 D-14; FS-50's
+`seven_le_chromaticNumber_finitePlane83_of_indepNum_le` in `Instances/IndependenceThreshold.lean` is the
+shape), never ahead of it. -/
 
-theorem six_mul_lt_card_finitePlane23 : 6 * 88 < Fintype.card (ZMod 23 × ZMod 23) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
+/-- **A certified independence bound raises a finite plane's chromatic number**, stated on `finitePlane q`
+with its vertex count `q * q` folded in: if `k · a < q²` and no independent set exceeds `a` points, then
+`χ ≥ k + 1`. The hypothesis `indepNum ≤ a` is what an exact rational certificate of the triple-level
+semidefinite bound supplies (`tools/fplane_cert_check.py`, its `⌊N⌋`); the kernel never decides it. -/
+theorem add_one_le_chromaticNumber_finitePlane_of_indepNum_le {q k a : ℕ} [NeZero q]
+    (h : (finitePlane q).indepNum ≤ a) (hk : k * a < q * q) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ (finitePlane q).chromaticNumber :=
+  add_one_le_chromaticNumber_of_indepNum_le h (by simpa [Fintype.card_prod, ZMod.card] using hk)
 
-theorem six_mul_lt_card_finitePlane31 : 6 * 160 < Fintype.card (ZMod 31 × ZMod 31) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
+/-- The spec at the window's most-watched cell: six refused at 23 needs `α ≤ 88`, and would read `χ ≥ 7`. -/
+example (h : (finitePlane 23).indepNum ≤ 88) : (7 : ℕ∞) ≤ (finitePlane 23).chromaticNumber := by
+  simpa using add_one_le_chromaticNumber_finitePlane_of_indepNum_le (k := 6) h (by norm_num)
 
-theorem six_mul_lt_card_finitePlane43 : 6 * 308 < Fintype.card (ZMod 43 × ZMod 43) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem six_mul_lt_card_finitePlane47 : 6 * 368 < Fintype.card (ZMod 47 × ZMod 47) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem six_mul_lt_card_finitePlane59 : 6 * 580 < Fintype.card (ZMod 59 × ZMod 59) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem six_mul_lt_card_finitePlane67 : 6 * 748 < Fintype.card (ZMod 67 × ZMod 67) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem six_mul_lt_card_finitePlane79 : 6 * 1040 < Fintype.card (ZMod 79 × ZMod 79) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem five_mul_lt_card_finitePlane31 : 5 * 192 < Fintype.card (ZMod 31 × ZMod 31) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem five_mul_lt_card_finitePlane43 : 5 * 369 < Fintype.card (ZMod 43 × ZMod 43) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-theorem five_mul_lt_card_finitePlane47 : 5 * 441 < Fintype.card (ZMod 47 × ZMod 47) := by
-  rw [Fintype.card_prod, ZMod.card]; norm_num
-
-/-! ### The six-colour thresholds — a refusal of six at each prime member
-
-Each says: *if* the plane's independence number is at most `⌈q²/6⌉ − 1`, its `q²` points do not split
-into six classes and `χ ≥ 7`, so that member leaves the window. By the subplan's §S2.2 the exact
-certificate should reach this at 79 and 67, is expected to miss at 59, and is 10–25 % out of reach at
-23, 31, 43 and 47 — which is a fact about the instrument, not about those planes. -/
-
-theorem seven_le_chromaticNumber_finitePlane23_of_indepNum_le
-    (h : (finitePlane 23).indepNum ≤ 88) : (7 : ℕ∞) ≤ (finitePlane 23).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane23
-
-theorem seven_le_chromaticNumber_finitePlane31_of_indepNum_le
-    (h : (finitePlane 31).indepNum ≤ 160) : (7 : ℕ∞) ≤ (finitePlane 31).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane31
-
-theorem seven_le_chromaticNumber_finitePlane43_of_indepNum_le
-    (h : (finitePlane 43).indepNum ≤ 308) : (7 : ℕ∞) ≤ (finitePlane 43).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane43
-
-theorem seven_le_chromaticNumber_finitePlane47_of_indepNum_le
-    (h : (finitePlane 47).indepNum ≤ 368) : (7 : ℕ∞) ≤ (finitePlane 47).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane47
-
-theorem seven_le_chromaticNumber_finitePlane59_of_indepNum_le
-    (h : (finitePlane 59).indepNum ≤ 580) : (7 : ℕ∞) ≤ (finitePlane 59).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane59
-
-theorem seven_le_chromaticNumber_finitePlane67_of_indepNum_le
-    (h : (finitePlane 67).indepNum ≤ 748) : (7 : ℕ∞) ≤ (finitePlane 67).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane67
-
-theorem seven_le_chromaticNumber_finitePlane79_of_indepNum_le
-    (h : (finitePlane 79).indepNum ≤ 1040) : (7 : ℕ∞) ≤ (finitePlane 79).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane79
-
-/-! ### The five-colour thresholds — raising a floor to six
-
-At 59, 67 and 79 the spectrum already refuses five, so only 23, 31, 43 and 47 need these. The one at 23
-(`α ≤ 105`) is FS-17's and already stated in `Instances/IndependenceThreshold.lean`; the relaxation's own
-optimum there is 108.546075, so it cannot reach it. At 43 and 47 it should. -/
-
-theorem six_le_chromaticNumber_finitePlane31_of_indepNum_le
-    (h : (finitePlane 31).indepNum ≤ 192) : (6 : ℕ∞) ≤ (finitePlane 31).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 5) h five_mul_lt_card_finitePlane31
-
-theorem six_le_chromaticNumber_finitePlane43_of_indepNum_le
-    (h : (finitePlane 43).indepNum ≤ 369) : (6 : ℕ∞) ≤ (finitePlane 43).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 5) h five_mul_lt_card_finitePlane43
-
-theorem six_le_chromaticNumber_finitePlane47_of_indepNum_le
-    (h : (finitePlane 47).indepNum ≤ 441) : (6 : ℕ∞) ≤ (finitePlane 47).chromaticNumber := by
-  simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 5) h five_mul_lt_card_finitePlane47
+/-- And the floor raised to six at 43 needs `α ≤ 369`, inside the certificate's measured reach (§S2.2). -/
+example (h : (finitePlane 43).indepNum ≤ 369) : (6 : ℕ∞) ≤ (finitePlane 43).chromaticNumber := by
+  simpa using add_one_le_chromaticNumber_finitePlane_of_indepNum_le (k := 5) h (by norm_num)
 
 /-! ### The field half, at the level of the ring
 
