@@ -653,6 +653,35 @@ and 1.443 at the degenerate `q = 3`. *Falsifier:* phase A.1's eight measured rat
 separation in the other direction. *Both outcomes reachable:* A.1 produces a number at every member either way, and the
 split is 4–4, which is the cleanest natural experiment the window offers.
 
+**The split is not a second fact — it IS the exclusion, and that has a strategic consequence.** Both halves are the
+same Legendre symbol. `ω = 2` iff `(3/q) = −1`; and a prime is usable for a field only if every radicand is a square or
+zero there, so `(3/q) = −1` is exactly *"no field containing `√3` can use `q`"*. Verified together at all eight members
+(the product owner, 2026-09-15), which also re-verifies G56's exclusion from scratch:
+
+| q | `(3/q)` | `(11/q)` | excluded by | ω |
+|---|---|---|---|---|
+| 23 | square | **non-square** | 11 | 3 |
+| 27 | 3 = 0 (ramified, usable by `[Moorhouse2010]` Lemma 8.2) | **non-square** | 11 | 3 |
+| 31 | **non-square** | **non-square** | 3 and 11 | 2 |
+| 43 | **non-square** | square | 3 | 2 |
+| 47 | square | **non-square** | 11 | 3 |
+| 59 | square | **non-square** | 11 | 3 |
+| 67 | **non-square** | **non-square** | 3 and 11 | 2 |
+| 79 | **non-square** | square | 3 | 2 |
+
+So the window's 4–4 split by clique number **coincides exactly** with the split by *which* radicand does the excluding:
+the four members excluded by `√3` (31, 43, 67, 79) are precisely the triangle-free four, and the four excluded only by
+`√11` (23, 27, 47, 59) are precisely the four with triangles.
+
+**What follows, and it aims phase C.1.** Every field this project has ever built contains `√3` — it is what the Moser
+spindle needs — so **such a field can reach only the four members with triangles**, which is exactly what G56's named
+candidates do (`ℚ(√2,√3,√31)` sees 23, `ℚ(√2,√3,√7)` sees 47, `ℚ(√3, α)` with `α³ = α + 1` sees 27). A field reaching
+**31, 43, 67 or 79 must contain no `√3` at all** — hence no Moser spindle, hence none of the project's five-forcers, so
+its own five-chromaticity would have to be established from nothing. **C.1's designer must report that split explicitly
+per candidate**, because "this field sees 43" and "this field sees 23" are not the same kind of object: the first is a
+field the hunt has never worked in. And the two halves are also where the growth law does and does not have a theorem
+behind it (above), so the arithmetic exclusion and the Ramsey structure are one fact seen twice.
+
 **Why it is worth registering rather than noticing at the close.** If it holds, the milestone's durable product (R-4)
 stops being a fitted curve and becomes a **two-constant law with a structural reason** — `c₂` on the triangle-free half,
 where a theorem already bounds it below, and `c₃` on the half where triangles bind — which is the programme's own
