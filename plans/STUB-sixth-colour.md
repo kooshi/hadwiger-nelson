@@ -32,12 +32,14 @@ given the 8/3 forcer (G55).*
    23, 47, 59, 71). So for every F ⊇ ℚ(√3, √11) the usable primes are 11 and then nothing below 83, and L(F) ∈ {…, 5, 7, …} —
    **six is arithmetically excluded for every field the hunt has ever used**, given 83's refusal. A six-chromatic field, if
    one exists, contains no √11; no known five-forcer lives in it; its five-chromaticity is itself open.
-4. **Under the conjecture the window decides whether "6" exists at all.** A finite unit-distance graph has algebraic
-   coordinates (its realisation space is semi-algebraic over ℚ; FS-39's bridge), so χ(ℝ²) = sup_F χ(F²) over number fields. If
-   no window plane is six-chromatic then no number field has L(F) = 6, the conjecture says no number field is six-chromatic,
-   and χ(ℝ²) ∈ {5, 7}. If some window plane IS six-chromatic, there is a field F with L(F) = 6, χ(F²) ≤ 6 by theorem, and the
-   conjecture predicts χ(F²) = 6 — which, by compactness, is a finite six-chromatic unit-distance graph in F² and χ(ℝ²) ≥ 6.
-   **That is why this is the next milestone: it is the first question whose every answer bears on six.**
+4. **The window decides whether six is reachable by the residue method at all** (corrected 2026-09-15 at the modeling
+   passes; the first draft said "χ(ℝ²) ∈ {5, 7}", which the weak conjecture does not give). A finite unit-distance graph has
+   algebraic coordinates, so χ(ℝ²) = sup_F χ(F²) over number fields (`[Madore2015]` ¶5.4 plus de Bruijn–Erdős; FS-39's kernel
+   form). If no window plane is six-chromatic then no number field has L(F) = 6, so every field holding a six-chromatic graph has
+   all its usable planes at ≥ 7 — the finite planes can never pin six, and under the conjecture's bold form (χ(F²) = 7 wherever
+   L(F) ≥ 7) χ(ℝ²) = 7 with six a value no field attains. If some window plane IS six-chromatic, there is a field F with L(F) = 6,
+   χ(F²) ≤ 6 by theorem, and the conjecture predicts χ(F²) = 6 — by compactness a finite six-chromatic unit-distance graph in F²
+   and χ(ℝ²) ≥ 6. **That is why this is the next milestone: it is the first question whose every answer bears on six.**
 
 ## §1 The question, in two halves and a third that is not promised
 

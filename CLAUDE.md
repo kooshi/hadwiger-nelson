@@ -143,13 +143,17 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    field with L ≤ 3, for every field containing √3 with L ≤ 4, and, given the measured 8/3 forcer, for every multiquadratic
    F ⊇ ℚ(√3,√11) with L ≤ 5, by the chain theorem, which lands a forced pair's contradiction in the field itself. Its cheapest
    exposed predictions are quadratic — four for ℚ(√11) and ℚ(√23), four or five for ℚ(√47) — with no forcer known there (FS-46).
-11. **The window for six, and who can see it** (G56, row 68). A finite plane can be exactly six-chromatic only at
-   p ∈ {23, 31, 43, 47, 59, 67, 79} — the exact spectra put 71 at ≥ 7, the certificate puts 83 at ≥ 7, Weil refuses six from
-   103 — and none of the seven is decided. No field containing ℚ(√3,√11) can use any of them (3 is a non-square at 31, 43,
-   67, 79 and 11 at 23, 47, 59, 71), so every field the hunt has built in has local bound 5 or ≥ 7: **six is arithmetically
-   excluded for all of them**, and a six-chromatic number field, if one exists, contains no √11 and none of the known
-   five-forcers. Under the conjecture the window decides whether six exists at all: no six-chromatic plane means no
-   six-chromatic number field and χ(ℝ²) ∈ {5, 7}; one means a field with χ(F²) ≤ 6 by theorem and predicted 6 (FS-53).
+11. **The window for six, and who can see it** (G56, row 68). A finite plane UD(𝔽_q, 2) with q ≡ 3 (mod 4) of odd degree can be
+   exactly six-chromatic only at q ∈ {23, 27, 31, 43, 47, 59, 67, 79} — the exact spectra put 71 at ≥ 7, the certificate puts 83
+   at ≥ 7, Weil refuses six from 98 — and none of the eight is decided (floors 5, 5, 5, 5, 5, 6, 6, 6; ceilings 8, 7, 8, 8, 10,
+   10, 12 by verified colourings; no six-colouring found anywhere). No field containing ℚ(√3,√11) can use any of them (3 is a
+   non-square at 31, 43, 67, 79 and 11 at 23, 47, 59, 71; at 27, 11 ≡ −1 (mod 3) is a non-square in every 𝔽_q with q ≡ 3 (mod 4)),
+   so every field the hunt has built in has local bound 5 or ≥ 7: **six is arithmetically excluded for all of them**, and a
+   six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers. What the window decides is
+   whether six is *reachable by the residue method*: no six-chromatic plane means no field has local bound 6, so any field
+   holding a six-chromatic unit-distance graph has every usable plane at ≥ 7 and the finite planes can never pin it — under the
+   conjecture's bold form (χ = 7 wherever L ≥ 7) that is χ(ℝ²) = 7 with six a value no field attains; one six-chromatic plane
+   means a field with χ(F²) ≤ 6 by theorem and predicted 6 (FS-53).
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -693,24 +697,32 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   length-2 edges of `[ExooIsmailescu2019]`'s {1, 2} graph, is a six-chromatic unit-distance graph (the sentence is the advisor's;
   M49–M50 replaced those edges one at a time); its field must be 6-open (row 66), and the arena has no such pair. What the chain cannot do is produce the five-forcer it needs.
 * **G56 — The window for six, and reciprocity's exclusion of it. [derived: exact spectra and the 83 certificate; the
-  exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture and on FS-39's bridge]** Six
-  colours on UD(𝔽_p, 2) need an independent set of ⌈p²/6⌉, which the ratio bound permits only while 5|λ_min| ≥ p + 1: by
-  Weil that fails from p = 103, the exact spectrum already fails it at 71, and 83 — the last prime where six was spectrally
-  possible — refuses it by certificate (row 68). Five is refused from 59 up. So **a plane with χ exactly 6 can live only at
-  p ∈ {23, 31, 43, 47, 59, 67, 79}**, spectral floors 5 at the first four and 6 at the last three, and none is decided:
-  "no object here is six-chromatic" has so far been "the only primes where it could be were never looked at". A prime is
-  usable for a field only if the field's radicands are all squares modulo it, and **every field this project has built in
-  contains ℚ(√3,√11)**: 3 is a non-square modulo 31, 43, 67, 79 and 11 modulo 23, 47, 59, 71, so such a field's usable primes
-  are 11 and then nothing below 83, its local bound is 5 or ≥ 7, and **six is arithmetically excluded for all of them**.
-  A six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers — ℚ(√2,√3,√31) sees only
-  23, ℚ(√2,√3,√7) only 47 — and its five-chromaticity is itself open. Under the conjecture (G48) the window decides whether
-  six exists at all: a finite unit-distance graph has algebraic coordinates, so χ(ℝ²) = sup_F χ(F²) (FS-39, unstated in the
-  kernel); no six-chromatic window plane ⟹ no six-chromatic number field ⟹ χ(ℝ²) ∈ {5, 7}, and one ⟹ a field with
-  χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness. Every window plane is slack at six
-  (λ_min ≠ −(p+1)/5), so over a field it seals the residue mechanism forces no pair (G54): a six-forcer there is built, not
-  transported. The reading with two data points — χ one above the spectral floor, as at 11 and 83 — predicts six at 23–47
-  and seven at 59–79; FS-53 scores it prime by prime. *Killing test of the exclusion: a usable window prime for some field
-  containing ℚ(√3,√11) — impossible by reciprocity; of the reading: the table.*
+  exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture's bold form and on FS-39's
+  bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős]** Six colours on UD(𝔽_q, 2) need an independent set of ⌈q²/6⌉,
+  which the ratio bound permits only while 5|λ_min| ≥ q + 1: by Weil that fails from q = 98, the exact spectrum already fails
+  it at 71, and 83 — the last prime where six was spectrally possible — refuses it by certificate (row 68). Five is refused from
+  59 up. Over the residue fields a number field can have (𝔽_q, q ≡ 3 (mod 4), odd degree), **a plane with χ exactly 6 can live
+  only at q ∈ {23, 27, 31, 43, 47, 59, 67, 79}** — floors 5 at the first five and 6 at the last three; ceilings 8, 7, 8, 8, 10,
+  10, 12 by verified colourings (`data/fplane/periodic-below-71.json`, `data/fs53/`); none decided: five is CDCL-undecided or
+  spectrally refused at every one, and no six-colouring was found by local search (23, 31, 43, 47) or by the subgroup-periodic
+  sweep at 27 (exhaustive at indices 9 and 27). A prime is usable for a field only if the field's radicands are all squares in
+  its residue field, and **every field this project has built in contains ℚ(√3,√11)**: 3 is a non-square modulo 31, 43, 67,
+  79 and 11 modulo 23, 47, 59, 71, and at 27 the residue 11 ≡ −1 (mod 3) is a non-square in every 𝔽_q with q ≡ 3 (mod 4); so
+  such a field's usable primes are 11 and then nothing below 83, its local bound is 5 or ≥ 7, and **six is arithmetically
+  excluded for all of them**. A six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers
+  — ℚ(√2,√3,√31) sees only 23, ℚ(√2,√3,√7) only 47, ℚ(√3, α) with α³ = α + 1 sees 27 — and its five-chromaticity is itself
+  open. **What the window decides is whether six is reachable by the residue method at all**, since χ(ℝ²) = sup_F χ(F²): no
+  six-chromatic window plane ⟹ no field has local bound 6 ⟹ every field holding a six-chromatic unit-distance graph has all
+  its usable planes at ≥ 7, so the finite planes can never pin six — and under the bold form of the conjecture (χ(F²) = 7
+  wherever L(F) ≥ 7) χ(ℝ²) = 7, with six a value no field attains though every seven-chromatic graph passes through it; one
+  six-chromatic plane ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness. Every
+  window plane is slack at six — at 23, 27, 31, 43, 47, 67 by divisibility (Hoffman-tightness at k needs (k−1) | (q+1), and
+  5 ∤ q + 1), at 59 and 79 by the exact spectrum — so over a field it seals the residue mechanism forces no pair (G54): a
+  six-forcer there is built, not transported. The registered reading is **χ = ⌈q²/α⌉ at every plane** (true at 3 and 11,
+  consistent at 7 and 19; it replaces the "+1 over the spectral floor" reading, which fails at the Hoffman-tight q = 3), under
+  which α decides χ: the calibrated searcher's plateau α(23) = 87 against the 89 six needs is the advisor's 2:1 bet that 23 is
+  empty, and FS-53 scores it. *Killing test of the exclusion: a usable window member for some field containing ℚ(√3,√11) —
+  impossible by reciprocity; of the reading: a decided plane with χ ≠ ⌈q²/α⌉.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
