@@ -175,10 +175,30 @@ third item was scored green with a note that the acceptance line, not the work, 
 finding, credited: regenerating `chi-q27.json` with `--k 4` alone would have dropped the `k = 5 unknown` row at
 2,327.6 s that §S0 and `window.md` cite; `carry_prior_rows` now carries it under three guards.
 
-**In flight:** one Opus implementer on **phase A0** (A0.1 and A0.2 committed and reviewed; A0.4, the certificate stack
-over prime powers, still running), briefed by
+**PHASE A0 IS CLOSED (13:10), all three items green, reviewed by artifact and pushed** (commits `0892218`, `193ceb0`,
+`84b154d`, `3d71164`, `05f6a25`; the phase record `data/fs53/PHASE-A0.md`; the review note
+`/home/kooshi/.claude/jobs/b1507518/tmp/a0-review/REVIEW-A0.md`). What it delivered beyond the checklist:
+* **`α(UD(𝔽₂₇,2)) ≤ 147`, CERTIFIED** — the first exact certificate at a **prime-power** finite Euclidean plane and the
+  first exact independence bound at any window member besides 23. Filed by the product owner as
+  `data/fs53/cert-q27-N147.json` (it existed only in the job's scratch, which dies with the job), re-checked from the
+  filed copy by the untouched checker. **Phase B's 27 item is therefore complete; B's remaining order is 79, 67, 47, 43, 59.**
+* **P3 is FALSIFIED at 27.** The relaxation's converged optimum is 147.578 (two formulations, three solvers, agreeing to
+  5 × 10⁻⁴) against the 146 five needs. **Five at 27 survives in a two-integer window** (α is 146 or 147) — the narrowest
+  a five-question has been in this project, and a sharper target for the finding side at 27 than the six-threshold.
+* **The reach at 27 is 0.9110, the worst measured anywhere** (0.8445 at 11, 0.8238 at 23, 0.8836 at 83), and converged
+  rather than compute-limited. **Consequence two members away: Q1's six-refusal at 67 (`frac6` 0.9204) is left with
+  0.9 % of margin.** Both §S6 rows are scored in place.
+* **Three of the product owner's own statements corrected**, each by the implementer checking rather than believing:
+  `--self-test` never overwrote the sweep record on `main` (the overwrite came from a sweep run with `--out`); "the
+  CERTIFIED line must be the last line printed" was wrong against the committed tool; and "the first reach measured at a
+  window member" was false — **23 is a window member and was measured at FS-50**, an error made independently by both
+  the implementer and the product owner in the same direction.
+
+**In flight:** the `ferrous-engineer` on **A0.3** (WO-19 `plane-colour` checkpoints and resumes; WO-20 `--fix-class`) in
+`~/source/descent-engine`, briefed by `/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.3.md`. **Next after it:**
+K1/K2, briefed by
 `/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.md`. **Written and waiting, so the next phase costs no latency:**
-`brief-fs53-A0.3.md` (the Rust engineer, WO-19/WO-20) and `brief-fs53-K1K2.md` (the kernel side) in the same directory.
+`brief-fs53-K1K2.md` (the kernel side) in the same directory.
 **Nothing is pushed above `origin/main` at `184e721`** while an unreviewed implementer commit sits in the stack — the
 review (§S13.4) comes first, then the push.
 
