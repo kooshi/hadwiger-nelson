@@ -127,6 +127,27 @@ on review (92c839b); the modeling passes §S12.1–§S12.3 with the window modul
 rewritten to eight members with the corrected consequence; §S13 the rulings and the gate. `./scripts/build.sh` green on the
 skeleton twice; every commit pushed.
 
+**Implementation OPENED 2026-09-15 ≈ 12:00 (this session).** Done so far, by the product owner, before and beside the
+first implementer: the FS-50 jobs confirmed alive (pids 2808409 producer/card A, 2816615 reading/card B, 2950705 polish loop;
+checkpoints fresh); an **independent review instrument** committed, `tools/fplane_review_verify.py` — it rebuilds
+`UD(𝔽_q,2)` from `q` (and a modulus for a prime power) with its own field arithmetic, standard library only, sharing no
+code with `tools/fplane.py`, and checks a colouring or an independent set from the definition, with three plants seen to
+fire. With it: the 27-plane's committed identity reproduced (729 vertices, degree 28, 10,206 edges, the committed
+`edges_sha256`), **both** committed 7-colourings of the 27-plane re-verified (0 monochromatic of 10,206), the 87-set at
+23 re-verified independent, and **every `[exact]` column of `data/fs53/window.md` recomputed from `q` alone at all eight
+members** (`fplane_review_verify.py window`). Two corrections made in the same pass: the window table's "for scale" line
+said α(83) ≤ 1076 where the checked certificate is 1059; and the instrument's own first output stated a false
+consequence (a *lower* bound on α bounds χ from below nowhere) — fixed, with the threshold ladder printed instead.
+**A plan correction, §S13.2 A0.3 and A.2:** peel-and-colour has an arithmetic precondition — fixing a class `S` with
+`|S| < ⌈q²/k⌉` forces the remainder to contain an independent set *larger* than `S` — so at (23, 6), with `⌈529/6⌉ = 89`
+and the best known set 87, WO-20's fixed-class run cannot succeed unless α(23) ≥ 89, which is the open question;
+`plane-independent` targeting 89 leads at 23, and WO-20 gains a note (never a refusal) naming both numbers.
+**In flight:** one Opus implementer on **phase A0** (A0.1 committed as `0892218`), briefed by
+`/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.md`. **Written and waiting, so the next phase costs no latency:**
+`brief-fs53-A0.3.md` (the Rust engineer, WO-19/WO-20) and `brief-fs53-K1K2.md` (the kernel side) in the same directory.
+**Nothing is pushed above `origin/main` at `184e721`** while an unreviewed implementer commit sits in the stack — the
+review (§S13.4) comes first, then the push.
+
 **The next session's first acts, in order** (the implementing session — read §S13 in full before spawning anyone):
 1. Confirm the FS-50 jobs' state (`kill -0 2808409 2816615`; `data/fs50/ckpt/*.npz` timestamps). The 1059 certificate at 83
    is CERTIFIED and its exact LDL is green (`data/fs50/p83-refusal/ldl-N1059.log`); the loop keeps polishing tighter ones into the
