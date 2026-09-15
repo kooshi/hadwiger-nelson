@@ -429,6 +429,42 @@ recorded as a known unexploited strengthening, not built: certifying them touche
 construction (steps 1–3 of the derivation assume one row per orbit pointing at one target), the wire
 format's row list, and both existing certificates, for no measured gain.
 
+### The refusal of six at 83 (2026-09-15, 06:05): α(UD(𝔽₈₃, 2)) ≤ 1082, two independent exact certificates
+
+**The claim, at the exact-rational level:** every independent set of UD(𝔽₈₃, 2) has at most 1082 points, so 6 × 1082 = 6,492
+< 6,889 and **the plane is not six-colourable**; with `add_one_le_chromaticNumber_of_indepNum_le` (kernel) that is
+χ(UD(𝔽₈₃, 2)) ≥ 7. The certificate is checked by `tools/fplane_cert_check.py`, which rebuilds the group, its 49,447 orbits and
+the 98,894 canonical rows from the number 83 and trusts no solver; the kernel form of the certificate itself is FS-52.
+
+| file (`data/fs50/p83-refusal/`) | exact N | ⌊N⌋ | produced from | checker `--k 6` | `--ldl` |
+|---|---|---|---|---|---|
+| `cert-p83-N1082-pardiso-arm.json` (15.1 MB) | 54145768919878014998796452705507433877093 / 5·10³⁷ = 1082.915378 | **1082** | the 5,000-iteration iterate resumed for +500 in a fresh solver on sequential MKL Pardiso (`build/venv-sdp`), its own dual at the chunk end | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
+| `cert-p83-N1082-gpu-arm.json` (15.1 MB) | 676848530876231948246514932098797470489039 / 6.25·10³⁸ = 1082.957649 | **1082** | the same parent iterate resumed for +500 in a fresh solver on `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | CERTIFIED, "not 6-colourable", 15.2 s | CERTIFIED, 1 m 55 s |
+| `cert-p83-N1252-pardiso-arm-nudged.json`, `cert-p83-N1250-gpu-arm-nudged.json` | 1252.08, 1250.03 | 1252, 1250 | `--round-only` on the two 5,500-iterates (one nudge iteration from a fresh solver object, cut 10⁻⁶, denominators 10⁸) | CERTIFIED, say nothing about six | — |
+
+**How they came to exist, because the mechanism is the finding.** The two arms were the backend-honesty control: the same
+5,000-iteration checkpoint (`iterate-5000-common-parent.npz`) resumed for 500 iterations on each backend, to compare the
+chunk lines with one thing differing. They agree — pobj −1074.201411 against −1074.213493, res_pri 7.39e-1 both, res_dual
+1.64 both — and each arm's own rounding sweep then rounded its dual to ⌊N⌋ = 1082, **while the live run's iterates at
+19,500–33,500 rounded to 1286–1260 with an objective near 1,067**. The difference is SCS's adaptive scale, which is not in
+the checkpoint: a long run's scale drifts (its reported residuals are in the scaled space), and a resumed run restarts it at
+the default and, 500 iterations later, holds a dual that rounds to within 9 of its objective instead of 200. The nudged
+certificates above measure the other half of the same mechanism: `--round-only`'s one iteration from a fresh solver object
+moved the dual residual from 1.64 to 3.19 and cost ≈ 170 in the bound. **So the exact bound is read from a fresh short
+continuation's own dual at its chunk end, never from a long-run iterate and never through a nudge**; the live loop now does
+that (`anytime-loop2.sh` in the session's scratch). Reproducibility: a deterministic rerun of the Pardiso arm from the same
+parent with a dual cache and three cuts is recorded beside this table when it lands (its 10⁻⁸ / 10¹⁰ candidate must reproduce
+1082.915378 to every digit; the other cuts round the identical dual).
+
+**Reproduce** (each ≈ 30 min on the CPU wheel, ≈ 6 min on the GPU wheel): `tools/fplane_cert_round.py --p 83 --blocks --real
+--chunk 500 --scs-ckpt data/fs50/p83-refusal/iterate-5000-common-parent.npz --linear-solver mkl --eps 1e-8 --max-iters 5500
+--thresholds 1e-8 --denominators 10000000000 --weight-denominators 10000000000 --out <file>` (copy the iterate first: the run
+advances it), then `tools/fplane_cert_check.py <file> --k 6 --ldl`.
+
+**Not claimed:** the converged value of the relaxation (the producer's iterate reads 1,064.5 at 38,500 iterations and is
+still moving; the exact bound will tighten toward it, and the table's entry is whatever the last certificate says); anything
+about seven-colourability (a 7-colouring of the plane has not been sought); the kernel form (FS-52).
+
 **The checker changed once, 2026-09-15 05:05, under a recorded decision** (`plans/STUB-independence-threshold.md` §M3):
 `--against` decides the display's affordability (`p ≤ 29`) from `p` alone before any quadratic work, re-verifies the set's
 independence straight from coordinates at every `p`, treats a bad or missing set as a fault in the SET (exit 2, `THE --against
