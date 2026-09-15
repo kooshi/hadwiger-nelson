@@ -614,6 +614,40 @@ Hoffman-tight) and `q = 11` exact, a constant cannot be separated from a slope i
 bound that can only push `c` up. So `c = 1.130` is a floor read from the cleanest point, not a fit; phase A.1's eight
 measurements are what turn it into one.
 
+**Q7 — the law has a theorem behind it on exactly half the window, and the residual should split there** (the product
+owner, 2026-09-15; registered before phase A.1 measures anything). `[Krebs2022]`'s rule — `ω(UD(𝔽_q,2)) = 3` iff the
+characteristic is 3 or 3 is a square in `𝔽_q`, else 2 — was **verified here directly rather than cited**, by searching
+for a triangle (a pair of circle points whose difference is again on the circle) at all thirteen planes this milestone
+touches: **13 of 13 agree** with the criterion. It splits the window exactly **four and four**:
+
+| | members | 3 in `𝔽_q` |
+|---|---|---|
+| **ω = 3**, contains triangles | **23, 27, 47, 59** | a square (27: characteristic 3) |
+| **ω = 2**, triangle-free | **31, 43, 67, 79** | a non-square |
+
+*Why that should matter to the law.* For a **triangle-free** graph, Shearer's bound (with Ajtai–Komlós–Szemerédi behind
+it) gives `α ≥ (1 + o(1))·n ln d / d`. Since `|λ_min| ≈ 2√q` by Weil and `d = q + 1`, the ratio bound is
+`≈ 2n/√d`, so Q4's law is `α ≈ (2n/√d)(ln d/√d) = 2n ln d / d` — **asymptotically exactly twice Shearer's bound**, and
+the measured constant makes it about 2.26 times. For the **ω = 3** half no comparable lower-bound theorem applies:
+triangles suppress independence at a given degree, and there is no Shearer there. So **the law is a theorem's shadow on
+the triangle-free half of the window and a pure fit on the other half** — an asymmetry the law as registered does not
+mention, and one that predicts its residual is not a single constant.
+
+**Q7, stated:** `α / law` is systematically **larger on the triangle-free members (31, 43, 67, 79) than on the ω = 3
+members (23, 27, 47, 59)**. Present evidence is weak and mostly one-sided, which is why it is registered rather than
+claimed: ω = 2 gives ≥ 1.080 at 7 and ≥ 1.140 at 19; ω = 3 gives 1.130 *exactly* at 11, ≥ 1.018 at 23, ≥ 1.030 at 83,
+and 1.443 at the degenerate `q = 3`. *Falsifier:* phase A.1's eight measured ratios showing no separation by `ω`, or a
+separation in the other direction. *Both outcomes reachable:* A.1 produces a number at every member either way, and the
+split is 4–4, which is the cleanest natural experiment the window offers.
+
+**Why it is worth registering rather than noticing at the close.** If it holds, the milestone's durable product (R-4)
+stops being a fitted curve and becomes a **two-constant law with a structural reason** — `c₂` on the triangle-free half,
+where a theorem already bounds it below, and `c₃` on the half where triangles bind — which is the programme's own
+preference for a derivation over an object. And it is **directly actionable for six**: at a uniform `c = 1.130` the two
+nominated members are **23 (ω = 3, +8.5 %)** and **31 (ω = 2, +3.3 %)**, one from each class; if the residual splits as
+predicted, 31 gains and 23 loses, and which of the two is the better six-candidate can **reverse**. So A.1 measures
+both before either is called — which is what its order already does.
+
 ### §S7. Decisions settled at subplanning (choice · alternative · why · confidence)
 
 | # | choice | alternative | why this one | confidence |
