@@ -334,10 +334,17 @@ bound**: SCS's iterates are neither feasible nor monotone, and the objective can
 solve's checkpoint and rounds from it without advancing or rewriting it; **any** dual gives a sound
 certificate (section 4 of the derivation), so a half-converged iterate gives a real exact bound:
 
-| from the iterate at | res_pri | res_dual | exact `N` | `⌊N⌋` |
-|---|---|---|---|---|
-| 500 iterations | 6.16 | 12.9 | 2466.274139 | 2466 |
-| 1,000 iterations | 1.34 | 26.7 | **2232.886881** | **2232** |
+| from the iterate at | res_pri | res_dual | float objective | exact `N` | `⌊N⌋` | `N` − objective |
+|---|---|---|---|---|---|---|
+| 500 iterations | 6.16 | 12.9 | 1085.72 | 2466.274139 | 2466 | 1380.6 |
+| 1,000 iterations | 1.34 | 26.7 | 1073.97 | **2232.886881** | **2232** | 1158.9 |
+| 6,000 iterations | — | — | 1070.25 | 1379.804227 | 1379 | 309.6 |
+
+The gap between the bound and the objective is the **dual's** inaccuracy, and it is what has to close:
+the objective has been within half a unit of 1,070 since 3,000 iterations, while `N` has come down from
+2,466 to 1,380 as the dual residual fell. The six-colour threshold is 1,148, so what decides the
+milestone is whether that gap closes past about 78 before the solve converges — and every reading is a
+sound bound whatever it says.
 
 Both are far above the ratio bound 1,199.46 and neither is a result — they are what a dual at those
 residuals proves. **What they establish is the machinery**, and the second one establishes it
