@@ -99,4 +99,16 @@ that comparison silently fails: two honest records of one graph disagree. **The 
 documented:** `tools/fplane_review_verify.py` now computes **both**, prints both, accepts either under
 `--expect-sha`, and carries a control that reproduces `plane-colour`'s own digest at `q = 23` from the definition —
 so the two toolchains are confirmed to build **the same graph**, and the difference is serialisation only. Run
-`python3 tools/fplane_review_verify.py graph --q <q>` to get both numbers for any member.
+`python3 tools/fplane_review_verify.py graph --q <q>` to get both numbers for any member. **Confirmed from three
+independent rebuilds** — `plane-colour`'s own, the product owner's, and the Rust engineer's re-derivation in Python from
+the claimed convention alone — that the 6,348 edges at `q = 23` are the same set under both digests.
+
+**The ruling, and the fix when the wire form is next opened** (the product owner, 2026-09-15, on the engineer's
+doctrinal point): the records already carry `vertex_index` and `edge_rule` **because a reader who indexes `y·p + x`
+would call a correct colouring improper**, and then `edges_sha256` shipped one paragraph later with no statement of how
+it was computed — the same rule, unapplied to the field that needed it most. A stranger holding one record cannot
+reproduce its digest. **Both toolchains add a self-describing `edges_sha256_rule` string** (e.g. *"sha256 of u,v as
+little-endian u32 over the ascending edge list"*) **when their record shape is next amended, and the Rust side's
+deadline is before phase A.2 writes the milestone's colouring records**, so every FS-53 artifact carries it. Not done
+now, and deliberately: a field added mid-phase would split the milestone's own records into two shapes, which is the
+trap one level up. Filed as the engine's D95.
