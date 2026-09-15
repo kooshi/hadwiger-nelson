@@ -89,13 +89,14 @@ it once; nothing there is repeated here).
    the objective has gone 1380 → 1159 → 310 while the objective sits within half a unit of 1,070 since 3,000 iterations —
    the dual's inaccuracy is what must close, to about 78.
 
-## 2. What is running at 04:10 (all on the desktop; ≈ 40 GB of 125 in use; every one resumable)
+## 2. What is running at 05:30 (all on the desktop; ≈ 40 GB of 125 in use; every one resumable)
 
 | pid | what | checkpoint | note |
 |---|---|---|---|
-| 2808409 | the producer `fplane_cert_round.py --p 83 --blocks --real --chunk 500 --linear-solver gpu_indirect …` on **card A** (`CUDA_VISIBLE_DEVICES=1`, `build/venv-sdp-gpu`), launched 04:06 from the 1,000-iteration checkpoint | `data/fs50/ckpt/scs-p83-cert-real.npz` (every 500 iterations ≈ 3 min) | log `build/fs50-p83-real-gpu.log`; the CPU trajectory to compare against is `build/fs50-p83-real.log` (chunk 2 = 1,000 it: pobj −1073.97, res_pri 2.94, res_dual 0.377) — an inexact CG may change the iteration count, never the answer; **relaunch = the same command** |
-| 2791699 | `bench83.py` in `build/venv-sdp` — the CPU split (qdldl / sequential mkl / cpu_indirect, 40/40/20 iterations) | none (a measurement; the problem data are cached at job tmp `sdp/p83-scsdata-*.npz`) | log job tmp `sdp/bench83.log`; answers "is it BLAS?" with SCS's own lin-sys/cone split |
-| (bench) | `bench83.py gpu_indirect:60 mkl:40` in `build/venv-sdp-mkl` on **card B** | none | log job tmp `sdp/benchmkl.log`; decides whether the producer moves to the MKL-linked build at a checkpoint (faster cones) and gives the threaded-Pardiso CPU number |
+| 2808409 | the producer `fplane_cert_round.py --p 83 --blocks --real --chunk 500 --linear-solver gpu_indirect …` on **card A** (`build/venv-sdp-gpu`), from the 1,000-iteration checkpoint at 04:06 | `data/fs50/ckpt/scs-p83-cert-real.npz` (every 500 iterations ≈ 100 s) | log `build/fs50-p83-real-gpu.log`; at 23,500 (05:27): pobj −1067.08, res_pri 1.87, res_dual 4.4e-2, the dual residual falling ≈ 5e-4 per 2,500; **relaunch = the same command** (README "Resume") |
+| 2816615 | the reading driver `fplane_sdp_scs.py --p 83 --eps 1e-5 --chunk 2000 --linear-solver gpu_indirect` on **card B** (`build/venv-sdp-mkl`, `LD_LIBRARY_PATH=build/venv-sdp-mkl/lib`, `CUDA_VISIBLE_DEVICES=0`) — the TIGHTER relaxation (all three le_diag rows), a reading | `data/fs50/ckpt/scs-p83-real-gpu.npz` (every 2,000 ≈ 8 min) | log job tmp `sdp/s83gpu.log`; at 16,000: pobj −1019.44, res_pri 2.8e-2, res_dual 3.9e-2; relaunch = the same command |
+| 2891008, 2891009 | the backend-honesty controls, relaunched 05:22 on the wheel's sequential Pardiso (`--linear-solver mkl`, `build/venv-sdp`) from the verified 5,000-iterate copies `sdp/ckpt-control{,-qdldl}.npz` (the QDLDL pair killed after 58 min in the factorisation) | none needed (a control; redo ≈ 30 min) | logs `sdp/ctl-mkl.log` (+500 iterations, its chunk line beside the GPU's at 5,500: pobj −1070.334948, res_pri 1.64, res_dual 5.83e-2) and `sdp/ro-mkl.log` (`--round-only`; its exact N beside the GPU wheel's 1401.821726 on the same iterate) |
+| 2895860 | `sdp/anytime-loop.sh`: every ≈ 25 min copies the live checkpoint at a chunk boundary and rounds an exact bound from it on the GPU wheel (`--round-only`, never touching the live file) | — | one line per rounding in `sdp/anytime-loop.log` (iterate, float, exact N, residuals, file); **writes `HALT AND VERIFY` there when ⌊N⌋ ≤ 1148** — then the untouched checker on that file first, a second rounding, `--ldl`, before any sentence |
 
 Killed 04:01–04:06 under the rule: 2690393 and 2764850 (my reading solves, no checkpoint on disk) and 2701719 (the
 producer, superseded by 2808409). The implementer's `--round-only` run (2777345) finished on its own: float bound
