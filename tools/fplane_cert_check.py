@@ -41,8 +41,11 @@ LDL^T on a block that came with a Gram factor (redundant, and slow at p = 11: mi
 from __future__ import annotations
 
 import argparse
+import hashlib
+import itertools
 import json
 import math
+import re
 import sys
 from fractions import Fraction
 
@@ -105,6 +108,192 @@ def is_prime(p: int) -> bool:
     return True
 
 
+def is_prime_power(q: int):
+    """(p, f) with q = p^f and p prime, or None.  Rebuilt here from the number, like everything else."""
+    if q < 2:
+        return None
+    d = 2
+    while d * d <= q:
+        if q % d == 0:
+            f = 0
+            r = q
+            while r % d == 0:
+                r //= d
+                f += 1
+            return (d, f) if r == 1 else None
+        d += 1
+    return (q, 1)
+
+
+def parse_modulus(text, p: int, where: str = "modulus"):
+    """The defining polynomial of F_q, read from a string such as "t^3-t-1" (meaning t^3 = t + 1 over
+    F_p), as the reduction list red with t^f = red[0] + red[1] t + ... + red[f-1] t^(f-1).
+
+    It is READ, never inferred.  A prime power names a ring only with its modulus: Z/27 and F_27 are
+    different rings, their unit circles have 36 and 28 points, and the two planes are different graphs
+    -- so a certificate that says only "27" is ambiguous and is refused by name.  The polynomial's
+    IRREDUCIBILITY is proved here by trial division against every monic polynomial of degree at most
+    f/2 over F_p; a reducible modulus would make F_p[t]/(f) not a field and everything downstream
+    meaningless, so it is refused rather than trusted."""
+    raw = text
+    s_ = str(text).replace(" ", "").replace("\u2212", "-").replace("*", "")
+    if not s_:
+        raise Refusal(f"{where}: empty; write the polynomial in t, for example t^3-t-1")
+    coeffs = {}
+    for term in re.findall(r"[+-]?[^+-]+", s_):
+        mt = re.fullmatch(r"([+-]?)(\d*)(t(?:\^(\d+))?)?", term)
+        if mt is None or (not mt.group(2) and not mt.group(3)):
+            raise Refusal(f"{where}: cannot read the term {term!r} of {raw!r}; write a polynomial in t "
+                          f"such as t^3-t-1, with an explicit integer coefficient where there is one")
+        sign = -1 if mt.group(1) == "-" else 1
+        c = int(mt.group(2)) if mt.group(2) else 1
+        e = 0 if not mt.group(3) else (int(mt.group(4)) if mt.group(4) else 1)
+        coeffs[e] = coeffs.get(e, 0) + sign * c
+    coeffs = {e: c % p for e, c in coeffs.items()}
+    f = max((e for e, c in coeffs.items() if c), default=0)
+    if f < 1:
+        raise Refusal(f"{where}: {raw!r} is a constant modulo {p}; the modulus must have degree at least 1")
+    if coeffs[f] != 1:
+        raise Refusal(f"{where}: {raw!r} is not monic modulo {p} (its leading coefficient is {coeffs[f]}); "
+                      f"write the monic polynomial with the same roots")
+    poly = [coeffs.get(e, 0) % p for e in range(f + 1)]
+    # irreducibility, by trial division against every monic polynomial of degree 1 .. f//2
+    def divides(g):
+        r = list(poly)
+        dg = len(g) - 1
+        for i in range(f - dg, -1, -1):
+            c = r[i + dg]
+            if c:
+                for j in range(dg + 1):
+                    r[i + j] = (r[i + j] - c * g[j]) % p
+        return not any(r)
+    for dg in range(1, f // 2 + 1):
+        for tail in itertools.product(range(p), repeat=dg):
+            g = list(tail) + [1]
+            if divides(g):
+                gs = " + ".join(f"{c}t^{i}" for i, c in enumerate(g) if c) or "0"
+                raise Refusal(f"{where}: {raw!r} is REDUCIBLE modulo {p} -- it is divisible by {gs} -- so "
+                              f"F_{p}[t]/({raw}) is not a field and no plane over it is the one this checker verifies")
+    # t^f = -(c_0 + ... + c_{f-1} t^{f-1}): the reduction is the NEGATED low coefficients, not the
+    # polynomial's own (with t^3 - t - 1 over F_3 the reduction is t^3 = t + 1, never t^3 = 2 + 2t).
+    return [(-c) % p for c in poly[:f]], f
+
+
+class Field:
+    """F_q with the elements NAMED by the integers 0 .. q-1.
+
+    For a PRIME q the name is the residue and every operation below is the ordinary arithmetic mod q,
+    which is why routing the prime path through this class changes none of its numbers.  For q = p^f
+    the element c_0 + c_1 t + ... + c_{f-1} t^{f-1} is named by the integer whose base-p digits are
+    (c_0, c_1, ..., c_{f-1}) read MOST SIGNIFICANT FIRST -- so at q = 27 the element 1 is named 9 and t
+    is named 3.  That is not an aesthetic choice: it is the convention of `field_q27` in tools/fplane.py
+    and of every committed q = 27 artifact (data/fplane/chi-q27.json, data/fs53/periodic-q27.json,
+    data/fs53/colour-q27-k7-quotient.json), so with it the checker indexes the same vertices as the rest
+    of the project and the edge hashes are comparable.  Because 1 is then not the integer 1, the code
+    below uses `F.one` and never a literal.
+
+    The modulus is a parameter and never a default: see `parse_modulus`."""
+
+    def __init__(self, q: int, modulus=None):
+        pf = is_prime_power(q)
+        if pf is None:
+            raise Refusal(f"{q} is neither a prime nor a prime power, so there is no field with {q} elements")
+        self.p, self.f = pf
+        self.q = q
+        if self.f == 1:
+            if modulus is not None:
+                raise Refusal(f"modulus: {modulus!r} was given for q = {q}, which is PRIME -- F_{q} is Z/{q} "
+                              f"and needs no modulus; a modulus here would name a different field")
+            self.modulus = None
+            self.red = None
+            self.add = lambda a, b: (a + b) % q
+            self.sub = lambda a, b: (a - b) % q
+            self.mul = lambda a, b: (a * b) % q
+            self.neg = lambda a: (-a) % q
+            self.source = f"p = {q}"
+        else:
+            if modulus is None:
+                raise Refusal(f"q = {q} = {self.p}^{self.f} is a prime power and no modulus was given. "
+                              f"Z/{q} is NOT F_{q} -- over the ring the circle x^2 + y^2 = 1 has a different "
+                              f"number of points and the plane is a different graph -- so the field must be named: "
+                              f'pass "modulus": "t^{self.f}-..." in the certificate (--modulus on the command line)')
+            self.red, deg = parse_modulus(modulus, self.p, where="modulus")
+            if deg != self.f:
+                raise Refusal(f"modulus: {modulus!r} has degree {deg} over F_{self.p}, but q = {q} = {self.p}^{self.f} "
+                              f"needs degree {self.f}")
+            self.modulus = str(modulus)
+            p_, f_, red = self.p, self.f, self.red
+            pw = [p_ ** (f_ - 1 - i) for i in range(f_)]      # c_0 is the MOST significant digit
+
+            def dec(a):
+                return [(a // pw[i]) % p_ for i in range(f_)]
+
+            def encode(c):
+                return sum(c[i] * pw[i] for i in range(f_))
+
+            ADD = [[encode([(x + y) % p_ for x, y in zip(dec(a), dec(b))]) for b in range(q)] for a in range(q)]
+            NEG = [encode([(-x) % p_ for x in dec(a)]) for a in range(q)]
+            MUL = [[0] * q for _ in range(q)]
+            for a in range(q):
+                ca = dec(a)
+                for b in range(q):
+                    cb = dec(b)
+                    r = [0] * (2 * f_ - 1)
+                    for i in range(f_):
+                        if ca[i]:
+                            for j in range(f_):
+                                r[i + j] = (r[i + j] + ca[i] * cb[j]) % p_
+                    for d in range(2 * f_ - 2, f_ - 1, -1):      # reduce t^d, highest first
+                        c = r[d]
+                        if c:
+                            r[d] = 0
+                            for i in range(f_):
+                                r[d - f_ + i] = (r[d - f_ + i] + c * red[i]) % p_
+                    MUL[a][b] = encode(r[:f_])
+            self.add = lambda a, b: ADD[a][b]
+            self.sub = lambda a, b: ADD[a][NEG[b]]
+            self.mul = lambda a, b: MUL[a][b]
+            self.neg = lambda a: NEG[a]
+            self.source = f"q = {q} = {self.p}^{self.f} and the modulus {self.modulus}"
+        self.one = 1 % q if self.f == 1 else self.p ** (self.f - 1)
+        self.zero = 0
+
+    def __repr__(self):
+        return f"F_{self.q}" + ("" if self.modulus is None else f"[{self.modulus}]")
+
+
+def as_field(spec, modulus=None) -> Field:
+    """A Field from either a Field (returned unchanged) or a number with an optional modulus."""
+    return spec if isinstance(spec, Field) else Field(spec, modulus)
+
+
+def plane_edges(F: Field):
+    """The plane's edges as sorted (min, max) vertex-index pairs, and its unit circle.
+
+    The edge rule, once: two points are adjacent iff their difference lies on x^2 + y^2 = 1.  This
+    walks each point's circle -- n(q+1) steps -- where `build_orbits` decides adjacency from the
+    quadrance table over all n^2 pairs; the self-test checks the two agree, so neither is a private
+    copy of the rule."""
+    q, one, add, mul = F.q, F.one, F.add, F.mul
+    circ = [(x, y) for x in range(q) for y in range(q) if add(mul(x, x), mul(y, y)) == one]
+    E = set()
+    for x in range(q):
+        for y in range(q):
+            u = x * q + y
+            for (a, b) in circ:
+                v = add(x, a) * q + add(y, b)
+                E.add((u, v) if u < v else (v, u))
+    return sorted(E), circ
+
+
+def graph_sha256(F: Field) -> str:
+    """sha256 of `repr` of that sorted edge list -- the hash the rest of the project uses for a graph
+    record (tools/fplane.py's graph_q27, tools/fplane_periodic_subgroups.py), so a certificate's plane
+    can be compared against the committed graph records by a stranger with this file alone."""
+    E, _ = plane_edges(F)
+    return hashlib.sha256(repr(E).encode()).hexdigest()
+
+
 def build_orbits(p: int, plant_translation: bool = False) -> dict:
     """Everything the checker derives from `p` alone.
 
@@ -125,25 +314,28 @@ def build_orbits(p: int, plant_translation: bool = False) -> dict:
     the orbit of (0, u), t[k] = #{u : orbit of (u, u) is k} (the objective's coefficients), k0 = the
     orbit of (0, 0), sub[u][v] = the index of the difference of two points.
     """
-    n = p * p
-    pts = [(v // p, v % p) for v in range(n)]
+    F = as_field(p)
+    q, one = F.q, F.one
+    add, subf, mul, negf = F.add, F.sub, F.mul, F.neg
+    n = q * q
+    pts = [(v // q, v % q) for v in range(n)]
 
     def vid(x, y):
-        return (x % p) * p + (y % p)
+        return x * q + y
 
-    quad = [(x * x + y * y) % p for (x, y) in pts]
-    circle = [(x, y) for (x, y) in pts if (x * x + y * y) % p == 1 % p]
+    quad = [add(mul(x, x), mul(y, y)) for (x, y) in pts]
+    circle = [pts[v] for v in range(n) if quad[v] == one]
     # the maps, as permutations of the n points
     maps = []
     for (a, b) in circle:                                   # every rotation, not a generator: the
-        maps.append([vid(a * x - b * y, b * x + a * y) for (x, y) in pts])   # group needs no search
-    maps.append([vid(x, -y) for (x, y) in pts])             # the reflection
+        maps.append([vid(subf(mul(a, x), mul(b, y)), add(mul(b, x), mul(a, y))) for (x, y) in pts])   # group needs no search
+    maps.append([vid(x, negf(y)) for (x, y) in pts])        # the reflection
     if plant_translation:                                   # FOR THE CONTROL ONLY, never for a
-        maps.append([vid(x + 1, y + 1) for (x, y) in pts])   # certificate: translating a PAIR is not
+        maps.append([vid(add(x, one), add(y, one)) for (x, y) in pts])   # certificate: translating a PAIR is not
         # a symmetry of the triple counts (the shift z -> z - w leaves S), so adding it here merges
         # orbits whose variables are genuinely different, and the soundness control must go red.
-    neg = [vid(-x, -y) for (x, y) in pts]
-    sub = [[vid(pts[u][0] - pts[v][0], pts[u][1] - pts[v][1]) for v in range(n)] for u in range(n)]
+    neg = [vid(negf(x), negf(y)) for (x, y) in pts]
+    sub = [[vid(subf(pts[u][0], pts[v][0]), subf(pts[u][1], pts[v][1])) for v in range(n)] for u in range(n)]
 
     parent = list(range(n * n))
 
@@ -178,7 +370,6 @@ def build_orbits(p: int, plant_translation: bool = False) -> dict:
         orb[i] = label[r]
     K = len(label)
 
-    one = 1 % p
     killed = [False] * K
     for u in range(n):
         for v in range(n):
@@ -191,7 +382,7 @@ def build_orbits(p: int, plant_translation: bool = False) -> dict:
         if orb[u * n + u] != g_orbit[u]:
             raise Refusal(f"internal: the S3 relation does not tie Y[{u},{u}] to Y[0,{u}]")
         t[g_orbit[u]] += 1
-    return dict(p=p, n=n, quad=quad, sub=sub, orb=orb, K=K, rep=rep, killed=killed,
+    return dict(p=F.q, field=F, n=n, quad=quad, sub=sub, orb=orb, K=K, rep=rep, killed=killed,
                 g_orbit=g_orbit, t=t, k0=orb[0], maps=maps, circle=circle)
 
 
@@ -222,36 +413,39 @@ def build_orbits_fast(p: int) -> dict:
     circle and n separates the u's.  `self_test` checks this function against `build_orbits` at
     p = 3, 7, 11, 19, 23 -- every orbit, every representative, every derived array.
     """
-    if p % 4 != 3:
-        raise Refusal(f"build_orbits_fast: p = {p} is not 3 mod 4")
-    n, m = p * p, p + 1
-    pts = [(v // p, v % p) for v in range(n)]
+    F = as_field(p)
+    q, one, zero = F.q, F.one, F.zero
+    add, subf, fmul, negf = F.add, F.sub, F.mul, F.neg
+    if q % 4 != 3:
+        raise Refusal(f"build_orbits_fast: p = {q} is not 3 mod 4")
+    n, m = q * q, q + 1
+    pts = [(v // q, v % q) for v in range(n)]
 
     def vid(x, y):
-        return (x % p) * p + (y % p)
+        return x * q + y
 
     def mul(a, b):
-        return ((a[0] * b[0] - a[1] * b[1]) % p, (a[0] * b[1] + a[1] * b[0]) % p)
+        return (subf(fmul(a[0], b[0]), fmul(a[1], b[1])), add(fmul(a[0], b[1]), fmul(a[1], b[0])))
 
-    quad = [(x * x + y * y) % p for (x, y) in pts]
-    circle = [(x, y) for (x, y) in pts if (x * x + y * y) % p == 1 % p]
+    quad = [add(fmul(x, x), fmul(y, y)) for (x, y) in pts]
+    circle = [pts[v] for v in range(n) if quad[v] == one]
     if len(circle) != m:
         raise Refusal(f"build_orbits_fast: the unit circle has {len(circle)} points, expected {m}")
     zeta = None
     for cpt in circle:                      # a generator of the rotation group: order exactly m
         z, k = cpt, 1
-        while z != (1, 0):
+        while z != (one, zero):
             z = mul(z, cpt)
             k += 1
         if k == m:
             zeta = cpt
             break
     if zeta is None:
-        raise Refusal(f"build_orbits_fast: the rotation group at p = {p} has no generator of order {m}")
-    classes = sorted({quad[v] for v in range(n)} - {0})
+        raise Refusal(f"build_orbits_fast: the rotation group at p = {q} has no generator of order {m}")
+    classes = sorted({quad[v] for v in range(n)} - {zero})
     C = len(classes)
-    if C != p - 1:
-        raise Refusal(f"build_orbits_fast: {C} circles, expected {p - 1}")
+    if C != q - 1:
+        raise Refusal(f"build_orbits_fast: {C} circles, expected {q - 1}")
     ci = {c: i for i, c in enumerate(classes)}
     base = {}
     for v in range(n):
@@ -273,12 +467,12 @@ def build_orbits_fast(p: int) -> dict:
         if any(ang[pt[i][th]] != (i, th) for th in range(m)):
             raise Refusal("build_orbits_fast: the angular coordinate is not injective")
     half = m // 2
-    if mul(zeta, (1, 0)) == (1, 0) or pow_pt(zeta, half, mul) != ((-1) % p, 0):
+    if mul(zeta, (one, zero)) == (one, zero) or pow_pt(zeta, half, mul, (one, zero)) != (negf(one), zero):
         raise Refusal(f"build_orbits_fast: zeta^{half} is not -1")
     a_off = [0] * C                         # sigma(u_c) = u_c zeta^{a_c}, sigma(x, y) = (x, -y)
     for c in classes:
         x, y = base[c]
-        a_off[ci[c]] = ang[vid(x, -y)][1]
+        a_off[ci[c]] = ang[vid(x, negf(y))][1]
 
     # ---- the node numbering of the rotation orbits
     NP = C * C * m
@@ -317,9 +511,9 @@ def build_orbits_fast(p: int) -> dict:
             row = pt[b]
             for d in range(m):
                 v = pts[row[d]]
-                w = ((v[0] - ua[0]) % p, (v[1] - ua[1]) % p)
+                w = (subf(v[0], ua[0]), subf(v[1], ua[1]))
                 i = nz(a, b, d)
-                if w == (0, 0):
+                if w == (zero, zero):
                     s3[i] = ZR(a)
                     diffq[i] = 0
                 else:
@@ -363,7 +557,6 @@ def build_orbits_fast(p: int) -> dict:
     rep = [(best[r] // n, best[r] % n) for r in order]
     rot_orb = [index[find(i)] for i in range(NR)]
 
-    one = 1 % p
     killed = [False] * K
     for a in range(C):
         ca = classes[a]
@@ -402,14 +595,14 @@ def build_orbits_fast(p: int) -> dict:
         rot_diff[ZR(a)] = zorb[a]
     rot_diff[ZZ] = k0
 
-    return dict(p=p, n=n, m=m, C=C, K=K, classes=classes, ci=ci, pt=pt, ang=ang, quad=quad,
+    return dict(p=F.q, field=F, n=n, m=m, C=C, K=K, classes=classes, ci=ci, pt=pt, ang=ang, quad=quad,
                 zeta=zeta, a_off=a_off, rep=rep, killed=killed, g_orbit=g_orbit, t=t, k0=k0,
                 zorb=zorb, rot_orb=rot_orb, rot_diff=rot_diff, NP=NP, NR=NR, circle=circle,
                 nz=nz, ZL=ZL, ZR=ZR, ZZ=ZZ, fast=True)
 
 
-def pow_pt(z, k, mul):
-    r = (1, 0)
+def pow_pt(z, k, mul, one=(1, 0)):
+    r = one
     for _ in range(k):
         r = mul(r, z)
     return r
@@ -844,6 +1037,41 @@ def circulant_to_dense(obj, F):
 KIND = "fplane-alpha-certificate"
 
 
+def field_of_cert(cert: dict) -> Field:
+    """The field the certificate is about, READ from the file.
+
+    A prime plane is named by "p" alone, exactly as before prime powers existed here.  A prime-power
+    plane is named by "q" AND "modulus", both required: the number alone does not name a ring, Z/27 and
+    F_27 are different rings whose unit circles have 36 and 28 points, and a certificate that says only
+    "27" is refused by name rather than resolved by a default."""
+    has_p, has_q = "p" in cert, "q" in cert
+    if not has_p and not has_q:
+        raise Refusal('certificate: neither "p" nor "q" -- the file does not say which plane it is about')
+    if has_q:
+        q = as_int(cert["q"], "certificate.q")
+        pf = is_prime_power(q)
+        if pf is None:
+            raise Refusal(f"certificate.q: {q} is neither a prime nor a prime power, so there is no field with {q} elements")
+        if has_p:
+            pp = as_int(cert["p"], "certificate.p")
+            if pp != pf[0]:
+                raise Refusal(f"certificate: q = {q} = {pf[0]}^{pf[1]}, so its characteristic is {pf[0]}, but the file "
+                              f"says p = {pp}")
+        if "f" in cert and as_int(cert["f"], "certificate.f") != pf[1]:
+            raise Refusal(f"certificate.f: the file says {cert['f']}, but {q} = {pf[0]}^{pf[1]}")
+        return Field(q, cert.get("modulus"))
+    p = as_int(cert["p"], "certificate.p")
+    if not is_prime(p):
+        pf = is_prime_power(p)
+        if pf is not None:
+            raise Refusal(f"certificate.p: {p} = {pf[0]}^{pf[1]} is a prime POWER, not a prime, and \"p\" names a prime "
+                          f"field. Z/{p} is NOT F_{p} -- over the ring the circle x^2 + y^2 = 1 has a different number of "
+                          f"points and the plane is a different graph -- so name the field: \"q\": {p} together with "
+                          f'"modulus": "t^{pf[1]}-...", never the number alone')
+        raise Refusal(f"certificate.p: {p} is not prime")
+    return Field(p)
+
+
 def check(cert: dict, k: int | None = None, force_ldl: bool = False, out=sys.stdout) -> str:
     """Run every check and return the final sentence.  Raises `Refusal` at the first failure."""
     def log(s):
@@ -853,11 +1081,10 @@ def check(cert: dict, k: int | None = None, force_ldl: bool = False, out=sys.std
     if kind != KIND:
         raise Refusal(f"the file's kind is {kind!r}, not {KIND!r} -- this is not a certificate "
                       f"(a solver's record, {kind!r}, carries readings and proves nothing)")
-    p = as_int(need(cert, "p", "certificate"), "certificate.p")
-    if not is_prime(p):
-        raise Refusal(f"certificate.p: {p} is not prime")
+    F = field_of_cert(cert)
+    p = F.q                                  # the plane's size; for a prime field it IS the prime
     if p % 4 != 3:
-        raise Refusal(f"certificate.p: {p} is not 3 mod 4 -- the plane then has isotropic vectors "
+        raise Refusal(f"certificate.{'p' if F.f == 1 else 'q'}: {p} is not 3 mod 4 -- the plane then has isotropic vectors "
                       f"and this checker's orbit construction has never been exercised there")
     N = as_frac(need(cert, "N", "certificate"), "certificate.N")
     alpha = as_int(need(cert, "alpha_bound", "certificate"), "certificate.alpha_bound")
@@ -875,12 +1102,12 @@ def check(cert: dict, k: int | None = None, force_ldl: bool = False, out=sys.std
         raise Refusal("certificate.psd: one matrix is in the circulant block form and the other is "
                       "not; both must be, or neither")
     if circ:
-        B = build_orbits_fast(p)
+        B = build_orbits_fast(F)
     elif p > 29:
         raise Refusal(f"certificate.psd: at p = {p} the dense form would need a {p * p}-by-{p * p} "
                       f"matrix; use the circulant block form")
     else:
-        B = build_orbits(p)
+        B = build_orbits(F)
     n, K = B["n"], B["K"]
     reps = need(cert, "orbits", "certificate")
     if not isinstance(reps, list) or len(reps) != K:
@@ -918,8 +1145,16 @@ def check(cert: dict, k: int | None = None, force_ldl: bool = False, out=sys.std
                               f"({kind_i}) has {dict((str(a), str(b)) for a, b in coeffs_i.items())}")
         if as_frac(need(f, "rhs", w), f"{w}.rhs") != rhs_i:
             raise Refusal(f"{w}.rhs: the file has {f['rhs']!r}, the canonical row has {rhs_i}")
+    if "edges_sha256" in cert:
+        want = cert["edges_sha256"]
+        got = graph_sha256(F)
+        if not isinstance(want, str) or want != got:
+            raise Refusal(f"certificate.edges_sha256: the file says {want!r}, but the plane rebuilt from "
+                          f"{F.source} hashes to {got!r} -- the certificate is about a different graph")
+        log(f"check 1/4  the file's edges_sha256 {got[:16]}... is the hash of the plane rebuilt here "
+            f"({F.source}), so this is the same graph as the project's other records of it")
     nk = sum(1 for k in range(K) if B["killed"][k])
-    log(f"check 1/4  group and orbits rebuilt from p = {p} alone: {n} points, {K} orbits of ordered "
+    log(f"check 1/4  group and orbits rebuilt from {F.source} alone: {n} points, {K} orbits of ordered "
         f"pairs under O(2,{p}) x swap x S3, {nk} killed by a unit vector; the file's {K} "
         f"representatives agree, and the canonical constraint list ({len(rows)} rows: 1 g0, {nk} killed, "
         f"{K} nonneg, {len(rows) - 1 - nk - K} le_diag) agrees row for row")
@@ -1016,6 +1251,14 @@ def _rank_one_blocks(n: int, idx: list, c: Fraction):
     return dict(blocks=blocks), flat, den
 
 
+def _ident(F: Field) -> dict:
+    """How a generated certificate NAMES its plane: "p" alone for a prime field (unchanged), and
+    "q" + "p" + "f" + "modulus" for a prime power, because the number alone does not name the ring."""
+    if F.f == 1:
+        return dict(p=F.q)
+    return dict(q=F.q, p=F.p, f=F.f, modulus=F.modulus)
+
+
 def trivial_certificate(p: int, form: str = "gram", scale: Fraction = Fraction(0)) -> dict:
     """A COMPLETE, valid certificate built with no solver, for the controls to mutate.
 
@@ -1025,6 +1268,7 @@ def trivial_certificate(p: int, form: str = "gram", scale: Fraction = Fraction(0
     exactly what a control wants: a faithful certificate that must PASS, beside the planted ones that
     must fail."""
     B = build_orbits(p)
+    F = B["field"]; p = F.q
     n, K, k0 = B["n"], B["K"], B["k0"]
     rows = canonical_constraints(B)
     Z2 = [0] * (n * n)
@@ -1038,7 +1282,7 @@ def trivial_certificate(p: int, form: str = "gram", scale: Fraction = Fraction(0
             Z1[i * n + i] = int(scale * den)
         psd1, psd2 = _block(Z1, den, n, form), _block(Z2, 1, n, form)
     mult, N = solve_multipliers(B, rows, Z1, den, Z2, 1)
-    cert = dict(kind=KIND, p=p, N=str(N), alpha_bound=N.numerator // N.denominator,
+    cert = dict(kind=KIND, **_ident(F), N=str(N), alpha_bound=N.numerator // N.denominator,
                 claim=f"every independent set of UD(F_{p}, 2) has at most {N} points",
                 vertex_index="v = x*p + y for the point (x, y) of F_p^2",
                 edge_rule="two points are adjacent iff their difference has quadrance x^2 + y^2 = 1 in F_p",
@@ -1061,9 +1305,10 @@ def trivial_circulant_certificate(p: int) -> dict:
     factor (1/2) I is rational.  As always, any rational positive semidefinite pair is a valid
     certificate for SOME N; this one proves a true and useless bound, which is exactly what a control
     wants beside the planted ones."""
-    F = build_orbits_fast(p)
-    rows = canonical_constraints(F)
-    m, C = F["m"], F["C"]
+    B = build_orbits_fast(p)
+    F = B["field"]; p = F.q
+    rows = canonical_constraints(B)
+    m, C = B["m"], B["C"]
     W = 2 * C + 1
     wden = 1000
     # The weights must have BOTH a cosine and a sine part, and the matrices must couple the two kinds
@@ -1087,17 +1332,17 @@ def trivial_circulant_certificate(p: int) -> dict:
     zero = [dict(a=[0] * m, b=[0] * m, o=0, gram=dict(den="1", num=[[0] * W]))]
     psd2 = dict(circulant=dict(weight_den=str(wden), blocks=zero))
     quiet = lambda _s: None
-    rot1, d1 = load_circulant(psd1["circulant"], F, "Z1", False, quiet)
-    rot2, d2 = load_circulant(psd2["circulant"], F, "Z2", False, quiet)
-    s1, _ = orbit_sums_from_rot(F, rot1, d1)
-    s2y, s2m = orbit_sums_from_rot(F, rot2, d2)
-    mult, N = multipliers_from_sums(F, rows, s1, d1, s2y, s2m, d2)
-    return dict(kind=KIND, p=p, N=str(N), alpha_bound=N.numerator // N.denominator,
+    rot1, d1 = load_circulant(psd1["circulant"], B, "Z1", False, quiet)
+    rot2, d2 = load_circulant(psd2["circulant"], B, "Z2", False, quiet)
+    s1, _ = orbit_sums_from_rot(B, rot1, d1)
+    s2y, s2m = orbit_sums_from_rot(B, rot2, d2)
+    mult, N = multipliers_from_sums(B, rows, s1, d1, s2y, s2m, d2)
+    return dict(kind=KIND, **_ident(F), N=str(N), alpha_bound=N.numerator // N.denominator,
                 claim=f"every independent set of UD(F_{p}, 2) has at most {N} points",
                 vertex_index="v = x*p + y for the point (x, y) of F_p^2",
                 edge_rule="two points are adjacent iff their difference has quadrance x^2 + y^2 = 1 in F_p",
                 symmetry="O(2,p) x swap x S3 on ordered pairs",
-                orbits=[[u, v] for (u, v) in F["rep"]],
+                orbits=[[u, v] for (u, v) in B["rep"]],
                 constraints=[dict(kind=a, sense=b, coeffs={str(x): str(y) for x, y in c.items()},
                                   rhs=str(d)) for (a, b, c, d) in rows],
                 multipliers=[str(x) for x in mult],
@@ -1197,12 +1442,13 @@ def brute_force_soundness(p: int, limit: int | None = None, plant_translation: b
     both matrices are positive semidefinite.  That is what the derivation claims and what the whole
     certificate rests on, tested rather than assumed.  Returns (sets checked, the largest seen)."""
     B = build_orbits(p, plant_translation=plant_translation)
+    F = B["field"]; q = F.q; fadd = F.add
     n, K = B["n"], B["K"]
     rows = canonical_constraints(B)
     quad, sub, orb, g_orbit, t = B["quad"], B["sub"], B["orb"], B["g_orbit"], B["t"]
-    one = 1 % p
+    one = F.one
     adj = [[u != v and quad[sub[u][v]] == one for v in range(n)] for u in range(n)]
-    add = [[((u // p + z // p) % p) * p + ((u % p + z % p) % p) for z in range(n)] for u in range(n)]
+    add = [[fadd(u // q, z // q) * q + fadd(u % q, z % q) for z in range(n)] for u in range(n)]
     sets = []
 
     def grow(start, cur):
@@ -1275,17 +1521,18 @@ def evaluate_at_set(cert: dict, S: list, out=sys.stdout, display_max_p: int = 29
     def log(s):
         print(s, file=out, flush=True)
 
-    p = as_int(need(cert, "p", "certificate"), "certificate.p")
+    F = field_of_cert(cert)
+    p = F.q
     n = p * p
     S = sorted(set(int(v) for v in S))
     if any(v < 0 or v >= n for v in S):
         raise SetProblem(f"the set has a vertex outside 0..{n - 1}")
-    one = 1 % p
+    one = F.one; fsub = F.sub; fmul = F.mul; fadd = F.add
     for i, u in enumerate(S):                           # from the coordinates: no table of size n^2
         ux, uy = divmod(u, p)
         for v in S[i + 1:]:
             vx, vy = divmod(v, p)
-            if ((ux - vx) * (ux - vx) + (uy - vy) * (uy - vy)) % p == one:
+            if fadd(fmul(fsub(ux, vx), fsub(ux, vx)), fmul(fsub(uy, vy), fsub(uy, vy))) == one:
                 raise SetProblem(f"the set is NOT independent: {(u, v)} are at quadrance 1")
     log(f"           the set: {len(S)} points, re-verified independent from the definition "
         f"(no two differ by a vector of quadrance 1)")
@@ -1300,11 +1547,11 @@ def evaluate_at_set(cert: dict, S: list, out=sys.stdout, display_max_p: int = 29
             f"p <= {display_max_p} is affordable. The four checks never assemble anything; the verdict "
             f"above stands.")
         return False
-    B = build_orbits(p)
+    B = build_orbits(F)
     K = B["K"]
     rows = canonical_constraints(B)
     quad, sub, orb, g_orbit, t = B["quad"], B["sub"], B["orb"], B["g_orbit"], B["t"]
-    add = [[((u // p + z // p) % p) * p + ((u % p + z % p) % p) for z in range(n)] for u in range(n)]
+    add = [[fadd(u // p, z // p) * p + fadd(u % p, z % p) for z in range(n)] for u in range(n)]
     Sset, acc = set(S), [0] * K
     for z in S:
         mem = [u for u in range(n) if add[u][z] in Sset]
@@ -1320,9 +1567,9 @@ def evaluate_at_set(cert: dict, S: list, out=sys.stdout, display_max_p: int = 29
     if tr != len(S):
         raise Refusal(f"trace Y = {tr} but the set has {len(S)} points")
     if "circulant" in z1o:
-        F = build_orbits_fast(p)
-        Z1, d1 = circulant_to_dense(z1o["circulant"], F)
-        Z2, d2 = circulant_to_dense(z2o["circulant"], F)
+        Bf = build_orbits_fast(F)
+        Z1, d1 = circulant_to_dense(z1o["circulant"], Bf)
+        Z2, d2 = circulant_to_dense(z2o["circulant"], Bf)
     else:
         Z1, d1 = load_psd(z1o, n, "Z1", False, lambda _s: None)
         Z2, d2 = load_psd(z2o, n, "Z2", False, lambda _s: None)
@@ -1642,10 +1889,57 @@ def self_test(out=sys.stdout, shipped: str | None = None) -> bool:
         failures.append(f"the --against display path did not end on the verdict: exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
         log(f"  RED — NOT OK        14. exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
 
+    # ---------------------------------------------------------------------------------------------
+    log("=== the prime-power plane: F_27 = F_3[t]/(t^3 - t - 1), named and never inferred (FS-53 A0.4) ===")
+    F27 = Field(27, "t^3-t-1")
+    h27 = graph_sha256(F27)
+    SHA27 = "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d"
+    if h27 == SHA27:
+        log(f"  GREEN (as designed) 21. the plane rebuilt here from 27 and the modulus hashes to {h27[:16]}..., "
+            f"the graph of data/fplane/chi-q27.json and data/fs53/periodic-q27.json")
+    else:
+        failures.append(f"the F_27 plane rebuilt here hashes to {h27}, not the project's {SHA27}")
+        log(f"  RED — NOT OK        21. {h27[:16]}... is not the project's {SHA27[:16]}...")
+    # the two edge rules -- the circle walk and the quadrance table over all n^2 pairs -- must agree,
+    # and the O(n^2) reference orbit construction must reproduce the fast one array for array.
+    Bd = build_orbits(F27)
+    Bf27 = build_orbits_fast(F27)
+    E_circle, circ27 = plane_edges(F27)
+    E_table = [(u, v) for u in range(Bd["n"]) for v in range(u + 1, Bd["n"]) if Bd["quad"][Bd["sub"][u][v]] == F27.one]
+    agree = (E_circle == E_table and len(circ27) == 28
+             and all(Bd[f] == Bf27[f] for f in ("K", "rep", "killed", "t", "k0", "g_orbit"))
+             and canonical_constraints(Bd) == canonical_constraints(Bf27))
+    if agree:
+        log(f"  GREEN (as designed) 22. at q = 27 the circle rule and the quadrance table give the same "
+            f"{len(E_circle)} edges, and the n^2 orbit construction reproduces the fast one exactly "
+            f"({Bd['K']} orbits, every representative, killed set, t and g_orbit)")
+    else:
+        failures.append("at q = 27 the two edge rules or the two orbit constructions disagree")
+        log("  RED — NOT OK        22. the two constructions at q = 27 disagree")
+    c27 = trivial_circulant_certificate(F27)
+    c27["edges_sha256"] = SHA27
+    expect_pass("23. a faithful certificate over F_27, circulant block form, with its graph hash", c27)
+    c = _mutate(c27); del c["modulus"]
+    expect_refusal("24. the SAME certificate with the modulus removed", c, "Z/27 is NOT F_27")
+    c = _mutate(c27); del c["q"]; del c["f"]; del c["modulus"]; c["p"] = 27
+    expect_refusal('25. the same file labelled "p": 27, the trap Z/27 is not F_27', c, "prime POWER")
+    c = _mutate(c27); c["modulus"] = "t^3-t+1"
+    expect_refusal("26. the OTHER irreducible cubic as the modulus (a different labelling of the same field)",
+                   c, "orbits")
+    c = _mutate(c27); c["modulus"] = "t^3-t"
+    expect_refusal("27. a REDUCIBLE modulus (t^3 - t = t(t-1)(t+1), so the quotient is not a field)", c, "REDUCIBLE")
+    c = _mutate(c27); c["edges_sha256"] = "0" + SHA27[1:]
+    expect_refusal("28. the graph hash altered in one character", c, "different graph")
+    c = _mutate(c27); c["q"] = 9; c["f"] = 2; c["modulus"] = "t^2+1"
+    expect_refusal("29. q = 9, which is 1 mod 4 (the plane then has isotropic vectors)", c, "not 3 mod 4")
+    c = _mutate(c27); c["p"] = 5
+    expect_refusal("30. the characteristic contradicted (q = 27 with p = 5)", c, "characteristic")
+
     log("=== after every mutation, the faithful certificates again (the restore, verified) ===")
     expect_pass("p = 7, Gram form", trivial_certificate(7, form="gram", scale=Fraction(1, 4)))
     expect_pass("p = 7, dense form", trivial_certificate(7, form="dense", scale=Fraction(1, 4)))
     expect_pass("p = 7, circulant block form", trivial_circulant_certificate(7))
+    expect_pass("q = 27, circulant block form (the prime-power path, after its mutations)", c27)
 
     quiet.close()
     if failures:
@@ -1672,10 +1966,19 @@ def main() -> int:
                          "carrying `independent_set` or `best_set`), term by term; the display is "
                          "available for p <= 29 (it assembles the matrices), the set's independence is "
                          "re-verified at every p, and the run ends on the verdict either way")
+    ap.add_argument("--q", type=int, metavar="Q",
+                    help="assert that the certificate is about the plane over the field with Q elements; "
+                         "a prime power needs --modulus as well. An assertion, never a default: the field "
+                         "is read from the file, and a disagreement is refused")
+    ap.add_argument("--modulus", metavar="POLY",
+                    help='the defining polynomial of F_q as a polynomial in t, for example "t^3-t-1". '
+                         "Only with --q, and only for a prime power: Z/27 is not F_27")
     ap.add_argument("--self-test", action="store_true",
                     help="plant faults and watch each one refuse; with a certificate given as well, "
                          "plant them in THAT file too")
     a = ap.parse_args()
+    if a.modulus is not None and a.q is None:
+        ap.error("--modulus names the field of --q; give --q as well")
     if a.self_test:
         return 0 if self_test(shipped=a.certificate) else 1
     if not a.certificate:
@@ -1690,8 +1993,25 @@ def main() -> int:
     if not isinstance(cert, dict):
         print("NOT A CERTIFICATE: the file's top level is not an object")
         return 1
-    print(f"[cert] kind {cert.get('kind')!r}, p = {cert.get('p')}, N = {cert.get('N')!r}, "
-          f"alpha_bound = {cert.get('alpha_bound')}", flush=True)
+    if "q" in cert:
+        print(f"[cert] kind {cert.get('kind')!r}, q = {cert.get('q')} (characteristic {cert.get('p')}, "
+              f"modulus {cert.get('modulus')!r}), N = {cert.get('N')!r}, "
+              f"alpha_bound = {cert.get('alpha_bound')}", flush=True)
+    else:
+        print(f"[cert] kind {cert.get('kind')!r}, p = {cert.get('p')}, N = {cert.get('N')!r}, "
+              f"alpha_bound = {cert.get('alpha_bound')}", flush=True)
+    if a.q is not None:
+        try:
+            named = Field(a.q, a.modulus)
+            infile = field_of_cert(cert)
+        except Refusal as e:
+            print(f"NOT A CERTIFICATE: {e}")
+            return 1
+        if (named.q, named.modulus) != (infile.q, infile.modulus):
+            print(f"NOT A CERTIFICATE: the command line asserts the plane over {named.source}, but the file "
+                  f"is about {infile.source}")
+            return 1
+        print(f"[cert] the command line's --q asserts {named.source}: the file agrees", flush=True)
     if cert.get("derivation"):
         print(f"[cert] the derivation it points at: {cert['derivation']}", flush=True)
     try:
