@@ -128,9 +128,9 @@ rewritten to eight members with the corrected consequence; §S13 the rulings and
 skeleton twice; every commit pushed.
 
 **The next session's first acts, in order** (the implementing session — read §S13 in full before spawning anyone):
-1. Confirm the FS-50 jobs' state (`kill -0 2808409 2816615`; `data/fs50/ckpt/*.npz` timestamps) and the LDL check of the
-   1059 certificate (`data/fs50/p83-refusal/ldl-N1059.log`; if it ended green, say so in the README row; if it is still running,
-   leave it).
+1. Confirm the FS-50 jobs' state (`kill -0 2808409 2816615`; `data/fs50/ckpt/*.npz` timestamps). The 1059 certificate at 83
+   is CERTIFIED and its exact LDL is green (`data/fs50/p83-refusal/ldl-N1059.log`); the loop keeps polishing tighter ones into the
+   job tmp `sdp/` until the jobs are stopped by §S13.3, which banks the last.
 2. Spawn one Opus implementer for **phase A0** (A0.1, A0.2, A0.4 in this repository — §S13.2), briefed by §S13.5; in parallel
    nothing (one subagent at a time). Then a `ferrous-engineer` for **A0.3** (WO-19, WO-20) in `~/source/descent-engine`.
 3. Then K1 and K2 (one implementer), then A.1/A.2 across the eight members (one implementer; CPU), then §S13.3 (stop the FS-50
