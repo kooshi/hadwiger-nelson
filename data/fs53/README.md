@@ -61,3 +61,21 @@ Rerun: `python3 tools/fplane_periodic_subgroups.py --q 27 --k 6 --out data/fs53/
 leaves what it finished and `--dims` names the redo. Over a **prime** field this family is only the `p + 1` lines
 (`data/fplane/periodic-below-71.json`); over `𝔽₂₇` the additive group is `(ℤ/3)⁶` and every `𝔽₃`-subspace is a subgroup,
 which is why the family is 56,266 subspaces rather than 28.
+
+## The first exact certificate at a prime-power plane — α(UD(𝔽₂₇,2)) ≤ 147 (FS-53 phase A0.4, 2026-09-15)
+
+| file | plane | budget | verdict | claim scope |
+|---|---|---|---|---|
+| `cert-q27-N147.json` | 𝔽₂₇ (`q = 27 = 3³`, modulus `t³ − t − 1`, named explicitly and never inferred) | the rounding and the check: 62 s of one core | **CERTIFIED** by the untouched `tools/fplane_cert_check.py`: `N = 368945166004872794530764081061/2500000000000000000000000000`, so **α ≤ 147** | an **exact rational** bound on the independence number, re-checkable by a stranger: the checker rebuilds the group, its 1,847 pair orbits and the 3,694 canonical rows from the number 27 and the modulus alone, checks the multipliers' signs, the rational Gram factors and the affine identity exactly, and confirms the file's `edges_sha256` is the hash of the plane it rebuilt. Nothing here is the solver's word |
+| `sdp-q27.json` | 𝔽₂₇ | 79 s, real blocks, SCS | the relaxation's optimum **147.5779** `[solver]` | a **float reading**, never a bound. Measured twice through formulations sharing only the field — 147.5779 in real blocks (79 s) and 147.5780 unreduced (398 s) — and the certificate above was rounded from a third solver's dual (CLARABEL, float bound 147.5774). Three solvers, agreeing to 5 × 10⁻⁴ |
+
+**What it decides, and what it does not.** `⌈729/147⌉ = 5`, so the floor stays `χ(UD(𝔽₂₇,2)) ≥ 5` — the certificate does
+**not** move it. Six needs `α ≥ 122` and is untouched. **Five needs `α ≥ 146`, and the certificate says `α ≤ 147`** — so
+five at 27 is not refused, but it survives in a window **two integers wide**: a five-colouring of the 27-plane requires
+its independence number to be 146 or 147, within one of the certified maximum. That is the narrowest any five-question
+has been anywhere in this project, and the finding side at 27 now has a second, sharper target than the six-threshold.
+
+**The instrument's reach at 27 is 147.578 / 162.000 = 0.9110 of the ratio bound** — the first reach measured at a window
+member, and the **worst** measured anywhere (0.8445 at 11, 0.8238 at 23, 0.8836 at 83). It is a converged value, not a
+compute artifact: two formulations and three solvers agree. `plans/STUB-sixth-colour.md` §S6 P3 predicted the
+certificate would refuse five at 27; **it does not, and P3 is falsified there.**

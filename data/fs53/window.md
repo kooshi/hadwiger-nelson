@@ -15,7 +15,7 @@ members remain, none decided.**
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
-| **27** | 729 | **−8** | 162.00 | — | — | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
+| **27** | 729 | **−8** | 162.00 | — | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | — | — | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | — | — | 5 `[exact]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | — | — | 5 `[exact]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
@@ -52,6 +52,14 @@ the largest eigenvalue equal to the degree `q + 1` at each member as a connectiv
 five. The certificate's reach has been measured exactly three times — **0.8445 at 11** (N = 29.176808 against Hoffman
 34.5496), **0.8238 at 23** (108.546075 against 131.7620) and **0.8836 at 83** (1059.834185 against 1199.4588) — so it
 should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59.
+
+**Measured at a window member for the first time (FS-53 phase A0.4): 0.9110 at `q = 27`** — `147.578 / 162.000`, a
+**converged** value (two formulations, three solvers, agreeing to 5 × 10⁻⁴), and the **worst reach measured anywhere**.
+It sits above `frac5` at 27 (0.9012), so **the certificate does not refuse five there and §S6's P3 is falsified at 27**;
+`data/fs53/cert-q27-N147.json` is the CERTIFIED artifact, `α ≤ 147` against the 146 five needs. Read against the other
+cells, a worst-case reach of 0.9110 leaves `frac5` at 43 (0.9362) and 47 (0.9477) refusable with 2.5 % and 3.7 % of
+margin, `frac6` at 79 (0.9471) with 3.6 %, and **`frac6` at 67 (0.9204) with only 0.9 %** — so **Q1's six-refusal at 67
+is now marginal**, against an instrument whose reach has ranged from 0.8238 to 0.9110.
 
 **The reach is not a property of the instrument alone: it improves with the compute spent.** At 83 it was 0.8974 at
 FS-50's close (N = 1076.366454) and is 0.8836 now (N = 1059.834185, the polish loop's 134,500-iterate, CERTIFIED with its

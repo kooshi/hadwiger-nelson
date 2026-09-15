@@ -940,10 +940,17 @@ conditional is promised, and "not landed" is a complete sentence.
 *Not changed:* the trust tags and file names (§S11), the designer's spec and its four named controls, `plane-colour`'s and the
 checker's verdict words.
 
-*Found on review (2026-09-15, after the passes):* `tools/fplane_periodic_subgroups.py --self-test` reproduced every count of
-`data/fs53/periodic-q27.json` and then **overwrote the committed record in place** (timings changed; the `partial`/`dims_done`
-checkpoint fields vanished, so the self-test path uses a second, older writer). Two lines for A0.2's acceptance: the self-test writes
-only under a scratch path, never the milestone's record; and there is one record writer, the checkpointing one.
+*Found on review (2026-09-15, after the passes), and **the attribution corrected by the A0 implementer**:* the committed
+`data/fs53/periodic-q27.json` was **overwritten in place** during the review (timings changed; the `partial`/`dims_done`
+checkpoint fields vanished) and had to be restored with `git checkout --`. The product owner recorded the cause as
+`--self-test`. **That was wrong, and the implementer checked it rather than believing it**: on `main`, `--self-test`
+returns before any write (`if a.self_test: return self_test()`, and `self_test` writes nothing), verified by md5 on the
+committed tool before any edit — so the overwrite came from a sweep run with `--out data/fs53/periodic-q27.json`, the
+tool's own documented invocation. **The defect was real and the fix is right; the cause named in the plan was not.** What
+was genuinely wrong is the part the implementer repaired: **two record writers**, the checkpointing one and an older one
+in `main`, which could disagree. A0.2's acceptance keeps both lines — one writer, and the self-test confined to a scratch
+path — the second now as a *guarantee to preserve* rather than a defect to fix, and the implementer went further and made
+the tool **assert** the committed record is byte-identical before and after (its control 7).
 
 ### §S13. The rulings (Kooshi, 2026-09-15) and the implementation gate — written for an implementer who arrives with no memory and a product owner who scores by artifact
 
@@ -995,7 +1002,9 @@ degree 28, 10,206 edges, `edges_sha256 = b15ae514ce55dddda7e21f8923ae86c678f0324
 `python3 tools/fplane.py self-test` green with the new row; `git diff` on the file shows the restore and the row and nothing else.
 
 **A0.2 — the sweep tool's record** (an hour). `tools/fplane_periodic_subgroups.py`: one record writer (the checkpointing one,
-with `partial`/`dims_done`); the self-test writes only under a scratch path; a `best_witness` field carries the colouring behind
+with `partial`/`dims_done`); the self-test writes only under a scratch path (**it already did on `main`** — the plan's
+claim that `--self-test` overwrote the record was a misattribution, corrected in §S12.3; keep it true and *assert* it); a
+`best_witness` field carries the colouring behind
 `best_k_found`. *Pass:* `--self-test` green and `git status` clean afterwards; a rerun's `data/fs53/periodic-q27.json` carries
 `best_witness`, and the product owner's independent script (the one behind `data/fs53/colour-q27-k7-quotient.json`, re-run) verifies
 that colouring proper on all 10,206 edges.
@@ -1017,7 +1026,10 @@ counts.
 prime path is byte-identical — `git diff` shows only the dispatch, and the 11 and 23 certificates (`data/fs50/cert-p11-N29.json`,
 `cert-p23-real-N108.json`) re-run through the checker with **identical output lines**; (ii) a certificate labelled 27 without a
 modulus is refused by name; (iii) the 27 graph the tools build matches A0.1's hash; (iv) the self-test gains these as controls and
-each is seen to fire. The checker's CERTIFIED line is still the last line in every path.
+each is seen to fire. The checker's CERTIFIED line still comes after all four checks in every path. (**The acceptance's earlier wording,
+"the last line printed", was wrong against the committed tool** — with `--k` the colourability consequence prints *after*
+CERTIFIED, which is FS-50 §M3's behaviour and correct: the consequence is what the reader came for. A0.4 preserved it
+byte-identically; the wording is fixed here, not the tool.)
 
 **K1 — the packed Cayley certificate, in the kernel** (§S9, §S12.1 D-13, §S12.2; two days). `CayleyCert.Cert` generic over
 `IdArith R`; `sound` proved once; `IdArith (ZMod q)` with its five laws proved; `cert3` and **`cert23_8`** (the line-periodic
