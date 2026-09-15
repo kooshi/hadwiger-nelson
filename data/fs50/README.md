@@ -290,3 +290,112 @@ stays sound whatever `T` is. On a live circle the end-to-end effect is visible a
 planted at 11 gives float 29.285445 and `N` = **29.285452**, weaker than 29.176808 and still CERTIFIED.
 The tool now prints that sentence beside the plant so the next reader scores it against the float bound
 and not against `N`.
+
+### At 83: what the real form costs, what the solve has said so far, and the first certificate the checker has read there
+
+**The setup is affordable and controlled.** 6,889 points, 82 circles, 564,981 rotation orbits, 49,447
+pair orbits (1,764 killed), 98,894 canonical rows, in 1.3 s. The real blocks are **43 of size 82–83**
+against the 330-row embedding the Hermitian form would need, 24,576,550 map entries, built in 11.6 s;
+the cone data cvxpy hands SCS is `A` of shape 391,718 × 49,447 with 18,552,972 nonzeros and 86
+positive semidefinite blocks of size ≤ 83, built in 127 s. `--check-real` runs **at 83** (check (1)
+skipped by cost, with the reason printed): the reduced map equals `TᵀAT` to 3.7·10⁻¹³, the wire block's
+whole spectrum is the reduced block's doubled to 2.4·10⁻¹¹, and both negative controls are reachable
+there (off by 107.6 and 575.0).
+
+**The solve is the whole cost, and the linear-system backend is the whole lever.** SCS picks its
+backend by a *string* keyword, `linear_solver=` (`qdldl`, `mkl`, `cpu_indirect`, `cpu_dense`,
+`gpu_indirect`, `cudss`); passing nothing leaves the wheel's auto choice, which in `build/venv-sdp` is
+a **sequential** MKL Pardiso. Measured on this problem:
+
+| backend | seconds per 500 iterations | per iteration |
+|---|---|---|
+| auto (sequential MKL Pardiso, `build/venv-sdp`) | 1,679 and 1,798 | ≈ 3.5 s |
+| `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | 98–99 | ≈ 0.20 s |
+
+**The backend does not move the answer** — controlled at 11, where `auto`, `qdldl` and `cpu_indirect`
+all give the float bound 29.176799 and `⌊N⌋ = 29`, the exact `N` agreeing to 10⁻⁶ (the duals differ in
+their last digits, as they must). `cpu_indirect` is the precedent that matters, because it is the same
+*kind* of method as the GPU backend: an iterative solve of each step's linear system rather than a
+factorisation, which can change the iterate sequence and not merely its speed.
+
+**The trajectory, chunk by chunk**, each line a checkpoint on disk. It is an ADMM iterate and **not a
+bound**: SCS's iterates are neither feasible nor monotone, and the objective can move.
+
+| iterations | backend | pobj | res_pri | res_dual |
+|---|---|---|---|---|
+| 500 | auto | −1085.752190 | 4.73 | 9.83 |
+| 1,000 | auto | −1073.968923 | 2.94 | 3.77·10⁻¹ |
+| 1,500 | gpu | −1072.999847 | 1.25 | 8.86·10⁻¹ |
+| 2,500 | gpu | −1071.110024 | 1.48 | 7.51·10⁻² |
+| 3,500 | gpu | −1070.813018 | 1.53 | 6.69·10⁻² |
+| 4,500 | gpu | −1070.561505 | 1.58 | 6.18·10⁻² |
+
+**Two exact bounds at 83, from iterates, hours before convergence.** `--round-only` reads the running
+solve's checkpoint and rounds from it without advancing or rewriting it; **any** dual gives a sound
+certificate (section 4 of the derivation), so a half-converged iterate gives a real exact bound:
+
+| from the iterate at | res_pri | res_dual | exact `N` | `⌊N⌋` |
+|---|---|---|---|---|
+| 500 iterations | 6.16 | 12.9 | 2466.274139 | 2466 |
+| 1,000 iterations | 1.34 | 26.7 | **2232.886881** | **2232** |
+
+Both are far above the ratio bound 1,199.46 and neither is a result — they are what a dual at those
+residuals proves. **What they establish is the machinery**, and the second one establishes it
+completely: the **unmodified** checker read a real 15.28 MB certificate at 83 and accepted it **in 17.9
+seconds** — the group, its 49,447 orbits and all 98,894 canonical rows rebuilt from the number 83 alone
+and agreeing with the file row for row; 98,894 multipliers with the 97,129 attached to inequalities
+non-negative; 43 circulant blocks over 165 slots per matrix, each a rational Gram factor; and the affine
+identity exact over every one of the 49,447 orbit coefficients and the constant term. At `⌊N⌋ = 2232`
+the strongest colouring sentence it can add is `k = 3` (3 × 2232 = 6,696 < 6,889); the six-colour
+sentence needs `⌊N⌋ ≤ 1,148`. Until this file the checker had only ever seen a *synthetic* certificate
+at 83.
+
+The artefact is `build/fs50/cert-p83-iter1000-N2232.json`, untracked — it says less than a character sum
+does. **It is not reproducible from the checkpoint**, and that is worth stating because the obvious
+assumption is wrong: `scs-p83-cert-real.npz` is rewritten every 500 iterations, so the 1,000-iteration
+iterate exists nowhere on disk any more. A fresh `--round-only` yields a *different, tighter* bound from
+a *later* iterate; this file is the only record of this one.
+
+**Resume.** The iterate lives in `data/fs50/ckpt/scs-p83-cert-real.npz` and is rewritten after every
+chunk; a relaunch continues from it, across backends, and refuses a checkpoint whose shape belongs to
+another prime. The rounding sweep's own checkpoint is `data/fs50/ckpt/round-p83-real.jsonl`, and every
+row in it now carries a fingerprint of the dual that scored it.
+
+```
+build/venv-sdp-gpu/bin/python tools/fplane_cert_round.py --p 83 --blocks --real --chunk 500 \
+    --scs-ckpt data/fs50/ckpt/scs-p83-cert-real.npz --linear-solver gpu_indirect \
+    --eps 1e-8 --max-iters 400000 --dual-cache data/fs50/ckpt/dual-p83-real.npz \
+    --ckpt data/fs50/ckpt/round-p83-real.jsonl --thresholds 1e-9,1e-8,1e-6,1e-4 \
+    --denominators 1000000,100000000,10000000000 --weight-denominators 100000000,10000000000 \
+    --out data/fs50/cert-p83.json
+```
+
+An exact bound from the iterate as it stands, at any moment, without touching that run:
+
+```
+build/venv-sdp/bin/python tools/fplane_cert_round.py --p 83 --blocks --real --chunk 500 \
+    --scs-ckpt data/fs50/ckpt/scs-p83-cert-real.npz --round-only --eps 1e-8 \
+    --ckpt data/fs50/ckpt/round-p83-anytime.jsonl --thresholds 1e-8 \
+    --denominators 10000000000 --weight-denominators 10000000000 --out <a file>
+```
+
+**The `--linear-solver` flag, and the control that it does not move the answer.**
+`tools/fplane_cert_round.py --linear-solver <backend>` passes the string straight to SCS's constructor
+in the chunked path (default `auto`, so every existing command line is unchanged). The backend changes
+only how each iteration's linear system is solved, never the problem or the iterate, so a warm start
+carries across backends — but `gpu_indirect` and `cpu_indirect` are *iterative* solves of that system
+rather than factorisations, which can change the iterate sequence and not merely its speed, so the
+claim was controlled rather than assumed. **At 11, `auto`, `qdldl` and `cpu_indirect` all give the float
+bound 29.176799 and `⌊N⌋ = 29`, with the exact `N` agreeing to 10⁻⁶** (the duals differ in their last
+digits, as they must). `cpu_indirect` is the precedent that matters, being the same kind of method as
+the GPU backend.
+
+**Two traps this phase paid for, both now mechanisms rather than scars.** (i) **A `timeout` wrapper
+cannot be detached after the fact on this machine**: GNU coreutils 9.11's `timeout` arms
+`PR_SET_PDEATHSIG` on the command it monitors, so `kill -KILL <timeout-pid>` takes the child with it —
+tested twice on `sleep`, with and without `--foreground`. Wrapping a multi-hour solve in a wall and
+planning to lift the wall later does not work; the shape that does is no wrapper plus an in-process
+checkpoint. (ii) **SCS ends every chunk with the status `solved (inaccurate - reached max_iters)`**,
+because `max_iters` *is* the chunk size — so a `startswith("solved")` break stops after one chunk and
+reports whatever the iterate happened to be, with nothing to warn a reader. At 11 that read 29.2729
+against the true 29.1768 and looked like a clean success.
