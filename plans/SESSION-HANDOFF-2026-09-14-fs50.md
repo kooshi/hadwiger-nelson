@@ -57,7 +57,8 @@ corner — rerun the sweep off the cached dual.**
 
 The Hermitian-form producers at 83 never converged inside their walls; the real-block value solve (four-hour wall) neither;
 and **killing the `timeout` wrappers to lift the walls killed the solver children too** (both producers lost at 7.5 h and
-4 h). Running now: the implementer's real-form producer (eps 1e-8, a twelve-hour wall it set), and
+4 h; the implementer's run too, 3 h 51 m, on my untested datum — GNU timeout 9.11 arms `PR_SET_PDEATHSIG` on its child,
+tested on `sleep`: no wrapped job can be detached after the fact on this box; never wrap a multi-hour solve). Running now: the implementer's real-form producer (eps 1e-8, a twelve-hour wall it set), and
 `tools/fplane_sdp_scs.py --p 83 --eps 1e-5` — the chunked, checkpointed SCS driver (no wall; resume = the same command;
 checkpoint `data/fs50/ckpt/scs-p83-real.npz`; log at the job tmp `sdp/s83.log`, one residual line per chunk).
 
