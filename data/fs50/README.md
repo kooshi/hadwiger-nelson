@@ -307,10 +307,16 @@ backend by a *string* keyword, `linear_solver=` (`qdldl`, `mkl`, `cpu_indirect`,
 `gpu_indirect`, `cudss`); passing nothing leaves the wheel's auto choice, which in `build/venv-sdp` is
 a **sequential** MKL Pardiso. Measured on this problem:
 
-| backend | seconds per 500 iterations | per iteration |
-|---|---|---|
-| auto (sequential MKL Pardiso, `build/venv-sdp`) | 1,679 and 1,798 | ≈ 3.5 s |
-| `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | 98–99 | ≈ 0.20 s |
+| backend | seconds per 500 iterations | per iteration | machine conditions |
+|---|---|---|---|
+| auto (sequential MKL Pardiso, `build/venv-sdp`) | 1,679 and 1,798 | ≈ 3.5 s | **contended** — three other semidefinite solves on the box |
+| the same, uncontended | — | ≈ 1.4 s | measured separately once the box was clear |
+| `gpu_indirect` (graphics card A, `build/venv-sdp-gpu`) | 98–99 | ≈ 0.20 s | one other solve |
+
+**The two sequential figures are the same backend under different load**, and the honest ratio for the
+GPU is therefore about **7×**, not the 17× the contended number gives. The 3.5 s is a real measurement
+of a real situation — it is what the run actually cost while four solves shared the memory bandwidth —
+but it is not the backend's cost, and a ratio built from it is a ratio of two different things.
 
 **The backend does not move the answer** — controlled at 11, where `auto`, `qdldl` and `cpu_indirect`
 all give the float bound 29.176799 and `⌊N⌋ = 29`, the exact `N` agreeing to 10⁻⁶ (the duals differ in
