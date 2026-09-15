@@ -1048,9 +1048,15 @@ rebuilt under the cap (expect an hour of wall; do not raise `BATCH`).
 
 **A.1 — α at every member** (per member, an hour of one core; 27 through A0.1's graph exported in the engine's format). For each of
 the eight: `plane-independent` free, then rotation-order seeds over every divisor of `q + 1`, the line quotients, chaining through
-`--start`. **Order: 23 (target 89), 31 (target 161), 27 (target 122) first** — the three members the
+`--start`. **Order: 23 (target 89), 31 (target 161), 27 (targets 122 and 146) first** — the three members the
 bias-corrected growth law leaves live (§S6) — then 43, 47, 59, 67, 79, where the law predicts the search is empty
-and a null costs the milestone nothing. *Pass:* `data/fs53/alpha-q<q>-ge<size>.json` per member, every set re-verified by the product
+and a null costs the milestone nothing. **27 carries a second, sharper target because of A0.4's certificate:** with
+`α ≤ 147` CERTIFIED, five at 27 survives only if `α ∈ {146, 147}`, so a search reaching **146** makes five live at 27
+and a plateau far below it is the strongest evidence against five that a search can give — while 122 remains the
+six-threshold. The two targets are 24 apart and the same run answers both; report the plateau once, against both. Note
+the tension the run resolves: the bias-corrected law predicts `α(27) ≈ 115`, below *both* targets, while the
+certificate allows 147 — a 28 % bracket, which is itself a measurement of how loose the certificate is at 27 (it was
+4 % loose at 11, where `α = 28` against a certified 29.18). *Pass:* `data/fs53/alpha-q<q>-ge<size>.json` per member, every set re-verified by the product
 owner's script from the definition; the record states budget, threads, seed and `halt`; a plateau is reported as "plateau at N
 under budget B", never as α.
 
