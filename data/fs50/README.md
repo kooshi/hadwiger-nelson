@@ -453,9 +453,12 @@ the default and, 500 iterations later, holds a dual that rounds to within 9 of i
 certificates above measure the other half of the same mechanism: `--round-only`'s one iteration from a fresh solver object
 moved the dual residual from 1.64 to 3.19 and cost ≈ 170 in the bound. **So the exact bound is read from a fresh short
 continuation's own dual at its chunk end, never from a long-run iterate and never through a nudge**; the live loop now does
-that (`anytime-loop2.sh` in the session's scratch). Reproducibility: a deterministic rerun of the Pardiso arm from the same
-parent with a dual cache and three cuts is recorded beside this table when it lands (its 10⁻⁸ / 10¹⁰ candidate must reproduce
-1082.915378 to every digit; the other cuts round the identical dual).
+that (`anytime-loop2.sh` in the session's scratch). **Reproduced (07:00):** the Pardiso arm rerun from the same parent (`repro.log`) printed the identical chunk line to every
+digit (pobj −1074.201411, dobj −1074.199749, res_pri 7.39e-1, res_dual 1.64, gap 1.66e-3), its 10⁻⁸ / 10¹⁰ / 10¹⁰ candidate
+reads 1082.915378, and the identical dual (`dual-5500-pardiso-rerun.npz`, so it can be re-rounded without re-solving) rounded
+at twelve cut-and-denominator combinations lands between 1082.915377 and 1082.938331 — every one ⌊N⌋ = 1082
+(`round-repro.jsonl`); its best, `cert-p83-N1082-pardiso-rerun.json` (cut 10⁻⁹, denominators 10¹⁰ / 10⁸), is CERTIFIED with the
+six-colour sentence in 15 s. So the rounding is not an accident of one cut, and the arm's arithmetic is deterministic.
 
 **Reproduce** (each ≈ 30 min on the CPU wheel, ≈ 6 min on the GPU wheel): `tools/fplane_cert_round.py --p 83 --blocks --real
 --chunk 500 --scs-ckpt data/fs50/p83-refusal/iterate-5000-common-parent.npz --linear-solver mkl --eps 1e-8 --max-iters 5500

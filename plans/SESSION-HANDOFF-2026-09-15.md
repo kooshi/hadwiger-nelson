@@ -122,7 +122,7 @@ has the table, the mechanism and the reproduction command). The certificates cam
 arms — a fresh +500 continuation of one checkpoint on each backend, each rounding its own dual — where the live run's
 iterates rounded 200 above the objective (SCS's adaptive scale is not checkpointed) and `--round-only`'s nudge costs ~170.
 
-1. **When the reproduction rerun lands** (job tmp `sdp/repro.log`; the Pardiso arm from `iterate-5000-common-parent.npz`
+1. **DONE 07:00 — the reproduction rerun** (identical chunk line; 1082.915378 reproduced; twelve cuts of the same dual all ⌊N⌋ = 1082; recorded in the README). Originally: (job tmp `sdp/repro.log`; the Pardiso arm from `iterate-5000-common-parent.npz`
    with a dual cache and three cuts): its 10⁻⁸/10¹⁰ candidate must reproduce 1082.915378 to every digit; the other cuts round
    the identical dual. Record the numbers in the README's refusal section.
 2. **The seven-colouring attempt at 83** (`~/source/descent-engine/target/release/plane-colour --p 83 --k 7`, a few
