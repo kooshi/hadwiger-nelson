@@ -617,8 +617,21 @@ measurements are what turn it into one.
 **Q7 — the law has a theorem behind it on exactly half the window, and the residual should split there** (the product
 owner, 2026-09-15; registered before phase A.1 measures anything). `[Krebs2022]`'s rule — `ω(UD(𝔽_q,2)) = 3` iff the
 characteristic is 3 or 3 is a square in `𝔽_q`, else 2 — was **verified here directly rather than cited**, by searching
-for a triangle (a pair of circle points whose difference is again on the circle) at all thirteen planes this milestone
-touches: **13 of 13 agree** with the criterion. It splits the window exactly **four and four**:
+for a triangle (a pair of circle points whose difference is again on the circle) at **21 planes** spanning both
+residue classes mod 4 (`q` = 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83):
+**21 of 21 agree**, and the rule holds uniformly in `q mod 4`, not only at `q ≡ 3`.
+
+**The split itself is prior art, and older than Krebs — state it that way.** `[Vinh2008]` **Theorem 13** classifies the
+triangle-free finite Euclidean graphs (attributing the elementary proof to Vinh–Dung and noting it also follows from the
+association schemes' character tables), and his §3 uses exactly our triangle-free members — *"a prime of form
+`q = 12k ± 5`"*, which for `q ≡ 3 (mod 4)` is `q ≡ 7 (mod 12)`, i.e. 3 a non-square — as **explicit Ramsey graphs**,
+disproving a conjecture of Chvátal and giving `R(3, k) ≥ Ω(k^{4/3})`; his Theorem 12 is the ratio-bound upper bound
+`α ≤ (4 + o(1))·q^{3/2}` already in our bibliography. So *neither* the split *nor* an upper bound on `α` is ours. **What
+Q7 registers is only that the growth law's residual splits along that line** — which Vinh does not consider, since he
+wants `α` small for Ramsey purposes and never asks how large it actually is (the bibliography row records "no exact
+value, no construction, the question not posed").
+
+The split runs exactly **four and four** across the window:
 
 | | members | 3 in `𝔽_q` |
 |---|---|---|
@@ -1022,7 +1035,16 @@ row 68). *Pass per certificate, in this order:* the untouched checker CERTIFIED 
 filed as `data/fs53/cert-q<q>-N<N>.json` with a README row and the `window.md` cell tagged `[cert]`. A member the certificate
 cannot reach is recorded as "N = … at convergence, above the threshold by …" — a fact about the instrument, in the cell.
 
-**B′ — the side row at 17** (an hour). `plane-colour --p 17 --k 6` **before** `--k 5`. *Pass:* records with budgets; a `found`
+**B′ — the side row at 17** (an hour). `plane-colour --p 17 --k 6` **before** `--k 5` — the cheap gate, since a `k = 6`
+null at an hour makes a `k = 5` hit hopeless. **But give `k = 5` a real budget if `k = 6` is found** (the product owner,
+2026-09-15): 17 is **triangle-free** (3 is a non-square mod 17, verified by direct triangle search), its ratio bound is
+96.01 and the bias-corrected growth law predicts **α(17) ≈ 75 against the 58 that five needs — a 29 % margin, the
+largest of any undecided plane in or beside the window**, so a five-colouring at 17 is the likeliest `found` anywhere in
+this milestone. It is also the most valuable: `k = 4` is already UNSAT there, so a verified five-colouring **closes
+`[Moorhouse2010]` Table 6.1's open cell `χ(𝔽₁₇²) ∈ {5, 6, 7}` at exactly 5** — a published open question answered, of
+the kind `CLOSED-QUESTIONS.md` exists for — while a six-colouring alone only narrows it to `{5, 6}`. The calibration
+that makes the prediction credible: at `q = 13`, where `χ = 5` is known, the same corrected law gives α ≈ 39 against the
+34 five needs, and five is indeed attained. *Pass:* records with budgets; a `found`
 re-verified; the README sentence carries both halves (first six-chromatic single-distance graph over any field if six; seals no
 field because 17 ≡ 1 mod 4).
 
