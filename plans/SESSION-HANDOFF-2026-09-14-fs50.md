@@ -53,6 +53,14 @@ corner — rerun the sweep off the cached dual.**
   Gvozdenović–Laurent 2008 as listings (the advisor's "recalled, not read"); memory updated.
 - Kooshi's open decision (card 3): the product as the table (recommended) or the bit at 83 — default the table.
 
+## 3a. 2026-09-15, 02:30 — what happened overnight
+
+The Hermitian-form producers at 83 never converged inside their walls; the real-block value solve (four-hour wall) neither;
+and **killing the `timeout` wrappers to lift the walls killed the solver children too** (both producers lost at 7.5 h and
+4 h). Running now: the implementer's real-form producer (eps 1e-8, a twelve-hour wall it set), and
+`tools/fplane_sdp_scs.py --p 83 --eps 1e-5` — the chunked, checkpointed SCS driver (no wall; resume = the same command;
+checkpoint `data/fs50/ckpt/scs-p83-real.npz`; log at the job tmp `sdp/s83.log`, one residual line per chunk).
+
 ## 4. Traps met today
 
 - `setsid cmd &` records the wrong pid; `timeout` kills without a record — every long tool now writes its record on every
