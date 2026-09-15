@@ -38,7 +38,9 @@ That record's graph — 729 vertices, degree 28, 10,206 edges — is reproduced 
 record and the restored producer agree on the object.
 
 *Decided, for scale:* `χ(UD(𝔽₃,2)) = 3`, `χ(UD(𝔽₇,2)) = 4`, `χ(UD(𝔽₁₁,2)) = 5` `[kernel]`, `χ(UD(𝔽₁₉,2)) = 5` `[solver]`;
-`χ(UD(𝔽₇₁,2)) ≥ 7` `[exact]`; `χ(UD(𝔽₈₃,2)) ≥ 7` `[cert]`, `α(83) ≥ 597` `[search]`, `α(83) ≤ 1076` `[cert]`.
+`χ(UD(𝔽₇₁,2)) ≥ 7` `[exact]`; `χ(UD(𝔽₈₃,2)) ≥ 7` `[cert]`, `α(83) ≥ 597` `[search]`, `α(83) ≤ 1059` `[cert]`
+(`data/fs50/p83-refusal/cert-p83-N1059-polish-134500.json`, CERTIFIED with its exact LDL green; the polish loop is still
+tightening and §S13.3 banks the last one).
 
 **Every `[exact]` cell above is reproducible from the number `q` alone** by a committed script that shares nothing with
 `tools/fplane.py`: `python3 tools/fplane_review_verify.py window` rebuilds each field (at 27 from the modulus
