@@ -253,3 +253,256 @@ proposed or asked about with `χ(K²) = 6`; any designer of fields from a prime.
    exclusion list, the usable-prime table with each plane's status, and the controls the stub names.
 5. **Bibliography, the same day:** listings added for Nechushtan 2002 and Kurz 2009; `[Madore2015]` §5 and `[Moorhouse2010]`
    §8 marked read; `[Vinh2005]` and `[CervantesKrebs2023]` rows extended with the citation walk.
+
+## §S. The subplan (2026-09-15, the planner; the advisor's pass read first, per Kooshi's ordering; the stub's §0–§9 and §PA above are the brief this refines)
+
+*Written for an implementer with zero conversation memory. Every number below is either recomputed here (numpy or exact
+arithmetic, in the planner's scratch) or carries a file path. A search's null is a null at a budget, never a refusal; a
+solver's verdict is untrusted until an independent checker or the kernel holds it; a relaxation's iterate is never a bound.*
+
+### §S0. State on disk at opening
+
+| what | where | trust |
+|---|---|---|
+| the window's exact spectra, thresholds and Legendre symbols | §S1's table; `tools/fplane.py spectrum`, recomputed independently at subplanning | exact character sums, reproduced twice |
+| **the finding side, everything ever asked**: `(23,6)` not found in 300 s (best 1.83 % of edges monochromatic), `(23,7)` 0.60 %, `(31,6)` 1.35 %, `(43,6)` 2.87 %, `(47,6)` 3.52 %, all at 120 s; controls `(23,8)` found in 1.5 s and `(19,5)` in 8.7 s | `data/fs53/README.md` (committed 2026-09-15) | the search's word; nulls at a budget |
+| the refusing side, everything ever asked: `k = 5` **undecided at 4 h** at 23, 31, 43, 47; `k = 5` undecided at 2,328 s at `q = 27`; no rotationally symmetric 5-colouring at 23 | `data/fplane/chi-p{23,31,43,47}-k5.json`, `chi-q27.json`, `equivariant-p23-k5.json` | the solver's word |
+| the upper bounds the project holds: line-periodic 8 / 8 / 8 / 10 / 10 / 12 at 23 / 31 / 43 / 47 / 59 / 67 | `data/fplane/periodic-below-71.json` | verified colourings |
+| **α: 28 exactly at 11** (cadical refuses 29), ≥ 76 at 19, ≥ 87 at 23, ≥ 597 at 83; nothing at 27, 31, 43, 47, 59, 67, 79 | `data/fplane/alpha-p{11,19}.json`, `data/fs50/alpha-p23-ge87.json`, `data/fs50/wo18/` | verified sets |
+| the exact certificates: α(11) ≤ 29, α(23) ≤ 108.546075, **α(83) ≤ 1076.366454** | `data/fs50/cert-p11-N29.json`, `cert-p23-real-N108.json`, `data/fs50/p83-refusal/` | exact rational, re-checked by `tools/fplane_cert_check.py` |
+| the kernel: `add_one_le_chromaticNumber_of_indepNum_le`, `not_colorable_of_mul_lt`, `card_le_mul_of_colorable`; `unitQuadrance`, `finitePlane`, `unitQuadrance.map`, `rotHom`; `addCayleyMap`, `addCayleyColoring`, `colorable_of_addCayleyMap`, `unitQuadrance_colorable_of_quotient`; `Adjoin.lift`; `unpackColor`; the three FS-50 consumers at 83 / 23 / 11 | `LocalGlobal.lean`, `UnitQuadrance.lean`, `Critical.lean:241`, `Instances/IndependenceThreshold.lean`, `Instances/FinitePlane11.lean` | kernel |
+| `tools/fplane.py chi --q 27` is **broken**: `field_q27()` was deleted by commit `a3adc46`; the body survives only at `.claude/worktrees/fs38-stubs-paper/tools/fplane.py:887`, so `data/fplane/chi-q27.json` is unreproducible from `main` | verified at subplanning | a defect, phase A0 |
+| `plane-colour` writes its record **once, at the end** (`crates/plane-colour/src/main.rs:485`), unlike `plane-independent`, whose `--out` is rewritten at every progress tick through a temp file and resumed by `--start` | verified at subplanning | a defect against the PROTECTED checkpointing rule, phase A0 |
+| two live FS-50 GPU jobs (pids 2808409, 2816615) and a polish loop | `plans/SESSION-HANDOFF-2026-09-15.md` §2 | must be stopped at a checkpoint before phase B |
+
+### §S1. Units, and the window — fixed once
+
+`q` is a prime power `≡ 3 (mod 4)` of odd degree over its prime; `UD(𝔽_q, 2)` is the Cayley graph on `𝔽_q²` joining points
+whose difference satisfies `x² + y² = 1` — `n = q²` vertices, degree `d = q + 1` (no isotropic vectors, so the circle is a
+`(q+1)`-point conic). `α` is the independence number, `χ` the chromatic number, `χ_f` the fractional chromatic number.
+Three identities and one bound are used throughout and are not re-derived:
+
+* **vertex-transitive ⟹ `χ_f = n/α` exactly** (Scheinerman–Ullman Prop. 3.1.1), so `χ ≥ ⌈n/α⌉`;
+* **a proper `k`-colouring needs `α ≥ ⌈n/k⌉`** — necessary, never sufficient: a cleared threshold says six is possible
+  *fractionally* and nothing more (the classes must also partition);
+* **the ratio (Hoffman) bound `α ≤ n·|λ_min| / (d + |λ_min|)`**, on exact character sums;
+* **the certificate's reach** is the ratio `N_certified / Hoffman` — *lower is tighter*. Measured three times, and only
+  three: **0.8444 at 11** (29.176808 / 34.55), **0.8238 at 23** (108.546075 / 131.76), **0.8974 at 83**
+  (1076.366454 / 1199.46). It bounds `α` from **above**, so it can **remove** a prime from the window and never place a six.
+
+**The window** — every `q ≡ 3 (mod 4)` of odd degree whose plane can be exactly six-chromatic. Six needs `α ≥ ⌈q²/6⌉`,
+which the ratio bound permits only while `5|λ_min| ≥ q + 1`; with Weil's `|λ_min| ≤ 2√q` that fails from `q = 98` up
+(`t² − 10t + 1 ≤ 0` at `t = √q` gives `q ≤ 97.98`), 71's exact spectrum fails it, and 83 is refused by certificate. **Eight
+members** (the stub's §2 and `CLAUDE.md` G56 list seven: `q = 27 = 3³` was omitted — the advisor's finding, adopted):
+
+| q | n = q² | λ_min | Hoffman α ≤ | spectral floor χ ≥ | six needs α ≥ | **frac6** | five needs α ≥ | **frac5** | (3/q) | (11/q) |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 23 | 529 | −7.9607 | 131.76 | 5 | 89 | **0.6755** | 106 | 0.8045 | + | − |
+| **27** | 729 | **−8 exactly** | 162.00 | 5 | 122 | **0.7531** | 146 | **0.9012** | ramified | − |
+| 31 | 961 | −10.6665 | 240.25 | 5 | 161 | **0.6701** | 193 | 0.8033 | − | − |
+| 43 | 1849 | −11.9622 | 395.23 | 5 | 309 | **0.7818** | 370 | **0.9362** | − | + |
+| 47 | 2209 | −12.8465 | 466.39 | 5 | 369 | **0.7912** | 442 | **0.9477** | + | − |
+| 59 | 3481 | −14.9176 | 693.14 | 6 | 581 | **0.8382** | (refused) | 1.0056 | + | − |
+| 67 | 4489 | −15.0567 | 813.78 | 6 | 749 | **0.9204** | (refused) | 1.1035 | − | − |
+| 79 | 6241 | −17.1019 | 1099.19 | 6 | 1041 | **0.9471** | (refused) | 1.1363 | − | + |
+
+*(Out of the window: 71, floor 7 by its exact spectrum; 83, six refused by certificate 2026-09-15; 11 and 19, decided at 5.)*
+**Every figure recomputed at subplanning** from the exact character sums, including 𝔽₂₇'s, whose integer spectrum is
+`{−8, −5, −2, 1, 4, 7, 10, 28}` (rebuilt from the deleted `field_q27` body in scratch; the circle has 28 points, the graph
+is 28-regular and loopless). `frac6` and `frac5` are the fractions of the ratio bound a certificate must get **below** to
+refuse six and five; compare them against the reach 0.82–0.90 and the whole of phase B's ordering falls out.
+
+**The exclusion for every field this project has built in** (`CLAUDE.md` G56, §0.3): a prime is usable for `F` only if every
+radicand of `F` is a square modulo it; every field here contains `ℚ(√3, √11)`, and at each window member 3 or 11 fails — 3 at
+31, 43, 67, 79; 11 at 23, 47, 59. **At `q = 27` the argument as written does not typecheck** (3 is ramified) and needs one
+extra line, the advisor's: `11 ≡ −1 (mod 3)` and `−1` is a non-square in every `𝔽_q` with `q ≡ 3 (mod 4)`, so `√11 ∉ 𝔽₂₇`.
+The conclusion survives at all eight: **six is arithmetically excluded for every field containing `ℚ(√3, √11)`.**
+
+### §S2. What the arithmetic decided, before any phase was written
+
+**1. The milestone is asymmetric, and the stub's headline is unreachable.** The positive outcome is **one colouring away**:
+a single verified six-colouring of one window plane gives `χ ≤ 6` there, `α ≥ ⌈q²/6⌉` for free, a field with `L(F) = 6`,
+and the conjecture's first prediction of the middle value. The negative outcome needs **eight refusals of six**, and by
+§S1's `frac6` column the certificate can deliver at most two of them (67 and 79). So **§0.4's conditional — "no
+six-chromatic window plane ⟹ χ(ℝ²) ∈ {5, 7}" — cannot be reached by this milestone in the negative direction**, and the
+subplan does not promise it. What the negative direction delivers instead is §S6's scorecard: a per-prime verdict with its
+cause, the α table with its growth law, and the exact digits the certificate does produce.
+
+**2. The certificate is aimed by arithmetic, not by preference** (the advisor's §3.1, recomputed). Against a reach of
+0.82–0.90 it should:
+
+| it should | at | because |
+|---|---|---|
+| **refuse six** (⟹ `χ ≥ 7`, the prime leaves the window) | **79** (frac6 0.9471), **67** (0.9204) | both above the worst reach ever measured (0.8974 at 83) |
+| **refuse five** (⟹ floor 6) | **47** (frac5 0.9477), **43** (0.9362), **27** (0.9012) | all above 0.8974, though 27 by only 0.4 % |
+| **decide nothing about six** | 23 (0.6755), 31 (0.6701), 27 (0.7531), 43 (0.7818), 47 (0.7912) | 10–25 % below the best reach ever measured (0.8238 at 23) |
+| **probably decide nothing at 59** | 59 (frac6 0.8382) | *sharpening the advisor's "coin flip"*: 0.8382 is below two of the three measured reaches, and the reach **worsens with q** (0.8238 at 23 → 0.8974 at 83). Interpolated at 59 it is ≈ 0.87. Registered as Q1 |
+
+So phase B's order is **27, 79, 67, 47, 43, 59** — and never 23 or 31 for six. The stub's "phase A starts with 23 and 47"
+is dropped, with the reason in §S7 D-2.
+
+**3. `q = 27` is the milestone's best target, and the reason is new** (this subplan's opening measurement, §S3). Its
+five-threshold 0.9012 is inside the certificate's measured reach, so the certificate can raise its floor to **six**; and
+its ceiling is now **seven**, measured here. Alone in the window it would then read `χ ∈ {6, 7}` — one bit from the
+milestone's whole question, against `{6, 7, 8}` at 43, `{6, …, 10}` at 47 and 59, and `{5, 6, 7, 8}` at 23 and 31. It is
+also the second-smallest plane in the window (729 vertices) and carries an extra symmetry the prime members do not: the
+Frobenius `x ↦ x³` is a graph automorphism (`(x³)² + (y³)² = (x² + y²)³ = 1`), so `|Aut| ≥ 729 · 28 · 2 · 3 = 122,472`
+against 25,392 at 23 — a larger group means fewer orbits and a cheaper semidefinite program. **The cost is that the whole
+certificate stack is prime-field-only** (§S7 D-5, and a decision card for Kooshi).
+
+**4. The decisive measurement is the independence number, not the chromatic number** (the advisor's reframing, adopted and
+sharpened). At every window prime a six-colouring needs a class of `≥ ⌈q²/6⌉` points, so **the α search is a necessary
+precondition that is cheaper and better instrumented than the colouring search** — and at 23 the arithmetic is brutal: six
+classes of the best set ever found cover `6 × 87 = 522 < 529`, so a six-colouring at 23 *contains* an independent set of at
+least 89, two above a plateau that 16 threads held for 298 of 300 seconds across 22,390 restarts, on the one plane where
+that searcher's plateau has been calibrated against truth (it plateaus at 28 at `p = 11`, and `α(11) = 28`). **The whole
+question at 23 is two vertices wide, and the only instrument that has looked says it falls on the wrong side.** The
+evidence is one-sided (a local search can only raise α) and defeasible in an hour, which is exactly why it goes first.
+
+**5. `χ ≥ 7` is out of reach at 23, 27, 31, 43 and 47 by every instrument this project can name, and that is a measured
+fact, not a budget.** `χ > 6` for a vertex-transitive graph is exactly `χ_f > 6`, which is exactly `α < q²/6`: fractional
+and spectral instruments give nothing the certificate does not. An *integrality* argument would have to come from
+resolution, and FS-50 measured resolution's reach on these graphs — cadical refutes `α ≥ N` only above a residual density
+of ≈ 0.41, at 23 with `N = 106` the easiest undecided cube sits at 0.394, and the monolith is undecided at **every** `N`
+from 110 to 140, above the ratio bound. **So the undecidable primes are undecidable for a reason independent of their χ,**
+and the escape hatch "six lives in the ones we could not decide" is closed in advance (§S6).
+
+**6. What the kernel can hold today, with no prime decided.** Three modules' worth, all provable before phase A returns:
+the packed **Cayley colouring certificate** (a `Bool` the kernel decides, turning a table plus the circle into
+`(finitePlane q).Colorable k` at `(q+1)·q²` checks instead of `q⁴`); the **sixteen conditional consumers** (six- and
+seven-colour thresholds at each of the eight window members, one line each from
+`add_one_le_chromaticNumber_of_indepNum_le`); and the **field half's ring-level reduction** (`χ(unitQuadrance O) ≤ χ(UD(𝔽_q,2))`
+for each candidate field's order `O`, one `Adjoin.lift` each). None waits on a digit (§S9).
+
+### §S3. The opening measurement: the periodic family at `q = 27`, exhausted (run at subplanning, 2026-09-15)
+
+**Why this and not something else.** Over a prime field the additive group `𝔽_p²` has exactly `p + 1` proper nonzero
+subgroups — the lines — so "colourings constant on the cosets of a subgroup" is the `periodic-below-71.json` family, and it
+is already exhausted (8 / 8 / 8 / 10 / 10 / 12 at 23 / 31 / 43 / 47 / 59 / 67, each refused at one colour fewer). Over
+`𝔽₂₇` the additive group is `(ℤ/3)⁶`, whose subgroups are **all** `𝔽₃`-subspaces: 364 of dimension 1, 11,011 of dimension 2,
+33,880 of dimension 3, 11,011 of dimension 4. That family is tens of thousands of times larger than a line family, it is
+searchable exhaustively in minutes, the project's tools cannot express it, and **at `q = 27` the project held no upper
+bound of any kind.** A colouring of the quotient pulls back to the plane whenever the subgroup misses the circle
+(`colorable_of_addCayleyMap`, kernel), so every hit is sound and every miss is one-sided.
+
+**The decision rule, registered in the planner's scratch before the run** (`DECISION-RULE-q27.md`): a six-colouring of any
+quotient ⟹ `χ(UD(𝔽₂₇,2)) ≤ 6` on the spot and 27 becomes the live prime; a five-colouring ⟹ `χ = 5` exactly (with the
+recorded `k = 4` UNSAT) and 27 leaves the window; none ⟹ the first upper bound at 27 plus an exhaustive negative over the
+periodic family. Both outcomes reachable: the family certainly contains colourings at large `k`, and 27's six-threshold
+0.7531 is the friendliest in the window.
+
+**The result.** Every subspace enumerated by reduced row echelon form; a subspace is *usable* when no circle point lies in
+it (else the quotient has a loop); dimensions 3 and 4 decided **exactly** by backtracking, dimensions 1 and 2 by DSATUR at
+40 restarts — **sound on success, a null at a budget on failure**:
+
+| subgroup dim | index | quotient size | subspaces | usable | six-colourable | best `k` found |
+|---|---|---|---|---|---|---|
+| 4 | 9 | 9 | 11,011 | 2,100 | **0 (exact)** | 9 — every usable quotient is `K₉` |
+| 3 | 27 | 27 | 33,880 | 20,216 | **0 (exact)** | **7** (a quotient with a 12-element connection set) |
+| 2 | 81 | 81 | 11,011 | 9,408 | 0 (DSATUR budget) | 8 |
+| 1 | 243 | 243 | 364 | 350 | 0 (DSATUR budget) | 11 |
+
+**Two findings, both new.**
+1. **`χ(UD(𝔽₂₇, 2)) ≤ 7`** — the first upper bound at `q = 27`, and a 27-vertex certificate: the quotient by the subspace
+   spanned by `(1,0,0,0,0,1), (0,1,0,0,2,2), (0,0,1,0,1,1)` (coordinates: the three `𝔽₃`-components of `x` then of `y`) is a
+   27-vertex Cayley graph of degree 12 which is 7-colourable and, by the exact sweep, not 6-colourable. With the recorded
+   `k = 4` UNSAT this brackets **`χ(UD(𝔽₂₇,2)) ∈ {5, 6, 7}`**.
+2. **No six-colouring of `UD(𝔽₂₇, 2)` is constant on the cosets of any subgroup of index 9 or 27**, exhaustively; and none
+   at index 81 or 243 at the DSATUR budget. The finding side at 27 must go non-periodic, exactly as at the prime members.
+
+**Reproduction, and what phase A0 owes it.** The run lived in the planner's scratch. Phase A0 ships it as
+`tools/fplane_periodic_subgroups.py` with a `--self-test` carrying three controls — a positive (the family yields a
+`k`-colouring at `k = 9` at dimension 4, which must be found), a planted subspace containing a circle point (must be
+refused as unusable, never silently coloured), and the `𝔽₂₇` graph's `edges_sha256` asserted against the restored
+`field_q27` — and files `data/fs53/periodic-q27.json`. **Until that lands the two findings are the planner's word.**
+
+### §S4. Derivations that fix the shape
+
+**D1 — the kernel cost of a colouring certificate, and the shape it forces.** `Instances/FinitePlane11.lean` proves
+properness by `decide +kernel` over **all ordered pairs**: `q⁴` adjacency tests, 14,641 at 11 but 279,841 at 23, 3.4 M at
+43 and 4.9 M at 47. The plane is a Cayley graph, so properness is equivalent to `∀ s ∈ circle, ∀ v, col(v) ≠ col(v + s)` —
+`(q+1)·q²` tests: 12,696 at 23, 20,412 at 27, 81,356 at 43, 106,032 at 47, a factor of `q²/(q+1)` cheaper (22× at 23, 42×
+at 47). Mathlib's `addCayleyColoring` (`LocalGlobal.lean:103`) already consumes exactly that hypothesis. Two further rules
+from `CLAUDE.md` § The kernel's cost model shape the rest: a `∀ x ∈ l` under `decide` costs an order of magnitude more than
+the same check as a `Bool` (state it through `List.all` and recover with `List.all_eq_true`), and a numeral at an
+unsimplified type index is paid per numeral (so the table carries **no** `ZMod q` literals — vertices are `ℕ` ids
+`v = x·q + y`, and the colours are packed into one `Nat` at 3 bits each, `unpackColor` from `Critical.lean:241`, the M04
+rule that a `Nat` literal costs ≈ 2.3 KB of olean against ≈ 145 bytes per literal node). **So the certificate is: one
+packed `Nat`, one `List ℕ` of circle ids, one `Bool`, one soundness theorem** (§S9). Its cost is measured, not assumed, in
+phase K1's acceptance.
+
+**D2 — which direction of the circle check is load-bearing.** The `Bool` must verify that the listed circle **covers** the
+true circle (`∀ i < q², quadrance i = 1 → i ∈ list`), not that it equals it. A *missing* circle point drops edges, makes a
+colouring easier and would make an unsound certificate look sound; a *spurious* point only makes the check harder. This is
+`CLAUDE.md` G21's rule ("the finding and refusing sides fail in opposite directions") applied to the kernel: the check is
+written in the direction whose failure mode is unsound, and the negative control is a certificate whose circle list is
+missing one point, which must be refused.
+
+**D3 — what the milestone can and cannot put in the kernel about tightness.** The advisor's sharpening of G54's classifier
+is correct and is used throughout: adjacency eigenvalues are algebraic integers, so `λ_min = −d/(k−1)` rational forces
+`(k−1) ∣ d = q + 1`; for six that is `5 ∣ q + 1`, which **fails at 23, 27, 31, 43, 47 and 67** — six-slackness there is a
+divisibility theorem. It does **not** cover 59 and 79, where `5 ∣ 60` and `5 ∣ 80`: those need the explicit spectrum
+(`λ_min = −14.9176 ≠ −12` and `−17.1019 ≠ −16`, recomputed here). *(The same caveat applies to 19, where `5 ∣ 20`; 19 is
+decided at 5 and is not a window member, but the divisibility filter alone does not exclude it.)* **None of this enters the
+kernel in this milestone**: the project has no spectral infrastructure — no `λ_min`, no Hoffman bound, no eigenvalue of an
+adjacency matrix — and building it is FS-41's whole milestone. The window's slackness stays `[hand]`, stated with its
+one-line proof, and the stub's P4 is scored as a theorem in the plan and nowhere else (§S7 D-6).
+
+**D4 — the field half's kernel content does not wait on a digit, and its `q = 27` case is the expensive one, not the
+cheapest.** For a candidate field `F` the kernel statement available today is at the level of the **ring**: a ring
+homomorphism from the order `O_F` to `𝔽_q` is a graph homomorphism `unitQuadrance O_F →g UD(𝔽_q, 2)` (`unitQuadrance.map`,
+kernel), so `(unitQuadrance O_F).Colorable k` for every `k` the plane admits. At `q = 23` and `F = ℚ(√2, √3, √31)` the hom
+is `Adjoin.lift` three times with the roots `5² = 2`, `7² = 3`, `10² = 8 ≡ 31 (mod 23)` — three `decide`s, an hour. The
+step from the ring to the field (`𝔭`-integrality of unit vectors) is row 57's standing hand gap, marked as such, unchanged
+by this milestone. **At `q = 27` none of this is available**: `Adjoin d K` is `K[√d]`, a *quadratic* adjunction, and the
+field `ℚ(√3, α)` with `α³ = α + 1` needs a cubic one; and `unitQuadrance R` needs a concrete `CommRing` with `DecidableEq`
+that the kernel can compute in, which `𝔽₂₇` has not got here (Mathlib's `GaloisField 3 3` is a quotient type). Both are
+bounded and real: a `Cubic e d K` on the basis `1, t, t²` with `t³ = e + d·t` and its `lift`, plus `𝔽₂₇` as a concrete
+three-component ring with `decide`d axioms — about a day. **The advisor calls `ℚ(√3, α)` "the milestone's cheapest field
+half"; it is the cheapest on paper and the most expensive in the kernel, and the subplan prices it as such.**
+
+**D5 — exact maximum independent set at 23 is declined, with the reason.** The advisor files orbital branching over the
+order-25,392 automorphism group as "the only instrument that could turn §3.4's reading into a proof … a real candidate for
+phase B". It is not one: the target is `α ≤ 88` and the best node bound anybody can evaluate is the same triple-level
+relaxation whose *global* value is 108.55 — a gap of twenty vertices that every node inherits, each node's bound costing
+minutes — while resolution, the other proof system available, is measured undecided at every size from 106 to 140 (§S2.5).
+Priced and declined; it returns to the table only if the relaxation's value at 23 falls below about 95.
+
+**D6 — the finding side's missing instrument: peel-and-colour.** The Rust colourer is a tabu search on the number of
+monochromatic edges over whole colourings; it never uses the independent sets the α search has already found. A
+`k`-colouring of a vertex-transitive graph is naturally built the other way — peel a maximum independent set, recurse on
+the rest — and at 23 the arithmetic makes that the *only* shape available: six classes must average 88.2, the best class
+known is 87, so the first class must be at least 89 and the residual 440 vertices must then carry five classes averaging
+88. So the finding side gets a second instrument: seed `plane-colour` with a verified independent
+set pinned as one colour class and run the α search on the residual. The flag is **filed and not implemented** — FS-50's
+engineer proposed `--pin-class` (D87) and FS-50 dropped the seeded-colouring phase *because at 83 no set near the threshold
+existed to seed with, 52 % of it* — **and that reason is false at 23, where the best set is 87 of the 89 needed, 98 % of
+it.** An instrument dropped for a reason that does not hold here is the cheapest thing on the list: about an hour of Rust
+(§S5 A0.3). Its null is as informative as its hit — a residual whose α falls below `⌈440/5⌉ = 88` closes that branch exactly.
+
+### §S5. Phases — cost, checkpoint, resume, acceptance
+
+**The standing rules for every phase.** No `timeout` wall on any solve, ever (killing the wrapper kills the child: GNU
+timeout arms `PR_SET_PDEATHSIG`). Every launch is `setsid`, writes its pgid to a file in the job's tmp, and is signalled by
+pid or pgid — **never by a command-line match** (`pkill -f` / `pgrep -f` match the shell that runs them and other agents'
+monitors; six recorded incidents). Every long run is launched from a snapshot copy of its script. One heavy job at a time;
+**phase B does not begin until FS-50's two GPU jobs (pids 2808409, 2816615) and its polish loop are stopped at a
+checkpoint** — the relaunch commands are in `plans/SESSION-HANDOFF-2026-09-15.md` §2, and stopping them forfeits nothing but
+the minutes since the last chunk. Every new graph the milestone builds carries an `edges_sha256` in its record.
+
+| phase | what | cost | **if it dies at any instant, the relaunch redoes** | acceptance |
+|---|---|---|---|---|
+| **A0** repair and instrument | **A0.1** restore `field_q27()` in `tools/fplane.py` (body at `.claude/worktrees/fs38-stubs-paper/tools/fplane.py:887`), add a `self-test` row for it, regenerate `data/fplane/chi-q27.json` with an `edges_sha256`. **A0.2** ship §S3's sweep as `tools/fplane_periodic_subgroups.py --self-test` with its three controls and file `data/fs53/periodic-q27.json`. **A0.3** two work orders to `~/source/descent-engine`: give `plane-colour --out` the per-tick rewrite `plane-independent` already has (its record is written once, at the end, `main.rs:485` — **every colour run over ~15 minutes currently violates the PROTECTED checkpointing rule**), and implement `--pin-class` (D6) | half a day, CPU | nothing — each step is minutes and idempotent | `fplane.py self-test` green with the `q = 27` row; `chi-q27.json` regenerated and its graph hash recorded; the periodic tool's three controls each seen to fire; a killed `plane-colour` leaves a readable record |
+| **A** the finding side and the α ladder, all eight members | **A.1 α**, per member: `plane-independent` free; then seeds by rotation order over every divisor of `q+1`, the line quotients, and chaining through `--start` (the recipe that moved 574 → 597 at 83); target `⌈q²/6⌉`. **A.2 the colouring**, per member: `plane-colour --k 6` at a long budget, `--rotation-order/--tau` for the equivariant families, spectral seeding (threshold a random combination of the `λ_min` characters), and D6's peel-and-colour once A0.3 lands. **A.3** `fplane.py equivariant --p q --k 6`. At `q = 27` the Python path is the instrument (729 vertices); the Rust tools are prime-only and are **not** extended for it | 2 days, CPU, no GPU | **α: nothing** — `plane-independent --out` rewrites the record at every progress tick and `--start <that file>` resumes from its best set. **Colouring: everything since launch**, until A0.3 lands; until then each launch is capped at 15 minutes with its seed recorded (one thread at a seed reproduces byte for byte) | every run files a record with its budget, thread count, seed, `edges_sha256` and the word "not found", never "refused"; every null names its cause; each member's α bracket `[found, certified]` written into `data/fs53/window.md` |
+| **B** the certificate side, ordered by §S2.2 | per member, on one GPU: the real-block program (`tools/fplane_sdp_blocks.py --real`), then `tools/fplane_cert_round.py --p q --blocks --real --chunk 500 --linear-solver gpu_indirect --scs-ckpt … --ckpt …`; the exact rational bound rounded **from a fresh short continuation's own dual, never from a long-run iterate** (SCS's adaptive scale is not checkpointed and drifts: 1082 against 1260 from the same solve); then the untouched `tools/fplane_cert_check.py` on the file, a second rounding of the same dual at a different cut and denominator, and `--ldl`. Order: **27** (five), **79**, **67** (six), **47**, **43** (five), **59** (six). 27 needs the prime-power extension of the stack — see §S7 D-5 and card 1 | 1–2 GPU-days for the prime members; +1.5 days of engineering if 27 is included | **the minutes since the last chunk**: the SCS iterate is saved every chunk to `data/fs53/ckpt/scs-q<q>-real.npz` and the rounding log to `data/fs53/ckpt/round-q<q>.jsonl` (**both outside `build/`**, which is scratch another agent may clean — clause 2 of the PROTECTED rule). Resume = the identical command | a checked certificate per member, or an honest "the relaxation's optimum is `V`, above the threshold `T`, so it decides nothing here" with `V` recorded. **Stop rule per member**: stop when the objective has stayed within 0.5 for 3,000 iterations *and* the rounding gap over the objective is below 100; halt and verify the moment a rounded `⌊N⌋` crosses the threshold |
+| **B′** the side row at 17 | `plane-colour --p 17 --k 6` **before** `k = 5` (satisfiable is cheap, unsatisfiable is dear, and the 50-minute null on record at `k = 5` is the expensive question asked first). 289 vertices, degree 16 — note `17 ≡ 1 (mod 4)`, so the circle has `p − 1` points and isotropic vectors exist: it is **not** a window member and none of §S1's identities transfer | an hour | nothing (short runs) | one sentence carrying both halves: a six-colouring at 17 would be **the first six-chromatic single-distance graph over any field**, *and* it seals no number field, because `17 ≡ 1 (mod 4)` is outside `[Madore2015]` Cor. 3.4's hypothesis. Moorhouse's `χ(𝔽₁₇²) ∈ {5,6,7}` cell either way |
+| **C** the field | **C.1, unconditional and now**: the ring-level reduction module for the candidate fields (§S9 K3), `Adjoin.lift` per field, and `tools/fplane_field_design.py` with its controls — `ℚ(√3,√11)` must return `{11, 83, 131, …}`, de Grey's field `{131, 479, …}`, ramified primes counted usable (`[Moorhouse2010]` Lemma 8.2, so `ℚ(√23)` sees 23), and a planted radicand that is a square everywhere refused by name. **C.2, only if a plane is decided `≤ 6`**: the field's `L(F) = 6` verified by Legendre symbols (seconds; a stranger checks it as a table of `±1`), the prediction `χ(F²) = 6` registered with its falsifiers, and the tight/slack consequence written out | C.1 an afternoon; C.2 an afternoon | nothing (all seconds-scale) | the designer's four controls each seen to fire; the reduction module green; C.2 does not start before C.1's controls pass and a digit exists |
+| **D** the setting for a forcer | priced, not promised (the stub's §1(C)): the six-colouring census of a decided plane, its fan gaps, and M63's screen over a base in `F` | open | — | only on Kooshi's word |
+| **E** the record | `data/fs53/window.md` and `README.md` rows; the ledger row with three trust levels per cell; G56 corrected to eight members with the `q = 27` exclusion line; the α growth law registered; FRONTIER re-ranked; `plans/FRONTIER-STUBS.md` updated; every conjecture the milestone surfaces minted as a stub or explicitly declined | half a day | — | `CLAUDE.md` under 200,000 bytes; the close updates § Frontier or the milestone is not closed |
+
+**Kernel work (K1–K4), which runs beside A–C and waits on nothing except K4.** K1 the packed Cayley colouring certificate;
+K2 the sixteen conditional consumers and the `χ = 6` schema; K3 the field half's ring reductions; **K4** the per-member
+instance modules (`Instances/FinitePlane<q>.lean`), which exist only for a member phase A actually decides and are not
+written before. Build **only** through `./scripts/build.sh` (never `lake build`, bare or named); `lake env lean <file>` is
+for iteration and is not the gate. `./scripts/vacuity.sh` green, and the counts in `CLAUDE.md` § The gate updated in the
+same commit that changes them.
