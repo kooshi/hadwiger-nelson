@@ -142,7 +142,41 @@ consequence (a *lower* bound on α bounds χ from below nowhere) — fixed, with
 `|S| < ⌈q²/k⌉` forces the remainder to contain an independent set *larger* than `S` — so at (23, 6), with `⌈529/6⌉ = 89`
 and the best known set 87, WO-20's fixed-class run cannot succeed unless α(23) ≥ 89, which is the open question;
 `plane-independent` targeting 89 leads at 23, and WO-20 gains a note (never a refusal) naming both numbers.
-**In flight:** one Opus implementer on **phase A0** (A0.1 committed as `0892218`), briefed by
+**Findings from the product owner's own pass, all committed and pushed, each with its arithmetic in the commit message
+and its full statement in `plans/STUB-sixth-colour.md` §S6 — read these before phase A or C:**
+1. **Q4, the milestone's headline growth law, under-predicts α at six of six planes where α is known or bounded below**
+   — by 11.5 % at the one non-degenerate exact point (`q = 11`). Bias-corrected at `c = 1.130`, it **nominates 23
+   (+8.5 %) and 31 (+3.3 %)** as the only members whose α plausibly clears the six-threshold, with 27 the nearest miss
+   (−5.5 %) and 43–79 short by 17–42 %, outside the law's own ±15 % band. **§S13.2 A.1's order is fixed to 23, 31, 27
+   first.** α at 31 has never been searched.
+2. **Q7, registered before A.1 measures:** the law's residual should split by clique number. `ω = 3` at 23, 27, 47, 59;
+   triangle-free at 31, 43, 67, 79 — verified by direct triangle search at **21 planes, 21 of 21** agreeing with
+   `[Krebs2022]`'s rule. On the triangle-free half Shearer's bound applies and Q4's law is **asymptotically twice it**;
+   on the other half no such theorem exists. **The split is `[Vinh2008]`'s Theorem 13, not ours** (his §3 uses those
+   members as explicit Ramsey graphs, `R(3,k) ≥ Ω(k^{4/3})`); ours is only the claim about the residual.
+3. **That split IS G56's exclusion split.** `ω = 2` iff `(3/q) = −1` iff no field containing `√3` can use `q`. So the
+   four triangle-free members are exactly the four no √3-field reaches, and **every field this project has built
+   contains √3** — such a field can reach only 23, 27, 47, 59. A field reaching 31, 43, 67 or 79 has no Moser spindle
+   and none of the project's five-forcers. **C.1's designer must report that split per candidate.**
+4. **The certificate's reach is a function of compute, not a fixed property**: 0.8974 → **0.8836** at 83 on the same
+   formulation by a longer solve (and still falling — the polish loop reached N = 1057.46 at 12:25). P3's margin at 27
+   is 1.8 %, not 0.4 %. An out-of-reach member must record its converged `N` and its gap.
+5. **B′ at 17 re-aimed:** 17 is triangle-free, and the corrected law predicts **α ≈ 75 against the 58 five needs — a
+   29 % margin, the largest of any undecided plane**. `k = 4` is already UNSAT there, so a verified five-colouring
+   **closes `[Moorhouse2010]` Table 6.1's open cell `χ(𝔽₁₇²) ∈ {5,6,7}` at exactly 5**. Keep `k = 6` first as the cheap
+   gate; give `k = 5` a real budget if 6 lands. Calibrated at `q = 13`, where χ = 5 is known and the law clears there too.
+6. **Peel-and-colour has an arithmetic precondition** (§S13.2 A0.3, A.2): fixing a class `S` with `|S| < ⌈q²/k⌉` forces
+   the remainder to hold an independent set larger than `S`; at (23, 6) that is 89 against the known 87, so WO-20's
+   fixed-class run there cannot succeed unless α(23) ≥ 89.
+
+**Reviewed and pushed:** A0.1 (`0892218`) and A0.2 (`193ceb0`), scored item by item against §S13.2 by opening the
+artifacts — the review note is `/home/kooshi/.claude/jobs/b1507518/tmp/a0-review/REVIEW-A0.md`. Both green; A0.1's
+third item was scored green with a note that the acceptance line, not the work, was too narrow. The implementer's own
+finding, credited: regenerating `chi-q27.json` with `--k 4` alone would have dropped the `k = 5 unknown` row at
+2,327.6 s that §S0 and `window.md` cite; `carry_prior_rows` now carries it under three guards.
+
+**In flight:** one Opus implementer on **phase A0** (A0.1 and A0.2 committed and reviewed; A0.4, the certificate stack
+over prime powers, still running), briefed by
 `/home/kooshi/.claude/jobs/b1507518/tmp/brief-fs53-A0.md`. **Written and waiting, so the next phase costs no latency:**
 `brief-fs53-A0.3.md` (the Rust engineer, WO-19/WO-20) and `brief-fs53-K1K2.md` (the kernel side) in the same directory.
 **Nothing is pushed above `origin/main` at `184e721`** while an unreviewed implementer commit sits in the stack — the
