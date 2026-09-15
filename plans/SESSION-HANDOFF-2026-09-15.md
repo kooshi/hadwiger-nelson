@@ -119,7 +119,9 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
 **GO (Kooshi, 2026-09-15 ~10:30): FS-53 subplanning is under way — WORKFLOW steps 3a (§PA), Poros planning-only, the planner
 (one subagent at a time), then the modeling passes; PAUSE before implementation (step 7). Every step commits as it lands and this letter's §3 says which step was reached. Progress ledger:** §PA — DONE (committed; `plans/STUB-sixth-colour.md` §PA, with the stub's §0/§2 corrected: 83 is only ≥ 7,
 the window's upper bounds are the line-periodic 8/8/8/10/10/12, five is CDCL-undecided at 23–47, Moorhouse's open cell at 17 is phase A′);
-Poros — next (planning-only, writes `plans/POROS-2026-09-15-fs53-planning.md`); planner — not started; modeling passes — not started.
+Poros — RUNNING since ≈ 11:20 (planning-only, Opus; writes `plans/POROS-2026-09-15-fs53-planning.md` incrementally, uncommitted until
+de Bruijn reads it and commits it by path — if this session was cut off, read that file, commit it, then spawn the planner with the brief
+drafted at job tmp `planner-brief-fs53.md`); planner — not started; modeling passes — not started (de Bruijn runs them, fresh Skill invocations).
 
 **FS-50 is closed** (ledger row 68, G56, `plans/STUB-independence-threshold.md` §Close, committed): six colours refused at 83
 by two independent exact certificates, α(UD(𝔽₈₃,2)) ≤ 1082 (`data/fs50/p83-refusal/`; the README's "refusal of six" section
