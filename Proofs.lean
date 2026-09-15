@@ -18,6 +18,7 @@ import Proofs.HadwigerNelson.Gadget
 import Proofs.HadwigerNelson.Assembly
 import Proofs.HadwigerNelson.AssemblyDiagnose
 import Proofs.HadwigerNelson.Critical
+import Proofs.HadwigerNelson.CayleyCertificate
 import Proofs.HadwigerNelson.CriticalDiagnose
 import Proofs.HadwigerNelson.CriticalSet
 import Proofs.HadwigerNelson.Absorb
@@ -128,6 +129,7 @@ import Proofs.HadwigerNelson.TwoColourResidue
 import Proofs.HadwigerNelson.SquareClass
 import Proofs.HadwigerNelson.Instances.CompositumFive
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
+import Proofs.HadwigerNelson.Instances.SixthColour
 
 /-!
 # Proofs

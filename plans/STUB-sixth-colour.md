@@ -584,3 +584,72 @@ is closed before anyone reaches for it.
 | the advisor's card 3 (does the window have eight members?) | **yes, adopted** — §S1, with the `q = 27` exclusion line |
 | the advisor's card 4 (where should the GPU-day go?) | **adopted and extended**: reordered, and 27 added at the front, which the card did not have |
 | the advisor's card 5 (the digits or the growth law?) | **to Kooshi** (§S10 card 5), with the planner's recommendation |
+
+### §S9. The skeleton — every statement the milestone will prove that does not wait on a digit
+
+Two modules, added to the flat import surface `Proofs.lean` and to `ARCHITECTURE.md` § 3
+(`tools/check_architecture.py` reads PASS). Both **elaborate** — checked with `lake env lean`, which
+builds nothing; **the real gate is `./scripts/build.sh`**, deliberately not run here because FS-50's two
+GPU solves were live and this machine runs one heavy job at a time. Running it is the implementer's
+first act.
+
+**`Proofs/HadwigerNelson/CayleyCertificate.lean` — K1, the packed Cayley colouring certificate.**
+Vertex identifiers (`toId`, `ofId`, `addId`, `quadId`), the certificate `CayleyCert.Cert` (modulus,
+colour count, field width, one packed `Nat`, one circle list), the three `Bool`s (`covers`, `proper`,
+`check`), the colouring `Cert.colouring` and the soundness theorem `Cert.sound`. Five identifier lemmas
+and `sound` are the `sorry` leaves. **The spec is validated where it is cheap**, and this is not
+decoration: four `#guard`s pin the identifier arithmetic at `q = 11`, and `cert3` — the plane over `𝔽₃`,
+circle `[1, 2, 3, 6]`, the colouring `(x, y) ↦ x + y` packed two bits per vertex into the single number
+`74340` — **passes `check` in the elaborator**, so the format is exhibited end to end before anything
+large is attempted and `sound`'s hypothesis has an inhabitant in the same file. Two reds sit beside it:
+the same certificate with an **empty circle list** must be refused (the covering direction doing its
+job), and with **one bit of the table flipped** must be refused (properness doing its).
+
+**`Proofs/HadwigerNelson/Instances/SixthColour.lean` — K2 and K3.** The equality schema
+`chromaticNumber_eq_succ_of_colorable_of_indepNum_le` (the milestone's headline shape: a verified
+colouring is the upper half, a certified independence bound the lower, and neither alone is a digit);
+the seven prime members' six-colour thresholds and the three remaining five-colour ones, with their
+vertex counts — ten `norm_num` facts and ten one-line consequences of
+`add_one_le_chromaticNumber_of_indepNum_le`, all proved, no leaves; and the field half at the level of
+the ring — the order `O23 = ℤ[√2, √3, √31]`, its residue homomorphism `O23.res` (`√2 ↦ 5`, `√3 ↦ 7`,
+`√31 ↦ 10`, three `decide`s) and `colorable_unitQuadrance_O23`. The schema is the module's one leaf.
+
+**The `sorry` inventory — seven leaves, every one a tracked obligation of this milestone, none a
+conjecture.** Nothing below is a statement that might be false: each is a lemma whose proof is routine
+and whose route is named, and the milestone's *open questions* appear only as **hypotheses** of
+conditional theorems, never as `sorry`d conclusions.
+
+| leaf | route |
+|---|---|
+| `toId_lt`, `ofId_toId`, `toId_ofId` | `ZMod.val_lt`, `ZMod.val_cast_of_lt`, `Nat.div_add_mod`; `Nat.lt_of_div_lt_div` for the bound |
+| `toId_add` | `ZMod.val_add` and `Nat.add_mul_mod_self`; the one place identifier arithmetic meets `ZMod` arithmetic, and the only lemma `sound` needs |
+| `mem_unitCircle_iff` | `ZMod.natCast_self_eq_zero` and `ZMod.val_cast_of_lt`, with `Fact (1 < q)` giving `(1 : ZMod q).val = 1` |
+| `Cert.sound` | `List.all_eq_true` twice to recover the per-element forms, `mem_unitCircle_iff` and `toId_add` to move to identifiers, then `addCayleyColoring` and `unitQuadrance_eq_addCayley` |
+| `chromaticNumber_eq_succ_of_colorable_of_indepNum_le` | `le_antisymm (hcol.chromaticNumber_le)` against `add_one_le_chromaticNumber_of_indepNum_le hα hlt`, cast in `ℕ∞`. Two lines; **left open here because implementation is paused, not because it is hard** |
+
+**What is deliberately absent.**
+* **No statement about `q = 27`.** `finitePlane q` is `unitQuadrance (ZMod q)`, the plane over the *ring*
+  `ℤ/q`; at 27 that is not the finite Euclidean plane, and `ℤ/27` is not `𝔽₂₇`. Instantiating any
+  theorem here at 27 and reading it as a statement about the window's eighth member would be exactly the
+  characteristic failure this project guards against — proving the wrong theorem efficiently. Both
+  module docstrings say so in those words, and the plane over `𝔽₂₇` waits on §S7 D-8's concrete field.
+* **No `Instances/FinitePlane<q>.lean`** (K4). Those exist only for a member phase A actually decides,
+  and their data does not exist. A `sorry`d `(finitePlane 23).Colorable 6` would be a conjecture wearing
+  a skeleton's clothes.
+* **Nothing spectral** (§S7 D-6), and **no five-refusal by resolution** (§S8).
+
+**Gate notes for the implementer.** The seven leaves are FS-53's tracked `sorry`s and the milestone's
+close must show zero; `./scripts/vacuity.sh`'s counts in `CLAUDE.md` § The gate move when these modules
+land and must be re-recorded in the same commit; the threshold theorems assume a `≤` between naturals,
+so they create no carrier site, the schema is parametric (`GENERIC`), and `Cert.sound`'s structure
+hypothesis has `cert3` as its named inhabitant in the same file.
+
+### §S10. What is being put to Kooshi
+
+The five decision cards are in the planner's report, in the house format. In one line each, with the
+planner's recommendation: **(1)** extend the certificate stack from prime fields to prime powers so that
+`q = 27` can be certified — *yes*; **(2)** the two `descent-engine` work orders (a per-tick record for the
+colourer, `--pin-class`) — *yes*; **(3)** how long the finding side runs before a member is closed as
+undecided — *four CPU-hours across three instruments*; **(4)** whether phase D is priced or promised —
+*priced*; **(5)** whether the milestone's durable product is the digits or the growth law of α — *the
+law, with the digits as its corollary*.
