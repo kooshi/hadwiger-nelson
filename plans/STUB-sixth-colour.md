@@ -24,8 +24,8 @@ given the 8/3 forcer (G55).*
    UD(𝔽_p, 2) need an independent set of ⌈p²/6⌉, and the ratio bound permits that only while 5|λ_min| ≥ p + 1; with Weil's
    |λ_min| ≤ 2√p that fails from p = 103, and five colours are refused from 59 up (G44). So **a plane with χ exactly 6 can
    live only at p ∈ {23, 31, 43, 47, 59, 67, 79}** — 71's exact spectrum already puts it at ≥ 7 (§2) — and 83 was the last
-   prime where six was spectrally possible at all. We have decided 11 and 19 (five) and 83 (seven). We have decided none of
-   the seven.
+   prime where six was spectrally possible at all. We have decided 11 (five, kernel), 19 (five, on the solver's word) and 83 (≥ 7 by certificate; a seven-colouring was sought and not
+   found, so χ(83) ∈ {7, 8, …}). We have decided none of the seven.
 3. **The hunt's fields cannot see the window, by quadratic reciprocity.** Every field this project has built in contains
    ℚ(√3, √11) (the Moser spindle and every known five-forcer live there), and a prime is usable for such a field only if 3
    and 11 are both squares modulo it. At every window prime one of them is not (§2's table: 3 fails at 31, 43, 67, 79; 11 at
@@ -68,20 +68,23 @@ Kooshi says so.
 
 | p | n = p² | λ_min | ratio bound α ≤ | spectral floor χ ≥ | five needs α ≥ | six needs α ≥ | (3/p) | (11/p) | usable for F ⊇ ℚ(√3,√11)? | known |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 23 | 529 | −7.9607 | 131.76 | 5 | 106 | 89 | + | − | no | α ∈ [87, 108]; SDP 108.546; no rotationally symmetric 5-colouring; χ ∈ {5, 6} (six needs α ≥ 89, two above the set found) |
-| 31 | 961 | −10.6665 | 240.25 | 5 (4.0001) | 193 | 161 | − | − | no | untouched |
-| 43 | 1849 | −11.9622 | 395.23 | 5 | 370 | 309 | − | + | no | untouched |
-| 47 | 2209 | −12.8465 | 466.39 | 5 | 442 | 369 | + | − | no | untouched |
-| 59 | 3481 | −14.9176 | 693.14 | 6 | 697 (refused) | 581 | + | − | no | five refused by spectrum; χ ∈ {6, 7, …} |
-| 67 | 4489 | −15.0567 | 813.78 | 6 | 898 (refused) | 749 | − | − | no | same |
-| 71 | 5041 | −14.1728 | 829.09 | **7** | — | 841 (refused) | + | − | no | **six refused by spectrum; out of the window** |
+| 23 | 529 | −7.9607 | 131.76 | 5 | 106 | 89 | + | − | no | α ∈ [87, 108]; SDP 108.546; five CDCL-undecided (4 h, M58) and no rotationally symmetric 5-colouring; line-periodic colourings need 8 (χ ≤ 8); χ ∈ {5, 6, 7, 8} (six needs α ≥ 89, two above the set found) |
+| 31 | 961 | −10.6665 | 240.25 | 5 (4.0001) | 193 | 161 | − | − | no | five CDCL-undecided (4 h, M58); line-periodic colourings need 8 (χ ≤ 8); no SDP yet |
+| 43 | 1849 | −11.9622 | 395.23 | 5 | 370 | 309 | − | + | no | five CDCL-undecided (4 h, M58); line-periodic 8 (χ ≤ 8); no SDP yet |
+| 47 | 2209 | −12.8465 | 466.39 | 5 | 442 | 369 | + | − | no | five CDCL-undecided (4 h, M58); line-periodic 10 (χ ≤ 10); no SDP yet |
+| 59 | 3481 | −14.9176 | 693.14 | 6 | 697 (refused) | 581 | + | − | no | five refused by spectrum; line-periodic 10 (χ ≤ 10); χ ∈ {6, …, 10} |
+| 67 | 4489 | −15.0567 | 813.78 | 6 | 898 (refused) | 749 | − | − | no | five refused by spectrum; line-periodic 12 (χ ≤ 12); χ ∈ {6, …, 12} |
+| 71 | 5041 | −14.1728 | 829.09 | **7** | — | 841 (refused) | + | − | no | **six refused by spectrum; out of the window**; line-periodic 12 |
 | 79 | 6241 | −17.1019 | 1099.19 | 6 | — | 1041 | − | + | no | χ ∈ {6, 7, …} |
 | 83 | 6889 | −17.7087 | 1199.46 | 6 | — | 1149 | + | + | yes (11 and 83 are K's only usable primes below 131) | **χ ≥ 7, exact certificate α ≤ 1082 (2026-09-15)** |
 
 Six-tightness (λ_min = −(p+1)/5) holds at none of them (−4.8, −6.4, −8.8, −9.6, −12, −13.6, −16 against the column above):
-every window plane is slack at six. The heuristic that χ sits one above the spectral floor, true at both decided primes
-(11: floor 4, χ 5; 83: floor 6, χ 7), predicts **six at 23, 31, 43, 47 and seven at 59, 67, 79** — a reading with two data
-points, to be scored by phase A.
+every window plane is slack at six. The heuristic that χ sits one above the spectral floor — true at the three decided primes,
+7 (floor 3, χ 4), 11 (floor 4, χ 5) and 19 (floor 4, χ 5 on the solver's word), and consistent with 83 (floor 6, χ ≥ 7, seven
+not found) — predicts **six at 23, 31, 43, 47 and seven at 59, 67, 79**: a reading with three data points, to be scored by
+phase A. The upper bounds the project holds in the window are line-periodic colourings (`data/fplane/periodic-below-71.json`:
+8 at 23, 31, 43; 10 at 47, 59; 12 at 67, 71), each refused at one colour fewer by the solver, so **a six-colouring of any window
+plane, if it exists, is not constant on the cosets of any line** (§PA item 3).
 
 ## §3 Candidate fields (the designer's first outputs, exact Legendre symbols, 2026-09-15)
 
@@ -157,7 +160,7 @@ each checked; `tools/fplane_field_design.py` (the designer, with its controls); 
 decided prime; the field's upper bound module; the registered prediction in the plan; ledger rows and the grokking;
 `plans/FRONTIER-STUBS.md` re-ranked.
 
-## §8 Prior art to search at the subplan (§PA), in the disciplines' words
+## §8 Prior art searched at the subplan — the result is §PA below (run 2026-09-15); the search list as minted:
 
 Finite Euclidean graphs / unit-distance graphs over finite fields: chromatic and independence numbers — `[Vinh2006]`,
 `[Vinh2008]` (Thm 12, the ratio bound), `[Krebs2022]`, `[SchneiderSilva2013]`, `[LorenzZimmermann2023]`, Medrano–Myers–
@@ -173,3 +176,80 @@ graph of Moorhouse's draft and of Vinh 2008.
 Phase A a GPU-day; B hours (certificate) to days (SAT) per prime; C a day; D open. **Bearing on χ ≥ 6: the highest of any
 stub in either outcome** — a six-chromatic plane names the field a six-forcer must live in and the value the conjecture
 predicts there; no six-chromatic plane retires six for every number field under the conjecture and points the hunt at seven.
+
+## §PA. The prior-art gate (run 2026-09-15, before the subplan; WORKFLOW step 3a; about an hour; extends FS-50's gate, `plans/FS50-prior-art.md`, whose independence-side negatives stand and are not repeated)
+
+**In one sentence:** no finite Euclidean plane is known to be six-chromatic and no window prime has been decided or even
+bracketed in print; the only bracketed cells anywhere are Moorhouse's `χ(𝔽₁₃²) ∈ {5, 6}` (this project measured 5, M58) and
+`χ(𝔽₁₇²) ∈ {5, 6, 7}` (five unfinished here at 50 min, M58) — primes ≡ 1 (mod 4), which seal no field; the field half's
+existence step is elementary and its bridge to χ(ℝ²) is `[Madore2015]` ¶5.4; six is reached by every neighbouring problem
+(3-space, two distances, odd distances) and never by one distance in a plane.
+
+### PA.1 The names searched (the gate's questions)
+
+1. **The object in the disciplines' words.** (i) *the chromatic number of the finite Euclidean graph `E_q(2, 1)` / unit-quadrance
+   graph `D_q`* (`[Vinh2005]`, `[MMST1998]`, `[BannaiShimabukuroTanaka2009]`); (ii) *the generalized Paley graph `GP(p², p−1)`*
+   (Lim–Praeger; `[SchneiderSilva2013]`; Broere–Döman–Ridley); (iii) *chromatic numbers of Cayley graphs of abelian groups*
+   (`[CervantesKrebs2023]` and its two follow-ups); (iv) *unit-distance / distance graphs over finite fields*; (v) *a 6-chromatic
+   unit-distance graph* anywhere — plane, space, field; (vi) the field half: *Hadwiger–Nelson over number fields / quadratic
+   fields*, *prescribed splitting of primes* (Chebotarev). Strings: "chromatic number finite Euclidean graph exact small q",
+   "generalized Paley graph chromatic number GP(p², p−1) norm-one subgroup", "Lorenz Zimmermann unit-quadrance chromatic",
+   "Bannai Shimabukuro Tanaka finite Euclidean graphs Ramanujan Kloosterman", "6-chromatic OR six-chromatic unit distance graph
+   field plane", "Hadwiger–Nelson number field quadratic field chromatic number exactly 6", "Kurz integral point sets finite
+   fields unit distance chromatic", "Chromatic numbers of Cayley graphs of abelian groups matrix method unit-quadrance".
+2. **Two disciplines.** Spectral finite geometry / algebraic graph theory (the finite-field lineage and the Cayley-graph
+   literature) against algebraic number theory (splitting in multiquadratic fields; Madore's Chebotarev argument). The
+   disciplines still do not cite each other: `[Moorhouse2010]` is indexed by no citation database (Semantic Scholar has no
+   record of it; reached only through `[Madore2015]` and `[Krebs2022]`), and `[Vinh2005]`'s five citing works are all on the
+   finite-field side.
+3. **The question, not only the method.** "Is any finite plane `UD(𝔽_q, 2)` exactly six-chromatic?" and "is there a number
+   field `K` with `χ(K²) = 6`?" — neither is posed anywhere found. The nearest posed items are Moorhouse's two bracketed cells
+   (Table 6.1) and `[Fischer1990]` §1's question for an algebraic criterion.
+4. **Outside arXiv:** Moorhouse's draft (personal page); Kurz's Australasian J. Combin. papers; the Polymath16 wiki (read in
+   full for FS-23 — it holds no finite-plane chromatic number).
+5. **Citation graphs, two databases, identifiers compared.** `[Madore2015]`: Semantic Scholar 4 citing works via
+   arXiv:1509.07023 (*Chromatic number of spacetime* 2023; `[Krebs2022]`; `[Heule2018]`'s new proof; a thesis on
+   computer-aided extremal unit-distance graphs and quantum contextuality) against OpenAlex `W2216410758` with 1 — none
+   computes a finite plane. `[Vinh2005]`: Semantic Scholar 5 via arXiv:math/0510092 (Kurz's integral point sets 2007/2008;
+   `[CervantesKrebs2023]`; `[Krebs2022]`; a 2024 paper on maximal circular point sets over arbitrary fields with a cryptographic
+   application) against OpenAlex `W1590777427` with 2 — none. `[Krebs2022]` (doi 10.1007/s10801-022-01157-8): 2, both
+   `[LorenzZimmermann2023]`'s, held. `[Vinh2008]`'s were walked for FS-50.
+6. **Read, not characterised from abstracts:** `[Moorhouse2010]` §6 and §8 (the tables and the quadratic-field theorem);
+   `[Madore2015]` §5 (the whole section); `[CervantesKrebs2023]` Example 2.13 and its Vinh citation; Vinh 2005 from the held
+   bibliography row.
+
+### PA.2 What was found, with verdicts
+
+| key | what it holds | verdict for FS-53 |
+|---|---|---|
+| `[Moorhouse2010]` §6 | **Table 6.1**, `χ(𝔽_q²)` for `q ≤ 17`: 2, 3, 2, 3, 4, 2, 3, 5 at `q = 2, 3, 4, 5, 7, 8, 9, 11`; **`{5, 6}` at 13; 2 at 16; `{5, 6, 7}` at 17**; Lemma 6.2 (`q ≡ ±1 mod 12 ⟹ χ ≥ 4`, by a chain of rhombi); the guess `χ → ∞` (proved by `[Vinh2005]`, whom he does not cite) | the only bracketed finite-plane cells in print. Both primes are ≡ 1 (mod 4): −1 is a square, unit vectors need not be 𝔭-integral, `[Madore2015]` Cor. 3.4's hypothesis fails, **no field is sealed through them**. They bear on "is any finite Euclidean plane six-chromatic?" and on nothing else; 13 reads 5 here (M58: `k = 4` UNSAT, `k = 5` SAT, 3.8 s) and **17 is open — `k = 4` UNSAT, `k = 5` unfinished at 50 min** (M58's log, under `build/`, gone); 289 vertices, degree 16, a side row |
+| `[Moorhouse2010]` §8 | **Theorem 8.1:** for real quadratic `ℚ(√d)`, `χ ≤ 4` unless `d ≡ 47, 59, 83 (mod 84)` — the sieve at 2, 3 and 7 (11 unused there); Lemma 8.2 counts a **ramified** `p` as usable (`d ≡ 0 mod p`); Theorem 8.6 (`√p ∈ K`, `p ≡ 3 mod 4 ⟹ χ ≥ 3`, an odd cycle from Pell) | the quadratic case of the field half, from the field to its bound; the three exceptional classes are where the quadratic fields' `L` is 5 or more; our designer runs the other way (from the prime to a field) and must count ramified primes as usable (`tools/fplane.py usable` — a control for phase C: `ℚ(√23)` sees 23) |
+| `[Vinh2005]` (held row) | `√q(1/2 + o(1)) ≤ χ(𝔽_q²) ≤ q(1/2 + o(1))`, the upper bound constructive (pairs of parallel lines of non-square slope, `(p+1)/2` colours); the only exact value `χ(𝔽₇²) = 4` | at 23 his colouring uses 12 where our line-periodic one uses 8; nothing at the window; the divergence kills Madore's Prop. 5.3 route (next row) |
+| `[Madore2015]` §5 (read 2026-09-15) | **¶5.4:** `χ(E^d)` is the same for every real closed `E` (Tarski), so `χ(ℝ^d) = χ(ℚ_r-alg^d)`, and "if `χ(ℝ²) = 7` then this fact is provable"; **Prop. 5.3:** a finite graph drawn in `ℂ^d` maps into `𝔽_p^d` for a positive-density set of degree-one primes (Chebotarev; the finitely many denominators avoided; every residue class mod 4), so `χ(ℝ^d) ≤ lim sup_p χ(𝔽_p^d)` | **FS-39's bridge is prior art**: with de Bruijn–Erdős, `χ(ℝ²) = sup_K χ(K²)` over number fields is a two-line corollary of ¶5.4, and §0.4 rests on published theorems. The upper route is dead (`[Vinh2005]`'s floor diverges), and the plane → field direction runs only through Cor. 3.4 (`q ≡ 3 mod 4`): a six-chromatic plane at 13 or 17 says nothing about any field |
+| `[CervantesKrebs2023]` and follow-ups | Heuberger-matrix calculus for abelian Cayley graphs; Example 2.13 computes `χ` of the infinite unit-distance Cayley graph in ℝ² generated by `1, ω, ω², ω³` with `ω = (5 + i√39)/8`; the follow-ups classify small dimension and rank | our planes are rank-2 Cayley graphs on `ℤ_p²` of degree `p + 1`, outside the classified cases; **no finite plane computed**; the row-collapse homomorphism is M61's periodic quotient (bib row) |
+| generalized Paley graphs (Broere–Döman–Ridley 1988; `[SchneiderSilva2013]`; Lim–Praeger) | `χ = ω = q` for `GP(q², d)` with `d ∣ q + 1`; the `χ = ω` cases classified | our `GP(p², p−1)` has `p − 1 ∤ p + 1` for `p > 3` and `ω ∈ {2, 3} ≪ χ`; the GP chromatic literature covers the `χ = ω` cases only — **nothing** |
+| `[BannaiShimabukuroTanaka2009]` (held listing) | `E_q(n, Q, a)` asymptotically Ramanujan; spectra as (twisted) Kloosterman sums | the spectra's prior art with `[MMST1998]`; our window spectra are exact computations, not cited values; no colourings |
+| Kurz, *Integral point sets over finite fields* (AJC 43 (2009); listing) and *Maximal integral point sets in affine planes over finite fields* (arXiv:0804.1285) | the **integral-distance** graph on `𝔽_q^m` (squared distance a square), strongly regular in even dimension | a different graph; no chromatic numbers of unit-quadrance graphs |
+| six by the neighbours: Nechushtan 2002 (`χ(ℝ³) ≥ 6`, listing), `[Parts2020b]` and `[ExooIsmailescu2019]` (two distances, 16 vertices), `[PartsOdd2022]` (odd distances) | each relaxation of "one distance in the plane" reaches six with a finite graph | **aims the milestone**: six is not intrinsically out of reach for distance graphs — it is the value every neighbour attains — and the finite planes are the one setting where "one distance" is asked exactly and decided |
+| the existence half of the field design (standard: Dirichlet + CRT; Chebotarev for density) | for real multiquadratic `ℚ(√d₁, …, √d_k)`, `p ≡ 3 (mod 4)` is usable iff every `(dᵢ/p) ∈ {0, 1}` (a ramified `dᵢ` with the others squares); a consistent finite list of congruences on the `dᵢ` modulo `3, 7, 11, 19, 23, 31, 43, 47` (every usable prime ≥ 59 already refuses five) has squarefree solutions by Dirichlet, and the usable set is infinite of density `2^{−(k+1)}` | **the design's content is the exclusion list and the table, never existence**; no paper designs a field from a target prime (`[Moorhouse2010]` §8 and `[Fischer1990]` §1 go from the field to its bound) |
+
+**Not found under any name tried:** a chromatic number of any finite Euclidean plane at `p ≡ 3 (mod 4)` above 11 other than
+ours; any statement bracketing a window prime; any six-chromatic single-distance graph over any field; any number field
+proposed or asked about with `χ(K²) = 6`; any designer of fields from a prime.
+
+### PA.3 What the gate aims (handed to the advisor and the planner)
+
+1. **Phase A′, a side row:** decide `χ(𝔽₁₇²)` (Moorhouse's open cell; 289 vertices; five unfinished at 50 min on one CDCL —
+   the cube-and-conquer or the SDP at `(17, 5)`: five needs `α ≥ 58`), and record 13 as decided (5). If 17 is six, it is the
+   first six-chromatic unit-quadrance graph ever exhibited, and it seals nothing — say both.
+2. **Both directions are open at every window prime, and any six-colouring is non-periodic.** The upper bounds are ours
+   (line-periodic: 8, 8, 8, 10, 10, 12 at 23–67, each one colour above the solver's refusal of the circulant), five is
+   CDCL-undecided at 23–47 (4 h, M58), and the SDP has run only at 23. The planner's phase A therefore has a finding side
+   (six- and five-colourings by the Rust colourer, whole plane and quotients — FS-40's instrument, which failed at 83 for
+   seven and eight) as well as the certificate side, and the reading "+1 over the floor" has three data points (7, 11, 19).
+3. **FS-39's bridge is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős** — state §0.4 with the attribution; the kernel form stays
+   FS-39's.
+4. **The designer counts ramified primes as usable** (Moorhouse Lemma 8.2) and needs no existence theorem: its output is the
+   exclusion list, the usable-prime table with each plane's status, and the controls the stub names.
+5. **Bibliography, the same day:** listings added for Nechushtan 2002 and Kurz 2009; `[Madore2015]` §5 and `[Moorhouse2010]`
+   §8 marked read; `[Vinh2005]` and `[CervantesKrebs2023]` rows extended with the citation walk.
