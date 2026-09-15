@@ -14,27 +14,27 @@
    "k": 2,
    "status": "unsat",
    "seconds": 0.0,
-   "carried_from": "chi-q27.json",
-   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
+   "carried_from": "chi-q27.json (the previous version of this record)",
+   "carried_note": "a row of the PREVIOUS VERSION OF THIS RECORD (the tool reads the file it is about to rewrite), not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   },
   {
    "k": 3,
    "status": "unsat",
    "seconds": 0.0,
-   "carried_from": "chi-q27.json",
-   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
+   "carried_from": "chi-q27.json (the previous version of this record)",
+   "carried_note": "a row of the PREVIOUS VERSION OF THIS RECORD (the tool reads the file it is about to rewrite), not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   },
   {
    "k": 4,
    "status": "unsat",
-   "seconds": 6.8
+   "seconds": 7.0
   },
   {
    "k": 5,
    "status": "unknown",
    "seconds": 2327.6,
-   "carried_from": "chi-q27.json",
-   "carried_note": "a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
+   "carried_from": "chi-q27.json (the previous version of this record)",
+   "carried_note": "a row of the PREVIOUS VERSION OF THIS RECORD (the tool reads the file it is about to rewrite), not re-run here; its conflict budget is whatever that run used and is not recorded per row"
   }
  ],
  "chi": null,

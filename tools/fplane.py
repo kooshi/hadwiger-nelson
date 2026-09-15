@@ -126,9 +126,10 @@ def carry_prior_rows(out, path):
     if legacy:
         print(f"  [carry] {path.name} predates edges_sha256; matched structurally instead (q, modulus, n, edges, degree all agree), which is enough for colourability rows")
     asked = {r["k"] for r in out["rows"]}
-    note = ("a row of the previous record, not re-run here; its conflict budget is whatever that run used and is not recorded per row"
+    note = ("a row of the PREVIOUS VERSION OF THIS RECORD (the tool reads the file it is about to rewrite), not re-run here; "
+            "its conflict budget is whatever that run used and is not recorded per row"
             + ("; that record predates edges_sha256, so the graphs were matched structurally (q, modulus, n, edges, degree), not by hash" if legacy else ""))
-    carried = [dict(r, carried_from=path.name, carried_note=note)
+    carried = [dict(r, carried_from=f"{path.name} (the previous version of this record)", carried_note=note)
                for r in prev.get("rows", []) if r["k"] not in asked and r["status"] != "sat"]
     for r in carried:
         print(f"  [carry] k={r['k']} {r['status'].upper()} at {r['seconds']}s carried from {path.name} (not re-run)")
