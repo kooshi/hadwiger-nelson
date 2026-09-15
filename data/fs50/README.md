@@ -429,6 +429,14 @@ recorded as a known unexploited strengthening, not built: certifying them touche
 construction (steps 1–3 of the derivation assume one row per orbit pointing at one target), the wire
 format's row list, and both existing certificates, for no measured gain.
 
+**The checker changed once, 2026-09-15 05:05, under a recorded decision** (`plans/STUB-independence-threshold.md` §M3):
+`--against` decides the display's affordability (`p ≤ 29`) from `p` alone before any quadratic work, re-verifies the set's
+independence straight from coordinates at every `p`, treats a bad or missing set as a fault in the SET (exit 2, `THE --against
+SET IS NOT USABLE`) and never as a refusal of the certificate, and restates the CERTIFIED sentence as the last line of every
+path. Before the change a run at 83 spent 34 minutes in the orbit construction and then ended a certified run on `NOT A
+CERTIFICATE`. Self-test green with three new controls (12–14); the 1,000-iteration certificate re-checked with `--against` in
+16.9 s, exit 0, ending on CERTIFIED; the four checks themselves are untouched.
+
 **Two traps this phase paid for, both now mechanisms rather than scars.** (i) **A `timeout` wrapper
 cannot be detached after the fact on this machine**: GNU coreutils 9.11's `timeout` arms
 `PR_SET_PDEATHSIG` on the command it monitors, so `kill -KILL <timeout-pid>` takes the child with it —

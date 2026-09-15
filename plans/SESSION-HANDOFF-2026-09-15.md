@@ -79,8 +79,8 @@ it once; nothing there is repeated here).
    data/fs50/wo18/p83-chain.json` the four checks CERTIFIED the file and the 597-set was re-verified independent, then after
    34 min 17 s the run ended "NOT A CERTIFICATE: --against assembles the certificate's matrices … 47458321 entries … re-run
    without --against". The 34 minutes are `evaluate_at_set` calling `build_orbits(p)` (the n² union-find) at line 1266 and an
-   n × n addition table at 1279, both before the `p > 29` guard at 1299. **Open item for the close (the checker is frozen
-   except by a recorded decision):** decide the display's feasibility as the first statement of `evaluate_at_set`; print the
+   n × n addition table at 1279, both before the `p > 29` guard at 1299. **DONE 05:05 under a recorded decision (plan §M3; self-test green with controls 12–14; the 83 file with
+   `--against` now ends on CERTIFIED in 16.9 s, exit 0). What was done:** decide the display's feasibility as the first statement of `evaluate_at_set`; print the
    CERTIFIED line last in every path; make the unavailability a note, not a refusal; add the negative control that a run with
    an unavailable `--against` still ends on CERTIFIED; re-run the whole self-test. **The HALT-AND-VERIFY protocol at 83 is
    therefore:** the untouched checker on the file FIRST (it decides), then a second rounding from the same iterate at a

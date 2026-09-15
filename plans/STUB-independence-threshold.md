@@ -517,3 +517,21 @@ Docstrings state the implication and nothing stronger: they must not read as "χ
 **The breakdown designed first:** the plausible mistakes — a certificate file for another `p` handed to a run at 83, a
 float where a rational should be, a checker run on the SDP record by mistake (`kind` mismatch) — each refused by name
 before any arithmetic, exactly as `plane-independent` refuses a start record from a foreign plane.
+
+
+**Decision, 2026-09-15 05:05 (product owner): the checker's `--against` path re-ordered so the verdict is the last line of every
+run.** The checker is frozen except by a recorded decision; this is one. Observed at 83: with `--against` the four checks
+CERTIFIED the file, the 597-set was re-verified, and then — after 34 minutes in the quadratic orbit construction and an n × n
+table that ran BEFORE the `p > 29` feasibility guard — the run ended `NOT A CERTIFICATE: --against assembles …`, a last line
+contradicting the verdict two screens above it (the implementer located the lines; it did not touch the checker, per its
+brief). The change (`tools/fplane_cert_check.py`): (i) a problem with the SET — absent, unreadable, outside the plane, not
+independent — is a `SetProblem`, never a `Refusal`: it prints `THE --against SET IS NOT USABLE: …`, exits 2, and restates the
+CERTIFIED sentence last; (ii) the set's independence is re-verified straight from coordinates, O(|S|²), at every p; (iii) the
+display's affordability (`p ≤ 29`, since it assembles n² entries) is decided from p alone before any quadratic work, and an
+unaffordable display is a NOTE ("… the verdict above stands"), exit 0; (iv) `run_against` is the one function both `main` and
+the self-test use, so the last line the self-test checks is the last line a user sees. Controls added (the self-test's 12–14,
+beside 11 re-typed): an unavailable display ends on CERTIFIED with exit 0; an unusable set exits 2, names the set, and still
+ends on CERTIFIED; the display itself at p = 7 runs and ends on CERTIFIED. The whole self-test re-run green (25.6 s); the 83
+certificate re-checked with `--against` in 16.9 s, exit 0; the 11 certificate's display path unchanged. **Verification protocol
+at 83, consequently:** the untouched checker on the file first (it decides), then a second rounding from the same iterate at a
+different cut and denominator, then `--ldl`; the 597-set's independence is what `--against` does supply at 83.

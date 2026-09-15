@@ -51,6 +51,11 @@ from fractions import Fraction
 # --------------------------------------------------------------------------------------------
 
 
+class SetProblem(Exception):
+    """A problem with a set handed to --against -- it is not independent, or the file carries none --
+    which is never a problem with the certificate: the verdict the four checks reached stands."""
+
+
 class Refusal(Exception):
     """The certificate is refused; the message names the site."""
 
@@ -1252,30 +1257,53 @@ def brute_force_soundness(p: int, limit: int | None = None, plant_translation: b
     return (len(sets), population), biggest
 
 
-def evaluate_at_set(cert: dict, S: list, out=sys.stdout) -> bool:
+def evaluate_at_set(cert: dict, S: list, out=sys.stdout, display_max_p: int = 29) -> bool:
     """Evaluate the certificate's identity at a GENUINE independent set and print it term by term.
 
     This proves nothing the four checks do not already prove; what it does is show a reviewer the
     argument working on a real object -- the set is re-verified independent from the definition, its
     orbit variables are built from the triple counts, and every term on the right of the identity is
-    displayed with its sign. The slack `N - |S|` is how far the certificate is from that set."""
+    displayed with its sign. The slack `N - |S|` is how far the certificate is from that set.
+
+    Order of business, fixed 2026-09-15 after a run at p = 83 spent 34 minutes in the quadratic orbit
+    construction below and THEN declined to display, ending a CERTIFIED run on a line that read like a
+    refusal: (1) the set is re-verified independent straight from its coordinates, which is cheap at
+    every p; (2) whether the display is affordable is decided from p alone, before any quadratic work,
+    and an unaffordable display is a NOTE -- it returns False -- never a refusal; (3) only then the
+    orbit construction. A set that is not independent, or lies outside the plane, is a `SetProblem`:
+    a fault in the set, and the certificate's verdict stands."""
     def log(s):
         print(s, file=out, flush=True)
 
     p = as_int(need(cert, "p", "certificate"), "certificate.p")
-    B = build_orbits(p)
-    n, K = B["n"], B["K"]
-    rows = canonical_constraints(B)
-    quad, sub, orb, g_orbit, t = B["quad"], B["sub"], B["orb"], B["g_orbit"], B["t"]
-    one = 1 % p
+    n = p * p
     S = sorted(set(int(v) for v in S))
     if any(v < 0 or v >= n for v in S):
-        raise Refusal(f"the set has a vertex outside 0..{n - 1}")
-    bad = [(u, v) for u in S for v in S if u != v and quad[sub[u][v]] == one]
-    if bad:
-        raise Refusal(f"the set is NOT independent: {bad[0]} are at quadrance 1")
+        raise SetProblem(f"the set has a vertex outside 0..{n - 1}")
+    one = 1 % p
+    for i, u in enumerate(S):                           # from the coordinates: no table of size n^2
+        ux, uy = divmod(u, p)
+        for v in S[i + 1:]:
+            vx, vy = divmod(v, p)
+            if ((ux - vx) * (ux - vx) + (uy - vy) * (uy - vy)) % p == one:
+                raise SetProblem(f"the set is NOT independent: {(u, v)} are at quadrance 1")
     log(f"           the set: {len(S)} points, re-verified independent from the definition "
         f"(no two differ by a vector of quadrance 1)")
+    z1o = need(need(cert, "psd", "certificate"), "Z1", "certificate.psd")
+    z2o = need(need(cert, "psd", "certificate"), "Z2", "certificate.psd")
+    if "circulant" in z1o and p > display_max_p:
+        # this display assembles the matrices, which is quadratic in the number of points; the four
+        # checks never do.  It is a reading aid, so it is offered only where assembling is cheap --
+        # and that is decided HERE, before anything quadratic runs, and said as a note.
+        log(f"           the identity display is unavailable at p = {p}: it would assemble the "
+            f"certificate's matrices ({n * n} entries) to show the identity term by term, and only "
+            f"p <= {display_max_p} is affordable. The four checks never assemble anything; the verdict "
+            f"above stands.")
+        return False
+    B = build_orbits(p)
+    K = B["K"]
+    rows = canonical_constraints(B)
+    quad, sub, orb, g_orbit, t = B["quad"], B["sub"], B["orb"], B["g_orbit"], B["t"]
     add = [[((u // p + z // p) % p) * p + ((u % p + z % p) % p) for z in range(n)] for u in range(n)]
     Sset, acc = set(S), [0] * K
     for z in S:
@@ -1291,15 +1319,7 @@ def evaluate_at_set(cert: dict, S: list, out=sys.stdout) -> bool:
     tr = sum((Fraction(t[k]) * y[k] for k in range(K)), Fraction(0))
     if tr != len(S):
         raise Refusal(f"trace Y = {tr} but the set has {len(S)} points")
-    z1o = need(need(cert, "psd", "certificate"), "Z1", "certificate.psd")
-    z2o = need(need(cert, "psd", "certificate"), "Z2", "certificate.psd")
     if "circulant" in z1o:
-        # this display assembles the matrices, which is quadratic in the number of points; the four
-        # checks never do.  It is a reading aid, so it is offered only where assembling is cheap.
-        if p > 29:
-            raise Refusal(f"--against assembles the certificate's matrices to display the identity term "
-                          f"by term, and at p = {p} they have {n * n} entries. The four checks do not "
-                          f"assemble anything and are unaffected; re-run without --against.")
         F = build_orbits_fast(p)
         Z1, d1 = circulant_to_dense(z1o["circulant"], F)
         Z2, d2 = circulant_to_dense(z2o["circulant"], F)
@@ -1586,9 +1606,41 @@ def self_test(out=sys.stdout, shipped: str | None = None) -> bool:
         evaluate_at_set(gram7, [0, nbr], out=quiet)
         failures.append("a set with an adjacent pair was accepted by --against")
         log("  GREEN — NOT OK      a set with an adjacent pair was accepted")
-    except Refusal as e:
+    except SetProblem as e:
         log(f"  RED (as designed)  11. a set with an adjacent pair handed to --against\n"
             f"                     -> {str(e)[:150]}")
+    except Refusal as e:
+        failures.append(f"a set with an adjacent pair was refused as if the CERTIFICATE were bad: {e}")
+        log(f"  RED, WRONG KIND    11. a set with an adjacent pair refused the certificate: {str(e)[:120]}")
+
+    log("=== the --against path ends on the verdict, whatever the display did (the last line IS the check) ===")
+    import io
+    circ7 = trivial_circulant_certificate(7)
+    sentence7 = check(circ7, out=quiet)
+    buf = io.StringIO()
+    rc = run_against(circ7, sentence7, {"best_set": S7}, "<S7>", out=buf, display_max_p=3)
+    lines = [l for l in buf.getvalue().splitlines() if l.strip()]
+    if rc == 0 and lines and lines[-1].startswith("CERTIFIED") and any("display is unavailable" in l for l in lines):
+        log(f"  GREEN (as designed) 12. an unavailable display (p = 7 > 3) is a note, and the run ends on CERTIFIED (exit {rc})")
+    else:
+        failures.append(f"an unavailable --against display did not end on the verdict: exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
+        log(f"  RED — NOT OK        12. exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
+    buf = io.StringIO()
+    rc = run_against(circ7, sentence7, {"best_set": [0, nbr]}, "<adjacent pair>", out=buf)
+    lines = [l for l in buf.getvalue().splitlines() if l.strip()]
+    if rc == 2 and len(lines) >= 2 and lines[-1].startswith("CERTIFIED") and "NOT USABLE" in lines[-2]:
+        log(f"  RED (as designed)  13. an unusable set exits {rc}, names the set, and STILL ends on CERTIFIED")
+    else:
+        failures.append(f"an unusable --against set did not end on the verdict with exit 2: exit {rc}, last lines {lines[-2:]!r}")
+        log(f"  RED, WRONG SHAPE   13. exit {rc}, last lines {lines[-2:]!r}")
+    buf = io.StringIO()
+    rc = run_against(circ7, sentence7, {"best_set": S7}, "<S7>", out=buf)
+    lines = [l for l in buf.getvalue().splitlines() if l.strip()]
+    if rc == 0 and lines and lines[-1].startswith("CERTIFIED") and any("slack" in l.lower() or "N - |S|" in l for l in lines):
+        log(f"  GREEN (as designed) 14. the display itself (p = 7 <= 29) runs and the run ends on CERTIFIED")
+    else:
+        failures.append(f"the --against display path did not end on the verdict: exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
+        log(f"  RED — NOT OK        14. exit {rc}, last line {lines[-1] if lines else '<none>'!r}")
 
     log("=== after every mutation, the faithful certificates again (the restore, verified) ===")
     expect_pass("p = 7, Gram form", trivial_certificate(7, form="gram", scale=Fraction(1, 4)))
@@ -1617,7 +1669,9 @@ def main() -> int:
                     help="also run the exact LDL^T on blocks given by a Gram factor (redundant, slow)")
     ap.add_argument("--against", metavar="SETFILE",
                     help="also evaluate the identity at a verified independent set (a JSON record "
-                         "carrying `independent_set` or `best_set`), term by term")
+                         "carrying `independent_set` or `best_set`), term by term; the display is "
+                         "available for p <= 29 (it assembles the matrices), the set's independence is "
+                         "re-verified at every p, and the run ends on the verdict either way")
     ap.add_argument("--self-test", action="store_true",
                     help="plant faults and watch each one refuse; with a certificate given as well, "
                          "plant them in THAT file too")
@@ -1641,19 +1695,47 @@ def main() -> int:
     if cert.get("derivation"):
         print(f"[cert] the derivation it points at: {cert['derivation']}", flush=True)
     try:
-        check(cert, k=a.k, force_ldl=a.ldl)
-        if a.against:
-            with open(a.against) as fh:
-                rec = json.load(fh)
-            S = rec.get("independent_set") or rec.get("best_set")
-            if S is None:
-                print(f"NOT A CERTIFICATE: {a.against} carries no `independent_set` or `best_set`")
-                return 1
-            print(f"the identity at the verified set in {a.against}:")
-            evaluate_at_set(cert, S)
+        sentence = check(cert, k=a.k, force_ldl=a.ldl)
     except Refusal as e:
         print(f"NOT A CERTIFICATE: {e}")
         return 1
+    if a.against:
+        try:
+            with open(a.against) as fh:
+                rec = json.load(fh)
+        except (OSError, json.JSONDecodeError) as e:
+            rec = {"_unreadable": str(e)}
+        return run_against(cert, sentence, rec, a.against)
+    return 0
+
+
+def run_against(cert: dict, sentence: str, rec: dict, where: str, out=sys.stdout,
+                display_max_p: int = 29) -> int:
+    """The --against path after the four checks have CERTIFIED the file: display the identity at the
+    set in `rec`, and END ON THE VERDICT whatever happens to the display.  Exit 0 when the display ran
+    or was unavailable at this p; exit 2 when the SET is unusable (absent, unreadable, not independent)
+    -- a fault in the set and never in the certificate, so the verdict is restated last, after the
+    fault, in that path too.  A `Refusal` here (an internal inconsistency such as tr Y != |S|) is the
+    one thing that still ends on NOT A CERTIFICATE, exit 1."""
+    def log(s):
+        print(s, file=out, flush=True)
+    try:
+        if "_unreadable" in rec:
+            raise SetProblem(f"{where} could not be read: {rec['_unreadable']}")
+        S = rec.get("independent_set") or rec.get("best_set")
+        if S is None:
+            raise SetProblem(f"{where} carries no `independent_set` or `best_set`")
+        log(f"the identity at the verified set in {where}:")
+        evaluate_at_set(cert, S, out=out, display_max_p=display_max_p)
+    except SetProblem as e:
+        log(f"THE --against SET IS NOT USABLE: {e}")
+        log(f"{sentence}  [the verdict, restated last: the --against display failed on its set, "
+            f"not on the certificate]")
+        return 2
+    except Refusal as e:
+        log(f"NOT A CERTIFICATE: {e}")
+        return 1
+    log(f"{sentence}  [the verdict, restated last, after the --against display]")
     return 0
 
 
