@@ -116,6 +116,10 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
 
 ## 3. What to do next, in order (rewritten 06:40 after the close)
 
+**GO (Kooshi, 2026-09-15 ~10:30): FS-53 subplanning is under way — WORKFLOW steps 3a (§PA), Poros planning-only, the planner
+(one subagent at a time), then the modeling passes; PAUSE before implementation (step 7). Every step commits as it lands and this letter's §3 says which step was reached. Progress ledger:** §PA — in progress (de Bruijn,
+appended to `plans/STUB-sixth-colour.md`); Poros — not started; planner — not started; modeling passes — not started.
+
 **FS-50 is closed** (ledger row 68, G56, `plans/STUB-independence-threshold.md` §Close, committed): six colours refused at 83
 by two independent exact certificates, α(UD(𝔽₈₃,2)) ≤ 1082 (`data/fs50/p83-refusal/`; the README's "refusal of six" section
 has the table, the mechanism and the reproduction command). The certificates came from the backend-honesty control's two
