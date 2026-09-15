@@ -339,6 +339,7 @@ certificate (section 4 of the derivation), so a half-converged iterate gives a r
 | 500 iterations | 6.16 | 12.9 | 1085.72 | 2466.274139 | 2466 | 1380.6 |
 | 1,000 iterations | 1.34 | 26.7 | 1073.97 | **2232.886881** | **2232** | 1158.9 |
 | 6,000 iterations | — | — | 1070.25 | 1379.804227 | 1379 | 309.6 |
+| 19,500 iterations | — | — | 1067.79 | 1285.910286 | 1285 | 218.1 |
 
 The gap between the bound and the objective is the **dual's** inaccuracy, and it is what has to close:
 the objective has been within half a unit of 1,070 since 3,000 iterations, while `N` has come down from
