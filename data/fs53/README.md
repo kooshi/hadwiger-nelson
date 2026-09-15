@@ -49,6 +49,13 @@ scale is not checkpointed, where a fresh short continuation's own dual rounded t
 |---|---|---|---|---|
 | `periodic-q27.json` | 𝔽₂₇, 6 | exhaustive at subgroup index 9 and 27; 40 DSATUR restarts at index 81 and 243; 234 s, one core | **none six-colourable**; best found **7**, at index 27 | a colouring constant on the cosets of a subgroup pulls back to the plane, so the 7 is a **verified** upper bound: `χ(UD(𝔽₂₇,2)) ≤ 7`, the first of any kind at 27, and with the ratio bound's floor `⌈729/162⌉ = 5` the bracket is `χ ∈ {5,6,7}`. The six-colour null is **exact** at index 9 (11,011 subspaces, 2,100 usable) and index 27 (33,880, 20,216) and a **null at a budget** at index 81 (11,011, 9,408) and 243 (364, 350). It refuses nothing about the plane: a colouring of the plane need not be periodic |
 
+Since FS-53 phase A0 (`data/fs53/PHASE-A0.md`) every row also carries `best_witness`: the quotient colouring behind
+`best_k_found` AND its pullback to the plane, 729 entries under `data/fplane/chi-q27.json`'s vertex index, verified on
+all 10,206 plane edges before the record is written — so the record's own ceilings (9 / 7 / 9 / 11 at index 9 / 27 / 81 /
+243) are re-checkable from the file alone. All four re-verified through `tools/fplane.py`'s independently built edge
+list: 0 monochromatic edges of 10,206 each. The dimension-3 witness sits on the same basis as
+`colour-q27-k7-quotient.json` above and carries a different, equally proper 7-colouring on it.
+
 Rerun: `python3 tools/fplane_periodic_subgroups.py --q 27 --k 6 --out data/fs53/periodic-q27.json` (controls:
 `--self-test`). The record is rewritten after every dimension and carries `partial` and `dims_done`, so a killed run
 leaves what it finished and `--dims` names the redo. Over a **prime** field this family is only the `p + 1` lines
