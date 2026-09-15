@@ -1,0 +1,12 @@
+[cert] file: data/fs53/cert-q79-N1023.json
+[cert] kind 'fplane-alpha-certificate', p = 79, N = '2558455072391901331428007922088014151122727/2500000000000000000000000000000000000000', alpha_bound = 1023
+[cert] the derivation it points at: plans/FS50-certificate-soundness.md
+check 1/4  the file's edges_sha256 f876a649c749bf0c... is the hash of the plane rebuilt here (p = 79), so this is the same graph as the project's other records of it
+check 1/4  group and orbits rebuilt from p = 79 alone: 6241 points, 42693 orbits of ordered pairs under O(2,79) x swap x S3, 1600 killed by a unit vector; the file's 42693 representatives agree, and the canonical constraint list (85386 rows: 1 g0, 1600 killed, 42693 nonneg, 41092 le_diag) agrees row for row
+check 2/4  multipliers: 85386 rationals, the 83785 attached to inequalities are all >= 0, the 1601 attached to equalities are free
+check 3/4  positive semidefiniteness:
+           Z1: 41 circulant block(s) over 157 slots (78 cosine, 78 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 22x157 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 17x157 (Z = B^T B), LDL^T re-run and clean; ... (39 more, each checked the same way)
+           Z2: 41 circulant block(s) over 157 slots (78 cosine, 78 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 26x157 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 21x157 (Z = B^T B), LDL^T re-run and clean; ... (39 more, each checked the same way)
+check 4/4  the affine identity N - tr Y(y) = <Z1,Y(y)> + <Z2,M(y)-Y(y)> + sum lambda_i c_i(y) + sum nu_j e_j(y): all 42693 orbit coefficients and the constant term agree exactly
+CERTIFIED: every independent set of UD(F_79, 2) has at most 2558455072391901331428007922088014151122727/2500000000000000000000000000000000000000 points, hence at most 1023 (a cardinality is an integer) -- exact arithmetic, no solver trusted
+hence UD(F_79, 2) is not 6-colourable (6 * 1023 = 6138 < 6241); kernel consumer: add_one_le_chromaticNumber_of_indepNum_le

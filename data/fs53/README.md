@@ -112,3 +112,60 @@ little-endian u32 over the ascending edge list"*) **when their record shape is n
 deadline is before phase A.2 writes the milestone's colouring records**, so every FS-53 artifact carries it. Not done
 now, and deliberately: a field added mid-phase would split the milestone's own records into two shapes, which is the
 trap one level up. Filed as the engine's D95.
+
+## Phase B — the certificate side (de Bruijn, 2026-09-15)
+
+### The certificates
+
+| file | plane | cost | what it says | trust |
+|---|---|---|---|---|
+| `cert-q79-N1023.json` (13.1 MB) | 𝔽₇₉ | graphics card A; the producer reached 6,500 iterations, and the certificate is from a **2,000**-iteration iterate resumed +500 in a fresh solver (796 s including the 183 s data build) | **CERTIFIED** by the untouched `tools/fplane_cert_check.py` (`--k 6`): `N = 2558455072391901331428007922088014151122727/2.5·10³⁹ = 1023.382029`, so **α(UD(𝔽₇₉,2)) ≤ 1023**, and `6 × 1023 = 6138 < 6241`: **six is refused at 79**, `χ(UD(𝔽₇₉,2)) ≥ 7` | an **exact rational** bound. The checker rebuilds the group, its 42,693 pair orbits and the 85,386 canonical rows from the number 79 alone, checks the multipliers' signs, the rational Gram factors and the affine identity exactly. Nothing is the solver's word. `--ldl` green, all 82 blocks re-run clean (`ldl-q79-N1023.log`). **Every one of the 18 cuts in the sweep gives ⌊N⌋ = 1023** (1023.382029–1023.413092 over thresholds 10⁻⁹, 10⁻⁸, 10⁻⁶ × gram denominators 10⁶, 10⁸, 10¹⁰ × weight denominators 10⁸, 10¹⁰) |
+
+**79 leaves the window.** It was the largest live member and carried `frac6 = 0.9471`; it is now `χ ≥ 7`, and the window
+for an exactly six-chromatic finite Euclidean plane is **seven members: 23, 27, 31, 43, 47, 59, 67**.
+
+**The margin, so the reader can see how little the instrument had to work for it.** The ratio bound gives 1099.19 and six
+needs 1040; the certificate lands at 1023, which is **17 integers inside the threshold and 76 below the ratio bound** —
+and it came from an iterate of 2,000 iterations whose primal residual was still 7.1 × 10⁻¹. 79 was never the hard one.
+
+### The `le_diag` experiment: the whole constraint class is inactive, not just the extra rows (phase B item 0)
+
+**The question.** Two relaxations exist. The **certified** one carries the `le_diag` row `y[k] ≤ y[diag]` **once per pair
+orbit** — the frozen checker's canonical list, the only form it verifies. The **tighter** one
+(`tools/fplane_sdp_blocks.py`, `tools/fplane_sdp_scs.py`) imposes it at **every** diagonal class the orbit meets. At 83
+the two solves were never comparable (they ended 435× apart in primal residual, `data/fs50/README.md`'s last section),
+and the predicted six-refusal at 67 has only 0.9 % of margin — so if the extra rows bind, extending the canonical list
+could be what closes 67.
+
+**The design.** One module (`fplane_sdp_blocks`), one solve path (real blocks), one solver (SCS), one tolerance
+(`eps_abs = eps_rel = 1e-8`), one backend (CPU, two threads). **The constraint list is the only thing that differs.**
+Script: `/home/kooshi/.claude/jobs/b1507518/tmp/phaseB/relax_exp.py`; records `exp-q{11,23,27}.json`.
+
+| q | pair orbits | `all` — le_diag at every diagonal class | `one` — one row per orbit (the certified shape) | difference | `none` — **the plant**: no le_diag at all | reachability control: the *killed-orbit equalities* dropped instead |
+|---|---|---|---|---|---|---|
+| 11 | 151 | 257 rows → **29.176799** | 105 rows → **29.176799** | −8.5 × 10⁻⁸ | 0 rows → **29.176799** — **did not fire** | 121.000000 = 11², **fired** (rose by 91.82) |
+| 23 | 1,167 | 2,741 rows → **108.546073** | 1,001 rows → **108.546073** | −1.5 × 10⁻⁷ | 0 rows → **108.546073** — **did not fire** | 529.000000 = 23², **fired** (rose by 420.45) |
+| 27 | 1,847 | 4,513 rows → **147.577433** | 1,625 rows → **147.577433** | +4.8 × 10⁻⁷ | 0 rows → **147.577433** — **did not fire** | 728.999996 = 27², **fired** (rose by 581.42) |
+
+(Every number is the optimum of the block-diagonalised triple-level SDP over the **same** variable set, at the **same**
+tolerance, on the **same** backend; the differences are at the solver's own tolerance, 10⁻⁷ against an optimum of order
+10², not a gap.)
+
+**The finding, and it is not the one the question expected.** The extra rows are inactive — but so is *every* `le_diag`
+row: dropping the entire class leaves the optimum unchanged to six decimals at all three members. The class is
+**redundant given the positive-semidefinite blocks and the killed-orbit equalities**. So:
+
+* **The answer to "could extending the canonical list close 67?" is no, and for a stronger reason than "the extra rows
+  happen not to bind here":** the rows the checker already verifies are themselves doing nothing, so no enlargement of
+  that class can move any bound. The route is a measured dead end, and 67 must be closed by converging the solve.
+* **The earlier readings at 11 and 23 — "the extra rows were measured inactive" — were true and empty.** They measured a
+  constraint class that contributes nothing at all. Recorded here so the next reader does not take them as evidence that
+  the *certified* relaxation is close to the tighter one for a reason to do with the extra rows.
+* **This is exactly what standing rule 9 is for.** The plant (drop every `le_diag` row; the optimum must rise) **did not
+  fire** at any member, which would have left the verdict empty. The reachability control — drop the killed-orbit
+  equalities instead, which must and does collapse the bound to the trivial `q²` — fires at all three, so the instrument
+  demonstrably detects a dropped constraint class. The null is therefore a fact about the relaxation, not about the
+  instrument.
+* **What it does not say.** It does not say the 83 comparison is explained: those two runs differed in formulation *and*
+  in convergence, and the 40-point objective gap there is still unaccounted for by anything measured here. Nothing here
+  was run at 83.
