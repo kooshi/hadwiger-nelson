@@ -17,3 +17,26 @@ plane for six colours). The GPUs were busy with FS-50's solves; these are CPU ru
 | `colour-p47-k6.json` | 47, 6 | 120 s | not found; best 1,867 of 53,016 (3.52 %) | a null |
 
 Logs (not committed): job tmp `fs53/colour-p<p>-k<k>.log`. Rerun: `plane-colour --p <p> --k <k> --threads 12 --max-seconds <s> --out <file>`.
+
+## The row format, fixed at subplanning (2026-09-15, the planner; `plans/STUB-sixth-colour.md` §S)
+
+Every file gets one row, and a row carries **five things or it is not a row**:
+
+| column | what it must say |
+|---|---|
+| **file** | the committed path, never a log under `build/` or a job's tmp |
+| **what it is** | the plane (`q`) and the question (`k` colours, or a target independent-set size `N`) |
+| **budget** | wall-clock seconds, threads, seed — and for a semidefinite solve, the iteration count and both residuals |
+| **verdict** | `found` / `not_found` / `CERTIFIED` / `unsat` / `unknown`. **`not_found` and `unknown` are nulls at a budget and are written in those words**; neither is ever "refused" |
+| **claim scope** | one sentence naming what the row licenses *and what it does not* — in particular which of `[exact]`, `[cert]`, `[solver]`, `[search]`, `[kernel]` it is, in `data/fs53/window.md`'s vocabulary |
+
+Two standing rules, from the failure modes this milestone's instruments actually have.
+
+**Every graph carries an `edges_sha256`.** The finding side and the refusing side fail in opposite directions: a
+*missing* edge makes a colouring easier and a refusal safer, an *invented* edge does the reverse. A hash in the record is
+what lets a later row be compared against an earlier one instead of against a description of it.
+
+**An iterate is never a bound.** A semidefinite solver's objective at iteration `m` is a number in flight; only a
+rounded, exactly checked dual is an upper bound on `α`, and only the untouched checker's `CERTIFIED` line decides. FS-50
+measured the trap: a rounding taken from a long-run iterate landed 200 above the objective because the solver's adaptive
+scale is not checkpointed, where a fresh short continuation's own dual rounded to within 9.

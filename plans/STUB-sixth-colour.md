@@ -533,7 +533,7 @@ is closed before anyone reaches for it.
 | id | prediction | confidence · falsifier · both outcomes reachable? |
 |---|---|---|
 | **P2** *(replaced)* | ~~χ sits one above the spectral floor~~ — **dead**: false at `p = 3` (floor 3, χ 3), the one Hoffman-tight plane in the table, and its omission flattered the reading (G21). **The replacement, the advisor's:** `χ = ⌈q²/α⌉` at every decided plane — these graphs have integrality gap below one | medium. True at 3 (α = 3) and 11 (α = 28); consistent at 7 (needs α ≤ 16, known `[14,17]`) and 19 (needs α ≤ 90, known `≥ 76`). **Not automatic** — Kneser graphs are vertex-transitive with arbitrarily large gaps. Falsifier: a plane with α and χ both pinned and `χ > ⌈q²/α⌉`. The dead reading is not carried in prose anywhere |
-| **P3** *(widened)* | the certificate refuses **five** at 47 (frac5 0.9477), 43 (0.9362) **and 27** (0.9012) | high at 47 and 43, medium at 27 (0.4 % of margin over the worst measured reach). Falsifier: a converged `V ≥ ⌈q²/5⌉`. Both reachable |
+| **P3** *(widened)* | the certificate refuses **five** at 47 (frac5 0.9477), 43 (0.9362) **and 27** (0.9012) | high at 47 and 43; **medium-high at 27**, and the margin must be stated carefully: 0.9012 clears the *worst* reach ever measured (0.8974, at 83) by only 0.4 %, but the reach is not monotone in `q` (0.8444 at 11, 0.8238 at 23, 0.8974 at 83) and both small-`q` measurements sit below 0.845, so at `q = 27` the expected margin is ≈ 6 %, not 0.4 %. Falsifier: a converged `V ≥ ⌈q²/5⌉`. Both reachable |
 | **P4** *(now a theorem, and narrower than stated)* | no window plane is six-tight | **proved** for 23, 27, 31, 43, 47, 67 by divisibility (`5 ∤ q+1`); **at 59 and 79, where `5 ∣ q+1`, by the explicit spectrum** (−14.9176 ≠ −12; −17.1019 ≠ −16). So over any field a window plane seals at six, the residue mechanism forces no pair and a six-forcer there is built, not transported |
 | **P5** *(a control, not a prediction)* | for every real `F ⊇ ℚ(√3,√11)`, no prime in `(11, 83)` is usable | verified here; only 83 in `(11, 83]` has both `(3/p)` and `(11/p)` non-negative. It is the designer's **first self-test** (§S5 C.1) |
 | **P6** | for a field `F` the milestone names, `χ(F²) = 6` | the conjecture's exposed sentence; only live if a plane is decided. Falsifiers unchanged: a five-colouring of `F²` local at no prime and non-additive, or a seven-forcer in `F²` |
@@ -653,3 +653,23 @@ colourer, `--pin-class`) — *yes*; **(3)** how long the finding side runs befor
 undecided — *four CPU-hours across three instruments*; **(4)** whether phase D is priced or promised —
 *priced*; **(5)** whether the milestone's durable product is the digits or the growth law of α — *the
 law, with the digits as its corollary*.
+
+### §S11. The data layout
+
+Two committed files carry the milestone's state, and every phase writes into them rather than into prose.
+
+* **`data/fs53/window.md`** — the table, one row per window member, **three trust levels per cell**: `[exact]` (exact
+  arithmetic, reproducible from `q` alone), `[cert]` (an exact rational certificate a stranger re-checks with
+  `tools/fplane_cert_check.py`), `[solver]` (a SAT solver's word, untrusted), `[search]` (a local search — a verified
+  object when it says *found*, a **null at a budget** when it says *not found*), `[kernel]`. It also fixes the file names
+  (`cert-q<q>-N<N>.json`, `alpha-q<q>-ge<size>.json`, `colour-q<q>-k<k>.json`, `periodic-q27.json`,
+  `ckpt/scs-q<q>-real.npz`, `ckpt/round-q<q>.jsonl`, `field-q<q>.json`) and carries the designer's specification with its
+  four controls.
+* **`data/fs53/README.md`** — one row per file, and the row format is fixed: file · what it is · budget · verdict ·
+  claim scope. `not_found` and `unknown` are written in those words and are never "refused". Two standing rules are
+  recorded there: every graph carries an `edges_sha256` (the finding and refusing sides fail in opposite directions), and
+  an iterate is never a bound (FS-50 measured a long-run iterate rounding 200 above its own objective).
+
+`tools/fplane_periodic_subgroups.py` (§S3's measurement, with its three controls and `--self-test`) and
+`data/fs53/periodic-q27.json` are committed with this subplan, so the two `q = 27` findings are reproducible from the
+number 27 rather than resting on the planner's word.
