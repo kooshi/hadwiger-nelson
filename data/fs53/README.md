@@ -16,6 +16,8 @@ plane for six colours). The GPUs were busy with FS-50's solves; these are CPU ru
 | `colour-p43-k6.json` | 43, 6 | 120 s | not found; best 1,167 of 40,678 (2.87 %) | a null |
 | `colour-p47-k6.json` | 47, 6 | 120 s | not found; best 1,867 of 53,016 (3.52 %) | a null |
 
+| `colour-q27-k7-quotient.json` | 27, 7 | — | **found**: a 7-colouring of UD(𝔽₂₇,2) constant on the cosets of a 3-dimensional 𝔽₃-subspace, for BOTH bases named in the record (`periodic-q27.json`'s dim-3 `best.basis`) and in the subplan §S3 (the scratch run's) — each quotient 27 vertices, connection set 12, 7-colourable and not 6-colourable by exhaustive backtracking; pulled back and verified proper on every one of the 10,206 edges by an independent rebuild of the field (de Bruijn's review script, sharing nothing with `tools/fplane_periodic_subgroups.py`) | **χ(UD(𝔽₂₇,2)) ≤ 7, exact-rational trust** (a colouring table; kernel form waits on K1's certificate over 𝔽₂₇, which `finitePlane 27` is NOT — ℤ/27 is a different ring) |
+
 Logs (not committed): job tmp `fs53/colour-p<p>-k<k>.log`. Rerun: `plane-colour --p <p> --k <k> --threads 12 --max-seconds <s> --out <file>`.
 
 ## The row format, fixed at subplanning (2026-09-15, the planner; `plans/STUB-sixth-colour.md` §S)

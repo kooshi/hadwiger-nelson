@@ -407,7 +407,7 @@ it (else the quotient has a loop); dimensions 3 and 4 decided **exactly** by bac
 **Two findings, both new.**
 1. **`χ(UD(𝔽₂₇, 2)) ≤ 7`** — the first upper bound at `q = 27`, and a 27-vertex certificate: the quotient by the subspace
    spanned by `(1,0,0,0,0,1), (0,1,0,0,2,2), (0,0,1,0,1,1)` (coordinates: the three `𝔽₃`-components of `x` then of `y`) is a
-   27-vertex Cayley graph of degree 12 which is 7-colourable and, by the exact sweep, not 6-colourable. With the recorded
+   27-vertex Cayley graph of degree 12 which is 7-colourable and, by the exact sweep, not 6-colourable. **Review note (de Bruijn, 2026-09-15):** the committed record's dim-3 `best.basis` is a different subspace, `(1,0,0,0,0,2), (0,1,0,0,1,1), (0,0,1,0,2,2)` (the tool's rerun found a different 7-colourable quotient from the scratch run's); BOTH were rebuilt independently, 7-coloured, pulled back and verified proper on all 10,206 edges, and neither quotient is 6-colourable — the colourings are filed in `data/fs53/colour-q27-k7-quotient.json`, which is the certificate (the sweep record carries no colouring, since its witness fields are for `k = 6` hits). With the recorded
    `k = 4` UNSAT this brackets **`χ(UD(𝔽₂₇,2)) ∈ {5, 6, 7}`**.
 2. **No six-colouring of `UD(𝔽₂₇, 2)` is constant on the cosets of any subgroup of index 9 or 27**, exhaustively; and none
    at index 81 or 243 at the DSATUR budget. The finding side at 27 must go non-periodic, exactly as at the prime members.
