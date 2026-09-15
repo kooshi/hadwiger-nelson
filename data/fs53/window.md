@@ -49,9 +49,18 @@ tightening and §S13.3 banks the last one).
 the largest eigenvalue equal to the degree `q + 1` at each member as a connectivity control.
 
 **`frac6` and `frac5`** are the fractions of the ratio bound an exact certificate must get **below** to refuse six and
-five. The certificate's reach has been measured exactly three times — **0.8444 at 11, 0.8238 at 23, 0.8974 at 83** — so
-it should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59. **A cell it cannot
-reach is a fact about the instrument, never about the plane.**
+five. The certificate's reach has been measured exactly three times — **0.8445 at 11** (N = 29.176808 against Hoffman
+34.5496), **0.8238 at 23** (108.546075 against 131.7620) and **0.8836 at 83** (1059.834185 against 1199.4588) — so it
+should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59.
+
+**The reach is not a property of the instrument alone: it improves with the compute spent.** At 83 it was 0.8974 at
+FS-50's close (N = 1076.366454) and is 0.8836 now (N = 1059.834185, the polish loop's 134,500-iterate, CERTIFIED with its
+exact LDL green), from nothing but a longer solve on the same formulation — and the loop is still tightening. So the
+margin against `frac5` at 27 is **1.8 %** (0.9012 − 0.8836), not the 0.4 % the close's number gave; the margins are
++5.3 % at 43, +6.4 % at 47, +3.7 % at 67, +6.4 % at 79, and 59 remains **4.5 % out of reach** at `frac6` 0.8382.
+**A cell the certificate does not reach is a fact about the instrument and the compute spent on it, never about the
+plane** — and a member recorded as out of reach names its converged `N` and its gap, so a later session with more GPU
+time knows exactly what it would be buying.
 
 **`α` is the object.** These graphs are vertex-transitive, so `χ_f = q²/α` exactly and `χ ≥ ⌈q²/α⌉`; a `k`-colouring
 needs `α ≥ ⌈q²/k⌉`, which is necessary and **never sufficient** — a cleared threshold means six is possible
