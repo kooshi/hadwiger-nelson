@@ -806,3 +806,146 @@ checker's verdict words.
 `data/fs53/periodic-q27.json` and then **overwrote the committed record in place** (timings changed; the `partial`/`dims_done`
 checkpoint fields vanished, so the self-test path uses a second, older writer). Two lines for A0.2's acceptance: the self-test writes
 only under a scratch path, never the milestone's record; and there is one record writer, the checkpointing one.
+
+### §S13. The rulings (Kooshi, 2026-09-15) and the implementation gate — written for an implementer who arrives with no memory and a product owner who scores by artifact
+
+**§S13.0 Rulings.** Kooshi, 2026-09-15, after the report of §S10: *"I agree with all of your decisions."* Every card is decided as
+recommended and every decision D-1 … D-16 stands. Implementation is by **Opus 5**, one implementer at a time, one phase each,
+under this gate; Kooshi's instruction verbatim: *"Opus 5 is an excellent engineer, but it misses things sometimes, so a well
+specified plan and a rigid gate definition are necessary."* The product owner (de Bruijn, or whoever holds this file after
+a compaction) scores every report against §S13.2 **item by item, opening the artifacts and the gate logs, never the summary.**
+
+| ruling | what it decides | where it lands |
+|---|---|---|
+| **R-1** (card 1) | the certificate stack — `tools/fplane_sdp_blocks.py`, `tools/fplane_cert_round.py`, `tools/fplane_cert_check.py` — is extended from prime fields to prime powers so `q = 27` can be certified. **This paragraph is the recorded decision that unfreezes the checker for exactly this change** (FS-50 §M3's rule: the checker changes only by a decision recorded in the plan) | phase A0.4 |
+| **R-2** (card 2) | two work orders to the Rust engineer (`~/source/descent-engine`, the `ferrous-engineer` agent): **WO-19** `plane-colour` writes its record every progress tick and resumes from it; **WO-20** `plane-colour` can hold a given independent set as one colour class | phase A0.3 |
+| **R-3** (card 3) | phase B runs, on one GPU, in the order **27, 79, 67, 47, 43, 59**, after phase A's CPU work; never 23 or 31 for six | phase B |
+| **R-4** (card 4) | the milestone's durable product is the **growth law of α** with "is six attained" as its corollary; the table records both α brackets and χ brackets; the close leads with the law | phase E |
+| **R-5** | Opus 5 implements; one subagent at a time; the gate below is binding; the product owner reviews by artifact | every phase |
+
+**§S13.1 Standing rules — a violation fails the phase whatever its results** (each with the reason; all are `CLAUDE.md` rules,
+two of them PROTECTED):
+1. **Build only through `./scripts/build.sh`** — never `lake build`, bare or named (it took the desktop down twice). `lake env
+   lean <file>` is for iteration and does not apply the lakefile's options; it is never the gate.
+2. **Every run expected to exceed 15 minutes checkpoints outside `build/` and has its resume command written in the phase
+   record BEFORE launch** (PROTECTED). No `timeout` wall on any solve (killing the wrapper kills the child). Launch with
+   `setsid`, write the pgid to a file in the job tmp, signal by pid or pgid — **never `pkill -f` / `pgrep -f`** (they match the
+   shell that runs them and other agents' monitors). Launch long runs from a snapshot copy of their script.
+3. **One heavy job at a time.** Phase B does not start until FS-50's GPU jobs are stopped at a checkpoint by §S13.3.
+4. **Verdict words are fixed.** A search's `not_found` is a null at a stated budget, never a refusal. A solver's UNSAT is "the
+   solver's word". Only the checker's CERTIFIED and the kernel are exact. A float reading is never a bound. A record says which
+   it is in its `claim_scope`.
+5. **Every graph record carries `edges_sha256`; every record carries `claim_scope`, the budget, the threads and the seed.**
+6. **The checker is frozen except for A0.4's recorded change (R-1).** Any other edit to `tools/fplane_cert_check.py` fails the
+   phase. The prime code path must stay byte-identical (§S13.2 A0.4).
+7. **Commit incrementally** with the attribution lines the brief gives; `git diff -- <path>` before every `git add` and commit only
+   hunks that are yours; one writer per file, named in the brief. A committed half-phase is recoverable, an uncommitted one is not.
+8. **Never read credential files; never edit a running shell script; never work past an unexplained process crash** — halt and
+   report.
+9. **Every new check ships a planted failure that is seen to fire** (G21, § Make the gate fail). A control whose failure mode
+   cannot be reached has not been tested by passing; the phase record names the plant and the line it broke.
+10. **A number in a record travels with what it measures** — units, conditions, population, budget. When two numbers are
+    compared, exactly one thing differs, written as fractions with the denominators spelled out.
+
+**§S13.2 The gate, phase by phase.** Each item: *what* · *verified how* · *pass condition*. An item is green only when the product
+owner has opened the artifact named; "the report says so" is not green.
+
+**A0.1 — restore the 27-plane's producer** (an hour). Restore `field_q27()` in `tools/fplane.py` from
+`.claude/worktrees/fs38-stubs-paper/tools/fplane.py:887`; add a `self-test` row asserting the 27-graph's shape (729 vertices,
+degree 28, 10,206 edges, `edges_sha256 = b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d`); regenerate
+`data/fplane/chi-q27.json` carrying that hash. *Pass:* `python3 tools/fplane.py chi --q 27 --k 4` reproduces `k = 4 unsat`;
+`python3 tools/fplane.py self-test` green with the new row; `git diff` on the file shows the restore and the row and nothing else.
+
+**A0.2 — the sweep tool's record** (an hour). `tools/fplane_periodic_subgroups.py`: one record writer (the checkpointing one,
+with `partial`/`dims_done`); the self-test writes only under a scratch path; a `best_witness` field carries the colouring behind
+`best_k_found`. *Pass:* `--self-test` green and `git status` clean afterwards; a rerun's `data/fs53/periodic-q27.json` carries
+`best_witness`, and the product owner's independent script (the one behind `data/fs53/colour-q27-k7-quotient.json`, re-run) verifies
+that colouring proper on all 10,206 edges.
+
+**A0.3 — WO-19 and WO-20 to the Rust engineer** (R-2; a day). WO-19: the record is rewritten every progress tick with the best
+colouring so far and `partial: true`, and `--start <record>` resumes from it. *Pass:* a run killed by pid at two minutes leaves a
+valid record; the resumed run's best conflict count is monotone from it; the plant — a record with a corrupted colouring — is
+refused by name. WO-20: `--fix-class <independent-set record>` holds that set as colour class 0. *Pass:* at `(23, 6)` with
+`data/fs50/alpha-p23-ge87.json` the verifier confirms class 0 equals the set; the plant — a set that is not independent — is
+refused by name before any search. Both under the ferrous standard's own gate (its tests, its controls), reported with the test
+counts.
+
+**A0.4 — the certificate stack over prime powers** (R-1; a day and a half). The three tools accept `--q 27 --modulus t^3-t-1`
+(the field named explicitly, carried in every record and certificate; never inferred from the number). *Pass, all four:* (i) the
+prime path is byte-identical — `git diff` shows only the dispatch, and the 11 and 23 certificates (`data/fs50/cert-p11-N29.json`,
+`cert-p23-real-N108.json`) re-run through the checker with **identical output lines**; (ii) a certificate labelled 27 without a
+modulus is refused by name; (iii) the 27 graph the tools build matches A0.1's hash; (iv) the self-test gains these as controls and
+each is seen to fire. The checker's CERTIFIED line is still the last line in every path.
+
+**K1 — the packed Cayley certificate, in the kernel** (§S9, §S12.1 D-13, §S12.2; two days). `CayleyCert.Cert` generic over
+`IdArith R`; `sound` proved once; `IdArith (ZMod q)` with its five laws proved; `cert3` and **`cert23_8`** (the line-periodic
+8-colouring of the 23-plane from `data/fplane/periodic-below-71.json`, packed) with `#guard cert23_8.check` and
+`example : (finitePlane 23).Colorable 8 := CayleyCert.sound …`; the cost of `check` at 23 measured and written in the module
+docstring. *Pass:* `./scripts/build.sh` green with **zero `sorry`** in `CayleyCertificate.lean`; `./scripts/vacuity.sh` green with
+the counts in `CLAUDE.md` § The gate updated in the same commit; `#print axioms` clean; **the five mutations of §S12.2's audit each
+applied and each seen to break the named step**, recorded in the phase record with the line numbers (dropping `covers` from `check`
+must make the short-circle control pass `check` and `sound` fail; reversing `covers`; dropping `0 < k`; dropping `Fact (1 < q)`;
+deleting `toId_add` from the proof).
+
+**K2 — the schema and the threshold form** (half a day). D-15: `chromaticNumber_eq_succ_of_colorable_of_indepNum_le` moves to
+`LocalGlobal.lean` beside `add_one_le_chromaticNumber_of_indepNum_le` and is proved; the `finitePlane` threshold form and its two
+`example`s stay in `Instances/SixthColour.lean`. *Pass:* build green, zero `sorry` in both, the dependents of `LocalGlobal.lean`
+rebuilt under the cap (expect an hour of wall; do not raise `BATCH`).
+
+**A.1 — α at every member** (per member, an hour of one core; 27 through A0.1's graph exported in the engine's format). For each of
+the eight: `plane-independent` free, then rotation-order seeds over every divisor of `q + 1`, the line quotients, chaining through
+`--start`; at 23 the target is 89. *Pass:* `data/fs53/alpha-q<q>-ge<size>.json` per member, every set re-verified by the product
+owner's script from the definition; the record states budget, threads, seed and `halt`; a plateau is reported as "plateau at N
+under budget B", never as α.
+
+**A.2 — six-colourings at every member** (per member, the long budget WO-19 makes safe: an hour, checkpointed). `plane-colour
+--k 6` whole plane; `fplane.py equivariant --p q --k 6` for the prime members; WO-20's fixed-class search at 23 with the best set;
+`k = 5` after `k = 6` where five is open. *Pass:* one record per (member, k) with its budget; any `found` re-verified by the product
+owner from the definition and promoted to a `Cert` under K1 the same day; every `not_found` names its budget in `data/fs53/window.md`.
+
+**B — the certificate side** (R-3; one GPU-day; §S13.3 first). Per member in the order 27, 79, 67, 47, 43, 59:
+`tools/fplane_sdp_blocks.py --real` (with `--q 27 --modulus t^3-t-1` at 27), then `tools/fplane_cert_round.py --p <q> --blocks
+--real --chunk 500 --linear-solver gpu_indirect --scs-ckpt data/fs53/ckpt/scs-q<q>-real.npz --ckpt data/fs53/ckpt/round-q<q>.jsonl
+…` (the FS-50 command line, `data/fs50/README.md` "Resume"), the anytime polish loop beside it; **the exact bound is rounded from a
+fresh short continuation's own dual, never from a long-run iterate and never through `--round-only`'s nudge** (the mechanism of
+row 68). *Pass per certificate, in this order:* the untouched checker CERTIFIED with the right sentence (`--k 5` at 27, 47, 43;
+`--k 6` at 79, 67, 59); a second rounding of the same dual at another cut and denominator with the same `⌊N⌋`; `--ldl` green;
+filed as `data/fs53/cert-q<q>-N<N>.json` with a README row and the `window.md` cell tagged `[cert]`. A member the certificate
+cannot reach is recorded as "N = … at convergence, above the threshold by …" — a fact about the instrument, in the cell.
+
+**B′ — the side row at 17** (an hour). `plane-colour --p 17 --k 6` **before** `--k 5`. *Pass:* records with budgets; a `found`
+re-verified; the README sentence carries both halves (first six-chromatic single-distance graph over any field if six; seals no
+field because 17 ≡ 1 mod 4).
+
+**C.1 — the designer and the ring reductions** (a day). `tools/fplane_field_design.py` with its **four controls seen to fire**
+(`ℚ(√3,√11)` → {11, 83, 131, …}; de Grey's field → {131, 479, …} and not 11; `ℚ(√23)` sees 23 by ramification; a planted
+square-everywhere radicand refused by name); P5 as a self-test row (only 83 in (11, 83] has both (3/p), (11/p) ≥ 0). The ring-level
+reductions per candidate field in `Instances/SixthColour.lean` (the `O23` shape; ℚ(√3, α) per D-16 when 27 is live). *Pass:*
+self-test green; build green; `data/fs53/field-q<q>.json` per candidate.
+
+**E — the close** (WORKFLOW step 9; half a day). `data/fs53/window.md` complete, every cell tagged; README rows for every file;
+the ledger row(s) in row 68's three-level shape; G56 already carries eight members; FRONTIER re-ranked and `plans/FRONTIER-STUBS.md`
+updated; the conjecture sweep of this plan (`grep -n "conjecture\|not claimed" plans/STUB-sixth-colour.md`, each hit a stub or an
+explicit decline); the growth law scored at eight points (R-4) and the reading `χ = ⌈q²/α⌉` scored at every decided plane;
+`CLAUDE.md` under 200,000 bytes; a session handoff. *Pass:* the product owner reads the ledger row against every cited artifact.
+
+**§S13.3 Stopping FS-50's GPU jobs before phase B** (the killable-run rule: they block phase B and forfeit only the minutes since
+their last chunk). 1. Signal by pid: `kill -TERM 2808409 2816615 $(cat /home/kooshi/.claude/jobs/b1507518/tmp/sdp/pid-anytime-loop2)`
+and wait with `kill -0` until each is gone (if `kill -0` already fails, the jobs ended earlier — check the timestamps of
+`data/fs50/ckpt/*.npz`). 2. Take the newest `cert-polish-*.json` under the job tmp `sdp/` (or the certificate the producer wrote at
+convergence) through the untouched checker, a second rounding, and `--ldl`; file it under `data/fs50/p83-refusal/` with a README row;
+update row 68's tightest number. 3. Record both formulations' last chunk lines as `[solver]` readings in `data/fs50/README.md` and say
+whether the two values differ at equal tolerance (the third-row revisit condition, FS-50 §1 item 10). 4. Only then launch phase B.
+The FS-50 relaunch commands stay in `plans/SESSION-HANDOFF-2026-09-15.md` §2 should the readings ever be wanted again.
+
+**§S13.4 The review procedure** (the product owner, per phase, before anything is pushed): open `build/gate/build/latest`'s digest and
+the vacuity digest; `git log` the phase's commits and `git diff` every touched file; run the checker yourself on every certificate;
+re-verify every `found` colouring and every independent set with a script that shares nothing with the tool that produced it;
+score §S13.2's items for the phase one by one; an item not demonstrably green is **not done** and goes back to the implementer as a
+measurement and a question, never as a reprimand (the peer-delegation rule). Push only after the phase scores green.
+
+**§S13.5 The brief template for each phase** (peer-delegation shape): the milestone in a paragraph (§S13's first lines); the phase's
+mission and why it matters; what is on disk (§S0, the previous phase's record); the standing rules §S13.1 with their reasons; the
+phase's items from §S13.2 as the acceptance; the files the implementer may write (one writer per file); the scratch directory; the
+attribution lines; "commit incrementally, Kooshi may be cut off"; the report format — commits, the checklist scored by the
+implementer itself, what was rejected and why, and anything found that contradicts this plan.

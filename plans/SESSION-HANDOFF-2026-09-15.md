@@ -116,17 +116,27 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
 
 ## 3. What to do next, in order (rewritten 06:40 after the close)
 
-**GO (Kooshi, 2026-09-15 ~10:30): FS-53 subplanning — DONE through WORKFLOW step 5, PAUSED before step 7 (implementation) on
-Kooshi's instruction.** The ledger: §PA (82b47e9); the advisor's pass `plans/POROS-2026-09-15-fs53-planning.md` (0f1d6da); the first
-measurement — no window plane found six-colourable by the Rust colourer, `data/fs53/README.md` (3c80e02); the planner's subplan §S0–§S11
-in `plans/STUB-sixth-colour.md`, the skeleton `Proofs/HadwigerNelson/CayleyCertificate.lean` and `Instances/SixthColour.lean`
-(7868ccf…15e1bf4), the 27-plane's seven-colouring filed as a certificate on review (92c839b); the three modeling passes §S12.1–§S12.3
-(e0d68e9 and the closing commit), the window module trimmed to one `finitePlane` threshold statement; `./scripts/build.sh` green on the
-skeleton twice (3 modules rebuilt, warnings = the tracked `sorry`s). **Next, when Kooshi says go:** his four cards (§S10) — card 1 (extend
-the certificate stack to prime powers for q = 27) and card 2 (two Rust work orders: `plane-colour` checkpointing; a fixed-class search)
-must be decided before phase A; then one Opus implementer per phase per §S5 (A0 first, on the CPU; phase B only after FS-50's GPU jobs are
-stopped at a checkpoint — the kill command is in §3 item 3 below). The implementer's first acts: K1 under §S12.1 D-13 (the certificate
-generic over `IdArith R`), `cert23_8` as K1's inhabitant (§S12.2), D-15's move of the equality schema into `LocalGlobal.lean`.
+**FS-53 subplanning is DONE (WORKFLOW steps 3–5) and Kooshi has RULED (2026-09-15, ≈ 12:00): "I agree with all of your
+decisions" — the four cards of `plans/STUB-sixth-colour.md` §S10 are decided as recommended, recorded as R-1 … R-5 in §S13.0.
+Implementation is by Opus 5 (he compacts before implementation begins), one implementer at a
+time, one phase each, under the gate §S13.2, with the product owner scoring every report by artifact (§S13.4).** The record so
+far: §PA (82b47e9); the advisor's pass `plans/POROS-2026-09-15-fs53-planning.md` (0f1d6da); the first measurement — no window
+plane found six-colourable, `data/fs53/README.md` (3c80e02); the planner's §S0–§S11 and the skeleton
+`Proofs/HadwigerNelson/CayleyCertificate.lean`, `Instances/SixthColour.lean` (7868ccf…15e1bf4); the 27-plane's 7-colouring filed
+on review (92c839b); the modeling passes §S12.1–§S12.3 with the window module trimmed (e0d68e9, 14880d1); G56 and item 11
+rewritten to eight members with the corrected consequence; §S13 the rulings and the gate. `./scripts/build.sh` green on the
+skeleton twice; every commit pushed.
+
+**The next session's first acts, in order** (the implementing session — read §S13 in full before spawning anyone):
+1. Confirm the FS-50 jobs' state (`kill -0 2808409 2816615`; `data/fs50/ckpt/*.npz` timestamps) and the LDL check of the
+   1059 certificate (`data/fs50/p83-refusal/ldl-N1059.log`; if it ended green, say so in the README row; if it is still running,
+   leave it).
+2. Spawn one Opus implementer for **phase A0** (A0.1, A0.2, A0.4 in this repository — §S13.2), briefed by §S13.5; in parallel
+   nothing (one subagent at a time). Then a `ferrous-engineer` for **A0.3** (WO-19, WO-20) in `~/source/descent-engine`.
+3. Then K1 and K2 (one implementer), then A.1/A.2 across the eight members (one implementer; CPU), then §S13.3 (stop the FS-50
+   jobs at a checkpoint, bank the last certificate), then phase B in the order 27, 79, 67, 47, 43, 59 (one implementer; GPU),
+   B′, C.1, E.
+4. Review each phase by §S13.4 before pushing; score the checklist; send back measurements and questions, never reprimands.
 
 
 **FS-50 is closed** (ledger row 68, G56, `plans/STUB-independence-threshold.md` §Close, committed): six colours refused at 83
@@ -160,6 +170,9 @@ iterates rounded 200 above the objective (SCS's adaptive scale is not checkpoint
 - One subagent at a time; Poros for planning only, before the planner (standing from 2026-09-14).
 - **The killable-run rule is PROTECTED and this was an instance** (04:00): measuring a replacement is not a precondition
   for stopping the run it replaces; kill at the checkpoint, relaunch on what the measurement names.
+- **FS-53's four cards ruled as recommended (≈ 12:00): R-1 the certificate stack goes to prime powers (the checker's recorded
+  change); R-2 WO-19/WO-20 to the Rust engineer; R-3 phase B in the order 27, 79, 67, 47, 43, 59 after the CPU side; R-4 the growth
+  law leads the close. Opus 5 implements; "a well specified plan and a rigid gate definition are necessary" — §S13.**
 
 ## 5. Traps met since the previous letter
 
