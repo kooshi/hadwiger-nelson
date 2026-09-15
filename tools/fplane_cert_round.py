@@ -155,13 +155,18 @@ def score(B, rows, num1, d1, num2, d2):
 def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra, psd=None):
     n = B["n"]
     import math
+    F = B["field"]                      # the plane's field, named in the file: never inferred from p
+    p = F.q
     cert = dict(
-        kind=C.KIND, p=p, N=str(N), alpha_bound=math.floor(N),
+        kind=C.KIND, **C._ident(F), edges_sha256=C.graph_sha256(F), N=str(N), alpha_bound=math.floor(N),
         claim=(f"every independent set of the unit-distance graph on F_{p}^2 -- every set of points "
                f"no two of which differ by a vector of quadrance 1 -- has at most {math.floor(N)} points"),
         vertex_index=f"v = x*{p} + y for the point (x, y) of F_{p}^2, with 0 <= x, y < {p}",
         edge_rule=(f"two points are adjacent iff their difference (dx, dy) satisfies "
-                   f"dx^2 + dy^2 = 1 in F_{p}"),
+                   f"dx^2 + dy^2 = 1 in F_{p}"
+                   + ("" if F.f == 1 else f", where F_{p} = F_{F.p}[t]/({F.modulus}) and an element "
+                                          f"c_0 + c_1 t + ... is written as the integer whose base-{F.p} digits "
+                                          f"are (c_0, c_1, ...), most significant first")),
         symmetry=("O(2,p) x swap x S3 acting on ordered pairs (u, v) of points: (u, v) -> (gu, gv) "
                   "for g in the orthogonal group (the rotations by the points of the unit circle and "
                   "the reflection (x, y) -> (x, -y)); (u, v) -> (v, u); (u, v) -> (-u, v - u)"),
@@ -177,7 +182,8 @@ def build_certificate(p, N, mult, B, rows, num1, d1, num2, d2, extra, psd=None):
         derivation="plans/FS50-certificate-soundness.md",
         produced_by=("tools/fplane_cert_round.py (untrusted: a floating-point semidefinite solver "
                      "proposes, exact rational arithmetic disposes); checked by "
-                     "tools/fplane_cert_check.py, which rebuilds the constraint system from p alone"),
+                     "tools/fplane_cert_check.py, which rebuilds the constraint system from "
+                     + ("p alone" if F.f == 1 else "q and the modulus alone") + ")"),
         provenance=extra)
     return cert
 
@@ -595,6 +601,7 @@ def check_real(p, out=sys.stdout):
     def log(s):
         print(s, file=out, flush=True)
     F = C.build_orbits_fast(p)
+    p = F["field"].q                     # `p` may arrive as a Field; below it means the plane's size
     m, Cc, K = F["m"], F["C"], F["K"]
     W = 2 * Cc + 1
     js = list(range(m // 2 + 1))
@@ -643,7 +650,7 @@ def check_real(p, out=sys.stdout):
     lc = [c for c in live_circles(F) if F["a_off"][c] % m]
     c0 = lc[0] if lc else live_circles(F)[0]
     for name, kw in ((f"a planted reflection angle (circle {c0}, quadrance "
-                      f"{F['classes'][c0]}, live, +1)", dict(plant=(c0, 1))),
+                      f"{F['field'].elt(F['classes'][c0])}, live, +1)", dict(plant=(c0, 1))),
                      ("the flipped phase sign", dict(flip=True))):
         worst = 0.0
         for j in js:
@@ -675,16 +682,16 @@ def main_blocks(a):
             raise SystemExit("--plant-phase wants 'circle,shift'")
         if not a.real:
             raise SystemExit("--plant-phase is a control on the real block form; pass --real")
-    F = C.build_orbits_fast(a.p)
+    F = C.build_orbits_fast(a.field)
     if plant is not None:
         live = live_circles(F)
         if plant[0] % F["C"] not in live:
             raise SystemExit(f"[blocks] --plant-phase {plant[0]},{plant[1]}: every orbit of circle "
-                             f"{plant[0]} (quadrance {F['classes'][plant[0] % F['C']]}) is killed by a "
+                             f"{plant[0]} (quadrance {F['field'].elt(F['classes'][plant[0] % F['C']])}) is killed by a "
                              f"unit vector, so the plant moves NOTHING and the control cannot fire.  "
                              f"Live circles: {live[:8]}{' ...' if len(live) > 8 else ''}")
         print(f"[blocks] NEGATIVE CONTROL: the reflection angle of circle {plant[0]} (quadrance "
-              f"{F['classes'][plant[0] % F['C']]}, a live circle) is shifted by {plant[1]}.  The "
+              f"{F['field'].elt(F['classes'][plant[0] % F['C']])}, a live circle) is shifted by {plant[1]}.  The "
               f"RELAXATION'S OPTIMUM can then only rise -- T^T A T >= 0 is implied by A >= 0 for any T, "
               f"so a planted T is a weaker constraint -- and the certificate stays SOUND whatever "
               f"happens.  N is that optimum plus a rounding error of order 1e-4, so N itself is not "
@@ -848,7 +855,11 @@ def main_blocks(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--p", type=int, required=True)
+    ap.add_argument("--p", type=int, help="the plane over the PRIME field F_p")
+    ap.add_argument("--q", type=int, help="the plane over the field with q elements; a prime power needs --modulus")
+    ap.add_argument("--modulus", metavar="POLY",
+                    help='the defining polynomial of F_q in t, for example "t^3-t-1". Required for a prime '
+                         "power and never inferred: Z/27 is not F_27, and the two planes differ")
     ap.add_argument("--solver", default="CLARABEL")
     ap.add_argument("--out")
     ap.add_argument("--denominators", default="1000,10000,100000,1000000,10000000,100000000")
@@ -886,12 +897,21 @@ def main():
     ap.add_argument("--check-real", action="store_true",
                     help="run the real form's controls at p and exit")
     a = ap.parse_args()
+    if (a.p is None) == (a.q is None):
+        ap.error("give exactly one of --p (a prime field) and --q (any field, with --modulus if q is a prime power)")
+    if a.p is not None and a.modulus is not None:
+        ap.error("--modulus belongs to --q; a prime field needs none")
+    try:
+        a.field = C.Field(a.q, a.modulus) if a.q is not None else C.Field(a.p)
+    except C.Refusal as e:
+        ap.error(str(e))
+    a.p = a.field.q                      # every message below says the plane's size; for a prime it is the prime
     if a.check_real:
-        return 0 if check_real(a.p) else 1
+        return 0 if check_real(a.field) else 1
     if a.blocks:
         return main_blocks(a)
     t0 = time.time()
-    B = C.build_orbits(a.p)
+    B = C.build_orbits(a.field)
     rows = C.canonical_constraints(B)
     n, K = B["n"], B["K"]
     print(f"[round] p = {a.p}: {n} points, {K} pair orbits, {sum(B['killed'])} killed, "

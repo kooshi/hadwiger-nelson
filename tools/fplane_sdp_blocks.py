@@ -17,16 +17,24 @@ import scipy.sparse as sp
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import fplane_lp as L
 import fplane
+import fplane_cert_check as CC     # the Field: F_q for a prime power, named by its modulus
 
 def setup(p):
-    n = p * p; m = p + 1
-    Q = lambda v: (v[0] * v[0] + v[1] * v[1]) % p
-    circ = fplane.circle(p)
+    """`p` is a prime, or a `CC.Field` (F_q with q a prime power, the modulus named).  All the
+    arithmetic below goes through the field, so for a prime it is the same `% p` it always was."""
+    F = CC.as_field(p)
+    q, one, zero = F.q, F.one, F.zero
+    fadd, fsub, fmul, fneg = F.add, F.sub, F.mul, F.neg
+    p = q                                   # every message below means the plane's size
+    n = q * q; m = q + 1
+    Q = lambda v: fadd(fmul(v[0], v[0]), fmul(v[1], v[1]))
+    cmul = lambda a, b: (fsub(fmul(a[0], b[0]), fmul(a[1], b[1])), fadd(fmul(a[0], b[1]), fmul(a[1], b[0])))
+    circ = fplane.circle(q) if F.f == 1 else [(x, y) for x in range(q) for y in range(q) if Q((x, y)) == one]
     zeta = None
     for a, b in circ:
         z = (a, b); k = 1
-        while z != (1, 0):
-            z = L.mul(z, (a, b), p); k += 1
+        while z != (one, zero):
+            z = cmul(z, (a, b)); k += 1
         if k == m:
             zeta = (a, b); break
     assert zeta is not None
@@ -35,27 +43,28 @@ def setup(p):
     # fixes every square-class base point and sends a non-square one to ū_c = u_c ζ^{k_c}; the DFT blocks B_j are
     # diag(ω^{j a_c}) · R_j · diag(ω^{−j a_c}) with a_c = k_c/2 and R_j REAL symmetric — half the embedded block size.
     base = {}; angle = {}
-    for t in range(1, p):
-        c = (t * t) % p
-        if c not in base: base[c] = (t, 0)
+    for t in range(1, q):
+        c = fmul(t, t)
+        if c not in base: base[c] = (t, zero)
     w = None
-    for x in range(p):
-        for y in range(p):
+    for x in range(q):
+        for y in range(q):
             if (x, y) != (0, 0) and Q((x, y)) not in base:
                 w = (x, y); break
         if w: break
     if w is not None:
-        for t in range(1, p):
-            c = Q(((t * w[0]) % p, (t * w[1]) % p))
-            if c not in base: base[c] = ((t * w[0]) % p, (t * w[1]) % p)
-    assert len(base) == p - 1
+        for t in range(1, q):
+            tw = (fmul(t, w[0]), fmul(t, w[1]))
+            c = Q(tw)
+            if c not in base: base[c] = tw
+    assert len(base) == q - 1
     for c, u in base.items():
         w = u
         for th in range(m):
-            angle[w] = (c, th); w = L.mul(w, zeta, p)
+            angle[w] = (c, th); w = cmul(w, zeta)
     assert len(angle) == n - 1
-    kc = {c: angle[(u[0], (-u[1]) % p)][1] for c, u in base.items()}   # ū_c = u_c ζ^{k_c}; k_c = 0 on the real axis
-    classes = sorted(base)  # the p−1 circles
+    kc = {c: angle[(u[0], fneg(u[1]))][1] for c, u in base.items()}   # ū_c = u_c ζ^{k_c}; k_c = 0 on the real axis
+    classes = sorted(base)  # the q−1 circles
     ci = {c: i for i, c in enumerate(classes)}
     C = len(classes)
     # the profile index set: (c, c', θ) ↦ C*C*m + ...; zero-pairs (0, c) ↦ base0 + i; (0,0) ↦ last
@@ -79,9 +88,9 @@ def setup(p):
         if v == (0, 0): return idx_zero(angle[u][0])
         c, th = angle[u]; cp_, thp = angle[v]
         return idx_prof(c, cp_, (thp - th) % m)
-    neg = lambda w: ((-w[0]) % p, (-w[1]) % p)
-    sub = lambda a, b: ((a[0] - b[0]) % p, (a[1] - b[1]) % p)
-    refl = lambda w: (w[0], (-w[1]) % p)
+    neg = lambda w: (fneg(w[0]), fneg(w[1]))
+    sub = lambda a, b: (fsub(a[0], b[0]), fsub(a[1], b[1]))
+    refl = lambda w: (w[0], fneg(w[1]))
     # identifications: swap, reflection, S3 — applied at every profile entry (u = base point, v = u_{c'} ζ^θ)
     for c in classes:
         u = base[c]
@@ -92,7 +101,7 @@ def setup(p):
                 union(i, pair_index(w, u))                       # swap
                 union(i, pair_index(refl(u), refl(w)))            # the reflection
                 union(i, pair_index(neg(u), sub(w, u)))           # S3: (u, v) ↦ (−u, v − u)
-                w = L.mul(w, zeta, p)
+                w = cmul(w, zeta)
     for c in classes:
         union(idx_zero(c), pair_index(base[c], base[c]))           # Y[u,u] = Y[0,u] (S3 with v = u); also (0,u) ↔ (u,0) by swap
         union(idx_zero(c), pair_index(neg(base[c]), (0, 0)))
@@ -109,10 +118,10 @@ def setup(p):
         for cp_ in classes:
             w = base[cp_]
             for th in range(m):
-                if c == 1 or cp_ == 1 or Q(sub(u, w)) == 1:
+                if c == one or cp_ == one or Q(sub(u, w)) == one:
                     killed[cls[idx_prof(c, cp_, th)]] = True
-                w = L.mul(w, zeta, p)
-    killed[cls[idx_zero(1)]] = True
+                w = cmul(w, zeta)
+    killed[cls[idx_zero(one)]] = True
     diag_cls = {c: cls[idx_zero(c)] for c in classes}
     g0 = cls[idx_00]
     # M profiles: M[u_c, u_{c'} ζ^θ] = g(Q(u_c − u_{c'} ζ^θ)) = the class of (0, that difference)
@@ -123,9 +132,9 @@ def setup(p):
             w = base[cp_]
             for th in range(m):
                 d = sub(u, w)
-                Mcls[idx_prof(c, cp_, th)] = g0 if d == (0, 0) else cls[idx_zero(Q(d))]
-                w = L.mul(w, zeta, p)
-    return dict(p=p, n=n, m=m, C=C, classes=classes, ci=ci, cls=cls, K=K, killed=killed, diag_cls=diag_cls, g0=g0,
+                Mcls[idx_prof(c, cp_, th)] = g0 if d == (zero, zero) else cls[idx_zero(Q(d))]
+                w = cmul(w, zeta)
+    return dict(p=p, field=F, n=n, m=m, C=C, classes=classes, ci=ci, cls=cls, K=K, killed=killed, diag_cls=diag_cls, g0=g0,
                 NP=NP, Mcls=Mcls, idx_prof=idx_prof, idx_zero=idx_zero, base=base, angle=angle, zeta=zeta, Q=Q, kc=kc)
 
 def block_maps(S, which):
@@ -222,20 +231,35 @@ def solve(S, solver="SCS", verbose=False, extra_eq=None, solver_opts=None, real=
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--p", type=int, required=True); ap.add_argument("--solver", default="SCS"); ap.add_argument("--verbose", action="store_true")
+    ap.add_argument("--p", type=int, help="the plane over the PRIME field F_p")
+    ap.add_argument("--q", type=int, help="the plane over the field with q elements; a prime power needs --modulus")
+    ap.add_argument("--modulus", metavar="POLY",
+                    help='the defining polynomial of F_q in t, for example "t^3-t-1"; required for a prime '
+                         "power and never inferred (Z/27 is not F_27)")
+    ap.add_argument("--solver", default="SCS"); ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--out")
     ap.add_argument("--mkl", action="store_true", help="SCS's MKL Pardiso linear solver (multithreaded; MKL_NUM_THREADS)")
     ap.add_argument("--eps", type=float, default=None)
     ap.add_argument("--real", action="store_true", help="real blocks (base points on the reflection axes): half the embedded size")
     a = ap.parse_args()
+    if (a.p is None) == (a.q is None):
+        ap.error("give exactly one of --p (a prime field) and --q (any field, with --modulus if q is a prime power)")
+    if a.p is not None and a.modulus is not None:
+        ap.error("--modulus belongs to --q; a prime field needs none")
+    try:
+        field = CC.Field(a.q, a.modulus) if a.q is not None else CC.Field(a.p)
+    except CC.Refusal as e:
+        ap.error(str(e))
+    a.p = field.q
     opts = {}
     if a.mkl: opts["mkl"] = True
     if a.eps: opts["eps"] = a.eps
-    t0 = time.time(); S = setup(a.p)
-    print(f"[blocks] p={a.p}: {S['C']} circles, {S['K']} profile classes after swap/reflection/S3, {int(S['killed'].sum())} killed; setup {time.time()-t0:.1f} s", flush=True)
+    t0 = time.time(); S = setup(field)
+    print(f"[blocks] {field.source}: {S['C']} circles, {S['K']} profile classes after swap/reflection/S3, {int(S['killed'].sum())} killed; setup {time.time()-t0:.1f} s", flush=True)
     t1 = time.time(); v, st, yv = solve(S, solver=a.solver, verbose=a.verbose, solver_opts=opts, real=a.real)
     print(f"[blocks] triple-level bound, block form: {v:.4f} ({st}) in {time.time()-t1:.1f} s", flush=True)
-    rec = dict(kind="fplane-sdp-blocks", p=a.p, n=S["n"], real_blocks=a.real, classes=int(S["K"]), killed=int(S["killed"].sum()), value=v, status=st, solver=a.solver,
+    rec = dict(kind="fplane-sdp-blocks", **CC._ident(field), edges_sha256=CC.graph_sha256(field),
+               n=S["n"], real_blocks=a.real, classes=int(S["K"]), killed=int(S["killed"].sum()), value=v, status=st, solver=a.solver,
                seconds=time.time() - t0, claim_scope="a float reading of the block-diagonalised triple-level SDP (rotation-only DFT blocks; the reflection, swap and S3 as variable identifications); must reproduce fplane_sdp.py's direct value at 11 (29.18) and 23 (108.55); never a bound")
     if a.out:
         Path(a.out).write_text(json.dumps(rec, indent=1)); print(f"  wrote {a.out}")

@@ -258,6 +258,18 @@ class Field:
         self.one = 1 % q if self.f == 1 else self.p ** (self.f - 1)
         self.zero = 0
 
+    def elt(self, a: int) -> str:
+        """An element written for a human: the residue at a prime field, and the polynomial at a prime
+        power, where the NAME of an element is not its value -- at q = 27 the element 1 is named 9 and
+        the id 1 is t^2, so a message that prints the id alone reads as a different element."""
+        if self.f == 1:
+            return str(a)
+        pw = [self.p ** (self.f - 1 - i) for i in range(self.f)]
+        c = [(a // pw[i]) % self.p for i in range(self.f)]
+        terms = [(f"{v}" if i == 0 else (("t" if i == 1 else f"t^{i}") if v == 1 else f"{v}t" if i == 1 else f"{v}t^{i}"))
+                 for i, v in enumerate(c) if v]
+        return " + ".join(terms) if terms else "0"
+
     def __repr__(self):
         return f"F_{self.q}" + ("" if self.modulus is None else f"[{self.modulus}]")
 
