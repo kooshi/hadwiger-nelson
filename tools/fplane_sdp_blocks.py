@@ -30,18 +30,31 @@ def setup(p):
         if k == m:
             zeta = (a, b); break
     assert zeta is not None
-    # base points: u_c = the first point of each circle in the (x, y) order; the angle index of every nonzero point
+    # base points ON THE TWO REFLECTION AXES: (t, 0) for the square classes c = t², and t·w on the line through one fixed
+    # non-square point w for the others (that line meets exactly the non-square classes). Then the reflection (x,y) ↦ (x,−y)
+    # fixes every square-class base point and sends a non-square one to ū_c = u_c ζ^{k_c}; the DFT blocks B_j are
+    # diag(ω^{j a_c}) · R_j · diag(ω^{−j a_c}) with a_c = k_c/2 and R_j REAL symmetric — half the embedded block size.
     base = {}; angle = {}
+    for t in range(1, p):
+        c = (t * t) % p
+        if c not in base: base[c] = (t, 0)
+    w = None
     for x in range(p):
         for y in range(p):
-            c = Q((x, y))
-            if c and c not in base:
-                base[c] = (x, y)
+            if (x, y) != (0, 0) and Q((x, y)) not in base:
+                w = (x, y); break
+        if w: break
+    if w is not None:
+        for t in range(1, p):
+            c = Q(((t * w[0]) % p, (t * w[1]) % p))
+            if c not in base: base[c] = ((t * w[0]) % p, (t * w[1]) % p)
+    assert len(base) == p - 1
     for c, u in base.items():
         w = u
         for th in range(m):
             angle[w] = (c, th); w = L.mul(w, zeta, p)
     assert len(angle) == n - 1
+    kc = {c: angle[(u[0], (-u[1]) % p)][1] for c, u in base.items()}   # ū_c = u_c ζ^{k_c}; k_c = 0 on the real axis
     classes = sorted(base)  # the p−1 circles
     ci = {c: i for i, c in enumerate(classes)}
     C = len(classes)
@@ -113,7 +126,7 @@ def setup(p):
                 Mcls[idx_prof(c, cp_, th)] = g0 if d == (0, 0) else cls[idx_zero(Q(d))]
                 w = L.mul(w, zeta, p)
     return dict(p=p, n=n, m=m, C=C, classes=classes, ci=ci, cls=cls, K=K, killed=killed, diag_cls=diag_cls, g0=g0,
-                NP=NP, Mcls=Mcls, idx_prof=idx_prof, idx_zero=idx_zero, base=base, angle=angle, zeta=zeta, Q=Q)
+                NP=NP, Mcls=Mcls, idx_prof=idx_prof, idx_zero=idx_zero, base=base, angle=angle, zeta=zeta, Q=Q, kc=kc)
 
 def block_maps(S, which):
     """for j = 0 … m/2: sparse real maps y ↦ vec([[R, −I],[I, R]]) of the Hermitian block B_j (size C, or C+1 at j = 0 with the
@@ -150,7 +163,36 @@ def block_maps(S, which):
         maps.append((j, d, A))
     return maps
 
-def solve(S, solver="SCS", verbose=False, extra_eq=None):
+def block_maps_real(S, which):
+    """the REAL blocks R_j (size C, or C+1 at j = 0): R_j[c,c'] = Σ_θ f_{cc'}(θ) cos(2π j (2θ − k_{c'} + k_c) / (2m)) — the
+    Hermitian B_j conjugated by diag(ω^{j k_c/2}); valid because the base points lie on the two reflection axes (setup)"""
+    p, m, C, K = S["p"], S["m"], S["C"], S["K"]
+    src = S["cls"][:S["NP"]] if which == "Y" else S["Mcls"]
+    kc = [S["kc"][c] for c in S["classes"]]
+    maps = []
+    for j in range(0, m // 2 + 1):
+        d = C + (1 if j == 0 else 0)
+        rows, cols, vals = [], [], []
+        for a in range(C):
+            for b in range(C):
+                basei = (a * C + b) * m
+                shift = kc[a] - kc[b]
+                for th in range(m):
+                    k = src[basei + th]
+                    v = np.cos(np.pi * j * (2 * th + shift) / m)
+                    if abs(v) > 1e-15:
+                        rows.append(a * d + b); cols.append(k); vals.append(v)
+        if j == 0:
+            o = C
+            for a in range(C):
+                k = S["cls"][S["idx_zero"](S["classes"][a])]; v = np.sqrt(m)
+                rows += [o * d + a, a * d + o]; cols += [k, k]; vals += [v, v]
+            rows.append(o * d + o); cols.append(S["g0"]); vals.append(1.0)
+        A = sp.csr_matrix((np.array(vals), (np.array(rows), np.array(cols))), shape=(d * d, K))
+        maps.append((j, d, A))
+    return maps
+
+def solve(S, solver="SCS", verbose=False, extra_eq=None, solver_opts=None, real=False):
     import cvxpy as cp
     K = S["K"]; y = cp.Variable(K, nonneg=True)
     cons = [y[S["g0"]] == 1]
@@ -165,26 +207,35 @@ def solve(S, solver="SCS", verbose=False, extra_eq=None):
                 k = int(S["cls"][S["idx_prof"](c, cp_, th)])
                 if not S["killed"][k] and (k, dc) not in seen and k != dc:
                     cons.append(y[k] <= y[dc]); seen.add((k, dc))
-    Ymaps = block_maps(S, "Y"); Mmaps = block_maps(S, "M")
+    if real:
+        Ymaps = block_maps_real(S, "Y"); Mmaps = block_maps_real(S, "M")
+    else:
+        Ymaps = block_maps(S, "Y"); Mmaps = block_maps(S, "M")
     for (j, d, A), (_, _, Am) in zip(Ymaps, Mmaps):
-        D = 2 * d
+        D = d if real else 2 * d
         Yb = cp.reshape(A @ y, (D, D), order="C"); Mb = cp.reshape(Am @ y, (D, D), order="C")
         cons += [Yb >> 0, Mb - Yb >> 0]
     obj = y[S["g0"]] + S["m"] * sum(y[S["diag_cls"][c]] for c in S["classes"])   # tr Y = 1 + (p+1) Σ_c g(c)
     prob = cp.Problem(cp.Maximize(obj), cons)
-    prob.solve(solver=solver, verbose=verbose)
+    prob.solve(solver=solver, verbose=verbose, **(solver_opts or {}))
     return prob.value, prob.status, y.value
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--p", type=int, required=True); ap.add_argument("--solver", default="SCS"); ap.add_argument("--verbose", action="store_true")
     ap.add_argument("--out")
+    ap.add_argument("--mkl", action="store_true", help="SCS's MKL Pardiso linear solver (multithreaded; MKL_NUM_THREADS)")
+    ap.add_argument("--eps", type=float, default=None)
+    ap.add_argument("--real", action="store_true", help="real blocks (base points on the reflection axes): half the embedded size")
     a = ap.parse_args()
+    opts = {}
+    if a.mkl: opts["mkl"] = True
+    if a.eps: opts["eps"] = a.eps
     t0 = time.time(); S = setup(a.p)
     print(f"[blocks] p={a.p}: {S['C']} circles, {S['K']} profile classes after swap/reflection/S3, {int(S['killed'].sum())} killed; setup {time.time()-t0:.1f} s", flush=True)
-    t1 = time.time(); v, st, yv = solve(S, solver=a.solver, verbose=a.verbose)
+    t1 = time.time(); v, st, yv = solve(S, solver=a.solver, verbose=a.verbose, solver_opts=opts, real=a.real)
     print(f"[blocks] triple-level bound, block form: {v:.4f} ({st}) in {time.time()-t1:.1f} s", flush=True)
-    rec = dict(kind="fplane-sdp-blocks", p=a.p, n=S["n"], classes=int(S["K"]), killed=int(S["killed"].sum()), value=v, status=st, solver=a.solver,
+    rec = dict(kind="fplane-sdp-blocks", p=a.p, n=S["n"], real_blocks=a.real, classes=int(S["K"]), killed=int(S["killed"].sum()), value=v, status=st, solver=a.solver,
                seconds=time.time() - t0, claim_scope="a float reading of the block-diagonalised triple-level SDP (rotation-only DFT blocks; the reflection, swap and S3 as variable identifications); must reproduce fplane_sdp.py's direct value at 11 (29.18) and 23 (108.55); never a bound")
     if a.out:
         Path(a.out).write_text(json.dumps(rec, indent=1)); print(f"  wrote {a.out}")
