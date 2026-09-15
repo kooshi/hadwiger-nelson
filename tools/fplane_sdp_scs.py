@@ -56,11 +56,19 @@ def main():
         np.savez(ck, x=x0, y=y0, s=s0, iters=done_iters)
         print(f"[scs] chunk {chunks}: +{info['iter']} it ({done_iters} total), {time.time()-t1:.0f} s, pobj {info['pobj']:.5f} dobj {info['dobj']:.5f} "
               f"res_pri {info['res_pri']:.2e} res_dual {info['res_dual']:.2e} gap {info['gap']:.2e} status {info['status']}", flush=True)
-        if info["status"].lower().startswith("solved"): break
+        # SCS labels EVERY chunk that reaches its iteration cap "solved (inaccurate - reached max_iters)" — the cap IS the
+        # chunk size — so only a clean "solved" ends the loop (the FS-50 implementer's catch, 2026-09-15: the first version
+        # stopped after one chunk and recorded a wrong value as converged)
+        st = info["status"].lower()
+        if st.startswith("solved") and "inaccurate" not in st: break
+        if "reached max_iters" not in st and not st.startswith("solved"):
+            print(f"[scs] solver status {info['status']} — stopping without a value", flush=True); return
         if a.stop_after_chunks and chunks >= a.stop_after_chunks: print("[scs] stopping after the requested chunks (control)", flush=True); return
     sol = chain.solvers[-1].invert(result, inv[-1]); prob.unpack_results(sol, chain, inv)
     value = float(prob.value); status = result["info"]["status"]
     print(f"[scs] VALUE at p={a.p} (real blocks): {value:.6f}  status {status}  {done_iters} iterations  {time.time()-t0:.0f} s", flush=True)
+    if done_iters >= a.max_iters and "inaccurate" in result["info"]["status"].lower():
+        print("[scs] iteration cap reached without convergence — the value above is an iterate, NOT a converged reading; no record written", flush=True); return
     if a.out:
         Path(a.out).write_text(json.dumps(dict(kind="fplane-sdp-scs", p=a.p, n=a.p * a.p, real_blocks=True, value=value, status=status, iterations=done_iters,
             eps=a.eps, seconds=time.time() - t0, ckpt=str(ck), claim_scope="a float reading of the block-diagonalised (real) triple-level SDP through SCS in warm-started chunks; never a bound"), indent=1))
