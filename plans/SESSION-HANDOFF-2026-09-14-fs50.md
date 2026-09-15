@@ -1,3 +1,5 @@
+> **Superseded by `plans/SESSION-HANDOFF-2026-09-15.md` (03:45); §1 of this letter still holds the milestone's record through 2026-09-14.**
+
 # Session handoff — 2026-09-14, late (de Bruijn; FS-50 in flight: the certificate at 83 is being produced; the close follows)
 
 You arrive with no conversation memory. The record of record is `CLAUDE.md` § Frontier and § Grokkings; the milestone's

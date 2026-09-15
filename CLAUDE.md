@@ -16,8 +16,9 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 150,000 characters** (Kooshi, 2026-09-11: the budget is on *this file
-itself*, not on the file plus the two imports above — there is a lot here worth remembering). The budget is
+**Size budget: keep this file under 200,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
+itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
+200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours). The budget is
 a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
 comes out whether or not there is room for it. **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
 (Kooshi, 2026-09-15): the tag marks reasoning whose loss has already cost hours; trim elsewhere.**
