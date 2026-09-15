@@ -799,3 +799,8 @@ conditional is promised, and "not landed" is a complete sentence.
 
 *Not changed:* the trust tags and file names (§S11), the designer's spec and its four named controls, `plane-colour`'s and the
 checker's verdict words.
+
+*Found on review (2026-09-15, after the passes):* `tools/fplane_periodic_subgroups.py --self-test` reproduced every count of
+`data/fs53/periodic-q27.json` and then **overwrote the committed record in place** (timings changed; the `partial`/`dims_done`
+checkpoint fields vanished, so the self-test path uses a second, older writer). Two lines for A0.2's acceptance: the self-test writes
+only under a scratch path, never the milestone's record; and there is one record writer, the checkpointing one.
