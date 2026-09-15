@@ -5,6 +5,7 @@ number q (and, for a prime power, the modulus) with its own field arithmetic, re
 checks a claimed colouring or a claimed independent set FROM THE DEFINITION.
 
   verify_colouring.py graph  --q 27 --modulus t^3-t-1
+  verify_colouring.py window                    # recompute data/fs53/window.md's exact columns from q alone
   verify_colouring.py colour --q 27 --modulus t^3-t-1 --json <record> --path a.b.c [--k K]
   verify_colouring.py indep  --q 23 --json <record> --path set
   verify_colouring.py self-test          # plants three faults and watches each fire
@@ -123,7 +124,7 @@ def dig(obj, path):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("mode", choices=["graph", "colour", "indep", "self-test"])
+    ap.add_argument("mode", choices=["graph", "colour", "indep", "window", "self-test"])
     ap.add_argument("--q", type=int)
     ap.add_argument("--modulus")
     ap.add_argument("--json")
@@ -133,6 +134,8 @@ def main():
     a = ap.parse_args()
     if a.mode == "self-test":
         return self_test()
+    if a.mode == "window":
+        return window()
     F = Field(a.q, a.modulus)
     circle, n, nbr = plane(F)
     h, ne = edge_hash(n, nbr)
@@ -166,6 +169,73 @@ def main():
             sys.exit(f"NOT INDEPENDENT: e.g. {bad[:3]}")
         print(f"  INDEPENDENT — verified from the definition; alpha >= {len(S)}, so chi >= ceil({n}/{len(S)}) "
               f"= {-(-n // len(S))}")
+
+
+# the committed table, data/fs53/window.md: q -> (lambda_min, ratio bound, six needs, frac6, five needs, frac5)
+WINDOW = {23: (-7.9607, 131.76, 89, 0.6755, 106, 0.8045),
+          27: (-8.0, 162.00, 122, 0.7531, 146, 0.9012),
+          31: (-10.6665, 240.25, 161, 0.6701, 193, 0.8033),
+          43: (-11.9622, 395.23, 309, 0.7818, 370, 0.9362),
+          47: (-12.8465, 466.39, 369, 0.7912, 442, 0.9477),
+          59: (-14.9176, 693.14, 581, 0.8382, None, 1.0056),
+          67: (-15.0567, 813.78, 749, 0.9204, None, 1.1035),
+          79: (-17.1019, 1099.19, 1041, 0.9471, None, 1.1363)}
+MODULI = {27: "t^3-t-1"}
+
+
+def spectrum(F):
+    """the adjacency spectrum of UD(F_q,2) as additive character sums over the unit circle.
+    The eigenvalue at (a, b) is sum over circle points (x, y) of e_p(Tr(ax + by)), Tr the absolute trace
+    F_q -> F_p (x + x^p + ... + x^{p^(e-1)}).  Returns (min, max, degree)."""
+    import cmath, math
+    els = F.els
+    circle = [(s, t) for s in els for t in els if F.add(F.mul(s, s), F.mul(t, t)) == F.one]
+
+    def power(u, e):
+        r = F.one
+        for _ in range(e):
+            r = F.mul(r, u)
+        return r
+
+    def trace(u):
+        acc = u
+        for i in range(1, F.e):
+            acc = F.add(acc, power(u, F.p ** i))
+        assert all(c == 0 for c in acc[1:]), f"the absolute trace must land in F_{F.p}: {acc}"
+        return acc[0]
+
+    z = [cmath.exp(2j * math.pi * k / F.p) for k in range(F.p)]
+    lo, hi = None, None
+    for a in els:
+        for b in els:
+            v = sum(z[trace(F.add(F.mul(a, x), F.mul(b, y)))] for (x, y) in circle).real
+            lo = v if lo is None or v < lo else lo
+            hi = v if hi is None or v > hi else hi
+    return lo, hi, len(circle)
+
+
+def window():
+    """recompute every [exact] column of data/fs53/window.md from the number q, and compare."""
+    print(f"{'q':>3} {'lam_min here':>13} {'table':>9} {'ratio here':>11} {'table':>8} "
+          f"{'six':>5} {'frac6':>7} {'five':>5} {'frac5':>7}  verdict")
+    allok = True
+    for q, (tl, tr, t6, tf6, t5, tf5) in WINDOW.items():
+        F = Field(q, MODULI.get(q))
+        lm, lmax, deg = spectrum(F)
+        n, d = q * q, q + 1
+        ratio = n * (-lm) / (d - lm)                      # Hoffman: alpha <= n|lam_min| / (d + |lam_min|)
+        six, five = -(-n // 6), -(-n // 5)                # a k-colouring needs alpha >= ceil(n/k)
+        f6, f5 = six / ratio, five / ratio
+        refused = five > ratio
+        ok = (deg == d and abs(lmax - d) < 1e-6 and abs(lm - tl) < 5e-4 and abs(ratio - tr) < 0.02
+              and six == t6 and abs(f6 - tf6) < 1e-4 and abs(f5 - tf5) < 1e-4
+              and (t5 is None) == refused and (t5 is None or t5 == five))
+        allok &= ok
+        print(f"{q:>3} {lm:>13.4f} {tl:>9.4f} {ratio:>11.2f} {tr:>8.2f} {six:>5} {f6:>7.4f} "
+              f"{five:>5} {f5:>7.4f}  {'OK' if ok else 'MISMATCH'}"
+              + ("  (five refused by the ratio bound)" if refused else ""))
+    print("WINDOW TABLE", "REPRODUCED" if allok else "DISAGREES")
+    sys.exit(0 if allok else 1)
 
 
 def self_test():

@@ -40,6 +40,12 @@ record and the restored producer agree on the object.
 *Decided, for scale:* `χ(UD(𝔽₃,2)) = 3`, `χ(UD(𝔽₇,2)) = 4`, `χ(UD(𝔽₁₁,2)) = 5` `[kernel]`, `χ(UD(𝔽₁₉,2)) = 5` `[solver]`;
 `χ(UD(𝔽₇₁,2)) ≥ 7` `[exact]`; `χ(UD(𝔽₈₃,2)) ≥ 7` `[cert]`, `α(83) ≥ 597` `[search]`, `α(83) ≤ 1076` `[cert]`.
 
+**Every `[exact]` cell above is reproducible from the number `q` alone** by a committed script that shares nothing with
+`tools/fplane.py`: `python3 tools/fplane_review_verify.py window` rebuilds each field (at 27 from the modulus
+`t³ − t − 1`), computes the spectrum as additive character sums over the unit circle, and reprints this table's
+`λ_min`, ratio bound, thresholds and fractions beside the committed ones — reproduced, 2026-09-15, all eight rows, with
+the largest eigenvalue equal to the degree `q + 1` at each member as a connectivity control.
+
 **`frac6` and `frac5`** are the fractions of the ratio bound an exact certificate must get **below** to refuse six and
 five. The certificate's reach has been measured exactly three times — **0.8444 at 11, 0.8238 at 23, 0.8974 at 83** — so
 it should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59. **A cell it cannot
