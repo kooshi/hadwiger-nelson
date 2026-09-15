@@ -45,6 +45,7 @@ USAGE
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import subprocess
@@ -728,14 +729,27 @@ def main_blocks(a):
             np.savez_compressed(cache, **d)
             print(f"[blocks] the duals cached in {cache} "
                   f"({cache.stat().st_size / 1e6:.1f} MB)", flush=True)
+    # WHICH DUAL a scored candidate belongs to is part of its key.  Without this the sweep's
+    # checkpoint is keyed on (signs, cut, denominators) alone, and --round-only -- which rounds a
+    # DIFFERENT iterate of the same solve each time it runs -- reads back an N that another dual
+    # proved.  Caught at p = 83 by the winner's re-score guard: the sweep reported 2466.274 from the
+    # 500-iteration dual and the re-score of the 1,000-iteration one gave 2232.887.
+    dual_id = hashlib.sha256(b"".join(np.ascontiguousarray(Z, dtype=np.float64).tobytes()
+                                      for Z in list(Ws) + list(Vs))).hexdigest()[:12]
     seen = {}
     ck = Path(a.ckpt) if a.ckpt else None
     if ck is not None and ck.exists():
+        skipped = 0
         for line in ck.read_text().splitlines():
             if line.strip():
                 r = json.loads(line)
+                if r.get("dual_id") != dual_id:
+                    skipped += 1
+                    continue
                 seen[(r["s1"], r["s2"], r["thr"], r["den"], r["wden"])] = Fraction(r["N"])
-        print(f"[blocks] the checkpoint {ck} holds {len(seen)} scored candidate(s)", flush=True)
+        print(f"[blocks] the checkpoint {ck} holds {len(seen)} scored candidate(s) for this dual "
+              f"({dual_id})" + (f"; {skipped} from other duals are ignored" if skipped else ""),
+              flush=True)
 
     def record(key, N):
         seen[key] = N
@@ -743,8 +757,8 @@ def main_blocks(a):
             return
         ck.parent.mkdir(parents=True, exist_ok=True)
         with ck.open("a") as fh:
-            fh.write(json.dumps(dict(p=a.p, s1=key[0], s2=key[1], thr=key[2], den=key[3],
-                                     wden=key[4], N=str(N), N_float=float(N))) + "\n")
+            fh.write(json.dumps(dict(p=a.p, dual_id=dual_id, s1=key[0], s2=key[1], thr=key[2],
+                                     den=key[3], wden=key[4], N=str(N), N_float=float(N))) + "\n")
 
     thresholds = [float(x) for x in a.thresholds.split(",")]
     denominators = [int(x) for x in a.denominators.split(",")]
@@ -809,7 +823,7 @@ def main_blocks(a):
           flush=True)
     extra = dict(float_bound=float(val), solver=a.solver, solver_status=status,
                  dual_signs=[s1, s2], eigenvalue_cut=thr, gram_denominator=den,
-                 weight_denominator=wd, blocks=len(Ws), seconds=time.time() - t0,
+                 weight_denominator=wd, blocks=len(Ws), seconds=time.time() - t0, dual_id=dual_id,
                  block_form=("real (per-circle Fourier phase, pushed onto the wire's shared cosine "
                              "and sine slots by the congruence T of `real_block_setup`)"
                              if a.real else "Hermitian (the wire's 2C+1 slots directly)"),
