@@ -401,7 +401,7 @@ it (else the quotient has a loop); dimensions 3 and 4 decided **exactly** by bac
 |---|---|---|---|---|---|---|
 | 4 | 9 | 9 | 11,011 | 2,100 | **0 (exact)** | 9 — every usable quotient is `K₉` |
 | 3 | 27 | 27 | 33,880 | 20,216 | **0 (exact)** | **7** (a quotient with a 12-element connection set) |
-| 2 | 81 | 81 | 11,011 | 9,408 | 0 (DSATUR budget) | 8 |
+| 2 | 81 | 81 | 11,011 | 9,408 | 0 (DSATUR budget) | 9, or 8 at a wider budget |
 | 1 | 243 | 243 | 364 | 350 | 0 (DSATUR budget) | 11 |
 
 **Two findings, both new.**
@@ -412,11 +412,15 @@ it (else the quotient has a loop); dimensions 3 and 4 decided **exactly** by bac
 2. **No six-colouring of `UD(𝔽₂₇, 2)` is constant on the cosets of any subgroup of index 9 or 27**, exhaustively; and none
    at index 81 or 243 at the DSATUR budget. The finding side at 27 must go non-periodic, exactly as at the prime members.
 
-**Reproduction, and what phase A0 owes it.** The run lived in the planner's scratch. Phase A0 ships it as
-`tools/fplane_periodic_subgroups.py` with a `--self-test` carrying three controls — a positive (the family yields a
-`k`-colouring at `k = 9` at dimension 4, which must be found), a planted subspace containing a circle point (must be
-refused as unusable, never silently coloured), and the `𝔽₂₇` graph's `edges_sha256` asserted against the restored
-`field_q27` — and files `data/fs53/periodic-q27.json`. **Until that lands the two findings are the planner's word.**
+**Reproduced, and committed.** `tools/fplane_periodic_subgroups.py` ships with this subplan, carrying a `--self-test`
+with three controls — a positive (a `k = 9` colouring of a dimension-4 quotient, found and verified), a planted subspace
+containing a circle point (refused as unusable, never silently coloured), and the `𝔽₂₇` graph's shape and `edges_sha256`
+asserted against the restored `field_q27` body — and it reproduces every count above into
+`data/fs53/periodic-q27.json` in 234 s. **Two notes on honesty.** Its graph (729 vertices, degree 28, 10,206 edges) equals
+the one `data/fplane/chi-q27.json` records, so the orphaned record and the restored producer agree on the object. And its
+dimension-2 row reads `best k = 9` where the scratch run read 8: the committed tool climbs with a cheaper restart budget,
+both numbers are sound upper bounds, and neither matters because dimension 3 already gives 7 — **a search's number is a
+function of its budget, and the record says which budget.**
 
 ### §S4. Derivations that fix the shape
 

@@ -1,0 +1,179 @@
+{
+ "kind": "fplane-periodic-subgroups",
+ "q": 27,
+ "k": 6,
+ "n": 729,
+ "degree": 28,
+ "edges": 10206,
+ "edges_sha256": "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d",
+ "rows": [
+  {
+   "dim": 4,
+   "index": 9,
+   "quotient_size": 9,
+   "subspaces": 11011,
+   "usable": 2100,
+   "k": 6,
+   "hits": 0,
+   "exact": true,
+   "restarts": null,
+   "best_k_found": 9,
+   "witness": null,
+   "best": {
+    "basis": [
+     [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      1,
+      0,
+      2
+     ]
+    ],
+    "quotient_size": 9,
+    "connection_size": 8
+   },
+   "seconds": 10.0
+  },
+  {
+   "dim": 3,
+   "index": 27,
+   "quotient_size": 27,
+   "subspaces": 33880,
+   "usable": 20216,
+   "k": 6,
+   "hits": 0,
+   "exact": true,
+   "restarts": null,
+   "best_k_found": 7,
+   "witness": null,
+   "best": {
+    "basis": [
+     [
+      1,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1
+     ],
+     [
+      0,
+      0,
+      1,
+      0,
+      2,
+      2
+     ]
+    ],
+    "quotient_size": 27,
+    "connection_size": 12
+   },
+   "seconds": 178.4
+  },
+  {
+   "dim": 2,
+   "index": 81,
+   "quotient_size": 81,
+   "subspaces": 11011,
+   "usable": 9408,
+   "k": 6,
+   "hits": 0,
+   "exact": false,
+   "restarts": 40,
+   "best_k_found": 9,
+   "witness": null,
+   "best": {
+    "basis": [
+     [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ]
+    ],
+    "quotient_size": 81,
+    "connection_size": 20
+   },
+   "seconds": 39.8
+  },
+  {
+   "dim": 1,
+   "index": 243,
+   "quotient_size": 243,
+   "subspaces": 364,
+   "usable": 350,
+   "k": 6,
+   "hits": 0,
+   "exact": false,
+   "restarts": 40,
+   "best_k_found": 11,
+   "witness": null,
+   "best": {
+    "basis": [
+     [
+      1,
+      0,
+      0,
+      1,
+      0,
+      2
+     ]
+    ],
+    "quotient_size": 243,
+    "connection_size": 26
+   },
+   "seconds": 5.6
+  }
+ ],
+ "partial": false,
+ "dims_done": [
+  4,
+  3,
+  2,
+  1
+ ],
+ "claim_scope": "a hit is a VERIFIED proper colouring of a quotient, so chi(UD(F_q,2)) <= k follows by pullback; a miss at dim >= 3 is exact over that family; a miss at dim <= 2 is a null at the DSATUR budget; no result here ever refuses a colouring of the plane, which need not be periodic"
+}

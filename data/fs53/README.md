@@ -40,3 +40,15 @@ what lets a later row be compared against an earlier one instead of against a de
 rounded, exactly checked dual is an upper bound on `α`, and only the untouched checker's `CERTIFIED` line decides. FS-50
 measured the trap: a rounding taken from a long-run iterate landed 200 above the objective because the solver's adaptive
 scale is not checkpointed, where a fresh short continuation's own dual rounded to within 9.
+
+## The subgroup-quotient sweep at q = 27 (the planner, 2026-09-15)
+
+| file | plane, k | budget | verdict | claim scope |
+|---|---|---|---|---|
+| `periodic-q27.json` | 𝔽₂₇, 6 | exhaustive at subgroup index 9 and 27; 40 DSATUR restarts at index 81 and 243; 234 s, one core | **none six-colourable**; best found **7**, at index 27 | a colouring constant on the cosets of a subgroup pulls back to the plane, so the 7 is a **verified** upper bound: `χ(UD(𝔽₂₇,2)) ≤ 7`, the first of any kind at 27, and with the ratio bound's floor `⌈729/162⌉ = 5` the bracket is `χ ∈ {5,6,7}`. The six-colour null is **exact** at index 9 (11,011 subspaces, 2,100 usable) and index 27 (33,880, 20,216) and a **null at a budget** at index 81 (11,011, 9,408) and 243 (364, 350). It refuses nothing about the plane: a colouring of the plane need not be periodic |
+
+Rerun: `python3 tools/fplane_periodic_subgroups.py --q 27 --k 6 --out data/fs53/periodic-q27.json` (controls:
+`--self-test`). The record is rewritten after every dimension and carries `partial` and `dims_done`, so a killed run
+leaves what it finished and `--dims` names the redo. Over a **prime** field this family is only the `p + 1` lines
+(`data/fplane/periodic-below-71.json`); over `𝔽₂₇` the additive group is `(ℤ/3)⁶` and every `𝔽₃`-subspace is a subgroup,
+which is why the family is 56,266 subspaces rather than 28.
