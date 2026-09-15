@@ -19,6 +19,8 @@
 | `cert-p23-N108.json` | **the second row of that table, and the first at a prime where the true value is unknown**: the same rounding at 23 — 529 points, 1,167 pair orbits, 2,334 constraint rows, two rational Gram factors (220×529 and 250×529), 1.67 MB. Produced from a cached SCS dual (`ckpt/dual-p23.npz`) by `tools/fplane_cert_round.py`; accepted by `tools/fplane_cert_check.py`, and **also by the checker as it stood before this milestone extended it** (`git show 95ff153:tools/fplane_cert_check.py`, the last commit before this milestone touched it, 5.2 s) — the extension for the block form did not move the dense path's verdict | **α(UD(𝔽₂₃, 2)) ≤ 1085461828989727987/10000000000000000 = 108.546183, hence ≤ 108** — against Hoffman 131.76 and the best verified set 87, so the bracket is **[87, 108]**. The rounding costs 1.1·10⁻⁴ against the float optimum 108.546073, and ⌊N⌋ = 108 is the best any dual of this relaxation can give (its own optimum is 108.5461 > 108). **The five-colour threshold 106 is NOT reached** (5 × 108 = 540 ≥ 529), so FS-17's first digit at 23 stays open exactly where M61 left it; the certificate refutes four colours, which was already known. Kernel consumer: `add_one_le_chromaticNumber_of_indepNum_le` |
 | `cert-p23-blocks-N108.json` | **the control that phase E's pipeline is right, at the largest prime where the answer is independently known**: the same bound at 23 produced through the CIRCULANT BLOCK form — 13 blocks over 45 slots (22 cosine, 22 sine, 1 origin), weights over 10⁸, the matrix never assembled — by `tools/fplane_cert_round.py --p 23 --blocks` and accepted by the checker's circulant path | `N = 108.546198` against the dense certificate's `108.546183` and the solver's own `108.546073` — **the same ⌊N⌋ = 108**, in **0.40 MB against 1.67 MB**. That ratio is what makes 83 possible at all: there the dense form would need a 6,889 × 6,889 matrix and the block form needs 43 blocks over 165 slots. The block solve took 882.9 s against the direct form's 447.7 s — slower at 23, and the only one that exists at 83 |
 | `sdp-p23-blocks-real.json` | `tools/fplane_sdp_blocks.py --real`: base points on the two reflection axes make every DFT block real (the Hermitian block is a diagonal unitary conjugate of a real one, so PSD-ness is preserved) — half the embedded block size | 108.5467 at 23 in **5.4 s** against 208 s for the Hermitian embedding (29.1769 at 11 in 0.6 s against 5.5 s): the lever that makes 83 minutes rather than hours |
+| `cert-p11-real-N29.json` | the same certificate at 11 through the **REAL** block form (the per-circle Fourier phase; the solve's blocks are 7 of size 10–11 against the 42-row embedding the Hermitian form uses, 9,142 map entries), the reduced dual pushed back onto the identical wire form by the congruence `T` — `tools/fplane_cert_round.py --p 11 --blocks --real`, accepted by the **unmodified** checker | `N = 911775245913368821483035055323/31250000000000000000000000000 = 29.176808`, hence `α ≤ 29` — **better than the Hermitian block form's 29.176927** and equal to the dense certificate's 29.176807 to 10⁻⁶; float bound 29.176798848 in 6.4 s; 0.05 MB. At the verified 28-point maximum set: `⟨Z1,Y⟩ = 1.145807`, `⟨Z2,M−Y⟩ = 0`, `Σλ·c = 0.031001`, `N − |S| = 1.176808` |
+| `cert-p23-real-N108.json` | the same at 23 — 13 blocks of size 22–23 against 90 embedded, 157,390 map entries; the control that the real form's dual rounds to the same bound at the largest prime where an independent answer exists | `N = 1356827560436792973544000094025497/12500000000000000000000000000000 = 108.546205`, hence `α ≤ 108` — the same `⌊N⌋` as the dense (108.546183) and the Hermitian block (108.546198) certificates; 0.34 MB; **the solve fell from 882.9 s to 146.9 s at the same tolerance**. At the verified 87-point set: `⟨Z1,Y⟩ = 21.421645`, `Σλ·c = 0.124560`, `N − |S| = 21.546205` |
 | `lp-attribution.json` | the single-graph maxima at 11, 23, 83 — which graph's rows carry the drop | at 83 only the triangle bites (1,197.064); the spindle bites at 11 (30.392) and not at 83 |
 
 ## The certificate at 11, checked
@@ -188,3 +190,102 @@ verified 28-point maximum independent set (`--against data/fplane/alpha-p11.json
 
 Regenerate: `python3 tools/fplane_lp.py --self-test` (controls: `ϑ′` reproduced with no rows; 28 feasible at 11 and 76 at
 19 under every family; a planted `α` moves the bound, two-sided), then the three commands above.
+
+## The real block form — the producer's solve at a quarter the block size, on the same wire and the same checker
+
+Phase E's producer had one expensive step: the floating-point solve. A wire block (the form
+`fplane_cert_check.load_circulant` reads, and the only form that fits at 83) carries **one** cosine and
+**one** sine weight vector shared by every circle, so a block spans `2C + 1` slots — 165 at 83. The
+block-diagonalisation that makes the solve small wants a **per-circle phase** instead: with the base
+points fixed, the reflection forces every angular profile to satisfy `f_{cc'}(d) = f_{cc'}(a_{c'} − a_c − d)`
+(where `a_c` is the angle of circle `c`'s reflected base point, which `build_orbits_fast` already
+computes), and that makes `exp(i π j (a_c − a_{c'}) / m) · B_j[c, c']` **real**. So the Hermitian Fourier
+block of size `C` — which the wire form carries as a real embedding of *twice* its spectrum — is a
+diagonal-unitary conjugate of a real symmetric block of size `C`, and the solve can use the small one.
+
+**A per-circle weight cannot be written on the wire. It does not have to be.** With
+`phi_c = π j a_c / m`, the wanted weight is `w_c = cos(phi_c)·a + sin(phi_c)·b` — a combination of the two
+weights the wire already carries — so the reduced map is `V_j = U_j T_j` for an explicit `(2C+1) × d`
+matrix `T_j`, and
+
+    <W, T_j^T (U_j^T Y U_j) T_j>  =  <T_j W T_j^T, U_j^T Y U_j>          identically in Y.
+
+The producer therefore **solves with the reduced blocks and pushes each reduced dual back through the
+congruence**, `Z_j = T_j W_j T_j^T`, before rounding. Nothing downstream changes: the sign probe, the
+rounding sweep, the wire form, the file, and **the checker** are the same code and the same bytes
+(`git diff tools/fplane_cert_check.py` is empty across this work). And nothing here reaches the trust
+surface: `T W T^T` is positive semidefinite whenever `W` is, whatever `T` is — the same sentence section 4
+of the derivation already makes about the block maps — so a wrong phase can only make `N` bigger.
+At `j = 0` and `j = m/2` the sine weight is identically zero, so `T_j` is a plain selection of the cosine
+slots (plus the origin at `j = 0`) and the reduction is trimming provable zeros.
+
+**The controls** (`tools/fplane_cert_round.py --p P --check-real`, run at 11, 23 and **83**):
+
+| check | 11 | 23 | 83 |
+|---|---|---|---|
+| (1) the vectorised wire arrays equal `block_setup`'s map, entry by entry | green | green | skipped by cost, with the reason printed |
+| (2) the reduced map equals `T^T A T` | 5.3·10⁻¹⁵ | 2.1·10⁻¹⁴ | 3.7·10⁻¹³ |
+| (3) **the wire block's whole spectrum is the reduced block's with each eigenvalue doubled** — so the reduction loses *nothing* | 5.0·10⁻¹⁴ | 9.1·10⁻¹³ | 2.4·10⁻¹¹ |
+| (4) a planted reflection angle, and the flipped phase sign, both LOSE (3) | off by 6.3 / 12.8 | 20.6 / 49.7 | 107.6 / 575.0 |
+
+Check (3) is the one that matters and it is an equality, not an inequality: the `2C`-dimensional wire
+block and the `C`-dimensional real block impose the **same** condition. Check (4) is there because (3)
+passing proves nothing unless a wrong phase can fail it.
+
+### What it bought, with the two numbers kept apart
+
+| at | solve, Hermitian blocks | solve, real blocks | ratio | tolerance |
+|---|---|---|---|---|
+| `fplane_sdp_blocks.py` (a reading; no duals kept), 11 | 5.5 s | 0.6 s | 9× | SCS default (10⁻⁴) |
+| `fplane_sdp_blocks.py`, 23 | 208.0 s | 5.4 s | **38×** | SCS default (10⁻⁴) |
+| `fplane_cert_round.py` (the producer; duals kept), 23 | 882.9 s | **146.9 s** | **6.0×** | `--eps 1e-9` |
+
+The 38× and the 6.0× are different measurements and only one of them prices phase E: the reading tool at
+its default tolerance against the producer at the tolerance a certificate wants. **The producer's figure
+is 6.0×**, at 23, same tool, same tolerance, same machine, one thing differing.
+
+**And the tolerance is nearly free**, which is worth recording because it was the reason to fear the
+tight setting at 83 (23, real blocks, the whole rounding sweep re-run at each tolerance):
+
+| `--eps` | solve | float bound | best exact `N` | `N` − float |
+|---|---|---|---|---|
+| 10⁻⁴ | 143.5 s | 108.621145 | 108.624183 | 3.0·10⁻³ |
+| 10⁻⁵ | 190.4 s | 108.545615 | 108.575118 | 3.0·10⁻² |
+| 10⁻⁶ | 168.0 s | 108.546095 | 108.548232 | 2.1·10⁻³ |
+| 10⁻⁷ | 172.2 s | 108.546075 | 108.546226 | 1.5·10⁻⁴ |
+| 10⁻⁸ | 196.1 s | 108.546073 | 108.546103 | 3.0·10⁻⁵ |
+
+The solve time is flat in the tolerance at this size — SCS reaches 10⁻⁸ for a third more iterations, not
+for an order of magnitude — and the whole spread of `N` is 0.08, far inside the one-unit granularity of
+`⌊N⌋`. So the tolerance is not what decides the digit; the relaxation's own optimum is.
+
+### The phase is load-bearing, and the first plant could not fire
+
+Dropping the phase altogether — `T` = the cosine slots, which is what one gets by ignoring the reflection
+angles — is a genuinely weaker relaxation: the optimum rises from **29.176799 to 29.893909** at 11 and from
+**108.546073 to 113.377707** at 23. A single circle's angle shifted by one rises it to 29.285445 and
+108.971608. That is the theorem behind the control: `T^T A T ⪰ 0` is implied by `A ⪰ 0` for *any* `T`, so
+a planted `T` is a weaker constraint and the **optimum** can only rise.
+
+**Two corrections to what was expected, both recorded rather than smoothed.**
+
+*First, the plant this work was asked to watch could not fire.* Planting circle **0** left the optimum at
+11 unchanged to eight decimals (−1.2·10⁻⁸, solver noise) and at 23 likewise (−5.3·10⁻⁸) — because circle 0
+is the circle of quadrance 1, **the unit circle, every one of whose orbits is killed**, so its phase
+multiplies nothing. A control whose failure mode is unreachable has not been tested by passing. The
+producer now **refuses a plant on a dead circle by name**, printing the live ones:
+
+```
+$ ... --p 11 --blocks --real --plant-phase 0,1
+[blocks] --plant-phase 0,1: every orbit of circle 0 (quadrance 1) is killed by a unit vector, so the
+plant moves NOTHING and the control cannot fire.  Live circles: [1, 2, 3, 4, 5, 6, 7, 8] ...
+```
+
+*Second, "a wrong phase must make `N` larger" is not a theorem, and at 11 it was false by 3·10⁻⁶.* With
+circle 0 planted (the dead plant), `N` came out **29.176805** against the faithful **29.176808** — smaller,
+and both CERTIFIED, because `N` is the optimum plus a rounding error of order 10⁻⁴…10⁻⁶ that is not
+monotone in anything. The sound statement is the one above: the **optimum** rises, and the certificate
+stays sound whatever `T` is. On a live circle the end-to-end effect is visible as expected: circle 3
+planted at 11 gives float 29.285445 and `N` = **29.285452**, weaker than 29.176808 and still CERTIFIED.
+The tool now prints that sentence beside the plant so the next reader scores it against the float bound
+and not against `N`.
