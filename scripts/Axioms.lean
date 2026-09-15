@@ -1433,6 +1433,8 @@ held, and by an exact rational certificate checked OUTSIDE the kernel
 trust that these lines do not show. -/
 
 #print axioms add_one_le_chromaticNumber_of_indepNum_le
+-- FS-53 K2: its lemma API — a colouring and an independence bound meeting in one statement.
+#print axioms chromaticNumber_eq_succ_of_colorable_of_indepNum_le
 #print axioms seven_le_chromaticNumber_finitePlane83_of_indepNum_le
 #print axioms six_le_chromaticNumber_finitePlane23_of_indepNum_le
 #print axioms five_le_chromaticNumber_finitePlane11_of_indepNum_le

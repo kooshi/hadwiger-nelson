@@ -1,7 +1,7 @@
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 
 /-!
-# FS-53 — the sixth colour: the window's thresholds, the equality schema, and a field's bound
+# FS-53 — the sixth colour: the window's threshold and a field's bound
 
 Which finite Euclidean plane, if any, needs exactly six colours? Six colours on `UD(𝔽_q, 2)` need an
 independent set of `⌈q²/6⌉` points, which the ratio bound permits only while `5|λ_min| ≥ q + 1`; with
@@ -11,8 +11,6 @@ exactly six can live only at `q ∈ {23, 27, 31, 43, 47, 59, 67, 79}`, and none 
 
 This module holds the kernel content that does **not** wait on a digit:
 
-* the **equality schema** — a verified `(k+1)`-colouring together with a certified bound on the
-  independence number pins `χ` exactly;
 * the **window's threshold**, one statement on `finitePlane q` with the vertex count folded in (a per-member
   named form is minted only when its certificate exists — subplan §S12.1 D-14);
 * a **field's bound at the ring level**: a ring homomorphism from an order into `𝔽_q` is a graph
@@ -35,31 +33,27 @@ seven prime members that is the finite Euclidean plane. For the window's eighth 
 claims nothing. The plane over `𝔽₂₇ = 𝔽₃[t]/(t³ − t − 1)` needs a concrete finite field with decidable
 equality that this library has not got, and the subplan prices it (§S7 D-8).
 
+## Where the equality schema went
+
+`chromaticNumber_eq_succ_of_colorable_of_indepNum_le` — a verified `(k+1)`-colouring together with a
+certified bound on the independence number pins `χ` exactly — is a statement about any finite graph,
+so it is library rather than instance and lives in `LocalGlobal.lean` beside
+`add_one_le_chromaticNumber_of_indepNum_le`, whose lemma API it is (subplan §S12.1 D-15). A reader
+looking for "colouring plus independence bound gives `χ` exactly" finds it next to the bound they
+already have in hand.
+
 ## Vacuity
 
 The threshold theorems assume a `≤` between natural numbers, not a structure, so `scripts/Vacuity.lean`
-records no carrier site for them. The equality schema is parametric in the graph — `GENERIC`, the
-caller's obligation. `unitQuadrance O23` is inhabited by its own zero, and the field bound's hypothesis
-is a `Colorable`, which the schema's callers supply.
+records no carrier site for them. `unitQuadrance O23` is inhabited by its own zero, and the field
+bound's hypothesis is a `Colorable`, which its callers supply — at 23,
+`CayleyCert.colorable_finitePlane23_eight` supplies one today (eight colours), so
+`colorable_unitQuadrance_O23` is not an empty statement.
 -/
 
 namespace HadwigerNelson
 
 open SimpleGraph
-
-/-! ### The equality schema -/
-
-/-- **A colouring plus an independence bound pins `χ` exactly.** If a finite graph is `(k+1)`-colourable
-and no independent set exceeds `a` points while `k · a` is fewer than the vertices, then `χ = k + 1`.
-
-This is the shape of every headline FS-53 can produce: the upper half is a verified colouring table
-(`CayleyCertificate.lean`'s `CayleyCert.sound`, which this module deliberately does not import: the
-threshold statements are independent of how an upper bound is certified), the lower half an exact rational certificate consumed through
-`add_one_le_chromaticNumber_of_indepNum_le`. Neither half alone is a digit. -/
-theorem chromaticNumber_eq_succ_of_colorable_of_indepNum_le {V : Type*} [Fintype V]
-    {G : SimpleGraph V} {k a : ℕ} (hcol : G.Colorable (k + 1)) (hα : G.indepNum ≤ a)
-    (hlt : k * a < Fintype.card V) : G.chromaticNumber = (k + 1 : ℕ) := by
-  sorry
 
 /-! ### The window's thresholds, in one statement
 

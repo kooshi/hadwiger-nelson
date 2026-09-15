@@ -212,6 +212,24 @@ theorem add_one_le_chromaticNumber_of_indepNum_le [Fintype V] (h : G.indepNum �
   add_one_le_chromaticNumber_iff_not_colorable.mpr
     (not_colorable_of_mul_lt (fun _s hs => hs.card_le_indepNum.trans h) hk)
 
+/-- **A colouring plus an independence bound pins `χ` exactly.** If a finite graph is
+`(k+1)`-colourable and no independent set exceeds `a` points while `k · a` is fewer than the
+vertices, then `χ = k + 1`.
+
+This is the lemma API of the bound above, and the shape of every exact chromatic number FS-53 can
+produce: the upper half is a verified colouring — `CayleyCertificate.lean`'s `CayleyCert.Cert.sound`
+consumes a packed table and returns exactly this `Colorable` — and the lower half an exact rational
+certificate checked outside the kernel and consumed through
+`add_one_le_chromaticNumber_of_indepNum_le`. **Neither half alone is a digit**, which is why they
+meet in one statement rather than in a paragraph: an upper bound with no matching refusal is a
+ceiling, and a refusal with no colouring is a floor.
+
+Parametric in the graph, so `scripts/vacuity.sh` records it `GENERIC` — the caller owes the
+inhabitant, and at FS-53's window nobody holds one yet. -/
+theorem chromaticNumber_eq_succ_of_colorable_of_indepNum_le [Fintype V] (hcol : G.Colorable (k + 1))
+    (hα : G.indepNum ≤ a) (hlt : k * a < Fintype.card V) : G.chromaticNumber = (k + 1 : ℕ) :=
+  le_antisymm hcol.chromaticNumber_le (add_one_le_chromaticNumber_of_indepNum_le hα hlt)
+
 /-- **The fractional face: `card ≤ χ · α`**, in `ℕ∞`. -/
 theorem card_le_chromaticNumber_mul_indepNum [Fintype V] :
     (Fintype.card V : ℕ∞) ≤ G.chromaticNumber * G.indepNum := by

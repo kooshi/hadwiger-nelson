@@ -189,9 +189,15 @@ def covers (c : Cert) (A : IdArith R) : Bool :=
 
 /-- No listed circle point joins two vertices of the same colour.
 
-The vertex walk is the **outer** loop and the circle the inner one, which is not a matter of taste:
-`List.range A.nverts` written inside the circle's `all` is rebuilt once per circle point, and
-`CLAUDE.md` § The kernel's cost model prices a rebuilt index list at about 0.83 ms per element. -/
+The vertex walk is the **outer** loop and the circle the inner one, so that `List.range A.nverts` is
+written once rather than once per circle point. **Measured, and the measurement is the reason this
+paragraph is not stronger:** at `q = 23` the two orders cost 4.19 s and 4.17 s for the whole module —
+a difference inside run-to-run variation, so the kernel's `whnf` cache evidently absorbs the repeated
+`List.range`, and the naive prediction (24 rebuilds of a 529-node list) is simply not what happens.
+The order is kept because it is the honest shape and costs nothing, not because it was found to
+matter. At a larger `q`, or for an index list built by `List.range` *and* `List.map` — which is the
+construction `CLAUDE.md` § The kernel's cost model actually prices, at about 0.83 ms per element —
+the question would have to be measured again. -/
 def proper (c : Cert) (A : IdArith R) : Bool :=
   (List.range A.nverts).all fun v =>
     c.circle.all fun s =>
