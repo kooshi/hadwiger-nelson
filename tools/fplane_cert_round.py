@@ -437,10 +437,10 @@ def real_block_setup(F, plant=None):
     return js, dims, Ts, mapsY, mapsM, weights
 
 
-def solve_blocks_real(F, rows, solver="SCS", verbose=False, opts=None, plant=None):
-    """The same relaxation as `solve_blocks`, in the reduced real blocks, with the duals pushed back
-    through the congruence so that everything downstream -- the sign probe, the rounding sweep, the
-    wire form, the checker -- is byte-for-byte the same code as the Hermitian form uses."""
+def build_real_problem(F, rows, plant=None):
+    """The relaxation in the reduced real blocks, as a cvxpy problem plus the per-block congruences.
+    Returns (prob, y, cY, cM, Ts, weights) -- `cY[j]`, `cM[j]` the two positive semidefinite
+    constraints of block j, whose duals push back onto the wire form as `T_j W T_j^T`."""
     import cvxpy as cp
     K, k0 = F["K"], F["k0"]
     t0 = time.time()
@@ -468,10 +468,91 @@ def solve_blocks_real(F, rows, solver="SCS", verbose=False, opts=None, plant=Non
         cY.append(c1)
         cM.append(c2)
     prob = cp.Problem(cp.Maximize(cp.sum(cp.multiply(np.array(F["t"], dtype=float), y))), cons)
+    return prob, y, cY, cM, Ts, weights
+
+
+def solve_blocks_real(F, rows, solver="SCS", verbose=False, opts=None, plant=None):
+    """The same relaxation as `solve_blocks`, in the reduced real blocks, with the duals pushed back
+    through the congruence so that everything downstream -- the sign probe, the rounding sweep, the
+    wire form, the checker -- is byte-for-byte the same code as the Hermitian form uses."""
+    prob, y, cY, cM, Ts, weights = build_real_problem(F, rows, plant)
     prob.solve(solver=solver, verbose=verbose, **(opts or {}))
     push = lambda T, c: T @ np.asarray(c.dual_value) @ T.T
     return (prob.value, prob.status, [push(T, c) for T, c in zip(Ts, cY)],
             [push(T, c) for T, c in zip(Ts, cM)], weights)
+
+
+def solve_blocks_real_chunked(F, rows, eps=1e-8, chunk=2000, max_iters=200000, ckpt=None,
+                              plant=None):
+    """The same solve, driven through SCS's OWN API in warm-started chunks, so that it is observable
+    (one flushed line per chunk: iterations, residuals, gap, objective) and RESUMABLE (the iterate
+    x, y, s goes to `ckpt` after every chunk; a relaunch continues from it).
+
+    Written 2026-09-15 after a four-hour solve at p = 83 was lost with nothing on disk -- the
+    architecture is `tools/fplane_sdp_scs.py`'s, applied to the producer, whose duals then come out in
+    the producer's own convention and need no translation.  cvxpy still builds and inverts the problem,
+    so the cone data and the dual unpacking are the identical code path the one-shot solve uses; only
+    the iteration loop is ours.  Controlled at 11 and 23: the chunked path must return the same float
+    bound and produce the same exact N as the one-shot path."""
+    import cvxpy as cp
+    import scs as scs_mod
+    prob, y, cY, cM, Ts, weights = build_real_problem(F, rows, plant)
+    t0 = time.time()
+    data, chain, inv = prob.get_problem_data(cp.SCS)
+    dims = data["dims"]
+    cone = dict(z=int(dims.zero), l=int(dims.nonneg), s=[int(x) for x in dims.psd])
+    A, b, c = data["A"], data["b"], data["c"]
+    print(f"[blocks] SCS data: A {A.shape} nnz {A.nnz}; {len(cone['s'])} positive semidefinite "
+          f"blocks of size <= {max(cone['s'])}; built in {time.time() - t0:.0f} s", flush=True)
+    ck = Path(ckpt) if ckpt else None
+    x0 = yv = sv = None
+    done = 0
+    if ck is not None and ck.exists():
+        z = np.load(ck)
+        x0, yv, sv, done = z["x"], z["y"], z["s"], int(z["iters"])
+        if x0.shape[0] != A.shape[1] or yv.shape[0] != A.shape[0]:
+            raise SystemExit(f"[blocks] {ck} holds an iterate of shape {x0.shape}/{yv.shape}, but this "
+                             f"problem is {A.shape}: wrong p, or a different formulation")
+        print(f"[blocks] resumed from {ck}: {done} iterations already done", flush=True)
+    solver = scs_mod.SCS(dict(A=A, b=b, c=c), cone, eps_abs=eps, eps_rel=eps, max_iters=chunk,
+                         verbose=False, normalize=True)
+    result = None
+    nch = 0
+    while done < max_iters:
+        t1 = time.time()
+        result = (solver.solve(warm_start=True, x=x0, y=yv, s=sv) if x0 is not None
+                  else solver.solve())
+        info = result["info"]
+        x0, yv, sv = result["x"], result["y"], result["s"]
+        done += int(info["iter"])
+        nch += 1
+        if ck is not None:
+            ck.parent.mkdir(parents=True, exist_ok=True)
+            np.savez(ck, x=x0, y=yv, s=sv, iters=done)
+        print(f"[blocks] chunk {nch}: +{info['iter']} it ({done} total) in {time.time() - t1:.0f} s; "
+              f"pobj {info['pobj']:.6f} dobj {info['dobj']:.6f} res_pri {info['res_pri']:.2e} "
+              f"res_dual {info['res_dual']:.2e} gap {info['gap']:.2e} -- {info['status']}", flush=True)
+        st = info["status"].lower()
+        # THE TRAP THIS LOOP IS WRITTEN AROUND, caught by the control at p = 11: SCS ends EVERY chunk
+        # with the status "solved (inaccurate - reached max_iters)", because max_iters IS the chunk.
+        # A `startswith("solved")` break therefore stops after one chunk and reports a bound that is
+        # merely wherever the iterate happened to be -- 29.2729 against the true 29.1768 at p = 11,
+        # and it looks like a clean success.  Only a status that says "solved" and does NOT say
+        # "inaccurate" is convergence.
+        if st.startswith("solved") and "inaccurate" not in st:
+            break
+        if not st.startswith("solved"):
+            print(f"[blocks] SCS stopped with status {info['status']!r} -- not a convergence and not "
+                  f"a chunk boundary; the loop ends here and the dual is whatever it is (the "
+                  f"certificate stays sound, the bound may be weak)", flush=True)
+            break
+    else:
+        print(f"[blocks] the iteration cap {max_iters} was reached without convergence; the dual is "
+              f"used as it stands (sound, possibly weak)", flush=True)
+    prob.unpack_results(result, chain, inv)
+    push = lambda T, cc: T @ np.asarray(cc.dual_value) @ T.T
+    return (prob.value, prob.status, [push(T, cc) for T, cc in zip(Ts, cY)],
+            [push(T, cc) for T, cc in zip(Ts, cM)], weights)
 
 
 def check_real(p, out=sys.stdout):
@@ -600,14 +681,19 @@ def main_blocks(a):
         if a.max_iters is not None:
             opts["max_iters"] = a.max_iters
         t1 = time.time()
-        if a.real:
+        if a.real and a.chunk:
+            val, status, Ws, Vs, weights = solve_blocks_real_chunked(
+                F, rows, eps=(a.eps if a.eps is not None else 1e-8), chunk=a.chunk,
+                max_iters=(a.max_iters or 200000), ckpt=a.scs_ckpt, plant=plant)
+        elif a.real:
             val, status, Ws, Vs, weights = solve_blocks_real(F, rows, solver=a.solver,
                                                              verbose=a.verbose, opts=opts,
                                                              plant=plant)
         else:
             val, status, Ws, Vs, weights = solve_blocks(F, rows, solver=a.solver, verbose=a.verbose,
                                                         opts=opts)
-        print(f"[blocks] the float bound: {val:.6f} ({status}, {a.solver}, "
+        print(f"[blocks] the float bound: {val:.6f} ({status}, "
+              f"{'SCS, chunked' if (a.real and a.chunk) else a.solver}, "
               f"{'real' if a.real else 'Hermitian'} blocks) in {time.time()-t1:.1f} s", flush=True)
         if cache is not None:
             cache.parent.mkdir(parents=True, exist_ok=True)
@@ -742,6 +828,12 @@ def main():
     ap.add_argument("--plant-phase", metavar="CIRCLE,SHIFT",
                     help="negative control (needs --real): shift one circle's reflection angle, which "
                          "must leave the certificate sound and make N larger")
+    ap.add_argument("--chunk", type=int,
+                    help="with --real: drive SCS in warm-started chunks of this many iterations, "
+                         "printing one flushed line each and checkpointing the iterate to --scs-ckpt, "
+                         "so a long solve is observable and a kill costs one chunk")
+    ap.add_argument("--scs-ckpt", help="where the chunked solve saves its iterate (npz); a relaunch "
+                                       "with the same file continues from it")
     ap.add_argument("--check-real", action="store_true",
                     help="run the real form's controls at p and exit")
     a = ap.parse_args()
