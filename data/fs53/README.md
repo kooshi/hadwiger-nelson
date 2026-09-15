@@ -82,3 +82,21 @@ implementer and the product owner wrote "first at a window member" before checki
 the window (23, 27) and two outside it (11, 83), and the window half alone already spans 0.8238 to 0.9110. It is a converged value, not a
 compute artifact: two formulations and three solvers agree. `plans/STUB-sixth-colour.md` §S6 P3 predicted the
 certificate would refuse five at 27; **it does not, and P3 is falsified there.**
+
+
+## Two `edges_sha256` conventions, and the bridge between them (the product owner, 2026-09-15)
+
+`data/fs53/window.md`'s cells are filled from **two** toolchains, and both write a field named
+`edges_sha256` **computed differently**, so the same graph carries two different digests:
+
+| written by | convention | at `q = 23` |
+|---|---|---|
+| `tools/fplane.py`, `tools/fplane_periodic_subgroups.py`, `tools/fplane_cert_check.py` | sha256 of `repr(sorted [(min, max)])` over the undirected edge list | `9e7c0a81f67cb8c2…901e6613b3` |
+| `~/source/descent-engine`'s `plane-colour` and `plane-independent` | sha256 of each endpoint as a **little-endian u32**, same sorted undirected list | `4321f5f1880fff97…49aa25bb3` |
+
+Standing rule 5 exists so that "a later record can be compared against" an earlier one, and across the tool boundary
+that comparison silently fails: two honest records of one graph disagree. **The bridge is committed rather than
+documented:** `tools/fplane_review_verify.py` now computes **both**, prints both, accepts either under
+`--expect-sha`, and carries a control that reproduces `plane-colour`'s own digest at `q = 23` from the definition —
+so the two toolchains are confirmed to build **the same graph**, and the difference is serialisation only. Run
+`python3 tools/fplane_review_verify.py graph --q <q>` to get both numbers for any member.

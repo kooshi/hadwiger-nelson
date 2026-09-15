@@ -109,11 +109,22 @@ def plane(F):
 
 
 def edge_hash(n, nbr):
-    E = set()
-    for i in range(n):
-        for j in nbr[i]:
-            E.add((min(i, j), max(i, j)))
-    return hashlib.sha256(repr(sorted(E)).encode()).hexdigest(), len(E)
+    """Both conventions in use in this project, over the same sorted undirected edge list.
+
+    `py`   — sha256 of repr(sorted list of (min, max) pairs); what tools/fplane.py and
+             tools/fplane_periodic_subgroups.py write as `edges_sha256`.
+    `rust` — sha256 of each endpoint as a little-endian u32, in the same sorted order; what
+             ~/source/descent-engine's plane-colour and plane-independent write under the SAME
+             field name.  Reproduced here (2026-09-15) and confirmed against plane-colour's own
+             digest at q = 23, so a record from either toolchain can be checked against the other:
+             the two numbers differ only in serialisation, never in the graph."""
+    E = sorted({(min(i, j), max(i, j)) for i in range(n) for j in nbr[i]})
+    py = hashlib.sha256(repr(E).encode()).hexdigest()
+    h = hashlib.sha256()
+    for u, v in E:
+        h.update(u.to_bytes(4, "little"))
+        h.update(v.to_bytes(4, "little"))
+    return py, h.hexdigest(), len(E)
 
 
 def dig(obj, path):
@@ -138,11 +149,12 @@ def main():
         return window()
     F = Field(a.q, a.modulus)
     circle, n, nbr = plane(F)
-    h, ne = edge_hash(n, nbr)
+    h, hr, ne = edge_hash(n, nbr)
     print(f"q = {a.q}{' (F_' + str(a.q) + ' by ' + a.modulus + ')' if a.modulus else ''}: "
-          f"{n} vertices, degree {len(circle)}, {ne} edges, edges_sha256 {h}")
-    if a.expect_sha and a.expect_sha != h:
-        sys.exit(f"MISMATCH: expected edges_sha256 {a.expect_sha}")
+          f"{n} vertices, degree {len(circle)}, {ne} edges\n  edges_sha256 (python tools) {h}"
+          f"\n  edges_sha256 (descent-engine) {hr}")
+    if a.expect_sha and a.expect_sha not in (h, hr):
+        sys.exit(f"MISMATCH: expected edges_sha256 {a.expect_sha}, got {h} (python) / {hr} (rust)")
     if a.mode == "graph":
         return
     rec = json.load(open(a.json))
@@ -253,7 +265,7 @@ def self_test():
     ok = True
     F = Field(27, "t^3-t-1")
     circle, n, nbr = plane(F)
-    h, ne = edge_hash(n, nbr)
+    h, hr, ne = edge_hash(n, nbr)
     shape = (n == 729 and len(circle) == 28 and ne == 10206 and
              h == "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d")
     print(f"[control 1] F_27 plane: {n} vertices, degree {len(circle)}, {ne} edges, sha {h[:16]}…: "
@@ -282,13 +294,23 @@ def self_test():
     try:
         F2 = Field(27, "t^3-t-2")
         _, n2, nbr2 = plane(F2)
-        h2, ne2 = edge_hash(n2, nbr2)
+        h2, _hr2, ne2 = edge_hash(n2, nbr2)
         differs = (h2 != h)
         print(f"[plant B] the reducible modulus t^3-t-2 gives {ne2} edges, sha {h2[:16]}… — "
               f"{'DIFFERS as it must' if differs else 'IDENTICAL: FAIL'}")
         ok &= differs
     except Exception as e:                                  # a reducible modulus need not be a field
         print(f"[plant B] the reducible modulus t^3-t-2 raised {type(e).__name__}: acceptable (not a field)")
+    # control: the descent-engine's own digest at q = 23, reproduced from its convention
+    F23 = Field(23)
+    _c23, n23, nbr23 = plane(F23)
+    _py23, rust23, _ne23 = edge_hash(n23, nbr23)
+    want = "4321f5f1880fff97295b9d763dec1d8c73a4d4cc8bd58921c5b659349aa25bb3"
+    agree = rust23 == want
+    print(f"[control 3] the descent-engine's edges_sha256 at q = 23 (little-endian u32 over the sorted "
+          f"undirected edge list): {rust23[:16]}… against plane-colour's own {want[:16]}…: "
+          f"{'AGREE — the two toolchains build the same graph' if agree else 'DISAGREE: FAIL'}")
+    ok &= agree
     # plant C: a prime power with no modulus must be refused
     import subprocess
     r = subprocess.run([sys.executable, __file__, "graph", "--q", "27"], capture_output=True, text=True)
