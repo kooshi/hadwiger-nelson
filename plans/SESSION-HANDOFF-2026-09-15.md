@@ -65,6 +65,30 @@ it once; nothing there is repeated here).
    increments shrinking cleanly — stands unless the qdldl line contradicts it. The 1,000-iteration certificate was
    CERTIFIED by the untouched checker here too (⌊N⌋ = 2232; `--k 6` says nothing, as it must).
 
+10. **The two relaxations, measured properly (the implementer, 04:50): the extra rows are valid, new, and INACTIVE at 11 and
+   23.** One tool, one tolerance (10⁻⁹), one thing differing: canonical list vs all three edges gives 29.176799 / 29.176799
+   at 11 (152 extra rows over 96 orbits) and 108.546073 / 108.546073 at 23 (1,740 over 980). My earlier 23 comparison differed
+   in two things (rows AND tolerance: the reading tool at SCS's default 10⁻⁴; the producer's own formulation reads 108.621145
+   there). **Decision: do not extend the canonical list now**; record the rows as a known unexploited strengthening and revisit
+   only if the two 83 solves converge to different values at equal tolerance (then it is a measurement, not a hunch).
+11. **The baseline, uncontended (bench, 04:45):** the wheel's sequential MKL Pardiso runs **1.405 s/iteration alone** (lin-sys
+   94 %, cones 3 %, factorisation 771 s); the 3.4 s/it the four concurrent solves showed was memory-bandwidth contention
+   among bandwidth-bound direct solves (2.5×). `cpu_indirect` 0.76 s/it (setup 3 s). So the GPU is ≈ 7× the lone sequential
+   solver, 17× the contended one, ≈ 2× the threaded Pardiso (0.70 s/it, 8 threads). The BLAS part was never the cost.
+12. **`--against` is unavailable at 83, and the checker's last line contradicts its verdict there.** With `--against
+   data/fs50/wo18/p83-chain.json` the four checks CERTIFIED the file and the 597-set was re-verified independent, then after
+   34 min 17 s the run ended "NOT A CERTIFICATE: --against assembles the certificate's matrices … 47458321 entries … re-run
+   without --against". The 34 minutes are `evaluate_at_set` calling `build_orbits(p)` (the n² union-find) at line 1266 and an
+   n × n addition table at 1279, both before the `p > 29` guard at 1299. **Open item for the close (the checker is frozen
+   except by a recorded decision):** decide the display's feasibility as the first statement of `evaluate_at_set`; print the
+   CERTIFIED line last in every path; make the unavailability a note, not a refusal; add the negative control that a run with
+   an unavailable `--against` still ends on CERTIFIED; re-run the whole self-test. **The HALT-AND-VERIFY protocol at 83 is
+   therefore:** the untouched checker on the file FIRST (it decides), then a second rounding from the same iterate at a
+   different cut and denominator, then `--ldl` on the blocks; the 597-set's independence is the part of `--against` that does
+   run. Latest rounding from the live checkpoint (the implementer): N = 1379.80 at 6,000 iterations; the rounding gap over
+   the objective has gone 1380 → 1159 → 310 while the objective sits within half a unit of 1,070 since 3,000 iterations —
+   the dual's inaccuracy is what must close, to about 78.
+
 ## 2. What is running at 04:10 (all on the desktop; ≈ 40 GB of 125 in use; every one resumable)
 
 | pid | what | checkpoint | note |
@@ -97,7 +121,8 @@ Launch recipe that works (the `cd` must be OUTSIDE the backgrounded list, paths 
    move the producer to it at a checkpoint (`LD_LIBRARY_PATH=build/venv-sdp-mkl/lib`, same command). The reading IS the
    producer's chunk lines; no separate reading run is relaunched.
 3. The **first exact bound at 83** (round-only): a README row and a ledger sentence — `[exact-rational]`, with the iterate's
-   residual — and, if `⌊N⌋ ≤ 1148`, HALT AND VERIFY per the previous letter's §3 before any sentence about χ.
+   residual — and, if `⌊N⌋ ≤ 1148`, HALT AND VERIFY per §1 item 12's order (checker first; second rounding; `--ldl`; no
+   `--against` at 83) before any sentence about χ.
 4. The close (WORKFLOW step 9), keyed on the outcome exactly as the previous letter's §3 lays out: the ledger row with the
    three trust levels; rows 53/56; G44/G48; item 2 of "what the hunt has established"; `plans/FRONTIER-STUBS.md` re-ranked
    with FS-51 and FS-52 added (assert every FS exactly once) and the mirror in `CLAUDE.md`; the conjecture sweep;
