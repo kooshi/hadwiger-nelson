@@ -15,13 +15,19 @@ members remain, none decided.**
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
-| **27** | 729 | **−8** | 162.00 | — | — | 5 `[solver]` | **7** `[planner]` | 122 | 0.7531 | 146 | **0.9012** |
+| **27** | 729 | **−8** | 162.00 | — | — | 5 `[exact]` | **7** `[planner]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | — | — | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | — | — | 5 `[exact]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | — | — | 5 `[exact]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
 | 59 | 3481 | −14.9176 | 693.14 | — | — | 6 `[exact]` | 10 `[search]` | 581 | 0.8382 | (refused) | 1.0056 |
 | 67 | 4489 | −15.0567 | 813.78 | — | — | 6 `[exact]` | 12 `[search]` | 749 | **0.9204** | (refused) | 1.1035 |
 | 79 | 6241 | −17.1019 | 1099.19 | — | — | 6 `[exact]` | — | 1041 | **0.9471** | (refused) | 1.1363 |
+
+At `q = 27` the floor is the ratio bound's, `⌈729/162⌉ = 5`, and **not** the solver's: `data/fplane/chi-q27.json`
+records `k = 4` UNSAT in 6.9 s, which is the same number by an untrusted route. Its `k = 5` row is `unknown` at 2,328 s.
+That record's graph — 729 vertices, degree 28, 10,206 edges — is reproduced exactly by
+`tools/fplane_periodic_subgroups.py`, which rebuilds the field from the body commit `a3adc46` deleted, so the committed
+record and the restored producer agree on the object.
 
 *Decided, for scale:* `χ(UD(𝔽₃,2)) = 3`, `χ(UD(𝔽₇,2)) = 4`, `χ(UD(𝔽₁₁,2)) = 5` `[kernel]`, `χ(UD(𝔽₁₉,2)) = 5` `[solver]`;
 `χ(UD(𝔽₇₁,2)) ≥ 7` `[exact]`; `χ(UD(𝔽₈₃,2)) ≥ 7` `[cert]`, `α(83) ≥ 597` `[search]`, `α(83) ≤ 1076` `[cert]`.

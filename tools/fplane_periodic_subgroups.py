@@ -90,26 +90,35 @@ def span(M):
     return out
 
 
-def quotient(M, cv, allv, pow3):
-    """the quotient Cayley graph, or None when a circle point lies in the subgroup (a loop)."""
-    H = span(M)
-    Hs = set(H)
-    if Hs & set(cv):
-        return None
-    rep = {}
+def add_table(allv, pow3):
+    """the 729 x 729 addition table of (Z/3)^6 on encoded vectors -- built once, so every quotient
+    below is integer lookups rather than tuple arithmetic (measured: about 8x the whole sweep)."""
+    n = len(allv)
+    T = [None] * n
     for v in allv:
-        rep[v] = min(enc(tuple((a + b) % 3 for a, b in zip(v, h)), pow3) for h in H)
-    ids = sorted(set(rep.values()))
+        i = enc(v, pow3)
+        T[i] = [enc(tuple((a + b) % 3 for a, b in zip(v, w)), pow3) for w in allv]
+    return T
+
+
+def quotient(M, cve, T, n):
+    """the quotient Cayley graph on encoded vectors, or None when a circle point lies in the
+    subgroup (which would make the quotient carry a loop and no colouring pull back)."""
+    He = [enc(h, [243, 81, 27, 9, 3, 1]) for h in span(M)]
+    if set(He) & set(cve):
+        return None
+    rep = [min(T[v][h] for h in He) for v in range(n)]
+    ids = sorted(set(rep))
     idx = {r: i for i, r in enumerate(ids)}
-    S = sorted({idx[rep[s]] for s in cv})
-    if idx[rep[(0,) * 6]] in S:
+    ridx = [idx[r] for r in rep]
+    S = sorted({ridx[c] for c in cve})
+    if ridx[0] in S:
         return None
     m = len(ids)
-    dec = {i: allv[r] for r, i in ((r, idx[r]) for r in ids)}
     adj = [set() for _ in range(m)]
     for i in range(m):
         for s in S:
-            j = idx[rep[tuple((a + b) % 3 for a, b in zip(dec[i], dec[s]))]]
+            j = ridx[T[ids[i]][ids[s]]]
             if j != i:
                 adj[i].add(j); adj[j].add(i)
     return m, adj, len(S)
@@ -163,9 +172,11 @@ def verify(adj, n, col, k):
     return True
 
 
-def sweep(q, k, dims, tries, log=print):
+def sweep(q, k, dims, tries, log=print, out=None, head=None):
     cv, allv, pow3 = build(q)
     h, ne = edges_sha256(cv, allv, pow3)
+    T = add_table(allv, pow3)
+    cve = [enc(c, pow3) for c in cv]
     rows = []
     for j in dims:
         t0 = time.time(); rng = random.Random(7)
@@ -173,7 +184,7 @@ def sweep(q, k, dims, tries, log=print):
         exact = j >= 3
         for M in rrefs(6, j):
             n_sub += 1
-            qg = quotient(M, cv, allv, pow3)
+            qg = quotient(M, cve, T, len(allv))
             if qg is None:
                 continue
             usable += 1
@@ -207,8 +218,18 @@ def sweep(q, k, dims, tries, log=print):
         word = "EXACT" if exact else f"a null at {tries} DSATUR restarts"
         log(f"dim {j} (index {3**(6-j)}): {n_sub} subspaces, {usable} usable, {hits} are {k}-colourable "
             f"[{word}]; best k found {rows[-1]['best_k_found']}  [{rows[-1]['seconds']}s]")
+        # The record is rewritten after EVERY dimension, not once at the end: a sweep of the whole
+        # family is tens of minutes, and a run whose state lives only in a process is a bug, not a
+        # style choice (CLAUDE.md's checkpointing rule). A killed run leaves the dimensions it
+        # finished; the relaunch redoes only the one in flight, and `--dims` names which.
+        if out:
+            json.dump(record(q, k, ne, h, rows, partial=True), open(out, "w"), indent=1)
+    return record(q, k, ne, h, rows)
+
+
+def record(q, k, ne, h, rows, partial=False):
     return dict(kind="fplane-periodic-subgroups", q=q, k=k, n=q * q, degree=q + 1, edges=ne,
-                edges_sha256=h, rows=rows,
+                edges_sha256=h, rows=rows, partial=partial, dims_done=[r["dim"] for r in rows],
                 claim_scope=("a hit is a VERIFIED proper colouring of a quotient, so chi(UD(F_q,2)) <= k follows by pullback; "
                              "a miss at dim >= 3 is exact over that family; a miss at dim <= 2 is a null at the DSATUR budget; "
                              "no result here ever refuses a colouring of the plane, which need not be periodic"))
@@ -217,11 +238,13 @@ def sweep(q, k, dims, tries, log=print):
 def self_test():
     """three controls, each watched to fire."""
     cv, allv, pow3 = build(27)
+    T = add_table(allv, pow3)
+    cve = [enc(c, pow3) for c in cv]
     ok = True
     # 1 positive: the family must contain a colouring at k = 9 at dimension 4 (every such quotient is K_9)
     rng = random.Random(1); found = False
     for M in rrefs(6, 4):
-        qg = quotient(M, cv, allv, pow3)
+        qg = quotient(M, cve, T, len(allv))
         if qg is None:
             continue
         m, adj, ds = qg
@@ -237,7 +260,7 @@ def self_test():
     lead = next(i for i, a in enumerate(s) if a)
     inv = 1 if s[lead] == 1 else 2
     M[0] = [(a * inv) % 3 for a in s]
-    refused = quotient(M, cv, allv, pow3) is None
+    refused = quotient(M, cve, T, len(allv)) is None
     print(f"[control 2] the line through a circle point is refused as unusable: {refused}")
     ok &= refused
     # 3 the graph's hash and shape, asserted against the field's own definition
@@ -260,7 +283,7 @@ def main():
     a = ap.parse_args()
     if a.self_test:
         return self_test()
-    rec = sweep(a.q, a.k, [int(d) for d in a.dims.split(",")], a.restarts)
+    rec = sweep(a.q, a.k, [int(d) for d in a.dims.split(",")], a.restarts, out=a.out)
     if a.out:
         json.dump(rec, open(a.out, "w"), indent=1)
         print(f"  wrote {a.out}")

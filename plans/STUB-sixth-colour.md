@@ -312,6 +312,8 @@ members** (the stub's §2 and `CLAUDE.md` G56 list seven: `q = 27 = 3³` was omi
 is 28-regular and loopless). `frac6` and `frac5` are the fractions of the ratio bound a certificate must get **below** to
 refuse six and five; compare them against the reach 0.82–0.90 and the whole of phase B's ordering falls out.
 
+*(At `q = 27` the floor 5 is the ratio bound's, `⌈729/162⌉ = 5`, not the solver's: `data/fplane/chi-q27.json`'s `k = 4` UNSAT is the same number by an untrusted route, and its `k = 5` row is `unknown` at 2,328 s.)*
+
 **The exclusion for every field this project has built in** (`CLAUDE.md` G56, §0.3): a prime is usable for `F` only if every
 radicand of `F` is a square modulo it; every field here contains `ℚ(√3, √11)`, and at each window member 3 or 11 fails — 3 at
 31, 43, 67, 79; 11 at 23, 47, 59. **At `q = 27` the argument as written does not typecheck** (3 is ramified) and needs one
