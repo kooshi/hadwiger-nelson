@@ -46,6 +46,25 @@ it once; nothing there is repeated here).
    from its 1,000-iteration checkpoint with `--linear-solver gpu_indirect` (the flag added to `fplane_cert_round.py`,
    default `auto`, every old command line unchanged). The implementer was told all of this by message.
 
+8. **Two relaxations, not one (04:35).** The checker's `canonical_constraints` emits ONE `le_diag` row per orbit (P6 at the
+   representative's first endpoint), while `fplane_sdp_scs.py` / `fplane_sdp_blocks.py` impose P6 at all three edges of
+   the triangle an orbit represents (at 83: 139,361 rows over 47,601 orbits — 81 with one, 3,280 with two, 44,240 with
+   three). So the reading tools solve a strictly tighter relaxation than the producer certifies; at 23 the two agree to
+   < 10⁻³ (the extra rows did not bind). At 83 the driver's formulation on card B (`build/venv-sdp-mkl`, pid 2816615,
+   ckpt `data/fs50/ckpt/scs-p83-real-gpu.npz`, log job tmp `sdp/s83gpu.log`) read pobj −1031.64 at 2,000 iterations with
+   res_pri 5.5e-2 / res_dual 1.2e-1 (0.27 s/it), against the producer's −1070.23 at 6,000 with res_pri 1.66 — not yet
+   comparable as values. For the six-colour sentence the certified relaxation suffices if it lands under 1,148; for the
+   TABLE the tighter one is the better number where the rows bind, and certifying it means extending the canonical list
+   (three rows per orbit), the derivation's multiplier steps 1–3 and the wire format, and regenerating the 11/23
+   certificates — **a decision for the close**, sent to the implementer for its report.
+9. **The GPU backend's honesty controls (launched 04:24 from a verified copy of the 5,000-iteration checkpoint, job tmp
+   `sdp/ckpt-control.npz`):** +500 iterations on the sequential direct solver (`ctl-qdldl.log`, chunk line to sit beside
+   the GPU's line at 5,500: pobj −1070.334948, res_pri 1.64, res_dual 5.83e-2) and `--round-only` under both wheels on
+   the same copy (`ro-cpu.log`, `ro-gpu.log`; exact N should agree to ~10⁻⁶, as the control at 11 did). The implementer's
+   reading of the rising primal residual — adaptive scaling trading primal for dual feasibility, the objective's
+   increments shrinking cleanly — stands unless the qdldl line contradicts it. The 1,000-iteration certificate was
+   CERTIFIED by the untouched checker here too (⌊N⌋ = 2232; `--k 6` says nothing, as it must).
+
 ## 2. What is running at 04:10 (all on the desktop; ≈ 40 GB of 125 in use; every one resumable)
 
 | pid | what | checkpoint | note |

@@ -35,6 +35,8 @@ def main():
     ap.add_argument("--p", type=int, required=True); ap.add_argument("--eps", type=float, default=1e-5)
     ap.add_argument("--chunk", type=int, default=2000); ap.add_argument("--max-iters", type=int, default=400000)
     ap.add_argument("--ckpt", required=True); ap.add_argument("--out"); ap.add_argument("--stop-after-chunks", type=int, default=0, help="(control) exit after this many chunks")
+    ap.add_argument("--linear-solver", default="auto", help="SCS linear-system backend (string): auto, qdldl, mkl, cpu_indirect, gpu_indirect, cudss; "
+                    "measured 2026-09-15 at 83: 3.4 s/it sequential direct, 0.3 s/it gpu_indirect; the iterate warm-starts across backends")
     a = ap.parse_args()
     import cvxpy as cp, scs
     t0 = time.time(); S, prob, yvar = build_problem(a.p)
@@ -46,7 +48,7 @@ def main():
     ck = Path(a.ckpt); x0 = y0 = s0 = None; done_iters = 0
     if ck.exists():
         z = np.load(ck); x0, y0, s0, done_iters = z["x"], z["y"], z["s"], int(z["iters"]); print(f"[scs] resumed from {ck}: {done_iters} iterations done", flush=True)
-    solver = scs.SCS(dict(A=A, b=b, c=c), cone, eps_abs=a.eps, eps_rel=a.eps, max_iters=a.chunk, verbose=False, normalize=True)
+    solver = scs.SCS(dict(A=A, b=b, c=c), cone, eps_abs=a.eps, eps_rel=a.eps, max_iters=a.chunk, verbose=False, normalize=True, linear_solver=a.linear_solver)
     chunks = 0; result = None
     while done_iters < a.max_iters:
         t1 = time.time()
@@ -54,7 +56,7 @@ def main():
         else: result = solver.solve()
         info = result["info"]; x0, y0, s0 = result["x"], result["y"], result["s"]; done_iters += int(info["iter"]); chunks += 1
         np.savez(ck, x=x0, y=y0, s=s0, iters=done_iters)
-        print(f"[scs] chunk {chunks}: +{info['iter']} it ({done_iters} total), {time.time()-t1:.0f} s, pobj {info['pobj']:.5f} dobj {info['dobj']:.5f} "
+        print(f"[scs] chunk {chunks}: +{info['iter']} it ({done_iters} total), {time.time()-t1:.0f} s ({(time.time()-t1)/max(1,int(info['iter'])):.3f} s/it, {a.linear_solver}), pobj {info['pobj']:.5f} dobj {info['dobj']:.5f} "
               f"res_pri {info['res_pri']:.2e} res_dual {info['res_dual']:.2e} gap {info['gap']:.2e} status {info['status']}", flush=True)
         # SCS labels EVERY chunk that reaches its iteration cap "solved (inaccurate - reached max_iters)" — the cap IS the
         # chunk size — so only a clean "solved" ends the loop (the FS-50 implementer's catch, 2026-09-15: the first version
