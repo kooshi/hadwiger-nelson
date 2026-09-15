@@ -967,7 +967,20 @@ disappear quietly merely because the decision was otherwise right.
 **Kill by PID or process group, never by matching a command line.** `pkill -f <pattern>` matches the shell that runs it
 and every other process whose command line mentions the pattern — including another agent's monitor. Sixth recorded
 instance 2026-09-13 (FS-38 phase T): it killed the engineer's own level-7 run at 11,000 of 16,383 asks and the advisor's
-watcher in the same second. `setsid` the job, write its pgid to a file, signal that.
+watcher in the same second. `setsid` the job, write its pgid to a file, signal that. **And the pid you hold may not be
+the process you mean** (2026-09-15, FS-53 A0.3): `nohup <binary> … &` followed by `$!` reports an intermediate **shell**
+in this harness, not the binary — reproduced deliberately on `sleep`, where `$!` read 3469129 and the binary was its
+child 3469131. Killing that pid leaves the binary running, re-parented, still writing its `--out`; the engineer found it
+only because `git status` showed a **committed** artifact modified after the commit. **A kill is verified by what stopped
+changing, never by the exit status of the kill**: after signalling, confirm by effect — no process of that name in `ps`,
+and the file's digest identical across ten seconds.
+
+**A pipe can kill the producer, and `| tail` can hide that it did.** Same session: a mutation harness run as
+`./plant.sh … | head -6` died of `SIGPIPE` when `head` closed the pipe — **before its `git checkout` restore** — leaving
+a planted fault in the tree, and the verification that should have caught it was `cargo nextest run | tail -2`, whose
+exit status is `tail`'s and therefore always zero. The plant reached a commit. Two rules, both already here in other
+costumes: a command whose *cleanup* matters is never piped into `head`, and a gate's exit status is read from the gate,
+never through a pipeline (`set -o pipefail`, or capture to a file and read it).
 
 **Never edit a shell script while it is running.** Bash reads a script lazily, by byte offset, so a live process resumes
 mid-token — it killed a 46-minute `lean4checker` run at M07 with `line 110: ull-library: command not found`, a message that
