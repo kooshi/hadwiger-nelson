@@ -614,6 +614,37 @@ Hoffman-tight) and `q = 11` exact, a constant cannot be separated from a slope i
 bound that can only push `c` up. So `c = 1.130` is a floor read from the cleanest point, not a fit; phase A.1's eight
 measurements are what turn it into one.
 
+**SCORED against phase A.1 stage 1 (900 s × 3 threads per member, 2026-09-15) — and the bias correction is losing
+where it can be tested.** The seven plateaus, each re-verified from the definition with 0 internal edges:
+
+| q | plateau | six needs | Q4's law as registered | plateau ÷ law | bias-corrected (×1.130) | plateau ÷ corrected |
+|---|---|---|---|---|---|---|
+| 23 | **87** | 89 | 85.5 | 1.018 | 96.6 | 0.900 |
+| 31 | 146 | 161 | 147.2 | 0.992 | 166.3 | 0.878 |
+| 43 | 258 | 309 | 225.5 | 1.144 | 254.8 | 1.012 |
+| 47 | 265 | 369 | 260.6 | 1.017 | 294.5 | 0.900 |
+| 59 | 363 | 581 | 366.4 | 0.991 | 414.0 | 0.877 |
+| 67 | 422 | 749 | 416.4 | 1.013 | 470.5 | 0.897 |
+| 79 | 523 | 1041 | 538.5 | 0.971 | 608.5 | 0.859 |
+| | | | | **mean 1.021** | | **mean 0.903** |
+
+**What this licenses and what it does not.** Six of the seven plateaus are **budget-limited** — a flat 900 s while the
+graph grows 11.8× — so comparing them to a prediction *about α* compares two things, and at 43–79 the comparison is not
+yet licensed. **The exception is `q = 23`, and it is the member that matters**: two threads reach 87 there in fifteen
+seconds and 9,330 restarts over 900 s never beat it, so at 23 the plateau is very likely α itself. There the
+bias-corrected prediction of **96–97 is contradicted by 87**, and the uncorrected law's 85.5 is nearly exact.
+
+**Consequence, stated against my own registration.** The correction was read from `q = 11`, where α = 28 exactly against
+the law's 24.78 — a ratio of 1.130. At `q = 23`, equally saturated, the ratio is **1.018**. Two saturated points, two
+different ratios, so **the law's shape is wrong between 11 and 23** and a single constant cannot carry it — which is what
+the registration itself warned could not be ruled out from one non-degenerate exact point. **The nomination of 23 as a
+six-candidate is therefore weakened, not confirmed**: if α(23) is 87 or 88, six at 23 is impossible, and the advisor's
+2:1 bet (Q3) is winning. **31 remains open** — 146 against a threshold of 161, and its search is *not* saturated.
+
+*What would settle 23:* a verified 89-set (six is live, Q3 dead) or an exact certificate below 89 (six is dead at 23).
+The certificate's reach cannot get there — `frac6` at 23 is 0.6755 against a measured best reach of 0.8238 — so **23 can
+only be closed from the finding side, and only by exhausting it.**
+
 **Q7 — the law has a theorem behind it on exactly half the window, and the residual should split there** (the product
 owner, 2026-09-15; registered before phase A.1 measures anything). `[Krebs2022]`'s rule — `ω(UD(𝔽_q,2)) = 3` iff the
 characteristic is 3 or 3 is a square in `𝔽_q`, else 2 — was **verified here directly rather than cited**, by searching
