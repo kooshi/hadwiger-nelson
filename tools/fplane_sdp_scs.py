@@ -34,7 +34,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--p", type=int, required=True); ap.add_argument("--eps", type=float, default=1e-5)
     ap.add_argument("--chunk", type=int, default=2000); ap.add_argument("--max-iters", type=int, default=400000)
-    ap.add_argument("--ckpt", required=True); ap.add_argument("--out"); ap.add_argument("--stop-after-chunks", type=int, default=0, help="(control) exit after this many chunks")
+    ap.add_argument("--ckpt", required=True); ap.add_argument("--out"); ap.add_argument("--indirect", action="store_true", help="SCS's conjugate-gradient linear solver instead of the cached direct factorisation"); ap.add_argument("--stop-after-chunks", type=int, default=0, help="(control) exit after this many chunks")
     a = ap.parse_args()
     import cvxpy as cp, scs
     t0 = time.time(); S, prob, yvar = build_problem(a.p)
@@ -46,7 +46,7 @@ def main():
     ck = Path(a.ckpt); x0 = y0 = s0 = None; done_iters = 0
     if ck.exists():
         z = np.load(ck); x0, y0, s0, done_iters = z["x"], z["y"], z["s"], int(z["iters"]); print(f"[scs] resumed from {ck}: {done_iters} iterations done", flush=True)
-    solver = scs.SCS(dict(A=A, b=b, c=c), cone, eps_abs=a.eps, eps_rel=a.eps, max_iters=a.chunk, verbose=False, normalize=True)
+    solver = scs.SCS(dict(A=A, b=b, c=c), cone, use_indirect=a.indirect, eps_abs=a.eps, eps_rel=a.eps, max_iters=a.chunk, verbose=False, normalize=True)
     chunks = 0; result = None
     while done_iters < a.max_iters:
         t1 = time.time()
