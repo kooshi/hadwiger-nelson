@@ -46,3 +46,35 @@ is resumed by re-running it; the runs that already finished cost their budget ag
 having a stage-level checkpoint, and is minutes rather than hours at every stage but s3.
 
 *(The results tables below are filled in as the stages land.)*
+
+## The calibration, before any result (2026-09-15, the runner)
+
+**Two threads reach 87 at `q = 23` in fifteen seconds** — the best size found anywhere for that plane, from a
+cold start, on a fifteen-second smoke test. The search saturates at the best known size almost immediately. So
+**the question at 23 is not whether the search is strong enough to reach the neighbourhood; it is whether 88
+exists at all.** That changes what a null at 23 means: it stops being "we did not look hard enough" and becomes
+weak but real evidence about the graph. It is still a null at a budget and it is never a refusal — a local
+search cannot bound α from above, and only a certificate can.
+
+## The prediction on trial (the product owner, registered in `plans/STUB-sixth-colour.md` §S6)
+
+The bias-corrected growth law — corrected against the one plane whose α is known exactly — predicts
+**α(23) ≈ 96–97** and **α(31) ≈ 166**, both **above** the six-thresholds this phase targets (89 and 161). The
+law is the milestone's durable product, and this phase is its test. A plateau well below those numbers at both
+members says the law's shape is wrong below `q ≈ 30`; that is a real outcome and is reported as one.
+
+## The plant, fired (standing rule 9)
+
+The false positive that would move this milestone is a claimed 88 or 89 at `q = 23` that is not independent. It
+was fabricated exactly: the real 87-set plus one point adjacent to a member of it
+(`rec/PLANT-q23-unitpair.json` in the job scratch, vertex 29 = (1, 6) beside vertex 6 = (0, 6) under the
+record's own `v = x·p + y` index). It was pointed at the **product owner's** verifier, not at the runner's own:
+
+```
+python3 tools/fplane_review_verify.py indep --q 23 --json <plant> --path best_set
+  independent set of size 88; internal edges 16
+  NOT INDEPENDENT: e.g. [(6, 29), (29, 30), (29, 52)]          exit 1
+```
+
+It refused by name, naming the offending pairs, before printing any threshold consequence. The same script
+verifies the real 87-set as INDEPENDENT with 0 internal edges, so both outcomes of the control are reachable.
