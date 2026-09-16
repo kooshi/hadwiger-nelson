@@ -80,7 +80,7 @@ and is corrected in phase B.)
 
 ---
 
-## §2 Why ℚ(√167) is in this instrument's reach and ℚ(√11), ℚ(√23) are not — [measured; a reading, with its killing test]
+## §2 What limits a fractional route, and where the ratio bound stops — [measured; the ratio-bound part a reading, with its killing test]
 
 The instrument's weakest relative is the **ratio (Delsarte–Hoffman) bound** on a finitely generated piece `Cay(Λ, W)` of the
 plane, `Λ ≅ ℤ⁴`: `χ_f ≥ 1 − 1/m` with `m` the least mean of a character of `Λ` over `W` (`[BachocEtAl2014]`, the operator
@@ -100,15 +100,22 @@ has mean near that completion's own least character mean — measured 2026-09-16
 | `𝔽₄₇` | −0.2676 | 4.736 |
 | dyadic ramified in `F(i)/F` | −1 | 2 |
 
-**The reading (R-C).** *The fractional route can certify `χ(F²) ≥ 4` only if no compact place of `F` has least mean ≤ −1/2*,
-because a character at such a place is a fixed obstruction no choice of `W` removes once `W` equidistributes there; split places
-contribute a Kloosterman-type mean weighted by the share of `W` that is integral there, which the choice of `W` controls.
-**ℚ(√167) passes** (its compact places are real, 23, 43, 59, …, 167: least −0.40276). **ℚ(√11) and ℚ(√23) fail** at 7
-(both have 7 usable), which is why the conjecture's cheapest level-4 predictions are not this milestone's target.
-*Consistent with every known value*: `ℚ(√3)`, `ℚ(√7)` (χ = 3) each have an `𝔽₃` place at −1/2 exactly; `ℚ(√2)`, `ℚ(√5)` (χ = 2)
-a dyadic ramified place. *Not a theorem*: split places are handled heuristically and the local–global product structure of
-character means is an equidistribution statement nobody has proved here. *Killing test:* a finite `H` over a field with a compact
-place at ≤ −1/2 and `χ_gf(H) > 3`; or ℚ(√167) pieces whose `χ_gf` plateaus at ≤ 3 however they grow.
+**The hard limit, for every fractional route** [theorem]. A residue homomorphism pulls fractional colourings back, so
+`χ_f(F²) ≤ χ_f(target)` at every usable place, and `χ_f(F²) ≤ 4.36` by restricting Croft's measurable colouring (`[MatolcsiEtAl2025]`
+(1)). A finite `H ⊂ F²` can therefore certify four colours only if every usable place has `χ_f > 3`, which fails exactly at an `𝔽₃`
+plane (`χ_f(Γ₃) = 3`) and a dyadic place ramified in `F(i)/F` (2). For **ℚ(√167)** the limit is `min(4.36, χ_f(Γ₂₃) ≥ 5.03, …) = 4.36`;
+for **ℚ(√11)** and **ℚ(√23)** it is `χ_f(Γ₇) = 49/14 = 3.5` (`α(Γ₇) = 14` exactly) — still above 3.
+
+**The ratio-bound reading (R-C)** [reading]. *The ratio bound on pieces `Cay(Λ, W)` can reach above 3 only if no compact place has
+least mean ≤ −1/2*: a character at such a place is an obstruction no equidistributed `W` removes, while split places contribute a
+Kloosterman-type mean weighted by the share of `W` integral there, which the choice of `W` controls. **ℚ(√167) passes** (least
+−0.40276, the real place); **ℚ(√11) and ℚ(√23) fail** at 7 (−0.5617). This is a statement about the ratio bound only: the finite
+programme of §4 is stronger (in the whole plane the ratio bound stops at 3.48 while `χ_gf(G27) = 4`), so it does not remove those
+fields from the milestone's instrument — they are a registered side target (§5), where a certificate would prove the conjecture's
+prediction `χ = 4` outright. *Consistent with every known value*: `ℚ(√3)`, `ℚ(√7)` (χ = 3) have an `𝔽₃` place at −1/2 exactly;
+`ℚ(√2)`, `ℚ(√5)` (χ = 2) a dyadic ramified place. *Not a theorem*: split places are handled heuristically, and the product form of
+character means across places is an unproved equidistribution statement. *Killing test:* ℚ(√167) pieces whose ratio bound
+plateaus at or below 3 under every equidistributing choice of `W`.
 
 **Why the ratio bound is not the certificate.** Probed 2026-09-16 (scratchpad, not kept): unit vectors of `F(i)` with bounded
 denominator are sparse (20 at denominator 84, 60 at 420, 324 at 10,920), so an equidistributed `W` has frequencies near 10⁴ on
@@ -137,10 +144,16 @@ pairwise coprime, > 1, embedded with every `√d_j > 0` — so that one checker 
 common denominator per file; a point of `F²` is a pair `(x, y)` of such vectors. The **quadrance** of a difference, `dx² + dy²`,
 is an element of `F`, compared as an integer vector: two points are adjacent iff it equals 1.
 
-**Shapes.** The congruence class of a point set `Y ⊂ F²` is keyed by the **least ordering of its labelled quadrance matrix** (the
-tuple of pairwise quadrances over all orderings of `Y`, least in any fixed total order): a bijection preserving every pairwise
-distance extends to an isometry of the plane, so the key is a complete invariant for every size, and by B1 congruent sets are
-congruent by isometries of `F²`. For `|Y| ≤ 3` it is the sorted multiset of side quadrances. No isometry witnesses are stored.
+**Shapes.** Two point sets `Y, Y′ ⊂ F²` are congruent iff some isometry maps one onto the other (by B1, an isometry of `F²`).
+The checker decides it exactly and without square roots: after a prefilter (equal size and equal sorted multiset of pairwise
+quadrances), fix `y₁ ≠ y₂ ∈ Y`; for each ordered pair `(y₁′, y₂′)` in `Y′` with the same quadrance, test the orientation-preserving
+map by `(z′ − y₁′)(y₂ − y₁) = (z − y₁)(y₂′ − y₁′)` and the reversing one by `(z′ − y₁′)·conj(y₂ − y₁) = conj(z − y₁)(y₂′ − y₁′)` — for
+every `z ∈ Y` some `z′ ∈ Y′` must satisfy it (products in `F(i)`, points read as `x + iy`); the map is injective and `|Y| = |Y′|`, so
+it is a bijection. Classes are built by comparing each set with one representative per class; congruence is an equivalence, so a
+class is congruent throughout. **Only "grouped together ⇒ congruent" carries soundness**: grouping congruent sets apart leaves
+the programme with fewer constraints, which lowers its value and keeps every bound valid. *(The domain pass chose the least
+ordering of the labelled quadrance matrix; the obligation pass replaced it: it costs `k!` orderings, and the `G27` control needs
+sets of 27 points.)*
 
 **The programme, level k** — a moment relaxation of "a random isometric copy of an independent set of `F²`, restricted to `H`":
 variables `γ(S) ≥ 0` for independent sets `S` of `H`; the aggregate `γ̄(Y) = Σ_{S ⊇ Y} γ(S)` must be constant on every congruence
@@ -179,8 +192,10 @@ to unit edges and (through B1's form `z ↦ uz + t`, `uū = 1`) congruent sets t
 programme for `H` relabelled. Rotations by `u ∈ W` are symmetries of the plane but not of `Λ`, so congruent copies of `H` can
 survive deduplication; that costs time, never correctness. The LP by column generation (pricing: the most negative reduced cost
 over independent sets, a pseudo-boolean maximisation with pair and triple terms, OR-Tools CP-SAT), floats; any `H` reading above
-`3 + 10⁻³` goes to exact rounding (duals rationalised, (i) and (ii) repaired by projection onto the class-sum-zero space, (iii)
-re-checked) and to the checker.
+`3 + 10⁻³` goes to exact rounding and to the checker. **Rounding cannot fail (iii)**: rationalise the duals, subtract each
+size-≥ 2 class's mean from its members (so (i) holds exactly), compute `M = max_S Σ_{Y⊆S} y_Y` exactly by the checker's own
+branch-and-bound, and publish `y/M` with `w = (Σ_singletons y)/M`; (iii) then holds with equality at the maximiser, and the only
+loss is `w`'s.
 
 **The unit vectors to build from.** `W₀ = {±1, ±i}` ∪ Pythagorean `(3 ± 4i)/5`-family ∪ `ρ₄₂ = (83 + i√167)/84` with its
 `⟨i, conj⟩`-orbit, then denominators 168, 420 (60 vectors), 2184 (108), 5460 (180). A graph using only `ℚ(i)` points is bipartite,
@@ -206,6 +221,9 @@ so every useful `H` uses `ρ₄₂`-type vectors; `n = 42` is the smallest type-
 reading has not improved by `10⁻³` over five generations at the largest `W` tried, and report the plateau as the finding.
 
 ## §5 What this milestone is not
+**Side target, registered not planned:** `χ(ℚ(√11)²) ≥ 4` or `χ(ℚ(√23)²) ≥ 4` by the same instrument would prove the
+conjecture's value there (`L = 4`), with a hard fractional ceiling of 3.5 from `Γ₇` — a narrow window, cheaper fields.
+
 Not a search for a six-colouring of any finite plane (FS-57), and not a claim that ℚ(√167)² needs six colours. Q2 (four and five
 colours refused by the same instrument) is registered as reachable in principle — `χ_gf > 4` over ℚ(√167) would prove
 `χ ≥ 5` — but is not planned until Q1 lands; `[DuczVarga2026]` needed a hand-guided augmentation to cross 4 in the whole plane.
@@ -216,12 +234,32 @@ colours refused by the same instrument) is registered as reachable in principle 
 | decision | alternative weighed | why this one | confidence |
 |---|---|---|---|
 | Points as pairs of elements of a real multiquadratic field, integer vectors over one denominator | points of `F(i)` as 4-vectors over `(1, √d, i, i√d)`, specific to quadratics | the checker must also verify MRVZ's `G27` in ℚ(√3,√11) and run the ℚ(√7) control; the quadrance `dx² + dy²` lives in `F` itself, so the pair form states adjacency in the field it is about | high |
-| Congruence classes keyed by the least labelled quadrance matrix | storing an isometry `(u, t)` per congruent pair and verifying it | the key is a complete invariant (a distance-preserving bijection of finite plane sets extends to an isometry), needs no witness, and is the same code for every size; witnesses are incidental data a checker would have to trust or re-derive | high |
+| Congruence decided by the checker from coordinates, no isometry stored (**superseded in M2**: prefilter plus an exact isometry test, not the least labelled quadrance matrix) | storing an isometry `(u, t)` per congruent pair and verifying it | witnesses are incidental data a checker would have to parse and trust the pairing of; recomputing congruence from coordinates keeps the file to points and weights | high |
 | The programme as a level-`k` moment relaxation with `k` a dial | MRVZ's full congruence family only | every subfamily is valid for B2, `k` trades LP size against strength, and `k = 1, 2, 3` reproduce known values on the spindle | high |
 | The class-sum dual as the certificate | MRVZ's `(4, −y)` row form with a distinguished vertex | symmetric in the vertices, no congruence rows to list or check, and the weak-duality line is three equalities; MRVZ's form converts mechanically | high |
 | Regularity folded into the singleton class | a separate row per vertex | every point of `F²` is congruent to every other; the separate rows are the singleton class written out | high |
 | Galois conjugation in the search's canonical form | canonicalise by isometries only | the programme is invariant under it (it fixes `i`), so it removes true duplicates at no risk | medium — if a future field's Galois group does not fix `i` (a non-real or CM field) the flip must go |
 | Branch-and-bound over independent sets in the checker | enumerating them (MRVZ) or a pseudo-boolean proof log | enumeration dies on triangle-free graphs past ~40 points; a proof log adds a trusted checker we do not hold; branch-and-bound keeps the standard-library surface | **medium — the cost is unmeasured; if it cannot finish on the `H` the search needs, the certificate format changes (symmetry-reduced enumeration, or VeriPB)** |
+
+### M2 — obligations (2026-09-16): what is proved, tested, assumed
+| claim | status | the local obligation | where it is discharged |
+|---|---|---|---|
+| **B1** congruences are isometries of `F²` | prove [hand] | `u = (φ(y₂) − φ(y₁))/(y₂ − y₁)` or its conjugate form lies in `F(i)`; `uū ∈ F` equals 1 | §1, three lines |
+| **B2** the blow-up over `F`, any subfamily `𝒞` | prove [hand, MRVZ Thm 1 transcribed] | (1) `T` finite (≤ 2 isometries per distance-preserving bijection), symmetric, `∋ id`; (2) `⟨T⟩ ≤ Isom(F²)`, solvable ⟹ amenable ⟹ right Følner; (3) the pulled-back aggregates are aggregates of fractional colourings of `H` (isometries preserve independence), regular, of weight `χ_f(G_k)`; (4) for `τ ∈ T` with `τY = Y′`: `Σ_{σ∈R} γ̄(στY) − Σ_{σ∈R} γ̄(σY)` has at most `2|RT∖R|` unmatched terms, **each defined because `στY = σY′ ⊆ σH ⊆ G_k`**, each ≤ `χ_f(G_k) ≤ 7` (row 33); (5) the approximation property (7) by compactness of regular fractional colourings of weight ≤ 7 | §1; a kernel form is not planned (amenability and Følner sets for countable solvable groups) |
+| **B3** `χ_f(K²) = 4` | prove [hand] from B2 + MRVZ Thm 3 + Theorem B | `G27 ⊂ K²` (their Definition 2 in `ℤ⁴`); `χ_f(K²) ≥ χ_f(G)` for finite `G ⊂ K²` (restrict a fractional colouring); `χ_f(K²) ≤ χ(K²) = 4` (`chromaticNumber_seamPlane`) | **test**: phase B re-verifies `χ_gf(G27) ≥ 4` from MRVZ's witness with our checker, on our own recomputed edges and congruences |
+| Hall ratio of `K²` is 4 | prove [hand] | MRVZ Thm 2's cube lives in the lattice spanned by `G`'s vertices, inside `K²`; `α₁(K²)` is an infimum over finite subgraphs of `K²` | §1 |
+| **weak duality** of the class-sum certificate | prove [hand] | `γ ≥ 0` and (iii) give `Σγ(S) ≥ Σ_S γ(S) Σ_{Y⊆S} y_Y`; swap finite sums; `γ̄` constant on each class kills the size-≥ 2 sums and leaves `w` | §4, one line; **test**: the spindle prototype's duals |
+| checker: grouping is sound | prove [hand] + test | equal-orientation map test ⟺ `z ↦ uz + t` with `u = (y₂′−y₁′)/(y₂−y₁)`, `|u| = 1` from equal quadrances; representatives + transitivity | negative control: two non-congruent sets with equal quadrance multisets (a homometric pair) must land in different classes |
+| checker: branch-and-bound is exhaustive | prove [hand] + test | branching includes or excludes each vertex; including removes its neighbours; the bound adds every positive `y_Y` over `Y ⊆ I ∪ R′`, `Y ⊄ I` — an upper bound on every completion | control: on `G27` and on random small graphs, B&B's maximum equals full enumeration's |
+| checker: multiquadratic arithmetic | prove [hand] + test | square roots of distinct squarefree integers are `ℚ`-independent (Besicovitch), so vector equality is field equality; `√a√b = (∏_{shared} d)·√(∏_{sym. diff.})` for coprime squarefree radicands | control: a non-squarefree radicand is refused; `(√3·√11)² = 33` and `ω₃ ω̄₃ = 1` as spec tests |
+| verdict rule `χ(F²) ≥ ⌊w⌋ + 1` only for non-integer `w` | prove [hand] | `χ(G) ≥ χ_f(G) > w − ε > ⌊w⌋` for small `ε` | control: `w = 3` exactly must print `χ_gf ≥ 3` and no colour claim |
+| §2 local means | **reading / measured** (floats) | none — a prediction instrument | phase C script, labelled a reading |
+| **kernel consumer at 23** | kernel theorem, hypothesis **assumed** (discharged by the exact certificate outside the kernel) | `finitePlane 23 = unitQuadrance (ZMod 23)`: adjacency `dx² + dy² = 1`, the checker's edge rule | phase E rewrites its docstrings; no declaration changes |
+
+**What the pass changed:** §2's claim that ℚ(√11) and ℚ(√23) are out of reach was true of the ratio bound only (corrected; the
+hard fractional ceiling is `χ_f(Γ₇) = 3.5 > 3`); the shape key moved from ordering-minimisation to prefilter plus exact isometry
+test; rounding became infallible for (iii); the homometric-pair control was added, because it is the one input on which the
+prefilter alone would be unsound.
 
 ## §PA — prior-art gate (WORKFLOW 3a), 2026-09-16
 
