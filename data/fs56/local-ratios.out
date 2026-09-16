@@ -1,0 +1,28 @@
+# FS-56 local character means (readings, floats)
+real place: min J0 = -0.402759 at r = 3.83171; ratio floor 3.4829
+F_3: circle 4, least mean -0.5000, ratio floor 3.000, chi_f 9/3 = 3.0000 (exact)
+F_7: circle 8, least mean -0.5617, ratio floor 2.780, chi_f 49/14 = 3.5000 (exact)
+F_11: circle 12, least mean -0.3996, ratio floor 3.502, chi_f 121/28 = 4.3214 (exact)
+F_19: circle 20, least mean -0.3805, ratio floor 3.628, chi_f in [4.457, 4.750]
+F_23: circle 24, least mean -0.3317, ratio floor 4.015, chi_f in [5.038, 6.080]
+F_31: circle 32, least mean -0.3333, ratio floor 4.000, chi_f in [4.805, 6.582]
+F_43: circle 44, least mean -0.2719, ratio floor 4.678, chi_f in [5.066, 7.167]
+F_47: circle 48, least mean -0.2676, ratio floor 4.736, chi_f in [5.954, 8.336]
+F_59: circle 60, least mean -0.2486, ratio floor 5.022, chi_f —
+F_67: circle 68, least mean -0.2214, ratio floor 5.516, chi_f —
+F_71: circle 72, least mean -0.1968, ratio floor 6.080, chi_f —
+F_79: circle 80, least mean -0.2138, ratio floor 5.678, chi_f —
+F_83: circle 84, least mean -0.2108, ratio floor 5.743, chi_f —
+dyadic place ramified in F(i)/F: least mean -1 (the plane two-colours); split places: no fixed obstruction
+
+# fields Q(sqrt d): usable odd primes q < 100 (q = 3 mod 4, d a nonzero square mod q, or q | d), 2-adic type,
+# the least compact-place mean (real place included), and the hard fractional ceiling from usable planes
+Q(sqrt 3): 2-adic not split (wall stands); usable [3, 11, 23, 47, 59, 71, 83]; least compact mean -0.5000 (<= -1/2); fractional ceiling 3.000
+Q(sqrt 7): 2-adic split in F(i) (wall broken); usable [3, 7, 19, 31, 47, 59, 83]; least compact mean -0.5617 (<= -1/2); fractional ceiling 3.000
+Q(sqrt 11): 2-adic not split (wall stands); usable [7, 11, 19, 43, 79, 83]; least compact mean -0.5617 (<= -1/2); fractional ceiling 3.500
+Q(sqrt 23): 2-adic split in F(i) (wall broken); usable [7, 11, 19, 23, 43, 67, 79, 83]; least compact mean -0.5617 (<= -1/2); fractional ceiling 3.500
+Q(sqrt 167): 2-adic split in F(i) (wall broken); usable [23, 43, 59, 67, 71, 79, 83]; least compact mean -0.4028 (> -1/2); fractional ceiling 4.360
+Q(sqrt 887): 2-adic split in F(i) (wall broken); usable [23, 31, 67, 79]; least compact mean -0.4028 (> -1/2); fractional ceiling 4.360
+Q(sqrt 1055): 2-adic split in F(i) (wall broken); usable [31, 43, 47, 83]; least compact mean -0.4028 (> -1/2); fractional ceiling 4.360
+Q(sqrt 2351): 2-adic split in F(i) (wall broken); usable [47, 67, 71, 83]; least compact mean -0.4028 (> -1/2); fractional ceiling 4.360
+Q(sqrt 4703): 2-adic split in F(i) (wall broken); usable [43, 47, 79]; least compact mean -0.4028 (> -1/2); fractional ceiling 4.360
