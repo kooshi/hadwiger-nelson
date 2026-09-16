@@ -10,9 +10,10 @@ subplanning and not yet reproducible from a committed tool.*
 **The window.** A finite Euclidean plane `UD(𝔽_q, 2)` — the Cayley graph on `𝔽_q²` joining points whose difference has
 `x² + y² = 1` — can be exactly six-chromatic only for `q ≡ 3 (mod 4)` of odd degree with `5|λ_min| ≥ q + 1`. Weil's
 `|λ_min| ≤ 2√q` caps that at `q ≤ 97`; 71's exact spectrum fails it; 83 was refused by certificate (FS-50). **Eight
-members remained when this file was written; **79 has since left it** — `data/fs53/cert-q79-N1023.json`
-certifies `α(UD(𝔽₇₉,2)) ≤ 1023`, and `6 × 1023 = 6138 < 6241`, so six is refused there and `χ(UD(𝔽₇₉,2)) ≥ 7`. **Seven
-members remain: 23, 27, 31, 43, 47, 59, 67 — none decided.**
+members remained when this file was written; **79 has since left it** — two of them were refused six by exact certificate on
+2026-09-15. **79 and 67 have both since left it** —
+`cert-q79-N1023.json` gives `α ≤ 1023` against the 1040 six needs, and `cert-q67-N745.json` gives `α ≤ 745` against
+the 748 six needs, so `χ ≥ 7` at both. **Six members remain: 23, 27, 31, 43, 47, 59 — none decided.**
 
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
@@ -22,7 +23,7 @@ members remain: 23, 27, 31, 43, 47, 59, 67 — none decided.**
 | 43 | 1849 | −11.9622 | 395.23 | — | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | — | **402** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
 | 59 | 3481 | −14.9176 | 693.14 | — | — | 6 `[exact]` | 10 `[search]` | 581 | 0.8382 | (refused) | 1.0056 |
-| 67 | 4489 | −15.0567 | 813.78 | — | — | 6 `[exact]` | 12 `[search]` | 749 | **0.9204** | (refused) | 1.1035 |
+| ~~67~~ | 4489 | −15.0567 | 813.78 | — | **745** `[cert]` | **7** `[cert]` | 12 `[search]` | 749 | **0.9204** | (refused) | 1.1035 |
 | ~~79~~ | 6241 | −17.1019 | 1099.19 | — | **1023** `[cert]` | **7** `[cert]` | — | 1041 | **0.9471** | (refused) | 1.1363 |
 
 The ceiling 7 at `q = 27` is `data/fs53/colour-q27-k7-quotient.json`: a proper 7-colouring of a 27-vertex quotient of the

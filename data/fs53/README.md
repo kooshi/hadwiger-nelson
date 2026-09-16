@@ -178,3 +178,30 @@ row: dropping the entire class leaves the optimum unchanged to six decimals at a
 against its threshold. The instrument did not have to converge for any of them. 67 is the one that does: its threshold
 (α ≤ 748) sits 0.9 % below the ratio bound, and its first polish, from iterate 8,500, gave ⌊N⌋ = 750 — **two integers
 short**.
+
+| `cert-q67-N745.json` (7.6 MB) | 𝔽₆₇ | graphics card B; the producer reached 38,000 iterations over 65 minutes, and the certificate is from its **37,000**-iteration iterate resumed **+2,000** in a fresh solver (404 s) | **CERTIFIED** (`--k 6`): `N = 181942132667989711844836116511294223/2.44140625·10³³ = 745.234975`, so **α(UD(𝔽₆₇,2)) ≤ 745**, and `6 × 745 = 4470 < 4489`: **six is refused at 67**, `χ(UD(𝔽₆₇,2)) ≥ 7` | exact rational; 26,225 pair orbits and 52,450 canonical rows rebuilt from the number 67 alone. `--ldl` green (`ldl-q67-N745.log`). All 17 cuts give ⌊N⌋ = 745 (745.234975–745.294498) |
+
+**67 was the marginal member and it took the whole instrument.** Its threshold sits 0.9 % below the ratio bound — `α ≤
+748` against 813.78 — where 79's sat 5.4 % below. The first polish, from iterate 8,500, gave 750 (two short); at 33,500
+it gave 749 (one short); the certificate came only at 37,000, and then only because of the continuation length below.
+
+### The continuation length is a lever, and +500 was leaving a whole integer on the table
+
+FS-50's recipe says: resume the producer's checkpoint for **+500** iterations in a fresh solver and round *that* run's
+own dual. At 67 that recipe lands exactly on the threshold and nearly missed it. Two arms were run from **one** parent
+iterate (37,000), on the same card, same backend, same tolerance, same 18-candidate sweep — **the continuation length the
+only thing differing**:
+
+| arm | continuation | the continuation's own float bound | exact `N` | ⌊N⌋ | rounding loss (exact `N` minus that arm's own float bound) |
+|---|---|---|---|---|---|
+| a | **+500** (the FS-50 recipe) | 744.807736 | 748.829896 | **748** — clears `748` by nothing at all | **4.022** |
+| b | **+2,000** | 743.602143 | **745.234975** | **745** | **1.633** |
+
+The longer continuation wins twice over: its own float bound is 1.21 lower *and* its dual rounds 2.5× more tightly, so
+the exact bound improves by 3.6 — **three integers**, where the member had one to give. The mechanism is unchanged (a
+fresh short continuation's own dual, never a long-run iterate, never `--round-only`'s nudge); what changes is that
+"short" should be read as a few thousand iterations and not as 500. The 47 and 59 polish loops were switched to +2,000
+after this measurement.
+
+*What this does not establish:* the comparison is one parent iterate at one member. It does not say +2,000 is optimal,
+and it does not say anything about 83, where nothing here was re-run.
