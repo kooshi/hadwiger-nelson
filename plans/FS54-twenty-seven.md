@@ -433,6 +433,20 @@ solve at 47 is the top compute item. (3) At 27 W_f needs 121 against 141 (14 %):
 remaining question is the six-colouring (D5) or a structural bound. (4) The escape-hatch section of the wall document is
 rewritten around the integrality gap and the tower theorem.
 
+### §W Can the wall be proved? (assessment, 2026-09-16, on Kooshi's question)
+**W is a finite statement**: every Q outside {23, 27, 31, 43, 47, 64} is settled, so W is six graphs with χ ≠ 6. Its
+sufficient form W_f needs α ≤ 88, 121, 160, 308, 368, 682 there, against best certified 108, 141, 200, 365, 371 and
+Hoffman 768 — drops of 18.5 %, 14.2 %, 20.0 %, 15.6 %, **0.76 %**, **11.2 %**. Level 3 has dropped 3.1–4.5 % below the
+three-point bound on every plane measured, so **47 (level 3, measured 5.15 s/it, 9–23 h projected, low confidence) and
+U₆₄ (a characteristic-2 three-point port) are in reach; 23, 27, 31, 43 are not, by any priced instrument**. Exact search is
+no substitute: **KaMIS's exact `weighted_branch_reduce` on UD(𝔽₁₉,2) with unit weights (361 vertices) sat at 70 for 600 s**
+(`build/fs54-exact/q19-bnr.log`), below the heuristic's 76 — it neither found the best set nor bounded anything; CDCL was
+undecided at 23 even above the Hoffman bound (`data/fs50/nscale/`). **And no uniform bound can carry W**: a bound
+α ≤ c·q^{3/2} proves W at 23 only with c < 0.799, but α(19) ≥ 76 already has c ≥ 0.918 — so any proof must use something
+that changes between 19 and 23, or go member by member (Reading B of the wall document gains weight). **What W would not
+give:** χ(ℝ²) ≠ 6 (that needs every field's true χ, i.e. the conjecture's bold form, which gives χ(ℝ²) = 7 on its own), and
+nothing against a six-chromatic graph in a field whose local bound is ≥ 7 — the lower-bound hunt is untouched by W.
+
 ### D5 — the colour search goes non-periodic
 Periodic six-colourings are already excluded at indices 9 and 27. After D1: `plane-colour --q 27 --k 6` seeded with D2's best
 set as colour 0 (`--fix-class`), and an **antipodal-quotient finder** (G58's instrument redesign: search colourings with
