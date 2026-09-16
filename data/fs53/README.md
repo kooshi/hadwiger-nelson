@@ -205,3 +205,22 @@ after this measurement.
 
 *What this does not establish:* the comparison is one parent iterate at one member. It does not say +2,000 is optimal,
 and it does not say anything about 83, where nothing here was re-run.
+
+| `cert-q59-N575.json` (5.2 MB) | 𝔽₅₉ | graphics card B, 24 minutes of producer on its own card; certificate from the **38,500**-iteration iterate resumed **+2,000** in a fresh solver | **CERTIFIED** (`--k 6`): `N = 143846235677354518768068907660498526067/2.5·10³⁵ = 575.384943`, so **α(UD(𝔽₅₉,2)) ≤ 575**, and `6 × 575 = 3450 < 3481`: **six is refused at 59**, `χ(UD(𝔽₅₉,2)) ≥ 7` | exact rational, `--ldl` green (`ldl-q59-N575.log`). All 18 cuts give ⌊N⌋ = 575 (575.384943–575.385459) |
+| `cert-q47-N377.json` (2.6 MB) | 𝔽₄₇ | the **75,500**-iteration iterate resumed +500, 145 s — **supersedes `cert-q47-N402.json`**, which said the same sentence from a 2,000-iteration iterate and is kept only in git history | **CERTIFIED** (`--k 5`): `N = 94491195010531319257100523576210165349/2.5·10³⁵ = 377.964780`, **α(UD(𝔽₄₇,2)) ≤ 377** | exact rational, `--ldl` green (`ldl-q47-N377.log`). All 18 cuts give ⌊N⌋ = 377 |
+
+**59 was expected out of reach and was not.** The phase plan put it last and predicted a recorded gap rather than a
+certificate: its threshold (α ≤ 580) is 16.3 % below the ratio bound (693.14), where 79's was 5.4 % below and 67's
+0.9 %. It landed **5 integers inside**, once it had a card to itself and the +2,000 continuation. What made the
+difference was convergence, not the relaxation: the producer's float optimum fell 606.8 → 574.7 over 42,000 iterations,
+and the threshold was crossed at about 38,000.
+
+**The two members the instrument cannot reach, recorded as facts about the instrument.**
+
+* **Six at 47:** `N = 377.96` at the producer's 87,500 iterations, where the float optimum had flattened to 377.27 with
+  a rounding loss of 0.54 — converged for practical purposes. Six at 47 needs `α ≤ 368`. **Above the threshold by 9
+  integers**, and the remaining slope was about 0.1 per 5,000 iterations, so the relaxation's own optimum (≈ 377) is
+  above what six requires. Not a statement about `UD(𝔽₄₇,2)`.
+* **Six at 43:** the producer's float optimum was 363.8 at 8,500 iterations and still falling when the run was stopped.
+  Six at 43 needs `α ≤ 308`. **Above the threshold by at least 55 integers**; the relaxation would have to fall 15 %
+  below where it already sat, which no member here has done. Not pursued further.

@@ -1,0 +1,12 @@
+[cert] file: data/fs53/cert-q47-N377.json
+[cert] kind 'fplane-alpha-certificate', p = 47, N = '94491195010531319257100523576210165349/250000000000000000000000000000000000', alpha_bound = 377
+[cert] the derivation it points at: plans/FS50-certificate-soundness.md
+check 1/4  the file's edges_sha256 79850577b64df5b6... is the hash of the plane rebuilt here (p = 47), so this is the same graph as the project's other records of it
+check 1/4  group and orbits rebuilt from p = 47 alone: 2209 points, 9247 orbits of ordered pairs under O(2,47) x swap x S3, 576 killed by a unit vector; the file's 9247 representatives agree, and the canonical constraint list (18494 rows: 1 g0, 576 killed, 9247 nonneg, 8670 le_diag) agrees row for row
+check 2/4  multipliers: 18494 rationals, the 17917 attached to inequalities are all >= 0, the 577 attached to equalities are free
+check 3/4  positive semidefiniteness:
+           Z1: 25 circulant block(s) over 93 slots (46 cosine, 46 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 18x93 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 16x93 (Z = B^T B), LDL^T re-run and clean; ... (23 more, each checked the same way)
+           Z2: 25 circulant block(s) over 93 slots (46 cosine, 46 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 7x93 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 5x93 (Z = B^T B), LDL^T re-run and clean; ... (23 more, each checked the same way)
+check 4/4  the affine identity N - tr Y(y) = <Z1,Y(y)> + <Z2,M(y)-Y(y)> + sum lambda_i c_i(y) + sum nu_j e_j(y): all 9247 orbit coefficients and the constant term agree exactly
+CERTIFIED: every independent set of UD(F_47, 2) has at most 94491195010531319257100523576210165349/250000000000000000000000000000000000 points, hence at most 377 (a cardinality is an integer) -- exact arithmetic, no solver trusted
+hence UD(F_47, 2) is not 5-colourable (5 * 377 = 1885 < 2209); kernel consumer: add_one_le_chromaticNumber_of_indepNum_le
