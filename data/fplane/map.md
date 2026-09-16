@@ -13,17 +13,15 @@ L(K(√7)) = 7 is the sharp statement, and the others are ≥ 7.
 4-sealed, 5-sealed, or ≥ 7 — which is G56's reciprocity exclusion seen from the field side: every
 one of them contains ℚ(√3,√11), and 3 or 11 is a non-square at every window member.
 
-**Which field would a six-colouring at q buy?** The smallest field — by discriminant, over every number
-field — whose FIRST usable residue plane is a window member *and* whose 2-adic wall is broken (the second
-condition is what makes it worth anything: a field with the wall standing is four-colourable by the residue
-at 2). Found by complete enumeration, not by this generator (`tools/fs54_fields.gp`, PARI `nflist`, FS-54):
-**23 → ℚ(√167); 27 → the cyclic cubic field of conductor 13 (x³ − x² − 4x − 1, disc 169, the smallest of
-all five); 31 → the cyclic quartic x⁴ − 30x² + 45 (disc 1125), smallest quadratic ℚ(√1055); 43 → ℚ(√4703);
-47 → ℚ(√2351).** They are the rows tagged `[smallest, sees q]` at the bottom, added by hand from that
-script's output. The rows tagged `[sees q]` above them are biquadratic fields that also see their member
-first but are not the smallest. *Correction record: this note first said those biquadratic fields were the
-smallest and that one radicand could not do it, and it proposed ℚ(√3, α), α³ = α + 1, for 27 — which has a
-usable plane at 11. The earlier search stopped at small radicands.*
+**Which field would a six-colouring at q buy?** The smallest field whose FIRST usable residue plane is a window member
+*and* whose 2-adic wall is broken — **every prime above 2 splits in F(i)**. A prime above 2 ramified in F(i)/F two-colours
+the plane at any norm (so every odd-degree field is 2-colourable), and an inert one gives a 4-colourable residue graph at
+every size checked. Found by `tools/fs54_fields.gp` (complete for degree ≤ 4, |disc| ≤ 20,000; FS-54): **23 → ℚ(√167);
+31 → ℚ(√1055); 43 → ℚ(√4703); 47 → ℚ(√2351); 27 needs even degree ≥ 6, the smallest found being the disc-316 cubic
+x³ + 2x² − 3x − 2 joined with √79.** They are the rows tagged `[smallest, sees q]` at the bottom, added by hand. The rows
+tagged `[sees q]` above them are biquadratic fields that also see their member first but are not the smallest.
+*Correction record: this note first called those biquadratic fields the smallest; a second version named the conductor-13
+cubic for 27 and a cyclic quartic for 31 on a wrong 2-adic test (norm ≤ 4 instead of splitting); both are ≤ 4-colourable.*
 
 **Quadratic fields whose local bound is at least 6** (`tools/fs54_quadratic_fields.gp`,
 `data/fs54/quadratic-fields.out`): with d ≤ 30,000, sixteen real quadratic fields have the wall broken and
@@ -63,8 +61,7 @@ predicted 6 by the conjecture. **Both deciding planes are implausible on the mea
 | Q(√2,√3,√7) [sees 47] | [2, 3, 7] | broken | [47, 167, 311, 383, 479, 503] | open-pending (p = 47: its plane is undecided) |
 | Q(√2,√3,√31) [sees 23] | [2, 3, 31] | broken | [23, 167, 239, 263, 383] | open-pending (p = 23: its plane is undecided) |
 | Q(√167) [smallest, sees 23] | [167] | broken | [23, 43, 59, 67, 71, 79, 83] (below 100) | open-pending (p = 23: its plane is undecided) |
-| Q(√1055) [smallest quadratic, sees 31] | [1055] | broken | [31, 43, 47, 83] (below 100) | open-pending (p = 31: its plane is undecided) |
-| x⁴ − 30x² + 45, cyclic quartic, disc 1125 [smallest, sees 31] | not multiquadratic | broken (fixed prime above 2 of norm 16) | [31, 59] (below 100) | open-pending (p = 31: its plane is undecided) |
 | Q(√2351) [smallest, sees 47] | [2351] | broken | [47, 67, 71, 83] (below 100) | local bound ≥ 6; exactly 6 iff UD(F_47,2) is six-chromatic |
 | Q(√4703) [smallest, sees 43] | [4703] | broken | [43, 47, 79] (below 100) | local bound ≥ 6; exactly 6 iff UD(F_43,2) or UD(F_47,2) is six-chromatic |
-| x³ − x² − 4x − 1, cyclic cubic of conductor 13, disc 169 [smallest, sees 27] | not multiquadratic | broken (2 inert; fixed prime above 2 of norm 8) | [27, 31, 47, 79, 83] (below 100) | open-pending (q = 27: its plane is undecided) |
+| Q(√1055) [smallest, sees 31] | [1055] | broken | [31, 43, 47, 83] (below 100) | open-pending (p = 31: its plane is undecided) |
+| cubic x³ + 2x² − 3x − 2 (disc 316) · Q(√79), disc 31,554,496 [smallest found, sees 27] | not multiquadratic | broken (every prime above 2 splits in F(i)) | [27, 43, 79] (below 100) | open-pending (q = 27: its plane is undecided) |

@@ -62,22 +62,26 @@ against 83 % at 23 and 96 % at 31.
 ### 1.4 The stub's fact (f) is prior art in substance, and G57 is wrong in characteristic 3
 The collinear triangle is `[Moorhouse2010]` Lemma 6.2(b)'s odd `p`-cycle at `p = 3` and `[Krebs2022]` §5.2 (`UD(F,1)` is a
 union of `p`-cycles, `ω = 3` iff `p = 3`); ours is only the edge-disjoint decomposition and the cap. **G57's "a field
-contains √3 exactly when its usable planes have triangles" fails at 27**: the field in §1.5 is cubic, so contains no √3,
-and its first usable plane is 27, which has triangles. The correct statement holds for usable `q` prime to 3. (G57's
+contains √3 exactly when its usable planes have triangles" is false in the converse direction**: ℚ has no √3 and its usable
+plane at 11 has triangles; and at 27 every plane has them, whatever the field. The correct statement holds for usable `q` prime to 3. (G57's
 Moser-spindle conclusion survives: 11 is a non-square in `𝔽₂₇`.)
 
-### 1.5 D6 answered: the field that sees 27 — `tools/fs54_fields.gp` → `data/fs54/fields.out`
-* **The stub's candidate `ℚ(√3, ρ)`, `ρ³ = ρ + 1`, is refuted**: its usable planes are 11, 23, 27, … — sealed at five by 11
-  before 27 is reached.
-* **The smallest field whose first usable plane is 27: the cyclic cubic field of conductor 13**, `x³ − x² − 4x − 1`,
-  discriminant 169 = 13², totally real — the cubic subfield of `ℚ(ζ₁₃)`. Usable planes below 100: **27, 31, 47, 79, 83**; 2 is
-  inert (the only conjugation-fixed prime above 2 has norm 8, so no four-colour bound). Its local bound is
-  `min(χ(27), χ(31), χ(47)) ∈ {5, 6, 7}`. **Minimal over every number field**: a quadratic field cannot see `𝔽₂₇`, a quartic
-  with a degree-3 prime above 3 also has a degree-1 prime there (3-colourable plane), `nflist` enumerates every cubic field
-  completely, and every field of degree ≥ 5 has `|disc| > 169` by Minkowski's bound `(π/4)ⁿ(nⁿ/n!)²` (202.7 at n = 5,
-  increasing in n).
-* **So 27 is the window member seen first by the arithmetically smallest field** — root discriminant 5.5, against 25.8 for
-  the smallest field that sees 23 first.
+### 1.5 D6: the field that sees 27 — `tools/fs54_fields.gp` → `data/fs54/fields.out`
+* **The primes above 2, classified correctly** (an error in this section's first version, caught while drafting the outward
+  write-up): a prime of `F` above 2 that **splits** in `F(i)` gives no bound; one **ramified** in `F(i)/F` gives
+  **`χ(F²) ≤ 2` at any norm** — conjugation acts trivially on the residue field, so a unit vector `w` has `w² ≡ w·w̄ = 1`,
+  hence `w ≡ 1`, and a linear map `k → 𝔽₂` with `1 ↦ 1` is a proper two-colouring of each coset of the unit-vector group;
+  one **inert** gives `Cay(𝔽_{Q²}, μ_{Q+1})`, `Q = N𝔭`, which is **4-colourable at Q = 2, 4, 8, 16, 32** (CaDiCaL; Hoffman
+  floors ≤ 4; controls ℚ → 2, ℚ(√3) → ≤ 4, ℚ(√3,√11) → ≤ 4, ℚ(√41) → 2 all agree). **Consequence: every field of odd degree
+  is 2-colourable** — some prime above 2 has odd local degree, so `i` is not in that completion, and the extension is ramified
+  because `ℚ₂(i)/ℚ₂` is.
+* **So the first version's answer — the conductor-13 cubic field — is 2-colourable and sees nothing.** Nor does the stub's
+  `ℚ(√3, ρ)` (usable plane at 11).
+* **A field whose first usable plane is 27, with the wall broken, has even degree ≥ 6**: quadratic fields cannot reach `𝔽₂₇`;
+  a quartic with a degree-3 prime above 3 has a degree-1 one too (an `𝔽₃` plane); odd degree is 2-colourable. Smallest found
+  among composita of a cubic (|disc| ≤ 4000, 3 inert) with `ℚ(√d)` (`d ≡ 7 mod 8`, `d ≤ 400`): **the cubic `x³ + 2x² − 3x − 2`
+  (disc 316) joined with `√79`**, |disc| 31,554,496, usable planes below 100: **27, 43, 79**. Not claimed minimal over all
+  sextic fields.
 
 ### 1.6 A correction to G56, `data/fs53/window.md` and `data/fplane/map.md`, found by the same complete search
 Those files name biquadratic fields for 23, 31, 43, 47 and assert that one radicand cannot do it ("every minimal field
@@ -87,7 +91,7 @@ with the 2-adic wall broken see each prime member first —
 | member | smallest by discriminant (degree ≤ 4, `|disc|` ≤ 20,000) | usable planes < 100 |
 |---|---|---|
 | 23 | `ℚ(√167)`, disc 668 | 23, 43, 59, 67, 71, 79, 83 |
-| 31 | cyclic quartic `x⁴ − 30x² + 45`, disc 1125; quadratic `ℚ(√1055)`, disc 4220 | 31, 59 / 31, 43, 47, 83 |
+| 31 | `ℚ(√1055)`, disc 4220 (every field of degree 3 or 4 fails at 2) | 31, 43, 47, 83 |
 | 43 | `ℚ(√4703)`, disc 18812 | **43, 47, 79** |
 | 47 | `ℚ(√2351)`, disc 9404 | 47, 67, 71, 83 |
 
@@ -172,7 +176,9 @@ beside the type as theorems (`card = 27`, `IsField`), not inside it.
 | `λ_min ≥ −8` at 27 | **[hand]** given Weil for these character sums (prior art) | the congruence and `2√27 < 11` |
 | `λ_min = −8`, the multiplicities, `|Aut| = 122,472` | **[tools, exact]** | `tools/fs54_structure.py` (nauty for the group) |
 | every edge in exactly one triangle, for every `q = 3^f`, `f` odd | **[hand, general]**; tested at 27 | a third point `w` needs `N(w) = 1` and `N(1−w) = 1`, i.e. `Tr w = 1`, so `w` is a root of `X² − X + 1 = (X + 1)²` |
-| the conductor-13 cubic is the least-discriminant field whose first usable plane is 27 | **[hand]** for degrees 2, 4, ≥ 5 (residue degrees; Minkowski); **[tools]** for degree 3 (PARI's `nflist`, trusted as software) | per degree |
+| a field seeing 27 first with the wall broken has even degree ≥ 6 | **[hand]** | degree 2: residue degree ≤ 2; degree 4: a degree-3 prime above 3 forces a degree-1 one; odd degree: a ramified prime above 2 two-colours |
+| every odd-degree real field is 2-colourable | **[hand]** (a corollary of GPT Astra's `χ = 2 ⟺ L = 2`, G55) | local degree odd at some prime above 2 ⟹ `F_𝔭(i)/F_𝔭` ramified ⟹ unit vectors ≡ 1 |
+| inert residue graphs at 2 are 4-colourable | **[solver]** at Q ≤ 32 only; general Q a reading | CaDiCaL colourings, verified |
 | `L(ℚ(√4703)) ≥ 6` | **[cert]** at 43, 47, 79; **[derived]** from 98 up (Weil); **[tools]** the usable list | a quadratic field's usable planes are primes; each is bounded separately |
 | max over prime-order classes of the largest `H`-invariant independent set = max over independent sets with nontrivial stabiliser | **[hand]** | Cauchy: a nontrivial stabiliser contains an element of prime order; conjugating moves the set to the class representative without changing its size; and the GAP group equals `Aut` because its order is nauty's |
 | a class's maximum (OPTIMAL) | **[solver]**, untrusted | CP-SAT; a refusal that matters is re-asked on CaDiCaL (orbit weights expanded as literal copies) before it is written as one |

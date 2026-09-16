@@ -16,7 +16,7 @@ remaining candidate would buy.*
 | **χ(UD(𝔽₁₇,2)) ≤ 6** | a published open cell narrowed from {5, 6, 7} to {5, 6} |
 | **χ(UD(𝔽₂₃,2)) ≤ 8, kernel-checked** | on the standard three axioms, no compiler trust bought — the first kernel statement about any window member |
 | **Three grokkings** | G56 (the window and reciprocity's exclusion), G57 (a field contains √3 iff its usable planes have triangles; no candidate field holds a Moser spindle), G58 (the antipodal conjecture) |
-| **Every member's field named** | 23 → ℚ(√2,√31), 31 → ℚ(√5,√51), 43 → ℚ(√10,√23), 47 → ℚ(√7,√89). 27 alone has none from square roots  — *corrected at FS-54: these see their members first but are not the smallest; the smallest are ℚ(√167), a quartic of disc 1125, ℚ(√4703), ℚ(√2351), and for 27 the cubic of conductor 13 (`data/fs53/window.md`)* |
+| **Every member's field named** | 23 → ℚ(√2,√31), 31 → ℚ(√5,√51), 43 → ℚ(√10,√23), 47 → ℚ(√7,√89). 27 alone has none from square roots  — *corrected at FS-54: these see their members first but are not the smallest; the smallest are ℚ(√167), ℚ(√1055), ℚ(√4703), ℚ(√2351), and 27 needs even degree ≥ 6 (`data/fs53/window.md`)* |
 
 **What it did not do:** find a six-colouring anywhere, or clear a six-threshold on the finding side at any
 member. Both were registered as long shots in advance and are reported as nulls at their budgets.

@@ -1,0 +1,11 @@
+Q= 4: 16 vertices, degree 5, spectrum [-3, 1, 5], lambda_min -3, Hoffman chi >= 2.667
+    k=3: NOT colourable (0.0s)
+    k=4: colourable (0.0s)
+Q= 8: 64 vertices, degree 9, spectrum [-3, 1, 5, 9], lambda_min -3, Hoffman chi >= 4.000
+    k=4: colourable (0.0s)
+Q=16: 256 vertices, degree 17, spectrum [-7, -3, 1, 5, 17], lambda_min -7, Hoffman chi >= 3.429
+    k=4: colourable (0.0s)
+Q=32: 1024 vertices, degree 33, spectrum [-11, -7, -3, 1, 5, 9, 33], lambda_min -11, Hoffman chi >= 4.000
+    k=4: colourable (0.2s)
+
+[exited with code 0]

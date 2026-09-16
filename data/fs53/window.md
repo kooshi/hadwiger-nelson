@@ -107,29 +107,30 @@ written down. The residue bound gives `χ(F²) ≤ χ(UD(𝔽_q,2))` whenever `F
 `𝔽_q`, so the field to name for member `q` is the smallest whose **first** usable prime is `q`.
 
 **Two conditions, and the second is the one that bites.** The field must (i) have `q` as its first usable
-residue plane — every smaller usable plane would give a better bound — and (ii) have the **2-adic wall broken**,
-because a field whose wall stands is already four-colourable by the residue at 2 and a local bound of 6 there
-is dead weight. **Smallest means smallest discriminant over every number field**, found by a complete
-enumeration (`tools/fs54_fields.gp` → `data/fs54/fields.out`: PARI's `nflist`, every field of degree ≤ 4 and
-`|disc|` ≤ 20,000; FS-54).
+residue plane — every smaller usable plane would give a better bound — and (ii) have the **2-adic wall broken**, which
+means **every prime above 2 splits in `F(i)`**: a prime above 2 that is ramified in `F(i)/F` gives `χ(F²) ≤ 2` whatever
+its norm (conjugation fixes the residue field, every unit vector reduces to 1, and a linear map to `𝔽₂` sending 1 to 1 is a
+two-colouring), and an inert one gives a Cayley graph on `𝔽_{Q²}` that is 4-colourable at every `Q` checked (2 to 32). So
+**every field of odd degree is 2-colourable** and never sees anything. Search: `tools/fs54_fields.gp` → `data/fs54/fields.out`
+(PARI's `nflist`, every field of degree ≤ 4 and `|disc|` ≤ 20,000, then composita of a cubic with a quadratic field for 27).
 
 | if this plane is six-chromatic | this field gets `χ(F²) ≤ 6` **by theorem** | its usable planes below 100 | wall |
 |---|---|---|---|
-| 23 | `ℚ(√167)`, disc 668 | 23, 43, 59, 67, 71, 79, 83 | broken |
-| 27 | **the cyclic cubic field of conductor 13**, `x³ − x² − 4x − 1`, disc 169 | 27, 31, 47, 79, 83 | broken (2 inert; the fixed prime above 2 has norm 8) |
-| 31 | the cyclic quartic `x⁴ − 30x² + 45`, disc 1125; the smallest quadratic is `ℚ(√1055)`, disc 4220 | 31, 59 / 31, 43, 47, 83 | broken |
+| 23 | `ℚ(√167)`, disc 668 | 23, 43, 59, 67, 71, 79, 83 | broken (2 splits in F(i)) |
+| 27 | needs **even degree ≥ 6**; smallest found: the cubic `x³ + 2x² − 3x − 2` (disc 316) joined with `√79`, disc 31,554,496 | 27, 43, 79 | broken |
+| 31 | `ℚ(√1055)`, disc 4220 | 31, 43, 47, 83 | broken |
 | **43** | **`ℚ(√4703)`**, disc 18812 | **43, 47, 79** | broken |
 | **47** | **`ℚ(√2351)`**, disc 9404 | **47, 67, 71, 83** | broken |
 
-**27's field is the arithmetically smallest of all five**: no quadratic field has residue field `𝔽₂₇`, a quartic
-with a degree-3 prime above 3 also has a degree-1 prime there (whose plane is three-colourable), `nflist` covers
-every cubic field, and Minkowski's bound puts every field of degree ≥ 5 above discriminant 169.
+Every field of degree 3 or 4 with `|disc|` ≤ 20,000 fails at 2. For 27, a quadratic field cannot reach `𝔽₂₇`, a quartic that
+does also has an `𝔽₃` plane (three-colourable), and an odd-degree field is two-colourable — hence degree ≥ 6.
 
-**Correction record (FS-54).** This section first named `ℚ(√2,√31)`, `ℚ(√5,√51)`, `ℚ(√10,√23)`, `ℚ(√7,√89)`
-and asserted that every single-radicand field seeing a member first has the wall standing, and it proposed
-`ℚ(√3, α)`, `α³ = α + 1`, for 27. The search behind it stopped at small radicands (167 > 100); `ℚ(√3, α)` has
-usable planes 11, 23, 27, … and is sealed at five by 11. The biquadratic fields still see their members first
-and are recorded in `data/fplane/map.md`; they are not the smallest.
+**Correction record (FS-54).** This section first named `ℚ(√2,√31)`, `ℚ(√5,√51)`, `ℚ(√10,√23)`, `ℚ(√7,√89)` and asserted
+that every single-radicand field seeing a member first has the wall standing (the search stopped at small radicands), and it
+proposed `ℚ(√3, α)`, `α³ = α + 1`, for 27 (usable planes 11, 23, 27, …: sealed at five by 11). A second version named the
+conductor-13 cubic field for 27 and a cyclic quartic for 31, testing only "a fixed prime above 2 of norm ≤ 4" — wrong: both
+have a prime above 2 that does not split in `F(i)`, so they are two- or four-colourable. The biquadratic fields still see
+their members first and are recorded in `data/fplane/map.md`; they are not the smallest.
 
 **Quadratic fields whose local bound is at least 6, each decided by one or two planes**
 (`tools/fs54_quadratic_fields.gp` → `data/fs54/quadratic-fields.out`). With `d ≤ 30,000`, 16 real quadratic
