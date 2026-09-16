@@ -272,3 +272,20 @@ stronger null here**: the best of many short, diverse restarts beats one long gr
 local search with 2 million-iteration restarts should be expected to do. The phase's `k = 6` null at 23 is
 therefore recorded as no stronger than the subplanning one, and the honest budget to quote for six at 23 is
 both rows together.
+
+## The side row at 17 — a published open cell narrowed (FS-53 phase B′, 2026-09-15)
+
+`[Moorhouse2010]` Table 6.1 lists `χ(𝔽₁₇²) ∈ {5, 6, 7}` — one of only two bracketed finite-plane cells in print, and open
+since 2010.
+
+| file | plane, k | budget | verdict | claim scope |
+|---|---|---|---|---|
+| `colour-p17-k6.json` | 𝔽₁₇, 6 | **0.056 s**, 4 threads, seed 1, 1,244 iterations, no restarts | **found** | a proper 6-colouring, verified by the tool's own independent pair sweep **and re-verified here from the definition** by `tools/fplane_review_verify.py` (0 monochromatic of 2,312 edges; class sizes 46, 48, 45, 49, 53, 48). So **`χ(UD(𝔽₁₇,2)) ≤ 6`**, and with `k = 4` UNSAT (M58) the bracket is **`{5, 6}`** |
+
+**Both halves of the sentence, as the plan requires.** What it is: the published bracket at 17 narrowed from three values
+to two, by an object anyone can re-check from the file. What it is **not**: 17 ≡ 1 (mod 4), so −1 is a square there, the
+unit vectors need not be 𝔭-integral, `[Madore2015]` Cor. 3.4's hypothesis fails, and **this plane seals no number field**.
+It bears on "is any finite Euclidean plane six-chromatic" and on nothing else — it is not a window member.
+
+The decisive ask is `k = 5`: a five-colouring would give `χ(UD(𝔽₁₇,2)) = 5` exactly and close the cell. Running at an
+hour's budget; a null there is a null at a budget and closes nothing.
