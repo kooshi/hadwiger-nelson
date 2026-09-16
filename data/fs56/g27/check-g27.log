@@ -1,0 +1,6 @@
+[check] H: 27 points of Q(√3, √11)^2 over denominator 12, 49 unit edges; level 12; 28496 weighted sets
+[check] (i) 11640 congruence classes of sets with two or more points, each summing to 0; (ii) the singletons sum to w = 4 (≈ 4.000000)  [8.2 s]
+[check] (iii) every independent set weighs at most 1 (182304 nodes of the enumeration visited)  [11.9 s]
+CERTIFIED: H = 27 points of Q(√3, √11)², level 12 — every fractional colouring of H whose weight on each point set of at most 12 points depends only on the set's congruence class weighs at least w = 4 (≈ 4.000000); exact arithmetic, no solver trusted (12 s)
+hence, by the field blow-up (plans/FS56-field-blowup.md, Lemma B2), the plane over Q(√3, √11) needs at least 4 colours
+exit 0

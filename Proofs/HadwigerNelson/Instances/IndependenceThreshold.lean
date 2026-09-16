@@ -7,10 +7,9 @@ A `k`-colouring of a graph on `n` vertices splits it into `k` independent sets, 
 least `⌈n/k⌉` points. Turned around (`add_one_le_chromaticNumber_of_indepNum_le`, `LocalGlobal.lean`):
 an upper bound on the largest independent set that leaves `k · a < n` refutes `k` colours outright.
 
-This module names the three instances FS-50 cares about, at the three finite Euclidean planes whose
-independence number the milestone measures. **Each is a conditional statement and nothing more**: its
-hypothesis is a numerical fact about the plane which the kernel does not decide here, and the
-docstrings say so rather than reading as a bound on `χ`.
+This module names three instances, at the finite Euclidean planes 11, 23 and 83. **Each is a
+conditional statement and nothing more**: its hypothesis is a numerical fact about the plane which the
+kernel does not decide here, and the docstrings say so rather than reading as a bound on `χ`.
 
 ## Where the hypotheses come from, and what they are worth
 
@@ -24,21 +23,24 @@ few hundred standard-library lines. The pieces live outside Lean:
 * `tools/fplane_cert_check.py` — the checker, which rebuilds the whole constraint system from `p`
   alone and accepts that file in 0.2 s (`--self-test` plants faults and watches each refuse).
 
-So `five_le_chromaticNumber_finitePlane11_of_indepNum_le` below has its hypothesis discharged **by an
-exact certificate outside the kernel**, and its conclusion is already a kernel theorem by a different
-route (`Instances/FinitePlane11.lean`, `chromaticNumber_finitePlane11 = 5`) — which makes it a
-consistency check on the certificate pipeline rather than a new bound. The other two hypotheses are
-**open questions**: `α(UD(𝔽₈₃, 2)) ≤ 1148` is FS-50's own, and `α(UD(𝔽₂₃, 2)) ≤ 105` is FS-17's. The
-best sets known are 597 points at 83 and 87 at 23 (`data/fs50/wo18/`), so neither hypothesis is known
-to be false either; the relaxation's exact value at those primes is what would decide them.
+**All three hypotheses are now held, each by an exact certificate checked outside the kernel**, so each
+conclusion rests on that checker's word and on nothing this module decides:
+
+* at 11, `α ≤ 29` — `data/fs50/cert-p11-N29.json`, `tools/fplane_cert_check.py`; the conclusion is also a
+  kernel theorem by a different route (`chromaticNumber_finitePlane11 = 5`), which makes this instance a
+  consistency check on the certificate pipeline;
+* at 83, `α ≤ 1046 ≤ 1148` — `data/fs50/p83-refusal/cert-p83-N1046-polish-208500.json` (FS-50), the same
+  checker;
+* at 23, `α ≤ 105` — `data/fs54/cert-q23-l3-N105.json` (FS-56), the level-3 relaxation, checked by
+  `tools/fs54_l3_cert_check.py`.
+
+Discharging them in the kernel is FS-52's question.
 
 ## Vacuity
 
 These theorems assume a `≤` between two natural numbers, not a structure, so `scripts/Vacuity.lean`
 records no carrier site for them and no `VACUITY DECLARED:` marker belongs here — writing one would
-claim a provable emptiness that is not proved, which that gate reads as `STALE`. The honest statement
-is the one above: the hypotheses at 83 and at 23 are open, and until a certificate supplies one the
-corresponding conclusion is asserted by nobody.
+claim a provable emptiness that is not proved, which that gate reads as `STALE`.
 -/
 
 namespace HadwigerNelson
@@ -69,9 +71,9 @@ example : Fintype.card (ZMod 11 × ZMod 11) = 121 := by rw [Fintype.card_prod, Z
 `83` exceeds 1,148 points, then its 6,889 points cannot be split into six colour classes and its
 chromatic number is at least 7.
 
-The hypothesis is FS-50's open question: `⌈6889/6⌉ = 1149`, and the largest set anybody here has
-exhibited is 597 (`data/fs50/wo18/p83-chain.json`). **This theorem asserts nothing about `χ` until
-that hypothesis is supplied**, by a certificate of the kind `data/fs50/cert-p11-N29.json` is at 11. -/
+`⌈6889/6⌉ = 1149`. **The hypothesis is held outside the kernel**: FS-50's exact certificate
+`data/fs50/p83-refusal/cert-p83-N1046-polish-208500.json`, accepted by `tools/fplane_cert_check.py`, gives
+`α ≤ 1046`; the largest set exhibited is 597. -/
 theorem seven_le_chromaticNumber_finitePlane83_of_indepNum_le
     (h : (finitePlane 83).indepNum ≤ 1148) : (7 : ℕ∞) ≤ (finitePlane 83).chromaticNumber := by
   simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 6) h six_mul_lt_card_finitePlane83
@@ -79,8 +81,9 @@ theorem seven_le_chromaticNumber_finitePlane83_of_indepNum_le
 /-- **At `23`, the five-colour threshold** — FS-17's first digit. *If* no independent set of the
 finite Euclidean plane at `23` exceeds 105 points, its 529 points need at least six colours.
 
-Open on the same terms: `⌈529/5⌉ = 106`, and the largest set held is 87
-(`data/fs50/alpha-p23-ge87.json`). -/
+`⌈529/5⌉ = 106`. **The hypothesis is held outside the kernel**: the level-3 certificate
+`data/fs54/cert-q23-l3-N105.json`, accepted by `tools/fs54_l3_cert_check.py`, gives `α ≤ 105`
+(`N ≈ 105.4306`, FS-56); the largest set held is 87 (`data/fs50/alpha-p23-ge87.json`). -/
 theorem six_le_chromaticNumber_finitePlane23_of_indepNum_le
     (h : (finitePlane 23).indepNum ≤ 105) : (6 : ℕ∞) ≤ (finitePlane 23).chromaticNumber := by
   simpa using add_one_le_chromaticNumber_of_indepNum_le (k := 5) h five_mul_lt_card_finitePlane23

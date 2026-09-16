@@ -1,0 +1,56 @@
+{
+ "kind": "fs56-gf-certificate-controls",
+ "genuine": "data/fs56/g27/cert-g27-mrvz.json",
+ "results": [
+  {
+   "control": "a-w-overclaimed",
+   "expect": "refuse",
+   "fragments": [
+    "the singletons sum to"
+   ],
+   "exit": 1,
+   "printed": "NOT A CERTIFICATE: the singletons sum to 4 but the file claims w = 41/10",
+   "as_designed": true
+  },
+  {
+   "control": "b-singleton-raised",
+   "expect": "refuse",
+   "fragments": [
+    "weighs"
+   ],
+   "exit": 1,
+   "printed": "NOT A CERTIFICATE: independent set [0] weighs \u2248 1.001 (exact: 255-digit numerator) > 1 (largest contributions: [0] +\u2248 1.001 (exact: 255-digit numerator), \u2026)",
+   "as_designed": true
+  },
+  {
+   "control": "c-weight-moved-across-classes",
+   "expect": "refuse",
+   "fragments": [
+    "sums to"
+   ],
+   "exit": 1,
+   "printed": "NOT A CERTIFICATE: the congruence class of set #1 [0, 1] (26 listed sets: #1, #2538, #4069, #12314, #15449, #19621, \u2026) sums to \u2248 0.604139636 (exact: 253-digit numerator); a class of sets of two or more points must sum to 0",
+   "as_designed": true
+  },
+  {
+   "control": "d-point-moved",
+   "expect": "refuse",
+   "fragments": [
+    "sums to",
+    "weighs"
+   ],
+   "exit": 1,
+   "printed": "NOT A CERTIFICATE: the congruence class of set #1 [0, 1] (1 listed sets: #1) sums to \u2248 -0.604139636 (exact: 254-digit numerator); a class of sets of two or more points must sum to 0",
+   "as_designed": true
+  },
+  {
+   "control": "t-faithful-relabelled",
+   "expect": "pass",
+   "fragments": [],
+   "exit": 0,
+   "printed": "CERTIFIED: H = 27 points of Q(\u221a3, \u221a11)\u00b2, level 12 \u2014 every fractional colouring of H whose weight on each point set of at most 12 points depends only on the set's congruence class weighs at least w = 4 (\u2248 4.000000); exact arithmetic, no solver trusted (11 s)",
+   "as_designed": true
+  }
+ ],
+ "all_as_designed": true
+}
