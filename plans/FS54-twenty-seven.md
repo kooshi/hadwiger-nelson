@@ -265,6 +265,18 @@ hierarchy on the full stabiliser** (order 168, the Frobenius included — the FS
 which leaves the optimum unchanged but not the size): orbit counts, block sizes, memory, iteration cost on card A. **No
 solve is launched before the price is on this page.** Gated on D2: if a search finds 146, five is possible and D4 is moot.
 
+### D1 — LANDED 2026-09-16 (descent-engine `1908a8c`…`794c40f`, pushed)
+Both tools take `--q 27 --modulus t^3-t-1`; the prime path byte-identical over 11 record pairs; both digests reproduced;
+19 refusals by name; planted wrong multiplication caught; gate green; the prime hot path not slower. Records carry
+`field: {q, p, f, modulus}` with top-level `p` the **characteristic** (3 at 27 — so a rebuild from `p` fails loudly instead of
+building ℤ/27), both digests with their rules, and `claim_scope`. **The engineer's findings, credited:** the integer 1 is not
+the field's 1 (at 27 the unit is element 9, and element 1 is `t²`), which no prime could reveal; and three defects in
+`tools/fplane_review_verify.py` (a reducible modulus accepted, higher terms dropped in silence, plant B mislabelled), all
+fixed. **D97, which bears directly on D5: `plane-colour` cannot find 7 or even 8 colours at 27 from a random start** (best 118
+conflicts at k = 7, 41 at k = 8, while one thread finds 8 at 23 at once), though it repairs a damaged 7-colouring in 40
+iterations. **So a `k = 6` null from this searcher at 27 is weak evidence even by the standard of its own k = 8 behaviour**, and
+D5 must seed from structure (the 117-sets as a fixed class, the periodic 7-colouring) rather than from random starts.
+
 ### D5 — the colour search goes non-periodic
 Periodic six-colourings are already excluded at indices 9 and 27. After D1: `plane-colour --q 27 --k 6` seeded with D2's best
 set as colour 0 (`--fix-class`), and an **antipodal-quotient finder** (G58's instrument redesign: search colourings with
