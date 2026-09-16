@@ -230,6 +230,10 @@ every record (owed since FS-53).
   outcome, a symmetric 122-set, is reachable: nothing here excludes it). **P6** the order-7 rotation class is the weakest,
   best ≤ 112, and is the one CP-SAT proves optimal inside its budget. **P7** at least one order-3 translation class reaches
   117 (forced: a 9-periodic set is 3-periodic under its subgroup's lines — a control, not a prediction).
+* **Registered 2026-09-16, before they report: P8** the calibrated `plane-independent` ladder (after WO-21) also plateaus at
+  **117** — probability 0.7; a set of 118 or more from it would be the first non-9-periodic record. **P9** if the D4 pricing
+  agent's 4-point bound is computable at 27, its float value lands in **[138, 146]**, and it refuses five (< 146) with
+  probability 0.35.
 * **Reading, not a claim:** 117 is a strong attractor. If `α(27) = 117`, then `χ(27) = 7` exactly (`⌈729/117⌉ = 7` and a
   seven-colouring is known) and 27 leaves the window — but proving `α ≤ 121` is 26 integers below the converged certificate.
 
