@@ -865,6 +865,26 @@ system LLVM, so any native/C compile fails unless you use the system clang plus 
 external needs installing. It is single-threaded: use `tools/portfolio.sh` (a configuration race) and
 colour-cube splits (one run per cube) to use the cores.
 
+**Break the symmetry before any (UN)SAT search, and treat an unbroken encoding's verdict as a measurement of the
+encoding** (Kooshi, 2026-09-15). These graphs are vertex- and arc-transitive with interchangeable colours, so a naive
+encoding asks the solver to re-derive the same contradiction once per symmetric copy. The checklist, cheapest first:
+1. **Pin a maximal clique.** The origin takes colour 0 (vertex-transitivity) and one neighbour takes colour 1
+   (arc-transitivity). **Check `ω` first, because it bounds what this can buy**: `ω(UD(𝔽_q,2)) = 3` iff the
+   characteristic is 3 or 3 is a square in `𝔽_q`, else 2 (`[Krebs2022]`, verified here at 21 planes). Where `ω = 3` a
+   triangle pins three colours; where `ω = 2` — 7, 17, 19, 31, 43, 67, 79 among them — **an edge is all there is, and the
+   clique pin is therefore weak**.
+2. **Break the residual value symmetry, which the clique pin does not reach.** After pinning `k' ≤ ω` colours the
+   remaining `k − k'` are still freely interchangeable — `3! = 6` at `(17, 5)`. A precedence constraint kills it: colour
+   `c` may appear at `v` only if `c − 1` appears strictly earlier (`¬x[v][c] ∨ ⋁_{u<v} x[u][c−1]`).
+   **Measured 2026-09-15: `(13, 5)` 251.09 s → 3.48 s, a 72× speedup, and `(17, 4)` 38.35 s → 11.55 s.** The 3.48 s
+   also reproduces M58's independently recorded 3.8 s for that instance, which is the control.
+3. **Then the cores:** `tools/portfolio.sh` for a configuration race, and cube-and-conquer for a hard instance — but
+   **price the cubes on a sample before committing** (M63 phase H2 priced 552 cubes before spending 20 core-hours).
+4. **Never report an `UNKNOWN` at a budget from an unbroken encoding as a fact about the graph.** It is G21's rule in
+   solver clothes: the verdict measures the enumeration, and an unbroken encoding's enumeration is `|Aut| × k!` times
+   larger than the question.
+
+
 **Python is 3.14, and its multiprocessing default changed.** On Linux the default start method is now
 `forkserver`, not `fork` (measured: 3.14.6), so a worker **re-imports the module** instead of inheriting the
 parent's memory, and state a parent leaves in a module-level global is **empty in the worker** — the symptom is
