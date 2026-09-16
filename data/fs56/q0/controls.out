@@ -1,0 +1,15 @@
+[controls] OK  cert-q23-l3-N105-a-flipped-sign: expected refuse, exit 1, 0 s
+           NOT A CERTIFICATE: multiplier lower[60832] (on the valid inequality y_K >= 0 of variable 60832) is negative: -61128990230507/500000000000000
+[controls] OK  cert-q23-l3-N105-b-faithful-dense-block: expected pass, exit 0, 6 s
+           CERTIFIED: every independent set of UD(F_23, 2) has at most 1054305865660809133/10000000000000000 points, hence at most 105 -- exact arithmetic, no solver trusted (6 s)
+[controls] OK  cert-q23-l3-N105-b-indefinite-dense-block: expected refuse, exit 1, 1 s
+           NOT A CERTIFICATE: certificate.matrices[48].blocks[1]: the block is NOT positive semidefinite -- pivot 1 is negative: -226093091318349948695278081/283780370268160000000000000000
+[controls] OK  cert-q23-l3-N105-b2-gram-entry-bumped: expected refuse, exit 1, 6 s
+           NOT A CERTIFICATE: the identity fails at variable 0 (the set [0, 2]): the left side's coefficient is -24, the right side's -59999999994297341/2500000000000000 (difference -2.281e-09)
+[controls] OK  cert-q23-l3-N105-d-smaller-N: expected refuse, exit 1, 6 s
+           NOT A CERTIFICATE: the identity's constant term fails: the file's N = 1054305865660799133/10000000000000000 (~105.430586566), but o0 + <Z, A>'s constant + sum mu = 1054305865660809133/10000000000000000 (~105.430586566); the file c
+[controls] 5/5 as designed; wrote data/fs56/q0/controls.json
+
+real	0m23.299s
+user	1m25.839s
+sys	0m0.994s

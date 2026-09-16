@@ -1,0 +1,56 @@
+{
+ "kind": "fs54-l3-certificate-controls",
+ "results": [
+  {
+   "control": "cert-q23-l3-N105-a-flipped-sign",
+   "expect": "refuse",
+   "fragment": "is negative",
+   "exit": 1,
+   "seconds": 0.5,
+   "printed": "NOT A CERTIFICATE: multiplier lower[60832] (on the valid inequality y_K >= 0 of variable 60832) is negative: -61128990230507/500000000000000",
+   "as_designed": true,
+   "log": "data/fs56/q0/controls/cert-q23-l3-N105-a-flipped-sign.log"
+  },
+  {
+   "control": "cert-q23-l3-N105-b-faithful-dense-block",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 6.2,
+   "printed": "CERTIFIED: every independent set of UD(F_23, 2) has at most 1054305865660809133/10000000000000000 points, hence at most 105 -- exact arithmetic, no solver trusted (6 s)",
+   "as_designed": true,
+   "log": "data/fs56/q0/controls/cert-q23-l3-N105-b-faithful-dense-block.log"
+  },
+  {
+   "control": "cert-q23-l3-N105-b-indefinite-dense-block",
+   "expect": "refuse",
+   "fragment": "NOT positive semidefinite",
+   "exit": 1,
+   "seconds": 0.8,
+   "printed": "NOT A CERTIFICATE: certificate.matrices[48].blocks[1]: the block is NOT positive semidefinite -- pivot 1 is negative: -226093091318349948695278081/283780370268160000000000000000",
+   "as_designed": true,
+   "log": "data/fs56/q0/controls/cert-q23-l3-N105-b-indefinite-dense-block.log"
+  },
+  {
+   "control": "cert-q23-l3-N105-b2-gram-entry-bumped",
+   "expect": "refuse",
+   "fragment": "identity fails",
+   "exit": 1,
+   "seconds": 6.1,
+   "printed": "NOT A CERTIFICATE: the identity fails at variable 0 (the set [0, 2]): the left side's coefficient is -24, the right side's -59999999994297341/2500000000000000 (difference -2.281e-09)",
+   "as_designed": true,
+   "log": "data/fs56/q0/controls/cert-q23-l3-N105-b2-gram-entry-bumped.log"
+  },
+  {
+   "control": "cert-q23-l3-N105-d-smaller-N",
+   "expect": "refuse",
+   "fragment": "constant term",
+   "exit": 1,
+   "seconds": 6.1,
+   "printed": "NOT A CERTIFICATE: the identity's constant term fails: the file's N = 1054305865660799133/10000000000000000 (~105.430586566), but o0 + <Z, A>'s constant + sum mu = 1054305865660809133/10000000000000000 (~105.430586566); the file claims LESS than its own multipliers prove",
+   "as_designed": true,
+   "log": "data/fs56/q0/controls/cert-q23-l3-N105-d-smaller-N.log"
+  }
+ ],
+ "all_as_designed": true
+}

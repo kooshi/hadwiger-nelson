@@ -1,0 +1,201 @@
+# FS-56 — ℚ(√167): the subplan
+
+*Opened 2026-09-16 by Kooshi ("You are go for 167"). The stub `plans/STUB-quadratic-167.md` holds the motivation and every
+number it rests on; this file is the execution plan and supersedes the stub's §3–§5 where they differ. Written for a session
+with no memory. Read beside: `CLAUDE.md` G55 (chain theorem), G56 (window, 2-adic trichotomy), G59 (the wall and the
+conjecture's prediction); `BIBLIOGRAPHY.md` `[MatolcsiEtAl2025]`, `[DuczVarga2026]`, `[AmbrusEtAl2023]`, `[KMOR2016]`,
+`[CranstonRabern2015]`, `[Fischer1990b]`.*
+
+**The object.** `F = ℚ(√167)`, and its plane `F²`: the points `(x, y)` with `x, y ∈ F`, two joined when `x² + y² = 1` for their
+difference. As a graph it is the Cayley graph of the abelian group `(F(i), +) ≅ ℚ⁴` on the norm-one elements `U_F` of
+`F(i)/F`, and its isometry group `F(i) ⋊ (U_F ⋊ ⟨conj⟩)` is solvable. It has no `√3`, hence no unit triangle (G57). Its
+places where the unit circle is **compact** (a finite plane or a real circle the residue method can see) are the two real
+places, the usable primes 23, 43, 59, 67, 71, 79, 83, … and the ramified prime 167; at 2, 3, 5, 7, 11, 13, 17, 19, … the circle
+is split.
+
+---
+
+## §0 What landed at the opening (2026-09-16), before this plan was written
+
+### Q0 — five colours refused at 23, by exact certificate — **LANDED**
+* `data/fs54/cert-q23-l3-N105.json` (sha256 `8fe36870…`): **α(UD(𝔽₂₃,2)) ≤ 105**, exact `N = 105.430586566`, from the level-3
+  relaxation's calibration iterate (3,500 iterations; float reading 105.430580; rounding loss 6.6·10⁻⁶). Producer
+  `tools/fs54_l3_cert_round.py`, 99,481 orbit variables, CERTIFIED in 6 s by the producer's run and **re-run by the PO in a
+  fresh process, 24 s single-threaded, CERTIFIED** (`data/fs56/q0/recheck-po.log`). **Planted-fault controls 5/5 as designed**
+  (`data/fs56/q0/controls.json`): a flipped multiplier sign, an indefinite dense block, a bumped Gram entry and a lowered N
+  each refused for their named reason, and the faithful dense twin passed.
+* **Consequences.** `5 · 105 = 525 < 529`, so **χ(UD(𝔽₂₃,2)) ∈ {6, 7, 8}**. The window's floors are now **6, 6, 5, 6, 6** at
+  23, 27, 31, 43, 47 (and 6 at U₆₄): five is open only at 31. FS-17's first digit is half-answered (23 is not five-chromatic).
+  `L(ℚ(√167)) ≥ 6`, so **the conjecture predicts χ(ℚ(√167)²) ≥ 6** (6 if Γ₂₃ or Γ₄₃ is six-chromatic, else 7 by the bold form).
+  The kernel consumer already exists and asks for exactly this hypothesis:
+  `six_le_chromaticNumber_finitePlane23_of_indepNum_le` (`Instances/IndependenceThreshold.lean`), whose docstrings still call
+  it open (phase E).
+* The float reading was 0.57 below the threshold and the certificate lost 7·10⁻⁶ of it: the stub's expectation "Q0
+  certifies" is **WON**.
+
+### The prior-art gate turned up the milestone's instrument (§PA)
+The fractional side of Hadwiger–Nelson (`[AmbrusEtAl2023]`, `[MatolcsiEtAl2025]`, `[DuczVarga2026]`) proves bounds on
+`χ_f(ℝ²)` through the **geometric fractional chromatic number** `χ_gf(H)` of a finite graph `H` — a fractional colouring whose
+aggregate weight on a point set depends only on its congruence class — and a **blow-up** (MRVZ Theorem 1): finitely many
+congruent copies of `H`, indexed by a Følner set of the countable solvable group the congruences generate, carry fractional
+chromatic number `≥ χ_gf(H) − ε`. **That proof never leaves the field `H` lives in** (§1). So every finite `H ⊂ F²` with
+`χ_gf(H) > k` proves `χ(F²) ≥ k + 1` for any subfield `F ⊆ ℝ`. This is the first instrument this project holds that can see
+**non-local, non-residue** obstructions over a field — exactly what ℚ(√167) requires, since every residue plane it has is
+≥ 6-chromatic and useless for a lower bound, and the chain theorem needs a forcer nobody knows how to build without triangles.
+
+---
+
+## §1 The derivation the milestone rests on (phase B) — [hand; checked against MRVZ §3 line by line]
+
+**Lemma B1 (congruences are field-rational).** Let `F ⊆ ℝ` be a field and `Y, Y′ ⊂ F²` with `|Y| ≥ 2`. Every Euclidean
+isometry `φ` with `φ(Y) = Y′` is `z ↦ u z + t` or `z ↦ u z̄ + t` with `u ∈ F(i)`, `u ū = 1`, `t ∈ F(i)`.
+*Proof.* Pick `y₁ ≠ y₂ ∈ Y`. An isometry of `ℂ` is `z ↦ uz + t` or `z ↦ u z̄ + t` with `|u| = 1`. In the first case
+`u = (φ(y₂) − φ(y₁))/(y₂ − y₁) ∈ F(i)` and `t = φ(y₁) − u y₁ ∈ F(i)`; in the second `u = (φ(y₂) − φ(y₁))/(ȳ₂ − ȳ₁)`, also in
+`F(i)` because conjugation preserves `F(i)` (`F` is real). `|u| = 1` and `u ∈ F(i)` give `u ū = 1` in `F`. ∎
+
+**Lemma B2 (the blow-up over a field).** For every subfield `F ⊆ ℝ`, every finite `H ⊂ F²` and every family `𝒞` of pairs of
+congruent subsets of `H` (each of size ≥ 2), write `χ_gf(H; 𝒞)` for the least weight of a regular fractional colouring of `H`
+whose aggregate functional agrees on every pair in `𝒞`. Then for every `ε > 0` there is a finite `G ⊂ F²` with
+`χ_f(G) ≥ χ_gf(H; 𝒞) − ε`.
+*Proof.* MRVZ Theorem 1 verbatim, with three checks. (i) The set `T` of isometries carrying a shape of `𝒞` to its partner is
+finite, symmetric, contains the identity, and by B1 consists of isometries of `F²`; the group it generates is a countable
+subgroup of `F(i) ⋊ (U_F ⋊ ⟨conj⟩)`, which is solvable (abelian by abelian by order 2), hence amenable, hence Følner. (ii)
+`G_k = ⋃_{σ ∈ R_k} σH ⊂ F²`. (iii) The bound on the terms, which MRVZ take from `χ_f(ℝ²) ≤ 4.36`, holds with `χ_f(G_k) ≤ 7`
+(any aggregate value is at most the weight). Restricting `𝒞` to a subfamily only removes constraints of the limiting
+programme, so the averaged colouring still nearly satisfies the ones kept. ∎
+
+**Corollary B3 (Cranston–Rabern's first question).** `χ_f(ℚ(√3,√11)²) = 4`.
+*Proof.* MRVZ's `G27` has Moser coefficients in `ℤ⁴` (their Definition 2), so `G27 ⊂ L_Moser ⊂ K²` with `K = ℚ(√3,√11)`, and
+`χ_gf(G27) = 4` (their Theorem 3, a rational dual witness). By B2, `χ_f(K²) ≥ sup χ_f(G) ≥ 4`. By Theorem B
+(`chromaticNumber_seamPlane`), `χ_f(K²) ≤ χ(K²) = 4`. ∎ Also: the finitary Hall ratio of `K²` is 4 (MRVZ Theorem 2's proof is
+field-internal too — its cube lives in the lattice the vertices span), so finite unit-distance graphs over `K` have independence
+ratios tending to exactly `1/4` and never below it. **What `[CranstonRabern2015]` asked** (their conclusion, verbatim in
+`BIBLIOGRAPHY.md`): *"What is the fractional chromatic number of `ℚ(√3,√11) × ℚ(√3,√11)`?"* — bracketed `76/21 ≤ · ≤ 4` since
+Theorem B; now closed. **Dependency stated plainly:** B3 rests on MRVZ's computer-verified witness. Phase B re-verifies it.
+
+**Corollary B4 (where `[DuczVarga2026]` must leave `K`).** Their `G29 ⊃ G27` has `χ_gf > 4.0007`, so by B2 its field cannot be
+four-colourable; its two new points involve `√5` and `η = i√((415 + 79√33)/8)`, outside `K`. Consistent with Theorem B, and
+a check that B2 and Theorem B agree. (`BIBLIOGRAPHY.md`'s row saying the augmentation stays "inside the Moser lattice" is wrong
+and is corrected in phase B.)
+
+---
+
+## §2 Why ℚ(√167) is in this instrument's reach and ℚ(√11), ℚ(√23) are not — [measured; a reading, with its killing test]
+
+The instrument's weakest relative is the **ratio (Delsarte–Hoffman) bound** on a finitely generated piece `Cay(Λ, W)` of the
+plane, `Λ ≅ ℤ⁴`: `χ_f ≥ 1 − 1/m` with `m` the least mean of a character of `Λ` over `W` (`[BachocEtAl2014]`, the operator
+form; a periodic-set proof as in `[KMOR2016]`). A character that factors through a completion `F_v` where the circle is compact
+has mean near that completion's own least character mean — measured 2026-09-16 (`data/fs56/local-ratios.out`, phase C):
+
+| place | least character mean over the unit circle | ratio floor `1 − 1/m` |
+|---|---|---|
+| real (Bessel `J₀`) | **−0.40276** | 3.483 |
+| `𝔽₃` plane | −0.5 | 3.000 |
+| `𝔽₇` plane | **−0.5617** | 2.780 |
+| `𝔽₁₁` | −0.3996 | 3.502 |
+| `𝔽₁₉` | −0.3805 | 3.628 |
+| `𝔽₂₃` | −0.3317 | 4.015 |
+| `𝔽₃₁` | −0.3333 | 4.000 |
+| `𝔽₄₃` | −0.2719 | 4.678 |
+| `𝔽₄₇` | −0.2676 | 4.736 |
+| dyadic ramified in `F(i)/F` | −1 | 2 |
+
+**The reading (R-C).** *The fractional route can certify `χ(F²) ≥ 4` only if no compact place of `F` has least mean ≤ −1/2*,
+because a character at such a place is a fixed obstruction no choice of `W` removes once `W` equidistributes there; split places
+contribute a Kloosterman-type mean weighted by the share of `W` that is integral there, which the choice of `W` controls.
+**ℚ(√167) passes** (its compact places are real, 23, 43, 59, …, 167: least −0.40276). **ℚ(√11) and ℚ(√23) fail** at 7
+(both have 7 usable), which is why the conjecture's cheapest level-4 predictions are not this milestone's target.
+*Consistent with every known value*: `ℚ(√3)`, `ℚ(√7)` (χ = 3) each have an `𝔽₃` place at −1/2 exactly; `ℚ(√2)`, `ℚ(√5)` (χ = 2)
+a dyadic ramified place. *Not a theorem*: split places are handled heuristically and the local–global product structure of
+character means is an equidistribution statement nobody has proved here. *Killing test:* a finite `H` over a field with a compact
+place at ≤ −1/2 and `χ_gf(H) > 3`; or ℚ(√167) pieces whose `χ_gf` plateaus at ≤ 3 however they grow.
+
+**Why the ratio bound is not the certificate.** Probed 2026-09-16 (scratchpad, not kept): unit vectors of `F(i)` with bounded
+denominator are sparse (20 at denominator 84, 60 at 420, 324 at 10,920), so an equidistributed `W` has frequencies near 10⁴ on
+a 4-torus, and a rigorous minimum there is out of reach. The ℚ(√3) control read exactly −0.50000 (its 3-adic value); ℚ(√167) at
+denominator 84 (20 vectors) read −0.98 — too few vectors, as predicted. So the ratio bound names the target; the finite LP
+(phase D) certifies.
+
+---
+
+## §3 The phases
+
+| phase | what | output | status |
+|---|---|---|---|
+| A | Q0 (§0) | `data/fs54/cert-q23-l3-N105.json`, `data/fs56/q0/` | **LANDED** |
+| B | the field blow-up (§1): write it up; re-verify MRVZ's `G27` witness with our own exact checker; correct the bibliography; prior-art search on `χ_f(K²)` | `plans/FS56-field-blowup.md`, `tools/fs56_gf_check.py`, `data/fs56/g27/` | open |
+| C | the local ratio table (§2) as a committed script | `tools/fs56_local_ratios.py` → `data/fs56/local-ratios.out` | open |
+| D | **Q1 — χ(ℚ(√167)²) ≥ 4 by a finite `H` with `χ_gf(H; 𝒞) > 3`** (§4) | `tools/fs56_gf_lp.py`, `tools/fs56_gf_search.py`, `data/fs56/q1/` | open |
+| E | kernel: the 23 consumer's docstrings from "open" to "held by certificate" | `Instances/IndependenceThreshold.lean` | open |
+| F | the close: ledger row 71, grokkings, re-rank, stubs, sweep | `CLAUDE.md`, `plans/FRONTIER-STUBS.md` | open |
+
+## §4 Phase D in detail — the instrument for Q1
+
+**The programme.** For a finite `H ⊂ F²`, variables `γ(S) ≥ 0` for independent sets `S` of `H`; regularity `Σ_{S∋x} γ(S) = 1`
+for every `x`; for each congruence class `c` of point sets in `𝒞` (sizes 2 and 3 to start), `Σ_{S ⊇ Y} γ(S)` equal across all
+`Y ∈ c`; minimise `Σ γ(S)`. Congruence classes over `F²` are computed exactly: pairs by squared distance (an element of `F`),
+triples by the sorted triple of squared side lengths (congruence including reflections). **Dual certificate:** multipliers
+`z₀` (the regularity row at one vertex, after using the size-1 congruences — all vertices congruent — to drop the others) and
+`y_{Y,Y′}` on congruence rows, with **`z₀ > 3` and, for every independent set `S` of `H`, `z₀·[x₀ ∈ S] − Σ y_{Y,Y′}([Y ⊆ S] − [Y′ ⊆ S]) ≤ 1`**.
+The last condition quantifies over **all** independent sets, not the generated columns — the checker must certify it.
+
+**The checker** (`tools/fs56_gf_check.py`, standard library, `fractions.Fraction`): rebuilds `H`'s points from exact coordinates in
+`ℚ(√d)` (pairs `(p, q)` of rationals for `p + q√d`), recomputes every unit edge, every squared distance and every triple
+class from the coordinates alone, checks that each listed congruence row pairs two genuinely congruent sets, and certifies the
+max-over-independent-sets inequality by **exhaustive branch-and-bound over independent sets** with an admissible bound (the
+positive part of each remaining term), in exact arithmetic. It must re-verify MRVZ's `G27` (phase B) — that is its positive
+control, on a published witness it did not produce. Negative controls: a row pairing non-congruent sets; a dual with one
+`y` perturbed so one independent set violates; a point moved off the field lattice (an edge disappears); `z₀ = 3` exactly.
+
+**The search** (`tools/fs56_gf_search.py`): MRVZ Appendix A's backtracking beam search transplanted to `F`: children add a point
+at a unit vector from a fixed `W` (closed under `z ↦ iz` and conjugation) from an existing point, or complete a unit rhombus
+`x₀ + u + v`; canonicalise under translation, `z ↦ iz`, conjugation **and the Galois flip** `σ : √167 ↦ −√167`. The flip is not
+an isometry of the real picture, but it fixes `i`, so it carries unit edges to unit edges and, through B1's algebraic form
+(`z ↦ uz + t` with `uū = 1` goes to `z ↦ σ(u)z + σ(t)`), congruent pairs to congruent pairs; the programme for `σH` is the
+programme for `H` relabelled, and `χ_gf(σH; σ𝒞) = χ_gf(H; 𝒞)`. The LP by column generation (pricing =
+max-weight independent set with pair and triple terms, OR-Tools CP-SAT), floats; any `H` reading above `3 + 10⁻³` goes to exact
+rounding and the checker.
+
+**The unit vectors to build from.** `W₀ = {±1, ±i}` ∪ Pythagorean `(3 ± 4i)/5`-family ∪ `ρ₄₂ = (83 + i√167)/84` with its
+`⟨i, conj⟩`-orbit, then denominators 168, 420 (60 vectors), 2184 (108), 5460 (180). A graph using only `ℚ(i)` points is bipartite,
+so every useful `H` uses `ρ₄₂`-type vectors; `n = 42` is the smallest type-M rotation of this field (G7).
+
+**Registered predictions (2026-09-16, before any search).** Both outcomes of each are reachable.
+* **P1.** The checker re-verifies `χ_gf(G27) ≥ 4` from MRVZ's published rational witness. *Reachable failure:* the witness
+  does not load, or our congruence enumeration disagrees with theirs (a defect on one side, which is the point of checking).
+  Confidence high.
+* **P2.** At `ℚ(√7)` (χ = 3, the control where the answer is forced) every `H` the search produces reads `χ_gf ≤ 3`. A reading
+  above 3 is a bug in the LP or the congruence code, never a finding. Confidence: certain as mathematics; the prediction is about
+  the code.
+* **P3.** Pair-only congruences are too weak: on `G27` they read strictly below 4 (the triple rows do real work). Medium.
+* **P4.** Q1 lands: some `H ⊂ ℚ(√167)²` with at most 200 points reads `χ_gf(H; pairs ∪ triples) > 3` and certifies. **Low–medium
+  (0.35).** The reading of §2 says the limit exceeds 3; the size at which a finite `H` shows it is unknown, and the field has no
+  triangles, which is where MRVZ's search started (the spindle already reads 3.5). *Reachable failure:* the best reading
+  plateaus below 3 across the budget.
+* **P5.** If P4 lands, the certificate's `H` contains a non-3-colourable subgraph small enough for CaDiCaL (≤ 2,000 vertices)
+  — **low (0.2)**: the blow-up is enormous and χ_f > 3 on a blown-up graph says nothing about small subgraphs.
+
+**Budget and stop rule.** The search runs checkpointed (the beam's population and every `(H, value)` written per generation to
+`data/fs56/q1/beam-gen*.json`; resume = relaunch without `--new`), at most one heavy job at a time. **Stop** when the best
+reading has not improved by `10⁻³` over five generations at the largest `W` tried, and report the plateau as the finding.
+
+## §5 What this milestone is not
+Not a search for a six-colouring of any finite plane (FS-57), and not a claim that ℚ(√167)² needs six colours. Q2 (four and five
+colours refused by the same instrument) is registered as reachable in principle — `χ_gf > 4` over ℚ(√167) would prove
+`χ ≥ 5` — but is not planned until Q1 lands; `[DuczVarga2026]` needed a hand-guided augmentation to cross 4 in the whole plane.
+
+## §PA — prior-art gate (WORKFLOW 3a), 2026-09-16
+
+**Searched, in the disciplines' words:** (i) *chromatic number of the plane over a real quadratic field / unit distance graph
+ℚ(√d)²* — nothing beyond `[Johnson1987]` (two-colourings) and `[Fischer1990]`; (ii) *triangle-free 4-chromatic unit distance
+graph, coordinate field* — the 17- and 19-vertex Exoo–Ismailescu graphs, whose coordinate fields were certified in
+arXiv:2607.19995 (EI19: base `ℚ(√2,√5,√7)` plus a degree-12 angle; EI17: an `S₂₀` degree-20 field) — neither quadratic; and the
+ℚ³ scavenger hunt (arXiv:2303.09513), rational 3-space; (iii) *spectral bounds for the independence ratio and chromatic number of
+an operator / Cayley graph on a locally compact abelian group* — `[BachocEtAl2014]` (Israel J. Math., arXiv:1301.1054), the
+framework of §2; (iv) *fractional chromatic number of the plane / geometric fractional chromatic number* — `[MatolcsiEtAl2025]`,
+`[DuczVarga2026]`, `[AmbrusEtAl2023]` (held, read for this gate: MRVZ §2–§4 and Appendix A; Dúcz–Varga in full);
+(v) **the question** *"fractional chromatic number of ℚ(√3,√11)²"* and every work citing `[CranstonRabern2015]` (Semantic
+Scholar, 11 citing records: none addresses a field plane; OpenAlex reports 8). **Findings:** no field-restricted form of the
+blow-up; no value of `χ_f(K²)`; no lower bound above 3 for any real quadratic field's plane. **Negative recorded.** Not yet
+reached: `[Johnson2006]` (still not held), "Still Spinning: The Moser Spindle at Sixty" (Math. Mag. 96(2), 2023, cites
+Cranston–Rabern; not held).
