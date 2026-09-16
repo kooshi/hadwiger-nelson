@@ -1,3 +1,11 @@
+> **CLOSED 2026-09-16.** This milestone ran and is finished; the close, with the ranked options it leaves, is
+> `data/fs53/CLOSE.md`, and the result is `CLAUDE.md` § ledger row 69. **The window fell from eight members to
+> five (23, 27, 31, 43, 47); five colours are refused by certificate at 43 and 47, so their floor is six and a
+> single verified six-colouring at either is that plane's exact chromatic number; the certificate side is
+> exhausted (23, 27, 31 and 47 converged and final).** No six-colouring was found anywhere. Successor:
+> **FS-54** (`plans/STUB-twenty-seven.md`). The plan below is kept as written — deprecate, never delete — and
+> its predictions are scored in the close.
+
 # FS-53 — The sixth colour: a finite plane with χ = 6 exactly, and the field it seals (STUB, minted 2026-09-15 at Kooshi's instruction: "stub the next milestone as searching for and verifying the field and prime with chromatic number 6, now that we have strong tools")
 
 *Read beside: `plans/STUB-independence-threshold.md` and `data/fs50/README.md` (the instrument: the triple-level SDP in real
