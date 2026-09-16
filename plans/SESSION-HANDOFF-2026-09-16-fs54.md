@@ -1,74 +1,54 @@
-# Session handoff — 2026-09-16, ~11:00 (de Bruijn; FS-54 twenty-seven, mid-milestone)
+# Session handoff — 2026-09-16: FS-54 closed; FS-56 ℚ(√167) next
 
-You arrive with no conversation memory. Record of record: `CLAUDE.md` § Frontier / § Grokkings (G56, G57 rewritten today);
-the milestone plan `plans/FS54-twenty-seven.md` (§1 findings, §M domain model, §O obligations, §PA prior art, §D
-deliverables with scores); `data/fs54/README.md` (every file and its claim). **Kooshi is about to give feedback on
-`reference/wall-at-six/WALL-AT-SIX.md`** — the outward request for help written this session; read it before replying.
+*For a session with no memory of this one. Current state only; the full record of FS-54 is `plans/FS54-twenty-seven.md`
+(its §C is the close). Kooshi compacted after this was written.*
 
-## 1. What FS-54 has established (all committed, each with its script)
+## 1. Where things stand
 
-**About 27** (`tools/fs54_structure.py` → `data/fs54/structure.out`):
-* every edge lies in exactly one triangle, a collinear 𝔽₃-line {z, z+u, z+2u}; the 14 unit directions are a cap in PG(5,3);
-* spectrum 28¹ 10²⁸ 7⁸⁴ 4¹⁶⁸ 1⁸⁴ −2¹⁶⁸ −5⁸⁴ −8¹¹²; λ_a = 3m_a − 14 ≡ 1 (mod 3), Weil forbids −11, so λ_min = −8
-  (integrality is Bridges–Mena; the eigenvalues are Frobenius traces of y² = x³ + x² − a, Moisio, verified on 26 curves);
-* |Aut| = 122,472 (nauty) — nothing hidden;
-* **α(27) ≥ 117 and every method stops there**: exhaustive subspace-periodic 81/108/117 (SAT cross-checked, 461 orbits);
-  KaMIS 117 on 7 seeds, all 9-periodic; CP-SAT per prime-order symmetry class ≤ 117 (order 7: 106 optimal);
-  the calibrated Rust ladder (`data/fs54/ladder/`) free 117, rotation orders 2/4/7/14/28 → 117/117/106/99/85, line 81;
-  **all fourteen 117-sets are 4-rigid** (every outside vertex has ≥ 4 neighbours inside). Six needs 122.
-* **Upper side**: GLV level-3 relaxation (orbits of independent ≤ 4-sets, 77,238 variables) reads 143.055 at 8,000
-  iterations and **141.6 / 142.9 (upper/lower readings) at 15,619** — below the 146 that refusing five needs. Floats only.
+* **FS-54 twenty-seven is closed** (`CLAUDE.md` row 70, G59). Headline: **α(UD(𝔽₂₇,2)) ≤ 141 by an exact level-3 certificate,
+  so five colours are refused at 27**; α ≥ 117 by every method; the 2-adic trichotomy (odd-degree real fields 2-colourable,
+  U₆₄ a window member); the wall at six (`reference/wall-at-six/WALL-AT-SIX.md`) answered twice by GPT Astra, verified, five of
+  our errors fixed; `[Fischer1990b]` arrived and is read (prior art for multiquadratic prime inversion).
+* **Next milestone: FS-56 ℚ(√167)** — Kooshi: "Let's close this out and look at 167 next." **The stub
+  `plans/STUB-quadratic-167.md` is the letter**: motivation, every number with its source, what is proved, what is predicted,
+  the questions in order (Q0 first), the prior-art gate questions, failure and jackpot clauses. Open it with WORKFLOW step 3
+  (subplan) and the step-3a prior-art gate.
+* **Second: FS-57 the fractional wall** (`plans/STUB-fractional-wall.md`): 47 and U₆₄ in reach with measured prices.
 
-**Fields** (`tools/fs54_fields.gp`, `tools/fs54_quadratic_fields.gp`):
-* **Primes above 2 in F(i)/F**: split → no bound; **ramified → χ(F²) ≤ 2 at any norm**; inert → Cay(𝔽_{Q²}, μ_{Q+1}).
-  **Every odd-degree real field is 2-colourable.** (Today's first two field answers — the conductor-13 cubic for 27, a
-  quartic for 31 — were wrong on this point and are corrected everywhere, with correction records.)
-* Smallest fields seeing each member first with the wall broken: 23 → ℚ(√167), 31 → ℚ(√1055), 43 → ℚ(√4703),
-  47 → ℚ(√2351); 27 needs even degree ≥ 6 (smallest found: disc-316 cubic x³+2x²−3x−2 joined with √79).
-* 16 real quadratic fields (d ≤ 30,000) have local bound ≥ 6, every one decided by the planes at 43 and/or 47 — both
-  implausible on the evidence, so these fields are most likely ≥ 7.
-* G57's "√3 ∈ F iff usable planes have triangles" demoted to the direction that holds (ℚ has no √3; its plane at 11 has
-  triangles).
+## 2. What is running
 
-**The 2-adic targets** (`data/fs54/char2/`): U_Q = Cay(𝔽_{Q²}, μ_{Q+1}) is 4-colourable at Q = 2…32; **U₆₄ has Hoffman
-floor 6 (λ_min = −15) and a linear 8-colouring — a sixth window member, in characteristic 2**, realised only by fields of
-degree ≥ 12; U₁₂₈ has floor 8.
+**Nothing.** Stopped or finished, each with its state on disk: the 27 ADMM (checkpoint `data/fs54/d4/ckpt/admm-q27.npz`), the
+ladder (complete), both U₆₄ SAT runs (stopped by pid, no verdict), the 47 pricing run (checkpoint
+`data/fs54/d4/ckpt/admm-q47-l3.npz` at 340 iterations), every KaMIS run (records in `data/fs54/char2/`). Resume commands are in
+`data/fs54/d4/runs/RESUME.md`; the 47 run needs Kooshi's approval (a 2-hour decision point, then 9–23 h projected).
 
-**The wall**, `reference/wall-at-six/WALL-AT-SIX.md`: no residue target (odd planes, 2-adic graphs) is known to be
-six-chromatic; proofs below 23 and above 47; window {23, 27, 31, 43, 47} ∪ {U₆₄}; escape hatches not covered (composite
-ideals = categorical products; tower levels); six questions asked. **Two responses came back the same day** (verbatim in
-`reference/wall-at-six/responses/`, verified in `plans/FS54-twenty-seven.md` §R): the fractional wall W_f (α < Q²/6 at the six
-open targets proves W and closes the product hatch), five errors in our text (all confirmed, all fixed), U₃₂'s rigidity,
-λ ≡ 1 mod 4 at 64, the inert-tower Hoffman invariance.
+## 3. The first thing FS-56 does
 
-## 2. What is running (all checkpointed or short) — updated 11:30 after the wall document's two responses
+**Q0: the exact five-refusal certificate at 23.** The level-3 calibration iterate `data/fs54/d4/ckpt/calib-q23.npz` (3,500
+iterations) reads a certificate-shaped 105.431 < 106. The producer reads that format (the pricing agent's word; untested at 23).
+The command used at 27, adapted — copy the checkpoint first, never read the live file:
 
-| job | pid / pgid | where | what to do with it |
-|---|---|---|---|
-| level-3 ADMM at 27 | **stopped by pid 11:22** at ~25,671 its (certificate already filed; a lower N decides nothing) | checkpoint `data/fs54/d4/ckpt/admm-q27.npz` (sha256 `ab277ec9…`) | resume line in `data/fs54/d4/runs/RESUME.md` only if a tighter certificate is ever wanted |
-| the ladder at 27 | **COMPLETE** 10:57 — every stage ≤ 117; **P8 WON** | `data/fs54/ladder/` | nothing |
-| SAT on U₆₄, k = 7 and k = 6 — **STOPPED by pid 12:55 after 3 h 33 m, no verdict** (see `data/fs54/char2/README.md`: KaMIS plateaus at 512 on 6 seeds; ϑ′ = Hoffman = 768) | pids 468640, 468642 (gone) | logs in the SESSION SCRATCHPAD `…/scratchpad/q27/g64-k7.log`, `g64-k6.log` (ephemeral; the script prints only at the end) | if a pid is gone and its log is lost, rerun `python3 tools/fs54_char2_q64_sat.py <k> 20000000` from lean-dir (writes into `data/fs54/char2/`); record in `data/fs54/char2/README.md`. Note (second response): a 6- or 7-colouring cannot be periodic under a subspace of dimension ≥ 8 |
-| **certificate agent** | **DONE** — `bacf4a4`: **α(27) ≤ 141 CERTIFIED** (re-run by the PO), **P9 WON**; α(7) = 14, α(11) = 28 certified | `data/fs54/cert-q27-l3-N141.json`, `plans/FS54-L3-certificate-soundness.md` | an independent read of the checker (not a re-run) is owed before any claim beyond the wall document |
-| **literature agent** | **DONE** — every cited theorem holds as used; Hedetniemi settled (holds ≤ 3, fails ≥ 4); `[Tardif2022]` → `[Tardif2023]` (wrong arXiv id); MMST1998 gives the tower theorem for odd primes only; the Zetterberg coset-graph name | BIBLIOGRAPHY § A/§ C, the wall document §6.3/§8/§C, plan §R | nothing |
-| **47 pricing agent** (background) | — | measured price of level 3 at q = 47 (build, controls, s/iteration, projection to N < 369); must NOT launch the long solve | on its report: decide with Kooshi whether to commit the machine to the solve |
+    cp data/fs54/d4/ckpt/calib-q23.npz data/fs54/d4/ckpt/calib-q23-certcopy.npz
+    .venv/bin/python tools/fs54_l3_cert_round.py round --q 23 --ckpt data/fs54/d4/ckpt/calib-q23.npz \
+        --snapshot data/fs54/d4/ckpt/calib-q23-certcopy.npz --den 100000000 --jobs 6 --k 5 \
+        --out 'data/fs54/cert-q23-l3-N{N}.json' --log 'data/fs54/d4/check-q23-l3-N{N}.log'
+    python3 tools/fs54_l3_cert_check.py data/fs54/cert-q23-l3-N<N>.json      # the PO re-runs this
 
-## 3. Next, ranked
-1. **Level 3 at 47** once priced — α ≤ 368 refuses six, proves W_f at 47, takes 47 out of the window.
-2. **23** at level 3 (five refused if N < 106, 2.35 %).
-3. **U₆₄**: SAT above; the second response's stability idea (near-Hoffman-equality ⟹ near-hyperplane structure) as a
-   route to α(U₆₄) < 683; a triple-level SDP at U₆₄.
-4. **D5** at 27: colour search seeded from structure; the antipodal quotient. 27's question is now exactly six vs seven.
-5. Close FS-54: ledger row 70 (five refused at 27; the 2-adic trichotomy; W_f and the escape hatches closed to integrality
-   gaps), G59, FRONTIER re-rank, conjecture sweep of the plan.
+About one CPU-hour. It is the precondition of the ℚ(√167) prediction: without it χ(Γ₂₃) = 5 stays possible.
 
-## 4. Traps met this session
-* **A wrong acceptance test flattered the result twice** (the 2-adic "norm ≤ 4" test; the stub's "worst reach" fact
-  omitting 43). Audit the result you like (G21).
-* **A misfiled table row passes an audit silently**: ten bibliography rows went into the alternate-keys table (§ A′), whose
-  second column the audit reads as a canonical key, so every key "resolved". Moved to § A on 2026-09-16.
-* **The reboot wiped `/tmp`** — the scratchpad is not storage; everything durable is in `data/` and `tools/`.
-* `scripts/dev-env.sh`'s `LIBRARY_PATH` breaks non-Lean C/C++ links (use `env -u LIBRARY_PATH`); OR-Tools and cvxpy clash
-  over `libhighs.so.1` (highspy pinned 1.12.0) — `data/fs54/environment.md`.
-* An exp-table 𝔽_{2^m} build gave a spurious λ_min = −129 at Q = 128; the carry-less rebuild is authoritative.
-* Machine: desktop, Python 3.14.7, the 3rd GPU is not on the PCI bus (only graphics cards A and B); `.venv` has pynauty,
-  ortools, numba, cvxpy; KaMIS at `~/source/KaMIS`; GAP needs `GRAPE_DREADNAUT_EXE := "/usr/bin/dreadnaut";`.
+## 4. Traps met this session (the ones that recur)
+
+* **A wrong acceptance test flattered results twice** (the 2-adic "norm ≤ 4" test; the stub's "worst reach" fact). Audit the
+  result you like (G21).
+* **A named-but-unread paper on exactly our fields held a theorem we reconstructed** (`[Fischer1990b]`, M56's conjecture).
+  At FS-56's gate, read `[Johnson2006]` if it can be had — the last unread compendium of this direction.
+* **A misfiled table row passes an audit silently**: ten bibliography rows sat in the alternate-keys table, where the audit
+  read them as aliases. Fixed.
+* **KaMIS's `weighted_branch_reduce --weight_source=uniform` assigns random weights**, not unit weights; for unweighted MIS
+  write METIS format 10 with weight 1 on every vertex.
+* **Exact MIS does not reach these graphs**: branch-and-reduce sat at 70 on UD(𝔽₁₉,2) for 600 s (heuristics find 76).
+* `scripts/dev-env.sh`'s `LIBRARY_PATH` breaks non-Lean C/C++ links (`env -u LIBRARY_PATH`); OR-Tools and cvxpy clash over
+  `libhighs.so.1` — `data/fs54/environment.md`.
+* Machine: desktop, Python 3.14; `.venv` has pynauty, ortools, numba, cvxpy, scipy; KaMIS at `~/source/KaMIS/deploy/`; the
+  third GPU is not on the PCI bus (card A `GPU-UUID-REMOVED` and card B
+  `GPU-UUID-REMOVED`, pinned by UUID).

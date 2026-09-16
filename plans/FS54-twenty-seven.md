@@ -476,6 +476,55 @@ if D5 finds a six-colouring, D7 becomes the headline and opens with its skeleton
 
 ---
 
+## §C The close (2026-09-16)
+
+**FS-54 is closed.** Kooshi, 2026-09-16: "Let's close this out and look at 167 next." Ledger row 70 and grokking G59 in
+`CLAUDE.md`; the frontier re-ranked with FS-56 (ℚ(√167)) at the top and FS-57 (the fractional wall) second.
+
+**What landed**
+
+| result | trust | where |
+|---|---|---|
+| **α(UD(𝔽₂₇,2)) ≤ 141, so five colours refused and χ(Γ₂₇) ∈ {6, 7}** — GLV level 3, 77,238 variables | [cert], checker re-run by the PO, 21 controls | `data/fs54/cert-q27-l3-N141.json`, `plans/FS54-L3-certificate-soundness.md` |
+| α(Γ₇) = 14 and α(Γ₁₁) = 28 exactly (level 3 meets the known sets) | [cert] | `data/fs54/cert-q7-l3-N14.json`, `cert-q11-l3-N28.json` |
+| α(Γ₂₇) ≥ 117 and nothing larger by any method: exhaustive subspace-periodic (81/108/117), KaMIS 7 seeds, all 15 prime-order symmetry classes, the Rust ladder; every 117-set 4-rigid | [exact] periodic; [found] | `data/fs54/` README |
+| 27 explained: collinear triangles (w² − w + 1 = (w + 1)² in characteristic 3), 14 directions a cap in PG(5,3), integral spectrum λ = 3m − 14 (Bridges–Mena; Moisio's curves), λ_min = −8, \|Aut\| = 122,472 | [exact] + prior art | `data/fs54/structure.out` |
+| **The 2-adic trichotomy**: a prime above 2 split in F(i) gives nothing, ramified gives χ(F²) ≤ 2 at any norm, inert gives U_Q; **every odd-degree real field is 2-colourable**; U_Q four-colourable for Q ≤ 32, **U₆₄ a window member (6 ≤ χ ≤ 8)** | [proof]; [exact] spectra | G56, `data/fs54/char2/` |
+| the smallest field per window member (23 → ℚ(√167), 31 → ℚ(√1055), 43 → ℚ(√4703), 47 → ℚ(√2351); 27 needs even degree ≥ 6) and 16 quadratic fields with L ≥ 6 up to 30,000; the corrected field test | [exact] PARI | `data/fs54/fields.out`, `quadratic-fields.out` |
+| **the wall at six**, written for outside help and answered twice the same day (GPT Astra): W_f; five errors in our text, all confirmed and fixed; U₃₂'s rigidity; λ ≡ 1 mod 4 at 64; the inert-tower Hoffman invariance (MMST1998 for odd primes; new for 27 and powers of 2); every finite claim recomputed independently | [proof] read; [exact] recomputed | `reference/wall-at-six/`, §R, `tools/fs54_wall_feedback_verify.py` |
+| U₆₄ probed: \|Aut\| exact, ϑ′ = Hoffman = 768, KaMIS 512 on 6 seeds, periodic sets ≤ 512 above dimension 8, the 50.2 % Fourier concentration of a 683-set | [exact]/[found]/[proof] | `data/fs54/char2/README.md` |
+| level 3 at 47 built, controlled and priced (5.15 s/it; 9–23 h projected, low confidence) | measured | §D4 at 47, `data/fs54/d4/q47/` |
+| `[Fischer1990b]` read in full: prime inversion for multiquadratic fields at odd unramified primes and the quadratic unit-vector ring in closed form are 1989 prior art | read | `BIBLIOGRAPHY.md` |
+| what the conjecture implies if the wall holds, and **its quadratic prediction, χ(ℚ(√167)²) ≥ 6 once five is refused at 23** | derivation | §W, G59, `plans/STUB-quadratic-167.md` |
+
+**Predictions scored:** P1 LOST (KaMIS 117, below the band [118, 132]); **P2 WON** exactly (108 at dimension 3); P3 LOST (no
+search found 122; registered at 0.55); **P4 WON** (no search found 146); P5 undecided (no class above 117, but no refusal);
+**P6 WON** (order-7 class weakest, 106, solver-optimal); P7 control passed; **P8 WON** (ladder ≤ 117 at every stage); **P9 WON**
+(float ≈ 141.2 in [138, 146], and the refusal registered at 0.35 happened). FS-47's hunch P3 ("prime inversion is not in
+Fischer") LOST to `[Fischer1990b]`.
+
+**Decisions made and overturned during the milestone** (each recorded in its section): the stub's field ℚ(√3,α) refuted
+(usable at 11); the "norm ≤ 4" 2-adic test replaced by the trichotomy (it had named two wrong fields); G57's converse demoted;
+G56's slackness sentence demoted; the wall document's five errors; D7 (a kernel 𝔽₂₇) declined — no consumer; the 27 ADMM and
+the two U₆₄ SAT runs stopped by pid once they could decide nothing.
+
+**Conjecture sweep** (WORKFLOW step 9: `grep -n "conjecture\|not claimed"`):
+* line 87, "Not claimed minimal over all fields" (27's sextic field) — **declined**: 27's field is recorded only to show a
+  field reaching 27 exists; nothing rests on minimality.
+* §W's "what the conjecture gives once W holds" — **minted as FS-56** (`plans/STUB-quadratic-167.md`).
+* readings without the word: W and W_f, the 117 attractor at 27, α(U₆₄) = 512, the periodicity and stability routes, the
+  unrun D5 colour search at 27 — **minted as FS-57** (`plans/STUB-fractional-wall.md`); G58's antipodal conjecture is FS-55
+  already; the rounding reading χ = ⌈q²/α⌉ stays in G56.
+
+**Gate.** No Lean module was touched by FS-54 (`git log --since 2026-09-16 -- Proofs/` is empty), so the build, axiom and
+vacuity gates have nothing new to check; `tools/bib_audit.py` clean; no process of this milestone is running (the 27 ADMM,
+the ladder, both SAT runs, the 47 pricing run and every KaMIS run are stopped or finished, each checkpoint or record on disk).
+
+**Credits.** GPT Astra (both responses to the wall document; the first under the Poros procedure); the certificate agent
+(the L₃ certificate, the √2 correction, the soundness page); the D4 and 47 pricing agents (the ADMM, the lean path, the 23 and
+31 surprises, the chunk-size fix); the literature agent (Hedetniemi's status settled, MMST1998's scope, the Zetterberg name);
+the WO-21 engineer (prime-power fields in the Rust tools, D97).
+
 ## §S Runs, checkpoints and resume commands
 | run | expected length | checkpoint | resume |
 |---|---|---|---|

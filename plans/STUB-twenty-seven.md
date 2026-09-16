@@ -1,5 +1,7 @@
 # FS-54 — twenty-seven: the one member we cannot see
 
+> **CLOSED 2026-09-16** — record `plans/FS54-twenty-seven.md` (§C the close); ledger row 70, G59. Five colours refused at 27 (α ≤ 141); α ≥ 117 by every method; continued as FS-56 (ℚ(√167)) and FS-57 (the fractional wall).
+
 *Minted 2026-09-16 at FS-53's close, by Kooshi: "It is very suspicious, and we need to tweak our tools for
 it." This stub is written for a session with **zero conversation memory**: everything the deciding session
 knew is here, in plain language, with the numbers and where they came from.*
