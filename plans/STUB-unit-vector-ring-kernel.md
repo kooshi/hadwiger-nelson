@@ -9,6 +9,11 @@ direction of prime inversion is already there in valuation form), `TwoColourResi
 
 **Credit.** Lemma 1.1 and Theorems 1.2, 2.1, 6.1 and Corollary 6.2 are **GPT Astra's** (OpenAI, 2026-09-14). The "only if" of
 Theorem 1.2 is M56's local-ring argument; the statement was M56 §M1.7 L7's conjecture, written 2026-09-06 and never stubbed.
+**Prior art, found 2026-09-16 (`[Fischer1990b]`, read in full):** Fischer proved Theorem 1.2 for multiquadratic fields at odd
+unramified primes (his Theorem 1, both directions, the "if" by a sum of two unit vectors; Lemma 1 is the integrality), for every
+prime of a real quadratic field (Theorems 3 and 4: 1/2 ∈ Σ₀ iff N ≡ 7 mod 8), and gave the whole ring for real quadratic fields
+in closed form (Theorem 5). GPT Astra's statement for every number field and every prime, through lying-over, is the general
+form; the credit line names both, and Fischer's Theorem 5 supplies ready-made quadratic inhabitants (`ℚ(√5)`, `ℚ(√7)`).
 
 ## 1. Mission context, in plain language
 
@@ -102,7 +107,7 @@ falls out of D2's `𝒪`-as-data form.
 |---|---|---|
 | P1 | Mathlib's lying-over and valuation-subring API carry D2 without a custom Dedekind-domain development, in the `𝒪`-as-data form | the missing lemma is named and priced; the full form waits on FS-37 |
 | P2 | D4's parity homomorphism needs no walk parity at all (the colouring is the function) | a well-definedness obligation appears — then the walk form, with `SimpleGraph.Walk` |
-| P3 (hunch) | prime inversion is not in Fischer or Moorhouse in this form (both state the `1/k` obstruction as a consumer, not the characterisation) | the credit line names the paper |
+| P3 (hunch) — **LOST 2026-09-16** | prime inversion is not in Fischer or Moorhouse in this form (both state the `1/k` obstruction as a consumer, not the characterisation) | the credit line names the paper — it does: `[Fischer1990b]` Thm 1 (multiquadratic, odd unramified p) and Thms 3–5 (quadratic). The hunch checked `[Fischer1990]` and not his second 1990 paper, which sat unread behind an interlibrary loan |
 
 ## 6. Failure and jackpot clauses
 

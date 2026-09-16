@@ -489,7 +489,8 @@ from the Moser twist alone; the 1/2 half: the local ring). What B4 measures is o
 richness a chunk of each field loses its last hom at k = 4 and k = 5 (`obstruct` reporting the killing
 unit vectors), plus the finite witnesses of L7 (P7″: the chunk {0, 1, ρ, ρ̄, ρ², ρ̄²} for each rotation has
 1/d² ∈ Λ). Conjecture, NOT claimed: 1/p ∈ Σ₀(F²) iff no conjugation-fixed prime of F(i) lies above p (one
-direction is the local-ring argument).
+direction is the local-ring argument). [2026-09-16: prior art — `[Fischer1990b]` Thm 1 proves it for multiquadratic F at odd
+unramified p, Thms 3–4 for every prime of a real quadratic F; GPT Astra proved the general form, G55.]
 
 **M1.8 The Lean shape, least type.** No subgroup, no coset, no lattice: a graph Γ on an additive group V
 (the lattice, translated so a base point is 0) and a hom φ : V →+ G nonzero on every edge difference —

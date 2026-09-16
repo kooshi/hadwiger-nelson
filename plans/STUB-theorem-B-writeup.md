@@ -383,8 +383,12 @@ not be used in the manuscript.**
   competing `χ(K²) = 4` could still be. Budget: half a day, and it is the last thing between this paper and
   submission on the novelty side.
 
-* **R1 — `[Fischer1990b]`**, *The connected components of the graph `ℚ(√N₁,…,√N_d)²`*, Congr. Numer. 72 (1990)
-  213–221. The **multiquadratic** paper, on exactly this paper's fields. Not digitised; needs a library.
+* **R1 — `[Fischer1990b]` — CLOSED 2026-09-16** (interlibrary loan; read in full). No colouring result anywhere, so no competing
+  `χ(K²) = 4`. What the manuscript must cite from it: the component lemma (every component a translate of Σ₀, the ring of sums of
+  unit vectors — his symbol); Lemma 1, the p-integrality of unit vectors at a prime p ≡ 3 (mod 4) where every radicand is a
+  residue — the integrality step of the residue bound, for multiquadratic fields, in 1989, though he draws no colouring from it;
+  Theorem 1, prime inversion for multiquadratic fields at odd unramified primes; Theorem 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8) for
+  quadratic fields. §3's "each lineage as an instance" must place Fischer's two 1990 papers together.
 * **R2 — `[Johnson2006]`**, the compendium of this exact direction, Geombinatorics XVI(1) 209–218. **The one
   place a seventh lineage could hide.** **NEARLY IN HAND**: the OJS galley is at
   `https://geombinatorics.uccs.edu/archive/index.php/home/article/view/62/198` (Kooshi, 2026-09-08) — a browser

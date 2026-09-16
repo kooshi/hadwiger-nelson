@@ -117,7 +117,9 @@ over `ℚ(√d)` and number fields; unit-distance graphs over fields; additive c
 - `[Johnson2006]`: it discusses `ℚ(√m)²`. It is not held.
 
 `[Fischer1990b]`, on multiquadratic planes specifically, is about connected components according to its zbMATH
-review. No colouring criterion is mentioned there, but the paper itself is unread.
+review. **Read in full 2026-09-16: it states no colouring criterion** — it describes the unit-vector ring Σ₀ (prime
+inversion at odd unramified primes; the ring in closed form for quadratic fields, where N ≡ 5 (mod 8) keeps every denominator
+odd, the parity fact behind Fischer's Theorem 8).
 
 **Consequence for the shape.** The kernel statement is the valuation-subring form of the mechanism, which none of the
 four sources states and all four instantiate. The multiquadratic iff stays a hand theorem, recorded with its

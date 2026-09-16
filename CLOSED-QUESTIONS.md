@@ -65,7 +65,7 @@ exact value and the kernel proof.**
 opened, the 47 citations of `[ExooIsmailescu2019]` walked, two citation databases cross-checked. None found.
 
 **Status:** the manuscript is FS-20 (rank 1, `plans/STUB-theorem-B-writeup.md`), not yet written; it is
-blocked on FS-27 §2 and on obtaining `[Johnson2006]` and `[Fischer1990b]`. Kooshi released this result, and
+blocked on FS-27 §2 and on obtaining `[Johnson2006]`. `[Fischer1990b]`, the one earlier paper on planes over multiquadratic fields, arrived and was read in full on 2026-09-16: it describes the unit-vector ring and the components, and states **no colouring result**, so it does not compete with this one. Kooshi released this result, and
 only this one, from the write-up deferral.
 
 ---
