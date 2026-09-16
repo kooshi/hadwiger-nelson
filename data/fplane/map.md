@@ -13,23 +13,27 @@ L(K(√7)) = 7 is the sharp statement, and the others are ≥ 7.
 4-sealed, 5-sealed, or ≥ 7 — which is G56's reciprocity exclusion seen from the field side: every
 one of them contains ℚ(√3,√11), and 3 or 11 is a non-square at every window member.
 
-**The six rows tagged `[sees q]` are the answer to "which field would a six-colouring at q buy?"**
-They are the smallest multiquadratic fields whose FIRST usable prime is a window member *and* whose
-2-adic wall is broken — the second condition is what makes them worth anything, since a field with
-the wall standing is already four-colourable by Theorem B and a local bound of 6 there would be
-dead weight. Every minimal field ignoring that condition has the wall standing, which is why these
-need two radicands rather than one. Verified by hand as well as by this tool: each has an odd square
-class ≡ 7 (mod 8), and for ℚ(√10,√23) quadratic reciprocity gives 10 and 23 both squares mod 43
-while 3, 7, 11, 19, 23 and 31 each fail.
+**Which field would a six-colouring at q buy?** The smallest field — by discriminant, over every number
+field — whose FIRST usable residue plane is a window member *and* whose 2-adic wall is broken (the second
+condition is what makes it worth anything: a field with the wall standing is four-colourable by the residue
+at 2). Found by complete enumeration, not by this generator (`tools/fs54_fields.gp`, PARI `nflist`, FS-54):
+**23 → ℚ(√167); 27 → the cyclic cubic field of conductor 13 (x³ − x² − 4x − 1, disc 169, the smallest of
+all five); 31 → the cyclic quartic x⁴ − 30x² + 45 (disc 1125), smallest quadratic ℚ(√1055); 43 → ℚ(√4703);
+47 → ℚ(√2351).** They are the rows tagged `[smallest, sees q]` at the bottom, added by hand from that
+script's output. The rows tagged `[sees q]` above them are biquadratic fields that also see their member
+first but are not the smallest. *Correction record: this note first said those biquadratic fields were the
+smallest and that one radicand could not do it, and it proposed ℚ(√3, α), α³ = α + 1, for 27 — which has a
+usable plane at 11. The earlier search stopped at small radicands.*
+
+**Quadratic fields whose local bound is at least 6** (`tools/fs54_quadratic_fields.gp`,
+`data/fs54/quadratic-fields.out`): with d ≤ 30,000, sixteen real quadratic fields have the wall broken and
+no usable plane in {3, 7, 11, 19, 23, 31}, and every one has 43 or 47 usable, every other usable plane being
+≥ 7. Their local bound is **6 exactly when a usable one of 43, 47 is six-chromatic**, and ≥ 7 otherwise.
 
 **What is at stake at the two decisive planes.** Five is refused by certificate at 43 and 47, so a
-verified six-colouring at either is that plane's exact chromatic number. At 43 that would make
-**χ(ℚ(√10,√23)²) ≤ 6 a theorem** — the first number field with local bound exactly 6, predicted 6
-by the conjecture — and at 47, χ(ℚ(√7,√89)²) ≤ 6 likewise. Until this rebuild no field had been
-named for either.
-
-**q = 27 has no row.** A field seeing 27 needs residue field 𝔽₂₇, so it is not multiquadratic —
-ℚ(√3, α) with α³ = α + 1 is the standing candidate (G56) and this generator cannot represent it.
+verified six-colouring at either is that plane's exact chromatic number, and it makes **χ(ℚ(√4703)²) ≤ 6
+a theorem** (and at 47 also χ(ℚ(√2351)²) ≤ 6) — the first number field with local bound exactly 6,
+predicted 6 by the conjecture.
 
 | field | radicands | 2-adic wall | usable primes | verdict |
 |---|---|---|---|---|
@@ -58,3 +62,9 @@ named for either.
 | Q(√7,√89) [sees 47] | [7, 89] | broken | [47, 131, 139, 167, 199, 223, 227, 251] | open-pending (p = 47: its plane is undecided) |
 | Q(√2,√3,√7) [sees 47] | [2, 3, 7] | broken | [47, 167, 311, 383, 479, 503] | open-pending (p = 47: its plane is undecided) |
 | Q(√2,√3,√31) [sees 23] | [2, 3, 31] | broken | [23, 167, 239, 263, 383] | open-pending (p = 23: its plane is undecided) |
+| Q(√167) [smallest, sees 23] | [167] | broken | [23, 43, 59, 67, 71, 79, 83] (below 100) | open-pending (p = 23: its plane is undecided) |
+| Q(√1055) [smallest quadratic, sees 31] | [1055] | broken | [31, 43, 47, 83] (below 100) | open-pending (p = 31: its plane is undecided) |
+| x⁴ − 30x² + 45, cyclic quartic, disc 1125 [smallest, sees 31] | not multiquadratic | broken (fixed prime above 2 of norm 16) | [31, 59] (below 100) | open-pending (p = 31: its plane is undecided) |
+| Q(√2351) [smallest, sees 47] | [2351] | broken | [47, 67, 71, 83] (below 100) | local bound ≥ 6; exactly 6 iff UD(F_47,2) is six-chromatic |
+| Q(√4703) [smallest, sees 43] | [4703] | broken | [43, 47, 79] (below 100) | local bound ≥ 6; exactly 6 iff UD(F_43,2) or UD(F_47,2) is six-chromatic |
+| x³ − x² − 4x − 1, cyclic cubic of conductor 13, disc 169 [smallest, sees 27] | not multiquadratic | broken (2 inert; fixed prime above 2 of norm 8) | [27, 31, 47, 79, 83] (below 100) | open-pending (q = 27: its plane is undecided) |

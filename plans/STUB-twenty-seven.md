@@ -157,6 +157,11 @@ inert in `ℚ(α)` and the residue field is `𝔽₂₇`. **This has never been 
 hand-verify this one, and state what `χ(ℚ(√3,α)²) ≤ 6` would mean. Every other member has its field named
 (23 → `ℚ(√2,√31)`, 31 → `ℚ(√5,√51)`, 43 → `ℚ(√10,√23)`, 47 → `ℚ(√7,√89)`); **27 is the only gap.**
 
+**Answered at the opening (FS-54 subplan §1.5–1.6).** `ℚ(√3, α)` is refuted — its usable planes are 11, 23, 27, …, so it is
+sealed at five by 11. The smallest field whose first usable plane is 27 is the cyclic cubic field of conductor 13
+(`x³ − x² − 4x − 1`, disc 169); the prime members' smallest fields are quadratic (`ℚ(√167)`, `ℚ(√4703)`, `ℚ(√2351)`), not
+the biquadratic ones named above.
+
 ---
 
 ## 5. Standing constraints (all of these bit during FS-53)

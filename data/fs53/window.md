@@ -18,7 +18,7 @@ certificate on 2026-09-15: `α ≤ 1023` against the 1040 six needs at 79, `α �
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
-| **27** | 729 | **−8** | 162.00 | — | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
+| **27** | 729 | **−8** | 162.00 | **117** `[search]` (FS-54) | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **200** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | **258** `[search]` | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | **265** `[search]` | **371** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
@@ -107,27 +107,41 @@ written down. The residue bound gives `χ(F²) ≤ χ(UD(𝔽_q,2))` whenever `F
 `𝔽_q`, so the field to name for member `q` is the smallest whose **first** usable prime is `q`.
 
 **Two conditions, and the second is the one that bites.** The field must (i) have `q` as its first usable
-prime — every smaller usable prime would give a better bound — and (ii) have the **2-adic wall broken**,
-because a field whose wall stands is already four-colourable by Theorem B and a local bound of 6 there is
-dead weight. **Every minimal field satisfying (i) alone has the wall standing** (ℚ(√41) sees 23, ℚ(√2,√5)
-sees 31, ℚ(√6,√14) sees 43, ℚ(√2,√17) sees 47 — all four four-colourable already), which is why the
-candidates below need two radicands rather than one.
+residue plane — every smaller usable plane would give a better bound — and (ii) have the **2-adic wall broken**,
+because a field whose wall stands is already four-colourable by the residue at 2 and a local bound of 6 there
+is dead weight. **Smallest means smallest discriminant over every number field**, found by a complete
+enumeration (`tools/fs54_fields.gp` → `data/fs54/fields.out`: PARI's `nflist`, every field of degree ≤ 4 and
+`|disc|` ≤ 20,000; FS-54).
 
-| if this plane is six-chromatic | this field gets `χ(F²) ≤ 6` **by theorem** | its usable primes | wall |
+| if this plane is six-chromatic | this field gets `χ(F²) ≤ 6` **by theorem** | its usable planes below 100 | wall |
 |---|---|---|---|
-| 23 | `ℚ(√2,√31)` | 23, 31, 79, 127, … | broken |
-| 31 | `ℚ(√5,√51)` | 31, 59, 79, … | broken |
-| **43** | **`ℚ(√10,√23)`** | 43, 67, 79, 83, … | broken |
-| **47** | **`ℚ(√7,√89)`**, also `ℚ(√2,√3,√7)` | 47, 131, 139, … | broken |
-| 27 | **none exists among fields built from square roots** — `𝔽₂₇` needs residue degree 3, so the field is not multiquadratic. `ℚ(√3, α)` with `α³ = α + 1` is the standing candidate | | |
+| 23 | `ℚ(√167)`, disc 668 | 23, 43, 59, 67, 71, 79, 83 | broken |
+| 27 | **the cyclic cubic field of conductor 13**, `x³ − x² − 4x − 1`, disc 169 | 27, 31, 47, 79, 83 | broken (2 inert; the fixed prime above 2 has norm 8) |
+| 31 | the cyclic quartic `x⁴ − 30x² + 45`, disc 1125; the smallest quadratic is `ℚ(√1055)`, disc 4220 | 31, 59 / 31, 43, 47, 83 | broken |
+| **43** | **`ℚ(√4703)`**, disc 18812 | **43, 47, 79** | broken |
+| **47** | **`ℚ(√2351)`**, disc 9404 | **47, 67, 71, 83** | broken |
 
-Verified by hand as well as by `tools/fplane.py map`: each has an odd square class `≡ 7 (mod 8)` (the
-wall-break test), and for `ℚ(√10,√23)` quadratic reciprocity gives `(10/43) = (23/43) = +1` while 3, 7, 11,
-19, 23 and 31 each fail, so 43 really is its first usable prime. The standing map is `data/fplane/map.md`.
+**27's field is the arithmetically smallest of all five**: no quadratic field has residue field `𝔽₂₇`, a quartic
+with a degree-3 prime above 3 also has a degree-1 prime there (whose plane is three-colourable), `nflist` covers
+every cubic field, and Minkowski's bound puts every field of degree ≥ 5 above discriminant 169.
+
+**Correction record (FS-54).** This section first named `ℚ(√2,√31)`, `ℚ(√5,√51)`, `ℚ(√10,√23)`, `ℚ(√7,√89)`
+and asserted that every single-radicand field seeing a member first has the wall standing, and it proposed
+`ℚ(√3, α)`, `α³ = α + 1`, for 27. The search behind it stopped at small radicands (167 > 100); `ℚ(√3, α)` has
+usable planes 11, 23, 27, … and is sealed at five by 11. The biquadratic fields still see their members first
+and are recorded in `data/fplane/map.md`; they are not the smallest.
+
+**Quadratic fields whose local bound is at least 6, each decided by one or two planes**
+(`tools/fs54_quadratic_fields.gp` → `data/fs54/quadratic-fields.out`). With `d ≤ 30,000`, 16 real quadratic
+fields have the wall broken and no usable plane in {3, 7, 11, 19, 23, 31}; every one has 43 or 47 usable, and
+every other usable plane is ≥ 7 (certificates at 59, 67, 79, 83, the spectrum at 71, Weil from 98). So their
+local bound is **6 exactly when a usable one of 43, 47 is six-chromatic**, and ≥ 7 otherwise. The smallest:
+`ℚ(√2351)` (decided by 47 alone), `ℚ(√4703)` (43 or 47), `ℚ(√4847)` (43 or 47); decided by 43 alone first at
+`ℚ(√20807)`.
 
 **At 43 and 47 this is the whole prize.** Five is refused by certificate at both, so a verified six-colouring
-there *is* that plane's exact chromatic number — and it would make `χ(ℚ(√10,√23)²) ≤ 6` or
-`χ(ℚ(√7,√89)²) ≤ 6` a theorem: **the first number field with local bound exactly 6**, predicted 6 exactly by
+there *is* that plane's exact chromatic number — and it would make `χ(ℚ(√4703)²) ≤ 6`, and at 47 also
+`χ(ℚ(√2351)²) ≤ 6`, a theorem: **the first number field with local bound exactly 6**, predicted 6 exactly by
 the conjecture. Nowhere else does one result do that.
 
 **And no candidate field holds a Moser spindle** (G57): the spindle needs `√3` *and* `√11`, and no window
