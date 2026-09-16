@@ -277,6 +277,18 @@ conflicts at k = 7, 41 at k = 8, while one thread finds 8 at 23 at once), though
 iterations. **So a `k = 6` null from this searcher at 27 is weak evidence even by the standard of its own k = 8 behaviour**, and
 D5 must seed from structure (the 117-sets as a fixed class, the periodic 7-colouring) rather than from random starts.
 
+### D4 — the reading, and what was decided (2026-09-16)
+The pricing agent's report is `plans/FS54-D4-pricing.md`: Gvozdenović–Laurent–Vallentin `L₃` (orbits of independent sets
+of size ≤ 4; 77,238 variables; 102 blocks of order 169–378), controlled at q = 7 (14.000 = α), q = 11 (28.07 ≥ 28), the
+full-group triple level reproducing 147.5774 at 27, evaluation at 23 real sets exactly |S| with every block PSD, four plants
+firing. Solved not by SCS (9.7 s/iteration on card A, >270 GPU-hours to FS-53's standard) but by an ADMM exploiting the
+arrowhead structure of AᵀA (0.17 s/iteration on the CPU, 55× cheaper). **Reading at 8,000 iterations: certificate-shaped
+N = 143.055** (P9's band [138, 146] — scored only when certified). **Decisions (PO):** (1) resume the 27 solve toward
+convergence — approved and launched (pid 550586, resume line in `data/fs54/d4/runs/RESUME.md`); (2) the exact certificate
+path (producer, standard-library checker, soundness page, controls) as a fresh work order from the pricing page as its
+letter — spawned; (3) **47 next**: refusing six there needs only 0.76 % below the converged 371.84, which would take 47 out
+of the window; priced at ~4 M variables, not yet run; (4) 23 after: five refused if N < 106 (2.35 %).
+
 ### D5 — the colour search goes non-periodic
 Periodic six-colourings are already excluded at indices 9 and 27. After D1: `plane-colour --q 27 --k 6` seeded with D2's best
 set as colour 0 (`--fix-class`), and an **antipodal-quotient finder** (G58's instrument redesign: search colourings with

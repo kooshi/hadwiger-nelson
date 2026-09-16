@@ -284,6 +284,10 @@ At these two, **a single verified six-colouring would be the exact chromatic num
   must remove four, which is why local search stalls.
 * The subgroup-quotient colouring sweep is exhaustive at indices 9 and 27: no six-colouring is periodic there [exact]. The
   best periodic colouring found uses 7 colours.
+* **Upper side, in progress:** the next level of the semidefinite hierarchy — Gvozdenović–Laurent–Vallentin's `L₃`, whose
+  variables are the orbits of independent sets of size ≤ 4 (77,238 at 27) — reads **143.06** in floating point at 8,000
+  iterations and still falling, against the converged three-point 147.58 [a reading, **not** a bound]. If an exact rational
+  certificate confirms ⌊N⌋ ≤ 145, **five colours are refused at 27** and its floor is six. The certificate is being built.
 
 **q = 31** — six needs 161; plateau **146** (75,852 restarts in one chained hour alone) [null]. Six-colour search: 195 of
 15,376 edges monochromatic after 1,800 s × 3 threads [null].
@@ -295,7 +299,9 @@ At these two, **a single verified six-colouring would be the exact chromatic num
 * The six-colour search stalled at 1,016 monochromatic edges and held there for 2 h 52 m [null].
 * Equivariant sweep: 21 classes, 0 colourable, 18 refused [solver].
 
-**q = 47** — six needs 369 against a certified 371, so **the certificate would have to be 99.4 % tight**. The only plane
+**q = 47** — six needs 369 against a certified 371, so **the certificate would have to be 99.4 % tight**. The level-3
+relaxation that moves 27 by about 3 % would need to move 47 by only **0.76 %** (below 369) to refuse six outright and take 47
+out of the window; it has been priced there, not run. The only plane
 where tightness like that has been observed is q = 7 (α/N = 0.9938); at q = 11 it is 0.9597.
 * Plateau 265; the six-colour search stalled at 1,851 monochromatic edges [null].
 * Equivariant sweep: 63 classes, 0 colourable, 59 refused [solver].
