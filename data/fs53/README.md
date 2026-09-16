@@ -231,3 +231,44 @@ and the threshold was crossed at about 38,000.
 bound at all.** Its float optimum converged to 201.666 over 144,500 iterations (the rounding loss is 0.157, the smallest
 of any member here), so **five at 31 is above the threshold by 9 integers** and out of this instrument's reach — the same
 shape of result as five at 27 and six at 47. The cell is now a `[cert]` rather than a dash.
+
+## FS-53 phase A — the finding side (the runner, 2026-09-15)
+
+*All runs: the Rust `plane-independent` and `plane-colour` (`~/source/descent-engine`) on the desktop, leaving
+six cores free for another agent's work. The phase record with every budget, control and resume command is
+`data/fs53/PHASE-A.md`. `q = 27` is not here: both tools take `--p <PRIME>` only, and 27 = 3³ goes to a
+separate work order.*
+
+**Controls that ran before any result was believed.** `plane-independent --self-test` 28/28 and `plane-colour
+--self-test` 25/25, both cold. A **positive control at the one plane whose independence number is known
+exactly**: at `q = 11`, where `α = 28`, one thread reaches 28 in two seconds and holds it — the instrument
+attains the truth where the truth is known. A **planted failure**: the real 87-set at `q = 23` plus one
+adjacent point, claimed as an 88 — the exact shape of the false positive that would move this milestone — was
+refused by name and with exit 1 by the product owner's verifier, which shares no code with the search.
+
+| file | what it is | budget | verdict | claim scope |
+|---|---|---|---|---|
+| `alpha-q23-ge87.json` | `q = 23`, largest independent set | 900 s × 3 threads, then 58 symmetry runs, then 3600 s × 6 threads; ≈ 96,000 restarts, seeds 1 and 2 | **plateau at 87 under that budget** | `α(UD(𝔽₂₃,2)) ≥ 87`, verified from the definition (0 internal edges). **Not α.** Six needs 89, so six at 23 is neither found nor refused. The strongest null this phase has: the plateau is reached in 15 s from cold and never moves, at every rotation order dividing 24 and at the line quotient |
+| `alpha-q31-ge146.json` | `q = 31`, largest independent set | same shape; 75,852 restarts in the chained hour alone | **plateau at 146** | `α ≥ 146`, verified. Six needs 161 |
+| `alpha-q43-ge258.json` | `q = 43` | 900 s × 3, then 1800 s × 2, seeds 1–2 | **plateau at 258** | `α ≥ 258`, verified. Six needs 309 |
+| `alpha-q47-ge265.json` | `q = 47` | same | **plateau at 265** | `α ≥ 265`, verified. Six needs 369 |
+| `alpha-q59-ge363.json` | `q = 59` | same | **plateau at 363** | `α ≥ 363`, verified |
+| `alpha-q67-ge443.json` | `q = 67` | same, seeded from the rotation of order 34 | **plateau at 443** | `α ≥ 443`, verified |
+| `alpha-q79-ge578.json` | `q = 79` | same, seeded from the rotation of order 2 | **plateau at 578** | `α ≥ 578`, verified |
+| `colour-q23-k6.json` | `q = 23`, six colours | 1800 s × 3 threads, seed 1 | **not found**; best 121 of 6,348 edges monochromatic (1.91 %) | a null at that budget; six at 23 neither found nor refused. **Weaker than the 300 s row below it** — see the note on threads |
+| `colour-q31-k6.json` | `q = 31`, six colours | 1800 s × 3 threads, seed 1 | **not found**; best 195 of 15,376 (1.27 %) | a null at that budget. Better than the 120 s row above (208) |
+
+**The subplanning rows `colour-p23-k6.json` … `colour-p47-k6.json` are kept, not superseded.** They are
+different measurements of the same question at different budgets, and a null's whole content is its budget, so
+overwriting the short one would destroy the comparison rather than update it. The `p`-named files are the
+120–300 s subplanning runs at 12 threads; the `q`-named files are this phase's 1800 s runs at 3 threads.
+
+**And the comparison says something about the instrument, in the direction nobody wants.** At `q = 23`, 1800
+seconds on 3 threads (5,400 thread-seconds) reached **121** monochromatic edges, while 300 seconds on 12
+threads (3,600 thread-seconds) reached **116**. More thread-seconds, a worse result. Exactly one thing is not
+different between those two numbers — they differ in wall clock *and* in thread count — so this does not
+measure either factor alone. What it does establish is that **a longer wall clock is not automatically a
+stronger null here**: the best of many short, diverse restarts beats one long grind, which is what an iterated
+local search with 2 million-iteration restarts should be expected to do. The phase's `k = 6` null at 23 is
+therefore recorded as no stronger than the subplanning one, and the honest budget to quote for six at 23 is
+both rows together.
