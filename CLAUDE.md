@@ -144,9 +144,14 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    F ⊇ ℚ(√3,√11) with L ≤ 5, by the chain theorem, which lands a forced pair's contradiction in the field itself. Its cheapest
    exposed predictions are quadratic — four for ℚ(√11) and ℚ(√23), four or five for ℚ(√47) — with no forcer known there (FS-46).
 11. **The window for six, and who can see it** (G56, row 68). A finite plane UD(𝔽_q, 2) with q ≡ 3 (mod 4) of odd degree can be
-   exactly six-chromatic only at q ∈ {23, 27, 31, 43, 47, 59, 67, 79} — the exact spectra put 71 at ≥ 7, the certificate puts 83
-   at ≥ 7, Weil refuses six from 98 — and none of the eight is decided (floors 5, 5, 5, 5, 5, 6, 6, 6; ceilings 8, 7, 8, 8, 10,
-   10, 12 by verified colourings; no six-colouring found anywhere). No field containing ℚ(√3,√11) can use any of them (3 is a
+   exactly six-chromatic only at **q ∈ {23, 27, 31, 43, 47}** — the exact spectra put 71 at ≥ 7, and exact certificates put 83 and
+   **79, 67, 59** at ≥ 7 (α ≤ 1046, 1023, 745, 575; FS-53 phase B), Weil refuses six from 98 — and none of the five is decided
+   (floors 5, 5, 5, **6, 6**; ceilings 8, 7, 8, 8, 10 by verified colourings; no six-colouring found anywhere). **At 43 and 47
+   five is refused by certificate too — α ≤ 365 against the 370 five needs, and ≤ 377 against 442 — so their floor is six, and a
+   single verified six-colouring at either would be the first exactly six-chromatic finite Euclidean plane**; nowhere else does
+   one hit settle it, five being open at 23, 27 and 31. The finding side has reached no threshold anywhere: the best sets are 87
+   at 23 (against 89 — about 96,000 restarts over three stages, three seeds, eight rotation orders and a line quotient never
+   produced 88, on an instrument that attains the true α at 11 in two seconds), 146 at 31 (161), 258 at 43 (309), 265 at 47 (369). No field containing ℚ(√3,√11) can use any of them (3 is a
    non-square at 31, 43, 67, 79 and 11 at 23, 47, 59, 71; at 27, 11 ≡ −1 (mod 3) is a non-square in every 𝔽_q with q ≡ 3 (mod 4)),
    so every field the hunt has built in has local bound 5 or ≥ 7: **six is arithmetically excluded for all of them**, and a
    six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers. What the window decides is
@@ -702,8 +707,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   which the ratio bound permits only while 5|λ_min| ≥ q + 1: by Weil that fails from q = 98, the exact spectrum already fails
   it at 71, and 83 — the last prime where six was spectrally possible — refuses it by certificate (row 68). Five is refused from
   59 up. Over the residue fields a number field can have (𝔽_q, q ≡ 3 (mod 4), odd degree), **a plane with χ exactly 6 can live
-  only at q ∈ {23, 27, 31, 43, 47, 59, 67, 79}** — floors 5 at the first five and 6 at the last three; ceilings 8, 7, 8, 8, 10,
-  10, 12 by verified colourings (`data/fplane/periodic-below-71.json`, `data/fs53/`); none decided: five is CDCL-undecided or
+  only at q ∈ {23, 27, 31, 43, 47}** — 59, 67 and 79 refused six by exact certificate (FS-53 phase B: α ≤ 575, 745, 1023, each
+  CERTIFIED with its LDL green and 18 of 18 cuts agreeing); floors 5, 5, 5, 6, 6 — five is refused by certificate at 43 and 47 —
+  and ceilings 8, 7, 8, 8, 10 by verified colourings (`data/fplane/periodic-below-71.json`, `data/fs53/`); none decided: five is CDCL-undecided or
   spectrally refused at every one, and no six-colouring was found by local search (23, 31, 43, 47) or by the subgroup-periodic
   sweep at 27 (exhaustive at indices 9 and 27). A prime is usable for a field only if the field's radicands are all squares in
   its residue field, and **every field this project has built in contains ℚ(√3,√11)**: 3 is a non-square modulo 31, 43, 67,
