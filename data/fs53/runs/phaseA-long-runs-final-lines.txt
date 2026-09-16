@@ -1,0 +1,16 @@
+# FS-53 phase A — the four long runs at 43 and 47, final progress line of each
+# (the full 16 MB of logs lived in job scratch and is not committed; the RECORDS are
+#  data/fs53/colour-q4{3,7}-k6.json and alpha-q4{3,7}-ge*.json.  These lines are the
+#  provenance for 'flat for hours': read since_best_s against elapsed_s.)
+
+## a2-q43-k6-long.log
+[2026-09-16 04:14:49.891][plane_colour::driver][INFO] searching: the best any thread holds, and how long since it last moved best_conflicts=1016 edges=40678 best_share=0.02497664585279512 since_best_s=10315.19822554 iterations=2652363776 iters_per_sec=236356.98143296808 elapsed_s=11221.855008976 left_s=3178.144991024 restarts=1321 live=8 threads=8
+
+## a2-q47-k6-long.log
+[2026-09-16 04:14:49.885][plane_colour::driver][INFO] searching: the best any thread holds, and how long since it last moved best_conflicts=1851 edges=53016 best_share=0.03491398822996831 since_best_s=10592.038953355 iterations=1078894592 iters_per_sec=96142.33974534596 elapsed_s=11221.846637576 left_s=3178.153362424 restarts=534 live=4 threads=4
+
+## a1-q43-push309.log
+[2026-09-16 04:14:50.773][plane_independent::driver][INFO] searching: the best any thread holds, and how long since it last moved best=258 target=309 of_target=0.8349514563106796 total_weight=1849 since_best_s=11220.739168635 cycles=22114790981 cycles_per_sec=1970534.13947769 elapsed_s=11222.739326334 left_s=3177.260673666 restarts=110571 live=4 spread_low=258 spread_high=258
+
+## a1-q47-push369.log
+[2026-09-16 04:14:50.056][plane_independent::driver][INFO] searching: the best any thread holds, and how long since it last moved best=265 target=369 of_target=0.7181571815718157 total_weight=2209 since_best_s=11220.019741029 cycles=9914476449 cycles_per_sec=883484.1296283103 elapsed_s=11222.019860358 left_s=3177.980139642 restarts=49572 live=2 spread_low=265 spread_high=265

@@ -1,0 +1,388 @@
+{
+  "kind": "plane-independent",
+  "p": 17,
+  "vertex_index": "v = x*p + y, with 0 <= x,y < p",
+  "edge_rule": "v ~ w iff (x-x')^2 + (y-y')^2 = 1 (mod p)",
+  "n": 289,
+  "degree": 16,
+  "edges": 2312,
+  "edges_sha256": "150b61fd4d4764b4f2cba64202df3dd397be8cd3c0608ad2b387d7ef2b5b9160",
+  "lambda_min": -7.960346064064937,
+  "ratio_bound_alpha": 96.01447351234434,
+  "k": null,
+  "target": null,
+  "target_note": null,
+  "symmetry": null,
+  "verdict": "best",
+  "halt": "deadline",
+  "verdict_note": "The largest independent set found and verified has 66 points — 68.7% of the ratio bound 96.01. This is a local search and a plateau is a statement about the search, not about the graph: alpha may be larger, and this tool can never show it is smaller.",
+  "best_size": 66,
+  "best_size_over_target": null,
+  "best_size_over_ratio_bound": 0.6873963641691432,
+  "best_set": [
+    1,
+    7,
+    9,
+    12,
+    16,
+    17,
+    23,
+    28,
+    32,
+    36,
+    43,
+    48,
+    51,
+    56,
+    59,
+    62,
+    70,
+    84,
+    86,
+    88,
+    92,
+    95,
+    98,
+    100,
+    102,
+    106,
+    108,
+    111,
+    120,
+    122,
+    127,
+    131,
+    138,
+    145,
+    147,
+    150,
+    153,
+    158,
+    161,
+    163,
+    171,
+    177,
+    183,
+    186,
+    191,
+    197,
+    202,
+    205,
+    210,
+    216,
+    221,
+    230,
+    241,
+    246,
+    252,
+    254,
+    255,
+    257,
+    260,
+    262,
+    266,
+    276,
+    280,
+    282,
+    285,
+    287
+  ],
+  "best_quotient_set": null,
+  "verified_independent": true,
+  "rejected_set": null,
+  "violation": null,
+  "produced_at": "2026-09-16T02:38:16+00:00",
+  "machine": "local",
+  "complete": true,
+  "seed": 1,
+  "threads": 2,
+  "max_seconds": 60.0,
+  "cycles_total": 129255363,
+  "restarts_total": 645,
+  "seconds": 60.005125171,
+  "cycles_per_sec": 2154072.0502066063,
+  "pops_total": 840176640,
+  "pops_per_cycle": 6.500129824400401,
+  "rerun": "plane-independent --p 17 --threads 2 --seed 1 --max-seconds 60 --force-tightness 3 --restart-after 200000 --progress-seconds 2",
+  "trace": [
+    {
+      "seconds": 2.000152165,
+      "cycles": 4359449,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 4.005287402,
+      "cycles": 8726032,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 6.010540965,
+      "cycles": 13179111,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 8.016245193,
+      "cycles": 17545900,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 10.022615014,
+      "cycles": 21982946,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 12.027864815,
+      "cycles": 26281490,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 14.033041462,
+      "cycles": 30627495,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 16.038223565,
+      "cycles": 34950780,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 18.043359205,
+      "cycles": 39192747,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 20.049398789,
+      "cycles": 43440086,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 22.05560916,
+      "cycles": 47797564,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 24.06079086,
+      "cycles": 52091500,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 26.066495107,
+      "cycles": 56461753,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 28.071674482,
+      "cycles": 60797798,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 30.077854732,
+      "cycles": 65014942,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 32.083025412,
+      "cycles": 69296910,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 34.08826975,
+      "cycles": 73573323,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 36.094497734,
+      "cycles": 77873055,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 38.099445929,
+      "cycles": 82290721,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 40.104869582,
+      "cycles": 86537082,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 42.109831984,
+      "cycles": 90939944,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 44.116169421,
+      "cycles": 95296191,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 46.12136419,
+      "cycles": 99504047,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 48.126503418,
+      "cycles": 103711747,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 50.135263785,
+      "cycles": 108014223,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 52.140334672,
+      "cycles": 112256202,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 54.145481688,
+      "cycles": 116483464,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 56.155087301,
+      "cycles": 120888360,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 58.160190717,
+      "cycles": 125263560,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 60.000057137,
+      "cycles": 129246029,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    },
+    {
+      "seconds": 60.005125171,
+      "cycles": 129255363,
+      "best_size": 66,
+      "per_thread": [
+        66,
+        66
+      ]
+    }
+  ]
+}

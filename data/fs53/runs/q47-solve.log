@@ -1,0 +1,93 @@
+[scs] p=47: 9247 classes; building SCS data …
+[scs] A (88741, 9247) nnz 2023939; 50 PSD blocks ≤ 47; setup 46 s
+[scs] resumed from data/fs53/ckpt/scs-q47-real.npz: 89000 iterations done
+Traceback (most recent call last):
+  File [35m"/home/kooshi/source/lean-dir/tools/fplane_sdp_scs.py"[0m, line [35m80[0m, in [35m<module>[0m
+    [31mmain[0m[1;31m()[0m
+    [31m~~~~[0m[1;31m^^[0m
+  File [35m"/home/kooshi/source/lean-dir/tools/fplane_sdp_scs.py"[0m, line [35m55[0m, in [35mmain[0m
+    if x0 is not None: result = [31msolver.solve[0m[1;31m(warm_start=True, x=x0, y=y0, s=s0)[0m
+                                [31m~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/kooshi/source/lean-dir/build/venv-sdp-gpu/lib/python3.14/site-packages/scs/__init__.py"[0m, line [35m203[0m, in [35msolve[0m
+    return [31mself._solver.solve[0m[1;31m(warm_start, x, y, s)[0m
+           [31m~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^[0m
+[1;35mValueError[0m: [35mWarm-start must be a 1-D float array of length 88741[0m
+[scs] p=47: 9247 classes; building SCS data …
+[scs] A (88741, 9247) nnz 2023939; 50 PSD blocks ≤ 47; setup 45 s
+[scs] p=47: 9247 classes; building SCS data …
+[scs] A (88741, 9247) nnz 2023939; 50 PSD blocks ≤ 47; setup 49 s
+[scs] chunk 1: +2000 it (2000 total), 56 s (0.028 s/it, gpu_indirect), pobj -376.82729 dobj -376.82537 res_pri 2.26e-02 res_dual 9.25e-02 gap 1.93e-03 status solved (inaccurate - reached max_iters)
+[scs] chunk 2: +2000 it (4000 total), 54 s (0.027 s/it, gpu_indirect), pobj -375.61523 dobj -375.61392 res_pri 1.66e-02 res_dual 6.37e-02 gap 1.31e-03 status solved (inaccurate - reached max_iters)
+[scs] chunk 3: +2000 it (6000 total), 55 s (0.028 s/it, gpu_indirect), pobj -374.79822 dobj -374.79722 res_pri 1.32e-02 res_dual 4.75e-02 gap 9.94e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 4: +2000 it (8000 total), 54 s (0.027 s/it, gpu_indirect), pobj -374.18991 dobj -374.18911 res_pri 1.18e-02 res_dual 3.81e-02 gap 7.99e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 5: +2000 it (10000 total), 52 s (0.026 s/it, gpu_indirect), pobj -373.71444 dobj -373.71378 res_pri 1.07e-02 res_dual 3.12e-02 gap 6.58e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 6: +2000 it (12000 total), 52 s (0.026 s/it, gpu_indirect), pobj -373.33350 dobj -373.33296 res_pri 9.61e-03 res_dual 2.56e-02 gap 5.48e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 7: +2000 it (14000 total), 43 s (0.022 s/it, gpu_indirect), pobj -373.02498 dobj -373.02452 res_pri 8.69e-03 res_dual 2.18e-02 gap 4.65e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 8: +2000 it (16000 total), 40 s (0.020 s/it, gpu_indirect), pobj -372.76889 dobj -372.76850 res_pri 7.70e-03 res_dual 1.75e-02 gap 3.92e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 9: +2000 it (18000 total), 41 s (0.021 s/it, gpu_indirect), pobj -372.55842 dobj -372.55810 res_pri 6.86e-03 res_dual 1.44e-02 gap 3.28e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 10: +2000 it (20000 total), 41 s (0.020 s/it, gpu_indirect), pobj -372.38668 dobj -372.38640 res_pri 6.50e-03 res_dual 1.20e-02 gap 2.78e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 11: +2000 it (22000 total), 38 s (0.019 s/it, gpu_indirect), pobj -372.24490 dobj -372.24466 res_pri 6.15e-03 res_dual 1.01e-02 gap 2.37e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 12: +2000 it (24000 total), 37 s (0.019 s/it, gpu_indirect), pobj -372.12708 dobj -372.12687 res_pri 5.81e-03 res_dual 8.63e-03 gap 2.03e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 13: +2000 it (26000 total), 36 s (0.018 s/it, gpu_indirect), pobj -372.02825 dobj -372.02808 res_pri 5.41e-03 res_dual 7.18e-03 gap 1.73e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 14: +2000 it (28000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.94586 dobj -371.94571 res_pri 4.99e-03 res_dual 6.24e-03 gap 1.51e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 15: +2000 it (30000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.87597 dobj -371.87584 res_pri 4.52e-03 res_dual 5.47e-03 gap 1.33e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 16: +2000 it (32000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.81604 dobj -371.81592 res_pri 4.02e-03 res_dual 4.75e-03 gap 1.17e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 17: +2000 it (34000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.76475 dobj -371.76464 res_pri 3.53e-03 res_dual 4.17e-03 gap 1.04e-04 status solved (inaccurate - reached max_iters)
+[scs] chunk 18: +2000 it (36000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.72063 dobj -371.72055 res_pri 3.04e-03 res_dual 3.56e-03 gap 8.96e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 19: +2000 it (38000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.68338 dobj -371.68331 res_pri 2.89e-03 res_dual 3.08e-03 gap 7.77e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 20: +2000 it (40000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.65155 dobj -371.65149 res_pri 2.94e-03 res_dual 2.60e-03 gap 6.65e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 21: +2000 it (42000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.62472 dobj -371.62466 res_pri 2.99e-03 res_dual 2.27e-03 gap 5.74e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 22: +2000 it (44000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.60178 dobj -371.60173 res_pri 3.02e-03 res_dual 1.96e-03 gap 4.97e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 23: +2000 it (46000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.58200 dobj -371.58196 res_pri 3.00e-03 res_dual 1.69e-03 gap 4.36e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 24: +2000 it (48000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.56487 dobj -371.56483 res_pri 2.98e-03 res_dual 1.52e-03 gap 3.92e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 25: +2000 it (50000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.54967 dobj -371.54963 res_pri 2.93e-03 res_dual 1.38e-03 gap 3.60e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 26: +2000 it (52000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.53604 dobj -371.53600 res_pri 2.87e-03 res_dual 1.29e-03 gap 3.36e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 27: +2000 it (54000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.52360 dobj -371.52357 res_pri 2.78e-03 res_dual 1.21e-03 gap 3.17e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 28: +2000 it (56000 total), 38 s (0.019 s/it, gpu_indirect), pobj -371.51193 dobj -371.51190 res_pri 2.60e-03 res_dual 1.09e-03 gap 2.90e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 29: +2000 it (58000 total), 38 s (0.019 s/it, gpu_indirect), pobj -371.50174 dobj -371.50172 res_pri 2.40e-03 res_dual 9.45e-04 gap 2.62e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 30: +2000 it (60000 total), 39 s (0.020 s/it, gpu_indirect), pobj -371.52080 dobj -371.52074 res_pri 2.00e-03 res_dual 7.58e-03 gap 6.64e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 31: +2000 it (62000 total), 39 s (0.019 s/it, gpu_indirect), pobj -371.49560 dobj -371.49555 res_pri 1.74e-03 res_dual 6.52e-03 gap 5.71e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 32: +2000 it (64000 total), 38 s (0.019 s/it, gpu_indirect), pobj -371.47278 dobj -371.47274 res_pri 1.50e-03 res_dual 5.04e-03 gap 4.38e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 33: +2000 it (66000 total), 38 s (0.019 s/it, gpu_indirect), pobj -371.45079 dobj -371.45076 res_pri 1.04e-03 res_dual 2.78e-03 gap 2.46e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 34: +2000 it (68000 total), 37 s (0.019 s/it, gpu_indirect), pobj -371.43982 dobj -371.43980 res_pri 7.42e-04 res_dual 1.77e-03 gap 1.60e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 35: +2000 it (70000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.43337 dobj -371.43336 res_pri 5.53e-04 res_dual 1.23e-03 gap 1.11e-05 status solved (inaccurate - reached max_iters)
+[scs] chunk 36: +2000 it (72000 total), 37 s (0.018 s/it, gpu_indirect), pobj -371.42901 dobj -371.42900 res_pri 4.21e-04 res_dual 8.35e-04 gap 7.63e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 37: +2000 it (74000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.42646 dobj -371.42645 res_pri 3.93e-04 res_dual 6.43e-04 gap 5.96e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 38: +2000 it (76000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.42478 dobj -371.42478 res_pri 3.82e-04 res_dual 5.59e-04 gap 5.23e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 39: +2000 it (78000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.42348 dobj -371.42348 res_pri 3.74e-04 res_dual 5.15e-04 gap 4.84e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 40: +2000 it (80000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.42237 dobj -371.42236 res_pri 3.66e-04 res_dual 4.90e-04 gap 4.63e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 41: +2000 it (82000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.42136 dobj -371.42136 res_pri 3.58e-04 res_dual 4.72e-04 gap 4.46e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 42: +2000 it (84000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.42044 dobj -371.42044 res_pri 3.50e-04 res_dual 4.58e-04 gap 4.33e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 43: +2000 it (86000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.41958 dobj -371.41958 res_pri 3.42e-04 res_dual 4.48e-04 gap 4.23e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 44: +2000 it (88000 total), 36 s (0.018 s/it, gpu_indirect), pobj -371.41871 dobj -371.41871 res_pri 3.25e-04 res_dual 4.24e-04 gap 4.02e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 45: +2000 it (90000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41801 dobj -371.41801 res_pri 3.14e-04 res_dual 4.22e-04 gap 4.01e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 46: +2000 it (92000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41733 dobj -371.41732 res_pri 3.03e-04 res_dual 4.16e-04 gap 3.96e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 47: +2000 it (94000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41668 dobj -371.41668 res_pri 2.94e-04 res_dual 4.08e-04 gap 3.90e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 48: +2000 it (96000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41607 dobj -371.41606 res_pri 2.84e-04 res_dual 4.01e-04 gap 3.81e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 49: +2000 it (98000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41549 dobj -371.41549 res_pri 2.76e-04 res_dual 3.94e-04 gap 3.76e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 50: +2000 it (100000 total), 35 s (0.018 s/it, gpu_indirect), pobj -371.41495 dobj -371.41494 res_pri 2.67e-04 res_dual 3.87e-04 gap 3.72e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 51: +2000 it (102000 total), 35 s (0.017 s/it, gpu_indirect), pobj -371.41398 dobj -371.41398 res_pri 2.39e-04 res_dual 3.06e-04 gap 3.00e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 52: +2000 it (104000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41360 dobj -371.41360 res_pri 2.23e-04 res_dual 3.08e-04 gap 3.02e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 53: +2000 it (106000 total), 35 s (0.017 s/it, gpu_indirect), pobj -371.41320 dobj -371.41320 res_pri 2.09e-04 res_dual 3.00e-04 gap 2.96e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 54: +2000 it (108000 total), 35 s (0.017 s/it, gpu_indirect), pobj -371.41283 dobj -371.41282 res_pri 1.96e-04 res_dual 2.91e-04 gap 2.85e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 55: +2000 it (110000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41248 dobj -371.41248 res_pri 1.84e-04 res_dual 2.81e-04 gap 2.78e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 56: +2000 it (112000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41216 dobj -371.41216 res_pri 1.72e-04 res_dual 2.70e-04 gap 2.66e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 57: +2000 it (114000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41187 dobj -371.41187 res_pri 1.60e-04 res_dual 2.60e-04 gap 2.59e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 58: +2000 it (116000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41161 dobj -371.41161 res_pri 1.49e-04 res_dual 2.49e-04 gap 2.46e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 59: +2000 it (118000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41137 dobj -371.41137 res_pri 1.38e-04 res_dual 2.39e-04 gap 2.37e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 60: +2000 it (120000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41115 dobj -371.41115 res_pri 1.28e-04 res_dual 2.28e-04 gap 2.29e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 61: +2000 it (122000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41095 dobj -371.41095 res_pri 1.18e-04 res_dual 2.18e-04 gap 2.16e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 62: +2000 it (124000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41077 dobj -371.41077 res_pri 1.08e-04 res_dual 2.07e-04 gap 2.09e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 63: +2000 it (126000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41060 dobj -371.41060 res_pri 9.85e-05 res_dual 1.97e-04 gap 1.99e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 64: +2000 it (128000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41045 dobj -371.41045 res_pri 8.94e-05 res_dual 1.86e-04 gap 1.88e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 65: +2000 it (130000 total), 34 s (0.017 s/it, gpu_indirect), pobj -371.41031 dobj -371.41031 res_pri 8.11e-05 res_dual 1.75e-04 gap 1.78e-06 status solved (inaccurate - reached max_iters)
+[scs] chunk 66: +2000 it (132000 total), 35 s (0.017 s/it, gpu_indirect), pobj -371.40895 dobj -371.40895 res_pri 2.84e-07 res_dual 1.70e-05 gap 4.24e-07 status solved (inaccurate - reached max_iters)
+[scs] chunk 67: +125 it (132125 total), 2 s (0.017 s/it, gpu_indirect), pobj -371.40910 dobj -371.40910 res_pri 1.94e-07 res_dual 2.49e-06 gap 4.40e-08 status solved
+Traceback (most recent call last):
+  File [35m"/home/kooshi/source/lean-dir/tools/fplane_sdp_scs.py"[0m, line [35m80[0m, in [35m<module>[0m
+    [31mmain[0m[1;31m()[0m
+    [31m~~~~[0m[1;31m^^[0m
+  File [35m"/home/kooshi/source/lean-dir/tools/fplane_sdp_scs.py"[0m, line [35m69[0m, in [35mmain[0m
+    sol = [1;31mchain.solvers[0m[-1].invert(result, inv[-1]); prob.unpack_results(sol, chain, inv)
+          [1;31m^^^^^^^^^^^^^[0m
+[1;35mAttributeError[0m: [35m'SolvingChain' object has no attribute 'solvers'. Did you mean: 'solver'?[0m

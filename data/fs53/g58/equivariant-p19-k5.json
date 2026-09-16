@@ -1,0 +1,881 @@
+{
+ "kind": "fplane-equivariant",
+ "p": 19,
+ "k": 5,
+ "conflict_budget": 5000000,
+ "rows": [
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     18,
+     0
+    ],
+    [
+     0,
+     18
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     18,
+     0
+    ],
+    [
+     0,
+     18
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 92.1,
+   "colouring": null
+  },
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     18,
+     0
+    ],
+    [
+     0,
+     18
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "sat",
+   "seconds": 2.1,
+   "colouring": [
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    1,
+    2,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    1,
+    4,
+    3,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    3,
+    2,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    0,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    2,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    3,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    0,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    1,
+    2,
+    0,
+    1,
+    2,
+    0,
+    3,
+    0,
+    1,
+    4,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3,
+    2,
+    4,
+    3,
+    1,
+    4,
+    0,
+    1,
+    4,
+    2,
+    4,
+    3,
+    2,
+    4,
+    0,
+    1,
+    4,
+    0,
+    1,
+    4,
+    0,
+    3,
+    2,
+    0,
+    3,
+    2,
+    4,
+    3
+   ]
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     18
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     18
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     18
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     18
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    3,
+    4,
+    1
+   ],
+   "tau_cycle_type": [
+    4,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.3,
+   "colouring": null
+  },
+  {
+   "rotation_order": 5,
+   "rotation": [
+    [
+     2,
+     15
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 5,
+   "rotation": [
+    [
+     2,
+     15
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "tau": [
+    1,
+    2,
+    3,
+    4,
+    0
+   ],
+   "tau_cycle_type": [
+    5
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 10,
+   "rotation": [
+    [
+     12,
+     16
+    ],
+    [
+     3,
+     12
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 10,
+   "rotation": [
+    [
+     12,
+     16
+    ],
+    [
+     3,
+     12
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 10,
+   "rotation": [
+    [
+     12,
+     16
+    ],
+    [
+     3,
+     12
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 10,
+   "rotation": [
+    [
+     12,
+     16
+    ],
+    [
+     3,
+     12
+    ]
+   ],
+   "tau": [
+    1,
+    2,
+    3,
+    4,
+    0
+   ],
+   "tau_cycle_type": [
+    5
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 20,
+   "rotation": [
+    [
+     3,
+     12
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 20,
+   "rotation": [
+    [
+     3,
+     12
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 20,
+   "rotation": [
+    [
+     3,
+     12
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 20,
+   "rotation": [
+    [
+     3,
+     12
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    3,
+    4,
+    1
+   ],
+   "tau_cycle_type": [
+    4,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 20,
+   "rotation": [
+    [
+     3,
+     12
+    ],
+    [
+     7,
+     3
+    ]
+   ],
+   "tau": [
+    1,
+    2,
+    3,
+    4,
+    0
+   ],
+   "tau_cycle_type": [
+    5
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  }
+ ],
+ "claim_scope": "colourings of UD(F_p,2) with col(r z) = \u03c4(col z) for one rotation r of each order about the origin and one \u03c4 per conjugacy class of S_k of compatible order (conjugate \u03c4 and the rotation's other generators give equivalent instances); sat: a colouring verified proper and equivariant; unsat: the solver's refusal at the conflict budget (untrusted); unknown: the budget ran out \u2014 a refusal of every class says a k-colouring has no rotational symmetry, not that none exists"
+}

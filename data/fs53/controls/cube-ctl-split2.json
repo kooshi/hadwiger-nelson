@@ -1,0 +1,55 @@
+{
+ "q": 17,
+ "k": 4,
+ "start_depth": 2,
+ "max_depth": 24,
+ "cap_seconds": 1,
+ "order": [
+  2,
+  3,
+  4,
+  5,
+  79,
+  78,
+  16,
+  53,
+  52,
+  15,
+  77,
+  51,
+  14,
+  76,
+  22,
+  21,
+  75,
+  127,
+  126,
+  20,
+  74,
+  73,
+  19,
+  125
+ ],
+ "order_sha256": "1574ac26ab135e1164e6933bbdf010ee355446834d9140b6b36443ea3d7f53ec",
+ "pins": [
+  [
+   0,
+   0
+  ],
+  [
+   1,
+   1
+  ]
+ ],
+ "n_roots": 9,
+ "symmetry_break": "clique pins + colour precedence",
+ "method": "adaptive cube-and-conquer: a cube undecided at the cap is split on the next vertex of the order, and its children partition its space",
+ "kind": "fplane-sat-cube-adaptive",
+ "decided": 15,
+ "split": 3,
+ "deepest_depth": 3,
+ "wall_seconds": 2.2,
+ "core_seconds": 5.6,
+ "verdict": "UNSAT",
+ "claim_scope": "EXHAUSTIVE: every leaf of the cube tree is UNSAT and the children of a split cube partition its space, so under the (sound) clique-pin and colour-precedence symmetry breaking UD(F_17,2) has no 4-colouring, i.e. chi > 4"
+}

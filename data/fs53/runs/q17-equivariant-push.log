@@ -1,0 +1,5 @@
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (1, 1, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (2, 1, 1, 1): UNSAT   — the solver's refusal [332.9s]
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (2, 2, 1): UNKNOWN — unknown at 40000000 conflicts [9398.1s]
+[equivariant] p=17 k=5: 3 rows, 0 sat / 2 unsat / 1 unknown, 9398.1s wall, 2 jobs, quotient
+  wrote /home/kooshi/.claude/jobs/b1507518/tmp/cube17/equivariant-q17-k5-push.json

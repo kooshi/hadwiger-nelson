@@ -1,0 +1,17 @@
+[equivariant] p=17 k=5: rotation of order  4, τ of cycle type (1, 1, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (1, 1, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  4, τ of cycle type (2, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  4, τ of cycle type (2, 2, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  8, τ of cycle type (1, 1, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  8, τ of cycle type (2, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  8, τ of cycle type (2, 2, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  8, τ of cycle type (4, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order 16, τ of cycle type (1, 1, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order 16, τ of cycle type (2, 1, 1, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order 16, τ of cycle type (2, 2, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order 16, τ of cycle type (4, 1): UNSAT   — the solver's refusal [0.0s]
+[equivariant] p=17 k=5: rotation of order  4, τ of cycle type (4, 1): UNSAT   — the solver's refusal [3.2s]
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (2, 1, 1, 1): UNKNOWN — unknown at 5000000 conflicts [313.6s]
+[equivariant] p=17 k=5: rotation of order  2, τ of cycle type (2, 2, 1): UNKNOWN — unknown at 5000000 conflicts [394.6s]
+[equivariant] p=17 k=5: 15 rows, 0 sat / 13 unsat / 2 unknown, 394.6s wall, 4 jobs, quotient
+  wrote /home/kooshi/.claude/jobs/b1507518/tmp/cube17/equivariant-q17-k5.json

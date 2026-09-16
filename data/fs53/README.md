@@ -282,8 +282,9 @@ since 2010.
 | file | plane, k | budget | verdict | claim scope |
 |---|---|---|---|---|
 | `colour-p17-k6.json` | 𝔽₁₇, 6 | **0.056 s**, 4 threads, seed 1, 1,244 iterations, no restarts | **found** | a proper 6-colouring, verified by the tool's own independent pair sweep **and re-verified here from the definition** by `tools/fplane_review_verify.py` (0 monochromatic of 2,312 edges; class sizes 46, 48, 45, 49, 53, 48). So **`χ(UD(𝔽₁₇,2)) ≤ 6`**, and with `k = 4` UNSAT (M58) the bracket is **`{5, 6}`** |
-| `alpha-q17-ge58.json` | 𝔽₁₇, largest independent set | **0.055 s**, 4 threads, seed 1, 35 cycles, **0 restarts** — it hit the target immediately | **found, 58** | verified from the definition here (0 internal edges). A 5-colouring needs a class of `⌈289/5⌉ = 58`, so **the peel-and-colour precondition for five at 17 is satisfied** — this is a lower bound and refutes nothing. The ratio bound is `α ≤ 96`, far above 58, so the spectral route cannot refuse five either; and refusing five by exact certificate would need the instrument to reach `57/96 = 0.594` of the ratio bound against a best-ever reach of 0.8238, which is out of the question. **17 can only be settled by decision** |
-| `colour-q17-k5.json` | 𝔽₁₇, 5 | 120 s × 4 threads, seed 1 | **not found** | a null at that budget — but the informative part is *how close*: the best any thread reached is **2 monochromatic edges of 2,312** (0.087 %), and it does not close. That is the signature of an instance sitting on the boundary, and it is why cube-and-conquer fixing 26 of 289 vertices still fails to decide |
+| `alpha-q17-ge66.json` | 𝔽₁₇, largest independent set | 60 s, seed 1 | **found, 66** | verified from the definition here (0 internal edges). **Supersedes the 58-set filed earlier the same night**, which was merely the first run to hit the 58 target and stopped there. Five needs a class of `⌈289/5⌉ = 58` and six needs 49, so **both preconditions at 17 are satisfied with room** — these are lower bounds and refute nothing. The ratio bound is `α ≤ 96`; refusing five by certificate would need `57/96 = 0.594` of it against a best-ever reach of 0.7973, which is out of the question. **17 can only be settled by decision** |
+| `colour-q17-k5.json` | 𝔽₁₇, 5 | **3,600 s**, seed 1 | **not found** | a null at that budget — and the informative part is *how close*: the best any thread reaches is **2 monochromatic edges of 2,312** (0.087 %), and an hour does not close it. **Supersedes the 120 s run filed earlier the same night, which reached the same 2** — so the plateau is at 2 across a 30× budget range, which is the signature of an instance sitting on the boundary, and is why cube-and-conquer fixing 26 of 289 vertices still fails to decide |
+| `colour-q17-k5-peel.json` | 𝔽₁₇, 5, a colour class pinned to a large independent set first | 1,200 s | **not found**, best 5 monochromatic edges | the peel-and-colour variant does **worse** than the free search (5 against 2). Pinning a maximum independent set as one class is sufficient-not-necessary — a 5-colouring need not use a maximum class — and here the restriction costs more than it buys |
 | `equivariant-q17-k5.json` | 𝔽₁₇, 5, rotation-equivariant colourings | 5,000,000 conflicts per row, 4 jobs | **15 rows: 0 satisfiable, 13 refused, 2 undecided** | each row is a SAT **decision**, not a search, so the 13 are refusals — on the solver's word, and only about colourings with `col(r·z) = τ(col z)`. **No five-colouring of `UD(𝔽₁₇,2)` is rotation-equivariant** on 13 of the 15 symmetry classes. **The 2 undecided rows are rotation order 2 with τ of cycle type (2,2,1) and (2,1,1,1)** — the least constrained rows, i.e. *the same rows* phase A could not decide at 23, 43 and 47, now reproduced at a fourth member and at `k = 5` rather than `k = 6`. So the pattern is a property of the instrument, not of any one plane, and the zeros are again concentrated where a colouring was least likely to live. Being re-asked at 40,000,000 conflicts |
 
 **Both halves of the sentence, as the plan requires.** What it is: the published bracket at 17 narrowed from three values
@@ -341,3 +342,22 @@ this project at 72× on a comparable instance. `tools/fplane.py` carries `--pin-
 subcommand; whether the *equivariant* encoder breaks the symmetry that survives fixing τ (the centraliser of τ
 in `S_k`) was **not** established here — a grep placed the flag on `chi` and nothing more. That check, and the
 precedence constraint if it is absent, is the continuation.
+
+## Sub-directories — evidence that used to live only in job scratch (moved 2026-09-16)
+
+Job scratch (`~/.claude/jobs/<id>/tmp/`) is deleted with the job. Everything below evidences a claim in
+`CLAUDE.md` or in this log, so it lives here instead. Each directory has its own README.
+
+| directory | what it holds |
+|---|---|
+| `g58/` | the **antipodal conjecture's** entire evidence base — the equivariant sweeps at `q = 3, 7, 11, 19`, the four planes whose chromatic number is known, each colouring re-verified from the definition; plus the three **killing-test** records that returned nothing, kept as a recorded failure |
+| `controls/` | the five controls of `tools/fplane_sat_cube.py`, including the one written *after* the first pair passed without exercising the splitting path, and the resume control |
+| `runs/` | the run logs and the resume notes written **before** each launch — including the line proving the 47 solve converged, and two corrections registered before their results landed |
+| `ledag/` | the `le_diag` experiment (`tools/fplane_relax_experiment.py`): dropping the whole constraint class moves the optimum by `1e-7` at 11 and 23, while the control arm that drops a different class jumps to the trivial bound `n`. This is why the two SDP formulations in this milestone have the same optimum and incompatible warm starts |
+
+**A caveat on `rerun` fields.** Several records carry a `rerun` command whose `--start` points into job
+scratch. The **artifact** is durable and independently verifiable — every independent set here was
+re-checked from the definition by `tools/fplane_review_verify.py`, which shares no code with the producer —
+but the exact search *chain* cannot be replayed once the job is deleted. Read `rerun` as provenance, not as
+a reproduction recipe.
+

@@ -1,0 +1,19 @@
+q=17 k=5: 289 vertices, degree 16, 2312 edges; cubing on 6 vertices -> 2661 cubes (of 15625 raw, the rest killed by an edge). 0 already decided, 2661 to go, 8 workers. cubes_sha256=df063300a7e7487d…
+q=17 k=5: 289 vertices, degree 16, 2312 edges. 27321 roots at depth 8; 0 cubes already decided, 0 already split; 27321 on the frontier. cap 30s, 8 workers. order_sha256=dd0a6edc4100ea46…
+  !! cube at max depth 24 still UNKNOWN at 30s — raise --max-depth; no claim about the graph
+q=17 k=5: 289 vertices, degree 16, 2312 edges. 27321 roots at depth 8; 0 cubes already decided, 0 already split; 27321 on the frontier. cap 20s, 8 workers. order_sha256=ab6512f183071809…
+  500 decided, 764 split, 28129 outstanding, deepest 26, 2523s, 0.2 cubes/s, mean 9.68s
+  1000 decided, 1091 split, 28063 outstanding, deepest 27, 3949s, 0.3 cubes/s, mean 9.71s
+  1500 decided, 1427 split, 28125 outstanding, deepest 27, 5417s, 0.3 cubes/s, mean 9.81s
+  2000 decided, 1744 split, 28131 outstanding, deepest 27, 6819s, 0.3 cubes/s, mean 9.78s
+  2500 decided, 2070 split, 28124 outstanding, deepest 27, 8277s, 0.3 cubes/s, mean 9.87s
+  3000 decided, 2380 split, 28079 outstanding, deepest 27, 9662s, 0.3 cubes/s, mean 9.86s
+  3500 decided, 2680 split, 28085 outstanding, deepest 27, 11034s, 0.3 cubes/s, mean 9.87s
+  4000 decided, 2980 split, 28111 outstanding, deepest 27, 12449s, 0.3 cubes/s, mean 9.96s
+  4500 decided, 3245 split, 28066 outstanding, deepest 27, 13722s, 0.3 cubes/s, mean 9.93s
+  5000 decided, 3537 split, 28003 outstanding, deepest 27, 15067s, 0.3 cubes/s, mean 9.92s
+  5500 decided, 3925 split, 28076 outstanding, deepest 27, 16676s, 0.3 cubes/s, mean 9.95s
+  6000 decided, 4272 split, 28100 outstanding, deepest 27, 18214s, 0.3 cubes/s, mean 10.01s
+  6500 decided, 4562 split, 28060 outstanding, deepest 27, 19564s, 0.3 cubes/s, mean 10.01s
+  7000 decided, 4878 split, 28048 outstanding, deepest 27, 21002s, 0.3 cubes/s, mean 10.03s
+  7500 decided, 5271 split, 28063 outstanding, deepest 27, 22649s, 0.3 cubes/s, mean 10.07s

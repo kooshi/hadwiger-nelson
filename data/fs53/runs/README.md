@@ -1,0 +1,17 @@
+# Run logs and resume notes — the provenance for FS-53's 2026-09-15/16 results
+
+Kept because the records say *what* was found and these say *how*, and because three of them carry
+corrections that would otherwise live only in a chat.
+
+| file | what it evidences |
+|---|---|
+| `q47-solve.log` | **the 47 relaxation CONVERGED**: chunk 67 reads `status solved` — not `inaccurate` — at `pobj -371.40910`, res_pri 1.94e-07, gap 4.40e-08, 132,125 iterations. This is the line behind "six is not refused at 47 and never will be by this relaxation". It also holds the `AttributeError` crash that happened **after** convergence and after the checkpoint was written (cvxpy moved `chain.solvers[-1]` to `chain.solver`), now patched in the tool |
+| `q47-round.log` | the exact rounding sweep that produced `cert-q47-N371.json`: best `N = 371.839576`, **reproduced at two independent cuts** (1e-07 and 1e-06 at gram denominator 1e8). Read the whole sweep, not one line — the worst candidate in it is 581, which is a discarded denominator and not a result |
+| `q47-RESUME.md` | the resume command written **before** launch, plus two notes: the formulation mismatch (the producer drops the inactive `le_diag` class, so its checkpoint has 72,638 cone rows against this driver's 88,741 — same optimum, incompatible warm start), and the device pinned by **UUID** because `CUDA_VISIBLE_DEVICES` orders by PCI bus and `nvidia-smi` does not |
+| `q31-round.log` | the 31 solve driven to `status solved` at 394,925 iterations, `N = 200.881446` → `α ≤ 200` |
+| `q31-RESUME.md` | the resume command, **and a correction recorded before any result**: the launch argument called 31 "the least converged" from `provenance.seconds = 22.8`, which measures the final rounding call and not the solve — 31's checkpoint held 170,000 iterations against 47's 89,000, so it was the *more* converged. The corrected forecast (moving 0.036 per 2,000 iterations against 8.2 to go, so it will **not** reach 193) is registered there and it held |
+| `q17-cube-depth-pricing.log` | why the handoff's cube depth was wrong, and why the pricing that replaced it was **also** wrong: six draws cannot estimate a heavy-tailed mean, and the table contradicts itself (depth 6 reads 0.0 core-hours against a live sweep that had decided nothing). This is what motivated the adaptive splitter |
+| `q17-cube-sweep.log` | the adaptive sweep at 17. Its last progress line is the evidence that it was **diverging**, not merely slow: 5,500 decided against 3,925 split, leaving 28,076 outstanding and growing at 0.3 cubes/s. Checkpoint kept at `../ckpt/cube-q17-k5.jsonl`; resume is the command in `q17-cube-RESUME.md` |
+| `q17-equivariant.log`, `q17-equivariant-push.log` | the symmetry sweep at 17 and its re-ask at 40,000,000 conflicts. After the push, **one** antipodally symmetric candidate survives at five colours — rotation order 2 with τ = `(2,2,1)`, undecided after 9,398 s — and that is precisely the row type carrying the colouring at 19 and one of the two at 11 |
+| `q17-cube-RESUME.md` | the exhaustive-sweep resume command, written before launch, with the independent verification command for a SAT colouring |
+| `phaseA-long-runs-final-lines.txt` | the final progress line of each of phase A's four long runs at 43 and 47 — the provenance for "flat for hours" (`since_best_s` against `elapsed_s`). The 16 MB of full logs lived in job scratch and is not committed; the **records** are `../colour-q4{3,7}-k6.json` and `../alpha-q4{3,7}-ge*.json` |

@@ -1,0 +1,48 @@
+{
+ "kind": "fs53-le-diag-experiment",
+ "q": 27,
+ "p": 3,
+ "f": 3,
+ "modulus": "t^3-t-1",
+ "eps": 1e-08,
+ "solver": "SCS",
+ "backend": "cpu",
+ "real_blocks": true,
+ "arms": [
+  {
+   "arm": "all",
+   "le_diag_rows": 4513,
+   "value": 147.57743277831565,
+   "status": "optimal",
+   "seconds": 191.8,
+   "scs_iters": 43050
+  },
+  {
+   "arm": "one",
+   "le_diag_rows": 1625,
+   "value": 147.57743325698746,
+   "status": "optimal",
+   "seconds": 331.9,
+   "scs_iters": 69050
+  },
+  {
+   "arm": "none",
+   "le_diag_rows": 0,
+   "value": 147.5774334769474,
+   "status": "optimal",
+   "seconds": 62.1,
+   "scs_iters": 13500
+  },
+  {
+   "arm": "nokilled",
+   "le_diag_rows": 4513,
+   "value": 728.9999958020977,
+   "status": "optimal",
+   "seconds": 3.5,
+   "scs_iters": 100
+  }
+ ],
+ "plant_fired": false,
+ "reachability_control_fired": true,
+ "claim_scope": "float readings of one relaxation's optimum under three le_diag lists; one module, one solve path, one solver, one tolerance, one backend, the constraint list the only thing differing; never a bound"
+}

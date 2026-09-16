@@ -1,0 +1,19 @@
+{"header": true, "q": 17, "k": 4, "start_depth": 2, "max_depth": 24, "cap_seconds": 1, "order": [2, 3, 4, 5, 79, 78, 16, 53, 52, 15, 77, 51, 14, 76, 22, 21, 75, 127, 126, 20, 74, 73, 19, 125], "order_sha256": "1574ac26ab135e1164e6933bbdf010ee355446834d9140b6b36443ea3d7f53ec", "pins": [[0, 0], [1, 1]], "n_roots": 9, "symmetry_break": "clique pins + colour precedence", "method": "adaptive cube-and-conquer: a cube undecided at the cap is split on the next vertex of the order, and its children partition its space"}
+{"cube": [[2, 3], [3, 2]], "verdict": "UNSAT", "seconds": 0.008}
+{"cube": [[2, 3], [3, 1]], "verdict": "UNSAT", "seconds": 0.007}
+{"cube": [[2, 3], [3, 0]], "verdict": "UNSAT", "seconds": 0.006}
+{"cube": [[2, 0], [3, 3]], "verdict": "UNSAT", "seconds": 0.01}
+{"cube": [[2, 2], [3, 0]], "verdict": "UNSAT", "seconds": 0.882}
+{"cube": [[2, 0], [3, 1]], "verdict": "UNSAT", "seconds": 0.886}
+{"cube": [[2, 2], [3, 3]], "verdict": "SPLIT"}
+{"cube": [[2, 2], [3, 1]], "verdict": "SPLIT"}
+{"cube": [[2, 2], [3, 1], [4, 0]], "verdict": "UNSAT", "seconds": 0.426}
+{"cube": [[2, 2], [3, 3], [4, 1]], "verdict": "UNSAT", "seconds": 0.515}
+{"cube": [[2, 2], [3, 3], [4, 0]], "verdict": "UNSAT", "seconds": 0.602}
+{"cube": [[2, 2], [3, 3], [4, 2]], "verdict": "UNSAT", "seconds": 0.865}
+{"cube": [[2, 2], [3, 1], [4, 2]], "verdict": "UNSAT", "seconds": 0.879}
+{"cube": [[2, 2], [3, 1], [4, 3]], "verdict": "UNSAT", "seconds": 0.913}
+{"cube": [[2, 0], [3, 2]], "verdict": "SPLIT"}
+{"cube": [[2, 0], [3, 2], [4, 0]], "verdict": "UNSAT", "seconds": 0.303}
+{"cube": [[2, 0], [3, 2], [4, 1]], "verdict": "UNSAT", "seconds": 0.327}
+{"cube": [[2, 0], [3, 2], [4, 3]], "verdict": "UNSAT", "seconds": 0.725}

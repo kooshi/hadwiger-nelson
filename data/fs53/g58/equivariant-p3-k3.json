@@ -1,0 +1,124 @@
+{
+ "kind": "fplane-equivariant",
+ "p": 3,
+ "k": 3,
+ "conflict_budget": 2000000,
+ "formulation": "quotient",
+ "jobs": 2,
+ "seconds": 0.0,
+ "rows": [
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     2,
+     0
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1
+   ],
+   "tau_cycle_type": [
+    2,
+    1
+   ],
+   "status": "sat",
+   "seconds": 0.0,
+   "colouring": [
+    0,
+    1,
+    2,
+    1,
+    2,
+    0,
+    2,
+    0,
+    1
+   ]
+  },
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     2,
+     0
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1
+   ],
+   "tau_cycle_type": [
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  }
+ ],
+ "claim_scope": "colourings of UD(F_p,2) with col(r z) = \u03c4(col z) for one rotation r of each order about the origin and one \u03c4 per conjugacy class of S_k of compatible order (conjugate \u03c4 and the rotation's other generators give equivalent instances); sat: a colouring verified proper and equivariant ON THE FULL PLANE (the quotient is only the instrument); unsat: the solver's refusal at the conflict budget (untrusted); unknown: the budget ran out \u2014 a refusal of every class says a k-colouring has no rotational symmetry, not that none exists"
+}
