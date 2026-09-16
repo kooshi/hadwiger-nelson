@@ -34,15 +34,18 @@ Every item below is re-derived by a committed script; run it rather than trustin
   `ℤ[ζ₃]`, whose real elements are integers; Bridges–Mena 1982 classify integral abelian Cayley graphs, and the "Cayley
   integral groups" literature records that such 3-groups are exactly the elementary abelian ones). So **every**
   `UD(𝔽_{3^f},2)` is integral — odd or even `f` — and 27 is special only because it is the window's one characteristic-3 member.
-* **Exactly −8:** by Moisio's identity in characteristic 3, each eigenvalue is the **trace of Frobenius** of the elliptic curve
-  `E_a : y² = x³ + x² − a` over `𝔽₂₇`, `t = 28 − #E_a` — verified on all 26 curves. Every curve in the family has
-  `3 | #E_a`; Hasse allows `#E ≤ 28 + 2√27 = 38.4`; divisibility caps it at **36**; the largest curve has 36 points;
-  `λ_min = 28 − 36 = −8`. The multiplicities are the family's point-count distribution (Katz–Livné's class-number formula,
-  listing only). Hence the ratio bound is exactly `729·8/36 = 162`.
+* **Exactly −8, by an elementary chain that needs no outside theorem at q = 27:** each unit direction `±u` contributes
+  `ζ₃^t + ζ₃^{−t}`, which is 2 or −1, so `λ_a = 3·m_a − 14 ≡ 1 (mod 3)` — and for every `q = 3^f` with `f` odd,
+  `λ_a = 3·m_a − (q+1)/2 ≡ 1 (mod 3)`. Weil's `|λ| ≤ 2√27 = 10.39` then forbids −11, so `λ ≥ −8`; attainment is the
+  computation (56 hyperplanes hold exactly two directions). **The explanation of what the eigenvalues ARE** is Moisio's
+  identity in characteristic 3: each is the trace of Frobenius of `E_a : y² = x³ + x² − a` over `𝔽₂₇`, `t = 28 − #E_a`
+  (verified on all 26 curves), and the congruence is `3 | #E_a`; the largest curve has 36 points, Hasse allows 38. The
+  multiplicities are the family's point-count distribution (Katz–Livné's class-number formula, listing only). Hence the
+  ratio bound is exactly `729·8/36 = 162`.
 
 ### 1.3 The stub's fact (d) is WRONG as written, and the truth is more interesting
 "Worst certificate reach ever measured, 0.9110" omits **43**, whose certificate `α ≤ 365` against its ratio bound 395.23
-has reach **≥ 0.9235** (its solve is not converged, so the relaxation's own reach there is lower; the claim is true only as
+has reach **0.9258** (N = 365.917; its solve is not converged, so the relaxation's own reach there is lower; the claim is true only as
 "worst among converged solves"). And the reach is high at 27 **because the ratio bound is unusually strong, not because the
 relaxation is weak**, as densities show (bound ÷ n):
 
@@ -71,7 +74,8 @@ Moser-spindle conclusion survives: 11 is a non-square in `𝔽₂₇`.)
   inert (the only conjugation-fixed prime above 2 has norm 8, so no four-colour bound). Its local bound is
   `min(χ(27), χ(31), χ(47)) ∈ {5, 6, 7}`. **Minimal over every number field**: a quadratic field cannot see `𝔽₂₇`, a quartic
   with a degree-3 prime above 3 also has a degree-1 prime there (3-colourable plane), `nflist` enumerates every cubic field
-  completely, and every field of degree ≥ 5 has `|disc| ≥ 1609`.
+  completely, and every field of degree ≥ 5 has `|disc| > 169` by Minkowski's bound `(π/4)ⁿ(nⁿ/n!)²` (202.7 at n = 5,
+  increasing in n).
 * **So 27 is the window member seen first by the arithmetically smallest field** — root discriminant 5.5, against 25.8 for
   the smallest field that sees 23 first.
 
@@ -155,6 +159,26 @@ several colours confines the unit circle to the moved ones.
 representation is `ZMod 3 × ZMod 3 × ZMod 3` (coefficients of `1, t, t²`) with multiplication reduced by `t³ = t + 1`, its
 `CommRing` laws and `IsField` discharged by `decide` over 27 elements — the fact "this is the field with 27 elements" placed
 beside the type as theorems (`card = 27`, `IsField`), not inside it.
+
+---
+
+## §O The obligations (modeling pass, 2026-09-16): what is proved, what is tested, what is assumed
+
+| claim | status | the local obligation that carries it |
+|---|---|---|
+| `λ_a = 3m_a − (q+1)/2` for `q = 3^f`, so every eigenvalue ≡ 1 (mod 3) | **[hand, general]** | one direction's contribution is 2 or −1 |
+| `λ_min ≥ −8` at 27 | **[hand]** given Weil for these character sums (prior art) | the congruence and `2√27 < 11` |
+| `λ_min = −8`, the multiplicities, `|Aut| = 122,472` | **[tools, exact]** | `tools/fs54_structure.py` (nauty for the group) |
+| every edge in exactly one triangle, for every `q = 3^f`, `f` odd | **[hand, general]**; tested at 27 | a third point `w` needs `N(w) = 1` and `N(1−w) = 1`, i.e. `Tr w = 1`, so `w` is a root of `X² − X + 1 = (X + 1)²` |
+| the conductor-13 cubic is the least-discriminant field whose first usable plane is 27 | **[hand]** for degrees 2, 4, ≥ 5 (residue degrees; Minkowski); **[tools]** for degree 3 (PARI's `nflist`, trusted as software) | per degree |
+| `L(ℚ(√4703)) ≥ 6` | **[cert]** at 43, 47, 79; **[derived]** from 98 up (Weil); **[tools]** the usable list | a quadratic field's usable planes are primes; each is bounded separately |
+| max over prime-order classes of the largest `H`-invariant independent set = max over independent sets with nontrivial stabiliser | **[hand]** | Cauchy: a nontrivial stabiliser contains an element of prime order; conjugating moves the set to the class representative without changing its size; and the GAP group equals `Aut` because its order is nauty's |
+| a class's maximum (OPTIMAL) | **[solver]**, untrusted | CP-SAT; a refusal that matters is re-asked on CaDiCaL (orbit weights expanded as literal copies) before it is written as one |
+| a found independent set | **[verified]** | `tools/fplane_review_verify.py indep`, sharing no code with any finder |
+
+**Two statements were weaker than their proofs and are restated above:** the −8 no longer leans on Moisio (his identity is
+the explanation, the congruence is the proof), and minimality no longer leans on a discriminant table (Minkowski covers
+every degree ≥ 5).
 
 ---
 
