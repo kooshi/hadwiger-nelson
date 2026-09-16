@@ -265,3 +265,34 @@ honest form is "43 of 47 classes refused, 4 open".
 
 This is what the `α` side could not give: at 23 the search side can only say 87 and never 88, which is evidence
 about a plateau; the equivariant side says *no* for a whole structured family, by decision.
+
+## The equivariant sweeps at 43 and 47, and what their zeros do **not** say
+
+`tools/fplane.py equivariant --p <q> --k 6`, one rotation of each order about the origin and one colour
+permutation τ per conjugacy class of compatible order, each row a SAT decision on the quotient:
+
+| q | rows | satisfiable | refused | undecided at 5,000,000 conflicts | wall |
+|---|---|---|---|---|---|
+| 23 | 47 | **0** | 43 | 4 | 921.8 s, 2 jobs |
+| 43 | 21 | **0** | 18 | 3 | 801.1 s, 4 jobs |
+| 47 | 63 | **0** | 59 | 4 | 932.2 s, 4 jobs |
+
+Committed as `equivariant-q23-k6.json`, `equivariant-q43-k6.json`, `equivariant-q47-k6.json`. Every refusal is
+**the solver's word, not the kernel's**, and every row is about *rotation-equivariant* colourings only: a
+six-colouring with no rotational symmetry is untouched at all three members.
+
+**The undecided rows are the same rows at all three members, and that is the finding.** They are
+
+  rotation order 2 with τ of cycle type (2,2,1,1) and (2,1,1,1,1); order 3 with (3,1,1,1); order 4 with (4,1,1)
+
+— at 43 the order-3 row is simply absent, because 3 ∤ 44. These are precisely the **least constrained**
+instances in each sweep: the lowest rotation orders, so the quotient is largest, with the colour permutations
+having the most fixed points, so the colouring has the most freedom.
+
+**So the zeros are concentrated where a colouring was least likely to be, and silent where it was most likely
+to be.** A sweep that refuses 59 of 63 classes sounds close to exhaustive and is not: the four it could not
+decide are the four with the largest search space, which is both why the solver could not finish them and why
+they are the rows a six-colouring would plausibly occupy. This is the standing rule that a negative measures
+its enumeration — the acceptance test here is "the solver closed it within five million conflicts", and the
+rows that fail that test are systematically the informative ones. The 23 sweep's four are being re-asked at
+40,000,000 conflicts; the same push at 43 and 47 is not yet run and is the obvious continuation.
