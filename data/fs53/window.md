@@ -12,13 +12,13 @@ subplanning and not yet reproducible from a committed tool.*
 `|λ_min| ≤ 2√q` caps that at `q ≤ 97`; 71's exact spectrum fails it; 83 was refused by certificate (FS-50). **Eight
 members remained when this file was written; **79 has since left it** — two of them were refused six by exact certificate on
 2026-09-15. **79, 67 and 59 have all since left it**, each refused six by an exact
-certificate on 2026-09-15: `α ≤ 1023` against the 1040 six needs at 79, `α ≤ 745` against 748 at 67, `α ≤ 575` against
-580 at 59 — so `χ ≥ 7` at all three. **Five members remain: 23, 27, 31, 43, 47 — none decided.**
+certificate on 2026-09-15: `α ≤ 1023` against the 1041 six needs at 79, `α ≤ 745` against 749 at 67, `α ≤ 575` against
+581 at 59 — so `χ ≥ 7` at all three. **Five members remain: 23, 27, 31, 43, 47 — none decided.**
 
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
-| **27** | 729 | **−8** | 162.00 | **117** `[search]` (FS-54) | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
+| **27** | 729 | **−8** | 162.00 | **117** `[search]` (FS-54) | **141** `[cert]` (FS-54, level 3; three-point 147) | **6** `[cert]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **200** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | **258** `[search]` | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | **265** `[search]` | **371** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
@@ -62,7 +62,10 @@ first reach at a window member: **23 is in the window** and its 0.8238 is the be
 measurements split two inside the window (23, 27) and two outside (11, 83), and the inside pair alone already spans
 0.8238 to 0.9110 — the reach is not a function of "window or not", and reading it as one would be comparing two things
 at once.
-It sits above `frac5` at 27 (0.9012), so **the certificate does not refuse five there and §S6's P3 is falsified at 27**;
+**FS-54 moved 27 past this: the level-3 relaxation (Gvozdenović–Laurent–Vallentin `L₃`, independent sets of size ≤ 4)
+certifies `α ≤ 141` (`data/fs54/cert-q27-l3-N141.json`, N = 141.593, reach 0.8740), so five is refused at 27 and its floor is
+six.** The three-point sentences that follow are kept as that instrument's record.
+It sits above `frac5` at 27 (0.9012), so **the three-point certificate does not refuse five there and §S6's P3 is falsified at 27**;
 `data/fs53/cert-q27-N147.json` is the CERTIFIED artifact, `α ≤ 147` against the 146 five needs. Read against the other
 cells, a worst-case reach of 0.9110 leaves `frac5` at 43 (0.9362) and 47 (0.9477) refusable with 2.5 % and 3.7 % of
 margin, `frac6` at 79 (0.9471) with 3.6 %, and **`frac6` at 67 (0.9204) with only 0.9 %** — so **Q1's six-refusal at 67

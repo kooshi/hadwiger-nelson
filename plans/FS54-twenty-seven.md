@@ -252,6 +252,9 @@ every record (owed since FS-53).
   reflections 117, the Frobenius class 109), but every solver bound except order 7's is ≥ 132, so nothing at 122 is refused.
   **Every one of the fourteen 117-sets found by any method is 4-rigid**: maximal, with every outside vertex adjacent to at least
   4 of its points.
+* **P8 scored: WON.** The ladder completed 2026-09-16T10:57 (`data/fs54/ladder/`): free-s1 117, rot2 117, rot4 117, rot7 106,
+  rot14 99, rot28 85, line 81, free-s2 117 — every stage at or below 117, target 122 `not_found` throughout; free-s2's
+  117-set re-verified from the definition (`tools/fplane_review_verify.py indep`, INDEPENDENT).
 * **Reading, not a claim:** 117 is a strong attractor. If `α(27) = 117`, then `χ(27) = 7` exactly (`⌈729/117⌉ = 7` and a
   seven-colouring is known) and 27 leaves the window — but proving `α ≤ 121` is 26 integers below the converged certificate.
 
@@ -288,6 +291,60 @@ convergence — approved and launched (pid 550586, resume line in `data/fs54/d4/
 path (producer, standard-library checker, soundness page, controls) as a fresh work order from the pricing page as its
 letter — spawned; (3) **47 next**: refusing six there needs only 0.76 % below the converged 371.84, which would take 47 out
 of the window; priced at ~4 M variables, not yet run; (4) 23 after: five refused if N < 106 (2.35 %).
+
+### D4 — LANDED: five colours refused at 27 (2026-09-16, commit `bacf4a4`)
+**`α(UD(𝔽₂₇,2)) ≤ 141` [cert]** — `data/fs54/cert-q27-l3-N141.json`, N = 1415933445295268663/10¹⁶ ≈ 141.5933, CERTIFIED by
+`tools/fs54_l3_cert_check.py` (standard library, exact; 28 s one process), **re-run by the PO: CERTIFIED, sha256
+`1b6646e3…`**. 5 × 141 = 705 < 729, so **χ(Γ₂₇) ≥ 6**; with the verified 7-colouring, χ ∈ {6, 7}. The certificate agent's
+controls: 21 of 21 as designed (flipped sign, non-PSD block, bumped Gram entry, filed against `t³−t−2` both with and
+without the hash updated, N lowered by 10⁻¹²), canonical form against brute force (0 disagreements; firing with the
+Frobenius dropped), expansion against the definition at the verified 117-set, the identity evaluated exactly at maximum
+sets at 7, 11, 27. Small planes: N = 14.00000007 at 7 and 28.0715 at 11 — **so α(7) = 14 and α(11) = 28 are now
+certified, not the solver's word**. **Credited findings of the certificate agent:** (i) the pricing page's "±1/√|Stab| bases,
+no cosine rounding" is wrong because √2 is irrational — columns are integer ±1 orbit sums with √(stabiliser/group) folded
+into the Gram factor; (ii) soundness needs only that each canonical form is an automorphic image of its set, so a faulty
+canonicaliser can only refuse; (iii) the rounding loss is ~10⁻⁵ and the real cost is Σμ, the iterate's dual infeasibility —
+10,089 its → 142.672, 16,611 → 141.593 (committed), 22,412 → 141.157 (scratch). **P9 scored: WON on the band** (float
+≈ 141.2 ∈ [138, 146]) and the refusal, registered at probability 0.35, happened. **Doubt kept:** the checker imports field
+arithmetic, the rational reader and the exact LDLᵀ from `tools/fplane_cert_check.py`; an independent fresh-eyes read of the
+checker (not a re-run) has not been done and is owed before any outward claim beyond the wall document.
+
+### §R Outside responses to the wall document (2026-09-16)
+Kooshi relayed two responses to `reference/wall-at-six/WALL-AT-SIX.md`, credited to **GPT Astra** (OpenAI) per the standing
+rule — the first written under the Poros procedure. Verbatim copies: `reference/wall-at-six/responses/`. **Every claim was
+checked before any text changed**; the verdicts:
+
+| claim | verdict | how checked |
+|---|---|---|
+| R1.a χ_f = n/α on a vertex-transitive graph; the reading χ = ⌈n/α⌉ is an extra rounding assertion | **correct**; our §5.1 leaned on the reading more than it said, and "at 19 c is above the window, so χ = 5" was a non-sequitur | derivation (standard) |
+| R1.b Zhang Thm 1.8 (independence ratio of a direct product of vertex-transitive graphs is the max) and Zhu's fractional Hedetniemi ⟹ χ_f of a product of targets is the min ⟹ a composite target escapes W only through an integrality gap χ_f ≤ 6 < χ in a factor | **derivation correct**; theorem statements being checked against the papers by a literature agent | read; literature agent |
+| R1.c Hedetniemi is not open at 5–7 (Wrochna Cor. 4.3 at c = 6) | **our text was wrong** — it also contradicted this repository's own `[Tardif2022]` (fails at 4) | literature agent |
+| R1.d "748.8 refuses nothing" at 67 is wrong: ⌊748.83⌋ = 748 < 749 | **correct**; `data/fs53/README.md` already said "clears by nothing at all" — the wall document mis-transcribed it | our records |
+| R1.e "containing a six-chromatic graph ⟹ L ≥ 7 is a local–global gap" overstated; the bold form alone gives χ(ℝ²) = 7 via ℚ(√3,√7,√11), independent of W | **correct**; the same conflation sits in CLAUDE.md G56's closing sentence and Frontier item 11 | derivation |
+| R1.f Slackness at six does not by itself prove "no forced pairs"; vacuous if no six-colouring exists | **correct**; the overclaim is also in CLAUDE.md G56 ("so over a field it seals the residue mechanism forces no pair"), contradicting G54's own "slack but gap-free is logically open" | G54 |
+| R1.g the dispatch: a proof-logging threshold decision for 89 at Γ₂₃ | **declined, with the evidence the response asked for**: `data/fs50/race23/` — CDCL undecided at 900 s on six cardinality encodings at the easier size 106, and `nscale/` undecided even at sizes ABOVE the Hoffman bound 131.76; resolution does not see the spectral bound at 361+ vertices. The question itself (W_f) is adopted; its instrument is the level-3 relaxation, whose nearest member is 47 (0.76 %) | our records |
+| R2.1 u + v = d, uv = d/d̄; char-2 Sidon; \|μ∩(d+μ)\| = 2·Tr(1/N(d)); triangle-free iff m even; K₄ = x + u𝔽₄ for m odd | **correct** — proof read; recomputed for m = 1..6 | `tools/fs54_wall_feedback_verify.py` A |
+| R2.2 U₃₂: Tr_{E/𝔽₄} is a proper 4-colouring; least eigenspace = μ₃₃ (moment polynomial + Weil); every maximum independent set is an 𝔽₄-hyperplane (44); 11 colour partitions | **correct** — every step of the Fourier/Sidon argument read (the equation at a + b, the \|B\| ≤ 3 step, the coefficient equations, b/a ∈ 𝔽₄^×); moments re-derived by hand (991, 959, 63391; P gives 10r + r₁ = 15); finite instances recomputed | A |
+| R2.3 λ ≡ 1 (mod 4) at Q = 64 ⟹ every binary codim-2 subspace holds ≥ 5 units; attained | **correct** — exhaustive minimum 5 recomputed | A |
+| R2.4 a 6- or 7-colouring of U₆₄ has no period subspace of dimension ≥ 8; linear 8-colourings have quotient K₈ | **correct** (three-line proof: a colour class of size ≥ 3 in a cubelike graph spans an independent subgroup of order 4) | read |
+| R2.5 inert towers: λ_min(G_j) = Q^{j−1} λ_min(G₁), degree Q^{j−1}(Q+1), Hoffman constant | **correct** — proof read (lifts along the tangent line; ≤ 2 surviving residue points odd, 1 in char 2; λ_min(G₁) ≤ −2 by an induced C₄); recomputed at q = 3 (levels 1–4), 7 (1–3), 11, 19, 23 (1–2), **27 over GR(9,3) (level 2: −216)**, and Q = 2 over ℤ₂[ω] (1–6); prior art in MMST1998 being checked | B |
+| R2.6 √3 ∈ F ⟹ 3 \| Q + 1 at an inert dyadic prime ⟹ U₆₄ unreachable | **correct** | read |
+| R2.7 a CRT target with χ = 6 has a factor with residue size in {23, 27, 31, 43, 47, 59, 64, 67, 79, 83} | **correct** given the tower theorem, the product Hoffman bound (eigenvalues multiply) and the recorded low-Q colourings | derivation |
+
+Negative controls for the verification script: a tower level with one unit point removed goes red (on the degree check —
+a wrong-reason red, so a second plant perturbs the level-1 value and goes red on the eigenvalue comparison, its faithful twin
+passing); a Q = 64 connection set with one unit swapped for a non-unit fails λ ≡ 1 (mod 4). The response's own appendix
+script reproduces (`data/fs54/wall-feedback/responses-appendix-script.out`). **Latent defect found on the way:**
+`tools/fs54_char2_spectra.py`'s irreducibility test compares x^{2^d} with x instead of taking a gcd, so a reducible modulus
+such as quartic × sextic × quadratic would pass it; its records stand because it asserts |μ_{Q+1}| = Q + 1, which a product
+ring fails, and λ_min(U₆₄) = −15 is now confirmed three ways.
+
+**What changes in the milestone.** (1) The target statement becomes **W_f: α(U_Q) < Q²/6 at 23, 27, 31, 43, 47, 64** —
+it proves W with no heuristic and closes the product hatch; its thresholds are 88, 121, 160, 308, 368, 682. (2) **47 is the
+member where W_f is closest** (368 against the certified 371) and the level-3 relaxation moved 27 by 4.1 %, so the level-3
+solve at 47 is the top compute item. (3) At 27 W_f needs 121 against 141 (14 %): out of the relaxation's reach; 27's
+remaining question is the six-colouring (D5) or a structural bound. (4) The escape-hatch section of the wall document is
+rewritten around the integrality gap and the tower theorem.
 
 ### D5 — the colour search goes non-periodic
 Periodic six-colourings are already excluded at indices 9 and 27. After D1: `plane-colour --q 27 --k 6` seeded with D2's best

@@ -86,7 +86,7 @@ paths forward. Rewritten in place at every milestone close (WORKFLOW step 9); a 
 not update this section is not closed. The understanding the results add up to lives in § Grokkings, under
 the same rule.*
 
-*Last updated: 2026-09-16 — FS-53 closed: the window for an exactly six-chromatic finite Euclidean plane fell from eight members to five, **five colours refused by certificate at 43 and 47** so their floor is six and one verified six-colouring at either settles the question, the certificate side exhausted (23, 27, 31, 47 converged and final), every member's field named, and three grokkings minted (G56, G57, G58) — row 69; **FS-54 twenty-seven opened the same day and is in progress** (`plans/FS54-twenty-seven.md`): α(27) ≥ 117 everywhere against the 122 six needs, a level-3 relaxation reading ≈ 142 under the 146 that refusing five needs, the 2-adic trichotomy (odd-degree fields are 2-colourable), and the wall at six written up for outside help (`reference/wall-at-six/WALL-AT-SIX.md`).*
+*Last updated: 2026-09-16 — FS-53 closed: the window for an exactly six-chromatic finite Euclidean plane fell from eight members to five, **five colours refused by certificate at 43 and 47** so their floor is six and one verified six-colouring at either settles the question, the certificate side exhausted (23, 27, 31, 47 converged and final), every member's field named, and three grokkings minted (G56, G57, G58) — row 69; **FS-54 twenty-seven opened the same day and is in progress** (`plans/FS54-twenty-seven.md`): **five colours refused at 27 by an exact level-3 certificate, α ≤ 141**, so χ(UD(𝔽₂₇,2)) ∈ {6, 7}; α(27) ≥ 117 everywhere against the 122 six needs; the 2-adic trichotomy (odd-degree fields are 2-colourable); and the wall at six written up for outside help (`reference/wall-at-six/WALL-AT-SIX.md`) and answered twice the same day — the fractional wall W_f, U₃₂'s rigidity, the inert-tower Hoffman invariance.*
 
 ### Where the problem stands
 
@@ -146,10 +146,10 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
 11. **The window for six, and who can see it** (G56, row 68). A finite plane UD(𝔽_q, 2) with q ≡ 3 (mod 4) of odd degree can be
    exactly six-chromatic only at **q ∈ {23, 27, 31, 43, 47}** — the exact spectra put 71 at ≥ 7, and exact certificates put 83 and
    **79, 67, 59** at ≥ 7 (α ≤ 1046, 1023, 745, 575; FS-53 phase B), Weil refuses six from 98 — and none of the five is decided
-   (floors 5, 5, 5, **6, 6**; ceilings 8, 7, 8, 8, 10 by verified colourings; no six-colouring found anywhere). **At 43 and 47
-   five is refused by certificate too — α ≤ 365 against the 370 five needs, and ≤ 377 against 442 — so their floor is six, and a
-   single verified six-colouring at either would be the first exactly six-chromatic finite Euclidean plane**; nowhere else does
-   one hit settle it, five being open at 23, 27 and 31. The finding side has reached no threshold anywhere: the best sets are 87
+   (floors 5, **6**, 5, **6, 6**; ceilings 8, 7, 8, 8, 10 by verified colourings; no six-colouring found anywhere). **At 27, 43
+   and 47 five is refused by certificate too — α ≤ 141 (the level-3 relaxation, FS-54) against the 146 five needs, ≤ 365 against
+   370, and ≤ 371 against 442 — so their floor is six, and a single verified six-colouring at any of them would be the first
+   exactly six-chromatic finite Euclidean plane**; nowhere else does one hit settle it, five being open at 23 and 31. The finding side has reached no threshold anywhere: the best sets are 87
    at 23 (against 89 — about 96,000 restarts over three stages, three seeds, eight rotation orders and a line quotient never
    produced 88, on an instrument that attains the true α at 11 in two seconds), 146 at 31 (161), 258 at 43 (309), 265 at 47 (369). No field containing ℚ(√3,√11) can use any of them (3 is a
    non-square at 31, 43, 67, 79 and 11 at 23, 47, 59, 71; at 27, 11 ≡ −1 (mod 3) is a non-square in every 𝔽_q with q ≡ 3 (mod 4)),
@@ -157,8 +157,11 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers. What the window decides is
    whether six is *reachable by the residue method*: no six-chromatic plane means no field has local bound 6, so any field
    holding a six-chromatic unit-distance graph has every usable plane at ≥ 7 and the finite planes can never pin it — under the
-   conjecture's bold form (χ = 7 wherever L ≥ 7) that is χ(ℝ²) = 7 with six a value no field attains; one six-chromatic plane
-   means a field with χ(F²) ≤ 6 by theorem and predicted 6 (FS-53).
+   conjecture six is then a value no field attains (χ(ℝ²) = 7 itself needs only the bold form, at K(√7), and not the window);
+   one six-chromatic plane means a field with χ(F²) ≤ 6 by theorem and predicted 6 (FS-53). **The sharp target is
+   fractional** (G56): χ_f = q²/α on these vertex-transitive graphs, so **α < q²/6 at 23, 27, 31, 43, 47 and U₆₄** (≤ 88, 121,
+   160, 308, 368, 682) proves no target six-chromatic with no rounding heuristic, and closes the composite-ideal hatch too;
+   47 is nearest, 368 against the certified 371.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -266,7 +269,7 @@ closed 2026-09-13** (rows 66–67, G54). **M63** stands at phases H2–H3 closed
 
 | rank | stub | the question | bearing on χ ≥ 6 |
 |---|---|---|---|
-| 1 | **FS-54 twenty-seven — IN PROGRESS** (`plans/FS54-twenty-seven.md`, handoff `plans/SESSION-HANDOFF-2026-09-16-fs54.md`) | what is α(UD(𝔽₂₇,2)), and is that plane six-chromatic? **Every method stops at α ≥ 117** (six needs 122): exhaustive subspace-periodic 117, KaMIS 117 on 7 seeds, every prime-order symmetry class ≤ 117, the Rust ladder 117; all 117-sets 4-rigid. **The upper side moved**: the GLV level-3 relaxation reads ≈ 142 against the converged three-point 147.58 — below the 146 that refusing five needs; an exact certificate is being built. The strangeness is explained: the integer spectrum is Bridges–Mena plus a mod-3 congruence (Moisio's elliptic curves), the triangles are collinear 𝔽₃-lines, |Aut| = 122,472 exactly. Found on the way: **every odd-degree field is 2-colourable** (a ramified prime above 2), the smallest fields per member are quadratic, and **U₆₄ = Cay(𝔽₄₀₉₆, μ₆₅) is a 2-adic window member** (Hoffman floor 6). The outward request for the governing theorem: `reference/wall-at-six/WALL-AT-SIX.md` | **the highest of any open stub in either outcome** — five refused there puts its floor at six at the most achievable threshold in the window; a plateau far below 122 brings the negative close in sight |
+| 1 | **FS-54 twenty-seven — IN PROGRESS** (`plans/FS54-twenty-seven.md`, handoff `plans/SESSION-HANDOFF-2026-09-16-fs54.md`) | what is α(UD(𝔽₂₇,2)), and is that plane six-chromatic? **Every method stops at α ≥ 117** (six needs 122): exhaustive subspace-periodic 117, KaMIS 117 on 7 seeds, every prime-order symmetry class ≤ 117, the Rust ladder 117 at every stage; all 117-sets 4-rigid. **Five refused**: the GLV level-3 certificate gives **α ≤ 141** (`data/fs54/cert-q27-l3-N141.json`, CERTIFIED, 21 controls; also α(7) = 14 and α(11) = 28 exactly), so χ ∈ {6, 7}. **Next: level 3 at 47**, where α ≤ 368 refuses six and proves W_f there (0.76 % below the converged 371.84), then 23 (five if < 106). The strangeness is explained: the integer spectrum is Bridges–Mena plus a mod-3 congruence (Moisio's elliptic curves), the triangles are collinear 𝔽₃-lines, |Aut| = 122,472 exactly. Found on the way: **every odd-degree field is 2-colourable** (a ramified prime above 2), the smallest fields per member are quadratic, and **U₆₄ = Cay(𝔽₄₀₉₆, μ₆₅) is a 2-adic window member** (Hoffman floor 6). The outward request for the governing theorem: `reference/wall-at-six/WALL-AT-SIX.md` | **the highest of any open stub in either outcome** — five refused there puts its floor at six at the most achievable threshold in the window; a plateau far below 122 brings the negative close in sight |
 | 2 | FS-55 the antipodal conjecture — `plans/STUB-antipodal-colouring.md` | does every plane have an optimal colouring symmetric under z ↦ −z up to a colour involution? True at all four planes where χ is known. It would halve every colouring instance and make a symmetry-restricted search **complete**; and 32 % of this project's "solver refusals" in equivariant sweeps are free by the fixed-colour argument, which the tool should filter | medium-high as an instrument, not a decider of six |
 | 2 | FS-45 chain, don't spindle — `plans/STUB-chain-theorem.md` | GPT Astra's chain theorem in the kernel with its instances: the 18-vertex ℚ(√2,√3) graph, and `five_le_chromaticNumber_planeOver (K(√7))` from eight copies of the 588-core 8/3 forcer with its pinned refusal as an LRAT | none on six directly; medium, mechanism |
 | 3 | FS-47 the unit-vector ring in the kernel — `plans/STUB-unit-vector-ring-kernel.md` | prime inversion (1/p ∈ R iff no stable prime above p, by lying-over — M56 L7's conjecture), the two-colour classification of every real number field, χ ≥ 5 for every wall-broken F ⊇ K; closes row 57's hand step from the ring side | none; medium, mechanism |
@@ -576,7 +579,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   proper subfield ℚ(√3,√5,√11)**, never about de Grey's field. The 5-sealed witnesses are Heule-510/553 —
   ℚ-span rank **8**, ℚ(√3,√5,√11), no √7 — where row 52's bound is exactly tight against
   `chromaticNumber_heule510` = 5. Moorhouse §9's bar on a composite ideal beating the best prime rests on
-  Hedetniemi's conjecture, which `[Shitov2019]` refuted, so it is not a bar (FS-42). The shadow sieve: an object's direction residues seal every graph built from
+  Hedetniemi's conjecture, which `[Shitov2019]` refuted, so it is not a bar (FS-42) — but the *fractional* chromatic number
+  of a categorical product is the minimum of its factors' (`[Zhu2011]`; for vertex-transitive factors the independence
+  ratio is the maximum, `[Zhang2012]`), so a composite ideal beats its best prime only through an **integrality gap**
+  χ_f ≤ k < χ in some factor (outside review, 2026-09-16). The shadow sieve: an object's direction residues seal every graph built from
   those directions.
 * **G44 — Kloosterman control. [derived + measured; ω facts prior art]** UD(𝔽_p, 2) has eigenvalues
   −K(1, c/4), so Weil and Hoffman force χ > 5 from p = 59 and χ > 6 from p = 103 (exact spectra; 71 as well), and at 83 six is
@@ -676,7 +682,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   Blokhuis–Brouwer–Haemers's, the periodicity ours). The middle case — slack but gap-free — is logically open and
   unobserved (at 11 no 5-colouring has every vertex gapped, on two engines). Both properties **propagate up a tower**
   whose level maps carry `S_{m+1}` onto `S_m` with constant fibres (`λ_min/d` is non-increasing under pullback),
-  which is why the 2-adic tower is tight and the 11-adic tower slack at every level. The table: tight at 3 (k = 3;
+  which is why the 2-adic tower is tight and the 11-adic tower slack at every level. **In an inert tower the ratio is exactly
+  constant** (GPT Astra, 2026-09-16, hand; recomputed at 3, 7, 11, 19, 23, 27 and 2 by `tools/fs54_wall_feedback_verify.py`):
+  λ_min(G_j) = Q^{j−1}·λ_min(G₁) with degree Q^{j−1}(Q+1), so every Hoffman floor survives every level. **Tight can be rigid
+  and still force nothing** (same review, recomputed): at U₃₂ = Cay(𝔽₁₀₂₄, μ₃₃), k = 4, the least eigenspace is exactly
+  μ₃₃, the unit circle is a Sidon set, so a maximum independent set's Fourier support is {0, a, b, a+b} and **every maximum
+  independent set is an 𝔽₄-hyperplane** — eleven four-colourings, with trivial common kernel. The table: tight at 3 (k = 3;
   the rhombus forces, row 58) and at 2 (k = 4; forced from level 5, row 67); slack at 7 (k = 4) and at 11, 19, 23
   (k = 5) and 83 (k = 6); by Weil, tightness at k needs `(p+1)/(k−1) ≤ 2√p`, so no usable prime above 3 in the
   committed table is tight for any k ≤ 7 (p = 31 misses 4-tightness by 4.4·10⁻⁵). **What it says about six:** the
@@ -710,7 +721,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   it at 71, and 83 — the last prime where six was spectrally possible — refuses it by certificate (row 68). Five is refused from
   59 up. Over the residue fields a number field can have (𝔽_q, q ≡ 3 (mod 4), odd degree), **a plane with χ exactly 6 can live
   only at q ∈ {23, 27, 31, 43, 47}** — 59, 67 and 79 refused six by exact certificate (FS-53 phase B: α ≤ 575, 745, 1023, each
-  CERTIFIED with its LDL green and 18 of 18 cuts agreeing); floors 5, 5, 5, 6, 6 — five is refused by certificate at 43 and 47 —
+  CERTIFIED with its LDL green and 18 of 18 cuts agreeing); floors 5, 6, 5, 6, 6 — five is refused by certificate at 27 (the
+  level-3 relaxation, α ≤ 141, FS-54), 43 and 47 —
   and ceilings 8, 7, 8, 8, 10 by verified colourings (`data/fplane/periodic-below-71.json`, `data/fs53/`); none decided: five is CDCL-undecided or
   spectrally refused at every one, and no six-colouring was found by local search (23, 31, 43, 47) or by the subgroup-periodic
   sweep at 27 (exhaustive at indices 9 and 27). A prime is usable for a field only if the field's radicands are all squares in
@@ -755,17 +767,23 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   the prime 11 at residue degree 2. The next usable prime powers are 3⁵ = 243 and 7³ = 343, far beyond the cap, so the
   tooling's prime-only assumption costs exactly one member and no more. **What the window decides is whether six is reachable by the residue method at all**, since χ(ℝ²) = sup_F χ(F²): no
   six-chromatic window plane ⟹ no field has local bound 6 ⟹ every field holding a six-chromatic unit-distance graph has all
-  its usable planes at ≥ 7, so the finite planes can never pin six — and under the bold form of the conjecture (χ(F²) = 7
-  wherever L(F) ≥ 7) χ(ℝ²) = 7, with six a value no field attains though every seven-chromatic graph passes through it; one
+  its usable planes at ≥ 7, so the finite planes can never pin six — and under the conjecture six is a value no field
+  attains, though every seven-chromatic graph passes through it (χ(ℝ²) = 7 follows from the bold form at K(√7) alone, without
+  the window; a field merely *containing* a six-chromatic graph may have χ(F²) = 7 = L, which is no local–global gap); one
   six-chromatic plane ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness. The
   clique structure decides which field can see which member, and rules the Moser spindle out of every one of them
   (G57). Every window plane is slack at six — at 23, 27, 31, 43, 47, 67 by divisibility (Hoffman-tightness at k needs (k−1) | (q+1), and
-  5 ∤ q + 1), at 59 and 79 by the exact spectrum — so over a field it seals the residue mechanism forces no pair (G54): a
-  six-forcer there is built, not transported. The registered reading is **χ = ⌈q²/α⌉ at every plane** (true at 3 and 11,
-  consistent at 7 and 19; it replaces the "+1 over the spectral floor" reading, which fails at the Hoffman-tight q = 3), under
-  which α decides χ: the calibrated searcher's plateau α(23) = 87 against the 89 six needs is the advisor's 2:1 bet that 23 is
-  empty, and FS-53 scores it. *Killing test of the exclusion: a usable window member for some field containing ℚ(√3,√11) —
-  impossible by reciprocity; of the reading: a decided plane with χ ≠ ⌈q²/α⌉.*
+  5 ∤ q + 1), at 59 and 79 by the exact spectrum — so the tight mechanism, which forces pairs in every colouring, is not
+  available there. *Demotion record: this sentence went on "so over a field it seals the residue mechanism forces no pair";
+  slack only permits gaps (G54's middle case is open), no six-colouring of any window plane is known, and an outside review
+  (2026-09-16) caught the overreach.* **The rounding reading:** on a vertex-transitive graph χ_f = q²/α, so χ ≥ ⌈q²/α⌉ is a
+  theorem and only the equality **χ = ⌈q²/α⌉** is the reading (true at 3, 7, 11; consistent at 19; it replaces the "+1 over
+  the spectral floor" reading, which fails at the Hoffman-tight q = 3). **The fractional wall W_f** — α(U_Q) < Q²/6 at
+  23, 27, 31, 43, 47 and 64 — proves the window empty with no reading at all, and by `[Zhu2011]`/`[Zhang2012]` rules six out for
+  every CRT product of first-level targets; a composite target with χ = 6 needs a factor of residue size in {23, 27, 31, 43,
+  47, 59, 64, 67, 79, 83} at some tower level (the Hoffman floor is constant up inert towers, G54). *Killing test of the
+  exclusion: a usable window member for some field containing ℚ(√3,√11) — impossible by reciprocity; of the reading: a decided
+  plane with χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.*
 * **G57 — The window is triangle-free where it is roomy, and no candidate field holds a Moser spindle. [derived;
   the clique rule is `[Krebs2022]`, verified here; the correspondence and its consequence are ours]** Three mutual unit
   distances force an equilateral triangle, whose apex is `(1/2, √3/2)`, so **`ω(unit-distance graph over F) = 3` iff

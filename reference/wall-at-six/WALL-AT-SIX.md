@@ -31,20 +31,27 @@ give a third family of targets, Cay(𝔽_{Q²}, μ_{Q+1}) with Q a power of 2, o
 | target | χ, in order of size |
 |---|---|
 | Γ_q, q = 3, 7, 11, 19 | **3, 4, 5, 5** (upper bounds by explicit colourings; lower bounds proved at 3 and 11, a solver's refusal at 7 and 19) |
-| Γ_q, q = 23, 27, 31 | ≥ 5, and every search says ≥ 7 |
-| Γ_q, q = 43, 47 | ≥ 6 by exact certificate, and every search says ≥ 7 |
+| Γ_q, q = 23, 31 | ≥ 5 proved; the largest independent sets found would force ≥ 7 if they were maximum |
+| Γ_q, q = 27, 43, 47 | ≥ 6 by exact certificate; the largest independent sets found would force ≥ 7 if they were maximum |
 | Γ_q, every other usable q | **≥ 7**, proved (exact certificates at 59, 67, 79, 83; exact spectrum at 71; Weil's bound from 98 on) |
 | 2-adic targets, Q = 2, 4, 8, 16, 32 | **4** (explicit colourings; lower bounds by Hoffman, and at Q = 4 a solver's refusal) |
 | 2-adic target, Q = 64 | 6 ≤ χ ≤ 8, open |
 | 2-adic targets, Q ≥ 128 | **≥ 7**, proved (≥ 8 at 128, Weil's bound beyond) |
 
 **No target is known to be six-chromatic, and the evidence at every undecided one argues against it.** If the wall is real,
-then **no number field has a residue bound of exactly 6**: every field's bound is ≤ 5 or ≥ 7. Combined with a local–global
-conjecture that is proved for bounds up to 3 (all real fields), 4 (fields containing √3) and 5 (a large family), it would give
-**χ(ℝ²) = 7**, with six a value no number field attains.
+then **no number field has a residue bound of exactly 6**: every field's bound is ≤ 5 or ≥ 7. We have a local–global
+conjecture, χ(F²) = L(F), proved for bounds up to 3 (all real fields), 4 (fields containing √3) and 5 (a large family).
+**Its bold form alone already gives χ(ℝ²) = 7**, through a field whose bound is ≥ 7 (§1.5), and it does not need W.
+**What W adds is that six would be a value no number field attains**: under the conjecture every χ(F²) would lie in
+{2, 3, 4, 5, 7}.
 
 **What we have is a pattern, proofs at both ends, six open cases in the middle, and no explanation.** We would like the
 theorem — or the counterexample.
+
+**The sharpest form of the question** (from the first response, §0.3). For a vertex-transitive graph the fractional
+chromatic number is χ_f = |V|/α, and χ ≥ ⌈χ_f⌉. So **α(U_Q) < Q²/6 at the six open targets would prove W outright**, with
+no appeal to any rounding heuristic. Because the fractional chromatic number of a categorical product is the minimum over its
+factors, the same inequality would also rule out six for every composite residue target built from them (§6.3).
 
 ### 0.2 Trust levels used below
 
@@ -57,6 +64,17 @@ theorem — or the counterexample.
 | **[solver]** | a SAT solver's refusal — untrusted; stated with its budget |
 | **[found]** | an explicit object (independent set, colouring) verified from the definition by an independent script. A *found* independent set proves a lower bound on α and nothing else |
 | **[null]** | a search that did not find something at a stated budget — evidence, never a refusal |
+
+### 0.3 Responses received
+
+The first version of this document went out on 2026-09-16. Two responses came back the same day, and this version
+incorporates them. Both are kept verbatim beside this file in `responses/`. **Credit:** GPT Astra (OpenAI, via the workspace's
+owner); the first response was written under the Poros review procedure.
+
+| response | what it established | how we checked it | where it changed this text |
+|---|---|---|---|
+| **The fractional wall** | For vertex-transitive graphs, χ_f = \|V\|/α. Zhang's theorem on independence ratios of direct products (and Zhu's fractional Hedetniemi theorem) gives χ_f(G × H) = min(χ_f(G), χ_f(H)). So a composite target escapes W only through an **integrality gap**, a factor with χ_f ≤ 6 < χ. It also found **five errors in the first version**: the six-window's upper edge used a rounding heuristic without saying so; Hedetniemi's status was out of date; one sentence about q = 67 was wrong; the field-side consequence of a six-chromatic graph was overstated; and a slackness claim was unproved | theorem statements checked against the papers (§C); the five errors confirmed against our own records | §0.1, §2, §3.2, §5.1, §6.3, §7.3, §8 |
+| **Algebraic mechanisms** | (i) Two unit vectors are determined by their sum: u + v = d, uv = d/d̄. In characteristic 2 the unit circle is therefore a Sidon set, with an exact common-neighbour formula; U_{2^m} is triangle-free iff m is even. (ii) **U₃₂: every maximum independent set is an 𝔽₄-hyperplane**: 44 of them, and 11 four-colourings up to colour names. (iii) λ ≡ 1 (mod 4) at Q = 64, so every binary codimension-2 subspace contains ≥ 5 unit vectors, which is why linear four-colourings stop at 64. (iv) **In an inert prime-power tower, λ_min and the degree both scale by Q^{j−1}**, so the Hoffman bound is constant up the tower. (v) A field containing √3 cannot reach U₆₄ | every proof read line by line; every finite instance recomputed by independent code (a different field polynomial, characters via a trace mask, tower levels over (ℤ/p^j)² and GR(9,3)) — `tools/fs54_wall_feedback_verify.py`, output in `data/fs54/wall-feedback/`; the response's own script reproduces | §1.2, §1.4, §4.4, §6.3, §7.1, §8 |
 
 ---
 
@@ -99,6 +117,17 @@ For a prime power Q write
 * **Clique number** (Krebs 2022): ω(Γ_q) = 3 if q is a power of 3 or 3 is a square in 𝔽_q, and 2 otherwise.
 * **Colour-class necessity**: a k-colouring needs α ≥ ⌈Q²/k⌉. So **α < Q²/6 refuses six colours**, and α < Q²/5 refuses
   five.
+* **Fractional chromatic number.** Because U_Q is vertex-transitive, χ_f(U_Q) = Q²/α(U_Q), and always χ ≥ ⌈χ_f⌉. The
+  colour-class necessity above is exactly this inequality. The converse "rounding" χ = ⌈χ_f⌉ is **not** a theorem. We use
+  it only as a labelled reading: it holds at q = 3, 7 and 11, and it is consistent with the bounds at 19.
+* **Two unit vectors are determined by their sum** [proof; second response, §0.3]. If u, v ∈ μ_{Q+1} and u + v = d ≠ 0,
+  then uv = d/d̄, because conjugation inverts units. So {u, v} is the root set of X² − dX + d/d̄, and two distinct vertices
+  have at most two common neighbours. That is the finite form of "two unit circles meet in at most two points".
+  * In characteristic 2 this makes μ_{Q+1} a Sidon set, with an exact count: |μ ∩ (d + μ)| = 2 when
+    Tr_{𝔽_Q/𝔽₂}(1/N(d)) = 1, and 0 otherwise.
+  * Hence U_{2^m} is **triangle-free when m is even**. When m is odd, every edge lies in exactly one K₄, a coset x + u𝔽₄.
+  * In characteristic 3, with d itself a unit, the polynomial is (X + d)². That is why every edge of Γ₂₇ lies in exactly one
+    triangle, and why that triangle is a straight line (§7.1).
 
 ### 1.3 The residue bound at odd primes
 
@@ -139,13 +168,14 @@ is 2, for every real number field.)
 | 4 | 16 | 5 | −3 | 2.67 | **4** (3 refused [solver]) |
 | 8 | 64 | 9 | −3 | 4.00 | **4** |
 | 16 | 256 | 17 | −7 | 3.43 | **4** |
-| 32 | 1,024 | 33 | −11 | 4.00 | **4** |
-| **64** | 4,096 | 65 | **−15** | **5.33** | **6 ≤ χ ≤ 8** — a linear 8-colouring is known; 6 and 7 open |
+| 32 | 1,024 | 33 | −11 | 4.00 | **4** — the trace 𝔽₁₀₂₄ → 𝔽₄ is a proper colouring, and it is essentially the only one (§4.4) |
+| **64** | 4,096 | 65 | **−15** | **5.33** | **6 ≤ χ ≤ 8** — triangle-free; a linear 8-colouring is known; 6 and 7 open |
 | 128 | 16,384 | 129 | −19 | 7.79 | ≥ 8 |
 
 So **the 2-adic side gives 2 or 4 up to Q = 32, jumps to ≥ 6 at Q = 64, and ≥ 8 beyond** — the same shape of jump as the
 odd side. Q = 64 is realised only by fields of degree ≥ 12: an inert 𝔭 needs F_𝔭 ramified over ℚ₂ (e ≥ 2) and
-residue degree 6.
+residue degree 6. **No field containing √3 realises it** [proof; second response]. Such a field makes ω = (−1 + √−3)/2 a unit
+vector, and at an inert prime above 2 it reduces to an element of order 3 in μ_{Q+1}, which needs 3 | Q + 1; but 3 ∤ 65.
 
 ### 1.5 The local bound, and the conjecture it serves
 
@@ -177,10 +207,28 @@ six-chromatic, the explicit field of §6.2 for that member would have first usab
 every prime above 2 split in F(i), hence L = 6. For the 2-adic member U₆₄ a field realising it needs degree ≥ 12 (§1.4); we
 expect one exists but have not exhibited it.
 
+**W_f (the fractional wall).** *α(U_Q) < Q²/6 for Q ∈ {23, 27, 31, 43, 47, 64}*, equivalently χ_f(U_Q) > 6 there.
+
+**W_f ⟹ W, with no heuristic** [proof]: the proven ends settle every other Q, and χ ≥ ⌈χ_f⌉ > 6 at these six. W_f is
+strictly stronger than W, since a target could have χ ≥ 7 with χ_f ≤ 6. It also closes the composite-ideal escape hatch
+(§6.3). One independent set of size ⌈Q²/6⌉ at any of the six refutes W_f and leaves W open there.
+
+| Q | largest set known | best certified α ≤ | W_f needs α ≤ | refuted by a set of |
+|---|---|---|---|---|
+| 23 | 87 | 108 | 88 | 89 |
+| 27 | 117 | **141** | 121 | 122 |
+| 31 | 146 | 200 | 160 | 161 |
+| 43 | 258 | 365 | 308 | 309 |
+| 47 | 265 | 371 | **368** | 369 |
+| 64 | 512 (from the linear 8-colouring) | 768 (Hoffman) | 682 | 683 |
+
 **What W would give.**
-* With the conjecture: χ(F²) ∈ {2, 3, 4, 5, 7} for every real number field, and χ(ℝ²) = 7.
-* Without it: **the residue method can never certify six.** Any field carrying a six-chromatic unit-distance graph would
-  have L ≥ 7, a local–global gap.
+* With the conjecture: χ(F²) ∈ {2, 3, 4, 5, 7} for every real number field, so six is a value no field attains.
+  (χ(ℝ²) = 7 needs only the conjecture's bold form, applied to ℚ(√3,√7,√11); W is not needed for that.)
+* Without it: **the residue method can never certify six as an upper bound.** A field whose plane is *exactly*
+  six-chromatic would have L ≥ 7, a local–global gap. A field that merely *contains* a six-chromatic unit-distance graph may
+  have χ(F²) = 7 = L, which is no gap. *(Corrected after the first response: the first version said "carrying a
+  six-chromatic graph".)*
 * Either way, a proof of W is a structural statement about Hadwiger–Nelson at the level of finite fields.
 
 **Status.**
@@ -188,7 +236,7 @@ expect one exists but have not exhibited it.
 | range | status |
 |---|---|
 | Q ∈ {2, 3, 4, 7, 8, 11, 16, 19, 32} | χ ≤ 5: **W holds** [exact / kernel at 11, 19] |
-| Q ∈ {59, 67, 71, 79, 83} and every Q ≥ 98 of either family, and Q = 128 | χ ≥ 7: **W holds** [cert / exact spectrum / Weil] |
+| Q ∈ {59, 67, 71, 79, 83} and every Q ≥ 98 of either family, and Q = 128 | χ ≥ 7: **W holds**, and so does its fractional form, α < Q²/6 [cert / exact spectrum / Weil] |
 | **Q ∈ {23, 27, 31, 43, 47} (odd) and Q = 64 (2-adic)** | **open** — six is possible on the proven bounds; every search argues against it (§4) |
 
 ---
@@ -221,17 +269,19 @@ it does not reach any window member.
 | 79 | 1023 (1023.382) | 1041 | 1099.19 |
 | 83 | 1046 (1046.716) | 1149 | 1199.46 |
 
-At 67 the margin is four integers, and it took a well-converged dual to get there: a shorter polish rounded to 748.8, which
-refuses nothing.
+At 67 the margin is four integers. A shorter polish of the same solve rounded to 748.83. That still refuses six,
+because ⌊748.83⌋ = 748 < 749, but with nothing to spare; the longer polish bought three more integers. *(Corrected after the
+first response: the first version said the 748.8 bound refused nothing.)*
 
-### 3.3 Five refused at 43 and 47
+### 3.3 Five refused at 27, 43 and 47
 
-| q | certified α ≤ | five needs α ≥ | so χ ≥ |
-|---|---|---|---|
-| 43 | 365 (365.917) | 370 | **6** |
-| 47 | 371 (371.840) | 442 | **6** |
+| q | certified α ≤ | five needs α ≥ | so χ ≥ | relaxation |
+|---|---|---|---|---|
+| 27 | **141** (141.593) | 146 | **6** | level 3 (§4.3, §B) |
+| 43 | 365 (365.917) | 370 | **6** | three-point |
+| 47 | 371 (371.840) | 442 | **6** | three-point |
 
-At these two, **a single verified six-colouring would be the exact chromatic number**. None has been found.
+At these three, **a single verified six-colouring would be the exact chromatic number**. None has been found.
 
 ---
 
@@ -242,12 +292,13 @@ At these two, **a single verified six-colouring would be the exact chromatic num
 | q | Hoffman α ≤ | certified α ≤ | largest set **found** | six needs | five needs | χ | best colouring found |
 |---|---|---|---|---|---|---|---|
 | 23 | 131.76 | 108 (108.546) | **87** | 89 | 106 | 5 ≤ χ ≤ 8 | 8, **kernel-checked** |
-| 27 | 162 (exactly) | 147 (147.578) | **117** | 122 | 146 | 5 ≤ χ ≤ 7 | 7 |
+| 27 | 162 (exactly) | **141** (141.593, level 3; three-point 147.578) | **117** | 122 | 146 | **6** ≤ χ ≤ 7 | 7 |
 | 31 | 240.25 | 200 (200.881) | **146** | 161 | 193 | 5 ≤ χ ≤ 8 | 8 |
 | 43 | 395.23 | 365 (365.917) | **258** | 309 | 370 | 6 ≤ χ ≤ 8 | 8 |
 | 47 | 466.39 | 371 (371.840) | **265** | 369 | 442 | 6 ≤ χ ≤ 10 | 10 |
 
-**If the found independence numbers are the true ones, every window member has χ ≥ 7**: 529/87 = 6.08, 729/117 = 6.23,
+**If the found independence numbers are the true ones, every window member has χ ≥ 7**, because χ ≥ ⌈q²/α⌉ always:
+529/87 = 6.08, 729/117 = 6.23,
 961/146 = 6.58, 1849/258 = 7.17, 2209/265 = 8.34. The gap between "found" and "certified" is the whole problem.
 
 ### 4.2 The instruments, and why the nulls are believable
@@ -256,8 +307,9 @@ At these two, **a single verified six-colouring would be the exact chromatic num
   **Calibration**: the Rust engine attains the true α at q = 11 (28) in two seconds, and the certificate there is 29.18.
 * **Colourings** — Rust local search at fixed k, with checkpointed resumable runs; a subgroup-quotient sweep; an equivariant
   SAT sweep (colourings invariant under a rotation, up to a colour permutation).
-* **Upper bounds** — the exact certificates of §B. **At 23, 27, 31 and 47 the semidefinite solve is converged**, so those
-  bounds will never improve by this method. Only 43's is a stopped iterate.
+* **Upper bounds** — the exact certificates of §B. **At 23, 27, 31 and 47 the three-point solve is converged**, so that
+  relaxation will never improve those bounds. Only 43's is a stopped iterate. The next level of the hierarchy is a
+  different relaxation, and at 27 it moved the bound from 147 to 141 (§4.3).
 
 ### 4.3 Per member
 
@@ -284,10 +336,14 @@ At these two, **a single verified six-colouring would be the exact chromatic num
   must remove four, which is why local search stalls.
 * The subgroup-quotient colouring sweep is exhaustive at indices 9 and 27: no six-colouring is periodic there [exact]. The
   best periodic colouring found uses 7 colours.
-* **Upper side, in progress:** the next level of the semidefinite hierarchy — Gvozdenović–Laurent–Vallentin's `L₃`, whose
-  variables are the orbits of independent sets of size ≤ 4 (77,238 at 27) — reads **143.06** in floating point at 8,000
-  iterations and still falling, against the converged three-point 147.58 [a reading, **not** a bound]. If an exact rational
-  certificate confirms ⌊N⌋ ≤ 145, **five colours are refused at 27** and its floor is six. The certificate is being built.
+* **Upper side: five colours refused** [cert]. The next level of the semidefinite hierarchy is Gvozdenović–Laurent–
+  Vallentin's `L₃`, whose variables are the orbits of independent sets of size ≤ 4: 77,238 of them at 27, in 102 blocks. It
+  certifies **α ≤ 141** (N = 141.593), against the converged three-point 147.578. So 5 × 141 = 705 < 729, and **χ(Γ₂₇) ≥ 6**.
+  * The checker uses the Python standard library only and rebuilds the plane, the group and every constraint from q and
+    the modulus. It passed 21 of 21 planted-fault controls.
+  * The same instrument certifies N = 14.00000007 at q = 7 and 28.07 at q = 11, so there it gives the exact α (14 and 28).
+  * The floating-point solve is still converging: a later iterate rounds to 141.16. But W_f at 27 needs α ≤ 121, 14 %
+    further down, which is beyond anything this relaxation has shown.
 
 **q = 31** — six needs 161; plateau **146** (75,852 restarts in one chained hour alone) [null]. Six-colour search: 195 of
 15,376 edges monochromatic after 1,800 s × 3 threads [null].
@@ -300,8 +356,8 @@ At these two, **a single verified six-colouring would be the exact chromatic num
 * Equivariant sweep: 21 classes, 0 colourable, 18 refused [solver].
 
 **q = 47** — six needs 369 against a certified 371, so **the certificate would have to be 99.4 % tight**. The level-3
-relaxation that moves 27 by about 3 % would need to move 47 by only **0.76 %** (below 369) to refuse six outright and take 47
-out of the window; it has been priced there, not run. The only plane
+relaxation moved 27 by 4.1 % (147.578 → 141.593). It would need to move 47 by only **0.76 %** (below 369) to refuse six
+outright, prove W_f at 47, and take 47 out of the window. It has been priced there, not run. The only plane
 where tightness like that has been observed is q = 7 (α/N = 0.9938); at q = 11 it is 0.9597.
 * Plateau 265; the six-colour search stalled at 1,851 monochromatic edges [null].
 * Equivariant sweep: 63 classes, 0 colourable, 59 refused [solver].
@@ -313,8 +369,31 @@ about a third of them follow in one line from the fact that a rotation fixes the
 ### 4.4 The 2-adic member Q = 64
 
 U₆₄ has 4,096 vertices and degree 65. Hoffman gives χ ≥ 6 (α ≤ 768; six needs α ≥ 683), and a linear 8-colouring exists
-[found], so 6 ≤ χ ≤ 8. It has not been searched seriously. It is the only 2-adic target in the window, reachable only by
-fields of degree ≥ 12, and **it is the cheapest place a counterexample to W could hide that nobody has looked**.
+[found], so 6 ≤ χ ≤ 8. It is the only 2-adic target in the window, reachable only by fields of degree ≥ 12, none of which
+contains √3 (§1.4).
+
+**Why the smaller 2-adic targets are four-colourable, and why that stops at 64** [proof; second response; every finite
+instance recomputed here]:
+* **At Q = 32 the four-colouring is forced to be linear.** The relative trace T : 𝔽₁₀₂₄ → 𝔽₄ never vanishes on μ₃₃
+  (μ₃₃ = 𝔽₄^× · μ₁₁; the powers of 4 modulo 11 are the quadratic residues and 2 is a non-residue, so the trace of a
+  primitive 11th root of unity is a root of X² + X + 1), so
+  x ↦ T(x) is a proper four-colouring. The least eigenvalue −11 occurs exactly at the characters indexed by μ₃₃ (a
+  moment-polynomial argument with Weil's bound). A maximum independent set meets Hoffman's bound with equality, so its
+  indicator's Fourier transform lives on {0} ∪ μ₃₃. The Sidon property then forces that support to be {0, a, b, a + b}.
+  **So every maximum independent set is an 𝔽₄-hyperplane Tr(ax) = c** (44 of them), and **every four-colouring is one of
+  11 parallel classes**, up to naming the colours.
+* **At Q = 64 no linear four-colouring can exist.** Every eigenvalue is ≡ 1 (mod 4), because μ₆₅ sums to zero. So
+  λ_min ≥ −15, and every binary codimension-2 subspace contains at least (65 − 45)/4 = 5 unit vectors. The bound is
+  attained: exhaustively, the minimum is exactly 5.
+* **Constraints on a six- or seven-colouring of U₆₄.** A cubelike graph on at most 16 vertices that is 7-colourable is
+  4-colourable, since a colour class of size ≥ 3 spans an independent subgroup of order 4. So **a six- or seven-colouring
+  cannot be periodic under any 𝔽₂-subspace of dimension ≥ 8**. Also, every linear eight-colouring has quotient K₈, so no
+  two of its classes can be merged.
+* The rigidity argument at 32 rests on Hoffman *equality*. At 64 Hoffman is slack (768 against 683), so it does not
+  transfer as stated. A stability version (near-equality forces near-hyperplane structure) is one route to W_f at 64 that we
+  have not pursued.
+
+A first SAT attempt at k = 6 and 7 (symmetry pins only) is running at the time of writing.
 
 ---
 
@@ -322,9 +401,11 @@ fields of degree ≥ 12, and **it is the cheapest place a counterexample to W co
 
 ### 5.1 One normalisation makes the pattern visible
 
-Put **c(q) := α(Γ_q) / q^{3/2}**. Hoffman plus Weil gives c ≤ 2 + o(1). Six colours need c ≥ √q/6; five need c ≥ √q/5. So
-**Γ_q can be exactly six-chromatic only if c(q) ∈ [√q/6, √q/5)** (under the reading χ = ⌈q²/α⌉, which holds at 3 and 11 and
-is consistent at 7 and 19).
+Put **c(q) := α(Γ_q) / q^{3/2}**. Hoffman plus Weil gives c ≤ 2 + o(1). Six colours need c ≥ √q/6 — **unconditionally**,
+since each colour class is independent. The other edge is not unconditional: c ≥ √q/5 means χ_f ≤ 5, and a graph can have
+χ_f ≤ 5 < χ. So the **six-window [√q/6, √q/5)** is where Γ_q can be exactly six-chromatic *under the rounding reading*
+χ = ⌈χ_f⌉ (§1.2); without that reading, only the lower edge is a necessary condition. *(Corrected after the first response,
+which pointed out that the first version's argument leaned on the reading more than it said.)*
 
 | q | c from the **largest set found** | c from the **certificate** | six-window [√q/6, √q/5) |
 |---|---|---|---|
@@ -332,7 +413,7 @@ is consistent at 7 and 19).
 | 11 | 0.768 (exact α) | 0.800 | [0.553, 0.663) |
 | 19 | ≥ 0.918 (found 76) | — | [0.726, 0.872) |
 | **23** | **0.789** | 0.984 | **[0.799, 0.959)** |
-| **27** | **0.834** | 1.052 | **[0.866, 1.039)** |
+| **27** | **0.834** | 1.009 (level 3) | **[0.866, 1.039)** |
 | **31** | 0.846 | 1.164 | [0.928, 1.114) |
 | **43** | 0.915 | 1.298 | [1.093, 1.311) |
 | **47** | 0.822 | 1.154 | [1.143, 1.371) |
@@ -345,7 +426,7 @@ What the table shows:
 * **The found values of c sit in a narrow band, 0.75–0.92, for every q from 7 to 83.**
 * The six-window moves up like √q. It crosses that band only for q roughly between 14 and 30, and the elements of 𝒬 in that
   range are 19, 23 and 27.
-* **At 19 the found c is above the window**, so χ = 5.
+* **At 19 the found c is above the window**, consistent with χ = 5, which an explicit colouring proves.
 * **At 23 and 27 it lands just below the window**: 0.789 against 0.799, and 0.834 against 0.866.
 * From 31 upward the window is out of reach of the band, and the certificates close it from 59 on.
 
@@ -353,15 +434,16 @@ What the table shows:
 
 **Reading A — a theorem.** Some structural reason keeps α(Γ_q) out of [q²/6, q²/5), or keeps χ(Γ_q) ≠ 6 by other means.
 The data's sharpness argues for this reading if the true c(23) and c(27) sit strictly below their windows. That would need
-an upper bound far stronger than every relaxation we have: the three-point certificate gives c = 0.98 and 1.05 there, while
-the truth appears to be about 0.79 and 0.83.
+an upper bound far stronger than every relaxation we have: the best certificates give c = 0.98 (three-point) and 1.01
+(level 3) there, while the truth appears to be about 0.79 and 0.83.
 
 **Reading B — an arithmetic near miss.** c(q) is a slowly varying function of q, 𝒬 is sparse, and the window of q where
 six is plausible happens to contain only 23 and 27, both of which fall just short. Under this reading there is no theorem,
-and a small change (another residue ring, §6.3) could land on six.
+and a small change could land on six: another member of the family, or a composite residue ring whose factor has an
+integrality gap (§6.3).
 
 **What would separate them:**
-* the true α(Γ₂₃) (is it 87 or 88, or 89 or more?);
+* the true α(Γ₂₃) (is it 87 or 88, or 89 or more?), or any exact α at an open member;
 * a proof that α(Γ_q) ≤ 0.8 q^{3/2} for some range;
 * a six-colouring of U₆₄;
 * the behaviour of the analogous graphs with q ≡ 1 (mod 4) (§6.4), which have no role for fields but are the same kind of
@@ -374,15 +456,16 @@ and a small change (another residue ring, §6.3) could land on six.
 | 7 | 0.799 | 0.994 |
 | 11 | 0.845 | 0.960 |
 | 23 | 0.824 | 0.801 |
-| 27 | 0.911 | 0.793 |
+| 27 | 0.874 (level 3; three-point 0.911) | 0.826 (three-point 0.793) |
 | 31 | 0.836 | 0.727 |
 | 43 | 0.926 (not converged) | 0.705 |
 | 47 | 0.797 | 0.713 |
 | 83 | 0.873 | 0.570 |
 
-The last column is the gap a theorem must close. The certificate at 27 looks weak against Hoffman only because Hoffman is
-unusually strong there (§7.1): its density 162/729 = 0.222 is well below the 0.249–0.250 at 23 and 31. The certificate's
-own density, 0.2024, is in line with its neighbours.
+The last column is the gap a theorem must close. The three-point certificate at 27 looked weak against Hoffman (0.911)
+only because Hoffman is unusually strong there (§7.1): its density 162/729 = 0.222 is well below the 0.249–0.250 at 23 and
+31, while that certificate's own density, 0.2024, was in line with its neighbours. The level-3 certificate's density is
+0.1942. Every other row is three-point.
 
 ---
 
@@ -465,7 +548,9 @@ group μ_{q+1}) rather than something true of all finite planes.
   * In characteristic 3 that polynomial is (w + 1)², so the two equilateral triangles of the other ω = 3 planes merge into
     one flat one.
   * The 10,206 edges split into 3,402 edge-disjoint triangles, and the 14 unit directions form a **cap in PG(5, 3)**.
-  * This holds for every q = 3^f with f odd [proof].
+  * This holds for every q = 3^f with f odd [proof]. In the language of §1.2: for a unit d, the two unit vectors summing to
+    d are the roots of X² − dX + d², which in characteristic 3 is (X + d)². So the only common neighbour of 0 and d is
+    −d = 2d.
 * **Every eigenvalue is an integer**, as for any Cayley graph on an elementary abelian 3-group (Bridges–Mena 1982). The
   spectrum is 28¹, 10²⁸, 7⁸⁴, 4¹⁶⁸, 1⁸⁴, −2¹⁶⁸, −5⁸⁴, −8¹¹² [exact].
   * Each eigenvalue is 3m − 14, where m is the number of unit directions in the corresponding hyperplane of 𝔽₃⁶. So every
@@ -475,7 +560,7 @@ group μ_{q+1}) rather than something true of all finite planes.
     𝔽₂₇, and every curve in that family has 3 | #E. Verified on all 26 curves; the largest has 36 points.
 * **|Aut| = 122,472**, with nothing hidden [exact, nauty].
 * **Independence**: exhaustive subspace-periodic maximum 117; outside-finder attractor 117; prime-order-symmetric maximum
-  117; every 117-set 4-rigid (§4.3).
+  117; every 117-set 4-rigid; **certified α ≤ 141** at level 3, so χ ≥ 6 (§4.3).
 
 ### 7.2 Symmetry of optimal colourings (a reading)
 
@@ -486,16 +571,27 @@ colouring question, from q² vertices to (q² + 1)/2 orbits. Nothing in the lite
 ### 7.3 Slackness
 
 At six colours every window plane is Hoffman-slack. Hoffman-tightness at k needs (k − 1) | (q + 1), and 5 ∤ q + 1 for
-q ∈ {23, 27, 31, 43, 47}. Consequently no residue plane "forces" pairs of points at six colours, so a six-forcer over a
-window field would have to be built rather than transported.
+q ∈ {23, 27, 31, 43, 47}.
+
+* **What tightness would have given.** When a plane is Hoffman-tight at k, every k-colouring is balanced, no colour is
+  missing from any closed neighbourhood, and every colouring is periodic under the common kernel of the least-eigenvalue
+  characters (Blokhuis–Brouwer–Haemers for the first two). U₃₂ at four colours is the extreme case (§4.4).
+* **What slackness does not give.** It removes that mechanism, but it does **not** prove the converse: that a six-colouring,
+  if one exists, leaves every pair of non-adjacent points free to differ. That needs a separate argument. At q = 11 and 19
+  with five colours we have one: those planes have colourings in which a colour is missing from some vertex's closed
+  neighbourhood, and such a gap frees every pair [kernel]. No six-colouring is known at any window plane, so there the
+  statement is unproved. If no six-colouring exists, it is vacuous.
+  *(Corrected after the first response: the first version concluded "no residue plane forces pairs at six colours" from
+  slackness alone.)*
 
 ---
 
 ## 8. What we are asking
 
 **Q1 — the governing theorem.** Is χ(U_Q) ≠ 6 for every Q in the two families? In the sharpest form the data suggests:
-**is χ(Γ_q) ≤ 5 exactly for q ≤ 19 and ≥ 7 for every q ∈ 𝒬 from 23 on?** Equivalently, under χ = ⌈q²/α⌉,
-α(Γ_q) < q²/6 for q ≥ 23.
+**is α(U_Q) < Q²/6 for Q ∈ {23, 27, 31, 43, 47, 64}** (W_f, §2)? That would prove W with no heuristic, and close the
+composite-ideal escape hatch too. The closest member is **47**, where an upper bound of 368 would do it against the certified
+371. The farthest is **27**, which needs 121 against 141.
 
 **Q2 — the independence number of a non-split finite Euclidean plane.** What is known about α(Γ_q) = the largest subset of
 𝔽_q² with no two points at squared distance 1, for q ≡ 3 (mod 4)?
@@ -510,12 +606,16 @@ window field would have to be built rather than transported.
 small"? For example: a rigidity forcing optimal colourings to be periodic or symmetric, a character-sum obstruction to a
 balanced 6-partition, or an algebraic-geometry reason via the norm-one torus.
 
-**Q4 — the 2-adic member.** Is Cay(𝔽₄₀₉₆, μ₆₅) six-colourable? More broadly: why are the U_{2^m} four-colourable up to
-m = 5? Is there a general linear 4-colouring, and why does it stop at m = 6?
+**Q4 — the 2-adic member.** Is Cay(𝔽₄₀₉₆, μ₆₅) six-colourable, and is α(U₆₄) < 683? *Partly answered by the second
+response (§4.4):* the four-colourings at m = 5 are the trace to 𝔽₄ and nothing else; linear four-colourings die at m = 6
+because λ ≡ 1 (mod 4); and a six- or seven-colouring of U₆₄ cannot be periodic under a subspace of dimension ≥ 8. Open: a
+nonlinear six-colouring, or a stability form of the Hoffman-equality argument that bounds α(U₆₄) below 683.
 
-**Q5 — the escape hatches.** Can a categorical product Γ_q × Γ_{q′} of two targets that are each ≥ 7-chromatic be
-six-colourable? (That is Hedetniemi at 7, restricted to these graphs.) Can a tower level modulo 𝔭² be six-chromatic when
-Γ_q is not?
+**Q5 — the escape hatches.** *Largely answered by both responses (§6.3).* A composite target can be exactly six-chromatic
+only if some factor has a residue size in {23, 27, 31, 43, 47, 59, 64, 67, 79, 83}. Among first-level factors, only an
+**integrality gap** (χ_f ≤ 6 < χ) at one of the six open members lets it through. What remains: **can a tower level above
+23, 27, 31, 43, 47, 59, 64, 67, 79 or 83 have χ_f ≤ 6** when the level below has χ_f > 6? The Hoffman bound is constant up
+every inert tower, but the certificates at 59–83 do not obviously lift.
 
 **Q6 — the field statement directly.** Is there an argument that no real number field F has χ(F²) = 6, or a construction of
 one, that does not go through the residue method at all?
@@ -531,11 +631,11 @@ UD(𝔽_q, 2) beyond q = 17; any work on Cayley graphs of 𝔽_{q²} with connec
 | q | degree | λ_min | Hoffman α ≤ | certified α ≤ | largest found | ⌈q²/6⌉ | ⌈q²/5⌉ | χ |
 |---|---|---|---|---|---|---|---|---|
 | 3 | 4 | −2 | 3 | — | 3 | 2 | 2 | 3 |
-| 7 | 8 | −4.4940 | 17.63 | 14 (14.088) | 14 | 9 | 10 | 4 |
-| 11 | 12 | −4.7958 | 34.55 | 29 (29.177) | 28 (= α [solver]) | 21 | 25 | 5 |
+| 7 | 8 | −4.4940 | 17.63 | 14 (level 3: 14.0000001) — so α = 14 | 14 | 9 | 10 | 4 |
+| 11 | 12 | −4.7958 | 34.55 | 28 (level 3: 28.072; three-point 29.177) — so α = 28 | 28 | 21 | 25 | 5 |
 | 19 | 20 | −7.6097 | 99.50 | — | 76 | 61 | 73 | 5 |
 | 23 | 24 | −7.9607 | 131.76 | 108 | 87 | 89 | 106 | 5–8 |
-| 27 | 28 | −8 | 162 | 147 | 117 | 122 | 146 | 5–7 |
+| 27 | 28 | −8 | 162 | 141 (level 3) | 117 | 122 | 146 | 6–7 |
 | 31 | 32 | −10.6665 | 240.25 | 200 | 146 | 161 | 193 | 5–8 |
 | 43 | 44 | −11.9622 | 395.23 | 365 | 258 | 309 | 370 | 6–8 |
 | 47 | 48 | −12.8465 | 466.39 | 371 | 265 | 369 | 442 | 6–10 |
@@ -566,7 +666,16 @@ exact rationals, and a standalone checker (Python standard library only) verifie
 * the exact affine identity that makes the dual objective N an upper bound.
 
 It rebuilds every orbit and constraint from the number q, so it trusts nothing the solver produced. A certified N gives
-α ≤ ⌊N⌋. At q = 83 a kernel-checked Lean theorem consumes ⌊N⌋ to conclude χ ≥ 7; the certificate itself is not yet
+α ≤ ⌊N⌋.
+
+**Level 3 (used at 7, 11 and 27).** Gvozdenović–Laurent–Vallentin's block-diagonal hierarchy one step above Schrijver's
+bound: moment matrices localised at one or two anchor points, with every sign pattern, in Schrijver's normalisation. Its
+variables are the orbits of sets of ≤ 4 points under Aut(G), and symmetry reduction splits the matrices into blocks. At 27
+that is 77,238 variables and 102 blocks of orders 169–378. It is solved by a first-order method
+(ADMM) that checkpoints its iterate. A copy of the iterate is rounded to exact rationals: integer ±1 orbit-sum columns, with
+the stabiliser weights folded into rational Gram factors. The checker then verifies, over all 77,238 variables, the exact
+identity N − Σ_u y{0,u} = Σ ⟨Z, A(y)⟩ + Σ λ y + Σ μ (1 − y) with Z ⪰ 0 and λ, μ ≥ 0. It needs no symmetry argument: each
+canonical form it uses is checked to be an automorphic image of its set, so a wrong canonicaliser can only make it refuse. At q = 83 a kernel-checked Lean theorem consumes ⌊N⌋ to conclude χ ≥ 7; the certificate itself is not yet
 kernel-checked. Files, checker and logs can be provided.
 
 ## Appendix C — references

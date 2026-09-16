@@ -1,0 +1,32 @@
+== A. characteristic 2 ==
+Q=  2: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 3 d; triangles; every edge {x, x+u} lies in exactly one K4, x + u.F4; lambda_min = -1 (poly 0x7, 0.0 s)
+Q=  4: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 15 d; triangle-free; lambda_min = -3 (poly 0x1f, 0.0 s)
+Q=  8: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 63 d; triangles; every edge {x, x+u} lies in exactly one K4, x + u.F4; lambda_min = -3 (poly 0x75, 0.0 s)
+Q= 16: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 255 d; triangle-free; lambda_min = -7 (poly 0x1f9, 0.0 s)
+Q= 32: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 1023 d; triangles; every edge {x, x+u} lies in exactly one K4, x + u.F4; lambda_min = -11 (poly 0x7ff, 0.0 s)
+   Q=32: least-eigenvalue characters = S exactly (33); lambda_a = 4M_a - 11 for all a; Tr_{E/F4} is a proper 4-colouring; the 44 F4-hyperplanes are independent 256-sets in 11 parallel classes; exactly 11 binary planes {a,b,a+b} lie in S
+Q= 64: Sidon; |S∩(d+S)| = 2·Tr(1/N(d)) for all 4095 d; triangle-free; lambda_min = -15 (poly 0x1fff, 0.1 s)
+   Q=64: lambda_a = 1 (mod 4) for all 4095 nontrivial characters; lambda_min = -15; the minimum of |S ∩ W| over binary codimension-2 subspaces W is exactly 5 (exhaustive over all pairs)
+== B. inert towers ==
+   q=3: level 1: |V| = 9, degree 4 = Q^0(Q+1), lambda_min = -2.000000 = Q^0·(-2.000000); Hoffman 1 + d/|lambda_min| = 3.000000
+   q=3: level 2: |V| = 81, degree 12 = Q^1(Q+1), lambda_min = -6.000000 = Q^1·(-2.000000); Hoffman 1 + d/|lambda_min| = 3.000000
+   q=3: level 3: |V| = 729, degree 36 = Q^2(Q+1), lambda_min = -18.000000 = Q^2·(-2.000000); Hoffman 1 + d/|lambda_min| = 3.000000
+   q=3: level 4: |V| = 6561, degree 108 = Q^3(Q+1), lambda_min = -54.000000 = Q^3·(-2.000000); Hoffman 1 + d/|lambda_min| = 3.000000
+   q=7: level 1: |V| = 49, degree 8 = Q^0(Q+1), lambda_min = -4.493959 = Q^0·(-4.493959); Hoffman 1 + d/|lambda_min| = 2.780167
+   q=7: level 2: |V| = 2401, degree 56 = Q^1(Q+1), lambda_min = -31.457714 = Q^1·(-4.493959); Hoffman 1 + d/|lambda_min| = 2.780167
+   q=7: level 3: |V| = 117649, degree 392 = Q^2(Q+1), lambda_min = -220.204001 = Q^2·(-4.493959); Hoffman 1 + d/|lambda_min| = 2.780167
+   q=11: level 1: |V| = 121, degree 12 = Q^0(Q+1), lambda_min = -4.795755 = Q^0·(-4.795755); Hoffman 1 + d/|lambda_min| = 3.502213
+   q=11: level 2: |V| = 14641, degree 132 = Q^1(Q+1), lambda_min = -52.753303 = Q^1·(-4.795755); Hoffman 1 + d/|lambda_min| = 3.502213
+   q=19: level 1: |V| = 361, degree 20 = Q^0(Q+1), lambda_min = -7.609729 = Q^0·(-7.609729); Hoffman 1 + d/|lambda_min| = 3.628215
+   q=19: level 2: |V| = 130321, degree 380 = Q^1(Q+1), lambda_min = -144.584844 = Q^1·(-7.609729); Hoffman 1 + d/|lambda_min| = 3.628215
+   q=23: level 1: |V| = 529, degree 24 = Q^0(Q+1), lambda_min = -7.960687 = Q^0·(-7.960687); Hoffman 1 + d/|lambda_min| = 4.014815
+   q=23: level 2: |V| = 279841, degree 552 = Q^1(Q+1), lambda_min = -183.095805 = Q^1·(-7.960687); Hoffman 1 + d/|lambda_min| = 4.014815
+   q=27 (GR(9,3)): level 1: |V| = 729, degree 28 = Q^0(Q+1), lambda_min = -8.000000 = Q^0·(-8.000000); Hoffman 1 + d/|lambda_min| = 4.500000
+   q=27 (GR(9,3)): level 2: |V| = 531441, degree 756 = Q^1(Q+1), lambda_min = -216.000000 = Q^1·(-8.000000); Hoffman 1 + d/|lambda_min| = 4.500000
+   Q=2 (Z_2[omega]): level 1: |V| = 4, degree 3 = Q^0(Q+1), lambda_min = -1.000000 = Q^0·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+   Q=2 (Z_2[omega]): level 2: |V| = 16, degree 6 = Q^1(Q+1), lambda_min = -2.000000 = Q^1·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+   Q=2 (Z_2[omega]): level 3: |V| = 64, degree 12 = Q^2(Q+1), lambda_min = -4.000000 = Q^2·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+   Q=2 (Z_2[omega]): level 4: |V| = 256, degree 24 = Q^3(Q+1), lambda_min = -8.000000 = Q^3·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+   Q=2 (Z_2[omega]): level 5: |V| = 1024, degree 48 = Q^4(Q+1), lambda_min = -16.000000 = Q^4·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+   Q=2 (Z_2[omega]): level 6: |V| = 4096, degree 96 = Q^5(Q+1), lambda_min = -32.000000 = Q^5·(-1.000000); Hoffman 1 + d/|lambda_min| = 4.000000
+ALL CHECKS HELD (14 s)

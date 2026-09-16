@@ -20,8 +20,13 @@ refuted in between. *undecided at budget* — CaDiCaL's `UNKNOWN`: says nothing 
 | `kamis-smoke/alpha-q27-kamis.json` | KaMIS `redumis` (outside code): *found 117* on seven seeds of seven, every set invariant under an order-9 translation; `online_mis` 104 | found; verified |
 | `symmetric/prime-order-classes.json` | GAP: the 15 conjugacy classes of subgroups of prime order of `Aut` (orders 2, 3, 7) with their orbits on points; GAP checks `|G| = 122,472` first | exact |
 | `symmetric/prime-order-alpha.jsonl` | per class, the largest independent set invariant under it (CP-SAT, one line per class, resumable — `symmetric/RESUME.md`) | *found N, bound B* or *solver's word* |
+| `cert-q27-l3-N141.json` | **the level-3 certificate**: Gvozdenović–Laurent–Vallentin `L₃` (moment matrices localised at one or two anchors, every sign pattern; 77,238 orbit variables, 102 blocks) rounded from the ADMM iterate at 16,611; `python3 tools/fs54_l3_cert_check.py data/fs54/cert-q27-l3-N141.json` (standard library, 28 s) | **CERTIFIED: α(UD(𝔽₂₇,2)) ≤ 141** (N = 141.593), so **not five-colourable, χ ≥ 6** — re-run by the PO; soundness page `plans/FS54-L3-certificate-soundness.md`; controls `d4/cert-controls.json` (21 of 21) |
+| `cert-q7-l3-N14.json`, `cert-q11-l3-N28.json` | the same instrument at the calibration planes | CERTIFIED: N = 14.00000007 and 28.0715, so **α(7) = 14 and α(11) = 28 exactly** with the verified sets |
+| `ladder/` | the calibrated Rust `plane-independent` ladder at 27 (free, rotation orders 2/4/7/14/28, line quotient, free again), `RESUME.md` | *found* 117, 117, 117, 106, 99, 85, 81, 117; target 122 `not_found` at every stage |
+| `d4/` | the level-3 pricing, the ADMM runs (`runs/`, resume in `runs/RESUME.md`), the certificate logs and controls; `d4/README.md` | readings are floats; the certificate above is the bound |
+| `wall-feedback/` | `verify.out`: `tools/fs54_wall_feedback_verify.py`, independent checks of the two outside responses to `reference/wall-at-six/WALL-AT-SIX.md` (char-2 Sidon and common-neighbour law for Q = 2…64; U₃₂'s least eigenspace = μ₃₃, the trace-to-𝔽₄ colouring, the 44 hyperplanes; λ ≡ 1 mod 4 and min \|S∩W\| = 5 at 64; inert towers at q = 3, 7, 11, 19, 23, 27 over GR(9,3), and Q = 2); `responses-appendix-script.out`: the response's own script, rerun | exact (integers; tower eigenvalues as float character sums compared to closed forms at 10⁻⁶); every line an assertion |
 | `environment.md` | the venv, KaMIS build, versions, and two machine traps (`LIBRARY_PATH` breaks non-Lean C links; OR-Tools and cvxpy clash over `libhighs.so.1`) | — |
 
-**The one number to carry away:** every independent set found by any method so far — exhaustive periodic search, KaMIS,
-symmetric CP-SAT — has **at most 117** points. Six colours at 27 need **122**; five need 146; the exact certificate allows
-147.
+**The numbers to carry away:** every independent set found by any method — exhaustive periodic search, KaMIS, symmetric
+CP-SAT, the Rust ladder — has **at most 117** points; six colours at 27 need **122**. The level-3 certificate allows **141**,
+below the **146** five colours need, so **χ(UD(𝔽₂₇,2)) ∈ {6, 7}**.

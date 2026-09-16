@@ -36,30 +36,36 @@ degree ≥ 12; U₁₂₈ has floor 8.
 
 **The wall**, `reference/wall-at-six/WALL-AT-SIX.md`: no residue target (odd planes, 2-adic graphs) is known to be
 six-chromatic; proofs below 23 and above 47; window {23, 27, 31, 43, 47} ∪ {U₆₄}; escape hatches not covered (composite
-ideals = categorical products, where Hedetniemi is open at 5–7; tower levels); six questions asked.
+ideals = categorical products; tower levels); six questions asked. **Two responses came back the same day** (verbatim in
+`reference/wall-at-six/responses/`, verified in `plans/FS54-twenty-seven.md` §R): the fractional wall W_f (α < Q²/6 at the six
+open targets proves W and closes the product hatch), five errors in our text (all confirmed, all fixed), U₃₂'s rigidity,
+λ ≡ 1 mod 4 at 64, the inert-tower Hoffman invariance.
 
-## 2. What is running (all checkpointed or short)
+## 2. What is running (all checkpointed or short) — updated 11:30 after the wall document's two responses
 
 | job | pid / pgid | where | what to do with it |
 |---|---|---|---|
-| level-3 ADMM at 27 toward convergence | pid **550586** | log `data/fs54/d4/runs/admm-q27-converge.log`, checkpoint `data/fs54/d4/ckpt/admm-q27.npz` (atomic), out `data/fs54/d4/runs/admm-q27.json` | resume line in `data/fs54/d4/runs/RESUME.md` (no `--new`); the certificate agent rounds from a copy |
-| the ladder at 27, last stage free-s2 | snapshot shell pgid **524993** (child plane-independent) | `data/fs54/ladder/` (`<stage>.done` markers) | relaunch skips finished stages (`data/fs54/ladder/RESUME.md`); score **P8** (plateau at 117) when `LADDER COMPLETE` appears in `ladder.out` |
-| SAT on U₆₄, k = 7 and k = 6, 20 M conflicts each | pids **468640** (k=7), **468642** (k=6) | logs in the SESSION SCRATCHPAD `…/scratchpad/q27/g64-k7.log`, `g64-k6.log` (ephemeral!); colouring saved there as `g64-col-k{k}.npy` if SAT | if a pid is gone and its log is lost, rerun `python3 tools/fs54_char2_q64_sat.py <k> 20000000` from lean-dir (writes into `data/fs54/char2/`); record the verdict in `data/fs54/char2/README.md` |
-| **certificate agent** (background subagent) | — | brief: exact rational certificate for level 3 at 27, standard-library checker, `plans/FS54-L3-certificate-soundness.md`, controls at 7 and 11 with four plants; files `tools/fs54_l3_cert_{round,check}.py`, certs in `data/fs54/` | on its report: re-run its checker yourself, open the certificate, score **P9** ([138, 146]; refuses five with p = 0.35); if ⌊N⌋ ≤ 145 — row-worthy: χ(Γ₂₇) ≥ 6 |
+| level-3 ADMM at 27 | **stopped by pid 11:22** at ~25,671 its (certificate already filed; a lower N decides nothing) | checkpoint `data/fs54/d4/ckpt/admm-q27.npz` (sha256 `ab277ec9…`) | resume line in `data/fs54/d4/runs/RESUME.md` only if a tighter certificate is ever wanted |
+| the ladder at 27 | **COMPLETE** 10:57 — every stage ≤ 117; **P8 WON** | `data/fs54/ladder/` | nothing |
+| SAT on U₆₄, k = 7 and k = 6, 20 M conflicts each | pids **468640** (k=7), **468642** (k=6) | logs in the SESSION SCRATCHPAD `…/scratchpad/q27/g64-k7.log`, `g64-k6.log` (ephemeral; the script prints only at the end) | if a pid is gone and its log is lost, rerun `python3 tools/fs54_char2_q64_sat.py <k> 20000000` from lean-dir (writes into `data/fs54/char2/`); record in `data/fs54/char2/README.md`. Note (second response): a 6- or 7-colouring cannot be periodic under a subspace of dimension ≥ 8 |
+| **certificate agent** | **DONE** — `bacf4a4`: **α(27) ≤ 141 CERTIFIED** (re-run by the PO), **P9 WON**; α(7) = 14, α(11) = 28 certified | `data/fs54/cert-q27-l3-N141.json`, `plans/FS54-L3-certificate-soundness.md` | an independent read of the checker (not a re-run) is owed before any claim beyond the wall document |
+| **literature agent** (background) | — | checking Zhang 2012 Thm 1.8, Zhu's fractional Hedetniemi, Wrochna Cor. 4.3, Tardif 2023, MMST1998 vs the tower theorem, arXiv:2411.14087, and prior art on U₃₂ | on its report: write §6.3 and §C of the wall document, add `[Zhang2012]` `[Zhu2011]` and the rest to BIBLIOGRAPHY § A (the audit flags them now), correct `[Tardif2022]` |
+| **47 pricing agent** (background) | — | measured price of level 3 at q = 47 (build, controls, s/iteration, projection to N < 369); must NOT launch the long solve | on its report: decide with Kooshi whether to commit the machine to the solve |
 
 ## 3. Next, ranked
-1. **Receive the certificate** (above). If five is refused at 27: update the wall document, window.md (27's floor 6), G56.
-2. **Level 3 at 47** — refusing six there needs only 0.76 % below the converged 371.84, which **takes 47 out of the window**;
-   priced at ~4 M variables (`plans/FS54-D4-pricing.md` §8); check memory first. Then 23 (five refused if N < 106).
-3. **U₆₄**: its six/seven question (SAT above; a triple-level SDP could refuse six — Hoffman 768 against 683).
-4. **D5** at 27: colour search seeded from structure (D97: `plane-colour` cannot find even 7 or 8 colours from random starts
-   at 27), and the antipodal quotient.
-5. **The composite-ideal escape hatch** (wall §6.3): χ of a categorical product of two ≥ 7 planes — unmeasured.
-6. Close FS-54: ledger row, G59 (characteristic 3 and the 2-adic trichotomy), FRONTIER re-rank, conjecture sweep of the plan.
+1. **Level 3 at 47** once priced — α ≤ 368 refuses six, proves W_f at 47, takes 47 out of the window.
+2. **23** at level 3 (five refused if N < 106, 2.35 %).
+3. **U₆₄**: SAT above; the second response's stability idea (near-Hoffman-equality ⟹ near-hyperplane structure) as a
+   route to α(U₆₄) < 683; a triple-level SDP at U₆₄.
+4. **D5** at 27: colour search seeded from structure; the antipodal quotient. 27's question is now exactly six vs seven.
+5. Close FS-54: ledger row 70 (five refused at 27; the 2-adic trichotomy; W_f and the escape hatches closed to integrality
+   gaps), G59, FRONTIER re-rank, conjecture sweep of the plan.
 
 ## 4. Traps met this session
 * **A wrong acceptance test flattered the result twice** (the 2-adic "norm ≤ 4" test; the stub's "worst reach" fact
   omitting 43). Audit the result you like (G21).
+* **A misfiled table row passes an audit silently**: ten bibliography rows went into the alternate-keys table (§ A′), whose
+  second column the audit reads as a canonical key, so every key "resolved". Moved to § A on 2026-09-16.
 * **The reboot wiped `/tmp`** — the scratchpad is not storage; everything durable is in `data/` and `tools/`.
 * `scripts/dev-env.sh`'s `LIBRARY_PATH` breaks non-Lean C/C++ links (use `env -u LIBRARY_PATH`); OR-Tools and cvxpy clash
   over `libhighs.so.1` (highspy pinned 1.12.0) — `data/fs54/environment.md`.
