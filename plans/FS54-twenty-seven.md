@@ -199,6 +199,13 @@ every record (owed since FS-53).
   an order-9 translation (seven different subgroups, none an `𝔽₂₇`-line) — the exhaustive periodic ceiling, reached by a
   finder that knows nothing of the group. Verified from the definition by `tools/fplane_review_verify.py indep` (exit 0) with
   a planted non-independent control rejected. `data/fs54/kamis-smoke/` (the environment agent's run).
+* **Registered 2026-09-16, before `tools/fs54_symmetric_alpha.py` reports** (15 classes of prime-order subgroups from GAP:
+  three of order 2 — the point reflection, 365 orbits, and two reflection classes fixing a line, 378 orbits; eleven of order 3
+  — ten translation classes, 243 orbits, and a Frobenius-type class fixing 9 points, 249 orbits; one of order 7, 105 orbits):
+  **P5** no prime-order class carries an invariant independent set of 122 or more — probability 0.6 (the informative
+  outcome, a symmetric 122-set, is reachable: nothing here excludes it). **P6** the order-7 rotation class is the weakest,
+  best ≤ 112, and is the one CP-SAT proves optimal inside its budget. **P7** at least one order-3 translation class reaches
+  117 (forced: a 9-periodic set is 3-periodic under its subgroup's lines — a control, not a prediction).
 * **Reading, not a claim:** 117 is a strong attractor. If `α(27) = 117`, then `χ(27) = 7` exactly (`⌈729/117⌉ = 7` and a
   seven-colouring is known) and 27 leaves the window — but proving `α ≤ 121` is 26 integers below the converged certificate.
 
