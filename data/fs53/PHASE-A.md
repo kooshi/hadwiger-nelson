@@ -296,3 +296,23 @@ they are the rows a six-colouring would plausibly occupy. This is the standing r
 its enumeration — the acceptance test here is "the solver closed it within five million conflicts", and the
 rows that fail that test are systematically the informative ones. The 23 sweep's four are being re-asked at
 40,000,000 conflicts; the same push at 43 and 47 is not yet run and is the obvious continuation.
+
+## An incident: both watchers died silently and the work did not
+
+At about 2 h 52 m into the four-hour runs, the two background waiters armed on the long stage's completion
+marker **both exited with code 144, at the same instant, with no output**. Two independent `until … sleep`
+loops exiting identically at one moment is a **shared-cause signature**, and the shared cause is the harness
+that owns them, not the jobs they watch.
+
+Checked before concluding anything, because the standing rule is to halt on an unexplained process crash: all
+four long runs (`plane-colour` at 43 and 47, `plane-independent` at 43 and 47) and the equivariant push at 23
+were **alive**, in their own process group, with elapsed times consistent with a continuous run from launch,
+and their records were being rewritten at every tick. So this is not a crash of the work, and the phase
+continues.
+
+**It is an instance of the rule that an exit-waiter can tell you a thing has ended, never that it is late.**
+Both waiters failed in the direction that looks like nothing happening: had the harness not reported their
+exit codes, the phase would have waited on two dead watchers for the rest of the night while the runs finished
+unattended. The repair is the one the rules already name — **verify by effect, not by the waiter**: a run's
+liveness is `ps` plus a record whose digest is still moving, and a waiter is re-armed with a bounded lifetime
+so that "it has not fired yet" and "it is dead" stop being the same observation.
