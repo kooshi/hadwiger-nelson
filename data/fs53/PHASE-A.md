@@ -117,3 +117,34 @@ plateau/threshold with `q` is **not** a measurement of the planes; it is mostly 
 spread over growing graphs. The one row where the plateau is near-converged is **23**, where all three threads
 independently sit at exactly 87 (`spread_low = spread_high = 87`), the best was reached in the first fifteen
 seconds, and 9,330 restarts over fifteen minutes never moved it.
+
+## A.1 stage 2 — the symmetry sweeps: every rotation order dividing `q + 1`, and the line quotient
+
+58 runs, 180 s × 3 threads × seed 1 each (`--rotation-order m` searches only the sets invariant under a rotation
+of order `m`; `--line-direction` only those invariant under the translations along a line). Best per member,
+beside stage 1's free plateau:
+
+| q | free, 900 s | best restricted, 180 s | which | change |
+|---|---|---|---|---|
+| 23 | 87 | 86 | rotation order 2 | −1 |
+| 31 | 146 | 146 | rotation order 2 | 0 |
+| 43 | 258 | 258 | line quotient, and rotation order 2 | 0 |
+| 47 | 265 | 265 | rotation orders 2, 3, 4, 12, 24 | 0 |
+| 59 | 363 | 363 | rotation order 2 | 0 |
+| 67 | 422 | **443** | rotation orders 17 and 34 | **+21** |
+| 79 | 523 | **578** | rotation order 2 | **+55** |
+
+The two improved sets were re-verified from the definition: 443 at 67 and 578 at 79, **0 internal edges** in
+each. They are independent sets of the whole plane, not of a quotient.
+
+**The finding, and the direction of the comparison is what is safe in it.** At the two largest members a
+*restricted* search beat the free one **on one fifth of the budget**. Restriction and budget both differ
+between those two numbers, so the *size* of the gain is not measured — but the sign is, because the winner had
+less of everything except the symmetry. Searching only the invariant sets divides the search space by the
+rotation order, and on a graph of 4,489 or 6,241 vertices that is worth more than 5× the wall clock.
+
+**What it says about stage 1's table.** The free plateaus at 67 and 79 were **not** converged: 180 seconds of a
+better-shaped search moved them by 21 and 55. So the fall-off of plateau/threshold with `q` in stage 1 was, as
+that table said in advance, mostly a measurement of a flat budget spread over growing graphs — and here is the
+direct evidence, rather than the caveat. The result stands for 23 in the other direction: no rotation order and
+no line quotient reaches even 87 there, so 23's plateau is the one that does not move under a change of method.
