@@ -725,6 +725,139 @@
    ],
    "sealing": null,
    "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+  },
+  {
+   "field": "Q(\u221a2,\u221a31) [sees 23]",
+   "radicands": [
+    2,
+    31
+   ],
+   "wall_broken": true,
+   "usable": [
+    23,
+    31,
+    79,
+    127,
+    151,
+    167,
+    199,
+    223,
+    239,
+    263,
+    271,
+    367
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 23: its plane is undecided)"
+  },
+  {
+   "field": "Q(\u221a5,\u221a51) [sees 31]",
+   "radicands": [
+    5,
+    51
+   ],
+   "wall_broken": true,
+   "usable": [
+    31,
+    59,
+    79,
+    139,
+    179,
+    191,
+    199,
+    211,
+    239,
+    251,
+    359,
+    379
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 31: its plane is undecided)"
+  },
+  {
+   "field": "Q(\u221a10,\u221a23) [sees 43]",
+   "radicands": [
+    10,
+    23
+   ],
+   "wall_broken": true,
+   "usable": [
+    43,
+    67,
+    79,
+    83,
+    107,
+    191,
+    199,
+    227,
+    283,
+    359,
+    431,
+    467
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 43: its plane is undecided)"
+  },
+  {
+   "field": "Q(\u221a7,\u221a89) [sees 47]",
+   "radicands": [
+    7,
+    89
+   ],
+   "wall_broken": true,
+   "usable": [
+    47,
+    131,
+    139,
+    167,
+    199,
+    223,
+    227,
+    251,
+    271,
+    283,
+    307,
+    311
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 47: its plane is undecided)"
+  },
+  {
+   "field": "Q(\u221a2,\u221a3,\u221a7) [sees 47]",
+   "radicands": [
+    2,
+    3,
+    7
+   ],
+   "wall_broken": true,
+   "usable": [
+    47,
+    167,
+    311,
+    383,
+    479,
+    503
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 47: its plane is undecided)"
+  },
+  {
+   "field": "Q(\u221a2,\u221a3,\u221a31) [sees 23]",
+   "radicands": [
+    2,
+    3,
+    31
+   ],
+   "wall_broken": true,
+   "usable": [
+    23,
+    167,
+    239,
+    263,
+    383
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 23: its plane is undecided)"
   }
  ],
  "vocabulary": "sealed-at-k: \u03c7(F\u00b2) \u2264 k by a verified colouring of the plane at the named prime (or Theorem B); 6-open: no usable prime seals (spectral floor \u2265 6 at p \u2265 67; the planes below by their records); open-pending: a usable plane below 67 is undecided"
