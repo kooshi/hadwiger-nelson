@@ -190,3 +190,48 @@ So: **the law's shape is wrong below `q ≈ 30`, on this evidence** — it over-
 at the one member where the search is near-converged it over-predicts by 10 %. That is the milestone's durable
 product taking a hit, and it is reported as the outcome it is. What survives is the law's *ordering*: 23 and 31
 are still the members closest to their thresholds, by a wide margin.
+
+## A.2 re-aimed: six exact certificates moved the window mid-stage (the product owner, 2026-09-15)
+
+Certificates landed at six members while stage 4 was running. **Five colours are refused at 43 (α ≤ 365) and at
+47 (α ≤ 377), and six is refused at 59, 67 and 79.** So 43 and 47 are now the only members of the window where
+a single six-colouring settles the question outright — it would exhibit the first exactly six-chromatic finite
+Euclidean plane — while at 59, 67 and 79 a six-colour search is now looking for something proved not to exist.
+
+**Cross-instrument consistency, checked before anything was killed.** Every α lower bound this phase verified
+sits under the new certified ceiling at the same member: 258 ≤ 365 at 43, 265 ≤ 377 at 47, 363 ≤ 580 at 59,
+443 ≤ 748 at 67, 578 ≤ 1040 at 79. The finding side and the certificate side agree at all five. A violation
+would have meant one of the two was wrong, so the check is recorded whichever way it came out.
+
+**The three condemned runs were captured before they were signalled, and they are a free negative control.**
+At 162 seconds each, `k = 6` at 59, 67 and 79 stood at 5,238 / 104,430, 9,859 / 152,626 and 13,046 / 249,640
+monochromatic edges and reported `not_found`. The instrument did not report a six-colouring at three planes
+where a certificate now proves none exists — a control that costs nothing because the runs had already been
+paid for. It is weak (162 seconds is a short look) and it is recorded as weak. They were then stopped by
+`SIGTERM` to the five binaries' own pids, selected by reading `/proc`-backed `ps` output and requiring
+`argv[0]` to end in `/plane-colour` — never by matching a command line, which would match this agent's own
+shell and other agents' monitors.
+
+**The re-aimed runs** (four, 14,400 s each, seed 3, 24 threads in total, checkpointed through the same
+per-tick record; resume: `phaseA/drive2.sh long`):
+
+| run | what | threads | resumed from |
+|---|---|---|---|
+| `a2-q43-k6-long` | `plane-colour --k 6` at 43 | 8 | the killed stage-4 record, its conflict count re-derived by an independent sweep before it ran |
+| `a2-q47-k6-long` | `plane-colour --k 6` at 47 | 4 | likewise |
+| `a1-q43-push309` | `plane-independent --target 309` at 43 | 4 | `alpha-q43-ge258.json` |
+| `a1-q47-push369` | `plane-independent --target 369` at 47 | 2 | `alpha-q47-ge265.json` |
+
+**Why the last two, which were not asked for.** A six-colouring of the 43-plane partitions 1,849 vertices into
+six independent sets, so one of them has at least ⌈1849/6⌉ = **309** vertices — the colour search cannot
+succeed unless α(43) ≥ 309, and the best set eight core-hours of a dedicated maximiser reached there is **258**.
+The same arithmetic at 47: 369 needed against 265 reached. This is the plan's own peel-and-colour precondition
+(§S13.2 A.2), which it states at 23 and says "applies at every member". It does not make the colour search
+illegitimate — a free search is not a fixed-class search, and it could in principle discover a 309-class it
+never found while maximising — but it does say that the cheaper instrument measures the precondition directly.
+So both run, and **the independent-set side is the one that can return an informative negative**: if α at 43
+will not pass 309 under hours of a maximiser, that is the reason the colour search came back empty, and it is a
+statement about the plane rather than about the colouring search.
+
+**The honest prior, recorded before the results:** 309 needed against 258 reached at 43 is a 20 % gap, and
+369 against 265 at 47 is a 39 % gap. Both are long shots and nulls are expected.
