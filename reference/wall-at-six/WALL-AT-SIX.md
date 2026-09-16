@@ -393,7 +393,13 @@ instance recomputed here]:
   transfer as stated. A stability version (near-equality forces near-hyperplane structure) is one route to W_f at 64 that we
   have not pursued.
 
-A first SAT attempt at k = 6 and 7 (symmetry pins only) is running at the time of writing.
+**Measured since** [exact / found]: |Aut(U₆₄)| = 4096 · 65 · 12 exactly (nauty); the Delsarte LP bound (ϑ′) is exactly
+768, no better than Hoffman; KaMIS finds independent sets of **exactly 512 on six seeds of six**, with period subspaces of
+dimension 4–6, so the attractor is the linear 8-colouring's class size and not its structure. An independent set periodic
+under a subspace of dimension ≥ 8 has at most 512 points [proof, by the cube-like lemma above]. A 683-point set must put at
+least 50.2 % of its nontrivial Fourier energy on the 195 least-eigenvalue characters [proof]; the found 512-sets put 36–44 %
+there. A CaDiCaL attempt at k = 6 and 7 was stopped after 3.5 hours with no verdict. **If α(U₆₄) = 512, then χ(U₆₄) = 8**
+and U₆₄ is out of the window. The three-point SDP would refuse six at 88.8 % of Hoffman.
 
 ---
 
