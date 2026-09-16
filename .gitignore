@@ -24,3 +24,6 @@ __pycache__/
 
 # The project's Python virtual environment (rebuild recipe: data/fs54/environment.md)
 /.venv/
+
+# FS-54 D4 solver checkpoints (tens of MB each; resume state, not evidence — the evidence is the run's --out record)
+data/fs54/d4/ckpt/
