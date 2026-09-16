@@ -323,3 +323,41 @@ its keep rather than a lucky escape: each stage is launched with `setsid` into i
 pgid on disk, so a sweep that reaps the session's processes reaps the watchers and leaves four hours of
 solving untouched. The rule is usually justified by the danger of killing *other* agents' processes; this is
 the same rule protecting *ours* from someone else's cleanup.
+
+## The phase, scored against §S13.2 items A.1 and A.2
+
+**A.1 — α at every member.** *Green for the seven prime members; 27 was out of scope.*
+`plane-independent` free, then every rotation order dividing `q + 1` and the line quotient, chained through
+`--start`, at 23, 31, 43, 47, 59, 67, 79. Seven records filed, **every set re-verified from the definition by
+the product owner's script as committed** (0 internal edges, seven of seven). Every record states budget,
+threads, seed and `halt` — with the caveat above that `plane-independent`'s `halt` is unreliable on a killed
+run and `complete` is the field to read. Every plateau is written "plateau at N under budget B" and never as α.
+**No threshold was cleared at any member.** `q = 27` was excluded because both tools take `--p <PRIME>`.
+
+**A.2 — six-colourings at every member.** *Green, with the scope actually covered stated.*
+`plane-colour --k 6` at all seven (the three now refused by certificate were stopped once phase B made them
+moot, and their 162-second records stand as a weak negative control); `--k 5` at 23; `fplane.py equivariant
+--k 6` at 23, 43 and 47. **Every verdict is `not_found` or a solver refusal; no colouring was found anywhere,
+so nothing was promoted and no `Cert` was owed.** Not run: the equivariant sweep at 31, 59, 67 and 79, and
+WO-20's fixed-class search — the latter correctly, since the plan's own arithmetic makes it predetermined to
+fail while α sits below the threshold.
+
+**What would have changed the milestone, and did not.** A verified independent set of 89 at 23 — the search
+never passed 87. A verified six-colouring anywhere — none found. Both were recorded as long shots in advance.
+
+## What this phase actually establishes
+
+1. **At 23 the search side is as converged as a search gets and still says 87.** The instrument attains the
+   true α at `q = 11` in two seconds; here it saturates at 87 in fifteen seconds and roughly 96,000 restarts
+   across three stages, three seeds, eight rotation orders and a line quotient never produce an 88. Six needs
+   89. This is evidence about the graph, weak but real, and it is **not** a refutation: only a certificate can
+   bound α from above.
+2. **The growth law over-predicts below `q ≈ 30`.** It said 96–97 at 23 and 166 at 31; the searches reached 87
+   and 146. Its ordering survives — 23 and 31 remain the members closest to their thresholds — its shape does
+   not.
+3. **No six-colouring is rotation-equivariant** at 23, 43 or 47, on 120 of the 131 symmetry classes swept, by
+   solver refusal. The eleven that remain open are the least constrained rows at every member.
+4. **Restricting a search by symmetry beats lengthening it** on the large planes: at 67 and 79 a restricted
+   search beat the free one on one fifth of the budget. On the small ones it does not.
+5. **A longer wall clock is not automatically a stronger null**: at 23, 5,400 thread-seconds reached 121
+   monochromatic edges where 3,600 thread-seconds on four times the threads reached 116.
