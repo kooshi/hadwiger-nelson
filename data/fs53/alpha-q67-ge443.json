@@ -1,0 +1,8577 @@
+{
+  "kind": "plane-independent",
+  "p": 67,
+  "vertex_index": "v = x*p + y, with 0 <= x,y < p",
+  "edge_rule": "v ~ w iff (x-x')^2 + (y-y')^2 = 1 (mod p)",
+  "n": 4489,
+  "degree": 68,
+  "edges": 152626,
+  "edges_sha256": "6f3030bd95c092b228ad94631dc701fe1951226d2c3501db9bac58e94649ce61",
+  "lambda_min": -15.056703349786158,
+  "ratio_bound_alpha": 813.7758737249964,
+  "k": null,
+  "target": 749,
+  "target_note": null,
+  "symmetry": null,
+  "verdict": "not_found",
+  "halt": "deadline",
+  "verdict_note": "No independent set of 749 points was found within this budget. This is a local search: it can exhibit a set but it cannot bound alpha from above, so nothing in this record is evidence that no such set exists, and nothing in it says chi(UD(F_67,2)) is any particular number. The largest set found and verified has 443 points — 59.1% of the 749 needed, and 54.4% of the ratio bound 813.78.",
+  "best_size": 443,
+  "best_size_over_target": 0.5914552736982643,
+  "best_size_over_ratio_bound": 0.5443759323709139,
+  "best_set": [
+    0,
+    79,
+    87,
+    90,
+    93,
+    110,
+    115,
+    136,
+    145,
+    158,
+    163,
+    170,
+    187,
+    207,
+    239,
+    243,
+    248,
+    255,
+    261,
+    273,
+    282,
+    290,
+    298,
+    308,
+    324,
+    339,
+    342,
+    352,
+    370,
+    376,
+    392,
+    396,
+    405,
+    423,
+    427,
+    455,
+    457,
+    464,
+    474,
+    477,
+    483,
+    488,
+    503,
+    506,
+    509,
+    519,
+    529,
+    533,
+    543,
+    545,
+    548,
+    562,
+    564,
+    595,
+    611,
+    636,
+    642,
+    647,
+    652,
+    699,
+    717,
+    727,
+    732,
+    739,
+    748,
+    752,
+    754,
+    764,
+    780,
+    800,
+    805,
+    812,
+    817,
+    822,
+    837,
+    848,
+    851,
+    854,
+    865,
+    883,
+    895,
+    897,
+    902,
+    911,
+    917,
+    919,
+    925,
+    935,
+    942,
+    945,
+    999,
+    1003,
+    1016,
+    1030,
+    1034,
+    1038,
+    1055,
+    1090,
+    1094,
+    1103,
+    1107,
+    1113,
+    1118,
+    1144,
+    1150,
+    1165,
+    1168,
+    1175,
+    1182,
+    1191,
+    1194,
+    1199,
+    1218,
+    1222,
+    1224,
+    1241,
+    1248,
+    1264,
+    1280,
+    1295,
+    1297,
+    1305,
+    1327,
+    1339,
+    1341,
+    1363,
+    1377,
+    1379,
+    1395,
+    1397,
+    1404,
+    1413,
+    1428,
+    1432,
+    1434,
+    1442,
+    1448,
+    1458,
+    1461,
+    1478,
+    1490,
+    1493,
+    1504,
+    1514,
+    1518,
+    1542,
+    1561,
+    1567,
+    1586,
+    1596,
+    1599,
+    1610,
+    1621,
+    1627,
+    1649,
+    1658,
+    1664,
+    1674,
+    1681,
+    1690,
+    1696,
+    1700,
+    1707,
+    1711,
+    1724,
+    1739,
+    1743,
+    1750,
+    1755,
+    1759,
+    1765,
+    1785,
+    1788,
+    1793,
+    1804,
+    1820,
+    1830,
+    1844,
+    1854,
+    1863,
+    1869,
+    1872,
+    1884,
+    1904,
+    1908,
+    1912,
+    1923,
+    1934,
+    1945,
+    1953,
+    1958,
+    1960,
+    1973,
+    1981,
+    2007,
+    2014,
+    2032,
+    2039,
+    2044,
+    2047,
+    2057,
+    2070,
+    2090,
+    2093,
+    2113,
+    2116,
+    2119,
+    2127,
+    2142,
+    2163,
+    2169,
+    2172,
+    2184,
+    2190,
+    2193,
+    2195,
+    2206,
+    2220,
+    2223,
+    2226,
+    2248,
+    2271,
+    2285,
+    2308,
+    2330,
+    2333,
+    2336,
+    2350,
+    2361,
+    2363,
+    2366,
+    2372,
+    2384,
+    2387,
+    2393,
+    2414,
+    2429,
+    2437,
+    2440,
+    2443,
+    2463,
+    2466,
+    2486,
+    2499,
+    2509,
+    2512,
+    2517,
+    2524,
+    2542,
+    2549,
+    2575,
+    2583,
+    2596,
+    2598,
+    2603,
+    2611,
+    2622,
+    2633,
+    2644,
+    2648,
+    2652,
+    2672,
+    2684,
+    2687,
+    2693,
+    2702,
+    2712,
+    2726,
+    2736,
+    2752,
+    2763,
+    2768,
+    2771,
+    2791,
+    2797,
+    2801,
+    2806,
+    2813,
+    2817,
+    2832,
+    2845,
+    2849,
+    2856,
+    2860,
+    2866,
+    2875,
+    2882,
+    2892,
+    2898,
+    2907,
+    2929,
+    2935,
+    2946,
+    2957,
+    2960,
+    2970,
+    2989,
+    2995,
+    3014,
+    3038,
+    3042,
+    3052,
+    3063,
+    3066,
+    3078,
+    3095,
+    3098,
+    3108,
+    3114,
+    3122,
+    3124,
+    3128,
+    3143,
+    3152,
+    3159,
+    3161,
+    3177,
+    3179,
+    3193,
+    3215,
+    3217,
+    3229,
+    3251,
+    3259,
+    3261,
+    3276,
+    3292,
+    3308,
+    3315,
+    3332,
+    3334,
+    3338,
+    3357,
+    3362,
+    3365,
+    3374,
+    3381,
+    3388,
+    3391,
+    3406,
+    3412,
+    3438,
+    3443,
+    3449,
+    3453,
+    3462,
+    3466,
+    3501,
+    3518,
+    3522,
+    3526,
+    3540,
+    3553,
+    3557,
+    3611,
+    3614,
+    3621,
+    3631,
+    3637,
+    3639,
+    3645,
+    3654,
+    3659,
+    3661,
+    3673,
+    3691,
+    3702,
+    3705,
+    3708,
+    3719,
+    3734,
+    3739,
+    3744,
+    3751,
+    3756,
+    3776,
+    3792,
+    3802,
+    3804,
+    3808,
+    3817,
+    3824,
+    3829,
+    3839,
+    3857,
+    3904,
+    3909,
+    3914,
+    3920,
+    3945,
+    3961,
+    3992,
+    3994,
+    4008,
+    4011,
+    4013,
+    4023,
+    4027,
+    4037,
+    4047,
+    4050,
+    4053,
+    4068,
+    4073,
+    4079,
+    4082,
+    4092,
+    4099,
+    4101,
+    4129,
+    4133,
+    4151,
+    4160,
+    4164,
+    4180,
+    4186,
+    4204,
+    4214,
+    4217,
+    4232,
+    4248,
+    4258,
+    4266,
+    4274,
+    4283,
+    4295,
+    4301,
+    4308,
+    4313,
+    4317,
+    4349,
+    4369,
+    4386,
+    4393,
+    4398,
+    4411,
+    4420,
+    4441,
+    4446,
+    4463,
+    4466,
+    4469,
+    4477
+  ],
+  "best_quotient_set": null,
+  "verified_independent": true,
+  "rejected_set": null,
+  "violation": null,
+  "produced_at": "2026-09-16T00:33:04+00:00",
+  "machine": "local",
+  "complete": true,
+  "seed": 2,
+  "threads": 2,
+  "max_seconds": 1800.0,
+  "cycles_total": 1005994388,
+  "restarts_total": 5029,
+  "seconds": 1800.006952683,
+  "cycles_per_sec": 558883.6123663385,
+  "pops_total": 6950541312,
+  "pops_per_cycle": 6.909125334007331,
+  "rerun": "plane-independent --p 67 --target 749 --start /home/kooshi/.claude/jobs/b1507518/tmp/phaseA/rec/a1-q67-rot34.json --threads 2 --seed 2 --max-seconds 1800 --force-tightness 3 --restart-after 200000 --progress-seconds 2",
+  "trace": [
+    {
+      "seconds": 2.000135452,
+      "cycles": 1141476,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 4.006079055,
+      "cycles": 2241609,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 6.011566042,
+      "cycles": 3337195,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 8.017302189,
+      "cycles": 4433669,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 10.022971107,
+      "cycles": 5531987,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 12.028551047,
+      "cycles": 6621739,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 14.034788402,
+      "cycles": 7702749,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 16.040509022,
+      "cycles": 8792683,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 18.046126325,
+      "cycles": 9877895,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 20.051733939,
+      "cycles": 10970351,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 22.057255404,
+      "cycles": 12286866,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 24.063363185,
+      "cycles": 13649864,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 26.069006212,
+      "cycles": 15005243,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 28.07454343,
+      "cycles": 16356275,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 30.080930172,
+      "cycles": 17706738,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 32.08669952,
+      "cycles": 19051874,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 34.092217162,
+      "cycles": 20404920,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 36.097705474,
+      "cycles": 21750649,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 38.103223818,
+      "cycles": 23100945,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 40.109212528,
+      "cycles": 24455973,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 42.114743843,
+      "cycles": 25803544,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 44.120270869,
+      "cycles": 27137680,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 46.125840466,
+      "cycles": 28482854,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 48.131397504,
+      "cycles": 29812670,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 50.13724927,
+      "cycles": 31146335,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 52.14284069,
+      "cycles": 32487205,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 54.14841594,
+      "cycles": 33818850,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 56.153941762,
+      "cycles": 35138493,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 58.159525365,
+      "cycles": 36474955,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 60.165497444,
+      "cycles": 37817884,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 62.17092495,
+      "cycles": 39136781,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 64.176551415,
+      "cycles": 40441106,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 66.181970742,
+      "cycles": 41758432,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 68.18748684,
+      "cycles": 43062741,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 70.193350805,
+      "cycles": 44381475,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 72.198876275,
+      "cycles": 45701140,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 74.204555694,
+      "cycles": 47013807,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 76.210014496,
+      "cycles": 48329640,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 78.215524548,
+      "cycles": 49638116,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 80.22117122,
+      "cycles": 50943456,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 82.226606674,
+      "cycles": 52251543,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 84.232592415,
+      "cycles": 53558577,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 86.238400968,
+      "cycles": 54856989,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 88.244034604,
+      "cycles": 56159223,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 90.249973358,
+      "cycles": 57458705,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 92.255646995,
+      "cycles": 58756004,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 94.261126024,
+      "cycles": 60073681,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 96.266584945,
+      "cycles": 61394374,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 98.272037517,
+      "cycles": 62611535,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 100.277618358,
+      "cycles": 63680758,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 102.283313349,
+      "cycles": 64745547,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 104.289519507,
+      "cycles": 65818705,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 106.29520765,
+      "cycles": 66890478,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 108.300904013,
+      "cycles": 67958922,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 110.306792716,
+      "cycles": 69031153,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 112.312295054,
+      "cycles": 70100553,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 114.317703232,
+      "cycles": 71166542,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 116.323278571,
+      "cycles": 72232370,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 118.329055788,
+      "cycles": 73295004,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 120.336995937,
+      "cycles": 74353214,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 122.342617697,
+      "cycles": 75411276,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 124.349649526,
+      "cycles": 76474193,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 126.355418147,
+      "cycles": 77540172,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 128.361598005,
+      "cycles": 78602956,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 130.367213168,
+      "cycles": 79671079,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 132.373510117,
+      "cycles": 80738920,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 134.37938235,
+      "cycles": 81799899,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 136.384973556,
+      "cycles": 82865195,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 138.390667142,
+      "cycles": 83929457,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 140.39631191,
+      "cycles": 84998608,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 142.402477583,
+      "cycles": 86070904,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 144.408092902,
+      "cycles": 87133641,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 146.413594573,
+      "cycles": 88196775,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 148.41972505,
+      "cycles": 89263145,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 150.425265882,
+      "cycles": 90328315,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 152.431049763,
+      "cycles": 91375411,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 154.436748535,
+      "cycles": 92425819,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 156.442601217,
+      "cycles": 93477881,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 158.448817237,
+      "cycles": 94532049,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 160.454582031,
+      "cycles": 95585853,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 162.460257757,
+      "cycles": 96634387,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 164.466057802,
+      "cycles": 97690328,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 166.471775369,
+      "cycles": 98748401,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 168.477952622,
+      "cycles": 100057913,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 170.483682161,
+      "cycles": 101376682,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 172.489653248,
+      "cycles": 102675352,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 174.495625005,
+      "cycles": 103982940,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 176.501266747,
+      "cycles": 105274512,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 178.506860169,
+      "cycles": 106573470,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 180.512547322,
+      "cycles": 107892314,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 182.518142875,
+      "cycles": 109195626,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 184.524036228,
+      "cycles": 110506769,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 186.529841431,
+      "cycles": 111797220,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 188.535466017,
+      "cycles": 113101867,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 190.541173533,
+      "cycles": 114384340,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 192.546716811,
+      "cycles": 115674168,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 194.552679896,
+      "cycles": 116972917,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 196.558400984,
+      "cycles": 118256925,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 198.564093983,
+      "cycles": 119539237,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 200.569909981,
+      "cycles": 120844534,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 202.575322164,
+      "cycles": 122144934,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 204.581399792,
+      "cycles": 123418772,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 206.587149623,
+      "cycles": 124708070,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 208.592831395,
+      "cycles": 126000213,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 210.598852386,
+      "cycles": 127281973,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 212.60456229,
+      "cycles": 128570505,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 214.610260614,
+      "cycles": 129853793,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 216.615762191,
+      "cycles": 131149524,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 218.621376128,
+      "cycles": 132423353,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 220.627395701,
+      "cycles": 133715216,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 222.633046589,
+      "cycles": 135008560,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 224.638612778,
+      "cycles": 136284986,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 226.644277337,
+      "cycles": 137575592,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 228.649956626,
+      "cycles": 138863580,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 230.656071873,
+      "cycles": 140156678,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 232.661737683,
+      "cycles": 141442703,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 234.667180877,
+      "cycles": 142723387,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 236.67275947,
+      "cycles": 144022690,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 238.678415973,
+      "cycles": 145286999,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 240.684501552,
+      "cycles": 146588084,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 242.690175547,
+      "cycles": 147881927,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 244.696070359,
+      "cycles": 149161743,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 246.701760645,
+      "cycles": 150441460,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 248.707245012,
+      "cycles": 151731969,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 250.713399895,
+      "cycles": 153017506,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 252.718977393,
+      "cycles": 154315326,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 254.724652551,
+      "cycles": 155607437,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 256.730645437,
+      "cycles": 156904632,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 258.736223137,
+      "cycles": 158187939,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 260.741989986,
+      "cycles": 159483797,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 262.747820095,
+      "cycles": 160777148,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 264.753419987,
+      "cycles": 162056613,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 266.759536325,
+      "cycles": 163349412,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 268.765163737,
+      "cycles": 164633679,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 270.771055988,
+      "cycles": 165932832,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 272.776808871,
+      "cycles": 167219320,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 274.782648104,
+      "cycles": 168520766,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 276.788851724,
+      "cycles": 169811514,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 278.794657559,
+      "cycles": 171128152,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 280.800529223,
+      "cycles": 172434340,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 282.806841504,
+      "cycles": 173747943,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 284.812857568,
+      "cycles": 175057222,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 286.818571676,
+      "cycles": 176367628,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 288.824218885,
+      "cycles": 177656365,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 290.829900414,
+      "cycles": 178959997,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 292.836125768,
+      "cycles": 180265701,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 294.841767859,
+      "cycles": 181571684,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 296.847483889,
+      "cycles": 182864443,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 298.853805605,
+      "cycles": 184183252,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 300.859581776,
+      "cycles": 185488209,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 302.865308968,
+      "cycles": 186808642,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 304.871107641,
+      "cycles": 188117005,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 306.877089922,
+      "cycles": 189428160,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 308.883635298,
+      "cycles": 190730577,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 310.889574521,
+      "cycles": 192037859,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 312.895519784,
+      "cycles": 193350028,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 314.901696746,
+      "cycles": 194656691,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 316.907957537,
+      "cycles": 195949815,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 318.914212559,
+      "cycles": 197005785,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 320.920403753,
+      "cycles": 198050128,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 322.926191539,
+      "cycles": 199087442,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 324.932124156,
+      "cycles": 200125712,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 326.938609748,
+      "cycles": 201176231,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 328.944462517,
+      "cycles": 202222895,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 330.950234396,
+      "cycles": 203260803,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 332.956154915,
+      "cycles": 204313661,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 334.962020685,
+      "cycles": 205384504,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 336.968322842,
+      "cycles": 206451098,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 338.974144533,
+      "cycles": 207524468,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 340.979868106,
+      "cycles": 208604366,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 342.986079805,
+      "cycles": 209667621,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 344.992019857,
+      "cycles": 210733057,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 346.997711962,
+      "cycles": 211788184,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 349.003425997,
+      "cycles": 212849065,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 351.009232992,
+      "cycles": 213902461,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 353.015425314,
+      "cycles": 214958800,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 355.021334239,
+      "cycles": 216016346,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 357.027009596,
+      "cycles": 217070665,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 359.033363878,
+      "cycles": 218125780,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 361.039317654,
+      "cycles": 219182294,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 363.045469899,
+      "cycles": 220233087,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 365.051671864,
+      "cycles": 221290006,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 367.057432754,
+      "cycles": 222340437,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 369.063289423,
+      "cycles": 223394270,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 371.069114952,
+      "cycles": 224451038,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 373.074754724,
+      "cycles": 225502472,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 375.080931642,
+      "cycles": 226548357,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 377.086690534,
+      "cycles": 227605577,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 379.092442346,
+      "cycles": 228659996,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 381.098586256,
+      "cycles": 229718018,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 383.104373809,
+      "cycles": 230765955,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 385.110323011,
+      "cycles": 231816341,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 387.11901869,
+      "cycles": 232867867,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 389.125004153,
+      "cycles": 233914933,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 391.130803268,
+      "cycles": 234968162,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 393.13696581,
+      "cycles": 236018301,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 395.143063544,
+      "cycles": 237067041,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 397.149156098,
+      "cycles": 238120861,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 399.155429371,
+      "cycles": 239170732,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 401.161259278,
+      "cycles": 240167799,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 403.167135415,
+      "cycles": 241185495,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 405.172900714,
+      "cycles": 242223509,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 407.178575324,
+      "cycles": 243242411,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 409.184801599,
+      "cycles": 244532566,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 411.190696298,
+      "cycles": 245833573,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 413.196526768,
+      "cycles": 247144836,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 415.202460508,
+      "cycles": 248447086,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 417.20811966,
+      "cycles": 249742378,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 419.213905732,
+      "cycles": 251045215,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 421.219787834,
+      "cycles": 252351025,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 423.225474097,
+      "cycles": 253654159,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 425.231489838,
+      "cycles": 254947908,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 427.237289502,
+      "cycles": 256238048,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 429.243279244,
+      "cycles": 257538685,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 431.249201777,
+      "cycles": 258832251,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 433.255209611,
+      "cycles": 260135276,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 435.261032516,
+      "cycles": 261433402,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 437.26707225,
+      "cycles": 262691510,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 439.274831459,
+      "cycles": 263780951,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 441.280676245,
+      "cycles": 264872850,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 443.286516462,
+      "cycles": 265955492,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 445.292408719,
+      "cycles": 267031715,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 447.298826341,
+      "cycles": 268102875,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 449.304709859,
+      "cycles": 269184958,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 451.310555028,
+      "cycles": 270271120,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 453.316848343,
+      "cycles": 271350362,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 455.322807531,
+      "cycles": 272431689,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 457.328818449,
+      "cycles": 273508143,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 459.334736599,
+      "cycles": 274587756,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 461.340599139,
+      "cycles": 275668134,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 463.346545649,
+      "cycles": 276743591,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 465.35248054,
+      "cycles": 277827441,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 467.358365302,
+      "cycles": 278902620,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 469.36466103,
+      "cycles": 279987647,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 471.370539033,
+      "cycles": 281073550,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 473.376284346,
+      "cycles": 282160569,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 475.382320658,
+      "cycles": 283244175,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 477.388065533,
+      "cycles": 284337583,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 479.393734279,
+      "cycles": 285426988,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 481.399528825,
+      "cycles": 286508021,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 483.40539804,
+      "cycles": 287592355,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 485.411582252,
+      "cycles": 288681073,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 487.417284989,
+      "cycles": 289757510,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 489.423000057,
+      "cycles": 290842494,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 491.428948203,
+      "cycles": 291929647,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 493.434741601,
+      "cycles": 293018028,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 495.440467909,
+      "cycles": 294106023,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 497.446267868,
+      "cycles": 295190871,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 499.452025997,
+      "cycles": 296274281,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 501.458283672,
+      "cycles": 297354082,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 503.464073642,
+      "cycles": 298436921,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 505.469729163,
+      "cycles": 299523439,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 507.475420375,
+      "cycles": 300605511,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 509.481068737,
+      "cycles": 301690065,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 511.487313524,
+      "cycles": 302778951,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 513.492987256,
+      "cycles": 303870203,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 515.498767629,
+      "cycles": 304951946,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 517.504897588,
+      "cycles": 306037116,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 519.510654971,
+      "cycles": 307123855,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 521.516322075,
+      "cycles": 308207131,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 523.522202098,
+      "cycles": 309290428,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 525.52830251,
+      "cycles": 310371547,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 527.534747108,
+      "cycles": 311447431,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 529.540685481,
+      "cycles": 312525568,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 531.546600755,
+      "cycles": 313598344,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 533.553023335,
+      "cycles": 314671083,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 535.55897327,
+      "cycles": 315745342,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 537.565011174,
+      "cycles": 316823137,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 539.571236407,
+      "cycles": 317897697,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 541.57747434,
+      "cycles": 318969905,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 543.583428275,
+      "cycles": 320045964,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 545.589860178,
+      "cycles": 321125361,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 547.595814064,
+      "cycles": 322195535,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 549.60193683,
+      "cycles": 323276175,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 551.607854937,
+      "cycles": 324351237,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 553.613986374,
+      "cycles": 325433541,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 555.619865192,
+      "cycles": 326507636,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 557.626371756,
+      "cycles": 327582450,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 559.632374514,
+      "cycles": 328655458,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 561.638912698,
+      "cycles": 329731444,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 563.644895087,
+      "cycles": 330807524,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 565.650754588,
+      "cycles": 331887422,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 567.657159494,
+      "cycles": 332965161,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 569.663260203,
+      "cycles": 334041224,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 571.668983926,
+      "cycles": 335117043,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 573.675140545,
+      "cycles": 336191523,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 575.680969578,
+      "cycles": 337269117,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 577.68693181,
+      "cycles": 338344177,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 579.692802853,
+      "cycles": 339422032,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 581.698599396,
+      "cycles": 340495411,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 583.704704988,
+      "cycles": 341573825,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 585.710556512,
+      "cycles": 342646791,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 587.716518005,
+      "cycles": 343716586,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 589.722771857,
+      "cycles": 344785145,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 591.728644622,
+      "cycles": 345862109,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 593.73644083,
+      "cycles": 346937817,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 595.742682432,
+      "cycles": 348014866,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 597.748610048,
+      "cycles": 349095767,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 599.754530314,
+      "cycles": 350168521,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 601.760591158,
+      "cycles": 351238907,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 603.766269147,
+      "cycles": 352314716,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 605.772028465,
+      "cycles": 353385699,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 607.778047151,
+      "cycles": 354457962,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 609.78385692,
+      "cycles": 355535383,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 611.791397133,
+      "cycles": 356802163,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 613.797616849,
+      "cycles": 357991077,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 615.803623016,
+      "cycles": 359039100,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 617.809442006,
+      "cycles": 360089220,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 619.815161897,
+      "cycles": 361141081,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 621.820978987,
+      "cycles": 362191009,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 623.827209724,
+      "cycles": 363238608,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 625.833050874,
+      "cycles": 364284588,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 627.839736018,
+      "cycles": 365338287,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 629.846031725,
+      "cycles": 366388886,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 631.852031795,
+      "cycles": 367442519,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 633.857928177,
+      "cycles": 368495064,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 635.864213465,
+      "cycles": 369546544,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 637.870060837,
+      "cycles": 370594952,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 639.876085208,
+      "cycles": 371649823,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 641.881930701,
+      "cycles": 372683501,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 643.887635506,
+      "cycles": 373735582,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 645.893886236,
+      "cycles": 374782425,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 647.89969023,
+      "cycles": 375833196,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 649.905564924,
+      "cycles": 376889774,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 651.912548309,
+      "cycles": 377941312,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 653.920402376,
+      "cycles": 378995518,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 655.928614181,
+      "cycles": 380048830,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 657.934692484,
+      "cycles": 381097917,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 659.942072456,
+      "cycles": 382328066,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 661.9493058,
+      "cycles": 383624599,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 663.959151572,
+      "cycles": 384923092,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 665.96942567,
+      "cycles": 386219820,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 667.975367276,
+      "cycles": 387505657,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 669.982541282,
+      "cycles": 388806674,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 671.988902694,
+      "cycles": 390066890,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 673.997027022,
+      "cycles": 391150098,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 676.004351237,
+      "cycles": 392454756,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 678.010367374,
+      "cycles": 393745141,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 680.016748878,
+      "cycles": 395052717,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 682.022888274,
+      "cycles": 396346548,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 684.028740053,
+      "cycles": 397641748,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 686.035564194,
+      "cycles": 398939756,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 688.041664721,
+      "cycles": 400231105,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 690.048240725,
+      "cycles": 401532834,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 692.054579291,
+      "cycles": 402834803,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 694.060788638,
+      "cycles": 404132707,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 696.066796487,
+      "cycles": 405424299,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 698.073483941,
+      "cycles": 406718974,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 700.079478761,
+      "cycles": 408016154,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 702.08561391,
+      "cycles": 409319424,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 704.092108906,
+      "cycles": 410621330,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 706.098119327,
+      "cycles": 411924355,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 708.104108418,
+      "cycles": 413217036,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 710.110045829,
+      "cycles": 414524128,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 712.116042451,
+      "cycles": 415823556,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 714.122005353,
+      "cycles": 417115713,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 716.128115894,
+      "cycles": 418414435,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 718.134018347,
+      "cycles": 419699396,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 720.140431066,
+      "cycles": 420997205,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 722.146548048,
+      "cycles": 422291833,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 724.152499061,
+      "cycles": 423580006,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 726.158906021,
+      "cycles": 424880276,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 728.164984644,
+      "cycles": 426178813,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 730.170996277,
+      "cycles": 427470980,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 732.177209219,
+      "cycles": 428775813,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 734.183310323,
+      "cycles": 430068478,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 736.189368537,
+      "cycles": 431366413,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 738.195747908,
+      "cycles": 432669519,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 740.201814043,
+      "cycles": 433968531,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 742.207927937,
+      "cycles": 435271192,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 744.214335749,
+      "cycles": 436571097,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 746.220400294,
+      "cycles": 437868382,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 748.226334101,
+      "cycles": 439167459,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 750.232452216,
+      "cycles": 440457918,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 752.238615551,
+      "cycles": 441747790,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 754.244838806,
+      "cycles": 443040802,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 756.25116152,
+      "cycles": 444342193,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 758.260702117,
+      "cycles": 445640082,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 760.266840043,
+      "cycles": 446942002,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 762.273236347,
+      "cycles": 448234444,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 764.279349604,
+      "cycles": 449524324,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 766.285405462,
+      "cycles": 450829393,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 768.292404502,
+      "cycles": 452127190,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 770.298648618,
+      "cycles": 453427737,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 772.304891985,
+      "cycles": 454732150,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 774.31132899,
+      "cycles": 456025886,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 776.318069343,
+      "cycles": 457333557,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 778.324743057,
+      "cycles": 458628033,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 780.330693517,
+      "cycles": 459928323,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 782.336764766,
+      "cycles": 461229862,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 784.342705637,
+      "cycles": 462528344,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 786.349212903,
+      "cycles": 463824067,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 788.355767289,
+      "cycles": 465107511,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 790.36176748,
+      "cycles": 466406277,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 792.368036409,
+      "cycles": 467692333,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 794.374217368,
+      "cycles": 468992771,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 796.380800205,
+      "cycles": 470269157,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 798.387069624,
+      "cycles": 471556679,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 800.393185825,
+      "cycles": 472853968,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 802.399217687,
+      "cycles": 474147631,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 804.405864264,
+      "cycles": 475460151,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 806.412068235,
+      "cycles": 476756391,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 808.418403755,
+      "cycles": 478068171,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 810.425072532,
+      "cycles": 479376857,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 812.431276064,
+      "cycles": 480686574,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 814.438705545,
+      "cycles": 481991539,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 816.445957098,
+      "cycles": 483291903,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 818.452761575,
+      "cycles": 484595761,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 820.458860749,
+      "cycles": 485891887,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 822.465878394,
+      "cycles": 487197120,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 824.472300285,
+      "cycles": 488495449,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 826.478349519,
+      "cycles": 489807807,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 828.484402324,
+      "cycles": 491104261,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 830.490990364,
+      "cycles": 492414681,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 832.497039109,
+      "cycles": 493713967,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 834.503161044,
+      "cycles": 495018891,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 836.509515707,
+      "cycles": 496325357,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 838.515747951,
+      "cycles": 497536785,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 840.521832536,
+      "cycles": 498831476,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 842.528035891,
+      "cycles": 500127223,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 844.534127297,
+      "cycles": 501409140,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 846.540260952,
+      "cycles": 502715145,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 848.546775745,
+      "cycles": 504018183,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 850.552893281,
+      "cycles": 505313525,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 852.559003408,
+      "cycles": 506615986,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 854.565506601,
+      "cycles": 507905659,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 856.571810836,
+      "cycles": 509207043,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 858.578043162,
+      "cycles": 510497819,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 860.584571286,
+      "cycles": 511792710,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 862.590632744,
+      "cycles": 513077549,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 864.59689362,
+      "cycles": 514363593,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 866.603488744,
+      "cycles": 515669312,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 868.609485013,
+      "cycles": 516963040,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 870.615571182,
+      "cycles": 518254049,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 872.622329994,
+      "cycles": 519541344,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 874.628374834,
+      "cycles": 520823807,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 876.634900319,
+      "cycles": 522050383,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 878.641386335,
+      "cycles": 523110286,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 880.647471275,
+      "cycles": 524162753,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 882.653771672,
+      "cycles": 525213250,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 884.660646245,
+      "cycles": 526268126,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 886.666679696,
+      "cycles": 527321798,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 888.672815766,
+      "cycles": 528378345,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 890.679295123,
+      "cycles": 529434449,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 892.685466532,
+      "cycles": 530484027,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 894.691589303,
+      "cycles": 531540345,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 896.69806189,
+      "cycles": 532731939,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 898.704086292,
+      "cycles": 534021026,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 900.710451251,
+      "cycles": 535330983,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 902.71674,
+      "cycles": 536632153,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 904.722885281,
+      "cycles": 537934495,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 906.728894084,
+      "cycles": 539029282,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 908.735377583,
+      "cycles": 540084282,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 910.741626153,
+      "cycles": 541142399,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 912.747676856,
+      "cycles": 542197214,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 914.753949597,
+      "cycles": 543246687,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 916.774470045,
+      "cycles": 544314759,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 918.780658357,
+      "cycles": 545369872,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 920.788130578,
+      "cycles": 546423930,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 922.794608958,
+      "cycles": 547474788,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 924.80088572,
+      "cycles": 548530193,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 926.80728937,
+      "cycles": 549586720,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 928.813773161,
+      "cycles": 550644276,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 930.820142202,
+      "cycles": 551697987,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 932.826293286,
+      "cycles": 552746774,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 934.833033054,
+      "cycles": 553796392,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 936.839277537,
+      "cycles": 554849684,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 938.845419681,
+      "cycles": 555904717,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 940.851874443,
+      "cycles": 556955663,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 942.858261425,
+      "cycles": 558010478,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 944.864974635,
+      "cycles": 559066904,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 946.870995571,
+      "cycles": 560122869,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 948.877212135,
+      "cycles": 561177330,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 950.883630108,
+      "cycles": 562237339,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 952.889940782,
+      "cycles": 563288774,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 954.896095567,
+      "cycles": 564334405,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 956.902299592,
+      "cycles": 565385202,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 958.908830264,
+      "cycles": 566442145,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 960.91505031,
+      "cycles": 567497070,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 962.921149526,
+      "cycles": 568553240,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 964.927761568,
+      "cycles": 569611150,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 966.933921634,
+      "cycles": 570660264,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 968.940111301,
+      "cycles": 571726377,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 970.947515896,
+      "cycles": 572799541,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 972.953803922,
+      "cycles": 573860324,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 974.9600831180001,
+      "cycles": 574923154,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 976.966330684,
+      "cycles": 575978716,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 978.979403252,
+      "cycles": 577040162,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 980.986137784,
+      "cycles": 578099609,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 982.992825587,
+      "cycles": 579156950,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 984.999128673,
+      "cycles": 580214266,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 987.005296711,
+      "cycles": 581279034,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 989.012185673,
+      "cycles": 582341508,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 991.018306191,
+      "cycles": 583398247,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 993.025957246,
+      "cycles": 584460541,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 995.032535211,
+      "cycles": 585520869,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 997.039123766,
+      "cycles": 586577568,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 999.045290654,
+      "cycles": 587636069,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1001.051464513,
+      "cycles": 588694785,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1003.057700851,
+      "cycles": 589747364,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1005.063846251,
+      "cycles": 590814929,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1007.070566705,
+      "cycles": 591875810,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1009.076736194,
+      "cycles": 592935244,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1011.083054403,
+      "cycles": 593993421,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1013.089196832,
+      "cycles": 595050803,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1015.095499831,
+      "cycles": 596334009,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1017.101653151,
+      "cycles": 597641881,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1019.109042291,
+      "cycles": 598938424,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1021.115147381,
+      "cycles": 600244795,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1023.121242153,
+      "cycles": 601558016,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1025.127426323,
+      "cycles": 602866642,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1027.133648953,
+      "cycles": 604155454,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1029.139982422,
+      "cycles": 605455437,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1031.146210103,
+      "cycles": 606766057,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1033.152356034,
+      "cycles": 608067725,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1035.158471512,
+      "cycles": 609368839,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1037.164901907,
+      "cycles": 610669831,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1039.171085402,
+      "cycles": 611975832,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1041.177287563,
+      "cycles": 613285738,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1043.183891224,
+      "cycles": 614597895,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1045.190197176,
+      "cycles": 615911254,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1047.196292786,
+      "cycles": 617044663,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1049.202721188,
+      "cycles": 618075137,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1051.208856319,
+      "cycles": 619096632,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1053.214961086,
+      "cycles": 620091031,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1055.221540992,
+      "cycles": 621085636,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1057.227402003,
+      "cycles": 622110028,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1059.233548185,
+      "cycles": 623131164,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1061.23985717,
+      "cycles": 624139975,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1063.245915253,
+      "cycles": 625138548,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1065.251777733,
+      "cycles": 626152363,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1067.258264699,
+      "cycles": 627170646,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1069.264396625,
+      "cycles": 628187885,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1071.270504785,
+      "cycles": 629184924,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1073.276974544,
+      "cycles": 630188243,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1075.282916244,
+      "cycles": 631217096,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1077.288980557,
+      "cycles": 632240819,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1079.295062742,
+      "cycles": 633239381,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1081.301024793,
+      "cycles": 634227544,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1083.307987865,
+      "cycles": 635242688,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1085.313976002,
+      "cycles": 636255495,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1087.320209399,
+      "cycles": 637258653,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1089.32643595,
+      "cycles": 638254673,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1091.332664203,
+      "cycles": 639258120,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1093.338898929,
+      "cycles": 640263740,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1095.345024819,
+      "cycles": 641273892,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1097.351157722,
+      "cycles": 642262926,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1099.357426925,
+      "cycles": 643248470,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1101.363586402,
+      "cycles": 644262294,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1103.369828279,
+      "cycles": 645266822,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1105.37602927,
+      "cycles": 646260072,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1107.382644157,
+      "cycles": 647248820,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1109.388991949,
+      "cycles": 648246448,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1111.395166415,
+      "cycles": 649249568,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1113.401382792,
+      "cycles": 650253987,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1115.407720249,
+      "cycles": 651239124,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1117.413827551,
+      "cycles": 652235800,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1119.420312728,
+      "cycles": 653246617,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1121.426605699,
+      "cycles": 654258795,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1123.432801122,
+      "cycles": 655243061,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1125.439125724,
+      "cycles": 656234578,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1127.445336829,
+      "cycles": 657252202,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1129.451623373,
+      "cycles": 658261851,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1131.459532246,
+      "cycles": 659258939,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1133.466088807,
+      "cycles": 660238377,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1135.472319263,
+      "cycles": 661245980,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1137.478400891,
+      "cycles": 662255134,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1139.484866783,
+      "cycles": 663261977,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1141.491155128,
+      "cycles": 664250308,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1143.497464002,
+      "cycles": 665239086,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1145.504099712,
+      "cycles": 666251039,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1147.510371825,
+      "cycles": 667258924,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1149.516600999,
+      "cycles": 668246791,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1151.523332305,
+      "cycles": 669233137,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1153.529543947,
+      "cycles": 670246131,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1155.537076262,
+      "cycles": 671260296,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1157.544891661,
+      "cycles": 672263236,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1159.551751742,
+      "cycles": 673252468,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1161.5579643,
+      "cycles": 674254750,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1163.564110667,
+      "cycles": 675264463,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1165.570634658,
+      "cycles": 676276899,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1167.57699731,
+      "cycles": 677267777,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1169.583461458,
+      "cycles": 678255285,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1171.590026763,
+      "cycles": 679267959,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1173.596148442,
+      "cycles": 680284347,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1175.602369927,
+      "cycles": 681275166,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1177.608945386,
+      "cycles": 682268025,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1179.615314515,
+      "cycles": 683279246,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1181.621521074,
+      "cycles": 684288406,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1183.628225664,
+      "cycles": 685292909,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1185.634726434,
+      "cycles": 686278888,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1187.641399569,
+      "cycles": 687275464,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1189.647767375,
+      "cycles": 688287875,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1191.654089468,
+      "cycles": 689296603,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1193.66031086,
+      "cycles": 690286423,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1195.666530699,
+      "cycles": 691277312,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1197.672771374,
+      "cycles": 692291439,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1199.678914887,
+      "cycles": 693306967,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1201.685621719,
+      "cycles": 694303067,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1203.691944163,
+      "cycles": 695316168,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1205.698157724,
+      "cycles": 696532456,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1207.704707488,
+      "cycles": 697823887,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1209.710987591,
+      "cycles": 699113096,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1211.71722952,
+      "cycles": 700406820,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1213.723731702,
+      "cycles": 701704657,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1215.730009443,
+      "cycles": 702998548,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1217.736421887,
+      "cycles": 704285684,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1219.742598961,
+      "cycles": 705552381,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1221.749055616,
+      "cycles": 706836383,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1223.75526456,
+      "cycles": 708135084,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1225.761266861,
+      "cycles": 709440881,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1227.767533335,
+      "cycles": 710749703,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1229.773673045,
+      "cycles": 712046580,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1231.780288224,
+      "cycles": 713337550,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1233.786479213,
+      "cycles": 714629196,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1235.792518459,
+      "cycles": 715924322,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1237.798878706,
+      "cycles": 717216833,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1239.804993181,
+      "cycles": 718509816,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1241.811032021,
+      "cycles": 719810304,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1243.81753109,
+      "cycles": 721107013,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1245.823683857,
+      "cycles": 722415686,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1247.829763399,
+      "cycles": 723719107,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1249.8360481939999,
+      "cycles": 725025164,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1251.842184094,
+      "cycles": 726334260,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1253.84814604,
+      "cycles": 727639526,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1255.854489305,
+      "cycles": 728937008,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1257.860562867,
+      "cycles": 730238045,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1259.866599144,
+      "cycles": 731528938,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1261.873067879,
+      "cycles": 732841878,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1263.879113212,
+      "cycles": 734147233,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1265.885147979,
+      "cycles": 735451538,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1267.89193142,
+      "cycles": 736750083,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1269.898147191,
+      "cycles": 737856190,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1271.905906687,
+      "cycles": 738900113,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1273.912546349,
+      "cycles": 739950242,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1275.919055996,
+      "cycles": 741145115,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1277.925276339,
+      "cycles": 742432891,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1279.931442386,
+      "cycles": 743719712,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1281.937905771,
+      "cycles": 745010354,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1283.944153992,
+      "cycles": 746297417,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1285.950493304,
+      "cycles": 747592059,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1287.956925788,
+      "cycles": 748899353,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1289.963493672,
+      "cycles": 750188891,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1291.969717173,
+      "cycles": 751486475,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1293.975965915,
+      "cycles": 752789341,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1295.982312638,
+      "cycles": 754053867,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1297.988641794,
+      "cycles": 755037407,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1299.994872692,
+      "cycles": 756033004,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1302.001091523,
+      "cycles": 757017503,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1304.023537351,
+      "cycles": 758009381,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1306.029676346,
+      "cycles": 759001930,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1308.036335297,
+      "cycles": 759986169,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1310.042569463,
+      "cycles": 760973792,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1312.04975166,
+      "cycles": 761963040,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1314.055913401,
+      "cycles": 762952769,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1316.063343067,
+      "cycles": 763935207,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1318.070773935,
+      "cycles": 764922565,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1320.077053427,
+      "cycles": 765917779,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1322.083880914,
+      "cycles": 766903381,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1324.090124019,
+      "cycles": 767885083,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1326.096408584,
+      "cycles": 768871974,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1328.1026539,
+      "cycles": 769861694,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1330.109002736,
+      "cycles": 770846526,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1332.115271863,
+      "cycles": 771837072,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1334.121608859,
+      "cycles": 772827844,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1336.127864998,
+      "cycles": 773816338,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1338.134087496,
+      "cycles": 774807713,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1340.14079266,
+      "cycles": 775795835,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1342.147030189,
+      "cycles": 776783050,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1344.153247598,
+      "cycles": 777771222,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1346.159816833,
+      "cycles": 778761178,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1348.16621935,
+      "cycles": 779749468,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1350.172441099,
+      "cycles": 780735408,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1352.178802246,
+      "cycles": 781731263,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1354.185136944,
+      "cycles": 782723524,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1356.19148888,
+      "cycles": 783713135,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1358.197596669,
+      "cycles": 784710192,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1360.203831196,
+      "cycles": 785712211,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1362.209954004,
+      "cycles": 786709613,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1364.216270948,
+      "cycles": 787706103,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1366.222486904,
+      "cycles": 788699032,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1368.228666748,
+      "cycles": 789702105,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1370.235255807,
+      "cycles": 790702605,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1372.241669627,
+      "cycles": 791708793,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1374.247894678,
+      "cycles": 792706431,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1376.254045449,
+      "cycles": 793708676,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1378.260342057,
+      "cycles": 794712647,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1380.266914341,
+      "cycles": 795716846,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1382.273291475,
+      "cycles": 796716265,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1384.27949189,
+      "cycles": 797721344,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1386.285920201,
+      "cycles": 798720382,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1388.292042063,
+      "cycles": 799723708,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1390.298221784,
+      "cycles": 800721944,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1392.304315943,
+      "cycles": 801721090,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1394.312852053,
+      "cycles": 802719228,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1396.319215206,
+      "cycles": 803720321,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1398.325483258,
+      "cycles": 804719552,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1400.331683239,
+      "cycles": 805719543,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1402.338225584,
+      "cycles": 806723629,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1404.344650308,
+      "cycles": 807726224,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1406.350858282,
+      "cycles": 808730448,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1408.357602998,
+      "cycles": 809730594,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1410.364835656,
+      "cycles": 810732150,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1412.371038494,
+      "cycles": 811738006,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1414.378041979,
+      "cycles": 812752833,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1416.384651567,
+      "cycles": 813759498,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1418.391084304,
+      "cycles": 814767815,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1420.399560635,
+      "cycles": 815775518,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1422.405928547,
+      "cycles": 816777402,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1424.412498884,
+      "cycles": 817787373,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1426.418991359,
+      "cycles": 818794971,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1428.42559495,
+      "cycles": 819800399,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1430.431928131,
+      "cycles": 820805107,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1432.438383408,
+      "cycles": 821817162,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1434.445153687,
+      "cycles": 822826448,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1436.451917034,
+      "cycles": 823833066,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1438.458257952,
+      "cycles": 824836623,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1440.464823374,
+      "cycles": 825849809,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1442.471597221,
+      "cycles": 826855036,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1444.477950438,
+      "cycles": 827857610,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1446.484373481,
+      "cycles": 828871944,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1448.491082468,
+      "cycles": 829882065,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1450.497589253,
+      "cycles": 830886280,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1452.503949506,
+      "cycles": 831900099,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1454.510524662,
+      "cycles": 832908861,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1456.516773999,
+      "cycles": 833914676,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1458.528750897,
+      "cycles": 834921939,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1460.535332012,
+      "cycles": 835928934,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1462.541699465,
+      "cycles": 836932835,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1464.548328631,
+      "cycles": 837936407,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1466.554758295,
+      "cycles": 838948507,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1468.561473262,
+      "cycles": 839951669,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1470.56767456,
+      "cycles": 840947116,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1472.5742323,
+      "cycles": 841951352,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1474.580625687,
+      "cycles": 842955874,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1476.586837072,
+      "cycles": 843957132,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1478.593140821,
+      "cycles": 844955171,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1480.599655993,
+      "cycles": 845958532,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1482.606093921,
+      "cycles": 846964532,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1484.612402376,
+      "cycles": 847963893,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1486.618808845,
+      "cycles": 848954082,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1488.625038901,
+      "cycles": 849952229,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1490.631723467,
+      "cycles": 850957375,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1492.638154892,
+      "cycles": 851961234,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1494.64462874,
+      "cycles": 852960994,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1496.651204482,
+      "cycles": 853957420,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1498.657362614,
+      "cycles": 854961175,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1500.6635956,
+      "cycles": 855963423,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1502.670139967,
+      "cycles": 856966056,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1504.676398662,
+      "cycles": 857962419,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1506.682831509,
+      "cycles": 858971429,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1508.689831775,
+      "cycles": 859976574,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1510.696314791,
+      "cycles": 860974282,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1512.702685983,
+      "cycles": 861975776,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1514.709422015,
+      "cycles": 862981162,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1516.715969734,
+      "cycles": 863978313,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1518.722332949,
+      "cycles": 864980283,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1520.728879716,
+      "cycles": 865979906,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1522.735233289,
+      "cycles": 866979786,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1524.741821774,
+      "cycles": 867983622,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1526.748163645,
+      "cycles": 868986894,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1528.754960916,
+      "cycles": 869987710,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1530.761568513,
+      "cycles": 870992027,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1532.767621989,
+      "cycles": 871994262,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1534.774270393,
+      "cycles": 872996882,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1536.780445466,
+      "cycles": 874001410,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1538.786690512,
+      "cycles": 875001200,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1540.793278887,
+      "cycles": 876004251,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1542.799654609,
+      "cycles": 877005151,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1544.806058184,
+      "cycles": 878014882,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1546.812610631,
+      "cycles": 879013595,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1548.819116371,
+      "cycles": 880022090,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1550.825721475,
+      "cycles": 881025414,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1552.832613148,
+      "cycles": 882028935,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1554.839073809,
+      "cycles": 883032453,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1556.845769271,
+      "cycles": 884042648,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1558.852086821,
+      "cycles": 885045936,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1560.858592341,
+      "cycles": 886046327,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1562.865155324,
+      "cycles": 887051744,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1564.87171065,
+      "cycles": 888053382,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1566.878037811,
+      "cycles": 889052180,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1568.884430735,
+      "cycles": 890057841,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1570.890781922,
+      "cycles": 891063333,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1572.897432409,
+      "cycles": 892066818,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1574.90388392,
+      "cycles": 893071267,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1576.910270366,
+      "cycles": 894076249,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1578.916877891,
+      "cycles": 895075042,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1580.923187182,
+      "cycles": 896075644,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1582.929566405,
+      "cycles": 897082061,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1584.936197818,
+      "cycles": 898079145,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1586.942569216,
+      "cycles": 899082655,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1588.949015046,
+      "cycles": 900090283,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1590.956110471,
+      "cycles": 901089762,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1592.962605285,
+      "cycles": 902095399,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1594.968943713,
+      "cycles": 903101068,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1596.975233464,
+      "cycles": 904107608,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1598.981646456,
+      "cycles": 905109388,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1600.98803908,
+      "cycles": 906116379,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1602.994719543,
+      "cycles": 907120025,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1605.001339119,
+      "cycles": 908129305,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1607.007694889,
+      "cycles": 909130989,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1609.014062372,
+      "cycles": 910138586,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1611.020661243,
+      "cycles": 911146479,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1613.026876681,
+      "cycles": 912150616,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1615.03318612,
+      "cycles": 913163277,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1617.039755118,
+      "cycles": 914170389,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1619.045984911,
+      "cycles": 915176464,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1621.052209285,
+      "cycles": 916186590,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1623.058756868,
+      "cycles": 917197101,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1625.065047696,
+      "cycles": 918202758,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1627.071269515,
+      "cycles": 919205473,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1629.077932222,
+      "cycles": 920217717,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1631.084647919,
+      "cycles": 921220274,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1633.090937162,
+      "cycles": 922224932,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1635.097743581,
+      "cycles": 923234392,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1637.104055287,
+      "cycles": 924242170,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1639.110333174,
+      "cycles": 925250553,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1641.119410823,
+      "cycles": 926260358,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1643.126296426,
+      "cycles": 927267726,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1645.132742315,
+      "cycles": 928272959,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1647.139223965,
+      "cycles": 929279846,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1649.146091962,
+      "cycles": 930284348,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1651.152607574,
+      "cycles": 931289979,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1653.159019377,
+      "cycles": 932293893,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1655.16566745,
+      "cycles": 933302175,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1657.172481921,
+      "cycles": 934308621,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1659.178869657,
+      "cycles": 935313606,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1661.185403423,
+      "cycles": 936322217,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1663.192738881,
+      "cycles": 937328738,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1665.199296388,
+      "cycles": 938334680,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1667.205727647,
+      "cycles": 939338982,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1669.212137447,
+      "cycles": 940346008,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1671.218713566,
+      "cycles": 941347910,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1673.225211896,
+      "cycles": 942354487,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1675.231785166,
+      "cycles": 943361734,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1677.238599394,
+      "cycles": 944367783,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1679.245048936,
+      "cycles": 945374528,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1681.251578648,
+      "cycles": 946384719,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1683.258485596,
+      "cycles": 947394520,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1685.264736851,
+      "cycles": 948401061,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1687.271171864,
+      "cycles": 949402843,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1689.278044014,
+      "cycles": 950406182,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1691.284407778,
+      "cycles": 951405462,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1693.290816563,
+      "cycles": 952406999,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1695.297293986,
+      "cycles": 953404947,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1697.303603912,
+      "cycles": 954399972,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1699.309908268,
+      "cycles": 955398915,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1701.316323442,
+      "cycles": 956398653,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1703.322875005,
+      "cycles": 957399144,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1705.329349119,
+      "cycles": 958395483,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1707.335661114,
+      "cycles": 959397496,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1709.342347616,
+      "cycles": 960399796,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1711.349779099,
+      "cycles": 961390797,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1713.356172493,
+      "cycles": 962393600,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1715.363406307,
+      "cycles": 963391321,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1717.3698325,
+      "cycles": 964386200,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1719.376402271,
+      "cycles": 965387693,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1721.384056961,
+      "cycles": 966401534,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1723.39078135,
+      "cycles": 967399312,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1725.397229821,
+      "cycles": 968401593,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1727.40383494,
+      "cycles": 969414767,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1729.410566757,
+      "cycles": 970422156,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1731.416886947,
+      "cycles": 971428233,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1733.423259727,
+      "cycles": 972448200,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1735.429941113,
+      "cycles": 973458618,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1737.436306191,
+      "cycles": 974461427,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1739.442910006,
+      "cycles": 975477694,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1741.449681049,
+      "cycles": 976488928,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1743.456305562,
+      "cycles": 977497460,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1745.462615688,
+      "cycles": 978504833,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1747.468794224,
+      "cycles": 979515609,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1749.475187847,
+      "cycles": 980525542,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1751.481297632,
+      "cycles": 981536255,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1753.487499545,
+      "cycles": 982551618,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1755.493699068,
+      "cycles": 983563157,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1757.500066147,
+      "cycles": 984575713,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1759.506564594,
+      "cycles": 985586850,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1761.513578725,
+      "cycles": 986592837,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1763.519793542,
+      "cycles": 987598229,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1765.526114667,
+      "cycles": 988617014,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1767.533006006,
+      "cycles": 989623176,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1769.539314059,
+      "cycles": 990629304,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1771.545595551,
+      "cycles": 991641849,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1773.552163838,
+      "cycles": 992654384,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1775.558323109,
+      "cycles": 993656247,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1777.564594067,
+      "cycles": 994671168,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1779.571329408,
+      "cycles": 995691062,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1781.577463065,
+      "cycles": 996694545,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1783.583624539,
+      "cycles": 997704927,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1785.590394756,
+      "cycles": 998719486,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1787.596660667,
+      "cycles": 999728792,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1789.602886446,
+      "cycles": 1000741808,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1791.60955688,
+      "cycles": 1001761745,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1793.616090472,
+      "cycles": 1002767596,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1795.622284157,
+      "cycles": 1003777561,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1797.629065634,
+      "cycles": 1004792421,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1799.635630671,
+      "cycles": 1005806806,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1800.000059193,
+      "cycles": 1005990949,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    },
+    {
+      "seconds": 1800.006952683,
+      "cycles": 1005994388,
+      "best_size": 443,
+      "per_thread": [
+        443,
+        443
+      ]
+    }
+  ]
+}

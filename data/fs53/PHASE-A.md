@@ -148,3 +148,45 @@ better-shaped search moved them by 21 and 55. So the fall-off of plateau/thresho
 that table said in advance, mostly a measurement of a flat budget spread over growing graphs — and here is the
 direct evidence, rather than the caveat. The result stands for 23 in the other direction: no rotation order and
 no line quotient reaches even 87 there, so 23's plateau is the one that does not move under a change of method.
+
+## A.1 stage 3 — chained from each member's best, and the seven filed records
+
+Each run resumed with `--start` from the best set any earlier run of that member reached, at seed 2.
+**Nothing moved at any member.**
+
+| q | filed record | α ≥ (verified) | six needs | short by | the budget behind the plateau |
+|---|---|---|---|---|---|
+| 23 | `alpha-q23-ge87.json` | **87** | 89 | **2** | 900 s × 3 + 58 symmetry runs + 3600 s × 6 threads; **≈ 96,000 restarts, no movement past 87** |
+| 31 | `alpha-q31-ge146.json` | **146** | 161 | 15 | same shape; 75,852 restarts in the chained hour alone |
+| 43 | `alpha-q43-ge258.json` | **258** | 309 | 51 | 900 s × 3, then 1800 s × 2 |
+| 47 | `alpha-q47-ge265.json` | **265** | 369 | 104 | same |
+| 59 | `alpha-q59-ge363.json` | **363** | 581 | 218 | same |
+| 67 | `alpha-q67-ge443.json` | **443** | 749 | 306 | same, seeded from rotation order 34 |
+| 79 | `alpha-q79-ge578.json` | **578** | 1041 | 463 | same, seeded from rotation order 2 |
+
+Every filed set was re-verified from the definition by the product owner's script **as committed**, not merely
+in scratch: 0 internal edges in all seven. Each record carries its budget, threads, seed and `halt`.
+
+**None of these numbers is α.** Each is a plateau at the stated budget; a local search bounds α from below only
+and refuses nothing. No six-colour threshold was cleared at any member, so the phase clears no member for six
+and eliminates none either.
+
+## The prediction on trial, scored
+
+The bias-corrected growth law predicted **α(23) ≈ 96–97** and **α(31) ≈ 166**. The searches reached **87** and
+**146** — 10 % and 12 % below the predicted values, and both **below** the six-thresholds the law put them
+above.
+
+**At 23 this is close to as strong as a search verdict gets, and it is still not a refutation.** The instrument
+attains the true α at the one plane where the true α is known (28 at `q = 11`, in two seconds on one thread);
+at 23 it saturates at 87 within fifteen seconds of a cold start, and then roughly 96,000 restarts across three
+stages, three seeds, eight rotation orders, a line quotient and eight core-hours never produce an 88. The
+predicted 96 would need **nine** more vertices than anything the search has ever touched there.
+
+**At 31 the same reading is weaker**, because the 31-plane is 1.8× the 23-plane and got the same wall clock;
+146 against a predicted 166 is a 20-vertex gap on a graph where the search is less converged.
+
+So: **the law's shape is wrong below `q ≈ 30`, on this evidence** — it over-predicts at both live members, and
+at the one member where the search is near-converged it over-predicts by 10 %. That is the milestone's durable
+product taking a hit, and it is reported as the outcome it is. What survives is the law's *ordering*: 23 and 31
+are still the members closest to their thresholds, by a wide margin.
