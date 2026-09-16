@@ -261,6 +261,47 @@ hard fractional ceiling is `χ_f(Γ₇) = 3.5 > 3`); the shape key moved from or
 test; rounding became infallible for (iii); the homometric-pair control was added, because it is the one input on which the
 prefilter alone would be unsound.
 
+### M3 — experience (2026-09-16): the surfaces and their wording
+**Who reads what, holding what.** A reviewer who trusts none of this holds one certificate file, a standard-library checker and
+`plans/FS56-field-blowup.md`; a later session holds the search's records and nothing of this conversation; a Lean reader holds
+one docstring; Kooshi holds the report.
+
+**The certificate file** (`data/fs56/…/cert-*.json`), everything the checker needs and nothing it recomputes:
+`kind` · `field.radicands` (e.g. `[167]`; `F = ℚ(√d₁,…)`, every root positive) · `denominator` · `points` (each `[x, y]`, each a list
+of `2^r` integer numerators over the basis `√(∏_{j∈S} d_j)`, `S` read as a bitmask, in bitmask order) · `level` (`k`) ·
+`weights` (`[{"set": [indices], "y": "p/q"}]`) · `w` (claimed; the checker recomputes it and refuses a mismatch) · `claim`
+(one plain sentence) · `derivation` (the path to the hand proof) · `produced_by`, `provenance` (untrusted, never read by the
+checker). No congruence rows, no isometries, no independent sets: the checker derives all three.
+
+**The checker's words.** `python3 tools/fs56_gf_check.py CERT.json` — exit 0 certified, 1 not a certificate, 2 unreadable file;
+`--show-points` prints the points as `a + b√167` fractions; `--self-test` runs the arithmetic and grouping controls.
+* Success, two lines, the second carrying the consequence and its dependency:
+  `CERTIFIED: H = 42 points of Q(√167)², level 3 — every fractional colouring of H whose weight on each point set of at most 3 points
+  depends only on the set's congruence class weighs at least w = 1234/411 (≈ 3.00243); exact arithmetic, no solver trusted (12 s)` ·
+  `hence, by the field blow-up (plans/FS56-field-blowup.md, Lemma B2), the plane over Q(√167) needs at least 4 colours`.
+  The colour count printed is always `⌈w⌉` — the obligation pass's rule `χ(F²) ≥ ⌊w⌋ + 1` for non-integer `w` and `χ ≥ w` for integer
+  `w` are one statement — so an integer `w` claims nothing beyond itself and needs no special wording.
+* Refusals name the object and the rule, never a line number: `NOT A CERTIFICATE: the congruence class of set #12 [0, 5, 9]
+  (4 listed sets: #12, #13, #40, #41) sums to 1/7; a class of sets of two or more points must sum to 0` ·
+  `NOT A CERTIFICATE: independent set [0, 4, 11, 17] weighs 1003/1000 > 1 (largest contributions: [0, 11] +1/2, [4] +3/10, …)` ·
+  `NOT A CERTIFICATE: the singletons sum to 3 but the file claims w = 31/10` · `NOT A CERTIFICATE: set #5 has 4 points but the file
+  declares level 3` · `NOT A CERTIFICATE: radicand 12 is not squarefree`.
+
+**The search's records** (`data/fs56/q1/<run>/`): `progress.jsonl`, one line per completed generation (`generation`, `best`,
+`population`, `lp_calls`, `seconds`), the line a waiter can watch; `gen-<g>.json`, the whole beam (canonical points, float
+readings, parent key) written atomically; `RESUME.md` written before launch. `run … --new` refuses an existing directory,
+`run …` without it refuses a missing one — a wrong path cannot silently restart from zero (the FS-54 D4 convention). Float
+readings are labelled `reading` in every record; the word `bound` is reserved for checker output.
+
+**The kernel docstrings** (`Instances/IndependenceThreshold.lean`): the module doc and both consumers at 23 and 83 still say their
+hypotheses are open. Both are now held outside the kernel — 83 by `data/fs50/p83-refusal/` (FS-50, `α ≤ 1046`), 23 by
+`data/fs54/cert-q23-l3-N105.json` — so the text becomes *"held by an exact certificate checked outside the kernel; the conclusion
+rests on that checker, not on anything this module decides"*, naming the file and the checker. Declarations unchanged.
+
+**The report to Kooshi** leads with the three findings in plain words (five colours refused at 23; the fractional chromatic number
+of the plane over ℚ(√3,√11) is exactly 4, a published question; a fractional route to four colours over ℚ(√167)), states the
+correction to what was said mid-session about ℚ(√11) and ℚ(√23) in one line, and gives Q1's shape and default.
+
 ## §PA — prior-art gate (WORKFLOW 3a), 2026-09-16
 
 **Searched, in the disciplines' words:** (i) *chromatic number of the plane over a real quadratic field / unit distance graph
