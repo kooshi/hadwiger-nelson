@@ -6,3 +6,8 @@ check 1/4  group and orbits rebuilt from p = 83 alone: 6889 points, 49447 orbits
 check 2/4  multipliers: 98894 rationals, the 97129 attached to inequalities are all >= 0, the 1765 attached to equalities are free
 check 3/4  positive semidefiniteness:
            Z1: 43 circulant block(s) over 165 slots (82 cosine, 82 sine, 1 origin), weights over the denominator 100000000; block 0: a rational Gram factor of shape 28x165 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 24x165 (Z = B^T B), LDL^T re-run and clean; ... (41 more, each checked the same way)
+           Z2: 43 circulant block(s) over 165 slots (82 cosine, 82 sine, 1 origin), weights over the denominator 100000000; block 0: a rational Gram factor of shape 20x165 (Z = B^T B), LDL^T re-run and clean; block 1: a rational Gram factor of shape 14x165 (Z = B^T B), LDL^T re-run and clean; ... (41 more, each checked the same way)
+check 4/4  the affine identity N - tr Y(y) = <Z1,Y(y)> + <Z2,M(y)-Y(y)> + sum lambda_i c_i(y) + sum nu_j e_j(y): all 49447 orbit coefficients and the constant term agree exactly
+CERTIFIED: every independent set of UD(F_83, 2) has at most 26167902345848526536560849055071098347/25000000000000000000000000000000000 points, hence at most 1046 (a cardinality is an integer) -- exact arithmetic, no solver trusted
+hence UD(F_83, 2) is not 6-colourable (6 * 1046 = 6276 < 6889); kernel consumer: add_one_le_chromaticNumber_of_indepNum_le
+ldl exit=0
