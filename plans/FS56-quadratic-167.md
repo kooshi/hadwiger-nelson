@@ -131,30 +131,56 @@ denominator 84 (20 vectors) read −0.98 — too few vectors, as predicted. So t
 
 ## §4 Phase D in detail — the instrument for Q1
 
-**The programme.** For a finite `H ⊂ F²`, variables `γ(S) ≥ 0` for independent sets `S` of `H`; regularity `Σ_{S∋x} γ(S) = 1`
-for every `x`; for each congruence class `c` of point sets in `𝒞` (sizes 2 and 3 to start), `Σ_{S ⊇ Y} γ(S)` equal across all
-`Y ∈ c`; minimise `Σ γ(S)`. Congruence classes over `F²` are computed exactly: pairs by squared distance (an element of `F`),
-triples by the sorted triple of squared side lengths (congruence including reflections). **Dual certificate:** multipliers
-`z₀` (the regularity row at one vertex, after using the size-1 congruences — all vertices congruent — to drop the others) and
-`y_{Y,Y′}` on congruence rows, with **`z₀ > 3` and, for every independent set `S` of `H`, `z₀·[x₀ ∈ S] − Σ y_{Y,Y′}([Y ⊆ S] − [Y′ ⊆ S]) ≤ 1`**.
-The last condition quantifies over **all** independent sets, not the generated columns — the checker must certify it.
+**The field and its points** (domain pass, §M1). `F` is a real multiquadratic field `ℚ(√d₁, …, √d_r)` — radicands squarefree,
+pairwise coprime, > 1, embedded with every `√d_j > 0` — so that one checker serves ℚ(√167) (`r = 1`), MRVZ's `G27` in
+ℚ(√3,√11) (`r = 2`) and the `ℚ(√7)` control. An element of `F` is an integer vector over the `2^r` basis `√(∏_{j∈S} d_j)` with one
+common denominator per file; a point of `F²` is a pair `(x, y)` of such vectors. The **quadrance** of a difference, `dx² + dy²`,
+is an element of `F`, compared as an integer vector: two points are adjacent iff it equals 1.
 
-**The checker** (`tools/fs56_gf_check.py`, standard library, `fractions.Fraction`): rebuilds `H`'s points from exact coordinates in
-`ℚ(√d)` (pairs `(p, q)` of rationals for `p + q√d`), recomputes every unit edge, every squared distance and every triple
-class from the coordinates alone, checks that each listed congruence row pairs two genuinely congruent sets, and certifies the
-max-over-independent-sets inequality by **exhaustive branch-and-bound over independent sets** with an admissible bound (the
-positive part of each remaining term), in exact arithmetic. It must re-verify MRVZ's `G27` (phase B) — that is its positive
-control, on a published witness it did not produce. Negative controls: a row pairing non-congruent sets; a dual with one
-`y` perturbed so one independent set violates; a point moved off the field lattice (an edge disappears); `z₀ = 3` exactly.
+**Shapes.** The congruence class of a point set `Y ⊂ F²` is keyed by the **least ordering of its labelled quadrance matrix** (the
+tuple of pairwise quadrances over all orderings of `Y`, least in any fixed total order): a bijection preserving every pairwise
+distance extends to an isometry of the plane, so the key is a complete invariant for every size, and by B1 congruent sets are
+congruent by isometries of `F²`. For `|Y| ≤ 3` it is the sorted multiset of side quadrances. No isometry witnesses are stored.
 
-**The search** (`tools/fs56_gf_search.py`): MRVZ Appendix A's backtracking beam search transplanted to `F`: children add a point
-at a unit vector from a fixed `W` (closed under `z ↦ iz` and conjugation) from an existing point, or complete a unit rhombus
-`x₀ + u + v`; canonicalise under translation, `z ↦ iz`, conjugation **and the Galois flip** `σ : √167 ↦ −√167`. The flip is not
-an isometry of the real picture, but it fixes `i`, so it carries unit edges to unit edges and, through B1's algebraic form
-(`z ↦ uz + t` with `uū = 1` goes to `z ↦ σ(u)z + σ(t)`), congruent pairs to congruent pairs; the programme for `σH` is the
-programme for `H` relabelled, and `χ_gf(σH; σ𝒞) = χ_gf(H; 𝒞)`. The LP by column generation (pricing =
-max-weight independent set with pair and triple terms, OR-Tools CP-SAT), floats; any `H` reading above `3 + 10⁻³` goes to exact
-rounding and the checker.
+**The programme, level k** — a moment relaxation of "a random isometric copy of an independent set of `F²`, restricted to `H`":
+variables `γ(S) ≥ 0` for independent sets `S` of `H`; the aggregate `γ̄(Y) = Σ_{S ⊇ Y} γ(S)` must be constant on every congruence
+class of sets of size `≤ k` inside `H`, with value 1 on the singletons (one class — every point is congruent to every other, which
+is where regularity comes from); minimise `γ̄(∅) = Σ γ(S)`. `k = 1` is the (regular) fractional chromatic number `χ_f(H)`, `k = |H|`
+is MRVZ's `χ_gf(H)`, and every `k` is a valid input to B2 (it is a subfamily `𝒞`). Default `k = 3`.
+
+**The certificate — the class-sum dual.** A rational weight `y_Y` on finitely many sets `Y ⊆ H` with `1 ≤ |Y| ≤ k`, such that
+(i) on every congruence class of size-≥ 2 sets the weights **sum to zero**; (ii) on the singletons they sum to **`w`**; (iii) for
+**every** independent set `S` of `H`, `Σ_{Y ⊆ S} y_Y ≤ 1`. Then every feasible `γ` has `Σ γ(S) ≥ Σ_S γ(S) Σ_{Y⊆S} y_Y =
+Σ_Y y_Y γ̄(Y) = Σ_c γ̄_c Σ_{Y∈c} y_Y = w`, so `χ_gf(H; k) ≥ w`, and `w > k₀` proves `χ(F²) ≥ k₀ + 1` through B2. No vertex is
+distinguished and no congruence *row* is listed: the checker groups the listed sets by their keys. A set containing an edge is
+never inside an independent set, so its weight only balances a class; the checker allows it. (MRVZ's row form converts
+mechanically: `y_Y = Σ_{rows (Y, Y′)} y_row − Σ_{rows (Y′, Y)} y_row`, plus the vertex-1 coefficient on the singleton.)
+*Validated on the Moser spindle in `ℚ(√3,√11)²`, 2026-09-16 (scratchpad prototype): the programme reads 3.500000 at `k = 1, 2, 3`
+— the spindle's known `χ_f = χ_gf` — and HiGHS's duals satisfy (i)–(iii) exactly as written.*
+
+**The checker** (`tools/fs56_gf_check.py`, standard library, `fractions.Fraction`): parses the field (rejecting radicands that are
+not squarefree, pairwise coprime and > 1), the points (rejecting duplicates), and the weighted sets (rejecting an index outside `H`,
+a repeated set, a size above the declared `k`); recomputes every quadrance and edge from the coordinates alone; groups the sets by
+shape key and checks (i) and (ii) exactly; and certifies (iii) by **exhaustive branch-and-bound over the independent sets of `H`**
+in exact arithmetic, with the admissible bound "current value plus the positive weights of sets meeting the undecided vertices".
+It reports `w` and the verdict `χ_gf(H; k) ≥ w`, and says `χ(F²) ≥ ⌊w⌋ + 1` only when `w` is not an integer or exceeds it. Positive
+control: MRVZ's `G27` at `k = 27`, from their published witness (phase B). Negative controls, each with a faithful twin: a
+weight moved between two non-congruent sets (class sum breaks); one weight raised so exactly one independent set exceeds 1; a
+point moved by a non-unit vector (an edge disappears, so a new independent set violates); `w` equal to an integer (the verdict must
+not claim the next colour). **Cost to measure before the search is sized:** the branch-and-bound on `G27` (182,304 independent
+sets) and on a 60-point ℚ(√167) piece.
+
+**The search** (`tools/fs56_gf_search.py`): MRVZ Appendix A's backtracking beam search transplanted to `F`. All points lie in the
+lattice `Λ = ℤ-span(W)` of a fixed unit-vector set `W`, stored as integer vectors over `W`'s common denominator. Children add a
+point at a unit step from `W` off an existing point, or complete a unit rhombus `x₀ + u + v`. Canonical form: the least image under
+the 16-element group generated by `z ↦ iz`, conjugation and the Galois group of `F` (`√167 ↦ −√167`), each image translated so its
+coordinatewise minimum is zero. The Galois flip is not an isometry of the real picture, but it fixes `i`, so it carries unit edges
+to unit edges and (through B1's form `z ↦ uz + t`, `uū = 1`) congruent sets to congruent sets, and the programme for `σH` is the
+programme for `H` relabelled. Rotations by `u ∈ W` are symmetries of the plane but not of `Λ`, so congruent copies of `H` can
+survive deduplication; that costs time, never correctness. The LP by column generation (pricing: the most negative reduced cost
+over independent sets, a pseudo-boolean maximisation with pair and triple terms, OR-Tools CP-SAT), floats; any `H` reading above
+`3 + 10⁻³` goes to exact rounding (duals rationalised, (i) and (ii) repaired by projection onto the class-sum-zero space, (iii)
+re-checked) and to the checker.
 
 **The unit vectors to build from.** `W₀ = {±1, ±i}` ∪ Pythagorean `(3 ± 4i)/5`-family ∪ `ρ₄₂ = (83 + i√167)/84` with its
 `⟨i, conj⟩`-orbit, then denominators 168, 420 (60 vectors), 2184 (108), 5460 (180). A graph using only `ℚ(i)` points is bipartite,
@@ -183,6 +209,19 @@ reading has not improved by `10⁻³` over five generations at the largest `W` t
 Not a search for a six-colouring of any finite plane (FS-57), and not a claim that ℚ(√167)² needs six colours. Q2 (four and five
 colours refused by the same instrument) is registered as reachable in principle — `χ_gf > 4` over ℚ(√167) would prove
 `χ ≥ 5` — but is not planned until Q1 lands; `[DuczVarga2026]` needed a hand-guided augmentation to cross 4 in the whole plane.
+
+## §M Modeling passes
+
+### M1 — domain (2026-09-16)
+| decision | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| Points as pairs of elements of a real multiquadratic field, integer vectors over one denominator | points of `F(i)` as 4-vectors over `(1, √d, i, i√d)`, specific to quadratics | the checker must also verify MRVZ's `G27` in ℚ(√3,√11) and run the ℚ(√7) control; the quadrance `dx² + dy²` lives in `F` itself, so the pair form states adjacency in the field it is about | high |
+| Congruence classes keyed by the least labelled quadrance matrix | storing an isometry `(u, t)` per congruent pair and verifying it | the key is a complete invariant (a distance-preserving bijection of finite plane sets extends to an isometry), needs no witness, and is the same code for every size; witnesses are incidental data a checker would have to trust or re-derive | high |
+| The programme as a level-`k` moment relaxation with `k` a dial | MRVZ's full congruence family only | every subfamily is valid for B2, `k` trades LP size against strength, and `k = 1, 2, 3` reproduce known values on the spindle | high |
+| The class-sum dual as the certificate | MRVZ's `(4, −y)` row form with a distinguished vertex | symmetric in the vertices, no congruence rows to list or check, and the weak-duality line is three equalities; MRVZ's form converts mechanically | high |
+| Regularity folded into the singleton class | a separate row per vertex | every point of `F²` is congruent to every other; the separate rows are the singleton class written out | high |
+| Galois conjugation in the search's canonical form | canonicalise by isometries only | the programme is invariant under it (it fixes `i`), so it removes true duplicates at no risk | medium — if a future field's Galois group does not fix `i` (a non-real or CM field) the flip must go |
+| Branch-and-bound over independent sets in the checker | enumerating them (MRVZ) or a pseudo-boolean proof log | enumeration dies on triangle-free graphs past ~40 points; a proof log adds a trusted checker we do not hold; branch-and-bound keeps the standard-library surface | **medium — the cost is unmeasured; if it cannot finish on the `H` the search needs, the certificate format changes (symmetry-reduced enumeration, or VeriPB)** |
 
 ## §PA — prior-art gate (WORKFLOW 3a), 2026-09-16
 
