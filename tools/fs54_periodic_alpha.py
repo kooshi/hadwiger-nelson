@@ -172,10 +172,17 @@ def main():
                 for c in img:
                     adj[qidx[p]] |= 1 << qidx[tuple((a + b) % 3 for a, b in zip(p, c))]
             a, S = max_independent(len(qpts), adj)
+            chosen = {qpts[i] for i in S}
+            witness = sorted(_index(v) for v in POINTS
+                             if tuple(sum(x * y for x, y in zip(r, v)) % 3 for r in P) in chosen)
+            assert len(witness) == a * 3 ** k
             results.append({"basis": basis, "orbit_size": osize, "quotient_degree": len(img),
-                            "alpha_quotient": a, "periodic_set_size": a * 3 ** k})
+                            "alpha_quotient": a, "periodic_set_size": a * 3 ** k, "witness_set": witness})
         best = max(r["periodic_set_size"] for r in results)
-        record["by_dim"][k] = {"subspaces": len(subs), "unit_free_subspaces": usable, "orbits": len(reps),
+        best_witness = next(r["witness_set"] for r in results if r["periodic_set_size"] == best)
+        for r in results:
+            del r["witness_set"]
+        record["by_dim"][k] = {"best_witness_set": best_witness, "subspaces": len(subs), "unit_free_subspaces": usable, "orbits": len(reps),
                                "best_periodic_alpha": best, "seconds": round(time.time() - t0, 2),
                                "orbits_detail": results}
         print(f"dim {k}: {len(subs)} subspaces, {usable} unit-free in {len(reps)} orbits; "
