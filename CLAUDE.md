@@ -748,6 +748,26 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   ceiling — while the member with room is **43**, a fifty-seven-integer window at 84.7 % of the ceiling, sitting in
   triangle-free territory where we have no vocabulary at all. *Killing test: a five- or six-forcer built over a field
   containing neither `√3` nor `√11`, which would show the vocabulary is not the binding constraint.*
+* **G58 — The antipodal conjecture: an optimal colouring can always be taken symmetric under `z ↦ −z`. [reading,
+  4 of 4 planes with a known χ, each verified from the definition; the fixed-colour half is derived]** **Conjecture:
+  every finite Euclidean plane `UD(𝔽_q,2)` has an optimal colouring `c` with `c(−z) = τ(c(z))` for some **involution**
+  `τ` of the colours. Verified where χ is known exactly: `q = 3` (χ = 3, `τ = (2,1)`), `q = 7` (4, `(2,1,1)`), `q = 11`
+  (5, `(2,2,1)` and `(2,1,1,1)`), `q = 19` (5, `(2,2,1)`) — proper on every edge by an independent rebuild. **No simpler
+  form survives**: at 19 the identity and every single transposition are refuted, so "invariant" without a colour
+  involution is false and the involution is doing real work. **Derived, not conjectured:** a rotation fixes the origin,
+  so `c(0) = τ(c(0))` and **τ must fix a colour** — which refutes 73 of the 226 rows refused across seven equivariant
+  sweeps (32 %) in one line, with no solver, and should be a filter in the tool rather than solver time. **Why it
+  matters: it halves every colouring instance**, `(q² + 1)/2` orbits against `q²` vertices — 925 against 1,849 at 43,
+  145 against 289 at 17 — and the equivariant sweep's order-2 rows *are* that search. **Which relocates the open
+  question**: at 11 and 19 the satisfiable rows are order 2 with `τ = (2,2,1)` or `(2,1,1,1)`, and those are **exactly
+  the rows left undecided** at 17 (k = 5) and 23, 43, 47 (k = 6). So the sweeps' zeros are not evidence of absence —
+  they refused only the rows that are refused at 11 and 19 too, where a colouring demonstrably exists — and the effort
+  belongs on those half-size instances rather than on a full cube-and-conquer. *Killing test: a plane with an optimal
+  colouring but none antipodally invariant under any involution — cheapest at 23 (χ ≤ 8 kernel-checked), 27 (≤ 7),
+  43 (≤ 8), 47 (≤ 10), where a colouring is already in hand and the symmetric question is one SAT call.* **Prior art
+  NOT searched** (WORKFLOW 3a owed): the query is symmetric/equitable colourings of Cayley graphs invariant under
+  inversion, and the general statement "a vertex-transitive graph has an optimal colouring invariant under a given
+  automorphism" is false, so only the involution-up-to-colour-permutation form is at issue.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
