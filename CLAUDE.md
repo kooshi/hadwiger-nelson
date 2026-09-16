@@ -729,6 +729,24 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   which α decides χ: the calibrated searcher's plateau α(23) = 87 against the 89 six needs is the advisor's 2:1 bet that 23 is
   empty, and FS-53 scores it. *Killing test of the exclusion: a usable window member for some field containing ℚ(√3,√11) —
   impossible by reciprocity; of the reading: a decided plane with χ ≠ ⌈q²/α⌉.*
+* **G57 — The window is triangle-free where it is roomy, and no candidate field holds a Moser spindle. [derived;
+  the clique rule is `[Krebs2022]`, verified here; the correspondence and its consequence are ours]** Three mutual unit
+  distances force an equilateral triangle, whose apex is `(1/2, √3/2)`, so **`ω(unit-distance graph over F) = 3` iff
+  `√3 ∈ F`**, and 2 otherwise. Downstairs, Krebs: `ω(UD(𝔽_q,2)) = 3` iff char 3 or 3 is a square in `𝔽_q`. **These are the
+  same condition**, because `q` is usable for `F` only if every radicand of `F` is a square mod `q` — so **a field contains
+  `√3` exactly when its usable planes have triangles.** Across the window: `ω = 3` at 23, 27 and 47 (3 a square, or char 3),
+  `ω = 2` at **31 and 43**. Hence 31 and 43 can serve only fields *without* `√3`, whose own planes are therefore
+  **triangle-free**. And **no window member admits `√3` and `√11` together** (11 is a non-square at 23, 27, 47; 3 is a
+  non-square at 31, 43 — 11 *is* a square at 43, so there the exclusion is driven by 3 alone), which is G56's reciprocity
+  seen through the clique structure — and since the **Moser spindle needs both** (`√3` for its rhombi, `√11` for the twist
+  `cos θ = 5/6`), **no field whose local bound could be 6 contains a Moser spindle.** Every forcer this project holds is
+  assembled from spindles or their relatives, so G31's "a χ ≥ 6 gadget must be constructed, not found" acquires its sharp
+  form: over a window field there is nothing to build *from*, and at 31 and 43 not even a triangle. **The tension this
+  creates is the milestone's, stated in one line:** the member where our construction vocabulary could apply is **47**,
+  which has almost no room — six needs `α ≥ 369` against the certified `α ≤ 377`, a nine-integer window at 97.9 % of the
+  ceiling — while the member with room is **43**, a fifty-seven-integer window at 84.7 % of the ceiling, sitting in
+  triangle-free territory where we have no vocabulary at all. *Killing test: a five- or six-forcer built over a field
+  containing neither `√3` nor `√11`, which would show the vocabulary is not the binding constraint.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
