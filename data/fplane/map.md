@@ -33,7 +33,7 @@ no usable plane in {3, 7, 11, 19, 23, 31}, and every one has 43 or 47 usable, ev
 **What is at stake at the two decisive planes.** Five is refused by certificate at 43 and 47, so a
 verified six-colouring at either is that plane's exact chromatic number, and it makes **χ(ℚ(√4703)²) ≤ 6
 a theorem** (and at 47 also χ(ℚ(√2351)²) ≤ 6) — the first number field with local bound exactly 6,
-predicted 6 by the conjecture.
+predicted 6 by the conjecture. **Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`, `data/fs53/README.md`): six at 47 needs the certificate to be 99.4 % tight, a tightness seen only at q = 7; at 43 every instrument came back empty — the independent set stuck at 258 against the 309 six needs through over three hours aimed at exactly that, the six-colour search stalled at 1,016 monochromatic edges for 2 h 52 m, the equivariant sweep 0 of 21. These are nulls at a budget, not refusals; but they mean these fields most likely have local bound ≥ 7, where the conjecture's bold form predicts seven, and their six rests on a plane the evidence argues against.
 
 | field | radicands | 2-adic wall | usable primes | verdict |
 |---|---|---|---|---|

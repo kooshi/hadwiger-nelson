@@ -139,7 +139,9 @@ local bound is **6 exactly when a usable one of 43, 47 is six-chromatic**, and �
 `ℚ(√2351)` (decided by 47 alone), `ℚ(√4703)` (43 or 47), `ℚ(√4847)` (43 or 47); decided by 43 alone first at
 `ℚ(√20807)`.
 
-**At 43 and 47 this is the whole prize.** Five is refused by certificate at both, so a verified six-colouring
+**Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`, `data/fs53/README.md`): six at 47 needs the certificate to be 99.4 % tight, a tightness seen only at q = 7; at 43 every instrument came back empty — the independent set stuck at 258 against the 309 six needs through over three hours aimed at exactly that, the six-colour search stalled at 1,016 monochromatic edges for 2 h 52 m, the equivariant sweep 0 of 21. These are nulls at a budget, not refusals; but they mean these fields most likely have local bound ≥ 7, where the conjecture's bold form predicts seven, and their six rests on a plane the evidence argues against.
+
+**At 43 and 47 this would be the whole prize.** Five is refused by certificate at both, so a verified six-colouring
 there *is* that plane's exact chromatic number — and it would make `χ(ℚ(√4703)²) ≤ 6`, and at 47 also
 `χ(ℚ(√2351)²) ≤ 6`, a theorem: **the first number field with local bound exactly 6**, predicted 6 exactly by
 the conjecture. Nowhere else does one result do that.

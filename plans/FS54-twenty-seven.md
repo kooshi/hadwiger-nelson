@@ -93,7 +93,9 @@ with the 2-adic wall broken see each prime member first —
 
 **`ℚ(√4703)` has local bound ≥ 6 by certificate** — its only usable planes below 100 are 43 and 47 (floor six each) and 79
 (≥ 7), and every plane from 98 up is ≥ 7 by Weil — so `L(ℚ(√4703)) ∈ {6, 7, 8}`, and **a six-colouring at 43 or 47 makes it
-exactly 6**. The earlier searches were bounded to small radicands; `167 > 100`.
+exactly 6**. The earlier searches were bounded to small radicands; `167 > 100`. **Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`, `data/fs53/README.md`): six at 47 needs the certificate to be 99.4 % tight, a tightness seen only at q = 7; at 43 every instrument came back empty — the independent set stuck at 258 against the 309 six needs through over three hours aimed at exactly that, the six-colour search stalled at 1,016 monochromatic edges for 2 h 52 m, the equivariant sweep 0 of 21. These are nulls at a budget, not refusals; but they mean these fields most likely have local bound ≥ 7, where the conjecture's bold form predicts seven, and their six rests on a plane the evidence argues against. The complete listing
+(`tools/fs54_quadratic_fields.gp`, d ≤ 30,000) finds 16 such quadratic fields, **every one decided by 43 and/or 47** — so on
+current evidence none of them is a six-field.
 
 ### 1.7 A cheap bound that does not work (recorded so nobody re-derives it)
 Partitioning the plane into cosets of an `𝔽₃`-subspace `W` gives `α ≤ [V:W]·α(G[W])`. Every solid contains at most 5

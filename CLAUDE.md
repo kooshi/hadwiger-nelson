@@ -734,7 +734,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   six-chromatic and ≥ 7 otherwise — the smallest are **ℚ(√2351)** (usable 47, 67, 71, 83, …: decided by 47 alone) and
   **ℚ(√4703)** (43, 47, 79, …). **So a six-colouring at 43 or 47 — the two members where five is already refused, hence the
   two a single hit settles — makes χ(ℚ(√4703)²) ≤ 6, and at 47 also χ(ℚ(√2351)²) ≤ 6, a theorem: the first number field with
-  local bound exactly 6.** **And 27 is the unique non-prime
+  local bound exactly 6.** **Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`): six at 47
+  needs the certificate 99.4 % tight, seen only at q = 7; at 43 the independent set stuck at 258 against the 309 six needs
+  through three hours aimed at it, the six-colour search stalled for 2 h 52 m, the equivariant sweep 0 of 21 — nulls at a
+  budget, not refusals, but they put these fields most likely at local bound ≥ 7. **And 27 is the unique non-prime
   member, permanently:** usable means q ≡ 3 (mod 4), which for q = p^f holds iff p ≡ 3 (mod 4) **and f is odd** — so
   "odd residue degree" is not an extra hypothesis but the congruence restated — and of the non-prime prime powers below
   Weil's cap of 97 (4, 8, 9, 16, 25, 27, 32, 49, 64, 81) only 27 qualifies. **25 = 5² fails twice** (5 ≡ 1 mod 4, and
