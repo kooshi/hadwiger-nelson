@@ -75,6 +75,10 @@ Moser-spindle conclusion survives: 11 is a non-square in `𝔽₂₇`.)
   floors ≤ 4; controls ℚ → 2, ℚ(√3) → ≤ 4, ℚ(√3,√11) → ≤ 4, ℚ(√41) → 2 all agree). **Consequence: every field of odd degree
   is 2-colourable** — some prime above 2 has odd local degree, so `i` is not in that completion, and the extension is ramified
   because `ℚ₂(i)/ℚ₂` is.
+* **And the 2-adic side has its own window member**: `U₆₄ = Cay(𝔽₄₀₉₆, μ₆₅)` has `λ_min = −15`, Hoffman `χ ≥ 5.33`, a linear
+  8-colouring — so `6 ≤ χ(U₆₄) ≤ 8` — while `U₁₂₈` has floor 8 (`data/fs54/char2/`, carry-less rebuild; an exp-table build
+  gave a spurious −129 at 128 and is discarded). A field realising `U₆₄` needs an inert prime above 2 of residue degree 6 with
+  `F_𝔭` ramified over `ℚ₂`, so degree ≥ 12.
 * **So the first version's answer — the conductor-13 cubic field — is 2-colourable and sees nothing.** Nor does the stub's
   `ℚ(√3, ρ)` (usable plane at 11).
 * **A field whose first usable plane is 27, with the wall broken, has even degree ≥ 6**: quadratic fields cannot reach `𝔽₂₇`;
@@ -242,6 +246,12 @@ every record (owed since FS-53).
   **117** — probability 0.7; a set of 118 or more from it would be the first non-9-periodic record. **P9** if the D4 pricing
   agent's 4-point bound is computable at 27, its float value lands in **[138, 146]**, and it refuses five (< 146) with
   probability 0.35.
+* **P5–P7 scored (all 15 classes, 180 s each, `data/fs54/symmetric/prime-order-alpha.jsonl`).** **P7 control passed**: three
+  order-3 translation classes reach 117. **P6 WON**: the order-7 rotations are the weakest class, **106, proven optimal** by
+  CP-SAT (solver's word) in 0.4 s. **P5 undecided**: no class found more than 117 (the point reflection and both line
+  reflections 117, the Frobenius class 109), but every solver bound except order 7's is ≥ 132, so nothing at 122 is refused.
+  **Every one of the fourteen 117-sets found by any method is 4-rigid**: maximal, with every outside vertex adjacent to at least
+  4 of its points.
 * **Reading, not a claim:** 117 is a strong attractor. If `α(27) = 117`, then `χ(27) = 7` exactly (`⌈729/117⌉ = 7` and a
   seven-colouring is known) and 27 leaves the window — but proving `α ≤ 121` is 26 integers below the converged certificate.
 

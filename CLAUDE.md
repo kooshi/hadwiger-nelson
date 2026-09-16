@@ -725,7 +725,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   that **splits** in F(i) gives no bound; one that is **ramified** in F(i)/F gives **χ(F²) ≤ 2** whatever its norm (conjugation
   acts trivially on the residue field, so every unit vector reduces to 1 and a linear map to 𝔽₂ sending 1 to 1 two-colours
   the plane); one that is **inert** gives the Cayley graph of 𝔽_{Q²} on the (Q+1)-st roots of unity, Q = N(𝔭), which is
-  **4-colourable at Q = 2, 4, 8, 16, 32** (CaDiCaL, FS-54). So "the wall is broken" means **every prime above 2 splits in
+  **4-colourable at Q = 2, 4, 8, 16, 32** (CaDiCaL, FS-54) — and **at Q = 64 its Hoffman floor is 6** (λ_min = −15; a linear
+  8-colouring exists, so 6 ≤ χ ≤ 8), so **U₆₄ is a sixth window member, in characteristic 2**, realised only by fields of
+  degree ≥ 12; Q = 128 has floor 8 (`data/fs54/char2/`). So "the wall is broken" means **every prime above 2 splits in
   F(i)**, i.e. −1 is a square in every completion above 2, and **every field of odd degree is 2-colourable** (some prime above
   2 has odd local degree, so i is not in that completion and it ramifies). With that criterion the smallest fields are
   **23 → ℚ(√167), 31 → ℚ(√1055), 43 → ℚ(√4703), 47 → ℚ(√2351)** — every field of degree 3 or 4 with |disc| ≤ 20,000 fails at
