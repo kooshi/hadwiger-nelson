@@ -21,7 +21,7 @@ certificate on 2026-09-15: `α ≤ 1023` against the 1040 six needs at 79, `α �
 | **27** | 729 | **−8** | 162.00 | — | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **201** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | **258** `[search]` | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
-| 47 | 2209 | −12.8465 | 466.39 | **265** `[search]` | **377** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
+| 47 | 2209 | −12.8465 | 466.39 | **265** `[search]` | **371** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
 | ~~59~~ | 3481 | −14.9176 | 693.14 | 363 `[search]` | **575** `[cert]` | **7** `[cert]` | 10 `[search]` | 581 | 0.8382 | (refused) | 1.0056 |
 | ~~67~~ | 4489 | −15.0567 | 813.78 | 443 `[search]` | **745** `[cert]` | **7** `[cert]` | 12 `[search]` | 749 | **0.9204** | (refused) | 1.1035 |
 | ~~79~~ | 6241 | −17.1019 | 1099.19 | 578 `[search]` | **1023** `[cert]` | **7** `[cert]` | — | 1041 | **0.9471** | (refused) | 1.1363 |
@@ -52,7 +52,7 @@ independent cuts of the same dual — the last, the solves being stopped).
 the largest eigenvalue equal to the degree `q + 1` at each member as a connectivity control.
 
 **`frac6` and `frac5`** are the fractions of the ratio bound an exact certificate must get **below** to refuse six and
-five. The certificate's reach has been measured exactly three times — **0.8445 at 11** (N = 29.176808 against Hoffman
+five. The certificate's reach has now been measured five times — **0.8445 at 11** (N = 29.176808 against Hoffman
 34.5496), **0.8238 at 23** (108.546075 against 131.7620) and **0.8836 at 83** (1059.834185 against 1199.4588) — so it
 should refuse six at 79 and 67, refuse five at 47, 43 and 27, and decide nothing at 23, 31 or 59.
 
@@ -67,6 +67,17 @@ It sits above `frac5` at 27 (0.9012), so **the certificate does not refuse five 
 cells, a worst-case reach of 0.9110 leaves `frac5` at 43 (0.9362) and 47 (0.9477) refusable with 2.5 % and 3.7 % of
 margin, `frac6` at 79 (0.9471) with 3.6 %, and **`frac6` at 67 (0.9204) with only 0.9 %** — so **Q1's six-refusal at 67
 is now marginal**, against an instrument whose reach has ranged from 0.8238 to 0.9110.
+
+**2026-09-16, q = 47, and it is the best reach ever measured: 0.7973** — `N = 371.839576 / 466.39`, from a solve driven
+to **convergence** (`status solved`, res_pri 1.9e-07, gap 4.4e-08) rather than stopped at the first certificate, and the
+exact bound reproduced at two independent cuts (1e-07 and 1e-06 at gram denominator 1e8). **α(UD(𝔽₄₇,2)) ≤ 371**
+(`cert-q47-N371.json`, CERTIFIED by the frozen checker, re-run by the product owner; positive semidefiniteness by exact
+rational Gram factorisation). It supersedes `cert-q47-N377.json`, which is kept as the weaker earlier reading.
+**What it settles and what it does not:** six at 47 needs `α ≥ 369`, and 371.84 is above it, so **six is NOT refused at
+47 — and never will be by this relaxation, because the value is converged rather than stopped.** What it buys is the
+narrowest window in the table: **α(47) must be exactly 369, 370 or 371** for the plane to be six-chromatic, against a
+best set found of 265. The same lesson applies to 31 and 43, whose certificates are still `optimal_inaccurate` and
+therefore still movable; 23 and 27 are already converged and will never move.
 
 **The reach is not a property of the instrument alone: it improves with the compute spent.** At 83 it was 0.8974 at
 FS-50's close (N = 1076.366454) and is 0.8836 now (N = 1059.834185, the polish loop's 134,500-iterate, CERTIFIED with its
