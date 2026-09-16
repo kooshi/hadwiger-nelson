@@ -1,0 +1,216 @@
+{
+ "kind": "fs54-l3-certificate-controls",
+ "results": [
+  {
+   "control": "genuine-cert-q7-l3-N14",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 0.1,
+   "printed": "CERTIFIED: every independent set of UD(F_7, 2) has at most 14000000074383511489/1000000000000000000 points, hence at most 14 -- exact arithmetic, no solver trusted (0 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/genuine-cert-q7-l3-N14.log"
+  },
+  {
+   "control": "genuine-cert-q11-l3-N28",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 0.4,
+   "printed": "CERTIFIED: every independent set of UD(F_11, 2) has at most 28071477391722527319/1000000000000000000 points, hence at most 28 -- exact arithmetic, no solver trusted (0 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/genuine-cert-q11-l3-N28.log"
+  },
+  {
+   "control": "genuine-cert-q27-l3-N141",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 7.9,
+   "printed": "CERTIFIED: every independent set of UD(F_27, 2) [t^3-t-1] has at most 1415933445295268663/10000000000000000 points, hence at most 141 -- exact arithmetic, no solver trusted (8 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/genuine-cert-q27-l3-N141.log"
+  },
+  {
+   "control": "cert-q7-l3-N14-a-flipped-sign",
+   "expect": "refuse",
+   "fragment": "is negative",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: multiplier lower[58] (on the valid inequality y_K >= 0 of variable 58) is negative: -10410917678465163/250000000000000000",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q7-l3-N14-a-flipped-sign.log"
+  },
+  {
+   "control": "cert-q7-l3-N14-b-faithful-dense-block",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 0.1,
+   "printed": "CERTIFIED: every independent set of UD(F_7, 2) has at most 14000000074383511489/1000000000000000000 points, hence at most 14 -- exact arithmetic, no solver trusted (0 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q7-l3-N14-b-faithful-dense-block.log"
+  },
+  {
+   "control": "cert-q7-l3-N14-b-indefinite-dense-block",
+   "expect": "refuse",
+   "fragment": "NOT positive semidefinite",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: certificate.matrices[1].blocks[2]: the block is NOT positive semidefinite -- pivot 1 is negative: -6541636534969/6506538366661000000000000000000",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q7-l3-N14-b-indefinite-dense-block.log"
+  },
+  {
+   "control": "cert-q7-l3-N14-b2-gram-entry-bumped",
+   "expect": "refuse",
+   "fragment": "identity fails",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: the identity fails at variable 0 (the set [0, 2]): the left side's coefficient is -8, the right side's -1000000000001603071/125000000000000000 (difference 1.282e-11)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q7-l3-N14-b2-gram-entry-bumped.log"
+  },
+  {
+   "control": "cert-q7-l3-N14-d-smaller-N",
+   "expect": "refuse",
+   "fragment": "constant term",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: the identity's constant term fails: the file's N = 14000000074382511489/1000000000000000000 (~14.000000074), but o0 + <Z, A>'s constant + sum mu = 14000000074383511489/1000000000000000000 (~14.000000074); the file claims LESS than its own multipliers prove",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q7-l3-N14-d-smaller-N.log"
+  },
+  {
+   "control": "cert-q11-l3-N28-a-flipped-sign",
+   "expect": "refuse",
+   "fragment": "is negative",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: multiplier lower[1274] (on the valid inequality y_K >= 0 of variable 1274) is negative: -100312988436152387/31250000000000000",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q11-l3-N28-a-flipped-sign.log"
+  },
+  {
+   "control": "cert-q11-l3-N28-b-faithful-dense-block",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 0.2,
+   "printed": "CERTIFIED: every independent set of UD(F_11, 2) has at most 28071477391722527319/1000000000000000000 points, hence at most 28 -- exact arithmetic, no solver trusted (0 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q11-l3-N28-b-faithful-dense-block.log"
+  },
+  {
+   "control": "cert-q11-l3-N28-b-indefinite-dense-block",
+   "expect": "refuse",
+   "fragment": "NOT positive semidefinite",
+   "exit": 1,
+   "seconds": 0.1,
+   "printed": "NOT A CERTIFICATE: certificate.matrices[0].blocks[2]: the block is NOT positive semidefinite -- pivot 0 is zero but entry (0,1) = 1/1000000000000000000 is not",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q11-l3-N28-b-indefinite-dense-block.log"
+  },
+  {
+   "control": "cert-q11-l3-N28-b2-gram-entry-bumped",
+   "expect": "refuse",
+   "fragment": "identity fails",
+   "exit": 1,
+   "seconds": 0.2,
+   "printed": "NOT A CERTIFICATE: the identity fails at variable 4 (the set [0, 12]): the left side's coefficient is -12, the right side's -2999999999999999999/250000000000000000 (difference -4.000e-18)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q11-l3-N28-b2-gram-entry-bumped.log"
+  },
+  {
+   "control": "cert-q11-l3-N28-d-smaller-N",
+   "expect": "refuse",
+   "fragment": "constant term",
+   "exit": 1,
+   "seconds": 0.2,
+   "printed": "NOT A CERTIFICATE: the identity's constant term fails: the file's N = 28071477391721527319/1000000000000000000 (~28.071477392), but o0 + <Z, A>'s constant + sum mu = 28071477391722527319/1000000000000000000 (~28.071477392); the file claims LESS than its own multipliers prove",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q11-l3-N28-d-smaller-N.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-a-flipped-sign",
+   "expect": "refuse",
+   "fragment": "is negative",
+   "exit": 1,
+   "seconds": 0.8,
+   "printed": "NOT A CERTIFICATE: multiplier lower[22154] (on the valid inequality y_K >= 0 of variable 22154) is negative: -915897052817761/1250000000000000",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-a-flipped-sign.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-b-faithful-dense-block",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 7.9,
+   "printed": "CERTIFIED: every independent set of UD(F_27, 2) [t^3-t-1] has at most 1415933445295268663/10000000000000000 points, hence at most 141 -- exact arithmetic, no solver trusted (8 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-b-faithful-dense-block.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-b-indefinite-dense-block",
+   "expect": "refuse",
+   "fragment": "NOT positive semidefinite",
+   "exit": 1,
+   "seconds": 1.0,
+   "printed": "NOT A CERTIFICATE: certificate.matrices[22].blocks[1]: the block is NOT positive semidefinite -- pivot 0 is zero but entry (0,1) = 1/10000000000000000 is not",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-b-indefinite-dense-block.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-b2-gram-entry-bumped",
+   "expect": "refuse",
+   "fragment": "identity fails",
+   "exit": 1,
+   "seconds": 7.8,
+   "printed": "NOT A CERTIFICATE: the identity fails at variable 0 (the set [0, 1]): the left side's coefficient is -84, the right side's -105000000000000001/1250000000000000 (difference 8.000e-16)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-b2-gram-entry-bumped.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-d-smaller-N",
+   "expect": "refuse",
+   "fragment": "constant term",
+   "exit": 1,
+   "seconds": 7.9,
+   "printed": "NOT A CERTIFICATE: the identity's constant term fails: the file's N = 1415933445295258663/10000000000000000 (~141.593344530), but o0 + <Z, A>'s constant + sum mu = 1415933445295268663/10000000000000000 (~141.593344530); the file claims LESS than its own multipliers prove",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-d-smaller-N.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-c-other-modulus-hash-kept",
+   "expect": "refuse",
+   "fragment": "edges_sha256",
+   "exit": 1,
+   "seconds": 0.6,
+   "printed": "NOT A CERTIFICATE: certificate.edges_sha256: the file says 'b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d', but the plane rebuilt from q = 27 = 3^3 and the modulus t^3-t-2 hashes to '2a2b007041d2f7ee9710bfa2383fe0ee57e9afa769f2e263eafb6833c581b53d' -- the certificate is about a different graph",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-c-other-modulus-hash-kept.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-c-other-modulus-hash-updated",
+   "expect": "refuse",
+   "fragment": "variable",
+   "exit": 1,
+   "seconds": 1.0,
+   "printed": "NOT A CERTIFICATE: the set [0, 44] has the canonical form [0, 44], which is not in the file's variable list -- the file's variables are not this plane's orbits",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-c-other-modulus-hash-updated.log"
+  },
+  {
+   "control": "cert-q27-l3-N141-c-faithful-transported",
+   "expect": "pass",
+   "fragment": "",
+   "exit": 0,
+   "seconds": 7.8,
+   "printed": "CERTIFIED: every independent set of UD(F_27, 2) [t^3-t-2] has at most 1415933445295268663/10000000000000000 points, hence at most 141 -- exact arithmetic, no solver trusted (8 s)",
+   "as_designed": true,
+   "log": "data/fs54/d4/cert-controls/cert-q27-l3-N141-c-faithful-transported.log"
+  }
+ ],
+ "all_as_designed": true
+}

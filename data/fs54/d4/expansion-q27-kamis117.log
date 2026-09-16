@@ -1,0 +1,6 @@
+[cert] file: data/fs54/cert-q27-l3-N141.json
+[cert] sha256 1b6646e3c272ee2da95960cffa2b4965288007dd20ec9336121c9c66458b13cb
+[cert] kind 'fplane-alpha-certificate-l3', q = 27, modulus 't^3-t-1', N = 1415933445295268663/10000000000000000..., alpha_bound = 141; derivation plans/FS54-L3-certificate-soundness.md
+[expansion] q = 27, |S| = 117: 3000 sampled entries of 30 matrices (2462 nonzero), keyed expansion vs definition: 0 mismatches; 2714 canonical forms evaluated from the definition; 39 s
+[expansion] q = 27, |S| = 117: 750 sampled entries of 30 matrices (609 nonzero), keyed expansion vs definition: 390 mismatches [PLANT: every sign +]; 943 canonical forms evaluated from the definition; 12 s
+[expansion] faithful: 0 mismatches of 3000 -> PASS; plant: 390 mismatches -> FIRED (as designed)

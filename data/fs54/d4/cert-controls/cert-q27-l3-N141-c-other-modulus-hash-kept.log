@@ -1,0 +1,5 @@
+$ python3 /home/kooshi/source/lean-dir/tools/fs54_l3_cert_check.py /tmp/claude-1000/-home-kooshi-source-lean-dir/b1507518-dd2a-4756-a291-855e63c44221/scratchpad/plants/cert-q27-l3-N141-c-other-modulus-hash-kept.json --jobs 6
+[cert] file: /tmp/claude-1000/-home-kooshi-source-lean-dir/b1507518-dd2a-4756-a291-855e63c44221/scratchpad/plants/cert-q27-l3-N141-c-other-modulus-hash-kept.json
+[cert] sha256 858f356a299acc4142350b9d697f884d4c9d49cb50a275539a261584fbb31023
+[cert] kind 'fplane-alpha-certificate-l3', q = 27, modulus 't^3-t-2', N = 1415933445295268663/10000000000000000..., alpha_bound = 141; derivation plans/FS54-L3-certificate-soundness.md
+NOT A CERTIFICATE: certificate.edges_sha256: the file says 'b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d', but the plane rebuilt from q = 27 = 3^3 and the modulus t^3-t-2 hashes to '2a2b007041d2f7ee9710bfa2383fe0ee57e9afa769f2e263eafb6833c581b53d' -- the certificate is about a different graph

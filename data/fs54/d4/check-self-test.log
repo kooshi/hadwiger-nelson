@@ -1,0 +1,52 @@
+=== 1. the group: generators verified, and a plant of each kind refused ===
+  q = 7: |G0| = 16 (expected 16) ok
+  q = 11: |G0| = 24 (expected 24) ok
+  q = 27 [t^3-t-1]: |G0| = 168 (expected 168) ok
+  q = 27 [t^3-t-2]: |G0| = 168 (expected 168) ok
+  RED (as designed)   a planted non-additive generator (swap two points)
+                      -> generator planted swap: not additive at a = 7, b = 1
+  RED (as designed)   a planted additive map that does not preserve the circle (z -> 2z)
+                      -> generator planted doubling: does not preserve the unit circle at the point 1
+=== 2. the canonical form against the brute-force least image ===
+  q = 7: 4000 random sets of 2-4 points, 0 disagreements
+  q = 11: 1500 random sets of 2-4 points, 0 disagreements
+  q = 27: 300 random sets of 2-4 points, 0 disagreements
+  plant: the key computed WITHOUT the Frobenius against the full group's brute force at 27: 200 of 300 disagree (RED as designed: the comparison can fire)
+=== 3. the expansion against the definition, at genuine independent sets (q = 7) ===
+  |S| = 11: 27 anchored matrices x 49^2 entries, keyed expansion vs the definitional G0-average: 0 mismatches
+  plant 'sign' (the expansion with every sign +): 22156 mismatches (RED as designed)
+  plant 'untranslated' (the expansion looking {a,u,w} up as {0,u,w}): 20552 mismatches (RED as designed)
+  |S| = 13: 27 anchored matrices x 49^2 entries, keyed expansion vs the definitional G0-average: 0 mismatches
+  |S| = 12: 27 anchored matrices x 49^2 entries, keyed expansion vs the definitional G0-average: 0 mismatches
+=== 4. certificates at q = 7: faithful ones pass, planted ones are refused ===
+  GREEN (as designed) a synthetic Gram-form certificate
+                      -> CERTIFIED: every independent set of UD(F_7, 2) has at most 1226/25 points, hence at most 49 -- exact arithmetic, no solver trusted (0 s)
+  GREEN (as designed) the same with dense blocks (the exact LDL path)
+                      -> CERTIFIED: every independent set of UD(F_7, 2) has at most 1226/25 points, hence at most 49 -- exact arithmetic, no solver trusted (0 s)
+  RED (as designed)   (a) a flipped multiplier sign
+                      -> multiplier lower[9] (on the valid inequality y_K >= 0 of variable 9) is negative: -8/25
+  RED (as designed)   (b) a dense block perturbed to be indefinite
+                      -> certificate.matrices[0].blocks[0]: the block is NOT positive semidefinite -- pivot 1 is negative: -721/50
+  RED (as designed)   (b') a Gram entry perturbed (PSD by construction, so the IDENTITY must refuse it)
+                      -> the identity fails at variable 2 (the set [0, 9]): the left side's coefficient is -8, the right side's -203/25 (difference 1.200e-01)
+  RED (as designed)   (d) a claimed N smaller than the identity allows
+                      -> the identity's constant term fails: the file's N = 49039999/1000000 (~49.039999000), but o0 + <Z, A>'s constant + sum mu = 1226/25 (~49.040000000); the file claims LESS than its own multipliers prove
+  RED (as designed)   a float where a rational belongs
+                      -> certificate.N: expected a rational as an integer or a string, found the float 3.5
+  RED (as designed)   a certificate filed against q = 11
+                      -> certificate.edges_sha256: the file says '9830643194a5b1b7dac6ea365c8ec21634728a3a813c16cf5c1f56f2bc4f3252', but the plane rebuilt from p = 11 hashes to '878d0dbab571b97107b8141e74f700ca6417395e9f5c918
+  RED (as designed)   a variable missing from the file's list
+                      -> the set [0, 2, 11, 25] has the canonical form [0, 2, 11, 25], which is not in the file's variable list -- the file's variables are not this plane's orbits
+  RED (as designed)   the wrong kind
+                      -> the file's kind is 'fs54-d4', not 'fplane-alpha-certificate-l3'
+  GREEN (as designed) the faithful certificate again, after the mutations
+                      -> CERTIFIED: every independent set of UD(F_7, 2) has at most 1226/25 points, hence at most 49 -- exact arithmetic, no solver trusted (0 s)
+=== 5. the identity at genuine independent sets, exactly (q = 7) ===
+  GREEN (as designed) |S| = 13: objective = |S|, every term >= 0, N - |S| = their sum
+  GREEN (as designed) |S| = 12: objective = |S|, every term >= 0, N - |S| = their sum
+  GREEN (as designed) |S| = 11: objective = |S|, every term >= 0, N - |S| = their sum
+  RED (as designed)   plant: subsets counted without their stabiliser weight -- the objective is no longer |S|
+  RED (as designed)   a set that is not independent
+                      -> the set is not independent: 0 and 1 are adjacent
+=== verdict ===
+SELF-TEST PASSED: every faithful case accepted, every plant refused for its own reason

@@ -1,0 +1,28 @@
+[round] snapshot data/fs54/d4/ckpt/admm-q27-certcopy-a.npz (sha256 8856e3958e421be0..., 16611 iterations, fingerprint {'q': 27, 'modulus': 't^3-t-1', 'family': 'l3', 'dclasses': [1, 3, 4, 9, 10, 28, 38, 40, 41, 85], 'border': False, 's0': None, 'nvar': 77238, 'rows': 2684418, 'nnz': 14619724, 'psd': 102, 'psd_max': 378, 'method': 'admm'})
+[round] float certificate-shaped N of the projected iterate (the READING): 141.593347 (sum mu 0.100627)
+[round] eigen-truncation at cut 1e-10: ranks sum 5945, Gram entries 1145274; float N 141.593347
+[round]   scale t = 1.0000: rounded over den 100000000: float N 141.593345 (sum mu 0.100625)
+[round] chosen scale 1.0000: float N of the ROUNDED factors 141.593345
+[exact] check 3/5  positive semidefiniteness: 102 blocks over 30 matrices -- 102 by a rational Gram factor G (Z = G^T G, PSD for any rational G; 511739 Gram entries), 0 dense and PSD by exact LDL^T; common denominator of the Z numerators 10000000000000000
+[exact] check 4/5  canonical forms: pairs and triples tabulated in 1.1 s; 10 pair-anchor table(s) of quadruples to build (d = [1, 3, 4, 9, 10, 28, 38, 40, 41, 85])
+[exact]            task d = 9: matrices [23], table 0.1 s, total 0.4 s
+[exact]            task d = 3: matrices [3, 12, 21], table 1.6 s, total 2.6 s
+[exact]            task d = 1: matrices [2, 11, 20], table 1.5 s, total 2.6 s
+[exact]            task d = 10: matrices [5, 14, 24], table 1.6 s, total 2.7 s
+[exact]            task d = 28: matrices [6, 15, 25], table 1.6 s, total 2.7 s
+[exact]            task d = 4: matrices [4, 13, 22], table 1.6 s, total 2.9 s
+[exact]            task d = None: matrices [0, 1], table 0.0 s, total 0.4 s
+[exact]            task d = 38: matrices [7, 16, 26], table 1.6 s, total 2.7 s
+[exact]            task d = 40: matrices [8, 17, 27], table 1.6 s, total 2.8 s
+[exact]            task d = 41: matrices [9, 18, 28], table 1.6 s, total 2.8 s
+[exact]            task d = 85: matrices [10, 19, 29], table 1.6 s, total 2.9 s
+[exact]            the pairing over 30 matrices in 11 task(s), 6 job(s): 5.8 s
+[round] EXACT N = 141.593344530 (floor 141), computed in 7 s; float score of the same factors 141.593344529; difference 4.508e-11
+[round] wrote data/fs54/cert-q27-l3-N141.json (5.6 MiB)
+[round] checker exit 0 in 8 s; log data/fs54/d4/check-q27-l3-N141.log
+           task d = 85: matrices [10, 19, 29], table 1.6 s, total 2.8 s
+           the pairing over 30 matrices in 11 task(s), 6 job(s): 5.6 s
+           the file's 77238 variables are exactly the canonical forms the entries met
+check 5/5  the identity N - sum_u y{0,u} = sum <Z, A(y)> + sum lambda y + sum mu (1 - y): all 77238 coefficients and the constant term agree exactly; N recomputed = 141.593344530 (sum mu = 0.100625)
+CERTIFIED: every independent set of UD(F_27, 2) [t^3-t-1] has at most 1415933445295268663/10000000000000000 points, hence at most 141 -- exact arithmetic, no solver trusted (7 s)
+hence UD(F_27, 2) is not 5-colourable (5 * 141 = 705 < 729) and its chromatic number is at least 6
