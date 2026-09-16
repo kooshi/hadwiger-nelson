@@ -721,7 +721,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   six-chromatic window plane ⟹ no field has local bound 6 ⟹ every field holding a six-chromatic unit-distance graph has all
   its usable planes at ≥ 7, so the finite planes can never pin six — and under the bold form of the conjecture (χ(F²) = 7
   wherever L(F) ≥ 7) χ(ℝ²) = 7, with six a value no field attains though every seven-chromatic graph passes through it; one
-  six-chromatic plane ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness. Every
+  six-chromatic plane ⟹ a field with χ(F²) ≤ 6 by theorem, predicted 6, a finite six-chromatic graph by compactness. The
   clique structure decides which field can see which member, and rules the Moser spindle out of every one of them
   (G57). Every window plane is slack at six — at 23, 27, 31, 43, 47, 67 by divisibility (Hoffman-tightness at k needs (k−1) | (q+1), and
   5 ∤ q + 1), at 59 and 79 by the exact spectrum — so over a field it seals the residue mechanism forces no pair (G54): a
