@@ -301,8 +301,9 @@ rows that fail that test are systematically the informative ones. The 23 sweep's
 
 At about 2 h 52 m into the four-hour runs, the two background waiters armed on the long stage's completion
 marker **both exited with code 144, at the same instant, with no output**. Two independent `until … sleep`
-loops exiting identically at one moment is a **shared-cause signature**, and the shared cause is the harness
-that owns them, not the jobs they watch.
+loops exiting identically at one moment is a **shared-cause signature**, and the shared cause was the main
+agent session's process cleanup — **named by Kooshi, not diagnosed here**; what this phase established on its
+own evidence was only that the cause was shared and external to the jobs.
 
 Checked before concluding anything, because the standing rule is to halt on an unexplained process crash: all
 four long runs (`plane-colour` at 43 and 47, `plane-independent` at 43 and 47) and the equivariant push at 23
@@ -316,3 +317,9 @@ exit codes, the phase would have waited on two dead watchers for the rest of the
 unattended. The repair is the one the rules already name — **verify by effect, not by the waiter**: a run's
 liveness is `ps` plus a record whose digest is still moving, and a waiter is re-armed with a bounded lifetime
 so that "it has not fired yet" and "it is dead" stop being the same observation.
+
+**And the runs survived the very cleanup that killed the watchers**, which is the setsid discipline earning
+its keep rather than a lucky escape: each stage is launched with `setsid` into its own process group with its
+pgid on disk, so a sweep that reaps the session's processes reaps the watchers and leaves four hours of
+solving untouched. The rule is usually justified by the danger of killing *other* agents' processes; this is
+the same rule protecting *ours* from someone else's cleanup.
