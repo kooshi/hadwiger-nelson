@@ -224,3 +224,10 @@ and the threshold was crossed at about 38,000.
 * **Six at 43:** the producer's float optimum was 363.8 at 8,500 iterations and still falling when the run was stopped.
   Six at 43 needs `α ≤ 308`. **Above the threshold by at least 55 integers**; the relaxation would have to fall 15 %
   below where it already sat, which no member here has done. Not pursued further.
+
+| `cert-q31-N201.json` (0.9 MB) | 𝔽₃₁ | graphics card A, 14 minutes; certificate from the **144,500**-iteration iterate resumed +2,000, 16 s of solve | **CERTIFIED** (`--k 5`): `N = 1261394274068929461488146128816236345949268281/6.25·10⁴² = 201.823084`, **α(UD(𝔽₃₁,2)) ≤ 201** — the **first upper bound of any kind at 31**. It refutes neither five (needs `α ≤ 192`) nor six (needs `α ≤ 160`) | exact rational, `--ldl` green (`ldl-q31-N201.log`). All 18 cuts give ⌊N⌋ = 201 (201.823084, 201.823129) |
+
+**31 was not on phase B's list and was run because both cards came free and it was the only window member with no upper
+bound at all.** Its float optimum converged to 201.666 over 144,500 iterations (the rounding loss is 0.157, the smallest
+of any member here), so **five at 31 is above the threshold by 9 integers** and out of this instrument's reach — the same
+shape of result as five at 27 and six at 47. The cell is now a `[cert]` rather than a dash.

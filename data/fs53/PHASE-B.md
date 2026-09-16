@@ -83,3 +83,30 @@ certificate was already filed and checked, the run being killed was being killed
 iterations at the time) and the experiment were untouched. **The repair, in use since:** `pidof_log.py` finds a process by
 the **inode** of the log file it holds open — it matches no command line, so it cannot match the shell that runs it — and
 every launch writes `pid-q<q>` / `pgid-q<q>` before anything else may signal it.
+
+**19:19 q = 67 CERTIFIED at N = 745.234975, ⌊N⌋ = 745 — six refused** (`6 × 745 = 4470 < 4489`), the marginal member.
+Its first two polishes gave 750 and 749; what closed it was **continuation length**, measured as two arms from one parent
+iterate (37,000): +500 gave 748.829896 and +2,000 gave 745.234975. The 47 and 59 loops were switched to +2,000.
+
+**19:45 q = 59 CERTIFIED at N = 575.384943, ⌊N⌋ = 575 — six refused** (`6 × 575 = 3450 < 3481`). Expected out of reach and
+was not; a dedicated card and the +2,000 continuation did it in 24 minutes of producer.
+
+**19:31 q = 47 superseded at N = 377.964780** (⌊N⌋ = 377, five refused); its float optimum had flattened at 377.27, so six
+at 47 (needs α ≤ 368) is above the threshold by 9 integers.
+
+**20:00 q = 31 CERTIFIED at N = 201.823084, ⌊N⌋ = 201** — not on the list, run because both cards came free and 31 was the
+only window member with no upper bound of any kind. Refutes neither five (needs 192) nor six (needs 160).
+
+**Scoreboard.** Six certificates, six `--ldl` green, six checked by the frozen checker (sha256 `057263079bb…`, unchanged
+throughout): 79 (1023), 67 (745), 59 (575) — **six refused, χ ≥ 7**; 47 (377), 43 (365) — **five refused, χ ≥ 6**; 31 (201)
+— neither. **The six-window falls from eight members to five: 23, 27, 31, 43, 47.**
+
+**Two facts about the tooling, recorded because they cost time or nearly did.**
+1. **`grep -c` on this machine is `ugrep` 7.8.4 and returned 0 for a string occurring four times** — `LDL^T re-run and
+   clean`, where the `^` is taken as an anchor mid-pattern. The LDL verification of all six certificates briefly read as
+   *zero blocks checked*. `grep -oF … | wc -l` counts correctly. `CLAUDE.md` § Searching warns about this engine's
+   alternation handling; this is a second quirk on the same engine, and it fails in the direction that makes a check
+   look like it found nothing.
+2. **The `le_diag` experiment at q = 47 did not finish** (over 75 minutes on its first arm at 9,247 variables and
+   `eps = 1e-8`, on two threads beside the GPU jobs) and was stopped. The finding rests on **11, 23 and 27**, three
+   members rather than the planned two, each with the reachability control firing.
