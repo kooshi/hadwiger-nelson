@@ -1,0 +1,30 @@
+{
+ "kind": "fs54-d4-lean",
+ "cmd": "lean-compare",
+ "argv": [
+  "lean-compare",
+  "--q",
+  "19",
+  "--workers",
+  "12",
+  "--out",
+  "data/fs54/d4/q47/lean-compare-q19.json"
+ ],
+ "q": 19,
+ "family": "l3",
+ "same_numbering": true,
+ "rows_ref": 1207268,
+ "rows_lean": 1207268,
+ "nnz_ref": 6104761,
+ "nnz_lean": 6104726,
+ "max_abs_entry_difference": 2.220446049250313e-16,
+ "max_abs_C_difference": 0.0,
+ "bs_equal": true,
+ "cone_equal": true,
+ "oc_equal": true,
+ "same": true,
+ "seconds": 7.829919099807739,
+ "maxrss_self_GiB": 0.6491966247558594,
+ "maxrss_largest_child_GiB": 0.4456062316894531,
+ "claim_scope": "float readings, sizes and controls of the lean path; never a bound"
+}

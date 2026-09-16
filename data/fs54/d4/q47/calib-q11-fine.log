@@ -1,0 +1,175 @@
+[tables] q=11: T3 keys for 121x121 in 0.0 s
+[tables] q=11: T4 keys for d=1 in 0.0 s
+[tables] q=11: T4 keys for d=2 in 0.0 s
+[tables] q=11: T4 keys for d=3 in 0.0 s
+[tables] q=11: T4 keys for d=4 in 0.0 s
+[tables] q=11: T4 keys for d=5 in 0.0 s
+[tables] q=11: T4 keys for d=12 in 0.0 s
+[tables] q=11: T4 keys for d=14 in 0.0 s
+[tables] q=11: T4 keys for d=15 in 0.0 s
+[tables] q=11: T4 keys for d=24 in 0.0 s
+[tables] q=11: T4 keys for d=27 in 0.0 s
+[tables] q=11: 1841 live variables (size 2: 9, 3: 105, 4: 1727); 0.1 s total
+[solve] q=11 family=l3 d-classes=[1, 2, 3, 4, 5, 12, 14, 15, 24, 27]: 102 blocks, max 66, PSD rows 74100, sum m^3 6.527e+06; build 0.0 s
+[solve] SCS: 75941 rows x 1841 columns, nnz 299986, A 3.4 MiB
+[admm] G = V^T V: 40347 nonzeros, border 114, 4-set diagonal 1727 (off-diagonal noise 0.0e+00); Schur complement factored in 0.01 s
+[admm] NEW checkpoint data/fs54/d4/ckpt/calib-q11-fine.npz
+[admm] it 23: 0.0110 s/it (lin 0.0009, spmv 0.0010, cone 0.0088); upper reading 1.000078 lower reading 7.802154 pinf 1.05e+00 dinf 3.47e-03 gap 6.94e-01 mu 1.30e+00
+[admm] it 49: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 1.000238 lower reading 13.779569 pinf 1.36e+00 dinf 1.97e-03 gap 8.10e-01 mu 1.69e+00
+[admm] it 75: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 1.003241 lower reading 22.126347 pinf 1.38e+00 dinf 1.16e-03 gap 8.75e-01 mu 2.20e+00
+[admm] it 100: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 23.775319 lower reading 28.153638 pinf 3.79e-01 dinf 6.30e-03 gap 8.27e-02 mu 3.71e+00
+[admm] it 125: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 26.272574 lower reading 29.017659 pinf 2.48e-01 dinf 4.85e-03 gap 4.88e-02 mu 4.83e+00
+[admm] it 151: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.361707 lower reading 29.498276 pinf 1.08e-01 dinf 5.35e-03 gap 1.93e-02 mu 6.27e+00
+[admm] it 177: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.301958 lower reading 29.567178 pinf 7.82e-02 dinf 4.60e-03 gap 2.15e-02 mu 8.16e+00
+[admm] it 202: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.601161 lower reading 29.663572 pinf 4.73e-02 dinf 5.06e-03 gap 1.79e-02 mu 1.38e+01
+[admm] it 227: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.906061 lower reading 29.636346 pinf 1.66e-02 dinf 5.58e-03 gap 1.23e-02 mu 1.79e+01
+[admm] it 253: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 29.154532 lower reading 29.538303 pinf 5.84e-03 dinf 4.73e-03 gap 6.43e-03 mu 1.79e+01
+[admm] it 278: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 29.141923 lower reading 29.459490 pinf 8.68e-03 dinf 3.85e-03 gap 5.33e-03 mu 1.79e+01
+[admm] it 304: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 29.066208 lower reading 29.419382 pinf 6.43e-03 dinf 3.35e-03 gap 5.94e-03 mu 1.79e+01
+[admm] it 329: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.999187 lower reading 29.390412 pinf 4.18e-03 dinf 3.04e-03 gap 6.59e-03 mu 1.79e+01
+[admm] it 354: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.950372 lower reading 29.363851 pinf 2.67e-03 dinf 2.81e-03 gap 6.97e-03 mu 1.79e+01
+[admm] it 380: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.916107 lower reading 29.340817 pinf 1.82e-03 dinf 2.64e-03 gap 7.17e-03 mu 1.79e+01
+[admm] it 405: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.888377 lower reading 29.319166 pinf 1.37e-03 dinf 2.51e-03 gap 7.28e-03 mu 1.79e+01
+[admm] it 429: 0.0106 s/it (lin 0.0002, spmv 0.0011, cone 0.0087); upper reading 28.866085 lower reading 29.298475 pinf 1.15e-03 dinf 2.41e-03 gap 7.31e-03 mu 1.79e+01
+[admm] it 454: 0.0101 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.850521 lower reading 29.276641 pinf 1.08e-03 dinf 2.31e-03 gap 7.21e-03 mu 1.79e+01
+[admm] it 480: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.829963 lower reading 29.255249 pinf 9.27e-04 dinf 2.22e-03 gap 7.20e-03 mu 1.79e+01
+[admm] it 505: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.813974 lower reading 29.233934 pinf 8.82e-04 dinf 2.14e-03 gap 7.11e-03 mu 1.79e+01
+[admm] it 530: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.798658 lower reading 29.218197 pinf 7.73e-04 dinf 2.07e-03 gap 7.11e-03 mu 1.79e+01
+[admm] it 556: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.783996 lower reading 29.202694 pinf 7.07e-04 dinf 2.01e-03 gap 7.10e-03 mu 1.79e+01
+[admm] it 582: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.768985 lower reading 29.188108 pinf 6.33e-04 dinf 1.95e-03 gap 7.11e-03 mu 1.38e+01
+[admm] it 606: 0.0105 s/it (lin 0.0002, spmv 0.0011, cone 0.0087); upper reading 28.761775 lower reading 29.170373 pinf 8.63e-04 dinf 1.89e-03 gap 6.93e-03 mu 1.38e+01
+[admm] it 631: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.746378 lower reading 29.151197 pinf 7.96e-04 dinf 1.82e-03 gap 6.87e-03 mu 1.38e+01
+[admm] it 657: 0.0097 s/it (lin 0.0001, spmv 0.0010, cone 0.0081); upper reading 28.733234 lower reading 29.132041 pinf 8.10e-04 dinf 1.76e-03 gap 6.77e-03 mu 1.38e+01
+[admm] it 683: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.716806 lower reading 29.116530 pinf 7.17e-04 dinf 1.71e-03 gap 6.79e-03 mu 1.38e+01
+[admm] it 708: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.706252 lower reading 29.102172 pinf 7.15e-04 dinf 1.67e-03 gap 6.73e-03 mu 1.38e+01
+[admm] it 733: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.694520 lower reading 29.084963 pinf 6.72e-04 dinf 1.62e-03 gap 6.64e-03 mu 1.38e+01
+[admm] it 759: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.680324 lower reading 29.073442 pinf 5.54e-04 dinf 1.58e-03 gap 6.69e-03 mu 1.38e+01
+[admm] it 785: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.672455 lower reading 29.059983 pinf 5.87e-04 dinf 1.54e-03 gap 6.60e-03 mu 1.38e+01
+[admm] it 810: 0.0102 s/it (lin 0.0002, spmv 0.0009, cone 0.0085); upper reading 28.660103 lower reading 29.048185 pinf 4.84e-04 dinf 1.51e-03 gap 6.61e-03 mu 1.38e+01
+[admm] it 835: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.655536 lower reading 29.036399 pinf 6.87e-04 dinf 1.47e-03 gap 6.49e-03 mu 1.06e+01
+[admm] it 860: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.642049 lower reading 29.018987 pinf 6.57e-04 dinf 1.43e-03 gap 6.43e-03 mu 1.06e+01
+[admm] it 886: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.629879 lower reading 29.006830 pinf 5.99e-04 dinf 1.40e-03 gap 6.43e-03 mu 1.06e+01
+[admm] it 911: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.622956 lower reading 28.992202 pinf 6.73e-04 dinf 1.36e-03 gap 6.30e-03 mu 1.06e+01
+[admm] it 937: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.611197 lower reading 28.978763 pinf 6.14e-04 dinf 1.33e-03 gap 6.27e-03 mu 1.06e+01
+[admm] it 963: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.600336 lower reading 28.966353 pinf 5.68e-04 dinf 1.30e-03 gap 6.25e-03 mu 1.06e+01
+[admm] it 989: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.590591 lower reading 28.953803 pinf 5.32e-04 dinf 1.27e-03 gap 6.20e-03 mu 1.06e+01
+[admm] it 1014: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.580864 lower reading 28.945019 pinf 4.81e-04 dinf 1.25e-03 gap 6.22e-03 mu 1.06e+01
+[admm] it 1039: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.573420 lower reading 28.934430 pinf 4.76e-04 dinf 1.22e-03 gap 6.17e-03 mu 1.06e+01
+[admm] it 1065: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.565342 lower reading 28.922788 pinf 4.57e-04 dinf 1.20e-03 gap 6.11e-03 mu 1.06e+01
+[admm] it 1091: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.559059 lower reading 28.912673 pinf 4.96e-04 dinf 1.17e-03 gap 6.05e-03 mu 1.06e+01
+[admm] it 1116: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.549722 lower reading 28.899196 pinf 4.22e-04 dinf 1.15e-03 gap 5.98e-03 mu 1.06e+01
+[admm] it 1142: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.542165 lower reading 28.890447 pinf 3.88e-04 dinf 1.13e-03 gap 5.96e-03 mu 1.06e+01
+[admm] it 1168: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.535818 lower reading 28.879563 pinf 4.06e-04 dinf 1.11e-03 gap 5.88e-03 mu 1.06e+01
+[admm] it 1193: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 28.528894 lower reading 28.869611 pinf 3.92e-04 dinf 1.09e-03 gap 5.83e-03 mu 1.06e+01
+[admm] it 1218: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.521033 lower reading 28.860622 pinf 3.21e-04 dinf 1.07e-03 gap 5.82e-03 mu 1.06e+01
+[admm] it 1244: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.517788 lower reading 28.852359 pinf 5.02e-04 dinf 1.05e-03 gap 5.73e-03 mu 8.16e+00
+[admm] it 1270: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.513261 lower reading 28.837242 pinf 6.22e-04 dinf 1.02e-03 gap 5.55e-03 mu 8.16e+00
+[admm] it 1296: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.500877 lower reading 28.826780 pinf 4.38e-04 dinf 1.00e-03 gap 5.59e-03 mu 8.16e+00
+[admm] it 1322: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.495256 lower reading 28.817092 pinf 4.81e-04 dinf 9.83e-04 gap 5.52e-03 mu 8.16e+00
+[admm] it 1348: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.489188 lower reading 28.807246 pinf 5.04e-04 dinf 9.63e-04 gap 5.46e-03 mu 8.16e+00
+[admm] it 1374: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.482985 lower reading 28.796069 pinf 4.97e-04 dinf 9.42e-04 gap 5.37e-03 mu 8.16e+00
+[admm] it 1399: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.475434 lower reading 28.785545 pinf 4.26e-04 dinf 9.24e-04 gap 5.32e-03 mu 8.16e+00
+[admm] it 1423: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.469703 lower reading 28.777187 pinf 4.25e-04 dinf 9.07e-04 gap 5.28e-03 mu 8.16e+00
+[admm] it 1449: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.464007 lower reading 28.767095 pinf 4.16e-04 dinf 8.91e-04 gap 5.20e-03 mu 8.16e+00
+[admm] it 1475: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.459683 lower reading 28.757297 pinf 4.70e-04 dinf 8.67e-04 gap 5.11e-03 mu 8.16e+00
+[admm] it 1500: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.454342 lower reading 28.744652 pinf 4.26e-04 dinf 8.51e-04 gap 4.99e-03 mu 8.16e+00
+[admm] it 1525: 0.0101 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 28.446385 lower reading 28.736020 pinf 3.27e-04 dinf 8.36e-04 gap 4.98e-03 mu 8.16e+00
+[admm] it 1551: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.442759 lower reading 28.727452 pinf 3.77e-04 dinf 8.20e-04 gap 4.89e-03 mu 8.16e+00
+[admm] it 1577: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.436743 lower reading 28.718828 pinf 3.23e-04 dinf 8.07e-04 gap 4.85e-03 mu 8.16e+00
+[admm] it 1602: 0.0102 s/it (lin 0.0001, spmv 0.0010, cone 0.0085); upper reading 28.431984 lower reading 28.711707 pinf 3.12e-04 dinf 7.94e-04 gap 4.81e-03 mu 8.16e+00
+[admm] it 1627: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.429636 lower reading 28.702962 pinf 3.92e-04 dinf 7.80e-04 gap 4.70e-03 mu 8.16e+00
+[admm] it 1653: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.426259 lower reading 28.692000 pinf 3.98e-04 dinf 7.62e-04 gap 4.57e-03 mu 8.16e+00
+[admm] it 1679: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.420232 lower reading 28.680739 pinf 3.06e-04 dinf 7.49e-04 gap 4.48e-03 mu 8.16e+00
+[admm] it 1705: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.414546 lower reading 28.673312 pinf 2.86e-04 dinf 7.32e-04 gap 4.45e-03 mu 8.16e+00
+[admm] it 1731: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.409841 lower reading 28.666170 pinf 2.10e-04 dinf 7.22e-04 gap 4.41e-03 mu 8.16e+00
+[admm] it 1757: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.406517 lower reading 28.660605 pinf 2.75e-04 dinf 7.09e-04 gap 4.38e-03 mu 6.27e+00
+[admm] it 1783: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.406703 lower reading 28.651401 pinf 4.57e-04 dinf 6.94e-04 gap 4.21e-03 mu 6.27e+00
+[admm] it 1807: 0.0105 s/it (lin 0.0002, spmv 0.0010, cone 0.0087); upper reading 28.399286 lower reading 28.642627 pinf 3.46e-04 dinf 6.82e-04 gap 4.19e-03 mu 6.27e+00
+[admm] it 1832: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.393181 lower reading 28.636993 pinf 3.14e-04 dinf 6.71e-04 gap 4.20e-03 mu 6.27e+00
+[admm] it 1858: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.389383 lower reading 28.631022 pinf 2.92e-04 dinf 6.61e-04 gap 4.16e-03 mu 6.27e+00
+[admm] it 1884: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.384742 lower reading 28.625102 pinf 2.53e-04 dinf 6.52e-04 gap 4.14e-03 mu 6.27e+00
+[admm] it 1909: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.382195 lower reading 28.619189 pinf 3.03e-04 dinf 6.41e-04 gap 4.09e-03 mu 6.27e+00
+[admm] it 1935: 0.0099 s/it (lin 0.0002, spmv 0.0010, cone 0.0082); upper reading 28.376826 lower reading 28.613062 pinf 2.39e-04 dinf 6.32e-04 gap 4.07e-03 mu 6.27e+00
+[admm] it 1961: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.375382 lower reading 28.606387 pinf 3.20e-04 dinf 6.21e-04 gap 3.98e-03 mu 6.27e+00
+[admm] it 1987: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.368651 lower reading 28.600389 pinf 2.00e-04 dinf 6.13e-04 gap 4.00e-03 mu 6.27e+00
+[admm] it 2012: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.365575 lower reading 28.596251 pinf 3.03e-04 dinf 6.04e-04 gap 3.98e-03 mu 6.27e+00
+[admm] it 2037: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.362585 lower reading 28.591270 pinf 2.15e-04 dinf 5.97e-04 gap 3.95e-03 mu 6.27e+00
+[admm] it 2063: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.357791 lower reading 28.587154 pinf 1.70e-04 dinf 5.90e-04 gap 3.96e-03 mu 4.83e+00
+[admm] it 2089: 0.0098 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.357590 lower reading 28.582726 pinf 4.05e-04 dinf 5.81e-04 gap 3.89e-03 mu 4.83e+00
+[admm] it 2114: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.354870 lower reading 28.575990 pinf 3.88e-04 dinf 5.73e-04 gap 3.82e-03 mu 4.83e+00
+[admm] it 2140: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.347648 lower reading 28.570409 pinf 2.89e-04 dinf 5.66e-04 gap 3.85e-03 mu 4.83e+00
+[admm] it 2166: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.346621 lower reading 28.564779 pinf 3.85e-04 dinf 5.55e-04 gap 3.77e-03 mu 4.83e+00
+[admm] it 2192: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.344186 lower reading 28.557884 pinf 4.24e-04 dinf 5.44e-04 gap 3.69e-03 mu 4.83e+00
+[admm] it 2217: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.338922 lower reading 28.550685 pinf 3.60e-04 dinf 5.36e-04 gap 3.66e-03 mu 4.83e+00
+[admm] it 2242: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.334045 lower reading 28.545204 pinf 3.64e-04 dinf 5.28e-04 gap 3.65e-03 mu 4.83e+00
+[admm] it 2268: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.331975 lower reading 28.540077 pinf 3.84e-04 dinf 5.19e-04 gap 3.60e-03 mu 4.83e+00
+[admm] it 2294: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.330629 lower reading 28.533319 pinf 4.06e-04 dinf 5.11e-04 gap 3.50e-03 mu 4.83e+00
+[admm] it 2320: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.324950 lower reading 28.526817 pinf 3.11e-04 dinf 5.03e-04 gap 3.49e-03 mu 4.83e+00
+[admm] it 2346: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.320275 lower reading 28.522376 pinf 2.67e-04 dinf 4.96e-04 gap 3.49e-03 mu 4.83e+00
+[admm] it 2372: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.318009 lower reading 28.518206 pinf 2.76e-04 dinf 4.88e-04 gap 3.46e-03 mu 4.83e+00
+[admm] it 2397: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.317968 lower reading 28.513080 pinf 3.81e-04 dinf 4.79e-04 gap 3.37e-03 mu 4.83e+00
+[admm] it 2421: 0.0105 s/it (lin 0.0002, spmv 0.0010, cone 0.0087); upper reading 28.314780 lower reading 28.507200 pinf 3.11e-04 dinf 4.73e-04 gap 3.33e-03 mu 4.83e+00
+[admm] it 2447: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.308471 lower reading 28.502758 pinf 2.02e-04 dinf 4.68e-04 gap 3.36e-03 mu 4.83e+00
+[admm] it 2473: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0084); upper reading 28.308324 lower reading 28.498046 pinf 3.46e-04 dinf 4.59e-04 gap 3.28e-03 mu 4.83e+00
+[admm] it 2499: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.304405 lower reading 28.492968 pinf 2.45e-04 dinf 4.53e-04 gap 3.26e-03 mu 4.83e+00
+[admm] it 2525: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.300276 lower reading 28.489583 pinf 2.02e-04 dinf 4.48e-04 gap 3.28e-03 mu 4.83e+00
+[admm] it 2551: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.298120 lower reading 28.486837 pinf 2.09e-04 dinf 4.43e-04 gap 3.27e-03 mu 4.83e+00
+[admm] it 2577: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.296330 lower reading 28.483698 pinf 2.23e-04 dinf 4.39e-04 gap 3.24e-03 mu 4.83e+00
+[admm] it 2602: 0.0101 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 28.293964 lower reading 28.480447 pinf 2.16e-04 dinf 4.35e-04 gap 3.23e-03 mu 4.83e+00
+[admm] it 2626: 0.0106 s/it (lin 0.0002, spmv 0.0011, cone 0.0087); upper reading 28.291641 lower reading 28.477516 pinf 2.13e-04 dinf 4.31e-04 gap 3.22e-03 mu 4.83e+00
+[admm] it 2652: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.290388 lower reading 28.474416 pinf 2.92e-04 dinf 4.24e-04 gap 3.19e-03 mu 4.83e+00
+[admm] it 2678: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.291182 lower reading 28.469356 pinf 3.97e-04 dinf 4.17e-04 gap 3.08e-03 mu 4.83e+00
+[admm] it 2703: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.289255 lower reading 28.462499 pinf 4.24e-04 dinf 4.12e-04 gap 3.00e-03 mu 4.83e+00
+[admm] it 2729: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.281700 lower reading 28.457969 pinf 2.73e-04 dinf 4.08e-04 gap 3.05e-03 mu 4.83e+00
+[admm] it 2755: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.278331 lower reading 28.456857 pinf 2.00e-04 dinf 4.04e-04 gap 3.09e-03 mu 4.83e+00
+[admm] it 2781: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.278834 lower reading 28.455192 pinf 1.97e-04 dinf 4.00e-04 gap 3.05e-03 mu 4.83e+00
+[admm] it 2807: 0.0100 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.278248 lower reading 28.451897 pinf 2.18e-04 dinf 3.97e-04 gap 3.01e-03 mu 4.83e+00
+[admm] it 2832: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.275716 lower reading 28.448711 pinf 1.88e-04 dinf 3.93e-04 gap 3.00e-03 mu 4.83e+00
+[admm] it 2858: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.273027 lower reading 28.446188 pinf 1.77e-04 dinf 3.90e-04 gap 3.00e-03 mu 4.83e+00
+[admm] it 2884: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.271211 lower reading 28.443921 pinf 1.80e-04 dinf 3.86e-04 gap 2.99e-03 mu 4.83e+00
+[admm] it 2910: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.269730 lower reading 28.441500 pinf 1.85e-04 dinf 3.83e-04 gap 2.98e-03 mu 4.83e+00
+[admm] it 2936: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.267924 lower reading 28.438985 pinf 1.81e-04 dinf 3.80e-04 gap 2.96e-03 mu 4.83e+00
+[admm] it 2962: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.266086 lower reading 28.436526 pinf 1.80e-04 dinf 3.77e-04 gap 2.95e-03 mu 4.83e+00
+[admm] it 2988: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.264543 lower reading 28.434121 pinf 1.80e-04 dinf 3.74e-04 gap 2.94e-03 mu 4.83e+00
+[admm] it 3013: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.262826 lower reading 28.431822 pinf 1.76e-04 dinf 3.71e-04 gap 2.93e-03 mu 4.83e+00
+[admm] it 3038: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.261072 lower reading 28.429663 pinf 1.72e-04 dinf 3.68e-04 gap 2.92e-03 mu 4.83e+00
+[admm] it 3064: 0.0097 s/it (lin 0.0001, spmv 0.0010, cone 0.0081); upper reading 28.259482 lower reading 28.427442 pinf 1.72e-04 dinf 3.64e-04 gap 2.91e-03 mu 4.83e+00
+[admm] it 3090: 0.0096 s/it (lin 0.0001, spmv 0.0009, cone 0.0080); upper reading 28.258168 lower reading 28.425130 pinf 1.75e-04 dinf 3.62e-04 gap 2.89e-03 mu 4.83e+00
+[admm] it 3115: 0.0101 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 28.256573 lower reading 28.422766 pinf 1.67e-04 dinf 3.58e-04 gap 2.88e-03 mu 4.83e+00
+[admm] it 3141: 0.0098 s/it (lin 0.0001, spmv 0.0010, cone 0.0081); upper reading 28.255122 lower reading 28.420499 pinf 1.68e-04 dinf 3.55e-04 gap 2.87e-03 mu 4.83e+00
+[admm] it 3167: 0.0096 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.255756 lower reading 28.417119 pinf 2.65e-04 dinf 3.51e-04 gap 2.80e-03 mu 4.83e+00
+[admm] it 3193: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.253257 lower reading 28.413613 pinf 1.91e-04 dinf 3.48e-04 gap 2.78e-03 mu 4.83e+00
+[admm] it 3217: 0.0105 s/it (lin 0.0002, spmv 0.0010, cone 0.0087); upper reading 28.252718 lower reading 28.411644 pinf 5.64e-04 dinf 3.40e-04 gap 2.76e-03 mu 4.83e+00
+[admm] it 3242: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.254432 lower reading 28.405638 pinf 6.21e-04 dinf 3.35e-04 gap 2.62e-03 mu 4.83e+00
+[admm] it 3268: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.249999 lower reading 28.399769 pinf 1.76e-04 dinf 3.32e-04 gap 2.60e-03 mu 4.83e+00
+[admm] it 3294: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.245118 lower reading 28.398192 pinf 1.87e-04 dinf 3.29e-04 gap 2.66e-03 mu 4.83e+00
+[admm] it 3320: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.249966 lower reading 28.394514 pinf 3.71e-04 dinf 3.22e-04 gap 2.51e-03 mu 4.83e+00
+[admm] it 3345: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.247832 lower reading 28.389463 pinf 3.05e-04 dinf 3.19e-04 gap 2.46e-03 mu 4.83e+00
+[admm] it 3371: 0.0097 s/it (lin 0.0001, spmv 0.0009, cone 0.0081); upper reading 28.241891 lower reading 28.386289 pinf 2.51e-04 dinf 3.16e-04 gap 2.51e-03 mu 4.83e+00
+[admm] it 3397: 0.0099 s/it (lin 0.0002, spmv 0.0010, cone 0.0082); upper reading 28.239899 lower reading 28.385693 pinf 1.27e-04 dinf 3.14e-04 gap 2.53e-03 mu 4.83e+00
+[admm] it 3422: 0.0103 s/it (lin 0.0001, spmv 0.0011, cone 0.0085); upper reading 28.239918 lower reading 28.384993 pinf 1.29e-04 dinf 3.12e-04 gap 2.52e-03 mu 3.71e+00
+[admm] it 3448: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.240300 lower reading 28.382774 pinf 2.03e-04 dinf 3.09e-04 gap 2.47e-03 mu 3.71e+00
+[admm] it 3474: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.240490 lower reading 28.380004 pinf 5.15e-04 dinf 3.01e-04 gap 2.42e-03 mu 3.71e+00
+[admm] it 3500: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.250224 lower reading 28.368499 pinf 9.68e-04 dinf 2.94e-04 gap 2.05e-03 mu 6.27e+00
+[admm] it 3525: 0.0101 s/it (lin 0.0002, spmv 0.0010, cone 0.0084); upper reading 28.236850 lower reading 28.358157 pinf 3.96e-04 dinf 2.93e-04 gap 2.11e-03 mu 6.27e+00
+[admm] it 3551: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.226198 lower reading 28.359698 pinf 4.67e-04 dinf 2.90e-04 gap 2.32e-03 mu 6.27e+00
+[admm] it 3577: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.228180 lower reading 28.365337 pinf 3.16e-04 dinf 2.88e-04 gap 2.38e-03 mu 6.27e+00
+[admm] it 3603: 0.0100 s/it (lin 0.0002, spmv 0.0010, cone 0.0083); upper reading 28.233940 lower reading 28.364758 pinf 2.74e-04 dinf 2.86e-04 gap 2.27e-03 mu 6.27e+00
+[admm] it 3627: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0086); upper reading 28.233836 lower reading 28.361089 pinf 2.16e-04 dinf 2.85e-04 gap 2.21e-03 mu 6.27e+00
+[admm] it 3652: 0.0100 s/it (lin 0.0001, spmv 0.0010, cone 0.0083); upper reading 28.230480 lower reading 28.358470 pinf 1.38e-04 dinf 2.83e-04 gap 2.22e-03 mu 6.27e+00
+[admm] it 3678: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.228242 lower reading 28.358339 pinf 1.19e-04 dinf 2.81e-04 gap 2.26e-03 mu 6.27e+00
+[admm] it 3703: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.228588 lower reading 28.358184 pinf 9.88e-05 dinf 2.80e-04 gap 2.25e-03 mu 6.27e+00
+[admm] it 3728: 0.0101 s/it (lin 0.0001, spmv 0.0010, cone 0.0084); upper reading 28.228902 lower reading 28.356848 pinf 1.16e-04 dinf 2.78e-04 gap 2.22e-03 mu 6.27e+00
+[admm] it 3754: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.228062 lower reading 28.354913 pinf 1.03e-04 dinf 2.76e-04 gap 2.20e-03 mu 6.27e+00
+[admm] it 3780: 0.0099 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.226797 lower reading 28.353704 pinf 8.52e-05 dinf 2.75e-04 gap 2.20e-03 mu 4.83e+00
+[admm] it 3806: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.225975 lower reading 28.352929 pinf 9.55e-05 dinf 2.73e-04 gap 2.20e-03 mu 3.71e+00
+[admm] it 3831: 0.0103 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.225963 lower reading 28.351723 pinf 1.32e-04 dinf 2.71e-04 gap 2.18e-03 mu 3.71e+00
+[admm] it 3857: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.225514 lower reading 28.349714 pinf 1.63e-04 dinf 2.69e-04 gap 2.16e-03 mu 3.71e+00
+[admm] it 3883: 0.0098 s/it (lin 0.0001, spmv 0.0010, cone 0.0082); upper reading 28.223706 lower reading 28.347718 pinf 1.50e-04 dinf 2.67e-04 gap 2.15e-03 mu 3.71e+00
+[admm] it 3908: 0.0102 s/it (lin 0.0002, spmv 0.0010, cone 0.0085); upper reading 28.221685 lower reading 28.346257 pinf 1.44e-04 dinf 2.65e-04 gap 2.16e-03 mu 3.71e+00
+[admm] it 3934: 0.0098 s/it (lin 0.0001, spmv 0.0009, cone 0.0082); upper reading 28.220436 lower reading 28.345027 pinf 1.54e-04 dinf 2.63e-04 gap 2.16e-03 mu 3.71e+00
+[admm] it 3960: 0.0099 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.219614 lower reading 28.343691 pinf 1.65e-04 dinf 2.62e-04 gap 2.16e-03 mu 3.71e+00
+[admm] it 3986: 0.0098 s/it (lin 0.0001, spmv 0.0010, cone 0.0081); upper reading 28.218336 lower reading 28.342260 pinf 1.69e-04 dinf 2.60e-04 gap 2.15e-03 mu 3.71e+00
+[admm] it 4000: 0.0102 s/it (lin 0.0001, spmv 0.0009, cone 0.0083); upper reading 28.217581 lower reading 28.341441 pinf 1.80e-04 dinf 2.58e-04 gap 2.15e-03 mu 3.71e+00
+[admm] stopped after the requested iterations (a pricing or control run): NOT converged
+  wrote data/fs54/d4/q47/calib-q11-fine.json

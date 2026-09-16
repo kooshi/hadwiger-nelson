@@ -1,0 +1,42 @@
+{
+ "upper_below_0.0065": {
+  "descent_iterations": {
+   "11": 101,
+   "19": 217,
+   "23": 822,
+   "27": 1533
+  },
+  "exponent_all_four": 1.4847021835068126,
+  "exponent_steps": {
+   "11->19": 0.6996483792498025,
+   "19->23": 3.4854921123409732,
+   "23->27": 1.943467578724116
+  },
+  "projected_total_iterations_at_47": {
+   "fit_all_four": 6440,
+   "from_27_with_exponent_11->19": 3750,
+   "from_27_with_exponent_19->23": 73483,
+   "from_27_with_exponent_23->27": 13641
+  }
+ },
+ "upper_below_0.01": {
+  "descent_iterations": {
+   "11": 176,
+   "19": 361,
+   "23": 1020,
+   "27": 1874
+  },
+  "exponent_all_four": 1.2773664149416486,
+  "exponent_steps": {
+   "11->19": 0.6572154751068771,
+   "19->23": 2.7182713375071663,
+   "23->27": 1.8967896446605181
+  },
+  "projected_total_iterations_at_47": {
+   "fit_all_four": 6406,
+   "from_27_with_exponent_11->19": 4303,
+   "from_27_with_exponent_19->23": 38573,
+   "from_27_with_exponent_23->27": 15767
+  }
+ }
+}

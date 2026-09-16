@@ -1,0 +1,3 @@
+PLANT scale one +- block by 1+1e-9: same=False max diff 2.00e-09 -> FIRED
+PLANT drop one raw term of one -- block: same=False max diff 7.07e-01 -> FIRED
+restored: same=True max diff 2.22e-16

@@ -309,6 +309,93 @@ canonicaliser can only refuse; (iii) the rounding loss is ~10⁻⁵ and the real
 arithmetic, the rational reader and the exact LDLᵀ from `tools/fplane_cert_check.py`; an independent fresh-eyes read of the
 checker (not a re-run) has not been done and is owed before any outward claim beyond the wall document.
 
+### §D4 at 47 — measured price (2026-09-16; a pricing work order, nothing solved)
+**Why.** At 47 six colours need α ≥ 369 against the triple level's converged 371.409 (certified 371.84): a certificate-shaped
+`L₃` value below 369 is a drop of **0.649 %** and would refuse six there (and prove W_f at 47). Records: `data/fs54/d4/q47/`
+(scripts, logs, JSON); instance and checkpoint in `data/fs54/d4/ckpt/` (not committed). **Every number is a reading, a
+size, a time or a control; none is a bound.**
+
+**The instrument had to be rebuilt to reach 47** (`tools/fs54_d4_quad.py` `lean-*` subcommands). It uses the same functions
+for the derivation (`canon`, `blocks_for`, `le_diag_rows`), but: the tables are built in forked workers, each block is
+compressed to CSR inside its worker, V = −A is kept with int32 indices and no COO stage, the instance is cached on disk,
+the ADMM's vector work runs in numba-parallel kernels, and the projection runs either in a CPU thread pool or on card A through `cusolverDnXsyevBatched`.
+
+| measured at q = 47 | value |
+|---|---|
+| variables | **4,121,921** = 45 pairs + 8,625 triples + 4,113,251 four-sets; census **exact** at k = 2, 3, 4 (867,058,301,120 independent 4-sets) |
+| d-classes | 46, each of size 48 (one is the unit circle) |
+| PSD blocks | **462**: 93 × 529, 186 × 552, 93 × 576, 45 × 1,081, 45 × 1,128; 111,851,346 PSD rows; Σm³ = 1.843·10¹¹ (133× 27's) |
+| constraint matrix | 115,973,267 rows × 4,121,921 columns, **701,212,581 nonzeros, 8.27 GiB** (int32); instance on disk 9.3 GB |
+| build wall-clock (14 workers) | **96 s** (tables 63, blocks 26, assembly 1); process peak RSS 17.8 GiB, system use ≈ 19 GB. The first build took 787 s: 40,000 sets per canonical-form call is bandwidth-bound (152 k sets/s over 14 workers against 2.33 M/s at 1,000); rebuilt digests identical |
+| ADMM setup | 180 s (load and digest check 6 s, transpose 11 s, G = VᵀV with 99.0 M nonzeros and the Schur factor 164 s); off-diagonal four-set coupling exactly 0; exact solve residual 2.2·10⁻¹³ |
+| **s/iteration, CPU projector** (14 threads) | **7.01** = linear solve 0.47 + sparse products 2.08 + vector updates 0.41 + **projection 3.96** |
+| **s/iteration, GPU projector** (card A; its 86–340) | **5.15** = 0.47 + 2.10 + 0.41 + **projection 2.09** (unpack 0.16, to device 0.13, **eigensolver 1.43**, reconstruction 0.24, from device 0.13, pack 0.10) |
+| solve memory | ≈ 26 GB of system RAM; GPU 1.28 GiB buffers + 1.95 GiB eigensolver workspace; checkpoint 1.89 GB written in 1.4 s |
+
+The pricing page's estimate held on sizes (46 classes, ~4 M variables, blocks to ~1,104) and was pessimistic on time
+(10–15 s/iteration estimated; 7.0 s on the CPU, 5.15 s with the GPU).
+
+**Controls.** (i) The lean path's data against `assemble_scs` at 11, 19, 27: same variable numbering, rows, cone, C, bs and
+objective constant; entries agree to 2.2·10⁻¹⁶ (13/35/92 sums are exactly zero in one summation order and not the other).
+Two planted faults fired: one block scaled by 1 + 10⁻⁹, and one dropped term. (ii) The lean y(S) matches the reference to
+≤ 1.9·10⁻¹⁶ at 11 and 19. (iii) The lean ADMM matches the reference ADMM at 11: identical readings after 400 iterations,
+and the same when the 400 are split 200 + 200 across a resume. (iv) **At 47, FS-53's verified 265-set gives objective
+265.000000000, least eigenvalue −3.0·10⁻¹⁴ over all 462 blocks, and least y ≥ 0 slack 0**, computed from the assembled data
+the solver uses. Two planted faults made blocks indefinite: "−−" without its four-set term (−0.960) and permuted four-set
+values (−1.042). (v) The GPU projection matches the CPU projection to 3.4·10⁻¹⁵ on a real iterate. **Not run at 47:**
+- **The triple-level value.** Its Y/MY blocks come from the functions that reproduced 27's triple value to 5·10⁻⁶. A
+  triple-level ADMM at 47 would need more iterations than a control is worth.
+- **Random maximal sets.** The 265-set is already not a maximum.
+
+**The trajectory at 47 (340 iterations, stopped at a checkpoint).** The upper reading stays near 1 while the lower reading
+climbs: 4.5 at 20, 11.6 at 86, 30.5 at 180, 98 at 274, 227 at 340. It grows ×1.8 per 47 iterations, the same rate as at 27,
+but it starts lower, so 47's climb should end around iteration 380–450 (at 27 it ended at 216–264). Nothing about the
+descent below the triple level has been measured at 47 yet.
+
+**Calibration from zero on the same code** (`calib-q{11,19,23}.log`, `early-q27-calibration.log`, `trajectories.py`).
+Crossings count the first report after each plane's peak at which the upper reading is that far below the triple level.
+
+| q | n | peak | 0.65 % | 1 % | 2 % | last reading |
+|---|---|---|---|---|---|---|
+| 11 | 121 | 253 | 354 | 429 | 989 | 3.29 % below at 4,000 |
+| 19 | 361 | 217 | 434 | 578 | 1,070 | 4.26 % at 4,000; certificate-shaped N 82.105 |
+| 23 | 529 | 315 | 1,137 | 1,335 | 2,075 | 3.06 % at 3,500; **certificate-shaped N = 105.431** |
+| 27 | 729 | 264 | 1,797 | 2,138 | 3,800 | 4.47 % at 25,671 |
+
+N sits 0.10–0.19 % above the upper reading, so N falls below 369 somewhere between the upper reading's 0.65 % and 1 %
+crossings. **Projection** (`projection.py`): scale the descent iterations (from each plane's peak) as a power of n, and add
+47's estimated peak of 420.
+
+| exponent source | projected iterations | wall-clock at 5.15 s/iteration |
+|---|---|---|
+| fit over all four planes | **≈ 6,400** | **≈ 9 h** |
+| the last size step (23 → 27, exponent ≈ 1.9) | **≈ 13,600–15,800** | **≈ 20–23 h** |
+| 11 → 19 | ≈ 3,750–4,300 | ≈ 6 h |
+| 19 → 23 | ≈ 38,600–73,500 | ≈ 2.3–4.4 days |
+
+**Confidence: low.** The fact that would settle it is 47's own descent: the upper reading about 1,000 iterations after its
+peak, near iteration 1,450, roughly 2 h from the checkpoint. At that point 27 was 0.3 % below the triple level and 23 was
+0.97 % below. Whether `L₃` at 47 goes below 369 at all is a separate question. Every measured plane dropped at least 3 %
+(7 dropped only to α), so the answer is probably yes; confidence medium.
+
+**The certificate step at 47 (estimated).** The checker is pure Python.
+- Canonical forms: 115 M keys at a measured 5.4 µs each, about 10 CPU-min.
+- Gram products and the pairing: scaled from 27, about 25–30 CPU-min.
+- Total: roughly 40 min on one process, about 5 min on 14 jobs, a few GB per job. The file would be about 0.4 GB if the
+  rank fraction matches 27's 10 %.
+
+The producer, `tools/fs54_l3_cert_round.py`, rebuilds the instance through `Tables`/`assemble_scs`, whose COO assembly
+is estimated at tens of GB. It has to be ported to the cached lean instance first: a few hours of engineering.
+
+**Found on the way.**
+- **At 23 the calibration iterate already reads N = 105.431 < 106.** Five colours at 23 need α ≥ 106. The checkpoint
+  `ckpt/calib-q23.npz` is in the format the 27 producer reads, so an exact certificate that five colours are refused at 23
+  looks about an hour away. It is a reading, not a bound.
+- **31 is in reach of the same instrument for five:** it needs N < 193, 3.92 % below the converged 200.88. Measured drops
+  range 3.1–4.5 %, and the size is about 7× 27's (estimated).
+- **Moving the sparse products and vector updates onto a GPU** is estimated to take 5.15 s/iteration to about 2.7 s,
+  halving any 47 run. Not built.
+
 ### §R Outside responses to the wall document (2026-09-16)
 Kooshi relayed two responses to `reference/wall-at-six/WALL-AT-SIX.md`, credited to **GPT Astra** (OpenAI) per the standing
 rule — the first written under the Poros procedure. Verbatim copies: `reference/wall-at-six/responses/`. **Every claim was

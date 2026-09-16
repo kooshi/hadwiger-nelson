@@ -1,0 +1,7 @@
+[instance] loaded data/fs54/d4/ckpt/instance-q47-l3 (digests verified) in 5.7 s
+[lean-yset] y from a 265-set (200860990 4-subsets) in 85 s
+[lean-checkset] objective 265.000000000; least linear slack 0.00e+00; least eigenvalue over 462 blocks -2.989e-14 (+-@16/chi0); 3 s
+[lean-checkset] PLANT '--' without its 4-set term: least eigenvalue -9.602e-01 (--@111/chi0) -> FIRED
+[lean-checkset] PLANT 4-set values permuted: least eigenvalue -1.042e+00 (++@111/chi0) -> FIRED
+  wrote data/fs54/d4/q47/checkset-q47-set265.json
+EXIT 0

@@ -1,0 +1,11 @@
+{
+ "q": 19,
+ "family": "l3",
+ "checkpoint": "data/fs54/d4/ckpt/calib-q19.npz",
+ "iterations": 4000,
+ "N": 82.10541648617058,
+ "scale": 1.0,
+ "mu_sum": 0.08591212217871169,
+ "mu_support": 12928,
+ "claim_scope": "float readings and controls; never a bound"
+}

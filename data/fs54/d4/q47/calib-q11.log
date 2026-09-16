@@ -1,0 +1,28 @@
+[tables] q=11: T3 keys for 121x121 in 0.0 s
+[tables] q=11: T4 keys for d=1 in 0.0 s
+[tables] q=11: T4 keys for d=2 in 0.0 s
+[tables] q=11: T4 keys for d=3 in 0.0 s
+[tables] q=11: T4 keys for d=4 in 0.0 s
+[tables] q=11: T4 keys for d=5 in 0.0 s
+[tables] q=11: T4 keys for d=12 in 0.0 s
+[tables] q=11: T4 keys for d=14 in 0.0 s
+[tables] q=11: T4 keys for d=15 in 0.0 s
+[tables] q=11: T4 keys for d=24 in 0.0 s
+[tables] q=11: T4 keys for d=27 in 0.0 s
+[tables] q=11: 1841 live variables (size 2: 9, 3: 105, 4: 1727); 0.2 s total
+[solve] q=11 family=l3 d-classes=[1, 2, 3, 4, 5, 12, 14, 15, 24, 27]: 102 blocks, max 66, PSD rows 74100, sum m^3 6.527e+06; build 0.0 s
+[solve] SCS: 75941 rows x 1841 columns, nnz 299986, A 3.4 MiB
+[admm] G = V^T V: 40347 nonzeros, border 114, 4-set diagonal 1727 (off-diagonal noise 0.0e+00); Schur complement factored in 0.01 s
+[admm] NEW checkpoint data/fs54/d4/ckpt/calib-q11.npz
+[admm] it 480: 0.0104 s/it (lin 0.0002, spmv 0.0010, cone 0.0089); upper reading 28.829963 lower reading 29.255249 pinf 9.27e-04 dinf 2.22e-03 gap 7.20e-03 mu 1.79e+01
+[admm] it 902: 0.0119 s/it (lin 0.0002, spmv 0.0013, cone 0.0100); upper reading 28.626680 lower reading 28.998033 pinf 6.66e-04 dinf 1.38e-03 gap 6.33e-03 mu 1.06e+01
+[admm] it 1314: 0.0121 s/it (lin 0.0002, spmv 0.0013, cone 0.0102); upper reading 28.497286 lower reading 28.820248 pinf 4.80e-04 dinf 9.88e-04 gap 5.54e-03 mu 8.16e+00
+[admm] it 1726: 0.0122 s/it (lin 0.0002, spmv 0.0013, cone 0.0102); upper reading 28.411022 lower reading 28.667417 pinf 2.28e-04 dinf 7.24e-04 gap 4.41e-03 mu 8.16e+00
+[admm] it 2145: 0.0120 s/it (lin 0.0003, spmv 0.0013, cone 0.0100); upper reading 28.347192 lower reading 28.569601 pinf 3.18e-04 dinf 5.61e-04 gap 3.84e-03 mu 4.83e+00
+[admm] it 2563: 0.0120 s/it (lin 0.0002, spmv 0.0013, cone 0.0100); upper reading 28.297393 lower reading 28.485434 pinf 2.14e-04 dinf 4.41e-04 gap 3.25e-03 mu 4.83e+00
+[admm] it 2980: 0.0120 s/it (lin 0.0002, spmv 0.0013, cone 0.0101); upper reading 28.265035 lower reading 28.434864 pinf 1.80e-04 dinf 3.75e-04 gap 2.94e-03 mu 4.83e+00
+[admm] it 3400: 0.0119 s/it (lin 0.0003, spmv 0.0013, cone 0.0099); upper reading 28.239788 lower reading 28.385638 pinf 1.02e-04 dinf 3.14e-04 gap 2.53e-03 mu 3.71e+00
+[admm] it 3816: 0.0120 s/it (lin 0.0002, spmv 0.0013, cone 0.0101); upper reading 28.225909 lower reading 28.352556 pinf 1.09e-04 dinf 2.73e-04 gap 2.20e-03 mu 3.71e+00
+[admm] it 4000: 0.0121 s/it (lin 0.0003, spmv 0.0013, cone 0.0102); upper reading 28.217581 lower reading 28.341441 pinf 1.80e-04 dinf 2.58e-04 gap 2.15e-03 mu 3.71e+00
+[admm] stopped after the requested iterations (a pricing or control run): NOT converged
+  wrote data/fs54/d4/q47/calib-q11.json

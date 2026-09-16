@@ -46,6 +46,20 @@ SUBCOMMANDS
              are projected in a thread pool (--proj-threads, with OPENBLAS_NUM_THREADS=1).  CPU only; measured 0.17 s per
              iteration at q = 27 against 9.7 s for SCS gpu_indirect.
 
+THE LEAN PATH (q = 47; plans/FS54-twenty-seven.md "§D4 at 47 -- measured price").  The same programme from the same
+functions, built in forked workers (tables as int32 triangles, each block compressed to CSR in its worker) and cached:
+  lean-build     build and cache the instance (V = -A in CSR with int32 indices, C, bs, the orbit keys); --census adds
+                 the orbit-completeness check.  q = 47: 4,121,921 variables, 462 blocks (orders 529-1,128), 701 M nonzeros.
+  lean-compare   the lean data against assemble_scs at a small q (identical numbering, rows, cone, C, bs, objective
+                 constant; entries equal to 2.2e-16 -- summation order differs, so a few exact-zero sums differ).
+  lean-checkset  y from a real independent set (subsets split by least member over forked workers), objective and every
+                 block's least eigenvalue from the ASSEMBLED data, with two plants that must make a block indefinite.
+  lean-solve     admm_solve's iteration on the cached instance, vector work in numba-parallel kernels, the projection in a
+                 CPU thread pool (--projector cpu) or on one GPU via cusolverDnXsyevBatched (--projector gpu, checked
+                 against the CPU projection on the first iteration); checkpoint and resume exactly as `solve`.
+  lean-evaluate  the certificate-shaped float value N on a lean checkpoint.
+Run the lean path with .venv (numba) and OMP_NUM_THREADS=OPENBLAS_NUM_THREADS=1; pin a GPU by UUID.
+
 Run with the GPU venv for solves (build/venv-sdp-gpu/bin/python; pin the card by UUID), or .venv for counts."""
 import argparse, json, math, sys, time
 from pathlib import Path
@@ -618,10 +632,10 @@ class Arrowhead:
     here: the off-diagonal mass there must be below `tol`, else refused) with a border on the pair and triple variables
     (they must be numbered first, as Tables does).  G y = r is solved exactly through the Schur complement on the border."""
 
-    def __init__(self, V, nb, tol=1e-9, log=print):
+    def __init__(self, V, nb, tol=1e-9, log=print, VT=None):
         import scipy.sparse as sp
         t0 = time.time()
-        G = (V.T @ V).tocsr()
+        G = ((V.T if VT is None else VT) @ V).tocsr()          # VT: a precomputed CSR transpose (the lean path holds one)
         n = G.shape[0]
         G44 = G[nb:, nb:].tocoo()
         off = G44.row != G44.col
@@ -914,6 +928,886 @@ def selftest(log=print):
     return ok
 
 
+# ======================================================================================================================
+# THE LEAN PATH (FS-54 D4 at q = 47).  The same programme, built by the same functions (canon, blocks_for, le_diag_rows,
+# pattern_terms), but: the canonical-form tables in forked worker processes and stored as int32 upper triangles; every
+# block compressed to CSR in its worker (duplicates summed, exact zeros dropped); the constraint matrix held as V = -A
+# (int32 indices) with no COO stage; the instance cached on disk; the ADMM's vector work in numba-parallel kernels with
+# the SAME iteration as admm_solve (rhs combined as mu*bs + V^T(C - S - mu X), which is the same vector); the PSD
+# projection either in a CPU thread pool (numba unpack/pack without the GIL, LAPACK eigh) or on a GPU through cuSOLVER's
+# batched symmetric eigensolver.  `lean-compare` checks the lean V, C, bs, cone and objective constant against
+# assemble_scs at small q, so the lean path is shown to be the same derivation's data, not re-derived.
+# ======================================================================================================================
+_FORK = {}          # state inherited by forked workers (Python 3.14 defaults to forkserver; the fork context is explicit)
+
+
+def _fork_pool(workers):
+    import multiprocessing as mp
+    return mp.get_context("fork").Pool(workers)      # Pool forks every worker in __init__, before its handler threads
+
+
+def _tri_index(n, u, v):
+    """position of the unordered pair {u, v} in np.triu_indices(n) order (u <= v)"""
+    a, b = np.minimum(u, v).astype(np.int64), np.maximum(u, v).astype(np.int64)
+    return a * n - a * (a - 1) // 2 + (b - a)
+
+
+def _lean_keys_worker(j):
+    P, iu, iv, first, chunk = _FORK["P"], _FORK["iu"], _FORK["iv"], _FORK["firsts"][j], _FORK["chunk"]
+    keys = np.empty(len(iu), dtype=np.int64)
+    t = time.time()
+    for s in range(0, len(iu), chunk):
+        u, v = iu[s:s + chunk], iv[s:s + chunk]
+        cols = [np.zeros_like(u)] + ([np.full_like(u, first)] if first is not None else []) + [u, v]
+        keys[s:s + chunk] = P.canon(np.stack(cols, axis=1))
+    return j, keys, time.time() - t
+
+
+class _FullFromTri:
+    """Tb.V4 on the lean path: d -> the full n x n int32 id table, expanded on demand from its upper triangle (one cached)"""
+
+    def __init__(self, n, iu, iv, tri):
+        self.n, self.iu, self.iv, self.tri = n, iu, iv, tri
+        self._d, self._full = None, None
+
+    def __getitem__(self, d):
+        if self._d != d:
+            full = np.empty((self.n, self.n), dtype=np.int32)
+            full[self.iu, self.iv] = self.tri[d]
+            full[self.iv, self.iu] = self.tri[d]
+            self._d, self._full = d, full
+        return self._full
+
+    def __contains__(self, d):
+        return d in self.tri
+
+
+class LeanTables:
+    """Tables' variable numbering (identical: the same key set, ordered by size then key), built in `workers` forked
+    processes; V3 a full int32 table, V4 upper triangles expanded on demand."""
+
+    def __init__(self, P, dreps, workers=14, log=print, chunk=1000):
+        # chunk: sets per canon call.  Measured at q = 47 (2026-09-16): 40,000 gives 152k sets/s over 14 workers (memory-
+        # bandwidth bound, no parallel gain); 1,000 gives 2.33M/s.  The first q = 47 build used 40,000 (722 s of tables).
+        n = P.n
+        t0 = time.time()
+        iu, iv = np.triu_indices(n)
+        firsts = [None] + [int(d) for d in dreps]
+        _FORK.update(P=P, iu=iu, iv=iv, firsts=firsts, chunk=chunk)
+        keys = [None] * len(firsts)
+        with _fork_pool(workers) as pool:
+            for j, k, dt in pool.imap_unordered(_lean_keys_worker, range(len(firsts))):
+                keys[j] = k
+                log(f"[lean-tables] q={P.q}: table {'T3' if firsts[j] is None else 'T4 d=' + str(firsts[j])} in {dt:.1f} s "
+                    f"({sum(x is not None for x in keys)}/{len(firsts)}, {time.time()-t0:.0f} s elapsed)")
+        t1 = time.time()
+        allkeys = np.unique(np.concatenate([np.unique(k) for k in keys]))
+        size, indep = P.key_size_and_indep(allkeys)
+        var = np.full(len(allkeys), KILLED, dtype=np.int64)
+        var[size == 1] = CONST
+        live = (size >= 2) & indep
+        order = np.nonzero(live)[0]
+        order = order[np.lexsort((allkeys[order], size[order]))]
+        var[order] = np.arange(len(order))
+        self.keys, self.size, self.indep, self.var = allkeys, size, indep, var
+        self.nvar = len(order)
+        self.var_size = size[order]
+        self.var_key = allkeys[order]
+        assert self.nvar < 2 ** 31
+        tri = {}
+        for j, f in enumerate(firsts):
+            ids = var[np.searchsorted(allkeys, keys[j])].astype(np.int32)
+            keys[j] = None
+            if f is None:
+                V3 = np.empty((n, n), dtype=np.int32)
+                V3[iu, iv] = ids
+                V3[iv, iu] = ids
+                self.V3 = V3
+            else:
+                tri[f] = ids
+        self.V4 = _FullFromTri(n, iu, iv, tri)
+        self.iu, self.iv = iu, iv
+        log(f"[lean-tables] q={P.q}: {self.nvar} live variables (size 2: {int((self.var_size==2).sum())}, "
+            f"3: {int((self.var_size==3).sum())}, 4: {int((self.var_size==4).sum())}); numbering {time.time()-t1:.1f} s; "
+            f"{time.time()-t0:.1f} s total")
+
+
+def _compress_block(nvar, label, m, rows, cols, vals, const):
+    """one block's (rows, cols, vals) -> CSR (local rows 0..L-1): duplicates summed, exact zeros dropped, columns sorted"""
+    L = m * (m + 1) // 2
+    key = rows.astype(np.int64) * nvar + cols.astype(np.int64)
+    uk, inv = np.unique(key, return_inverse=True)
+    sv = np.bincount(inv.ravel(), weights=vals, minlength=len(uk))
+    keep = sv != 0.0
+    uk, sv = uk[keep], sv[keep]
+    r = uk // nvar
+    indptr = np.zeros(L + 1, dtype=np.int64)
+    np.cumsum(np.bincount(r, minlength=L), out=indptr[1:])
+    return (label, m, indptr, (uk % nvar).astype(np.int32), sv, const)
+
+
+def _lean_units(P, family, dreps):
+    """the (pattern, d) units in build()'s order"""
+    units = []
+    for pat in FAMILIES[family]:
+        if pat in ("LD", "Y", "MY"):
+            units.append((pat, 0))
+            continue
+        for d in dreps:
+            if P.unit[d] and pat in ("++", "+-"):
+                continue
+            units.append((pat, int(d)))
+    return units
+
+
+def _lean_block_worker(unit):
+    P, Tb, border, s0 = _FORK["P"], _FORK["Tb"], _FORK["border"], _FORK["s0"]
+    pat, d = unit
+    t = time.time()
+    if pat == "LD":
+        raw = le_diag_rows(P, Tb)
+    elif pat in ("Y", "MY"):
+        raw = list(blocks_for(P, Tb, pat, 0, border=border and pat == "MY", s0=s0))
+    else:
+        raw = list(blocks_for(P, Tb, pat, d, border=border and pat == "--", s0=s0))
+    out = [_compress_block(Tb.nvar, *bl) for bl in raw]
+    return unit, out, time.time() - t
+
+
+def lean_build_blocks(P, Tb, family, dreps, border=False, s0=None, workers=14, log=print):
+    units = _lean_units(P, family, dreps)
+    _FORK.update(P=P, Tb=Tb, border=border, s0=s0)
+    res = {}
+    t0 = time.time()
+    with _fork_pool(workers) as pool:
+        for unit, out, dt in pool.imap_unordered(_lean_block_worker, units):
+            res[unit] = out
+            if len(res) % 10 == 0 or len(res) == len(units):
+                log(f"[lean-blocks] {len(res)}/{len(units)} matrices ({time.time()-t0:.0f} s elapsed; last {unit} {dt:.1f} s)")
+    blocks = []
+    for u in units:
+        blocks += res.pop(u)
+    return blocks
+
+
+def lean_assemble(P, Tb, blocks, nonneg=True, log=print):
+    """V = -A, C = b, bs = SCS's c, in assemble_scs's row order (y >= 0 rows, then 1x1 blocks, then the PSD blocks)."""
+    import scipy.sparse as sp
+    nv = Tb.nvar
+    lin = [bl for bl in blocks if bl[1] == 1]
+    psd = [bl for bl in blocks if bl[1] > 1]
+    blocks.clear()
+    ordered = lin + psd
+    lin.clear(); psd.clear()
+    n0 = nv if nonneg else 0
+    nrows = n0 + sum(bl[1] * (bl[1] + 1) // 2 for bl in ordered)
+    nnz = n0 + sum(len(bl[3]) for bl in ordered)
+    idt = np.int32 if nnz < 2 ** 31 - 1 else np.int64
+    indptr = np.empty(nrows + 1, dtype=idt)
+    indices = np.empty(nnz, dtype=idt)
+    data = np.empty(nnz)
+    C = np.zeros(nrows)
+    indptr[:n0 + 1] = np.arange(n0 + 1)
+    indices[:n0] = np.arange(n0)
+    data[:n0] = 1.0
+    ro, no = n0, n0
+    labels, offsets, dims = [], [], []
+    for k in range(len(ordered)):
+        label, m, ip, ind, val, const = ordered[k]
+        ordered[k] = None
+        L = m * (m + 1) // 2
+        indptr[ro + 1:ro + L + 1] = ip[1:] + no
+        indices[no:no + len(ind)] = ind
+        data[no:no + len(ind)] = val
+        C[ro:ro + L] = const
+        if m > 1:
+            labels.append(label); offsets.append(ro); dims.append(m)
+        ro += L
+        no += len(ind)
+    assert ro == nrows and no == nnz
+    V = sp.csr_matrix((data, indices, indptr), shape=(nrows, nv), copy=False)
+    oc, cvec = objective(P, Tb)
+    cone = dict(z=0, l=nrows - sum(m * (m + 1) // 2 for m in dims), s=dims)     # the y >= 0 rows and the 1x1 blocks
+    return dict(V=V, C=C, bs=-cvec, oc=oc, cone=cone, labels=labels, offsets=offsets, nb=int((Tb.var_size < 4).sum()))
+
+
+# --------------------------------------------------------------------------------------------------- numba kernels
+_NB = {}
+
+
+def numba_kernels():
+    if _NB:
+        return _NB
+    here = str(Path(__file__).resolve().parent)       # tools/coverage.py would shadow the coverage package numba probes for
+    saved = list(sys.path)
+    sys.path[:] = [p for p in sys.path if Path(p or ".").resolve() != Path(here)]
+    try:
+        import numba as nb
+    finally:
+        sys.path[:] = saved
+
+    @nb.njit(parallel=True, cache=False)
+    def matvec(indptr, indices, data, x, out, bounds):
+        for c in nb.prange(len(bounds) - 1):
+            for r in range(bounds[c], bounds[c + 1]):
+                acc = 0.0
+                for k in range(indptr[r], indptr[r + 1]):
+                    acc += data[k] * x[indices[k]]
+                out[r] = acc
+
+    @nb.njit(parallel=True)
+    def c_minus_s_minus_mux(C, S, X, mu, out):          # out = C - S - mu X
+        for i in nb.prange(len(C)):
+            out[i] = C[i] - S[i] - mu * X[i]
+
+    @nb.njit(parallel=True)
+    def w_update(C, Vy, X, mu, W):                      # W = C - Vy - mu X
+        for i in nb.prange(len(C)):
+            W[i] = C[i] - Vy[i] - mu * X[i]
+
+    @nb.njit(parallel=True)
+    def x_update(X, S, W, mu, gamma):                   # X = (1-gamma) X + gamma (S - W)/mu
+        a, b = 1.0 - gamma, gamma / mu
+        for i in nb.prange(len(X)):
+            X[i] = a * X[i] + b * (S[i] - W[i])
+
+    @nb.njit(parallel=True)
+    def resid_norm2(C, Vy, S):                          # ||C - Vy - S||^2
+        acc = 0.0
+        for i in nb.prange(len(C)):
+            t = C[i] - Vy[i] - S[i]
+            acc += t * t
+        return acc
+
+    @nb.njit(parallel=True)
+    def pdot(a, b):
+        acc = 0.0
+        for i in nb.prange(len(a)):
+            acc += a[i] * b[i]
+        return acc
+
+    @nb.njit(nogil=True)
+    def unpack(w, o, m, M):                             # SCS scaled lower triangle, column-major -> dense symmetric
+        r2 = 1.0 / math.sqrt(2.0)
+        idx = o
+        for j in range(m):
+            M[j, j] = w[idx]; idx += 1
+            for i in range(j + 1, m):
+                v = w[idx] * r2; idx += 1
+                M[i, j] = v; M[j, i] = v
+
+    @nb.njit(nogil=True)
+    def pack(M, o, m, out):
+        s2 = math.sqrt(2.0)
+        idx = o
+        for j in range(m):
+            out[idx] = M[j, j]; idx += 1
+            for i in range(j + 1, m):
+                out[idx] = M[i, j] * s2; idx += 1
+
+    @nb.njit(parallel=True)
+    def unpack_batch(w, offs, m, H):                    # H: (b, m*m) column-major per matrix
+        r2 = 1.0 / math.sqrt(2.0)
+        for k in nb.prange(len(offs)):
+            idx = offs[k]
+            for j in range(m):
+                H[k, j * m + j] = w[idx]; idx += 1
+                for i in range(j + 1, m):
+                    v = w[idx] * r2; idx += 1
+                    H[k, j * m + i] = v; H[k, i * m + j] = v
+
+    @nb.njit(parallel=True)
+    def pack_batch(H, offs, m, out):
+        s2 = math.sqrt(2.0)
+        for k in nb.prange(len(offs)):
+            idx = offs[k]
+            for j in range(m):
+                out[idx] = H[k, j * m + j]; idx += 1
+                for i in range(j + 1, m):
+                    out[idx] = H[k, j * m + i] * s2; idx += 1
+
+    @nb.njit(parallel=True)
+    def clip0(w, out, l):
+        for i in nb.prange(l):
+            out[i] = w[i] if w[i] > 0.0 else 0.0
+
+    _NB.update(matvec=matvec, c_minus_s_minus_mux=c_minus_s_minus_mux, w_update=w_update, x_update=x_update,
+               resid_norm2=resid_norm2, pdot=pdot, unpack=unpack, pack=pack, unpack_batch=unpack_batch,
+               pack_batch=pack_batch, clip0=clip0)
+    return _NB
+
+
+def _balanced_bounds(indptr, parts):
+    nnz = int(indptr[-1])
+    cuts = np.searchsorted(indptr, np.linspace(0, nnz, parts + 1).astype(np.int64))
+    cuts[0], cuts[-1] = 0, len(indptr) - 1
+    return np.unique(cuts).astype(np.int64)
+
+
+class ParSparse:
+    """a CSR matrix with a numba-parallel matvec (rows split into nnz-balanced chunks)"""
+
+    def __init__(self, M, parts=64):
+        self.M = M
+        self.indptr, self.indices, self.data = M.indptr, M.indices, M.data
+        self.bounds = _balanced_bounds(M.indptr, parts)
+        self.shape = M.shape
+
+    def dot(self, x, out=None):
+        if out is None:
+            out = np.empty(self.shape[0])
+        numba_kernels()["matvec"](self.indptr, self.indices, self.data, x, out, self.bounds)
+        return out
+
+
+class LeanCpuProjector:
+    """nonneg^l x PSD blocks; blocks in a thread pool: numba unpack/pack (GIL released) and LAPACK eigh; the projection is
+    rebuilt from the smaller side of the spectrum (U+ U+^T or M + U- U-^T, the same matrix).  Run with BLAS single-threaded."""
+
+    def __init__(self, cone, threads=14):
+        from concurrent.futures import ThreadPoolExecutor
+        self.pool = ThreadPoolExecutor(threads)
+        self.l = cone["l"]
+        self.jobs = []
+        off = self.l
+        for m in cone["s"]:
+            self.jobs.append((off, m))
+            off += m * (m + 1) // 2
+        self.total = off
+        order = sorted(range(len(self.jobs)), key=lambda k: -self.jobs[k][1])      # big blocks first
+        self.jobs = [self.jobs[k] for k in order]
+        self.tim = dict(cone=0.0)
+        numba_kernels()
+
+    def _one(self, args):
+        w, out, o, m = args
+        K = _NB
+        M = np.empty((m, m))
+        K["unpack"](w, o, m, M)
+        ev, U = np.linalg.eigh(M)
+        npos = int((ev > 0).sum())
+        if npos <= m - npos:
+            Up = U[:, ev > 0] * np.sqrt(ev[ev > 0])
+            P = Up @ Up.T
+        else:
+            Un = U[:, ev < 0] * np.sqrt(-ev[ev < 0])
+            P = M + Un @ Un.T
+        K["pack"](P, o, m, out)
+        return float(ev[0])
+
+    def project(self, w, want_min=False, out=None):
+        t = time.time()
+        if out is None:
+            out = np.empty_like(w)
+        _NB["clip0"](w, out, self.l)
+        mins = list(self.pool.map(self._one, [(w, out, o, m) for (o, m) in self.jobs]))
+        self.tim["cone"] += time.time() - t
+        return (out, min(mins)) if want_min else out
+
+
+class GpuProjector:
+    """the PSD blocks on one CUDA device (pin it with CUDA_VISIBLE_DEVICES=<UUID>): blocks grouped by order, each group
+    unpacked into pinned host memory (numba), copied up, cusolverDnXsyevBatched (all eigenpairs), eigenvalues brought back
+    and clipped, U diag(sqrt(max(ev,0))) by cublasDdgmm, its Gram matrix by cublasDgemmStridedBatched, copied down and
+    packed.  Every call's status and every batch's info array are checked."""
+
+    def __init__(self, cone, libdir="/opt/cuda/lib64", log=print):
+        import ctypes
+        from collections import OrderedDict
+        c = ctypes
+        self.c = c
+        self.cudart = c.CDLL(f"{libdir}/libcudart.so")
+        self.cus = c.CDLL(f"{libdir}/libcusolver.so")
+        self.cub = c.CDLL(f"{libdir}/libcublas.so")
+        V, I64, SZ = c.c_void_p, c.c_int64, c.c_size_t
+        self.cudart.cudaMalloc.argtypes = [c.POINTER(V), SZ]
+        self.cudart.cudaHostAlloc.argtypes = [c.POINTER(V), SZ, c.c_uint]
+        self.cudart.cudaMemcpy.argtypes = [V, V, SZ, c.c_int]
+        self.cus.cusolverDnXsyevBatched_bufferSize.argtypes = [V, V, c.c_int, c.c_int, I64, c.c_int, V, I64, c.c_int, V,
+                                                                 c.c_int, c.POINTER(SZ), c.POINTER(SZ), I64]
+        self.cus.cusolverDnXsyevBatched.argtypes = [V, V, c.c_int, c.c_int, I64, c.c_int, V, I64, c.c_int, V, c.c_int,
+                                                      V, SZ, V, SZ, V, I64]
+        self.cub.cublasDdgmm.argtypes = [V, c.c_int, c.c_int, c.c_int, V, c.c_int, V, c.c_int, V, c.c_int]
+        self.cub.cublasDgemmStridedBatched.argtypes = [V, c.c_int, c.c_int, c.c_int, c.c_int, c.c_int, c.POINTER(c.c_double),
+                                                       V, c.c_int, c.c_longlong, V, c.c_int, c.c_longlong,
+                                                       c.POINTER(c.c_double), V, c.c_int, c.c_longlong, c.c_int]
+        dev = V()
+        self.sh = V(); self._chk(self.cus.cusolverDnCreate(c.byref(self.sh)), "cusolverDnCreate")
+        self.bh = V(); self._chk(self.cub.cublasCreate_v2(c.byref(self.bh)), "cublasCreate")
+        self.params = V(); self._chk(self.cus.cusolverDnCreateParams(c.byref(self.params)), "CreateParams")
+        self.l = cone["l"]
+        groups = OrderedDict()
+        off = self.l
+        for m in cone["s"]:
+            groups.setdefault(m, []).append(off)
+            off += m * (m + 1) // 2
+        self.total = off
+        self.groups = [(m, np.array(offs, dtype=np.int64)) for m, offs in sorted(groups.items())]
+        maxel = max(m * m * len(offs) for m, offs in self.groups)
+        maxev = max(m * len(offs) for m, offs in self.groups)
+        maxb = max(len(offs) for m, offs in self.groups)
+        self.dA = self._malloc(8 * maxel); self.dU = self._malloc(8 * maxel); self.dP = self._malloc(8 * maxel)
+        self.dW = self._malloc(8 * maxev); self.dinfo = self._malloc(4 * maxb)
+        self.hIn = self._host(maxel); self.hOut = self._host(maxel); self.hW = self._host(maxev)
+        wsd, wsh = 0, 0
+        for m, offs in self.groups:
+            a, b = SZ(), SZ()
+            self._chk(self.cus.cusolverDnXsyevBatched_bufferSize(self.sh, self.params, 1, 0, m, 1, self.dA, m, 1, self.dW, 1,
+                                                                 c.byref(a), c.byref(b), len(offs)), "XsyevBatched_bufferSize")
+            wsd, wsh = max(wsd, a.value), max(wsh, b.value)
+        self.wsd, self.wsh = wsd, wsh
+        self.dWork = self._malloc(max(1, wsd))
+        self.hWork = (c.c_char * max(1, wsh))()
+        self.tim = dict(unpack=0.0, h2d=0.0, eig=0.0, recon=0.0, d2h=0.0, pack=0.0)
+        numba_kernels()
+        log(f"[gpu] {len(self.groups)} block orders {[(m, len(o)) for m, o in self.groups]}; device buffers "
+            f"{3*8*maxel/2**30:.2f} GiB + eig workspace {wsd/2**30:.2f} GiB; pinned host {2*8*maxel/2**30:.2f} GiB")
+
+    def _chk(self, r, what):
+        if r != 0:
+            raise RuntimeError(f"CUDA call {what} returned status {r}")
+
+    def _malloc(self, nbytes):
+        p = self.c.c_void_p(); self._chk(self.cudart.cudaMalloc(self.c.byref(p), nbytes), "cudaMalloc"); return p
+
+    def _host(self, count):
+        p = self.c.c_void_p(); self._chk(self.cudart.cudaHostAlloc(self.c.byref(p), 8 * count, 0), "cudaHostAlloc")
+        return np.ctypeslib.as_array((self.c.c_double * count).from_address(p.value))
+
+    def _h2d(self, dst, arr):
+        self._chk(self.cudart.cudaMemcpy(dst, arr.ctypes.data, arr.nbytes, 1), "memcpy h2d")
+
+    def _d2h(self, arr, src):
+        self._chk(self.cudart.cudaMemcpy(arr.ctypes.data, src, arr.nbytes, 2), "memcpy d2h")
+
+    def _sync(self):
+        self._chk(self.cudart.cudaDeviceSynchronize(), "synchronize")
+
+    def project(self, w, want_min=False, out=None):
+        c, K, T = self.c, numba_kernels(), self.tim
+        if out is None:
+            out = np.empty_like(w)
+        K["clip0"](w, out, self.l)
+        lam_min = np.inf
+        one, zero = c.c_double(1.0), c.c_double(0.0)
+        for m, offs in self.groups:
+            b, mm = len(offs), m * m
+            t0 = time.time()
+            H = self.hIn[:b * mm].reshape(b, mm)
+            K["unpack_batch"](w, offs, m, H)
+            t1 = time.time(); T["unpack"] += t1 - t0
+            self._h2d(self.dA, H)
+            t2 = time.time(); T["h2d"] += t2 - t1
+            self._chk(self.cus.cusolverDnXsyevBatched(self.sh, self.params, 1, 0, m, 1, self.dA, m, 1, self.dW, 1,
+                                                      self.dWork, self.wsd, self.hWork, self.wsh, self.dinfo, b),
+                      "XsyevBatched")
+            ev = self.hW[:b * m].reshape(b, m)
+            self._d2h(ev, self.dW)
+            info = np.empty(b, dtype=np.int32)
+            self._d2h(info, self.dinfo)
+            if np.any(info != 0):
+                raise RuntimeError(f"XsyevBatched info nonzero at order {m}: {info[info != 0][:5]}")
+            t3 = time.time(); T["eig"] += t3 - t2
+            lam_min = min(lam_min, float(ev.min()))
+            np.sqrt(np.maximum(ev, 0.0), out=ev)
+            self._h2d(self.dW, ev)
+            for k in range(b):
+                self._chk(self.cub.cublasDdgmm(self.bh, 1, m, m, self.dA.value + 8 * k * mm, m, self.dW.value + 8 * k * m, 1,
+                                               self.dU.value + 8 * k * mm, m), "Ddgmm")
+            self._chk(self.cub.cublasDgemmStridedBatched(self.bh, 0, 1, m, m, m, c.byref(one), self.dU, m, mm, self.dU, m, mm,
+                                                         c.byref(zero), self.dP, m, mm, b), "DgemmStridedBatched")
+            self._sync()
+            t4 = time.time(); T["recon"] += t4 - t3
+            Ho = self.hOut[:b * mm].reshape(b, mm)
+            self._d2h(Ho, self.dP)
+            t5 = time.time(); T["d2h"] += t5 - t4
+            K["pack_batch"](Ho, offs, m, out)
+            T["pack"] += time.time() - t5
+        return (out, lam_min) if want_min else out
+
+
+# --------------------------------------------------------------------------------------------------- instance cache
+def _sha256_arrays(arrs):
+    import hashlib
+    h = hashlib.sha256()
+    for a in arrs:
+        h.update(memoryview(np.ascontiguousarray(a)).cast("B"))
+    return h.hexdigest()
+
+
+def lean_fingerprint(q, modulus, family, dreps, border, s0, inst):
+    V, cone = inst["V"], inst["cone"]
+    return dict(q=q, modulus=modulus, family=family, dclasses=[int(d) for d in dreps], border=bool(border), s0=s0,
+                nvar=int(V.shape[1]), rows=int(V.shape[0]), nnz=int(V.nnz), psd=len(cone["s"]),
+                psd_max=int(max(cone["s"])), method="admm-lean")
+
+
+def save_instance(dirpath, inst, Tb, fp, meta, log=print):
+    d = Path(dirpath)
+    d.mkdir(parents=True, exist_ok=False)
+    t = time.time()
+    arrs = dict(V_indptr=inst["V"].indptr, V_indices=inst["V"].indices, V_data=inst["V"].data, C=inst["C"], bs=inst["bs"],
+                keys=Tb.keys, var=Tb.var, var_size=Tb.var_size)
+    for k, a in arrs.items():
+        np.save(d / f"{k}.npy", a)
+    man = dict(fingerprint=fp, oc=inst["oc"], cone=inst["cone"], labels=inst["labels"], offsets=[int(o) for o in inst["offsets"]],
+               nb=int((Tb.var_size < 4).sum()), sha256_V=_sha256_arrays([arrs["V_indptr"], arrs["V_indices"], arrs["V_data"]]),
+               sha256_C_bs=_sha256_arrays([arrs["C"], arrs["bs"]]), meta=meta)
+    (d / "manifest.json").write_text(json.dumps(man, indent=1, default=float))
+    log(f"[instance] saved {d} in {time.time()-t:.1f} s")
+
+
+def load_instance(dirpath, verify=True, log=print):
+    import scipy.sparse as sp
+    d = Path(dirpath)
+    t = time.time()
+    man = json.loads((d / "manifest.json").read_text())
+    ld = {k: np.load(d / f"{k}.npy") for k in ("V_indptr", "V_indices", "V_data", "C", "bs", "keys", "var", "var_size")}
+    if verify:
+        hv = _sha256_arrays([ld["V_indptr"], ld["V_indices"], ld["V_data"]])
+        hc = _sha256_arrays([ld["C"], ld["bs"]])
+        if hv != man["sha256_V"] or hc != man["sha256_C_bs"]:
+            raise SystemExit(f"instance {d} does not match its manifest digests: refusing it")
+    fp = man["fingerprint"]
+    V = sp.csr_matrix((ld["V_data"], ld["V_indices"], ld["V_indptr"]), shape=(fp["rows"], fp["nvar"]), copy=False)
+    inst = dict(V=V, C=ld["C"], bs=ld["bs"], oc=man["oc"], cone=man["cone"], labels=man["labels"], offsets=man["offsets"],
+                nb=int(man["nb"]))
+    log(f"[instance] loaded {d} ({'digests verified' if verify else 'digests NOT verified'}) in {time.time()-t:.1f} s")
+    return inst, man, ld
+
+
+def lean_build(q, modulus, family, dclass_arg, border, s0, workers, log=print):
+    t0 = time.time()
+    P = Plane(q, modulus)
+    dreps, dcnt, _ = d_classes(P)
+    one_point = all(pat in ("Y", "MY", "LD") for pat in FAMILIES[family])
+    # a one-point family (the triple level) touches no 4-set: its tables are T3 alone, and its variables the pairs and triples
+    Tb = LeanTables(P, [] if one_point else dreps, workers=workers, log=log)
+    t1 = time.time()
+    chosen = dreps if dclass_arg in (None, "all") else [int(x) for x in dclass_arg.split(",")]
+    blocks = lean_build_blocks(P, Tb, family, chosen, border=border, s0=s0, workers=workers, log=log)
+    t2 = time.time()
+    sizes = [bl[1] for bl in blocks]
+    inst = lean_assemble(P, Tb, blocks, log=log)
+    t3 = time.time()
+    V = inst["V"]
+    meta = dict(G0=len(P.G0), aut=P.aut_order, d_class_reps=[int(x) for x in dreps], d_class_sizes=dcnt,
+                d_class_unit=[int(d) for d in dreps if P.unit[d]], nvar=int(Tb.nvar),
+                nvar_by_size={k: int((Tb.var_size == k).sum()) for k in (2, 3, 4)},
+                blocks=len([m for m in sizes if m > 1]), linear_1x1_blocks=len([m for m in sizes if m == 1]),
+                block_sizes_hist={int(k): int(v) for k, v in zip(*np.unique(sizes, return_counts=True))},
+                psd_rows=int(sum(m * (m + 1) // 2 for m in sizes if m > 1)), sum_cubes=float(sum(float(m) ** 3 for m in sizes if m > 1)),
+                rows=int(V.shape[0]), nnz=int(V.nnz), V_bytes=int(V.data.nbytes + V.indices.nbytes + V.indptr.nbytes),
+                index_dtype=str(V.indices.dtype), seconds_tables=t1 - t0, seconds_blocks=t2 - t1, seconds_assemble=t3 - t2,
+                workers=workers)
+    log(f"[lean-build] q={q} {family}: {meta['nvar']} variables {meta['nvar_by_size']}; {meta['blocks']} PSD blocks "
+        f"{meta['block_sizes_hist']}; rows {meta['rows']}; nnz {meta['nnz']} ({meta['V_bytes']/2**30:.2f} GiB, {meta['index_dtype']}); "
+        f"tables {t1-t0:.0f} s, blocks {t2-t1:.0f} s, assemble {t3-t2:.0f} s")
+    return P, Tb, chosen, inst, meta
+
+
+# -------------------------------------------------------------------------------------------- controls on the lean path
+def _yset_worker(firsts):
+    import itertools
+    P, keys, var, nvar, S, g0, chunk = (_FORK[k] for k in ("P", "keys", "var", "nvar", "S", "g0", "chunk"))
+    s = len(S)
+    parts_i, parts_w = [], []            # one bincount at the end: a per-chunk bincount over nvar entries is memory-bound
+    for i in firsts:
+        for k in (2, 3, 4):
+            combos = itertools.combinations(range(i + 1, s), k - 1)
+            while True:
+                blk = np.array(list(itertools.islice(combos, chunk)), dtype=np.int64)
+                if len(blk) == 0:
+                    break
+                T = np.concatenate([np.full((len(blk), 1), i, dtype=np.int64), blk], axis=1)
+                kk, mult = P.canon(S[T], want_mult=True)
+                pos = np.searchsorted(keys, kk)
+                assert np.all(keys[np.minimum(pos, len(keys) - 1)] == kk), "a subset of S has an orbit no table touches"
+                ids = var[pos]
+                assert np.all(ids >= 0), "a subset of S is killed: S is not independent"
+                parts_i.append(ids.astype(np.int32)); parts_w.append(mult / (s * g0))
+    if not parts_i:
+        return np.zeros(nvar)
+    return np.bincount(np.concatenate(parts_i), weights=np.concatenate(parts_w), minlength=nvar)
+
+
+def lean_y_from_set(P, keys, var, nvar, S, workers=14, log=print, chunk=1000):
+    """y_from_set, the same formula, with the subsets split by their least member across forked workers"""
+    from math import comb
+    S = np.array(sorted(set(int(x) for x in S)), dtype=np.int64)
+    s = len(S)
+    work = [(comb(s - 1 - i, 3) + comb(s - 1 - i, 2) + comb(s - 1 - i, 1), i) for i in range(s)]
+    nbins = max(1, 3 * workers)
+    bins = [[0, []] for _ in range(nbins)]
+    for w, i in sorted(work, reverse=True):
+        b = min(bins, key=lambda x: x[0]); b[0] += w; b[1].append(i)
+    _FORK.update(P=P, keys=keys, var=var, nvar=nvar, S=S, g0=len(P.G0), chunk=chunk)
+    t = time.time()
+    y = np.zeros(nvar)
+    with _fork_pool(workers) as pool:
+        for part in pool.imap_unordered(_yset_worker, [b[1] for b in bins if b[1]]):
+            y += part
+    log(f"[lean-yset] y from a {s}-set ({comb(s,4)} 4-subsets) in {time.time()-t:.0f} s")
+    return y
+
+
+def lean_checkset(inst, y, workers=14, log=print, plants=True):
+    """objective at y(S) and the least eigenvalue of every PSD block of s = C + V y(S), from the ASSEMBLED data (the
+    solver's own).  Plants: (a) the '--' blocks with their 4-set term removed; (b) y's 4-set part permuted."""
+    from concurrent.futures import ThreadPoolExecutor
+    K = numba_kernels()
+    V, C, bs, oc, cone = inst["V"], inst["C"], inst["bs"], inst["oc"], inst["cone"]
+    PV = ParSparse(V)
+    l = cone["l"]
+    labels, offsets, dims = inst["labels"], inst["offsets"], cone["s"]
+
+    def least_eigs(svec, which):
+        def one(k):
+            m, o = dims[k], offsets[k]
+            M = np.empty((m, m)); K["unpack"](svec, o, m, M)
+            return float(np.linalg.eigvalsh(M)[0]), labels[k]
+        with ThreadPoolExecutor(workers) as ex:
+            return list(ex.map(one, which))
+
+    t = time.time()
+    svec = C + PV.dot(y)
+    obj = oc - float(bs @ y)
+    lin_min = float(svec[:l].min())
+    eigs = least_eigs(svec, range(len(dims)))
+    worst = min(eigs)
+    rec = dict(objective_at_set=obj, least_linear_slack=lin_min, least_eigenvalue=worst[0], at=worst[1],
+               blocks_checked=len(eigs), seconds=time.time() - t)
+    log(f"[lean-checkset] objective {obj:.9f}; least linear slack {lin_min:.2e}; least eigenvalue over {len(eigs)} blocks "
+        f"{worst[0]:.3e} ({worst[1]}); {time.time()-t:.0f} s")
+    if plants:
+        nb = int(inst["nb"])
+        mm = [k for k in range(len(dims)) if labels[k].startswith("--@")]
+        # (a) remove the 4-set term from every '--' row: s' = s - V[--rows][:, 4-set cols] y
+        y4 = y.copy(); y4[:nb] = 0.0
+        s4 = PV.dot(y4)
+        sa = svec.copy()
+        for k in mm:
+            o, L = offsets[k], dims[k] * (dims[k] + 1) // 2
+            sa[o:o + L] -= s4[o:o + L]
+        ea = min(least_eigs(sa, mm))
+        # (b) permute y's 4-set part
+        rng = np.random.default_rng(7)
+        yb = y.copy(); yb[nb:] = rng.permutation(y[nb:])
+        sb = C + PV.dot(yb)
+        eb = min(least_eigs(sb, range(len(dims))))
+        rec.update(plant_minus_minus_without_4set=dict(least_eigenvalue=ea[0], at=ea[1], fired=bool(ea[0] < -1e-6)),
+                   plant_4set_permuted=dict(least_eigenvalue=eb[0], at=eb[1], fired=bool(eb[0] < -1e-6)))
+        log(f"[lean-checkset] PLANT '--' without its 4-set term: least eigenvalue {ea[0]:.3e} ({ea[1]}) -> "
+            f"{'FIRED' if ea[0] < -1e-6 else 'DID NOT FIRE'}")
+        log(f"[lean-checkset] PLANT 4-set values permuted: least eigenvalue {eb[0]:.3e} ({eb[1]}) -> "
+            f"{'FIRED' if eb[0] < -1e-6 else 'DID NOT FIRE'}")
+    return rec
+
+
+def _census_worker(args):
+    lo, hi = args
+    P, reps = _FORK["P"], _FORK["reps"]
+    mult = np.concatenate([P.canon(reps[a:min(a + 1000, hi)], want_mult=True)[1] for a in range(lo, hi, 1000)])
+    return float(np.sum(P.aut_order / mult)), mult
+
+
+def lean_census(P, var_key, var_size, workers=14, log=print, chunk=50000):
+    """census()'s completeness check (sum over orbit representatives of |Aut|/|Stab| against the direct count of
+    independent k-sets), in parallel chunks; the G0-orbits-containing-0 measure is not computed."""
+    n = P.n
+    W = np.nonzero(~P.unit[P.SUB[np.arange(n), 0]] & (np.arange(n) != 0))[0]
+    NA = (~P.unit[P.SUB[W[:, None], W[None, :]]]).astype(np.float64)
+    np.fill_diagonal(NA, 0.0)
+    direct = {2: n * len(W) / 2, 3: n * (NA.sum() / 2) / 3, 4: n * (float(np.sum(NA * (NA @ NA))) / 6) / 4}
+    out = {}
+    for k in (2, 3, 4):
+        reps = P.decode(var_key[var_size == k])[:, :k]
+        _FORK.update(P=P, reps=reps, k=k)
+        t = time.time()
+        total, hist = 0.0, {}
+        with _fork_pool(workers) as pool:
+            for s, mult in pool.imap_unordered(_census_worker, [(a, min(a + chunk, len(reps))) for a in range(0, len(reps), chunk)]):
+                total += s
+                for a, b in zip(*np.unique(mult, return_counts=True)):
+                    hist[int(a)] = hist.get(int(a), 0) + int(b)
+        out[k] = dict(aut_orbits=int(len(reps)), sum_aut_over_stab=total, direct_count=direct[k],
+                      complete=bool(abs(total - direct[k]) < 0.5), stabiliser_hist=dict(sorted(hist.items())))
+        log(f"[lean-census] q={P.q} k={k}: {len(reps)} Aut-orbits; sum |Aut|/|Stab| = {total:.0f} vs direct {direct[k]:.0f} -> "
+            f"{'COMPLETE' if out[k]['complete'] else 'MISMATCH'} ({time.time()-t:.0f} s)")
+    return out
+
+
+def lean_compare(q, modulus, family, workers=4, log=print):
+    """the lean path's data against assemble_scs (the path every earlier control ran on): V = -A entrywise, C = b, bs = c,
+    cone and objective constant.  Summation order differs, so values are compared to a tolerance and the nnz difference
+    (exact zeros one order produces and the other does not) is reported."""
+    P = Plane(q, modulus)
+    dreps, _, _ = d_classes(P)
+    TbR = Tables(P, dreps, log=lambda *a: None)
+    ref, cone_r, oc_r = assemble_scs(P, TbR, build(P, TbR, family, dreps))
+    TbL = LeanTables(P, dreps, workers=workers, log=lambda *a: None)
+    same_numbering = bool(np.array_equal(TbR.var_key, TbL.var_key) and np.array_equal(TbR.var_size, TbL.var_size))
+    inst = lean_assemble(P, TbL, lean_build_blocks(P, TbL, family, dreps, workers=workers, log=lambda *a: None))
+    Ar = ref["A"].tocsr(); Ar.sort_indices()
+    Vl = inst["V"].copy(); Vl.sort_indices()
+    D = (Vl + Ar)                                  # V = -A
+    D.eliminate_zeros()
+    maxdiff = float(np.abs(D.data).max()) if D.nnz else 0.0
+    rec = dict(q=q, family=family, same_numbering=same_numbering, rows_ref=int(Ar.shape[0]), rows_lean=int(Vl.shape[0]),
+               nnz_ref=int(Ar.nnz), nnz_lean=int(Vl.nnz), max_abs_entry_difference=maxdiff,
+               max_abs_C_difference=float(np.abs(inst["C"] - ref["b"]).max()), bs_equal=bool(np.array_equal(inst["bs"], ref["c"])),
+               cone_equal=bool(inst["cone"]["l"] == cone_r["l"] and list(inst["cone"]["s"]) == list(cone_r["s"])),
+               oc_equal=bool(inst["oc"] == oc_r))
+    rec["same"] = bool(same_numbering and rec["rows_ref"] == rec["rows_lean"] and maxdiff < 1e-12 and rec["max_abs_C_difference"] < 1e-12
+                       and rec["bs_equal"] and rec["cone_equal"] and rec["oc_equal"])
+    log(f"[lean-compare] q={q} {family}: {rec}")
+    return rec
+
+
+def lean_certificate_shaped(inst, Z, VT, scales=np.linspace(0.97, 1.01, 41)):
+    """certificate_shaped_value on the lean instance (V = -A held directly)"""
+    l = inst["cone"]["l"]
+    Zp = Z.copy(); Zp[:l] = 0.0
+    VZ = VT.dot(Zp)
+    CZ = float(numba_kernels()["pdot"](inst["C"], Zp))
+    cvec = -inst["bs"]
+    best = None
+    for t in scales:
+        mu = np.maximum(0.0, t * VZ + cvec)
+        N = inst["oc"] + t * CZ + mu.sum()
+        if best is None or N < best[0]:
+            best = (float(N), float(t), float(mu.sum()), int((mu > 0).sum()))
+    return dict(N=best[0], scale=best[1], mu_sum=best[2], mu_support=best[3])
+
+
+def admm_solve_lean(inst, nb, fp, ckpt, new, tol, max_iters, chunk_seconds, projector="cpu", proj_threads=14, log=print,
+                    stop_after_iters=0, mu0=1.0, gamma=1.6, adapt_every=20, eta=3.0, first_report=0, gpu_check=True):
+    """admm_solve's iteration, unchanged, on the lean instance.  Timers: lin (the exact arrowhead solve), spmv (the two
+    sparse products), vec (the fused vector updates), cone (the projection; the GPU projector splits it further)."""
+    K = numba_kernels()
+    t_setup = time.time()
+    V = inst["V"]
+    t = time.time()
+    VTm = V.T.tocsr()
+    log(f"[lean-admm] V^T as CSR in {time.time()-t:.1f} s")
+    PV, PVT = ParSparse(V), ParSparse(VTm)
+    C, bs, oc = inst["C"], inst["bs"], inst["oc"]
+    AH = Arrowhead(V, nb, log=log, VT=VTm)
+    del AH.G
+    rr = np.random.default_rng(11).standard_normal(V.shape[1])
+    yy = AH.solve(rr)
+    rel = float(np.linalg.norm(PVT.dot(PV.dot(yy)) - rr) / np.linalg.norm(rr))
+    log(f"[lean-admm] exact linear solve G y = r on a random r: relative residual {rel:.2e}")
+    if not rel < 1e-8:
+        raise SystemExit("the arrowhead solve does not solve G y = r: refusing to iterate")
+    del rr, yy
+    cone = inst["cone"]
+    if projector == "gpu":
+        Kp = GpuProjector(cone, log=log)
+    else:
+        Kp = LeanCpuProjector(cone, threads=proj_threads)
+    ck = Path(ckpt)
+    it0 = 0
+    if ck.exists():
+        if new:
+            raise SystemExit(f"--new given but {ck} exists: refusing to overwrite")
+        z = np.load(ck, allow_pickle=False)
+        if json.loads(str(z["fingerprint"])) != fp:
+            raise SystemExit(f"checkpoint {ck} belongs to a different problem")
+        X, S, y, mu, it0 = z["X"], z["S"], z["y"], float(z["mu"]), int(z["iters"])
+        log(f"[lean-admm] RESUMED from {ck}: {it0} iterations, mu {mu:.3e}")
+    elif not new:
+        raise SystemExit(f"checkpoint {ck} does not exist and --new was not given: refusing to start from zero silently")
+    else:
+        ck.parent.mkdir(parents=True, exist_ok=True)
+        X = np.zeros(V.shape[0]); S = np.zeros(V.shape[0]); y = np.zeros(V.shape[1]); mu = mu0
+        log(f"[lean-admm] NEW checkpoint {ck}")
+    W = np.empty(V.shape[0]); Vy = np.empty(V.shape[0]); T = np.empty(V.shape[0])
+    nbs, nC = 1 + np.linalg.norm(bs), 1 + math.sqrt(K["pdot"](C, C))
+    log(f"[lean-admm] setup {time.time()-t_setup:.1f} s ({projector} projector)")
+    it = it0
+    t_last = time.time(); t_start = time.time(); it_last = it
+    tim = dict(lin=0.0, spmv=0.0, vec=0.0, cone=0.0)
+    res = None
+    checked = not (projector == "gpu" and gpu_check)
+    while it < max_iters:
+        ta = time.time()
+        K["c_minus_s_minus_mux"](C, S, X, mu, T)
+        tb = time.time()
+        rhs = mu * bs + PVT.dot(T)
+        tc = time.time()
+        y = AH.solve(rhs)
+        td = time.time()
+        PV.dot(y, out=Vy)
+        te = time.time()
+        K["w_update"](C, Vy, X, mu, W)
+        tf = time.time()
+        if not checked:
+            cpu = LeanCpuProjector(cone, threads=proj_threads)
+            Sc = cpu.project(W)
+            Sg = Kp.project(W)
+            diff = float(np.abs(Sc - Sg).max()); scale = float(np.abs(Sc).max())
+            log(f"[lean-admm] GPU projector against CPU on this iteration's W: max |difference| {diff:.3e} (max |entry| {scale:.3e})")
+            if not diff <= 1e-8 * max(1.0, scale):
+                raise SystemExit("the GPU projection disagrees with the CPU projection: refusing to continue")
+            S = Sg
+            del Sc, cpu
+            checked = True
+            tf = time.time()
+        else:
+            S = Kp.project(W, out=S)
+        tg = time.time()
+        K["x_update"](X, S, W, mu, gamma)
+        th = time.time()
+        it += 1
+        tim["vec"] += (tb - ta) + (tf - te) + (th - tg); tim["spmv"] += (tc - tb) + (te - td); tim["lin"] += td - tc
+        tim["cone"] += tg - tf
+        if it % adapt_every == 0 or it >= max_iters:
+            pinf = np.linalg.norm(PVT.dot(X) - bs) / nbs
+            dinf = math.sqrt(K["resid_norm2"](C, Vy, S)) / nC
+            if pinf > eta * dinf:
+                mu *= 1.3
+            elif dinf > eta * pinf:
+                mu /= 1.3
+        now = time.time()
+        if (now - t_last >= chunk_seconds or it >= max_iters or (stop_after_iters and it - it0 >= stop_after_iters)
+                or (first_report and it - it0 == first_report)):
+            tr = time.time()
+            k = max(1, it - it_last)
+            extra = ""
+            if projector == "gpu":
+                extra = " [gpu " + ", ".join(f"{a} {b/k:.3f}" for a, b in Kp.tim.items()) + "]"
+                Kp.tim = {a: 0.0 for a in Kp.tim}
+            Xp = Kp.project(X)
+            up = oc + float(K["pdot"](C, Xp))
+            lo = oc + float(bs @ y)
+            pinf = np.linalg.norm(PVT.dot(Xp) - bs) / nbs
+            dinf = math.sqrt(K["resid_norm2"](C, Vy, S)) / nC
+            gap = abs(up - lo) / (1 + abs(up) + abs(lo))
+            del Xp
+            t_rep = time.time() - tr
+            tw = time.time()
+            tmp = ck.with_name(ck.name + ".tmp.npz")
+            np.savez(tmp, X=X, S=S, y=y, mu=mu, iters=it, fingerprint=json.dumps(fp))
+            tmp.replace(ck)
+            t_ck = time.time() - tw
+            dt = (tr - t_last) / k
+            log(f"[lean-admm] it {it}: {dt:.3f} s/it (lin {tim['lin']/k:.3f}, spmv {tim['spmv']/k:.3f}, vec {tim['vec']/k:.3f}, "
+                f"cone {tim['cone']/k:.3f}){extra}; upper reading {up:.6f} lower reading {lo:.6f} pinf {pinf:.2e} "
+                f"dinf {dinf:.2e} gap {gap:.2e} mu {mu:.2e}; report {t_rep:.1f} s, checkpoint write {t_ck:.1f} s", flush=True)
+            tim = dict(lin=0.0, spmv=0.0, vec=0.0, cone=0.0)
+            t_last, it_last = time.time(), it
+            res = dict(iterations=it, upper=up, lower=lo, pinf=pinf, dinf=dinf, gap=gap, mu=mu, seconds_per_iteration=dt,
+                       seconds=now - t_start, converged=bool(max(pinf, dinf, gap) < tol))
+            if res["converged"]:
+                log(f"[lean-admm] converged at tolerance {tol}")
+                break
+            if stop_after_iters and it - it0 >= stop_after_iters:
+                log("[lean-admm] stopped after the requested iterations (a pricing or control run): NOT converged")
+                break
+    return res
+
+
 def setup(q, modulus, dclass_arg, log=print):
     P = Plane(q, modulus)
     dreps, dcnt, _ = d_classes(P)
@@ -965,7 +1859,90 @@ def main():
     r = sub.add_parser("randsets")
     r.add_argument("--q", type=int, required=True); r.add_argument("--modulus"); r.add_argument("--count", type=int, default=5)
     r.add_argument("--seed", type=int, default=1); r.add_argument("--family", default="l3", choices=sorted(FAMILIES)); r.add_argument("--out")
+    lb = sub.add_parser("lean-build", help="the lean path: build the instance in parallel and cache it (q = 47)")
+    lb.add_argument("--q", type=int, required=True); lb.add_argument("--modulus"); lb.add_argument("--family", default="l3", choices=sorted(FAMILIES))
+    lb.add_argument("--dclasses", default="all"); lb.add_argument("--border", action="store_true"); lb.add_argument("--s0", type=float)
+    lb.add_argument("--workers", type=int, default=14); lb.add_argument("--instance", required=True, help="directory (must not exist)")
+    lb.add_argument("--census", action="store_true", help="also the orbit-completeness check"); lb.add_argument("--out")
+    lc = sub.add_parser("lean-checkset", help="objective and every block's least eigenvalue at y(S), from a cached instance, with two plants")
+    lc.add_argument("--instance", required=True); lc.add_argument("--set", required=True); lc.add_argument("--path", default="set")
+    lc.add_argument("--workers", type=int, default=14); lc.add_argument("--out")
+    ls = sub.add_parser("lean-solve", help="the arrowhead ADMM on a cached instance, checkpointed")
+    ls.add_argument("--instance", required=True); ls.add_argument("--ckpt", required=True); ls.add_argument("--new", action="store_true")
+    ls.add_argument("--eps", type=float, default=1e-6); ls.add_argument("--max-iters", type=int, default=400000)
+    ls.add_argument("--report-seconds", type=float, default=600.0); ls.add_argument("--report-first", type=int, default=0,
+                                                                                   help="also report and checkpoint after this many iterations")
+    ls.add_argument("--stop-after-iters", type=int, default=0); ls.add_argument("--projector", default="cpu", choices=["cpu", "gpu"])
+    ls.add_argument("--proj-threads", type=int, default=14); ls.add_argument("--mu0", type=float, default=1.0)
+    ls.add_argument("--no-gpu-check", action="store_true"); ls.add_argument("--no-verify", action="store_true"); ls.add_argument("--out")
+    le = sub.add_parser("lean-evaluate", help="certificate-shaped float value N on a lean checkpoint")
+    le.add_argument("--instance", required=True); le.add_argument("--ckpt", required=True); le.add_argument("--proj-threads", type=int, default=14)
+    le.add_argument("--out")
+    lk = sub.add_parser("lean-compare", help="lean data against assemble_scs at a small q")
+    lk.add_argument("--q", type=int, required=True); lk.add_argument("--modulus"); lk.add_argument("--family", default="l3", choices=sorted(FAMILIES))
+    lk.add_argument("--workers", type=int, default=4); lk.add_argument("--out")
     a = ap.parse_args()
+    if a.cmd.startswith("lean-"):
+        import resource
+        t0 = time.time()
+        rec = dict(kind="fs54-d4-lean", cmd=a.cmd, argv=sys.argv[1:])
+        ok = True
+        if a.cmd == "lean-build":
+            P, Tb, chosen, inst, meta = lean_build(a.q, a.modulus, a.family, a.dclasses, a.border, a.s0, a.workers)
+            fp = lean_fingerprint(a.q, a.modulus, a.family, chosen, a.border, a.s0, inst)
+            rec.update(fingerprint=fp, meta=meta)
+            if a.census:
+                rec["census"] = lean_census(P, Tb.var_key, Tb.var_size, workers=a.workers)
+                ok = all(v["complete"] for v in rec["census"].values())
+            save_instance(a.instance, inst, Tb, fp, meta)
+        elif a.cmd == "lean-compare":
+            rec.update(lean_compare(a.q, a.modulus, a.family, workers=a.workers))
+            ok = rec["same"]
+        elif a.cmd == "lean-checkset":
+            inst, man, ld = load_instance(a.instance)
+            fp = man["fingerprint"]
+            P = Plane(fp["q"], fp["modulus"])
+            S = json.load(open(a.set))
+            for k in a.path.split("."):
+                S = S[int(k)] if isinstance(S, list) else S[k]
+            y = lean_y_from_set(P, ld["keys"], ld["var"], int(fp["nvar"]), S, workers=a.workers)
+            rec.update(fingerprint=fp, set_file=a.set, set_size=len(set(S)))
+            rec.update(lean_checkset(inst, y, workers=a.workers))
+            ok = (abs(rec["objective_at_set"] - len(set(S))) < 1e-7 and rec["least_eigenvalue"] > -1e-9 and rec["least_linear_slack"] > -1e-12
+                  and rec["plant_minus_minus_without_4set"]["fired"] and rec["plant_4set_permuted"]["fired"])
+        elif a.cmd == "lean-solve":
+            inst, man, ld = load_instance(a.instance, verify=not a.no_verify)
+            fp = dict(man["fingerprint"])
+            res = admm_solve_lean(inst, int(man["nb"]), fp, a.ckpt, a.new, a.eps, a.max_iters, a.report_seconds, projector=a.projector,
+                                  proj_threads=a.proj_threads, stop_after_iters=a.stop_after_iters, mu0=a.mu0,
+                                  first_report=a.report_first, gpu_check=not a.no_gpu_check)
+            rec.update(fingerprint=fp, result=res, projector=a.projector, ckpt=a.ckpt)
+        elif a.cmd == "lean-evaluate":
+            import shutil
+            inst, man, ld = load_instance(a.instance)
+            snap = str(a.ckpt) + ".eval-copy.npz"
+            shutil.copy(a.ckpt, snap)
+            try:
+                z = np.load(snap)
+                if json.loads(str(z["fingerprint"])) != man["fingerprint"]:
+                    raise SystemExit("checkpoint and instance disagree")
+                Kp = LeanCpuProjector(inst["cone"], threads=a.proj_threads)
+                Zv = Kp.project(z["X"])
+                VT = ParSparse(inst["V"].T.tocsr())
+                rec.update(fingerprint=man["fingerprint"], checkpoint=a.ckpt, iterations=int(z["iters"]))
+                rec.update(lean_certificate_shaped(inst, Zv, VT))
+                print(f"[lean-evaluate] at {rec['iterations']} iterations: certificate-shaped N = {rec['N']:.6f} (scale {rec['scale']:.3f}, "
+                      f"sum mu {rec['mu_sum']:.6f} on {rec['mu_support']} orbits)")
+            finally:
+                Path(snap).unlink(missing_ok=True)
+        rec["seconds"] = time.time() - t0
+        rec["maxrss_self_GiB"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 2 ** 20
+        rec["maxrss_largest_child_GiB"] = resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss / 2 ** 20
+        rec["claim_scope"] = "float readings, sizes and controls of the lean path; never a bound"
+        if a.out:
+            Path(a.out).parent.mkdir(parents=True, exist_ok=True)
+            Path(a.out).write_text(json.dumps(rec, indent=1, default=float)); print(f"  wrote {a.out}")
+        sys.exit(0 if ok else 1)
     if a.cmd == "selftest":
         sys.exit(0 if selftest() else 1)
     if a.cmd in ("evaluate", "randsets"):

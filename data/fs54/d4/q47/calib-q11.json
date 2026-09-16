@@ -1,0 +1,86 @@
+{
+ "kind": "fs54-d4",
+ "cmd": "solve",
+ "q": 11,
+ "modulus": null,
+ "family": "l3",
+ "dclasses": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  12,
+  14,
+  15,
+  24,
+  27
+ ],
+ "border": false,
+ "s0": null,
+ "G0": 24,
+ "aut": 2904,
+ "d_class_reps": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  12,
+  14,
+  15,
+  24,
+  27
+ ],
+ "d_class_sizes": [
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12
+ ],
+ "d_class_unit": [
+  1
+ ],
+ "nvar": 1841,
+ "nvar_by_size": {
+  "2": 9,
+  "3": 105,
+  "4": 1727
+ },
+ "build_seconds": 0.024393320083618164,
+ "blocks": 102,
+ "block_sizes_hist": {
+  "25": 21,
+  "30": 42,
+  "36": 21,
+  "55": 9,
+  "66": 9
+ },
+ "psd_rows": 74100,
+ "sum_cubes": 6526740.0,
+ "scs_rows": 75941,
+ "scs_nnz": 299986,
+ "scs_A_bytes": 3607200,
+ "result": {
+  "iterations": 4000,
+  "upper": 28.217580721989314,
+  "lower": 28.34144055058878,
+  "pinf": 0.0001799370741004695,
+  "dinf": 0.00025792631723679,
+  "gap": 0.0021518751684972207,
+  "mu": 3.712930000000001,
+  "seconds": 47.27115249633789,
+  "converged": false
+ },
+ "eps": 1e-06,
+ "method": "admm",
+ "ckpt": "data/fs54/d4/ckpt/calib-q11.npz",
+ "seconds": 47.60102319717407,
+ "claim_scope": "float readings (arrowhead ADMM); never a bound"
+}

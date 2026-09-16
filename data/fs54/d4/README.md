@@ -34,3 +34,21 @@ five-colourable)**.
 | `expansion-q27-kamis117.log`, `expansion-q11-maxsat28.log` | the checker's keyed expansion against the definition of the anchored matrix at the verified maximum sets, 3,000 sampled entries of every matrix of the certificate, with a sign plant | `python3 tools/fs54_l3_cert_check.py CERT --expansion-check SETFILE --set-path set --samples 100` |
 | `against-q{7,11,27}-*.log` | (★) evaluated exactly at a maximum independent set, term by term | `python3 tools/fs54_l3_cert_check.py CERT --against SETFILE --set-path …` |
 | `alpha-q7-bb.json` | a maximum independent set at 7 (size 14, found by an exhaustive branch and bound over the 49 points), the input of the at-7 evaluation; `--against` re-verifies its independence and refuses a set that is not | any exhaustive search; α(UD(𝔽₇,2)) = 14 |
+
+## `q47/` — the level-3 programme at q = 47, measured (sizes, controls, timing, calibration); nothing solved
+
+Summary and projection: `plans/FS54-twenty-seven.md` "§D4 at 47 — measured price". Tool: the `lean-*` subcommands of
+`tools/fs54_d4_quad.py`. Instance (9.3 GB) and checkpoint (1.9 GB) are in `ckpt/`, not committed. Resume: `runs/RESUME.md`.
+
+| file | what it is | how to regenerate |
+|---|---|---|
+| `build-q47.{sh,log,json,rss}` | the first build with the census (787 s; tables at 40,000 sets per call). `.rss` is the process group's SUMMED RSS, which counts forked pages once per worker (it read 269 GB while the system used about 20) | `setsid data/fs54/d4/q47/build-q47.sh` (writes the instance: move the old one first) |
+| `rebuild-q47.{sh,log,json,mem}` | the same build with 1,000 sets per call: 96 s, digests identical to the first; `.mem` is system MemAvailable | `setsid data/fs54/d4/q47/rebuild-q47.sh` |
+| `lean-compare-q{11,19,27}.json`, `controls/plant_compare.*`, `controls/yset_eq.*`, `controls/admm_equivalence_q11.*` | the lean data, the lean y(S) and the lean ADMM against the reference path, with planted faults | the scripts in `controls/`; `lean-compare --q Q [--modulus …]` |
+| `checkset-q47-set265.json`, `checkset-q47.{sh,log,mem}` | y from FS-53's verified 265-set: objective 265, every block PSD, two plants fired | `setsid data/fs54/d4/q47/checkset-q47.sh` |
+| `solve-q47.{sh,log,mem}`, `solve-q47-last.json` | three legs on one checkpoint: CPU projector (20 iterations), GPU projector (20), GPU projector (300); per-part timing in every report line | `runs/RESUME.md` |
+| `early-q27-calibration.log` | 27 from zero for 400 iterations with reports every 4 s (the climb the pricing log did not record) | `solve --q 27 --modulus 't^3-t-1' --family l3 --method admm --proj-threads 14 --ckpt X --new --stop-after-chunks 400 --report-seconds 4` |
+| `calibrate.{sh,done}`, `calib-q{11,19,23}.{log,json}`, `calib-q11-fine.*` | 11, 19, 23 from zero on the reference path | `setsid data/fs54/d4/q47/calibrate.sh` |
+| `certshape-q{19,23}-calib.json` | certificate-shaped float N on the 19 and 23 calibration iterates (**23: 105.431**) | `evaluate --q Q --ckpt data/fs54/d4/ckpt/calib-qQ.npz` |
+| `trajectories.{py,json}`, `projection.{py,json}` | the relative-drop crossings per plane, and the power-law projection to 47 | `.venv/bin/python data/fs54/d4/q47/trajectories.py data/fs54/d4/q47/trajectories.json`, then `projection.py` |
+
