@@ -1,0 +1,441 @@
+{
+ "kind": "fplane-equivariant",
+ "p": 17,
+ "k": 5,
+ "conflict_budget": 5000000,
+ "formulation": "quotient",
+ "jobs": 4,
+ "seconds": 394.6,
+ "rows": [
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     16,
+     0
+    ],
+    [
+     0,
+     16
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unknown",
+   "seconds": 394.6,
+   "colouring": null
+  },
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     16,
+     0
+    ],
+    [
+     0,
+     16
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unknown",
+   "seconds": 313.6,
+   "colouring": null
+  },
+  {
+   "rotation_order": 2,
+   "rotation": [
+    [
+     16,
+     0
+    ],
+    [
+     0,
+     16
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     16
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    3,
+    4,
+    1
+   ],
+   "tau_cycle_type": [
+    4,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 3.2,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     16
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     16
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 4,
+   "rotation": [
+    [
+     0,
+     16
+    ],
+    [
+     1,
+     0
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 8,
+   "rotation": [
+    [
+     3,
+     14
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    3,
+    4,
+    1
+   ],
+   "tau_cycle_type": [
+    4,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 8,
+   "rotation": [
+    [
+     3,
+     14
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 8,
+   "rotation": [
+    [
+     3,
+     14
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 8,
+   "rotation": [
+    [
+     3,
+     14
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 16,
+   "rotation": [
+    [
+     4,
+     11
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    3,
+    4,
+    1
+   ],
+   "tau_cycle_type": [
+    4,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 16,
+   "rotation": [
+    [
+     4,
+     11
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "tau": [
+    0,
+    2,
+    1,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    2,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 16,
+   "rotation": [
+    [
+     4,
+     11
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    4,
+    3
+   ],
+   "tau_cycle_type": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  },
+  {
+   "rotation_order": 16,
+   "rotation": [
+    [
+     4,
+     11
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "tau": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "tau_cycle_type": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "status": "unsat",
+   "seconds": 0.0,
+   "colouring": null
+  }
+ ],
+ "claim_scope": "colourings of UD(F_p,2) with col(r z) = \u03c4(col z) for one rotation r of each order about the origin and one \u03c4 per conjugacy class of S_k of compatible order (conjugate \u03c4 and the rotation's other generators give equivalent instances); sat: a colouring verified proper and equivariant ON THE FULL PLANE (the quotient is only the instrument); unsat: the solver's refusal at the conflict budget (untrusted); unknown: the budget ran out \u2014 a refusal of every class says a k-colouring has no rotational symmetry, not that none exists"
+}
