@@ -1,0 +1,1570 @@
+		Graph
+==========================================
+IO time:			0.000949144
+Filename:			ud-q27.graph
+|-Nodes:			729
+|-Edges:			20412
+
+		Configuration
+==========================================
+Population size:		50
+Repetitions:			50
+Time limit:			300
+---
+KaHIP mode:			0
+---
+Seed:				0
+Base imbalance:			0.03
+Random imbalance:		1
+---
+Tournament size:		2
+---
+Mutation rate:			1
+---
+Use Multiway-VC:		0
+Multiway blocks:		64
+---
+Apply all reductions:		1
+Reductions threshold:		350
+---
+Insert threshold:		150
+Pool threshold:			250
+---
+ILS iterations:			15000
+---
+No. of partitions:		10
+No. of separators:		10
+No. of k-partitions:		10
+No. of k-separators:		10
+
+==========================================
+		Reduction
+==========================================
+Offset:				0
+Kernel size:			729
+
+		Partitioning
+==========================================
+block weight upper bound 579
+Partition [Seed: 5488, K: 2]
+block weight upper bound 569
+Partition [Seed: 1414, K: 2]
+block weight upper bound 544
+Partition [Seed: 5782, K: 2]
+block weight upper bound 420
+Partition [Seed: 2442, K: 2]
+block weight upper bound 434
+Partition [Seed: 9877, K: 2]
+block weight upper bound 594
+Partition [Seed: 3860, K: 2]
+block weight upper bound 610
+Partition [Seed: 1254, K: 2]
+block weight upper bound 578
+Partition [Seed: 9181, K: 2]
+block weight upper bound 444
+Partition [Seed: 2406, K: 2]
+block weight upper bound 422
+Partition [Seed: 8804, K: 2]
+block weight upper bound 514
+Separator [Seed: 893, K: 2, Size: 216]
+block weight upper bound 522
+Separator [Seed: 9352, K: 2, Size: 208]
+block weight upper bound 461
+Separator [Seed: 6960, K: 2, Size: 269]
+block weight upper bound 386
+Separator [Seed: 3954, K: 2, Size: 344]
+block weight upper bound 398
+Separator [Seed: 3297, K: 2, Size: 332]
+block weight upper bound 392
+Separator [Seed: 8074, K: 2, Size: 338]
+block weight upper bound 472
+Separator [Seed: 5325, K: 2, Size: 258]
+block weight upper bound 444
+Separator [Seed: 789, K: 2, Size: 286]
+block weight upper bound 435
+Separator [Seed: 6244, K: 2, Size: 295]
+block weight upper bound 396
+Separator [Seed: 56, K: 2, Size: 334]
+block weight upper bound 16
+Separator [Seed: 1964, K: 57, Size: 702]
+block weight upper bound 15
+Separator [Seed: 527, K: 64, Size: 697]
+block weight upper bound 54
+Separator [Seed: 1542, K: 20, Size: 681]
+block weight upper bound 17
+Separator [Seed: 9588, K: 51, Size: 713]
+block weight upper bound 17
+Separator [Seed: 9410, K: 56, Size: 711]
+block weight upper bound 23
+Separator [Seed: 5718, K: 50, Size: 703]
+block weight upper bound 483
+Separator [Seed: 7316, K: 2, Size: 247]
+block weight upper bound 19
+Separator [Seed: 7080, K: 49, Size: 702]
+block weight upper bound 112
+Separator [Seed: 8016, K: 8, Size: 616]
+block weight upper bound 36
+Separator [Seed: 277, K: 32, Size: 687]
+Created separator pool:	1.03454
+
+		Initialization
+==========================================
+0		Initial		103	103	1.03609
+0		Initial		106	106	1.0419
+
+Round:				1
+Best solution:			106
+Time:				1.04709
+
+		Evolution
+==========================================
+3		Multiway	114	114	1.16436
+12		Vertex cover	117	117	1.51037
+
+Round:				2
+Best solution:			117
+Time:				3.15623
+
+		Evolution
+==========================================
+
+Round:				3
+Best solution:			117
+Time:				5.20284
+
+		Evolution
+==========================================
+
+Round:				4
+Best solution:			117
+Time:				7.36596
+
+		Evolution
+==========================================
+
+Round:				5
+Best solution:			117
+Time:				9.44163
+
+		Evolution
+==========================================
+
+Round:				6
+Best solution:			117
+Time:				11.5247
+
+		Evolution
+==========================================
+
+Round:				7
+Best solution:			117
+Time:				13.4531
+
+		Partitioning
+==========================================
+block weight upper bound 434
+Partition [Seed: 5951, K: 2]
+block weight upper bound 490
+Partition [Seed: 9826, K: 2]
+block weight upper bound 459
+Partition [Seed: 8517, K: 2]
+block weight upper bound 384
+Partition [Seed: 1292, K: 2]
+block weight upper bound 493
+Partition [Seed: 6832, K: 2]
+block weight upper bound 611
+Partition [Seed: 3969, K: 2]
+block weight upper bound 626
+Partition [Seed: 6733, K: 2]
+block weight upper bound 628
+Partition [Seed: 1024, K: 2]
+block weight upper bound 632
+Partition [Seed: 6581, K: 2]
+block weight upper bound 500
+Partition [Seed: 8357, K: 2]
+block weight upper bound 414
+Separator [Seed: 2947, K: 2, Size: 316]
+block weight upper bound 508
+Separator [Seed: 7460, K: 2, Size: 222]
+block weight upper bound 519
+Separator [Seed: 7435, K: 2, Size: 211]
+block weight upper bound 422
+Separator [Seed: 9383, K: 2, Size: 308]
+block weight upper bound 462
+Separator [Seed: 2289, K: 2, Size: 268]
+block weight upper bound 607
+Separator [Seed: 1300, K: 2, Size: 123]
+block weight upper bound 591
+Separator [Seed: 4778, K: 2, Size: 140]
+block weight upper bound 570
+Separator [Seed: 6784, K: 2, Size: 160]
+block weight upper bound 419
+Separator [Seed: 9835, K: 2, Size: 311]
+block weight upper bound 494
+Separator [Seed: 2101, K: 2, Size: 236]
+block weight upper bound 23
+Separator [Seed: 1799, K: 37, Size: 696]
+block weight upper bound 158
+Separator [Seed: 9861, K: 8, Size: 570]
+block weight upper bound 26
+Separator [Seed: 3753, K: 39, Size: 700]
+block weight upper bound 20
+Separator [Seed: 7577, K: 62, Size: 703]
+block weight upper bound 62
+Separator [Seed: 4403, K: 16, Size: 675]
+block weight upper bound 12
+Separator [Seed: 8505, K: 64, Size: 699]
+block weight upper bound 57
+Separator [Seed: 2829, K: 21, Size: 685]
+block weight upper bound 29
+Separator [Seed: 8516, K: 43, Size: 695]
+block weight upper bound 35
+Separator [Seed: 8121, K: 27, Size: 713]
+block weight upper bound 20
+Separator [Seed: 472, K: 42, Size: 713]
+Created separator pool:	1.12675
+
+		Evolution
+==========================================
+
+Round:				8
+Best solution:			117
+Time:				16.4788
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				12
+Kernel size:			442
+
+		Partitioning
+==========================================
+block weight upper bound 237
+Partition [Seed: 1080, K: 2]
+block weight upper bound 326
+Partition [Seed: 4151, K: 2]
+block weight upper bound 276
+Partition [Seed: 1922, K: 2]
+block weight upper bound 240
+Partition [Seed: 5433, K: 2]
+block weight upper bound 343
+Partition [Seed: 369, K: 2]
+block weight upper bound 373
+Partition [Seed: 4449, K: 2]
+block weight upper bound 297
+Partition [Seed: 1282, K: 2]
+block weight upper bound 255
+Partition [Seed: 2043, K: 2]
+block weight upper bound 348
+Partition [Seed: 1781, K: 2]
+block weight upper bound 379
+Partition [Seed: 9335, K: 2]
+block weight upper bound 309
+Separator [Seed: 6316, K: 2, Size: 135]
+block weight upper bound 258
+Separator [Seed: 3388, K: 2, Size: 185]
+block weight upper bound 277
+Separator [Seed: 1756, K: 2, Size: 166]
+block weight upper bound 283
+Separator [Seed: 513, K: 2, Size: 160]
+block weight upper bound 271
+Separator [Seed: 1029, K: 2, Size: 172]
+block weight upper bound 293
+Separator [Seed: 9000, K: 2, Size: 150]
+block weight upper bound 323
+Separator [Seed: 3904, K: 2, Size: 124]
+block weight upper bound 286
+Separator [Seed: 241, K: 2, Size: 157]
+block weight upper bound 286
+Separator [Seed: 15, K: 2, Size: 157]
+block weight upper bound 312
+Separator [Seed: 3615, K: 2, Size: 133]
+block weight upper bound 19
+Separator [Seed: 8857, K: 26, Size: 420]
+block weight upper bound 13
+Separator [Seed: 4054, K: 56, Size: 412]
+block weight upper bound 24
+Separator [Seed: 4289, K: 27, Size: 416]
+block weight upper bound 12
+Separator [Seed: 3903, K: 47, Size: 413]
+block weight upper bound 12
+Separator [Seed: 5361, K: 48, Size: 416]
+block weight upper bound 17
+Separator [Seed: 8657, K: 34, Size: 411]
+block weight upper bound 25
+Separator [Seed: 4586, K: 25, Size: 419]
+block weight upper bound 13
+Separator [Seed: 1189, K: 54, Size: 420]
+block weight upper bound 37
+Separator [Seed: 6811, K: 21, Size: 416]
+block weight upper bound 36
+Separator [Seed: 8978, K: 17, Size: 414]
+Created separator pool:	0.501998
+
+		Initialization
+==========================================
+
+Round:				9
+Best solution:			117
+Time:				18.9648
+
+		Evolution
+==========================================
+
+Round:				10
+Best solution:			117
+Time:				19.0172
+
+		Evolution
+==========================================
+
+Round:				11
+Best solution:			117
+Time:				19.0786
+
+		Evolution
+==========================================
+
+Round:				12
+Best solution:			117
+Time:				19.142
+
+		Evolution
+==========================================
+
+Round:				13
+Best solution:			117
+Time:				19.1996
+
+		Evolution
+==========================================
+
+Round:				14
+Best solution:			117
+Time:				19.2616
+
+		Partitioning
+==========================================
+block weight upper bound 291
+Partition [Seed: 2345, K: 2]
+block weight upper bound 370
+Partition [Seed: 2299, K: 2]
+block weight upper bound 283
+Partition [Seed: 4153, K: 2]
+block weight upper bound 363
+Partition [Seed: 2437, K: 2]
+block weight upper bound 349
+Partition [Seed: 3059, K: 2]
+block weight upper bound 295
+Partition [Seed: 3464, K: 2]
+block weight upper bound 287
+Partition [Seed: 1925, K: 2]
+block weight upper bound 290
+Partition [Seed: 841, K: 2]
+block weight upper bound 329
+Partition [Seed: 5722, K: 2]
+block weight upper bound 307
+Partition [Seed: 9995, K: 2]
+block weight upper bound 359
+Separator [Seed: 3454, K: 2, Size: 92]
+block weight upper bound 316
+Separator [Seed: 9525, K: 2, Size: 129]
+block weight upper bound 296
+Separator [Seed: 4682, K: 2, Size: 148]
+block weight upper bound 330
+Separator [Seed: 9016, K: 2, Size: 116]
+block weight upper bound 369
+Separator [Seed: 8647, K: 2, Size: 91]
+block weight upper bound 371
+Separator [Seed: 3577, K: 2, Size: 97]
+block weight upper bound 321
+Separator [Seed: 1408, K: 2, Size: 121]
+block weight upper bound 311
+Separator [Seed: 7594, K: 2, Size: 135]
+block weight upper bound 244
+Separator [Seed: 7124, K: 2, Size: 199]
+block weight upper bound 267
+Separator [Seed: 6325, K: 2, Size: 176]
+block weight upper bound 9
+Separator [Seed: 5167, K: 62, Size: 414]
+block weight upper bound 17
+Separator [Seed: 7178, K: 47, Size: 424]
+block weight upper bound 19
+Separator [Seed: 471, K: 38, Size: 406]
+block weight upper bound 11
+Separator [Seed: 257, K: 60, Size: 412]
+block weight upper bound 70
+Separator [Seed: 5416, K: 11, Size: 403]
+block weight upper bound 8
+Separator [Seed: 4157, K: 64, Size: 415]
+block weight upper bound 15
+Separator [Seed: 2027, K: 52, Size: 421]
+block weight upper bound 102
+Separator [Seed: 5543, K: 6, Size: 365]
+block weight upper bound 16
+Separator [Seed: 4121, K: 46, Size: 420]
+block weight upper bound 12
+Separator [Seed: 7658, K: 53, Size: 412]
+Created separator pool:	0.534813
+
+		Evolution
+==========================================
+
+Round:				15
+Best solution:			117
+Time:				19.85
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				23
+Kernel size:			317
+
+		Partitioning
+==========================================
+block weight upper bound 273
+Partition [Seed: 4544, K: 2]
+block weight upper bound 233
+Partition [Seed: 1595, K: 2]
+block weight upper bound 195
+Partition [Seed: 8249, K: 2]
+block weight upper bound 251
+Partition [Seed: 5827, K: 2]
+block weight upper bound 210
+Partition [Seed: 6571, K: 2]
+block weight upper bound 264
+Partition [Seed: 9731, K: 2]
+block weight upper bound 239
+Partition [Seed: 5683, K: 2]
+block weight upper bound 183
+Partition [Seed: 2562, K: 2]
+block weight upper bound 199
+Partition [Seed: 7006, K: 2]
+block weight upper bound 186
+Partition [Seed: 6103, K: 2]
+block weight upper bound 275
+Separator [Seed: 6987, K: 2, Size: 76]
+block weight upper bound 222
+Separator [Seed: 9197, K: 2, Size: 95]
+block weight upper bound 273
+Separator [Seed: 3160, K: 2, Size: 94]
+block weight upper bound 199
+Separator [Seed: 4125, K: 2, Size: 120]
+block weight upper bound 171
+Separator [Seed: 2125, K: 2, Size: 146]
+block weight upper bound 219
+Separator [Seed: 1317, K: 2, Size: 100]
+block weight upper bound 185
+Separator [Seed: 613, K: 2, Size: 132]
+block weight upper bound 273
+Separator [Seed: 8643, K: 2, Size: 88]
+block weight upper bound 188
+Separator [Seed: 7388, K: 2, Size: 133]
+block weight upper bound 171
+Separator [Seed: 1666, K: 2, Size: 146]
+block weight upper bound 10
+Separator [Seed: 5079, K: 38, Size: 289]
+block weight upper bound 10
+Separator [Seed: 9985, K: 40, Size: 289]
+block weight upper bound 28
+Separator [Seed: 3776, K: 18, Size: 296]
+block weight upper bound 22
+Separator [Seed: 7961, K: 20, Size: 297]
+block weight upper bound 14
+Separator [Seed: 2054, K: 33, Size: 291]
+block weight upper bound 7
+Separator [Seed: 6670, K: 58, Size: 287]
+block weight upper bound 29
+Separator [Seed: 267, K: 13, Size: 291]
+block weight upper bound 24
+Separator [Seed: 3469, K: 20, Size: 283]
+block weight upper bound 10
+Separator [Seed: 2270, K: 34, Size: 286]
+block weight upper bound 40
+Separator [Seed: 5689, K: 13, Size: 277]
+Created separator pool:	0.263287
+
+		Initialization
+==========================================
+
+Round:				16
+Best solution:			83
+Time:				20.1775
+
+		Evolution
+==========================================
+
+Round:				17
+Best solution:			117
+Time:				20.2081
+
+		Evolution
+==========================================
+
+Round:				18
+Best solution:			117
+Time:				20.2406
+
+		Evolution
+==========================================
+
+Round:				19
+Best solution:			117
+Time:				20.2703
+
+		Evolution
+==========================================
+
+Round:				20
+Best solution:			117
+Time:				20.2982
+
+		Evolution
+==========================================
+
+Round:				21
+Best solution:			117
+Time:				20.3262
+
+		Evolution
+==========================================
+
+Round:				22
+Best solution:			117
+Time:				20.3541
+
+		Partitioning
+==========================================
+block weight upper bound 177
+Partition [Seed: 1941, K: 2]
+block weight upper bound 241
+Partition [Seed: 3328, K: 2]
+block weight upper bound 250
+Partition [Seed: 6046, K: 2]
+block weight upper bound 219
+Partition [Seed: 1670, K: 2]
+block weight upper bound 271
+Partition [Seed: 7877, K: 2]
+block weight upper bound 174
+Partition [Seed: 9419, K: 2]
+block weight upper bound 266
+Partition [Seed: 7842, K: 2]
+block weight upper bound 213
+Partition [Seed: 7750, K: 2]
+block weight upper bound 171
+Partition [Seed: 6171, K: 2]
+block weight upper bound 261
+Partition [Seed: 1625, K: 2]
+block weight upper bound 239
+Separator [Seed: 7127, K: 2, Size: 89]
+block weight upper bound 252
+Separator [Seed: 4909, K: 2, Size: 81]
+block weight upper bound 245
+Separator [Seed: 8673, K: 2, Size: 87]
+block weight upper bound 206
+Separator [Seed: 5724, K: 2, Size: 115]
+block weight upper bound 266
+Separator [Seed: 5420, K: 2, Size: 84]
+block weight upper bound 171
+Separator [Seed: 4268, K: 2, Size: 151]
+block weight upper bound 195
+Separator [Seed: 969, K: 2, Size: 129]
+block weight upper bound 212
+Separator [Seed: 6871, K: 2, Size: 107]
+block weight upper bound 211
+Separator [Seed: 4269, K: 2, Size: 105]
+block weight upper bound 224
+Separator [Seed: 1532, K: 2, Size: 96]
+block weight upper bound 34
+Separator [Seed: 8136, K: 15, Size: 276]
+block weight upper bound 9
+Separator [Seed: 530, K: 52, Size: 292]
+block weight upper bound 46
+Separator [Seed: 1002, K: 10, Size: 267]
+block weight upper bound 8
+Separator [Seed: 5059, K: 42, Size: 289]
+block weight upper bound 18
+Separator [Seed: 6961, K: 27, Size: 295]
+block weight upper bound 45
+Separator [Seed: 2366, K: 12, Size: 268]
+block weight upper bound 8
+Separator [Seed: 8649, K: 60, Size: 281]
+block weight upper bound 24
+Separator [Seed: 5520, K: 16, Size: 288]
+block weight upper bound 14
+Separator [Seed: 4068, K: 31, Size: 289]
+block weight upper bound 10
+Separator [Seed: 4501, K: 47, Size: 288]
+Created separator pool:	0.267245
+
+		Evolution
+==========================================
+
+Round:				23
+Best solution:			117
+Time:				20.651
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				34
+Kernel size:			241
+
+		Partitioning
+==========================================
+block weight upper bound 190
+Partition [Seed: 3970, K: 2]
+block weight upper bound 135
+Partition [Seed: 1888, K: 2]
+block weight upper bound 157
+Partition [Seed: 6663, K: 2]
+block weight upper bound 165
+Partition [Seed: 1130, K: 2]
+block weight upper bound 177
+Partition [Seed: 9214, K: 2]
+block weight upper bound 148
+Partition [Seed: 1894, K: 2]
+block weight upper bound 134
+Partition [Seed: 8222, K: 2]
+block weight upper bound 154
+Partition [Seed: 7500, K: 2]
+block weight upper bound 147
+Partition [Seed: 9453, K: 2]
+block weight upper bound 186
+Partition [Seed: 6883, K: 2]
+block weight upper bound 207
+Separator [Seed: 4544, K: 2, Size: 71]
+block weight upper bound 177
+Separator [Seed: 1595, K: 2, Size: 75]
+block weight upper bound 148
+Separator [Seed: 8249, K: 2, Size: 96]
+block weight upper bound 191
+Separator [Seed: 5827, K: 2, Size: 71]
+block weight upper bound 160
+Separator [Seed: 6571, K: 2, Size: 85]
+block weight upper bound 201
+Separator [Seed: 9731, K: 2, Size: 61]
+block weight upper bound 182
+Separator [Seed: 5683, K: 2, Size: 79]
+block weight upper bound 139
+Separator [Seed: 2562, K: 2, Size: 103]
+block weight upper bound 151
+Separator [Seed: 7006, K: 2, Size: 103]
+block weight upper bound 141
+Separator [Seed: 6103, K: 2, Size: 109]
+block weight upper bound 43
+Separator [Seed: 6987, K: 10, Size: 199]
+block weight upper bound 10
+Separator [Seed: 445, K: 42, Size: 208]
+block weight upper bound 5
+Separator [Seed: 2122, K: 63, Size: 204]
+block weight upper bound 5
+Separator [Seed: 7625, K: 64, Size: 202]
+block weight upper bound 6
+Separator [Seed: 9494, K: 59, Size: 201]
+block weight upper bound 6
+Separator [Seed: 8801, K: 42, Size: 208]
+block weight upper bound 8
+Separator [Seed: 2578, K: 53, Size: 206]
+block weight upper bound 89
+Separator [Seed: 1468, K: 3, Size: 158]
+block weight upper bound 16
+Separator [Seed: 1339, K: 20, Size: 210]
+block weight upper bound 22
+Separator [Seed: 7892, K: 18, Size: 216]
+Created separator pool:	0.150086
+
+		Initialization
+==========================================
+
+Round:				24
+Best solution:			117
+Time:				20.8296
+
+		Evolution
+==========================================
+
+Round:				25
+Best solution:			117
+Time:				20.8496
+
+		Evolution
+==========================================
+
+Round:				26
+Best solution:			117
+Time:				20.8678
+
+		Evolution
+==========================================
+
+Round:				27
+Best solution:			117
+Time:				20.8859
+
+		Evolution
+==========================================
+
+Round:				28
+Best solution:			117
+Time:				20.9033
+
+		Evolution
+==========================================
+
+Round:				29
+Best solution:			117
+Time:				20.9211
+
+		Partitioning
+==========================================
+block weight upper bound 132
+Partition [Seed: 9359, K: 2]
+block weight upper bound 210
+Partition [Seed: 5377, K: 2]
+block weight upper bound 140
+Partition [Seed: 8345, K: 2]
+block weight upper bound 138
+Partition [Seed: 4977, K: 2]
+block weight upper bound 135
+Partition [Seed: 1881, K: 2]
+block weight upper bound 157
+Partition [Seed: 2271, K: 2]
+block weight upper bound 148
+Partition [Seed: 9806, K: 2]
+block weight upper bound 211
+Partition [Seed: 4745, K: 2]
+block weight upper bound 177
+Partition [Seed: 2460, K: 2]
+block weight upper bound 183
+Partition [Seed: 4359, K: 2]
+block weight upper bound 145
+Separator [Seed: 7988, K: 2, Size: 95]
+block weight upper bound 186
+Separator [Seed: 7402, K: 2, Size: 68]
+block weight upper bound 189
+Separator [Seed: 3151, K: 2, Size: 73]
+block weight upper bound 178
+Separator [Seed: 910, K: 2, Size: 72]
+block weight upper bound 172
+Separator [Seed: 8127, K: 2, Size: 71]
+block weight upper bound 200
+Separator [Seed: 6257, K: 2, Size: 41]
+block weight upper bound 128
+Separator [Seed: 7248, K: 2, Size: 119]
+block weight upper bound 160
+Separator [Seed: 3330, K: 2, Size: 85]
+block weight upper bound 149
+Separator [Seed: 6985, K: 2, Size: 89]
+block weight upper bound 207
+Separator [Seed: 2168, K: 2, Size: 62]
+block weight upper bound 10
+Separator [Seed: 6004, K: 36, Size: 204]
+block weight upper bound 16
+Separator [Seed: 7825, K: 25, Size: 216]
+block weight upper bound 10
+Separator [Seed: 7932, K: 40, Size: 201]
+block weight upper bound 8
+Separator [Seed: 7435, K: 43, Size: 210]
+block weight upper bound 5
+Separator [Seed: 276, K: 62, Size: 204]
+block weight upper bound 20
+Separator [Seed: 3423, K: 15, Size: 209]
+block weight upper bound 5
+Separator [Seed: 5847, K: 62, Size: 208]
+block weight upper bound 10
+Separator [Seed: 9217, K: 35, Size: 204]
+block weight upper bound 10
+Separator [Seed: 413, K: 43, Size: 205]
+block weight upper bound 9
+Separator [Seed: 8880, K: 38, Size: 211]
+Created separator pool:	0.161075
+
+		Evolution
+==========================================
+
+Round:				30
+Best solution:			117
+Time:				21.101
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				43
+Kernel size:			193
+
+		Partitioning
+==========================================
+block weight upper bound 118
+Partition [Seed: 1308, K: 2]
+block weight upper bound 146
+Partition [Seed: 892, K: 2]
+block weight upper bound 104
+Partition [Seed: 3103, K: 2]
+block weight upper bound 108
+Partition [Seed: 2287, K: 2]
+block weight upper bound 120
+Partition [Seed: 757, K: 2]
+block weight upper bound 122
+Partition [Seed: 7133, K: 2]
+block weight upper bound 150
+Partition [Seed: 1746, K: 2]
+block weight upper bound 146
+Partition [Seed: 3720, K: 2]
+block weight upper bound 163
+Partition [Seed: 1321, K: 2]
+block weight upper bound 162
+Partition [Seed: 3217, K: 2]
+block weight upper bound 138
+Separator [Seed: 1613, K: 2, Size: 69]
+block weight upper bound 161
+Separator [Seed: 1480, K: 2, Size: 48]
+block weight upper bound 107
+Separator [Seed: 2972, K: 2, Size: 84]
+block weight upper bound 109
+Separator [Seed: 3219, K: 2, Size: 91]
+block weight upper bound 132
+Separator [Seed: 8403, K: 2, Size: 74]
+block weight upper bound 127
+Separator [Seed: 9332, K: 2, Size: 81]
+block weight upper bound 150
+Separator [Seed: 5739, K: 2, Size: 67]
+block weight upper bound 157
+Separator [Seed: 8305, K: 2, Size: 58]
+block weight upper bound 120
+Separator [Seed: 2028, K: 2, Size: 83]
+block weight upper bound 122
+Separator [Seed: 2628, K: 2, Size: 76]
+block weight upper bound 5
+Separator [Seed: 3655, K: 50, Size: 158]
+block weight upper bound 14
+Separator [Seed: 4829, K: 21, Size: 161]
+block weight upper bound 8
+Separator [Seed: 251, K: 42, Size: 157]
+block weight upper bound 20
+Separator [Seed: 3870, K: 17, Size: 163]
+block weight upper bound 6
+Separator [Seed: 2449, K: 50, Size: 153]
+block weight upper bound 13
+Separator [Seed: 2965, K: 17, Size: 161]
+block weight upper bound 6
+Separator [Seed: 9717, K: 51, Size: 152]
+block weight upper bound 12
+Separator [Seed: 8355, K: 21, Size: 154]
+block weight upper bound 47
+Separator [Seed: 8014, K: 6, Size: 134]
+block weight upper bound 14
+Separator [Seed: 1911, K: 22, Size: 165]
+Created separator pool:	0.099046
+
+		Initialization
+==========================================
+
+Round:				31
+Best solution:			117
+Time:				21.2201
+
+		Evolution
+==========================================
+
+Round:				32
+Best solution:			117
+Time:				21.2334
+
+		Evolution
+==========================================
+
+Round:				33
+Best solution:			117
+Time:				21.2456
+
+		Evolution
+==========================================
+
+Round:				34
+Best solution:			117
+Time:				21.2584
+
+		Evolution
+==========================================
+
+Round:				35
+Best solution:			117
+Time:				21.2711
+
+		Evolution
+==========================================
+
+Round:				36
+Best solution:			117
+Time:				21.2839
+
+		Partitioning
+==========================================
+block weight upper bound 106
+Partition [Seed: 3823, K: 2]
+block weight upper bound 143
+Partition [Seed: 2820, K: 2]
+block weight upper bound 140
+Partition [Seed: 9765, K: 2]
+block weight upper bound 125
+Partition [Seed: 1505, K: 2]
+block weight upper bound 158
+Partition [Seed: 9876, K: 2]
+block weight upper bound 167
+Partition [Seed: 7665, K: 2]
+block weight upper bound 132
+Partition [Seed: 6214, K: 2]
+block weight upper bound 152
+Partition [Seed: 2586, K: 2]
+block weight upper bound 146
+Partition [Seed: 313, K: 2]
+block weight upper bound 129
+Partition [Seed: 6179, K: 2]
+block weight upper bound 114
+Separator [Seed: 574, K: 2, Size: 87]
+block weight upper bound 151
+Separator [Seed: 23, K: 2, Size: 67]
+block weight upper bound 138
+Separator [Seed: 2824, K: 2, Size: 78]
+block weight upper bound 147
+Separator [Seed: 1312, K: 2, Size: 68]
+block weight upper bound 119
+Separator [Seed: 7504, K: 2, Size: 91]
+block weight upper bound 132
+Separator [Seed: 1709, K: 2, Size: 66]
+block weight upper bound 141
+Separator [Seed: 2686, K: 2, Size: 58]
+block weight upper bound 121
+Separator [Seed: 1290, K: 2, Size: 80]
+block weight upper bound 135
+Separator [Seed: 5211, K: 2, Size: 59]
+block weight upper bound 109
+Separator [Seed: 8370, K: 2, Size: 95]
+block weight upper bound 6
+Separator [Seed: 3755, K: 58, Size: 153]
+block weight upper bound 6
+Separator [Seed: 7303, K: 54, Size: 159]
+block weight upper bound 87
+Separator [Seed: 6246, K: 3, Size: 114]
+block weight upper bound 66
+Separator [Seed: 763, K: 5, Size: 122]
+block weight upper bound 10
+Separator [Seed: 6383, K: 21, Size: 156]
+block weight upper bound 11
+Separator [Seed: 651, K: 22, Size: 156]
+block weight upper bound 5
+Separator [Seed: 9038, K: 61, Size: 159]
+block weight upper bound 7
+Separator [Seed: 3244, K: 42, Size: 153]
+block weight upper bound 6
+Separator [Seed: 4254, K: 37, Size: 160]
+block weight upper bound 5
+Separator [Seed: 6400, K: 51, Size: 149]
+Created separator pool:	0.099998
+
+		Evolution
+==========================================
+
+Round:				37
+Best solution:			117
+Time:				21.3982
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				54
+Kernel size:			154
+
+		Partitioning
+==========================================
+block weight upper bound 118
+Partition [Seed: 7501, K: 2]
+block weight upper bound 83
+Partition [Seed: 9066, K: 2]
+block weight upper bound 113
+Partition [Seed: 6287, K: 2]
+block weight upper bound 114
+Partition [Seed: 6880, K: 2]
+block weight upper bound 111
+Partition [Seed: 6651, K: 2]
+block weight upper bound 87
+Partition [Seed: 7046, K: 2]
+block weight upper bound 88
+Partition [Seed: 1404, K: 2]
+block weight upper bound 111
+Partition [Seed: 10, K: 2]
+block weight upper bound 109
+Partition [Seed: 7488, K: 2]
+block weight upper bound 108
+Partition [Seed: 2630, K: 2]
+block weight upper bound 130
+Separator [Seed: 5328, K: 2, Size: 46]
+block weight upper bound 84
+Separator [Seed: 6771, K: 2, Size: 64]
+block weight upper bound 100
+Separator [Seed: 4753, K: 2, Size: 62]
+block weight upper bound 107
+Separator [Seed: 3128, K: 2, Size: 71]
+block weight upper bound 110
+Separator [Seed: 9246, K: 2, Size: 60]
+block weight upper bound 95
+Separator [Seed: 9135, K: 2, Size: 61]
+block weight upper bound 110
+Separator [Seed: 6351, K: 2, Size: 57]
+block weight upper bound 87
+Separator [Seed: 6414, K: 2, Size: 71]
+block weight upper bound 96
+Separator [Seed: 1463, K: 2, Size: 68]
+block weight upper bound 87
+Separator [Seed: 8430, K: 2, Size: 65]
+block weight upper bound 25
+Separator [Seed: 19, K: 8, Size: 113]
+block weight upper bound 15
+Separator [Seed: 3331, K: 17, Size: 121]
+block weight upper bound 6
+Separator [Seed: 1174, K: 39, Size: 121]
+block weight upper bound 4
+Separator [Seed: 6569, K: 48, Size: 124]
+block weight upper bound 11
+Separator [Seed: 2301, K: 16, Size: 121]
+block weight upper bound 7
+Separator [Seed: 7819, K: 37, Size: 124]
+block weight upper bound 4
+Separator [Seed: 2960, K: 51, Size: 124]
+block weight upper bound 10
+Separator [Seed: 1026, K: 24, Size: 127]
+block weight upper bound 5
+Separator [Seed: 7027, K: 45, Size: 120]
+block weight upper bound 12
+Separator [Seed: 6168, K: 23, Size: 119]
+Created separator pool:	0.079046
+
+		Initialization
+==========================================
+
+Round:				38
+Best solution:			117
+Time:				21.4907
+
+		Evolution
+==========================================
+
+Round:				39
+Best solution:			117
+Time:				21.5008
+
+		Evolution
+==========================================
+
+Round:				40
+Best solution:			117
+Time:				21.5105
+
+		Evolution
+==========================================
+
+Round:				41
+Best solution:			117
+Time:				21.52
+
+		Evolution
+==========================================
+
+Round:				42
+Best solution:			117
+Time:				21.5302
+
+		Evolution
+==========================================
+
+Round:				43
+Best solution:			117
+Time:				21.5399
+
+		Partitioning
+==========================================
+block weight upper bound 90
+Partition [Seed: 4606, K: 2]
+block weight upper bound 94
+Partition [Seed: 8249, K: 2]
+block weight upper bound 121
+Partition [Seed: 5827, K: 2]
+block weight upper bound 102
+Partition [Seed: 6571, K: 2]
+block weight upper bound 127
+Partition [Seed: 9731, K: 2]
+block weight upper bound 115
+Partition [Seed: 5683, K: 2]
+block weight upper bound 88
+Partition [Seed: 2562, K: 2]
+block weight upper bound 96
+Partition [Seed: 7006, K: 2]
+block weight upper bound 90
+Partition [Seed: 6103, K: 2]
+block weight upper bound 133
+Partition [Seed: 6987, K: 2]
+block weight upper bound 107
+Separator [Seed: 9197, K: 2, Size: 60]
+block weight upper bound 132
+Separator [Seed: 3160, K: 2, Size: 39]
+block weight upper bound 96
+Separator [Seed: 4125, K: 2, Size: 67]
+block weight upper bound 82
+Separator [Seed: 2125, K: 2, Size: 74]
+block weight upper bound 106
+Separator [Seed: 1317, K: 2, Size: 67]
+block weight upper bound 89
+Separator [Seed: 613, K: 2, Size: 67]
+block weight upper bound 132
+Separator [Seed: 8643, K: 2, Size: 42]
+block weight upper bound 91
+Separator [Seed: 7388, K: 2, Size: 69]
+block weight upper bound 83
+Separator [Seed: 1666, K: 2, Size: 76]
+block weight upper bound 91
+Separator [Seed: 5079, K: 2, Size: 76]
+block weight upper bound 4
+Separator [Seed: 5602, K: 53, Size: 124]
+block weight upper bound 16
+Separator [Seed: 4598, K: 16, Size: 122]
+block weight upper bound 4
+Separator [Seed: 7303, K: 54, Size: 125]
+block weight upper bound 41
+Separator [Seed: 7045, K: 6, Size: 117]
+block weight upper bound 5
+Separator [Seed: 9482, K: 47, Size: 125]
+block weight upper bound 25
+Separator [Seed: 4376, K: 10, Size: 117]
+block weight upper bound 25
+Separator [Seed: 1944, K: 7, Size: 105]
+block weight upper bound 97
+Separator [Seed: 2455, K: 2, Size: 71]
+block weight upper bound 5
+Separator [Seed: 7566, K: 60, Size: 122]
+block weight upper bound 6
+Separator [Seed: 6088, K: 34, Size: 123]
+Created separator pool:	0.0742831
+
+		Evolution
+==========================================
+
+Round:				44
+Best solution:			117
+Time:				21.6237
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				63
+Kernel size:			117
+
+		Partitioning
+==========================================
+block weight upper bound 73
+Partition [Seed: 4863, K: 2]
+block weight upper bound 74
+Partition [Seed: 7945, K: 2]
+block weight upper bound 85
+Partition [Seed: 6545, K: 2]
+block weight upper bound 67
+Partition [Seed: 7865, K: 2]
+block weight upper bound 75
+Partition [Seed: 8418, K: 2]
+block weight upper bound 64
+Partition [Seed: 9486, K: 2]
+block weight upper bound 95
+Partition [Seed: 9961, K: 2]
+block weight upper bound 84
+Partition [Seed: 3696, K: 2]
+block weight upper bound 68
+Partition [Seed: 9563, K: 2]
+block weight upper bound 95
+Partition [Seed: 8983, K: 2]
+block weight upper bound 90
+Separator [Seed: 6230, K: 2, Size: 47]
+block weight upper bound 97
+Separator [Seed: 2098, K: 2, Size: 34]
+block weight upper bound 99
+Separator [Seed: 6345, K: 2, Size: 32]
+block weight upper bound 100
+Separator [Seed: 6666, K: 2, Size: 31]
+block weight upper bound 79
+Separator [Seed: 7690, K: 2, Size: 52]
+block weight upper bound 96
+Separator [Seed: 3867, K: 2, Size: 49]
+block weight upper bound 73
+Separator [Seed: 5375, K: 2, Size: 51]
+block weight upper bound 68
+Separator [Seed: 3840, K: 2, Size: 54]
+block weight upper bound 84
+Separator [Seed: 8480, K: 2, Size: 44]
+block weight upper bound 81
+Separator [Seed: 8198, K: 2, Size: 47]
+block weight upper bound 3
+Separator [Seed: 7214, K: 42, Size: 89]
+block weight upper bound 2
+Separator [Seed: 7287, K: 61, Size: 87]
+block weight upper bound 13
+Separator [Seed: 819, K: 15, Size: 85]
+block weight upper bound 4
+Separator [Seed: 5038, K: 47, Size: 87]
+block weight upper bound 35
+Separator [Seed: 977, K: 5, Size: 73]
+block weight upper bound 4
+Separator [Seed: 2839, K: 42, Size: 85]
+block weight upper bound 5
+Separator [Seed: 7149, K: 37, Size: 85]
+block weight upper bound 14
+Separator [Seed: 6564, K: 11, Size: 91]
+block weight upper bound 13
+Separator [Seed: 7563, K: 12, Size: 89]
+block weight upper bound 4
+Separator [Seed: 3799, K: 47, Size: 88]
+Created separator pool:	0.0507741
+
+		Initialization
+==========================================
+
+Round:				45
+Best solution:			117
+Time:				21.6853
+
+		Evolution
+==========================================
+
+Round:				46
+Best solution:			117
+Time:				21.6928
+
+		Evolution
+==========================================
+
+Round:				47
+Best solution:			117
+Time:				21.6994
+
+		Evolution
+==========================================
+
+Round:				48
+Best solution:			117
+Time:				21.7059
+
+		Evolution
+==========================================
+
+Round:				49
+Best solution:			117
+Time:				21.7129
+
+		Evolution
+==========================================
+
+Round:				50
+Best solution:			117
+Time:				21.7194
+
+		Partitioning
+==========================================
+block weight upper bound 70
+Partition [Seed: 7282, K: 2]
+block weight upper bound 71
+Partition [Seed: 2812, K: 2]
+block weight upper bound 70
+Partition [Seed: 1273, K: 2]
+block weight upper bound 62
+Partition [Seed: 9264, K: 2]
+block weight upper bound 96
+Partition [Seed: 1724, K: 2]
+block weight upper bound 90
+Partition [Seed: 874, K: 2]
+block weight upper bound 66
+Partition [Seed: 4197, K: 2]
+block weight upper bound 91
+Partition [Seed: 256, K: 2]
+block weight upper bound 71
+Partition [Seed: 842, K: 2]
+block weight upper bound 101
+Partition [Seed: 4424, K: 2]
+block weight upper bound 77
+Separator [Seed: 6218, K: 2, Size: 33]
+block weight upper bound 63
+Separator [Seed: 4540, K: 2, Size: 52]
+block weight upper bound 100
+Separator [Seed: 2853, K: 2, Size: 53]
+block weight upper bound 101
+Separator [Seed: 3280, K: 2, Size: 15]
+block weight upper bound 90
+Separator [Seed: 3815, K: 2, Size: 52]
+block weight upper bound 90
+Separator [Seed: 2011, K: 2, Size: 56]
+block weight upper bound 73
+Separator [Seed: 8270, K: 2, Size: 45]
+block weight upper bound 93
+Separator [Seed: 4803, K: 2, Size: 49]
+block weight upper bound 94
+Separator [Seed: 2900, K: 2, Size: 33]
+block weight upper bound 70
+Separator [Seed: 4567, K: 2, Size: 49]
+block weight upper bound 3
+Separator [Seed: 6964, K: 40, Size: 87]
+block weight upper bound 12
+Separator [Seed: 9407, K: 12, Size: 92]
+block weight upper bound 4
+Separator [Seed: 4218, K: 42, Size: 89]
+block weight upper bound 8
+Separator [Seed: 218, K: 23, Size: 94]
+block weight upper bound 2
+Separator [Seed: 7749, K: 62, Size: 88]
+block weight upper bound 8
+Separator [Seed: 1210, K: 21, Size: 88]
+block weight upper bound 6
+Separator [Seed: 9390, K: 35, Size: 84]
+block weight upper bound 4
+Separator [Seed: 1223, K: 35, Size: 87]
+block weight upper bound 4
+Separator [Seed: 5057, K: 47, Size: 83]
+block weight upper bound 9
+Separator [Seed: 4330, K: 20, Size: 85]
+Created separator pool:	0.052731
+
+		Evolution
+==========================================
+
+Round:				51
+Best solution:			117
+Time:				21.7794
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				71
+Kernel size:			91
+
+		Partitioning
+==========================================
+block weight upper bound 64
+Partition [Seed: 2969, K: 2]
+block weight upper bound 48
+Partition [Seed: 3781, K: 2]
+block weight upper bound 58
+Partition [Seed: 2582, K: 2]
+block weight upper bound 61
+Partition [Seed: 2200, K: 2]
+block weight upper bound 74
+Partition [Seed: 9103, K: 2]
+block weight upper bound 77
+Partition [Seed: 8675, K: 2]
+block weight upper bound 59
+Partition [Seed: 2716, K: 2]
+block weight upper bound 62
+Partition [Seed: 3365, K: 2]
+block weight upper bound 74
+Partition [Seed: 6561, K: 2]
+block weight upper bound 76
+Partition [Seed: 4248, K: 2]
+block weight upper bound 70
+Separator [Seed: 507, K: 2, Size: 28]
+block weight upper bound 62
+Separator [Seed: 4597, K: 2, Size: 28]
+block weight upper bound 80
+Separator [Seed: 2496, K: 2, Size: 21]
+block weight upper bound 75
+Separator [Seed: 1092, K: 2, Size: 25]
+block weight upper bound 77
+Separator [Seed: 1547, K: 2, Size: 36]
+block weight upper bound 49
+Separator [Seed: 5938, K: 2, Size: 32]
+block weight upper bound 66
+Separator [Seed: 6711, K: 2, Size: 22]
+block weight upper bound 66
+Separator [Seed: 2499, K: 2, Size: 31]
+block weight upper bound 67
+Separator [Seed: 4296, K: 2, Size: 32]
+block weight upper bound 76
+Separator [Seed: 3729, K: 2, Size: 29]
+block weight upper bound 4
+Separator [Seed: 8503, K: 28, Size: 64]
+block weight upper bound 4
+Separator [Seed: 3949, K: 36, Size: 62]
+block weight upper bound 14
+Separator [Seed: 4072, K: 11, Size: 61]
+block weight upper bound 8
+Separator [Seed: 1253, K: 12, Size: 63]
+block weight upper bound 2
+Separator [Seed: 8042, K: 50, Size: 64]
+block weight upper bound 4
+Separator [Seed: 8911, K: 31, Size: 63]
+block weight upper bound 4
+Separator [Seed: 5683, K: 37, Size: 66]
+block weight upper bound 22
+Separator [Seed: 2136, K: 7, Size: 57]
+block weight upper bound 2
+Separator [Seed: 5976, K: 46, Size: 67]
+block weight upper bound 9
+Separator [Seed: 6292, K: 13, Size: 63]
+Created separator pool:	0.0369742
+
+		Initialization
+==========================================
+
+Round:				52
+Best solution:			117
+Time:				21.8239
+
+		Evolution
+==========================================
+
+Round:				53
+Best solution:			117
+Time:				21.8289
+
+		Evolution
+==========================================
+
+Round:				54
+Best solution:			117
+Time:				21.8338
+
+		Evolution
+==========================================
+
+Round:				55
+Best solution:			117
+Time:				21.8387
+
+		Evolution
+==========================================
+
+Round:				56
+Best solution:			117
+Time:				21.8435
+
+		Evolution
+==========================================
+
+Round:				57
+Best solution:			117
+Time:				21.8482
+
+		Partitioning
+==========================================
+block weight upper bound 53
+Partition [Seed: 2502, K: 2]
+block weight upper bound 51
+Partition [Seed: 1422, K: 2]
+block weight upper bound 59
+Partition [Seed: 8845, K: 2]
+block weight upper bound 70
+Partition [Seed: 8779, K: 2]
+block weight upper bound 54
+Partition [Seed: 1446, K: 2]
+block weight upper bound 73
+Partition [Seed: 7458, K: 2]
+block weight upper bound 65
+Partition [Seed: 7781, K: 2]
+block weight upper bound 70
+Partition [Seed: 3176, K: 2]
+block weight upper bound 71
+Partition [Seed: 8274, K: 2]
+block weight upper bound 49
+Partition [Seed: 5652, K: 2]
+block weight upper bound 73
+Separator [Seed: 3020, K: 2, Size: 22]
+block weight upper bound 68
+Separator [Seed: 2188, K: 2, Size: 36]
+block weight upper bound 66
+Separator [Seed: 762, K: 2, Size: 28]
+block weight upper bound 50
+Separator [Seed: 1101, K: 2, Size: 37]
+block weight upper bound 48
+Separator [Seed: 780, K: 2, Size: 32]
+block weight upper bound 78
+Separator [Seed: 7870, K: 2, Size: 25]
+block weight upper bound 73
+Separator [Seed: 1569, K: 2, Size: 26]
+block weight upper bound 51
+Separator [Seed: 8716, K: 2, Size: 32]
+block weight upper bound 79
+Separator [Seed: 7153, K: 2, Size: 23]
+block weight upper bound 54
+Separator [Seed: 3642, K: 2, Size: 39]
+block weight upper bound 5
+Separator [Seed: 2718, K: 28, Size: 64]
+block weight upper bound 3
+Separator [Seed: 659, K: 37, Size: 67]
+block weight upper bound 3
+Separator [Seed: 6551, K: 59, Size: 61]
+block weight upper bound 13
+Separator [Seed: 7395, K: 11, Size: 61]
+block weight upper bound 8
+Separator [Seed: 4246, K: 13, Size: 68]
+block weight upper bound 3
+Separator [Seed: 5157, K: 60, Size: 69]
+block weight upper bound 2
+Separator [Seed: 150, K: 59, Size: 68]
+block weight upper bound 8
+Separator [Seed: 2835, K: 17, Size: 67]
+block weight upper bound 7
+Separator [Seed: 6102, K: 18, Size: 63]
+block weight upper bound 7
+Separator [Seed: 2180, K: 21, Size: 64]
+Created separator pool:	0.0366311
+
+		Evolution
+==========================================
+
+Round:				58
+Best solution:			117
+Time:				21.89
+
+		Evolution
+==========================================
+==========================================
+		Reduction
+==========================================
+Offset:				117
+Kernel size:			0
+
+2900		Combine reduction	46	117	21.895
+
+		Statistics
+==========================================
+Total time:			21.8962
+Evolution time:			21.8951
+Number of rounds:		58
+Number of repetitions:		2900
+
+Operator	Times selected	Improvements	Avg. time	Avg. improv
+--------------------------------------------------------------------------------
+Vertex cover	857		1		0.00686247	3
+Node separator	980		0		0.00639419	0
+Multiway	1063		1		0.00484222	8
+
+		Best
+==========================================
+Size:				117
+Time found:			21.895
+Operator:			Combine reduction
+Repetition number:		2900
+Round number:			58
+
+writing independent set to data/fs54/kamis-smoke/redumis-q27-seed0.out ... 
+checking solution ...
+done ...
+Independent set has size 117

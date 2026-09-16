@@ -1,0 +1,17 @@
+		Graph
+==========================================
+IO time:			0.00165892
+Filename:			ud-q27.graph
+|-Nodes:			729
+|-Edges:			20412
+
+Size:				90	[4.79221e-05]
+Size:				104	[0.029341]
+
+		Best
+==========================================
+Size:				104
+Time found:			0.029341
+
+writing independent set to data/fs54/kamis-smoke/runs/online_mis-q27-seed0.out ... 
+exit 0

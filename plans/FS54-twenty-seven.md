@@ -123,6 +123,41 @@ cubic field via its residue plane at 27; any use of Moisio's identity to explain
 
 ---
 
+## §M The domain model (modeling pass, 2026-09-16)
+
+**One representation replaces five instruments.** FS-53 searched with a free finder, rotation-order restrictions, line
+quotients, subgroup-periodic sweeps and an antipodal sweep, and treated them as different tools. They are one object: **a
+subgroup `H ≤ Aut(UD(𝔽₂₇,2))`, up to conjugacy, and the `H`-invariant independent sets (or `H`-equivariant colourings,
+with a homomorphism `H → S_k` acting on colours)**. An `H`-invariant independent set is a set of `H`-orbits, none containing
+an edge, pairwise non-adjacent, weighted by orbit size — a weighted independent set problem on the orbit graph. The free
+search is `H = 1`; translations by an `𝔽₃`-subspace `W` are the periodic sweeps; rotation orders are cyclic subgroups of
+`O(2,27)`; antipodal is `z ↦ −z`; Frobenius is `(x, y) ↦ (x³, y³)`. `Aut = 𝔽₃⁶ ⋊ G₀` with `|G₀| = 168` (nauty), and it is
+solvable, so its subgroup classes are enumerable in GAP.
+* **Why this is the intrinsic structure and the tool list was not:** the lattice is ordered (`H' ≤ H` ⟹ every `H`-invariant
+  set is `H'`-invariant), so a refusal at `H'` covers every `H` above it, and **every set with a nontrivial stabiliser has a
+  prime-order symmetry**. So the prime-order classes (orders 2, 3, 7 — `|Aut| = 2³·3⁷·7`) are the complete first layer:
+  if none of them carries an invariant independent set of 122, **every 122-set is asymmetric**, and the free search is the
+  only instrument left.
+* **Where the evidence already sits in this model:** translations of order 9 and above are closed (§D2, exhaustive, best 117);
+  KaMIS, knowing nothing of the group, returns a 117-set invariant under an order-9 translation on seven seeds out of seven.
+
+**D4's symmetry group is the full `Aut`**, Frobenius included. FS-53's certificate used `O(2,27) × swap × S₃`, which gives
+the same optimum but more variables. The size measure for pricing a level is **the number of `G₀`-orbits of independent
+`k`-sets containing 0** — the variables that survive — never the raw matrix dimension.
+
+**D5's antipodal quotient is the order-2 member of the same lattice, with a colour action.** One structural fact settles its
+shape at 27: `z` and `−z` differ by `2z = −z`, so they are adjacent exactly when `z` is a unit vector. Hence in any colouring
+with `c(−z) = τ(c(z))`, **every colour used on the unit circle is moved by `τ`**, and the colour of 0 is fixed. A `τ` fixing
+several colours confines the unit circle to the moved ones.
+
+**D7's kernel field is a concrete computable ring, not a library field.** `ZMod 27` is the wrong object; Mathlib's
+`GaloisField 3 3` is a splitting field and does not compute; `AdjoinRoot` is a quotient the kernel cannot evaluate. The
+representation is `ZMod 3 × ZMod 3 × ZMod 3` (coefficients of `1, t, t²`) with multiplication reduced by `t³ = t + 1`, its
+`CommRing` laws and `IsField` discharged by `decide` over 27 elements — the fact "this is the field with 27 elements" placed
+beside the type as theorems (`card = 27`, `IsField`), not inside it.
+
+---
+
 ## §D The deliverables, in order
 
 ### D1 — the Rust tools take a prime-power field (WO-21 to `ferrous-engineer`, `~/source/descent-engine`)
@@ -153,6 +188,19 @@ every record (owed since FS-53).
 * **P2** the best subspace-periodic set is **108** (α of the 27-vertex quotient = 4); 135 has probability 0.25.
 * **P3** the whole D2 ladder finds `α ≥ 122` — six becomes possible at 27 — with probability **0.55**.
 * **P4** no search finds 146 (probability 0.9): five stays open from below as well as above.
+
+**Scored so far.**
+* **P2 WON exactly.** Exhaustive over every unit-free subspace (orbit-reduced, then every orbit's quotient α re-derived by
+  CaDiCaL: SAT at α, UNSAT at α + 1, 0 mismatches over 36 + 282 + 143 orbits): dimension 4 → **81**; dimension 3 → **108**;
+  dimension 2 → **117**. The unit-free counts 2,100 and 20,216 reproduce FS-53's colouring sweep (`data/fs53/periodic-q27.json`),
+  an independent control. `data/fs54/periodic-alpha-q27.json`, `…-dim2.json`.
+* **P1 LOST.** KaMIS's `redumis` reads **117 on seven seeds of seven** (22–32 s each; it converges and exits, so a budget is
+  spent by reseeding), below the registered band [118, 132]; `online_mis` 104. Every one of the seven sets is invariant under
+  an order-9 translation (seven different subgroups, none an `𝔽₂₇`-line) — the exhaustive periodic ceiling, reached by a
+  finder that knows nothing of the group. Verified from the definition by `tools/fplane_review_verify.py indep` (exit 0) with
+  a planted non-independent control rejected. `data/fs54/kamis-smoke/` (the environment agent's run).
+* **Reading, not a claim:** 117 is a strong attractor. If `α(27) = 117`, then `χ(27) = 7` exactly (`⌈729/117⌉ = 7` and a
+  seven-colouring is known) and 27 leaves the window — but proving `α ≤ 121` is 26 integers below the converged certificate.
 
 ### D3 — structure: closed except the write-up
 §1.1–1.4 are the answer. Remaining: grokking **G59 (characteristic 3)** and the multiplicity table as class numbers

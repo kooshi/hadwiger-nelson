@@ -21,3 +21,6 @@ data/m62/ckpt/
 
 # Python bytecode from tools/
 __pycache__/
+
+# The project's Python virtual environment (rebuild recipe: data/fs54/environment.md)
+/.venv/

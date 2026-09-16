@@ -49,20 +49,30 @@ def gauss_count(n, k, q=3):
     return num // den
 
 
-# the point stabiliser's generators, as maps on 6-vectors (x digits then y digits)
-def rot(u):
+# the point stabiliser's generators, as permutations of the 729 point indices (x digits then y digits)
+def _rot(u):
     a, b = u[:3], u[3:]
-    return lambda v: tuple(fmul(a, v[:3])[i] - fmul(b, v[3:])[i] for i in range(3)) and \
-        tuple((fmul(a, v[:3])[i] - fmul(b, v[3:])[i]) % 3 for i in range(3)) + \
+    return lambda v: tuple((fmul(a, v[:3])[i] - fmul(b, v[3:])[i]) % 3 for i in range(3)) + \
         tuple((fmul(b, v[:3])[i] + fmul(a, v[3:])[i]) % 3 for i in range(3))
 
 
-def cube(x):
+def _cube(x):
     return fmul(fmul(x, x), x)
 
 
-GENS = [rot(u) for u in U] + [lambda v: v[:3] + tuple((-c) % 3 for c in v[3:]),
-                              lambda v: cube(v[:3]) + cube(v[3:])]
+def _index(v):
+    i = 0
+    for d in v:
+        i = 3 * i + d
+    return i
+
+
+POINTS = [tuple(v) for v in itertools.product(range(3), repeat=N)]
+# the rotation group is cyclic of order 28, but all 28 rotations are listed: a generator is not needed when the
+# permutations are precomputed, and listing them all removes any doubt that the group generated is the whole of it
+GEN_MAPS = [_rot(u) for u in U] + [lambda v: v[:3] + tuple((-c) % 3 for c in v[3:]),
+                                   lambda v: _cube(v[:3]) + _cube(v[3:])]
+GENS = [[_index(g(v)) for v in POINTS] for g in GEN_MAPS]
 
 
 def annihilator(W):
@@ -119,7 +129,7 @@ def main():
     ap.add_argument("--dims", type=int, nargs="+", default=[4, 3, 2])
     ap.add_argument("--out", default="data/fs54/periodic-alpha-q27.json")
     args = ap.parse_args()
-    Uset = set(U)
+    Uidx = {_index(u) for u in U}
     record = {"q": 27, "modulus": "t^3-t-1",
               "claim_scope": "exhaustive over every F_3-subspace W of the stated dimension (orbit-reduced under the "
                              "point stabiliser of Aut); the maximum |W|*alpha(quotient) is the largest W-periodic "
@@ -132,17 +142,17 @@ def main():
         seen, reps = set(), []
         usable = 0
         for basis in subs:
-            S = span(basis)
+            S = frozenset(_index(v) for v in span(basis))
             if S in seen:
                 continue
-            if S & Uset:
+            if S & Uidx:
                 seen.add(S)
                 continue
             orbit, frontier = {S}, [S]
             while frontier:
                 T = frontier.pop()
                 for g in GENS:
-                    gT = frozenset(g(v) for v in T)
+                    gT = frozenset(g[i] for i in T)
                     if gT not in orbit:
                         orbit.add(gT)
                         frontier.append(gT)

@@ -1,0 +1,3448 @@
+{
+ "q": 27,
+ "modulus": "t^3-t-1",
+ "claim_scope": "exhaustive over every F_3-subspace W of the stated dimension (orbit-reduced under the point stabiliser of Aut); the maximum |W|*alpha(quotient) is the largest W-periodic independent set, exactly. Says nothing about non-periodic sets.",
+ "by_dim": {
+  "2": {
+   "subspaces": 11011,
+   "unit_free_subspaces": 9408,
+   "orbits": 143,
+   "best_periodic_alpha": 117,
+   "seconds": 8.25,
+   "orbits_detail": [
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 28,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 28,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 20,
+     "alpha_quotient": 13,
+     "periodic_set_size": 117
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 21,
+     "quotient_degree": 20,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 10,
+     "periodic_set_size": 90
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 20,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 21,
+     "quotient_degree": 24,
+     "alpha_quotient": 13,
+     "periodic_set_size": 117
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 14,
+     "quotient_degree": 20,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       0,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 28,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       0
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       0,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       0,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 26,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       0,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       0,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 11,
+     "periodic_set_size": 99
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       2,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       2,
+       0
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 26,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       1,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       2,
+       0,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       0,
+       1,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       2,
+       1,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 21,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 28,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       0
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       1,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 21,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       1
+      ],
+      [
+       0,
+       1,
+       2,
+       2,
+       0,
+       2
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       0,
+       0,
+       2,
+       1
+      ]
+     ],
+     "orbit_size": 84,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       0,
+       2,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 22,
+     "alpha_quotient": 12,
+     "periodic_set_size": 108
+    },
+    {
+     "basis": [
+      [
+       1,
+       0,
+       1,
+       0,
+       1,
+       2
+      ],
+      [
+       0,
+       1,
+       1,
+       1,
+       1,
+       1
+      ]
+     ],
+     "orbit_size": 42,
+     "quotient_degree": 24,
+     "alpha_quotient": 9,
+     "periodic_set_size": 81
+    }
+   ]
+  }
+ }
+}
