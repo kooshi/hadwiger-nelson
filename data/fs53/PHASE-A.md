@@ -235,3 +235,33 @@ statement about the plane rather than about the colouring search.
 
 **The honest prior, recorded before the results:** 309 needed against 258 reached at 43 is a 20 % gap, and
 369 against 265 at 47 is a 39 % gap. Both are long shots and nulls are expected.
+
+## A.2 at 23 and 31, and the one instrument in this phase that decides
+
+**The local searches** (filed as `colour-q23-k6.json`, `colour-q31-k6.json`, `colour-q23-k5.json`):
+
+| record | budget | verdict |
+|---|---|---|
+| `q = 23`, six colours | 1800 s × 3 threads, seed 1 | not found; best 121 of 6,348 edges monochromatic (1.91 %) |
+| `q = 31`, six colours | 1800 s × 3 threads, seed 1 | not found; best 195 of 15,376 (1.27 %) |
+| `q = 23`, five colours | 1800 s × 6 threads, seed 1 | not found; best 229 of 6,348 (3.61 %) |
+
+All three are nulls at their budgets. None refuses anything.
+
+**The equivariant sweep at 23 is a different kind of instrument, and it is the strongest thing in this phase.**
+`tools/fplane.py equivariant --p 23 --k 6` asks, for one rotation of each order about the origin and one colour
+permutation τ per conjugacy class of compatible order, whether a six-colouring exists with `col(r·z) = τ(col z)`
+— and each row is a **SAT decision**, not a search. The sweep is committed as `equivariant-q23-k6.json`:
+
+> **47 rows: 0 satisfiable, 43 refused, 4 undecided** at a budget of 5,000,000 conflicts per row; 921.8 s wall
+> on 2 jobs, quotient formulation.
+
+So **no six-colouring of `UD(𝔽₂₃,2)` is equivariant under any rotation about the origin under any admissible
+colour permutation**, on 43 of the 47 symmetry classes — a refusal, not a null, though **a refusal on the
+solver's word and not the kernel's**, and restricted to rotation-equivariant colourings: the plane may still
+have a six-colouring with no rotational symmetry at all, and nothing here touches that. The four undecided rows
+(rotation orders 2, 2, 3 and 4) are being re-asked at 40,000,000 conflicts, and until they land the sweep's
+honest form is "43 of 47 classes refused, 4 open".
+
+This is what the `α` side could not give: at 23 the search side can only say 87 and never 88, which is evidence
+about a plateau; the equivariant side says *no* for a whole structured family, by decision.
