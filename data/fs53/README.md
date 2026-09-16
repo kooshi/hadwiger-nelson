@@ -289,3 +289,51 @@ It bears on "is any finite Euclidean plane six-chromatic" and on nothing else �
 
 The decisive ask is `k = 5`: a five-colouring would give `χ(UD(𝔽₁₇,2)) = 5` exactly and close the cell. Running at an
 hour's budget; a null there is a null at a budget and closes nothing.
+
+### The re-aimed long runs at 43 and 47, and the budgets they actually spent
+
+*After phase B's certificates made 43 and 47 the only members where one six-colouring settles the milestone,
+four runs were resumed there at seed 3 and stopped by hand when they went flat. Every row's budget below is
+the budget the run **actually spent**, not the one it was given.*
+
+| file | what | budget spent | verdict | claim scope |
+|---|---|---|---|---|
+| `colour-q43-k6.json` | `q = 43`, six colours; resumed from the stage-4 record, conflict count re-derived by independent sweep before it ran | **11,222 s × 8 threads** of a 14,400 s budget, stopped by hand | **not found**; best 1,016 of 40,678 edges monochromatic (2.50 %) | a null at that budget. Six at 43 is neither found nor refused — and at 43 five is refused by certificate, so a six-colouring here would be the first exactly six-chromatic finite Euclidean plane |
+| `colour-q47-k6.json` | `q = 47`, six colours; likewise | **11,222 s × 4 threads** of 14,400 s, stopped by hand | **not found**; best 1,851 of 53,016 (3.49 %) | a null at that budget; same standing as 43 |
+| (no new file) | `q = 43`, independent set targeting 309 | 11,223 s × 4 threads | **no improvement whatever** on the 258 seed | `alpha-q43-ge258.json` stands; its budget is now stage 3's **plus** this |
+| (no new file) | `q = 47`, independent set targeting 369 | 11,222 s × 2 threads | **no improvement** on the 265 seed | `alpha-q47-ge265.json` stands, with the same addition |
+
+**Why they were stopped, from the traces rather than from the impression.** The six-colour search at 43 last
+improved at **905 s** and then held 1,016 for 2 h 52 m — 92 % of the run produced nothing; at 47 it last
+improved at 628 s. The two independent-set searches **never improved at all**: 5,577 and 5,578 trace samples,
+zero movement off their seeds in over three hours. And the colour search at 43 would have had to discover, as
+a by-product, an independent class of 309 while a maximiser pointed at exactly that object, on the same graph,
+at the same time, could not pass 258.
+
+**A trap in these records, and it is the documented one wearing a second face.** `plane-independent` writes
+`halt: "deadline"` into a record whose run was killed at 11,223 s of a 14,400 s budget — the anticipated halt
+reason, not the actual one — while `plane-colour` honestly writes `halt: null` with `partial: true`. The field
+that is correct on both is **`complete`** (`false` on a killed `plane-independent` record). So `halt` alone
+must not be read as evidence that a run spent its budget; read `complete`, or `seconds` against `max_seconds`.
+This is the same shape as the engine's D90 (`partial` and `complete` being one fact with opposite signs) and
+belongs with it.
+
+### The equivariant six-colour sweeps (`tools/fplane.py equivariant`)
+
+| file | plane | budget | verdict | claim scope |
+|---|---|---|---|---|
+| `equivariant-q23-k6.json` | `q = 23` | 5,000,000 conflicts per row; 921.8 s, 2 jobs | **47 rows: 0 sat, 43 unsat, 4 unknown** | no six-colouring of `UD(𝔽₂₃,2)` is equivariant under any rotation about the origin under any admissible colour permutation, on 43 of 47 symmetry classes — **the solver's word**, and about rotation-equivariant colourings only |
+| `equivariant-q43-k6.json` | `q = 43` | same; 801.1 s, 4 jobs | **21 rows: 0 sat, 18 unsat, 3 unknown** | as above |
+| `equivariant-q47-k6.json` | `q = 47` | same; 932.2 s, 4 jobs | **63 rows: 0 sat, 59 unsat, 4 unknown** | as above |
+
+**The eleven undecided rows are the same rows at all three members** — rotation order 2 with τ of cycle type
+(2,2,1,1) and (2,1,1,1,1), order 3 with (3,1,1,1), order 4 with (4,1,1) — the least constrained instances in
+each sweep. **So the refusals are concentrated where a colouring was least likely to live.**
+
+**And more conflicts is not the lever.** The four undecided rows at 23 were re-asked at **40,000,000**
+conflicts, eight times the original: the hardest ran **6,992 s** and returned UNKNOWN again. The documented
+lever for these planes is not budget but **breaking the residual palette symmetry** — measured elsewhere in
+this project at 72× on a comparable instance. `tools/fplane.py` carries `--pin-clique` on its `chi`
+subcommand; whether the *equivariant* encoder breaks the symmetry that survives fixing τ (the centraliser of τ
+in `S_k`) was **not** established here — a grep placed the flag on `chi` and nothing more. That check, and the
+precedence constraint if it is absent, is the continuation.
