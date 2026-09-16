@@ -179,7 +179,7 @@ against its threshold. The instrument did not have to converge for any of them. 
 (α ≤ 748) sits 0.9 % below the ratio bound, and its first polish, from iterate 8,500, gave ⌊N⌋ = 750 — **two integers
 short**.
 
-| `cert-q67-N745.json` (7.6 MB) | 𝔽₆₇ | graphics card B; the producer reached 38,000 iterations over 65 minutes, and the certificate is from its **37,000**-iteration iterate resumed **+2,000** in a fresh solver (404 s) | **CERTIFIED** (`--k 6`): `N = 181942132667989711844836116511294223/2.44140625·10³³ = 745.234975`, so **α(UD(𝔽₆₇,2)) ≤ 745**, and `6 × 745 = 4470 < 4489`: **six is refused at 67**, `χ(UD(𝔽₆₇,2)) ≥ 7` | exact rational; 26,225 pair orbits and 52,450 canonical rows rebuilt from the number 67 alone. `--ldl` green (`ldl-q67-N745.log`). All 17 cuts give ⌊N⌋ = 745 (745.234975–745.294498) |
+| `cert-q67-N745.json` (7.6 MB) | 𝔽₆₇ | graphics card B; the producer reached 38,000 iterations over 65 minutes, and the certificate is from its **37,000**-iteration iterate resumed **+2,000** in a fresh solver (404 s) | **CERTIFIED** (`--k 6`): `N = 181942132667989711844836116511294223/2.44140625·10³³ = 745.234975`, so **α(UD(𝔽₆₇,2)) ≤ 745**, and `6 × 745 = 4470 < 4489`: **six is refused at 67**, `χ(UD(𝔽₆₇,2)) ≥ 7` | exact rational; 26,225 pair orbits and 52,450 canonical rows rebuilt from the number 67 alone. `--ldl` green (`ldl-q67-N745.log`). All 18 cuts give ⌊N⌋ = 745 (745.234975–745.294498) |
 
 **67 was the marginal member and it took the whole instrument.** Its threshold sits 0.9 % below the ratio bound — `α ≤
 748` against 813.78 — where 79's sat 5.4 % below. The first polish, from iterate 8,500, gave 750 (two short); at 33,500
