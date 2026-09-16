@@ -764,10 +764,16 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   they refused only the rows that are refused at 11 and 19 too, where a colouring demonstrably exists — and the effort
   belongs on those half-size instances rather than on a full cube-and-conquer. *Killing test: a plane with an optimal
   colouring but none antipodally invariant under any involution — cheapest at 23 (χ ≤ 8 kernel-checked), 27 (≤ 7),
-  43 (≤ 8), 47 (≤ 10), where a colouring is already in hand and the symmetric question is one SAT call.* **Prior art
-  NOT searched** (WORKFLOW 3a owed): the query is symmetric/equitable colourings of Cayley graphs invariant under
-  inversion, and the general statement "a vertex-transitive graph has an optimal colouring invariant under a given
-  automorphism" is false, so only the involution-up-to-colour-permutation form is at issue.
+  43 (≤ 8), 47 (≤ 10), where a colouring is already in hand and the symmetric question is one SAT call.* **Prior art, searched
+  2026-09-16 (WORKFLOW 3a), under two disciplines and in their words — graph theory (*colouring invariant under a graph
+  automorphism*, *vertex-transitive chromatic number*) and algebraic combinatorics (*Cayley graph colouring invariant
+  under inversion*, *group-invariant colouring*): the discipline's frame is the **Burnside chromatic polynomial of
+  group-invariant graphs**, which counts colourings invariant under a group action, and the abelian-Cayley colouring
+  literature (`[GarciaMarcoKnauer]`, the matrix method of arXiv:2303.06262) works on χ itself and not on invariance.
+  **Nothing found asserting or refuting this statement for any graph family.** Two neighbours that are NOT it: the
+  *distinguishing* chromatic number is the opposite question (colourings preserved by NO non-trivial automorphism), and
+  the known failure of "an optimal colouring invariant under the FULL automorphism group" says nothing about a single
+  involution taken up to a colour permutation. Negative recorded as a finding; the bibliography keys are owed.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each

@@ -66,7 +66,10 @@ def main():
         if "reached max_iters" not in st and not st.startswith("solved"):
             print(f"[scs] solver status {info['status']} — stopping without a value", flush=True); return
         if a.stop_after_chunks and chunks >= a.stop_after_chunks: print("[scs] stopping after the requested chunks (control)", flush=True); return
-    sol = chain.solvers[-1].invert(result, inv[-1]); prob.unpack_results(sol, chain, inv)
+    # cvxpy moved `chain.solvers[-1]` to `chain.solver` (seen 1.9.2, 2026-09-15): the old spelling raised
+    # AttributeError AFTER a converged solve, losing the VALUE line while the checkpoint survived.
+    _solver = getattr(chain, 'solver', None) or chain.solvers[-1]
+    sol = _solver.invert(result, inv[-1]); prob.unpack_results(sol, chain, inv)
     value = float(prob.value); status = result["info"]["status"]
     print(f"[scs] VALUE at p={a.p} (real blocks): {value:.6f}  status {status}  {done_iters} iterations  {time.time()-t0:.0f} s", flush=True)
     if done_iters >= a.max_iters and "inaccurate" in result["info"]["status"].lower():
