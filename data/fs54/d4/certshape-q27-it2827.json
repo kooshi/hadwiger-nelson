@@ -1,0 +1,1 @@
+{"q": 27, "family": "l3", "checkpoint": "data/fs54/d4/ckpt/admm-q27.npz (as it stood at iteration 2827; overwritten since)", "iterations": 2827, "N": 145.4774488154922, "scale": 1.0, "mu_sum": 0.26542963364994127, "mu_support": 12022, "claim_scope": "a float evaluation of the certificate-shaped identity (plans/FS54-D4-pricing.md §3) on a projected ADMM iterate; never a bound"}

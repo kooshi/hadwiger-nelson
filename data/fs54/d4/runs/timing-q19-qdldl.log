@@ -1,0 +1,36 @@
+[tables] q=19: T3 keys for 361x361 in 0.2 s
+[tables] q=19: T4 keys for d=1 in 0.2 s
+[tables] q=19: T4 keys for d=2 in 0.2 s
+[tables] q=19: T4 keys for d=3 in 0.2 s
+[tables] q=19: T4 keys for d=4 in 0.2 s
+[tables] q=19: T4 keys for d=5 in 0.2 s
+[tables] q=19: T4 keys for d=6 in 0.2 s
+[tables] q=19: T4 keys for d=7 in 0.2 s
+[tables] q=19: T4 keys for d=8 in 0.2 s
+[tables] q=19: T4 keys for d=9 in 0.2 s
+[tables] q=19: T4 keys for d=20 in 0.2 s
+[tables] q=19: T4 keys for d=22 in 0.2 s
+[tables] q=19: T4 keys for d=25 in 0.2 s
+[tables] q=19: T4 keys for d=26 in 0.2 s
+[tables] q=19: T4 keys for d=27 in 0.2 s
+[tables] q=19: T4 keys for d=41 in 0.2 s
+[tables] q=19: T4 keys for d=45 in 0.2 s
+[tables] q=19: T4 keys for d=66 in 0.2 s
+[tables] q=19: T4 keys for d=81 in 0.2 s
+[tables] q=19: 36044 live variables (size 2: 17, 3: 555, 4: 35472); 4.0 s total
+[solve] q=19 family=l3 d-classes=[1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 22, 25, 26, 27, 41, 45, 66, 81]: 182 blocks, max 190, PSD rows 1171224, sum m^3 3.122e+08; build 0.2 s
+[solve] SCS: 1207268 rows x 36044 columns, nnz 6104761, A 70.0 MiB
+[solve] NEW checkpoint data/fs54/d4/ckpt/timing-q19-qdldl.npz
+------------------------------------------------------------------
+	       SCS v3.3.1 - Splitting Conic Solver
+	(c) Brendan O'Donoghue, Stanford University, 2012
+------------------------------------------------------------------
+problem:  variables n: 36044, constraints m: 1207268
+cones: 	  l: linear vars: 36044
+	  s: psd vars: 1171224, ssize: 182
+settings: eps_abs: 1.0e-06, eps_rel: 1.0e-06, eps_infeas: 1.0e-07
+	  alpha: 1.50, scale: 1.00e-01, adaptive_scale: 1
+	  max_iters: 20, normalize: 1, rho_x: 1.00e-06
+	  acceleration_lookback: 10, acceleration_interval: 5
+lin-sys:  sparse-direct-amd-qdldl
+	  nnz(A): 6104761, nnz(P): 0

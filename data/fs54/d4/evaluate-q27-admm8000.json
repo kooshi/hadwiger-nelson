@@ -1,0 +1,24 @@
+{
+ "q": 27,
+ "family": "l3",
+ "checkpoint": "data/fs54/d4/ckpt/admm-q27.npz",
+ "iterations": 8000,
+ "N": 143.05471922605528,
+ "scale": 1.0,
+ "mu_sum": 0.1388610829378411,
+ "mu_support": 6368,
+ "sum_m3": 1387966428,
+ "sum_rank_m2": 140685433,
+ "rank_fraction": 0.10136083277080532,
+ "set_size": 117,
+ "identity_difference": 2.7000623958883807e-13,
+ "terms": [
+  25.82779028652441,
+  0.09227754506491403,
+  0.13465139446577254
+ ],
+ "plant_mu_dropped_difference": 0.004209688472332829,
+ "plant_fired": true,
+ "identity_holds": true,
+ "claim_scope": "float readings and controls; never a bound"
+}

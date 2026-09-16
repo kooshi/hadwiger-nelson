@@ -1,0 +1,30 @@
+[tables] q=19: T3 keys for 361x361 in 0.2 s
+[tables] q=19: T4 keys for d=1 in 0.2 s
+[tables] q=19: T4 keys for d=2 in 0.2 s
+[tables] q=19: T4 keys for d=3 in 0.2 s
+[tables] q=19: T4 keys for d=4 in 0.2 s
+[tables] q=19: T4 keys for d=5 in 0.2 s
+[tables] q=19: T4 keys for d=6 in 0.2 s
+[tables] q=19: T4 keys for d=7 in 0.2 s
+[tables] q=19: T4 keys for d=8 in 0.2 s
+[tables] q=19: T4 keys for d=9 in 0.2 s
+[tables] q=19: T4 keys for d=20 in 0.2 s
+[tables] q=19: T4 keys for d=22 in 0.2 s
+[tables] q=19: T4 keys for d=25 in 0.2 s
+[tables] q=19: T4 keys for d=26 in 0.2 s
+[tables] q=19: T4 keys for d=27 in 0.2 s
+[tables] q=19: T4 keys for d=41 in 0.2 s
+[tables] q=19: T4 keys for d=45 in 0.2 s
+[tables] q=19: T4 keys for d=66 in 0.2 s
+[tables] q=19: T4 keys for d=81 in 0.2 s
+[tables] q=19: 36044 live variables (size 2: 17, 3: 555, 4: 35472); 3.9 s total
+[solve] q=19 family=l3 d-classes=[1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 22, 25, 26, 27, 41, 45, 66, 81]: 182 blocks, max 190, PSD rows 1171224, sum m^3 3.122e+08; build 0.2 s
+[solve] SCS: 1207268 rows x 36044 columns, nnz 6104761, A 70.0 MiB
+[admm] G = V^T V: 848216 nonzeros, border 572, 4-set diagonal 35472 (off-diagonal noise 0.0e+00); Schur complement factored in 0.72 s
+[admm] RESUMED from data/fs54/d4/ckpt/admm-q19.npz: 1571 iterations, mu 3.029e+01
+[admm] it 2473: 0.0666 s/it (lin 0.0011, spmv 0.0273, cone 0.0329); upper reading 82.696821 lower reading 84.106880 pinf 5.02e-04 dinf 1.08e-03 gap 8.40e-03 mu 2.33e+01
+[admm] it 3372: 0.0668 s/it (lin 0.0011, spmv 0.0276, cone 0.0328); upper reading 82.262696 lower reading 83.604753 pinf 4.62e-04 dinf 8.41e-04 gap 8.04e-03 mu 1.79e+01
+[admm] it 4116: 0.0807 s/it (lin 0.0012, spmv 0.0374, cone 0.0350); upper reading 81.988283 lower reading 83.235976 pinf 3.79e-04 dinf 7.01e-04 gap 7.51e-03 mu 1.79e+01
+[admm] it 4785: 0.0897 s/it (lin 0.0014, spmv 0.0427, cone 0.0371); upper reading 81.788951 lower reading 82.960843 pinf 3.62e-04 dinf 6.04e-04 gap 7.07e-03 mu 1.38e+01
+[admm] it 5437: 0.0921 s/it (lin 0.0015, spmv 0.0440, cone 0.0378); upper reading 81.611568 lower reading 82.691631 pinf 2.38e-04 dinf 5.22e-04 gap 6.53e-03 mu 1.38e+01
+[admm] it 6090: 0.0920 s/it (lin 0.0015, spmv 0.0436, cone 0.0380); upper reading 81.484191 lower reading 82.461848 pinf 1.90e-04 dinf 4.59e-04 gap 5.93e-03 mu 1.38e+01

@@ -1,0 +1,16 @@
+{
+ "kind": "fs54-d4",
+ "q": 27,
+ "modulus": "t^3-t-1",
+ "family": "triple (Y, M-Y, and FS-50's le_diag rows), variables = Aut-orbits under the FULL group of order 122472 (Frobenius included)",
+ "solver": "SCS 3.3.1 CPU (qdldl), eps 1e-8, chunk 2000",
+ "iterations": 32000,
+ "primal_value": 147.577438,
+ "dual_value": 147.577438,
+ "gap": 1.18e-07,
+ "status": "stopped by pid at 32000 iterations with gap 1.2e-7 (SCS 'solved' at 1e-8 not yet declared)",
+ "compare": "FS-53 arms at 27 (O(2) x swap x S3, no Frobenius): 147.577433 (data/fs53/runs/phaseB/exp-q27.log); data/fs53/sdp-q27.json 147.57790",
+ "control": "the symmetry reduction with the Frobenius reproduces the triple level to 5e-6: PASS",
+ "log": "data/fs54/d4/runs/q27-triple.log",
+ "claim_scope": "a float reading; never a bound"
+}

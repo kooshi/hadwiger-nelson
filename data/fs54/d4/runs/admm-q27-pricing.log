@@ -1,0 +1,41 @@
+[tables] q=27: T3 keys for 729x729 in 2.7 s
+[tables] q=27: T4 keys for d=1 in 3.2 s
+[tables] q=27: T4 keys for d=3 in 3.2 s
+[tables] q=27: T4 keys for d=4 in 3.0 s
+[tables] q=27: T4 keys for d=9 in 3.1 s
+[tables] q=27: T4 keys for d=10 in 3.2 s
+[tables] q=27: T4 keys for d=28 in 3.2 s
+[tables] q=27: T4 keys for d=38 in 3.2 s
+[tables] q=27: T4 keys for d=40 in 3.2 s
+[tables] q=27: T4 keys for d=41 in 3.1 s
+[tables] q=27: T4 keys for d=85 in 2.9 s
+[tables] q=27: 77238 live variables (size 2: 9, 3: 545, 4: 76684); 34.3 s total
+[solve] q=27 family=l3 d-classes=[1, 3, 4, 9, 10, 28, 38, 40, 41, 85]: 102 blocks, max 378, PSD rows 2607180, sum m^3 1.388e+09; build 0.4 s
+[solve] SCS: 2684418 rows x 77238 columns, nnz 14619724, A 167.6 MiB
+[admm] G = V^T V: 2011456 nonzeros, border 554, 4-set diagonal 76684 (off-diagonal noise 2.7e-15); Schur complement factored in 2.06 s
+[admm] NEW checkpoint data/fs54/d4/ckpt/admm-q27.npz
+[admm] it 372: 0.1613 s/it (lin 0.0021, spmv 0.0804, cone 0.0646); upper reading 150.028530 lower reading 152.074121 pinf 4.01e-03 dinf 5.52e-03 gap 6.75e-03 mu 5.12e+01
+[admm] it 721: 0.1724 s/it (lin 0.0020, spmv 0.0908, cone 0.0640); upper reading 148.441518 lower reading 150.572865 pinf 1.42e-03 dinf 2.91e-03 gap 7.10e-03 mu 3.03e+01
+[admm] it 1086: 0.1644 s/it (lin 0.0020, spmv 0.0838, cone 0.0636); upper reading 147.410137 lower reading 149.666944 pinf 8.18e-04 dinf 2.17e-03 gap 7.57e-03 mu 3.03e+01
+[admm] it 1445: 0.1674 s/it (lin 0.0020, spmv 0.0864, cone 0.0638); upper reading 146.795226 lower reading 149.111394 pinf 8.02e-04 dinf 1.82e-03 gap 7.80e-03 mu 2.33e+01
+[admm] it 1797: 0.1707 s/it (lin 0.0020, spmv 0.0899, cone 0.0636); upper reading 146.235397 lower reading 148.555649 pinf 7.88e-04 dinf 1.55e-03 gap 7.84e-03 mu 2.33e+01
+[admm] it 2138: 0.1761 s/it (lin 0.0020, spmv 0.0943, cone 0.0640); upper reading 145.819254 lower reading 148.148040 pinf 6.19e-04 dinf 1.37e-03 gap 7.90e-03 mu 2.33e+01
+[admm] it 2470: 0.1814 s/it (lin 0.0021, spmv 0.0973, cone 0.0656); upper reading 145.501985 lower reading 147.812385 pinf 5.33e-04 dinf 1.24e-03 gap 7.85e-03 mu 2.33e+01
+[admm] it 2827: 0.1684 s/it (lin 0.0020, spmv 0.0863, cone 0.0647); upper reading 145.212019 lower reading 147.505271 pinf 4.42e-04 dinf 1.13e-03 gap 7.81e-03 mu 2.33e+01
+[admm] it 3156: 0.1828 s/it (lin 0.0021, spmv 0.0989, cone 0.0655); upper reading 144.990950 lower reading 147.256859 pinf 4.01e-04 dinf 1.05e-03 gap 7.73e-03 mu 2.33e+01
+[admm] it 3449: 0.2050 s/it (lin 0.0023, spmv 0.1163, cone 0.0679); upper reading 144.793269 lower reading 147.033101 pinf 5.62e-04 dinf 9.80e-04 gap 7.65e-03 mu 1.79e+01
+[admm] it 3800: 0.1710 s/it (lin 0.0020, spmv 0.0892, cone 0.0644); upper reading 144.555379 lower reading 146.781197 pinf 4.52e-04 dinf 9.08e-04 gap 7.61e-03 mu 1.79e+01
+[admm] it 4163: 0.1654 s/it (lin 0.0020, spmv 0.0851, cone 0.0632); upper reading 144.349625 lower reading 146.545736 pinf 4.02e-04 dinf 8.46e-04 gap 7.52e-03 mu 1.79e+01
+[admm] it 4530: 0.1636 s/it (lin 0.0020, spmv 0.0833, cone 0.0633); upper reading 144.165122 lower reading 146.352595 pinf 3.41e-04 dinf 7.96e-04 gap 7.50e-03 mu 1.79e+01
+[admm] it 4894: 0.1652 s/it (lin 0.0019, spmv 0.0789, cone 0.0698); upper reading 144.001775 lower reading 146.180458 pinf 2.90e-04 dinf 7.54e-04 gap 7.48e-03 mu 1.79e+01
+[admm] it 5232: 0.1780 s/it (lin 0.0020, spmv 0.0798, cone 0.0814); upper reading 143.866069 lower reading 146.034592 pinf 3.23e-04 dinf 7.18e-04 gap 7.45e-03 mu 1.38e+01
+[admm] it 5577: 0.1740 s/it (lin 0.0020, spmv 0.0769, cone 0.0809); upper reading 143.705336 lower reading 145.849983 pinf 3.74e-04 dinf 6.80e-04 gap 7.38e-03 mu 1.38e+01
+[admm] it 5923: 0.1738 s/it (lin 0.0020, spmv 0.0767, cone 0.0808); upper reading 143.566628 lower reading 145.702608 pinf 3.44e-04 dinf 6.47e-04 gap 7.36e-03 mu 1.38e+01
+[admm] it 6271: 0.1726 s/it (lin 0.0020, spmv 0.0754, cone 0.0811); upper reading 143.432659 lower reading 145.544632 pinf 3.26e-04 dinf 6.17e-04 gap 7.28e-03 mu 1.38e+01
+[admm] it 6612: 0.1763 s/it (lin 0.0020, spmv 0.0789, cone 0.0810); upper reading 143.314420 lower reading 145.410361 pinf 3.18e-04 dinf 5.91e-04 gap 7.23e-03 mu 1.38e+01
+[admm] it 6962: 0.1718 s/it (lin 0.0020, spmv 0.0748, cone 0.0807); upper reading 143.192971 lower reading 145.281589 pinf 2.22e-04 dinf 5.66e-04 gap 7.22e-03 mu 1.38e+01
+[admm] it 7307: 0.1742 s/it (lin 0.0020, spmv 0.0777, cone 0.0803); upper reading 143.089957 lower reading 145.153486 pinf 2.18e-04 dinf 5.43e-04 gap 7.13e-03 mu 1.38e+01
+[admm] it 7659: 0.1708 s/it (lin 0.0019, spmv 0.0737, cone 0.0810); upper reading 143.002027 lower reading 145.028224 pinf 2.39e-04 dinf 5.22e-04 gap 7.01e-03 mu 1.38e+01
+[admm] it 8000: 0.1725 s/it (lin 0.0020, spmv 0.0751, cone 0.0810); upper reading 142.915858 lower reading 144.903688 pinf 2.26e-04 dinf 5.03e-04 gap 6.88e-03 mu 1.38e+01
+[admm] stopped after the requested iterations (a pricing or control run): NOT converged
+  wrote data/fs54/d4/runs/admm-q27-pricing.json

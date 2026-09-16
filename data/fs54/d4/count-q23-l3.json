@@ -1,0 +1,147 @@
+{
+ "kind": "fs54-d4",
+ "cmd": "count",
+ "q": 23,
+ "modulus": null,
+ "family": "l3",
+ "dclasses": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  25,
+  26,
+  27,
+  29,
+  31,
+  34,
+  50,
+  54,
+  74,
+  78,
+  80
+ ],
+ "border": false,
+ "s0": null,
+ "G0": 48,
+ "aut": 25392,
+ "d_class_reps": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  25,
+  26,
+  27,
+  29,
+  31,
+  34,
+  50,
+  54,
+  74,
+  78,
+  80
+ ],
+ "d_class_sizes": [
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24,
+  24
+ ],
+ "d_class_unit": [
+  1
+ ],
+ "nvar": 99481,
+ "nvar_by_size": {
+  "2": 21,
+  "3": 1001,
+  "4": 98459
+ },
+ "build_seconds": 1.1104254722595215,
+ "blocks": 222,
+ "block_sizes_hist": {
+  "121": 45,
+  "132": 90,
+  "144": 45,
+  "253": 21,
+  "276": 21
+ },
+ "psd_rows": 3069462,
+ "sum_cubes": 1202682558.0,
+ "census": {
+  "2": {
+   "aut_orbits": 21,
+   "sum_aut_over_stab": 133308.0,
+   "direct_count": 133308.0,
+   "complete": true,
+   "g0_orbits_containing_0": 21,
+   "stabiliser_hist": {
+    "4": 21
+   }
+  },
+  "3": {
+   "aut_orbits": 1001,
+   "sum_aut_over_stab": 21329280.0,
+   "direct_count": 21329280.0,
+   "complete": true,
+   "g0_orbits_containing_0": 2741,
+   "stabiliser_hist": {
+    "1": 703,
+    "2": 257,
+    "4": 20,
+    "6": 21
+   }
+  },
+  "4": {
+   "aut_orbits": 98459,
+   "sum_aut_over_stab": 2436700960.0,
+   "direct_count": 2436700960.0,
+   "complete": true,
+   "g0_orbits_containing_0": 386773,
+   "stabiliser_hist": {
+    "1": 93637,
+    "2": 4500,
+    "4": 282,
+    "6": 20,
+    "8": 20
+   }
+  }
+ },
+ "scs_rows": 3168943,
+ "scs_nnz": 16904547,
+ "scs_A_bytes": 203252492,
+ "seconds": 36.96573185920715,
+ "claim_scope": "float readings of a semidefinite relaxation of alpha (GLV L_3 in Schrijver normalisation; derivation plans/FS54-D4-pricing.md); never a bound until an exact rational certificate is checked"
+}

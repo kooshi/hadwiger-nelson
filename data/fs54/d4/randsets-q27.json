@@ -1,0 +1,27 @@
+{
+ "q": 27,
+ "seed": 3,
+ "sets": 3,
+ "all_pass": true,
+ "results": [
+  {
+   "size": 83,
+   "objective": 82.99999999999957,
+   "least_eigenvalue": -2.7607569313645523e-15,
+   "ok": true
+  },
+  {
+   "size": 84,
+   "objective": 84.00000000000045,
+   "least_eigenvalue": -1.1372997231644893e-14,
+   "ok": true
+  },
+  {
+   "size": 78,
+   "objective": 77.99999999999977,
+   "least_eigenvalue": -1.6077717443229012e-16,
+   "ok": true
+  }
+ ],
+ "claim_scope": "float readings and controls; never a bound"
+}

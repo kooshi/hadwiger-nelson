@@ -1,0 +1,84 @@
+{
+ "kind": "fs54-d4",
+ "cmd": "solve",
+ "q": 11,
+ "modulus": null,
+ "family": "triple",
+ "dclasses": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  12,
+  14,
+  15,
+  24,
+  27
+ ],
+ "border": false,
+ "s0": null,
+ "G0": 24,
+ "aut": 2904,
+ "d_class_reps": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  12,
+  14,
+  15,
+  24,
+  27
+ ],
+ "d_class_sizes": [
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12,
+  12
+ ],
+ "d_class_unit": [
+  1
+ ],
+ "nvar": 1841,
+ "nvar_by_size": {
+  "2": 9,
+  "3": 105,
+  "4": 1727
+ },
+ "build_seconds": 0.0024929046630859375,
+ "blocks": 8,
+ "block_sizes_hist": {
+  "25": 2,
+  "30": 4,
+  "36": 2
+ },
+ "psd_rows": 3842,
+ "sum_cubes": 232562.0,
+ "scs_rows": 5683,
+ "scs_nnz": 15887,
+ "scs_A_bytes": 198012,
+ "result": {
+  "converged": true,
+  "iterations": 1475,
+  "primal": 29.176798821072218,
+  "dual": 29.17679881681015,
+  "status": "solved",
+  "res_pri": 6.303396677385762e-09,
+  "res_dual": 6.680005090041868e-08,
+  "gap": 4.262066480398379e-09
+ },
+ "eps": 1e-08,
+ "chunk": 5000,
+ "linear_solver": "auto",
+ "ckpt": "data/fs54/d4/ckpt/q11-triple.npz",
+ "seconds": 2.141460418701172,
+ "claim_scope": "float readings of a semidefinite relaxation of alpha (GLV L_3 in Schrijver normalisation; derivation plans/FS54-D4-pricing.md); never a bound until an exact rational certificate is checked"
+}

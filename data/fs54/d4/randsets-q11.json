@@ -1,0 +1,81 @@
+{
+ "q": 11,
+ "seed": 1,
+ "sets": 12,
+ "all_pass": true,
+ "results": [
+  {
+   "size": 22,
+   "objective": 21.99999999999999,
+   "least_eigenvalue": -8.921517037397282e-16,
+   "ok": true
+  },
+  {
+   "size": 24,
+   "objective": 23.999999999999996,
+   "least_eigenvalue": -6.494865956419493e-16,
+   "ok": true
+  },
+  {
+   "size": 21,
+   "objective": 21.0,
+   "least_eigenvalue": -6.873515580784247e-16,
+   "ok": true
+  },
+  {
+   "size": 23,
+   "objective": 23.000000000000007,
+   "least_eigenvalue": -8.5060517597537495e-16,
+   "ok": true
+  },
+  {
+   "size": 22,
+   "objective": 21.99999999999999,
+   "least_eigenvalue": -3.885505966837063e-16,
+   "ok": true
+  },
+  {
+   "size": 21,
+   "objective": 21.0,
+   "least_eigenvalue": -6.411235687109251e-16,
+   "ok": true
+  },
+  {
+   "size": 22,
+   "objective": 21.99999999999999,
+   "least_eigenvalue": -6.988468188141954e-16,
+   "ok": true
+  },
+  {
+   "size": 20,
+   "objective": 20.0,
+   "least_eigenvalue": -6.993786191656106e-16,
+   "ok": true
+  },
+  {
+   "size": 22,
+   "objective": 21.99999999999999,
+   "least_eigenvalue": -5.706647109953449e-16,
+   "ok": true
+  },
+  {
+   "size": 22,
+   "objective": 21.99999999999999,
+   "least_eigenvalue": -4.3540965942291385e-16,
+   "ok": true
+  },
+  {
+   "size": 21,
+   "objective": 21.0,
+   "least_eigenvalue": -8.063820636774919e-16,
+   "ok": true
+  },
+  {
+   "size": 21,
+   "objective": 21.0,
+   "least_eigenvalue": -7.871831665084224e-16,
+   "ok": true
+  }
+ ],
+ "claim_scope": "float readings and controls; never a bound"
+}

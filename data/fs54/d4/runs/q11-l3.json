@@ -1,0 +1,13 @@
+{
+ "kind": "fs54-d4",
+ "q": 11,
+ "family": "l3",
+ "solver": "SCS 3.3.1, CPU qdldl (auto), eps 1e-8, chunk 5000",
+ "iterations": 100000,
+ "primal_value": 28.07115545808567,
+ "dual_value": 28.071154288767005,
+ "status": "stopped by pid at 100000 iterations; value stable to 1e-3 since 25000 (28.07220 primal at 25000, 28.07770 at 10000); SCS 'solved' at 1e-8 not reached",
+ "reading_from": "data/fs54/d4/ckpt/q11-l3.npz via the peek script (objective and b.y recomputed from the iterate)",
+ "control": "true alpha 28 <= 28.0712 <= triple level 29.1768: PASS",
+ "claim_scope": "a float reading of GLV L_3 in Schrijver normalisation; never a bound"
+}

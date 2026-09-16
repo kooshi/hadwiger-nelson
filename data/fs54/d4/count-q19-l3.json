@@ -1,0 +1,133 @@
+{
+ "kind": "fs54-d4",
+ "cmd": "count",
+ "q": 19,
+ "modulus": null,
+ "family": "l3",
+ "dclasses": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  20,
+  22,
+  25,
+  26,
+  27,
+  41,
+  45,
+  66,
+  81
+ ],
+ "border": false,
+ "s0": null,
+ "G0": 40,
+ "aut": 14440,
+ "d_class_reps": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  20,
+  22,
+  25,
+  26,
+  27,
+  41,
+  45,
+  66,
+  81
+ ],
+ "d_class_sizes": [
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20
+ ],
+ "d_class_unit": [
+  1
+ ],
+ "nvar": 36044,
+ "nvar_by_size": {
+  "2": 17,
+  "3": 555,
+  "4": 35472
+ },
+ "build_seconds": 0.3800795078277588,
+ "blocks": 182,
+ "block_sizes_hist": {
+  "81": 37,
+  "90": 74,
+  "100": 37,
+  "171": 17,
+  "190": 17
+ },
+ "psd_rows": 1171224,
+ "sum_cubes": 312215904.0,
+ "census": {
+  "2": {
+   "aut_orbits": 17,
+   "sum_aut_over_stab": 61370.0,
+   "direct_count": 61370.0,
+   "complete": true,
+   "g0_orbits_containing_0": 17,
+   "stabiliser_hist": {
+    "4": 17
+   }
+  },
+  "3": {
+   "aut_orbits": 555,
+   "sum_aut_over_stab": 6548540.0,
+   "direct_count": 6548540.0,
+   "complete": true,
+   "g0_orbits_containing_0": 1505,
+   "stabiliser_hist": {
+    "1": 360,
+    "2": 179,
+    "4": 16
+   }
+  },
+  "4": {
+   "aut_orbits": 35472,
+   "sum_aut_over_stab": 493266790.0,
+   "direct_count": 493266790.0,
+   "complete": true,
+   "g0_orbits_containing_0": 138154,
+   "stabiliser_hist": {
+    "1": 32948,
+    "2": 2331,
+    "4": 177,
+    "8": 16
+   }
+  }
+ },
+ "scs_rows": 1207268,
+ "scs_nnz": 6104761,
+ "scs_A_bytes": 73401312,
+ "seconds": 14.20262598991394,
+ "claim_scope": "float readings of a semidefinite relaxation of alpha (GLV L_3 in Schrijver normalisation; derivation plans/FS54-D4-pricing.md); never a bound until an exact rational certificate is checked"
+}
