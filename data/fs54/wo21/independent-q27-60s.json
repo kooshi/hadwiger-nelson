@@ -1,0 +1,635 @@
+{
+  "kind": "plane-independent",
+  "p": 3,
+  "field": {
+    "q": 27,
+    "p": 3,
+    "f": 3,
+    "modulus": "t^3-t-1"
+  },
+  "vertex_index": "v = X*27 + Y with 0 <= X,Y < 27, where X and Y number the elements x and y of F_27 = F_3[t]/(t^3-t-1): the element c0 + c1*t + c2*t^2 is numbered c0*9 + c1*3 + c2, so the constant coefficient is the most significant base-3 digit",
+  "edge_rule": "v ~ w iff (x-x')^2 + (y-y')^2 = 1 computed in F_27 = F_3[t]/(t^3-t-1), not in the integers mod 27",
+  "n": 729,
+  "degree": 28,
+  "edges": 10206,
+  "edges_sha256": "ff23c2bba87f23962f1d63dab92575a60cd54a7f84a2adbd8460fd46dbc1e9da",
+  "edges_sha256_rule": "sha256 over u.to_le_bytes() ++ v.to_le_bytes() (each vertex id a 32-bit little-endian integer) for every edge u < v, in ascending (u, v) order",
+  "edges_sha256_repr": "b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d",
+  "edges_sha256_repr_rule": "sha256 of the UTF-8 text of Python's repr(sorted({(min(u,v), max(u,v))})) over the edges, \"[(u, v), (u, v), ...]\" -- the convention the campaign's Python tools publish as edges_sha256",
+  "lambda_min": -8.000000000000004,
+  "ratio_bound_alpha": 162.00000000000009,
+  "k": null,
+  "target": null,
+  "target_note": null,
+  "symmetry": null,
+  "verdict": "best",
+  "halt": "deadline",
+  "verdict_note": "The largest independent set found and verified has 117 points — 72.2% of the ratio bound 162.00. This is a local search and a plateau is a statement about the search, not about the graph: alpha may be larger, and this tool can never show it is smaller.",
+  "claim_scope": "a verified independent set of 117 points: alpha(UD(F_27, 2)) >= 117, a lower bound only — never an upper bound on alpha, and no bound on chi",
+  "best_size": 117,
+  "best_size_over_target": null,
+  "best_size_over_ratio_bound": 0.7222222222222219,
+  "best_set": [
+    9,
+    10,
+    11,
+    51,
+    52,
+    53,
+    57,
+    58,
+    59,
+    81,
+    86,
+    88,
+    102,
+    103,
+    109,
+    110,
+    117,
+    122,
+    124,
+    150,
+    152,
+    153,
+    158,
+    160,
+    168,
+    170,
+    180,
+    185,
+    187,
+    189,
+    194,
+    196,
+    201,
+    202,
+    225,
+    230,
+    232,
+    235,
+    236,
+    258,
+    259,
+    260,
+    291,
+    292,
+    293,
+    297,
+    298,
+    299,
+    326,
+    328,
+    330,
+    342,
+    343,
+    358,
+    359,
+    362,
+    364,
+    366,
+    390,
+    392,
+    398,
+    400,
+    402,
+    408,
+    410,
+    425,
+    427,
+    429,
+    434,
+    436,
+    438,
+    441,
+    442,
+    470,
+    472,
+    474,
+    484,
+    485,
+    498,
+    499,
+    500,
+    531,
+    532,
+    533,
+    546,
+    547,
+    548,
+    568,
+    570,
+    575,
+    591,
+    592,
+    598,
+    599,
+    604,
+    606,
+    611,
+    630,
+    632,
+    640,
+    642,
+    647,
+    648,
+    650,
+    667,
+    669,
+    674,
+    676,
+    678,
+    683,
+    690,
+    691,
+    712,
+    714,
+    719,
+    724,
+    725
+  ],
+  "best_quotient_set": null,
+  "verified_independent": true,
+  "rejected_set": null,
+  "violation": null,
+  "produced_at": "2026-09-16T14:38:38+00:00",
+  "machine": "local",
+  "complete": true,
+  "seed": 1,
+  "threads": 8,
+  "max_seconds": 60.0,
+  "cycles_total": 268134944,
+  "restarts_total": 1332,
+  "seconds": 60.007287582,
+  "cycles_per_sec": 4468373.006088526,
+  "pops_total": 1721741312,
+  "pops_per_cycle": 6.421174675390314,
+  "rerun": "plane-independent --q 27 --modulus t^3-t-1 --threads 8 --seed 1 --max-seconds 60 --force-tightness 3 --restart-after 200000 --progress-seconds 2",
+  "trace": [
+    {
+      "seconds": 2.0003215,
+      "cycles": 9058075,
+      "best_size": 114,
+      "per_thread": [
+        113,
+        114,
+        112,
+        113,
+        112,
+        112,
+        111,
+        113
+      ]
+    },
+    {
+      "seconds": 4.005419569,
+      "cycles": 18012025,
+      "best_size": 114,
+      "per_thread": [
+        113,
+        114,
+        112,
+        113,
+        113,
+        112,
+        113,
+        113
+      ]
+    },
+    {
+      "seconds": 6.011510134,
+      "cycles": 27161160,
+      "best_size": 114,
+      "per_thread": [
+        113,
+        114,
+        112,
+        113,
+        113,
+        113,
+        113,
+        113
+      ]
+    },
+    {
+      "seconds": 8.01668552,
+      "cycles": 36142715,
+      "best_size": 114,
+      "per_thread": [
+        113,
+        114,
+        114,
+        113,
+        113,
+        113,
+        113,
+        113
+      ]
+    },
+    {
+      "seconds": 10.022492632,
+      "cycles": 45017919,
+      "best_size": 117,
+      "per_thread": [
+        113,
+        114,
+        114,
+        113,
+        113,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 12.051709338,
+      "cycles": 54534068,
+      "best_size": 117,
+      "per_thread": [
+        113,
+        114,
+        114,
+        113,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 14.063375276,
+      "cycles": 63951177,
+      "best_size": 117,
+      "per_thread": [
+        113,
+        114,
+        114,
+        113,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 16.069510443,
+      "cycles": 73121463,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        113,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 18.075465098,
+      "cycles": 82366257,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        113,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 20.080621122,
+      "cycles": 91574605,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        113,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 22.086933592,
+      "cycles": 100916903,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 24.091962533,
+      "cycles": 110206995,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 26.097979618,
+      "cycles": 119439919,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        113,
+        114
+      ]
+    },
+    {
+      "seconds": 28.102993703,
+      "cycles": 128664270,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 30.108919164,
+      "cycles": 137943000,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 32.113987943,
+      "cycles": 147282888,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 34.119000509,
+      "cycles": 156485945,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 36.124071412,
+      "cycles": 165632402,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 38.129121322,
+      "cycles": 174859721,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 40.134271129,
+      "cycles": 184140581,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 42.139267862,
+      "cycles": 193341466,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 44.147287117,
+      "cycles": 201265349,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 46.170005753,
+      "cycles": 209180309,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 48.175764194,
+      "cycles": 217033845,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 50.180826633,
+      "cycles": 225120278,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 52.185775989,
+      "cycles": 233872639,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        114,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 54.19087734,
+      "cycles": 242548863,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        117,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 56.196082007,
+      "cycles": 251302591,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        117,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 58.201108989,
+      "cycles": 260003978,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        117,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 60.000060524,
+      "cycles": 268102169,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        117,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    },
+    {
+      "seconds": 60.007287582,
+      "cycles": 268134944,
+      "best_size": 117,
+      "per_thread": [
+        114,
+        114,
+        117,
+        114,
+        114,
+        117,
+        114,
+        114
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ checks a claimed colouring or a claimed independent set FROM THE DEFINITION.
   verify_colouring.py window                    # recompute data/fs53/window.md's exact columns from q alone
   verify_colouring.py colour --q 27 --modulus t^3-t-1 --json <record> --path a.b.c [--k K]
   verify_colouring.py indep  --q 23 --json <record> --path set
-  verify_colouring.py self-test          # plants three faults and watches each fire
+  verify_colouring.py self-test          # plants five faults and watches each fire
 
 Vertex numbering (the repository's convention, reimplemented here, never imported): a point is (x, y) with x, y in
 F_q; over F_p the index is x*p + y; over F_{p^e} with basis 1, t, ..., t^{e-1} each coordinate is its e
@@ -40,6 +40,9 @@ def parse_modulus(s, p, e):
         coef[d] = (coef.get(d, 0) + (-c if neg else c)) % p
     if coef.get(e, 0) % p != 1:
         sys.exit(f"REFUSED: the modulus must be monic of degree {e}: {s}")
+    high = sorted(d for d, c in coef.items() if d > e and c % p)
+    if high:   # a term above the degree used to be dropped in silence (found by the WO-21 engineer, 2026-09-16)
+        sys.exit(f"REFUSED: the modulus has a term of degree {high[-1]} above the field degree {e}: {s}")
     return [(-coef.get(i, 0)) % p for i in range(e)]   # t^e = sum red[i] t^i
 
 
@@ -66,6 +69,13 @@ class Field:
         # an element is its coefficient tuple (c0, c1, ..., c_{e-1}) against 1, t, ..., t^{e-1}
         self.els = [tuple(v) for v in itertools.product(range(p), repeat=e)]
         self.one = tuple([1] + [0] * (e - 1))
+        if e > 1:   # a reducible modulus gives a ring with zero divisors, not a field: refuse it, naming the pair
+            zero = tuple([0] * e)
+            for u in self.els[1:]:
+                for v in self.els[1:]:
+                    if self.mul(u, v) == zero:
+                        sys.exit(f"REFUSED: the modulus {modulus} is reducible over F_{p}: the coefficient tuples "
+                                 f"{u} * {v} = 0, so F_{p}[t]/({modulus}) is not a field")
 
     def add(self, u, v):
         return tuple((a + b) % self.p for a, b in zip(u, v))
@@ -290,17 +300,15 @@ def self_test():
     print(f"[plant A] greedy colouring proper ({bad0} bad); after recolouring vertex {w} to its neighbour's "
           f"colour: {bad1} bad — the check {'FIRED' if fired else 'DID NOT FIRE'}")
     ok &= fired
-    # plant B: the wrong modulus must give a different graph (the Z/27 trap has its own shape)
-    try:
-        F2 = Field(27, "t^3-t-2")
-        _, n2, nbr2 = plane(F2)
-        h2, _hr2, ne2 = edge_hash(n2, nbr2)
-        differs = (h2 != h)
-        print(f"[plant B] the reducible modulus t^3-t-2 gives {ne2} edges, sha {h2[:16]}… — "
-              f"{'DIFFERS as it must' if differs else 'IDENTICAL: FAIL'}")
-        ok &= differs
-    except Exception as e:                                  # a reducible modulus need not be a field
-        print(f"[plant B] the reducible modulus t^3-t-2 raised {type(e).__name__}: acceptable (not a field)")
+    # plant B: a DIFFERENT irreducible modulus is the same field with the vertices renumbered, so the digest must differ.
+    # (t^3-t-2 is t^3-t+1 over F_3 and has no root, so it is irreducible; this plant was once mislabelled "reducible".)
+    F2 = Field(27, "t^3-t-2")
+    _, n2, nbr2 = plane(F2)
+    h2, _hr2, ne2 = edge_hash(n2, nbr2)
+    differs = (h2 != h and ne2 == ne)
+    print(f"[plant B] the other irreducible modulus t^3-t-2: {ne2} edges (the same graph up to renumbering), sha "
+          f"{h2[:16]}… — {'DIFFERS as it must' if differs else 'FAIL'}")
+    ok &= differs
     # control: the descent-engine's own digest at q = 23, reproduced from its convention
     F23 = Field(23)
     _c23, n23, nbr23 = plane(F23)
@@ -318,6 +326,12 @@ def self_test():
     print(f"[plant C] q = 27 with no --modulus: exit {r.returncode}, "
           f"{'REFUSED as it must' if fired else 'ACCEPTED: FAIL'}")
     ok &= fired
+    # plant D: a reducible modulus (t^3-t = t(t-1)(t+1)) must be refused; plant E: a term above the degree must be refused
+    for tag, mod in (("D", "t^3-t"), ("E", "t^4+t^3-t-1")):
+        r = subprocess.run([sys.executable, __file__, "graph", "--q", "27", "--modulus", mod], capture_output=True, text=True)
+        fired = r.returncode != 0 and "REFUSED" in (r.stdout + r.stderr)
+        print(f"[plant {tag}] --modulus {mod}: exit {r.returncode}, {'REFUSED as it must' if fired else 'ACCEPTED: FAIL'}")
+        ok &= fired
     print("SELF-TEST", "GREEN" if ok else "RED")
     sys.exit(0 if ok else 1)
 
