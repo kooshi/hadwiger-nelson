@@ -1,0 +1,47 @@
+[blocks] p = 31: 961 points, 30 circles, 28861 rotation orbits, 2741 pair orbits, 256 killed, 5482 canonical constraints (0.1 s)
+[blocks] the real blocks: 17 of sizes 30-31 (against 122 embedded in the Hermitian form), 505022 map entries, 0.3 s
+[blocks] SCS data: A (21354, 2741) nnz 381030; 34 positive semidefinite blocks of size <= 31; built in 2 s
+[blocks] resumed from /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/arm31.npz: 144500 iterations already done
+[blocks] chunk 1: +2000 it (146500 total) in 13 s; pobj -201.665598 dobj -201.665477 res_pri 9.05e-02 res_dual 5.72e-02 gap 1.21e-04 -- solved (inaccurate - reached max_iters)
+[blocks] the iteration cap 146500 was reached without convergence; the dual is used as it stands (sound, possibly weak)
+/home/kooshi/source/lean-dir/tools/fplane_cert_round.py:586: UserWarning: Solution may be inaccurate. Try another solver, adjusting the solver settings, or solve with verbose=True for more information.
+  prob.unpack_results(result, chain, inv)
+[blocks] the float bound: 201.665633 (optimal_inaccurate, SCS, chunked, real blocks) in 16.1 s
+[blocks]   dual signs (+1,+1): N = 201.823129  (0 s)
+[blocks]   dual signs (+1,-1): N = 1916.083013  (0 s)
+[blocks]   dual signs (-1,+1): N = 2063.899534  (0 s)
+[blocks]   dual signs (-1,-1): N = 929.000000  (0 s)
+[blocks] taking the dual signs (+1,+1)
+[blocks]   cut 1e-09, gram denominator 100000000, weight denominator 10000000000: N = 201.823129  (from the checkpoint)  <- best so far
+[blocks]   cut 1e-09, gram denominator 100000000, weight denominator 1000000000000: N = 201.823129  (0 s)
+[blocks]   cut 1e-09, gram denominator 10000000000, weight denominator 10000000000: N = 201.823084  (0 s)  <- best so far
+[blocks]   cut 1e-09, gram denominator 10000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-09, gram denominator 1000000000000, weight denominator 10000000000: N = 201.823084  (0 s)  <- best so far
+[blocks]   cut 1e-09, gram denominator 1000000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-08, gram denominator 100000000, weight denominator 10000000000: N = 201.823129  (0 s)
+[blocks]   cut 1e-08, gram denominator 100000000, weight denominator 1000000000000: N = 201.823129  (0 s)
+[blocks]   cut 1e-08, gram denominator 10000000000, weight denominator 10000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-08, gram denominator 10000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-08, gram denominator 1000000000000, weight denominator 10000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-08, gram denominator 1000000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-06, gram denominator 100000000, weight denominator 10000000000: N = 201.823129  (0 s)
+[blocks]   cut 1e-06, gram denominator 100000000, weight denominator 1000000000000: N = 201.823129  (0 s)
+[blocks]   cut 1e-06, gram denominator 10000000000, weight denominator 10000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-06, gram denominator 10000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-06, gram denominator 1000000000000, weight denominator 10000000000: N = 201.823084  (0 s)
+[blocks]   cut 1e-06, gram denominator 1000000000000, weight denominator 1000000000000: N = 201.823084  (0 s)
+[blocks] best exact N = 1261394274068929461488146128816236345949268281/6250000000000000000000000000000000000000000 = 201.823084; alpha(UD(F_31, 2)) <= 201
+[blocks] wrote /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q31-arm-144500.json (0.88 MB)
+[blocks] handing it to the checker (a separate program, standard library only):
+[cert] file: /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q31-arm-144500.json
+[cert] kind 'fplane-alpha-certificate', p = 31, N = '1261394274068929461488146128816236345949268281/6250000000000000000000000000000000000000000', alpha_bound = 201
+[cert] the derivation it points at: plans/FS50-certificate-soundness.md
+check 1/4  the file's edges_sha256 abc8e86193bb6a8f... is the hash of the plane rebuilt here (p = 31), so this is the same graph as the project's other records of it
+check 1/4  group and orbits rebuilt from p = 31 alone: 961 points, 2741 orbits of ordered pairs under O(2,31) x swap x S3, 256 killed by a unit vector; the file's 2741 representatives agree, and the canonical constraint list (5482 rows: 1 g0, 256 killed, 2741 nonneg, 2484 le_diag) agrees row for row
+check 2/4  multipliers: 5482 rationals, the 5225 attached to inequalities are all >= 0, the 257 attached to equalities are free
+check 3/4  positive semidefiniteness:
+           Z1: 17 circulant block(s) over 61 slots (30 cosine, 30 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 13x61 (Z = B^T B); block 1: a rational Gram factor of shape 13x61 (Z = B^T B); ... (15 more, each checked the same way)
+           Z2: 17 circulant block(s) over 61 slots (30 cosine, 30 sine, 1 origin), weights over the denominator 10000000000; block 0: a rational Gram factor of shape 2x61 (Z = B^T B); block 1: a rational Gram factor of shape 3x61 (Z = B^T B); ... (15 more, each checked the same way)
+check 4/4  the affine identity N - tr Y(y) = <Z1,Y(y)> + <Z2,M(y)-Y(y)> + sum lambda_i c_i(y) + sum nu_j e_j(y): all 2741 orbit coefficients and the constant term agree exactly
+CERTIFIED: every independent set of UD(F_31, 2) has at most 1261394274068929461488146128816236345949268281/6250000000000000000000000000000000000000000 points, hence at most 201 (a cardinality is an integer) -- exact arithmetic, no solver trusted
+hence UD(F_31, 2) is not 4-colourable (4 * 201 = 804 < 961); kernel consumer: add_one_le_chromaticNumber_of_indepNum_le

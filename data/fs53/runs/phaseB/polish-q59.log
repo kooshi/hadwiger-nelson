@@ -1,0 +1,2 @@
+19:07 q=59 polished from iterate 500 (+500 fresh): pobj -602.510021 dobj -602.508290 res_pri 1.39e+00 res_dual 2.77e+00; exact N = 624.950030; 222 s; exit 0; file /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q59-polish-500.json
+19:31 q=59 polished from iterate 19000 (+500 fresh): pobj -590.456401 dobj -590.455542 res_pri 9.96e-01 res_dual 3.90e-01; exact N = 593.916328; 328 s; exit 0; file /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q59-polish-19000.json

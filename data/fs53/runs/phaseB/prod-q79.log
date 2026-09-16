@@ -1,0 +1,16 @@
+[blocks] p = 79: 6241 points, 78 circles, 486877 rotation orbits, 42693 pair orbits, 1600 killed, 85386 canonical constraints (1.0 s)
+[blocks] the real blocks: 41 of sizes 78-79 (against 314 embedded in the Hermitian form), 20205278 map entries, 8.5 s
+[blocks] SCS data: A (338186, 42693) nnz 15186567; 82 positive semidefinite blocks of size <= 79; built in 175 s
+[blocks] chunk 1: +500 it (500 total) in 117 s; pobj -1020.145218 dobj -1020.143894 res_pri 3.03e+00 res_dual 1.18e+01 gap 1.32e-03 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 2: +500 it (1000 total) in 115 s; pobj -1013.915451 dobj -1013.915177 res_pri 2.28e+00 res_dual 4.99e-01 gap 2.74e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 3: +500 it (1500 total) in 100 s; pobj -1013.164284 dobj -1013.164043 res_pri 1.73e+00 res_dual 1.06e-01 gap 2.41e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 4: +500 it (2000 total) in 96 s; pobj -1012.926876 dobj -1012.926641 res_pri 1.73e+00 res_dual 7.79e-02 gap 2.35e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 5: +500 it (2500 total) in 97 s; pobj -1012.738053 dobj -1012.737823 res_pri 1.76e+00 res_dual 6.69e-02 gap 2.30e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 6: +500 it (3000 total) in 97 s; pobj -1012.568772 dobj -1012.568547 res_pri 1.63e+00 res_dual 6.06e-02 gap 2.25e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 7: +500 it (3500 total) in 104 s; pobj -1012.414813 dobj -1012.414592 res_pri 1.58e+00 res_dual 5.65e-02 gap 2.21e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 8: +500 it (4000 total) in 121 s; pobj -1012.271633 dobj -1012.271417 res_pri 1.44e+00 res_dual 5.42e-02 gap 2.16e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 9: +500 it (4500 total) in 99 s; pobj -1012.138050 dobj -1012.137837 res_pri 1.39e+00 res_dual 5.24e-02 gap 2.13e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 10: +500 it (5000 total) in 97 s; pobj -1012.010985 dobj -1012.010774 res_pri 1.31e+00 res_dual 5.10e-02 gap 2.12e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 11: +500 it (5500 total) in 97 s; pobj -1011.890460 dobj -1011.890253 res_pri 1.23e+00 res_dual 4.97e-02 gap 2.07e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 12: +500 it (6000 total) in 95 s; pobj -1011.775414 dobj -1011.775212 res_pri 1.18e+00 res_dual 4.87e-02 gap 2.02e-04 -- solved (inaccurate - reached max_iters)
+[blocks] chunk 13: +500 it (6500 total) in 96 s; pobj -1011.664036 dobj -1011.663835 res_pri 1.15e+00 res_dual 4.77e-02 gap 2.01e-04 -- solved (inaccurate - reached max_iters)

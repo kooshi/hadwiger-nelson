@@ -1,0 +1,8 @@
+[exp] p = 11: 10 circles, 151 profile classes, 36 killed; setup 0.0 s
+[exp] q=11 arm=all  le_diag rows=    257 value=29.176799 (optimal, 1325 iters, 0.4 s)
+[exp] q=11 arm=one  le_diag rows=    105 value=29.176799 (optimal, 1350 iters, 0.3 s)
+[exp] q=11 arm=none le_diag rows=      0 value=29.176799 (optimal, 1800 iters, 0.4 s)
+[exp] q=11 arm=nokilled le_diag rows=    257 value=121.000000 (optimal, 75 iters, 0.1 s)
+[exp] q=11 TIGHTER(all) 29.176799  vs  CERTIFIED-SHAPE(one) 29.176799  difference -8.472e-08
+[exp] q=11 REACHABILITY CONTROL (the killed-orbit equalities dropped instead) 121.000000: FIRED (rose by 91.823201) - the instrument DOES detect a constraint class being dropped
+[exp] q=11 PLANT (no le_diag at all) 29.176799: DID NOT FIRE - the verdict below is EMPTY

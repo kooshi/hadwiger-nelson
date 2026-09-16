@@ -1,0 +1,8 @@
+[exp] q = 27 = 3^3 and the modulus t^3-t-1: 26 circles, 1847 profile classes, 196 killed; setup 0.1 s
+[exp] q=27 arm=all  le_diag rows=   4513 value=147.577433 (optimal, 43050 iters, 191.8 s)
+[exp] q=27 arm=one  le_diag rows=   1625 value=147.577433 (optimal, 69050 iters, 331.9 s)
+[exp] q=27 arm=none le_diag rows=      0 value=147.577433 (optimal, 13500 iters, 62.1 s)
+[exp] q=27 arm=nokilled le_diag rows=   4513 value=728.999996 (optimal, 100 iters, 3.5 s)
+[exp] q=27 TIGHTER(all) 147.577433  vs  CERTIFIED-SHAPE(one) 147.577433  difference +4.787e-07
+[exp] q=27 REACHABILITY CONTROL (the killed-orbit equalities dropped instead) 728.999996: FIRED (rose by 581.422563) - the instrument DOES detect a constraint class being dropped
+[exp] q=27 PLANT (no le_diag at all) 147.577433: DID NOT FIRE - the verdict below is EMPTY

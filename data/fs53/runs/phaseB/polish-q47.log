@@ -1,0 +1,4 @@
+18:49 q=47 producer gone; polish loop ends
+18:51 q=47 polished from iterate 2000 (+500 fresh): pobj -396.639025 dobj -396.635533 res_pri 8.58e-01 res_dual 1.67e+00; exact N = 402.806482; 94 s; exit 0; file /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q47-polish-2000.json
+19:23 q=47 polished from iterate 67000 (+500 fresh): pobj -378.784756 dobj -378.783909 res_pri 2.76e-01 res_dual 2.09e-01; exact N = 379.306748; 96 s; exit 0; file /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q47-polish-67000.json
+19:28 q=47 polished from iterate 75500 (+500 fresh): pobj -377.424166 dobj -377.423994 res_pri 2.83e-01 res_dual 7.72e-02; exact N = 377.964780; 145 s; exit 0; file /home/kooshi/.claude/jobs/b1507518/tmp/phaseB/cert-q47-polish-75500.json
