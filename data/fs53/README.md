@@ -169,3 +169,12 @@ row: dropping the entire class leaves the optimum unchanged to six decimals at a
 * **What it does not say.** It does not say the 83 comparison is explained: those two runs differed in formulation *and*
   in convergence, and the 40-point objective gap there is still unaccounted for by anything measured here. Nothing here
   was run at 83.
+
+| `cert-q47-N402.json` (2.6 MB) | 𝔽₄₇ | graphics card A shared with its own producer; certificate from a **2,000**-iteration iterate resumed +500 in a fresh solver, 94 s | **CERTIFIED** (`--k 5`): `N = 100701620496835012188100202147162478941/2.5·10³⁵ = 402.806482`, so **α(UD(𝔽₄₇,2)) ≤ 402**, and `5 × 402 = 2010 < 2209`: **five is refused at 47**, `χ(UD(𝔽₄₇,2)) ≥ 6` | exact rational; 9,247 pair orbits and 18,494 canonical rows rebuilt from the number 47 alone. `--ldl` green (`ldl-q47-N402.log`). All 18 cuts give ⌊N⌋ = 402 (402.806482–402.810220). Six is **not** refused: `6 × 402 = 2412 ≥ 2209`, and six at 47 would need α ≤ 368 |
+| `cert-q43-N365.json` (1.6 MB) | 𝔽₄₃ | the same card; certificate from a **500**-iteration iterate resumed +500 in a fresh solver, 50 s | **CERTIFIED** (`--k 5`): `N = 45739578027246880185150958981840496503/1.25·10³⁵ = 365.916624`, so **α(UD(𝔽₄₃,2)) ≤ 365**, and `5 × 365 = 1825 < 1849`: **five is refused at 43**, `χ(UD(𝔽₄₃,2)) ≥ 6` | exact rational, `--ldl` green (`ldl-q43-N365.log`). All 18 cuts give ⌊N⌋ = 365 (365.916624–365.919743). Six at 43 would need α ≤ 308 against a float optimum of 363.8 still falling at 8,500 iterations — 55 integers away, so six at 43 is **out of this instrument's reach**, not refused |
+
+**What the three easy members cost, and what that says about 67.** 79, 47 and 43 were each certified from an iterate of
+**500 to 2,000 iterations** whose primal residual was still of order 10⁻¹ — the bound had 17, 39 and 4 integers of margin
+against its threshold. The instrument did not have to converge for any of them. 67 is the one that does: its threshold
+(α ≤ 748) sits 0.9 % below the ratio bound, and its first polish, from iterate 8,500, gave ⌊N⌋ = 750 — **two integers
+short**.
