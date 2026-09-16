@@ -1,0 +1,23 @@
+1. the graph
+  ok: |unit circle| = 28, |E| = 10206
+  ok: edges_sha256 = b15ae514ce55dddda7e21f8923ae86c678f032421914fc91e138ca0f24e7ff3d
+2. triangles
+  ok: third points w (w and u - w both unit) per edge (0, u): {1: 28} -- exactly one
+  ok: that third point is 2u = -u: every triangle is the F_3-line {0, u, 2u}
+  ok: so the 10,206 edges split into 3402 edge-disjoint collinear triangles (729*28/6)
+3. the 14 directions are a cap in PG(5,3)
+  ok: 14 directions (unit circle modulo +-1)
+  ok: no two directions a, b with a + b or a - b a unit vector: no three directions collinear
+4. spectrum
+  ok: eigenvalue at character a equals 3*m_a - 14, m_a = number of directions in the hyperplane a^perp
+  spectrum (eigenvalue, multiplicity): [(-8, 112), (-5, 84), (-2, 168), (1, 84), (4, 168), (7, 84), (10, 28), (28, 1)]
+  ok: lambda_min = -8, multiplicity 112 (56 hyperplanes holding exactly 2 directions)
+  ok: every eigenvalue is 1 (mod 3); Weil's |lambda| <= 2 sqrt 27 = 10.39 then forces lambda >= -8
+5. Kloosterman sums and the elliptic curves y^2 = x^3 + x^2 - a
+  ok: Kloosterman sums over F_27 are all -1 (mod 3): [(-10, 1), (-7, 3), (-4, 6), (-1, 3), (2, 6), (5, 3), (8, 4)]
+  ok: the nontrivial spectrum is {-K(c) : c in F_27^*}, each value 28 times
+  ok: trace of Frobenius of y^2 = x^3 + x^2 - a equals -K(a) for all 26 a (Moisio)
+  ok: 3 | #E(a) for every a, and the largest curve has 36 points: Hasse allows 38, divisibility caps it at 36, so lambda_min = 28 - 36 = -8
+6. automorphisms
+  dreadnaut: 1 orbit; grpsize=122472; 6 gens; 16 nodes; maxlev=4
+  ok: |Aut| = 122,472 = 729 * 56 * 3: exactly translations, O(2,27) and the Frobenius, nothing hidden
