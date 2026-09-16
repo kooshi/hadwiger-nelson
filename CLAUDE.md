@@ -1064,7 +1064,19 @@ in this harness, not the binary — reproduced deliberately on `sleep`, where `$
 child 3469131. Killing that pid leaves the binary running, re-parented, still writing its `--out`; the engineer found it
 only because `git status` showed a **committed** artifact modified after the commit. **A kill is verified by what stopped
 changing, never by the exit status of the kill**: after signalling, confirm by effect — no process of that name in `ps`,
-and the file's digest identical across ten seconds. **A hand-rolled scan of `/proc/*/cmdline` is `pkill -f` in a
+and the file's digest identical across ten seconds. **Seventh and eighth instances, 2026-09-16, both in one night and the second while writing up the first.**
+(a) **A pgid read from `ps` at launch was not the group the work ran in.** A cube sweep was launched under
+`setsid`; `ps` showed its pool at pgid `4088996`, that number went into the pgid file, and `kill -- -4088996`
+followed by a count of processes *in that group* reported **"survivors: 0"**. The sweep in fact ran in group
+`4131612` and kept going for **six more hours**, discovered only when a later `ps` showed nine live workers.
+**The verification tested the wrong proposition**: group membership, not whether the work stopped. (b) The
+repair attempt then ran `for p in $(pgrep -u $USER -f "fplane_sat_cube.py run"); do kill -TERM $p; done` —
+and `pgrep -f` matched **the shell executing the loop**, whose command line contains the pattern, so the
+shell killed itself mid-loop before reaching a single real target and exited 144, which reads like an
+unrelated failure. **The rule in one line: verify a kill against the thing you wanted stopped — the named
+pid absent from `ps`, and the artifact it was writing static across ten seconds — never against group
+membership, and never through a pattern that can match the killing shell.** Both checks are two commands
+and both would have fired here. **A hand-rolled scan of `/proc/*/cmdline` is `pkill -f` in a
 different costume** (2026-09-15, FS-53 phase B): an agent stopping one solve matched its own pattern in the command line
 of the shell running the scan and killed its own process group. Nothing was lost — the certificate was already filed —
 but the repair is the one to copy: find a process by the **inode of the log file it holds open**, which cannot match a
