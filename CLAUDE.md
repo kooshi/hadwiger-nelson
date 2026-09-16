@@ -683,7 +683,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   unobserved (at 11 no 5-colouring has every vertex gapped, on two engines). Both properties **propagate up a tower**
   whose level maps carry `S_{m+1}` onto `S_m` with constant fibres (`λ_min/d` is non-increasing under pullback),
   which is why the 2-adic tower is tight and the 11-adic tower slack at every level. **In an inert tower the ratio is exactly
-  constant** (GPT Astra, 2026-09-16, hand; recomputed at 3, 7, 11, 19, 23, 27 and 2 by `tools/fs54_wall_feedback_verify.py`):
+  constant** (GPT Astra, 2026-09-16, hand; recomputed at 3, 7, 11, 19, 23, 27 and 2 by `tools/fs54_wall_feedback_verify.py`;
+  for odd prime Q immediate from `[MMST1998]` Thms 2.1, 2.3, 2.9, new for Galois rings and even Q):
   λ_min(G_j) = Q^{j−1}·λ_min(G₁) with degree Q^{j−1}(Q+1), so every Hoffman floor survives every level. **Tight can be rigid
   and still force nothing** (same review, recomputed): at U₃₂ = Cay(𝔽₁₀₂₄, μ₃₃), k = 4, the least eigenspace is exactly
   μ₃₃, the unit circle is a Sidon set, so a maximum independent set's Fourier support is {0, a, b, a+b} and **every maximum
@@ -707,7 +708,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (every three-colouring is 3R-periodic by the rhombus and descends to Cay(R/3R, H), which contains the product of the planes
   at the stable primes above 3; `[ElZaharSauer1985]` and the Weil floor leave q = 3), so
   the conjecture holds for L ≤ 4 there; the same argument cannot run at four colours, where Hedetniemi already fails
-  (`[Tardif2022]`, unchecked). Given M56's measured 8/3 forcer over K = ℚ(√3,√11) (588 vertices, one solver refusal): every wall-broken real F ⊇ K has χ(F²) ≥ 5 (3/8 = 3·(1/2)³ ∈ R) — wall-broken is
+  (the product of two 5-chromatic graphs can be 4-chromatic, `[Tardif2023]`; from four colours up no level of the conjecture survives, `[Zhu2025]`). Given M56's measured 8/3 forcer over K = ℚ(√3,√11) (588 vertices, one solver refusal): every wall-broken real F ⊇ K has χ(F²) ≥ 5 (3/8 = 3·(1/2)³ ∈ R) — wall-broken is
   *sufficient* for five over K where G35 had it necessary — and every multiquadratic F ⊇ K with L ≤ 5 has χ(F²) = L(F); over
   K(√7), w = (−3 + i√7)/4 has w³ + w̄³ − 3w² − 3w̄² = 3/8, so eight copies plus an edge, at most 4,697 vertices, need five colours
   by hand, against the ρ₆₃ arena's 51,133 by solver (FS-45 puts it in the kernel). An 18-vertex, 33-edge graph over ℚ(√2,√3)

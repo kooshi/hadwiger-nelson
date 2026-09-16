@@ -38,7 +38,7 @@ residue field `𝔽₃` gives the bound 3 and the unit triangle the floor. ∎
 than "exhibit the forcer": the product theorem does the work the spindle did, and it does it for *every* field at once. (ii) It
 uses a Hedetniemi-type theorem in the **positive** direction, where FS-42 uses Shitov's refutation to remove Moorhouse's bar —
 and the two are the same fact seen from both sides: El-Zahar–Sauer is Hedetniemi at four colours, which is true, while at five
-the product of two 5-chromatic graphs can be 4-chromatic (`[Tardif2022]`, from memory, to be checked at PA), so **the same
+the product of two 5-chromatic graphs can be 4-chromatic (`[Tardif2023]`, Combinatorica 43(6) 2023, checked 2026-09-16 against the publisher's abstract), so **the same
 argument cannot run at the next level** — the four-colour classification of the conjecture is not a product theorem away, and
 the reason is the exact place where Hedetniemi first fails. (iii) It hands the record new field values by congruence alone:
 `ℚ(√3, √11)` and `ℚ(√2, √3)` have no prime of residue field `𝔽₃` (3 is inert in `ℚ(√11)` and in `ℚ(√2)`), so both need four,
@@ -99,7 +99,7 @@ names. Name those as the questions this stub leaves.
 
 | phase | what | cost | stop rule |
 |---|---|---|---|
-| PA | `[ElZaharSauer1985]` fetched and read in full (its proof is what phase D formalizes); `[Tardif2022]` checked against the paper; search "chromatic number of the plane over a number field three colours", "categorical product unit-distance", `[Fischer1990]` §3, `[Moorhouse2010]` §7, `[Madore2015]` §3 for the three-colour case; `[Soifer2024]` ch. 11 | half a day | a prior statement moves the credit line; the bibliography updated the same day |
+| PA | `[ElZaharSauer1985]` fetched and read in full (its proof is what phase D formalizes); `[Tardif2023]` checked against the paper; search "chromatic number of the plane over a number field three colours", "categorical product unit-distance", `[Fischer1990]` §3, `[Moorhouse2010]` §7, `[Madore2015]` §3 for the three-colour case; `[Soifer2024]` ch. 11 | half a day | a prior statement moves the credit line; the bibliography updated the same day |
 | A | D1: the proof in our notation, each step checked; the instances table extended to every field in `data/fplane/map.md` (FS-48 does the biquadratic family) | a day | a written proof, or the step that does not close, named |
 | B | D2 (a)–(e): the rhombus period, the descent, the reduced quotient, Hilbert 90, the product embedding — after FS-45 and FS-47 | 3–5 days | `three_colorable_planeOver_imp_exists_three_colorable_factor` on the standard axioms |
 | C | D2 (g): `hfloor` discharged at `f = 3` by an LRAT core; `f = 5` priced | a day; solver hours | `not_colorable_three_finitePlane27` in the kernel |
@@ -112,7 +112,7 @@ names. Name those as the questions this stub leaves.
 |---|---|---|
 | P1 | El-Zahar–Sauer's theorem, read, covers finite products of finitely many factors by the two-factor case and induction, with no connectivity or looplessness hypothesis beyond simple graphs; its proof formalizes in under two weeks | a hypothesis the product `∏ UD(𝔽_{q_j})` does not meet; or a proof step that resists (then the leaf is named) |
 | P2 | PA finds no prior statement of Theorem 3.1 (the three-colour classification of number-field planes) | a statement in Fischer, Moorhouse, Madore or Benda–Perles — then the credit line names it |
-| P3 (hunch) | the four-colour level cannot be proved by any product theorem: Hedetniemi fails at five (`[Tardif2022]`) exactly where the argument would need it | a product theorem for the specific factors (Cayley graphs of `𝔽_q²`) at five colours |
+| P3 (hunch) | the four-colour level cannot be proved by any product theorem: the product of two 5-chromatic graphs can be 4-chromatic (`[Tardif2023]`) exactly where the argument would need it | a product theorem for the specific factors (Cayley graphs of `𝔽_q²`) at five colours |
 
 ## 6. Failure and jackpot clauses
 

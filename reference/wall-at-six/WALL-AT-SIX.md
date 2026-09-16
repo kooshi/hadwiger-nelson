@@ -30,7 +30,7 @@ give a third family of targets, Cay(𝔽_{Q²}, μ_{Q+1}) with Q a power of 2, o
 
 | target | χ, in order of size |
 |---|---|
-| Γ_q, q = 3, 7, 11, 19 | **3, 4, 5, 5** (upper bounds by explicit colourings; lower bounds proved at 3 and 11, a solver's refusal at 7 and 19) |
+| Γ_q, q = 3, 7, 11, 19 | **3, 4, 5, 5** (upper bounds by explicit colourings; lower bounds proved at 3, 7 and 11, a solver's refusal at 19) |
 | Γ_q, q = 23, 31 | ≥ 5 proved; the largest independent sets found would force ≥ 7 if they were maximum |
 | Γ_q, q = 27, 43, 47 | ≥ 6 by exact certificate; the largest independent sets found would force ≥ 7 if they were maximum |
 | Γ_q, every other usable q | **≥ 7**, proved (exact certificates at 59, 67, 79, 83; exact spectrum at 71; Weil's bound from 98 on) |
@@ -248,7 +248,7 @@ strictly stronger than W, since a target could have χ ≥ 7 with χ_f ≤ 6. It
 | q | χ(Γ_q) | how |
 |---|---|---|
 | 3 | 3 | explicit 3-colouring; odd cycle [exact] |
-| 7 | 4 | explicit 4-colouring; 3 refused [solver]; also Moorhouse's Table 6.1 |
+| 7 | 4 | explicit 4-colouring; 3 refused [cert: α ≤ 14 < 17 = ⌈49/3⌉, level 3; earlier a solver's refusal]; also Moorhouse's Table 6.1 |
 | 11 | 5 | Moorhouse's Table 6.1; **kernel-checked** in Lean, both directions |
 | 19 | 5 | explicit 5-colouring (kernel-checked); 4 refused [solver, 5 s] |
 
@@ -515,18 +515,52 @@ its local bound is 6 exactly when one of those two planes is six-chromatic, and 
 **No real quadratic field with d ≤ 30,000 has local bound ≥ 7 without passing through 43 or 47.** So the fate of these
 fields is exactly the fate of W at 43 and 47.
 
-### 6.3 What W′ does not cover — the escape hatches
+### 6.3 What W′ does not cover — the escape hatches, and how far the responses closed them
 
 1. **Composite ideals.** The reduction works modulo any ideal 𝔞 all of whose prime factors are conjugation-fixed. By the
    Chinese remainder theorem the target for 𝔭₁𝔭₂ is the **categorical (tensor) product** U_{Q₁} × U_{Q₂}, and
-   χ(G × H) ≤ min(χ(G), χ(H)). Hedetniemi's conjecture — equality — is **false in general** (Shitov 2019), but the known
-   counterexamples need far more than seven colours. It is proved at 4 (El-Zahar–Sauer 1985) and, to our knowledge, open at
-   5, 6 and 7. **So a product of two targets that are each ≥ 7-chromatic might be six-colourable, and W′ would then fail
-   for the field's composite local bound.** We have not measured any such product.
-2. **Prime-power ideals.** Modulo 𝔭^k the target is a "tower level" mapping onto U_Q, so its chromatic number is at most
-   χ(U_Q). For the 2-adic tower of ℚ(√3,√11) at four colours the levels stabilise; for odd q we have not measured any
-   level at six.
-3. **Fields with no small usable target at all** (L ≥ 7 from the start, e.g. ℚ(√3,√7,√11)). W says nothing about their
+   χ(G × H) ≤ min(χ(G), χ(H)) by projection.
+   * **Ordinary colourings.** Hedetniemi's conjecture, that equality always holds, is **settled** [external, checked against
+     the papers]. It holds when the smaller chromatic number is at most 4 (El-Zahar–Sauer 1985), and fails at every level
+     above: Shitov (2019) for large counts, Wrochna (2020, Cor. 4.2) for every c ≥ 5, meaning two graphs that each need more
+     than c colours with a c-colourable product, and Tardif (2023) for c = 4. *The first version of this document said the
+     conjecture was open at 5, 6 and 7; that was out of date.* So nothing general stops two targets that each need ≥ 7
+     colours from having a six-colourable product. Nor does anything simple protect one: Zhu's weaker conjecture (one factor
+     with large χ_f suffices) is refuted, and counterexamples of large girth exist (Zhu's 2025 survey, §3 and §6).
+   * **Fractional colourings** [proof; first response]. Zhu proved χ_f(G × H) = min(χ_f(G), χ_f(H)) for all graphs, and
+     Zhang proved that for vertex-transitive G and H the independence ratio of G × H is the larger of the two. Every target
+     is vertex-transitive, so:
+
+   | factors | the product |
+   |---|---|
+   | some factor is ≤ 5-colourable | ≤ 5-colourable (colour through the projection onto that factor) |
+   | every factor has χ_f > 6 | χ_f > 6, so it needs ≥ 7 colours |
+   | every factor needs ≥ 7 colours, yet the product is 6-colourable | some factor has an **integrality gap**, χ_f ≤ 6 < χ |
+
+   Among first-level targets, χ_f > 6 is proved at 59, 67, 71, 79, 83 and every Q ≥ 98 (certificates and spectra). **So a
+   gap factor would have to be one of 23, 27, 31, 43, 47, 64.** Under W_f there is none, and no composite target of
+   first-level primes is six-chromatic.
+
+2. **Prime-power ideals.** Modulo 𝔭^j the target G_j = Cay(O_E/π^j, norm-one elements) maps onto U_Q, so χ(G_j) ≤ χ(U_Q).
+   * **The Hoffman bound is constant up the tower** [proof; second response]: λ_min(G_j) = Q^{j−1}·λ_min(U_Q), and the
+     degree is Q^{j−1}(Q + 1). The lifts of a residue unit vector form a coset of its tangent line. A character that is
+     nontrivial on the last layer therefore survives on at most two residue points in odd characteristic, and on one in
+     characteristic 2. So its eigenvalue has size at most 2Q^{j−1}, which never goes below Q^{j−1}·λ_min.
+     *Recomputed here:* q = 3 (levels 1–4), 7 (1–3), 11, 19 and 23 (1–2), **27 over the Galois ring GR(9,3) (level 2:
+     λ_min = −216 = 27·(−8))**, and Q = 2 over ℤ₂[ω] (levels 1–6). *Prior art:* for an odd prime Q the statement is
+     immediate from Medrano–Myers–Stark–Terras (1998), Thms 2.1, 2.3 and 2.9, which give the degree, the inherited
+     eigenvalues and closed forms for the rest; it is not stated there, and nothing there covers Q = 27 or even Q.
+   * Consequences: every level above 71, above every odd Q ≥ 98 and above every Q ≥ 128 stays ≥ 7. Every level above 3 is
+     exactly 3-chromatic, and every level above 2, 8, 16 and 32 is exactly 4-chromatic.
+   * The exact certificates at 59, 67, 79 and 83 bound α(U_Q), but α(G_j)/|G_j| can only grow with j, so they do not lift
+     by this argument.
+
+3. **Both at once** [proof; second response]. **A residue target of any ideal with χ exactly 6 has a prime-power factor whose
+   residue size lies in {23, 27, 31, 43, 47, 59, 64, 67, 79, 83}.** Every factor outside that list is either ≤ 5-colourable
+   at every level, or has Hoffman bound > 6 at every level. A product of regular graphs has the least of its factors'
+   Hoffman bounds, because the eigenvalues of a product are the products of the factors' eigenvalues.
+
+4. **Fields with no small usable target at all** (L ≥ 7 from the start, e.g. ℚ(√3,√7,√11)). W says nothing about their
    true chromatic number; only the conjecture does.
 
 ### 6.4 A control family: q ≡ 1 (mod 4)
@@ -622,7 +656,16 @@ one, that does not go through the residue method at all?
 
 **Pointers to prior art we may have missed would be as valuable as proofs.** In particular: any table of α or χ for
 UD(𝔽_q, 2) beyond q = 17; any work on Cayley graphs of 𝔽_{q²} with connection set the norm-one group ("unitary graphs",
-"Hermitian unit-circle graphs"); and any result on Hedetniemi's conjecture at 6 or 7 colours for Cayley graphs.
+"Hermitian unit-circle graphs"); and any result on Hedetniemi-type products restricted to Cayley graphs.
+
+**A name from coding theory** (found while checking the responses). The Cayley graph of 𝔽_{q²} on the norm-one group is the
+**coset graph of a generalized Zetterberg code**, whose parity-check columns are μ_{q+1}, whenever the code's base field is
+𝔽₂ or 𝔽₃. So **U_{2^m} is the coset graph of the binary Zetterberg code, and Γ₂₇ that of the ternary code C₃(3)**.
+The recent literature (Shi–Helleseth–Özbudak 2023; Shi–Li–Helleseth–Özbudak 2024) determines covering radii, which are
+diameters of these graphs, not independence or chromatic numbers. A coding theorist may know more about their independent
+sets. Also, every U_{2^m} is a **cube-like graph**, a Cayley graph on 𝔽₂ⁿ. No cube-like graph has chromatic number 3
+(Payan), and whether one with chromatic number 5 exists is reported open, so U₆₄'s 6 ≤ χ ≤ 8 sits in a family with its own
+open questions.
 
 ---
 
@@ -712,5 +755,24 @@ What we used each work for, and how much of it we read.
   Theory, 2005) — the three-point construction. Recalled.
 * K. G. Fischer, *Additive k-colorable extensions of the rational plane*, Discrete Math. 82 (1990) 181–195; D. R. Woodall
   (1973) — additive colourings and the two-colour mechanism over fields. Read (Fischer).
-* Y. Shitov, *Counterexamples to Hedetniemi's conjecture* (Ann. Math., 2019); M. El-Zahar, N. Sauer (1985) — products.
-  Listing.
+* Y. Shitov, *Counterexamples to Hedetniemi's conjecture*, Ann. Math. 190 (2019) 663–667; M. El-Zahar, N. Sauer, *The
+  chromatic number of the product of two 4-chromatic graphs is 4*, Combinatorica 5 (1985) 121–126 — products. Bibliographic
+  data checked; unread.
+* M. Wrochna, *Smaller counterexamples to Hedetniemi's conjecture*, arXiv:2012.13558 (2020) — Thm 4.1, Cor. 4.2 (4.3 on
+  arXiv's HTML page). Read.
+* C. Tardif, *The chromatic number of the product of 5-chromatic graphs can be 4*, Combinatorica 43 (2023) 1067–1073 — the
+  last open case. Abstract.
+* X. Zhu, *The fractional version of Hedetniemi's conjecture is true*, European J. Combin. 32 (2011) 1168–1175; X. Zhu, *A
+  survey on Hedetniemi's conjecture*, arXiv:2502.16078 (2025) — χ_f of a product (survey Thm 2.4) and the status by level.
+  Survey read in the sections used; the 2011 paper not read.
+* H. Zhang, *Independent sets in direct products of vertex-transitive graphs*, J. Combin. Theory Ser. B 102 (2012) 832–838;
+  arXiv:1007.0797 — Thm 1.8, the independence ratio of a product. Read.
+* A. Medrano, P. Myers, H. M. Stark, A. Terras, *Finite Euclidean graphs over rings*, Proc. AMS 126 (1998) 701–710 — spectra
+  over ℤ/p^r (Thms 2.1, 2.3, 2.9). Read.
+* M. Shi, T. Helleseth, F. Özbudak, the ternary generalized Zetterberg codes, IEEE Trans. Inf. Theory 69 (2023) 7025–7048
+  (listing); Shi, Li, Helleseth, Özbudak, arXiv:2411.14087 (2024) — covering radius of generalized Zetterberg codes, whose
+  coset graphs include U_{2^m} and Γ₂₇. Introduction and main theorems read.
+* C. Payan, *On the chromatic number of cube-like graphs*, Discrete Math. 103 (1992) 271–277 — seen via A. E. Brouwer's
+  cube-like graphs page. Listing.
+* N. Gvozdenović, M. Laurent, F. Vallentin, *Block-diagonal semidefinite programming hierarchies for 0/1 programming*, Oper.
+  Res. Lett. 37 (2009) 27–31 — the level-3 relaxation used at 7, 11 and 27. Read.
