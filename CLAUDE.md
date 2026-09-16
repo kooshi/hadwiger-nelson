@@ -763,8 +763,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   the rows left undecided** at 17 (k = 5) and 23, 43, 47 (k = 6). So the sweeps' zeros are not evidence of absence —
   they refused only the rows that are refused at 11 and 19 too, where a colouring demonstrably exists — and the effort
   belongs on those half-size instances rather than on a full cube-and-conquer. *Killing test: a plane with an optimal
-  colouring but none antipodally invariant under any involution — cheapest at 23 (χ ≤ 8 kernel-checked), 27 (≤ 7),
-  43 (≤ 8), 47 (≤ 10), where a colouring is already in hand and the symmetric question is one SAT call.* **Prior art, searched
+  colouring but none antipodally invariant under any involution.* **Attempted 2026-09-16 at 23 (k = 7, 8) and 43 (k = 8)
+  as a decision, and it returned NOTHING — every refusal was free and every informative row undecided.** The `(2,2,2,2)`
+  rows fall to the fixed-colour argument in 0 s, the identity rows fall in 0 s to a single edge (some `z` is adjacent to
+  `−z`, so `c(z) = c(−z)` is immediate), and the rows with a τ fixing several colours — the only ones that could carry a
+  colouring — were undecided at 3,000,000 conflicts after 170–483 s. A test whose informative outcome was never shown to
+  be reachable, which is this file's own rule broken by its author within the hour. **The design fix is to change
+  instrument, not budget: G58 asserts EXISTENCE, so the right tool is a FINDER on the antipodal quotient — roughly
+  `(q²+1)/2` orbits — and not a decider on the full plane.** A decider is being asked to refute, which is the expensive
+  direction and the wrong one for an existence claim. **Prior art, searched
   2026-09-16 (WORKFLOW 3a), under two disciplines and in their words — graph theory (*colouring invariant under a graph
   automorphism*, *vertex-transitive chromatic number*) and algebraic combinatorics (*Cayley graph colouring invariant
   under inversion*, *group-invariant colouring*): the discipline's frame is the **Burnside chromatic polynomial of
