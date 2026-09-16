@@ -99,6 +99,72 @@ time knows exactly what it would be buying.
 needs `α ≥ ⌈q²/k⌉`, which is necessary and **never sufficient** — a cleared threshold means six is possible
 *fractionally*, and the classes must still partition.
 
+## What each member would buy: the field it hands us (2026-09-16)
+
+**A six-colouring of a window plane is only worth what it says about a number field**, and until this
+section existed no field had been named for any member — the milestone's target statement had no consumer
+written down. The residue bound gives `χ(F²) ≤ χ(UD(𝔽_q,2))` whenever `F` has a prime with residue field
+`𝔽_q`, so the field to name for member `q` is the smallest whose **first** usable prime is `q`.
+
+**Two conditions, and the second is the one that bites.** The field must (i) have `q` as its first usable
+prime — every smaller usable prime would give a better bound — and (ii) have the **2-adic wall broken**,
+because a field whose wall stands is already four-colourable by Theorem B and a local bound of 6 there is
+dead weight. **Every minimal field satisfying (i) alone has the wall standing** (ℚ(√41) sees 23, ℚ(√2,√5)
+sees 31, ℚ(√6,√14) sees 43, ℚ(√2,√17) sees 47 — all four four-colourable already), which is why the
+candidates below need two radicands rather than one.
+
+| if this plane is six-chromatic | this field gets `χ(F²) ≤ 6` **by theorem** | its usable primes | wall |
+|---|---|---|---|
+| 23 | `ℚ(√2,√31)` | 23, 31, 79, 127, … | broken |
+| 31 | `ℚ(√5,√51)` | 31, 59, 79, … | broken |
+| **43** | **`ℚ(√10,√23)`** | 43, 67, 79, 83, … | broken |
+| **47** | **`ℚ(√7,√89)`**, also `ℚ(√2,√3,√7)` | 47, 131, 139, … | broken |
+| 27 | **none exists among fields built from square roots** — `𝔽₂₇` needs residue degree 3, so the field is not multiquadratic. `ℚ(√3, α)` with `α³ = α + 1` is the standing candidate | | |
+
+Verified by hand as well as by `tools/fplane.py map`: each has an odd square class `≡ 7 (mod 8)` (the
+wall-break test), and for `ℚ(√10,√23)` quadratic reciprocity gives `(10/43) = (23/43) = +1` while 3, 7, 11,
+19, 23 and 31 each fail, so 43 really is its first usable prime. The standing map is `data/fplane/map.md`.
+
+**At 43 and 47 this is the whole prize.** Five is refused by certificate at both, so a verified six-colouring
+there *is* that plane's exact chromatic number — and it would make `χ(ℚ(√10,√23)²) ≤ 6` or
+`χ(ℚ(√7,√89)²) ≤ 6` a theorem: **the first number field with local bound exactly 6**, predicted 6 exactly by
+the conjecture. Nowhere else does one result do that.
+
+**And no candidate field holds a Moser spindle** (G57): the spindle needs `√3` *and* `√11`, and no window
+member admits both — 3 is a non-square at 31 and 43, 11 at 23, 27 and 47. Every forcer this project holds is
+built from spindles or their relatives, so over a window field there is nothing to build *from*, and at 31
+and 43 (where 3 is a non-square, so by Krebs `ω = 2`) not even a triangle.
+
+## Why 27 is the only non-prime member, and why 25 and 49 are not (2026-09-16)
+
+A residue field `𝔽_q` is usable iff **`q ≡ 3 (mod 4)`** — exactly the condition that `−1` is not a square,
+which is what makes `x² + y² = 1` a non-split conic with `q + 1` points and the graph `(q+1)`-regular. When
+`−1` *is* a square the conic degenerates, the circle has `q − 1` points, and the theory does not apply.
+
+For `q = p^f` that congruence unpacks completely:
+
+| | |
+|---|---|
+| `p ≡ 1 (mod 4)` | `p^f ≡ 1 (mod 4)` for **every** `f` — never usable |
+| `p ≡ 3 (mod 4)` | `p^f ≡ p (mod 4)` if `f` is **odd**, `≡ 1` if `f` is even |
+| `p = 2` | `q ≡ 0` or `2 (mod 4)` — never usable |
+
+So **usable ⟺ `p ≡ 3 (mod 4)` and `f` odd**, and "odd residue degree" is not an extra hypothesis at all —
+**it is the congruence restated.** (It is also why a larger field can *lose* a prime its subfield had: de
+Grey's field has 11 at residue degree 2, so 11 is unusable there while it is usable over ℚ(√3,√5,√11).)
+
+Applied to the two natural guesses:
+
+* **`25 = 5²` — no, twice over.** `5 ≡ 1 (mod 4)`, so no power of 5 is ever usable; and `f = 2` is even.
+* **`49 = 7²` — no.** `7 ≡ 3 (mod 4)` is fine, but `f = 2` is **even**, so `49 ≡ 1 (mod 4)`. This is the
+  odd-degree condition doing its work: the prime is right and the degree kills it.
+
+**And the window is exhausted.** Weil's bound refuses six from `q = 98` up, so the window lives in `q ≤ 97`.
+The non-prime prime powers there are 4, 8, 9, 16, 25, 27, 32, 49, 64, 81 — and **only 27 satisfies
+`q ≡ 3 (mod 4)`**. The next usable prime powers are `3⁵ = 243` and `7³ = 343`, both far beyond the cap.
+**So `q = 27` is the unique non-prime member of the window, now and for good** — which is why the tooling's
+prime-only assumption (`--p <PRIME>`) costs exactly one member and no more.
+
 ## The file names, fixed now
 
 | file | what |

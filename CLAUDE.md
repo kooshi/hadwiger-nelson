@@ -715,9 +715,22 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   its residue field, and **every field this project has built in contains ℚ(√3,√11)**: 3 is a non-square modulo 31, 43, 67,
   79 and 11 modulo 23, 47, 59, 71, and at 27 the residue 11 ≡ −1 (mod 3) is a non-square in every 𝔽_q with q ≡ 3 (mod 4); so
   such a field's usable primes are 11 and then nothing below 83, its local bound is 5 or ≥ 7, and **six is arithmetically
-  excluded for all of them**. A six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers
-  — ℚ(√2,√3,√31) sees only 23, ℚ(√2,√3,√7) only 47, ℚ(√3, α) with α³ = α + 1 sees 27 — and its five-chromaticity is itself
-  open. **What the window decides is whether six is reachable by the residue method at all**, since χ(ℝ²) = sup_F χ(F²): no
+  excluded for all of them**. A six-chromatic number field, if one exists, contains no √11 and none of the known five-forcers,
+  and its five-chromaticity is itself open. **Each member now has its field named** (`data/fs53/window.md`, computed
+  2026-09-16): the smallest field whose FIRST usable prime is that member **and whose 2-adic wall is broken** — the
+  second condition being what makes a local bound of 6 worth anything, since a wall-standing field is already
+  four-colourable by Theorem B, and **every minimal field satisfying only the first has the wall standing** (ℚ(√41),
+  ℚ(√2,√5), ℚ(√6,√14), ℚ(√2,√17) see 23, 31, 43, 47 and are all 4-sealed). They are **23 → ℚ(√2,√31), 31 → ℚ(√5,√51),
+  43 → ℚ(√10,√23), 47 → ℚ(√7,√89)** (also ℚ(√2,√3,√7)); 27 has none built from square roots, since 𝔽₂₇ needs residue
+  degree 3, leaving ℚ(√3, α) with α³ = α + 1 as the standing candidate. **So a six-colouring at 43 or 47 — the two
+  members where five is already refused, hence the two a single hit settles — makes χ(ℚ(√10,√23)²) ≤ 6 or
+  χ(ℚ(√7,√89)²) ≤ 6 a theorem: the first number field with local bound exactly 6.** **And 27 is the unique non-prime
+  member, permanently:** usable means q ≡ 3 (mod 4), which for q = p^f holds iff p ≡ 3 (mod 4) **and f is odd** — so
+  "odd residue degree" is not an extra hypothesis but the congruence restated — and of the non-prime prime powers below
+  Weil's cap of 97 (4, 8, 9, 16, 25, 27, 32, 49, 64, 81) only 27 qualifies. **25 = 5² fails twice** (5 ≡ 1 mod 4, and
+  the degree is even) and **49 = 7² fails on the degree alone**, which is the same mechanism that costs de Grey's field
+  the prime 11 at residue degree 2. The next usable prime powers are 3⁵ = 243 and 7³ = 343, far beyond the cap, so the
+  tooling's prime-only assumption costs exactly one member and no more. **What the window decides is whether six is reachable by the residue method at all**, since χ(ℝ²) = sup_F χ(F²): no
   six-chromatic window plane ⟹ no field has local bound 6 ⟹ every field holding a six-chromatic unit-distance graph has all
   its usable planes at ≥ 7, so the finite planes can never pin six — and under the bold form of the conjecture (χ(F²) = 7
   wherever L(F) ≥ 7) χ(ℝ²) = 7, with six a value no field attains though every seven-chromatic graph passes through it; one
