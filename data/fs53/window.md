@@ -19,7 +19,7 @@ certificate on 2026-09-15: `α ≤ 1023` against the 1040 six needs at 79, `α �
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
 | **27** | 729 | **−8** | 162.00 | — | **147** `[cert]` | 5 `[exact]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
-| 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **201** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
+| 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **200** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | **258** `[search]` | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
 | 47 | 2209 | −12.8465 | 466.39 | **265** `[search]` | **371** `[cert]` | **6** `[cert]` | 10 `[search]` | 369 | 0.7912 | 442 | **0.9477** |
 | ~~59~~ | 3481 | −14.9176 | 693.14 | 363 `[search]` | **575** `[cert]` | **7** `[cert]` | 10 `[search]` | 581 | 0.8382 | (refused) | 1.0056 |
@@ -67,6 +67,13 @@ It sits above `frac5` at 27 (0.9012), so **the certificate does not refuse five 
 cells, a worst-case reach of 0.9110 leaves `frac5` at 43 (0.9362) and 47 (0.9477) refusable with 2.5 % and 3.7 % of
 margin, `frac6` at 79 (0.9471) with 3.6 %, and **`frac6` at 67 (0.9204) with only 0.9 %** — so **Q1's six-refusal at 67
 is now marginal**, against an instrument whose reach has ranged from 0.8238 to 0.9110.
+
+**2026-09-16, q = 31, converged, and it does NOT refuse five**: `N = 200.881446 / 240.25` — reach **0.8362**, from a
+solve driven to `status solved`. **α(UD(𝔽₃₁,2)) ≤ 200** (`cert-q31-N200.json`, CERTIFIED, re-run by the product owner),
+against 201 before. Five needs `α ≥ 193`, so five stands at 31 and **never will be refused by this relaxation**. The
+prediction was registered before the run from the observed trajectory (0.036 per 2,000 iterations against 8.2 to go)
+and it held. **Three of the five members are now closed on the certificate side — 23, 27 and 31 converged, and 47
+converged — leaving only 43 with an `optimal_inaccurate` certificate and therefore any headroom at all.**
 
 **2026-09-16, q = 47, and it is the best reach ever measured: 0.7973** — `N = 371.839576 / 466.39`, from a solve driven
 to **convergence** (`status solved`, res_pri 1.9e-07, gap 4.4e-08) rather than stopped at the first certificate, and the
