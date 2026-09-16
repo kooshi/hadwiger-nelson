@@ -784,7 +784,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   every CRT product of first-level targets; a composite target with χ = 6 needs a factor of residue size in {23, 27, 31, 43,
   47, 59, 64, 67, 79, 83} at some tower level (the Hoffman floor is constant up inert towers, G54). *Killing test of the
   exclusion: a usable window member for some field containing ℚ(√3,√11) — impossible by reciprocity; of the reading: a decided
-  plane with χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.*
+  plane with χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.* **Under the conjecture the window's
+sharpest consequence is quadratic** (FS-54 §W): ℚ(√167) breaks the wall and its usable planes below 100 are 23, 43, 59, 67,
+71, 79, 83, so once five is refused at 23 the conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way the window goes (6 if Γ₂₃ or
+Γ₄₃ is six-chromatic, 7 by the bold form if not), against a proven 3 in a triangle-free quadratic field — the cheapest place
+the bold form can fail.
 * **G57 — The window is triangle-free where it is roomy, and no candidate field holds a Moser spindle. [derived;
   the clique rule is `[Krebs2022]`, verified here; the correspondence and its consequence are ours]** Three mutual unit
   distances force an equilateral triangle, whose apex is `(1/2, √3/2)`, so **`ω(unit-distance graph over F) = 3` iff

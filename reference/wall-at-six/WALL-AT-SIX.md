@@ -229,6 +229,11 @@ strictly stronger than W, since a target could have χ ≥ 7 with χ_f ≤ 6. It
   six-chromatic would have L ≥ 7, a local–global gap. A field that merely *contains* a six-chromatic unit-distance graph may
   have χ(F²) = 7 = L, which is no gap. *(Corrected after the first response: the first version said "carrying a
   six-chromatic graph".)*
+* **Its sharpest instance is a real quadratic field.** ℚ(√167) has every prime above 2 split in F(i) (167 ≡ 7 mod 8), and
+  its usable planes below 100 are exactly 23, 43, 59, 67, 71, 79, 83. So L(ℚ(√167)) = min(χ(Γ₂₃), χ(Γ₄₃)) or ≥ 7. Once five
+  colours are refused at 23, the conjecture predicts **χ(ℚ(√167)²) ≥ 6 whichever way W goes**: 6 by its main clause if Γ₂₃ or
+  Γ₄₃ is six-chromatic, and 7 by its bold form if W holds. The best proven lower bound there is 3, and the field contains no
+  √3, so its plane has no unit triangles. This is the cheapest place the bold form can fail.
 * Either way, a proof of W is a structural statement about Hadwiger–Nelson at the level of finite fields.
 
 **Status.**

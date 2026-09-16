@@ -446,6 +446,16 @@ undecided at 23 even above the Hoffman bound (`data/fs50/nscale/`). **And no uni
 that changes between 19 and 23, or go member by member (Reading B of the wall document gains weight). **What W would not
 give:** χ(ℝ²) ≠ 6 (that needs every field's true χ, i.e. the conjecture's bold form, which gives χ(ℝ²) = 7 on its own), and
 nothing against a six-chromatic graph in a field whose local bound is ≥ 7 — the lower-bound hunt is untouched by W.
+**What the conjecture gives once W holds** (derivation, 2026-09-16): (1) its "L ≤ 6" clause shrinks to L ≤ 5, a finite rule
+read off the conjugation-fixed primes with residue 𝔽₃, 𝔽₇, 𝔽₁₁, 𝔽₁₉ or dyadic (ramified, or inert with N𝔭 ≤ 32) — large
+parts already proved (G55); (2) the bold form gives χ(F²) ∈ {2, 3, 4, 5, 7} for every real field, the sixth colour with no
+field of its own, and every six-chromatic unit-distance graph extending to a seven-chromatic one over any field containing
+it; (3) **the sharpest instance is quadratic**: ℚ(√167) (167 ≡ 7 mod 8, so the wall is broken; usable planes below 100
+exactly 23, 43, 59, 67, 71, 79, 83 — `data/fs54/fields.out`) has L(ℚ(√167)) = min(χ(Γ₂₃), χ(Γ₄₃), ≥ 7). **Once five is refused
+at 23, the conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way W goes** — 6 by the L ≤ 6 clause if Γ₂₃ or Γ₄₃ is
+six-chromatic, 7 by the bold form if not — against a proven lower bound of 3 (χ = 2 iff L = 2), in a field with no √3 and
+so no triangles. With W and only the non-bold form, it predicts nothing there. This is the cheapest place the bold form can
+be wrong.
 
 ### D5 — the colour search goes non-periodic
 Periodic six-colourings are already excluded at indices 9 and 27. After D1: `plane-colour --q 27 --k 6` seeded with D2's best
