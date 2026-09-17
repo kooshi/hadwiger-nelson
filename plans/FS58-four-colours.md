@@ -282,15 +282,16 @@ equidistribution (phase E states it and decides the carry-forward). A null in B 
 
 ## §S — the skeleton
 
-`Proofs/HadwigerNelson/ThreeAdicBarrier.lean` (phase D; statements with `sorry`; revised by the domain pass M1):
-* `instance : NatScalar ℚ` (leaf-local, so `Field/Quadratic.lean` is untouched);
-* `Plane d := Adjoin d ℚ × Adjoin d ℚ` and `IsIntegral3 q := (q.den : ZMod 3) ≠ 0`;
-* `threeIntegral d : AddSubgroup (Plane d)` (all four coordinates 3-integral);
-* `kappa d : threeIntegral d →+ ZMod 3` (`a + b + c`, each rational cast into `ZMod 3`) and `kappa_apply`;
-* `circle_kappa_ne_zero` (the 81-case fact over 𝔽₃ components) and `kappa_ne_zero` (under `d % 3 = 2`);
-* `integralPlane d := addCayley {v | v.1² + v.2² = 1 ∧ v ∈ threeIntegral d}`;
-* **`colorable_three_integralPlane : d % 3 = 2 → (integralPlane d).Colorable 3`**, the barrier;
-* the inhabitant `diamond167` with `integralPlane_167_adj_diamond` (the graph has edges).
+`Proofs/HadwigerNelson/ThreeAdicBarrier.lean` (phase D; statements with `sorry`; names fixed by the experience pass M3):
+* `instance : NatScalar ℚ` (leaf-local, as `Instances/FanGap11.lean` does for `ℤ_[11]`, so `Field/Quadratic.lean` is untouched);
+* `Plane d := Adjoin d ℚ × Adjoin d ℚ`; `IsThreeIntegral q := (q.den : ZMod 3) ≠ 0`; `threeIntegralRat : Subring ℚ`;
+* `toZModThree : threeIntegralRat →+* ZMod 3` with `@[simp] toZModThree_apply` (the cast);
+* `threeIntegral d : AddSubgroup (Plane d)`; `kappa d : threeIntegral d →+ ZMod 3` with `@[simp] kappa_apply`;
+* `circle_kappa_ne_zero` (81 tuples, in the reduction's shape), `unit_reduce`, `kappa_ne_zero` (under `d % 3 = 2`);
+* `integralDirectionPlane d := addCayley {v | v.1² + v.2² = 1 ∧ v ∈ threeIntegral d}`;
+* **`colorable_three_integralDirectionPlane : d % 3 = 2 → (integralDirectionPlane d).Colorable 3`**, the barrier;
+* the inhabitant `diamond167` with `integralDirectionPlane_adj_diamond167`; the adversary `vanishingVectorThree` with
+  `vanishingVectorThree_mem`, `vanishingVectorThree_unit`, `kappa_vanishingVectorThree`.
 
 Checked outside Lean before stating: the 𝔽₃ fact by brute force (8 circle points, `a + b + c` never 0), and `diamond167` exactly
 (`a² + 167b² + c² + 167e² = 1`, `2ab + 2ce = 0`, denominators 28, 20, 4, 140).
@@ -366,6 +367,56 @@ three rules. *Why:* no consumer, and the general form's other cases are prior ar
 | D6: the local LP over a finite character index is exact up to ε | **prove** at odd split places [hand]; **measure** at the dyadic place | `a_k(α, β) = a_0(απ^k, βπ^{−k})` (substitute `t = π^k s`) and unit scaling fix the index `(v(α) + k, v(β) − k, αβ)`; characters whose every shell term has level `≥ L₀` read `≥ −ε(L₀)` by (ii)'s bound. At `p = 2` the stationary-phase bound needs its own derivation; until then the dyadic LP is a measurement |
 | D7: the pigeonhole lemma | **prove** [hand, three lines] | as written; no independence hypothesis |
 | routes' verdicts | **test** | every separable verdict by a colouring verified on every edge; every forced verdict a solver claim until an LRAT check; controls per §3 |
+
+### M3 — experience (2026-09-17): names, verdicts, records, and the gate
+
+**Decisions** (choice · alternative · why · confidence):
+
+| # | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| 1 | `IsThreeIntegral`, `threeIntegralRat`, `toZModThree` | `IsIntegral3`, `ratIntegral3`, `red3` | Mathlib's `IsIntegral` means algebraic integrality, and a reader who knows it misreads `IsIntegral3`; `toZModThree` follows `PadicInt.toZMod`, the name a user would guess for the same map | high |
+| 2 | `integralDirectionPlane` | `integralPlane` | "integral plane" reads as a plane of integral *points*; the vertex set is all of `ℚ(√d)²` and only the *directions* are restricted | high |
+| 3 | `kappa` keeps its Greek name | a descriptive name such as `sumRule` | the prelude, the plan and the tools all call it κ; one vocabulary across plan, code and records beats a local improvement | medium — revisit if the paper renames it |
+| 4 | the adversary is a named vector with three plain lemmas | one `∃ h, … ∧ …` statement | a consumer uses the vector; destructuring an existential to reach it is work the statement imposed | high |
+| 5 | `@[simp]` on `kappa_apply` and `toZModThree_apply` only | tagging the membership and unit lemmas too | Mathlib tags `_apply` lemmas; the others are facts about particular vectors, not rewrites toward a normal form | high |
+| 6 | **verdicts are exactly `Separable (colouring verified)`, `Forced (solver claim)`, `Unknown (budget)`**, in every tool and record | free-form sentences per tool | a reader scanning records across phases must be able to grep one vocabulary; the qualifier in brackets states the trust level at the point of use. Caught while writing this: `balls` printed "colouring verified" for separations it had not verified; the tool now checks every separating model | high |
+
+**Tool surfaces (phases B and W), fixed before code.** Every long command prints its headline first, appends one JSON object per
+unit of work to a JSONL record with a flush and `fsync` per line, writes derived files to `<name>.tmp` and renames them, and resumes by
+**re-running the same command**: finished units are read back from the JSONL and skipped. No command is ever piped into `head`.
+
+| command | output | unit of work |
+|---|---|---|
+| `tools/fs58_chain.py pool D N` | `data/fs58/chain-D/pool-N.json`: the direction count, a reduced ℤ-basis of `ℤ[W₃(N)]` and its index, the rank (must be 4), the least odd cycle | one `N` |
+| `tools/fs58_chain.py control D N` | `CONTROL PASS` twice, or a named failure: on `L = 3Λ₀` no separation; on an `L` with `3u ≡ w`, every colouring separates | one `N` |
+| `tools/fs58_chain.py screen D N --lattices K --wall S` | `data/fs58/chain-D/screen-N.jsonl`: `{lattice, u, verdict, colouring_file}` | one `(L, u)` |
+| `tools/fs58_chain.py probe D N --points P` | `data/fs58/chain-D/probe-N.jsonl`: piece size, edges, direction set read from the exact edge set, pairs asked, verdicts, planted-rhombus control | one piece |
+| `tools/fs58_pigeon.py odd D --size s --height H` | `data/fs58/pigeon-D/odd-s-H.jsonl`: every odd subset found, with its witness `(U, cycle, anchors)`, and the count of dependent subsets excluded | one subset |
+| `tools/fs58_pigeon.py sat T.json` | the pigeonhole SAT on `T`; on UNSAT, the assembled graph written for the checker | one `T` |
+| `tools/fs58_check_witness.py GRAPH` | `CERTIFIED` or a named refusal; standard library only; rebuilds every edge in exact arithmetic from the point list and checks a refutation proof with a checker that is not the solver | one witness |
+
+### §G — the phase gates (what · verified how · pass condition), scored by artifact and gate log, never by a report's summary
+
+| phase | gate item | verified how | pass condition |
+|---|---|---|---|
+| A | §0's records regenerate from committed code | rerun each `tools/fs58_local.py` subcommand into `.tmp`; `cmp` against `data/fs58/opening/` with timing lines removed | identical |
+| A | the `d`-generic enumerator agrees with FS-56's | `units_d(N, 167)` against `fs56_low_height.units(N)` for `N ∈ {84, 420, 2184}` | identical sets |
+| A | D6's local LP | `tools/fs58_local.py lp PLACE S L0` → `data/fs58/local/`; the omitted-character bound `ε(L0)` printed beside the optimum | the controls at `S = 0` read −1/2 (3-adic) and −1 (dyadic); optima at `S = 1, 2` recorded with `ε` |
+| B | pool records | `pool` for `ℚ(√11)`, `N ∈ {10, 20, 40, 70, 140, 280}` | rank 4 in every file; every vector re-asserted unit when written |
+| B | controls before any screen | `control` per `N` | both `CONTROL PASS`, in the log before the first screen line |
+| B | screen verdicts | every `Separable` line's colouring file re-verified on every quotient edge and on `c(0) ≠ c(3u)` by a re-read of the written file | 0 failures; each `N` recorded as *killed* (with its `L`) or *not killed at budget* (with the budget) |
+| B, W | any forced pair or UNSAT pigeonhole | the assembled witness through `fs58_check_witness.py`, plus five planted faults (a point moved, a non-unit edge added, the proof truncated, a vertex deleted, the pinned pair flipped) | `CERTIFIED`; all five refused for their named reasons |
+| W | odd subsets | every witness line re-verified by `check`; the `ℚ(√3)` positive control run first at the same `--size` and `--height` | control finds odd triples; 0 witness failures |
+| C | the affine-alignment meter | run on a colouring pulled back through κ on a 3-integral piece | reads exactly 1 |
+| D | the kernel barrier | `./scripts/build.sh`; `grep sorry` on the module; `./scripts/axioms.sh`; `./scripts/vacuity.sh`; `python3 tools/check_architecture.py` | green; zero `sorry`; axioms exactly `[propext, Classical.choice, Quot.sound]`, no native purchase; vacuity counts updated in `CLAUDE.md` if they move; architecture PASS, with the row's SKELETON banner removed |
+| E | R1's statement | the plan section with D6's table | written, and a carry-forward decision recorded |
+| F | the close | WORKFLOW step 9, including the sweep of this plan for "conjecture" and "not claimed" | `CLAUDE.md` Frontier, ledger and grokkings updated; `plans/FRONTIER-STUBS.md` re-ranked; every hit minted or declined |
+
+**Standing rules for whoever implements** (with the reason each exists): checkpoint per unit and resume by rerunning (the PROTECTED
+checkpointing rule); one heavy job at a time; kill by pid, verified by the named pid gone and the record static for ten seconds; no
+`| head` on a command whose cleanup matters; a gate's exit status is read from the gate, never through a pipe; symmetry is broken
+before any SAT search (origin 0, one neighbour 1), and an `Unknown` from an unbroken encoding is not a fact about the graph; edges are
+decided by exact arithmetic, so a refusal is robust and a colourable verdict measures the piece.
 
 ## §R Results
 

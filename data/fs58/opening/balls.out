@@ -1,12 +1,12 @@
 N=140 |W|=36 word radius 3: 8353 points, 23456 edges, mean degree 5.62
   3-colourable, model verified on every edge (0.0 s)
   control: planted rhombus on one open pair reads forced = True; unplanted reads separable = True
-  pairs (p, p + 3u) with p at depth <= 1: 88 asked; separated by the first model 77; forced equal (solver claim) 0
+  pairs (p, p + 3u) with p at depth <= 1: 88 asked; Separable (colouring verified): 88 (77 by the first model); Forced (solver claim): 0
 N=140 |W|=36 word radius 4: 74533 points, 281644 edges, mean degree 7.56
   3-colourable, model verified on every edge (0.1 s)
   control: planted rhombus on one open pair reads forced = True; unplanted reads separable = True
-  pairs (p, p + 3u) with p at depth <= 1: 200 asked; separated by the first model 199; forced equal (solver claim) 0
+  pairs (p, p + 3u) with p at depth <= 1: 200 asked; Separable (colouring verified): 200 (199 by the first model); Forced (solver claim): 0
 N=700 |W|=60 word radius 3: 37641 points, 108336 edges, mean degree 5.76
   3-colourable, model verified on every edge (0.0 s)
   control: planted rhombus on one open pair reads forced = True; unplanted reads separable = True
-  pairs (p, p + 3u) with p at depth <= 1: 168 asked; separated by the first model 141; forced equal (solver claim) 0
+  pairs (p, p + 3u) with p at depth <= 1: 168 asked; Separable (colouring verified): 168 (141 by the first model); Forced (solver claim): 0

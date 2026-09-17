@@ -243,7 +243,7 @@ def cmd_balls(N, R, maxpairs):
     s.add_clause([var(b0, 1)])
     t = time.time()
     if not s.solve():
-        print(f"  NOT 3-colourable (solver claim, {time.time() - t:.1f} s)")
+        print(f"  NOT 3-colourable (solver claim, unchecked; {time.time() - t:.1f} s)")
         return
     m = s.get_model()
     col = [next(c for c in range(3) if m[var(v, c) - 1] > 0) for v in range(n)]
@@ -276,9 +276,13 @@ def cmd_balls(N, R, maxpairs):
             s.add_clause([-nextvar, -var(i, c), -var(j, c)])
         if not s.solve(assumptions=[nextvar]):
             forced += 1
+        else:                                    # a separable verdict is certified by its colouring, checked here
+            m = s.get_model()
+            c2 = [next(c for c in range(3) if m[var(v, c) - 1] > 0) for v in range(n)]
+            assert all(c2[a] != c2[b] for a, b in E) and c2[i] != c2[j], 'INSTRUMENT CATASTROPHE: separating model fails'
         nextvar += 1
-    print(f"  pairs (p, p + 3u) with p at depth <= 1: {len(pairs)} asked; separated by the first model {len(pairs) - len(open_)}; "
-          f"forced equal (solver claim) {forced}")
+    print(f"  pairs (p, p + 3u) with p at depth <= 1: {len(pairs)} asked; Separable (colouring verified): {len(pairs) - forced} "
+          f"({len(pairs) - len(open_)} by the first model); Forced (solver claim): {forced}")
 
 
 # ---------------------------------------------------------------- counts / circles
