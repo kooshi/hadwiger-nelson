@@ -7,6 +7,9 @@ its ℚ(√11) outputs byte-identical after the flag was added). Second opinion:
 `bash data/fs58/witness-23/run-all.sh` (with `steps.jsonl` present, seconds; from empty, about 15 minutes — the checkpoint makes a kill
 cost at most one round or one minute of deletion).
 
+**A smaller certified witness from the same checkpoint — 297 points, 670 edges, 12,225 LRAT additions — is in `minimal/`** (seeded deletion
+orders; recommended for a kernel form).
+
 ## The claim, and who checks what
 
 **`witness.json` lists 475 points of ℚ(√23)² whose unit-distance graph (1,099 edges) has no proper 3-colouring, so χ(ℚ(√23)²) ≥ 4.**

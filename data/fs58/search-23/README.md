@@ -9,7 +9,8 @@ gitignored; every other record is committed.
 
 **The witness is `data/fs58/witness-23/`: 475 points of ℚ(√23)², 1,099 unit edges, no proper 3-colouring — CERTIFIED by
 `tools/fs58_check_witness.py --radicand 23`, twelve planted faults refused, decorrelated recheck passed, the whole extraction reproduced
-from empty.** With the residue plane at 7 (row 52, hand level) **χ(ℚ(√23)²) = 4**. It needs no forced pair and no chain: it is a
+from empty.** With the residue plane at 7 (row 52, hand level) **χ(ℚ(√23)²) = 4**. A smaller certified witness from the same extraction, 297 points and
+670 edges, is `data/fs58/witness-23/minimal/`. It needs no forced pair and no chain: it is a
 refusing subset of one ball.
 
 The pool: axis (4) + the (3/5, 4/5) family (8) + the orbit of `((7 + √23)/12, (7 − √23)/12)` (8) + the orbit of
