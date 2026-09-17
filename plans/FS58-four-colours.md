@@ -514,7 +514,7 @@ word balls (§0 O3) and every periodic screen (R-B1) could not; this is the rigi
   nodes).
 * **Status: `χ(ℚ(√11)²) ≥ 4` at the tools-certificate level; with `[Fischer1990]` Thm 9, `χ(ℚ(√11)²) = 4`.** By §PA, the first real
   quadratic field whose plane is shown to need four colours; the graph is triangle-free (no `√3` in the field) with explicit coordinates in a
-  quadratic field (the smallest known triangle-free 4-chromatic unit-distance graphs, `[ExooIsmailescu2019]`'s 17 and 19 vertices, need
-  fields of degree 12–20). **P3 (0.3) won** — route C landed at finite size. **The kernel form is phase D2**, priced by the implementer at
+  quadratic field (the smallest known triangle-free 4-chromatic unit-distance graphs, Exoo–Ismailescu's EI17 and EI19, have coordinate fields
+  certified by `[CostaSilvaFilho2026]` as a degree-20 field and a base `ℚ(√2,√5,√7)` with a degree-12 angle). **P3 (0.3) won** — route C landed at finite size. **The kernel form is phase D2**, priced by the implementer at
   well under a minute through the `UDCert`/SAT-bridge pipeline (running).
 
