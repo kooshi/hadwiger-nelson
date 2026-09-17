@@ -1,0 +1,322 @@
+<title>Finite Plane Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&text=%E2%84%9A%E2%88%9A%CF%87%E2%89%A4%E2%89%A5%F0%9D%94%BD%E2%82%80%E2%82%81%E2%82%82%E2%82%83%E2%82%84%E2%82%85%E2%82%86%E2%82%87%E2%82%88%E2%82%89%CE%B1%CF%89%E2%88%92&display=swap">
+<style>
+:root {
+  --ground: #ECEFF3; --surface: #FFFFFF; --plate: #F9FAFC;
+  --ink: #111723; --ink-2: #4A5465; --ink-3: #778196; --rule: #D5DBE3;
+  --accent: #2553E8; --accent-soft: rgba(37, 83, 232, .10); --accent-ink: #FFFFFF;
+  --edge: rgba(24, 40, 72, .16); --dot: #172133; --sel: #07876A; --near: #D95A0B;
+  --serif: "Newsreader", "Noto Sans Math", Georgia, serif;
+  --sans: "IBM Plex Sans", "Noto Sans Math", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Noto Sans Math", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0A0D13; --surface: #111620; --plate: #0D1119;
+    --ink: #E5EAF1; --ink-2: #A3ADBC; --ink-3: #6D788A; --rule: #242D3B;
+    --accent: #85A1FF; --accent-soft: rgba(133, 161, 255, .13); --accent-ink: #0A0D13;
+    --edge: rgba(176, 196, 232, .15); --dot: #DCE4F0; --sel: #43D9A8; --near: #FF9D55;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0A0D13; --surface: #111620; --plate: #0D1119;
+  --ink: #E5EAF1; --ink-2: #A3ADBC; --ink-3: #6D788A; --rule: #242D3B;
+  --accent: #85A1FF; --accent-soft: rgba(133, 161, 255, .13); --accent-ink: #0A0D13;
+  --edge: rgba(176, 196, 232, .15); --dot: #DCE4F0; --sel: #43D9A8; --near: #FF9D55;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: var(--ground); color: var(--ink); font: 15px/1.5 var(--sans); padding-inline: 16px; padding-block: 0; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { max-width: 1360px; margin: 0 auto; padding-block: 14px 48px; display: grid; gap: 18px; }
+@media (min-width: 980px) {
+  .app { grid-template-columns: minmax(0, 1fr) 372px; align-items: start; column-gap: 28px; }
+  .viewer { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 14px); }
+}
+.mast { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; grid-column: 1 / -1; }
+.mast .brand { font: 600 12px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.mast .tag { font-size: 13px; color: var(--ink-3); }
+.viewer { display: grid; gap: 12px; min-width: 0; }
+.qs { display: flex; flex-wrap: wrap; gap: 6px; }
+.qs button { min-width: 44px; height: 36px; padding-inline: 10px; border: 1px solid var(--rule); background: var(--surface); border-radius: 8px; cursor: pointer; font: 500 14px var(--mono); color: var(--ink-2); }
+.qs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.head h1 { margin: 0; font: 600 clamp(28px, 5vw, 42px)/1.1 var(--serif); letter-spacing: -.01em; }
+.chi { margin: 4px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.chi b { font: 600 20px/1.2 var(--serif); }
+.chi span { color: var(--ink-2); font-size: 14px; }
+.stage { position: relative; width: 100%; aspect-ratio: 1 / 1; max-height: 72vh; background: var(--plate); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+@media (min-width: 980px) { .stage { aspect-ratio: auto; height: calc(100vh - 250px); min-height: 420px; max-height: none; } }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.status { position: absolute; left: 10px; bottom: 10px; right: 100px; font: 12px/1.35 var(--mono); color: var(--ink-2); pointer-events: none; }
+.tools { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 6px; }
+.tools button { min-width: 34px; height: 34px; padding-inline: 8px; border: 1px solid var(--rule); background: var(--surface); border-radius: 7px; cursor: pointer; font-size: 14px; }
+.panel { display: grid; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; min-width: 0; }
+.panel > section { padding: 16px; border-top: 1px solid var(--rule); min-width: 0; }
+.panel > :first-child { border-top: 0; }
+.panel h2 { margin: 0 0 10px; font: 600 11px/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.field-row { display: grid; gap: 6px; margin-bottom: 14px; }
+.field-row:last-child { margin-bottom: 0; }
+.legend { font-size: 13px; color: var(--ink-2); }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.seg label { position: relative; display: grid; place-items: center; min-height: 38px; padding: 4px 8px; font-size: 13px; text-align: center; cursor: pointer; border-left: 1px solid var(--rule); color: var(--ink-2); }
+.seg label:first-child { border-left: 0; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg label:has(input:checked) { background: var(--accent-soft); color: var(--ink); font-weight: 500; }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+.hint { margin: 6px 0 0; font-size: 12px; color: var(--ink-3); }
+dl.stats { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7px 14px; font-size: 13px; }
+dl.stats dt { color: var(--ink-2); }
+dl.stats dd { margin: 0; text-align: right; font: 13px var(--mono); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.fields { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.fields li { font: 13px var(--serif); border: 1px solid var(--rule); border-radius: 6px; padding: 1px 8px; }
+.none { font-size: 13px; color: var(--ink-3); margin: 0; }
+.about p { margin: 0 0 8px; font-size: 13px; color: var(--ink-2); max-width: 64ch; }
+.about p:last-child { margin-bottom: 0; }
+</style>
+
+<div class="app">
+  <header class="mast">
+    <div class="brand">Finite Plane Atlas</div>
+    <div class="tag">The unit-distance graphs of the residue planes UD(𝔽_q, 2), q ≡ 3 (mod 4)</div>
+  </header>
+
+  <main class="viewer">
+    <div class="qs" id="qs" role="group" aria-label="Choose the prime q"></div>
+    <div class="head">
+      <h1 id="title">UD(𝔽₁₁, 2)</h1>
+      <p class="chi"><b id="chi"></b><span id="how"></span></p>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv" aria-label="The finite plane; tap a point to show its unit circle"></canvas>
+      <div class="status" id="status"></div>
+      <div class="tools"><button type="button" id="fit">Fit</button></div>
+    </div>
+  </main>
+
+  <aside class="panel">
+    <section>
+      <h2>View</h2>
+      <div class="field-row">
+        <div class="legend" id="layLegend">Layout</div>
+        <div class="seg" role="radiogroup" aria-labelledby="layLegend">
+          <label><input type="radio" name="layout" id="lGrid" value="grid" checked>Grid</label>
+          <label><input type="radio" name="layout" id="lRings" value="rings">Rotation rings</label>
+        </div>
+        <p class="hint" id="layHint"></p>
+      </div>
+      <div class="field-row">
+        <div class="legend" id="edgeLegend">Edges</div>
+        <div class="seg" role="radiogroup" aria-labelledby="edgeLegend">
+          <label><input type="radio" name="edges" id="eAll" value="all" checked>All</label>
+          <label><input type="radio" name="edges" id="eSel" value="sel">Selected point only</label>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>This plane</h2>
+      <dl class="stats" id="stats"></dl>
+    </section>
+    <section>
+      <h2>Selected point</h2>
+      <dl class="stats" id="selStats"></dl>
+    </section>
+    <section>
+      <h2>Atlas fields that reduce to it</h2>
+      <ul class="fields" id="fields"></ul>
+      <p class="hint">A field reduces to 𝔽_q when each of its square roots is a square modulo q or divisible by q; its plane then maps edge-to-edge into this one, so χ(F²) is at most this plane's χ.</p>
+    </section>
+    <section class="about">
+      <h2>How this is drawn</h2>
+      <p><strong>Grid</strong> places (x, y) at integer coordinates from −(q−1)/2 to (q−1)/2. An edge joins points whose difference (a, b) has a² + b² ≡ 1 (mod q); it is drawn as the shortest lift of (a, b), so edges that wrap around the torus leave the square.</p>
+      <p><strong>Rotation rings</strong> groups points by x² + y², one ring per value, and orders each ring by the rotation group of order q + 1, so every rotation turns every ring by the same angle.</p>
+      <p><strong>Bounds</strong> come from the lean-dir project's record. The Hoffman lines are computed here from the eigenvalues in floating point.</p>
+    </section>
+  </aside>
+</div>
+
+<script>
+(() => {
+const QS = [3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83];
+const FACTS = {
+  3: ['χ = 3', 'exact', 'α = 3'],
+  7: ['χ = 4', 'three refused by solver; a verified four-colouring', 'α = 14 (exact certificate)'],
+  11: ['χ = 5', 'proved in Lean', 'α = 28 (exact certificate)'],
+  19: ['χ = 5', 'at most 5 in Lean; four refused by solver', 'α ≥ 76'],
+  23: ['6 ≤ χ ≤ 8', 'five refused by exact certificate; eight by a verified colouring', '87 ≤ α ≤ 105'],
+  31: ['5 ≤ χ ≤ 8', 'the only window plane where five is still open', '146 ≤ α ≤ 200'],
+  43: ['6 ≤ χ ≤ 8', 'five refused by exact certificate; a six-colouring would settle it', '258 ≤ α ≤ 365'],
+  47: ['6 ≤ χ ≤ 10', 'five refused by exact certificate; a six-colouring would settle it', '265 ≤ α ≤ 371'],
+  59: ['7 ≤ χ ≤ 10', 'six refused by exact certificate', '363 ≤ α ≤ 575'],
+  67: ['7 ≤ χ ≤ 12', 'six refused by exact certificate', '443 ≤ α ≤ 745'],
+  71: ['7 ≤ χ ≤ 12', 'six refused by the exact spectrum', 'α ≥ 426'],
+  79: ['χ ≥ 7', 'six refused by exact certificate', '578 ≤ α ≤ 1023'],
+  83: ['χ ≥ 7', 'six refused by exact certificate', '597 ≤ α ≤ 1046'],
+};
+const ATLAS = [[], [2], [3], [5], [7], [11], [23], [47], [167], [1055], [2351], [4703], [2, 3], [3, 11], [3, 11, 35], [3, 11, 14], [3, 11, 70], [3, 5, 11], [3, 11, 23], [3, 11, 247], [3, 7, 11], [3, 11, 13], [3, 5, 7, 11]];
+const SUB = '₀₁₂₃₄₅₆₇₈₉', sub = (n) => String(n).split('').map((c) => SUB[+c]).join('');
+const $ = (id) => document.getElementById(id), nf = (x) => x.toLocaleString('en-US');
+const mod = (a, q) => ((a % q) + q) % q;
+const isQR = (a, q) => { a = mod(a, q); if (!a) return true; let r = 1, b = a, e = (q - 1) / 2; while (e) { if (e & 1) r = r * b % q; b = b * b % q; e >>= 1; } return r === 1; };
+
+const state = { q: 11, layout: 'grid', edges: 'all' };
+let P = null, sel = -1, userMoved = false;
+const view = { s: 10, tx: 0, ty: 0 };
+try { const h = new URLSearchParams(location.hash.slice(1)); const q = +h.get('q'); if (QS.includes(q)) state.q = q; if (h.get('l') === 'rings') state.layout = 'rings'; } catch (e) { /* no hash */ }
+
+const qs = $('qs');
+for (const q of QS) { const b = document.createElement('button'); b.type = 'button'; b.textContent = q; b.addEventListener('click', () => { state.q = q; build(); }); qs.appendChild(b); }
+for (const el of document.querySelectorAll('input[name="layout"]')) el.addEventListener('change', () => { state.layout = el.value; layout(); fit(); draw(); save(); });
+for (const el of document.querySelectorAll('input[name="edges"]')) el.addEventListener('change', () => { state.edges = el.value; draw(); });
+const save = () => { try { history.replaceState(null, '', `#q=${state.q}&l=${state.layout}`); } catch (e) { /* sandboxed */ } };
+
+function build() {
+  const q = state.q, n = q * q, half = (q - 1) / 2;
+  const circle = []; for (let a = 0; a < q; a++) for (let b = 0; b < q; b++) if ((a * a + b * b) % q === 1) circle.push([a, b]);
+  const lift = (a) => (a > half ? a - q : a);
+  // a generator of the rotation group (order q + 1)
+  const mul = (u, v) => [mod(u[0] * v[0] - u[1] * v[1], q), mod(u[0] * v[1] + u[1] * v[0], q)];
+  let gen = null;
+  for (const u of circle) { let p = u, k = 1; while (!(p[0] === 1 && p[1] === 0)) { p = mul(p, u); k++; } if (k === q + 1) { gen = u; break; } }
+  // spectrum: λ(s, t) = Σ_{(a,b) on the circle} cos(2π(sa + tb)/q)
+  let lmin = Infinity;
+  for (let s = 0; s < q; s++) for (let t = 0; t < q; t++) { if (!s && !t) continue; let l = 0; for (const [a, b] of circle) l += Math.cos(2 * Math.PI * (s * a + t * b) / q); if (l < lmin) lmin = l; }
+  const d = q + 1, hoffA = n * (-lmin) / (d - lmin), hoffChi = 1 + d / (-lmin);
+  // norms and ring order
+  const norm = new Int32Array(n), ringIdx = new Int32Array(n);
+  for (let x = 0; x < q; x++) for (let y = 0; y < q; y++) norm[x * q + y] = (x * x + y * y) % q;
+  const seen = new Uint8Array(n);
+  for (let r = 1; r < q; r++) {
+    let base = -1; for (let i = 0; i < n; i++) if (norm[i] === r) { base = i; break; }
+    let p = [Math.floor(base / q), base % q];
+    for (let k = 0; k <= q; k++) { const i = p[0] * q + p[1]; if (!seen[i]) { seen[i] = 1; ringIdx[i] = k; } p = mul(p, gen); }
+  }
+  const lifts = circle.map(([a, b]) => [lift(a), lift(b)]).filter(([a, b]) => a > 0 || (a === 0 && b > 0));
+  P = { q, n, half, circle, lifts, norm, ringIdx, lmin, hoffA, hoffChi, omega: q === 3 || isQR(3, q) ? 3 : 2, xy: new Float64Array(2 * n) };
+  sel = -1; layout(); fit(); render(); draw(); save();
+}
+
+function layout() {
+  const { q, n, half, norm, ringIdx, xy } = P;
+  for (let i = 0; i < n; i++) {
+    const x = Math.floor(i / q), y = i % q;
+    if (state.layout === 'grid') { xy[2 * i] = x > half ? x - q : x; xy[2 * i + 1] = y > half ? y - q : y; }
+    else if (!norm[i]) { xy[2 * i] = 0; xy[2 * i + 1] = 0; }
+    else { const R = 1 + norm[i], th = 2 * Math.PI * ringIdx[i] / (q + 1); xy[2 * i] = R * Math.cos(th); xy[2 * i + 1] = R * Math.sin(th); }
+  }
+  $('layHint').textContent = state.layout === 'grid'
+    ? 'Coordinates as integers centred on the origin.'
+    : `Ring k holds the ${q + 1} points with x² + y² ≡ k; the centre is the origin alone.`;
+}
+
+function render() {
+  const q = state.q, [chi, how, alpha] = FACTS[q];
+  for (const b of qs.children) b.setAttribute('aria-pressed', String(+b.textContent === q));
+  $('title').textContent = `UD(𝔽${sub(q)}, 2)`; $('chi').textContent = chi; $('how').textContent = how;
+  const rows = [
+    ['Points', nf(P.n)], ['Degree', `${q + 1} (the unit circle)`], ['Edges', nf(P.n * (q + 1) / 2)],
+    ['Largest clique ω', P.omega === 3 ? '3 (3 is a square)' : '2 (3 is not a square)'],
+    ['Independent sets', alpha],
+    ['Least eigenvalue', P.lmin.toFixed(4)],
+    ['Hoffman: α ≤', nf(Math.floor(P.hoffA + 1e-9))],
+    ['Hoffman: χ ≥', String(Math.ceil(P.hoffChi - 1e-9))],
+  ];
+  fill($('stats'), rows);
+  const ul = $('fields'); ul.textContent = '';
+  const users = ATLAS.filter((r) => reduces(r, q));
+  if (!users.length) { const li = document.createElement('li'); li.textContent = 'none of the atlas fields'; li.style.border = '0'; li.style.color = 'var(--ink-3)'; ul.appendChild(li); }
+  for (const r of users) { const li = document.createElement('li'); li.textContent = r.length ? 'ℚ(' + r.map((x) => '√' + x).join(', ') + ')' : 'ℚ'; ul.appendChild(li); }
+  renderSel();
+}
+function reduces(r, q) {
+  // adapt the square roots so that at most one is divisible by q, then ask for squares
+  const gens = r.slice(); const div = gens.filter((g) => g % q === 0), rest = gens.filter((g) => g % q !== 0);
+  for (let i = 1; i < div.length; i++) rest.push((div[0] / q) * (div[i] / q));
+  return rest.every((g) => isQR(g, q));
+}
+function fill(dl, rows) { dl.textContent = ''; for (const [k, v] of rows) { const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); } }
+function renderSel() {
+  if (sel < 0) { fill($('selStats'), [['Tap a point', '—']]); return; }
+  const q = P.q, x = Math.floor(sel / q), y = sel % q, c = (v) => (v > P.half ? v - q : v);
+  fill($('selStats'), [['(x, y)', `(${c(x)}, ${c(y)})`], ['x² + y² mod q', String(P.norm[sel])], ['Neighbours', `${q + 1}, highlighted`]]);
+}
+
+// ---------- drawing ----------
+const cv = $('cv'), ctx = cv.getContext('2d'), stage = $('stage');
+let Wc = 0, Hc = 0, dpr = 1, raf = 0;
+new ResizeObserver(() => { const r = stage.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2.5); Wc = r.width; Hc = r.height; cv.width = Math.round(Wc * dpr); cv.height = Math.round(Hc * dpr); if (P && !userMoved) fit(); draw(); }).observe(stage);
+function fit() {
+  if (!P) return; userMoved = false; let m = 0;
+  for (let i = 0; i < P.n; i++) m = Math.max(m, Math.abs(P.xy[2 * i]), Math.abs(P.xy[2 * i + 1]));
+  view.s = Math.min(Wc, Hc - 30) / (2 * m + 2); view.tx = Wc / 2; view.ty = (Hc - 30) / 2;
+}
+const draw = () => { if (!raf) raf = requestAnimationFrame(paint); };
+function paint() {
+  raf = 0; if (!P) return;
+  const cs = getComputedStyle(document.documentElement), col = (v) => cs.getPropertyValue(v).trim();
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, Wc, Hc);
+  const { q, n, xy, lifts, circle } = P, s = view.s, X = (i) => xy[2 * i] * s + view.tx, Y = (i) => -xy[2 * i + 1] * s + view.ty;
+  const idx = (x, y) => mod(x, q) * q + mod(y, q);
+  if (state.edges === 'all') {
+    ctx.strokeStyle = col('--edge'); ctx.lineWidth = Math.max(0.35, Math.min(1, s * 0.06)); ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      const x = Math.floor(i / q), y = i % q;
+      for (const [a, b] of lifts) {
+        const j = idx(x + a, y + b);
+        if (state.layout === 'grid') { ctx.moveTo(X(i), Y(i)); ctx.lineTo(X(i) + a * s, Y(i) - b * s); }
+        else { ctx.moveTo(X(i), Y(i)); ctx.lineTo(X(j), Y(j)); }
+      }
+    }
+    ctx.stroke();
+  }
+  const r = Math.max(1.2, Math.min(4, s * 0.16));
+  ctx.fillStyle = col('--dot'); ctx.beginPath();
+  for (let i = 0; i < n; i++) { ctx.moveTo(X(i) + r, Y(i)); ctx.arc(X(i), Y(i), r, 0, 2 * Math.PI); }
+  ctx.fill();
+  if (sel >= 0) {
+    const x = Math.floor(sel / q), y = sel % q, nb = circle.map(([a, b]) => idx(x + a, y + b));
+    ctx.strokeStyle = col('--near'); ctx.lineWidth = 1.6; ctx.beginPath();
+    for (const j of nb) { ctx.moveTo(X(sel), Y(sel)); ctx.lineTo(X(j), Y(j)); }
+    ctx.stroke();
+    ctx.fillStyle = col('--near'); ctx.beginPath();
+    for (const j of nb) { ctx.moveTo(X(j) + r * 1.7, Y(j)); ctx.arc(X(j), Y(j), r * 1.7, 0, 2 * Math.PI); }
+    ctx.fill();
+    ctx.strokeStyle = col('--sel'); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(X(sel), Y(sel), r * 2.6 + 2, 0, 2 * Math.PI); ctx.stroke();
+  }
+  $('status').textContent = `${nf(n)} points · ${nf(n * (q + 1) / 2)} edges`;
+}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ---------- gestures ----------
+const ptrs = new Map(); let g = null;
+const loc = (e) => { const b = cv.getBoundingClientRect(); return { x: e.clientX - b.left, y: e.clientY - b.top }; };
+cv.addEventListener('pointerdown', (e) => { cv.setPointerCapture(e.pointerId); const p = loc(e); ptrs.set(e.pointerId, p);
+  if (ptrs.size === 1) g = { t: 'pan', x0: p.x, y0: p.y, tx: view.tx, ty: view.ty, moved: false, at: performance.now() };
+  else if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; g = { t: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, s0: view.s, mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, tx: view.tx, ty: view.ty }; } });
+cv.addEventListener('pointermove', (e) => { if (!ptrs.has(e.pointerId) || !g) return; const p = loc(e); ptrs.set(e.pointerId, p);
+  if (g.t === 'pan') { const dx = p.x - g.x0, dy = p.y - g.y0; if (Math.hypot(dx, dy) > 5) g.moved = true; if (g.moved) { view.tx = g.tx + dx; view.ty = g.ty + dy; userMoved = true; draw(); } }
+  else if (ptrs.size >= 2) { const [a, b] = [...ptrs.values()], f = Math.hypot(a.x - b.x, a.y - b.y) / g.d0, mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, wx = (g.mx - g.tx) / g.s0, wy = (g.my - g.ty) / g.s0; view.s = g.s0 * f; view.tx = mx - wx * view.s; view.ty = my - wy * view.s; userMoved = true; draw(); } });
+const up = (e) => { if (!ptrs.has(e.pointerId)) return; const p = loc(e); ptrs.delete(e.pointerId);
+  if (g && g.t === 'pan' && !g.moved && e.type === 'pointerup' && performance.now() - g.at < 500) pick(p.x, p.y);
+  if (ptrs.size === 1) { const [o] = [...ptrs.values()]; g = { t: 'pan', x0: o.x, y0: o.y, tx: view.tx, ty: view.ty, moved: true }; } else if (!ptrs.size) g = null; };
+cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+cv.addEventListener('wheel', (e) => { e.preventDefault(); const p = loc(e), f = Math.exp(-e.deltaY * 0.0016); view.tx = p.x - (p.x - view.tx) * f; view.ty = p.y - (p.y - view.ty) * f; view.s *= f; userMoved = true; draw(); }, { passive: false });
+cv.addEventListener('dblclick', () => { fit(); draw(); });
+$('fit').addEventListener('click', () => { fit(); draw(); });
+function pick(px, py) {
+  let best = -1, bd = 24 * 24;
+  for (let i = 0; i < P.n; i++) { const dx = P.xy[2 * i] * view.s + view.tx - px, dy = -P.xy[2 * i + 1] * view.s + view.ty - py, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = i; } }
+  sel = best; renderSel(); draw();
+}
+
+if (state.layout === 'rings') $('lRings').checked = true;
+build();
+})();
+</script>

@@ -1,0 +1,950 @@
+<title>Unit Distance Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Math&text=%E2%84%9A%E2%88%9A%CF%87%E2%89%A4%F0%9D%94%BD%E2%88%92&display=swap">
+<style>
+:root {
+  --ground: #ECEFF3; --surface: #FFFFFF; --plate: #F9FAFC;
+  --ink: #111723; --ink-2: #4A5465; --ink-3: #778196; --rule: #D5DBE3;
+  --accent: #2553E8; --accent-soft: rgba(37, 83, 232, .10); --accent-ink: #FFFFFF;
+  --edge: rgba(24, 40, 72, .30); --dot: #172133; --tri: rgba(37, 83, 232, .15);
+  --spin: #BE2F7C; --odd: #D95A0B; --sel: #07876A; --scale: rgba(24, 40, 72, .22);
+  --warn: #A15C00;
+  --serif: "Newsreader", "Noto Sans Math", Georgia, serif;
+  --sans: "IBM Plex Sans", "Noto Sans Math", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", "Noto Sans Math", ui-monospace, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0A0D13; --surface: #111620; --plate: #0D1119;
+    --ink: #E5EAF1; --ink-2: #A3ADBC; --ink-3: #6D788A; --rule: #242D3B;
+    --accent: #85A1FF; --accent-soft: rgba(133, 161, 255, .13); --accent-ink: #0A0D13;
+    --edge: rgba(176, 196, 232, .27); --dot: #DCE4F0; --tri: rgba(133, 161, 255, .20);
+    --spin: #F27EC2; --odd: #FF9D55; --sel: #43D9A8; --scale: rgba(176, 196, 232, .22);
+    --warn: #F2B35B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0A0D13; --surface: #111620; --plate: #0D1119;
+  --ink: #E5EAF1; --ink-2: #A3ADBC; --ink-3: #6D788A; --rule: #242D3B;
+  --accent: #85A1FF; --accent-soft: rgba(133, 161, 255, .13); --accent-ink: #0A0D13;
+  --edge: rgba(176, 196, 232, .27); --dot: #DCE4F0; --tri: rgba(133, 161, 255, .20);
+  --spin: #F27EC2; --odd: #FF9D55; --sel: #43D9A8; --scale: rgba(176, 196, 232, .22);
+  --warn: #F2B35B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: var(--ground); color: var(--ink); font: 15px/1.5 var(--sans); padding-inline: 16px; padding-block: 0; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.app { max-width: 1360px; margin: 0 auto; padding-block: 14px 48px; display: grid; gap: 18px; }
+@media (min-width: 980px) {
+  .app { grid-template-columns: minmax(0, 1fr) 372px; align-items: start; column-gap: 28px; }
+  .viewer { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 14px); }
+}
+
+.mast { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; grid-column: 1 / -1; }
+.mast .brand { font: 600 12px/1.2 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.mast .tag { font-size: 13px; color: var(--ink-3); }
+
+.viewer { display: grid; gap: 12px; min-width: 0; }
+.picker { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 8px; }
+.picker select, .step {
+  height: 40px; border: 1px solid var(--rule); background: var(--surface); border-radius: 8px;
+}
+.picker select { padding-inline: 12px; font-family: var(--sans); font-size: 15px; min-width: 0; }
+.step { cursor: pointer; font-size: 20px; line-height: 1; }
+.step:hover { border-color: var(--ink-3); }
+
+.head { display: grid; gap: 2px; }
+.head h1 { margin: 0; font: 600 clamp(30px, 5.4vw, 44px)/1.08 var(--serif); letter-spacing: -.01em; text-wrap: balance; }
+.chi { margin: 2px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.chi b { font: 600 20px/1.2 var(--serif); }
+.chi span { color: var(--ink-2); font-size: 14px; }
+.look { margin: 2px 0 0; color: var(--ink-2); font-size: 14px; max-width: 70ch; }
+
+.stage { position: relative; width: 100%; aspect-ratio: 1 / 1; max-height: 72vh; background: var(--plate); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+@media (min-width: 980px) { .stage { aspect-ratio: auto; height: calc(100vh - 318px); min-height: 420px; max-height: none; } }
+.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+.stage canvas:active { cursor: grabbing; }
+.status { position: absolute; left: 10px; bottom: 10px; right: 146px; font: 12px/1.35 var(--mono); color: var(--ink-2); pointer-events: none; text-wrap: pretty; }
+.status.busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: var(--accent); vertical-align: 1px; animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) { .status.busy::before { animation: none; } }
+.tools { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 6px; }
+.tools button { min-width: 34px; height: 34px; padding-inline: 8px; border: 1px solid var(--rule); background: var(--surface); border-radius: 7px; cursor: pointer; font-size: 14px; }
+
+.shapes { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding-inline: 12px; border: 1px solid var(--rule); background: var(--surface); border-radius: 999px; cursor: pointer; font-size: 13px; color: var(--ink-2); }
+.chip b { font: 500 13px var(--mono); color: var(--ink); font-variant-numeric: tabular-nums; }
+.chip[aria-pressed="true"] { border-color: var(--ink-3); color: var(--ink); background: var(--surface); }
+.chip[aria-pressed="false"] .sw { opacity: .3; }
+.chip:disabled { cursor: default; opacity: .55; }
+.sw { width: 14px; height: 14px; border-radius: 3px; flex: none; }
+.sw.tri { background: var(--tri); border: 1.5px solid var(--accent); }
+.sw.spin { border: 2px solid var(--spin); border-radius: 50%; }
+.sw.odd { border: 2px solid var(--odd); transform: rotate(45deg); border-radius: 2px; width: 12px; height: 12px; }
+
+.panel { display: grid; gap: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; min-width: 0; }
+.panel > section, .panel > details { padding: 16px; border-top: 1px solid var(--rule); min-width: 0; }
+.panel > :first-child { border-top: 0; }
+.panel h2 { margin: 0 0 10px; font: 600 11px/1.2 var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+
+.field-row { display: grid; gap: 6px; margin-bottom: 14px; }
+.field-row:last-child { margin-bottom: 0; }
+.field-row > label, .legend { font-size: 13px; color: var(--ink-2); display: flex; justify-content: space-between; gap: 8px; }
+.field-row output { font: 500 13px var(--mono); color: var(--ink); }
+.stepper { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; height: 40px; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.stepper button { border: 0; background: transparent; cursor: pointer; font-size: 18px; }
+.stepper button:hover { background: var(--accent-soft); }
+.stepper input { border: 0; border-inline: 1px solid var(--rule); text-align: center; background: transparent; font: 500 16px var(--mono); min-width: 0; -moz-appearance: textfield; }
+.stepper input::-webkit-inner-spin-button, .stepper input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.sugg { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); }
+.sugg button { border: 1px solid var(--rule); background: transparent; border-radius: 6px; padding: 2px 8px; font: 12px var(--mono); cursor: pointer; color: var(--ink-2); }
+.sugg button[aria-current="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.dirline { margin: 0; font-size: 13px; color: var(--ink-2); }
+.dirline.warn { color: var(--warn); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.seg label { position: relative; display: grid; place-items: center; min-height: 38px; padding: 4px 8px; font-size: 13px; text-align: center; cursor: pointer; border-left: 1px solid var(--rule); color: var(--ink-2); }
+.seg label:first-child { border-left: 0; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg label:has(input:checked) { background: var(--accent-soft); color: var(--ink); font-weight: 500; }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+.hint { margin: 6px 0 0; font-size: 12px; color: var(--ink-3); }
+
+dl.stats { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 7px 14px; font-size: 13px; }
+dl.stats dt { color: var(--ink-2); }
+dl.stats dd { margin: 0; text-align: right; font: 13px var(--mono); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.coord { display: grid; gap: 4px; font: 13px/1.45 var(--mono); overflow-wrap: anywhere; }
+.coord span { color: var(--ink-3); }
+.selmeta { margin: 0 0 8px; font-size: 13px; color: var(--ink-2); }
+
+details summary { cursor: pointer; font-size: 14px; font-weight: 500; }
+.dirlist { margin: 10px 0 0; padding: 0; list-style: none; max-height: 280px; overflow: auto; font: 12px/1.6 var(--mono); color: var(--ink-2); }
+.dirlist li { white-space: nowrap; }
+
+.custom { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.custom input { height: 40px; border: 1px solid var(--rule); border-radius: 8px; padding-inline: 12px; background: transparent; font-family: var(--mono); min-width: 0; }
+.custom button { height: 40px; padding-inline: 14px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); font-weight: 500; cursor: pointer; }
+.err { margin: 8px 0 0; font-size: 13px; color: var(--warn); }
+.about p { margin: 0 0 8px; font-size: 13px; color: var(--ink-2); max-width: 64ch; }
+.about p:last-child { margin-bottom: 0; }
+</style>
+
+<div class="app">
+  <header class="mast">
+    <div class="brand">Unit Distance Atlas</div>
+    <div class="tag">Exact unit-distance graphs over the number fields of the Hadwiger–Nelson hunt</div>
+  </header>
+
+  <main class="viewer">
+    <div class="picker">
+      <button class="step" id="prev" type="button" aria-label="Previous field">‹</button>
+      <label class="sr" for="field">Field</label>
+      <select id="field"></select>
+      <button class="step" id="next" type="button" aria-label="Next field">›</button>
+    </div>
+    <div class="head">
+      <h1 id="fname">ℚ</h1>
+      <p class="chi"><b id="fchi"></b><span id="fhow"></span></p>
+      <p class="look" id="flook"></p>
+    </div>
+    <div class="shapes" role="group" aria-label="Show an example shape">
+      <button class="chip" type="button" id="chipTri" aria-pressed="false"><i class="sw tri"></i>Triangles <b id="nTri">–</b></button>
+      <button class="chip" type="button" id="chipSpin" aria-pressed="false"><i class="sw spin"></i>Moser spindles <b id="nSpin">–</b></button>
+      <button class="chip" type="button" id="chipOdd" aria-pressed="false"><i class="sw odd"></i>Shortest odd cycle <b id="nOdd">–</b></button>
+    </div>
+    <div class="stage" id="stage">
+      <canvas id="cv" aria-label="Unit-distance graph drawing; drag to pan, pinch or scroll to zoom, tap a point to read its coordinates"></canvas>
+      <div class="status busy" id="status" role="status">Loading…</div>
+      <div class="tools">
+        <button type="button" id="zin" aria-label="Zoom in">+</button>
+        <button type="button" id="zout" aria-label="Zoom out">−</button>
+        <button type="button" id="fit">Fit</button>
+      </div>
+    </div>
+  </main>
+
+  <aside class="panel">
+    <section>
+      <h2>Directions</h2>
+      <div class="field-row">
+        <label for="nInput">Denominator N</label>
+        <div class="stepper">
+          <button type="button" id="nDown" aria-label="Decrease N">−</button>
+          <input id="nInput" type="number" min="1" max="99999" inputmode="numeric">
+          <button type="button" id="nUp" aria-label="Increase N">+</button>
+        </div>
+        <div class="sugg" id="nSugg"></div>
+      </div>
+      <p class="dirline" id="dirline">–</p>
+    </section>
+    <section>
+      <h2>Drawing</h2>
+      <div class="field-row">
+        <label for="pts">Points <output id="ptsOut" for="pts">1,000</output></label>
+        <input type="range" id="pts" min="100" max="3000" step="100" value="1000">
+      </div>
+      <div class="field-row">
+        <div class="legend" id="growLegend">Growth</div>
+        <div class="seg" role="radiogroup" aria-labelledby="growLegend">
+          <label><input type="radio" name="growth" id="gBall" value="ball" checked>Ball</label>
+          <label><input type="radio" name="growth" id="gClosure" value="closure">Closure</label>
+        </div>
+        <p class="hint" id="growHint"></p>
+      </div>
+      <div class="field-row">
+        <div class="legend" id="centreLegend">Centre</div>
+        <div class="seg" role="radiogroup" aria-labelledby="centreLegend">
+          <label><input type="radio" name="centre" id="cOrigin" value="origin" checked>Origin</label>
+          <label><input type="radio" name="centre" id="cOdd" value="odd">Shortest odd cycle</label>
+        </div>
+        <p class="hint" id="centreHint"></p>
+      </div>
+    </section>
+    <section>
+      <h2>This drawing</h2>
+      <dl class="stats" id="stats"></dl>
+    </section>
+    <section id="selBox">
+      <h2>Selected point</h2>
+      <div id="selBody"><p class="selmeta">Tap or click a point to read its exact coordinates.</p></div>
+    </section>
+    <details id="dirDetails">
+      <summary id="dirSummary">The directions</summary>
+      <ul class="dirlist" id="dirList"></ul>
+    </details>
+    <section>
+      <h2>Any field</h2>
+      <form class="custom" id="customForm">
+        <label class="sr" for="customR">Square roots to adjoin</label>
+        <input id="customR" placeholder="e.g. 3, 11, 13" autocomplete="off" spellcheck="false">
+        <button type="submit">Open</button>
+      </form>
+      <p class="hint">Up to four square roots of positive integers. The search is exact; large fields at large N may stop at the step budget, and the page says so.</p>
+      <p class="err" id="customErr" hidden></p>
+    </section>
+    <section class="about">
+      <h2>How this is drawn</h2>
+      <p><strong>Directions</strong> are every unit vector (x, y) whose coordinates are integer combinations of the field's square roots divided by N, found by exhaustive search in integer arithmetic.</p>
+      <p><strong>Ball</strong> draws all sums of at most r directions from the centre, nearest first, up to the point budget. <strong>Closure</strong> draws the unit star of the centre, then repeatedly the nearest point already joined to two drawn points.</p>
+      <p><strong>Edges</strong> are all pairs of drawn points at distance exactly 1. Floating point only proposes a pair; an integer identity decides it.</p>
+      <p><strong>χ</strong> above is the chromatic number of the whole plane over the field, as recorded in the lean-dir project; the drawing is a finite piece of it and is left uncoloured.</p>
+    </section>
+  </aside>
+</div>
+
+<script>
+// ===== exact core: multiquadratic fields, unit vectors, lattice growth, shapes =====
+const Core = (() => {
+  const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) { const t = a % b; a = b; b = t; } return a; };
+  const isqrt = (n) => { if (n < 0) return -1; let r = Math.floor(Math.sqrt(n)); while (r * r > n) r--; while ((r + 1) * (r + 1) <= n) r++; return r; };
+  const primesOf = (n) => { const ps = []; for (let p = 2; p * p <= n; p++) { let e = 0; while (n % p === 0) { n /= p; e++; } if (e % 2) ps.push(p); } if (n > 1) ps.push(n); return ps; };
+  const symdiff = (a, b) => { const s = new Set(a); for (const x of b) s.has(x) ? s.delete(x) : s.add(x); return [...s].sort((x, y) => x - y); };
+  const inter = (a, b) => a.filter((x) => b.includes(x));
+  const prod = (ps) => ps.reduce((m, p) => m * p, 1);
+
+  // A real multiquadratic field Q(√g1, …, √gk): basis √d_S over squarefree d_S, S ⊆ {1..k} as a bitmask.
+  function makeField(radicands) {
+    const basis = []; // [{primes, pivot}]
+    for (const r of radicands) {
+      let v = primesOf(Math.floor(Math.abs(r)));
+      for (const b of basis) if (v.includes(b.pivot)) v = symdiff(v, b.primes);
+      if (v.length) basis.push({ primes: v, pivot: v[v.length - 1] });
+    }
+    const k = basis.length, n = 1 << k;
+    const P = []; // prime set of d_S
+    for (let S = 0; S < n; S++) { let v = []; for (let j = 0; j < k; j++) if (S >> j & 1) v = symdiff(v, basis[j].primes); P.push(v); }
+    const d = P.map(prod), gens = basis.map((b) => prod(b.primes));
+    const c = [];   // √d_S · √d_T = c[S][T] · √d_(S^T)
+    for (let S = 0; S < n; S++) { c.push([]); for (let T = 0; T < n; T++) c[S].push(prod(inter(P[S], P[T]))); }
+    const pairs = []; // for R ≠ 0: [S, T, c] with S < T, S ^ T = R
+    for (let R = 0; R < n; R++) { pairs.push([]); if (!R) continue; for (let S = 0; S < n; S++) { const T = S ^ R; if (S < T) pairs[R].push([S, T, c[S][T]]); } }
+    const sq = d.map(Math.sqrt);
+    const eps = []; // eps[σ][S] = sign of √d_S under the embedding σ
+    for (let s = 0; s < n; s++) { eps.push([]); for (let S = 0; S < n; S++) { let b = S & s, par = 0; while (b) { par ^= b & 1; b >>= 1; } eps[s].push(par ? -1 : 1); } }
+    return { k, n, gens, d, c, pairs, sq, eps, hasSqrt3: d.includes(3) };
+  }
+
+  // Every unit vector (x, y) ∈ F² with N·x, N·y in the Z-span of the basis. A vector is an Int32Array
+  // [X_0..X_{n-1}, Y_0..Y_{n-1}]. Exhaustive: DFS over the irrational coefficient pairs, largest d first,
+  // pruned by the rational part (Σ d_S(X_S²+Y_S²) = N²) and by every real embedding (each image lies on
+  // the circle of radius N); the rational pair is then solved from the linear constraints.
+  function* unitVectors(F, N, budget = 4e7) {
+    const { n, d, c, sq, eps } = F, N2 = N * N, out = [], seen = new Set();
+    const order = []; for (let S = 1; S < n; S++) order.push(S); order.sort((a, b) => d[b] - d[a]);
+    const X = new Array(n).fill(0), Y = new Array(n).fill(0);
+    const L = new Array(n).fill(0);            // L[R] = Σ_{0<S<T, S^T=R} c(X_S X_T + Y_S Y_T)
+    const px = new Float64Array(n), py = new Float64Array(n);
+    let nodes = 0, stopped = false;
+    const push = (a, b) => {
+      const v = new Int32Array(2 * n); v[0] = a; v[n] = b; for (let S = 1; S < n; S++) { v[S] = X[S]; v[n + S] = Y[S]; }
+      const key = v.join(','); if (!seen.has(key)) { seen.add(key); out.push(v); }
+    };
+    const leaf = (B) => {
+      let R0 = 0; for (const S of order) if (X[S] || Y[S]) { R0 = S; break; }
+      if (!R0) { for (let a = -N; a <= N; a++) { const r = N2 - a * a, b = isqrt(r); if (b >= 0 && b * b === r) { push(a, b); push(a, -b); } } return; }
+      const u = X[R0], v = Y[R0], g = u * u + v * v, Lr = L[R0], s2 = B * g - Lr * Lr;
+      if (s2 < 0) return; const s = isqrt(s2); if (s * s !== s2) return;
+      for (const t of s ? [s, -s] : [0]) {
+        const an = -Lr * u - t * v, cn = -Lr * v + t * u;
+        if (an % g || cn % g) continue; const a = an / g, b = cn / g;
+        if (a * a + b * b !== B) continue;
+        let ok = true; for (let R = 1; R < n && ok; R++) if (a * X[R] + b * Y[R] + L[R] !== 0) ok = false;
+        if (ok) push(a, b);
+      }
+    };
+    function* rec(i, B) {
+      if (++nodes > budget) { stopped = true; return; }
+      if ((nodes & 0x3fff) === 0) yield nodes;
+      const remPairs = order.length - i + 1, slack = Math.sqrt(remPairs * B) + 1e-6;
+      for (let s = 0; s < n; s++) { const r = Math.hypot(px[s], py[s]); if (Math.abs(r - N) > slack) return; }
+      if (i === order.length) { leaf(B); return; }
+      const S = order[i], dS = d[S], xm = isqrt(Math.floor(B / dS));
+      for (let x = -xm; x <= xm; x++) {
+        const Bx = B - dS * x * x, ym = isqrt(Math.floor(Bx / dS));
+        for (let y = -ym; y <= ym; y++) {
+          X[S] = x; Y[S] = y;
+          for (let j = 0; j < i; j++) { const T = order[j]; if (X[T] || Y[T]) L[S ^ T] += c[S][T] * (x * X[T] + y * Y[T]); }
+          for (let s = 0; s < n; s++) { const e = eps[s][S] * sq[S]; px[s] += x * e; py[s] += y * e; }
+          yield* rec(i + 1, Bx - dS * y * y);
+          for (let s = 0; s < n; s++) { const e = eps[s][S] * sq[S]; px[s] -= x * e; py[s] -= y * e; }
+          for (let j = 0; j < i; j++) { const T = order[j]; if (X[T] || Y[T]) L[S ^ T] -= c[S][T] * (x * X[T] + y * Y[T]); }
+          X[S] = 0; Y[S] = 0;
+          if (stopped) return;
+        }
+      }
+    }
+    yield* rec(0, N2);
+    for (const v of out) if (!isUnit(F, N, v)) throw new Error('enumeration produced a non-unit vector');
+    return { W: out, complete: !stopped, nodes };
+  }
+
+  // exact test: is the integer vector v (over denominator N) a unit vector?
+  function isUnit(F, N, v) {
+    const { n, d, pairs } = F; let q = 0;
+    for (let S = 0; S < n; S++) q += d[S] * (v[S] * v[S] + v[n + S] * v[n + S]);
+    if (q !== N * N) return false;
+    for (let R = 1; R < n; R++) { let t = 0; for (const [S, T, cc] of pairs[R]) t += cc * (v[S] * v[T] + v[n + S] * v[n + T]); if (t) return false; }
+    return true;
+  }
+  const embed = (F, N, v) => { let x = 0, y = 0; for (let S = 0; S < F.n; S++) { x += v[S] * F.sq[S]; y += v[F.n + S] * F.sq[S]; } return [x / N, y / N]; };
+
+  const hashVec = (v) => { let h1 = 0x811c9dc5, h2 = 0x9e3779b9; for (let i = 0; i < v.length; i++) { h1 = Math.imul(h1 ^ v[i], 16777619); h2 = Math.imul(h2 ^ (v[i] + i), 0x85ebca6b) ^ (h2 >>> 13); } return (h1 >>> 0) * 2097152 + ((h2 >>> 0) >>> 11); };
+  const eqAt = (A, i, B, j, m) => { for (let t = 0; t < m; t++) if (A[i + t] !== B[j + t]) return false; return true; };
+
+  // growth. 'ball': the word-length ball of the Cayley graph about the seeds (ties: nearest the centre).
+  // 'closure': the seeds and their unit stars, then repeatedly the nearest lattice point that already has two
+  // or more unit neighbours drawn (a rhombus, triangle or spindle completion); a point with one only if none has two.
+  function* grow(F, N, W, seeds, target, mode) {
+    const m = 2 * F.n;
+    const pts = new Int32Array((target + 1) * m); let np = 0;
+    const pmap = new Map();
+    let cx = 0, cy = 0; for (const s of seeds) { const [x, y] = embed(F, N, s); cx += x / seeds.length; cy += y / seeds.length; }
+    const cand = new Map(); const cP = [], cW = [], cS = [], cD = [], cDone = [];
+    const heaps = [[], [], []];
+    const hpush = (h, key, id) => { h.push([key, id]); let i = h.length - 1; while (i) { const p = (i - 1) >> 1; if (h[p][0] <= h[i][0]) break; [h[p], h[i]] = [h[i], h[p]]; i = p; } };
+    const hpop = (h) => { const top = h[0], last = h.pop(); if (h.length) { h[0] = last; let i = 0; for (;;) { const l = 2 * i + 1, r = l + 1; let b = i; if (l < h.length && h[l][0] < h[b][0]) b = l; if (r < h.length && h[r][0] < h[b][0]) b = r; if (b === i) break; [h[b], h[i]] = [h[i], h[b]]; i = b; } } return top; };
+    const tmp = new Int32Array(m);
+    const same = (i) => { for (let t = 0; t < m; t++) if (pts[i * m + t] !== tmp[t]) return false; return true; };
+    const findTmp = () => { const l = pmap.get(hashVec(tmp)); if (l) for (const i of l) if (same(i)) return i; return -1; };
+    const depth = []; let capped = false; const candCap = 1500000;
+    const addPoint = (vec, dep) => {
+      for (let t = 0; t < m; t++) tmp[t] = vec[t];
+      if (findTmp() >= 0) return;
+      pts.set(vec, np * m); const h = hashVec(vec); const l = pmap.get(h); l ? l.push(np) : pmap.set(h, [np]); depth.push(dep);
+      const i = np++;
+      for (let w = 0; w < W.length; w++) {
+        const Wv = W[w]; for (let t = 0; t < m; t++) tmp[t] = pts[i * m + t] + Wv[t];
+        if (findTmp() >= 0) continue;
+        const hh = hashVec(tmp); let id = -1; const cl = cand.get(hh);
+        if (cl) for (const j of cl) { const P = cP[j] * m, Wj = W[cW[j]]; let eq = true; for (let t = 0; t < m && eq; t++) if (pts[P + t] + Wj[t] !== tmp[t]) eq = false; if (eq) { id = j; break; } }
+        const isNew = id < 0;
+        if (isNew) {
+          if (cP.length >= candCap) { capped = true; continue; }
+          id = cP.length; cP.push(i); cW.push(w); cS.push(0); cDone.push(false);
+          const [x, y] = embed(F, N, tmp); cD.push(Math.hypot(x - cx, y - cy));
+          cl ? cl.push(id) : cand.set(hh, [id]);
+        }
+        cS[id]++;
+        if (mode === 'ball') { if (isNew) hpush(heaps[0], (dep + 1) * 1e6 + cD[id], id); }
+        else if (cS[id] === 1) hpush(heaps[1], cD[id], id);
+        else if (cS[id] === 2) hpush(heaps[2], cD[id], id);
+      }
+    };
+    const materialise = (id) => { const vec = new Int32Array(m), P = cP[id] * m, Wv = W[cW[id]]; for (let t = 0; t < m; t++) vec[t] = pts[P + t] + Wv[t]; return vec; };
+    for (const s of seeds) if (np < target) addPoint(s, 0);
+    if (mode === 'closure') { // the unit stars of the seeds, nearest first
+      const star = []; for (let id = 0; id < cP.length; id++) star.push(id);
+      star.sort((a, b) => cD[a] - cD[b]);
+      for (const id of star) { if (np >= target) break; if (!cDone[id]) { cDone[id] = true; addPoint(materialise(id), 1); } }
+    }
+    while (np < target) {
+      let id = -1;
+      const order = mode === 'ball' ? [heaps[0]] : [heaps[2], heaps[1]];
+      for (const h of order) { while (h.length) { const [, j] = hpop(h); if (!cDone[j]) { id = j; break; } } if (id >= 0) break; }
+      if (id < 0) break;
+      cDone[id] = true; addPoint(materialise(id), depth[cP[id]] + 1);
+      if ((np & 63) === 0) yield np;
+    }
+    return { pts: pts.slice(0, np * m), np, capped };
+  }
+
+  // all exact unit edges among the points: float grid proposes, exact arithmetic decides
+  function edgesOf(F, N, pts, np) {
+    const m = 2 * F.n, xy = new Float64Array(2 * np);
+    for (let i = 0; i < np; i++) { const [x, y] = embed(F, N, pts.subarray(i * m, (i + 1) * m)); xy[2 * i] = x; xy[2 * i + 1] = y; }
+    const grid = new Map(); const cell = (x) => Math.floor(x);
+    for (let i = 0; i < np; i++) { const k = cell(xy[2 * i]) * 65536 + cell(xy[2 * i + 1]); const l = grid.get(k); l ? l.push(i) : grid.set(k, [i]); }
+    let maxAbs = 0; for (let i = 0; i < pts.length; i++) maxAbs = Math.max(maxAbs, Math.abs(pts[i]));
+    const bound = 4 * maxAbs * maxAbs * Math.max(...F.d) * F.n * F.n;
+    const safe = bound < 2 ** 52;
+    const E = [], dv = new Int32Array(m); let proposals = 0;
+    for (let i = 0; i < np; i++) {
+      const gx = cell(xy[2 * i]), gy = cell(xy[2 * i + 1]);
+      for (let ax = -1; ax <= 1; ax++) for (let ay = -1; ay <= 1; ay++) {
+        const l = grid.get((gx + ax) * 65536 + gy + ay); if (!l) continue;
+        for (const j of l) {
+          if (j <= i) continue; const dx = xy[2 * i] - xy[2 * j], dy = xy[2 * i + 1] - xy[2 * j + 1];
+          if (Math.abs(dx * dx + dy * dy - 1) > 1e-7) continue;
+          proposals++;
+          for (let t = 0; t < m; t++) dv[t] = pts[j * m + t] - pts[i * m + t];
+          if (safe ? isUnit(F, N, dv) : isUnitBig(F, N, dv)) E.push(i, j);
+        }
+      }
+    }
+    return { E: new Int32Array(E), xy, proposals };
+  }
+  function isUnitBig(F, N, v) {
+    const { n, d, pairs } = F, b = (x) => BigInt(x); let q = 0n;
+    for (let S = 0; S < n; S++) q += b(d[S]) * (b(v[S]) * b(v[S]) + b(v[n + S]) * b(v[n + S]));
+    if (q !== b(N) * b(N)) return false;
+    for (let R = 1; R < n; R++) { let t = 0n; for (const [S, T, cc] of pairs[R]) t += b(cc) * (b(v[S]) * b(v[T]) + b(v[n + S]) * b(v[n + T])); if (t) return false; }
+    return true;
+  }
+
+  // ---- shapes on the drawn graph ----
+  function adjacency(np, E) {
+    const adj = Array.from({ length: np }, () => []);
+    for (let e = 0; e < E.length; e += 2) { adj[E[e]].push(E[e + 1]); adj[E[e + 1]].push(E[e]); }
+    for (const l of adj) l.sort((a, b) => a - b);
+    return adj;
+  }
+  function triangles(adj) {
+    const T = [];
+    for (let u = 0; u < adj.length; u++) for (const v of adj[u]) if (v > u) {
+      const A = adj[u], B = adj[v]; let i = 0, j = 0;
+      while (i < A.length && j < B.length) { if (A[i] < B[j]) i++; else if (A[i] > B[j]) j++; else { if (A[i] > v) T.push(u, v, A[i]); i++; j++; } }
+    }
+    return T;
+  }
+  // Moser spindles: an apex a with two rhombus tips (b + c − a over a triangle abc) at unit distance.
+  // In the plane each tip at distance √3 fixes its rhombus, and one spindle has one apex.
+  function spindles(F, pts, np, adj, T) {
+    const m = 2 * F.n, pmap = new Map();
+    for (let i = 0; i < np; i++) { const h = hashVec(pts.subarray(i * m, (i + 1) * m)); const l = pmap.get(h); l ? l.push(i) : pmap.set(h, [i]); }
+    const tmp = new Int32Array(m);
+    const find = () => { const l = pmap.get(hashVec(tmp)); if (l) for (const i of l) { let ok = true; for (let t = 0; t < m && ok; t++) if (pts[i * m + t] !== tmp[t]) ok = false; if (ok) return i; } return -1; };
+    const tips = Array.from({ length: np }, () => new Map()); // apex -> tip -> [b, c]
+    for (let e = 0; e < T.length; e += 3) {
+      const tri = [T[e], T[e + 1], T[e + 2]];
+      for (let r = 0; r < 3; r++) {
+        const a = tri[r], b = tri[(r + 1) % 3], c = tri[(r + 2) % 3];
+        for (let t = 0; t < m; t++) tmp[t] = pts[b * m + t] + pts[c * m + t] - pts[a * m + t];
+        const tip = find(); if (tip >= 0) tips[a].set(tip, [b, c]);
+      }
+    }
+    const S = [];
+    for (let a = 0; a < np; a++) {
+      const ts = [...tips[a].keys()];
+      for (let i = 0; i < ts.length; i++) for (let j = i + 1; j < ts.length; j++)
+        if (bsearch(adj[ts[i]], ts[j])) S.push([a, ...tips[a].get(ts[i]), ts[i], ...tips[a].get(ts[j]), ts[j]]);
+    }
+    return S;
+  }
+  const bsearch = (A, x) => { let lo = 0, hi = A.length - 1; while (lo <= hi) { const mid = (lo + hi) >> 1; if (A[mid] === x) return true; if (A[mid] < x) lo = mid + 1; else hi = mid - 1; } return false; };
+  // shortest odd cycle of the drawn graph, by breadth-first search from every vertex
+  function shortestOddCycle(adj) {
+    const np = adj.length, dist = new Int32Array(np), par = new Int32Array(np), q = new Int32Array(np);
+    let best = Infinity, cyc = null;
+    for (let s = 0; s < np; s++) {
+      dist.fill(-1); dist[s] = 0; par[s] = -1; let h = 0, t = 0; q[t++] = s;
+      while (h < t) {
+        const u = q[h++]; if (2 * dist[u] + 1 >= best) break;
+        for (const v of adj[u]) {
+          if (dist[v] < 0) { dist[v] = dist[u] + 1; par[v] = u; q[t++] = v; }
+          else if (dist[v] === dist[u] && u < v) {
+            const len = 2 * dist[u] + 1;
+            if (len < best) {
+              const pu = [], pv = []; let x = u, y = v;
+              while (x !== y) { pu.push(x); pv.push(y); x = par[x]; y = par[y]; }
+              const c = [...pu, x, ...pv.reverse()];
+              if (c.length === len) { best = len; cyc = c; }
+            }
+          }
+        }
+      }
+      if (best === 3) break;
+    }
+    return cyc;
+  }
+  // an odd cycle found by breadth-first search from one vertex: the first same-level edge, closed through the tree
+  function oddCycleFrom(adj, s) {
+    const np = adj.length, dist = new Int32Array(np).fill(-1), par = new Int32Array(np), q = new Int32Array(np);
+    dist[s] = 0; par[s] = -1; let h = 0, t = 0; q[t++] = s;
+    while (h < t) {
+      const u = q[h++];
+      for (const v of adj[u]) {
+        if (dist[v] < 0) { dist[v] = dist[u] + 1; par[v] = u; q[t++] = v; }
+        else if (dist[v] === dist[u]) { const pu = [], pv = []; let x = u, y = v; while (x !== y) { pu.push(x); pv.push(y); x = par[x]; y = par[y]; } return [...pu, x, ...pv.reverse()]; }
+      }
+    }
+    return null;
+  }
+  // shortest odd cycle of the Cayley graph of the directions, by breadth-first search from 0 with a point cap
+  function* cayleyOddCycle(F, N, W, cap) {
+    const m = 2 * F.n; let store = new Int32Array(Math.min(cap, 4096) * m); let np = 0;
+    const pmap = new Map(), level = [], parent = [], via = [];
+    const ensure = () => { if ((np + 1) * m > store.length) { const s2 = new Int32Array(store.length * 2); s2.set(store); store = s2; } };
+    const tmp = new Int32Array(m);
+    const find = () => { const l = pmap.get(hashVec(tmp)); if (l) for (const i of l) { let ok = true; for (let t = 0; t < m && ok; t++) if (store[i * m + t] !== tmp[t]) ok = false; if (ok) return i; } return -1; };
+    const add = (lev, p, w) => { ensure(); store.set(tmp, np * m); const h = hashVec(tmp); const l = pmap.get(h); l ? l.push(np) : pmap.set(h, [np]); level.push(lev); parent.push(p); via.push(w); return np++; };
+    tmp.fill(0); add(0, -1, -1);
+    let head = 0, L = -1;
+    while (head < np) {
+      const u = head++;
+      if (level[u] !== L) { L = level[u]; yield { level: L, points: np }; }
+      for (let w = 0; w < W.length; w++) {
+        for (let t = 0; t < m; t++) tmp[t] = store[u * m + t] + W[w][t];
+        const v = find();
+        if (v < 0) { if (np >= cap) return { found: false, radius: L, points: np }; add(level[u] + 1, u, w); }
+        else if (level[v] === level[u]) {
+          const words = []; let x = u; const a = []; while (x > 0) { a.push(via[x]); x = parent[x]; }
+          let y = v; const b = []; while (y > 0) { b.push(via[y]); y = parent[y]; }
+          // closed walk 0 → u → v → 0 of length 2L+1; shortest odd closed walk through 0 is a cycle
+          const walk = [...a.reverse(), w]; const back = b; // v = sum(b); return along −b in reverse
+          const verts = []; const acc = new Int32Array(m); verts.push(acc.slice());
+          for (const wi of walk) { for (let t = 0; t < m; t++) acc[t] += W[wi][t]; verts.push(acc.slice()); }
+          for (let i = 0; i < back.length - 1; i++) { for (let t = 0; t < m; t++) acc[t] -= W[back[i]][t]; verts.push(acc.slice()); }
+          return { found: true, length: 2 * level[u] + 1, verts, points: np };
+        }
+      }
+    }
+    return { found: false, radius: L, points: np, exhausted: true };
+  }
+
+  // exact coordinate as text: (Σ X_S √d_S) / N, reduced
+  function fmt(F, N, v, off) {
+    let g = N; for (let S = 0; S < F.n; S++) g = gcd(g, v[off + S]);
+    const den = N / g; let s = '';
+    for (let S = 0; S < F.n; S++) {
+      const a = v[off + S] / g; if (!a) continue;
+      const mag = Math.abs(a), rad = F.d[S] === 1 ? '' : '√' + F.d[S];
+      const term = rad ? (mag === 1 ? rad : mag + rad) : String(mag);
+      s += s ? (a < 0 ? ' − ' : ' + ') + term : (a < 0 ? '−' : '') + term;
+    }
+    if (!s) return '0';
+    const multi = s.includes(' + ') || s.includes(' − ');
+    return den === 1 ? s : (multi ? '(' + s + ')' : s) + '/' + den;
+  }
+
+  return { gcd, isqrt, makeField, unitVectors, isUnit, embed, grow, edgesOf, hashVec, adjacency, triangles, spindles, shortestOddCycle, oddCycleFrom, cayleyOddCycle, fmt };
+})();
+if (typeof module !== 'undefined') module.exports = Core;
+
+</script>
+<script>
+(() => {
+const FIELDS = [
+  { g: 'ℚ and quadratic fields', r: [], N: 5, sugg: [5, 25, 65], chi: 'χ = 2', how: 'classical', look: 'Only Pythagorean directions such as (3 + 4i)/5 and their quarter turns. No triangles and no odd cycles.' },
+  { g: 'ℚ and quadratic fields', r: [2], N: 6, sugg: [2, 6, 18], chi: 'χ = 2', how: 'two-colour criterion, proved by hand', look: 'The eight-fold direction (1 + i)/√2 appears at N = 2. Still bipartite.' },
+  { g: 'ℚ and quadratic fields', r: [3], N: 2, sugg: [2, 7, 14], chi: 'χ = 3', how: 'classical', look: 'Triangles appear: an equilateral triangle needs exactly √3. At N = 2 the directions are the twelve twelfth roots of unity.' },
+  { g: 'ℚ and quadratic fields', r: [5], N: 3, sugg: [3, 15, 45], chi: 'χ = 2', how: 'Fischer 1990', look: 'New directions such as (2 + i√5)/3, and still no odd cycle.' },
+  { g: 'ℚ and quadratic fields', r: [7], N: 8, sugg: [4, 8, 24], chi: 'χ = 3', how: 'proved by hand; the finite plane over 𝔽₃ colours it', look: 'No triangles (no √3), yet three colours are needed: 5-cycles already appear at N = 4. (3 + i√7)/4 and (3√7 + i)/8 live here.' },
+  { g: 'ℚ and quadratic fields', r: [11], N: 10, sugg: [6, 10, 30], chi: 'χ = 4', how: '≥ 4 by a 204-point graph checked in Lean (FS-58); ≤ 4 through the plane over 𝔽₇', look: 'The Moser twist (5 + i√11)/6 lives here (N = 6), without the triangles that would make it a spindle. At N = 10 the drawing holds 5-cycles; the four-colour proof’s 52-point forcer uses these 36 directions.' },
+  { g: 'ℚ and quadratic fields', r: [23], N: 12, sugg: [8, 12, 24, 60], chi: 'χ = 4', how: '≥ 4 by a certified 297-point graph (FS-58); ≤ 4 through the plane over 𝔽₇', look: 'The first new directions appear at N = 8, such as ((−3 − √23) + i(−3 + √23))/8; (11 + i√23)/12 follows, and at N = 12 the drawing already holds 7-cycles.' },
+  { g: 'ℚ and quadratic fields', r: [47], N: 24, sugg: [12, 24, 48, 120], chi: '4 ≤ χ ≤ 5', how: '≥ 4 by a certified 169-point graph (FS-58); ≤ 5 through 𝔽₁₁; the conjecture predicts 5, given a solver’s refusal of four colours on 𝔽₁₉', look: 'The first new directions appear at N = 12, such as ((−5 − √47) + i(−5 + √47))/12; (23 + i√47)/24 follows.' },
+  { g: 'ℚ and quadratic fields', r: [71], N: 12, sugg: [12, 24, 60], chi: 'χ = 4', how: '≥ 4 by a certified 148-point graph (FS-58); ≤ 4 through the plane over 𝔽₇', look: 'The first new directions appear at N = 12, such as ((−1 − √71) + i(−1 + √71))/12.' },
+  { g: 'ℚ and quadratic fields', r: [95], N: 12, sugg: [12, 24, 60], chi: 'χ = 4', how: '≥ 4 by a certified 1,068-point graph (FS-58); ≤ 4 through the plane over 𝔽₇', look: 'The first new direction is (7 + i√95)/12.' },
+  { g: 'ℚ and quadratic fields', r: [191], N: 20, sugg: [20, 40, 60], chi: 'χ = 4', how: '≥ 4 by a certified 483-point graph (FS-58); ≤ 4 through the plane over 𝔽₇', look: 'The first new directions appear at N = 20, such as ((−3 − √191) + i(−3 + √191))/20.' },
+  { g: 'Quadratic fields at the six-colour window', r: [167], N: 420, sugg: [24, 84, 140, 420, 2184], chi: '3 ≤ χ ≤ 7', how: 'five colours are refused on its usable planes 𝔽₂₃ and 𝔽₄₃, so the conjecture predicts 6 or 7; four colours not yet proved', look: 'The first new directions appear at N = 24, such as ((−11 − √167) + i(−11 + √167))/24. No triangles or 5-cycles at small height; the shortest odd cycle is 7, first at N = 140 (within the search caps).' },
+  { g: 'Quadratic fields at the six-colour window', r: [1055], N: 108, sugg: [80, 108, 420, 2184], chi: '3 ≤ χ ≤ 7', how: 'first usable finite plane is 𝔽₃₁', look: 'The smallest field whose first usable residue plane is 𝔽₃₁. The first new directions appear at N = 80, such as ((−30 − √1055) + i(−15 + 2√1055))/80; (103 + i√1055)/108 follows.' },
+  { g: 'Quadratic fields at the six-colour window', r: [2351], N: 1176, sugg: [88, 1176, 5880], chi: '3 ≤ χ ≤ 7', how: 'local bound ≥ 6; a six-colouring of 𝔽₄₇ would give χ ≤ 6', look: 'Decided by the plane over 𝔽₄₇ alone. The first new directions appear at N = 88, such as ((−39 − √2351) + i(−39 + √2351))/88; (1175 + i√2351)/1176 is at the default N.' },
+  { g: 'Quadratic fields at the six-colour window', r: [4703], N: 2352, sugg: [116, 2184, 2352], chi: '3 ≤ χ ≤ 7', how: 'local bound ≥ 6; first usable finite plane is 𝔽₄₃', look: 'A six-colouring of 𝔽₄₃ or 𝔽₄₇ would make this field’s local bound exactly 6. The first new directions appear at N = 116, such as ((−45 − √4703) + i(−45 + √4703))/116; (2351 + i√4703)/2352 is at the default N.' },
+  { g: 'Fields with two or more square roots', r: [2, 3], N: 2, sugg: [2, 6, 12], chi: 'χ = 4', how: 'proved by hand (an 18-vertex graph)', look: 'Triangles and squares together, but no Moser spindle: this field lacks √11.' },
+  { g: 'Fields with two or more square roots', r: [3, 11], N: 12, sugg: [6, 12, 24], chi: 'χ = 4', how: 'Theorem B, proved in Lean', look: 'The Moser spindle’s own field. At N = 12 the directions include every sixth-turn of the twist (5 + i√11)/6.' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 35], N: 12, sugg: [6, 12], chi: 'χ = 4', how: 'the 2-adic wall still stands (by hand)', look: 'Contains the spindle field, adds (1 + i√35)/6, and still needs only four colours.' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 14], N: 10, sugg: [10, 12], chi: 'χ = 4', how: 'passes the four-colour test (by hand)', look: 'Adds (√11 + i√14)/5. Together with ℚ(√3, √11, √70) its compositum needs five colours (proved in Lean).' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 70], N: 18, sugg: [9, 18], chi: 'χ = 4', how: 'passes the four-colour test (by hand)', look: 'Adds (√11 + i√70)/9. Together with ℚ(√3, √11, √14) its compositum needs five colours (proved in Lean).' },
+  { g: 'Fields with two or more square roots', r: [3, 5, 11], N: 8, sugg: [4, 8, 12], chi: 'χ = 5', how: '≥ 5 by Heule’s 510-vertex graph in Lean; ≤ 5 through the plane over 𝔽₁₁', look: 'Heule’s field. At N = 8: the record rotation (7 + i√15)/8 and (√5 + i√11)/4.' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 23], N: 12, sugg: [12, 14], chi: 'χ = 5', how: '≥ 5 by a solver-found graph; ≤ 5 through 𝔽₁₁', look: 'Adds (11 + i√23)/12 to the spindle field.' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 247], N: 16, sugg: [16, 24], chi: 'χ = 5', how: '≥ 5 by a solver-found graph; ≤ 5 through 𝔽₁₁', look: 'Adds (3 + i√247)/16. √247 only enters at denominators divisible by 16: at N = 24 the directions are exactly those of ℚ(√3, √11).' },
+  { g: 'Fields with two or more square roots', r: [3, 7, 11], N: 8, sugg: [8, 12], chi: '5 ≤ χ ≤ 7', how: 'the conjecture predicts 7; ≥ 5 by solver and by hand', look: 'The ρ₆₃ arena’s field. At N = 8 the half-turn (3√7 + i)/8 of ρ₆₃ appears.' },
+  { g: 'Fields with two or more square roots', r: [3, 11, 13], N: 12, sugg: [7, 12, 14], chi: '5 ≤ χ ≤ 7', how: '≥ 5 given a solver-found forcer; no usable plane below 𝔽₁₀₇', look: '(6 + i√13)/7 appears at N = 7; at N = 12 Moser spindles appear.' },
+  { g: 'Fields with two or more square roots', r: [3, 5, 7, 11], N: 8, sugg: [6, 8], chi: '5 ≤ χ ≤ 7', how: '≥ 5 by de Grey’s graph in Lean; first usable plane 𝔽₁₃₁', look: 'De Grey’s field. N = 12 is out of reach of a browser search; N = 6 brings the twist, N = 8 the record rotation.' },
+];
+
+const $ = (id) => document.getElementById(id);
+const nf = (x) => x.toLocaleString('en-US');
+const fieldName = (gens) => gens.length ? 'ℚ(' + gens.map((g) => '√' + g).join(', ') + ')' : 'ℚ';
+const keyOf = (gens) => [...gens].sort((a, b) => a - b).join('.');
+const PRESET_BY_KEY = new Map(FIELDS.map((f, i) => [keyOf(Core.makeField(f.r).gens), i]));
+
+const state = { fi: 0, r: [], N: 5, pts: 1000, growth: 'ball', centre: 'origin', shape: null };
+let F = null, W = null, Wres = null, G = null, E = null, adj = null, XY = null, T = [], S = [], cyc = null, cayley = null, seeds = null, depthOf = null;
+let sel = -1, token = 0, userMoved = false, exSpin = null, exOdd = null;
+const cacheW = new Map(), cacheOdd = new Map();
+const view = { s: 100, tx: 0, ty: 0 };
+
+// ---------- controls ----------
+const sel$ = $('field');
+{
+  let group = null, og = null;
+  FIELDS.forEach((f, i) => {
+    if (f.g !== group) { group = f.g; og = document.createElement('optgroup'); og.label = group; sel$.appendChild(og); }
+    const o = document.createElement('option'); o.value = i; o.textContent = fieldName(Core.makeField(f.r).gens); og.appendChild(o);
+  });
+  const oc = document.createElement('option'); oc.value = 'custom'; oc.textContent = 'Custom field'; oc.hidden = true; sel$.appendChild(oc);
+}
+
+function readHash() {
+  const h = new URLSearchParams(location.hash.slice(1));
+  if (!h.has('r')) return false;
+  const r = h.get('r') ? h.get('r').split(',').map(Number).filter((x) => Number.isInteger(x) && x > 1) : [];
+  state.r = r; const k = keyOf(Core.makeField(r).gens);
+  state.fi = PRESET_BY_KEY.has(k) ? PRESET_BY_KEY.get(k) : -1;
+  const N = parseInt(h.get('N'), 10); state.N = N > 0 ? N : (state.fi >= 0 ? FIELDS[state.fi].N : 12);
+  const p = parseInt(h.get('p'), 10); if (p >= 100 && p <= 3000) state.pts = p;
+  if (['ball', 'closure'].includes(h.get('g'))) state.growth = h.get('g');
+  if (['origin', 'odd'].includes(h.get('c'))) state.centre = h.get('c');
+  return true;
+}
+function writeHash() {
+  const h = `r=${state.r.join(',')}&N=${state.N}&p=${state.pts}&g=${state.growth}&c=${state.centre}`;
+  try { history.replaceState(null, '', '#' + h); } catch (e) { /* sandboxed */ }
+}
+
+function setField(i) {
+  state.fi = i; const f = FIELDS[i]; state.r = f.r.slice(); state.N = f.N;
+  rebuild(true);
+}
+sel$.addEventListener('change', () => { if (sel$.value !== 'custom') setField(+sel$.value); });
+$('prev').addEventListener('click', () => setField(((state.fi < 0 ? 0 : state.fi) - 1 + FIELDS.length) % FIELDS.length));
+$('next').addEventListener('click', () => setField(((state.fi < 0 ? -1 : state.fi) + 1) % FIELDS.length));
+
+const nInput = $('nInput');
+const setN = (N) => { N = Math.max(1, Math.min(99999, Math.round(N) || 1)); if (N === state.N) { nInput.value = N; return; } state.N = N; rebuild(false); };
+nInput.addEventListener('change', () => setN(parseInt(nInput.value, 10)));
+nInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); setN(parseInt(nInput.value, 10)); } });
+$('nDown').addEventListener('click', () => setN(state.N - 1));
+$('nUp').addEventListener('click', () => setN(state.N + 1));
+
+const pts$ = $('pts');
+pts$.addEventListener('input', () => { $('ptsOut').textContent = nf(+pts$.value); });
+pts$.addEventListener('change', () => { state.pts = +pts$.value; regrow(false); });
+for (const el of document.querySelectorAll('input[name="growth"]')) el.addEventListener('change', () => { state.growth = el.value; regrow(true); });
+for (const el of document.querySelectorAll('input[name="centre"]')) el.addEventListener('change', () => { state.centre = el.value; regrow(true); });
+
+const chips = { tri: $('chipTri'), spin: $('chipSpin'), odd: $('chipOdd') };
+for (const [k, el] of Object.entries(chips)) el.addEventListener('click', () => { state.shape = shown() === k ? 'none' : k; syncChips(); draw(); });
+function shown() { if (!G) return 'none'; const s = state.shape; if (s && s !== 'none') return s; if (s === 'none') return 'none'; return S.length ? 'spin' : cyc ? 'odd' : 'none'; }
+function syncChips() { const s = shown(); for (const [k, el] of Object.entries(chips)) el.setAttribute('aria-pressed', String(s === k)); }
+function updateExamples() {
+  exSpin = null; exOdd = cyc;
+  if (S.length) {
+    if (sel >= 0) exSpin = S.find((sp) => sp[0] === sel) || S.find((sp) => sp.includes(sel)) || null;
+    if (!exSpin) { let bd = Infinity; const [cx, cy] = G.centre; for (const sp of S) { let x = 0, y = 0; for (const v of sp) { x += XY[2 * v]; y += XY[2 * v + 1]; } const d = Math.hypot(x / 7 - cx, y / 7 - cy); if (d < bd) { bd = d; exSpin = sp; } } }
+  }
+  if (sel >= 0 && cyc) exOdd = Core.oddCycleFrom(adj, sel) || cyc;
+}
+
+$('customForm').addEventListener('submit', (e) => {
+  e.preventDefault(); const err = $('customErr'); err.hidden = true;
+  const parts = $('customR').value.split(/[\s,;]+/).filter(Boolean);
+  const r = parts.map((s) => Number(s.replace(/^√/, '')));
+  if (r.some((x) => !Number.isInteger(x) || x < 1 || x > 1e7)) { err.textContent = 'Use whole numbers between 1 and 10,000,000, separated by commas.'; err.hidden = false; return; }
+  const Fc = Core.makeField(r);
+  if (Fc.k > 4) { err.textContent = `That field needs ${Fc.k} independent square roots; this page handles at most four.`; err.hidden = false; return; }
+  const k = keyOf(Fc.gens);
+  if (PRESET_BY_KEY.has(k)) { setField(PRESET_BY_KEY.get(k)); return; }
+  state.fi = -1; state.r = Fc.gens; state.N = 12; rebuild(true);
+});
+
+// ---------- the pipeline ----------
+class Cancelled extends Error {}
+async function drive(gen, tk, onTick) {
+  let t0 = performance.now();
+  for (;;) {
+    const r = gen.next();
+    if (r.done) return r.value;
+    if (tk !== token) throw new Cancelled();
+    if (performance.now() - t0 > 14) { if (onTick) onTick(r.value); await new Promise((res) => setTimeout(res, 0)); if (tk !== token) throw new Cancelled(); t0 = performance.now(); }
+  }
+}
+const status = (text, busy) => { const el = $('status'); el.textContent = text; el.classList.toggle('busy', !!busy); };
+
+function renderHeader() {
+  F = Core.makeField(state.r);
+  const f = state.fi >= 0 ? FIELDS[state.fi] : null;
+  $('fname').textContent = fieldName(F.gens);
+  $('fchi').textContent = f ? f.chi : 'χ not in the record';
+  $('fhow').textContent = f ? f.how : `degree ${F.n} over ℚ`;
+  $('flook').textContent = f ? f.look : 'A field outside the project’s record: explore freely.';
+  sel$.value = f ? String(state.fi) : 'custom';
+  nInput.value = state.N;
+  const sugg = $('nSugg'); sugg.textContent = '';
+  const list = f ? f.sugg : [6, 12, 24];
+  const lab = document.createElement('span'); lab.textContent = 'Try'; sugg.appendChild(lab);
+  for (const n of list) { const b = document.createElement('button'); b.type = 'button'; b.textContent = n; b.setAttribute('aria-current', n === state.N); b.addEventListener('click', () => setN(n)); sugg.appendChild(b); }
+  pts$.value = state.pts; $('ptsOut').textContent = nf(state.pts);
+  $(state.growth === 'ball' ? 'gBall' : 'gClosure').checked = true;
+  $(state.centre === 'origin' ? 'cOrigin' : 'cOdd').checked = true;
+  $('growHint').textContent = state.growth === 'ball' ? 'Every sum of at most r directions, nearest first.' : 'The unit star, then the nearest points already joined to two drawn points.';
+}
+
+async function rebuild(fieldChanged) {
+  const tk = ++token; renderHeader(); writeHash();
+  sel = -1; renderSel();
+  const key = keyOf(F.gens) + '/' + state.N;
+  try {
+    if (cacheW.has(key)) Wres = cacheW.get(key);
+    else {
+      status(`Searching for unit vectors of denominator dividing ${nf(state.N)}…`, true);
+      $('dirline').textContent = 'Searching…'; $('dirline').classList.remove('warn');
+      const res = await drive(Core.unitVectors(F, state.N, 2e7), tk, (steps) => status(`Searching for unit vectors · ${nf(steps)} steps`, true));
+      res.rank = rankOf(res.W);
+      Wres = res; cacheW.set(key, res);
+    }
+    W = Wres.W; renderDirections();
+    await regrowInner(tk, true);
+  } catch (e) { if (!(e instanceof Cancelled)) { status('Something went wrong: ' + e.message, false); console.error(e); } }
+}
+async function regrow(refit) { const tk = ++token; writeHash(); renderHeader(); try { await regrowInner(tk, refit); } catch (e) { if (!(e instanceof Cancelled)) { status('Something went wrong: ' + e.message, false); console.error(e); } } }
+
+async function regrowInner(tk, refit) {
+  const m = 2 * F.n, key = keyOf(F.gens) + '/' + state.N;
+  seeds = [new Int32Array(m)]; cayley = null;
+  if (state.centre === 'odd') {
+    if (cacheOdd.has(key)) cayley = cacheOdd.get(key);
+    else {
+      status('Searching the direction graph for its shortest odd cycle…', true);
+      const cap = Math.max(20000, Math.min(250000, Math.floor(6e6 / m)));
+      cayley = await drive(Core.cayleyOddCycle(F, state.N, W, cap), tk, (p) => status(`Odd-cycle search · radius ${p.level} · ${nf(p.points)} points`, true));
+      cacheOdd.set(key, cayley);
+    }
+    if (cayley.found) seeds = cayley.verts;
+  }
+  $('centreHint').textContent = centreHint();
+  status(`Growing · 0 of ${nf(state.pts)} points`, true);
+  const g = await drive(Core.grow(F, state.N, W, seeds, state.pts, state.growth), tk, (np) => status(`Growing · ${nf(np)} of ${nf(state.pts)} points`, true));
+  status('Checking unit distances exactly…', true);
+  await new Promise((r) => setTimeout(r, 0)); if (tk !== token) return;
+  G = g; { let cx = 0, cy = 0; for (const v of seeds) { const [a, b] = Core.embed(F, state.N, v); cx += a / seeds.length; cy += b / seeds.length; } G.centre = [cx, cy]; }
+  const ed = Core.edgesOf(F, state.N, G.pts, G.np); E = ed.E; XY = ed.xy;
+  adj = Core.adjacency(G.np, E);
+  T = Core.triangles(adj);
+  S = Core.spindles(F, G.pts, G.np, adj, T);
+  await new Promise((r) => setTimeout(r, 0)); if (tk !== token) return;
+  cyc = Core.shortestOddCycle(adj);
+  // extra edges: differences not among the directions (possible only when the search stopped early)
+  const Wset = new Set(W.map((v) => v.join(','))); let extra = 0; const dv = new Array(m);
+  for (let e = 0; e < E.length; e += 2) { for (let t = 0; t < m; t++) dv[t] = G.pts[E[e + 1] * m + t] - G.pts[E[e] * m + t]; if (!Wset.has(dv.join(','))) extra++; }
+  G.extra = extra;
+  if (refit || !userMoved) fit();
+  sel = -1; updateExamples(); renderSel(); renderStats(); syncChips(); draw();
+  status(`${nf(G.np)} points · ${nf(E.length / 2)} unit edges · exact`, false);
+}
+
+function centreHint() {
+  if (state.centre === 'origin') return 'The drawing grows from the point (0, 0).';
+  if (!cayley) return '';
+  if (cayley.found) return `Grown around a shortest odd cycle of the direction graph: length ${cayley.length} (${nf(cayley.points)} points searched).`;
+  if (cayley.exhausted) return 'The direction graph has no odd cycle at all.';
+  return `No odd cycle of length ≤ ${2 * cayley.radius - 1} in the direction graph (${nf(cayley.points)} points searched); growing from the origin.`;
+}
+
+function rankOf(Wv) {
+  if (!Wv.length) return 0;
+  const m = Wv[0].length, A = Wv.map((v) => Array.from(v, BigInt)); let r = 0;
+  const bgcd = (a, b) => { a = a < 0n ? -a : a; b = b < 0n ? -b : b; while (b) [a, b] = [b, a % b]; return a; };
+  for (let col = 0; col < m && r < A.length; col++) {
+    let p = -1; for (let i = r; i < A.length; i++) if (A[i][col] !== 0n) { p = i; break; }
+    if (p < 0) continue; [A[r], A[p]] = [A[p], A[r]]; const piv = A[r][col];
+    for (let i = r + 1; i < A.length; i++) {
+      const f = A[i][col]; if (f === 0n) continue; let g = 0n;
+      for (let j = col; j < m; j++) { A[i][j] = A[i][j] * piv - A[r][j] * f; if (A[i][j]) g = bgcd(g, A[i][j]); }
+      if (g > 1n) for (let j = col; j < m; j++) A[i][j] /= g;
+    }
+    r++;
+  }
+  return r;
+}
+
+function renderDirections() {
+  const line = $('dirline');
+  const lead = `${nf(W.length)} unit vectors · span of rank ${Wres.rank}`;
+  if (Wres.complete) { line.textContent = `${lead} · the complete list`; line.classList.remove('warn'); }
+  else { line.textContent = `${lead} · the search stopped at ${nf(Wres.nodes - 1)} steps, so this list may be incomplete`; line.classList.add('warn'); }
+  $('dirSummary').textContent = `The ${nf(W.length)} directions, exactly`;
+  const denom = (v) => { let g = state.N; for (const x of v) g = Core.gcd(g, x); return state.N / g; };
+  const rows = W.map((v) => ({ v, den: denom(v), x: Core.embed(F, state.N, v) }))
+    .filter((o) => o.x[0] > 1e-9 && o.x[1] >= -1e-9)
+    .sort((a, b) => a.den - b.den || Math.atan2(a.x[1], a.x[0]) - Math.atan2(b.x[1], b.x[0]));
+  const ul = $('dirList'); ul.textContent = '';
+  const li0 = document.createElement('li'); li0.textContent = `Shown up to quarter turns (${nf(rows.length)} of ${nf(W.length)}), by denominator:`; li0.style.color = 'var(--ink-3)'; ul.appendChild(li0);
+  for (const o of rows.slice(0, 500)) { const li = document.createElement('li'); li.textContent = `(${Core.fmt(F, state.N, o.v, 0)}, ${Core.fmt(F, state.N, o.v, F.n)})`; ul.appendChild(li); }
+}
+
+function renderStats() {
+  const deg = adj.map((l) => l.length), maxd = Math.max(0, ...deg), mean = G.np ? (2 * E.length / 2) / G.np : 0;
+  const rows = [
+    ['Points', nf(G.np)],
+    ['Unit edges', nf(E.length / 2)],
+    ['Degree', `mean ${mean.toFixed(2)} · max ${maxd}`],
+    ['Triangles', nf(T.length / 3)],
+    ['Moser spindles', nf(S.length)],
+    ['Shortest odd cycle', cyc ? String(cyc.length) : 'none (bipartite)'],
+  ];
+  if (cayley) rows.push(['Odd girth of the directions', cayley.found ? String(cayley.length) : (cayley.exhausted ? 'none' : `> ${2 * cayley.radius - 1}`)]);
+  if (G.extra) rows.push(['Edges off the listed directions', nf(G.extra)]);
+  if (G.capped) rows.push(['Note', 'candidate cap reached']);
+  const dl = $('stats'); dl.textContent = '';
+  for (const [k, v] of rows) { const dt = document.createElement('dt'); dt.textContent = k; const dd = document.createElement('dd'); dd.textContent = v; dl.append(dt, dd); }
+  $('nTri').textContent = nf(T.length / 3); $('nSpin').textContent = nf(S.length); $('nOdd').textContent = cyc ? cyc.length : 'none';
+  chips.tri.disabled = !T.length; chips.spin.disabled = !S.length; chips.odd.disabled = !cyc;
+}
+
+function renderSel() {
+  const body = $('selBody'); body.textContent = '';
+  if (sel < 0 || !G) { const p = document.createElement('p'); p.className = 'selmeta'; p.textContent = 'Tap or click a point to read its exact coordinates.'; body.appendChild(p); return; }
+  const m = 2 * F.n, v = G.pts.subarray(sel * m, (sel + 1) * m);
+  const meta = document.createElement('p'); meta.className = 'selmeta';
+  const inSp = S.filter((sp) => sp.includes(sel)).length;
+  meta.textContent = `Degree ${adj[sel].length} in this drawing` + (exOdd && sel >= 0 && cyc ? ` · odd cycle found from here: length ${exOdd.length}` : '') + (inSp ? ` · in ${nf(inSp)} Moser spindle${inSp > 1 ? 's' : ''}` : '');
+  const c = document.createElement('div'); c.className = 'coord';
+  for (const [lab, off] of [['x', 0], ['y', F.n]]) { const d = document.createElement('div'); const s = document.createElement('span'); s.textContent = lab + ' = '; d.append(s, Core.fmt(F, state.N, v, off)); c.appendChild(d); }
+  body.append(meta, c);
+}
+
+// ---------- drawing ----------
+const cv = $('cv'), ctx = cv.getContext('2d'), stage = $('stage');
+let W_css = 0, H_css = 0, dpr = 1, raf = 0;
+function resize() {
+  const r = stage.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  W_css = r.width; H_css = r.height; cv.width = Math.round(W_css * dpr); cv.height = Math.round(H_css * dpr);
+  if (G && !userMoved) fit(); draw();
+}
+new ResizeObserver(resize).observe(stage);
+function fit() {
+  if (!G || !G.np) return; userMoved = false;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (let i = 0; i < G.np; i++) { const x = XY[2 * i], y = XY[2 * i + 1]; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+  const pad = 26, w = Math.max(x1 - x0, 1e-3), h = Math.max(y1 - y0, 1e-3);
+  view.s = Math.min((W_css - 2 * pad) / w, (H_css - 2 * pad - 24) / h);
+  view.tx = W_css / 2 - view.s * (x0 + x1) / 2; view.ty = (H_css - 24) / 2 + view.s * (y0 + y1) / 2;
+}
+const draw = () => { if (!raf) raf = requestAnimationFrame(paint); };
+function paint() {
+  raf = 0; const cs = getComputedStyle(document.documentElement), col = (n) => cs.getPropertyValue(n).trim();
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W_css, H_css);
+  if (!G) return;
+  const s = view.s, tx = view.tx, ty = view.ty, X = (i) => XY[2 * i] * s + tx, Y = (i) => -XY[2 * i + 1] * s + ty;
+  // the unit circle about the centre, as a scale
+  const [cx, cy] = G.centre;
+  ctx.strokeStyle = col('--scale'); ctx.lineWidth = 1; ctx.setLineDash([4, 5]);
+  ctx.beginPath(); ctx.arc(cx * s + tx, -cy * s + ty, s, 0, 2 * Math.PI); ctx.stroke(); ctx.setLineDash([]);
+  const mode = shown();
+  if (mode === 'tri' && T.length) {
+    ctx.fillStyle = col('--tri'); ctx.beginPath();
+    for (let e = 0; e < T.length; e += 3) { ctx.moveTo(X(T[e]), Y(T[e])); ctx.lineTo(X(T[e + 1]), Y(T[e + 1])); ctx.lineTo(X(T[e + 2]), Y(T[e + 2])); ctx.closePath(); }
+    ctx.fill();
+  }
+  const lw = Math.max(0.45, Math.min(1.2, s * 0.012));
+  ctx.strokeStyle = col('--edge'); ctx.lineWidth = lw; ctx.beginPath();
+  for (let e = 0; e < E.length; e += 2) { ctx.moveTo(X(E[e]), Y(E[e])); ctx.lineTo(X(E[e + 1]), Y(E[e + 1])); }
+  ctx.stroke();
+  if (mode === 'spin' && exSpin) {
+    ctx.strokeStyle = col('--spin'); ctx.lineWidth = Math.max(1.4, lw * 1.8); ctx.lineJoin = 'round'; ctx.beginPath();
+    for (const [a, b, c, t1, d, e2, t2] of [exSpin]) {
+      for (const [p, q] of [[a, b], [a, c], [b, c], [b, t1], [c, t1], [a, d], [a, e2], [d, e2], [d, t2], [e2, t2], [t1, t2]]) { ctx.moveTo(X(p), Y(p)); ctx.lineTo(X(q), Y(q)); }
+    }
+    ctx.stroke();
+  }
+  if (mode === 'odd' && exOdd) {
+    ctx.strokeStyle = col('--odd'); ctx.lineWidth = Math.max(2.2, lw * 2.6); ctx.lineJoin = 'round'; ctx.beginPath();
+    exOdd.forEach((v, i) => (i ? ctx.lineTo(X(v), Y(v)) : ctx.moveTo(X(v), Y(v)))); ctx.closePath(); ctx.stroke();
+  }
+  const r = Math.max(1.1, Math.min(3.6, s * 0.028));
+  ctx.fillStyle = col('--dot'); ctx.beginPath();
+  for (let i = 0; i < G.np; i++) { const x = X(i), y = Y(i); if (x < -8 || y < -8 || x > W_css + 8 || y > H_css + 8) continue; ctx.moveTo(x + r, y); ctx.arc(x, y, r, 0, 2 * Math.PI); }
+  ctx.fill();
+  if (mode === 'spin' && exSpin) { ctx.fillStyle = col('--spin'); ctx.beginPath(); for (const v of exSpin) { ctx.moveTo(X(v) + r * 1.6, Y(v)); ctx.arc(X(v), Y(v), r * 1.6, 0, 2 * Math.PI); } ctx.fill(); }
+  if (mode === 'odd' && exOdd) { ctx.fillStyle = col('--odd'); ctx.beginPath(); for (const v of exOdd) { ctx.moveTo(X(v) + r * 1.6, Y(v)); ctx.arc(X(v), Y(v), r * 1.6, 0, 2 * Math.PI); } ctx.fill(); }
+  if (sel >= 0) {
+    ctx.strokeStyle = col('--sel'); ctx.lineWidth = 2; ctx.beginPath();
+    for (const j of adj[sel]) { ctx.moveTo(X(sel), Y(sel)); ctx.lineTo(X(j), Y(j)); }
+    ctx.stroke(); ctx.fillStyle = col('--sel'); ctx.beginPath();
+    for (const j of adj[sel]) { ctx.moveTo(X(j) + r * 1.5, Y(j)); ctx.arc(X(j), Y(j), r * 1.5, 0, 2 * Math.PI); }
+    ctx.fill(); ctx.beginPath(); ctx.arc(X(sel), Y(sel), r * 2.6 + 2, 0, 2 * Math.PI); ctx.lineWidth = 2; ctx.stroke();
+  }
+  // scale bar: one unit
+  const barY = H_css - 58, barX = W_css - 16 - Math.min(s, W_css * 0.4);
+  if (s > 12) {
+    ctx.strokeStyle = col('--ink-3'); ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(barX, barY); ctx.lineTo(barX + Math.min(s, W_css * 0.4), barY); ctx.stroke();
+    ctx.fillStyle = col('--ink-3'); ctx.font = '12px ' + col('--mono'); ctx.textAlign = 'right'; ctx.fillText(s <= W_css * 0.4 ? '1' : '1 (clipped)', W_css - 16, barY - 6);
+  }
+}
+for (const q of [matchMedia('(prefers-color-scheme: dark)')]) q.addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+// ---------- gestures ----------
+const ptrs = new Map(); let gest = null;
+const local = (e) => { const r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+function zoomAt(px, py, f) { view.tx = px - (px - view.tx) * f; view.ty = py - (py - view.ty) * f; view.s *= f; userMoved = true; draw(); }
+cv.addEventListener('pointerdown', (e) => {
+  cv.setPointerCapture(e.pointerId); const p = local(e); ptrs.set(e.pointerId, p);
+  if (ptrs.size === 1) gest = { type: 'pan', x0: p.x, y0: p.y, tx: view.tx, ty: view.ty, t: performance.now(), moved: false };
+  else if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; gest = { type: 'pinch', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, s0: view.s, m0: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, tx: view.tx, ty: view.ty }; }
+});
+cv.addEventListener('pointermove', (e) => {
+  if (!ptrs.has(e.pointerId) || !gest) return; const p = local(e); ptrs.set(e.pointerId, p);
+  if (gest.type === 'pan') {
+    const dx = p.x - gest.x0, dy = p.y - gest.y0; if (Math.hypot(dx, dy) > 5) gest.moved = true;
+    if (gest.moved) { view.tx = gest.tx + dx; view.ty = gest.ty + dy; userMoved = true; draw(); }
+  } else if (ptrs.size >= 2) {
+    const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y), m = { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+    const f = d / gest.d0, wx = (gest.m0.x - gest.tx) / gest.s0, wy = (gest.m0.y - gest.ty) / gest.s0;
+    view.s = gest.s0 * f; view.tx = m.x - wx * view.s; view.ty = m.y - wy * view.s; userMoved = true; draw();
+  }
+});
+const endPtr = (e) => {
+  if (!ptrs.has(e.pointerId)) return; const p = local(e); ptrs.delete(e.pointerId);
+  if (gest && gest.type === 'pan' && !gest.moved && e.type === 'pointerup' && performance.now() - gest.t < 500) pick(p.x, p.y);
+  if (ptrs.size === 1) { const [q] = [...ptrs.values()]; gest = { type: 'pan', x0: q.x, y0: q.y, tx: view.tx, ty: view.ty, t: 0, moved: true }; }
+  else if (!ptrs.size) gest = null;
+};
+cv.addEventListener('pointerup', endPtr); cv.addEventListener('pointercancel', endPtr);
+cv.addEventListener('wheel', (e) => { e.preventDefault(); const p = local(e); zoomAt(p.x, p.y, Math.exp(-e.deltaY * 0.0016)); }, { passive: false });
+cv.addEventListener('dblclick', () => { fit(); draw(); });
+$('zin').addEventListener('click', () => zoomAt(W_css / 2, H_css / 2, 1.5));
+$('zout').addEventListener('click', () => zoomAt(W_css / 2, H_css / 2, 1 / 1.5));
+$('fit').addEventListener('click', () => { fit(); draw(); });
+function pick(px, py) {
+  if (!G) return; let best = -1, bd = 22 * 22;
+  for (let i = 0; i < G.np; i++) { const dx = XY[2 * i] * view.s + view.tx - px, dy = -XY[2 * i + 1] * view.s + view.ty - py, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = i; } }
+  sel = best; updateExamples(); renderSel(); draw();
+}
+
+// ---------- start ----------
+if (!readHash()) { state.fi = 0; state.r = FIELDS[0].r.slice(); state.N = FIELDS[0].N; }
+rebuild(true);
+})();
+</script>
