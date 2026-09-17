@@ -129,6 +129,7 @@ import Proofs.HadwigerNelson.TwoColourResidue
 import Proofs.HadwigerNelson.ThreeAdicBarrier
 import Proofs.HadwigerNelson.SquareClass
 import Proofs.HadwigerNelson.Instances.CompositumFive
+import Proofs.HadwigerNelson.Instances.SqrtEleven
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 import Proofs.HadwigerNelson.Instances.SixthColour
 

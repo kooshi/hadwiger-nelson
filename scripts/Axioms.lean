@@ -1483,6 +1483,28 @@ congruence is used, `integralDirectionPlane_adj_diamond167` the inhabitant showi
 #print axioms ThreeAdicBarrier.colorable_three_integralDirectionPlane
 #print axioms ThreeAdicBarrier.integralDirectionPlane_adj_diamond167
 
+/-! ## FS-58 phase D2 — the plane over `ℚ(√11)` needs four colours
+
+A 204-point unit-distance graph in `ℚ(√11)²` with no proper 3-colouring (`data/fs58/witness-11/`), through the
+existing certificate pipeline: the geometry by `decide +kernel` over `Q4` at scale 150, the coordinates in `ℤ[√11]`
+by `decide +kernel`, and the CaDiCaL refutation replayed by the mask checker. No native evaluation is bought.
+`eleven204_colorable_four` is the control that the graph is not refuted at every colour count. -/
+
+#print axioms eleven204_valid
+#print axioms eleven204_agrees
+#print axioms eleven204_unsat
+#print axioms Q4.eval_mem_of_mem_elevenOnly
+#print axioms UDCert.point_mem_planeOver
+#print axioms UDCert.chromaticNumber_le_planeOver
+#print axioms eleven204_coordsIn_elevenOnly
+#print axioms eleven204_not_colorable_three
+#print axioms eleven204_colour_proper
+#print axioms eleven204_colorable_four
+#print axioms four_le_chromaticNumber_eleven204
+#print axioms sqrt_eleven_mem_fieldOfRadicands_eleven
+#print axioms four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem
+#print axioms four_le_chromaticNumber_planeOver_eleven
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
