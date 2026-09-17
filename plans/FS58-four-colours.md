@@ -480,8 +480,12 @@ query written as DIMACS and solved by the CaDiCaL binary and by Glucose4) → `b
 A further control: identifying `0` with `3·(basis vector)` (affine value 0, not a direction multiple) is SAT with a verified model. So
 the identification encoding can answer yes, and it answers no exactly at `2w`.
 
-**What it means, if the certificate holds.** For `w = (3√11/10, −1/10)`, the finite piece `H` (28,561 points) forces `c(0) = c(3w)` in
-every 3-colouring, and separates `0` from `2w` (a virtual edge, D3.8). Over `ℚ(√11)`, `1/3 = 1 + 1 + v + v̄` with `v = (−5 + i√11)/6` a
+*Correction (B3 implementer, verified): the `R = 6` lines above are for three other directions — `fs58_box.py`'s float LLL leaves the
+pool basis unchanged, and in it `w = (0,3,−1,0)/10` has coordinates `(0,2,0,−3)`, so `3w` lies outside the `R = 6` box; `w` itself was
+asked only at `R = 9`, by the independent build. Every direction forces from a span-2 box (R-B3).*
+
+**What it means, if the certificate holds.** A finite piece `H` forces `c(0) = c(3u)` in every 3-colouring (at `R = 9` for `w`), and
+separates `0` from `2u` (a virtual edge, D3.8). Over `ℚ(√11)`, `1/3 = 1 + 1 + v + v̄` with `v = (−5 + i√11)/6` a
 unit vector (`tools`-side search, N = 12). So the chain (G55) closes with four copies: transporting `H` by the rotations `w̄, w̄, w̄v, w̄v̄`
 forces `c(0) = c(3) = c(6) = c(6 + 3v) = c(6 + 3v + 3v̄) = c(1)`, while `0` and `1` are adjacent. **χ(ℚ(√11)²) ≥ 4**, and with
 `[Fischer1990]`'s four colours, **χ(ℚ(√11)²) = 4** — by §PA, the first real quadratic field whose plane is known to need four colours.
@@ -492,4 +496,25 @@ refutation checked by a proof checker that is not the solver, and the kernel rou
 word balls (§0 O3) and every periodic screen (R-B1) could not; this is the rigidity D3.4 predicted, arriving at finite size.
 *Negative, same session:* `ℚ(√23)` with 12 directions (`N = 8, 56`) forces nothing at `R = 7`; `ℚ(√23)` with 36 (`N = 40`) and `ℚ(√167)`
 (`N = 28, 56, 140`) have reduced coordinates up to 8–49, too large for boxes that contain `3w` at this size.
+
+### R-B3 — the certificate: a 204-point unit-distance graph over `ℚ(√11)` with no proper 3-colouring (2026-09-17, `1b045f8`; implementer Opus 5; re-verified by the reviewer)
+
+* **The forcer** (`data/fs58/witness-11/forcer.json`): **52 points, 111 edges**, vertex-minimal under deletion, forcing `c(0) = c(3u)` for
+  `u = (−3/5, 4/5)` — a direction in `ℚ(i)`; 20 of its 32 signed directions involve `√11`. Found by scanning all 18 directions on span
+  boxes (every direction forces from span 2; every direction also has the virtual edge at `2u`), extracting the LRAT core, and deleting.
+* **The witness** (`witness.json`): the chain of four transported copies with `1/3 = 1 + 1 + v + v̄`, `v = (−5 + i√11)/6` — **204 points,
+  455 unit edges** (444 transported, 11 new between copies), `(0,0)` and `(1,0)` adjacent. **227 of the 455 edges have 3 in their direction's
+  denominator**, as D1 requires of any four-chromatic graph over this field.
+* **Evidence.** `tools/fs58_check_witness.py` (standard library only, no import from `tools/`): rebuilds every unit pair in integer
+  arithmetic, builds the CNF itself, checks the LRAT (461 additions) with its own RUP checker — `CERTIFIED` (exit 0, re-run by the
+  reviewer); twelve planted faults refused for their named reasons and a mutation audit of the checker all red. **Reviewer's decorrelated
+  recheck** (sharing no code with generator or checker): all 20,706 pairs tested in exact rational arithmetic give exactly the file's 455
+  edges; Minisat22 and Lingeling both refuse three colours (with CaDiCaL and Glucose4: four solver codebases); deleting vertex `(1, 0)`
+  makes the graph 3-colourable, model verified. The no-solver exhaustive search refuses each copy's end-separation (445, 231, 201, 189
+  nodes).
+* **Status: `χ(ℚ(√11)²) ≥ 4` at the tools-certificate level; with `[Fischer1990]` Thm 9, `χ(ℚ(√11)²) = 4`.** By §PA, the first real
+  quadratic field whose plane is shown to need four colours; the graph is triangle-free (no `√3` in the field) with explicit coordinates in a
+  quadratic field (the smallest known triangle-free 4-chromatic unit-distance graphs, `[ExooIsmailescu2019]`'s 17 and 19 vertices, need
+  fields of degree 12–20). **P3 (0.3) won** — route C landed at finite size. **The kernel form is phase D2**, priced by the implementer at
+  well under a minute through the `UDCert`/SAT-bridge pipeline (running).
 
