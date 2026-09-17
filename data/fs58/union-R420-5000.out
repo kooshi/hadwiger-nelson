@@ -1,0 +1,5 @@
+{"rotation_denominator": 420, "rotations": 60, "cap": 5000, "seed_points": 1569, "points": 5002, "gadget_copies": 1724, "gadget_edges": 11424, "unit_edges": 17435, "directions_up_to_sign": 102, "directions_with_3_in_denominator": 52, "lattice_rank": 4, "additive_Z3_colourings": 0, "three_colourable": "SAT (colouring verified)", "solver_seconds": 0.08}
+
+real	0m0.704s
+user	0m0.677s
+sys	0m0.024s

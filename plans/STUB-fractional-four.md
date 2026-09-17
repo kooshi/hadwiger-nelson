@@ -33,6 +33,15 @@ chromatic number `χ_gf(H)` bounds `χ(F²)` from below, because `[MatolcsiEtAl2
   additive 4- or 5-colourings up to denominator 5,460; the 125-point union of all 7-cycles through a point has `χ_f ≤ 2.75`; the
   radius-3 balls — **37,681 points at denominator 420 and 215,409 at 2184 — are 3-colourable** (verified exhaustively). A triangle-rich
   graph (`G27`) starts from `χ_f = 3` and pairs lift it to 3.722; ℚ(√167)'s pieces start below 2.75.
+* **The prelude** [hand + exact, `plans/FS58-prelude-seven-cycle-gadget.md`, `data/fs58/`, 2026-09-17]: the 7-cycle at denominators
+  140 | N is one shape — a run of three unit edges closed by two unit diamonds with cos θ = 24/25 (apex 98.51°), the member of a family
+  whose run-of-one member with 60° diamonds is the Moser spindle; the family lives in ℚ(√(8(1 + cos θ) − n²)), always ≡ 7 (mod 8),
+  and a prime D > 7 holds its 7-cycle or 5-cycle only if (7/D) or (15/D) is +1 — at 167 the first is and the second is not. The shape
+  forces nothing at three colours (its diamonds are 4-cycles): the union of its copies in every rotation of W₈₄ or W₄₂₀, 50,000
+  points, is 3-colourable. **The 3-adic barrier:** 3 is inert with residue 𝔽₉, whose plane is 3-coloured by a linear rule, so every
+  unit-distance graph over ℚ(√167) whose directions have 3-free denominators is 3-colourable ((a + b + c)·m⁻¹ mod 3) — **a four-colour
+  graph must use a direction with 3 in its denominator**, and all four window fields ℚ(√167), ℚ(√1055), ℚ(√2351), ℚ(√4703) carry
+  the same barrier.
 
 ## 3. Routes, cheapest first
 
@@ -50,7 +59,8 @@ chromatic number `χ_gf(H)` bounds `χ(F²)` from below, because `[MatolcsiEtAl2
   orbit variables; the certificate needs a new proof of inequality (iii) — "every independent set weighs ≤ 1" — for graphs whose
   independent sets cannot be enumerated (a pseudo-boolean proof log, or a decomposition of the weights).
 * **R3 — SAT at height.** Radius-4 balls, or denominator 10,920 at radius 3 (10⁶–10⁷ points); a refusal is an LRAT certificate and
-  a kernel-reachable `χ(ℚ(√167)²) ≥ 4`. Cheapest to try, least likely to land: the fractional ceiling is not the obstacle, the boundary
+  a kernel-reachable `χ(ℚ(√167)²) ≥ 4`. **Build pieces from directions with 3 in the denominator** — any piece whose directions are
+  3-integral is 3-colourable by the prelude's theorem, so such material is wasted. Cheapest to try, least likely to land: the fractional ceiling is not the obstacle, the boundary
   of a finite ball is.
 * **Side target**: `ℚ(√11)` and `ℚ(√23)` (`L = 4`) by R2 or R3, where a certificate proves the conjecture's value exactly; the
   ceiling 3.5 leaves a narrow window, and R1 does not apply (their `𝔽₇` place reads −0.5617).

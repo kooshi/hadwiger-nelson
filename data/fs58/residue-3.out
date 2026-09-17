@@ -1,0 +1,21 @@
+UD(𝔽₉, 2): 81 points, unit circle 8 points, 324 edges
+  2-colourable: False (breadth-first, exhaustive)
+  the linear rule colour(x, y) = x₀ + x₁ + y₀ (mod 3): 0 monochromatic edges of 324
+  pulled back to ℚ(√167): colour((a + b√167)/m, (c + e√167)/m) = (a + b + c)·m⁻¹ (mod 3), for 3 ∤ m
+    m=140: 36 unit vectors, rule zero on 0
+    m=280: 36 unit vectors, rule zero on 0
+    m=560: 36 unit vectors, rule zero on 0
+    m=700: 60 unit vectors, rule zero on 0
+    m=980: 60 unit vectors, rule zero on 0
+    m=1540: 36 unit vectors, rule zero on 0
+    m=1960: 60 unit vectors, rule zero on 0
+    m=3640: 108 unit vectors, rule zero on 0
+    checked 432 unit vectors with 3-free denominators
+UD(𝔽_5², 2): 625 points, unit circle 24, 7500 edges; 3-colourable: UNSAT (solver claim)
+UD(𝔽_5², 2): 625 points, unit circle 24, 7500 edges; 4-colourable: UNSAT (solver claim)
+UD(𝔽_7², 2): 2401 points, unit circle 48, 57624 edges; 3-colourable: UNSAT (solver claim)
+UD(𝔽_7², 2): 2401 points, unit circle 48, 57624 edges; 4-colourable: UNSAT (solver claim)
+
+real	0m0.896s
+user	0m0.803s
+sys	0m0.090s

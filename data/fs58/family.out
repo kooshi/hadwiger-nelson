@@ -1,0 +1,24 @@
+Exact constructions (base n, diamond cosine) -> field, points, unit edges, odd girth:
+  n=3 cos θ=24/25: (167, 9, 11, 7)
+  n=3 cos θ=1/1: (7, 7, 7, 7)
+  n=3 cos θ=4/5: (15, 9, 11, 7)
+  n=3 cos θ=7/25: (31, 9, 11, 7)
+  n=3 cos θ=5/13: (39, 9, 11, 7)
+  n=1 cos θ=0/1: (7, 7, 9, 5)
+  n=1 cos θ=-3/5: (55, 7, 9, 5)
+  n=1 cos θ=20/29: (87, 7, 9, 5)
+  n=1 cos θ=527/625: (71, 7, 9, 5)
+n = 1 (5-cycle), diamond-cosine denominator ≤ 200,000: squarefree D ≡ 7 (mod 8) below 400 holding the gadget:
+   7 (cos 0/1), 15 (cos 1/1), 55 (cos -3/5), 71 (cos 527/625), 87 (cos 20/29), 103 (cos -240/289), 119 (cos -7/25), 127 (cos -5544/7225), 159 (cos -28/53), 223 (cos -120/169), 231 (cos 7/25), 295 (cos 3/5), 303 (cos 20/101), 335 (cos 4/5), 367 (cos 24/25)
+   none found: [23, 31, 39, 47, 79, 95, 111, 143, 151, 167, 183, 191, 199, 215, 239, 247, 255, 263, 271, 287, 311, 319, 327, 359, 383, 391, 399]
+   primes D > 7 found with (15/D) = −1 (the proved necessary condition, D ≡ 3 mod 4 and D > 7, says none): []
+   primes D > 7 with (15/D) = +1 not found at this height: [191, 239, 311, 359]
+n = 3 (7-cycle), diamond-cosine denominator ≤ 200,000: squarefree D ≡ 7 (mod 8) below 400 holding the gadget:
+   7 (cos 1/1), 15 (cos 4/5), 31 (cos 7/25), 39 (cos 5/13), 87 (cos 119/169), 95 (cos 3/5), 103 (cos 96719/97969), 111 (cos 35/37), 167 (cos 24/25), 183 (cos 11/61), 399 (cos 527/625)
+   none found: [23, 47, 55, 71, 79, 119, 127, 143, 151, 159, 191, 199, 215, 223, 231, 239, 247, 255, 263, 271, 287, 295, 303, 311, 319, 327, 335, 359, 367, 383, 391]
+   primes D > 7 found with (7/D) = −1 (the proved necessary condition, D ≡ 3 mod 4 and D > 7, says none): []
+   primes D > 7 with (7/D) = +1 not found at this height: [47, 199, 223, 271, 311, 367, 383]
+
+real	0m0.294s
+user	0m0.279s
+sys	0m0.014s

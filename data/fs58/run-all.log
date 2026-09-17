@@ -1,0 +1,10 @@
+run  census-420.out
+run  census-2184.out
+run  residue-3.out
+run  family.out
+run  union-R140-5000.out
+run  union-R420-5000.out
+run  union-R84-50000.out
+run  union-R420-50000.out
+run  least-denominator.out
+ALL-DONE

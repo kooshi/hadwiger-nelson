@@ -1,0 +1,20 @@
+N=24: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=28: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=48: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=56: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=72: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=84: |W| = 20 (16 outside ℚ(i)); no odd cycle of length ≤ 11 (breadth-first from 0 stopped at 400,000 points)
+N=88: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=96: |W| = 20 (16 outside ℚ(i)); no odd cycle of length ≤ 11 (breadth-first from 0 stopped at 400,000 points)
+N=108: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=112: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=116: |W| = 20 (8 outside ℚ(i)); no odd cycle of length ≤ 11 (breadth-first from 0 stopped at 400,000 points)
+N=120: |W| = 36 (24 outside ℚ(i)); no odd cycle of length ≤ 7 (breadth-first from 0 stopped at 400,000 points)
+N=124: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=128: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=132: |W| = 12 (8 outside ℚ(i)); no odd cycle of length ≤ 23 (breadth-first from 0 stopped at 400,000 points)
+N=140: |W| = 36 (24 outside ℚ(i)); odd girth 7
+
+real	0m24.661s
+user	0m24.255s
+sys	0m0.308s
