@@ -8,3 +8,8 @@
 {"R":1.5,"covolume":5.3668481754001676e-05,"edges":3176650,"key":"q1+28+84|ball1.5","points":932337,"pool":"q1+28+84","seconds":260.29,"size":20,"solve_seconds":249.22,"verdict":"3-colourable (model verified)"}
 {"R":1.5,"covolume":5.154320987654321e-05,"edges":5025954,"key":"q1+q5+24+q25|ball1.5","points":1023629,"pool":"q1+q5+24+q25","seconds":18.88,"size":28,"solve_seconds":0.88,"verdict":"3-colourable (model verified)"}
 {"R":1.7,"covolume":9.637738757541683e-05,"edges":3643414,"key":"q1+q29+348.2|ball1.7","points":898313,"pool":"q1+q29+348.2","seconds":16.47,"size":20,"solve_seconds":2.54,"verdict":"3-colourable (model verified)"}
+{"R":1.7,"covolume":5.3668481754001676e-05,"edges":6123418,"key":"q1+28+84|ball1.7","points":1537245,"pool":"q1+28+84","seconds":269.82,"size":20,"solve_seconds":247.41,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":5.154320987654321e-05,"edges":25896462,"key":"q1+q5+24+120|ball2.0","points":3065169,"pool":"q1+q5+24+120","seconds":101.49,"size":36,"solve_seconds":2.89,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":6.900122352163424e-05,"edges":2645180,"key":"q1+q5+132|ball1.5","points":798661,"pool":"q1+q5+132","seconds":1810.46,"size":20,"solve_seconds":1801.23,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":2.129667392643032e-05,"edges":8028160,"key":"q1+132+396.2|ball1.5","points":2358181,"pool":"q1+132+396.2","seconds":1830.17,"size":20,"solve_seconds":1800.28,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":1.1211771507520863e-05,"edges":21257148,"key":"q1+324+1620|ball1.5","points":4460997,"pool":"q1+324+1620","seconds":1962.57,"size":28,"solve_seconds":1881.13,"verdict":"Unknown (budget)"}

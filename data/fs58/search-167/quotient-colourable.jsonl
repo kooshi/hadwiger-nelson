@@ -1,0 +1,33 @@
+{"key":"q1+264","quotients_colourable_verified":10,"quotients_nonloop":16,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+144.1","quotients_colourable_verified":11,"quotients_nonloop":16,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+168","quotients_colourable_verified":12,"quotients_nonloop":15,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+24","quotients_colourable_verified":15,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+108","quotients_colourable_verified":14,"quotients_nonloop":20,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+228","quotients_colourable_verified":15,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+144.2+24","quotients_colourable_verified":2,"quotients_nonloop":18,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+132","quotients_colourable_verified":11,"quotients_nonloop":22,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+1008.1","quotients_colourable_verified":12,"quotients_nonloop":17,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+324","quotients_colourable_verified":16,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+396.1","quotients_colourable_verified":15,"quotients_nonloop":18,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+372","quotients_colourable_verified":13,"quotients_nonloop":23,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+504","quotients_colourable_verified":6,"quotients_nonloop":13,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+348.2+q29","quotients_colourable_verified":5,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+1128","quotients_colourable_verified":16,"quotients_nonloop":20,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+456","quotients_colourable_verified":14,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+120+q5+24","quotients_colourable_verified":0,"quotients_nonloop":18,"verdict":"live: no colourable quotient found"}
+{"key":"q1+396.2+132","quotients_colourable_verified":0,"quotients_nonloop":19,"verdict":"live: no colourable quotient found"}
+{"key":"q1+1344","quotients_colourable_verified":13,"quotients_nonloop":17,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+564","quotients_colourable_verified":11,"quotients_nonloop":19,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+96","quotients_colourable_verified":14,"quotients_nonloop":17,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+768","quotients_colourable_verified":11,"quotients_nonloop":17,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+696.3+q29","quotients_colourable_verified":6,"quotients_nonloop":16,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+588","quotients_colourable_verified":15,"quotients_nonloop":22,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+756","quotients_colourable_verified":15,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+684","quotients_colourable_verified":12,"quotients_nonloop":22,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+1488.1","quotients_colourable_verified":12,"quotients_nonloop":19,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+84+28","quotients_colourable_verified":1,"quotients_nonloop":20,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+1596.1","quotients_colourable_verified":12,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+q5+120+24","quotients_colourable_verified":0,"quotients_nonloop":18,"verdict":"live: no colourable quotient found"}
+{"key":"q1+1644.1+q137","quotients_colourable_verified":9,"quotients_nonloop":22,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}
+{"key":"q1+1620+324","quotients_colourable_verified":0,"quotients_nonloop":19,"verdict":"live: no colourable quotient found"}
+{"key":"q1+q5+132","quotients_colourable_verified":6,"quotients_nonloop":21,"verdict":"DEAD: a verified periodic 3-colouring of the whole Cayley graph"}

@@ -1,0 +1,33 @@
+quotient-colourable D=167: 32 pools
+  q1+264: 10 of 16 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+144.1: 11 of 16 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+168: 12 of 15 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+24: 15 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+108: 14 of 20 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+228: 15 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+144.2+24: 2 of 18 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+132: 11 of 22 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+1008.1: 12 of 17 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+324: 16 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+396.1: 15 of 18 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+372: 13 of 23 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+504: 6 of 13 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+348.2+q29: 5 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+1128: 16 of 20 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+456: 14 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+120+q5+24: 0 of 18 quotients verified 3-colourable -> live: no colourable quotient found
+  q1+396.2+132: 0 of 19 quotients verified 3-colourable -> live: no colourable quotient found
+  q1+1344: 13 of 17 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+564: 11 of 19 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+96: 14 of 17 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+768: 11 of 17 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+696.3+q29: 6 of 16 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+588: 15 of 22 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+756: 15 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+684: 12 of 22 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+1488.1: 12 of 19 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+84+28: 1 of 20 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+1596.1: 12 of 21 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+q5+120+24: 0 of 18 quotients verified 3-colourable -> live: no colourable quotient found
+  q1+1644.1+q137: 9 of 22 quotients verified 3-colourable -> DEAD: a verified periodic 3-colouring of the whole Cayley graph
+  q1+1620+324: 0 of 19 quotients verified 3-colourable -> live: no colourable quotient found

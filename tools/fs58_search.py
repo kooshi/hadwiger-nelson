@@ -1290,6 +1290,90 @@ def cmd_extract(D, spec, R, out, cap=2_000_000, stop_deletion=False):
                                              'distances among the kept points re-derived exactly'})
 
 
+def cmd_quotient_colourable(D, specs, lattices=24, wall=30.0, jobs=16):
+    """the necessary filter for the direct route: a pool with a 3-colourable finite quotient Cay(Z^4/L, W) (no generator in L) has a
+    periodic 3-colouring of its whole Cayley graph, so no ball of it ever refuses three colours. Runs the quotient screen (targets
+    sep 2u, 3u, id 2u) and reports, per pool, how many quotients are 3-colourable with a verified model (any SEPARATED/IDENTIFIED
+    answer carries one) -> quotient-colourable.jsonl"""
+    import multiprocessing as mp
+    out = outdir(D) / 'quotient-colourable.jsonl'
+    done = load_jsonl(out)
+    todo = [(D, sp, [2, 3], lattices, wall) for sp in specs if sp not in done]
+    print(f'quotient-colourable D={D}: {len(todo)} pools', flush=True)
+    with mp.get_context('fork').Pool(jobs) as P:
+        for spec, killed, alive in P.imap_unordered(_qscreen_worker, todo):
+            recs = [r for r in load_jsonl(outdir(D) / 'qscreen.jsonl').values() if r.get('pool') == spec]
+            verified = sum(1 for r in recs if any(v in ('SEPARATED (verified)', 'IDENTIFIED (verified)') for v in r.get('answers', {}).values()))
+            rec = {'key': spec, 'quotients_nonloop': sum(1 for r in recs if r.get('status') != 'loop'),
+                   'quotients_colourable_verified': verified,
+                   'verdict': 'DEAD: a verified periodic 3-colouring of the whole Cayley graph' if verified else 'live: no colourable quotient found'}
+            append(out, rec)
+            print(f"  {spec}: {rec['quotients_colourable_verified']} of {rec['quotients_nonloop']} quotients verified 3-colourable -> {rec['verdict']}", flush=True)
+
+
+def cmd_minimize(D, spec, R, src, out, seeds):
+    """From SRC/steps.jsonl's last core round (the assumption-core fixpoint of `extract`), Glucose4 deletion in random vertex orders
+    (random.Random(seed).shuffle over the core's recorded order, after one initial failed-assumption core), for each seed; the smallest
+    refusing set is emitted to OUT exactly as `extract` emits (translation, exact edges, CaDiCaL LRAT). Each seed's size is appended to
+    OUT/minimize.jsonl (resume: finished seeds are read back). Deterministic given the seed list."""
+    import numpy as np, random, subprocess
+    from pysat.solvers import Glucose4
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    t0 = time.time()
+    C, names = spec_classes(D, spec)
+    M, W = pool_vectors(D, C, names)
+    B, coords, cov, mc = reduce_pool(D, M, W)
+    steps = [json.loads(l) for l in (Path(src) / 'steps.jsonl').read_text().splitlines() if l.strip()]
+    rounds = [r for r in steps if r['step'].startswith('core-round-')]
+    core = [tuple(p) for p in rounds[-1]['kept']]
+    idx = {p: i for i, p in enumerate(core)}
+    m = len(core)
+    G = [tuple(g) for g in coords]
+    E = sorted({(idx[p], idx[q]) for p in core for g in G for q in [tuple(a + b for a, b in zip(p, g))] if q in idx and idx[p] < idx[q]})
+    sel = lambda i: 3 * m + 1 + i
+    log = out / 'minimize.jsonl'
+    done = load_jsonl(log)
+    for seed in seeds:
+        key = f'seed-{seed}'
+        if key in done:
+            continue
+        g = Glucose4()
+        for i in range(m):
+            g.add_clause([-sel(i), 3 * i + 1, 3 * i + 2, 3 * i + 3])
+        for a, b in E:
+            for c in range(3):
+                g.add_clause([-(3 * a + c + 1), -(3 * b + c + 1)])
+        order = list(range(m))
+        random.Random(seed).shuffle(order)
+        t = time.time()
+        assert not g.solve(assumptions=[sel(i) for i in range(m)])
+        cur = {x - 3 * m - 1 for x in g.get_core()}
+        for v in order:
+            if v in cur and not g.solve(assumptions=[sel(x) for x in sorted(cur - {v})]):
+                cur = {x - 3 * m - 1 for x in g.get_core()}
+        g.delete()
+        rec = {'key': key, 'seed': seed, 'points': len(cur), 'seconds': round(time.time() - t, 1), 'kept': [list(core[i]) for i in sorted(cur)]}
+        append(log, rec)
+        done[key] = rec
+        print(f'  seed {seed}: {m} -> {len(cur)} points ({rec["seconds"]} s)', flush=True)
+    best = min((done[f'seed-{s_}'] for s_ in seeds), key=lambda r: (r['points'], r['seed']))
+    flat = all(c[3] == 0 for c in coords)
+    X, n = piece(D, M, B, (0, 0, 0, 0), 'ball', R, 2_000_000, flat=flat)
+    key = {tuple(int(t) for t in x): i for i, x in enumerate(X)}
+    kept = sorted(key[tuple(p)] for p in best['kept'])
+    pre = subprocess.run(['lean', '--print-prefix'], capture_output=True, text=True, check=True).stdout.strip()
+    work = ROOT / 'build' / f'fs58-direct-{D}'
+    work.mkdir(parents=True, exist_ok=True)
+    _emit_witness(D, spec, R, M, B, X, kept, W, n, int(len(piece_edges(X, coords))), len(kept), out, pre, work, t0,
+                  provenance={'generator': f'tools/fs58_search.py minimize (from {src}/steps.jsonl; seeds {list(seeds)})',
+                              'reduction': f'{len(rounds)} rounds of CaDiCaL assumption cores to a fixpoint ({n} -> {m} points), then '
+                                           f'Glucose4 deletion in the random order of seed {best["seed"]} (best of seeds {list(seeds)}: '
+                                           f'{sorted(done[f"seed-{s_}"]["points"] for s_ in seeds)}), 1-minimal; then translated by -p so '
+                                           'the axis edge p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit distances among the kept '
+                                           'points re-derived exactly'})
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -1307,6 +1391,8 @@ def main():
     elif a[0] == 'batch':
         cmd_batch(int(a[1]), a[2].split(','), [float(x) for x in a[3].split(',')], [int(x) for x in a[4].split(',')], int(a[5]),
                   float(a[6]))
+    elif a[0] == 'minimize':
+        cmd_minimize(int(a[1]), a[2], float(a[3]), a[4], a[5], [int(x) for x in a[6].split(',')])
     elif a[0] == 'extract':
         cmd_extract(int(a[1]), a[2], float(a[3]), a[4], stop_deletion='--stop-deletion' in a)
     elif a[0] == 'direct-witness':
@@ -1321,6 +1407,8 @@ def main():
     elif a[0] == 'rigidity':
         for R in a[3].split(','):
             cmd_rigidity(int(a[1]), a[2], float(R), int(a[4]) if len(a) > 4 else 2)
+    elif a[0] == 'quotient-colourable':
+        cmd_quotient_colourable(int(a[1]), a[2].split(','))
     elif a[0] == 'qscreen':
         cmd_qscreen(int(a[1]), a[2], [int(x) for x in a[3].split(',')], int(a[4]), float(a[5]))
     elif a[0] == 'probe':
