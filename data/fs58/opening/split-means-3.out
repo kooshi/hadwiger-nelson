@@ -1,0 +1,9 @@
+split circle over Q_3(i) (residue F_9), characters of level <= 2, Tamagawa weights: least means
+  -0.400000  alpha=(3, 0) beta=(3, 3)
+  -0.400000  alpha=(3, 0) beta=(3, 6)
+  -0.187939  alpha=(1, 0) beta=(0, 2)
+  -0.187939  alpha=(1, 0) beta=(0, 7)
+
+real	0m0.267s
+user	0m0.251s
+sys	0m0.015s

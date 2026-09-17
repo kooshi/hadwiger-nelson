@@ -1,0 +1,10 @@
+S_1 = Cay(F_9^2, C): |C| = 8; spectrum {-4.0: 16, -1.0: 32, 2.0: 24, 5.0: 8, 8.0: 1}
+  lambda_min = -4.0; 3-tight iff lambda_min = -d/2 = -4.0: True; Hoffman alpha <= 27.0 against 81/3 = 27
+  proper 3-colourings with the origin 0 and neighbour ((0, 0), (1, 0)) 1: 8 (exhaustive); affine x -> sigma(L(x)): 8
+  level m=1: |circle| = 8; least mean over nonzero characters -0.500000; characters at exactly -1/2: 16; least over level-1-primitive: -0.500000
+  level m=2: |circle| = 72; least mean over nonzero characters -0.500000; characters at exactly -1/2: 16; least over level-2-primitive: -0.234923
+  level m=3: |circle| = 648; least mean over nonzero characters -0.500000; characters at exactly -1/2: 16; least over level-3-primitive: -0.082770
+
+real	0m8.515s
+user	0m6.745s
+sys	0m1.733s
