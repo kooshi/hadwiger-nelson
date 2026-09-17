@@ -16,6 +16,10 @@ arithmetic for every graph and every colouring; character means are floats (expo
   balls N R PAIRS    the Cayley ball of radius R of W_N (unit vectors of ℚ(√167)(i) with denominator dividing N): points,
                      edges, 3-colourability, and for up to PAIRS pairs (p, p + 3u), u ∈ W_N, p at word depth ≤ 1, whether the
                      pair is forced equal at three colours (incremental CaDiCaL with one selector per pair)
+  tensor Q           the tensor product S_1 × P_Q of the 3-adic residue plane (Cay(𝔽₉², 8-point circle)) with the residue plane
+                     P_Q = Cay(𝔽_Q², circle) at a prime Q: is there a 3-colouring with f(0, 0) ≠ f(0, e) for some e ≠ 0, i.e.
+                     one not pulled back from S_1? (Q = 3 is the positive control: P_3 is 3-colourable.) Separable colourings
+                     are verified on every edge
   counts             unit vectors of ℚ(√d)(i) outside ℚ(i) by denominator, for d = 11, 23, 167
   circles D N DRAWS  independent triples U = {0, a, b} (a, b sums of 1–3 directions of W_N over ℚ(√D), no unit distance inside
                      U): is the unit-distance graph on the union of the unit circles about U, directions W_N, non-bipartite?
@@ -285,6 +289,54 @@ def cmd_balls(N, R, maxpairs):
           f"({len(pairs) - len(open_)} by the first model); Forced (solver claim): {forced}")
 
 
+# ---------------------------------------------------------------- tensor
+def cmd_tensor(q):
+    from pysat.solvers import Cadical153
+    add9 = lambda u, v: ((u[0] + v[0]) % 3, (u[1] + v[1]) % 3)
+    mul9 = lambda u, v: ((u[0] * v[0] - u[1] * v[1]) % 3, (u[0] * v[1] + u[1] * v[0]) % 3)
+    F9 = [(a, b) for a in range(3) for b in range(3)]
+    V3 = [(x, y) for x in F9 for y in F9]
+    C3 = [(x, y) for x, y in V3 if add9(mul9(x, x), mul9(y, y)) == (1, 0)]
+    Vq = [(x, y) for x in range(q) for y in range(q)]
+    Cq = [(x, y) for x, y in Vq if (x * x + y * y) % q == 1]
+    i3, iq = {v: i for i, v in enumerate(V3)}, {v: i for i, v in enumerate(Vq)}
+    nq = len(Vq)
+    vid = lambda a, b: a * nq + b
+    N = len(V3) * nq
+    E = []
+    for a, r in enumerate(V3):
+        for b, rq in enumerate(Vq):
+            for c in C3:
+                a2 = i3[(add9(r[0], c[0]), add9(r[1], c[1]))]
+                for cq in Cq:
+                    w = vid(a2, iq[((rq[0] + cq[0]) % q, (rq[1] + cq[1]) % q)])
+                    if w > vid(a, b):
+                        E.append((vid(a, b), w))
+    var = lambda v, c: 3 * v + c + 1
+    s = Cadical153()
+    for v in range(N):
+        s.add_clause([var(v, c) for c in range(3)])
+    for u, w in E:
+        for c in range(3):
+            s.add_clause([-var(u, c), -var(w, c)])
+    print(f"S_1 x P_{q}: {N} vertices, {len(E)} edges, degree {len(C3) * len(Cq)}; 3-colourable: {s.solve()}")
+    nxt, found = 3 * N + 1, None
+    for b in range(1, nq):
+        for c in range(3):
+            s.add_clause([-nxt, -var(vid(0, 0), c), -var(vid(0, b), c)])
+        if s.solve(assumptions=[nxt]):
+            m = s.get_model()
+            g = [next(c for c in range(3) if m[var(v, c) - 1] > 0) for v in range(N)]
+            assert all(g[u] != g[w] for u, w in E) and g[vid(0, 0)] != g[vid(0, b)], 'INSTRUMENT CATASTROPHE'
+            found = Vq[b]
+            break
+        nxt += 1
+    if found:
+        print(f"  Separable (colouring verified): f(0,0) != f(0,{found}) — a 3-colouring not pulled back from S_1")
+    else:
+        print(f"  Forced (solver claim) for all {nq - 1} points e != 0: every 3-colouring is pulled back from S_1")
+
+
 # ---------------------------------------------------------------- counts / circles
 def units_d(N, d):
     """every unit vector ((a + b√d)/N, (c + e√d)/N) of ℚ(√d)(i), d squarefree > 1 (tools/fs56_low_height.units with d free)"""
@@ -385,6 +437,8 @@ if __name__ == '__main__':
         cmd_split_means(int(args[0]), int(args[1]))
     elif cmd == 'dyadic-means':
         cmd_dyadic_means(int(args[0]))
+    elif cmd == 'tensor':
+        cmd_tensor(int(args[0]))
     elif cmd == 'counts':
         cmd_counts()
     elif cmd == 'circles':

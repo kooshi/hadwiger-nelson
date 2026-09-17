@@ -52,6 +52,11 @@ denominator 10, against `ℚ(√167)`'s first at 24; §0 O5) and the field where
 * **O5 — low-height direction counts** (outside `ℚ(i)`, by denominator N): `ℚ(√11)`: 24 at 10, 8 at 12, 24 at 20, 96 at 60;
   `ℚ(√23)`: 8 at 8, 16 at 12, 32 at 24; `ℚ(√167)`: 8 at 24, 8 at 28, 24 at 140. (Scratch count with FS-56's enumerator generalised to
   `d`: `counts.out`.)
+* **O7 — tensor products with the stable residue planes are rigid at three colours** (`tensor.out`; found after the subplan's
+  commit, and it corrected D3.4). `S₁ × P_q` (the Cayley graph of `𝔽₉² × 𝔽_q²` on pairs of circle points), asked for a 3-colouring
+  with `f(0, 0) ≠ f(0, e)`, `e ≠ 0`: `q = 3` (control; `P₃` is 3-colourable) — **Separable, verified**; `q = 7` (3,969 vertices),
+  `11` (9,801), `19` (29,241), `23` (42,849) — **Forced (solver claim) for every `e`**, 0–10 s each: every 3-colouring is pulled back
+  from `S₁`.
 * **O6 — the pigeonhole route (D7) at three points finds nothing in triangle-free fields at this height** (`circles.out`). Independent
   triples `U = {0, a, b}` (`a, b` sums of one to three directions, no unit distance inside `U`) whose union of unit circles, with
   directions in `W_N`, holds an odd cycle: `ℚ(√3)`, `W₂` — **37 of 90** (the positive control); `ℚ(√11)`, `W₆₀` — **0 of 1,292**;
@@ -158,13 +163,18 @@ an edge direction), and `R = ℤ[U]` the ring the unit vectors of `F(i)` generat
    * *3-adic*: if every edge of `H` is 3-integral, `H` maps to `S₁` and its affine colourings separate every pair whose difference has
      nonzero residue — **a 3-integral forcer can force only `δ ∈ 3·(3-integral vectors)`**;
    * *tower*: by D2 every `S_m` forces every such `δ`, so no finite level of the 3-adic tower rules any of them out.
-4. **Periodic rigidity.** Let `A = O_{(3)}²`, the 3-integral vectors. (a) *Every finite quotient `A/L` is a quotient of some
-   `(O/3^m)²`*: multiplication by an integer prime to 3 is an automorphism of `A`, hence of `A/L`, so `A/L` has no element of prime
-   order `≠ 3`; it is a 3-group of some exponent `3^m`, so `3^m A ⊆ L`. (b) *Every point of the circle `C_m` of `(O/3^m)²` lifts to a
-   3-integral unit vector of `F²`*: the parametrisation `s ↦ ((1 − s²)/(1 + s²), 2s/(1 + s²))` with `1 + s²` a 3-adic unit covers
-   `C_m` except the point `(−1, 0)`, which is itself global, and `O` is dense in `O/3^m`. (b) is what makes the quotient graph `S_m`
-   itself rather than a Cayley graph on fewer generators, whose colourings would be more. So **every periodic 3-colouring of `G₃` is
-   pulled back from some `S_m`, hence affine** (D2), and keeps every pair at difference `3u` equal.
+4. **Periodic rigidity** [corrected 2026-09-17; the first version was wrong]. The component of `G₃` through `0` lies in
+   `Λ₃ = ℤ[S]`, the group the 3-integral unit vectors generate, **not** in `A = O_{(3)}²`: at every conjugation-stable prime `𝔮` of
+   `F(i)` (for `ℚ(√11)`: the primes above 2, 7, 11, 19, …; for `ℚ(√167)`: above 23, 43, 59, 167, …) every unit vector is `𝔮`-integral,
+   so `Λ₃` maps onto the residue plane `P_𝔮` there while `1/p ∉ Λ₃` (prime inversion, G55). The first version argued from `A`, where
+   such primes are invertible, and concluded that every finite quotient is a 3-group — false for `Λ₃`. **Correct statement:** a
+   periodic 3-colouring of `G₃` factors through a finite quotient of `Λ₃`, which maps to a product of 3-adic levels `S_m` and levels of
+   the stable planes `P_𝔮`; since `S` surjects onto `C_m × Π C_𝔮` (weak approximation on the conic), the quotient graph is a
+   **tensor product** `S_m × Π P_𝔮`. *Measured* (§0 O7): for `q = 7, 11, 19, 23`, every 3-colouring of `S₁ × P_q` is pulled back from
+   `S₁`, with the positive control at `q = 3` (whose plane is 3-colourable) separating at once. *Not derived:* the statement for every
+   product of levels; the relevant graph-theoretic fact — 3-colourings of `G × H` with `χ(H) > 3` factor through `G` — is a
+   multiplicativity-type property of `K₃` whose prior art (Häggkvist–Hell–Miller–Neumann-Lara 1988, Greenwell–Lovász 1974 for `K_n`
+   factors) is owed a reading before it is cited. The lifting step (every circle point modulo `𝔮^m` and `3^m` lifts jointly) stays.
 5. **The dichotomy, by compactness.** A finite forcer of `(p, p + 3u)` among 3-integral graphs exists **iff `G₃` forces it** (if every
    finite subgraph had a separating colouring, a limit colouring of `G₃` would separate it). So route C over 3-integral forcers asks one
    question per field: **is `G₃` rigid at three colours?** A non-affine 3-colouring of `G₃`, if one exists, is aperiodic (4.).
@@ -178,6 +188,14 @@ an edge direction), and `R = ℤ[U]` the ring the unit vectors of `F(i)` generat
    edge set, never from the directions used to build it. `Λ₀ ≅ ℤ⁴` has quotients of every order, unlike `A`, and this screen is a
    boundary-free SAT question on a vertex-transitive graph. *Controls, both reachable:* on `L = 3Λ₀` the pair is one vertex, so no
    separation exists; on an `L` with `3u ≡ w ∈ W₀`, the pair is an edge, so every colouring separates it.
+8. **A distance-2 virtual edge is enough** [hand, three lines]. If a finite 3-integral graph separates `x` from `x + 2u` in every
+   3-colouring, then any graph containing it and the run `x, x + u, x + 2u, x + 3u` (and the same gadget translated by `u`) forces
+   `x` and `x + 3u` equal: `c(x), c(x+u), c(x+2u)` are distinct and so are `c(x+u), c(x+2u), c(x+3u)`, so `c(x + 3u) = c(x)`. Every
+   affine colouring separates `2u` (`κ(2u) = 2κ(u) ≠ 0`), the tower separates it at every level, and the compactness dichotomy holds
+   for separation as for forcing. So the chain target can be sought as **a virtual edge at difference `2u`** — a Moser-spindle-shaped
+   question (a 4-chromatic `{1, 2}`-graph with one distance-2 edge, over the field) — which is a stronger property than forcing `3u`
+   and the more geometric one to design for.
+
 *What is not claimed:* that `G₃` is rigid. Forcers that use 3-non-integral edges escape screen 3 (they have no homomorphism to `S₁`) and are
 phase C's.
 

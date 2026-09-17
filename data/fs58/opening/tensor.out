@@ -1,0 +1,15 @@
+S_1 x P_3: 729 vertices, 11664 edges, degree 32; 3-colourable: True
+  Separable (colouring verified): f(0,0) != f(0,(0, 1)) — a 3-colouring not pulled back from S_1
+  (0 s)
+S_1 x P_7: 3969 vertices, 127008 edges, degree 64; 3-colourable: True
+  Forced (solver claim) for all 48 points e != 0: every 3-colouring is pulled back from S_1
+  (0 s)
+S_1 x P_11: 9801 vertices, 470448 edges, degree 96; 3-colourable: True
+  Forced (solver claim) for all 120 points e != 0: every 3-colouring is pulled back from S_1
+  (2 s)
+S_1 x P_19: 29241 vertices, 2339280 edges, degree 160; 3-colourable: True
+  Forced (solver claim) for all 360 points e != 0: every 3-colouring is pulled back from S_1
+  (6 s)
+S_1 x P_23: 42849 vertices, 4113504 edges, degree 192; 3-colourable: True
+  Forced (solver claim) for all 528 points e != 0: every 3-colouring is pulled back from S_1
+  (10 s)
