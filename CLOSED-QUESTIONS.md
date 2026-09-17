@@ -50,8 +50,8 @@ prime above 2; the lower half is the Moser spindle exhibited as an identity in t
 `Real.sqrt` anywhere. That settles rows 2–7; row 1 asks for every algebraic extension of `ℚ²`, and this is
 one field of it.
 
-**Also closed by it:** `[CranstonRabern2015]`'s second question outright. Their first is bracketed
-`76/21 ≤ χ_f(K²) ≤ 4` (§3).
+**Also closed by it:** `[CranstonRabern2015]`'s second question outright, and — with `[MatolcsiEtAl2025]` — their first
+(§1.6).
 
 **Prior art that constrains the claim.** `[Madore2015]`'s bracket is the closest anyone came. The residue
 mechanism is not new: the reduction from a field plane to a finite residue plane was derived in seven lineages
@@ -216,6 +216,30 @@ source on record.
 
 ---
 
+### 1.6 The fractional chromatic number of the plane over `ℚ(√3, √11)`
+
+> **`[CranstonRabern2015]`**, concluding section (Combinatorica 37, 2017): *"What is the fractional chromatic number of
+> `ℚ(√3,√11) × ℚ(√3,√11)`?"* — after noting that their graphs give `χ_f(ℚ(√3,√11)²) ≥ 76/21`.
+
+**Our answer: 4, exactly.** The upper bound is Theorem B (§1.1, kernel-checked). The lower bound is `[MatolcsiEtAl2025]`'s
+27-point graph `G27`, which lies in the Moser lattice inside `ℚ(√3,√11)²` and has geometric fractional chromatic number 4, combined
+with the observation that their blow-up (their Theorem 1) **never leaves the field its graph lives in**: every congruence between
+subsets of `F²` is an isometry of `F²`, the group those generate is solvable, and the Følner copies of `G27` stay in `F²`. So finite
+unit-distance graphs over `ℚ(√3,√11)` have fractional chromatic numbers arbitrarily close to 4 (and independence ratios
+arbitrarily close to `1/4`, never below). Proof: `plans/FS56-field-blowup.md` (hand). **Not kernel-checked** beyond Theorem B.
+
+**Prior art that constrains the claim.** Almost all of it is theirs: the geometric fractional chromatic number (`[AmbrusEtAl2023]`),
+the blow-up and `G27` with its rational witness (`[MatolcsiEtAl2025]`). Ours is the field-internal reading of the blow-up and the
+upper bound. Their witness was **re-verified here** by an independent exact checker (`tools/fs56_gf_check.py`: the graph rebuilt in
+`ℚ(√3,√11)` arithmetic, every congruence decided by an exact isometry test, all 182,304 independent sets enumerated; CERTIFIED, with
+five planted faults refused — `data/fs56/g27/`). **Searched for a contradicting or earlier claim** on 2026-09-16: every work citing
+`[CranstonRabern2015]` (Semantic Scholar, 11 records; OpenAlex, 8) and `[MatolcsiEtAl2025]` (Semantic Scholar, 4; OpenAlex's preprint
+record, 0); none addresses a field plane.
+
+**Status:** not written up. It would sit naturally in FS-20's manuscript beside Theorem B, since the upper bound is Theorem B.
+
+---
+
 ## §2 — Answered in one direction, or with a caveat that must travel
 
 ### 2.1 Type-M constructions with other rotations
@@ -317,10 +341,6 @@ candidate material for FS-20.
 - **`χ(𝔽₁₇²) ∈ {5, 6, 7}`** — `[Moorhouse2010]` Table 6.1; open, and never touched here (289 vertices, against
   the 529 of the plane at 23). A 6 would answer the first digit (`CLAUDE.md` G48: is any finite plane exactly
   6-chromatic?), though `17 ≡ 1 (mod 4)` is never a usable prime, so it bears on no field's sieve.
-- **`χ_f(K²) = 4` exactly?** — `[CranstonRabern2015]`'s first question (§1.1 row 4); our bracket is
-  `76/21 ≤ χ_f ≤ 4`. `[MatolcsiEtAl2025]`'s amenability argument uses the full Euclidean group; the subgroup
-  preserving `K²` is metabelian, hence amenable, and dense in it. If their Følner step survives the
-  restriction, the question closes. Not attempted.
 - *Closed by others, listed so it is not re-closed:* **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
   more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no.
 

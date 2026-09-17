@@ -1,0 +1,4 @@
+H: 27 points, 49 edges, 182304 independent sets (with the empty set)
+level 1: 0 congruence classes of independent sets of 2..1 points, 0 equality rows; LP value 3.000000 (Optimization terminated successfully. (HiGHS Status 7: Optimal))
+level 2: 39 congruence classes of independent sets of 2..2 points, 263 equality rows; LP value 3.722186 (Optimization terminated successfully. (HiGHS Status 7: Optimal))
+level 3: 605 congruence classes of independent sets of 2..3 points, 1564 equality rows; LP value 3.947534 (Optimization terminated successfully. (HiGHS Status 7: Optimal))

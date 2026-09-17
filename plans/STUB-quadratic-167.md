@@ -1,3 +1,5 @@
+> **CLOSED 2026-09-16 — run as FS-56; the record is `plans/FS56-quadratic-167.md`.** Q0 landed (five refused at 23, α ≤ 105), so the prediction χ(ℚ(√167)²) ≥ 6 stands. Q1 (≥ 4) not landed: the milestone's instrument is the fractional blow-up (which also gave χ_f(ℚ(√3,√11)²) = 4), and small pieces of this plane are starved (odd girth 7, 3-colourable balls of 215,409 points). Q1–Q4 continue as FS-58 (`plans/STUB-fractional-four.md`). The text below is the stub as written.
+
 # FS-56 — ℚ(√167): the smallest field the conjecture says needs six colours
 
 *Minted 2026-09-16 at FS-54's close. Kooshi: "Let's close this out and look at 167 next." Written for a session with **zero

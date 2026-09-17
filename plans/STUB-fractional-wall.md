@@ -24,15 +24,14 @@ residue target built from first-level primes (`CLAUDE.md` G43/G59).
 |---|---|---|---|---|---|---|
 | **47** | 368 | 371 (three-point, converged) | **0.76 %** | 265 | level-3 GLV relaxation: 4,121,921 variables, 462 blocks (orders 529–1,128), 26 GB RAM, **5.15 s/iteration on graphics card A**, checkpoint at 340 its (`data/fs54/d4/ckpt/admm-q47-l3.npz`); projected **6,400–16,000 iterations, 9–23 h (low confidence)**; decision point ≈ 1,500 its (~2 h, 1,000 past the warm-up peak); certificate producer needs a port (hours) | **in reach** |
 | **64** | 682 | 768 (Hoffman = Delsarte LP) | 11.2 % | 512 (KaMIS, 6 seeds of 6) | three-point SDP ported to characteristic 2: G₀ = μ₆₅ ⋊ C₁₂ (order 780, nauty-exact), real blocks of size ≤ 64; needs 0.888 of Hoffman, reached by 5 of 9 odd planes | **plausible** |
-| 23 | 88 | 108 | 18.5 % | 87 | level 3 drops 3–4.5 %; nothing priced reaches it | not in reach |
+| 23 | 88 | **105** (level 3, FS-56) | 16.2 % | 87 | level 3 spent; nothing priced reaches it | not in reach |
 | 27 | 121 | **141** (level 3) | 14.2 % | 117 | level 3 already spent | not in reach |
 | 31 | 160 | 200 | 20.0 % | 146 | — | not in reach |
 | 43 | 308 | 365 (three-point, stopped iterate) | 15.6 % | 258 | — | not in reach |
 
 **Side results on the way, each a first digit rather than a wall step:**
-* **Five refused at 23**: the level-3 calibration iterate reads 105.431 < 106 at 3,500 iterations
-  (`data/fs54/d4/ckpt/calib-q23.npz`); `tools/fs54_l3_cert_round.py` reads it; ≈ 1 CPU-hour to an exact certificate. **This is
-  also FS-56's precondition** — FS-56 runs it first.
+* **Five refused at 23 — DONE (FS-56):** `data/fs54/cert-q23-l3-N105.json`, α ≤ 105 (N = 105.4306), rounded from the 3,500-iteration
+  calibration iterate in seconds.
 * **Five refused at 31** needs N < 193, 3.92 % under the converged 200.88; level 3 at 31 is ~7× the size of 27 (estimated).
 
 ## 3. Why no single theorem carries W, and the routes that might

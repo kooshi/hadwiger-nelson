@@ -1,0 +1,12 @@
+# the plane over Q(sqrt 167) at small height (exact; tools/fs56_low_height.py survey)
+N=84: |W| = 20 (16 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [4, 5], into (Z/2)^2: False
+N=168: |W| = 36 (32 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [5], into (Z/2)^2: False
+N=420: |W| = 60 (48 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [4], into (Z/2)^2: False
+N=2184: |W| = 108 (96 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [5], into (Z/2)^2: False
+N=5460: |W| = 180 (144 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [4], into (Z/2)^2: False
+N=10920: |W| = 324 (288 leave Q(i)); rank 4, index 4 in Z^4; triangle False; 5-cycle False; additive colourings nonzero on every unit vector into Z/p for p in [], into (Z/2)^2: False
+N=84: ball of radius 5 about 0 has 36365 points; shortest odd closed walk through 0 longer than 11
+N=168: ball of radius 4 about 0 has 72317 points; shortest odd closed walk through 0 longer than 9
+N=420: ball of radius 3 about 0 has 37681 points; shortest odd closed walk through 0 7
+N=2184: ball of radius 3 about 0 has 215409 points; shortest odd closed walk through 0 7
+N=10920: ball of radius 2 about 0 has 52813 points; shortest odd closed walk through 0 longer than 5

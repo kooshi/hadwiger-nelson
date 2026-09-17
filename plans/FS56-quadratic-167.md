@@ -130,10 +130,10 @@ denominator 84 (20 vectors) read −0.98 — too few vectors, as predicted. So t
 | phase | what | output | status |
 |---|---|---|---|
 | A | Q0 (§0) | `data/fs54/cert-q23-l3-N105.json`, `data/fs56/q0/` | **LANDED** |
-| B | the field blow-up (§1): write it up; re-verify MRVZ's `G27` witness with our own exact checker; correct the bibliography; prior-art search on `χ_f(K²)` | `plans/FS56-field-blowup.md`, `tools/fs56_gf_check.py`, `data/fs56/g27/` | open |
-| C | the local ratio table (§2) as a committed script | `tools/fs56_local_ratios.py` → `data/fs56/local-ratios.out` | open |
-| D | **Q1 — χ(ℚ(√167)²) ≥ 4 by a finite `H` with `χ_gf(H; 𝒞) > 3`** (§4) | `tools/fs56_gf_lp.py`, `tools/fs56_gf_search.py`, `data/fs56/q1/` | open |
-| E | kernel: the 23 consumer's docstrings from "open" to "held by certificate" | `Instances/IndependenceThreshold.lean` | open |
+| B | the field blow-up (§1): write it up; re-verify MRVZ's `G27` witness with our own exact checker; correct the bibliography; prior-art search on `χ_f(K²)` | `plans/FS56-field-blowup.md`, `tools/fs56_gf_check.py`, `data/fs56/g27/` | **LANDED** |
+| C | the local ratio table (§2) as a committed script | `tools/fs56_local_ratios.py` → `data/fs56/local-ratios.out` | **LANDED** |
+| D | **Q1 — χ(ℚ(√167)²) ≥ 4 by a finite `H` with `χ_gf(H; 𝒞) > 3`** (§4) | `tools/fs56_low_height.py`, `tools/fs56_gf_levels.py`, `data/fs56/q1/` | **not landed — measured (§D)** |
+| E | kernel: the 23 consumer's docstrings from "open" to "held by certificate" | `Instances/IndependenceThreshold.lean` | **LANDED** (83 too; build 172/172) |
 | F | the close: ledger row 71, grokkings, re-rank, stubs, sweep | `CLAUDE.md`, `plans/FRONTIER-STUBS.md` | open |
 
 ## §4 Phase D in detail — the instrument for Q1
@@ -219,6 +219,87 @@ so every useful `H` uses `ρ₄₂`-type vectors; `n = 42` is the smallest type-
 **Budget and stop rule.** The search runs checkpointed (the beam's population and every `(H, value)` written per generation to
 `data/fs56/q1/beam-gen*.json`; resume = relaunch without `--new`), at most one heavy job at a time. **Stop** when the best
 reading has not improved by `10⁻³` over five generations at the largest `W` tried, and report the plateau as the finding.
+
+## §D Phase D, measured (2026-09-16) — **Q1 not landed; the planned search was not built, because its informative outcome was measured unreachable**
+
+Before building the beam search, the cheapest facts that decide whether a ≤ 200-point piece of ℚ(√167)² can read above 3 were
+measured. They say it cannot, at any height a finite search reaches cheaply.
+
+**The plane at small height** (`tools/fs56_low_height.py survey` → `data/fs56/q1/low-height.out`, exact integers). `W_N`, the unit
+vectors whose denominator divides `N`, has 20, 36, 60, 108, 180, 324 elements at `N` = 84, 168, 420, 2184, 5460, 10920; each spans a
+rank-4 lattice of index 4 in `(1/N)ℤ⁴`. **No triangle** (no `√3`) **and no 5-cycle** at any of these `N`. **The shortest odd cycle
+has length 7** at `N` = 420 and 2184; at 84 none has length ≤ 11, at 168 none ≤ 9, at 10920 none ≤ 5. **Additive colourings**
+of `Cay(Λ_N, W_N)` exist into `ℤ/4` or `ℤ/5` for every `N ≤ 5460` (none into `ℤ/2`, `ℤ/3` or `(ℤ/2)²`) and into no cyclic group of
+order ≤ 5 at 10920 — Fischer's 1/k obstruction (`1/4, 1/5 ∈ R`) arriving height by height.
+
+**The richest small piece.** The 125 points on all 7-cycles through 0 at `N = 420` (352 unit edges): plain `χ_f ≤ 2.75` (the
+restricted master of column generation, a float reading; lower bound 2). Level 2 by column generation is **degenerate** — with
+exact class equalities the master never leaves its single-point basis — so it gave no reading; full enumeration is the working
+method for small `H` (below).
+
+**The integral side** (`ball` + CaDiCaL + `check-model --exhaustive`): the radius-3 ball about 0 of `Cay(Λ₄₂₀, W₄₂₀)` — **37,681
+points, 108,152 edges — is 3-colourable**, the colouring verified on the edge list and then **exhaustively**, every same-coloured
+pair's exact quadrance computed without the unit-vector list (1.29·10⁹ ordered pairs), with a planted recolouring that the
+exhaustive check catches (`data/fs56/q1/ball-420-r3-check.out`). The radius-3 ball of `Cay(Λ₂₁₈₄, W₂₁₈₄)` — **215,409 points,
+632,124 edges** — is 3-colourable by CaDiCaL (verification in `data/fs56/q1/ball-2184-r3-check.out`).
+
+**The ratio bound.** Over characters of order ≤ 8 the least mean is −0.5000 at `N` = 420 and 5460 and −0.3833 at 2184; the
+full minimum lives on a character domain of ~10¹⁰ unit cells (Lipschitz constant ≈ 8.9 in Minkowski coordinates, volume
+`N⁴/2672`), beyond any certificate this project can check.
+
+**Calibration on `G27`** (`tools/fs56_gf_levels.py`, full enumeration, float LP → `data/fs56/g27/levels-g27.out`): level 1 (plain
+`χ_f`) **3.000**, level 2 (pairs) **3.722**, full congruence **4** (certified). Pair congruences carry most of the lift, and a
+triangle-rich 27-point graph starts from exactly 3; ℚ(√167)'s richest 125-point piece starts from ≤ 2.75.
+
+**Scores.** P1 **WON** (`G27` re-verified by our checker). P3 **WON** (pairs alone read 3.722 < 4). P2 **not reached** (no search ran).
+P4 **abandoned before running, not scored**: its informative outcome needs a ≤ 200-point piece above 3, and the smallest odd cycles
+are 7-cycles at denominator 420 whose union reads ≤ 2.75 before any congruence — the evidence predates the decision. P5 moot.
+
+**What Q1 needs, stated for the stub it becomes (FS-58).** Height: pieces containing odd structure grow as `|W_N|³` (radius 3), and
+the balls measured so far are 3-colourable. Three routes, none cheap: (i) the level-2 programme by full or stabilised column
+generation on structured pieces at `N ≥ 2184`, with a certificate format whose inequality (iii) is proved by something other than
+enumerating independent sets; (ii) SAT on balls of radius ≥ 4 or at `N ≥ 10920` (10⁶–10⁷ points); (iii) the equidistribution
+theorem behind §2's reading — character sums over unit vectors of bounded height — which, with the split places controlled, would prove
+`χ_f(F²) ≥ 3.48` — hence `χ(F²) ≥ 4` — for every real field whose compact places all read above −1/2, ℚ(√167) among them.
+
+## §C The close (2026-09-16)
+
+**Landed, with trust levels.**
+| result | trust | where |
+|---|---|---|
+| α(UD(𝔽₂₃,2)) ≤ 105, so χ(Γ₂₃) ≥ 6; L(ℚ(√167)) ≥ 6 | exact certificate, re-run, 5/5 controls | §0, `data/fs56/q0/` |
+| χ(F²) ≥ ⌈χ_gf(H)⌉ for finite `H ⊂ F²`, every subfield `F ⊆ ℝ` | hand (MRVZ Thm 1 with field bookkeeping) | `plans/FS56-field-blowup.md` |
+| χ_f(ℚ(√3,√11)²) = 4; finitary independence ratio 1/4 | hand + MRVZ witness re-verified by our checker + Theorem B (kernel) | same; `data/fs56/g27/`; `CLOSED-QUESTIONS.md` §1.6 |
+| the local character-mean table and each field's fractional ceiling | readings (floats) + theorem (ceilings) | `data/fs56/local-ratios.out` |
+| ℚ(√167)² at small height: no triangle or 5-cycle to denominator 10,920; odd girth 7; additive 4/5-colourings to 5,460; 3-colourable radius-3 balls (37,681 and 215,409 points) | exact; colourings verified exhaustively | §D, `data/fs56/q1/` |
+| `G27` at levels 1, 2: 3.000, 3.722 | float LP, full enumeration | `data/fs56/g27/levels-g27.out` |
+| the 23 and 83 consumers documented as held | build 172/172 | `Instances/IndependenceThreshold.lean` |
+
+**Not landed:** χ(ℚ(√167)²) ≥ 4 (Q1), and with it Q2–Q4 of the stub — carried to FS-58.
+
+**Decisions implementation forced or overturned.**
+* The beam search of §4 was **not built**: its informative outcome (a ≤ 200-point piece above 3) was measured unreachable before any
+  search cost was paid (§D). *Alternative:* build it and run to the stop rule. *Why not:* the measurement predates the decision and
+  the plateau would have been below 2.75 by construction. Confidence high.
+* The shape key moved from ordering-minimisation to an exact isometry test (obligation pass), which is what let the checker verify
+  `G27` at 12-point sets in 12 s.
+* §2's claim that ℚ(√11), ℚ(√23) are out of the instrument's reach was **wrong** as first written (true of the ratio bound only; the
+  hard ceiling is 3.5) and was corrected before any consequence was drawn.
+* Column generation at level 2 is degenerate under exact class equalities (measured); full enumeration or a stabilised method is
+  required — recorded in FS-58 R2.
+
+**The sweep** (WORKFLOW 9: "conjecture", "not claimed", "reading"). The ratio-bound reading R-C → **FS-58 R1** (minted). The side
+target ℚ(√11)/ℚ(√23) → **FS-58** side target. The stub's Q3 (what could six-colour ℚ(√167)²) — **declined**: no instrument sees it;
+the fractional ceiling 4.36 says nothing against six, and residue and additive colourings are already excluded (§0 of the stub).
+`χ_gf > 4` over ℚ(√167) as a route to five — **declined as a separate stub**, recorded inside FS-58 §2 (it needs a Dúcz–Varga-type
+augmentation in a field that cannot yet reach 3).
+
+**Gate.** Lean: docstrings only (`IndependenceThreshold.lean`), gated build 172/172 batches, 3 modules rebuilt, 0 warnings; axioms and
+vacuity re-run at the close (counts in the commit). Bibliography audit clean. Checker self-tests: `tools/fs56_gf_check.py --self-test`
+all passed; planted controls 5/5 on the 23 certificate and 5/5 on `G27`.
+
+**Credits.** `G27`, its congruence list and its rational witness are Matolcsi, Ruzsa, Varga and Zsámboki's (bit.ly/fcn-4); the
+geometric fractional chromatic number is Ambrus, Csiszárik, Matolcsi, Varga and Zsámboki's.
 
 ## §5 What this milestone is not
 **Side target, registered not planned:** `χ(ℚ(√11)²) ≥ 4` or `χ(ℚ(√23)²) ≥ 4` by the same instrument would prove the

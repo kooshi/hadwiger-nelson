@@ -1,0 +1,3 @@
+VERIFIED: a proper 3-colouring of the radius-3 ball of Cay(Lambda_420, W_420) (37681 vertices, 108152 edges)
+VERIFIED EXHAUSTIVELY: no two of the 37681 points with the same colour are at distance 1 (1288467001 ordered same-colour pairs checked by exact quadrance, independently of the unit-vector list)
+control: with vertex 1 recoloured to match its neighbour 0, the exhaustive check FIRES as designed
