@@ -555,3 +555,69 @@ seconds** in total (geometry 11.3 s, LRAT 8.8 s), against an estimate of about 4
 least four colours. The matching upper bound (`[Fischer1990]` Thm 9; `[Moorhouse2010]` Thm 8.1) is not in the kernel. **Owed at the close:**
 `CLAUDE.md` counts (trust ledger 990; gate line above); cite `[Moorhouse2010]` Thm 8.1 beside Fischer in the instance's docstring.
 
+### R-B5 — the search beyond `ℚ(√11)`: `ℚ(√23)` landed by a different route; five more fields; `ℚ(√167)` not landed (2026-09-17, `0b9f607`…`2a7aa7b`; implementer Opus 5, 3 h 23 m; reviewed by artifact)
+
+* **The route that landed is not the chain.** Over `ℚ(√23)` no forced pair at `3u` was found (174 capsule probes to 365,878 points; local
+  rigidity 0 in every pool; a hand obstruction: for `d ≡ 7 (mod 8)` no diamond chord is a rational vector of odd parity, which removes the
+  "diamond + three rational steps" 5-cycles that drive `ℚ(√11)`'s forcer). What landed is the plan's phase-C idea taken one step further:
+  a **saturated, 3-non-integral lattice** (the axis plus the orbit of `((49 + √23)/60, (7 − 7√23)/60)`, which already holds the `(3/5, 4/5)`
+  family: 36 directions, covolume `1.14·10⁻⁴`, least odd cycle 9, no linear form mod 3 nonzero on every generator) whose **ball** of
+  physical radius 1.5 (440,077 points) refuses three colours outright; it refuses from `R = 1.3` (248,213 points). Control on the identical
+  ball: without the `(3/5, 4/5)` edges it is 3-colourable (verified model). Extraction (77 core rounds, then deletion, then eight seeded
+  deletion orders) to **297 points, 670 edges** (`data/fs58/witness-23/minimal/`).
+* **Certified witnesses** (each: `tools/fs58_check_witness.py --radicand D` CERTIFIED with twelve planted faults refused and the same files
+  refused under a wrong radicand; the implementer's second-opinion `tools/fs58_recheck_witness.py`; **and the reviewer's decorrelated
+  recheck** — exact edges over all pairs equal to the file's, Minisat22 and Lingeling refusing three colours, a verified 4-colouring):
+
+  | field | points / edges | edges with 3 in a denominator | upper bound (hand, prior art) | value |
+  |---|---|---|---|---|
+  | `ℚ(√23)` | 297 / 670 (and 475 / 1,099) | 455 | 4, the plane at 7 (`[Moorhouse2010]` Cor. 8.3, `23 ≡ 2 mod 7`) | **χ = 4** |
+  | `ℚ(√47)` | 169 / 385 | 358 | 5, the plane at 11 (`47 ≡ 47 mod 84`: no 7) | 4 ≤ χ ≤ 5 |
+  | `ℚ(√71)` | 148 / 346 | 133 | 4 (`71 ≡ 1 mod 7`) | **χ = 4** |
+  | `ℚ(√95)` | 1,068 / 3,096 (not 1-minimal) | 2,707 | 4 (`95 ≡ 4 mod 7`) | **χ = 4** |
+  | `ℚ(√191)` | 483 / 1,203 | 408 | 4 (`191 ≡ 2 mod 7`) | **χ = 4** |
+
+  Every one of these `d` is `≡ 2 (mod 3)` and `≡ 3 (mod 4)`; every witness uses directions with 3 in a denominator, as D1 requires.
+* **`ℚ(√167)`: not landed.** 755 orbit classes to denominator 2520; 38 saturated 3-non-integral lattices of covolume `≥ 10⁻⁵`, none with an
+  odd cycle within a 20,000-point cap; the coarse lattices with 7-cycles are 3-integral (3-colourable by D1). A **necessary filter** for the
+  direct route (a lattice with a 3-colourable finite quotient has a periodic 3-colouring of its whole plane, so no ball of it refuses) kills
+  28 of 31 candidate lattices by verified quotient colourings; of the three live, `q1+q5+24+120` (the analogue of `ℚ(√23)`'s hit) is
+  3-colourable at radii 1.3–2.0 (to 3,065,169 points), and two are `Unknown` at 1,800 s (2.36M and 4.46M points) — an `Unknown` read as
+  nothing, since a lattice the filter proves dead also ran to `Unknown`. Balls to 2,011,745 points colourable in other pools.
+* **Instrument defect recorded:** pysat's conflict-budgeted CaDiCaL returned `Unknown` on a 4,609-point ball that is certainly 3-colourable;
+  no `Unknown` is read as a refusal anywhere.
+
+## §C The close (2026-09-17)
+
+**What landed.**
+1. **The 3-adic barrier, kernel** (`ThreeAdicBarrier.lean`, `073a91e`): for `d ≡ 2 (mod 3)` the plane over `ℚ(√d)` with 3-integral
+   directions is 3-colourable.
+2. **`χ(ℚ(√11)²) ≥ 4`, kernel** (`Instances/SqrtEleven.lean`, `05aee38`), from a 204-point triangle-free witness; `= 4` with the prior-art
+   upper bound.
+3. **`χ(ℚ(√d)²) ≥ 4` certified (tools) for `d = 23, 47, 71, 95, 191`**; with the residue plane at 7, `χ = 4` for 23, 71, 95, 191, and
+   `4 ≤ χ ≤ 5` for 47. By §PA, nothing in print gives `χ ≥ 4` for any real quadratic field (unread: `[Johnson2006]`, Johnson's 2000 status
+   report).
+4. **Mechanism, measured**: forcing at finite size needs the rational directions (axis, `(3/5, 4/5)`), the 3-non-integral classes, and short
+   odd cycles in a coarse lattice; every periodic colouring of the 3-integral pools is affine (R-B1); tensor products of the 3-adic plane
+   with any non-3-colourable residue plane are rigid (§0 O7).
+
+**Not landed:** `χ(ℚ(√167)²) ≥ 4` — the stub's headline field (FS-59).
+
+**Predictions scored.** P1 (0.8) **lost** — the screen cannot kill, every periodic colouring being affine. P2 (0.45) **won** in the wrong
+way — every pool survived because the screen is structurally blind. P3 (0.3) **won** — route C landed at `ℚ(√11)`, by a 52-point forcer.
+P4 (0.75) **not measured** — the D6 local LP was never run; the ratio route was superseded by direct certificates (declined below). P5 (0.9)
+**won**. P6 (0.35) **lost** — route W found no independent odd subset (§0 O6), and the dimension count says generic point sets never will.
+
+**Phases not run, each with its decision.** Phase A's LP (D6): *declined* — its only consumer was route R1, whose conclusion (a lower bound
+above 3) is now reached by certificates; the local statement is `[BardestaniMallahiKarai2015]` Lemma 3.8's over `ℚ_p`. Phase E (R1's
+equidistribution theorem): *carried* into FS-61 as the explanation the census needs, not as a route. Phase W: *closed* by §0 O6 and the
+dimension count (a number field cannot move points continuously as `[Wormald1979]` does).
+
+**The sweep** ("conjecture", "not claimed"). The local–global conjecture is G48's, restated, not new. "Not claimed: that `G₃` is rigid"
+(D3): *declined as moot for `ℚ(√11)`* (the finite forcer answers what rigidity was for) and *carried into FS-59* for `ℚ(√167)`, where it is
+the open question. D3.4's multiplicativity fact (3-colourings of `G × H` with `χ(H) > 3` factor through `G`) is measured, not cited: its
+reading is owed in FS-61's §PA.
+
+**Minted:** FS-59 (four colours over `ℚ(√167)`), FS-60 (the quadratic witnesses in the kernel), FS-61 (the census: which real quadratic
+fields need four colours, and why).
+

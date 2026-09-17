@@ -240,6 +240,31 @@ record, 0); none addresses a field plane.
 
 ---
 
+### 1.7 The chromatic number of the plane over real quadratic fields: `ℚ(√11)`, `ℚ(√23)`, `ℚ(√71)`, `ℚ(√95)`, `ℚ(√191)`
+
+> **Benda–Perles, Open Problem 11.6** (`[Soifer2024]` ch. 11): *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic
+> extension of `ℚ²`."* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
+> where `F` is a subfield of `ℝ`, of finite degree over `ℚ`."*
+
+**Our answer, field by field: `χ(ℚ(√d)²) = 4` for `d = 11, 23, 71, 95, 191`, and `4 ≤ χ(ℚ(√47)²) ≤ 5`.** The upper bounds are prior art:
+the residue plane at 7 (`[Moorhouse2010]` Cor. 8.3 and Thm 8.1; for 11 also `[Fischer1990]` Thm 9), at 11 for 47. The lower bounds are
+FS-58's: finite unit-distance graphs with coordinates in the field that admit no proper 3-colouring —
+**`ℚ(√11)` in the kernel** (`four_le_chromaticNumber_planeOver_eleven`, 204 points, triangle-free, standard three axioms), the others
+certified by `tools/fs58_check_witness.py` (standard library, its own LRAT checker, planted faults) and re-checked with two further solvers
+(ℚ(√23): 297 points; ℚ(√71): 148; ℚ(√95): 1,068; ℚ(√191): 483; ℚ(√47): 169). Record: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
+`data/fs58/witness-*/`.
+
+**Prior art that constrains the claim.** The upper bounds and the odd cycles (`χ ≥ 3`, `[Moorhouse2010]` Thm 8.6; `[Madore2015]` for
+`ℚ(√7)`) are theirs. FS-58's §PA searched for any lower bound above three for a real quadratic field — combinatorial geometry, number
+theory, spectral graph theory; citation walks of `[Fischer1990]`, `[Johnson1987]`, `[BachocEtAl2014]`, `[MatolcsiEtAl2025]` in two
+databases — and found none; `[Fischer1990]`'s Example 4 on `ℚ(√167)` is about additive colourings only. **Unread and the likeliest places
+for a contrary claim:** `[Johnson2006]` (the compendium) and Johnson's 2000 status report (Geombinatorics IX(4)).
+
+**Status:** `ℚ(√11)`'s lower bound kernel-checked; the other four tools-certified (their kernel forms are FS-60); the upper bounds hand /
+prior art. Not written up. `ℚ(√167)`, where the local–global conjecture predicts at least six, is not answered (FS-59).
+
+---
+
 ## §2 — Answered in one direction, or with a caveat that must travel
 
 ### 2.1 Type-M constructions with other rotations

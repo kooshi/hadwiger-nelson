@@ -1,5 +1,9 @@
 # FS-58 — four colours beyond the residue method: the fractional route over number fields
 
+> **CLOSED 2026-09-17** (`plans/FS58-four-colours.md` §C). Landed, not by the fractional routes below: `χ(ℚ(√11)²) ≥ 4` in the kernel and
+> `χ ≥ 4` certified for ℚ(√23), ℚ(√47), ℚ(√71), ℚ(√95), ℚ(√191), by forced pairs with chains and by ball refusals in saturated lattices.
+> ℚ(√167) not landed → FS-59; census → FS-61; kernel forms → FS-60. The text below is the stub as minted.
+
 *Minted 2026-09-16 at FS-56's close. Written for a session with zero conversation memory. Read beside: `plans/FS56-quadratic-167.md`
 (§1 the field blow-up, §2 the ratio-bound reading, **§D the measurements this stub starts from**), `plans/FS56-field-blowup.md`,
 `CLAUDE.md` G55, G59, **G60**; `BIBLIOGRAPHY.md` `[MatolcsiEtAl2025]`, `[DuczVarga2026]`, `[AmbrusEtAl2023]`, `[BachocEtAl2014]`,

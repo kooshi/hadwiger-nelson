@@ -26,7 +26,7 @@ and `Instances/SqrtEleven/Cnf/` (`tools/emit_mask.py`, three colours, the pin `c
 
 ## What is not proved here
 
-The matching upper bound. `χ(ℚ(√11)²) ≤ 4` is `[Fischer1990]`'s and is **not** in the kernel, so this module proves
+The matching upper bound. `χ(ℚ(√11)²) ≤ 4` is `[Fischer1990]` Thm 9 and `[Moorhouse2010]` Thm 8.1 (the residue plane at 7) and is **not** in the kernel, so this module proves
 `χ ≥ 4` and not `χ = 4` for the plane. For the finite graph it proves both (`eleven204_colorable_four`).
 -/
 
@@ -239,7 +239,7 @@ from the 204-point witness of FS-58 (`data/fs58/witness-11/`), whose points lie 
 
 Unlike `four_le_chromaticNumber_planeOver`, the bound does not come from a Moser spindle: `ℚ(√11)` contains no `√3`,
 so its plane has no equilateral triangle and no spindle. **Not proved here:** the matching upper bound
-`χ(ℚ(√11)²) ≤ 4`, which is `[Fischer1990]`'s and is not in the kernel. -/
+`χ(ℚ(√11)²) ≤ 4`, which is `[Fischer1990]` Thm 9 and `[Moorhouse2010]` Thm 8.1 and is not in the kernel. -/
 theorem four_le_chromaticNumber_planeOver_eleven :
     4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {11}))).chromaticNumber :=
   four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem sqrt_eleven_mem_fieldOfRadicands_eleven
