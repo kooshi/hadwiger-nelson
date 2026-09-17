@@ -3,7 +3,7 @@
 Tool: `tools/fs58_search.py` (untrusted; every edge exact; solver verdicts are claims, SAT models verified edge by edge). Plan:
 `plans/FS58-four-colours.md` §R-B4 (carried to B5). Budget: about 5 hours of wall time from 03:32. This record was first written at the
 half-way mark (05:50) and is updated in place. `survey.jsonl` (6.9 MB, 4 min to regenerate) and `qscreen.jsonl` (2.6 MB, 2 min) are
-gitignored; every other record is committed.
+committed too (added 2026-09-17 for durability); every record is committed.
 
 ## Result
 
