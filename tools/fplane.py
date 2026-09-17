@@ -443,6 +443,13 @@ FIELDS = {
     "K(√35)": [3, 11, 35], "K(√79)": [3, 11, 79], "K(√127)": [3, 11, 127], "K(√247) [T20, W]": [3, 11, 247],
     "K(√5,√247)": [3, 5, 11, 247], "Heule Q(√3,√5,√11)": [3, 5, 11], "de Grey Q(√3,√5,√7,√11)": [3, 5, 7, 11],
     "K(√5,√7,√247)": [3, 5, 7, 11, 247],
+    # real quadratic fields: FS-58's (χ ≥ 4 certified, data/fs58/witness-*/) and the smallest field seeing each window plane first (FS-54)
+    "Q(√23)": [23], "Q(√47)": [47], "Q(√71)": [71], "Q(√95)": [95], "Q(√191)": [191],
+    # biquadratic fields that also see a window plane first (FS-53/54; not the smallest)
+    "Q(√2,√31) [sees 23]": [2, 31], "Q(√5,√51) [sees 31]": [5, 51], "Q(√10,√23) [sees 43]": [10, 23],
+    "Q(√7,√89) [sees 47]": [7, 89], "Q(√2,√3,√7) [sees 47]": [2, 3, 7], "Q(√2,√3,√31) [sees 23]": [2, 3, 31],
+    "Q(√167) [smallest, sees 23]": [167], "Q(√1055) [smallest, sees 31]": [1055],
+    "Q(√2351) [smallest, sees 47]": [2351], "Q(√4703) [smallest, sees 43]": [4703],
 }
 
 
@@ -470,28 +477,63 @@ def wall_broken(rads) -> bool:
     return False
 
 
+# Exact certificates refusing k colours on a plane, each a committed record (independence bound α ≤ N against the
+# ⌈q²/k⌉ that k colours need). The checker for every file is named in its README; the value here is the record's, not recomputed.
+CERT_REFUSALS = {
+    23: (5, "data/fs54/cert-q23-l3-N105.json", "α ≤ 105 < 106, level-3 certificate (FS-56; re-run data/fs56/q0/recheck-po.log)"),
+    43: (5, "data/fs53/cert-q43-N365.json", "α ≤ 365 < 370 (FS-53, data/fs53/README.md)"),
+    47: (5, "data/fs53/cert-q47-N371.json", "α ≤ 371 < 442 (FS-53, data/fs53/README.md)"),
+    59: (6, "data/fs53/cert-q59-N575.json", "α ≤ 575 < 581 (FS-53, data/fs53/README.md)"),
+    67: (6, "data/fs53/cert-q67-N745.json", "α ≤ 745 < 749 (FS-53, data/fs53/README.md)"),
+    79: (6, "data/fs53/cert-q79-N1023.json", "α ≤ 1023 < 1041 (FS-53, data/fs53/README.md)"),
+    83: (6, "data/fs50/p83-refusal/cert-p83-N1046-polish-208500.json", "α ≤ 1046 < 1149 (FS-50, data/fs50/README.md)"),
+}
+# Verified colourings giving ceilings: line-periodic colourings lifted and verified on every plane edge.
+PERIODIC_CEILINGS = "data/fplane/periodic-below-71.json"
+
+
 def plane_verdicts(bound: int):
-    """What is known about χ(UD(F_p,2)) for each p ≡ 3 mod 4 below the bound, from the records on disk and the
-    spectral bound: {p: (kind, chi_or_floor, source)} — kind 'exact' (a verified colouring at chi, chi−1 refused by
-    the solver), 'upper' (a verified colouring, the lower half unknown), 'floor' (refused below / spectral)."""
+    """What is known about χ(UD(F_p,2)) for each p ≡ 3 mod 4 below the bound: {p: dict(kind, value, lower, upper, source)}.
+    lower: the largest of the spectral (Hoffman) floor, a solver refusal in `chi-p{p}*.json` (+1), and an exact certificate in
+    CERT_REFUSALS (+1); upper: the smallest of a verified colouring in `chi-p{p}*.json` and a lifted periodic colouring in
+    PERIODIC_CEILINGS. kind 'exact' when they meet, 'upper' when a ceiling is known, else 'floor'; value is the ceiling for
+    'exact'/'upper' and the floor for 'floor'."""
+    ceilings = {}
+    ceil_path = ROOT / PERIODIC_CEILINGS if "ROOT" in globals() else DATA / "periodic-below-71.json"
+    if ceil_path.exists():
+        for r in json.loads(ceil_path.read_text()).get("rows", []):
+            if r.get("lift_verified") and r.get("chi_circ"):
+                ceilings[r["p"]] = r["chi_circ"]
     out = {}
     for p in [q for q in range(3, bound) if is_prime(q) and q % 4 == 3]:
-        upper = None; lower = 1
+        upper = None; lower = 1; srcs = []
         for f in sorted(DATA.glob(f"chi-p{p}*.json")):
             d = json.loads(f.read_text())
             if d.get("chi"):
                 upper = d["chi"] if upper is None else min(upper, d["chi"])
             for r in d.get("rows", []):
-                if r["status"] == "unsat":
-                    lower = max(lower, r["k"] + 1)
+                if r["status"] == "unsat" and r["k"] + 1 > lower:
+                    lower = r["k"] + 1; srcs.append(f"refused {r['k']} by the solver (chi-p{p})")
         h, floor = hoffman_of(p + 1, min(spectrum(p)[0].values()))
-        lower = max(lower, floor)
+        if floor >= lower:
+            if floor > lower:
+                srcs = []
+            lower = floor; srcs.append(f"floor {floor} (spectral)")
+        if p in CERT_REFUSALS:
+            k, path, what = CERT_REFUSALS[p]
+            assert (DATA.parent.parent / path).exists(), f"cited certificate {path} is missing"
+            if k + 1 >= lower:
+                lower = k + 1; srcs = [f"floor {k + 1} (exact certificate {path}: {what})"]
+        if p in ceilings:
+            upper = ceilings[p] if upper is None else min(upper, ceilings[p])
+        if upper is not None:
+            srcs.append(f"ceiling {upper} ({'chi-p' + str(p) if upper != ceilings.get(p) else PERIODIC_CEILINGS})")
         if upper is not None and lower == upper:
-            out[p] = ("exact", upper, f"chi-p{p}")
+            out[p] = dict(kind="exact", value=upper, lower=lower, upper=upper, source=f"chi-p{p}")
         elif upper is not None:
-            out[p] = ("upper", upper, f"chi-p{p} (≤); floor {lower}")
+            out[p] = dict(kind="upper", value=upper, lower=lower, upper=upper, source="; ".join(srcs))
         else:
-            out[p] = ("floor", lower, f"floor {lower} ({'spectral' if floor == lower else 'refused by the solver'})")
+            out[p] = dict(kind="floor", value=lower, lower=lower, upper=None, source="; ".join(srcs))
     return out
 
 
@@ -507,32 +549,39 @@ def cmd_map(a):
         us = usable(rads, a.bound)
         sealing = None
         for p in us:
-            kind, val, src = verdicts.get(p, ("floor", 1, "?"))
-            if kind in ("exact", "upper") and val <= 5:
-                sealing = (p, val, src); break
-        pending = [p for p in us if p < 67 and verdicts.get(p, ("floor", 1, ""))[0] == "floor" and verdicts[p][1] <= 5]
+            v = verdicts.get(p)
+            if v and v["upper"] is not None and v["upper"] <= 5:
+                sealing = (p, v["upper"], v["source"]); break
+        # a usable plane below 67 whose floor is still ≤ 5 leaves the field's local bound undecided at that plane
+        pending = [p for p in us if p < 67 and p in verdicts and verdicts[p]["lower"] <= 5
+                   and (verdicts[p]["upper"] is None or verdicts[p]["upper"] > 5)]
         # the best upper bound the two mechanisms give: Theorem B's 4 when the 2-adic wall stands (Fischer gives 2 or 3
-        # on some of those fields; not computed here), and the smallest plane value among the usable primes with a record
-        best = min((verdicts[p][1], p, verdicts[p][2]) for p in us if verdicts.get(p, ("floor",))[0] in ("exact", "upper")) if any(verdicts.get(p, ("floor",))[0] in ("exact", "upper") for p in us) else None
+        # on some of those fields; not computed here), and the smallest plane ceiling among the usable primes with one
+        with_ceiling = [(verdicts[p]["upper"], p, verdicts[p]["source"]) for p in us if p in verdicts and verdicts[p]["upper"] is not None]
+        best = min(with_ceiling) if with_ceiling else None
+        floor_min = min((verdicts[p]["lower"] for p in us if p in verdicts), default=None)
         if not wall and (best is None or best[0] >= 4):
             verdict = "sealed-at-4 (Theorem B: the 2-adic wall stands)" + (f"; the sieve agrees at p = {best[1]}" if best and best[0] == 4 else "")
         elif best is not None and best[0] <= 5:
             verdict = f"sealed-at-{best[0]} (p = {best[1]}, {best[2]})" + ("" if wall else "; Theorem B: ≤ 4 as well")
         elif pending:
-            verdict = f"open-pending (p = {pending[0]}: its plane is undecided)"
+            verdict = f"open-pending (p = {pending[0]}: its plane's floor is {verdicts[pending[0]]['lower']}, undecided)"
         else:
-            verdict = "6-open (every usable prime's plane refuses five: spectral for p ≥ 67, records below)"
+            verdict = f"6-open: local bound ≥ {floor_min} (every usable plane refuses five; see the planes table)"
         rows.append(dict(field=name, radicands=rads, wall_broken=wall, usable=us[:12], sealing=sealing, verdict=verdict))
-        print(f"{name:26s} wall {'broken' if wall else 'stands'}  usable {us[:8]}  → {verdict}")
+        print(f"{name:30s} wall {'broken' if wall else 'stands'}  usable {us[:8]}  → {verdict}")
     rec = dict(kind="fplane-map", bound=a.bound, planes={p: v for p, v in verdicts.items()}, rows=rows,
                vocabulary="sealed-at-k: χ(F²) ≤ k by a verified colouring of the plane at the named prime (or Theorem B); "
-                          "6-open: no usable prime seals (spectral floor ≥ 6 at p ≥ 67; the planes below by their records); open-pending: a usable plane below 67 is undecided")
+                          "6-open: no usable plane is five-colourable (every floor ≥ 6; the local bound is the least usable floor or more); "
+                          "open-pending: a usable plane below 67 still has floor ≤ 5. Upper bounds only: lower bounds on χ(F²) are not computed here "
+                          "(data/fplane/map.md records them with their sources)")
     DATA.mkdir(parents=True, exist_ok=True); path = Path(a.out) if a.out else DATA / "map.json"
-    path.write_text(json.dumps(rec, indent=1, default=str)); print(f"  wrote {path}")
-    md = ["| field | radicands | 2-adic wall | usable primes | verdict |", "|---|---|---|---|---|"]
-    for r in rows:
-        md.append(f"| {r['field']} | {r['radicands']} | {'broken' if r['wall_broken'] else 'stands'} | {r['usable'][:8]} | {r['verdict']} |")
-    (DATA / "map.md").write_text("\n".join(md) + "\n"); print(f"  wrote {DATA / 'map.md'}")
+    path.write_text(json.dumps(rec, indent=1, default=str, ensure_ascii=False)); print(f"  wrote {path}")
+    if a.md:   # data/fplane/map.md carries hand-written notes and cited lower bounds; the bare table goes elsewhere unless asked
+        md = ["| field | radicands | 2-adic wall | usable primes | verdict |", "|---|---|---|---|---|"]
+        for r in rows:
+            md.append(f"| {r['field']} | {r['radicands']} | {'broken' if r['wall_broken'] else 'stands'} | {r['usable'][:8]} | {r['verdict']} |")
+        Path(a.md).write_text("\n".join(md) + "\n"); print(f"  wrote {a.md}")
     return rec
 
 
@@ -1128,7 +1177,7 @@ def main():
     p.add_argument("--seed", action="store_true"); p.add_argument("--object"); p.add_argument("--witness"); p.add_argument("--heule510", action="store_true")
     p.add_argument("--degrey", action="store_true"); p.add_argument("--field16"); p.add_argument("--graph"); p.add_argument("--planted"); p.add_argument("--gen1", action="store_true", help="the de Grey gen-1 half-spindle closure (24,065 points)")
     p.add_argument("--p", type=int, required=True); p.add_argument("--k", type=int); p.add_argument("--wall", type=float); p.add_argument("--out"); p.set_defaults(f=cmd_shadow)
-    p = sub.add_parser("map"); p.add_argument("--fields", help="extra fields as NAME:d1,d2;NAME2:…"); p.add_argument("--bound", type=int, default=600); p.add_argument("--out"); p.set_defaults(f=cmd_map)
+    p = sub.add_parser("map"); p.add_argument("--fields", help="extra fields as NAME:d1,d2;NAME2:…"); p.add_argument("--bound", type=int, default=600); p.add_argument("--out"); p.add_argument("--md", help="also write the bare table to this path (never data/fplane/map.md, which is hand-maintained)"); p.set_defaults(f=cmd_map)
     p = sub.add_parser("usable"); p.add_argument("--rads", required=True); p.add_argument("--bound", type=int, default=600); p.set_defaults(f=cmd_usable)
     p = sub.add_parser("reduce")
     p.add_argument("--seed", action="store_true"); p.add_argument("--object"); p.add_argument("--witness"); p.add_argument("--heule510", action="store_true")

@@ -49,6 +49,22 @@ At every field where χ(F²) is known exactly, it EQUALS the local bound:
 | K(√247) | 5 (p = 11) | 5 | the T20 witness, 1,175 points (M53) |
 | K(√23) | 5 (p = 11) | 5 | the second T20 witness (M53) |
 
+*Rows added 2026-09-17 (FS-58), each a field where χ(F²) became known exactly after this plan was written; the equality with the
+local bound still holds at every one:*
+
+| field F | local bound L(F), from | χ(F²) | attained by |
+|---|---|---|---|
+| ℚ(√11) | 4 (p = 2 and p = 7) | 4 | a 204-point triangle-free graph; lower bound in the kernel, `four_le_chromaticNumber_planeOver_eleven` (`Proofs/HadwigerNelson/Instances/SqrtEleven.lean`, `data/fs58/witness-11/`) |
+| ℚ(√23) | 4 (p = 7) | 4 | a 297-point graph, certified (`data/fs58/witness-23/minimal/certified.out`) |
+| ℚ(√71) | 4 (p = 7) | 4 | a 148-point graph, certified (`data/fs58/witness-71/certified.out`) |
+| ℚ(√95) | 4 (p = 7) | 4 | a 1,068-point graph, certified (`data/fs58/witness-95/certified.out`) |
+| ℚ(√191) | 4 (p = 7) | 4 | a 483-point graph, certified (`data/fs58/witness-191/certified.out`) |
+
+*Not exact, for the record: ℚ(√47) has 4 ≤ χ ≤ 5 (a certified 169-point graph, `data/fs58/witness-47/certified.out`; L = 5 from the
+planes at 11 and 19, the latter's refusal of four a solver claim, `data/fplane/chi-p19-k4.json`). "Certified" is defined in
+`data/fplane/map.md`'s last section; the upper bounds are the residue planes at 7 (`[Moorhouse2010]` Lemma 8.2 and Cor. 8.3) and, for ℚ(√47), at 11 (Lemma 8.2 with
+χ(UD(𝔽₁₁,2)) = 5).*
+
 The last two rows are not a selection effect: the field-wall analysis PREDICTED that a 5-forcer needs the 2-adic wall broken,
 and the rigidity dial then found forcers in exactly the fields it named (√247 read off the forced distances of K-fabric, §M53
 T20). The conjecture below is the statement that this is what always happens.

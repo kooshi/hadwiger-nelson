@@ -668,7 +668,9 @@ https://claude.ai/code/artifact/d35ad805-f5dd-483a-a03d-6160704ae6cf. Ledger `bu
   when σ is nontrivial, {±1} when σ lies in inertia). Ours: the local criterion in field-theoretic form,
   the multiquadratic case, Theorem B's exact 4 for K = ℚ(√3, √11) (Fischer's Theorem 10(i) gives only
   ≤ 4, on ℚ(√N) alone), the descent consequences, and the 2-adic reading of the classical 5-forcers.
-  Open from his table: χ(ℚ(√11)²) ∈ {3, 4}, triangle-free. Note §10.1; handoff §4; Johnson DM 79 (the
+  Open from his table: χ(ℚ(√11)²) ∈ {3, 4}, triangle-free. *Answered 2026-09-17 (FS-58): χ(ℚ(√11)²) = 4, the lower bound
+  kernel-checked (`four_le_chromaticNumber_planeOver_eleven`, `Proofs/HadwigerNelson/Instances/SqrtEleven.lean`) from a
+  204-point triangle-free witness (`data/fs58/witness-11/`).* Note §10.1; handoff §4; Johnson DM 79 (the
   2-adic 2-colourings of ℤ₍₂₎ⁿ forbidding all √(p/q), p, q odd) is the lineage.
 
 * **T22, closed (2026-09-06 ~03:00Z) — the dial read on C = ∅ objects.** [measured, complete] The forcing-

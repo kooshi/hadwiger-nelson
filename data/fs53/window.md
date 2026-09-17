@@ -9,15 +9,14 @@ subplanning and not yet reproducible from a committed tool.*
 
 **The window.** A finite Euclidean plane `UD(𝔽_q, 2)` — the Cayley graph on `𝔽_q²` joining points whose difference has
 `x² + y² = 1` — can be exactly six-chromatic only for `q ≡ 3 (mod 4)` of odd degree with `5|λ_min| ≥ q + 1`. Weil's
-`|λ_min| ≤ 2√q` caps that at `q ≤ 97`; 71's exact spectrum fails it; 83 was refused by certificate (FS-50). **Eight
-members remained when this file was written; **79 has since left it** — two of them were refused six by exact certificate on
-2026-09-15. **79, 67 and 59 have all since left it**, each refused six by an exact
+`|λ_min| ≤ 2√q` caps that at `q ≤ 97`; 71's exact spectrum fails it; 83 was refused by certificate (FS-50). Eight
+members remained when this file was written; **79, 67 and 59 have since left it**, each refused six by an exact
 certificate on 2026-09-15: `α ≤ 1023` against the 1041 six needs at 79, `α ≤ 745` against 749 at 67, `α ≤ 575` against
 581 at 59 — so `χ ≥ 7` at all three. **Five members remain: 23, 27, 31, 43, 47 — none decided.**
 
 | q | n = q² | λ_min `[exact]` | ratio bound α ≤ `[exact]` | α, lower | α, upper | χ ≥ | χ ≤ | six needs α ≥ | frac6 | five needs α ≥ | frac5 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **108** `[cert]` | 5 `[cert]` | 8 `[search]` | 89 | 0.6755 | 106 | 0.8045 |
+| 23 | 529 | −7.9607 | 131.76 | **87** `[search]` | **105** `[cert]` (FS-56, level 3; three-point 108) | **6** `[cert]` (FS-56) | 8 `[kernel]` | 89 | 0.6755 | 106 | 0.8045 |
 | **27** | 729 | **−8** | 162.00 | **117** `[search]` (FS-54) | **141** `[cert]` (FS-54, level 3; three-point 147) | **6** `[cert]` | **7** `[search]` | 122 | 0.7531 | 146 | **0.9012** |
 | 31 | 961 | −10.6665 | 240.25 | **146** `[search]` | **200** `[cert]` | 5 `[exact]` | 8 `[search]` | 161 | 0.6701 | 193 | 0.8033 |
 | 43 | 1849 | −11.9622 | 395.23 | **258** `[search]` | **365** `[cert]` | **6** `[cert]` | 8 `[search]` | 309 | 0.7818 | 370 | **0.9362** |
@@ -87,7 +86,9 @@ rational Gram factorisation). It supersedes `cert-q47-N377.json`, which is kept 
 47 — and never will be by this relaxation, because the value is converged rather than stopped.** What it buys is the
 narrowest window in the table: **α(47) must be exactly 369, 370 or 371** for the plane to be six-chromatic, against a
 best set found of 265. The same lesson applies to 31 and 43, whose certificates are still `optimal_inaccurate` and
-therefore still movable; 23 and 27 are already converged and will never move.
+therefore still movable; 23 and 27 are already converged and will never move under this relaxation. *(2026-09-17:* the
+level-3 relaxation moved both — α ≤ 141 at 27 (FS-54, `data/fs54/cert-q27-l3-N141.json`) and **α ≤ 105 at 23 (FS-56,
+`data/fs54/cert-q23-l3-N105.json`, re-run `data/fs56/q0/recheck-po.log`), refusing five at 23**; the row above carries it.*)
 
 **The reach is not a property of the instrument alone: it improves with the compute spent.** At 83 it was 0.8974 at
 FS-50's close (N = 1076.366454) and is 0.8836 now (N = 1059.834185, the polish loop's 134,500-iterate, CERTIFIED with its
@@ -136,14 +137,16 @@ have a prime above 2 that does not split in `F(i)`, so they are two- or four-col
 their members first and are recorded in `data/fplane/map.md`; they are not the smallest.
 
 **Quadratic fields whose local bound is at least 6, each decided by one or two planes**
-(`tools/fs54_quadratic_fields.gp` → `data/fs54/quadratic-fields.out`). With `d ≤ 30,000`, 16 real quadratic
-fields have the wall broken and no usable plane in {3, 7, 11, 19, 23, 31}; every one has 43 or 47 usable, and
-every other usable plane is ≥ 7 (certificates at 59, 67, 79, 83, the spectrum at 71, Weil from 98). So their
-local bound is **6 exactly when a usable one of 43, 47 is six-chromatic**, and ≥ 7 otherwise. The smallest:
-`ℚ(√2351)` (decided by 47 alone), `ℚ(√4703)` (43 or 47), `ℚ(√4847)` (43 or 47); decided by 43 alone first at
-`ℚ(√20807)`.
+(`tools/fs54_quadratic_fields.gp` → `data/fs54/quadratic-fields.out`, rerun 2026-09-17 after FS-56 refused five at 23).
+With `d ≤ 30,000`, **44** real quadratic fields have the wall broken and no usable plane in {3, 7, 11, 19, 31}; every one
+has 23, 43 or 47 usable, and every other usable plane is ≥ 7 (certificates at 59, 67, 79, 83, the spectrum at 71, Weil from
+98). So their local bound is **6 exactly when a usable one of 23, 43, 47 is six-chromatic**, and ≥ 7 otherwise. The
+smallest: `ℚ(√167)` (23 or 43), `ℚ(√1319)` (23 or 47), `ℚ(√2351)` (47 alone), `ℚ(√3527)` (23, 43 or 47), `ℚ(√4703)`
+(43 or 47); decided by 23 alone first at `ℚ(√5015)`, by 43 alone at `ℚ(√20807)`. *(Until 2026-09-17: 16 fields, filter
+{3, 7, 11, 19, 23, 31}, deciders 43 and 47 — 23's floor was then 5.)*
 
-**Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`, `data/fs53/README.md`): six at 47 needs the certificate to be 99.4 % tight, a tightness seen only at q = 7; at 43 every instrument came back empty — the independent set stuck at 258 against the 309 six needs through over three hours aimed at exactly that, the six-colour search stalled at 1,016 monochromatic edges for 2 h 52 m, the equivariant sweep 0 of 21. These are nulls at a budget, not refusals; but they mean these fields most likely have local bound ≥ 7, where the conjecture's bold form predicts seven, and their six rests on a plane the evidence argues against.
+**All three deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`, `data/fs53/README.md`): six at 23
+needs an independent set of 89 against a plateau of 87 over about 96,000 restarts (`data/fs53/alpha-q23-ge87.json`); six at 47 needs the certificate to be 99.4 % tight, a tightness seen only at q = 7; at 43 every instrument came back empty — the independent set stuck at 258 against the 309 six needs through over three hours aimed at exactly that, the six-colour search stalled at 1,016 monochromatic edges for 2 h 52 m, the equivariant sweep 0 of 21. These are nulls at a budget, not refusals; but they mean these fields most likely have local bound ≥ 7, where the conjecture's bold form predicts seven, and their six rests on a plane the evidence argues against.
 
 **At 43 and 47 this would be the whole prize.** Five is refused by certificate at both, so a verified six-colouring
 there *is* that plane's exact chromatic number — and it would make `χ(ℚ(√4703)²) ≤ 6`, and at 47 also

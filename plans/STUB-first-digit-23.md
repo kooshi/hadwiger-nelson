@@ -1,5 +1,11 @@
 # FS-17 — The first digit at 23: is UD(𝔽₂₃, 2) exactly 5-chromatic? (STUB, 2026-09-08; minted at the M61 close — M61's phase A, undecided)
 
+> **Answered in part 2026-09-16 (FS-56): UD(𝔽₂₃, 2) is not 5-chromatic.** The level-3 relaxation certifies `α ≤ 105`
+> (`data/fs54/cert-q23-l3-N105.json`; CERTIFIED on the product owner's re-run, `data/fs56/q0/recheck-po.log`), below the 106 that
+> five colours need, so `χ(UD(𝔽₂₃,2)) ∈ {6, 7, 8}` (eight in the kernel, `colorable_finitePlane23_eight`). The question is now
+> six against seven: six needs `α ≥ 89`, and the best set found is 87 (`data/fs53/alpha-q23-ge87.json`). The re-descriptions
+> below are kept as the record of how the question narrowed.
+
 > **Re-described 2026-09-13 (FS-38 close; rank 6).** The plane at 23 is **slack** at five colours (λ_min = −7.96 against
 > −24/5 = −4.8; `plans/FS38-derivation.md` D-3), so FS-38's tightness screen does NOT decide this stub's question: slack
 > says gaps are permitted *if* a five-colouring exists, and whether one exists is exactly the question, untouched. What

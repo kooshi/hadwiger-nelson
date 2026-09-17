@@ -299,7 +299,7 @@ bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 | 6 | FS-43 the slack census — `plans/STUB-arena-slack-census.md` | which vertices of the ρ₆₃ arena are frozen in every five-colouring? A vertex with a free colour in some five-colouring is forced to nothing (row 66 against the graph itself); every vertex off the 66 cross edges is slack by derivation once one compatible pair (f, g) with f four-coloured exists, so the census is ≤ 132 interface vertices, hours; then the slack dial on thick K(√7)-fabric | medium as an instrument — explains H4's null by theorem or hands the hunt its first frozen material in a 6-open field; two-sided |
 | 7 | FS-49 one gadget for six — `plans/STUB-distance-two-gadget.md` | a five-colour virtual edge at distance 2 over a 6-open field, transported onto the 892 length-2 edges of Exoo–Ismailescu's 426-vertex graph, is χ(ℝ²) ≥ 6 (GPT Astra's sentence; row 43 needed two gadgets); the arena has none (H4), so the search runs on thick K(√7)-fabric through FS-43's shared-gap filter with pinned asks on survivors; the kernel consumer waits on row 44's certificate | the highest if it lands; the genre that returned zero on the arena |
 | 8–13 | FS-39 the bridge to the plane, FS-41 `forces_of_tight`, FS-42 5-tight quotients, FS-44 the fifth colour, FS-51 the ratio bound in the kernel, FS-52 the triple certificate in the kernel | χ(ℝ²) = sup_F χ(F²), invoked since M58 and never stated; Hoffman's equality case in Fourier form, the mechanism behind rows 58 and 67; the one residue route to a five-forced pair row 66 leaves, a reading with its falsifier; what structures five-colourings of 6-open fabric when no residue or additive colouring exists | high on every χ(ℝ²) sentence; medium mechanism; medium-low reading; medium-high frame |
-| 14–16 | FS-20 the paper, FS-17 the first digit at 23 (five refused by certificate, α ≤ 105; six needs α ≥ 89, the set found 87), FS-2 Kempe classes | Theorem A as the formulation seven lineages stopped short of, now carrying rows 57, 66, 67 and G55; is UD(𝔽₂₃,2) exactly 5-chromatic (slack, so the screen cannot decide it); what carries M56's depth-6 forcing | the publication trigger; the disproof-side digit; mechanism |
+| 14–16 | FS-20 the paper, FS-17 the first digit at 23 (five refused by certificate, α ≤ 105; six needs α ≥ 89, the set found 87), FS-2 Kempe classes | Theorem A as the formulation seven lineages stopped short of, now carrying rows 57, 66, 67 and G55; is UD(𝔽₂₃,2) six- or seven-chromatic (five refused, row 71); what carries M56's depth-6 forcing | the publication trigger; the disproof-side digit; mechanism |
 | 17–20 | FS-13 finite-plane 6-critical cores, FS-12 the hub scan as a design instrument, FS-19 𝔭-adic classification of forbidden distances, FS-37 the 2-adic criteria at the field level | autopsy objects; a decidable fan filter over sealed fields; `[Chow1993]` with v_𝔭(d²); Theorem A's own gap, shared with FS-47 | low-medium each; FS-37 feeds FS-20 and FS-47 |
 | 21–22 | FS-27 consolidation remainder, FS-23 the knowledge web | the paper's blockers; the citation graph | none |
 | 23–25 | FS-30 consume the rotation list, FS-35 expansion look-ahead, FS-22 √7 phase pinning | largely answered by M63 phases G–H2; bookkeeping remainders | low |
@@ -772,16 +772,16 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   member first with the wall broken (the search stopped at small radicands, 167 > 100); it then named the conductor-13 cubic
   field for 27 and a cyclic quartic for 31, using "a fixed prime above 2 of norm ≤ 4" as the test — wrong, since a ramified
   one two-colours at any norm, and both fields are 4-colourable or less; and it proposed ℚ(√3, α), α³ = α + 1, which has a
-  usable plane at 11.* **Real quadratic fields with local bound at least 6 exist, and
-  each is decided by one or two planes**: with d ≤ 30,000 there are 16 whose wall is broken and whose usable planes avoid
-  {3, 7, 11, 19, 23, 31}, and every one has 43 or 47 usable, so its L is 6 exactly when a usable one of those two is
-  six-chromatic and ≥ 7 otherwise — the smallest are **ℚ(√2351)** (usable 47, 67, 71, 83, …: decided by 47 alone) and
-  **ℚ(√4703)** (43, 47, 79, …). **So a six-colouring at 43 or 47 — the two members where five is already refused, hence the
-  two a single hit settles — makes χ(ℚ(√4703)²) ≤ 6, and at 47 also χ(ℚ(√2351)²) ≤ 6, a theorem: the first number field with
-  local bound exactly 6.** **Both deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`): six at 47
-  needs the certificate 99.4 % tight, seen only at q = 7; at 43 the independent set stuck at 258 against the 309 six needs
-  through three hours aimed at it, the six-colour search stalled for 2 h 52 m, the equivariant sweep 0 of 21 — nulls at a
-  budget, not refusals, but they put these fields most likely at local bound ≥ 7. **And 27 is the unique non-prime
+  usable plane at 11.* **Real quadratic fields with local bound at least 6 exist, each
+  decided by one to three planes**: with d ≤ 30,000 there are 44 whose wall is broken and whose usable planes avoid
+  {3, 7, 11, 19, 31} (`data/fs54/quadratic-fields.out`, rerun 2026-09-17); every one has 23, 43 or 47 usable, so its L is 6
+  exactly when a usable one of those is six-chromatic and ≥ 7 otherwise — the smallest are **ℚ(√167)** (23 or 43), ℚ(√1319)
+  (23 or 47) and **ℚ(√2351)** (47 alone). **Five is refused at all three, so a six-colouring at 23, 43 or 47 makes
+  χ(ℚ(√167)²), χ(ℚ(√4703)²) or χ(ℚ(√2351)²) ≤ 6 a theorem: the first number field with local bound exactly 6.** **All three
+  deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`): six at 23 needs α ≥ 89 against a plateau of
+  87; at 47 a certificate 99.4 % tight, seen only at q = 7; at 43 the independent set stuck at 258 against 309 for three hours,
+  the six-colour search stalled 2 h 52 m, the equivariant sweep 0 of 21 — nulls at a budget, not refusals, but they put these
+  fields most likely at local bound ≥ 7. **And 27 is the unique non-prime
   member, permanently:** usable means q ≡ 3 (mod 4), which for q = p^f holds iff p ≡ 3 (mod 4) **and f is odd** — so
   "odd residue degree" is not an extra hypothesis but the congruence restated — and of the non-prime prime powers below
   Weil's cap of 97 (4, 8, 9, 16, 25, 27, 32, 49, 64, 81) only 27 qualifies. **25 = 5² fails twice** (5 ≡ 1 mod 4, and

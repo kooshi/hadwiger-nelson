@@ -1,16 +1,22 @@
-real quadratic fields Q(sqrt d), d <= 30000, wall broken, no usable plane in {3,7,11,19,23,31}:
-  L in {6, 7, 8}: L = 6 iff a listed decider plane is six-chromatic -- 16 fields; the first 12:
+real quadratic fields Q(sqrt d), d <= 30000, wall broken, no usable plane in {3,7,11,19,31}:
+  L >= 6, and L = 6 iff a listed decider plane is six-chromatic -- 44 fields; the first 12:
+    d = 167  deciders [23, 43]  usable planes < 100 [23, 43, 59, 67, 71, 79, 83]
+    d = 1319  deciders [23, 47]  usable planes < 100 [23, 47, 59, 79]
     d = 2351  deciders [47]  usable planes < 100 [47, 67, 71, 83]
+    d = 3527  deciders [23, 43, 47]  usable planes < 100 [23, 43, 47, 59, 71, 79, 83]
     d = 4703  deciders [43, 47]  usable planes < 100 [43, 47, 79]
     d = 4847  deciders [43, 47]  usable planes < 100 [43, 47, 59, 67, 71, 83]
+    d = 5015  deciders [23]  usable planes < 100 [23, 59, 71, 79]
+    d = 5183  deciders [23, 43]  usable planes < 100 [23, 43, 67, 71, 83]
+    d = 5759  deciders [23, 43, 47]  usable planes < 100 [23, 43, 47, 59, 67, 71]
+    d = 7895  deciders [23]  usable planes < 100 [23, 59, 67, 83]
+    d = 8951  deciders [23, 47]  usable planes < 100 [23, 47, 67, 71, 83]
     d = 12143  deciders [43, 47]  usable planes < 100 [43, 47, 59, 67, 71, 83]
-    d = 12647  deciders [47]  usable planes < 100 [47, 59, 71, 83]
-    d = 14087  deciders [47]  usable planes < 100 [47, 59, 67, 71, 79]
-    d = 15839  deciders [43, 47]  usable planes < 100 [43, 47, 59, 71, 83]
-    d = 17855  deciders [43, 47]  usable planes < 100 [43, 47, 67, 79, 83]
-    d = 20807  deciders [43]  usable planes < 100 [43, 67, 71]
-    d = 21815  deciders [43, 47]  usable planes < 100 [43, 47, 67, 71, 79, 83]
-    d = 22343  deciders [47]  usable planes < 100 [47, 59, 71, 79, 83]
-    d = 23183  deciders [43, 47]  usable planes < 100 [43, 47, 67, 71, 79, 83]
   L >= 7 (no usable plane below 59) -- 0 fields; the first 8:
-  decided by 43 alone: 3 (first d = 20807); by 47 alone: 6 (first d = 2351); by either: 7 (first d = 4703)
+  decided by [23]: 5 (first d = 5015)
+  decided by [43]: 3 (first d = 20807)
+  decided by [47]: 6 (first d = 2351)
+  decided by [23, 43]: 6 (first d = 167)
+  decided by [23, 47]: 7 (first d = 1319)
+  decided by [43, 47]: 7 (first d = 4703)
+  decided by [23, 43, 47]: 10 (first d = 3527)

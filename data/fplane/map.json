@@ -2,291 +2,405 @@
  "kind": "fplane-map",
  "bound": 600,
  "planes": {
-  "3": [
-   "exact",
-   3,
-   "chi-p3"
-  ],
-  "7": [
-   "exact",
-   4,
-   "chi-p7"
-  ],
-  "11": [
-   "exact",
-   5,
-   "chi-p11"
-  ],
-  "19": [
-   "exact",
-   5,
-   "chi-p19"
-  ],
-  "23": [
-   "floor",
-   5,
-   "floor 5 (spectral)"
-  ],
-  "31": [
-   "floor",
-   5,
-   "floor 5 (spectral)"
-  ],
-  "43": [
-   "floor",
-   5,
-   "floor 5 (spectral)"
-  ],
-  "47": [
-   "floor",
-   5,
-   "floor 5 (spectral)"
-  ],
-  "59": [
-   "floor",
-   6,
-   "floor 6 (spectral)"
-  ],
-  "67": [
-   "floor",
-   6,
-   "floor 6 (spectral)"
-  ],
-  "71": [
-   "floor",
-   7,
-   "floor 7 (spectral)"
-  ],
-  "79": [
-   "floor",
-   6,
-   "floor 6 (spectral)"
-  ],
-  "83": [
-   "floor",
-   6,
-   "floor 6 (spectral)"
-  ],
-  "103": [
-   "floor",
-   7,
-   "floor 7 (spectral)"
-  ],
-  "107": [
-   "floor",
-   7,
-   "floor 7 (spectral)"
-  ],
-  "127": [
-   "floor",
-   7,
-   "floor 7 (spectral)"
-  ],
-  "131": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "139": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "151": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "163": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "167": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "179": [
-   "floor",
-   8,
-   "floor 8 (spectral)"
-  ],
-  "191": [
-   "floor",
-   9,
-   "floor 9 (spectral)"
-  ],
-  "199": [
-   "floor",
-   9,
-   "floor 9 (spectral)"
-  ],
-  "211": [
-   "floor",
-   9,
-   "floor 9 (spectral)"
-  ],
-  "223": [
-   "floor",
-   9,
-   "floor 9 (spectral)"
-  ],
-  "227": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "239": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "251": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "263": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "271": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "283": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "307": [
-   "floor",
-   10,
-   "floor 10 (spectral)"
-  ],
-  "311": [
-   "floor",
-   11,
-   "floor 11 (spectral)"
-  ],
-  "331": [
-   "floor",
-   11,
-   "floor 11 (spectral)"
-  ],
-  "347": [
-   "floor",
-   11,
-   "floor 11 (spectral)"
-  ],
-  "359": [
-   "floor",
-   11,
-   "floor 11 (spectral)"
-  ],
-  "367": [
-   "floor",
-   11,
-   "floor 11 (spectral)"
-  ],
-  "379": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "383": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "419": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "431": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "439": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "443": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "463": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "467": [
-   "floor",
-   12,
-   "floor 12 (spectral)"
-  ],
-  "479": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "487": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "491": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "499": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "503": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "523": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "547": [
-   "floor",
-   14,
-   "floor 14 (spectral)"
-  ],
-  "563": [
-   "floor",
-   13,
-   "floor 13 (spectral)"
-  ],
-  "571": [
-   "floor",
-   14,
-   "floor 14 (spectral)"
-  ],
-  "587": [
-   "floor",
-   14,
-   "floor 14 (spectral)"
-  ],
-  "599": [
-   "floor",
-   14,
-   "floor 14 (spectral)"
-  ]
+  "3": {
+   "kind": "exact",
+   "value": 3,
+   "lower": 3,
+   "upper": 3,
+   "source": "chi-p3"
+  },
+  "7": {
+   "kind": "exact",
+   "value": 4,
+   "lower": 4,
+   "upper": 4,
+   "source": "chi-p7"
+  },
+  "11": {
+   "kind": "exact",
+   "value": 5,
+   "lower": 5,
+   "upper": 5,
+   "source": "chi-p11"
+  },
+  "19": {
+   "kind": "exact",
+   "value": 5,
+   "lower": 5,
+   "upper": 5,
+   "source": "chi-p19"
+  },
+  "23": {
+   "kind": "upper",
+   "value": 8,
+   "lower": 6,
+   "upper": 8,
+   "source": "floor 6 (exact certificate data/fs54/cert-q23-l3-N105.json: α ≤ 105 < 106, level-3 certificate (FS-56; re-run data/fs56/q0/recheck-po.log)); ceiling 8 (data/fplane/periodic-below-71.json)"
+  },
+  "31": {
+   "kind": "upper",
+   "value": 8,
+   "lower": 5,
+   "upper": 8,
+   "source": "floor 5 (spectral); ceiling 8 (data/fplane/periodic-below-71.json)"
+  },
+  "43": {
+   "kind": "upper",
+   "value": 8,
+   "lower": 6,
+   "upper": 8,
+   "source": "floor 6 (exact certificate data/fs53/cert-q43-N365.json: α ≤ 365 < 370 (FS-53, data/fs53/README.md)); ceiling 8 (data/fplane/periodic-below-71.json)"
+  },
+  "47": {
+   "kind": "upper",
+   "value": 10,
+   "lower": 6,
+   "upper": 10,
+   "source": "floor 6 (exact certificate data/fs53/cert-q47-N371.json: α ≤ 371 < 442 (FS-53, data/fs53/README.md)); ceiling 10 (data/fplane/periodic-below-71.json)"
+  },
+  "59": {
+   "kind": "upper",
+   "value": 10,
+   "lower": 7,
+   "upper": 10,
+   "source": "floor 7 (exact certificate data/fs53/cert-q59-N575.json: α ≤ 575 < 581 (FS-53, data/fs53/README.md)); ceiling 10 (data/fplane/periodic-below-71.json)"
+  },
+  "67": {
+   "kind": "upper",
+   "value": 12,
+   "lower": 7,
+   "upper": 12,
+   "source": "floor 7 (exact certificate data/fs53/cert-q67-N745.json: α ≤ 745 < 749 (FS-53, data/fs53/README.md)); ceiling 12 (data/fplane/periodic-below-71.json)"
+  },
+  "71": {
+   "kind": "upper",
+   "value": 12,
+   "lower": 7,
+   "upper": 12,
+   "source": "floor 7 (spectral); ceiling 12 (data/fplane/periodic-below-71.json)"
+  },
+  "79": {
+   "kind": "floor",
+   "value": 7,
+   "lower": 7,
+   "upper": null,
+   "source": "floor 7 (exact certificate data/fs53/cert-q79-N1023.json: α ≤ 1023 < 1041 (FS-53, data/fs53/README.md))"
+  },
+  "83": {
+   "kind": "floor",
+   "value": 7,
+   "lower": 7,
+   "upper": null,
+   "source": "floor 7 (exact certificate data/fs50/p83-refusal/cert-p83-N1046-polish-208500.json: α ≤ 1046 < 1149 (FS-50, data/fs50/README.md))"
+  },
+  "103": {
+   "kind": "floor",
+   "value": 7,
+   "lower": 7,
+   "upper": null,
+   "source": "floor 7 (spectral)"
+  },
+  "107": {
+   "kind": "floor",
+   "value": 7,
+   "lower": 7,
+   "upper": null,
+   "source": "floor 7 (spectral)"
+  },
+  "127": {
+   "kind": "floor",
+   "value": 7,
+   "lower": 7,
+   "upper": null,
+   "source": "floor 7 (spectral)"
+  },
+  "131": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "139": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "151": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "163": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "167": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "179": {
+   "kind": "floor",
+   "value": 8,
+   "lower": 8,
+   "upper": null,
+   "source": "floor 8 (spectral)"
+  },
+  "191": {
+   "kind": "floor",
+   "value": 9,
+   "lower": 9,
+   "upper": null,
+   "source": "floor 9 (spectral)"
+  },
+  "199": {
+   "kind": "floor",
+   "value": 9,
+   "lower": 9,
+   "upper": null,
+   "source": "floor 9 (spectral)"
+  },
+  "211": {
+   "kind": "floor",
+   "value": 9,
+   "lower": 9,
+   "upper": null,
+   "source": "floor 9 (spectral)"
+  },
+  "223": {
+   "kind": "floor",
+   "value": 9,
+   "lower": 9,
+   "upper": null,
+   "source": "floor 9 (spectral)"
+  },
+  "227": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "239": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "251": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "263": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "271": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "283": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "307": {
+   "kind": "floor",
+   "value": 10,
+   "lower": 10,
+   "upper": null,
+   "source": "floor 10 (spectral)"
+  },
+  "311": {
+   "kind": "floor",
+   "value": 11,
+   "lower": 11,
+   "upper": null,
+   "source": "floor 11 (spectral)"
+  },
+  "331": {
+   "kind": "floor",
+   "value": 11,
+   "lower": 11,
+   "upper": null,
+   "source": "floor 11 (spectral)"
+  },
+  "347": {
+   "kind": "floor",
+   "value": 11,
+   "lower": 11,
+   "upper": null,
+   "source": "floor 11 (spectral)"
+  },
+  "359": {
+   "kind": "floor",
+   "value": 11,
+   "lower": 11,
+   "upper": null,
+   "source": "floor 11 (spectral)"
+  },
+  "367": {
+   "kind": "floor",
+   "value": 11,
+   "lower": 11,
+   "upper": null,
+   "source": "floor 11 (spectral)"
+  },
+  "379": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "383": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "419": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "431": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "439": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "443": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "463": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "467": {
+   "kind": "floor",
+   "value": 12,
+   "lower": 12,
+   "upper": null,
+   "source": "floor 12 (spectral)"
+  },
+  "479": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "487": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "491": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "499": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "503": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "523": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "547": {
+   "kind": "floor",
+   "value": 14,
+   "lower": 14,
+   "upper": null,
+   "source": "floor 14 (spectral)"
+  },
+  "563": {
+   "kind": "floor",
+   "value": 13,
+   "lower": 13,
+   "upper": null,
+   "source": "floor 13 (spectral)"
+  },
+  "571": {
+   "kind": "floor",
+   "value": 14,
+   "lower": 14,
+   "upper": null,
+   "source": "floor 14 (spectral)"
+  },
+  "587": {
+   "kind": "floor",
+   "value": 14,
+   "lower": 14,
+   "upper": null,
+   "source": "floor 14 (spectral)"
+  },
+  "599": {
+   "kind": "floor",
+   "value": 14,
+   "lower": 14,
+   "upper": null,
+   "source": "floor 14 (spectral)"
+  }
  },
  "rows": [
   {
@@ -312,10 +426,10 @@
     3,
     "chi-p3"
    ],
-   "verdict": "sealed-at-3 (p = 3, chi-p3); Theorem B: \u2264 4 as well"
+   "verdict": "sealed-at-3 (p = 3, chi-p3); Theorem B: ≤ 4 as well"
   },
   {
-   "field": "Q(\u221a2)",
+   "field": "Q(√2)",
    "radicands": [
     2
    ],
@@ -342,7 +456,7 @@
    "verdict": "sealed-at-4 (Theorem B: the 2-adic wall stands); the sieve agrees at p = 7"
   },
   {
-   "field": "Q(\u221a3)",
+   "field": "Q(√3)",
    "radicands": [
     3
    ],
@@ -366,10 +480,10 @@
     3,
     "chi-p3"
    ],
-   "verdict": "sealed-at-3 (p = 3, chi-p3); Theorem B: \u2264 4 as well"
+   "verdict": "sealed-at-3 (p = 3, chi-p3); Theorem B: ≤ 4 as well"
   },
   {
-   "field": "Q(\u221a5)",
+   "field": "Q(√5)",
    "radicands": [
     5
    ],
@@ -396,7 +510,7 @@
    "verdict": "sealed-at-4 (Theorem B: the 2-adic wall stands)"
   },
   {
-   "field": "Q(\u221a7)",
+   "field": "Q(√7)",
    "radicands": [
     7
    ],
@@ -423,7 +537,7 @@
    "verdict": "sealed-at-3 (p = 3, chi-p3)"
   },
   {
-   "field": "Q(\u221a11)",
+   "field": "Q(√11)",
    "radicands": [
     11
    ],
@@ -450,7 +564,7 @@
    "verdict": "sealed-at-4 (Theorem B: the 2-adic wall stands); the sieve agrees at p = 7"
   },
   {
-   "field": "K = Q(\u221a3,\u221a11)",
+   "field": "K = Q(√3,√11)",
    "radicands": [
     3,
     11
@@ -478,7 +592,7 @@
    "verdict": "sealed-at-4 (Theorem B: the 2-adic wall stands)"
   },
   {
-   "field": "K(\u221a5)",
+   "field": "K(√5)",
    "radicands": [
     3,
     5,
@@ -502,7 +616,7 @@
    "verdict": "sealed-at-5 (p = 11, chi-p11)"
   },
   {
-   "field": "K(\u221a7)",
+   "field": "K(√7)",
    "radicands": [
     3,
     7,
@@ -519,10 +633,10 @@
     563
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 7 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "K(\u221a13)",
+   "field": "K(√13)",
    "radicands": [
     3,
     11,
@@ -539,10 +653,10 @@
     563
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 7 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "K(\u221a23) [T20b]",
+   "field": "K(√23) [T20b]",
    "radicands": [
     3,
     11,
@@ -569,7 +683,7 @@
    "verdict": "sealed-at-5 (p = 11, chi-p11)"
   },
   {
-   "field": "K(\u221a35)",
+   "field": "K(√35)",
    "radicands": [
     3,
     11,
@@ -587,7 +701,7 @@
    "verdict": "sealed-at-4 (Theorem B: the 2-adic wall stands)"
   },
   {
-   "field": "K(\u221a79)",
+   "field": "K(√79)",
    "radicands": [
     3,
     11,
@@ -602,10 +716,10 @@
     503
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 7 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "K(\u221a127)",
+   "field": "K(√127)",
    "radicands": [
     3,
     11,
@@ -622,10 +736,10 @@
     563
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 7 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "K(\u221a247) [T20, W]",
+   "field": "K(√247) [T20, W]",
    "radicands": [
     3,
     11,
@@ -649,7 +763,7 @@
    "verdict": "sealed-at-5 (p = 11, chi-p11)"
   },
   {
-   "field": "K(\u221a5,\u221a247)",
+   "field": "K(√5,√247)",
    "radicands": [
     3,
     5,
@@ -671,7 +785,7 @@
    "verdict": "sealed-at-5 (p = 11, chi-p11)"
   },
   {
-   "field": "Heule Q(\u221a3,\u221a5,\u221a11)",
+   "field": "Heule Q(√3,√5,√11)",
    "radicands": [
     3,
     5,
@@ -695,7 +809,7 @@
    "verdict": "sealed-at-5 (p = 11, chi-p11)"
   },
   {
-   "field": "de Grey Q(\u221a3,\u221a5,\u221a7,\u221a11)",
+   "field": "de Grey Q(√3,√5,√7,√11)",
    "radicands": [
     3,
     5,
@@ -708,10 +822,10 @@
     479
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 8 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "K(\u221a5,\u221a7,\u221a247)",
+   "field": "K(√5,√7,√247)",
    "radicands": [
     3,
     5,
@@ -724,10 +838,145 @@
     479
    ],
    "sealing": null,
-   "verdict": "6-open (every usable prime's plane refuses five: spectral for p \u2265 67, records below)"
+   "verdict": "6-open: local bound ≥ 13 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "Q(\u221a2,\u221a31) [sees 23]",
+   "field": "Q(√23)",
+   "radicands": [
+    23
+   ],
+   "wall_broken": true,
+   "usable": [
+    7,
+    11,
+    19,
+    23,
+    43,
+    67,
+    79,
+    83,
+    103,
+    107,
+    191,
+    199
+   ],
+   "sealing": [
+    7,
+    4,
+    "chi-p7"
+   ],
+   "verdict": "sealed-at-4 (p = 7, chi-p7)"
+  },
+  {
+   "field": "Q(√47)",
+   "radicands": [
+    47
+   ],
+   "wall_broken": true,
+   "usable": [
+    11,
+    19,
+    23,
+    31,
+    43,
+    47,
+    67,
+    107,
+    127,
+    139,
+    151,
+    163
+   ],
+   "sealing": [
+    11,
+    5,
+    "chi-p11"
+   ],
+   "verdict": "sealed-at-5 (p = 11, chi-p11)"
+  },
+  {
+   "field": "Q(√71)",
+   "radicands": [
+    71
+   ],
+   "wall_broken": true,
+   "usable": [
+    7,
+    11,
+    23,
+    31,
+    47,
+    59,
+    67,
+    71,
+    127,
+    139,
+    163,
+    211
+   ],
+   "sealing": [
+    7,
+    4,
+    "chi-p7"
+   ],
+   "verdict": "sealed-at-4 (p = 7, chi-p7)"
+  },
+  {
+   "field": "Q(√95)",
+   "radicands": [
+    95
+   ],
+   "wall_broken": true,
+   "usable": [
+    7,
+    19,
+    23,
+    31,
+    43,
+    47,
+    59,
+    71,
+    79,
+    83,
+    151,
+    163
+   ],
+   "sealing": [
+    7,
+    4,
+    "chi-p7"
+   ],
+   "verdict": "sealed-at-4 (p = 7, chi-p7)"
+  },
+  {
+   "field": "Q(√191)",
+   "radicands": [
+    191
+   ],
+   "wall_broken": true,
+   "usable": [
+    7,
+    11,
+    19,
+    31,
+    47,
+    71,
+    83,
+    127,
+    131,
+    139,
+    151,
+    167
+   ],
+   "sealing": [
+    7,
+    4,
+    "chi-p7"
+   ],
+   "verdict": "sealed-at-4 (p = 7, chi-p7)"
+  },
+  {
+   "field": "Q(√2,√31) [sees 23]",
    "radicands": [
     2,
     31
@@ -748,10 +997,10 @@
     367
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 23: its plane is undecided)"
+   "verdict": "open-pending (p = 31: its plane's floor is 5, undecided)"
   },
   {
-   "field": "Q(\u221a5,\u221a51) [sees 31]",
+   "field": "Q(√5,√51) [sees 31]",
    "radicands": [
     5,
     51
@@ -772,10 +1021,10 @@
     379
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 31: its plane is undecided)"
+   "verdict": "open-pending (p = 31: its plane's floor is 5, undecided)"
   },
   {
-   "field": "Q(\u221a10,\u221a23) [sees 43]",
+   "field": "Q(√10,√23) [sees 43]",
    "radicands": [
     10,
     23
@@ -796,10 +1045,10 @@
     467
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 43: its plane is undecided)"
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "Q(\u221a7,\u221a89) [sees 47]",
+   "field": "Q(√7,√89) [sees 47]",
    "radicands": [
     7,
     89
@@ -820,10 +1069,10 @@
     311
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 47: its plane is undecided)"
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "Q(\u221a2,\u221a3,\u221a7) [sees 47]",
+   "field": "Q(√2,√3,√7) [sees 47]",
    "radicands": [
     2,
     3,
@@ -839,10 +1088,10 @@
     503
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 47: its plane is undecided)"
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
   },
   {
-   "field": "Q(\u221a2,\u221a3,\u221a31) [sees 23]",
+   "field": "Q(√2,√3,√31) [sees 23]",
    "radicands": [
     2,
     3,
@@ -857,8 +1106,100 @@
     383
    ],
    "sealing": null,
-   "verdict": "open-pending (p = 23: its plane is undecided)"
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
+  },
+  {
+   "field": "Q(√167) [smallest, sees 23]",
+   "radicands": [
+    167
+   ],
+   "wall_broken": true,
+   "usable": [
+    23,
+    43,
+    59,
+    67,
+    71,
+    79,
+    83,
+    103,
+    131,
+    139,
+    151,
+    163
+   ],
+   "sealing": null,
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
+  },
+  {
+   "field": "Q(√1055) [smallest, sees 31]",
+   "radicands": [
+    1055
+   ],
+   "wall_broken": true,
+   "usable": [
+    31,
+    43,
+    47,
+    83,
+    103,
+    107,
+    131,
+    163,
+    191,
+    211,
+    227,
+    239
+   ],
+   "sealing": null,
+   "verdict": "open-pending (p = 31: its plane's floor is 5, undecided)"
+  },
+  {
+   "field": "Q(√2351) [smallest, sees 47]",
+   "radicands": [
+    2351
+   ],
+   "wall_broken": true,
+   "usable": [
+    47,
+    67,
+    71,
+    83,
+    139,
+    151,
+    163,
+    191,
+    199,
+    211,
+    223,
+    227
+   ],
+   "sealing": null,
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
+  },
+  {
+   "field": "Q(√4703) [smallest, sees 43]",
+   "radicands": [
+    4703
+   ],
+   "wall_broken": true,
+   "usable": [
+    43,
+    47,
+    79,
+    103,
+    107,
+    127,
+    139,
+    151,
+    167,
+    179,
+    199,
+    239
+   ],
+   "sealing": null,
+   "verdict": "6-open: local bound ≥ 6 (every usable plane refuses five; see the planes table)"
   }
  ],
- "vocabulary": "sealed-at-k: \u03c7(F\u00b2) \u2264 k by a verified colouring of the plane at the named prime (or Theorem B); 6-open: no usable prime seals (spectral floor \u2265 6 at p \u2265 67; the planes below by their records); open-pending: a usable plane below 67 is undecided"
+ "vocabulary": "sealed-at-k: χ(F²) ≤ k by a verified colouring of the plane at the named prime (or Theorem B); 6-open: no usable plane is five-colourable (every floor ≥ 6; the local bound is the least usable floor or more); open-pending: a usable plane below 67 still has floor ≤ 5. Upper bounds only: lower bounds on χ(F²) are not computed here (data/fplane/map.md records them with their sources)"
 }

@@ -46,11 +46,15 @@ matching Theorem B and FS-45's 18-vertex graph; `ℚ(√3, √5)` needs four too
 `15 ≡ 7 (mod 8)`; 11 is usable since 3 and 5 are squares modulo 11; `fplane.py usable --rads 3,5` lists 11, 59, 71, …) with
 `√11 ∉ F`, so FS-45's Corollary 6.2 does not apply: **`ℚ(√3, √5)` is the smallest field containing `√3` where the conjecture's
 five-level is open with `L = 5`**, a named test case. Below it sit the quadratic fields, where the theorem is silent (no `√3`) and
-the exposure is starker: `ℚ(√11)` and `ℚ(√23)` have `L = 4` (the 2-adic `K₄`; the plane at 7, `χ = 4`) and `χ ∈ {3, 4}` (odd cycles
-exist since `11, 23 ≡ 3 (mod 4)`, row 63), and `ℚ(√47)` has usable primes 11, 19, 23, 31, 43, 47, … so `L ∈ {4, 5}` — **five iff the
-plane at 19 refuses four colours**, which `data/fplane/chi-p19-k4.json` records as undecided — and `χ ∈ {3, 4, 5}`. The conjecture
-predicts four for a quadratic field with no Moser spindle and, if 19 refuses four, five for `ℚ(√47)`; no forcer is known in any
-of them, and a four-colouring of `ℚ(√11)²` local at no prime would refute the conjecture outright.
+the exposure is starker, and FS-58 (2026-09-17) has answered part of it: `ℚ(√11)` and `ℚ(√23)` have `L = 4` (for `ℚ(√11)` the 2-adic
+`K₄`; for both the plane at 7, `χ = 4`) and now **`χ = 4`** — at 11 in the kernel (`four_le_chromaticNumber_planeOver_eleven`,
+`Proofs/HadwigerNelson/Instances/SqrtEleven.lean`, a 204-point witness in `data/fs58/witness-11/`), at 23 by a certified 297-point
+witness (`data/fs58/witness-23/minimal/`), neither containing a Moser spindle. `ℚ(√47)` has usable primes 11, 19, 23, 31, 43, 47, …
+so `L = 5` provided the plane at 19 refuses four colours, which `data/fplane/chi-p19-k4.json` records as a **solver** refusal
+(`unsat`, 5.1 s; untrusted), and now `χ ∈ {4, 5}` (a certified 169-point witness, `data/fs58/witness-47/`). The conjecture's
+prediction for a quadratic field with no Moser spindle is met at 11 and 23; for `ℚ(√47)` it predicts five, and a four-colouring of
+`ℚ(√47)²` would refute it. *Correction record (2026-09-17): this paragraph said `chi-p19-k4.json` records the question as
+undecided — the file has recorded `unsat` since M58 (commit `d02a4f3`) — and that no forcer was known in any of these fields.*
 
 ## 2. What we know
 
@@ -91,9 +95,9 @@ statement is then `χ = 3 ↔ ∃ 𝔽₃-prime` with `hfloor` as the sole non-k
 **D3 — the four-colour level, stated so it can fail.** For `√3 ∈ F` with no `𝔽₃`-prime, `χ(F²) ≥ 4`; the conjecture says `= 4`
 iff a stable dyadic prime has residue graph `K₄`, else `≥ 5`. The "`≥ 5`" half is FS-45's Theorem 6.1 for `F ⊇ K` (conditional
 on the 8/3 forcer) and **open for fields like `ℚ(√3, √5)`** — the product route is closed by (ii) above, so the five-level needs a
-four-forcer over `ℚ(√3)`-material that does not use `√11`, or a different mechanism; and the four-level is open for the quadratic
-fields `ℚ(√11)`, `ℚ(√23)`, where a three-forcer with `1/δ` a sum of unit vectors (FS-45's chain) is the only route the record
-names. Name those as the questions this stub leaves.
+four-forcer over `ℚ(√3)`-material that does not use `√11`, or a different mechanism; and the four-level for the quadratic
+fields `ℚ(√11)`, `ℚ(√23)` was closed by FS-58 — at 11 by exactly that route (a 52-point three-forcer and a four-copy chain,
+`plans/FS58-four-colours.md` §R-B3), at 23 by a direct refutation in a saturated lattice (§R-B5). Name those as the questions this stub leaves.
 
 ## 4. Phases
 
