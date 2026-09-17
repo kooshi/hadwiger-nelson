@@ -518,3 +518,24 @@ word balls (§0 O3) and every periodic screen (R-B1) could not; this is the rigi
   certified by `[CostaSilvaFilho2026]` as a degree-20 field and a base `ℚ(√2,√5,√7)` with a degree-12 angle). **P3 (0.3) won** — route C landed at finite size. **The kernel form is phase D2**, priced by the implementer at
   well under a minute through the `UDCert`/SAT-bridge pipeline (running).
 
+### R-B4 — toward `ℚ(√23)` and `ℚ(√167)`: what the span-box probe says so far (2026-09-17) [tools, solver claims; nulls measure their pieces]
+
+`tools/fs58_subpool.py` (unions of direction classes: covolume, pairs, reduced coordinates) → `data/fs58/span/subpools.out`;
+`tools/fs58_mkpool.py`; `tools/fs58_span.py` (span boxes: the smallest coordinate box holding `0` and `3u`, widened by `s`) →
+`data/fs58/span/span.out`.
+
+* **Control:** `ℚ(√11)`'s 36-direction pool forces `(0, 3u)` and has the virtual edge at `2u` from span 2 (2,500–2,800 points), three
+  directions of three; span 1 does not force. Matches B3's scan.
+* **The rational directions are load-bearing:** `ℚ(√11)`'s 24 `√11`-vectors alone (no axis, no `(3/5, 4/5)` family) force nothing at spans
+  2–3 (up to 10,192 points); `ℚ(√23)`'s 24 `√23`-vectors of denominator 40 alone force nothing at spans 2–4 (up to 17,496).
+* **`ℚ(√23)`'s full 36-direction pool (denominator 40) forces nothing** at spans 2–5 (up to 81,796 points, two directions; span 5 is about
+  the physical margin of `ℚ(√11)`'s span 2, the lattice being 2.3× finer per axis). `ℚ(√23)` has neither the 5-cycle nor the 7-cycle of
+  the prelude's family (`(15/23) = (7/23) = −1`); `ℚ(√11)` has the 5-cycle. *Reading, with its test:* forcing at small size tracks short
+  odd cycles through the rational directions; test by adding 3-non-integral classes (`W₁₂*`, `W₂₄*`) whose odd girth is smaller.
+* **`ℚ(√167)` has a coarse class:** its 24 `√167`-vectors of denominator 140 (or 120) alone reach covolume 0.0063 with coordinates ≤ 5 —
+  but with the rational directions added the coordinates rise to 49; span boxes there are about 300,000 points. Not yet probed.
+
+**Carried to a search phase (B5), not run while the kernel build (D2) holds the machine:** pool design for `ℚ(√23)` and `ℚ(√167)` (classes
+with 3 in the denominator allowed — the chain needs only `1/δ ∈ R`; odd girth of each pool as the first screen), span boxes at physically
+matched margins, core extraction and the four-copy chain as in B3 (`1/3` as a sum of unit vectors over each field to be found).
+
