@@ -1,0 +1,139 @@
+screen D=11 N=40: |W₀| = 36, 18 u up to sign; lattices: 11 principal mΛ₀ then 50 random loop-free HNF (index log-uniform in (1000, 100000)); wall 60.0 s in conflict chunks of 5000; resume: 0 (L, u) lines and 0 lattice lines already recorded
+  m=2 |G| = 16 [2, 2, 2, 2] deg 6: Hoffman min mean -0.3333; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  m=4 |G| = 256 [4, 4, 4, 4] deg 20: Hoffman min mean -0.6000; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  m=5 |G| = 625: 4 generators in L — loop, nothing asked
+  m=7 |G| = 2401 [7, 7, 7, 7] deg 32: Hoffman min mean -0.5617; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  m=8 |G| = 4096 [8, 8, 8, 8] deg 32: Hoffman min mean -0.5625; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  m=10 |G| = 10000 [10, 10, 10, 10] deg 34: Hoffman min mean -0.4759; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.4 s
+  m=11 |G| = 14641 [11, 11, 11, 11] deg 36: Hoffman min mean -0.5124; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.5 s
+  m=13 |G| = 28561 [13, 13, 13, 13] deg 36: Hoffman min mean -0.4758; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.9 s
+  m=14 |G| = 38416 [14, 14, 14, 14] deg 36: Hoffman min mean -0.5679; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 1.2 s
+  m=16 |G| = 65536 [16, 16, 16, 16] deg 36: Hoffman min mean -0.5710; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.0 s
+  m=17 |G| = 83521 [17, 17, 17, 17] deg 36: Hoffman min mean -0.5559; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.5 s
+  random #1 (draw 1) |G| = 94653 [1, 1, 3, 31551] deg 36: Hoffman min mean -0.5876; affine forms descending 2; quotient 3-colourable (colouring verified); non-affine colouring none (solver claim); {'Forced (solver claim)': 18}; 3.1 s
+  random #2 (draw 2) |G| = 8433 [1, 1, 3, 2811] deg 36: Hoffman min mean -0.5477; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #3 (draw 3) |G| = 2176 [1, 1, 2, 1088] deg 36: Hoffman min mean -0.5137; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #4 (draw 4) |G| = 4573 [1, 1, 1, 4573] deg 32: Hoffman min mean -0.5007; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #5 (draw 5) |G| = 2538 [1, 1, 1, 2538] deg 36: Hoffman min mean -0.5710; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #6 (draw 6) |G| = 78668 [1, 1, 1, 78668] deg 36: Hoffman min mean -0.5655; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.5 s
+  random #7 (draw 7) |G| = 20983 [1, 1, 1, 20983] deg 32: Hoffman min mean -0.5012; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.6 s
+  random #8 (draw 8) |G| = 5911 [1, 1, 1, 5911] deg 34: Hoffman min mean -0.5354; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #9 (draw 9) |G| = 35844 [1, 1, 1, 35844] deg 28: Hoffman min mean -0.5006; affine forms descending 2; quotient 3-colourable (colouring verified); non-affine colouring none (solver claim); {'identical': 1, 'Forced (solver claim)': 17}; 0.9 s
+  random #10 (draw 10) |G| = 97416 [1, 1, 6, 16236] deg 36: Hoffman min mean -0.5742; affine forms descending 2; quotient 3-colourable (colouring verified); non-affine colouring none (solver claim); {'Forced (solver claim)': 18}; 3.5 s
+  random #11 (draw 11) |G| = 3768 [1, 1, 1, 3768] deg 36: Hoffman min mean -0.5556; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #12 (draw 12) |G| = 4131 [1, 1, 1, 4131] deg 36: Hoffman min mean -0.4766; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #13 (draw 13) |G| = 3121 [1, 1, 1, 3121] deg 32: Hoffman min mean -0.4966; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #14 (draw 14) |G| = 7466 [1, 1, 1, 7466] deg 36: Hoffman min mean -0.5520; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #15 (draw 15) |G| = 56269 [1, 1, 1, 56269] deg 36: Hoffman min mean -0.5719; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 1.7 s
+  random #16 (draw 16) |G| = 7212 [1, 1, 1, 7212] deg 36: Hoffman min mean -0.5280; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #17 (draw 17) |G| = 1037 [1, 1, 1, 1037] deg 34: Hoffman min mean -0.4839; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #18 (draw 18) |G| = 4194 [1, 1, 1, 4194] deg 36: Hoffman min mean -0.5404; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #19 (draw 19) |G| = 61935 [1, 1, 1, 61935] deg 36: Hoffman min mean -0.5835; affine forms descending 2; quotient 3-colourable (colouring verified); non-affine colouring none (solver claim); {'Forced (solver claim)': 18}; 2.1 s
+  random #20 (draw 20) |G| = 15448 [1, 2, 2, 3862] deg 36: Hoffman min mean -0.5648; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.5 s
+  random #21 (draw 21) |G| = 4301 [1, 1, 1, 4301] deg 36: Hoffman min mean -0.5121; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #22 (draw 22) |G| = 2196 [1, 1, 2, 1098] deg 36: Hoffman min mean -0.4395; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #23 (draw 23) |G| = 77455 [1, 1, 1, 77455] deg 36: Hoffman min mean -0.5669; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.4 s
+  random #24 (draw 24) |G| = 78418 [1, 1, 1, 78418] deg 36: Hoffman min mean -0.5856; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.3 s
+  random #25 (draw 25) |G| = 2174 [1, 1, 1, 2174] deg 36: Hoffman min mean -0.5019; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #26 (draw 26) |G| = 3410 [1, 1, 1, 3410] deg 32: Hoffman min mean -0.5014; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #27 (draw 27) |G| = 1919 [1, 1, 1, 1919] deg 36: Hoffman min mean -0.5047; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #28 (draw 28) |G| = 4713 [1, 1, 1, 4713] deg 36: Hoffman min mean -0.5578; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #29 (draw 29) |G| = 7839 [1, 1, 1, 7839] deg 32: Hoffman min mean -0.4123; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #30 (draw 30) |G| = 2833 [1, 1, 1, 2833] deg 36: Hoffman min mean -0.5375; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #31 (draw 31) |G| = 41993 [1, 1, 1, 41993] deg 36: Hoffman min mean -0.5715; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 1.2 s
+  random #32 (draw 32) |G| = 23508 [1, 1, 2, 11754] deg 36: Hoffman min mean -0.5509; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.7 s
+  random #33 (draw 33) |G| = 24461 [1, 1, 1, 24461] deg 32: Hoffman min mean -0.5013; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.7 s
+  random #34 (draw 34) |G| = 1808 [1, 1, 2, 904] deg 25: Hoffman min mean -0.6846; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #35 (draw 35) |G| = 8656 [1, 2, 2, 2164] deg 36: Hoffman min mean -0.5528; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #36 (draw 36) |G| = 2437 [1, 1, 1, 2437] deg 34: Hoffman min mean -0.5373; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #37 (draw 37) |G| = 15263 [1, 1, 1, 15263] deg 32: Hoffman min mean -0.5009; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.4 s
+  random #38 (draw 38) |G| = 7499 [1, 1, 1, 7499] deg 36: Hoffman min mean -0.5478; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #39 (draw 39) |G| = 5192 [1, 1, 2, 2596] deg 36: Hoffman min mean -0.5225; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #40 (draw 40) |G| = 3695 [1, 1, 1, 3695] deg 36: Hoffman min mean -0.5475; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #41 (draw 43) |G| = 3599 [1, 1, 1, 3599] deg 36: Hoffman min mean -0.4847; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #42 (draw 44) |G| = 1176 [1, 1, 2, 588] deg 36: Hoffman min mean -0.5295; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.1 s
+  random #43 (draw 45) |G| = 9914 [1, 1, 1, 9914] deg 36: Hoffman min mean -0.5328; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.3 s
+  random #44 (draw 46) |G| = 7343 [1, 1, 1, 7343] deg 30: Hoffman min mean -0.3745; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.2 s
+  random #45 (draw 47) |G| = 84760 [1, 1, 2, 42380] deg 36: Hoffman min mean -0.5705; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 2.6 s
+  random #46 (draw 48) |G| = 13802 [1, 1, 1, 13802] deg 36: Hoffman min mean -0.5320; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.5 s
+  random #47 (draw 49) |G| = 18710 [1, 1, 1, 18710] deg 36: Hoffman min mean -0.5716; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.6 s
+  random #48 (draw 50) |G| = 39416 [1, 1, 1, 39416] deg 36: Hoffman min mean -0.5625; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 1.2 s
+  random #49 (draw 51) |G| = 14280 [1, 1, 2, 7140] deg 36: Hoffman min mean -0.5823; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 0.5 s
+  random #50 (draw 52) |G| = 32657 [1, 1, 1, 32657] deg 36: Hoffman min mean -0.5607; affine forms descending 0; quotient not 3-colourable (solver claim); non-affine colouring not asked; {'Forced (solver claim)': 18}; 1.0 s
+summary data/fs58/chain-11/screen-40.jsonl: 1098 (L, u) lines over 61 lattices
+  verdicts: {'Forced (solver claim) (vacuous: quotient not 3-colourable)': 1008, 'loop': 18, 'Forced (solver claim) on a 3-colourable quotient': 71, 'identical': 1}
+  lattices by (quotient, some affine form descends, non-affine colouring):
+    ('3-colourable (colouring verified)', True, 'none (solver claim)'): 4
+    ('loop', False, 'not asked'): 1
+    ('not 3-colourable (solver claim)', False, 'not asked'): 56
+  u killed (some quotient separates (0, 3u)): 0 of 18
+    u #18 [0, 0, 40, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #19 [0, 12, -4, 0]: NOT killed at budget ({'Forced (solver claim)': 59, 'loop': 1, 'identical': 1})
+    u #20 [0, 12, 4, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #21 [4, 0, 0, -12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #22 [4, 0, 0, 12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #23 [12, -8, -24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #24 [12, -8, 24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #25 [12, 8, -24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #26 [12, 8, 24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #27 [24, -4, -12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #28 [24, -4, 12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #29 [24, 0, -32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #30 [24, 0, 32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #31 [24, 4, -12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #32 [24, 4, 12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #33 [32, 0, -24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #34 [32, 0, 24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #35 [40, 0, 0, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+screen D=11 N=40: |W₀| = 36, 18 u up to sign; lattices: 11 principal mΛ₀ then 50 random loop-free HNF (index log-uniform in (1000, 100000)); wall 60.0 s in conflict chunks of 5000; resume: 1098 (L, u) lines and 61 lattice lines already recorded
+summary data/fs58/chain-11/screen-40.jsonl: 1098 (L, u) lines over 61 lattices
+  verdicts: {'Forced (solver claim) (vacuous: quotient not 3-colourable)': 1008, 'loop': 18, 'Forced (solver claim) on a 3-colourable quotient': 71, 'identical': 1}
+  lattices by (quotient, some affine form descends, non-affine colouring):
+    ('3-colourable (colouring verified)', True, 'none (solver claim)'): 4
+    ('loop', False, 'not asked'): 1
+    ('not 3-colourable (solver claim)', False, 'not asked'): 56
+  u killed (some quotient separates (0, 3u)): 0 of 18
+    u #18 [0, 0, 40, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #19 [0, 12, -4, 0]: NOT killed at budget ({'Forced (solver claim)': 59, 'loop': 1, 'identical': 1})
+    u #20 [0, 12, 4, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #21 [4, 0, 0, -12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #22 [4, 0, 0, 12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #23 [12, -8, -24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #24 [12, -8, 24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #25 [12, 8, -24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #26 [12, 8, 24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #27 [24, -4, -12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #28 [24, -4, 12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #29 [24, 0, -32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #30 [24, 0, 32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #31 [24, 4, -12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #32 [24, 4, 12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #33 [32, 0, -24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #34 [32, 0, 24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #35 [40, 0, 0, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+screen D=11 N=40: |W₀| = 36, 18 u up to sign; lattices: 11 principal mΛ₀ then 50 random loop-free HNF (index log-uniform in (1000, 100000)); wall 60.0 s in conflict chunks of 5000; resume: 1098 (L, u) lines and 61 lattice lines already recorded
+summary data/fs58/chain-11/screen-40.jsonl: 1098 (L, u) lines over 61 lattices
+  verdicts: {'Forced (solver claim) (vacuous: quotient not 3-colourable)': 1008, 'loop': 18, 'Forced (solver claim) on a 3-colourable quotient': 71, 'identical': 1}
+  lattices by (quotient, some affine form descends, non-affine colouring):
+    ('3-colourable (colouring verified)', True, 'none (solver claim)'): 4
+    ('loop', False, 'not asked'): 1
+    ('not 3-colourable (solver claim)', False, 'not asked'): 56
+  u killed (some quotient separates (0, 3u)): 0 of 18
+    u #18 [0, 0, 40, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #19 [0, 12, -4, 0]: NOT killed at budget ({'Forced (solver claim)': 59, 'loop': 1, 'identical': 1})
+    u #20 [0, 12, 4, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #21 [4, 0, 0, -12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #22 [4, 0, 0, 12]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #23 [12, -8, -24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #24 [12, -8, 24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #25 [12, 8, -24, 4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #26 [12, 8, 24, -4]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #27 [24, -4, -12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #28 [24, -4, 12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #29 [24, 0, -32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #30 [24, 0, 32, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #31 [24, 4, -12, 8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #32 [24, 4, 12, -8]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #33 [32, 0, -24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #34 [32, 0, 24, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})
+    u #35 [40, 0, 0, 0]: NOT killed at budget ({'Forced (solver claim)': 60, 'loop': 1})

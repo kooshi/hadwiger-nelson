@@ -1,0 +1,4 @@
+pool D=11 N=50: building W₃(N), Λ₀ and its least odd cycle
+  |W₀| = 100 (80 outside ℚ(i), 20 in ℚ(i)); rank 4; index in ℤ⁴ 4; covolume 2.816e-05; κ nonzero on every generator: True; admissible linear forms mod 3: 16
+  least odd cycle: 5 (5101 points)
+  vector set sha256 063a264bad22bf3e; wrote data/fs58/chain-11/pool-50.json and re-read it (0.06 s)

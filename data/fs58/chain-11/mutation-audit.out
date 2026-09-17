@@ -1,0 +1,22 @@
+# Mutation audit of tools/fs58_chain.py `control` (2026-09-17, against the committed version). Each mutant is a scratch
+# copy of the tool with ONE planted fault, run as `control 11 10 --wall 20` with its control record redirected to
+# scratch. A control is known to work only if the faithful copy passes and every mutant goes red. Mutations:
+#   pinned-ask-asks-equal: the separation ask pins c(3u)=0 instead of 1
+#   edge-kind-blind: pair_kind never reports 'edge'
+#   identical-blind: pair_kind never reports 'identical'
+#   refusal-read-as-unknown: a refused pinned ask is reported Unknown instead of Forced
+#   verifier-skips-properness: the colouring-file verifier skips the edge check
+#   verifier-skips-map-check: the colouring-file verifier skips the Smith-form isomorphism check
+#   affine-not-blocked: the non-affine ask does not block the affine colourings
+#   affine-descent-without-Qinv: affine colourings computed from the form without the change of basis Q^-1
+#   edges-drop-last-generator: the quotient's edge list omits one generator's edges (a missing derived edge)
+faithful: exit 0 | CONTROL PASS (all parts) 
+pinned-ask-asks-equal: exit 1 |  INSTRUMENT CATASTROPHE: separating model fails
+edge-kind-blind: exit 1 | CONTROL FAIL: edge 
+identical-blind: exit 1 | CONTROL FAIL: identical 
+refusal-read-as-unknown: exit 1 | CONTROL FAIL: planted rhombus 
+verifier-skips-properness: exit 1 | CONTROL FAIL: verifier planted improper 
+verifier-skips-map-check: exit 1 | CONTROL FAIL: verifier planted map 
+affine-not-blocked: exit 1 |  AssertionError: INSTRUMENT CATASTROPHE: the non-affine model is improper or affine
+affine-descent-without-Qinv: exit 1 |  AssertionError: a descending form is not well defined on digits
+edges-drop-last-generator: exit 1 | CONTROL FAIL: non-affine none 

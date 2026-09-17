@@ -1,0 +1,17 @@
+control D=11 N=280: |W₀| = 36, 18 u up to sign, wall 60.0 s
+CONTROL PASS [smith] 300 random nonsingular 4×4 matrices: P·M·Q = diag(n), P and Q unimodular, n₁|n₂|n₃|n₄, every row of M maps to 0, |G| = |det M|, invariants equal sympy's; failures 0
+CONTROL PASS [smith planted] on a non-diagonal M the true Q passes the isomorphism check and the identity in its place is refused: 'isomorphism check: a row of M does not map to 0'
+CONTROL PASS [identical] L = 3Λ₀ (|G| = 81, loops 0): pair kinds over all u ['identical']; the screen asks nothing there
+CONTROL PASS [edge] L = ℤ(3u − w) + 7Λ₀, u = #18, w = #0, |G| = 343: pair kind 'edge'; quotient not 3-colourable (solver claim); verdict 'Forced (solver claim)' (vacuous: the graph has no proper 3-colouring (solver claim)) — on a 3-colourable quotient every colouring separates an edge
+  host: L = 2·ker κ (3-colourable by κ), |G| = 48 [2, 2, 2, 6]: quotient 3-colourable (colouring verified); non-edge 3u pairs 18, verdicts ['Forced (solver claim)']
+    3u twins on this 3-colourable quotient: ['Forced (solver claim)']; pairs v = w_i + w_j: 16 of 30 Separable, 14 Forced
+CONTROL PASS [unplanted twin] L = 2·ker κ, |G| = 48, generators the 12 directions in ℚ(i) (96 edges), pair 3u for u = #18: the twin reads 'Separable (colouring verified)' (model 0; c(0) = 0, c(3u) = 1)
+CONTROL PASS [planted rhombus] the same graph plus two vertices adjacent to each other and to 0 and 3u: planted graph 3-colourable (colouring verified) (so the refusal is not vacuous); verdict 'Forced (solver claim)' (pinned ask c(0)=0, c(3u)=1 refused, 0.00 s)
+CONTROL PASS [non-affine none] L = 3Λ₀: 16 affine colourings (every admissible form descends), 8 pinned ones blocked: non-affine colouring 'none (solver claim)'
+CONTROL PASS [non-affine exists] L = 2·ker κ with the ℚ(i) directions only: 2 affine colourings of the full quotient, 1 pinned ones blocked: non-affine colouring 'exists (colouring verified)'
+  full quotients in the host search: 1 3-colourable; their non-edge 3u twins read Forced 18 times
+CONTROL PASS [verifier faithful] the twin colouring written and re-read verifies for its pair: None
+CONTROL PASS [verifier planted improper] one endpoint of edge (0, 16) recoloured to match: 'improper edge: vertex 15 and vertex 16 share colour 0'
+CONTROL PASS [verifier planted pair] the faithful file checked against a 3u pair it leaves equal: 'pair not separated: c(0) = c(v) = 0'
+CONTROL PASS [verifier planted map] the file's Q replaced by the identity: 'isomorphism check: a row of M does not map to 0'
+CONTROL PASS (all parts)
