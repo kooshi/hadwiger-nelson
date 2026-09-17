@@ -158,19 +158,26 @@ an edge direction), and `R = ℤ[U]` the ring the unit vectors of `F(i)` generat
    * *3-adic*: if every edge of `H` is 3-integral, `H` maps to `S₁` and its affine colourings separate every pair whose difference has
      nonzero residue — **a 3-integral forcer can force only `δ ∈ 3·(3-integral vectors)`**;
    * *tower*: by D2 every `S_m` forces every such `δ`, so no finite level of the 3-adic tower rules any of them out.
-4. **Periodic rigidity.** Every finite quotient of the 3-integral group `O_{(3)}²` of `F²` is a quotient of some `(O/3^m)²` (its finite
-   quotients are 3-groups: integers prime to 3 are invertible). So **every periodic 3-colouring of `G₃` is pulled back from some `S_m`,
-   hence affine** (D2), and keeps every pair at difference `3u` equal.
+4. **Periodic rigidity.** Let `A = O_{(3)}²`, the 3-integral vectors. (a) *Every finite quotient `A/L` is a quotient of some
+   `(O/3^m)²`*: multiplication by an integer prime to 3 is an automorphism of `A`, hence of `A/L`, so `A/L` has no element of prime
+   order `≠ 3`; it is a 3-group of some exponent `3^m`, so `3^m A ⊆ L`. (b) *Every point of the circle `C_m` of `(O/3^m)²` lifts to a
+   3-integral unit vector of `F²`*: the parametrisation `s ↦ ((1 − s²)/(1 + s²), 2s/(1 + s²))` with `1 + s²` a 3-adic unit covers
+   `C_m` except the point `(−1, 0)`, which is itself global, and `O` is dense in `O/3^m`. (b) is what makes the quotient graph `S_m`
+   itself rather than a Cayley graph on fewer generators, whose colourings would be more. So **every periodic 3-colouring of `G₃` is
+   pulled back from some `S_m`, hence affine** (D2), and keeps every pair at difference `3u` equal.
 5. **The dichotomy, by compactness.** A finite forcer of `(p, p + 3u)` among 3-integral graphs exists **iff `G₃` forces it** (if every
    finite subgraph had a separating colouring, a limit colouring of `G₃` would separate it). So route C over 3-integral forcers asks one
    question per field: **is `G₃` rigid at three colours?** A non-affine 3-colouring of `G₃`, if one exists, is aperiodic (4.).
 6. **All additive 3-colourings of `G₃` are affine** (`Hom(O_{(3)}², ℤ/3) = Hom((O/3)², ℤ/3)`), so a non-affine colouring is non-additive
    as well as aperiodic.
-7. **The direction-set screen.** A forcer uses finitely many directions `W₀`. If some finite quotient `Cay(ℤ[W₀]/L, W₀)` (with `L`
-   containing no element of `W₀`) has a 3-colouring separating `0` from `3u`, its pullback, translated, separates every `(p, p + 3u)` in
-   every subgraph of `Cay(ℤ[W₀], W₀)`: **no forcer with directions in `W₀` exists**. `ℤ[W₀] ≅ ℤ⁴` has quotients of every order, unlike
-   `O_{(3)}²`, and this screen is a boundary-free SAT question on a vertex-transitive graph.
-
+7. **The direction-set screen.** Let `W₀` be a finite symmetric set of unit vectors and `Λ₀ = ℤ[W₀]`. If some finite quotient
+   `Cay(Λ₀/L, W₀)` (no element of `W₀` in `L`) has a 3-colouring `c̄` with `c̄(0) ≠ c̄(3ū)`, then for every `p ∈ Λ₀` the translated
+   pullback `x ↦ c̄(x̄ − p̄)` is a proper colouring of `Cay(Λ₀, W₀)` separating `p` from `p + 3u`. So **no graph whose edge vectors all
+   lie in `W₀` forces a pair at difference `3u`** — the scope is the forcer's *edges*: a graph drawn on those points may carry further
+   unit distances with directions outside `W₀`, and forcing only grows with edges, so a piece's direction set is read from its full exact
+   edge set, never from the directions used to build it. `Λ₀ ≅ ℤ⁴` has quotients of every order, unlike `A`, and this screen is a
+   boundary-free SAT question on a vertex-transitive graph. *Controls, both reachable:* on `L = 3Λ₀` the pair is one vertex, so no
+   separation exists; on an `L` with `3u ≡ w ∈ W₀`, the pair is an edge, so every colouring separates it.
 *What is not claimed:* that `G₃` is rigid. Forcers that use 3-non-integral edges escape screen 3 (they have no homomorphism to `S₁`) and are
 phase C's.
 
@@ -202,10 +209,12 @@ expectation: spreading over `2S + 1` shells gives least mean near `−1/(2S + 1)
 
 ### D7 — forcing by pigeonhole, generalised from `[Wormald1979]` [hand]
 
-For a finite `T ⊂ F²` call `U ⊆ T` **odd** when `U` has no internal unit distance and the unit-distance graph on `⋃_{u∈U} S(u, 1) ∩ F²`
+For a finite `T ⊂ F²` call `U ⊆ T` **odd** when the unit-distance graph on `⋃_{u∈U} S(u, 1) ∩ F²`
 contains an odd cycle. **If `T` admits no 3-colouring that is proper on `T`'s own unit edges and leaves no odd subset monochromatic, then
 `χ(F²) ≥ 4`**, witnessed by `T`, one odd cycle per odd subset used, and one edge from each cycle vertex to a point of its subset. *Proof:*
-a monochromatic odd `U` forces its cycle into two colours. `[Wormald1979]` is the case of 13 points, all 5-subsets, bijectively attached
+a monochromatic odd `U` forces its cycle into two colours. The lemma needs no independence hypothesis: a `U` with an internal unit
+distance is never monochromatic, and a cycle vertex can coincide with a point of `U` only across such a distance; independence is the
+*search's* filter (§0 O6: every odd triple found without it was dependent, and useless). `[Wormald1979]` is the case of 13 points, all 5-subsets, bijectively attached
 5-cycles. The smallest subsets that can be odd have size 3: one unit circle is edgeless without `√3`, and two circles form a bipartite
 graph. **A three-point subset needs an arithmetic coincidence**: a vertex has at most two neighbours on another circle (the glue points,
 row 17), so an odd cycle through three circles closes only where a composition of glue maps returns. §0 O6 found none at low height in
@@ -319,6 +328,44 @@ upper half, `= 4`, is `[Fischer1990]`'s and is not restated.
 **Seams checked.** The model of the barrier's hypotheses is `diamond167`: an edge exists, so three colours colour a nonempty
 graph. The adversarial member owed to the obligation pass is a unit vector at some `d ≡ 1 (mod 3)` on which `a + b + c ≡ 0`, which
 would show `hd` is used; if none exists, `kappa_ne_zero`'s hypothesis is too strong and the statement should say so.
+
+### M2 — obligations (2026-09-17): what is proved, tested, assumed
+
+**The kernel barrier, decomposed** (each a leaf of `ThreeAdicBarrier.lean`, each a local obligation):
+
+| leaf | local obligation | instrument |
+|---|---|---|
+| `ratIntegral3` (subring) | `(q₁ + q₂).den ∣ q₁.den·q₂.den`, same for `*`; `(−q).den = q.den`; a product of naturals prime to 3 is prime to 3 | `Rat.add_den_dvd`, `Rat.mul_den_dvd`; `ZMod` cast of a divisor |
+| `red3` (ring hom) | `map_add`, `map_mul` under nonvanishing denominators | `Rat.cast_add_of_ne_zero`, `Rat.cast_mul_of_ne_zero` |
+| `threeIntegral` (subgroup), `kappa` (additive) | coordinatewise from the subring; `kappa := red3 ∘ re₁ + red3 ∘ im₁ + red3 ∘ re₂` | `Adjoin.add_re`, … (`Field/Quadratic.lean`, all `rfl`) |
+| `unit_reduce` | `(x² + y²).re = x.re² + d·x.im² + y.re² + d·y.im²` and `.im = 2x.re·x.im + 2y.re·y.im` (`mul_re`, `mul_im`); apply `red3`; `(d : ZMod 3) = 2` from `d % 3 = 2` | `ZMod.natCast_mod` |
+| `circle_kappa_ne_zero` | 81 tuples | `decide` |
+| `kappa_ne_zero` | `unit_reduce` then the circle fact | two lines |
+| `colorable_three_integralPlane` | `colorable_of_residue` with `f = id`: an edge difference is `±s`, `s` a 3-integral unit vector, and the circle is closed under negation | `addCayley_adj`, `cosetResidue_apply_of_mem`, `ZMod.card` |
+| `integralPlane_167_adj_diamond` | the unit identity in `Adjoin 167 ℚ` and four denominators | `decide +kernel` first; fallback `Adjoin.ext` and `norm_num` |
+| `kappa_vanishes_at_three` | the adversary: `(−√3/2, 1/2)`, dens 2, `κ = 0 + (−1/2) + 1/2 = 0` already in `ℚ` | `norm_num` |
+
+**The mutation audit, run on the statements before any proof.** Dropping `d % 3 = 2` from `kappa_ne_zero` breaks it
+(`kappa_vanishes_at_three`). Dropping it from the barrier does **not** make the conclusion false: at `d ≡ 0, 1 (mod 3)` the whole plane is
+3-colourable through its usable residue plane at 3 (`[Moorhouse2010]` Cor. 8.3). The hypothesis is kept anyway, with the reason in the
+docstring: the milestone's content is the `d ≡ 2` case, where 3 is not usable and only the integral part colours, and restating
+Moorhouse's cases means three rules and nothing that consumes them. *Choice:* keep `hd`. *Alternative:* a case split on `d mod 3` with
+three rules. *Why:* no consumer, and the general form's other cases are prior art. *Confidence:* high.
+
+**The hand obligations** (prove / test / assume):
+
+| claim | status | local obligation or instrument |
+|---|---|---|
+| D2 (i): a character with exactly one unit coordinate has mean 0 at level `m ≥ 2` | **prove** [hand] | substitute `t ↦ t(1 + 3^{m−1}s)`: the non-unit term is unchanged mod `3^m`, the unit term picks up `Tr(αts)/3`, which sums to 0 over `s ∈ O/3` |
+| D2 (ii): both units, `\|S\| ≤ 2·9^{m/2}` | **prove** [hand, standard] | stationary phase: `m = 2k`, `t = t₀(1 + 3^k s)` gives `S = 9^k Σ_{αt₀² ≡ β (3^k)} ψ(…)`, at most two roots (Hensel, `p` odd); `m = 2k + 1` the same with a quadratic Gauss sum of modulus `3`. **Test:** measured `\|S\|` at `m = 3` is 53.6 against the bound 54 (§0 O1) |
+| D2 conclusion: every 3-colouring of `S_m` is pulled back from `S₁` | **prove** [hand] from (i)–(ii), each character primitive at exactly one level, and G54's Theorem D2-A | **assume** D2-A's applicability to finite abelian Cayley graphs (derived at FS-38) |
+| every 3-colouring of `S₁` is affine | **test** (§0 O1: exhaustive enumeration by the solver, 8 colourings, each verified; completeness is the solver's claim) | a hand derivation from the Fourier support is not attempted |
+| D3.4 (a) finite quotients are 3-groups; (b) circle points lift | **prove** [hand] | (a) Cauchy; (b) the rational parametrisation and density — **the obligation this pass found missing** |
+| D3.5 finite forcer ⟺ `G₃` forces | **prove** [hand] | ⟸ compactness over a countable vertex set (a pointwise-convergent subsequence of separating colourings of an exhausting chain); ⟹ `Forces` is monotone in the graph |
+| D3.7 the quotient screen | **prove** [hand] | pullback along `Λ₀ → Λ₀/L` and translation; scope corrected to graphs with edge vectors in `W₀` |
+| D6: the local LP over a finite character index is exact up to ε | **prove** at odd split places [hand]; **measure** at the dyadic place | `a_k(α, β) = a_0(απ^k, βπ^{−k})` (substitute `t = π^k s`) and unit scaling fix the index `(v(α) + k, v(β) − k, αβ)`; characters whose every shell term has level `≥ L₀` read `≥ −ε(L₀)` by (ii)'s bound. At `p = 2` the stationary-phase bound needs its own derivation; until then the dyadic LP is a measurement |
+| D7: the pigeonhole lemma | **prove** [hand, three lines] | as written; no independence hypothesis |
+| routes' verdicts | **test** | every separable verdict by a colouring verified on every edge; every forced verdict a solver claim until an LRAT check; controls per §3 |
 
 ## §R Results
 

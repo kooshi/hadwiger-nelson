@@ -42,6 +42,23 @@ abbrev Plane (d : ℕ) : Type := Adjoin d ℚ × Adjoin d ℚ
 /-- A rational is **3-integral** when its denominator is prime to 3, i.e. nonzero in `ZMod 3`. -/
 def IsIntegral3 (q : ℚ) : Prop := ((q.den : ℕ) : ZMod 3) ≠ 0
 
+/-- **The 3-integral rationals** `ℤ₍₃₎`, a subring: denominators of sums and products divide products of denominators
+(`Rat.add_den_dvd`, `Rat.mul_den_dvd`). -/
+def ratIntegral3 : Subring ℚ where
+  carrier := {q | IsIntegral3 q}
+  add_mem' := sorry
+  mul_mem' := sorry
+  zero_mem' := sorry
+  one_mem' := sorry
+  neg_mem' := sorry
+
+/-- **Reduction modulo 3** on `ℤ₍₃₎`: `Rat.cast` into the field `ZMod 3`, a ring homomorphism there because the casts of
+sums and products agree once denominators do not vanish (`Rat.cast_add_of_ne_zero`, `Rat.cast_mul_of_ne_zero`). -/
+noncomputable def red3 : ratIntegral3 →+* ZMod 3 := sorry
+
+/-- The reduction is the cast. -/
+theorem red3_apply (q : ratIntegral3) : red3 q = ((q : ℚ) : ZMod 3) := sorry
+
 /-- **The 3-integral vectors**: all four rational coordinates 3-integral. -/
 def threeIntegral (d : ℕ) : AddSubgroup (Plane d) where
   carrier := {v | IsIntegral3 v.1.re ∧ IsIntegral3 v.1.im ∧ IsIntegral3 v.2.re ∧ IsIntegral3 v.2.im}
@@ -49,22 +66,37 @@ def threeIntegral (d : ℕ) : AddSubgroup (Plane d) where
   zero_mem' := sorry
   neg_mem' := sorry
 
-/-- **The linear rule** `a + b + c (mod 3)` for `v = (a + b√d, c + e√d)`, with each rational read in `ZMod 3` (its denominator
-is invertible there). Additive because `Rat.cast` into `ZMod 3` is additive on rationals whose denominators do not vanish. -/
+/-- **The linear rule** `a + b + c (mod 3)` for `v = (a + b√d, c + e√d)`, each rational reduced by `red3`. -/
 noncomputable def kappa (d : ℕ) : threeIntegral d →+ ZMod 3 := sorry
 
 /-- The rule, on coordinates. -/
 theorem kappa_apply {d : ℕ} (v : threeIntegral d) :
     kappa d v = ((v : Plane d).1.re : ZMod 3) + ((v : Plane d).1.im : ZMod 3) + ((v : Plane d).2.re : ZMod 3) := sorry
 
-/-- **The eight-point circle of `𝔽₉²` misses the kernel of the rule**: writing a point as `(a + bt, c + et)` with `t² = 2`,
-the circle `x² + y² = 1` is `a² + 2b² + c² + 2e² = 1 ∧ ab + ce = 0`, and on it `a + b + c ≠ 0`. -/
+/-- **The eight-point circle of `𝔽₉²` misses the kernel of the rule**, in the shape the reduction produces: a 3-integral unit
+vector `(a + b√d, c + e√d)` has `a² + d·b² + c² + d·e² = 1` and `2ab + 2ce = 0`, which modulo 3 with `d ≡ 2` read as below;
+on those 8 of the 81 component tuples `a + b + c ≠ 0`. -/
 theorem circle_kappa_ne_zero :
-    ∀ a b c e : ZMod 3, a ^ 2 + 2 * b ^ 2 + c ^ 2 + 2 * e ^ 2 = 1 → a * b + c * e = 0 → a + b + c ≠ 0 := sorry
+    ∀ a b c e : ZMod 3, a ^ 2 + 2 * b ^ 2 + c ^ 2 + 2 * e ^ 2 = 1 → 2 * a * b + 2 * c * e = 0 → a + b + c ≠ 0 := sorry
+
+/-- **The unit condition reduced**: a 3-integral unit vector's components satisfy the circle equations of `𝔽₉²` in `ZMod 3`
+when `d ≡ 2 (mod 3)`. -/
+theorem unit_reduce {d : ℕ} (hd : d % 3 = 2) {v : Plane d} (hv : v.1 ^ 2 + v.2 ^ 2 = 1) (h3 : v ∈ threeIntegral d) :
+    (v.1.re : ZMod 3) ^ 2 + 2 * (v.1.im : ZMod 3) ^ 2 + (v.2.re : ZMod 3) ^ 2 + 2 * (v.2.im : ZMod 3) ^ 2 = 1 ∧
+      2 * (v.1.re : ZMod 3) * (v.1.im : ZMod 3) + 2 * (v.2.re : ZMod 3) * (v.2.im : ZMod 3) = 0 := sorry
 
 /-- **The rule never vanishes on a 3-integral unit vector** when `d ≡ 2 (mod 3)`. -/
 theorem kappa_ne_zero {d : ℕ} (hd : d % 3 = 2) {v : Plane d} (hv : v.1 ^ 2 + v.2 ^ 2 = 1) (h3 : v ∈ threeIntegral d) :
     kappa d ⟨v, h3⟩ ≠ 0 := sorry
+
+/-- **The congruence is used** — the adversarial member. At `d = 3` (ramified at 3) the vector `(−√3/2, 1/2)` is a 3-integral
+unit vector on which the rule vanishes, so `kappa_ne_zero` fails without `d ≡ 2 (mod 3)`. (The barrier's *conclusion* still
+holds at `d ≡ 0, 1 (mod 3)`, where the whole plane is 3-coloured through the residue plane at 3, `[Moorhouse2010]` Cor. 8.3,
+by a different rule; that prior art is not restated here.) -/
+theorem kappa_vanishes_at_three :
+    ∃ h : ((⟨0, -1 / 2⟩, ⟨1 / 2, 0⟩) : Plane 3) ∈ threeIntegral 3,
+      ((⟨0, -1 / 2⟩, ⟨1 / 2, 0⟩) : Plane 3).1 ^ 2 + ((⟨0, -1 / 2⟩, ⟨1 / 2, 0⟩) : Plane 3).2 ^ 2 = 1 ∧
+        kappa 3 ⟨_, h⟩ = 0 := sorry
 
 /-- **The plane over `ℚ(√d)` with only its 3-integral directions**: the Cayley graph of `Plane d` on the unit vectors in
 `threeIntegral d`. -/
