@@ -439,3 +439,16 @@ decided by exact arithmetic, so a refusal is robust and a colourable verdict mea
 ## §R Results
 
 *(Phase records, newest last.)*
+
+### R-D — phase D, the kernel barrier: LANDED (2026-09-17, `073a91e`; implementer Opus 5, reviewed by artifact)
+
+`colorable_three_integralDirectionPlane`: for `d ≡ 2 (mod 3)` the plane over `ℚ(√d)` restricted to its 3-integral directions is
+3-colourable, on exactly `[propext, Classical.choice, Quot.sound]`, no native purchase. **Gate, re-checked by the reviewer:** zero `sorry`
+(grep 0); the diff removes only `:= sorry` endings (no public statement changed); axioms log
+`build/gate/axioms/20260917T065657Z-1476791.log` (10 new records, standard three); vacuity green, counts
+`declarations=6588 refutations-skipped=267`, sites unchanged at 260; build 172/172; architecture PASS; lint 0 of 20 declarations.
+Controls on scratch copies: four planted faults refused, their negations proved (so they fail for being false, not by a stuck
+reduction), and `hd`'s mutation proved load-bearing from the adversary. **Owed at the close:** `CLAUDE.md` trust-ledger count 966 → 976
+and the vacuity counts line; `scripts/vacuity-baseline.txt`'s header. **Declined, with reason:** a public `DecidablePred IsThreeIntegral`
+instance and a public `mem_threeIntegral` (no consumer this milestone).
+
