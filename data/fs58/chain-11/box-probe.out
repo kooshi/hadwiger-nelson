@@ -1,0 +1,10 @@
+data/fs58/chain-11/pool-10.json: d=11 N=10 |W0|=36 reduced max coord 5
+  R=6: 28561 points, 294644 edges, mean degree 20.6; 3-colourable: True
+  u=(-2, -2, 2, 1): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT
+  u=(-2, 2, 2, -1): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT
+  u=(-2, 2, -1, 2): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT
+data/fs58/chain-11/pool-10.json: d=11 N=10 |W0|=36 reduced max coord 5
+  R=9: 130321 points, 1627148 edges, mean degree 25.0; 3-colourable: True
+  u=(-2, -2, 2, 1): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT
+  u=(-2, 2, 2, -1): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT
+  u=(-2, 2, -1, 2): identify 2w: UNSAT; separate 3w: UNSAT; identify 3w: SAT

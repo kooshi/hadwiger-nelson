@@ -452,3 +452,44 @@ reduction), and `hd`'s mutation proved load-bearing from the adversary. **Owed a
 and the vacuity counts line; `scripts/vacuity-baseline.txt`'s header. **Declined, with reason:** a public `DecidablePred IsThreeIntegral`
 instance and a public `mem_threeIntegral` (no consumer this milestone).
 
+### R-B1 — phase B, the quotient screen over `ℚ(√11)`: nothing killed, for a structural reason (2026-09-17, `ced5722`; implementer Opus 5)
+
+* **The plan's denominator list was wrong** (de Bruijn's error, caught by the implementer): `W₃(N)` for `N = 10, 20, 40, 70, 140, 280` is
+  **one set of 36 vectors**, because every prime dividing those `N` other than 5 (that is, 2 and 7) is conjugation-stable over
+  `ℚ(√11)`, where every unit vector is integral. §0 O5's counts (24 outside `ℚ(i)` at each of them) showed it and were not read. The
+  pool first grows at `N = 50` (100 vectors), 130, 230 (108), 250 (196).
+* **Every periodic 3-colouring found is affine.** Across 427 lattice records at `N = 10` and `50`, 399 quotients refuse three colours; on
+  the 21 that accept them exactly one admissible linear form (up to sign) descends, and a non-affine colouring is refused (solver
+  claim). An affine colouring never separates `3u`, so the screen **cannot** kill this pool on any lattice. P1 (0.8 that it kills
+  `W₃(10)`) lost.
+* Controls: seven parts, all `CONTROL PASS`; a mutation audit of nine planted faults, all red. The least character mean of `W₀` over
+  its dual torus is about −0.596 (below −1/2), so the ratio bound is not what refuses the quotients.
+
+### R-B2 — the forced pair: box pieces over `ℚ(√11)` force `0` and `3w` equal at three colours (2026-09-17) — **solver claims, two codebases, independent build; certificate owed (B3)**
+
+`tools/fs58_box.py` (box pieces `|x_i| ≤ R` of `Cay(ℤ[W₀], W₀)`, `W₀` the 36 unit vectors of `ℚ(√11)(i)` with denominator dividing 10,
+coordinates in a basis LLL-reduced in the Minkowski embedding) → `data/fs58/chain-11/box-probe.out`; `tools/fs58_box_indep.py` (points
+rebuilt as exact vectors from the pool's own unreduced basis, edges from a fresh enumeration of unit vectors by exact membership, the
+query written as DIMACS and solved by the CaDiCaL binary and by Glucose4) → `box-indep.out`.
+
+| piece | points | edges | identify `(0, 2w)` | separate `(0, 3w)` | identify `(0, 3w)` (control) |
+|---|---|---|---|---|---|
+| `R = 6` | 28,561 | 294,644 | **UNSAT** (3 directions) | **UNSAT** (3 directions) | SAT |
+| `R = 9` | 130,321 | 1,627,148 | **UNSAT** | **UNSAT** (CaDiCaL and Glucose4, independent build; 2 directions) | SAT, model verified |
+
+A further control: identifying `0` with `3·(basis vector)` (affine value 0, not a direction multiple) is SAT with a verified model. So
+the identification encoding can answer yes, and it answers no exactly at `2w`.
+
+**What it means, if the certificate holds.** For `w = (3√11/10, −1/10)`, the finite piece `H` (28,561 points) forces `c(0) = c(3w)` in
+every 3-colouring, and separates `0` from `2w` (a virtual edge, D3.8). Over `ℚ(√11)`, `1/3 = 1 + 1 + v + v̄` with `v = (−5 + i√11)/6` a
+unit vector (`tools`-side search, N = 12). So the chain (G55) closes with four copies: transporting `H` by the rotations `w̄, w̄, w̄v, w̄v̄`
+forces `c(0) = c(3) = c(6) = c(6 + 3v) = c(6 + 3v + 3v̄) = c(1)`, while `0` and `1` are adjacent. **χ(ℚ(√11)²) ≥ 4**, and with
+`[Fischer1990]`'s four colours, **χ(ℚ(√11)²) = 4** — by §PA, the first real quadratic field whose plane is known to need four colours.
+
+**Status: not yet claimed.** Owed before any sentence outside this plan: the forcing core extracted from the refutation, the chained
+witness built and refuted directly, every edge checked in exact arithmetic by a checker that shares no code with the generator, the
+refutation checked by a proof checker that is not the solver, and the kernel route priced (B3). *Reading:* the thick box forces where
+word balls (§0 O3) and every periodic screen (R-B1) could not; this is the rigidity D3.4 predicted, arriving at finite size.
+*Negative, same session:* `ℚ(√23)` with 12 directions (`N = 8, 56`) forces nothing at `R = 7`; `ℚ(√23)` with 36 (`N = 40`) and `ℚ(√167)`
+(`N = 28, 56, 140`) have reduced coordinates up to 8–49, too large for boxes that contain `3w` at this size.
+

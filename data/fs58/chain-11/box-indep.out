@@ -1,0 +1,17 @@
+independent build R=6: 28561 points, 294644 edges; query identify (0, 0·w) with w = (6, 0, 0, 0)
+  CaDiCaL binary exit 10 (10 SAT, 20 UNSAT)
+  Glucose4: SAT
+  model verified proper; c(p0) = 0 c(q) = 0
+independent build R=9: 130321 points, 1627148 edges; query identify (0, 3·w) with w = (0, 3, -1, 0)
+  CaDiCaL binary exit 10 (10 SAT, 20 UNSAT)
+  Glucose4: SAT
+  model verified proper; c(p0) = 0 c(q) = 0
+independent build R=9: 130321 points, 1627148 edges; query separate (0, 3·w) with w = (0, 3, -1, 0)
+  CaDiCaL binary exit 20 (10 SAT, 20 UNSAT)
+  Glucose4: UNSAT
+independent build R=9: 130321 points, 1627148 edges; query identify (0, 2·w) with w = (0, 3, -1, 0)
+  CaDiCaL binary exit 20 (10 SAT, 20 UNSAT)
+  Glucose4: UNSAT
+independent build R=9: 130321 points, 1627148 edges; query separate (0, 3·w) with w = (0, 3, 1, 0)
+  CaDiCaL binary exit 20 (10 SAT, 20 UNSAT)
+  Glucose4: UNSAT
