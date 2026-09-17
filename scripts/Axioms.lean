@@ -1464,6 +1464,25 @@ packing. `colorable_finitePlane3` is the same pipeline on a plane small enough t
 #print axioms CayleyCert.colorable_finitePlane3
 #print axioms CayleyCert.colorable_finitePlane23_eight
 
+/-! ## FS-58 phase D — the 3-adic barrier
+
+For `d ≡ 2 (mod 3)` the plane over `ℚ(√d)`, held as `Adjoin d ℚ × Adjoin d ℚ`, restricted to its 3-integral
+directions, is 3-colourable: Theorem A with the linear rule `a + b + c mod 3`, nonzero on every 3-integral unit
+vector because the eight-point circle of `𝔽₉²` misses its kernel. The finite facts are `decide` and
+`decide +kernel`; no native evaluation is bought. `kappa_vanishingVectorThree` is the adversary showing the
+congruence is used, `integralDirectionPlane_adj_diamond167` the inhabitant showing the graph has edges. -/
+
+#print axioms ThreeAdicBarrier.toZModThree_apply
+#print axioms ThreeAdicBarrier.kappa_apply
+#print axioms ThreeAdicBarrier.circle_kappa_ne_zero
+#print axioms ThreeAdicBarrier.unit_reduce
+#print axioms ThreeAdicBarrier.kappa_ne_zero
+#print axioms ThreeAdicBarrier.vanishingVectorThree_mem
+#print axioms ThreeAdicBarrier.vanishingVectorThree_unit
+#print axioms ThreeAdicBarrier.kappa_vanishingVectorThree
+#print axioms ThreeAdicBarrier.colorable_three_integralDirectionPlane
+#print axioms ThreeAdicBarrier.integralDirectionPlane_adj_diamond167
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
