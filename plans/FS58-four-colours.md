@@ -539,3 +539,19 @@ word balls (§0 O3) and every periodic screen (R-B1) could not; this is the rigi
 with 3 in the denominator allowed — the chain needs only `1/δ ∈ R`; odd girth of each pool as the first screen), span boxes at physically
 matched margins, core extraction and the four-copy chain as in B3 (`1/3` as a sum of unit vectors over each field to be found).
 
+### R-D2 — `χ(ℚ(√11)²) ≥ 4` in the kernel (2026-09-17, `05aee38`; implementer Opus 5; reviewed by artifact)
+
+**`four_le_chromaticNumber_planeOver_eleven : 4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {11}))).chromaticNumber`**, and its
+general form `four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem (h11 : √11 ∈ F)`, on exactly `[propext, Classical.choice, Quot.sound]`
+(axioms log `build/gate/axioms/20260917T082649Z-1592099.log`, line 1143, re-read by the reviewer), no `native_decide`, no `sorry`
+(grep of the new modules empty). The 204-point witness enters as a `UDCert` over `Q4` with only the `1` and `√11` slots used
+(`Q4.elevenOnly`), through a generic pair `UDCert.point_mem_planeOver` / `UDCert.chromaticNumber_le_planeOver` (any subring whose
+evaluations lie in `F`), and the refutation as a two-port `Gadget` from the LRAT (existing emitters unchanged; a thin driver
+`tools/fs58_emit_witness.py` asserts the formula equals the checker's clause for clause and the proof's sha256). Control:
+`eleven204_colorable_four`, a kernel-checked 4-colouring of the same graph. Six planted faults refused at their own lines. **Cost: 32.8 CPU
+seconds** in total (geometry 11.3 s, LRAT 8.8 s), against an estimate of about 40. Gates: build green, vacuity green
+(`declarations=6632 refutations-skipped=268 sites=262 … generic=240 unknown=2`), architecture PASS, axioms 990 clean.
+**Read aloud:** the graph is unit distance in `ℂ` restricted to points with both coordinates in `ℚ(√11)`; every proper colouring uses at
+least four colours. The matching upper bound (`[Fischer1990]` Thm 9; `[Moorhouse2010]` Thm 8.1) is not in the kernel. **Owed at the close:**
+`CLAUDE.md` counts (trust ledger 990; gate line above); cite `[Moorhouse2010]` Thm 8.1 beside Fischer in the instance's docstring.
+
