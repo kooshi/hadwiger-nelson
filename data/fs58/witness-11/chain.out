@@ -1,0 +1,2 @@
+solver-free route: each copy forces its ends equal by exhaustive search (nodes 445, 231, 201, 189); identification colourings verified
+G*: 204 points (copies [52, 52, 52, 52]), 455 unit edges; not 3-colourable: CaDiCaL exit 20 in 0.03 s, Glucose4 UNSAT in 0.00 s; LRAT 0.05 MB (0.02 MB gz), 461 additions; its core touches 1160 clauses on 204 points

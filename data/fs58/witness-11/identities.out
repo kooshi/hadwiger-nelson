@@ -1,0 +1,4 @@
+identities, exact over Q(sqrt11, i):
+  w = (3 sqrt11 - i)/10 and v = (-5 + i sqrt11)/6 are unit vectors; 1 + 1 + v + vbar = 1/3
+  T_k(z) = t_k + r_k z, r = (wbar, wbar, wbar v, wbar vbar): T_k(0) = t_k and T_k(3w) = t_{k+1}, t = 0, 3, 6, 6 + 3v, 1: holds
+  the same chain (r = ubar (1, 1, v, vbar)) closes at t_5 = 1 for all 36 directions u in W0
