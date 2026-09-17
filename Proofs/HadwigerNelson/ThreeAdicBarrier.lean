@@ -1,62 +1,85 @@
+import Mathlib.Combinatorics.SimpleGraph.Cayley
+import Mathlib.Algebra.Field.ZMod
 import Proofs.HadwigerNelson.ResidueColouring
+import Proofs.HadwigerNelson.Field.Quadratic
 
 /-!
-# The 3-adic barrier: 3-integral unit-distance graphs over `ℚ(√d)`, `d ≡ 2 (mod 3)`, are 3-colourable
+# The 3-adic barrier: the plane over `ℚ(√d)`, `d ≡ 2 (mod 3)`, with 3-integral directions is 3-colourable
 
-FS-58 (`plans/FS58-four-colours.md` §2 D1; found in `plans/FS58-prelude-seven-cycle-gadget.md` §4 for `d = 167`).
+FS-58 (`plans/FS58-four-colours.md` §2 D1; found for `d = 167` in `plans/FS58-prelude-seven-cycle-gadget.md` §4).
 
-When `d ≡ 2 (mod 3)` the prime 3 is inert in `ℚ(√d)`, and reduction sends `ℤ₍₃₎[√d]` onto `𝔽₉ = 𝔽₃[t]/(t² + 1)`
-with `√d ↦ t`, because `d ≡ −1 (mod 3)`. A unit vector whose coordinates have denominator prime to 3 reduces to a
-point of the circle `x² + y² = 1` of `𝔽₉²`, which has eight points, and the linear rule
-`κ(x₀ + x₁t, y₀ + y₁t) = x₀ + x₁ + y₀` is nonzero on all eight. So `κ ∘ reduction` is an additive map, nonzero on
-every 3-integral unit vector, and Theorem A (`colorable_of_residue`) three-colours every unit-distance graph whose
-edge vectors are 3-integral — at every size, with no solver.
+**The model.** A point of the plane over `ℚ(√d)` is a pair of `Adjoin d ℚ` — coordinates `re + im·√d` held as data, so each
+point has exactly one representation and no map out of the plane needs `√d` to be irrational. The graph is `integralPlane d`,
+the Cayley graph of that group on the unit vectors whose four rational coordinates have denominators prime to 3. Every
+unit-distance graph over `ℚ(√d)` whose edge vectors are 3-integral is, up to translating each component, a subgraph of it.
+When `d` is not a square (every `d ≡ 2 mod 3`) evaluation at `√d` identifies `Plane d` with `ℚ(√d)²` and this graph with the
+unit-distance graph there restricted to those directions; that transfer to `ℂ` is not stated here, because nothing consumes it
+(a colouring transfers only along an injective map, and the injectivity is the irrationality this model avoids buying).
 
-The consequence FS-58 uses: a four-chromatic unit-distance graph over such a field needs an edge whose direction has
-3 in its denominator.
+**Why it is true.** When `d ≡ 2 (mod 3)`, reducing the coordinates modulo 3 sends `ℤ₍₃₎[√d]` onto `𝔽₉ = 𝔽₃[t]/(t² + 1)` with
+`√d ↦ t`. A 3-integral unit vector `(a + b√d, c + e√d)` reduces to a point of the eight-point circle of `𝔽₉²`, and on that
+circle `a + b + c` never vanishes (`circle_kappa_ne_zero`, 81 cases). So `kappa` — the additive map `(a + b + c) mod 3` on the
+3-integral vectors — is nonzero on every edge vector, and Theorem A (`colorable_of_residue`) three-colours the graph, at every
+size and with no solver. **Consequence (FS-58):** a four-chromatic unit-distance graph over such a field has an edge whose
+direction has 3 in a denominator.
 
 SKELETON (WORKFLOW step 3): statements only; every `sorry` is a tracked leaf of FS-58 phase D.
 -/
 
 namespace HadwigerNelson.ThreeAdicBarrier
 
-/-- The point `((a + b√d)/m, (c + e√d)/m)` of the plane, as a complex number. -/
-noncomputable def point (d : ℕ) (a b c e m : ℤ) : ℂ :=
-  ⟨(a + b * Real.sqrt d) / m, (c + e * Real.sqrt d) / m⟩
+open SimpleGraph
 
-/-- **The 3-integral vectors of the plane over `ℚ(√d)`**: both coordinates have a denominator prime to 3. -/
-def threeIntegral (d : ℕ) : AddSubgroup ℂ where
-  carrier := {z | ∃ a b c e m : ℤ, ¬ (3 : ℤ) ∣ m ∧ z = point d a b c e m}
+/-- `ℚ`'s scalar action for `Adjoin d ℚ`: ordinary multiplication, as for `ℤ` (`Field/Quadratic.lean`). Declared here, in
+a leaf module, so that `Field/Quadratic.lean` — which the certificates import — is not touched. -/
+instance : NatScalar ℚ where
+  smul n x := (n : ℚ) * x
+  smul_eq _ _ := rfl
+
+/-- **The plane over `ℚ(√d)`**, coordinates as data. -/
+abbrev Plane (d : ℕ) : Type := Adjoin d ℚ × Adjoin d ℚ
+
+/-- A rational is **3-integral** when its denominator is prime to 3, i.e. nonzero in `ZMod 3`. -/
+def IsIntegral3 (q : ℚ) : Prop := ((q.den : ℕ) : ZMod 3) ≠ 0
+
+/-- **The 3-integral vectors**: all four rational coordinates 3-integral. -/
+def threeIntegral (d : ℕ) : AddSubgroup (Plane d) where
+  carrier := {v | IsIntegral3 v.1.re ∧ IsIntegral3 v.1.im ∧ IsIntegral3 v.2.re ∧ IsIntegral3 v.2.im}
   add_mem' := sorry
   zero_mem' := sorry
   neg_mem' := sorry
 
-/-- **The linear rule** `(a + b + c)·m⁻¹ (mod 3)` on the 3-integral vectors. Well defined because `√d` is
-irrational when `d ≡ 2 (mod 3)` (no square is), so the representation is unique up to scaling by an integer prime
-to 3. -/
-noncomputable def kappa (d : ℕ) (hd : d % 3 = 2) : threeIntegral d →+ ZMod 3 := sorry
+/-- **The linear rule** `a + b + c (mod 3)` for `v = (a + b√d, c + e√d)`, with each rational read in `ZMod 3` (its denominator
+is invertible there). Additive because `Rat.cast` into `ZMod 3` is additive on rationals whose denominators do not vanish. -/
+noncomputable def kappa (d : ℕ) : threeIntegral d →+ ZMod 3 := sorry
 
-/-- The rule, on a representation. -/
-theorem kappa_point {d : ℕ} (hd : d % 3 = 2) {a b c e m : ℤ} (hm : ¬ (3 : ℤ) ∣ m) :
-    kappa d hd ⟨point d a b c e m, ⟨a, b, c, e, m, hm, rfl⟩⟩ = (a + b + c) * ((m : ZMod 3))⁻¹ := sorry
+/-- The rule, on coordinates. -/
+theorem kappa_apply {d : ℕ} (v : threeIntegral d) :
+    kappa d v = ((v : Plane d).1.re : ZMod 3) + ((v : Plane d).1.im : ZMod 3) + ((v : Plane d).2.re : ZMod 3) := sorry
 
-/-- **The rule never vanishes on a 3-integral unit vector** — the eight-point circle of `𝔽₉²`. -/
-theorem kappa_ne_zero {d : ℕ} (hd : d % 3 = 2) {z : threeIntegral d} (hz : ‖(z : ℂ)‖ = 1) :
-    kappa d hd z ≠ 0 := sorry
+/-- **The eight-point circle of `𝔽₉²` misses the kernel of the rule**: writing a point as `(a + bt, c + et)` with `t² = 2`,
+the circle `x² + y² = 1` is `a² + 2b² + c² + 2e² = 1 ∧ ab + ce = 0`, and on it `a + b + c ≠ 0`. -/
+theorem circle_kappa_ne_zero :
+    ∀ a b c e : ZMod 3, a ^ 2 + 2 * b ^ 2 + c ^ 2 + 2 * e ^ 2 = 1 → a * b + c * e = 0 → a + b + c ≠ 0 := sorry
 
-/-- **The 3-adic barrier.** Every unit-distance graph over `ℚ(√d)`, `d ≡ 2 (mod 3)`, whose edge vectors are
-3-integral is 3-colourable. -/
-theorem colorable_three_of_threeIntegral {d : ℕ} (hd : d % 3 = 2) {S : Set ℂ}
-    (hS : ∀ z ∈ S, ∀ w ∈ S, dist z w = 1 → z - w ∈ threeIntegral d) :
-    ((unitDistance ℂ).induce S).Colorable 3 := sorry
+/-- **The rule never vanishes on a 3-integral unit vector** when `d ≡ 2 (mod 3)`. -/
+theorem kappa_ne_zero {d : ℕ} (hd : d % 3 = 2) {v : Plane d} (hv : v.1 ^ 2 + v.2 ^ 2 = 1) (h3 : v ∈ threeIntegral d) :
+    kappa d ⟨v, h3⟩ ≠ 0 := sorry
+
+/-- **The plane over `ℚ(√d)` with only its 3-integral directions**: the Cayley graph of `Plane d` on the unit vectors in
+`threeIntegral d`. -/
+def integralPlane (d : ℕ) : SimpleGraph (Plane d) :=
+  addCayley {v : Plane d | v.1 ^ 2 + v.2 ^ 2 = 1 ∧ v ∈ threeIntegral d}
+
+/-- **The 3-adic barrier.** For `d ≡ 2 (mod 3)`, the plane over `ℚ(√d)` restricted to 3-integral directions is 3-colourable. -/
+theorem colorable_three_integralPlane {d : ℕ} (hd : d % 3 = 2) : (integralPlane d).Colorable 3 := sorry
 
 /-- A 3-integral unit vector of `ℚ(√167)` outside `ℚ(i)`: a diamond side of the prelude's seven-cycle,
-`((−15 − 7√167)/140, (105 − √167)/140)`. The model of `hS`'s edges: the barrier's hypothesis is met by real edges. -/
-theorem norm_point_167_diamond : ‖point 167 (-15) (-7) 105 (-1) 140‖ = 1 := sorry
+`((−15 − 7√167)/140, (105 − √167)/140)`. -/
+def diamond167 : Plane 167 := (⟨-15 / 140, -7 / 140⟩, ⟨105 / 140, -1 / 140⟩)
 
-/-- **The inhabitant**: the whole 3-integral plane over `ℚ(√167)` is 3-colourable, and it has edges
-(`norm_point_167_diamond`). -/
-theorem colorable_three_threeIntegral_167 :
-    ((unitDistance ℂ).induce (threeIntegral 167 : Set ℂ)).Colorable 3 := sorry
+/-- **The model of the barrier's graph has edges**: `diamond167` is a 3-integral unit vector, so the origin and it are
+adjacent in `integralPlane 167`, and the three colours are spent on a graph that is not empty. -/
+theorem integralPlane_167_adj_diamond : (integralPlane 167).Adj 0 diamond167 := sorry
 
 end HadwigerNelson.ThreeAdicBarrier

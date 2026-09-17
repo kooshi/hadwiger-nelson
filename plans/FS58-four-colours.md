@@ -273,18 +273,52 @@ equidistribution (phase E states it and decides the carry-forward). A null in B 
 
 ## §S — the skeleton
 
-`Proofs/HadwigerNelson/ThreeAdicBarrier.lean` (phase D; statements with `sorry`, elaborated 2026-09-17):
-`point`, `threeIntegral d : AddSubgroup ℂ`, `kappa d hd : threeIntegral d →+ ZMod 3`, `kappa_point`, `kappa_ne_zero`,
-**`colorable_three_of_threeIntegral`** (the barrier for every `d ≡ 2 mod 3`), and the inhabitant pair `norm_point_167_diamond`,
-`colorable_three_threeIntegral_167`.
+`Proofs/HadwigerNelson/ThreeAdicBarrier.lean` (phase D; statements with `sorry`; revised by the domain pass M1):
+* `instance : NatScalar ℚ` (leaf-local, so `Field/Quadratic.lean` is untouched);
+* `Plane d := Adjoin d ℚ × Adjoin d ℚ` and `IsIntegral3 q := (q.den : ZMod 3) ≠ 0`;
+* `threeIntegral d : AddSubgroup (Plane d)` (all four coordinates 3-integral);
+* `kappa d : threeIntegral d →+ ZMod 3` (`a + b + c`, each rational cast into `ZMod 3`) and `kappa_apply`;
+* `circle_kappa_ne_zero` (the 81-case fact over 𝔽₃ components) and `kappa_ne_zero` (under `d % 3 = 2`);
+* `integralPlane d := addCayley {v | v.1² + v.2² = 1 ∧ v ∈ threeIntegral d}`;
+* **`colorable_three_integralPlane : d % 3 = 2 → (integralPlane d).Colorable 3`**, the barrier;
+* the inhabitant `diamond167` with `integralPlane_167_adj_diamond` (the graph has edges).
+
+Checked outside Lean before stating: the 𝔽₃ fact by brute force (8 circle points, `a + b + c` never 0), and `diamond167` exactly
+(`a² + 167b² + c² + 167e² = 1`, `2ab + 2ce = 0`, denominators 28, 20, 4, 140).
 
 Jackpot statements (not in the tree until a witness exists; phase D generates them):
-`four_le_chromaticNumber_planeOver_sqrt11 : 4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {11}))).chromaticNumber`, with the
-upper half `chromaticNumber … = 4` from the plane at 7 (row 57's hand step at 7 is the gap to name).
+`four_le_chromaticNumber_planeOver_sqrt11 : 4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {11}))).chromaticNumber`.
+A lower bound transfers from a drawing in `Plane 11` to `ℂ` along evaluation with no injectivity: a graph homomorphism suffices. The
+upper half, `= 4`, is `[Fischer1990]`'s and is not restated.
 
 ## §M Modeling passes
 
-*(WORKFLOW step 5 — to be run fresh after this plan is committed.)*
+### M1 — domain (2026-09-17)
+
+**Decisions, kernel side** (choice · alternative · why · confidence):
+
+| # | choice | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| 1 | the plane is `Adjoin d ℚ × Adjoin d ℚ`: coordinates as data | points of `ℂ` with an existential `(a, b, c, e, m)` representation (the first skeleton) | the linear rule must be a function; on `ℂ` it needs a chosen representation, a proof that the choice does not matter, and the irrationality of `√d` to prove it — three purchases the problem does not ask for. On the data model the representation is unique by construction | high |
+| 2 | 3-integrality is `(q.den : ZMod 3) ≠ 0` per coordinate, and the reduction is `Rat.cast` into the field `ZMod 3` | `padicValRat 3 q ≥ 0` and `ℤ_[3]`'s `toZMod` | `Rat.cast_add_of_ne_zero` and `Rat.cast_mul_of_ne_zero` are exactly the additivity and multiplicativity needed, under exactly this hypothesis; the p-adic route adds a completion no statement mentions | high |
+| 3 | no type for 𝔽₉: the circle fact is stated on four `ZMod 3` components (`a² + 2b² + c² + 2e² = 1 ∧ ab + ce = 0 → a + b + c ≠ 0`) | `Adjoin 2 (ZMod 3)` as the residue field, with a ring map onto it | the only use of 𝔽₉ is one 81-case check; a residue-ring type adds a `NatScalar (ZMod 3)` instance and a ring-map API that nothing else consumes. 𝔽₉ stays in the docstring, where the reader needs it | high — if FS-58 ever needs the tower `(O/3^m)²` in the kernel, this becomes `Adjoin 2 (ZMod (3^m))` |
+| 4 | the object is the Cayley graph `integralPlane d`; the theorem colours all of it | a theorem about a drawing `f : V → Plane d` with 3-integral unit edges (the `colorable_of_residue` shape) | "every unit-distance graph with 3-integral directions" *is* "every subgraph of a translate of this Cayley graph"; one statement says it all, and the drawing form is a two-line corollary with no consumer this milestone | high |
+| 5 | `kappa` takes no `d % 3 = 2` hypothesis; only `kappa_ne_zero` and the barrier do | the hypothesis on `kappa` itself | the rule is linear for every `d`; the congruence is needed only where the circle reduces to 𝔽₉'s. Index only what consumers need | high |
+| 6 | the transfer to `ℂ` / `planeOver` is **not stated** for the barrier | a `planeOver (fieldOfRadicands {d})` form | a colouring transfers only along an injective map, which costs the irrationality of `√d` plus the fact that `fieldOfRadicands {d} = {a + b√d}`; nothing this milestone consumes it. The jackpot is a *lower* bound and transfers along evaluation for free | medium — if the close's ledger row wants the `ℂ` sentence, it is FS-47-style work, priced then |
+
+**Decisions, tools side** (the phases' domain, fixed before code):
+
+| # | choice | alternative weighed | why | confidence |
+|---|---|---|---|---|
+| T1 | route C works in **coordinates of a ℤ-basis of `ℤ[W₀]`** (a lattice `≅ ℤ⁴`): a quotient is a full-rank sublattice `L` (a 4 × 4 integer matrix), the finite group `ℤ⁴/L` comes from its Smith normal form, a generator is a loop iff it lies in `L`, and `3u ≡ 0 mod L` makes the pair trivially equal | the prelude's global denominator `M = 58800` with 4-vectors over it | the Cayley graph depends only on the relation module of `W₀` (`[FourUnitVectors2025]`'s Heuberger matrix); denominators are incidental to it and overflow as heights grow | high |
+| T2 | route W works in **canonical reduced rationals** `(a, b, c, e, m)`, `gcd = 1`, `m > 0`, so points of any height hash, and 2- and 3-integrality read `2 ∤ m`, `3 ∤ m`; glue points (`S(x, 1) ∩ S(u, 1)`) by an exact square root in `ℚ(√d)` | points restricted to `u + W_N` (the §0 O6 probe) | O6's zero measures `W_N`; the pigeonhole needs the circle at every height, and glue points leave any fixed `W_N` | high |
+| T3 | a forcing query returns `Forced (solver claim)`, `Separable (colouring, verified on every edge)` or `Unknown (budget)`, and carries its control's outcome | a boolean | G21: a verdict carries its enumeration; a separable verdict is certified by its colouring, a forced one is not until an LRAT check | high |
+| T4 | an odd-subset witness is `(U, cycle points in order, anchor index per cycle vertex)`, verified exactly (unit cycle edges, unit anchor edges, `U` independent); the pigeonhole SAT runs on `T` with `T`'s unit edges | a boolean "odd" flag per subset | the final certificate is built from the witnesses; a flag cannot be re-checked | high |
+| T5 | the local LP of D6 indexes characters by `(v(α) + k, v(β) − k, class of αβ)` per shell | enumerating `(A, B)` up to a level (§0 O4's defect) | unit scaling `t ↦ ct` fixes shell averages on these orbits, so a finite index set covers every level, which is exactly what the truncated enumeration got wrong | medium — the class of `αβ` needs a precision that depends on the valuations; the obligation pass states it |
+
+**Seams checked.** The model of the barrier's hypotheses is `diamond167`: an edge exists, so three colours colour a nonempty
+graph. The adversarial member owed to the obligation pass is a unit vector at some `d ≡ 1 (mod 3)` on which `a + b + c ≡ 0`, which
+would show `hd` is used; if none exists, `kappa_ne_zero`'s hypothesis is too strong and the statement should say so.
 
 ## §R Results
 
