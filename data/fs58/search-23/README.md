@@ -13,8 +13,8 @@ extraction (`tools/fs58_search.py extract 23 q1+q5+12.1+60.2 1.5 data/fs58/witne
 at 7 (23 ≡ 2 = 3² mod 7, `χ(UD(𝔽₇, 2)) = 4`, row 52's bound at hand level) this would give **χ(ℚ(√23)²) = 4**.
 
 The pool: axis (4) + the (3/5, 4/5) family (8) + the orbit of `((7 + √23)/12, (7 − √23)/12)` (8) + the orbit of
-`((49 + √23)/60, (7 − 7√23)/60)` (16): 36 unit vectors, lattice covolume 1.14·10⁻⁴, least odd cycle 7, no linear form mod 3 nonzero
-on every generator. **Control inside the hit:** the same lattice without the (3/5, 4/5) family (`q1+12.1+60.2`, 28 directions) and with
+`((49 + √23)/60, (7 − 7√23)/60)` (16): 36 unit vectors, lattice covolume 1.14·10⁻⁴, least odd cycle 9 (4,528 edges inside BFS level 4 — no 5- or 7-cycle), no linear
+form mod 3 nonzero on every generator. **Control inside the hit:** the same lattice without the (3/5, 4/5) family (`q1+12.1+60.2`, 28 directions) and with
 only the axis and class 60 (`q1+60.2`) give the identical 440,077-point ball, and both are 3-colourable (models verified, 1.1–1.3 s).
 
 ## What was tried, what it measured, what it cost (all ℚ(√23) unless marked)

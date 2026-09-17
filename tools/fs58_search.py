@@ -1048,7 +1048,7 @@ def cmd_direct_witness(D, spec, R, out, lrat_core=False):
     _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pre, work, t0)
 
 
-def _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pre, work, t0):
+def _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pre, work, t0, provenance=None):
     """the reduced, translated witness from a refusing vertex set `core` (indices into X), refuted and written (see cmd_direct_witness)"""
     import numpy as np, gzip, subprocess
     from pysat.solvers import Glucose4, Minisat22
@@ -1138,6 +1138,8 @@ def _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pr
                          'p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit distances among the kept points re-derived exactly',
                          'generator': 'tools/fs58_search.py direct-witness'},
     }
+    if provenance:
+        obj['construction'].update(provenance)
     tmp = out / 'witness.json.tmp'
     with open(tmp, 'w') as f:
         json.dump(obj, f, indent=1, sort_keys=True)
@@ -1251,7 +1253,13 @@ def cmd_extract(D, spec, R, out, cap=2_000_000):
     pre = subprocess.run(['lean', '--print-prefix'], capture_output=True, text=True, check=True).stdout.strip()
     work = ROOT / 'build' / f'fs58-direct-{D}'
     work.mkdir(parents=True, exist_ok=True)
-    _emit_witness(D, spec, R, M, B, X, sorted(kept), W, n, piece_edge_count, len(kept), out, pre, work, t0)
+    rounds = [r for r in (json.loads(l) for l in steps.read_text().splitlines() if l.strip()) if r['step'].startswith('core-round-')]
+    _emit_witness(D, spec, R, M, B, X, sorted(kept), W, n, piece_edge_count, len(kept), out, pre, work, t0,
+                  provenance={'generator': 'tools/fs58_search.py extract (checkpoint: steps.jsonl)',
+                              'reduction': f'{len(rounds)} rounds of CaDiCaL assumption cores (one selector per vertex) to a fixpoint '
+                                           f'({n} -> {rounds[-1]["points_out"]} points), then deletion to 1-minimal with Glucose4, then '
+                                           'translated by -p so the axis edge p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit '
+                                           'distances among the kept points re-derived exactly'})
 
 
 def main():
