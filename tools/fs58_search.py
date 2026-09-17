@@ -16,11 +16,29 @@ Subcommands (every record is a JSONL line flushed and fsynced; a rerun skips rec
   survey D NMAX K SPEC            -> data/fs58/search-D/survey.jsonl: every union of <= K classes from SPEC (comma list of class names,
                                     or 'all'): size, covolume, largest reduced coordinate, bipartite?, 3-integral?, admissible linear
                                     forms mod 3, least odd cycle (BFS to a cap) and the number of odd closed walks of that length at 0
-  probe D POOLSPEC R-list [--dirs K] [--cap P] [--shape ball|span]
-                                 -> data/fs58/search-D/probe.jsonl: for the K shortest directions u (up to sign) of the pool, the piece
-                                    of lattice points within physical radius R of the midpoint of 0 and 3u in BOTH embeddings (shape
-                                    ball) or the span box widened by R (shape span); queries: plain 3-colourability, separate (0, 3u)
-                                    [UNSAT = forced], identify (0, 2u) [UNSAT = virtual edge], identify (0, 3u) [control]
+  survey-wide D NMAX NMAX3 CAP   -> the same records for bases {}, q1, q1+q5 joined with every pair (<= NMAX) and triple (<= NMAX3)
+  rank D [TOP]                    -> the surveyed pools ranked by least odd cycle, then largest reduced coordinate
+  probe D POOLSPEC R-list [--dirs K] [--cap P] [--wall S] [--shape ball|capsule|span] [--u CLASSES] [--ks 2,3,4]
+                                 -> data/fs58/search-D/probe.jsonl: for one direction u per class of the pool, a piece about the segment
+                                    [0, k_max u] (ball about its midpoint, capsule = within R of the segment, span box); queries: plain
+                                    3-colourability, separate (0, ku) [UNSAT = forced], identify (0, 2u) [UNSAT = virtual edge], identify
+                                    (0, ku) [controls]
+  qscreen D POOL KS LATTICES WALL -> data/fs58/search-D/qscreen.jsonl: the quotient screen (plan D3.7) on L = mZ^4 and random Hermite
+                                    lattices: a verified quotient colouring separating (0, ku) or identifying (0, 2u) kills that target
+  qscreen-many D MAXODD TOP KS LATTICES WALL -> qscreen-summary.jsonl over the TOP surveyed pools by covolume
+  rigidity D POOL R-list [WORDS] -> rigidity.jsonl: in the ball of radius R about 0, how many word-length <= WORDS pairs are forced
+                                    equal or different (a meter; unreliable near refusal, see data/fs58/search-23/README.md)
+  charmeans D MINCOV MAXODD       -> charmeans.jsonl: least character mean of each pool over the dual torus (float reading)
+  saturate D NMAX                 -> saturate.jsonl: lattices spanned by the axis and one or two classes, with every unit vector of their
+                                    denominator they hold
+  colour-scan D R-list MINCOV MAXODD CAP WALL [POOLS]  (FS58_JOBS workers, default 16)
+                                 -> colour-scan.jsonl: is the ball of radius R about 0 3-colourable at all? (3-non-integral pools: D1)
+  direct-witness D POOL R OUTDIR [--lrat-core]
+                                 -> a refusing ball shrunk to 1-minimal in one shot, emitted as witness.json + witness.lrat.gz for
+                                    tools/fs58_check_witness.py --radicand D
+  extract D POOL R OUTDIR [--stop-deletion]
+                                 -> the same for large balls, checkpointed in OUTDIR/steps.jsonl (assumption-core rounds to a fixpoint,
+                                    then Glucose4 deletion); resume = rerun the same command
 Plan: plans/FS58-four-colours.md R-B4 (carried to B5).
 """
 import sys, os, json, itertools, math, time, hashlib
@@ -1148,13 +1166,13 @@ def _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pr
     cnf.unlink()
     prf.unlink()
     print(f'direct witness over Q(sqrt{D}): pool {spec} (|W| = {len(W)}, M = {M}), ball piece R = {R}: {n} points, {piece_edge_count} edges -> deletion start {nv} -> '
-          f'1-minimal refusing set {nP} points; {len(Ed)} exact unit edges; CaDiCaL exit 20 in {cad_s:.2f} s (LRAT {len(raw)} bytes), '
+          f'refusing set {nP} points; {len(Ed)} exact unit edges; CaDiCaL exit 20 in {cad_s:.2f} s (LRAT {len(raw)} bytes), '
           f'Glucose4 {others["Glucose4"]}, Minisat22 {others["Minisat22"]}; deletion controls {ctl}; '
           f'{time.time() - t0:.1f} s; wrote {out}')
 
 
 # ================================================================ checkpointed extraction for large refusing pieces
-def cmd_extract(D, spec, R, out, cap=2_000_000):
+def cmd_extract(D, spec, R, out, cap=2_000_000, stop_deletion=False):
     """For a ball piece too large for a one-shot shrink (the checkpoint rule: any run over ~15 minutes resumes exactly):
       stage 1  assumption cores: CaDiCaL (pysat, one selector per vertex guarding its at-least-one clause) refuses the induced graph on
                the kept set, its failed assumptions become the next kept set; repeated to a fixpoint. Each round appended to
@@ -1221,6 +1239,13 @@ def cmd_extract(D, spec, R, out, cap=2_000_000):
         finished = dels[-1]['finished']
     else:
         pos, finished = 0, False
+    if not finished and stop_deletion:
+        print(f'  deletion stopped by request at position {pos}: the witness is the last recorded refusing set ({len(kept)} points), '
+              'refusing but NOT 1-minimal', flush=True)
+        finished = True
+        stopped_at = pos
+    else:
+        stopped_at = None
     if not finished:
         ks = sorted(kept)
         loc = {v: i for i, v in enumerate(ks)}
@@ -1257,9 +1282,12 @@ def cmd_extract(D, spec, R, out, cap=2_000_000):
     _emit_witness(D, spec, R, M, B, X, sorted(kept), W, n, piece_edge_count, len(kept), out, pre, work, t0,
                   provenance={'generator': 'tools/fs58_search.py extract (checkpoint: steps.jsonl)',
                               'reduction': f'{len(rounds)} rounds of CaDiCaL assumption cores (one selector per vertex) to a fixpoint '
-                                           f'({n} -> {rounds[-1]["points_out"]} points), then deletion to 1-minimal with Glucose4, then '
-                                           'translated by -p so the axis edge p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit '
-                                           'distances among the kept points re-derived exactly'})
+                                           f'({n} -> {rounds[-1]["points_out"]} points), then '
+                                           + ('deletion to 1-minimal with Glucose4, then ' if stopped_at is None else
+                                              f'Glucose4 deletion STOPPED after {stopped_at} of {rounds[-1]["points_out"]} tests (the '
+                                              'set is refusing, not 1-minimal), then ')
+                                           + 'translated by -p so the axis edge p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit '
+                                             'distances among the kept points re-derived exactly'})
 
 
 def main():
@@ -1280,7 +1308,7 @@ def main():
         cmd_batch(int(a[1]), a[2].split(','), [float(x) for x in a[3].split(',')], [int(x) for x in a[4].split(',')], int(a[5]),
                   float(a[6]))
     elif a[0] == 'extract':
-        cmd_extract(int(a[1]), a[2], float(a[3]), a[4])
+        cmd_extract(int(a[1]), a[2], float(a[3]), a[4], stop_deletion='--stop-deletion' in a)
     elif a[0] == 'direct-witness':
         cmd_direct_witness(int(a[1]), a[2], float(a[3]), a[4], lrat_core='--lrat-core' in a)
     elif a[0] == 'saturate':

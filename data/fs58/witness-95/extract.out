@@ -1,0 +1,3 @@
+extract D=95 pool q1+12+60.2 ball 1.5: 17169 points, 82206 edges (0.1 s)
+  deletion stopped by request at position 363: the witness is the last recorded refusing set (1068 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt95): pool q1+12+60.2 (|W| = 28, M = 60), ball piece R = 1.5: 17169 points, 82206 edges -> deletion start 1068 -> refusing set 1068 points; 3096 exact unit edges; CaDiCaL exit 20 in 1.68 s (LRAT 19015711 bytes), Glucose4 ['UNSAT', 2.132], Minisat22 ['UNSAT', 1.094]; deletion controls [[0, 'UNSAT'], [311, 'UNSAT'], [622, 'SAT (model verified)'], [933, 'UNSAT'], [176, 'UNSAT'], [487, 'UNSAT'], [798, 'UNSAT'], [41, 'SAT (model verified)'], [352, 'UNSAT'], [663, 'UNSAT'], [974, 'UNSAT'], [217, 'UNSAT']]; 75.0 s; wrote data/fs58/witness-95

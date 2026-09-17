@@ -43,9 +43,9 @@ graph on them is refused again, 77 rounds to a fixpoint (440,077 → 12,106 → 
 every vertex once for deletion (1,241 → 475, two checkpoint records); an axis edge is translated to `(0, 0) → (1, 0)`; every unit distance
 among the 475 points is re-derived exactly (1,099, all within the pool's 18 direction pairs); CaDiCaL 2.1.2 writes the LRAT.
 
-**Reproducibility.** Re-emitting from `steps.jsonl` gives the same points, edges and LRAT byte for byte (checked). A full re-extraction
-from an empty directory was started as a determinism check (`/tmp` scratch, not part of the record); its outcome is reported in the
-B5 hand-off, not here.
+**Reproducibility.** Re-emitting from `steps.jsonl` gives the same `witness.json` and LRAT byte for byte (checked twice, the second time
+after later edits to the tool), and **a full re-extraction from an empty directory reproduced all 77 rounds and the same points, edges
+and proof** (checked by comparing the rounds' kept sets and the proof's sha256).
 
 **Kernel form.** Not attempted and not priced in B5 (the brief excludes `Proofs/`). For scale: `witness-11` (204 points, 461 LRAT
 additions) cost 32.8 CPU s in the kernel (R-D2); this one has 475 points and 16,009 additions. R-D2 entered ℚ(√11)'s points through
