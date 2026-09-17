@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""fs58_check_witness -- the checker for FS-58's witness that the plane over Q(sqrt11) needs four colours.
+"""fs58_check_witness -- the checker for FS-58's witnesses that the plane over Q(sqrt D) needs four colours (D = 11 by default;
+--radicand D for another real quadratic field, D > 1 not a perfect square).
 
 STANDARD LIBRARY ONLY, and it imports nothing from tools/: it shares no code with the generator (tools/fs58_witness.py) or the solver.
 
 What it certifies. The witness file lists points (a, b, c, e, m) of integers, m > 0, gcd(a, b, c, e, m) = 1, each standing for the point
-((a + b sqrt11)/m, (c + e sqrt11)/m) of Q(sqrt11)^2 -- the representation is membership in Q(sqrt11)^2. The checker
+((a + b sqrtD)/m, (c + e sqrtD)/m) of Q(sqrtD)^2 -- the representation is membership in Q(sqrtD)^2. The checker
   1. checks every point is such a tuple and no point is listed twice;
   2. re-derives EVERY pair of points at distance exactly 1, in integer arithmetic (a bucketing by exact integer cell keys proposes pairs;
      the arithmetic decides), and refuses unless that set equals the file's edge list;
@@ -16,11 +17,14 @@ What it certifies. The witness file lists points (a, b, c, e, m) of integers, m 
   5. checks the LRAT proof against that CNF with its own checker: each added clause must be implied by reverse unit propagation using
      exactly its listed hints in order (every hint unit under the running assignment, the last one falsified); deletions are honoured; the
      proof must add the empty clause.
-If every step passes, no proper 3-colouring of the unit-distance graph on those points exists, so chi(Q(sqrt11)^2) >= 4.
+If every step passes, no proper 3-colouring of the unit-distance graph on those points exists, so chi(Q(sqrtD)^2) >= 4.
+The only property of D the edge test uses is that sqrtD is irrational (D > 1 and not a perfect square), which splits distance 1 into
+its rational part and its sqrtD part; the checker refuses any other D.
 
 Usage:
-  fs58_check_witness.py WITNESS.json [PROOF.lrat[.gz]]   -> prints CERTIFIED (exit 0) or REFUSED <CODE>: <detail> (exit 1)
-  fs58_check_witness.py --controls WITNESS.json [PROOF]  -> planted faults, each must be refused for its named reason, plus the faithful twin
+  fs58_check_witness.py [--radicand D] WITNESS.json [PROOF.lrat[.gz]]   -> prints CERTIFIED (exit 0) or REFUSED <CODE>: <detail> (exit 1)
+  fs58_check_witness.py [--radicand D] --controls WITNESS.json [PROOF]  -> planted faults, each must be refused for its named reason,
+                                                                          plus the faithful twin
 The proof defaults to witness.lrat.gz beside the witness file.
 """
 import sys, os, json, gzip, hashlib, math, tempfile, subprocess, shutil
@@ -63,7 +67,7 @@ def read_points(raw):
 # ---------------------------------------------------------------- 2. unit distances, exactly
 
 def common_scale(pts):
-    """every point over one denominator L: (X0, X1, Y0, Y1) with x = (X0 + X1 sqrt11)/L, y = (Y0 + Y1 sqrt11)/L"""
+    """every point over one denominator L: (X0, X1, Y0, Y1) with x = (X0 + X1 sqrtD)/L, y = (Y0 + Y1 sqrtD)/L, D = RADICAND"""
     L = 1
     for p in pts:
         L = L * p[4] // math.gcd(L, p[4])
@@ -274,11 +278,11 @@ def main_check(witness_path, proof_path):
     except Refusal as ex:
         print(f'REFUSED {ex.code}: {ex.detail}')
         return 1
-    print(f'CERTIFIED: {r["points"]} points of Q(sqrt11)^2, each a reduced (a, b, c, e, m); all {r["edges"]} pairs at distance exactly 1 '
+    print(f'CERTIFIED: {r["points"]} points of Q(sqrt{RADICAND})^2, each a reduced (a, b, c, e, m); all {r["edges"]} pairs at distance exactly 1 '
           f're-derived in integer arithmetic ({r["pairs_tested"]} candidate pairs tested) and equal to the file\'s edge list; (0, 0) = vertex '
           f'{r["origin"]} and (1, 0) = vertex {r["one"]} adjacent; pinned edge {list(r["pin"])} adjacent; CNF built here with {r["vars"]} variables '
           f'and {r["clauses"]} clauses; LRAT checked here: {r["additions"]} additions, {r["deletions"]} deletion lines, empty clause at id '
-          f'{r["empty_id"]}. No proper 3-colouring exists, so chi(Q(sqrt11)^2) >= 4.')
+          f'{r["empty_id"]}. No proper 3-colouring exists, so chi(Q(sqrt{RADICAND})^2) >= 4.')
     print(f'  witness sha256 {r["witness_sha256"]}; proof text sha256 {r["proof_sha256"]}'
           + ('' if r['claimed_proof_sha256'] in (None, r['proof_sha256']) else f' (the witness file names {r["claimed_proof_sha256"]}: the files are out of step)'))
     return 0
@@ -287,7 +291,8 @@ def main_check(witness_path, proof_path):
 # ---------------------------------------------------------------- planted faults
 
 def run_self(witness, proof):
-    r = subprocess.run([sys.executable, os.path.abspath(__file__), witness, proof], capture_output=True, text=True)
+    r = subprocess.run([sys.executable, os.path.abspath(__file__), '--radicand', str(RADICAND), witness, proof], capture_output=True,
+                       text=True)
     out = r.stdout.strip().splitlines()
     return r.returncode, (out[0] if out else r.stderr.strip()[-300:])
 
@@ -447,7 +452,19 @@ def controls(witness_path, proof_path):
 
 
 def main():
+    global RADICAND
     args = sys.argv[1:]
+    if '--radicand' in args:
+        k = args.index('--radicand')
+        try:
+            RADICAND = int(args[k + 1])
+        except (IndexError, ValueError):
+            print('REFUSED RADICAND: --radicand needs an integer')
+            return 1
+        del args[k:k + 2]
+    if RADICAND <= 1 or math.isqrt(RADICAND) ** 2 == RADICAND:
+        print(f'REFUSED RADICAND: {RADICAND} is not an integer > 1 whose square root is irrational')
+        return 1
     ctl = '--controls' in args
     args = [a for a in args if a != '--controls']
     if not args or len(args) > 2:
