@@ -1,0 +1,4 @@
+colour scan D=23: 48 pools x radii [1.5]: 29 to do (3-non-integral pools only: D1)
+  q1+q5+12.1+60.2|ball1.5: 440077 points -> NOT 3-COLOURABLE (solver claim)
+  q1+q13+24|ball1.5: 334589 points -> Unknown (budget)
+  q1+q17+24|ball1.5: 572217 points -> Unknown (budget)

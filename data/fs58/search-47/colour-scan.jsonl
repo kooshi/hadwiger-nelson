@@ -1,0 +1,5 @@
+{"R":1.5,"covolume":0.14506172839506173,"edges":736,"key":"q1+12|ball1.5","points":377,"pool":"q1+12","seconds":0.01,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q5+12+60|ball1.5","points":"> 150000 (box 1979649)","pool":"q5+12+60","verdict":"over cap"}
+{"R":1.5,"covolume":0.005802469135802469,"edges":29344,"key":"q1+60|ball1.5","points":8629,"pool":"q1+60","seconds":0.1,"size":20,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.005802469135802469,"edges":41144,"key":"q1+12+60|ball1.5","points":8629,"pool":"q1+12+60","seconds":0.69,"size":28,"solve_seconds":0.57,"verdict":"NOT 3-COLOURABLE (solver claim)"}
+{"R":1.5,"covolume":0.0022665895061728396,"edges":75410,"key":"q1+12+24|ball1.5","points":22077,"pool":"q1+12+24","seconds":0.23,"size":20,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}

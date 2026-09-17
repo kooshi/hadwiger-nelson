@@ -872,7 +872,7 @@ def _colour_ball(args):
         return {'key': f'{spec}|ball{R}', 'pool': spec, 'R': R, 'verdict': f'ERROR {ex}'}
 
 
-def cmd_colour_scan(D, radii, mincov, maxodd, cap, wall, jobs=16, extra=None):
+def cmd_colour_scan(D, radii, mincov, maxodd, cap, wall, jobs=int(os.environ.get("FS58_JOBS", "16")), extra=None):
     import multiprocessing as mp
     if extra:
         specs = extra
@@ -883,7 +883,10 @@ def cmd_colour_scan(D, radii, mincov, maxodd, cap, wall, jobs=16, extra=None):
         specs = [r['key'] for r in rs]
     out = outdir(D) / 'colour-scan.jsonl'
     done = load_jsonl(out)
-    todo = [(D, sp, R, cap, wall) for sp in specs for R in radii if f'{sp}|ball{R}' not in done]
+    def settled(k):         # an over-cap or budget record is not an answer: a rerun with a larger cap or wall asks again
+        r = done.get(k)
+        return r is not None and r['verdict'] not in ('over cap', 'Unknown (budget)')
+    todo = [(D, sp, R, cap, wall) for sp in specs for R in radii if not settled(f'{sp}|ball{R}')]
     print(f'colour scan D={D}: {len(specs)} pools x radii {radii}: {len(todo)} to do (3-non-integral pools only: D1)', flush=True)
     hits = []
     with mp.get_context('fork').Pool(jobs) as P:
@@ -960,7 +963,7 @@ def cmd_saturate(D, NMAX, cap=20000, jobs=16, with_axis=True, pairs=True):
 
 
 # ================================================================ a direct witness: a ball piece of a pool that refuses three colours
-def cmd_direct_witness(D, spec, R, out):
+def cmd_direct_witness(D, spec, R, out, lrat_core=False):
     """From a ball piece that refuses 3 colours (a pool with 3-non-integral directions, D1): a 1-minimal refusing vertex set (Glucose4
     core-guided deletion), translated so an axis edge runs from (0, 0) to (1, 0), every exact unit distance re-derived over the reduced
     points, refused by the CaDiCaL binary with a text LRAT proof and by Glucose4 and Minisat22; controls: every single-vertex deletion
@@ -978,6 +981,54 @@ def cmd_direct_witness(D, spec, R, out):
     X, n = piece(D, M, B, (0, 0, 0, 0), 'ball', R, 2_000_000, flat=flat)
     assert X is not None, f'piece over cap: {n}'
     E = piece_edges(X, coords)
+    # shrink first with CaDiCaL's LRAT core (backward reachability from the empty clause), to a fixpoint, so the deletion below
+    # starts from a few hundred vertices rather than the whole piece
+    pre = subprocess.run(['lean', '--print-prefix'], capture_output=True, text=True, check=True).stdout.strip()
+    work = ROOT / 'build' / f'fs58-direct-{D}'
+    work.mkdir(parents=True, exist_ok=True)
+    keep = np.arange(len(X))
+    piece_edge_count = int(len(E))
+    for _ in range(10 if lrat_core else 0):      # without --lrat-core the deletion starts from the whole piece (witness-47, -71, -191)
+        loc = {int(v): k for k, v in enumerate(keep)}
+        Ek = [(loc[a], loc[b]) for a, b in E.tolist() if a in loc and b in loc]
+        n_ = len(keep)
+        clauses = [(3 * v + 1, 3 * v + 2, 3 * v + 3) for v in range(n_)]
+        owner = [(v,) for v in range(n_)]
+        for a, b in Ek:
+            for c in range(3):
+                clauses.append((-(3 * a + c + 1), -(3 * b + c + 1)))
+                owner.append((a, b))
+        with open(work / 'core.cnf', 'w') as f:
+            f.write(f'p cnf {3 * n_} {len(clauses)}\n')
+            f.write(''.join(' '.join(map(str, c)) + ' 0\n' for c in clauses))
+        r = subprocess.run([os.path.join(pre, 'bin', 'cadical'), '-q', '--lrat=true', '--binary=false', str(work / 'core.cnf'),
+                            str(work / 'core.lrat')], capture_output=True, text=True)
+        assert r.returncode == 20, f'the piece is not refused by CaDiCaL (exit {r.returncode})'
+        lines = (work / 'core.lrat').read_bytes().split(b'\n')
+        needed, orig, started = set(), set(), False
+        for ln in reversed(lines):
+            toks = ln.split()
+            if not toks or toks[1] == b'd':
+                continue
+            cid = int(toks[0])
+            z = toks.index(b'0', 1)
+            if not started:
+                if z != 1:
+                    continue
+                started, _ = True, needed.add(cid)
+            if cid in needed:
+                for h in toks[z + 1:-1]:
+                    h = int(h)
+                    (orig if h <= len(clauses) else needed).add(h)
+        V = sorted({keep[v] for k in orig for v in owner[k - 1]})
+        if len(V) == n_:
+            break
+        keep = np.array(V)
+    if len(keep) < len(X):
+        X = X[keep]
+        loc = {int(v): k for k, v in enumerate(keep)}
+        E = np.array(sorted((loc[a], loc[b]) for a, b in E.tolist() if a in loc and b in loc), dtype=np.int64)
+        print(f'  LRAT core fixpoint: {len(keep)} of {n} points', flush=True)
     nv = len(X)
     sel = lambda v: 3 * nv + 1 + v
     g = Glucose4()
@@ -994,6 +1045,13 @@ def cmd_direct_witness(D, spec, R, out):
             cur = {x - 3 * nv - 1 for x in g.get_core()}
     g.delete()
     core = sorted(cur)
+    _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pre, work, t0)
+
+
+def _emit_witness(D, spec, R, M, B, X, core, W, n, piece_edge_count, nv, out, pre, work, t0):
+    """the reduced, translated witness from a refusing vertex set `core` (indices into X), refuted and written (see cmd_direct_witness)"""
+    import numpy as np, gzip, subprocess
+    from pysat.solvers import Glucose4, Minisat22
     Bm = [list(b) for b in B]
     vec = [tuple(sum(int(X[v][i]) * Bm[i][j] for i in range(4)) for j in range(4)) for v in core]   # over M
     # an axis edge p -> p + (M, 0, 0, 0) to put at (0, 0) -> (1, 0)
@@ -1027,14 +1085,11 @@ def cmd_direct_witness(D, spec, R, out):
         for c in range(3):
             cl.append((-var(i, c), -var(j, c)))
     cl += [(var(o, 0),), (var(one, 1),)]
-    work = ROOT / 'build' / f'fs58-direct-{D}'
-    work.mkdir(parents=True, exist_ok=True)
     cnf, prf = work / 'witness.cnf', work / 'witness.lrat'
     with open(cnf, 'w') as f:
         f.write(f'p cnf {3 * nP} {len(cl)}\n')
         for c in cl:
             f.write(' '.join(map(str, c)) + ' 0\n')
-    pre = subprocess.run(['lean', '--print-prefix'], capture_output=True, text=True, check=True).stdout.strip()
     t = time.time()
     r = subprocess.run([os.path.join(pre, 'bin', 'cadical'), '-q', '--lrat=true', '--binary=false', str(cnf), str(prf)],
                        capture_output=True, text=True)
@@ -1078,7 +1133,7 @@ def cmd_direct_witness(D, spec, R, out):
         'proof': 'witness.lrat.gz: CaDiCaL (the toolchain binary) text LRAT for exactly this CNF (original clauses numbered 1..M in the order above)',
         'proof_sha256_uncompressed': hashlib.sha256(raw).hexdigest(),
         'construction': {'pool': spec, 'pool_directions': len(W), 'pool_denominator': M, 'piece': f'the lattice Z[W] points within physical '
-                         f'radius {R} of (0, 0) in both real embeddings', 'piece_points': nv, 'piece_edges': int(len(E)),
+                         f'radius {R} of (0, 0) in both real embeddings', 'piece_points': n, 'piece_edges': piece_edge_count,
                          'reduction': '1-minimal refusing vertex set by Glucose4 core-guided deletion, translated by -p so the axis edge '
                          'p -> p + (1, 0) becomes (0, 0) -> (1, 0); all unit distances among the kept points re-derived exactly',
                          'generator': 'tools/fs58_search.py direct-witness'},
@@ -1090,10 +1145,113 @@ def cmd_direct_witness(D, spec, R, out):
     os.replace(tmp, out / 'witness.json')
     cnf.unlink()
     prf.unlink()
-    print(f'direct witness over Q(sqrt{D}): pool {spec} (|W| = {len(W)}, M = {M}), ball piece R = {R}: {nv} points, {len(E)} edges -> '
+    print(f'direct witness over Q(sqrt{D}): pool {spec} (|W| = {len(W)}, M = {M}), ball piece R = {R}: {n} points, {piece_edge_count} edges -> deletion start {nv} -> '
           f'1-minimal refusing set {nP} points; {len(Ed)} exact unit edges; CaDiCaL exit 20 in {cad_s:.2f} s (LRAT {len(raw)} bytes), '
           f'Glucose4 {others["Glucose4"]}, Minisat22 {others["Minisat22"]}; deletion controls {ctl}; '
           f'{time.time() - t0:.1f} s; wrote {out}')
+
+
+# ================================================================ checkpointed extraction for large refusing pieces
+def cmd_extract(D, spec, R, out, cap=2_000_000):
+    """For a ball piece too large for a one-shot shrink (the checkpoint rule: any run over ~15 minutes resumes exactly):
+      stage 1  assumption cores: CaDiCaL (pysat, one selector per vertex guarding its at-least-one clause) refuses the induced graph on
+               the kept set, its failed assumptions become the next kept set; repeated to a fixpoint. Each round appended to
+               OUT/steps.jsonl ('core-round-k', the kept lattice coordinates) before the next starts;
+      stage 2  deletion to 1-minimal with Glucose4, the kept set and the scan position appended every 60 s ('deletion');
+      stage 3  the witness, exactly as direct-witness emits it.
+    Resume: rerun the same command; finished rounds and the last deletion record are read back."""
+    import numpy as np, subprocess
+    from pysat.solvers import Cadical195, Glucose4
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    steps = out / 'steps.jsonl'
+    done = []
+    if steps.exists():
+        done = [json.loads(l) for l in steps.read_text().splitlines() if l.strip()]
+    t0 = time.time()
+    C, names = spec_classes(D, spec)
+    M, W = pool_vectors(D, C, names)
+    B, coords, cov, mc = reduce_pool(D, M, W)
+    flat = all(c[3] == 0 for c in coords)
+    X, n = piece(D, M, B, (0, 0, 0, 0), 'ball', R, cap, flat=flat)
+    assert X is not None, f'piece over cap: {n}'
+    E = piece_edges(X, coords)
+    piece_edge_count = int(len(E))
+    key = {tuple(int(t) for t in x): i for i, x in enumerate(X)}
+    print(f'extract D={D} pool {spec} ball {R}: {n} points, {piece_edge_count} edges ({time.time() - t0:.1f} s)', flush=True)
+
+    def rec(obj):
+        with open(steps, 'a') as f:
+            f.write(json.dumps(obj, separators=(',', ':')) + '\n')
+            f.flush()
+            os.fsync(f.fileno())
+    rounds = [r for r in done if r['step'].startswith('core-round-')]
+    kept = [key[tuple(p)] for p in rounds[-1]['kept']] if rounds else list(range(n))
+    fixpoint = bool(rounds) and rounds[-1]['points_in'] == rounds[-1]['points_out']
+    k = len(rounds)
+    Elist = E.tolist()
+    while not fixpoint:
+        ks = set(kept)
+        loc = {v: i for i, v in enumerate(kept)}
+        m = len(kept)
+        sv = Cadical195()
+        sel = lambda i: 3 * m + 1 + i
+        sv.append_formula([[-sel(i), 3 * i + 1, 3 * i + 2, 3 * i + 3] for i in range(m)])
+        Ek = np.array([(loc[a], loc[b]) for a, b in Elist if a in ks and b in ks], dtype=np.int64)
+        for c in range(3):
+            sv.append_formula(np.stack([-(3 * Ek[:, 0] + c + 1), -(3 * Ek[:, 1] + c + 1)], axis=1).tolist())
+        t = time.time()
+        res = sv.solve(assumptions=[sel(i) for i in range(m)])
+        assert res is False, f'core round {k}: the kept set is 3-colourable'
+        new = sorted(kept[x - 3 * m - 1] for x in sv.get_core())
+        sv.delete()
+        rec({'step': f'core-round-{k}', 'points_in': m, 'points_out': len(new), 'seconds': round(time.time() - t, 1),
+             'kept': [[int(t_) for t_ in X[v]] for v in new]})
+        print(f'  core round {k}: {m} -> {len(new)} points ({time.time() - t:.1f} s)', flush=True)
+        fixpoint = len(new) == m
+        kept = new
+        k += 1
+    # stage 2: deletion
+    dels = [r for r in done if r['step'] == 'deletion']
+    if dels:
+        kept = [key[tuple(p)] for p in dels[-1]['kept']]
+        pos = dels[-1]['position']
+        finished = dels[-1]['finished']
+    else:
+        pos, finished = 0, False
+    if not finished:
+        ks = sorted(kept)
+        loc = {v: i for i, v in enumerate(ks)}
+        m = len(ks)
+        g = Glucose4()
+        sel = lambda i: 3 * m + 1 + i
+        for i in range(m):
+            g.add_clause([-sel(i), 3 * i + 1, 3 * i + 2, 3 * i + 3])
+        kset = set(ks)
+        for a, b in Elist:
+            if a in kset and b in kset:
+                for c in range(3):
+                    g.add_clause([-(3 * loc[a] + c + 1), -(3 * loc[b] + c + 1)])
+        Bf = np.array(B, dtype=float)
+        order = sorted(ks, key=lambda v: (-float(np.abs(X[v] @ Bf).sum()), v))
+        cur = set(kept)
+        last = time.time()
+        for j in range(pos, len(order)):
+            v = order[j]
+            if v in cur and not g.solve(assumptions=[sel(loc[x]) for x in sorted(cur - {v})]):
+                cur = {ks[x - 3 * m - 1] for x in g.get_core()}
+            if time.time() - last > 60:
+                rec({'step': 'deletion', 'position': j + 1, 'finished': False, 'kept': [[int(t_) for t_ in X[x]] for x in sorted(cur)]})
+                print(f'  deletion: {j + 1}/{len(order)} tested, {len(cur)} kept', flush=True)
+                last = time.time()
+        g.delete()
+        kept = sorted(cur)
+        rec({'step': 'deletion', 'position': len(order), 'finished': True, 'kept': [[int(t_) for t_ in X[x]] for x in kept]})
+        print(f'  deletion finished: {len(kept)} points (1-minimal)', flush=True)
+    pre = subprocess.run(['lean', '--print-prefix'], capture_output=True, text=True, check=True).stdout.strip()
+    work = ROOT / 'build' / f'fs58-direct-{D}'
+    work.mkdir(parents=True, exist_ok=True)
+    _emit_witness(D, spec, R, M, B, X, sorted(kept), W, n, piece_edge_count, len(kept), out, pre, work, t0)
 
 
 def main():
@@ -1113,8 +1271,10 @@ def main():
     elif a[0] == 'batch':
         cmd_batch(int(a[1]), a[2].split(','), [float(x) for x in a[3].split(',')], [int(x) for x in a[4].split(',')], int(a[5]),
                   float(a[6]))
+    elif a[0] == 'extract':
+        cmd_extract(int(a[1]), a[2], float(a[3]), a[4])
     elif a[0] == 'direct-witness':
-        cmd_direct_witness(int(a[1]), a[2], float(a[3]), a[4])
+        cmd_direct_witness(int(a[1]), a[2], float(a[3]), a[4], lrat_core='--lrat-core' in a)
     elif a[0] == 'saturate':
         cmd_saturate(int(a[1]), int(a[2]))
     elif a[0] == 'colour-scan':

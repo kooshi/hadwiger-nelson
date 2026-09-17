@@ -1,0 +1,216 @@
+q1+q5+L12: screen kills 12, alive []
+q1+q5+L16: screen kills 12, alive []
+q1+q5+L24: screen kills 12, alive []
+q1+q5+L27: screen kills 12, alive []
+q1+q5+L36: screen kills 12, alive []
+q1+q5+L39: screen kills 12, alive []
+q1+q5+L59: screen kills 12, alive []
+q1+q5+L72: screen kills 12, alive []
+q1+q5+L87: screen kills 12, alive []
+q1+q5+L93: screen kills 12, alive []
+q1+q5+L96: screen kills 10, alive ['q1:sep3', 'q1:id2']
+probe D=23 pool q1+q5+L96: |W| = 16, M = 480, covolume 0.001531, largest coordinate 240
+  q1+q5+L96|u=q1:480,0,0,0|capsule0.8|ks=2,3,4: 13309 points, 42643 edges (build 0.2 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.19 s)
+  q1+q5+L96|u=q1:480,0,0,0|capsule1.2|ks=2,3,4: 29162 points, 109300 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.45 s)
+  q1+q5+L96|u=q1:480,0,0,0|capsule1.6|ks=2,3,4: 60367 points, 278065 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.02 s)
+  q1+q5+L96|u=q1:480,0,0,0|capsule2.0|ks=2,3,4: 100894 points, 526211 edges (build 1.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.84 s)
+  q1+q5+L96|u=q1:480,0,0,0|capsule2.5|ks=2,3,4: 173359 points, 987461 edges (build 2.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.39 s)
+q1+q5+L101: screen kills 12, alive []
+q1+q5+L104: screen kills 11, alive ['q1:id2']
+probe D=23 pool q1+q5+L104: |W| = 16, M = 520, covolume 0.000301, largest coordinate 260
+  q1+q5+L104|u=q1:520,0,0,0|capsule0.8|ks=2,3,4: 61931 points, 213152 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.0 s)
+  q1+q5+L104|u=q1:520,0,0,0|capsule1.2|ks=2,3,4: 150837 points, 665189 edges (build 1.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.52 s)
+  q1+q5+L104|u=q1:520,0,0,0|capsule1.6|ks=2,3,4: 297756 points, 1513149 edges (build 4.0 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.66 s)
+  q1+q5+L104|u=q1:520,0,0,0|capsule2.0|ks=2,3,4: > 400000 (box 5284571) points over cap 400000
+q1+q5+L116: screen kills 12, alive []
+q1+q5+L117: screen kills 12, alive []
+q1+q5+q13+L12: screen kills 16, alive []
+q1+q5+q13+L16: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'q13:sep3', 'q13:id2']
+probe D=23 pool q1+q5+q13+L16: |W| = 24, M = 1040, covolume 7.525e-05, largest coordinate 520
+  q1+q5+q13+L16|u=q1:1040,0,0,0|capsule0.8|ks=2,3,4: 286290 points, 1487606 edges (build 4.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (6.78 s)
+  q1+q5+q13+L16|u=q1:1040,0,0,0|capsule1.2|ks=2,3,4: > 400000 (box 12561201) points over cap 400000
+  q1+q5+q13+L16|u=q5:832,0,624,0|capsule0.8|ks=2,3,4: 323310 points, 1599206 edges (build 4.9 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.73 s)
+  q1+q5+q13+L16|u=q5:832,0,624,0|capsule1.2|ks=2,3,4: > 400000 (box 12561201) points over cap 400000
+  q1+q5+q13+L16|u=q13:960,0,400,0|capsule0.8|ks=2,3,4: 284223 points, 1481952 edges (build 4.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (7.4 s)
+  q1+q5+q13+L16|u=q13:960,0,400,0|capsule1.2|ks=2,3,4: > 400000 (box 12561201) points over cap 400000
+q1+q5+q13+L24: screen kills 16, alive []
+q1+q5+q13+L27: screen kills 16, alive []
+q1+q5+q13+L36: screen kills 15, alive ['q1:sep4']
+probe D=23 pool q1+q5+q13+L36: |W| = 24, M = 2340, covolume 3.468e-05, largest coordinate 1170
+  q1+q5+q13+L36|u=q1:2340,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 21651165) points over cap 400000
+q1+q5+q13+L39: screen kills 16, alive []
+q1+q5+q13+L59: screen kills 16, alive []
+q1+q5+q13+L72: screen kills 14, alive ['q1:sep2', 'q1:sep4']
+probe D=23 pool q1+q5+q13+L72: |W| = 24, M = 4680, covolume 1.363e-05, largest coordinate 2340
+  q1+q5+q13+L72|u=q1:4680,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 43292421) points over cap 400000
+q1+q5+q13+L87: screen kills 16, alive []
+q1+q5+q13+L93: screen kills 16, alive []
+q1+q5+q13+L96: screen kills 14, alive ['q1:sep3', 'q1:id2']
+probe D=23 pool q1+q5+q13+L96: |W| = 24, M = 6240, covolume 9.058e-06, largest coordinate 3120
+  q1+q5+q13+L96|u=q1:6240,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 70546575) points over cap 400000
+q1+q5+q13+L101: screen kills 16, alive []
+q1+q5+q13+L104: screen kills 16, alive []
+q1+q5+q13+L116: screen kills 16, alive []
+q1+q5+q13+L117: screen kills 16, alive []
+q1+L12: screen kills 8, alive []
+q1+L16: screen kills 8, alive []
+q1+L24: screen kills 8, alive []
+q1+L27: screen kills 8, alive []
+q1+L36: screen kills 8, alive []
+q1+L39: screen kills 8, alive []
+q1+L59: screen kills 8, alive []
+q1+L72: screen kills 8, alive []
+q1+L87: screen kills 8, alive []
+q1+L93: screen kills 8, alive []
+q1+L96: screen kills 8, alive []
+q1+L101: screen kills 8, alive []
+q1+L104: screen kills 8, alive []
+q1+L116: screen kills 8, alive []
+q1+L117: screen kills 8, alive []
+q1+q5+L12+L16: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L16:sep3', 'L16:id2']
+probe D=23 pool q1+q5+L12+L16: |W| = 20, M = 240, covolume 0.000471, largest coordinate 120
+  q1+q5+L12+L16|u=q1:240,0,0,0|capsule0.8|ks=2,3,4: 43177 points, 153181 edges (build 0.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.73 s)
+  q1+q5+L12+L16|u=q1:240,0,0,0|capsule1.2|ks=2,3,4: 101897 points, 508652 edges (build 1.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.86 s)
+  q1+q5+L12+L16|u=q1:240,0,0,0|capsule1.6|ks=2,3,4: 196389 points, 1164113 edges (build 3.0 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.1 s)
+  q1+q5+L12+L16|u=q1:240,0,0,0|capsule2.0|ks=2,3,4: 329788 points, 2163668 edges (build 5.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (7.44 s)
+  q1+q5+L12+L16|u=q1:240,0,0,0|capsule2.5|ks=2,3,4: > 400000 (box 4733793) points over cap 400000
+  q1+q5+L12+L16|u=q5:192,0,144,0|capsule0.8|ks=2,3,4: 46474 points, 158389 edges (build 0.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (9.72 s)
+  q1+q5+L12+L16|u=q5:192,0,144,0|capsule1.2|ks=2,3,4: 113513 points, 567701 edges (build 1.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.19 s)
+  q1+q5+L12+L16|u=q5:192,0,144,0|capsule1.6|ks=2,3,4: 218032 points, 1302958 edges (build 3.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.48 s)
+  q1+q5+L12+L16|u=q5:192,0,144,0|capsule2.0|ks=2,3,4: 365878 points, 2422910 edges (build 6.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.47 s)
+  q1+q5+L12+L16|u=q5:192,0,144,0|capsule2.5|ks=2,3,4: > 400000 (box 4733793) points over cap 400000
+  q1+q5+L12+L16|u=L16:105,0,0,45|capsule0.8|ks=2,3,4: 73029 points, 248511 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.68 s)
+  q1+q5+L12+L16|u=L16:105,0,0,45|capsule1.2|ks=2,3,4: 167259 points, 854313 edges (build 2.2 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.06 s)
+  q1+q5+L12+L16|u=L16:105,0,0,45|capsule1.6|ks=2,3,4: 303961 points, 1861829 edges (build 5.0 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (6.65 s)
+  q1+q5+L12+L16|u=L16:105,0,0,45|capsule2.0|ks=2,3,4: > 400000 (box 3436947) points over cap 400000
+q1+q5+L12+L24: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L12:sep2', 'L12:sep3', 'L12:sep4', 'L12:id2', 'L24:sep2', 'L24:sep3', 'L24:sep4', 'L24:id2']
+probe D=23 pool q1+q5+L12+L24: |W| = 20, M = 120, covolume 0.001884, largest coordinate 60
+  q1+q5+L12+L24|u=q1:120,0,0,0|capsule0.8|ks=2,3,4: 11785 points, 43237 edges (build 0.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.27 s)
+  q1+q5+L12+L24|u=q1:120,0,0,0|capsule1.2|ks=2,3,4: 26612 points, 133540 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.43 s)
+  q1+q5+L12+L24|u=q1:120,0,0,0|capsule1.6|ks=2,3,4: 50869 points, 301165 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.93 s)
+  q1+q5+L12+L24|u=q1:120,0,0,0|capsule2.0|ks=2,3,4: 84611 points, 553275 edges (build 1.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.71 s)
+  q1+q5+L12+L24|u=q1:120,0,0,0|capsule2.5|ks=2,3,4: 138239 points, 973143 edges (build 2.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.97 s)
+  q1+q5+L12+L24|u=q5:96,0,72,0|capsule0.8|ks=2,3,4: 11544 points, 38903 edges (build 0.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.26 s)
+  q1+q5+L12+L24|u=q5:96,0,72,0|capsule1.2|ks=2,3,4: 28278 points, 139739 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.48 s)
+  q1+q5+L12+L24|u=q5:96,0,72,0|capsule1.6|ks=2,3,4: 54282 points, 321234 edges (build 0.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.01 s)
+  q1+q5+L12+L24|u=q5:96,0,72,0|capsule2.0|ks=2,3,4: 91195 points, 598964 edges (build 1.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.88 s)
+  q1+q5+L12+L24|u=q5:96,0,72,0|capsule2.5|ks=2,3,4: 156131 points, 1114152 edges (build 2.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.44 s)
+  q1+q5+L12+L24|u=L12:110,0,0,10|capsule0.8|ks=2,3,4: 10423 points, 33361 edges (build 0.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.68 s)
+  q1+q5+L12+L24|u=L12:110,0,0,10|capsule1.2|ks=2,3,4: 25647 points, 123605 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.4 s)
+  q1+q5+L12+L24|u=L12:110,0,0,10|capsule1.6|ks=2,3,4: 49661 points, 289195 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.89 s)
+  q1+q5+L12+L24|u=L12:110,0,0,10|capsule2.0|ks=2,3,4: 83961 points, 545317 edges (build 1.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.7 s)
+  q1+q5+L12+L24|u=L12:110,0,0,10|capsule2.5|ks=2,3,4: 145045 points, 1026719 edges (build 2.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.14 s)
+  q1+q5+L12+L24|u=L24:5,0,0,25|capsule0.8|ks=2,3,4: 31767 points, 145035 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.48 s)
+  q1+q5+L12+L24|u=L24:5,0,0,25|capsule1.2|ks=2,3,4: 60933 points, 357639 edges (build 0.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.12 s)
+  q1+q5+L12+L24|u=L24:5,0,0,25|capsule1.6|ks=2,3,4: 100761 points, 666035 edges (build 1.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.11 s)
+  q1+q5+L12+L24|u=L24:5,0,0,25|capsule2.0|ks=2,3,4: 152807 points, 1084677 edges (build 2.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.41 s)
+  q1+q5+L12+L24|u=L24:5,0,0,25|capsule2.5|ks=2,3,4: 239900 points, 1806556 edges (build 4.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.74 s)
+q1+q5+L12+L27: screen kills 14, alive ['q1:sep4', 'L27:sep4']
+probe D=23 pool q1+q5+L12+L27: |W| = 20, M = 540, covolume 9.304e-05, largest coordinate 270
+  q1+q5+L12+L27|u=q1:540,0,0,0|capsule0.8|ks=2,3,4: 202967 points, 725709 edges (build 2.4 s); colourable Unknown (budget); separate 2u Unknown (budget); separate 3u Unknown (budget); separate 4u Unknown (budget); identify 2u Unknown (budget); controls identify 3u Unknown (budget), identify 4u Unknown (budget) (426.62 s)
+  q1+q5+L12+L27|u=q1:540,0,0,0|capsule1.2|ks=2,3,4: > 400000 (box 8905995) points over cap 400000
+  q1+q5+L12+L27|u=L27:380,0,0,80|capsule0.8|ks=2,3,4: 262470 points, 896697 edges (build 3.0 s); colourable Unknown (budget); separate 2u Unknown (budget); separate 3u Unknown (budget); separate 4u Unknown (budget); identify 2u Unknown (budget); controls identify 3u Unknown (budget), identify 4u Unknown (budget) (429.73 s)
+  q1+q5+L12+L27|u=L27:380,0,0,80|capsule1.2|ks=2,3,4: > 400000 (box 8905995) points over cap 400000
+q1+q5+L12+L36: screen kills 12, alive ['q1:sep4', 'q5:sep4', 'L12:sep3', 'L12:id2']
+probe D=23 pool q1+q5+L12+L36: |W| = 20, M = 180, covolume 0.0008373, largest coordinate 90
+  q1+q5+L12+L36|u=q1:180,0,0,0|capsule0.8|ks=2,3,4: 23731 points, 81879 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.06 s)
+  q1+q5+L12+L36|u=q1:180,0,0,0|capsule1.2|ks=2,3,4: 56306 points, 277106 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.06 s)
+  q1+q5+L12+L36|u=q1:180,0,0,0|capsule1.6|ks=2,3,4: 109322 points, 642724 edges (build 1.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.32 s)
+  q1+q5+L12+L36|u=q1:180,0,0,0|capsule2.0|ks=2,3,4: 184085 points, 1201104 edges (build 3.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.3 s)
+  q1+q5+L12+L36|u=q1:180,0,0,0|capsule2.5|ks=2,3,4: 310045 points, 2193401 edges (build 6.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.14 s)
+  q1+q5+L12+L36|u=q5:144,0,108,0|capsule0.8|ks=2,3,4: 26295 points, 89323 edges (build 0.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.32 s)
+  q1+q5+L12+L36|u=q5:144,0,108,0|capsule1.2|ks=2,3,4: 64108 points, 319527 edges (build 0.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.17 s)
+  q1+q5+L12+L36|u=q5:144,0,108,0|capsule1.6|ks=2,3,4: 122925 points, 732355 edges (build 2.0 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.73 s)
+  q1+q5+L12+L36|u=q5:144,0,108,0|capsule2.0|ks=2,3,4: 206194 points, 1361909 edges (build 3.9 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.07 s)
+  q1+q5+L12+L36|u=q5:144,0,108,0|capsule2.5|ks=2,3,4: 350238 points, 2509366 edges (build 7.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (9.36 s)
+  q1+q5+L12+L36|u=L12:165,0,0,15|capsule0.8|ks=2,3,4: 23704 points, 77808 edges (build 0.2 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (7.34 s)
+  q1+q5+L12+L36|u=L12:165,0,0,15|capsule1.2|ks=2,3,4: 58220 points, 284598 edges (build 0.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (1.14 s)
+  q1+q5+L12+L36|u=L12:165,0,0,15|capsule1.6|ks=2,3,4: 112550 points, 661344 edges (build 1.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.48 s)
+  q1+q5+L12+L36|u=L12:165,0,0,15|capsule2.0|ks=2,3,4: 189971 points, 1242100 edges (build 3.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.61 s)
+  q1+q5+L12+L36|u=L12:165,0,0,15|capsule2.5|ks=2,3,4: 325456 points, 2314718 edges (build 6.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.5 s)
+q1+q5+L12+L39: screen kills 16, alive []
+q1+q5+L12+L59: screen kills 16, alive []
+q1+q5+L12+L72: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L12:sep2', 'L12:sep3', 'L12:sep4', 'L12:id2', 'L72:sep2', 'L72:sep3', 'L72:sep4', 'L72:id2']
+probe D=23 pool q1+q5+L12+L72: |W| = 20, M = 360, covolume 0.0002093, largest coordinate 180
+  q1+q5+L12+L72|u=q1:360,0,0,0|capsule0.8|ks=2,3,4: 94084 points, 343771 edges (build 1.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (46.25 s)
+  q1+q5+L12+L72|u=q1:360,0,0,0|capsule1.2|ks=2,3,4: 225743 points, 1153090 edges (build 3.3 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.24 s)
+  q1+q5+L12+L72|u=q1:360,0,0,0|capsule1.6|ks=2,3,4: > 400000 (box 5623371) points over cap 400000
+  q1+q5+L12+L72|u=q5:288,0,216,0|capsule0.8|ks=2,3,4: 104639 points, 366871 edges (build 1.1 s); colourable Unknown (budget); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (88.56 s)
+  q1+q5+L12+L72|u=q5:288,0,216,0|capsule1.2|ks=2,3,4: 255840 points, 1307721 edges (build 4.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (6.86 s)
+  q1+q5+L12+L72|u=q5:288,0,216,0|capsule1.6|ks=2,3,4: > 400000 (box 5623371) points over cap 400000
+  q1+q5+L12+L72|u=L12:330,0,0,30|capsule0.8|ks=2,3,4: 94802 points, 331488 edges (build 1.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (57.76 s)
+  q1+q5+L12+L72|u=L12:330,0,0,30|capsule1.2|ks=2,3,4: 232920 points, 1179769 edges (build 3.7 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (5.91 s)
+  q1+q5+L12+L72|u=L12:330,0,0,30|capsule1.6|ks=2,3,4: > 400000 (box 5623371) points over cap 400000
+  q1+q5+L12+L72|u=L72:245,0,0,55|capsule0.8|ks=2,3,4: 119203 points, 405315 edges (build 1.4 s); colourable Unknown (budget); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (98.32 s)
+  q1+q5+L12+L72|u=L72:245,0,0,55|capsule1.2|ks=2,3,4: 287095 points, 1456479 edges (build 4.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (6.59 s)
+  q1+q5+L12+L72|u=L72:245,0,0,55|capsule1.6|ks=2,3,4: > 400000 (box 5623371) points over cap 400000
+q1+q5+L12+L87: screen kills 16, alive []
+q1+q5+L12+L93: screen kills 14, alive ['q1:sep4', 'L93:sep4']
+probe D=23 pool q1+q5+L12+L93: |W| = 20, M = 1860, covolume 7.842e-06, largest coordinate 930
+  q1+q5+L12+L93|u=q1:1860,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 70647605) points over cap 400000
+  q1+q5+L12+L93|u=L93:1820,0,0,80|capsule0.8|ks=2,3,4: > 400000 (box 70647605) points over cap 400000
+q1+q5+L16+L24: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L16:sep3', 'L16:id2']
+probe D=23 pool q1+q5+L16+L24: |W| = 20, M = 240, covolume 0.000471, largest coordinate 120
+  q1+q5+L16+L24|u=q1:240,0,0,0|capsule0.8|ks=2,3,4: 43177 points, 124233 edges (build 0.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (0.87 s)
+  q1+q5+L16+L24|u=q1:240,0,0,0|capsule1.2|ks=2,3,4: 101897 points, 451552 edges (build 1.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.16 s)
+  q1+q5+L16+L24|u=q1:240,0,0,0|capsule1.6|ks=2,3,4: 196389 points, 1075385 edges (build 3.2 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.4 s)
+  q1+q5+L16+L24|u=q1:240,0,0,0|capsule2.0|ks=2,3,4: 329788 points, 2039916 edges (build 6.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.17 s)
+  q1+q5+L16+L24|u=q1:240,0,0,0|capsule2.5|ks=2,3,4: > 400000 (box 4733793) points over cap 400000
+  q1+q5+L16+L24|u=q5:192,0,144,0|capsule0.8|ks=2,3,4: 46474 points, 146071 edges (build 0.5 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (31.93 s)
+  q1+q5+L16+L24|u=q5:192,0,144,0|capsule1.2|ks=2,3,4: 113513 points, 538111 edges (build 1.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (2.38 s)
+  q1+q5+L16+L24|u=q5:192,0,144,0|capsule1.6|ks=2,3,4: 218032 points, 1252044 edges (build 3.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (4.91 s)
+  q1+q5+L16+L24|u=q5:192,0,144,0|capsule2.0|ks=2,3,4: 365878 points, 2347102 edges (build 6.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (8.99 s)
+  q1+q5+L16+L24|u=q5:192,0,144,0|capsule2.5|ks=2,3,4: > 400000 (box 4733793) points over cap 400000
+  q1+q5+L16+L24|u=L16:105,0,0,45|capsule0.8|ks=2,3,4: 73029 points, 276729 edges (build 0.8 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (7.16 s)
+  q1+q5+L16+L24|u=L16:105,0,0,45|capsule1.2|ks=2,3,4: 167259 points, 892321 edges (build 2.6 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (3.5 s)
+  q1+q5+L16+L24|u=L16:105,0,0,45|capsule1.6|ks=2,3,4: 303961 points, 1895923 edges (build 5.4 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (7.17 s)
+  q1+q5+L16+L24|u=L16:105,0,0,45|capsule2.0|ks=2,3,4: > 400000 (box 3436947) points over cap 400000
+q1+q5+L16+L27: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L16:sep2', 'L16:sep3', 'L16:sep4', 'L16:id2', 'L27:sep2', 'L27:sep3', 'L27:sep4', 'L27:id2']
+probe D=23 pool q1+q5+L16+L27: |W| = 20, M = 2160, covolume 5.815e-06, largest coordinate 1080
+  q1+q5+L16+L27|u=q1:2160,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 95166435) points over cap 400000
+  q1+q5+L16+L27|u=q5:1728,0,1296,0|capsule0.8|ks=2,3,4: > 400000 (box 95166435) points over cap 400000
+  q1+q5+L16+L27|u=L16:945,0,0,405|capsule0.8|ks=2,3,4: > 400000 (box 95166435) points over cap 400000
+  q1+q5+L16+L27|u=L27:1520,0,0,320|capsule0.8|ks=2,3,4: > 400000 (box 95166435) points over cap 400000
+q1+q5+L16+L36: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L16:sep2', 'L16:sep3', 'L16:sep4', 'L16:id2', 'L36:sep2', 'L36:sep3', 'L36:sep4', 'L36:id2']
+probe D=23 pool q1+q5+L16+L36: |W| = 20, M = 720, covolume 5.233e-05, largest coordinate 360
+  q1+q5+L16+L36|u=q1:720,0,0,0|capsule0.8|ks=2,3,4: 363967 points, 1014544 edges (build 5.6 s); colourable Unknown (budget); separate 2u Unknown (budget); separate 3u Unknown (budget); separate 4u Unknown (budget); identify 2u Unknown (budget); controls identify 3u Unknown (budget), identify 4u Unknown (budget) (458.41 s)
+  q1+q5+L16+L36|u=q1:720,0,0,0|capsule1.2|ks=2,3,4: > 400000 (box 15758925) points over cap 400000
+  q1+q5+L16+L36|u=q5:576,0,432,0|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+  q1+q5+L16+L36|u=L16:315,0,0,135|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+  q1+q5+L16+L36|u=L36:260,0,0,140|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+q1+q5+L16+L39: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L16:sep3', 'L16:id2']
+probe D=23 pool q1+q5+L16+L39: |W| = 20, M = 3120, covolume 2.787e-06, largest coordinate 1560
+  q1+q5+L16+L39|u=q1:3120,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 198170445) points over cap 400000
+  q1+q5+L16+L39|u=q5:2496,0,1872,0|capsule0.8|ks=2,3,4: > 400000 (box 198170445) points over cap 400000
+  q1+q5+L16+L39|u=L16:1365,0,0,585|capsule0.8|ks=2,3,4: > 400000 (box 198170445) points over cap 400000
+q1+q5+L16+L59: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L59:sep3', 'L59:id2']
+probe D=23 pool q1+q5+L16+L59: |W| = 20, M = 4720, covolume 3.653e-06, largest coordinate 2360
+  q1+q5+L16+L59|u=q1:4720,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 151212141) points over cap 400000
+  q1+q5+L16+L59|u=q5:3776,0,2832,0|capsule0.8|ks=2,3,4: > 400000 (box 151212141) points over cap 400000
+  q1+q5+L16+L59|u=L59:1040,0,0,960|capsule0.8|ks=2,3,4: > 400000 (box 151212141) points over cap 400000
+q1+q5+L16+L72: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L16:sep2', 'L16:sep3', 'L16:sep4', 'L16:id2', 'L72:sep2', 'L72:sep3', 'L72:sep4', 'L72:id2']
+probe D=23 pool q1+q5+L16+L72: |W| = 20, M = 720, covolume 5.233e-05, largest coordinate 360
+  q1+q5+L16+L72|u=q1:720,0,0,0|capsule0.8|ks=2,3,4: 363967 points, 1084650 edges (build 4.0 s); colourable Unknown (budget); separate 2u Unknown (budget); separate 3u Unknown (budget); separate 4u Unknown (budget); identify 2u Unknown (budget); controls identify 3u Unknown (budget), identify 4u Unknown (budget) (433.68 s)
+  q1+q5+L16+L72|u=q1:720,0,0,0|capsule1.2|ks=2,3,4: > 400000 (box 15758925) points over cap 400000
+  q1+q5+L16+L72|u=q5:576,0,432,0|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+  q1+q5+L16+L72|u=L16:315,0,0,135|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+  q1+q5+L16+L72|u=L72:490,0,0,110|capsule0.8|ks=2,3,4: > 400000 (box 10702719) points over cap 400000
+q1+q5+L16+L87: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L16:sep3', 'L16:id2']
+probe D=23 pool q1+q5+L16+L87: |W| = 20, M = 6960, covolume 5.6e-07, largest coordinate 3480
+  q1+q5+L16+L87|u=q1:6960,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 983874559) points over cap 400000
+  q1+q5+L16+L87|u=q5:5568,0,4176,0|capsule0.8|ks=2,3,4: > 400000 (box 983874559) points over cap 400000
+  q1+q5+L16+L87|u=L16:3045,0,0,1305|capsule0.8|ks=2,3,4: > 400000 (box 983874559) points over cap 400000
+q1+q5+L16+L93: screen kills 10, alive ['q1:sep3', 'q1:id2', 'q5:sep3', 'q5:id2', 'L16:sep3', 'L16:id2']
+probe D=23 pool q1+q5+L16+L93: |W| = 20, M = 7440, covolume 4.901e-07, largest coordinate 3720
+  q1+q5+L16+L93|u=q1:7440,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 1124164377) points over cap 400000
+  q1+q5+L16+L93|u=q5:5952,0,4464,0|capsule0.8|ks=2,3,4: > 400000 (box 1124164377) points over cap 400000
+  q1+q5+L16+L93|u=L16:3255,0,0,1395|capsule0.8|ks=2,3,4: > 400000 (box 1124164377) points over cap 400000
+q1+q5+L24+L27: screen kills 10, alive ['q1:sep2', 'q1:sep4', 'q1:id2', 'L27:sep2', 'L27:sep4', 'L27:id2']
+probe D=23 pool q1+q5+L24+L27: |W| = 20, M = 1080, covolume 2.326e-05, largest coordinate 540
+  q1+q5+L24+L27|u=q1:1080,0,0,0|capsule0.8|ks=2,3,4: > 400000 (box 23944245) points over cap 400000
+  q1+q5+L24+L27|u=L27:760,0,0,160|capsule0.8|ks=2,3,4: > 400000 (box 23944245) points over cap 400000
+q1+q5+L24+L36: screen kills 0, alive ['q1:sep2', 'q1:sep3', 'q1:sep4', 'q1:id2', 'q5:sep2', 'q5:sep3', 'q5:sep4', 'q5:id2', 'L24:sep2', 'L24:sep3', 'L24:sep4', 'L24:id2', 'L36:sep2', 'L36:sep3', 'L36:sep4', 'L36:id2']
+probe D=23 pool q1+q5+L24+L36: |W| = 20, M = 360, covolume 0.0002093, largest coordinate 180
+  q1+q5+L24+L36|u=q1:360,0,0,0|capsule0.8|ks=2,3,4: 94084 points, 262134 edges (build 0.9 s); colourable Unknown (budget); separate 2u Unknown (budget); separate 3u Unknown (budget); separate 4u Unknown (budget); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (291.13 s)
+  q1+q5+L24+L36|u=q1:360,0,0,0|capsule1.2|ks=2,3,4: 225743 points, 987297 edges (build 3.1 s); colourable SAT (model verified); separate 2u SAT (model verified); separate 3u SAT (model verified); separate 4u SAT (model verified); identify 2u SAT (model verified); controls identify 3u SAT (model verified), identify 4u SAT (model verified) (22.3 s)
+  q1+q5+L24+L36|u=q1:360,0,0,0|capsule1.6|ks=2,3,4: > 400000 (box 5623371) points over cap 400000

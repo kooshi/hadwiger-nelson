@@ -8,4 +8,5 @@ D=data/fs58/witness-47
 python3 tools/fs58_search.py direct-witness 47 q1+12+60 1.5 $D > $D/generate.out
 python3 tools/fs58_check_witness.py --radicand 47 $D/witness.json > $D/certified.out
 python3 tools/fs58_check_witness.py --radicand 47 --controls $D/witness.json > $D/controls.out
+python3 tools/fs58_recheck_witness.py 47 $D/witness.json > $D/recheck.out
 echo "run-all: done; certified.out and controls.out written"

@@ -1,0 +1,1463 @@
+{"R":1.2,"covolume":0.07098765432098765,"edges":472,"key":"q1+12.1|ball1.2","points":317,"pool":"q1+12.1","seconds":0.01,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.017746913580246913,"edges":1758,"key":"q1+12.2|ball1.2","points":1193,"pool":"q1+12.2","seconds":0.01,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.027729552469135804,"edges":3546,"key":"q1+24|ball1.5","points":1953,"pool":"q1+24","seconds":0.02,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.027729552469135804,"edges":1070,"key":"q1+24|ball1.2","points":865,"pool":"q1+24","seconds":0.02,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.017746913580246913,"edges":2918,"key":"q1+12.1+12.2|ball1.2","points":1193,"pool":"q1+12.1+12.2","seconds":0.02,"size":20,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.013587480709876542,"edges":2198,"key":"q1+48|ball1.2","points":1769,"pool":"q1+48","seconds":0.02,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.017746913580246913,"edges":5762,"key":"q1+12.2|ball1.5","points":2853,"pool":"q1+12.2","seconds":0.03,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.07098765432098765,"edges":1484,"key":"q1+12.1|ball1.5","points":749,"pool":"q1+12.1","seconds":0.02,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.017746913580246913,"edges":2328,"key":"12.1+12.2|ball1.2","points":1193,"pool":"12.1+12.2","seconds":0.02,"size":16,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.017746913580246913,"edges":7696,"key":"12.1+12.2|ball1.5","points":2853,"pool":"12.1+12.2","seconds":0.03,"size":16,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.010735787227556776,"edges":2990,"key":"q1+36.1|ball1.2","points":2193,"pool":"q1+36.1","seconds":0.01,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.07098765432098765,"edges":6556,"key":"q1+12.1|ball2.0","points":2305,"pool":"q1+12.1","seconds":0.03,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.017746913580246913,"edges":9594,"key":"q1+12.1+12.2|ball1.5","points":2853,"pool":"q1+12.1+12.2","seconds":0.04,"size":20,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.013587480709876542,"edges":7178,"key":"q1+48|ball1.5","points":4053,"pool":"q1+48","seconds":0.03,"size":12,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.027729552469135804,"edges":16486,"key":"q1+24|ball2.0","points":5981,"pool":"q1+24","seconds":0.07,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":8684,"key":"8+12.1|ball1.2","points":4609,"pool":"8+12.1","seconds":0.05,"size":16,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":8720,"key":"8+12.2|ball1.2","points":4609,"pool":"8+12.2","seconds":0.04,"size":16,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.010735787227556776,"edges":9942,"key":"q1+36.1|ball1.5","points":5137,"pool":"q1+36.1","seconds":0.07,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.017746913580246913,"edges":25542,"key":"q1+12.2|ball2.0","points":9005,"pool":"q1+12.2","seconds":0.11,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":10914,"key":"q1+8+12.1|ball1.2","points":4609,"pool":"q1+8+12.1","seconds":0.12,"size":20,"solve_seconds":0.07,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.013587480709876542,"edges":33790,"key":"q1+48|ball2.0","points":12117,"pool":"q1+48","seconds":0.16,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":10950,"key":"q1+8+12.2|ball1.2","points":4609,"pool":"q1+8+12.2","seconds":0.15,"size":20,"solve_seconds":0.11,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.017746913580246913,"edges":34016,"key":"12.1+12.2|ball2.0","points":9005,"pool":"12.1+12.2","seconds":0.23,"size":16,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.017746913580246913,"edges":42558,"key":"q1+12.1+12.2|ball2.0","points":9005,"pool":"q1+12.1+12.2","seconds":0.26,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":15346,"key":"q1+8+12.1+12.2|ball1.2","points":4609,"pool":"q1+8+12.1+12.2","seconds":0.07,"size":28,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":38734,"key":"q1+8+12.1|ball1.5","points":11369,"pool":"q1+8+12.1","seconds":0.21,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":38810,"key":"q1+8+12.2|ball1.5","points":11369,"pool":"q1+8+12.2","seconds":0.2,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0033968701774691355,"edges":11548,"key":"12.1+16|ball1.2","points":6089,"pool":"12.1+16","seconds":0.08,"size":16,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":30996,"key":"8+12.1|ball1.5","points":11369,"pool":"8+12.1","seconds":0.32,"size":16,"solve_seconds":0.18,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":46596,"key":"8+12.1+12.2|ball1.5","points":11369,"pool":"8+12.1+12.2","seconds":0.24,"size":24,"solve_seconds":0.03,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.002839506172839506,"edges":14488,"key":"q5+12.1|ball1.2","points":7409,"pool":"q5+12.1","seconds":0.09,"size":16,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.010735787227556776,"edges":41954,"key":"q1+36.1|ball2.0","points":15073,"pool":"q1+36.1","seconds":0.41,"size":12,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.002839506172839506,"edges":18392,"key":"q1+q5+12.1|ball1.2","points":7409,"pool":"q1+q5+12.1","seconds":0.1,"size":20,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":31072,"key":"8+12.2|ball1.5","points":11369,"pool":"8+12.2","seconds":0.42,"size":16,"solve_seconds":0.28,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.004436728395061728,"edges":54334,"key":"q1+8+12.1+12.2|ball1.5","points":11369,"pool":"q1+8+12.1+12.2","seconds":0.25,"size":28,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0016569263450693492,"edges":19362,"key":"q1+72|ball1.2","points":13677,"pool":"q1+72","seconds":0.1,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.002839506172839506,"edges":50112,"key":"q5+12.1|ball1.5","points":18185,"pool":"q5+12.1","seconds":0.34,"size":16,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.002839506172839506,"edges":62480,"key":"q1+q5+12.1|ball1.5","points":18185,"pool":"q1+q5+12.1","seconds":0.3,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0013148163277127015,"edges":22136,"key":"q1+156.1|ball1.2","points":18145,"pool":"q1+156.1","seconds":0.12,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":134096,"key":"8+12.2|ball2.0","points":35701,"pool":"8+12.2","seconds":0.78,"size":16,"solve_seconds":0.08,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":134020,"key":"8+12.1|ball2.0","points":35701,"pool":"8+12.1","seconds":0.85,"size":16,"solve_seconds":0.19,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":167594,"key":"q1+8+12.1|ball2.0","points":35701,"pool":"q1+8+12.1","seconds":0.84,"size":20,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":167670,"key":"q1+8+12.2|ball2.0","points":35701,"pool":"q1+8+12.2","seconds":0.8,"size":20,"solve_seconds":0.04,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":41900,"key":"q5+24|ball1.2","points":21457,"pool":"q5+24","seconds":0.21,"size":16,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0016569263450693492,"edges":63922,"key":"q1+72|ball1.5","points":31365,"pool":"q1+72","seconds":0.6,"size":12,"solve_seconds":0.08,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":34256,"key":"8+24|ball1.2","points":18397,"pool":"8+24","seconds":0.25,"size":16,"solve_seconds":0.07,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0013148163277127015,"edges":71908,"key":"q1+156.1|ball1.5","points":41721,"pool":"q1+156.1","seconds":0.45,"size":12,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":201172,"key":"8+12.1+12.2|ball2.0","points":35701,"pool":"8+12.1+12.2","seconds":1.04,"size":24,"solve_seconds":0.06,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":34516,"key":"12.2+24|ball1.2","points":18397,"pool":"12.2+24","seconds":0.28,"size":16,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.004436728395061728,"edges":234746,"key":"q1+8+12.1+12.2|ball2.0","points":35701,"pool":"q1+8+12.1+12.2","seconds":1.15,"size":28,"solve_seconds":0.04,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":120012,"key":"q5+24|ball1.5","points":49445,"pool":"q5+24","seconds":0.6,"size":16,"solve_seconds":0.04,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":34316,"key":"12.1+24|ball1.2","points":18397,"pool":"12.1+24","seconds":0.24,"size":16,"solve_seconds":0.04,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.002839506172839506,"edges":211464,"key":"q5+12.1|ball2.0","points":56029,"pool":"q5+12.1","seconds":1.13,"size":16,"solve_seconds":0.08,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0033968701774691355,"edges":174460,"key":"12.1+16|ball2.0","points":46469,"pool":"12.1+16","seconds":1.3,"size":16,"solve_seconds":0.29,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":58106,"key":"q1+q5+24|ball1.2","points":21457,"pool":"q1+q5+24","seconds":0.32,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.002839506172839506,"edges":264664,"key":"q1+q5+12.1|ball2.0","points":56033,"pool":"q1+q5+12.1","seconds":1.42,"size":20,"solve_seconds":0.08,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0033968701774691355,"edges":40172,"key":"12.1+16|ball1.5","points":14721,"pool":"12.1+16","seconds":1.74,"size":16,"solve_seconds":1.56,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":153478,"key":"q1+8+24|ball1.5","points":45137,"pool":"q1+8+24","seconds":1.13,"size":20,"solve_seconds":0.21,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0013148163277127015,"edges":350220,"key":"q1+156.1|ball2.0","points":125829,"pool":"q1+156.1","seconds":2.16,"size":12,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":42990,"key":"q1+12.1+24|ball1.2","points":18397,"pool":"q1+12.1+24","seconds":1.06,"size":20,"solve_seconds":0.65,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":153490,"key":"q1+12.1+24|ball1.5","points":45137,"pool":"q1+12.1+24","seconds":0.98,"size":20,"solve_seconds":0.2,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":563412,"key":"q5+24|ball2.0","points":149101,"pool":"q5+24","seconds":3.2,"size":16,"solve_seconds":0.15,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":43190,"key":"q1+12.2+24|ball1.2","points":18397,"pool":"q1+12.2+24","seconds":1.06,"size":20,"solve_seconds":0.75,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":153498,"key":"q1+12.2+24|ball1.5","points":45137,"pool":"q1+12.2+24","seconds":0.92,"size":20,"solve_seconds":0.24,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":535300,"key":"12.2+24|ball2.0","points":142657,"pool":"12.2+24","seconds":3.76,"size":16,"solve_seconds":0.86,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":122784,"key":"8+24|ball1.5","points":45137,"pool":"8+24","seconds":4.38,"size":16,"solve_seconds":3.81,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":535080,"key":"8+24|ball2.0","points":142657,"pool":"8+24","seconds":4.86,"size":16,"solve_seconds":2.04,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":184188,"key":"8+12.1+24|ball1.5","points":45137,"pool":"8+12.1+24","seconds":1.38,"size":24,"solve_seconds":0.12,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":668978,"key":"q1+8+24|ball2.0","points":142657,"pool":"q1+8+24","seconds":4.58,"size":20,"solve_seconds":0.65,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":535252,"key":"12.1+24|ball2.0","points":142657,"pool":"12.1+24","seconds":5.13,"size":16,"solve_seconds":2.25,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":707526,"key":"q1+q5+24|ball2.0","points":149101,"pool":"q1+q5+24","seconds":5.18,"size":20,"solve_seconds":1.62,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":184196,"key":"8+12.2+24|ball1.5","points":45137,"pool":"8+12.2+24","seconds":1.04,"size":24,"solve_seconds":0.09,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":669150,"key":"q1+12.1+24|ball2.0","points":142657,"pool":"q1+12.1+24","seconds":4.09,"size":20,"solve_seconds":0.2,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":184208,"key":"12.1+12.2+24|ball1.5","points":45137,"pool":"12.1+12.2+24","seconds":0.95,"size":24,"solve_seconds":0.06,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":669198,"key":"q1+12.2+24|ball2.0","points":142657,"pool":"q1+12.2+24","seconds":3.4,"size":20,"solve_seconds":0.2,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":214882,"key":"q1+8+12.1+24|ball1.5","points":45137,"pool":"q1+8+12.1+24","seconds":1.04,"size":28,"solve_seconds":0.06,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":802860,"key":"8+12.1+24|ball2.0","points":142657,"pool":"8+12.1+24","seconds":4.11,"size":24,"solve_seconds":0.28,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":122796,"key":"12.1+24|ball1.5","points":45137,"pool":"12.1+24","seconds":7.73,"size":16,"solve_seconds":7.09,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":214890,"key":"q1+8+12.2+24|ball1.5","points":45137,"pool":"q1+8+12.2+24","seconds":1.09,"size":28,"solve_seconds":0.07,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":214902,"key":"q1+12.1+12.2+24|ball1.5","points":45137,"pool":"q1+12.1+12.2+24","seconds":1.04,"size":28,"solve_seconds":0.07,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":802908,"key":"8+12.2+24|ball2.0","points":142657,"pool":"8+12.2+24","seconds":4.33,"size":24,"solve_seconds":0.22,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":803080,"key":"12.1+12.2+24|ball2.0","points":142657,"pool":"12.1+12.2+24","seconds":4.06,"size":24,"solve_seconds":0.24,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":245600,"key":"8+12.1+12.2+24|ball1.5","points":45137,"pool":"8+12.1+12.2+24","seconds":1.13,"size":32,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":936758,"key":"q1+8+12.1+24|ball2.0","points":142657,"pool":"q1+8+12.1+24","seconds":4.56,"size":28,"solve_seconds":0.19,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":936806,"key":"q1+8+12.2+24|ball2.0","points":142657,"pool":"q1+8+12.2+24","seconds":4.31,"size":28,"solve_seconds":0.16,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":42930,"key":"q1+8+24|ball1.2","points":18397,"pool":"q1+8+24","seconds":11.86,"size":20,"solve_seconds":11.56,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":276294,"key":"q1+8+12.1+12.2+24|ball1.5","points":45137,"pool":"q1+8+12.1+12.2+24","seconds":1.35,"size":36,"solve_seconds":0.06,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0009893630448864503,"edges":30394,"key":"q1+144|ball1.2","points":22745,"pool":"q1+144","seconds":0.18,"size":12,"solve_seconds":0.01,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":936978,"key":"q1+12.1+12.2+24|ball2.0","points":142657,"pool":"q1+12.1+12.2+24","seconds":5.34,"size":28,"solve_seconds":0.17,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0009893630448864503,"edges":111010,"key":"q1+144|ball1.5","points":54537,"pool":"q1+144","seconds":0.57,"size":12,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":60434,"key":"q1+12.1+12.2+24|ball1.2","points":18397,"pool":"q1+12.1+12.2+24","seconds":6.66,"size":28,"solve_seconds":6.37,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0008763907940862673,"edges":32876,"key":"q1+36.2|ball1.2","points":23393,"pool":"q1+36.2","seconds":0.21,"size":12,"solve_seconds":0.03,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0008763907940862673,"edges":116876,"key":"q1+36.2|ball1.5","points":57109,"pool":"q1+36.2","seconds":1.09,"size":12,"solve_seconds":0.37,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":1070688,"key":"8+12.1+12.2+24|ball2.0","points":142657,"pool":"8+12.1+12.2+24","seconds":5.27,"size":32,"solve_seconds":0.23,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0009893630448864503,"edges":452094,"key":"q1+144|ball2.0","points":163801,"pool":"q1+144","seconds":2.39,"size":12,"solve_seconds":0.16,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0008763907940862673,"edges":194516,"key":"q1+12.1+36.2|ball1.5","points":57109,"pool":"q1+12.1+36.2","seconds":1.06,"size":20,"solve_seconds":0.2,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0008492175443672839,"edges":47260,"key":"48+96.1|ball1.2","points":24621,"pool":"48+96.1","seconds":0.33,"size":16,"solve_seconds":0.12,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":77618,"key":"q1+8+12.1+12.2+24|ball1.2","points":18397,"pool":"q1+8+12.1+12.2+24","seconds":6.89,"size":36,"solve_seconds":6.6,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.001109182098765432,"edges":1204586,"key":"q1+8+12.1+12.2+24|ball2.0","points":142657,"pool":"q1+8+12.1+12.2+24","seconds":6.5,"size":36,"solve_seconds":0.25,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0008492175443672839,"edges":36410,"key":"q1+96.1|ball1.2","points":24621,"pool":"q1+96.1","seconds":0.28,"size":12,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0008763907940862673,"edges":508136,"key":"q1+36.2|ball2.0","points":180445,"pool":"q1+36.2","seconds":4.95,"size":12,"solve_seconds":2.3,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0008492175443672839,"edges":121922,"key":"q1+96.1|ball1.5","points":59473,"pool":"q1+96.1","seconds":1.25,"size":12,"solve_seconds":0.44,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0008763907940862673,"edges":846624,"key":"q1+12.1+36.2|ball2.0","points":180445,"pool":"q1+12.1+36.2","seconds":4.2,"size":20,"solve_seconds":0.37,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0008492175443672839,"edges":59790,"key":"q1+48+96.1|ball1.2","points":24621,"pool":"q1+48+96.1","seconds":0.84,"size":20,"solve_seconds":0.56,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"covolume":0.0008492175443672839,"edges":524690,"key":"q1+96.1|ball2.0","points":186893,"pool":"q1+96.1","seconds":3.53,"size":12,"solve_seconds":0.86,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0007322334948881172,"edges":42822,"key":"q1+96.2|ball1.2","points":30365,"pool":"q1+96.2","seconds":0.25,"size":12,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0007322334948881172,"edges":144962,"key":"q1+96.2|ball1.5","points":69045,"pool":"q1+96.2","seconds":1.35,"size":12,"solve_seconds":0.65,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+96.2|ball2.0","points":"> 200000 (box 3080025)","pool":"q1+96.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.0007098765432098765,"edges":56212,"key":"q5+12.2|ball1.2","points":29165,"pool":"q5+12.2","seconds":0.34,"size":16,"solve_seconds":0.03,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0008492175443672839,"edges":161932,"key":"48+96.1|ball1.5","points":59473,"pool":"48+96.1","seconds":8.07,"size":16,"solve_seconds":7.35,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q5+12.2|ball2.0","points":"> 200000 (box 2556801)","pool":"q5+12.2","verdict":"over cap"}
+{"R":2.0,"covolume":0.0008492175443672839,"edges":875734,"key":"q1+48+96.1|ball2.0","points":186893,"pool":"q1+48+96.1","seconds":5.4,"size":20,"solve_seconds":1.16,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0007098765432098765,"edges":70318,"key":"q1+q5+12.2|ball1.2","points":29165,"pool":"q1+q5+12.2","seconds":2.05,"size":20,"solve_seconds":1.73,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q5+12.2|ball2.0","points":"> 200000 (box 2556801)","pool":"q1+q5+12.2","verdict":"over cap"}
+{"R":1.5,"covolume":0.0007098765432098765,"edges":244142,"key":"q1+q5+12.2|ball1.5","points":71129,"pool":"q1+q5+12.2","seconds":1.63,"size":20,"solve_seconds":0.39,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0008492175443672839,"edges":203166,"key":"q1+48+96.1|ball1.5","points":59473,"pool":"q1+48+96.1","seconds":7.77,"size":20,"solve_seconds":6.62,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q5+12.1+12.2|ball2.0","points":"> 200000 (box 2556801)","pool":"q5+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.0007098765432098765,"edges":98518,"key":"q1+q5+12.1+12.2|ball1.2","points":29165,"pool":"q1+q5+12.1+12.2","seconds":0.56,"size":28,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0007098765432098765,"edges":292556,"key":"q5+12.1+12.2|ball1.5","points":71129,"pool":"q5+12.1+12.2","seconds":2.22,"size":24,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q5+12.1+12.2|ball2.0","points":"> 200000 (box 2556801)","pool":"q1+q5+12.1+12.2","verdict":"over cap"}
+{"R":1.5,"covolume":0.0007098765432098765,"edges":341254,"key":"q1+q5+12.1+12.2|ball1.5","points":71129,"pool":"q1+q5+12.1+12.2","seconds":1.53,"size":28,"solve_seconds":0.08,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0006709867017222985,"edges":57636,"key":"12.1+72|ball1.2","points":30581,"pool":"12.1+72","seconds":0.51,"size":16,"solve_seconds":0.07,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"12.1+72|ball2.0","points":"> 200000 (box 2550717)","pool":"12.1+72","verdict":"over cap"}
+{"R":1.5,"covolume":0.0007098765432098765,"edges":195444,"key":"q5+12.2|ball1.5","points":71129,"pool":"q5+12.2","seconds":6.5,"size":16,"solve_seconds":5.61,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0005434992283950617,"edges":86628,"key":"q5+48|ball1.2","points":43733,"pool":"q5+48","seconds":0.72,"size":16,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q5+48|ball2.0","points":"> 200000 (box 5697769)","pool":"q5+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.0007098765432098765,"edges":84412,"key":"q5+12.1+12.2|ball1.2","points":29165,"pool":"q5+12.1+12.2","seconds":4.71,"size":24,"solve_seconds":4.35,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0005434992283950617,"edges":118178,"key":"q1+q5+48|ball1.2","points":43733,"pool":"q1+q5+48","seconds":0.89,"size":20,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q5+48|ball2.0","points":"> 200000 (box 5697769)","pool":"q1+q5+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.0005434992283950617,"edges":332830,"key":"q1+q5+48|ball1.5","points":101237,"pool":"q1+q5+48","seconds":1.81,"size":20,"solve_seconds":0.3,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000429431489102271,"edges":106860,"key":"q5+36.1|ball1.2","points":54529,"pool":"q5+36.1","seconds":1.34,"size":16,"solve_seconds":0.52,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q5+36.1|ball2.0","points":"> 200000 (box 6456681)","pool":"q5+36.1","verdict":"over cap"}
+{"R":2.0,"covolume":0.0016569263450693492,"edges":272734,"key":"q1+72|ball2.0","points":97925,"pool":"q1+72","seconds":35.87,"size":12,"solve_seconds":34.41,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000429431489102271,"edges":145290,"key":"q1+q5+36.1|ball1.2","points":54529,"pool":"q1+q5+36.1","seconds":0.98,"size":20,"solve_seconds":0.05,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q5+36.1|ball2.0","points":"> 200000 (box 6456681)","pool":"q1+q5+36.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.0004200452918401636,"edges":99360,"key":"q13+12.1|ball1.2","points":50029,"pool":"q13+12.1","seconds":0.68,"size":16,"solve_seconds":0.15,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0004200452918401636,"edges":338392,"key":"q13+12.1|ball1.5","points":122421,"pool":"q13+12.1","seconds":3.41,"size":16,"solve_seconds":1.71,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q13+12.1|ball2.0","points":"> 200000 (box 4028049)","pool":"q13+12.1","verdict":"over cap"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":122804,"key":"12.2+24|ball1.5","points":45137,"pool":"12.2+24","seconds":40.92,"size":16,"solve_seconds":40.35,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0004200452918401636,"edges":125676,"key":"q1+q13+12.1|ball1.2","points":50029,"pool":"q1+q13+12.1","seconds":1.48,"size":20,"solve_seconds":0.83,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q13+12.1|ball2.0","points":"> 200000 (box 4028049)","pool":"q1+q13+12.1","verdict":"over cap"}
+{"R":2.0,"covolume":0.0008492175443672839,"edges":700164,"key":"48+96.1|ball2.0","points":186893,"pool":"48+96.1","seconds":25.24,"size":16,"solve_seconds":22.1,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0004200452918401636,"edges":421864,"key":"q1+q13+12.1|ball1.5","points":122421,"pool":"q1+q13+12.1","seconds":2.43,"size":20,"solve_seconds":0.17,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":139372,"key":"12.1+48|ball1.2","points":73901,"pool":"12.1+48","seconds":1.1,"size":16,"solve_seconds":0.38,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":68944,"key":"8+12.1+12.2+24|ball1.2","points":18397,"pool":"8+12.1+12.2+24","seconds":40.92,"size":32,"solve_seconds":40.54,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"12.1+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.1+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":139396,"key":"12.2+48|ball1.2","points":73901,"pool":"12.2+48","seconds":0.98,"size":16,"solve_seconds":0.22,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":139268,"key":"8+48|ball1.2","points":73901,"pool":"8+48","seconds":12.18,"size":16,"solve_seconds":11.03,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.001109182098765432,"edges":158446,"key":"q1+q5+24|ball1.5","points":49445,"pool":"q1+q5+24","seconds":56.12,"size":20,"solve_seconds":55.36,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.004436728395061728,"edges":13116,"key":"8+12.1+12.2|ball1.2","points":4609,"pool":"8+12.1+12.2","seconds":61.07,"size":24,"solve_seconds":61.03,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":138928,"key":"24+48|ball1.2","points":73901,"pool":"24+48","seconds":6.27,"size":16,"solve_seconds":5.22,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":51500,"key":"8+12.1+24|ball1.2","points":18397,"pool":"8+12.1+24","seconds":60.44,"size":24,"solve_seconds":60.07,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+8+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":51700,"key":"8+12.2+24|ball1.2","points":18397,"pool":"8+12.2+24","seconds":60.35,"size":24,"solve_seconds":60.12,"verdict":"Unknown (budget)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":51760,"key":"12.1+12.2+24|ball1.2","points":18397,"pool":"12.1+12.2+24","seconds":60.73,"size":24,"solve_seconds":60.53,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.1+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.1+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":60174,"key":"q1+8+12.1+24|ball1.2","points":18397,"pool":"q1+8+12.1+24","seconds":60.51,"size":28,"solve_seconds":60.25,"verdict":"Unknown (budget)"}
+{"R":1.2,"covolume":0.001109182098765432,"edges":60374,"key":"q1+8+12.2+24|ball1.2","points":18397,"pool":"q1+8+12.2+24","seconds":60.86,"size":28,"solve_seconds":60.57,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000429431489102271,"edges":425666,"key":"q1+q5+36.1|ball1.5","points":128785,"pool":"q1+q5+36.1","seconds":37.12,"size":20,"solve_seconds":34.02,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":491280,"key":"24+48|ball1.5","points":180445,"pool":"24+48","seconds":18.97,"size":16,"solve_seconds":16.44,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.0008763907940862673,"edges":54812,"key":"q1+12.1+36.2|ball1.2","points":23393,"pool":"q1+12.1+36.2","seconds":60.45,"size":20,"solve_seconds":60.22,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737560,"key":"8+12.1+48|ball1.5","points":180445,"pool":"8+12.1+48","seconds":4.89,"size":24,"solve_seconds":1.11,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+12.1+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.1+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":173834,"key":"q1+24+48|ball1.2","points":73901,"pool":"q1+24+48","seconds":14.83,"size":20,"solve_seconds":13.88,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":614666,"key":"q1+12.2+48|ball1.5","points":180445,"pool":"q1+12.2+48","seconds":16.99,"size":20,"solve_seconds":13.84,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737704,"key":"8+12.2+48|ball1.5","points":180445,"pool":"8+12.2+48","seconds":4.93,"size":24,"solve_seconds":0.94,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":614682,"key":"q1+8+48|ball1.5","points":180445,"pool":"q1+8+48","seconds":31.26,"size":20,"solve_seconds":28.15,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.0006709867017222985,"edges":202948,"key":"12.1+72|ball1.5","points":74449,"pool":"12.1+72","seconds":61.02,"size":16,"solve_seconds":60.1,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737244,"key":"8+24+48|ball1.5","points":180445,"pool":"8+24+48","seconds":5.72,"size":24,"solve_seconds":1.28,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":614522,"key":"q1+12.1+48|ball1.5","points":180445,"pool":"q1+12.1+48","seconds":28.45,"size":20,"solve_seconds":24.17,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"12.1+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.1+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.0005434992283950617,"edges":263508,"key":"q5+48|ball1.5","points":101237,"pool":"q5+48","seconds":63.91,"size":16,"solve_seconds":62.76,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"12.1+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.1+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000429431489102271,"edges":330996,"key":"q5+36.1|ball1.5","points":128785,"pool":"q5+36.1","seconds":62.53,"size":16,"solve_seconds":60.96,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737544,"key":"12.1+12.2+48|ball1.5","points":180445,"pool":"12.1+12.2+48","seconds":5.17,"size":24,"solve_seconds":1.1,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.2+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":614206,"key":"q1+24+48|ball1.5","points":180445,"pool":"q1+24+48","seconds":26.37,"size":20,"solve_seconds":23.08,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737084,"key":"12.1+24+48|ball1.5","points":180445,"pool":"12.1+24+48","seconds":6.82,"size":24,"solve_seconds":1.33,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+8+12.1+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+12.1+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860486,"key":"q1+8+12.1+48|ball1.5","points":180445,"pool":"q1+8+12.1+48","seconds":5.11,"size":28,"solve_seconds":0.8,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":737228,"key":"12.2+24+48|ball1.5","points":180445,"pool":"12.2+24+48","seconds":7.23,"size":24,"solve_seconds":1.46,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+8+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":491756,"key":"8+48|ball1.5","points":180445,"pool":"8+48","seconds":62.49,"size":16,"solve_seconds":60.21,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":491596,"key":"12.1+48|ball1.5","points":180445,"pool":"12.1+48","seconds":62.45,"size":16,"solve_seconds":60.09,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.1+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.1+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860630,"key":"q1+8+12.2+48|ball1.5","points":180445,"pool":"q1+8+12.2+48","seconds":5.34,"size":28,"solve_seconds":0.32,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860470,"key":"q1+12.1+12.2+48|ball1.5","points":180445,"pool":"q1+12.1+12.2+48","seconds":4.61,"size":28,"solve_seconds":0.29,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+8+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860170,"key":"q1+8+24+48|ball1.5","points":180445,"pool":"q1+8+24+48","seconds":5.09,"size":28,"solve_seconds":0.3,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":491740,"key":"12.2+48|ball1.5","points":180445,"pool":"12.2+48","seconds":67.17,"size":16,"solve_seconds":64.87,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.1+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.1+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860010,"key":"q1+12.1+24+48|ball1.5","points":180445,"pool":"q1+12.1+24+48","seconds":4.38,"size":28,"solve_seconds":0.22,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":174174,"key":"q1+8+48|ball1.2","points":73901,"pool":"q1+8+48","seconds":61.27,"size":20,"solve_seconds":60.48,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":860154,"key":"q1+12.2+24+48|ball1.5","points":180445,"pool":"q1+12.2+24+48","seconds":4.55,"size":28,"solve_seconds":0.26,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":174278,"key":"q1+12.1+48|ball1.2","points":73901,"pool":"q1+12.1+48","seconds":63.47,"size":20,"solve_seconds":62.64,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"8+12.1+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.1+12.2+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":983508,"key":"8+12.1+12.2+48|ball1.5","points":180445,"pool":"8+12.1+12.2+48","seconds":5.09,"size":32,"solve_seconds":0.27,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":174302,"key":"q1+12.2+48|ball1.2","points":73901,"pool":"q1+12.2+48","seconds":63.29,"size":20,"solve_seconds":62.36,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"8+12.1+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.1+24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":278368,"key":"8+12.1+24+48|ball1.2","points":73901,"pool":"8+12.1+24+48","seconds":2.45,"size":32,"solve_seconds":1.1,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":983048,"key":"8+12.1+24+48|ball1.5","points":180445,"pool":"8+12.1+24+48","seconds":5.34,"size":32,"solve_seconds":0.5,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":983192,"key":"8+12.2+24+48|ball1.5","points":180445,"pool":"8+12.2+24+48","seconds":6.08,"size":32,"solve_seconds":0.89,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":209040,"key":"8+12.1+48|ball1.2","points":73901,"pool":"8+12.1+48","seconds":61.58,"size":24,"solve_seconds":60.64,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"12.1+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":983032,"key":"12.1+12.2+24+48|ball1.5","points":180445,"pool":"12.1+12.2+24+48","seconds":6.19,"size":32,"solve_seconds":0.88,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":209064,"key":"8+12.2+48|ball1.2","points":73901,"pool":"8+12.2+48","seconds":61.52,"size":24,"solve_seconds":60.45,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+8+12.1+12.2+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+12.1+12.2+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":208596,"key":"8+24+48|ball1.2","points":73901,"pool":"8+24+48","seconds":60.94,"size":24,"solve_seconds":60.04,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1106434,"key":"q1+8+12.1+12.2+48|ball1.5","points":180445,"pool":"q1+8+12.1+12.2+48","seconds":5.7,"size":36,"solve_seconds":0.26,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+8+12.1+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+12.1+24+48","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1105974,"key":"q1+8+12.1+24+48|ball1.5","points":180445,"pool":"q1+8+12.1+24+48","seconds":5.87,"size":36,"solve_seconds":0.24,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":278392,"key":"8+12.2+24+48|ball1.2","points":73901,"pool":"8+12.2+24+48","seconds":22.74,"size":32,"solve_seconds":21.45,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+8+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+8+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":209168,"key":"12.1+12.2+48|ball1.2","points":73901,"pool":"12.1+12.2+48","seconds":61.11,"size":24,"solve_seconds":60.05,"verdict":"Unknown (budget)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":313274,"key":"q1+8+12.1+24+48|ball1.2","points":73901,"pool":"q1+8+12.1+24+48","seconds":10.65,"size":36,"solve_seconds":9.19,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+12.1+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"q1+12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":208700,"key":"12.1+24+48|ball1.2","points":73901,"pool":"12.1+24+48","seconds":61.85,"size":24,"solve_seconds":60.91,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1106118,"key":"q1+8+12.2+24+48|ball1.5","points":180445,"pool":"q1+8+12.2+24+48","seconds":5.91,"size":36,"solve_seconds":0.25,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"8+12.1+12.2+24+48|ball2.0","points":"> 200000 (box 4844401)","pool":"8+12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":208724,"key":"12.2+24+48|ball1.2","points":73901,"pool":"12.2+24+48","seconds":61.66,"size":24,"solve_seconds":60.65,"verdict":"Unknown (budget)"}
+{"R":1.2,"covolume":0.0002456320218719296,"edges":168552,"key":"q17+12.1|ball1.2","points":85641,"pool":"q17+12.1","seconds":1.26,"size":16,"solve_seconds":0.1,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q17+12.1|ball1.5","points":"> 200000 (box 2350089)","pool":"q17+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q17+12.1|ball2.0","points":"> 200000 (box 6859161)","pool":"q17+12.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q17+12.1|ball1.5","points":"> 200000 (box 2350089)","pool":"q1+q17+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q17+12.1|ball2.0","points":"> 200000 (box 6859161)","pool":"q1+q17+12.1","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1105958,"key":"q1+12.1+12.2+24+48|ball1.5","points":180445,"pool":"q1+12.1+12.2+24+48","seconds":6.08,"size":36,"solve_seconds":0.22,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"156.2+156.6|ball1.5","points":"> 200000 (box 2047761)","pool":"156.2+156.6","verdict":"over cap"}
+{"R":2.0,"key":"156.2+156.6|ball2.0","points":"> 200000 (box 5832225)","pool":"156.2+156.6","verdict":"over cap"}
+{"R":1.2,"covolume":0.0002456320218719296,"edges":213660,"key":"q1+q17+12.1|ball1.2","points":85641,"pool":"q1+q17+12.1","seconds":1.88,"size":20,"solve_seconds":0.74,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"12.1+36.1|ball1.5","points":"> 200000 (box 2030625)","pool":"12.1+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+36.1|ball2.0","points":"> 200000 (box 6125625)","pool":"12.1+36.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":243946,"key":"q1+8+12.1+48|ball1.2","points":73901,"pool":"q1+8+12.1+48","seconds":62.47,"size":28,"solve_seconds":61.31,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"12.2+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.2+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"12.2+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":176272,"key":"12.1+36.1|ball1.2","points":93525,"pool":"12.1+36.1","seconds":1.65,"size":16,"solve_seconds":0.6,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"36.1+36.2","verdict":"over cap"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1228996,"key":"8+12.1+12.2+24+48|ball1.5","points":180445,"pool":"8+12.1+12.2+24+48","seconds":6.68,"size":40,"solve_seconds":0.3,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":176144,"key":"36.1+36.2|ball1.2","points":93525,"pool":"36.1+36.2","seconds":1.54,"size":16,"solve_seconds":0.56,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+12.1+36.1|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.1+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+36.1|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.1+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+36.1|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+36.1|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":243970,"key":"q1+8+12.2+48|ball1.2","points":73901,"pool":"q1+8+12.2+48","seconds":62.12,"size":28,"solve_seconds":60.36,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.2+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":175992,"key":"12.2+36.2|ball1.2","points":93525,"pool":"12.2+36.2","seconds":5.44,"size":16,"solve_seconds":4.45,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":348164,"key":"8+12.1+12.2+24+48|ball1.2","points":73901,"pool":"8+12.1+12.2+24+48","seconds":12.48,"size":40,"solve_seconds":10.78,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"12.1+12.2+36.1|ball1.5","points":"> 200000 (box 2030625)","pool":"12.1+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+36.1|ball2.0","points":"> 200000 (box 6125625)","pool":"12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":313742,"key":"q1+8+12.1+12.2+48|ball1.2","points":73901,"pool":"q1+8+12.1+12.2+48","seconds":29.23,"size":36,"solve_seconds":27.18,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"12.1+12.2+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"12.1+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":278496,"key":"12.1+12.2+24+48|ball1.2","points":73901,"pool":"12.1+12.2+24+48","seconds":33.69,"size":32,"solve_seconds":32.32,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"12.1+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"12.1+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":244074,"key":"q1+12.1+12.2+48|ball1.2","points":73901,"pool":"q1+12.1+12.2+48","seconds":63.91,"size":28,"solve_seconds":62.11,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"12.2+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.2+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":243502,"key":"q1+8+24+48|ball1.2","points":73901,"pool":"q1+8+24+48","seconds":61.53,"size":28,"solve_seconds":60.4,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.1+12.2+36.1|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.1+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+36.1|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":243606,"key":"q1+12.1+24+48|ball1.2","points":73901,"pool":"q1+12.1+24+48","seconds":62.27,"size":28,"solve_seconds":60.62,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.1+12.2+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.1+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":313298,"key":"q1+8+12.2+24+48|ball1.2","points":73901,"pool":"q1+8+12.2+24+48","seconds":25.57,"size":36,"solve_seconds":24.11,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+12.1+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.1+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":243630,"key":"q1+12.2+24+48|ball1.2","points":73901,"pool":"q1+12.2+24+48","seconds":61.4,"size":28,"solve_seconds":60.27,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":313402,"key":"q1+12.1+12.2+24+48|ball1.2","points":73901,"pool":"q1+12.1+12.2+24+48","seconds":28.84,"size":36,"solve_seconds":27.34,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"12.1+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":308046,"key":"q1+12.1+12.2+36.2|ball1.2","points":93525,"pool":"q1+12.1+12.2+36.2","seconds":12.91,"size":28,"solve_seconds":10.7,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+12.1+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 2030625)","pool":"q1+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":278836,"key":"8+12.1+12.2+48|ball1.2","points":73901,"pool":"8+12.1+12.2+48","seconds":61.33,"size":32,"solve_seconds":60.05,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+156.6|ball1.5","points":"> 200000 (box 2752281)","pool":"q1+156.6","verdict":"over cap"}
+{"R":2.0,"key":"q1+156.6|ball2.0","points":"> 200000 (box 8037225)","pool":"q1+156.6","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017957557594941909,"edges":170098,"key":"q1+156.6|ball1.2","points":115345,"pool":"q1+156.6","seconds":1.57,"size":12,"solve_seconds":0.13,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q5+8+12.1|ball1.5","points":"> 200000 (box 2812329)","pool":"q5+8+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1|ball2.0","points":"> 200000 (box 8450649)","pool":"q5+8+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":396238,"key":"q1+12.1+12.2+36.1+36.2|ball1.2","points":93525,"pool":"q1+12.1+12.2+36.1+36.2","seconds":22.76,"size":36,"solve_seconds":20.83,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q5+8+12.2|ball1.5","points":"> 200000 (box 2812329)","pool":"q5+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.2|ball2.0","points":"> 200000 (box 8450649)","pool":"q5+8+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00022431412774304597,"edges":259016,"key":"156.2+156.6|ball1.2","points":91517,"pool":"156.2+156.6","seconds":62.87,"size":24,"solve_seconds":61.58,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q5+8+12.1|ball1.5","points":"> 200000 (box 2812329)","pool":"q1+q5+8+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.1|ball2.0","points":"> 200000 (box 8450649)","pool":"q1+q5+8+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":219966,"key":"q1+12.2+36.2|ball1.2","points":93525,"pool":"q1+12.2+36.2","seconds":61.6,"size":20,"solve_seconds":60.54,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q5+8+12.2|ball1.5","points":"> 200000 (box 2812329)","pool":"q1+q5+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.2|ball2.0","points":"> 200000 (box 8450649)","pool":"q1+q5+8+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":220118,"key":"q1+36.1+36.2|ball1.2","points":93525,"pool":"q1+36.1+36.2","seconds":62.12,"size":20,"solve_seconds":60.98,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q5+8+12.1+12.2|ball1.5","points":"> 200000 (box 2812329)","pool":"q5+8+12.1+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+12.2|ball2.0","points":"> 200000 (box 8450649)","pool":"q5+8+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":220206,"key":"q1+12.2+36.1|ball1.2","points":93525,"pool":"q1+12.2+36.1","seconds":63.04,"size":20,"solve_seconds":61.96,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q5+8+12.1+12.2|ball1.5","points":"> 200000 (box 2812329)","pool":"q1+q5+8+12.1+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.1+12.2|ball2.0","points":"> 200000 (box 8450649)","pool":"q1+q5+8+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":264072,"key":"12.1+12.2+36.2|ball1.2","points":93525,"pool":"12.1+12.2+36.2","seconds":61.69,"size":24,"solve_seconds":60.24,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"36.1+48|ball1.5","points":"> 200000 (box 2907025)","pool":"36.1+48","verdict":"over cap"}
+{"R":2.0,"key":"36.1+48|ball2.0","points":"> 200000 (box 9455625)","pool":"36.1+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":220246,"key":"q1+12.1+36.1|ball1.2","points":93525,"pool":"q1+12.1+36.1","seconds":67.47,"size":20,"solve_seconds":66.33,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+36.1+48|ball1.5","points":"> 200000 (box 2907025)","pool":"q1+36.1+48","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":264312,"key":"12.1+12.2+36.1|ball1.2","points":93525,"pool":"12.1+12.2+36.1","seconds":63.34,"size":24,"solve_seconds":62.01,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+36.1+48|ball2.0","points":"> 200000 (box 9455625)","pool":"q1+36.1+48","verdict":"over cap"}
+{"R":1.5,"key":"q13+24|ball1.5","points":"> 200000 (box 5546025)","pool":"q13+24","verdict":"over cap"}
+{"R":2.0,"key":"q13+24|ball2.0","points":"> 200000 (box 19263321)","pool":"q13+24","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":264184,"key":"12.2+36.1+36.2|ball1.2","points":93525,"pool":"12.2+36.1+36.2","seconds":61.68,"size":24,"solve_seconds":60.3,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q13+24|ball1.5","points":"> 200000 (box 5546025)","pool":"q1+q13+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q13+24|ball2.0","points":"> 200000 (box 19263321)","pool":"q1+q13+24","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":308286,"key":"q1+12.1+12.2+36.1|ball1.2","points":93525,"pool":"q1+12.1+12.2+36.1","seconds":61.75,"size":28,"solve_seconds":60.16,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"12.1+39.1|ball1.5","points":"> 200000 (box 4439449)","pool":"12.1+39.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+39.1|ball2.0","points":"> 200000 (box 13727025)","pool":"12.1+39.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00016408019212506392,"edges":284196,"key":"q13+24|ball1.2","points":145357,"pool":"q13+24","seconds":3.08,"size":16,"solve_seconds":1.48,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"39.1+156.3|ball1.5","points":"> 200000 (box 4439449)","pool":"39.1+156.3","verdict":"over cap"}
+{"R":1.2,"covolume":0.00016408019212506392,"edges":394162,"key":"q1+q13+24|ball1.2","points":145357,"pool":"q1+q13+24","seconds":3.25,"size":20,"solve_seconds":1.03,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"39.1+156.3|ball2.0","points":"> 200000 (box 13727025)","pool":"39.1+156.3","verdict":"over cap"}
+{"R":1.5,"key":"q5+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q5+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q5+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":264224,"key":"12.1+36.1+36.2|ball1.2","points":93525,"pool":"12.1+36.1+36.2","seconds":66.53,"size":24,"solve_seconds":65.08,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q1+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.000121788279882651,"edges":316504,"key":"12.1+39.1|ball1.2","points":168029,"pool":"12.1+39.1","seconds":3.91,"size":16,"solve_seconds":1.84,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q25+12.1|ball1.5","points":"> 200000 (box 5049009)","pool":"q25+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q25+12.1|ball2.0","points":"> 200000 (box 14768649)","pool":"q25+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":308198,"key":"q1+12.1+36.1+36.2|ball1.2","points":93525,"pool":"q1+12.1+36.1+36.2","seconds":62.14,"size":28,"solve_seconds":60.63,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q5+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q1+q5+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q1+q5+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":382774,"key":"q1+q5+8+12.2|ball1.2","points":115573,"pool":"q1+q5+8+12.2","seconds":15.62,"size":28,"solve_seconds":13.71,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+q25+12.1|ball1.5","points":"> 200000 (box 5049009)","pool":"q1+q25+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q25+12.1|ball2.0","points":"> 200000 (box 14768649)","pool":"q1+q25+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":308158,"key":"q1+12.2+36.1+36.2|ball1.2","points":93525,"pool":"q1+12.2+36.1+36.2","seconds":64.49,"size":28,"solve_seconds":63.06,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.1+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q1+12.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q1+12.1+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":554312,"key":"q5+q25+12.1|ball1.2","points":185189,"pool":"q5+q25+12.1","seconds":3.62,"size":24,"solve_seconds":0.33,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q5+q25+12.1|ball1.5","points":"> 200000 (box 5049009)","pool":"q5+q25+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+q25+12.1|ball2.0","points":"> 200000 (box 14768649)","pool":"q5+q25+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00021909769852156683,"edges":352264,"key":"12.1+12.2+36.1+36.2|ball1.2","points":93525,"pool":"12.1+12.2+36.1+36.2","seconds":62.07,"size":32,"solve_seconds":60.35,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q5+12.1+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q5+12.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q5+12.1+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":492762,"key":"q1+q5+8+12.1+12.2|ball1.2","points":115573,"pool":"q1+q5+8+12.1+12.2","seconds":18.51,"size":36,"solve_seconds":15.99,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+q5+12.1+60.2|ball1.5","points":"> 200000 (box 3775249)","pool":"q1+q5+12.1+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":371456,"key":"q25+12.1|ball1.2","points":185189,"pool":"q25+12.1","seconds":9.71,"size":16,"solve_seconds":6.28,"verdict":"3-colourable (model verified)"}
+{"R":2.0,"key":"q1+q5+12.1+60.2|ball2.0","points":"> 200000 (box 10843849)","pool":"q1+q5+12.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q13+12.2|ball1.5","points":"> 200000 (box 4549689)","pool":"q13+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q13+12.2|ball2.0","points":"> 200000 (box 16769025)","pool":"q13+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":327768,"key":"q5+8+12.1|ball1.2","points":115573,"pool":"q5+8+12.1","seconds":62.75,"size":24,"solve_seconds":61.11,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+q13+12.2|ball1.5","points":"> 200000 (box 4549689)","pool":"q1+q13+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q13+12.2|ball2.0","points":"> 200000 (box 16769025)","pool":"q1+q13+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":327852,"key":"q5+8+12.2|ball1.2","points":115573,"pool":"q5+8+12.2","seconds":62.85,"size":24,"solve_seconds":61.07,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q13+12.1+12.2|ball1.5","points":"> 200000 (box 4549689)","pool":"q13+12.1+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q13+12.1+12.2|ball2.0","points":"> 200000 (box 16769025)","pool":"q13+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+192|ball1.2","points":"> 200000 (box 2660161)","pool":"q1+192","verdict":"over cap"}
+{"R":1.5,"key":"q1+192|ball1.5","points":"> 200000 (box 6859161)","pool":"q1+192","verdict":"over cap"}
+{"R":2.0,"key":"q1+192|ball2.0","points":"> 200000 (box 18122049)","pool":"q1+192","verdict":"over cap"}
+{"R":1.2,"key":"q17+24|ball1.2","points":"> 200000 (box 6027025)","pool":"q17+24","verdict":"over cap"}
+{"R":1.5,"key":"q17+24|ball1.5","points":"> 200000 (box 9455625)","pool":"q17+24","verdict":"over cap"}
+{"R":2.0,"key":"q17+24|ball2.0","points":"> 200000 (box 32867289)","pool":"q17+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q17+24|ball1.2","points":"> 200000 (box 6027025)","pool":"q1+q17+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q17+24|ball1.5","points":"> 200000 (box 9455625)","pool":"q1+q17+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q17+24|ball2.0","points":"> 200000 (box 32867289)","pool":"q1+q17+24","verdict":"over cap"}
+{"R":1.2,"key":"36.2+48|ball1.2","points":"> 200000 (box 1874161)","pool":"36.2+48","verdict":"over cap"}
+{"R":1.5,"key":"36.2+48|ball1.5","points":"> 200000 (box 4879681)","pool":"36.2+48","verdict":"over cap"}
+{"R":2.0,"key":"36.2+48|ball2.0","points":"> 200000 (box 13845841)","pool":"36.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q13+48|ball1.2","points":"> 200000 (box 7049025)","pool":"q13+48","verdict":"over cap"}
+{"R":1.5,"key":"q13+48|ball1.5","points":"> 200000 (box 10989225)","pool":"q13+48","verdict":"over cap"}
+{"R":2.0,"key":"q13+48|ball2.0","points":"> 200000 (box 38378025)","pool":"q13+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q13+48|ball1.2","points":"> 200000 (box 7049025)","pool":"q1+q13+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q13+48|ball1.5","points":"> 200000 (box 10989225)","pool":"q1+q13+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q13+48|ball2.0","points":"> 200000 (box 38378025)","pool":"q1+q13+48","verdict":"over cap"}
+{"R":1.2,"key":"12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"16+48","verdict":"over cap"}
+{"R":1.5,"key":"16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"16+48","verdict":"over cap"}
+{"R":2.0,"key":"16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"16+48","verdict":"over cap"}
+{"R":1.2,"key":"16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"16+24","verdict":"over cap"}
+{"R":1.5,"key":"16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"16+24","verdict":"over cap"}
+{"R":2.0,"key":"16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+16","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+16+24","verdict":"over cap"}
+{"R":1.2,"covolume":0.0001050113229600409,"edges":386484,"key":"q13+12.2|ball1.2","points":197221,"pool":"q13+12.2","seconds":9.16,"size":16,"solve_seconds":5.72,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"key":"q1+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+16+24","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+16|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+16+48","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+16|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+16","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+16|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+16","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"8+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"8+16+24","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"8+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"8+16+24","verdict":"over cap"}
+{"R":1.2,"key":"8+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+16+48","verdict":"over cap"}
+{"R":2.0,"key":"8+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"8+16+24","verdict":"over cap"}
+{"R":1.5,"key":"8+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"8+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"12.1+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+16+24","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"12.1+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+16+48","verdict":"over cap"}
+{"R":2.0,"key":"12.1+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"12.1+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"12.1+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.2+16+48","verdict":"over cap"}
+{"R":1.5,"key":"12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"12.2+16+24","verdict":"over cap"}
+{"R":1.2,"key":"16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.1+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.1+16","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+16+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.1+16","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+16+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.2+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.2+16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.2+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+16+24","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+12.2+16","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+16+48","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+16+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+16+24","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.2+16+48","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"8+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"8+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"8+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"12.1+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.2,"key":"12.2+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"12.2+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.2+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"12.1+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.1+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.1+16+24","verdict":"over cap"}
+{"R":2.0,"key":"12.2+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.2+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.1+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.1+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.1+16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+12.2+16|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+12.2+16|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.1+12.2+16","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.1+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+12.2+16|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.1+12.2+16","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+8+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+8+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+12.2+16+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+8+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.1+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"q1+12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"q1+12.2+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+16+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+12.2+16+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"q1+12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+16+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+16+24|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+16+24|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+12.2+16+24","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+16+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+12.2+16+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.1+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+16+24|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+12.2+16+24","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"8+12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"8+12.2+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.1+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+16+24+48|ball1.2","points":"> 200000 (box 2712609)","pool":"12.1+12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+16+24+48|ball1.5","points":"> 200000 (box 6125625)","pool":"12.1+12.2+16+24+48","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"8+12.2+16+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+72|ball1.2","points":"> 200000 (box 4730625)","pool":"q1+q5+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+16+24+48|ball2.0","points":"> 200000 (box 18861649)","pool":"12.1+12.2+16+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+72|ball1.5","points":"> 200000 (box 14447601)","pool":"q1+q5+72","verdict":"over cap"}
+{"R":1.2,"key":"q13+36.1|ball1.2","points":"> 200000 (box 7924225)","pool":"q13+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+72|ball2.0","points":"> 200000 (box 25613721)","pool":"q1+q5+72","verdict":"over cap"}
+{"R":1.5,"key":"q13+36.1|ball1.5","points":"> 200000 (box 12425625)","pool":"q13+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q13+36.1|ball1.2","points":"> 200000 (box 7924225)","pool":"q1+q13+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q13+36.1|ball2.0","points":"> 200000 (box 43204329)","pool":"q13+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q13+36.1|ball1.5","points":"> 200000 (box 12425625)","pool":"q1+q13+36.1","verdict":"over cap"}
+{"R":1.2,"key":"39.2+52.2|ball1.2","points":"> 200000 (box 2825761)","pool":"39.2+52.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q13+36.1|ball2.0","points":"> 200000 (box 43204329)","pool":"q1+q13+36.1","verdict":"over cap"}
+{"R":1.5,"key":"39.2+52.2|ball1.5","points":"> 200000 (box 5764801)","pool":"39.2+52.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+156.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+156.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+156.2|ball1.5","points":"> 200000 (box 6275025)","pool":"q1+156.2","verdict":"over cap"}
+{"R":2.0,"key":"39.2+52.2|ball2.0","points":"> 200000 (box 17850625)","pool":"39.2+52.2","verdict":"over cap"}
+{"R":1.2,"key":"q17+12.2|ball1.2","points":"> 200000 (box 4941729)","pool":"q17+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q17+12.2|ball1.5","points":"> 200000 (box 7733961)","pool":"q17+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+156.2|ball2.0","points":"> 200000 (box 21930489)","pool":"q1+156.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q17+12.2|ball1.2","points":"> 200000 (box 4941729)","pool":"q1+q17+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q17+12.2|ball2.0","points":"> 200000 (box 28547649)","pool":"q17+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q17+12.2|ball1.5","points":"> 200000 (box 7733961)","pool":"q1+q17+12.2","verdict":"over cap"}
+{"R":1.2,"key":"q17+12.1+12.2|ball1.2","points":"> 200000 (box 4941729)","pool":"q17+12.1+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q17+12.1+12.2|ball1.5","points":"> 200000 (box 7733961)","pool":"q17+12.1+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q17+12.2|ball2.0","points":"> 200000 (box 28547649)","pool":"q1+q17+12.2","verdict":"over cap"}
+{"R":1.2,"key":"8+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"8+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"8+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q17+12.1+12.2|ball2.0","points":"> 200000 (box 28547649)","pool":"q17+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"key":"8+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"8+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":382690,"key":"q1+q5+8+12.1|ball1.2","points":115573,"pool":"q1+q5+8+12.1","seconds":64.61,"size":28,"solve_seconds":62.71,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+8+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.2+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.2+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.1+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.1+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+12.2+36.1|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+12.2+36.1|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+12.2+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+12.2+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+12.2+36.1|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+12.2+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+12.2+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+12.2+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"q1+8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"q1+8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+36.1+36.2|ball1.2","points":"> 200000 (box 3080025)","pool":"8+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+36.1+36.2|ball1.5","points":"> 200000 (box 7144929)","pool":"8+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"q1+8+12.2+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+36.1+36.2|ball2.0","points":"> 200000 (box 23184225)","pool":"8+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+156.1|ball1.2","points":"> 200000 (box 10989225)","pool":"q1+q5+156.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+156.1|ball1.5","points":"> 200000 (box 17181025)","pool":"q1+q5+156.1","verdict":"over cap"}
+{"R":1.2,"key":"q17+48|ball1.2","points":"> 200000 (box 12075625)","pool":"q17+48","verdict":"over cap"}
+{"R":1.5,"key":"q17+48|ball1.5","points":"> 200000 (box 18792225)","pool":"q17+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+156.1|ball2.0","points":"> 200000 (box 59830225)","pool":"q1+q5+156.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q17+48|ball1.2","points":"> 200000 (box 12075625)","pool":"q1+q17+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q17+48|ball1.5","points":"> 200000 (box 18792225)","pool":"q1+q17+48","verdict":"over cap"}
+{"R":2.0,"key":"q17+48|ball2.0","points":"> 200000 (box 65593801)","pool":"q17+48","verdict":"over cap"}
+{"R":1.2,"key":"q25+24|ball1.2","points":"> 200000 (box 13068225)","pool":"q25+24","verdict":"over cap"}
+{"R":1.5,"key":"q25+24|ball1.5","points":"> 200000 (box 20385225)","pool":"q25+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q17+48|ball2.0","points":"> 200000 (box 65593801)","pool":"q1+q17+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q25+24|ball1.2","points":"> 200000 (box 13068225)","pool":"q1+q25+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q25+24|ball1.5","points":"> 200000 (box 20385225)","pool":"q1+q25+24","verdict":"over cap"}
+{"R":2.0,"key":"q25+24|ball2.0","points":"> 200000 (box 70913241)","pool":"q25+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+q25+24|ball1.2","points":"> 200000 (box 13068225)","pool":"q5+q25+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+q25+24|ball1.5","points":"> 200000 (box 20385225)","pool":"q5+q25+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q25+24|ball2.0","points":"> 200000 (box 70913241)","pool":"q1+q25+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+8+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+8+24","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":595124,"key":"q1+q5+60.2|ball1.2","points":180433,"pool":"q1+q5+60.2","seconds":41.4,"size":28,"solve_seconds":38.24,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"key":"q5+12.1+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+12.1+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+8+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+q25+24|ball2.0","points":"> 200000 (box 70913241)","pool":"q5+q25+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+8+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+8+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+12.1+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+8+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.1+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+8+12.1+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.1+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+8+12.1+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+8+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+12.1+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+8+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+12.1+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+8+12.1+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+12.1+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+8+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+12.1+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+8+12.1+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+8+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+8+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.1+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+8+12.1+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+8+12.2+24","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+12.1+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+12.1+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.1+12.2+24|ball1.2","points":"> 200000 (box 4862025)","pool":"q5+8+12.1+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+12.1+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.1+12.2+24|ball1.5","points":"> 200000 (box 9678321)","pool":"q5+8+12.1+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"12.2+120|ball1.2","points":"> 200000 (box 4862025)","pool":"12.2+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+8+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"12.2+120|ball1.5","points":"> 200000 (box 9678321)","pool":"12.2+120","verdict":"over cap"}
+{"R":1.2,"key":"12.1+120|ball1.2","points":"> 200000 (box 4862025)","pool":"12.1+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+12.1+12.2+24","verdict":"over cap"}
+{"R":1.5,"key":"12.1+120|ball1.5","points":"> 200000 (box 9678321)","pool":"12.1+120","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+12.2+24|ball2.0","points":"> 200000 (box 31236921)","pool":"q5+8+12.1+12.2+24","verdict":"over cap"}
+{"R":1.2,"key":"8+120|ball1.2","points":"> 200000 (box 4862025)","pool":"8+120","verdict":"over cap"}
+{"R":2.0,"key":"12.2+120|ball2.0","points":"> 200000 (box 31236921)","pool":"12.2+120","verdict":"over cap"}
+{"R":1.5,"key":"8+120|ball1.5","points":"> 200000 (box 9678321)","pool":"8+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+120","verdict":"over cap"}
+{"R":2.0,"key":"8+120|ball2.0","points":"> 200000 (box 31236921)","pool":"8+120","verdict":"over cap"}
+{"R":2.0,"key":"12.1+120|ball2.0","points":"> 200000 (box 31236921)","pool":"12.1+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+8+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+8+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+12.1+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+12.1+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+12.2+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+12.2+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+24+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+8+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+24+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+12.1+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+12.2+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+8+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+8+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+12.1+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+24+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+12.2+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+12.1+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+12.2+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+8+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+24+120|ball1.2","points":"> 200000 (box 4862025)","pool":"q1+q5+24+120","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+24+120|ball1.5","points":"> 200000 (box 9678321)","pool":"q1+q5+24+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+12.1+120","verdict":"over cap"}
+{"R":1.2,"key":"16+72|ball1.2","points":"> 200000 (box 4647375)","pool":"16+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+12.2+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+24+120|ball2.0","points":"> 200000 (box 31236921)","pool":"q1+q5+24+120","verdict":"over cap"}
+{"R":1.2,"key":"12.1+16+72|ball1.2","points":"> 200000 (box 4647375)","pool":"12.1+16+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+16+72|ball1.5","points":"> 200000 (box 11667159)","pool":"12.1+16+72","verdict":"over cap"}
+{"R":1.5,"key":"16+72|ball1.5","points":"> 200000 (box 11667159)","pool":"16+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+144|ball1.2","points":"> 200000 (box 9394225)","pool":"q1+q5+144","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+144|ball1.5","points":"> 200000 (box 14630625)","pool":"q1+q5+144","verdict":"over cap"}
+{"R":1.2,"key":"q17+36.1|ball1.2","points":"> 200000 (box 13579225)","pool":"q17+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+144|ball2.0","points":"> 200000 (box 51079609)","pool":"q1+q5+144","verdict":"over cap"}
+{"R":1.5,"key":"q17+36.1|ball1.5","points":"> 200000 (box 21206025)","pool":"q17+36.1","verdict":"over cap"}
+{"R":2.0,"key":"16+72|ball2.0","points":"> 200000 (box 35859375)","pool":"16+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+q17+36.1|ball1.2","points":"> 200000 (box 13579225)","pool":"q1+q17+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+16+72|ball2.0","points":"> 200000 (box 35859375)","pool":"12.1+16+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+q17+36.1|ball1.5","points":"> 200000 (box 21206025)","pool":"q1+q17+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+36.2|ball1.2","points":"> 200000 (box 5405625)","pool":"q5+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q17+36.1|ball2.0","points":"> 200000 (box 73770921)","pool":"q17+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+36.2|ball1.2","points":"> 200000 (box 5405625)","pool":"q1+q5+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+36.2|ball1.5","points":"> 200000 (box 10764961)","pool":"q5+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+36.2|ball1.5","points":"> 200000 (box 10764961)","pool":"q1+q5+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+36.2|ball1.2","points":"> 200000 (box 5405625)","pool":"q5+12.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+36.2|ball1.5","points":"> 200000 (box 10764961)","pool":"q5+12.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+36.2|ball2.0","points":"> 200000 (box 34939921)","pool":"q5+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+36.2|ball1.2","points":"> 200000 (box 5405625)","pool":"q1+q5+12.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+36.2|ball2.0","points":"> 200000 (box 34939921)","pool":"q1+q5+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q17+36.1|ball2.0","points":"> 200000 (box 73770921)","pool":"q1+q17+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+36.2|ball1.5","points":"> 200000 (box 10764961)","pool":"q1+q5+12.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+36.2|ball2.0","points":"> 200000 (box 34939921)","pool":"q5+12.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+180.2|ball1.2","points":"> 200000 (box 4879681)","pool":"q1+180.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+36.2|ball2.0","points":"> 200000 (box 34939921)","pool":"q1+q5+12.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+180.2|ball1.2","points":"> 200000 (box 4879681)","pool":"q1+12.1+180.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+180.2|ball1.5","points":"> 200000 (box 10556001)","pool":"q1+180.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+180.2|ball2.0","points":"> 200000 (box 31640625)","pool":"q1+180.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.2+180.2|ball1.2","points":"> 200000 (box 4879681)","pool":"q1+36.2+180.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+180.2|ball1.5","points":"> 200000 (box 10556001)","pool":"q1+12.1+180.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+96.1|ball1.2","points":"> 200000 (box 8196769)","pool":"q1+q5+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.2+180.2|ball1.5","points":"> 200000 (box 10556001)","pool":"q1+36.2+180.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+96.1|ball1.5","points":"> 200000 (box 21150801)","pool":"q1+q5+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+48+96.1|ball1.2","points":"> 200000 (box 8196769)","pool":"q1+q5+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+180.2|ball2.0","points":"> 200000 (box 31640625)","pool":"q1+12.1+180.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+48+96.1|ball1.5","points":"> 200000 (box 21150801)","pool":"q1+q5+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.2+180.2|ball2.0","points":"> 200000 (box 31640625)","pool":"q1+36.2+180.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+96.1|ball2.0","points":"> 200000 (box 56115081)","pool":"q1+q5+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+156.6|ball1.2","points":"> 200000 (box 6470695)","pool":"12.1+156.6","verdict":"over cap"}
+{"R":1.2,"key":"39.1+156.6|ball1.2","points":"> 200000 (box 6470695)","pool":"39.1+156.6","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+48+96.1|ball2.0","points":"> 200000 (box 56115081)","pool":"q1+q5+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+156.6|ball1.5","points":"> 200000 (box 15661689)","pool":"12.1+156.6","verdict":"over cap"}
+{"R":1.2,"key":"156.3+156.6|ball1.2","points":"> 200000 (box 6470695)","pool":"156.3+156.6","verdict":"over cap"}
+{"R":2.0,"key":"12.1+156.6|ball2.0","points":"> 200000 (box 48361131)","pool":"12.1+156.6","verdict":"over cap"}
+{"R":1.5,"key":"39.1+156.6|ball1.5","points":"> 200000 (box 15661689)","pool":"39.1+156.6","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+96.2|ball1.2","points":"> 200000 (box 8381025)","pool":"q1+q5+96.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+96.2|ball1.5","points":"> 200000 (box 25613721)","pool":"q1+q5+96.2","verdict":"over cap"}
+{"R":1.5,"key":"156.3+156.6|ball1.5","points":"> 200000 (box 15661689)","pool":"156.3+156.6","verdict":"over cap"}
+{"R":1.2,"key":"q5+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q5+60.1","verdict":"over cap"}
+{"R":2.0,"key":"39.1+156.6|ball2.0","points":"> 200000 (box 48361131)","pool":"39.1+156.6","verdict":"over cap"}
+{"R":1.2,"covolume":0.00017746913580246913,"edges":437840,"key":"q5+8+12.1+12.2|ball1.2","points":115573,"pool":"q5+8+12.1+12.2","seconds":63.13,"size":32,"solve_seconds":60.86,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q5+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q5+60.1","verdict":"over cap"}
+{"R":2.0,"key":"156.3+156.6|ball2.0","points":"> 200000 (box 48361131)","pool":"156.3+156.6","verdict":"over cap"}
+{"R":1.2,"key":"q1+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+96.2|ball2.0","points":"> 200000 (box 75116889)","pool":"q1+q5+96.2","verdict":"over cap"}
+{"R":1.2,"key":"q25+12.2|ball1.2","points":"> 200000 (box 10673289)","pool":"q25+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q25+12.2|ball1.5","points":"> 200000 (box 16621929)","pool":"q25+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+60.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"12.1+60.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"12.1+60.1","verdict":"over cap"}
+{"R":1.2,"key":"12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q25+12.2|ball2.0","points":"> 200000 (box 61449921)","pool":"q25+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q5+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+60.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"12.2+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+60.1","verdict":"over cap"}
+{"R":1.2,"key":"60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"12.1+60.1","verdict":"over cap"}
+{"R":1.5,"key":"60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q25+12.2|ball1.2","points":"> 200000 (box 10673289)","pool":"q1+q25+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q25+12.2|ball1.5","points":"> 200000 (box 16621929)","pool":"q1+q25+12.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00016774667543057462,"edges":228604,"key":"36.1+48|ball1.2","points":122993,"pool":"36.1+48","seconds":64.59,"size":16,"solve_seconds":63.29,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+q5+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.1+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.2+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q25+12.2|ball2.0","points":"> 200000 (box 61449921)","pool":"q1+q25+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+q25+12.2|ball1.2","points":"> 200000 (box 10673289)","pool":"q5+q25+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.2+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+q25+12.2|ball1.5","points":"> 200000 (box 16621929)","pool":"q5+q25+12.2","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q5+12.1+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q5+12.1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+q25+12.2|ball2.0","points":"> 200000 (box 61449921)","pool":"q5+q25+12.2","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q5+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q5+12.2+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q5+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q5+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q5+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q25+12.1+12.2|ball1.2","points":"> 200000 (box 10673289)","pool":"q25+12.1+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q5+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q25+12.1+12.2|ball1.5","points":"> 200000 (box 16621929)","pool":"q25+12.1+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q5+12.2+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q5+12.1+60.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00016774667543057462,"edges":288090,"key":"q1+36.1+48|ball1.2","points":122993,"pool":"q1+36.1+48","seconds":64.78,"size":20,"solve_seconds":63.18,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"12.1+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"12.1+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"12.1+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q5+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"12.2+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"12.1+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"12.1+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q5+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q25+12.1+12.2|ball2.0","points":"> 200000 (box 61449921)","pool":"q25+12.1+12.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.1+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"12.1+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":509944,"key":"q5+60.2|ball1.2","points":180433,"pool":"q5+60.2","seconds":62.84,"size":24,"solve_seconds":60.04,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"12.1+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"12.1+12.2+60.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+12.2+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"12.2+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.1+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.1+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.1+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+12.2+60.1|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.1+12.2+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.1+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+12.2+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.1+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.1+60.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+12.2+60.1|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.1+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.2+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.1+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+12.2+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.1+12.2+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+60.1+60.2|ball1.2","points":"> 200000 (box 6125625)","pool":"q1+q5+12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"48+64|ball1.2","points":"> 200000 (box 5764801)","pool":"48+64","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+60.1+60.2|ball1.5","points":"> 200000 (box 13155129)","pool":"q1+q5+12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q13+8+12.2|ball1.2","points":"> 200000 (box 8625969)","pool":"q13+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+60.1+60.2","verdict":"over cap"}
+{"R":1.5,"key":"q13+8+12.2|ball1.5","points":"> 200000 (box 18740241)","pool":"q13+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+12.2+60.1|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.1+12.2+60.1","verdict":"over cap"}
+{"R":1.2,"key":"q13+8+12.1|ball1.2","points":"> 200000 (box 8625969)","pool":"q13+8+12.1","verdict":"over cap"}
+{"R":1.5,"key":"q13+8+12.1|ball1.5","points":"> 200000 (box 18740241)","pool":"q13+8+12.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":468908,"key":"q1+q25+12.1|ball1.2","points":185189,"pool":"q1+q25+12.1","seconds":63.99,"size":20,"solve_seconds":61.27,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"48+64|ball1.5","points":"> 200000 (box 13845841)","pool":"48+64","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+12.2+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.1+12.2+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q25+48|ball1.2","points":"> 200000 (box 26061025)","pool":"q25+48","verdict":"over cap"}
+{"R":1.5,"key":"q25+48|ball1.5","points":"> 200000 (box 40640625)","pool":"q25+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q25+48|ball1.2","points":"> 200000 (box 26061025)","pool":"q1+q25+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q25+48|ball1.5","points":"> 200000 (box 40640625)","pool":"q1+q25+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.1+60.1+60.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+60.1+60.2|ball2.0","points":"> 200000 (box 43890625)","pool":"q1+q5+12.2+60.1+60.2","verdict":"over cap"}
+{"R":1.2,"key":"q5+q25+48|ball1.2","points":"> 200000 (box 26061025)","pool":"q5+q25+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+q25+48|ball1.5","points":"> 200000 (box 40640625)","pool":"q5+q25+48","verdict":"over cap"}
+{"R":1.2,"key":"12.1+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q13+8+12.2|ball2.0","points":"> 200000 (box 56715961)","pool":"q13+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"48+64|ball2.0","points":"> 200000 (box 43046721)","pool":"48+64","verdict":"over cap"}
+{"R":2.0,"key":"q13+8+12.1|ball2.0","points":"> 200000 (box 56715961)","pool":"q13+8+12.1","verdict":"over cap"}
+{"R":1.2,"key":"8+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":425140,"key":"q1+60.2|ball1.2","points":180433,"pool":"q1+60.2","seconds":68.36,"size":20,"solve_seconds":65.95,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+q25+48|ball2.0","points":"> 200000 (box 141443449)","pool":"q1+q25+48","verdict":"over cap"}
+{"R":1.2,"key":"12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q25+48|ball2.0","points":"> 200000 (box 141443449)","pool":"q25+48","verdict":"over cap"}
+{"R":1.2,"key":"16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+96.1","verdict":"over cap"}
+{"R":1.2,"key":"24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+q25+48|ball2.0","points":"> 200000 (box 141443449)","pool":"q5+q25+48","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+12.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.1+96.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+12.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+96.1","verdict":"over cap"}
+{"R":1.2,"key":"8+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"24+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":595024,"key":"q1+12.1+60.2|ball1.2","points":180421,"pool":"q1+12.1+60.2","seconds":67.14,"size":28,"solve_seconds":63.77,"verdict":"Unknown (budget)"}
+{"R":1.2,"key":"8+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"8+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"8+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.1+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+12.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"8+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"8+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.1+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.1+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.1+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.1+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.1+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.2+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.2+16+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.000121788279882651,"edges":474760,"key":"39.1+156.3|ball1.2","points":168029,"pool":"39.1+156.3","seconds":76.33,"size":24,"solve_seconds":73.89,"verdict":"Unknown (budget)"}
+{"R":1.2,"key":"12.1+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.2+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.2+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.2+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"12.2+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"8+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"8+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"16+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"16+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.2+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.1+12.2+96.1","verdict":"over cap"}
+{"R":1.2,"key":"16+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"16+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.2+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.1+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.1+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"24+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"24+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+96.1","verdict":"over cap"}
+{"R":1.5,"key":"16+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"16+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.2+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"12.2+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.1+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"24+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"24+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"16+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"16+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.1+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.2+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"12.2+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"16+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"16+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.1+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+12.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"16+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"16+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"24+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"24+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+12.1+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.0001050113229600409,"edges":482166,"key":"q1+q13+12.2|ball1.2","points":197221,"pool":"q1+q13+12.2","seconds":69.93,"size":20,"solve_seconds":67.52,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+12.1+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.1+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+8+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+12.2+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.1+12.2+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":679824,"key":"q5+12.1+60.2|ball1.2","points":180421,"pool":"q5+12.1+60.2","seconds":72.16,"size":32,"solve_seconds":68.12,"verdict":"Unknown (budget)"}
+{"R":1.2,"covolume":0.00011358024691358025,"edges":765000,"key":"q1+q5+12.1+60.2|ball1.2","points":180421,"pool":"q1+q5+12.1+60.2","seconds":71.76,"size":36,"solve_seconds":66.29,"verdict":"Unknown (budget)"}
+{"R":2.0,"key":"q1+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.1+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.1+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+12.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+8+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+16+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.2+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.1+12.2+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.1+16+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.2+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.1+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+12.2+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+24+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+16+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+16+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+16+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+16+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.2+16+96.1","verdict":"over cap"}
+{"R":1.2,"covolume":0.0001050113229600409,"edges":577772,"key":"q13+12.1+12.2|ball1.2","points":197221,"pool":"q13+12.1+12.2","seconds":70.98,"size":24,"solve_seconds":67.86,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.2+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.2+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+8+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+48+96.1|ball1.2","points":"> 200000 (box 8850625)","pool":"q1+24+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q25+36.1|ball1.2","points":"> 200000 (box 29322225)","pool":"q25+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q25+36.1|ball1.5","points":"> 200000 (box 45765225)","pool":"q25+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q25+36.1|ball1.2","points":"> 200000 (box 29322225)","pool":"q1+q25+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.1+12.2+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+16+24+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+16+24+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q25+36.1|ball1.5","points":"> 200000 (box 45765225)","pool":"q1+q25+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.1+24+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+q25+36.1|ball1.2","points":"> 200000 (box 29322225)","pool":"q5+q25+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q5+q25+36.1|ball1.5","points":"> 200000 (box 45765225)","pool":"q5+q25+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+180.1|ball1.2","points":"> 200000 (box 10791225)","pool":"q1+180.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+16+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+16+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+12.2+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.1+180.1|ball1.2","points":"> 200000 (box 10791225)","pool":"q1+36.1+180.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+48+96.1|ball1.5","points":"> 200000 (box 23184225)","pool":"q1+24+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.2+16+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+180.1|ball1.5","points":"> 200000 (box 26904969)","pool":"q1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+180.1|ball1.2","points":"> 200000 (box 10791225)","pool":"q1+q5+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+36.1+180.1|ball1.2","points":"> 200000 (box 10791225)","pool":"q1+q5+36.1+180.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+16+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.1+16+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.2+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+12.2+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q25+36.1|ball2.0","points":"> 200000 (box 159289641)","pool":"q25+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q5+q13+12.1|ball1.5","points":"> 200000 (box 33674809)","pool":"q5+q13+12.1","verdict":"over cap"}
+{"R":1.2,"key":"q17+8+12.1|ball1.2","points":"> 200000 (box 14737921)","pool":"q17+8+12.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+36.1+180.1|ball1.5","points":"> 200000 (box 26904969)","pool":"q1+q5+36.1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q17+8+12.2|ball1.2","points":"> 200000 (box 14737921)","pool":"q17+8+12.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+180.1|ball1.5","points":"> 200000 (box 26904969)","pool":"q1+q5+180.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+16+24+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+16+24+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+16+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+16+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.1+180.1|ball1.5","points":"> 200000 (box 26904969)","pool":"q1+36.1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q5+q13+12.1|ball1.2","points":"> 200000 (box 21538881)","pool":"q5+q13+12.1","verdict":"over cap"}
+{"R":1.5,"key":"q17+8+12.1|ball1.5","points":"> 200000 (box 31979025)","pool":"q17+8+12.1","verdict":"over cap"}
+{"R":1.5,"key":"q17+8+12.2|ball1.5","points":"> 200000 (box 31979025)","pool":"q17+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q25+36.1|ball2.0","points":"> 200000 (box 159289641)","pool":"q1+q25+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+48+96.1|ball2.0","points":"> 200000 (box 69205761)","pool":"q1+24+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+q25+36.1|ball2.0","points":"> 200000 (box 159289641)","pool":"q5+q25+36.1","verdict":"over cap"}
+{"R":1.2,"key":"24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+180.1|ball2.0","points":"> 200000 (box 69705801)","pool":"q1+36.1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q5+q13+12.1|ball2.0","points":"> 200000 (box 98903025)","pool":"q5+q13+12.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+180.1|ball2.0","points":"> 200000 (box 69705801)","pool":"q1+q5+180.1","verdict":"over cap"}
+{"R":1.5,"key":"24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+180.1|ball2.0","points":"> 200000 (box 69705801)","pool":"q1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+36.1+180.1|ball2.0","points":"> 200000 (box 69705801)","pool":"q1+q5+36.1+180.1","verdict":"over cap"}
+{"R":1.2,"key":"24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"8+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"8+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"12.1+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q17+8+12.2|ball2.0","points":"> 200000 (box 96884649)","pool":"q17+8+12.2","verdict":"over cap"}
+{"R":2.0,"key":"q17+8+12.1|ball2.0","points":"> 200000 (box 96884649)","pool":"q17+8+12.1","verdict":"over cap"}
+{"R":2.0,"key":"24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"8+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.2+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"12.1+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.1+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"12.2+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.1+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"8+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.1+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"12.1+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+24+36.1|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"12.2+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.1+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+12.2+24+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.1+24+36.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+24+36.1|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+24+36.1+36.2|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+72","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+24+36.1+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+12.2+24+36.2|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"8+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+72","verdict":"over cap"}
+{"R":1.2,"key":"36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"8+12.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.1+72","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+24+36.1|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+12.2+24+36.1","verdict":"over cap"}
+{"R":1.5,"key":"12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+12.2+24+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+12.2+24+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+24+36.1+36.2","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+24+72","verdict":"over cap"}
+{"R":1.5,"key":"8+12.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.1+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+24+36.1+36.2|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+12.2+24+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"key":"8+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"8+12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"8+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"8+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+72","verdict":"over cap"}
+{"R":1.2,"key":"12.1+12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"8+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+24+72","verdict":"over cap"}
+{"R":1.5,"key":"8+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"12.1+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+24+72","verdict":"over cap"}
+{"R":1.2,"key":"12.1+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"8+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"8+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+12.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.1+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+24+72","verdict":"over cap"}
+{"R":1.2,"key":"12.1+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+12.2+72","verdict":"over cap"}
+{"R":1.2,"key":"12.2+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+24+72","verdict":"over cap"}
+{"R":1.2,"key":"12.2+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"8+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+24+72","verdict":"over cap"}
+{"R":1.2,"key":"12.2+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"12.2+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"12.1+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"12.2+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+24+72","verdict":"over cap"}
+{"R":1.5,"key":"12.2+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"24+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"24+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"8+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"8+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"12.2+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"12.2+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"24+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"24+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"36.1+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"36.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+24+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"24+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"24+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+72","verdict":"over cap"}
+{"R":1.5,"key":"24+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"24+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"12.2+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+24+72","verdict":"over cap"}
+{"R":1.5,"key":"36.1+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"36.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"12.1+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"12.2+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+72","verdict":"over cap"}
+{"R":2.0,"key":"12.2+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"12.2+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+72","verdict":"over cap"}
+{"R":2.0,"key":"24+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"24+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+72","verdict":"over cap"}
+{"R":2.0,"key":"24+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"24+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"36.1+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"36.1+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+12.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+12.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+24+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+8+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+8+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+12.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+12.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+24+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+24+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+12.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+12.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+24+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+24+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+24+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+8+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+8+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+24+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.1+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+36.1+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+36.1+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+24+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+24+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+12.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+8+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+8+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.2+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+12.2+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+24+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+24+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+12.2+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+12.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+12.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.1+36.2+72|ball1.2","points":"> 200000 (box 12595401)","pool":"q1+36.1+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"48+52.2|ball1.2","points":"> 200000 (box 12938409)","pool":"48+52.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+24+72","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.1+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+36.1+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+36.1+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+24+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+24+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.1+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q5+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.1+36.2+72|ball1.5","points":"> 200000 (box 28206721)","pool":"q1+36.1+36.2+72","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+24+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+24+72","verdict":"over cap"}
+{"R":1.5,"key":"48+52.2|ball1.5","points":"> 200000 (box 30636225)","pool":"48+52.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+8+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+12.1+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.2+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+12.2+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+36.1+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+36.1+72","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+8+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.1+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+12.1+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"48+52.2|ball2.0","points":"> 200000 (box 99102025)","pool":"48+52.2","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.1+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.1+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.1+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+24+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+24+36.2+72","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.1+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.2+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+12.1+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+8+12.1+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+36.2+72|ball2.0","points":"> 200000 (box 88115769)","pool":"q1+36.1+36.2+72","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.1+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+8+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+8+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.1+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+8+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+8+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.2+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.2+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+12.1+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.1+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+12.1+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+12.1+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+8+12.1+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+12.2+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+8+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+8+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+8+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.1+12.2+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+12.1+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+12.1+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.1+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+12.1+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.1+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+12.1+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+8+12.2+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+8+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+12.2+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+12.2+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.1+12.2+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+12.1+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"q5+12.1+12.2+24+48|ball1.2","points":"> 200000 (box 15171025)","pool":"q5+12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.1+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+12.1+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.1+12.2+48","verdict":"over cap"}
+{"R":1.2,"key":"48+120|ball1.2","points":"> 200000 (box 15171025)","pool":"48+120","verdict":"over cap"}
+{"R":1.5,"key":"q5+8+12.2+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+8+12.2+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.2+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+48+120|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+48+120","verdict":"over cap"}
+{"R":1.5,"key":"q5+12.1+12.2+24+48|ball1.5","points":"> 200000 (box 34939921)","pool":"q5+12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+q5+48+120|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+q5+48+120","verdict":"over cap"}
+{"R":1.5,"key":"48+120|ball1.5","points":"> 200000 (box 34939921)","pool":"48+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+8+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+8+24+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+48+120|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+48+120","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+12.1+12.2+48","verdict":"over cap"}
+{"R":1.5,"key":"q1+q5+48+120|ball1.5","points":"> 200000 (box 34939921)","pool":"q1+q5+48+120","verdict":"over cap"}
+{"R":1.2,"key":"12.1+27|ball1.2","points":"> 200000 (box 15171025)","pool":"12.1+27","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.1+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+12.1+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.1+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+12.2+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"key":"27+36.2|ball1.2","points":"> 200000 (box 15171025)","pool":"27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+12.2+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+12.1+12.2+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.1+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+12.1+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+8+12.1+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+8+12.1+48","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+27|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+12.1+27","verdict":"over cap"}
+{"R":1.2,"key":"q1+27+36.2|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+27+36.2","verdict":"over cap"}
+{"R":1.5,"key":"12.1+27|ball1.5","points":"> 200000 (box 34000561)","pool":"12.1+27","verdict":"over cap"}
+{"R":1.5,"key":"27+36.2|ball1.5","points":"> 200000 (box 34000561)","pool":"27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q5+8+12.2+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+8+12.2+24+48","verdict":"over cap"}
+{"R":2.0,"key":"q5+12.1+12.2+24+48|ball2.0","points":"> 200000 (box 111746041)","pool":"q5+12.1+12.2+24+48","verdict":"over cap"}
+{"R":1.2,"key":"36.1+96.1|ball1.2","points":"> 200000 (box 17631601)","pool":"36.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+27+36.2|ball1.5","points":"> 200000 (box 34000561)","pool":"q1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"48+120|ball2.0","points":"> 200000 (box 111746041)","pool":"48+120","verdict":"over cap"}
+{"R":1.2,"key":"q1+12.1+27+36.2|ball1.2","points":"> 200000 (box 15171025)","pool":"q1+12.1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+48+120|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+48+120","verdict":"over cap"}
+{"R":1.2,"key":"36.1+48+96.1|ball1.2","points":"> 200000 (box 17631601)","pool":"36.1+48+96.1","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.1+96.1|ball1.2","points":"> 200000 (box 17631601)","pool":"q1+36.1+96.1","verdict":"over cap"}
+{"R":1.2,"key":"12.1+27+36.2|ball1.2","points":"> 200000 (box 15171025)","pool":"12.1+27+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+27|ball1.5","points":"> 200000 (box 34000561)","pool":"q1+12.1+27","verdict":"over cap"}
+{"R":1.5,"key":"12.1+27+36.2|ball1.5","points":"> 200000 (box 34000561)","pool":"12.1+27+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.1+27+36.2|ball1.5","points":"> 200000 (box 34000561)","pool":"q1+12.1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+q5+48+120|ball2.0","points":"> 200000 (box 111746041)","pool":"q1+q5+48+120","verdict":"over cap"}
+{"R":2.0,"key":"12.1+27|ball2.0","points":"> 200000 (box 106812225)","pool":"12.1+27","verdict":"over cap"}
+{"R":1.2,"key":"q1+36.1+48+96.1|ball1.2","points":"> 200000 (box 17631601)","pool":"q1+36.1+48+96.1","verdict":"over cap"}
+{"R":1.5,"key":"36.1+96.1|ball1.5","points":"> 200000 (box 41563809)","pool":"36.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"36.1+48+96.1|ball1.5","points":"> 200000 (box 41563809)","pool":"36.1+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"27+36.2|ball2.0","points":"> 200000 (box 106812225)","pool":"27+36.2","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.1+96.1|ball1.5","points":"> 200000 (box 41563809)","pool":"q1+36.1+96.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+36.1+48+96.1|ball1.5","points":"> 200000 (box 41563809)","pool":"q1+36.1+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+27|ball2.0","points":"> 200000 (box 106812225)","pool":"q1+12.1+27","verdict":"over cap"}
+{"R":2.0,"key":"12.1+27+36.2|ball2.0","points":"> 200000 (box 106812225)","pool":"12.1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+27+36.2|ball2.0","points":"> 200000 (box 106812225)","pool":"q1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"q1+12.1+27+36.2|ball2.0","points":"> 200000 (box 106812225)","pool":"q1+12.1+27+36.2","verdict":"over cap"}
+{"R":2.0,"key":"36.1+96.1|ball2.0","points":"> 200000 (box 121947849)","pool":"36.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"36.1+48+96.1|ball2.0","points":"> 200000 (box 121947849)","pool":"36.1+48+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+96.1|ball2.0","points":"> 200000 (box 121947849)","pool":"q1+36.1+96.1","verdict":"over cap"}
+{"R":2.0,"key":"q1+36.1+48+96.1|ball2.0","points":"> 200000 (box 121947849)","pool":"q1+36.1+48+96.1","verdict":"over cap"}
+{"R":1.8,"key":"q1+q13+52.2+52.4|ball1.8","points":"> 400000 (box 4004001)","pool":"q1+q13+52.2+52.4","verdict":"over cap"}
+{"R":1.8,"key":"q1+12.1+12.2+36.1+36.2|ball1.8","points":"> 400000 (box 4004001)","pool":"q1+12.1+12.2+36.1+36.2","verdict":"over cap"}
+{"R":1.2,"covolume":0.0005539879345776235,"edges":115382,"key":"q1+q41+164.1|ball1.2","points":42733,"pool":"q1+q41+164.1","seconds":4.82,"size":20,"solve_seconds":4.18,"verdict":"3-colourable (model verified)"}
+{"R":1.8,"covolume":0.0005539879345776235,"edges":839474,"key":"q1+q41+164.1|ball1.8","points":202421,"pool":"q1+q41+164.1","seconds":4.99,"size":20,"solve_seconds":0.44,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0004529778369104723,"edges":677898,"key":"q1+q13+52.1+52.3|ball1.5","points":110613,"pool":"q1+q13+52.1+52.3","seconds":6.7,"size":36,"solve_seconds":3.64,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00039459402681978924,"edges":775968,"key":"q1+q13+52.2+260.3|ball1.5","points":126737,"pool":"q1+q13+52.2+260.3","seconds":6.54,"size":36,"solve_seconds":2.5,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000277295524691358,"edges":1351922,"key":"q1+8+12.1+12.2+24+48|ball1.5","points":180445,"pool":"q1+8+12.1+12.2+24+48","seconds":6.77,"size":44,"solve_seconds":0.21,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0005539879345776235,"edges":335850,"key":"q1+q41+164.1|ball1.5","points":99517,"pool":"q1+q41+164.1","seconds":10.36,"size":20,"solve_seconds":8.75,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.000277295524691358,"edges":383070,"key":"q1+8+12.1+12.2+24+48|ball1.2","points":73901,"pool":"q1+8+12.1+12.2+24+48","seconds":14.59,"size":44,"solve_seconds":12.8,"verdict":"3-colourable (model verified)"}
+{"R":1.8,"covolume":0.00039459402681978924,"edges":2002908,"key":"q1+q13+52.2+260.3|ball1.8","points":262709,"pool":"q1+q13+52.2+260.3","seconds":15.01,"size":36,"solve_seconds":5.52,"verdict":"3-colourable (model verified)"}
+{"R":1.8,"covolume":0.000277295524691358,"edges":3484838,"key":"q1+8+12.1+12.2+24+48|ball1.8","points":373885,"pool":"q1+8+12.1+12.2+24+48","seconds":15.51,"size":44,"solve_seconds":0.56,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.0004529778369104723,"edges":191454,"key":"q1+q13+52.1+52.3|ball1.2","points":45281,"pool":"q1+q13+52.1+52.3","seconds":20.46,"size":36,"solve_seconds":19.44,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00020132348307132103,"edges":1521456,"key":"q1+q13+52.2+52.4|ball1.5","points":248213,"pool":"q1+q13+52.2+52.4","seconds":33.72,"size":36,"solve_seconds":26.41,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.00039459402681978924,"edges":220248,"key":"q1+q13+52.2+260.3|ball1.2","points":52025,"pool":"q1+q13+52.2+260.3","seconds":41.4,"size":36,"solve_seconds":40.29,"verdict":"3-colourable (model verified)"}
+{"R":1.8,"covolume":0.0004529778369104723,"edges":1747182,"key":"q1+q13+52.1+52.3|ball1.8","points":229105,"pool":"q1+q13+52.1+52.3","seconds":41.69,"size":36,"solve_seconds":33.79,"verdict":"3-colourable (model verified)"}
+{"R":1.2,"covolume":0.00020132348307132103,"edges":431312,"key":"q1+q13+52.2+52.4|ball1.2","points":101681,"pool":"q1+q13+52.2+52.4","seconds":122.41,"size":36,"solve_seconds":120.35,"verdict":"Unknown (budget)"}
+{"R":1.5,"key":"q1+12.1+60.1|ball1.5","points":"> 1000000 (box 13155129)","pool":"q1+12.1+60.1","verdict":"over cap"}
+{"R":1.5,"key":"q1+12.2+60.2|ball1.5","points":"> 1000000 (box 13155129)","pool":"q1+12.2+60.2","verdict":"over cap"}
+{"R":1.5,"covolume":0.00011358024691358025,"edges":1498868,"key":"q1+60.2|ball1.5","points":440077,"pool":"q1+60.2","seconds":6.73,"size":20,"solve_seconds":1.14,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00011358024691358025,"edges":2098516,"key":"q1+12.1+60.2|ball1.5","points":440077,"pool":"q1+12.1+60.2","seconds":8.58,"size":28,"solve_seconds":1.33,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0013148163277127015,"edges":133548,"key":"q1+q13+156.1|ball1.5","points":41721,"pool":"q1+q13+156.1","seconds":0.46,"size":20,"solve_seconds":0.02,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0006498545934544004,"edges":152666,"key":"q1+216.1|ball1.5","points":84797,"pool":"q1+216.1","seconds":1.24,"size":12,"solve_seconds":0.65,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0005434992283950617,"edges":439430,"key":"q1+48+240|ball1.5","points":92201,"pool":"q1+48+240","seconds":1.52,"size":28,"solve_seconds":0.2,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0004200452918401636,"edges":421864,"key":"q1+12.1+q13|ball1.5","points":122421,"pool":"q1+12.1+q13","seconds":1.54,"size":20,"solve_seconds":0.1,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0002456320218719296,"edges":722484,"key":"q1+12.1+q17|ball1.5","points":209477,"pool":"q1+12.1+q17","seconds":3.96,"size":20,"solve_seconds":1.55,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00022431412774304597,"edges":909304,"key":"156.2+156.6|ball1.5","points":222789,"pool":"156.2+156.6","seconds":3.82,"size":24,"solve_seconds":0.53,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00021909769852156683,"edges":1398342,"key":"q1+12.1+12.2+36.1+36.2|ball1.5","points":228201,"pool":"q1+12.1+12.2+36.1+36.2","seconds":5.13,"size":36,"solve_seconds":0.22,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00017957557594941909,"edges":974714,"key":"q1+q13+156.6|ball1.5","points":283477,"pool":"q1+q13+156.6","seconds":5.19,"size":20,"solve_seconds":1.82,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00017746913580246913,"edges":1733726,"key":"q1+q5+8+12.1+12.2|ball1.5","points":282165,"pool":"q1+q5+8+12.1+12.2","seconds":6.2,"size":36,"solve_seconds":0.32,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00035967112423315804,"edges":278814,"key":"q1+288.1|ball1.5","points":153329,"pool":"q1+288.1","seconds":22.05,"size":12,"solve_seconds":21.01,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.000121788279882651,"edges":2235896,"key":"12.1+39.1+156.3|ball1.5","points":410329,"pool":"12.1+39.1+156.3","seconds":9.41,"size":32,"solve_seconds":1.06,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00016774667543057462,"edges":1015422,"key":"q1+36.1+48|ball1.5","points":299053,"pool":"q1+36.1+48","seconds":30.37,"size":20,"solve_seconds":26.89,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00011358024691358025,"edges":2190044,"key":"q1+q5+12.1+q25|ball1.5","points":453177,"pool":"q1+q5+12.1+q25","seconds":8.68,"size":28,"solve_seconds":0.57,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0001050113229600409,"edges":2301750,"key":"q1+12.1+12.2+q13|ball1.5","points":480117,"pool":"q1+12.1+12.2+q13","seconds":8.86,"size":28,"solve_seconds":0.36,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0006709867017222985,"edges":202948,"key":"12.1+72|ball1.5","points":74449,"pool":"12.1+72","seconds":60.79,"size":16,"solve_seconds":60.1,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00011358024691358025,"edges":2698324,"key":"q1+q5+12.1+60.2|ball1.5","points":440077,"pool":"q1+q5+12.1+60.2","seconds":139.52,"size":36,"solve_seconds":130.01,"verdict":"NOT 3-COLOURABLE (solver claim)"}
+{"R":1.5,"covolume":9.775750431013695e-05,"edges":1054022,"key":"q1+192|ball1.5","points":513933,"pool":"q1+192","seconds":141.34,"size":12,"solve_seconds":137.42,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":8.039929414128132e-05,"edges":2206334,"key":"q1+q13+48|ball1.5","points":683705,"pool":"q1+q13+48","seconds":11.33,"size":20,"solve_seconds":3.06,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":6.93238811728395e-05,"edges":6384702,"key":"q1+8+12.1+12.2+16+24+48|ball1.5","points":721001,"pool":"q1+8+12.1+12.2+16+24+48","seconds":24.12,"size":52,"solve_seconds":0.66,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.00016408019212506392,"edges":1101782,"key":"q1+q13+24|ball1.5","points":334589,"pool":"q1+q13+24","seconds":603.73,"size":20,"solve_seconds":600.03,"verdict":"Unknown (budget)"}
+{"R":1.5,"covolume":9.59500085437225e-05,"edges":1862982,"key":"q1+q17+24|ball1.5","points":572217,"pool":"q1+q17+24","seconds":607.14,"size":20,"solve_seconds":600.38,"verdict":"Unknown (budget)"}

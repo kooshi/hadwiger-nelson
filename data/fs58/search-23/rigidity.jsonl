@@ -1,0 +1,10 @@
+{"R":1.5,"colourable":true,"edges":9594,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+12.1+12.2|ball1.5|words2","pairs":68,"points":2853,"pool":"q1+12.1+12.2","seconds":0.1,"unknown":0}
+{"R":2.0,"colourable":true,"edges":42558,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+12.1+12.2|ball2.0|words2","pairs":200,"points":9005,"pool":"q1+12.1+12.2","seconds":0.6,"unknown":0}
+{"R":1.5,"colourable":true,"edges":54334,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+8+12.1+12.2|ball1.5|words2","pairs":120,"points":11369,"pool":"q1+8+12.1+12.2","seconds":0.5,"unknown":0}
+{"R":2.0,"colourable":true,"edges":234746,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+8+12.1+12.2|ball2.0|words2","pairs":392,"points":35701,"pool":"q1+8+12.1+12.2","seconds":10.8,"unknown":0}
+{"R":1.5,"colourable":true,"edges":18656,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+q13+52.2|ball1.5|words2","pairs":64,"points":5609,"pool":"q1+q13+52.2","seconds":0.2,"unknown":0}
+{"R":2.0,"colourable":true,"edges":78292,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+q13+52.2|ball2.0|words2","pairs":200,"points":16333,"pool":"q1+q13+52.2","seconds":1.4,"unknown":0}
+{"R":1.5,"colourable":true,"edges":526606,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+52.1+52.3|ball1.5|words2","pairs":144,"points":110613,"pool":"q1+52.1+52.3","seconds":73.6,"unknown":0}
+{"R":1.5,"colourable":true,"edges":276294,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+8+12.1+12.2+24|ball1.5|words2","pairs":204,"points":45137,"pool":"q1+8+12.1+12.2+24","seconds":7.9,"unknown":0}
+{"R":2.0,"colourable":true,"edges":1204586,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+8+12.1+12.2+24|ball2.0|words2","pairs":648,"points":142657,"pool":"q1+8+12.1+12.2+24","seconds":88.6,"unknown":0}
+{"R":1.5,"colourable":true,"edges":533518,"examples":[],"forced_different":0,"forced_equal":0,"key":"q1+q5+8+40|ball1.5|words2","pairs":176,"points":86989,"pool":"q1+q5+8+40","seconds":140.2,"unknown":12}
