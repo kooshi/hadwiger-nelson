@@ -1,0 +1,542 @@
+<title>The Wall at Six</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --surface:      #fcfcfb;
+    --card:         #f5f5f1;
+    --rule:         #e4e4dc;
+    --rule-soft:    #eeeee8;
+    --ink:          #0f0f0e;
+    --ink-2:        #55544f;
+    --ink-3:        #86857c;
+    --proven:       #2a78d6;
+    --proven-fill:  rgba(42, 120, 214, 0.20);
+    --six:          #eb6834;
+    --band:         rgba(42, 120, 214, 0.10);
+    --band-edge:    rgba(42, 120, 214, 0.28);
+    --accent-ink:   #b1461b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --surface:      #1a1a19;
+      --card:         #232321;
+      --rule:         #3b3b36;
+      --rule-soft:    #2c2c29;
+      --ink:          #ffffff;
+      --ink-2:        #c3c2b7;
+      --ink-3:        #908f86;
+      --proven:       #3987e5;
+      --proven-fill:  rgba(57, 135, 229, 0.26);
+      --six:          #d95926;
+      --band:         rgba(57, 135, 229, 0.14);
+      --band-edge:    rgba(57, 135, 229, 0.34);
+      --accent-ink:   #f0906a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --surface:      #1a1a19;
+    --card:         #232321;
+    --rule:         #3b3b36;
+    --rule-soft:    #2c2c29;
+    --ink:          #ffffff;
+    --ink-2:        #c3c2b7;
+    --ink-3:        #908f86;
+    --proven:       #3987e5;
+    --proven-fill:  rgba(57, 135, 229, 0.26);
+    --six:          #d95926;
+    --band:         rgba(57, 135, 229, 0.14);
+    --band-edge:    rgba(57, 135, 229, 0.34);
+    --accent-ink:   #f0906a;
+  }
+
+  body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-inline: 20px;
+    padding-block: 40px 56px;
+  }
+  h1 {
+    font-size: clamp(28px, 5.4vw, 40px);
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  h2 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; color: var(--ink-2); }
+  p.lede { color: var(--ink); font-size: 16.5px; }
+  strong { color: var(--ink); font-weight: 600; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    margin: 0 0 12px;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 26px; margin-bottom: 30px; }
+
+  section { margin-bottom: 38px; }
+  .sechead { margin-bottom: 18px; }
+  .sechead p { font-size: 14px; margin: 0; }
+
+  /* ---- chart ---- */
+  .chart {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 18px 16px 12px;
+  }
+  .scroller { overflow-x: auto; }
+  .plot { min-width: 500px; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 34px 1fr 116px;
+    align-items: stretch;
+    column-gap: 10px;
+    height: 26px;
+  }
+  .row:focus-visible { outline: 2px solid var(--proven); outline-offset: 1px; }
+  .rk {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    text-align: right;
+    align-self: center;
+  }
+  .st {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    color: var(--ink-3);
+    align-self: center;
+    white-space: nowrap;
+  }
+  .tr { position: relative; }
+  .gl { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--rule-soft); }
+  .bandzone {
+    position: absolute; top: 0; bottom: 0;
+    background: var(--band);
+    border-left: 1px solid var(--band-edge);
+    border-right: 1px solid var(--band-edge);
+  }
+  .bar {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    height: 6px; border-radius: 3px;
+    background: var(--proven-fill);
+  }
+  .cap {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 9px; height: 9px; border-radius: 50%;
+    box-sizing: border-box;
+  }
+  .cap.lo { background: var(--proven); }
+  .cap.hi { background: var(--card); border: 2px solid var(--proven); }
+  .thr {
+    position: absolute; top: 3px; bottom: 3px;
+    width: 2px; background: var(--six); border-radius: 1px;
+    transform: translateX(-1px);
+  }
+  .arrowend {
+    position: absolute; top: 50%; transform: translate(-1px, -50%);
+    width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 7px solid var(--proven);
+  }
+  .axis { display: grid; grid-template-columns: 34px 1fr 116px; column-gap: 10px; margin-top: 4px; }
+  .axisline { position: relative; height: 20px; border-top: 1px solid var(--rule); }
+  .tick {
+    position: absolute; top: 4px; transform: translateX(-50%);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 10.5px; color: var(--ink-3); white-space: nowrap;
+  }
+  .tick.six { color: var(--accent-ink); font-weight: 600; }
+  .axistitle {
+    grid-column: 2;
+    font-size: 11.5px; color: var(--ink-3); margin-top: 2px;
+  }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule);
+    font-size: 12.5px; color: var(--ink-2);
+  }
+  .lg { display: flex; align-items: center; gap: 7px; }
+  .sw { width: 22px; height: 9px; border-radius: 3px; background: var(--proven-fill); position: relative; flex: none; }
+  .sw i { position: absolute; top: 50%; transform: translateY(-50%); width: 9px; height: 9px; border-radius: 50%; box-sizing: border-box; }
+  .sw i.a { left: 0; background: var(--proven); }
+  .sw i.b { right: 0; background: var(--card); border: 2px solid var(--proven); }
+  .sw2 { width: 22px; height: 12px; position: relative; flex: none; }
+  .sw2 i { position: absolute; left: 10px; top: 0; bottom: 0; width: 2px; background: var(--six); border-radius: 1px; }
+  .sw3 { width: 22px; height: 12px; background: var(--band); border-left: 1px solid var(--band-edge); border-right: 1px solid var(--band-edge); flex: none; }
+
+  .callout {
+    margin-top: 14px;
+    border-left: 2px solid var(--six);
+    padding: 2px 0 2px 12px;
+    font-size: 13.5px;
+    color: var(--ink-2);
+    max-width: 62ch;
+  }
+
+  /* ---- table ---- */
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 640px; }
+  th, td {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    padding: 5px 9px;
+    border-bottom: 1px solid var(--rule-soft);
+    white-space: nowrap;
+  }
+  th {
+    font-size: 10.5px; font-weight: 500; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  td { color: var(--ink-2); }
+  td.k, th.k { text-align: left; color: var(--ink); }
+  td.hl { color: var(--accent-ink); }
+  tr.settled td { color: var(--ink-3); }
+  .tag { font-size: 9.5px; color: var(--ink-3); letter-spacing: 0.02em; }
+
+  /* ---- tooltip ---- */
+  #tip {
+    position: fixed; z-index: 20; pointer-events: none;
+    background: var(--ink); color: var(--surface);
+    border-radius: 3px; padding: 7px 10px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px; line-height: 1.5;
+    white-space: pre-line;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.22);
+    max-width: 260px;
+  }
+  #tip[hidden] { display: none !important; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  footer p { color: var(--ink-3); font-size: 12.5px; max-width: 74ch; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  @media (max-width: 560px) {
+    .row, .axis { grid-template-columns: 30px 1fr 96px; column-gap: 8px; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Finite Euclidean planes · UD(F_q, 2)</p>
+    <h1>Does any finite plane need exactly six colours?</h1>
+    <p class="lede">Each of these graphs joins two points of a finite plane when the squared distance between them is exactly 1. Their chromatic numbers run 3, 4, 5, 5 &hellip; and then, where they are known again, at least 7. Whether any of them needs exactly <strong>six</strong> is open at five sizes. Here is what is actually proven, and the one flat quantity that explains the jump.</p>
+  </header>
+
+  <section>
+    <div class="sechead">
+      <h2>1 &middot; The independence constant, and the threshold that outruns it</h2>
+      <p>Largest independent set <span class="mono">&alpha;</span>, divided by <span class="mono">q<sup>3/2</sup></span>. Every best-known set sits in a narrow band; the value six needs climbs like <span class="mono">&radic;q&nbsp;/&nbsp;6</span>.</p>
+    </div>
+    <div class="chart">
+      <div class="scroller"><div class="plot" id="plot1"></div></div>
+      <div class="legend">
+        <span class="lg"><span class="sw"><i class="a"></i><i class="b"></i></span> proven range for <span class="mono">c</span> &mdash; filled end: best set found; open end: exact certificate</span>
+        <span class="lg"><span class="sw2"><i></i></span> what six requires</span>
+        <span class="lg"><span class="sw3"></span> the band: every best-known set, <span class="mono">q &ge; 7</span></span>
+      </div>
+      <p class="callout">Where the orange rule sits to the <strong>right</strong> of the whole bar, six is refused &mdash; the certificate already proves the set cannot be big enough. It overtakes the certificates between <span class="mono">q = 47</span> and <span class="mono">q = 59</span>. At 47 it misses by <strong>two vertices</strong>: 369 needed against 371 certified.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>2 &middot; What is proven about the chromatic number</h2>
+      <p>Lower ends are theorems; upper ends are colourings someone exhibited and verified. A dot is an exact value.</p>
+    </div>
+    <div class="chart">
+      <div class="scroller"><div class="plot" id="plot2"></div></div>
+      <div class="legend">
+        <span class="lg"><span class="sw"><i class="a"></i><i class="b"></i></span> proven range for <span class="mono">&chi;</span> &mdash; filled end: proven floor; open end: best colouring found</span>
+        <span class="lg"><span class="sw2"><i></i></span> the value six</span>
+      </div>
+      <p class="callout">The line at six passes through five of these ranges and has never been reached from either side: no interval has closed onto it. That is the whole of the wall &mdash; not a theorem that six is impossible, but five undecided graphs.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <h2>3 &middot; The numbers</h2>
+      <p>Integers as committed; <span class="mono">c</span> computed from them here.</p>
+    </div>
+    <div class="chart">
+      <div class="scroller"><table id="tbl"></table></div>
+    </div>
+  </section>
+
+  <footer>
+    <p><strong>How to read the two ends.</strong> A set someone <em>found</em> is a lower bound on <span class="mono">&alpha;</span>; a <em>certificate</em> is an exact rational proof of an upper bound, re-checkable from the number <span class="mono">q</span> alone. The true value lies between, so the flat left edge of the band is a band of lower bounds &mdash; it may be measuring how hard people searched rather than the graphs themselves. Only <span class="mono">q = 3, 7, 11</span> have <span class="mono">&alpha;</span> pinned exactly.</p>
+    <p><strong>Not shown.</strong> <span class="mono">q = 71</span>, refused six by its exact spectrum, has no recorded search figure to plot. The sixth open case is not a prime-field plane at all but a characteristic-two target of size 4096, which scales differently: its best known set is a subspace.</p>
+    <p><strong>Sources.</strong> Certificates and searches from this project's own records; the eigenvalues were recomputed independently for this page and agree with the committed table at <span class="mono">q = 23, 31, 43, 47</span>.</p>
+  </footer>
+</div>
+
+<div id="tip" hidden></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // q, n, alpha found (lower), alpha proven (upper), tag for upper,
+  // chi floor, chi floor tag, chi ceiling (null = none known), chi ceiling tag
+  var D = [
+    { q:  3, aLo:    3, aHi:    3, aHiTag: "exact",  cLo: 3, cLoTag: "exact",  cHi:    3, cHiTag: "exact"  },
+    { q:  7, aLo:   14, aHi:   14, aHiTag: "exact",  cLo: 4, cLoTag: "exact",  cHi:    4, cHiTag: "exact"  },
+    { q: 11, aLo:   28, aHi:   28, aHiTag: "exact",  cLo: 5, cLoTag: "kernel", cHi:    5, cHiTag: "kernel" },
+    { q: 19, aLo:   76, aHi:   99, aHiTag: "ratio",  cLo: 5, cLoTag: "solver", cHi:    5, cHiTag: "solver" },
+    { q: 23, aLo:   87, aHi:  105, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:    8, cHiTag: "kernel" },
+    { q: 27, aLo:  117, aHi:  141, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:    7, cHiTag: "search" },
+    { q: 31, aLo:  146, aHi:  200, aHiTag: "cert",   cLo: 5, cLoTag: "exact",  cHi:    8, cHiTag: "search" },
+    { q: 43, aLo:  258, aHi:  365, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:    8, cHiTag: "search" },
+    { q: 47, aLo:  265, aHi:  371, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:   10, cHiTag: "search" },
+    { q: 59, aLo:  363, aHi:  575, aHiTag: "cert",   cLo: 7, cLoTag: "cert",   cHi:   10, cHiTag: "search" },
+    { q: 67, aLo:  443, aHi:  745, aHiTag: "cert",   cLo: 7, cLoTag: "cert",   cHi:   12, cHiTag: "search" },
+    { q: 79, aLo:  578, aHi: 1023, aHiTag: "cert",   cLo: 7, cLoTag: "cert",   cHi: null, cHiTag: ""       },
+    { q: 83, aLo:  597, aHi: 1046, aHiTag: "cert",   cLo: 7, cLoTag: "cert",   cHi: null, cHiTag: ""       }
+  ];
+
+  D.forEach(function (d) {
+    d.n = d.q * d.q;
+    d.p = Math.pow(d.q, 1.5);
+    d.six = Math.ceil(d.n / 6);          // alpha six requires
+    d.clo = d.aLo / d.p;                 // observed constant (lower bound on truth)
+    d.chi = d.aHi / d.p;                 // proven ceiling on the constant
+    d.csix = d.six / d.p;                // the rising threshold
+    d.refused = d.six > d.aHi;           // certificate already refutes six
+    d.settled = d.cLo === d.cHi;         // chromatic number pinned
+    d.state = d.settled ? "settled" : (d.refused ? "refused" : "open");
+  });
+
+  var band = { lo: 0.756, hi: 0.918 };   // every best-known set, q >= 7
+
+  function el(cls, parent) {
+    var e = document.createElement("div");
+    if (cls) { e.className = cls; }
+    if (parent) { parent.appendChild(e); }
+    return e;
+  }
+  function pct(v, d0, d1) { return ((v - d0) / (d1 - d0)) * 100; }
+  function fmt(x, n) { return x.toFixed(n); }
+
+  var STATE_LABEL = {
+    settled: "χ pinned",
+    refused: "six refused",
+    open: "six open"
+  };
+
+  function tipText(d) {
+    var L = [];
+    L.push("q = " + d.q + "   n = " + d.n + " points");
+    L.push("α ≥ " + d.aLo + " (found)   α ≤ " + d.aHi + " (" + d.aHiTag + ")");
+    L.push("c = α/q^1.5 ∈ [" + fmt(d.clo, 3) + ", " + fmt(d.chi, 3) + "]");
+    L.push("six needs α ≥ " + d.six + "  →  c ≥ " + fmt(d.csix, 3));
+    L.push("χ ≥ " + d.cLo + " (" + d.cLoTag + ")" + (d.cHi === null ? "   χ ≤ not known" : "   χ ≤ " + d.cHi + " (" + d.cHiTag + ")"));
+    L.push(d.refused ? "→ six is refused by certificate"
+                     : (d.settled ? "→ chromatic number is exactly " + d.cLo
+                                  : "→ six is not decided"));
+    return L.join("\n");
+  }
+
+  var tip = document.getElementById("tip");
+  function bindTip(row, d) {
+    var txt = tipText(d);
+    function show(ev) {
+      tip.textContent = txt;
+      tip.hidden = false;
+      var pad = 12;
+      var x = (ev.clientX || 0) + 14;
+      var y = (ev.clientY || 0) + 14;
+      var r = tip.getBoundingClientRect();
+      if (x + r.width + pad > window.innerWidth) { x = window.innerWidth - r.width - pad; }
+      if (y + r.height + pad > window.innerHeight) { y = (ev.clientY || 0) - r.height - 14; }
+      tip.style.left = Math.max(pad, x) + "px";
+      tip.style.top = Math.max(pad, y) + "px";
+    }
+    row.addEventListener("pointerenter", show);
+    row.addEventListener("pointermove", show);
+    row.addEventListener("pointerleave", function () { tip.hidden = true; });
+    row.addEventListener("focus", function () {
+      var r = row.getBoundingClientRect();
+      show({ clientX: r.left + 40, clientY: r.bottom });
+    });
+    row.addEventListener("blur", function () { tip.hidden = true; });
+  }
+
+  function drawPlot(host, opts) {
+    var d0 = opts.d0, d1 = opts.d1;
+
+    D.forEach(function (d) {
+      var row = el("row", host);
+      row.tabIndex = 0;
+      row.setAttribute("role", "listitem");
+      row.setAttribute("aria-label", tipText(d).replace(/\n/g, ". "));
+
+      el("rk", row).textContent = d.q;
+      var tr = el("tr", row);
+
+      if (opts.band) {
+        var bz = el("bandzone", tr);
+        bz.style.left = pct(band.lo, d0, d1) + "%";
+        bz.style.width = (pct(band.hi, d0, d1) - pct(band.lo, d0, d1)) + "%";
+      }
+      opts.ticks.forEach(function (t) {
+        var g = el("gl", tr);
+        g.style.left = pct(t, d0, d1) + "%";
+      });
+
+      var v = opts.value(d);
+      var openEnded = v.hi === null;
+      var hiV = openEnded ? d1 - (d1 - d0) * 0.022 : v.hi;
+      var L = pct(v.lo, d0, d1), R = pct(hiV, d0, d1);
+
+      var bar = el("bar", tr);
+      bar.style.left = L + "%";
+      bar.style.width = Math.max(R - L, 0.6) + "%";
+
+      var lo = el("cap lo", tr);
+      lo.style.left = L + "%";
+
+      if (openEnded) {
+        var ar = el("arrowend", tr);
+        ar.style.left = R + "%";
+      } else if (v.hi !== v.lo) {
+        var hi = el("cap hi", tr);
+        hi.style.left = R + "%";
+      }
+
+      if (opts.thr) {
+        var th = el("thr", tr);
+        th.style.left = pct(opts.thr(d), d0, d1) + "%";
+      }
+
+      var st = el("st " + (d.state === "refused" ? "refused" : d.state === "open" ? "open" : ""), row);
+      st.textContent = opts.label(d);
+
+      bindTip(row, d);
+    });
+
+    var ax = el("axis", host);
+    el("", ax);
+    var line = el("axisline", ax);
+    opts.ticks.forEach(function (t) {
+      var k = el("tick" + (opts.emph === t ? " six" : ""), line);
+      k.style.left = pct(t, d0, d1) + "%";
+      k.textContent = opts.tickLabel(t);
+    });
+    el("", ax);
+    var ttl = el("axistitle", ax);
+    ttl.textContent = opts.axisTitle;
+  }
+
+  drawPlot(document.getElementById("plot1"), {
+    d0: 0.30, d1: 1.60,
+    ticks: [0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6],
+    tickLabel: function (t) { return t.toFixed(1); },
+    band: true,
+    value: function (d) { return { lo: d.clo, hi: d.chi }; },
+    thr: function (d) { return d.csix; },
+    label: function (d) { return STATE_LABEL[d.state]; },
+    axisTitle: "c = α / q^(3/2)"
+  });
+
+  drawPlot(document.getElementById("plot2"), {
+    d0: 2.4, d1: 12.6,
+    ticks: [3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    tickLabel: function (t) { return String(t); },
+    emph: 6,
+    band: false,
+    value: function (d) { return { lo: d.cLo, hi: d.cHi }; },
+    thr: function () { return 6; },
+    label: function (d) {
+      return d.settled ? "χ = " + d.cLo
+                       : (d.cHi === null ? "χ ≥ " + d.cLo
+                                         : "χ ∈ [" + d.cLo + ", " + d.cHi + "]");
+    },
+    axisTitle: "χ, the number of colours"
+  });
+
+  var HEAD = ["q", "n = q²", "α found", "α proven ≤", "six needs α", "c found", "c ceiling", "c six needs", "χ"];
+  var t = document.getElementById("tbl");
+  var thead = document.createElement("thead");
+  var hr = document.createElement("tr");
+  HEAD.forEach(function (h, i) {
+    var th = document.createElement("th");
+    if (i === 0) { th.className = "k"; }
+    th.textContent = h;
+    hr.appendChild(th);
+  });
+  thead.appendChild(hr);
+  t.appendChild(thead);
+
+  var tb = document.createElement("tbody");
+  D.forEach(function (d) {
+    var tr = document.createElement("tr");
+    if (d.settled) { tr.className = "settled"; }
+    var chiTxt = d.settled ? String(d.cLo)
+              : (d.cHi === null ? "≥ " + d.cLo : d.cLo + "–" + d.cHi);
+    var cells = [
+      { v: String(d.q), k: true },
+      { v: String(d.n) },
+      { v: String(d.aLo) },
+      { v: String(d.aHi), tag: d.aHiTag },
+      { v: String(d.six), hl: true },
+      { v: fmt(d.clo, 3) },
+      { v: fmt(d.chi, 3) },
+      { v: fmt(d.csix, 3), hl: true },
+      { v: chiTxt }
+    ];
+    cells.forEach(function (c) {
+      var td = document.createElement("td");
+      if (c.k) { td.className = "k"; }
+      if (c.hl) { td.className = "hl"; }
+      td.textContent = c.v;
+      if (c.tag) {
+        var s = document.createElement("span");
+        s.className = "tag";
+        s.textContent = " " + c.tag;
+        td.appendChild(s);
+      }
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+  t.appendChild(tb);
+})();
+</script>
