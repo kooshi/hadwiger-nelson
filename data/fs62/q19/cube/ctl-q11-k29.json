@@ -1,0 +1,17 @@
+{
+ "kind": "fs65-indep-cube",
+ "q": 11,
+ "k_asked": 29,
+ "verdict": "UNSAT",
+ "cubes_total": 64,
+ "unsat": 64,
+ "sat": 0,
+ "undecided": 0,
+ "depth": 6,
+ "max_depth": 20,
+ "cap": 30.0,
+ "workers": 16,
+ "seconds": 18.02,
+ "digest": "bc9cd70de59b1c27",
+ "claim_scope": "UNSAT: every cube refuted and the cubes are exhaustive, so alpha < k. SAT: the exhibited set is verified from the graph definition. UNKNOWN: some cube was undecided at --max-depth, a statement about the budget."
+}

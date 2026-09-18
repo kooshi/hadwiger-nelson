@@ -29,3 +29,8 @@ __pycache__/
 data/fs54/d4/ckpt/
 data/fs62/q19/*.ckpt
 data/fs62/q19/search.log
+data/fs62/q19/cube/*.jsonl
+data/fs62/q19/cube/cube78.log
+data/fs62/q19/cube/*.pgid
+data/fs62/q19/*.pgid
+data/fs62/q19/sat78.log

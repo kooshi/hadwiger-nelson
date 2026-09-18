@@ -80,10 +80,7 @@ That turns `α` into an optimisation over **`q − 1` variables** — 18 at `q =
 over subsets of a `(q+1)`-cycle, with pairwise constraints and a linear objective. **No existing solver knows this
 structure**, which is exactly why the general-purpose ones fall through to blind branching.
 
-**The first task is arithmetic, not code, and it is an afternoon:** count the live per-circle domain after the
-rotation quotient and after discarding subsets that are already internally adjacent, then count the pairwise
-relations. If the domains are too large the decomposition dies on the spot and D3 is closed before anything is
-written — which is the informative failure this deliverable is designed to reach quickly.
+**SIZED 2026-09-18, AND IT FAILS — D3 is closed in the form stated above.** The sizing test this paragraph called for was run and the decomposition does not survive it. A circle's induced subgraph is nearly empty: at `q = 19` only **190 of 3,610 edges** lie inside a circle, and **8 of the 18 circles have no internal edge at all**, so the per-circle domain is essentially every subset — `2^(q+1)`, which is **1,048,576 at `q = 19`, 16.8 million at 23 and 1.8 × 10¹³ at 43**. The framing *"an optimisation over 18 variables"* hides that each variable has a million values; the 153 pairwise compatibility tables would hold 10¹² entries each, and the naive product is 10¹⁰⁸. **Precomputed pairwise relations are impossible and the decomposition as stated is dead.** What survives is not an algorithm but a structural fact worth keeping: a circle of norm `r` has internal edges **exactly when `2 − 1/r` is a trace on the unit circle** (`|z−w|² = 2r − Tr(z w̄)`, and `Tr` on the norm-one circle takes `(q+1)/2` values) — derived independently and matching the measurement at `q = 19` on all 18 circles, `r ∈ {2,3,5,6,9,10,11,12,14,16}` predicted and found. *A branch-and-bound over circles that computes compatibility on the fly is not excluded by this count, but it would need pruning strong enough to cross a 10¹⁰⁸ product, and nothing here suggests where that would come from.* **Recorded because the first version of this count checked ONE circle and reported its zero as if it held for all** — the flattering answer, caught by auditing a result that had made the arithmetic clean (G21).
 
 ## 6. Expectations, and the clauses that matter
 
