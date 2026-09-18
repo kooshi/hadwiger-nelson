@@ -56,6 +56,17 @@ torus, a finite level `m`), this is a finite constraint problem — SAT or ILP �
 **Then the target:** over `ℚ(√167)`, whose bracket is currently `3 ≤ χ ≤ 7` (the ceiling from the hexagonal colouring, and `≤ 8`
 from `colorable_finitePlane23_eight` through the usable plane at 23), **does any mixed colouring reach 6 or 5?**
 
+**Two configurations, and they differ in kind — run both.**
+
+| | non-archimedean factor | what it contributes alone | why cross it with a real window |
+|---|---|---|---|
+| **(i) the usable prime, 23** | `F² → UD(𝔽₂₃,2)`, a genuine graph homomorphism | a real bound, `χ ≤ 8` (kernel), `≤ 7` if 23's plane is seven-chromatic | the homomorphism is surjective and throws away *all* geometry; a real window could distinguish points the residue map fuses, letting a colour class be re-used across residue classes that the plane forces apart |
+| **(ii) the barrier prime, 3** | **no bound at all** — 167 ≡ 2 (mod 3), so the residue field is `𝔽₉` and 3 is **not usable** | nothing on its own; row 72's barrier only 3-colours the directions integral at 3 | precisely because it is not usable, the 3-adic coordinate is *unused information*: the barrier says every witness must have 3 in a denominator, so the 3-adic coordinate is where the hard directions live and is free to carry colour structure |
+
+**(ii) is the more interesting and the more speculative.** (i) asks whether geometry can improve a bound the arithmetic already
+gives; (ii) asks whether a place that gives no bound at all can still carry part of a colouring. **A place that bounds nothing is
+not the same as a place that says nothing**, and no instrument here has ever used one.
+
 **Any improvement on 7 there is new.** A 6 would be the first field with `χ(F²) = 6` if its floor can be raised to 6 — which is
 FS-56's prediction and FS-59's target — and would kill FS-62's dichotomy. A 5 would refute the conjecture's main clause at the
 field the conjecture is sharpest about. **Both outcomes are findings**, which is the property that makes this worth building.

@@ -10,6 +10,14 @@ conjecture predicts at least six colours are needed (no small residue plane boun
 proved four for ℚ(√11), ℚ(√23), ℚ(√71), ℚ(√95), ℚ(√191) (four is exact there) and ℚ(√47) by finite certified graphs, and the same
 instruments found nothing over ℚ(√167).
 
+**Raised to rank 1 on 2026-09-17, and the reason changed the stub's purpose.** Kooshi adopted the local–global conjecture and set the
+target at seven (`CLAUDE.md` § The mission). That makes this field the place to *attack* the belief rather than assume it: with G64,
+the conjecture's proved range is L ≤ 3 generally, L ≤ 4 given √3 and L ≤ 5 for multiquadratic F ⊇ K; **L = 6 has no instance at all if
+the wall holds; and L ≥ 7 is Hadwiger–Nelson itself.** So the cases between "proved" and "the whole problem" are nearly exhausted, and
+**ℚ(√167) is the cheapest one left** — predicted ≥ 6, proven 3, with a three-colour gap at discriminant 668. A four here confirms the
+level-4 clause at a field outside every proved class; **a proof that three suffices kills the conjecture's main clause outright**, which
+is the single most valuable negative available to this project. Run it to find out which, not to confirm either.
+
 ## 2. What is known
 
 * **The 3-adic barrier** [kernel, `ThreeAdicBarrier.lean`]: every unit-distance graph over ℚ(√167) whose edge directions have

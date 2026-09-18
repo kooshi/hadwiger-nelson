@@ -60,6 +60,12 @@ every "k of n classes refused" figure in this project overstates its evidence by
 3. **Use it at 43** — the member with the most room for six — once the finder confirms it there at some `k`.
 4. **Settle `q = 17`**: under G58, χ(17) = 5 iff the single surviving instance is satisfiable. That one
    instance is the whole five-colour question at 17, at half the size of the full problem.
+   **It acquired a second consumer on 2026-09-17, and it is the cheapest one on the board.** `q = 17` seals no
+   field (17 ≡ 1 mod 4), so its digit was only ever bookkeeping against `[Moorhouse2010]` Table 6.1 — but G64's
+   **norm reading** says the value 6 never occurs because 6 is the smallest integer that is neither `a² + b²` nor
+   `a² + ab + b²`, and `χ(𝔽₁₇²) ∈ {5, 6}` is the reading's cheapest killing test anywhere: **a six at 17 refutes
+   it in an afternoon, for zero mathematical cost.** `tools/fq_chi.py` reproduces `≥ 5` and leaves it undecided at
+   five in 90 s (`data/fs62/dim2.jsonl`); this stub's half-size instance is the instrument that should decide it.
 5. **Prior art** was searched on 2026-09-16 under two disciplines and found nothing asserting or refuting the
    statement for any family. The discipline's frame is the **Burnside chromatic polynomial of group-invariant
    graphs**; the abelian-Cayley colouring literature works on χ itself, not on invariance. Two near
