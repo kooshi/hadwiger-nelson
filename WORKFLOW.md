@@ -107,6 +107,16 @@ leaves.
    stated honestly, demote with a banner, never delete; § Paths forward mirrors the top of the table.
    Both files hold current state only: rewrite the affected text in place — no dated amendments,
    correction trails or superseded rankings — and leave the history to git and the milestone's plan.
+   **And sweep the milestone's §PA for recognitions that belong in the Grokkings** (2026-09-17). The
+   conjecture sweep below catches claims the milestone *made*; this catches identifications it *found while
+   checking whether it was first*. The rule exists because M63 phase H3's prior-art appendix derived, verified
+   symbolically, and correctly recorded that this project's whole rotation family is the Σ = n coincidence-rotation
+   family of an imaginary quadratic order — the construction grammar of every witness we hold, in the vocabulary of
+   a discipline with classification theorems — and then closed, leaving it in §PA.4 where nothing reads it. It
+   surfaced five days later only because Kooshi asked whether any of this looked like Moiré patterns. **A prior-art
+   appendix is written to answer "are we first?" and is filed under that question, so anything it learns about
+   what the object IS gets filed there too and is lost.** At every close, read the §PA back asking only: *what did
+   this teach us about our own object?* — and promote each answer to a grokking or a stub.
    **And sweep the milestone's own plan for unpursued conjectures** (Kooshi, 2026-09-14): grep it for
    "conjecture" and "not claimed", and for each hit either mint a stub or record an explicit decline in
    the close. The rule exists because M56's modeling pass wrote "Conjecture, NOT claimed: 1/p ∈ Σ₀(F²)

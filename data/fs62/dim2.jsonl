@@ -1,0 +1,10 @@
+{'q': 3, 'n': 2, 'V': 9, 'degree': 4, 'clique': 3, 'chi': 3, 'lower': 3, 'upper': 3}
+{'q': 5, 'n': 2, 'V': 25, 'degree': 4, 'clique': 2, 'chi': 3, 'lower': 3, 'upper': 3}
+{'q': 7, 'n': 2, 'V': 49, 'degree': 8, 'clique': 2, 'chi': 4, 'lower': 4, 'upper': 4}
+{'q': 9, 'n': 2, 'V': 81, 'degree': 8, 'clique': 3, 'chi': 3, 'lower': 3, 'upper': 3}
+{'q': 11, 'n': 2, 'V': 121, 'degree': 12, 'clique': 3, 'chi': 5, 'lower': 5, 'upper': 5}
+{'q': 13, 'n': 2, 'V': 169, 'degree': 12, 'clique': 3, 'chi': 5, 'lower': 5, 'upper': 5}
+{'q': 17, 'n': 2, 'V': 289, 'degree': 16, 'clique': 2, 'lower': 5, 'upper': None, 'note': 'undecided at k=5 after 90s; k<5 refuted'}
+{'q': 19, 'n': 2, 'V': 361, 'degree': 20, 'clique': 2, 'chi': 5, 'lower': 5, 'upper': 5}
+{'q': 25, 'n': 2, 'V': 625, 'degree': 24, 'clique': 3, 'lower': 5, 'upper': None, 'note': 'undecided at k=5 after 90s; k<5 refuted'}
+{'q': 29, 'n': 2, 'V': 841, 'degree': 28, 'clique': 2, 'lower': 5, 'upper': None, 'note': 'undecided at k=5 after 90s; k<5 refuted'}

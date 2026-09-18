@@ -1,0 +1,5 @@
+{'q': 3, 'n': 3, 'V': 27, 'degree': 6, 'clique': 3, 'chi': 3, 'lower': 3, 'upper': 3}
+{'q': 5, 'n': 3, 'V': 125, 'degree': 30, 'clique': 3, 'lower': 7, 'upper': None, 'note': 'undecided at k=7 after 90s; k<7 refuted'}
+{'q': 7, 'n': 3, 'V': 343, 'degree': 42, 'clique': 4, 'lower': 7, 'upper': None, 'note': 'undecided at k=7 after 90s; k<7 refuted'}
+{'q': 9, 'n': 3, 'V': 729, 'degree': 90, 'clique': 4, 'lower': 8, 'upper': None, 'note': 'undecided at k=8 after 90s; k<8 refuted'}
+{'q': 11, 'n': 3, 'V': 1331, 'degree': 110, 'clique': 3, 'lower': 7, 'upper': None, 'note': 'undecided at k=7 after 90s; k<7 refuted'}

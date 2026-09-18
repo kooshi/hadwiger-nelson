@@ -42,15 +42,54 @@ semialgebraic set defined over ℚ, nonempty, so it has a point over the real al
 existentially closed in ℝ). Price the Mathlib support first; if it is absent, the stub's deliverable is the statement with
 `sorry` at that leaf, labelled, so the record has the bridge's SHAPE and one named gap.
 
+D4 — **Route C for (ii): a valuation-theoretic descent instead of a model-theoretic one** (added 2026-09-17; `CLAUDE.md` G63).
+D3's two routes both go through real closed fields. There is a third, and it uses machinery this repository already has.
+
+> **Lemma (transcendence is free).** For any `F ⊆ ℝ` and any `t` transcendental over `F`, **`χ(F(t)²) = χ(F²)`**.
+
+*Proof.* Take the place `t ↦ 0` of `F(t)/F`; its residue field is `F`, which is formally real, so `−1` is not a square in it. If a
+unit vector `(u,v)` — `u² + v² = 1` — had a pole, the leading terms of `u²` and `v²` would have to cancel, which forces `−1` to be
+a square in the residue field. So **every unit vector lies in the valuation ring** (`normOne_subset_valuationSubring`, which
+exists), the plane decomposes into cosets of `O_v²` with no edge between cosets, and reduction is a graph homomorphism onto `F²`
+(`colorable_unitDistance_induce_of_valuationSubring`, which also exists). Hence `χ(F(t)²) ≤ χ(F²)`; the reverse is the induced
+subgraph. ∎
+
+**Consequence, worth stating on its own:** `χ(ℚ(π)²) = χ(ℚ(e)²) = 2`. The chromatic number of a field plane cannot see
+transcendence degree at all — it is an arithmetic invariant, and "other subfields of ℝ" is a much smaller category than it looks.
+
+**What this does and does not close.** It handles one transcendental over a real base cleanly and cheaply, which is a real kernel
+deliverable by itself. It does **not** yet give (ii) for an arbitrary finitely generated `F ⊆ ℝ`: descending such a field needs a
+place whose residue field is again **formally real**, which is the theory of real places (Artin–Lang), not Tarski–Seidenberg.
+**So Route C trades one Mathlib gap for a different one** — and that is the point: the two gaps should be priced against each
+other before either route is committed to, and nobody has priced the real-places one.
+
+*Prior art unchecked, and almost certainly folklore* — this is the standard specialisation argument in valuation dress. The gate
+below owes the search, and nothing here may be claimed until it runs.
+
+## 3a. Prior-art gate (WORKFLOW 3a) — owed, never run
+
+This stub predates its own gate. Before any of D2–D4 is written: search for the specialisation argument in the words of valuation
+theory and of real algebraic geometry (*real place*, *Artin–Lang homomorphism theorem*, *specialisation of a semialgebraic set*),
+and for the statement `χ(ℝ²) = sup over number fields` in the Hadwiger–Nelson literature — `[Madore2015]` ¶5.4 is the nearest thing
+we have and is cited in prose only. FS-62 depends on this stub's conclusion, so its gate matters more than it did.
+
 ## 4. Phases
 
 | phase | what | cost |
 |---|---|---|
 | A | (i) — compactness of colourings for `unitDistance ℂ`, or the citation of Mathlib's lemma | half a day |
 | B | (ii) — the algebraic-drawing lemma, or its statement with the named gap | one to two days, Mathlib-dependent |
+| B′ | **D4's transcendence lemma in the kernel** — `chromaticNumber_planeOver_adjoin_transcendental_eq`, plus `χ(ℚ(π)²) = 2` as its named inhabitant | half a day; the two valuation lemmas already exist |
 | C | the corollary `chromaticNumber_plane_eq_iSup_numberField` and a rewrite of the prose sentences to cite it | an hour |
+
+**Phase order changed 2026-09-17:** run **B′ before B**, and price Route C's real-places gap against Route B's Tarski gap in the
+same sitting. B′ is cheap, standalone, and lands a statement worth having whichever route wins.
 
 ## 5. Bearing on 6, honestly
 
 None directly on finding a 6-forcer (D1). High on the honesty of every "χ(ℝ²) = …" sentence the programme writes after M58,
 and required by FS-20's paper. Cheap.
+
+**Raised 2026-09-17:** this stub is now a **prerequisite of FS-62** (`plans/STUB-six-is-not-a-value.md`), whose whole statement —
+*no subfield of ℝ has χ(F²) = 6, hence χ(ℝ²) ∈ {5, 7}* — is a claim about ℝ² that cannot be made without the bridge. It moved from
+rank 8–13 to rank 3 for that reason.

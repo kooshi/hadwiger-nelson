@@ -16,9 +16,11 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 200,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 250,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
-200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours). The budget is
+200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, and from 200,000 to 250,000
+on 2026-09-17 with the file at 199,785 bytes — a ceiling reached is a ceiling that starts costing content, and the
+current-state-only rule, not the byte count, is what keeps this file honest). The budget is
 a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
 comes out whether or not there is room for it. **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
 (Kooshi, 2026-09-15): the tag marks reasoning whose loss has already cost hours; trim elsewhere.**
@@ -177,6 +179,17 @@ never either alone, and over the distance set {1, 2} a single five-colour √3 g
    a four-copy chain (G55 at three colours); elsewhere balls of saturated 3-non-integral lattices refuse outright. Every witness uses a
    direction with 3 in a denominator, as the kernel's **3-adic barrier** requires. ℚ(√167), where the conjecture predicts six, is not
    landed (FS-59).
+15. **Six may be a value nothing attains, and proving that is a two-value Hadwiger–Nelson** (G64, FS-62). *"No subfield of ℝ has
+   χ(F²) = 6"* is equivalent to χ(ℝ²) ∈ {5, 7} (modulo FS-39), so the value-skipping this project keeps observing is the open problem
+   reduced from three values to two. It factors into the wall at six — finite, six graphs, G56/G59 — and a gap theorem
+   χ(F²) ≥ 6 ⟹ χ(F²) ≥ 7, whose engine is G55's chain at one rung higher. Unconditionally, since L(F) is never 6, **the only fields
+   that could be exactly six-chromatic are the ones the conjecture predicts to be seven**: six hides only in the gap between L(F) and
+   χ(F²), where every ceiling we own is silent (FS-64 is the one proposal that is not). Six being skipped is *not* evidence for seven.
+16. **The construction grammar is crystallography's, and transcendence is free** (G62, G63). Every witness is a twisted bilayer whose
+   rotation is the Σ = n coincidence rotation of the order of discriminant 1 − 4n; commensurate twists are periodic, hence bounded by a
+   finite quotient, hence unable to raise the colour count — which is the field wall in the vocabulary of a discipline with
+   classification theorems (FS-63 is its gate). And χ(F(t)²) = χ(F²) for transcendental t, so χ(ℚ(π)²) = 2: the chromatic number is an
+   arithmetic invariant that cannot see transcendence degree, and "other subsets of ℝ" is a smaller category than it looks.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -283,22 +296,27 @@ bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
 **Open milestones, in order.** **FS-58 closed 2026-09-17** (rows 72–73, G61): χ(ℚ(√11)²) = 4 with the lower half in the kernel; χ ≥ 4 certified for five more real quadratic fields; ℚ(√167) not landed (FS-59). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it.
 
-**Ranked stubs** (re-ranked 2026-09-17 at FS-58's close: FS-61 census first, FS-59 ℚ(√167) second; `plans/FRONTIER-STUBS.md` is authoritative):
+**Ranked stubs** (re-ranked 2026-09-17 at FS-58's close, and again the same day when a conversation on where six could hide minted
+FS-62–FS-64; `plans/FRONTIER-STUBS.md` is authoritative):
 
 | rank | stub | the question | bearing on χ ≥ 6 |
 |---|---|---|---|
+| 1 | **FS-62 six is not a value** — `plans/STUB-six-is-not-a-value.md` | state and attack *no subfield of ℝ has χ(F²) = 6*, which is χ(ℝ²) ∈ {5, 7} — the finite half is the wall (FS-57), the mathematical half a gap theorem χ ≥ 6 ⟹ χ ≥ 7 through G55's chain at six; prerequisites FS-39 and FS-47 | **none on finding a 6-forcer; the largest theorem target on the board** — a two-value Hadwiger–Nelson, and it re-aims the wall and census work that already exists |
 | 1 | **FS-61 the quadratic census** — `plans/STUB-quadratic-census.md` | for which real quadratic `d` does FS-58's direct route (saturated 3-non-integral lattice, quotient filter, ball refusal, extraction) prove χ ≥ 4, and what arithmetic decides it; known 2- and 3-chromatic fields as controls | none directly; high for the conjecture's level-4 clause across a family (candidate: every field with a usable plane at 7 has χ = 4) |
+| 2 | **FS-64 the adelic window colouring** — `plans/STUB-adelic-window-colouring.md` | every ceiling we own uses ONE place — residues the non-archimedean, the hexagonal 7 the archimedean. Build the mixed one: a cut-and-project colouring on the S-integers of F in ℝ² × ℝ² × ℚ₃², the 3-adic place named by the barrier (row 72). First ask: can it beat 6 over ℚ(√167)? | **the only ceiling instrument that could decide six** — G64 puts six exclusively in the gap between L(F) and χ(F²), where every existing instrument is silent; speculative, low confidence |
 | 2 | **FS-59 four colours over ℚ(√167)** — `plans/STUB-four-colours-167.md` | the conjecture predicts six; nothing above three proven; no coarse 3-non-integral lattice with short odd cycles to denominator 2520; two balls (2.36M, 4.46M points) undecided at 1,800 s; routes: decide them, search further, forcer-shaped chain pieces, rigidity of the 3-integral graph | none directly; high — FS-56's carried target |
 | 2 | FS-57 the fractional wall — `plans/STUB-fractional-wall.md` | α < Q²/6 at the members in reach: 47 (level 3 priced, 5.15 s/it, 9–23 h, low confidence) and U₆₄ (a characteristic-2 three-point port); side digit five refused at 31; 23, 27, 31, 43 beyond any priced instrument | none directly; it sharpens FS-56's prediction to 7 |
 | 2 | FS-55 the antipodal conjecture — `plans/STUB-antipodal-colouring.md` | does every plane have an optimal colouring symmetric under z ↦ −z up to a colour involution? True at all four planes where χ is known. It would halve every colouring instance and make a symmetry-restricted search **complete**; and 32 % of this project's "solver refusals" in equivariant sweeps are free by the fixed-colour argument, which the tool should filter | medium-high as an instrument, not a decider of six |
 | 2 | FS-45 chain, don't spindle — `plans/STUB-chain-theorem.md` | GPT Astra's chain theorem in the kernel with its instances: the 18-vertex ℚ(√2,√3) graph, and `five_le_chromaticNumber_planeOver (K(√7))` from eight copies of the 588-core 8/3 forcer with its pinned refusal as an LRAT | none on six directly; medium, mechanism |
+| 3 | **FS-63 the crystallography gate** — `plans/STUB-moire-coincidence.md` | a full prior-art session in the vocabulary of coincidence site lattices, Moiré superlattices and aperiodic order (G62): does that literature already hold the rotation screen, the index arithmetic, or a colouring theory for planar modules? M63 phase H3 opened the door on one front and closed three | none directly; free classification theorems if they exist, the negative if they do not, and the paper's second-discipline vocabulary (FS-20) |
 | 3 | FS-60 the quadratic witnesses in the kernel — `plans/STUB-quadratic-witnesses-kernel.md` | χ ≥ 4 for ℚ(√23), 47, 71, 95, 191 in the kernel through a certificate type over `Adjoin d ℤ`; the upper halves wait on the number-field residue step (FS-37/47) | none; five field values from the checker's word to the kernel's |
 | 3 | FS-47 the unit-vector ring in the kernel — `plans/STUB-unit-vector-ring-kernel.md` | prime inversion (1/p ∈ R iff no stable prime above p, by lying-over — M56 L7's conjecture; `[Fischer1990b]` Thm 1 for multiquadratic F at odd unramified p, Thm 5 the whole ring for quadratic F), the two-colour classification of every real number field, χ ≥ 5 for every wall-broken F ⊇ K; closes row 57's hand step from the ring side | none; medium, mechanism |
 | 4 | FS-46 three colours over √3-fields — `plans/STUB-three-colour-classification.md` | Theorem 3.1 in the kernel leaf by leaf: the rhombus period, the descent to R/3R, Hilbert 90, the product embedding, El-Zahar–Sauer formalized (not in Mathlib), the floor at 3^f as the one named hypothesis | none; medium, mechanism |
 | 5 | FS-48 the ℚ(√3,√d) table — `plans/STUB-biquadratic-table.md` | χ = 3 iff d ≡ 1 (mod 3); χ = 4 iff d ≡ 2 with the wall standing, by explicit rhombus chains (ℚ(√3,√5)'s is six vectors by hand; 17, 41 predicted new values); d = 5, 23, 47 the open five-level cases, d = 29's local bound FS-17's question; the first witness built from a residue plane upward, over ℚ(√3, α), α³ = α + 1 | none on six; medium-low mechanism, high as a table |
 | 6 | FS-43 the slack census — `plans/STUB-arena-slack-census.md` | which vertices of the ρ₆₃ arena are frozen in every five-colouring? A vertex with a free colour in some five-colouring is forced to nothing (row 66 against the graph itself); every vertex off the 66 cross edges is slack by derivation once one compatible pair (f, g) with f four-coloured exists, so the census is ≤ 132 interface vertices, hours; then the slack dial on thick K(√7)-fabric | medium as an instrument — explains H4's null by theorem or hands the hunt its first frozen material in a 6-open field; two-sided |
 | 7 | FS-49 one gadget for six — `plans/STUB-distance-two-gadget.md` | a five-colour virtual edge at distance 2 over a 6-open field, transported onto the 892 length-2 edges of Exoo–Ismailescu's 426-vertex graph, is χ(ℝ²) ≥ 6 (GPT Astra's sentence; row 43 needed two gadgets); the arena has none (H4), so the search runs on thick K(√7)-fabric through FS-43's shared-gap filter with pinned asks on survivors; the kernel consumer waits on row 44's certificate | the highest if it lands; the genre that returned zero on the arena |
-| 8–13 | FS-39 the bridge to the plane, FS-41 `forces_of_tight`, FS-42 5-tight quotients, FS-44 the fifth colour, FS-51 the ratio bound in the kernel, FS-52 the triple certificate in the kernel | χ(ℝ²) = sup_F χ(F²), invoked since M58 and never stated; Hoffman's equality case in Fourier form, the mechanism behind rows 58 and 67; the one residue route to a five-forced pair row 66 leaves, a reading with its falsifier; what structures five-colourings of 6-open fabric when no residue or additive colouring exists | high on every χ(ℝ²) sentence; medium mechanism; medium-low reading; medium-high frame |
+| 3 | **FS-39 the bridge to the plane** — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup over number fields of χ(F²), invoked in prose since M58 and never stated. **Route C, new 2026-09-17 (G63):** χ(F(t)²) = χ(F²) for transcendental t, by the place t ↦ 0 through machinery that already exists — the remaining gap is a formally real residue field (Artin–Lang) rather than Tarski–Seidenberg, and the two should be priced against each other | high on every χ(ℝ²) sentence, and now a **prerequisite of FS-62**, which cannot be stated about ℝ² without it |
+| 8–13 | FS-41 `forces_of_tight`, FS-42 5-tight quotients, FS-44 the fifth colour, FS-51 the ratio bound in the kernel, FS-52 the triple certificate in the kernel | Hoffman's equality case in Fourier form, the mechanism behind rows 58 and 67; the one residue route to a five-forced pair row 66 leaves, a reading with its falsifier; what structures five-colourings of 6-open fabric when no residue or additive colouring exists | medium mechanism; medium-low reading; medium-high frame |
 | 14–16 | FS-20 the paper, FS-17 the first digit at 23 (five refused by certificate, α ≤ 105; six needs α ≥ 89, the set found 87), FS-2 Kempe classes | Theorem A as the formulation seven lineages stopped short of, now carrying rows 57, 66, 67 and G55; is UD(𝔽₂₃,2) six- or seven-chromatic (five refused, row 71); what carries M56's depth-6 forcing | the publication trigger; the disproof-side digit; mechanism |
 | 17–20 | FS-13 finite-plane 6-critical cores, FS-12 the hub scan as a design instrument, FS-19 𝔭-adic classification of forbidden distances, FS-37 the 2-adic criteria at the field level | autopsy objects; a decidable fan filter over sealed fields; `[Chow1993]` with v_𝔭(d²); Theorem A's own gap, shared with FS-47 | low-medium each; FS-37 feeds FS-20 and FS-47 |
 | 21–22 | FS-27 consolidation remainder, FS-23 the knowledge web | the paper's blockers; the citation graph | none |
@@ -874,6 +892,87 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   denominator 2520 — FS-59); every field with a usable plane at 7 has χ = 4 (FS-61's census, with known 3-chromatic fields as controls).
   *Demotion record:* FS-58's plan first derived periodic affinity from "finite quotients of the 3-integral group are 3-groups" — false,
   since the unit vectors' lattice maps onto every stable residue plane; the corrected claim rests on the tensor measurements.
+* **G62 — Every witness is a twisted bilayer, and the twist family is the coincidence rotations. [derived, the
+  identification verified symbolically; the prior art external]** Every 5-chromatic object this project holds or reproduces —
+  de Grey's 1581, Heule's 510, `[Parts2020a]`'s record, the `ρ₆₃` arena — is **a point set plus a rotated copy of itself,
+  joined where the two layers land at distance 1.** That is the definition of a **Moiré bilayer**, and the resemblance the
+  pictures have to Moiré patterns is not a resemblance but a description. **The identification is exact.** With
+  `w = (1 + i√(4n−1))/2`, the standard generator of the integers of `ℚ(√−(4n−1))`, `|w|² = n` and **`w̄/w = −ρ_n`** — so
+  G7's type-M family is, up to a half-turn, **the coincidence rotation of index `Σ = n` of the imaginary quadratic order
+  of discriminant `1 − 4n`, one for each `n`**. Verified symbolically for general `n` and at `n = 3, 4, 16`:
+  `(5+i√11)/6`, `(7+i√15)/8`, `(31+3i√7)/32`. (Derived at M63 phase H3 and left in `plans/M63-phaseH3-prior-art.md` §PA.4;
+  promoted here 2026-09-17.) **Commensurate or incommensurate IS the field wall.** A twist is *commensurate* with a module
+  when the two layers share a finite-index sublattice — equivalently, when `√(4n−1)` already lies in the module's field.
+  Then the bilayer is **periodic**, so it is a Cayley graph of a finite quotient, so its chromatic number is bounded by that
+  quotient's: **a commensurate twist cannot raise the colour count above its base field's local bound — there is nowhere for
+  it to go.** Only an incommensurate twist generates a new field, and *which* field is exactly what the 2-adic wall test
+  measures. G7's ladder, rung by rung: `n = 3` (Moser, `Σ3`, radicand 11 already in `K`) is **commensurate** and can never
+  reach five; `n = 4` (`Σ4`, radicand 15 → `√5`) is incommensurate, reaches five, lands 5-sealed; `n = 16` (`Σ16`,
+  radicand 63 → `√7`) is incommensurate, reaches five, lands 6-open. **And the plane's own 7-colouring is the `Σ7`
+  coincidence lattice**: `Instances/Seven.lean` colours by cosets of the norm-7 Eisenstein ideal `(−3 + ζ₆)`, whose
+  index-7 sublattice is the coincidence site lattice of the 21.79° twist — the canonical `Σ7` grain boundary and the
+  textbook twisted-bilayer-graphene commensurate angle. Row 34's "2, 5, 6 are not `a² + ab + b²`" is that discipline's
+  statement that a coset colouring's colour count is an ideal index, hence a norm (G64). **Refuted trap, recorded so it is
+  not rediscovered:** `ρ₁₅` sits **1.045°** off 30° and twisted bilayer graphene's first magic angle is **≈1.05°**. This is
+  a coincidence. Ours is `arccos(7/8) − 30°`, algebraic and forced by a Diophantine condition; theirs is the first zero of a
+  ratio of interlayer coupling to Fermi velocity, a continuum quantity that moves with the material. **What the frame does
+  NOT reach: the forcing side.** Moiré physics' localisation — flat bands, trapped states at the superlattice scale — has no
+  principled translation into "this vertex's colour is determined"; every construction of one is word-association, and
+  forcing stays where G15 left it. **Prior art** (M63 phase H3 §PA.4, three passes): `[BaakeZeiner2017]` §6 defines a
+  submodule to have the **same rank** (footnote 8), so rank-halving ones are out of scope by definition;
+  `[BaakeGrimm2004]`'s Bravais colourings are similarity submodules, and ours is neither map; the twisted-bilayer-graphene
+  literature's commensurate family is the **hexagonal** one, `cos θ = (m²+n²+4mn)/(2(m²+n²+mn))`, a different one-parameter
+  shape that does not contain ours; and **no source joins coincidence-site theory to unit-distance colouring.** The full
+  gate is FS-63. *Killing test: a commensurate twist whose arena's chromatic number exceeds its base field's local bound,
+  which would refute the periodic ⟹ finite-quotient ⟹ bounded step.*
+* **G63 — The chromatic number of a field plane is arithmetic only: transcendence is free. [hand; prior art
+  unchecked]** For any `F ⊆ ℝ` and any `t` transcendental over `F`, **`χ(F(t)²) = χ(F²)`**. At the place `t ↦ 0` the
+  residue field is `F`, which is formally real, so `−1` is not a square there; a unit vector `(u,v)` with a pole would need
+  the leading terms of `u²` and `v²` to cancel, which needs `−1` to be a square — so **every unit vector is integral**, the
+  plane splits into cosets of the valuation ring, and reduction is a graph homomorphism onto `F²`. The other inequality is
+  the induced subgraph. **So `χ(ℚ(π)²) = χ(ℚ(e)²) = 2`: the planes over the transcendental fields are bipartite.** No amount
+  of transcendence buys a colour; only algebraic extension does, and the chromatic number cannot see transcendence degree at
+  all. (The other constant people ask about is the golden ratio, and it is arithmetic, not transcendental: `ℚ(φ) = ℚ(√5)`,
+  `5 ≡ 5 (mod 8)`, so the prime above 2 is inert in `ℚ(√5)` and ramified in `ℚ(√5, i)` — **`χ(ℚ(φ)²) = 2`**, the golden-ratio
+  plane is bipartite. `L(ℚ(√5)) = 2` is G48's; `data/fplane/map.md` reads "sealed-at-4" there, which is the coarse `|κ|` bound
+  and not the sharp value.) **Why it matters beyond the answer:** it is a route to FS-39 that `plans/STUB-plane-bridge.md` does not consider —
+  valuation-theoretic rather than model-theoretic, using `normOne_subset_valuationSubring` and
+  `colorable_unitDistance_induce_of_valuationSubring`, which already exist. **The remaining gap is a different one**:
+  descending an arbitrary finitely generated `F ⊆ ℝ` needs a place whose residue field stays **formally real** (real places,
+  Artin–Lang), where the model-theoretic route needs Tarski–Seidenberg, which Mathlib does not hold. Price both before
+  committing. *Prior art unchecked and probably folklore — this is the standard specialisation argument in valuation dress;
+  FS-39's gate owes the search and nothing here may be claimed until it runs.* *Killing test: a unit vector of `F(t)²` with a
+  pole at a place whose residue field is formally real.*
+* **G64 — Six is the value nothing attains, and saying so IS the theorem. [derived; the pattern a reading]**
+  **The equivalence, modulo FS-39:** *no subfield `F ⊆ ℝ` has `χ(F²) = 6`* ⟺ `χ(ℝ²) ≠ 6` ⟺ **`χ(ℝ²) ∈ {5, 7}`**. Forward:
+  if `χ(ℝ²) = 6`, de Bruijn–Erdős gives a finite 6-chromatic unit-distance graph, its coordinates generate a number field
+  `F`, and `6 ≤ χ(F²) ≤ χ(ℝ²) = 6`. Backward: the plane's value is the supremum of the fields' values. **So the observed
+  value-skipping is not a curiosity about quadratic fields — it is Hadwiger–Nelson reduced from three values to two, and
+  would be the first narrowing since de Grey removed 4.** **It factors.** `χ(F²) ≤ L(F)` is a theorem (row 52; the
+  field-level step is row 57's gap, FS-47), so every field with a usable small prime is *already* excluded as a home for
+  six; and the wall at six (G56, G59) says `L(F)` is never 6. What remains is a **gap theorem** — `χ(F²) ≥ 6 ⟹ χ(F²) ≥ 7` —
+  whose engine would be G55's chain theorem one rung up: a 6-colour forced pair at `δ` with `1/δ ∈ ℤ[U]`. Half the target is
+  a finite computation already down to six graphs; the other half is this file's own open structural question at six instead
+  of five. **Unconditionally, and this is the aiming statement:** since `L` is never 6, **the only fields that could have
+  `χ(F²) = 6` are exactly the fields the conjecture predicts to be 7.** Six hides nowhere in the arithmetic — it hides only
+  in the gap between `L(F)` and `χ(F²)`, where every ceiling instrument this project owns (residue maps, additive colourings,
+  the hexagonal 7) is silent; FS-64 is the one proposal for an instrument that is not. **Warning:** "six is skipped" is **not**
+  evidence for seven — it is equally consistent with every field being `≤ 5` and `χ(ℝ²) = 5`. What forces seven is the
+  conjecture's bold form at `K(√7)` (G48), never the skipping. **The norm reading** [reading]: every chromatic number this
+  project has ever pinned for a plane over a coefficient structure is **2, 3, 4, 5 or 7** — exactly the integers `≤ 7` that
+  are `a² + b²` or `a² + ab + b²` — and **6 is the smallest integer that is neither**, because `6 = 2·3` with 2 inert in the
+  Eisenstein integers and 3 ramified. Mechanism where it has one: a coset colouring's classes are cosets of a rotation-stable
+  sublattice, hence of an ideal, hence the colour count is a norm (row 34, G62). **No mechanism at the finite planes** — the
+  5-colouring of `UD(𝔽₁₁,2)` cannot be a subgroup quotient, since `(ℤ/11)²` has no subgroup of index 5 — so this is half
+  numerology and is labelled so. Next predicted skips: 11, 14, 15. *Killing tests: a six-colouring at 17 (`χ ∈ {5,6}`), at
+  `U₆₄` (`χ ∈ [6,8]`), or at any window member; or any plane pinned at exactly 11.* **Measured 2026-09-17**
+  (`tools/fq_chi.py`, `data/fs62/`): an independent rebuild reproduces `χ = 3, 4, 3, 5, 5` at `q = 3, 7, 9, 11, 19` and
+  gives `χ(UD(𝔽₅,2)) = 3`, `χ(UD(𝔽₁₃,2)) = 5` (both `[Moorhouse2010]` Table 6.1 / M58, so controls, not findings), with
+  17, 25, 29 at `≥ 5` and undecided at five colours in 90 s. **The dimension-3 probe returned nothing**:
+  `χ(UD(𝔽₃,3)) = 3` and every other case decided is `≥ 7` (`≥ 8` at `q = 9`), so the informative outcome — a six outside
+  dimension two — was **unreachable at the sizes decided**, and whether the skipping is specific to the plane stays
+  untested. A fresh instance of this file's own rule: the probe's design confirmed that a six was reachable *in principle*
+  and never that it was reachable *at the sizes the budget could decide*.
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
@@ -1321,7 +1420,18 @@ FS-53 K1). A wait-for-the-build loop watching for a line beginning `==> build:` 
 "BUILD FINISHED" at batch 140 of 172, because `scripts/build.sh` prints exactly that as its *first* output. A waiter
 whose condition already holds at launch cannot tell you anything, and **it fails in the direction that looks like
 success** — the implementer caught it only because the rebuilt-module count came back zero. One line before arming:
-evaluate the condition and assert it is false.
+evaluate the condition and assert it is false. **Second instance, 2026-09-17, and the mechanism is different: the condition was
+vacuous, not already-satisfied.** A waiter armed as `until ! pgrep -u $USER -x python3 -f "valueset.py 3"` fired in the same second,
+because `-x` matches the process **name** exactly and, combined with `-f`, matched nothing at all — so "the job is gone" was true at
+arming while the job had six minutes left. **A predicate that can never match reads exactly like a predicate that is satisfied**, and
+both fail toward "done". The one-line guard covers both: before arming, evaluate the condition and assert it is false — here that
+printed `pid=` empty, which is the tell. The repair used the PID directly (`while kill -0 <pid>`), which cannot be vacuous.
+**Third instance, same session, and it is `pgrep -f` self-match wearing a waiter's costume:** `while pgrep -u $USER -f "fq_chi\.py
+[23] "; do sleep 15; done` can **never** exit, because the shell running the loop carries that pattern in its own command line and
+so matches itself forever. The self-match rule is on this page with eight instances, all of them *kills*; in a waiter's **condition**
+the same bug fails in the opposite direction — not a wrong process killed, but a wait that never ends and looks exactly like a job
+that never finished. **So the rule is not "don't pkill -f", it is "never let a pattern that can match the matching shell decide
+anything"** — a kill, a wait, or a liveness check. PIDs cannot self-match; patterns always can.
 
 **And the rule the one above does not reach: state the uninformative outcome and confirm it is REACHABLE,
 before believing a control's pass or proposing a discriminator.** "Break it and watch it go red" assumes the
