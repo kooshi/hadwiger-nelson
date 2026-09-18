@@ -94,6 +94,21 @@ maximum 0.92 at `q ≈ 30.5`.
    `α(19) ≥ 76` — a 1.3 % margin. So **an independent set of 78 at `q = 19`, or of 263 at `q = 43`, kills the uniform route to 31**,
    on search instruments that already exist. Run those before pricing any theorem.
 
+4. **But price D5 honestly, because the reframing flatters itself.** A uniform `0.93·q^{3/2}` is not a cheaper route to the
+   same place — it is a **stronger statement than any single certificate this project has produced**, asked of every `q` at once.
+   Against the exact spectral (ratio) bound it must reach:
+
+   | `q` | ratio bound | `0.93·q^{3/2}` | reach D5 needs | best reach achieved there |
+   |---:|---:|---:|---:|---:|
+   | 31 | 240.25 | 160.5 | **0.668** | 0.836 (`cert-q31-N200`) |
+   | 43 | 395.23 | 262.2 | **0.663** | 0.924 (`cert-q43-N365`) |
+   | 47 | 466.39 | 299.6 | **0.642** | 0.797 — *the best measured anywhere* (`cert-q47-N371`) |
+
+   So D5 asks for roughly 19 % beyond the instrument's best single-member result, uniformly. That does not kill it — a theorem
+   and a relaxation are different objects, and the literature pass in §5 item 5 may simply hold one — but it means **D5 is a long
+   shot to be ranked on its prior-art answer, not an obvious simplification of (b)**. *Recorded because the reframing in this
+   section is the author's own and this was the first number checked after writing it (G21: audit what you like at the same rate).*
+
 **The first experiment, and it is hours, not days:** `α(19)` has never been put through the level-3 relaxation that pinned
 `α(Γ₇) = 14` and `α(Γ₁₁) = 28` exactly (ledger row 70), and `q = 19` is *smaller* than the `q = 23` instance where that
 instrument converged. Running it calibrates the whole normalization: it either pins the one value that makes `c` look flat, or
@@ -114,7 +129,7 @@ graph chromatic number", which is what has been searched so far.
 | D2 | **The aiming corollary, unconditional** — `L(F) ≠ 6` for every `F` whose wall members are closed, hence the candidates for six are exactly the `L ≥ 7` fields | hours, once the wall is closed | **FS-47** (row 57's step at field level) |
 | D3 | **The conditional theorem** — *assuming the local–global conjecture and the wall, `χ(ℝ²) ≠ 6`* | days | D1 + D2; publishable as a statement about the conjecture even before the wall closes |
 | D4 | **The gap theorem**, or a sharply stated obstruction to it | open | the chain at six; a necessity theorem for compulsions at the top rung |
-| D5 | **The uniform independence bound** — `α(UD(𝔽_q,2)) ≤ 0.93·q^{3/2}` for odd `q ≥ 23`, or its counterexample. Closes **31, 43 and 47 in one theorem**, cutting (b) from six members to two | unknown; one theorem instead of three relaxations | §2a above; a literature pass on independence numbers of subgroup-Cayley graphs over `𝔽_{q²}` |
+| D5 | **The uniform independence bound** — `α(UD(𝔽_q,2)) ≤ 0.93·q^{3/2}` for odd `q ≥ 23`, or its counterexample. Closes **31, 43 and 47 in one theorem**, cutting (b) from six members to two | unknown, and **harder than "one theorem instead of three relaxations" suggests** — §2a(4) prices it | §2a above; a literature pass on independence numbers of subgroup-Cayley graphs over `𝔽_{q²}` |
 
 **D3 is the honest first target.** A conditional dichotomy resting on a conjecture verified at six fields and proved for `L ≤ 5`
 (G55) is a real result and states clearly what it depends on. D4 is the real prize and may be out of reach.
