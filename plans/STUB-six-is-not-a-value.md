@@ -55,6 +55,57 @@ the only necessity theorem we hold (A1) is vacuous at the top rung.
 
 ---
 
+## 2a. Why the wall exists at all, and what that makes of (b)
+
+*Added 2026-09-18, out of a conversation with Kooshi that started on the complex plane and the quaternions. The conclusion is
+G59's; this section is the part that bears on FS-62, namely that (b) is one theorem plus two small cases rather than six
+certificates.*
+
+**Normalize the independence number.** Write `c = α(UD(𝔽_q,2)) / q^{3/2}`. Since these graphs are vertex-transitive,
+`χ_f = q²/α` and `χ ≥ ⌈χ_f⌉`, so the colour count is `≈ √q / c`. Six therefore needs `c ≈ √q/6` — **a threshold that grows
+with `q`, measured against a constant that looks flat:**
+
+| `q` | best set known | `c` observed | `c` six requires | shortfall |
+|---:|---:|---:|---:|---:|
+| 7 | 14 | 0.756 | — | — |
+| 11 | 28 | 0.767 | — | — |
+| 19 | 76 | **0.918** | — | — |
+| 23 | 87 | 0.789 | 0.807 | **+2 vertices** |
+| 27 | 117 | 0.834 | 0.870 | +5 |
+| 31 | 146 | 0.846 | 0.933 | +15 |
+| 43 | 258 | **0.915** | 1.096 | +51 |
+| 47 | 265 | 0.822 | 1.145 | +104 |
+
+Exact only at 7 and 11; the rest are best-found sets, hence **lower** bounds on the truth. The threshold crosses the observed
+maximum 0.92 at `q ≈ 30.5`.
+
+**Three consequences for this stub.**
+
+1. **Six is not special; the family is discrete and the function climbs.** The colour count grows like `√q`, so each value is
+   reachable only in a narrow band of `q`, and six's band falls in the gap between the last comfortably five-chromatic member
+   (19) and the first comfortably seven-chromatic one. That is a far weaker and more contingent reason than the norm reading of
+   G64 suggests — which matters here, because §4's trap ("six is skipped" is not evidence for seven) gets sharper: **if the
+   skipping is an artifact of where the prime powers fall, it carries no information about `χ(ℝ²)` at all.**
+2. **(b) is one theorem plus two cases.** A uniform `α ≤ 0.93·q^{3/2}` closes **31, 43 and 47**, leaving 23, 27 and `U₆₄` — the
+   last on a different scaling (characteristic 2, measured `c = 1.0`, maximum sets are subspaces). No uniform bound can close 23:
+   it needs `c < 0.799` while 19 itself reaches 0.918. So the shape of the finite half changes from "six hard relaxations at
+   growing cost" (FS-57's pricing) to "one bound, plus the two members where the search has plateaued 2 and 5 vertices short".
+3. **The uniform bound is nearly refuted already, and the falsifiers are cheap.** `0.93·19^{3/2} = 77.0` against a measured
+   `α(19) ≥ 76` — a 1.3 % margin. So **an independent set of 78 at `q = 19`, or of 263 at `q = 43`, kills the uniform route to 31**,
+   on search instruments that already exist. Run those before pricing any theorem.
+
+**The first experiment, and it is hours, not days:** `α(19)` has never been put through the level-3 relaxation that pinned
+`α(Γ₇) = 14` and `α(Γ₁₁) = 28` exactly (ledger row 70), and `q = 19` is *smaller* than the `q = 23` instance where that
+instrument converged. Running it calibrates the whole normalization: it either pins the one value that makes `c` look flat, or
+shows the flatness was search effort (G21).
+
+**Prior-art question this opens, owed under §5:** independence numbers of Cayley graphs on `𝔽_{q²}` whose connection set is the
+norm-one subgroup `μ_{q+1}` — equivalently, the largest set whose difference set misses a prescribed multiplicative coset. That
+is a well-posed question in the character-sum and finite-geometry literature and is *not* the same search as "finite Euclidean
+graph chromatic number", which is what has been searched so far.
+
+---
+
 ## 3. Deliverables, cheapest first
 
 | # | deliverable | cost | what it needs |
@@ -63,6 +114,7 @@ the only necessity theorem we hold (A1) is vacuous at the top rung.
 | D2 | **The aiming corollary, unconditional** — `L(F) ≠ 6` for every `F` whose wall members are closed, hence the candidates for six are exactly the `L ≥ 7` fields | hours, once the wall is closed | **FS-47** (row 57's step at field level) |
 | D3 | **The conditional theorem** — *assuming the local–global conjecture and the wall, `χ(ℝ²) ≠ 6`* | days | D1 + D2; publishable as a statement about the conjecture even before the wall closes |
 | D4 | **The gap theorem**, or a sharply stated obstruction to it | open | the chain at six; a necessity theorem for compulsions at the top rung |
+| D5 | **The uniform independence bound** — `α(UD(𝔽_q,2)) ≤ 0.93·q^{3/2}` for odd `q ≥ 23`, or its counterexample. Closes **31, 43 and 47 in one theorem**, cutting (b) from six members to two | unknown; one theorem instead of three relaxations | §2a above; a literature pass on independence numbers of subgroup-Cayley graphs over `𝔽_{q²}` |
 
 **D3 is the honest first target.** A conditional dichotomy resting on a conjecture verified at six fields and proved for `L ≤ 5`
 (G55) is a real result and states clearly what it depends on. D4 is the real prize and may be out of reach.
@@ -96,5 +148,10 @@ the only necessity theorem we hold (A1) is vacuous at the top rung.
 3. **The chromatic number of `F²` as a function of `F`** — has anyone asked what its image is? `[Benda–Perles]` Open Problem 11.6
    and Johnson's status reports are the places to look.
 4. Under two disciplines (G49): graph colouring, and the arithmetic-of-fields side where the object is `χ(F²)`.
+5. **For D5 / §2a, a different search from any run so far:** independence numbers of Cayley graphs on `𝔽_{q²}` with connection
+   set the norm-one subgroup `μ_{q+1}` — in that literature's words (*difference sets avoiding a multiplicative coset*,
+   *Paley-type* and *Peisert-type graphs*, *character-sum bounds on independent sets*), not in ours (*finite Euclidean plane*).
+   Everything searched to date has been about the chromatic number of these graphs; the independence number is a separate and
+   much more classical question, and a uniform `α ≤ c·q^{3/2}` with `c < 0.93` may simply exist.
 
 A negative is a finding and goes in §PA either way. **`CLOSED-QUESTIONS.md` gets a row if the literature has posed this.**
