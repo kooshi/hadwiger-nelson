@@ -27,3 +27,5 @@ __pycache__/
 
 # FS-54 D4 solver checkpoints (tens of MB each; resume state, not evidence — the evidence is the run's --out record)
 data/fs54/d4/ckpt/
+data/fs62/q19/*.ckpt
+data/fs62/q19/search.log

@@ -79,7 +79,7 @@ with `q`, measured against a constant that looks flat:**
 Exact only at 7 and 11; the rest are best-found sets, hence **lower** bounds on the truth. The threshold crosses the observed
 maximum 0.92 at `q ≈ 30.5`.
 
-**Three consequences for this stub.**
+**Five consequences for this stub** (1–3 derived 2026-09-18, 4–5 measured the same day).
 
 1. **Six is not special; the family is discrete and the function climbs.** The colour count grows like `√q`, so each value is
    reachable only in a narrow band of `q`, and six's band falls in the gap between the last comfortably five-chromatic member
@@ -109,10 +109,19 @@ maximum 0.92 at `q ≈ 30.5`.
    shot to be ranked on its prior-art answer, not an obvious simplification of (b)**. *Recorded because the reframing in this
    section is the author's own and this was the first number checked after writing it (G21: audit what you like at the same rate).*
 
-**The first experiment, and it is hours, not days:** `α(19)` has never been put through the level-3 relaxation that pinned
-`α(Γ₇) = 14` and `α(Γ₁₁) = 28` exactly (ledger row 70), and `q = 19` is *smaller* than the `q = 23` instance where that
-instrument converged. Running it calibrates the whole normalization: it either pins the one value that makes `c` look flat, or
-shows the flatness was search effort (G21).
+5. **Do not reach for an exact independent-set solver here; both of them fail, and the reason is structural** [measured
+   2026-09-18, `data/fs62/q19/`]. On `q = 19` — 361 vertices, 20-regular, 3,610 edges, 5.6 % density, which *looks* easy —
+   KaMIS's branch-and-reduce returned **70** at its time limit without proving optimality, and `struction`, even with its
+   degree cap raised to 20 so the reduction could fire at all, returned **66**; the local search finds **76** in seconds.
+   **Every reduction rule these solvers own works by finding a vertex that differs from its neighbours, and a vertex-transitive
+   graph has no such vertex** — measured directly: branch-and-reduce spent 3 ms on reductions, `struction` 26 ms, both finding
+   nothing, then fell through to blind branching. Worse, at `q = 19` the graph is **triangle-free** (3 is a non-residue mod 19,
+   G57), so the clique-cover bound that prunes the search tree is at best a matching: `n/2 = 180` against a truth `≤ 80`, off by
+   2.3×, and nothing prunes. The symmetry that makes the algebraic instruments work is exactly what defeats the combinatorial
+   ones, and the property that decides it — whether 3 is a square mod `q` — is arithmetic. *A symmetry-aware exact method
+   (orbital branching, Schreier–Sims cuts in a MIP) is the untried class; the off-the-shelf MIS solvers are closed.*
+
+**The first experiment, RUN 2026-09-18 — and it neither confirmed nor refuted the reading** (`data/fs62/q19/README.md`): the level-3 relaxation that pinned `α(Γ₇) = 14` and `α(Γ₁₁) = 28` exactly had never been run at 19, and it converges there to **80.59**, so `α(19) ≤ 80` — an improvement on the ratio bound's 99, ~6 % loose against the best known set, and **not the ≤ 77 that would confirm the uniform route**. Alongside it, the local search was asked for 78 for a full hour on 24 threads: **521,874 restarts, never past 76** — a null at a budget, never a refusal (G21). So `c(19) ∈ [0.918, 0.966]` with the deciding 0.933 inside, and the reading survives its cheapest falsifier without being confirmed. **Two by-products worth more than the target:** the relaxation is ~6 % loose at 19, against exact at 7 and 11 and ~20 % at 23, which pins where the instrument stops being exact; and its GPU backend is **3.6× SLOWER** than the CPU one on this instance class (2.75 against 0.77 s/iteration), the reverse of the FS-50 certificate at `q = 83` — a number that does not travel across instance shapes.
 
 **Prior-art question this opens, owed under §5:** independence numbers of Cayley graphs on `𝔽_{q²}` whose connection set is the
 norm-one subgroup `μ_{q+1}` — equivalently, the largest set whose difference set misses a prescribed multiplicative coset. That
@@ -168,5 +177,12 @@ graph chromatic number", which is what has been searched so far.
    *Paley-type* and *Peisert-type graphs*, *character-sum bounds on independent sets*), not in ours (*finite Euclidean plane*).
    Everything searched to date has been about the chromatic number of these graphs; the independence number is a separate and
    much more classical question, and a uniform `α ≤ c·q^{3/2}` with `c < 0.93` may simply exist.
+   **First pass run 2026-09-18, and it returns a negative that lowers D5's rank** (`[Hopkins2018]`): the representation-theoretic
+   machinery for independence bounds on Cayley graphs (Kane–Lovett–Rao) **reduces, on ABELIAN groups, to the Hoffman bound and
+   Delsarte's linear programme** — and every target here is a Cayley graph on the abelian `𝔽_{q²}`, where that is the ratio bound
+   we already compute (99.50 at `q = 19` against the 77 D5 needs). KLR's advance is for non-abelian groups, which these are not.
+   **So the discipline D5 would naturally borrow from supplies nothing beyond what we hold.** Still unsearched, and now the only
+   live line: the Paley/Peisert and character-sum literature proper, where bounds beating the ratio bound for *specific* subgroup
+   connection sets do exist.
 
 A negative is a finding and goes in §PA either way. **`CLOSED-QUESTIONS.md` gets a row if the literature has posed this.**
