@@ -159,6 +159,19 @@
     width: 2px; background: var(--six); border-radius: 1px;
     transform: translateX(-1px);
   }
+  .rdm {
+    position: absolute; top: 1px; transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--ink-2);
+  }
+  .swr { width: 22px; height: 12px; position: relative; flex: none; }
+  .swr i {
+    position: absolute; left: 6px; top: 2px; width: 0; height: 0;
+    border-left: 5px solid transparent; border-right: 5px solid transparent;
+    border-top: 7px solid var(--ink-2);
+  }
   .arrowend {
     position: absolute; top: 50%; transform: translate(-1px, -50%);
     width: 0; height: 0;
@@ -271,8 +284,10 @@
         <span class="lg"><span class="sw"><i class="a"></i><i class="b"></i></span> proven range for <span class="mono">c</span> &mdash; filled end: best set found; open end: exact certificate</span>
         <span class="lg"><span class="sw2"><i></i></span> what six requires</span>
         <span class="lg"><span class="sw3"></span> the band: every best-known set, <span class="mono">q &ge; 7</span></span>
+        <span class="lg"><span class="swr"><i></i></span> relaxation reading &mdash; a float, not yet a proven bound</span>
       </div>
       <p class="callout">Where the orange rule sits to the <strong>right</strong> of the whole bar, six is refused &mdash; the certificate already proves the set cannot be big enough. It overtakes the certificates between <span class="mono">q = 47</span> and <span class="mono">q = 59</span>. At 47 it misses by <strong>two vertices</strong>: 369 needed against 371 certified.</p>
+      <p class="callout"><strong>18 September 2026.</strong> The relaxation that pins the value exactly at 7 and 11 was pointed at <span class="mono">q = 19</span> for the first time, and reads <strong>80.59</strong> &mdash; the grey marker. That is a float from an unconverged solve, so it is <em>not</em> a bound and the blue bar still ends at the 99 exact arithmetic proves; turning it into a bound needs an exact rational certificate. Alongside it, a search asked for 78 points for an hour on 24 threads and never beat 76 in <strong>521,874 restarts</strong>. Between them the true value is pinned to <span class="mono">[76, 80]</span> and the reading stands.</p>
     </div>
   </section>
 
@@ -302,8 +317,9 @@
   </section>
 
   <footer>
-    <p><strong>How to read the two ends.</strong> A set someone <em>found</em> is a lower bound on <span class="mono">&alpha;</span>; a <em>certificate</em> is an exact rational proof of an upper bound, re-checkable from the number <span class="mono">q</span> alone. The true value lies between, so the flat left edge of the band is a band of lower bounds &mdash; it may be measuring how hard people searched rather than the graphs themselves. Only <span class="mono">q = 3, 7, 11</span> have <span class="mono">&alpha;</span> pinned exactly.</p>
-    <p><strong>Not shown.</strong> <span class="mono">q = 71</span>, refused six by its exact spectrum, has no recorded search figure to plot. The sixth open case is not a prime-field plane at all but a characteristic-two target of size 4096, which scales differently: its best known set is a subspace.</p>
+    <p><strong>How to read the two ends.</strong> A set someone <em>found</em> is a lower bound on <span class="mono">&alpha;</span>; a <em>certificate</em> is an exact rational proof of an upper bound, re-checkable from the number <span class="mono">q</span> alone. The true value lies between, so the flat left edge of the band is a band of lower bounds &mdash; it may be measuring how hard people searched rather than the graphs themselves. Only <span class="mono">q = 3, 7, 11</span> have <span class="mono">&alpha;</span> pinned exactly &mdash; and <span class="mono">q = 19</span> is where the exact instrument stops being exact, reading about 6 % above the best known set there against 20 % at 23.</p>
+    <p><strong>Why the gap between the two ends stays open.</strong> The obvious move is an exact solver &mdash; these graphs are small, and at <span class="mono">q = 19</span> the graph is 361 points of degree 20. Two were tried on 18 September 2026 and both failed, returning 70 and 66 where a local search finds 76 in seconds. The reason is structural: every reduction rule such a solver owns works by finding a point that differs from its neighbours, and in these planes <em>every point looks the same</em>. And at 19 the graph has no triangles at all, which destroys the bound that prunes the search &mdash; it allows 180 where the truth is at most 80. The symmetry that makes the algebraic instruments work is exactly what defeats the combinatorial ones.</p>
+  <p><strong>Not shown.</strong> <span class="mono">q = 71</span>, refused six by its exact spectrum, has no recorded search figure to plot. The sixth open case is not a prime-field plane at all but a characteristic-two target of size 4096, which scales differently: its best known set is a subspace.</p>
     <p><strong>Sources.</strong> Certificates and searches from this project's own records; the eigenvalues were recomputed independently for this page and agree with the committed table at <span class="mono">q = 23, 31, 43, 47</span>.</p>
   </footer>
 </div>
@@ -320,7 +336,7 @@
     { q:  3, aLo:    3, aHi:    3, aHiTag: "exact",  cLo: 3, cLoTag: "exact",  cHi:    3, cHiTag: "exact"  },
     { q:  7, aLo:   14, aHi:   14, aHiTag: "exact",  cLo: 4, cLoTag: "exact",  cHi:    4, cHiTag: "exact"  },
     { q: 11, aLo:   28, aHi:   28, aHiTag: "exact",  cLo: 5, cLoTag: "kernel", cHi:    5, cHiTag: "kernel" },
-    { q: 19, aLo:   76, aHi:   99, aHiTag: "ratio",  cLo: 5, cLoTag: "solver", cHi:    5, cHiTag: "solver" },
+    { q: 19, aLo:   76, aHi:   99, aHiTag: "ratio",  cLo: 5, cLoTag: "solver", cHi:    5, cHiTag: "solver", rd: 80.588 },
     { q: 23, aLo:   87, aHi:  105, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:    8, cHiTag: "kernel" },
     { q: 27, aLo:  117, aHi:  141, aHiTag: "cert",   cLo: 6, cLoTag: "cert",   cHi:    7, cHiTag: "search" },
     { q: 31, aLo:  146, aHi:  200, aHiTag: "cert",   cLo: 5, cLoTag: "exact",  cHi:    8, cHiTag: "search" },
@@ -339,6 +355,7 @@
     d.clo = d.aLo / d.p;                 // observed constant (lower bound on truth)
     d.chi = d.aHi / d.p;                 // proven ceiling on the constant
     d.csix = d.six / d.p;                // the rising threshold
+    d.crd = d.rd ? d.rd / d.p : null;      // a float READING, never a bound
     d.refused = d.six > d.aHi;           // certificate already refutes six
     d.settled = d.cLo === d.cHi;         // chromatic number pinned
     d.state = d.settled ? "settled" : (d.refused ? "refused" : "open");
@@ -441,6 +458,10 @@
         hi.style.left = R + "%";
       }
 
+      if (opts.reading && d.crd !== null) {
+        var rm = el("rdm", tr);
+        rm.style.left = pct(d.crd, d0, d1) + "%";
+      }
       if (opts.thr) {
         var th = el("thr", tr);
         th.style.left = pct(opts.thr(d), d0, d1) + "%";
@@ -470,6 +491,7 @@
     ticks: [0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6],
     tickLabel: function (t) { return t.toFixed(1); },
     band: true,
+    reading: true,
     value: function (d) { return { lo: d.clo, hi: d.chi }; },
     thr: function (d) { return d.csix; },
     label: function (d) { return STATE_LABEL[d.state]; },
