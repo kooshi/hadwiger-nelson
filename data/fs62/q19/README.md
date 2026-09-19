@@ -189,13 +189,14 @@ claim and its correction are wrong in opposite directions: the symmetry accounti
 
 **How far SAT is from this question at all** (`--break origin`, the fastest, single solver):
 
-| `k` | 170 | 150 | 130 | 120 | 115 | 95 | 90 | 86 | 83 | **78** |
-|---|---|---|---|---|---|---|---|---|---|---|
-| seconds | 1.9 | 3.4 | 15.7 | 50.2 | 114.6 | >600 | >600 | >600 | >600 | **>3,600** |
+| `k` | 170 | 150 | 130 | 120 | 115 | 110 | 105 | 100 | 95 | 90 | 86 | 83 | **78** |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| seconds | 1.9 | 3.4 | 15.7 | 50.2 | 114.6 | 383.4 | >900 | >900 | >600 | >600 | >600 | >600 | **>3,600** |
 
-The solver's frontier sits around `k = 115`, **about forty above the answer**, and the wall between 115 and
-95 is vertical. That is the honest form of D1's conclusion: it is not that this encoding is bad, it is that
-CDCL is not within reach of this graph at the size that matters, and three sound encodings do not move it.
+**The wall is between 110 and 105**, and it is vertical: 383 s one side, nothing in 900 s the other. So the
+solver's frontier sits about **thirty** above the answer, and each step of 5 down costs roughly 3×. That is
+the honest form of D1's conclusion: it is not that this encoding is bad, it is that CDCL is not within reach
+of this graph at the size that matters, and three sound encodings do not move it.
 
 **The controls, all passing** (`python3 tools/fs65_indep_sat.py --selftest`):
 

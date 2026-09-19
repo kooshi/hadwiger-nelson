@@ -28,7 +28,7 @@ Both of the previous handoff's queued items, and a measurement neither of them e
 ## NEXT ACTION
 
 **Not more SAT.** Three encodings have now been measured on this graph and the best of them cannot
-decide `k = 120`, let alone 78 (`data/fs62/q19/README.md` § The symmetry breaks measured). The
+decide `k = 105`, let alone 78 (`data/fs62/q19/README.md` § The symmetry breaks measured). The
 remaining live routes, in order:
 
 1. **The 574 fixed-cardinality moment equations** for the level-3 relaxation — `Σ_{v ∉ T ∪ N(T)}
@@ -70,7 +70,7 @@ costs more than it buys.
 | SAT, origin pin, cube-and-conquer | split rate diverges; **the conclusion drawn from it is retracted** |
 | SAT, centroid or lex break | slower than the origin pin (above) |
 | SAT + line case split (`tools/fs65_lines.py`) | **9 of 204 cases refuted**, the rest undecided |
-| **how far SAT gets at all** | `k = 130` refutes in 16 s, `k = 150` in 3 s, and **`k ≤ 120` does not refute in 900 s** — the frontier is ~50 above the answer |
+| **how far SAT gets at all** | `k = 130` refutes in 16 s, `k = 115` in 115 s, `k = 110` in 383 s, and **`k ≤ 105` does not refute in 900 s** — the frontier is ~30 above the answer, and the wall between 110 and 105 is vertical |
 
 ## The line case split — now resumable
 
