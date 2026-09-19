@@ -1,0 +1,23 @@
+{
+ "kind": "fs65-lines",
+ "q": 19,
+ "k": 78,
+ "cases": [
+  {
+   "r": 6,
+   "case": 18,
+   "pattern": [
+    0,
+    2,
+    4,
+    7,
+    9,
+    13
+   ],
+   "verdict": "UNKNOWN",
+   "seconds": 5400.0,
+   "vars": 47176,
+   "clauses": 99299
+  }
+ ]
+}

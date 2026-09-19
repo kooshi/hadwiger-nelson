@@ -1,0 +1,167 @@
+{
+ "kind": "fs65-lines-decided",
+ "q": 19,
+ "k": 78,
+ "decided": [
+  {
+   "r": 9,
+   "case": 0,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 1137.8,
+   "vars": 58006,
+   "clauses": 120449
+  },
+  {
+   "r": 8,
+   "case": 5,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    11,
+    13,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 5333.3,
+   "vars": 54396,
+   "clauses": 113399
+  },
+  {
+   "r": 8,
+   "case": 6,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    11,
+    13,
+    15
+   ],
+   "verdict": "UNSAT",
+   "seconds": 2320.6,
+   "vars": 54396,
+   "clauses": 113399
+  },
+  {
+   "r": 8,
+   "case": 7,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    11,
+    13,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 839.0,
+   "vars": 54396,
+   "clauses": 113399
+  },
+  {
+   "r": 8,
+   "case": 8,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    11,
+    14,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 917.0,
+   "vars": 54396,
+   "clauses": 113399
+  },
+  {
+   "r": 8,
+   "case": 9,
+   "pattern": [
+    0,
+    2,
+    4,
+    7,
+    9,
+    11,
+    14,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 1249.3,
+   "vars": 54396,
+   "clauses": 113399
+  },
+  {
+   "r": 7,
+   "case": 10,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    11,
+    14
+   ],
+   "verdict": "UNSAT",
+   "seconds": 5260.7,
+   "vars": 50786,
+   "clauses": 106349
+  },
+  {
+   "r": 7,
+   "case": 15,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    12,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 4876.9,
+   "vars": 50786,
+   "clauses": 106349
+  },
+  {
+   "r": 7,
+   "case": 23,
+   "pattern": [
+    0,
+    2,
+    4,
+    7,
+    9,
+    12,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 3611.7,
+   "vars": 50786,
+   "clauses": 106349
+  }
+ ]
+}

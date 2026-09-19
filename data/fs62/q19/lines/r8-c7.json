@@ -1,0 +1,25 @@
+{
+ "kind": "fs65-lines",
+ "q": 19,
+ "k": 78,
+ "cases": [
+  {
+   "r": 8,
+   "case": 7,
+   "pattern": [
+    0,
+    2,
+    4,
+    6,
+    9,
+    11,
+    13,
+    16
+   ],
+   "verdict": "UNSAT",
+   "seconds": 839.0,
+   "vars": 54396,
+   "clauses": 113399
+  }
+ ]
+}
