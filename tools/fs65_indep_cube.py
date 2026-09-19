@@ -17,10 +17,14 @@ believed.  A cube undecided at its cap is split one variable deeper; a cube stil
 --max-depth leaves the whole run UNDECIDED, which is a statement about the budget and is reported
 as one.
 
-The symmetry breaks are the ones fs65_indep_sat.py argues and verifies: the origin pinned in (the
-translations act simply transitively) and the lex-least member of each orbit of the 2(q+1) maps
-fixing the origin.  Their soundness is checked there, and separately by the fact that the encoding
-admits a known independent set at the size that set has.
+The symmetry breaks are the ones fs65_indep_sat.py argues and verifies, through its base_cnf: by
+default the CENTROID normalisation of the translations (exactly one translate of a k-set has both
+coordinate sums zero when gcd(k, q) = 1, so the reduction is the full q^2 -- pinning the origin
+instead is worth only q^2/k, 4.63 at q = 19, k = 78) and the lex-least member of each orbit of the
+2(q+1) maps fixing the origin, which preserve the centroid condition and so compose with it.  Their
+soundness is checked there, and separately by the fact that the encoding admits a known independent
+set at the size that set has.  --break selects; the checkpoint digest covers the choice, so a
+checkpoint from one encoding is refused by a run of another.
 """
 
 from __future__ import annotations
@@ -51,35 +55,8 @@ def cadical_path():
     return c
 
 
-def base_cnf(q, k, no_lex=False):
-    n, circle, adj = fs65.build(q)
-    G = fs65.stabiliser(q, circle)
-    assert len(G) == 2 * (q + 1)
-    for g in G:
-        assert g[0] == 0
-        for v in range(n):
-            assert {g[w] for w in adj[v]} == adj[g[v]]
-    cnf = fs65.CNF(n)
-    X = [i + 1 for i in range(n)]
-    for v in range(n):
-        for w in adj[v]:
-            if v < w:
-                cnf.add(-X[v], -X[w])
-    cnf.add(X[0])
-    for w in adj[0]:
-        cnf.add(-X[w])
-    if not no_lex:
-        ident = tuple(range(n))
-        for g in G:
-            if g != ident:
-                fs65.lex_le(cnf, X, g)
-    fs65.at_least_k(cnf, X, k)
-    return n, adj, cnf, X
-
-
-def pick_cube_vars(n, adj, depth):
-    """vertices to split on: spread out, never the origin or a fixed neighbour."""
-    banned = {0} | adj[0]
+def pick_cube_vars(n, adj, depth, banned):
+    """vertices to split on: pairwise non-adjacent, and never one the encoding already fixes."""
     order = [v for v in range(n) if v not in banned]
     chosen = []
     for v in order:
@@ -123,24 +100,31 @@ def main():
     ap.add_argument("--cap", type=float, default=120.0, help="per-cube seconds before it is split deeper")
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--scratch", default="/tmp")
+    ap.add_argument("--break", dest="brk", choices=("centroid", "origin", "lex", "none"), default="centroid",
+                    help="how the translations are broken; see fs65_indep_sat.py")
+    ap.add_argument("--no-lex", action="store_true", help="drop the orthogonal break (for comparison)")
     ap.add_argument("--ckpt", required=True, help="JSONL, one line per decided cube; resumed from")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
 
-    n, adj, cnf, X = base_cnf(a.q, a.k)
+    n, adj, cnf, X, _G, _aux = fs65.base_cnf(a.q, a.k, brk=a.brk, lex=not a.no_lex)
     scratch = Path(a.scratch)
     scratch.mkdir(parents=True, exist_ok=True)
-    base = scratch / f"fs65-base-q{a.q}-k{a.k}.cnf"
+    base = scratch / f"fs65-base-q{a.q}-k{a.k}-{a.brk}.cnf"
     cnf.write(base)
 
-    banned = {0} | adj[0]
+    # the origin pin puts unit clauses on the origin and its neighbours; the centroid break fixes
+    # no vertex at all, so under it every vertex is a legitimate split variable
+    banned = ({0} | adj[0]) if a.brk == "origin" else set()
     free_vars = [v for v in range(n) if v not in banned]
-    cvars = pick_cube_vars(n, adj, a.depth)
+    cvars = pick_cube_vars(n, adj, a.depth, banned)
     cubes = []
     for m in range(1 << len(cvars)):
         lits = [X[v] if (m >> i) & 1 else -X[v] for i, v in enumerate(cvars)]
         cubes.append(lits)
-    digest = hashlib.sha256(json.dumps([cvars, a.q, a.k]).encode()).hexdigest()[:16]
+    # the digest covers the BREAKS too: a checkpoint taken under a different encoding answers a
+    # different question, and must be refused rather than silently reused
+    digest = hashlib.sha256(json.dumps([cvars, a.q, a.k, a.brk, a.no_lex]).encode()).hexdigest()[:16]
 
     done = {}
     ck = Path(a.ckpt)

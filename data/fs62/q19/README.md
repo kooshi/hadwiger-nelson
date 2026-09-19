@@ -155,7 +155,76 @@ total was about **185, not 14,440**.
 of the symmetry was never broken. The exact fix is the **centroid**: `c(S) = 78⁻¹ Σ v = 10 Σ v` over `𝔽₁₉²`
 translates with the set (`c(S+t) = c(S)+t`), so exactly one translate has `c = 0`, and the two modular
 equations `Σ a·x ≡ Σ b·x ≡ 0 (mod 19)` select one representative per orbit — the full 361. The 40 orthogonal
-maps fix the condition, so a lex break still composes with it. **Not yet implemented.**
+maps fix the condition, so a lex break still composes with it. **Implemented 2026-09-19 — and it does not
+pay; see the next section.**
+
+## The symmetry breaks, measured (2026-09-19) — the fix costs more than it buys
+
+The correction above is arithmetic and it stands. What did not follow from it is the recommendation, and
+the only way to find that out was to build the thing and time it. `tools/fs65_indep_sat.py --break` now
+carries three sound normalisations of the 361 translations, and they were run against each other with one
+thing differing:
+
+| break | what it keeps per translation orbit | how it is encoded |
+|---|---|---|
+| `none` | all 361 | — |
+| `origin` | the 78 translates containing the origin — **4.63** | 13 unit clauses (`x₀`, and its 12 neighbours false) |
+| `centroid` | exactly 1 — **361** | two modular sums `Σa·x ≡ Σb·x ≡ 0 (mod 19)`, a residue chain, +12,958 vars |
+| `lex` | exactly 1 — **361** | `x ≤ t(x)` for all 360 translations, Crawford chains, +130,000 vars |
+
+**`q = 11`, `k = 29` (UNSAT, `α(11) = 28` known exactly), two runs each, sequential on a quiet machine:**
+
+| break | seconds | CNF |
+|---|---|---|
+| `origin` | **22.4, 22.5** | 5,864 vars / 14,745 clauses |
+| `centroid` | 238.0, 244.5 | 8,262 / 19,528 |
+| `none` | 286.6, 320.4 | 5,864 / 14,732 |
+
+**The origin pin's power was never its symmetry reduction.** It is the thirteen unit clauses: the origin
+true and its twelve neighbours false, which propagate immediately. The centroid equations fix no variable
+at all, and modular sums are the constraint family CDCL is worst at — the same reason XOR constraints need
+a dedicated engine. So an 11× larger *mathematical* quotient bought a 10× *slower* solve, and the earlier
+claim and its correction are wrong in opposite directions: the symmetry accounting was off by a factor of
+78, and the fix for it costs more than it buys.
+
+**How far SAT is from this question at all** (`--break origin`, the fastest, single solver):
+
+| `k` | 170 | 150 | 130 | 120 | 115 | 95 | 90 | 86 | 83 | **78** |
+|---|---|---|---|---|---|---|---|---|---|---|
+| seconds | 1.9 | 3.4 | 15.7 | 50.2 | 114.6 | >600 | >600 | >600 | >600 | **>3,600** |
+
+The solver's frontier sits around `k = 115`, **about forty above the answer**, and the wall between 115 and
+95 is vertical. That is the honest form of D1's conclusion: it is not that this encoding is bad, it is that
+CDCL is not within reach of this graph at the size that matters, and three sound encodings do not move it.
+
+**The controls, all passing** (`python3 tools/fs65_indep_sat.py --selftest`):
+
+- the modular-sum encoding against brute force on **every** assignment of a small instance — two-sided, so
+  an encoding that forbids too much fails as loudly as one that forbids too little;
+- `q = 11`: `k = 28` SAT with the model re-verified independent and its centroid checked, `k = 29` UNSAT;
+- **the normalisation itself, on 200 random sets per size**: for `gcd(k, q) = 1` exactly one of the `q²`
+  translates satisfies both equations, and for `q | k` the count is 0 or `q²` — the degenerate case, which
+  the encoder **refuses** rather than answers. That case is not hypothetical: **`k = 76`, the size of the
+  best set we have, is `4 × 19`**, and every translate of it has identical coordinate sums.
+
+## The line case split is resumable (2026-09-19)
+
+`tools/fs65_lines.py --state DIR` keeps one record per case and writes it atomically as it lands, so a kill
+costs one case per worker rather than the run; `--status` prints the tally, `--plan` prints what is left,
+`--jobs N` runs them in a pool (no `xargs`, which is where this repository's `pkill -f` trap keeps biting).
+The 149 records already on disk are read unchanged — the store is the per-case files `--out` was always
+writing.
+
+**An UNKNOWN is credited with the time it actually SPENT, never the cap it was launched with.** A case
+whose solver was killed — a stopped batch, an OOM, a machine going down — lands as UNKNOWN too, and
+crediting it with its nominal cap would drop it silently out of every future queue while nothing had
+decided it. Three faults were planted to check this and each fired: a killed case at 100 s wearing a
+5,400 s cap is re-queued, a genuine 5,400 s timeout is not, and a truncated record is re-queued rather
+than crashing the run.
+
+**And the split now has an end-to-end control it never had.** At `q = 11`, where `α = 28` is known: `k = 29`
+refutes in **all 10** cases, and `k = 28` comes back **satisfiable in 2 of 10**. Both outcomes reachable,
+both correct — the exhaustiveness argument checked against a known answer instead of argued.
 
 ## Three further corrections accepted
 

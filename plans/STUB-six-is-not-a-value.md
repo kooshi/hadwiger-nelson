@@ -120,6 +120,13 @@ maximum 0.92 at `q ≈ 30.5`.
    2.3×, and nothing prunes. The symmetry that makes the algebraic instruments work is exactly what defeats the combinatorial
    ones, and the property that decides it — whether 3 is a square mod `q` — is arithmetic. *A symmetry-aware exact method
    (orbital branching, Schreier–Sims cuts in a MIP) is the untried class; the off-the-shelf MIS solvers are closed.*
+   **And SAT is now closed too, with the symmetry broken three different ways** [measured 2026-09-19, FS-65 D1]:
+   pinning the origin, the centroid equations `Σa·x ≡ Σb·x ≡ 0 (mod q)`, and lex-least over all 360 translations —
+   the last two exact, quotienting the full `q²` where the pin is worth only `q²/k = 4.63`. **None of them decides
+   `k = 78`, and the fastest is the weakest one**: at `q = 11, k = 29` (UNSAT, `α = 28` known) the pin refutes in
+   22 s where the centroid takes 240 s, because the pin's thirteen unit clauses propagate and modular sums do not.
+   The sharp statement of the gap: at `q = 19` the solver refutes `k = 130` in 16 s, `k = 115` in 115 s, and
+   **nothing at or below `k = 95` in 600 s** — its frontier sits about forty above the answer.
 
 **The first experiment, RUN 2026-09-18 — and it neither confirmed nor refuted the reading** (`data/fs62/q19/README.md`): the level-3 relaxation that pinned `α(Γ₇) = 14` and `α(Γ₁₁) = 28` exactly had never been run at 19, and it converges there to **80.59**, so `α(19) ≤ 80` — an improvement on the ratio bound's 99, ~6 % loose against the best known set, and **not the ≤ 77 that would confirm the uniform route**. Alongside it, the local search was asked for 78 for a full hour on 24 threads: **521,874 restarts, never past 76** — a null at a budget, never a refusal (G21). So `c(19) ∈ [0.918, 0.966]` with the deciding 0.933 inside, and the reading survives its cheapest falsifier without being confirmed. **Two by-products worth more than the target:** the relaxation is ~6 % loose at 19, against exact at 7 and 11 and ~20 % at 23, which pins where the instrument stops being exact; and its GPU backend is **3.6× SLOWER** than the CPU one on this instance class (2.75 against 0.77 s/iteration), the reverse of the FS-50 certificate at `q = 83` — a number that does not travel across instance shapes.
 
