@@ -93,7 +93,9 @@ answer is not a test.** `f(k)` is a number in the units the unstrengthened bound
 
 | `k` | 76 | 78 | 80 | 81 |
 |---|---|---|---|---|
-| `f(k)` | ≥ 76, **by exhibition** | **78.000000** (converged, gap `6.1e-07`) | **80.000006** (gap `4.25e-07`) | must collapse; `f(81) = 81` is impossible |
+| `f(k)` | ≥ 76, **by exhibition** | **78.000000** (converged, gap `6.1e-07`) | **80.000006** (gap `4.25e-07`) | 80.85 and falling toward `N` |
+
+`k = 81` was stopped at 8,000 iterations reading 80.85. It did **not** collapse to 1 as it does at `q = 7` and `q = 11`; it drifts down toward `N ≈ 80.588`. Either way `f(81) < 81`, which is the refutation `⌊N⌋ = 80` already gives, so the threshold stands at 80 and nothing turned on finishing it.
 
 `f(80) = 80` puts the feasibility threshold at 80, and `⌊N⌋ = ⌊80.588⌋ = 80` is the ceiling no
 strengthening of this kind can pass. **So the threshold is exactly `⌊N⌋`: the 573 equations reproduce
