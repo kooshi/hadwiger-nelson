@@ -126,10 +126,20 @@ of `k` far below both:
 
 So the objective carries no information once the equations are imposed, and **the strengthened
 programme is a pure feasibility test.** Its only output is the largest `k` at which the system is
-feasible. Every feasible point has `tr Y = k ≤ N`, the unstrengthened optimum, so
+feasible.
 
-> **the threshold can never exceed `⌊N⌋`** — the strengthening cannot beat the integer rounding of the
-> bound it starts from, on either relaxation.
+*That is `[measured]`, not `[derived]`.* Summing the `|T| = 2` equations gives only
+`2·Σ(triples) = (k−2)(tr Y − 1)`, one relation between two quantities — the forcing must come from
+combining it with the `|T| = 3` family and the semidefinite blocks, and no proof of it is offered
+here. What IS a theorem needs none of it:
+
+> **`f(k) ≤ N` always**, because adding constraints cannot raise a maximum. So for every `k > N` the
+> test fires automatically and says only what `⌊N⌋` already said; the strengthening can improve on
+> integer rounding **only** by having `f(k) < k` at some `k ≤ ⌊N⌋`.
+
+At `q = 19` that is exactly what was checked and did not happen: `f(78) = 78.000000` and
+`f(80) = 80.000006`, so the threshold is `⌊N⌋` and nothing is gained. The measured forcing law
+explains why, and the conclusion does not rest on it.
 
 It could in principle land *below* `⌊N⌋`, and that is the only way it could still pay: at `q = 19`,
 `⌊80.588⌋ = 80`, so a collapse at `k = 80` would give `α(19) ≤ 79` and a collapse at 79 would give 78.
