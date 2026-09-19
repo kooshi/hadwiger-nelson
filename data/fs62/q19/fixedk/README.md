@@ -89,6 +89,24 @@ degenerate exactly at the boundary: at `q = 11, k = 28`, where a 28-set exists a
 margin came back `−5e-08` and the run reported a refutation. **A test whose false positive sits at the
 answer is not a test.** `f(k)` is a number in the units the unstrengthened bound already has.
 
+## THE RESULT AT `q = 19`: `f(78) = 78.000000`, and the equations do not settle it
+
+**Converged** — status `solved`, primal 78.000000 against dual 77.999999, `res_pri 1.2e-08`,
+`res_dual 8.1e-07`, gap `6.1e-07`, in 750 iterations and 55 minutes, with all 572 equations in the
+problem over 36,044 variables. So
+
+> **`α(19) ≤ 77` is NOT proven by this route.** The standing interval `76 ≤ α(19) ≤ 80` is unchanged
+> and `c(19) ∈ [0.918, 0.966]` still has the deciding 0.933 inside it.
+
+**And the shape of the answer is the finding, not the value.** `f(78)` is *exactly* 78, not 78-and-a-bit
+— the same degeneracy measured on the triple-level relaxation earlier the same day: `f(k) = k` wherever
+the system is feasible at all, and `1` once it collapses. A test of that shape can only fire at the
+collapse threshold, so the strengthening cannot do better than report `⌊unstrengthened bound⌋`, which
+integrality already gives for free.
+
+*The prediction below was registered before any of this landed, and the outcome it named as "only
+integer rounding" is the one that occurred.*
+
 ## The prediction, registered before the `q = 19` runs finished
 
 The controls at 7 and 11 **cannot** distinguish the two live possibilities, because `L₃` is already
