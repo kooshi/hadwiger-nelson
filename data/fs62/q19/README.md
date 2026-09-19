@@ -253,9 +253,13 @@ both correct — the exhaustiveness argument checked against a known answer inst
 3. **The proven fractional interval is `[361/99, 361/76] = [3.646, 4.75]`**, not the narrower `[4.51, 4.75]`
    quoted earlier, which used the uncertified relaxation value as though it were a bound.
 
-**Not yet tried, and the review's first choice:** 574 fixed-cardinality moment equations for the level-3
-relaxation — `Σ_{v ∉ T ∪ N(T)} y_{T∪{v}} = (78 − |T|) y_T` for every independent `T` with `|T| ≤ 3`, whose
-orbit counts (1, 1, 17, 555) match the level-3 variable set exactly, so no new moment variables are needed.
+**The review's first choice, tried 2026-09-19 and closed** (`fixedk/README.md`): the fixed-cardinality
+moment equations `Σ_{v ∉ T ∪ N(T)} y_{T∪{v}} = (78 − |T|) y_T`. Its arithmetic was right in every
+particular — **573 equations at `q = 19`, exactly 1 + 17 + 555, needing no new moment variables** — and
+the implementation is controlled to machine precision at three field sizes and two-sided at the two
+where `α` is known. **It adds nothing:** the `|T| ≥ 2` equations force `tr Y = k` on their own, so the
+programme is a pure feasibility test whose threshold cannot exceed `⌊N⌋`, and measured at 19 the
+threshold is exactly `⌊80.588⌋ = 80`.
 
 ## Files
 

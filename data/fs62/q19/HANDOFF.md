@@ -31,15 +31,19 @@ Both of the previous handoff's queued items, and a measurement neither of them e
 decide `k = 105`, let alone 78 (`data/fs62/q19/README.md` § The symmetry breaks measured). The
 remaining live routes, in order:
 
-1. **The 574 fixed-cardinality moment equations** for the level-3 relaxation — `Σ_{v ∉ T ∪ N(T)}
-   y_{T∪{v}} = (78 − |T|)·y_T` for every independent `T` with `|T| ≤ 3`. The orbit counts are
-   1, 1, 17, 555 = 574, matching the level-3 variable set, so **no new moment variables are needed**.
-   This was the external review's own first recommendation and it is still untried. Feasibility-control
-   it with the known 76-point construction before believing any bound it produces.
-2. **Round the 80.59 into an exact rational certificate**, which would make `α(19) ≤ 80` proven and
-   is the same instrument FS-50 and FS-54 already own.
-3. **D2/D4 of the stub** — a MIP with published symmetry handling, or orbital branching. The SAT
-   measurements are now the case *for* these rather than a reason to keep tuning the encoding.
+1. **Round the 80.59 into an exact rational certificate**, which would make `α(19) ≤ 80` proven
+   rather than read, on the instrument FS-50 and FS-54 already own. This is now the only route left
+   that improves anything at 19.
+2. **D2/D4 of the stub** — a MIP with published symmetry handling, or orbital branching. The SAT
+   measurements are the case *for* these rather than a reason to keep tuning the encoding.
+
+**Done and closed 2026-09-19: the fixed-cardinality moment equations** (`data/fs62/q19/fixedk/`). The
+review's own first recommendation, implemented in the level-3 programme — 573 equations at `q = 19`,
+exactly the 1 + 17 + 555 it predicted, needing no new moment variables, controlled to machine
+precision against real independent sets at three field sizes. **It adds nothing.** The `|T| ≥ 2`
+equations force `tr Y = k` by themselves, so the programme is a pure feasibility test whose threshold
+can never exceed `⌊N⌋`; measured, `f(78) = 78.000000` and `f(80) = 80.000006`, so the threshold is
+exactly `⌊80.588⌋ = 80` — the integer rounding we already had.
 
 ## The symmetry breaks, measured
 
