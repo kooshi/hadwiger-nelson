@@ -1,0 +1,20 @@
+{
+ "kind": "fs65-indep-decision",
+ "q": 19,
+ "n": 361,
+ "degree": 20,
+ "edges": 3610,
+ "k_asked": 78,
+ "verdict": "UNKNOWN",
+ "seconds": 3600.03,
+ "symmetry": {
+  "translation_origin_pinned": true,
+  "stabiliser_lex_broken": true,
+  "stabiliser_order": 40
+ },
+ "cnf": {
+  "vars": 39196,
+  "clauses": 94621
+ },
+ "claim_scope": "UNSAT means no independent set of this size exists, so alpha < k: the two symmetry breaks are sound (translations act simply transitively; every orbit has a lex-least member) and both are verified in code. UNKNOWN is a statement about the budget."
+}

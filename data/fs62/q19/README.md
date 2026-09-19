@@ -65,6 +65,49 @@ A second defect, found the same way: the solve's progress is written with plain 
 a file, so **31 minutes produced an empty log while the job was healthy**. Relaunched under `python3 -u`. A monitor
 armed on that log reported nothing for 30 minutes and the silence was indistinguishable from a hang.
 
+## The decision problem in SAT (FS-65 D1), run 2026-09-18 — a characterised negative
+
+Asked at Kooshi's instruction: *is there an independent set of 78?* — one yes/no question, because a
+refutation puts `α(19) ≤ 77`, `c(19) ≤ 0.930` under the 0.933 threshold, and the reading survives with a
+proof instead of a null. **It did not resolve.** What is worth keeping is *why*, which is measured.
+
+**The instrument is correct and controlled.** `tools/fs65_indep_sat.py` encodes the question with two
+symmetry breaks, each argued and verified in code: the origin pinned in (translations act simply
+transitively) and the lex-least member of each orbit of the 40 maps fixing the origin. At `q = 11`, where
+the value is known exactly and kernel-checked, it reproduces it **from both sides** — `k = 28` SAT with a
+verified set in 0.2 s, `k = 29` UNSAT in 22.1 s. `tools/fs65_indep_cube.py` passes the same two-sided
+control (18 s / 0.08 s).
+
+**At `q = 19` the positive control returned UNKNOWN, and that was not the alarm it looked like.** Breaking
+symmetry keeps one set per orbit of 14,440, so it makes SATISFIABLE instances much harder while making
+refutations easier — the solver was hunting a needle the encoding had deliberately shrunk. The soundness
+question was then settled **without a solver**: the known 76-set, translated to contain the origin and
+mapped to the lex-least member of its orbit, is *accepted* by the encoding. So the encoding admits a
+genuine 76-set and no refutation it produced could have been an artifact of the symmetry break.
+
+**Why the route fails, in two measurements.**
+
+| level | cubes | split rate | multiplier `2f` | |
+|---|---:|---:|---:|---|
+| 1 | 1,024 | 23.3 % | 0.47 | converging |
+| 2 | 478 | 49.2 % | 0.98 | on the line |
+| 3 | 470 | 62 %+ | **1.25** | **diverging** |
+
+1. **Splitting stops paying.** Difficulty concentrates with depth: level 1 clears the easy space and what
+   remains resists division, so by level 3 a split produces more work than it removes and the frontier grows.
+2. **And a bigger budget is not the fix.** Three of the 239 level-1 cubes that survived 90 s were re-run at
+   **420 s each: 0 of 3 resolved.** So the cap was never the binding constraint — those cubes are hard, not
+   marginal, and restarting at a higher cap would have bought nothing for about half an hour of re-work.
+
+**Standing result: undecided.** 1,109 cubes refuted and **no set of 78 found anywhere**, which is weak
+evidence in the reading's direction and nothing more — a refutation needs *every* cube. `α(19) ∈ [76, 80]`
+and `c(19) ∈ [0.918, 0.966]` are unchanged, with the deciding 0.933 still inside.
+
+The single undivided run is the calibration: **UNKNOWN after a full hour**, holding nothing. The cube run
+banked 1,109 durable refutations in the same period, survived a kill and a code change mid-flight, and its
+785 top-level cubes are reusable by any future attempt. That durability, not the 28× in cores, is what
+parallelising actually bought.
+
 ## Files
 
 | file | what it is |
