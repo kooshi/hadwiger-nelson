@@ -98,11 +98,30 @@ problem over 36,044 variables. So
 > **`α(19) ≤ 77` is NOT proven by this route.** The standing interval `76 ≤ α(19) ≤ 80` is unchanged
 > and `c(19) ∈ [0.918, 0.966]` still has the deciding 0.933 inside it.
 
-**And the shape of the answer is the finding, not the value.** `f(78)` is *exactly* 78, not 78-and-a-bit
-— the same degeneracy measured on the triple-level relaxation earlier the same day: `f(k) = k` wherever
-the system is feasible at all, and `1` once it collapses. A test of that shape can only fire at the
-collapse threshold, so the strengthening cannot do better than report `⌊unstrengthened bound⌋`, which
-integrality already gives for free.
+**And the shape of the answer is the finding, not the value.** `f(78)` is *exactly* 78, not 78-and-a-bit.
+
+### Why, and it is a one-second experiment
+
+The `|T| ≥ 2` equations **force `tr Y = k` on their own** — the `|T| = 1` equation, which is literally
+`tr Y = k`, is implied by them. Measured at `q = 7`, where α = 14 and the bound is 14.0879, at values
+of `k` far below both:
+
+| `k` | 8 | 10 | 12 | 14 |
+|---|---|---|---|---|
+| `f(k)` | 8.000000 | 10.000000 | 12.000000 | 14.000000 |
+
+So the objective carries no information once the equations are imposed, and **the strengthened
+programme is a pure feasibility test.** Its only output is the largest `k` at which the system is
+feasible. Every feasible point has `tr Y = k ≤ N`, the unstrengthened optimum, so
+
+> **the threshold can never exceed `⌊N⌋`** — the strengthening cannot beat the integer rounding of the
+> bound it starts from, on either relaxation.
+
+It could in principle land *below* `⌊N⌋`, and that is the only way it could still pay: at `q = 19`,
+`⌊80.588⌋ = 80`, so a collapse at `k = 80` would give `α(19) ≤ 79` and a collapse at 79 would give 78.
+`f(78) = 78` rules out anything better than that. **`k = 79` and `k = 80` are therefore the only runs
+that can still return anything, and `k = 81` is the reachability check that the collapse happens at
+all at this field size.**
 
 *The prediction below was registered before any of this landed, and the outcome it named as "only
 integer rounding" is the one that occurred.*
