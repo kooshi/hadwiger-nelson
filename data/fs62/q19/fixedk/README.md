@@ -36,7 +36,7 @@ This repository has **two** semidefinite relaxations and I strengthened the wron
 
 The triple-level's live-class count at `q = 19` is 573, which is numerically the same as the equation
 count and is what led me to it. But its largest variable is a **3**-set, so the `|T| = 3` equations —
-545 of the 573 — have nowhere to land there. Only `L₃` carries 4-sets. The 80.59 on record came from
+555 of the 573 — have nowhere to land there. Only `L₃` carries 4-sets. The 80.59 on record came from
 `L₃`, and `L₃` is the object the review meant.
 
 *Recorded because it is a real trap: two numbers agreed (573), and the agreement was a coincidence
@@ -100,15 +100,32 @@ unstrengthened value is 80.59, so:
 - **if it is genuinely stronger**, `f(78) < 78` and `α(19) ≤ 77`, which puts `c(19) ≤ 0.930` under the
   0.933 that G59's uniform-bound reading needs.
 
-`k = 76` is run alongside as the two-sided control at the field that matters: a 76-set exists, so
-`f(76) ≥ 76` **must** hold, and a collapse there would mean the equations are wrong rather than strong.
+### The control at field 19, which needs no solver at all
+
+`f(76) ≥ 76` **is already established by exhibition**, and that is a better control than the solver run
+I first launched for it. `checkset` builds `y` from the real 76-point set and finds: every block PSD
+(least eigenvalue `−2.9e-14`), every one of the 573 equations satisfied at `k = 76` (residual
+`1.6e-13`), `y ≥ 0` by construction, and objective exactly 76. That is a **feasible point of the
+strengthened programme at `k = 76` with `tr Y = 76`** — so `f(76) ≥ 76` holds without optimising
+anything, and a collapse at 76 would have meant a bug rather than a finding.
+
+The solver run at `k = 76` was therefore redundant and was killed, on this repository's own rule that a
+run blocking something is presumed killable: it was taking half the machine from the question. What
+replaced it on that core is `k = 81`, which is the **reachability check** — the unstrengthened bound
+80.59 already refutes 81, so a collapse there says the mechanism fires at this field size, and its
+absence would say the programme has simply not converged rather than that 78 survives.
 
 ## Files
 
 | file | what it is |
 |---|---|
-| `l3-fixedk-q19-k76.json` | the control run at the size a set is known to exist |
 | `l3-fixedk-q19-k78.json` | the question |
+| `l3-fixedk-q19-k81.json` | the reachability check: 80.59 already refutes 81, so this must collapse |
+
+The cost, measured: **2.83 s per iteration** against the unstrengthened programme's 0.42 s, a 6.7×
+slowdown for 572 rows that are dense across the 4-set variables. The collapse, where it happens, is
+fast — 225 iterations at `q = 7`, 950 at `q = 11` — so the run is short if it refutes and long if it
+does not, which is the wrong way round for patience.
 
 The checkpoints are large and regenerable; they are not committed. Re-run with
 
