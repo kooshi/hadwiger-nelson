@@ -119,9 +119,27 @@ feasible. Every feasible point has `tr Y = k ≤ N`, the unstrengthened optimum,
 
 It could in principle land *below* `⌊N⌋`, and that is the only way it could still pay: at `q = 19`,
 `⌊80.588⌋ = 80`, so a collapse at `k = 80` would give `α(19) ≤ 79` and a collapse at 79 would give 78.
-`f(78) = 78` rules out anything better than that. **`k = 79` and `k = 80` are therefore the only runs
-that can still return anything, and `k = 81` is the reachability check that the collapse happens at
-all at this field size.**
+`f(78) = 78` rules out anything better than that.
+
+### The bracket, and what was cut from it
+
+At 400 iterations every member was converging to exactly its own `k` — 77.04, 79.31, 80.31, and
+81.0006 — which is the law again. With five solves the per-iteration cost had risen from 2.8 s to
+13–17 s (memory bandwidth, not cores: each uses one of sixteen), so the uninformative runs were
+taxing the decisive ones by about 3×. **`k = 77` and `k = 79` were killed**, on this repository's rule
+that a run blocking something is presumed killable.
+
+*What that forfeits, named:* the converged values of `f(77)` and `f(79)`. Both were already heading to
+their own `k` and neither can change the conclusion — if `f(80) = 80` the threshold is 80 whatever 79
+does, and `f(78) = 78` bounds what 79 could have bought. Their checkpoints survive, so if `k = 80`
+surprises us by collapsing, `k = 79` resumes from where it stopped rather than restarting.
+
+**What is left is the pair that decides it.** `k = 80` converging to 80 makes the threshold exactly
+`⌊N⌋` and the strengthening worth precisely integer rounding; `k = 81` is the reachability check that a
+collapse happens at all at this field size, without which `f(80) = 80` would leave open the reading
+that the test is simply inert here. Note `f(81) = 81` is *impossible* — every feasible point has
+`tr Y = k ≤ N = 80.588` — so the 81.0006 on its iterate is a solver that has not yet found the
+infeasibility, and watching it find one is the check.
 
 *The prediction below was registered before any of this landed, and the outcome it named as "only
 integer rounding" is the one that occurred.*
