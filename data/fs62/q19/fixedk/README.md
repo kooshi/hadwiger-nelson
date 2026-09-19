@@ -119,8 +119,15 @@ absence would say the programme has simply not converged rather than that 78 sur
 
 | file | what it is |
 |---|---|
-| `l3-fixedk-q19-k78.json` | the question |
+| `l3-fixedk-q19-k77.json` … `-k80.json` | the bracket: **`k = 77…80` is the untested regime** |
 | `l3-fixedk-q19-k81.json` | the reachability check: 80.59 already refutes 81, so this must collapse |
+
+**`k` between α and the unstrengthened bound has never been observed.** At `q = 7` and `q = 11` the
+unstrengthened `L₃` value already equals α, so there is no gap and every `k` tested was either at the
+answer or outside the bound entirely — where the programme collapses to 1. At `q = 19` the gap is real:
+α ∈ [76, 80] against a bound of 80.59, so `k = 77, 78, 79, 80` all sit inside it, and what `f` does
+there is exactly what has never been measured. The whole bracket is therefore run, not just `k = 78`:
+the shape of `f` across it is the finding, and one point of it would not be readable.
 
 The cost, measured: **2.83 s per iteration** against the unstrengthened programme's 0.42 s, a 6.7×
 slowdown for 572 rows that are dense across the 4-set variables. The collapse, where it happens, is
