@@ -1,0 +1,16 @@
+# FS-65 D1: how far CDCL gets at q = 19, --break origin (the fastest of the three).
+# Run FOUR AT A TIME, so each carries a ~1.18x contention penalty: k = 115 reads 114.6 s here
+# and 97.2 s on the quiet machine (see q19-k115-bench.log).  The caps are unaffected.
+# The wall is between 110 and 105 and it is vertical.  The answer sought is k = 78.
+q=19 k=83 -> UNKNOWN in 600.0s (40601 vars, 97431 clauses, break=origin)
+q=19 k=86 -> UNKNOWN in 600.0s (41432 vars, 99093 clauses, break=origin)
+q=19 k=90 -> UNKNOWN in 600.0s (42526 vars, 101281 clauses, break=origin)
+q=19 k=95 -> UNKNOWN in 600.0s (43871 vars, 103971 clauses, break=origin)
+q=19 k=100 -> UNKNOWN in 900.0s (45191 vars, 106611 clauses, break=origin)
+q=19 k=105 -> UNKNOWN in 900.0s (46486 vars, 109201 clauses, break=origin)
+q=19 k=110 -> UNSAT in 383.4s (47756 vars, 111741 clauses, break=origin)
+q=19 k=115 -> UNSAT in 114.6s (49001 vars, 114231 clauses, break=origin)
+q=19 k=120 -> UNSAT in 50.2s (50221 vars, 116671 clauses, break=origin)
+q=19 k=130 -> UNSAT in 15.7s (52586 vars, 121401 clauses, break=origin)
+q=19 k=150 -> UNSAT in 3.4s (57016 vars, 130261 clauses, break=origin)
+q=19 k=170 -> UNSAT in 1.9s (61046 vars, 138321 clauses, break=origin)

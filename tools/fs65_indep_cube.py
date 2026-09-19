@@ -17,14 +17,13 @@ believed.  A cube undecided at its cap is split one variable deeper; a cube stil
 --max-depth leaves the whole run UNDECIDED, which is a statement about the budget and is reported
 as one.
 
-The symmetry breaks are the ones fs65_indep_sat.py argues and verifies, through its base_cnf: by
-default the CENTROID normalisation of the translations (exactly one translate of a k-set has both
-coordinate sums zero when gcd(k, q) = 1, so the reduction is the full q^2 -- pinning the origin
-instead is worth only q^2/k, 4.63 at q = 19, k = 78) and the lex-least member of each orbit of the
-2(q+1) maps fixing the origin, which preserve the centroid condition and so compose with it.  Their
-soundness is checked there, and separately by the fact that the encoding admits a known independent
-set at the size that set has.  --break selects; the checkpoint digest covers the choice, so a
-checkpoint from one encoding is refused by a run of another.
+The symmetry breaks are the ones fs65_indep_sat.py argues, verifies and MEASURES, through its
+base_cnf: by default the origin pinned in -- which is worth only q^2/k, 4.63 at q = 19, k = 78,
+where the centroid and lex normalisations are exact and worth the full q^2, and yet both are 4-11x
+slower, so the default is the weak break on purpose -- and the lex-least member of each orbit of the
+2(q+1) maps fixing the origin.  Their soundness is checked there, and separately by the fact that the
+encoding admits a known independent set at the size that set has.  --break selects; the checkpoint
+digest covers the choice, so a checkpoint from one encoding is refused by a run of another.
 """
 
 from __future__ import annotations
@@ -100,8 +99,9 @@ def main():
     ap.add_argument("--cap", type=float, default=120.0, help="per-cube seconds before it is split deeper")
     ap.add_argument("--workers", type=int, default=16)
     ap.add_argument("--scratch", default="/tmp")
-    ap.add_argument("--break", dest="brk", choices=("centroid", "origin", "lex", "none"), default="centroid",
-                    help="how the translations are broken; see fs65_indep_sat.py")
+    ap.add_argument("--break", dest="brk", choices=("origin", "centroid", "lex", "none"), default="origin",
+                    help="how the translations are broken; see fs65_indep_sat.py -- the exact "
+                         "breaks (centroid, lex) are 4-11x SLOWER and the default is measured")
     ap.add_argument("--no-lex", action="store_true", help="drop the orthogonal break (for comparison)")
     ap.add_argument("--ckpt", required=True, help="JSONL, one line per decided cube; resumed from")
     ap.add_argument("--out", required=True)

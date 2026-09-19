@@ -1,0 +1,11 @@
+# FS-65 D1: the same comparison at q = 19's control field, q = 11, k = 29 (UNSAT, alpha = 28 known).
+# Ordering here: origin < lex < centroid < none.  At q = 19 it is origin < none < centroid < lex.
+# Neither ordering is a law; what reproduces is that the propagating break wins.
+q=11 k=29 -> UNSAT in 238.0s (8262 vars, 19528 clauses, break=centroid)
+q=11 k=29 -> UNSAT in 244.5s (8262 vars, 19528 clauses, break=centroid)
+q=11 k=29 -> UNSAT in 22.4s (5864 vars, 14745 clauses, break=origin)
+q=11 k=29 -> UNSAT in 22.5s (5864 vars, 14745 clauses, break=origin)
+q=11 k=29 -> UNSAT in 286.6s (5864 vars, 14732 clauses, break=none)
+q=11 k=29 -> UNSAT in 320.4s (5864 vars, 14732 clauses, break=none)
+q=11 k=29 -> UNSAT in 46.72s (20384 vars, 58292 clauses, break=lex)
+q=11 k=29 -> UNSAT in 46.4s (20384 vars, 58292 clauses, break=lex)

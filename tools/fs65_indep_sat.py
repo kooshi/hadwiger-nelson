@@ -7,25 +7,35 @@ q = 19 and 23.  Those were optimisation-shaped asks on an encoding that told the
 automorphism group of order q^2 (q+1) 2 -- 14,440 at q = 19 -- so the solver rediscovers every partial set
 up to 14,440 times.  CLAUDE.md's toolchain rule: an unbroken encoding's verdict measures the encoding.
 
-THE TWO SYMMETRY BREAKS, and why each is SOUND (an unsound break turns a SAT into a fake UNSAT, which is
-exactly the direction that would flatter us here, so both are argued rather than asserted):
+THE SYMMETRY BREAKS, and why each is SOUND (an unsound break turns a SAT into a fake UNSAT, which is
+exactly the direction that would flatter us here, so each is argued rather than asserted):
 
-  (1) TRANSLATION -- by the CENTROID, not by pinning the origin (--break centroid, the default).
-      For a set S of size k with gcd(k, q) = 1 the sum c(S) = sum_{v in S} v over F_q^2 satisfies
-      c(S + t) = c(S) + k*t, and t -> k*t is a bijection, so EXACTLY ONE translate of S has c = 0.
-      Imposing
+  (1) TRANSLATION.  Three sound normalisations are implemented and MEASURED against each other, and the
+      default is `origin`, the mathematically WEAKEST of them, because it is the fastest by 4x.  Read the
+      measurement at the end of this docstring before changing that: the obvious "improvement" here has
+      been made once already and undone.
+
+      (1a) ORIGIN (--break origin, the default).  x_0 = true, plus its q+1 neighbours false: some
+      translate of any independent set contains the origin.  Sound, but worth only q^2/k, not q^2 -- a
+      78-set at q = 19 has trivial translation stabiliser, so its orbit has 361 members of which 78
+      contain the origin, a reduction of 4.63.  This file once claimed 361 here, and every reading of
+      "the hardness is in the instance, not the encoding" taken under that claim had a factor of 78 of
+      the symmetry unbroken.  (External review, 2026-09-18; verified here.)
+
+      (1b) CENTROID (--break centroid).  For a set S of size k with gcd(k, q) = 1 the sum
+      c(S) = sum_{v in S} v over F_q^2 satisfies c(S + t) = c(S) + k*t, and t -> k*t is a bijection, so
+      EXACTLY ONE translate of S has c = 0.  Imposing
 
           sum_{(a,b) in S} a = 0 (mod q)   and   sum_{(a,b) in S} b = 0 (mod q)
 
-      therefore keeps exactly one representative per translation orbit: the full q^2.
+      keeps exactly one representative per translation orbit: the full q^2.  The gcd condition is not
+      decoration -- at k = 76, the size of the best set known at q = 19, every translate has identical
+      coordinate sums, and the encoder refuses rather than answers.
 
-      RETRACTION, recorded so the error is not repeated.  This file used to pin the origin into the
-      set (x_0 = true, --break origin), on the argument that some translate of any independent set
-      contains the origin.  That is true and it is sound, but it is worth only q^2/k, not q^2: a
-      78-set at q = 19 has trivial translation stabiliser, so its orbit has 361 members of which 78
-      contain the origin -- a reduction of 4.63, not 361.  Every earlier reading of "the hardness is
-      in the instance, not the encoding" was taken with a factor of 78 of the symmetry unbroken.
-      (External review, 2026-09-18; verified here.)
+      (1c) LEX (--break lex).  x <= t(x) for every translation t keeps the lex-least member of each full
+      orbit, which no constraint can remove, so a subset of the group is as sound as all of it.  Exact
+      like the centroid, and encoded in chains rather than modular counters -- but it costs 360 chains
+      of q^2 positions, so its CNF grows like q^4: 58k clauses at q = 11, 504k at q = 19.
 
   (2) ROTATION + REFLECTION.  What stabilises the origin is the orthogonal group of x^2 + y^2 over F_q.
       For q = 3 (mod 4) the form is anisotropic, so the rotations are the norm-one group of F_{q^2},
@@ -34,26 +44,46 @@ exactly the direction that would flatter us here, so both are argued rather than
       characteristic vector: every orbit has one, so again no solution is lost.  Encoded as one
       "x <= g(x)" chain per non-identity g (Crawford-style lex-leader).
 
-      IT COMPOSES WITH THE CENTROID BREAK.  Every g here is linear, so c(g(S)) = g(c(S)) = g(0) = 0:
-      the centroid-zero sets are stable under the orthogonal group, and taking the lex-least of each
-      orbit inside that stable class loses nothing.  Together the two breaks quotient the full
-      automorphism group of order q^2 * 2(q+1) -- 14,440 at q = 19.
+      IT COMPOSES WITH ALL THREE.  Every g here is linear, so c(g(S)) = g(c(S)) = g(0) = 0: the
+      centroid-zero sets are stable under the orthogonal group, and taking the lex-least of each orbit
+      inside that stable class loses nothing.  With an exact translation break the two together quotient
+      the full automorphism group of order q^2 * 2(q+1) -- 14,440 at q = 19.
 
   Both breaks are verified in code, not trusted: every g is checked to fix 0 and to preserve adjacency,
   the group is checked to be closed and of the expected order, gcd(k, q) = 1 is asserted before the
   centroid break is used, and any model is checked to satisfy the centroid equations.
 
-CONTROLS (--selftest, one command, three of them):
+CONTROLS (--selftest, one command, four of them):
   (a) the modular-sum encoding, two-sided: over a small residue ring every assignment is fixed by unit
       clauses and the solver's verdict compared against the arithmetic, so an encoding that forbids too
       much fails exactly as loudly as one that forbids too little;
   (b) q = 11, k = 28 must come back SAT -- alpha(UD(F_11,2)) = 28 exactly (ledger row 70) -- with the
       model re-verified independent from the graph definition;
-  (c) q = 11, k = 29 must come back UNSAT.
+  (c) q = 11, k = 29 must come back UNSAT;
+  (d) the normalisation itself, on 200 random sets per size: for gcd(k, q) = 1 exactly one of the q^2
+      translates satisfies both centroid equations, and for q | k the count is 0 or q^2 -- the
+      degenerate case, which the encoder must REFUSE rather than answer.
   A symmetry break that has gone unsound shows up as a spurious UNSAT at (b).
 
   UNSAT here is a real refutation: alpha(UD(F_q,2)) < k.  SAT exhibits a set, printed and verified.
   UNKNOWN at a budget is a statement about the budget and is reported as one.
+
+THE MEASUREMENT, and why the default is the weak break (tools/fs65_break_bench.sh, two runs each,
+sequential on a quiet machine; the reps agree to within 0.5%, so the ratios are not noise):
+
+                        q = 11, k = 29 (UNSAT)          q = 19, k = 115 (UNSAT)
+      origin              22.4  22.5 s    1.0x            97.2   96.8 s    1.0x
+      centroid           238.0 244.5 s   10.7x           466.5  464.8 s    4.8x
+      lex                 46.7  46.4 s    2.1x          1112.7 1107.6 s   11.5x
+      none (no break)    286.6 320.4 s   13.5x           408.9  407.5 s    4.2x
+
+  The pin's power is NOT its symmetry reduction.  It is the q+2 unit clauses it puts in the instance --
+  the origin true and its q+1 neighbours false -- and that propagation is worth more to CDCL than a 78x
+  larger quotient.  The exact breaks fix no variable at all: the centroid is a pair of modular sums,
+  which is the constraint family CDCL is worst at, and lex pays q^4 clauses for its chains.  AT q = 19
+  BOTH EXACT BREAKS ARE A NET LOSS AGAINST NO TRANSLATION BREAK AT ALL.  The orderings also differ
+  between the two field sizes, so neither is a law -- what reproduces is that the propagating break wins
+  and the exact ones do not.
 """
 
 from __future__ import annotations
@@ -232,7 +262,7 @@ def run_cnf(cnf, path, timeout, cad=None):
     return v, out, dt
 
 
-def base_cnf(q, k, brk="centroid", lex=True, exact=False):
+def base_cnf(q, k, brk="origin", lex=True, exact=False):
     """the symmetry-broken encoding of "alpha(UD(F_q,2)) >= k".
 
     THE ONE PLACE the encoding lives: the cube driver builds its base through this function too, so
@@ -295,7 +325,7 @@ def base_cnf(q, k, brk="centroid", lex=True, exact=False):
     return n, adj, cnf, X, G, aux_centroid
 
 
-def decide(q, k, brk="centroid", lex=True, exact=False, timeout=3600.0, workdir="/tmp", cad=None):
+def decide(q, k, brk="origin", lex=True, exact=False, timeout=3600.0, workdir="/tmp", cad=None):
     """the decision problem at (q, k) under the chosen symmetry breaks; returns the record."""
     n, adj, cnf, X, G, aux_centroid = base_cnf(q, k, brk, lex, exact)
     edges = sum(len(s) for s in adj) // 2
@@ -431,10 +461,10 @@ def main():
     ap.add_argument("--q", type=int)
     ap.add_argument("--k", type=int, help="the size asked for")
     ap.add_argument("--timeout", type=float, default=3600.0)
-    ap.add_argument("--break", dest="brk", choices=("centroid", "origin", "lex", "none"),
-                    default="centroid",
-                    help="how the translations are broken: centroid and lex are exact (q^2), "
-                         "origin is worth only q^2/k")
+    ap.add_argument("--break", dest="brk", choices=("origin", "centroid", "lex", "none"),
+                    default="origin",
+                    help="how the translations are broken: centroid and lex are exact (q^2) and "
+                         "MEASURABLY SLOWER; origin is worth only q^2/k and is 4x faster")
     ap.add_argument("--no-lex", action="store_true", help="drop the orthogonal break (for comparison)")
     ap.add_argument("--exact", action="store_true", help="also cap the set at k (|S| = k exactly)")
     ap.add_argument("--expect", choices=("SAT", "UNSAT"), help="fail the run if the verdict differs")

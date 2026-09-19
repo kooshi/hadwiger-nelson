@@ -172,20 +172,33 @@ thing differing:
 | `centroid` | exactly 1 — **361** | two modular sums `Σa·x ≡ Σb·x ≡ 0 (mod 19)`, a residue chain, +12,958 vars |
 | `lex` | exactly 1 — **361** | `x ≤ t(x)` for all 360 translations, Crawford chains, +130,000 vars |
 
-**`q = 11`, `k = 29` (UNSAT, `α(11) = 28` known exactly), two runs each, sequential on a quiet machine:**
+Two runs each, sequential on a quiet machine, at two field sizes — `q = 11, k = 29` (UNSAT, `α = 28`
+known exactly) and `q = 19, k = 115` (UNSAT). **The two runs of each cell agree to within 0.5 %, so the
+ratios below are not noise:**
 
-| break | seconds | CNF |
-|---|---|---|
-| `origin` | **22.4, 22.5** | 5,864 vars / 14,745 clauses |
-| `centroid` | 238.0, 244.5 | 8,262 / 19,528 |
-| `none` | 286.6, 320.4 | 5,864 / 14,732 |
+| break | `q = 11, k = 29` | | `q = 19, k = 115` | | CNF at 19 |
+|---|---|---|---|---|---|
+| `origin` | **22.4, 22.5 s** | 1.0× | **97.2, 96.8 s** | 1.0× | 49,001 vars / 114,231 clauses |
+| `centroid` | 238.0, 244.5 s | 10.7× | 466.5, 464.8 s | 4.8× | 61,959 / 140,126 |
+| `lex` | 46.7, 46.4 s | 2.1× | 1112.7, 1107.6 s | 11.5× | 178,961 / 504,090 |
+| `none` | 286.6, 320.4 s | 13.5× | 408.9, 407.5 s | 4.2× | 49,001 / 114,210 |
 
-**The origin pin's power was never its symmetry reduction.** It is the thirteen unit clauses: the origin
-true and its twelve neighbours false, which propagate immediately. The centroid equations fix no variable
-at all, and modular sums are the constraint family CDCL is worst at — the same reason XOR constraints need
-a dedicated engine. So an 11× larger *mathematical* quotient bought a 10× *slower* solve, and the earlier
-claim and its correction are wrong in opposite directions: the symmetry accounting was off by a factor of
-78, and the fix for it costs more than it buys.
+**The origin pin's power was never its symmetry reduction.** It is the twenty-two unit clauses it puts in
+the instance — the origin true and its twenty neighbours false — and that propagation is worth more to
+CDCL than a 78× larger quotient. The exact breaks fix no variable at all: the centroid is a pair of
+modular sums, the constraint family CDCL is worst at (the same reason XOR constraints need a dedicated
+engine), and `lex` pays `q⁴` clauses for its chains — 58k at 11, 504k at 19.
+
+**And at `q = 19` both exact breaks are a net loss against no translation break at all.** The centroid
+takes 466 s where doing nothing takes 409. So the correction and its fix are wrong in opposite directions:
+the symmetry accounting was off by a factor of 78, and correcting it makes the solve slower than leaving
+the symmetry entirely unbroken.
+
+**Neither ordering is a law** — `lex` is second-best at 11 and worst at 19, because its encoding grows like
+`q⁴` while the graph grows like `q²`. What reproduces across both field sizes is only this: **the
+propagating break wins and the exact ones do not.** The default in the tool is therefore `origin`, the
+mathematically weakest of the three, with the measurement in its docstring so the "improvement" is not
+made a second time.
 
 **How far SAT is from this question at all** (`--break origin`, the fastest, single solver):
 
@@ -194,7 +207,11 @@ claim and its correction are wrong in opposite directions: the symmetry accounti
 | seconds | 1.9 | 3.4 | 15.7 | 50.2 | 114.6 | 383.4 | >900 | >900 | >600 | >600 | >600 | >600 | **>3,600** |
 
 **The wall is between 110 and 105**, and it is vertical: 383 s one side, nothing in 900 s the other. So the
-solver's frontier sits about **thirty** above the answer, and each step of 5 down costs roughly 3×. That is
+solver's frontier sits about **thirty** above the answer, and each step of 5 down costs roughly 3×.
+
+*These were run four at a time, so they carry a contention penalty: `k = 115` reads 114.6 s here and
+**97.2 s** on the quiet machine, a factor of 1.18. The undecided rows are unaffected — they are caps, not
+timings — and the ratio between steps is what the table is for.* That is
 the honest form of D1's conclusion: it is not that this encoding is bad, it is that CDCL is not within reach
 of this graph at the size that matters, and three sound encodings do not move it.
 
@@ -250,6 +267,9 @@ orbit counts (1, 1, 17, 555) match the level-3 variable set exactly, so no new m
 | `struction.log`, `struction-q19.set` | run 4 |
 | `l3.log` | run 2's chunk trace (live, unbuffered) |
 | `probe/*.log` | the four backend timings |
+| `breaks/q19-k115-bench.log` | the three translation breaks against each other at `q = 19`, sequential, two runs each |
+| `breaks/q11-k29-bench.log` | the same at `q = 11`, where `α = 28` is known exactly |
+| `breaks/q19-frontier.log` | how far CDCL gets at `q = 19`, `k = 170` down to `k = 83` |
 
 `ud-q19.graph` was built here rather than reused, so it carries its own controls: 361 vertices, every degree exactly
 20, 3,610 edges, **the independently verified 76-set is independent in it**, and KaMIS's `graphchecker` accepts the

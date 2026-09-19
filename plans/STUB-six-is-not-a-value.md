@@ -123,8 +123,9 @@ maximum 0.92 at `q ≈ 30.5`.
    **And SAT is now closed too, with the symmetry broken three different ways** [measured 2026-09-19, FS-65 D1]:
    pinning the origin, the centroid equations `Σa·x ≡ Σb·x ≡ 0 (mod q)`, and lex-least over all 360 translations —
    the last two exact, quotienting the full `q²` where the pin is worth only `q²/k = 4.63`. **None of them decides
-   `k = 78`, and the fastest is the weakest one**: at `q = 11, k = 29` (UNSAT, `α = 28` known) the pin refutes in
-   22 s where the centroid takes 240 s, because the pin's thirteen unit clauses propagate and modular sums do not.
+   `k = 78`, the fastest is the weakest one, and at `q = 19` both exact breaks are slower than leaving the
+   symmetry entirely unbroken**: at `q = 19, k = 115` the pin refutes in 97 s against the centroid's 467 s, lex's
+   1,110 s and no-break's 408 s, because the pin's unit clauses propagate and modular sums do not.
    The sharp statement of the gap: at `q = 19` the solver refutes `k = 130` in 16 s, `k = 115` in 115 s, and
    **nothing at or below `k = 105` in 900 s** — its frontier sits about thirty above the answer, with a vertical wall between 110 and 105.
 

@@ -45,19 +45,20 @@ remaining live routes, in order:
 
 Three sound normalisations of the 361 translations, one thing differing between them:
 
-| break | keeps per translation orbit | `q=11, k=29` (UNSAT, α = 28) |
-|---|---|---|
-| `none` | 361 | 286.6 s, 320.4 s |
-| `origin` — pin `x₀ = 1` | 78 of 361 (**4.63**) | **22.4 s, 22.5 s** |
-| `centroid` — `Σa·x ≡ Σb·x ≡ 0` | 1 of 361 (**361**) | 238.0 s, 244.5 s |
-| `lex` — `x ≤ t(x)` for all 360 `t` | 1 of 361 (**361**) | see README |
+| break | keeps per orbit | `q=11, k=29` | `q=19, k=115` |
+|---|---|---|---|
+| `origin` — pin `x₀ = 1` | 78 of 361 (**4.63**) | **22.4, 22.5 s** | **97.2, 96.8 s** |
+| `centroid` — `Σa·x ≡ Σb·x ≡ 0` | 1 of 361 (**361**) | 238.0, 244.5 s | 466.5, 464.8 s |
+| `lex` — `x ≤ t(x)`, all 360 `t` | 1 of 361 (**361**) | 46.7, 46.4 s | 1112.7, 1107.6 s |
+| `none` | 361 | 286.6, 320.4 s | 408.9, 407.5 s |
 
-**The origin pin's power was never its symmetry reduction.** It puts 13 unit clauses into the
-instance — the origin true and its 12 neighbours false — and that propagation is worth more to CDCL
-than a 78× larger quotient. The centroid equations fix no variable at all and are modular sums, which
-is the constraint family CDCL is worst at. So the correct reading is that **both** of the earlier
-claims were wrong in opposite directions: the symmetry accounting was off by 78, and the fix for it
-costs more than it buys.
+**The origin pin's power was never its symmetry reduction.** It puts 22 unit clauses into the
+instance — the origin true and its 20 neighbours false — and that propagation is worth more to CDCL
+than a 78× larger quotient. The exact breaks fix no variable at all: the centroid is a pair of modular
+sums, the family CDCL is worst at, and `lex` pays `q⁴` clauses for its chains. **At `q = 19` both exact
+breaks are a net loss against no translation break at all.** So the correction and its fix are wrong in
+opposite directions: the accounting was off by 78, and correcting it is slower than leaving the
+symmetry unbroken. The tool's default is `origin` on that evidence, with the table in its docstring.
 
 ## What has been tried, and the verdict on each
 
@@ -68,7 +69,7 @@ costs more than it buys.
 | level-3 relaxation | 80.59, a float reading, **not a certificate** |
 | SAT, origin pin, single solver (1 h) | undecided |
 | SAT, origin pin, cube-and-conquer | split rate diverges; **the conclusion drawn from it is retracted** |
-| SAT, centroid or lex break | slower than the origin pin (above) |
+| SAT, centroid or lex break | 4.8× and 11.5× slower than the origin pin at q = 19, and both slower than no break at all |
 | SAT + line case split (`tools/fs65_lines.py`) | **9 of 204 cases refuted**, the rest undecided |
 | **how far SAT gets at all** | `k = 130` refutes in 16 s, `k = 115` in 115 s, `k = 110` in 383 s, and **`k ≤ 105` does not refute in 900 s** — the frontier is ~30 above the answer, and the wall between 110 and 105 is vertical |
 

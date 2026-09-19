@@ -1,0 +1,11 @@
+# FS-65 D1: the three sound translation breaks against each other, q = 19, k = 115 (UNSAT).
+# tools/fs65_break_bench.sh, two runs each, SEQUENTIAL on a quiet machine.
+# Both exact breaks (centroid, lex) are slower than the weak pin AND slower than no break at all.
+q=19 k=115 -> UNSAT in 97.2s (49001 vars, 114231 clauses, break=origin)
+q=19 k=115 -> UNSAT in 96.8s (49001 vars, 114231 clauses, break=origin)
+q=19 k=115 -> UNSAT in 466.5s (61959 vars, 140126 clauses, break=centroid)
+q=19 k=115 -> UNSAT in 464.8s (61959 vars, 140126 clauses, break=centroid)
+q=19 k=115 -> UNSAT in 1112.7s (178961 vars, 504090 clauses, break=lex)
+q=19 k=115 -> UNSAT in 1107.6s (178961 vars, 504090 clauses, break=lex)
+q=19 k=115 -> UNSAT in 408.9s (49001 vars, 114210 clauses, break=none)
+q=19 k=115 -> UNSAT in 407.5s (49001 vars, 114210 clauses, break=none)
