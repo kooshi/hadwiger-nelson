@@ -446,16 +446,93 @@ def objective(P, Tb):
     return const, c
 
 
-def assemble_scs(P, Tb, blocks, nonneg=True):
+def fixed_k_rows(P, Tb, k, origin_eq=False, log=print):
+    """the FIXED-CARDINALITY moment equations at |S| = k (the external review of 2026-09-18).
+
+    For an independent set S of size s, N(T) = #{z : T + z inside S} and y(T) = N(T)/s.  Summing over
+    every v in V,
+
+        sum_v N(T u {v}) = sum_z [T + z inside S] * #{v : v + z in S} = s * N(T),
+
+    and a v outside T that is adjacent to some member of T contributes 0 because S is independent, so
+    for every independent T
+
+        sum_{v not in T u N(T)} y(T u {v})  =  (|S| - |T|) * y(T).
+
+    One equation per Aut-orbit of an independent T, and the orbits of size 1, 2, 3 give 1 + 17 + 555 =
+    573 of them at q = 19 -- using variables of size 2, 3 and 4, ALL OF WHICH THIS RELAXATION ALREADY
+    CARRIES (35,472 of size 4 at q = 19).  That is what the review meant by "no new moment variables".
+    |T| = 0 is vacuous in this normalisation (y(point) = 1 by definition), and |T| = 4 would need a
+    5-set variable.
+
+    THE ORIGIN EQUATION IS LEFT OUT BY DEFAULT.  |T| = 1 reads sum_{v} y{0,v} = k - 1, which is
+    exactly "trace Y = k" -- it would pin the objective and throw the quantity away.  Keeping it out
+    leaves f(k) = max trace Y as a NUMBER, and the test is f(k) < k: a real independent set of size
+    exactly k satisfies every equation here and has trace Y = k, so f(k) < k proves there is none,
+    hence alpha < k (any larger independent set has an independent k-subset).  --origin-eq puts it
+    back and turns the programme into a feasibility question instead.
+
+    Returns (rows, counts) with rows a list of (cols, vals, rhs): sum vals[i] * y[cols[i]] = rhs."""
+    n = P.n
+    t0 = time.time()
+    reps = [(1, np.array([0], dtype=np.int64), None)] if origin_eq else []
+    for sz in (2, 3):
+        idx = np.nonzero(Tb.var_size == sz)[0]
+        D = P.decode(Tb.var_key[idx])
+        for i, row in zip(idx, D):
+            reps.append((sz, row[row < n].astype(np.int64), int(i)))
+    all_v = np.arange(n)
+    rows = []
+    for sz, T, vid in reps:
+        ok = np.ones(n, dtype=bool)
+        for t in T:
+            ok &= ~P.unit[P.SUB[all_v, int(t)]]
+            ok[int(t)] = False
+        vs = np.nonzero(ok)[0]
+        cols4 = np.concatenate([np.tile(T, (len(vs), 1)), vs[:, None]], axis=1)
+        keys = P.canon(cols4)
+        pos = np.searchsorted(Tb.keys, keys)
+        assert np.all(Tb.keys[np.minimum(pos, len(Tb.keys) - 1)] == keys), "a T+v orbit no table touches"
+        ids = Tb.var[pos]
+        assert np.all(ids >= 0), "a T+v set is killed, but v was chosen non-adjacent to T"
+        coef = np.bincount(ids, minlength=Tb.nvar).astype(np.float64)
+        rhs = 0.0
+        if vid is None:                       # |T| = 1: y(T) = 1, so it is a constant
+            rhs = float(k - sz)
+        else:
+            coef[vid] -= float(k - sz)
+        nz = np.nonzero(coef)[0]
+        rows.append((nz, coef[nz], rhs))
+    counts = {}
+    for sz, _, _ in reps:
+        counts[sz] = counts.get(sz, 0) + 1
+    log(f"[fixedk] q={P.q} k={k}: {len(rows)} equations "
+        f"({', '.join(f'|T|={a}: {b}' for a, b in sorted(counts.items()))}) in {time.time()-t0:.1f} s")
+    return rows, counts
+
+
+def fixed_k_residuals(rows, y):
+    """the equations evaluated at a y: the control's whole content."""
+    return np.array([float(v @ y[c] - rhs) for c, v, rhs in rows])
+
+
+def assemble_scs(P, Tb, blocks, nonneg=True, eq_rows=None):
     """SCS standard form  min c.x  s.t.  A x + s = b,  s in K  (K = nonneg^nvar x PSD blocks, scaled lower-triangle
     column-major vectorisation).  A block's s = const + sum vals x[cols], so A = -vals and b = const."""
     import scipy.sparse as sp
     nv = Tb.nvar
     rows, cols, vals, b = [], [], [], []
     off = 0
+    nz_rows = 0
+    if eq_rows:                                          # the zero cone comes FIRST in SCS's ordering
+        for (c_, v_, rhs) in eq_rows:
+            rows.append(np.full(len(c_), off)); cols.append(np.asarray(c_))
+            vals.append(-np.asarray(v_)); b.append(np.array([-float(rhs)]))
+            off += 1
+        nz_rows = len(eq_rows)
     if nonneg:
-        rows.append(np.arange(nv)); cols.append(np.arange(nv)); vals.append(-np.ones(nv)); b.append(np.zeros(nv))
-        off = nv
+        rows.append(np.arange(nv) + off); cols.append(np.arange(nv)); vals.append(-np.ones(nv)); b.append(np.zeros(nv))
+        off += nv                                        # += , never = : the equality rows sit before it
     dims = []
     lin = [bl for bl in blocks if bl[1] == 1]            # 1x1 blocks are linear rows: they go in the nonneg cone
     for (label, m, r, cidx, v, const) in lin + [bl for bl in blocks if bl[1] > 1]:
@@ -468,7 +545,7 @@ def assemble_scs(P, Tb, blocks, nonneg=True):
     A.eliminate_zeros()
     bb = np.concatenate(b)
     oc, cvec = objective(P, Tb)
-    cone = dict(z=0, l=(nv if nonneg else 0) + len(lin), s=dims)
+    cone = dict(z=nz_rows, l=(nv if nonneg else 0) + len(lin), s=dims)
     return dict(A=A, b=bb, c=-cvec), cone, oc
 
 
@@ -567,10 +644,11 @@ def canon_fixed0(P, T):
 
 
 # ----------------------------------------------------------------------------------------------- the driver
-def fingerprint(P, Tb, family, dreps, data, cone, border, s0):
+def fingerprint(P, Tb, family, dreps, data, cone, border, s0, fixed_k=None, origin_eq=False):
     return dict(q=P.q, modulus=P.F.modulus, family=family, dclasses=[int(d) for d in dreps], border=bool(border),
                 s0=s0, nvar=int(Tb.nvar), rows=int(data["A"].shape[0]), nnz=int(data["A"].nnz), psd=len(cone["s"]),
-                psd_max=int(max(cone["s"])))
+                psd_max=int(max(cone["s"])), fixed_k=fixed_k, origin_eq=bool(origin_eq),
+                zero_cone=int(cone.get("z", 0)))
 
 
 def run_chunks(data, cone, oc, fp, ckpt, new, eps, chunk, max_iters, linear_solver, log=print, stop_after=0, verbose=False):
@@ -1831,6 +1909,12 @@ def main():
         a.add_argument("--dclasses", default="all", help="comma-separated d-class representatives, or all")
         a.add_argument("--border", action="store_true", help="the all-ones border on MY and -- (needs --s0)")
         a.add_argument("--s0", type=float, help="the size threshold the border's corner |V|/s0 is valid for")
+        a.add_argument("--fixed-k", type=int, default=None,
+                       help="impose the fixed-cardinality moment equations at |S| = k; the test is then "
+                            "f(k) = max trace Y < k, which proves alpha < k")
+        a.add_argument("--origin-eq", action="store_true",
+                       help="also impose the |T| = 1 equation (trace Y = k), which makes it a feasibility "
+                            "question and throws away f(k)")
         a.add_argument("--out")
         if name == "checkset":
             a.add_argument("--set", required=True, help="JSON file; the set is read from --path")
@@ -1982,18 +2066,43 @@ def main():
         worst = min((np.linalg.eigvalsh(block_matrix(m, r, cc, v, const, y))[0], lab) for (lab, m, r, cc, v, const) in blocks)
         rec.update(set_size=len(set(S)), objective_at_set=oc + c @ y, least_eigenvalue=worst[0], at=worst[1])
         print(f"[checkset] |S| = {len(set(S))}, objective at y(S) = {oc + c @ y:.9f}, least block eigenvalue {worst[0]:.3e} ({worst[1]})")
+        # the fixed-cardinality control: the equations must hold EXACTLY at k = |S| and must BITE at k +- 1
+        sz = len(set(S))
+        rws, counts = fixed_k_rows(P, Tb, sz, origin_eq=True)
+        res = fixed_k_residuals(rws, y)
+        worst_eq = float(np.max(np.abs(res)))
+        bite = {}
+        for kk in (sz - 1, sz + 1):
+            bite[kk] = float(np.max(np.abs(fixed_k_residuals(fixed_k_rows(P, Tb, kk, origin_eq=True, log=lambda *_: None)[0], y))))
+        rec.update(fixedk_equations=len(rws), fixedk_counts={str(a_): b_ for a_, b_ in counts.items()},
+                   fixedk_worst_residual_at_k=worst_eq, fixedk_worst_residual_off_k=bite)
+        print(f"[checkset] the {len(rws)} fixed-cardinality equations at k = {sz}: worst residual {worst_eq:.3e} "
+              f"{'PASS' if worst_eq < 1e-9 else 'FAIL'};  at k-1 {bite[sz-1]:.3e}, at k+1 {bite[sz+1]:.3e} "
+              f"{'PASS (they bite)' if min(bite.values()) > 1e-6 else 'FAIL (vacuous)'}")
     if a.cmd == "count":
         rec["census"] = census(P, Tb)
     if a.cmd in ("count", "solve"):
-        data, cone, oc = assemble_scs(P, Tb, blocks, nonneg=not getattr(a, "no_nonneg", False))
+        eq_rows = None
+        if getattr(a, "fixed_k", None) is not None:
+            eq_rows, eq_counts = fixed_k_rows(P, Tb, a.fixed_k, origin_eq=a.origin_eq)
+            rec["fixed_k"] = a.fixed_k
+            rec["fixed_k_equations"] = len(eq_rows)
+            rec["fixed_k_counts"] = {str(k_): v_ for k_, v_ in eq_counts.items()}
+            rec["origin_eq"] = bool(a.origin_eq)
+        data, cone, oc = assemble_scs(P, Tb, blocks, nonneg=not getattr(a, "no_nonneg", False), eq_rows=eq_rows)
         rec["scs_rows"], rec["scs_nnz"] = int(data["A"].shape[0]), int(data["A"].nnz)
         rec["scs_A_bytes"] = int(data["A"].data.nbytes + data["A"].indices.nbytes + data["A"].indptr.nbytes)
         print(f"[{a.cmd}] SCS: {data['A'].shape[0]} rows x {data['A'].shape[1]} columns, nnz {data['A'].nnz}, "
               f"A {rec['scs_A_bytes']/2**20:.1f} MiB", flush=True)
     if a.cmd == "solve":
-        fp = fingerprint(P, Tb, a.family, chosen, data, cone, a.border, a.s0)
+        fp = fingerprint(P, Tb, a.family, chosen, data, cone, a.border, a.s0,
+                         fixed_k=getattr(a, "fixed_k", None), origin_eq=getattr(a, "origin_eq", False))
         fp["method"] = a.method
         if a.method == "admm":
+            if getattr(a, "fixed_k", None) is not None:
+                raise SystemExit("--fixed-k is not implemented for --method admm: the arrowhead solver assumes "
+                                 "A^T A is diagonal on the 4-set variables, and the cardinality rows are dense "
+                                 "across them. Use --method scs.")
             nb = int((Tb.var_size < 4).sum())
             res = admm_solve(data, cone, oc, nb, fp, a.ckpt, a.new, a.eps, a.max_iters, a.report_seconds,
                              stop_after_iters=a.stop_after_chunks, mu0=a.mu0, proj_threads=a.proj_threads)

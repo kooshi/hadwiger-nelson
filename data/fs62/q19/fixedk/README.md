@@ -1,0 +1,124 @@
+# The fixed-cardinality moment equations (FS-65, 2026-09-19)
+
+*The external review's own first recommendation, implemented, controlled, and run. Written before the
+`q = 19` solves finished, with the discriminating prediction registered below.*
+
+## What the equations are
+
+For an independent set `S` of size `s`, the level-3 programme's variables are `y(T) = N(T)/s` with
+`N(T) = #{z : T + z ⊆ S}`, averaged over the automorphism group. Summing over every `v ∈ V`,
+
+```
+Σ_v N(T ∪ {v}) = Σ_z [T + z ⊆ S] · #{v : v + z ∈ S} = s · N(T),
+```
+
+and a `v` outside `T` adjacent to a member of `T` contributes nothing because `S` is independent. So
+for every independent `T`
+
+```
+Σ_{v ∉ T ∪ N(T)}  y(T ∪ {v})  =  (|S| − |T|) · y(T).
+```
+
+One equation per orbit of an independent `T`. At `q = 19` the orbit counts are **1, 17 and 555** for
+`|T| = 1, 2, 3` — **573 equations, exactly the count the review gave** (its 574 includes the vacuous
+`|T| = 0`). They use variables of size 2, 3 and 4, and the level-3 relaxation carries all of them
+(36,044 live variables at `q = 19`: 17 of size 2, 555 of size 3, **35,472 of size 4**). So the review's
+"no new moment variables are needed" is exactly right.
+
+## Which relaxation — a correction to my first attempt
+
+This repository has **two** semidefinite relaxations and I strengthened the wrong one first.
+
+| | variables | value at 7 | at 11 | at 19 |
+|---|---|---|---|---|
+| FS-50 **triple-level** (`tools/fplane_sdp_blocks.py`) | orbits of independent sets of size ≤ 3 — 573 live at 19 | 14.0879 | 29.1769 | — |
+| FS-54 **level-3, GLV `L₃`** (`tools/fs54_d4_quad.py`) | orbits of size ≤ 4 — 36,044 live at 19 | **14** | **28** | **80.59** |
+
+The triple-level's live-class count at `q = 19` is 573, which is numerically the same as the equation
+count and is what led me to it. But its largest variable is a **3**-set, so the `|T| = 3` equations —
+545 of the 573 — have nowhere to land there. Only `L₃` carries 4-sets. The 80.59 on record came from
+`L₃`, and `L₃` is the object the review meant.
+
+*Recorded because it is a real trap: two numbers agreed (573), and the agreement was a coincidence
+between a variable count in one relaxation and an equation count in another.*
+
+**What the detour bought** (`tools/fs65_l3_fixedk.py`, kept): the same equations for the triple-level
+relaxation, where only `|T| ≤ 2` fits — 18 equations at `q = 19`. Measured there, the strengthening is
+worth **exactly integer rounding and nothing more**: `f(k) = k` for every `k ≤ ⌊N⌋` and `f(k) = 1`
+above it, so the threshold is `⌊14.0879⌋ = 14` at `q = 7` and `⌊29.1769⌋ = 29` at `q = 11`. That is
+the null result the `L₃` run has to beat.
+
+## The controls, all passing
+
+Run before any solver, from a **real** independent set, with `y` built from its subsets exactly:
+
+| field | set | equations | worst residual at `k = |S|` | at `k ± 1` |
+|---|---|---|---|---|
+| 7 | a 14-set (= α) | 29 | `3.6e-15` | `1.0` — they bite |
+| 11 | a 28-set (= α) | 115 | `1.3e-14` | `1.0` — they bite |
+| 19 | the 76-set | **573** | `1.6e-13` | `1.0` — they bite |
+
+The `k ± 1` column is the half that matters: an equation satisfied at every `k` would constrain
+nothing, and these are wrong by exactly 1 one step away.
+
+Two-sided at the solver, where the answer is known exactly:
+
+| field | `k` | `f(k) = max tr Y` | verdict | truth |
+|---|---|---|---|---|
+| 7 | 14 | 14.000000 | not refuted | α = 14 ✓ |
+| 7 | 15 | **1.000000** | refuted, so α ≤ 14 | ✓ |
+| 11 | 28 | 28.000000 | not refuted | α = 28 ✓ |
+| 11 | 29 | **1.000000** | refuted, so α ≤ 28 | ✓ |
+| 11 | 30 | **1.000000** | refuted | ✓ |
+
+The collapse is to the trivial point `y = 0` (`tr Y = 1`, the one-point set), not to something just
+under `k` — a sharp signal rather than a marginal one.
+
+## How the test is put, and why not as feasibility
+
+The `|T| = 1` equation reads `Σ_v y{0,v} = k − 1`, which is exactly `tr Y = k`. Imposing it would pin
+the objective and turn the programme into a feasibility question, so it is **left out by default** and
+the objective stays `max tr Y`, whose value at cardinality `k` is called `f(k)`. A real independent set
+of size exactly `k` satisfies every remaining equation and has `tr Y = k`, so
+
+> **`f(k) < k` proves there is no independent set of size `k`, hence `α < k`** — any larger independent
+> set has an independent `k`-subset.
+
+The first version of this work asked the feasibility question instead and it was numerically
+degenerate exactly at the boundary: at `q = 11, k = 28`, where a 28-set exists and is on disk, the
+margin came back `−5e-08` and the run reported a refutation. **A test whose false positive sits at the
+answer is not a test.** `f(k)` is a number in the units the unstrengthened bound already has.
+
+## The prediction, registered before the `q = 19` runs finished
+
+The controls at 7 and 11 **cannot** distinguish the two live possibilities, because `L₃` is already
+exact at both — there is no room there for the strengthening to show itself. At `q = 19` the
+unstrengthened value is 80.59, so:
+
+- **if the strengthening is only integer rounding** (what it demonstrably is for the triple-level
+  relaxation), then `f(81) = 1` and `f(78) ≥ 78`, and nothing is gained over `⌊80.59⌋ = 80`;
+- **if it is genuinely stronger**, `f(78) < 78` and `α(19) ≤ 77`, which puts `c(19) ≤ 0.930` under the
+  0.933 that G59's uniform-bound reading needs.
+
+`k = 76` is run alongside as the two-sided control at the field that matters: a 76-set exists, so
+`f(76) ≥ 76` **must** hold, and a collapse there would mean the equations are wrong rather than strong.
+
+## Files
+
+| file | what it is |
+|---|---|
+| `l3-fixedk-q19-k76.json` | the control run at the size a set is known to exist |
+| `l3-fixedk-q19-k78.json` | the question |
+
+The checkpoints are large and regenerable; they are not committed. Re-run with
+
+```
+build/venv-sdp/bin/python -u tools/fs54_d4_quad.py solve --q 19 --fixed-k 78 \
+    --ckpt <path>.npz --new --eps 1e-7 --chunk 200 --linear-solver cpu_indirect --out <out>.json
+```
+
+and the control with
+
+```
+build/venv-sdp/bin/python -u tools/fs54_d4_quad.py checkset --q 19 --set <set>.json --path set
+```
