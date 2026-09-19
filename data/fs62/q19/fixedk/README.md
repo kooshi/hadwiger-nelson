@@ -89,7 +89,21 @@ degenerate exactly at the boundary: at `q = 11, k = 28`, where a 28-set exists a
 margin came back `−5e-08` and the run reported a refutation. **A test whose false positive sits at the
 answer is not a test.** `f(k)` is a number in the units the unstrengthened bound already has.
 
-## THE RESULT AT `q = 19`: `f(78) = 78.000000`, and the equations do not settle it
+## THE RESULT: the strengthening is worth exactly integer rounding, and nothing at `q = 19`
+
+| `k` | 76 | 78 | 80 | 81 |
+|---|---|---|---|---|
+| `f(k)` | ≥ 76, **by exhibition** | **78.000000** (converged, gap `6.1e-07`) | **80.000006** (gap `4.25e-07`) | must collapse; `f(81) = 81` is impossible |
+
+`f(80) = 80` puts the feasibility threshold at 80, and `⌊N⌋ = ⌊80.588⌋ = 80` is the ceiling no
+strengthening of this kind can pass. **So the threshold is exactly `⌊N⌋`: the 573 equations reproduce
+the integer rounding of the bound they start from and add nothing to it.**
+
+`α(19) ≤ 80` was already what the unstrengthened relaxation gave. The interval `76 ≤ α(19) ≤ 80`
+stands, `c(19) ∈ [0.918, 0.966]` still contains the deciding 0.933, and **the question this was run to
+answer — is there an independent set of 78 — remains open.**
+
+## The result at `k = 78` and why the objective carried no information
 
 **Converged** — status `solved`, primal 78.000000 against dual 77.999999, `res_pri 1.2e-08`,
 `res_dual 8.1e-07`, gap `6.1e-07`, in 750 iterations and 55 minutes, with all 572 equations in the
