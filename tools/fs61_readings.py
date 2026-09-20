@@ -443,7 +443,7 @@ def write_readings(out=None, alpha=0.05):
               'ball was decided, and the balls that were not decided are the large, dense ones. The confound is '
               'named and not removed.', '']
     # the owner's addition after phase B': the phase diagram that re-aimed tier 1c, with its populations
-    dr = degree_rows()
+    dr = degree_rows()  # noqa: E501  (the phrase beside this table is computed, never asserted -- decided_phrase)
     dg = degree_diagram(dr)
     big = [r for r in dr if r['points'] >= 200000]
     dgb = degree_diagram(big)
@@ -468,7 +468,7 @@ def write_readings(out=None, alpha=0.05):
           f'R = {lo["R"]}), over {len(refs)} refusing balls. The {len(unk)} undecided balls have median degree '
           f'**{unk[len(unk) // 2]:.2f}** and lie in {unk[0]:.2f}–{unk[-1]:.2f}.', '',
           f'**Restricted to balls of at least 200,000 points** (n = {len(big)}), which is where the census\'s hard '
-          f'cases live: {len(hi14)} are at degree ≥ 14 and **every one of them decided** — '
+          f'cases live: {len(hi14)} are at degree ≥ 14 and {decided_phrase(hi14)} — '
           f'{sum(1 for r in hi14 if r["verdict"] == "Colourable")} coloured, '
           f'{sum(1 for r in hi14 if r["verdict"] == "Refused")} refused, '
           f'**{sum(1 for r in hi14 if r["verdict"] == "Unknown")} undecided** — the slowest in '
@@ -787,6 +787,21 @@ def degree_diagram(rows):
     return t
 
 
+def decided_phrase(rows):
+    """The phrase that reports how much of a population decided — **computed from the counts, never asserted.**
+
+    It used to be the fixed string "every one of them decided", written when the population was 43 balls of which
+    43 decided.  Tier 1c then added two `Unknown` balls at degree 14 — which is exactly how the owner's prediction
+    P-deg1 lost — and the sentence went on claiming the opposite of the three counts printed in the same breath
+    beside it.  Found at the close, 2026-09-20, by reading the generated table rather than the generator.
+
+    **A derived table that can state a conclusion its own counts contradict is not derived**, so the conclusion is
+    a function of the counts and the selftest shows it returning both of its phrasings.
+    """
+    u = sum(1 for r in rows if r['verdict'] == 'Unknown')
+    return '**every one of them decided**' if u == 0 else f'**{len(rows) - u} of them decided**'
+
+
 def degree_law_control(rows):
     """observed / predicted over the population, as a control on `degree = g·φ(R)²`."""
     rat = sorted(r['degree'] / (r['g'] * C.degree_phi(r['R']) ** 2) for r in rows if r['g'])
@@ -951,6 +966,18 @@ def selftest(rnd=None):
                  score_r_C(ok)['verdict'] == 'won'
                  and score_r_C(ok + [{'min_character_mean': -0.61}])['verdict'] == 'lost',
                  'two readings above -1/2 -> won; adding one at -0.61 -> lost'))
+    # the phase diagram's conclusion sentence must be computed, and must be able to say either thing
+    allD = [{'verdict': 'Colourable'}, {'verdict': 'Refused'}]
+    someU = allD + [{'verdict': 'Unknown'}]
+    real = [r for r in degree_rows() if r['points'] >= 200000 and r['degree'] >= 14]
+    rows.append(('PLANT (the phase diagram\'s conclusion): the "every one decided" phrase is COMPUTED from the '
+                 'counts, so a population with an undecided ball cannot be described as fully decided -- the '
+                 'defect the template had until 2026-09-20',
+                 decided_phrase(allD) == '**every one of them decided**'
+                 and decided_phrase(someU) == '**2 of them decided**'
+                 and decided_phrase(real) == decided_phrase(real),
+                 f'2 decided -> {decided_phrase(allD)}; 2 of 3 decided -> {decided_phrase(someU)}; '
+                 f'the real population of {len(real)} -> {decided_phrase(real)}'))
     # the degree law control, on the real records
     ctl = degree_law_control(degree_rows())
     rows.append(('the degree law control runs on the real records and is tight',
