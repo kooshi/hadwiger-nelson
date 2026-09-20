@@ -272,11 +272,13 @@ certified a finite graph forcing four colours over **thirteen** of the forty:
 
 | | fields | the matching upper bound, all prior art |
 |---|---|---|
-| **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 9); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
+| **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i)); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
 | **`4 ≤ χ(ℚ(√d)²) ≤ 5`** — brackets | 47, **143**, **311**, **335** | the residue plane at 11 |
 
-*(Bold: first proved by FS-61's census. `d = 239` also has a refusing ball, but it is a **solver claim** — its certification is
-resumable and not finished, `data/fs61/records/phase-F.md` §3.1a — and is not counted above.)*
+*(Bold: first proved by FS-61's census. `d = 239` also has refusing balls — two of them — but they are **solver claims**: its
+certification is resumable and not finished, and is not counted above. Its state at the milestone's close is a refusing set of
+**2,451 points**, one gate run from a certificate, on a denser ball asked under tier `1u`
+(`data/fs61/records/phase-F-239.md`; the two earlier stops are `phase-F.md` §3.1a and §3.1a′).)*
 
 **Only the lower bounds are ours**, and `ℚ(√11)`'s is the only one the Lean kernel has seen
 (`four_le_chromaticNumber_planeOver_eleven`, 204 points, triangle-free, standard three axioms — FS-58's *chain* witness, a different

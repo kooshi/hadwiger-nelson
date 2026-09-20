@@ -4,3 +4,11 @@
 # is 600 KB raw -- and is kept out of git.  Re-create with `fs61_census.py scan <d>` after deleting the ball record.
 fields/*/models/
 fields/*/quotients/
+
+# A PARKED extraction checkpoint.  `witness-<d>/steps-ball<R>.jsonl` is a `steps.jsonl` set aside so that a DIFFERENT
+# ball of the same lattice can be extracted in the same directory without the frozen `extract` silently resuming
+# from it -- its resume maps the checkpoint's lattice coordinates into the new ball, and balls about one centre are
+# NESTED, so every old point is found and the old kept set is picked up as though it belonged to the new ball.  That
+# is sound and it is not what an upward ask is for: it would skip core round 0 on the denser ball, which is the whole
+# measurement.  Park, do not delete: moving the file back restores the old route exactly.  Provenance, never evidence.
+witness-*/steps-ball*.jsonl

@@ -15,7 +15,7 @@ the five claims into certificates, and then writes the milestone's close.
 
 Certified, three of the five are **new exact values** — `χ(ℚ(√59)²) = χ(ℚ(√239)²) = χ(ℚ(√431)²) = 4` — and two are
 brackets, `4 ≤ χ(ℚ(√311)²) ≤ 5` and `4 ≤ χ(ℚ(√335)²) ≤ 5`. The upper halves are prior art in every case and are
-named as such: the dyadic prime at 59 (`[Fischer1990]` Thm 9), the residue plane at 7 at 239 and 431
+named as such: the dyadic prime at 59 (`[Fischer1990]` Thm 10(i)), the residue plane at 7 at 239 and 431
 (`[Moorhouse2010]` Thm 8.1), the residue plane at 11 at 311 and 335.
 
 ---
@@ -317,7 +317,7 @@ go.
 |---|---|---|---|---|---|---|---|---|
 | **311** | **CERTIFIED** | 189 | 460 | yes | 213 of 460 | 0.1 MB | `4 ≤ χ(ℚ(√311)²) ≤ 5` | the residue plane at 11 |
 | **335** | **CERTIFIED** | 443 | 1,086 | yes | 933 of 1,086 | 0.9 MB | `4 ≤ χ(ℚ(√335)²) ≤ 5` | the residue plane at 11 |
-| **59** | **CERTIFIED** | 1,739 | 5,025 | no (stopped at 297 of 2,473) | 2,442 of 5,025 | **39.7 MB** | **`χ(ℚ(√59)²) = 4`** | the dyadic prime, `[Fischer1990]` Thm 9 |
+| **59** | **CERTIFIED** | 1,739 | 5,025 | no (stopped at 297 of 2,473) | 2,442 of 5,025 | **39.7 MB** | **`χ(ℚ(√59)²) = 4`** | the dyadic prime, `[Fischer1990]` Thm 10(i) |
 | **431** | **CERTIFIED** | 1,031 | 2,719 | no (stopped at 95 of 1,234) | 1,570 of 2,719 | 26.4 MB | **`χ(ℚ(√431)²) = 4`** | the residue plane at 7 |
 | **239** | **NOT LANDED — `Refusal claimed`, resumable** | — | — | — | — | — | *(a solver claim; §3.1a and §3.1a′)* | *(would be `χ = 4`)* |
 

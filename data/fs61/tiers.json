@@ -60,6 +60,22 @@
       "point_cap": 2000000,
       "solve_wall": 1800
   },
+  "1u": {
+      "name": "tier 1u (the certification-onset ask: upward in degree, on a lattice that already refuses)",
+      "defined": "2026-09-20, the owner's acceptance of FS-61's certification pass. At d = 239 the refusing ball sits at average degree 14.0, refuses in 403 s, and collapses slowly under extraction (369,885 -> 46,338 points in core round 0; 8,336 points after 52 rounds, heading for a certificate of hundreds of megabytes). The census's own degree phase diagram is therefore turned on the CERTIFICATE rather than on the refusal: on a fixed lattice a denser ball refuses FASTER and collapses FURTHER (d = 47: 104 s at R = 1.2, under a second at 1.5; d = 311: 1,137,169 points at degree 14 refused in 18 s and core round 0 left 738 of them).",
+      "deepens": "1c",
+      "purpose": "a cheaper CERTIFICATE SOURCE, never a new refusal. Refusal is monotone in radius -- balls about one centre on one lattice are nested -- so a larger ball of a refusing lattice refuses too, and no ask of this tier can change a field's census state. What it asks is how fast that larger ball refuses and how far the first extraction round collapses it.",
+      "scope": "every lattice carrying a `Refused` ball record at a census field with NO certified witness -- refusing but uncertified. A lattice with no `Refused` record is REFUSED an ask by the rule, and so is every lattice at a field already `Landed (certified)`. This tier creates no lattice record.",
+      "nmax": 420,
+      "lattices": "none of its own: it re-asks lattices earlier tiers built, at whatever NMAX built them",
+      "degree_law": "tier 1c's, unchanged: predicted average degree is g*phi(R)^2 with phi(R) = [2R^2*acos(1/(2R)) - sqrt(4R^2-1)/2] / (pi*R^2), the area fraction a radius-R disc shares with its unit translate, squared because a ball here is a bidisc.",
+      "target_degree": 18,
+      "ask_rule": "onset",
+      "radius_rule": "ask ONE ball per in-scope lattice. Arm `R18`: the radius where the predicted degree reaches 18, if its predicted points fit the point cap divided by the 1.11 overshoot margin tier 1c measured. Arm `Rcap`: otherwise the largest radius whose predicted points fit that margin. THE ASK MUST RAISE THE DEGREE -- an arm whose predicted degree does not strictly exceed the predicted degree of the refusing ball it is aimed at is refused, and the record reads `No lift (not asked)` carrying both degrees. This tier exists to move UP the phase diagram; a lower-degree ball of the same lattice is a step toward the hardness peak at degree 4-6, where no ball has ever refused. Because degree rises with radius at a fixed generator count, a lifting ask is automatically at a strictly larger radius than the refusing ball, which is what makes its refusal free by nesting.",
+      "radii": [],
+      "point_cap": 2000000,
+      "solve_wall": 600
+  },
   "2l": {
       "name": "tier 2l (deeper lattices, the same degree rule)",
       "defined": "2026-09-20, the owner's re-plan after phase B' ruling 3 item E.1b, as revised the same day: `E.1b keeps its pricing rule and uses this same ask rule in place of the ladder`.",

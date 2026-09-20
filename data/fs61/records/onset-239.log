@@ -1,0 +1,5 @@
+fs61 onset-ask tier=1u: 1 refusing-but-uncertified lattices in scope over 1 field(s); 1 ball(s) to ask, 0 refused for want of a degree lift; cap 2,000,000, wall 600 s
+  d=239 L3e1c94c6 g= 52 above its refusal at R=1.2892 (degree 14.0, 369885 points, 403.01 s) -> arm R18 R=1.5181 degree 18.0 points 710,638  [predicted degree 18.000 at R = 1.5181, above the refusing ball's 14.000]
+  d=239 L3e1c94c6 R=1.5181 arm=R18 710,957 points 6396358 edges degree 17.994 (predicted 18.0, predicted points 710,638) -> Refused (solver claim) [197.15 s, peak 4.49 GB]
+DONE onset-ask tier=1u: 1 Refused (solver claim); 0 defects; 3.6 min
+[onset-ask: 217.5 s wall on desktop]

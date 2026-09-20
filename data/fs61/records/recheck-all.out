@@ -1,13 +1,145 @@
-# The frozen, independent checker re-run on every committed FS-61 witness, from the files as committed.
-# for d in 11 23 47 71 95 119 143 191 359; do
-#   python3 tools/fs58_check_witness.py --radicand $d data/fs61/witness-$d/witness.json; done
-d=11   exit=0      0.2 s  CERTIFIED      189 points,   452 edges
-d=23   exit=0      1.0 s  CERTIFIED      573 points,  1365 edges
-d=47   exit=0      0.1 s  CERTIFIED      169 points,   385 edges
-d=71   exit=0      0.0 s  CERTIFIED      131 points,   306 edges
-d=95   exit=0      5.3 s  CERTIFIED     1004 points,  2829 edges
-d=119  exit=0      0.5 s  CERTIFIED      456 points,  1122 edges
-d=143  exit=0      0.7 s  CERTIFIED      664 points,  1600 edges
-d=191  exit=0      0.3 s  CERTIFIED      292 points,   713 edges
-d=359  exit=0      7.3 s  CERTIFIED     1190 points,  3243 edges
-TOTAL: 9 of 9 CERTIFIED by the frozen checker, 0 not
+
+=== d = 11 ===
+  C.1 certificate        PASS  CERTIFIED: 189 points of Q(sqrt11)^2, each a reduced (a, b, c, e, m);  189 points, 452 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0 offered as a witness over Q(sqrt23)
+  C.4a second opinion    PASS  RECHECK PASS: 189 points; 452 unit pairs by Fraction arithmetic over a RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 452
+  C.6 3-adic barrier     PASS  268 of 452                                     edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha c43da02bdfbf2e0c..., record says c43da02bdfbf2e0c..., 189 points / 452 edges
+
+=== d = 23 ===
+  C.1 certificate        PASS  CERTIFIED: 573 points of Q(sqrt23)^2, each a reduced (a, b, c, e, m);  573 points, 1365 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 51] between [0, 0, 0, 0 offered as a witness over Q(sqrt35)
+  C.4a second opinion    PASS  RECHECK PASS: 573 points; 1365 unit pairs by Fraction arithmetic over  RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 1365
+  C.6 3-adic barrier     PASS  866 of 1365                                    edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 12b0fb37566cb2a6..., record says 12b0fb37566cb2a6..., 573 points / 1365 edges
+
+=== d = 47 ===
+  C.1 certificate        PASS  CERTIFIED: 169 points of Q(sqrt47)^2, each a reduced (a, b, c, e, m);  169 points, 385 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 69] between [0, 0, 0, 0 offered as a witness over Q(sqrt59)
+  C.4a second opinion    PASS  RECHECK PASS: 169 points; 385 unit pairs by Fraction arithmetic over a RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 385
+  C.6 3-adic barrier     PASS  358 of 385                                     edges with 3 in a reduced denominator
+  C.7 the value          PASS  bracket to 5                                   frame.jsonl L = 5
+  record agrees          PASS  CERTIFIED                                      sha 13aca2c8351ba2b3..., record says 13aca2c8351ba2b3..., 169 points / 385 edges
+
+=== d = 59 ===
+  C.1 certificate        PASS  CERTIFIED: 1739 points of Q(sqrt59)^2, each a reduced (a, b, c, e, m); 1739 points, 5025 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 677] between [0, 0, 0,  offered as a witness over Q(sqrt71)
+  C.4a second opinion    PASS  RECHECK PASS: 1739 points; 5025 unit pairs by Fraction arithmetic over RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 5025
+  C.6 3-adic barrier     PASS  2442 of 5025                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 3bdb4ae6eef3f976..., record says 3bdb4ae6eef3f976..., 1739 points / 5025 edges
+
+=== d = 71 ===
+  C.1 certificate        PASS  CERTIFIED: 131 points of Q(sqrt71)^2, each a reduced (a, b, c, e, m);  131 points, 306 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 64] between [0, 0, 0, 0 offered as a witness over Q(sqrt83)
+  C.4a second opinion    PASS  RECHECK PASS: 131 points; 306 unit pairs by Fraction arithmetic over a RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 306
+  C.6 3-adic barrier     PASS  108 of 306                                     edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 035010f19301e68e..., record says 035010f19301e68e..., 131 points / 306 edges
+
+=== d = 95 ===
+  C.1 certificate        PASS  CERTIFIED: 1004 points of Q(sqrt95)^2, each a reduced (a, b, c, e, m); 1004 points, 2829 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 319] between [0, 0, 0,  offered as a witness over Q(sqrt107)
+  C.4a second opinion    PASS  RECHECK FAIL: deleting vertex 7 leaves a graph that still refuses (con reached step (iii), so (i) and (ii) passed
+  C.4b pinned-vertex     FAIL  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 2829
+  C.6 3-adic barrier     PASS  2484 of 2829                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha a72fbb80d5f5ff8f..., record says a72fbb80d5f5ff8f..., 1004 points / 2829 edges
+
+=== d = 119 ===
+  C.1 certificate        PASS  CERTIFIED: 456 points of Q(sqrt119)^2, each a reduced (a, b, c, e, m); 456 points, 1122 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 19] between [0, 0, 0, 0 offered as a witness over Q(sqrt131)
+  C.4a second opinion    PASS  RECHECK PASS: 456 points; 1122 unit pairs by Fraction arithmetic over  RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 1122
+  C.6 3-adic barrier     PASS  996 of 1122                                    edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha f61526fc80c6c6cc..., record says f61526fc80c6c6cc..., 456 points / 1122 edges
+
+=== d = 143 ===
+  C.1 certificate        PASS  CERTIFIED: 664 points of Q(sqrt143)^2, each a reduced (a, b, c, e, m); 664 points, 1600 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0 offered as a witness over Q(sqrt155)
+  C.4a second opinion    PASS  RECHECK PASS: 664 points; 1600 unit pairs by Fraction arithmetic over  RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 1600
+  C.6 3-adic barrier     PASS  1204 of 1600                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  bracket to 5                                   frame.jsonl L = 5
+  record agrees          PASS  CERTIFIED                                      sha 012bd153b4483899..., record says 012bd153b4483899..., 664 points / 1600 edges
+
+=== d = 191 ===
+  C.1 certificate        PASS  CERTIFIED: 292 points of Q(sqrt191)^2, each a reduced (a, b, c, e, m); 292 points, 713 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 145] between [0, 0, 0,  offered as a witness over Q(sqrt203)
+  C.4a second opinion    PASS  RECHECK PASS: 292 points; 713 unit pairs by Fraction arithmetic over a RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 713
+  C.6 3-adic barrier     PASS  89 of 713                                      edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 461a5cc0cb36330e..., record says 461a5cc0cb36330e..., 292 points / 713 edges
+
+=== d = 311 ===
+  C.1 certificate        PASS  CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); 189 points, 460 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 4] between [0, 0, 0, 0, offered as a witness over Q(sqrt323)
+  C.4a second opinion    PASS  RECHECK PASS: 189 points; 460 unit pairs by Fraction arithmetic over a RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 460
+  C.6 3-adic barrier     PASS  213 of 460                                     edges with 3 in a reduced denominator
+  C.7 the value          PASS  bracket to 5                                   frame.jsonl L = 5
+  record agrees          PASS  CERTIFIED                                      sha 1480a9fe621decee..., record says 1480a9fe621decee..., 189 points / 460 edges
+
+=== d = 335 ===
+  C.1 certificate        PASS  CERTIFIED: 443 points of Q(sqrt335)^2, each a reduced (a, b, c, e, m); 443 points, 1086 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 118] between [0, 0, 0,  offered as a witness over Q(sqrt347)
+  C.4a second opinion    PASS  RECHECK PASS: 443 points; 1086 unit pairs by Fraction arithmetic over  RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says yes                                   required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 1086
+  C.6 3-adic barrier     PASS  933 of 1086                                    edges with 3 in a reduced denominator
+  C.7 the value          PASS  bracket to 5                                   frame.jsonl L = 5
+  record agrees          PASS  CERTIFIED                                      sha 5415e8a36164d29d..., record says 5415e8a36164d29d..., 443 points / 1086 edges
+
+=== d = 359 ===
+  C.1 certificate        PASS  CERTIFIED: 1190 points of Q(sqrt359)^2, each a reduced (a, b, c, e, m) 1190 points, 3243 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 427] between [0, 0, 0,  offered as a witness over Q(sqrt371)
+  C.4a second opinion    PASS  RECHECK PASS: 1190 points; 3243 unit pairs by Fraction arithmetic over RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 3243
+  C.6 3-adic barrier     PASS  1997 of 3243                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 6d2c97573470b980..., record says 6d2c97573470b980..., 1190 points / 3243 edges
+
+=== d = 431 ===
+  C.1 certificate        PASS  CERTIFIED: 1031 points of Q(sqrt431)^2, each a reduced (a, b, c, e, m) 1031 points, 2719 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 105] between [-19, -1,  offered as a witness over Q(sqrt443)
+  C.4a second opinion    PASS  RECHECK PASS: 1031 points; 2719 unit pairs by Fraction arithmetic over RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 2719
+  C.6 3-adic barrier     PASS  1570 of 2719                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha f88f148ecb2a265c..., record says f88f148ecb2a265c..., 1031 points / 2719 edges
+
+DONE recount-landings: 13 of 13 fields green [11, 23, 47, 59, 71, 95, 119, 143, 191, 311, 335, 359, 431]

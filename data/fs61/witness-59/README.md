@@ -16,7 +16,7 @@ edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the
 checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
 exit 1.
 
-**What is not claimed.** The matching **upper** bound is prior art, not ours: the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9) gives
+**What is not claimed.** The matching **upper** bound is prior art, not ours: the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 10(i)) gives
 `χ(ℚ(√59)²) ≤ 4`. With it, **chi(Q(sqrt59)^2) = 4**. Nothing here proves the upper bound.
 **And nothing here is checked by the Lean kernel**: the certificate above is the standard-library checker's, and that
 is a different and weaker thing.

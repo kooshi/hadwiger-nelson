@@ -1,4 +1,4 @@
-fs61 selftest: 7 sections (keys, saturation, outdir, barrier, predicted, atlas, land)
+fs61 selftest: 12 sections (keys, saturation, outdir, barrier, predicted, atlas, land, ladder, lock, phaseE, degree, onset)
   [keys]
     PASS  two specs of one lattice (119: q1+60.1, q1+12+60.1) -> one key  --  L8a8b1603 vs L8a8b1603
     PASS  a different lattice (119: q1+12) -> a different key  --  L7cb2ac72 vs L8a8b1603
@@ -31,8 +31,8 @@ fs61 selftest: 7 sections (keys, saturation, outdir, barrier, predicted, atlas, 
     PASS  the inverted enumeration agrees with the brute force on D(12)  --  [23, 47, 71, 95, 119, 143]
   [land]
     [fs61] steps.jsonl: dropped a truncated final record of 38 bytes, written as the generator was stopped
-    stopping the generator (pid 1978769): selftest
-    stopped: pid 1978769 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    stopping the generator (pid 2383403): selftest
+    stopped: pid 2383403 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
     PASS  C.9 the minimality reader says `yes` on FS-58's direct-witness provenance  --  1-minimal: deleting any single vertex leaves a 3-colourable graph
     PASS  PLANT (C.9): FS-58's own stopped-deletion provenance (witness-95) is NOT reported as minimal  --  refusing but NOT 1-minimal: the deletion was stopped at position 363 of 1737
     PASS  C.9 an absent deletion phase reads `unknown`, never `yes`  --  the generator recorded no deletion phase
@@ -53,9 +53,77 @@ fs61 selftest: 7 sections (keys, saturation, outdir, barrier, predicted, atlas, 
     PASS  PLANT (C.4a, wrong-reason guard): a failure at step (i), the exact edge re-derivation disagreeing turns C.4a RED with C.9 = yes  --  the second opinion itself failed at step (i)
     PASS  PLANT (the inference is about ONE file): at a different sha256 the step-(iii) inference is REFUSED, not guessed  --  the frozen second opinion is at sha256 0000000000000000..., not 880f5bc48ef39b4c...: the step-(iii) inference is about THAT file and is refused here
     PASS  the frozen second opinion on disk still has the sha256 the inference is stated for  --  880f5bc48ef39b4c…
-    PASS  the landed set is read from the landing records and the checker's own first line  --  9 of 9 fields landed: [359, 11, 119, 143, 47, 95, 191, 71, 23]
+    PASS  the landed set is read from the landing records and the checker's own first line  --  13 of 14 fields with a refusing ball are landed: [359, 11, 119, 143, 47, 95, 191, 71, 23, 59, 311, 335, 431]
     PASS  PLANT (landing): d=359 with its landing record result mangled is NOT landed  --  a record that does not say CERTIFIED cannot promote a field
     PASS  the stop verification CAN fire: a live writer's artifact digest moves across the sample  --  digest changed while the child was still running
-    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 1978769 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
-DONE selftest: 7 sections, 0 failures
-[selftest: 8.2 s wall on desktop]
+    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 2383403 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+  [ladder]
+NOTE /tmp/tmpkjczfos1/balls.jsonl grew while it was being read (34 -> 48 bytes): its partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it outside this driver's lock.
+    PASS  tier 1's definition is unmoved -- every committed ball record stamped with it depends on that  --  7a520f29e32724da (minted 7a520f29e32724da); 1745 ball records carry it
+    PASS  tier 1b's definition is unmoved -- every committed ball record stamped with it depends on that  --  fb13bdf841cf581d (minted fb13bdf841cf581d); 78 ball records carry it
+    PASS  tier 1c's definition is unmoved -- every committed ball record stamped with it depends on that  --  7e833199a93662b0 (minted 7e833199a93662b0); 48 ball records carry it
+    PASS  tier 2's definition is unmoved -- every committed ball record stamped with it depends on that  --  34763942a9797e27 (minted 34763942a9797e27); 0 ball records carry it
+    PASS  tier 2l's definition is unmoved -- every committed ball record stamped with it depends on that  --  31490e13c24cffa6 (minted 31490e13c24cffa6); 130 ball records carry it
+    PASS  scope: every lattice in the plan has an `Over cap (not asked)` record at the base radius  --  14 in scope at d=23
+    PASS  scope: a lattice whose base ball WAS asked is out of scope, with the verdict as the reason  --  6 of 6 out-of-scope lattices, e.g. asked at R=1.5: Colourable (colouring verified)
+    PASS  the rung selected is the first whose PREDICTED points fit the cap  --  L03b762b2: rungs 1.2:295217, 1.0:142369 -> R=1.2 at cap 600000
+    PASS  PLANT (rung rule): with the cap set just under the top rung's prediction the choice DESCENDS, so the formula is what decides and both outcomes are reachable  --  cap 295216 -> R=1.0, against R=1.2 at cap 600000
+    PASS  a lattice answered at its selected rung is complete  --  Colourable (colouring verified) at R=1.2
+    PASS  PLANT (accounting): the record at the selected rung deleted -> the check names the rung  --  no tier-1b record at R=1.2 (predicted 295217 points, the rung the rule selects)
+    PASS  PLANT (accounting): a record at the right rung but stamped with the WRONG tier does not count  --  no tier-1b record at R=1.2 (predicted 295217 points, the rung the rule selects)
+    PASS  PLANT (descent): an exact over-cap at the top rung with no record below it -> incomplete  --  no tier-1b record at R=1.0 (predicted 142369 points, the rung below R=1.2)
+    PASS  PLANT resolved: with the descent record present the same ladder is complete  --  Refused (solver claim) at R=1.0
+    PASS  PLANT (consistency): `over cap by PREDICTION` at a rung the prediction fits is impossible under the rule, and is caught  --  R=1.2 fits the cap by prediction (295217 points) yet its record is over cap by 'prediction', which the rule cannot produce at an askable rung
+    PASS  the census null phrases are distinct and each is reachable  --  by certificate | by budget: 2 Open lattices, none askable | asked: 1 of 2 Open lattices, no refusal | asked: 1 of 2 Open lattices, no refusal, 1 undecided at the wall
+    PASS  PLANT (phrases): a ball that ran to the wall must NOT read as "asked and not refused" -- it is counted as undecided  --  asked: 1 of 2 Open lattices, no refusal, 1 undecided at the wall
+    PASS  PLANT (phrases): an UNASKED open lattice must never read as asked -- an Over cap record alone keeps the field `by budget`  --  by budget: 2 Open lattices, none askable
+    PASS  B'.1: every record carries predicted beside actual, with A.8's bound applied to the pair  --  ratio 1.0, rungs {'1.2': 295217, '1.0': 142369}
+    PASS  PLANT (A.8): an actual count at twice the prediction is flagged outside the bound  --  ratio 2.0
+    PASS  a quiescent file with a partial final line IS repaired  --  34 bytes -> 24
+    PASS  PLANT (data loss): the same repair against a STALE length leaves the file alone instead of destroying the records appended since  --  34 -> 48 bytes, all 4 lines intact; unguarded it would truncate to 24 bytes and lose the last two records
+    PASS  PLANT resolved: the stale-length read still returns the complete records it could parse  --  ['a', 'b', 'c', 'd']
+    PASS  phase C's committed priority order is a prefix of today's, with every field that has refused since appended and named  --  [359, 11, 119, 143, 47, 95, 191, 71, 23, 59, 239, 311, 335, 431]  (appended since phase C: [59, 239, 311, 335, 431])
+    PASS  PLANT (land order): a field refusing for the first time is APPENDED, never dropped  --  [359, 11, 119, 143, 47, 95, 191, 71, 23, 239]
+  [lock]
+    PASS  the lock EXCLUDES: a writer in another interpreter, stopped at its append, cannot grow the file while a reader holds the lock  --  writer announced itself, then 0.5 s with the file at 24 bytes against 24 before, and the writer alive (pid 2383512)
+    PASS  PLANT resolved: the moment the lock is released the writer lands, and nothing is lost  --  ['a', 'b', 'c']; the writer was blocked 0.51 s inside `append`
+    PASS  PLANT (data loss): with no lock, a writer that appends between the size check and the truncate loses every record it wrote -- the window the guard alone leaves open  --  ['a', 'b'] survive of a, b, c, d: two finished records destroyed
+    PASS  PLANT resolved: through `record_lock` the same writer is outside the read-and-repair, so the partial line is repaired AND the writer's record survives  --  ['a', 'b', 'd']
+  [phaseE]
+    PASS  a DEEPER tier's record counts for the shallower tier it shadows -- without this, a ball re-asked at a deeper tier would read as a shallower tier's gap  --  tier 1c record, tier 1b asking
+    PASS  PLANT: a shallower tier's record does NOT discharge a deeper tier's own obligation  --  tier 1b record, tier 1c asking
+    PASS  a tier that REUSES a shallower tier's lattices counts that tier's balls (tier 2l over tier 1)  --  tier 1 record, tier 2l asking
+    PASS  PLANT: a shallower tier that is NOT reused does not count (the tier-1b rule, unmoved)  --  tier 1 record, tier 1b asking
+    PASS  and settledness is still applied on top of the tier relation: a deeper record that ran to a SMALLER wall than this tier's does not answer it  --  wall 3600 answers tier 1b (600 s); wall 60 does not
+    PASS  tier 2l owns tier 1's lattices (NMAX 180 <= 420) and tier 1 does NOT own tier 2l's  --  nmax 180 in 420: True; nmax 420 in 180: False
+    PASS  PLANT: a lattice from an unknown tier is counted, never silently dropped  --  unknown tier -> in scope
+    PASS  the re-ask record SHADOWS the record it re-asks in the view, while the history keeps both  --  view: tier 1c 'Colourable (colouring verified)'; history: ['1b', '1c']
+    PASS  PLANT (self-erasing check): a scope defined by a verdict empties the moment the work is done, so an accounting read from the VIEW would pass by having lost its subject; `read_records` keeps the history, and the degree tier's own scope is a LATTICE STATE (`Open` or `Refused`) for the same reason -- a lattice that refuses must not drop out of the check that owed it  --  history 1 ball in scope, view 0
+    PASS  a lattice recorded Open inside one recorded Colourable is closed from above, and one already Colourable is left alone  --  [('sub', 'sup')]
+    PASS  PLANT: with the superlattice still Open nothing is closed -- the closure comes from the certificate above, not from the inclusion  --  sup Open -> no closure
+    PASS  a lattice tier 1b skipped as `already asked at its base radius` is still in the degree tier's scope -- a degree tier asks a different ball, not a rung of the same ladder  --  d=155: 1 out of tier-1b scope as already asked, 1 of them in the tier-1c plan
+  [degree]
+    PASS  the degree law g*phi(R)^2 against every asked ball record on disk  --  775 balls: observed/predicted median 1.0000, range 0.715-1.184, 0 outside +-30%
+    PASS  PLANT (the law): dropping the bidisc square -- g*phi(R) instead of g*phi(R)^2 -- is visibly wrong, so the square is doing the work and the control can fail  --  median 0.584 on a 60-ball sample, against 1.0000 for the law
+    PASS  the rule reaches all three arms as the cap moves, so none of them is unreachable  --  g=36, covolume 5.154e-05: cap 2,000,000 -> R14 (R=1.666, 1,473,884 points); cap 600,000 -> Rcap; cap 120,000 -> overcap
+    PASS  PLANT (the degree target decides the radius): raising the target raises the radius it picks  --  degree 14 -> R=1.666; degree 20 -> R=2.483
+    PASS  a lattice can never exceed its own generator count in degree, so the target is unreachable at g <= target; and the search bound R <= 12 makes the answer CONSERVATIVE just above it, which under-asks and never over-asks  --  g=14 cannot reach degree 14 at any radius (degree rises to g and stops); g=15 reads 13.45 at the search bound R = 12 and is reported unreachable; g=20 reaches it at R = 3.887
+    PASS  the rule aims below the point cap by the largest overshoot ever recorded on a ball of at least 100,000 points, so the EXACT count does not overflow the cap  --  margin 1.11, worst recorded actual/predicted on such a ball 1.1078
+    PASS  PLANT (the margin): aiming AT the cap would overflow it at that worst ratio -- which is what the first ball of this tier did, returning `Over cap (not asked)` instead of an answer  --  2,000,000 x 1.1078 = 2,215,659 points, above the cap
+    PASS  the symmetry break pins an edge at the origin when the origin has one  --  pinned (0, 5), units [1, 17]
+    PASS  PLANT (isolated origin): with NO edge at the origin the break pins some other edge instead of indexing an empty array -- the IndexError that killed the first tier-2l run  --  pinned (3, 4), units [10, 14]
+    PASS  PLANT (no edges at all): the origin's colour alone, and no edge pin  --  ([1], None)
+    PASS  the scope is `Open` OR `Refused`, so answering a lattice does not remove it from the accounting's subject  --  degree_plan keeps a Refused lattice in scope
+  [onset]
+    PASS  the rule aims above the HIGHEST-degree refusal on the lattice  --  picked k|ball1.2892 of three records
+    PASS  PLANT (the scope rule): a lattice whose records hold no refusal is REFUSED an ask -- it would be a census ask wearing this tier's id, at a radius chosen for the wrong reason  --  two Unknown/Colourable records -> None; no records at all -> None
+    PASS  the lift: above a degree-14 refusal the rule asks arm R18 at the degree-18 radius  --  R = 1.5181 (710,638 points), degree 18.000, above 14.0
+    PASS  PLANT (the lift rule): aimed above a refusal that is ALREADY denser than anything the cap allows, the rule asks NOTHING rather than stepping down the phase diagram toward the hardness peak  --  from degree 24.0 the best available is 23.446 at the cap -> no-lift; "the highest predicted degree available under the 2,000,000-point cap is 23.446 (R = 1.9156), which does not exceed the refusing ball's 24.000: this tier only ever asks UPWARD"
+    PASS  the Rcap arm is reachable: above a degree-20 refusal the degree-18 radius does not lift, so the rule falls through to the largest ball under the cap, which does  --  from degree 20.0 -> arm Rcap, R = 1.9156, degree 23.446
+    PASS  a lifting ask is always at a strictly LARGER radius than the refusal it is aimed above, which is what makes its refusal free by nesting  --  checked at from-degrees 8, 11, 14, 17
+    PASS  every lattice the plan holds really carries a refusal, at a field with no certificate  --  1 lattice(s) in scope: d=239 L3e1c94c6 above R=1.2892
+    PASS  PLANT (the certified-field rule): no lattice of a field that is already `Landed (certified)` is in scope, however many refusing balls it carries  --  13 certified field(s) carry refusing balls and contribute 0 items
+    PASS  the rule TERMINATES: a lattice this tier has already asked is discharged by its own record, not re-demanded at a higher radius above the refusal that record created  --  1 of 1 in-scope lattice(s) discharged: d=239 L3e1c94c6 this tier has already asked its one ball on this lattice, at R = 1.5181 -> Refused (solver claim)
+    PASS  PLANT (termination): the tier aims above refusals from OTHER tiers only, so its own refusing record can never become the thing it is asked to beat  --  onset_plan filters the lattice's records by tier before choosing what to aim above
+DONE selftest: 12 sections, 0 failures
+[selftest: 9.4 s wall on desktop]

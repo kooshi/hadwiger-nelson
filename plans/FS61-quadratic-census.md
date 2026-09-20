@@ -1286,3 +1286,51 @@ FS-60 now consume. `CLAUDE.md`, `plans/FRONTIER-STUBS.md` and the stubs were not
 `tools/fs61_recount_landings.py`, a standalone second opinion on the certification gate that reports counts rather
 than exit statuses, with five planted faults each seen to fire. Machine: the desktop, one heavy job at a time,
 ≈ 3 h 15 m.
+
+### §R-F239 — the certification-onset ask at `d = 239` (2026-09-20, closed; the sixth implementer)
+
+**What was asked.** The owner adopted the fifth implementer's priced proposal: one denser ball of `d = 239`'s
+*same* refusing lattice, under a new tier id, aimed by the census's own degree phase diagram — which says a denser
+ball of a refusing lattice refuses *faster* — purely to hand `land` a cheaper certificate source. Registered
+before it ran, **P-up: the ball refuses in under 120 s AND core round 0 leaves fewer than 5,000 points**; loses if
+either half fails. Full record: `data/fs61/records/phase-F-239.md`.
+
+**Tier `1u`, minted.** *One ball per lattice that already refuses at a field with no certificate, at the radius
+where the predicted average degree reaches 18, and only where that strictly exceeds the refusing ball's own
+degree.* It cannot change a field's state (balls about one centre are nested, so a bigger ball of a refusing
+lattice refuses by inclusion; the driver treats a `Colourable` verdict there as a halt) and it is placed between
+`1c` and `2l` in the depth order so the census table's headline depth stays `2l`. Two refusals are planted and
+each seen to fire — a lattice with no `Refused` record is refused an ask, and a radius that does not *raise* the
+degree is refused — plus a third the accounting found minutes after the first ask landed: **the rule was
+non-terminating**, because the ball it asks becomes the lattice's highest refusal and demanded a still higher ask
+up to the cap. Fixed by discharging a lattice on its own tier-`1u` record, with its own selftest row.
+`selftest --section onset`: **10 rows, 0 failures**; `table --check` at tier `2l`: **40 fields, 0 defects**.
+
+**P-up LOST, on both halves — and the route WON.** The ball (`R = 1.5181`, 710,957 points, 6,396,358 edges,
+average degree 17.994 against 18.0 predicted) refused in **197.15 s**, not under 120; core round 0 left **49,576**
+points, not under 5,000. But round 0's output is the wrong statistic: against the old ball of the same lattice,
+the refusal is 2.0× cheaper, round 0 2.5× cheaper, and the **tail an order of magnitude cheaper** — stage 1
+*finished at its own fixpoint* in 76 rounds and 721 s at **4,917 points**, where the old ball was stopped twice
+after 52 rounds and 4,598 s at 8,336 and still falling by ~25 points a round; stage 2 then deleted to **2,451
+points in about three minutes**. **Twenty-one minutes of wall clock against 103.**
+
+**`d = 239` is NOT LANDED, and it is one gate run away.** `python3 tools/fs61_census.py land 239 --tier 1u`
+resumes at deletion position 903 with 2,451 points, emits and runs C.1–C.9; the witness would sit between
+`d = 431`'s 1,031 points and `d = 59`'s 1,739, so a proof in the tens of megabytes rather than the hundreds the
+old route promised. Certified it is a fifth new exact value, `χ(ℚ(√239)²) = 4`, and fourteen of forty.
+
+**Two reading errors, the same shape, one hour apart, both mine.** Round 0's output was taken as the state of the
+run and the landing stopped on the owner's first clause — while six further rounds were already fsynced in the
+same file. Then the core-round fixpoint was taken as the state and the landing stopped on his second clause —
+while four deletion checkpoints in the same file showed the kept set at **2,451, under his 3,000 target, inside
+his 45 minutes**. *Before acting on a checkpoint, print the whole of it, not the field you came to look at.* Also
+recorded: `kill -TERM` on the `land` parent left its `extract` child **running and re-parented**, twice, caught
+both times by a `/proc` walk matching an argv element — a kill is verified against the thing you wanted stopped,
+never against the pid you happened to hold.
+
+**Citation corrected repo-wide** (the owner's, against the held PDF; the error originated in this plan's §1
+table): the dyadic upper bound `χ ≤ 4` for `d ≡ 3 (mod 8)` is **`[Fischer1990]` Thm 10(i)**, not Thm 9, which is
+the additive 3-colouring for `N ≢ 2 (mod 3)`. The driver's string is now one function, `upper_bound_source`, so
+the two affected witness READMEs (`d = 11`, `d = 59`) were regenerated with `land-readme` — no solver, no
+certificate byte moved. Landing records written earlier keep the old string in their C.7 **transcript**, which is
+what a transcript is for. Uses of Thm 9 for `χ = 3` are correct and untouched.

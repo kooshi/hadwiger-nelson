@@ -33,7 +33,7 @@ Every refusing lattice in the census has an odd cycle of length at most 9, and n
 
 **Not a registered reading — a finding of this phase**, and the one that re-aimed its own last ask. Every earlier tier of this census chose which ball to put to a solver by its **size**, under a point cap. That was the wrong quantity. What separates a ball the solver decides from one it does not is its **average degree**, `2·edges / points`.
 
-**Population: all 774 asked ball records on disk that carry both a point count and an edge count** — the forty census fields *and* the seven control fields, because the question is about the instrument and not about the family.
+**Population: all 775 asked ball records on disk that carry both a point count and an edge count** — the forty census fields *and* the seven control fields, because the question is about the instrument and not about the family.
 
 | average degree | 3-colourable | undecided at the wall | refused |
 |---|---|---|---|
@@ -42,18 +42,18 @@ Every refusing lattice in the census has an odd cycle of length at most 9, and n
 | **6–8** | 106 | 14 | 3 |
 | **8–10** | 114 | 15 | 6 |
 | **10–14** | 88 | 11 | 17 |
-| **14–20** | 46 | 2 | 16 |
+| **14–20** | 46 | 2 | 17 |
 | **≥ 20** | 20 | 0 | 7 |
 
-**No ball below average degree 6.595 has ever refused** (`d = 119`, `L8a8b1603`, R = 1.2), over 49 refusing balls. The 81 undecided balls have median degree **6.51** and lie in 4.70–14.04.
+**No ball below average degree 6.595 has ever refused** (`d = 119`, `L8a8b1603`, R = 1.2), over 50 refusing balls. The 81 undecided balls have median degree **6.51** and lie in 4.70–14.04.
 
-**Restricted to balls of at least 200,000 points** (n = 273), which is where the census's hard cases live: 48 are at degree ≥ 14 and **46 of them decided** — 30 coloured, 16 refused, **2 undecided** — the slowest in 1834 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
+**Restricted to balls of at least 200,000 points** (n = 274), which is where the census's hard cases live: 49 are at degree ≥ 14 and **47 of them decided** — 30 coloured, 17 refused, **2 undecided** — the slowest in 1834 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
 
 ### The law that makes it actionable
 
 A ball of radius `R` on a lattice holding `g` unit vectors has predicted average degree **`g·φ(R)²`**, where `φ(R) = [2R²·arccos(1/(2R)) − √(4R²−1)/2] / (πR²)` is the fraction of a radius-`R` disc's area that its unit translate covers — **squared**, because a ball here is a *bidisc*, one disc per real embedding of the field. Each point has `g` candidate neighbours and each lands inside the ball with probability `φ(R)²`.
 
-**Control, on the same 774 balls: observed / predicted has median 1.0000 and range 0.715–1.184, with 0 outside ±30 %.** The plant: dropping the bidisc square — `g·φ(R)` in place of `g·φ(R)²` — reads a median of 0.584 on a 60-ball sample, so the square is what makes the law fit and the control is able to fail.
+**Control, on the same 775 balls: observed / predicted has median 1.0000 and range 0.715–1.184, with 0 outside ±30 %.** The plant: dropping the bidisc square — `g·φ(R)` in place of `g·φ(R)²` — reads a median of 0.584 on a 60-ball sample, so the square is what makes the law fit and the control is able to fail.
 
 ### What it cost, and what it bought
 

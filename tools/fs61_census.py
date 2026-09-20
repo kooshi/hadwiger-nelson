@@ -1841,6 +1841,89 @@ def selftest_degree(rnd):
     return rows
 
 
+def selftest_onset(rnd):
+    import inspect
+    """Tier 1u's two refusals, each shown to fire, plus the plan on the real records.
+
+    The tier exists to hand `land` a cheaper certificate source, so its whole content is WHICH ball it declines to
+    ask.  Both declines are planted here; a rule whose refusal has never been seen to fire is not a rule."""
+    rows = []
+    tier = tier_def('1u')
+    target, cap = tier['target_degree'], tier['point_cap']
+    g, cov = 52, 7.376543209876543e-05                   # d = 239's L3e1c94c6, the tier's only real subject
+
+    # (1) THE SCOPE RULE: no `Refused` record on the lattice, no ask.
+    refusing = {'key': 'k|ball1.2892', 'verdict': 'Refused (solver claim)', 'R': 1.2892, 'predicted_degree': 14,
+                'points': 369885, 'solve_seconds': 403.01}
+    unknown = {'key': 'k|ball1.2', 'verdict': 'Unknown (budget)', 'R': 1.2, 'predicted_degree': 9.9, 'points': 277893}
+    colourable = {'key': 'k|ball1.0', 'verdict': 'Colourable (colouring verified)', 'R': 1.0, 'predicted_degree': 5.5}
+    rows.append(('the rule aims above the HIGHEST-degree refusal on the lattice',
+                 onset_refusing_ball([colourable, refusing, unknown]) is refusing,
+                 f'picked {onset_refusing_ball([colourable, refusing, unknown])["key"]} of three records'))
+    rows.append(('PLANT (the scope rule): a lattice whose records hold no refusal is REFUSED an ask -- it would be '
+                 'a census ask wearing this tier\'s id, at a radius chosen for the wrong reason',
+                 onset_refusing_ball([colourable, unknown]) is None and onset_refusing_ball([]) is None,
+                 'two Unknown/Colourable records -> None; no records at all -> None'))
+
+    # (2) THE LIFT RULE: a radius that does not raise the degree is refused.
+    R, arm, dg, why = onset_radius(g, cov, 14.0, target, cap)
+    rows.append((f'the lift: above a degree-14 refusal the rule asks arm R18 at the degree-{target} radius',
+                 arm == 'R18' and abs(dg - target) < 1e-9 and R is not None and R > 1.2892,
+                 f'R = {R:.4f} ({predicted_points(cov, round(R, 4)):,} points), degree {dg:.3f}, above 14.0'))
+    Rn, an, dn, wn = onset_radius(g, cov, 24.0, target, cap)
+    rows.append(('PLANT (the lift rule): aimed above a refusal that is ALREADY denser than anything the cap allows, '
+                 'the rule asks NOTHING rather than stepping down the phase diagram toward the hardness peak',
+                 an == 'no-lift' and Rn is None and dn < 24.0,
+                 f'from degree 24.0 the best available is {dn:.3f} at the cap -> {an}; "{wn}"'))
+    # and the middle case, so `Rcap` is reachable too and `no-lift` is not simply "the cap is small"
+    Rc, ac, dc, _ = onset_radius(g, cov, 20.0, target, cap)
+    rows.append(('the Rcap arm is reachable: above a degree-20 refusal the degree-18 radius does not lift, so the '
+                 'rule falls through to the largest ball under the cap, which does',
+                 ac == 'Rcap' and dc > 20.0,
+                 f'from degree 20.0 -> arm {ac}, R = {Rc:.4f}, degree {dc:.3f}'))
+    rows.append(('a lifting ask is always at a strictly LARGER radius than the refusal it is aimed above, which is '
+                 'what makes its refusal free by nesting',
+                 all(onset_radius(g, cov, f, target, cap)[0] > radius_for_degree(g, f)
+                     for f in (8.0, 11.0, 14.0, 17.0)),
+                 'checked at from-degrees 8, 11, 14, 17'))
+
+    # (3) the plan on the real records: every item in scope really has a refusal, and its field really has no
+    #     certificate.  A real-data control, not a fixture.
+    plan = onset_plan('1u')
+    landings = load_jsonl(FS61 / 'landings.jsonl')
+    ok = True
+    for it in plan:
+        per = [b for b in load_jsonl(field_dir(it['D']) / 'balls.jsonl').values() if b['lattice'] == it['key']]
+        ok &= (onset_refusing_ball(per) is not None) and not certified_field(it['D'], landings)
+    rows.append(('every lattice the plan holds really carries a refusal, at a field with no certificate',
+                 ok, f'{len(plan)} lattice(s) in scope: '
+                     + (', '.join(f'd={it["D"]} {it["id"]} above R={it["from_R"]}' for it in plan) or 'none')))
+    certified = [D for D in FAMILY_500 if certified_field(D, landings)]
+    rows.append(('PLANT (the certified-field rule): no lattice of a field that is already `Landed (certified)` is '
+                 'in scope, however many refusing balls it carries',
+                 not any(it['D'] in certified for it in plan),
+                 f'{len(certified)} certified field(s) carry refusing balls and contribute 0 items'))
+
+    # (4) TERMINATION.  A ball this tier asks refuses (it contains a refusing ball), so it becomes the lattice's
+    #     highest refusal.  Without the discharge rule the plan would demand a still higher ask, and that one
+    #     another, up to the cap -- `table --check` reporting a gap for ever on work that was done.  This really
+    #     happened, minutes after the first ask landed, and the accounting is what caught it.
+    asked = [it for it in plan if it['arm'] == 'asked']
+    rows.append(('the rule TERMINATES: a lattice this tier has already asked is discharged by its own record, not '
+                 're-demanded at a higher radius above the refusal that record created',
+                 all(it.get('already') for it in asked) and
+                 all(it['arm'] != 'asked' or it['R'] is not None for it in plan),
+                 f'{len(asked)} of {len(plan)} in-scope lattice(s) discharged: '
+                 + ('; '.join(f'd={it["D"]} {it["id"]} {it["why"]}' for it in asked) or 'none yet')))
+    rows.append(('PLANT (termination): the tier aims above refusals from OTHER tiers only, so its own refusing '
+                 'record can never become the thing it is asked to beat',
+                 onset_refusing_ball([{'key': 'k|ball1.5181', 'verdict': 'Refused (solver claim)', 'R': 1.5181,
+                                       'predicted_degree': 18}]) is not None
+                 and "str(b.get('tier')) != str(tid)" in inspect.getsource(onset_plan),
+                 'onset_plan filters the lattice\'s records by tier before choosing what to aim above'))
+    return rows
+
+
 def s_scope_src():
     import inspect
     return inspect.getsource(degree_plan)
@@ -1930,7 +2013,7 @@ def selftest_lock(rnd):
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
             'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas,
             'land': selftest_land, 'ladder': selftest_ladder, 'lock': selftest_lock,
-            'phaseE': selftest_phaseE, 'degree': selftest_degree}
+            'phaseE': selftest_phaseE, 'degree': selftest_degree, 'onset': selftest_onset}
 
 
 def cmd_selftest(section=None):
@@ -2805,7 +2888,11 @@ def propagate_refusal(D, filt, balls):
 #
 # TIER_ORDER is a code constant and NOT part of any tier's definition -- putting it in tiers.json would change tier 1's
 # `_sha256`, which 343 committed ball records carry.
-TIER_ORDER = {'1': 10, '1b': 15, '1c': 17, '2l': 18, '2': 20}
+# Tier 1u sits between 1c and 2l on purpose, and NOT above 2l: `deepest_tier_present` reads the table's headline
+# depth off this map, and 1u is not a census depth -- it re-asks ONE lattice that already refuses, for a cheaper
+# certificate, and asks nothing new of any field.  A table that called itself "at tier 1u" would claim a depth
+# nobody ran.  (2l moved 18 -> 19 to make room; only the ORDER of these numbers is ever read.)
+TIER_ORDER = {'1': 10, '1b': 15, '1c': 17, '1u': 18, '2l': 19, '2': 20}
 ONSET_WALL = 120.0          # phase B's wall for a follow-up ask below a refusal: the band under the threshold stalls
 
 # Which SHALLOWER tiers' ball records a tier may count as its own work.  Tier 2l's lattices (NMAX = 420) contain tier
@@ -3433,6 +3520,214 @@ def cmd_degree_ask(tid='1c', fields=None, jobs=None, budget=None, show_plan=Fals
     return errs
 
 
+# ============================================== tier 1u: the certification-onset ask, upward in degree (2026-09-20)
+#
+# What this is for, in one sentence: at `d = 239` a ball that REFUSES is not the same thing as a ball that CERTIFIES,
+# and the census's degree phase diagram says which way to move.  Its refusing ball sits at average degree 14, refuses
+# in 403 s, and core round 0 of the extraction leaves 46,338 of its 369,885 points -- after 52 rounds the kept set was
+# still 8,336, a certificate of hundreds of megabytes away.  On a FIXED lattice a denser ball refuses faster (47:
+# 104 s at R = 1.2, under a second at 1.5) and collapses further (311: 1.14 M points at degree 14, refused in 18 s,
+# round 0 left 738).  So this tier re-asks a refusing lattice ONE ball higher up the phase diagram, purely to hand
+# `land` a cheaper certificate source.  It cannot change any field's state: balls about one centre on one lattice are
+# nested, so a bigger ball of a refusing lattice refuses by inclusion, and `Refusal claimed` is already what the
+# census says.  Two things the rule REFUSES to do, each with a planted control in `selftest_onset`:
+#   * ask a lattice with no `Refused` record -- that would be a census ask wearing this tier's id, at a radius chosen
+#     for the wrong reason (this tier aims ABOVE a known refusal, tier 1c aims AT the decidable band);
+#   * ask at a radius whose predicted degree does not EXCEED the refusing ball's -- the whole point is to move up,
+#     and a lower-degree ball of the same lattice steps toward the hardness peak at degree 4-6, where in 774 asked
+#     balls nothing has ever refused.
+
+def onset_refusing_ball(balls_of_lattice):
+    """The refusing ball this tier aims above: the one with the LARGEST predicted degree among the lattice's
+    `Refused` records, or None when the lattice has none -- in which case the tier refuses to ask it.
+
+    Largest, not smallest: the rule must lift the degree above every refusal already on record, or it would re-ask a
+    ball whose answer is in hand.  Pure, so both of its outcomes can be shown on fixtures."""
+    ref = [b for b in balls_of_lattice if str(b.get('verdict', '')).startswith('Refused')]
+    if not ref:
+        return None
+    return max(ref, key=lambda b: (b.get('predicted_degree') or 0.0, b.get('R') or 0.0))
+
+
+def onset_radius(g, cov, from_degree, target, cap, overshoot=DEGREE_OVERSHOOT):
+    """The onset rule's decision for one lattice, as a pure function of four numbers.
+
+    `g` generators, `cov` covolume, `from_degree` the predicted degree of the refusing ball being aimed above.
+    Returns (R, arm, predicted_degree, why) with arm in {'R18', 'Rcap', 'no-lift'}; on 'no-lift' R is None and the
+    fourth element says, in words, which degree was available and which it had to beat."""
+    cand = []
+    R18 = radius_for_degree(g, target)
+    if R18 is not None and predicted_points(cov, R18) <= cap / overshoot:
+        cand.append((R18, 'R18', float(target)))
+    Rcap = radius_for_points(cov, cap / overshoot)
+    cand.append((Rcap, 'Rcap', degree_of(g, Rcap)))
+    for R, arm, dg in cand:
+        if dg > from_degree + 1e-9:
+            return R, arm, dg, (f'predicted degree {dg:.3f} at R = {R:.4f}, above the refusing ball\'s '
+                                f'{from_degree:.3f}')
+    best = max(dg for _, _, dg in cand)
+    return None, 'no-lift', best, (f'the highest predicted degree available under the {cap:,}-point cap is '
+                                   f'{best:.3f} (R = {Rcap:.4f}), which does not exceed the refusing ball\'s '
+                                   f'{from_degree:.3f}: this tier only ever asks UPWARD')
+
+
+def onset_plan(tid='1u', fields=None):
+    """One item per in-scope lattice: which radius the onset rule asks, by which arm, and above which refusal.
+
+    Pure apart from reading records, and called by BOTH the runner and `table --check`, so the check re-derives the
+    rule from the covolume, the generator count and the cap rather than trusting the run that wrote the records."""
+    tier = tier_def(tid)
+    target, cap = tier['target_degree'], tier['point_cap']
+    landings = load_jsonl(FS61 / 'landings.jsonl')
+    items = []
+    for D in (fields if fields is not None else FAMILY_500):
+        if certified_field(D, landings):
+            continue                      # a field with a certificate needs no cheaper certificate source
+        lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+        per = collections.defaultdict(list)
+        for b in load_jsonl(field_dir(D) / 'balls.jsonl').values():
+            per[b['lattice']].append(b)
+        for key, r in lat.items():
+            # A ball this tier asks REFUSES (it contains a refusing ball), so it becomes the lattice's highest
+            # refusal and would demand a still higher ask, and that one another, up to the cap: the rule would eat
+            # its own tail and `table --check` would report a gap for ever.  Found by running the check right after
+            # the first ask landed, which is what the check is for.  The definition says ONE ball per lattice, so
+            # the tier aims above refusals from OTHER tiers, and a lattice it has already asked is DISCHARGED.
+            others = [b for b in per.get(key, []) if str(b.get('tier')) != str(tid)]
+            src = onset_refusing_ball(others)
+            if src is None:
+                continue                  # THE SCOPE RULE: no refusal on record, no ask (selftest_onset plants it)
+            g, cov = r['size'], r['covolume']
+            if not cov:
+                continue
+            mine = [b for b in per.get(key, []) if str(b.get('tier')) == str(tid)]
+            if mine:
+                items.append({'D': D, 'key': key, 'id': r['id'], 'lattice': r, 'g': g, 'covolume': cov,
+                              'R': mine[0]['R'], 'arm': 'asked', 'already': True,
+                              'predicted_degree': mine[0].get('predicted_degree'),
+                              'predicted_points': mine[0].get('predicted_points'),
+                              'radius_at_cap': round(radius_for_points(cov, cap / DEGREE_OVERSHOOT), 4),
+                              'from_R': src['R'], 'from_degree': round(float(src.get('predicted_degree') or
+                                                                             degree_of(g, src['R'])), 3),
+                              'from_points': src.get('points'), 'from_solve_seconds': src.get('solve_seconds'),
+                              'from_key': src['key'],
+                              'why': f'this tier has already asked its one ball on this lattice, at '
+                                     f'R = {mine[0]["R"]} -> {mine[0]["verdict"]}'})
+                continue
+            frm = src.get('predicted_degree')
+            if frm is None:               # a pre-degree-tier refusal: recompute its predicted degree from the law
+                frm = degree_of(g, src['R'])
+            R, arm, dg, why = onset_radius(g, cov, float(frm), target, cap)
+            items.append({'D': D, 'key': key, 'id': r['id'], 'lattice': r, 'g': g, 'covolume': cov,
+                          'R': None if R is None else round(R, 4), 'arm': arm, 'already': False,
+                          'predicted_degree': round(dg, 3),
+                          'predicted_points': None if R is None else predicted_points(cov, round(R, 4)),
+                          'radius_at_cap': round(radius_for_points(cov, cap / DEGREE_OVERSHOOT), 4),
+                          'from_R': src['R'], 'from_degree': round(float(frm), 3),
+                          'from_points': src.get('points'), 'from_solve_seconds': src.get('solve_seconds'),
+                          'from_key': src['key'], 'why': why})
+    items.sort(key=lambda it: (it['arm'] == 'no-lift', it['predicted_points'] or 1 << 60))
+    return items
+
+
+def cmd_onset_ask(tid='1u', fields=None, jobs=1, budget=None, show_plan=False):
+    """Tier 1u: one denser ball per refusing-but-uncertified lattice, to hand `land` a cheaper certificate source.
+
+    Resume = the identical command; a settled record at the chosen radius is skipped."""
+    import multiprocessing as mp
+    tier = tier_def(tid)
+    cap, wall = tier['point_cap'], tier['solve_wall']
+    items = onset_plan(tid, fields)
+    todo = []
+    for it in items:
+        if it['arm'] in ('no-lift', 'asked'):
+            continue
+        done = load_jsonl(field_dir(it['D']) / 'balls.jsonl')
+        prev = done.get(f'{it["key"]}|ball{it["R"]}')
+        if prev is not None and _record_answers(prev, tid, tier):
+            continue
+        M, H = parse_key(it['key'])
+        gens = [list(v) for v in saturation(it['D'], M, H)]
+        if sha_vectors([tuple(v) for v in gens]) != it['lattice']['generators_sha256']:
+            die(f'lattice {it["id"]}: the saturation of its key does not match the recorded generators_sha256', 1)
+        todo.append((it, (it['D'], it['key'], gens, it['R'], cap, wall, tid, tier['_sha256'],
+                          it['predicted_points'])))
+    print(f'fs61 onset-ask tier={tid}: {len(items)} refusing-but-uncertified lattices in scope over '
+          f'{len({it["D"] for it in items})} field(s); {len(todo)} ball(s) to ask, '
+          f'{sum(1 for it in items if it["arm"] == "no-lift")} refused for want of a degree lift, '
+          f'{sum(1 for it in items if it["arm"] == "asked")} already asked by this tier; '
+          f'cap {cap:,}, wall {wall:.0f} s', flush=True)
+    for it in items:
+        print(f'  d={it["D"]:>3} {it["id"]} g={it["g"]:>3} above its refusal at R={it["from_R"]} '
+              f'(degree {it["from_degree"]}, {it["from_points"]} points, {it["from_solve_seconds"]} s) -> '
+              + (f'arm {it["arm"]} R={it["R"]} degree {it["predicted_degree"]} '
+                 f'points {it["predicted_points"]:,}' if it['arm'] not in ('no-lift', 'asked')
+                 else 'NO ASK' if it['arm'] == 'no-lift' else 'ALREADY ASKED')
+              + f'  [{it["why"]}]', flush=True)
+    if show_plan:
+        print(f'DONE onset-ask --plan tier={tid}: {len(todo)} ball(s) the rule would ask', flush=True)
+        return []
+    # the no-lift records: one per lattice the rule refuses to ask, carrying both degrees, so `table --check` sees an
+    # answer where the rule declined rather than a gap it cannot tell from work nobody did.
+    for it in items:
+        if it['arm'] != 'no-lift':
+            continue
+        out = field_dir(it['D']) / 'balls.jsonl'
+        k = f'{it["key"]}|ball{it["radius_at_cap"]}'
+        done = load_jsonl(out)
+        if k in done and _record_answers(done[k], tid, tier):
+            continue
+        append(out, {'key': k, 'lattice': it['key'], 'id': it['id'], 'D': it['D'], 'shape': 'ball',
+                     'R': it['radius_at_cap'], 'tier': tid, 'tier_sha256': tier['_sha256'], 'machine': MACHINE,
+                     'wall': wall, 'cap': cap, 'predicted_points': cap, 'verdict': 'No lift (not asked)',
+                     'claim_scope': 'float reading', 'degree_arm': 'no-lift', 'generators': it['g'],
+                     'covolume': it['covolume'], 'predicted_degree': it['predicted_degree'],
+                     'onset_above_key': it['from_key'], 'onset_above_degree': it['from_degree'],
+                     'degree_note': it['why']})
+    if not todo:
+        print(f'DONE onset-ask tier={tid}: nothing to ask', flush=True)
+        return []
+    counts, errs, t0 = collections.Counter(), [], time.time()
+    with mp.get_context('fork').Pool(min(jobs, len(todo))) as P:
+        for rec, model in P.imap_unordered(_ball_worker, [w for _, w in todo]):
+            it = next(i for i, w in todo if w[0] == rec['D'] and f'{w[1]}|ball{w[3]}' == rec['key'])
+            act = (2 * rec['edges'] / rec['points']) if isinstance(rec.get('points'), int) and rec.get('edges') else None
+            rec = dict(rec, degree_arm=it['arm'], generators=it['g'], covolume=it['covolume'],
+                       predicted_degree=it['predicted_degree'],
+                       actual_degree=round(act, 3) if act else None,
+                       degree_over_predicted=round(act / it['predicted_degree'], 4) if act else None,
+                       onset_above_key=it['from_key'], onset_above_degree=it['from_degree'],
+                       onset_above_R=it['from_R'], onset_above_points=it['from_points'],
+                       onset_above_solve_seconds=it['from_solve_seconds'])
+            if model is not None:
+                with gzip.open(model_path(rec['D'], rec['model_sha256']), 'wb') as f:
+                    f.write(model)
+            append(field_dir(rec['D']) / 'balls.jsonl', rec)
+            counts[rec['verdict']] += 1
+            if rec['verdict'] == 'ERROR':
+                errs.append((rec['key'], rec.get('error')))
+                defect(f'onset-ask d={rec["D"]} {rec["key"]}: {rec.get("error")}')
+            if rec['verdict'] == 'Colourable (colouring verified)':
+                # A ball that CONTAINS a refusing ball of the same lattice cannot be 3-colourable.  If one ever is,
+                # the nesting assumption or an edge list is wrong, and it is a halt, not a row.
+                defect(f'onset-ask d={rec["D"]} {rec["key"]}: a ball that contains the refusing ball at '
+                       f'R={it["from_R"]} came back 3-COLOURABLE. Balls about one centre are nested, so this '
+                       f'contradicts the refusal on record. HALT.')
+                errs.append((rec['key'], 'colourable superset of a refusing ball'))
+            pts_s = f'{rec["points"]:,}' if isinstance(rec.get('points'), int) else str(rec.get('points'))
+            print(f'  d={rec["D"]:>3} {rec["id"]} R={rec["R"]} arm={it["arm"]} {pts_s} points '
+                  f'{rec.get("edges", "-")} edges degree {rec.get("actual_degree")} (predicted '
+                  f'{it["predicted_degree"]}, predicted points {it["predicted_points"]:,}) -> {rec["verdict"]} '
+                  f'[{rec.get("solve_seconds")} s, peak {rec.get("rss_peak_kb", 0) / 1048576:.2f} GB]', flush=True)
+            if budget and time.time() - t0 > budget:
+                print(f'  budget {budget} s reached: stopping (resume = re-run this command)', flush=True)
+                P.terminate()
+                break
+    print(f'DONE onset-ask tier={tid}: ' + ', '.join(f'{v} {k}' for k, v in sorted(counts.items()))
+          + f'; {len(errs)} defects; {(time.time() - t0) / 60:.1f} min', flush=True)
+    return errs
+
+
 # ================================================================ phase E.1b: tier 2l, deeper lattices at the same cap
 def colourability_closures(filt, pairs):
     """The (sub, sup) inclusions where a lattice recorded `Open` sits inside one recorded `Colourable`, so the Open
@@ -3695,7 +3990,22 @@ def tier_accounting(D, tid, lat, filt, balls):
     checked against its base radius, which is what phase B's B.1 asked for."""
     tier = tier_def(tid)
     bad = []
-    if 'target_degree' in tier:
+    if tier.get('ask_rule') == 'onset':
+        # Tier 1u's obligation: every refusing-but-uncertified lattice has a record at the radius the ONSET rule
+        # picks -- re-derived here, never read back from the run.  A lattice the rule refuses to ask (no degree
+        # lift available) owes a `No lift (not asked)` record at the cap radius, so "the rule declined" and "nobody
+        # ran it" are different rows rather than the same silence.
+        for item in onset_plan(tid, fields=[D]):
+            if item['already']:
+                continue                  # this tier asked its one ball here; the record IS the answer
+            R = item['R'] if item['arm'] != 'no-lift' else item['radius_at_cap']
+            rec = balls.get(f'{item["key"]}|ball{R}')
+            if rec is None or not _tier_counts(rec, tid):
+                bad.append((D, f'{item["id"]} tier-{tid} onset ask missing at R={R}'))
+                defect(f'table --check d={D}: lattice {item["id"]} refuses at R={item["from_R"]} and has no '
+                       f'tier-{tid} record at R={R}, the radius the onset rule selects (arm {item["arm"]}, '
+                       f'predicted degree {item["predicted_degree"]})')
+    elif 'target_degree' in tier:
         # A degree tier's obligation: every in-scope lattice has a record at the radius the RULE picks -- re-derived
         # here from the covolume, the generator count and the cap, never read back from the run that wrote it.  A
         # lattice already decided at or above that radius is discharged by that decision and says so.
@@ -3739,7 +4049,11 @@ def cmd_table(check=False, tid=None):
          f'**The depth this table is at: tier `{tid}`** — the deepest tier with ball records, read from the records '
          f'themselves. Tier definitions live in `data/fs61/tiers.json` and never change after their first record:',
          ''] + [f'* **tier `{t}`** — {T[t]["name"]}: lattices to `NMAX = {T[t]["nmax"]}`, '
-                + (f'one ball per lattice at the radius where the predicted average degree reaches '
+                + (f'one ball per refusing-but-uncertified lattice at the radius where the predicted average degree '
+                   f'reaches {T[t]["target_degree"]}, and only where that strictly EXCEEDS the degree of the '
+                   f'refusing ball it is aimed above'
+                   if T[t].get('ask_rule') == 'onset' else
+                   f'one ball per lattice at the radius where the predicted average degree reaches '
                    f'{T[t]["target_degree"]} (floor {T[t]["floor_degree"]})'
                    if T[t].get('target_degree') else f'radii {T[t].get("ladder_radii") or T[t]["radii"]}')
                 + f', point cap {T[t]["point_cap"]:,}, solve wall '
@@ -4226,8 +4540,7 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     print(f"    {'C.6 3-adic barrier':22s}        {'PASS' if nb else 'FAIL'}  {nb} of {len(edges)} edges have a "
           f"direction with 3 in its reduced denominator", flush=True)
     L, Lp = fr['L'], fr['L_prime']
-    src = ('the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9)' if Lp == 2 else
-           f'the residue plane at {Lp} ([Moorhouse2010] Thm 8.1)')
+    src = upper_bound_source(Lp)
     value = f'chi(Q(sqrt{D})^2) = 4' if L == 4 else f'4 <= chi(Q(sqrt{D})^2) <= {L}'
     steps['C.7 the value'] = {'ok': True, 'value': value, 'upper_source': src, 'L': L}
     mn = rec['minimality']
@@ -4318,6 +4631,20 @@ def _secs(x):
     return 'well under a second' if x < 1 else f'{x:.0f} s'
 
 
+def upper_bound_source(Lp):
+    """Which prior-art residue plane supplies this field's upper bound, in one place.
+
+    ONE definition, called by C.7 and by the README writer, because it is a fact about the mathematics and not a
+    fact about a run: a landing record is a transcript of the gate as it ran, and a citation that turns out to be
+    wrong must be fixable without re-running a solver.  It was wrong: for `d = 3 (mod 8)` the dyadic bound is
+    `[Fischer1990]` **Theorem 10(i)** ("has an additive 4-coloring if N = 3 mod 8"), NOT Theorem 9, which is the
+    additive 3-colouring for `N != 2 (mod 3)` -- the chi = 3 result for `N = 3, 7 (mod 12)`.  Corrected 2026-09-20
+    by the product owner against the held PDF; the error originated in the plan's own table.  Landing records
+    written before that date keep the old string in their C.7 transcript, which is what a transcript is for."""
+    return ('the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 10(i))' if Lp == 2 else
+            f'the residue plane at {Lp} ([Moorhouse2010] Thm 8.1)')
+
+
 def write_witness_readme(D, out, rec, w, fr):
     n3 = rec['steps']['C.6 3-adic barrier']['edges_with_3_in_denominator']
     (out / 'README.md').write_text(f'''# `χ(ℚ(√{D})²) ≥ 4` — a witness, and the one command that re-checks it
@@ -4338,7 +4665,7 @@ edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the
 checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
 exit 1.
 
-{_gate_caveat(rec)}**What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
+{_gate_caveat(rec)}**What is not claimed.** The matching **upper** bound is prior art, not ours: {upper_bound_source(fr['L_prime'])} gives
 `χ(ℚ(√{D})²) ≤ {fr['L']}`. With it, **{rec['value']}**. Nothing here proves the upper bound.
 **And nothing here is checked by the Lean kernel**: the certificate above is the standard-library checker's, and that
 is a different and weaker thing.{_kernel_note(D)}
@@ -4507,6 +4834,14 @@ def main():
     p.add_argument('--limit', type=int, help='ask only the first N of the plan, in its own order')
     p.add_argument('--plan', action='store_true', help='print the balls the rule would ask and stop')
 
+    p = sub.add_parser('onset-ask', help='tier 1u: one DENSER ball per refusing-but-uncertified lattice, as a '
+                                         'cheaper certificate source for `land` (never a new refusal)')
+    p.add_argument('--tier', default='1u')
+    p.add_argument('--jobs', type=int, default=1, help='pool width; one ball at a time by default -- this tier asks '
+                                                       'a handful of balls and each wants several GB')
+    p.add_argument('--budget', type=float); p.add_argument('--fields', type=int, nargs='*')
+    p.add_argument('--plan', action='store_true', help='print the ball the rule would ask, and why, then stop')
+
     p = sub.add_parser('deepen', help='phase E.1b: deeper lattices at the same cap, then the ladder over them')
     p.add_argument('--tier', default='2l')
     p.add_argument('--jobs', type=int, help='pool width; required for the ball stage (see degree-ask)')
@@ -4588,6 +4923,8 @@ def main():
     elif a.cmd == 'degree-ask':
         bad = cmd_degree_ask(a.tier, fields=a.fields or None, jobs=a.jobs, budget=a.budget, show_plan=a.plan,
                              only_arm=a.arm, limit=a.limit)
+    elif a.cmd == 'onset-ask':
+        bad = cmd_onset_ask(a.tier, fields=a.fields or None, jobs=a.jobs, budget=a.budget, show_plan=a.plan)
     elif a.cmd == 'deepen':
         bad = cmd_deepen(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget, stages=a.stages,
                          girth=a.girth)

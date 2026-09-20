@@ -64,6 +64,7 @@ pipe.
 | `README.md`, `run-all.sh` | `land`, or `land-readme` to rewrite without a solver | prose and regeneration script |
 | `generate.out` | FS-58's generator | provenance — the generator's own log, including every stop and its verification line |
 | `steps.jsonl` | FS-58's `extract` | **gitignored**: megabytes of lattice coordinates. Provenance, not evidence — but it is what lets `run-all.sh` reproduce a stopped-deletion witness byte-identically, and each such `run-all.sh` says so in its header |
+| `steps-ball<R>.jsonl` | a **parked** `steps.jsonl` | **gitignored**, same status. It exists where two different balls of ONE lattice have been extracted in one directory: `extract` resumes by mapping a checkpoint's lattice coordinates into the ball it has just built, and balls about one centre are **nested**, so a smaller ball's kept set is found in a larger one and silently resumed as though it belonged there — skipping the first core round, which is usually the whole measurement. Park, never delete; moving it back to `steps.jsonl` restores that route exactly. Present at `witness-239/` (R = 1.2892, 52 rounds, 8,336 points), beside the live checkpoint for R = 1.5181 |
 
 ## The records — one line per unit of work, appended, flushed and fsynced as it finished
 
@@ -87,6 +88,8 @@ pipe.
 | `census.jsonl` | field | `fs61_census.py table` | derived — the machine-readable twin of `census.md` |
 | `census-progress.jsonl`, `ladder-progress-1b.jsonl`, `deepen-progress-2l.jsonl` | field | `census` / `ladder-all` / `deepen` | provenance — the resume state of a pooled pass |
 | `tiers.json` | tier | hand-written, once per tier | **the definitions of the search depths.** A tier's definition never changes after its first record; a new depth is a new id |
+
+**Tier `1u` is not a search depth**, and it is the one entry in `tiers.json` that answers a different question from the rest. Tiers 1, 1b, 1c, 2 and 2l ask *does this field refuse?* — they widen the lattice set, the radius or the solver's budget. Tier `1u` asks *is there a cheaper CERTIFICATE?*: one denser ball of a lattice that **already refuses** at a field with no certificate, at the radius where the predicted average degree reaches 18, and only where that strictly exceeds the refusing ball's own degree. It cannot change any field's state — balls about one centre are nested, so a bigger ball of a refusing lattice refuses by inclusion, and the driver treats a `Colourable` verdict there as a **halt**. It is placed between `1c` and `2l` in the driver's depth order so the census table's headline depth stays `2l`: a table calling itself *at tier 1u* would claim a depth nobody ran.
 | `regress/*.jsonl` | — | `fs61_census.py regress <name>` | exact — the FS-58 regressions (gate items 0.1, 0.2, 0.3, 0.8): FS-58's lattices, refusals, certificates reproduced, and the check that nothing under `data/fs58/` or `tools/fs58_*` has moved |
 
 ## The derived tables — regenerate them, never edit them
@@ -107,7 +110,7 @@ without a record moving cannot change a verdict; that is the point of deriving t
 ## The phase records — `records/`
 
 One file per phase (`phase-0.md`, `phase-A.md`, `phase-B.md`, `phase-Bprime.md`, `phase-C.md`, `phase-E.md`,
-`phase-F.md`), each a table of *gate item · the pasteable command · the artifact · the line of output that shows
+`phase-F.md`, `phase-F-239.md`), each a table of *gate item · the pasteable command · the artifact · the line of output that shows
 the pass · exit status*, plus the machine, the cost, the resume command written **before** launch, every planted
 fault and the line it turned red, and anything that did not land, in those words. The product owner scores a phase
 by re-running these commands; a claim with no row behind it is not read as evidence.
@@ -157,5 +160,5 @@ witnesses are FS-60 (`plans/STUB-quadratic-witnesses-kernel.md`), and the witnes
 it.
 
 **And every upper bound is prior art**, named field by field in each witness `README.md` and in `frame.jsonl`:
-the dyadic prime for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 9), the residue plane at 7 or at 11 otherwise
+the dyadic prime for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i)), the residue plane at 7 or at 11 otherwise
 (`[Moorhouse2010]` Thm 8.1). This milestone proves lower bounds only.
