@@ -546,6 +546,13 @@ govern the table above wherever they differ, and apply to every field equally, i
    one a landing record carries means **regenerate**; the same or smaller budget is a no-op. And because the frozen `extract`
    resumes a deletion at a stale scan position, **a stopped deletion is never finished later** — only a from-scratch run can be
    1-minimal.
+5. **The closing task is accepted** (2026-09-20; `5034212`, `68e9fd9`; scored by artifact: frozen files untouched, all nine
+   `witness.json` byte-identical to the ones C.10 passed, `census.md` reads 9 `Landed (certified)` of 40, `selftest` re-run by the
+   owner — 7 sections, 0 failures). The second implementer's judgement call stands: a *required-but-red* C.4b keeps the field
+   `Landed (certified)` and exits non-zero as a named defect — the refusal is sound either way, and the contradiction is between two
+   recorded facts that a person must resolve. **`land 95 --ball-rank 2` was declined on a measurement and the decline is
+   accepted**: at `d = 95` the core rounds run ~90 s each with a slow tail (6,997 → 3,308 → 2,958 → 2,808 → 2,735) on every ball
+   tried, so a from-scratch 1-minimal witness there is priced in hours; FS-60 is told that 95 is the expensive field. Not pursued.
 4. **C.9 gains a clause** (accepted): *a witness that is not 1-minimal is not a weaker certificate* — a refusing set refuses
    whether or not it is minimal; minimality buys size (the checker's time, FS-60's kernel cost), never soundness.
 
