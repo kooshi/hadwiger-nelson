@@ -1,0 +1,3 @@
+fs61 table: 40 fields -> data/fs61/census.md, data/fs61/census.jsonl
+DONE table --check: 40 fields, 0 defects
+[table: 0.3 s wall on desktop]

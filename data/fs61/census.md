@@ -30,22 +30,22 @@ suffice — the conjecture predicts at least four for every row of this table.**
 
 | d | mod 8 | L | N₁ | N₃ | lattices (C2/C3/Cq/R/O) | balls asked / over cap / unknown | bracket | state | evidence | value | what would deepen it |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| **11** | 3 | 4 | 6 | 6 | 70 (28/17/19/4/2) | **4** / 10 / 0 | – … 1.0 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 11` |
-| **23** | 7 | 4 | 8 | 12 | 94 (20/35/12/6/21) | **15** / 42 / 2 | 1.8 … 1.3 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 23` |
+| **11** | 3 | 4 | 6 | 6 | 70 (28/17/19/4/2) | **4** / 10 / 0 | – … 1.0 | Landed (certified) | kernel | 4 ≤ χ ≤ 4 | `` |
+| **23** | 7 | 4 | 8 | 12 | 94 (20/35/12/6/21) | **15** / 42 / 2 | 1.8 … 1.3 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **35** | 3 | 4 | 6 | 6 | 53 (23/13/16/0/1) | **0** / 2 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 35 --tier 2` |
-| **47** | 7 | 5 | 12 | 12 | 55 (8/18/0/5/24) | **32** / 30 / 2 | 1.8 … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 5 | `python3 tools/fs61_census.py land 47` |
+| **47** | 7 | 5 | 12 | 12 | 55 (8/18/0/5/24) | **32** / 30 / 2 | 1.8 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 5 | `` |
 | **59** | 3 | 4 | 30 | 30 | 29 (10/9/8/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 59 --tier 2` |
-| **71** | 7 | 4 | 12 | 12 | 50 (11/17/14/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 71` |
+| **71** | 7 | 4 | 12 | 12 | 50 (11/17/14/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **83** | 3 | 4 | 42 | 42 | 18 (6/4/6/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 83 --tier 2` |
 | **95** | 7 | 4 | 12 | 12 | 41 (10/11/14/6/0) | **11** / 7 / 3 | 1.0 … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 95` |
 | **107** | 3 | 4 | 54 | 54 | 16 (6/4/6/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 107 --tier 2` |
-| **119** | 7 | 4 | 12 | 12 | 54 (9/15/22/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 119` |
+| **119** | 7 | 4 | 12 | 12 | 54 (9/15/22/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **131** | 3 | 4 | 30 | 30 | 22 (7/7/6/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 131 --tier 2` |
-| **143** | 7 | 5 | 12 | 12 | 24 (7/5/0/1/11) | **12** / 14 / 2 | 1.8 … 1.5 | Refusal claimed | solver claim | 4 ≤ χ ≤ 5 | `python3 tools/fs61_census.py land 143` |
+| **143** | 7 | 5 | 12 | 12 | 24 (7/5/0/1/11) | **12** / 14 / 2 | 1.8 … 1.5 | Landed (certified) | checker | 4 ≤ χ ≤ 5 | `` |
 | **155** | 3 | 4 | 18 | 18 | 29 (9/6/12/0/2) | **2** / 2 / 0 | 1.8 … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 155 --tier 2` |
 | **167** | 7 | [6, 8] | 24 | 24 | 20 (1/6/7/0/6) | **0** / 12 / 0 | – … – | Not landed at tier 1 | none | ≤ [6, 8] | `python3 tools/fs61_census.py census-field 167 --tier 2` |
 | **179** | 3 | 4 | 30 | 30 | 15 (3/4/6/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 179 --tier 2` |
-| **191** | 7 | 4 | 20 | 48 | 28 (3/11/10/4/0) | **8** / 4 / 2 | – … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 191` |
+| **191** | 7 | 4 | 20 | 48 | 28 (3/11/10/4/0) | **8** / 4 / 2 | – … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **203** | 3 | 4 | 18 | 18 | 18 (4/5/7/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 203 --tier 2` |
 | **215** | 7 | 5 | 24 | 24 | 24 (3/8/11/0/2) | **2** / 2 / 0 | 1.8 … – | Not landed at tier 1 | none | ≤ 5 | `python3 tools/fs61_census.py census-field 215 --tier 2` |
 | **227** | 3 | 4 | 114 | 114 | 6 (0/2/4/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 227 --tier 2` |
@@ -58,7 +58,7 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **323** | 3 | 4 | 18 | 18 | 11 (2/3/5/0/1) | **0** / 2 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 323 --tier 2` |
 | **335** | 7 | 5 | 36 | 36 | 12 (2/3/5/0/2) | **1** / 3 / 0 | 1.5 … – | Not landed at tier 1 | none | ≤ 5 | `python3 tools/fs61_census.py census-field 335 --tier 2` |
 | **347** | 3 | 4 | 78 | 78 | 4 (0/2/2/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 347 --tier 2` |
-| **359** | 7 | 4 | 36 | 36 | 12 (2/4/2/3/1) | **7** / 5 / 3 | – … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 359` |
+| **359** | 7 | 4 | 36 | 36 | 12 (2/4/2/3/1) | **7** / 5 / 3 | – … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **371** | 3 | 4 | 30 | 30 | 6 (2/1/3/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 371 --tier 2` |
 | **383** | 7 | 5 | 28 | 72 | 5 (0/3/2/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 5 | `python3 tools/fs61_census.py census-field 383 --tier 2` |
 | **395** | 3 | 4 | 42 | 42 | 10 (4/2/4/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 395 --tier 2` |
@@ -71,6 +71,6 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **479** | 7 | 5 | 36 | 36 | 9 (2/3/2/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 5 | `python3 tools/fs61_census.py census-field 479 --tier 2` |
 | **491** | 3 | 4 | 50 | 102 | 4 (2/1/1/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 491 --tier 2` |
 
-**40 fields.** 31 Not landed at tier 1; 9 Refusal claimed.
+**40 fields.** 8 Landed (certified); 31 Not landed at tier 1; 1 Refusal claimed.
 Balls on the census population (lattices the filter left open): 343 records, **124 asked**, 219 over cap, 20 unknown. Counting every record, including the balls phase 0's paired controls asked on already-certified lattices at d = 47: 395 records, 147 asked.
 

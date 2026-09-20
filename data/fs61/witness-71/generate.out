@@ -1,0 +1,18 @@
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 71 q1+q5+60.2+120.2 1.5 /home/kooshi/source/lean-dir/data/fs61/witness-71
+extract D=71 pool q1+q5+60.2+120.2 ball 1.5: 47597 points, 227726 edges (0.2 s)
+  core round 0: 47597 -> 868 points (0.3 s)
+  core round 1: 868 -> 426 points (0.0 s)
+  core round 2: 426 -> 352 points (0.0 s)
+  core round 3: 352 -> 338 points (0.0 s)
+  core round 4: 338 -> 324 points (0.0 s)
+  core round 5: 324 -> 316 points (0.0 s)
+  core round 6: 316 -> 310 points (0.0 s)
+  core round 7: 310 -> 300 points (0.0 s)
+  core round 8: 300 -> 297 points (0.0 s)
+  core round 9: 297 -> 286 points (0.0 s)
+  core round 10: 286 -> 279 points (0.0 s)
+  core round 11: 279 -> 276 points (0.0 s)
+  core round 12: 276 -> 276 points (0.0 s)
+  deletion finished: 131 points (1-minimal)
+direct witness over Q(sqrt71): pool q1+q5+60.2+120.2 (|W| = 28, M = 120), ball piece R = 1.5: 47597 points, 227726 edges -> deletion start 131 -> refusing set 131 points; 306 exact unit edges; CaDiCaL exit 20 in 0.01 s (LRAT 86063 bytes), Glucose4 ['UNSAT', 0.003], Minisat22 ['UNSAT', 0.002]; deletion controls [[0, 'SAT (model verified)'], [20, 'SAT (model verified)'], [40, 'SAT (model verified)'], [60, 'SAT (model verified)'], [80, 'SAT (model verified)'], [100, 'SAT (model verified)'], [120, 'SAT (model verified)'], [9, 'SAT (model verified)'], [29, 'SAT (model verified)'], [49, 'SAT (model verified)'], [69, 'SAT (model verified)'], [89, 'SAT (model verified)']]; 2.0 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-71

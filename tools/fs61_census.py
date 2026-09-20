@@ -2668,7 +2668,7 @@ def _minimality(w):
 
 
 def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
-             direct_wall=DIRECT_WALL):
+             direct_wall=DIRECT_WALL, ball_rank=0):
     """One field, FS-58's full certification path on its cheapest refusing ball."""
     balls = load_jsonl(field_dir(D) / 'balls.jsonl')
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
@@ -2680,9 +2680,16 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     # 2026-09-20 at d = 47: the 3,565-point ball refuses in 103.72 s, the 8,629-point one in 0.45 s -- 230x per solve
     # for 2.4x the vertices.  So the cost proxy is points x (solve_seconds + 0.5), which keeps a fast refusal cheap
     # without picking an enormous graph just because the solver saw through it instantly.
-    b = min(ref, key=lambda x: x['points'] * ((x.get('solve_seconds') or 600.0) + 0.5))
+    # `ball_rank` is the handle a null needs.  The proxy optimises GENERATION time, and at d = 95 the ball it
+    # picks gives a witness whose pinned vertex is redundant, so C.4's minimality control cannot pass on it however
+    # long the deletion runs (a resumed deletion skips -- see the phase record).  Ranks 1, 2, ... walk the same
+    # ordering, into their own directory, so a standing witness is never overwritten by an experiment.
+    ref.sort(key=lambda x: x['points'] * ((x.get('solve_seconds') or 600.0) + 0.5))
+    if ball_rank >= len(ref):
+        die(f'd={D} has {len(ref)} refusing balls on record; --ball-rank {ball_rank} is out of range', 1)
+    b = ref[ball_rank]
     spec, R, pts_n = lat[b['lattice']]['spec_full'], b['R'], b['points']
-    out = FS61 / f'witness-{D}'
+    out = FS61 / (f'witness-{D}' if ball_rank == 0 else f'witness-{D}-rank{ball_rank}')
     out.mkdir(parents=True, exist_ok=True)
     frame = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'frame.jsonl')}
     fr = frame[D]
@@ -2696,9 +2703,21 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     print(f'fs61 land d={D}: cheapest refusing ball {pts_n} points at R={R} on {spec} '
           f'(refused in {b.get("solve_seconds")} s; cost proxy {proxy:.0f}); '
           f'{"checkpointed extract" if big else "direct-witness"}', flush=True)
-    rec = {'key': str(D), 'd': D, 'spec': spec, 'R': R, 'ball_points': pts_n, 'lattice': b['lattice'],
+    rec = {'key': str(D) if ball_rank == 0 else f'{D}#rank{ball_rank}', 'd': D, 'ball_rank': ball_rank,
+           'spec': spec, 'R': R, 'ball_points': pts_n, 'lattice': b['lattice'],
            'ball_solve_seconds': b.get('solve_seconds'), 'selection': 'points x (solve_seconds + 0.5)',
            'generator': 'extract' if big else 'direct-witness', 'machine': MACHINE, 'tier': tid}
+    # Re-ask only with a bigger budget -- FS-58's rule for `Unknown` balls, applied to the deletion.  A witness
+    # whose deletion was stopped is not final: a larger `--deletion-budget` than the one that produced it is a
+    # request to shrink it further, and skipping generation because witness.json exists would silently ignore the
+    # flag (it did, at d = 95, 2026-09-20).  An equal or smaller budget still skips, so a plain re-run is cheap.
+    prev = load_jsonl(FS61 / 'landings.jsonl').get(rec['key'], {})
+    prev_budget = (prev.get('generation') or {}).get('deletion_budget_s')
+    if ((prev.get('minimality') or {}).get('minimal') == 'no' and prev_budget is not None
+            and deletion_budget > prev_budget and (out / 'witness.json').exists()):
+        print(f'    deletion budget raised {prev_budget:.0f} -> {deletion_budget:.0f} s on a witness whose deletion '
+              f'was stopped: regenerating from the checkpoint', flush=True)
+        (out / 'witness.json').unlink()
     if not (out / 'witness.json').exists():
         t0 = time.time()
         gi = run_generation(D, spec, R, out, big, deletion_budget=deletion_budget, gen_cap=gen_cap,
@@ -2786,7 +2805,7 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     write_witness_readme(D, out, rec, w, fr)
     write_witness_scripts(D, out, rec)
     append(FS61 / 'landings.jsonl', rec)
-    man = {'key': str(D), 'd': D, 'path': rel(out), 'points': len(pts), 'edges': len(edges),
+    man = {'key': rec['key'], 'd': D, 'ball_rank': ball_rank, 'path': rel(out), 'points': len(pts), 'edges': len(edges),
            'lcm_denominator': rec['lcm_denominator'], 'pinned_edge': w['pinned_edge'],
            'witness_sha256': rec['witness_sha256'],
            'lrat_sha256': hashlib.sha256((out / 'witness.lrat.gz').read_bytes()).hexdigest()
@@ -2999,6 +3018,9 @@ def main():
     p.add_argument('--deletion-budget', type=float, default=DELETION_BUDGET, help=budget_help)
     p.add_argument('--gen-cap', type=float, default=GEN_CAP, help=cap_help)
     p.add_argument('--direct-wall', type=float, default=DIRECT_WALL, help=wall_help)
+    p.add_argument('--ball-rank', type=int, default=0,
+                   help='which refusing ball to shrink, 0 = cheapest by the cost proxy; a non-zero rank writes to '
+                        'data/fs61/witness-<d>-rank<k>/ and its own landing key, so the standing witness is safe')
     p = sub.add_parser('land-readme', help='rewrite README.md/run-all.sh from the landing records; no solver')
     p.add_argument('--fields', type=int, nargs='*')
     p = sub.add_parser('land-all', help='phase C over every refusing field, in priority order, resumable')
@@ -3057,7 +3079,7 @@ def main():
             cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
         bad = cmd_land(a.d, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap,
-                       direct_wall=a.direct_wall)
+                       direct_wall=a.direct_wall, ball_rank=a.ball_rank)
     elif a.cmd == 'land-readme':
         bad = cmd_land_readme(a.fields or None)
     elif a.cmd == 'land-all':

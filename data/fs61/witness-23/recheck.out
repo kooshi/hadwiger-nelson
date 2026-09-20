@@ -1,0 +1,1 @@
+RECHECK PASS: 573 points; 1365 unit pairs by Fraction arithmetic over all 163878 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; deleting vertex 1 leaves a 3-colourable graph (model verified)

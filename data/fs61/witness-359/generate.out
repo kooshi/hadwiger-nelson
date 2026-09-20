@@ -1,0 +1,4 @@
+extract D=359 pool q1+q5+60.1+60.2 ball 1.5: 113325 points, 847394 edges (0.8 s)
+  deletion stopped by request at position 483: the witness is the last recorded refusing set (1190 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt359): pool q1+q5+60.1+60.2 (|W| = 44, M = 60), ball piece R = 1.5: 113325 points, 847394 edges -> deletion start 1190 -> refusing set 1190 points; 3243 exact unit edges; CaDiCaL exit 20 in 8.31 s (LRAT 87375793 bytes), Glucose4 ['UNSAT', 12.64], Minisat22 ['UNSAT', 11.163]; deletion controls [[0, 'SAT (model verified)'], [249, 'UNSAT'], [498, 'SAT (model verified)'], [747, 'UNSAT'], [996, 'SAT (model verified)'], [55, 'UNSAT'], [304, 'UNSAT'], [553, 'UNSAT'], [802, 'UNSAT'], [1051, 'SAT (model verified)'], [110, 'SAT (model verified)'], [359, 'UNSAT']]; 389.0 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-359
+extract exit=0

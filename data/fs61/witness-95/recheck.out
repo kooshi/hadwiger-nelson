@@ -1,0 +1,1 @@
+RECHECK FAIL: deleting vertex 7 leaves a graph that still refuses (control expected a colouring)

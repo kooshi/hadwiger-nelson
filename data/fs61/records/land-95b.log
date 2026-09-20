@@ -1,0 +1,4 @@
+fs61 land d=95: cheapest refusing ball 17169 points at R=1.5 on q1+12+60.2 (refused in 1.07 s; cost proxy 26955); checkpointed extract
+    deletion budget raised 600 -> 2400 s on a witness whose deletion was stopped: regenerating from the checkpoint
+    stage 2 (deletion) started at position 399; budget 2400 s
+setsid: child 1876002 did not exit normally: Success

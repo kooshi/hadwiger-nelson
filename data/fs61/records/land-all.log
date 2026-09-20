@@ -1,0 +1,102 @@
+fs61 land-all: 9 fields in the order [359, 11, 119, 143, 47, 95, 191, 71, 23]; 0 already certified [], 9 to do. Deletion budget 600 s per field, generation cap 5400 s. Resume = re-run this identical command.
+fs61 land d=359: cheapest refusing ball 113325 points at R=1.5 on q1+q5+60.1+60.2 (refused in 1.75 s; cost proxy 254981); checkpointed extract
+    C.1 certificate        exit  0  PASS  CERTIFIED: 1190 points of Q(sqrt359)^2, each a reduced (a, b, c, e, m); all 3243 pairs at distan
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 427] between [0, 0, 0, 0, 1] and [38, -1, -19, -2
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 1190 points; 3243 unit pairs by Fraction arithmetic over all 707455 pairs = the fi
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 3243 edges
+    C.6 3-adic barrier            PASS  1997 of 3243 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 483 of 2019
+  d=359: 1190 points, 3243 edges -> CERTIFIED; chi(Q(sqrt359)^2) = 4; no
+  [1/9 d=359 took 417 s; running total 1 certified, 0 not, 417 s elapsed]
+fs61 land d=11: cheapest refusing ball 45521 points at R=1.0 on q1+q5+6+10.1+10.2+15.1+15.2+30.1+30.2+30.3 (refused in 0.61 s; cost proxy 50528); checkpointed extract
+    generation pass "deletion under budget": 9 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 189 points of Q(sqrt11)^2, each a reduced (a, b, c, e, m); all 452 pairs at distance 
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [5, 0, 0, -1, 6],
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 189 points; 452 unit pairs by Fraction arithmetic over all 17766 pairs = the file;
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 452 edges
+    C.6 3-adic barrier            PASS  268 of 452 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=11: 189 points, 452 edges -> CERTIFIED; chi(Q(sqrt11)^2) = 4; 1-minimal
+  [2/9 d=11 took 14 s; running total 2 certified, 0 not, 431 s elapsed]
+fs61 land d=119: cheapest refusing ball 13605 points at R=1.5 on q1+12+60.1 (refused in 0.75 s; cost proxy 17006); direct-witness
+    generation pass "direct-witness (whole)": 51 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 456 points of Q(sqrt119)^2, each a reduced (a, b, c, e, m); all 1122 pairs at distanc
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 19] between [0, 0, 0, 0, 1] and [5, 0, 0, 1, 12],
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 456 points; 1122 unit pairs by Fraction arithmetic over all 103740 pairs = the fil
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 1122 edges
+    C.6 3-adic barrier            PASS  996 of 1122 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=119: 456 points, 1122 edges -> CERTIFIED; chi(Q(sqrt119)^2) = 4; 1-minimal
+  [3/9 d=119 took 72 s; running total 3 certified, 0 not, 503 s elapsed]
+fs61 land d=143: cheapest refusing ball 283485 points at R=1.5 on q1+q5+12+60 (refused in 115.95 s; cost proxy 33011828); checkpointed extract
+    stage 2 (deletion) started at position 163; budget 600 s
+    stopping the generator (pid 1782662): deletion budget 600 s spent at position 1056
+    stopped: pid 1782662 reaped with exit -15; steps.jsonl digest static across 5 s
+    generation pass "deletion under budget": 1145 s, exit -15 -- deletion budget 600 s spent at position 1056
+    generation pass "emit from the last checkpoint": 16 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 664 points of Q(sqrt143)^2, each a reduced (a, b, c, e, m); all 1600 pairs at distanc
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [3, -4, 4, 3, 60]
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 664 points; 1600 unit pairs by Fraction arithmetic over all 220116 pairs = the fil
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 1600 edges
+    C.6 3-adic barrier            PASS  1204 of 1600 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 1056 of 1769
+  d=143: 664 points, 1600 edges -> CERTIFIED; 4 <= chi(Q(sqrt143)^2) <= 5; no
+  [4/9 d=143 took 1224 s; running total 4 certified, 0 not, 1727 s elapsed]
+fs61 land d=47: cheapest refusing ball 8629 points at R=1.5 on q1+12+60 (refused in 0.45 s; cost proxy 8198); direct-witness
+    generation pass "direct-witness (whole)": 6 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 169 points of Q(sqrt47)^2, each a reduced (a, b, c, e, m); all 385 pairs at distance 
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 69] between [0, 0, 0, 0, 1] and [35, -1, -5, -7, 
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 169 points; 385 unit pairs by Fraction arithmetic over all 14196 pairs = the file;
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 385 edges
+    C.6 3-adic barrier            PASS  358 of 385 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=47: 169 points, 385 edges -> CERTIFIED; 4 <= chi(Q(sqrt47)^2) <= 5; 1-minimal
+  [5/9 d=47 took 10 s; running total 5 certified, 0 not, 1737 s elapsed]
+fs61 land d=95: cheapest refusing ball 17169 points at R=1.5 on q1+12+60.2 (refused in 1.07 s; cost proxy 26955); direct-witness
+    generation pass "direct-witness (whole)": 2183 s, exit -15
+DEFECT land d=95: no witness.json after 2183 s; see data/fs61/witness-95/generate.out. Re-running `land 95` resumes from steps.jsonl.
+  [6/9 d=95 took 2183 s; running total 5 certified, 1 not, 3920 s elapsed]
+fs61 land d=191: cheapest refusing ball 53177 points at R=1.5 on q1+q5+20+60.1 (refused in 0.11 s; cost proxy 32438); checkpointed extract
+    generation pass "deletion under budget": 20 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 292 points of Q(sqrt191)^2, each a reduced (a, b, c, e, m); all 713 pairs at distance
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 145] between [0, 0, 0, 0, 1] and [39, 1, -13, 3, 
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 292 points; 713 unit pairs by Fraction arithmetic over all 42486 pairs = the file;
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 713 edges
+    C.6 3-adic barrier            PASS  89 of 713 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=191: 292 points, 713 edges -> CERTIFIED; chi(Q(sqrt191)^2) = 4; 1-minimal
+  [7/9 d=191 took 28 s; running total 6 certified, 1 not, 3947 s elapsed]
+fs61 land d=71: cheapest refusing ball 47597 points at R=1.5 on q1+q5+60.2+120.2 (refused in 0.07 s; cost proxy 27130); checkpointed extract
+    generation pass "deletion under budget": 2 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 131 points of Q(sqrt71)^2, each a reduced (a, b, c, e, m); all 306 pairs at distance 
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 64] between [0, 0, 0, 0, 1] and [61, -7, 61, 7, 1
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 131 points; 306 unit pairs by Fraction arithmetic over all 8515 pairs = the file; 
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 306 edges
+    C.6 3-adic barrier            PASS  108 of 306 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=71: 131 points, 306 edges -> CERTIFIED; chi(Q(sqrt71)^2) = 4; 1-minimal
+  [8/9 d=71 took 5 s; running total 7 certified, 1 not, 3953 s elapsed]
+fs61 land d=23: cheapest refusing ball 248213 points at R=1.3 on q1+q5+12.1+60.2 (refused in 54.88 s; cost proxy 13746036); checkpointed extract
+    stage 2 (deletion) started at position 4; budget 600 s
+    stopping the generator (pid 1833913): deletion budget 600 s spent at position 467
+    stopped: pid 1833913 reaped with exit -15; steps.jsonl digest static across 5 s
+    generation pass "deletion under budget": 1155 s, exit -15 -- deletion budget 600 s spent at position 467
+    generation pass "emit from the last checkpoint": 16 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 573 points of Q(sqrt23)^2, each a reduced (a, b, c, e, m); all 1365 pairs at distance
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 51] between [0, 0, 0, 0, 1] and [7, -1, 7, 1, 12]
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 573 points; 1365 unit pairs by Fraction arithmetic over all 163878 pairs = the fil
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 1365 edges
+    C.6 3-adic barrier            PASS  866 of 1365 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 467 of 1280
+  d=23: 573 points, 1365 edges -> CERTIFIED; chi(Q(sqrt23)^2) = 4; no
+  [9/9 d=23 took 1196 s; running total 8 certified, 1 not, 5148 s elapsed]
+DONE land-all: 9 fields, 8 certified here [359, 11, 119, 143, 47, 191, 71, 23], 1 not certified [95], 0 skipped (already on record); 5148 s
+[land-all: 5148.5 s wall on desktop]

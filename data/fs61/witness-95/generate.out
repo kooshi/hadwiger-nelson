@@ -1,0 +1,102 @@
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py direct-witness 95 q1+12+60.2 1.5 /home/kooshi/source/lean-dir/data/fs61/witness-95
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 95 q1+12+60.2 1.5 /home/kooshi/source/lean-dir/data/fs61/witness-95
+extract D=95 pool q1+12+60.2 ball 1.5: 17169 points, 82206 edges (0.1 s)
+  core round 0: 17169 -> 5499 points (3.1 s)
+  core round 1: 5499 -> 4521 points (1.4 s)
+  core round 2: 4521 -> 3770 points (1.2 s)
+  core round 3: 3770 -> 3371 points (1.3 s)
+  core round 4: 3371 -> 3116 points (1.1 s)
+  core round 5: 3116 -> 2931 points (3.7 s)
+  core round 6: 2931 -> 2827 points (0.9 s)
+  core round 7: 2827 -> 2728 points (1.1 s)
+  core round 8: 2728 -> 2634 points (1.4 s)
+  core round 9: 2634 -> 2573 points (1.2 s)
+  core round 10: 2573 -> 2516 points (3.3 s)
+  core round 11: 2516 -> 2489 points (2.6 s)
+  core round 12: 2489 -> 2460 points (2.0 s)
+  core round 13: 2460 -> 2438 points (2.7 s)
+  core round 14: 2438 -> 2388 points (1.3 s)
+  core round 15: 2388 -> 2336 points (0.8 s)
+  core round 16: 2336 -> 2313 points (1.6 s)
+  core round 17: 2313 -> 2289 points (0.9 s)
+  core round 18: 2289 -> 2249 points (0.9 s)
+  core round 19: 2249 -> 2215 points (1.6 s)
+  core round 20: 2215 -> 2177 points (1.0 s)
+  core round 21: 2177 -> 2156 points (0.8 s)
+  core round 22: 2156 -> 2141 points (1.3 s)
+  core round 23: 2141 -> 2119 points (0.9 s)
+  core round 24: 2119 -> 2106 points (2.8 s)
+  core round 25: 2106 -> 2077 points (1.0 s)
+  core round 26: 2077 -> 2059 points (1.9 s)
+  core round 27: 2059 -> 2050 points (2.7 s)
+  core round 28: 2050 -> 2043 points (1.4 s)
+  core round 29: 2043 -> 2027 points (1.3 s)
+  core round 30: 2027 -> 2020 points (2.4 s)
+  core round 31: 2020 -> 2002 points (1.1 s)
+  core round 32: 2002 -> 1987 points (1.0 s)
+  core round 33: 1987 -> 1969 points (1.1 s)
+  core round 34: 1969 -> 1940 points (0.8 s)
+  core round 35: 1940 -> 1931 points (1.6 s)
+  core round 36: 1931 -> 1926 points (1.0 s)
+  core round 37: 1926 -> 1920 points (2.5 s)
+  core round 38: 1920 -> 1911 points (0.8 s)
+  core round 39: 1911 -> 1903 points (1.2 s)
+  core round 40: 1903 -> 1887 points (0.9 s)
+  core round 41: 1887 -> 1876 points (0.8 s)
+  core round 42: 1876 -> 1870 points (1.1 s)
+  core round 43: 1870 -> 1858 points (1.1 s)
+  core round 44: 1858 -> 1857 points (0.8 s)
+  core round 45: 1857 -> 1855 points (1.2 s)
+  core round 46: 1855 -> 1841 points (0.8 s)
+  core round 47: 1841 -> 1835 points (1.0 s)
+  core round 48: 1835 -> 1833 points (2.0 s)
+  core round 49: 1833 -> 1823 points (0.8 s)
+  core round 50: 1823 -> 1819 points (0.8 s)
+  core round 51: 1819 -> 1811 points (1.0 s)
+  core round 52: 1811 -> 1810 points (1.5 s)
+  core round 53: 1810 -> 1805 points (1.0 s)
+  core round 54: 1805 -> 1796 points (0.8 s)
+  core round 55: 1796 -> 1791 points (2.3 s)
+  core round 56: 1791 -> 1787 points (0.9 s)
+  core round 57: 1787 -> 1786 points (0.7 s)
+  core round 58: 1786 -> 1780 points (2.7 s)
+  core round 59: 1780 -> 1775 points (1.0 s)
+  core round 60: 1775 -> 1772 points (1.6 s)
+  core round 61: 1772 -> 1770 points (1.0 s)
+  core round 62: 1770 -> 1766 points (0.8 s)
+  core round 63: 1766 -> 1764 points (0.9 s)
+  core round 64: 1764 -> 1755 points (0.8 s)
+  core round 65: 1755 -> 1753 points (0.9 s)
+  core round 66: 1753 -> 1752 points (0.9 s)
+  core round 67: 1752 -> 1748 points (0.8 s)
+  core round 68: 1748 -> 1745 points (1.4 s)
+  core round 69: 1745 -> 1738 points (0.7 s)
+  core round 70: 1738 -> 1737 points (1.6 s)
+  core round 71: 1737 -> 1737 points (1.9 s)
+  deletion: 325/1737 tested, 1139 kept
+  deletion: 353/1737 tested, 1081 kept
+  deletion: 367/1737 tested, 1063 kept
+  deletion: 372/1737 tested, 1049 kept
+  deletion: 380/1737 tested, 1037 kept
+  deletion: 394/1737 tested, 1032 kept
+  deletion: 396/1737 tested, 1029 kept
+  deletion: 399/1737 tested, 1024 kept
+[fs61] generator stopped: deletion budget 600 s spent at position 399; pid 1855821 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 95 q1+12+60.2 1.5 /home/kooshi/source/lean-dir/data/fs61/witness-95 --stop-deletion
+extract D=95 pool q1+12+60.2 ball 1.5: 17169 points, 82206 edges (0.1 s)
+  deletion stopped by request at position 399: the witness is the last recorded refusing set (1024 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt95): pool q1+12+60.2 (|W| = 28, M = 60), ball piece R = 1.5: 17169 points, 82206 edges -> deletion start 1024 -> refusing set 1024 points; 2915 exact unit edges; CaDiCaL exit 20 in 5.65 s (LRAT 53416857 bytes), Glucose4 ['UNSAT', 5.426], Minisat22 ['UNSAT', 4.049]; deletion controls [[0, 'UNSAT'], [15, 'UNSAT'], [30, 'SAT (model verified)'], [45, 'UNSAT'], [60, 'UNSAT'], [75, 'UNSAT'], [90, 'SAT (model verified)'], [105, 'UNSAT'], [120, 'UNSAT'], [135, 'SAT (model verified)'], [150, 'UNSAT'], [165, 'SAT (model verified)']]; 195.7 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-95
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 95 q1+12+60.2 1.5 /home/kooshi/source/lean-dir/data/fs61/witness-95
+extract D=95 pool q1+12+60.2 ball 1.5: 17169 points, 82206 edges (0.1 s)
+  deletion: 400/1024 tested, 1023 kept
+  deletion: 402/1024 tested, 1014 kept
+  deletion: 403/1024 tested, 1012 kept
+  deletion: 406/1024 tested, 1010 kept
+  deletion: 407/1024 tested, 1004 kept
+extract D=95 pool q1+12+60.2 ball 1.5: 17169 points, 82206 edges (0.1 s)
+  deletion stopped by request at position 407: the witness is the last recorded refusing set (1004 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt95): pool q1+12+60.2 (|W| = 28, M = 60), ball piece R = 1.5: 17169 points, 82206 edges -> deletion start 1004 -> refusing set 1004 points; 2829 exact unit edges; CaDiCaL exit 20 in 6.81 s (LRAT 64318054 bytes), Glucose4 ['UNSAT', 10.692], Minisat22 ['UNSAT', 5.299]; deletion controls [[0, 'UNSAT'], [231, 'UNSAT'], [462, 'UNSAT'], [693, 'UNSAT'], [924, 'UNSAT'], [151, 'SAT (model verified)'], [382, 'SAT (model verified)'], [613, 'UNSAT'], [844, 'UNSAT'], [71, 'UNSAT'], [302, 'SAT (model verified)'], [533, 'UNSAT']]; 360.1 s; wrote data/fs61/witness-95

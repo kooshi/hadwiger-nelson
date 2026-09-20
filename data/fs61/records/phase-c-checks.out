@@ -1,0 +1,23 @@
+
+C.8 -- `run-all.sh`'s generation line, re-run into a scratch directory:
+| d | why this field | started from | seconds | witness.json |
+|---|---|---|---|---|
+| 47 | direct-witness, 1-minimal, the smallest witness here | EMPTY directory | 5.7 | **byte-identical** |
+| 71 | extract, 1-minimal -- the core rounds and the whole deletion rerun from nothing | EMPTY directory | 2.0 | **byte-identical** |
+| 143 | extract with the deletion stopped at 1,056 of 1,769; seeded with its own steps.jsonl | seeded with steps.jsonl | 15.6 | **byte-identical** |
+    stopping the generator (pid 1911127): direct-witness wall 5 s spent with nothing on disk
+    stopped: pid 1911127 reaped with exit -15 (a reaped child cannot write); generate.out digest static across 5 s
+    generation pass "direct-witness (whole, under its wall)": 15 s, exit -15 -- direct-witness wall 5 s spent with nothing on disk
+    direct-witness hit its 5 s wall with nothing on disk; extract took over on the same ball
+    generation pass "deletion under budget": 60 s, exit 0
+    generation pass "direct-witness (whole, under its wall)": 53 s, exit 0
+
+PLANT -- the direct-witness wall and its fallback (d = 119, ball 13,605 points):
+| wall | what should happen | generator that finished | what was stopped | witness points | seconds |
+|---|---|---|---|---|---|
+| 5 s | the wall fires and extract takes over | **extract** | direct-witness wall 5 s spent with nothing on disk | 418 | 74.9 |
+| 600 s | direct-witness finishes | **direct-witness** | nothing | 456 | 52.6 |
+
+plant fired: True;  the generous arm is clean: True  (both outcomes reachable, which is what makes the plant evidence)
+
+DONE fs61_phase_c_checks: 0 failures

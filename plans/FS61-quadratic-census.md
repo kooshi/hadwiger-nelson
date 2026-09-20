@@ -950,40 +950,61 @@ remaining balls **unrecorded** rather than writing them `Over cap (not asked)`, 
 `direct-witness`'s range as priced in phase 0 (O3: 13,605 points → 52 CPU-s); the last two want the checkpointed
 `extract`.
 
-### §R-C — phase C, certifying the nine refusals (2026-09-20, IN FLIGHT at the hand-back)
+### §R-C — phase C, certifying the nine refusals (2026-09-20, CLOSED at eight of nine)
 
-**Not closed.** The certification driver `land-all` is running and resumable; **nothing is certified yet**, so no
-field's value has changed and `census.md` is untouched — every refusal still reads `Refusal claimed`. Record, with the
-launch block, the pgid and the resume command: **`data/fs61/records/phase-C.md`**.
+**Eight of the nine tier-1 refusals are certified by the frozen, independent checker**, each with its planted-fault
+run, its wrong-radicand refusal, its decorrelated second opinion, an explicit verified 4-colouring and its 3-adic
+barrier count. The ninth, `d = 95`, has a **CERTIFIED** witness too but one red gate item, reported as red. Record,
+with one row per gate item per field and every plant: **`data/fs61/records/phase-C.md`**.
 
-**Two design corrections, both made from measurements, both recorded because each cost a run.**
+| d | points | edges | minimality | value now stated | what is new |
+|---|---|---|---|---|---|
+| **359** | 1,190 | 3,243 | stopped at 483 of 2,019 | **`χ(ℚ(√359)²) = 4`** | **a field nobody had scanned** — found by this milestone's own census, not inherited from FS-58 |
+| **119** | 456 | 1,122 | 1-minimal | **`χ(ℚ(√119)²) = 4`** | priced in phase 0, never certified before |
+| **11** | 189 | 452 | 1-minimal | `χ(ℚ(√11)²) = 4` | the first witness over 11 from the **direct** route (FS-58 used the chain); nine seconds |
+| **143** | 664 | 1,600 | stopped at 1,056 of 1,769 | `4 ≤ χ(ℚ(√143)²) ≤ 5` | priced in phase 0, never certified before |
+| 23 | 573 | 1,365 | stopped at 467 of 1,280 | `χ(ℚ(√23)²) = 4` | re-certified from a smaller ball (248,213 at `R = 1.3`, against FS-58's 440,077) |
+| 47 | 169 | 385 | 1-minimal | `4 ≤ χ(ℚ(√47)²) ≤ 5` | reproduces FS-58's 169-point witness exactly |
+| 71 | 131 | 306 | 1-minimal | `χ(ℚ(√71)²) = 4` | smaller than FS-58's |
+| 191 | 292 | 713 | 1-minimal | `χ(ℚ(√191)²) = 4` | smaller than FS-58's |
+| 95 | 1,004 | 2,829 | stopped at 407 of 1,737 | — | **C.4 red**; stands as `Refusal claimed` |
 
-1. **The generator threshold.** `direct-witness` deletes vertex by vertex and **does not checkpoint**. On `d = 359`'s
-   46,421-point ball it was still running at **33 minutes with nothing on disk** while blocking eight other fields.
-   The threshold above which the checkpointed `extract` is used instead is now **20,000 points**, not 100,000 —
-   because at this size `extract` is both the faster tool and the only resumable one (plan rule 1: a run over ~15
-   minutes must be resumable).
-2. **Which refusing ball to extract from — and this was the decisive one.** Not the smallest. The smallest refusing
-   ball sits in **the hard band just under the threshold** (the plan's own O3, O4), where one solve costs a hundred
-   seconds while an extraction is thousands of solves:
+Every upper bound is prior art at hand level, named per README from `frame.jsonl`: the residue plane at 7 where
+`L = 4`, at 11 where `L = 5`. Nothing here is kernel-checked.
 
-   | d | smallest ball | one solve | fastest ball | one solve |
-   |---|---|---|---|---|
-   | 47 | 3,565 | **103.72 s** | 8,629 | **0.45 s** |
-   | 119 | 5,605 | **114.18 s** | 13,605 | **0.75 s** |
-   | 95 | 6,997 | 32.07 s | 17,169 | 1.07 s |
-   | 359 | 46,421 | 19.19 s | 113,325 | 1.75 s |
+**P4 ("every tier-1 refusal certifies", 0.9) is scored: 8 of 9 on the full gate, 9 of 9 on the certificate itself.**
+No extraction stalled and no refusal failed exact re-derivation — the failure mode P4 named did not occur. What
+occurred instead was a *minimality* control failing on a witness whose deletion had been stopped, which P4's wording
+did not anticipate.
 
-   Selection is now `points × (solve_seconds + 0.5)`. Measured on `d = 359`, one thing changed: the smallest ball gave
-   120 core rounds down to 5,061 points at ~14 s a round and still falling; the fastest ball gave **14 rounds down to
-   2,830 points at 0.6 s a round** — twenty times faster, converging to a *smaller* set from a *larger* ball.
+**The deletion policy, which is what phase C had to design.** `extract`'s stage 1 (assumption-core rounds) runs to
+its fixpoint — it is the reduction that matters and the frozen tool cannot stop it. Stage 2 (deletion to 1-minimal)
+is a nicety gate C.9 records and never requires, and at `d = 359` it ran at 45 s a step with ~700 steps left, so it
+gets `--deletion-budget` (600 s) from its first checkpoint and is then stopped by pid and emitted from that
+checkpoint. Four of nine witnesses came out 1-minimal anyway; the four stopped ones are labelled as stopped in the
+record, the manifest and their READMEs.
 
-   **This supersedes the phase-B §R-C hand-off note that listed the fields "smallest refusing ball first"**: that
-   ordering is right for *value* (which field to do first) and wrong for *cost* (which ball to extract from).
+**Three findings a later phase should not rediscover.**
+1. **Ball size does not predict `direct-witness`'s cost** — it deletes one vertex at a time against the *whole
+   ball's* formula, so the cost is set by the initial core: 8,629 points → 5.7 s (core 169), 13,605 → 51 s (core
+   456), 17,169 → unfinished at 2,124 s (core ≥ 1,737). A threshold is a guess about that, so `direct-witness` now
+   runs under a wall and falls back to the checkpointed `extract` on the same ball.
+2. **A stopped deletion cannot be finished later.** The frozen `extract` stores a scan position into an order built
+   from the kept set and, on resume, rebuilds that order from the *smaller* kept set while reusing the old position
+   — so it skips the vertices deleted before it. Sound (it claims only "refusing"), but only a from-scratch run can
+   be 1-minimal.
+3. **C.4 is two claims under one number.** `fs58_recheck_witness.py` first gives a genuine decorrelated second
+   opinion (all pairs in exact `Fraction` arithmetic, three solvers outside the generator's) and then runs a
+   *minimality* control (delete the pinned vertex, expect a colouring) which a stopped deletion can leave false — as
+   at 95 — and which exits before the second opinion is reported.
 
-**P4 is not yet scored.** No extraction has stalled under the corrected selection; the one that looked like a stall
-was stalling on my ball choice, not on the object.
+**Two defects in the driver were found by running it, both of the shape this project's gate section names — a check
+reporting about something other than the thing it guards.** C.2 read the frozen checker's verdict off the *first*
+line of output, but `--controls` prints its verdict on the *last*, so that item could never have gone green; and
+`Landed (certified)` was read from `certified.out` **existing**, which `land` writes whatever the checker says, so a
+REFUSED run would have promoted its field in `census.md`. Both are fixed, both have plants, and the second plant is
+live in the record.
 
-**What phase C still owes:** C.1–C.9 on all nine fields, with the priority the owner set — 359 and 11 (the two
-genuinely new certificates), then 119 and 143, then the five re-certifications. C.10 is the owner's own decorrelated
-recheck.
+**`census.md` now reads 8 `Landed (certified)`, 1 `Refusal claimed`, 31 `Not landed at tier 1`** (`table --check`:
+40 fields, 0 defects; byte-identical on regeneration). `git status --porcelain data/fs58 tools/fs58_*` is empty.
+Machine: the desktop, one heavy job at a time, ≈ 3 h 20 m total.

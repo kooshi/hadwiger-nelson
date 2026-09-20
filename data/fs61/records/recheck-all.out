@@ -1,0 +1,13 @@
+# The frozen, independent checker re-run on every committed FS-61 witness, from the files as committed.
+# for d in 11 23 47 71 95 119 143 191 359; do
+#   python3 tools/fs58_check_witness.py --radicand $d data/fs61/witness-$d/witness.json; done
+d=11   exit=0      0.2 s  CERTIFIED      189 points,   452 edges
+d=23   exit=0      1.0 s  CERTIFIED      573 points,  1365 edges
+d=47   exit=0      0.1 s  CERTIFIED      169 points,   385 edges
+d=71   exit=0      0.0 s  CERTIFIED      131 points,   306 edges
+d=95   exit=0      5.4 s  CERTIFIED     1004 points,  2829 edges
+d=119  exit=0      0.6 s  CERTIFIED      456 points,  1122 edges
+d=143  exit=0      0.8 s  CERTIFIED      664 points,  1600 edges
+d=191  exit=0      0.3 s  CERTIFIED      292 points,   713 edges
+d=359  exit=0      7.6 s  CERTIFIED     1190 points,  3243 edges
+TOTAL: 9 of 9 CERTIFIED by the frozen checker, 0 not

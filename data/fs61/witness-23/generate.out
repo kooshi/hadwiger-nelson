@@ -1,0 +1,67 @@
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 23 q1+q5+12.1+60.2 1.3 /home/kooshi/source/lean-dir/data/fs61/witness-23
+extract D=23 pool q1+q5+12.1+60.2 ball 1.3: 248213 points, 1220300 edges (1.3 s)
+  core round 0: 248213 -> 12381 points (98.5 s)
+  core round 1: 12381 -> 4915 points (13.3 s)
+  core round 2: 4915 -> 3929 points (15.4 s)
+  core round 3: 3929 -> 2964 points (10.3 s)
+  core round 4: 2964 -> 2822 points (11.5 s)
+  core round 5: 2822 -> 2646 points (11.5 s)
+  core round 6: 2646 -> 2517 points (12.4 s)
+  core round 7: 2517 -> 2307 points (8.4 s)
+  core round 8: 2307 -> 2214 points (11.2 s)
+  core round 9: 2214 -> 2166 points (10.4 s)
+  core round 10: 2166 -> 2099 points (8.2 s)
+  core round 11: 2099 -> 2068 points (8.0 s)
+  core round 12: 2068 -> 2048 points (12.1 s)
+  core round 13: 2048 -> 2031 points (8.4 s)
+  core round 14: 2031 -> 2012 points (9.3 s)
+  core round 15: 2012 -> 1927 points (9.3 s)
+  core round 16: 1927 -> 1862 points (9.3 s)
+  core round 17: 1862 -> 1851 points (8.7 s)
+  core round 18: 1851 -> 1836 points (8.6 s)
+  core round 19: 1836 -> 1797 points (6.3 s)
+  core round 20: 1797 -> 1796 points (8.0 s)
+  core round 21: 1796 -> 1781 points (7.9 s)
+  core round 22: 1781 -> 1764 points (8.6 s)
+  core round 23: 1764 -> 1756 points (7.6 s)
+  core round 24: 1756 -> 1751 points (8.0 s)
+  core round 25: 1751 -> 1737 points (8.3 s)
+  core round 26: 1737 -> 1735 points (8.2 s)
+  core round 27: 1735 -> 1729 points (6.8 s)
+  core round 28: 1729 -> 1722 points (6.7 s)
+  core round 29: 1722 -> 1701 points (6.8 s)
+  core round 30: 1701 -> 1694 points (8.8 s)
+  core round 31: 1694 -> 1688 points (8.5 s)
+  core round 32: 1688 -> 1663 points (5.1 s)
+  core round 33: 1663 -> 1654 points (7.1 s)
+  core round 34: 1654 -> 1645 points (8.0 s)
+  core round 35: 1645 -> 1610 points (6.7 s)
+  core round 36: 1610 -> 1585 points (5.1 s)
+  core round 37: 1585 -> 1574 points (6.7 s)
+  core round 38: 1574 -> 1523 points (5.9 s)
+  core round 39: 1523 -> 1521 points (5.4 s)
+  core round 40: 1521 -> 1491 points (6.8 s)
+  core round 41: 1491 -> 1400 points (5.9 s)
+  core round 42: 1400 -> 1395 points (6.0 s)
+  core round 43: 1395 -> 1368 points (4.9 s)
+  core round 44: 1368 -> 1324 points (6.0 s)
+  core round 45: 1324 -> 1296 points (5.0 s)
+  core round 46: 1296 -> 1280 points (5.3 s)
+  core round 47: 1280 -> 1280 points (5.2 s)
+  deletion: 4/1280 tested, 1114 kept
+  deletion: 29/1280 tested, 965 kept
+  deletion: 79/1280 tested, 821 kept
+  deletion: 125/1280 tested, 725 kept
+  deletion: 170/1280 tested, 680 kept
+  deletion: 208/1280 tested, 659 kept
+  deletion: 227/1280 tested, 635 kept
+  deletion: 292/1280 tested, 614 kept
+  deletion: 335/1280 tested, 592 kept
+  deletion: 467/1280 tested, 573 kept
+[fs61] generator stopped: deletion budget 600 s spent at position 467; pid 1833913 reaped with exit -15; steps.jsonl digest static across 5 s
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 23 q1+q5+12.1+60.2 1.3 /home/kooshi/source/lean-dir/data/fs61/witness-23 --stop-deletion
+extract D=23 pool q1+q5+12.1+60.2 ball 1.3: 248213 points, 1220300 edges (1.2 s)
+  deletion stopped by request at position 467: the witness is the last recorded refusing set (573 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt23): pool q1+q5+12.1+60.2 (|W| = 36, M = 60), ball piece R = 1.3: 248213 points, 1220300 edges -> deletion start 573 -> refusing set 573 points; 1365 exact unit edges; CaDiCaL exit 20 in 0.86 s (LRAT 10966590 bytes), Glucose4 ['UNSAT', 1.773], Minisat22 ['UNSAT', 2.527]; deletion controls [[0, 'SAT (model verified)'], [89, 'SAT (model verified)'], [178, 'SAT (model verified)'], [267, 'SAT (model verified)'], [356, 'SAT (model verified)'], [445, 'SAT (model verified)'], [534, 'UNSAT'], [50, 'SAT (model verified)'], [139, 'UNSAT'], [228, 'SAT (model verified)'], [317, 'UNSAT'], [406, 'SAT (model verified)']]; 15.7 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-23

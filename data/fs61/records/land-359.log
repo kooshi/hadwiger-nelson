@@ -1,0 +1,10 @@
+fs61 land d=359: cheapest refusing ball 113325 points at R=1.5 on q1+q5+60.1+60.2 (refused in 1.75 s; cost proxy 254981); checkpointed extract
+    C.1 certificate        exit  0  PASS  CERTIFIED: 1190 points of Q(sqrt359)^2, each a reduced (a, b, c, e, m); all 3243 pairs at distan
+    C.2 planted faults     exit  0  FAIL  [PASS] positive twin (the faithful files, re-serialised): expected CERTIFIED; got exit 0: CERTIF
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 427] between [0, 0, 0, 0, 1] and [38, -1, -19, -2
+    C.4 second opinion     exit  0  PASS  RECHECK PASS: 1190 points; 3243 unit pairs by Fraction arithmetic over all 707455 pairs = the fi
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 3243 edges
+    C.6 3-adic barrier            PASS  1997 of 3243 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 483 of 2019
+  d=359: 1190 points, 3243 edges -> INCOMPLETE; chi(Q(sqrt359)^2) = 4; no
+[land: 418.0 s wall on desktop]
