@@ -77,6 +77,38 @@ RUNNING     pgid 1727573 (stop with `kill -TERM -1727573`, then verify by effect
 extraction has stalled under the corrected selection — the one that looked like stalling was stalling because of my
 ball choice, not because of the object.
 
+## HALT RESOLVED by the product owner (2026-09-20) — the death is explained: the owner stopped the run, and failed to say so here first
+
+**Cause, established:** the product owner sent `kill -TERM -1727573` deliberately, after the implementer's hand-back. The defect is
+the owner's and it is one of coordination: `CLAUDE.md` says *capture the run's state into the record before signalling, and name
+what the kill forfeits* — the forfeit was named to Kooshi and the state was backed up, but **nothing was written in this record
+before the signal**, so the implementer's waiter saw a process vanish with no explanation and did exactly what rule 15 asks:
+halted, reported, relaunched nothing, and flagged its own hypothesis as a hypothesis. That is the rule working.
+
+**Why it was stopped** (measured by the owner before signalling): the `d = 359` extraction was in its vertex-deletion phase at
+**45 s per step** (positions 481 → 483 in 90 s) with about 700 steps left — roughly **nine more hours on one field, with eight
+fields queued behind it** in a sequential driver. Vertex-minimality is *recorded, not required* (gate C.9), and FS-58's extractor
+has `--stop-deletion` for exactly this (its 95 witness was certified that way). A run that blocks something is presumed killable,
+and the checkpoint made the cost of being wrong a redo.
+
+**What the kill forfeits:** a 1-minimal witness over 359, about nine hours away. The checkpoint at position 483 (1,190 points
+kept) was copied aside first, so the deletion can be resumed from exactly there if anyone wants the smaller object.
+
+**Verified by effect:** both pids of the group absent from `ps` five seconds after the signal; `steps.jsonl` byte-identical across
+100 s (steps had been 45 s apart, so a 12-second check would have proved nothing).
+
+**The implementer's hypothesis — that the harness reaps a subagent's detached jobs at hand-back — is NOT supported, and this run
+is evidence against it:** the driver was launched before the hand-back and was alive, progressing and checkpointing at elapsed
+1,393 s when the owner first inspected it, well after the hand-back. It died at the owner's signal and at no other time. The
+alternative the implementer named — a fault in `extract`'s deletion phase at this scale — is also not indicated: the phase was
+slow, not broken.
+
+**Consequence for the driver** (for whoever continues phase C): `land` should pass `--stop-deletion` to `extract`, or run deletion
+under a stated per-field time budget, so that one field cannot hold the queue; and a sequential driver should order its fields so
+a slow one blocks the fewest.
+
+---
+
 ## HALT — the certification run died without explanation (plan §5 rule 15)
 
 Detected immediately after the hand-back, when the waiter armed on "four certificates or the process gone" fired with
