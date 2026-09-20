@@ -454,6 +454,46 @@ wall, because the band just under the threshold stalls (O3, O4). Lattices of ran
 | B.6 | the table regenerates | `table` twice | byte-identical `data/fs61/census.md` and `census.jsonl` |
 | B.7 | machine and cost | the phase record | machine named, workers, CPU seconds per field, the resume command that was written before launch |
 
+### The owner's re-plan after phase B (2026-09-20) — read this before phases C–E; where it differs from the rows below, it governs
+
+**Phase B is accepted.** Nine fields refuse at tier 1 — 11, 23, 47, 71, 95, 119, 143, 191 and **359 (new; `L = 4`)** — recounted by
+the owner from the raw ball records; `table --check` re-run (0 defects), the table byte-identical on regeneration. **P2 lost** (11
+refuses by the direct route, four balls on one ten-class lattice, `M = 30`, 108 generators) and **P3 lost** (8 of 20, not ≥ 10).
+
+**What tier 1 did and did not measure — the owner's reading of the `balls asked` column, which is the finding of this phase.** 124 of
+343 ball records were asked. The 24 fields that asked nothing are two different populations, and the census must never merge them:
+* **eleven fields where every tier-1 lattice is closed by a certificate** (107, 227, 299, 347, 371, 383, 395, 419, 443, 467, 491) —
+  a null *by certificate*: no witness exists among the lattices of this depth, and only deeper lattices (more classes, larger
+  `NMAX`) can land them. More solver time at tier 1 is worth nothing there;
+* **thirteen fields whose `Open` lattices were all over the cap at `R = 1.5`** (35, 59, 83, 131, 167, 179, 203, 239, 251, 323, 407,
+  455, 479) — a null *by budget*. At eight of them (131, 167, 179, 203, 239, 407, 455, 479) the smallest `Open` lattice fits under
+  the same 600,000-point cap at `R = 1.0` (a ball holds `∝ R⁴` points: `× 0.41` at 1.2, `× 0.20` at 1.0); at the other five it
+  fits under tier 2's cap. Every refusal on record occurs at a radius between 1.0 and 1.5 (11 refuses at 1.0; 47 at 3,565 points;
+  119 at 1.2 and not at 1.0).
+
+**Rulings.**
+1. **Order from here: C, then B′, then C again on anything B′ lands, then E, then F.** Results first: nine certifications.
+2. **Phase B′ — tier `1b`, the radius ladder under the same cap** (a NEW tier id in `tiers.json`; tier 1's definition does not change):
+   for every rank-4 `Open` lattice whose `R = 1.5` ball is `Over cap (not asked)`, ask `R = 1.2` if its predicted points are under
+   the cap, else `R = 1.0` if those are; same cap (600,000), same wall (600 s), all forty fields under the one definition — **167
+   included, which is decision H applied, not broken**. Gate: B.1–B.7 re-read at tier `1b`, plus **B′.1: the predicted-points
+   formula decides which radius is asked, and the record carries predicted beside actual** (A.8's 15 % bound is the control).
+3. **Decision G is revised: the chain route (phase D, items D.1–D.6) is NOT run.** It was conditional on R-mod8 surviving phase B,
+   and R-mod8 lost at its first askable field. What replaces it is what decision G itself named — certify 11's ball (phase C) — and
+   **E.1's tier 2 is extended to BOTH halves of the family**: every field not landed after `1b` that still has an `Open` lattice.
+   D.0 survives as one table in phase E: for each `d ≡ 3 (mod 8)` field, whether a lattice with 11's class recipe (denominators
+   dividing 30) exists there, and its state.
+4. **Tier 2 must be sized by memory before it is launched** (`CLAUDE.md` § Building: *the batch is the plan; the cap is a
+   backstop*): measure one worker's peak RSS on a ball near the 3,000,000-point cap, and set the worker count to
+   `available memory / peak`, never to 16 by default — this machine has been taken down by exactly that, and an unexplained crash is
+   a halt. Write the measurement in the phase record before the launch.
+5. **The two-hour field budget records a verdict of its own, `Not asked (field budget)`**, not silence and not `Over cap` (the
+   implementer's departure, accepted in substance: `Over cap` would be a verdict the instrument did not earn; but B.1 wants every
+   `Open` lattice accounted for by a record, so the honest record is a third string). It joins §7's vocabulary table.
+6. **Census language, binding on `census.md` and on the close:** a field is `Not landed at tier T (by certificate)` when it has no
+   `Open` lattice at that tier, and `Not landed at tier T (by budget: k Open lattices, none askable)` otherwise. One phrase for
+   both would be the 1,350-against-550 error again, one level up.
+
 ### Phase C — certify every refusal (FS-58's full path; minutes per field, up to an hour for balls over 300,000 points)
 
 For each field with a `Refused` ball, smallest ball first, into `data/fs61/witness-<d>/` with a `run-all.sh` modelled on
@@ -473,7 +513,7 @@ For each field with a `Refused` ball, smallest ball first, into `data/fs61/witne
 | C.9 | (once) a vertex-minimality note | per witness: is it 1-minimal? | recorded yes/no; not required |
 | C.10 | (once) the owner's decorrelated recheck | the product owner's own script | done by the owner, not the implementer |
 
-### Phase D — the other half: `d ≡ 3 (mod 8)` (conditional, decision G; one day; fields 35 and 59 only)
+### Phase D — the other half: `d ≡ 3 (mod 8)` — **NOT RUN (owner's re-plan above, ruling 3): its condition, R-mod8 surviving phase B, failed at `d = 11`.** The rows below are kept as the record of what was planned
 
 Run only if phase B leaves R-mod8 standing. FS-58's chain route at 11: a 3-integral pool (denominators dividing 10) whose capsule
 pieces force `c(0) = c(3u)` from ~2,700 points; `1/3 = 1 + 1 + v + v̄`; four transported copies. Generalise in **new** files
@@ -568,7 +608,7 @@ two *searches* for that one kind of object: the route is the witness's provenanc
 | `Colourable (periodic colouring verified)` | a lattice | verified model — the quotient colouring is stored and re-checked on every generator |
 | `Open (no certificate among: …)` | a lattice | a statement about the search; carries its enumeration |
 | `Refused (solver claim)`, `Refused (certified)`, `Refused (inherited from <key>)` | a lattice | claim / checker / as its source |
-| `Colourable (colouring verified)`, `Refused (solver claim)`, `Unknown (budget)`, `Over cap (not asked)` | a ball | verified model / claim / nothing / nothing |
+| `Colourable (colouring verified)`, `Refused (solver claim)`, `Unknown (budget)`, `Over cap (not asked)`, `Not asked (field budget)` | a ball | verified model / claim / nothing / nothing / nothing |
 | `Separable (colouring verified)`, `Forced (solver claim)`, `Unknown (budget)` | a forcing question (phase D) | as FS-58 |
 | `Landed (certified)`, `Refusal claimed`, `Not landed at tier T` | a field | checker / claim / a null at a depth |
 | `CERTIFIED`, `REFUSED <CODE>` | the frozen checker's own words | exact |
