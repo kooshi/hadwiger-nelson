@@ -27,6 +27,40 @@ AT LAUNCH   d = 359's witness.json and witness.lrat.gz already exist (the owner'
             So 359 is the end-to-end test of C.1-C.9 with no generation.
 ```
 
+## A stop, written here BEFORE the signal (2026-09-20 06:41) — `d = 95`'s `direct-witness`
+
+**What I am about to stop and why.** `python3 tools/fs58_search.py direct-witness 95 q1+12+60.2 1.5 …`, pid 1800997,
+at **2,124 s (35 min) with nothing on disk**. `direct-witness` neither checkpoints nor can be resumed, so plan rule 1
+— *any run over ~15 minutes must be resumable* — has been violated by my own threshold for twenty minutes.
+
+**The measurement that says the threshold is wrong, and it is not ball size.** `direct-witness` takes one Glucose4
+assumption core over the whole ball and then deletes one vertex at a time, each test a solve **against the whole
+ball's formula**; `extract` deletes against the kept set only. So the cost is set by the **core** size, which is not
+known until the run has already started:
+
+| d | ball | core it deletes over | generation |
+|---|---|---|---|
+| 47 | 8,629 | 169 | **5.7 s** |
+| 119 | 13,605 | 456 | **51 s** |
+| 95 | 17,169 | ≥ 1,737 (FS-58's `extract` fixpoint on this ball) | **> 2,124 s, unfinished** |
+
+**What the kill forfeits:** a 1-minimal witness over 95, of unknown remaining cost. FS-58's own 95 witness is 1,068
+points and *not* 1-minimal, so nothing certified is at stake — 95 is one of the five re-certifications, the lowest-value
+end of the queue. The redo through `extract` is minutes (FS-58 reached the fixpoint on this very ball in ~2 min) and
+is checkpointed. **The fix makes the redo cheaper than the run being protected**, which is the third shape
+`CLAUDE.md` lists under *a run that blocks something is presumed killable*; and the run is producing a record under
+code I am about to change, which is the second.
+
+**What replaces the guess.** Not a new threshold number — the table above says ball size does not predict the cost.
+`run_generation` now gives `direct-witness` a **wall** (`--direct-wall`, 900 s) and, if it is hit, stops it by pid and
+**falls back to `extract`** on the same ball under the deletion budget. That is right wherever the cliff actually is,
+and the phase record shows it firing here. The threshold moves 20,000 → 15,000 as well, so the common case does not
+pay the wall.
+
+**Stopped by pid, verified by effect:** `kill -TERM 1800997`; the pid absent from `ps`, and `land-all` recording
+`FAIL: generation` for 95 and moving to the next field — which is the driver's own resumable path, so nothing else is
+disturbed. `land 95` is re-run afterwards under the new policy. *(Outcome, after the signal: recorded in §Results.)*
+
 ## The deletion policy (the owner's ask; my design)
 
 **The rule: stage 1 runs to its fixpoint, stage 2 gets 600 seconds.** `extract`'s stage 1 — CaDiCaL assumption-core

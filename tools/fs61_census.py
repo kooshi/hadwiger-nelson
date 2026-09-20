@@ -2484,6 +2484,8 @@ def four_colour(pts, edges):
 
 DELETION_BUDGET = 600.0    # seconds of stage-2 deletion per field; see run_generation for why it exists
 GEN_CAP = 5400.0           # a backstop on one field's whole generation call, never the plan
+DIRECT_WALL = 900.0        # `direct-witness` cannot checkpoint, so it gets a wall and then `extract` takes over
+DIRECT_MAX_POINTS = 15_000 # above this a ball goes straight to the checkpointed generator
 
 
 def _deletion_state(steps):
@@ -2546,7 +2548,11 @@ def _stop_child(p, artifact, reason, fh):
         p.wait()
     time.sleep(5)
     static = (before == dig())
-    line = (f'pid {p.pid} reaped with exit {p.returncode}; {artifact.name} digest '
+    # The load-bearing half is the REAP: this is our own child, so `p.wait()` returning means the kernel has
+    # collected it and it cannot write anything ever again -- strictly stronger than its absence from `ps`.  The
+    # digest is the redundant belt, and it is only informative when the artifact was being written at all (which
+    # for `direct-witness`, silent until it finishes, it is not); the selftest shows it able to fire.
+    line = (f'pid {p.pid} reaped with exit {p.returncode} (a reaped child cannot write); {artifact.name} digest '
             f'{"static" if static else "STILL CHANGING"} across 5 s')
     print(f'    stopped: {line}', flush=True)
     fh.write(f'[fs61] generator stopped: {reason}; {line}\n')
@@ -2554,7 +2560,8 @@ def _stop_child(p, artifact, reason, fh):
     return line, static
 
 
-def run_generation(cmdgen, out, budgeted, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
+def run_generation(D, spec, R, out, big, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
+                   direct_wall=DIRECT_WALL):
     """Run FS-58's generator for one field under a **deletion** budget, and resume it to emit the witness.
 
     Why a budget at all, and why on stage 2 only (the owner's ruling after phase C's first stall):
@@ -2568,14 +2575,23 @@ def run_generation(cmdgen, out, budgeted, deletion_budget=DELETION_BUDGET, gen_c
       * `gen_cap` is a backstop on the whole call, never the plan.  A field it stops is left resumable, not failed.
 
     Every stop is cheap because `extract` checkpoints each core round and every 60 s of deletion, so re-running
-    `land` redoes at most one round or one minute (plan rule 1).  `direct-witness` (`budgeted` False) neither
-    checkpoints nor stops, so it is run whole -- which is why `land` sends only small balls there.
+    `land` redoes at most one round or one minute (plan rule 1).
+
+    **`direct-witness` neither checkpoints nor resumes**, so it gets a plain wall (`direct_wall`) and, if it hits
+    it, is stopped and **replaced by `extract` on the same ball**.  The wall exists because ball size does not
+    predict its cost: `direct-witness` takes one assumption core over the whole ball and then deletes one vertex at
+    a time *against the whole ball's formula*, so the cost is set by the core, which is unknown until it is running
+    -- 8,629 points took 5.7 s (core 169) and 13,605 took 51 s (core 456), while 17,169 was unfinished at 2,124 s.
+    A threshold is a guess about that; a wall plus a checkpointed fallback is not.
     """
     steps, log = out / 'steps.jsonl', out / 'generate.out'
-    info = {'deletion_budget_s': deletion_budget if budgeted else None,
-            'gen_cap_s': gen_cap if budgeted else None, 'passes': [], 'stopped': None, 'stop_verified': None}
+    EX = [sys.executable, str(ROOT / 'tools' / 'fs58_search.py'), 'extract', str(D), spec, str(R), str(out)]
+    DW = [sys.executable, str(ROOT / 'tools' / 'fs58_search.py'), 'direct-witness', str(D), spec, str(R), str(out)]
+    info = {'deletion_budget_s': deletion_budget, 'gen_cap_s': gen_cap,
+            'direct_wall_s': None if big else direct_wall, 'generator': 'extract' if big else 'direct-witness',
+            'passes': [], 'stopped': None, 'stop_verified': None}
 
-    def one(cmd, tag, watch):
+    def one(cmd, tag, watch, wall=None):
         t0 = time.time()
         fh = open(log, 'a')
         fh.write(f'\n$ {" ".join(str(c) for c in cmd)}\n')
@@ -2588,6 +2604,11 @@ def run_generation(cmdgen, out, budgeted, deletion_budget=DELETION_BUDGET, gen_c
                 break
             except subprocess.TimeoutExpired:
                 pass
+            if wall and time.time() - t0 > wall:
+                reason = f'direct-witness wall {wall:.0f} s spent with nothing on disk'
+                info['stop_verified'], _ = _stop_child(p, log, reason, fh)
+                info['stopped'] = reason
+                break
             if not watch:
                 continue
             st = _deletion_state(steps)
@@ -2613,9 +2634,18 @@ def run_generation(cmdgen, out, budgeted, deletion_budget=DELETION_BUDGET, gen_c
               + (f' -- {reason}' if reason else ''), flush=True)
         return reason
 
-    stopped = one(list(cmdgen), 'deletion under budget' if budgeted else 'direct-witness (whole)', budgeted)
+    if not big:
+        if one(DW, 'direct-witness (whole, under its wall)', False, wall=direct_wall) is None:
+            info['ok'] = (out / 'witness.json').exists()
+            return info
+        # the wall fired: fall back to the checkpointed generator on the same ball, and say so in the record
+        info['generator'] = 'extract'
+        info['fallback'] = (f'direct-witness hit its {direct_wall:.0f} s wall with nothing on disk; '
+                            f'extract took over on the same ball')
+        print(f'    {info["fallback"]}', flush=True)
+    stopped = one(EX, 'deletion under budget', True)
     if stopped and not (out / 'witness.json').exists():
-        one(list(cmdgen) + ['--stop-deletion'], 'emit from the last checkpoint', False)
+        one(EX + ['--stop-deletion'], 'emit from the last checkpoint', False)
     info['ok'] = (out / 'witness.json').exists()
     return info
 
@@ -2637,7 +2667,8 @@ def _minimality(w):
             'note': 'the generator recorded no deletion phase'}
 
 
-def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
+def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
+             direct_wall=DIRECT_WALL):
     """One field, FS-58's full certification path on its cheapest refusing ball."""
     balls = load_jsonl(field_dir(D) / 'balls.jsonl')
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
@@ -2660,9 +2691,7 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     # d = 359's 46,421-point ball was still running at 33 minutes with nothing on disk, while FS-58's `extract` did a
     # 440,077-point ball over d = 23 in about eleven.  Anything above ~20,000 points therefore goes the checkpointed
     # way -- both because it is faster here and because a run over ~15 minutes must be resumable (plan rule 1).
-    big = pts_n > 20_000
-    cmdgen = ([sys.executable, str(ROOT / 'tools' / 'fs58_search.py'), 'extract' if big else 'direct-witness',
-               str(D), spec, str(R), str(out)])
+    big = pts_n > DIRECT_MAX_POINTS
     proxy = pts_n * ((b.get('solve_seconds') or 600.0) + 0.5)
     print(f'fs61 land d={D}: cheapest refusing ball {pts_n} points at R={R} on {spec} '
           f'(refused in {b.get("solve_seconds")} s; cost proxy {proxy:.0f}); '
@@ -2672,9 +2701,12 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
            'generator': 'extract' if big else 'direct-witness', 'machine': MACHINE, 'tier': tid}
     if not (out / 'witness.json').exists():
         t0 = time.time()
-        gi = run_generation(cmdgen, out, budgeted=big, deletion_budget=deletion_budget, gen_cap=gen_cap)
+        gi = run_generation(D, spec, R, out, big, deletion_budget=deletion_budget, gen_cap=gen_cap,
+                            direct_wall=direct_wall)
         rec['generate_seconds'] = round(time.time() - t0, 1)
         rec['generation'] = gi
+        rec['generator'] = gi['generator']            # the fallback may have changed it; run-all.sh must match
+        big = gi['generator'] == 'extract'
         if not gi['ok']:
             rec['result'] = 'FAIL: generation'
             defect(f'land d={D}: no witness.json after {rec["generate_seconds"]:.0f} s; '
@@ -2697,12 +2729,14 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
         checker puts its verdict on the FIRST line, but `--controls` prints one `[PASS] …` row per planted fault
         and its verdict `CONTROLS ALL PASS` on the LAST -- so a first-line test can never see it, which is what
         it did until 2026-09-20.  The exit status is read from the command, never through a pipe (rule 8)."""
+        t = time.time()
         p = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
         (out / fname).write_text(p.stdout + p.stderr)
         lines = p.stdout.strip().splitlines() or ['']
         line = lines[0] if where == 'first' else lines[-1]
         ok = (p.returncode == 0) == want[1] and line.startswith(want[0])
         steps[name] = {'exit': p.returncode, 'line': line[:200], 'ok': ok, 'verdict_line': where,
+                       'seconds': round(time.time() - t, 1), 'file': fname,
                        'rows': {'PASS': sum(1 for l in lines if l.lstrip().startswith('[PASS]')),
                                 'FAIL': sum(1 for l in lines if l.lstrip().startswith('[FAIL]'))}}
         print(f"    {name:22s} exit {p.returncode:2d}  {'PASS' if ok else 'FAIL'}  {line[:96]}", flush=True)
@@ -2738,30 +2772,7 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src,
                 'result': 'CERTIFIED' if (ok and col and nb) else 'INCOMPLETE'})
     write_witness_readme(D, out, rec, w, fr)
-    # `steps.jsonl` is the extraction checkpoint: megabytes of lattice coordinates, provenance and not evidence.
-    # FS-58 gitignores it in witness-23, -95 and -11 for exactly that reason, and this follows FS-58.
-    (out / '.gitignore').write_text('steps.jsonl\n' if big else '')
-    stop_note = ('' if mn['minimal'] != 'no' else f'''#
-# NOTE, and it is the honest caveat on "byte-identical": this witness's deletion was STOPPED at position
-# {mn["stopped_at"]} of {mn["of_tests"]}, so `--stop-deletion` below reproduces it only with the SAME steps.jsonl present
-# (it is gitignored -- provenance, not evidence).  From an empty directory the core rounds rerun deterministically
-# and `--stop-deletion` then stops at position 0, giving the larger core-round witness; drop the flag to run the
-# full deletion, which is deterministic too and yields a SMALLER 1-minimal witness (slow: at d = 359 the deletion
-# ran at 45 s a step).  Either way what the reviewer checks is `witness.json` + `witness.lrat.gz` as committed.''')
-    (out / 'run-all.sh').write_text(f'''#!/usr/bin/env bash
-# Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic.{stop_note}
-set -euo pipefail
-cd "$(dirname "$0")/../../.."
-source scripts/dev-env.sh >/dev/null 2>&1 || true
-D={rel(out)}
-python3 tools/fs58_search.py {'extract' if big else 'direct-witness'} {D} {spec} {R} $D{
-        ' --stop-deletion' if mn['minimal'] == 'no' else ''} > $D/generate.out
-python3 tools/fs58_check_witness.py --radicand {D} $D/witness.json > $D/certified.out
-python3 tools/fs58_check_witness.py --radicand {D} --controls $D/witness.json > $D/controls.out
-python3 tools/fs58_recheck_witness.py {D} $D/witness.json > $D/recheck.out
-echo "run-all: done"
-''')
-    (out / 'run-all.sh').chmod(0o755)
+    write_witness_scripts(D, out, rec)
     append(FS61 / 'landings.jsonl', rec)
     man = {'key': str(D), 'd': D, 'path': rel(out), 'points': len(pts), 'edges': len(edges),
            'lcm_denominator': rec['lcm_denominator'], 'pinned_edge': w['pinned_edge'],
@@ -2784,7 +2795,8 @@ def write_witness_readme(D, out, rec, w, fr):
 **The claim.** The {rec['points']} points listed in `witness.json` all lie in `ℚ(√{D})²`, and the graph joining the pairs
 exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√{D})` needs at least four colours.
 
-**Re-check it with one command** (about a second; it needs nothing from this project but Python):
+**Re-check it with one command** ({rec['steps']['C.1 certificate'].get('seconds', '?')} s on the machine that wrote
+this; it needs nothing from this project but Python):
 
 ```
 python3 tools/fs58_check_witness.py --radicand {D} data/fs61/witness-{D}/witness.json
@@ -2800,7 +2812,7 @@ exit 1.
 **What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
 `χ(ℚ(√{D})²) ≤ {fr['L']}`. With it, **{rec['value']}**. Nothing here proves the upper bound.
 
-**What else was checked** (all four files are in this directory, each the verbatim output of the command named):
+**What else was checked** (each file below is in this directory, the verbatim output of the command named):
 
 | file | command | result |
 |---|---|---|
@@ -2827,10 +2839,67 @@ Regenerate with `./run-all.sh` (read its header first if the deletion was stoppe
 ''')
 
 
+def write_witness_scripts(D, out, rec):
+    """`run-all.sh` and `.gitignore`, from the landing record alone.  `steps.jsonl` is the extraction checkpoint --
+    megabytes of lattice coordinates, provenance and not evidence -- and FS-58 gitignores it in witness-23, -95 and
+    -11 for exactly that reason; this follows FS-58, and says out loud what that costs a from-scratch rerun."""
+    big, spec, R, mn = rec['generator'] == 'extract', rec['spec'], rec['R'], rec['minimality']
+    if big:
+        (out / '.gitignore').write_text('steps.jsonl\n')
+    elif (out / '.gitignore').exists():
+        (out / '.gitignore').unlink()
+    stop_note = ('' if mn['minimal'] != 'no' else f'''#
+# NOTE, and it is the honest caveat on "byte-identical": this witness's deletion was STOPPED at position
+# {mn["stopped_at"]} of {mn["of_tests"]}, so `--stop-deletion` below reproduces it only with the SAME steps.jsonl present
+# (it is gitignored -- provenance, not evidence).  From an empty directory the core rounds rerun deterministically
+# and `--stop-deletion` then stops at position 0, giving the larger core-round witness; drop the flag to run the
+# full deletion, which is deterministic too and yields a SMALLER 1-minimal witness (slow: at d = 359 the deletion
+# ran at 45 s a step).  Either way what the reviewer checks is `witness.json` + `witness.lrat.gz` as committed.''')
+    (out / 'run-all.sh').write_text(f'''#!/usr/bin/env bash
+# Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic.{stop_note}
+set -euo pipefail
+cd "$(dirname "$0")/../../.."
+source scripts/dev-env.sh >/dev/null 2>&1 || true
+D={rel(out)}
+python3 tools/fs58_search.py {'extract' if big else 'direct-witness'} {D} {spec} {R} $D{
+        ' --stop-deletion' if mn['minimal'] == 'no' else ''} > $D/generate.out
+python3 tools/fs58_check_witness.py --radicand {D} $D/witness.json > $D/certified.out
+python3 tools/fs58_check_witness.py --radicand {D} --controls $D/witness.json > $D/controls.out
+python3 tools/fs58_recheck_witness.py {D} $D/witness.json > $D/recheck.out
+echo "run-all: done"
+''')
+    (out / 'run-all.sh').chmod(0o755)
+
+
+def cmd_land_readme(fields=None):
+    """Rewrite the consumer-facing files -- README.md, run-all.sh, .gitignore -- from the landing records already
+    on disk, asking no solver and touching no certificate.  The README is the surface a reviewer reads, so it gets
+    edited more often than the evidence does; without this, fixing a sentence in it would mean re-running the whole
+    gate (seven minutes at d = 359) to regenerate one paragraph."""
+    land = load_jsonl(FS61 / 'landings.jsonl')
+    frame = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'frame.jsonl')}
+    todo = fields or [d for d in LAND_ORDER if land.get(str(d), {}).get('result') == 'CERTIFIED']
+    bad = []
+    for D in todo:
+        rec = land.get(str(D))
+        if not rec or rec.get('result') != 'CERTIFIED':
+            defect(f'land-readme d={D}: no CERTIFIED landing record')
+            bad.append(D)
+            continue
+        out = FS61 / f'witness-{D}'
+        w = json.loads((out / 'witness.json').read_text())
+        write_witness_readme(D, out, rec, w, frame[D])
+        write_witness_scripts(D, out, rec)
+        print(f'  d={D}: README.md, run-all.sh rewritten from the landing record', flush=True)
+    print(f'DONE land-readme: {len(todo)} fields, {len(bad)} without a record', flush=True)
+    return bad
+
+
 LAND_ORDER = [359, 11, 119, 143, 47, 95, 191, 71, 23]     # the owner's priority: the four with no certificate first
 
 
-def cmd_land_all(fields=None, tid='1', deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
+def cmd_land_all(fields=None, tid='1', deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
+                 direct_wall=DIRECT_WALL):
     """Phase C over every refusing field, resumable: a field whose landing record says CERTIFIED is skipped."""
     done = load_jsonl(FS61 / 'landings.jsonl')
     todo = fields or LAND_ORDER
@@ -2843,7 +2912,7 @@ def cmd_land_all(fields=None, tid='1', deletion_budget=DELETION_BUDGET, gen_cap=
         if done.get(str(D), {}).get('result') == 'CERTIFIED':
             continue
         t0 = time.time()
-        r = cmd_land(D, tid, deletion_budget=deletion_budget, gen_cap=gen_cap)
+        r = cmd_land(D, tid, deletion_budget=deletion_budget, gen_cap=gen_cap, direct_wall=direct_wall)
         bad += r
         if not r:
             cert.append(D)
@@ -2911,14 +2980,20 @@ def main():
     budget_help = ('seconds of one-vertex-at-a-time deletion per field before the generator is stopped and the '
                    'witness emitted from its last checkpoint; minimality is recorded, never required (gate C.9)')
     cap_help = 'a backstop on one field\'s whole generation call; 0 disables it. A field it stops stays resumable'
+    wall_help = ('seconds before `direct-witness` -- which cannot checkpoint -- is stopped and the checkpointed '
+                 '`extract` takes over the same ball')
     p = sub.add_parser('land', help="phase C: FS-58's full certification path on a field's cheapest refusing ball")
     p.add_argument('d', type=int); p.add_argument('--tier', default='1')
     p.add_argument('--deletion-budget', type=float, default=DELETION_BUDGET, help=budget_help)
     p.add_argument('--gen-cap', type=float, default=GEN_CAP, help=cap_help)
+    p.add_argument('--direct-wall', type=float, default=DIRECT_WALL, help=wall_help)
+    p = sub.add_parser('land-readme', help='rewrite README.md/run-all.sh from the landing records; no solver')
+    p.add_argument('--fields', type=int, nargs='*')
     p = sub.add_parser('land-all', help='phase C over every refusing field, in priority order, resumable')
     p.add_argument('--tier', default='1'); p.add_argument('--fields', type=int, nargs='*')
     p.add_argument('--deletion-budget', type=float, default=DELETION_BUDGET, help=budget_help)
     p.add_argument('--gen-cap', type=float, default=GEN_CAP, help=cap_help)
+    p.add_argument('--direct-wall', type=float, default=DIRECT_WALL, help=wall_help)
 
     a = ap.parse_args()
     t0 = time.time()
@@ -2969,9 +3044,13 @@ def main():
         else:
             cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
-        bad = cmd_land(a.d, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap)
+        bad = cmd_land(a.d, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap,
+                       direct_wall=a.direct_wall)
+    elif a.cmd == 'land-readme':
+        bad = cmd_land_readme(a.fields or None)
     elif a.cmd == 'land-all':
-        bad = cmd_land_all(a.fields or None, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap)
+        bad = cmd_land_all(a.fields or None, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap,
+                           direct_wall=a.direct_wall)
     print(f'[{a.cmd}: {time.time() - t0:.1f} s wall on {MACHINE.split(" (")[0]}]', flush=True)
     sys.exit(1 if bad else 0)
 
