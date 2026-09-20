@@ -113,7 +113,43 @@ minimise the number of vertices using the fourth (local search; the GPU's kind o
 fourth-colour vertices that stays clearly positive across many restarts is evidence — never proof — that the lattice refuses, and
 how deep; its reciprocal estimates the core's size, which prices R6's growth budget.
 
-**Order for the subplan:** R5 is free and comes first (it is a table). R6 with its controls is the instrument to build. R7 is an
+**R9 — Kooshi's triangle as the seed of a forcer: the chain route, re-priced** (recorded 2026-09-20; he raised the triangle again
+the day the phase diagram was found, and the two fit). *The object* is recorded in full, with credit, in
+`plans/FS58-prelude-seven-cycle-gadget.md`: ℚ(√167)'s shortest odd cycle is a 7-cycle drawn as a triangle — a **run of three
+collinear unit edges** from `0` to `3w`, `w = (0, −1)`, closed by two legs, each the long diagonal of a unit diamond
+(`cos θ = 24/25`), apex `(√167/10, −3/2)`; 9 points, 11 unit edges; the Moser spindle is the same family's run-of-one member. **All
+of its directions have denominator 140 — no 3 — so by the kernel barrier (row 72) it can never refuse on its own**, and the prelude's
+experiment (unions of rotated copies to 50,000 points, 3-colourable in 0.6 s) confirmed that. What that experiment never asked is
+the question the triangle is shaped for:
+* **Its base is the chain route's target pair.** The kernel proof at ℚ(√11) rests on a 52-point forcer that makes `c(0) = c(3u)`
+  along a rational direction; in any affine (rigid) 3-colouring of 3-integral material `3w` is a period. So the base `(0, 3w)` is
+  the natural candidate forced pair at 167 and the triangle the natural seed. **The ask: on a piece of the pure 3-integral pool
+  `W₁₄₀` (where the 7-cycles live) containing the run, is there a 3-colouring with `c(0) ≠ c(3w)`?** `UNSAT` is a finite forcer.
+  Use only 3-integral material: the prelude measured that mixing in 3-non-integral rotations kills every additive colouring (16 → 0)
+  and with them the rigidity a forcer needs. Its `R = 140` control had 16 additive colourings; whether it had any *non*-additive one
+  was not asked — that is this ask.
+* **The chain is explicit and short** [exact arithmetic, checked 2026-09-20]: with `w₂₄ = ((11 + √167) + i(−11 + √167))/24` and its
+  Galois conjugate `w₂₄′ = ((11 − √167) + i(−11 − √167))/24`, both unit vectors, `w₂₄ + w̄₂₄ + w₂₄′ + w̄₂₄′ = 11/6`, so
+  **`1/6 = 1 + 1 − w₂₄ − w̄₂₄ − w₂₄′ − w̄₂₄′` and `1/3` is a sum of twelve unit vectors**: twelve transported copies of the forcer
+  chain `0` to `1` by periods `3uᵢ`, and the unit edge `(0, 1)` closes it (G55; FS-58 did it with four at ℚ(√11)). The 3 in the
+  denominator enters only through the transports, exactly as the barrier requires. A shorter representation of `1/3` may exist; this
+  one suffices.
+* **The route needs nothing that 167 was found to lack.** R5's finding is that 167's *3-non-integral* lattices hold too few unit
+  vectors (20–36) to refuse. The chain route never refuses a 3-non-integral ball; it needs a finite forcer in the 3-integral pool,
+  and the denominator-140 lattice is rich (the prelude's `R = 140` union shows 50 directions up to sign — about a hundred unit
+  vectors; **check the count**) at covolume `2.8·10⁻⁵`.
+* **Re-priced by the phase diagram.** FS-58 (D3) priced *box-shaped* thick pieces at `10⁷` points and stopped (R3 above). A capsule
+  around the run `[0, 3w]`, or a ball of radius ≈ 1.6 about its midpoint, is of order one to two million points at an average degree
+  in the thirties — the regime where every ask on FS-61's record decided in seconds to minutes, colourable or not. It is **one pinned
+  ask**, memory measured first (edges, not points, set the footprint at that degree). `UNSAT` ⟹ extract the forcer's core ⟹ twelve
+  copies and an edge ⟹ **χ(ℚ(√167)²) ≥ 4**, the jackpot of this stub, by the route the kernel already knows. `SAT` ⟹ a verified
+  non-affine colouring of that piece: thicken, or run R6 seeded on the triangle with the pin `c(0) ≠ c(3w)` as its target and R7's
+  `P_same(3w)` as its progress bar.
+* *Before running:* read FS-58 §D3 and §R-B3 for what was actually asked of `W₁₄₀` (so this is not a repeat); confirm `g`; and keep
+  the control — the same pinned ask on the ℚ(√11) pool must reproduce the known forcer.
+
+**Order for the subplan:** **R9's one pinned ask is the cheapest decisive experiment in this stub and goes first**, after its
+"before running" checks. R5 is free and comes with it (it is a table). R6 with its controls is the instrument to build. R7 is an
 afternoon on top of any sampler and serves both R6 and the chain route. R8 only if R6 stalls. R1's long solves come after all of
 them, re-aimed by R5.
 
