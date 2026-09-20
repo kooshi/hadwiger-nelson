@@ -63,8 +63,13 @@ place whose residue field is again **formally real**, which is the theory of rea
 **So Route C trades one Mathlib gap for a different one** — and that is the point: the two gaps should be priced against each
 other before either route is committed to, and nobody has priced the real-places one.
 
-*Prior art unchecked, and almost certainly folklore* — this is the standard specialisation argument in valuation dress. The gate
-below owes the search, and nothing here may be claimed until it runs.
+***Prior art, found 2026-09-19 at FS-61's gate and read first-hand in the held PDF: the Lemma is `[Fischer1990]` Theorem 6*** —
+*"`F^d` can be k-colored (has an additive k-coloring) iff `F(α)^d` can"*, any dimension, proved by clearing denominators in `F[x]`
+and setting `x = 0`. **And his Remark 1 is this stub's whole bridge, with a false step:** it reduces a finitely generated `E ⊂ ℝ`
+to a number field by asserting `E` is *"a purely transcendental extension of some finite algebraic extension"* of ℚ — false in
+general (the function field of a curve of positive genus) — and then invokes de Bruijn–Erdős. So (ii) has been *stated* in print
+since 1990 and never correctly *proved* there; this stub's product is the repair — real places, or Tarski–Seidenberg — and the
+kernel form. B′ remains a fair half-day kernel theorem, credited to Fischer.
 
 ## 3a. Prior-art gate (WORKFLOW 3a) — owed, never run
 

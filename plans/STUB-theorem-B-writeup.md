@@ -1,5 +1,19 @@
 # FS-20 — The paper: one reduction, six lineages, and the first exact value past the Moser obstruction
 
+> **BLOCKED 2026-09-19 — read `[Fischer1994]` before anything else in this stub is acted on.** FS-61's prior-art gate found
+> K. G. Fischer, *A planar geometric graph of chromatic number four*, Congressus Numerantium 104 (1994) 73–79 (Zbl 0836.05030). Its
+> zbMATH record is an author's summary with no reviewer, read first-hand by the product owner through the zbMATH API: for squarefree
+> coprime `p ≡ 3`, `q ≡ 11 (mod 16)` with `pq ≡ 1 (mod 32)` the plane over `ℚ(√p, √q)` has an additive 4-colouring (a homomorphism
+> from the group the unit vectors generate to `ℤ/4`, nonzero on every unit vector), and *"Since the graph `ℚ(√3, √11)²` contains
+> finite graphs which require four colors, it follows that the chromatic number of this graph is 4."* `p = 3`, `q = 11` meet all three
+> congruences. **That is Theorem B's value, thirty-two years before this project's proof.** The paper is print-only (HathiTrust
+> lists Michigan and Penn State, search-only — the same holders as the `[Fischer1990b]` loan); nobody here has seen it. **If the proof
+> stands, this stub's title and premise are false** — the value was not past anyone's reach, and the six later posings were of a
+> question already answered in a venue none of them, nor we, searched (G49). What would be left to write: the kernel proof; Theorem A's
+> general form, which is what `[Madore2015]` Prop. 3.9 declines to formulate and which Fischer's congruence family does not obviously
+> contain; and the comparison of his `ℤ/4`-valued colouring with our `𝔽₄`-valued residue colouring — different groups, so possibly
+> different colourings of the same plane, which would itself be worth a paragraph. **First task: the library request.**
+
 > **Read before this milestone opens (Kooshi, 2026-09-11).** `~/source/fermats-last-theorem/HADWIGER-NELSON-DETAILED.md`
 > (commit `e87f426e`, local only — keep it unpushed) analyses Anthropic's Lean proof of Fermat's Last Theorem
 > for this project. Its useful part is the verification packaging: a final check whose output is pinned with
