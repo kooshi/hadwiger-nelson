@@ -1047,6 +1047,21 @@ is real. "Not landed" is a complete sentence.
 Ask with the measurement that justifies it. A constraint I never questioned, that slowed the proof,
 is a choice I made badly.
 
+## Delegation — one level deep
+
+**Standing rule (Kooshi, 2026-09-19): no child agent spawns children of its own.** Only the top-level session — the one Kooshi is
+talking to — launches agents. **If you are reading this as a subagent: do not use the Agent tool, a fork, a workflow, or any other
+mechanism that starts another agent. If the work does not fit in your context, stop at a clean boundary, persist what you have, and
+tell the session that briefed you what is left** — that is a good report, never a failure. Minted the day a planner briefed as
+"exactly one planner" delegated part of its prior-art gate to a subagent that spawned two more: three agents nobody had budgeted,
+could review, or knew existed. **Why, in two parts.** *Cost:* nested agents multiply token spend, and a milestone's staffing — at
+present one Fable 5.1 planner and one Opus 5 implementer, no standing advisor, an advisor only as a one-off query at a named wall —
+is a budget decision Kooshi makes, which a child silently overrides by delegating. *Review:* the product owner scores work by
+artifact, and cannot score work done by an agent it does not know about — nor trust a bibliography entry's read-status when the
+reading was a grandchild's summary (G50). **For the session that briefs:** the rule goes into *every* brief, in words, with its
+reason. That this file is loaded is not enough — the brief is what an agent acts on, and the brief that caused this said "one
+planner" and never said the count included anything the planner might start. A head-count in a brief says so explicitly.
+
 ## The standard of evidence above rung B
 
 χ(ℝ²) ≥ 5 is a known theorem; a reader's default is to believe it. **χ(ℝ²) ≥ 6 would be new
