@@ -56,7 +56,7 @@ plan (68 KB — read by search, not whole) the useful parts are §2 D1–D4 (lin
   `q5` = the `(3/5, 4/5)` family). Names are meaningful only under the frozen `classes()`.
 * **spec** / **pool** — a `+`-joined list of class names (`q1+12+60.1`) and the union of those classes. FS-58's commands take specs.
 * **lattice** — the subgroup of the plane a pool generates; here always with **every** unit vector it contains as a generator
-  (FS-58: "saturated"). **Covolume** — its 4-volume in the two real embeddings; a ball of radius `R` holds about `4.93·R⁴/covolume` points.
+  (FS-58: "saturated"). **Covolume** — its 4-volume in the two real embeddings; a ball of radius `R` — a *bidisc*, see below — holds about `π²R⁴/covolume` points (119: `9.87·1.5⁴/0.00367 ≈ 13,610` against 13,605 counted).
 * **quotient filter** — asks whether some finite quotient `Λ/L` of the lattice is 3-colourable; if so the whole lattice graph has a
   periodic 3-colouring and **no ball of it can ever refuse** (FS-58: the lattice is "dead"; otherwise "live", here `Open`).
 * **ball** — the lattice points within radius `R` of the origin in both embeddings (FS-58's `piece(…, 'ball', R)`), with every unit
@@ -273,7 +273,7 @@ or `"chromatic number" plane "real quadratic"` [sub]. **Not searched by anyone:*
    halves are tested on every atlas row (a failing row is a defect in the law or in the enumerator; report it, never patch around it).
 3. **Size law** [derived shape; the constants are the census's to measure]. The lattice spanned by the axis and a class of
    denominator `N` has covolume `index·(2√d/N²)²` in the trace-form embedding (FS-58 D4), so a ball of radius `R` holds about
-   `(π²/2)R⁴·N⁴/(4d·index)` points; at matched *relative height* `N/√d` that is **proportional to `d`**. Reading **R-size**: *landing
+   `π²R⁴·N⁴/(4d·index)` points (the ball is a product of two discs, one per embedding); at matched *relative height* `N/√d` that is **proportional to `d`**. Reading **R-size**: *landing
    at a fixed solver budget is decided by size — the least 3-non-integral denominators grow like `√d`, the refusing ball grows with
    `d`, and `ℚ(√167)` is not arithmetically special for four colours, only large* (its analogue of 23's hit is 2–5 million points,
    which is where FS-58's solves went `Unknown`). Killing test: a field `d ≡ 7 (mod 8)` with a live coarse lattice (covolume ≥ `10⁻³`)
