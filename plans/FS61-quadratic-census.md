@@ -97,7 +97,7 @@ All of this is **pricing**, run from a scratch copy of the FS-58 tools so that `
   `Λ/9Λ` for 59), that is, a verified periodic 3-colouring of the whole lattice graph: no ball of them ever refuses. 59's balls colour
   in under a second to radius 2.3 (237,229 points). **One lattice per field was asked — this is a reading, registered as P2, not a
   fact about the class.**
-* **O6 — the two halves of the family live in disjoint denominator worlds** [exact enumeration, all `d`]. For a fixed denominator
+* **O6 — the two halves of the family live in disjoint worlds of *even* denominators** [exact enumeration, all `d`; odd denominators such as 57 (over 143), 63 (over 59), 171 (over 167) occur in both halves]. For a fixed denominator
   `N` only finitely many fields have a non-rational unit vector of least denominator `N` (its coordinates force `d ≤ N²`). Enumerating
   by `N`: `N = 6` → `{11, 35}`; `N = 18` → `{11, 35, 155, 203, 299, 323}`; `N = 30` → `{11, 35, 59, 131, 155, 179, 371, …}`;
   `N = 42` → `{59, 83, 395, …}` — **all `d ≡ 3 (mod 8)`**; while **`N = 12` → exactly `{23, 47, 71, 95, 119, 143}`**, `N = 24` →
@@ -229,10 +229,15 @@ or `"chromatic number" plane "real quadratic"` [sub]. **Not searched by anyone:*
    and listable by solving for `d`. *Enumerate the parameter first* (`CLAUDE.md` § The gate): the atlas of phase A is this inverted
    enumeration, and it cannot silently omit a field the way a per-field scan at fixed depth can.
 2. **Prime support** [prior art: the `p`-integrality of unit vectors, `[Fischer1990b]`]. An odd prime `p ≡ 3 (mod 4)` divides some
-   class denominator iff `(d/p) = −1` (`p` inert in `F`, residue field `𝔽_{p²} ∋ i`); every `p ≡ 1 (mod 4)` can. For the dyadic prime
-   O6 shows **`v₂(N) ≤ 1` when `d ≡ 3 (mod 8)` and `v₂(N) ≥ 2` when `d ≡ 7 (mod 8)`** — to be derived in phase A (stable dyadic prime
-   against split), and tested on every atlas row (a failing row is a defect in the law or in the enumerator; report it, never patch
-   around it).
+   class denominator iff `(d/p) = −1` (`p` inert in `F`, residue field `𝔽_{p²} ∋ i`); every `p ≡ 1 (mod 4)` can. *Proof of "only if", five lines:* a prime `𝔓` of `K` fixed by conjugation has
+   `v_𝔓(u) = v_𝔓(ū)`, and `uū = 1` makes the sum zero, so **every unit vector is a unit at every stable prime**; for odd `p` with
+   `(d/p) ∈ {0, 1}` every prime above `p` is stable, the coordinates `(u ± ū)/2`, `/2i` are integral there, and a reduced denominator
+   divisible by `p` would force `p` into all of `a, b, c, e`. *"If"* is Hilbert 90 with a `z` of valuation 1 at one prime above `p` and
+   0 at its conjugate (no principality needed — the class group decides only *which* `N` occur, `[ZanardoZannier1991]`). **The dyadic
+   law:** for `d ≡ 3 (mod 8)` the dyadic prime is stable and `2 = 𝔭²` in `F`, so the same argument gives **`v₂(N) ≤ 1`** [proved: if
+   `4 | N` then integrality up to `1/2` puts `a + b√d` and `c + e√d` in `𝔭² = 2𝒪`, so all of `a, b, c, e` are even]. For
+   `d ≡ 7 (mod 8)` O6 shows **`v₂(N) ≠ 1`** on nine denominators — *observed, not derived*; a mod-8 count does not settle it. Both
+   halves are tested on every atlas row (a failing row is a defect in the law or in the enumerator; report it, never patch around it).
 3. **Size law** [derived shape; the constants are the census's to measure]. The lattice spanned by the axis and a class of
    denominator `N` has covolume `index·(2√d/N²)²` in the trace-form embedding (FS-58 D4), so a ball of radius `R` holds about
    `(π²/2)R⁴·N⁴/(4d·index)` points; at matched *relative height* `N/√d` that is **proportional to `d`**. Reading **R-size**: *landing
@@ -257,7 +262,7 @@ outcome.
 | id | reading | predicts | the measurement that can contradict it |
 |---|---|---|---|
 | **R-cycle** (FS-58 §R-B5) | a coarse saturated 3-non-integral lattice with a short odd cycle lands | refusal tracks least odd cycle | 59's lattice already contradicts it *as stated* (odd cycle 7, coarse, dead). Restated on **live** lattices only: among live lattices at matched ball size, does odd girth ≤ 9 against > 9 separate refusing from colourable? |
-| **R-mod8** (the 2-adic reading, sharpened by O5–O6) | the direct route lands only at `d ≡ 7 (mod 8)`; at `d ≡ 3 (mod 8)` coarse lattices are dead and the chain route (a 3-integral forcer plus the chain, as at 11) is the only one | zero refusals among the twenty `d ≡ 3 (mod 8)` fields at tier 1 | one refusing ball at any `d ≡ 3 (mod 8)` |
+| **R-mod8** (the 2-adic reading, sharpened by O5–O6) | the direct route lands only at `d ≡ 7 (mod 8)`; at `d ≡ 3 (mod 8)` coarse lattices are dead and the chain route (a 3-integral forcer plus the chain, as at 11) is the only one | no **ball** refuses among the twenty `d ≡ 3 (mod 8)` fields at tier 1 (lattices over 11 that contain FS-58's witness are `Refused` *by inheritance* — that is not a ball and does not count) | one refusing ball at any `d ≡ 3 (mod 8)` |
 | **R-L** (the mod-84 / local-bound reading) | landing depends on `L(F)` | different landing rates for `L = 4` and `L ≥ 5` among `d ≡ 7 (mod 8)` at matched relative height | 47 and 143 (`L = 5`) landing like their `L = 4` neighbours — already suggestive; the census gives the count |
 | **R-C** (G60's ratio reading as a *decider* of finite landing) | a refusing lattice has least character mean above −1/2 | — | FS-58's `charmeans` on every refusing lattice: one reading below −1/2 contradicts it (FS-58 saw none above −1/2 in 1,505 pools over 23, which landed) |
 | **R-size** (D-H.3) | the least refusing ball grows like a power of `d` at matched relative height | log–log slope of least refusing size against `d` in `[0.5, 2]` | slope outside, or no correlation |
@@ -266,9 +271,12 @@ R-mod8 and R-size can both hold (they describe different halves); R-cycle and R-
 girth that refuses; R-L disagrees with all three on the `L = 5` fields. Every reading is scored at the close, won or lost, in those
 words. **Each has a unit of analysis, and the tables name it** (§M1.8): R-cycle and R-C are statements about *lattices* (population:
 rank-4 `Open`-or-`Refused` lattices at one tier); R-mod8, R-L and R-size about *fields*. **R-mod8 has two strengths, scored
-separately:** (a) *no tier-1 lattice over any `d ≡ 3 (mod 8)` is `Refused`* — a null at a budget; (b) *every tier-1 lattice over
-those fields is `Colourable` by certificate* — the barrier-shaped finding, which by downward inheritance needs certificates only on
-the finest lattices and would make A.7's rule a theorem candidate for the whole class.
+separately:** (a) *no tier-1 ball over any `d ≡ 3 (mod 8)` refuses* — a null at a budget; (b) *every tier-1 lattice over those
+fields is `Colourable` by certificate, except — over 11 — the lattices that contain FS-58's witness* — the barrier-shaped finding,
+which by downward inheritance needs certificates only on the finest lattices and would make A.7's rule a theorem candidate for the
+class. The exception is the point: FS-58's 204-point witness over 11 draws on **ten** classes (denominators 1, 5, 6, 10, 15, 25, 30,
+50, 75, 150), so whatever refuses over `d ≡ 3 (mod 8)` is rich in classes, not coarse — A.5 records which tier-1 lattices over 11
+contain it, and D.0 asks the same *recipe* of 35 and 59.
 
 ## §4 Decisions (choice · alternative weighed · why · confidence, and what would change it)
 
@@ -326,7 +334,7 @@ the finest lattices and would make A.7's rule a theorem candidate for the whole 
 ## §6 The phases and their gates (what · verified how · pass condition)
 
 *An item is green only when the product owner has opened the named artifact. Sizes: phase 0 — 8 items; A — 9; B — 8; C — 8 per field
-plus 2; D — 6; E — 7; F — 5.*
+plus 2; D — 7; E — 7; F — 5.*
 
 ### Phase 0 — the instrument (`tools/fs61_census.py`; half a day)
 
@@ -352,11 +360,11 @@ Build the census driver as a thin layer over FS-58's functions (`import fs58_sea
 |---|---|---|---|
 | A.1 | the frame (D-F.1) → `data/fs61/frame.jsonl`: every squarefree `d < 2000` with `d mod 4, 3, 8`, the stable small primes, `L` as `2`, `3`, `4 (dyadic)`, `4 (7)`, `5 (11\|19)`, `≥6 (first usable primes)` | two computations: congruences and Legendre symbols; PARI (`gp`) prime decomposition of 2, 3, 7, 11, 19, 23 in `K = ℚ(√d, i)` | they agree on every row; the 40-field list of §1 is reproduced exactly; the known values (`χ = 2`: 2, 5, 13; `= 3`: 3, 7, 19; `L(167) ≥ 6` with first usable primes 23, 43) are rows |
 | A.2 | the atlas (D-H.1) → `data/fs61/atlas.jsonl`: for every squarefree `d ≡ 11 (mod 12)`, `d < 2000`, the class denominators `N ≤ 420` with orbit counts, `v₂`, `v₃`, and `N₁(d)` (least non-rational), `N₃(d)` (least with `3 \| N`) | inverted enumeration (solve for `d`); cross-check against FS-58's `classes(D, NMAX)` | exact agreement of (denominator, orbit count) lists with `classes` on FS-58's 14 fields and on 119, 155, 299 at `NMAX = 180`; `D(6) = {11, 35}` and **`D(12) = {23, 47, 71, 95, 119, 143}`** reproduced; the plant (drop the orthogonality condition `ab + ce = 0`) changes `D(12)` and is caught |
-| A.3 | the laws of D-H.2, tested on every atlas row | a script over `atlas.jsonl` | height floor `N ≥ √d`: 0 violations; odd `p ≡ 3 (mod 4)` divides a denominator only if `(d/p) = −1`: 0 violations; `v₂(N) ≤ 1` for `d ≡ 3 (mod 8)` and `≥ 2` for `d ≡ 7 (mod 8)`: 0 violations **or the violating rows printed in full and the law restated** |
-| A.4 | hand derivation of the dyadic law, in `§R-A` of this plan, status `[hand]` | read by the product owner | a proof, or an honest "not derived" with what blocked it |
+| A.3 | the laws of D-H.2, tested on every atlas row | a script over `atlas.jsonl` | height floor `N ≥ √d`: 0 violations; odd `p ≡ 3 (mod 4)` divides a denominator only if `(d/p) = −1`: 0 violations; `v₂(N) ≤ 1` for `d ≡ 3 (mod 8)` (proved — a violation is an enumerator defect): 0 violations; `v₂(N) ≠ 1` for `d ≡ 7 (mod 8)` (observed): 0 violations **or the violating rows printed in full and the law restated** |
+| A.4 | hand derivation of the `d ≡ 7 (mod 8)` half of the dyadic law (`v₂(N) ≠ 1`), after reading `[ZanardoZannier1991]` Thm 3, in `§R-A` of this plan, status `[hand]` | read by the product owner | a proof, or an honest "not derived" with what blocked it |
 | A.5 | every known witness's own lattice is **not** `Colourable` (a control on the filter: a non-3-colourable finite subgraph cannot sit in a colourable lattice) | the ℤ-span of the points of `data/fs58/witness-{11,23,47,71,95,191}/witness.json` and of `data/fs61/pricing/witness-119/witness.json`: canonical key, covolume, saturation, quotient filter | seven `Open` (or `Refused`); a `Colourable` here is an instrument defect: halt and report. The 11-witness's lattice and covolume are recorded — they are phase D's starting point |
 | A.6 | the killing-quotient table (D-Q) → `data/fs61/dead-quotients.md`, **from FS-58's existing `qscreen.jsonl` files, no new solving** | for each lattice with a verified colourable quotient: the least-order such quotient, its Smith form, the prime support of its order; tallied by `d mod 8` and by 3-integrality | the table regenerates from the records by one command; counts reconcile with FS-58's README (28 dead of 31 over 167) |
-| A.7 | the formula behind the non-affine quotient colourings (D-Q), timebox three hours | regenerate three verified quotient colourings (59 at `Λ/9Λ`; 35 at `Λ/6Λ`; one over 167), look for the rule (a function of a linear form mod 3 and a residue mod 2 or mod 9; a coset structure), test any candidate rule as an *exact* colouring on every dead lattice of the table | one of: a rule that reproduces a colouring on ≥ 90 % of dead lattices, with the statement it suggests; a rule for a sub-family; "no pattern found", with what was tried. Any rule is a `[reading]` until proved |
+| A.7 | the rule behind the non-affine quotient colourings (D-Q), timebox three hours. **The shape a rule must have (§M2):** a homomorphism `ρ : Λ → A` onto a *small* finite abelian group, a set `T ⊂ A` with `ρ(S) ⊂ T` for every generator, and a proper 3-colouring `f` of `Cay(A, T)` — Theorem A's shape (row 57), of which the kernel barrier is the case `A = 𝔽₃`, `T = 𝔽₃ˣ`. A solver's colouring of `Λ/mΛ` is one of many and hides `A`; so **compute the minimal colourable quotient**: for each dead lattice, the least-order quotient of `Λ/mΛ` (through subgroups containing no generator) that is still 3-colourable, by exhaustive search over subgroups of index ≤ 36 — tiny graphs, no budget issue | three lattices first (59 at `Λ/9Λ`; 35 at `Λ/6Λ`; one over 167), then every dead lattice of A.6's table: the isomorphism type of `A_min`, `|T|`, the number of proper colourings of `Cay(A_min, T)` | one of: a small `A_min` shared by ≥ 90 % of dead lattices, with `ρ` identified arithmetically (a residue at 2, at 3, at 9, or a product) and the class statement it suggests; the same for a sub-family; "no small quotient: `A_min` is large or varies", with the table. Any rule is a `[reading]` until its local obligation — `ρ(s) ∈ T` for **every** unit vector of the class, a congruence on `(a, b, c, e, N)` — is proved |
 | A.8 | the size-law inputs: per (field, lattice) predicted ball points at `R = 1.5` from the covolume, beside the relative height `N/√d` | `lattices` records (phase B computes them; here the formula is fixed and tested on FS-58's known balls) | predicted against actual point counts within 15 % on FS-58's recorded balls (8,629; 13,605; 47,597; 53,177; 283,485; 440,077) |
 | A.9 | predictions P1–P10 (§8) are in the committed plan before phase B's first solver call | `git log` order | the commit carrying §8 precedes the first `balls.jsonl` line |
 
@@ -364,7 +372,7 @@ Build the census driver as a thin layer over FS-58's functions (`import fs58_sea
 
 Per field: `lattices` → `filter` gives each lattice its state on the **one axis of §7** — `Colourable (form mod 2)`, `Colourable
 (form mod 3)`, `Colourable (periodic colouring verified)`, or `Open` — cheapest certificate first, **and top-down**: a colouring
-certificate on a lattice is inherited by every full-rank sublattice of it, so the finest lattices are filtered first and everything
+certificate on a lattice is inherited by every sublattice of it, so the finest lattices are filtered first and everything
 under a colourable one is closed without being asked (§M1.3). Then `scan` the `Open` lattices bottom-up, in order of ascending predicted
 points: `R = 1.5` for **every** `Open` lattice under the cap (the census's comparable column), then `R = 1.8` for those colourable at
 1.5; a `Refused` ball closes every lattice above it. Onset radii (`R = 1.0, 1.2`) are asked only of refusing lattices and with a 120 s
@@ -374,7 +382,7 @@ wall, because the band just under the threshold stalls (O3, O4). Lattices of ran
 | # | what | verified how | pass condition |
 |---|---|---|---|
 | B.1 | completeness | `table --check` | 40 fields; per field `#lattices = #Colourable (by certificate kind) + #Refused + #Open`; every rank-4 `Open` lattice has an `R = 1.5` record, an inherited verdict with the key it was inherited from, or `Over cap (not asked)`; no field skipped silently — a field with zero `Open` lattices says so |
-| B.1b | the two monotonicity controls (§M1.3–4) — they can fail, and a failure is an instrument defect: halt and report | `table --check` | no pair `Λ ⊂ Λ′` (full rank) with `Λ` `Refused` and `Λ′` `Colourable`; no lattice with a `Colourable` ball at a radius above a `Refused` one; every 3-integral lattice has a form mod 3 (the kernel barrier, row 72, seen by the instrument). Plant: flip one verdict in a scratch copy and watch the check name the pair |
+| B.1b | the two monotonicity controls (§M1.3–4) — they can fail, and a failure is an instrument defect: halt and report | `table --check` | no pair `Λ ⊂ Λ′` with `Λ` `Refused` and `Λ′` `Colourable`; no lattice with a `Colourable` ball at a radius above a `Refused` one; every 3-integral lattice has a form mod 3 (the kernel barrier, row 72, seen by the instrument). Plant: flip one verdict in a scratch copy and watch the check name the pair |
 | B.2 | every `Colourable` verdict is verified | each record carries the sha256 of its model; `scan --reverify` re-reads a random 10 % of models and checks every edge | 0 failures |
 | B.3 | every `Colourable` lattice carries its certificate | the form (four residues) or the quotient (matrix, order) with the colouring's sha256; `filter --reverify` on all of them, against the **full** generator set | 0 failures |
 | B.4 | the priced facts reproduce | 119 `q1+12+60.1` and 143 `q1+q5+12+60` | `Refused (solver claim)` at `R = 1.5` with 13,605 and 283,485 points |
@@ -409,6 +417,7 @@ pieces force `c(0) = c(3u)` from ~2,700 points; `1/3 = 1 + 1 + v + v̄`; four tr
 
 | # | what | verified how | pass condition |
 |---|---|---|---|
+| D.0 | does 11's recipe transfer? | the class recipe of the tier-1 lattices over 11 that contain FS-58's witness (A.5), rebuilt over 35 and 59 from the classes of the same denominators where they exist | each rebuilt lattice's state: `Colourable` by certificate (the recipe does not transfer — record the certificate) or `Open` (a chain-route candidate, probed first in D.3) |
 | D.1 | calibration | the new tool re-derives 11's forced pair on a capsule piece | `Forced (solver claim)` for `(0, 3u)` and the control `identify (0, 3·basis vector)` `Separable` — FS-58's numbers reproduced |
 | D.2 | the 5-cycle supply | for every `d ≡ 3 (mod 8)` in the family: the least odd `m` with `(4m² − n)·n = d·k²`, `n = p² + q²`, `m` a product of primes `≡ 1 (mod 4)` (so three rational unit steps can close the chord; FS-58's hand obstruction is this equation's failure at `d ≡ 7 (mod 8)`) | an atlas column; 11's value is 5 (`n = 1`, `k = 3`) — the control |
 | D.3 | forced-pair probes over 35 and 59 | FS-58's `probe` (capsule, `--ks 2,3`) on 3-integral pools chosen by D.2, to 400,000 points | each record one of the three forcing verdicts with its planted-rhombus control |
@@ -424,7 +433,7 @@ pieces force `c(0) = c(3u)` from ~2,700 points; `1/3 = 1 + 1 + v + v̄`; four tr
 | E.2 | R-cycle, R-mod8, R-L, R-size scored | one analysis script over `census.jsonl` → `data/fs61/readings.md`: the contingency tables and the fit named in §3, each with its population spelled out | each reading **won / lost / not decided (why)**, in those words |
 | E.3 | R-C scored | FS-58's `charmeans` on every refusing lattice (a float reading, labelled so) | the table of least character means; R-C lost if any is below −1/2 |
 | E.4 | the note for FS-59 | `data/fs61/aiming-167.md`: under the size law, the predicted least refusing size over 167 with its uncertainty; which of 167's lattices A.7's rule says can be live; what budget that implies | written; every number carries its population |
-| E.5 | the class-theorem attempt | §R-E: is any *infinite* family reachable — by a parametric witness (the four fields `d = 144 − c²` share one lattice recipe, but the family is finite), or by rigidity of the 3-integral graph plus the uniform chain (D-F.3)? | a statement with its status, or "no route found" with what was tried; **no claim of T4 without a proof** |
+| E.5 | the class-theorem attempt (§M2 names the only two proof shapes in sight) | **(β) a parametric witness:** every field `d = N² − c²` owns the layer vector `(c/N, √d/N)` — an infinite two-parameter family (`N = 12`: 23, 95, 119, 143; `N = 24`: 47, 215, 287, 407, 455, 527, 551; …). Test: a canonical form (Weisfeiler–Leman hash, then an exact isomorphism test on collisions) of every certified witness, compared pairwise; an isomorphic pair in one `N`-family is a candidate for a witness with coordinates polynomial in `c`, whose edges would be identities in `c` and whose refutation **one** LRAT for the whole family. **(α) the chain:** what phase D learned about 3-integral forcers at `d ≡ 3 (mod 8)`. Also: does any witness or refusing lattice lie in a rank-2 layer `ℚ × √d·ℚ` up to rotation (`[Sokolov2018]`)? | the isomorphism table; a statement with its status, or "no route found" with what was tried; **no claim of T4 without a proof** |
 | E.6 | predictions scored | §8 | every P scored won / lost / not measured |
 | E.7 | P-unreachable audit | — | any prediction whose informative outcome turned out unreachable is named as mis-specified, with evidence that predates the result |
 
@@ -450,8 +459,8 @@ definition and is asserted, never assumed. A lattice's **state** is one axis, *w
 `Colourable (form mod 2)` (bipartite), `Colourable (form mod 3)` (a linear form `Λ → ℤ/3` nonzero on every generator — every
 3-integral lattice has one, by the kernel barrier), `Colourable (periodic colouring verified)` (FS-58's "dead"), `Refused (solver
 claim)` / `Refused (certified)` (some ball refuses), or `Open (no certificate among: forms mod 2, 3; Q quotients; balls to R)` (FS-58's
-"live" — a statement about the search, which is why it carries its enumeration). Colourability is inherited **downward** (a full-rank
-sublattice of a colourable lattice is colourable, periodically), refusal **upward**. A lattice's balls give a **refusal bracket**
+"live" — a statement about the search, which is why it carries its enumeration). Colourability is inherited **downward** (the graph on a sublattice is an induced subgraph, and a colouring periodic under `L′`
+restricts to one periodic under `L′ ∩ Λ`, of finite index — no rank condition), refusal **upward**. A lattice's balls give a **refusal bracket**
 `(largest radius verified colourable, smallest radius refused)`, never a "least refusing ball". A **field** has a `role` (`census`, or
 `control` with its expected `χ`) and, separately, a state; its value is a bracket `[lower, upper]` with a source for each end. A
 **landing is a certified witness** — a finite point set the frozen checker certifies — and the direct route and the chain route are
@@ -467,7 +476,8 @@ two *searches* for that one kind of object: the route is the witness's provenanc
   differ by a rotation are *not* merged, this lets the analysis see them)}`.
 * `fields/<d>/filter.jsonl` — `{key, state, certificate: {kind: form2|form3|quotient, form | (matrix, snf, order, colouring_sha256)},
   inherited_from (a key, when the state came by monotonicity), quotients_tried}`.
-* `fields/<d>/poset.jsonl` — derived: the inclusion pairs among the field's full-rank lattices (an HNF divisibility test).
+* `fields/<d>/poset.jsonl` — derived: the inclusion pairs among the field's lattices (exact: each basis vector of `Λ` an integer
+  combination of `Λ′`'s).
 * `fields/<d>/balls.jsonl` — `{key, shape (FS-58's `piece`: `ball`), R, points, edges, verdict, solve_seconds, wall, model_sha256}`.
 * `witness-<d>/` — FS-58's bundle: `witness.json`, `witness.lrat.gz`, `certified.out`, `controls.out`, `recheck.out`,
   `colouring4.json`, `run-all.sh`, `README.md`.
@@ -481,8 +491,8 @@ two *searches* for that one kind of object: the route is the witness's provenanc
 
 | id | prediction | probability | how each outcome would look | reachable both ways? |
 |---|---|---|---|---|
-| P1 | A.3's dyadic law holds on every atlas row | 0.85 | 0 violations / a printed violating row | yes — O6 covers nine denominators only; `N` with `v₂ = 1` at `d ≡ 7 (mod 8)` could appear at larger `N` |
-| P2 | **R-mod8:** tier 1 yields no `Refused` ball at any of the twenty `d ≡ 3 (mod 8)` fields | 0.7 | zero / at least one | yes — only one lattice per field was asked at the opening (O5), and the 11-witness's own lattice is known live |
+| P1 | the observed half of the dyadic law (`v₂(N) ≠ 1` for `d ≡ 7 (mod 8)`) holds on every atlas row to `N = 420` | 0.85 | 0 violations / a printed violating row | yes — O6 covers nine denominators only |
+| P2 | **R-mod8 (a):** tier 1 yields no refusing ball at any of the twenty `d ≡ 3 (mod 8)` fields (inherited refusals over 11 excluded) | 0.7 | zero / at least one | yes — only one lattice per field was asked at the opening (O5), and the 11-witness's own lattice is known live |
 | P3 | among the twenty `d ≡ 7 (mod 8)` fields, tier 1 yields a `Refused` ball at **ten or more** (seven are known or priced: 23, 47, 71, 95, 119, 143, 191) | 0.6 | count | yes |
 | P4 | every tier-1 refusal certifies (phase C) | 0.9 | all `CERTIFIED` / an extraction that stalls or a refusal that does not survive exact re-derivation | yes — FS-58's 95 stopped short of 1-minimal |
 | P5 | R-size: log–log slope of least refusing ball size against `d` in `[0.5, 2]` over the landed `d ≡ 7 (mod 8)` fields | 0.5 | the fit | yes; with fewer than six landed fields it is *not decided*, said so |
@@ -512,7 +522,7 @@ FS-58's search happened to be organised** (class specs, separate flags, "the bal
 |---|---|---|---|---|
 | M1.1 | the lattice is the object and its graph is the full unit-distance graph on it; saturation is definitional and asserted | FS-58's pool (a direction set `W`, graph `Cay(ℤ[W], W)`) | the pool graph is a *subgraph* of the plane's graph on the same points; only the full graph is an induced piece of the plane, so only it is monotone under inclusion and only its colourings mean anything about the plane. A missed generator is the one error that fails silently toward "colourable" (rule 6) | high |
 | M1.2 | one state axis with certificate kinds (decision C′) | four flags | above; the control it buys for free — every 3-integral lattice must show a form mod 3 — is the kernel barrier observed by the instrument | high |
-| M1.3 | **the lattices of a field form a poset under inclusion; colourability is inherited downward, refusal upward; the census records the inclusions and checks both directions** | independent lattice records | it is the problem's own structure (an induced subgraph of a 3-colourable graph is 3-colourable; the restriction of a periodic colouring to a full-rank sublattice is periodic). It gives an order of work (certificates top-down, balls bottom-up), a strong consistency control that can fail (B.1b), and the sharp form of R-mod8 — *certificates on the finest lattices close a field's whole slice* | high |
+| M1.3 | **the lattices of a field form a poset under inclusion; colourability is inherited downward, refusal upward; the census records the inclusions and checks both directions** | independent lattice records | it is the problem's own structure (an induced subgraph of a 3-colourable graph is 3-colourable; the restriction of a periodic colouring to a sublattice is periodic). It gives an order of work (certificates top-down, balls bottom-up), a strong consistency control that can fail (B.1b), and the sharp form of R-mod8 — *certificates on the finest lattices close a field's whole slice* | high |
 | M1.4 | a lattice's balls give a bracket `(largest colourable, smallest refused)` | "the least refusing ball" | verdicts are monotone in the radius and the band between the two ends is where solvers stall, so the minimum is not observable; R-size is fitted on the bracket's upper end and says so | high |
 | M1.5 | a landing is a certified witness; the route is provenance; a field has a role and, separately, a state | a field state that names the route, and `Control` as a state | the chain route and the direct route search for the same object, and a control field has the same possible states as any other — that it must stay `Not landed` is the *expectation*, which a state cannot also be | high |
 | M1.6 | tiers are defined once in `tiers.json`; records carry the id | the depth tuple in every record | one definition cannot drift from itself; a changed depth is a new tier | high |
@@ -527,6 +537,40 @@ set (B.3); a witness certified under the wrong field — the checker's wrong-rad
 frame is computed two ways (A.1). *The next-lemma test:* FS-59's question ("which lattices over 167 are `Open`, and how large are their
 balls?"), FS-60's ("every certified witness with its path and size") and a later tier or route all state in the schema without
 changing it.
+
+### M2 — obligations (2026-09-19): what is proved, tested, assumed
+
+Run as a fresh invocation of `debruijn-obligation-modeling`. The master move: every global claim is replaced by a **local
+obligation** — a finite per-case check whose discharge implies it — or it is labelled a test or an assumption.
+
+| claim | status | the local obligation, or the instrument |
+|---|---|---|
+| the frame (§1): `χ = 2`, `χ = 3` off the family; `χ ≤ 4`, `≤ 5` on it | **assume** — prior art at hand level (`[Fischer1990]` Thms 8–10, read in statement; `[Moorhouse2010]` Thm 8.1), and the field-level residue step is row 57's standing gap (FS-37/47). Every "`= 4`" the census reports inherits this status and says so | **test:** PARI's decomposition of 2, 3, 7, 11, 19 in `K` agrees with the congruences on every row (A.1) |
+| every unit vector is a unit at every stable prime | **prove** [hand, one line]: `v(u) = v(ū)` and `v(u) + v(ū) = 0` | — |
+| height floor; finiteness of `D(N)` | **prove** [hand]: `d(b² + e²) ≤ N²` | **test:** A.3 on every row |
+| odd prime support; `v₂(N) ≤ 1` at `d ≡ 3 (mod 8)` | **prove** [hand; D-H.2]; prior art `[Fischer1990b]` | **test:** A.3; a violation is an enumerator defect |
+| `v₂(N) ≠ 1` at `d ≡ 7 (mod 8)` | **test** (A.3, P1); a proof is A.4's attempt | — |
+| refusal is inherited upward, colourability downward | **prove** [hand, two lines]: both graphs are *induced* subgraphs of the plane's, so `G_Λ` is the induced subgraph of `G_Λ′` on `Λ`; a colouring periodic under `L′` restricts to one periodic under `L′ ∩ Λ`. **The mutation audit removed a hypothesis:** "full rank" is not needed | **test:** B.1b, with a plant |
+| balls are nested in the radius | **test:** assert `X_R ⊂ X_R′` on one lattice (FS-58's `piece` is a black box here) | — |
+| a lattice's graph is the full unit-distance graph | **test, per record** (0.6): every unit vector of denominator dividing `M` that lies in `Λ` is a generator; and `Λ ⊂ (1/M)ℤ⁴` makes those *all* the unit vectors in `Λ` | — |
+| a rule for the dead lattices (A.7) | **a reading until its local obligation is proved:** `ρ(s) ∈ T` for every unit vector `s` of the class — one congruence on `(a, b, c, e, N)` — with `Cay(A, T)` 3-colourable (finite, by exhaustion). This is Theorem A's shape, so a proved rule is a *second barrier* beside row 72's | **instrument:** the minimal colourable quotient (A.7) |
+| FS-58 D3.4's repair (3-colourings of `G × H`, `χ(H) > 3`, factor through `G` when `G` is gap-free) | **not used and not attempted here.** True by a two-line eigenvalue argument when `G` is Hoffman-tight at three colours and `H`'s ratio `λ_min/d` is above −1/2 (by Weil, the residue planes from about `q = 17` up); measured, unproved, at `q = 7, 11` (FS-58 §0 O7). Proposed to the owner as a stub at the close | — |
+| every solver verdict | **test:** `Colourable` by a model checked on every edge; `Refused` a claim until the frozen checker's `CERTIFIED` | §5 rule 4 |
+
+**T4 — what a proof would have to look like, and what a census can give it.** Two shapes are in sight. **(α) The chain:** a finite
+forcer of a pair at difference `δ` with `1/δ ∈ ℤ[U]`. The chain half is uniform (`1/3 ∈ ℤ[U]` for every `d ≡ 2 (mod 3)`); the forcer
+half is uniform only through FS-58 D3.5's dichotomy — a finite forcer among 3-integral graphs exists iff the infinite 3-integral graph
+forces — and a proof that it forces for *every* `d` needs control of **aperiodic, non-additive** 3-colourings, for which no tool is
+known (periodic ones are affine by the tower; additive ones are affine). A census contributes instances and the 5-cycle supply law
+(D.2), never the quantifier. **(β) A parametric witness:** one abstract non-3-colourable graph drawn with coordinates polynomial in a
+parameter, every edge an identity — one refutation, infinitely many fields. The local obligations are exactly checkable (a computer
+algebra identity per edge; one LRAT). Nothing says such a family exists; E.5's isomorphism test is the cheap way to find out, and both
+of its outcomes are reachable. **Outside (α) and (β) the census proves T4 one field at a time, and says so.**
+
+**The mutation audit on this plan's own statements** found three overstatements, all corrected in place: the dyadic law was stated as
+"`v₂(N) ≥ 2` for `d ≡ 7 (mod 8)`" when odd denominators occur in both halves (57 over 143, 171 over 167); inheritance carried an
+unused "full rank" hypothesis; and R-mod8 was stated on lattices, where FS-58's certified witness over 11 falsifies it by inheritance
+before anything is run — it is a statement about *balls*.
 
 ## §R Results
 
