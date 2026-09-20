@@ -787,6 +787,50 @@ def degree_diagram(rows):
     return t
 
 
+def witness_separation(wt):
+    """E.5's conclusion about the certified witnesses — **computed from the invariants, never asserted.**
+
+    It used to read "no two are isomorphic, and the reason is immediate: no two have the same number of points",
+    with a parenthetical `(Sizes repeating: [...])` bolted on for the case that contradicts it — so once `d = 11`
+    and `d = 311` both landed at 189 points the sentence stated the opposite of the clause beside it. The second
+    instance of exactly the defect `decided_phrase` was written for, in the same file, on the table E.5 exists to
+    produce (found 2026-09-20 at the close).
+
+    The invariants are checked in strengthening order and the sentence names the weakest one that already
+    separates every pair: point count, then (point count, edge count), then the WL hash. Only a pair that survives
+    all three needs an exact isomorphism test, and the sentence says so instead of assuming it away.
+    """
+    import collections as _c
+    n = len(wt)
+    by_pts = _c.Counter(w['points'] for w in wt)
+    dup_pts = sorted(s for s, k in by_pts.items() if k > 1)
+    if not dup_pts:
+        return (f'**No two of the {n} certified witnesses are isomorphic, and the reason is immediate: no two have '
+                f'the same number of points.** Every point count is distinct, so the Weisfeiler–Leman hashes were '
+                f'never even needed to separate them; they are recorded so that a later witness can be compared '
+                f'against these without recomputing anything.')
+    by_pe = _c.Counter((w['points'], w['edges']) for w in wt)
+    dup_pe = sorted(k for k, c in by_pe.items() if c > 1)
+    groups = {s: sorted(w['d'] for w in wt if w['points'] == s) for s in dup_pts}
+    shared = '; '.join(f'`d = {"` and `d = ".join(str(x) for x in v)}` at {s:,} points' for s, v in groups.items())
+    if not dup_pe:
+        pairs = '; '.join(f'{v[0]} has {[w["edges"] for w in wt if w["d"] == v[0]][0]:,} edges and {v[1]} has '
+                          f'{[w["edges"] for w in wt if w["d"] == v[1]][0]:,}' for v in groups.values() if len(v) == 2)
+        return (f'**No two of the {n} certified witnesses are isomorphic — and the point count alone no longer says '
+                f'so.** {shared.capitalize()}, the first collision this table has ever had, so the claim is now '
+                f'carried by a second invariant rather than by the first: {pairs}, and a graph cannot be isomorphic '
+                f'to one with a different number of edges. The Weisfeiler–Leman hashes, which are the next '
+                f'invariant, are all distinct too, so no exact isomorphism test was needed on any pair.')
+    dup_wl = sorted(h for h, c in _c.Counter(w['wl'] for w in wt).items() if c > 1)
+    if not dup_wl:
+        return (f'**No two of the {n} certified witnesses are isomorphic**, and it takes the Weisfeiler–Leman hash '
+                f'to say so: {shared} share a point count, and {len(dup_pe)} pair(s) share point AND edge counts, '
+                f'but every WL hash is distinct.')
+    return (f'**{len(dup_wl)} pair(s) of the {n} certified witnesses share a Weisfeiler–Leman hash and an exact '
+            f'isomorphism test is OWED on each** (hashes {dup_wl}). Until it is run, no claim about isomorphism is '
+            f'made here in either direction — a shared WL hash is not an isomorphism.')
+
+
 def decided_phrase(rows):
     """The phrase that reports how much of a population decided — **computed from the counts, never asserted.**
 
@@ -877,15 +921,10 @@ def write_shapes(out=None):
         L.append(f'| **{w["d"]}** | {w["points"]:,} | {w["edges"]:,} | {prof} | `{w["wl"]}` | {w["coord_rank"]} | '
                  f'{"yes" if w["minimal"] == "yes" else "no (deletion stopped at " + str(w["deletion_stopped_at"]) + ")"} | '
                  f'`{w["spec"]}` at R = {w["R"]} |')
-    sizes = collections.Counter(w['points'] for w in wt)
-    dup = [s for s, n in sizes.items() if n > 1]
-    L += ['', '### What this table says', '',
-          f'**No two of the {len(wt)} certified witnesses are isomorphic, and the reason is immediate: no two have '
-          f'the same number of points.** ' + (f'(Sizes repeating: {dup}.)' if dup else
-          'Every point count is distinct, so the Weisfeiler–Leman hashes were never even needed to separate them; '
-          'they are recorded so that a later witness can be compared against these without recomputing anything.'),
+    L += ['', '### What this table says', '', witness_separation(wt),
           '', '**And that is a fact about the extraction, not about the fields.** A witness\'s size is the output '
-          'of a shrinking procedure that was *stopped on a budget* in four of the nine cases (the table says which). '
+          f'of a shrinking procedure that was *stopped on a budget* in '
+          f'{sum(1 for w in wt if w["minimal"] != "yes")} of the {len(wt)} cases (the table says which). '
           'Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points '
           'because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot '
           'decide the question it was set, and the shape table above is where the cross-field structure actually '
@@ -912,7 +951,9 @@ def write_shapes(out=None):
           'in both slots") now made exact and checkable.', '']
     out.write_text('\n'.join(L) + '\n')
     print(f'fs61 shapes -> {C.rel(out)}: {len(shape)} shapes, {len(refusing)} refusing somewhere, '
-          f'{len(wt)} certified witnesses, {len(dup)} point-count collisions among them, '
+          f'{len(wt)} certified witnesses, '
+          f'{sum(c - 1 for c in collections.Counter(w["points"] for w in wt).values() if c > 1)} '
+          f'point-count collisions among them, '
           f'{sum(1 for w in wt if w["coord_rank"] != 4)} witnesses of rank below 4', flush=True)
     print('DONE shapes', flush=True)
     return out
@@ -966,6 +1007,25 @@ def selftest(rnd=None):
                  score_r_C(ok)['verdict'] == 'won'
                  and score_r_C(ok + [{'min_character_mean': -0.61}])['verdict'] == 'lost',
                  'two readings above -1/2 -> won; adding one at -0.61 -> lost'))
+    # E.5's witness conclusion must be COMPUTED too, and must reach each of its four verdicts
+    W = lambda d, p, e, h, m='yes': {'d': d, 'points': p, 'edges': e, 'wl': h, 'minimal': m}
+    distinct = [W(1, 10, 20, 'a'), W(2, 11, 21, 'b')]
+    same_pts = [W(1, 10, 20, 'a'), W(2, 10, 21, 'b')]
+    same_pe = [W(1, 10, 20, 'a'), W(2, 10, 20, 'b')]
+    same_wl = [W(1, 10, 20, 'a'), W(2, 10, 20, 'a')]
+    v = [witness_separation(x) for x in (distinct, same_pts, same_pe, same_wl)]
+    rows.append(('PLANT (E.5\'s conclusion): the sentence about whether the certified witnesses are separated is '
+                 'COMPUTED from the invariants and reaches all four verdicts -- point counts alone, edge counts, '
+                 'the WL hash, and an isomorphism test still OWED. Until 2026-09-20 it asserted "no two have the '
+                 'same number of points" with a parenthetical listing the ones that do',
+                 'no two have the same number of points' in v[0]
+                 and 'the point count alone no longer says so' in v[1]
+                 and 'it takes the Weisfeiler-Leman hash'.replace('-', '–') in v[2]
+                 and 'isomorphism test is OWED' in v[3]
+                 and 'the first collision this table has ever had' in witness_separation(witness_table()[0]),
+                 'distinct points -> first invariant; equal points -> edges; equal points and edges -> WL hash; '
+                 'equal WL hash -> the test is owed; and the REAL table (d = 11 and d = 311 both at 189 points) '
+                 'takes the edge-count branch'))
     # the phase diagram's conclusion sentence must be computed, and must be able to say either thing
     allD = [{'verdict': 'Colourable'}, {'verdict': 'Refused'}]
     someU = allD + [{'verdict': 'Unknown'}]

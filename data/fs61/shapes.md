@@ -52,18 +52,22 @@ E.5 asks for a canonical form of every certified witness — a Weisfeiler–Lema
 | **11** | 189 | 452 | 3:43, 4:60, 5:34, 6:28, 7:11, 8:6… | `7c465d8df6dee00d` | 4 | yes | `q1+q5+6+10.1+10.2+15.1+15.2+30.1+30.2+30.3` at R = 1.0 |
 | **23** | 573 | 1,365 | 2:13, 3:122, 4:182, 5:106, 6:68, 7:44… | `266de87cd00e4df2` | 4 | no (deletion stopped at 467) | `q1+q5+12.1+60.2` at R = 1.3 |
 | **47** | 169 | 385 | 3:42, 4:66, 5:27, 6:17, 7:5, 8:6… | `b33c21abb4e94207` | 4 | yes | `q1+12+60` at R = 1.5 |
+| **59** | 1,739 | 5,025 | 2:4, 3:238, 4:322, 5:308, 6:263, 7:241… | `928f062473336cc8` | 4 | no (deletion stopped at 297) | `q1+q5+30.1+30.2+45+90` at R = 1.1945 |
 | **71** | 131 | 306 | 3:33, 4:37, 5:25, 6:20, 7:10, 8:4… | `26c69f0bb197779b` | 4 | yes | `q1+q5+60.2+120.2` at R = 1.5 |
 | **95** | 1,004 | 2,829 | 2:2, 3:121, 4:229, 5:223, 6:161, 7:101… | `bfd22d79de137571` | 4 | no (deletion stopped at 407) | `q1+12+60.2` at R = 1.5 |
 | **119** | 456 | 1,122 | 3:102, 4:138, 5:95, 6:45, 7:31, 8:17… | `9a4cdae48b0fde17` | 4 | yes | `q1+12+60.1` at R = 1.5 |
 | **143** | 664 | 1,600 | 2:1, 3:158, 4:177, 5:137, 6:117, 7:32… | `ef72dda56e311ec8` | 4 | no (deletion stopped at 1056) | `q1+q5+12+60` at R = 1.5 |
 | **191** | 292 | 713 | 3:57, 4:93, 5:50, 6:46, 7:25, 8:13… | `0b090003fcddc64a` | 4 | yes | `q1+q5+20+60.1` at R = 1.5 |
+| **311** | 189 | 460 | 3:38, 4:57, 5:48, 6:17, 7:14, 8:8… | `db9209771da4f973` | 4 | yes | `q1+q5+40+60+120` at R = 1.2892 |
+| **335** | 443 | 1,086 | 3:119, 4:120, 5:74, 6:54, 7:30, 8:24… | `58c581836edf8d53` | 4 | yes | `q1+q5+60+300` at R = 1.4301 |
 | **359** | 1,190 | 3,243 | 2:6, 3:198, 4:264, 5:236, 6:179, 7:123… | `b1119595ed46e5ac` | 4 | no (deletion stopped at 483) | `q1+q5+60.1+60.2` at R = 1.5 |
+| **431** | 1,031 | 2,719 | 2:1, 3:168, 4:228, 5:221, 6:180, 7:110… | `43e7062a53e99d21` | 4 | no (deletion stopped at 95) | `q1+q5+60.1+60.2+240.2` at R = 1.11 |
 
 ### What this table says
 
-**No two of the 9 certified witnesses are isomorphic, and the reason is immediate: no two have the same number of points.** Every point count is distinct, so the Weisfeiler–Leman hashes were never even needed to separate them; they are recorded so that a later witness can be compared against these without recomputing anything.
+**No two of the 13 certified witnesses are isomorphic — and the point count alone no longer says so.** `d = 11` and `d = 311` at 189 points, the first collision this table has ever had, so the claim is now carried by a second invariant rather than by the first: 11 has 452 edges and 311 has 460, and a graph cannot be isomorphic to one with a different number of edges. The Weisfeiler–Leman hashes, which are the next invariant, are all distinct too, so no exact isomorphism test was needed on any pair.
 
-**And that is a fact about the extraction, not about the fields.** A witness's size is the output of a shrinking procedure that was *stopped on a budget* in four of the nine cases (the table says which). Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot decide the question it was set, and the shape table above is where the cross-field structure actually shows up.**
+**And that is a fact about the extraction, not about the fields.** A witness's size is the output of a shrinking procedure that was *stopped on a budget* in 6 of the 13 cases (the table says which). Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot decide the question it was set, and the shape table above is where the cross-field structure actually shows up.**
 
 **The `N`-family the plan names.** Every field `d = N² − c²` owns the layer vector `(c/N, √d/N)`; for `N = 12` that family is `d = 23, 95, 119, 143`, and **all four are landed**. Phase A found that the witness lattices of `(95, 119)` share an integral shape, as do those of `(23, 191)`, with generator counts that agree exactly while the generator *sets* differ. That shared shape with equal counts is the precondition for one abstract graph drawn over several fields — and Table 1 shows what actually happens when you try it: the same shape holds a different number of unit vectors in each field, and where the count falls the lattice becomes three-colourable by certificate.
 
@@ -75,5 +79,5 @@ Sokolov's `χ_√ℚ(ℝ²)` is the supremum over `n` of `χ(ℚ × √n·ℚ)`,
 
 **It is settled by a rank, with no search.** A point `(a, b, c, e, m)` here is `((a + b√d)/m, (c + e√d)/m)`, so `F²` is `ℚ⁴` and the layer `ℚ × √d·ℚ` is the 2-dimensional subspace `b = c = 0`. Any *rotation* of it is some other 2-dimensional ℚ-subspace. So a point set whose ℚ-span is all of `ℚ⁴` lies in no 2-dimensional subspace whatever, rotated or not.
 
-**Every one of the 9 certified witnesses has ℚ-rank 4** (column above, computed in exact rational arithmetic), and **every refusing lattice in this census has rank 4** by construction — rank is recorded per lattice and the census never scans below it. **So nothing this milestone produced bears on Sokolov's question**, which is the same answer FS-58 gave informally ("their coordinates mix 1 and √d in both slots") now made exact and checkable.
+**Every one of the 13 certified witnesses has ℚ-rank 4** (column above, computed in exact rational arithmetic), and **every refusing lattice in this census has rank 4** by construction — rank is recorded per lattice and the census never scans below it. **So nothing this milestone produced bears on Sokolov's question**, which is the same answer FS-58 gave informally ("their coordinates mix 1 and √d in both slots") now made exact and checkable.
 
