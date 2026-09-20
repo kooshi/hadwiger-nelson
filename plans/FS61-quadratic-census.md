@@ -697,7 +697,7 @@ section is the index and the carry-forward. Current state only — a corrected c
 | 0.1 | FS-58's **1,761** rank-4 records over 14 fields → **648** distinct lattices; key sets agree exactly, field by field. FS-58's depths confirmed from the records, not assumed: 180, with **300 at `d = 23`** and **420 at `d = 167`** |
 | 0.2 | the five refusing balls reproduce FS-58's point **and** edge counts exactly, all `Refused (solver claim)` |
 | 0.3 | six witnesses `CERTIFIED` (the gate's five plus `d = 11`), exit 0; wrong-radicand plant `REFUSED EDGE_NOT_UNIT`, exit 1 |
-| 0.4 | **zero refusals** over 1,350 balls at `d = 2, 5, 7, 13, 19, 31, 43`; every lattice over 2, 5, 13 bipartite; **3 refusals at `d = 47`** on the identical `--filter-off` command. Table: `data/fs61/controls.md` |
+| 0.4 | **zero refusals among the 550 balls ASKED** at `d = 2, 5, 7, 13, 19, 31, 43` (1,350 ball records: 525 verified colourable, 25 `Unknown (budget)`, **800 `Over cap (not asked)`** — the zero is over 550, not 1,350; owner's correction 2026-09-20); every lattice over 2, 5, 13 bipartite; **3 refusals at `d = 47`** on the identical `--filter-off` command. Table: `data/fs61/controls.md` |
 | 0.5 | one lattice one key over 25 unimodular/permuted/sign-flipped bases; different lattices different keys |
 | 0.6 | the saturation recomputed from the canonical key is byte-identical to FS-58's `_saturate_one` on all 648 lattices — a two-implementation cross-check |
 | 0.7 | scan stopped mid-run by pgid and resumed: 18 records before, 24 after, **0 duplicates, 0 lost, 0 changed** |
@@ -730,7 +730,8 @@ section is the index and the carry-forward. Current state only — a corrected c
    and on all 1,761 FS-58 rank-4 records), which is A.3's law met early. So the seven zeros say the instrument does not
    invent refusals and say nothing about certificate-free lattices; `d = 47`'s 29 `Open` lattices and three refusals are
    what covers that. **Worth adding to §6's 0.4 row** so the zeros are not read as stronger than they are.
-5. **`Unknown (budget)` has five self-certifying instances.** Twenty-six of 1,460 control balls hit the 600 s wall;
+5. **`Unknown (budget)` has five self-certifying instances — the bound on how much any `Unknown` in the census can be
+   read into, and phase E's input when it scores a null.** Twenty-six of the 610 control balls asked hit the 600 s wall;
    five are on **provably bipartite** lattices (an exact form mod 2 two-colours the whole infinite graph), against a
    median colourable solve of 0.21 s and one coloured ball of 557,065 points. Rule 4 now has instances, not an argument.
    *Phase-B improvement proposed, not made:* a lattice with a form mod 2 or 3 can have its ball colouring **constructed**
