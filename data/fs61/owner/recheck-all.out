@@ -137,3 +137,20 @@ C.1 d=311 exit=0
 CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); all 460 pairs at distance exactly 1 re-derived in integer arithmetic (17766 candidate pairs tested) and equal to the file's edge list; (0, 0) = vertex 0 and (1, 0) = vertex 3 adjacent; pinned edge [0, 3] adjacent; CNF built here 
 C.1 d=59 exit=0
 CERTIFIED: 1739 points of Q(sqrt59)^2, each a reduced (a, b, c, e, m); all 5025 pairs at distance exactly 1 re-derived in integer arithmetic (1511191 candidate pairs tested) and equal to the file's edge list; (0, 0) = vertex 0 and (1, 0) = vertex 9 adjacent; pinned edge [0, 9] adjacent; CNF built he
+
+## Third pass, 2026-09-20 evening: d = 239, certified from the tier-1u (degree-18) ball -- owner's C.10 with plants, and the frozen checker re-run by the owner
+### d = 239  sha256 1a49a2a76e734933  (2026-09-20 17:10)
+owner recheck: D = 239, data/fs61/witness-239/witness.json
+  points 2360; unit-distance pairs by exact arithmetic over all 2783620 pairs: 6639; file lists 6639
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 6639 edges: yes; class sizes [848, 709, 469, 334]
+  triangles: 0; degrees min/median/max 2/5/21; 3 in some edge denominator: 6444 edges have 3 | m_i m_j
+  plants (each must make the recheck FAIL):
+    [fired] one listed edge removed: 1 unit-distance pairs MISSING from the file, e.g. (664, 1193)
+    [fired] one non-edge added: 1 listed edges are NOT at distance 1, e.g. (0, 1)
+    [fired] wrong radicand D + 12: 4328 listed edges are NOT at distance 1, e.g. (0, 531)
+RECHECK PASS
+exit=0
+C.1 d=239 exit=0
+CERTIFIED: 2360 points of Q(sqrt239)^2, each a reduced (a, b, c, e, m); all 6639 pairs at distance exactly 1 re-derived in integer arithmetic (2783620 candidate pairs tested) and equal to the file's edge list; (0, 0) = vertex 0 and (1, 0) = vertex 3 adjacent; pinned edge [0, 3] adjacent; CNF built here with 7080 variables and 22

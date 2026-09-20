@@ -1,5 +1,7 @@
 # FS-61 — which real quadratic fields need four colours, and why
 
+> **CLOSED 2026-09-20 as FS-61** (`plans/FS61-quadratic-census.md`; `CLAUDE.md` row 74, G61, G65; `data/fs61/README.md`). 14 of forty fields certified; the class theorem it hoped for (T4) was not found and the reason is recorded (no witness transfers between fields). What it hands on: FS-59 (`data/fs61/aiming-167.md` and that stub's §3a), FS-60 (fourteen witnesses in one format), FS-66, FS-67. This stub's "jackpot" sentence about every field with a usable plane at 7 was false (ℚ(√2), ℚ(√7)) and is superseded by the plan's §1.
+
 > **Subplanned 2026-09-19: `plans/FS61-quadratic-census.md`** — which also corrects two sentences below: the family in play is the squarefree `d ≡ 11 (mod 12)` (not every field with a usable plane at 7: `ℚ(√2)` has one and `χ = 2`), and the lower bound 3 for `d ≡ 3 (mod 4)` is `[Fischer1990]` Thm 8, older than `[Moorhouse2010]`.
 
 *Minted 2026-09-17 at FS-58's close. Read beside: `plans/FS58-four-colours.md` (§2, §R-B4, §R-B5, §C), `data/fs58/search-23/README.md`,

@@ -696,6 +696,33 @@ kept set under 3,000", which had been met). Its own lesson stands beside it: *be
 not the field you came to look at.* Ruling: `land 239 --tier 1u` is finished with a 2,400 s deletion budget; the certificate is
 committed if its gzipped LRAT is ≤ 60 MB and otherwise comes back to the owner.
 
+**THE OWNER'S CLOSE (2026-09-20, evening) — FS-61 IS CLOSED AT FOURTEEN OF FORTY.** `d = 239` certified from the tier-`1u`
+ball (2,360 points, 6,639 edges, LRAT 42.95 MB — under the 60 MB rule); the owner's C.10 passes on it with three plants fired, and
+the frozen checker re-run by the owner prints `CERTIFIED`, exit 0 (`data/fs61/owner/recheck-all.out`, third pass); all thirteen
+earlier witness hashes re-read unchanged. **WORKFLOW step 8, the gate:** no `.lean`, lakefile or toolchain file changed since the
+milestone opened (`git diff --stat 4936e9f HEAD` over them: 0 lines), so the kernel gates are untouched by construction;
+`tools/bib_audit.py` green; the implementer's closing counts (selftest 12 sections / 0 failures; `table --check` 40 fields, 0 defects;
+`fs61_recount_landings.py` 14 of 14 with 5 of 5 plants) stand beside the owner's own recounts of every tier from the raw records.
+**Step 9:** `CLAUDE.md` — ledger row 74, item 14, G61 rewritten in place with two demotion records, **G65 minted (the refusal phase
+diagram)**, row 50's attribution corrected against the PDF, Paths forward re-ranked; `plans/FRONTIER-STUBS.md` — FS-61 to the closed
+list, FS-59 / FS-60 / FS-57 rows updated, **FS-66 and FS-67 minted**; stub banners and hand-ons written.
+* **The §PA sweep for recognitions** (the implementer's F.4, read and ruled on): the unit-vector supply as a class-group count
+  (`[ZanardoZannier1991]` Thm 3) → row 74 and G61 (4), *as a pointer, the theorem not re-read*; the census cutting across
+  `[Fischer1990]` Thm 10's split → G61 (4); Moorhouse's named question → `CLOSED-QUESTIONS.md` §1.7 (done by the implementer);
+  `[Sokolov2018]`'s rank-2 layers → answered by a rank column in `shapes.md`, no stub. **And one recognition the sweep could not
+  have made, found by the owner opening the PDF to settle a theorem number: `[Fischer1990]` Example 4 is about ℚ(√167) by name** —
+  no additive `k`-colouring for `k < 11`, by the unit vector `(83 + i√167)/84` — now in FS-59's stub and row 50.
+* **The conjecture sweep:** every "conjecture" in this plan is G48 (carried; FS-59 and FS-66 are its consumers) or Duffus–Sands–
+  Woodrow's B(n) (not ours; its originals unread, `BIBLIOGRAPHY.md` § R.4); **T4 stays a reading** with its killing test in G61 and
+  the reason no proof route is in sight (the owner's exact search: no witness transfers between fields,
+  `tools/fs61_owner_shape_iso.py`); FS-58 D3.4's repair → **minted as FS-67**.
+* **Declined, with the reason:** the planner's proposal to cross-reference `[JoeNoble2023]` Thm 2.1 in ledger row 72 — the source is
+  second-hand and unread, and a ledger row does not cite a relay (G50); it stays in this plan's §PA.
+* **Predictions, the owner's own, scored plainly:** "at most two verdicts change" — withdrawn with its ask; **P-deg1 lost**
+  (a population extrapolated past its edge); **P-deg2 won**; **P-up lost on both halves while its route won**. Three design errors
+  recorded as the owner's: the radius ladder that stepped down in degree; the stop rule worded on "core rounds" where the kept set
+  was meant; and stopping the first implementer's run before writing it in its record.
+
 ### Phase E — tier 2, and the explanation (one day)
 
 | # | what | verified how | pass condition |
