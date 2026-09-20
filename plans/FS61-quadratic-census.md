@@ -40,6 +40,39 @@ records under `data/fs61/`. Nothing under `data/fs58/` may change — a gate ite
 **No Lean in this milestone** (decision K, §4): kernel forms of the witnesses are FS-60's (`plans/STUB-quadratic-witnesses-kernel.md`).
 FS-61's obligation to FS-60 is a format: every witness is emitted in exactly FS-58's `witness.json` + `witness.lrat.gz` shape.
 
+### §0.1 How to read this file, the words it uses, and your first hour
+
+**Reading order for the implementer:** §0, this section, §1–§2, §3, §4 (decisions), §5 (rules), then the phase you are on in §6 with
+§7 (records) beside it, and §8 before phase B. §PA is the record of the literature search: you need only its Headlines 2 and 4. §M is
+the record of *why* the schema and statements look as they do; where §M and §6–§7 differ, §6–§7 are the specification. In FS-58's
+plan (68 KB — read by search, not whole) the useful parts are §2 D1–D4 (lines ~127–210) and §R-B5 (~558–589); in
+`tools/fs58_search.py` the 40-line docstring at the top is the manual.
+
+**Words** (FS-58's, kept so one vocabulary runs through plan, code and records):
+* **unit vector** — `((a + b√d)/N, (c + e√d)/N)` with integers, `a² + c² + d(b² + e²) = N²`, `ab + ce = 0`; written `(a, b, c, e)` over
+  `N`. Its **least denominator** is `N` in lowest terms; it is **3-integral** when `3 ∤ N`, **rational** when `b = e = 0`.
+* **class** — an orbit of unit vectors of one least denominator under the order-16 group (quarter turn, swap of coordinates, `√d ↦ −√d`).
+  Named by denominator: `12`, or `60.1`, `60.2` when there are several; rational classes carry a `q` (`q1` = the four axis vectors,
+  `q5` = the `(3/5, 4/5)` family). Names are meaningful only under the frozen `classes()`.
+* **spec** / **pool** — a `+`-joined list of class names (`q1+12+60.1`) and the union of those classes. FS-58's commands take specs.
+* **lattice** — the subgroup of the plane a pool generates; here always with **every** unit vector it contains as a generator
+  (FS-58: "saturated"). **Covolume** — its 4-volume in the two real embeddings; a ball of radius `R` holds about `4.93·R⁴/covolume` points.
+* **quotient filter** — asks whether some finite quotient `Λ/L` of the lattice is 3-colourable; if so the whole lattice graph has a
+  periodic 3-colouring and **no ball of it can ever refuse** (FS-58: the lattice is "dead"; otherwise "live", here `Open`).
+* **ball** — the lattice points within radius `R` of the origin in both embeddings (FS-58's `piece(…, 'ball', R)`), with every unit
+  distance among them as an edge. A ball **refuses** when a solver reports no proper 3-colouring.
+* **witness** — a finite point set with its edge list and an LRAT refutation, in FS-58's `witness.json` / `witness.lrat.gz` format;
+  **certified** when `tools/fs58_check_witness.py` prints `CERTIFIED`. **Direct route** — find a refusing ball and shrink it.
+  **Chain route** (11 only, so far) — a finite graph that *forces* two points at difference `3u` to share a colour in every
+  3-colouring (a **forcer**), copied along `1/3 = ` a sum of unit vectors until the forced-equal points are adjacent.
+* **tier** — a named search depth (decision B). **Landed** — a certified witness exists. **Not landed at tier T** — none was found at
+  that depth; it says nothing about the field's chromatic number.
+
+**Your first hour** (it shows the whole instrument working before you write a line): from a scratch copy of `tools/fs58_search.py`,
+`fs58_local.py`, `fs58_chain.py` (so that `data/fs58/` is untouched — the tool writes beside itself), reproduce O3 with the exact
+commands in `data/fs61/pricing/README.md`: `saturate 119 180` (2 s), the three balls, then — **from the repository root after
+`source scripts/dev-env.sh`** — `direct-witness` and the frozen checker. You should see `CERTIFIED: 456 points of Q(sqrt119)^2`.
+
 ## §1 The family, and why it is exactly `d ≡ 11 (mod 12)`
 
 Let `F = ℚ(√d)`, `d > 1` squarefree, `K = F(i)`. Identify `F²` with `K` by `(x, y) ↦ x + iy`; a **unit vector** is a `u ∈ K` with
@@ -330,6 +363,15 @@ contain it, and D.0 asks the same *recipe* of 35 and 59.
 13. **No subagents** (§0).
 14. **Prior art found while working goes into `BIBLIOGRAPHY.md` the same day**, with its read status per section; an abstract is not
     a reading.
+15. **The five halts.** Stop, write down what you saw, and report — do not repair and continue — when: a control field refuses (0.4);
+    a known witness's lattice comes out `Colourable` (A.5); a monotonicity check fails (B.1b); a *proved* law is violated by the atlas
+    (A.3); any process dies unexplained. Each means the instrument is wrong in a direction that would flatter the census, and results
+    gathered after it are worth nothing until it is understood.
+16. **Each phase ends with a phase record**, `data/fs61/records/phase-<id>.md`: one row per gate item — *item · the command run,
+    pasteable · the artifact's path · the line of output that shows the pass · exit status* — plus the machine, the CPU time, the
+    resume command written before launch, every plant and the line it turned red, and anything not landed, in those words. The
+    product owner scores from this file by re-running its commands; a summary that is not backed by a row is not read as evidence.
+    If a gate item cannot go green, say so in its row: **a rung that does not land is reported as not landed, never rescoped.**
 
 ## §6 The phases and their gates (what · verified how · pass condition)
 
@@ -341,7 +383,20 @@ plus 2; D — 7; E — 7; F — 5.*
 Build the census driver as a thin layer over FS-58's functions (`import fs58_search`, rebinding its `outdir` to
 `data/fs61/fields/<d>/`; `fork` start method, as FS-58 uses, so workers inherit the rebinding — Python 3.14's default is
 `forkserver`, which would not). `argparse` throughout, with `--help` on every subcommand (O7). Subcommands: `frame`, `atlas`,
-`lattices`, `filter`, `scan`, `land`, `table`, `selftest` (schemas in §7).
+`lattices`, `filter`, `scan`, `land`, `table`, `status`, `selftest` (schemas in §7). **The surface, fixed before code (§M3):**
+* the bare call is the common one: `fs61_census.py scan 143` means tier 1; `--tier 2` is the exception;
+* every command prints its headline first (what it will do, how many units, how many already on disk) and ends with one summary line
+  of counts — `DONE 37 balls: 3 Refused, 31 Colourable, 2 Unknown, 1 Over cap; 12 skipped (on disk)`. Silence is never success;
+* resume is **re-running the same command**; finished units are read back from the JSONL and skipped; `Unknown` and `Over cap` units
+  are re-asked only when the wall or cap is larger than the one recorded (FS-58's rule);
+* `status` prints, per field, where it stands — lattices by state, balls asked, witness or not — from the records alone, so nobody
+  reads JSONL to learn progress;
+* a check that fails names the culprit and exits non-zero: `DEFECT control field d=7: lattice <key> ball R=1.5 Refused — a
+  3-chromatic plane cannot refuse`; `DEFECT monotone: <key> Refused inside <key′> Colourable (certificate <kind>)`. Exit codes: 0
+  pass, 1 a check failed, 2 usage;
+* verdict strings are exactly §7's, character for character, so one `grep -F` finds every instance;
+* `table` writes, for every field not landed, the pasteable command that would deepen it (the next tier, or the re-ask of its
+  `Unknown`s) — a null that does not say what would turn it into an answer is a dead end.
 
 | # | what | verified how | pass condition |
 |---|---|---|---|
@@ -480,12 +535,34 @@ two *searches* for that one kind of object: the route is the witness's provenanc
   combination of `Λ′`'s).
 * `fields/<d>/balls.jsonl` — `{key, shape (FS-58's `piece`: `ball`), R, points, edges, verdict, solve_seconds, wall, model_sha256}`.
 * `witness-<d>/` — FS-58's bundle: `witness.json`, `witness.lrat.gz`, `certified.out`, `controls.out`, `recheck.out`,
-  `colouring4.json`, `run-all.sh`, `README.md`.
+  `colouring4.json`, `run-all.sh`, `README.md`. **The README is written for a reviewer who trusts none of this** (model:
+  `data/fs58/witness-47/README.md`): the claim in one sentence; the one command that re-checks it and what that command checks (it
+  is standard-library Python sharing no code with the generator); what is **not** claimed (the upper bound is prior art at hand
+  level, named); sizes and hashes; how the witness was found (`found_by`, lattice, radius) — provenance, never evidence.
+* `witnesses.jsonl` — the manifest FS-60 consumes: `{d, path, points, edges, lcm_denominator, pinned_edge, witness_sha256,
+  lrat_sha256, lrat_additions, found_by, certified: true}` — one line per certified witness, FS-58's six included by reference.
 * `census.jsonl`, `census.md` — **derived**: one row per field — `d`, `d mod 8`, `L`, `N₁`, `N₃`, lattices by state, the best live
   lattice, the refusal bracket of the best lattice (both ends, with points), the witness (points, edges, `found_by: ball | chain`),
   `role`, the field's state ∈ {`Landed (certified)`, `Refusal claimed`, `Not landed at tier T`}, the value bracket with the source of
-  each end, notes (every `Unknown` and `Over cap`). A `control` field whose state is not `Not landed` is a defect, and the table says
-  so in red words.
+  each end, `evidence` ∈ {`kernel` (11 only), `checker`, `solver claim`, `none`}, notes (every `Unknown` and `Over cap`, and the
+  command that would deepen the row). A `control` field whose state is not `Not landed` is a defect, and the table says so in red
+  words. **`census.md` opens with a legend a stranger can read** — what each column means in plain words, the tier definitions, and
+  this sentence in bold: *"Not landed" means no certificate was found at the stated depth; it is not evidence that three colours
+  suffice — the conjecture predicts at least four for every row of this table.* A table that lists "landed" beside "not landed"
+  without it will be read as a table of chromatic numbers.
+
+**The vocabulary, in one place** (every status string the tools, records and table may use):
+
+| string | said of | trust |
+|---|---|---|
+| `Colourable (form mod 2)`, `Colourable (form mod 3)` | a lattice | exact — the form is in the record and re-checks in microseconds |
+| `Colourable (periodic colouring verified)` | a lattice | verified model — the quotient colouring is stored and re-checked on every generator |
+| `Open (no certificate among: …)` | a lattice | a statement about the search; carries its enumeration |
+| `Refused (solver claim)`, `Refused (certified)`, `Refused (inherited from <key>)` | a lattice | claim / checker / as its source |
+| `Colourable (colouring verified)`, `Refused (solver claim)`, `Unknown (budget)`, `Over cap (not asked)` | a ball | verified model / claim / nothing / nothing |
+| `Separable (colouring verified)`, `Forced (solver claim)`, `Unknown (budget)` | a forcing question (phase D) | as FS-58 |
+| `Landed (certified)`, `Refusal claimed`, `Not landed at tier T` | a field | checker / claim / a null at a depth |
+| `CERTIFIED`, `REFUSED <CODE>` | the frozen checker's own words | exact |
 
 ## §8 Registered predictions (before any census solver call; both outcomes of each checked reachable)
 
@@ -554,7 +631,7 @@ obligation** — a finite per-case check whose discharge implies it — or it is
 | balls are nested in the radius | **test:** assert `X_R ⊂ X_R′` on one lattice (FS-58's `piece` is a black box here) | — |
 | a lattice's graph is the full unit-distance graph | **test, per record** (0.6): every unit vector of denominator dividing `M` that lies in `Λ` is a generator; and `Λ ⊂ (1/M)ℤ⁴` makes those *all* the unit vectors in `Λ` | — |
 | a rule for the dead lattices (A.7) | **a reading until its local obligation is proved:** `ρ(s) ∈ T` for every unit vector `s` of the class — one congruence on `(a, b, c, e, N)` — with `Cay(A, T)` 3-colourable (finite, by exhaustion). This is Theorem A's shape, so a proved rule is a *second barrier* beside row 72's | **instrument:** the minimal colourable quotient (A.7) |
-| FS-58 D3.4's repair (3-colourings of `G × H`, `χ(H) > 3`, factor through `G` when `G` is gap-free) | **not used and not attempted here.** True by a two-line eigenvalue argument when `G` is Hoffman-tight at three colours and `H`'s ratio `λ_min/d` is above −1/2 (by Weil, the residue planes from about `q = 17` up); measured, unproved, at `q = 7, 11` (FS-58 §0 O7). Proposed to the owner as a stub at the close | — |
+| FS-58 D3.4's repair (3-colourings of `G × H`, `χ(H) > 3`, factor through `G` when `G` is gap-free) | **not used and not attempted here.** The sweep agent sketched an eigenvalue argument for the case `G` Hoffman-tight at three colours and `H`'s ratio `λ_min/d` above −1/2 (by Weil, the residue planes from about `q = 17` up) — *unverified by anyone*; the fact is measured, unproved, at `q = 7, 11` (FS-58 §0 O7). Proposed to the owner as a stub at the close | — |
 | every solver verdict | **test:** `Colourable` by a model checked on every edge; `Refused` a claim until the frozen checker's `CERTIFIED` | §5 rule 4 |
 
 **T4 — what a proof would have to look like, and what a census can give it.** Two shapes are in sight. **(α) The chain:** a finite
@@ -571,6 +648,28 @@ of its outcomes are reachable. **Outside (α) and (β) the census proves T4 one 
 "`v₂(N) ≥ 2` for `d ≡ 7 (mod 8)`" when odd denominators occur in both halves (57 over 143, 171 over 167); inheritance carried an
 unused "full rank" hypothesis; and R-mod8 was stated on lattices, where FS-58's certified witness over 11 falsifies it by inheritance
 before anything is run — it is a statement about *balls*.
+
+### M3 — experience (2026-09-19): the surfaces, read from the consumer's side of the wire
+
+Run as a fresh invocation of `debruijn-experience-modeling`. Four consumers, none of whom holds what the planner held: an implementer
+with this file and nothing else; a product owner scoring from artifacts; FS-59, FS-60, the ledger and a future paper reading the
+records; a reviewer who trusts none of it opening one witness directory.
+
+| # | choice | alternative | why | confidence |
+|---|---|---|---|---|
+| M3.1 | a glossary, a reading order and a first hour at the top (§0.1) | let FS-58's tool docstring teach the words | the cold read failed on the first page: "class", "spec", "saturated", "dead", `q5`, `60.1` are used from §2 on and defined nowhere in this file; and the first thing a new colleague should see is the instrument working | high |
+| M3.2 | a phase record with one pasteable row per gate item (rule 16) | the implementer's prose report | the owner's scoring becomes re-running commands; a claim with no row is visibly a claim | high |
+| M3.3 | the five halts in one rule (rule 15) | each halt stated at its gate item only | at the moment of a red control the question is "may I fix this and go on?", and the answer must be where the eye lands — no | high |
+| M3.4 | the tool's surface fixed before code: bare call = tier 1, headline and summary lines, resume by re-running, `status`, failures that name the culprit and exit non-zero, exact verdict strings | leave it to the implementer | FS-58's surface cost the planner three stumbles in one hour (O7); a silent success path and an unreadable failure path are how this project's checks have failed before (`CLAUDE.md` § Make the gate fail) | high |
+| M3.5 | one vocabulary table (§7) | strings defined where first used | one `grep -F` must find every instance, and a reader must learn each string's trust level once | high |
+| M3.6 | `census.md` opens with a legend and the sentence about what "not landed" does not mean; an `evidence` column | a bare table | implicature: a table of "landed / not landed" reads as a table of chromatic numbers, and a solver's claim beside a checker's certificate reads as the same kind of fact | high |
+| M3.7 | every null row carries the command that would deepen it | nulls as end states | each turn funds the next: FS-59 and any later tier start from that line | medium — if the commands rot when the tool changes, the table regenerates them |
+| M3.8 | a witness manifest for FS-60, and witness READMEs written for a reviewer | FS-60 walks the directories | FS-60's certificate type needs the common denominator and the pinned edge per witness; asking "what must someone who trusts none of this check?" while the evidence is gathered is this project's own rule (`CLAUDE.md` § The standard of evidence) | high |
+
+**Breakdowns walked.** A control goes red → rule 15, with the message naming the field, lattice and ball. A gate item cannot go green
+→ its row says *not landed* (rule 16). The implementer's context fills → stop at a phase boundary; the phase records and JSONL are the
+memory, and the next implementer's first command is `status`. A reader meets `Open` → the string itself says which certificates were
+tried. A reader meets "`χ = 4`" → the `evidence` column and the value bracket's sources say which half is ours.
 
 ## §R Results
 
