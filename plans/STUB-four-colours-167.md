@@ -56,7 +56,7 @@ after phase B′", ruling 3a; raw data `data/fs61/fields/*/balls.jsonl`).*
 and fields of FS-61): under degree 4 every ball is three-colourable in a fraction of a second; **degree 4–6 is the hardness peak —
 39 of the 70 `Unknown`s, and every decided ball there is colourable** (random graphs have their 3-colouring threshold at degree
 ≈ 4.7; 25 `Unknown`s sit on control planes that are 3-colourable by theorem); **no ball below degree 6.6 has ever refused**; from
-degree 14 up **nothing is undecided** — among balls of ≥ 200,000 points, 28 colourable and 15 refused, slowest 239 s. On a fixed
+degree 14 up **nothing is undecided** — among balls of ≥ 200,000 points, 28 colourable and 15 refused, slowest 259 s. On a fixed
 refusing lattice the *smallest* refusing ball is the slow one and larger radii refuse in seconds (47: 104 s at `R = 1.2`, 0 s at 1.5;
 119: 114 s → 1 s; 95: 32 s → 1 s). **So hardness is not the signal of having crossed to four colours — it is the signal of standing
 near the threshold, from either side — and the move is away from it, toward higher degree, where both answers are cheap.** Size is
@@ -71,8 +71,9 @@ saturated lattice by `N₁₄` before any ball is built; ask once, at `R₁₄`;
 the lattice search beyond denominator 2520 should *maximise `g` at given covolume*, not merely find an odd cycle. **At 167:** the
 best lattices known have `g` = 20–36 against 108 for the lattice that landed 11 — that, in one number, is why 167 is hard. The
 36-vector lattice (`120|1,1,1,3;0,2,0,2;0,0,2,2;0,0,0,4`) reaches degree 14 at `R ≈ 1.67`, about 1.5 M points (5–8 GB, one worker);
-the 20-vector lattices cannot reach degree 8 under 2 M points. FS-61's tier `1c` asks the former; read its verdict before anything
-else here. **Check first:** at what degree did FS-58's two `Unknown` balls (2.36 M and 4.46 M points, R1 above) sit? If under ~8,
+the 20-vector lattices cannot reach degree 8 under 2 M points. **FS-61's tier `1c` asked it (2026-09-20): degree 14.0 on 1,474,541 points, three-colourable in 3.66 s** — so the
+best lattice known at 167 is, on this evidence, colourable at every radius; at `NMAX = 420` 167 has 16 `Open` lattices, and almost
+none reaches degree 8 under 2,000,000 points. 167 needs lattices with more unit vectors, not deeper asks of these. **Check first:** at what degree did FS-58's two `Unknown` balls (2.36 M and 4.46 M points, R1 above) sit? If under ~8,
 R1 as written is aimed at the hard band and should be re-aimed before any cube-and-conquer is priced.
 *Monotone axes that make bisection sound:* radius (balls are nested, so refusal is upward-closed in `R`); lattice inclusion
 (`Λ ⊂ Λ′` ⟹ refusal passes up, colourability passes down — **verify whether the census driver propagates verdicts along inclusion;

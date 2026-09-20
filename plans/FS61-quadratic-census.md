@@ -626,7 +626,7 @@ therefore still never been asked a question that was both decidable and capable 
    | 14–20 | 44 | 0 | 15 |
    | ≥ 20 | 20 | 0 | 7 |
 
-   Among balls of ≥ 200,000 points: degree < 6 → 49 / 31 / 0; degree ≥ 14 → 28 Colourable, 15 Refused, **0 Unknown**, slowest 239 s.
+   Among balls of ≥ 200,000 points: degree < 6 → 49 / 31 / 0; degree ≥ 14 → 28 Colourable, 15 Refused, **0 Unknown**, slowest 259 s (the fourth implementer's recount; the owner first wrote 239 s, read off a top-twelve listing rather than a maximum).
    **No ball below degree 6.6 has refused; the `Unknown`s are the hardness peak at degree 4–6, on the colourable side wherever
    decided; and on one lattice a larger radius refuses FASTER** (47: 104 s at `R = 1.2`, 0 s at 1.5; 119: 114 s → 1 s; 95: 32 s → 1 s).
    So B′'s "the solver is the wall" was a reading of a population at median degree 5.5 — *a cost measured in one regime and carried
@@ -647,6 +647,25 @@ therefore still never been asked a question that was both decidable and capable 
    predicted points at 1.0 / 1.2 / 1.5 and what was asked. **E.5's product is the isomorphism table and the shape table; the theorem
    attempt beyond them is the owner's, at the close.**
 5. **Staffing:** the third implementer returned at 472k tokens; phase E and F go to a fresh one.
+
+**The owner's acceptance of E.1 (2026-09-20, midday) — FIVE NEW FIELDS REFUSE: 59, 239, 311, 335, 431. The census stands at fourteen
+of forty with a refusing ball, nine of them certified.** Scored by artifact: frozen files untouched; the plan untouched by the
+implementer; no witness byte moved; no stray process; and the two new tiers recounted by the owner from the raw records —
+tier `1c`: 48 records (21 `Colourable`, 7 `Unknown`, 3 `Refused`, 17 `Over cap`); tier `2l`: 130 (3 / 4 / 2 / 121). The refusals:
+59 (`R` = 1.1945, 1,396,469 points, degree 14.0, 315 s), 239 (1.2892, 369,885, 14.0, 403 s), 311 (1.2892, 1,137,169, 14.0, 18 s) at
+tier `1c`; 335 (1.4301, 623,737, 14.0, 65 s) and 431 (1.11, 1,803,077, **degree 10.4** — the cap arm, not the degree-14 arm) at
+tier `2l`. **Solver claims until certified.** Certified, they are `χ = 4` at 59, 239, 431 (`L = 4`) and `4 ≤ χ ≤ 5` at 311, 335.
+* **P-deg2 WON** (at least one new field refuses): five did, every one from a degree-aimed ask. **P-deg1 LOST**: of 17 tier-`1c`
+  balls at degree 14, two ran to the 1,800 s wall (239's second lattice, 711,381 points; 287, 908,253). *How it lost is the
+  finding, and the defect in the registration is the owner's:* the 43-of-43 record it was registered against held no ball above
+  600,000 points at that degree, because that was the old cap — a population extrapolated past its own edge. Size alone does not
+  explain the two: at the same degree 167 decided on 1,474,541 points in 3.66 s and 179 on 1,740,473 in 11.84 s.
+* **167**: its one lattice that reaches a refusal-capable degree under the cap was asked at degree 14.0 on 1,474,541 points and is
+  **three-colourable in 3.66 s**. That is the first ask at 167 that was both decidable and capable of refusing, and it coloured.
+* **The depth finding** (tier `2l`): at `NMAX = 420` ten of the eleven by-certificate fields gain `Open` lattices (not 227), and
+  167 goes from 6 to 16 — but 121 of 130 tier-`2l` records are `Over cap`: finer lattices have smaller covolume and reach no
+  degree ≥ 8 under 2,000,000 points. Depth without unit vectors buys nothing; `N₁₄` is the number to search by.
+* **Staffing:** the fourth implementer ended at 644k tokens. A fifth, fresh, certifies the five and finishes phase F.
 
 ### Phase E — tier 2, and the explanation (one day)
 
