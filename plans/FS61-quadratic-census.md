@@ -94,7 +94,7 @@ finite residue graph, so `χ(F²) ≤ χ(`that graph`)`; `L(F)` is the least suc
 |---|---|---|---|
 | `d ≢ 3 (mod 4)` | a dyadic prime of `F`, **ramified** in `K` | every unit vector `↦ 1 ∈ 𝔽₂` | `χ = 2` (`[Johnson1987]`, `[Fischer1990]` Thm 8) |
 | `d ≡ 3 (mod 4)` and `d ≢ 2 (mod 3)` | a prime above 3 with residue field `𝔽₃` | the plane over `𝔽₃`, `χ = 3` | `χ = 3` — **both halves are `[Fischer1990]`** (Thm 9 and the sentence after it: *"the chromatic number of the plane `ℚ(√N)²` is 3 when `N ≡ 3` or `7 mod 12`"*; the lower bound is Thm 8's "only if", for every `N ≡ 3 (mod 4)`); re-derived by `[Moorhouse2010]` Thm 8.6 and `[Madore2015]` |
-| `d ≡ 11 (mod 12)`, `d ≡ 3 (mod 8)` | the dyadic prime, **inert** in `K`, residue `𝔽₄` | `Cay(𝔽₄, μ₃) = K₄` | `χ ≤ 4` (`[Fischer1990]` Thm 9) |
+| `d ≡ 11 (mod 12)`, `d ≡ 3 (mod 8)` | the dyadic prime, **inert** in `K`, residue `𝔽₄` | `Cay(𝔽₄, μ₃) = K₄` | `χ ≤ 4` (`[Fischer1990]` **Thm 10(i)** — corrected 2026-09-20 from "Thm 9" against the held PDF: Thm 9 is the additive 3-colouring for `N ≢ 2 (mod 3)`; Thm 10(i) the additive 4-colouring for `N ≡ 3 (mod 8)`) |
 | `d ≡ 11 (mod 12)`, `d ≡ 7 (mod 8)`, `(d/7) ≠ −1` | a prime above 7 with residue `𝔽₇` | the plane over `𝔽₇`, `χ = 4` | `χ ≤ 4` (`[Moorhouse2010]` Thm 8.1) |
 | …, `(d/7) = −1`, `(d/11) ≠ −1` or `(d/19) ≠ −1` | above 11 or 19 | `χ = 5` | `χ ≤ 5` |
 | …, none of 7, 11, 19 usable | above 23, 43, 47, … | floors 6 or more (G56) | `L ≥ 6`; below 500 only **`d = 167`** |

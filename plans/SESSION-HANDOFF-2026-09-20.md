@@ -100,8 +100,9 @@ This is a second opinion, never the certificate: **the certificate is `tools/fs5
 ## 5. Findings so far that the close must carry (so they are not lost in compaction)
 
 * **The family**: exactly the squarefree d ≡ 11 (mod 12) can need four; 40 below 500. L = 4 at 32 of them (dyadic bound at d ≡ 3 mod 8
-  — `[Fischer1990]` **Thm 9 per the plan's §1 table and every witness README; this handoff first said "Thm 10", from memory — open
-  the PDF and settle the number before it goes into a ledger row**; the plane at 7 otherwise), L = 5 at d ≡ 47, 143, 167 (mod 168) (47, 143, 215, 311, 335, 383, 479), and
+  — `[Fischer1990]` **Thm 10(i) — SETTLED 2026-09-20 against the held PDF: Thm 10(i) is the additive 4-colouring at N ≡ 3 (mod 8);
+  Thm 9 is the additive 3-colouring at N ≢ 2 (mod 3). The plan's §1 table and the READMEs at 11 and 59 said "Thm 9" and are being
+  corrected**; the plane at 7 otherwise), L = 5 at d ≡ 47, 143, 167 (mod 168) (47, 143, 215, 311, 335, 383, 479), and
   167 is [6, 8]. Below 2000: **887, 1055, 1823 are [5, 8] through the open digit at 31** — FS-57's side digit has three named consumers.
 * **Theorem (implementer's, checked by hand by me)**: for d ≡ 7 (mod 8) no primitive unit vector has denominator ≡ 2 (mod 4); for
   d ≡ 3 (mod 8) none has 4 | N. 0 violations on 3,107 rows. P1 is superseded by proof.
