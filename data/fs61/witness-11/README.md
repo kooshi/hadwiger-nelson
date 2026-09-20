@@ -3,7 +3,7 @@
 **The claim.** The 189 points listed in `witness.json` all lie in `ℚ(√11)²`, and the graph joining the pairs
 exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√11)` needs at least four colours.
 
-**Re-check it with one command** (about a second; it needs nothing from this project but Python):
+**Re-check it with one command** (well under a second on the machine that wrote this; it needs nothing from this project but Python):
 
 ```
 python3 tools/fs58_check_witness.py --radicand 11 data/fs61/witness-11/witness.json
@@ -19,7 +19,7 @@ exit 1.
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9) gives
 `χ(ℚ(√11)²) ≤ 4`. With it, **chi(Q(sqrt11)^2) = 4**. Nothing here proves the upper bound.
 
-**What else was checked** (all four files are in this directory, each the verbatim output of the command named):
+**What else was checked** (each file below is in this directory, the verbatim output of the command named):
 
 | file | command | result |
 |---|---|---|

@@ -3,7 +3,7 @@
 **The claim.** The 456 points listed in `witness.json` all lie in `ℚ(√119)²`, and the graph joining the pairs
 exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√119)` needs at least four colours.
 
-**Re-check it with one command** (about a second; it needs nothing from this project but Python):
+**Re-check it with one command** (well under a second on the machine that wrote this; it needs nothing from this project but Python):
 
 ```
 python3 tools/fs58_check_witness.py --radicand 119 data/fs61/witness-119/witness.json
@@ -19,7 +19,7 @@ exit 1.
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the residue plane at 7 ([Moorhouse2010] Thm 8.1) gives
 `χ(ℚ(√119)²) ≤ 4`. With it, **chi(Q(sqrt119)^2) = 4**. Nothing here proves the upper bound.
 
-**What else was checked** (all four files are in this directory, each the verbatim output of the command named):
+**What else was checked** (each file below is in this directory, the verbatim output of the command named):
 
 | file | command | result |
 |---|---|---|

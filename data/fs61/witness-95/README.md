@@ -3,8 +3,7 @@
 **The claim.** The 1004 points listed in `witness.json` all lie in `ℚ(√95)²`, and the graph joining the pairs
 exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√95)` needs at least four colours.
 
-**Re-check it with one command** (5.2 s on the machine that wrote
-this; it needs nothing from this project but Python):
+**Re-check it with one command** (5 s on the machine that wrote this; it needs nothing from this project but Python):
 
 ```
 python3 tools/fs58_check_witness.py --radicand 95 data/fs61/witness-95/witness.json
@@ -16,6 +15,8 @@ found this graph. It (1) checks every point is a reduced integer tuple standing 
 edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the CNF from *its own* edge set; and (5)
 checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
 exit 1.
+
+**One gate item did not go green, and it is not about this certificate.** C.4 fails on its MINIMALITY control, not on the refutation: C.1 certified this witness and C.2 passed every plant. The deletion was stopped at 407 of 1737, leaving the pinned vertex redundant. Resume with a larger --deletion-budget (the checkpoint is on disk). The certificate above is unaffected: the frozen checker re-derives the graph from the coordinates and refutes it, and a refusing set refuses whether or not it is smallest.
 
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the residue plane at 7 ([Moorhouse2010] Thm 8.1) gives
 `χ(ℚ(√95)²) ≤ 4`. With it, **chi(Q(sqrt95)^2) = 4**. Nothing here proves the upper bound.

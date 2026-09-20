@@ -2819,6 +2819,24 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     return [] if rec['result'] == 'CERTIFIED' else [D]
 
 
+def _gate_caveat(rec):
+    """A reviewer reads this file, so a gate item that did not go green belongs in it -- above the claims, not in a
+    phase record they will never open."""
+    if not rec.get('diagnosis'):
+        return ''
+    return (f"**One gate item did not go green, and it is not about this certificate.** {rec['diagnosis']} The "
+            f"certificate above is unaffected: the frozen checker re-derives the graph from the coordinates and "
+            f"refutes it, and a refusing set refuses whether or not it is smallest.\n\n")
+
+
+def _secs(x):
+    """A measured time a reader can use.  Printing `0.0 s` for a check that really does finish instantly reads like
+    a missing measurement, and `?` reads like a promise nobody made."""
+    if x is None:
+        return 'not timed on this run'
+    return 'well under a second' if x < 1 else f'{x:.0f} s'
+
+
 def write_witness_readme(D, out, rec, w, fr):
     n3 = rec['steps']['C.6 3-adic barrier']['edges_with_3_in_denominator']
     (out / 'README.md').write_text(f'''# `χ(ℚ(√{D})²) ≥ 4` — a witness, and the one command that re-checks it
@@ -2826,8 +2844,7 @@ def write_witness_readme(D, out, rec, w, fr):
 **The claim.** The {rec['points']} points listed in `witness.json` all lie in `ℚ(√{D})²`, and the graph joining the pairs
 exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√{D})` needs at least four colours.
 
-**Re-check it with one command** ({rec['steps']['C.1 certificate'].get('seconds', '?')} s on the machine that wrote
-this; it needs nothing from this project but Python):
+**Re-check it with one command** ({_secs(rec['steps']['C.1 certificate'].get('seconds'))} on the machine that wrote this; it needs nothing from this project but Python):
 
 ```
 python3 tools/fs58_check_witness.py --radicand {D} data/fs61/witness-{D}/witness.json
@@ -2840,7 +2857,7 @@ edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the
 checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
 exit 1.
 
-**What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
+{_gate_caveat(rec)}**What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
 `χ(ℚ(√{D})²) ≤ {fr['L']}`. With it, **{rec['value']}**. Nothing here proves the upper bound.
 
 **What else was checked** (each file below is in this directory, the verbatim output of the command named):
@@ -2913,8 +2930,8 @@ def cmd_land_readme(fields=None):
     bad = []
     for D in todo:
         rec = land.get(str(D))
-        if not rec or rec.get('result') != 'CERTIFIED':
-            defect(f'land-readme d={D}: no CERTIFIED landing record')
+        if not rec or 'steps' not in rec:      # a named field is rewritten whatever its result; a default sweep
+            defect(f'land-readme d={D}: no landing record with gate steps')   # takes only the certified ones
             bad.append(D)
             continue
         out = FS61 / f'witness-{D}'

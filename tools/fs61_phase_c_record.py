@@ -3,8 +3,9 @@
 
 The phase record is what the product owner scores from, one row per gate item per field, and typing 72 rows by hand
 is how a record and its artifacts drift apart.  This reads `data/fs61/landings.jsonl` -- the file the driver wrote --
-and substitutes the @@...@@ placeholders, so every cell in the record is the driver's own recorded output line and
-exit status.  Re-running it is idempotent only against a fresh split; it is a one-shot renderer, not a gate.
+and rewrites the block between `<!-- GATE:BEGIN -->` and `<!-- GATE:END -->`, so every cell in the record is the
+driver's own recorded output line, exit status and seconds.  Re-running it after a second gate pass updates the same
+rows in place.  It renders a record; it is not itself a gate.
 
 Usage: python3 tools/fs61_phase_c_record.py [--print]
 """
@@ -79,6 +80,8 @@ def main():
     land = {}
     for l in open(FS61 / 'landings.jsonl'):
         r = json.loads(l)
+        if r.get('ball_rank', 0):           # a --ball-rank experiment is its own object, never the field's row
+            continue
         land[str(r['d'])] = r
     txt = gate_tables(land)
     if '--print' in sys.argv:
@@ -86,10 +89,16 @@ def main():
         return 0
     p = FS61 / 'records' / 'phase-C.md'
     s = p.read_text()
-    if '@@GATE@@' not in s:
-        print('phase-C.md holds no @@GATE@@ placeholder; nothing substituted', file=sys.stderr)
+    B, E = '<!-- GATE:BEGIN -->', '<!-- GATE:END -->'
+    block = f'{B}\n{txt}\n{E}'
+    if B in s and E in s:                       # re-render in place, so a second gate pass updates the same rows
+        s = s[:s.index(B)] + block + s[s.index(E) + len(E):]
+    elif '@@GATE@@' in s:
+        s = s.replace('@@GATE@@', block)
+    else:
+        print('phase-C.md holds neither the GATE markers nor the @@GATE@@ placeholder', file=sys.stderr)
         return 1
-    p.write_text(s.replace('@@GATE@@', txt))
+    p.write_text(s)
     print(f'wrote {len(ORDER)} gate tables into {p}')
     return 0
 

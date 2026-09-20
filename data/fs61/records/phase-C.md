@@ -160,14 +160,15 @@ Its log is `data/fs61/records/land-all.log` (and `land-95.log`, `land-95b.log` f
 per-item exit status, output line and seconds of every field are in `data/fs61/landings.jsonl`, one JSON object per
 field, keyed by `steps`.
 
+<!-- GATE:BEGIN -->
 ### `d = 11` — **CERTIFIED**, 189 points, 452 edges (`data/fs61/witness-11/`)
 
 | # | item | command, pasteable (`$D` = 11, `$D2` = 23) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 11 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/certified.out` | **PASS** — CERTIFIED: 189 points of Q(sqrt11)^2, each a reduced (a, b, c, e, m); all 452 pairs at distance exactly 1 re-derived in integer arithmetic (17766 cand | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 11 --controls data/fs61/witness-11/witness.json` | `data/fs61/witness-11/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 23 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [5, 0, 0, -1, 6], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 11 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/recheck.out` | **PASS** — RECHECK PASS: 189 points; 452 unit pairs by Fraction arithmetic over all 17766 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 11 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/certified.out` | **PASS** — (0.1 s) CERTIFIED: 189 points of Q(sqrt11)^2, each a reduced (a, b, c, e, m); all 452 pairs at distance exactly 1 re-derived in integer arithmetic (17766 cand | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 11 --controls data/fs61/witness-11/witness.json` | `data/fs61/witness-11/controls.out` | **PASS** — (0.9 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 23 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/wrong-radicand.out` | **PASS** — (0.0 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [5, 0, 0, -1, 6], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 11 data/fs61/witness-11/witness.json` | `data/fs61/witness-11/recheck.out` | **PASS** — (3.2 s) RECHECK PASS: 189 points; 452 unit pairs by Fraction arithmetic over all 17766 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 11   (step C.5)` | `data/fs61/witness-11/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 452 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 11   (step C.6)` | `data/fs61/witness-11/README.md` | **PASS** — 268 of 452 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 11   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-11/README.md` | **PASS** — `chi(Q(sqrt11)^2) = 4`, upper bound the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9) | — |
@@ -177,10 +178,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 23, `$D2` = 35) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 23 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/certified.out` | **PASS** — CERTIFIED: 573 points of Q(sqrt23)^2, each a reduced (a, b, c, e, m); all 1365 pairs at distance exactly 1 re-derived in integer arithmetic (163878 ca | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 23 --controls data/fs61/witness-23/witness.json` | `data/fs61/witness-23/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 35 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 51] between [0, 0, 0, 0, 1] and [7, -1, 7, 1, 12], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 23 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/recheck.out` | **PASS** — RECHECK PASS: 573 points; 1365 unit pairs by Fraction arithmetic over all 163878 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 23 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/certified.out` | **PASS** — (1.0 s) CERTIFIED: 573 points of Q(sqrt23)^2, each a reduced (a, b, c, e, m); all 1365 pairs at distance exactly 1 re-derived in integer arithmetic (163878 ca | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 23 --controls data/fs61/witness-23/witness.json` | `data/fs61/witness-23/controls.out` | **PASS** — (3.3 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 35 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/wrong-radicand.out` | **PASS** — (0.1 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 51] between [0, 0, 0, 0, 1] and [7, -1, 7, 1, 12], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 23 data/fs61/witness-23/witness.json` | `data/fs61/witness-23/recheck.out` | **PASS** — (20.3 s) RECHECK PASS: 573 points; 1365 unit pairs by Fraction arithmetic over all 163878 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 23   (step C.5)` | `data/fs61/witness-23/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 1365 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 23   (step C.6)` | `data/fs61/witness-23/README.md` | **PASS** — 866 of 1365 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 23   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-23/README.md` | **PASS** — `chi(Q(sqrt23)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
@@ -190,10 +191,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 47, `$D2` = 59) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 47 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/certified.out` | **PASS** — CERTIFIED: 169 points of Q(sqrt47)^2, each a reduced (a, b, c, e, m); all 385 pairs at distance exactly 1 re-derived in integer arithmetic (14196 cand | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 47 --controls data/fs61/witness-47/witness.json` | `data/fs61/witness-47/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 59 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 69] between [0, 0, 0, 0, 1] and [35, -1, -5, -7, 60], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 47 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/recheck.out` | **PASS** — RECHECK PASS: 169 points; 385 unit pairs by Fraction arithmetic over all 14196 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 47 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/certified.out` | **PASS** — (0.1 s) CERTIFIED: 169 points of Q(sqrt47)^2, each a reduced (a, b, c, e, m); all 385 pairs at distance exactly 1 re-derived in integer arithmetic (14196 cand | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 47 --controls data/fs61/witness-47/witness.json` | `data/fs61/witness-47/controls.out` | **PASS** — (0.7 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 59 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/wrong-radicand.out` | **PASS** — (0.0 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 69] between [0, 0, 0, 0, 1] and [35, -1, -5, -7, 60], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 47 data/fs61/witness-47/witness.json` | `data/fs61/witness-47/recheck.out` | **PASS** — (3.0 s) RECHECK PASS: 169 points; 385 unit pairs by Fraction arithmetic over all 14196 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 47   (step C.5)` | `data/fs61/witness-47/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 385 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 47   (step C.6)` | `data/fs61/witness-47/README.md` | **PASS** — 358 of 385 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 47   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-47/README.md` | **PASS** — `4 <= chi(Q(sqrt47)^2) <= 5`, upper bound the residue plane at 11 ([Moorhouse2010] Thm 8.1) | — |
@@ -203,10 +204,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 71, `$D2` = 83) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 71 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/certified.out` | **PASS** — CERTIFIED: 131 points of Q(sqrt71)^2, each a reduced (a, b, c, e, m); all 306 pairs at distance exactly 1 re-derived in integer arithmetic (8515 candi | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 71 --controls data/fs61/witness-71/witness.json` | `data/fs61/witness-71/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 83 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 64] between [0, 0, 0, 0, 1] and [61, -7, 61, 7, 120], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 71 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/recheck.out` | **PASS** — RECHECK PASS: 131 points; 306 unit pairs by Fraction arithmetic over all 8515 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT;  | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 71 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/certified.out` | **PASS** — (0.0 s) CERTIFIED: 131 points of Q(sqrt71)^2, each a reduced (a, b, c, e, m); all 306 pairs at distance exactly 1 re-derived in integer arithmetic (8515 candi | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 71 --controls data/fs61/witness-71/witness.json` | `data/fs61/witness-71/controls.out` | **PASS** — (0.5 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 83 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/wrong-radicand.out` | **PASS** — (0.0 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 64] between [0, 0, 0, 0, 1] and [61, -7, 61, 7, 120], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 71 data/fs61/witness-71/witness.json` | `data/fs61/witness-71/recheck.out` | **PASS** — (2.7 s) RECHECK PASS: 131 points; 306 unit pairs by Fraction arithmetic over all 8515 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT;  | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 71   (step C.5)` | `data/fs61/witness-71/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 306 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 71   (step C.6)` | `data/fs61/witness-71/README.md` | **PASS** — 108 of 306 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 71   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-71/README.md` | **PASS** — `chi(Q(sqrt71)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
@@ -218,10 +219,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 95, `$D2` = 107) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 95 data/fs61/witness-95/witness.json` | `data/fs61/witness-95/certified.out` | **PASS** — (5.2 s) CERTIFIED: 1004 points of Q(sqrt95)^2, each a reduced (a, b, c, e, m); all 2829 pairs at distance exactly 1 re-derived in integer arithmetic (503506 c | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 95 --controls data/fs61/witness-95/witness.json` | `data/fs61/witness-95/controls.out` | **PASS** — (15.0 s) CONTROLS ALL PASS | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 95 data/fs61/witness-95/witness.json` | `data/fs61/witness-95/certified.out` | **PASS** — (5.3 s) CERTIFIED: 1004 points of Q(sqrt95)^2, each a reduced (a, b, c, e, m); all 2829 pairs at distance exactly 1 re-derived in integer arithmetic (503506 c | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 95 --controls data/fs61/witness-95/witness.json` | `data/fs61/witness-95/controls.out` | **PASS** — (14.9 s) CONTROLS ALL PASS | 0 |
 | C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 107 data/fs61/witness-95/witness.json` | `data/fs61/witness-95/wrong-radicand.out` | **PASS** — (0.1 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 319] between [0, 0, 0, 0, 1] and [50, -1, -25, -2, 60], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 95 data/fs61/witness-95/witness.json` | `data/fs61/witness-95/recheck.out` | **FAIL** — (344.2 s) RECHECK FAIL: deleting vertex 7 leaves a graph that still refuses (control expected a colouring) | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 95 data/fs61/witness-95/witness.json` | `data/fs61/witness-95/recheck.out` | **FAIL** — (345.1 s) RECHECK FAIL: deleting vertex 7 leaves a graph that still refuses (control expected a colouring) | 1 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 95   (step C.5)` | `data/fs61/witness-95/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 2829 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 95   (step C.6)` | `data/fs61/witness-95/README.md` | **PASS** — 2484 of 2829 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 95   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-95/README.md` | **PASS** — `chi(Q(sqrt95)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
@@ -231,10 +232,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 119, `$D2` = 131) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 119 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/certified.out` | **PASS** — CERTIFIED: 456 points of Q(sqrt119)^2, each a reduced (a, b, c, e, m); all 1122 pairs at distance exactly 1 re-derived in integer arithmetic (103740 c | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 119 --controls data/fs61/witness-119/witness.json` | `data/fs61/witness-119/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 131 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 19] between [0, 0, 0, 0, 1] and [5, 0, 0, 1, 12], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 119 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/recheck.out` | **PASS** — RECHECK PASS: 456 points; 1122 unit pairs by Fraction arithmetic over all 103740 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 119 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/certified.out` | **PASS** — (0.5 s) CERTIFIED: 456 points of Q(sqrt119)^2, each a reduced (a, b, c, e, m); all 1122 pairs at distance exactly 1 re-derived in integer arithmetic (103740 c | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 119 --controls data/fs61/witness-119/witness.json` | `data/fs61/witness-119/controls.out` | **PASS** — (1.9 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 131 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/wrong-radicand.out` | **PASS** — (0.1 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 19] between [0, 0, 0, 0, 1] and [5, 0, 0, 1, 12], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 119 data/fs61/witness-119/witness.json` | `data/fs61/witness-119/recheck.out` | **PASS** — (18.9 s) RECHECK PASS: 456 points; 1122 unit pairs by Fraction arithmetic over all 103740 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 119   (step C.5)` | `data/fs61/witness-119/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 1122 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 119   (step C.6)` | `data/fs61/witness-119/README.md` | **PASS** — 996 of 1122 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 119   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-119/README.md` | **PASS** — `chi(Q(sqrt119)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
@@ -244,10 +245,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 143, `$D2` = 155) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 143 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/certified.out` | **PASS** — CERTIFIED: 664 points of Q(sqrt143)^2, each a reduced (a, b, c, e, m); all 1600 pairs at distance exactly 1 re-derived in integer arithmetic (220116 c | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 143 --controls data/fs61/witness-143/witness.json` | `data/fs61/witness-143/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 155 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [3, -4, 4, 3, 60], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 143 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/recheck.out` | **PASS** — RECHECK PASS: 664 points; 1600 unit pairs by Fraction arithmetic over all 220116 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 143 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/certified.out` | **PASS** — (0.7 s) CERTIFIED: 664 points of Q(sqrt143)^2, each a reduced (a, b, c, e, m); all 1600 pairs at distance exactly 1 re-derived in integer arithmetic (220116 c | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 143 --controls data/fs61/witness-143/witness.json` | `data/fs61/witness-143/controls.out` | **PASS** — (2.7 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 155 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/wrong-radicand.out` | **PASS** — (0.1 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 15] between [0, 0, 0, 0, 1] and [3, -4, 4, 3, 60], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 143 data/fs61/witness-143/witness.json` | `data/fs61/witness-143/recheck.out` | **PASS** — (60.0 s) RECHECK PASS: 664 points; 1600 unit pairs by Fraction arithmetic over all 220116 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSA | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 143   (step C.5)` | `data/fs61/witness-143/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 1600 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 143   (step C.6)` | `data/fs61/witness-143/README.md` | **PASS** — 1204 of 1600 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 143   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-143/README.md` | **PASS** — `4 <= chi(Q(sqrt143)^2) <= 5`, upper bound the residue plane at 11 ([Moorhouse2010] Thm 8.1) | — |
@@ -257,10 +258,10 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 191, `$D2` = 203) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 191 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/certified.out` | **PASS** — CERTIFIED: 292 points of Q(sqrt191)^2, each a reduced (a, b, c, e, m); all 713 pairs at distance exactly 1 re-derived in integer arithmetic (42486 can | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 191 --controls data/fs61/witness-191/witness.json` | `data/fs61/witness-191/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 203 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 145] between [0, 0, 0, 0, 1] and [39, 1, -13, 3, 60], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 191 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/recheck.out` | **PASS** — RECHECK PASS: 292 points; 713 unit pairs by Fraction arithmetic over all 42486 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 191 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/certified.out` | **PASS** — (0.3 s) CERTIFIED: 292 points of Q(sqrt191)^2, each a reduced (a, b, c, e, m); all 713 pairs at distance exactly 1 re-derived in integer arithmetic (42486 can | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 191 --controls data/fs61/witness-191/witness.json` | `data/fs61/witness-191/controls.out` | **PASS** — (1.2 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 203 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/wrong-radicand.out` | **PASS** — (0.0 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 145] between [0, 0, 0, 0, 1] and [39, 1, -13, 3, 60], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 191 data/fs61/witness-191/witness.json` | `data/fs61/witness-191/recheck.out` | **PASS** — (6.8 s) RECHECK PASS: 292 points; 713 unit pairs by Fraction arithmetic over all 42486 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNSAT; | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 191   (step C.5)` | `data/fs61/witness-191/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 713 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 191   (step C.6)` | `data/fs61/witness-191/README.md` | **PASS** — 89 of 713 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 191   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-191/README.md` | **PASS** — `chi(Q(sqrt191)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
@@ -270,15 +271,16 @@ field, keyed by `steps`.
 
 | # | item | command, pasteable (`$D` = 359, `$D2` = 371) | artifact | the line that shows the verdict | exit |
 |---|---|---|---|---|---|
-| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 359 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/certified.out` | **PASS** — CERTIFIED: 1190 points of Q(sqrt359)^2, each a reduced (a, b, c, e, m); all 3243 pairs at distance exactly 1 re-derived in integer arithmetic (707455  | 0 |
-| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 359 --controls data/fs61/witness-359/witness.json` | `data/fs61/witness-359/controls.out` | **PASS** — CONTROLS ALL PASS | 0 |
-| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 371 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 427] between [0, 0, 0, 0, 1] and [38, -1, -19, -2, 60], which are not at distance 1 | 1 |
-| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 359 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/recheck.out` | **PASS** — RECHECK PASS: 1190 points; 3243 unit pairs by Fraction arithmetic over all 707455 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNS | 0 |
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 359 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/certified.out` | **PASS** — (7.2 s) CERTIFIED: 1190 points of Q(sqrt359)^2, each a reduced (a, b, c, e, m); all 3243 pairs at distance exactly 1 re-derived in integer arithmetic (707455  | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 359 --controls data/fs61/witness-359/witness.json` | `data/fs61/witness-359/controls.out` | **PASS** — (19.8 s) CONTROLS ALL PASS | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 371 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/wrong-radicand.out` | **PASS** — (0.2 s) REFUSED EDGE_NOT_UNIT: the file lists edge [0, 427] between [0, 0, 0, 0, 1] and [38, -1, -19, -2, 60], which are not at distance 1 | 1 |
+| C.4 | second opinion | `python3 tools/fs58_recheck_witness.py 359 data/fs61/witness-359/witness.json` | `data/fs61/witness-359/recheck.out` | **PASS** — (390.5 s) RECHECK PASS: 1190 points; 3243 unit pairs by Fraction arithmetic over all 707455 pairs = the file; Lingeling UNSAT, Cadical153 UNSAT, MapleChrono UNS | 0 |
 | C.5 | exactly four | `python3 tools/fs61_census.py land 359   (step C.5)` | `data/fs61/witness-359/colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 3243 edges | — |
 | C.6 | the barrier is met | `python3 tools/fs61_census.py land 359   (step C.6)` | `data/fs61/witness-359/README.md` | **PASS** — 1997 of 3243 edges carry 3 in the reduced denominator | — |
 | C.7 | the value | `python3 tools/fs61_census.py land 359   (step C.7, from data/fs61/frame.jsonl)` | `data/fs61/witness-359/README.md` | **PASS** — `chi(Q(sqrt359)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
 | C.9 | minimality, recorded | `python3 tools/fs61_census.py land 359   (step C.9)` | witness.json `construction.reduction` | **NOTE** — refusing but NOT 1-minimal: the deletion was stopped at position 483 of 2019 | — |
 
+<!-- GATE:END -->
 
 **C.8, reproducibility, and the honest caveat on "byte-identical".**
 
@@ -411,6 +413,33 @@ that produced it, which is a request to shrink further.
 | `data/fs61/landings.jsonl` | one JSON object per field: every C-item's exit status, output line, seconds, and the generation passes with what stopped them | yes |
 | `data/fs61/witnesses.jsonl` | the manifest FS-60 consumes, now carrying `minimal` and `deletion_stopped_at` | yes |
 | `data/fs61/records/land-all.log`, `land-95*.log`, `phase-c-checks.out`, `recheck-all.out`, `selftest.out`, `table-check.out` | the raw logs behind every row above | yes |
+
+
+## A second, complete gate pass from the committed certificates (2026-09-20, the last thing run)
+
+*The habit the previous implementer left behind — re-run every gate command at the end and read the **counts**, not
+the exit codes — and it earned its keep twice today: it caught `/usr/bin/time` missing (the row read `0 of 9
+CERTIFIED` while every exit status was 0) and, earlier, the C.2 defect.*
+
+```
+for d in 11 23 47 71 95 119 143 191 359; do python3 tools/fs61_census.py land $d; done
+```
+
+`data/fs61/records/land-final.log`. Generation is skipped at every field because `witness.json` is already on disk,
+so this is **the whole gate re-run against the committed files**: 8 CERTIFIED, 1 INCOMPLETE (`d = 95`, the same C.4
+row), identical verdicts to the first pass, and
+
+```
+git status --porcelain 'data/fs61/witness-*/witness.json' 'data/fs61/witness-*/witness.lrat.gz'   -> empty
+```
+
+— **not one certificate byte moved.** The pass also filled in the per-item seconds now shown in the gate tables
+above (C.1 runs from under a second to 7 s; C.4 from 2.7 s to 390 s at `d = 359` and 345 s at `d = 95`, which is
+where phase C's wall clock actually goes).
+
+Re-read at the same time: `selftest` **7 sections, 38 PASS, 0 FAIL**; `table --check` **40 fields, 0 defects** and
+`census.md` byte-identical on a second regeneration; `regress untouched` **0 modified paths** under `data/fs58` and
+`tools/fs58_*`.
 
 
 ## What I would change in the plan (the owner's call, not mine)
