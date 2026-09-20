@@ -85,6 +85,28 @@ only necessity theorem we hold (A1) is vacuous at the top rung.
 field has `L = 6` cannot move it. FS-57's stub said so the day before this one was minted: the wall *"neither proves nor refutes
 χ(ℝ²) ≥ 6"*.
 
+**The split, stated once** (2026-09-20, out of a conversation with Kooshi, who asked why finishing the enumeration of the six
+finite planes would not narrow Hadwiger–Nelson). Sort the fields by local bound; S is three statements:
+
+| fields with | six is excluded by | status |
+|---|---|---|
+| `L(F) ≤ 5` | `χ ≤ L` — (a) | theorem (row 57's hand step aside) |
+| `L(F) = 6` | the wall: no such field exists — (b) | **finite**: six graphs, none decided, four beyond any priced instrument |
+| `L(F) ≥ 7` | nothing we hold; needs (c) on these fields | **open, and infinite**: ℚ(√167) (if the wall holds; proven `3 ≤ χ ≤ 7`), `K(√7)` and de Grey's field (`5 ≤ χ ≤ 7`), and every real field containing one of them |
+
+The theorem is one-sided — `χ ≤ L` — so **closing the wall proves "no field has local bound six", never "no field has chromatic
+number six"**; the step between them is `χ = L`, which is the conjecture. And **W follows from the third row alone** [derived; rests
+on the bridge and on row 68's `L(K(√7)) ≥ 7`]: if `χ(ℝ²) = 6`, the bridge gives a number field `F` with `χ(F²) = 6`; then
+`F′ = F·K(√7)` is real, `L(F′) ≥ L(K(√7)) ≥ 7` because `L` is monotone up a tower (a conjugation-fixed prime of `F′(i)` restricts to
+one of `F(i)`, and the residue-field inclusion is a homomorphism of the target graphs — a larger field only *loses* usable primes),
+and `6 ≤ χ(F′²) ≤ χ(ℝ²) = 6`, a six-chromatic field in the third row. So **the fields with `L ≥ 7` are cofinal, `χ(ℝ²)` is decided
+on a cofinal family, and the fields the wall speaks about are exactly the ones that can never decide the plane.** Checked from both
+ends: without the conjecture the wall is silent on the third row; with its bold form `χ(K(√7)²) = 7` already gives `χ(ℝ²) = 7` and
+the wall is not used; under the main clause alone (`χ = L` where `L ≤ 6`) the third row is unconstrained. There is no intermediate
+hypothesis under which the enumeration is the step that narrows Hadwiger–Nelson. What it does buy is listed in §4 and in G64: a
+theorem about the residue method (`L` omits six), the conjecture's prediction at ℚ(√167) sharpened from `≥ 6` to `7`, and the aiming
+statement.
+
 ---
 
 ## 2a. Why the wall exists at all, and what that makes of (b)
