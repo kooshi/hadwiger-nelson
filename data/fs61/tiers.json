@@ -1,0 +1,28 @@
+{
+  "1": {
+    "name": "tier 1",
+    "defined": "2026-09-19, plans/FS61-quadratic-census.md decision B",
+    "nmax": 180,
+    "lattices": "the axis plus one or two non-rational classes with lcm <= 180, saturated (every unit vector of the lattice a generator)",
+    "odd_girth": "FS-58's odd_girth, exact to length 15 or a 400,000-point BFS cap, whichever binds first; none_up_to recorded",
+    "bfs_cap": 400000,
+    "quotients": 24,
+    "quotient_wall": 30,
+    "radii": [1.5, 1.8],
+    "point_cap": 600000,
+    "solve_wall": 600
+  },
+  "2": {
+    "name": "tier 2",
+    "defined": "2026-09-19, plans/FS61-quadratic-census.md decision B (phase E; d = 7 mod 8 fields not landed at tier 1, 167 excluded)",
+    "nmax": 420,
+    "lattices": "the axis plus one or two non-rational classes with lcm <= 420, saturated",
+    "odd_girth": "FS-58's odd_girth, exact to length 15 or a 400,000-point BFS cap, whichever binds first; none_up_to recorded",
+    "bfs_cap": 400000,
+    "quotients": 24,
+    "quotient_wall": 30,
+    "radii": [1.5, 1.8],
+    "point_cap": 3000000,
+    "solve_wall": 1800
+  }
+}

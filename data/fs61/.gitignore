@@ -1,0 +1,5 @@
+# Verified 3-colourings of balls, one file per model, named by the sha256 the ball record carries.
+# The RECORD is the commitment (verdict + model_sha256, checked edge by edge when it was written and re-checkable by
+# `fs61_census.py scan <d> --reverify`); the model file itself is bulk regenerable data -- a single 600,000-point ball
+# is 600 KB raw -- and is kept out of git.  Re-create with `fs61_census.py scan <d>` after deleting the ball record.
+fields/*/models/
