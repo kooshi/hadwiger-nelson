@@ -92,6 +92,41 @@ field the conjecture is sharpest about. **Both outcomes are findings**, which is
 **Item 3 is the first thing to do.** It is a derivation, not a search, and it either kills the stub cheaply or tells us what the
 instrument can reach.
 
+### 3a. A first pass at item 3 — [sketch, 2026-09-19, UNVERIFIED; recorded so it is not lost, not so it is believed]
+
+*Made in passing during a ranking review, in about ten minutes, with no search and no computation. Every step below is owed a check
+before anything rests on it.*
+
+**The recognition (G46).** Take configuration (i): a usable prime `𝔭`, target `G = (ℝ²/L) × (O_𝔭/𝔭^m)²`. The image of `F²` is dense
+in `G` (each fibre of `F² → (O_𝔭/𝔭^m)²` is dense in `ℝ²`). The unit circle is a rational curve, so by weak approximation at the two
+places the unit vectors of `F` are dense in `S¹(ℝ) × C(F_𝔭)`; hence the closure of their image in `G` is the full product
+`S̄ × C_m` — the torus's unit circle times the residue plane's connection set, **independently**. So for colour classes that are
+*regular* windows (closure of interior, null boundary — the model-set hypothesis, and what this stub proposes), a proper mixed
+colouring is exactly a proper open colouring of the **categorical (tensor) product**
+
+> `(torus unit-distance graph) × (residue plane at level m)`.
+
+**What that makes of the instrument.** `χ(A × B) ≤ min(χ(A), χ(B))` always — the two corners. **The mixed colouring beats both
+corners iff Hedetniemi's inequality is strict for this pair.** So FS-64 is a search for a Hedetniemi counterexample between a
+compact abelian Cayley graph and a finite one — the same object G43/G59 already met for CRT products of two residue planes, with
+the archimedean place as one more factor.
+
+**The cap, such as it is.** The only general lower bound is fractional: `χ_f(A × B) = min(χ_f(A), χ_f(B))` (`[Zhu2011]`, finite
+graphs; the compact-group form is owed), and `χ_f` of the real factor is at most 4.36 (`[MatolcsiEtAl2025]`'s neighbourhood), so the
+cap reads **≥ 5** and no more. *So the stub is not dead on arrival — G60's kind of cap does not kill it — but its success condition
+is now named, and it is a strong one:* known Hedetniemi failures (`[Shitov2019]`, `[Tardif2023]`, `[Zhu2025]`) are built from
+exponential graphs and look nothing like Cayley graphs of abelian groups; whether the inequality can fail at all in that class is
+**the prior-art question this adds to §4**, in those words (*Hedetniemi's conjecture for Cayley graphs / vertex-transitive graphs /
+circular and distance graphs*).
+
+**Checks owed, cheapest first.** (1) The density step at a *non-usable* prime — configuration (ii), the barrier prime 3 — is
+different in kind: unit vectors with 3 in a denominator leave `O_𝔭²`, the finite level is not a quotient of `F²`, and the target
+must be the `S`-arithmetic solenoid; nothing above covers it, and (ii) is the configuration this stub cares most about. (2)
+"Regular window" is a real restriction: the residue colouring's own classes are dense and escape this argument entirely, so the
+reduction says nothing about non-regular mixed colourings. (3) The corner value `χ` of the torus factor for regular classes is
+`6` or `7` (closed-set colourings need six, a classical result — cite before use), which is what makes a strict Hedetniemi gap
+necessary for any gain over a seven-chromatic residue plane.
+
 ---
 
 ## 4. Prior art owed (WORKFLOW 3a) — shared with FS-63
