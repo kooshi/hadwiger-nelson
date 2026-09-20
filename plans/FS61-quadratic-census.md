@@ -667,6 +667,24 @@ tier `2l`. **Solver claims until certified.** Certified, they are `χ = 4` at 59
   degree ≥ 8 under 2,000,000 points. Depth without unit vectors buys nothing; `N₁₄` is the number to search by.
 * **Staffing:** the fourth implementer ended at 644k tokens. A fifth, fresh, certifies the five and finishes phase F.
 
+**The owner's acceptance of the certification pass (2026-09-20, afternoon) — 311, 335, 59 and 431 are `Landed (certified)`:
+THIRTEEN of forty; `d = 239` refuses by solver claim and did not certify.** Scored by artifact: frozen files untouched; plan edits
+confined to §R-F; no standing witness byte moved (the nine earlier hashes re-read against `data/fs61/owner/recheck-all.out`); C.7
+read at all four against `frame.jsonl` (the dyadic bound at 59; the residue plane at 7 at 431; the plane at 11 at 311 and 335); the
+owner's C.10 recheck and the frozen checker re-run by the owner are recorded in `data/fs61/owner/`. **New exact values: χ = 4 at 59
+and 431; new brackets `4 ≤ χ ≤ 5` at 311 and 335.** The fifth implementer ended at 554k tokens.
+* **239: the predecessor's route is adopted, registered before it runs.** Its ball at degree 14 refuses in 403 s and collapses
+  slowly (46,338 points after round 0; 8,336 after 52 rounds; a certificate of hundreds of megabytes ahead). The phase diagram says
+  a denser ball refuses faster and collapses further, so a sixth, short-lived implementer asks ONE ball of the same lattice at
+  `R = 1.5181` (predicted 710,575 points, degree 18) under a new tier id. **P-up: it refuses in under 120 s and round 0 leaves
+  fewer than 5,000 points** (medium; loses if either half fails). Stop rule fixed in advance: round 0 over 10,000 points, or the
+  kept set not under 3,000 within 45 minutes ⟹ 239 is reported not landed.
+* **The fifth implementer's finding about certification cost stands as a finding:** neither the ball's point count (the owner's
+  brief) nor its plain solve time (the implementer's replacement; its registered band lost 3 of 5) predicts extraction cost — the
+  largest of the five balls certified in 44 s and the smallest did not finish. What separates them is round 0's output, knowable
+  only by running it; **the honest instrument is a stop rule, not a predictor.** And certificate weight is a cliff: 1,004 points →
+  19 MB, 1,739 → 39.7 MB gzipped LRAT.
+
 ### Phase E — tier 2, and the explanation (one day)
 
 | # | what | verified how | pass condition |
