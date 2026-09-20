@@ -31,7 +31,7 @@ leaves.
    output is a **§PA section of the subplan**; a subplan without one is not a subplan. Minted 2026-09-08
    (`CLAUDE.md` § Grokkings G49) after a check found that four consecutive milestones had reconstructed the
    contents of a 2010 draft that was one web search away, and that a paper systematizing one of their kernel
-   theorems had been sitting unread in our own bibliography. Four questions:
+   theorems had been sitting unread in our own bibliography. Eight questions — the last four each added after a miss:
    1. **Name the object in the vocabulary of the discipline it belongs to, and search THAT.** G46 already
       demands the recognition step for *deriving*; the sentence it produces is the search query. "The finite
       planes are Cayley graphs of an abelian group" → search *Cayley graph chromatic number abelian group*.
@@ -52,6 +52,26 @@ leaves.
       says and its conclusion contradicts. An abstract is not a reading (G50).
    7. **Cross-check citation lists in two databases** — OpenAlex and Semantic Scholar disagreed by a factor of
       four on the same paper, and the missing three were the informative ones.
+   8. **Pull the COMPLETE author listing of everyone who posed or worked the question, and search abstracts in THEIR
+      vocabulary, in a reviews database** — added 2026-09-19, after FS-61's gate found `[Fischer1994]` (Congressus
+      Numerantium 104), whose author's summary states this project's Theorem B thirty-two years before we proved it.
+      Every earlier gate missed it, for three reasons items 1–7 do not reach: it is in neither OpenAlex nor Semantic
+      Scholar and nothing cites it, so **no citation walk can arrive at it** — pre-2000 conference proceedings mostly
+      exist in no citation graph at all; its title, *A planar geometric graph of chromatic number four*, carries none
+      of the question's words and reads in a listing as a planar-graphs paper; and we had read one paper by its author,
+      ordered a second by interlibrary loan, and never once listed what else he wrote. Either of two queries finds it in
+      seconds: his author listing (27 entries, exactly three on the subject), and his own 1990 vocabulary run against
+      abstracts — `ti:"chromatic number" & ab:"additive" & ab:"coloring" & py:1985-2000` returns that one paper.
+      **The zbMATH Open API is an excellent additional source and belongs in every gate — for DISCOVERY, not only for
+      looking up a paper already known** (the only way it had been used here):
+      `https://api.zbmath.org/v1/document/_search?search_string=…&results_per_page=100` (URL-encode the query;
+      `curl -G --data-urlencode` does it). Fields, each verified 2026-09-19: `au:"Last, First"`, `ti:"…"`, `ab:"…"` (the
+      review or summary text), `py:1985-2000`, `cc:05C15` (MSC class), `so:"Congr. Numerantium"` (source),
+      `an:0836.05030` (a Zbl number); join with `&` and `|`. The JSON carries the full review text and, under
+      `editorial_contributions`, whether it is a reviewer's review or an author's `summary` — **record which, because an
+      author's summary is a claim, never a reading** (G50). The zbMATH *web pages* refuse scripted fetches (HTTP 403); the
+      API does not. It indexes reviews, not citations, so it complements items 5–7 and replaces none of them; a negative
+      from it measures the query's words, like any other (G21).
    Record the result in §PA either way: a negative ("searched X, Y, Z under these names; nothing") is a finding
    about where the unworked ground is. **Sell this as AIMING the milestone, not as protecting novelty**, or it
    gets skipped: it hands over free theorems and it finds the open questions the work is answering. Anything
