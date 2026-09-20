@@ -558,6 +558,14 @@ Re-read at the same time: `selftest` **7 sections, 38 PASS, 0 FAIL**; `table --c
 
 ## For whoever runs B′ and the second certification pass
 
+> **B′ has now run (2026-09-20, `data/fs61/records/phase-Bprime.md`) and landed NOTHING**: 36 balls asked at
+> radius 1.2 and 1.0, one refusal, and it is at `d = 23`, a field already certified. **So there was no second
+> certification pass and this file gains no field.** `land_order()` — which now reads the refusing fields off the
+> records rather than a hardcoded list — still returns exactly the nine in `LAND_ORDER`. Everything below stands as
+> written and is what the next person landing a field needs; the one thing it could not know is that the binding
+> constraint at this depth turned out to be the solver, not the point cap (24 of 37 asks ran to the wall undecided).
+
+
 *Written for a colleague with only the repository and no memory of this phase. Everything here is something that
 otherwise lives only in one session's head.*
 
