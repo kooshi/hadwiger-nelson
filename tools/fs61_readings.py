@@ -643,20 +643,31 @@ def write_aiming167(out=None):
          'points at distance exactly 1. A *ball of radius R* is the part of it within `R` of the origin in both '
          'real embeddings, and holds about `π²R⁴/covolume` points — so dropping `R` from 1.5 to 1.2 keeps 41 % of '
          'them and to 1.0 keeps 20 %.', '',
-         '| lattice | generators | covolume | predicted points at R = 1.5 / 1.2 / 1.0 | what was asked, and the answer |',
-         '|---|---|---|---|---|']
+         '| lattice | unit vectors `g` | covolume | predicted points at R = 1.5 / 1.2 / 1.0 | best degree reachable '
+         'under a 2,000,000-point cap | what was asked, and the answer |',
+         '|---|---|---|---|---|---|']
+    tier1c = C.tier_def('1c')
     for k in open4:
         r = lat[k]
         p15, p12, p10 = (C.predicted_points(r['covolume'], x) for x in (1.5, 1.2, 1.0))
+        Rc = C.radius_for_points(r['covolume'], tier1c['point_cap'] / C.DEGREE_OVERSHOOT)
+        R14 = C.radius_for_degree(r['size'], tier1c['target_degree'])
+        if R14 is not None and C.predicted_points(r['covolume'], R14) <= tier1c['point_cap'] / C.DEGREE_OVERSHOOT:
+            dcell = (f'**{tier1c["target_degree"]:.0f}** at R = {R14:.3f} '
+                     f'({C.predicted_points(r["covolume"], R14):,} points) — **asked**')
+        else:
+            dcell = (f'only **{C.degree_of(r["size"], Rc):.2f}** at R = {Rc:.3f} — below the floor of '
+                     f'{tier1c["floor_degree"]}, so no ball of it was asked')
         asks = []
         for b in sorted(per.get(k, []), key=lambda b: -b['R']):
             if b['verdict'] == 'Over cap (not asked)':
                 asks.append(f'R={b["R"]}: over cap ({b.get("over_cap_by", "prediction")})')
             else:
+                dg = f', degree {2 * b["edges"] / b["points"]:.2f}' if b.get('edges') and b.get('points') else ''
                 asks.append(f'**R={b["R"]}: {b["verdict"]}** ({b.get("points"):,} points, '
-                            f'{b.get("edges", 0):,} edges, {b.get("solve_seconds")} s'
+                            f'{b.get("edges", 0):,} edges{dg}, {b.get("solve_seconds")} s'
                             + (f', tier {b.get("tier")}' if b.get('tier') else '') + ')')
-        L.append(f'| `{r["id"]}` | {r["size"]} | {r["covolume"]:.3e} | {p15:,} / {p12:,} / {p10:,} | '
+        L.append(f'| `{r["id"]}` | {r["size"]} | {r["covolume"]:.3e} | {p15:,} / {p12:,} / {p10:,} | {dcell} | '
                  + ('; '.join(asks) if asks else '—') + ' |')
     L += ['', '## The three readings FS-59 should carry', '',
           '### 1. The two balls that coloured in under two seconds could not have refused, and that is about the '
@@ -683,16 +694,27 @@ def write_aiming167(out=None):
           'is a floor, because finer lattices carry more edges per point and memory here tracks edges more closely '
           'than points.', '',
           '### 3. What the size law predicts, and why the prediction is weak', '']
-    if pred167:
+    if fit:
+        decades = math.log10(max(lo, hi) / max(min(lo, hi), 1e-9))
+        pts_sorted = sorted(rs['points'], key=lambda t: t[1])
         L += [f'Fitting `log(smallest refusing ball) = a + b·log d` over the **{fit["n"]} landed fields with '
               f'`d ≡ 7 (mod 8)`** gives slope **{fit["slope"]:.2f}** (95 % interval {fit["ci95"][0]:.2f} to '
-              f'{fit["ci95"][1]:.2f}, R² {fit["r2"]:.2f}). Extrapolated to `d = 167` that is **≈ {pred167:,.0f} '
-              f'points**, with the interval running **{min(lo, hi):,.0f} to {max(lo, hi):,.0f}** — two orders of '
-              f'magnitude wide.', '',
-              '**Why it is weak, said plainly.** The fit is over eight fields, each contributing whichever lattice '
-              'happened to refuse first, and it does not condition on relative height or covolume — and covolume, '
-              'not `d`, is what sets a ball\'s size directly. Read it as *the right order of magnitude is hundreds '
-              'of thousands of points, not tens of millions*, and not as a target.', '']
+              f'{fit["ci95"][1]:.2f}, R² **{fit["r2"]:.2f}**). **R-size is scored `{rs["verdict"]}`.**', '',
+              f'**No prediction for `d = 167` is given here, and that is the finding.** Extrapolating the fit would '
+              f'read ≈ {pred167:,.0f} points, but its 95 % interval runs {min(lo, hi):,.0f} to {max(lo, hi):,.0f} — '
+              f'**{decades:.0f} orders of magnitude**. A number with that interval is not a budget, and quoting the '
+              f'midpoint of it would be a prediction the data do not support.', '',
+              f'**The data go further than "not decided": they contradict the premise.** The reading behind R-size '
+              f'was that `ℚ(√167)` is *not arithmetically special, only large* — that the refusing ball grows with '
+              f'`d`. Among the landed fields the smallest refusing ball is **{pts_sorted[0][1]:,} points at '
+              f'`d = {pts_sorted[0][0]}`** and the largest **{pts_sorted[-1][1]:,} at `d = {pts_sorted[-1][0]}`**, '
+              f'with `d = 359` refusing on {dict(rs["points"]).get(359, 0):,} points against '
+              f'{dict(rs["points"]).get(23, 0):,} at `d = 23`. **Size does not track `d`; it tracks the lattice.** '
+              f'What sets a ball\'s point count is its covolume (`π²R⁴/covolume`), and which lattice a field '
+              f'happens to own is arithmetic, not size.', '',
+              '**So 167 should not be budgeted as "the same problem, bigger".** It should be budgeted by its '
+              'lattices, and the table above says what those are: one lattice reaches a degree capable of refusing '
+              'under a 2,000,000-point cap, it was asked, and it coloured.', '']
     else:
         L += ['Not fitted: ' + rs.get('why', 'too few landed fields.'), '']
     L += ['## What A.7 says about which of 167\'s lattices can be live — and it says nothing', '',

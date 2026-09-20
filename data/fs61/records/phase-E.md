@@ -301,3 +301,73 @@ capable of refusing.
 **And `d = 59` is a second `d ≡ 3 (mod 8)` field refusing by the direct route**, after `d = 11` in phase B. R-mod8
 did not merely lose; it is now losing repeatedly, and the half of the family it declared out of the direct route's
 reach has supplied two of the census's twelve refusing fields.
+
+### E.1a closed — the full result
+
+`DONE degree-ask tier=1c: 20 Colourable (colouring verified), 3 Refused (solver claim), 7 Unknown (budget); 4
+lattices Refused (inherited); 0 defects; 35.9 min` — and, recounted from the raw bytes by a standalone script that
+shares no code with the driver (`tools/fs61_recount.py 1c`):
+
+| | |
+|---|---|
+| tier-1c records | **48** over 20 fields, 0 unparseable lines |
+| asked (not over cap) | **31** — 17 by arm `R14`, 14 by arm `Rcap` |
+| `Colourable (colouring verified)` | 21 |
+| **`Refused (solver claim)`** | **3** — `d = 59`, `d = 239`, `d = 311` |
+| `Unknown (budget)` at the 1,800 s wall | 7 |
+| `Over cap (not asked)` | 17, each carrying the degree it would reach at the cap |
+| scope arm | 27 in the owner's scope, **4** in the widened one (none of the four refused) |
+| actual / predicted **points** | 0.9993–1.0018, median 1.0005 |
+| actual / predicted **degree** | **0.9990–1.0016, median 1.0000** |
+| worker peak RSS | max **7.85 GB**, median 6.44 GB — against the 7.00 GB measured beforehand, which is why the pool was 12 and not the 16 that `available / peak` allowed |
+| machine time | 35.9 min of the six-hour E.1 budget; **the budget did not bind** |
+
+`table --check`: **40 fields at tier 1c, accounting checked at tiers 1, 1b and 1c, 0 defects**, and `census.md`
+now reads **9 `Landed (certified)` + 3 `Refusal claimed`** — twelve of forty fields with a refusing ball.
+
+### P-deg1 is LOST, and the way it lost is the finding
+
+> **P-deg1** (the owner, registered before the run): *every ball asked at predicted degree ≥ 14 decides within the
+> wall.* **17 such balls were asked; 2 ran to the 1,800 s wall undecided.** `d = 239 Lc223387a` (711,381 points)
+> and `d = 287 Lc223387a` (908,253 points), both at degree 14.0.
+
+**It did not lose because the balls were large.** At the same degree, `d = 167` decided on **1,474,541** points in
+3.66 s, `d = 335` on 1,664,113 in 3.48 s and `d = 179` on 1,740,473 in 11.84 s — all roughly twice the size of the
+two that failed. Neither size nor degree orders these.
+
+**What the prediction was registered against, and why that population could not carry it:** 43 of 43 balls of
+≥ 200,000 points at degree ≥ 14 had decided — but every one of those was asked under a **600,000-point** cap, so
+the record contained no ball above 600,000 points at that degree at all. P-deg1 extrapolated it to a million and a
+half. That is this repository's most repeated error in its most disguised form: not a wrong measurement, but a
+right one whose population did not contain the case it was used to predict.
+
+**And the rule is still an enormous improvement, which is the honest headline.** The undecided share went from
+**24 of 37 (65 %)** at tier 1b to **7 of 31 (23 %)** here, and inside the `R14` arm to **2 of 17 (12 %)**. Every
+one of the three refusals came from the `R14` arm. What is refuted is *sufficiency*, not the rule.
+
+> **P-deg2** (*at least one new field refuses*, the owner at 0.35): **WON, three times over.**
+
+### The seven undecided, for whoever goes next
+
+| d | lattice | R | points | degree | arm |
+|---|---|---|---|---|---|
+| 35 | `Ldb4246f8` | 1.1173 | 1,802,101 | 12.14 | Rcap |
+| 179 | `L5ea33424` | 1.0081 | 1,802,225 | 9.38 | Rcap |
+| **239** | `Lc223387a` | 1.0736 | 711,381 | **14.00** | R14 |
+| 251 | `L5ea33424` | 1.0970 | 1,802,313 | 8.54 | Rcap |
+| **287** | `Lc223387a` | 1.1945 | 908,253 | **14.00** | R14 |
+| 287 | `L48438d86` | 1.1817 | 1,803,533 | 8.23 | Rcap |
+| 431 | `Leb4c3969` | 1.0465 | 1,802,885 | 9.00 | Rcap |
+
+`d = 239` and `d = 287` are the interesting two: 239 already refuses on a *different* lattice, and 287 is a field
+with `L = 4` whose only undecided asks are at degree 14.
+
+### A ninth instance of the self-match trap, in the check written to guard against it
+
+The survivor check after the stop reported `SURVIVORS: ['2132173', '2134236', '2146918']` with nothing running. It
+walks `/proc` matching `'fs61_census' in cmdline` — **and the literal string sits inside the `python -c` snippet
+that performs the walk**, so the shell running the check matched itself. Two of the three were my own waiter
+shells and the third had already exited. The repair is the one this repository keeps arriving at from new
+directions: **match an argv ELEMENT (`a.endswith('tools/fs61_census.py')`), never a substring of a command line**,
+because a command line contains whatever the checker happens to be looking for. Re-run that way: `REAL census
+processes: NONE`.
