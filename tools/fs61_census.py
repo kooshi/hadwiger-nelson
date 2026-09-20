@@ -37,7 +37,7 @@ WHERE FS-58 WRITES.  fs58_search.outdir(D) is rebound to data/fs61/fields/D/ bef
 worker pools use the 'fork' start method so the rebinding is inherited (Python 3.14's default is 'forkserver', which re-imports the
 module and would silently write into data/fs58/).  selftest --section outdir checks both halves of that.
 """
-import sys, os, json, math, time, hashlib, gzip, argparse, subprocess, itertools
+import sys, os, json, math, time, hashlib, gzip, argparse, subprocess, itertools, collections
 from fractions import Fraction as Fr
 from pathlib import Path
 
@@ -405,41 +405,153 @@ def barrier_violation(rec):
     return None
 
 
-def cmd_filter(D, tid, quiet=False):
+def poset_pairs(lat):
+    """the inclusion pairs among a field's lattices: (sub, sup) with Lambda_sub contained in Lambda_sup.
+    Exact: every Hermite basis vector of the smaller lattice, rescaled to a common denominator, lies in the larger."""
+    items = [(k, parse_key(k)) for k in sorted(lat)]
+    pairs = []
+    for ka, (Ma, Ha) in items:
+        for kb, (Mb, Hb) in items:
+            if ka == kb:
+                continue
+            L = Ma * Mb // math.gcd(Ma, Mb)                      # compare inside (1/L)Z^4
+            A = [[x * (L // Ma) for x in r] for r in Ha]
+            B = [[x * (L // Mb) for x in r] for r in Hb]
+            Hb2 = hnf(B)
+            if all(in_lattice(Hb2, v) for v in A):
+                pairs.append((ka, kb))
+    return pairs
+
+
+def cmd_poset(D, quiet=False):
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    out = field_dir(D) / 'poset.jsonl'
+    pairs = poset_pairs(lat)
+    if out.exists():
+        out.unlink()
+    for a, b in pairs:
+        append(out, {'key': f'{a}<{b}', 'D': D, 'sub': a, 'sup': b, 'sub_id': lat[a]['id'], 'sup_id': lat[b]['id'],
+                     'claim_scope': 'exact'})
+    if not quiet:
+        print(f'  poset d={D}: {len(pairs)} strict inclusions among {len(lat)} lattices', flush=True)
+    return pairs
+
+
+def cmd_filter(D, tid, quiet=False, quotients=True):
+    """The one state axis (plan section 7, decision C\'), cheapest certificate first and TOP-DOWN.
+
+    A 3-colouring of a lattice\'s graph restricts to every sublattice, so colourability is inherited DOWNWARD along the
+    inclusion poset and refusal UPWARD.  The finest lattices are certified first and everything under a colourable one
+    is closed without being asked; that is the order of work, and B.1b checks both directions afterwards."""
     tier = tier_def(tid)
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
     if not lat:
         die(f'no lattices for d={D}: run `fs61_census.py lattices {D} --tier {tid}` first')
     out = field_dir(D) / 'filter.jsonl'
     done = load_jsonl(out)
+    pairs = cmd_poset(D, quiet=True)
+    sups = {}                                                   # key -> the keys strictly containing it
+    for a, b in pairs:
+        sups.setdefault(a, []).append(b)
+    nq = tier['quotients'] if quotients else 0
+    openstr = (f'Open (no certificate among: forms mod 2, 3; {nq} quotients)' if quotients else OPEN_PHASE0)
     if not quiet:
-        print(f'fs61 filter d={D} tier={tid}: {len(lat)} lattices, {len(done)} filtered on disk '
-              f'-> {len(lat) - len(done)} to certify (exact forms only in phase 0; quotients are phase B)', flush=True)
+        print(f'fs61 filter d={D} tier={tid}: {len(lat)} lattices, {len(done)} on disk; exact forms, then '
+              f'{nq} quotients each, then inheritance down the {len(pairs)} inclusions', flush=True)
     counts, errs = {}, []
-    for key, r in sorted(lat.items()):
-        si = r['state_inputs']
+    order = sorted(lat, key=lambda k: -lat[k]['size'])           # finest (most generators) first
+    for key in order:
+        r = lat[key]
+        msg = barrier_violation(r)
+        if msg:
+            errs.append((key, 'barrier: 3-integral but no form mod 3'))
+            defect(f'filter d={D} {r["id"]} {r["spec_full"]}: {msg}')
         if key in done:
             counts[done[key]['state']] = counts.get(done[key]['state'], 0) + 1
             continue
+        si = r['state_inputs']
+        inherited, cert, state = None, None, None
         if si['forms_mod2']:
             state, cert = 'Colourable (form mod 2)', {'kind': 'form2', 'form': si['form2']}
         elif si['forms_mod3']:
             state, cert = 'Colourable (form mod 3)', {'kind': 'form3', 'form': si['form3']}
         else:
-            state, cert = OPEN_PHASE0, None
-        msg = barrier_violation(r)
-        if msg:
-            errs.append((key, 'barrier: 3-integral but no form mod 3'))
-            defect(f'filter d={D} {r["id"]} {r["spec_full"]}: {msg}')
-        rec = {'key': key, 'id': r['id'], 'D': D, 'state': state, 'certificate': cert, 'inherited_from': None,
-               'quotients_tried': 0, 'tier': tid, 'tier_sha256': tier['_sha256'], 'machine': MACHINE,
-               'claim_scope': 'exact' if cert else 'a statement about the search'}
+            for sup in sups.get(key, []):                        # a colourable lattice above closes this one for free
+                st = done.get(sup, {}).get('state', '')
+                if st.startswith('Colourable'):
+                    state, inherited = st, sup
+                    cert = dict(done[sup].get('certificate') or {}, inherited=True)
+                    break
+        tried = 0
+        if state is None and quotients and r['rank'] == 4:
+            M, H = parse_key(key)
+            S = saturation(D, M, H)
+            tried, colourable, cov, coords = quotient_screen(D, M, H, S, lattices=nq, wall=tier['quotient_wall'],
+                                                             save=field_dir(D) / 'quotients')
+            if colourable:
+                best = min(colourable, key=lambda c: c['order'])
+                state = 'Colourable (periodic colouring verified)'
+                cert = {'kind': 'quotient', 'order': best['order'], 'H': best['H'], 'snf': [t for t in smith(best['H']) if t != 1],
+                        'colouring_sha256': best['colouring_sha256'], 'colourable_of_tried': [len(colourable), tried]}
+        if state is None:
+            state = openstr
+        rec = {'key': key, 'id': r['id'], 'D': D, 'state': state, 'certificate': cert, 'inherited_from': inherited,
+               'quotients_tried': tried, 'rank': r['rank'], 'tier': tid, 'tier_sha256': tier['_sha256'],
+               'machine': MACHINE,
+               'claim_scope': 'exact' if (cert or {}).get('kind') in ('form2', 'form3') else
+                              'verified model' if cert else 'a statement about the search'}
         append(out, rec)
         done[key] = rec
         counts[state] = counts.get(state, 0) + 1
     if not quiet:
-        print('DONE ' + ', '.join(f'{v} {k}' for k, v in sorted(counts.items())) + f'; {len(errs)} defects -> {rel(out)}', flush=True)
+        print('  DONE filter ' + ', '.join(f'{v} {k}' for k, v in sorted(counts.items())) +
+              f'; {len(errs)} defects', flush=True)
     return done, errs
+
+
+def cmd_filter_reverify(D, quiet=False):
+    """B.3: re-check every colourability certificate against the FULL generator set, re-derived from the key."""
+    import numpy as np
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+    bad, n = [], 0
+    for key, f in sorted(filt.items()):
+        c = f.get('certificate')
+        if not c or f.get('inherited_from'):
+            continue
+        M, H = parse_key(key)
+        S = saturation(D, M, H)
+        if sha_vectors(S) != lat[key]['generators_sha256']:
+            bad.append((key, 'generators do not match the key')); continue
+        B, coords, cov, mc = FS.reduce_pool(D, M, S)
+        n += 1
+        if c['kind'] in ('form2', 'form3'):
+            p = 2 if c['kind'] == 'form2' else 3
+            vals = [sum(a * b for a, b in zip(c['form'], co)) % p for co in coords]
+            ok = all(v == 1 for v in vals) if p == 2 else all(vals)
+            if not ok:
+                bad.append((key, f'the recorded form mod {p} is zero on some generator'))
+                defect(f'filter --reverify d={D} {f["id"]}: the recorded form mod {p} is zero on some generator')
+        elif c['kind'] == 'quotient':
+            g = FS.quotient_graph(coords, c['H'])
+            if g is None:
+                bad.append((key, 'a generator lies in the recorded quotient lattice'))
+                defect(f'filter --reverify d={D} {f["id"]}: a generator lies in the recorded quotient lattice')
+                continue
+            nq, E, _ = g
+            path = field_dir(D) / 'quotients' / f'{c["colouring_sha256"]}.bin.gz'
+            if not path.exists():
+                bad.append((key, 'quotient colouring file missing')); continue
+            with gzip.open(path, 'rb') as fh:
+                raw = fh.read()
+            col = np.frombuffer(raw, dtype=np.uint8)
+            if len(col) != nq or (len(E) and not bool((col[E[:, 0]] != col[E[:, 1]]).all())):
+                bad.append((key, 'the stored quotient colouring is not proper'))
+                defect(f'filter --reverify d={D} {f["id"]}: the stored quotient colouring is not proper')
+    if not quiet:
+        print(f'fs61 filter --reverify d={D}: {n} certificates re-checked against the full generator set, '
+              f'{len(bad)} failures', flush=True)
+    return bad
 
 
 # ================================================================ balls
@@ -501,7 +613,8 @@ def model_path(D, sha):
     return p / f'{sha[:16]}.bin.gz'
 
 
-def cmd_scan(D, tid, filter_off=False, only_key=None, radii=None, jobs=16, quiet=False, budget=None):
+def cmd_scan(D, tid, filter_off=False, only_key=None, radii=None, jobs=16, quiet=False, budget=None,
+              wall_override=None):
     import multiprocessing as mp
     tier = tier_def(tid)
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
@@ -511,7 +624,7 @@ def cmd_scan(D, tid, filter_off=False, only_key=None, radii=None, jobs=16, quiet
     out = field_dir(D) / 'balls.jsonl'
     done = load_jsonl(out)
     radii = radii or tier['radii']
-    cap, wall = tier['point_cap'], tier['solve_wall']
+    cap, wall = tier['point_cap'], (wall_override or tier['solve_wall'])
 
     def settled(k):
         r = done.get(k)
@@ -542,10 +655,12 @@ def cmd_scan(D, tid, filter_off=False, only_key=None, radii=None, jobs=16, quiet
                 continue
         pool.append(r)
     pool.sort(key=lambda r: r['predicted_points_R15'] or 1 << 60)
+    if radii is None and not filter_off and not only_key:
+        radii = [tier['radii'][0]]                              # pass one: the census's comparable column
     todo = []
     for r in pool:
         gens = None
-        for R in radii:
+        for R in (radii or tier['radii']):
             k = f'{r["key"]}|ball{R}'
             if settled(k):
                 continue
@@ -1575,7 +1690,7 @@ def witness_lattice(D, path):
     return Mc, H, len(pts), M
 
 
-def quotient_screen(D, M, H, S, lattices=24, wall=30.0, seed=1):
+def quotient_screen(D, M, H, S, lattices=24, wall=30.0, seed=1, save=None):
     """FS-58's necessary filter, driven from a lattice rather than from a class spec: a 3-colourable finite quotient
     Cay(Lambda/L, S) with no generator in L gives a periodic 3-colouring of the whole Cayley graph, so no ball of the
     lattice can ever refuse.  Uses FS-58's frozen quotient_graph for the graph and verifies every model on every edge."""
@@ -1605,8 +1720,13 @@ def quotient_screen(D, M, H, S, lattices=24, wall=30.0, seed=1):
         if r:
             col = (np.array(sv.get_model()[:3 * n]).reshape(n, 3) > 0).argmax(axis=1)
             assert (col[E[:, 0]] != col[E[:, 1]]).all(), 'quotient model not proper'
-            colourable.append({'order': n, 'diag': [Hq[i][i] for i in range(4)],
-                               'colouring_sha256': hashlib.sha256(col.astype('uint8').tobytes()).hexdigest()[:16]})
+            raw = col.astype('uint8').tobytes()
+            sha = hashlib.sha256(raw).hexdigest()[:16]
+            if save is not None:                               # kept so filter --reverify can re-check it on every edge
+                save.mkdir(parents=True, exist_ok=True)
+                with gzip.open(save / f'{sha}.bin.gz', 'wb') as fh:
+                    fh.write(raw)
+            colourable.append({'order': n, 'H': [list(r) for r in Hq], 'colouring_sha256': sha})
         sv.delete()
     return tried, colourable, cov, coords
 
@@ -1953,6 +2073,272 @@ def _coset(c, periods, m):
     return best
 
 
+# ================================================================ phase B: the census scan and the table
+FAMILY_500 = [d for d in range(2, 500) if d % 12 == 11 and squarefree(d)]
+
+
+def cmd_census_field(D, tid='1', jobs=16, budget=7200, quiet=False):
+    """One field, tier 1, in the plan's order: lattices -> filter (top-down, inheritance) -> scan the Open lattices
+    bottom-up.  Resumable at every unit; re-running the identical command continues."""
+    t0 = time.time()
+    tier = tier_def(tid)
+    lat, e1 = cmd_lattices(D, tid, jobs=jobs, quiet=True)
+    filt, e2 = cmd_filter(D, tid, quiet=True)
+    print(f'fs61 census d={D} tier={tid}: {len(lat)} lattices -> '
+          + ', '.join(f'{v} {k}' for k, v in sorted(collections.Counter(r['state'] for r in filt.values()).items())),
+          flush=True)
+    balls, e3 = cmd_scan(D, tid, jobs=jobs, quiet=True, budget=budget)
+    # pass two: R = 1.8 only for the Open lattices whose R = 1.5 ball was colourable (the plan's order)
+    r0, r1 = tier['radii']
+    second = [k for k, f in filt.items()
+              if f['state'].startswith('Open')
+              and balls.get(f'{k}|ball{r0}', {}).get('verdict') == 'Colourable (colouring verified)']
+    for k in second:
+        cmd_scan(D, tid, only_key=k, radii=[r1], jobs=1, quiet=True)
+    balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+    # onset radii, only for lattices that refused, at the short wall the plan prescribes
+    refusing = sorted({b['lattice'] for b in balls.values() if b['verdict'].startswith('Refused')})
+    for k in refusing:
+        for R in (1.2, 1.0):
+            if f'{k}|ball{R}' not in balls:
+                cmd_scan(D, tid, only_key=k, radii=[R], jobs=1, quiet=True, wall_override=120.0)
+    balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+    # refusal is inherited upward: a Refused ball closes every lattice above it
+    prop = propagate_refusal(D, filt, balls)
+    v = collections.Counter(b['verdict'] for b in balls.values())
+    asked = sum(v.values()) - v['Over cap (not asked)']
+    print(f'  d={D}: {len(balls)} ball records, {asked} asked -> '
+          + ', '.join(f'{n} {k}' for k, n in sorted(v.items()))
+          + f'; {prop} lattices Refused (inherited); {time.time() - t0:.0f} s', flush=True)
+    return e1 + e2 + e3
+
+
+def propagate_refusal(D, filt, balls):
+    """A ball of Lambda that refuses three colours is an induced subgraph of every Lambda' containing Lambda, so the
+    refusal is inherited UPWARD.  Recorded as its own certificate kind with the key it came from."""
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    pairs = [(json.loads(l)['sub'], json.loads(l)['sup'])
+             for l in open(field_dir(D) / 'poset.jsonl')] if (field_dir(D) / 'poset.jsonl').exists() else []
+    refusing = {b['lattice'] for b in balls.values() if b['verdict'].startswith('Refused')}
+    out = field_dir(D) / 'filter.jsonl'
+    n = 0
+    for sub, sup in pairs:
+        if sub in refusing and sup in filt and not filt[sup]['state'].startswith('Refused'):
+            if filt[sup]['state'].startswith('Colourable'):
+                continue                                        # B.1b will name this pair; do not paper over it
+            rec = dict(filt[sup], state=f'Refused (inherited from {lat[sub]["id"]})', inherited_from=sub,
+                       certificate={'kind': 'refusal', 'from': sub}, claim_scope='solver claim')
+            append(out, rec)
+            filt[sup] = rec
+            n += 1
+    for key in {b['lattice'] for b in balls.values() if b['verdict'].startswith('Refused')}:
+        if key in filt and not filt[key]['state'].startswith('Refused'):
+            rec = dict(filt[key], state='Refused (solver claim)', certificate={'kind': 'ball'},
+                       claim_scope='solver claim')
+            append(out, rec)
+            filt[key] = rec
+            n += 1
+    return n
+
+
+def cmd_census(fields=None, tid='1', jobs=16, budget=7200, projection_after=6):
+    """Tier 1 over the family in ascending d, resumable.  Prints a projection after the first few fields so the tier
+    can be re-planned before a day of machine time is spent rather than after (the owner's instruction, 2026-09-20)."""
+    fields = fields or FAMILY_500
+    state = FS61 / 'census-progress.jsonl'
+    done = load_jsonl(state)
+    print(f'fs61 census: {len(fields)} fields, tier {tid}, ascending d; {len(done)} already complete. '
+          f'Resume = re-run this identical command.', flush=True)
+    times, errs = [], []
+    for D in fields:
+        if str(D) in done:
+            times.append(done[str(D)]['seconds'])
+            continue
+        t0 = time.time()
+        e = cmd_census_field(D, tid, jobs=jobs, budget=budget)
+        dt = time.time() - t0
+        times.append(dt)
+        append(state, {'key': str(D), 'd': D, 'seconds': round(dt, 1), 'defects': len(e), 'tier': tid,
+                       'machine': MACHINE})
+        errs += e
+        n = len(times)
+        if n == projection_after or (n > projection_after and n % 10 == 0):
+            per = sum(times) / n
+            left = (len(fields) - n) * per
+            print(f'  PROJECTION after {n} fields: {sum(times) / 60:.1f} min spent, mean {per:.0f} s/field, '
+                  f'{left / 3600:.1f} h projected for the remaining {len(fields) - n} '
+                  f'(total {(sum(times) + left) / 3600:.1f} h)', flush=True)
+    print(f'DONE census: {len(fields)} fields, {sum(times) / 3600:.2f} h, {len(errs)} defects', flush=True)
+    return errs
+
+
+CENSUS_LEGEND = '''# FS-61 — the census of real quadratic fields: which planes need four colours
+
+*Derived by `python3 tools/fs61_census.py table` from `data/fs61/fields/<d>/*.jsonl`; never hand-edited. Plan:
+`plans/FS61-quadratic-census.md`. Machine: {machine}.*
+
+**Read this first.** Colour the points of the plane whose two coordinates lie in `ℚ(√d)` so that no two points exactly
+1 apart share a colour; `χ(ℚ(√d)²)` is the fewest colours that suffice. The forty fields below are the only real
+quadratic fields whose plane can need four (§1), and the project's local–global conjecture predicts every one of them
+does. **"Not landed" means no certificate was found at the stated depth; it is not evidence that three colours
+suffice — the conjecture predicts at least four for every row of this table.**
+
+**The columns.**
+
+* **d** — the field is `ℚ(√d)`. **mod 8** — 3 or 7; the two halves behave differently (R-mod8).
+* **L** — the best upper bound the finite residue planes give, `[lower, upper]` when the target's own chromatic number
+  is undecided. `χ(ℚ(√d)²) ≤ L`, prior art at hand level.
+* **N₁, N₃** — the least denominator of a non-rational unit vector, and the least denominator divisible by 3. A witness
+  needs a direction with 3 in a denominator (the kernel's 3-adic barrier, `CLAUDE.md` row 72).
+* **lattices** — the tier's lattices by state: `C2`/`C3` colourable by a linear form mod 2 or mod 3 (exact),
+  `Cq` by a verified periodic quotient colouring, `R` refused, `O` open.
+* **balls asked / over cap / unknown** — of the ball records, how many were actually put to a solver. A lattice too
+  fine for the tier's point cap is never built, so **a field with few asks has been looked at less than its lattice
+  count suggests**.
+* **bracket** — the refusal bracket of the best lattice: (largest radius verified colourable, smallest refused).
+* **state** — `Landed (certified)` only when the frozen checker printed CERTIFIED; `Refusal claimed` is a solver's
+  word; `Not landed at tier 1` is a null at a depth.
+* **evidence** — `kernel` (11 only), `checker`, `solver claim`, or `none`.
+* **value** — the bracket on `χ(ℚ(√d)²)` with a source for each end.
+
+'''
+
+
+def census_rows(tid='1'):
+    frame = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'frame.jsonl')} if (FS61 / 'frame.jsonl').exists() else {}
+    atlas = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'atlas.jsonl')} if (FS61 / 'atlas.jsonl').exists() else {}
+    rows = []
+    for D in FAMILY_500:
+        fd = field_dir(D)
+        lat = load_jsonl(fd / 'lattices.jsonl')
+        filt = load_jsonl(fd / 'filter.jsonl')
+        balls = load_jsonl(fd / 'balls.jsonl')
+        st = collections.Counter(f['state'].split(' (')[0] + ('/' + f['state'].split('(')[1][:4] if '(' in f['state'] else '')
+                                 for f in filt.values())
+        kinds = collections.Counter()
+        for f in filt.values():
+            s = f['state']
+            kinds['C2' if 'form mod 2' in s else 'C3' if 'form mod 3' in s else 'Cq' if 'periodic' in s
+                  else 'R' if s.startswith('Refused') else 'O'] += 1
+        v = collections.Counter(b['verdict'] for b in balls.values())
+        asked = sum(v.values()) - v['Over cap (not asked)']
+        # the CENSUS population is the balls on lattices the filter left open (or that a ball then refused).  Phase 0's
+        # paired controls ran a --filter-off scan on d = 2, 5, 7, 13, 19, 31, 43 and 47, so 47 carries ball records on
+        # lattices that already had a colourability certificate; those are real asks but not comparable column entries.
+        cens = [b for b in balls.values()
+                if not (filt.get(b['lattice'], {}).get('state', 'Open').startswith('Colourable'))]
+        vc = collections.Counter(b['verdict'] for b in cens)
+        asked_c = sum(vc.values()) - vc['Over cap (not asked)']
+        best = None
+        for b in balls.values():
+            if b['verdict'].startswith('Refused'):
+                if best is None or (isinstance(b.get('points'), int) and b['points'] < best.get('points', 1 << 60)):
+                    best = b
+        col = [b for b in balls.values() if b['verdict'] == 'Colourable (colouring verified)']
+        lo = max((b['R'] for b in col), default=None)
+        hi = min((b['R'] for b in balls.values() if b['verdict'].startswith('Refused')), default=None)
+        wit = (FS61 / f'witness-{D}' / 'certified.out').exists()
+        fr = frame.get(D, {})
+        L = fr.get('L') or (f"[{fr.get('L_lower')}, {fr.get('L_upper') or '?'}]" if fr else None)
+        state = ('Landed (certified)' if wit else 'Refusal claimed' if hi is not None else f'Not landed at tier {tid}')
+        ck = fr.get('chi_known')
+        rows.append({'key': str(D), 'd': D, 'mod8': D % 8, 'L': L, 'L_prime': fr.get('L_prime'),
+                     'N1': atlas.get(D, {}).get('N1'), 'N3': atlas.get(D, {}).get('N3'),
+                     'lattices': len(lat), 'by_state': dict(kinds), 'ball_records': len(balls), 'balls_asked': asked,
+                     'census_ball_records': len(cens), 'census_balls_asked': asked_c,
+                     'census_over_cap': vc['Over cap (not asked)'], 'census_unknown': vc['Unknown (budget)'],
+                     'over_cap': v['Over cap (not asked)'], 'unknown': v['Unknown (budget)'],
+                     'refused': v['Refused (solver claim)'], 'colourable': v['Colourable (colouring verified)'],
+                     'bracket': [lo, hi], 'best_refusing': (best or {}).get('id'),
+                     'best_refusing_points': (best or {}).get('points'),
+                     'state': state, 'evidence': 'kernel' if (wit and D == 11) else 'checker' if wit
+                                                 else 'solver claim' if hi is not None else 'none',
+                     'value': [4 if hi is not None else None, L], 'chi_known': ck,
+                     'deepen': (f'python3 tools/fs61_census.py census-field {D} --tier 2'
+                                if state.startswith('Not landed') else
+                                f'python3 tools/fs61_census.py land {D}' if state == 'Refusal claimed' else ''),
+                     'tier': tid, 'machine': MACHINE,
+                     'claim_scope': 'checker' if wit else 'solver claim' if hi is not None else 'verified model'})
+    return rows
+
+
+def cmd_table(check=False, tid='1'):
+    rows = census_rows(tid)
+    out_j, out_m = FS61 / 'census.jsonl', FS61 / 'census.md'
+    if out_j.exists():
+        out_j.unlink()
+    for r in rows:
+        append(out_j, r)
+    L = [CENSUS_LEGEND.format(machine=MACHINE),
+         '| d | mod 8 | L | N₁ | N₃ | lattices (C2/C3/Cq/R/O) | balls asked / over cap / unknown | bracket | '
+         'state | evidence | value | what would deepen it |', '|---|---|---|---|---|---|---|---|---|---|---|---|']
+    for r in rows:
+        k = r['by_state']
+        L.append(f"| **{r['d']}** | {r['mod8']} | {r['L']} | {r['N1']} | {r['N3']} | "
+                 f"{r['lattices']} ({k.get('C2',0)}/{k.get('C3',0)}/{k.get('Cq',0)}/{k.get('R',0)}/{k.get('O',0)}) | "
+                 f"**{r['census_balls_asked']}** / {r['census_over_cap']} / {r['census_unknown']} | "
+                 f"{r['bracket'][0] or '–'} … {r['bracket'][1] or '–'} | {r['state']} | {r['evidence']} | "
+                 f"{'4 ≤ χ ≤ ' + str(r['L']) if r['value'][0] else '≤ ' + str(r['L'])} | "
+                 f"`{r['deepen']}`" + ' |')
+    tot = collections.Counter(r['state'] for r in rows)
+    L += ['', f"**{len(rows)} fields.** " + '; '.join(f'{n} {s}' for s, n in sorted(tot.items())) + '.',
+          f"Balls on the census population (lattices the filter left open): "
+          f"{sum(r['census_ball_records'] for r in rows)} records, **{sum(r['census_balls_asked'] for r in rows)} asked**, "
+          f"{sum(r['census_over_cap'] for r in rows)} over cap, {sum(r['census_unknown'] for r in rows)} unknown. "
+          f"Counting every record, including the balls phase 0's paired controls asked on already-certified lattices at "
+          f"d = 47: {sum(r['ball_records'] for r in rows)} records, {sum(r['balls_asked'] for r in rows)} asked.", '']
+    out_m.write_text('\n'.join(L) + '\n')
+    print(f'fs61 table: {len(rows)} fields -> {rel(out_m)}, {rel(out_j)}', flush=True)
+    if not check:
+        print('DONE table', flush=True)
+        return []
+    bad = []
+    for r in rows:
+        k = r['by_state']
+        if sum(k.values()) != r['lattices']:
+            bad.append((r['d'], f'{sum(k.values())} filtered against {r["lattices"]} lattices'))
+            defect(f'table --check d={r["d"]}: {sum(k.values())} filtered states against {r["lattices"]} lattices')
+        fd = field_dir(r['d'])
+        lat, filt, balls = load_jsonl(fd / 'lattices.jsonl'), load_jsonl(fd / 'filter.jsonl'), load_jsonl(fd / 'balls.jsonl')
+        for key, f in filt.items():
+            if f['state'].startswith('Open') and lat[key]['rank'] == 4:
+                if f'{key}|ball{tier_def(tid)["radii"][0]}' not in balls:
+                    bad.append((r['d'], f'{f["id"]} Open with no R=1.5 record'))
+                    defect(f'table --check d={r["d"]}: lattice {f["id"]} is Open with no R=1.5 ball record')
+        bad += monotonicity_check(r['d'], lat, filt, balls)
+    print(f'DONE table --check: {len(rows)} fields, {len(bad)} defects', flush=True)
+    return bad
+
+
+def monotonicity_check(D, lat, filt, balls):
+    """B.1b, and it can fail: a failure is an instrument defect and one of the plan's five halts."""
+    bad = []
+    pp = field_dir(D) / 'poset.jsonl'
+    pairs = [(json.loads(l)['sub'], json.loads(l)['sup']) for l in open(pp)] if pp.exists() else []
+    for sub, sup in pairs:
+        a, b = filt.get(sub, {}).get('state', ''), filt.get(sup, {}).get('state', '')
+        if a.startswith('Refused') and b.startswith('Colourable'):
+            bad.append((D, f'{lat[sub]["id"]} Refused inside {lat[sup]["id"]} {b}'))
+            defect(f'DEFECT monotone d={D}: {lat[sub]["id"]} Refused inside {lat[sup]["id"]} '
+                   f'{b} (certificate {filt[sup].get("certificate", {}).get("kind")}) -- HALT, plan rule 15')
+    byl = {}
+    for b in balls.values():
+        byl.setdefault(b['lattice'], []).append(b)
+    for key, bs in byl.items():
+        ref = [b['R'] for b in bs if b['verdict'].startswith('Refused')]
+        col = [b['R'] for b in bs if b['verdict'] == 'Colourable (colouring verified)']
+        if ref and col and max(col) > min(ref):
+            bad.append((D, f'{lat[key]["id"]} colourable at R={max(col)} above refused at R={min(ref)}'))
+            defect(f'DEFECT monotone d={D}: {lat[key]["id"]} colourable at R={max(col)} above a refusal at '
+                   f'R={min(ref)} -- HALT, plan rule 15')
+    for key, r in lat.items():
+        m = barrier_violation(r)
+        if m:
+            bad.append((D, f'{r["id"]} {m}'))
+            defect(f'DEFECT barrier d={D}: {r["id"]} {m} -- HALT, plan rule 15')
+    return bad
+
+
 def not_yet(name, phase):
     print(f'fs61 {name}: NOT IMPLEMENTED YET -- this subcommand is phase {phase} of plans/FS61-quadratic-census.md', flush=True)
     sys.exit(2)
@@ -1969,8 +2355,15 @@ def main():
     p.add_argument('--jobs', type=int, default=16); p.add_argument('--reverify', action='store_true')
     p.add_argument('--no-girth', action='store_true', help='skip the odd-girth search (records say `not asked`, never `null`)')
 
-    p = sub.add_parser('filter', help='the exact colourability certificates (forms mod 2 and mod 3)')
+    p = sub.add_parser('filter', help='the colourability certificates: forms, quotients, inheritance')
     p.add_argument('d', type=int); p.add_argument('--tier', default='1')
+    p.add_argument('--reverify', action='store_true'); p.add_argument('--no-quotients', action='store_true')
+    p = sub.add_parser('census-field', help='one field, tier 1: lattices -> filter -> scan')
+    p.add_argument('d', type=int); p.add_argument('--tier', default='1'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float, default=7200)
+    p = sub.add_parser('census', help='tier 1 over the whole family in ascending d, resumable')
+    p.add_argument('--tier', default='1'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float, default=7200); p.add_argument('--fields', type=int, nargs='*')
 
     p = sub.add_parser('scan', help='ask whether balls of the field\'s lattices are 3-colourable')
     p.add_argument('d', type=int); p.add_argument('--tier', default='1'); p.add_argument('--filter-off', action='store_true')
@@ -1998,8 +2391,9 @@ def main():
     sub.add_parser('witness-lattices', help="A.5: each certified witness's own lattice must not be Colourable")
     sub.add_parser('dead-quotients', help="A.6: which quotients kill, from FS-58's qscreen records")
     sub.add_parser('minimal-quotient', help='A.7: the group behind a dead lattice\'s periodic 3-colouring')
-    for name, phase in (('land', 'C'), ('table', 'B')):
-        sub.add_parser(name, help=f'NOT IMPLEMENTED YET (phase {phase})')
+    p = sub.add_parser('table', help='the derived census table (never hand-edited)')
+    p.add_argument('--check', action='store_true'); p.add_argument('--tier', default='1')
+    sub.add_parser('land', help='NOT IMPLEMENTED YET (phase C)')
 
     a = ap.parse_args()
     t0 = time.time()
@@ -2007,7 +2401,13 @@ def main():
     if a.cmd == 'lattices':
         _, bad = cmd_lattices(a.d, a.tier, nmax=a.nmax, jobs=a.jobs, reverify=a.reverify, girth=not a.no_girth)
     elif a.cmd == 'filter':
-        _, bad = cmd_filter(a.d, a.tier)
+        bad = cmd_filter_reverify(a.d) if a.reverify else cmd_filter(a.d, a.tier, quotients=not a.no_quotients)[1]
+    elif a.cmd == 'census-field':
+        bad = cmd_census_field(a.d, a.tier, jobs=a.jobs, budget=a.budget)
+    elif a.cmd == 'census':
+        bad = cmd_census(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget)
+    elif a.cmd == 'table':
+        bad = cmd_table(check=a.check, tid=a.tier)
     elif a.cmd == 'scan':
         if a.reverify:
             bad = cmd_scan_reverify(a.d)
@@ -2045,8 +2445,6 @@ def main():
             cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
         not_yet(a.cmd, 'C')
-    elif a.cmd == 'table':
-        not_yet(a.cmd, 'B')
     print(f'[{a.cmd}: {time.time() - t0:.1f} s wall on {MACHINE.split(" (")[0]}]', flush=True)
     sys.exit(1 if bad else 0)
 

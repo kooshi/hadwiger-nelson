@@ -857,3 +857,55 @@ read-status in `BIBLIOGRAPHY.md` moves to *Prop. 2 and Thm 3 read, 2026-09-20*.
 lattice records for `d = 2, 5, 7, 11, 13, 19, 23, 31, 43, 47, 119, 143`; ball records for the eight control fields and
 143. Phase B needs `lattices` + `filter` + `scan` per family field; `filter`'s quotient certificate and the inheritance
 poset are phase B's to add — phase 0 and A left `filter` with the two exact forms only, and its `Open` string says so.
+
+### §R-B — phase B, the census scan at tier 1 (2026-09-20, closed)
+
+**B.1–B.7 all green; 40 fields, 1.01 h, 0 defects, nothing halted.** Record:
+**`data/fs61/records/phase-B.md`**. Table: **`data/fs61/census.md`** (derived, byte-identical on re-run) and
+`census.jsonl`.
+
+**898 lattices**: 209 `Colourable (form mod 2)`, 268 `(form mod 3)`, **268 `(periodic colouring verified)`**, 43
+`Refused`, 110 `Open`. The quotient certificate closes a third of the family — 268 lattices that would otherwise have
+been balls to ask.
+
+**Nine fields refuse at tier 1: 11, 23, 47, 71, 95, 119, 143, 191 and 359.** `d = 359` is **new** (not FS-58's, not
+priced in phase 0): `L = 4`, twelve lattices, smallest refusing ball 46,421 points — so phase C would make
+**`χ(ℚ(√359)²) = 4`** a new exact value. The onset radii also shrank two known refusals, `d = 47` from 8,629 points to
+**3,565** and `d = 95` from 17,169 to **6,997**, which are cheaper starting points for extraction. Everything here is
+a solver claim until the frozen checker says otherwise.
+
+**P2 lost.** `d = 11` — a `d ≡ 3 (mod 8)` field — produced **four genuine ball refusals** on one lattice
+(`q1+q5+6+10.1+10.2+15.1+15.2+30.1+30.2+30.3`, `M = 30`, 108 generators, covolume 2.17e-4), down to radius 1.0 (45,521
+points). Not inheritance: that lattice is not the witness lattice (`M = 150`, and `150 ∤ 30`). Verified before being
+believed — all 108 generators pass the exact norm equation, the graph has **zero triangles** (G57, since `√3 ∉ ℚ(√11)`),
+and 400 sampled edges re-derive as exact unit distances. **So the direct route does land at `d ≡ 3 (mod 8)`.** What
+survives of R-mod8 is the plan's own refinement, not its claim: the refusing lattice draws on **ten classes**, "rich in
+classes, not coarse", exactly as §3's note about FS-58's witness predicted.
+
+**Decision G is therefore live and should be re-read before phase D**: phase D (the chain route at 35 and 59) was
+conditional on R-mod8 surviving phase B, and it has not. The direct route is now known to work at one `d ≡ 3 (mod 8)`
+field; whether it works at 35 and 59 is untested, because *they asked zero balls* (below).
+
+**P3 lost**, 8 of 20 `d ≡ 7 (mod 8)` fields against ten or more predicted.
+
+**Both nulls are bounded by what was askable, and this is the phase's most important number.** Of the twenty
+`d ≡ 3 (mod 8)` fields, **eighteen asked ZERO balls** — every lattice either certified colourable or over the tier's
+600,000-point cap. Only `d = 11` (4 asked, 4 refused) and `d = 155` (2 asked, 2 colourable) asked anything. Of the
+twenty `d ≡ 7 (mod 8)` fields, six asked zero, **including `d = 167`**. Across the family: **343 ball records, 124
+asked**, 219 over cap, 20 unknown at the wall. So "Not landed at tier 1" at 31 of 40 fields means, overwhelmingly,
+*nothing was askable at this depth* — which is why B.5's per-field `balls asked / over cap / unknown` column is in
+`census.md` and why the totals line repeats it.
+
+**Cost, projection reconciled.** 1.01 h total; `d ≡ 3 (mod 8)` fields mean **22 s**, `d ≡ 7 (mod 8)` mean **159 s**.
+The running projection moved 2.3 → 2.6 → 1.6 → 1.3 → 1.0 h: the drift is the **mod-8 split**, not noise. The first six
+fields hold four of the expensive kind, so the early mean was biased high by about 2.3×; the population changed, not
+the rate.
+
+**One departure from the plan's wording, in the direction of visibility:** the two-hour per-field stop rule leaves the
+remaining balls **unrecorded** rather than writing them `Over cap (not asked)`, so `table --check` reports a gap
+("Open with no R = 1.5 record") instead of a verdict the instrument did not earn. No field reached the budget.
+
+**For phase C** (nine fields to certify, smallest refusing ball first): 47 (3,565 points), 119 (5,605), 95 (6,997),
+191 (21,845), 11 (45,521), 359 (46,421), 71 (47,597), 23 (248,213), 143 (283,485). The first seven are inside
+`direct-witness`'s range as priced in phase 0 (O3: 13,605 points → 52 CPU-s); the last two want the checkpointed
+`extract`.
