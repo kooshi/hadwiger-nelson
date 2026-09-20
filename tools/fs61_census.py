@@ -2769,7 +2769,19 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     mn = rec['minimality']
     steps['C.9 minimality'] = {'ok': True, **mn}          # recorded, never required (gate C.9)
     print(f"    {'C.9 minimality':22s}        NOTE  {mn['note']}", flush=True)
-    rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src,
+    # A named diagnosis for the one failure the deletion budget can cause.  C.4's third step asks whether deleting
+    # the pinned edge's second vertex leaves a 3-colourable graph -- a MINIMALITY question, not a soundness one, so
+    # it can fail on a witness the frozen checker has already CERTIFIED.  `extract` deletes outward-in, so the pin
+    # (at the translated origin) is tested last and a stopped deletion never reaches it: whether it is load-bearing
+    # is then luck.  Measured 2026-09-20: pass at d = 359, 143, 23 with stopped deletions, fail at d = 95.
+    why = None
+    if not steps['C.4 second opinion']['ok'] and 'still refuses (control expected a colouring)' in \
+            steps['C.4 second opinion']['line'] and mn['minimal'] == 'no':
+        why = (f'C.4 fails on its MINIMALITY control, not on the refutation: C.1 certified this witness and C.2 '
+               f'passed every plant. The deletion was stopped at {mn["stopped_at"]} of {mn["of_tests"]}, leaving the '
+               f'pinned vertex redundant. Resume with a larger --deletion-budget (the checkpoint is on disk).')
+        print(f'    NOTE  {why}', flush=True)
+    rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src, 'diagnosis': why,
                 'result': 'CERTIFIED' if (ok and col and nb) else 'INCOMPLETE'})
     write_witness_readme(D, out, rec, w, fr)
     write_witness_scripts(D, out, rec)
