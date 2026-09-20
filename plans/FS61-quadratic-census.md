@@ -731,7 +731,7 @@ section is the index and the carry-forward. Current state only — a corrected c
    invent refusals and say nothing about certificate-free lattices; `d = 47`'s 29 `Open` lattices and three refusals are
    what covers that. **Worth adding to §6's 0.4 row** so the zeros are not read as stronger than they are.
 5. **`Unknown (budget)` has five self-certifying instances — the bound on how much any `Unknown` in the census can be
-   read into, and phase E's input when it scores a null.** Twenty-six of the 610 control balls asked hit the 600 s wall;
+   read into, and phase E's input when it scores a null.** Twenty-six of the 601 control balls asked hit the 600 s wall;
    five are on **provably bipartite** lattices (an exact form mod 2 two-colours the whole infinite graph), against a
    median colourable solve of 0.21 s and one coloured ball of 557,065 points. Rule 4 now has instances, not an argument.
    *Phase-B improvement proposed, not made:* a lattice with a form mod 2 or 3 can have its ball colouring **constructed**

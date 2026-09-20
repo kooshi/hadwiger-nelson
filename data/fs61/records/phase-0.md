@@ -255,12 +255,12 @@ All three pass conditions met: zero refusals on the seven; every lattice over `d
 `controls.md` were already right, the summary sentence was not). Of the seven negative fields' **1,350 ball records**,
 **800 are `Over cap (not asked)`** — the lattice was too fine for the tier's 600,000-point cap and no graph was ever
 built — 525 are verified colourable and 25 are `Unknown (budget)`. So **550 balls were asked and none refused.** Across
-all eight fields: 1,460 records, 850 over cap, **610 asked**. A number travels with what it measures, and "balls
+all eight fields: 1,460 records, 859 over cap, **601 asked** (572 verified colourable, 26 `Unknown`, 3 `Refused`). A number travels with what it measures, and "balls
 recorded" is not "balls asked": at `d = 47` alone, 59 of 110 records are over cap.
 
 **What `--filter-off` means here.** Every rank-4 lattice is considered at both tier-1 radii whatever certificate it
 already carries — not merely the 3-non-integral ones FS-58's `colour-scan` selects — and is *asked* when its predicted
-point count is under the tier's cap. 1,460 ball records over the eight fields, of which **610 were asked**.
+point count is under the tier's cap. 1,460 ball records over the eight fields, of which **601 were asked**.
 
 **Finding — the three-chromatic controls are a theorem-backed null, not a budget null, and that both strengthens and
 limits them.** Over `d = 7, 19, 31, 43` **no lattice is `Open`**: every one carries an exact certificate. The reason is
@@ -279,7 +279,7 @@ what the positive control at 47 — 29 `Open` lattices, three refusing balls —
 one command rather than two.
 
 **Finding — `Unknown (budget)` carries no information about the graph, demonstrated on instances where a colouring is
-certain.** Twenty-six of the 610 control balls asked ran the solver to its 600-second wall. Five of them are on `d = 2`
+certain.** Twenty-six of the 601 control balls asked ran the solver to its 600-second wall. Five of them are on `d = 2`
 lattices that are **provably bipartite** — an exact linear form mod 2 two-colours the whole infinite lattice graph —
 so a 3-colouring certainly exists and the solver did not find one:
 
