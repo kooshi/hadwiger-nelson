@@ -1,0 +1,43 @@
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 431 q1+q5+60.1+60.2+240.2 1.11 /home/kooshi/source/lean-dir/data/fs61/witness-431
+extract D=431 pool q1+q5+60.1+60.2+240.2 ball 1.11: 1803077 points, 9349130 edges (11.2 s)
+  core round 0: 1803077 -> 2219 points (207.0 s)
+  core round 1: 2219 -> 1932 points (0.5 s)
+  core round 2: 1932 -> 1787 points (0.5 s)
+  core round 3: 1787 -> 1664 points (0.5 s)
+  core round 4: 1664 -> 1621 points (0.5 s)
+  core round 5: 1621 -> 1559 points (0.5 s)
+  core round 6: 1559 -> 1509 points (0.4 s)
+  core round 7: 1509 -> 1462 points (0.4 s)
+  core round 8: 1462 -> 1432 points (0.4 s)
+  core round 9: 1432 -> 1410 points (0.5 s)
+  core round 10: 1410 -> 1395 points (0.4 s)
+  core round 11: 1395 -> 1385 points (0.4 s)
+  core round 12: 1385 -> 1361 points (0.4 s)
+  core round 13: 1361 -> 1343 points (0.4 s)
+  core round 14: 1343 -> 1323 points (0.4 s)
+  core round 15: 1323 -> 1316 points (0.4 s)
+  core round 16: 1316 -> 1308 points (0.4 s)
+  core round 17: 1308 -> 1303 points (0.4 s)
+  core round 18: 1303 -> 1297 points (0.4 s)
+  core round 19: 1297 -> 1288 points (0.4 s)
+  core round 20: 1288 -> 1274 points (0.4 s)
+  core round 21: 1274 -> 1266 points (0.4 s)
+  core round 22: 1266 -> 1263 points (0.4 s)
+  core round 23: 1263 -> 1254 points (0.4 s)
+  core round 24: 1254 -> 1241 points (0.4 s)
+  core round 25: 1241 -> 1237 points (0.4 s)
+  core round 26: 1237 -> 1234 points (0.4 s)
+  core round 27: 1234 -> 1234 points (0.4 s)
+  deletion: 69/1234 tested, 1054 kept
+  deletion: 74/1234 tested, 1044 kept
+  deletion: 82/1234 tested, 1040 kept
+  deletion: 89/1234 tested, 1036 kept
+  deletion: 94/1234 tested, 1032 kept
+  deletion: 95/1234 tested, 1031 kept
+[fs61] generator stopped: deletion budget 600 s spent at position 95; pid 2256990 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 431 q1+q5+60.1+60.2+240.2 1.11 /home/kooshi/source/lean-dir/data/fs61/witness-431 --stop-deletion
+extract D=431 pool q1+q5+60.1+60.2+240.2 ball 1.11: 1803077 points, 9349130 edges (11.4 s)
+  deletion stopped by request at position 95: the witness is the last recorded refusing set (1031 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt431): pool q1+q5+60.1+60.2+240.2 (|W| = 52, M = 240), ball piece R = 1.11: 1803077 points, 9349130 edges -> deletion start 1031 -> refusing set 1031 points; 2719 exact unit edges; CaDiCaL exit 20 in 7.12 s (LRAT 97177781 bytes), Glucose4 ['UNSAT', 13.966], Minisat22 ['UNSAT', 15.709]; deletion controls [[0, 'SAT (model verified)'], [539, 'UNSAT'], [47, 'SAT (model verified)'], [586, 'SAT (model verified)'], [94, 'SAT (model verified)'], [633, 'UNSAT'], [141, 'SAT (model verified)'], [680, 'SAT (model verified)'], [188, 'SAT (model verified)'], [727, 'SAT (model verified)'], [235, 'SAT (model verified)'], [774, 'SAT (model verified)']]; 105.1 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-431

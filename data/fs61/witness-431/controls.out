@@ -1,0 +1,14 @@
+  [PASS] positive twin (the faithful files, re-serialised): expected CERTIFIED; got exit 0: CERTIFIED: 1031 points of Q(sqrt431)^2, each a reduced (a, b, c, e, m); all 2719 pairs at distance exactly 1 re-derived in integer arithmetic (530965 candidate 
+  [PASS] a point moved (vertex 496, degree 14, a -> a + 1): expected REFUSED EDGE_NOT_UNIT; got exit 1: REFUSED EDGE_NOT_UNIT: the file lists edge [6, 496] between [1, 0, 0, -1, 120] and [122, 0, 0, -1, 120], which are not at distance 1
+  [PASS] a non-unit pair [0, 1] inserted as an edge: expected REFUSED EDGE_NOT_UNIT; got exit 1: REFUSED EDGE_NOT_UNIT: the file lists edge [0, 1] between [-19, -1, 71, -5, 240] and [0, 0, 0, 0, 1], which are not at distance 1
+  [PASS] the proof truncated to 120488 of 240976 lines: expected REFUSED NO_EMPTY_CLAUSE; got exit 1: REFUSED NO_EMPTY_CLAUSE: the proof ends after 108849 additions without deriving the empty clause
+  [PASS] one hint corrupted (proof line 120489: first hint 17797 -> 1): expected REFUSED PROOF_STEP; got exit 1: REFUSED PROOF_STEP: line 120489: hint 1 names no clause in the database
+  [PASS] a derivation's last hint dropped (proof line 80326: hint 6902 removed): expected REFUSED PROOF_STEP; got exit 1: REFUSED PROOF_STEP: line 80326: clause 82062: its hints propagate to no conflict
+  [PASS] the pin reversed (1, 7) -> (7, 1): expected REFUSED PROOF_STEP; got exit 1: REFUSED PROOF_STEP: line 1: hint 9189 is already satisfied, so it is not unit
+  [PASS] the pinned edge (1, 7) removed from the edge list: expected REFUSED EDGE_MISSING; got exit 1: REFUSED EDGE_MISSING: points 1 and 7 ([0, 0, 0, 0, 1], [1, 0, 0, 0, 1]) are at distance 1 but the file omits the edge
+  [PASS] the pin moved to the non-adjacent pair (1, 0): expected REFUSED PIN_NOT_EDGE; got exit 1: REFUSED PIN_NOT_EDGE: the pinned pair [1, 0] is not at distance 1, so colouring it 0 and 1 is not a symmetry reduction
+  [PASS] a vertex deleted (vertex 1030, degree 6; file renumbered consistently): expected REFUSED PROOF_STEP or NO_EMPTY_CLAUSE; got exit 1: REFUSED PROOF_STEP: line 1: hint 9189 names no clause in the database
+  [PASS] a point listed twice: expected REFUSED DUPLICATE_POINT; got exit 1: REFUSED DUPLICATE_POINT: points 1 and 1030 are both [0, 0, 0, 0, 1]
+  [PASS] a point not in reduced form: expected REFUSED POINT_FORMAT; got exit 1: REFUSED POINT_FORMAT: point 1030 = [922, 2, 146, -10, 480] is not reduced (gcd 2)
+  [PASS] bucketing completeness: the all-pairs exact test over 530965 pairs finds 2719 unit pairs, the bucketed search 2719, the file 2719
+CONTROLS ALL PASS

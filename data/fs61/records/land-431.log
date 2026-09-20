@@ -1,0 +1,16 @@
+fs61 land d=431: cheapest refusing ball 1803077 points at R=1.11 on q1+q5+60.1+60.2+240.2 (refused in 322.92 s; cost proxy 583151163); checkpointed extract
+    stage 2 (deletion) started at position 69; budget 600 s
+    stopping the generator (pid 2256990): deletion budget 600 s spent at position 95
+    stopped: pid 2256990 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    generation pass "deletion under budget": 935 s, exit -15 -- deletion budget 600 s spent at position 95
+    generation pass "emit from the last checkpoint": 106 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 1031 points of Q(sqrt431)^2, each a reduced (a, b, c, e, m); all 2719 pairs at distan
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 105] between [-19, -1, 71, -5, 240] and [25, 0, 1
+    C.4a second opinion    exit  0  PASS  RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse
+    C.4b pinned-vertex            PASS  recorded, not required (C.9 says not 1-minimal) -- deleting the pinned vertex leaves a verified 3-colouring
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 2719 edges
+    C.6 3-adic barrier            PASS  1570 of 2719 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 95 of 1234
+  d=431: 1031 points, 2719 edges -> CERTIFIED; chi(Q(sqrt431)^2) = 4; no
+[land: 1269.3 s wall on desktop]
