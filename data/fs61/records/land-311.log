@@ -1,0 +1,12 @@
+fs61 land d=311: cheapest refusing ball 1137169 points at R=1.2892 on q1+q5+40+60+120 (refused in 18.19 s; cost proxy 21253689); checkpointed extract
+    generation pass "deletion under budget": 41 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); all 460 pairs at distance
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 4] between [0, 0, 0, 0, 1] and [6, 1, 3, -2, 40],
+    C.4a second opinion    exit  0  PASS  RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse
+    C.4b pinned-vertex            PASS  required (C.9 says 1-minimal) -- deleting the pinned vertex leaves a verified 3-colouring
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 460 edges
+    C.6 3-adic barrier            PASS  213 of 460 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  1-minimal: deleting any single vertex leaves a 3-colourable graph
+  d=311: 189 points, 460 edges -> CERTIFIED; 4 <= chi(Q(sqrt311)^2) <= 5; 1-minimal
+[land: 43.9 s wall on desktop]
