@@ -1,0 +1,15 @@
+# FS-61 owner: are two fields' unit-distance graphs on ONE integral shape linearly isomorphic?  (tools/fs61_owner_shape_iso.py, 2026-09-20)
+# Pairs with equal unit-vector counts where the shape refuses in both fields.  First three settled by odd girth (records); the fourth by exhaustive exact search.
+L8a8b1603  95 vs 119 : 28 = 28 unit vectors; odd girth 7 vs 5  -> not isomorphic
+Lb0a7206c  23 vs 191 : 36 = 36 unit vectors; odd girth 9 vs 5  -> not isomorphic
+L54356af8  95 vs 191 : 52 = 52 unit vectors; odd girth 7 vs 5  -> not isomorphic
+L3e1c94c6: |W_239| = 52, |W_359| = 52
+  additive relations u+v in W: 0 vs 0
+  basis [(-120, 0, 0, 0), (-96, 0, -72, 0), (-66, -2, -22, 6), (-66, -2, 22, -6)]  elements per level [2, 10, 4, 36]
+  linear isomorphisms T(W_239) = W_359: 0
+# positive control:
+L3e1c94c6: |W_359| = 52, |W_359| = 52
+  additive relations u+v in W: 0 vs 0
+  basis [(-120, 0, 0, 0), (-96, 0, -72, 0), (-76, -2, -38, 4), (-76, -2, 38, -4)]  elements per level [2, 10, 4, 36]
+  linear isomorphisms T(W_359) = W_359: 16
+  first: [(-120, 0, 0, 0), (-96, 0, -72, 0), (-76, -2, -38, 4), (-76, -2, 38, -4)] -> ((-120, 0, 0, 0), (-96, 0, -72, 0), (-76, -2, -38, 4), (-76, -2, 38, -4))
