@@ -257,7 +257,9 @@ if __name__ == '__main__':
     args = sys.argv[1:]
     if args and args[0] == '--plant':
         sys.exit(plant(int(args[1])))
-    fs = [int(a) for a in args] or sorted(int(p.name.split('-')[1]) for p in FS61.glob('witness-*')
-                                          if p.is_dir() and p.name.split('-')[1].isdigit()
-                                          and (p / 'witness.json').exists())
+    # exactly `witness-<digits>`: `witness-95-rank2` is a SEPARATE object with its own landing key, and
+    # `witness-lattices.jsonl` is not a directory at all -- a looser match reads the first as a second d = 95.
+    fs = [int(a) for a in args] or sorted(int(m.group(1)) for p in FS61.glob('witness-*')
+                                          for m in [re.fullmatch(r'witness-(\d+)', p.name)]
+                                          if m and p.is_dir() and (p / 'witness.json').exists())
     sys.exit(run(fs))
