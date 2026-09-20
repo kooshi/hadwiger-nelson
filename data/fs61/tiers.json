@@ -12,6 +12,25 @@
     "point_cap": 600000,
     "solve_wall": 600
   },
+  "1b": {
+    "name": "tier 1b (the radius ladder)",
+    "defined": "2026-09-20, plans/FS61-quadratic-census.md, the owner's re-plan after phase B, ruling 2 (phase B')",
+    "deepens": "1",
+    "base_radius": 1.5,
+    "scope": "every rank-4 lattice whose state is Open and whose tier-1 R = 1.5 ball record is `Over cap (not asked)`; a lattice whose R = 1.5 ball was asked is out of scope, and tier 1's definition is unchanged",
+    "nmax": 180,
+    "lattices": "tier 1's lattices, unchanged: the axis plus one or two non-rational classes with lcm <= 180, saturated",
+    "odd_girth": "tier 1's, unchanged; no lattice record is rewritten by this tier",
+    "bfs_cap": 400000,
+    "quotients": 24,
+    "quotient_wall": 30,
+    "ladder_radii": [1.2, 1.0],
+    "radius_rule": "walk the rungs 1.2 then 1.0. A rung whose PREDICTED points (pi^2 R^4 / covolume) exceed point_cap is not asked; the first rung whose prediction fits is asked. If that rung's EXACT point count also exceeds point_cap the ladder descends to the next fitting rung -- the exact count is strictly better information than the prediction and the descent can only ask more, never fewer. If no rung's prediction fits, one `Over cap (not asked)` record is written at the first rung carrying both predictions.",
+    "onset_rule": "a rung that refuses is followed by the next rung down at a 120 s wall, as phase B's onset radii were, to hand phase C a smaller refusing ball; it is a bonus ask and never part of the accounting",
+    "radii": [1.2, 1.0],
+    "point_cap": 600000,
+    "solve_wall": 600
+  },
   "2": {
     "name": "tier 2",
     "defined": "2026-09-19, plans/FS61-quadratic-census.md decision B (phase E; d = 7 mod 8 fields not landed at tier 1, 167 excluded)",

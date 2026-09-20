@@ -555,6 +555,23 @@ def cmd_filter_reverify(D, quiet=False):
 
 
 # ================================================================ balls
+def _worker_memory():
+    """Two numbers, because they measure different things and a worker is reused across balls (CLAUDE.md: a number
+    travels with what it measures).  `rss_peak_kb` is this WORKER PROCESS's high-water mark -- it may have been set by
+    an earlier ball in the same worker, so it is an upper bound per ball and the right number for sizing a pool.
+    `rss_now_kb` is the resident size at the end of THIS ball, with the previous ball's memory already freed."""
+    import resource
+    out = {'rss_peak_kb': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
+    try:
+        for ln in open('/proc/self/status'):
+            if ln.startswith('VmRSS:'):
+                out['rss_now_kb'] = int(ln.split()[1])
+                break
+    except OSError:
+        pass
+    return out
+
+
 def _ball_worker(args):
     """The ball of radius R about the origin on a saturated lattice: FS-58's piece/piece_edges/CNF verbatim, plus the model."""
     import numpy as np
@@ -587,7 +604,7 @@ def _ball_worker(args):
             units.append(3 * j + 2)
         r, dt = walled_solve(sv, units, wall)
         rec = {**base, 'points': nv, 'edges': int(len(E)), 'covolume': cov, 'size': len(S),
-               'solve_seconds': round(dt, 2), 'seconds': round(time.time() - t0, 2)}
+               'solve_seconds': round(dt, 2), 'seconds': round(time.time() - t0, 2), **_worker_memory()}
         model = None
         if r is None:
             rec.update({'verdict': 'Unknown (budget)', 'claim_scope': 'nothing'})
@@ -1408,9 +1425,107 @@ def selftest_land(rnd):
     return rows
 
 
+TIER_SHA_AT_MINT = {'1': '7a520f29e32724da', '2': '34763942a9797e27'}     # read off the committed records, 2026-09-20
+
+
+def selftest_ladder(rnd):
+    """Phase B' (tier 1b): the ladder's rung rule, its accounting check, and the census's three null phrases.  Every
+    clause is shown able to go RED, on fixtures built from the real records and never written back."""
+    rows = []
+    # (0) a standing control: tier 1's and tier 2's definitions are what the committed records were stamped against.
+    for t, sha in sorted(TIER_SHA_AT_MINT.items()):
+        got = tier_def(t)['_sha256']
+        rows.append((f'tier {t}\'s definition is unmoved -- 343 committed ball records carry its _sha256', got == sha,
+                     f'{got} (minted {sha})'))
+    D, tid = 23, '1b'
+    tier = tier_def(tid)
+    cap = tier['point_cap']
+    plan, out = ladder_plan(D, tid)
+    balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+    if not plan:
+        rows.append(('d=23 has lattices in the ladder\'s scope', False, 'none found -- the fixture is gone'))
+        return rows
+    # (1) scope: in only when the base ball was NOT asked; out with the reason, and both populations are non-empty.
+    rows.append(('scope: every lattice in the plan has an `Over cap (not asked)` record at the base radius',
+                 all(balls[f'{k}|ball{tier["base_radius"]}']['verdict'] == 'Over cap (not asked)' for k in plan),
+                 f'{len(plan)} in scope at d={D}'))
+    asked_out = {k: w for k, w in out.items() if w.startswith('asked at R=')}
+    rows.append(('scope: a lattice whose base ball WAS asked is out of scope, with the verdict as the reason',
+                 bool(asked_out), f'{len(asked_out)} of {len(out)} out-of-scope lattices, e.g. '
+                                  f'{sorted(asked_out.values())[0] if asked_out else "-"}'))
+    # (2) the rung is chosen by the predicted-points formula, and the choice MOVES when the cap moves (B'.1).
+    key = sorted(plan, key=lambda k: (plan[k]['askable'] or [(0, 1 << 60)])[0][1])[0]
+    e = plan[key]
+    chosen = e['askable'][0][0] if e['askable'] else None
+    first_fit = next((R for R, p in e['rungs'] if p is not None and p <= cap), None)
+    rows.append(('the rung selected is the first whose PREDICTED points fit the cap', chosen == first_fit,
+                 f'{e["id"]}: rungs ' + ', '.join(f'{R}:{p}' for R, p in e['rungs']) + f' -> R={chosen} at cap {cap}'))
+    tight = e['rungs'][0][1] - 1                                   # a cap just under the top rung's prediction
+    moved = next((R for R, p in e['rungs'] if p is not None and p <= tight), None)
+    rows.append(('PLANT (rung rule): with the cap set just under the top rung\'s prediction the choice DESCENDS, so the '
+                 'formula is what decides and both outcomes are reachable', moved is not None and moved != e['rungs'][0][0],
+                 f'cap {tight} -> R={moved}, against R={e["rungs"][0][0]} at cap {cap}'))
+    # (3) the accounting check.  Fixtures, never written back.
+    R0, p0 = e['askable'][0]
+    good = {f'{key}|ball{R0}': {'key': f'{key}|ball{R0}', 'tier': tid, 'verdict': 'Colourable (colouring verified)'}}
+    ok, why = ladder_status(e, good, tid)
+    rows.append(('a lattice answered at its selected rung is complete', ok, why))
+    ok, why = ladder_status(e, {}, tid)
+    rows.append(('PLANT (accounting): the record at the selected rung deleted -> the check names the rung', not ok, why))
+    ok, why = ladder_status(e, {f'{key}|ball{R0}': dict(good[f'{key}|ball{R0}'], tier='1')}, tid)
+    rows.append(('PLANT (accounting): a record at the right rung but stamped with the WRONG tier does not count',
+                 not ok, why))
+    over_exact = {'key': f'{key}|ball{R0}', 'tier': tid, 'verdict': 'Over cap (not asked)', 'over_cap_by': 'exact'}
+    ok, why = ladder_status(e, {f'{key}|ball{R0}': over_exact}, tid)
+    if len(e['askable']) > 1:
+        rows.append(('PLANT (descent): an exact over-cap at the top rung with no record below it -> incomplete',
+                     not ok, why))
+        R1 = e['askable'][1][0]
+        ok2, why2 = ladder_status(e, {f'{key}|ball{R0}': over_exact,
+                                      f'{key}|ball{R1}': {'key': f'{key}|ball{R1}', 'tier': tid,
+                                                          'verdict': 'Refused (solver claim)'}}, tid)
+        rows.append(('PLANT resolved: with the descent record present the same ladder is complete', ok2, why2))
+    ok, why = ladder_status(e, {f'{key}|ball{R0}': {'key': f'{key}|ball{R0}', 'tier': tid,
+                                                   'verdict': 'Over cap (not asked)', 'over_cap_by': 'prediction'}}, tid)
+    rows.append(('PLANT (consistency): `over cap by PREDICTION` at a rung the prediction fits is impossible under the '
+                 'rule, and is caught', not ok, why))
+    # (4) the census's three null phrases are three different strings, and each is reachable (ruling 6 plus its gap).
+    L4 = {'k1': {'rank': 4}, 'k2': {'rank': 4}}
+    phrases = {
+        'by certificate': field_not_landed_reason(L4, {'k1': {'state': 'Colourable (form mod 3)'}}, {}),
+        'by budget': field_not_landed_reason(L4, {'k1': {'state': 'Open (x)'}, 'k2': {'state': 'Open (x)'}},
+                                             {'b': {'lattice': 'k1', 'verdict': 'Over cap (not asked)'}}),
+        'asked': field_not_landed_reason(L4, {'k1': {'state': 'Open (x)'}, 'k2': {'state': 'Open (x)'}},
+                                         {'b': {'lattice': 'k1', 'verdict': 'Colourable (colouring verified)'}}),
+    }
+    rows.append(('the three census null phrases are distinct and each is reachable',
+                 len(set(phrases.values())) == 3 and phrases['by certificate'] == 'by certificate'
+                 and phrases['by budget'].startswith('by budget: 2 Open lattices')
+                 and phrases['asked'].startswith('asked: 1 of 2 Open lattices'),
+                 ' | '.join(phrases.values())))
+    rows.append(('PLANT (phrases): an UNASKED open lattice must never read as asked -- an Over cap record alone keeps '
+                 'the field `by budget`', phrases['by budget'].startswith('by budget'), phrases['by budget']))
+    # (5) A.8's 15 % bound on predicted-beside-actual: it fires, and it is a FINDING and not a defect.
+    fix = {'predicted_points': 100000, 'points': 100000, 'verdict': 'Colourable (colouring verified)'}
+    good8 = _ladder_decorate(fix, e, 'fixture', R0)
+    bad8 = _ladder_decorate(dict(fix, points=200000), e, 'fixture', R0)
+    rows.append(('B\'.1: every record carries predicted beside actual, with A.8\'s bound applied to the pair',
+                 good8['within_A8_bound'] is True and good8['actual_over_predicted'] == 1.0,
+                 f'ratio {good8["actual_over_predicted"]}, rungs {good8["ladder_rungs"]}'))
+    rows.append(('PLANT (A.8): an actual count at twice the prediction is flagged outside the bound',
+                 bad8['within_A8_bound'] is False, f'ratio {bad8["actual_over_predicted"]}'))
+    # (6) phase C's field list is read from the records, so a field this tier lands is not silently skipped.
+    here = land_order(quiet=True)
+    planted = land_order(refusing=set(LAND_ORDER) | {239}, quiet=True)
+    rows.append(('phase C\'s order today is the owner\'s committed priority order', here == LAND_ORDER, f'{here}'))
+    rows.append(('PLANT (land order): a field refusing for the first time is APPENDED, never dropped',
+                 planted == LAND_ORDER + [239] and 239 not in LAND_ORDER, f'{planted}'))
+    return rows
+
+
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
             'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas,
-            'land': selftest_land}
+            'land': selftest_land, 'ladder': selftest_ladder}
 
 
 def cmd_selftest(section=None):
@@ -2274,6 +2389,297 @@ def propagate_refusal(D, filt, balls):
     return n
 
 
+# ================================================================ phase B': tier 1b, the radius ladder
+#
+# The owner's re-plan after phase B, ruling 2.  Tier 1 asked R = 1.5 of every rank-4 Open lattice whose ball fitted the
+# 600,000-point cap, and left the rest unasked: 77 of the family's 110 rank-4 Open lattices have an R = 1.5 record
+# reading `Over cap (not asked)`, and thirteen fields asked NOTHING for that reason alone.  A ball is a bidisc, so it
+# holds points in proportion to R^4: the same lattice at R = 1.2 holds 0.41 of them, at R = 1.0 holds 0.20.  Every
+# refusal anywhere on record sits at a radius between 1.0 and 1.5, so the ladder is asking the same question lower down,
+# under the SAME cap and the SAME wall.  Tier 1's definition, records and verdicts do not move: this is a new tier id.
+#
+# TIER_ORDER is a code constant and NOT part of any tier's definition -- putting it in tiers.json would change tier 1's
+# `_sha256`, which 343 committed ball records carry.
+TIER_ORDER = {'1': 10, '1b': 15, '2': 20}
+ONSET_WALL = 120.0          # phase B's wall for a follow-up ask below a refusal: the band under the threshold stalls
+
+
+def tiers_upto(tid):
+    """Every tier at or above `tid` in depth, shallowest first -- the tiers whose accounting a table at `tid` must check."""
+    if str(tid) not in TIER_ORDER:
+        die(f'tier {tid} has no depth order; known: {sorted(TIER_ORDER)}')
+    return [t for t in sorted(TIER_ORDER, key=TIER_ORDER.get) if TIER_ORDER[t] <= TIER_ORDER[str(tid)] and t in tiers()]
+
+
+def deepest_tier_present(fields=None):
+    """The deepest tier that has ball records anywhere in the family: the tier the derived table is AT.  Computed from
+    the records so the table cannot claim a depth nobody ran."""
+    seen = {'1'}
+    for D in (fields or FAMILY_500):
+        for b in load_jsonl(field_dir(D) / 'balls.jsonl').values():
+            t = str(b.get('tier'))
+            if t in TIER_ORDER:
+                seen.add(t)
+    return max(seen, key=TIER_ORDER.get)
+
+
+def ladder_plan(D, tid='1b'):
+    """The ladder's scope and its intended rung sequence for one field.  ONE definition, called by the runner AND by
+    `table --check`, so the check re-derives the rule from the covolume and the cap instead of trusting the run that
+    wrote the records.  Returns (plan, out_of_scope), the second mapping a key to the reason in words."""
+    tier = tier_def(tid)
+    if 'ladder_radii' not in tier:
+        die(f'tier {tid} defines no radius ladder (ladder_radii)')
+    base_r, cap = tier['base_radius'], tier['point_cap']
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+    balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+    plan, out = {}, {}
+    for key, f in filt.items():
+        if not f['state'].startswith('Open'):
+            continue
+        r = lat.get(key)
+        if r is None:
+            out[key] = 'no lattice record'
+            continue
+        if r['rank'] != 4:
+            out[key] = f'rank {r["rank"]}: lattices below rank 4 are filtered and never scanned (plan M1.7)'
+            continue
+        b = balls.get(f'{key}|ball{base_r}')
+        if b is None:
+            out[key] = f'no tier-{tier["deepens"]} R={base_r} record -- a gap B.1 reports, not a ladder question'
+            continue
+        if b['verdict'] != 'Over cap (not asked)':
+            out[key] = f'asked at R={base_r}: {b["verdict"]}'
+            continue
+        cov = r['covolume']
+        rungs = [(R, predicted_points(cov, R)) for R in tier['ladder_radii']]
+        plan[key] = {'key': key, 'id': r['id'], 'D': D, 'lattice': r, 'rungs': rungs,
+                     'base_radius': base_r, 'base_points': b.get('points'),
+                     'askable': [(R, p) for R, p in rungs if p is not None and p <= cap]}
+    return plan, out
+
+
+def _settled_at(rec, cap, wall):
+    """FS-58's rule, kept: an Unknown is re-asked only at a larger wall, an Over cap only at a larger cap."""
+    if rec['verdict'] == 'Unknown (budget)':
+        return rec.get('wall', 0) >= wall
+    if rec['verdict'] == 'Over cap (not asked)':
+        return rec.get('cap', 0) >= cap
+    return True
+
+
+def ladder_status(entry, balls, tid):
+    """Is one lattice's ladder complete, and why?  (ok, reason).  `ok` False is an accounting defect: the tier said it
+    would ask this rung and there is no record of it."""
+    key, tid = entry['key'], str(tid)
+
+    def rec_at(R):
+        rec = balls.get(f'{key}|ball{R}')
+        return rec if rec is not None and str(rec.get('tier')) == tid else None
+
+    if not entry['askable']:
+        R, p = entry['rungs'][0]
+        rec = rec_at(R)
+        if rec is None:
+            return False, f'no tier-{tid} record at R={R}, where the rule writes one over-cap record'
+        if rec['verdict'] != 'Over cap (not asked)':
+            return False, f'R={R} is over cap by prediction ({p} points) yet its record says {rec["verdict"]}'
+        return True, 'Over cap (not asked) at every rung, by prediction'
+    for i, (R, p) in enumerate(entry['askable']):
+        rec = rec_at(R)
+        if rec is None:
+            which = 'the rung the rule selects' if i == 0 else f'the rung below R={entry["askable"][i - 1][0]}'
+            return False, f'no tier-{tid} record at R={R} (predicted {p} points, {which})'
+        if rec['verdict'] == 'Over cap (not asked)':
+            by = rec.get('over_cap_by')
+            if by != 'exact':
+                return False, (f'R={R} fits the cap by prediction ({p} points) yet its record is over cap '
+                               f'by {by!r}, which the rule cannot produce at an askable rung')
+            if i + 1 < len(entry['askable']):
+                continue                                        # the exact count overflowed: descend one rung
+            return True, f'Over cap (not asked) at R={R}, by the exact count, at the last rung'
+        return True, f'{rec["verdict"]} at R={R}'
+    return True, 'every askable rung over cap by its exact count'
+
+
+def _ladder_work(D, entry, R, pred, tid, tsha, cap, wall):
+    """One ball for `_ball_worker`, with the generators re-derived from the canonical key and checked against the
+    lattice record's `generators_sha256` -- never read from a cache."""
+    M, H = parse_key(entry['key'])
+    gens = [list(v) for v in saturation(D, M, H)]
+    if sha_vectors([tuple(v) for v in gens]) != entry['lattice']['generators_sha256']:
+        die(f'lattice {entry["id"]}: the saturation of its key does not match the recorded generators_sha256', 1)
+    return (D, entry['key'], gens, R, cap, wall, tid, tsha, pred)
+
+
+def _ladder_decorate(rec, entry, reason, chosen):
+    """B'.1: the record says which rungs the formula predicted, which one it selected and why, and -- once the ball is
+    built -- the actual count beside the prediction, with A.8's 15 % bound applied to the pair."""
+    rec = dict(rec)
+    rec['ladder_rungs'] = {str(R): p for R, p in entry['rungs']}
+    rec['ladder_rung_chosen'] = chosen
+    rec['ladder_rung_reason'] = reason
+    rec['base_radius'] = entry['base_radius']
+    rec['base_verdict'] = 'Over cap (not asked)'
+    p, a = rec.get('predicted_points'), rec.get('points')
+    if isinstance(a, int) and isinstance(p, int) and p:
+        rec['actual_over_predicted'] = round(a / p, 4)
+        rec['within_A8_bound'] = abs(a / p - 1) <= 0.15
+    return rec
+
+
+def cmd_ladder(D, tid='1b', jobs=16, quiet=False, budget=None, show_plan=False):
+    """Phase B': the radius ladder for one field.  Resume = re-run the identical command; every rung is its own JSONL
+    record, so a kill at any instant redoes at most the balls in flight."""
+    import multiprocessing as mp
+    tier = tier_def(tid)
+    cap, wall = tier['point_cap'], tier['solve_wall']
+    plan, out = ladder_plan(D, tid)
+    out_file = field_dir(D) / 'balls.jsonl'
+    done = load_jsonl(out_file)
+    n_ask = sum(1 for e in plan.values() if e['askable'])
+    if not quiet or show_plan:
+        print(f'fs61 ladder d={D} tier={tid}: {len(plan)} rank-4 Open lattices in scope (over cap at '
+              f'R={tier["base_radius"]}), {len(out)} out of scope; {n_ask} with a rung under the {cap}-point cap; '
+              f'rungs {tier["ladder_radii"]}, wall {wall} s', flush=True)
+    if show_plan:
+        for key in sorted(plan, key=lambda k: (plan[k]['askable'] or [(0, 1 << 60)])[0][1]):
+            e = plan[key]
+            rung = f'R={e["askable"][0][0]} ({e["askable"][0][1]} pts)' if e['askable'] else 'none under the cap'
+            print(f'  {e["id"]}  rungs ' + ', '.join(f'{R}:{p}' for R, p in e['rungs']) + f'  -> {rung}', flush=True)
+        for key, why in sorted(out.items()):
+            print(f'  (out of scope) {short_id(key)}  {why}', flush=True)
+        print(f'DONE ladder --plan d={D}: {n_ask} balls the rule would ask', flush=True)
+        return []
+    counts, errs, t0, outside = collections.Counter(), [], time.time(), []
+    # (a) lattices with no rung under the cap: one over-cap record each, no enumeration and no solver
+    for key in sorted(plan):
+        e = plan[key]
+        if e['askable']:
+            continue
+        R, p = e['rungs'][0]
+        k = f'{key}|ball{R}'
+        if k in done and str(done[k].get('tier')) == str(tid) and _settled_at(done[k], cap, wall):
+            continue
+        rec = _ladder_decorate({'key': k, 'lattice': key, 'id': e['id'], 'D': D, 'shape': 'ball', 'R': R, 'tier': tid,
+                                'tier_sha256': tier['_sha256'], 'machine': MACHINE, 'wall': wall, 'cap': cap,
+                                'predicted_points': p, 'verdict': 'Over cap (not asked)',
+                                'over_cap_by': 'prediction', 'claim_scope': 'float reading'},
+                               e, 'no rung fits the cap by prediction', None)
+        append(out_file, rec)
+        done[k] = rec
+        counts[rec['verdict']] += 1
+    # (b) the ladder proper: walk the rungs, descending only when a rung's EXACT count overflows the cap
+    for _ in range(len(tier['ladder_radii']) + 1):
+        work, meta = [], {}
+        for key in sorted(plan):
+            e = plan[key]
+            i = 0
+            while i < len(e['askable']):
+                R, _p = e['askable'][i]
+                prev = done.get(f'{key}|ball{R}')
+                if prev is None or str(prev.get('tier')) != str(tid) or not _settled_at(prev, cap, wall):
+                    break
+                if prev['verdict'] == 'Over cap (not asked)' and prev.get('over_cap_by') == 'exact':
+                    i += 1
+                    continue
+                i = None
+                break
+            if i is None or i >= len(e['askable']):
+                continue
+            R, p = e['askable'][i]
+            reason = ('the first rung whose prediction fits the cap' if i == 0 else
+                      f'descended: the exact count at R={e["askable"][i - 1][0]} exceeded the cap')
+            work.append(_ladder_work(D, e, R, p, tid, tier['_sha256'], cap, wall))
+            meta[f'{key}|ball{R}'] = (e, reason, R)
+        if not work:
+            break
+        with mp.get_context('fork').Pool(min(jobs, len(work))) as P:
+            for rec, model in P.imap_unordered(_ball_worker, work):
+                e, reason, R = meta[rec['key']]
+                rec = _ladder_decorate(rec, e, reason, R)
+                if model is not None:
+                    with gzip.open(model_path(D, rec['model_sha256']), 'wb') as f:
+                        f.write(model)
+                append(out_file, rec)
+                done[rec['key']] = rec
+                counts[rec['verdict']] += 1
+                if rec['verdict'] == 'ERROR':
+                    errs.append((rec['key'], rec.get('error')))
+                    defect(f'ladder d={D} {rec["key"]}: {rec.get("error")}')
+                if rec.get('within_A8_bound') is False:
+                    outside.append(rec)
+                    print(f'  NOTE d={D} {rec["id"]} R={R}: {rec["points"]} points against {rec["predicted_points"]} '
+                          f'predicted, ratio {rec["actual_over_predicted"]} -- outside A.8\'s 15 % bound, a FINDING '
+                          f'(the owner\'s B\'.1), not a defect', flush=True)
+                if rec['verdict'] in ('Refused (solver claim)', 'Unknown (budget)', 'Over cap (not asked)') and not quiet:
+                    print(f'  {rec["id"]} R={R} {rec.get("points")} points {rec.get("edges", "-")} edges '
+                          f'-> {rec["verdict"]} [{rec.get("solve_seconds", "-")} s]', flush=True)
+                if budget and time.time() - t0 > budget:
+                    print(f'  budget {budget} s reached: stopping (resume = re-run this command)', flush=True)
+                    P.terminate()
+                    break
+        if budget and time.time() - t0 > budget:
+            break
+    # (c) the bonus ask below a refusal, as phase B's onset radii were: a smaller refusing ball for phase C
+    for key in sorted(plan):
+        e = plan[key]
+        for i, (R, _p) in enumerate(e['askable']):
+            rec = done.get(f'{key}|ball{R}')
+            if rec is None or str(rec.get('tier')) != str(tid) or not rec['verdict'].startswith('Refused'):
+                continue
+            if i + 1 >= len(e['askable']):
+                continue
+            R2, p2 = e['askable'][i + 1]
+            if f'{key}|ball{R2}' in done:
+                continue
+            w = _ladder_work(D, e, R2, p2, tid, tier['_sha256'], cap, ONSET_WALL)
+            r2, model = _ball_worker(w)
+            r2 = _ladder_decorate(r2, e, f'onset follow-up below the refusal at R={R}', R2)
+            if model is not None:
+                with gzip.open(model_path(D, r2['model_sha256']), 'wb') as f:
+                    f.write(model)
+            append(out_file, r2)
+            done[r2['key']] = r2
+            counts[r2['verdict']] += 1
+            print(f'  {r2["id"]} R={R2} (onset) {r2.get("points")} points -> {r2["verdict"]}', flush=True)
+    # (d) refusal is inherited upward
+    filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+    prop = propagate_refusal(D, filt, load_jsonl(out_file))
+    if not quiet:
+        print(f'DONE ladder d={D}: ' + (', '.join(f'{v} {k}' for k, v in sorted(counts.items())) or 'nothing to ask')
+              + f'; {prop} lattices Refused (inherited); {len(outside)} outside A.8; {len(errs)} defects; '
+              f'{time.time() - t0:.0f} s', flush=True)
+    return errs
+
+
+def cmd_ladder_all(fields=None, tid='1b', jobs=16, budget=None):
+    """Phase B' over the whole family in ascending d, resumable by re-running the identical command."""
+    fields = fields or FAMILY_500
+    state = FS61 / f'ladder-progress-{tid}.jsonl'
+    done = load_jsonl(state)
+    scope = {}
+    for D in fields:
+        plan, _ = ladder_plan(D, tid)
+        if plan:
+            scope[D] = sum(1 for e in plan.values() if e['askable'])
+    print(f'fs61 ladder-all tier={tid}: {len(fields)} fields, {len(scope)} with a lattice in scope, '
+          f'{sum(scope.values())} balls the rule would ask; {len(done)} fields already complete. '
+          f'Resume = re-run this identical command.', flush=True)
+    errs, t0 = [], time.time()
+    for D in sorted(scope, key=lambda d: (scope[d] == 0, d)):
+        if str(D) in done:
+            continue
+        t1 = time.time()
+        e = cmd_ladder(D, tid, jobs=jobs, budget=budget)
+        append(state, {'key': str(D), 'd': D, 'seconds': round(time.time() - t1, 1), 'defects': len(e),
+                       'tier': tid, 'machine': MACHINE})
+        errs += e
+    print(f'DONE ladder-all: {len(scope)} fields, {(time.time() - t0) / 60:.1f} min, {len(errs)} defects', flush=True)
+    return errs
+
+
 def cmd_census(fields=None, tid='1', jobs=16, budget=7200, projection_after=6):
     """Tier 1 over the family in ascending d, resumable.  Prints a projection after the first few fields so the tier
     can be re-planned before a day of machine time is spent rather than after (the owner's instruction, 2026-09-20)."""
@@ -2330,11 +2736,56 @@ suffice — the conjecture predicts at least four for every row of this table.**
   count suggests**.
 * **bracket** — the refusal bracket of the best lattice: (largest radius verified colourable, smallest refused).
 * **state** — `Landed (certified)` only when the frozen checker printed CERTIFIED; `Refusal claimed` is a solver's
-  word; `Not landed at tier 1` is a null at a depth.
-* **evidence** — `kernel` (11 only), `checker`, `solver claim`, or `none`.
+  word; `Not landed at tier T` is a null at a depth, and it always says **which kind of null** (the owner's ruling 6,
+  2026-09-20), because the three are different knowledge:
+  * `(by certificate)` — the field has **no** open lattice left at this depth: every one carries a verified
+    3-colouring of its whole infinite graph. More solver time at this depth is worth nothing; only deeper lattices
+    (more classes, a larger `NMAX`) can land it.
+  * `(by budget: k Open lattices, none askable)` — open lattices remain and **not one of them was ever put to a
+    solver**: every ball the tier would build is over its point cap. Nothing about the field was measured.
+  * `(asked: j of k Open lattices, no refusal)` — open lattices were asked and none refused at this depth.
+* **evidence** — what backs **this row's** lower bound: `checker` (the frozen independent checker certified the
+  witness in `data/fs61/witness-<d>/`), `solver claim` (a refusal no checker has confirmed), or `none`.
+  **No row of this table is kernel-checked**; see the note under the table for `d = 11`.
 * **value** — the bracket on `χ(ℚ(√d)²)` with a source for each end.
 
 '''
+
+
+CENSUS_KERNEL_NOTE = '''
+**The kernel and this table.** **No row above is kernel-checked.** The Lean kernel does hold `χ(ℚ(√11)²) ≥ 4` —
+`four_le_chromaticNumber_planeOver_eleven`, in `Proofs/HadwigerNelson/Instances/SqrtEleven.lean` — but it holds it
+from FS-58's **204-point chain witness**, which is a *different graph* from the **189-point direct witness** this
+census certified at `d = 11` (`data/fs61/witness-11/`). Every `evidence` cell above reading `checker` means the
+frozen independent checker `tools/fs58_check_witness.py` printed `CERTIFIED` on that row's own witness, and nothing
+more.
+'''
+
+
+def deepen_command(D, tid, why):
+    """M3.7: a null row carries the command that would turn it into an answer.  Which command depends on WHY the null
+    is a null -- a field closed by certificates needs deeper lattices, one closed by the cap needs a bigger budget."""
+    if str(tid) == '1' and (why or '').startswith('by budget'):
+        plan, _ = ladder_plan(D, '1b')
+        if any(e['askable'] for e in plan.values()):
+            return f'python3 tools/fs61_census.py ladder {D}'
+    return f'python3 tools/fs61_census.py census-field {D} --tier 2'
+
+
+def field_not_landed_reason(lat, filt, balls):
+    """The owner's ruling 6, plus the case its two phrases do not cover.  A field that has not landed is in exactly one
+    of three states, and merging any two of them repeats phase 0's 1,350-against-550 error one level up:
+      no open lattice at all          -> the null is BY CERTIFICATE
+      open lattices, none ever asked  -> the null is BY BUDGET, and nothing about the field was measured
+      open lattices, some asked       -> the null is a measurement: they were asked and did not refuse."""
+    open4 = [k for k, f in filt.items() if f['state'].startswith('Open') and lat.get(k, {}).get('rank') == 4]
+    if not open4:
+        return 'by certificate'
+    asked = {b['lattice'] for b in balls.values()
+             if b['lattice'] in open4 and b['verdict'] != 'Over cap (not asked)'}
+    if not asked:
+        return f'by budget: {len(open4)} Open lattices, none askable'
+    return f'asked: {len(asked)} of {len(open4)} Open lattices, no refusal'
 
 
 def census_rows(tid='1'):
@@ -2374,7 +2825,9 @@ def census_rows(tid='1'):
         wit = certified_field(D, landings)
         fr = frame.get(D, {})
         L = fr.get('L') or (f"[{fr.get('L_lower')}, {fr.get('L_upper') or '?'}]" if fr else None)
-        state = ('Landed (certified)' if wit else 'Refusal claimed' if hi is not None else f'Not landed at tier {tid}')
+        why = None if (wit or hi is not None) else field_not_landed_reason(lat, filt, balls)
+        state = ('Landed (certified)' if wit else 'Refusal claimed' if hi is not None
+                 else f'Not landed at tier {tid} ({why})')
         ck = fr.get('chi_known')
         rows.append({'key': str(D), 'd': D, 'mod8': D % 8, 'L': L, 'L_prime': fr.get('L_prime'),
                      'N1': atlas.get(D, {}).get('N1'), 'N3': atlas.get(D, {}).get('N3'),
@@ -2385,10 +2838,15 @@ def census_rows(tid='1'):
                      'refused': v['Refused (solver claim)'], 'colourable': v['Colourable (colouring verified)'],
                      'bracket': [lo, hi], 'best_refusing': (best or {}).get('id'),
                      'best_refusing_points': (best or {}).get('points'),
-                     'state': state, 'evidence': 'kernel' if (wit and D == 11) else 'checker' if wit
-                                                 else 'solver claim' if hi is not None else 'none',
+                     'state': state, 'not_landed_reason': why,
+                     # `evidence` is about THIS row's witness.  d = 11 is NOT `kernel` here: the kernel's
+                     # four_le_chromaticNumber_planeOver_eleven rests on FS-58's 204-point CHAIN witness, a different
+                     # graph from the 189-point direct witness certified in data/fs61/witness-11 -- see the note under
+                     # the table.  (Plan section 7 wrote `kernel (11 only)` before this census produced its own
+                     # witness over 11; the owner's correction, 2026-09-20.)
+                     'evidence': 'checker' if wit else 'solver claim' if hi is not None else 'none',
                      'value': [4 if hi is not None else None, L], 'chi_known': ck,
-                     'deepen': (f'python3 tools/fs61_census.py census-field {D} --tier 2'
+                     'deepen': (deepen_command(D, tid, why)
                                 if state.startswith('Not landed') else
                                 f'python3 tools/fs61_census.py land {D}' if state == 'Refusal claimed' else ''),
                      'tier': tid, 'machine': MACHINE,
@@ -2396,14 +2854,45 @@ def census_rows(tid='1'):
     return rows
 
 
-def cmd_table(check=False, tid='1'):
+def tier_accounting(D, tid, lat, filt, balls):
+    """One tier's own accounting rule: has it asked everything its definition says it would ask?  A tier with a radius
+    ladder is checked against `ladder_plan`, re-derived here from the covolumes and the cap; a tier without one is
+    checked against its base radius, which is what phase B's B.1 asked for."""
+    tier = tier_def(tid)
+    bad = []
+    if 'ladder_radii' in tier:
+        plan, _ = ladder_plan(D, tid)
+        for key in sorted(plan):
+            ok, why = ladder_status(plan[key], balls, tid)
+            if not ok:
+                bad.append((D, f'{plan[key]["id"]} tier-{tid} ladder incomplete: {why}'))
+                defect(f'table --check d={D}: lattice {plan[key]["id"]} tier-{tid} ladder incomplete -- {why}')
+    else:
+        R0 = tier['radii'][0]
+        for key, f in filt.items():
+            if f['state'].startswith('Open') and lat[key]['rank'] == 4 and f'{key}|ball{R0}' not in balls:
+                bad.append((D, f'{f["id"]} Open with no R={R0} record'))
+                defect(f'table --check d={D}: lattice {f["id"]} is Open with no R={R0} ball record')
+    return bad
+
+
+def cmd_table(check=False, tid=None):
+    tid = str(tid) if tid else deepest_tier_present()
     rows = census_rows(tid)
     out_j, out_m = FS61 / 'census.jsonl', FS61 / 'census.md'
     if out_j.exists():
         out_j.unlink()
     for r in rows:
         append(out_j, r)
+    T = tiers()
     L = [CENSUS_LEGEND.format(machine=MACHINE),
+         f'**The depth this table is at: tier `{tid}`** — the deepest tier with ball records, read from the records '
+         f'themselves. Tier definitions live in `data/fs61/tiers.json` and never change after their first record:',
+         ''] + [f'* **tier `{t}`** — {T[t]["name"]}: lattices to `NMAX = {T[t]["nmax"]}`, radii '
+                f'{T[t].get("ladder_radii") or T[t]["radii"]}, point cap {T[t]["point_cap"]:,}, solve wall '
+                f'{T[t]["solve_wall"]} s.' + (f' Scope: {T[t]["scope"]}' if T[t].get('scope') else '')
+                for t in tiers_upto(tid)] + [
+         '',
          '| d | mod 8 | L | N₁ | N₃ | lattices (C2/C3/Cq/R/O) | balls asked / over cap / unknown | bracket | '
          'state | evidence | value | what would deepen it |', '|---|---|---|---|---|---|---|---|---|---|---|---|']
     for r in rows:
@@ -2414,13 +2903,17 @@ def cmd_table(check=False, tid='1'):
                  f"{r['bracket'][0] or '–'} … {r['bracket'][1] or '–'} | {r['state']} | {r['evidence']} | "
                  f"{'4 ≤ χ ≤ ' + str(r['L']) if r['value'][0] else '≤ ' + str(r['L'])} | "
                  f"`{r['deepen']}`" + ' |')
-    tot = collections.Counter(r['state'] for r in rows)
-    L += ['', f"**{len(rows)} fields.** " + '; '.join(f'{n} {s}' for s, n in sorted(tot.items())) + '.',
+    tot = collections.Counter(r['state'].split(' (')[0] if r['state'].startswith('Not landed') else r['state']
+                              for r in rows)
+    kinds = collections.Counter(r['not_landed_reason'].split(':')[0] for r in rows if r['not_landed_reason'])
+    L += ['', f"**{len(rows)} fields.** " + '; '.join(f'{n} {s}' for s, n in sorted(tot.items())) + '.'
+          + (' Of the nulls: ' + ', '.join(f'{n} {k}' for k, n in sorted(kinds.items())) + '.' if kinds else ''),
           f"Balls on the census population (lattices the filter left open): "
           f"{sum(r['census_ball_records'] for r in rows)} records, **{sum(r['census_balls_asked'] for r in rows)} asked**, "
           f"{sum(r['census_over_cap'] for r in rows)} over cap, {sum(r['census_unknown'] for r in rows)} unknown. "
           f"Counting every record, including the balls phase 0's paired controls asked on already-certified lattices at "
-          f"d = 47: {sum(r['ball_records'] for r in rows)} records, {sum(r['balls_asked'] for r in rows)} asked.", '']
+          f"d = 47: {sum(r['ball_records'] for r in rows)} records, {sum(r['balls_asked'] for r in rows)} asked.",
+          CENSUS_KERNEL_NOTE]
     out_m.write_text('\n'.join(L) + '\n')
     print(f'fs61 table: {len(rows)} fields -> {rel(out_m)}, {rel(out_j)}', flush=True)
     if not check:
@@ -2434,13 +2927,11 @@ def cmd_table(check=False, tid='1'):
             defect(f'table --check d={r["d"]}: {sum(k.values())} filtered states against {r["lattices"]} lattices')
         fd = field_dir(r['d'])
         lat, filt, balls = load_jsonl(fd / 'lattices.jsonl'), load_jsonl(fd / 'filter.jsonl'), load_jsonl(fd / 'balls.jsonl')
-        for key, f in filt.items():
-            if f['state'].startswith('Open') and lat[key]['rank'] == 4:
-                if f'{key}|ball{tier_def(tid)["radii"][0]}' not in balls:
-                    bad.append((r['d'], f'{f["id"]} Open with no R=1.5 record'))
-                    defect(f'table --check d={r["d"]}: lattice {f["id"]} is Open with no R=1.5 ball record')
+        for t in tiers_upto(tid):                      # every tier at or above this one is held to its own accounting
+            bad += tier_accounting(r['d'], t, lat, filt, balls)
         bad += monotonicity_check(r['d'], lat, filt, balls)
-    print(f'DONE table --check: {len(rows)} fields, {len(bad)} defects', flush=True)
+    print(f'DONE table --check: {len(rows)} fields at tier {tid} (accounting checked at '
+          f'{", ".join(tiers_upto(tid))}), {len(bad)} defects', flush=True)
     return bad
 
 
@@ -2787,7 +3278,11 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     rec = {'key': str(D) if ball_rank == 0 else f'{D}#rank{ball_rank}', 'd': D, 'ball_rank': ball_rank,
            'spec': spec, 'R': R, 'ball_points': pts_n, 'lattice': b['lattice'],
            'ball_solve_seconds': b.get('solve_seconds'), 'selection': 'points x (solve_seconds + 0.5)',
-           'generator': 'extract' if big else 'direct-witness', 'machine': MACHINE, 'tier': tid}
+           'generator': 'extract' if big else 'direct-witness', 'machine': MACHINE, 'tier': tid,
+           # The tier that ASKED the ball this witness comes from, read off the ball's own record.  `tier` above is
+           # only the flag the command was given, and the two differ as soon as a later tier finds the refusal --
+           # which is what phase B' (tier 1b) can do (2026-09-20).
+           'ball_tier': b.get('tier'), 'ball_tier_sha256': b.get('tier_sha256')}
     # Re-ask only with a bigger budget -- FS-58's rule for `Unknown` balls, applied to the deletion.  A witness
     # whose deletion was stopped is not final: a larger `--deletion-budget` than the one that produced it is a
     # request to shrink it further, and skipping generation because witness.json exists would silently ignore the
@@ -2939,6 +3434,19 @@ def _c4b_readme(rec):
     return 'it was not reached'
 
 
+def _kernel_note(D):
+    """d = 11 is the one field where a kernel theorem exists, and it is about a DIFFERENT GRAPH.  A reader who meets
+    `χ(ℚ(√11)²) ≥ 4` in two places must not conclude that this witness is the kernel-checked one (the owner's
+    correction, 2026-09-20)."""
+    if D != 11:
+        return ''
+    return ('\n\nA kernel proof of this field\'s lower bound does exist — `four_le_chromaticNumber_planeOver_eleven` '
+            'in `Proofs/HadwigerNelson/Instances/SqrtEleven.lean` — but it is **not about this graph**. It rests on '
+            'FS-58\'s **204-point chain witness**, built by a different route (a forcer copied along a chain, not a '
+            'ball of a lattice). The 189 points here are this census\'s own, and they are certified by the checker '
+            'above and by nothing stronger.')
+
+
 def _gate_caveat(rec):
     """A reviewer reads this file, so a gate item that did not go green belongs in it -- above the claims, not in a
     phase record they will never open."""
@@ -2979,6 +3487,8 @@ exit 1.
 
 {_gate_caveat(rec)}**What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
 `χ(ℚ(√{D})²) ≤ {fr['L']}`. With it, **{rec['value']}**. Nothing here proves the upper bound.
+**And nothing here is checked by the Lean kernel**: the certificate above is the standard-library checker's, and that
+is a different and weaker thing.{_kernel_note(D)}
 
 **What else was checked** (each file below is in this directory, the verbatim output of the command named):
 
@@ -3069,11 +3579,27 @@ def cmd_land_readme(fields=None):
 LAND_ORDER = [359, 11, 119, 143, 47, 95, 191, 71, 23]     # the owner's priority: the four with no certificate first
 
 
+def land_order(refusing=None, quiet=False):
+    """Every field with a refusing ball on record, in the owner's phase-C priority order, with any field that has
+    refused SINCE that order was written appended and announced.  Read from the records, because a hardcoded list
+    silently skips a field a later tier lands -- which is exactly what phase B' can produce.
+    `refusing` is for the selftest: it plants a refusing field the committed order does not know about."""
+    if refusing is None:
+        refusing = {D for D in FAMILY_500
+                    if any(b['verdict'].startswith('Refused')
+                           for b in load_jsonl(field_dir(D) / 'balls.jsonl').values())}
+    extra = sorted(D for D in refusing if D not in LAND_ORDER)
+    if extra and not quiet:
+        print(f'fs61 land-all: {len(extra)} field(s) refusing since the phase-C priority order was written, '
+              f'appended: {extra}', flush=True)
+    return LAND_ORDER + extra
+
+
 def cmd_land_all(fields=None, tid='1', deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
                  direct_wall=DIRECT_WALL):
     """Phase C over every refusing field, resumable: a field whose landing record says CERTIFIED is skipped."""
     done = load_jsonl(FS61 / 'landings.jsonl')
-    todo = fields or LAND_ORDER
+    todo = fields or land_order()
     already = [d for d in todo if done.get(str(d), {}).get('result') == 'CERTIFIED']
     print(f'fs61 land-all: {len(todo)} fields in the order {todo}; {len(already)} already certified {already}, '
           f'{len(todo) - len(already)} to do. Deletion budget {deletion_budget:.0f} s per field, generation cap '
@@ -3120,6 +3646,14 @@ def main():
     p.add_argument('--tier', default='1'); p.add_argument('--jobs', type=int, default=16)
     p.add_argument('--budget', type=float, default=7200); p.add_argument('--fields', type=int, nargs='*')
 
+    p = sub.add_parser('ladder', help="phase B': the radius ladder for one field (tier 1b), resumable")
+    p.add_argument('d', type=int); p.add_argument('--tier', default='1b'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float, help='stop asking after this many seconds (resume = re-run)')
+    p.add_argument('--plan', action='store_true', help='print the rung the rule selects for every lattice; ask nothing')
+    p = sub.add_parser('ladder-all', help="phase B' over the whole family in ascending d, resumable")
+    p.add_argument('--tier', default='1b'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float); p.add_argument('--fields', type=int, nargs='*')
+
     p = sub.add_parser('scan', help='ask whether balls of the field\'s lattices are 3-colourable')
     p.add_argument('d', type=int); p.add_argument('--tier', default='1'); p.add_argument('--filter-off', action='store_true')
     p.add_argument('--key'); p.add_argument('--radius', type=float, action='append')
@@ -3147,7 +3681,8 @@ def main():
     sub.add_parser('dead-quotients', help="A.6: which quotients kill, from FS-58's qscreen records")
     sub.add_parser('minimal-quotient', help='A.7: the group behind a dead lattice\'s periodic 3-colouring')
     p = sub.add_parser('table', help='the derived census table (never hand-edited)')
-    p.add_argument('--check', action='store_true'); p.add_argument('--tier', default='1')
+    p.add_argument('--check', action='store_true')
+    p.add_argument('--tier', default=None, help='default: the deepest tier with ball records, read from the records')
     budget_help = ('seconds of one-vertex-at-a-time deletion per field before the generator is stopped and the '
                    'witness emitted from its last checkpoint; minimality is recorded, never required (gate C.9)')
     cap_help = 'a backstop on one field\'s whole generation call; 0 disables it. A field it stops stays resumable'
@@ -3180,6 +3715,10 @@ def main():
         bad = cmd_census_field(a.d, a.tier, jobs=a.jobs, budget=a.budget)
     elif a.cmd == 'census':
         bad = cmd_census(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget)
+    elif a.cmd == 'ladder':
+        bad = cmd_ladder(a.d, a.tier, jobs=a.jobs, budget=a.budget, show_plan=a.plan)
+    elif a.cmd == 'ladder-all':
+        bad = cmd_ladder_all(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget)
     elif a.cmd == 'table':
         bad = cmd_table(check=a.check, tid=a.tier)
     elif a.cmd == 'scan':
