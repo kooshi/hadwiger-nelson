@@ -6,6 +6,15 @@ Understanding so far: `CLAUDE.md` G48, G55, G60, G61, ledger rows 72–73. Statu
 [measured], [hand], [reading], [method]). **This file is written as a complete letter to an implementer who arrives with no memory of
 any conversation**, and to a product owner who scores each phase from artifacts and logs, never from a report's summary.*
 
+> **APPROVED by the product owner, 2026-09-19, as written** (plan at `f7d94f7`). Read cold; every gate in §6 is scoreable from a
+> named artifact. Checked independently before approval, first-hand: the zbMATH record for `[Fischer1994]` (verbatim as §PA-R quotes
+> it; `p = 3`, `q = 11` meet all three congruences); `[Fischer1990]` Thm 6 and the sentence after Thm 9, in the held PDF's text layer;
+> the `L ≥ 5` classes `d ≡ 47, 143, 167 (mod 168)`, re-derived by hand; and O6's atlas rows by a separate brute-force enumeration —
+> `D(6) ∩ family = {11, 35}`, `D(18) ∩ family = {11, 35, 155, 203, 299, 323}` (all `≡ 3 mod 8`), `D(24)` all `≡ 7 mod 8`, and
+> **`D(12) = {23, 47, 71, 95, 119, 143}` over *every* squarefree `d`, not only within the family**. The planner's three corrections
+> to the opening brief (the `mod 84` reading, "never tried" at 35 and 59, the stub's jackpot sentence) stand, and are its findings.
+> Decisions A–M stand. From here the implementer writes §R only; a change to §0–§9 is proposed to the owner, not made.
+
 ## §0 Read this first
 
 **What the milestone is, in plain words.** Colour every point of the plane whose two coordinates lie in the number field `ℚ(√d)` so
