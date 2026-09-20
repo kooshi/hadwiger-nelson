@@ -758,6 +758,7 @@ def cmd_status(fields):
         print('fs61 status: no fields on disk yet')
         return []
     print(f'fs61 status: {len(fields)} fields with records under {rel(FS61 / "fields")}', flush=True)
+    landings = load_jsonl(FS61 / 'landings.jsonl')
     rows = []
     for D in fields:
         lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
@@ -768,7 +769,7 @@ def cmd_status(fields):
             st[r['state']] = st.get(r['state'], 0) + 1
         for r in balls.values():
             bv[r['verdict']] = bv.get(r['verdict'], 0) + 1
-        wit = (FS61 / f'witness-{D}' / 'certified.out').exists()
+        wit = certified_field(D, landings)
         rows.append({'d': D, 'lattices': len(lat), 'states': st, 'balls': bv, 'witness': wit})
         print(f'  d={D:4d}: {len(lat):4d} lattices ({", ".join(f"{v} {k}" for k, v in sorted(st.items())) or "not filtered"}); '
               f'balls {", ".join(f"{v} {k}" for k, v in sorted(bv.items())) or "none asked"}; '
@@ -784,6 +785,18 @@ FS58_REFUSALS = [(47, 'q1+12+60', 1.5, 8629, 41144), (71, 'q1+q5+60.2+120.2', 1.
                  (95, 'q1+12+60.2', 1.5, 17169, 82206), (191, 'q1+q5+20+60.1', 1.5, 53177, 325524),
                  (23, 'q1+q5+12.1+60.2', 1.3, 248213, 1220300)]
 FS58_WITNESSES = [23, 47, 71, 95, 191]
+
+
+def certified_field(D, landings=None):
+    """Is `d` **landed**?  On the checker's VERDICT, never on a file existing: `land` writes certified.out whatever
+    the checker says, so an `.exists()` test would promote a REFUSED run to `Landed (certified)` (fixed 2026-09-20,
+    found while phase C's first field ran).  Both halves must agree -- the landing record's own result, and the
+    first line of the checker's committed output."""
+    cf = FS61 / f'witness-{D}' / 'certified.out'
+    if landings is None:
+        landings = load_jsonl(FS61 / 'landings.jsonl')
+    return (landings.get(str(D), {}).get('result') == 'CERTIFIED' and cf.exists()
+            and cf.read_text().lstrip().startswith('CERTIFIED'))
 
 
 def regress_dir():
@@ -1326,6 +1339,23 @@ def selftest_land(rnd):
         msg = _repair_steps(good)
         rows.append(('PLANT (checkpoint): a truncated final record is dropped, loudly, and nothing else is',
                      msg is not None and good.read_bytes() == clean and _deletion_state(good) == (7, False), msg))
+    # --- `Landed (certified)` reads the checker's VERDICT, not a file's existence.  Both outcomes reachable on the
+    #     real data: a landed field and the same field with each half of the test spoiled in turn.
+    landings = load_jsonl(FS61 / 'landings.jsonl')
+    cert = [d for d in LAND_ORDER if certified_field(d, landings)]
+    rows.append(('the landed set is read from the landing records and the checker\'s own first line',
+                 True, f'{len(cert)} of {len(LAND_ORDER)} fields landed: {cert}'))
+    if cert:
+        d0 = cert[0]
+        rows.append((f'PLANT (landing): d={d0} with its landing record result mangled is NOT landed',
+                     not certified_field(d0, dict(landings, **{str(d0): dict(landings[str(d0)],
+                                                                            result='INCOMPLETE')})),
+                     'a record that does not say CERTIFIED cannot promote a field'))
+    else:
+        rows.append(('PLANT (landing): no field is landed yet, so an existing certified.out alone does not land one',
+                     not any((FS61 / f'witness-{d}' / 'certified.out').exists() and certified_field(d, landings)
+                             for d in LAND_ORDER),
+                     'both halves of the test are required'))
     # --- the stop-by-pid verification.  Both outcomes reachable on a real child: a live writer's digest MOVES, and
     #     the same child stopped by pid leaves it static.  (Never a pattern match: `p.pid`, and `p.wait()` reaps it.)
     with tempfile.TemporaryDirectory() as td:
@@ -2278,6 +2308,7 @@ suffice — the conjecture predicts at least four for every row of this table.**
 def census_rows(tid='1'):
     frame = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'frame.jsonl')} if (FS61 / 'frame.jsonl').exists() else {}
     atlas = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'atlas.jsonl')} if (FS61 / 'atlas.jsonl').exists() else {}
+    landings = load_jsonl(FS61 / 'landings.jsonl')
     rows = []
     for D in FAMILY_500:
         fd = field_dir(D)
@@ -2308,7 +2339,7 @@ def census_rows(tid='1'):
         col = [b for b in balls.values() if b['verdict'] == 'Colourable (colouring verified)']
         lo = max((b['R'] for b in col), default=None)
         hi = min((b['R'] for b in balls.values() if b['verdict'].startswith('Refused')), default=None)
-        wit = (FS61 / f'witness-{D}' / 'certified.out').exists()
+        wit = certified_field(D, landings)
         fr = frame.get(D, {})
         L = fr.get('L') or (f"[{fr.get('L_lower')}, {fr.get('L_upper') or '?'}]" if fr else None)
         state = ('Landed (certified)' if wit else 'Refusal claimed' if hi is not None else f'Not landed at tier {tid}')
@@ -2661,18 +2692,25 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
                 'lcm_denominator': math.lcm(*[p[4] for p in pts]),
                 'witness_sha256': hashlib.sha256((out / 'witness.json').read_bytes()).hexdigest()})
     steps = {}
-    def run(name, cmd, want, fname):
+    def run(name, cmd, want, fname, where='first'):
+        """`want` = (the marker, the expected exit-zero-ness); `where` says which line carries it.  The frozen
+        checker puts its verdict on the FIRST line, but `--controls` prints one `[PASS] …` row per planted fault
+        and its verdict `CONTROLS ALL PASS` on the LAST -- so a first-line test can never see it, which is what
+        it did until 2026-09-20.  The exit status is read from the command, never through a pipe (rule 8)."""
         p = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
         (out / fname).write_text(p.stdout + p.stderr)
-        line = (p.stdout.strip().splitlines() or [''])[0]
+        lines = p.stdout.strip().splitlines() or ['']
+        line = lines[0] if where == 'first' else lines[-1]
         ok = (p.returncode == 0) == want[1] and line.startswith(want[0])
-        steps[name] = {'exit': p.returncode, 'line': line[:200], 'ok': ok}
+        steps[name] = {'exit': p.returncode, 'line': line[:200], 'ok': ok, 'verdict_line': where,
+                       'rows': {'PASS': sum(1 for l in lines if l.lstrip().startswith('[PASS]')),
+                                'FAIL': sum(1 for l in lines if l.lstrip().startswith('[FAIL]'))}}
         print(f"    {name:22s} exit {p.returncode:2d}  {'PASS' if ok else 'FAIL'}  {line[:96]}", flush=True)
         return ok
     CK = [sys.executable, str(ROOT / 'tools' / 'fs58_check_witness.py')]
     ok = run('C.1 certificate', CK + ['--radicand', str(D), str(out / 'witness.json')], ('CERTIFIED', True), 'certified.out')
     ok &= run('C.2 planted faults', CK + ['--radicand', str(D), '--controls', str(out / 'witness.json')],
-              ('CONTROLS ALL PASS', True), 'controls.out')
+              ('CONTROLS ALL PASS', True), 'controls.out', where='last')
     ok &= run('C.3 wrong radicand', CK + ['--radicand', str(D + 12), str(out / 'witness.json')], ('REFUSED', False),
               'wrong-radicand.out')
     ok &= run('C.4 second opinion', [sys.executable, str(ROOT / 'tools' / 'fs58_recheck_witness.py'), str(D),
@@ -2767,7 +2805,7 @@ exit 1.
 | file | command | result |
 |---|---|---|
 | `certified.out` | the checker above | `{rec['steps']['C.1 certificate']['line'][:60]}…` |
-| `controls.out` | `… --controls witness.json` | twelve planted faults, each refused for its named reason, and the faithful twin certified |
+| `controls.out` | `… --controls witness.json` | `{rec['steps']['C.2 planted faults']['line'][:40]}` — {rec['steps']['C.2 planted faults']['rows']['PASS']} rows pass, {rec['steps']['C.2 planted faults']['rows']['FAIL']} fail: the faithful twin certified, and each planted fault refused **for its named reason** |
 | `wrong-radicand.out` | `… --radicand {D + 12} witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
 | `recheck.out` | `tools/fs58_recheck_witness.py {D} witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
 | `colouring4.json` | — | an explicit proper **4**-colouring, verified on all {rec['edges']} edges: four colours suffice for this graph, so it is exactly 4-chromatic |
