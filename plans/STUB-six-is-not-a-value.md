@@ -1,4 +1,15 @@
-# FS-62 — six is not a value: χ(ℝ²) ∈ {5, 7} as a theorem target
+# FS-62 — six is not a value: does the function F ↦ χ(F²) omit six?
+
+> **CORRECTED AND DEMOTED 2026-09-19 — a frame, not a theorem target.** As minted, this stub's headline was an equivalence:
+> *no subfield of ℝ has χ(F²) = 6* ⟺ *χ(ℝ²) ∈ {5, 7}*, "Hadwiger–Nelson reduced from three values to two", with the wall at six as
+> its finite half. **Only one direction holds.** The strong statement implies the weak one trivially (ℝ is a subfield); nothing
+> gives the converse, and both lines of the original proof established the same implication. §1–§4 below are rewritten to the
+> corrected statements; §2a (why the wall exists) and §5 (prior art owed) stand as written, read as being about the *wall*, which is
+> a statement about fields and about the value set of `L` — not about the plane. What this cost: FS-57 and FS-65 were re-ranked as
+> "half of" a two-value Hadwiger–Nelson on 2026-09-17/18, and two days of compute at `q = 19` ran under that banner; their results
+> are sound and their stated bearing is withdrawn (`plans/FRONTIER-STUBS.md`). FS-53's plan had the careful version on 2026-09-15
+> (`plans/STUB-sixth-colour.md` §0.4: *"the first draft said χ(ℝ²) ∈ {5, 7}, which the weak conjecture does not give"*); this stub
+> regressed from it two days later.
 
 *Minted 2026-09-17, out of a conversation with Kooshi on where a six-chromatic structure could still hide once no real quadratic
 field turns out to need six. Read beside: `CLAUDE.md` G64 (the statement), G56 and G59 (the wall), G48 (the conjecture), G55 (the
@@ -7,30 +18,40 @@ chain theorem), `plans/STUB-plane-bridge.md` (FS-39), `plans/STUB-unit-vector-ri
 
 ---
 
-## 1. The question, and why it is the biggest one on the board
+## 1. The question, and what it is not
 
 Every time this project pins the chromatic number of a plane over a coefficient structure it gets **2, 3, 4, 5 or 7**. It has never
-once got 6, and by FS-53/FS-54/FS-56 the residue method *cannot* produce a 6: the local bound `L(F)` is never six, because no finite
-Euclidean plane is exactly six-chromatic anywhere the wall has been closed.
+once got 6, and by FS-53/FS-54/FS-56 the residue method can produce a 6 only through one of six undecided finite graphs: the local
+bound `L(F)` is six only if a window plane is exactly six-chromatic, and none has been found to be.
 
-The observation looks like a curiosity about small fields. It is not. **It is equivalent to a two-value Hadwiger–Nelson.**
+The observation is about the **value set of the function `F ↦ χ(F²)`**. It is tempting to read it as a statement about the plane.
+It is not one, and the two must be kept apart.
 
-> **Claim (modulo FS-39).** *No subfield `F ⊆ ℝ` has `χ(F²) = 6`* ⟺ `χ(ℝ²) ≠ 6` ⟺ **`χ(ℝ²) ∈ {5, 7}`**.
+> **S (strong — value omission).** No subfield `F ⊆ ℝ` has `χ(F²) = 6`.
+> **W (weak — the plane).** `χ(ℝ²) ∈ {5, 7}`.
 
-*Proof.* (⟸) `χ(ℝ²)` is the supremum of `χ(F²)` over subfields (FS-39). If no field attains 6, the supremum is not 6.
-(⟹) If `χ(ℝ²) = 6`, de Bruijn–Erdős gives a finite 6-chromatic unit-distance graph; its coordinates generate a number field `F`
-(FS-39's algebraic-drawing step); then `6 ≤ χ(F²) ≤ χ(ℝ²) = 6`. ∎
+* **S ⟹ W, trivially**: ℝ is a subfield of ℝ. Restricted to *number* fields, S ⟹ W is FS-39's bridge: if `χ(ℝ²) = 6`, de
+  Bruijn–Erdős gives a finite 6-chromatic unit-distance graph, its coordinates generate a number field `F`, and
+  `6 ≤ χ(F²) ≤ χ(ℝ²) = 6`.
+* **W ⟹ S is unproved, and nothing motivates it.** If the plane needs seven, a smaller field may perfectly well need exactly six;
+  `χ` is monotone up the tower of fields but its steps are irregular — one quadratic extension takes ℚ to ℚ(√11), 2 to 4.
+* **The exact form of W, given the bridge:**
 
-De Grey removed 4 in 2018. **Removing 6 would be the first narrowing of the interval since**, and it is a statement about fields —
-which is the one object this repository has a full instrument suite for.
+  > **`χ(ℝ²) ≠ 6` ⟺ every real number field `F` with `χ(F²) = 6` has a finite real extension `F′` with `χ(F′²) = 7`.**
+
+  *Proof.* (⟸) If `χ(ℝ²) = 6`, the bridge gives a number field `F` with `χ(F²) = 6`, and every real `F′ ⊇ F` has
+  `6 ≤ χ(F′²) ≤ χ(ℝ²) = 6`. (⟹) If `χ(ℝ²) ≠ 6` and some `χ(F²) = 6`, then `χ(ℝ²) = 7`, the bridge gives a number field `E` with
+  `χ(E²) = 7`, and the compositum `F′ = FE ⊆ ℝ` is finite over `F` with `χ(F′²) = 7`. ∎
+
+  Six is never where the climb *stops*. This restates Hadwiger–Nelson at the top rung; it is not a reduction of it.
 
 **Note what the claim is NOT.** Six-chromatic unit-distance *graphs* certainly exist if `χ(ℝ²) = 7`, by taking vertex-critical
-subgraphs. The claim is that the **function `F ↦ χ(F²)` omits the value 6**, which is a much stranger and much weaker-looking
-statement than "no six-chromatic graph exists".
+subgraphs. S says that the **function `F ↦ χ(F²)` omits the value 6** — stranger than "no six-chromatic graph exists", and,
+per the above, *stronger* than `χ(ℝ²) ≠ 6`, not a form of it.
 
 ---
 
-## 2. How it factors
+## 2. How S factors (and why none of this is about W)
 
 **(a) `χ(F²) ≤ L(F)` is a theorem** (ledger row 52; the field-level step is row 57's hand gap, which FS-47 closes). So **every field
 with a usable small prime is already excluded as a home for six** — no search needed, no conjecture needed. If `L(F) ≤ 5` then
@@ -40,26 +61,37 @@ with a usable small prime is already excluded as a home for six** — no search 
 floors 6, 6, 5, 6, 6, 6 and no six-colouring found at any of them. **This is a finite computation**, and FS-57 prices the two
 members within reach (47 and `U₆₄`).
 
-**(c) What is left is a gap theorem:**
+**(c) What is left of S is a gap theorem, in the field itself:**
 
 > **`χ(F²) ≥ 6 ⟹ χ(F²) ≥ 7`.**
 
-Combining (a) and (b): unconditionally, **the only fields that could have `χ(F²) = 6` are exactly the fields the conjecture
-predicts to be 7** — those with `L(F) ≥ 7`, where the arithmetic gives no bound below seven. Six hides nowhere else.
+Combining (a) with (b): **a field with `χ(F²) = 6` has `L(F) ≥ 6`, and `L(F) = 6` needs one of six named finite graphs to be
+six-chromatic.** If the wall holds, the only fields that could be six-chromatic are those with `L(F) ≥ 7` — exactly the fields the
+conjecture's bold form predicts to be 7. Under the bold form S *is* the wall; under the main clause alone, a six-chromatic window
+plane *is* a six-chromatic field (`ℚ(√2351)` if it is 47's), and S fails while W is untouched.
 
 **The engine for (c) is G55's chain theorem one rung up.** A pair forced equal at `k` colours at difference `δ` makes every
-`k`-colouring `δR`-periodic, and `1/δ ∈ R = ℤ[U]` gives `χ(F²) > k` with an explicit witness. So the gap theorem would follow from:
-*every 6-chromatic field graph carries a 6-colour forced pair at a `δ` with `1/δ ∈ ℤ[U]`*. That is this repository's own open
-structural question (`CLAUDE.md` § The open structural question — "is a pigeonhole necessary?") asked at six instead of five, and
-the only necessity theorem we hold (A1) is vacuous at the top rung.
+`k`-colouring `δR`-periodic, and `1/δ ∈ R = ℤ[U]` gives `χ(F²) > k` with an explicit witness *in `F`*. So the strong gap theorem
+would follow from: *every 6-chromatic field graph carries a 6-colour forced pair at a `δ` with `1/δ ∈ ℤ[U]`*.
+
+**W needs only the weak gap — and there the arithmetic hypothesis vanishes.** For `χ(ℝ²) ≠ 6` it suffices that some finite
+*extension* reaches 7, and the spindle (ledger row 44: a forced-equal pair at any `d ≥ 1/2` refutes `k`-colourability, in
+`F(√(4d² − 1))`) asks nothing of `δ`. `1/δ ∈ ℤ[U]` is the price of staying in the field, which only S pays. Either way the missing
+ingredient is the same — a six-colour forced pair in a six-chromatic field's fabric — and that is this repository's own open
+structural question (`CLAUDE.md` § The open structural question — "is a pigeonhole necessary?") asked at six instead of five; the
+only necessity theorem we hold (A1) is vacuous at the top rung.
+
+**And the wall is no part of W.** `χ(ℝ²)` is a supremum, and fields with `L ≥ 7` exist (`K(√7)`, de Grey's); whether some *other*
+field has `L = 6` cannot move it. FS-57's stub said so the day before this one was minted: the wall *"neither proves nor refutes
+χ(ℝ²) ≥ 6"*.
 
 ---
 
 ## 2a. Why the wall exists at all, and what that makes of (b)
 
 *Added 2026-09-18, out of a conversation with Kooshi that started on the complex plane and the quaternions. The conclusion is
-G59's; this section is the part that bears on FS-62, namely that (b) is one theorem plus two small cases rather than six
-certificates.*
+G59's; this section is about (b), the wall — one theorem plus two small cases rather than six certificates. Read 2026-09-19's
+banner first: (b) bears on S and on the value set of `L`, not on `χ(ℝ²)`.*
 
 **Normalize the independence number.** Write `c = α(UD(𝔽_q,2)) / q^{3/2}`. Since these graphs are vertex-transitive,
 `χ_f = q²/α` and `χ ≥ ⌈χ_f⌉`, so the colour count is `≈ √q / c`. Six therefore needs `c ≈ √q/6` — **a threshold that grows
@@ -142,29 +174,30 @@ graph chromatic number", which is what has been searched so far.
 
 | # | deliverable | cost | what it needs |
 |---|---|---|---|
-| D1 | **The equivalence, stated and proved in the kernel** — `chromaticNumber_plane_ne_six_of_no_field_six` and its converse | days | **FS-39** (the bridge) and de Bruijn–Erdős compactness; check Mathlib for the latter |
-| D2 | **The aiming corollary, unconditional** — `L(F) ≠ 6` for every `F` whose wall members are closed, hence the candidates for six are exactly the `L ≥ 7` fields | hours, once the wall is closed | **FS-47** (row 57's step at field level) |
-| D3 | **The conditional theorem** — *assuming the local–global conjecture and the wall, `χ(ℝ²) ≠ 6`* | days | D1 + D2; publishable as a statement about the conjecture even before the wall closes |
-| D4 | **The gap theorem**, or a sharply stated obstruction to it | open | the chain at six; a necessity theorem for compulsions at the top rung |
-| D5 | **The uniform independence bound** — `α(UD(𝔽_q,2)) ≤ 0.93·q^{3/2}` for odd `q ≥ 23`, or its counterexample. Closes **31, 43 and 47 in one theorem**, cutting (b) from six members to two | unknown, and **harder than "one theorem instead of three relaxations" suggests** — §2a(4) prices it | §2a above; a literature pass on independence numbers of subgroup-Cayley graphs over `𝔽_{q²}` |
+| D1 | **The exact equivalence in the kernel** — `χ(ℝ²) ≠ 6` ⟺ every six-chromatic number field has a seven-chromatic finite extension; and S ⟹ W for number fields | hours, **on top of FS-39**, where it belongs as a corollary | the bridge and de Bruijn–Erdős compactness; check Mathlib for the latter |
+| D2 | **The aiming corollary** — a six-chromatic field has `L(F) ≥ 6`; with the wall, `L(F) ≥ 7` | hours, once the wall is closed | **FS-47** (row 57's step at field level) |
+| ~~D3~~ | ~~The conditional theorem — *assuming the local–global conjecture and the wall, `χ(ℝ²) ≠ 6`*~~ **Withdrawn 2026-09-19: not a theorem target.** Under the conjecture's bold form `χ(K(√7)²) = 7`, so `χ(ℝ²) = 7` with no wall; under the main clause alone, fields with `L ≥ 7` are unconstrained and the conclusion does not follow even with the wall. What the conjecture plus the wall *does* give is S for fields with `L ≤ 6` — G59's `χ(F²) ∈ {2, 3, 4, 5, 7}` under the bold form — which is a statement about the fields and is already recorded | — | — |
+| D4 | **The gap theorem**, strong or weak, or a sharply stated obstruction to it | open | a necessity theorem for compulsions at the top rung |
+| D5 | **The uniform independence bound** — `α(UD(𝔽_q,2)) ≤ 0.93·q^{3/2}` for odd `q ≥ 23`, or its counterexample. Closes **31, 43 and 47 in one theorem**, cutting the wall from six members to two. **A wall result, not a plane result** | unknown, and **harder than "one theorem instead of three relaxations" suggests** — §2a(4) prices it; both routes to its killing test at 19 are characterised and closed (FS-65) | §2a above; a literature pass on independence numbers of subgroup-Cayley graphs over `𝔽_{q²}` |
 
-**D3 is the honest first target.** A conditional dichotomy resting on a conjecture verified at six fields and proved for `L ≤ 5`
-(G55) is a real result and states clearly what it depends on. D4 is the real prize and may be out of reach.
+**There is no cheap theorem here.** D1 is a corollary of another stub, D3 is withdrawn, D4 is the open problem, D5 is a long shot
+about the wall. What the frame is good for: keeping S and W apart, and §5's gate — *has anyone asked for the image of `F ↦ χ(F²)`?*
 
 ---
 
 ## 4. Expectations, and the clauses that matter
 
-* **The wall closes at 47 and `U₆₄` and nowhere else by any priced instrument** (medium-high; FS-57's own estimate). Then the
-  dichotomy stays conditional on four undecided planes, which is worth stating as such.
+* **The wall closes at 47 and `U₆₄` and nowhere else by any priced instrument** (medium-high; FS-57's own estimate). Then S
+  stays conditional on four undecided planes as well as on the conjecture, which is worth stating as such.
 * **The gap theorem resists** (high). Nobody has a 6-colour forced pair over any field, and G31 says every compulsion sweep this
   project has run returned zero at the top rung.
 * **Informative failure — the one that would make this stub a finding rather than a frame:** a six-colouring of any window member.
-  That gives a field with `L(F) = 6`, and under the conjecture a field with `χ(F²) = 6`, which kills the dichotomy outright and
-  hands the project the first exactly six-chromatic finite Euclidean plane. FS-53 and FS-57 are already pointed there.
+  That gives a field with `L(F) = 6`, and under the conjecture a field with `χ(F²) = 6`, which kills S outright (and says nothing
+  about W), and hands the project the first exactly six-chromatic finite Euclidean plane. FS-53 and FS-57 are already pointed there.
 * **The trap to name in advance:** "six is skipped" is **not** evidence that the answer is seven. It is equally consistent with every
-  field being `≤ 5` and `χ(ℝ²) = 5`. Any write-up that lets the dichotomy imply seven without invoking the conjecture's bold form at
-  `K(√7)` (G48) is overclaiming.
+  field being `≤ 5` and `χ(ℝ²) = 5`. Any write-up that lets the skipping imply seven without invoking the conjecture's bold form at
+  `K(√7)` (G48) is overclaiming — **and a second trap, sprung once already (the banner): S is not W.** A sentence that moves from
+  "no field is six-chromatic" to "the plane is five or seven" is fine; one that moves back is not.
 
 ---
 

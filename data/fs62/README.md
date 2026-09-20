@@ -13,7 +13,8 @@ graph (G21). Budget: 90 s per satisfiability call.
 ## The question
 
 Every chromatic number this project has ever pinned for a plane over a coefficient structure is **2, 3, 4, 5
-or 7**, never 6 — and by G64 *"no field is exactly six-chromatic"* is equivalent to `χ(ℝ²) ∈ {5, 7}`. The
+or 7**, never 6 — and by G64 *"no field is exactly six-chromatic"* is a claim about the value set of `F ↦ χ(F²)` that **implies**
+`χ(ℝ²) ∈ {5, 7}` and is not implied by it (corrected 2026-09-19; this file first called the two equivalent). The
 norm reading (G64) says 6 is skipped because it is the smallest integer that is neither `a² + b²` nor
 `a² + ab + b²`. **That reading predicts the skipping is specific to dimension two**, where the unit vectors
 generate a quadratic order whose norms omit 6; in higher dimensions the relevant orders are quaternionic and

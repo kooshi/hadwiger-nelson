@@ -24,8 +24,11 @@ On a vertex-transitive graph `χ_f = q²/α` exactly, so:
   outright — no relaxation, no certificate, no rounding.
 * **The converse does not hold.** `α ≥ ⌈q²/6⌉` leaves `χ ∈ {6, 7}` and still needs an exhibited six-colouring.
 
-So FS-65 can *close* the wall but cannot *open* it, and that asymmetry is the honest headline. It is the same finite
-half FS-57 attacks, from the opposite direction: **FS-57 pushes an upper bound on `α` down; FS-65 pushes the exact
+So FS-65 can *close* the wall but cannot *open* it, and that asymmetry is the honest headline. **And the wall is a statement
+about the value set of the local bound `L(F)` — it decides whether the conjecture predicts 6 or 7 at `ℚ(√167)` — not about
+`χ(ℝ²)`: the 2026-09-17/18 framing of it as "the finite half" of a two-value Hadwiger–Nelson rested on an equivalence that held
+in one direction only (`CLAUDE.md` G64, corrected 2026-09-19), and this stub is ranked for idle compute accordingly.** It is the
+same wall FS-57 attacks, from the opposite direction: **FS-57 pushes an upper bound on `α` down; FS-65 pushes the exact
 value up.** They meet at the same integers, and whichever arrives first retires the other at that member.
 
 ## 3. Why the off-the-shelf tools fail — measured, not assumed

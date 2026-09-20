@@ -71,7 +71,7 @@ below owes the search, and nothing here may be claimed until it runs.
 This stub predates its own gate. Before any of D2–D4 is written: search for the specialisation argument in the words of valuation
 theory and of real algebraic geometry (*real place*, *Artin–Lang homomorphism theorem*, *specialisation of a semialgebraic set*),
 and for the statement `χ(ℝ²) = sup over number fields` in the Hadwiger–Nelson literature — `[Madore2015]` ¶5.4 is the nearest thing
-we have and is cited in prose only. FS-62 depends on this stub's conclusion, so its gate matters more than it did.
+we have and is cited in prose only.
 
 ## 4. Phases
 
@@ -90,6 +90,12 @@ same sitting. B′ is cheap, standalone, and lands a statement worth having whic
 None directly on finding a 6-forcer (D1). High on the honesty of every "χ(ℝ²) = …" sentence the programme writes after M58,
 and required by FS-20's paper. Cheap.
 
-**Raised 2026-09-17:** this stub is now a **prerequisite of FS-62** (`plans/STUB-six-is-not-a-value.md`), whose whole statement —
-*no subfield of ℝ has χ(F²) = 6, hence χ(ℝ²) ∈ {5, 7}* — is a claim about ℝ² that cannot be made without the bridge. It moved from
-rank 8–13 to rank 3 for that reason.
+**Raised 2026-09-17, and the reason withdrawn 2026-09-19.** This stub was moved from rank 8–13 to rank 3 as a prerequisite of FS-62
+(`plans/STUB-six-is-not-a-value.md`), whose headline — *no subfield of ℝ has χ(F²) = 6* ⟺ *χ(ℝ²) ∈ {5, 7}* — turned out to hold in
+one direction only, and that direction (ℝ is a subfield) needs no bridge at all. **What the bridge does carry is the correct form,
+and it belongs here as phase C's second corollary:**
+
+> **`χ(ℝ²) ≠ 6` ⟺ every real number field `F` with `χ(F²) = 6` has a finite real extension `F′` with `χ(F′²) = 7`.**
+
+(⟸: a number field attaining the plane's 6 has no such extension; ⟹: take the compositum with a number field holding a 7-chromatic
+graph. Both use the bridge.) The stub keeps rank 3 on phase B′ alone — a half-day kernel theorem whose two valuation lemmas exist.

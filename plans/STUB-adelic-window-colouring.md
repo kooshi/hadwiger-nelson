@@ -68,7 +68,8 @@ gives; (ii) asks whether a place that gives no bound at all can still carry part
 not the same as a place that says nothing**, and no instrument here has ever used one.
 
 **Any improvement on 7 there is new.** A 6 would be the first field with `χ(F²) = 6` if its floor can be raised to 6 — which is
-FS-56's prediction and FS-59's target — and would kill FS-62's dichotomy. A 5 would refute the conjecture's main clause at the
+FS-56's prediction and FS-59's target — a six-chromatic field with `L ≥ 7`, which refutes the conjecture's bold form and FS-62's
+value-omission statement at once. A 5 would refute the conjecture's main clause at the
 field the conjecture is sharpest about. **Both outcomes are findings**, which is the property that makes this worth building.
 
 ---
@@ -113,5 +114,5 @@ A negative is a finding and goes in §PA.
 
 **Bearing on χ ≥ 6: it is the only ceiling instrument that could decide the value-6 question.** G64 proves six can hide nowhere but
 the gap between `L(F)` and `χ(F²)`; closing that gap from above is exactly what this would do, and nothing else we own points
-there. It is also the only stub in the set whose *success* would refute FS-62's dichotomy rather than support it — which is the
-right relationship between the two, and the reason both are worth holding.
+there. It is also the only stub in the set whose *success* would refute the conjecture's bold form rather than support it — which is the
+right relationship between an instrument and a belief, and the reason both are worth holding.
