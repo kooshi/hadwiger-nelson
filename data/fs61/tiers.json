@@ -44,4 +44,36 @@
     "point_cap": 3000000,
     "solve_wall": 1800
   }
+  ,
+  "1c": {
+    "name": "tier 1c (the long wall)",
+    "defined": "2026-09-20, plans/FS61-quadratic-census.md, the owner's re-plan after phase B', ruling 3, item E.1a",
+    "deepens": "1b",
+    "scope": "every ball a tier-1b record left `Unknown (budget)` at a census field with no certified witness -- the SAME lattice, the SAME radius, the SAME point cap and the SAME symmetry break. Only the solver's wall changes, from 600 s to 3600 s. This tier creates no lattice record and no filter record and asks no ball nobody has asked before; its records shadow the tier-1b records they re-ask, which stay on disk as the history.",
+    "not_in_scope": "the tier-1 `Unknown` records -- every one of them is at a field already landed -- and the tier-1 `Unknown` records at the seven control fields, whose planes are 2- or 3-colourable by theorem: an `Unknown` is not a near-refusal.",
+    "nmax": 180,
+    "lattices": "tier 1's lattices, unchanged; this tier creates no lattice record",
+    "reask": {"of_tier": "1b", "verdict": "Unknown (budget)", "fields": "census fields with no certified witness"},
+    "radii": [],
+    "point_cap": 600000,
+    "solve_wall": 3600
+  },
+  "2l": {
+    "name": "tier 2l (deeper lattices, the same cap)",
+    "defined": "2026-09-20, plans/FS61-quadratic-census.md, the owner's re-plan after phase B', ruling 3, item E.1b",
+    "deepens": "1b",
+    "scope": "every census field with no certified witness. Lattices to NMAX = 420 -- a superset of tier 1's NMAX = 180 set, so every tier-1 and tier-1b ball record still answers the ball it answered and is never re-asked; the new work is the finer lattices. The point cap and the solver's wall are tier 1's, deliberately: phase B' measured that at this depth the binding constraint is the solver and not the cap (24 of 37 asks ran to the 600 s wall), so this tier buys DEPTH and not SIZE, and tier 2's 3,000,000-point cap is not run.",
+    "nmax": 420,
+    "lattices": "the axis plus one or two non-rational classes with lcm <= 420, saturated (every unit vector of the lattice a generator)",
+    "odd_girth": "NOT computed at this tier: every 2l lattice record carries odd_girth.status `not asked`. Phase 0 measured the exact odd girth at about 900x the cost of the rest of `lattices` (1,648 CPU-s against 1.8 s at d = 11), and R-cycle is scored on tier 1's lattices, whose population is stated. A 2l lattice has no odd-girth column and must not be counted in an odd-girth table.",
+    "bfs_cap": 400000,
+    "quotients": 24,
+    "quotient_wall": 30,
+    "ladder_radii": [1.5, 1.2, 1.0],
+    "radius_rule": "every rank-4 Open lattice within this tier's NMAX walks the rungs 1.5, 1.2, 1.0: the first rung whose PREDICTED points (pi^2 R^4 / covolume) fit the point cap is asked, and a rung whose EXACT count overflows descends to the next fitting rung. If no rung's prediction fits, one `Over cap (not asked)` record is written at the first rung. Unlike tier 1b there is NO base-radius precondition, because this tier introduces lattices of its own that no earlier tier ever asked.",
+    "onset_rule": "a rung that refuses is followed by the next rung down at a 120 s wall, to hand phase C a smaller refusing ball; a bonus ask, never part of the accounting",
+    "radii": [1.5, 1.2, 1.0],
+    "point_cap": 600000,
+    "solve_wall": 600
+  }
 }

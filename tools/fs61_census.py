@@ -37,7 +37,7 @@ WHERE FS-58 WRITES.  fs58_search.outdir(D) is rebound to data/fs61/fields/D/ bef
 worker pools use the 'fork' start method so the rebinding is inherited (Python 3.14's default is 'forkserver', which re-imports the
 module and would silently write into data/fs58/).  selftest --section outdir checks both halves of that.
 """
-import sys, os, re, json, math, time, hashlib, gzip, argparse, subprocess, itertools, collections
+import sys, os, re, json, math, time, hashlib, gzip, argparse, subprocess, itertools, collections, fcntl, contextlib
 from fractions import Fraction as Fr
 from pathlib import Path
 
@@ -88,35 +88,89 @@ def outdir_is_bound():
     return FS61.resolve() in p.parents or p == FS61.resolve()
 
 
+@contextlib.contextmanager
+def record_lock(path, create=False):
+    """Hold an exclusive advisory lock on one JSONL record file for a whole read-and-repair or a whole append.
+
+    WHY (the owner's ruling 2 after phase B', and the last of phase B's three repairs).  `load_jsonl` REPAIRS a partial
+    final line by truncating the file, so every READ in this driver is a WRITE, and the length it truncates to was
+    measured earlier: if a writer appends a finished record in between, truncating to the stale length destroys it.
+    Phase B' added a guard -- refuse to truncate if the file is no longer the length it was read at -- which narrows
+    the window to the two syscalls between the `stat` and the `truncate` and does NOT close it.  A lock closes it:
+    while a reader holds it no writer can append, and while a writer holds it no reader can be part-way through.
+
+    Phase E is the first part of this milestone that runs a pooled job over the family while its records are read, so
+    the lock is built before any pooled run of it.  The lock lives on the record file's own inode, so it is shared by
+    every process that goes through these two functions -- which is every command in the driver -- and costs one
+    `flock` syscall per record.  `create=True` is for the append path, which is allowed to make the file."""
+    path = Path(path)
+    flags = os.O_RDONLY if not create else (os.O_RDWR | os.O_CREAT)
+    if not create and not path.exists():
+        yield False
+        return
+    fd = os.open(str(path), flags, 0o644)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield True
+    finally:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_UN)
+        finally:
+            os.close(fd)
+
+
+def read_records(path):
+    """Every record in the file, in order, with NO deduplication and NO repair: a pure reader.
+
+    `load_jsonl` returns the latest record per key -- the current VIEW -- and repairs the file.  Two consumers need the
+    raw history instead: a tier that re-asks a recorded ball writes a new record under the same key and so shadows the
+    old one in the view, and an accounting check whose scope is `the balls tier 1b left undecided` must read that scope
+    from the history, or the tier erases its own obligation by answering it (a check that passes because its subject
+    has disappeared is not a check).  A partial final line is skipped, never truncated."""
+    out = []
+    path = Path(path)
+    if not path.exists():
+        return out
+    with record_lock(path):
+        for ln in path.read_bytes().split(b'\n'):
+            if not ln.strip():
+                continue
+            try:
+                out.append(json.loads(ln))
+            except json.JSONDecodeError:
+                pass                                              # a partial final line: skipped, not repaired
+    return out
+
+
 def load_jsonl(path, keyfield='key'):
-    """key -> record, truncating a partial trailing line (FS-58's convention, its code, re-implemented for our key field)."""
+    """key -> record, truncating a partial trailing line (FS-58's convention, its code, re-implemented for our key field).
+
+    The read and the repair happen under `record_lock`, so a writer cannot append between them (see that function)."""
     done = {}
     path = Path(path)
     if path.exists():
-        raw = path.read_bytes()
-        *complete, tail = raw.split(b'\n')
-        for ln in complete:
-            if ln.strip():
-                r = json.loads(ln)
-                done[r[keyfield]] = r
-        if tail:
-            _repair_partial_line(path, len(raw), len(tail))
+        with record_lock(path):
+            raw = path.read_bytes()
+            *complete, tail = raw.split(b'\n')
+            for ln in complete:
+                if ln.strip():
+                    r = json.loads(ln)
+                    done[r[keyfield]] = r
+            if tail:
+                _repair_partial_line(path, len(raw), len(tail))
     return done
 
 
 def _repair_partial_line(path, read_len, tail_len):
     """Truncate a partial final line -- but ONLY if the file is still the length it was read at.
 
-    Every command in this driver calls `load_jsonl`, so this is a WRITE performed by every READ, and the length it
-    truncates to is one measured earlier.  If a job appended a finished record in between, truncating to the stale
-    length destroys it.  Phases 0, A, B and C ran one command at a time and never met it; phase B' did, because its
-    implementer read the live records while the ladder was writing them (nothing was lost -- 1,760 records checked
-    straight off the bytes).  Guarding on the size shrinks the window from the whole read to two syscalls; closing it
-    completely needs a lock in `append`, which is proposed and not built.  Returns True if it truncated."""
+    A second line of defence behind `record_lock`, kept because it is cheap, because it has been seen to fire, and
+    because it still guards the one case the lock cannot: a writer that does not go through `append` (an editor, a
+    crashed process's leftovers, a hand-repaired file).  Returns True if it truncated."""
     if path.stat().st_size != read_len:
         print(f'NOTE {rel(path)} grew while it was being read ({read_len} -> {path.stat().st_size} bytes): its '
-              f'partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it; '
-              f'do not read a field\'s records while a job writes them.', flush=True)
+              f'partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it '
+              f'outside this driver\'s lock.', flush=True)
         return False
     with open(path, 'r+b') as f:
         f.truncate(read_len - tail_len)
@@ -124,10 +178,11 @@ def _repair_partial_line(path, read_len, tail_len):
 
 
 def append(path, rec):
-    with open(path, 'a') as f:
-        f.write(json.dumps(rec, sort_keys=True, separators=(',', ':')) + '\n')
-        f.flush()
-        os.fsync(f.fileno())
+    with record_lock(path, create=True):
+        with open(path, 'a') as f:
+            f.write(json.dumps(rec, sort_keys=True, separators=(',', ':')) + '\n')
+            f.flush()
+            os.fsync(f.fileno())
 
 
 def die(msg, code=2):
@@ -1443,7 +1498,8 @@ def selftest_land(rnd):
     return rows
 
 
-TIER_SHA_AT_MINT = {'1': '7a520f29e32724da', '2': '34763942a9797e27'}     # read off the committed records, 2026-09-20
+TIER_SHA_AT_MINT = {'1': '7a520f29e32724da', '1b': 'fb13bdf841cf581d', '2': '34763942a9797e27',
+                    '1c': '22136bfff7923ade', '2l': '53b13c15a58bba28'}   # read off the records at mint, 2026-09-20
 
 
 def selftest_ladder(rnd):
@@ -1576,9 +1632,172 @@ def selftest_ladder(rnd):
     return rows
 
 
+def selftest_phaseE(rnd):
+    """Phase E's two new tiers: which records count as which tier's work (`_tier_counts`), which lattices a tier owns
+    (`tier_nmax_scope`), that a re-ask tier's scope is read from the HISTORY and so cannot erase itself, and that a
+    deeper tier's new certificates close the stale `Open` records under them.  Every clause is shown able to go RED."""
+    import tempfile
+    rows = []
+    t1b, t1c, t2l = tier_def('1b'), tier_def('1c'), tier_def('2l')
+    R = lambda t, v='Colourable (colouring verified)', **kw: dict({'tier': t, 'verdict': v}, **kw)
+    # (1) which tier's record counts as which tier's work.  The two that matter are new; the one that must NOT count
+    #     is the plant the ladder section already fires, restated here beside its siblings.
+    rows.append(('a DEEPER tier\'s record counts for the shallower tier it shadows -- without this, every ball tier '
+                 '1c re-asks would read as a tier-1b ladder gap', _tier_counts(R('1c'), '1b'), 'tier 1c record, tier 1b asking'))
+    rows.append(('PLANT: the record a re-ask tier is re-asking does NOT discharge that tier\'s own obligation',
+                 not _tier_counts(R('1b'), '1c'), 'tier 1b record, tier 1c asking'))
+    rows.append(('a tier that REUSES a shallower tier\'s lattices counts that tier\'s balls (tier 2l over tier 1)',
+                 _tier_counts(R('1'), '2l'), 'tier 1 record, tier 2l asking'))
+    rows.append(('PLANT: a shallower tier that is NOT reused does not count (the tier-1b rule, unmoved)',
+                 not _tier_counts(R('1'), '1b'), 'tier 1 record, tier 1b asking'))
+    rows.append(('and settledness is still applied on top of the tier relation: a deeper record that ran to a '
+                 'SMALLER wall than this tier\'s does not answer it',
+                 _record_answers(R('1c', 'Unknown (budget)', wall=3600, cap=600000), '1b', t1b)
+                 and not _record_answers(R('2l', 'Unknown (budget)', wall=60, cap=600000), '1b', t1b),
+                 'wall 3600 answers tier 1b (600 s); wall 60 does not'))
+    # (2) which lattices a tier owns.  Tier 2l adds lattices at NMAX = 420; without this, tier 1's accounting would
+    #     report a gap on every one of them, for balls tier 1's definition never said it would ask.
+    rows.append(('tier 2l owns tier 1\'s lattices (NMAX 180 <= 420) and tier 1 does NOT own tier 2l\'s',
+                 tier_nmax_scope({'tier': '1'}, t2l) and not tier_nmax_scope({'tier': '2l'}, tier_def('1')),
+                 f'nmax 180 in 420: True; nmax 420 in 180: False'))
+    rows.append(('PLANT: a lattice from an unknown tier is counted, never silently dropped',
+                 tier_nmax_scope({'tier': 'nosuchtier'}, tier_def('1')), 'unknown tier -> in scope'))
+    # (3) a re-ask tier's scope is a historical fact.  Answering a ball must NOT remove it from the scope, or the
+    #     accounting check passes because its subject disappeared.  `read_records` is what makes that true.
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / 'balls.jsonl'
+        append(p, {'key': 'K|ball1.0', 'lattice': 'K', 'id': 'L0', 'R': 1.0, 'tier': '1b',
+                   'verdict': 'Unknown (budget)', 'wall': 600, 'points': 10})
+        view_before = load_jsonl(p)['K|ball1.0']['verdict']
+        append(p, {'key': 'K|ball1.0', 'lattice': 'K', 'id': 'L0', 'R': 1.0, 'tier': '1c',
+                   'verdict': 'Colourable (colouring verified)', 'wall': 3600, 'points': 10})
+        view = load_jsonl(p)['K|ball1.0']
+        hist = read_records(p)
+        rows.append(('the re-ask record SHADOWS the record it re-asks in the view, while the history keeps both',
+                     view_before == 'Unknown (budget)' and view['tier'] == '1c' and len(hist) == 2
+                     and hist[0]['tier'] == '1b',
+                     f'view: tier {view["tier"]} {view["verdict"]!r}; history: {[h["tier"] for h in hist]}'))
+        scope_from_history = [h for h in hist if h['tier'] == '1b' and h['verdict'] == 'Unknown (budget)']
+        scope_from_view = [v for v in load_jsonl(p).values() if v['tier'] == '1b' and v['verdict'] == 'Unknown (budget)']
+        rows.append(('PLANT (self-erasing check): read from the VIEW the re-ask scope empties the moment the work is '
+                     'done, so the accounting would pass by having no subject; read from the HISTORY it does not',
+                     len(scope_from_history) == 1 and len(scope_from_view) == 0,
+                     f'history 1 ball in scope, view {len(scope_from_view)}'))
+    # (4) colourability inherited downward: a deeper tier's certificate closes the stale Open record under it.
+    pairs = [('sub', 'sup'), ('other', 'sup')]
+    filt = {'sub': {'state': 'Open (x)'}, 'sup': {'state': 'Colourable (periodic colouring verified)'},
+            'other': {'state': 'Colourable (form mod 3)'}}
+    got = colourability_closures(filt, pairs)
+    rows.append(('a lattice recorded Open inside one recorded Colourable is closed from above, and one already '
+                 'Colourable is left alone', got == [('sub', 'sup')], f'{got}'))
+    rows.append(('PLANT: with the superlattice still Open nothing is closed -- the closure comes from the '
+                 'certificate above, not from the inclusion',
+                 colourability_closures({**filt, 'sup': {'state': 'Open (x)'}}, pairs) == [],
+                 'sup Open -> no closure'))
+    # (5) the ladder's scope, on the real records: tier 1b is in scope only where tier 1 could not ask; tier 2l has no
+    #     such precondition, and the tier-1 record it meets there ANSWERS its first rung rather than being re-asked.
+    D = 155
+    p1b, o1b = ladder_plan(D, '1b')
+    p2l, o2l = ladder_plan(D, '2l')
+    asked = {k for k, w in o1b.items() if w.startswith('asked at R=')}
+    if asked:
+        k = sorted(asked)[0]
+        balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+        ok, why = (ladder_status(p2l[k], balls, '2l', t2l) if k in p2l else (False, 'not in the tier-2l plan'))
+        rows.append((f'tier 2l has no base-radius precondition: a lattice tier 1b skipped as `already asked` is in '
+                     f'tier 2l\'s scope, and the tier-1 record ANSWERS its first rung', k in p2l and ok,
+                     f'd={D} {short_id(k)}: 1b says {o1b[k]!r}; 2l says {why}'))
+    else:
+        rows.append((f'd={D} has a lattice asked at the base radius (the fixture for the 2l scope test)', False,
+                     'none -- the fixture is gone'))
+    return rows
+
+
+def selftest_lock(rnd):
+    """The lock in `append` and `load_jsonl` (the owner's ruling 2 after phase B', built before any pooled run of
+    phase E).  Two things are shown, because one without the other proves nothing: the lock really EXCLUDES -- a
+    writer in another process cannot append while a reader holds it -- and the window it closes really LOSES records
+    when it is open.  The second is the code as it stood before phase B' added its size guard, run against the one
+    interleaving that guard cannot see: a writer that appends between the reader's size check and its truncate."""
+    import tempfile
+    rows = []
+    with tempfile.TemporaryDirectory() as td:
+        # (1) the lock excludes.  The child is forked BEFORE the parent takes the lock (so it does not inherit it),
+        #     and it says `ready` on a pipe immediately before calling `append`, so "the file did not grow" is about a
+        #     writer that had reached the append and was blocked, not about a writer that had not started.
+        #     The writer is a separate interpreter, not a fork: a forked child inherits this process's open file
+        #     descriptions, so it could inherit the very lock the test is about.
+        p = Path(td) / 'balls.jsonl'
+        p.write_text('{"key":"a"}\n{"key":"b"}\n')
+        before = p.stat().st_size
+        ready, done_mark = Path(td) / 'ready', Path(td) / 'done'
+        code = (f'import sys, time, pathlib\n'
+                f'sys.path.insert(0, {str(ROOT / "tools")!r})\n'
+                f'import fs61_census as C\n'
+                f'pathlib.Path({str(ready)!r}).write_text("ready")\n'
+                f't0 = time.time()\n'
+                f'C.append(pathlib.Path({str(p)!r}), {{"key": "c"}})\n'
+                f'pathlib.Path({str(done_mark)!r}).write_text(str(time.time() - t0))\n')
+        with record_lock(p):
+            child = subprocess.Popen([sys.executable, '-c', code])
+            t0 = time.time()
+            while not ready.exists() and time.time() - t0 < 60:
+                time.sleep(0.02)
+            reached = ready.exists()
+            time.sleep(0.5)
+            blocked = p.stat().st_size == before and child.poll() is None
+            rows.append(('the lock EXCLUDES: a writer in another interpreter, stopped at its append, cannot grow the '
+                         'file while a reader holds the lock', reached and blocked,
+                         f'writer announced itself, then 0.5 s with the file at {p.stat().st_size} bytes against '
+                         f'{before} before, and the writer {"alive" if child.poll() is None else "ALREADY FINISHED"} '
+                         f'(pid {child.pid})'))
+        child.wait(timeout=60)
+        waited = float(done_mark.read_text()) if done_mark.exists() else -1.0
+        keys = [r['key'] for r in read_records(p)]
+        rows.append(('PLANT resolved: the moment the lock is released the writer lands, and nothing is lost',
+                     keys == ['a', 'b', 'c'] and waited >= 0.4,
+                     f'{keys}; the writer was blocked {waited:.2f} s inside `append`'))
+        # (2) the window the size guard cannot close, and what it costs.  This is `load_jsonl`'s repair as it stood
+        #     before phase B': read the length, then truncate to it.  The guard added at B' re-stats before the
+        #     truncate; here the writer appends AFTER that check and BEFORE the truncate, which is the interleaving
+        #     only a lock can exclude.
+        q = Path(td) / 'unguarded.jsonl'
+        q.write_text('{"key":"a"}\n{"key":"b"}\n{"key":"c"')
+        read_len, tail_len = q.stat().st_size, len('{"key":"c"')
+        assert q.stat().st_size == read_len                       # the guard's own check, passing
+        with open(q, 'a') as f:                                   # the writer gets in here, after the check
+            f.write('}\n{"key":"d"}\n')
+        with open(q, 'r+b') as f:                                 # the repair, verbatim as it was
+            f.truncate(read_len - tail_len)
+        lost = [r['key'] for r in read_records(q)]
+        rows.append(('PLANT (data loss): with no lock, a writer that appends between the size check and the truncate '
+                     'loses every record it wrote -- the window the guard alone leaves open',
+                     lost == ['a', 'b'], f'{lost} survive of a, b, c, d: two finished records destroyed'))
+        # (3) the same interleaving through the driver's own path: the writer cannot be in that window at all.
+        s = Path(td) / 'guarded.jsonl'
+        s.write_text('{"key":"a"}\n{"key":"b"}\n{"key":"c"')
+        ready2, done2 = Path(td) / 'ready2', Path(td) / 'done2'
+        code2 = code.replace(str(p), str(s)).replace(str(ready), str(ready2)).replace(str(done_mark), str(done2)) \
+                    .replace('"key": "c"', '"key": "d"')
+        with record_lock(s):
+            child2 = subprocess.Popen([sys.executable, '-c', code2])
+            t0 = time.time()
+            while not ready2.exists() and time.time() - t0 < 60:
+                time.sleep(0.02)
+            time.sleep(0.3)
+            raw = s.read_bytes()                                  # the read the repair is measured against
+            _repair_partial_line(s, len(raw), len('{"key":"c"'))  # safe: the writer is outside, holding nothing
+        child2.wait(timeout=60)
+        kept = [r['key'] for r in read_records(s)]
+        rows.append(('PLANT resolved: through `record_lock` the same writer is outside the read-and-repair, so the '
+                     'partial line is repaired AND the writer\'s record survives', kept == ['a', 'b', 'd'], f'{kept}'))
+    return rows
+
+
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
             'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas,
-            'land': selftest_land, 'ladder': selftest_ladder}
+            'land': selftest_land, 'ladder': selftest_ladder, 'lock': selftest_lock,
+            'phaseE': selftest_phaseE}
 
 
 def cmd_selftest(section=None):
@@ -2453,8 +2672,43 @@ def propagate_refusal(D, filt, balls):
 #
 # TIER_ORDER is a code constant and NOT part of any tier's definition -- putting it in tiers.json would change tier 1's
 # `_sha256`, which 343 committed ball records carry.
-TIER_ORDER = {'1': 10, '1b': 15, '2': 20}
+TIER_ORDER = {'1': 10, '1b': 15, '1c': 17, '2l': 18, '2': 20}
 ONSET_WALL = 120.0          # phase B's wall for a follow-up ask below a refusal: the band under the threshold stalls
+
+# Which SHALLOWER tiers' ball records a tier may count as its own work.  Tier 2l's lattices (NMAX = 420) contain tier
+# 1's (NMAX = 180), so it meets balls tiers 1, 1b and 1c already asked under the same cap and the same wall; asking
+# them again would buy nothing and would overwrite records the census's numbers are quoted from.  No other tier reuses
+# anything: tier 1b's scope is lattices whose tier-1 R = 1.5 record is `Over cap`, so at its rungs no shallower record
+# can exist, and the plant that a tier-1 record must not count as tier-1b work still fires.
+TIER_REUSES = {'2l': ('1', '1b', '1c')}
+
+
+def _tier_counts(rec, tid):
+    """Is this record's TIER one whose work counts as tier `tid`'s?  The relationship only -- whether the record is
+    also settled at this tier's budget is `_settled_at`, and the two are kept apart because the accounting check asks
+    the first question and the runner asks both.  See `_record_answers` for why another tier's record may count:
+      * a DEEPER tier re-asked the very same ball with more budget, so its record shadows the earlier one under the
+        same key (tier 1c over tier 1b: same lattice, same radius, a 3,600 s wall in place of 600 s).  The shallower
+        tier's accounting must accept that, or it reports a gap exactly where the question has been answered better;
+      * a tier that REUSES a shallower tier's lattices meets balls that tier already asked (TIER_REUSES).
+    A record from a shallower tier that does neither is not this tier's work and does not count."""
+    t = str(rec.get('tier'))
+    return t == str(tid) or TIER_ORDER.get(t, -1) > TIER_ORDER[str(tid)] or t in TIER_REUSES.get(str(tid), ())
+
+
+def _record_answers(rec, tid, tier):
+    """Does this record answer tier `tid`'s question at its rung, so the tier neither re-asks it nor reports a gap?
+    Its tier must count (`_tier_counts`) AND it must be settled at this tier's budget (`_settled_at`, FS-58's rule:
+    an `Unknown` is re-asked only at a larger wall, an `Over cap` only at a larger cap)."""
+    return _tier_counts(rec, tid) and _settled_at(rec, tier['point_cap'], tier['solve_wall'])
+
+
+def tier_nmax_scope(lat_rec, tier):
+    """Is this lattice inside `tier`'s lattice set?  A lattice record carries the tier that first built it, and a
+    tier's set is decided by its NMAX, so a tier owns every lattice a tier of no greater NMAX produced.  Without this
+    a finer tier's new lattices would be counted against a shallower tier's accounting, which never asked for them."""
+    other = tiers().get(str(lat_rec.get('tier')))
+    return True if other is None else other['nmax'] <= tier['nmax']   # an unknown tier is counted, never dropped
 
 
 def tiers_upto(tid):
@@ -2483,7 +2737,7 @@ def ladder_plan(D, tid='1b'):
     tier = tier_def(tid)
     if 'ladder_radii' not in tier:
         die(f'tier {tid} defines no radius ladder (ladder_radii)')
-    base_r, cap = tier['base_radius'], tier['point_cap']
+    base_r, cap = tier.get('base_radius'), tier['point_cap']
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
     filt = load_jsonl(field_dir(D) / 'filter.jsonl')
     balls = load_jsonl(field_dir(D) / 'balls.jsonl')
@@ -2498,17 +2752,25 @@ def ladder_plan(D, tid='1b'):
         if r['rank'] != 4:
             out[key] = f'rank {r["rank"]}: lattices below rank 4 are filtered and never scanned (plan M1.7)'
             continue
-        b = balls.get(f'{key}|ball{base_r}')
-        if b is None:
-            out[key] = f'no tier-{tier["deepens"]} R={base_r} record -- a gap B.1 reports, not a ladder question'
+        if not tier_nmax_scope(r, tier):
+            out[key] = f'built at tier {r.get("tier")}, whose NMAX is above this tier\'s {tier["nmax"]}'
             continue
-        if b['verdict'] != 'Over cap (not asked)':
-            out[key] = f'asked at R={base_r}: {b["verdict"]}'
-            continue
+        # A tier with a `base_radius` (tier 1b) deepens another tier's work and is in scope only where that tier could
+        # not ask; a tier without one (tier 2l) introduces lattices of its own, so every Open lattice of its own NMAX
+        # is in scope and the ladder starts at its first rung.
+        if base_r is not None:
+            b = balls.get(f'{key}|ball{base_r}')
+            if b is None:
+                out[key] = f'no tier-{tier["deepens"]} R={base_r} record -- a gap B.1 reports, not a ladder question'
+                continue
+            if b['verdict'] != 'Over cap (not asked)':
+                out[key] = f'asked at R={base_r}: {b["verdict"]}'
+                continue
         cov = r['covolume']
         rungs = [(R, predicted_points(cov, R)) for R in tier['ladder_radii']]
         plan[key] = {'key': key, 'id': r['id'], 'D': D, 'lattice': r, 'rungs': rungs,
-                     'base_radius': base_r, 'base_points': b.get('points'),
+                     'base_radius': base_r,
+                     'base_points': (balls.get(f'{key}|ball{base_r}') or {}).get('points') if base_r else None,
                      'askable': [(R, p) for R, p in rungs if p is not None and p <= cap]}
     return plan, out
 
@@ -2522,14 +2784,15 @@ def _settled_at(rec, cap, wall):
     return True
 
 
-def ladder_status(entry, balls, tid):
+def ladder_status(entry, balls, tid, tier=None):
     """Is one lattice's ladder complete, and why?  (ok, reason).  `ok` False is an accounting defect: the tier said it
     would ask this rung and there is no record of it."""
     key, tid = entry['key'], str(tid)
+    tier = tier or tier_def(tid)
 
     def rec_at(R):
         rec = balls.get(f'{key}|ball{R}')
-        return rec if rec is not None and str(rec.get('tier')) == tid else None
+        return rec if rec is not None and _tier_counts(rec, tid) else None
 
     if not entry['askable']:
         R, p = entry['rungs'][0]
@@ -2613,7 +2876,7 @@ def cmd_ladder(D, tid='1b', jobs=16, quiet=False, budget=None, show_plan=False):
             continue
         R, p = e['rungs'][0]
         k = f'{key}|ball{R}'
-        if k in done and str(done[k].get('tier')) == str(tid) and _settled_at(done[k], cap, wall):
+        if k in done and _record_answers(done[k], tid, tier):
             continue
         rec = _ladder_decorate({'key': k, 'lattice': key, 'id': e['id'], 'D': D, 'shape': 'ball', 'R': R, 'tier': tid,
                                 'tier_sha256': tier['_sha256'], 'machine': MACHINE, 'wall': wall, 'cap': cap,
@@ -2632,7 +2895,7 @@ def cmd_ladder(D, tid='1b', jobs=16, quiet=False, budget=None, show_plan=False):
             while i < len(e['askable']):
                 R, _p = e['askable'][i]
                 prev = done.get(f'{key}|ball{R}')
-                if prev is None or str(prev.get('tier')) != str(tid) or not _settled_at(prev, cap, wall):
+                if prev is None or not _record_answers(prev, tid, tier):
                     break
                 if prev['verdict'] == 'Over cap (not asked)' and prev.get('over_cap_by') == 'exact':
                     i += 1
@@ -2680,7 +2943,7 @@ def cmd_ladder(D, tid='1b', jobs=16, quiet=False, budget=None, show_plan=False):
         e = plan[key]
         for i, (R, _p) in enumerate(e['askable']):
             rec = done.get(f'{key}|ball{R}')
-            if rec is None or str(rec.get('tier')) != str(tid) or not rec['verdict'].startswith('Refused'):
+            if rec is None or not _tier_counts(rec, tid) or not rec['verdict'].startswith('Refused'):
                 continue
             if i + 1 >= len(e['askable']):
                 continue
@@ -2728,7 +2991,7 @@ def ladder_pooled_pass(fields, tid, jobs, budget=None):
                 continue
             R, p = e['askable'][0]
             prev = done.get(f'{key}|ball{R}')
-            if prev is not None and str(prev.get('tier')) == str(tid) and _settled_at(prev, cap, wall):
+            if prev is not None and _record_answers(prev, tid, tier):
                 continue
             work.append(_ladder_work(D, e, R, p, tid, tier['_sha256'], cap, wall))
             meta[(D, f'{key}|ball{R}')] = (e, 'the first rung whose prediction fits the cap', R)
@@ -2795,6 +3058,186 @@ def cmd_ladder_all(fields=None, tid='1b', jobs=16, budget=None):
                        'tier': tid, 'machine': MACHINE})
         errs += e
     print(f'DONE ladder-all: {len(scope)} fields, {(time.time() - t0) / 60:.1f} min, {len(errs)} defects', flush=True)
+    return errs
+
+
+# ================================================================ phase E.1a: tier 1c, the long wall
+#
+# The owner's re-plan after phase B', ruling 3.  Tier 1b asked 37 balls and 24 of them ran to the 600-second wall
+# without deciding anything, so at this depth the binding constraint is the SOLVER and not the point cap -- which is
+# why tier 2's 3,000,000-point cap is not run (it would build larger instances of exactly the graphs already
+# undecided, at 10-16 GB a worker).  Tier 1c changes the one thing that is actually binding: the same balls, the same
+# cap, a wall of 3,600 seconds.  Its scope is the fourteen undecided balls at the ten census fields that have not
+# landed; the undecided balls at LANDED fields are not re-asked, because a refusal there would change no state, and
+# the control fields' `Unknown` records are not re-asked at all -- those planes are 2- or 3-colourable by theorem, and
+# they are the standing reminder that an `Unknown` is not a near-refusal.
+def reask_plan(tid, fields=None):
+    """Which recorded balls tier `tid` re-asks, from the RAW records (see `read_records`).  One dict per ball."""
+    tier = tier_def(tid)
+    spec = tier.get('reask')
+    if not spec:
+        die(f'tier {tid} defines no re-ask scope')
+    of_tier, want = str(spec['of_tier']), spec['verdict']
+    landings = load_jsonl(FS61 / 'landings.jsonl')
+    items = []
+    for D in (fields if fields is not None else FAMILY_500):
+        if certified_field(D, landings):
+            continue                                              # a refusal here would change no state
+        lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+        seen = set()
+        for rec in read_records(field_dir(D) / 'balls.jsonl'):
+            if str(rec.get('tier')) != of_tier or rec.get('verdict') != want or rec['key'] in seen:
+                continue
+            seen.add(rec['key'])
+            r = lat.get(rec['lattice'])
+            if r is None:
+                continue
+            items.append({'D': D, 'key': rec['lattice'], 'ball_key': rec['key'], 'id': rec['id'], 'R': rec['R'],
+                          'lattice': r, 'of_tier': of_tier, 'prev_verdict': rec['verdict'],
+                          'prev_wall': rec.get('wall'), 'prev_solve_seconds': rec.get('solve_seconds'),
+                          'prev_points': rec.get('points'), 'prev_edges': rec.get('edges'),
+                          'predicted_points': rec.get('predicted_points')})
+    items.sort(key=lambda it: (it['prev_points'] or 0))
+    return items
+
+
+def cmd_reask(tid='1c', fields=None, jobs=16, budget=None, show_plan=False):
+    """Phase E.1a: re-ask, in ONE pool over the whole family, every ball the named tier left undecided.  Resume = the
+    identical command: a tier-1c record at the long wall is settled and skipped, a tier-1b record at the short one is
+    not, so a kill redoes at most the balls in flight."""
+    import multiprocessing as mp
+    tier = tier_def(tid)
+    cap, wall = tier['point_cap'], tier['solve_wall']
+    items = reask_plan(tid, fields=fields)
+    todo = []
+    for it in items:
+        done = load_jsonl(field_dir(it['D']) / 'balls.jsonl')
+        prev = done.get(it['ball_key'])
+        if prev is not None and _record_answers(prev, tid, tier):
+            continue
+        M, H = parse_key(it['key'])
+        gens = [list(v) for v in saturation(it['D'], M, H)]
+        if sha_vectors([tuple(v) for v in gens]) != it['lattice']['generators_sha256']:
+            die(f'lattice {it["id"]}: the saturation of its key does not match the recorded generators_sha256', 1)
+        todo.append((it, (it['D'], it['key'], gens, it['R'], cap, wall, tid, tier['_sha256'],
+                          it['predicted_points'])))
+    print(f'fs61 reask tier={tid}: {len(items)} balls in scope -- every ball tier {tier["reask"]["of_tier"]} left '
+          f'{tier["reask"]["verdict"]!r} at a census field with no certified witness -- over '
+          f'{len({it["D"] for it in items})} fields; {len(items) - len(todo)} already re-asked on disk, '
+          f'{len(todo)} to ask in ONE pool {min(jobs, max(len(todo), 1))} workers wide; same cap {cap:,} points, '
+          f'wall {wall:.0f} s against {tier_def(tier["reask"]["of_tier"])["solve_wall"]:.0f} s before', flush=True)
+    if show_plan or not todo:
+        for it in items:
+            print(f'  d={it["D"]:>3} {it["id"]} R={it["R"]} {it["prev_points"]} points {it["prev_edges"]} edges '
+                  f'(tier {it["of_tier"]}: {it["prev_verdict"]} after {it["prev_solve_seconds"]} s)', flush=True)
+        if show_plan:
+            print(f'DONE reask --plan tier={tid}: {len(todo)} balls the rule would ask', flush=True)
+            return []
+    if not todo:
+        print(f'DONE reask tier={tid}: nothing to ask', flush=True)
+        return []
+    counts, errs, t0 = collections.Counter(), [], time.time()
+    with mp.get_context('fork').Pool(min(jobs, len(todo))) as P:
+        for rec, model in P.imap_unordered(_ball_worker, [w for _, w in todo]):
+            it = next(i for i, w in todo if w[0] == rec['D'] and f'{w[1]}|ball{w[3]}' == rec['key'])
+            rec = dict(rec, reask_of={'tier': it['of_tier'], 'verdict': it['prev_verdict'], 'wall': it['prev_wall'],
+                                      'solve_seconds': it['prev_solve_seconds'], 'points': it['prev_points']})
+            if model is not None:
+                with gzip.open(model_path(rec['D'], rec['model_sha256']), 'wb') as f:
+                    f.write(model)
+            append(field_dir(rec['D']) / 'balls.jsonl', rec)
+            counts[rec['verdict']] += 1
+            if rec['verdict'] == 'ERROR':
+                errs.append((rec['key'], rec.get('error')))
+                defect(f'reask d={rec["D"]} {rec["key"]}: {rec.get("error")}')
+            print(f'  d={rec["D"]:>3} {rec["id"]} R={rec["R"]} {rec.get("points")} points {rec.get("edges")} edges '
+                  f'-> {rec["verdict"]} [{rec.get("solve_seconds")} s]  (was {it["prev_verdict"]} at '
+                  f'{it["prev_wall"]:.0f} s)', flush=True)
+            if budget and time.time() - t0 > budget:
+                print(f'  budget {budget} s reached: stopping (resume = re-run this command)', flush=True)
+                P.terminate()
+                break
+    changed = 0
+    for D in sorted({it['D'] for it, _ in todo}):
+        filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+        changed += propagate_refusal(D, filt, load_jsonl(field_dir(D) / 'balls.jsonl'))
+    print(f'DONE reask tier={tid}: ' + ', '.join(f'{v} {k}' for k, v in sorted(counts.items()))
+          + f'; {changed} lattices Refused (inherited); {len(errs)} defects; {(time.time() - t0) / 60:.1f} min',
+          flush=True)
+    return errs
+
+
+# ================================================================ phase E.1b: tier 2l, deeper lattices at the same cap
+def colourability_closures(filt, pairs):
+    """The (sub, sup) inclusions where a lattice recorded `Open` sits inside one recorded `Colourable`, so the Open
+    record is stale.  Pure, so both of its outcomes can be shown on fixtures; `propagate_colourability` writes them."""
+    return [(sub, sup) for sub, sup in pairs
+            if (filt.get(sub, {}).get('state', '').startswith('Open')
+                and filt.get(sup, {}).get('state', '').startswith('Colourable'))]
+
+
+def propagate_colourability(D, tid, quiet=True):
+    """The dual of `propagate_refusal`, and the reason it is needed only now.  A 3-colouring of a lattice's graph
+    restricts to every SUBlattice, so colourability is inherited DOWNWARD.  `cmd_filter` applies that inside one run,
+    but it skips every lattice already on disk -- so when a deeper tier adds a lattice ABOVE one an earlier tier left
+    `Open`, and that new lattice turns out colourable, the older record stays `Open` and the census over-counts its
+    open population.  A new record is appended at this tier (the old one stays as the history), never rewritten."""
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+    pp = field_dir(D) / 'poset.jsonl'
+    pairs = [(json.loads(l)['sub'], json.loads(l)['sup']) for l in open(pp)] if pp.exists() else []
+    tier = tier_def(tid)
+    out, n = field_dir(D) / 'filter.jsonl', 0
+    for sub, sup in colourability_closures(filt, pairs):
+        b = filt[sup]
+        rec = {'key': sub, 'id': lat[sub]['id'], 'D': D, 'state': b['state'], 'certificate':
+               dict(b.get('certificate') or {}, inherited=True), 'inherited_from': sup, 'quotients_tried': 0,
+               'rank': lat[sub]['rank'], 'tier': tid, 'tier_sha256': tier['_sha256'], 'machine': MACHINE,
+               'claim_scope': b.get('claim_scope', 'verified model')}
+        append(out, rec)
+        filt[sub] = rec
+        n += 1
+        if not quiet:
+            print(f'  d={D} {lat[sub]["id"]} closed by {lat[sup]["id"]} above it: {b["state"]}', flush=True)
+    return n
+
+
+def cmd_deepen(fields=None, tid='2l', jobs=16, budget=None, stages='all', girth=False):
+    """Phase E.1b: deeper lattices (this tier's NMAX) and their certificates at every field that has not landed, then
+    the radius ladder over the Open ones, pooled over the whole family.  Resume = the identical command."""
+    tier = tier_def(tid)
+    landings = load_jsonl(FS61 / 'landings.jsonl')
+    fields = [D for D in (fields or FAMILY_500) if not certified_field(D, landings)]
+    state = FS61 / f'deepen-progress-{tid}.jsonl'
+    done = load_jsonl(state)
+    print(f'fs61 deepen tier={tid}: {len(fields)} census fields with no certified witness, lattices to '
+          f'NMAX = {tier["nmax"]}, cap {tier["point_cap"]:,} points, wall {tier["solve_wall"]:.0f} s, rungs '
+          f'{tier["ladder_radii"]}; odd girth NOT computed at this tier; {len(done)} fields already built. '
+          f'Resume = re-run this identical command.', flush=True)
+    errs, t0 = [], time.time()
+    if stages in ('all', 'lattices'):
+        for D in fields:
+            if str(D) in done:
+                continue
+            t1 = time.time()
+            lat, e1 = cmd_lattices(D, tid, jobs=jobs, quiet=True, girth=girth)
+            filt, e2 = cmd_filter(D, tid, quiet=True)
+            nc = propagate_colourability(D, tid)
+            filt = load_jsonl(field_dir(D) / 'filter.jsonl')
+            st = collections.Counter(f['state'].split(' (')[0] for f in filt.values())
+            nopen = sum(1 for k, f in filt.items() if f['state'].startswith('Open') and lat[k]['rank'] == 4)
+            print(f'  d={D:>3}: {len(lat)} lattices ({", ".join(f"{v} {k}" for k, v in sorted(st.items()))}), '
+                  f'{nopen} rank-4 Open, {nc} closed from above; {time.time() - t1:.0f} s', flush=True)
+            append(state, {'key': str(D), 'd': D, 'lattices': len(lat), 'open_rank4': nopen,
+                           'closed_from_above': nc, 'seconds': round(time.time() - t1, 1), 'tier': tid,
+                           'machine': MACHINE})
+            errs += e1 + e2
+        print(f'  DONE deepen lattices+filter: {len(fields)} fields, {(time.time() - t0) / 60:.1f} min, '
+              f'{len(errs)} defects', flush=True)
+    if stages in ('all', 'balls'):
+        errs += cmd_ladder_all(fields, tid=tid, jobs=jobs, budget=budget)
+    print(f'DONE deepen tier={tid}: {len(fields)} fields, {(time.time() - t0) / 60:.1f} min, {len(errs)} defects',
+          flush=True)
     return errs
 
 
@@ -2986,17 +3429,27 @@ def tier_accounting(D, tid, lat, filt, balls):
     checked against its base radius, which is what phase B's B.1 asked for."""
     tier = tier_def(tid)
     bad = []
-    if 'ladder_radii' in tier:
+    if 'reask' in tier:
+        # A re-ask tier's obligation is a HISTORICAL fact -- the balls a named tier left undecided -- read from the raw
+        # records and not from the current view.  Read from the view it would erase itself: answering a ball removes it
+        # from the view's `Unknown` set, and a check whose subject disappears when the work is done is not a check.
+        for item in reask_plan(tid, fields=[D]):
+            if not any(_tier_counts(b, tid) for k, b in balls.items() if k == item['ball_key']):
+                bad.append((D, f'{item["id"]} tier-{tid} re-ask missing at R={item["R"]}'))
+                defect(f'table --check d={D}: lattice {item["id"]} R={item["R"]} was left '
+                       f'{item["prev_verdict"]!r} by tier {item["of_tier"]} and has no tier-{tid} record')
+    elif 'ladder_radii' in tier:
         plan, _ = ladder_plan(D, tid)
         for key in sorted(plan):
-            ok, why = ladder_status(plan[key], balls, tid)
+            ok, why = ladder_status(plan[key], balls, tid, tier)
             if not ok:
                 bad.append((D, f'{plan[key]["id"]} tier-{tid} ladder incomplete: {why}'))
                 defect(f'table --check d={D}: lattice {plan[key]["id"]} tier-{tid} ladder incomplete -- {why}')
     else:
         R0 = tier['radii'][0]
         for key, f in filt.items():
-            if f['state'].startswith('Open') and lat[key]['rank'] == 4 and f'{key}|ball{R0}' not in balls:
+            if (f['state'].startswith('Open') and lat[key]['rank'] == 4 and tier_nmax_scope(lat[key], tier)
+                    and f'{key}|ball{R0}' not in balls):
                 bad.append((D, f'{f["id"]} Open with no R={R0} record'))
                 defect(f'table --check d={D}: lattice {f["id"]} is Open with no R={R0} ball record')
     return bad
@@ -3014,8 +3467,10 @@ def cmd_table(check=False, tid=None):
     L = [CENSUS_LEGEND.format(machine=MACHINE),
          f'**The depth this table is at: tier `{tid}`** — the deepest tier with ball records, read from the records '
          f'themselves. Tier definitions live in `data/fs61/tiers.json` and never change after their first record:',
-         ''] + [f'* **tier `{t}`** — {T[t]["name"]}: lattices to `NMAX = {T[t]["nmax"]}`, radii '
-                f'{T[t].get("ladder_radii") or T[t]["radii"]}, point cap {T[t]["point_cap"]:,}, solve wall '
+         ''] + [f'* **tier `{t}`** — {T[t]["name"]}: lattices to `NMAX = {T[t]["nmax"]}`, '
+                + (f'the radii of the tier-{T[t]["reask"]["of_tier"]} records it re-asks'
+                   if T[t].get('reask') else f'radii {T[t].get("ladder_radii") or T[t]["radii"]}')
+                + f', point cap {T[t]["point_cap"]:,}, solve wall '
                 f'{T[t]["solve_wall"]} s.' + (f' Scope: {T[t]["scope"]}' if T[t].get('scope') else '')
                 for t in tiers_upto(tid)] + [
          '',
@@ -3772,6 +4227,18 @@ def main():
     p.add_argument('--tier', default='1'); p.add_argument('--jobs', type=int, default=16)
     p.add_argument('--budget', type=float, default=7200); p.add_argument('--fields', type=int, nargs='*')
 
+    p = sub.add_parser('reask', help='phase E.1a: re-ask, at a longer wall, every ball a tier left undecided')
+    p.add_argument('--tier', default='1c'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float); p.add_argument('--fields', type=int, nargs='*')
+    p.add_argument('--plan', action='store_true', help='print the balls the rule would re-ask and stop')
+
+    p = sub.add_parser('deepen', help='phase E.1b: deeper lattices at the same cap, then the ladder over them')
+    p.add_argument('--tier', default='2l'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--budget', type=float); p.add_argument('--fields', type=int, nargs='*')
+    p.add_argument('--stages', default='all', choices=('all', 'lattices', 'balls'),
+                   help='`lattices` builds and filters only (the priced stage); `balls` runs the ladder only')
+    p.add_argument('--girth', action='store_true', help='compute the odd girth too (about 900x the cost)')
+
     p = sub.add_parser('ladder', help="phase B': the radius ladder for one field (tier 1b), resumable")
     p.add_argument('d', type=int); p.add_argument('--tier', default='1b'); p.add_argument('--jobs', type=int, default=16)
     p.add_argument('--budget', type=float, help='stop asking after this many seconds (resume = re-run)')
@@ -3841,6 +4308,11 @@ def main():
         bad = cmd_census_field(a.d, a.tier, jobs=a.jobs, budget=a.budget)
     elif a.cmd == 'census':
         bad = cmd_census(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget)
+    elif a.cmd == 'reask':
+        bad = cmd_reask(a.tier, fields=a.fields or None, jobs=a.jobs, budget=a.budget, show_plan=a.plan)
+    elif a.cmd == 'deepen':
+        bad = cmd_deepen(fields=a.fields or None, tid=a.tier, jobs=a.jobs, budget=a.budget, stages=a.stages,
+                         girth=a.girth)
     elif a.cmd == 'ladder':
         bad = cmd_ladder(a.d, a.tier, jobs=a.jobs, budget=a.budget, show_plan=a.plan)
     elif a.cmd == 'ladder-all':
