@@ -1,0 +1,81 @@
+### d=11 witness.json sha256[:16]=c43da02bdfbf2e0c
+owner recheck: D = 11, data/fs61/witness-11/witness.json
+  points 189; unit-distance pairs by exact arithmetic over all 17766 pairs: 452; file lists 452
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 452 edges: yes; class sizes [69, 60, 44, 16]
+  triangles: 0; degrees min/median/max 3/4/15; 3 in some edge denominator: 446 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=23 witness.json sha256[:16]=12b0fb37566cb2a6
+owner recheck: D = 23, data/fs61/witness-23/witness.json
+  points 573; unit-distance pairs by exact arithmetic over all 163878 pairs: 1365; file lists 1365
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 1365 edges: yes; class sizes [214, 195, 115, 49]
+  triangles: 0; degrees min/median/max 2/4/19; 3 in some edge denominator: 1176 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=47 witness.json sha256[:16]=13aca2c8351ba2b3
+owner recheck: D = 47, data/fs61/witness-47/witness.json
+  points 169; unit-distance pairs by exact arithmetic over all 14196 pairs: 385; file lists 385
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 385 edges: yes; class sizes [70, 57, 40, 2]
+  triangles: 0; degrees min/median/max 3/4/12; 3 in some edge denominator: 382 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=71 witness.json sha256[:16]=035010f19301e68e
+owner recheck: D = 71, data/fs61/witness-71/witness.json
+  points 131; unit-distance pairs by exact arithmetic over all 8515 pairs: 306; file lists 306
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 306 edges: yes; class sizes [48, 45, 23, 15]
+  triangles: 0; degrees min/median/max 3/4/9; 3 in some edge denominator: 178 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=95 witness.json sha256[:16]=a72fbb80d5f5ff8f
+owner recheck: D = 95, data/fs61/witness-95/witness.json
+  points 1004; unit-distance pairs by exact arithmetic over all 503506 pairs: 2829; file lists 2829
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 2829 edges: yes; class sizes [380, 290, 222, 112]
+  triangles: 0; degrees min/median/max 2/5/16; 3 in some edge denominator: 2824 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=119 witness.json sha256[:16]=f61526fc80c6c6cc
+owner recheck: D = 119, data/fs61/witness-119/witness.json
+  points 456; unit-distance pairs by exact arithmetic over all 103740 pairs: 1122; file lists 1122
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 1122 edges: yes; class sizes [169, 133, 111, 43]
+  triangles: 0; degrees min/median/max 3/4/16; 3 in some edge denominator: 1119 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=143 witness.json sha256[:16]=012bd153b4483899
+owner recheck: D = 143, data/fs61/witness-143/witness.json
+  points 664; unit-distance pairs by exact arithmetic over all 220116 pairs: 1600; file lists 1600
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 1600 edges: yes; class sizes [256, 229, 122, 57]
+  triangles: 0; degrees min/median/max 2/4/14; 3 in some edge denominator: 1506 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=191 witness.json sha256[:16]=461a5cc0cb36330e
+owner recheck: D = 191, data/fs61/witness-191/witness.json
+  points 292; unit-distance pairs by exact arithmetic over all 42486 pairs: 713; file lists 713
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 713 edges: yes; class sizes [105, 99, 61, 27]
+  triangles: 0; degrees min/median/max 3/4/11; 3 in some edge denominator: 699 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
+### d=359 witness.json sha256[:16]=6d2c97573470b980
+owner recheck: D = 359, data/fs61/witness-359/witness.json
+  points 1190; unit-distance pairs by exact arithmetic over all 707455 pairs: 3243; file lists 3243
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 3243 edges: yes; class sizes [424, 391, 235, 140]
+  triangles: 0; degrees min/median/max 2/5/25; 3 in some edge denominator: 3043 edges have 3 | m_i m_j
+RECHECK PASS
+exit=0
