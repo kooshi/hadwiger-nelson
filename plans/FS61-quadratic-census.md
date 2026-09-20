@@ -949,3 +949,41 @@ remaining balls **unrecorded** rather than writing them `Over cap (not asked)`, 
 191 (21,845), 11 (45,521), 359 (46,421), 71 (47,597), 23 (248,213), 143 (283,485). The first seven are inside
 `direct-witness`'s range as priced in phase 0 (O3: 13,605 points → 52 CPU-s); the last two want the checkpointed
 `extract`.
+
+### §R-C — phase C, certifying the nine refusals (2026-09-20, IN FLIGHT at the hand-back)
+
+**Not closed.** The certification driver `land-all` is running and resumable; **nothing is certified yet**, so no
+field's value has changed and `census.md` is untouched — every refusal still reads `Refusal claimed`. Record, with the
+launch block, the pgid and the resume command: **`data/fs61/records/phase-C.md`**.
+
+**Two design corrections, both made from measurements, both recorded because each cost a run.**
+
+1. **The generator threshold.** `direct-witness` deletes vertex by vertex and **does not checkpoint**. On `d = 359`'s
+   46,421-point ball it was still running at **33 minutes with nothing on disk** while blocking eight other fields.
+   The threshold above which the checkpointed `extract` is used instead is now **20,000 points**, not 100,000 —
+   because at this size `extract` is both the faster tool and the only resumable one (plan rule 1: a run over ~15
+   minutes must be resumable).
+2. **Which refusing ball to extract from — and this was the decisive one.** Not the smallest. The smallest refusing
+   ball sits in **the hard band just under the threshold** (the plan's own O3, O4), where one solve costs a hundred
+   seconds while an extraction is thousands of solves:
+
+   | d | smallest ball | one solve | fastest ball | one solve |
+   |---|---|---|---|---|
+   | 47 | 3,565 | **103.72 s** | 8,629 | **0.45 s** |
+   | 119 | 5,605 | **114.18 s** | 13,605 | **0.75 s** |
+   | 95 | 6,997 | 32.07 s | 17,169 | 1.07 s |
+   | 359 | 46,421 | 19.19 s | 113,325 | 1.75 s |
+
+   Selection is now `points × (solve_seconds + 0.5)`. Measured on `d = 359`, one thing changed: the smallest ball gave
+   120 core rounds down to 5,061 points at ~14 s a round and still falling; the fastest ball gave **14 rounds down to
+   2,830 points at 0.6 s a round** — twenty times faster, converging to a *smaller* set from a *larger* ball.
+
+   **This supersedes the phase-B §R-C hand-off note that listed the fields "smallest refusing ball first"**: that
+   ordering is right for *value* (which field to do first) and wrong for *cost* (which ball to extract from).
+
+**P4 is not yet scored.** No extraction has stalled under the corrected selection; the one that looked like a stall
+was stalling on my ball choice, not on the object.
+
+**What phase C still owes:** C.1–C.9 on all nine fields, with the priority the owner set — 359 and 11 (the two
+genuinely new certificates), then 119 and 143, then the five re-certifications. C.10 is the owner's own decorrelated
+recheck.

@@ -2339,6 +2339,224 @@ def monotonicity_check(D, lat, filt, balls):
     return bad
 
 
+# ================================================================ phase C: certify every refusal (C.1-C.9)
+def barrier_edge_count(D, pts, edges):
+    """C.6: how many edges have a direction with 3 in its reduced denominator.  The kernel's 3-adic barrier (row 72)
+    says a four-chromatic graph over these fields must have at least one, so zero here is a defect, not a curiosity."""
+    n = 0
+    for i, j in edges:
+        a1, b1, c1, e1, m1 = pts[i]
+        a2, b2, c2, e2, m2 = pts[j]
+        L = m1 * m2 // math.gcd(m1, m2)
+        d = [a1 * (L // m1) - a2 * (L // m2), b1 * (L // m1) - b2 * (L // m2),
+             c1 * (L // m1) - c2 * (L // m2), e1 * (L // m1) - e2 * (L // m2)]
+        g = 0
+        for x in d:
+            g = math.gcd(g, abs(x))
+        den = L // math.gcd(L, g)
+        if den % 3 == 0:
+            n += 1
+    return n
+
+
+def four_colour(pts, edges):
+    """C.5: a 4-colouring of the witness graph, verified on every edge by code that shares nothing with the search."""
+    import numpy as np
+    from pysat.solvers import Cadical195
+    nv = len(pts)
+    sv = Cadical195()
+    sv.append_formula([[4 * v + k + 1 for k in range(4)] for v in range(nv)])
+    E = np.array(edges, dtype=np.int64)
+    for k in range(4):
+        sv.append_formula(np.stack([-(4 * E[:, 0] + k + 1), -(4 * E[:, 1] + k + 1)], axis=1).tolist())
+    if not sv.solve():
+        sv.delete()
+        return None
+    col = (np.array(sv.get_model()[:4 * nv]).reshape(nv, 4) > 0).argmax(axis=1).astype(int).tolist()
+    sv.delete()
+    for i, j in edges:                                          # verified here, in plain Python, on every edge
+        if col[i] == col[j]:
+            return None
+    return col
+
+
+def cmd_land(D, tid='1', quiet=False):
+    """One field, FS-58's full certification path on its smallest refusing ball."""
+    balls = load_jsonl(field_dir(D) / 'balls.jsonl')
+    lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
+    ref = [b for b in balls.values() if b['verdict'].startswith('Refused') and isinstance(b.get('points'), int)]
+    if not ref:
+        die(f'no refusing ball on record for d={D}', 1)
+    # Which refusing ball to extract from.  NOT the smallest: the smallest sits in the hard band just under the
+    # threshold, where a single solve costs 100 s (O3, O4), and an extraction is thousands of solves.  Measured
+    # 2026-09-20 at d = 47: the 3,565-point ball refuses in 103.72 s, the 8,629-point one in 0.45 s -- 230x per solve
+    # for 2.4x the vertices.  So the cost proxy is points x (solve_seconds + 0.5), which keeps a fast refusal cheap
+    # without picking an enormous graph just because the solver saw through it instantly.
+    b = min(ref, key=lambda x: x['points'] * ((x.get('solve_seconds') or 600.0) + 0.5))
+    spec, R, pts_n = lat[b['lattice']]['spec_full'], b['R'], b['points']
+    out = FS61 / f'witness-{D}'
+    out.mkdir(parents=True, exist_ok=True)
+    frame = {json.loads(l)['d']: json.loads(l) for l in open(FS61 / 'frame.jsonl')}
+    fr = frame[D]
+    # `direct-witness` deletes vertex by vertex and does NOT checkpoint; `extract` runs assumption-core rounds to a
+    # fixpoint and writes steps.jsonl after each, so a kill costs one round.  Measured 2026-09-20: direct-witness on
+    # d = 359's 46,421-point ball was still running at 33 minutes with nothing on disk, while FS-58's `extract` did a
+    # 440,077-point ball over d = 23 in about eleven.  Anything above ~20,000 points therefore goes the checkpointed
+    # way -- both because it is faster here and because a run over ~15 minutes must be resumable (plan rule 1).
+    big = pts_n > 20_000
+    cmdgen = ([sys.executable, str(ROOT / 'tools' / 'fs58_search.py'), 'extract' if big else 'direct-witness',
+               str(D), spec, str(R), str(out)])
+    print(f'fs61 land d={D}: smallest refusing ball {pts_n} points at R={R} on {spec}; '
+          f'{"checkpointed extract" if big else "direct-witness"}', flush=True)
+    rec = {'key': str(D), 'd': D, 'spec': spec, 'R': R, 'ball_points': pts_n, 'lattice': b['lattice'],
+           'machine': MACHINE, 'tier': tid}
+    if not (out / 'witness.json').exists():
+        t0 = time.time()
+        p = subprocess.run(cmdgen, capture_output=True, text=True, cwd=str(ROOT))
+        (out / 'generate.out').write_text(p.stdout + p.stderr)
+        rec['generate_seconds'] = round(time.time() - t0, 1)
+        if p.returncode != 0 or not (out / 'witness.json').exists():
+            rec['result'] = 'FAIL: generation'
+            defect(f'land d={D}: generation exited {p.returncode}; see {rel(out / "generate.out")}')
+            append(FS61 / 'landings.jsonl', rec)
+            return [D]
+    w = json.loads((out / 'witness.json').read_text())
+    pts, edges = w['points'], w['edges']
+    rec.update({'points': len(pts), 'edges': len(edges), 'pinned_edge': w['pinned_edge'],
+                'lcm_denominator': math.lcm(*[p[4] for p in pts]),
+                'witness_sha256': hashlib.sha256((out / 'witness.json').read_bytes()).hexdigest()})
+    steps = {}
+    def run(name, cmd, want, fname):
+        p = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
+        (out / fname).write_text(p.stdout + p.stderr)
+        line = (p.stdout.strip().splitlines() or [''])[0]
+        ok = (p.returncode == 0) == want[1] and line.startswith(want[0])
+        steps[name] = {'exit': p.returncode, 'line': line[:200], 'ok': ok}
+        print(f"    {name:22s} exit {p.returncode:2d}  {'PASS' if ok else 'FAIL'}  {line[:96]}", flush=True)
+        return ok
+    CK = [sys.executable, str(ROOT / 'tools' / 'fs58_check_witness.py')]
+    ok = run('C.1 certificate', CK + ['--radicand', str(D), str(out / 'witness.json')], ('CERTIFIED', True), 'certified.out')
+    ok &= run('C.2 planted faults', CK + ['--radicand', str(D), '--controls', str(out / 'witness.json')],
+              ('CONTROLS ALL PASS', True), 'controls.out')
+    ok &= run('C.3 wrong radicand', CK + ['--radicand', str(D + 12), str(out / 'witness.json')], ('REFUSED', False),
+              'wrong-radicand.out')
+    ok &= run('C.4 second opinion', [sys.executable, str(ROOT / 'tools' / 'fs58_recheck_witness.py'), str(D),
+                                     str(out / 'witness.json')], ('RECHECK PASS', True), 'recheck.out')
+    col = four_colour(pts, edges)
+    steps['C.5 four colours'] = {'ok': col is not None, 'colours': len(set(col)) if col else None}
+    if col:
+        (out / 'colouring4.json').write_text(json.dumps({'colouring': col, 'colours': len(set(col)),
+                                                         'verified': 'proper on every edge, checked in this file\'s producer'},
+                                                        separators=(',', ':')) + '\n')
+    print(f"    {'C.5 four colours':22s}        {'PASS' if col else 'FAIL'}  a proper 4-colouring using "
+          f"{len(set(col)) if col else '-'} colours, verified on all {len(edges)} edges", flush=True)
+    nb = barrier_edge_count(D, pts, edges)
+    steps['C.6 3-adic barrier'] = {'ok': nb > 0, 'edges_with_3_in_denominator': nb}
+    print(f"    {'C.6 3-adic barrier':22s}        {'PASS' if nb else 'FAIL'}  {nb} of {len(edges)} edges have a "
+          f"direction with 3 in its reduced denominator", flush=True)
+    L, Lp = fr['L'], fr['L_prime']
+    src = ('the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9)' if Lp == 2 else
+           f'the residue plane at {Lp} ([Moorhouse2010] Thm 8.1)')
+    value = f'chi(Q(sqrt{D})^2) = 4' if L == 4 else f'4 <= chi(Q(sqrt{D})^2) <= {L}'
+    steps['C.7 the value'] = {'ok': True, 'value': value, 'upper_source': src, 'L': L}
+    rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src,
+                'result': 'CERTIFIED' if (ok and col and nb) else 'INCOMPLETE'})
+    write_witness_readme(D, out, rec, w, fr)
+    (out / 'run-all.sh').write_text(f'''#!/usr/bin/env bash
+# Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic, so a rerun reproduces the committed files.
+set -euo pipefail
+cd "$(dirname "$0")/../../.."
+source scripts/dev-env.sh >/dev/null 2>&1 || true
+D={rel(out)}
+python3 tools/fs58_search.py {'extract' if big else 'direct-witness'} {D} {spec} {R} $D > $D/generate.out
+python3 tools/fs58_check_witness.py --radicand {D} $D/witness.json > $D/certified.out
+python3 tools/fs58_check_witness.py --radicand {D} --controls $D/witness.json > $D/controls.out
+python3 tools/fs58_recheck_witness.py {D} $D/witness.json > $D/recheck.out
+echo "run-all: done"
+''')
+    (out / 'run-all.sh').chmod(0o755)
+    append(FS61 / 'landings.jsonl', rec)
+    man = {'key': str(D), 'd': D, 'path': rel(out), 'points': len(pts), 'edges': len(edges),
+           'lcm_denominator': rec['lcm_denominator'], 'pinned_edge': w['pinned_edge'],
+           'witness_sha256': rec['witness_sha256'],
+           'lrat_sha256': hashlib.sha256((out / 'witness.lrat.gz').read_bytes()).hexdigest()
+                          if (out / 'witness.lrat.gz').exists() else None,
+           'found_by': 'ball', 'spec': spec, 'R': R, 'certified': rec['result'] == 'CERTIFIED',
+           'value': value, 'upper_source': src, 'machine': MACHINE, 'claim_scope': 'checker'}
+    append(FS61 / 'witnesses.jsonl', man)
+    print(f'  d={D}: {len(pts)} points, {len(edges)} edges -> {rec["result"]}; {value}', flush=True)
+    return [] if rec['result'] == 'CERTIFIED' else [D]
+
+
+def write_witness_readme(D, out, rec, w, fr):
+    n3 = rec['steps']['C.6 3-adic barrier']['edges_with_3_in_denominator']
+    (out / 'README.md').write_text(f'''# `χ(ℚ(√{D})²) ≥ 4` — a witness, and the one command that re-checks it
+
+**The claim.** The {rec['points']} points listed in `witness.json` all lie in `ℚ(√{D})²`, and the graph joining the pairs
+exactly 1 apart has **no proper 3-colouring**. So the plane over `ℚ(√{D})` needs at least four colours.
+
+**Re-check it with one command** (about a second; it needs nothing from this project but Python):
+
+```
+python3 tools/fs58_check_witness.py --radicand {D} data/fs61/witness-{D}/witness.json
+```
+
+That checker is **standard library only and imports nothing from `tools/`** — it shares no code with the program that
+found this graph. It (1) checks every point is a reduced integer tuple standing for a point of `ℚ(√{D})²`; (2)
+**re-derives every pair at distance exactly 1 itself, in integer arithmetic**, and refuses unless that set equals the
+edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the CNF from *its own* edge set; and (5)
+checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
+exit 1.
+
+**What is not claimed.** The matching **upper** bound is prior art, not ours: {rec['upper_source']} gives
+`χ(ℚ(√{D})²) ≤ {fr['L']}`. With it, **{rec['value']}**. Nothing here proves the upper bound.
+
+**What else was checked** (all four files are in this directory, each the verbatim output of the command named):
+
+| file | command | result |
+|---|---|---|
+| `certified.out` | the checker above | `{rec['steps']['C.1 certificate']['line'][:60]}…` |
+| `controls.out` | `… --controls witness.json` | twelve planted faults, each refused for its named reason, and the faithful twin certified |
+| `wrong-radicand.out` | `… --radicand {D + 12} witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
+| `recheck.out` | `tools/fs58_recheck_witness.py {D} witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
+| `colouring4.json` | — | an explicit proper **4**-colouring, verified on all {rec['edges']} edges: four colours suffice for this graph, so it is exactly 4-chromatic |
+
+**The 3-adic barrier, as a check on the object.** {n3} of the {rec['edges']} edges have a direction with 3 in its
+reduced denominator. The kernel result (`ThreeAdicBarrier.lean`, `CLAUDE.md` row 72) says a graph over this field that
+needs four colours **must** contain such a direction — directions integral at 3 are 3-colourable outright — so a zero
+here would be a defect in the search, not a discovery.
+
+**Sizes and hashes.** {rec['points']} points, {rec['edges']} edges, least common denominator
+{rec['lcm_denominator']}; pinned edge {w['pinned_edge']}. `witness.json` sha256 `{rec['witness_sha256'][:32]}…`.
+
+**How it was found** — provenance, never evidence. A ball of radius {rec['R']} about the origin in the saturated
+lattice `{rec['spec']}` over `ℚ(√{D})` ({rec['ball_points']} points) was refused three colours by a solver, and that
+refusal was shrunk to a 1-minimal vertex set. None of that is part of the certificate: the checker re-derives the graph
+from the coordinates alone. Regenerate with `./run-all.sh`.
+''')
+
+
+LAND_ORDER = [359, 11, 119, 143, 47, 95, 191, 71, 23]     # the owner's priority: the four with no certificate first
+
+
+def cmd_land_all(fields=None, tid='1'):
+    """Phase C over every refusing field, resumable: a field whose landing record says CERTIFIED is skipped."""
+    done = load_jsonl(FS61 / 'landings.jsonl')
+    todo = fields or LAND_ORDER
+    print(f'fs61 land-all: {len(todo)} fields in the order {todo}; '
+          f'{sum(1 for d in todo if done.get(str(d), {}).get("result") == "CERTIFIED")} already certified. '
+          f'Resume = re-run this identical command.', flush=True)
+    bad = []
+    for D in todo:
+        if done.get(str(D), {}).get('result') == 'CERTIFIED':
+            continue
+        t0 = time.time()
+        bad += cmd_land(D, tid)
+        print(f'  [{D} took {time.time() - t0:.0f} s]', flush=True)
+    print(f'DONE land-all: {len(todo)} fields, {len(bad)} not certified', flush=True)
+    return bad
+
+
 def not_yet(name, phase):
     print(f'fs61 {name}: NOT IMPLEMENTED YET -- this subcommand is phase {phase} of plans/FS61-quadratic-census.md', flush=True)
     sys.exit(2)
@@ -2393,7 +2611,10 @@ def main():
     sub.add_parser('minimal-quotient', help='A.7: the group behind a dead lattice\'s periodic 3-colouring')
     p = sub.add_parser('table', help='the derived census table (never hand-edited)')
     p.add_argument('--check', action='store_true'); p.add_argument('--tier', default='1')
-    sub.add_parser('land', help='NOT IMPLEMENTED YET (phase C)')
+    p = sub.add_parser('land', help="phase C: FS-58's full certification path on a field's smallest refusing ball")
+    p.add_argument('d', type=int); p.add_argument('--tier', default='1')
+    p = sub.add_parser('land-all', help='phase C over every refusing field, in priority order, resumable')
+    p.add_argument('--tier', default='1'); p.add_argument('--fields', type=int, nargs='*')
 
     a = ap.parse_args()
     t0 = time.time()
@@ -2444,7 +2665,9 @@ def main():
         else:
             cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
-        not_yet(a.cmd, 'C')
+        bad = cmd_land(a.d, a.tier)
+    elif a.cmd == 'land-all':
+        bad = cmd_land_all(a.fields or None, a.tier)
     print(f'[{a.cmd}: {time.time() - t0:.1f} s wall on {MACHINE.split(" (")[0]}]', flush=True)
     sys.exit(1 if bad else 0)
 
