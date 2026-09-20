@@ -100,7 +100,8 @@ This is a second opinion, never the certificate: **the certificate is `tools/fs5
 ## 5. Findings so far that the close must carry (so they are not lost in compaction)
 
 * **The family**: exactly the squarefree d ≡ 11 (mod 12) can need four; 40 below 500. L = 4 at 32 of them (dyadic bound at d ≡ 3 mod 8
-  — `[Fischer1990]` Thm 10; the plane at 7 otherwise), L = 5 at d ≡ 47, 143, 167 (mod 168) (47, 143, 215, 311, 335, 383, 479), and
+  — `[Fischer1990]` **Thm 9 per the plan's §1 table and every witness README; this handoff first said "Thm 10", from memory — open
+  the PDF and settle the number before it goes into a ledger row**; the plane at 7 otherwise), L = 5 at d ≡ 47, 143, 167 (mod 168) (47, 143, 215, 311, 335, 383, 479), and
   167 is [6, 8]. Below 2000: **887, 1055, 1823 are [5, 8] through the open digit at 31** — FS-57's side digit has three named consumers.
 * **Theorem (implementer's, checked by hand by me)**: for d ≡ 7 (mod 8) no primitive unit vector has denominator ≡ 2 (mod 4); for
   d ≡ 3 (mod 8) none has 4 | N. 0 violations on 3,107 rows. P1 is superseded by proof.
@@ -129,3 +130,15 @@ This is a second opinion, never the certificate: **the certificate is `tools/fs5
 
 Planner ~460k; its delegate + the two unauthorised grandchildren ~940k; implementer 1 ~730k (phases 0, A, B, start of C); implementer
 2 running. Machine: controls 43 min (+43 lost to a `timeout` wrapper), tier-1 scan 1.01 h, phase A under two minutes.
+
+## 8. After the handoff (same day, appended by the same session after compaction)
+
+* **Phase C ACCEPTED** (`9f9bbc5`; rulings in the plan's §6, "The owner's rulings after phase C"). Implementer 2 returned at 426k
+  tokens with eight of nine certified; `d = 95` was red only on the frozen second-opinion tool's **last** step, a minimality control,
+  so its exact edge check and three solver refusals had passed (the implementer's record read that as "not reached" — corrected).
+  Ruling: C.4 splits into C.4a (required) and C.4b (required only on 1-minimal witnesses); 95 lands under it.
+* Implementer 2 is on a **bounded closing task** (driver split with plants, re-score 95 without regenerating, `land 95 --ball-rank 2`,
+  and a section in `phase-C.md` written for whoever runs B′). **Then a FRESH Opus implementer is briefed for B′ onward.**
+* **A tangent with Kooshi on FS-62** (`2e09ff3`, the stub's §2 "The split, stated once"): finishing the six window graphs proves "no
+  field has local bound six", never "no field has chromatic number six" — `χ ≤ L` is one-sided; fields with `L ≥ 7` are cofinal, so
+  `χ(ℝ²) ≠ 6` follows from that row alone and the wall is not used. Ranking unchanged unless he pushes back.
