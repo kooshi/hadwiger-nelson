@@ -29,8 +29,8 @@ first and one summary line of counts last -- silence is never success.  Exit 0 p
                                                   -> data/fs61/fields/D/balls.jsonl: is the ball of radius R 3-colourable at all?
   status   [D ...]                                -> where each field stands, from the records alone
   selftest [--section S]                          -> the instrument's own checks, each with a planted fault that must fire
-  regress  {lattices,refusals,certificates,untouched,all}
-                                                  -> the FS-58 regressions (gate 0.1, 0.2, 0.3, 0.8) -> data/fs61/regress/
+  regress  {lattices,refusals,certificates,controls,untouched,all}
+                                                  -> the FS-58 regressions and the paired controls (gates 0.1-0.4, 0.6, 0.8)
   frame | atlas | land | table                    -> NOT IMPLEMENTED YET (phases A, C, B); they exit 2 and say so.
 
 WHERE FS-58 WRITES.  fs58_search.outdir(D) is rebound to data/fs61/fields/D/ before any FS-58 command function is called, and the
@@ -330,13 +330,17 @@ def cmd_lattices(D, tid, nmax=None, jobs=16, out=None, reverify=False, quiet=Fal
     tier = tier_def(tid)
     NMAX = nmax or tier['nmax']
     out = Path(out) if out else field_dir(D) / 'lattices.jsonl'
+    # The UNIT OF WORK is a class combination; the RECORD is per distinct lattice, and many combinations give one lattice.
+    # Resume therefore reads the spec ledger, not the lattice records -- otherwise every run redoes the 40 % of combinations
+    # whose lattice was first recorded under a different spec.
+    specs_out = out.with_name(out.stem + '-specs.jsonl')
     C, combos = tier_combos(D, NMAX)
     done = load_jsonl(out)
-    seen_specs = {r.get('spec_hint') for r in done.values()}
-    todo = [(D, NMAX, names, tier, tid, girth) for names in combos if '+'.join(names) not in seen_specs]
+    done_specs = load_jsonl(specs_out)
+    todo = [(D, NMAX, names, tier, tid, girth) for names in combos if '+'.join(names) not in done_specs]
     if not quiet:
         print(f'fs61 lattices d={D} tier={tid} (nmax={NMAX}): {len(combos)} class combinations, '
-              f'{len(done)} distinct lattices on disk -> {len(todo)} combinations to build', flush=True)
+              f'{len(done_specs)} done ({len(done)} distinct lattices on disk) -> {len(todo)} combinations to build', flush=True)
     errs = []
     if todo:
         t0, seen = time.time(), 0
@@ -350,6 +354,8 @@ def cmd_lattices(D, tid, nmax=None, jobs=16, out=None, reverify=False, quiet=Fal
                     errs.append((rec['key'], err))
                     defect(f'lattice d={D} {rec.get("spec_hint")}: {err}')
                     continue
+                append(specs_out, {'key': rec['spec_hint'], 'lattice': rec['key'], 'id': rec['id'], 'D': D, 'nmax': NMAX})
+                done_specs[rec['spec_hint']] = None
                 if rec['key'] in done:
                     prev = done[rec['key']]
                     if prev['generators_sha256'] != rec['generators_sha256']:
@@ -372,7 +378,7 @@ def cmd_lattices(D, tid, nmax=None, jobs=16, out=None, reverify=False, quiet=Fal
     for r in done.values():
         by_rank[r['rank']] = by_rank.get(r['rank'], 0) + 1
     if not quiet:
-        print(f'DONE {len(done)} distinct lattices from {len(combos)} specs '
+        print(f'DONE {len(done)} distinct lattices from {len(done_specs)} specs '
               f'({", ".join(f"rank {k}: {v}" for k, v in sorted(by_rank.items()))}); {len(errs)} defects -> {rel(out)}', flush=True)
     return done, errs
 
@@ -687,7 +693,7 @@ def cmd_regress_lattices(jobs=16):
     print(f'fs61 regress lattices: FS-58\'s 14 fields at FS-58\'s own depth {FS58_DEPTH}; {len(done)} on disk', flush=True)
     bad = []
     for D, NMAX in sorted(FS58_DEPTH.items()):
-        if str(D) in done:
+        if D in done:                                           # load_jsonl keys by the record's own `d`, an int
             continue
         t0 = time.time()
         src = ROOT / 'data' / 'fs58' / f'search-{D}' / 'saturate.jsonl'
@@ -725,7 +731,7 @@ def cmd_regress_lattices(jobs=16):
             defect(f'regress lattices d={D}: only-fs61 {len(only_ours)}, only-fs58 {len(only_fs58)}, '
                    f'generator mismatches {len(gen_mismatch)}, build errors {len(errs)}')
         append(out, rec)
-        done[str(D)] = rec
+        done[D] = rec
         print(f'  d={D:4d} nmax={NMAX}: {len(fs58)} FS-58 records ({len(rank4)} rank 4) -> {len(fs58_keys)} distinct lattices; '
               f'FS-61 {len(lat)} specs -> {len(ours_rank4)} rank-4 keys; {rec["multi_spec_keys"]} keys carry more than one spec; '
               f'{rec["verdict"]} [{rec["seconds"]} s]', flush=True)
@@ -801,6 +807,92 @@ def cmd_regress_certificates():
     fails = [r['key'] for r in done.values() if r['result'] != 'PASS']
     print(f'DONE regress certificates: {len(done)} witnesses, {len(fails)} failures -> {rel(out)}', flush=True)
     return fails
+
+
+CONTROL_FIELDS = {7: 3, 19: 3, 31: 3, 43: 3, 2: 2, 5: 2, 13: 2}     # field -> the chromatic number prior art gives it
+CONTROL_POSITIVE = 47                                               # the same code path, on a field that MUST refuse
+
+
+def cmd_regress_controls(tid='1', jobs=16, budget=None, fields=None):
+    """Gate 0.4 (decision E): the paired negative controls.  A three-chromatic plane cannot contain a ball that refuses
+    three colours and a two-chromatic one cannot contain a non-bipartite lattice, so a refusal or a non-bipartite lattice
+    here is an INSTRUMENT DEFECT and one of the plan's five halts.  The pairing is what makes it evidence: the identical
+    filter-off command runs on d = 47, where a ball must refuse."""
+    out = regress_dir() / 'controls.jsonl'
+    done = load_jsonl(out, keyfield='d')
+    todo = fields or (sorted(CONTROL_FIELDS) + [CONTROL_POSITIVE])
+    print(f'fs61 regress controls: {len(todo)} fields ({", ".join(map(str, todo))}), tier {tid}, filter OFF '
+          f'(every rank-4 lattice under the point cap is asked, whatever its certificate); {len(done)} on disk', flush=True)
+    bad = []
+    for D in todo:
+        if D in done:                                           # load_jsonl keys by the record's own `d`, an int
+            continue
+        t0 = time.time()
+        lat, e1 = cmd_lattices(D, tid, jobs=jobs, quiet=True)
+        filt, e2 = cmd_filter(D, tid, quiet=True)
+        balls, e3 = cmd_scan(D, tid, filter_off=True, jobs=jobs, quiet=True, budget=budget)
+        mine = {k: r for k, r in balls.items() if r['D'] == D}
+        verdicts = {}
+        for r in mine.values():
+            verdicts[r['verdict']] = verdicts.get(r['verdict'], 0) + 1
+        refused = [r for r in mine.values() if r['verdict'].startswith('Refused')]
+        nonbip = [r for r in lat.values() if r['rank'] >= 3 and not r.get('bipartite')]
+        expect = CONTROL_FIELDS.get(D)
+        problems = []
+        if expect is not None:
+            for r in refused:
+                problems.append(f'lattice {r["id"]} ball R={r["R"]} Refused -- a {expect}-chromatic plane cannot refuse')
+                defect(f'control field d={D}: lattice {r["lattice"]} ball R={r["R"]} Refused -- '
+                       f'a {expect}-chromatic plane cannot refuse')
+            if expect == 2 and nonbip:
+                for r in nonbip[:5]:
+                    problems.append(f'lattice {r["id"]} ({r["spec_full"]}) is not bipartite -- chi(Q(sqrt{D})^2) = 2')
+                    defect(f'control field d={D}: lattice {r["id"]} ({r["spec_full"]}) is not bipartite -- '
+                           f'chi(Q(sqrt{D})^2) = 2, so every unit-distance graph over it is')
+        else:                                                       # the positive half of the pair
+            if not refused:
+                problems.append('no ball refused -- the filter-off code path cannot refuse, so the negatives are worthless')
+                defect(f'control field d={D}: no ball refused on the SAME filter-off path -- the seven negatives above '
+                       f'measure a path that has not been shown able to go red')
+        rec = {'d': D, 'key': str(D), 'role': 'negative control' if expect is not None else 'positive control',
+               'expected_chi': expect, 'tier': tid, 'machine': MACHINE, 'claim_scope': 'verified model / solver claim',
+               'lattices': len(lat), 'lattices_rank4': sum(1 for r in lat.values() if r['rank'] == 4),
+               'lattices_bipartite': sum(1 for r in lat.values() if r.get('bipartite')),
+               'lattices_non_bipartite': len(nonbip), 'balls': len(mine), 'ball_verdicts': verdicts,
+               'refused': [r['key'] for r in refused], 'problems': problems,
+               'seconds': round(time.time() - t0, 1), 'result': 'PASS' if not problems else 'FAIL'}
+        append(out, rec)
+        done[D] = rec
+        if problems:
+            bad.append(D)
+        print(f'  d={D:3d} ({rec["role"]}, chi={expect if expect else "at least 4"}): {rec["lattices"]} lattices '
+              f'({rec["lattices_bipartite"]} bipartite), {len(mine)} balls -> '
+              f'{", ".join(f"{v} {k}" for k, v in sorted(verdicts.items())) or "none"}; {rec["result"]} [{rec["seconds"]} s]',
+              flush=True)
+    write_controls_md(done)
+    print(f'DONE regress controls: {len(done)} fields, {len(bad)} failures -> {rel(out)}, {rel(FS61 / "controls.md")}',
+          flush=True)
+    return bad
+
+
+def write_controls_md(done):
+    rows = sorted(done.values(), key=lambda r: (r['role'], r['d']))
+    L = ['# FS-61 — the paired controls on the census instrument (gate 0.4)', '',
+         '*Produced by `python3 tools/fs61_census.py regress controls`. Source of truth: `data/fs61/regress/controls.jsonl`',
+         'and the per-field `data/fs61/fields/<d>/balls.jsonl`. Machine: ' + MACHINE + '.*', '',
+         'Seven fields whose plane needs two or three colours (prior art: `[Johnson1987]`, `[Fischer1990]` Thms 8-9) are',
+         'scanned with the 3-integrality filter OFF, so every rank-4 lattice under the point cap is asked whatever its',
+         'certificate. None of them may contain a ball that refuses three colours, and over the two-chromatic ones no',
+         'lattice may be non-bipartite. Beside them, the identical command on `d = 47`, where a ball must refuse: a',
+         'control that cannot go red has not been tested by passing.', '',
+         '| d | role | chi | lattices (bipartite) | balls asked | verdicts | result |', '|---|---|---|---|---|---|---|']
+    for r in rows:
+        v = ', '.join(f'{n} {k}' for k, n in sorted(r['ball_verdicts'].items())) or 'none'
+        L.append(f'| {r["d"]} | {r["role"]} | {r["expected_chi"] or "at least 4"} | '
+                 f'{r["lattices"]} ({r["lattices_bipartite"]}) | {r["balls"]} | {v} | **{r["result"]}** |')
+    L += ['', 'Any `FAIL` row is an instrument defect and one of the plan\'s five halts (§5 rule 15): stop and report, '
+          'never repair and continue.', '']
+    (FS61 / 'controls.md').write_text('\n'.join(L))
 
 
 def cmd_regress_untouched():
@@ -1076,7 +1168,8 @@ def main():
     p.add_argument('--section', choices=sorted(SECTIONS))
 
     p = sub.add_parser('regress', help='the FS-58 regressions')
-    p.add_argument('part', choices=['lattices', 'refusals', 'certificates', 'untouched', 'all'])
+    p.add_argument('part', choices=['lattices', 'refusals', 'certificates', 'controls', 'untouched', 'all'])
+    p.add_argument('--budget', type=float, help='controls: stop a field\'s scan after this many seconds')
     p.add_argument('--jobs', type=int, default=16)
 
     for name, phase in (('frame', 'A'), ('atlas', 'A'), ('land', 'C'), ('table', 'B')):
@@ -1105,6 +1198,8 @@ def main():
             bad += cmd_regress_refusals()
         if a.part in ('certificates', 'all'):
             bad += cmd_regress_certificates()
+        if a.part in ('controls', 'all'):
+            bad += cmd_regress_controls(jobs=a.jobs, budget=a.budget)
         if a.part in ('untouched', 'all'):
             bad += cmd_regress_untouched()
     elif a.cmd in ('frame', 'atlas'):
