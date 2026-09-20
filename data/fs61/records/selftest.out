@@ -31,8 +31,8 @@ fs61 selftest: 12 sections (keys, saturation, outdir, barrier, predicted, atlas,
     PASS  the inverted enumeration agrees with the brute force on D(12)  --  [23, 47, 71, 95, 119, 143]
   [land]
     [fs61] steps.jsonl: dropped a truncated final record of 38 bytes, written as the generator was stopped
-    stopping the generator (pid 2383403): selftest
-    stopped: pid 2383403 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    stopping the generator (pid 2418887): selftest
+    stopped: pid 2418887 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
     PASS  C.9 the minimality reader says `yes` on FS-58's direct-witness provenance  --  1-minimal: deleting any single vertex leaves a 3-colourable graph
     PASS  PLANT (C.9): FS-58's own stopped-deletion provenance (witness-95) is NOT reported as minimal  --  refusing but NOT 1-minimal: the deletion was stopped at position 363 of 1737
     PASS  C.9 an absent deletion phase reads `unknown`, never `yes`  --  the generator recorded no deletion phase
@@ -53,12 +53,12 @@ fs61 selftest: 12 sections (keys, saturation, outdir, barrier, predicted, atlas,
     PASS  PLANT (C.4a, wrong-reason guard): a failure at step (i), the exact edge re-derivation disagreeing turns C.4a RED with C.9 = yes  --  the second opinion itself failed at step (i)
     PASS  PLANT (the inference is about ONE file): at a different sha256 the step-(iii) inference is REFUSED, not guessed  --  the frozen second opinion is at sha256 0000000000000000..., not 880f5bc48ef39b4c...: the step-(iii) inference is about THAT file and is refused here
     PASS  the frozen second opinion on disk still has the sha256 the inference is stated for  --  880f5bc48ef39b4c…
-    PASS  the landed set is read from the landing records and the checker's own first line  --  13 of 14 fields with a refusing ball are landed: [359, 11, 119, 143, 47, 95, 191, 71, 23, 59, 311, 335, 431]
+    PASS  the landed set is read from the landing records and the checker's own first line  --  14 of 14 fields with a refusing ball are landed: [359, 11, 119, 143, 47, 95, 191, 71, 23, 59, 239, 311, 335, 431]
     PASS  PLANT (landing): d=359 with its landing record result mangled is NOT landed  --  a record that does not say CERTIFIED cannot promote a field
     PASS  the stop verification CAN fire: a live writer's artifact digest moves across the sample  --  digest changed while the child was still running
-    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 2383403 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 2418887 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
   [ladder]
-NOTE /tmp/tmpkjczfos1/balls.jsonl grew while it was being read (34 -> 48 bytes): its partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it outside this driver's lock.
+NOTE /tmp/tmpdo9l2_d6/balls.jsonl grew while it was being read (34 -> 48 bytes): its partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it outside this driver's lock.
     PASS  tier 1's definition is unmoved -- every committed ball record stamped with it depends on that  --  7a520f29e32724da (minted 7a520f29e32724da); 1745 ball records carry it
     PASS  tier 1b's definition is unmoved -- every committed ball record stamped with it depends on that  --  fb13bdf841cf581d (minted fb13bdf841cf581d); 78 ball records carry it
     PASS  tier 1c's definition is unmoved -- every committed ball record stamped with it depends on that  --  7e833199a93662b0 (minted 7e833199a93662b0); 48 ball records carry it
@@ -85,8 +85,8 @@ NOTE /tmp/tmpkjczfos1/balls.jsonl grew while it was being read (34 -> 48 bytes):
     PASS  phase C's committed priority order is a prefix of today's, with every field that has refused since appended and named  --  [359, 11, 119, 143, 47, 95, 191, 71, 23, 59, 239, 311, 335, 431]  (appended since phase C: [59, 239, 311, 335, 431])
     PASS  PLANT (land order): a field refusing for the first time is APPENDED, never dropped  --  [359, 11, 119, 143, 47, 95, 191, 71, 23, 239]
   [lock]
-    PASS  the lock EXCLUDES: a writer in another interpreter, stopped at its append, cannot grow the file while a reader holds the lock  --  writer announced itself, then 0.5 s with the file at 24 bytes against 24 before, and the writer alive (pid 2383512)
-    PASS  PLANT resolved: the moment the lock is released the writer lands, and nothing is lost  --  ['a', 'b', 'c']; the writer was blocked 0.51 s inside `append`
+    PASS  the lock EXCLUDES: a writer in another interpreter, stopped at its append, cannot grow the file while a reader holds the lock  --  writer announced itself, then 0.5 s with the file at 24 bytes against 24 before, and the writer alive (pid 2418985)
+    PASS  PLANT resolved: the moment the lock is released the writer lands, and nothing is lost  --  ['a', 'b', 'c']; the writer was blocked 0.52 s inside `append`
     PASS  PLANT (data loss): with no lock, a writer that appends between the size check and the truncate loses every record it wrote -- the window the guard alone leaves open  --  ['a', 'b'] survive of a, b, c, d: two finished records destroyed
     PASS  PLANT resolved: through `record_lock` the same writer is outside the read-and-repair, so the partial line is repaired AND the writer's record survives  --  ['a', 'b', 'd']
   [phaseE]
@@ -121,9 +121,9 @@ NOTE /tmp/tmpkjczfos1/balls.jsonl grew while it was being read (34 -> 48 bytes):
     PASS  PLANT (the lift rule): aimed above a refusal that is ALREADY denser than anything the cap allows, the rule asks NOTHING rather than stepping down the phase diagram toward the hardness peak  --  from degree 24.0 the best available is 23.446 at the cap -> no-lift; "the highest predicted degree available under the 2,000,000-point cap is 23.446 (R = 1.9156), which does not exceed the refusing ball's 24.000: this tier only ever asks UPWARD"
     PASS  the Rcap arm is reachable: above a degree-20 refusal the degree-18 radius does not lift, so the rule falls through to the largest ball under the cap, which does  --  from degree 20.0 -> arm Rcap, R = 1.9156, degree 23.446
     PASS  a lifting ask is always at a strictly LARGER radius than the refusal it is aimed above, which is what makes its refusal free by nesting  --  checked at from-degrees 8, 11, 14, 17
-    PASS  every lattice the plan holds really carries a refusal, at a field with no certificate  --  1 lattice(s) in scope: d=239 L3e1c94c6 above R=1.2892
-    PASS  PLANT (the certified-field rule): no lattice of a field that is already `Landed (certified)` is in scope, however many refusing balls it carries  --  13 certified field(s) carry refusing balls and contribute 0 items
-    PASS  the rule TERMINATES: a lattice this tier has already asked is discharged by its own record, not re-demanded at a higher radius above the refusal that record created  --  1 of 1 in-scope lattice(s) discharged: d=239 L3e1c94c6 this tier has already asked its one ball on this lattice, at R = 1.5181 -> Refused (solver claim)
+    PASS  every lattice the plan holds really carries a refusal, at a field with no certificate  --  0 lattice(s) in scope: none
+    PASS  PLANT (the certified-field rule): no lattice of a field that is already `Landed (certified)` is in scope, however many refusing balls it carries  --  14 certified field(s) carry refusing balls and contribute 0 items
+    PASS  the rule TERMINATES: a lattice this tier has already asked is discharged by its own record, not re-demanded at a higher radius above the refusal that record created  --  0 of 0 in-scope lattice(s) discharged: none yet
     PASS  PLANT (termination): the tier aims above refusals from OTHER tiers only, so its own refusing record can never become the thing it is asked to beat  --  onset_plan filters the lattice's records by tier before choosing what to aim above
 DONE selftest: 12 sections, 0 failures
 [selftest: 9.4 s wall on desktop]

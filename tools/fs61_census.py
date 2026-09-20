@@ -4645,6 +4645,32 @@ def upper_bound_source(Lp):
             f'the residue plane at {Lp} ([Moorhouse2010] Thm 8.1)')
 
 
+def _ball_tier_note(rec):
+    """Which census tier ASKED the ball this witness was shrunk from, when the landing record knows.  `.get`, not
+    `[]`: the first landing records of this milestone predate the `ball_tier` field, and a README rewrite must
+    never crash on a record written before a field existed."""
+    bits = []
+    if rec.get('ball_tier'):
+        bits.append(f"asked by the census at **tier `{rec['ball_tier']}`**")
+    if rec.get('ball_solve_seconds') is not None:
+        bits.append(f"refused in {rec['ball_solve_seconds']} s")
+    return (', ' + ', '.join(bits)) if bits else ''
+
+
+def _parked_note(out, rec):
+    """A sentence naming any PARKED extraction checkpoint in this directory, so a reader cannot mistake it for part
+    of the witness.  It exists where two different balls of ONE lattice were extracted in one directory (`d = 239`:
+    a degree-14 ball and the degree-18 one this witness comes from), and the frozen `extract` keys its resume on
+    the directory rather than on the ball -- which is exactly why the older one had to be moved aside."""
+    parked = sorted(p.name for p in out.glob('steps-ball*.jsonl'))
+    if not parked:
+        return ''
+    return (f" This directory also holds {'a parked checkpoint' if len(parked) == 1 else 'parked checkpoints'} from a "
+            f"DIFFERENT ball of the same lattice — {', '.join('`' + n + '`' for n in parked)} — which is **not part "
+            f"of this witness** and is not read by anything that re-checks it: the live checkpoint for the "
+            f"R = {rec['R']} ball is `steps.jsonl`. Both are gitignored provenance.")
+
+
 def write_witness_readme(D, out, rec, w, fr):
     n3 = rec['steps']['C.6 3-adic barrier']['edges_with_3_in_denominator']
     (out / 'README.md').write_text(f'''# `χ(ℚ(√{D})²) ≥ 4` — a witness, and the one command that re-checks it
@@ -4689,8 +4715,8 @@ here would be a defect in the search, not a discovery.
 {rec['lcm_denominator']}; pinned edge {w['pinned_edge']}. `witness.json` sha256 `{rec['witness_sha256'][:32]}…`.
 
 **How it was found** — provenance, never evidence. A ball of radius {rec['R']} about the origin in the saturated
-lattice `{rec['spec']}` over `ℚ(√{D})` ({rec['ball_points']} points) was refused three colours by a solver, and that
-refusal was shrunk by `tools/fs58_search.py {rec['generator']}`. **{rec['minimality']['note'][0].upper() + rec['minimality']['note'][1:]}.**
+lattice `{rec['spec']}` over `ℚ(√{D})` ({rec['ball_points']} points{_ball_tier_note(rec)}) was refused three colours by a solver, and that
+refusal was shrunk by `tools/fs58_search.py {rec['generator']}`.{_parked_note(out, rec)} **{rec['minimality']['note'][0].upper() + rec['minimality']['note'][1:]}.**
 {'Minimality is not part of the claim and not part of the certificate: **a witness that is not 1-minimal is not a weaker certificate** — a refusing set refuses whether or not it is smallest, and minimality buys size (the checker time, and the kernel cost of a later formalisation), never soundness.' if rec['minimality']['minimal'] != 'yes' else ''}
 None of this is part of the certificate either: the checker re-derives the graph from the coordinates alone.
 Regenerate with `./run-all.sh` (read its header first if the deletion was stopped).

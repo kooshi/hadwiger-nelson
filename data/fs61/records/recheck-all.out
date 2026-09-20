@@ -98,6 +98,17 @@
   C.7 the value          PASS  = 4                                            frame.jsonl L = 4
   record agrees          PASS  CERTIFIED                                      sha 461a5cc0cb36330e..., record says 461a5cc0cb36330e..., 292 points / 713 edges
 
+=== d = 239 ===
+  C.1 certificate        PASS  CERTIFIED: 2360 points of Q(sqrt239)^2, each a reduced (a, b, c, e, m) 2360 points, 6639 edges
+  C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
+  C.3 wrong radicand     PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 531] between [0, 0, 0,  offered as a witness over Q(sqrt251)
+  C.4a second opinion    PASS  RECHECK PASS: 2360 points; 6639 unit pairs by Fraction arithmetic over RECHECK PASS
+  C.4b pinned-vertex     PASS  C.9 says no                                    recorded, not required
+  C.5 exactly four       PASS  4 colours                                      0 monochromatic edges of 6639
+  C.6 3-adic barrier     PASS  4328 of 6639                                   edges with 3 in a reduced denominator
+  C.7 the value          PASS  = 4                                            frame.jsonl L = 4
+  record agrees          PASS  CERTIFIED                                      sha 1a49a2a76e734933..., record says 1a49a2a76e734933..., 2360 points / 6639 edges
+
 === d = 311 ===
   C.1 certificate        PASS  CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); 189 points, 460 edges
   C.2 planted faults     PASS  CONTROLS ALL PASS                              13 [PASS] rows, 0 [FAIL] rows
@@ -142,4 +153,4 @@
   C.7 the value          PASS  = 4                                            frame.jsonl L = 4
   record agrees          PASS  CERTIFIED                                      sha f88f148ecb2a265c..., record says f88f148ecb2a265c..., 1031 points / 2719 edges
 
-DONE recount-landings: 13 of 13 fields green [11, 23, 47, 59, 71, 95, 119, 143, 191, 311, 335, 359, 431]
+DONE recount-landings: 14 of 14 fields green [11, 23, 47, 59, 71, 95, 119, 143, 191, 239, 311, 335, 359, 431]

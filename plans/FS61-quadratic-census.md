@@ -1345,3 +1345,24 @@ the additive 3-colouring for `N ≢ 2 (mod 3)`. The driver's string is now one f
 the two affected witness READMEs (`d = 11`, `d = 59`) were regenerated with `land-readme` — no solver, no
 certificate byte moved. Landing records written earlier keep the old string in their C.7 **transcript**, which is
 what a transcript is for. Uses of Thm 9 for `χ = 3` are correct and untouched.
+
+**The owner said FINISH IT, and it landed: `χ(ℚ(√239)²) = 4`, the census closes at FOURTEEN of forty.** He also
+recorded the defect in his own stop rule — its letter said "core rounds" where he meant "the kept set", which is
+why the clause read as determined when the kept set had met his target — and set the weight rule before the run:
+commit the gzipped LRAT if it is ≤ 60 MB, otherwise stop and report the size. **The witness is 2,360 points and
+6,639 edges; the LRAT is 42.95 MB, so the commit arm applies** and it is now the repository's largest certificate,
+just above `d = 59`'s 39.7 MB. Gate: C.1 `CERTIFIED`; C.2 `CONTROLS ALL PASS`, 13 rows pass / 0 fail; C.3
+`REFUSED` over `ℚ(√251)`; C.4a `RECHECK PASS` with Lingeling, CaDiCaL 1.5.3 and MapleChrono each refusing; **C.4b
+recorded, not required** (C.9 says not 1-minimal — a resumed deletion never can be) **and green anyway**; C.5 a
+proper 4-colouring verified on all 6,639 edges; C.6 4,328 of 6,639 edges carrying the 3-adic barrier; C.7
+`χ = 4`, upper half the residue plane at 7 (`239 ≡ 1 (mod 7)`, `[Moorhouse2010]` Thm 8.1). `recount-landings`
+reads **14 of 14 green**, with **5 of 5** planted faults firing on this witness.
+
+**The deletion was cut short of its 2,400 s, and the reason is a rate that decayed 60× while it ran.** The budget
+was set from this object's early scan — 363 tests in 240 s, 1.49 points a second. Measured live it read 0.226
+points a second over positions 903–932, then **0.022** over 932–948, so the 1,390 s remaining bought about 31
+points, 1.3 % of the witness, with the whole gate still to run. Stopped on that arithmetic. *The near-miss beside
+it: at the middle window I was about to cut on "11 seconds a test", and in **points** that window was removing
+2.62 a test — 22.8 % of the witness over the full budget, on which the owner's number was well spent. Only the
+next window made it clearly not worth it.* **A rate measured on a stale window is a different number from the same
+rate measured now, and the units decide the ruling** — three separate re-derivations in one afternoon.

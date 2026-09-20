@@ -253,7 +253,7 @@ record, 0); none addresses a field plane.
 
 ---
 
-### 1.7 The chromatic number of the plane over real quadratic fields — thirteen fields answered
+### 1.7 The chromatic number of the plane over real quadratic fields — fourteen fields answered
 
 > **Benda–Perles, Open Problem 11.6** (`[Soifer2024]` ch. 11): *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic
 > extension of `ℚ²`."* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
@@ -268,17 +268,16 @@ record, 0); none addresses a field plane.
 **Our answer, field by field.** Below four, the classification is prior art: `χ = 2` iff `d ≢ 3 (mod 4)` (`[Johnson1987]`,
 `[Fischer1990]` Thm 8) and `χ = 3` for `d ≡ 3, 7 (mod 12)` (`[Fischer1990]` Thm 9 and the sentence after it). So the only real quadratic
 fields whose plane **can** need four are the squarefree `d ≡ 11 (mod 12)` — forty of them below 500 — and this project has now
-certified a finite graph forcing four colours over **thirteen** of the forty:
+certified a finite graph forcing four colours over **fourteen** of the forty:
 
 | | fields | the matching upper bound, all prior art |
 |---|---|---|
-| **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i)); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
+| **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **239**, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i)); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
 | **`4 ≤ χ(ℚ(√d)²) ≤ 5`** — brackets | 47, **143**, **311**, **335** | the residue plane at 11 |
 
-*(Bold: first proved by FS-61's census. `d = 239` also has refusing balls — two of them — but they are **solver claims**: its
-certification is resumable and not finished, and is not counted above. Its state at the milestone's close is a refusing set of
-**2,451 points**, one gate run from a certificate, on a denser ball asked under tier `1u`
-(`data/fs61/records/phase-F-239.md`; the two earlier stops are `phase-F.md` §3.1a and §3.1a′).)*
+*(Bold: first proved by FS-61's census. **`d = 239` landed last**, from a 2,360-point witness on a denser ball of its own
+refusing lattice, asked under tier `1u` after two extraction attempts on a sparser ball of the same lattice had been stopped —
+`data/fs61/records/phase-F-239.md`.)*
 
 **Only the lower bounds are ours**, and `ℚ(√11)`'s is the only one the Lean kernel has seen
 (`four_le_chromaticNumber_planeOver_eleven`, 204 points, triangle-free, standard three axioms — FS-58's *chain* witness, a different
@@ -286,14 +285,14 @@ graph from the census's 189-point direct one). Every other field rests on `tools
 importing nothing from `tools/`, re-deriving each edge in exact integer arithmetic and replaying the LRAT refutation, with twelve
 planted faults each refused for its named reason and the same files refused over a neighbouring field — plus a second opinion in exact
 `Fraction` arithmetic with three further solvers, an explicit verified 4-colouring, and the product owner's own decorrelated recheck.
-Certificates: `data/fs58/witness-*/` (FS-58: 11, 23, 47, 71, 95, 191) and `data/fs61/witness-*/` (FS-61: all thirteen, from its own
+Certificates: `data/fs58/witness-*/` (FS-58: 11, 23, 47, 71, 95, 191) and `data/fs61/witness-*/` (FS-61: all fourteen, from its own
 ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
 `plans/FS61-quadratic-census.md` §R; `data/fs61/census.md`.
 
 **What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a bracket, not a value. His general question — *how much
-can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for thirteen
+can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for fourteen
 fields, and no real quadratic field is known to need five.** The census's candidate class theorem (*every squarefree `d ≡ 11 (mod 12)`
-needs four*) is **not proved**; 27 of the 40 fields are open, each with the kind of null recorded. And `ℚ(√167)`, where this project's
+needs four*) is **not proved**; 26 of the 40 fields are open, each with the kind of null recorded. And `ℚ(√167)`, where this project's
 local–global conjecture predicts six or more, is still at a proven three (FS-59).
 
 **Prior art that constrains the claim.** The upper bounds and the odd cycles are theirs — and the lower bound 3 is older than this

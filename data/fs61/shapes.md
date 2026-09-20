@@ -58,6 +58,7 @@ E.5 asks for a canonical form of every certified witness — a Weisfeiler–Lema
 | **119** | 456 | 1,122 | 3:102, 4:138, 5:95, 6:45, 7:31, 8:17… | `9a4cdae48b0fde17` | 4 | yes | `q1+12+60.1` at R = 1.5 |
 | **143** | 664 | 1,600 | 2:1, 3:158, 4:177, 5:137, 6:117, 7:32… | `ef72dda56e311ec8` | 4 | no (deletion stopped at 1056) | `q1+q5+12+60` at R = 1.5 |
 | **191** | 292 | 713 | 3:57, 4:93, 5:50, 6:46, 7:25, 8:13… | `0b090003fcddc64a` | 4 | yes | `q1+q5+20+60.1` at R = 1.5 |
+| **239** | 2,360 | 6,639 | 2:6, 3:409, 4:511, 5:445, 6:359, 7:234… | `948bbee080caa78d` | 4 | no (deletion stopped at 948) | `q1+q5+24+60+120.1` at R = 1.5181 |
 | **311** | 189 | 460 | 3:38, 4:57, 5:48, 6:17, 7:14, 8:8… | `db9209771da4f973` | 4 | yes | `q1+q5+40+60+120` at R = 1.2892 |
 | **335** | 443 | 1,086 | 3:119, 4:120, 5:74, 6:54, 7:30, 8:24… | `58c581836edf8d53` | 4 | yes | `q1+q5+60+300` at R = 1.4301 |
 | **359** | 1,190 | 3,243 | 2:6, 3:198, 4:264, 5:236, 6:179, 7:123… | `b1119595ed46e5ac` | 4 | no (deletion stopped at 483) | `q1+q5+60.1+60.2` at R = 1.5 |
@@ -65,9 +66,9 @@ E.5 asks for a canonical form of every certified witness — a Weisfeiler–Lema
 
 ### What this table says
 
-**No two of the 13 certified witnesses are isomorphic — and the point count alone no longer says so.** `d = 11` and `d = 311` at 189 points, the first collision this table has ever had, so the claim is now carried by a second invariant rather than by the first: 11 has 452 edges and 311 has 460, and a graph cannot be isomorphic to one with a different number of edges. The Weisfeiler–Leman hashes, which are the next invariant, are all distinct too, so no exact isomorphism test was needed on any pair.
+**No two of the 14 certified witnesses are isomorphic — and the point count alone no longer says so.** `d = 11` and `d = 311` at 189 points, the first collision this table has ever had, so the claim is now carried by a second invariant rather than by the first: 11 has 452 edges and 311 has 460, and a graph cannot be isomorphic to one with a different number of edges. The Weisfeiler–Leman hashes, which are the next invariant, are all distinct too, so no exact isomorphism test was needed on any pair.
 
-**And that is a fact about the extraction, not about the fields.** A witness's size is the output of a shrinking procedure that was *stopped on a budget* in 6 of the 13 cases (the table says which). Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot decide the question it was set, and the shape table above is where the cross-field structure actually shows up.**
+**And that is a fact about the extraction, not about the fields.** A witness's size is the output of a shrinking procedure that was *stopped on a budget* in 7 of the 14 cases (the table says which). Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot decide the question it was set, and the shape table above is where the cross-field structure actually shows up.**
 
 **The `N`-family the plan names.** Every field `d = N² − c²` owns the layer vector `(c/N, √d/N)`; for `N = 12` that family is `d = 23, 95, 119, 143`, and **all four are landed**. Phase A found that the witness lattices of `(95, 119)` share an integral shape, as do those of `(23, 191)`, with generator counts that agree exactly while the generator *sets* differ. That shared shape with equal counts is the precondition for one abstract graph drawn over several fields — and Table 1 shows what actually happens when you try it: the same shape holds a different number of unit vectors in each field, and where the count falls the lattice becomes three-colourable by certificate.
 
@@ -79,5 +80,5 @@ Sokolov's `χ_√ℚ(ℝ²)` is the supremum over `n` of `χ(ℚ × √n·ℚ)`,
 
 **It is settled by a rank, with no search.** A point `(a, b, c, e, m)` here is `((a + b√d)/m, (c + e√d)/m)`, so `F²` is `ℚ⁴` and the layer `ℚ × √d·ℚ` is the 2-dimensional subspace `b = c = 0`. Any *rotation* of it is some other 2-dimensional ℚ-subspace. So a point set whose ℚ-span is all of `ℚ⁴` lies in no 2-dimensional subspace whatever, rotated or not.
 
-**Every one of the 13 certified witnesses has ℚ-rank 4** (column above, computed in exact rational arithmetic), and **every refusing lattice in this census has rank 4** by construction — rank is recorded per lattice and the census never scans below it. **So nothing this milestone produced bears on Sokolov's question**, which is the same answer FS-58 gave informally ("their coordinates mix 1 and √d in both slots") now made exact and checkable.
+**Every one of the 14 certified witnesses has ℚ-rank 4** (column above, computed in exact rational arithmetic), and **every refusing lattice in this census has rank 4** by construction — rank is recorded per lattice and the census never scans below it. **So nothing this milestone produced bears on Sokolov's question**, which is the same answer FS-58 gave informally ("their coordinates mix 1 and √d in both slots") now made exact and checkable.
 

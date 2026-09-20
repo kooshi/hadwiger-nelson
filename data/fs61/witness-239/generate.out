@@ -142,3 +142,23 @@ extract D=239 pool q1+q5+24+60+120.1 ball 1.5181: 710957 points, 6396358 edges (
   deletion: 795/4917 tested, 2572 kept
   deletion: 885/4917 tested, 2482 kept
   deletion: 903/4917 tested, 2451 kept
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 239 q1+q5+24+60+120.1 1.5181 /home/kooshi/source/lean-dir/data/fs61/witness-239
+extract D=239 pool q1+q5+24+60+120.1 ball 1.5181: 710957 points, 6396358 edges (6.5 s)
+  deletion: 904/2451 tested, 2442 kept
+  deletion: 913/2451 tested, 2408 kept
+  deletion: 919/2451 tested, 2392 kept
+  deletion: 932/2451 tested, 2375 kept
+  deletion: 944/2451 tested, 2364 kept
+  deletion: 945/2451 tested, 2363 kept
+  deletion: 946/2451 tested, 2362 kept
+  deletion: 948/2451 tested, 2360 kept
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 239 q1+q5+24+60+120.1 1.5181 /home/kooshi/source/lean-dir/data/fs61/witness-239
+extract D=239 pool q1+q5+24+60+120.1 ball 1.5181: 710957 points, 6396358 edges (6.4 s)
+[fs61] generator stopped: deletion budget 1 s spent at position 948; pid 2403548 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 239 q1+q5+24+60+120.1 1.5181 /home/kooshi/source/lean-dir/data/fs61/witness-239 --stop-deletion
+extract D=239 pool q1+q5+24+60+120.1 ball 1.5181: 710957 points, 6396358 edges (6.4 s)
+  deletion stopped by request at position 948: the witness is the last recorded refusing set (2360 points), refusing but NOT 1-minimal
+direct witness over Q(sqrt239): pool q1+q5+24+60+120.1 (|W| = 52, M = 120), ball piece R = 1.5181: 710957 points, 6396358 edges -> deletion start 2360 -> refusing set 2360 points; 6639 exact unit edges; CaDiCaL exit 20 in 18.33 s (LRAT 159213396 bytes), Glucose4 ['UNSAT', 24.911], Minisat22 ['UNSAT', 14.243]; deletion controls [[0, 'SAT (model verified)'], [1879, 'UNSAT'], [1398, 'UNSAT'], [917, 'UNSAT'], [436, 'UNSAT'], [2315, 'UNSAT'], [1834, 'UNSAT'], [1353, 'UNSAT'], [872, 'UNSAT'], [391, 'SAT (model verified)'], [2270, 'SAT (model verified)'], [1789, 'SAT (model verified)']]; 370.0 s; wrote /home/kooshi/source/lean-dir/data/fs61/witness-239

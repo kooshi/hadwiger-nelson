@@ -1,3 +1,21 @@
 fs61 land d=239: cheapest refusing ball 710957 points at R=1.5181 on q1+q5+24+60+120.1 (refused in 197.15 s; cost proxy 140520651); checkpointed extract
 fs61 land d=239: cheapest refusing ball 710957 points at R=1.5181 on q1+q5+24+60+120.1 (refused in 197.15 s; cost proxy 140520651); checkpointed extract
     stage 2 (deletion) started at position 540; budget 600 s
+fs61 land d=239: cheapest refusing ball 710957 points at R=1.5181 on q1+q5+24+60+120.1 (refused in 197.15 s; cost proxy 140520651); checkpointed extract
+    stage 2 (deletion) started at position 903; budget 2400 s
+fs61 land d=239: cheapest refusing ball 710957 points at R=1.5181 on q1+q5+24+60+120.1 (refused in 197.15 s; cost proxy 140520651); checkpointed extract
+    stage 2 (deletion) started at position 948; budget 1 s
+    stopping the generator (pid 2403548): deletion budget 1 s spent at position 948
+    stopped: pid 2403548 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    generation pass "deletion under budget": 25 s, exit -15 -- deletion budget 1 s spent at position 948
+    generation pass "emit from the last checkpoint": 371 s, exit 0
+    C.1 certificate        exit  0  PASS  CERTIFIED: 2360 points of Q(sqrt239)^2, each a reduced (a, b, c, e, m); all 6639 pairs at distan
+    C.2 planted faults     exit  0  PASS  CONTROLS ALL PASS
+    C.3 wrong radicand     exit  1  PASS  REFUSED EDGE_NOT_UNIT: the file lists edge [0, 531] between [0, 0, 0, 0, 1] and [49, 1, -7, 7, 1
+    C.4a second opinion    exit  0  PASS  RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse
+    C.4b pinned-vertex            PASS  recorded, not required (C.9 says not 1-minimal) -- deleting the pinned vertex leaves a verified 3-colouring
+    C.5 four colours              PASS  a proper 4-colouring using 4 colours, verified on all 6639 edges
+    C.6 3-adic barrier            PASS  4328 of 6639 edges have a direction with 3 in its reduced denominator
+    C.9 minimality                NOTE  refusing but NOT 1-minimal: the deletion was stopped at position 948 of 4917
+  d=239: 2360 points, 6639 edges -> CERTIFIED; chi(Q(sqrt239)^2) = 4; no
+[land: 767.8 s wall on desktop]

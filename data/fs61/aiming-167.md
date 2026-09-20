@@ -51,9 +51,9 @@ Across the whole family at tier 1b, **24 of 37 asks ran to the 600-second wall u
 
 ### 3. What the size law predicts, and why the prediction is weak
 
-Fitting `log(smallest refusing ball) = a + b·log d` over the **11 landed fields with `d ≡ 7 (mod 8)`** gives slope **1.10** (95 % interval -0.27 to 2.47, R² **0.22**). **R-size is scored `not decided`.**
+Fitting `log(smallest refusing ball) = a + b·log d` over the **12 landed fields with `d ≡ 7 (mod 8)`** gives slope **1.15** (95 % interval -0.14 to 2.44, R² **0.23**). **R-size is scored `not decided`.**
 
-**No prediction for `d = 167` is given here, and that is the finding.** Extrapolating the fit would read ≈ 94,645 points, but its 95 % interval runs 87 to 103,090,434 — **6 orders of magnitude**. A number with that interval is not a budget, and quoting the midpoint of it would be a prediction the data do not support.
+**No prediction for `d = 167` is given here, and that is the finding.** Extrapolating the fit would read ≈ 103,355 points, but its 95 % interval runs 140 to 76,443,755 — **6 orders of magnitude**. A number with that interval is not a budget, and quoting the midpoint of it would be a prediction the data do not support.
 
 **The data go further than "not decided": they contradict the premise.** The reading behind R-size was that `ℚ(√167)` is *not arithmetically special, only large* — that the refusing ball grows with `d`. Among the landed fields the smallest refusing ball is **3,565 points at `d = 47`** and the largest **1,803,077 at `d = 431`**, with `d = 359` refusing on 46,421 points against 248,213 at `d = 23`. **Size does not track `d`; it tracks the lattice.** What sets a ball's point count is its covolume (`π²R⁴/covolume`), and which lattice a field happens to own is arithmetic, not size.
 

@@ -66,7 +66,7 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **203** | 3 | 4 | 18 | 18 | 51 (16/11/19/0/5) | **1** / 10 / 0 | 1.0 … – | Not landed at tier 2l (asked: 1 of 5 Open lattices, no refusal) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 203 --tier 2` |
 | **215** | 7 | 5 | 24 | 24 | 67 (18/16/26/0/7) | **6** / 6 / 1 | 2.1539 … – | Not landed at tier 2l (asked: 3 of 7 Open lattices, no refusal) | none | ≤ 5 | `python3 tools/fs61_census.py census-field 215 --tier 2` |
 | **227** | 3 | 4 | 114 | 114 | 24 (8/6/10/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 2l (by certificate) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 227 --tier 2` |
-| **239** | 7 | 4 | 24 | 24 | 69 (14/23/23/5/4) | **7** / 15 / 4 | 1.2771 … 1.2892 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 239` |
+| **239** | 7 | 4 | 24 | 24 | 69 (14/23/23/5/4) | **7** / 15 / 4 | 1.2771 … 1.2892 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **251** | 3 | 4 | 70 | 75 | 41 (14/10/14/0/3) | **1** / 5 / 1 | – … – | Not landed at tier 2l (asked: 1 of 3 Open lattices, no refusal, 1 undecided at the wall) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 251 --tier 2` |
 | **263** | 7 | 4 | 24 | 24 | 55 (8/20/17/0/10) | **3** / 9 / 0 | 2.1539 … – | Not landed at tier 2l (asked: 1 of 10 Open lattices, no refusal) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 263 --tier 2` |
 | **287** | 7 | 4 | 24 | 24 | 80 (14/26/18/0/22) | **12** / 29 / 5 | 2.1539 … – | Not landed at tier 2l (asked: 7 of 22 Open lattices, no refusal, 3 undecided at the wall) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 287 --tier 2` |
@@ -88,7 +88,7 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **479** | 7 | 5 | 36 | 36 | 38 (2/15/12/0/9) | **5** / 10 / 3 | 1.5195 … – | Not landed at tier 2l (asked: 3 of 9 Open lattices, no refusal, 1 undecided at the wall) | none | ≤ 5 | `python3 tools/fs61_census.py census-field 479 --tier 2` |
 | **491** | 3 | 4 | 50 | 102 | 23 (5/5/11/0/2) | **0** / 2 / 0 | – … – | Not landed at tier 2l (by budget: 2 Open lattices, none askable) | none | ≤ 4 | `python3 tools/fs61_census.py census-field 491 --tier 2` |
 
-**40 fields.** 13 Landed (certified); 26 Not landed at tier 2l; 1 Refusal claimed. Of the nulls: 15 asked, 10 by budget, 1 by certificate.
+**40 fields.** 14 Landed (certified); 26 Not landed at tier 2l. Of the nulls: 15 asked, 10 by budget, 1 by certificate.
 Balls on the census population (lattices the filter left open): 600 records, **202 asked**, 398 over cap, 55 unknown. Counting every record, including the balls phase 0's paired controls asked on already-certified lattices at d = 47: 652 records, 225 asked.
 
 **The kernel and this table.** **No row above is kernel-checked.** The Lean kernel does hold `χ(ℚ(√11)²) ≥ 4` —

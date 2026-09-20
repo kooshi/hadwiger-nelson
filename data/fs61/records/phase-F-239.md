@@ -56,7 +56,7 @@ verdict here as a **halt**, not a row: a 3-colourable superset of a refusing bal
 record.
 
 **The two things the rule refuses to do, each planted and each seen to fire**
-(`python3 tools/fs61_census.py selftest --section onset`, 8 rows, 0 failures):
+(`python3 tools/fs61_census.py selftest --section onset`, **10 rows, 0 failures**):
 
 | the refusal | why the rule has it | the plant, and what it printed |
 |---|---|---|
@@ -67,8 +67,19 @@ Three further rows keep those two from being vacuous: the `Rcap` arm is **reacha
 refusal, the degree-18 radius does not lift and the rule falls through to the largest ball under the cap, which
 does), a lifting ask is always at a strictly larger radius than the refusal it is aimed above (checked at
 from-degrees 8, 11, 14, 17), and on the **real records** every lattice the plan holds really carries a refusal at a
-field with no certificate — **one lattice, `d = 239`'s `L3e1c94c6`** — while the thirteen certified fields, which
-carry refusing balls too, contribute **0** items.
+field with no certificate — **one lattice, `d = 239`'s `L3e1c94c6`** — while the certified fields, which carry
+refusing balls too, contribute **0** items. *Thirteen of them when the tier was minted; **fourteen now that
+`d = 239` itself has landed**, which empties this tier's scope altogether — the plan reads `0 lattice(s) in
+scope` and the real-data rows are now vacuously true, the discrimination resting on the fixture plants. That is
+the tier working as defined: it asks for a cheaper certificate, and there is no longer a field that wants one.*
+
+**A third refusal, which I did not anticipate and the accounting found**, minutes after the first ask landed: the
+ball this tier asks **refuses** — it contains a refusing ball — so it becomes the lattice's highest refusal and
+demanded a still higher ask, and that one another, up to the cap. **The rule was non-terminating and `table
+--check` would have reported a gap for ever on work that had been done.** Fixed by aiming above refusals from
+*other* tiers only and discharging a lattice on its own tier-`1u` record, with two selftest rows of its own. *The
+check earned its keep on the day it was written, which is the argument for writing the accounting before the run
+rather than after it.*
 
 **And the accounting refuses the same way.** `table --check` now re-derives this rule from the covolume and the
 generator count for every field, so a missing onset ask is a named defect rather than a silence. Seen to fire
@@ -349,25 +360,134 @@ and it would have answered nothing. Nothing warns you; the two runs differ only 
 
 ## 4. What this settles, in the words the census uses
 
-**`d = 239` is NOT LANDED.** It has a refusing ball on record — now **two** of them, at degree 14 and degree 18 —
-and is `Refusal claimed` in `census.md`, excluded from every certified count. **The census closes at thirteen of
-forty certified.**
+*(Written when the coda was to hand back not-landed. The owner then said **finish it**, and §4a–§4c are what
+followed; the paragraph below is kept because its second half is the finding and is unchanged by the landing.)*
+
+**`d = 239` had TWO refusing balls on record, at degree 14 and degree 18, and no certificate.** It is now
+**`Landed (certified)`** (§4c), and **the census closes at fourteen of forty.**
 
 **But the upward route WORKED, and that is the finding.** The fifth implementer's proposal was the right
 experiment and it was cheap — 3.6 minutes for the ask, 21 minutes to a 2,451-point refusing set — against two
 stopped attempts totalling 103 minutes that reached 8,336 and were still grinding. The field is **one gate run
 from a certificate**, resumable with one command, at a proof size in `d = 59`'s league rather than ten times it.
 
-**What is still owed, priced.** `python3 tools/fs61_census.py land 239 --tier 1u`: a 600 s deletion window, an
-emit pass, then C.1–C.3, C.4a, C.5–C.7, C.9 (C.4b required only if C.9 records 1-minimal — it will not, since a
-resumed deletion can never be). Comparable gates: seven minutes at `d = 359`, with C.4a's three outside solvers
-the unbounded term. If it certifies, the census reads **fourteen of forty** and
-**`χ(ℚ(√239)²) = 4`** is a new exact value, its upper bound the residue plane at 7 (`[Moorhouse2010]` Thm 8.1).
+**What was still owed, and what it cost.** `land 239 --tier 1u`: a deletion window, an emit pass (371 s), then
+C.1–C.3, C.4a, C.5–C.7, C.9. Run in §4c — **`χ(ℚ(√239)²) = 4`, certified**, its upper bound the residue plane at 7
+(`[Moorhouse2010]` Thm 8.1). C.4b was *recorded, not required*, exactly as predicted, because a resumed deletion
+can never be 1-minimal.
 
-**And a second question the owner may want answered first:** whether a certificate of that weight is wanted at
-all. `d = 59`'s 39.7 MB is the repository's largest; this would be of that order or somewhat above. The fifth
-implementer escalated that question at 8,000 points and declined to answer it; at 2,451 it is a much easier call,
-but it is still a product decision and not an implementer's.
+**The weight question, answered by the owner before the run and then by the artifact.** His rule: commit the
+LRAT if it is **≤ 60 MB**, otherwise stop and report the size. It came in at **42.95 MB** on a 2,360-point
+witness — the repository's largest certificate, just above `d = 59`'s 39.7 MB on 1,739 points — so the commit arm
+applies and the escalation arm never fired.
+
+---
+
+## 4a. The owner said FINISH IT — the second launch, written before it ran
+
+*The owner's decision, 2026-09-20, after reading §3 and checking by artifact: finish the landing, with a larger
+deletion budget because **certificate weight is now the cost that matters**. He also recorded the defect in his own
+stop rule: its letter said "core rounds" where he meant "the kept set", which is why §3.4a's clause read as
+determined when the kept set had in fact met his target. The stop stands as the right call; the wording was his.*
+
+```
+COMMAND     python3 tools/fs61_census.py land 239 --tier 1u --deletion-budget 2400
+            The tier flag is the tier that ASKED the ball, read off the ball's own record, so the landing
+            record's `tier` and `ball_tier` agree.  No flag selects the ball: `land`'s cost proxy
+            `points x (solve_seconds + 0.5)` reads 1.405e8 for the tier-1u ball against 1.493e8 for the
+            degree-14 one, and the headline prints which it took.
+WHY 2400 s  the default is 600 s.  Stage 2 deletes one vertex at a time and is the only stage that makes the
+            WITNESS smaller, and witness size is what a certificate's megabytes track (1,004 points -> 19.0 MB
+            gzipped; 1,739 -> 39.7 MB).  Measured on this object: 4,917 -> 2,451 points in about three minutes,
+            ~903 of the scan done.  1,548 tests remain; at 0.5-2 s a test that is 13-50 minutes, so 2,400 s may
+            or may not finish it.  Either outcome is SOUND -- gate C.9 records minimality and never requires it.
+RE-ASK RULE no landing record exists for d = 239, so the "larger --deletion-budget means REGENERATE" rule cannot
+            fire and `witness.json` (which does not exist either) is not deleted: this is a plain resume.
+RESUME      the identical command.  `extract` resumes from data/fs61/witness-239/steps.jsonl -- stage 1 at its
+            76-round fixpoint (4,917 points), stage 2 at position 903 with 2,451 points.
+IF IT DIES  at most one minute of deletion is redone (stage 2 checkpoints every 60 s, flushed and fsynced).
+            Nothing else moves: a `land` run writes only under data/fs61/witness-239/ plus one appended line
+            each to landings.jsonl and witnesses.jsonl.
+LAUNCHED    setsid, no `timeout` wrapper, no pipe; stdout appended to data/fs61/records/land-239u.log, pid to
+            data/fs61/records/land-239u.pid.
+STOPPED     BY PID -- and then the `extract` CHILD by its own pid, because in this phase `kill -TERM` on the
+            parent left it running and re-parented TWICE (SS 3.3, 3.4a).  Verified by effect: a /proc walk
+            matching an argv ELEMENT reading 0, never `ps` on the pid I happened to hold.
+
+WEIGHT RULE (the owner's, fixed before the run): commit `witness.json` + `witness.lrat.gz` if the gzipped LRAT
+            is <= 60 MB.  If it is LARGER, do not commit the LRAT: stop, report the size, leave everything on
+            disk, and he decides between a from-scratch smaller ball and an out-of-tree certificate.
+
+WATCH       C.4b.  A resumed deletion rebuilds its scan order from the SMALLER kept set and reuses the stale
+            position, so it skips the ~903 vertices already passed -- yet if it reaches the end of that order
+            `extract` writes `deletion to 1-minimal` and C.9 will read `minimal: yes`.  Under the owner's
+            ruling 1 after phase C, C.4b (deleting the pinned vertex must leave a 3-colourable graph) is then
+            REQUIRED, and this would be the first fresh landing to exercise that arm.  `extract` deletes
+            outward-in and tests the pin LAST, so a completed scan should reach it -- but a RED C.4b on a
+            witness C.9 calls 1-minimal is one of the three things the owner said to HALT on, not to work past.
+```
+
+### 4b. The deletion was cut short of its 2,400 s — the rate decayed 60× while it ran, measured twice
+
+**Cause, with the measurement, written before the signal.** The owner set 2,400 s because stage 2 is the only
+stage that shrinks the *witness*, and witness size is what a certificate's megabytes track. His basis was this
+object's own early scan: **363 tests in 240 s — 0.7 s a test, 1.04 points a test.** The rate did not hold, and I
+re-derived it twice while the run was live:
+
+| window | tests | points removed | s / test | **points / second** |
+|---|---|---|---|---|
+| the early scan (positions 540–903, the basis for 2,400 s) | 363 | 379 | 0.7 | **1.49** |
+| positions 903–932 (this run's first 5.6 min) | 29 | 76 | 11.6 | **0.226** |
+| positions 932–948 (the next 11 min) | 16 | 15 | 41.7 | **0.022** |
+
+Each test is a SAT solve on a graph ever closer to minimally unsatisfiable, so the cost per test rises and the
+yield per test falls — the same decay the fifth implementer measured in the *core* rounds, one stage later. At
+0.022 points a second the 1,390 s left in the budget buys about **31 points, 1.3 % of the witness**, against the
+23 minutes it costs, with the whole gate still to run inside a one-hour budget. **Stopped on that arithmetic.**
+
+*And the near-miss is worth recording beside it, because it is today's fourth reading of a rate and the first one
+I got right by checking.* At the 11.6 s/test window I was about to cut the deletion on "11 seconds a test is
+slow" — and in points, which is the quantity that matters, that window was removing **2.62 points a test**, so
+2,400 s would have bought ~542 points, **22.8 %**. On *that* reading the owner's budget was well spent and cutting
+it would have been wrong. Only the next window made it clearly not worth it. **The units decide the ruling, and a
+rate measured on a stale window is a different number from the same rate measured now** — `CLAUDE.md`'s "a number
+in a ruling travels with its units, its conditions and its population", met three times in one afternoon.
+
+**Forfeit.** The in-flight deletion test only; twelve deletion checkpoints are fsynced and the relaunch resumes at
+position 948 with 2,360 points. **What this costs the artifact: about 31 points on a ~2,360-point witness**, and
+the witness is not 1-minimal either way — a resumed deletion can never be (the frozen `extract` rebuilds its scan
+order from the smaller kept set and reuses the stale position, so it skips). **C.4b is therefore *recorded, not
+required*, and the arm the owner asked me to watch does not fire on this witness.**
+
+### 4c. **`d = 239` is CERTIFIED: `χ(ℚ(√239)²) = 4`** — the census closes at fourteen of forty
+
+**The witness: 2,360 points, 6,639 edges, in `ℚ(√239)²`**, from the tier-`1u` ball (`R = 1.5181`, 710,957 points
+on the saturated lattice `q1+q5+24+60+120.1`), shrunk by 76 core rounds to a 4,917-point fixpoint and then by a
+deletion stopped at position 948 of 4,917. `witness.json` sha256 `1a49a2a76e734933…`; gzipped LRAT
+**42.95 MB (45,041,158 bytes)** — **inside the owner's 60 MB rule, so it is committed**; least common denominator
+120; pinned edge `[0, 3]`.
+
+| gate item | verdict | the line |
+|---|---|---|
+| **C.1** the certificate | **PASS** | `CERTIFIED: 2360 points of Q(sqrt239)^2 …` — every pair at distance exactly 1 re-derived in integer arithmetic and equal to the file's edge list, the LRAT replayed against the checker's own CNF |
+| **C.2** planted faults | **PASS** | `CONTROLS ALL PASS` — **13 rows pass, 0 fail** |
+| **C.3** wrong radicand | **PASS** | `REFUSED EDGE_NOT_UNIT`, exit 1, offered over `ℚ(√251)` |
+| **C.4a** the second opinion | **PASS** | `RECHECK PASS` — all 6,639 pairs re-derived in exact `Fraction` arithmetic, and **Lingeling, CaDiCaL 1.5.3 and MapleChrono each refuse three colours** |
+| **C.4b** pinned vertex | **PASS**, *recorded not required* | C.9 says not 1-minimal, so the arm is recorded — **and it passes anyway**: deleting the pinned vertex leaves a verified 3-colouring. *The arm the owner asked me to watch did not fire, and could not: a resumed deletion can never be 1-minimal.* |
+| **C.5** four colours | **PASS** | an explicit proper 4-colouring, verified on **all 6,639 edges** — the graph is exactly 4-chromatic |
+| **C.6** the 3-adic barrier | **PASS** | **4,328 of 6,639** edges carry a direction with 3 in its reduced denominator, as `ThreeAdicBarrier.lean` requires of any four-chromatic graph over this field |
+| **C.7** the value | **PASS** | `χ(ℚ(√239)²) = 4`; `L = 4` from `frame.jsonl`, the upper half the residue plane at 7 (`239 ≡ 1 (mod 7)`, `[Moorhouse2010]` Thm 8.1) — **prior art, not ours** |
+| **C.9** minimality | recorded | refusing but **not** 1-minimal: deletion stopped at 948 of 4,917 |
+
+**Independently recounted off the committed bytes**, by a reader that imports nothing from the census driver:
+`fs61_recount_landings.py` reads **14 of 14 fields green**, with `d = 239`'s `witness.json` sha256 matching its
+landing record, and its negative control on this very witness fires **5 of 5** planted faults on a faithful copy
+that reads green first.
+
+**`χ(ℚ(√239)²) = 4` is a new exact value** — the fifth this milestone produced and the fourteenth real quadratic
+field ever pinned. The whole object exists because of the upward ask: the field had been stopped twice on a
+sparser ball of the *same lattice*, 103 minutes for a kept set of 8,336 still falling by 25 points a round.
+**Total from the tier-`1u` ask to `CERTIFIED`: about 52 minutes of machine, including the gate.**
 
 ---
 
@@ -397,16 +517,17 @@ exit status of the kill or the absence of the pid you happened to hold.*
 | the onset rule's own section, both refusals planted | `… selftest --section onset` | **10 rows, 0 failures** |
 | the readings' selftest | `python3 tools/fs61_readings.py selftest` | **10 rows, 0 failures** |
 | the census table and its accounting, tier `1u` included | `python3 tools/fs61_census.py table --check` | **40 fields at tier 2l, accounting checked at 1, 1b, 1c, 1u, 2l, 0 defects** |
-| every certificate re-derived off the committed bytes | `python3 tools/fs61_recount_landings.py` | **13 of 13 fields green** |
-| that reader's negative control | `… --plant 59` | **5 of 5 planted faults fired**, on a faithful copy reading green |
+| every certificate re-derived off the committed bytes | `python3 tools/fs61_recount_landings.py` | **14 of 14 fields green** — `[11, 23, 47, 59, 71, 95, 119, 143, 191, 239, 311, 335, 359, 431]` |
+| that reader's negative control, on the NEW witness | `… --plant 239` | **5 of 5 planted faults fired**, on a faithful copy reading green |
+| and on an older witness | `… --plant 59` | **5 of 5 planted faults fired**, on a faithful copy reading green |
 | the frozen tree | `git status --porcelain data/fs58 'tools/fs58_*'` | **0 lines** |
-| the standing witnesses | `git status --porcelain data/fs61/witness-*` | **2 lines, both `README.md`** — the `[Fischer1990]` citation; no `witness.json` or `.lrat.gz` byte moved, and every sha256 re-read by the recount matches its record |
+| the thirteen standing witnesses | `git status --porcelain data/fs61/witness-*` | **2 lines, both `README.md`** — the `[Fischer1990]` citation. **No existing `witness.json` or `.lrat.gz` byte moved**, and every sha256 re-read by the recount matches its record. `witness-239/` is new: nine added files, 42.95 MB of it the LRAT |
 | nothing running | a `/proc` walk matching an argv **element** | **`census/fs58 processes: 0`** |
 
-**The derived tables regenerated** (`census.md`, `readings.md`, `shapes.md`, `aiming-167.md`). What moved, and
-only this: `census.md` gains the tier-`1u` legend line, `d = 239`'s asked-ball count goes 6 → 7 and the family
-total 201 → 202; the field's **state is unchanged at `Refusal claimed`** and the census still reads **13 Landed
-(certified) of 40**. In `readings.md` the degree phase diagram's population goes 774 → 775 balls and its
+**The derived tables regenerated** (`census.md`, `readings.md`, `shapes.md`, `aiming-167.md`). `census.md` gains
+the tier-`1u` legend line, `d = 239`'s asked-ball count goes 6 → 7 and the family total 201 → 202, and the field's
+state goes **`Refusal claimed` → `Landed (certified)`**: the census reads **14 Landed (certified) of 40**, with 26
+not landed (15 asked without a refusal, 10 by budget, 1 by certificate). In `readings.md` the degree phase diagram's population goes 774 → 775 balls and its
 degree-14–20 refusals 16 → 17 — and the degree law's control still reads **median 1.0000, range 0.715–1.184, 0
 outside ±30 %**, now including a ball at degree 18, which is out of sample for every earlier row of that table.
 
