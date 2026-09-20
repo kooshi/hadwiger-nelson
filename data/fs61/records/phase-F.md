@@ -142,6 +142,78 @@ NOT RUN     no Lean, no lake, nothing under data/fs58 or tools/fs58_*.  No exist
 
 ## 3. Results
 
+### 3.1 The extraction cost model, measured field by field
+
+*Round 0 of `extract` is one CaDiCaL assumption-core refutation of the **whole** ball, with one selector variable
+per vertex; it cannot be stopped usefully, and it is the single largest item in a field's generation. The later
+rounds run on the shrinking kept set. Every number is wall seconds on the desktop, one heavy job at a time.*
+
+**The two columns being compared measure the same object, checked rather than assumed** (the owner's standing
+correction that ball points are not peeled-piece points). At tiers `1c` and `2l` the ball worker builds the whole
+ball `X` and its whole edge set `E` and hands both to the solver with no peeling step, so a record's `points`,
+`edges` and `solve_seconds` all describe the ball; and `extract` rebuilds that ball from the same lattice key and
+radius — at `d = 239` it printed `369885 points, 2587978 edges`, the ball record's own two numbers. Phase B′'s
+correction about peeled pieces is about an earlier code path and does not touch any of these five.
+
+| d | ball points | ball edges | plain solve (s) | round 0 (s) | round 0 / plain solve | rounds to fixpoint | fixpoint points | witness points |
+|---|---|---|---|---|---|---|---|---|
+| 239 | 369,885 | 2,587,978 | 403.0 | **556.1** | **1.38** | | | |
+| 335 | 623,737 | 4,365,620 | 65.3 | | | | | |
+| 311 | 1,137,169 | 7,960,542 | 18.2 | | | | | |
+| 431 | 1,803,077 | 9,349,130 | 322.9 | | | | | |
+| 59 | 1,396,469 | 9,773,884 | 314.7 | | | | | |
+
+### 3.1a `d = 239` was STOPPED and re-queued last — cause, measurement and forfeit, written before the signal
+
+**Cause.** `d = 239` is the hardest-solving of the five and it is blocking the other four, which are cheaper by
+between 5× and 20× on the quantity that governs extraction. `CLAUDE.md`'s rule is that *a run that blocks
+something is presumed killable, and the burden of proof is on keeping it*; the owner's brief says the same in
+its own words — *if certification at one of these balls looks like it will eat the budget, say so with the
+measurement and move to the next field.* This is that.
+
+**Measurement** (from `data/fs61/witness-239/steps.jsonl`, which is the checkpoint itself, not a log):
+
+```
+core-round-0   369,885 -> 46,338 points   556.1 s
+core-round-1    46,338 -> 26,271 points    47.6 s
+core-round-2    26,271 -> 21,800 points    81.3 s
+core-round-3    21,800 -> ?                >900 s and still running when the decision was taken
+```
+
+**The round cost is rising as the kept set shrinks**, which is the expected shape — each round is an
+assumption-core refutation of a set that is closer to minimally unsatisfiable, and a minimal core is the hard
+instance — but the *rate* here is unlike every landed field: at `d = 23` (ball solve 54.9 s) the rounds after
+round 0 ran 8–15 s, at `d = 143` (116.0 s) 3–31 s, and the fixpoints took 48 and 75 rounds. At `d = 239` (403.0 s)
+round 3 alone has already cost more than every post-round-0 round of `d = 23` and `d = 143` put together. Thirty
+more rounds at even a third of round 3's cost is **two and a half hours on one field**, and there are four
+behind it. The generation cap (5,400 s) would fire inside the core rounds, which is the one stop this driver
+handles badly: the emit pass that follows a capped stop carries no wall of its own.
+
+**Forfeit, named.** The in-flight round 3 — at least 15 minutes of solver time, and nothing else. `extract`
+fsyncs every finished round, so the resume starts from **core-round-2 at 21,800 points** and redoes only round 3;
+no other census state moves, no landing record is written, and `witness-239/` keeps its checkpoint. What is
+genuinely lost is the *answer* to how many rounds this field's fixpoint takes, which nobody has measured — it is
+re-asked when 239 is resumed, and if the resumed run is stopped again that measurement is what the record will
+still owe.
+
+**And this is where the onset pass I declined in §1 would have been the right instrument, for a reason neither
+the brief nor I had.** My decline was argued on *round 0*, and round 0 is exactly the part the calibration
+predicted correctly (1.38× the plain solve). What it did not price is the *tail*: the number of core rounds and
+their cost, which is set by how hard the ball's minimal core is, and that is the same quantity the ball's plain
+solve time measures. A smaller refusing ball of the same lattice would plausibly carry a smaller and easier core.
+**The brief's rule and mine were both aimed at one stage of a two-stage cost.** It remains true that the brief's
+threshold would not have fired here either — 369,885 points is under its 500,000 — so nothing was lost by the
+decline that would have been saved by following it; what is lost is that neither rule would have caught this
+field. The honest form of the rule, for whoever comes next: **a refusing ball whose plain solve costs hundreds of
+seconds is an expensive extraction whatever its size, and that is when to spend an onset ask.**
+
+**The stop.** By process group, never by matching a command line; verified by effect — both pids absent from
+`ps`, no `fs61_census.py` / `fs58_search.py` process left in a `/proc` walk that matches an argv **element**, and
+`steps.jsonl` byte-identical across 65 s (the core-round checkpoints are minutes apart, so a shorter check would
+prove nothing).
+
+### 3.2 Per field
+
 *(filled in as each field lands)*
 
 ---
