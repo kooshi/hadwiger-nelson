@@ -76,3 +76,28 @@ RUNNING     pgid 1727573 (stop with `kill -TERM -1727573`, then verify by effect
 **Nothing was pushed and nothing was rescoped.** P4 ("every tier-1 refusal certifies") is **not yet scored**: no
 extraction has stalled under the corrected selection — the one that looked like stalling was stalling because of my
 ball choice, not because of the object.
+
+## HALT — the certification run died without explanation (plan §5 rule 15)
+
+Detected immediately after the hand-back, when the waiter armed on "four certificates or the process gone" fired with
+**zero certificates**. Reported, not repaired: the plan's fifth halt is *any process dies unexplained*, and the rule is
+stop and report, do not diagnose past it or retry.
+
+**The facts, and only the facts:**
+
+* the process group `1727573` is gone; no process of mine remains (`ps`);
+* its log contains **no error, no traceback and no final line** — the last thing it wrote was the headline for
+  `d = 359`;
+* `data/fs61/witness-359/steps.jsonl` holds **94 checkpoints**, the last a `deletion` step at position 483 with
+  `finished: false`. So it died *inside* the deletion phase, not between fields;
+* **memory was not the cause**: 119 GB available now, and this extraction's worker peaked around 380 MB;
+* `dmesg` is not readable as this user, so no kernel-side evidence was obtainable.
+
+**Leading hypothesis, stated as a hypothesis:** the death coincides with the end of my turn, so the likeliest cause is
+the harness reaping background processes when the session handed back — an environmental cause, not a fault in the
+work. **It is not established**, and it is exactly the kind of "true, sufficient-sounding reason" that this project's
+own rules warn stops you looking for the second one. The alternative worth ruling out before any long run is relaunched
+is a fault in `extract`'s deletion phase at scale.
+
+**Nothing is lost and nothing is claimed.** The 94 checkpoints are intact, `land-all` resumes from them, no field is
+certified, no value changed, and `census.md` is untouched.
