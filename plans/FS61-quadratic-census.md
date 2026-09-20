@@ -513,6 +513,42 @@ For each field with a `Refused` ball, smallest ball first, into `data/fs61/witne
 | C.9 | (once) a vertex-minimality note | per witness: is it 1-minimal? | recorded yes/no; not required |
 | C.10 | (once) the owner's decorrelated recheck | the product owner's own script | done by the owner, not the implementer |
 
+**The owner's rulings after phase C (2026-09-20; phase C ACCEPTED — scored by artifact: frozen files untouched, plan edits confined
+to §R, all nine `witness.json` byte-identical to the ones C.10 passed (`data/fs61/owner/recheck-all.out`), C.1 re-run by the owner
+at 11 and 359 with exit 0 read directly, C.2's thirteen rows read at 359, C.7 read against `frame.jsonl` at all nine).** They
+govern the table above wherever they differ, and apply to every field equally, including fields phase B′ has not landed yet.
+
+1. **C.4 was two claims under one pass condition, and the plan contradicted itself** (the implementer's proposal, accepted; the
+   defect is the plan's and the owner approved it). `tools/fs58_recheck_witness.py` (frozen; sha256 `880f5bc48ef39b4c…`) is
+   straight-line: (i) every pair in `Fraction` arithmetic equals the file's edge list, else FAIL; (ii) Lingeling, CaDiCaL 1.5.3 and
+   MapleChrono each refuse three colours, else FAIL; (iii) deleting the pinned edge's second vertex leaves a 3-colourable graph,
+   else FAIL. Step (iii) is a **minimality** control — it presumes the pinned vertex is critical — while C.9 says minimality is
+   *recorded, not required*. So:
+   * **C.4a, the second opinion proper = steps (i) and (ii). Required.** Evidence: `RECHECK PASS`, **or** the line
+     `RECHECK FAIL: deleting vertex … leaves a graph that still refuses` — in that file, at that hash, the line is reachable only
+     after (i) and (ii) returned without failing. *A correction to the phase record, which says the second opinion proper is
+     "not reached" at 95: the control runs **last**, so at 95 it was reached and passed; what was lost is only the PASS line's
+     wording.* C.10 (independent code, two further solvers) reads `RECHECK PASS` on that same file.
+   * **C.4b, pinned-vertex criticality = step (iii). Required iff C.9 records the witness 1-minimal; otherwise recorded.** A red
+     C.4b on a 1-minimal witness is a defect in the generator or the recheck and halts.
+   * **`Landed (certified)` = C.1–C.3, C.4a, C.5–C.7 green.** Under this rule `d = 95` is landed; its C.4b is recorded red, with
+     the diagnosis already in the record. The driver's diagnosis line must stop advising *"resume with a larger
+     `--deletion-budget`"* — the record itself shows a resumed deletion can never reach 1-minimality — and say *regenerate from
+     scratch on a smaller ball (`--ball-rank`)*.
+   * `land 95 --ball-rank 2` **is run**, as a nicety and not as a repair: `d = 95`'s state no longer depends on it, so it is not
+     tuning an object until a check agrees; it is a from-scratch 1-minimal witness on a 6,997-point ball, wanted by FS-60, whose
+     kernel cost tracks witness size (FS-58's 95 witness is 1,068 points and not 1-minimal). Both witnesses stay.
+2. **C.8's pass condition, reworded** (accepted): byte-identical `witness.json` from the committed witness **directory**; where
+   C.9 records a stopped deletion, the gitignored `steps.jsonl` checkpoint is part of what makes that true, and `run-all.sh` says
+   in its header what a rerun without it produces (the larger core-round witness with `--stop-deletion`, a smaller 1-minimal one
+   without).
+3. **The re-ask rule for deletion** (accepted; the sibling of §6's rule for `Unknown` balls): a `--deletion-budget` larger than the
+   one a landing record carries means **regenerate**; the same or smaller budget is a no-op. And because the frozen `extract`
+   resumes a deletion at a stale scan position, **a stopped deletion is never finished later** — only a from-scratch run can be
+   1-minimal.
+4. **C.9 gains a clause** (accepted): *a witness that is not 1-minimal is not a weaker certificate* — a refusing set refuses
+   whether or not it is minimal; minimality buys size (the checker's time, FS-60's kernel cost), never soundness.
+
 ### Phase D — the other half: `d ≡ 3 (mod 8)` — **NOT RUN (owner's re-plan above, ruling 3): its condition, R-mod8 surviving phase B, failed at `d = 11`.** The rows below are kept as the record of what was planned
 
 Run only if phase B leaves R-mod8 standing. FS-58's chain route at 11: a 3-integral pool (denominators dividing 10) whose capsule
