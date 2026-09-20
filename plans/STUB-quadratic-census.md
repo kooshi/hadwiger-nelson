@@ -1,5 +1,7 @@
 # FS-61 — which real quadratic fields need four colours, and why
 
+> **Subplanned 2026-09-19: `plans/FS61-quadratic-census.md`** — which also corrects two sentences below: the family in play is the squarefree `d ≡ 11 (mod 12)` (not every field with a usable plane at 7: `ℚ(√2)` has one and `χ = 2`), and the lower bound 3 for `d ≡ 3 (mod 4)` is `[Fischer1990]` Thm 8, older than `[Moorhouse2010]`.
+
 *Minted 2026-09-17 at FS-58's close. Read beside: `plans/FS58-four-colours.md` (§2, §R-B4, §R-B5, §C), `data/fs58/search-23/README.md`,
 `CLAUDE.md` G48, G55, G61.*
 

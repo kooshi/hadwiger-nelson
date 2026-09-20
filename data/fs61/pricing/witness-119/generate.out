@@ -1,0 +1,5 @@
+direct witness over Q(sqrt119): pool q1+12+60.1 (|W| = 28, M = 60), ball piece R = 1.5: 13605 points, 64942 edges -> deletion start 13605 -> refusing set 456 points; 1122 exact unit edges; CaDiCaL exit 20 in 0.36 s (LRAT 5546473 bytes), Glucose4 ['UNSAT', 0.482], Minisat22 ['UNSAT', 0.216]; deletion controls [[0, 'SAT (model verified)'], [71, 'SAT (model verified)'], [142, 'SAT (model verified)'], [213, 'SAT (model verified)'], [284, 'SAT (model verified)'], [355, 'SAT (model verified)'], [426, 'SAT (model verified)'], [41, 'SAT (model verified)'], [112, 'SAT (model verified)'], [183, 'SAT (model verified)'], [254, 'SAT (model verified)'], [325, 'SAT (model verified)']]; 51.6 s; wrote /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/price/w119
+
+real	0m51.704s
+user	0m51.460s
+sys	0m0.101s

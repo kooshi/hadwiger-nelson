@@ -1,0 +1,3 @@
+{"R":1.5,"covolume":0.0001765432098765432,"edges":1737874,"key":"q1+q5+12+60|ball1.5","points":283485,"pool":"q1+q5+12+60","seconds":108.58,"size":36,"solve_seconds":102.94,"verdict":"NOT 3-COLOURABLE (solver claim)"}
+{"R":1.8,"covolume":0.0001765432098765432,"edges":4478850,"key":"q1+q5+12+60|ball1.8","points":587333,"pool":"q1+q5+12+60","seconds":240.1,"size":36,"solve_seconds":224.98,"verdict":"NOT 3-COLOURABLE (solver claim)"}
+{"R":1.2,"covolume":0.0001765432098765432,"edges":492630,"key":"q1+q5+12+60|ball1.2","points":116193,"pool":"q1+q5+12+60","seconds":601.93,"size":36,"solve_seconds":600.41,"verdict":"Unknown (budget)"}

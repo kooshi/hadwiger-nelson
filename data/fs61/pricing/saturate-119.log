@@ -1,0 +1,30 @@
+saturate D=119: 144 lattices to do (0 done)
+  merit 0.9520 |S|  20 (from 12) cov 0.0476 odd 9 walks 4320 3int 1 forms3 16 q1+20|sat
+  merit 0.4591 |S|  20 (from 20) cov 0.023 odd 9 walks 626 3int 0 forms3 0 q1+12+24|sat
+  merit 0.4591 |S|  20 (from 12) cov 0.023 odd 9 walks 626 3int 0 forms3 0 q1+24|sat
+  merit 0.1028 |S|  28 (from 20) cov 0.00367 odd 5 walks 60 3int 0 forms3 0 q1+60.1|sat
+  merit 0.1028 |S|  28 (from 28) cov 0.00367 odd 5 walks 60 3int 0 forms3 0 q1+12+60.1|sat
+  merit 0.0331 |S|  36 (from 28) cov 0.000918 odd 5 walks 60 3int 0 forms3 0 q1+24+60.1|sat
+  merit 0.0117 |S|  28 (from 12) cov 0.000418 odd 7 walks 140 3int 1 forms3 4 q1+80.2|sat
+  merit 0.0117 |S|  28 (from 20) cov 0.000418 odd 7 walks 140 3int 1 forms3 4 q1+40+80.2|sat
+  merit 0.0088 |S|  60 (from 20) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+12+20|sat
+  merit 0.0088 |S|  60 (from 12) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+60.3|sat
+  merit 0.0088 |S|  60 (from 28) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+20+60.1|sat
+  merit 0.0088 |S|  60 (from 20) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+20+60.3|sat
+  merit 0.0088 |S|  60 (from 20) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+12+60.3|sat
+  merit 0.0088 |S|  60 (from 20) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+12+60.2|sat
+  merit 0.0088 |S|  60 (from 28) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+60.1+60.2|sat
+  merit 0.0088 |S|  60 (from 28) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+60.1+60.3|sat
+  merit 0.0088 |S|  60 (from 20) cov 0.000147 odd 5 walks 60 3int 0 forms3 0 q1+60.2+60.3|sat
+  merit 0.0034 |S|  92 (from 20) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+120.3|sat
+  merit 0.0034 |S|  92 (from 20) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+24+120.2|sat
+  merit 0.0034 |S|  92 (from 28) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+24+120.3|sat
+  merit 0.0034 |S|  92 (from 20) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+12+120.2|sat
+  merit 0.0034 |S|  92 (from 28) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+12+120.3|sat
+  merit 0.0034 |S|  92 (from 20) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+20+24|sat
+  merit 0.0034 |S|  92 (from 28) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+20+120.3|sat
+  merit 0.0034 |S|  92 (from 20) cov 3.67e-05 odd 5 walks 300 3int 0 forms3 0 q1+24+60.2|sat
+
+real	0m2.060s
+user	0m20.906s
+sys	0m0.642s

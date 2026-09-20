@@ -1,0 +1,3 @@
+{"R":1.0,"covolume":0.0036728395061728395,"edges":6058,"key":"q1+12+60.1|ball1.0","points":2745,"pool":"q1+12+60.1","seconds":0.03,"size":28,"solve_seconds":0.0,"verdict":"3-colourable (model verified)"}
+{"R":1.5,"covolume":0.0036728395061728395,"edges":64942,"key":"q1+12+60.1|ball1.5","points":13605,"pool":"q1+12+60.1","seconds":0.86,"size":28,"solve_seconds":0.69,"verdict":"NOT 3-COLOURABLE (solver claim)"}
+{"R":1.2,"covolume":0.0036728395061728395,"edges":18482,"key":"q1+12+60.1|ball1.2","points":5605,"pool":"q1+12+60.1","seconds":116.07,"size":28,"solve_seconds":116.01,"verdict":"NOT 3-COLOURABLE (solver claim)"}
