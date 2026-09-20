@@ -1499,7 +1499,7 @@ def selftest_land(rnd):
 
 
 TIER_SHA_AT_MINT = {'1': '7a520f29e32724da', '1b': 'fb13bdf841cf581d', '2': '34763942a9797e27',
-                    '1c': '7e833199a93662b0', '2l': '53b13c15a58bba28'}   # read off the records at mint, 2026-09-20
+                    '1c': '7e833199a93662b0', '2l': '31490e13c24cffa6'}   # read off the records at mint, 2026-09-20
 
 
 def selftest_ladder(rnd):
@@ -1626,9 +1626,17 @@ def selftest_ladder(rnd):
     # (7) phase C's field list is read from the records, so a field this tier lands is not silently skipped.
     here = land_order(quiet=True)
     planted = land_order(refusing=set(LAND_ORDER) | {239}, quiet=True)
-    rows.append(('phase C\'s order today is the owner\'s committed priority order', here == LAND_ORDER, f'{here}'))
+    # The invariant is `no refusing field is dropped`, NOT `the list is exactly the one phase C committed`.  As first
+    # written this row asserted equality, and it went red the hour tier 1c refused at d = 311 -- a check reporting a
+    # finding as a defect, and a snapshot in a check's assertion, which this repository has recorded before.
+    extra = [d for d in here if d not in LAND_ORDER]
+    rows.append(('phase C\'s committed priority order is a prefix of today\'s, with every field that has refused '
+                 'since appended and named',
+                 here[:len(LAND_ORDER)] == LAND_ORDER and all(d not in LAND_ORDER for d in extra),
+                 f'{here}' + (f'  (appended since phase C: {extra})' if extra else '  (none appended)')))
     rows.append(('PLANT (land order): a field refusing for the first time is APPENDED, never dropped',
-                 planted == LAND_ORDER + [239] and 239 not in LAND_ORDER, f'{planted}'))
+                 planted[:len(LAND_ORDER)] == LAND_ORDER and 239 in planted and 239 not in LAND_ORDER,
+                 f'{planted}'))
     return rows
 
 
@@ -1697,23 +1705,99 @@ def selftest_phaseE(rnd):
                  'certificate above, not from the inclusion',
                  colourability_closures({**filt, 'sup': {'state': 'Open (x)'}}, pairs) == [],
                  'sup Open -> no closure'))
-    # (5) the ladder's scope, on the real records: tier 1b is in scope only where tier 1 could not ask; tier 2l has no
-    #     such precondition, and the tier-1 record it meets there ANSWERS its first rung rather than being re-asked.
+    # (5) the degree tiers have no base-radius precondition, which is the point of `tier_nmax_scope`: a lattice tier
+    #     1b skipped as `already asked` is still in a degree tier's scope, because that tier asks a different ball.
     D = 155
     p1b, o1b = ladder_plan(D, '1b')
-    p2l, o2l = ladder_plan(D, '2l')
     asked = {k for k, w in o1b.items() if w.startswith('asked at R=')}
-    if asked:
-        k = sorted(asked)[0]
-        balls = load_jsonl(field_dir(D) / 'balls.jsonl')
-        ok, why = (ladder_status(p2l[k], balls, '2l', t2l) if k in p2l else (False, 'not in the tier-2l plan'))
-        rows.append((f'tier 2l has no base-radius precondition: a lattice tier 1b skipped as `already asked` is in '
-                     f'tier 2l\'s scope, and the tier-1 record ANSWERS its first rung', k in p2l and ok,
-                     f'd={D} {short_id(k)}: 1b says {o1b[k]!r}; 2l says {why}'))
-    else:
-        rows.append((f'd={D} has a lattice asked at the base radius (the fixture for the 2l scope test)', False,
-                     'none -- the fixture is gone'))
+    indeg = {it['key'] for it in degree_plan('1c', fields=[D])}
+    rows.append((f'a lattice tier 1b skipped as `already asked at its base radius` is still in the degree tier\'s '
+                 f'scope -- a degree tier asks a different ball, not a rung of the same ladder',
+                 bool(asked) and bool(asked & indeg),
+                 f'd={D}: {len(asked)} out of tier-1b scope as already asked, {len(asked & indeg)} of them in the '
+                 f'tier-1c plan'))
     return rows
+
+
+def selftest_degree(rnd):
+    """Tier 1c's degree law and its radius rule (the owner's revision of E.1a, 2026-09-20).
+
+    The law is checked against EVERY asked ball record on disk -- a real-data control, not a fixture -- and the rule
+    is shown to move between all three of its arms when the cap moves, so none of them is unreachable."""
+    rows = []
+    tier = tier_def('1c')
+    target, floor, cap = tier['target_degree'], tier['floor_degree'], tier['point_cap']
+    # (1) the law, on every asked ball with a point count and an edge count.
+    obs = []
+    for pth in sorted((FS61 / 'fields').glob('*/balls.jsonl')):
+        lat = load_jsonl(pth.parent / 'lattices.jsonl')
+        for r in load_jsonl(pth).values():
+            g = lat.get(r['lattice'], {}).get('size')
+            if g and isinstance(r.get('points'), int) and isinstance(r.get('edges'), int) and r['points']:
+                obs.append(((2 * r['edges'] / r['points']) / degree_of(g, r['R']), r))
+    rat = sorted(x for x, _ in obs)
+    med = rat[len(rat) // 2] if rat else 0
+    rows.append((f'the degree law g*phi(R)^2 against every asked ball record on disk',
+                 bool(rat) and abs(med - 1) < 0.02 and rat[0] > 0.6 and rat[-1] < 1.4,
+                 f'{len(rat)} balls: observed/predicted median {med:.4f}, range {rat[0]:.3f}-{rat[-1]:.3f}, '
+                 f'{sum(1 for x in rat if abs(x - 1) > 0.3)} outside +-30%'))
+    # PLANT: the same law WITHOUT the bidisc square -- one disc instead of two -- must be visibly wrong.
+    bad = sorted((2 * r['edges'] / r['points']) / (lat_g * degree_phi(r['R']))
+                 for lat_g, r in [(load_jsonl(FS61 / 'fields' / str(r['D']) / 'lattices.jsonl')[r['lattice']]['size'], r)
+                                  for _, r in obs[:60]])
+    rows.append(('PLANT (the law): dropping the bidisc square -- g*phi(R) instead of g*phi(R)^2 -- is visibly wrong, '
+                 'so the square is doing the work and the control can fail',
+                 bool(bad) and abs(bad[len(bad) // 2] - 1) > 0.1,
+                 f'median {bad[len(bad) // 2]:.3f} on a 60-ball sample, against {med:.4f} for the law'))
+    # (2) the three arms are all reachable, and the cap is what moves between them.
+    g, cov = 36, 5.154e-05                                        # d = 167's L3e1c94c6, the field's one askable lattice
+    R14 = radius_for_degree(g, target)
+    p14 = predicted_points(cov, R14)
+    def arm(c):
+        Rc = radius_for_points(cov, c / DEGREE_OVERSHOOT)
+        if R14 is not None and predicted_points(cov, R14) <= c / DEGREE_OVERSHOOT:
+            return 'R14'
+        return 'Rcap' if degree_of(g, Rc) >= floor else 'overcap'
+    rows.append(('the rule reaches all three arms as the cap moves, so none of them is unreachable',
+                 (arm(cap), arm(600_000), arm(120_000)) == ('R14', 'Rcap', 'overcap'),
+                 f'g={g}, covolume {cov:.3e}: cap {cap:,} -> {arm(cap)} (R={R14:.3f}, {p14:,} points); '
+                 f'cap 600,000 -> {arm(600_000)}; cap 120,000 -> {arm(120_000)}'))
+    rows.append(('PLANT (the degree target decides the radius): raising the target raises the radius it picks',
+                 radius_for_degree(g, target + 6) > R14,
+                 f'degree {target} -> R={R14:.3f}; degree {target + 6} -> R={radius_for_degree(g, target + 6):.3f}'))
+    rows.append(('a lattice can never exceed its own generator count in degree, so the target is unreachable at '
+                 'g <= target; and the search bound R <= 12 makes the answer CONSERVATIVE just above it, which '
+                 'under-asks and never over-asks',
+                 radius_for_degree(target, target) is None and radius_for_degree(target + 1, target) is None
+                 and radius_for_degree(target + 6, target) is not None,
+                 f'g={target} cannot reach degree {target} at any radius (degree rises to g and stops); g={target+1} '
+                 f'reads {degree_of(target+1, 12):.2f} at the search bound R = 12 and is reported unreachable; '
+                 f'g={target+6} reaches it at R = {radius_for_degree(target+6, target):.3f}'))
+    # (3) the safety margin below the cap.  Aiming AT the cap overflows on the recorded ratios; aiming below does not.
+    #     The ratio here is POINTS observed over points predicted -- NOT the degree ratio used above.  I first wrote
+    #     the degree ratio into this row, which reads 1.0407 where the points ratio reads 1.1078: a number measuring
+    #     one thing put to work deciding another, which is this repository's most repeated error, caught by the row
+    #     below it going red for an unrelated reason.
+    worst = max((r['points'] / r['predicted_points']
+                 for _, r in obs if isinstance(r.get('points'), int) and r['points'] >= 100_000
+                 and isinstance(r.get('predicted_points'), int) and r['predicted_points']), default=1.0)
+    rows.append(('the rule aims below the point cap by the largest overshoot ever recorded on a ball of at least '
+                 '100,000 points, so the EXACT count does not overflow the cap',
+                 DEGREE_OVERSHOOT >= worst,
+                 f'margin {DEGREE_OVERSHOOT}, worst recorded actual/predicted on such a ball {worst:.4f}'))
+    rows.append(('PLANT (the margin): aiming AT the cap would overflow it at that worst ratio -- which is what the '
+                 'first ball of this tier did, returning `Over cap (not asked)` instead of an answer',
+                 cap * worst > cap, f'{cap:,} x {worst:.4f} = {cap * worst:,.0f} points, above the cap'))
+    # (4) the scope is a LATTICE STATE, so a lattice this tier refuses does not drop out of the check that owed it.
+    rows.append(('the scope is `Open` OR `Refused`, so answering a lattice does not remove it from the accounting\'s '
+                 'subject', "st.startswith('Open') or st.startswith('Refused')" in s_scope_src(),
+                 'degree_plan keeps a Refused lattice in scope'))
+    return rows
+
+
+def s_scope_src():
+    import inspect
+    return inspect.getsource(degree_plan)
 
 
 def selftest_lock(rnd):
@@ -1800,7 +1884,7 @@ def selftest_lock(rnd):
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
             'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas,
             'land': selftest_land, 'ladder': selftest_ladder, 'lock': selftest_lock,
-            'phaseE': selftest_phaseE}
+            'phaseE': selftest_phaseE, 'degree': selftest_degree}
 
 
 def cmd_selftest(section=None):
@@ -2740,7 +2824,7 @@ def ladder_plan(D, tid='1b'):
     tier = tier_def(tid)
     if 'ladder_radii' not in tier:
         die(f'tier {tid} defines no radius ladder (ladder_radii)')
-    base_r, cap = tier.get('base_radius'), tier['point_cap']
+    base_r, cap = tier['base_radius'], tier['point_cap']
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
     filt = load_jsonl(field_dir(D) / 'filter.jsonl')
     balls = load_jsonl(field_dir(D) / 'balls.jsonl')
@@ -2758,22 +2842,17 @@ def ladder_plan(D, tid='1b'):
         if not tier_nmax_scope(r, tier):
             out[key] = f'built at tier {r.get("tier")}, whose NMAX is above this tier\'s {tier["nmax"]}'
             continue
-        # A tier with a `base_radius` (tier 1b) deepens another tier's work and is in scope only where that tier could
-        # not ask; a tier without one (tier 2l) introduces lattices of its own, so every Open lattice of its own NMAX
-        # is in scope and the ladder starts at its first rung.
-        if base_r is not None:
-            b = balls.get(f'{key}|ball{base_r}')
-            if b is None:
-                out[key] = f'no tier-{tier["deepens"]} R={base_r} record -- a gap B.1 reports, not a ladder question'
-                continue
-            if b['verdict'] != 'Over cap (not asked)':
-                out[key] = f'asked at R={base_r}: {b["verdict"]}'
-                continue
+        b = balls.get(f'{key}|ball{base_r}')
+        if b is None:
+            out[key] = f'no tier-{tier["deepens"]} R={base_r} record -- a gap B.1 reports, not a ladder question'
+            continue
+        if b['verdict'] != 'Over cap (not asked)':
+            out[key] = f'asked at R={base_r}: {b["verdict"]}'
+            continue
         cov = r['covolume']
         rungs = [(R, predicted_points(cov, R)) for R in tier['ladder_radii']]
         plan[key] = {'key': key, 'id': r['id'], 'D': D, 'lattice': r, 'rungs': rungs,
-                     'base_radius': base_r,
-                     'base_points': (balls.get(f'{key}|ball{base_r}') or {}).get('points') if base_r else None,
+                     'base_radius': base_r, 'base_points': b.get('points'),
                      'askable': [(R, p) for R, p in rungs if p is not None and p <= cap]}
     return plan, out
 
@@ -3118,6 +3197,16 @@ def radius_for_points(cov, n):
     return (n * cov / math.pi ** 2) ** 0.25
 
 
+# The predicted point count is a float law and the cap is enforced on the EXACT count, so a rule that aims at the cap
+# overflows it about half the time -- which is not a near miss but a lost ask: `piece` returns nothing and the record
+# reads `Over cap (not asked)`.  Found by running the first ball of this tier, which is what it cost.  The rule
+# therefore aims at cap / OVERSHOOT, where OVERSHOOT is the largest actual/predicted ratio ever recorded here on a
+# ball of at least 100,000 points (1.1078, over 327 such balls; on the fine lattices this tier actually asks, phase
+# B' measured 0.9982-1.0094 over 37).  It is a margin on the RULE; the cap itself is unchanged, and an exact
+# overflow is still recorded honestly if one happens.
+DEGREE_OVERSHOOT = 1.11
+
+
 def degree_plan(tid='1c', fields=None, nmax_scope=True):
     """One item per in-scope lattice: which radius the degree rule asks, by which arm, and what it predicts.
 
@@ -3148,8 +3237,8 @@ def degree_plan(tid='1c', fields=None, nmax_scope=True):
             if not cov:
                 continue
             R14 = radius_for_degree(g, target)
-            Rcap = radius_for_points(cov, cap)
-            if R14 is not None and predicted_points(cov, R14) <= cap:
+            Rcap = radius_for_points(cov, cap / DEGREE_OVERSHOOT)
+            if R14 is not None and predicted_points(cov, R14) <= cap / DEGREE_OVERSHOOT:
                 R, arm, dg = R14, 'R14', target
             elif degree_of(g, Rcap) >= floor:
                 R, arm, dg = Rcap, 'Rcap', degree_of(g, Rcap)
@@ -3262,7 +3351,9 @@ def cmd_degree_ask(tid='1c', fields=None, jobs=None, budget=None, show_plan=Fals
     with mp.get_context('fork').Pool(min(jobs, len(todo))) as P:
         for rec, model in P.imap_unordered(_ball_worker, [w for _, w in todo]):
             it = next(i for i, w in todo if w[0] == rec['D'] and f'{w[1]}|ball{w[3]}' == rec['key'])
-            act = (2 * rec['edges'] / rec['points']) if rec.get('points') else None
+            # An over-cap record carries no edge count: `piece` never built the ball.  Reading one unconditionally
+            # is how the first ball of this tier crashed the run, and it is the good direction to fail in.
+            act = (2 * rec['edges'] / rec['points']) if isinstance(rec.get('points'), int) and rec.get('edges') else None
             rec = dict(rec, degree_arm=it['arm'], owner_arm=it['owner_arm'], generators=it['g'],
                        covolume=it['covolume'],
                        predicted_degree=it['predicted_degree'],
@@ -3277,10 +3368,11 @@ def cmd_degree_ask(tid='1c', fields=None, jobs=None, budget=None, show_plan=Fals
             if rec['verdict'] == 'ERROR':
                 errs.append((rec['key'], rec.get('error')))
                 defect(f'degree-ask d={rec["D"]} {rec["key"]}: {rec.get("error")}')
-            print(f'  d={rec["D"]:>3} {rec["id"]} R={rec["R"]} arm={it["arm"]} {rec.get("points"):,} points '
-                  f'{rec.get("edges"):,} edges degree {rec.get("actual_degree")} (predicted '
-                  f'{it["predicted_degree"]}) -> {rec["verdict"]} [{rec.get("solve_seconds")} s, peak '
-                  f'{rec.get("rss_peak_kb", 0) / 1048576:.2f} GB]', flush=True)
+            pts_s = f'{rec["points"]:,}' if isinstance(rec.get('points'), int) else str(rec.get('points'))
+            print(f'  d={rec["D"]:>3} {rec["id"]} R={rec["R"]} arm={it["arm"]} {pts_s} points '
+                  f'{rec.get("edges", "-")} edges degree {rec.get("actual_degree")} (predicted '
+                  f'{it["predicted_degree"]}, predicted points {it["predicted_points"]:,}) -> {rec["verdict"]} '
+                  f'[{rec.get("solve_seconds")} s, peak {rec.get("rss_peak_kb", 0) / 1048576:.2f} GB]', flush=True)
             if budget and time.time() - t0 > budget:
                 print(f'  budget {budget} s reached: stopping (resume = re-run this command)', flush=True)
                 P.terminate()
@@ -3330,7 +3422,7 @@ def propagate_colourability(D, tid, quiet=True):
     return n
 
 
-def cmd_deepen(fields=None, tid='2l', jobs=16, budget=None, stages='all', girth=False):
+def cmd_deepen(fields=None, tid='2l', jobs=None, budget=None, stages='all', girth=False):
     """Phase E.1b: deeper lattices (this tier's NMAX) and their certificates at every field that has not landed, then
     the radius ladder over the Open ones, pooled over the whole family.  Resume = the identical command."""
     tier = tier_def(tid)
@@ -3339,16 +3431,16 @@ def cmd_deepen(fields=None, tid='2l', jobs=16, budget=None, stages='all', girth=
     state = FS61 / f'deepen-progress-{tid}.jsonl'
     done = load_jsonl(state)
     print(f'fs61 deepen tier={tid}: {len(fields)} census fields with no certified witness, lattices to '
-          f'NMAX = {tier["nmax"]}, cap {tier["point_cap"]:,} points, wall {tier["solve_wall"]:.0f} s, rungs '
-          f'{tier["ladder_radii"]}; odd girth NOT computed at this tier; {len(done)} fields already built. '
-          f'Resume = re-run this identical command.', flush=True)
+          f'NMAX = {tier["nmax"]}, cap {tier["point_cap"]:,} points, wall {tier["solve_wall"]:.0f} s, target '
+          f'degree {tier["target_degree"]} (floor {tier["floor_degree"]}); odd girth NOT computed at this tier; '
+          f'{len(done)} fields already built. Resume = re-run this identical command.', flush=True)
     errs, t0 = [], time.time()
     if stages in ('all', 'lattices'):
         for D in fields:
             if str(D) in done:
                 continue
             t1 = time.time()
-            lat, e1 = cmd_lattices(D, tid, jobs=jobs, quiet=True, girth=girth)
+            lat, e1 = cmd_lattices(D, tid, jobs=jobs or 16, quiet=True, girth=girth)
             filt, e2 = cmd_filter(D, tid, quiet=True)
             nc = propagate_colourability(D, tid)
             filt = load_jsonl(field_dir(D) / 'filter.jsonl')
@@ -3363,7 +3455,7 @@ def cmd_deepen(fields=None, tid='2l', jobs=16, budget=None, stages='all', girth=
         print(f'  DONE deepen lattices+filter: {len(fields)} fields, {(time.time() - t0) / 60:.1f} min, '
               f'{len(errs)} defects', flush=True)
     if stages in ('all', 'balls'):
-        errs += cmd_ladder_all(fields, tid=tid, jobs=jobs, budget=budget)
+        errs += cmd_degree_ask(tid, fields=fields, jobs=jobs, budget=budget)
     print(f'DONE deepen tier={tid}: {len(fields)} fields, {(time.time() - t0) / 60:.1f} min, {len(errs)} defects',
           flush=True)
     return errs
@@ -4370,7 +4462,8 @@ def main():
     p.add_argument('--plan', action='store_true', help='print the balls the rule would ask and stop')
 
     p = sub.add_parser('deepen', help='phase E.1b: deeper lattices at the same cap, then the ladder over them')
-    p.add_argument('--tier', default='2l'); p.add_argument('--jobs', type=int, default=16)
+    p.add_argument('--tier', default='2l')
+    p.add_argument('--jobs', type=int, help='pool width; required for the ball stage (see degree-ask)')
     p.add_argument('--budget', type=float); p.add_argument('--fields', type=int, nargs='*')
     p.add_argument('--stages', default='all', choices=('all', 'lattices', 'balls'),
                    help='`lattices` builds and filters only (the priced stage); `balls` runs the ladder only')

@@ -442,7 +442,60 @@ def write_readings(out=None, alpha=0.05):
               'are the small ones. A long-odd-girth lattice with a huge ball would sit in the `>9` row only if its '
               'ball was decided, and the balls that were not decided are the large, dense ones. The confound is '
               'named and not removed.', '']
-    L += ['---', '', '## E.2 — R-mod8: is the direct route blind to half the family?', '',
+    # the owner's addition after phase B': the phase diagram that re-aimed tier 1c, with its populations
+    dr = degree_rows()
+    dg = degree_diagram(dr)
+    big = [r for r in dr if r['points'] >= 200000]
+    dgb = degree_diagram(big)
+    ctl = degree_law_control(dr)
+    refs = [r for r in dr if r['verdict'] == 'Refused']
+    unk = sorted(r['degree'] for r in dr if r['verdict'] == 'Unknown')
+    lo = min(refs, key=lambda r: r['degree'])
+    hi14 = [r for r in big if r['degree'] >= 14]
+    L += ['---', '', '## E.2 — the degree phase diagram: what actually decides whether a solver answers', '',
+          '**Not a registered reading — a finding of this phase**, and the one that re-aimed its own last ask. Every '
+          'earlier tier of this census chose which ball to put to a solver by its **size**, under a point cap. That '
+          'was the wrong quantity. What separates a ball the solver decides from one it does not is its **average '
+          'degree**, `2·edges / points`.', '',
+          f'**Population: all {len(dr)} asked ball records on disk that carry both a point count and an edge count** '
+          '— the forty census fields *and* the seven control fields, because the question is about the instrument '
+          'and not about the family.', '',
+          '| average degree | 3-colourable | undecided at the wall | refused |', '|---|---|---|---|']
+    for b in DEGREE_BANDS:
+        nm = f'< {b[1]:g}' if b[0] == 0 else (f'≥ {b[0]:g}' if b[1] == float('inf') else f'{b[0]:g}–{b[1]:g}')
+        L.append(f'| **{nm}** | {dg[(b, "Colourable")]} | {dg[(b, "Unknown")]} | {dg[(b, "Refused")]} |')
+    L += ['', f'**No ball below average degree {lo["degree"]:.3f} has ever refused** (`d = {lo["D"]}`, `{lo["id"]}`, '
+          f'R = {lo["R"]}), over {len(refs)} refusing balls. The {len(unk)} undecided balls have median degree '
+          f'**{unk[len(unk) // 2]:.2f}** and lie in {unk[0]:.2f}–{unk[-1]:.2f}.', '',
+          f'**Restricted to balls of at least 200,000 points** (n = {len(big)}), which is where the census\'s hard '
+          f'cases live: {len(hi14)} are at degree ≥ 14 and **every one of them decided** — '
+          f'{sum(1 for r in hi14 if r["verdict"] == "Colourable")} coloured, '
+          f'{sum(1 for r in hi14 if r["verdict"] == "Refused")} refused, '
+          f'**{sum(1 for r in hi14 if r["verdict"] == "Unknown")} undecided** — the slowest in '
+          f'{max(r["seconds"] or 0 for r in hi14):.0f} s. Below degree 6 in the same population: '
+          f'{dgb[((4, 6), "Colourable")] + dgb[((0, 4), "Colourable")]} coloured, '
+          f'{dgb[((4, 6), "Unknown")] + dgb[((0, 4), "Unknown")]} undecided, **0 refused**.', '',
+          '### The law that makes it actionable', '',
+          'A ball of radius `R` on a lattice holding `g` unit vectors has predicted average degree **`g·φ(R)²`**, '
+          'where `φ(R) = [2R²·arccos(1/(2R)) − √(4R²−1)/2] / (πR²)` is the fraction of a radius-`R` disc\'s area '
+          'that its unit translate covers — **squared**, because a ball here is a *bidisc*, one disc per real '
+          'embedding of the field. Each point has `g` candidate neighbours and each lands inside the ball with '
+          'probability `φ(R)²`.', '',
+          f'**Control, on the same {ctl["n"]} balls: observed / predicted has median {ctl["median"]:.4f} and range '
+          f'{ctl["min"]:.3f}–{ctl["max"]:.3f}, with {ctl["outside_30pct"]} outside ±30 %.** The plant: dropping the '
+          'bidisc square — `g·φ(R)` in place of `g·φ(R)²` — reads a median of 0.584 on a 60-ball sample, so the '
+          'square is what makes the law fit and the control is able to fail.', '',
+          '### What it cost, and what it bought', '',
+          '**The undecided balls are not "nearly refused".** They are the classic hardness peak of sparse graphs, '
+          'and on the colourable side wherever anything decided them. Phase B\u2032\'s radius ladder walked 1.5 → 1.2 → '
+          '1.0, which steps **down** in degree — into that peak, or below the floor at which anything refuses. Its '
+          '24 undecided asks measure that choice of radius, not the fields.', '',
+          '**Going up in radius makes a refusal faster, not slower**, which is the opposite of the size intuition: '
+          '`d = 47` refuses in 104 s at R = 1.2 (degree 6.7) and in **0 s** at R = 1.5 (degree 9.5); `d = 119` goes '
+          '114 s → 1 s; `d = 95` 32 s → 1 s.', '',
+          '**And the tier built on it decided a 1.8-million-point ball in 5.6 seconds**, where balls a tenth that '
+          'size at degree ≈ 5.5 had run to a 600-second wall.', '',
+          '---', '', '## E.2 — R-mod8: is the direct route blind to half the family?', '',
           '**The claim, in two strengths.** (a) *about balls*: no ball over a field with `d ≡ 3 (mod 8)` refuses, so '
           'those twenty fields need the other route (a forcer plus a chain, as at `d = 11` in FS-58). (b) *about '
           'lattices*: every lattice over those fields is closed by a certificate.', '',
@@ -677,3 +730,253 @@ def write_aiming167(out=None):
           f'recorded', flush=True)
     print('DONE aiming167', flush=True)
     return out
+
+
+# ================================================================ the degree phase diagram (E.2, the owner's addition)
+DEGREE_BANDS = [(0, 4), (4, 6), (6, 8), (8, 10), (10, 14), (14, 20), (20, float('inf'))]
+
+
+def degree_rows(min_points=0):
+    """Every ASKED ball record on disk carrying both a point count and an edge count, at its average degree.
+    The population is every field with records -- the forty census fields AND the seven control fields -- because
+    the question (what does a solver decide?) is about the instrument, not about the census family."""
+    out = []
+    for p in sorted((FS61 / 'fields').glob('*/balls.jsonl')):
+        lat = C.load_jsonl(p.parent / 'lattices.jsonl')
+        for r in C.load_jsonl(p).values():
+            if not (isinstance(r.get('points'), int) and isinstance(r.get('edges'), int) and r['points']):
+                continue
+            if r['points'] < min_points:
+                continue
+            out.append({'D': int(p.parent.name), 'id': r['id'], 'R': r['R'], 'points': r['points'],
+                        'edges': r['edges'], 'degree': 2 * r['edges'] / r['points'],
+                        'verdict': r['verdict'].split(' (')[0], 'seconds': r.get('solve_seconds'),
+                        'g': lat.get(r['lattice'], {}).get('size'), 'tier': str(r.get('tier'))})
+    return out
+
+
+def degree_diagram(rows):
+    t = collections.Counter()
+    for r in rows:
+        for lo, hi in DEGREE_BANDS:
+            if lo <= r['degree'] < hi:
+                t[((lo, hi), r['verdict'])] += 1
+                break
+    return t
+
+
+def degree_law_control(rows):
+    """observed / predicted over the population, as a control on `degree = g·φ(R)²`."""
+    rat = sorted(r['degree'] / (r['g'] * C.degree_phi(r['R']) ** 2) for r in rows if r['g'])
+    if not rat:
+        return None
+    return {'n': len(rat), 'median': rat[len(rat) // 2], 'min': rat[0], 'max': rat[-1],
+            'outside_30pct': sum(1 for x in rat if abs(x - 1) > 0.3)}
+
+
+def write_shapes(out=None):
+    """E.5: the two tables, and the Sokolov question answered by a rank."""
+    out = Path(out or FS61 / 'shapes.md')
+    shape = shape_table()
+    wt, skipped = witness_table()
+    refusing = {k: m for k, m in shape.items() if any(v['refused'] for v in m.values())}
+    L = ['# FS-61 — what repeats across the family: the witness table and the shape table (phase E item E.5)', '',
+         f'*Derived from the committed records by `python3 tools/fs61_readings.py shapes`. Machine: {MACHINE}.*', '',
+         '## What a "shape" is here, and why it is the interesting object', '',
+         'A **lattice** is a subgroup of the plane generated by unit vectors. This census identifies one by a '
+         '*canonical key* — the least denominator `M` such that `M·Λ` has whole-number coordinates, together with '
+         'the Hermite normal form of `M·Λ`. **That key carries no `d`**: it names an integral shape, and several '
+         'different fields can hold the same shape. What differs between them is which unit vectors *lie* in it, '
+         'because that depends on the field through the equation `a² + c² + d(b² + e²) = N²`.', '',
+         'So the census can ask a question no single field can: **take one shape, put it in several fields, and see '
+         'where it refuses three colours and where it provably does not.**', '',
+         '---', '', '## Table 1 — every shape that refuses somewhere, and every census field that holds it', '',
+         f'{len(shape)} distinct shapes occur across the forty census fields; **{len(refusing)} of them refuse in at '
+         f'least one field**. Reading a cell: `d: state / generators`, where the state is `REF` (a ball of it '
+         'refused three colours), `O` (open — no certificate either way), `peri` (a periodic 3-colouring of the '
+         'whole infinite lattice graph is in hand, so no ball of it can ever refuse), `form` (an exact linear form '
+         'certifies 3-colourability), or `inhe` (closed by inheritance from a lattice above or below it).', '',
+         '| shape | M | fields | per field: `d: state / generators` |', '|---|---|---|---|']
+    def tag(v):
+        if v['refused']:
+            return 'REF'
+        s = v['state']
+        return ('O' if s.startswith('Open') else 'peri' if 'periodic' in s else
+                'inhe' if 'inherited' in s or s.startswith('Refused (inherited') else
+                'form' if 'form mod' in s else s.split(' (')[0][:4])
+    for k in sorted(refusing, key=lambda k: (-len(shape[k]), C.short_id(k))):
+        m = shape[k]
+        M, H = C.parse_key(k)
+        cells = ' '.join(f'{D}:{tag(m[D])}/{m[D]["size"]}' for D in sorted(m))
+        L.append(f'| `{C.short_id(k)}` | {M} | {len(m)} | {cells} |')
+    L += ['', '### What this table says', '',
+          '**The same integral shape refuses in one field and is provably 3-colourable in another.** `L54356af8` '
+          '(`M = 60`) refuses over `d = 71, 95, 119, 143, 191` and `359` and is open at 431. `Lb0a7206c` refuses '
+          'over 23, 71 and 191 and carries a **verified periodic 3-colouring** over 119, 239, 311, 359 and 431 — a '
+          'proof that no ball of it can ever refuse there. `Ld65c8ee8` (`M = 30`) is the shape that refuses over '
+          '`d = 11`, and it is periodically 3-colourable over **35, 59, 131, 179 and 371**, every one of them a '
+          '`d ≡ 3 (mod 8)` field.', '',
+          '**So the shape is not what decides — the number of unit vectors it holds is.** `Ld65c8ee8` holds 108 '
+          'unit vectors over `d = 11` and only 36 over 35, 36 over 59, 28 over 131 and 179, 20 over 371. The ℤ-module '
+          'is the same; the graph on it is not, because a field with fewer unit vectors of that height puts fewer '
+          'edges on the same points.', '',
+          '**This is also phase D\'s question, answered by certificates instead of by a search.** Decision G asked '
+          'whether `d = 11`\'s recipe transfers to 35 and 59 (item D.0). The owner cancelled phase D after R-mod8 '
+          'lost, and kept D.0 as a table in phase E. Here it is: **the recipe does not transfer — the shape that '
+          'refuses over 11 is provably three-colourable over both of them, and over three more besides.** That is '
+          'stronger than a failed search, and it cost nothing.', '',
+          '**And the converse is not true either**: generator count alone does not decide. `L54356af8` refuses at '
+          '`d = 143` with 36 generators and is open at `d = 431` with 36. Two lattices with the same shape and the '
+          'same number of unit vectors can differ, because which vectors they are differs.', '',
+          '---', '', '## Table 2 — the certified witnesses, pairwise', '',
+          f'E.5 asks for a canonical form of every certified witness — a Weisfeiler–Leman colour-refinement hash '
+          f'first, an exact isomorphism test on any collision — so that an isomorphic pair inside one `N`-family '
+          f'would be a candidate for a witness with coordinates polynomial in a parameter, whose edges would be '
+          f'identities in that parameter and whose refutation would be **one** proof for infinitely many fields.', '',
+          '| d | points | edges | degree profile (degree: count) | WL hash | ℚ-rank of its points | 1-minimal | lattice spec |',
+          '|---|---|---|---|---|---|---|---|']
+    for w in wt:
+        prof = ', '.join(f'{k}:{v}' for k, v in w['degree_profile'][:6]) + ('…' if len(w['degree_profile']) > 6 else '')
+        L.append(f'| **{w["d"]}** | {w["points"]:,} | {w["edges"]:,} | {prof} | `{w["wl"]}` | {w["coord_rank"]} | '
+                 f'{"yes" if w["minimal"] == "yes" else "no (deletion stopped at " + str(w["deletion_stopped_at"]) + ")"} | '
+                 f'`{w["spec"]}` at R = {w["R"]} |')
+    sizes = collections.Counter(w['points'] for w in wt)
+    dup = [s for s, n in sizes.items() if n > 1]
+    L += ['', '### What this table says', '',
+          f'**No two of the {len(wt)} certified witnesses are isomorphic, and the reason is immediate: no two have '
+          f'the same number of points.** ' + (f'(Sizes repeating: {dup}.)' if dup else
+          'Every point count is distinct, so the Weisfeiler–Leman hashes were never even needed to separate them; '
+          'they are recorded so that a later witness can be compared against these without recomputing anything.'),
+          '', '**And that is a fact about the extraction, not about the fields.** A witness\'s size is the output '
+          'of a shrinking procedure that was *stopped on a budget* in four of the nine cases (the table says which). '
+          'Two fields could hold essentially the same graph and still produce witnesses of 573 and 1,004 points '
+          'because one deletion ran longer than the other. **The honest conclusion is that this comparison cannot '
+          'decide the question it was set, and the shape table above is where the cross-field structure actually '
+          'shows up.**', '',
+          '**The `N`-family the plan names.** Every field `d = N² − c²` owns the layer vector `(c/N, √d/N)`; for '
+          '`N = 12` that family is `d = 23, 95, 119, 143`, and **all four are landed**. Phase A found that the '
+          'witness lattices of `(95, 119)` share an integral shape, as do those of `(23, 191)`, with generator '
+          'counts that agree exactly while the generator *sets* differ. That shared shape with equal counts is the '
+          'precondition for one abstract graph drawn over several fields — and Table 1 shows what actually happens '
+          'when you try it: the same shape holds a different number of unit vectors in each field, and where the '
+          'count falls the lattice becomes three-colourable by certificate.', '',
+          '---', '', '## Table 3 — [Sokolov2018]\'s adjacent question, answered by a rank', '',
+          'Sokolov\'s `χ_√ℚ(ℝ²)` is the supremum over `n` of `χ(ℚ × √n·ℚ)`, and he calls the value 3 *"quite '
+          'plausible"*. A 4-chromatic unit-distance graph inside such a **rank-2 layer** would refute that. The '
+          'plan asks whether any certified witness, or any refusing lattice, lies in one — *up to rotation*.', '',
+          '**It is settled by a rank, with no search.** A point `(a, b, c, e, m)` here is '
+          '`((a + b√d)/m, (c + e√d)/m)`, so `F²` is `ℚ⁴` and the layer `ℚ × √d·ℚ` is the 2-dimensional subspace '
+          '`b = c = 0`. Any *rotation* of it is some other 2-dimensional ℚ-subspace. So a point set whose ℚ-span is '
+          'all of `ℚ⁴` lies in no 2-dimensional subspace whatever, rotated or not.', '',
+          f'**Every one of the {len(wt)} certified witnesses has ℚ-rank 4** (column above, computed in exact '
+          f'rational arithmetic), and **every refusing lattice in this census has rank 4** by construction — rank is '
+          f'recorded per lattice and the census never scans below it. **So nothing this milestone produced bears on '
+          f'Sokolov\'s question**, which is the same answer FS-58 gave informally ("their coordinates mix 1 and √d '
+          'in both slots") now made exact and checkable.', '']
+    out.write_text('\n'.join(L) + '\n')
+    print(f'fs61 shapes -> {C.rel(out)}: {len(shape)} shapes, {len(refusing)} refusing somewhere, '
+          f'{len(wt)} certified witnesses, {len(dup)} point-count collisions among them, '
+          f'{sum(1 for w in wt if w["coord_rank"] != 4)} witnesses of rank below 4', flush=True)
+    print('DONE shapes', flush=True)
+    return out
+
+
+# ================================================================ the tool's own plants
+def selftest(rnd=None):
+    """Every scorer shown able to return EACH of its verdicts, on fixtures.  A scorer that can only ever say `won`
+    is not a scorer, and the census's three words would then be one word in three costumes."""
+    rows = []
+    L4 = lambda n: [{'decided': True, 'refused': i < n[0], 'girth': 5, 'none_up_to': None, 'girth_status': 'computed',
+                     'D': 23, 'state': 'Open'} for i in range(n[0] + n[1])]
+    # R-cycle: won / lost / not decided must all be reachable
+    def rc(a, b, c, d):
+        rows_ = ([{'decided': True, 'refused': True, 'girth': 5, 'none_up_to': None, 'girth_status': 'computed'}] * a
+                 + [{'decided': True, 'refused': False, 'girth': 5, 'none_up_to': None, 'girth_status': 'computed'}] * b
+                 + [{'decided': True, 'refused': True, 'girth': 15, 'none_up_to': None, 'girth_status': 'computed'}] * c
+                 + [{'decided': True, 'refused': False, 'girth': 15, 'none_up_to': None, 'girth_status': 'computed'}] * d)
+        return score_r_cycle(rows_)['verdict']
+    rows.append(('R-cycle returns all three verdicts on fixtures, so none of them is unreachable',
+                 (rc(19, 20, 0, 24), rc(0, 24, 19, 20), rc(5, 5, 5, 5)) == ('won', 'lost', 'not decided'),
+                 f'19/20 vs 0/24 -> {rc(19, 20, 0, 24)}; mirrored -> {rc(0, 24, 19, 20)}; '
+                 f'5/5 vs 5/5 -> {rc(5, 5, 5, 5)}'))
+    # the odd-girth cap trap: a null length under a cap below 9 must be `undetermined`, never `>9`
+    rows.append(('PLANT (the O1 trap): a lattice whose odd-girth search found nothing UP TO A CAP BELOW 9 is placed '
+                 'on neither side of the cut, while one searched past 9 is placed on the long side',
+                 girth_class({'girth': None, 'none_up_to': 7, 'girth_status': 'computed'}) == 'undetermined'
+                 and girth_class({'girth': None, 'none_up_to': 13, 'girth_status': 'computed'}) == '>9'
+                 and girth_class({'girth': None, 'none_up_to': None, 'girth_status': 'bipartite (x)'}) == '>9',
+                 'cap 7 -> undetermined; cap 13 -> >9; bipartite -> >9'))
+    # Fisher, against a known value
+    p = fisher_exact_2x2(19, 20, 0, 24)
+    rows.append(('the exact test is computed, not asserted: [[19,20],[0,24]] and a balanced table differ by orders '
+                 'of magnitude', p < 1e-4 and fisher_exact_2x2(5, 5, 5, 5) > 0.5,
+                 f'p = {p:.2e} against p = {fisher_exact_2x2(5, 5, 5, 5):.3f} balanced'))
+    # R-size: the band is a real test -- a slope inside it and one far outside give different verdicts
+    F = lambda pts: {i: {'d': d, 'mod8': 7, 'landed': True, 'best_refusing_points': v, 'L_lower': 4, 'L_upper': 4}
+                     for i, (d, v) in enumerate(pts)}
+    inside = [(23, 1000), (47, 2100), (71, 3200), (95, 4300), (119, 5400), (143, 6500), (191, 8600), (359, 16000)]
+    flat = [(d, 1000 + 7 * i) for i, d in enumerate((23, 47, 71, 95, 119, 143, 191, 359))]
+    vi, vf = score_r_size(F(inside))['verdict'], score_r_size(F(flat))['verdict']
+    rows.append(('R-size distinguishes a power law in the band from a flat one', vi == 'won' and vf == 'lost',
+                 f'growing -> {vi} (slope {score_r_size(F(inside))["fit"]["slope"]:.2f}); '
+                 f'flat -> {vf} (slope {score_r_size(F(flat))["fit"]["slope"]:.2f})'))
+    rows.append(('PLANT (R-size): fewer than six landed fields is `not decided`, in those words',
+                 score_r_size(F(inside[:4]))['verdict'] == 'not decided',
+                 score_r_size(F(inside[:4]))['why']))
+    # R-C: one reading below the threshold must flip it
+    ok = [{'min_character_mean': -0.3}, {'min_character_mean': -0.1}]
+    rows.append(('R-C flips on a single reading below -1/2, which is what makes it falsifiable',
+                 score_r_C(ok)['verdict'] == 'won'
+                 and score_r_C(ok + [{'min_character_mean': -0.61}])['verdict'] == 'lost',
+                 'two readings above -1/2 -> won; adding one at -0.61 -> lost'))
+    # the degree law control, on the real records
+    ctl = degree_law_control(degree_rows())
+    rows.append(('the degree law control runs on the real records and is tight',
+                 ctl and abs(ctl['median'] - 1) < 0.02 and ctl['outside_30pct'] == 0,
+                 f'{ctl["n"]} balls, median {ctl["median"]:.4f}, range {ctl["min"]:.3f}-{ctl["max"]:.3f}, '
+                 f'{ctl["outside_30pct"]} outside +-30%'))
+    # the Q-rank that answers Sokolov: a rank-2 point set must read 2, and a full one 4
+    flatpts = [[0, 0, 0, 0, 1], [1, 0, 0, 0, 1], [0, 0, 0, 1, 1], [2, 0, 0, 3, 1]]
+    fullpts = flatpts + [[0, 1, 0, 0, 1], [0, 0, 1, 0, 1]]
+    rows.append(('PLANT (Sokolov): a point set inside the layer Q x sqrt(d)Q reads rank 2, and one spanning the '
+                 'plane reads 4 -- so the column can distinguish them',
+                 coord_rank(flatpts) == 2 and coord_rank(fullpts) == 4,
+                 f'layer -> {coord_rank(flatpts)}; full -> {coord_rank(fullpts)}'))
+    print(f'fs61_readings selftest: {len(rows)} rows', flush=True)
+    bad = []
+    for what, ok_, detail in rows:
+        print(f'  {"PASS" if ok_ else "FAIL"}  {what}  --  {detail}', flush=True)
+        if not ok_:
+            bad.append(what)
+    print(f'DONE readings selftest: {len(rows)} rows, {len(bad)} failures', flush=True)
+    return bad
+
+
+def main():
+    ap = argparse.ArgumentParser(prog='fs61_readings.py', description=__doc__.split('\n')[0])
+    sub = ap.add_subparsers(dest='cmd', required=True)
+    sub.add_parser('readings', help='E.2/E.3/E.6/E.7 -> data/fs61/readings.md')
+    sub.add_parser('aiming167', help='E.4 -> data/fs61/aiming-167.md')
+    sub.add_parser('shapes', help='E.5 -> data/fs61/shapes.md')
+    p = sub.add_parser('charmeans', help="E.3's compute step -> data/fs61/charmeans.jsonl")
+    p.add_argument('--jobs', type=int, default=16)
+    sub.add_parser('selftest', help='every scorer shown able to return each of its verdicts')
+    a = ap.parse_args()
+    t0 = time.time()
+    bad = []
+    if a.cmd == 'readings':
+        write_readings()
+    elif a.cmd == 'aiming167':
+        write_aiming167()
+    elif a.cmd == 'shapes':
+        write_shapes()
+    elif a.cmd == 'charmeans':
+        charmean_rows(live_lattice_rows(), jobs=a.jobs)
+    elif a.cmd == 'selftest':
+        bad = selftest()
+    print(f'[{a.cmd}: {time.time() - t0:.1f} s wall on {MACHINE.split(" (")[0]}]', flush=True)
+    sys.exit(1 if bad else 0)
+
+
+if __name__ == '__main__':
+    main()

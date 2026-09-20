@@ -61,21 +61,22 @@
       "solve_wall": 1800
   },
   "2l": {
-    "name": "tier 2l (deeper lattices, the same cap)",
-    "defined": "2026-09-20, plans/FS61-quadratic-census.md, the owner's re-plan after phase B', ruling 3, item E.1b",
-    "deepens": "1b",
-    "scope": "every census field with no certified witness. Lattices to NMAX = 420 -- a superset of tier 1's NMAX = 180 set, so every tier-1 and tier-1b ball record still answers the ball it answered and is never re-asked; the new work is the finer lattices. The point cap and the solver's wall are tier 1's, deliberately: phase B' measured that at this depth the binding constraint is the solver and not the cap (24 of 37 asks ran to the 600 s wall), so this tier buys DEPTH and not SIZE, and tier 2's 3,000,000-point cap is not run.",
-    "nmax": 420,
-    "lattices": "the axis plus one or two non-rational classes with lcm <= 420, saturated (every unit vector of the lattice a generator)",
-    "odd_girth": "NOT computed at this tier: every 2l lattice record carries odd_girth.status `not asked`. Phase 0 measured the exact odd girth at about 900x the cost of the rest of `lattices` (1,648 CPU-s against 1.8 s at d = 11), and R-cycle is scored on tier 1's lattices, whose population is stated. A 2l lattice has no odd-girth column and must not be counted in an odd-girth table.",
-    "bfs_cap": 400000,
-    "quotients": 24,
-    "quotient_wall": 30,
-    "ladder_radii": [1.5, 1.2, 1.0],
-    "radius_rule": "every rank-4 Open lattice within this tier's NMAX walks the rungs 1.5, 1.2, 1.0: the first rung whose PREDICTED points (pi^2 R^4 / covolume) fit the point cap is asked, and a rung whose EXACT count overflows descends to the next fitting rung. If no rung's prediction fits, one `Over cap (not asked)` record is written at the first rung. Unlike tier 1b there is NO base-radius precondition, because this tier introduces lattices of its own that no earlier tier ever asked.",
-    "onset_rule": "a rung that refuses is followed by the next rung down at a 120 s wall, to hand phase C a smaller refusing ball; a bonus ask, never part of the accounting",
-    "radii": [1.5, 1.2, 1.0],
-    "point_cap": 600000,
-    "solve_wall": 600
+      "name": "tier 2l (deeper lattices, the same degree rule)",
+      "defined": "2026-09-20, the owner's re-plan after phase B' ruling 3 item E.1b, as revised the same day: `E.1b keeps its pricing rule and uses this same ask rule in place of the ladder`.",
+      "deepens": "1c",
+      "scope": "every census field with no certified witness. Lattices to NMAX = 420 -- a superset of tier 1's NMAX = 180 set, so every earlier tier's ball record still answers the ball it answered and is never re-asked; the new work is the finer lattices. The ask rule, the point cap and the solver's wall are tier 1c's: this tier buys DEPTH, and tier 1c bought DEGREE.",
+      "nmax": 420,
+      "lattices": "the axis plus one or two non-rational classes with lcm <= 420, saturated (every unit vector of the lattice a generator)",
+      "odd_girth": "NOT computed at this tier: every 2l lattice record carries odd_girth.status `not asked`. Phase 0 measured the exact odd girth at about 900x the cost of the rest of `lattices` (1,648 CPU-s against 1.8 s at d = 11), and R-cycle is scored on tier 1's lattices, whose population is stated. A 2l lattice has no odd-girth column and must not be counted in an odd-girth table.",
+      "bfs_cap": 400000,
+      "quotients": 24,
+      "quotient_wall": 30,
+      "degree_law": "tier 1c's, unchanged: predicted average degree is g*phi(R)^2 with phi the disc/unit-translate overlap fraction, squared for the bidisc.",
+      "target_degree": 14,
+      "floor_degree": 8,
+      "radius_rule": "tier 1c's, unchanged: one ball per lattice, at the radius where the predicted degree reaches 14 if its predicted points fit the cap (with the same margin below it), else the largest radius under the cap whose predicted degree is at least 8, else an `Over cap (not asked)` record carrying the degree it would reach at the cap.",
+      "radii": [],
+      "point_cap": 2000000,
+      "solve_wall": 1800
   }
 }
