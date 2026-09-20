@@ -572,6 +572,52 @@ pieces force `c(0) = c(3u)` from ~2,700 points; `1/3 = 1 + 1 + v + v̄`; four tr
 | D.5 | closure and certificate | `1/3` as a sum of unit vectors over the field (meet-in-the-middle, as FS-58 did for 11 and 23), the chained witness, then phase C's whole path | `CERTIFIED`, or the null stated with its enumeration |
 | D.6 | stop rule | — | no forced chaining pair at either field within the timebox → the `d ≡ 3 (mod 8)` half is reported **not landed beyond 11**, and a stub is proposed |
 
+### The owner's re-plan after phase B′ (2026-09-20) — read this before phase E; where it differs from the rows below, it governs
+
+**Phase B′ is accepted** (`ef22cd4 … bb5e05e`). Scored by artifact: frozen files untouched, plan edits confined to §R, no certificate
+byte moved, `table --check` re-run by the owner (40 fields, accounting at tiers 1 and 1b, 0 defects, no tracked file changed), and the
+tier-`1b` records recounted by the owner from the raw `balls.jsonl` with his own script: **78 records — 37 asked (12
+`Colourable`, 24 `Unknown`, 1 `Refused`) and 41 `Over cap`; the one refusal is at `d = 23`, already landed; actual / predicted points
+0.9982–1.0094 over the 37.** Nothing new lands, and that is the result: **nine of forty.** The nulls are now sorted — 11 by certificate,
+5 by budget (35, 59, 83, 251, 323), 15 asked without a refusal.
+
+**Two corrections to the record, both the recurring kind (a number without its population).** (a) §R-B′ and the phase record give
+167's two colourable balls as "313,748 and 397,140 points": those are the **pieces put to the solver after low-degree peeling**; the
+balls are **314,177 and 397,821 points** (the raw records' `points`). (b) The hand-back's headline said "36 balls asked"; the records
+say 37. **And the owner's reading of 167, which goes into E.4:** at `R = 1.0` those two balls carry 481,082 and 609,374 edges — average
+degree **3.06** — so "3-colourable in under two seconds" measures the *radius*, not the field: a ball that sparse cannot refuse. The
+informative ask at 167 is `R = 1.2` (397,817 points, 1,688,370 edges, average degree 8.5), and it is `Unknown` at the wall. 167 has
+therefore still never been asked a question that was both decidable and capable of refusing.
+
+**Rulings.**
+1. **Census language gains its third phrase** (the implementer's, accepted — it is the majority case): `Not landed at tier T (asked:
+   j of k Open lattices, no refusal[, u undecided at the wall])`. The undecided clause is mandatory whenever `u > 0`.
+2. The strengthened rung rule (descend a rung on an exact over-cap) stands as harmless; it never fired. The `evidence` column's
+   retirement of `kernel` stands: no row of this census is kernel-checked, and only 11's README names FS-58's 204-point chain witness
+   as a different graph. The `load_jsonl` finding stands, and **the lock in `append` is built before any pooled run of phase E** —
+   a read that writes is tolerable only while one command runs at a time, and phase E does not.
+3. **E.1 as written — tier 2 at a 3,000,000-point cap — is NOT run.** The measurement that decides it is B′'s own: 24 of 37 asks at
+   ≤ 600,000 points ended undecided at the wall, so the binding constraint is the solver and tier 2 asks *larger instances of the
+   shape already undecided*; at 3.4–5.2 GB per million points a worker wants 10–16 GB, so the pool is six to eight wide, not sixteen;
+   the price is a day and the expected yield is low. The big-instance problem belongs to FS-59, with tools built for it
+   (cube-and-conquer, priced on a sample). **What replaces it, bounded at six machine-hours in total:**
+   * **E.1a — tier `1c`: the 14 `Unknown (budget)` tier-`1b` balls at the ten family fields not landed** (131, 167, 215, 239 ×2,
+     287 ×2, 311 ×2, 407, 431, 455, 479 ×2), re-asked at a **3,600 s** wall, same cap, one pooled pass. The 25 tier-1 `Unknown`s
+     at the control fields are not re-asked: those planes are 2- or 3-colourable by theorem, which is also the standing reminder
+     that an `Unknown` is not a near-refusal. Registered before the run: *the owner expects at most two verdicts to change, and none
+     to `Refused`* (low confidence); both outcomes are reachable.
+   * **E.1b — tier `2l`: deeper lattices under the same cap.** `NMAX = 420` lattices and the quotient filter at the 31 fields not
+     landed; balls by the ladder 1.5 → 1.2 → 1.0 under the **same** 600,000 cap and 600 s wall, pooled. This is the only test the
+     eleven by-certificate nulls can ever get. **Priced first on one field** (the lattice and filter stages at `d = 107`): if the
+     lattice-and-filter stage projects over two hours for 31 fields, cut to the eleven by-certificate fields plus 167; if it still
+     does, it is not run and the record says so with the measurement.
+   * Any field that newly refuses is certified under phase C's amended gate. The owner runs C.10 on it.
+4. **E.2–E.7 stand as written**, with three additions to E.4 (`aiming-167.md`): the sparsity reading above; B′'s finding that the
+   solver and not the cap is the wall, with the memory figures and their population; and, for each of 167's six Open lattices, its
+   predicted points at 1.0 / 1.2 / 1.5 and what was asked. **E.5's product is the isomorphism table and the shape table; the theorem
+   attempt beyond them is the owner's, at the close.**
+5. **Staffing:** the third implementer returned at 472k tokens; phase E and F go to a fresh one.
+
 ### Phase E — tier 2, and the explanation (one day)
 
 | # | what | verified how | pass condition |
