@@ -262,8 +262,13 @@ outcome.
 | **R-C** (G60's ratio reading as a *decider* of finite landing) | a refusing lattice has least character mean above −1/2 | — | FS-58's `charmeans` on every refusing lattice: one reading below −1/2 contradicts it (FS-58 saw none above −1/2 in 1,505 pools over 23, which landed) |
 | **R-size** (D-H.3) | the least refusing ball grows like a power of `d` at matched relative height | log–log slope of least refusing size against `d` in `[0.5, 2]` | slope outside, or no correlation |
 
-R-mod8 and R-size can both hold (they describe different halves); R-cycle and R-size disagree on a live lattice with a long odd girth
-that refuses; R-L disagrees with all three on the `L = 5` fields. Every reading is scored at the close, won or lost, in those words.
+R-mod8 and R-size can both hold (they describe different halves); R-cycle and R-size disagree on an `Open` lattice with a long odd
+girth that refuses; R-L disagrees with all three on the `L = 5` fields. Every reading is scored at the close, won or lost, in those
+words. **Each has a unit of analysis, and the tables name it** (§M1.8): R-cycle and R-C are statements about *lattices* (population:
+rank-4 `Open`-or-`Refused` lattices at one tier); R-mod8, R-L and R-size about *fields*. **R-mod8 has two strengths, scored
+separately:** (a) *no tier-1 lattice over any `d ≡ 3 (mod 8)` is `Refused`* — a null at a budget; (b) *every tier-1 lattice over
+those fields is `Colourable` by certificate* — the barrier-shaped finding, which by downward inheritance needs certificates only on
+the finest lattices and would make A.7's rule a theorem candidate for the whole class.
 
 ## §4 Decisions (choice · alternative weighed · why · confidence, and what would change it)
 
@@ -272,6 +277,7 @@ that refuses; R-L disagrees with all three on the `L = 5` fields. Every reading 
 | A | **The census family is the 40 squarefree `d ≡ 11 (mod 12)` below 500**; every other `d` appears only as a control | the stub's "squarefree `d < 500`" (about 300 fields) | outside the family `χ ≤ 3` is a theorem, so a scan there can only measure the instrument; seven named control fields do that at 2 % of the cost | high |
 | B | **Depth is an explicit, recorded tuple, identical for every field in a tier**: tier 1 = (classes to `NMAX = 180`; lattices = the axis plus one or two classes with lcm ≤ 180, saturated; odd girth exact to length 15 or a 400,000-point BFS cap, whichever first, with `none_up_to` recorded; quotient filter = FS-58's, 24 quotients, 30 s each; balls at `R = 1.5` then `1.8`, point cap 600,000, solve wall 600 s). Tier 2 (phase E, non-landed `d ≡ 7 (mod 8)` fields only) = (`NMAX = 420`, cap 3,000,000, wall 1,800 s) | depth relative to the field (`NMAX = c·√d`) | a fixed `NMAX = 180` is already ≥ 8`√d` for every `d < 500`, reproduces FS-58's records exactly (the phase-0 regression), and keeps one comparable column; relative height `N/√d` is *recorded* per lattice so the analysis can condition on it | medium — if tier 1 lands nothing above `d ≈ 250`, tier 2's definition is what matters and is re-examined then |
 | C | **A lattice is identified by a canonical key** (Hermite normal form of a basis over the common denominator), never by the class spec that produced it | FS-58's spec strings | many specs give one lattice (`q1+60.1` and `q1+12+60.1` over 119 are the same 28 vectors); FS-58's "38 distinct lattices (39 lines; one listed twice)" is what spec keys cost. The spec stays as a *name*, and one spec per lattice — the union of all classes it contains — is what is handed to FS-58's frozen commands | high |
+| C′ | **A lattice's state is one axis with certificate kinds, inherited along inclusion; "3-integral", "bipartite" and "dead" are three kinds of one state** (§M1) | FS-58's separate flags (`bipartite`, `three_integral`, `forms_mod3`, a filter verdict) | the flags are one fact — *a 3-colouring of the whole lattice graph is in hand* — in four costumes, and keeping them apart hid that a 3-non-integral lattice with a form mod 3 needs no solver and that one certificate on a fine lattice closes every lattice under it | high |
 | D | **The atlas (inverted enumeration by denominator) runs before any scan, to `N ≤ 420` and `d < 2000`** | per-field `classes` only | D-H.1: an inverted enumeration has a row for every field whether or not anything was found there; and it prices tier 2 before it is run | high |
 | E | **Controls run before the census and are paired**: three-chromatic fields `d = 7, 19, 31, 43` and two-chromatic `d = 2, 5, 13` scanned with the 3-integrality filter **off** must yield zero refusals (and the two-chromatic ones only `Bipartite` lattices), beside the *same filter-off code path* at `d = 47`, which must refuse | a negative control alone | a control that cannot go red has not been tested by passing; the filter-off path at 47 shows the path can refuse | high |
 | F | **Every field with a `Refused` ball is carried to a certificate** (smallest refusing ball first), by FS-58's full path; an uncertified refusal is reported as `Refusal claimed`, never as landed | certify a sample | a census whose landings are solver claims is a list of rumours; extraction is minutes per field (O3) except for balls above ~300,000 points, which are checkpointed `extract` runs | high |
@@ -319,7 +325,7 @@ that refuses; R-L disagrees with all three on the `L = 5` fields. Every reading 
 
 ## §6 The phases and their gates (what · verified how · pass condition)
 
-*An item is green only when the product owner has opened the named artifact. Sizes: phase 0 — 8 items; A — 9; B — 7; C — 8 per field
+*An item is green only when the product owner has opened the named artifact. Sizes: phase 0 — 8 items; A — 9; B — 8; C — 8 per field
 plus 2; D — 6; E — 7; F — 5.*
 
 ### Phase 0 — the instrument (`tools/fs61_census.py`; half a day)
@@ -348,7 +354,7 @@ Build the census driver as a thin layer over FS-58's functions (`import fs58_sea
 | A.2 | the atlas (D-H.1) → `data/fs61/atlas.jsonl`: for every squarefree `d ≡ 11 (mod 12)`, `d < 2000`, the class denominators `N ≤ 420` with orbit counts, `v₂`, `v₃`, and `N₁(d)` (least non-rational), `N₃(d)` (least with `3 \| N`) | inverted enumeration (solve for `d`); cross-check against FS-58's `classes(D, NMAX)` | exact agreement of (denominator, orbit count) lists with `classes` on FS-58's 14 fields and on 119, 155, 299 at `NMAX = 180`; `D(6) = {11, 35}` and **`D(12) = {23, 47, 71, 95, 119, 143}`** reproduced; the plant (drop the orthogonality condition `ab + ce = 0`) changes `D(12)` and is caught |
 | A.3 | the laws of D-H.2, tested on every atlas row | a script over `atlas.jsonl` | height floor `N ≥ √d`: 0 violations; odd `p ≡ 3 (mod 4)` divides a denominator only if `(d/p) = −1`: 0 violations; `v₂(N) ≤ 1` for `d ≡ 3 (mod 8)` and `≥ 2` for `d ≡ 7 (mod 8)`: 0 violations **or the violating rows printed in full and the law restated** |
 | A.4 | hand derivation of the dyadic law, in `§R-A` of this plan, status `[hand]` | read by the product owner | a proof, or an honest "not derived" with what blocked it |
-| A.5 | every known witness's own lattice is `Live` (a control on the filter: a non-3-colourable finite subgraph cannot sit in a periodically 3-colourable lattice) | the ℤ-span of the points of `data/fs58/witness-{11,23,47,71,95,191}/witness.json` and of `data/fs61/pricing/witness-119/witness.json`: canonical key, covolume, saturation, quotient filter | seven `Live`; a `Dead` here is an instrument defect: halt and report. The 11-witness's lattice and covolume are recorded — they are phase D's starting point |
+| A.5 | every known witness's own lattice is **not** `Colourable` (a control on the filter: a non-3-colourable finite subgraph cannot sit in a colourable lattice) | the ℤ-span of the points of `data/fs58/witness-{11,23,47,71,95,191}/witness.json` and of `data/fs61/pricing/witness-119/witness.json`: canonical key, covolume, saturation, quotient filter | seven `Open` (or `Refused`); a `Colourable` here is an instrument defect: halt and report. The 11-witness's lattice and covolume are recorded — they are phase D's starting point |
 | A.6 | the killing-quotient table (D-Q) → `data/fs61/dead-quotients.md`, **from FS-58's existing `qscreen.jsonl` files, no new solving** | for each lattice with a verified colourable quotient: the least-order such quotient, its Smith form, the prime support of its order; tallied by `d mod 8` and by 3-integrality | the table regenerates from the records by one command; counts reconcile with FS-58's README (28 dead of 31 over 167) |
 | A.7 | the formula behind the non-affine quotient colourings (D-Q), timebox three hours | regenerate three verified quotient colourings (59 at `Λ/9Λ`; 35 at `Λ/6Λ`; one over 167), look for the rule (a function of a linear form mod 3 and a residue mod 2 or mod 9; a coset structure), test any candidate rule as an *exact* colouring on every dead lattice of the table | one of: a rule that reproduces a colouring on ≥ 90 % of dead lattices, with the statement it suggests; a rule for a sub-family; "no pattern found", with what was tried. Any rule is a `[reading]` until proved |
 | A.8 | the size-law inputs: per (field, lattice) predicted ball points at `R = 1.5` from the covolume, beside the relative height `N/√d` | `lattices` records (phase B computes them; here the formula is fixed and tested on FS-58's known balls) | predicted against actual point counts within 15 % on FS-58's recorded balls (8,629; 13,605; 47,597; 53,177; 283,485; 440,077) |
@@ -356,16 +362,21 @@ Build the census driver as a thin layer over FS-58's functions (`import fs58_sea
 
 ### Phase B — the census scan, tier 1, all 40 fields in ascending `d` (an afternoon; checkpointed per ball)
 
-Per field: `lattices` → state each lattice `Bipartite` / `ThreeIntegral` (3-colourable outright by the kernel barrier, row 72; never
-scanned) / `Dead (periodic colouring verified)` / `Live` → `scan` the live ones in order of ascending predicted points, `R = 1.5` for
-**every** live lattice under the cap (the census's comparable column), then `R = 1.8` for those colourable at 1.5. Onset radii
-(`R = 1.0, 1.2`) are asked only of refusing lattices and with a 120 s wall, because the band just under the threshold stalls (O3, O4).
+Per field: `lattices` → `filter` gives each lattice its state on the **one axis of §7** — `Colourable (form mod 2)`, `Colourable
+(form mod 3)`, `Colourable (periodic colouring verified)`, or `Open` — cheapest certificate first, **and top-down**: a colouring
+certificate on a lattice is inherited by every full-rank sublattice of it, so the finest lattices are filtered first and everything
+under a colourable one is closed without being asked (§M1.3). Then `scan` the `Open` lattices bottom-up, in order of ascending predicted
+points: `R = 1.5` for **every** `Open` lattice under the cap (the census's comparable column), then `R = 1.8` for those colourable at
+1.5; a `Refused` ball closes every lattice above it. Onset radii (`R = 1.0, 1.2`) are asked only of refusing lattices and with a 120 s
+wall, because the band just under the threshold stalls (O3, O4). Lattices of rank below 4 are recorded and filtered, never scanned
+(FS-58 found the layered pools dead or poor in odd cycles); E.5 reads them.
 
 | # | what | verified how | pass condition |
 |---|---|---|---|
-| B.1 | completeness | `table --check` | 40 fields; per field `#lattices = #Bipartite + #ThreeIntegral + #Dead + #Live`; every `Live` lattice has an `R = 1.5` record or `Over cap (not asked)`; no field skipped silently — a field with zero live lattices says so |
+| B.1 | completeness | `table --check` | 40 fields; per field `#lattices = #Colourable (by certificate kind) + #Refused + #Open`; every rank-4 `Open` lattice has an `R = 1.5` record, an inherited verdict with the key it was inherited from, or `Over cap (not asked)`; no field skipped silently — a field with zero `Open` lattices says so |
+| B.1b | the two monotonicity controls (§M1.3–4) — they can fail, and a failure is an instrument defect: halt and report | `table --check` | no pair `Λ ⊂ Λ′` (full rank) with `Λ` `Refused` and `Λ′` `Colourable`; no lattice with a `Colourable` ball at a radius above a `Refused` one; every 3-integral lattice has a form mod 3 (the kernel barrier, row 72, seen by the instrument). Plant: flip one verdict in a scratch copy and watch the check name the pair |
 | B.2 | every `Colourable` verdict is verified | each record carries the sha256 of its model; `scan --reverify` re-reads a random 10 % of models and checks every edge | 0 failures |
-| B.3 | every `Dead` carries its certificate | the killing quotient (matrix, order) and the colouring's sha256; `filter --reverify` on all of them | 0 failures |
+| B.3 | every `Colourable` lattice carries its certificate | the form (four residues) or the quotient (matrix, order) with the colouring's sha256; `filter --reverify` on all of them, against the **full** generator set | 0 failures |
 | B.4 | the priced facts reproduce | 119 `q1+12+60.1` and 143 `q1+q5+12+60` | `Refused (solver claim)` at `R = 1.5` with 13,605 and 283,485 points |
 | B.5 | budget honesty | the log | every `Unknown (budget)` and `Over cap` is listed per field in the table's notes column; none appears in any count of refusals or colourables |
 | B.6 | the table regenerates | `table` twice | byte-identical `data/fs61/census.md` and `census.jsonl` |
@@ -429,20 +440,42 @@ pieces force `c(0) = c(3u)` from ~2,700 points; `1/3 = 1 + 1 + v + v̄`; four tr
 
 ## §7 Records (the consumer surface: FS-59, FS-60, the ledger, the owner's scoring)
 
-All under `data/fs61/`. One JSON object per line; every record carries `tier`, `depth` (the tuple of decision B), `machine`, and
+All under `data/fs61/`. One JSON object per line; every record carries `tier` (an id defined once in `data/fs61/tiers.json` —
+the tuple of decision B; a tier's definition never changes after its first record, a new depth is a new id), `machine`, and
 `claim_scope` ∈ {`exact`, `verified model`, `solver claim`, `checker`, `float reading`}.
+
+**The objects (§M1).** A **lattice** is a finitely generated subgroup `Λ` of `F²`, identified by its canonical key; its graph is
+always the *full* unit-distance graph on `Λ` — generators = every unit vector lying in `Λ` — so "saturated" is part of the
+definition and is asserted, never assumed. A lattice's **state** is one axis, *what is known about 3-colouring its graph*:
+`Colourable (form mod 2)` (bipartite), `Colourable (form mod 3)` (a linear form `Λ → ℤ/3` nonzero on every generator — every
+3-integral lattice has one, by the kernel barrier), `Colourable (periodic colouring verified)` (FS-58's "dead"), `Refused (solver
+claim)` / `Refused (certified)` (some ball refuses), or `Open (no certificate among: forms mod 2, 3; Q quotients; balls to R)` (FS-58's
+"live" — a statement about the search, which is why it carries its enumeration). Colourability is inherited **downward** (a full-rank
+sublattice of a colourable lattice is colourable, periodically), refusal **upward**. A lattice's balls give a **refusal bracket**
+`(largest radius verified colourable, smallest radius refused)`, never a "least refusing ball". A **field** has a `role` (`census`, or
+`control` with its expected `χ`) and, separately, a state; its value is a bracket `[lower, upper]` with a source for each end. A
+**landing is a certified witness** — a finite point set the frozen checker certifies — and the direct route and the chain route are
+two *searches* for that one kind of object: the route is the witness's provenance (`found_by`), never part of the field's state.
 
 * `frame.jsonl` — `{d, mod4, mod3, mod8, stable_primes, L, L_reason, chi_known, chi_source}`.
 * `atlas.jsonl` — `{d, classes: [{N, orbits, v2, v3, rational}], N1, N3}`.
-* `fields/<d>/lattices.jsonl` — `{d, key (canonical), spec (all classes contained), M, size, covolume, rel_height (N/√d of its
-  coarsest non-rational class), state, odd_girth, odd_girth_none_up_to, forms_mod3, predicted_points_R15, saturated_sha256}`.
-* `fields/<d>/filter.jsonl` — `{key, state: Dead|Live, quotients_tried, killing_quotient: {matrix, snf, order}, colouring_sha256}`.
-* `fields/<d>/balls.jsonl` — `{key, R, points, edges, verdict, solve_seconds, wall, model_sha256}`.
+* `fields/<d>/lattices.jsonl` — `{d, key (canonical: exact denominator M and the Hermite normal form of MΛ), spec_full (the one
+  spec naming every class the lattice contains; `pool_vectors(spec_full)` must equal the generator set — asserted), class_reps (a
+  representative vector per class, because a class *name* means something only under the frozen `classes()`), rank, M, size,
+  covolume, rel_height (N/√d of its coarsest non-rational class), three_integral, odd_girth, odd_girth_none_up_to,
+  predicted_points_R15, generators_sha256, iso_invariant (covolume, size, sorted multiset of generator inner products — lattices that
+  differ by a rotation are *not* merged, this lets the analysis see them)}`.
+* `fields/<d>/filter.jsonl` — `{key, state, certificate: {kind: form2|form3|quotient, form | (matrix, snf, order, colouring_sha256)},
+  inherited_from (a key, when the state came by monotonicity), quotients_tried}`.
+* `fields/<d>/poset.jsonl` — derived: the inclusion pairs among the field's full-rank lattices (an HNF divisibility test).
+* `fields/<d>/balls.jsonl` — `{key, shape (FS-58's `piece`: `ball`), R, points, edges, verdict, solve_seconds, wall, model_sha256}`.
 * `witness-<d>/` — FS-58's bundle: `witness.json`, `witness.lrat.gz`, `certified.out`, `controls.out`, `recheck.out`,
   `colouring4.json`, `run-all.sh`, `README.md`.
 * `census.jsonl`, `census.md` — **derived**: one row per field — `d`, `d mod 8`, `L`, `N₁`, `N₃`, lattices by state, the best live
-  lattice, the least refusing ball (points, `R`), the witness (points, edges), the field's state ∈ {`Landed (certified)`,
-  `Refusal claimed`, `Not landed at tier T`, `Control`}, the value or bracket, notes (every `Unknown` and `Over cap`).
+  lattice, the refusal bracket of the best lattice (both ends, with points), the witness (points, edges, `found_by: ball | chain`),
+  `role`, the field's state ∈ {`Landed (certified)`, `Refusal claimed`, `Not landed at tier T`}, the value bracket with the source of
+  each end, notes (every `Unknown` and `Over cap`). A `control` field whose state is not `Not landed` is a defect, and the table says
+  so in red words.
 
 ## §8 Registered predictions (before any census solver call; both outcomes of each checked reachable)
 
@@ -466,6 +499,34 @@ Not an attack on 167 (FS-59). Not a kernel milestone (FS-60). Not a proof of the
 of landings is evidence for it and nothing more. **Stop rules:** tier 1 costs at most a day of machine time — if a single field's scan
 passes two hours, record the remainder as `Over cap (not asked)` and move on; phase A.7 three hours; phase D one day, two fields;
 tier 2 one day. A null at any tier measures that tier's lattices and balls (G21), and the table says which.
+
+## §M Modeling passes
+
+### M1 — domain (2026-09-19): what the census's objects are
+
+Run as a fresh invocation of `debruijn-domain-modeling` on the committed subplan. The cut it applied throughout: **what belongs to
+the problem** (a lattice, its unit-distance graph, whether that graph is 3-colourable, a finite witness) against **what belongs to how
+FS-58's search happened to be organised** (class specs, separate flags, "the ball that refused", the route that found a witness).
+
+| # | choice | alternative weighed | why | confidence |
+|---|---|---|---|---|
+| M1.1 | the lattice is the object and its graph is the full unit-distance graph on it; saturation is definitional and asserted | FS-58's pool (a direction set `W`, graph `Cay(ℤ[W], W)`) | the pool graph is a *subgraph* of the plane's graph on the same points; only the full graph is an induced piece of the plane, so only it is monotone under inclusion and only its colourings mean anything about the plane. A missed generator is the one error that fails silently toward "colourable" (rule 6) | high |
+| M1.2 | one state axis with certificate kinds (decision C′) | four flags | above; the control it buys for free — every 3-integral lattice must show a form mod 3 — is the kernel barrier observed by the instrument | high |
+| M1.3 | **the lattices of a field form a poset under inclusion; colourability is inherited downward, refusal upward; the census records the inclusions and checks both directions** | independent lattice records | it is the problem's own structure (an induced subgraph of a 3-colourable graph is 3-colourable; the restriction of a periodic colouring to a full-rank sublattice is periodic). It gives an order of work (certificates top-down, balls bottom-up), a strong consistency control that can fail (B.1b), and the sharp form of R-mod8 — *certificates on the finest lattices close a field's whole slice* | high |
+| M1.4 | a lattice's balls give a bracket `(largest colourable, smallest refused)` | "the least refusing ball" | verdicts are monotone in the radius and the band between the two ends is where solvers stall, so the minimum is not observable; R-size is fitted on the bracket's upper end and says so | high |
+| M1.5 | a landing is a certified witness; the route is provenance; a field has a role and, separately, a state | a field state that names the route, and `Control` as a state | the chain route and the direct route search for the same object, and a control field has the same possible states as any other — that it must stay `Not landed` is the *expectation*, which a state cannot also be | high |
+| M1.6 | tiers are defined once in `tiers.json`; records carry the id | the depth tuple in every record | one definition cannot drift from itself; a changed depth is a new tier | high |
+| M1.7 | lattices of rank below 4 are recorded and filtered, not scanned | skipped, as FS-58's `saturate` does | they are the objects of `[Sokolov2018]`'s adjacent question (E.5) and cost nothing to certify; FS-58's layered-pool nulls say a scan of them is poor value | medium — a rank-3 `Open` lattice with a short odd cycle would reopen it |
+| M1.8 | every reading names its unit of analysis and its quantifier; R-mod8 is split into (a) a budget null and (b) a certificate statement | one sentence per reading | (a) and (b) are different kinds of knowledge and the census can deliver the second | high |
+| M1.9 | lattices that differ by a rotation are not merged; an isomorphism invariant is recorded | canonicalising up to the plane's symmetries | the symmetry group is infinite (every unit vector is a rotation) and merging is graph isomorphism; duplicates cost only solver time, and the invariant lets the analysis see them | medium — if duplicates turn out to dominate a field's slice, merge by invariant then |
+
+**Seams checked.** *Unsampled members:* a field with no `Open` lattice (the table says so, B.1); a lattice of rank 3 (M1.7); a field
+whose only refusing ball is over the cap for `direct-witness` (phase C's checkpointed `extract`). *Adversarial members:* a `Colourable`
+verdict on an incomplete edge set — excluded by asserting saturation (0.6) and re-verifying certificates against the full generator
+set (B.3); a witness certified under the wrong field — the checker's wrong-radicand refusal (C.3); `χ = 4` claimed where `L = 5` — the
+frame is computed two ways (A.1). *The next-lemma test:* FS-59's question ("which lattices over 167 are `Open`, and how large are their
+balls?"), FS-60's ("every certified witness with its path and size") and a later tier or route all state in the schema without
+changing it.
 
 ## §R Results
 
