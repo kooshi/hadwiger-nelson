@@ -79,3 +79,61 @@ owner recheck: D = 359, data/fs61/witness-359/witness.json
   triangles: 0; degrees min/median/max 2/5/25; 3 in some edge denominator: 3043 edges have 3 | m_i m_j
 RECHECK PASS
 exit=0
+
+## Second pass, 2026-09-20 afternoon: the four fields certified at the close (311, 335, 431, 59) -- owner's C.10, plants included, and the frozen checker re-run by the owner at 311 and 59
+### d = 311  sha256 1480a9fe621decee  (2026-09-20 15:48)
+owner recheck: D = 311, data/fs61/witness-311/witness.json
+  points 189; unit-distance pairs by exact arithmetic over all 17766 pairs: 460; file lists 460
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 460 edges: yes; class sizes [66, 58, 40, 25]
+  triangles: 0; degrees min/median/max 3/4/15; 3 in some edge denominator: 413 edges have 3 | m_i m_j
+  plants (each must make the recheck FAIL):
+    [fired] one listed edge removed: 1 unit-distance pairs MISSING from the file, e.g. (62, 73)
+    [fired] one non-edge added: 1 listed edges are NOT at distance 1, e.g. (0, 1)
+    [fired] wrong radicand D + 12: 408 listed edges are NOT at distance 1, e.g. (0, 4)
+RECHECK PASS
+exit=0
+### d = 335  sha256 5415e8a36164d29d  (2026-09-20 15:48)
+owner recheck: D = 335, data/fs61/witness-335/witness.json
+  points 443; unit-distance pairs by exact arithmetic over all 97903 pairs: 1086; file lists 1086
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 1086 edges: yes; class sizes [184, 145, 93, 21]
+  triangles: 0; degrees min/median/max 3/4/22; 3 in some edge denominator: 1077 edges have 3 | m_i m_j
+  plants (each must make the recheck FAIL):
+    [fired] one listed edge removed: 1 unit-distance pairs MISSING from the file, e.g. (165, 167)
+    [fired] one non-edge added: 1 listed edges are NOT at distance 1, e.g. (0, 2)
+    [fired] wrong radicand D + 12: 933 listed edges are NOT at distance 1, e.g. (0, 118)
+RECHECK PASS
+exit=0
+### d = 431  sha256 f88f148ecb2a265c  (2026-09-20 15:48)
+owner recheck: D = 431, data/fs61/witness-431/witness.json
+  points 1031; unit-distance pairs by exact arithmetic over all 530965 pairs: 2719; file lists 2719
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 2719 edges: yes; class sizes [345, 312, 222, 152]
+  triangles: 0; degrees min/median/max 2/5/14; 3 in some edge denominator: 2584 edges have 3 | m_i m_j
+  plants (each must make the recheck FAIL):
+    [fired] one listed edge removed: 1 unit-distance pairs MISSING from the file, e.g. (317, 324)
+    [fired] one non-edge added: 1 listed edges are NOT at distance 1, e.g. (0, 1)
+    [fired] wrong radicand D + 12: 1570 listed edges are NOT at distance 1, e.g. (0, 105)
+RECHECK PASS
+exit=0
+### d = 59  sha256 3bdb4ae6eef3f976  (2026-09-20 15:50)
+owner recheck: D = 59, data/fs61/witness-59/witness.json
+  points 1739; unit-distance pairs by exact arithmetic over all 1511191 pairs: 5025; file lists 5025
+  3-colourable? glucose4: UNSAT
+  3-colourable? lingeling: UNSAT
+  4-colouring found and verified on all 5025 edges: yes; class sizes [566, 529, 367, 277]
+  triangles: 0; degrees min/median/max 2/5/16; 3 in some edge denominator: 4991 edges have 3 | m_i m_j
+  plants (each must make the recheck FAIL):
+    [fired] one listed edge removed: 1 unit-distance pairs MISSING from the file, e.g. (497, 1489)
+    [fired] one non-edge added: 1 listed edges are NOT at distance 1, e.g. (0, 1)
+    [fired] wrong radicand D + 12: 4 unit-distance pairs MISSING from the file, e.g. (673, 1651)
+RECHECK PASS
+exit=0
+C.1 d=311 exit=0
+CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); all 460 pairs at distance exactly 1 re-derived in integer arithmetic (17766 candidate pairs tested) and equal to the file's edge list; (0, 0) = vertex 0 and (1, 0) = vertex 3 adjacent; pinned edge [0, 3] adjacent; CNF built here 
+C.1 d=59 exit=0
+CERTIFIED: 1739 points of Q(sqrt59)^2, each a reduced (a, b, c, e, m); all 5025 pairs at distance exactly 1 re-derived in integer arithmetic (1511191 candidate pairs tested) and equal to the file's edge list; (0, 0) = vertex 0 and (1, 0) = vertex 9 adjacent; pinned edge [0, 9] adjacent; CNF built he
