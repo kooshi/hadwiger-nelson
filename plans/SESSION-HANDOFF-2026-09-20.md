@@ -142,3 +142,9 @@ Planner ~460k; its delegate + the two unauthorised grandchildren ~940k; implemen
 * **A tangent with Kooshi on FS-62** (`2e09ff3`, the stub's §2 "The split, stated once"): finishing the six window graphs proves "no
   field has local bound six", never "no field has chromatic number six" — `χ ≤ L` is one-sided; fields with `L ≥ 7` are cofinal, so
   `χ(ℝ²) ≠ 6` follows from that row alone and the wall is not used. Ranking unchanged unless he pushes back.
+* **Sequencing, Kooshi 2026-09-20:** *finish FS-61 first, as long as it still has value; then start the tower question (FS-66,
+  `plans/STUB-residue-tower-drop.md`, minted `0af9e54`) and ℚ(√167) (FS-59) in a FRESH session after a compaction.* So the FS-66
+  pilot is NOT inserted into FS-61. The owner's check that FS-61 still has value: its lower bounds stand whichever way FS-66 goes;
+  B′ is the first decidable-size ask at 167; the close produces the size law and `aiming-167.md`. Phase E's tier 2 is re-checked
+  against B′'s numbers before launch and trimmed, with the reason recorded, if it no longer earns its cost. **The close of FS-61
+  ends with a handoff whose first act for the next session is FS-66's prior-art gate, then its pilot at 11.**
