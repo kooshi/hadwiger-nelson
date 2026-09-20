@@ -4,7 +4,57 @@
 (Opus 5), 2026-09-20. Machine: **the desktop, 16 physical cores / 32 threads, 128 GB**, idle, one
 heavy job at a time.*
 
-## The launch — written before the run started (plan §5 rules 1 and 3)
+## The second implementer's launch — written before the run started (plan §5 rules 1 and 3), 2026-09-20
+
+*Taking over phase C mid-stream; the record below this block is the first implementer's and the owner's, kept as
+the history. What changed before this launch is the **deletion policy**, §"The deletion policy" below.*
+
+```
+COMMAND     python3 tools/fs61_census.py land-all
+            (defaults: --deletion-budget 600 --gen-cap 5400)
+ORDER       359, 11, 119, 143, 47, 95, 191, 71, 23   -- unchanged, the owner's priority
+RESUME      the identical command.  A field whose data/fs61/landings.jsonl record says CERTIFIED is skipped;
+            inside a field, `extract` resumes from witness-<d>/steps.jsonl and `land` skips generation entirely
+            when witness.json is already on disk.
+STATE       data/fs61/landings.jsonl, data/fs61/witnesses.jsonl, data/fs61/witness-<d>/
+LAUNCHED    setsid, no `timeout` wrapper, no pipe; stdout to data/fs61/records/land-all.log.
+PGID        written to data/fs61/records/land-all.pgid at launch; stop with `kill -TERM -$(cat …)`, then verify
+            BY EFFECT: no `fs61_census.py`/`fs58_search.py` pid in `ps`, and the field's steps.jsonl (or the log)
+            digest identical across 65 s -- the deletion checkpoints are 60 s apart, so a shorter check proves
+            nothing.
+AT LAUNCH   d = 359's witness.json and witness.lrat.gz already exist (the owner's --stop-deletion re-run finished
+            at 05:27): 1,190 points, 3,243 edges, LRAT 87,375,793 bytes raw / 25 MB gzipped, emit 389 s.
+            So 359 is the end-to-end test of C.1-C.9 with no generation.
+```
+
+## The deletion policy (the owner's ask; my design)
+
+**The rule: stage 1 runs to its fixpoint, stage 2 gets 600 seconds.** `extract`'s stage 1 — CaDiCaL assumption-core
+rounds — is the reduction that matters (113,325 → 2,830 points at `d = 359`) and the frozen tool offers no way to
+stop it. Stage 2 — deleting one vertex at a time down to 1-minimal — is a **nicety**: gate C.9 *records* minimality
+and never requires it, and FS-58's own `witness-95` was certified with it stopped at 363 of 1,737. At `d = 359` it
+ran at **45 s a step with ~700 steps left** — nine hours on one field. So stage 2 is given `--deletion-budget`
+seconds from the moment its first checkpoint appears; the generator is then stopped **by pid** and re-run with
+`--stop-deletion`, which resumes from the last checkpoint and emits. `--gen-cap 5400` is a backstop on the whole
+call and not the plan; a field it stops is left resumable, never failed.
+
+*Alternative weighed:* always pass `--stop-deletion` (the owner's first option). It is simpler and it forfeits the
+deletion entirely — at 359 that is 2,830 points instead of 1,190, a 2.4× larger witness and, since LRAT size tracks
+the graph, a 2–3× larger proof for every later consumer (the checker, FS-60's kernel form). Ten minutes a field buys
+that back. *Why this one won:* same worst case, strictly better typical case, and it is what makes the minimality
+row say something. *Confidence: high* — the budget only ever costs witness size, never correctness, because a
+refusing set refuses whether or not it is minimal.
+
+*What the stop does NOT do:* it cannot stop stage 1, so a field whose core rounds are slow (`d = 143` at 283,485
+points and 116 s a solve; `d = 23` at 248,213 and 55 s) can still exceed half an hour in generation. That is
+reported, not rescoped.
+
+**`direct-witness` (balls ≤ 20,000 points) is run whole and unbudgeted**, measured rather than assumed: FS-58's own
+log for `d = 47` (8,629 points) reads `5.6 s` end to end, because it takes one Glucose4 assumption core over the
+whole ball first and only then deletes over the few hundred vertices that survive. Only `d = 47` (8,629) and
+`d = 119` (13,605) take that path; their measured times are in the results table.
+
+## The first implementer's launch — written before their run started (plan §5 rules 1 and 3)
 
 ```
 COMMAND     python3 tools/fs61_census.py land-all

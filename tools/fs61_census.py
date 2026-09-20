@@ -37,7 +37,7 @@ WHERE FS-58 WRITES.  fs58_search.outdir(D) is rebound to data/fs61/fields/D/ bef
 worker pools use the 'fork' start method so the rebinding is inherited (Python 3.14's default is 'forkserver', which re-imports the
 module and would silently write into data/fs58/).  selftest --section outdir checks both halves of that.
 """
-import sys, os, json, math, time, hashlib, gzip, argparse, subprocess, itertools, collections
+import sys, os, re, json, math, time, hashlib, gzip, argparse, subprocess, itertools, collections
 from fractions import Fraction as Fr
 from pathlib import Path
 
@@ -1276,8 +1276,79 @@ def selftest_atlas(rnd):
     return rows
 
 
+def selftest_land(rnd):
+    """Phase C's own machinery, through the SHIPPED functions, each with a plant and both outcomes shown reachable:
+    the minimality reader (C.9), the four-colouring (C.5), the 3-adic barrier counter (C.6), the checkpoint repair,
+    and the stop-by-pid verification."""
+    import tempfile
+    rows = []
+    # --- C.9, the minimality reader.  Both outcomes reachable: the two provenance strings FS-58 actually writes.
+    mk = lambda s: {'construction': {'reduction': s}}
+    a = _minimality(mk('1-minimal refusing vertex set by Glucose4 core-guided deletion, translated by -p'))
+    b = _minimality(mk('72 rounds of CaDiCaL assumption cores to a fixpoint (17169 -> 1737 points), then Glucose4 '
+                       'deletion STOPPED after 363 of 1737 tests (the set is refusing, not 1-minimal), then '))
+    c = _minimality({'construction': {}})
+    rows.append(('C.9 the minimality reader says `yes` on FS-58\'s direct-witness provenance',
+                 a['minimal'] == 'yes', a['note']))
+    rows.append(('PLANT (C.9): FS-58\'s own stopped-deletion provenance (witness-95) is NOT reported as minimal',
+                 b['minimal'] == 'no' and (b['stopped_at'], b['of_tests']) == (363, 1737), b['note']))
+    rows.append(('C.9 an absent deletion phase reads `unknown`, never `yes`', c['minimal'] == 'unknown', c['note']))
+    # --- C.5, the four-colouring.  Positive: a 5-cycle needs 3 and takes 4.  Plant: K_5 needs 5, so None.
+    c5 = four_colour([(0, 0, 0, 0, 1)] * 5, [(0, 1), (1, 2), (2, 3), (3, 4), (0, 4)])
+    k5 = four_colour([(0, 0, 0, 0, 1)] * 5, [(i, j) for i in range(5) for j in range(i + 1, 5)])
+    rows.append(('C.5 four_colour finds and verifies a proper 4-colouring of a 5-cycle',
+                 c5 is not None and all(c5[i] != c5[j] for i, j in [(0, 1), (1, 2), (2, 3), (3, 4), (0, 4)]),
+                 f'colouring {c5}'))
+    rows.append(('PLANT (C.5): K_5 is 5-chromatic, so four_colour must return nothing', k5 is None, f'{k5}'))
+    # --- C.6, the 3-adic barrier counter.  Positive: FS-58's own certified 47 witness.  Plant: the same points with
+    #     every denominator made prime to 3, which is exactly the hypothesis of the kernel barrier (row 72).
+    w47 = json.loads((ROOT / 'data' / 'fs58' / 'witness-47' / 'witness.json').read_text())
+    p47, e47 = [tuple(p) for p in w47['points']], [tuple(e) for e in w47['edges']]
+    n47 = barrier_edge_count(47, p47, e47)
+    flat = [(a_, b_, c_, e_, m // 3 ** v_p(m, 3) or 1) for a_, b_, c_, e_, m in p47]
+    nflat = barrier_edge_count(47, flat, e47)
+    rows.append(('C.6 FS-58\'s certified 47 witness has edges with 3 in the reduced denominator (row 72 says it must)',
+                 n47 > 0, f'{n47} of {len(e47)} edges'))
+    rows.append(('PLANT (C.6): the same edge list over 3-integral points counts zero, which is the defect reading',
+                 nflat == 0, f'{nflat} of {len(e47)} edges'))
+    # --- the checkpoint repair.  Both outcomes reachable: a clean file is untouched, a truncated one is repaired.
+    with tempfile.TemporaryDirectory() as td:
+        good = Path(td) / 'steps.jsonl'
+        good.write_text(json.dumps({'step': 'deletion', 'position': 7, 'finished': False, 'kept': [[1, 2, 3, 4]]},
+                                   separators=(',', ':')) + '\n')
+        clean = good.read_bytes()
+        rows.append(('the checkpoint repair leaves an intact steps.jsonl alone',
+                     _repair_steps(good) is None and good.read_bytes() == clean, f'{len(clean)} bytes, unchanged'))
+        rows.append(('the deletion state is read back from an intact checkpoint', _deletion_state(good) == (7, False),
+                     f'{_deletion_state(good)}'))
+        with open(good, 'ab') as f:
+            f.write(b'{"step":"deletion","position":8,"finis')      # a SIGTERM between write and flush
+        msg = _repair_steps(good)
+        rows.append(('PLANT (checkpoint): a truncated final record is dropped, loudly, and nothing else is',
+                     msg is not None and good.read_bytes() == clean and _deletion_state(good) == (7, False), msg))
+    # --- the stop-by-pid verification.  Both outcomes reachable on a real child: a live writer's digest MOVES, and
+    #     the same child stopped by pid leaves it static.  (Never a pattern match: `p.pid`, and `p.wait()` reaps it.)
+    with tempfile.TemporaryDirectory() as td:
+        art = Path(td) / 'steps.jsonl'
+        art.write_text('')
+        prog = f'import time\nwhile True:\n open({str(art)!r}, "a").write("x" * 100 + "\\n"); time.sleep(0.05)'
+        p = subprocess.Popen([sys.executable, '-c', prog])
+        time.sleep(1.0)
+        d1 = hashlib.sha256(art.read_bytes()).hexdigest()
+        time.sleep(1.0)
+        moving = d1 != hashlib.sha256(art.read_bytes()).hexdigest()
+        rows.append(('the stop verification CAN fire: a live writer\'s artifact digest moves across the sample',
+                     moving, 'digest changed while the child was still running'))
+        with open(os.devnull, 'w') as dn:
+            line, static = _stop_child(p, art, 'selftest', dn)
+        rows.append(('PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static',
+                     static and p.poll() is not None, line))
+    return rows
+
+
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
-            'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas}
+            'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas,
+            'land': selftest_land}
 
 
 def cmd_selftest(section=None):
@@ -2380,8 +2451,163 @@ def four_colour(pts, edges):
     return col
 
 
-def cmd_land(D, tid='1', quiet=False):
-    """One field, FS-58's full certification path on its smallest refusing ball."""
+DELETION_BUDGET = 600.0    # seconds of stage-2 deletion per field; see run_generation for why it exists
+GEN_CAP = 5400.0           # a backstop on one field's whole generation call, never the plan
+
+
+def _deletion_state(steps):
+    """The last `deletion` checkpoint in FS-58's steps.jsonl as (position, finished), or None if stage 2 has not
+    started.  Read from the tail: the file is megabytes of lattice coordinates and this is polled every ten seconds."""
+    if not steps.exists():
+        return None
+    with open(steps, 'rb') as f:
+        f.seek(0, 2)
+        f.seek(max(0, f.tell() - 2_000_000))
+        tail = f.read().decode('utf-8', 'replace')
+    last = None
+    for ln in tail.splitlines():
+        if '"step":"deletion"' in ln:
+            try:
+                r = json.loads(ln)
+            except ValueError:                      # a tail cut mid-record, or the partial line of a stopped run
+                continue
+            last = (r['position'], r['finished'])
+    return last
+
+
+def _repair_steps(steps):
+    """A SIGTERM can land between FS-58's `f.write(record)` and its `flush()`, leaving a partial final line that
+    the resume path (`json.loads` over every line) would die on.  Drop exactly that line, loudly, and never more."""
+    if not steps.exists():
+        return None
+    raw = steps.read_bytes()
+    if not raw:
+        return None
+    cut = raw.rfind(b'\n', 0, len(raw) - 1) + 1 if raw.endswith(b'\n') else raw.rfind(b'\n') + 1
+    tail = raw[cut:]
+    bad = bool(tail.strip())
+    if bad:
+        try:
+            json.loads(tail.decode())
+            bad = False
+        except (ValueError, UnicodeDecodeError):
+            bad = True
+    if not bad:
+        return None
+    steps.write_bytes(raw[:cut])
+    msg = f'steps.jsonl: dropped a truncated final record of {len(tail)} bytes, written as the generator was stopped'
+    print(f'    [fs61] {msg}', flush=True)
+    return msg
+
+
+def _stop_child(p, artifact, reason, fh):
+    """Stop the generator **by pid** (never a pattern that could match this shell) and verify **by effect**: we own
+    this child, so `p.wait()` reaping it is proof it can no longer write anything; the artifact's digest held across
+    five seconds is the belt-and-braces half.  Returns the verification line, which goes into the record."""
+    dig = lambda: hashlib.sha256(artifact.read_bytes()).hexdigest() if artifact.exists() else None
+    before = dig()
+    print(f'    stopping the generator (pid {p.pid}): {reason}', flush=True)
+    p.terminate()
+    try:
+        p.wait(timeout=30)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        p.wait()
+    time.sleep(5)
+    static = (before == dig())
+    line = (f'pid {p.pid} reaped with exit {p.returncode}; {artifact.name} digest '
+            f'{"static" if static else "STILL CHANGING"} across 5 s')
+    print(f'    stopped: {line}', flush=True)
+    fh.write(f'[fs61] generator stopped: {reason}; {line}\n')
+    fh.flush()
+    return line, static
+
+
+def run_generation(cmdgen, out, budgeted, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
+    """Run FS-58's generator for one field under a **deletion** budget, and resume it to emit the witness.
+
+    Why a budget at all, and why on stage 2 only (the owner's ruling after phase C's first stall):
+      * stage 1, the assumption-core rounds, is the reduction that matters -- 113,325 -> 2,830 points at d = 359 --
+        and `extract` offers no way to stop it, so it runs to its fixpoint;
+      * stage 2, deleting one vertex at a time down to 1-minimal, is a **nicety**: gate C.9 *records* minimality and
+        never requires it, and FS-58's own 95 witness was certified with it stopped.  At d = 359 it ran at 45 s a
+        step with ~700 steps left -- nine hours on one field, with eight fields queued behind it.  So it gets
+        `deletion_budget` seconds from the moment its first checkpoint appears, and is then stopped and the witness
+        emitted from the last checkpoint with `--stop-deletion`;
+      * `gen_cap` is a backstop on the whole call, never the plan.  A field it stops is left resumable, not failed.
+
+    Every stop is cheap because `extract` checkpoints each core round and every 60 s of deletion, so re-running
+    `land` redoes at most one round or one minute (plan rule 1).  `direct-witness` (`budgeted` False) neither
+    checkpoints nor stops, so it is run whole -- which is why `land` sends only small balls there.
+    """
+    steps, log = out / 'steps.jsonl', out / 'generate.out'
+    info = {'deletion_budget_s': deletion_budget if budgeted else None,
+            'gen_cap_s': gen_cap if budgeted else None, 'passes': [], 'stopped': None, 'stop_verified': None}
+
+    def one(cmd, tag, watch):
+        t0 = time.time()
+        fh = open(log, 'a')
+        fh.write(f'\n$ {" ".join(str(c) for c in cmd)}\n')
+        fh.flush()
+        p = subprocess.Popen(cmd, stdout=fh, stderr=subprocess.STDOUT, cwd=str(ROOT))
+        del_t0, reason = None, None
+        while True:
+            try:
+                p.wait(timeout=10)
+                break
+            except subprocess.TimeoutExpired:
+                pass
+            if not watch:
+                continue
+            st = _deletion_state(steps)
+            if st and not st[1] and del_t0 is None:
+                del_t0 = time.time()
+                print(f'    stage 2 (deletion) started at position {st[0]}; budget {deletion_budget:.0f} s', flush=True)
+            if del_t0 is not None and time.time() - del_t0 > deletion_budget:
+                st = _deletion_state(steps)
+                reason = (f'deletion budget {deletion_budget:.0f} s spent'
+                          + (f' at position {st[0]}' if st else ''))
+            elif gen_cap and time.time() - t0 > gen_cap:
+                reason = f'generation cap {gen_cap:.0f} s spent'
+            if reason:
+                info['stop_verified'], _ = _stop_child(p, steps, reason, fh)
+                info['stopped'] = reason
+                break
+        fh.close()
+        if reason:
+            info['steps_repair'] = _repair_steps(steps)
+        info['passes'].append({'pass': tag, 'seconds': round(time.time() - t0, 1), 'exit': p.returncode,
+                               'stopped': reason})
+        print(f'    generation pass "{tag}": {time.time() - t0:.0f} s, exit {p.returncode}'
+              + (f' -- {reason}' if reason else ''), flush=True)
+        return reason
+
+    stopped = one(list(cmdgen), 'deletion under budget' if budgeted else 'direct-witness (whole)', budgeted)
+    if stopped and not (out / 'witness.json').exists():
+        one(list(cmdgen) + ['--stop-deletion'], 'emit from the last checkpoint', False)
+    info['ok'] = (out / 'witness.json').exists()
+    return info
+
+
+def _minimality(w):
+    """C.9, read out of the witness's own provenance rather than asserted: FS-58 writes either `1-minimal refusing
+    vertex set` (direct-witness), `deletion to 1-minimal` (extract, run to the end) or `deletion STOPPED after k of
+    m tests` (extract, stopped).  Minimality is recorded, never required."""
+    red = ((w.get('construction') or {}).get('reduction') or '')
+    m = re.search(r'deletion STOPPED after (\d+) of (\d+) tests', red)
+    if m:
+        return {'minimal': 'no', 'stopped_at': int(m.group(1)), 'of_tests': int(m.group(2)),
+                'note': f'refusing but NOT 1-minimal: the deletion was stopped at position {m.group(1)} '
+                        f'of {m.group(2)}'}
+    if 'deletion to 1-minimal' in red or '1-minimal refusing vertex set' in red:
+        return {'minimal': 'yes', 'stopped_at': None, 'of_tests': None,
+                'note': '1-minimal: deleting any single vertex leaves a 3-colourable graph'}
+    return {'minimal': 'unknown', 'stopped_at': None, 'of_tests': None,
+            'note': 'the generator recorded no deletion phase'}
+
+
+def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
+    """One field, FS-58's full certification path on its cheapest refusing ball."""
     balls = load_jsonl(field_dir(D) / 'balls.jsonl')
     lat = load_jsonl(field_dir(D) / 'lattices.jsonl')
     ref = [b for b in balls.values() if b['verdict'].startswith('Refused') and isinstance(b.get('points'), int)]
@@ -2406,21 +2632,30 @@ def cmd_land(D, tid='1', quiet=False):
     big = pts_n > 20_000
     cmdgen = ([sys.executable, str(ROOT / 'tools' / 'fs58_search.py'), 'extract' if big else 'direct-witness',
                str(D), spec, str(R), str(out)])
-    print(f'fs61 land d={D}: smallest refusing ball {pts_n} points at R={R} on {spec}; '
+    proxy = pts_n * ((b.get('solve_seconds') or 600.0) + 0.5)
+    print(f'fs61 land d={D}: cheapest refusing ball {pts_n} points at R={R} on {spec} '
+          f'(refused in {b.get("solve_seconds")} s; cost proxy {proxy:.0f}); '
           f'{"checkpointed extract" if big else "direct-witness"}', flush=True)
     rec = {'key': str(D), 'd': D, 'spec': spec, 'R': R, 'ball_points': pts_n, 'lattice': b['lattice'],
-           'machine': MACHINE, 'tier': tid}
+           'ball_solve_seconds': b.get('solve_seconds'), 'selection': 'points x (solve_seconds + 0.5)',
+           'generator': 'extract' if big else 'direct-witness', 'machine': MACHINE, 'tier': tid}
     if not (out / 'witness.json').exists():
         t0 = time.time()
-        p = subprocess.run(cmdgen, capture_output=True, text=True, cwd=str(ROOT))
-        (out / 'generate.out').write_text(p.stdout + p.stderr)
+        gi = run_generation(cmdgen, out, budgeted=big, deletion_budget=deletion_budget, gen_cap=gen_cap)
         rec['generate_seconds'] = round(time.time() - t0, 1)
-        if p.returncode != 0 or not (out / 'witness.json').exists():
+        rec['generation'] = gi
+        if not gi['ok']:
             rec['result'] = 'FAIL: generation'
-            defect(f'land d={D}: generation exited {p.returncode}; see {rel(out / "generate.out")}')
+            defect(f'land d={D}: no witness.json after {rec["generate_seconds"]:.0f} s; '
+                   f'see {rel(out / "generate.out")}. Re-running `land {D}` resumes from steps.jsonl.')
             append(FS61 / 'landings.jsonl', rec)
             return [D]
+    else:
+        rec['generate_seconds'] = 0.0
+        rec['generation'] = {'ok': True, 'passes': [], 'stopped': None,
+                             'note': 'witness.json was already on disk; generation skipped (resume)'}
     w = json.loads((out / 'witness.json').read_text())
+    rec['minimality'] = _minimality(w)
     pts, edges = w['points'], w['edges']
     rec.update({'points': len(pts), 'edges': len(edges), 'pinned_edge': w['pinned_edge'],
                 'lcm_denominator': math.lcm(*[p[4] for p in pts]),
@@ -2459,16 +2694,30 @@ def cmd_land(D, tid='1', quiet=False):
            f'the residue plane at {Lp} ([Moorhouse2010] Thm 8.1)')
     value = f'chi(Q(sqrt{D})^2) = 4' if L == 4 else f'4 <= chi(Q(sqrt{D})^2) <= {L}'
     steps['C.7 the value'] = {'ok': True, 'value': value, 'upper_source': src, 'L': L}
+    mn = rec['minimality']
+    steps['C.9 minimality'] = {'ok': True, **mn}          # recorded, never required (gate C.9)
+    print(f"    {'C.9 minimality':22s}        NOTE  {mn['note']}", flush=True)
     rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src,
                 'result': 'CERTIFIED' if (ok and col and nb) else 'INCOMPLETE'})
     write_witness_readme(D, out, rec, w, fr)
+    # `steps.jsonl` is the extraction checkpoint: megabytes of lattice coordinates, provenance and not evidence.
+    # FS-58 gitignores it in witness-23, -95 and -11 for exactly that reason, and this follows FS-58.
+    (out / '.gitignore').write_text('steps.jsonl\n' if big else '')
+    stop_note = ('' if mn['minimal'] != 'no' else f'''#
+# NOTE, and it is the honest caveat on "byte-identical": this witness's deletion was STOPPED at position
+# {mn["stopped_at"]} of {mn["of_tests"]}, so `--stop-deletion` below reproduces it only with the SAME steps.jsonl present
+# (it is gitignored -- provenance, not evidence).  From an empty directory the core rounds rerun deterministically
+# and `--stop-deletion` then stops at position 0, giving the larger core-round witness; drop the flag to run the
+# full deletion, which is deterministic too and yields a SMALLER 1-minimal witness (slow: at d = 359 the deletion
+# ran at 45 s a step).  Either way what the reviewer checks is `witness.json` + `witness.lrat.gz` as committed.''')
     (out / 'run-all.sh').write_text(f'''#!/usr/bin/env bash
-# Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic, so a rerun reproduces the committed files.
+# Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic.{stop_note}
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 source scripts/dev-env.sh >/dev/null 2>&1 || true
 D={rel(out)}
-python3 tools/fs58_search.py {'extract' if big else 'direct-witness'} {D} {spec} {R} $D > $D/generate.out
+python3 tools/fs58_search.py {'extract' if big else 'direct-witness'} {D} {spec} {R} $D{
+        ' --stop-deletion' if mn['minimal'] == 'no' else ''} > $D/generate.out
 python3 tools/fs58_check_witness.py --radicand {D} $D/witness.json > $D/certified.out
 python3 tools/fs58_check_witness.py --radicand {D} --controls $D/witness.json > $D/controls.out
 python3 tools/fs58_recheck_witness.py {D} $D/witness.json > $D/recheck.out
@@ -2482,9 +2731,11 @@ echo "run-all: done"
            'lrat_sha256': hashlib.sha256((out / 'witness.lrat.gz').read_bytes()).hexdigest()
                           if (out / 'witness.lrat.gz').exists() else None,
            'found_by': 'ball', 'spec': spec, 'R': R, 'certified': rec['result'] == 'CERTIFIED',
+           'minimal': mn['minimal'], 'deletion_stopped_at': mn['stopped_at'],
            'value': value, 'upper_source': src, 'machine': MACHINE, 'claim_scope': 'checker'}
     append(FS61 / 'witnesses.jsonl', man)
-    print(f'  d={D}: {len(pts)} points, {len(edges)} edges -> {rec["result"]}; {value}', flush=True)
+    print(f'  d={D}: {len(pts)} points, {len(edges)} edges -> {rec["result"]}; {value}; '
+          f'{"1-minimal" if mn["minimal"] == "yes" else mn["minimal"]}', flush=True)
     return [] if rec['result'] == 'CERTIFIED' else [D]
 
 
@@ -2531,29 +2782,37 @@ here would be a defect in the search, not a discovery.
 
 **How it was found** — provenance, never evidence. A ball of radius {rec['R']} about the origin in the saturated
 lattice `{rec['spec']}` over `ℚ(√{D})` ({rec['ball_points']} points) was refused three colours by a solver, and that
-refusal was shrunk to a 1-minimal vertex set. None of that is part of the certificate: the checker re-derives the graph
-from the coordinates alone. Regenerate with `./run-all.sh`.
+refusal was shrunk by `tools/fs58_search.py {rec['generator']}`. **{rec['minimality']['note'][0].upper() + rec['minimality']['note'][1:]}.**
+{'Minimality is not part of the claim and not part of the certificate — a refusing set refuses whether or not it is smallest.' if rec['minimality']['minimal'] != 'yes' else ''}
+None of this is part of the certificate either: the checker re-derives the graph from the coordinates alone.
+Regenerate with `./run-all.sh` (read its header first if the deletion was stopped).
 ''')
 
 
 LAND_ORDER = [359, 11, 119, 143, 47, 95, 191, 71, 23]     # the owner's priority: the four with no certificate first
 
 
-def cmd_land_all(fields=None, tid='1'):
+def cmd_land_all(fields=None, tid='1', deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP):
     """Phase C over every refusing field, resumable: a field whose landing record says CERTIFIED is skipped."""
     done = load_jsonl(FS61 / 'landings.jsonl')
     todo = fields or LAND_ORDER
-    print(f'fs61 land-all: {len(todo)} fields in the order {todo}; '
-          f'{sum(1 for d in todo if done.get(str(d), {}).get("result") == "CERTIFIED")} already certified. '
-          f'Resume = re-run this identical command.', flush=True)
-    bad = []
-    for D in todo:
+    already = [d for d in todo if done.get(str(d), {}).get('result') == 'CERTIFIED']
+    print(f'fs61 land-all: {len(todo)} fields in the order {todo}; {len(already)} already certified {already}, '
+          f'{len(todo) - len(already)} to do. Deletion budget {deletion_budget:.0f} s per field, generation cap '
+          f'{gen_cap:.0f} s. Resume = re-run this identical command.', flush=True)
+    bad, cert, T0 = [], [], time.time()
+    for n, D in enumerate(todo, 1):
         if done.get(str(D), {}).get('result') == 'CERTIFIED':
             continue
         t0 = time.time()
-        bad += cmd_land(D, tid)
-        print(f'  [{D} took {time.time() - t0:.0f} s]', flush=True)
-    print(f'DONE land-all: {len(todo)} fields, {len(bad)} not certified', flush=True)
+        r = cmd_land(D, tid, deletion_budget=deletion_budget, gen_cap=gen_cap)
+        bad += r
+        if not r:
+            cert.append(D)
+        print(f'  [{n}/{len(todo)} d={D} took {time.time() - t0:.0f} s; running total '
+              f'{len(cert)} certified, {len(bad)} not, {time.time() - T0:.0f} s elapsed]', flush=True)
+    print(f'DONE land-all: {len(todo)} fields, {len(cert)} certified here {cert}, {len(bad)} not certified {bad}, '
+          f'{len(already)} skipped (already on record); {time.time() - T0:.0f} s', flush=True)
     return bad
 
 
@@ -2611,10 +2870,17 @@ def main():
     sub.add_parser('minimal-quotient', help='A.7: the group behind a dead lattice\'s periodic 3-colouring')
     p = sub.add_parser('table', help='the derived census table (never hand-edited)')
     p.add_argument('--check', action='store_true'); p.add_argument('--tier', default='1')
-    p = sub.add_parser('land', help="phase C: FS-58's full certification path on a field's smallest refusing ball")
+    budget_help = ('seconds of one-vertex-at-a-time deletion per field before the generator is stopped and the '
+                   'witness emitted from its last checkpoint; minimality is recorded, never required (gate C.9)')
+    cap_help = 'a backstop on one field\'s whole generation call; 0 disables it. A field it stops stays resumable'
+    p = sub.add_parser('land', help="phase C: FS-58's full certification path on a field's cheapest refusing ball")
     p.add_argument('d', type=int); p.add_argument('--tier', default='1')
+    p.add_argument('--deletion-budget', type=float, default=DELETION_BUDGET, help=budget_help)
+    p.add_argument('--gen-cap', type=float, default=GEN_CAP, help=cap_help)
     p = sub.add_parser('land-all', help='phase C over every refusing field, in priority order, resumable')
     p.add_argument('--tier', default='1'); p.add_argument('--fields', type=int, nargs='*')
+    p.add_argument('--deletion-budget', type=float, default=DELETION_BUDGET, help=budget_help)
+    p.add_argument('--gen-cap', type=float, default=GEN_CAP, help=cap_help)
 
     a = ap.parse_args()
     t0 = time.time()
@@ -2665,9 +2931,9 @@ def main():
         else:
             cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
-        bad = cmd_land(a.d, a.tier)
+        bad = cmd_land(a.d, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap)
     elif a.cmd == 'land-all':
-        bad = cmd_land_all(a.fields or None, a.tier)
+        bad = cmd_land_all(a.fields or None, a.tier, deletion_budget=a.deletion_budget, gen_cap=a.gen_cap)
     print(f'[{a.cmd}: {time.time() - t0:.1f} s wall on {MACHINE.split(" (")[0]}]', flush=True)
     sys.exit(1 if bad else 0)
 
