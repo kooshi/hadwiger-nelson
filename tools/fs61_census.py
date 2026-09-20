@@ -1113,8 +1113,56 @@ def selftest_predicted(rnd):
     return rows
 
 
+def brute_D(N, orthogonal=True):
+    """D(N) by brute force over the defining equations themselves -- no units_d, no inverted parametrisation.
+    A unit vector over N needs a^2 + c^2 + d(b^2 + e^2) = N^2, so d(b^2 + e^2) <= N^2 and d <= N^2."""
+    out = set()
+    for d in range(2, N * N + 1):
+        if not squarefree(d):
+            continue
+        hit = False
+        bm = math.isqrt(N * N // d)
+        for b in range(-bm, bm + 1):
+            for e in range(-bm, bm + 1):
+                if b == 0 and e == 0:
+                    continue
+                r = N * N - d * (b * b + e * e)
+                if r < 0:
+                    continue
+                for a in range(-N, N + 1):
+                    c2 = r - a * a
+                    if c2 < 0:
+                        continue
+                    c = math.isqrt(c2)
+                    if c * c != c2:
+                        continue
+                    for cc in (c, -c):
+                        if orthogonal and a * b + cc * e != 0:
+                            continue
+                        if FS.least_den((a, b, cc, e), N) == N:
+                            hit = True
+        if hit:
+            out.add(d)
+    return sorted(out)
+
+
+def selftest_atlas(rnd):
+    """A.2's plant: the orthogonality condition ab + ce = 0 is load-bearing, and D(12) changes without it."""
+    rows = []
+    good = brute_D(12, orthogonal=True)
+    rows.append(('D(12) by brute force over the defining equations (no units_d, no inversion) is the plan\'s set',
+                 good == [23, 47, 71, 95, 119, 143], f'{good}'))
+    plant = brute_D(12, orthogonal=False)
+    rows.append(('PLANT: dropping ab + ce = 0 changes D(12), and the change is exhibited',
+                 plant != good and set(good) <= set(plant),
+                 f'{len(plant)} fields instead of {len(good)}; the intruders are {sorted(set(plant) - set(good))}'))
+    inv = sorted(d for d in atlas_scan_N(12, 200_000, dmin=2) if squarefree(d))
+    rows.append(('the inverted enumeration agrees with the brute force on D(12)', inv == good, f'{inv}'))
+    return rows
+
+
 SECTIONS = {'keys': selftest_keys, 'saturation': selftest_saturation, 'outdir': selftest_outdir,
-            'barrier': selftest_barrier, 'predicted': selftest_predicted}
+            'barrier': selftest_barrier, 'predicted': selftest_predicted, 'atlas': selftest_atlas}
 
 
 def cmd_selftest(section=None):
@@ -1136,6 +1184,380 @@ def cmd_selftest(section=None):
 
 
 # ================================================================ not yet implemented
+# ================================================================ A.1 the frame: L(Q(sqrt d)) for every squarefree d < 2000
+#
+# The arithmetic, in one place (plan section 1, CLAUDE.md G56).  Identify F^2 with K = F(i); a unit vector is a norm-one
+# element of K.  A prime p of F that does NOT split in K (a STABLE prime) makes every unit vector p-integral, and
+# reduction is a graph homomorphism onto a finite graph, so chi(F^2) is at most that graph's chromatic number:
+#   * p RAMIFIED in K/F: conjugation is trivial on the residue field, every unit vector reduces to 1, chi(F^2) <= 2;
+#   * p INERT in K/F with Q = N(p): the target is Cay(F_{Q^2}, mu_{Q+1}) = UD(F_Q, 2), so the bound is chi(UD(F_Q,2));
+#   * p SPLIT: no bound.
+# For a real quadratic field the stable primes are exactly: the dyadic prime when d is NOT 7 mod 8 (ramified in K when
+# d = 1, 2 mod 4, giving 2; inert with Q = 2 when d = 3 mod 8, giving Cay(F_4, mu_3) = K_4 and the bound 4), and the odd
+# p = 3 (mod 4) with (d/p) != -1 (inert, Q = p).  An odd p = 1 (mod 4) always splits, because -1 is a square in its
+# residue field; an odd p = 3 (mod 4) with (d/p) = -1 has residue field F_{p^2}, where -1 IS a square, so it splits too.
+CHI_TARGET = {2: (4, 4, 'Cay(F_4, mu_3) = K_4'), 3: (3, 3, '[Moorhouse2010] Table 6.1'),
+              7: (4, 4, '[Moorhouse2010] Table 6.1'), 11: (5, 5, 'chromaticNumber_finitePlane11 [kernel]'),
+              19: (5, 5, 'FS-58 / [Moorhouse2010]'), 23: (6, 8, 'FS-56 cert: five refused, alpha <= 105'),
+              31: (5, 8, 'FS-53 window'), 43: (6, 8, 'FS-53 cert: five refused'), 47: (6, 10, 'FS-53 cert: five refused'),
+              59: (7, None, 'FS-53 cert: six refused'), 67: (7, None, 'FS-53 cert'), 71: (7, None, 'exact spectrum'),
+              79: (7, None, 'FS-53 cert'), 83: (7, None, 'FS-50 cert')}
+USABLE_ODD = [p for p in (3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127, 131, 139, 151, 163, 167,
+                          179, 191, 199) if p % 4 == 3]
+CHI_ESTABLISHED = {                                    # (lo, hi, source) -- what this project and prior art have pinned
+    11: (4, 4, 'lower: four_le_chromaticNumber_planeOver_eleven [kernel, FS-58]; upper: residue plane at 7 [prior art]'),
+    23: (4, 4, 'lower: FS-58 witness, frozen checker; upper: residue plane at 7 [prior art]'),
+    47: (4, 5, 'lower: FS-58 witness, frozen checker; upper: residue plane at 11 [prior art]'),
+    71: (4, 4, 'lower: FS-58 witness, frozen checker; upper: residue plane at 7 [prior art]'),
+    95: (4, 4, 'lower: FS-58 witness, frozen checker; upper: residue plane at 7 [prior art]'),
+    191: (4, 4, 'lower: FS-58 witness, frozen checker; upper: residue plane at 7 [prior art]'),
+}
+
+
+def legendre(a, p):
+    a %= p
+    if a == 0:
+        return 0
+    return 1 if pow(a, (p - 1) // 2, p) == 1 else -1
+
+
+def squarefree(n):
+    k = 2
+    while k * k <= n:
+        if n % (k * k) == 0:
+            return False
+        k += 1
+    return True
+
+
+def stable_primes_congruence(d):
+    """Route A: the stable primes of Q(sqrt d) and their bounds, from congruences and Legendre symbols alone."""
+    out = []
+    if d % 4 != 3:
+        out.append({'p': 2, 'Q': 4 if d % 8 == 5 else 2, 'relative': 'ramified', 'bound_lo': 2, 'bound_hi': 2})
+    elif d % 8 == 3:
+        out.append({'p': 2, 'Q': 2, 'relative': 'inert', 'bound_lo': CHI_TARGET[2][0], 'bound_hi': CHI_TARGET[2][1]})
+    for p in USABLE_ODD:
+        if legendre(d, p) != -1:
+            lo, hi, _ = CHI_TARGET.get(p, (7, None, ''))       # every usable q >= 59 has chi >= 7 (FS-50, FS-53, Weil)
+            out.append({'p': p, 'Q': p, 'relative': 'inert', 'bound_lo': lo, 'bound_hi': hi})
+    return out
+
+
+def frame_row(d):
+    """L(F) = min over the stable primes of the chromatic number of that prime's target graph.  Several of those
+    chromatic numbers are themselves undecided (23, 31, 43, 47 are FS-53's open window), so L is recorded as a BRACKET
+    [L_lower, L_upper] and is an exact integer only when the two ends meet.  Writing `L >= 6` where the first usable
+    prime is 31 would be wrong: chi(UD(F_31,2)) is open at 5."""
+    st = stable_primes_congruence(d)
+    los = [s['bound_lo'] for s in st] or [7]
+    his = [s['bound_hi'] for s in st if s['bound_hi'] is not None]
+    L_lo = min(los)
+    L_hi = min(his) if his else None
+    L = L_lo if (L_hi is not None and L_hi == L_lo) else None
+    Lp = next((s['p'] for s in st if s['bound_lo'] == L_lo and s['bound_hi'] == L_lo), None) if L else None
+    if L is not None:
+        reason = '2 (dyadic, ramified in K)' if L == 2 else (f'{L} (dyadic)' if Lp == 2 else f'{L} ({Lp})')
+    else:
+        first = [s['p'] for s in st][:3]
+        reason = (f'[{L_lo}, {L_hi if L_hi else "?"}] (undecided; first usable primes '
+                  f'{", ".join(map(str, first)) if first else "all above 200"})')
+    lo, hi, src = CHI_ESTABLISHED.get(d, (None, None, None))
+    return {'key': str(d), 'd': d, 'mod4': d % 4, 'mod3': d % 3, 'mod8': d % 8,
+            'family': d % 12 == 11, 'stable_primes': st, 'L': L, 'L_lower': L_lo, 'L_upper': L_hi,
+            'L_prime': Lp, 'L_reason': reason, 'chi_known': [lo, hi] if lo else None, 'chi_source': src,
+            'claim_scope': 'exact', 'machine': MACHINE}
+
+
+def pari_frame(ds, primes=(2, 3, 7, 11, 19, 23, 31, 43, 47)):
+    """Route B: PARI's own prime decomposition in F and in K = Q(sqrt d, i), independently of every congruence above."""
+    lines = ['{', 'for (j = 1, %d,' % len(ds), '  d = [%s][j];' % ','.join(map(str, ds)),
+             '  F = nfinit(x^2 - d); K = nfinit(polcompositum(x^2 - d, x^2 + 1)[1]);',
+             '  for (k = 1, %d,' % len(primes), '    p = [%s][k];' % ','.join(map(str, primes)),
+             '    PF = idealprimedec(F, p); PK = idealprimedec(K, p);',
+             '    gF = #PF; gK = #PK; eF = PF[1].e; fF = PF[1].f; eK = PK[1].e; fK = PK[1].f;',
+             '    rel = if (gK == gF, if (fK/fF == 2, "inert", "ramified"), "split");',
+             '    print(d, " ", p, " ", p^fF, " ", rel);', '  );', ');', '}', 'quit']
+    src = Path(os.environ.get('TMPDIR', '/tmp')) / f'fs61-frame-{os.getpid()}.gp'
+    src.write_text('\n'.join(lines) + '\n')
+    p = subprocess.run(['gp', '-q'], stdin=open(src), capture_output=True, text=True)
+    src.unlink()
+    if p.returncode != 0:
+        die(f'gp failed: {p.stderr[-400:]}', 1)
+    out = {}
+    for ln in p.stdout.split('\n'):
+        f = ln.split()
+        if len(f) == 4:
+            out.setdefault(int(f[0]), {})[int(f[1])] = (int(f[2]), f[3])
+    return out
+
+
+def cmd_frame(dmax=2000, quiet=False):
+    out = FS61 / 'frame.jsonl'
+    ds = [d for d in range(2, dmax) if squarefree(d)]
+    if not quiet:
+        print(f'fs61 frame: {len(ds)} squarefree d in [2, {dmax}); route A congruences + Legendre symbols, '
+              f'route B PARI prime decomposition in F and in K = Q(sqrt d, i); they must agree on every row', flush=True)
+    pari = pari_frame(ds)
+    rows, errs = [], []
+    for d in ds:
+        r = frame_row(d)
+        mism = []
+        for s in r['stable_primes']:
+            got = pari.get(d, {}).get(s['p'])
+            if got is None:
+                continue
+            if got[0] != s['Q'] or got[1] != s['relative']:
+                mism.append(f'p={s["p"]}: congruences say N={s["Q"]} {s["relative"]}, PARI says N={got[0]} {got[1]}')
+        known = {s['p'] for s in r['stable_primes']}
+        for q, (Qn, relk) in sorted(pari.get(d, {}).items()):        # `rel` is this module's path helper: do not shadow it
+            if relk != 'split' and q not in known:
+                mism.append(f'p={q}: PARI says {relk} (N={Qn}) and the congruences call it split')
+        r['pari'] = {str(p): list(v) for p, v in sorted(pari.get(d, {}).items())}
+        r['routes_agree'] = not mism
+        if mism:
+            errs.append((d, mism))
+            defect(f'frame d={d}: ' + '; '.join(mism))
+        rows.append(r)
+    if out.exists():
+        out.unlink()
+    for r in rows:
+        append(out, r)
+    fam = [r['d'] for r in rows if r['family'] and r['d'] < 500]
+    by = {}
+    for r in rows:
+        k = r['L'] if r['L'] is not None else f'[{r["L_lower"]}, {r["L_upper"] or "?"}]'
+        by[k] = by.get(k, 0) + 1
+    if not quiet:
+        print(f'  {len(fam)} fields d = 11 (mod 12) below 500: {fam}', flush=True)
+        print(f'  L over all {len(rows)} fields: ' +
+              ', '.join(f'{k}: {v}' for k, v in sorted(by.items(), key=lambda kv: str(kv[0]))), flush=True)
+        print(f'DONE frame: {len(rows)} fields, {len(errs)} rows where the two routes disagree -> {rel(out)}', flush=True)
+    return rows, errs
+
+
+# ================================================================ A.2 the atlas: the parameter enumerated first (D-H.1)
+#
+# A unit vector ((a + b sqrt d)/N, (c + e sqrt d)/N) satisfies a^2 + c^2 + d(b^2 + e^2) = N^2 and ab + ce = 0.  FS-58's
+# units_d(N, d) fixes d and solves for the vectors; here N is fixed and d is SOLVED FOR, so every field gets a row
+# whether or not anything was found at it, and no field can be silently omitted the way a per-field scan at a fixed
+# depth can (plan D-H.1).  The inversion is exact, from units_d's own parametrisation: writing g = gcd(b, e) and
+# base = (b^2 + e^2)/g^2, a non-rational unit vector is (k(-e)/g, b, kb/g, e) with k^2 * base = N^2 - d(b^2 + e^2),
+# so    d = (N^2 - k^2 * base) / (g^2 * base)    for every integer k with k^2 * base < N^2.  Orthogonality is not an
+# extra filter here: it holds identically for that shape (ab + ce = k(-e)b/g + k b e/g = 0), which is why the plant
+# that drops it has to be built from a brute-force enumeration instead (selftest --section atlas).
+def rational_classes(N):
+    """the orbits of unit vectors with b = e = 0 and least denominator N (the same for every field)"""
+    vecs = set()
+    for a in range(-N, N + 1):
+        c2 = N * N - a * a
+        c = math.isqrt(c2)
+        if c * c == c2 and math.gcd(math.gcd(abs(a), c), N) == 1:
+            vecs |= {(a, 0, c, 0), (a, 0, -c, 0)}
+    return orbits_of(vecs)
+
+
+def orbits_of(vecs):
+    """group a set of vectors into orbits of FS-58's frozen order-16 group"""
+    seen, out = set(), []
+    for w in sorted(vecs):
+        if w in seen:
+            continue
+        o = FS.orbit(w)
+        seen |= o
+        out.append(sorted(o))
+    return out
+
+
+def atlas_scan_N(N, dmax, dmin=2, keep=None):
+    """d -> the non-rational unit vectors of least denominator exactly N over Q(sqrt d), by solving for d"""
+    import numpy as np
+    B = math.isqrt(N * N // dmin)
+    found = {}
+    for b in range(0, B + 1):
+        for e in range(-B if b else 0, B + 1):
+            if b == 0 and e == 0:
+                continue
+            g = math.gcd(b, abs(e))
+            base = (b * b + e * e) // (g * g)
+            den = g * g * base
+            if den * dmin > N * N:
+                continue
+            kmax = math.isqrt((N * N) // base)
+            ks = np.arange(0, kmax + 1, dtype=np.int64)
+            nums = N * N - ks * ks * base
+            ok = (nums > 0) & (nums % den == 0)
+            for k, dd in zip(ks[ok].tolist(), (nums[ok] // den).tolist()):
+                if dd < dmin or dd >= dmax or (keep and not keep(dd)):
+                    continue
+                for kk in (k, -k):
+                    w = (kk * (-e) // g, b, kk * b // g, e)
+                    if FS.least_den(w, N) == N:
+                        found.setdefault(dd, set()).add(w)
+    return found
+
+
+def cmd_atlas(nmax=420, dmax=2000, quiet=False):
+    out = FS61 / 'atlas.jsonl'
+    keep = lambda d: d % 12 == 11 and squarefree(d)
+    if not quiet:
+        print(f'fs61 atlas: denominators N <= {nmax} enumerated FIRST, then d solved for; keeping squarefree '
+              f'd = 11 (mod 12) below {dmax}', flush=True)
+    per_d = {}
+    rat = {}
+    t0 = time.time()
+    for N in range(1, nmax + 1):
+        rc = rational_classes(N)
+        if rc:
+            rat[N] = len(rc)
+        for d, vecs in atlas_scan_N(N, dmax, dmin=11, keep=keep).items():   # 11 is the smallest family member
+            per_d.setdefault(d, {})[N] = len(orbits_of(vecs))
+        if not quiet and N % 60 == 0:
+            print(f'  N <= {N}: {len(per_d)} fields carry a non-rational class ({time.time() - t0:.0f} s)', flush=True)
+    ds = sorted(d for d in range(2, dmax) if keep(d))
+    if out.exists():
+        out.unlink()
+    for d in ds:
+        nr = per_d.get(d, {})
+        Ns = sorted(set(nr) | set(rat))
+        classes = []
+        for N in Ns:
+            a, b = rat.get(N, 0), nr.get(N, 0)
+            classes.append({'N': N, 'orbits': a + b, 'orbits_rational': a, 'orbits_nonrational': b,
+                            'v2': (N & -N).bit_length() - 1, 'v3': v_p(N, 3), 'rational': b == 0})
+        N1 = min(nr) if nr else None
+        N3 = min((N for N in Ns if N % 3 == 0 and (rat.get(N, 0) or nr.get(N, 0))), default=None)
+        append(out, {'key': str(d), 'd': d, 'mod8': d % 8, 'nmax': nmax, 'classes': classes, 'N1': N1, 'N3': N3,
+                     'n_classes': sum(c['orbits'] for c in classes), 'claim_scope': 'exact', 'machine': MACHINE})
+    if not quiet:
+        print(f'DONE atlas: {len(ds)} fields, {sum(1 for d in ds if d in per_d)} with a non-rational class at N <= {nmax}; '
+              f'{time.time() - t0:.0f} s -> {rel(out)}', flush=True)
+    return per_d, rat
+
+
+def v_p(n, p):
+    v = 0
+    while n % p == 0:
+        n //= p
+        v += 1
+    return v
+
+
+def cmd_atlas_check(nmax=180, quiet=False):
+    """A.2's cross-check: the inverted enumeration must reproduce FS-58's per-field classes() exactly, and D(6), D(12)."""
+    fields = sorted(FS58_DEPTH) + [119, 155, 299]
+    print(f'fs61 atlas --check: (denominator, orbit count) lists against FS-58\'s classes(D, {nmax}) on '
+          f'{len(fields)} fields', flush=True)
+    bad = []
+    for D in fields:
+        C = class_table(D, nmax)
+        want = {}
+        for n, (N, vecs) in C.items():
+            want[N] = want.get(N, 0) + 1
+        got = {N: c for N, c in ((N, len(rational_classes(N))) for N in range(1, nmax + 1)) if c}
+        for N in range(1, nmax + 1):
+            f = atlas_scan_N(N, D + 1, dmin=D, keep=lambda x: x == D)
+            if D in f:
+                got[N] = got.get(N, 0) + len(orbits_of(f[D]))
+        if got != want:
+            diff = {N: (want.get(N, 0), got.get(N, 0)) for N in set(want) | set(got) if want.get(N, 0) != got.get(N, 0)}
+            bad.append((D, diff))
+            defect(f'atlas d={D}: (denominator, orbit count) differs from classes(): {diff}')
+        print(f'  d={D:4d}: {sum(want.values())} classes over {len(want)} denominators -> '
+              f'{"PASS" if got == want else "FAIL"}', flush=True)
+    # O6's sets.  D(N) here is over EVERY squarefree d -- the plan's O6 states D(6) and D(18) within the family
+    # (d = 11 mod 12) and D(12) over every squarefree d, which is the stronger of the two statements and is why it is
+    # the one quoted without qualification.  Both forms are printed so the quantifier is visible.
+    dn = {}
+    for N in (6, 12, 18, 24):
+        f = atlas_scan_N(N, 200_000, dmin=2)
+        dn[N] = sorted(d for d in f if squarefree(d))
+    fam = lambda L: [d for d in L if d % 12 == 11]
+    for N in (6, 12, 18, 24):
+        print(f'  D({N:2d}) = {dn[N]}', flush=True)
+        print(f'          within the family (d = 11 mod 12): {fam(dn[N])}', flush=True)
+    for label, got, want in (('D(6) within the family', fam(dn[6]), [11, 35]),
+                             ('D(12) over every squarefree d', dn[12], [23, 47, 71, 95, 119, 143]),
+                             ('D(18) within the family', fam(dn[18]), [11, 35, 155, 203, 299, 323])):
+        ok = got == want
+        if not ok:
+            bad.append((label, got))
+            defect(f'atlas {label} = {got}, expected {want}')
+        print(f'  {label} = the plan\'s set: {"PASS" if ok else "FAIL"}', flush=True)
+    for label, L, cond, name in (('D(6), D(18) within the family', fam(dn[6]) + fam(dn[18]), lambda d: d % 8 == 3, '3 mod 8'),
+                                 ('D(12), D(24) within the family', fam(dn[12]) + fam(dn[24]), lambda d: d % 8 == 7, '7 mod 8')):
+        ok = all(cond(d) for d in L)
+        if not ok:
+            bad.append((label, [d for d in L if not cond(d)]))
+            defect(f'atlas {label}: {[d for d in L if not cond(d)]} are not {name}')
+        print(f'  {label}: every member is {name}: {"PASS" if ok else "FAIL"}', flush=True)
+    print(f'DONE atlas --check: {len(fields)} fields + the O6 sets; {len(bad)} failures', flush=True)
+    return bad
+
+
+# ================================================================ A.3 the laws of D-H.2, on every atlas row
+def cmd_atlas_laws(quiet=False):
+    """Four statements about which denominators can occur, tested on every (field, denominator) the atlas holds.
+
+    Three are PROVED (plan D-H.2), so a violation is a defect in the enumerator, not news:
+      L1  height floor: a non-rational class has d <= d(b^2+e^2) <= N^2, so N >= sqrt(d);
+      L2  prime support: an odd p = 3 (mod 4) divides a class denominator only if (d/p) = -1, because every unit vector
+          is a unit at every stable prime and the primes above such a p are stable when (d/p) is 0 or 1;
+      L3  the dyadic law at d = 3 (mod 8): v_2(N) <= 1, since 2 = p^2 there with p stable.
+    One is OBSERVED only (O6, and prediction P1):
+      L4  at d = 7 (mod 8): v_2(N) != 1.
+    Rational classes (b = e = 0) have odd hypotenuse denominators whose odd prime factors are all 1 (mod 4), so they
+    satisfy L2, L3 and L4 vacuously; the laws bite on the non-rational classes and are reported on those."""
+    rows = [json.loads(l) for l in open(FS61 / 'atlas.jsonl')]
+    if not quiet:
+        print(f'fs61 atlas --laws: D-H.2 on {sum(len(r["classes"]) for r in rows)} (field, denominator) pairs '
+              f'over {len(rows)} fields', flush=True)
+    viol = {1: [], 2: [], 3: [], 4: []}
+    n_nr = 0
+    for r in rows:
+        d = r['d']
+        for c in r['classes']:
+            if not c['orbits_nonrational']:
+                continue
+            n_nr += 1
+            N = c['N']
+            if N * N < d:
+                viol[1].append((d, N))
+            for p in range(3, N + 1, 2):
+                if N % p == 0 and p % 4 == 3 and all(p % q for q in range(3, math.isqrt(p) + 1, 2)):
+                    if legendre(d, p) != -1:
+                        viol[2].append((d, N, p, legendre(d, p)))
+            if d % 8 == 3 and c['v2'] > 1:
+                viol[3].append((d, N, c['v2']))
+            if d % 8 == 7 and c['v2'] == 1:
+                viol[4].append((d, N, c['v2']))
+    names = {1: 'L1 height floor N >= sqrt(d)                                  [proved]',
+             2: 'L2 odd p = 3 (mod 4) divides N only if (d/p) = -1             [proved]',
+             3: 'L3 v_2(N) <= 1 at d = 3 (mod 8)                               [proved]',
+             4: 'L4 v_2(N) != 1 at d = 7 (mod 8)                               [OBSERVED, P1]'}
+    for k in (1, 2, 3, 4):
+        if not quiet:
+            print(f'  {names[k]}: {len(viol[k])} violations', flush=True)
+        for v in viol[k][:20]:
+            defect(f'atlas law L{k}: {v}')
+    v2s = {}
+    for r in rows:
+        for c in r['classes']:
+            if c['orbits_nonrational']:
+                v2s.setdefault(r['mod8'], {}).setdefault(c['v2'], 0)
+                v2s[r['mod8']][c['v2']] += 1
+    if not quiet:
+        for m in sorted(v2s):
+            print(f'  v_2 of the non-rational denominators at d = {m} (mod 8): '
+                  f'{dict(sorted(v2s[m].items()))}', flush=True)
+        print(f'DONE atlas --laws: {n_nr} non-rational (field, denominator) pairs, '
+              f'{sum(len(v) for v in viol.values())} violations', flush=True)
+    out = FS61 / 'atlas-laws.json'
+    out.write_text(json.dumps({'pairs_nonrational': n_nr, 'violations': {str(k): v[:200] for k, v in viol.items()},
+                               'v2_by_mod8': {str(m): v2s[m] for m in sorted(v2s)}, 'machine': MACHINE}, indent=1) + '\n')
+    return [v for k in viol for v in viol[k]]
+
+
 def not_yet(name, phase):
     print(f'fs61 {name}: NOT IMPLEMENTED YET -- this subcommand is phase {phase} of plans/FS61-quadratic-census.md', flush=True)
     sys.exit(2)
@@ -1172,7 +1594,13 @@ def main():
     p.add_argument('--budget', type=float, help='controls: stop a field\'s scan after this many seconds')
     p.add_argument('--jobs', type=int, default=16)
 
-    for name, phase in (('frame', 'A'), ('atlas', 'A'), ('land', 'C'), ('table', 'B')):
+    p = sub.add_parser('frame', help='L(Q(sqrt d)) for every squarefree d, by two independent routes')
+    p.add_argument('--dmax', type=int, default=2000)
+    p = sub.add_parser('atlas', help='class denominators by inverted enumeration: N first, d solved for')
+    p.add_argument('--nmax', type=int, default=420); p.add_argument('--dmax', type=int, default=2000)
+    p.add_argument('--check', action='store_true', help='cross-check against FS-58 classes() and the O6 sets')
+    p.add_argument('--laws', action='store_true', help='test D-H.2 on every atlas row (A.3)')
+    for name, phase in (('land', 'C'), ('table', 'B')):
         sub.add_parser(name, help=f'NOT IMPLEMENTED YET (phase {phase})')
 
     a = ap.parse_args()
@@ -1202,8 +1630,15 @@ def main():
             bad += cmd_regress_controls(jobs=a.jobs, budget=a.budget)
         if a.part in ('untouched', 'all'):
             bad += cmd_regress_untouched()
-    elif a.cmd in ('frame', 'atlas'):
-        not_yet(a.cmd, 'A')
+    elif a.cmd == 'frame':
+        _, bad = cmd_frame(dmax=a.dmax)
+    elif a.cmd == 'atlas':
+        if a.check:
+            bad = cmd_atlas_check()
+        elif a.laws:
+            bad = cmd_atlas_laws()
+        else:
+            cmd_atlas(nmax=a.nmax, dmax=a.dmax); bad = []
     elif a.cmd == 'land':
         not_yet(a.cmd, 'C')
     elif a.cmd == 'table':
