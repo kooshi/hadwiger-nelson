@@ -1480,9 +1480,14 @@ def selftest_land(rnd):
     # --- `Landed (certified)` reads the checker's VERDICT, not a file's existence.  Both outcomes reachable on the
     #     real data: a landed field and the same field with each half of the test spoiled in turn.
     landings = load_jsonl(FS61 / 'landings.jsonl')
-    cert = [d for d in LAND_ORDER if certified_field(d, landings)]
+    # the population is every field with a refusing ball on record, NOT the nine of `LAND_ORDER`: a field that
+    # refuses for the first time at a later tier is appended by `land_order`, and reporting "k of 9" once there
+    # are fourteen is a count without its population (corrected 2026-09-20 at the close, when the five tier-1c
+    # and tier-2l refusals were being certified and this row would have kept saying nine).
+    pop = land_order(quiet=True)
+    cert = [d for d in pop if certified_field(d, landings)]
     rows.append(('the landed set is read from the landing records and the checker\'s own first line',
-                 True, f'{len(cert)} of {len(LAND_ORDER)} fields landed: {cert}'))
+                 True, f'{len(cert)} of {len(pop)} fields with a refusing ball are landed: {cert}'))
     if cert:
         d0 = cert[0]
         rows.append((f'PLANT (landing): d={d0} with its landing record result mangled is NOT landed',
@@ -1492,7 +1497,7 @@ def selftest_land(rnd):
     else:
         rows.append(('PLANT (landing): no field is landed yet, so an existing certified.out alone does not land one',
                      not any((FS61 / f'witness-{d}' / 'certified.out').exists() and certified_field(d, landings)
-                             for d in LAND_ORDER),
+                             for d in pop),
                      'both halves of the test are required'))
     # --- the stop-by-pid verification.  Both outcomes reachable on a real child: a live writer's digest MOVES, and
     #     the same child stopped by pid leaves it static.  (Never a pattern match: `p.pid`, and `p.wait()` reaps it.)
