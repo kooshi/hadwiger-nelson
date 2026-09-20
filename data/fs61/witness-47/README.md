@@ -18,6 +18,8 @@ exit 1.
 
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the residue plane at 11 ([Moorhouse2010] Thm 8.1) gives
 `χ(ℚ(√47)²) ≤ 5`. With it, **4 <= chi(Q(sqrt47)^2) <= 5**. Nothing here proves the upper bound.
+**And nothing here is checked by the Lean kernel**: the certificate above is the standard-library checker's, and that
+is a different and weaker thing.
 
 **What else was checked** (each file below is in this directory, the verbatim output of the command named):
 

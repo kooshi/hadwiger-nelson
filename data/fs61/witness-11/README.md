@@ -18,6 +18,10 @@ exit 1.
 
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9) gives
 `χ(ℚ(√11)²) ≤ 4`. With it, **chi(Q(sqrt11)^2) = 4**. Nothing here proves the upper bound.
+**And nothing here is checked by the Lean kernel**: the certificate above is the standard-library checker's, and that
+is a different and weaker thing.
+
+A kernel proof of this field's lower bound does exist — `four_le_chromaticNumber_planeOver_eleven` in `Proofs/HadwigerNelson/Instances/SqrtEleven.lean` — but it is **not about this graph**. It rests on FS-58's **204-point chain witness**, built by a different route (a forcer copied along a chain, not a ball of a lattice). The 189 points here are this census's own, and they are certified by the checker above and by nothing stronger.
 
 **What else was checked** (each file below is in this directory, the verbatim output of the command named):
 

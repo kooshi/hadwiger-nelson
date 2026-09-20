@@ -100,9 +100,27 @@ def load_jsonl(path, keyfield='key'):
                 r = json.loads(ln)
                 done[r[keyfield]] = r
         if tail:
-            with open(path, 'r+b') as f:
-                f.truncate(len(raw) - len(tail))
+            _repair_partial_line(path, len(raw), len(tail))
     return done
+
+
+def _repair_partial_line(path, read_len, tail_len):
+    """Truncate a partial final line -- but ONLY if the file is still the length it was read at.
+
+    Every command in this driver calls `load_jsonl`, so this is a WRITE performed by every READ, and the length it
+    truncates to is one measured earlier.  If a job appended a finished record in between, truncating to the stale
+    length destroys it.  Phases 0, A, B and C ran one command at a time and never met it; phase B' did, because its
+    implementer read the live records while the ladder was writing them (nothing was lost -- 1,760 records checked
+    straight off the bytes).  Guarding on the size shrinks the window from the whole read to two syscalls; closing it
+    completely needs a lock in `append`, which is proposed and not built.  Returns True if it truncated."""
+    if path.stat().st_size != read_len:
+        print(f'NOTE {rel(path)} grew while it was being read ({read_len} -> {path.stat().st_size} bytes): its '
+              f'partial final line is dropped in memory and the FILE IS LEFT ALONE. Another process is writing it; '
+              f'do not read a field\'s records while a job writes them.', flush=True)
+        return False
+    with open(path, 'r+b') as f:
+        f.truncate(read_len - tail_len)
+    return True
 
 
 def append(path, rec):
@@ -1497,12 +1515,17 @@ def selftest_ladder(rnd):
                                              {'b': {'lattice': 'k1', 'verdict': 'Over cap (not asked)'}}),
         'asked': field_not_landed_reason(L4, {'k1': {'state': 'Open (x)'}, 'k2': {'state': 'Open (x)'}},
                                          {'b': {'lattice': 'k1', 'verdict': 'Colourable (colouring verified)'}}),
+        'undecided': field_not_landed_reason(L4, {'k1': {'state': 'Open (x)'}, 'k2': {'state': 'Open (x)'}},
+                                             {'b': {'lattice': 'k1', 'verdict': 'Unknown (budget)'}}),
     }
-    rows.append(('the three census null phrases are distinct and each is reachable',
-                 len(set(phrases.values())) == 3 and phrases['by certificate'] == 'by certificate'
+    rows.append(('the census null phrases are distinct and each is reachable',
+                 len(set(phrases.values())) == 4 and phrases['by certificate'] == 'by certificate'
                  and phrases['by budget'].startswith('by budget: 2 Open lattices')
-                 and phrases['asked'].startswith('asked: 1 of 2 Open lattices'),
+                 and phrases['asked'] == 'asked: 1 of 2 Open lattices, no refusal',
                  ' | '.join(phrases.values())))
+    rows.append(('PLANT (phrases): a ball that ran to the wall must NOT read as "asked and not refused" -- it is '
+                 'counted as undecided', phrases['undecided'].endswith(', 1 undecided at the wall'),
+                 phrases['undecided']))
     rows.append(('PLANT (phrases): an UNASKED open lattice must never read as asked -- an Over cap record alone keeps '
                  'the field `by budget`', phrases['by budget'].startswith('by budget'), phrases['by budget']))
     # (5) A.8's 15 % bound on predicted-beside-actual: it fires, and it is a FINDING and not a defect.
@@ -1514,7 +1537,29 @@ def selftest_ladder(rnd):
                  f'ratio {good8["actual_over_predicted"]}, rungs {good8["ladder_rungs"]}'))
     rows.append(('PLANT (A.8): an actual count at twice the prediction is flagged outside the bound',
                  bad8['within_A8_bound'] is False, f'ratio {bad8["actual_over_predicted"]}'))
-    # (6) phase C's field list is read from the records, so a field this tier lands is not silently skipped.
+    # (6) reading a record file must never destroy a record another process appended while it was being read.
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / 'balls.jsonl'
+        p.write_text('{"key":"a"}\n{"key":"b"}\n{"key":"c"')          # a genuine partial final line
+        raw = len(p.read_bytes())
+        rows.append(('a quiescent file with a partial final line IS repaired',
+                     _repair_partial_line(p, raw, len('{"key":"c"')) and p.read_text() == '{"key":"a"}\n{"key":"b"}\n',
+                     f'{raw} bytes -> {p.stat().st_size}'))
+        partial = '{"key":"c"'
+        p.write_text(f'{{"key":"a"}}\n{{"key":"b"}}\n{partial}')
+        stale = len(p.read_bytes())
+        with open(p, 'a') as f:                                       # a writer finishes the line and appends another
+            f.write('}\n{"key":"d"}\n')
+        grew = p.read_text()
+        rows.append(('PLANT (data loss): the same repair against a STALE length leaves the file alone instead of '
+                     'destroying the records appended since', _repair_partial_line(p, stale, len(partial)) is False
+                     and p.read_text() == grew, f'{stale} -> {p.stat().st_size} bytes, all {len(grew.splitlines())} '
+                     f'lines intact; unguarded it would truncate to {stale - len(partial)} bytes and lose the last '
+                     f'two records'))
+        rows.append(('PLANT resolved: the stale-length read still returns the complete records it could parse',
+                     list(load_jsonl(p)) == ['a', 'b', 'c', 'd'], f'{list(load_jsonl(p))}'))
+    # (7) phase C's field list is read from the records, so a field this tier lands is not silently skipped.
     here = land_order(quiet=True)
     planted = land_order(refusing=set(LAND_ORDER) | {239}, quiet=True)
     rows.append(('phase C\'s order today is the owner\'s committed priority order', here == LAND_ORDER, f'{here}'))
@@ -2654,8 +2699,72 @@ def cmd_ladder(D, tid='1b', jobs=16, quiet=False, budget=None, show_plan=False):
     return errs
 
 
+def ladder_pooled_pass(fields, tid, jobs, budget=None):
+    """ONE pool over the whole family.  A pool opened inside a field is one to three workers wide, because that is how
+    many balls a field has to ask -- measured 2026-09-20 on a sixteen-core machine: d = 11 used 2 workers, d = 23 used
+    6, d = 47 used 3, and the machine sat idle for the rest.  This pass puts the FIRST askable rung of every in-scope
+    lattice at every field into a single pool; the per-field pass then runs afterwards, finds them settled, and does
+    only the cheap remainder (over-cap records, any descent, the onset follow-ups, the refusal propagation).
+    `meta` is keyed by (field, ball) and never by the ball key alone: 154 of 817 lattice shapes are shared between
+    fields (phase A finding 2), so the bare key collides across them."""
+    import multiprocessing as mp
+    tier = tier_def(tid)
+    cap, wall = tier['point_cap'], tier['solve_wall']
+    work, meta = [], {}
+    for D in fields:
+        plan, _ = ladder_plan(D, tid)
+        done = load_jsonl(field_dir(D) / 'balls.jsonl')
+        for key in sorted(plan):
+            e = plan[key]
+            if not e['askable']:
+                continue
+            R, p = e['askable'][0]
+            prev = done.get(f'{key}|ball{R}')
+            if prev is not None and str(prev.get('tier')) == str(tid) and _settled_at(prev, cap, wall):
+                continue
+            work.append(_ladder_work(D, e, R, p, tid, tier['_sha256'], cap, wall))
+            meta[(D, f'{key}|ball{R}')] = (e, 'the first rung whose prediction fits the cap', R)
+    work.sort(key=lambda w: w[8])
+    width = min(jobs, len(work))
+    print(f'fs61 ladder pooled pass tier={tid}: {len(work)} balls over {len({w[0] for w in work})} fields in ONE '
+          f'pool {width} workers wide (a per-field pool would be 1-6); {sum(w[8] for w in work):,} points predicted '
+          f'in total, largest {max((w[8] for w in work), default=0):,}; wall {wall} s each', flush=True)
+    if not work:
+        return []
+    errs, counts, outside, t0 = [], collections.Counter(), [], time.time()
+    with mp.get_context('fork').Pool(width) as P:
+        for rec, model in P.imap_unordered(_ball_worker, work):
+            D = rec['D']
+            e, reason, R = meta[(D, rec['key'])]
+            rec = _ladder_decorate(rec, e, reason, R)
+            if model is not None:
+                with gzip.open(model_path(D, rec['model_sha256']), 'wb') as f:
+                    f.write(model)
+            append(field_dir(D) / 'balls.jsonl', rec)
+            counts[rec['verdict']] += 1
+            if rec['verdict'] == 'ERROR':
+                errs.append((rec['key'], rec.get('error')))
+                defect(f'ladder d={D} {rec["key"]}: {rec.get("error")}')
+            if rec.get('within_A8_bound') is False:
+                outside.append(rec)
+                print(f'  NOTE d={D} {rec["id"]} R={R}: {rec["points"]} points against {rec["predicted_points"]} '
+                      f'predicted, ratio {rec["actual_over_predicted"]} -- outside A.8\'s 15 % bound, a FINDING '
+                      f'(the owner\'s B\'.1), not a defect', flush=True)
+            if rec['verdict'] != 'Colourable (colouring verified)':
+                print(f'  d={D} {rec["id"]} R={R} {rec.get("points")} points {rec.get("edges", "-")} edges '
+                      f'-> {rec["verdict"]} [{rec.get("solve_seconds", "-")} s]', flush=True)
+            if budget and time.time() - t0 > budget:
+                print(f'  budget {budget} s reached: stopping (resume = re-run this command)', flush=True)
+                P.terminate()
+                break
+    print(f'DONE ladder pooled pass: ' + ', '.join(f'{v} {k}' for k, v in sorted(counts.items()))
+          + f'; {len(outside)} outside A.8; {len(errs)} defects; {time.time() - t0:.0f} s', flush=True)
+    return errs
+
+
 def cmd_ladder_all(fields=None, tid='1b', jobs=16, budget=None):
-    """Phase B' over the whole family in ascending d, resumable by re-running the identical command."""
+    """Phase B' over the whole family, resumable by re-running the identical command: one pool over every field's
+    first rung, then the cheap per-field remainder."""
     fields = fields or FAMILY_500
     state = FS61 / f'ladder-progress-{tid}.jsonl'
     done = load_jsonl(state)
@@ -2667,7 +2776,8 @@ def cmd_ladder_all(fields=None, tid='1b', jobs=16, budget=None):
     print(f'fs61 ladder-all tier={tid}: {len(fields)} fields, {len(scope)} with a lattice in scope, '
           f'{sum(scope.values())} balls the rule would ask; {len(done)} fields already complete. '
           f'Resume = re-run this identical command.', flush=True)
-    errs, t0 = [], time.time()
+    t0 = time.time()
+    errs = ladder_pooled_pass([D for D in scope if str(D) not in done], tid, jobs, budget=budget)
     for D in sorted(scope, key=lambda d: (scope[d] == 0, d)):
         if str(D) in done:
             continue
@@ -2783,9 +2893,17 @@ def field_not_landed_reason(lat, filt, balls):
         return 'by certificate'
     asked = {b['lattice'] for b in balls.values()
              if b['lattice'] in open4 and b['verdict'] != 'Over cap (not asked)'}
+    plural = 'lattice' if len(open4) == 1 else 'lattices'
     if not asked:
-        return f'by budget: {len(open4)} Open lattices, none askable'
-    return f'asked: {len(asked)} of {len(open4)} Open lattices, no refusal'
+        return f'by budget: {len(open4)} Open {plural}, none askable'
+    # "No refusal" would be read as "they came back colourable".  At tier 1b two thirds of the asks ran to the solver's
+    # wall without deciding anything, which is a third kind of nothing and belongs in the sentence, not only in the
+    # `unknown` column (de Bruijn, 2026-09-20).
+    decided = {b['lattice'] for b in balls.values()
+               if b['lattice'] in open4 and b['verdict'] == 'Colourable (colouring verified)'}
+    undecided = asked - decided
+    tail = f', {len(undecided)} undecided at the wall' if undecided else ''
+    return f'asked: {len(asked)} of {len(open4)} Open {plural}, no refusal{tail}'
 
 
 def census_rows(tid='1'):

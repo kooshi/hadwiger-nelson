@@ -1050,3 +1050,75 @@ REFUSED run would have promoted its field in `census.md`. Both are fixed, both h
 byte-identical on regeneration). Every `witness.json` is byte-identical to the one C.10 passed — the whole gate was
 re-run twice against the committed files and moved no certificate byte. `git status --porcelain data/fs58
 tools/fs58_*` is empty. Machine: the desktop, one heavy job at a time, ≈ 4 h 20 m.
+
+### §R-B′ — phase B′, tier `1b`, the radius ladder (2026-09-20, closed)
+
+**B.1–B.7 re-read at tier `1b` and B′.1 all green; 0 defects; nothing halted. No field lands.**
+Record, one pasteable row per gate item with every plant: **`data/fs61/records/phase-Bprime.md`**.
+Table: **`data/fs61/census.md`** (derived, byte-identical on re-run) and `census.jsonl`, now at tier `1b`.
+
+**What it asked.** Of the 110 rank-4 `Open` lattices, 77 had an `Over cap (not asked)` record at `R = 1.5`; the
+rule gave 15 of them a rung at `R = 1.2`, 21 a rung at `R = 1.0`, and left 41 with no rung under the 600,000-point
+cap. **36 balls over 19 fields, 277,442–594,931 predicted points each** (plus one onset follow-up), all forty
+fields under one tier definition, **167 included**.
+
+**One refusal, at `d = 23`** (`L1510e5aa`, `R = 1.2`, 462,045 points, 3,265,070 edges, 258.91 s) — a field already
+`Landed (certified)`, so it is a tenth refusing lattice there and changes no state, and phase C has nothing new to
+do. **`land_order()` confirms no field refuses that the phase-C priority order does not already contain.**
+
+**The nulls are now sorted by kind, which is what the phase was for** (the owner's ruling 6, with a third phrase
+the ruling's dichotomy does not cover and which turns out to be the majority case):
+
+| the null | tier 1 | tier 1b |
+|---|---|---|
+| `(by certificate)` — no `Open` lattice left | 11 | 11 |
+| `(by budget: k Open lattices, none askable)` | 13 | **5** (35, 59, 83, 251, 323) |
+| `(asked: j of k Open lattices, no refusal[, u undecided at the wall])` | 7 | **15** |
+
+Eight fields moved from *never asked* to *asked* — **131, 167, 179, 203, 239, 407, 455, 479**, exactly the eight
+the owner's re-plan named — and the family's asked-ball count went **124 → 161**.
+
+**The phase's finding: the binding constraint is no longer the cap, it is the solver.** Of the 37 asks, **24 ran to
+the 600 s wall undecided**, 12 were colourable, 1 refused. The lattices tier 1 could not ask are *fine* — small
+covolume, many generators — so their balls are large **and dense** (0.7–3.3 M edges on 0.28–0.60 M points), and
+CDCL does not decide that shape in ten minutes. **Tier 2 as defined raises the cap to 3,000,000, which makes larger
+instances of exactly the graphs that are already undecided**; E.1 should be re-read against this before it is run
+(proposal 4 of the phase record: re-ask the 24 `Unknown` balls at a longer wall first — a re-run of the same
+command does it — then price cube-and-conquer on one, then consider radii below 1.0).
+
+**`d = 167`, FS-59's field, was asked for the first time**: three of its six `Open` lattices, and **two are
+3-colourable in 0.63 s and 1.46 s on balls of 313,748 and 397,140 points**, the third undecided at the wall. Its
+row now reads *asked: 3 of 6 Open lattices, no refusal, 1 undecided at the wall* rather than *nothing was askable*.
+Consistent with FS-58's 3-colourable balls to 215,409 points there; it aims FS-59 a little and refutes nothing.
+
+**B′.1 is met and the mechanism it guards never fired.** All 37 asked records carry both rung predictions, the rung
+chosen, why it was chosen, and the actual count; the ratio actual/predicted ran **0.9982–1.0094** with **0 outside
+A.8's 15 % bound**. The exact-overflow descent I added (recorded in the phase record *before* the run, with its
+measurement) was therefore never used: the 1.1078 tail that motivated it lives at the small control fields and
+coarse lattices, not on this family's fine ones. Registered as a mis-priced risk, not a finding.
+
+**The memory measurement the owner's ruling 4 requires before tier 2 is launched** [measured, this phase]: every
+ball record now carries the worker's peak and end-of-ball RSS. Largest ball asked **595,257 points / 2,370,078
+edges**, worker peak **1.93 GB**; max worker peak over all 37 balls **2.47 GB**; **3.37 GB (median) to 5.22 GB
+(max) per million points**, so **10–16 GB per worker at tier 2's 3,000,000-point cap** — sixteen workers would ask
+160–250 GB of a 128 GB machine. `available memory / peak` gives **six workers, not more than eight**, and the
+figure is a floor because tier 2's `NMAX = 420` produces finer lattices with more edges per point. The whole
+16-wide tier-1b run peaked at **17.9 GB**.
+
+**Cost.** 20.5 min wall, 16 workers, one pool over the family. The first attempt pooled *inside* each field —
+2 to 6 workers of 16 — and was stopped after three fields on Kooshi's observation that the machine was idle; cause,
+measurement and forfeit are in the phase record, written before the signal, and the forfeit was at most three balls
+because every finished ball is its own fsynced record.
+
+**Three repairs shipped with this phase, each with a plant that was seen to fire.** `load_jsonl` **wrote to the file
+it read** — it truncates a partial final line to a length measured earlier, so a read concurrent with a write could
+destroy finished records; it is now guarded and says so (no records were lost: 1,760 checked straight off the
+bytes). Phase C's field list is now read from the records, so a field that refuses for the first time at a later
+tier is appended rather than silently skipped. And a landing record carries `ball_tier`, the tier that asked the
+ball, which is not the flag the command was given.
+
+**The `evidence` column no longer reads `kernel` at `d = 11`** (the owner's correction). §7's
+`evidence ∈ {kernel (11 only), …}` is retired: no row of `census.md` is kernel-checked. The kernel's
+`four_le_chromaticNumber_planeOver_eleven` rests on FS-58's **204-point chain witness**; this census's `d = 11` row
+is a **189-point direct witness**, a different graph. The legend, a note under the table and the `d = 11` witness
+README each now say which is which.
