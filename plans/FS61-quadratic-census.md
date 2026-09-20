@@ -612,6 +612,36 @@ therefore still never been asked a question that was both decidable and capable 
      lattice-and-filter stage projects over two hours for 31 fields, cut to the eleven by-certificate fields plus 167; if it still
      does, it is not run and the record says so with the measurement.
    * Any field that newly refuses is certified under phase C's amended gate. The owner runs C.10 on it.
+3a. **Ruling 3's premise was wrong, and E.1a is re-aimed (the owner, the same evening, out of a question of Kooshi's — *is there a
+   cliff we can traverse instead of searching blindly?*).** The owner put every asked ball on record — 734 with points and edges — at
+   its **average degree** `2·edges/points`:
+
+   | degree | Colourable | Unknown | Refused |
+   |---|---|---|---|
+   | < 4 | 87 | 0 | 0 |
+   | 4–6 | 183 | 39 | 0 |
+   | 6–8 | 106 | 14 | 3 |
+   | 8–10 | 112 | 11 | 6 |
+   | 10–14 | 68 | 6 | 13 |
+   | 14–20 | 44 | 0 | 15 |
+   | ≥ 20 | 20 | 0 | 7 |
+
+   Among balls of ≥ 200,000 points: degree < 6 → 49 / 31 / 0; degree ≥ 14 → 28 Colourable, 15 Refused, **0 Unknown**, slowest 239 s.
+   **No ball below degree 6.6 has refused; the `Unknown`s are the hardness peak at degree 4–6, on the colourable side wherever
+   decided; and on one lattice a larger radius refuses FASTER** (47: 104 s at `R = 1.2`, 0 s at 1.5; 119: 114 s → 1 s; 95: 32 s → 1 s).
+   So B′'s "the solver is the wall" was a reading of a population at median degree 5.5 — *a cost measured in one regime and carried
+   into another* (`CLAUDE.md` § Make the gate fail) — and **the owner's radius ladder 1.5 → 1.2 → 1.0 stepped DOWN in degree, into the
+   hard band or under the refusal floor. The design error is the owner's.** The law that lets a ball be aimed before it is built:
+   **predicted degree `= g·φ(R)²`**, `g` the lattice's unit-vector count, `φ(R) = [2R²·acos(1/(2R)) − ½√(4R² − 1)]/(πR²)` (a ball is a
+   bidisc, hence the square); observed / predicted over the 734 balls: median 1.000, range 0.715–1.184.
+   **Tier `1c` is therefore: every rank-4 `Open` lattice at the 31 fields not landed whose best record is `Unknown` or `Over cap`,
+   asked ONE ball at `R₁₄` (predicted degree 14) if predicted points ≤ 2,000,000; else at the largest radius under 2,000,000 points if
+   its predicted degree is ≥ 8; else `Over cap (not asked)`, the record carrying the predicted degree at the cap.** Wall 1,800 s;
+   workers = available memory / measured peak, measured on the largest ball first. Priced before it runs; over four hours projected ⇒
+   each field's best lattice by degree-at-cap plus all of 167's. E.1b uses the same ask rule. **Registered before the run — P-deg1:
+   every ball asked at predicted degree ≥ 14 decides within the wall (loses on one `Unknown`). P-deg2: at least one new field refuses
+   (0.35; the owner does not know).** Both outcomes of both are reachable: 43 of 43 large balls at degree ≥ 14 decided, and 28 of those
+   43 were colourable. The registered expectation under E.1a above (*at most two verdicts change*) is withdrawn with the ask it was about.
 4. **E.2–E.7 stand as written**, with three additions to E.4 (`aiming-167.md`): the sparsity reading above; B′'s finding that the
    solver and not the cap is the wall, with the memory figures and their population; and, for each of 167's six Open lattices, its
    predicted points at 1.0 / 1.2 / 1.5 and what was asked. **E.5's product is the isomorphism table and the shape table; the theorem
