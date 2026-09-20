@@ -670,11 +670,27 @@ def _ball_worker(args):
         sv.append_formula([[3 * v + 1, 3 * v + 2, 3 * v + 3] for v in range(nv)])
         for c in range(3):
             sv.append_formula(np.stack([-(3 * E[:, 0] + c + 1), -(3 * E[:, 1] + c + 1)], axis=1).tolist())
+        # Symmetry break (plan rule 5): pin one EDGE's endpoints to colours 0 and 1.  Any proper colouring can be
+        # permuted to agree with that, so it is sound for any edge -- and it must NOT assume the edge touches the
+        # origin.  A unit vector is short in one real embedding and may be long in the other, and a ball here is a
+        # bidisc, so a generator with R < |u'| <= 2R puts edges in the ball while `origin +- u` falls outside it:
+        # the origin can be ISOLATED in a graph with millions of edges.  Phase 0's version indexed the origin's
+        # incident edges unconditionally and raised IndexError the first time tier 2l's finer lattices produced
+        # such a ball (d = 407, 2026-09-20) -- loudly, with nothing written, which is the good direction.
         i0 = FS.index_of(X, (0, 0, 0, 0))
-        units = [3 * i0 + 1]                                   # symmetry break: origin colour 0, one neighbour colour 1 (rule 5)
+        units, pinned_edge = [], None
         if len(E):
-            j = int(E[E[:, 0] == i0][0, 1]) if (E[:, 0] == i0).any() else int(E[E[:, 1] == i0][0, 0])
-            units.append(3 * j + 2)
+            inc = E[(E[:, 0] == i0) | (E[:, 1] == i0)]
+            if len(inc):
+                j = int(inc[0, 1]) if int(inc[0, 0]) == i0 else int(inc[0, 0])
+                units, pinned_edge = [3 * i0 + 1, 3 * j + 2], (int(i0), j)
+            else:                                              # the origin is isolated: pin some other edge instead
+                a, b = int(E[0, 0]), int(E[0, 1])
+                units, pinned_edge = [3 * a + 1, 3 * b + 2], (a, b)
+        else:
+            units = [3 * i0 + 1]                               # no edges at all: the origin's colour alone
+        base['pinned_edge'] = pinned_edge
+        base['origin_isolated'] = bool(len(E)) and pinned_edge is not None and i0 not in pinned_edge
         r, dt = walled_solve(sv, units, wall)
         rec = {**base, 'points': nv, 'edges': int(len(E)), 'covolume': cov, 'size': len(S),
                'solve_seconds': round(dt, 2), 'seconds': round(time.time() - t0, 2), **_worker_memory()}
@@ -1788,6 +1804,31 @@ def selftest_degree(rnd):
     rows.append(('PLANT (the margin): aiming AT the cap would overflow it at that worst ratio -- which is what the '
                  'first ball of this tier did, returning `Over cap (not asked)` instead of an answer',
                  cap * worst > cap, f'{cap:,} x {worst:.4f} = {cap * worst:,.0f} points, above the cap'))
+    # (3b) the symmetry break must not assume the origin has a neighbour in the ball.  Fixture: an edge list in
+    #      which the origin (index 0) appears in no edge -- which really happens, because a unit vector short in one
+    #      real embedding can be long in the other and a ball here is a bidisc.
+    import numpy as _np
+    def _pin(E, i0=0):
+        """The pinning decision of `_ball_worker`, extracted verbatim in shape so it can be planted."""
+        if not len(E):
+            return [3 * i0 + 1], None
+        inc = E[(E[:, 0] == i0) | (E[:, 1] == i0)]
+        if len(inc):
+            j = int(inc[0, 1]) if int(inc[0, 0]) == i0 else int(inc[0, 0])
+            return [3 * i0 + 1, 3 * j + 2], (int(i0), j)
+        a, b = int(E[0, 0]), int(E[0, 1])
+        return [3 * a + 1, 3 * b + 2], (a, b)
+    touching = _np.array([[0, 5], [3, 4]])
+    isolated = _np.array([[3, 4], [5, 6]])
+    u1, e1 = _pin(touching)
+    u2, e2 = _pin(isolated)
+    rows.append(('the symmetry break pins an edge at the origin when the origin has one', e1 == (0, 5) and u1 == [1, 17],
+                 f'pinned {e1}, units {u1}'))
+    rows.append(('PLANT (isolated origin): with NO edge at the origin the break pins some other edge instead of '
+                 'indexing an empty array -- the IndexError that killed the first tier-2l run',
+                 e2 == (3, 4) and u2 == [10, 14], f'pinned {e2}, units {u2}'))
+    rows.append(('PLANT (no edges at all): the origin\'s colour alone, and no edge pin',
+                 _pin(_np.zeros((0, 2), dtype=int)) == ([1], None), f'{_pin(_np.zeros((0, 2), dtype=int))}'))
     # (4) the scope is a LATTICE STATE, so a lattice this tier refuses does not drop out of the check that owed it.
     rows.append(('the scope is `Open` OR `Refused`, so answering a lattice does not remove it from the accounting\'s '
                  'subject', "st.startswith('Open') or st.startswith('Refused')" in s_scope_src(),
