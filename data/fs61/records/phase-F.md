@@ -85,9 +85,13 @@ extrapolation past its own edge** — which is precisely how P-deg1 lost in phas
 prediction rather than relied on as a plan.
 
 **What is kept from the instruction.** Its purpose — do not enter a million-point extraction blind. Met instead by
-the order (ascending edges: 239 at 2.6 M, 335 at 4.4 M, 311 at 8.0 M, 431 at 9.3 M, 59 at 9.8 M, with 239 and 335
-first as the owner asked for early results), by measuring peak memory on each, and by the fact that **every core
-round is checkpointed**, so a stop costs one round and never the field.
+running one field at a time in ascending edge count, by measuring peak memory on each, and by the fact that
+**every core round is checkpointed**, so a stop costs one round and never the field.
+
+*The order actually run, and why it changed:* `239` (the owner's first, stopped — §3.1a), then `335`, `311`, `59`,
+`431`, then `239` resumed and stopped a second time (§3.1a′). The re-ordering after the first stop was not a
+preference: `d = 239` was blocking four fields that turned out to be between 6× and 30× cheaper, and this
+repository's rule is that a run which blocks something is presumed killable.
 
 ---
 
@@ -220,6 +224,68 @@ seconds is an expensive extraction whatever its size, and that is when to spend 
 `steps.jsonl` byte-identical across 65 s (the core-round checkpoints are minutes apart, so a shorter check would
 prove nothing).
 
+### 3.1a′ `d = 239` was RESUMED, ran 52 core rounds, and was stopped a second time — with the measurement, and the priced alternative
+
+**It was resumed** at 14:35 from its `core-round-2` checkpoint (`land 239 --tier 1c --gen-cap 7200`), once the four
+cheaper fields were certified, and given a window of about ninety minutes. It got much further than the first
+attempt and then ran into the thing that decides the field:
+
+```
+core-round-3    21,800 -> 19,628   1,274.7 s        (the round the first attempt was stopped inside)
+core-round-4    19,628 -> 17,993     102.0 s
+ …
+core-round-51    8,344 ->  8,336      21.2 s
+```
+
+**Fifty-two rounds, 4,598 s (77 min) of core-round time on disk, and the kept set is 8,336 points.** The last
+twelve rounds removed 8 to 58 points each (median ≈ 25) at 21–79 s each, so the reduction has decayed to about
+**25 points per 48 seconds**. Reaching even 2,000 points from here is **≈ 250 more rounds, about 3.4 hours**, and
+the rate is still falling; the fixpoint's size is not known and on this trajectory is not close.
+
+**And — the part that changes the decision rather than just the budget — a certificate off this ball would be a
+liability even if it arrived.** Gzipped LRAT against witness size, over the thirteen certified fields:
+
+| points | 131 | 189 | 443 | 664 | 1,004 | 1,739 |
+|---|---|---|---|---|---|---|
+| LRAT (MB, gzipped) | 0.03 | 0.1–0.4 | 0.9 | 2.2 | 19.0 | **39.7** |
+
+A witness near 8,000 points — which is what a deletion starting at this fixpoint and stopped on its 600 s budget
+would leave — is roughly five times `d = 59`'s, on a refutation that is harder per vertex, so **hundreds of
+megabytes**: several times the entire repository's present certificate weight, and a cost paid again by every
+consumer, by the checker and by FS-60's kernel form. *Spending three more hours to produce an object nobody wants
+is not a better outcome than stopping.*
+
+**Forfeit, named.** The in-flight round 52 only; the 52 finished rounds are fsynced in
+`data/fs61/witness-239/steps.jsonl` and `land 239` resumes from `core-round-51` at 8,336 points. No landing record
+was written, so `d = 239` stays `Refusal claimed` in `census.md`, which is what it is.
+
+**The priced alternative, and it is the onset pass with its direction reversed.** Every field that certified
+cheaply here had a ball that *refused fast*: `d = 311`'s 1.14-million-point ball refuses in 18.2 s and collapsed to
+738 points in one round; `d = 239`'s 370,000-point ball refuses in 403.0 s and collapses to 46,338. The census's
+own degree phase diagram says which way to move: **a bigger, denser ball refuses faster** (`d = 47`: 104 s at
+`R = 1.2`, 0 s at `R = 1.5`; 119: 114 s → 1 s; 95: 32 s → 1 s). So the ask to make at `d = 239` is **upward in
+radius, not downward** — the opposite of what the brief and I were both aiming at:
+
+| ask | radius | predicted points | predicted degree | in the 2,000,000-point cap? |
+|---|---|---|---|---|
+| the ball it has | 1.2892 | 369,885 (actual) | 14.0 | yes |
+| **degree 18** | **1.5181** | **710,575** | 18 | **yes** |
+| degree 20 | 1.6501 | 991,864 | 20 | yes |
+| degree 24 | 1.9638 | 1,990,083 | 24 | just |
+
+If the degree-18 ball refuses in, say, under a minute, `land 239` would pick it **with no flag at all**: the cost
+proxy `points × (solve_seconds + 0.5)` reads 1.49·10⁸ for the ball it has and 4.3·10⁷ for that one. *This is the
+onset pass the brief asked for, aimed by the census's own finding instead of by intuition, and it is worth one ask
+of at most 1,800 s.*
+
+**What it needs that this phase did not build.** The ask must land in `balls.jsonl` for `land` to see it, and every
+ball record carries a tier whose definition fixes its ask rule — tier `1c` says *one ball per lattice at the
+degree rule's radius*, so a second radius under that id would contradict a definition the census quotes. The
+honest move is a new tier id (`1u`, say) with its own rule and its own line in `tier_accounting`, which is perhaps
+an hour's work with a plant. **It was not built here, deliberately:** minting a tier in the census's own ladder for
+a certification convenience, late in a milestone the owner scores by artifact, is the kind of speculative change
+that produces the defects this record is otherwise full of. It is handed over priced, not started.
+
 ### 3.1b P-r0 is **LOST**, and the way it lost is the finding
 
 > **P-r0**, registered in §2 before the first run: *round 0 of `extract` costs about 1.8× the ball's recorded
@@ -245,9 +311,31 @@ already encodes exactly that, and at every one of the five fields there was only
 had nothing to choose between — which is the argument for an onset pass, and §3.1a says which direction it should
 go.
 
-### 3.2 Per field
+### 3.2 Per field, in one line each
 
-*(filled in as each field lands)*
+| d | verdict | points | edges | 1-minimal | barrier edges | LRAT (gz) | the value now stated | upper bound, prior art |
+|---|---|---|---|---|---|---|---|---|
+| **311** | **CERTIFIED** | 189 | 460 | yes | 213 of 460 | 0.1 MB | `4 ≤ χ(ℚ(√311)²) ≤ 5` | the residue plane at 11 |
+| **335** | **CERTIFIED** | 443 | 1,086 | yes | 933 of 1,086 | 0.9 MB | `4 ≤ χ(ℚ(√335)²) ≤ 5` | the residue plane at 11 |
+| **59** | **CERTIFIED** | 1,739 | 5,025 | no (stopped at 297 of 2,473) | 2,442 of 5,025 | **39.7 MB** | **`χ(ℚ(√59)²) = 4`** | the dyadic prime, `[Fischer1990]` Thm 9 |
+| **431** | **CERTIFIED** | 1,031 | 2,719 | no (stopped at 95 of 1,234) | 1,570 of 2,719 | 26.4 MB | **`χ(ℚ(√431)²) = 4`** | the residue plane at 7 |
+| **239** | **NOT LANDED — `Refusal claimed`, resumable** | — | — | — | — | — | *(a solver claim; §3.1a and §3.1a′)* | *(would be `χ = 4`)* |
+
+**Three of the four are new mathematics.** `χ(ℚ(√59)²) = 4` and `χ(ℚ(√431)²) = 4` are **new exact values** — no
+real quadratic field was known to need more than three before this project, and these are the twelfth and
+thirteenth to be pinned. `d = 59` is also the **second `d ≡ 3 (mod 8)` field to land by the direct route**, after
+`d = 11`, which is the census reading R-mod8 losing a second time and cutting across `[Fischer1990]` Thm 10's
+division of this family. `d = 311` and `d = 335` are brackets, `4 ≤ χ ≤ 5`, because their best residue plane is
+the one at 11.
+
+**`d = 59` is the largest certificate in the repository: 39.7 MB of gzipped LRAT.** Priced and not pursued — its
+deletion ran at 5.5 s a test with 2,176 tests left, so 1-minimality is 3.3 hours there, and a *resumed* deletion
+provably cannot reach it (the frozen `extract` resumes at a stale scan position and skips). Soundness is
+untouched; what a smaller witness would buy is checker time and FS-60's kernel cost.
+
+**Memory, one heavy job at a time, on a 128 GB machine with 117 GB available:** peak resident set 2.2 GB at
+`d = 239` (2.59 M edges), 4.3 GB at `d = 335` (4.37 M), 5.1 GB at `d = 431` (9.35 M) and 7.9 GB at `d = 59`
+(9.77 M). Nothing came near the machine, and no job ran beside another.
 
 ---
 
@@ -320,3 +408,76 @@ committed bytes; `python3 tools/fs61_census.py land <d>` re-runs the whole gate 
 | C.7 | the value | the same (step C.7, from `frame.jsonl`) | `README.md` | **PASS** — `chi(Q(sqrt431)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
 | C.9 | minimality | the witness's own provenance | `witness.json` | **NOTE** — refusing but NOT 1-minimal: the deletion was stopped at position 95 of 1234 | — |
 
+
+---
+
+## 5. The close (phase F items F.1, F.2, F.3, F.5; F.4 was done at the end of phase E)
+
+| # | what | artifact | the line that shows it |
+|---|---|---|---|
+| F.1 | the data tree's README — every path, its producer command, its trust level | `data/fs61/README.md` | five trust levels, strongest first (*checker / exact / verified model / solver claim / float reading*), a row per artifact, and the asymmetry that governs how to read a null: edges are **measured**, so the only possible error is a MISSED edge, which makes colouring easier — a refusal is robust and a "3-colourable" verdict is the suspect one |
+| F.2 | `CLOSED-QUESTIONS.md` §1.7, field by field with its certificate | `CLOSED-QUESTIONS.md` | `χ(ℚ(√d)²) = 4` at `d = 11, 23, 59, 71, 95, 119, 191, 359, 431` and `4 ≤ χ ≤ 5` at `d = 47, 143, 311, 335`; `d = 239` named as a solver claim and excluded from every count |
+| F.2 | the bibliography resolves | — | `python3 tools/bib_audit.py` → `every cited work resolves to a row or a recorded alias`, exit 0 |
+| F.3 | ledger row and grokking text, **as proposals** | `data/fs61/CLOSE-proposals.md` | the proposed row 74, six numbered changes to G61, and two honesty notes attached to the row |
+| F.5 | what FS-59 and FS-60 now consume, **as proposals** | the same file | four items each |
+| — | every derived table regenerated after the certifications | `census.md`, `readings.md`, `shapes.md`, `aiming-167.md` | `table --check`: 40 fields at tier 2l, accounting checked at tiers 1, 1b, 1c, 2l, **0 defects** |
+
+**`CLAUDE.md`, `plans/FRONTIER-STUBS.md` and the stubs were not touched.** They are the product owner's files and
+the proposals are written for him to accept, cut or rewrite.
+
+### 5.1 Two derived tables were asserting conclusions their own numbers contradicted
+
+Both found the same way — by **reading the generated table rather than the generator** — and both fixed so the
+conclusion is computed, with a selftest row that exercises every branch.
+
+| where | what it said | what its own data said | the fix |
+|---|---|---|---|
+| `readings.md`, the degree phase diagram | *"48 are at degree ≥ 14 and **every one of them decided**"* | *"…30 coloured, 16 refused, **2 undecided**"*, in the same sentence | `decided_phrase` computes the clause; the real population now reads **"46 of them decided"**. The template had been written when the population was 43 of 43; tier 1c then added the two undecided balls — which is **how the owner's prediction P-deg1 lost** — and the sentence never moved |
+| `shapes.md`, Table 2 (the table E.5 exists to produce) | *"No two are isomorphic, and the reason is immediate: no two have the same number of points"* | *"(Sizes repeating: [189].)"*, in the same sentence — `d = 11` and `d = 311` both landed at 189 points | `witness_separation` checks point count, then (points, edges), then the WL hash, in strengthening order, and names the **weakest invariant that already separates every pair**. Here it is the edge count (452 against 460). If a pair ever survives all three it says an exact isomorphism test is **owed** and claims nothing — a shared WL hash is not an isomorphism |
+
+The second is the worse of the two: the **conclusion was true and the stated reason was false**, which is the
+shape that survives review.
+
+### 5.2 The instrument this phase added
+
+`tools/fs61_recount_landings.py` — the second opinion on a certification pass, the sibling of `fs61_recount.py`
+for ball records. Standalone, imports nothing from the census driver, never writes, and reports **counts** rather
+than exit statuses (the habit that caught two of phase C's three real defects). It recomputes C.6's barrier-edge
+count in its own `Fraction` arithmetic, re-verifies C.5's 4-colouring on every edge, reads C.2's `[PASS]`/`[FAIL]`
+rows, applies the owner's ruling-1 split of C.4 by the frozen tool's own straight-line structure, and
+cross-checks all of it against `landings.jsonl`.
+
+**Its negative control plants five faults one at a time in a scratch copy and each must turn exactly its own row
+red, on a faithful copy that reads green first**: the checker's verdict line blanked (C.1), a `[FAIL]` row added
+to the controls (C.2), the wrong radicand made to certify (C.3), one edge of the 4-colouring made monochromatic
+(C.5), and the README's value promoted from a bracket to an equality or demoted the other way (C.7). **5 of 5
+fire**, at an equality field (`d = 71`) and at a bracket field (`d = 47`), and nothing under `data/fs61/` moves.
+
+```
+python3 tools/fs61_recount_landings.py              # all 13 certified fields
+python3 tools/fs61_recount_landings.py --plant 47   # the negative control
+```
+
+### 5.3 The closing gate
+
+| what | command | result |
+|---|---|---|
+| the driver's selftest | `python3 tools/fs61_census.py selftest` | 11 sections, 0 failures |
+| the readings' selftest | `python3 tools/fs61_readings.py selftest` | 10 rows, 0 failures |
+| the census table and its accounting | `python3 tools/fs61_census.py table --check` | 40 fields at tier 2l, tiers 1/1b/1c/2l accounted, 0 defects |
+| every certificate, re-derived off the committed bytes | `python3 tools/fs61_recount_landings.py` | 13 of 13 fields green |
+| the frozen tree | `git status --porcelain data/fs58 'tools/fs58_*'` | empty |
+| no process left | a `/proc` walk matching an argv element | `census/fs58 processes: 0` |
+
+### 5.4 What did not land, in those words
+
+**`d = 239` is not certified.** It has a refusing ball on record and is `Refusal claimed` in `census.md`; two
+extraction attempts were stopped, each with its cause, measurement and forfeit written before the signal (§3.1a,
+§3.1a′), and **52 finished core rounds are on disk**, so `python3 tools/fs61_census.py land 239` resumes from
+8,336 points. On the measured trajectory that route needs about three and a half more hours and would produce a
+witness near 8,000 points — hundreds of megabytes of proof, several times the whole repository's present
+certificate weight. **The recommended route is not that one**: it is a single upward ask at `R = 1.5181`
+(predicted 710,575 points at average degree 18), which §3.1a′ prices, and which needs a new tier id that this
+phase deliberately did not mint.
+
+**P-r0 lost** (§3.1b), and the loss is the phase's sharpest finding about its own instrument.

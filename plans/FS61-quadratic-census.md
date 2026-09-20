@@ -1217,3 +1217,54 @@ ball, which is not the flag the command was given.
 `four_le_chromaticNumber_planeOver_eleven` rests on FS-58's **204-point chain witness**; this census's `d = 11` row
 is a **189-point direct witness**, a different graph. The legend, a note under the table and the `d = 11` witness
 README each now say which is which.
+
+### §R-F — phase F, the second certification pass and the close (2026-09-20, closed)
+
+**Four of phase E's five solver claims are now certificates; the fifth is not, and is reported as not landed.**
+Record, one row per gate item per field with every plant and every stop: **`data/fs61/records/phase-F.md`**.
+
+| d | verdict | points | edges | 1-minimal | barrier edges | value now stated | what is new |
+|---|---|---|---|---|---|---|---|
+| **59** | **CERTIFIED** | 1,739 | 5,025 | no (stopped at 297 of 2,473) | 2,442 | **`χ(ℚ(√59)²) = 4`** | a **new exact value**, and the **second `d ≡ 3 (mod 8)` field by the direct route** after `d = 11` |
+| **431** | **CERTIFIED** | 1,031 | 2,719 | no (stopped at 95 of 1,234) | 1,570 | **`χ(ℚ(√431)²) = 4`** | a **new exact value**; its ball came from the `Rcap` arm at degree 10.37, which the degree floor of 8 is what allowed |
+| **311** | **CERTIFIED** | 189 | 460 | yes | 213 | `4 ≤ χ(ℚ(√311)²) ≤ 5` | certified in **43.9 s** from a 1,137,169-point ball |
+| **335** | **CERTIFIED** | 443 | 1,086 | yes | 933 | `4 ≤ χ(ℚ(√335)²) ≤ 5` | 212.8 s; deletion ran to completion, so 1-minimal |
+| **239** | **NOT LANDED** — `Refusal claimed`, resumable | — | — | — | — | *(a solver claim)* | two extraction attempts stopped; 52 core rounds on disk; the route to it is priced, not run |
+
+**So the census stands at 13 `Landed (certified)` of 40, 26 not landed, 1 refusal claimed** (`table --check`: 40
+fields at tier 2l, accounting checked at tiers 1, 1b, 1c and 2l, 0 defects). Of this milestone's own seven new
+fields, **four are new exact values** — `d = 59, 119, 359, 431` — and three are brackets — `d = 143, 311, 335`.
+
+**P-r0 is lost, and how it lost is the finding.** Registered in the phase record before the first run: *round 0 of
+`extract` costs 1.2–3.0× the ball's plain solve time.* Measured: **1.38, 1.61, 0.43, 0.21, 0.64** at `d = 239,
+335, 311, 59, 431`. It was fitted on the two landed fields whose ball solves cost real time (1.79 and 1.58 at
+`d = 23` and `d = 143`) and applied where the solve is cheap, which is the same error as P-deg1's one level down
+and is the implementer's. **What survives is the ordering, not the constant**: over the five, extraction cost is
+monotone and steep in the ball's *plain solve time* — 18.2 s → 44 s end to end, 65.3 s → 213 s, 403.0 s →
+unfinished after 77 minutes of core rounds. **A ball's point count predicts nothing**: the largest ball of the
+five certified fastest and the smallest is the one that did not finish.
+
+**The onset pass, and the direction it should have gone.** The brief asked for a downward radius bisection before
+extracting from a ball over ~500,000 points; it was declined on the round-0 calibration above, and that decline
+was argued on the wrong stage — round 0 was predicted acceptably and the *tail* (how many core rounds, and how
+fast they shrink) is what decides a field. Both rules missed `d = 239`. **The census's own degree phase diagram
+gives the right direction, and it is upward:** a denser ball refuses *faster* (47: 104 s at `R = 1.2`, 0 s at
+1.5), and every field that certified cheaply here had a fast-refusing ball. At `d = 239` the ask is one ball at
+`R = 1.5181` — predicted 710,575 points at average degree 18, inside the 2,000,000-point cap — after which
+`land`'s existing cost proxy would select it with no flag. It needs a new tier id, and minting one in the
+census's ladder for a certification convenience was judged not worth doing late in the milestone.
+
+**Two derived tables were stating conclusions their own numbers contradicted**, both found by reading the
+generated table rather than the generator, both now computed with a selftest row per branch: `readings.md`'s
+*"every one of them decided"* beside *"2 undecided"* (the template predated P-deg1's loss), and `shapes.md`'s
+*"no two have the same number of points"* beside *"(Sizes repeating: [189])"* — `d = 11` and `d = 311` both landed
+at 189 points, and the pair is separated by the edge count (452 against 460), not the point count. The second is
+the worse shape: a **true conclusion with a false stated reason**.
+
+**The close.** `data/fs61/README.md` (every path, its producer, one of five trust levels);
+`CLOSED-QUESTIONS.md` §1.7 rewritten field by field with `d = 239` excluded from every count;
+`data/fs61/CLOSE-proposals.md` carrying the proposed ledger row, six numbered changes to G61, and what FS-59 and
+FS-60 now consume. `CLAUDE.md`, `plans/FRONTIER-STUBS.md` and the stubs were not touched. New instrument:
+`tools/fs61_recount_landings.py`, a standalone second opinion on the certification gate that reports counts rather
+than exit statuses, with five planted faults each seen to fire. Machine: the desktop, one heavy job at a time,
+≈ 3 h 15 m.

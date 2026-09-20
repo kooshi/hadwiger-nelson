@@ -47,7 +47,7 @@ Every refusing lattice in the census has an odd cycle of length at most 9, and n
 
 **No ball below average degree 6.595 has ever refused** (`d = 119`, `L8a8b1603`, R = 1.2), over 49 refusing balls. The 81 undecided balls have median degree **6.51** and lie in 4.70–14.04.
 
-**Restricted to balls of at least 200,000 points** (n = 273), which is where the census's hard cases live: 48 are at degree ≥ 14 and **every one of them decided** — 30 coloured, 16 refused, **2 undecided** — the slowest in 1834 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
+**Restricted to balls of at least 200,000 points** (n = 273), which is where the census's hard cases live: 48 are at degree ≥ 14 and **46 of them decided** — 30 coloured, 16 refused, **2 undecided** — the slowest in 1834 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
 
 ### The law that makes it actionable
 
@@ -94,10 +94,10 @@ The refusal at `d = 11` is **not** inheritance from FS-58's certified witness �
 
 | local bound | landed | not landed | landing rate |
 |---|---|---|---|
-| **L = 4** | 6 | 6 | 50 % |
-| **L ≥ 5** | 2 | 6 | 25 % |
+| **L = 4** | 7 | 5 | 58 % |
+| **L ≥ 5** | 4 | 4 | 50 % |
 
-Fisher exact, two-sided: **p = 0.373**.
+Fisher exact, two-sided: **p = 1.000**.
 
 ### Verdict: **lost**
 
@@ -109,7 +109,7 @@ The two fields with `L = 5` that landed — `d = 47` and `d = 143` — land exac
 
 **The claim.** At matched relative height the least refusing ball grows like a power of `d` between 0.5 and 2 — so `ℚ(√167)` is not arithmetically special, only large.
 
-**Population: the 8 landed fields with `d ≡ 7 (mod 8)`, each contributing the smallest ball that was actually SEEN to refuse.** That is the bracket's upper end and not the least refusing ball, which is not observable: verdicts are monotone in the radius and the band just under the threshold is where solvers stall.
+**Population: the 11 landed fields with `d ≡ 7 (mod 8)`, each contributing the smallest ball that was actually SEEN to refuse.** That is the bracket's upper end and not the least refusing ball, which is not observable: verdicts are monotone in the radius and the band just under the threshold is where solvers stall.
 
 | d | smallest refusing ball (points) |
 |---|---|
@@ -120,9 +120,12 @@ The two fields with `L = 5` that landed — `d = 47` and `d = 143` — land exac
 | 119 | 5,605 |
 | 143 | 283,485 |
 | 191 | 21,845 |
+| 311 | 1,137,169 |
+| 335 | 623,737 |
 | 359 | 46,421 |
+| 431 | 1,803,077 |
 
-**slope -0.14 (95 % interval -1.71 to 1.42, R^2 0.01) over the 8 landed d = 7 (mod 8) fields.**
+**slope 1.10 (95 % interval -0.27 to 2.47, R^2 0.22) over the 11 landed d = 7 (mod 8) fields.**
 
 ### Verdict: **not decided**
 
@@ -177,10 +180,10 @@ Range **-0.8223 to -0.5380**; 24 below `−1/2`.
 |---|---|---|---|---|
 | **P1** | the observed half of the dyadic law (v2(N) != 1 for d = 7 mod 8) holds on every atlas row to N = 420 | 0.85 | **won** | phase A item A.3: 0 violations over 1,820 non-rational denominators at d = 7 (mod 8), against the nine O6 had registered it on; and A.4 proved it, so it is a theorem and not a prediction any more |
 | **P2** | R-mod8 (a): tier 1 yields no refusing ball at any of the twenty d = 3 (mod 8) fields | 0.7 | **lost** | phase B: d = 11 refused on its own lattice (not by inheritance) -- 2 refusing lattice(s) at d = 3 (mod 8) now, d=11 Ld65c8ee8 (108 generators, smallest refusing ball 45,521 points), d=59 Ldb4246f8 (60 generators, smallest refusing ball 1,396,469 points) |
-| **P3** | among the twenty d = 7 (mod 8) fields, tier 1 yields a Refused ball at ten or more | 0.6 | **lost** | 8 of 20 d = 7 (mod 8) fields have a refusing ball, against the ten predicted; and neither tier 1b nor tier 1c nor tier 2l added one |
+| **P3** | among the twenty d = 7 (mod 8) fields, tier 1 yields a Refused ball at ten or more | 0.6 | **lost** | 11 of 20 d = 7 (mod 8) fields have a refusing ball, against the ten predicted; and neither tier 1b nor tier 1c nor tier 2l added one |
 | **P4** | every tier-1 refusal certifies | 0.9 | **won** | phase C: 9 of 9, by the frozen checker, each with its twelve planted faults and its wrong-radicand refusal; no extraction stalled and no refusal failed exact re-derivation |
-| **P5** | R-size: the log-log slope of least refusing ball size against d lies in [0.5, 2] | 0.5 | **not decided** | slope -0.14 (95 % interval -1.71 to 1.42, R^2 0.01) over the 8 landed d = 7 (mod 8) fields |
-| **P6** | R-L loses: landing rates for L = 4 and L >= 5 among d = 7 (mod 8) do not differ by more than chance at matched relative height | 0.65 | **won** | 6 of 12 fields with L = 4 landed against 2 of 8 with L >= 5; Fisher exact p = 0.373 |
+| **P5** | R-size: the log-log slope of least refusing ball size against d lies in [0.5, 2] | 0.5 | **not decided** | slope 1.10 (95 % interval -0.27 to 2.47, R^2 0.22) over the 11 landed d = 7 (mod 8) fields |
+| **P6** | R-L loses: landing rates for L = 4 and L >= 5 among d = 7 (mod 8) do not differ by more than chance at matched relative height | 0.65 | **won** | 7 of 12 fields with L = 4 landed against 4 of 8 with L >= 5; Fisher exact p = 1.000 |
 | **P7** | R-C loses: some refusing lattice has least character mean below -1/2 | 0.75 | **won** | 24 refusing lattices, least character means from -0.8223 to -0.5380; 24 below -1/2 |
 | **P8** | A.7 finds a rule reproducing the non-affine quotient colourings on at least 90 % of dead lattices | 0.35 | **lost** | phase A item A.7: no rule. The smallest hidden groups found are 27, 108, 108, 243, 1728, 2187, 4096 and the most common order covers 29 % against the gate's 90 %; and one of them has no factor of 3 at all, which kills the natural candidate |
 | **P9** | phase D lands a second d = 3 (mod 8) field by the chain | 0.25 | **not measured** | phase D was NOT RUN: it was conditional on R-mod8 surviving phase B (decision G) and R-mod8 lost at its first askable field, so the owner replaced it (re-plan after phase B, ruling 3). What survives of its question is D.0, the recipe-transfer table, which phase E answers from certificates |
