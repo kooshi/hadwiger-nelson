@@ -685,6 +685,17 @@ and 431; new brackets `4 ≤ χ ≤ 5` at 311 and 335.** The fifth implementer e
   only by running it; **the honest instrument is a stop rule, not a predictor.** And certificate weight is a cliff: 1,004 points →
   19 MB, 1,739 → 39.7 MB gzipped LRAT.
 
+**The owner's ruling on `d = 239` (2026-09-20, evening): P-up LOST on both halves, the route it tested WON, and the landing is
+finished.** The degree-18 ball (tier `1u`; 710,957 points, 6,396,358 edges — the owner's read of the raw record agrees) refused in
+197 s, not under 120, and round 0 left 49,576 points, not under 5,000. But the old ball's core rounds crawled (52 rounds, 4,598 s,
+8,336 points and still falling ~25 a round) while the denser ball's ran to their own fixpoint in 721 s (4,917 points) and deletion
+took that to 2,451 in three minutes: **round 0's output, which the fifth implementer and the owner both took for the deciding
+statistic, was the wrong one — what differs is the tail.** The sixth implementer stopped twice on the owner's stop rule and declined
+to override it a second time; **the rule's letter was the owner's defect** ("core rounds … under 3,000" where the purpose was "the
+kept set under 3,000", which had been met). Its own lesson stands beside it: *before acting on a checkpoint, print the whole of it,
+not the field you came to look at.* Ruling: `land 239 --tier 1u` is finished with a 2,400 s deletion budget; the certificate is
+committed if its gzipped LRAT is ≤ 60 MB and otherwise comes back to the owner.
+
 ### Phase E — tier 2, and the explanation (one day)
 
 | # | what | verified how | pass condition |
