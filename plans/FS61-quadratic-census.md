@@ -757,3 +757,103 @@ lost to the incident); `selftest` 1.1 s; `lattices --tier 1` 115 s wall / 1,648 
 and FS-58-depth regression records for the 14 fields; ball records for the eight control fields and for 143; models are
 kept under `data/fs61/fields/<d>/models/` and gitignored (12 MB), with `model_sha256` in every record and
 `scan <d> --reverify` re-checking a sample against the full exact edge set (exercised: 12 of 111 at `d = 7`, 0 failures).
+
+### §R-A — phase A, derive before scanning (2026-09-20, closed; commit to follow)
+
+**9 of 9 items done; 8 green, A.7 on its third branch (no rule found, with the table).** Record with every command,
+artifact and output line: **`data/fs61/records/phase-A.md`**. Nothing halted; A.5, this phase's halt, passed on all
+seven witnesses. Total machine cost: **under two minutes** — a derivation phase costs less than one ball of phase 0's
+control scan, which is this plan's own point, measured.
+
+| item | result |
+|---|---|
+| A.1 | `frame.jsonl`, 1,214 squarefree `d < 2000`; congruences+Legendre and PARI's decomposition in `F` and `K` agree on **every row**. §1's 40-field list, the L = 4/4/5 split and all six named controls reproduced |
+| A.2 | `atlas.jsonl`, 155 family fields, `N ≤ 420`, **`d` solved for**; (denominator, orbit count) agrees with FS-58's `classes(D,180)` on all 17 fields; O6's `D(6), D(12), D(18), D(24)` reproduced with their mod-8 split |
+| A.3 | all four laws, **0 violations** on 3,107 non-rational (field, denominator) pairs |
+| A.4 | **L4 PROVED** (below); D-H.2 is now fully proved |
+| A.5 | all seven witness lattices `Open` (0 of 9–22 quotients colourable); 11's is `M = 150`, rank 4, 108 generators, covolume 2.17e-4 |
+| A.6 | 508 lattices from FS-58's own qscreen records, 256 dead; **0 disagreements** with FS-58's verdicts on all 33 pools at 167 |
+| A.7 | **no rule**: smallest groups found are 27, 108, 108, 243, 1728, 2187, 4096; most common order is 29 % against the gate's 90 % |
+| A.8 | worst error **2.24 %** on the six named balls; over 588 balls of ≥ 1000 points, **none** above 15 % |
+| A.9 | §8 in `8c4b4fb` (09-19) precedes the first ball record in `5fb9984` (09-20): PASS |
+
+#### A.4 — the dyadic law at `d ≡ 7 (mod 8)` [hand, machine-checked]
+
+**Theorem.** *Let `d ≡ 7 (mod 8)` be squarefree and let `((a + b√d)/N, (c + e√d)/N)` be a unit vector in lowest terms,
+so that `a² + c² + d(b² + e²) = N²`, `ab + ce = 0` and `gcd(a, b, c, e, N) = 1`. Then `N ≢ 2 (mod 4)`.*
+
+*Proof.* Suppose `N = 2M` with `M` odd. Then `N² = 4M² ≡ 4 (mod 8)`, and `d ≡ −1 (mod 8)`, so the norm equation gives
+
+  `a² + c² − (b² + e²) ≡ 4 (mod 8)`.
+
+A square is `≡ 0 (mod 8)` iff the number is `≡ 0 (mod 4)`, `≡ 4 (mod 8)` iff it is `≡ 2 (mod 4)`, and `≡ 1 (mod 8)` iff
+it is odd; so a sum of two squares is one of `0, 1, 2, 4, 5` mod 8, and the congruence forces
+
+  `(a² + c², b² + e²) ≡ (4, 0), (0, 4), (5, 1)` or `(1, 5) (mod 8)`.
+
+In the first two, `a, c, b, e` are all even, contradicting `gcd(a, b, c, e, N) = 1` with `N` even.
+In the last two, exactly one of `a, c` is odd and exactly one of `b, e` is odd, and the **second** equation decides it:
+* the odd ones *aligned* (`a, b` odd, or `c, e` odd): `ab` is odd and `ce` is even, so `ab + ce` is odd;
+* the odd ones *crossed* (`a, e` odd, or `c, b` odd): one of `ab, ce` is `≡ 2 (mod 4)` and the other `≡ 0 (mod 4)`, so
+  `ab + ce ≡ 2 (mod 4)`.
+
+Either way `ab + ce ≠ 0`, against orthogonality. ∎
+
+**Machine check** (`selftest --section atlas` and the residue exhaustion in the phase record): exhausting `(a,b,c,e,N)`
+mod 8 under the norm equation, orthogonality and primitivity leaves **0** patterns at `d ≡ 7 (mod 8)`; the *same*
+exhaustion at `d ≡ 3 (mod 8)` leaves **256**, and denominators `≡ 2 (mod 4)` really do occur there (6, 10, 18, 30, …
+over `ℚ(√11)`), so the argument is not vacuous and is exactly as sharp as the phenomenon.
+
+**Two notes on the plan.** (i) Its parenthetical *"a mod-8 count does not settle it"* is right about the **norm
+equation alone**; what settles it is orthogonality read mod 4, a second equation rather than a finer count.
+(ii) `[ZanardoZannier1991]` Thm 3 was read (with Prop. 2) and is **not** what settles this: it gives a basis of the free
+part of the norm-one group indexed by the *split* primes with the obstruction in `Cl(S)/M`, which explains why powers of
+2 occur in denominators at all — the dyadic prime is split at `d ≡ 7 (mod 8)` — but says nothing about the parity. Its
+read-status in `BIBLIOGRAPHY.md` moves to *Prop. 2 and Thm 3 read, 2026-09-20*.
+
+#### Findings that change later phases
+
+1. **`L` is a bracket** (A.1). Four target chromatic numbers are themselves undecided, so each row carries
+   `L_lower, L_upper`. Below 2000 exactly five fields have an undecided `L`: **167** [6,8] (23, 43, 59) and **1319**
+   [6,8] (23, 47, 59), and **887, 1055, 1823 at [5,8]** because **31** is usable there and five is still open at 31.
+   *A five-colouring of `UD(𝔽₃₁,2)` gives three real quadratic fields an `L` of 5; an `α < 161` certificate pushes all
+   three to [6,8].* FS-57's side digit at 31 has three named consumers it did not know it had.
+2. **A canonical key names a lattice within a field, not across fields** (A.5). The key is `(M, Hermite form)` and
+   carries no `d`; **154 of 817 integral shapes on disk are shared by more than one field**, including the witness
+   lattices of (23, 191) and (95, 119). Nothing built is wrong — every record carries `D` and every command is
+   per-field — but **phase E must group by `(D, key)`**, and §7 should say so.
+3. **A cheap pre-screen for E.5's parametric-witness route (β)**, delivered early. On a shared integral shape the
+   generator sets differ (only the rational unit vectors coincide: 12 of 36 at 23/191, 4 of 28 at 95/119) while their
+   **counts agree exactly**; `d = 23, 95, 119, 143` are the `N = 12` family `d = N² − c²` that E.5 names. A shared shape
+   with equal generator counts is the precondition for one abstract graph drawn over several fields, and it is
+   computable from the lattice records alone — where E.5 currently proposes graph isomorphism.
+4. **The hidden group of a periodic 3-colouring need not be a 3-group** (A.7). `167 q1+1008.1`'s colouring factors
+   through `(ℤ/8)⁴`, order with **no factor of 3**. This kills the natural candidate rule — that `ρ` is the kernel
+   barrier's shape with a larger 3-group in place of `𝔽₃`. Registered as a sub-family pattern only: the three coarse
+   `d ≡ 3 (mod 8)` lattices (11, 35, 59) all have 3-part exactly **27** and `|A| ≤ 108`, on three data points.
+5. **A.7's numbers are upper bounds on `A_min`** (G21): one solver colouring per `(lattice, modulus)`. A small reading
+   establishes `A_min` is small; a large one establishes nothing about `A_min`. Four lattices (all over `d = 23`)
+   produced no colouring at any `m ≤ 12` and are absent from the table rather than counted.
+6. **The bidisc law is safe above a few hundred points and not below** (A.8): over 588 balls of ≥ 1,000 points the
+   worst error is 10.89 % and none exceeds 15 %; all six balls above 15 % have fewer than 150 points.
+7. **Prediction P1 is won on a population 200× its registration** (A.3): 1,820 non-rational denominators at
+   `d ≡ 7 (mod 8)` with `v₂ ≠ 1`, against O6's nine. With A.4 it is now a theorem rather than a prediction.
+
+#### Proposals to the owner (§0–§9 are the specification; these are not edits)
+
+* A.1's row: state `L` as a bracket, and name the three fields that 31 decides.
+* A.2's row: mark which of O6's sets are stated within the family and which over every squarefree `d`.
+* A.4's row: narrow "a mod-8 count does not settle it" to the norm equation alone.
+* §7's lattice paragraph: add that the key identifies a lattice within a field, and that cross-field tables key on
+  `(D, key)`.
+* A.6's row: name the population — FS-58's README counts 28 dead of 31 distinct lattices over the 32 non-bipartite
+  lines of `saturate-2520.out`; its verdict file holds `q1+q5+132` as well, giving 29 of 32, and FS-61 agrees with
+  **every** one of its 33 pool verdicts.
+
+#### State on disk for phase B
+
+`frame.jsonl` (1,214 rows), `atlas.jsonl` (155 rows), `atlas-laws.json`, `witness-lattices.jsonl` (7),
+`dead-quotients.{md,jsonl}` + `-reconcile.json` (508), `minimal-quotients.jsonl` (11 lattices × 6 moduli). Tier-1
+lattice records for `d = 2, 5, 7, 11, 13, 19, 23, 31, 43, 47, 119, 143`; ball records for the eight control fields and
+143. Phase B needs `lattices` + `filter` + `scan` per family field; `filter`'s quotient certificate and the inheritance
+poset are phase B's to add — phase 0 and A left `filter` with the two exact forms only, and its `Open` string says so.

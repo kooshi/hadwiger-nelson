@@ -1,0 +1,11 @@
+[
+ {
+  "D": 167,
+  "fs58_pools": 33,
+  "fs58_dead_pools": 29,
+  "distinct_lattices": 32,
+  "distinct_dead": 29,
+  "compared": 33,
+  "disagreements": []
+ }
+]

@@ -1558,6 +1558,401 @@ def cmd_atlas_laws(quiet=False):
     return [v for k in viol for v in viol[k]]
 
 
+# ================================================================ A.5 the known witnesses' own lattices
+WITNESS_PATHS = [(11, 'data/fs58/witness-11'), (23, 'data/fs58/witness-23'), (47, 'data/fs58/witness-47'),
+                 (71, 'data/fs58/witness-71'), (95, 'data/fs58/witness-95'), (191, 'data/fs58/witness-191'),
+                 (119, 'data/fs61/pricing/witness-119')]
+
+
+def witness_lattice(D, path):
+    """The Z-span of a witness's points, as a lattice of F^2 in the census's own coordinates (a, b, c, e)/M."""
+    pts = json.loads((ROOT / path / 'witness.json').read_text())['points']
+    M = 1
+    for a, b, c, e, m in pts:
+        M = M * m // math.gcd(M, m)
+    W = [tuple(x * (M // m) for x in (a, b, c, e)) for a, b, c, e, m in pts]
+    Mc, H = canonicalise(M, W)
+    return Mc, H, len(pts), M
+
+
+def quotient_screen(D, M, H, S, lattices=24, wall=30.0, seed=1):
+    """FS-58's necessary filter, driven from a lattice rather than from a class spec: a 3-colourable finite quotient
+    Cay(Lambda/L, S) with no generator in L gives a periodic 3-colouring of the whole Cayley graph, so no ball of the
+    lattice can ever refuse.  Uses FS-58's frozen quotient_graph for the graph and verifies every model on every edge."""
+    import numpy as np, random
+    from pysat.solvers import Cadical195
+    from fs58_chain import walled_solve
+    B, coords, cov, mc = FS.reduce_pool(D, M, S)
+    rnd = random.Random(seed)
+    tried, colourable = 0, []
+    Hs = [[[m if i == j else 0 for j in range(4)] for i in range(4)] for m in (3, 6, 8, 9, 10, 12)]
+    while len(Hs) < lattices:
+        diag = [rnd.choice([1, 2, 3, 4, 6, 8, 9]) for _ in range(4)]
+        if math.prod(diag) < 8 or math.prod(diag) > 1296:
+            continue
+        Hs.append([[diag[i] if i == j else (rnd.randrange(diag[j]) if j > i else 0) for j in range(4)] for i in range(4)])
+    for Hq in Hs:
+        g = FS.quotient_graph(coords, Hq)
+        if g is None:                                          # a generator lies in L: this quotient says nothing
+            continue
+        n, E, _ = g
+        tried += 1
+        sv = Cadical195()
+        sv.append_formula([[3 * v + 1, 3 * v + 2, 3 * v + 3] for v in range(n)])
+        for c in range(3):
+            sv.append_formula(np.stack([-(3 * E[:, 0] + c + 1), -(3 * E[:, 1] + c + 1)], axis=1).tolist())
+        r, dt = walled_solve(sv, [3 * 0 + 1], wall)
+        if r:
+            col = (np.array(sv.get_model()[:3 * n]).reshape(n, 3) > 0).argmax(axis=1)
+            assert (col[E[:, 0]] != col[E[:, 1]]).all(), 'quotient model not proper'
+            colourable.append({'order': n, 'diag': [Hq[i][i] for i in range(4)],
+                               'colouring_sha256': hashlib.sha256(col.astype('uint8').tobytes()).hexdigest()[:16]})
+        sv.delete()
+    return tried, colourable, cov, coords
+
+
+def cmd_witness_lattices(quiet=False):
+    """A.5 -- one of the plan's five halts: a finite graph with no proper 3-colouring cannot sit inside a lattice whose
+    whole Cayley graph has one, so a `Colourable` verdict here is an instrument defect, not a discovery."""
+    out = FS61 / 'witness-lattices.jsonl'
+    done = load_jsonl(out)
+    print(f'fs61 witness-lattices (A.5): the Z-span of each certified witness, filtered; {len(done)} on disk', flush=True)
+    bad = []
+    for D, path in WITNESS_PATHS:
+        if str(D) in done:
+            continue
+        t0 = time.time()
+        Mc, H, npts, Mraw = witness_lattice(D, path)
+        key = key_of(Mc, H)
+        S = saturation(D, Mc, H)
+        f2 = bool(FS.forms_mod(FS.reduce_pool(D, Mc, S)[1], 2)) if len(H) >= 3 else False
+        f3 = bool(FS.forms_mod(FS.reduce_pool(D, Mc, S)[1], 3)) if len(H) >= 3 else False
+        tried, colourable, cov, coords = quotient_screen(D, Mc, H, S)
+        state = ('Colourable (form mod 2)' if f2 else 'Colourable (form mod 3)' if f3 else
+                 'Colourable (periodic colouring verified)' if colourable else
+                 f'Open (no certificate among: forms mod 2, 3; {tried} quotients)')
+        rec = {'key': str(D), 'D': D, 'path': path, 'points': npts, 'lattice_key': key, 'id': short_id(key),
+               'M': Mc, 'rank': len(H), 'generators': len(S), 'covolume': cov, 'three_integral': Mc % 3 != 0,
+               'forms_mod2': f2, 'forms_mod3': f3, 'quotients_tried': tried, 'quotients_colourable': colourable,
+               'state': state, 'seconds': round(time.time() - t0, 1), 'machine': MACHINE,
+               'claim_scope': 'verified model', 'result': 'PASS' if state.startswith('Open') else 'HALT'}
+        append(out, rec)
+        done[str(D)] = rec
+        if rec['result'] != 'PASS':
+            bad.append(D)
+            defect(f'A.5 d={D}: the witness lattice is {state} -- a non-3-colourable finite graph cannot sit in a '
+                   f'3-colourable lattice. HALT (plan rule 15).')
+        print(f'  d={D:4d}: {npts} points -> lattice {short_id(key)} M={Mc} rank {len(H)} {len(S)} generators '
+              f'cov {cov:.3g}; {tried} quotients, {len(colourable)} colourable -> {state} [{rec["seconds"]} s]', flush=True)
+    fails = [r['D'] for r in done.values() if r['result'] != 'PASS']
+    print(f'DONE witness-lattices: {len(done)} witnesses, {len(fails)} halts -> {rel(out)}', flush=True)
+    return fails
+
+
+# ================================================================ A.6 the killing-quotient table (D-Q)
+def smith(Hm):
+    """invariant factors of Z^4 / rowspace(H), by integer row/column reduction"""
+    A = [list(r) for r in Hm]
+    n, m = len(A), len(A[0])
+    res = []
+    r = c = 0
+    while r < n and c < m:
+        piv = None
+        for i in range(r, n):
+            for j in range(c, m):
+                if A[i][j] and (piv is None or abs(A[i][j]) < abs(A[piv[0]][piv[1]])):
+                    piv = (i, j)
+        if piv is None:
+            break
+        i0, j0 = piv
+        A[r], A[i0] = A[i0], A[r]
+        for row in A:
+            row[c], row[j0] = row[j0], row[c]
+        again = True
+        while again:
+            again = False
+            for i in range(r + 1, n):
+                if A[i][c]:
+                    q = A[i][c] // A[r][c]
+                    for j in range(m):
+                        A[i][j] -= q * A[r][j]
+                    if A[i][c]:
+                        A[r], A[i] = A[i], A[r]
+                        again = True
+            for j in range(c + 1, m):
+                if A[r][j]:
+                    q = A[r][j] // A[r][c]
+                    for i in range(n):
+                        A[i][j] -= q * A[i][c]
+                    if A[r][j]:
+                        for i in range(n):
+                            A[i][c], A[i][j] = A[i][j], A[i][c]
+                        again = True
+        res.append(abs(A[r][c]))
+        r += 1
+        c += 1
+    return res + [0] * (m - len(res))
+
+
+def prime_support(n):
+    out, k = [], 2
+    while k * k <= n:
+        if n % k == 0:
+            out.append(k)
+            while n % k == 0:
+                n //= k
+        k += 1
+    if n > 1:
+        out.append(n)
+    return out
+
+
+def cmd_dead_quotients(quiet=False):
+    """A.6: the quotients that kill, read off FS-58's own qscreen records.  No new solving."""
+    per = {}
+    for f in sorted((ROOT / 'data' / 'fs58').glob('search-*/qscreen.jsonl')):
+        D = int(f.parent.name.split('-')[1])
+        for ln in f.read_text().splitlines():
+            if not ln.strip():
+                continue
+            r = json.loads(ln)
+            if 'colourable' not in r:                          # 'loop' rows: a generator lies in L, the quotient says nothing
+                continue
+            e = per.setdefault((D, r['pool']), {'tried': 0, 'colourable': []})
+            e['tried'] += 1
+            if r['colourable'] == 'SAT':
+                e['colourable'].append((r['order'], r['H']))
+    rows = []
+    for (D, pool), e in sorted(per.items()):
+        try:
+            C, names = FS.spec_classes(D, pool)
+            M, W = FS.pool_vectors(D, C, names)
+            Mc, H = canonicalise(M, W)
+            key, ti = key_of(Mc, H), Mc % 3 != 0
+        except Exception:
+            key, Mc, ti = None, None, None
+        best = min(e['colourable']) if e['colourable'] else None
+        row = {'key': f'{D}|{pool}', 'D': D, 'mod8': D % 8, 'pool': pool, 'lattice_key': key, 'M': Mc,
+               'three_integral': ti, 'quotients_tried': e['tried'], 'quotients_colourable': len(e['colourable']),
+               'dead': bool(e['colourable'])}
+        if best:
+            order, Hm = best
+            sn = [s for s in smith(Hm) if s != 1]
+            row.update({'min_order': order, 'min_H_diag': [Hm[i][i] for i in range(4)], 'smith': sn,
+                        'prime_support': prime_support(order)})
+        rows.append(row)
+    # Reconciliation with FS-58's own per-pool verdicts, and with its README's count, which is by DISTINCT LATTICE
+    # (decision C again): FS-58 reports "28 dead of 31 distinct lattices" from 32 non-bipartite lines.
+    recon = []
+    for f in sorted((ROOT / 'data' / 'fs58').glob('search-*/quotient-colourable.jsonl')):
+        D = int(f.parent.name.split('-')[1])
+        fs58 = {}
+        for ln in f.read_text().splitlines():
+            if ln.strip():
+                r = json.loads(ln)
+                fs58[r['key']] = r['verdict'].startswith('DEAD')
+        mine = {r['pool']: r['dead'] for r in rows if r['D'] == D}
+        shared = set(fs58) & set(mine)
+        disagree = [k for k in shared if fs58[k] != mine[k]]
+        bykey = {}
+        for pool, isdead in fs58.items():
+            r = next((x for x in rows if x['D'] == D and x['pool'] == pool), None)
+            if r and r['lattice_key']:
+                bykey.setdefault(r['lattice_key'], []).append(isdead)
+        recon.append({'D': D, 'fs58_pools': len(fs58), 'fs58_dead_pools': sum(fs58.values()),
+                      'distinct_lattices': len(bykey), 'distinct_dead': sum(1 for v in bykey.values() if any(v)),
+                      'compared': len(shared), 'disagreements': disagree})
+        for k in disagree:
+            defect(f'A.6 d={D} {k}: FS-58 says dead={fs58[k]}, the qscreen records say dead={mine[k]}')
+    out = FS61 / 'dead-quotients.jsonl'
+    if out.exists():
+        out.unlink()
+    for r in rows:
+        append(out, r)
+    dead = [r for r in rows if r['dead']]
+    by8 = {}
+    for r in rows:
+        k = (r['mod8'], bool(r['three_integral']))
+        s = by8.setdefault(k, [0, 0])
+        s[0] += 1
+        s[1] += r['dead']
+    sup = {}
+    for r in dead:
+        for p in r.get('prime_support', []):
+            sup[p] = sup.get(p, 0) + 1
+    ords = {}
+    for r in dead:
+        ords[r['min_order']] = ords.get(r['min_order'], 0) + 1
+    L = ['# FS-61 A.6 — which quotients kill a lattice, from FS-58\'s own `qscreen.jsonl` (no new solving)', '',
+         f'*Produced by `python3 tools/fs61_census.py dead-quotients`; records `data/fs61/dead-quotients.jsonl`.*', '',
+         'A lattice is **dead** when some finite quotient `Cay(Λ/L, S)` with no generator in `L` is 3-colourable with a',
+         'verified model: the colouring pulls back to a periodic 3-colouring of the whole Cayley graph, so no ball of',
+         'that lattice can ever refuse three colours (FS-58\'s necessary filter, plan D-Q).', '',
+         f'**{len(rows)} lattices screened over {len(set(r["D"] for r in rows))} fields; {len(dead)} dead.**', '',
+         '| field | 3-integral | screened | dead |', '|---|---|---|---|']
+    for (m8, ti), (n, k) in sorted(by8.items()):
+        L.append(f'| d ≡ {m8} (mod 8) | {"yes" if ti else "no"} | {n} | {k} |')
+    L += ['', '## The least-order killing quotient', '',
+          '| order | how many dead lattices have it as their smallest | ',
+          '|---|---|'] + [f'| {o} | {n} |' for o, n in sorted(ords.items())]
+    L += ['', f'Prime support of the killing orders: ' +
+          ', '.join(f'`{p}` in {n} of {len(dead)}' for p, n in sorted(sup.items())), '',
+          '| d | pool | M | 3-int | tried | colourable | least order | Smith form | primes |', '|---|---|---|---|---|---|---|---|---|']
+    for r in sorted(dead, key=lambda r: (r['D'], r.get('min_order', 0))):
+        L.append(f'| {r["D"]} | `{r["pool"]}` | {r["M"]} | {"yes" if r["three_integral"] else "no"} | '
+                 f'{r["quotients_tried"]} | {r["quotients_colourable"]} | {r["min_order"]} | '
+                 f'{"×".join(map(str, r["smith"])) or "trivial"} | {", ".join(map(str, r["prime_support"]))} |')
+    (FS61 / 'dead-quotients.md').write_text('\n'.join(L) + '\n')
+    if not quiet:
+        print(f'fs61 dead-quotients (A.6): {len(rows)} lattices screened over '
+              f'{sorted(set(r["D"] for r in rows))}; {len(dead)} dead', flush=True)
+        for D in sorted(set(r['D'] for r in rows)):
+            n = [r for r in rows if r['D'] == D]
+            print(f'  d={D:4d}: {sum(1 for r in n if r["dead"])} dead of {len(n)} screened', flush=True)
+        print(f'  least killing order: {dict(sorted(ords.items()))}', flush=True)
+        print(f'  prime support of those orders: {dict(sorted(sup.items()))}', flush=True)
+        for r in recon:
+            print(f'  reconcile d={r["D"]:4d}: FS-58 records {r["fs58_dead_pools"]} dead of {r["fs58_pools"]} pools = '
+                  f'{r["distinct_dead"]} dead of {r["distinct_lattices"]} DISTINCT lattices; '
+                  f'{r["compared"]} pools compared, {len(r["disagreements"])} disagreements', flush=True)
+        print(f'DONE dead-quotients -> {rel(FS61 / "dead-quotients.md")}, {rel(out)}', flush=True)
+    (FS61 / 'dead-quotients-reconcile.json').write_text(json.dumps(recon, indent=1) + '\n')
+    return rows
+
+
+# ================================================================ A.7 the rule behind the non-affine quotient colourings
+#
+# A solver's 3-colouring of Lambda/m*Lambda is one of many and hides the group that is really doing the work.  Theorem A's
+# shape (row 57) is a homomorphism rho : Lambda -> A onto a SMALL finite abelian group, a set T = rho(S) with 0 not in T,
+# and a proper 3-colouring of Cay(A, T); the kernel barrier (row 72) is the case A = F_3, T = F_3^x.  Rather than search
+# sublattices, take a verified colouring c of Lambda/m*Lambda and compute its PERIOD GROUP
+#       P = { t : c(x + t) = c(x) for every x },
+# which is exact and cheap.  Then A = (Lambda/m*Lambda)/P is the smallest quotient THAT colouring factors through, rho is
+# the projection, and c descends to Cay(A, rho(S)).  A_min over all colourings is at most this; one colouring already
+# exposes the group.
+def period_quotient(m, col):
+    """the period subgroup of a colouring of (Z/m)^4 given as a flat array of length m^4, and the invariant factors of
+    the quotient by it"""
+    import numpy as np
+    c = np.asarray(col, dtype=np.uint8).reshape(m, m, m, m)
+    periods = []
+    for t0 in range(m):
+        for t1 in range(m):
+            for t2 in range(m):
+                for t3 in range(m):
+                    if (t0 or t1 or t2 or t3) and np.array_equal(np.roll(c, (-t0, -t1, -t2, -t3), (0, 1, 2, 3)), c):
+                        periods.append((t0, t1, t2, t3))
+    L = [[m if i == j else 0 for j in range(4)] for i in range(4)] + [list(p) for p in periods]
+    inv = [s for s in smith(L) if s != 1]
+    return periods, inv, math.prod(inv) if inv else 1
+
+
+def colour_quotient(m, coords, wall=30.0):
+    """a verified proper 3-colouring of Cay((Z/m)^4, coords), or None"""
+    import numpy as np
+    from pysat.solvers import Cadical195
+    from fs58_chain import walled_solve
+    H = [[m if i == j else 0 for j in range(4)] for i in range(4)]
+    g = FS.quotient_graph(coords, H)
+    if g is None:
+        return None, 'a generator lies in m*Lambda'
+    n, E, _ = g
+    sv = Cadical195()
+    sv.append_formula([[3 * v + 1, 3 * v + 2, 3 * v + 3] for v in range(n)])
+    for c in range(3):
+        sv.append_formula(np.stack([-(3 * E[:, 0] + c + 1), -(3 * E[:, 1] + c + 1)], axis=1).tolist())
+    r, dt = walled_solve(sv, [1], wall)
+    if not r:
+        sv.delete()
+        return None, 'not 3-colourable' if r is False else 'unknown at the wall'
+    col = (np.array(sv.get_model()[:3 * n]).reshape(n, 3) > 0).argmax(axis=1).astype(np.uint8)
+    assert (col[E[:, 0]] != col[E[:, 1]]).all(), 'quotient model not proper'
+    sv.delete()
+    return col, None
+
+
+A7_NAMED = [(59, 'q1+q5+30.1+30.2'), (35, 'q1+q5+6+30'), (11, 'q1+6+30.2')]
+A7_MODULI = (3, 4, 6, 8, 9, 12)
+
+
+def cmd_minimal_quotient(nsample=4, quiet=False):
+    """A.7: expose the group behind each dead lattice's periodic 3-colouring, over a sweep of moduli.
+
+    WHAT IS AND IS NOT MEASURED (G21).  For each (lattice, m) this takes ONE solver colouring of Lambda/m*Lambda and
+    computes the minimal quotient THAT colouring factors through.  The true A_min, over all colourings and all m, is at
+    most what is reported: every order below is an UPPER bound on A_min, so "A_min is large" is not established by a
+    large reading, while "A_min is small" is established by a small one."""
+    out = FS61 / 'minimal-quotients.jsonl'
+    done = load_jsonl(out)
+    dead = [json.loads(l) for l in open(FS61 / 'dead-quotients.jsonl')] if (FS61 / 'dead-quotients.jsonl').exists() else []
+    sample = ([(r['D'], r['pool']) for r in dead if r['dead'] and r['D'] == 167][:nsample]
+              + [(r['D'], r['pool']) for r in dead if r['dead'] and r['D'] == 23][:nsample])
+    todo = list(A7_NAMED) + sample
+    print(f'fs61 minimal-quotient (A.7): {len(todo)} dead lattices x moduli {A7_MODULI}; for each, a verified '
+          f'3-colouring of Lambda/m*Lambda, its period group, and the quotient A it factors through', flush=True)
+    rows = []
+    for D, spec in todo:
+        C, names = FS.spec_classes(D, spec)
+        M, W = FS.pool_vectors(D, C, names)
+        Mc, Hl = canonicalise(M, W)
+        S = saturation(D, Mc, Hl)
+        B, coords, cov, mc = FS.reduce_pool(D, Mc, S)
+        best = None
+        for m in A7_MODULI:
+            key = f'{D}|{spec}|{m}'
+            if key in done:
+                rec = done[key]
+            else:
+                t0 = time.time()
+                col, why = colour_quotient(m, coords, wall=20.0)
+                if col is None:
+                    rec = {'key': key, 'D': D, 'spec': spec, 'm': m, 'colourable': False, 'why': why,
+                           'seconds': round(time.time() - t0, 1), 'machine': MACHINE, 'claim_scope': 'verified model'}
+                else:
+                    per, inv, order = period_quotient(m, col)
+                    p3 = 1
+                    for t in inv:
+                        while t % 3 == 0:
+                            p3 *= 3
+                            t //= 3
+                    rec = {'key': key, 'D': D, 'spec': spec, 'm': m, 'colourable': True, 'lattice_key': key_of(Mc, Hl),
+                           'three_integral': Mc % 3 != 0, 'generators': len(S), 'covolume': cov,
+                           'A_invariant_factors': inv, 'A_order': order, 'A_three_part': p3,
+                           'T_size': len({_coset(c, per, m) for c in coords}), 'periods': len(per) + 1,
+                           'seconds': round(time.time() - t0, 1), 'machine': MACHINE, 'claim_scope': 'verified model'}
+                append(out, rec)
+                done[key] = rec
+            if rec.get('colourable'):
+                if best is None or rec['A_order'] < best['A_order']:
+                    best = rec
+                if not quiet:
+                    print(f"  d={D:4d} {spec:22s} m={rec['m']:2d}: A = "
+                          f"{' x '.join('Z/' + str(t) for t in rec['A_invariant_factors']) or 'trivial'} "
+                          f"of order {rec['A_order']}, 3-part {rec['A_three_part']}, |T| = {rec['T_size']}", flush=True)
+        if best:
+            rows.append(best)
+    if rows:
+        orders = sorted(r['A_order'] for r in rows)
+        p3s = sorted(set(r['A_three_part'] for r in rows))
+        print(f'  smallest quotient found per lattice: {orders}', flush=True)
+        print(f'  their 3-parts: {p3s}', flush=True)
+        common = max(set(orders), key=orders.count)
+        print(f'  most common order {common}: {orders.count(common)} of {len(orders)} lattices '
+              f'({orders.count(common) / len(orders):.0%}) -- the gate asks for 90%', flush=True)
+    print(f'DONE minimal-quotient: {len(rows)} lattices -> {rel(out)}', flush=True)
+    return rows
+
+
+def _coset(c, periods, m):
+    """a canonical name for the coset of c modulo the period group (the least element of c + P)"""
+    best = tuple(x % m for x in c)
+    for p in periods:
+        t = tuple((c[i] + p[i]) % m for i in range(4))
+        if t < best:
+            best = t
+    return best
+
+
 def not_yet(name, phase):
     print(f'fs61 {name}: NOT IMPLEMENTED YET -- this subcommand is phase {phase} of plans/FS61-quadratic-census.md', flush=True)
     sys.exit(2)
@@ -1600,6 +1995,9 @@ def main():
     p.add_argument('--nmax', type=int, default=420); p.add_argument('--dmax', type=int, default=2000)
     p.add_argument('--check', action='store_true', help='cross-check against FS-58 classes() and the O6 sets')
     p.add_argument('--laws', action='store_true', help='test D-H.2 on every atlas row (A.3)')
+    sub.add_parser('witness-lattices', help="A.5: each certified witness's own lattice must not be Colourable")
+    sub.add_parser('dead-quotients', help="A.6: which quotients kill, from FS-58's qscreen records")
+    sub.add_parser('minimal-quotient', help='A.7: the group behind a dead lattice\'s periodic 3-colouring')
     for name, phase in (('land', 'C'), ('table', 'B')):
         sub.add_parser(name, help=f'NOT IMPLEMENTED YET (phase {phase})')
 
@@ -1615,6 +2013,12 @@ def main():
             bad = cmd_scan_reverify(a.d)
         else:
             _, bad = cmd_scan(a.d, a.tier, filter_off=a.filter_off, only_key=a.key, radii=a.radius, jobs=a.jobs, budget=a.budget)
+    elif a.cmd == 'witness-lattices':
+        bad = cmd_witness_lattices()
+    elif a.cmd == 'dead-quotients':
+        cmd_dead_quotients()
+    elif a.cmd == 'minimal-quotient':
+        cmd_minimal_quotient()
     elif a.cmd == 'status':
         cmd_status(a.d)
     elif a.cmd == 'selftest':
