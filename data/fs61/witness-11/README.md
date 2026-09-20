@@ -26,7 +26,7 @@ exit 1.
 | `certified.out` | the checker above | `CERTIFIED: 189 points of Q(sqrt11)^2, each a reduced (a, b, …` |
 | `controls.out` | `… --controls witness.json` | `CONTROLS ALL PASS` — 13 rows pass, 0 fail: the faithful twin certified, and each planted fault refused **for its named reason** |
 | `wrong-radicand.out` | `… --radicand 23 witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
-| `recheck.out` | `tools/fs58_recheck_witness.py 11 witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
+| `recheck.out` | `tools/fs58_recheck_witness.py 11 witness.json` | **the second opinion** — every pair re-tested in exact `Fraction` arithmetic and three solvers outside the generator's (Lingeling, CaDiCaL 1.5.3, MapleChrono) refusing it: RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse. Its last step is a separate, **minimality** question — does deleting the pinned vertex leave a 3-colouring — and it passes |
 | `colouring4.json` | — | an explicit proper **4**-colouring, verified on all 452 edges: four colours suffice for this graph, so it is exactly 4-chromatic |
 
 **The 3-adic barrier, as a check on the object.** 268 of the 452 edges have a direction with 3 in its

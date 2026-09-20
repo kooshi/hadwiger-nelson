@@ -22,8 +22,10 @@ ITEMS = [
      'controls.out', 'C.2 planted faults'),
     ('C.3', 'wrong radicand', 'python3 tools/fs58_check_witness.py --radicand $D2 data/fs61/witness-$D/witness.json',
      'wrong-radicand.out', 'C.3 wrong radicand'),
-    ('C.4', 'second opinion', 'python3 tools/fs58_recheck_witness.py $D data/fs61/witness-$D/witness.json',
-     'recheck.out', 'C.4 second opinion'),
+    ('C.4a', 'second opinion (steps i, ii)', 'python3 tools/fs58_recheck_witness.py $D data/fs61/witness-$D/witness.json',
+     'recheck.out', 'C.4a second opinion'),
+    ('C.4b', 'pinned-vertex criticality (step iii)', 'python3 tools/fs58_recheck_witness.py $D data/fs61/witness-$D/witness.json',
+     'recheck.out', 'C.4b pinned-vertex'),
     ('C.5', 'exactly four', 'python3 tools/fs61_census.py land $D   (step C.5)', 'colouring4.json', 'C.5 four colours'),
     ('C.6', 'the barrier is met', 'python3 tools/fs61_census.py land $D   (step C.6)', 'README.md', 'C.6 3-adic barrier'),
     ('C.7', 'the value', 'python3 tools/fs61_census.py land $D   (step C.7, from data/fs61/frame.jsonl)',
@@ -45,6 +47,13 @@ def cell(rec, key):
         return ('PASS', '—', f"`{s.get('value')}`, upper bound {s.get('upper_source')}")
     if key == 'C.9 minimality':
         return ('NOTE', '—', s.get('note', ''))
+    if key == 'C.4a second opinion':
+        return ('PASS' if s.get('ok') else 'FAIL', str(s.get('exit')),
+                f"step {s.get('step')} — {s.get('why', '')[:150]}")
+    if key == 'C.4b pinned-vertex':
+        v = 'PASS' if s.get('ok') else ('FAIL' if s.get('ok') is False else 'n/a')
+        need = 'REQUIRED (C.9 says 1-minimal)' if s.get('required') else 'recorded, not required (C.9 says not 1-minimal)'
+        return (v, '—', f"{need} — {s.get('why', '')[:120]}")
     line = (s.get('line') or '').replace('|', '\\|')
     secs = s.get('seconds')
     return ('PASS' if s.get('ok') else 'FAIL', str(s.get('exit')),

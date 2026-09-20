@@ -1339,6 +1339,38 @@ def selftest_land(rnd):
         msg = _repair_steps(good)
         rows.append(('PLANT (checkpoint): a truncated final record is dropped, loudly, and nothing else is',
                      msg is not None and good.read_bytes() == clean and _deletion_state(good) == (7, False), msg))
+    # --- C.4a / C.4b.  The inference under test is that the frozen second opinion is STRAIGHT-LINE, so its
+    #     step-(iii) message proves steps (i) and (ii) passed.  Every arm below is exercised, both outcomes of
+    #     each are reachable, and the wrong-reason guard is explicit: a step-(i) or step-(ii) failure must turn
+    #     C.4a red WHATEVER C.9 says, because those are failures of the second opinion itself.
+    SHA = RECHECK_TOOL_SHA256
+    L3 = 'RECHECK FAIL: deleting vertex 7 leaves a graph that still refuses (control expected a colouring)'
+    L2 = 'RECHECK FAIL: Lingeling finds a 3-colouring'
+    L1 = 'RECHECK FAIL: 2828 unit pairs by Fraction arithmetic against 2829 in the file'
+    LP = 'RECHECK PASS: 1004 points; 2829 unit pairs by Fraction arithmetic over all 503506 pairs = the file; …'
+    a, b = classify_recheck(LP, 0, 'no', SHA)
+    rows.append(('C.4a/C.4b: a RECHECK PASS passes both claims', a['ok'] and b['ok'] and not b['required'],
+                 f"4a {a['step']}, 4b required={b['required']}"))
+    a, b = classify_recheck(L3, 1, 'no', SHA)
+    rows.append(('C.4a is GREEN on the step-(iii) line: in that file it is reachable only after (i) and (ii)',
+                 a['ok'] is True and a['step'] == '(i)+(ii)', a['why']))
+    rows.append(('C.4b is RED and merely RECORDED when C.9 says the witness is not 1-minimal (the d=95 case)',
+                 b['ok'] is False and b['required'] is False, f"required={b['required']}"))
+    a, b = classify_recheck(L3, 1, 'yes', SHA)
+    rows.append(('PLANT (C.4b): the same line on a witness C.9 records as 1-minimal is REQUIRED, so it halts',
+                 a['ok'] is True and b['ok'] is False and b['required'] is True, f"required={b['required']}"))
+    for lab, ln, st in (('(ii), a solver finding a 3-colouring', L2, '(ii)'),
+                        ('(i), the exact edge re-derivation disagreeing', L1, '(i)')):
+        for m in ('no', 'yes'):
+            a, b = classify_recheck(ln, 1, m, SHA)
+            rows.append((f'PLANT (C.4a, wrong-reason guard): a failure at step {lab} turns C.4a RED with '
+                         f'C.9 = {m}', a['ok'] is False and a['step'] == st and b['ok'] is None, a['why']))
+    a, b = classify_recheck(L3, 1, 'no', '0' * 64)
+    rows.append(('PLANT (the inference is about ONE file): at a different sha256 the step-(iii) inference is '
+                 'REFUSED, not guessed', a['ok'] is False and a['step'] == 'refused' and b['ok'] is None, a['why']))
+    real = hashlib.sha256((ROOT / 'tools' / 'fs58_recheck_witness.py').read_bytes()).hexdigest()
+    rows.append(('the frozen second opinion on disk still has the sha256 the inference is stated for',
+                 real == SHA, f'{real[:16]}…'))
     # --- `Landed (certified)` reads the checker's VERDICT, not a file's existence.  Both outcomes reachable on the
     #     real data: a landed field and the same field with each half of the test spoiled in turn.
     landings = load_jsonl(FS61 / 'landings.jsonl')
@@ -2667,6 +2699,55 @@ def _minimality(w):
             'note': 'the generator recorded no deletion phase'}
 
 
+RECHECK_TOOL_SHA256 = '880f5bc48ef39b4ca18aa50535481156ab38e1977e88a7906b4682a24a819ed6'
+_R3 = re.compile(r'deleting vertex \d+ leaves a graph that still refuses|the control model is not proper')
+_R2 = re.compile(r'finds a 3-colouring')
+_R1 = re.compile(r'unit pairs by Fraction arithmetic against')
+
+
+def classify_recheck(line, exit_code, minimal, tool_sha):
+    """Split the frozen second opinion's ONE line into the two claims it actually carries (the owner's ruling 1
+    after phase C).  `tools/fs58_recheck_witness.py`, at sha256 880f5bc48ef39b4c..., is **straight-line**:
+
+      (i)   every pair of points in exact `Fraction` arithmetic equals the file's edge list, else FAIL and return;
+      (ii)  Lingeling, CaDiCaL 1.5.3 and MapleChrono each refuse three colours, else FAIL and return;
+      (iii) deleting the pinned edge's second vertex leaves a 3-colourable graph, else FAIL and return.
+
+    So the step-(iii) message is **reachable only after (i) and (ii) returned without failing** -- that is the whole
+    inference, and it is an inference about *that file at that hash*, so a different hash refuses it instead of
+    guessing.  (The phase-C record first said the opposite -- that at `d = 95` the second opinion was "not reached"
+    because the control "exits at the first failure".  It is the LAST step, not the first; the second opinion was
+    reached and passed, and only its PASS line was lost.  The owner caught it; an error against one's own work is
+    still an error in the record.)
+
+      C.4a = (i) + (ii), the second opinion proper.  **Required.**
+      C.4b = (iii), pinned-vertex criticality.  **Required iff C.9 records the witness 1-minimal**, else recorded;
+             a red C.4b on a 1-minimal witness is a defect in the generator or the recheck, and halts.
+
+    `minimal` is C.9's own word (`yes` / `no` / `unknown`).  Returns (C.4a, C.4b) records.
+    """
+    req = (minimal == 'yes')
+    if tool_sha != RECHECK_TOOL_SHA256:
+        why = (f'the frozen second opinion is at sha256 {tool_sha[:16]}..., not {RECHECK_TOOL_SHA256[:16]}...: '
+               f'the step-(iii) inference is about THAT file and is refused here')
+        return ({'ok': False, 'line': line[:200], 'exit': exit_code, 'step': 'refused', 'why': why},
+                {'ok': None, 'required': req, 'step': 'refused', 'why': why})
+    if exit_code == 0 and line.startswith('RECHECK PASS'):
+        return ({'ok': True, 'line': line[:200], 'exit': exit_code, 'step': '(i)+(ii)',
+                 'why': 'RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse'},
+                {'ok': True, 'required': req, 'step': '(iii)',
+                 'why': 'deleting the pinned vertex leaves a verified 3-colouring'})
+    if _R3.search(line):
+        return ({'ok': True, 'line': line[:200], 'exit': exit_code, 'step': '(i)+(ii)',
+                 'why': 'reached step (iii), which in this file is reachable only after (i) and (ii) passed'},
+                {'ok': False, 'required': req, 'step': '(iii)', 'why': line[:200]})
+    step = '(i)' if _R1.search(line) else '(ii)' if _R2.search(line) else 'unrecognised'
+    return ({'ok': False, 'line': line[:200], 'exit': exit_code, 'step': step,
+             'why': f'the second opinion itself failed at step {step}'},
+            {'ok': None, 'required': req, 'step': 'not reached',
+             'why': 'step (iii) never ran: the second opinion failed before it'})
+
+
 def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=GEN_CAP,
              direct_wall=DIRECT_WALL, ball_rank=0):
     """One field, FS-58's full certification path on its cheapest refusing ball."""
@@ -2737,7 +2818,7 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
         rec['generation'] = {'ok': True, 'passes': [], 'stopped': None,
                              'note': 'witness.json was already on disk; generation skipped (resume)'}
     w = json.loads((out / 'witness.json').read_text())
-    rec['minimality'] = _minimality(w)
+    rec['minimality'] = mn = _minimality(w)
     pts, edges = w['points'], w['edges']
     rec.update({'points': len(pts), 'edges': len(edges), 'pinned_edge': w['pinned_edge'],
                 'lcm_denominator': math.lcm(*[p[4] for p in pts]),
@@ -2766,8 +2847,24 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
               ('CONTROLS ALL PASS', True), 'controls.out', where='last')
     ok &= run('C.3 wrong radicand', CK + ['--radicand', str(D + 12), str(out / 'witness.json')], ('REFUSED', False),
               'wrong-radicand.out')
-    ok &= run('C.4 second opinion', [sys.executable, str(ROOT / 'tools' / 'fs58_recheck_witness.py'), str(D),
-                                     str(out / 'witness.json')], ('RECHECK PASS', True), 'recheck.out')
+    # C.4 is ONE command carrying TWO claims, scored separately since the owner's ruling 1 after phase C.
+    tool = ROOT / 'tools' / 'fs58_recheck_witness.py'
+    p4 = subprocess.run([sys.executable, str(tool), str(D), str(out / 'witness.json')],
+                        capture_output=True, text=True, cwd=str(ROOT))
+    (out / 'recheck.out').write_text(p4.stdout + p4.stderr)
+    line4 = (p4.stdout.strip().splitlines() or [''])[0]
+    a4, b4 = classify_recheck(line4, p4.returncode, mn['minimal'],
+                              hashlib.sha256(tool.read_bytes()).hexdigest())
+    a4['file'], a4['seconds'] = 'recheck.out', None
+    steps['C.4a second opinion'] = a4
+    steps['C.4b pinned-vertex'] = b4
+    ok &= bool(a4['ok'])
+    print(f"    {'C.4a second opinion':22s} exit {p4.returncode:2d}  {'PASS' if a4['ok'] else 'FAIL'}  {a4['why'][:96]}",
+          flush=True)
+    print(f"    {'C.4b pinned-vertex':22s}        "
+          f"{'PASS' if b4['ok'] else ('FAIL' if b4['ok'] is False else 'n/a ')}  "
+          f"{'required (C.9 says 1-minimal)' if b4['required'] else 'recorded, not required (C.9 says not 1-minimal)'}"
+          f" -- {b4['why'][:70]}", flush=True)
     col = four_colour(pts, edges)
     steps['C.5 four colours'] = {'ok': col is not None, 'colours': len(set(col)) if col else None}
     if col:
@@ -2794,11 +2891,12 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     # (at the translated origin) is tested last and a stopped deletion never reaches it: whether it is load-bearing
     # is then luck.  Measured 2026-09-20: pass at d = 359, 143, 23 with stopped deletions, fail at d = 95.
     why = None
-    if not steps['C.4 second opinion']['ok'] and 'still refuses (control expected a colouring)' in \
-            steps['C.4 second opinion']['line'] and mn['minimal'] == 'no':
-        why = (f'C.4 fails on its MINIMALITY control, not on the refutation: C.1 certified this witness and C.2 '
-               f'passed every plant. The deletion was stopped at {mn["stopped_at"]} of {mn["of_tests"]}, leaving the '
-               f'pinned vertex redundant. Resume with a larger --deletion-budget (the checkpoint is on disk).')
+    if b4['ok'] is False and mn['minimal'] == 'no':
+        why = (f'C.4b, the pinned-vertex MINIMALITY control, is red; C.4a -- the second opinion proper -- passed, '
+               f'and so did C.1 and every one of C.2\'s plants. The deletion was stopped at {mn["stopped_at"]} of '
+               f'{mn["of_tests"]}, leaving the pinned vertex redundant. A larger --deletion-budget CANNOT fix this: '
+               f'the frozen extract resumes a deletion at a stale scan position and so skips, and only a '
+               f'from-scratch run can be 1-minimal. Regenerate on a smaller ball: `land {D} --ball-rank <k>`.')
         print(f'    NOTE  {why}', flush=True)
     rec.update({'steps': steps, 'value': value, 'L': L, 'upper_source': src, 'diagnosis': why,
                 'result': 'CERTIFIED' if (ok and col and nb) else 'INCOMPLETE'})
@@ -2816,7 +2914,29 @@ def cmd_land(D, tid='1', quiet=False, deletion_budget=DELETION_BUDGET, gen_cap=G
     append(FS61 / 'witnesses.jsonl', man)
     print(f'  d={D}: {len(pts)} points, {len(edges)} edges -> {rec["result"]}; {value}; '
           f'{"1-minimal" if mn["minimal"] == "yes" else mn["minimal"]}', flush=True)
+    if b4['required'] and b4['ok'] is False:
+        # The owner's ruling: this HALTS.  The certificate is untouched (C.4a passed), so `result` stays
+        # CERTIFIED and the census is right; what is wrong is that two recorded facts about the same witness
+        # contradict each other -- C.9 says 1-minimal, step (iii) says the pinned vertex is redundant -- and a
+        # human has to decide which is lying.  So it is named, and the exit status is non-zero.
+        defect(f'land d={D}: C.4b is RED on a witness C.9 records as 1-minimal. The certificate stands (C.4a '
+               f'passed), but the generator and the recheck disagree about this object. HALT: {b4["why"]}')
+        return [D]
     return [] if rec['result'] == 'CERTIFIED' else [D]
+
+
+def _c4b_readme(rec):
+    """The README's one clause about the pinned-vertex control, which is a MINIMALITY question and not part of
+    the certificate (C.9's clause, the owner's ruling 4)."""
+    b = rec['steps'].get('C.4b pinned-vertex')
+    if b is None:
+        return 'this record predates the C.4a/C.4b split — re-run `land` on this field to score it'
+    if b.get('ok'):
+        return 'it passes'
+    if b.get('ok') is False:
+        return ('**it does not pass here** — this witness is not 1-minimal, which costs size and never soundness: '
+                'a refusing set refuses whether or not it is smallest')
+    return 'it was not reached'
 
 
 def _gate_caveat(rec):
@@ -2867,7 +2987,7 @@ exit 1.
 | `certified.out` | the checker above | `{rec['steps']['C.1 certificate']['line'][:60]}…` |
 | `controls.out` | `… --controls witness.json` | `{rec['steps']['C.2 planted faults']['line'][:40]}` — {rec['steps']['C.2 planted faults']['rows']['PASS']} rows pass, {rec['steps']['C.2 planted faults']['rows']['FAIL']} fail: the faithful twin certified, and each planted fault refused **for its named reason** |
 | `wrong-radicand.out` | `… --radicand {D + 12} witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
-| `recheck.out` | `tools/fs58_recheck_witness.py {D} witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
+| `recheck.out` | `tools/fs58_recheck_witness.py {D} witness.json` | **the second opinion** — every pair re-tested in exact `Fraction` arithmetic and three solvers outside the generator's (Lingeling, CaDiCaL 1.5.3, MapleChrono) refusing it: {(rec['steps'].get('C.4a second opinion') or {}).get('why', 'not scored on this record')[:90]}. Its last step is a separate, **minimality** question — does deleting the pinned vertex leave a 3-colouring — and {_c4b_readme(rec)} |
 | `colouring4.json` | — | an explicit proper **4**-colouring, verified on all {rec['edges']} edges: four colours suffice for this graph, so it is exactly 4-chromatic |
 
 **The 3-adic barrier, as a check on the object.** {n3} of the {rec['edges']} edges have a direction with 3 in its
@@ -2881,7 +3001,7 @@ here would be a defect in the search, not a discovery.
 **How it was found** — provenance, never evidence. A ball of radius {rec['R']} about the origin in the saturated
 lattice `{rec['spec']}` over `ℚ(√{D})` ({rec['ball_points']} points) was refused three colours by a solver, and that
 refusal was shrunk by `tools/fs58_search.py {rec['generator']}`. **{rec['minimality']['note'][0].upper() + rec['minimality']['note'][1:]}.**
-{'Minimality is not part of the claim and not part of the certificate — a refusing set refuses whether or not it is smallest.' if rec['minimality']['minimal'] != 'yes' else ''}
+{'Minimality is not part of the claim and not part of the certificate: **a witness that is not 1-minimal is not a weaker certificate** — a refusing set refuses whether or not it is smallest, and minimality buys size (the checker time, and the kernel cost of a later formalisation), never soundness.' if rec['minimality']['minimal'] != 'yes' else ''}
 None of this is part of the certificate either: the checker re-derives the graph from the coordinates alone.
 Regenerate with `./run-all.sh` (read its header first if the deletion was stopped).
 ''')
@@ -2897,12 +3017,15 @@ def write_witness_scripts(D, out, rec):
     elif (out / '.gitignore').exists():
         (out / '.gitignore').unlink()
     stop_note = ('' if mn['minimal'] != 'no' else f'''#
-# NOTE, and it is the honest caveat on "byte-identical": this witness's deletion was STOPPED at position
-# {mn["stopped_at"]} of {mn["of_tests"]}, so `--stop-deletion` below reproduces it only with the SAME steps.jsonl present
-# (it is gitignored -- provenance, not evidence).  From an empty directory the core rounds rerun deterministically
-# and `--stop-deletion` then stops at position 0, giving the larger core-round witness; drop the flag to run the
-# full deletion, which is deterministic too and yields a SMALLER 1-minimal witness (slow: at d = 359 the deletion
-# ran at 45 s a step).  Either way what the reviewer checks is `witness.json` + `witness.lrat.gz` as committed.''')
+# NOTE -- what "byte-identical" means here.  The pass condition is byte-identical witness.json from the
+# COMMITTED WITNESS DIRECTORY, and this witness's deletion was STOPPED at position {mn["stopped_at"]} of
+# {mn["of_tests"]}, so the gitignored steps.jsonl checkpoint is part of what makes that true: `--stop-deletion`
+# below reproduces this file only with that SAME checkpoint present.  What a rerun WITHOUT it produces, both
+# deterministic: with `--stop-deletion`, the core rounds rerun and the deletion stops at position 0, giving the
+# LARGER core-round witness; without the flag, the full deletion runs and gives a SMALLER 1-minimal one (slow --
+# at d = 359 it ran at 45 s a step).  A stopped deletion is never *finished* later: the frozen extract resumes at
+# a stale scan position and skips, so only a from-scratch run is 1-minimal.  And none of this is the evidence:
+# what a reviewer checks is `witness.json` + `witness.lrat.gz` AS COMMITTED, through the frozen checker.''')
     (out / 'run-all.sh').write_text(f'''#!/usr/bin/env bash
 # Regenerate {rel(out)} (FS-61 phase C).  The generator is deterministic.{stop_note}
 set -euo pipefail

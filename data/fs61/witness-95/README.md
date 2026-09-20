@@ -16,7 +16,7 @@ edge list in the file; (3) checks the pinned pair is a real edge; (4) builds the
 checks the LRAT proof against that CNF with its own checker. Output: `CERTIFIED` and exit 0, or `REFUSED <CODE>` and
 exit 1.
 
-**One gate item did not go green, and it is not about this certificate.** C.4 fails on its MINIMALITY control, not on the refutation: C.1 certified this witness and C.2 passed every plant. The deletion was stopped at 407 of 1737, leaving the pinned vertex redundant. Resume with a larger --deletion-budget (the checkpoint is on disk). The certificate above is unaffected: the frozen checker re-derives the graph from the coordinates and refutes it, and a refusing set refuses whether or not it is smallest.
+**One gate item did not go green, and it is not about this certificate.** C.4b, the pinned-vertex MINIMALITY control, is red; C.4a -- the second opinion proper -- passed, and so did C.1 and every one of C.2's plants. The deletion was stopped at 407 of 1737, leaving the pinned vertex redundant. A larger --deletion-budget CANNOT fix this: the frozen extract resumes a deletion at a stale scan position and so skips, and only a from-scratch run can be 1-minimal. Regenerate on a smaller ball: `land 95 --ball-rank <k>`. The certificate above is unaffected: the frozen checker re-derives the graph from the coordinates and refutes it, and a refusing set refuses whether or not it is smallest.
 
 **What is not claimed.** The matching **upper** bound is prior art, not ours: the residue plane at 7 ([Moorhouse2010] Thm 8.1) gives
 `χ(ℚ(√95)²) ≤ 4`. With it, **chi(Q(sqrt95)^2) = 4**. Nothing here proves the upper bound.
@@ -28,7 +28,7 @@ exit 1.
 | `certified.out` | the checker above | `CERTIFIED: 1004 points of Q(sqrt95)^2, each a reduced (a, b,…` |
 | `controls.out` | `… --controls witness.json` | `CONTROLS ALL PASS` — 13 rows pass, 0 fail: the faithful twin certified, and each planted fault refused **for its named reason** |
 | `wrong-radicand.out` | `… --radicand 107 witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
-| `recheck.out` | `tools/fs58_recheck_witness.py 95 witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
+| `recheck.out` | `tools/fs58_recheck_witness.py 95 witness.json` | **the second opinion** — every pair re-tested in exact `Fraction` arithmetic and three solvers outside the generator's (Lingeling, CaDiCaL 1.5.3, MapleChrono) refusing it: reached step (iii), which in this file is reachable only after (i) and (ii) passed. Its last step is a separate, **minimality** question — does deleting the pinned vertex leave a 3-colouring — and **it does not pass here** — this witness is not 1-minimal, which costs size and never soundness: a refusing set refuses whether or not it is smallest |
 | `colouring4.json` | — | an explicit proper **4**-colouring, verified on all 2829 edges: four colours suffice for this graph, so it is exactly 4-chromatic |
 
 **The 3-adic barrier, as a check on the object.** 2484 of the 2829 edges have a direction with 3 in its
@@ -42,6 +42,6 @@ here would be a defect in the search, not a discovery.
 **How it was found** — provenance, never evidence. A ball of radius 1.5 about the origin in the saturated
 lattice `q1+12+60.2` over `ℚ(√95)` (17169 points) was refused three colours by a solver, and that
 refusal was shrunk by `tools/fs58_search.py extract`. **Refusing but NOT 1-minimal: the deletion was stopped at position 407 of 1737.**
-Minimality is not part of the claim and not part of the certificate — a refusing set refuses whether or not it is smallest.
+Minimality is not part of the claim and not part of the certificate: **a witness that is not 1-minimal is not a weaker certificate** — a refusing set refuses whether or not it is smallest, and minimality buys size (the checker time, and the kernel cost of a later formalisation), never soundness.
 None of this is part of the certificate either: the checker re-derives the graph from the coordinates alone.
 Regenerate with `./run-all.sh` (read its header first if the deletion was stopped).

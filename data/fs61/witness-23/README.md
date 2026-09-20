@@ -26,7 +26,7 @@ exit 1.
 | `certified.out` | the checker above | `CERTIFIED: 573 points of Q(sqrt23)^2, each a reduced (a, b, …` |
 | `controls.out` | `… --controls witness.json` | `CONTROLS ALL PASS` — 13 rows pass, 0 fail: the faithful twin certified, and each planted fault refused **for its named reason** |
 | `wrong-radicand.out` | `… --radicand 35 witness.json` | `REFUSED`, exit 1 — the witness is about **this** field |
-| `recheck.out` | `tools/fs58_recheck_witness.py 23 witness.json` | every pair re-tested in exact `Fraction` arithmetic, and three solvers outside the generator's refuse it |
+| `recheck.out` | `tools/fs58_recheck_witness.py 23 witness.json` | **the second opinion** — every pair re-tested in exact `Fraction` arithmetic and three solvers outside the generator's (Lingeling, CaDiCaL 1.5.3, MapleChrono) refusing it: RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse. Its last step is a separate, **minimality** question — does deleting the pinned vertex leave a 3-colouring — and it passes |
 | `colouring4.json` | — | an explicit proper **4**-colouring, verified on all 1365 edges: four colours suffice for this graph, so it is exactly 4-chromatic |
 
 **The 3-adic barrier, as a check on the object.** 866 of the 1365 edges have a direction with 3 in its
@@ -40,6 +40,6 @@ here would be a defect in the search, not a discovery.
 **How it was found** — provenance, never evidence. A ball of radius 1.3 about the origin in the saturated
 lattice `q1+q5+12.1+60.2` over `ℚ(√23)` (248213 points) was refused three colours by a solver, and that
 refusal was shrunk by `tools/fs58_search.py extract`. **Refusing but NOT 1-minimal: the deletion was stopped at position 467 of 1280.**
-Minimality is not part of the claim and not part of the certificate — a refusing set refuses whether or not it is smallest.
+Minimality is not part of the claim and not part of the certificate: **a witness that is not 1-minimal is not a weaker certificate** — a refusing set refuses whether or not it is smallest, and minimality buys size (the checker time, and the kernel cost of a later formalisation), never soundness.
 None of this is part of the certificate either: the checker re-derives the graph from the coordinates alone.
 Regenerate with `./run-all.sh` (read its header first if the deletion was stopped).

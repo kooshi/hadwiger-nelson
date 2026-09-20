@@ -37,7 +37,7 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **59** | 3 | 4 | 30 | 30 | 29 (10/9/8/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 59 --tier 2` |
 | **71** | 7 | 4 | 12 | 12 | 50 (11/17/14/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **83** | 3 | 4 | 42 | 42 | 18 (6/4/6/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 83 --tier 2` |
-| **95** | 7 | 4 | 12 | 12 | 41 (10/11/14/6/0) | **11** / 7 / 3 | 1.0 … 1.2 | Refusal claimed | solver claim | 4 ≤ χ ≤ 4 | `python3 tools/fs61_census.py land 95` |
+| **95** | 7 | 4 | 12 | 12 | 41 (10/11/14/6/0) | **11** / 7 / 3 | 1.0 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **107** | 3 | 4 | 54 | 54 | 16 (6/4/6/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 107 --tier 2` |
 | **119** | 7 | 4 | 12 | 12 | 54 (9/15/22/7/1) | **11** / 11 / 3 | 1.0 … 1.2 | Landed (certified) | checker | 4 ≤ χ ≤ 4 | `` |
 | **131** | 3 | 4 | 30 | 30 | 22 (7/7/6/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 131 --tier 2` |
@@ -71,6 +71,6 @@ suffice — the conjecture predicts at least four for every row of this table.**
 | **479** | 7 | 5 | 36 | 36 | 9 (2/3/2/0/2) | **0** / 4 / 0 | – … – | Not landed at tier 1 | none | ≤ 5 | `python3 tools/fs61_census.py census-field 479 --tier 2` |
 | **491** | 3 | 4 | 50 | 102 | 4 (2/1/1/0/0) | **0** / 0 / 0 | – … – | Not landed at tier 1 | none | ≤ 4 | `python3 tools/fs61_census.py census-field 491 --tier 2` |
 
-**40 fields.** 8 Landed (certified); 31 Not landed at tier 1; 1 Refusal claimed.
+**40 fields.** 9 Landed (certified); 31 Not landed at tier 1.
 Balls on the census population (lattices the filter left open): 343 records, **124 asked**, 219 over cap, 20 unknown. Counting every record, including the balls phase 0's paired controls asked on already-certified lattices at d = 47: 395 records, 147 asked.
 
