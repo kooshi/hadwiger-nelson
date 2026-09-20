@@ -682,4 +682,77 @@ tried. A reader meets "`χ = 4`" → the `evidence` column and the value bracket
 
 ## §R Results
 
-*(empty until phase 0 reports)*
+*Written by the implementer as each phase closes. The phase records under `data/fs61/records/` are the evidence; this
+section is the index and the carry-forward. Current state only — a corrected claim replaces the claim.*
+
+### §R-0 — phase 0, the instrument (2026-09-19/20, closed; commits `a2ff5ec`, `5fb9984`)
+
+**8 of 8 gate items green.** Record with every command, artifact, output line and exit status:
+**`data/fs61/records/phase-0.md`**. The driver is `tools/fs61_census.py` (subcommands `lattices`, `filter`, `scan`,
+`status`, `selftest`, `regress {lattices,refusals,certificates,controls,untouched,all}`; `frame`, `atlas`, `land`,
+`table` exit 2 saying which phase owns them). `data/fs58/` and `tools/fs58_*.py` unmodified.
+
+| item | result |
+|---|---|
+| 0.1 | FS-58's **1,761** rank-4 records over 14 fields → **648** distinct lattices; key sets agree exactly, field by field. FS-58's depths confirmed from the records, not assumed: 180, with **300 at `d = 23`** and **420 at `d = 167`** |
+| 0.2 | the five refusing balls reproduce FS-58's point **and** edge counts exactly, all `Refused (solver claim)` |
+| 0.3 | six witnesses `CERTIFIED` (the gate's five plus `d = 11`), exit 0; wrong-radicand plant `REFUSED EDGE_NOT_UNIT`, exit 1 |
+| 0.4 | **zero refusals** over 1,350 balls at `d = 2, 5, 7, 13, 19, 31, 43`; every lattice over 2, 5, 13 bipartite; **3 refusals at `d = 47`** on the identical `--filter-off` command. Table: `data/fs61/controls.md` |
+| 0.5 | one lattice one key over 25 unimodular/permuted/sign-flipped bases; different lattices different keys |
+| 0.6 | the saturation recomputed from the canonical key is byte-identical to FS-58's `_saturate_one` on all 648 lattices — a two-implementation cross-check |
+| 0.7 | scan stopped mid-run by pgid and resumed: 18 records before, 24 after, **0 duplicates, 0 lost, 0 changed** |
+| 0.8 | `git status --porcelain data/fs58 tools/fs58_*` empty |
+
+**Twelve planted faults, every one executed and fired on its named clause** (`data/fs61/records/phase-0.md` §Plants).
+
+**Findings that change later phases.**
+
+1. **Gate 0.5's plant is unreachable as the plan words it.** The canonical key is a function of the lattice, and these
+   generating sets are closed under negation, so removing, doubling or mutating a **single** generator leaves the
+   ℤ-span fixed — confirmed by exhausting all 28 single-generator deletions of one lattice. A key comparison therefore
+   *cannot* detect an unsaturated or corrupted generator set; `lattice_record`'s explicit assertion and the
+   `generators_sha256` comparison do, and a third plant (a genuinely smaller lattice) shows the key comparison can fire
+   at all. **Proposed rewording of 0.5's plant** in §6, for the owner: *"a corrupted generator set must move
+   `generators_sha256` while leaving the key fixed; a genuinely different lattice must move the key."*
+2. **Decision C's cost, measured: 261 of the 648 lattices carry more than one class spec** — 40 % of FS-58's lattice
+   records are one lattice under another name.
+3. **The tier's odd-girth search is the whole cost of `lattices`: 1,648 CPU-s for `d = 11` against 1.8 s with it off**
+   (~900×; worst single lattice 6.9 s, 300 generators). Affordable for the census (of the order of an hour of wall time
+   over 40 fields) and it buys what FS-58's 20,000-point cap could not: lengths where FS-58 recorded only `None`. The
+   regression runs `--no-girth`, since it compares lattices and generators. Records carry `odd_girth.status` ∈
+   {`computed`, `bipartite`, `not asked`} and never a bare `null` — FS-58's O1 trap in one field.
+   *Deviation, toward more information:* FS-58's `odd_girth` has no length cap, so it can report `none_up_to` above the
+   tier's 15; `bfs_cap`, `explored` and `levels` are in every record.
+4. **The three-chromatic controls are a theorem-backed null, and cannot test the `Open` population.** Over
+   `d = 7, 19, 31, 43` **no lattice is `Open`**: `d ≡ 1 (mod 3)` means 3 divides no class denominator (D-H.2), so every
+   lattice is 3-integral and the kernel barrier gives it a form mod 3. The law was checked on **1,091 lattices at
+   twelve fields, 0 violations** — and its converse holds exactly too (`forms mod 3 > 0` **iff** `3 ∤ M`, on those 1,091
+   and on all 1,761 FS-58 rank-4 records), which is A.3's law met early. So the seven zeros say the instrument does not
+   invent refusals and say nothing about certificate-free lattices; `d = 47`'s 29 `Open` lattices and three refusals are
+   what covers that. **Worth adding to §6's 0.4 row** so the zeros are not read as stronger than they are.
+5. **`Unknown (budget)` has five self-certifying instances.** Twenty-six of 1,460 control balls hit the 600 s wall;
+   five are on **provably bipartite** lattices (an exact form mod 2 two-colours the whole infinite graph), against a
+   median colourable solve of 0.21 s and one coloured ball of 557,065 points. Rule 4 now has instances, not an argument.
+   *Phase-B improvement proposed, not made:* a lattice with a form mod 2 or 3 can have its ball colouring **constructed**
+   from the form (`form(x) mod p`), exact and instant, instead of searched.
+
+**Free carry-forward into later gates.** B.4's `d = 143` half is already met (`R = 1.5`, 283,485 points and `R = 1.8`,
+587,333 points, both `Refused`); A.8's point law is verified on seven recorded balls, worst error **2.24 %** against the
+15 % bound (`π²R⁴/covolume`, the bidisc); the 119 pricing witness regenerates **byte-identical** (`witness.json` sha256
+`f61526fc…`, LRAT `0ee2aceb…`), which is C.8's determinism claim met early.
+
+**My own defects, all repaired and recorded** (`phase-0.md` §The incident): a `timeout` wrapper on the controls run —
+a rule this project already holds — killed it at 50 minutes, costing only redo because every unit checkpoints; resume
+was keyed per lattice where the unit of work is per class spec (40 % rebuilt every run; after the fix a second
+`lattices 119` costs 0.0 s against 29.9 s); and an int/str key comparison stopped finished fields being skipped, found
+twice, the second time only by re-running every gate command at the end and reading the **counts** — both runs exited 0
+and only the number moved.
+
+**Cost.** Desktop (16 physical cores), 16 workers, one heavy job at a time: `regress lattices` 6.6 s;
+`regress refusals` 299 s; `regress certificates` 2.6 s; gate 0.7's scan 608 s; `regress controls` 2,559 s (plus ~2,600 s
+lost to the incident); `selftest` 1.1 s; `lattices --tier 1` 115 s wall / 1,648 s CPU at `d = 11`.
+
+**State on disk for phase A/B.** Tier-1 lattice records exist for `d = 2, 5, 7, 11, 13, 19, 23, 31, 43, 47, 119, 143`
+and FS-58-depth regression records for the 14 fields; ball records for the eight control fields and for 143; models are
+kept under `data/fs61/fields/<d>/models/` and gitignored (12 MB), with `model_sha256` in every record and
+`scan <d> --reverify` re-checking a sample against the full exact edge set (exercised: 12 of 111 at `d = 7`, 0 failures).
