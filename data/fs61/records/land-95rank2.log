@@ -1,0 +1,6 @@
+fs61 land d=95: cheapest refusing ball 6997 points at R=1.2 on q1+12+60.2 (refused in 32.07 s; cost proxy 227892); direct-witness
+    stopping the generator (pid 1957714): direct-witness wall 900 s spent with nothing on disk
+    stopped: pid 1957714 reaped with exit -15 (a reaped child cannot write); generate.out digest static across 5 s
+    generation pass "direct-witness (whole, under its wall)": 905 s, exit -15 -- direct-witness wall 900 s spent with nothing on disk
+    direct-witness hit its 900 s wall with nothing on disk; extract took over on the same ball
+setsid: child 1957710 did not exit normally: Success

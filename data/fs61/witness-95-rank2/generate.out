@@ -1,0 +1,10 @@
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py direct-witness 95 q1+12+60.2 1.2 /home/kooshi/source/lean-dir/data/fs61/witness-95-rank2
+[fs61] generator stopped: direct-witness wall 900 s spent with nothing on disk; pid 1957714 reaped with exit -15 (a reaped child cannot write); generate.out digest static across 5 s
+
+$ /usr/bin/python3 /home/kooshi/source/lean-dir/tools/fs58_search.py extract 95 q1+12+60.2 1.2 /home/kooshi/source/lean-dir/data/fs61/witness-95-rank2
+extract D=95 pool q1+12+60.2 ball 1.2: 6997 points, 23246 edges (0.0 s)
+  core round 0: 6997 -> 3308 points (97.4 s)
+  core round 1: 3308 -> 2958 points (77.0 s)
+  core round 2: 2958 -> 2808 points (96.7 s)
+  core round 3: 2808 -> 2735 points (91.3 s)

@@ -31,8 +31,8 @@ fs61 selftest: 7 sections (keys, saturation, outdir, barrier, predicted, atlas, 
     PASS  the inverted enumeration agrees with the brute force on D(12)  --  [23, 47, 71, 95, 119, 143]
   [land]
     [fs61] steps.jsonl: dropped a truncated final record of 38 bytes, written as the generator was stopped
-    stopping the generator (pid 1932289): selftest
-    stopped: pid 1932289 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    stopping the generator (pid 1978769): selftest
+    stopped: pid 1978769 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
     PASS  C.9 the minimality reader says `yes` on FS-58's direct-witness provenance  --  1-minimal: deleting any single vertex leaves a 3-colourable graph
     PASS  PLANT (C.9): FS-58's own stopped-deletion provenance (witness-95) is NOT reported as minimal  --  refusing but NOT 1-minimal: the deletion was stopped at position 363 of 1737
     PASS  C.9 an absent deletion phase reads `unknown`, never `yes`  --  the generator recorded no deletion phase
@@ -43,9 +43,19 @@ fs61 selftest: 7 sections (keys, saturation, outdir, barrier, predicted, atlas, 
     PASS  the checkpoint repair leaves an intact steps.jsonl alone  --  69 bytes, unchanged
     PASS  the deletion state is read back from an intact checkpoint  --  (7, False)
     PASS  PLANT (checkpoint): a truncated final record is dropped, loudly, and nothing else is  --  steps.jsonl: dropped a truncated final record of 38 bytes, written as the generator was stopped
-    PASS  the landed set is read from the landing records and the checker's own first line  --  8 of 9 fields landed: [359, 11, 119, 143, 47, 191, 71, 23]
+    PASS  C.4a/C.4b: a RECHECK PASS passes both claims  --  4a (i)+(ii), 4b required=False
+    PASS  C.4a is GREEN on the step-(iii) line: in that file it is reachable only after (i) and (ii)  --  reached step (iii), which in this file is reachable only after (i) and (ii) passed
+    PASS  C.4b is RED and merely RECORDED when C.9 says the witness is not 1-minimal (the d=95 case)  --  required=False
+    PASS  PLANT (C.4b): the same line on a witness C.9 records as 1-minimal is REQUIRED, so it halts  --  required=True
+    PASS  PLANT (C.4a, wrong-reason guard): a failure at step (ii), a solver finding a 3-colouring turns C.4a RED with C.9 = no  --  the second opinion itself failed at step (ii)
+    PASS  PLANT (C.4a, wrong-reason guard): a failure at step (ii), a solver finding a 3-colouring turns C.4a RED with C.9 = yes  --  the second opinion itself failed at step (ii)
+    PASS  PLANT (C.4a, wrong-reason guard): a failure at step (i), the exact edge re-derivation disagreeing turns C.4a RED with C.9 = no  --  the second opinion itself failed at step (i)
+    PASS  PLANT (C.4a, wrong-reason guard): a failure at step (i), the exact edge re-derivation disagreeing turns C.4a RED with C.9 = yes  --  the second opinion itself failed at step (i)
+    PASS  PLANT (the inference is about ONE file): at a different sha256 the step-(iii) inference is REFUSED, not guessed  --  the frozen second opinion is at sha256 0000000000000000..., not 880f5bc48ef39b4c...: the step-(iii) inference is about THAT file and is refused here
+    PASS  the frozen second opinion on disk still has the sha256 the inference is stated for  --  880f5bc48ef39b4c…
+    PASS  the landed set is read from the landing records and the checker's own first line  --  9 of 9 fields landed: [359, 11, 119, 143, 47, 95, 191, 71, 23]
     PASS  PLANT (landing): d=359 with its landing record result mangled is NOT landed  --  a record that does not say CERTIFIED cannot promote a field
     PASS  the stop verification CAN fire: a live writer's artifact digest moves across the sample  --  digest changed while the child was still running
-    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 1932289 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
+    PASS  PLANT resolved: the same child stopped BY PID is reaped and its artifact goes static  --  pid 1978769 reaped with exit -15 (a reaped child cannot write); steps.jsonl digest static across 5 s
 DONE selftest: 7 sections, 0 failures
 [selftest: 8.2 s wall on desktop]

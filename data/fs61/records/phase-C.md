@@ -432,6 +432,48 @@ STOP RULE   it is optional value, not a gate item.  If it is still running after
             pid, with cause, measurement and forfeit written HERE first, and reported as not landed.
 ```
 
+### Outcome: NOT LANDED, stopped at 1,470 s by its own stop rule — and the reason is a finding
+
+**What happened, in order.** `direct-witness` ran 905 s on the 6,997-point ball and hit its 900 s wall **with nothing
+on disk** — the first time the wall has fired in production, and it did exactly what it is for: the generator was
+stopped **by pid** (reaped, `generate.out` digest static across 5 s) and the checkpointed `extract` took over the same
+ball. `extract`'s stage 1 then ran four assumption-core rounds:
+
+```
+  core round 0: 6997 -> 3308 points (97.4 s)
+  core round 1: 3308 -> 2958 points ( 77.0 s)
+  core round 2: 2958 -> 2808 points ( 96.7 s)
+  core round 3: 2808 -> 2735 points ( 91.3 s)
+```
+
+**The measurement that decides it.** The round deltas are 3,689 → 350 → 150 → 73 at ~90 s a round: a slow tail, and
+FS-58 needed **72 rounds** to reach its fixpoint on this field's other ball. So stage 1 alone is an hour or more, and
+stage 1 **cannot be stopped usefully** — the frozen tool offers no way to halt it, and its intermediate state (2,735
+points and falling) is *larger* than the standing witness's 1,004. After it, the deletion would run under the same
+600 s budget and be stopped in its turn, so the object this run exists to produce — a **from-scratch 1-minimal**
+witness — is not reachable on this ball either.
+
+**So the nicety is declined on a measurement, not on a budget.** At `d = 95` the expensive population is the
+deletion solve, on every ball: the standing witness's ball gave ~87 s a test after 400 tests, and this one costs
+~90 s per *core round* before deletion even starts. Making 95 1-minimal is priced in hours on the two balls tried,
+and the field is `Landed (certified)` without it.
+
+**What the kill forfeits, named:** a witness at 95 that might have been smaller than 1,004 points (not 1-minimal —
+that part is ruled out above), and the unmeasured chance that the core fixpoint here is small enough for a cheap
+full deletion. Neither is worth an hour of the machine on an explicitly optional item, and neither is lost
+permanently: `data/fs61/witness-95-rank2/steps.jsonl` holds the four rounds, and **re-running the identical command
+resumes from them**.
+
+**Verified by effect:** the process group signalled by pgid, both pids absent from `ps`, and
+`witness-95-rank2/generate.out` byte-identical across 65 s (the core rounds are ~90 s apart, so a shorter check
+would prove nothing). No `witness.json` was produced, so no landing record and no manifest line exist for
+`95#rank2`; `data/fs61/witness-95/` is untouched and still `a72fbb80d5f5ff8f…`.
+
+**If the owner wants it after all**, the honest command is not this one: it is
+`land 95 --ball-rank 2 --deletion-budget <hours>` *after* the core rounds have reached their fixpoint, and the first
+thing to measure is that fixpoint's size — the resume above gets there for the price of the rounds already done.
+
+
 ## Machine, cost, and what a resume looks like now
 
 **Machine:** the desktop (16 physical cores / 32 threads, 128 GB), idle, **one heavy job at a
