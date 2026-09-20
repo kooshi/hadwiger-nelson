@@ -31,3 +31,23 @@ FS-58 put `χ(ℚ(√11)²) ≥ 4` in the kernel (32.8 CPU seconds, standard thr
 * **Not a failure:** a field whose LRAT is too large for the kernel pattern at this size — report the price.
 
 **Bearing on χ(ℝ²) ≥ 6:** none; it moves six field values from the checker's word to the kernel's.
+
+## What FS-61 added (2026-09-20) — the input set, and four things to know
+
+FS-61 (the census of real quadratic fields, `plans/FS61-quadratic-census.md`, ledger row 74) certified more fields in FS-58's own
+`witness.json` + `witness.lrat.gz` format, under the same frozen checker. The manifest is **`data/fs61/witnesses.jsonl`** (sizes,
+hashes, minimality, deletion state); the state of each field is `data/fs61/census.md`; every witness also passed the owner's
+decorrelated recheck (`data/fs61/owner/recheck-all.out`, a sha256 per file).
+
+1. **The certificate type should be parametric in `d`.** All the witnesses share one format and one checker; the fields are
+   `d = 11, 23, 47, 59, 71, 95, 119, 143, 191, 311, 335, 359, 431` (and 239 if `census.md` shows it landed). Upper halves are the
+   dyadic bound at `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 10(i) — *not* Thm 9, corrected 2026-09-20) and the residue planes at 7 and 11.
+2. **Sizes run from 131 to 1,739 points and the variation is the deletion budget, not the field.** Seven are 1-minimal (11, 47, 71,
+   119, 191, 311, 335): formalise those first. A witness that is not 1-minimal is not a weaker certificate; it is a heavier one.
+3. **Certificate weight is a cliff**: 1,004 points → 19 MB of gzipped LRAT, 1,739 (`d = 59`) → 39.7 MB. `d = 95` is the expensive
+   field to shrink (core rounds ~90 s with a slow tail on every ball tried), and a stopped deletion can never be finished later —
+   the frozen `extract` resumes at a stale scan position — so shrinking means a from-scratch run on another ball.
+4. **`d = 11` has a 189-point direct-route witness** (`data/fs61/witness-11/`) beside the 204-point chain witness the kernel already
+   holds (`Instances/SqrtEleven.lean`). They are different graphs; the direct one's provenance is a single ball and it may be the
+   easier object for a generic certificate type.
+

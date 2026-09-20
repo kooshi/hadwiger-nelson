@@ -29,6 +29,12 @@ is the single most valuable negative available to this project. Run it to find o
   saturated lattice of covolume `≥ 10⁻⁵` has an odd cycle within a 20,000-point cap; the coarse lattices with 7-cycles are 3-integral
   (3-colourable by the barrier). The quotient filter (a lattice with a 3-colourable finite quotient never refuses) kills 28 of 31
   candidates; of the three live, one is 3-colourable to 3,065,169 points, two are `Unknown` at 1,800 s (2.36M, 4.46M points).
+* **`[Fischer1990]` singled this field out in 1990** (his Example 4, re-read 2026-09-20): 167 is the first `N ≡ −1 (mod 24)` that is also `≡ 6 (mod 7)`;
+  with the unit vector `(83 + i√167)/84` he gets `1/2, 1/3, 1/7` in the unit-vector ring and concludes that ℚ(√167)² has **no additive `k`-colouring for
+  `k < 11`** — *"even though the plane … can be 7-colored since ℝ² can, it has no additive 7-coloring."* That is the upper-bound side of this stub seen
+  thirty-six years early: no additive (linear) colouring can bound this field below 11, so any ceiling under 7 must be non-additive (FS-64, FS-66).
+* **FS-61's census (closed 2026-09-20) asked 167 under the same rules as thirty-nine other fields**: `data/fs61/aiming-167.md` lists its sixteen `Open` lattices at
+  depth 420 with covolumes and the best degree each reaches under a 2,000,000-point cap (one reaches 8; it was asked at degree 14 and coloured in 3.66 s).
 * **Periodic colourings of 3-integral pools are affine** (FS-58 R-B1) and tensor products of the 3-adic plane with non-3-colourable
   residue planes are rigid (§0 O7): the rigidity that made ℚ(√11) land is present; what ℚ(√167) lacks at low height is short odd cycles
   through coarse, 3-non-integral structure.
