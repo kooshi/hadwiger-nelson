@@ -1451,10 +1451,18 @@ def selftest_ladder(rnd):
     clause is shown able to go RED, on fixtures built from the real records and never written back."""
     rows = []
     # (0) a standing control: tier 1's and tier 2's definitions are what the committed records were stamped against.
+    #     The count is computed, never written down: a number in a check's message drifts, and a check whose message
+    #     names a wrong number is this project's own failure mode (mine, 2026-09-20 -- it said 343, a figure from a
+    #     different population, where the true count over every field is 1,745).
+    stamped = collections.Counter()
+    for D in FAMILY_500 + [2, 5, 7, 13, 19, 31, 43]:
+        for ln in (field_dir(D) / 'balls.jsonl').read_bytes().split(b'\n') if (field_dir(D) / 'balls.jsonl').exists() else []:
+            if ln.strip():
+                stamped[json.loads(ln).get('tier_sha256')] += 1
     for t, sha in sorted(TIER_SHA_AT_MINT.items()):
         got = tier_def(t)['_sha256']
-        rows.append((f'tier {t}\'s definition is unmoved -- 343 committed ball records carry its _sha256', got == sha,
-                     f'{got} (minted {sha})'))
+        rows.append((f'tier {t}\'s definition is unmoved -- every committed ball record stamped with it depends on that',
+                     got == sha, f'{got} (minted {sha}); {stamped.get(sha, 0)} ball records carry it'))
     D, tid = 23, '1b'
     tier = tier_def(tid)
     cap = tier['point_cap']

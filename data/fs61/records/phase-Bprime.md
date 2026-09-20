@@ -16,7 +16,7 @@ of the points, at radius 1.0 holds 0.20. Phase B′ walks that ladder down under
 600-second solver wall. Every refusal anywhere on record sits at a radius between 1.0 and 1.5, so this is the same
 question asked lower down, not a different one. **Tier 1's definition, records and verdicts do not move**: tier `1b` is
 a new id in `data/fs61/tiers.json`, and a standing check in `selftest` asserts that tier 1's fingerprint
-(`7a520f29e32724da`, which 343 committed ball records carry) has not changed.
+(`7a520f29e32724da`, which 1,745 committed ball records carry) has not changed.
 
 ## The launch — written before anything ran (plan §5 rules 1 and 3)
 
@@ -320,7 +320,7 @@ seen to pass. They are the `ladder` section of `selftest` (23 rows, run in 0.04 
 | an open lattice with only an `Over cap` record, offered as asked | `by budget: 2 Open lattices, none askable` | the null language, the other way |
 | a repair of a partial line against a **stale** length, after a writer appended two records | `34 -> 48 bytes, all 4 lines intact; unguarded it would truncate to 24 bytes and lose the last two records` | **data loss**: a read must not destroy records |
 | a field refusing for the first time, offered to the hardcoded phase-C order | `[359, 11, 119, 143, 47, 95, 191, 71, 23, 239]` | a new landing is appended, never skipped |
-| tier 1's or tier 2's definition altered | standing row: `7a520f29e32724da (minted 7a520f29e32724da)` | **tier 1 does not move**, and 343 committed records depend on that |
+| tier 1's or tier 2's definition altered | standing row: `7a520f29e32724da (minted 7a520f29e32724da)` | **tier 1 does not move**, and 1,745 committed ball records depend on that |
 
 And one plant that fired on the real data rather than a fixture: `table --check` against a snapshot taken mid-run
 named **62 incomplete ladders**, one line per lattice.
@@ -388,3 +388,16 @@ This repository's rule already covers it — *never let a pattern that can match
 is an inflated number that reads like a surviving job, which is the safe direction but is still a check reporting
 about the wrong thing. The verification that stands is the one in the section above: a walk of `/proc` matching on
 `comm` and `cmdline` while excluding the checker's own pid and its parent, which returned **NONE**.
+
+## A fourth defect of my own: a check that named a number I had not checked
+
+The standing control that tier 1's definition has not moved carried, in its own message, *"343 committed ball
+records carry its `_sha256`"*. **The true count is 1,745.** 343 was phase B's count of ball records over the forty
+*census* fields; the fingerprint is carried by every ball record at every field, including the seven control
+fields and every radius. The check itself was correct throughout — it compares the fingerprint — but its message
+asserted a figure from a different population, which is this repository's own most-repeated error appearing inside
+the very row that guards against drift.
+
+**Repaired by removing the number from the source**: the control now counts the stamped records itself and prints
+`1745 ball records carry it`, so the message cannot go stale. A number written into a check's message is a claim
+the check does not verify.
