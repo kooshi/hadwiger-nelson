@@ -46,17 +46,19 @@
   }
   ,
   "1c": {
-    "name": "tier 1c (the long wall)",
-    "defined": "2026-09-20, plans/FS61-quadratic-census.md, the owner's re-plan after phase B', ruling 3, item E.1a",
-    "deepens": "1b",
-    "scope": "every ball a tier-1b record left `Unknown (budget)` at a census field with no certified witness -- the SAME lattice, the SAME radius, the SAME point cap and the SAME symmetry break. Only the solver's wall changes, from 600 s to 3600 s. This tier creates no lattice record and no filter record and asks no ball nobody has asked before; its records shadow the tier-1b records they re-ask, which stay on disk as the history.",
-    "not_in_scope": "the tier-1 `Unknown` records -- every one of them is at a field already landed -- and the tier-1 `Unknown` records at the seven control fields, whose planes are 2- or 3-colourable by theorem: an `Unknown` is not a near-refusal.",
-    "nmax": 180,
-    "lattices": "tier 1's lattices, unchanged; this tier creates no lattice record",
-    "reask": {"of_tier": "1b", "verdict": "Unknown (budget)", "fields": "census fields with no certified witness"},
-    "radii": [],
-    "point_cap": 600000,
-    "solve_wall": 3600
+      "name": "tier 1c (the degree-targeted ask)",
+      "defined": "2026-09-20, the owner's revision of E.1a, on his measurement that what separates a decided ball from an undecided one is its AVERAGE DEGREE and not its size. Minted and then redefined the same hour, before any record carried it: the first definition re-asked tier 1b's undecided balls at a longer wall, and six of those fourteen sat at average degree 5.51, below the 6.595 at which any ball has ever refused.",
+      "deepens": "1b",
+      "scope": "every rank-4 lattice whose state is `Open` or `Refused` at a census field with no certified witness -- one uniform rule over all 31 such fields, 167 included under it like every other. A lattice's ask is decided by the degree rule below and not by which radii an earlier tier happened to reach.",
+      "nmax": 180,
+      "lattices": "tier 1's lattices, unchanged; this tier creates no lattice record",
+      "degree_law": "a ball of radius R on a lattice holding g unit vectors has predicted average degree g*phi(R)^2, where phi(R) = [2R^2*acos(1/(2R)) - sqrt(4R^2-1)/2] / (pi*R^2) is the area fraction a radius-R disc shares with its unit translate, squared because a ball here is a bidisc -- one disc per real embedding. Control over the 734 asked ball records carrying points and edges: observed/predicted has median 1.0000 and range 0.715-1.184, with 0 outside +-30%.",
+      "target_degree": 14,
+      "floor_degree": 8,
+      "radius_rule": "ask ONE ball per lattice. Arm `R14`: the radius where the predicted degree is 14, if its predicted points fit the point cap -- 43 of 43 recorded balls of at least 200,000 points at degree >= 14 decided, none undecided. Arm `Rcap`: otherwise the largest radius whose predicted points fit the cap, provided its predicted degree is at least the floor of 8. Arm `overcap`: otherwise no ask, and the record carries the predicted degree at the cap, which is the honest answer to `what would deepen this row`. A lattice already DECIDED at a radius at or above the rule's target is not re-asked, and its record says so.",
+      "radii": [],
+      "point_cap": 2000000,
+      "solve_wall": 1800
   },
   "2l": {
     "name": "tier 2l (deeper lattices, the same cap)",

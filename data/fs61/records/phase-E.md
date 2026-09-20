@@ -118,3 +118,52 @@ tier 1b, on a ball of the same shape and size.
 ### Result
 
 *(filled in below when the run lands)*
+
+### The tier-1c run as first launched was STOPPED, 7 m 38 s in — cause, measurement and forfeit, written before the signal
+
+**Cause.** The owner re-planned E.1a an hour after briefing me, on a measurement of his own: across every asked ball
+record, what separates a decided ball from an undecided one is not its size but its **average degree**, `2·edges /
+points`. I re-derived it independently before acting on it (below) and it holds. The ask I had launched — the same
+fourteen balls at six times the wall — is aimed at the wrong quantity, and for six of its fourteen units the
+informative outcome is **unreachable**.
+
+**Measurement** (mine, from `data/fs61/fields/*/balls.jsonl`, 734 asked ball records carrying both a point count and
+an edge count, over the forty census fields and the seven control fields):
+
+| average degree | Colourable | Unknown | Refused |
+|---|---|---|---|
+| < 4 | 87 | 0 | 0 |
+| 4–6 | 183 | **39** | 0 |
+| 6–8 | 106 | 14 | 3 |
+| 8–10 | 112 | 11 | 6 |
+| 10–14 | 68 | 6 | 13 |
+| 14–20 | 44 | **0** | 15 |
+| ≥ 20 | 20 | **0** | 7 |
+
+**The lowest average degree at which any ball has ever refused is 6.595** (`d = 119`, `L8a8b1603`, `R = 1.2`), over
+44 refusing balls. The 70 `Unknown` balls have median degree **5.52** and lie in 4.70–12.27. Restricted to balls of
+≥ 200,000 points, **43 are at degree ≥ 14 and every one decided** (28 colourable, 15 refused, **0 undecided**), the
+slowest in **259 s** — my figure; the owner's brief says 239 s, and the difference is a population difference I have
+not chased, so both are recorded rather than one being adopted.
+
+**The fourteen balls the run was asking, at their average degree** — the number that decided this:
+
+```
+  degree 5.51  x6   (d = 131, 287, 311, 407, 431, 479; all on 36-generator lattices at R = 1.0)
+  degree 7.95, 7.96, 8.47, 8.49, 9.16, 10.38, 11.62, 12.24   (the other eight)
+  median 7.96, range 5.51-12.24
+```
+
+**Six of the fourteen sit at degree 5.51, below the 6.595 floor: no ball at that degree has ever refused, anywhere
+in 734.** Six of fourteen workers were therefore asking a question whose informative outcome has never once been
+observed — which is this repository's own rule broken in the direction that looks like diligence, and it was my
+launch. The other eight would be asked at a higher radius under the revised rule.
+
+**Forfeit.** 7 m 38 s × 14 workers ≈ **1.8 core-hours**, and **no results**: `grep -c '"tier":"1c"'` over every
+`balls.jsonl` reads **0**, so not one record was written and tier `1c`'s definition is not yet fixed by any record.
+What is genuinely forfeited is a measurement nobody else will make: *do the hard-band balls (degree ≈ 5.5) decide if
+you give the solver six times as long?* B′'s reading — "the binding constraint is the solver" — was drawn from that
+population, and this run would have tested it directly. **It is offered back to the owner as a cheap optional
+control (one ball, not fourteen), not smuggled back into the plan.**
+
+**The stop.** By PID, never by matching a command line; verified by effect.
