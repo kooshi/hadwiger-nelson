@@ -45,6 +45,77 @@ is the single most valuable negative available to this project. Run it to find o
 * **R4 — the theory:** is the infinite 3-integral graph rigid at three colours (FS-58 D3.5: a finite forcer exists iff it is)? A proof
   would settle ℚ(√167) without a search.
 
+## 3a. Traverse, don't search — four instruments recorded 2026-09-20 (from a conversation with Kooshi during FS-61)
+
+*Kooshi's question: balls with colourings decide quickly; is there a cliff between three-colourable and not, and can the search be
+turned into a gradient or a bisection instead of a blind enumeration of balls? The answer was already in FS-61's records. Written
+here for a reader with no conversation memory; the measurements are FS-61's (`plans/FS61-quadratic-census.md`, "The owner's re-plan
+after phase B′", ruling 3a; raw data `data/fs61/fields/*/balls.jsonl`).*
+
+**What the records show (the phase diagram).** Put every asked ball at its **average degree** `2·edges/points` (734 balls, all tiers
+and fields of FS-61): under degree 4 every ball is three-colourable in a fraction of a second; **degree 4–6 is the hardness peak —
+39 of the 70 `Unknown`s, and every decided ball there is colourable** (random graphs have their 3-colouring threshold at degree
+≈ 4.7; 25 `Unknown`s sit on control planes that are 3-colourable by theorem); **no ball below degree 6.6 has ever refused**; from
+degree 14 up **nothing is undecided** — among balls of ≥ 200,000 points, 28 colourable and 15 refused, slowest 239 s. On a fixed
+refusing lattice the *smallest* refusing ball is the slow one and larger radii refuse in seconds (47: 104 s at `R = 1.2`, 0 s at 1.5;
+119: 114 s → 1 s; 95: 32 s → 1 s). **So hardness is not the signal of having crossed to four colours — it is the signal of standing
+near the threshold, from either side — and the move is away from it, toward higher degree, where both answers are cheap.** Size is
+not the wall; degree is.
+
+**R5 — aim every ask by degree (solver-free, the gradient itself).** `degree ≈ g·φ(R)²`, `g` the lattice's unit-vector count,
+`φ(R) = [2R²·acos(1/(2R)) − ½√(4R² − 1)]/(πR²)` the overlap of a radius-`R` disc with its unit translate, squared because a ball is a
+bidisc (observed / predicted over the 734 balls: median 1.000, range 0.715–1.184). **Figure of merit of a lattice:
+`N₁₄ = π²·R₁₄⁴ / covolume`, the points needed to reach degree 14** (`R₁₄` solves `g·φ(R)² = 14`). Rank every 3-non-integral
+saturated lattice by `N₁₄` before any ball is built; ask once, at `R₁₄`; **never step down in radius** (FS-61's tier-`1b` ladder
+1.5 → 1.2 → 1.0 stepped down in degree, into the hard band, and 24 of its 37 asks came back undecided). This also re-aims **R2**:
+the lattice search beyond denominator 2520 should *maximise `g` at given covolume*, not merely find an odd cycle. **At 167:** the
+best lattices known have `g` = 20–36 against 108 for the lattice that landed 11 — that, in one number, is why 167 is hard. The
+36-vector lattice (`120|1,1,1,3;0,2,0,2;0,0,2,2;0,0,0,4`) reaches degree 14 at `R ≈ 1.67`, about 1.5 M points (5–8 GB, one worker);
+the 20-vector lattices cannot reach degree 8 under 2 M points. FS-61's tier `1c` asks the former; read its verdict before anything
+else here. **Check first:** at what degree did FS-58's two `Unknown` balls (2.36 M and 4.46 M points, R1 above) sit? If under ~8,
+R1 as written is aimed at the hard band and should be re-aimed before any cube-and-conquer is priced.
+*Monotone axes that make bisection sound:* radius (balls are nested, so refusal is upward-closed in `R`); lattice inclusion
+(`Λ ⊂ Λ′` ⟹ refusal passes up, colourability passes down — **verify whether the census driver propagates verdicts along inclusion;
+if not, some `Open` lattices are already decided for free**); colours `k`.
+
+**R6 — counterexample-guided growth: build the core bottom-up, staying on the cheap side.** The certified cores are tiny — 131 to
+1,190 points — yet they are found by refusing balls of 45,000–600,000 points and shrinking (assumption cores, then deletion: hours
+at 95). Invert it. Start from a short odd cycle through a 3-non-integral direction (the barrier, row 72, says one is needed). Loop:
+(1) find a 3-colouring `c` of the current piece `P` — cheap, `P` is small and colourable; (2) collect the **killers** of `c`: lattice
+points within the allowed region whose neighbours in `P` already show all three colours under `c` (adding one makes `c`
+inextensible — this project's *fan / coverage* compulsion, rows 3–4, G13); (3) add a small batch chosen to kill the most colourings
+in a *sampled pool*, not just `c` (M50's batch-halo idea, G33: batches compose by construction); repeat. It ends when `P` refuses —
+and `P` is near the true core's size, so the refutation and its LRAT are small and there is no deletion stage — or when some
+colouring has no killer in the region, which is a verified colouring of that region (a `Colourable` record). **Progress is
+measurable at every step** (pool colourings surviving; R7's dial on `P`), which is what a ball refusal never gives. The lattice is
+translation-invariant, so the obstruction is everywhere and the seed's position is free. *Pitfalls:* greedy growth can bloat along
+one direction (keep `P` inside a ball of radius ~1.5: every refusal on record fits in diameter ≤ 3.6); near the end `P` enters the
+hard band, but at thousands of points, not hundreds of thousands; a sampled pool measures the solver (row 13), so diversify the
+sampler. *Controls before believing anything:* on 47, 71 or 119 it must reach a refusing piece of the order of the known cores
+(169, 131, 456 points) in minutes; on a control plane (ℚ(√2), ℚ(√7)) it must terminate with an extending colouring and never
+refuse; a planted missing edge must turn a refusing piece colourable.
+
+**R7 — the rigidity dial: how close is a colourable piece to the cliff?** Sample many 3-colourings of a colourable ball (random
+phases and seeds, a local-search sampler beside CDCL), normalise by the pinned edge, and aggregate **by difference vector `δ`**
+using translation invariance: `P_same(δ)` = the fraction of (colouring, position) samples with `c(x) = c(x + δ)`. A free system
+reads 1/3; structure shows as `P_same(δ)` near 0 or 1; **a forced pair is `P_same(δ) = 1` over all colourings.** The dial is the
+fraction of probed `δ` that never vary, tracked against `R` and across lattices: it should climb toward the refusal radius, so it
+ranks lattices from the *colourable* side, where every ask is cheap. **And it feeds the chain route directly (R3/R4, G55):** a `δ`
+that never varies is a *candidate* forced pair; confirm it with one pinned refusal (`c(x) ≠ c(x + δ)`) on a small piece; and at 167
+the chain's arithmetic hypothesis is nearly free — no usable prime below 23 means 2, 3, 5, 7, 11, 13, 17, 19 are all invertible in
+the unit-vector ring, so *any* forced pair at a `δ` built from those primes lands the next colour, at three colours and again at
+four and five. *Caveat, from this project's own ledger (row 13): pool statistics measure the solver, not the colouring space — a
+never-varying `δ` is a candidate until the pinned ask refuses, and the dial is for ranking, never for a claim.*
+
+**R8 — the order parameter on the refusing side.** For a ball that may refuse but will not decide, give a *finder* four colours and
+minimise the number of vertices using the fourth (local search; the GPU's kind of work). Zero is a 3-colouring. A density of
+fourth-colour vertices that stays clearly positive across many restarts is evidence — never proof — that the lattice refuses, and
+how deep; its reciprocal estimates the core's size, which prices R6's growth budget.
+
+**Order for the subplan:** R5 is free and comes first (it is a table). R6 with its controls is the instrument to build. R7 is an
+afternoon on top of any sampler and serves both R6 and the chain route. R8 only if R6 stalls. R1's long solves come after all of
+them, re-aimed by R5.
+
 ## 4. Registered expectations (candidates, to be registered at the subplan)
 
 * R1 refuses at least one of the two live balls (low, 0.25): nothing in the colourable neighbour suggests it.

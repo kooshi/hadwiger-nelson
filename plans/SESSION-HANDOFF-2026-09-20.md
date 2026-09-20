@@ -148,3 +148,10 @@ Planner ~460k; its delegate + the two unauthorised grandchildren ~940k; implemen
   B′ is the first decidable-size ask at 167; the close produces the size law and `aiming-167.md`. Phase E's tier 2 is re-checked
   against B′'s numbers before launch and trimmed, with the reason recorded, if it no longer earns its cost. **The close of FS-61
   ends with a handoff whose first act for the next session is FS-66's prior-art gate, then its pilot at 11.**
+* **Recorded while fresh (Kooshi asked, 2026-09-20): `plans/STUB-four-colours-167.md` §3a, "Traverse, don't search"** — the phase
+  diagram of FS-61's 734 asked balls by average degree (hard band 4–6, refusal floor 6.6, nothing undecided from 14 up), the degree
+  law `g·φ(R)²` and the figure of merit `N₁₄`, and four instruments for FS-59: R5 degree-aimed asks, R6 counterexample-guided growth
+  of a core, R7 the rigidity dial from sampled colourings (feeds the chain route; at 167 the chain's arithmetic hypothesis is nearly
+  free), R8 a fourth-colour-density finder. FS-61's tier `1c` was re-aimed by R5 the same evening (`d7106ed`); two predictions are
+  registered in the plan (P-deg1, P-deg2). **At FS-61's close the phase diagram becomes a grokking (next free id) once tier `1c`
+  has scored P-deg1.**
