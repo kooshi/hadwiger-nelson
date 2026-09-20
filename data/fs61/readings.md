@@ -12,14 +12,14 @@ A *reading* is a guess about what makes a field's plane refuse three colours, wr
 
 **The claim.** A live lattice whose shortest odd cycle is short refuses three colours; one whose odd cycles are all long does not. (FS-58 stated it about *coarse* lattices; `d = 59` contradicted that form at the opening — coarse, short odd cycle, and provably 3-colourable — so the plan restated it on **live** lattices, which is what is scored here.)
 
-**Population: the 78 rank-4 lattices across the forty census fields whose state is `Open` or `Refused` — no certificate closes them — and for which at least one ball came back decided** (refused, or coloured with a colouring verified edge by edge). Lattices closed by a certificate are excluded because the reading is about which live lattices refuse; balls that ran out of time are not a verdict and are excluded too.
+**Population: the 83 rank-4 lattices across the forty census fields whose state is `Open` or `Refused` — no certificate closes them — and for which at least one ball came back decided** (refused, or coloured with a colouring verified edge by edge). Lattices closed by a certificate are excluded because the reading is about which live lattices refuse; balls that ran out of time are not a verdict and are excluded too.
 
 | shortest odd cycle | refused | 3-colourable | refusal rate |
 |---|---|---|---|
 | **at most 9** | **22** | 25 | 47 % |
 | **more than 9** | **0** | 31 | 0 % |
 
-Fisher exact, two-sided: **p = 1.2e-06**. Rows the odd-girth search could not place on either side of the cut: **0** (a lattice whose search found no odd cycle *up to a cap below 9* is not evidence of a long odd cycle — that is FS-58's O1 trap, and such a row is counted nowhere).
+Fisher exact, two-sided: **p = 1.2e-06**. Rows the odd-girth search could not place on either side of the cut: **5** (a lattice whose search found no odd cycle *up to a cap below 9* is not evidence of a long odd cycle — that is FS-58's O1 trap, and such a row is counted nowhere).
 
 ### Verdict: **won**
 
@@ -33,7 +33,7 @@ Every refusing lattice in the census has an odd cycle of length at most 9, and n
 
 **Not a registered reading — a finding of this phase**, and the one that re-aimed its own last ask. Every earlier tier of this census chose which ball to put to a solver by its **size**, under a point cap. That was the wrong quantity. What separates a ball the solver decides from one it does not is its **average degree**, `2·edges / points`.
 
-**Population: all 765 asked ball records on disk that carry both a point count and an edge count** — the forty census fields *and* the seven control fields, because the question is about the instrument and not about the family.
+**Population: all 774 asked ball records on disk that carry both a point count and an edge count** — the forty census fields *and* the seven control fields, because the question is about the instrument and not about the family.
 
 | average degree | 3-colourable | undecided at the wall | refused |
 |---|---|---|---|
@@ -41,19 +41,19 @@ Every refusing lattice in the census has an odd cycle of length at most 9, and n
 | **4–6** | 183 | 39 | 0 |
 | **6–8** | 106 | 14 | 3 |
 | **8–10** | 114 | 15 | 6 |
-| **10–14** | 85 | 8 | 15 |
-| **14–20** | 46 | 1 | 16 |
+| **10–14** | 88 | 11 | 17 |
+| **14–20** | 46 | 2 | 16 |
 | **≥ 20** | 20 | 0 | 7 |
 
-**No ball below average degree 6.595 has ever refused** (`d = 119`, `L8a8b1603`, R = 1.2), over 47 refusing balls. The 77 undecided balls have median degree **5.56** and lie in 4.70–14.00.
+**No ball below average degree 6.595 has ever refused** (`d = 119`, `L8a8b1603`, R = 1.2), over 49 refusing balls. The 81 undecided balls have median degree **6.51** and lie in 4.70–14.04.
 
-**Restricted to balls of at least 200,000 points** (n = 264), which is where the census's hard cases live: 47 are at degree ≥ 14 and **every one of them decided** — 30 coloured, 16 refused, **1 undecided** — the slowest in 1800 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
+**Restricted to balls of at least 200,000 points** (n = 273), which is where the census's hard cases live: 48 are at degree ≥ 14 and **every one of them decided** — 30 coloured, 16 refused, **2 undecided** — the slowest in 1834 s. Below degree 6 in the same population: 49 coloured, 31 undecided, **0 refused**.
 
 ### The law that makes it actionable
 
 A ball of radius `R` on a lattice holding `g` unit vectors has predicted average degree **`g·φ(R)²`**, where `φ(R) = [2R²·arccos(1/(2R)) − √(4R²−1)/2] / (πR²)` is the fraction of a radius-`R` disc's area that its unit translate covers — **squared**, because a ball here is a *bidisc*, one disc per real embedding of the field. Each point has `g` candidate neighbours and each lands inside the ball with probability `φ(R)²`.
 
-**Control, on the same 765 balls: observed / predicted has median 1.0000 and range 0.715–1.184, with 0 outside ±30 %.** The plant: dropping the bidisc square — `g·φ(R)` in place of `g·φ(R)²` — reads a median of 0.584 on a 60-ball sample, so the square is what makes the law fit and the control is able to fail.
+**Control, on the same 774 balls: observed / predicted has median 1.0000 and range 0.715–1.184, with 0 outside ±30 %.** The plant: dropping the bidisc square — `g·φ(R)` in place of `g·φ(R)²` — reads a median of 0.584 on a 60-ball sample, so the square is what makes the law fit and the control is able to fail.
 
 ### What it cost, and what it bought
 
@@ -69,7 +69,7 @@ A ball of radius `R` on a lattice holding `g` unit vectors has predicted average
 
 **The claim, in two strengths.** (a) *about balls*: no ball over a field with `d ≡ 3 (mod 8)` refuses, so those twenty fields need the other route (a forcer plus a chain, as at `d = 11` in FS-58). (b) *about lattices*: every lattice over those fields is closed by a certificate.
 
-**Population: the 21 live rank-4 lattices over the twenty `d ≡ 3 (mod 8)` fields** (11, 35, 59, 83, 107, 131, 155, 179, 203, 227, 251, 299, 323, 347, 371, 395, 419, 443, 467, 491).
+**Population: the 70 live rank-4 lattices over the twenty `d ≡ 3 (mod 8)` fields** (11, 35, 59, 83, 107, 131, 155, 179, 203, 227, 251, 299, 323, 347, 371, 395, 419, 443, 467, 491).
 
 ### (a) Verdict: **lost**
 
@@ -82,7 +82,7 @@ The refusal at `d = 11` is **not** inheritance from FS-58's certified witness �
 
 **What survives is the plan's own refinement, not its claim.** The refusing lattice at `d = 11` draws on **ten** classes of unit vectors — it is rich in classes, not coarse — exactly as the note about FS-58's witness predicted. Coarseness, not the congruence, is what the direct route cannot work with.
 
-### (b) Verdict: **lost** — 16 lattices over those fields are still `Open` (d=11, d=35, d=59, d=83, d=131, d=155, d=179, d=203, d=251, d=323)
+### (b) Verdict: **lost** — 65 lattices over those fields are still `Open` (d=11, d=35, d=59, d=83, d=107, d=131, d=155, d=179, d=203, d=251, d=299, d=323, d=347, d=371, d=395, d=419, d=443, d=467, d=491)
 
 ---
 
@@ -134,7 +134,7 @@ The two fields with `L = 5` that landed — `d = 47` and `d = 143` — land exac
 
 **The claim.** G60's ratio reading, used as a decider of finite landing: a refusing lattice has least character mean above `−1/2`. One reading below `−1/2` contradicts it.
 
-**Population: the 22 refusing live lattices, one least character mean each**, computed through the frozen `tools/fs58_search.py` (`min_character_mean`: a grid over the dual torus followed by BFGS refinement). **These are floating-point readings, not exact**, and they are labelled so in every record.
+**Population: the 24 refusing live lattices, one least character mean each**, computed through the frozen `tools/fs58_search.py` (`min_character_mean`: a grid over the dual torus followed by BFGS refinement). **These are floating-point readings, not exact**, and they are labelled so in every record.
 
 | d | lattice | generators | least character mean |
 |---|---|---|---|
@@ -146,10 +146,12 @@ The two fields with `L = 5` that landed — `d = 47` and `d = 143` — land exac
 | 359 | `L54356af8` | 44 | -0.7290 |
 | 23 | `Lb0a7206c` | 36 | -0.7286 |
 | 95 | `L8a8b1603` | 28 | -0.7282 |
+| 335 | `Ldba4ddff` | 44 | -0.7143 |
 | 71 | `L9a15a47c` | 28 | -0.7071 |
 | 95 | `L9a74471f` | 44 | -0.7049 |
 | 119 | `Lac2ac6d0` | 36 | -0.7022 |
 | 119 | `L54356af8` | 60 | -0.6989 |
+| 431 | `L8e0d7059` | 52 | -0.6829 |
 | 311 | `Lc223387a` | 52 | -0.6712 |
 | 95 | `L54356af8` | 52 | -0.6649 |
 | 239 | `L3e1c94c6` | 52 | -0.6622 |
@@ -161,7 +163,7 @@ The two fields with `L = 5` that landed — `d = 47` and `d = 143` — land exac
 | 11 | `Ld65c8ee8` | 108 | -0.5712 |
 | 23 | `L1510e5aa` | 60 | -0.5380 |
 
-Range **-0.8223 to -0.5380**; 22 below `−1/2`.
+Range **-0.8223 to -0.5380**; 24 below `−1/2`.
 
 ### Verdict: **lost**
 
@@ -179,7 +181,7 @@ Range **-0.8223 to -0.5380**; 22 below `−1/2`.
 | **P4** | every tier-1 refusal certifies | 0.9 | **won** | phase C: 9 of 9, by the frozen checker, each with its twelve planted faults and its wrong-radicand refusal; no extraction stalled and no refusal failed exact re-derivation |
 | **P5** | R-size: the log-log slope of least refusing ball size against d lies in [0.5, 2] | 0.5 | **not decided** | slope -0.14 (95 % interval -1.71 to 1.42, R^2 0.01) over the 8 landed d = 7 (mod 8) fields |
 | **P6** | R-L loses: landing rates for L = 4 and L >= 5 among d = 7 (mod 8) do not differ by more than chance at matched relative height | 0.65 | **won** | 6 of 12 fields with L = 4 landed against 2 of 8 with L >= 5; Fisher exact p = 0.373 |
-| **P7** | R-C loses: some refusing lattice has least character mean below -1/2 | 0.75 | **won** | 22 refusing lattices, least character means from -0.8223 to -0.5380; 22 below -1/2 |
+| **P7** | R-C loses: some refusing lattice has least character mean below -1/2 | 0.75 | **won** | 24 refusing lattices, least character means from -0.8223 to -0.5380; 24 below -1/2 |
 | **P8** | A.7 finds a rule reproducing the non-affine quotient colourings on at least 90 % of dead lattices | 0.35 | **lost** | phase A item A.7: no rule. The smallest hidden groups found are 27, 108, 108, 243, 1728, 2187, 4096 and the most common order covers 29 % against the gate's 90 %; and one of them has no factor of 3 at all, which kills the natural candidate |
 | **P9** | phase D lands a second d = 3 (mod 8) field by the chain | 0.25 | **not measured** | phase D was NOT RUN: it was conditional on R-mod8 surviving phase B (decision G) and R-mod8 lost at its first askable field, so the owner replaced it (re-plan after phase B, ruling 3). What survives of its question is D.0, the recipe-transfer table, which phase E answers from certificates |
 | **P10** | a statement about infinitely many fields is proved (E.5) | 0.1 | **lost** | no statement about infinitely many fields is proved. E.5 produced the two tables it was asked for and they point the other way: see `data/fs61/shapes.md` |

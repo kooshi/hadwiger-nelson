@@ -371,3 +371,65 @@ shells and the third had already exited. The repair is the one this repository k
 directions: **match an argv ELEMENT (`a.endswith('tools/fs61_census.py')`), never a substring of a command line**,
 because a command line contains whatever the checker happens to be looking for. Re-run that way: `REAL census
 processes: NONE`.
+
+---
+
+## E.1b — tier `2l`, deeper lattices under the same degree rule
+
+### The price, measured first as the owner's rule requires
+
+| | |
+|---|---|
+| priced on | `d = 107` — 79 class combinations at `NMAX = 420` |
+| lattices stage | **1 s** |
+| filter stage (24 quotients, 30 s wall each) | **23 s** |
+| per combination | **0.30 s** |
+| projection over the 31 fields (2,851 combinations) | **0.24 h** |
+| the two-hour trigger | not reached, so the full 31 fields were run |
+
+*Population-aware, because the rule's own field is not typical:* `d = 107` is **rank 18 of 31** by class supply, so a
+flat ×31 would have read 0.21 h against the per-combination 0.24 h — a 1.16× understatement. **Actual: 8.0 min.**
+
+### What deeper lattices bought, and it is the answer to the "by certificate" null
+
+At `NMAX = 180` eleven fields had **no `Open` lattice at all** — the census could say only *"no witness exists among
+the lattices of this depth"*. At `NMAX = 420`, **ten of those eleven have `Open` lattices** (107 gains 7, 383 gains
+6, 419 gains 3, 299 and 371 and 491 gain 2, 347 and 395 and 443 and 467 gain 1). **Only `d = 227` still has none.**
+And `d = 167` goes from **6 open lattices to 16**.
+
+**So the "by certificate" null was a statement about depth, and depth dissolves it.**
+
+### But under a 2,000,000-point cap the deeper lattices are mostly unaskable
+
+Of **179** rank-4 `Open` lattices in scope, **138 reach no radius at which the predicted degree is 8** before the
+ball exceeds the cap — because a finer lattice has a smaller covolume, so its ball passes 2,000,000 points while
+still sparse. Nine were askable; one was lost to the defect below and re-asked.
+
+| | |
+|---|---|
+| tier-2l records | **130** over 30 fields |
+| asked | **9** — 3 by arm `R14`, 6 by arm `Rcap` |
+| `Colourable` | 3 |
+| **`Refused`** | **2** — `d = 335` and `d = 431` |
+| `Unknown (budget)` at the 1,800 s wall | 4 |
+| `Over cap (not asked)` | 121, each carrying the degree it would reach at the cap |
+| actual / predicted degree | 0.9997–1.0029, median 1.0000 |
+| worker peak RSS | max **8.35 GB** |
+| wall | 31.3 min (balls) + 8.0 min (lattices and filter) |
+
+### The two new refusals
+
+| d | L | the refusing ball | degree | solve | what a certificate makes it |
+|---|---|---|---|---|---|
+| **335** | 5 (11) | `Ldba4ddff`, R = 1.4301, 623,737 points, 4,365,620 edges | 13.998 | 65.3 s | `4 ≤ χ(ℚ(√335)²) ≤ 5` |
+| **431** | 4 (7) | `L8e0d7059`, R = 1.11, 1,803,077 points, 9,349,130 edges | 10.37 | 322.9 s | **χ(ℚ(√431)²) = 4** — a new exact value |
+
+`d = 431`'s refusal came from the **`Rcap` arm at degree 10.37**, below the target of 14 — so the floor of 8 earned
+its place, and a rule that only ever asked at degree 14 would have missed this field.
+
+## Phase E's result in one line
+
+**The census goes from 9 fields with a refusing ball to 14 of 40**: the certified nine, plus **`d = 59`, `239`,
+`311`, `335` and `431`**. Three of the five (`59`, `239`, `431`) have `L = 4`, so each certificate is a **new exact
+value `χ(ℚ(√d)²) = 4`**; the other two become `4 ≤ χ ≤ 5`. `table --check`: **40 fields at tier 2l, accounting
+checked at tiers 1, 1b, 1c and 2l, 0 defects.** No process survives.

@@ -12,7 +12,7 @@ So the census can ask a question no single field can: **take one shape, put it i
 
 ## Table 1 — every shape that refuses somewhere, and every census field that holds it
 
-459 distinct shapes occur across the forty census fields; **12 of them refuse in at least one field**. Reading a cell: `d: state / generators`, where the state is `REF` (a ball of it refused three colours), `O` (open — no certificate either way), `peri` (a periodic 3-colouring of the whole infinite lattice graph is in hand, so no ball of it can ever refuse), `form` (an exact linear form certifies 3-colourability), or `inhe` (closed by inheritance from a lattice above or below it).
+1158 distinct shapes occur across the forty census fields; **14 of them refuse in at least one field**. Reading a cell: `d: state / generators`, where the state is `REF` (a ball of it refused three colours), `O` (open — no certificate either way), `peri` (a periodic 3-colouring of the whole infinite lattice graph is in hand, so no ball of it can ever refuse), `form` (an exact linear form certifies 3-colourability), or `inhe` (closed by inheritance from a lattice above or below it).
 
 | shape | M | fields | per field: `d: state / generators` |
 |---|---|---|---|
@@ -22,12 +22,14 @@ So the census can ask a question no single field can: **take one shape, put it i
 | `L54356af8` | 60 | 8 | 23:inhe/60 71:REF/76 95:REF/52 119:REF/60 143:REF/36 191:REF/52 359:REF/44 431:O/36 |
 | `Lb0a7206c` | 60 | 8 | 23:REF/36 71:REF/52 119:peri/28 191:REF/36 239:peri/28 311:peri/28 359:peri/28 431:peri/20 |
 | `Ld65c8ee8` | 30 | 6 | 11:REF/108 35:peri/36 59:peri/36 131:peri/28 179:peri/28 371:peri/20 |
+| `L8e0d7059` | 240 | 4 | 239:inhe/84 311:inhe/76 431:REF/52 479:O/52 |
 | `L9a74471f` | 120 | 3 | 47:REF/36 95:REF/44 215:O/28 |
 | `Lac2ac6d0` | 120 | 3 | 119:REF/36 215:peri/20 263:O/28 |
 | `L7dfcb5f5` | 60 | 2 | 47:REF/28 335:peri/20 |
 | `L8a8b1603` | 60 | 2 | 95:REF/28 119:REF/28 |
 | `L9a15a47c` | 120 | 2 | 71:REF/28 119:peri/20 |
 | `L1510e5aa` | 120 | 1 | 23:REF/60 |
+| `Ldba4ddff` | 300 | 1 | 335:REF/44 |
 
 ### What this table says
 
