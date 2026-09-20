@@ -155,13 +155,21 @@ ball `X` and its whole edge set `E` and hands both to the solver with no peeling
 radius — at `d = 239` it printed `369885 points, 2587978 edges`, the ball record's own two numbers. Phase B′'s
 correction about peeled pieces is about an earlier code path and does not touch any of these five.
 
-| d | ball points | ball edges | plain solve (s) | round 0 (s) | round 0 / plain solve | rounds to fixpoint | fixpoint points | witness points |
-|---|---|---|---|---|---|---|---|---|
-| 239 | 369,885 | 2,587,978 | 403.0 | **556.1** | **1.38** | | | |
-| 335 | 623,737 | 4,365,620 | 65.3 | | | | | |
-| 311 | 1,137,169 | 7,960,542 | 18.2 | | | | | |
-| 431 | 1,803,077 | 9,349,130 | 322.9 | | | | | |
-| 59 | 1,396,469 | 9,773,884 | 314.7 | | | | | |
+| d | ball points | ball edges | plain solve (s) | round 0 (s) | round 0 / plain solve | rounds to fixpoint | fixpoint points | witness points | `land` end to end |
+|---|---|---|---|---|---|---|---|---|---|
+| 311 | 1,137,169 | 7,960,542 | 18.2 | **7.9** | **0.43** | 6 | 358 | **189**, 1-minimal | **43.9 s** |
+| 335 | 623,737 | 4,365,620 | 65.3 | **105.5** | **1.61** | 67 | 1,169 | **443**, 1-minimal | **212.8 s** |
+| 239 | 369,885 | 2,587,978 | 403.0 | **556.1** | **1.38** | ≥ 4, unfinished | — | — | **stopped at 26 min** (§3.1a) |
+| 431 | 1,803,077 | 9,349,130 | 322.9 | | | | | | |
+| 59 | 1,396,469 | 9,773,884 | 314.7 | | | | | | |
+
+**The table is sorted by what it found, not by what was predicted, and the two do not agree.** The **largest**
+ball of the five — `d = 311`, 1.14 million points and 7.96 million edges — gave the **cheapest** certification of
+the whole milestone, 44 seconds end to end; the **smallest** — `d = 239`, 370,000 points — is the one that had to
+be stopped. What orders them is the ball's **plain solve time** (18.2 s, 65.3 s, 403.0 s), and that ordering is
+steep: a 22× range in solve time became a range from 44 seconds to *unfinished after 26 minutes*. Neither the
+brief's rule (a threshold on points) nor my §1 replacement for it (a linear model on round 0) captures that; §3.1a
+states the rule that does.
 
 ### 3.1a `d = 239` was STOPPED and re-queued last — cause, measurement and forfeit, written before the signal
 
@@ -212,6 +220,31 @@ seconds is an expensive extraction whatever its size, and that is when to spend 
 `steps.jsonl` byte-identical across 65 s (the core-round checkpoints are minutes apart, so a shorter check would
 prove nothing).
 
+### 3.1b P-r0 is **LOST**, and the way it lost is the finding
+
+> **P-r0**, registered in §2 before the first run: *round 0 of `extract` costs about 1.8× the ball's recorded
+> plain solve time; it loses if any field's round 0 falls outside 1.2–3.0× that field's plain solve.*
+
+**Ratios measured: 1.38 (`d = 239`), 1.61 (`d = 335`), 0.43 (`d = 311`).** The third is outside the band, so the
+prediction loses, and it lost in the **cheap** direction — round 0 at `d = 311` cost 7.9 s against an 18.19 s
+plain refutation of the same ball.
+
+**Why that population could not carry it, stated the way phase E stated P-deg1's loss.** P-r0 was registered
+against `d = 23` (1.79×) and `d = 143` (1.58×), the only two landed fields whose ball solves cost real time —
+55 s and 116 s. At 18 s the two solves are not measuring the same thing: a plain refutation must prove
+unsatisfiability of the whole formula, while an assumption-core solve may stop the moment it has a set of failed
+assumptions, and at that scale run-to-run variance is a large share of the number. **The band was fitted where
+the quantity is expensive and applied where it is cheap.** That is the same error in the same milestone as
+P-deg1's, one level down, and it is mine.
+
+**What survives, and it is the useful half.** The ordering is right even though the constant is not: over the
+three fields measured, round 0 and the whole extraction are *monotone* in the plain solve time and steeply so —
+18.2 s → 44 s end to end, 65.3 s → 213 s, 403.0 s → unfinished at 26 minutes. **A ball's plain solve time is the
+statistic to select on; its point count is not.** The existing `land` cost proxy `points × (solve_seconds + 0.5)`
+already encodes exactly that, and at every one of the five fields there was only one refusing ball, so the proxy
+had nothing to choose between — which is the argument for an onset pass, and §3.1a says which direction it should
+go.
+
 ### 3.2 Per field
 
 *(filled in as each field lands)*
@@ -220,4 +253,70 @@ prove nothing).
 
 ## 4. The gate, item by item
 
-*(filled in as each field lands)*
+*One row per gate item per field, under the owner's rulings after phase C: `Landed (certified)` is C.1–C.3, C.4a,
+C.5–C.7; C.4b is required only where C.9 records the witness 1-minimal. Every command is pasteable from the
+repository root. The verdict line and the exit status are the driver's own record (`data/fs61/landings.jsonl`),
+and every one of them was **re-derived independently** afterwards by `tools/fs61_recount_landings.py`, which
+imports nothing from the driver, recomputes C.6's barrier count in its own `Fraction` arithmetic and re-verifies
+C.5's colouring on every edge — 9 of 9 rows green at each field.*
+
+**Re-generate this section:** `python3 tools/fs61_recount_landings.py <d>` reproduces every verdict from the
+committed bytes; `python3 tools/fs61_census.py land <d>` re-runs the whole gate against the committed
+`witness.json` without regenerating it (generation is skipped once that file exists).
+
+#### `d = 311` — **CERTIFIED**, 189 points, 460 edges (`data/fs61/witness-311/`)
+
+| # | item | command, pasteable from the repository root after `source scripts/dev-env.sh` | artifact | the line that shows the verdict | exit |
+|---|---|---|---|---|---|
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 311 data/fs61/witness-311/witness.json` | `certified.out` | **PASS** — CERTIFIED: 189 points of Q(sqrt311)^2, each a reduced (a, b, c, e, m); all 460 pairs a | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 311 --controls data/fs61/witness-311/witness.json` | `controls.out` | **PASS** — CONTROLS ALL PASS — **13 `[PASS]` rows, 0 `[FAIL]`** | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 323 data/fs61/witness-311/witness.json` | `wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 4] between [0, 0, 0, 0, 1] and [6, 1, 3 | 1 |
+| C.4a | second opinion (steps i, ii) | `python3 tools/fs58_recheck_witness.py 311 data/fs61/witness-311/witness.json` | `recheck.out` | **PASS** — RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse | 0 |
+| C.4b | pinned-vertex criticality (step iii) | the same command | `recheck.out` | **PASS** — REQUIRED (C.9 says 1-minimal) — deleting the pinned vertex leaves a verified 3-colouring | — |
+| C.5 | exactly four | `python3 tools/fs61_census.py land 311` (step C.5) | `colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 460 edges | — |
+| C.6 | the barrier is met | the same (step C.6) | `README.md` | **PASS** — 213 of 460 edges carry 3 in the reduced denominator | — |
+| C.7 | the value | the same (step C.7, from `frame.jsonl`) | `README.md` | **PASS** — `4 <= chi(Q(sqrt311)^2) <= 5`, upper bound the residue plane at 11 ([Moorhouse2010] Thm 8.1) | — |
+| C.9 | minimality | the witness's own provenance | `witness.json` | **NOTE** — 1-minimal: deleting any single vertex leaves a 3-colourable graph | — |
+
+#### `d = 335` — **CERTIFIED**, 443 points, 1,086 edges (`data/fs61/witness-335/`)
+
+| # | item | command, pasteable from the repository root after `source scripts/dev-env.sh` | artifact | the line that shows the verdict | exit |
+|---|---|---|---|---|---|
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 335 data/fs61/witness-335/witness.json` | `certified.out` | **PASS** — CERTIFIED: 443 points of Q(sqrt335)^2, each a reduced (a, b, c, e, m); all 1086 pairs  | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 335 --controls data/fs61/witness-335/witness.json` | `controls.out` | **PASS** — CONTROLS ALL PASS — **13 `[PASS]` rows, 0 `[FAIL]`** | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 347 data/fs61/witness-335/witness.json` | `wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 118] between [0, 0, 0, 0, 1] and [65, 9 | 1 |
+| C.4a | second opinion (steps i, ii) | `python3 tools/fs58_recheck_witness.py 335 data/fs61/witness-335/witness.json` | `recheck.out` | **PASS** — RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse | 0 |
+| C.4b | pinned-vertex criticality (step iii) | the same command | `recheck.out` | **PASS** — REQUIRED (C.9 says 1-minimal) — deleting the pinned vertex leaves a verified 3-colouring | — |
+| C.5 | exactly four | `python3 tools/fs61_census.py land 335` (step C.5) | `colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 1,086 edges | — |
+| C.6 | the barrier is met | the same (step C.6) | `README.md` | **PASS** — 933 of 1,086 edges carry 3 in the reduced denominator | — |
+| C.7 | the value | the same (step C.7, from `frame.jsonl`) | `README.md` | **PASS** — `4 <= chi(Q(sqrt335)^2) <= 5`, upper bound the residue plane at 11 ([Moorhouse2010] Thm 8.1) | — |
+| C.9 | minimality | the witness's own provenance | `witness.json` | **NOTE** — 1-minimal: deleting any single vertex leaves a 3-colourable graph | — |
+
+#### `d = 59` — **CERTIFIED**, 1,739 points, 5,025 edges (`data/fs61/witness-59/`)
+
+| # | item | command, pasteable from the repository root after `source scripts/dev-env.sh` | artifact | the line that shows the verdict | exit |
+|---|---|---|---|---|---|
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 59 data/fs61/witness-59/witness.json` | `certified.out` | **PASS** — CERTIFIED: 1739 points of Q(sqrt59)^2, each a reduced (a, b, c, e, m); all 5025 pairs  | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 59 --controls data/fs61/witness-59/witness.json` | `controls.out` | **PASS** — CONTROLS ALL PASS — **13 `[PASS]` rows, 0 `[FAIL]`** | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 71 data/fs61/witness-59/witness.json` | `wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 677] between [0, 0, 0, 0, 1] and [22, - | 1 |
+| C.4a | second opinion (steps i, ii) | `python3 tools/fs58_recheck_witness.py 59 data/fs61/witness-59/witness.json` | `recheck.out` | **PASS** — RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse | 0 |
+| C.4b | pinned-vertex criticality (step iii) | the same command | `recheck.out` | **PASS** — recorded, not required — deleting the pinned vertex leaves a verified 3-colouring | — |
+| C.5 | exactly four | `python3 tools/fs61_census.py land 59` (step C.5) | `colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 5,025 edges | — |
+| C.6 | the barrier is met | the same (step C.6) | `README.md` | **PASS** — 2,442 of 5,025 edges carry 3 in the reduced denominator | — |
+| C.7 | the value | the same (step C.7, from `frame.jsonl`) | `README.md` | **PASS** — `chi(Q(sqrt59)^2) = 4`, upper bound the dyadic prime, inert in K, residue F_4 ([Fischer1990] Thm 9) | — |
+| C.9 | minimality | the witness's own provenance | `witness.json` | **NOTE** — refusing but NOT 1-minimal: the deletion was stopped at position 297 of 2473 | — |
+
+#### `d = 431` — **CERTIFIED**, 1,031 points, 2,719 edges (`data/fs61/witness-431/`)
+
+| # | item | command, pasteable from the repository root after `source scripts/dev-env.sh` | artifact | the line that shows the verdict | exit |
+|---|---|---|---|---|---|
+| C.1 | the certificate | `python3 tools/fs58_check_witness.py --radicand 431 data/fs61/witness-431/witness.json` | `certified.out` | **PASS** — CERTIFIED: 1031 points of Q(sqrt431)^2, each a reduced (a, b, c, e, m); all 2719 pairs | 0 |
+| C.2 | planted faults | `python3 tools/fs58_check_witness.py --radicand 431 --controls data/fs61/witness-431/witness.json` | `controls.out` | **PASS** — CONTROLS ALL PASS — **13 `[PASS]` rows, 0 `[FAIL]`** | 0 |
+| C.3 | wrong radicand | `python3 tools/fs58_check_witness.py --radicand 443 data/fs61/witness-431/witness.json` | `wrong-radicand.out` | **PASS** — REFUSED EDGE_NOT_UNIT: the file lists edge [0, 105] between [-19, -1, 71, -5, 240] and | 1 |
+| C.4a | second opinion (steps i, ii) | `python3 tools/fs58_recheck_witness.py 431 data/fs61/witness-431/witness.json` | `recheck.out` | **PASS** — RECHECK PASS: all pairs re-derived exactly, three outside solvers refuse | 0 |
+| C.4b | pinned-vertex criticality (step iii) | the same command | `recheck.out` | **PASS** — recorded, not required — deleting the pinned vertex leaves a verified 3-colouring | — |
+| C.5 | exactly four | `python3 tools/fs61_census.py land 431` (step C.5) | `colouring4.json` | **PASS** — a proper 4-colouring, verified on every one of 2,719 edges | — |
+| C.6 | the barrier is met | the same (step C.6) | `README.md` | **PASS** — 1,570 of 2,719 edges carry 3 in the reduced denominator | — |
+| C.7 | the value | the same (step C.7, from `frame.jsonl`) | `README.md` | **PASS** — `chi(Q(sqrt431)^2) = 4`, upper bound the residue plane at 7 ([Moorhouse2010] Thm 8.1) | — |
+| C.9 | minimality | the witness's own provenance | `witness.json` | **NOTE** — refusing but NOT 1-minimal: the deletion was stopped at position 95 of 1234 | — |
+

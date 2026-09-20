@@ -253,7 +253,7 @@ record, 0); none addresses a field plane.
 
 ---
 
-### 1.7 The chromatic number of the plane over real quadratic fields: `ℚ(√11)`, `ℚ(√23)`, `ℚ(√71)`, `ℚ(√95)`, `ℚ(√191)`
+### 1.7 The chromatic number of the plane over real quadratic fields — thirteen fields answered
 
 > **Benda–Perles, Open Problem 11.6** (`[Soifer2024]` ch. 11): *"Find the chromatic number of `ℚ²(√2)` and, in general, of any algebraic
 > extension of `ℚ²`."* Also `[Fischer1990]` §1: *"whether some algebraic criterion can be found to determine the chromatic number of `F²`
@@ -265,24 +265,50 @@ record, 0); none addresses a field plane.
 > bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` below is a partial answer to that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
 > answer to the general one as far as finite witnesses reach.
 
-**Our answer, field by field: `χ(ℚ(√d)²) = 4` for `d = 11, 23, 71, 95, 191`, and `4 ≤ χ(ℚ(√47)²) ≤ 5`.** The upper bounds are prior art:
-the residue plane at 7 (`[Moorhouse2010]` Cor. 8.3 and Thm 8.1; for 11 also `[Fischer1990]` Thm 9), at 11 for 47. The lower bounds are
-FS-58's: finite unit-distance graphs with coordinates in the field that admit no proper 3-colouring —
-**`ℚ(√11)` in the kernel** (`four_le_chromaticNumber_planeOver_eleven`, 204 points, triangle-free, standard three axioms), the others
-certified by `tools/fs58_check_witness.py` (standard library, its own LRAT checker, planted faults) and re-checked with two further solvers
-(ℚ(√23): 297 points; ℚ(√71): 148; ℚ(√95): 1,068; ℚ(√191): 483; ℚ(√47): 169). Record: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
-`data/fs58/witness-*/`.
+**Our answer, field by field.** Below four, the classification is prior art: `χ = 2` iff `d ≢ 3 (mod 4)` (`[Johnson1987]`,
+`[Fischer1990]` Thm 8) and `χ = 3` for `d ≡ 3, 7 (mod 12)` (`[Fischer1990]` Thm 9 and the sentence after it). So the only real quadratic
+fields whose plane **can** need four are the squarefree `d ≡ 11 (mod 12)` — forty of them below 500 — and this project has now
+certified a finite graph forcing four colours over **thirteen** of the forty:
+
+| | fields | the matching upper bound, all prior art |
+|---|---|---|
+| **`χ(ℚ(√d)²) = 4`** — exact values | **11**, 23, **59**, 71, 95, **119**, 191, **359**, **431** | the dyadic prime, inert in `K` with residue field `𝔽₄`, for `d ≡ 3 (mod 8)` (`[Fischer1990]` Thm 9); the residue plane at 7 otherwise (`[Moorhouse2010]` Thm 8.1, Cor. 8.3) |
+| **`4 ≤ χ(ℚ(√d)²) ≤ 5`** — brackets | 47, **143**, **311**, **335** | the residue plane at 11 |
+
+*(Bold: first proved by FS-61's census. `d = 239` also has a refusing ball, but it is a **solver claim** — its certification is
+resumable and not finished, `data/fs61/records/phase-F.md` §3.1a — and is not counted above.)*
+
+**Only the lower bounds are ours**, and `ℚ(√11)`'s is the only one the Lean kernel has seen
+(`four_le_chromaticNumber_planeOver_eleven`, 204 points, triangle-free, standard three axioms — FS-58's *chain* witness, a different
+graph from the census's 189-point direct one). Every other field rests on `tools/fs58_check_witness.py`: standard library only,
+importing nothing from `tools/`, re-deriving each edge in exact integer arithmetic and replaying the LRAT refutation, with twelve
+planted faults each refused for its named reason and the same files refused over a neighbouring field — plus a second opinion in exact
+`Fraction` arithmetic with three further solvers, an explicit verified 4-colouring, and the product owner's own decorrelated recheck.
+Certificates: `data/fs58/witness-*/` (FS-58: 11, 23, 47, 71, 95, 191) and `data/fs61/witness-*/` (FS-61: all thirteen, from its own
+ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
+`plans/FS61-quadratic-census.md` §R; `data/fs61/census.md`.
+
+**What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a bracket, not a value. His general question — *how much
+can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for thirteen
+fields, and no real quadratic field is known to need five.** The census's candidate class theorem (*every squarefree `d ≡ 11 (mod 12)`
+needs four*) is **not proved**; 27 of the 40 fields are open, each with the kind of null recorded. And `ℚ(√167)`, where this project's
+local–global conjecture predicts six or more, is still at a proven three (FS-59).
 
 **Prior art that constrains the claim.** The upper bounds and the odd cycles are theirs — and the lower bound 3 is older than this
 file said: **`[Fischer1990]` Thm 8 gives `χ ≥ 3` for every `N ≡ 3 (mod 4)`, and the sentence after his Thm 9 states `χ(ℚ(√N)²) = 3`
 for `N ≡ 3, 7 (mod 12)`** (re-read 2026-09-19); `[Moorhouse2010]` Thm 8.6 and `[Madore2015]` (for `ℚ(√7)`) re-derive it. His Thm 10
 also separates the two halves of the four-colour family: an additive 4-colouring for `N ≡ 3 (mod 8)`, none with few colours for
-`N ≡ −1 (mod 24)` — every field answered here except 11 lies in the second class. FS-58's §PA searched for any lower bound above three for a real quadratic field — combinatorial geometry, number
+`N ≡ −1 (mod 24)` — and **the census's lower bounds cut ACROSS that division rather than along it**: `d = 11` and `d = 59` are both
+`≡ 3 (mod 8)` and both land by the direct route, which is also what refuted the census's own reading R-mod8. FS-58's §PA searched for any lower bound above three for a real quadratic field — combinatorial geometry, number
 theory, spectral graph theory; citation walks of `[Fischer1990]`, `[Johnson1987]`, `[BachocEtAl2014]`, `[MatolcsiEtAl2025]` in two
-databases — and found none; `[Fischer1990]`'s Example 4 on `ℚ(√167)` is about additive colourings only. **Unread and the likeliest places
-for a contrary claim:** `[Johnson2006]` (the compendium) and Johnson's 2000 status report (Geombinatorics IX(4)).
+databases — and found none; FS-61's §PA added zbMATH author listings and abstract searches in Fischer's own vocabulary, and found none
+either (it found `[Fischer1994]`, which is about `ℚ(√3,√11)` and is §1.1's problem, not this one);
+`[Fischer1990]`'s Example 4 on `ℚ(√167)` is about additive colourings only. **Unread and the likeliest places
+for a contrary claim:** `[Johnson2006]` (the compendium, which by `[Johnson2010]`'s own words discusses *"distance graphs
+`G(ℚ(√m)², D)` for square-free integers `m > 1`"* — exactly these planes) and `[Johnson2000]`, the 2000 status report. After
+`[Fischer1994]`, no claim of novelty in this lineage should go out unread.
 
-**Status:** `ℚ(√11)`'s lower bound kernel-checked; the other four tools-certified (their kernel forms are FS-60); the upper bounds hand /
+**Status:** `ℚ(√11)`'s lower bound kernel-checked; the other twelve tools-certified (their kernel forms are FS-60); the upper bounds hand /
 prior art. Not written up. `ℚ(√167)`, where the local–global conjecture predicts at least six, is not answered (FS-59).
 
 ---
