@@ -4482,6 +4482,7 @@ def main():
     p.add_argument('--key'); p.add_argument('--radius', type=float, action='append')
     p.add_argument('--jobs', type=int, default=16); p.add_argument('--reverify', action='store_true')
     p.add_argument('--budget', type=float, help='stop asking after this many seconds (resume = re-run)')
+    p.add_argument('--wall', type=float, help="override the tier's solver wall for THESE balls (recorded per record)")
 
     p = sub.add_parser('status', help='where each field stands, from the records alone')
     p.add_argument('d', type=int, nargs='*')
@@ -4554,7 +4555,8 @@ def main():
         if a.reverify:
             bad = cmd_scan_reverify(a.d)
         else:
-            _, bad = cmd_scan(a.d, a.tier, filter_off=a.filter_off, only_key=a.key, radii=a.radius, jobs=a.jobs, budget=a.budget)
+            _, bad = cmd_scan(a.d, a.tier, filter_off=a.filter_off, only_key=a.key, radii=a.radius, jobs=a.jobs,
+                              budget=a.budget, wall_override=a.wall)
     elif a.cmd == 'witness-lattices':
         bad = cmd_witness_lattices()
     elif a.cmd == 'dead-quotients':

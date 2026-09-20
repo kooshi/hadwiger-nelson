@@ -167,3 +167,137 @@ population, and this run would have tested it directly. **It is offered back to 
 control (one ball, not fourteen), not smuggled back into the plan.**
 
 **The stop.** By PID, never by matching a command line; verified by effect.
+
+---
+
+## E.1a, as re-aimed — tier `1c`, the degree-targeted ask
+
+### The finding this tier is built on, re-derived here before it was acted on
+
+The owner's measurement, reproduced independently from `data/fs61/fields/*/balls.jsonl` (my script, five lines, over
+every asked ball record carrying both a point count and an edge count) — the table is in the section above. Two
+numbers carry it: **no ball below average degree 6.595 has ever refused**, over 44 refusing balls; and among balls of
+≥ 200,000 points, **all 43 at degree ≥ 14 decided** — 28 coloured, 15 refused, none undecided.
+
+**The law that makes it actionable.** A ball of radius `R` on a lattice holding `g` unit vectors has predicted
+average degree `g·φ(R)²`, where `φ(R) = [2R²·acos(1/(2R)) − √(4R²−1)/2] / (πR²)` is the area fraction a radius-`R`
+disc shares with its unit translate — **squared**, because a ball here is a bidisc, one disc per real embedding. Each
+point has `g` candidate neighbours and each lands inside the ball with probability `φ(R)²`.
+
+**Control, on every asked ball record on disk (735, census fields and controls): observed / predicted has median
+1.0000 and range 0.715–1.184, with 0 outside ±30 %.** The plant: dropping the bidisc square — `g·φ(R)` instead of
+`g·φ(R)²` — reads median **0.584** on a 60-ball sample, so the square is doing the work and the control can fail.
+
+**The owner's orientation arithmetic, checked.** 167's 36-generator lattice `L3e1c94c6` reaches degree 14 at
+`R = 1.666` on 1,473,792 predicted points (his ≈1.67 and ≈1.5 M); its 20-generator lattices need 2.66–3.37 M points
+to reach degree 8, so they cannot (his claim); 239's 52-generator lattice reads degree **16.71** at `R = 1.44` on
+**575,303** points, under the old 600,000 cap (his 16.6).
+
+### Two defects of mine, both found by running, both in the safe direction
+
+1. **A rule that aims AT the cap overflows it about half the time.** `Rcap` was defined as the radius whose
+   *predicted* points equal the cap, but the cap is enforced on the *exact* count, so the first ball came back
+   `Over cap (not asked)` with nothing asked. The rule now aims at `cap / 1.11`, where 1.11 is the largest
+   actual/predicted **points** ratio ever recorded here on a ball of ≥ 100,000 points (1.1078 over 327 such balls;
+   on the fine lattices this tier asks, phase B′ measured 0.9982–1.0094 over 37). The cap itself is unchanged, and
+   an exact overflow is still recorded honestly if one happens. Cost: two lattices (`d = 131 L5ea33424` at predicted
+   degree 8.06 and `d = 335 Leb4c3969` at 8.14) fall below the floor of 8 and become `Over cap` records.
+2. **The record path read `rec['edges']` unconditionally**, and an over-cap record has none — so the first ball
+   crashed the run instead of recording. Fixed, and it is the good direction to fail in: loudly, with nothing
+   written.
+
+And a third, inside my own check: the margin row first quoted **1.0407** as "the worst recorded ratio", which is the
+worst *degree* ratio, not the worst *points* ratio (1.1078). A number measuring one thing put to work deciding
+another — this repository's most repeated error, in the row written to guard against overflow. It was caught only
+because the row beneath it went red for an unrelated reason.
+
+### The memory measurement the owner's rule requires, made before the pooled pass
+
+The densest ball the rule will ask, run **alone**:
+
+```
+  d=455 Lc223387a R=1.5911 arm=Rcap  1,802,901 points  11,938,510 edges
+  degree 13.244 (predicted 13.246)   predicted points 1,801,802, actual 1,802,901  (ratio 1.0006)
+  -> Colourable (colouring verified) [5.57 s solve, worker peak 7.00 GB, 50.4 s wall end to end]
+```
+
+**Worker peak 7.00 GB on the worst-case ball**, against 117 GB available. `available memory / peak` = 16.7, and the
+pool is set to **12**, not 16: the 7.00 GB is a per-worker high-water that a worker handling several balls in
+sequence can exceed (phase B′ recorded exactly that caveat about its own figure), 12 × 7 = 84 GB leaves 33 GB of
+headroom, and this machine has been taken down twice by parallel heavy jobs — an OOM here is an unexplained crash
+and therefore a halt.
+
+**And the ball decided in 5.57 seconds.** 1.8 million points, 11.9 million edges, at degree 13.2 — against 24 of 37
+balls a tenth that size running to a 600-second wall at degree ≈ 5.5. That is the owner's reading, visible in one
+measurement.
+
+### One deviation from the owner's revised rule, declared before the run and tagged per record
+
+His scope is *every rank-4 `Open` lattice at the 31 fields not landed whose **best ball record** is `Unknown
+(budget)` or `Over cap (not asked)`*. The scope implemented is **every rank-4 `Open` (or `Refused`) lattice at those
+fields**, with each record carrying `owner_arm: true|false`, so either scope can be scored from the records.
+
+*Why:* a lattice whose largest record is `Colourable` was coloured at whatever radius fitted an **earlier** tier's
+600,000-point cap, and colourability at a small radius is not a certificate — the lattice is still `Open`. Under
+this tier's cap a strictly larger and denser ball of the same lattice fits, and that is the informative ask. It adds
+**4 balls and 1.8 M of the 41.6 M points**, all at degree 14, and it can only ask more, never fewer. A lattice
+already **decided** at or above the rule's target radius is skipped and its record says so (1 such).
+
+*`Refused` is in scope beside `Open` for a different reason: so that a lattice this tier refuses does not drop out
+of the accounting check that owed it an ask — the self-erasing check again.*
+
+### The launch — written before anything ran (plan §5 rules 1 and 3)
+
+```
+COMMAND     python3 tools/fs61_census.py degree-ask --tier 1c --jobs 12
+RESUME      the identical command.  Every ball is its own JSONL line in data/fs61/fields/<d>/balls.jsonl, appended,
+            flushed and fsynced as it lands; a settled tier-1c record at the chosen radius is skipped on a re-run.
+            A kill at any instant redoes AT MOST the balls in flight (at most 12), and nothing already recorded
+            moves.  The plan is recomputed from the covolumes, the generator counts and the cap, never read back
+            from the run that wrote it, so a resume cannot inherit a stale scope.
+STATE       data/fs61/fields/<d>/balls.jsonl   one line per (lattice, radius), carrying tier "1c", the arm, g,
+                                               covolume, predicted and actual degree, predicted and actual BALL
+                                               points (len(X) and len(E) as handed to the solver, never a peeled
+                                               piece), and owner_arm
+            data/fs61/fields/<d>/filter.jsonl  a line per lattice whose state a refusal changes
+LAUNCHED    setsid, no `timeout` wrapper, no pipe; stdout to a file under the scratchpad.  Stopped BY PID, never by
+            matching a command line; a stop is verified BY EFFECT -- the pid absent AND no worker left in the
+            process group read from /proc/<pid>/stat (killing the parent last time left all 14 workers alive and
+            re-parented).
+WORKERS     12 (measured above), pool width is a required argument: `--jobs` has no default at this cap.
+SCOPE       49 lattices over 20 fields; 31 balls to ask (17 arm R14, 14 arm Rcap), 41,578,479 points predicted,
+            largest 1,801,802.  17 lattices unaskable -- five of them six of 167's -- each getting one `Over cap
+            (not asked)` record carrying the degree it WOULD reach at the cap.
+EXPECTED    from the one measured ball: about 50 s each end to end if they behave like it, so 31 balls twelve wide
+            is minutes; the 1,800 s wall bounds the worst case at 3 waves x 30 min = 1 h 30 m.
+NOT RUN     no Lean, no lake, nothing under data/fs58 or tools/fs58_*.
+```
+
+### The owner's registered predictions, recorded here before the run
+
+* **P-deg1** — *every ball asked at predicted degree ≥ 14 decides within the wall.* It **loses** if one is
+  `Unknown` at 1,800 s. Population: the 17 arm-`R14` balls (predicted degree exactly 14). The record it was
+  registered against: 43 of 43 balls of ≥ 200,000 points at degree ≥ 14 decided.
+* **P-deg2** — *at least one new field refuses.* The owner puts it at 0.35 and says he does not know.
+
+Both outcomes of both are reachable: the instrument that would report a refusal is the one that reported 44 of them.
+
+### Result — three fields that had not landed now refuse three colours
+
+**The headline: `d = 59`, `d = 239` and `d = 311` refuse.** Each is a field the census had recorded as *not landed*,
+and each refusal is a solver claim until the frozen checker certifies it (phase C). With their local bounds from
+`frame.jsonl`:
+
+| d | mod 8 | L | the refusing ball | degree | solve | what a certificate would make it |
+|---|---|---|---|---|---|---|
+| **59** | 3 | 4 (dyadic) | `Ldb4246f8`, R = 1.1945, 1,396,469 points, 9,773,884 edges | 13.998 | 314.7 s | **χ(ℚ(√59)²) = 4** — a new exact value |
+| **239** | 7 | 4 (7) | `L3e1c94c6`, R = 1.2892, 369,885 points, 2,587,978 edges | 13.993 | 403.0 s | **χ(ℚ(√239)²) = 4** — a new exact value |
+| **311** | 7 | 5 (11) | `Lc223387a`, R = 1.2892, 1,137,169 points, 7,960,542 edges | 14.001 | 18.2 s | **4 ≤ χ(ℚ(√311)²) ≤ 5** |
+
+**`d = 59` was one of the five fields phase B′ could say nothing about at all** — *"by budget: open lattices remain
+and not one was ever askable"*. It is now a refusal at the first question that was ever put to it at a degree
+capable of refusing.
+
+**And `d = 59` is a second `d ≡ 3 (mod 8)` field refusing by the direct route**, after `d = 11` in phase B. R-mod8
+did not merely lose; it is now losing repeatedly, and the half of the family it declared out of the direct route's
+reach has supplied two of the census's twelve refusing fields.
