@@ -50,6 +50,22 @@ no proof log kept, no second solver, no core extracted: a data point that prices
 "returned nothing" because it was wrapped in `/usr/bin/time`, which this machine does not have, behind a `grep` — a check that
 reported nothing because it could not run; the rerun reads the exit status from the solver.
 
+## `(19, 4)` at level two: one probe, not decided
+
+The owner's biclique encoder (`data/fs66/owner/fs66_owner_biclique_cnf.py 19 4`: 795,644 variables, 5,617,523 clauses, 96 MB,
+built in 7 s; pins: one edge, colours 0 and 1, **no precedence on the other two colours** — `ω = 2` at 19) under CaDiCaL with
+`-t 900`: **UNKNOWN, 165,454 conflicts, 896 s of process time, 1.19 GB.** By `CLAUDE.md` § Toolchain an unknown from an encoding
+whose value symmetry is unbroken measures the encoding; and level one's `(19, 4)` refusal was not timed under the same breaks
+first, which the plan's phase 3a does before anything else.
+
+## Certifying the single-class bound by spatial branch and bound (pricing pilot; scratch venv with `gurobipy 13.0.3`)
+
+`fs66_planner_b1_global.py P gurobi SECONDS [--cuts] [--pin]` — maximise `Σφ` under the fibre-density inequality (with `c` rounded
+up), optionally the edge and triangle cuts and the two sound symmetry breaks (`φ₀` maximal; the origin's first neighbour maximal
+among its neighbours). 4 threads. **At 7: bare 19.95 after 240 s; cuts 18.04 after 240 s; cuts + symmetry 16.165 after 300 s —
+below the 16.333 that refuses three colours at every level, which is the truth there.** **At 11 (cuts + symmetry): 35.88 after
+420 s against the 30.25 needed**, root relaxation 40.33, 39,720 open nodes and growing. Floating point, a solver's word.
+
 ## The single-class fibre-density relaxation (the owner's inequality, one colour class at a time)
 
 `fs66_planner_single_class.py P STARTS` maximises `Σφ` over `φ ∈ [0,1]^{p²}` subject to the owner's inequality
