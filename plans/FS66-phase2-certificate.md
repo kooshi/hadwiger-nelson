@@ -53,7 +53,7 @@ records. **No GPU, no Julia, no extended precision is needed at 11** (said plain
 | **representatives** | the `1 + (n+1)/2` monomials `φ_0` and `φ_{−h}φ_h` (one per class `{h, −h}`, in order of the smaller index; `h = 0` gives `φ_0²`): every monomial of degree 1 or 2 is a unique translate `τ_x(a)` of a unique representative `a`. 26 at 7, 62 at 11 |
 | **`F(a, a′, t)`** | `canon(a · τ_t(a′))` for representatives `a, a′` and a shift `t ∈ V` — the table through which the big moment matrix is read |
 | **`Q(m)`** | the linear form "moment of `q · m`": `2·Σ_x y(m ∪ x) − 2·Σ_x y(m ∪ x ∪ x) − Σ_x Σ_{s∈S} y(m ∪ x ∪ (x+s))` |
-| **box rows** | the scalar inequalities `y(m) ≥ 0` and `y(m ∖ x) − y(m) ≥ 0` (`x` a point of `m`): moments of products of `φ_x ≥ 0` and `1 − φ_x ≥ 0` |
+| **box product, box row** | `Π_{x∈A} φ_x · Π_{x∈B} (1 − φ_x)` with `|A| + |B| ≤ 4`; its symmetrised moment is ≥ 0 at any `φ ∈ [0,1]^V`. The relaxation uses only `B = ∅` (`y(m) ≥ 0`) and `|B| = 1` (`y(m∖x) − y(m) ≥ 0`); the certificate's one row type admits all of them |
 | **cascade** | the producer's rule that absorbs any leftover of either sign into box rows, down to the constant, so that `U` is computed, never guessed (§C.4) |
 | **trust word** | main plan §D's closed list, extended by one: `CERTIFIED (fs66_b1_cert_check)` — the checker's word plus the named hand steps of §S, never the kernel |
 
@@ -73,9 +73,10 @@ marked. Venv: **`~/venvs/fs66`** (outside `build/`; created with `--system-site-
 | B5 | the minimal relaxation at **11**: 3,759 moment variables, blocks 63 + 10 × 62 + a 2 × 2, 18,223 scalar rows | **28.2016** Clarabel (4 threads, 635 s, 7.3 GB); **28.2015** SCS (2 threads, **82 s**). Need < 30.25: margin **2.05** |
 | B6 | the un-reduced 122 × 122 box localisers at 11 | killed at 6 min: 24 GB, no first iteration. Not needed (B4–B5) |
 | B7 | local search at `c = 2` exactly, with the cuts | 7: **14.0000** (60 starts); 11: **28.0000** (200 starts; local maxima 27.998, 27.986, …; fractional *ties* at 28, nothing above). Nulls at a budget |
-| B8 | **exact-rounding prototype** (`tools/fs66_b1_probe.py --round 12 --wdigits 9 --shift 1e-6`), duals from SCS at `1e-7` | 7: **`U = 14.01758`**; 11: **`U = 28.22513`** (`4U = 112.90 < 121`); all blocks positive definite exactly; 0.1 s / 1.5 s of exact arithmetic. Outputs `proto-cert-p7.json` (87 KB), `proto-cert-p11.json` (775 KB, 3,838 rows) |
+| B8 | **exact-rounding prototype** (`tools/fs66_b1_probe.py --round 12 --wdigits 9 --shift 1e-6`), duals from SCS at `1e-7` | 7: **`U = 14.01758`**; 11: **`U = 28.22513`** (`4U = 112.90 < 121`); all blocks positive definite exactly; 0.1 s / 1.5 s of exact arithmetic. Outputs `proto-cert-p7.json`, `proto-cert-p11.json` (3,838 rows), since re-emitted in format v2 (§C) |
 | B9 | how the rounding fails when it fails | never on the identity; on **positive definiteness**: 6 digits, or no diagonal shift, and blocks fail; a shift applied *after* the basis rescaling cost 0.9 in `U` at 7 (apply it in the solver's basis, §R.2) |
 | B10 | one independent control of the prototype's bookkeeping, at 7 | a block's linear form on moments averaged over all 784 group elements equals the brute-force quadratic form to 9 digits, at a pure independent set and at a random fractional feasible point |
+| B12 | **the specification has an inhabitant**: a second program written from §C's formulas alone (`data/fs66/b1/planner_spec_inhabitant.py`, standard library, the planner's scratch — not the checker) evaluates (★) on the prototype files | 7: 0 mismatches over 495 canonical monomials, 14 blocks positive definite, 1.6 s; **11: 0 mismatches over 3,760, 22 blocks positive definite, 36 s**; the overclaim `U_num − 1` (one part in 10³⁰) is caught at `[]` |
 | B11 | the tightened relaxation at 11 (every box product of degree ≤ 4 and the edge/triangle cuts times monomials of degree ≤ 3, as scalar rows) — at 7 this reads **14.0000** | *running when this file was committed; recorded in `data/fs66/b1/README.md` and §R when it lands. It is a side reading (P-B5), not on the path* |
 
 **Three corrections to what the planner was handed.** (1) *"The relaxation cannot read below the three-point bound, 29.18"* — it
@@ -116,60 +117,76 @@ first — they cost rows, not matrices, and the certificate's shape (§C) does n
 
 ## §C. The certificate — what exactly it IS
 
-### C.1 The file (`format: "fs66-b1-cert-v1"`, JSON, integers and `"num/den"` strings only — a float anywhere is refused)
+### C.1 The file (`format: "fs66-b1-cert-v2"`, JSON, **integers only** — a float or a string where an integer belongs is refused)
+
+The certificate is the algebraic statement `U − Σφ = σ₀ + σ₁·q + Σ λ·(box products)` with `σ₀`, `σ₁` sums of squares — and the
+file has exactly that shape: **one block type** (a sum-of-squares multiplier of `1` or of `q`), **one row type** (a box product),
+one scale.
 
 ```
-{ "format": "fs66-b1-cert-v1", "p": 11, "c": 2,
-  "U": "num/den",                      the bound claimed: every feasible phi has sum(phi) <= U
-  "slack": "num/den",                  lambda_0 >= 0, the multiplier of the trivial row y([]) >= 0 (normally "0")
-  "den": D, "weight_den": W,           positive integers: block entries are integers over D, weights integers over W
-  "blocks": [ {"kind": "trivial",   "R": [[int]]},                       size 1 + #representatives; row 0 is the constant
-              {"kind": "character", "wc": [int]*n, "ws": [int]*n,        two weight vectors on V, by point index
-                                     "R": [[int]], "mu": int}, ... ],    size #representatives; mu >= 0 scales the q term
-  "q0": [[int, int], [int, int]],      the 2x2 multiplier of q on span{1, sum_x phi_x}
-  "rows": [ ["nonneg", m, "num/den"],  multiplier of  y(m) >= 0
-            ["le", m, x, "num/den"] ]  multiplier of  y(m minus one copy of x) - y(m) >= 0;  x must be a point of m
+{ "format": "fs66-b1-cert-v2", "p": 11,
+  "scale": L,                          integer > 0.  The bound claimed is U = U_num / L
+  "U_num": int,
+  "weights": [ [c, w_0, ..., w_{n-1}], ... ],     integer vectors on {[]} + V: entry 0 is the weight of the constant
+                                                  monomial, then one weight per point index
+  "blocks":  [ {"times": "1" | "q", "weights": [i, ...], "R": [[int]]}, ... ],
+                                       R symmetric POSITIVE DEFINITE, of size 1 + #reps(times); index 0 is the constant,
+                                       index 1 + j the j-th representative.  reps("1") = the representatives of §G
+                                       (phi_0, then phi_{-h} phi_h by smaller index of {h,-h}); reps("q") = [phi_0]
+  "rows":    [ [A, B, lam], ... ]      lam integer >= 0: the multiplier of the box product  prod_{x in A} phi_x * prod_{x in B} (1 - phi_x),
+                                       A and B lists of point indices (repeats allowed), len(A) + len(B) <= 4
 }
 ```
 
-The colour count `m` is **not** in the file: the file proves a bound `U`; whether `U` refuses `m` colours is the checker's
-arithmetic (`m·U < p²`), asked on the command line. `"u"` fields the prototype writes beside `wc`/`ws` are comments and ignored.
+The colour count `m` is **not** in the file: the file proves a bound; whether it refuses `m` colours is the checker's arithmetic
+(`m·U_num < p²·L`), asked on the command line. Unknown keys inside a block (the prototype writes `"u"`, the character the
+producer had in mind) are comments and ignored. What v1 of this format had and the domain pass removed: two block kinds, a
+separate `q0`/`mu`, two row kinds, a `slack` field and three denominators — each was the same object in a second costume (§E).
 
 ### C.2 The identity the checker verifies — (★)
 
-Write `κ_b(t) = Σ_x [wc_b(x)·wc_b(x+t) + ws_b(x)·ws_b(x+t)]` (an integer; the autocorrelation of block `b`'s weights). With
-`a, a′` over representatives, `t, x` over `V`:
+For a weight vector `ŵ = [c, w_0, …]` put `σ = Σ_x w_x` and `κ(t) = Σ_x w_x·w_{x+t}` (its autocorrelation, an integer). For a
+block, `Y(m)` means the form `y(canon(m))` when `times = "1"` and the form `Q(m)` (§G) when `times = "q"`. With `a, a′` over the
+block's representatives and `t` over `V`:
 
 ```
-T_triv(y) = R₀[0][0]·y([]) + 2n·Σ_a R₀[0][a]·y(a) + n·Σ_{a,a′} R₀[a][a′]·Σ_t y(F(a,a′,t))                       / D
-T_b(y)    = Σ_{a,a′} R_b[a][a′]·Σ_t κ_b(t)·y(F(a,a′,t))  +  mu_b·Σ_t κ_b(t)·Q([0,t])                             / (D·W²)
-T_q0(y)   = q0[0][0]·Q([]) + 2n·q0[0][1]·Q([0]) + n·q0[1][1]·Σ_t Q([0,t])                                       / D
+T_block(y) = Σ_{ŵ in the block's weights} [  R[0][0]·c²·Y([])  +  2·Σ_a R[0][a]·c·σ·Y(a)  +  Σ_{a,a′} R[a][a′]·Σ_t κ(t)·Y(a · τ_t(a′))  ]
+box(A,B)(y) = Σ_{T ⊆ positions of B} (−1)^{|T|}·y(canon(A ∪ B_T))
 
-(★)   U·y([]) − n·y([0])  =  T_triv(y) + Σ_b T_b(y) + T_q0(y) + Σ_rows λ_r·row_r(y) + slack·y([])
+(★)   U_num·y([]) − L·n·y([0])  =  Σ_blocks T_block(y)  +  Σ_rows lam·box(A,B)(y)
 ```
 
-as an equality of linear forms in the unknowns `y(canon(m))` — coefficient by coefficient over every canonical monomial of degree
-≤ 4, the constant `y([])` included. The checker also verifies: every `R` is symmetric and **positive definite** (exact
-fraction-free elimination, all leading minors > 0); `q0` symmetric with `q0[0][0] ≥ 0`, `q0[1][1] ≥ 0`, `det ≥ 0`; every `mu_b ≥ 0`,
-every `λ_r ≥ 0`, `slack ≥ 0`; every row well-formed.
+an equality of **integer** linear forms in the unknowns `y(k)`, `k` a canonical monomial of degree ≤ 4 — coefficient by
+coefficient, the constant `y([])` included. Beside (★) the checker verifies: `L > 0` (**a non-positive scale would flip the
+inequality** — the one adversarial file the type alone does not exclude); every `R` symmetric, of the right size, and positive
+definite (exact fraction-free elimination, every leading minor > 0); every `lam ≥ 0`; every index in range.
+
+*What the producer puts there (not the checker's concern):* weight 0 is all ones (`c = 1`): its `times "1"` block is the
+trivial-character block with the constant row, its `times "q"` block the 2 × 2 localiser of `q`. Each nonzero character class
+gets two weights `[0, round(10⁹cos)]`, `[0, round(10⁹sin)]` sharing one block `R = [[1, 0], [0, R_b]]` (the constant row is
+multiplied by `c = 0` and costs nothing) and one `times "q"` block `[[1, 0], [0, mu]]` when `mu > 0`. At 11: 21 weights,
+22 blocks, 3,838 rows, 775 KB.
 
 ### C.3 Why each term is nonnegative at a feasible point — and why the weights are NOT trusted
 
-Let `ȳ` be the symmetrised moments of a feasible `φ` (§S.3). `T_b(ȳ)` is `⟨𝒵_b, M(ȳ)⟩ + mu_b·⟨𝒲_b, M_q(ȳ)⟩` where `M(ȳ)` is the
-moment matrix on monomials of degree 1–2 indexed as `(x, a) ↔ τ_x(a)`, `𝒵_b = (wc·wcᵀ + ws·wsᵀ) ⊗ R_b` and
-`𝒲_b = wc·wcᵀ + ws·wsᵀ` on `V`. A Kronecker product of positive semidefinite matrices is positive semidefinite, **whatever the
-integers `wc`, `ws` are**. The producer takes them to be rounded cosines and sines of `2π⟨u,x⟩/p` because that makes `U` small —
-a fact about the producer, exactly as in FS-50 (`plans/FS50-certificate-soundness.md` §7). Wrong weights, a wrong block
-structure, a wrong `F` *in the producer*: each can only weaken `U`, never make a false certificate pass. Likewise the
-representatives need not be "centred" for soundness: any list of monomials of degree ≤ 2 indexes a (possibly repeated)
-principal submatrix of the moment matrix.
+Let `ȳ` be the symmetrised moments of a feasible `φ` (§S.3). Index monomials of degree ≤ 2 as `[]` and `(x, a) ↔ τ_x(a)`. For a
+weight vector `ŵ` let `E_ŵ` be the matrix from the block's index set to that monomial space with `E_ŵ[[], 0] = c` and
+`E_ŵ[(x, a), a] = w_x`. Then `T_block(ȳ) = Σ_ŵ ⟨E_ŵ R E_ŵᵀ, M⟩` where `M` is the moment matrix of `ȳ` (for `times "1"`) or the
+moment matrix of `q·ȳ` on monomials of degree ≤ 1 (for `times "q"`), using only that `ȳ` and `Q` are translation-invariant.
+`E R Eᵀ` is positive semidefinite for positive definite `R` **whatever the integers in `ŵ` are**. The producer takes them to be
+rounded cosines and sines because that makes `U` small — a fact about the producer, exactly as in FS-50
+(`plans/FS50-certificate-soundness.md` §7). Wrong weights, a wrong block structure, a wrong table *in the producer*: each can
+only weaken `U`. Likewise the representatives need not be "centred" for soundness: any list of monomials of degree ≤ 2 indexes
+a (possibly repeated) principal submatrix of the moment matrix. A box product of numbers in `[0, 1]` is nonnegative, so its
+symmetrised moment is.
 
 ### C.4 The cascade — `U` is an output, and the rounding cannot fail to produce an identity
 
 After rounding the blocks and the solver's own row multipliers (negative ones clipped to zero), compute the linear form still
 owed, `need(y) = −n·y([0]) − (all T terms) − (rounded rows)`, and walk the canonical monomials **by decreasing degree**: a
-positive coefficient is paid by `["nonneg", m]`; a negative one by `["le", m, x]` with `x` the last point of `m`, which moves the
-debt to `canon(m ∖ x)`, one degree down. At the constant, `U := −need([])`. Every step is a maximum against zero, so **any**
+positive coefficient is paid by the row `[m, [], ·]` (the moment of `m` is ≥ 0); a negative one by `[m ∖ x, [x], ·]` with `x` the
+last point of `m` (`y(m∖x) − y(m) ≥ 0`), which moves the debt to `canon(m ∖ x)`, one degree down. At the constant,
+`U_num := −need([])`. With integer blocks and one scale every leftover is an integer, so the rows' multipliers are too. Every step is a maximum against zero, so **any**
 rational positive definite blocks yield a valid certificate for *some* `U`; rounding is scored by the bound it proves, never by a
 residual (FS-50 §5's rule, transplanted). Measured loss: 0.0027 at 7, 0.024 at 11 (B8).
 
@@ -250,25 +267,26 @@ the file's SHA-256, and the words "given the hand-proved links L1–L6 of plans/
 
 ### K.2 What it does, in order of marginal evidential value (cheap and decisive first)
 
-1. Parse strictly: format string, types, no floats (`FLOAT_IN_FILE`), lengths (`MALFORMED`), `p` prime and `≡ 3 (mod 4)`.
-2. Signs: `mu`, row multipliers, `slack` (`NEGATIVE_MULTIPLIER`); `q0` (`Q0_NOT_PSD`).
+1. Parse strictly: format string, every number a JSON integer (`NOT_AN_INTEGER` — a float, a string, a boolean), shapes and
+   index ranges (`MALFORMED`), `p` prime and `≡ 3 (mod 4)` (`BAD_PRIME`).
+2. Signs: `scale > 0` (`NONPOSITIVE_SCALE`); every row multiplier `≥ 0` (`NEGATIVE_MULTIPLIER`).
 3. Rebuild from `p` alone: points, `S`, the `2(p+1)` linear maps, **and verify each is a bijection with `h(x+s) − h(x) ∈ S` for
    all `x, s`** (`NOT_A_SYMMETRY` — cannot fire on its own construction; it is the guard of the one property soundness needs).
-4. Rows: every `m` a sorted list of ≤ 4 valid indices, `x ∈ m` for `le` rows (`ROW_NOT_VALID`).
+4. Rows: `A`, `B` lists of valid point indices with `len(A) + len(B) ≤ 4` (`ROW_MALFORMED`).
 5. Positive definiteness of every `R` by fraction-free elimination (`BLOCK_NOT_POSITIVE_DEFINITE`, naming the block and the
    first non-positive minor).
-6. Build `F`, the `Q` forms and the `κ_b`; accumulate the right side of (★) as exact rationals per canonical monomial; compare
+6. Build the autocorrelations `κ`, the products `a·τ_t(a′)` and the `Q` forms; accumulate the right side of (★) in integers per canonical monomial; compare
    with the left (`IDENTITY_MISMATCH`, naming the canonical monomial and both coefficients — the constant first, because that
    is where an overclaimed `U` shows).
-7. `M·U < p²` exactly → `CERTIFIED`, else `BOUND ONLY`.
+7. `M·U_num < p²·scale` in integers → `CERTIFIED`, else `BOUND ONLY`.
 
 **Why `canon` cannot make a false certificate pass.** `canon(m)` is computed as an explicit image of `m` under a translation
 followed by a verified symmetry, so two monomials are merged only if they really are `Γ`-equivalent; *failing* to merge
 equivalent monomials only makes (★) stricter. So an incomplete canonicaliser is safe and a wrong-merging one is impossible by
 construction — say this in the checker's docstring.
 
-Expected cost at 11 (pure Python): ≈ 0.6 M canonicalisations (memoised), 2.6 M big-integer multiply-adds, twelve eliminations of
-size ≤ 63: **2–5 minutes, under 1 GB** [estimated from the prototype's 17 s build with numpy-free inner loops; P-B3].
+Cost at 11 (pure Python): ≈ 0.6 M canonicalisations (memoised), 2.6 M big-integer multiply-adds, 22 eliminations of size ≤ 63:
+**36 s, measured on the planner's from-the-spec evaluator (B12)**; the checker adds parsing, the symmetry guard and messages [P-B3].
 
 ### K.3 Controls (`--self-test`) — each red for a named reason, beside a faithful twin that stays green
 
@@ -279,22 +297,23 @@ re-checked and its SHA-256 compared (a harness must verify its own restore). Exp
 | # | plant | must end on |
 |---|---|---|
 | 0 | faithful twin | `CERTIFIED` (at 7 with `--m 3`) |
-| 1 | `U` lowered by `1/10¹²` | `REFUSED IDENTITY_MISMATCH` at `[]` — **the overclaim, the fault that matters most** |
-| 2 | `U` raised by 1 with `slack` raised by 1 | `CERTIFIED` — a weaker true claim must pass (the plant's both-sides bound) |
-| 3 | `U` raised by 1, `slack` untouched | `REFUSED IDENTITY_MISMATCH` |
+| 1 | `U_num` lowered by 1 (one part in 10³⁰ of `U`) | `REFUSED IDENTITY_MISMATCH` at `[]` — **the overclaim, the fault that matters most** |
+| 2 | `U_num` raised by `scale` (the bound weakened by 1) **and** the row `[[], [], scale]` added (`1 ≥ 0`, multiplier 1) | `CERTIFIED` — a weaker true claim must pass (the plant's both-sides bound) |
+| 3 | `U_num` raised by `scale`, no row added | `REFUSED IDENTITY_MISMATCH` |
 | 4 | one diagonal entry of a character block negated | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` |
 | 5 | a character block replaced by a symmetric matrix with a zero eigenvalue and positive diagonal | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` (semidefinite is refused: Sylvester's strict form is what is checked) |
 | 6 | a row multiplier's sign flipped, identity repaired by hand elsewhere | `REFUSED NEGATIVE_MULTIPLIER` |
-| 7 | an `le` row whose `x` is not a point of `m` | `REFUSED ROW_NOT_VALID` |
-| 8 | one integer replaced by a float (`1.0`) | `REFUSED FLOAT_IN_FILE` |
+| 7 | a row with `len(A) + len(B) = 5`; a row with a point index `n` | `REFUSED ROW_MALFORMED` |
+| 7b | `scale` and `U_num` and every `R` and `lam` negated (the identity still holds; the inequality is flipped) | `REFUSED NONPOSITIVE_SCALE` — the adversarial file the domain pass found |
+| 8 | one integer replaced by the float `1.0`; another by the string `"1"` | `REFUSED NOT_AN_INTEGER` |
 | 9 | a certificate produced for the WRONG problem, `c = 1` (`fs66_b1_probe.py … --c 1`; a stronger, false constraint) | `REFUSED IDENTITY_MISMATCH` — the checker has no `c` to read; `q` is rebuilt with 2 |
 | 10 | the 7 file checked with `--m 4`; the 11 file with `--m 5` | `BOUND ONLY` (exit 3) — both are colourable at every level, so `CERTIFIED` here would be a false theorem |
-| 11 | the 7 file with its `"p"` edited to 11 | `REFUSED MALFORMED` (lengths) |
+| 11 | the 7 file with its `"p"` edited to 11; to 5; to 9 | `REFUSED MALFORMED` (lengths); `BAD_PRIME`; `BAD_PRIME` |
 | 12 | weights replaced by arbitrary integers, `U` and rows recomputed by the producer | `CERTIFIED` or `BOUND ONLY` with a larger `U` — **never refused**: shows the weights are off the trust surface |
 
 **Two independent twins of the bookkeeping, run in `--self-test`.** (a) *Orbit twin:* at `p = 3` and `p = 7`, canonical forms
 against brute-force orbits (apply all of `Γ` to every monomial of degree ≤ 4, union-find): same partition. (b) *Assembled twin:*
-at `p = 3`, build the full matrices `𝒵 = Σ_b (wc·wcᵀ + ws·wsᵀ) ⊗ R_b` and the moment matrix of symbols explicitly, read the
+at `p = 3`, build the full matrices `Σ_ŵ E_ŵ R E_ŵᵀ` (§C.3) and the moment matrix of symbols explicitly, read the
 coefficient of every canonical monomial by brute force over all index pairs, and compare with the `F`/`κ` route — the path the
 fast code never takes. (A `p = 3` certificate: the producer at `p = 3`, `m = 2`; if `B₁(3)`'s relaxation does not refuse two
 colours the file ends `BOUND ONLY`, which serves the twin equally.)
@@ -309,8 +328,9 @@ colours the file ends `BOUND ONLY`, which serves the twin equally.)
    eleven 62 × 62 eigendecompositions and one cached sparse solve — nothing a GPU helps. *No extended precision:* the margin is
    2.05 and the measured rounding loss 0.024.
 2. **Round** (B8–B9): take the dual blocks `Z`; add `shift·max(diag Z)·I` **in the solver's basis**; rescale by the congruence
-   that turns the solver's normalisation into §C.2's (trivial block `diag(1, 1/n, …)`, character blocks `1/√n`, `q0`
-   `diag(1, 1/n)`; `mu = dual/n`); multiply by `D = 10^{12}` and round to integers; weights `round(10⁹·cos)`, `round(10⁹·sin)`.
+   that turns the solver's normalisation into §C.2's (all-ones weight: `diag(1, 1/n, …)`; character blocks `1/√n`; the 2 × 2
+   of `q`: `diag(1, 1/n)`; `mu = dual/n`); multiply by `D = 10^{12}` and round to integers; weights `round(W·cos)`,
+   `round(W·sin)` with `W = 10⁹`; the file's `scale` is `D·W²`, and the all-ones blocks are multiplied by `W²` to sit on it.
    Check positive definiteness exactly; on failure raise the shift (×10) and retry; record every attempt.
 3. **Rows and cascade** (§C.4), then write the file and a record.
 4. **Scan** `shift ∈ {1e-7, 1e-6, 1e-5}` × `D ∈ {10¹⁰, 10¹²}` and keep the smallest `U` whose blocks are all positive definite.
@@ -319,7 +339,7 @@ colours the file ends `BOUND ONLY`, which serves the twin equally.)
 Every run appends one record to `data/fs66/b1/records.jsonl` (main plan §D's discipline — flat, typed, a trust word):
 `{"kind": "fs66-b1", "record_version": 1, "utc", "command", "tool_sha256", "p", "c": 2, "relaxation": "minimal", "solver",
 "solver_eps", "threads", "float_value", "float_dual", "iterations", "solve_s", "rss_mb", "digits", "weight_digits", "shift",
-"pd_failures": [...], "U": "num/den", "U_float", "rows", "cert": "<path>", "cert_sha256", "machine", "trust": "float reading
+"pd_failures": [...], "U_num", "scale", "U_float", "rows", "cert": "<path>", "cert_sha256", "machine", "trust": "float reading
 (untrusted)" | "prototype bound (producer's own arithmetic, untrusted)" | "CERTIFIED (fs66_b1_cert_check)"}`. The producer never
 writes the third word; only a checker run does (a second record, `"kind": "fs66-b1-check"`, carrying the checker's last line, its
 exit status, its SHA-256, `m`, and wall seconds).
@@ -331,8 +351,8 @@ exit status, its SHA-256, `m`, and wall seconds).
 | id | prediction | confidence | what would refute it | both outcomes reachable? |
 |---|---|---|---|---|
 | P-B1 | the independent checker ends `CERTIFIED` on a certificate at 11 with **`U` in [28.20, 28.30]**, `--m 4` | high | a refusal that is not a plant — then the prototype's bookkeeping and the checker's disagree, and finding which is wrong is the phase's most valuable hour | yes: the prototype is self-consistent but has never been checked by other code |
-| P-B2 | the checker's **first** run on `proto-cert-p7.json` does *not* certify, because of a convention mismatch between this file's §C and the prototype (index order, a factor `n`, row semantics) rather than a mathematical error | medium | a first-run `CERTIFIED` (then §C was unambiguous) | yes |
-| P-B3 | checker wall time at 11 **under 10 minutes**, pure Python, under 2 GB | medium-high | over 30 minutes — then the canonicaliser needs the rooted-at-origin shortcut before anyone reviews with it | yes |
+| P-B2 | the checker's **first** run on `proto-cert-p7.json` does *not* certify, because of a convention read differently from §C (representative order, which factor of `a·τ_t(a′)` is translated, sub-multisets of `B`) rather than a mathematical error — *registered at medium before B12; after B12 showed §C executable as written by a second program, the planner holds it at* | low-medium | a first-run `CERTIFIED` (then §C was unambiguous) | yes |
+| P-B3 | checker wall time at 11 **under 3 minutes**, pure Python, under 1 GB (the planner's bare evaluator: 36 s, B12) | medium-high | over 10 minutes — a reviewer's patience is part of the trust surface; find what the evaluator does not do | yes |
 | P-B4 | plant 12 (arbitrary weights) yields `U > 40` at 11 — sound and useless | high | a refusal (the weights would be on the trust surface: a design error) | yes |
 | P-B5 | the tightened relaxation at 11 (B11) reads **28.00 ± 0.02** — the relaxation is exact at 11 as at 7 | low-medium | a reading above 28.05 | yes; the run is cheap |
 | P-B6 | at 19 (Phase 2C, if run) the minimal relaxation reads **in [80.6, 87]** and a certificate lands under 90.25 | low-medium — no measurement at 19 | a reading ≥ 90.25 (the second level is not enough at 19), or a build that does not fit (then §19's reductions are owed first) | yes |
@@ -460,7 +480,22 @@ certificate at the optimal face. That is a stub candidate, not this phase.
 
 ## §E. The modeling passes (WORKFLOW step 5) — what each changed
 
-*(filled by the planner as each pass is committed)*
+**Domain modeling (`debruijn-domain-modeling`, fresh invocation, 2026-09-20).** *The one cut:* what is intrinsic is the algebra —
+`U − Σφ = σ₀ + σ₁·q + Σ λ·(box products)`, a degree-4 certificate in the quadratic module of the box and `q`; what was incidental
+in format v1 was the producer's SDP showing through. *Ugliness read ("N declarations identical modulo naming"):* the "trivial"
+block was a "character" block with all-ones weights plus a constant row; `q0` and `mu` were the same block type one degree down
+with `Q` in place of `y`; `nonneg`, `le` and `slack` were the box products with `|B| = 0`, `|B| = 1` and `A = B = ∅`; three
+denominators were one scale. **Changed:** format v2 — one block type (`times`, weights with a constant entry, `R`), one row type
+(`[A, B, lam]`), integers only over one `scale`; the checker has one formula per term instead of three, and the tightening
+family (all box products) became expressible at no cost. *Adversarial member:* every sign negated together — the identity
+holds and the inequality flips — so `scale > 0` is a named refusal and a plant (7b). *Exhibit the model of the hypotheses:* the
+specification was run as written by a second program on the re-emitted prototype files (B12: 0 mismatches at 7 and 11; the
+overclaim `U_num − 1` caught at `[]`). *Placement cut:* the colour count stays outside the file (only some consumers need it);
+the character `u` is a comment, not a field (no consumer inspects it). *Not added:* rows of the form `q × box product`, cut
+rows, a positive-*semi*definite block form — no ugliness demands them at 11; the last is what an exact-face certificate would
+need (§PA) and is named there.
+
+*(the remaining passes are appended as each is committed)*
 
 ---
 

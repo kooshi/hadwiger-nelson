@@ -426,15 +426,27 @@ if args.round:
             par = canon(inv[k][:-1]); extra_le[(k, par)] = -need[k]; need[par] += need[k]
         need[k] = Fraction(0)
     U = -need[0]                                       # U*y0 + need[0]*y0 = 0
-    def frac(v): return f"{v.numerator}/{v.denominator}"
+    # ---- write format fs66-b1-cert-v2: integers only, ONE block type, ONE row type (plans/FS66-phase2-certificate.md §C)
+    LAM = DEN * DW * DW                                # the scale: U = U_num / LAM
+    def as_int(v):
+        v = Fraction(v) * LAM; assert v.denominator == 1, "a multiplier is not an integer over the scale"; return int(v)
+    weights = [[1] + [1] * n]                          # weight vectors on {[]} + V; index 0 is the all-ones vector
+    out_blocks = [dict(times="1", weights=[0], R=[[v * DW * DW for v in row] for row in R0])]
+    for blk in cert["blocks"][1:]:
+        ic = len(weights); weights.append([0] + blk["wc"]); weights.append([0] + blk["ws"])
+        Rb = blk["R"]; d = len(Rb)
+        out_blocks.append(dict(times="1", weights=[ic, ic + 1], u=blk["u"],
+                               R=[[1] + [0] * d] + [[0] + Rb[i] for i in range(d)]))
+        if blk["mu"] > 0: out_blocks.append(dict(times="q", weights=[ic, ic + 1], u=blk["u"], R=[[1, 0], [0, blk["mu"]]]))
+    if any(any(r_) for r_ in q0): out_blocks.append(dict(times="q", weights=[0], R=[[v * DW * DW for v in row] for row in q0]))
+    rows = []
     for k in set(lam_plus) | set(extra_plus):
-        v = Fraction(lam_plus.get(k, 0), DEN) + extra_plus.get(k, 0)
-        cert["rows"].append(["nonneg", list(inv[k]), frac(v)])
+        rows.append([list(inv[k]), [], as_int(Fraction(lam_plus.get(k, 0), DEN) + extra_plus.get(k, 0))])
     for (k, k2) in set(lam_le) | set(extra_le):
-        v = Fraction(lam_le.get((k, k2), 0), DEN) + extra_le.get((k, k2), 0)
         mk = list(inv[k]); x = next(x for x in set(mk) if canon(tuple(sorted(mk[:mk.index(x)] + mk[mk.index(x) + 1:]))) == k2)
-        cert["rows"].append(["le", mk, x, frac(v)])
-    cert["U"] = frac(U)
+        A_ = mk[:mk.index(x)] + mk[mk.index(x) + 1:]
+        rows.append([A_, [x], as_int(Fraction(lam_le.get((k, k2), 0), DEN) + extra_le.get((k, k2), 0))])
+    cert = dict(format="fs66-b1-cert-v2", p=p, scale=LAM, U_num=as_int(U), weights=weights, blocks=out_blocks, rows=rows)
     rec.update(dict(round_digits=args.round, weight_digits=args.wdigits, shift=args.shift, pd_failures=pdfail,
                     exact_U=float(U), exact_U_minus_float=float(U) - val, rows_in_certificate=len(cert["rows"]),
                     cascaded=len(extra_le), exact_seconds=round(time.time() - T2, 1)))

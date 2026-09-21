@@ -79,3 +79,11 @@ checks its own work with its own bookkeeping, which is exactly what a certificat
 run on the bookkeeping (`round-p7-selfcheck.log`, an earlier revision of the prototype): at a pure independent set and at a random
 fractional feasible point, a block's linear form evaluated on moments averaged over all 784 group elements equals the brute-force
 quadratic form to nine digits (0.390881637 and 0.004280977, both ways).
+
+## After the domain-modeling pass: format v2, and the specification run by a second program
+
+The prototype files were re-emitted in the collapsed format `fs66-b1-cert-v2` (one block type, one row type, integers over one
+scale; subplan §C), and `planner_spec_inhabitant.py` — the planner's scratch, standard library, written from §C's formulas alone,
+**not the checker** — evaluated the identity on them: **7: 0 mismatches over 495 canonical monomials, 14 blocks positive definite,
+1.6 s. 11: 0 mismatches over 3,760, 22 blocks positive definite, 36 s, `U = 28.225133`.** Lowering `U_num` by 1 (one part in 10³⁰)
+is caught at the constant monomial. Log of the re-emission: `round-p11-scs-d12-v2.log`.
