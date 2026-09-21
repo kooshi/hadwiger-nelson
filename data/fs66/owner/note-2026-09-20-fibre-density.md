@@ -73,3 +73,21 @@ structure. None is priced.
   ±1, ±3, ±5 are each wholly adjacent to it), at most three parallels are mutually free (offsets `{0, 2, 4}`), and the family tops out
   near 16–27 of 121 against level one's 28. A rise, if there is one, needs fibre sets with small projections in several directions
   at once — and the inequality of §2 says how little room that leaves.
+
+## 5. Level two is a union of complete bipartite blocks, and that gives a SAT encoding a tenth the size [checked; `fs66_owner_biclique.py`]
+
+Between the fibres over two adjacent level-one points `x` and `y = x + s̄`, the graph `UD(ℤ/p², 2)` is **`p` disjoint copies of
+`K_{p,p}`**: the second digits `u ∈ 𝔽_p²` of a fibre fall into `p` lines of direction `s̄·i` (indexed by the `s̄`-component
+`s₀a + s₁b mod p`), and line `t` over `x` is completely joined to exactly one line `t′ = t + γ(x, s̄)` over `y` and to nothing else
+(checked on 32 level-one edges at 7 and 48 at 11, 0 failures). So the 966,306 edges at 11 are 726 × 11 = 7,986 bicliques `K_{11,11}`.
+
+**The encoding** (`fs66_owner_biclique_cnf.py P K out.cnf`): beside the colour variables `c[v, a]`, one *line variable*
+`z[x, d, t, a]` per level-one point, direction class `d` (six at 11), line and colour, with `c[v, a] → z[x(v), d, t(v, d), a]`, and
+ONE conflict clause `¬z[x, d, t, a] ∨ ¬z[y, d, t′, a]` per biclique and colour in place of 121. At `(11, 4)`: 90,508 variables and
+**397,972 clauses against 3.9 million**, and unit propagation now reasons about whole lines. A triangle through the origin is
+pinned (`ω = 3` at 11), which leaves no colour symmetry at four colours.
+
+**Controls, run and passed:** `(7, 3)` UNSATISFIABLE — the true answer; `(7, 4)` SATISFIABLE, decoded and **verified by
+`tools/fs66_owner_verify.py`** (class sizes 583, 582, 615, 621 — not multiples of 49, so a colouring the solver was never handed
+and that is not pulled back from level one). Both in seconds, single-threaded CaDiCaL. The probes at `(11, 5)` and `(11, 4)`:
+appended below when they finish.
