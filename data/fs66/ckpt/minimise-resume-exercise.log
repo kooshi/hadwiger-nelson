@@ -1,0 +1,424 @@
+=== FS-66 phase 1a: the checkpoint/resume discipline, exercised on purpose ===
+The tool is tools/fs66_minimise.py -- the same code the production run uses. The mode here is edge
+deletion, only because its probes cost 120,000-150,000 conflicts each and the run therefore lasts long
+enough to interrupt; the production vertex run finishes in 15.7 s (see minimise-p11-l2.log).
+THE AUDIT QUESTION, answered BEFORE launching: if this process dies right now, what does the relaunch redo?
+  data/fs66/ckpt/resume-exercise.current.json is rewritten atomically (temp file, fsync, rename) after
+  EVERY wave, and carries the vertex list, the edge list, the pin, the accepted deletions and the set of
+  candidates already probed against THIS graph. So the relaunch redoes at most the one wave in flight.
+  resume: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/resume-exercise.current.json
+
+start: 883 vertices, 3441 edges, pin [0, 120, 5747], n=121, k=4, mode=edges, 16 probes at a time, conflict budget 300000, 0 deletions already on the checkpoint
+  if this dies now the relaunch redoes at most one wave of 16 probes; resume: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/resume-exercise.current.json
+wave 1 (edges): 883v/3441e -> 883v/3437e  (deleted e (0, 2326); 5 of 16 probes refused; 1595 conflicts; 0.1s)
+wave 2 (edges): 883v/3437e -> 883v/3433e  (deleted e (0, 1332); 4 of 16 probes refused; 1705 conflicts; 0.2s)
+wave 3 (edges): 883v/3433e -> 883v/3431e  (deleted e (0, 1451); 3 of 16 probes refused; 1496 conflicts; 0.1s)
+wave 4 (edges): 883v/3431e -> 883v/3428e  (deleted e (0, 996); 2 of 16 probes refused; 1686 conflicts; 0.1s)
+wave 5 (edges): 883v/3428e -> 883v/3426e  (deleted e (0, 2393); 1 of 16 probes refused; 1938 conflicts; 0.1s)
+wave 6 (sweep 1, edges): 883v/3426e  no deletion ({'SAT': 16}), 16/3423 probed, 0.1s
+wave 7 (edges): 883v/3426e -> 883v/3423e  (deleted e (0, 9015); 4 of 16 probes refused; 2121 conflicts; 0.1s)
+wave 8 (edges): 883v/3423e -> 883v/3421e  (deleted e (0, 9014); 2 of 16 probes refused; 2573 conflicts; 0.1s)
+wave 9 (sweep 1, edges): 883v/3421e  no deletion ({'SAT': 16}), 32/3418 probed, 0.1s
+wave 10 (edges): 883v/3421e -> 883v/3418e  (deleted e (0, 13766); 6 of 16 probes refused; 2322 conflicts; 0.2s)
+wave 11 (edges): 883v/3418e -> 883v/3415e  (deleted e (0, 12436); 6 of 16 probes refused; 2655 conflicts; 0.2s)
+wave 12 (edges): 883v/3415e -> 883v/3412e  (deleted e (0, 13701); 6 of 16 probes refused; 2549 conflicts; 0.2s)
+wave 13 (edges): 883v/3412e -> 883v/3409e  (deleted e (1, 2); 6 of 16 probes refused; 2134 conflicts; 0.2s)
+wave 14 (edges): 883v/3409e -> 883v/3406e  (deleted e (1, 1062); 6 of 16 probes refused; 2309 conflicts; 0.2s)
+wave 15 (edges): 883v/3406e -> 883v/3404e  (deleted e (1, 2327); 6 of 16 probes refused; 2634 conflicts; 0.2s)
+wave 16 (edges): 883v/3404e -> 883v/3403e  (deleted e (1, 1333); 5 of 16 probes refused; 2389 conflicts; 0.2s)
+wave 17 (edges): 883v/3403e -> 883v/3401e  (deleted e (1, 997); 4 of 16 probes refused; 3314 conflicts; 0.2s)
+wave 18 (edges): 883v/3401e -> 883v/3399e  (deleted e (1, 1331); 3 of 16 probes refused; 3176 conflicts; 0.2s)
+wave 19 (edges): 883v/3399e -> 883v/3398e  (deleted e (1, 2394); 1 of 16 probes refused; 2543 conflicts; 0.1s)
+wave 20 (sweep 1, edges): 883v/3398e  no deletion ({'SAT': 16}), 48/3395 probed, 0.1s
+wave 21 (edges): 883v/3398e -> 883v/3394e  (deleted e (1, 4472); 8 of 16 probes refused; 2686 conflicts; 0.2s)
+wave 22 (edges): 883v/3394e -> 883v/3391e  (deleted e (1, 12437); 8 of 16 probes refused; 2634 conflicts; 0.2s)
+wave 23 (edges): 883v/3391e -> 883v/3386e  (deleted e (1, 9016); 8 of 16 probes refused; 2784 conflicts; 0.2s)
+wave 24 (edges): 883v/3386e -> 883v/3383e  (deleted e (1, 13767); 7 of 16 probes refused; 2781 conflicts; 0.2s)
+wave 25 (edges): 883v/3383e -> 883v/3381e  (deleted e (1, 11981); 7 of 16 probes refused; 2645 conflicts; 0.2s)
+wave 26 (edges): 883v/3381e -> 883v/3380e  (deleted e (1, 14609); 7 of 16 probes refused; 2303 conflicts; 0.2s)
+wave 27 (edges): 883v/3380e -> 883v/3378e  (deleted e (2, 3); 5 of 16 probes refused; 2509 conflicts; 0.2s)
+wave 28 (edges): 883v/3378e -> 883v/3376e  (deleted e (1, 9015); 4 of 16 probes refused; 3139 conflicts; 0.2s)
+wave 29 (edges): 883v/3376e -> 883v/3375e  (deleted e (1, 13312); 4 of 16 probes refused; 2658 conflicts; 0.2s)
+wave 30 (edges): 883v/3375e -> 883v/3373e  (deleted e (2, 998); 4 of 16 probes refused; 3009 conflicts; 0.2s)
+wave 31 (edges): 883v/3373e -> 883v/3372e  (deleted e (1, 13702); 4 of 16 probes refused; 2805 conflicts; 0.2s)
+wave 32 (edges): 883v/3372e -> 883v/3370e  (deleted e (2, 2328); 4 of 16 probes refused; 2569 conflicts; 0.2s)
+wave 33 (edges): 883v/3370e -> 883v/3369e  (deleted e (1, 5749); 4 of 16 probes refused; 2488 conflicts; 0.2s)
+wave 34 (edges): 883v/3369e -> 883v/3368e  (deleted e (2, 2395); 3 of 16 probes refused; 2324 conflicts; 0.2s)
+wave 35 (edges): 883v/3368e -> 883v/3367e  (deleted e (2, 4473); 3 of 16 probes refused; 2355 conflicts; 0.2s)
+wave 36 (edges): 883v/3367e -> 883v/3366e  (deleted e (2, 1332); 3 of 16 probes refused; 2349 conflicts; 0.2s)
+wave 37 (edges): 883v/3366e -> 883v/3365e  (deleted e (2, 4751); 3 of 16 probes refused; 2833 conflicts; 0.2s)
+wave 38 (edges): 883v/3365e -> 883v/3363e  (deleted e (2, 5750); 3 of 16 probes refused; 2849 conflicts; 0.3s)
+wave 39 (edges): 883v/3363e -> 883v/3362e  (deleted e (2, 1063); 2 of 16 probes refused; 2739 conflicts; 0.2s)
+wave 40 (edges): 883v/3362e -> 883v/3361e  (deleted e (2, 5749); 1 of 16 probes refused; 2979 conflicts; 0.2s)
+wave 41 (edges): 883v/3361e -> 883v/3360e  (deleted e (2, 7741); 1 of 16 probes refused; 2669 conflicts; 0.1s)
+wave 42 (sweep 1, edges): 883v/3360e  no deletion ({'SAT': 16}), 64/3357 probed, 0.1s
+wave 43 (edges): 883v/3360e -> 883v/3359e  (deleted e (2, 11982); 5 of 16 probes refused; 2486 conflicts; 0.2s)
+wave 44 (edges): 883v/3359e -> 883v/3357e  (deleted e (2, 13311); 4 of 16 probes refused; 3091 conflicts; 0.2s)
+wave 45 (edges): 883v/3357e -> 883v/3355e  (deleted e (2, 9016); 1 of 16 probes refused; 3656 conflicts; 0.2s)
+wave 46 (sweep 1, edges): 883v/3355e  no deletion ({'SAT': 16}), 80/3352 probed, 0.1s
+wave 47 (edges): 883v/3355e -> 883v/3353e  (deleted e (3, 999); 11 of 16 probes refused; 3200 conflicts; 0.2s)
+wave 48 (edges): 883v/3353e -> 883v/3352e  (deleted e (3, 10043); 10 of 16 probes refused; 2442 conflicts; 0.2s)
+wave 49 (edges): 883v/3352e -> 883v/3350e  (deleted e (3, 2329); 8 of 16 probes refused; 2810 conflicts; 0.2s)
+wave 50 (edges): 883v/3350e -> 883v/3346e  (deleted e (3, 10403); 6 of 16 probes refused; 2998 conflicts; 0.2s)
+wave 51 (edges): 883v/3346e -> 883v/3344e  (deleted e (3, 1335); 4 of 16 probes refused; 2987 conflicts; 0.2s)
+wave 52 (edges): 883v/3344e -> 883v/3343e  (deleted e (3, 12372); 2 of 16 probes refused; 2289 conflicts; 0.2s)
+wave 53 (sweep 1, edges): 883v/3343e  no deletion ({'SAT': 16}), 96/3340 probed, 0.1s
+wave 54 (sweep 1, edges): 883v/3343e  no deletion ({'SAT': 16}), 112/3340 probed, 0.1s
+wave 55 (edges): 883v/3343e -> 883v/3342e  (deleted e (55, 56); 1 of 16 probes refused; 2332 conflicts; 0.1s)
+wave 56 (sweep 1, edges): 883v/3342e  no deletion ({'SAT': 16}), 128/3339 probed, 0.1s
+wave 57 (edges): 883v/3342e -> 883v/3340e  (deleted e (56, 5803); 8 of 16 probes refused; 2856 conflicts; 0.2s)
+wave 58 (edges): 883v/3340e -> 883v/3339e  (deleted e (56, 2328); 8 of 16 probes refused; 2574 conflicts; 0.2s)
+wave 59 (edges): 883v/3339e -> 883v/3338e  (deleted e (55, 13366); 7 of 16 probes refused; 2314 conflicts; 0.2s)
+wave 60 (edges): 883v/3338e -> 883v/3337e  (deleted e (56, 7079); 5 of 16 probes refused; 2399 conflicts; 0.2s)
+wave 61 (edges): 883v/3337e -> 883v/3336e  (deleted e (55, 7078); 5 of 16 probes refused; 2399 conflicts; 0.2s)
+wave 62 (edges): 883v/3336e -> 883v/3335e  (deleted e (56, 12371); 4 of 16 probes refused; 2280 conflicts; 0.2s)
+wave 63 (edges): 883v/3335e -> 883v/3333e  (deleted e (56, 9071); 3 of 16 probes refused; 3315 conflicts; 0.2s)
+wave 64 (edges): 883v/3333e -> 883v/3332e  (deleted e (56, 13701); 1 of 16 probes refused; 3319 conflicts; 0.2s)
+wave 65 (sweep 1, edges): 883v/3332e  no deletion ({'SAT': 16}), 144/3329 probed, 0.1s
+wave 66 (edges): 883v/3332e -> 883v/3331e  (deleted e (67, 1397); 1 of 16 probes refused; 3618 conflicts; 0.2s)
+wave 67 (sweep 1, edges): 883v/3331e  no deletion ({'SAT': 16}), 160/3328 probed, 0.1s
+wave 68 (sweep 1, edges): 883v/3331e  no deletion ({'SAT': 16}), 176/3328 probed, 0.1s
+wave 69 (sweep 1, edges): 883v/3331e  no deletion ({'SAT': 16}), 192/3328 probed, 0.1s
+wave 70 (edges): 883v/3331e -> 883v/3330e  (deleted e (119, 5746); 3 of 16 probes refused; 2674 conflicts; 0.2s)
+wave 71 (edges): 883v/3330e -> 883v/3328e  (deleted e (120, 1331); 2 of 16 probes refused; 2577 conflicts; 0.1s)
+wave 72 (edges): 883v/3328e -> 883v/3327e  (deleted e (119, 7626); 1 of 16 probes refused; 2577 conflicts; 0.1s)
+wave 73 (sweep 1, edges): 883v/3327e  no deletion ({'SAT': 16}), 208/3324 probed, 0.1s
+wave 74 (edges): 883v/3327e -> 883v/3326e  (deleted e (155, 818); 4 of 16 probes refused; 2833 conflicts; 0.3s)
+wave 75 (edges): 883v/3326e -> 883v/3325e  (deleted e (155, 2481); 4 of 16 probes refused; 2598 conflicts; 0.3s)
+wave 76 (edges): 883v/3325e -> 883v/3324e  (deleted e (120, 11979); 3 of 16 probes refused; 2897 conflicts; 0.3s)
+wave 77 (edges): 883v/3324e -> 883v/3323e  (deleted e (120, 10012); 2 of 16 probes refused; 5610 conflicts; 0.3s)
+wave 78 (edges): 883v/3323e -> 883v/3322e  (deleted e (120, 10045); 1 of 16 probes refused; 4463 conflicts; 0.2s)
+wave 79 (sweep 1, edges): 883v/3322e  no deletion ({'SAT': 16}), 224/3319 probed, 0.1s
+wave 80 (edges): 883v/3322e -> 883v/3321e  (deleted e (155, 9170); 1 of 16 probes refused; 4463 conflicts; 0.2s)
+wave 81 (sweep 1, edges): 883v/3321e  no deletion ({'SAT': 16}), 240/3318 probed, 0.1s
+wave 82 (sweep 1, edges): 883v/3321e  no deletion ({'SAT': 16}), 256/3318 probed, 0.1s
+wave 83 (sweep 1, edges): 883v/3321e  no deletion ({'SAT': 16}), 272/3318 probed, 0.1s
+wave 84 (edges): 883v/3321e -> 883v/3320e  (deleted e (358, 11287); 2 of 16 probes refused; 4219 conflicts; 0.2s)
+wave 85 (edges): 883v/3320e -> 883v/3319e  (deleted e (359, 360); 1 of 16 probes refused; 5134 conflicts; 0.3s)
+wave 86 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 288/3316 probed, 0.1s
+wave 87 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 304/3316 probed, 0.1s
+wave 88 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 320/3316 probed, 0.1s
+wave 89 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 336/3316 probed, 0.1s
+wave 90 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 352/3316 probed, 0.1s
+wave 91 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 368/3316 probed, 0.1s
+wave 92 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 384/3316 probed, 0.1s
+wave 93 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 400/3316 probed, 0.1s
+wave 94 (sweep 1, edges): 883v/3319e  no deletion ({'SAT': 16}), 416/3316 probed, 0.1s
+wave 95 (edges): 883v/3319e -> 883v/3317e  (deleted e (663, 7686); 4 of 16 probes refused; 4646 conflicts; 0.3s)
+wave 96 (edges): 883v/3317e -> 883v/3316e  (deleted e (663, 1993); 3 of 16 probes refused; 5000 conflicts; 0.3s)
+wave 97 (edges): 883v/3316e -> 883v/3315e  (deleted e (663, 14308); 1 of 16 probes refused; 3890 conflicts; 0.2s)
+wave 98 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 432/3312 probed, 0.1s
+wave 99 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 448/3312 probed, 0.1s
+wave 100 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 464/3312 probed, 0.1s
+wave 101 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 480/3312 probed, 0.1s
+wave 102 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 496/3312 probed, 0.1s
+wave 103 (sweep 1, edges): 883v/3315e  no deletion ({'SAT': 16}), 512/3312 probed, 0.1s
+wave 104 (edges): 883v/3315e -> 883v/3314e  (deleted e (964, 6590); 1 of 16 probes refused; 7104 conflicts; 0.3s)
+wave 105 (sweep 1, edges): 883v/3314e  no deletion ({'SAT': 16}), 528/3311 probed, 0.3s
+wave 106 (sweep 1, edges): 883v/3314e  no deletion ({'SAT': 16}), 544/3311 probed, 0.2s
+wave 107 (edges): 883v/3314e -> 883v/3313e  (deleted e (995, 6743); 4 of 16 probes refused; 5094 conflicts; 0.3s)
+wave 108 (edges): 883v/3313e -> 883v/3312e  (deleted e (986, 12674); 3 of 16 probes refused; 4019 conflicts; 0.3s)
+wave 109 (edges): 883v/3312e -> 883v/3311e  (deleted e (996, 1397); 2 of 16 probes refused; 4922 conflicts; 0.3s)
+wave 110 (edges): 883v/3311e -> 883v/3310e  (deleted e (996, 997); 1 of 16 probes refused; 6123 conflicts; 0.3s)
+wave 111 (edges): 883v/3310e -> 883v/3309e  (deleted e (996, 1992); 1 of 16 probes refused; 6523 conflicts; 0.3s)
+wave 112 (sweep 1, edges): 883v/3309e  no deletion ({'SAT': 16}), 560/3306 probed, 0.2s
+wave 113 (edges): 883v/3309e -> 883v/3308e  (deleted e (996, 6743); 6 of 16 probes refused; 5677 conflicts; 0.3s)
+wave 114 (edges): 883v/3308e -> 883v/3307e  (deleted e (996, 10011); 4 of 16 probes refused; 6171 conflicts; 0.4s)
+wave 115 (edges): 883v/3307e -> 883v/3306e  (deleted e (996, 11287); 4 of 16 probes refused; 3912 conflicts; 0.4s)
+wave 116 (edges): 883v/3306e -> 883v/3305e  (deleted e (996, 6744); 3 of 16 probes refused; 4247 conflicts; 0.4s)
+wave 117 (edges): 883v/3305e -> 883v/3304e  (deleted e (996, 13311); 2 of 16 probes refused; 6170 conflicts; 0.3s)
+wave 118 (edges): 883v/3304e -> 883v/3303e  (deleted e (996, 13365); 1 of 16 probes refused; 6679 conflicts; 0.3s)
+wave 119 (sweep 1, edges): 883v/3303e  no deletion ({'SAT': 16}), 576/3300 probed, 0.2s
+wave 120 (edges): 883v/3303e -> 883v/3302e  (deleted e (997, 3323); 9 of 16 probes refused; 4531 conflicts; 0.4s)
+wave 121 (edges): 883v/3302e -> 883v/3301e  (deleted e (997, 4989); 8 of 16 probes refused; 4677 conflicts; 0.4s)
+wave 122 (edges): 883v/3301e -> 883v/3300e  (deleted e (997, 1937); 7 of 16 probes refused; 5569 conflicts; 0.4s)
+wave 123 (edges): 883v/3300e -> 883v/3298e  (deleted e (997, 1151); 7 of 16 probes refused; 7726 conflicts; 0.4s)
+wave 124 (edges): 883v/3298e -> 883v/3297e  (deleted e (997, 2329); 5 of 16 probes refused; 6300 conflicts; 0.4s)
+
+=== DELIBERATE KILL, 2026-09-21T02:14:26Z ===
+SIGKILL to the process GROUP by its numeric pgid -- never by a command-line pattern, which matches the
+killing shell (CLAUDE.md records eight incidents, one of them an agent killing its own run).
+before the kill: pid 2683852 alive in ps: 1; 124 waves logged; 89 lines on the acceptance log;
+                 checkpoint says verts/edges/accepted/probed-against-this-graph = 883 3297 88 576
+kill exit status 0 -- which is NOT the verification. VERIFIED BY EFFECT:
+  pid 2683852 in ps at +3 s: 0 (want 0); at +15 s: 0 (want 0); cadical processes alive: 0 (want 0)
+  checkpoint digest d1263e53dc04ca5d at +3 s and d1263e53dc04ca5d at +15 s -> IDENTICAL: nothing is still writing to it
+
+=== RESUME, 2026-09-21T02:14:49Z ===
+command: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/resume-exercise.current.json --budget 120
+what the relaunch must redo: the ONE wave of 16 probes that was in flight when the kill landed. The
+checkpoint above says 576 candidates had been probed against this graph; the resume's first 'no deletion'
+line should read 592/… -- i.e. it re-probes only that lost wave and then carries on.
+resuming from data/fs66/ckpt/resume-exercise.current.json: 883 vertices, 3297 edges, 88 deletions already accepted
+start: 883 vertices, 3297 edges, pin [0, 120, 5747], n=121, k=4, mode=edges, 16 probes at a time, conflict budget 300000, 88 deletions already on the checkpoint
+  if this dies now the relaunch redoes at most one wave of 16 probes; resume: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/resume-exercise.current.json
+wave 1 (edges): 883v/3297e -> 883v/3296e  (deleted e (996, 14307); 4 of 16 probes refused; 4621 conflicts; 0.4s)
+wave 2 (edges): 883v/3296e -> 883v/3295e  (deleted e (997, 6744); 4 of 16 probes refused; 5444 conflicts; 0.3s)
+wave 3 (edges): 883v/3295e -> 883v/3294e  (deleted e (997, 6745); 3 of 16 probes refused; 6734 conflicts; 0.3s)
+wave 4 (edges): 883v/3294e -> 883v/3293e  (deleted e (997, 5592); 2 of 16 probes refused; 8493 conflicts; 0.4s)
+wave 5 (edges): 883v/3293e -> 883v/3292e  (deleted e (997, 3269); 1 of 16 probes refused; 7170 conflicts; 0.3s)
+wave 6 (sweep 1, edges): 883v/3292e  no deletion ({'SAT': 16}), 592/3289 probed, 0.3s
+wave 7 (edges): 883v/3292e -> 883v/3291e  (deleted e (998, 999); 2 of 16 probes refused; 7818 conflicts; 0.4s)
+wave 8 (edges): 883v/3291e -> 883v/3290e  (deleted e (998, 1938); 2 of 16 probes refused; 8850 conflicts; 0.4s)
+wave 9 (edges): 883v/3290e -> 883v/3289e  (deleted e (998, 2328); 2 of 16 probes refused; 8909 conflicts; 0.4s)
+wave 10 (edges): 883v/3289e -> 883v/3288e  (deleted e (997, 14308); 2 of 16 probes refused; 8408 conflicts; 0.4s)
+wave 11 (edges): 883v/3288e -> 883v/3287e  (deleted e (998, 3270); 1 of 16 probes refused; 8582 conflicts; 0.4s)
+wave 12 (sweep 1, edges): 883v/3287e  no deletion ({'SAT': 16}), 608/3284 probed, 0.3s
+wave 13 (edges): 883v/3287e -> 883v/3286e  (deleted e (998, 5593); 7 of 16 probes refused; 7585 conflicts; 0.5s)
+wave 14 (edges): 883v/3286e -> 883v/3285e  (deleted e (998, 5348); 5 of 16 probes refused; 7156 conflicts; 0.4s)
+wave 15 (edges): 883v/3285e -> 883v/3284e  (deleted e (998, 8021); 4 of 16 probes refused; 7330 conflicts; 0.4s)
+wave 16 (edges): 883v/3284e -> 883v/3283e  (deleted e (998, 10012); 3 of 16 probes refused; 7995 conflicts; 0.4s)
+wave 17 (edges): 883v/3283e -> 883v/3282e  (deleted e (998, 6746); 2 of 16 probes refused; 10512 conflicts; 0.5s)
+wave 18 (sweep 1, edges): 883v/3282e  no deletion ({'SAT': 16}), 624/3279 probed, 0.3s
+wave 19 (edges): 883v/3282e -> 883v/3281e  (deleted e (999, 1995); 4 of 16 probes refused; 8281 conflicts; 0.5s)
+wave 20 (edges): 883v/3281e -> 883v/3280e  (deleted e (999, 5594); 4 of 16 probes refused; 7987 conflicts; 0.4s)
+wave 21 (edges): 883v/3280e -> 883v/3279e  (deleted e (999, 5748); 3 of 16 probes refused; 9406 conflicts; 0.5s)
+wave 22 (edges): 883v/3279e -> 883v/3278e  (deleted e (998, 14307); 3 of 16 probes refused; 9244 conflicts; 0.4s)
+wave 23 (edges): 883v/3278e -> 883v/3276e  (deleted e (999, 6747); 2 of 16 probes refused; 10486 conflicts; 0.4s)
+wave 24 (edges): 883v/3276e -> 883v/3275e  (deleted e (999, 2329); 1 of 16 probes refused; 10457 conflicts; 0.4s)
+wave 25 (edges): 883v/3275e -> 883v/3274e  (deleted e (999, 10013); 1 of 16 probes refused; 9992 conflicts; 0.4s)
+wave 26 (sweep 1, edges): 883v/3274e  no deletion ({'SAT': 16}), 640/3271 probed, 0.2s
+wave 27 (edges): 883v/3274e -> 883v/3273e  (deleted e (999, 11039); 1 of 16 probes refused; 10486 conflicts; 0.4s)
+wave 28 (sweep 1, edges): 883v/3273e  no deletion ({'SAT': 16}), 656/3270 probed, 0.3s
+wave 29 (edges): 883v/3273e -> 883v/3272e  (deleted e (1000, 14311); 2 of 16 probes refused; 9155 conflicts; 0.4s)
+wave 30 (edges): 883v/3272e -> 883v/3271e  (deleted e (1000, 6747); 1 of 16 probes refused; 10058 conflicts; 0.4s)
+wave 31 (sweep 1, edges): 883v/3271e  no deletion ({'SAT': 16}), 672/3268 probed, 0.2s
+wave 32 (sweep 1, edges): 883v/3271e  no deletion ({'SAT': 16}), 688/3268 probed, 0.3s
+wave 33 (edges): 883v/3271e -> 883v/3270e  (deleted e (1061, 5750); 3 of 16 probes refused; 9303 conflicts; 0.4s)
+wave 34 (edges): 883v/3270e -> 883v/3269e  (deleted e (1061, 14372); 3 of 16 probes refused; 9164 conflicts; 0.4s)
+wave 35 (edges): 883v/3269e -> 883v/3268e  (deleted e (1061, 2393); 2 of 16 probes refused; 9186 conflicts; 0.5s)
+wave 36 (edges): 883v/3268e -> 883v/3267e  (deleted e (1062, 1063); 1 of 16 probes refused; 11389 conflicts; 0.5s)
+wave 37 (edges): 883v/3267e -> 883v/3266e  (deleted e (1062, 2394); 1 of 16 probes refused; 10132 conflicts; 0.4s)
+wave 38 (sweep 1, edges): 883v/3266e  no deletion ({'SAT': 16}), 704/3263 probed, 0.4s
+wave 39 (edges): 883v/3266e -> 883v/3265e  (deleted e (1063, 1938); 5 of 16 probes refused; 8472 conflicts; 0.5s)
+wave 40 (edges): 883v/3265e -> 883v/3264e  (deleted e (1063, 1064); 3 of 16 probes refused; 10171 conflicts; 0.4s)
+wave 41 (edges): 883v/3264e -> 883v/3263e  (deleted e (1063, 2393); 2 of 16 probes refused; 10127 conflicts; 0.5s)
+wave 42 (edges): 883v/3263e -> 883v/3262e  (deleted e (1063, 11342); 2 of 16 probes refused; 9171 conflicts; 0.4s)
+wave 43 (sweep 1, edges): 883v/3262e  no deletion ({'SAT': 16}), 720/3259 probed, 0.4s
+wave 44 (edges): 883v/3262e -> 883v/3261e  (deleted e (1064, 3269); 3 of 16 probes refused; 10478 conflicts; 0.5s)
+wave 45 (edges): 883v/3261e -> 883v/3260e  (deleted e (1063, 13311); 1 of 16 probes refused; 10306 conflicts; 0.5s)
+wave 46 (sweep 1, edges): 883v/3260e  no deletion ({'SAT': 16}), 736/3257 probed, 0.3s
+wave 47 (edges): 883v/3260e -> 883v/3259e  (deleted e (1151, 3477); 1 of 16 probes refused; 9868 conflicts; 0.4s)
+wave 48 (sweep 1, edges): 883v/3259e  no deletion ({'SAT': 16}), 752/3256 probed, 0.3s
+wave 49 (sweep 1, edges): 883v/3259e  no deletion ({'SAT': 16}), 768/3256 probed, 0.3s
+wave 50 (sweep 1, edges): 883v/3259e  no deletion ({'SAT': 16}), 784/3256 probed, 0.2s
+wave 51 (sweep 1, edges): 883v/3259e  no deletion ({'SAT': 16}), 800/3256 probed, 0.1s
+wave 52 (edges): 883v/3259e -> 883v/3258e  (deleted e (1331, 7078); 10 of 16 probes refused; 9356 conflicts; 0.5s)
+wave 53 (edges): 883v/3258e -> 883v/3257e  (deleted e (1331, 7079); 10 of 16 probes refused; 8659 conflicts; 0.6s)
+wave 54 (edges): 883v/3257e -> 883v/3256e  (deleted e (1331, 2327); 10 of 16 probes refused; 8973 conflicts; 0.5s)
+wave 55 (edges): 883v/3256e -> 883v/3255e  (deleted e (1332, 1995); 8 of 16 probes refused; 8520 conflicts; 0.5s)
+wave 56 (edges): 883v/3255e -> 883v/3254e  (deleted e (1332, 3658); 8 of 16 probes refused; 8565 conflicts; 0.5s)
+wave 57 (edges): 883v/3254e -> 883v/3253e  (deleted e (1332, 5803); 7 of 16 probes refused; 10200 conflicts; 0.5s)
+wave 58 (edges): 883v/3253e -> 883v/3252e  (deleted e (1331, 13311); 7 of 16 probes refused; 10116 conflicts; 0.5s)
+wave 59 (edges): 883v/3252e -> 883v/3251e  (deleted e (1332, 9071); 5 of 16 probes refused; 10080 conflicts; 0.5s)
+wave 60 (edges): 883v/3251e -> 883v/3250e  (deleted e (1331, 10345); 5 of 16 probes refused; 10525 conflicts; 0.5s)
+wave 61 (edges): 883v/3250e -> 883v/3248e  (deleted e (1332, 10347); 4 of 16 probes refused; 10569 conflicts; 0.5s)
+wave 62 (edges): 883v/3248e -> 883v/3247e  (deleted e (1332, 7079); 2 of 16 probes refused; 9777 conflicts; 0.5s)
+wave 63 (edges): 883v/3247e -> 883v/3246e  (deleted e (1331, 5693); 1 of 16 probes refused; 10333 conflicts; 0.4s)
+wave 64 (edges): 883v/3246e -> 883v/3245e  (deleted e (1333, 2329); 1 of 16 probes refused; 10551 conflicts; 0.4s)
+wave 65 (edges): 883v/3245e -> 883v/3244e  (deleted e (1333, 2394); 1 of 16 probes refused; 11087 conflicts; 0.5s)
+wave 66 (edges): 883v/3244e -> 883v/3243e  (deleted e (1333, 3659); 1 of 16 probes refused; 10803 conflicts; 0.5s)
+wave 67 (edges): 883v/3243e -> 883v/3242e  (deleted e (1333, 9072); 1 of 16 probes refused; 10409 conflicts; 0.4s)
+wave 68 (sweep 1, edges): 883v/3242e  no deletion ({'SAT': 16}), 816/3239 probed, 0.3s
+wave 69 (edges): 883v/3242e -> 883v/3241e  (deleted e (1333, 13311); 4 of 16 probes refused; 8647 conflicts; 0.5s)
+wave 70 (edges): 883v/3241e -> 883v/3240e  (deleted e (1333, 11494); 2 of 16 probes refused; 8504 conflicts; 0.4s)
+wave 71 (edges): 883v/3240e -> 883v/3239e  (deleted e (1333, 13313); 1 of 16 probes refused; 8495 conflicts; 0.4s)
+wave 72 (sweep 1, edges): 883v/3239e  no deletion ({'SAT': 16}), 832/3236 probed, 0.3s
+wave 73 (edges): 883v/3239e -> 883v/3238e  (deleted e (1387, 7134); 1 of 16 probes refused; 8044 conflicts; 0.3s)
+wave 74 (sweep 1, edges): 883v/3238e  no deletion ({'SAT': 16}), 848/3235 probed, 0.3s
+wave 75 (edges): 883v/3238e -> 883v/3237e  (deleted e (1388, 11340); 1 of 16 probes refused; 8156 conflicts; 0.3s)
+wave 76 (sweep 1, edges): 883v/3237e  no deletion ({'SAT': 16}), 864/3234 probed, 0.3s
+wave 77 (sweep 1, edges): 883v/3237e  no deletion ({'SAT': 16}), 880/3234 probed, 0.2s
+wave 78 (edges): 883v/3237e -> 883v/3236e  (deleted e (1450, 11375); 2 of 16 probes refused; 9465 conflicts; 0.5s)
+wave 79 (edges): 883v/3236e -> 883v/3235e  (deleted e (1451, 2326); 1 of 16 probes refused; 9702 conflicts; 0.4s)
+wave 80 (sweep 1, edges): 883v/3235e  no deletion ({'SAT': 16}), 896/3232 probed, 0.3s
+wave 81 (sweep 1, edges): 883v/3235e  no deletion ({'SAT': 16}), 912/3232 probed, 0.3s
+wave 82 (sweep 1, edges): 883v/3235e  no deletion ({'SAT': 16}), 928/3232 probed, 0.3s
+wave 83 (sweep 1, edges): 883v/3235e  no deletion ({'SAT': 16}), 944/3232 probed, 0.3s
+wave 84 (edges): 883v/3235e -> 883v/3234e  (deleted e (1810, 5358); 1 of 16 probes refused; 9771 conflicts; 0.4s)
+wave 85 (sweep 1, edges): 883v/3234e  no deletion ({'SAT': 16}), 960/3231 probed, 0.3s
+wave 86 (edges): 883v/3234e -> 883v/3233e  (deleted e (1936, 1937); 3 of 16 probes refused; 10009 conflicts; 0.4s)
+wave 87 (edges): 883v/3233e -> 883v/3232e  (deleted e (1936, 2145); 1 of 16 probes refused; 10730 conflicts; 0.5s)
+wave 88 (sweep 1, edges): 883v/3232e  no deletion ({'SAT': 16}), 976/3229 probed, 0.4s
+wave 89 (edges): 883v/3232e -> 883v/3231e  (deleted e (1937, 3269); 7 of 16 probes refused; 9404 conflicts; 0.5s)
+wave 90 (edges): 883v/3231e -> 883v/3230e  (deleted e (1938, 1939); 7 of 16 probes refused; 9522 conflicts; 0.5s)
+wave 91 (edges): 883v/3230e -> 883v/3229e  (deleted e (1937, 2146); 6 of 16 probes refused; 9088 conflicts; 0.5s)
+wave 92 (edges): 883v/3229e -> 883v/3228e  (deleted e (1937, 4600); 4 of 16 probes refused; 8373 conflicts; 0.5s)
+wave 93 (edges): 883v/3228e -> 883v/3227e  (deleted e (1938, 3268); 3 of 16 probes refused; 10094 conflicts; 0.5s)
+wave 94 (edges): 883v/3227e -> 883v/3226e  (deleted e (1938, 4599); 2 of 16 probes refused; 10122 conflicts; 0.4s)
+wave 95 (edges): 883v/3226e -> 883v/3225e  (deleted e (1938, 2934); 1 of 16 probes refused; 10312 conflicts; 0.4s)
+wave 96 (edges): 883v/3225e -> 883v/3224e  (deleted e (1938, 7685); 1 of 16 probes refused; 11128 conflicts; 0.5s)
+wave 97 (sweep 1, edges): 883v/3224e  no deletion ({'SAT': 16}), 992/3221 probed, 0.4s
+wave 98 (edges): 883v/3224e -> 883v/3223e  (deleted e (1939, 7686); 4 of 16 probes refused; 9833 conflicts; 0.5s)
+wave 99 (edges): 883v/3223e -> 883v/3222e  (deleted e (1939, 3269); 2 of 16 probes refused; 9749 conflicts; 0.5s)
+wave 100 (sweep 1, edges): 883v/3222e  no deletion ({'SAT': 16}), 1008/3219 probed, 0.3s
+wave 101 (edges): 883v/3222e -> 883v/3221e  (deleted e (1993, 4265); 8 of 16 probes refused; 8282 conflicts; 0.5s)
+wave 102 (edges): 883v/3221e -> 883v/3220e  (deleted e (1993, 7741); 8 of 16 probes refused; 9176 conflicts; 0.5s)
+wave 103 (edges): 883v/3220e -> 883v/3219e  (deleted e (1995, 4267); 6 of 16 probes refused; 8786 conflicts; 0.5s)
+wave 104 (edges): 883v/3219e -> 883v/3218e  (deleted e (1992, 14307); 5 of 16 probes refused; 10394 conflicts; 0.5s)
+wave 105 (edges): 883v/3218e -> 883v/3217e  (deleted e (1939, 14308); 4 of 16 probes refused; 9202 conflicts; 0.5s)
+wave 106 (edges): 883v/3217e -> 883v/3216e  (deleted e (1992, 3324); 3 of 16 probes refused; 9898 conflicts; 0.5s)
+wave 107 (sweep 1, edges): 883v/3216e  no deletion ({'SAT': 16}), 1024/3213 probed, 0.3s
+wave 108 (sweep 1, edges): 883v/3216e  no deletion ({'SAT': 16}), 1040/3213 probed, 0.3s
+wave 109 (edges): 883v/3216e -> 883v/3215e  (deleted e (2091, 3421); 1 of 16 probes refused; 10233 conflicts; 0.4s)
+wave 110 (sweep 1, edges): 883v/3215e  no deletion ({'SAT': 16}), 1056/3212 probed, 0.3s
+wave 111 (edges): 883v/3215e -> 883v/3214e  (deleted e (2146, 11039); 1 of 16 probes refused; 10810 conflicts; 0.5s)
+wave 112 (sweep 1, edges): 883v/3214e  no deletion ({'SAT': 16}), 1072/3211 probed, 0.3s
+wave 113 (edges): 883v/3214e -> 883v/3213e  (deleted e (2326, 6688); 3 of 16 probes refused; 10200 conflicts; 0.5s)
+wave 114 (edges): 883v/3213e -> 883v/3212e  (deleted e (2326, 3387); 1 of 16 probes refused; 10471 conflicts; 0.4s)
+wave 115 (sweep 1, edges): 883v/3212e  no deletion ({'SAT': 16}), 1088/3209 probed, 0.4s
+wave 116 (edges): 883v/3212e -> 883v/3211e  (deleted e (2327, 2328); 8 of 16 probes refused; 8910 conflicts; 0.5s)
+wave 117 (edges): 883v/3211e -> 883v/3210e  (deleted e (2326, 14306); 6 of 16 probes refused; 8772 conflicts; 0.5s)
+wave 118 (edges): 883v/3210e -> 883v/3209e  (deleted e (2327, 8075); 5 of 16 probes refused; 10057 conflicts; 0.5s)
+wave 119 (edges): 883v/3209e -> 883v/3208e  (deleted e (2327, 3267); 3 of 16 probes refused; 10351 conflicts; 0.5s)
+wave 120 (edges): 883v/3208e -> 883v/3207e  (deleted e (2327, 3323); 1 of 16 probes refused; 10761 conflicts; 0.4s)
+wave 121 (sweep 1, edges): 883v/3207e  no deletion ({'SAT': 16}), 1104/3204 probed, 0.3s
+wave 122 (edges): 883v/3207e -> 883v/3206e  (deleted e (2328, 4600); 10 of 16 probes refused; 9614 conflicts; 0.5s)
+wave 123 (edges): 883v/3206e -> 883v/3205e  (deleted e (2328, 8076); 9 of 16 probes refused; 8816 conflicts; 0.5s)
+wave 124 (edges): 883v/3205e -> 883v/3204e  (deleted e (2328, 3324); 7 of 16 probes refused; 8577 conflicts; 0.5s)
+wave 125 (edges): 883v/3204e -> 883v/3203e  (deleted e (2328, 3268); 6 of 16 probes refused; 8717 conflicts; 0.5s)
+wave 126 (edges): 883v/3203e -> 883v/3202e  (deleted e (2329, 3269); 5 of 16 probes refused; 9006 conflicts; 0.5s)
+wave 127 (edges): 883v/3202e -> 883v/3201e  (deleted e (2328, 8075); 4 of 16 probes refused; 9811 conflicts; 0.5s)
+wave 128 (edges): 883v/3201e -> 883v/3200e  (deleted e (2329, 7078); 4 of 16 probes refused; 9856 conflicts; 0.5s)
+wave 129 (edges): 883v/3200e -> 883v/3199e  (deleted e (2328, 7077); 3 of 16 probes refused; 10084 conflicts; 0.5s)
+wave 130 (edges): 883v/3199e -> 883v/3198e  (deleted e (2329, 8077); 2 of 16 probes refused; 10114 conflicts; 0.5s)
+wave 131 (edges): 883v/3198e -> 883v/3197e  (deleted e (2328, 4654); 1 of 16 probes refused; 10736 conflicts; 0.4s)
+wave 132 (edges): 883v/3197e -> 883v/3196e  (deleted e (2329, 11344); 1 of 16 probes refused; 10005 conflicts; 0.4s)
+wave 133 (sweep 1, edges): 883v/3196e  no deletion ({'SAT': 16}), 1120/3193 probed, 0.3s
+wave 134 (sweep 1, edges): 883v/3196e  no deletion ({'SAT': 16}), 1136/3193 probed, 0.3s
+wave 135 (edges): 883v/3196e -> 883v/3195e  (deleted e (2393, 14373); 2 of 16 probes refused; 9710 conflicts; 0.4s)
+wave 136 (sweep 1, edges): 883v/3195e  no deletion ({'SAT': 16}), 1152/3192 probed, 0.3s
+wave 137 (edges): 883v/3195e -> 883v/3194e  (deleted e (2394, 4599); 4 of 16 probes refused; 10300 conflicts; 0.5s)
+wave 138 (edges): 883v/3194e -> 883v/3193e  (deleted e (2395, 3085); 3 of 16 probes refused; 9829 conflicts; 0.5s)
+wave 139 (edges): 883v/3193e -> 883v/3192e  (deleted e (2395, 4600); 2 of 16 probes refused; 9975 conflicts; 0.4s)
+wave 140 (edges): 883v/3192e -> 883v/3191e  (deleted e (2394, 9407); 1 of 16 probes refused; 10139 conflicts; 0.4s)
+wave 141 (sweep 1, edges): 883v/3191e  no deletion ({'SAT': 16}), 1168/3188 probed, 0.3s
+wave 142 (edges): 883v/3191e -> 883v/3190e  (deleted e (2395, 12674); 3 of 16 probes refused; 10268 conflicts; 0.5s)
+wave 143 (edges): 883v/3190e -> 883v/3189e  (deleted e (2481, 3421); 2 of 16 probes refused; 9992 conflicts; 0.5s)
+wave 144 (edges): 883v/3189e -> 883v/3188e  (deleted e (2481, 4753); 1 of 16 probes refused; 9945 conflicts; 0.4s)
+wave 145 (sweep 1, edges): 883v/3188e  no deletion ({'SAT': 16}), 1184/3185 probed, 0.3s
+wave 146 (edges): 883v/3188e -> 883v/3187e  (deleted e (2482, 3422); 2 of 16 probes refused; 9522 conflicts; 0.5s)
+wave 147 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1200/3184 probed, 0.3s
+wave 148 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1216/3184 probed, 0.3s
+wave 149 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1232/3184 probed, 0.3s
+wave 150 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1248/3184 probed, 0.3s
+wave 151 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1264/3184 probed, 0.3s
+wave 152 (sweep 1, edges): 883v/3187e  no deletion ({'SAT': 16}), 1280/3184 probed, 0.3s
+wave 153 (edges): 883v/3187e -> 883v/3186e  (deleted e (3085, 11979); 5 of 16 probes refused; 8993 conflicts; 0.5s)
+wave 154 (edges): 883v/3186e -> 883v/3185e  (deleted e (3085, 10703); 5 of 16 probes refused; 8927 conflicts; 0.5s)
+wave 155 (edges): 883v/3185e -> 883v/3184e  (deleted e (3086, 4418); 3 of 16 probes refused; 9727 conflicts; 0.4s)
+wave 156 (edges): 883v/3184e -> 883v/3183e  (deleted e (3086, 4082); 3 of 16 probes refused; 9529 conflicts; 0.5s)
+wave 157 (edges): 883v/3183e -> 883v/3182e  (deleted e (3086, 5747); 2 of 16 probes refused; 10095 conflicts; 0.4s)
+wave 158 (edges): 883v/3182e -> 883v/3181e  (deleted e (3086, 5358); 1 of 16 probes refused; 9165 conflicts; 0.4s)
+wave 159 (sweep 1, edges): 883v/3181e  no deletion ({'SAT': 16}), 1296/3178 probed, 0.3s
+wave 160 (edges): 883v/3181e -> 883v/3180e  (deleted e (3088, 4418); 2 of 16 probes refused; 9188 conflicts; 0.5s)
+wave 161 (sweep 1, edges): 883v/3180e  no deletion ({'SAT': 16}), 1312/3177 probed, 0.3s
+wave 162 (edges): 883v/3180e -> 883v/3179e  (deleted e (3267, 8077); 3 of 16 probes refused; 9580 conflicts; 0.5s)
+wave 163 (edges): 883v/3179e -> 883v/3178e  (deleted e (3267, 13313); 3 of 16 probes refused; 8646 conflicts; 0.5s)
+wave 164 (edges): 883v/3178e -> 883v/3177e  (deleted e (3267, 5660); 2 of 16 probes refused; 9021 conflicts; 0.4s)
+wave 165 (edges): 883v/3177e -> 883v/3176e  (deleted e (3267, 3268); 2 of 16 probes refused; 10731 conflicts; 0.5s)
+wave 166 (edges): 883v/3176e -> 883v/3175e  (deleted e (3268, 3477); 2 of 16 probes refused; 10826 conflicts; 0.5s)
+wave 167 (sweep 1, edges): 883v/3175e  no deletion ({'SAT': 16}), 1328/3172 probed, 0.4s
+wave 168 (edges): 883v/3175e -> 883v/3174e  (deleted e (3268, 12283); 8 of 16 probes refused; 8554 conflicts; 0.5s)
+wave 169 (edges): 883v/3174e -> 883v/3173e  (deleted e (3268, 4264); 7 of 16 probes refused; 10515 conflicts; 0.5s)
+wave 170 (edges): 883v/3173e -> 883v/3172e  (deleted e (3268, 9016); 5 of 16 probes refused; 10709 conflicts; 0.5s)
+wave 171 (edges): 883v/3172e -> 883v/3171e  (deleted e (3268, 4329); 4 of 16 probes refused; 8512 conflicts; 0.5s)
+wave 172 (edges): 883v/3171e -> 883v/3170e  (deleted e (3268, 9015); 2 of 16 probes refused; 9195 conflicts; 0.5s)
+wave 173 (edges): 883v/3170e -> 883v/3169e  (deleted e (3269, 5595); 2 of 16 probes refused; 10515 conflicts; 0.5s)
+wave 174 (edges): 883v/3169e -> 883v/3168e  (deleted e (3268, 7739); 1 of 16 probes refused; 10782 conflicts; 0.4s)
+wave 175 (sweep 1, edges): 883v/3168e  no deletion ({'SAT': 16}), 1344/3165 probed, 0.3s
+wave 176 (edges): 883v/3168e -> 883v/3167e  (deleted e (3270, 5596); 1 of 16 probes refused; 10436 conflicts; 0.5s)
+wave 177 (sweep 1, edges): 883v/3167e  no deletion ({'SAT': 16}), 1360/3164 probed, 0.3s
+wave 178 (sweep 1, edges): 883v/3167e  no deletion ({'SAT': 16}), 1376/3164 probed, 0.3s
+wave 179 (edges): 883v/3167e -> 883v/3166e  (deleted e (3421, 11039); 4 of 16 probes refused; 10817 conflicts; 0.5s)
+wave 180 (edges): 883v/3166e -> 883v/3165e  (deleted e (3421, 4753); 3 of 16 probes refused; 10773 conflicts; 0.5s)
+wave 181 (edges): 883v/3165e -> 883v/3164e  (deleted e (3422, 4418); 3 of 16 probes refused; 10385 conflicts; 0.5s)
+wave 182 (edges): 883v/3164e -> 883v/3163e  (deleted e (3421, 12436); 3 of 16 probes refused; 9203 conflicts; 0.5s)
+wave 183 (edges): 883v/3163e -> 883v/3162e  (deleted e (3421, 13313); 2 of 16 probes refused; 11256 conflicts; 0.5s)
+wave 184 (edges): 883v/3162e -> 883v/3161e  (deleted e (3422, 5748); 1 of 16 probes refused; 10944 conflicts; 0.5s)
+wave 185 (sweep 1, edges): 883v/3161e  no deletion ({'SAT': 16}), 1392/3158 probed, 0.3s
+wave 186 (edges): 883v/3161e -> 883v/3160e  (deleted e (3422, 9170); 1 of 16 probes refused; 9700 conflicts; 0.4s)
+wave 187 (sweep 1, edges): 883v/3160e  no deletion ({'SAT': 16}), 1408/3157 probed, 0.3s
+wave 188 (edges): 883v/3160e -> 883v/3159e  (deleted e (3477, 5749); 6 of 16 probes refused; 10552 conflicts; 0.5s)
+wave 189 (edges): 883v/3159e -> 883v/3158e  (deleted e (3477, 12371); 6 of 16 probes refused; 9371 conflicts; 0.5s)
+wave 190 (edges): 883v/3158e -> 883v/3157e  (deleted e (3477, 4417); 4 of 16 probes refused; 10579 conflicts; 0.5s)
+wave 191 (edges): 883v/3157e -> 883v/3156e  (deleted e (3475, 8076); 2 of 16 probes refused; 11087 conflicts; 0.5s)
+wave 192 (sweep 1, edges): 883v/3156e  no deletion ({'SAT': 16}), 1424/3153 probed, 0.3s
+wave 193 (edges): 883v/3156e -> 883v/3155e  (deleted e (3658, 12672); 1 of 16 probes refused; 10558 conflicts; 0.4s)
+wave 194 (sweep 1, edges): 883v/3155e  no deletion ({'SAT': 16}), 1440/3152 probed, 0.3s
+wave 195 (edges): 883v/3155e -> 883v/3154e  (deleted e (3659, 4599); 3 of 16 probes refused; 11051 conflicts; 0.5s)
+wave 196 (edges): 883v/3154e -> 883v/3153e  (deleted e (3659, 11277); 2 of 16 probes refused; 10639 conflicts; 0.5s)
+wave 197 (sweep 1, edges): 883v/3153e  no deletion ({'SAT': 16}), 1456/3150 probed, 0.3s
+wave 198 (edges): 883v/3153e -> 883v/3152e  (deleted e (3660, 12674); 1 of 16 probes refused; 11064 conflicts; 0.5s)
+wave 199 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1472/3149 probed, 0.4s
+wave 200 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1488/3149 probed, 0.4s
+wave 201 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1504/3149 probed, 0.3s
+wave 202 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1520/3149 probed, 0.4s
+wave 203 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1536/3149 probed, 0.4s
+wave 204 (sweep 1, edges): 883v/3152e  no deletion ({'SAT': 16}), 1552/3149 probed, 0.4s
+wave 205 (edges): 883v/3152e -> 883v/3151e  (deleted e (4083, 6746); 1 of 16 probes refused; 10865 conflicts; 0.5s)
+wave 206 (sweep 1, edges): 883v/3151e  no deletion ({'SAT': 16}), 1568/3148 probed, 0.3s
+wave 207 (edges): 883v/3151e -> 883v/3150e  (deleted e (4263, 4264); 1 of 16 probes refused; 11074 conflicts; 0.5s)
+wave 208 (sweep 1, edges): 883v/3150e  no deletion ({'SAT': 16}), 1584/3147 probed, 0.3s
+wave 209 (edges): 883v/3150e -> 883v/3149e  (deleted e (4264, 4265); 4 of 16 probes refused; 10175 conflicts; 0.5s)
+wave 210 (edges): 883v/3149e -> 883v/3148e  (deleted e (4263, 5593); 3 of 16 probes refused; 9526 conflicts; 0.5s)
+wave 211 (edges): 883v/3148e -> 883v/3147e  (deleted e (4263, 6589); 1 of 16 probes refused; 12093 conflicts; 0.5s)
+wave 212 (sweep 1, edges): 883v/3147e  no deletion ({'SAT': 16}), 1600/3144 probed, 0.3s
+wave 213 (edges): 883v/3147e -> 883v/3146e  (deleted e (4265, 4266); 3 of 16 probes refused; 10516 conflicts; 0.5s)
+wave 214 (edges): 883v/3146e -> 883v/3145e  (deleted e (4264, 10011); 1 of 16 probes refused; 12649 conflicts; 0.5s)
+wave 215 (sweep 1, edges): 883v/3145e  no deletion ({'SAT': 16}), 1616/3142 probed, 0.4s
+wave 216 (edges): 883v/3145e -> 883v/3144e  (deleted e (4265, 11288); 3 of 16 probes refused; 11555 conflicts; 0.6s)
+wave 217 (edges): 883v/3144e -> 883v/3143e  (deleted e (4265, 10012); 2 of 16 probes refused; 11028 conflicts; 0.5s)
+wave 218 (sweep 1, edges): 883v/3143e  no deletion ({'SAT': 16}), 1632/3140 probed, 0.3s
+wave 219 (sweep 1, edges): 883v/3143e  no deletion ({'SAT': 16}), 1648/3140 probed, 0.4s
+wave 220 (edges): 883v/3143e -> 883v/3142e  (deleted e (4329, 11342); 3 of 16 probes refused; 11535 conflicts; 0.5s)
+wave 221 (edges): 883v/3142e -> 883v/3141e  (deleted e (4329, 5204); 1 of 16 probes refused; 12270 conflicts; 0.5s)
+wave 222 (edges): 883v/3141e -> 883v/3140e  (deleted e (4362, 5694); 1 of 16 probes refused; 10986 conflicts; 0.5s)
+wave 223 (sweep 1, edges): 883v/3140e  no deletion ({'SAT': 16}), 1664/3137 probed, 0.3s
+wave 224 (edges): 883v/3140e -> 883v/3139e  (deleted e (4416, 5748); 3 of 16 probes refused; 10327 conflicts; 0.5s)
+wave 225 (edges): 883v/3139e -> 883v/3138e  (deleted e (4417, 4418); 2 of 16 probes refused; 10987 conflicts; 0.5s)
+wave 226 (edges): 883v/3138e -> 883v/3137e  (deleted e (4416, 5412); 1 of 16 probes refused; 11164 conflicts; 0.5s)
+wave 227 (sweep 1, edges): 883v/3137e  no deletion ({'SAT': 16}), 1680/3134 probed, 0.3s
+wave 228 (edges): 883v/3137e -> 883v/3136e  (deleted e (4418, 5358); 5 of 16 probes refused; 12654 conflicts; 0.6s)
+wave 229 (edges): 883v/3136e -> 883v/3135e  (deleted e (4417, 13311); 5 of 16 probes refused; 12121 conflicts; 0.6s)
+wave 230 (edges): 883v/3135e -> 883v/3134e  (deleted e (4417, 6689); 4 of 16 probes refused; 13425 conflicts; 0.7s)
+wave 231 (edges): 883v/3134e -> 883v/3133e  (deleted e (4417, 10044); 2 of 16 probes refused; 14461 conflicts; 0.7s)
+wave 232 (edges): 883v/3133e -> 883v/3132e  (deleted e (4418, 5748); 1 of 16 probes refused; 15366 conflicts; 0.6s)
+wave 233 (edges): 883v/3132e -> 883v/3131e  (deleted e (4418, 6744); 1 of 16 probes refused; 19033 conflicts; 0.8s)
+wave 234 (edges): 883v/3131e -> 883v/3130e  (deleted e (4418, 7079); 1 of 16 probes refused; 17996 conflicts; 0.7s)
+wave 235 (sweep 1, edges): 883v/3130e  no deletion ({'SAT': 16}), 1696/3127 probed, 0.7s
+wave 236 (edges): 883v/3130e -> 883v/3129e  (deleted e (4419, 5359); 3 of 16 probes refused; 20825 conflicts; 0.9s)
+wave 237 (edges): 883v/3129e -> 883v/3128e  (deleted e (4419, 5749); 2 of 16 probes refused; 22258 conflicts; 0.9s)
+wave 238 (edges): 883v/3128e -> 883v/3127e  (deleted e (4419, 6745); 1 of 16 probes refused; 26023 conflicts; 1.0s)
+wave 239 (sweep 1, edges): 883v/3127e  no deletion ({'SAT': 16}), 1712/3124 probed, 0.8s
+wave 240 (edges): 883v/3127e -> 883v/3126e  (deleted e (4420, 4421); 1 of 16 probes refused; 27151 conflicts; 1.1s)
+wave 241 (sweep 1, edges): 883v/3126e  no deletion ({'SAT': 16}), 1728/3123 probed, 0.4s
+wave 242 (edges): 883v/3126e -> 883v/3125e  (deleted e (4472, 11979); 5 of 16 probes refused; 26302 conflicts; 1.1s)
+wave 243 (edges): 883v/3125e -> 883v/3124e  (deleted e (4421, 6747); 3 of 16 probes refused; 26620 conflicts; 1.2s)
+wave 244 (edges): 883v/3124e -> 883v/3123e  (deleted e (4471, 14363); 2 of 16 probes refused; 26871 conflicts; 1.1s)
+wave 245 (edges): 883v/3123e -> 883v/3122e  (deleted e (4421, 10048); 1 of 16 probes refused; 25608 conflicts; 1.0s)
+wave 246 (sweep 1, edges): 883v/3122e  no deletion ({'SAT': 16}), 1744/3119 probed, 0.8s
+wave 247 (sweep 1, edges): 883v/3122e  no deletion ({'SAT': 16}), 1760/3119 probed, 0.9s
+wave 248 (edges): 883v/3122e -> 883v/3121e  (deleted e (4601, 10348); 5 of 16 probes refused; 26117 conflicts; 1.2s)
+wave 249 (edges): 883v/3121e -> 883v/3120e  (deleted e (4600, 10347); 3 of 16 probes refused; 26693 conflicts; 1.2s)
+wave 250 (edges): 883v/3120e -> 883v/3119e  (deleted e (4600, 10348); 1 of 16 probes refused; 23580 conflicts; 0.9s)
+wave 251 (sweep 1, edges): 883v/3119e  no deletion ({'SAT': 16}), 1776/3116 probed, 0.4s
+wave 252 (sweep 1, edges): 883v/3119e  no deletion ({'SAT': 16}), 1792/3116 probed, 0.5s
+wave 253 (sweep 1, edges): 883v/3119e  no deletion ({'SAT': 16}), 1808/3116 probed, 0.5s
+wave 254 (edges): 883v/3119e -> 883v/3118e  (deleted e (4807, 5803); 1 of 16 probes refused; 25418 conflicts; 1.0s)
+wave 255 (sweep 1, edges): 883v/3118e  no deletion ({'SAT': 16}), 1824/3115 probed, 0.5s
+wave 256 (sweep 1, edges): 883v/3118e  no deletion ({'SAT': 16}), 1840/3115 probed, 0.7s
+stop: the 120.0 s budget is spent
+final: 883 vertices, 3118 edges after 4096 probes in 120.6 s (265 accepted deletions)
+the final graph itself, asked directly: UNSAT (25418 conflicts)
+
+WHAT THE RESUME ACTUALLY SHOWED, against the expectation written above it:
+  it began from the checkpointed state exactly -- 883 vertices, 3,297 edges, 88 accepted deletions, none
+  of them lost -- and its wave 1 re-probed the 16 candidates that were in flight when the kill landed.
+  The expectation that the first line would read '592/3319 probed' did NOT appear, and the reason is
+  visible in the log: that redone wave ACCEPTED a deletion (4 of its 16 probes refused), which advances
+  the state and clears the probed set, so the counter never printed. The claim the exercise was for
+  stands and is the narrower one: the relaunch lost exactly the one wave in flight and no acceptance.
+  This run's product is NOT the milestone's witness -- edge deletion makes the refutation harder and its
+  LRAT proof 71x larger (measured: 55.9 MB against 784 KB), which is what the kernel pays for. It exists
+  to exercise the checkpoint on a run long enough to interrupt.

@@ -1,0 +1,9 @@
+witness sha256 b23eb5d747021bac09af1cb2100d7517b68564d4dee9a9b3a3e35b4cb85012df  (data/fs66/witness-p11-l2-k4/stages/round0/witness.json)
+proof   sha256 e5430407ff8334c8bae4ded8b8f8b5aa33387364731d27d03fd06969ae7fa987  (/home/kooshi/source/lean-dir/data/fs66/witness-p11-l2-k4/stages/round0/witness.lrat.gz, uncompressed text)
+checker sha256 d6b322b4d3a77033a56caf6de2d24fe52db0cb0f5c647c8a711a9634ca5070ef  (this file)
+n = 121 (the modulus), k = 4 (the colours refused)
+points 2974; listed edges 14190; unit pairs those points actually span 61814 (the listed edges are a subset, which is sound and cheaper); unit circle of (Z/121)^2 has 132 points
+pinned triangle [0, 56, 1334] -> colours 0, 1, 2; CNF built here: 11896 variables, 59737 clauses, sha256 6e4528ae55dcc5ac18af29d0946a4fccf20ad462380478088d1290b646487728
+LRAT checked here: 2990 lines, 2531 additions, 459 deletion lines, empty clause at id 62268; 0.17 s
+the listed graph (2974 points, 14190 edges, every pair re-verified as a unit pair modulo 121) has no proper 4-colouring; it is a subgraph of UD(Z/121,2), so UD(Z/121,2) has none
+CERTIFIED by fs66_check_witness (standard-library checker; NOT the Lean kernel)

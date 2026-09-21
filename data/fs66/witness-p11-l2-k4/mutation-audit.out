@@ -1,0 +1,36 @@
+checker sha256 d6b322b4d3a77033a56caf6de2d24fe52db0cb0f5c647c8a711a9634ca5070ef
+witness /home/kooshi/source/lean-dir/data/fs66/witness-p11-l2-k4/witness.json
+proof   /home/kooshi/source/lean-dir/data/fs66/witness-p11-l2-k4/witness.lrat.gz
+
+baseline: the committed checker's controls -> exit 0, 23 of 23 rows green
+[ok  ] CNF-ORDER: the pin clauses are emitted BEFORE the edge clauses, so the formula is not Lean's
+         must redden: ['second CNF builder', 'faithful twin']
+         reddened   : ['faithful twin (the witness re-serialised, the proof rewritten line by line -- same scaffolding, no fault)', 'the second CNF builder (tools/coloring.py, via fs66_tower.py cnfdigest) agrees on the formula', 'the proof truncated to 1321 of 2642 lines', 'the guarded state after all plants: the committed witness and proof are byte-identical and certify']
+         also red (allowed): ['the proof truncated to 1321 of 2642 lines', 'the guarded state after all plants: the committed witness and proof ar']
+[ok  ] UNIT-PAIR-ONE: the per-edge re-verification is skipped -- BUT the circle walk still catches it, which is the point: the two adjacency routes are redundant on purpose
+         must redden: []
+         reddened   : nothing (as expected: another test still catches every plant)
+[ok  ] UNIT-PAIR-BOTH: both routes to adjacency are skipped: the per-edge test AND the circle walk that cross-checks it
+         must redden: ['a point moved', 'the modulus doubled']
+         reddened   : ['a point moved (point 113 = [8, 28] -> [9, 28], degree 42)', 'the modulus doubled (n = 121 -> 242); the points still fit, the quadrances do not']
+[ok  ] DUPLICATE-POINT: the "no point twice" test is skipped
+         must redden: ['a point listed twice']
+         reddened   : ['a point listed twice (point 113 replaced by point 0)']
+[ok  ] POINT-RANGE: the "every coordinate is in [0, n)" test is skipped
+         must redden: ['a point outside the ring']
+         reddened   : ['a point outside the ring (point 113 -> [121, 28])']
+[ok  ] PIN-CLIQUE: the "the pin is a triangle OF THE LISTED GRAPH" test is skipped
+         must redden: ['the pin moved to a non-triangle', 'the pinned edge']
+         reddened   : ['the pin moved to a non-triangle ([0, 27, 430] -> [0, 27, 1])', 'the pinned edge [0, 27] removed from the edge list']
+[ok  ] EDGE-ORDER: the "the edge list is sorted and repeats nothing" test is skipped
+         must redden: ['the edge list reversed', 'listed twice']
+         reddened   : ['the edge list reversed (positions address clauses, so order is part of the witness)', 'edge [0, 27] listed twice']
+[ok  ] RUP-CONFLICT: an added clause no longer has to propagate to a conflict
+         must redden: ["a derivation's last hint dropped"]
+         reddened   : ["a derivation's last hint dropped (proof line 881: hint 463 removed)"]
+[ok  ] FRESH-ID: a proof may reuse a clause id the formula already has
+         must redden: ['re-adds clause id 1']
+         reddened   : ['a proof line re-adds clause id 1 (a valid RUP derivation, but the id is not fresh)']
+[ok  ] the committed checker afterwards: exit 0, 23 of 23 rows green (nothing was edited in place)
+MUTATION AUDIT: 11 of 11 behaved
+ALL MUTATIONS SEEN RED

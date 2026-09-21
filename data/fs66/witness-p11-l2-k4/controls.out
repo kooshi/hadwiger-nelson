@@ -1,0 +1,71 @@
+  [ok  ] faithful twin (the witness re-serialised, the proof rewritten line by line -- same scaffolding, no fault)
+         expected CERTIFIED, exit 0
+         observed exit 0: CERTIFIED by fs66_check_witness (standard-library checker; NOT the Lean kernel)
+  [ok  ] the second CNF builder (tools/coloring.py, via fs66_tower.py cnfdigest) agrees on the formula
+         expected sha256 2f2c20157cbc859e899b0226fb5733b571d2883f08c7f91018279a315d38a889
+         observed sha256 2f2c20157cbc859e899b0226fb5733b571d2883f08c7f91018279a315d38a889
+  [ok  ] the circle walk and a plain all-pairs test over all 389403 pairs agree
+         expected 8597 unit pairs by all-pairs
+         observed 8597 by the circle walk, 3441 listed
+  [ok  ] a point moved (point 113 = [8, 28] -> [9, 28], degree 42)
+         expected REFUSED NOT_UNIT_PAIR or REPEATED_POINT
+         observed REFUSED NOT_UNIT_PAIR: edge 5: point 0 = (0, 0) and point 113 = (9, 28): (0 - 9)^2 + (0 - 28)^2 = 81 + 784 = 865 = 18 (mod 121), not 1 -- they are not at unit distance, so this is not an edge of UD(Z/
+  [ok  ] a point listed twice (point 113 replaced by point 0)
+         expected REFUSED REPEATED_POINT
+         observed REFUSED REPEATED_POINT: points 0 and 113 are both (0, 0)
+  [ok  ] a point outside the ring (point 113 -> [121, 28])
+         expected REFUSED BAD_POINT
+         observed REFUSED BAD_POINT: point 113 = (121, 28) has a coordinate outside [0, 121), so it is not a point of (Z/121)^2
+  [ok  ] the modulus reduced (n = 121 -> 120)
+         expected REFUSED BAD_POINT or NOT_UNIT_PAIR
+         observed REFUSED BAD_POINT: point 27 = (0, 120) has a coordinate outside [0, 120), so it is not a point of (Z/120)^2
+  [ok  ] the modulus doubled (n = 121 -> 242); the points still fit, the quadrances do not
+         expected REFUSED NOT_UNIT_PAIR
+         observed REFUSED NOT_UNIT_PAIR: edge 0: point 0 = (0, 0) and point 27 = (0, 120): (0 - 0)^2 + (0 - 120)^2 = 0 + 14400 = 14400 = 122 (mod 242), not 1 -- they are not at unit distance, so this is not an edge of 
+  [ok  ] the pin moved to a non-triangle ([0, 27, 430] -> [0, 27, 1])
+         expected REFUSED PIN_NOT_CLIQUE
+         observed REFUSED PIN_NOT_CLIQUE: pin [0, 27, 1]: points 0 = [0, 0] and 1 = [0, 1] are not a listed edge, so giving the three pinned points three different colours is not a symmetry reduction of the listed grap
+  [ok  ] the pinned edge [0, 27] removed from the edge list
+         expected REFUSED PIN_NOT_CLIQUE
+         observed REFUSED PIN_NOT_CLIQUE: pin [0, 27, 430]: points 0 = [0, 0] and 27 = [0, 120] are not a listed edge, so giving the three pinned points three different colours is not a symmetry reduction of the listed
+  [ok  ] the proof truncated to 1321 of 2642 lines
+         expected REFUSED PROOF_NO_EMPTY_CLAUSE
+         observed REFUSED PROOF_NO_EMPTY_CLAUSE: the proof ends after 1321 lines and 1082 additions without deriving the empty clause
+  [ok  ] one hint corrupted (proof line 1322: first hint 15550 -> 1)
+         expected REFUSED PROOF_BAD_HINT or PROOF_STEP_NOT_RUP
+         observed REFUSED PROOF_BAD_HINT: line 1322: hint 1 names no clause in the database
+  [ok  ] a derivation's last hint dropped (proof line 881: hint 463 removed)
+         expected REFUSED PROOF_STEP_NOT_RUP or PROOF_BAD_HINT
+         observed REFUSED PROOF_STEP_NOT_RUP: line 881: clause 15345's 181 hints propagate without reaching a conflict, so the clause is not implied by reverse unit propagation
+  [ok  ] k = 4 -> 5: a satisfiable formula (the listed graph does have 5 colours) handed the 4-colour proof
+         expected REFUSED PROOF_STEP_NOT_RUP or PROOF_BAD_HINT or PROOF_NO_EMPTY_CLAUSE
+         observed REFUSED PROOF_STEP_NOT_RUP: line 1: clause id 14651 is not fresh (the last id in use is 18091), so this proof is not a proof of this formula
+  [ok  ] k = 4 -> 2, below the three pinned colours
+         expected REFUSED BAD_WITNESS
+         observed REFUSED BAD_WITNESS: k is 2; it must be an integer of at least 3 (the colour count)
+  [ok  ] one edge [1, 2] deleted, the original proof kept
+         expected REFUSED PROOF_STEP_NOT_RUP or PROOF_BAD_HINT or PROOF_NO_EMPTY_CLAUSE
+         observed REFUSED PROOF_BAD_HINT: line 1: hint 14648 names no clause in the database
+  [ok  ] the edge list reversed (positions address clauses, so order is part of the witness)
+         expected REFUSED BAD_EDGE
+         observed REFUSED BAD_EDGE: edge 1 = [877, 878] does not come after edge 0 = [879, 880]; the list must be sorted and repeat nothing (the certificate addresses clauses by position)
+  [ok  ] edge [0, 27] listed twice
+         expected REFUSED BAD_EDGE
+         observed REFUSED BAD_EDGE: edge 1 = [0, 27] does not come after edge 0 = [0, 27]; the list must be sorted and repeat nothing (the certificate addresses clauses by position)
+  [ok  ] an unknown key "note" added to the witness
+         expected REFUSED BAD_WITNESS
+         observed REFUSED BAD_WITNESS: unknown key 'note' (this checker accepts only ['edges', 'k', 'kind', 'n', 'pin', 'points', 'provenance'] and refuses rather than ignore anything else)
+  [ok  ] the edge list emptied
+         expected REFUSED BAD_WITNESS
+         observed REFUSED BAD_WITNESS: edges is an empty or non-list value; a refutation needs edges
+  [ok  ] the proof replaced by text that is not LRAT
+         expected REFUSED PROOF_MALFORMED
+         observed REFUSED PROOF_MALFORMED: line 1: not a list of integers
+  [ok  ] a proof line re-adds clause id 1 (a valid RUP derivation, but the id is not fresh)
+         expected REFUSED PROOF_STEP_NOT_RUP
+         observed REFUSED PROOF_STEP_NOT_RUP: line 1: clause id 1 is not fresh (the last id in use is 14650), so this proof is not a proof of this formula
+  [ok  ] the guarded state after all plants: the committed witness and proof are byte-identical and certify
+         expected CERTIFIED, witness 03dec6a57d03…, proof 122b7876ac0e…
+         observed exit 0, witness 03dec6a57d03…, proof 122b7876ac0e…: CERTIFIED by fs66_check_witness (standard-library checker; NOT the Lean kernel)
+23 controls: 23 behaved, 0 did not
+ALL CONTROLS BEHAVED

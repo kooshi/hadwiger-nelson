@@ -1,0 +1,192 @@
+=== FS-66 phase 1a, the definitive vertex minimisation ===
+if this process dies at any instant the relaunch redoes at most ONE wave of 16 probes:
+  the acceptance log data/fs66/ckpt/minimise-p11-l2.jsonl gains a line per acceptance, and
+  data/fs66/ckpt/minimise-p11-l2.current.json is rewritten atomically after EVERY wave.
+resume: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/minimise-p11-l2.current.json
+
+start: 2974 vertices, 14190 edges, pin [0, 120, 5747], n=121, k=4, mode=vertices, 16 probes at a time, conflict budget 300000, 0 deletions already on the checkpoint
+  if this dies now the relaunch redoes at most one wave of 16 probes; resume: python3 tools/fs66_minimise.py --resume data/fs66/ckpt/minimise-p11-l2.current.json
+wave 1 (vertices): 2974v/14190e -> 1218v/5557e  (deleted v 29; 14 of 16 probes refused; 1593 conflicts; 0.3s)
+wave 2 (vertices): 1218v/5557e -> 1106v/4960e  (deleted v 143; 2 of 16 probes refused; 1508 conflicts; 0.1s)
+wave 3 (sweep 1, vertices): 1106v/4960e  no deletion ({'SAT': 16}), 16/1103 probed, 0.1s
+wave 4 (vertices): 1106v/4960e -> 1092v/4873e  (deleted v 434; 2 of 16 probes refused; 1507 conflicts; 0.1s)
+wave 5 (vertices): 1092v/4873e -> 1065v/4684e  (deleted v 477; 1 of 16 probes refused; 1448 conflicts; 0.1s)
+wave 6 (sweep 1, vertices): 1065v/4684e  no deletion ({'SAT': 16}), 32/1062 probed, 0.1s
+wave 7 (vertices): 1065v/4684e -> 1039v/4500e  (deleted v 629; 3 of 16 probes refused; 1184 conflicts; 0.1s)
+wave 8 (vertices): 1039v/4500e -> 1028v/4390e  (deleted v 606; 2 of 16 probes refused; 1527 conflicts; 0.1s)
+wave 9 (vertices): 1028v/4390e -> 1027v/4386e  (deleted v 696; 1 of 16 probes refused; 1527 conflicts; 0.1s)
+wave 10 (sweep 1, vertices): 1027v/4386e  no deletion ({'SAT': 16}), 48/1024 probed, 0.1s
+wave 11 (vertices): 1027v/4386e -> 998v/4263e  (deleted v 1029; 3 of 16 probes refused; 1497 conflicts; 0.1s)
+wave 12 (vertices): 998v/4263e -> 988v/4187e  (deleted v 813; 4 of 16 probes refused; 1471 conflicts; 0.1s)
+wave 13 (vertices): 988v/4187e -> 979v/4114e  (deleted v 694; 3 of 16 probes refused; 1373 conflicts; 0.1s)
+wave 14 (sweep 1, vertices): 979v/4114e  no deletion ({'SAT': 16}), 64/976 probed, 0.1s
+wave 15 (vertices): 979v/4114e -> 967v/4049e  (deleted v 1286; 2 of 16 probes refused; 1440 conflicts; 0.1s)
+wave 16 (vertices): 967v/4049e -> 966v/4045e  (deleted v 1153; 2 of 16 probes refused; 1440 conflicts; 0.1s)
+wave 17 (vertices): 966v/4045e -> 965v/4041e  (deleted v 394; 1 of 16 probes refused; 1440 conflicts; 0.1s)
+wave 18 (sweep 1, vertices): 965v/4041e  no deletion ({'SAT': 16}), 80/962 probed, 0.1s
+wave 19 (vertices): 965v/4041e -> 952v/3976e  (deleted v 1343; 2 of 16 probes refused; 1614 conflicts; 0.1s)
+wave 20 (vertices): 952v/3976e -> 947v/3931e  (deleted v 1720; 1 of 16 probes refused; 1589 conflicts; 0.1s)
+wave 21 (sweep 1, vertices): 947v/3931e  no deletion ({'SAT': 16}), 96/944 probed, 0.1s
+wave 22 (vertices): 947v/3931e -> 937v/3874e  (deleted v 2330; 2 of 16 probes refused; 1615 conflicts; 0.1s)
+wave 23 (vertices): 937v/3874e -> 932v/3839e  (deleted v 2392; 1 of 16 probes refused; 1422 conflicts; 0.1s)
+wave 24 (sweep 1, vertices): 932v/3839e  no deletion ({'SAT': 16}), 112/929 probed, 0.1s
+wave 25 (vertices): 932v/3839e -> 931v/3825e  (deleted v 3420; 2 of 16 probes refused; 1489 conflicts; 0.1s)
+wave 26 (vertices): 931v/3825e -> 929v/3803e  (deleted v 3356; 1 of 16 probes refused; 1585 conflicts; 0.1s)
+wave 27 (sweep 1, vertices): 929v/3803e  no deletion ({'SAT': 16}), 128/926 probed, 0.1s
+wave 28 (vertices): 929v/3803e -> 926v/3780e  (deleted v 3869; 1 of 16 probes refused; 1290 conflicts; 0.1s)
+wave 29 (sweep 1, vertices): 926v/3780e  no deletion ({'SAT': 16}), 144/923 probed, 0.1s
+wave 30 (sweep 1, vertices): 926v/3780e  no deletion ({'SAT': 16}), 160/923 probed, 0.1s
+wave 31 (vertices): 926v/3780e -> 924v/3762e  (deleted v 4655; 2 of 16 probes refused; 1655 conflicts; 0.1s)
+wave 32 (sweep 1, vertices): 924v/3762e  no deletion ({'SAT': 16}), 176/921 probed, 0.1s
+wave 33 (vertices): 924v/3762e -> 922v/3743e  (deleted v 5597; 1 of 16 probes refused; 1203 conflicts; 0.1s)
+wave 34 (sweep 1, vertices): 922v/3743e  no deletion ({'SAT': 16}), 192/919 probed, 0.1s
+wave 35 (sweep 1, vertices): 922v/3743e  no deletion ({'SAT': 16}), 208/919 probed, 0.1s
+wave 36 (vertices): 922v/3743e -> 920v/3727e  (deleted v 6387; 2 of 16 probes refused; 1399 conflicts; 0.1s)
+wave 37 (vertices): 920v/3727e -> 918v/3715e  (deleted v 6412; 3 of 16 probes refused; 1348 conflicts; 0.1s)
+wave 38 (vertices): 918v/3715e -> 917v/3711e  (deleted v 4084; 2 of 16 probes refused; 1348 conflicts; 0.1s)
+wave 39 (vertices): 917v/3711e -> 916v/3707e  (deleted v 57; 1 of 16 probes refused; 1348 conflicts; 0.1s)
+wave 40 (sweep 1, vertices): 916v/3707e  no deletion ({'SAT': 16}), 224/913 probed, 0.1s
+wave 41 (sweep 1, vertices): 916v/3707e  no deletion ({'SAT': 16}), 240/913 probed, 0.1s
+wave 42 (sweep 1, vertices): 916v/3707e  no deletion ({'SAT': 16}), 256/913 probed, 0.1s
+wave 43 (vertices): 916v/3707e -> 914v/3694e  (deleted v 9104; 2 of 16 probes refused; 1365 conflicts; 0.1s)
+wave 44 (vertices): 914v/3694e -> 913v/3690e  (deleted v 8614; 1 of 16 probes refused; 1365 conflicts; 0.1s)
+wave 45 (sweep 1, vertices): 913v/3690e  no deletion ({'SAT': 16}), 272/910 probed, 0.1s
+wave 46 (sweep 1, vertices): 913v/3690e  no deletion ({'SAT': 16}), 288/910 probed, 0.1s
+wave 47 (sweep 1, vertices): 913v/3690e  no deletion ({'SAT': 16}), 304/910 probed, 0.1s
+wave 48 (sweep 1, vertices): 913v/3690e  no deletion ({'SAT': 16}), 320/910 probed, 0.1s
+wave 49 (vertices): 913v/3690e -> 912v/3686e  (deleted v 11493; 1 of 16 probes refused; 1365 conflicts; 0.1s)
+wave 50 (sweep 1, vertices): 912v/3686e  no deletion ({'SAT': 16}), 336/909 probed, 0.1s
+wave 51 (vertices): 912v/3686e -> 910v/3674e  (deleted v 11711; 2 of 16 probes refused; 1513 conflicts; 0.1s)
+wave 52 (vertices): 910v/3674e -> 909v/3665e  (deleted v 9350; 2 of 16 probes refused; 1284 conflicts; 0.1s)
+wave 53 (vertices): 909v/3665e -> 908v/3656e  (deleted v 12281; 1 of 16 probes refused; 1468 conflicts; 0.1s)
+wave 54 (vertices): 908v/3656e -> 907v/3648e  (deleted v 7683; 1 of 16 probes refused; 1407 conflicts; 0.1s)
+wave 55 (sweep 1, vertices): 907v/3648e  no deletion ({'SAT': 16}), 352/904 probed, 0.1s
+wave 56 (vertices): 907v/3648e -> 906v/3639e  (deleted v 12966; 1 of 16 probes refused; 1573 conflicts; 0.1s)
+wave 57 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 368/903 probed, 0.1s
+wave 58 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 384/903 probed, 0.1s
+wave 59 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 400/903 probed, 0.1s
+wave 60 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 416/903 probed, 0.1s
+wave 61 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 432/903 probed, 0.1s
+wave 62 (sweep 1, vertices): 906v/3639e  no deletion ({'SAT': 16}), 448/903 probed, 0.1s
+wave 63 (vertices): 906v/3639e -> 905v/3632e  (deleted v 3478; 1 of 16 probes refused; 1561 conflicts; 0.1s)
+wave 64 (sweep 1, vertices): 905v/3632e  no deletion ({'SAT': 16}), 464/902 probed, 0.1s
+wave 65 (sweep 1, vertices): 905v/3632e  no deletion ({'SAT': 16}), 480/902 probed, 0.1s
+wave 66 (vertices): 905v/3632e -> 904v/3622e  (deleted v 9956; 2 of 16 probes refused; 1396 conflicts; 0.1s)
+wave 67 (vertices): 904v/3622e -> 903v/3613e  (deleted v 9405; 1 of 16 probes refused; 1305 conflicts; 0.1s)
+wave 68 (vertices): 903v/3613e -> 902v/3606e  (deleted v 2382; 1 of 16 probes refused; 1429 conflicts; 0.1s)
+wave 69 (vertices): 902v/3606e -> 901v/3600e  (deleted v 2383; 1 of 16 probes refused; 1474 conflicts; 0.1s)
+wave 70 (sweep 1, vertices): 901v/3600e  no deletion ({'SAT': 16}), 496/898 probed, 0.1s
+wave 71 (vertices): 901v/3600e -> 900v/3592e  (deleted v 12373; 3 of 16 probes refused; 1375 conflicts; 0.1s)
+wave 72 (vertices): 900v/3592e -> 899v/3586e  (deleted v 13669; 2 of 16 probes refused; 1385 conflicts; 0.1s)
+wave 73 (vertices): 899v/3586e -> 898v/3577e  (deleted v 12435; 1 of 16 probes refused; 1380 conflicts; 0.1s)
+wave 74 (vertices): 898v/3577e -> 897v/3568e  (deleted v 10951; 2 of 16 probes refused; 1501 conflicts; 0.1s)
+wave 75 (vertices): 897v/3568e -> 895v/3557e  (deleted v 6355; 4 of 16 probes refused; 1559 conflicts; 0.1s)
+wave 76 (vertices): 895v/3557e -> 894v/3550e  (deleted v 5415; 2 of 16 probes refused; 1469 conflicts; 0.1s)
+wave 77 (vertices): 894v/3550e -> 893v/3545e  (deleted v 13278; 1 of 16 probes refused; 1469 conflicts; 0.1s)
+wave 78 (sweep 1, vertices): 893v/3545e  no deletion ({'SAT': 16}), 512/890 probed, 0.1s
+wave 79 (vertices): 893v/3545e -> 892v/3534e  (deleted v 391; 1 of 16 probes refused; 1574 conflicts; 0.1s)
+wave 80 (sweep 1, vertices): 892v/3534e  no deletion ({'SAT': 16}), 528/889 probed, 0.1s
+wave 81 (sweep 1, vertices): 892v/3534e  no deletion ({'SAT': 16}), 544/889 probed, 0.1s
+wave 82 (sweep 1, vertices): 892v/3534e  no deletion ({'SAT': 16}), 560/889 probed, 0.1s
+wave 83 (vertices): 892v/3534e -> 891v/3528e  (deleted v 12282; 1 of 16 probes refused; 1558 conflicts; 0.1s)
+wave 84 (sweep 1, vertices): 891v/3528e  no deletion ({'SAT': 16}), 576/888 probed, 0.1s
+wave 85 (sweep 1, vertices): 891v/3528e  no deletion ({'SAT': 16}), 592/888 probed, 0.1s
+wave 86 (sweep 1, vertices): 891v/3528e  no deletion ({'SAT': 16}), 608/888 probed, 0.1s
+wave 87 (sweep 1, vertices): 891v/3528e  no deletion ({'SAT': 16}), 624/888 probed, 0.1s
+wave 88 (vertices): 891v/3528e -> 890v/3516e  (deleted v 662; 3 of 16 probes refused; 1554 conflicts; 0.1s)
+wave 89 (vertices): 890v/3516e -> 889v/3506e  (deleted v 3322; 2 of 16 probes refused; 1687 conflicts; 0.1s)
+wave 90 (vertices): 889v/3506e -> 888v/3495e  (deleted v 1994; 2 of 16 probes refused; 1452 conflicts; 0.1s)
+wave 91 (vertices): 888v/3495e -> 887v/3487e  (deleted v 4598; 1 of 16 probes refused; 1710 conflicts; 0.1s)
+wave 92 (sweep 1, vertices): 887v/3487e  no deletion ({'SAT': 16}), 640/884 probed, 0.1s
+wave 93 (vertices): 887v/3487e -> 886v/3478e  (deleted v 8020; 1 of 16 probes refused; 1725 conflicts; 0.1s)
+wave 94 (sweep 1, vertices): 886v/3478e  no deletion ({'SAT': 16}), 656/883 probed, 0.1s
+wave 95 (vertices): 886v/3478e -> 885v/3469e  (deleted v 13700; 1 of 16 probes refused; 1839 conflicts; 0.1s)
+wave 96 (sweep 1, vertices): 885v/3469e  no deletion ({'SAT': 16}), 672/882 probed, 0.1s
+wave 97 (sweep 1, vertices): 885v/3469e  no deletion ({'SAT': 16}), 688/882 probed, 0.1s
+wave 98 (sweep 1, vertices): 885v/3469e  no deletion ({'SAT': 16}), 704/882 probed, 0.1s
+wave 99 (vertices): 885v/3469e -> 884v/3456e  (deleted v 13310; 1 of 16 probes refused; 1625 conflicts; 0.1s)
+wave 100 (sweep 1, vertices): 884v/3456e  no deletion ({'SAT': 16}), 720/881 probed, 0.1s
+wave 101 (sweep 1, vertices): 884v/3456e  no deletion ({'SAT': 16}), 736/881 probed, 0.1s
+wave 102 (vertices): 884v/3456e -> 883v/3441e  (deleted v 7684; 1 of 16 probes refused; 1477 conflicts; 0.1s)
+wave 103 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 752/880 probed, 0.1s
+wave 104 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 768/880 probed, 0.1s
+wave 105 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 784/880 probed, 0.1s
+wave 106 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 800/880 probed, 0.1s
+wave 107 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 816/880 probed, 0.1s
+wave 108 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 832/880 probed, 0.1s
+wave 109 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 848/880 probed, 0.1s
+wave 110 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 864/880 probed, 0.1s
+wave 111 (sweep 1, vertices): 883v/3441e  no deletion ({'SAT': 16}), 880/880 probed, 0.0s
+sweep 1 (vertices) ended with 56 acceptances: another pass over all 880 of them
+wave 112 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 16/880 probed, 0.1s
+wave 113 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 32/880 probed, 0.1s
+wave 114 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 48/880 probed, 0.1s
+wave 115 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 64/880 probed, 0.1s
+wave 116 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 80/880 probed, 0.1s
+wave 117 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 96/880 probed, 0.1s
+wave 118 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 112/880 probed, 0.1s
+wave 119 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 128/880 probed, 0.1s
+wave 120 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 144/880 probed, 0.1s
+wave 121 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 160/880 probed, 0.1s
+wave 122 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 176/880 probed, 0.1s
+wave 123 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 192/880 probed, 0.1s
+wave 124 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 208/880 probed, 0.1s
+wave 125 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 224/880 probed, 0.1s
+wave 126 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 240/880 probed, 0.1s
+wave 127 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 256/880 probed, 0.1s
+wave 128 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 272/880 probed, 0.1s
+wave 129 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 288/880 probed, 0.1s
+wave 130 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 304/880 probed, 0.1s
+wave 131 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 320/880 probed, 0.1s
+wave 132 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 336/880 probed, 0.1s
+wave 133 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 352/880 probed, 0.1s
+wave 134 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 368/880 probed, 0.1s
+wave 135 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 384/880 probed, 0.1s
+wave 136 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 400/880 probed, 0.1s
+wave 137 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 416/880 probed, 0.1s
+wave 138 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 432/880 probed, 0.1s
+wave 139 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 448/880 probed, 0.1s
+wave 140 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 464/880 probed, 0.1s
+wave 141 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 480/880 probed, 0.1s
+wave 142 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 496/880 probed, 0.1s
+wave 143 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 512/880 probed, 0.1s
+wave 144 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 528/880 probed, 0.1s
+wave 145 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 544/880 probed, 0.1s
+wave 146 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 560/880 probed, 0.1s
+wave 147 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 576/880 probed, 0.1s
+wave 148 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 592/880 probed, 0.1s
+wave 149 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 608/880 probed, 0.1s
+wave 150 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 624/880 probed, 0.1s
+wave 151 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 640/880 probed, 0.1s
+wave 152 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 656/880 probed, 0.1s
+wave 153 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 672/880 probed, 0.1s
+wave 154 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 688/880 probed, 0.1s
+wave 155 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 704/880 probed, 0.1s
+wave 156 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 720/880 probed, 0.1s
+wave 157 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 736/880 probed, 0.1s
+wave 158 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 752/880 probed, 0.1s
+wave 159 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 768/880 probed, 0.1s
+wave 160 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 784/880 probed, 0.1s
+wave 161 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 800/880 probed, 0.1s
+wave 162 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 816/880 probed, 0.1s
+wave 163 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 832/880 probed, 0.1s
+wave 164 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 848/880 probed, 0.1s
+wave 165 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 864/880 probed, 0.1s
+wave 166 (sweep 2, vertices): 883v/3441e  no deletion ({'SAT': 16}), 880/880 probed, 0.0s
+sweep 2 (vertices) accepted nothing: the graph is 1-minimal in vertices (880 probed against this graph)
+stop: 1-minimal in vertices
+final: 883 vertices, 3441 edges after 2656 probes in 15.7 s (56 accepted deletions)
+the final graph itself, asked directly: UNSAT (1503 conflicts)
+written to /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/fs66/final-min.json
+
+=== DELIBERATE KILL, 2026-09-21T02:13:04Z ===
+the checkpoint discipline is exercised on purpose, not simulated: SIGKILL to the process GROUP by its
+numeric pgid (never by a command-line pattern, which matches the killing shell -- CLAUDE.md, eight incidents).
+before the kill: 166 waves logged, 57 lines on the acceptance log, state digest a6044481f3f9d037
+  kill -KILL -- -2679860 returned 'No such process'. VERIFIED BY EFFECT rather than assumed either way:
+  the log above already carries this run's own 'stop: 1-minimal', 'final:' and 'written to' lines, so the
+  run had ALREADY EXITED NORMALLY, 15.7 s after launch, before the kill was sent. Nothing crashed.
+  The production path is simply too fast to interrupt by hand: 2,656 probes, 56 accepted deletions,
+  2,974 -> 883 vertices in 15.7 s on 16 cores. The checkpoint/resume discipline of THIS SAME TOOL is
+  therefore exercised on a run long enough to interrupt -- the edge-deletion mode, whose probes cost
+  120,000-150,000 conflicts each -- in data/fs66/ckpt/minimise-resume-exercise.log.
