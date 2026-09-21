@@ -70,7 +70,7 @@ and the error codes, which say the CHECKER could not do its job rather than that
 
 USAGE
   fs66_b1_cert_check.py CERT.json [--m M] [--ldl] [--record FILE]
-  fs66_b1_cert_check.py --self-test [--cert CERT.json] [--orbit-twin-full]
+  fs66_b1_cert_check.py --self-test [--cert CERT.json]
   fs66_b1_cert_check.py --help
 The last line always begins with CERTIFIED (exit 0), BOUND ONLY (exit 3), REFUSED <CODE> (exit 1) or
 ERROR <CODE> (exit 2).  CERTIFIED is this checker's word, NOT the Lean kernel's, and it asserts only the
@@ -81,7 +81,6 @@ import hashlib
 import json
 import os
 import platform
-import random
 import shutil
 import subprocess
 import sys
@@ -216,9 +215,18 @@ def dec_str(num, den, places=6):
     return f'{"-" if neg else ""}{whole}.{frac:0{places}d}' + ('' if rem2 == 0 else '…')
 
 
-def short_int(v, digits=30):
+def short_int(v, digits=45):
+    """exact up to `digits` digits, then an abbreviation WITH the digit count.
+
+    The cut is 45 because every quantity a reader compares here -- a scale, a U_num, m*U_num, a row
+    multiplier -- is under 40 digits and must print exactly: two numbers differing in their last place
+    must never print as the same string. Only the elimination's minors (hundreds of digits) abbreviate,
+    and there the sign is the whole content."""
     s = str(v)
-    return s if len(s) <= digits else f'{s[0]}.{s[1:7]}e+{len(s.lstrip("-")) - 1} ({len(s.lstrip("-"))} digits)'
+    body = s.lstrip('-')
+    if len(body) <= digits:
+        return s
+    return f'{"-" if v < 0 else ""}{body[0]}.{body[1:7]}e+{len(body) - 1} ({len(body)} digits)'
 
 
 # ----------------------------------------------------------------------------- the plane, rebuilt from p
@@ -750,8 +758,9 @@ def check(path, m=None, use_ldl=False, narrate=lambda s: None):
     bad = [k for k in keys if rhs.get(k, 0) != lhs.get(k, 0)]
     if bad:
         bad.sort(key=lambda k: (len(canon.list[k]), canon.list[k]))
-        shown = '; '.join(f'y({list(canon.list[k]) if canon.list[k] else "[]"}): left '
-                          f'{short_int(lhs.get(k, 0))}, right {short_int(rhs.get(k, 0))}' for k in bad[:3])
+        shown = '; '.join(f'y({list(canon.list[k])}): left {short_int(lhs.get(k, 0))}, right '
+                          f'{short_int(rhs.get(k, 0))}, left - right = '
+                          f'{short_int(lhs.get(k, 0) - rhs.get(k, 0))}' for k in bad[:3])
         extra = ''
         const = canon.idx(())
         if bad == [const]:
@@ -856,9 +865,8 @@ def digest_of(path):
 
 
 class SelfTest:
-    def __init__(self, cert_path, full_orbit):
+    def __init__(self, cert_path):
         self.cert_path = cert_path
-        self.full_orbit = full_orbit
         self.rows = []
         self.first_bad = None
 
@@ -886,8 +894,8 @@ class SelfTest:
                   else f'[THE PLANT CHANGED NOTHING] exit {rc}: {line[:150]}'))
 
 
-def controls(cert_path, full_orbit):
-    st = SelfTest(cert_path, full_orbit)
+def controls(cert_path):
+    st = SelfTest(cert_path)
     print(f'self-test of {os.path.relpath(os.path.abspath(__file__), REPO)}')
     print(f'plants on a COPY of {cert_path}; the committed file is never written to', flush=True)
     rc, line = run_self([cert_path])
@@ -913,43 +921,47 @@ def controls(cert_path, full_orbit):
     # --- 0: the faithful twin, re-serialised through the same scaffolding as every plant.
     twin = put('twin', copy())
     twin_digest = digest_of(twin)
-    m_ok = (n * scale) // U_num                       # the largest m this bound refuses
+    m_ok = -((-n * scale) // U_num) - 1               # the largest m with m*U_num < n*scale, exactly
     st.expect('0  faithful twin (same scaffolding, no fault)', [twin, '--m', str(m_ok)], None, None,
               'CERTIFIED')
+
+    def plant(name, label, d, expect_word, expect_code=None, extra_args=()):
+        path = put(name, d)
+        st.expect(label, [path] + list(extra_args), path, twin_digest, expect_word, expect_code)
 
     # --- 1: the overclaim.  One part in 10^30 of U, and it must be caught at the constant monomial.
     d = copy()
     d['U_num'] = U_num - 1
-    st.expect('1  U_num lowered by 1 (the overclaim: a bound smaller than the blocks and rows support)',
-              [put('lower', d)], put('lower', d), twin_digest, 'REFUSED', 'IDENTITY_MISMATCH')
+    plant('lower', '1  U_num lowered by 1 (the overclaim: a bound smaller than the blocks and rows support)',
+          d, 'REFUSED', 'IDENTITY_MISMATCH')
 
     # --- 2: a weaker TRUE claim must pass (the plant's both-sides bound).
     d = copy()
     d['U_num'] = U_num + scale
     d['rows'] = d['rows'] + [[[], [], scale]]
-    st.expect('2  U_num raised by scale AND the row [[], [], scale] added (1 >= 0): a weaker true claim',
-              [put('weaker', d), '--m', str(m_ok)], put('weaker', d), twin_digest, 'CERTIFIED')
+    plant('weaker', '2  U_num raised by scale AND the row [[], [], scale] added (1 >= 0): a weaker true claim',
+          d, 'CERTIFIED', None, ('--m', str(m_ok)))
 
     # --- 3: the same weakening without the row, so the identity no longer holds.
     d = copy()
     d['U_num'] = U_num + scale
-    st.expect('3  U_num raised by scale, no row added', [put('unpaid', d)], put('unpaid', d), twin_digest,
-              'REFUSED', 'IDENTITY_MISMATCH')
+    plant('unpaid', '3  U_num raised by scale, no row added', d, 'REFUSED', 'IDENTITY_MISMATCH')
 
-    # --- 4: a negated diagonal entry of a character block.
+    # --- 4: a negated diagonal entry of a CHARACTER block (one carrying more than one weight vector).
+    ci = max((i for i, b in enumerate(doc['blocks']) if b['times'] == '1' and len(b['weights']) > 1),
+             key=lambda i: len(doc['blocks'][i]['R']))
     d = copy()
-    bi = max(range(len(d['blocks'])), key=lambda i: (d['blocks'][i]['times'] == '1', len(d['blocks'][i]['R'])))
-    last = len(d['blocks'][bi]['R']) - 1
-    d['blocks'][bi]['R'][last][last] = -d['blocks'][bi]['R'][last][last]
-    st.expect(f'4  blocks[{bi}] diagonal entry [{last}][{last}] negated', [put('negdiag', d)],
-              put('negdiag', d), twin_digest, 'REFUSED', 'BLOCK_NOT_POSITIVE_DEFINITE')
+    last = len(d['blocks'][ci]['R']) - 1
+    d['blocks'][ci]['R'][last][last] = -d['blocks'][ci]['R'][last][last]
+    plant('negdiag', f'4  blocks[{ci}] (a character block) diagonal entry [{last}][{last}] negated', d,
+          'REFUSED', 'BLOCK_NOT_POSITIVE_DEFINITE')
 
     # --- 5: positive SEMIdefinite is refused -- the strict form is what Sylvester's criterion checks.
     d = copy()
-    size = len(d['blocks'][bi]['R'])
-    d['blocks'][bi]['R'] = [[1] * size for _ in range(size)]      # all ones: eigenvalues size, 0, ..., 0
-    st.expect(f'5  blocks[{bi}] replaced by the all-ones matrix (positive diagonal, a zero eigenvalue)',
-              [put('semidef', d)], put('semidef', d), twin_digest, 'REFUSED', 'BLOCK_NOT_POSITIVE_DEFINITE')
+    size = len(d['blocks'][ci]['R'])
+    d['blocks'][ci]['R'] = [[1] * size for _ in range(size)]      # all ones: eigenvalues size, 0, ..., 0
+    plant('semidef', f'5  blocks[{ci}] replaced by the all-ones matrix (positive diagonal, a zero '
+                     f'eigenvalue)', d, 'REFUSED', 'BLOCK_NOT_POSITIVE_DEFINITE')
 
     # --- 6: a negative multiplier, with the identity repaired by hand so that the sign is the only fault.
     d = copy()
@@ -957,21 +969,19 @@ def controls(cert_path, full_orbit):
     A, B, lam = d['rows'][ri]
     d['rows'][ri] = [A, B, -lam]
     d['rows'].append([A, B, 2 * lam])
-    st.expect(f'6  rows[{ri}] multiplier negated, identity repaired by a duplicate row (2*lam)',
-              [put('negmul', d)], put('negmul', d), twin_digest, 'REFUSED', 'NEGATIVE_MULTIPLIER')
+    plant('negmul', f'6  rows[{ri}] multiplier negated, identity repaired by a duplicate row (2*lam)', d,
+          'REFUSED', 'NEGATIVE_MULTIPLIER')
 
     # --- 7: shape faults.
     d = copy()
     d['rows'] = d['rows'] + [[[0, 0, 0, 0, 0], [], 1]]
-    st.expect('7.1  a row of degree 5', [put('deg5', d)], put('deg5', d), twin_digest, 'REFUSED', 'MALFORMED')
+    plant('deg5', '7.1  a row of degree 5', d, 'REFUSED', 'MALFORMED')
     d = copy()
     d['rows'] = d['rows'] + [[[n], [], 1]]
-    st.expect(f'7.2  a row naming the point index {n} (out of range)', [put('oob', d)], put('oob', d),
-              twin_digest, 'REFUSED', 'MALFORMED')
+    plant('oob', f'7.2  a row naming the point index {n} (out of range)', d, 'REFUSED', 'MALFORMED')
     d = copy()
     d['U_nmu'] = d.pop('U_num')
-    st.expect('7.3  the top-level key "U_num" misspelt "U_nmu"', [put('misspelt', d)], put('misspelt', d),
-              twin_digest, 'REFUSED', 'MALFORMED')
+    plant('misspelt', '7.3  the top-level key "U_num" misspelt "U_nmu"', d, 'REFUSED', 'MALFORMED')
 
     # --- 7b: every sign negated.  The identity still holds; the inequality is the thing that flips.
     d = copy()
@@ -980,18 +990,16 @@ def controls(cert_path, full_orbit):
     for b in d['blocks']:
         b['R'] = [[-v for v in row] for row in b['R']]
     d['rows'] = [[A, B, -lam] for A, B, lam in d['rows']]
-    st.expect('7b  scale, U_num, every R and every lam negated (the identity holds; the sense flips)',
-              [put('negated', d)], put('negated', d), twin_digest, 'REFUSED', 'NONPOSITIVE_SCALE')
+    plant('negated', '7b  scale, U_num, every R and every lam negated (the identity holds; the sense flips)',
+          d, 'REFUSED', 'NONPOSITIVE_SCALE')
 
     # --- 8: a float and a string where integers belong.
     d = copy()
     d['rows'][0][2] = 1.0
-    st.expect('8.1  rows[0][2] replaced by the float 1.0', [put('float', d)], put('float', d), twin_digest,
-              'REFUSED', 'NOT_AN_INTEGER')
+    plant('float', '8.1  rows[0][2] replaced by the float 1.0', d, 'REFUSED', 'NOT_AN_INTEGER')
     d = copy()
     d['blocks'][0]['R'][0][0] = '1'
-    st.expect('8.2  blocks[0]["R"][0][0] replaced by the string "1"', [put('string', d)], put('string', d),
-              twin_digest, 'REFUSED', 'NOT_AN_INTEGER')
+    plant('string', '8.2  blocks[0]["R"][0][0] replaced by the string "1"', d, 'REFUSED', 'NOT_AN_INTEGER')
 
     # --- 10: a colour count the bound does not refuse.  Silence must not read as a positive.
     st.expect(f'10  the same file asked for {m_ok + 1} colours ({m_ok + 1} * U >= {n})',
@@ -1001,16 +1009,25 @@ def controls(cert_path, full_orbit):
     other = 11 if p != 11 else 7
     d = copy()
     d['p'] = other
-    st.expect(f'11.1  "p" edited from {p} to {other} (a prime = 3 mod 4, but the wrong one)',
-              [put('otherp', d)], put('otherp', d), twin_digest, 'REFUSED', 'MALFORMED')
+    plant('otherp', f'11.1  "p" edited from {p} to {other} (a prime = 3 mod 4, but the wrong one)', d,
+          'REFUSED', 'MALFORMED')
     d = copy()
     d['p'] = 5
-    st.expect('11.2  "p" edited to 5 (prime, but = 1 mod 4)', [put('p5', d)], put('p5', d), twin_digest,
-              'REFUSED', 'BAD_PRIME')
+    plant('p5', '11.2  "p" edited to 5 (prime, but = 1 mod 4)', d, 'REFUSED', 'BAD_PRIME')
     d = copy()
     d['p'] = 9
-    st.expect('11.3  "p" edited to 9 (= 3 mod 4, but not prime)', [put('p9', d)], put('p9', d), twin_digest,
-              'REFUSED', 'BAD_PRIME')
+    plant('p9', '11.3  "p" edited to 9 (= 3 mod 4, but not prime)', d, 'REFUSED', 'BAD_PRIME')
+
+    # --- the harness's own failure mode: a plant that does not apply must be reported, never counted green.
+    # A control whose "[THE PLANT CHANGED NOTHING]" branch has never been seen is a control that has not been
+    # tested by passing.  This row deliberately plants nothing and expects the harness to say so.
+    noop = put('noop', copy())
+    rc_n, line_n = run_self([noop, '--m', str(m_ok)])
+    st.row(digest_of(noop) == twin_digest and rc_n == 0,
+           'H  the harness itself: a plant identical to the twin is detected as "changed nothing"',
+           'the no-op plant has the twin\'s digest, so any row built on it would be marked',
+           ('the no-op plant has the twin\'s digest' if digest_of(noop) == twin_digest
+            else 'the no-op plant differs from the twin: the digest comparison is not measuring the plant'))
 
     # --- a missing file, and a file that is not JSON: the checker must not exit 1 (which reads as a refusal).
     st.expect('E.1  a path that does not exist', [os.path.join(tmp, 'nothing.json')], None, None, 'ERROR',
@@ -1061,11 +1078,11 @@ def all_monomials(n, degree):
 def orbit_twin(st):
     """(a) canonical forms against the brute force: the minimum over EVERY element of the group.
 
-    The fast route tries only the |m| translations that put a point of m at the origin; the twin applies all
-    2 p^2 (p+1) group elements to every monomial of the stated population.  Population: at p = 3 the whole
-    family (715 monomials); at p = 7 every monomial of degree <= 3 (22,100) and a fixed pseudo-random sample
-    of 20,000 of degree 4 -- the whole degree-4 family there is 270,725 monomials and takes about five
-    minutes, which --orbit-twin-full runs."""
+    The fast route tries only the |m| translations that put a point of m at the origin, and only then the
+    2(p+1) linear maps; the twin applies all 2 p^2 (p+1) group elements to EVERY monomial of degree <= 4 --
+    715 of them at p = 3 and 292,825 at p = 7, the complete families (about 100 s, measured).  A population
+    restricted to monomials through the origin would be blind to exactly the half of the fast route that
+    chooses the translation, so it is not restricted."""
     for p in (3, 7):
         t0 = time.monotonic()
         plane = Plane(p)
@@ -1076,16 +1093,8 @@ def orbit_twin(st):
                 row = plane.ADD[t]
                 gamma.append(tuple(row[h[x]] for x in range(n)))
         pop = []
-        for d in range(0, 4):
+        for d in range(0, 5):
             pop.extend(all_monomials(n, d))
-        deg4 = list(all_monomials(n, 4))
-        if p == 3 or st.full_orbit:
-            pop.extend(deg4)
-            which = 'every monomial of degree <= 4'
-        else:
-            random.Random(66).shuffle(deg4)
-            pop.extend(deg4[:20000])
-            which = 'every monomial of degree <= 3 and a fixed sample of 20,000 of degree 4'
         canon = Canon(plane)
         bad = None
         for m in pop:
@@ -1095,8 +1104,8 @@ def orbit_twin(st):
                 bad = (m, fast, slow)
                 break
         st.row(bad is None,
-               f'twin (a) orbits at p = {p}: {which} ({len(pop)} monomials) against the brute-force minimum '
-               f'over all {len(gamma)} group elements',
+               f'twin (a) orbits at p = {p}: every monomial of degree <= 4 ({len(pop)}) against the '
+               f'brute-force minimum over all {len(gamma)} group elements',
                'the canonical form equals the brute-force minimum, every monomial',
                (f'agreed on all {len(pop)} [{time.monotonic() - t0:.0f} s]' if bad is None
                 else f'monomial {list(bad[0])}: fast {list(bad[1])}, brute force {list(bad[2])}'))
@@ -1106,9 +1115,13 @@ def assembled_twin(st):
     """(b) at p = 3: the coefficient of every canonical monomial read off the ASSEMBLED matrices.
 
     For each block this builds sum_w E_w R E_w^T explicitly over the 1 + n*|reps| monomials of degree <= 2,
-    then reads the identity's right-hand side as sum over ORDERED PAIRS of index monomials -- the n^2-sized
-    path the fast code never takes, which uses neither the autocorrelation kappa nor the product table F nor
-    the memo that computes Q at the canonical form only."""
+    then reads the identity's right-hand side as sum over ORDERED PAIRS of index monomials -- the path the
+    fast code never takes, using neither the autocorrelation kappa, nor the product table F, nor the memo
+    that computes Q at the canonical form only.  The box rows are expanded a second way too, by multiplying
+    the polynomial out one factor (1 - phi_x) at a time instead of enumerating subsets of B.
+
+    What it does NOT twin: the canonical form itself (canon is called by both sides) -- that is twin (a)'s
+    job -- and positive definiteness, which is twin (c)'s."""
     path = SMALL_CERT
     if not os.path.exists(path):
         st.row(False, 'twin (b) assembled at p = 3', f'{path} present', 'the file is missing')
@@ -1135,11 +1148,13 @@ def assembled_twin(st):
                 d[i] = d.get(i, 0) - 1
         return d
 
+    sizes = []
     for b in cert.blocks:
         reps = plane.representatives(b['times'])
         index = [()] + [(x, j) for x in range(n) for j in range(len(reps))]
         mono = [()] + [tuple(plane.ADD[x][y] for y in reps[j]) for x in range(n) for j in range(len(reps))]
         size = len(index)
+        sizes.append(size)
         Z = [[0] * size for _ in range(size)]
         for wi in b['weights']:
             w = cert.weights[wi]
@@ -1168,14 +1183,23 @@ def assembled_twin(st):
                 for k, v in terms.items():
                     slow[k] = slow.get(k, 0) + z * v
     for (A, B, lam) in cert.rows:
-        for m, sign in box_terms(A, B):
+        poly = {tuple(A): 1}                       # multiply out one factor (1 - phi_x) at a time
+        for x in B:
+            nxt = {}
+            for m, c in poly.items():
+                nxt[m] = nxt.get(m, 0) + c
+                mx = tuple(sorted(m + (x,)))
+                nxt[mx] = nxt.get(mx, 0) - c
+            poly = nxt
+        for m, c in poly.items():
             k = canon.idx(m)
-            slow[k] = slow.get(k, 0) + sign * lam
+            slow[k] = slow.get(k, 0) + lam * c
     keys = set(fast) | set(slow)
     bad = [k for k in keys if fast.get(k, 0) != slow.get(k, 0)]
     st.row(not bad,
-           f'twin (b) assembled at p = 3: the right-hand side over all {size}^2 ordered index pairs, against '
-           f'the F/kappa route',
+           f'twin (b) assembled at p = 3: the right-hand side read off the assembled matrices over all '
+           f'ordered pairs of the {"/".join(str(s) for s in sorted(set(sizes)))} index monomials, and the '
+           f'box rows multiplied out factor by factor, against the F/kappa/subset route',
            f'the same integer at every canonical monomial',
            (f'agreed on all {len(keys)} [{time.monotonic() - t0:.1f} s]' if not bad
             else f'{len(bad)} disagree, first y({list(canon.list[bad[0]])}): fast '
@@ -1235,7 +1259,7 @@ HERE = (os.path.relpath(os.path.abspath(__file__), os.getcwd())
 USAGE = f"""fs66_b1_cert_check -- an independent, standard-library checker of an FS-66 all-levels certificate.
 
   python3 {HERE} CERT.json [--m M] [--ldl] [--record FILE]
-  python3 {HERE} --self-test [--cert CERT.json] [--orbit-twin-full]
+  python3 {HERE} --self-test [--cert CERT.json]
   python3 {HERE} --help          (the full description: the object, what is checked, the refusal codes)
 
   CERT.json     a certificate in format {FORMAT}.  The three in the repository:
@@ -1262,20 +1286,20 @@ def main():
         return 2
     try:
         if '--self-test' in argv:
-            rest = [a for a in argv if a not in ('--self-test', '--orbit-twin-full')]
+            rest = [a for a in argv if a != '--self-test']
             cert = DEFAULT_CERT
             if rest:
                 if rest[0] != '--cert' or len(rest) != 2:
                     print(USAGE)
-                    print(f'ERROR USAGE: --self-test takes only [--cert CERT.json] [--orbit-twin-full]; '
-                          f'got {" ".join(rest)}')
+                    print(f'ERROR USAGE: --self-test takes only [--cert CERT.json]; got '
+                          f'{" ".join(rest)}')
                     return 2
                 cert = rest[1]
             if not os.path.exists(cert):
                 print(f'ERROR CANNOT_READ: {cert} does not exist; the self-test needs a certifying file to '
                       f'plant faults in.')
                 return 2
-            return controls(cert, '--orbit-twin-full' in argv)
+            return controls(cert)
         m = None
         use_ldl = False
         record = None
