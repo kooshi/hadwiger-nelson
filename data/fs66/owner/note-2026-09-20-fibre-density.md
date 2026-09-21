@@ -160,3 +160,17 @@ The same elementary step gives my §1's bound with `c = 2` at every level withou
 plan: scored *met* on the hypotheses and the normalisation; what is NOT checked is whether someone has already said this in print
 (the planner found no citing work that does; the close should re-ask zbMATH for the authors' later papers before anything is
 written into `CLOSED-QUESTIONS.md`).
+
+## 8. Prior-art re-check for the Borel clause (zbMATH Open API, 2026-09-21) — a negative, which measures its queries
+
+Asked because the certificate, once `CERTIFIED`, gives **`χ_Bor(ℚ₇²) = 4` and `χ_Bor(ℚ₁₁²) = 5`** (phase-2 plan §ST, owner's addendum)
+and, with §7, answers `[BardestaniMallahiKarai2017]`'s Question 1. Queries, each through
+`api.zbmath.org/v1/document/_search`: the complete author listings of **Mallahi-Karai** (31 entries) and **Bardestani** (14) — after
+2017 they return to chromatic numbers only in the two papers the first planner read (`…2018`, structured Cayley graphs;
+`…2020`, polynomial configurations over local fields), never to the anisotropic `p`-adic plane; `ab:"Borel chromatic number"` (31
+entries: descriptive set theory throughout; the only `p`-adic items are those same two); `ab:"chromatic number" & ab:"p-adic"` (3:
+the 2020 paper, a proceedings volume, and **Kang–Maharaj, *Distance graphs from p-adic norms*, Integers 10 (2010)** — by its title a
+different object, distance graphs on the integers under a `p`-adic norm; seen in a listing only, owed a bibliography row marked so);
+`ti:"Hadwiger-Nelson" & py:2015-2026` (8: nothing `p`-adic beyond Madore and BMK). **Found: no exact value, and no lower bound, for
+the Borel or the plain chromatic number of an anisotropic `p`-adic plane.** Not searched: MathSciNet, the citing lists of BMK 2017 in
+OpenAlex / Semantic Scholar (the first planner walked them: nothing addresses Question 1), Russian-language literature.
