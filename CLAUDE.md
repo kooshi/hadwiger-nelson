@@ -314,7 +314,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 *A mirror of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** None open. **FS-61, the census of real quadratic fields, closed 2026-09-20** (row 74, G61, G65; 14 of forty certified; `plans/FS61-quadratic-census.md`). **FS-58 closed 2026-09-17** (rows 72–73): χ(ℚ(√11)²) = 4 with the lower half in the kernel. Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-20): next, in a fresh session, FS-66's pilot and FS-59's first experiment (R9).**
+**Open milestones, in order.** **FS-66 — does the residue ceiling drop up the tower? — open 2026-09-20** (Kooshi's go; `plans/FS66-residue-tower-drop.md`, stub `plans/STUB-residue-tower-drop.md`; pilot: is `UD(ℤ/121,2)` four-colourable?). **FS-61, the census of real quadratic fields, closed 2026-09-20** (row 74, G61, G65; 14 of forty certified; `plans/FS61-quadratic-census.md`). **FS-58 closed 2026-09-17** (rows 72–73): χ(ℚ(√11)²) = 4 with the lower half in the kernel. Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-20): FS-66 first, then FS-59's first experiment (R9).**
 
 **Ranked stubs** (re-ranked 2026-09-20: FS-61 closed; FS-66 and FS-67 minted; FS-59 re-aimed by G65 and by its stub's R9;
 `plans/FRONTIER-STUBS.md` is authoritative):
