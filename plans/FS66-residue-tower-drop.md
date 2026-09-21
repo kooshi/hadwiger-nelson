@@ -287,3 +287,172 @@ independent set of `UD(ℤ/49, 2)` with more than `686 = 49·14` points (I6).
 with a certificate instead of a solver's word. Phase 2 landing: *"at 11, local bounds survive at every level of the tower"* — a
 theorem about the clopen chromatic number of `ℤ₁₁²`, by a level-one certificate; not landing: a typed null and levels two and
 three on solvers' words. Phase 3: a second prime's data point (19), and an honest statement of why 23 is out of reach.
+
+---
+
+## §I. The instruments, in order
+
+*For each: what it is · its acceptance test · its controls (the uninformative AND the informative outcome shown reachable) · its
+checkpoint and resume command if it can pass ~15 minutes · its cost, from a measurement · how it uses the machine. "Owner's
+verifier" is `tools/fs66_owner_verify.py` (all-pairs from the definition; shares no code with any finder or encoder).*
+
+### I1. The witness, its checker, and the minimal core (Phase 1a)
+
+**What.** A witness that `UD(ℤ/n, 2)` is not `k`-colourable is: a list of points of `(ℤ/n)²`, a list of pairs of them, a pinned
+clique, and an LRAT refutation of that edge list's `k`-colouring formula. **`tools/fs66_check_witness.py` — standard library
+only, importing nothing from `tools/`** — modelled on `tools/fs58_check_witness.py` (frozen: read it, never import or edit it)
+and doing, in order: (1) every point is a pair of integers in `[0, n)`, no point twice; (2) **every listed pair is re-verified
+from the definition** `(a−c)² + (b−e)² ≡ 1 (mod n)` in integer arithmetic, and the count of *all* unit pairs among the listed
+points is reported beside the listed count (subset semantics: a subgraph that refuses refutes every supergraph — the kernel
+needs only that listed pairs are edges, and fewer clauses are cheaper there); (3) the pinned vertices are pairwise listed
+edges; (4) it builds the CNF **itself** in a fixed documented order (`x(v,c) = k·v + c + 1`; at-least-one clauses in vertex
+order; per listed edge in listed order the `k` conflict clauses; then the pin units); (5) it checks the LRAT with its own
+reverse-unit-propagation checker (each added clause implied using exactly its hints in order, deletions honoured, the empty
+clause added). Output `CERTIFIED` (exit 0) or `REFUSED <CODE>: <detail>` (exit 1).
+
+**Format** (`witness.json`): `{"kind": "fs66-witness", "n": 121, "k": 4, "points": [[a, b], …], "edges": [[i, j], …] (i < j,
+indices into points, sorted), "pin": [i, j, l], "provenance": {…}}` and `witness.lrat.gz` beside it. **`*.lrat` is gitignored
+repository-wide; `*.lrat.gz` under `data/fs58/` and `data/fs61/` are committed — check `.gitignore` and follow that precedent.**
+
+**Acceptance.** `CERTIFIED` on the committed witness; `--controls` refuses each planted fault **for its named reason** and
+certifies the faithful twin: a non-unit pair listed (move one endpoint by 1); a repeated point; `n` changed to 120 (almost every
+pair stops being unit — must be refused at step 2, not later); the pin replaced by a non-clique; the proof truncated before the
+empty clause; one hint id corrupted; **the `k = 5` formula with the `k = 4` proof** (a satisfiable formula handed to the
+checker); a witness with one edge deleted but the original proof (hint/clause-id mismatch). *Uninformative outcome and its
+reachability:* a checker that certifies everything — excluded by the plants, each of which must be seen red. *Wrong-reason red:*
+each plant asserts the refusal **code**, and the faithful twin (same scaffolding, no fault) must pass.
+
+**The minimal core.** Start from `data/fs66/planner/core-p11-k4-fixpoint-1115v.json` (or regenerate it, §M's README). Delete
+vertices one at a time while the remainder still refuses: each probe is a CaDiCaL run on ≤ 1,115 vertices (0.9 s measured at the
+fixpoint) under a **conflict budget of 300,000** (an `UNKNOWN` keeps the vertex and is counted — never read as "needed"). Run 16
+probes at a time on distinct candidate vertices, accept one refusing deletion per wave, re-extract the LRAT core of the accepted
+instance (it usually drops more than one vertex). **Checkpoint:** `data/fs66/ckpt/minimise-p11-l2.jsonl`, one line per accepted
+deletion (`{"removed": v, "vertices_left": …, "edges_left": …, "probe_conflicts": …}`) plus the current vertex list in
+`data/fs66/ckpt/minimise-p11-l2.current.json` rewritten atomically after every acceptance; **resume:** `python3
+tools/fs66_minimise.py --resume data/fs66/ckpt/minimise-p11-l2.current.json`. **If the process dies at any instant the relaunch
+redoes at most one wave.** *Stop rule (G65: certification cost is predicted by nothing; use the measured rate):* stop at
+1-minimality, or when the last 200 probes accepted nothing and the wave rate has fallen under one acceptance per five minutes,
+or at two hours — whichever first; the witness is whatever stands then. **The aim is a cheaper kernel check, not a record
+size**; G65 also says the core's average degree (7.9 at the fixpoint) is already near where four-colour asks turn hard, so
+expect probes to slow as it shrinks — the budget, not patience, handles that.
+*Cost:* minutes to two hours on 16 cores. *Hardware:* 16 single-threaded probes in parallel (`multiprocessing` with the `fork`
+context — `CLAUDE.md` § Toolchain on Python 3.14).
+
+### I2. The kernel theorem (Phase 1b)
+
+`χ(UD(ℤ/121, 2)) = 5` in Lean: §L has the skeleton (it elaborates). Upper half: `finitePlane11_colorable_five` pulled back along
+`unitQuadrance.map (ZMod.castHom …)` — no data. Lower half: the witness through **the existing certificate pipeline**
+(`tools/emit_mask.py --edges … --n N --edges-name … --pins … --lrat … --name zmod121Four --out … --module …`; precedent
+`Instances/TwoAdicFive.lean` + `Instances/TwoAdicFive/{Edges.lean, Cnf/}`, FS-38 phase K3; and `Instances/Heule510` for a
+4-colour certificate on 510 vertices), a generated vertex table of **natural-number pairs**, a `Bool` edge check through
+`List.all` on ℕ arithmetic (`unitPairNat`), and one bridging lemma from that check to adjacency over `ZMod 121`.
+**Measure before promising** (`CLAUDE.md` § The kernel's cost model — three of its rules bind here): `List.all f = true`, never
+`∀ e ∈ l`; **no `ZMod 121` literal in the data** (a numeral at a type index is paid per numeral — the table is `ℕ × ℕ` and the
+cast happens once, inside the bridging lemma's statement); feed the kernel the core, never the 14,641-vertex instance. Measure on
+the round-0 witness **before** minimising further: if the pipeline already checks the 1,115-vertex core in minutes, minimisation
+stops mattering and I1's stop rule can fire early.
+**Acceptance.** `./scripts/build.sh` green (never `lake build`); zero `sorry`; `./scripts/axioms.sh` shows the new theorems on
+`[propext, Classical.choice, Quot.sound]` with **no `native_decide` purchase**; `./scripts/vacuity.sh` and `--self-test` green
+with counts reconciled; the final statement **read aloud** against `SimpleGraph.chromaticNumber` and "the unit-distance graph
+over the ring of integers modulo 121 needs exactly five colours". *Negative controls, each seen red then restored and
+re-verified:* one vertex of the table moved by 1 (the edge check must fail, naming a pair); the certificate filed against
+`k = 5` (must fail); the pin changed to a non-triangle (must fail at the triangle gadget).
+*Cost:* unknown until measured — precedents: 125 vertices / 3,240 clauses, 5.9 s (FS-38 K3); 204 points at three colours, 32.8
+CPU s (FS-58); this is ≈ 1,115 × 4 + 4,405 × 4 ≈ 22,000 clauses and a 716 KB text LRAT. *Hardware:* segments elaborate in
+parallel under `scripts/build.sh`'s batching; measure one data module's peak memory before raising `BATCH`.
+
+### I3. Certifying `B₁(11) < 30.25` by exact global optimisation (Phase 2a) — low confidence, bounded, killable
+
+**What.** Maximise `Σφ` over `φ ∈ [0,1]^{121}` subject to `φᵀ(A₁ + c⁺I)φ ≤ c⁺Σφ` (`c⁺` = `c` rounded **up**: a larger `c` only
+weakens the constraint, so an upper bound for `c⁺` is one for `c`), the 726 edge cuts and 484 triangle cuts (§S5), and two
+**sound** symmetry breaks: `φ₀ ≥ φ_x` for all `x` (translate a maximum entry to the origin — vertex-transitivity) and
+`φ_{s₁} ≥ φ_s` over the origin's twelve neighbours (rotations act transitively on them). Solver: Gurobi 13 (`pip install
+gurobipy` in a venv **outside `build/`**, e.g. `~/venvs/fs66`; the bundled size-limited licence covers 2,000 variables and
+constraints — this model has 121 and ≈ 1,340) with `NonConvex = 2`; SCIP (`pyscipopt 6.2.1`, wheel exists for Python 3.14) as
+the second opinion. The planner's scratch script is reproduced in `data/fs66/planner/` only as a recipe — the implementer writes
+`tools/fs66_b1_global.py`.
+**Positive control — measured, M9:** at `p = 7`, three colours, the same model **lands: bound 16.165 < 16.333 in 300 s on 4
+threads** (the truth there is refusal: the certified 297-point graph over ℚ(√23) maps into every level). Bare problem 19.95,
+cuts only 18.04, cuts + symmetry 16.165 — so both additions are doing work. *Uninformative outcome and its reachability:* a
+bound that never crosses — reached at 11 in M9's 420 s probe (35.88). *Informative:* reached at 7.
+**Registered kill line (the prediction is that it fires):** run on 16 threads with Gurobi's own node file on disk
+(`NodefileStart = 8` GB, `NodefileDir` **outside `build/`**) and a log line per minute. **If the bound is above 33.0 after two
+hours, or has moved less than 0.05 in the last 30 minutes, stop and record the trajectory** — the log is the record
+(`data/fs66/b1/gurobi-p11.log`, committed). Gurobi cannot checkpoint a branch-and-bound tree portably; **what a death redoes is
+the whole run**, which is why the budget is two hours and not a day. **Before stopping it, write cause / measurement / forfeit
+in the record (`CLAUDE.md` § "A run that blocks something").**
+**Even if it lands it is a solver's floating-point word**, not a certificate: the plan's claim would read "refused at every
+level on Gurobi's word", and a rational certificate is I4's job.
+*Cost:* (7) 300 s [measured]; (11) unknown, expected not to land [M9: 38.6 → 35.9 in 7 minutes and slowing, open nodes growing].
+*Hardware:* 16 threads (Gurobi parallelises its tree); no GPU.
+
+### I4. Pricing — not running — a second-level moment relaxation of `B₁(11)` (Phase 2b)
+
+No first-level relaxation can work: Shor + RLT, symmetrised, contains `ϑ′ =` Hoffman `= 34.55 > 30.25` as the special case of
+pure `φ`. The candidate is the second-level moment (Lasserre) relaxation of the 121-variable problem with its cuts, with
+`Aut(G₁)` (translations × rotations × conjugation, order 2,904) divided out — FS-50's machinery (`tools/fplane_sdp_blocks.py`,
+`tools/fplane_cert_round.py`, `tools/fplane_cert_check.py`; the GPU build of SCS in `build/venv-sdp-gpu`, keyword
+`linear_solver=`, 0.33 s per iteration at 83) pointed at a different polynomial. **Its margin is thin by construction:** it
+cannot read below the triple-level value for true independent sets, 29.18, and must read below 30.25. **Deliverable of this
+phase: a one-page price** — the moment matrix's size after symmetry reduction (monomials of degree ≤ 2 in 121 variables: 7,503
+before reduction), the number of orbit variables, the localising constraints for the box, the quadratic constraint and the
+cuts, an estimated iteration cost on card A, and **a small-case reading first: the same relaxation at `p = 7`, three
+colours, where it must read below 16.33** (49 variables, 1,275 monomials — a CPU-minute problem with `cvxpy` + SCS, no symmetry
+reduction needed). If (7) does not read below 16.33, the route is dead and the price says so in one line. **Do not build the
+11 solve in this milestone without the owner's ruling on the price.**
+
+### I5. `(19, 4)` at level two, and level one first (Phase 3a)
+
+**What.** Is `UD(ℤ/361, 2)` (130,321 vertices, degree 380, 24.76 M edges) four-colourable? Floor 4 (ℚ(√11)'s kernel witness
+maps in: 11 is a square modulo 19), ceiling 5. **By §S6 the refusal can be no shorter than level one's, so level one is asked
+first:** `(19, 4)` at level one with the full symmetry checklist (`ω = 2` at 19: an edge pin is all the clique buys, so the
+**precedence constraint on the two remaining colours is mandatory** — `CLAUDE.md` § Toolchain measured 72× for it at `(13, 5)`);
+record its conflicts and time. Then level two in the owner's biclique encoding
+(`data/fs66/owner/fs66_owner_biclique_cnf.py`: 795,644 variables, 5,617,523 clauses at `(19, 4)`, built in 7 s) **with
+precedence added** — M11's probe had the edge pin only and did not decide in 900 s, which by `CLAUDE.md`'s rule measures the
+encoding, not the graph. If a single solve does not decide in 30 minutes: cube on the colours of the origin's neighbourhood
+and run cubes across the cores with `tools/fplane_sat_cube.py`'s checkpoint discipline (one JSON line per decided cube, a digest
+of the cube list in the header, a resume refused against a different enumeration); **price the cubes on a sample of 16 before
+committing** (M63 phase H2's rule).
+**Acceptance.** SAT → the colouring VERIFIED by the owner's verifier (then `χ(UD(ℤ/361,2)) = 4`: a drop at 19, and the milestone
+has a second, louder result — tell the owner at once). UNSAT → LRAT kept, core extracted, four-solver recheck of the bare core
+as in M2, witness in I1's format, `CERTIFIED` by I1's checker. UNKNOWN → a typed null with the conflict counts of levels one
+and two side by side. *Controls:* the same encoder must refuse `(7, 3)` and 5-colour `(11, 5)` with a verified colouring (both
+measured by the owner's encoder today); level one `(19, 4)` must refuse (the truth: `χ(UD(𝔽₁₉,2)) = 5`, M58).
+**Checkpoint:** single solves ≤ 30 min need none; the cube run's is `data/fs66/ckpt/cubes-p19-l2-k4.jsonl`, resume `python3
+tools/fs66_cubes.py --resume data/fs66/ckpt/cubes-p19-l2-k4.jsonl`; a death redoes the cubes in flight.
+*Cost:* encoder 7 s, 96 MB CNF [measured]; solve ≥ 900 s with the weak break [measured], unknown with precedence. *Hardware:* one
+core per solve; 16 (then 32 — record which) for cubes; no GPU.
+
+### I6. The cheap killing test of "the tower never rises": an independent set of `UD(ℤ/49, 2)` above 686 (rides along, any phase)
+
+2,401 vertices, degree 56. `α(UD(𝔽₇,2)) = 14` exactly (FS-54), so the pulled-back set has `14·49 = 686`, Hoffman allows 863, and
+`B₁(7) ≤ 16.165` (M9) allows at most `16·49 = 784`. **Ask:** an independent set of 687 — by SAT with a cardinality constraint and
+the translation symmetry broken (origin in the set), 30 minutes; and by any local search the implementer has to hand, seeded
+**both** from random and from the pulled-back set with line-sized moves (S1: adding one point over an empty fibre costs a whole
+line of `p` points in each full neighbouring fibre — single-vertex moves cannot leave the pulled-back optimum). *Both outcomes
+reachable:* the finder must first find **686** from a random start (positive control — if it cannot, its null is void).
+A 687-set, VERIFIED by the owner's verifier (`indep` mode), **kills §S5's conjecture** and is reported at once; a null is weak
+evidence for it (G21: say the budget and the moves in the sentence).
+
+### I7. 23 at five colours (Phase 3b–d) — what can land, and what cannot
+
+**(b) Level ONE, `(23, 5)`, as a CDCL refusal.** Known UNSAT by certificate (`α ≤ 105 < 105.8`, row 71) and **undecided by CDCL
+at four hours with a pinned clique** (M58). `ω = 3` at 23: pin a triangle, precedence on the remaining two colours, then
+cube-and-conquer across **32 threads** with `tools/fplane_sat_cube.py` (checkpointed, resumable; read its `--help` and
+`data/fs53/README.md` for its record format). **Price first:** 16 sampled cubes at a 10-minute conflict budget each; project the
+whole run from the sample *and keep the prediction beside the measured rate* (`CLAUDE.md`: a prediction that can be divided back
+out of a rate is a population check). **Registered budget: 8 hours of wall time; ask the owner before exceeding it.** A refusal
+here is worth having either way (it makes `(23, 5)`'s level-one refusal a checkable LRAT rather than an SDP certificate, and it
+is the precondition for (c)).
+**(c) Level two, `(23, 5)`, as a refusal — only if (b) refuses**, and then priced from (b)'s conflict count times the 11 →
+121 → 1331 growth seen at 11 (1,535 → 12,311 conflicts per level: ×8). 279,841 vertices; ≈ 17.5 M clauses in the biclique
+encoding.
+**(d) A finder at `UD(ℤ/529, 2)`, five colours — last, bounded, and its null teaches little.** The four-class fibre-density
+minimum at `(23, 5)` is 1.4656 × budget over 30 starts (owner's numerics): no level is expected to be 5-colourable, so a null is
+the predicted outcome and cannot distinguish "none exists" from "not found". **If run at all: CaDiCaL on the biclique encoding as
+the finder** (it found the non-pulled-back 5-colouring of `UD(ℤ/121,2)` in 251 s, M3), 16 seeds × 30 minutes, positive control
+`UD(ℤ/529, 2)` at **eight** colours (a pulled-back 8-colouring exists — `colorable_finitePlane23_eight` — and the finder must
+find one it was not handed). A colouring, VERIFIED, would make `χ(ℚ(√167)²) ≤ 5` a theorem and is reported at once.
+**Decision on the brief's finder question** (§W): no new finder is built and no work order is opened in
+`~/source/descent-engine` in this milestone; the GPU is not used for search.
