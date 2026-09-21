@@ -174,7 +174,14 @@ def load_json_strict(path):
         with open(path, 'rb') as f:
             raw = f.read()
     except OSError as ex:
-        raise CheckerError('CANNOT_READ', f'{path}: {ex.strerror or ex}')
+        hint = ''
+        if not os.path.exists(path):
+            near = sorted(f for f in os.listdir(CERT_DIR) if f.endswith('.json')) \
+                if os.path.isdir(CERT_DIR) else []
+            if near:
+                hint = (f' The certificates in this repository are '
+                        f'{", ".join(os.path.join(os.path.relpath(CERT_DIR, REPO), f) for f in near)}.')
+        raise CheckerError('CANNOT_READ', f'{path}: {ex.strerror or ex}.{hint}')
     try:
         doc = json.loads(raw.decode('utf-8'),
                          parse_float=lambda s: NotAnInteger('float', s),
@@ -736,7 +743,8 @@ def check(path, m=None, use_ldl=False, narrate=lambda s: None):
     worst = check_rows_shape(cert)
     narrate(f'step 4/7: rows: every point index in [0, {n}); largest box-product degree {worst} (<= 4)')
 
-    route = 'exact rational L*D*L^T, re-multiplied' if use_ldl else 'fraction-free (Bareiss) elimination'
+    route = ('an exact rational L*D*L^T, re-multiplied and compared with R: every D_k positive' if use_ldl
+             else 'fraction-free (Bareiss) elimination: every leading principal minor positive')
     for bi, b in enumerate(cert.blocks):
         k, minor = (ldl_verdict(b['R']) if use_ldl else first_nonpositive_minor(b['R']))
         if k:
@@ -749,7 +757,7 @@ def check(path, m=None, use_ldl=False, narrate=lambda s: None):
                           f'(the file scores by the U it proves, so a larger shift costs only a weaker U).')
     narrate(f'step 5/7: positive definiteness of {len(cert.blocks)} blocks '
             f'(sizes {min(b["size"] for b in cert.blocks)}..{max(b["size"] for b in cert.blocks)}) by '
-            f'{route}: every leading principal minor positive')
+            f'{route}')
 
     canon = Canon(plane)
     rhs = accumulate_identity(cert, plane, canon, narrate)
@@ -898,9 +906,19 @@ def controls(cert_path):
     st = SelfTest(cert_path)
     print(f'self-test of {os.path.relpath(os.path.abspath(__file__), REPO)}')
     print(f'plants on a COPY of {cert_path}; the committed file is never written to', flush=True)
+
+    # The three twins run FIRST and depend on nothing certifying.  They were once placed after the plants,
+    # behind the gate below -- and a deliberate break of the canonicaliser then made the gate fire and the
+    # twins never run, so the diagnostic for a bookkeeping bug was suppressed by that very bug.
+    orbit_twin(st)
+    assembled_twin(st)
+    elimination_twin(st, cert_path)
+
     rc, line = run_self([cert_path])
     if not line.startswith('CERTIFIED'):
-        print(f'{line}\nSELF-TEST FAILED: the input itself does not certify, so no plant would mean anything')
+        print(f'  {line[:200]}')
+        print(f'SELF-TEST FAILED: the input {cert_path} does not certify, so no PLANT would mean anything '
+              f'(the three twins above did run, and are where a bookkeeping fault shows)')
         return 1
     with open(cert_path) as f:
         doc = json.load(f)
@@ -1038,11 +1056,6 @@ def controls(cert_path):
     st.expect('E.2  a file that is not JSON', [notjson], None, None, 'ERROR', 'CANNOT_READ')
 
     shutil.rmtree(tmp)
-
-    # --- the three independent twins of the bookkeeping.
-    orbit_twin(st)
-    assembled_twin(st)
-    elimination_twin(st, cert_path)
 
     # --- the harness verifies its own restore.
     after = digest_of(cert_path)
