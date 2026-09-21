@@ -988,9 +988,12 @@ of it and is still not exact.)
 
 ---
 
-### Phase 2C — 19 at four colours (implementer, 2026-09-21). **IN PROGRESS — this section is written as the
-phase runs, so that nothing measured is lost if the session ends; the certificate row is marked pending until
-the frozen checker has spoken.**
+### Phase 2C — 19 at four colours (implementer, 2026-09-21). **LANDED.**
+
+**The headline.** `data/fs66/b1/cert-p19.json`, `U = 77.511742…`, **`CERTIFIED`** by Phase 2A's frozen
+checker with `--m 4`: `4·U = 310.046968… < 361`, so **no level of the 19-adic tower is four-colourable**, and
+19 joins 7 and 11 as a prime whose whole tower is decided. The reading was 77.506086 against the 90.25 the
+certificate needed — a margin of 14 %, against 11's 6.8 %.
 
 **The go/no-go, sent to the owner as a message before any rounding: GO.** The minimal second-level relaxation
 at `p = 19` reads **about 77.4**, against the `361/4 = 90.25` that a four-colour certificate needs — a margin
@@ -1102,7 +1105,48 @@ surprise** — they passed, and the cost is the naive `#reps² × n = 11,957,764
 checker rebuilds without the two symmetries the producer now uses. Within a reviewer's patience, and the
 checker was not touched.
 
-**R″.7 The certificate. PENDING** — the solve is still running.
+**R″.7 The certificate. `data/fs66/b1/cert-p19.json`, `U = 77.511742…`, `CERTIFIED`.**
+
+| | |
+|---|---|
+| `U_num / scale` | `7751174208860938222570365201256712 / 10^32` = **77.511742…** |
+| the claim | **`4·U = 310.046968… < 361`** — `--m 4`, exit 0 |
+| not the claim | `5·U = 387.558710… ≥ 361` — `--m 5`, exit 3, `BOUND ONLY` |
+| blocks / rows / weights / bytes | 38 / 53,545 / 37 / 10,383,708 |
+| sha256 | `055f031d1e69…` |
+| checker | **`CERTIFIED` in 8 min 31 s, 3.17 GB** |
+| rounded from | the **converged** solve: 13,950 iterations, `status solved`, `res_pri` 6.3e−07, `res_dual` 1.12e−05, 12,210 s on graphics card A |
+| rounding loss | **0.005656** against the float reading 77.506086 |
+
+**The solve converged**, at `eps = 1e-7`, in 13,950 iterations across five 3,000-iteration chunks, 3 h 23 m.
+The trajectory is the record the next prime needs: `res_dual` 1.32e−01 (3,000) → 4.92e−03 (6,000) →
+1.43e−03 (9,000) → 3.03e−05 (12,000) → 1.12e−05 (13,950, `solved`), and the bound rounded from each:
+**111.203356 → 78.774941 → 77.831624 → 77.533210 → 77.511742.** Four colours were already refused at
+6,000 iterations.
+
+**The shift/digit scan, and §R′.2's law at a third prime.** The 11-era default grid
+(`shift ∈ {1e-7, 1e-6, 1e-5} × D ∈ {10, 12}`) gives 77.532568 at best. The widened grid §R′.2 itself
+prescribes for the next prime — *round at `shift = 10^(3−D)` for the largest affordable `D`* — gives
+**77.511742** at `shift = 1e-10`, `D = 14`, a **4.7× smaller rounding loss** (0.005656 against 0.026482).
+And the law is exact again: `shift = 1e-10` with `D = 12` leaves **19 blocks not positive definite**
+(`1e-10 < 10^(3−12)`), while with `D = 14` it is fine. Three primes, no exception.
+
+| shift | `U`, `D = 12` | `U`, `D = 14` |
+|---|---|---|
+| `1e-10` | not positive definite | **77.511742…** (shipped) |
+| `1e-09` | 77.512147… | 77.511890… |
+| `1e-08` | 77.513532… | 77.513710… |
+| `1e-07` | 77.532568… | — |
+
+**What it licenses**, with the committed 76-point set: no level of the 19-adic tower is four-colourable, so
+`χ(UD(ℤ/19^k, 2)) = 5` at every `k`; `χ_f` of every level in `[4.6574, 4.7500]`; the Haar-measure supremum
+in `[0.210526, 0.214714]`; **`χ_Bor(ℚ₁₉²) = 5`**, a third exact value for `[BardestaniMallahiKarai2017]`'s
+problem; **`α(UD(𝔽₁₉,2)) ≤ 77`**, hence 76 or 77; and `27,436 ≤ α(UD(ℤ/361,2)) ≤ 27,981`.
+
+**`U < 77` is not attainable by this route, ever** (the owner asked): the certificate is a feasible point of
+the relaxation's dual, so `U ≥` the relaxation's own optimum, and that optimum is `77.506086…`. Extra
+shift/digit attempts can only approach it, and six of them did (77.5117 against 77.5061). Closing the last
+gap is a question about a *tighter relaxation*, not about rounding.
 
 **R″.8 P-B6.** Its first half is **NOT MET, on the low side**: the reading is about 77.4, below the predicted
 band `[80.6, 87]`. Its premise was wrong, and the error is worth keeping: §19 argued the reading "cannot be
@@ -1112,3 +1156,63 @@ result the phase was not aiming at: since `B₁ ≥ α(G₁)`, a certified `U` i
 independence number of level one, so `α(UD(𝔽₁₉,2)) ≤ ⌊U⌋` — against FS-62's 80 from the level-3 relaxation.
 `U` can never be below the relaxation's own optimum (the certificate is a feasible point of its dual), so with
 that optimum at ≈ 77.4 the attainable floor is `⌊U⌋ = 77`, never 76.
+
+**R″.9 The deliberate resume, and every checkpoint exercised.** The solve was resumed from its checkpoint
+**three times on purpose**, by PID, verified by effect: once at `p = 11` as a rehearsal before 19 was
+touched (`build cache reloaded … q forms 0.0 s`, `RESUMED from …: 200 iterations already done`, the value
+moving 28.33 → 28.20); once at 19 when the 300-chunk run was killed at 1,500 iterations; and once more
+implicitly at every chunk boundary, since each chunk reloads the iterate it saved. The build cache was
+written, reloaded and **checked to hold what it claims**: the first version saved it *before* the q forms
+existed, so a reload silently rebuilt them — cheap (5 s) but a cache that does not hold what its docstring
+says is the wrong kind of file, and it was fixed and the round trip re-exercised.
+
+Every kill in this phase was by **PID** and verified **by effect** — the PID absent from `ps`, and the
+checkpoint's digest identical across ten seconds — never by a pattern. One scan of `/proc/*/cmdline` for a
+producer pattern did report a live match: **the shell running the scan**, whose own command line contained
+the pattern. It was recognised, and the verdict was taken from the CPU listing instead.
+
+**R″.10 Decisions the implementer took (choice · alternative · why · confidence).**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Extend `fs66_b1_cert_make.py` in place, every new flag default-off, and prove it with `--regression`** | a second producer `fs66_b1_cert_make19.py` importing this one as a library | one program, one place; the import route needs an argv shim (this file parses arguments at import) and would record the *base* file's digest in its own records. The cost is that `producer.tool_sha256` inside `cert-p7.json` and `cert-p11.json` now names a digest that only exists in git — those files were made by the production producer at commit `3c740871`, they are **left untouched on disk**, and `--regression` shows every other key still reproduces | high |
+| **A structural twin, comparing canonical monomials and one random evaluation of every assembled row** | compare the two paths' certificates byte for byte at 7 and 11 | the two paths number orbits differently **on purpose** (the fast one deterministically by (degree, tuple), the reference by discovery order), so a byte comparison would fail for a reason that is not a fault. Comparing the linear forms compares the mathematics. Seen red on four breaks, each in a different part | high |
+| **Use the two product-table symmetries, verified on a sample before use** | build the full `#reps² × n` table as the reference does | a quarter of the work and of the matrix, which is the whole reason 19 was cheap; and a wrong table could only weaken `U` (§C.3), so the sample check guards quality, not validity. The frozen checker still does it the naive way, which is where its 8 minutes go | high |
+| **`--round-only`: round a checkpoint's dual with no solver call** | reach the dual by warm-starting SCS for a few iterations, as the first attempt did | measured: five warm-started iterations took `res_pri` from 1.33e−03 to 1.95 and the bound from ~78 to 192.574282. The remedy also skips the assembly, keeping 4.4 GB out of every forked worker. Controlled at 11: byte-identical to the normal path | high |
+| **Ship the widened-grid certificate (77.511742), not the default grid's (77.532568)** | ship the default-grid file, as Phase 2B did at 11, for reproducibility by the bare `--scan` | §R′.2 *itself* wrote the widened recipe down for the next prime, so the widened grid **is** the documented command here, and it is in the README verbatim. It buys 4.7× in rounding loss. Phase 2B's reasoning (reproducible by the documented default) is honoured, the default having changed for this prime | high |
+| **Kill the second, differently-configured solve on the idle 3090 once the first was clearly converging** | keep it as a hedge | it had produced no chunk line in 60 minutes and was measurably slowing the critical-path solve through the CPU-side eigendecompositions. Nothing is claimed about `acceleration_lookback=0` beyond "slower per iteration"; it was killed before its first measurement | medium-high — a hedge abandoned before it paid is a hedge that cost something |
+| **Commit the 31 MB of caches** | leave them on disk, untracked | the solve iterate is 2.5 GPU-hours and is what the certificate was rounded from; the repository already carries 80–120 MB artifacts, so the norm allows it. A README beside them says what regenerates each and gives the resume commands | medium-high |
+
+**R″.11 Where the plan, the earlier phases' hand-overs or the brief was wrong.**
+
+1. **§19's cost model was wrong in both directions.** The build is 26 s, not 30–60 min, and the matrix is
+   53.7 M nonzeros, not "near 10⁸" — both because of two symmetries nobody had used. But the **rounding** is
+   243 s, not §R′.3's ≈ 50 s, and the **checker** is 8.5 minutes, not §R.8's 2–4 — and §R.8's guess about
+   *which part* would surprise was wrong too: the Bareiss eliminations on blocks of size 183 passed without
+   incident, and the cost is the naive product table.
+2. **§19's "it cannot be below FS-62's level-3 value 80.59" was false**, and the brief repeated it. See R″.8.
+3. **§X's "cache `F` and the `Q` forms" needed doing literally.** The first implementation saved before the
+   q forms existed.
+4. **The plan gives no guidance on chunk size, and it is not a free parameter.** 300-iteration chunks left
+   the dual residual flat; 3,000-iteration chunks converged. `tools/fplane_sdp_scs.py`'s 2,000 is the right
+   order of magnitude, and §X should say so.
+5. **Nothing in the plan says the rounded bound tracks the DUAL residual.** It is the single most important
+   operational fact about this method at a new prime, and it is R″.4.
+
+**R″.12 The handover sweep** (WORKFLOW step 9's two greps over this phase's additions; the close is the
+owner's). *"conjecture" / "not claimed"* — **no new hit**; §R.9's two hits stand. *§PA read back for what
+this phase taught about the object* — two things:
+
+1. **The product table is symmetric in its representatives AND even in its shift, and both are exactly the
+   statement that `−1` lies on the unit circle and fixes every representative.** §R.8 item 2 had spotted the
+   first and half of the second and said "at 19 the second is worth taking as well". Taking both makes the
+   table a quarter, not a half: the constraint matrix at 19 is 53.7 M nonzeros where the plan priced 10⁸, and
+   the frozen checker — which uses neither — spends its whole 8 minutes rebuilding what the producer gets in
+   14 seconds on 16 cores. **If the checker is ever re-opened, this is the one change worth making**, and it
+   is safe in the strong sense: a canonicaliser that merges *fewer* monomials only makes (★) stricter
+   (§K.2), and these two identities merge nothing new — they say the same orbit is reached twice.
+2. **`B₁(p) ≥ α(UD(𝔽_p,2))` makes every certificate of this milestone a bound on a finite plane's
+   independence number**, which nobody had said. At 7 and 11 it is vacuous (`⌊U⌋ = α` already). At 19 it is
+   **new information**: `α ≤ 77` against FS-62's 80, from an instrument built for the tower. Any future prime
+   this milestone certifies pays the same dividend, and at 23 it would read `α(UD(𝔽₂₃,2)) ≤ ⌊U⌋` against
+   FS-56's certified 105 — a stub candidate the owner's close should consider.
