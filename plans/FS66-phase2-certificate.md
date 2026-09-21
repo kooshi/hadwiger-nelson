@@ -799,3 +799,189 @@ that direction is a format change and not just a producer change.
    independent implementations of §C (the prototype, the planner's evaluator, this checker) agreeing on
    `U = 28.225133…`. The one disagreement in the phase was arithmetic inside the checker, not a reading of
    the format.
+
+---
+
+### Phase 2B — the production producer, the certificates, the records (implementer, 2026-09-21). **LANDED.**
+
+**The headline.** `tools/fs66_b1_cert_make.py`, written from §R′, produced two certificates that the frozen
+checker of Phase 2A calls **`CERTIFIED`**:
+
+| | `data/fs66/b1/cert-p7.json` | `data/fs66/b1/cert-p11.json` |
+|---|---|---|
+| `U = U_num/scale`, exact | **14.015224…** | **28.204320…** |
+| `U_num` | `14015224526962403621588626098460` | `28204320001863099628721379861820` |
+| `scale` | `10^30` | `10^30` |
+| the claim | `3·U = 42.045673… < 49` (`--m 3`, exit 0) | **`4·U = 112.817280… < 121`** (`--m 4`, exit 0) |
+| not the claim | `4·U = 56.060898… ≥ 49` (`--m 4`, exit 3) | `5·U = 141.021600… ≥ 121` (`--m 5`, exit 3) |
+| sha256 | `f4b2ffa7c42727f3b63f651e94fc2f1052ef10e0d13e8e43eb6a8fcf1c9fe1b4` | `683236677e0d55a4f9bd37d5266b370cebbb682831b3f0bc7493bce214bf0661` |
+| blocks / rows / weights / bytes | 14 / 524 / 13 / 96,888 | 22 / 3,821 / 21 / 706,712 |
+| producer: build + solve + exact | 0.3 s + 3.3 s + 0.07 s | 5.1 s + 91.5 s + 1.86 s, 744 MB |
+| checker: wall | 0.31 s | **6.53 s** |
+
+**Both are tighter than the prototype's** (14.017576…, 28.225133…), and the gain is the *scan*, not the
+solve: the rounding loss against the float reading falls from 0.024 to **0.0028** at 11. `⌊U·121⌋` therefore
+improves §S.7's level-two bracket from `3,388 ≤ α(UD(ℤ/121,2)) ≤ 3,415` to **`≤ 3,412`**; at 7 the
+conclusion is unchanged and has more room (`⌊14.015224·49⌋ = 686 = 14·49`, so `α(UD(ℤ/49,2)) = 686` exactly).
+
+| deliverable (§H Phase 2B) | state |
+|---|---|
+| `tools/fs66_b1_cert_make.py` per §R′, two float controls at 7 | done: **24.5**, **49.0**, **14.0**, all exact (`controls.out`) |
+| the scan of §R′.4 recorded; the kept certificate at 11 has `U < 28.3`; both `CERTIFIED` | done: `scan.out`, 28.2043 |
+| plants 9 and 12 as documented manual controls, outputs in `controls.out`; P-B4 scored | done; **plant 12 went red first and found a producer bug (R′.4 below)** |
+| explicit 28-set at 11 and 14-set at 7, verified from the definition | done: `data/fs66/b1/level-one-sets.json`, `tools/fs66_b1_sets_check.py` (18 controls, seen red twice) |
+| `README.md` extended: each file, what it licenses (§ST verbatim, Borel clause), trust word | done |
+| B11 / P-B5 recorded | already recorded by the planner (§P, and `README.md`); nothing owed |
+
+**R′.1 Predictions scored.**
+
+| id | outcome |
+|---|---|
+| **P-B4** | **MET.** Plant 12 at 11 ends `BOUND ONLY` with `U = 7.156644 × 10¹⁹` — far above 40, sound and useless. Caveat on how much it proves: the plant replaces *every* entry including the constant `c`, so the magnitude of `U` is set by `c² ≈ 10¹⁸` rather than by the structure. The finding worth keeping is qualitative and stronger than the prediction — arbitrary weights give a bound `10¹⁸` times weaker and still **valid**, so the cosine/sine choice does all the work for the *quality* of the bound and none for its *validity*, which is §C.3 exactly. |
+| **P-B1** | **MET again, on the production files** (it was scored in Phase 2A on the prototype): `CERTIFIED` at 11, `--m 4`, `U = 28.204320…` inside [28.20, 28.30]. |
+| **P-B3** | **MET again:** 6.53 s at 11 against "under 3 minutes". |
+| **P-B2** | not re-scorable: it is about the checker's first run, Phase 2A's. Worth recording that **the producer's first output, at `p = 3`, was `CERTIFIED` by the frozen checker on the first attempt** — three independently written programs (prototype, planner's evaluator, checker) plus this one now agree on §C. |
+| P-B5, P-B6 | untouched (the planner's; P-B6 is Phase 2C's). |
+
+**R′.2 The rounding scan, widened, and the law it yields (`data/fs66/b1/scan.out`, 42 attempts).**
+§R′.4's grid is this tool's default `--scan`; the committed certificates come from it exactly. Widening it
+in both directions gives the curve the next prime needs, and it is sharper than §T.3's "six digits are not
+enough":
+
+> **Positive definiteness survives exactly when `shift ≥ 10^(3−D)`** — at `p = 7` and at `p = 11` alike, in
+> all 42 attempts, with no exception on either side. The shift and the digits are **not independent knobs**:
+> the rescaling divides the solver-basis block by `n`, so a shift below the rounding granularity is rounded
+> away and the block falls back onto the boundary the solver sits on.
+
+Above that threshold the loss `U − float` is linear in the shift and then flattens onto a rounding floor:
+at 11, `1e-4 → 30.5445` (**which no longer refuses four colours**), `1e-5 → 28.4361`, `1e-6 → 28.2253`
+(the prototype's), `1e-7 → 28.2043` (shipped), `1e-8 → 28.2023`, `1e-9 → 28.2021`, `1e-10` not positive
+definite. So for `p = 19`: round at `shift = 10^(3−D)` for the largest affordable `D`, and expect `U` within
+about `10⁻⁴` of the float reading — a rounding loss of ~0.001 on an expected margin of 4–10 %.
+
+**R′.3 What the phase at 19 should know** (measured here, not estimated).
+
+1. **The builder is far cheaper than §19 feared.** At 11 the whole build is **5.1 s**, of which the product
+   table `F(a,a′,t)` is **4.1 s for 465,124 canonical forms — 8.8 µs each** (with Phase 2A's two-stage memo,
+   which this producer adopted). At 19 the table is `182² × 361 = 11,957,764` forms and the per-call
+   minimisation is over 40 maps instead of 24, so **3–6 minutes single-threaded**, not the 30–60 of §19. The
+   `Q` forms cost 0.1 s at 11 because the memo already holds their monomials; the scalar rows 0.5 s.
+2. **The exact rounding scales like the table**, `#reps² × n`: 1.86 s at 11 → **≈ 50 s per attempt at 19**.
+   The scan is then ~10 minutes over six workers and still not the bottleneck. **The solve is.**
+3. **Parallelism buys little at 11 and will buy a lot at 19.** Six rounding attempts of 1.4 s each finish in
+   1.6 s wall on six forked workers — about 4×, the rest being the fork's copy of the build. At 19, with
+   50 s attempts, the fork cost vanishes and the scan is genuinely parallel. Use `multiprocessing`'s **`fork`
+   context explicitly**: Python 3.14's default `forkserver` re-imports the module and leaves the module-level
+   build empty in the worker.
+4. **Nothing in this phase came close to needing a checkpoint**, so none was built: the longest single run is
+   the 92 s solve at 11, and the producer is restartable from its command line with nothing on disk to
+   resume from. At 19 that changes and §X's requirement stands — the natural checkpoint boundary is the
+   **build** (cache `F` and the `Q` forms), because it is the part that is expensive *and* deterministic,
+   and then SCS's warm-started chunks. No `timeout` wall was used anywhere in this phase.
+5. **A GPU is not appropriate at 7 or 11 and was not used**, as §R′.1 says: the per-iteration work is eleven
+   62 × 62 eigendecompositions and one cached sparse factorisation. The solve at 11 used 4 threads, 92 s,
+   744 MB. Said plainly because the hardware was offered.
+6. **Memory at 11 is 744 MB for the solve**; the plan's 8 GB ceiling was never approached.
+
+**R′.4 The control that fired, and what it caught.** **Plant 12 was `REFUSED IDENTITY_MISMATCH` on its first
+run, and the fault was the producer's, not the design's.** The certificate's linear form was accumulated in
+three shapes — the all-ones block, a character block, a `q` block — instead of the one shape §C.2 states, and
+in the character and `q` shapes the padded constant row's term `R[0][0]·c²` (and its cross term
+`2·R[0][1+j]·c·σ`) was simply absent. With the real weights `c = 0`, so the missing term is zero: **the
+production certificates were never affected, and no control with `c = 0` could ever have seen it.** Three
+things are worth keeping.
+
+* **The plant had to be run in its strongest form to fire.** §K.3 says "weights replaced by arbitrary
+  integers"; a reading that kept the structural constant entries (1 for the all-ones vector, 0 for the
+  character vectors) would have passed and taught nothing. §C.3's claim is about the whole vector, `c`
+  included, so the plant must be too.
+* **The fix removed the bug class, not the bug.** The accumulation is now one loop over
+  (block × weight vector) applying the three terms of (★) as written, to every block including the padded
+  ones — which is also the checker's own shape, so the two programs are now provably asking the same
+  question in the same order.
+* **The repair forced everything downstream to be regenerated.** A change to the producer changes its
+  sha256, which appears inside every certificate's `producer` provenance; a file claiming a maker that no
+  longer exists is the kind of inconsistency this phase is about. Both certificates, all records and all
+  controls were re-made after the fix, and **the producer is frozen from that point.**
+
+**R′.5 The checker was re-run as `--self-test --cert data/fs66/b1/cert-p7.json`** — all 25 of Phase 2A's
+controls applied to *this* phase's certificate rather than the prototype: **25 of 25, 97 s**, and
+`git status` clean afterwards.
+
+**R′.6 The level-one sets, and a self-test that was itself caught.**
+`data/fs66/b1/level-one-sets.json` holds a 14-set of `UD(𝔽₇,2)` (a union of two cosets of an additive
+`𝔽₇`-line missing the unit circle) and a 28-set of `UD(𝔽₁₁,2)` (randomised greedy plus (1,2)-swap local
+search; 28 is not a multiple of 11 and the coset route reaches only 22). Each point is written **twice**, as
+the pair `[a, b]` and as the index `a·p + b`, and `tools/fs66_b1_sets_check.py` refuses the file if the two
+disagree — the one convention error a two-spelling format can carry. Only `α(G₁) ≥ size` is used anywhere;
+maximality is FS-54's and is neither re-derived nor needed.
+
+The verifier's `--self-test` was **seen red twice**, on copies of it under the session scratchpad: cutting
+the pair/index bridge reds one row, and cutting the independence loop to the first unit vector reds two.
+**The second break exposed a defect in the self-test itself**: its single independence plant put the
+violating pair at unit vector 1, the very one the break kept, so a verifier reduced to `S[:1]` passed all
+eleven controls. A control whose failure mode is unreachable has not been tested by passing. The plant now
+runs **once per unit vector** (8 at `p = 7`), and the self-test has 18 controls.
+
+**R′.7 Where the plan, Phase 2A's hand-over or the brief needed a word.** Nothing was wrong; four sentences
+are stale or narrower than they read.
+
+1. **§R′.1's control "`--no-q` → `n/2`-ish" is `n/2` only with a cut present.** The planner's B2 was measured
+   on the *full* relaxation, which carries the edge-cut localiser; in the **minimal** relaxation this phase
+   ships, dropping `q` reads **49 = n**, because `φ ≡ 1` is feasible for the moment blocks and the box rows.
+   Both are run and both are in `controls.out`: with the edge row **24.5**, without it **49**. The second is
+   the sharper statement — in the minimal relaxation `q` is the *only* thing that binds.
+2. **§ST and `SOUNDNESS.md` §8 carry the prototype's numbers.** Every clause there is true and is implied by
+   the committed certificates; one number changes, `α(UD(ℤ/121,2)) ≤ 3,415` → **`≤ 3,412`**, and the brackets
+   tighten (`χ_f ∈ [4.2901, 4.3215]` at 11, `[3.4961, 3.5]` at 7; Haar `∈ [0.231404, 0.233093]`). **Not
+   edited here**: §ST is the planner's and `SOUNDNESS.md` is frozen except for a sentence shown to be
+   *wrong*, which none of these is. The live statement is in `data/fs66/b1/README.md` under Phase 2B, with a
+   line saying so. **Owner's call** whether §ST and §8 are updated in place.
+3. **The frozen checker's usage text names only the three `proto-cert-*.json` files.** Its `CANNOT_READ` hint
+   globs the directory and so lists the new certificates correctly, but `--help` and the no-argument call now
+   under-report what is in the repository. Cosmetic, in a frozen file: flagged, not touched.
+4. **§R′'s closed trust vocabulary has no word for a production producer's own bound.** Its middle word reads
+   `"prototype bound (producer's own arithmetic, untrusted)"`; a fourth word was not minted, because a closed
+   vocabulary is worth more than an adjective and the parenthetical is the meaning. Every record carries
+   `tool_sha256` and `command`, which say which program it was.
+
+**R′.8 Decisions the implementer took (choice · alternative · why · confidence).**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Ship the certificate the plan's own §R′.4 grid selects (28.2043), not the best the widened scan found (28.2021)** | ship the 28.2021 file | the committed artifact is then reproducible by the documented default command, `--scan` with no arguments; the gain is 0.002 on a margin of 2.05, and §R′.4 says in as many words that anything under 28.3 is as good as 28.21. The widened scan is recorded as a measurement, in `scan.out`, and is what 19 will use | high |
+| **The producer writes the two provenance keys `spec` and `producer`, which the prototype left out** | write only the seven checked keys | it puts the specification's address and the solver, tolerance, digits, shift and tool digest inside the artifact, where a reviewer opening the file first meets them — and it exercises the checker's "provenance, not checked" narration on a real file. Key order is the claim first (`format`, `p`, `scale`, `U_num`), then `spec`, then `producer`, then the data | high |
+| **No build cache and no checkpointing in this phase** | build the `F`/`Q` cache under `data/fs66/ckpt/b1-p{p}/` now, since §X asks Phase 2C for one | the longest run here is 92 s, so a cache would save 5 s and add an untested reload path to the one program whose output is the milestone's artifact; §X's requirement is Phase 2C's, and R′.3 gives it the measured per-canonical-form cost to size it from. **Reversal condition:** if 2C is run by the same producer, the cache is its first commit, not an afterthought | high |
+| **Plant 12 replaces every entry of every weight vector, the constant `c` included** | replace only the point entries, keeping the structural constants | §C.3's claim is about the whole vector, so the control must be too — and only this form has a reachable failure, as the bug it found proves. The cost is that `U` comes out at `10¹⁹` and P-B4's "> 40" is met trivially; the qualitative finding is recorded instead | high |
+| **A separate standard-library verifier for the level-one sets** (`tools/fs66_b1_sets_check.py`), with its own three last-line words, exit codes and `--self-test` | verify the sets inside the certificate checker, or in a throwaway script | the certificate checker is frozen and these sets are a different claim with a different trust word; a throwaway script is not an artifact a reviewer can re-run. The cost is one more file to read; the benefit is that the lower halves of §ST have a checkable owner | high |
+| **The scan is parallel by `multiprocessing` with an explicit `fork` context** | run the six attempts in sequence (they cost 9 s in total at 11) | the brief asks for it and it is the shape 19 needs, where an attempt is ~50 s; it is honest to say that at 11 it saves seconds, not hours, and the report says so | high |
+| **The float controls print through `print`, not the narration channel** | leave them as narration | the first run of the controls under `--quiet` printed **nothing**, and a probe's silence is never a verdict — a control whose output is suppressed reads exactly like a control that never ran | high |
+| **The `c ≠ 2` and arbitrary-weights warnings print twice, before and after the bound, and survive `--quiet`** | the single warning at the top the tool first had | under `--quiet` that warning vanished while the confident line "refuses 3 colours at every level, by the hand links" still printed — for the *wrong problem*. A warning must be louder than the claim it qualifies | high |
+
+**R′.9 The handover sweep** (WORKFLOW step 9's two greps over this phase's own additions; the close is the
+owner's).
+
+*"conjecture" / "not claimed"* — no new hit. §R.9's two hits stand unchanged, and its item (ii) — that
+§S5's conjecture "may be provable at 7 by an exact certificate at the optimal face" — **is now one integer
+sharper and still owed a stub or a decline.** The certificate at 7 proves `U = 14.015224…` against
+`α(G₁) = 14`, so the gap is 0.0152 and the exact-face question is "is there a certificate with `U = 14`
+exactly". This phase adds one measurement bearing on it: the widened scan's smallest positive-definite `U`
+at 7 is **14.014996…**, reached at `shift = 1e-9`, and the trend flattens there rather than approaching 14 —
+the residual 0.0149 is the *relaxation's* gap (the minimal relaxation's float value is 14.014904), not the
+rounding's. So an exact-face certificate would need a **tighter relaxation** as well as a singular block, and
+§E's "not added: a positive-semidefinite block form" is only half the price. (At 11 the corresponding gap is
+0.2015 against `α = 28`, and B11's tightened relaxation reads 28.0427: the tightening closes three quarters
+of it and is still not exact.)
+
+*§PA read back for what this phase taught about the object* — two things.
+
+1. **The bound's sensitivity is entirely in the rounding, not in the mathematics.** One knob — the diagonal
+   shift — moves `U` at 11 from 28.2021 to 30.5445, i.e. across the line that decides whether four colours
+   are refused at all, while the relaxation's own value never moves from 28.2015. Anyone reading a number
+   like "28.2" off this method must be told which shift produced it.
+2. **The producer's freedom is enormous and entirely one-sided.** Arbitrary integer weights, a wrong table, a
+   wrong block structure: each gives a valid certificate of a worse bound. The only thing the producer can do
+   that is *not* one-sided is get `q`'s constant wrong (plant 9), because `c` is not a weight — it is part of
+   the *problem*, and the checker rebuilds it. That is the sharp statement of where this design's trust
+   boundary actually lies, and it is one line: **everything the producer chooses is off the trust surface
+   except the problem it is solving.**

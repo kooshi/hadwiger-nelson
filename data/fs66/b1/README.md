@@ -116,3 +116,111 @@ example and the input of the checker's assembled twin.
 | `planner_spec_inhabitant.py` | the planner's scratch evaluator of the specification — not the checker; do not port it | — |
 | `localsearch-c2.jsonl` | local maxima at `c = 2` with the cuts | nulls at a budget |
 | `links-test.out` | the falsifier of the hand links, run | tested (falsifier): no violation |
+
+---
+
+# Phase 2B — the production certificates (implementer, 2026-09-21)
+
+**The prototype above is superseded as an artifact.** `tools/fs66_b1_cert_make.py` — the production
+producer, written from the subplan's §R′ — made the two certificates this milestone ships, and
+`tools/fs66_b1_cert_check.py` (Phase 2A's, frozen, standard library only, sharing no code with the
+producer) says **`CERTIFIED`** on both. Everything the prototype files were for — being the checker's first
+test inputs — they have now done; they stay as test inputs and are not the milestone's statement.
+
+| | `cert-p7.json` | `cert-p11.json` |
+|---|---|---|
+| exact bound `U = U_num / scale` | **14.015224…** | **28.204320…** |
+| `U_num` | `14015224526962403621588626098460` | `28204320001863099628721379861820` |
+| `scale` | `10^30` | `10^30` |
+| refuses | `3·U = 42.045673… < 49` | **`4·U = 112.817280… < 121`** |
+| does not refuse | `4·U = 56.060898… ≥ 49` | `5·U = 141.021600… ≥ 121` |
+| blocks / rows / weight vectors | 14 / 524 / 13 | 22 / 3,821 / 21 |
+| size | 97 KB | 707 KB |
+| sha256 | `f4b2ffa7c42727f3…` | `683236677e0d55a4…` |
+| checker's wall time | 0.6 s | 6.6 s |
+| what the prototype had | 14.017576… | 28.225133… |
+
+The gain came from the **rounding scan**, not from a better solve: the prototype rounded at one diagonal
+shift (`1e-6`); the scan rounds at six (shift × digits) in parallel and keeps the smallest `U` whose blocks
+are all positive definite, and `1e-7` wins. At 11 the rounding loss against the float reading falls from
+0.024 to **0.0028**.
+
+## The statement these license — §ST of `plans/FS66-phase2-certificate.md`, with these files' numbers
+
+> **At `p = 11`: for every `k ≥ 1`, every independent set of `UD(ℤ/11^k, 2)` has at most `U·121^{k−1}`
+> points with `U = 28.204320…` (the exact rational in the file); hence no level of the tower is
+> four-colourable, the chromatic number of every level is exactly 5, the clopen chromatic number of `ℤ₁₁²`
+> is 5 (main plan §S2), the fractional chromatic number of every level lies in
+> `[121/U, 121/28] = [4.2901, 4.3215]`, and the supremum of the Haar measure of a measurable independent
+> set of `ℤ₁₁²` lies in `[28/121, U/121] = [0.231404, 0.233093]`.** At `p = 7` the same with
+> `U = 14.015224…`, three colours, `χ = 4`, `χ_f ∈ [3.4961, 3.5]`.
+
+**The Borel clause** (§ST's owner addendum, unchanged in substance): a Borel colour class of `ℚ_p²` meets
+`ℤ_p²` in a measurable independent set, of Haar measure at most `U/p²`, so `χ_Bor ≥ ⌈p²/U⌉`; a level-one
+colouring pulled back is clopen, hence Borel, and extends over the countably many cosets of `ℤ_p²` in
+`ℚ_p²`. Hence **`χ_Bor(ℚ₇²) = 4` and `χ_Bor(ℚ₁₁²) = 5`** — exact values for the problem
+`[BardestaniMallahiKarai2017]` pose and bound only by `O(p²)`.
+
+**And the level-two independence numbers**, with the explicit sets below: `α(UD(ℤ/49, 2)) = **686** exactly`
+(`14·49 = 686 = ⌊14.015224·49⌋`), and **`3,388 ≤ α(UD(ℤ/121, 2)) ≤ 3,412`** — the upper end three below the
+`3,415` the subplan records, which was computed from the prototype's weaker `U`.
+
+**Trust word for every sentence above: `CERTIFIED (fs66_b1_cert_check)` + the hand-proved links L1, L2, L6
+of `SOUNDNESS.md`. Never the Lean kernel.** The checker establishes only the polynomial bound `Σφ ≤ U`; the
+whole tower is carried by the hand links, which is why its own last line names them in capitals.
+`SOUNDNESS.md` §8 states the same clauses with the prototype's `U = 28.225133…` and `14.017576…`; every one
+of them is implied by the tighter values here, and only the `≤ 3,415` changes.
+
+## The rounding scan, and the law it gives the next prime (`scan.out`)
+
+One solve per prime; then independent exact rounding attempts, one per (shift, digits `D`), across the
+cores. **Positive definiteness survives exactly when `shift ≥ 10^(3−D)`** — the same threshold at 7 and at
+11, in every one of the 42 attempts — and above that threshold `U` is linear in the shift down to a floor
+set by the rounding itself:
+
+| shift | `U` at 7 (`D = 12`) | `U` at 11 (`D = 12`) |
+|---|---|---|
+| `1e-10` | not positive definite | not positive definite |
+| `1e-9` | 14.014996… | 28.202108… |
+| `1e-8` | 14.015011… | 28.202299… |
+| **`1e-7`** | **14.015224…** (shipped) | **28.204320…** (shipped) |
+| `1e-6` | 14.017579… | 28.225276… (the prototype's) |
+| `1e-5` | 14.041342… | 28.436113… |
+| `1e-4` | 14.278973… | 30.544473… — **no longer refuses four colours at 11** |
+
+So the recipe for `p = 19`: solve, then round at `shift = 10^(3−D)` for the largest `D` affordable, and
+expect `U` to land within about `10⁻⁴` of the float reading. Rounding is scored by the bound it proves,
+never by a residual (`plans/FS50-certificate-soundness.md` §5): the six shipped attempts differ by 0.23 in
+`U` and not one of them is "more nearly correct" than another.
+
+## Files added by Phase 2B
+
+| file | what it is | trust word |
+|---|---|---|
+| `cert-p7.json`, `cert-p11.json` | **the milestone's certificates**, format `fs66-b1-cert-v2`, integers only | **`CERTIFIED (fs66_b1_cert_check)`** + the hand links L1, L2, L6 |
+| `records.jsonl` | one flat record per producer attempt and per checker run: solver, tolerance, digits, shift, `U`, digests | provenance; the `trust` field of each row says which |
+| `scan.out` | the widened rounding scan at 7 and 11, 42 attempts | float reading / producer bound (untrusted) |
+| `controls.out` | plants 9 (`c = 1`) and 12 (arbitrary weights) with their faithful twins and digests; the colour-count controls; the three float controls at 7 | controls, each red or green for a named reason |
+| `level-one-sets.json` | an explicit 14-set of `UD(𝔽₇,2)` and 28-set of `UD(𝔽₁₁,2)`, each point written as a pair and as an index | **`VERIFIED (fs66_b1_sets_check)`** — independent, from the definition |
+| `tools/fs66_b1_cert_make.py` | the production producer | **untrusted by design**; a wrong weight or table in it can only weaken `U` |
+| `tools/fs66_b1_sets_check.py` | the sets' verifier, standard library only, `--self-test` with 18 controls | the verifier of the row above |
+
+## The controls, and the one that fired (`controls.out`)
+
+* **Float controls at 7, all three exact.** `q` dropped with the edge cut kept → **24.5** = `n/2` (the
+  planner's B2); `q` dropped with nothing kept → **49** = `n`, so in the *minimal* relaxation `q` is the only
+  thing that binds; `φ² = φ` added → **14.0** = `α(UD(𝔽₇,2))`.
+* **Plant 9** — a certificate produced for the wrong problem (`c = 1`, a stronger and false constraint, whose
+  bound 14.002121… *looks better*) → **`REFUSED IDENTITY_MISMATCH`** at 156 of 495 canonical monomials. The
+  checker has no `c` to read; it rebuilds `q` with 2.
+* **Plant 12** — every entry of every weight vector replaced by arbitrary integers, the constant entry `c`
+  included → **`BOUND ONLY`** with `U = 7.16 × 10¹⁹`: sound and useless, which is the point. Registered
+  prediction **P-B4 (`U > 40` at 11) MET.**
+* **Plant 12 went red the first time, and the fault was the producer's.** The linear form of a block was
+  written three ways — the all-ones block, a character block, a `q` block — instead of once, and the padded
+  constant row's term `R[0][0]·c²` was omitted from the character and `q` blocks. With the real cosine and
+  sine weights `c = 0`, so the omitted term is zero and the production certificates were never affected;
+  only a control that makes `c` nonzero could see it. The accumulation is now **one** loop over
+  (block × weight vector) applying the three terms of (★) as §C.2 states them.
+* **`--self-test` of the frozen checker, run against `cert-p7.json` rather than the prototype: 25 of 25**,
+  97 s, `git status` clean afterwards.
