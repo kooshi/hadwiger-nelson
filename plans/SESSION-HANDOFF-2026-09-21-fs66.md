@@ -54,7 +54,10 @@ at 17 after ~50 core-hours; the fact is already certified) · tools installed (`
 `kissat`). Mine: Phases 1c (level three by SAT) and 3a (`(19,4)` by SAT) STRUCK — subsumed by the certificates · **my ruling that
 23 was "out of reach" is OVERTURNED** (the 19 reading, 77.5, came in below the level-3 relaxation's 80.59; "it must beat 105.43" was
 never an argument that it cannot) · the finder at `UD(ℤ/529,2)` (the only instrument that could settle level two of 23 in the
-*surprising* direction) stays unrun unless Kooshi asks — I offered it as cheap insurance and he has not answered.
+*surprising* direction): **explained to Kooshi in full on 2026-09-21 with this default — not launched now; on a GO reading it stays
+unrun (a certificate below 105.8 means it cannot succeed); on a NO-GO reading the GPU job is stopped first and a fresh small
+implementer runs it (plan §I7(d): CaDiCaL on the biclique encoding, 16 seeds × 30 min, positive control at eight colours, my
+verifier on anything found).**
 
 ## 4. What is left, in order
 
@@ -62,10 +65,18 @@ never an argument that it cannot) · the finder at `UD(ℤ/529,2)` (the only ins
    attempt at 23 costs ≈ 2.9× 19's 243 s — price the scan first), `cert-p23.json` `CERTIFIED` with `--m 5` by the frozen checker
    (expect ~25–60 min and several GB at 23 — measure), an explicit 87-point level-one set verified from the definition, records,
    README statement. `⌊U⌋` also bounds `α(UD(𝔽₂₃,2))` (certified ≤ 105 today); a reading below `529/6 = 88.17` would refuse SIX at
-   every level and close a member of the window for six — not expected. **The full ℚ(√167) statement also needs 43** (its other
+   every level and close a member of the window for six. **Re-assessed after the handoff: closer than "not expected".** The
+   reading cannot be below 87.51 (my single-class local search exhibits a feasible point of that value, `data/fs66/owner/alpha-fuzzy.out`),
+   and at 7, 11, 19 the certified bound sat 0.1 %, 0.7 % and ≤ 2 % above level one's independence number — so expect ≈ 88–89.5.
+   **`U < 89` certified gives `α(UD(𝔽₂₃,2)) ≤ 88 < 89`, i.e. `χ(UD(𝔽₂₃,2)) ≥ 7`: 23 leaves the window for six at level one** (FS-17's
+   digit), even if `U ≥ 88.17` leaves six open at higher levels. If the float lands near 89, Phase 2D's brief must protect that
+   margin in the rounding (the bound travels with its shift). Told to Kooshi. **The full ℚ(√167) statement also needs 43** (its other
    usable prime below the spectral refusals at 59+): unpriced — `n = 1,849`, roughly 3 M moment variables; price it, do not run it.
 2. **The prover's verdict** — check it myself; act on it (§0).
-3. **The close (mine; WORKFLOW 8–10).** `CLAUDE.md` is at **246,496 of 250,000 bytes: TRIM FIRST** (candidates: the ranked-stub row
+3. **The close (mine; WORKFLOW 8–10).** *(Update, later on 2026-09-21: a first trim is DONE — commit `d0df4f82`, 242,682 bytes,
+   7.3 KB of room; G59's killing test at 19 and G57's stale `α ≤ 377` are already current. The close adds roughly 6 KB, so find
+   2–3 KB more when the row and the grokking are written — NOT from § "Make the gate fail" or any PROTECTED paragraph.)*
+   `CLAUDE.md` was at **246,496 of 250,000 bytes: TRIM FIRST** (candidates: the ranked-stub row
    for FS-66; G59's long "killing test at 19" narrative — now partly answered by `α(19) ≤ 77`; G58's attempted-decision paragraphs;
    the tools table). Then: ledger **row 75**; a grokking (the tower's limit is the clopen chromatic number; one level-one inequality
    governs every level; the numbers; the conjecture with its killing test — a verified 687-set in `UD(ℤ/49,2)` now refutes the
