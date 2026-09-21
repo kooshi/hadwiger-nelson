@@ -176,7 +176,7 @@ one edge of every single-direction cycle. The linear part of the conditions is t
 generic `K_g` has about `2p² − 3` edges of `p²(p+1)/2`. **Measured** (`tools/fs66_conj_edgecrit.py`, exact MILP): at 7,
 `α(G₁ − e) = 14` (no edge is `α`-critical), but six random one-edge-per-cycle deletions gave `α = 15, 16, 16, 16, 16, 16`. Whether
 *some* choice of one edge per cycle keeps `α = 14` is the necessary condition for this bound ever to be tight at 7;
-`tools/fs66_conj_transversal.py` (exact, no-good cuts) was started on it — **its state at the time of writing is in §4** — and
+`tools/fs66_conj_transversal.py` (exact, no-good cuts) was run on it and **did not decide it** (§4) — and
 for triangle-free `K` with `e ≤ 2·49 − 3 = 95` Shearer's bound already forces `α(K) ≥ 15`, so at 7 a tight `K_g` would have to be
 massively over-braced *and* consistent with the carry: a shadow of an arithmetic configuration (§3.4), not a generic lift.
 
@@ -282,8 +282,9 @@ points* (`α(G₂^γ(11)) ≤ 3,412` leaves room; not run — a finder on 14,641
 
 The tightened relaxation reads `14.0000` at 7 (float) and `28.04` at 11. What I can say: (1) *what makes 7 special* — `G₁(7)` has
 a **linear** homomorphism onto the circular clique `K_{7/2}` (`(x, y) ↦ 2x + 3y`: the eight unit vectors `(±1,0), (0,±1), (±2,±2)`
-map into `{±2, ±3}`; checked by hand), so its maximum independent sets are the 14-point unions of two adjacent parallel lines
-of a non-square direction, `χ_c = χ_f = 7/2`, and the optimum is a highly symmetric face; at 11, `121/28` is not of that kind
+map into `{±2, ±3}`; checked by hand), so `χ_c = χ_f = 7/2`, and **its maximum independent sets are exactly 28: the unions of two
+adjacent parallel lines of a non-square direction** (exhaustive, `tools/fs66_conj_maxsets7.py`: 8 through the origin, `49·8/14 = 28`,
+one orbit) — the optimum is a small, highly symmetric face; at 11, `121/28` is not of that kind
 (`11 ∤ 28`: no circulant core, no linear circular colouring), and I expect exactness at a fixed level to fail there as it
 measurably does. (2) *What an exact-face certificate at 7 would prove:* `B₁^{cuts}(7) = 14` exactly ⟹ **(C-α) at 7 for every
 `k`, and by Lemma T for every twist — `m₁(ℤ₇²) = 2/7`, the first exact measurable independence density of a `p`-adic plane.**
@@ -313,7 +314,8 @@ constraints along the two 7-cycles of `K_{7/2}` must be combined non-linearly, a
 | Lemma W: the line set is independent in `UD(ℤ/p²,2)`, shares sum to `(p²−1)/(2p)` on an induced `p`-cycle | `fs66_conj_line.py` → `line.out` | holds at 3, 7, 11, 19 (exact integers, every unit vector checked) |
 | the carry twist **is** `UD(ℤ/p², 2)`; Lemma T's spectral window | `fs66_conj_twist.py` → `twist-p3.out`, `twist-p7.out` | adjacency matrices equal entry by entry at 3 and 7; off-level-one spectrum in `[−2p, 2p]` for the carry, zero and 8 random twists; carry twist at 7 reads `−13.9712` (the note's `c = 1.995891`), zero twist `[−12.61, 14]` |
 | `α(G₁ − e)`, random one-edge-per-line deletions | `fs66_conj_edgecrit.py` | 7: `14`; then `16, 15, 16, 16, 16, 16` |
-| does any one-edge-per-line deletion keep `α(G₁(7)) = 14`? | `fs66_conj_transversal.py` → `transversal-p7.out` | **undecided at the time of writing** — the exact no-good-cut search had added ≈ 750 cuts (each a 15- or 16-set with 2–8 induced edges) without finding a transversal or proving there is none; the file holds the log. A FOUND is only a necessary condition for §3.1's section bound to be tight; an INFEASIBLE closes that sub-route at 7 by theorem |
+| does any one-edge-per-line deletion keep `α(G₁(7)) = 14`? | `fs66_conj_transversal.py` → `transversal-p7-run1-killed.out`, `transversal-p7.out` | **UNDECIDED — not landed.** Exact search by no-good cuts. Run 1 (lazy cuts only) was killed by me at ≈ 1,850 cuts as too slow; run 2, seeded with the 980 cuts "a maximum set plus one outside vertex" (outside vertices have 2 or 4 neighbours in the set), reached ≈ 2,250 further cuts — each a 15- or 16-set with 2–8 induced edges, all on distinct lines — before its 15-minute wall. No transversal found, none excluded. A FOUND would only be a necessary condition for §3.1's section bound to be tight; an INFEASIBLE would close that sub-route at 7 by theorem. The instrument is the wrong shape for this (each cut excludes little); a hitting-set formulation over enumerated near-independent 15-sets is what it wants |
+| every maximum independent set of `UD(𝔽₇,2)` | `fs66_conj_maxsets7.py` → `maxsets-p7.out` | 28 in all, one orbit, each two adjacent parallel lines of a non-square direction (exhaustive) |
 | `χ_f` by plain constraint generation | `fs66_conj_chif.py` | **instrument failed** (degenerate LP on a vertex-transitive graph: no convergence in 2 min at 7). Kept only because its `plane`/`witness` loaders are reused; do not trust it as a `χ_f` oracle |
 
 ---
