@@ -327,7 +327,7 @@ prior art. Not written up. `ℚ(√167)`, where the local–global conjecture pr
 > `χ((ℚ_p)²)` as a quantity worth asking for, and his Prop. 3.8 is the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤ χ(UD(𝔽_p, 2))`
 > this whole entry stands on.
 
-**Our answer: no — and three exact values.** *(FS-66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md` §ST,
+**Our answer: no — three exact values, and a floor at 23.** *(FS-66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md` §ST,
 `data/fs66/owner/note-2026-09-20-fibre-density.md` §7–8.)*
 
 * **No universal bound exists: `χ_Bor(ℚ_p²) ≥ 1 + (p+1)/(2√p) > √p/2` for every `p ≡ 3 (mod 4)`** [hand]. The tool is the paper's own
@@ -336,18 +336,19 @@ prior art. Not written up. `ℚ(√167)`, where the local–global conjecture pr
   one is a Kloosterman sum (Weil: `≥ −2√p/(p+1)`); and **every level `k ≥ 2` is at least `−2/(p+1)` by an elementary fibre sum** —
   the character sum over a fibre of `S_k → S_{k−1}` vanishes except over at most two residues. So the unknown growth is pinned between
   `√p/2` and `χ(UD(𝔽_p, 2))`.
-* **`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`** [exact certificate + hand]. Upper halves: the chain above and the known
+* **`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`, and `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`** [exact certificate + hand]. Upper halves: the chain above and the known
   level-one values (`[Moorhouse2010]` Table 6.1; row 53's kernel value at 11). Lower halves, ours: every independent set of every
   level of the tower obeys one inequality on its fibre shares over level one; an exact integer sum-of-squares certificate of the
   resulting level-one problem, accepted by a frozen standard-library checker written from the specification
-  (`tools/fs66_b1_cert_check.py`; `data/fs66/b1/cert-p{7,11,19}.json`; `U = 14.0152…, 28.2043…, 77.5117…` against `49/3`, `121/4`,
-  `361/4`), bounds the Haar measure of every measurable independent set of `ℤ_p²` by `U/p²` — so three colours cannot cover at 7, nor
-  four at 11 or 19. Six hand-proved links join the checker's word to the statement (`data/fs66/b1/SOUNDNESS.md`). At 11 the second
+  (`tools/fs66_b1_cert_check.py`; `data/fs66/b1/cert-p{7,11,19,23}.json`; `U = 14.0152…, 28.2043…, 77.5117…, 97.9846…` against `49/3`,
+  `121/4`, `361/4`, `529/5`), bounds the Haar measure of every measurable independent set of `ℤ_p²` by `U/p²` — so three colours
+  cannot cover at 7, four at 11 or 19, five at 23. At 23 the ceiling is `χ(UD(𝔽₂₃,2))`, itself undecided in {6, 7, 8}, so the Borel
+  number there is bracketed, not pinned. Six hand-proved links join the checker's word to the statement (`data/fs66/b1/SOUNDNESS.md`). At 11 the second
   level is also in the Lean kernel: `(unitQuadrance (ZMod 121)).chromaticNumber = 5`
   (`HadwigerNelson.chromaticNumber_unitQuadrance_zmod121`, standard three axioms).
 
 **What it does not say.** Nothing about the **plain** chromatic number `χ(ℚ_p²)` (axiom-of-choice colourings escape every measure
-argument) — Madore's quantity stays open at every `p`. Nothing, yet, at `p = 23`. And the lower bound is the spectral one: whether
+argument) — Madore's quantity stays open at every `p`. Nothing exact at `p = 23` until its finite plane is decided. And the lower bound is the spectral one: whether
 `χ_Bor(ℚ_p²)` grows like `√p` or faster is exactly the unknown gap between the ratio bound and `χ` on the finite planes.
 
 **Prior art checked** (WORKFLOW 3a item 8; a negative measures its queries): the complete zbMATH author listings of both posers
