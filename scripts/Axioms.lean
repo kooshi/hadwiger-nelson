@@ -1505,6 +1505,28 @@ by `decide +kernel`, and the CaDiCaL refutation replayed by the mask checker. No
 #print axioms four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem
 #print axioms four_le_chromaticNumber_planeOver_eleven
 
+/-! ## FS-66 — the residue tower at level two
+
+`χ(UD(ℤ/121, 2)) = 5`: at the prime 11 the residue ceiling does not drop from level one to level two.
+The lower half replays an LRAT refutation of an 883-point subgraph through the M05 pipeline, so the
+solver's word is nowhere in the axiom list; the upper half is level one's verified colouring pulled
+back along `ZMod.castHom` and buys nothing at all. **No native evaluation.** -/
+
+#print axioms ZMod.natCast_add_self_sub_mod
+#print axioms unitQuadrance_colorable_of_ringHom
+#print axioms chromaticNumber_unitQuadrance_zmod_le_of_dvd
+#print axioms unitQuadrance_adj_iff_quadrance
+#print axioms unitPairNat_eq_true_iff
+#print axioms zmod121FourEdges_all_ok
+#print axioms zmod121FourEdges_adj
+#print axioms zmod121Four_agrees
+#print axioms zmod121Four_unsat
+#print axioms zmod121FourEdgeGraph_not_colorable
+#print axioms unitQuadrance_zmod121_not_colorable_four
+#print axioms unitQuadrance_zmod121_colorable_five
+#print axioms chromaticNumber_unitQuadrance_zmod121
+#print axioms chromaticNumber_unitQuadrance_zmod121_eq_finitePlane11
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

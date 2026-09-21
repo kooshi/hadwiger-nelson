@@ -5,6 +5,7 @@ import Proofs.HadwigerNelson.Field.Quadratic
 import Proofs.HadwigerNelson.Field.Approx
 import Proofs.HadwigerNelson.Certificate
 import Proofs.HadwigerNelson.UnitQuadrance
+import Proofs.HadwigerNelson.ResidueTower
 import Proofs.HadwigerNelson.Lift
 import Proofs.HadwigerNelson.ResidueObstruction
 import Proofs.HadwigerNelson.FanGap
@@ -130,6 +131,7 @@ import Proofs.HadwigerNelson.ThreeAdicBarrier
 import Proofs.HadwigerNelson.SquareClass
 import Proofs.HadwigerNelson.Instances.CompositumFive
 import Proofs.HadwigerNelson.Instances.SqrtEleven
+import Proofs.HadwigerNelson.Instances.ZMod121Four
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 import Proofs.HadwigerNelson.Instances.SixthColour
 
