@@ -104,6 +104,11 @@ def parse_args(argv):
                     help='drive SCS in warm-started chunks of this many iterations, saving (x, y, s) to '
                          '--solve-ckpt after each and printing one residual line per chunk. 0 = one call.')
     ap.add_argument('--solve-ckpt', default=None, help='the chunked solve\'s checkpoint (.npz); resumed if present')
+    ap.add_argument('--round-only', action='store_true',
+                    help='round the dual already in --solve-ckpt and call NO solver. Re-entering SCS to '
+                         'reach a checkpoint perturbs the very dual one came for (measured at p = 19: five '
+                         'warm-started iterations took res_pri from 1.33e-4 to 1.95 and the bound from ~78 '
+                         'to 192), and the assembly is not needed either -- only the block offsets are.')
     ap.add_argument('--stop-after-chunks', type=int, default=0,
                     help='control: exit after this many chunks, leaving the checkpoint, so that resuming can be '
                          'exercised on purpose')
@@ -834,7 +839,9 @@ def solve_scs(B, A, bv, qobj, args):
             done += int(info['iter']); chunks += 1
             if args.solve_ckpt:
                 os.makedirs(os.path.dirname(os.path.abspath(args.solve_ckpt)), exist_ok=True)
-                np.savez(args.solve_ckpt + '.part', x=x0, y=y0, s=s0, iters=done)
+                np.savez(args.solve_ckpt + '.part', x=x0, y=y0, s=s0, iters=done,
+                         pobj=info['pobj'], dobj=info['dobj'], res_pri=info['res_pri'],
+                         res_dual=info['res_dual'], status=str(info['status']))
                 os.replace(args.solve_ckpt + '.part.npz', args.solve_ckpt)
             dt = time.monotonic() - t2
             print(f'[scs] chunk {chunks}: +{info["iter"]} it ({done} total), {dt:.0f} s '
@@ -1321,7 +1328,26 @@ def main():
 
     B = Build(args.p, c=args.c, with_q=not args.drop_q, edge_row=args.edge_row, pure=args.pure,
               fast=args.fast, jobs=args.build_jobs, cache_dir=args.cache_dir)
-    if args.fast:
+    if args.round_only:
+        # the block offsets are all the assembly would have told us; A itself is not needed, which
+        # also keeps 4.4 GB out of every forked rounding worker at p = 19.
+        row_off = len(B.eq_rows)
+        r, block_off = row_off + len(B.rows), []
+        for _, d, _ in B.blocks:
+            block_off.append(r)
+            r += d * (d + 1) // 2
+        z = np.load(args.solve_ckpt)
+        zdual = z['y']
+        st = str(z['status']) if 'status' in z else 'from checkpoint'
+        if 'res_pri' in z:
+            st += f" (res_pri {float(z['res_pri']):.2e}, res_dual {float(z['res_dual']):.2e})"
+        solve_info = dict(value=-float(z['pobj']) if 'pobj' in z else float('nan'),
+                          dual_value=-float(z['dobj']) if 'dobj' in z else float('nan'),
+                          status=st, iterations=int(z['iters']),
+                          solver='scs (checkpoint, no solver call)',
+                          solve_s=0.0, threads=args.threads, solver_eps=args.eps)
+        say(f'rounding the dual in {args.solve_ckpt} at {int(z["iters"])} iterations; no solver was called')
+    elif args.fast:
         if B.eq_rows:
             raise SystemExit('--fast does not carry equality rows; --pure is a reference-path control')
         A, bv, qobj, block_off, row_off = assemble_fast(B, args)
