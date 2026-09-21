@@ -87,6 +87,33 @@ def parse_args(argv):
                     help='control (plan §K.3 plant 12): replace every weight vector by arbitrary integers of the '
                          'same magnitude and recompute U and the rows. The file must still check.')
     ap.add_argument('--quiet', action='store_true')
+    # ---- phase 2C (p = 19): the fast path.  Every flag below defaults OFF, so the code the committed
+    # certificates at 7 and 11 came from is reached by exactly the commands that made them (--regression).
+    ap.add_argument('--fast', action='store_true',
+                    help='p = 19 path: build the product table across forked workers using the two symmetries '
+                         'F[ib][ia][t] = F[ia][ib][t] = F[ia][ib][-t], memoise the q forms on canon(m), and '
+                         'assemble the constraint matrix in numpy. Mathematically the same relaxation; verified '
+                         'against the reference build by --twin-build.')
+    ap.add_argument('--build-jobs', type=int, default=16, help='--fast: forked workers for the product table')
+    ap.add_argument('--cache-dir', default=None,
+                    help='--fast: directory holding the build cache (orbits, product table, q forms). Written '
+                         'after the build and reloaded on a later run; NEVER under build/.')
+    ap.add_argument('--linear-solver', default=None,
+                    help="SCS linear-system backend, passed through: e.g. indirect, gpu_indirect. Default: SCS's own")
+    ap.add_argument('--chunk-iters', type=int, default=0,
+                    help='drive SCS in warm-started chunks of this many iterations, saving (x, y, s) to '
+                         '--solve-ckpt after each and printing one residual line per chunk. 0 = one call.')
+    ap.add_argument('--solve-ckpt', default=None, help='the chunked solve\'s checkpoint (.npz); resumed if present')
+    ap.add_argument('--stop-after-chunks', type=int, default=0,
+                    help='control: exit after this many chunks, leaving the checkpoint, so that resuming can be '
+                         'exercised on purpose')
+    ap.add_argument('--twin-build', action='store_true',
+                    help='control: build BOTH the reference and the fast way and compare the product table, the '
+                         'q forms, the block entries and the box rows as canonical monomials. Exits nonzero on '
+                         'any disagreement.')
+    ap.add_argument('--regression', action='store_true',
+                    help='control: reproduce the committed certificate at this p and compare every key except '
+                         'producer.utc and producer.tool_sha256 (the two that any edit to this file must change)')
     return ap.parse_args(argv)
 
 
@@ -144,7 +171,48 @@ def dec_str(num, den, places=6):
     return f'{"-" if neg else ""}{whole}.{frac:0{places}d}' + ('' if rem2 == 0 else '…')
 
 
-# ----------------------------------------------------------------------------- the plane and the orbits
+# ----------------------------------------------------------- monomial encoding and the parallel product table
+# A monomial of degree <= 4 over n points is packed into one int64 so that millions of them cross a
+# process boundary as a numpy array rather than as Python tuples: [len | m0 | m1 | m2 | m3] base n+1,
+# absent entries written as the sentinel n.  At p = 19 the largest value is 4*362^4 < 2^63.
+
+def enc_mono(m, n):
+    v = len(m)
+    for i in range(4):
+        v = v * (n + 1) + (m[i] if i < len(m) else n)
+    return v
+
+
+def dec_mono(v, n):
+    d = []
+    for _ in range(4):
+        v, r = divmod(v, n + 1)
+        d.append(r)
+    ln = v
+    d.reverse()
+    return tuple(d[:ln])
+
+
+_FST = {}        # set in the parent before forking; the workers inherit it (fork context only)
+
+
+def _product_chunk(ias):
+    """canon(a * tau_t(a')) for a = reps[ia], every a' = reps[ib] with ib >= ia, and every t in the
+    HALF range (one representative per class {t, -t}), encoded.  One (ia, array) pair per ia."""
+    B = _FST['B']
+    n, R, half = B.n, B.R, B.half
+    out = []
+    for ia in ias:
+        a = B.reps[ia]
+        arr = np.empty((R - ia, len(half)), dtype=np.int64)
+        for k in range(R - ia):
+            b = B.reps[ia + k]
+            for j, t in enumerate(half):
+                row = B.ADD[t]
+                arr[k, j] = enc_mono(B.canon(a + tuple(row[y] for y in b)), n)
+        out.append((ia, arr))
+    return out
+
 
 class Build:
     """everything derived from p: the plane, the canonical forms, the representatives, the product
@@ -158,7 +226,10 @@ class Build:
       * kappa(t) = sum_x w_x w_{x+t}.
     """
 
-    def __init__(self, p, c=2.0, with_q=True, edge_row=False, pure=False):
+    def __init__(self, p, c=2.0, with_q=True, edge_row=False, pure=False,
+                 fast=False, jobs=1, cache_dir=None):
+        self.fast = fast
+        self._qmemo = {} if fast else None
         if p % 4 != 3:
             raise SystemExit(f'p = {p} is not 3 mod 4; the unit circle of F_p^2 has p + 1 points only in '
                              f'the anisotropic case, and nothing in this plan was examined otherwise.')
@@ -201,12 +272,27 @@ class Build:
         R = self.R = len(reps)
         say(f'p={p} n={n} |S|={len(self.S)} |maps|={len(self.maps)} reps={R}')
 
+        # ---- the half range of shifts: one t per class {t, -t}.  z -> -z is in Gamma (it is the
+        # rotation by the circle point -1) and every representative is negation-stable, so
+        # F(a, a', -t) = F(a, a', t); and a' * tau_{-t}(a) is the translate tau_{-t}(a * tau_t(a')),
+        # so F[ib][ia][t] = F[ia][ib][t].  The two together make the table a quarter of its naive size.
+        self.half = [t for t in range(n) if t <= self.SUB[t][0]]
+        self.hidx = [0] * n
+        for j, t in enumerate(self.half):
+            self.hidx[t] = j
+            self.hidx[self.SUB[t][0]] = j
+
         # ---- the product table
         t0 = time.monotonic()
-        self.F = [[[self.idx(a + tuple(self.ADD[t][y] for y in b)) for t in range(n)] for b in reps]
-                  for a in reps]
-        say(f'products a*tau_t(a\'): {R*R*n} canonical forms, {len(self.list)} orbits '
-            f'[{time.monotonic()-t0:.1f} s]')
+        if fast:
+            self._fast_products(jobs, cache_dir)
+            say(f'products a*tau_t(a\'): {R*(R+1)//2*len(self.half)} canonical forms (a quarter of '
+                f'{R*R*n} by the two symmetries), {len(self.list)} orbits [{time.monotonic()-t0:.1f} s]')
+        else:
+            self.F = [[[self.idx(a + tuple(self.ADD[t][y] for y in b)) for t in range(n)] for b in reps]
+                      for a in reps]
+            say(f'products a*tau_t(a\'): {R*R*n} canonical forms, {len(self.list)} orbits '
+                f'[{time.monotonic()-t0:.1f} s]')
 
         # ---- the forms Q(m) = moment of q*m  (needed for the q localiser and for the exact accumulation)
         self.Q_empty = self.q_form(())
@@ -231,9 +317,14 @@ class Build:
         self.blocks = []          # (name, dim, [(i, j, orbit, coef)])  upper triangle i <= j
         self.rows = []            # (kind, payload, {orbit: coef})   meaning  expr >= 0
         self.eq_rows = []         # {orbit: coef} meaning expr == 0
-        self._moment_blocks()
-        if with_q:
-            self._q_blocks()
+        if fast:
+            self._moment_blocks_fast()
+            if with_q:
+                self._q_blocks_fast()
+        else:
+            self._moment_blocks()
+            if with_q:
+                self._q_blocks()
         if edge_row:
             self.rows.append(('edge', None, {self.idx(()): 1.0, self.idx((0,)): -2.0}))
         self._box_rows()
@@ -294,6 +385,14 @@ class Build:
         rounding here -- the checker builds the same form with 2 hard-coded."""
         cc = int(self.c) if float(self.c).is_integer() else self.c
         base = self.canon(m)
+        if self._qmemo is not None:
+            # Q(m) depends on m only through canon(m) (it is built from `base`), so at p = 19 the 363
+            # forms the relaxation asks for are ~12 distinct ones.  Memoised only on the fast path: the
+            # memo changes the ORDER in which new orbits are discovered, hence the orbit numbering, hence
+            # the bytes of the file -- which must not move at 7 and 11.
+            got = self._qmemo.get(base)
+            if got is not None:
+                return got
         d = {}
         for x in range(self.n):
             i = self.idx(base + (x,))
@@ -304,7 +403,135 @@ class Build:
             for s in self.S:
                 i = self.idx(base + (x, row[s]))
                 d[i] = d.get(i, 0) - 1
-        return {k: v for k, v in d.items() if v}
+        out = {k: v for k, v in d.items() if v}
+        if self._qmemo is not None:
+            self._qmemo[base] = out
+        return out
+
+    # -- the fast build (plan §19; p = 19) ----------------------------------------------------------
+    def _fast_products(self, jobs, cache_dir):
+        """the product table, across forked workers, with a disk cache of the whole build.
+
+        If this process dies at any instant the relaunch redoes: everything, unless --cache-dir was
+        given and the cache was written, in which case it redoes only the reload (seconds).
+        Resume command: the same command line; the cache is keyed on (p, c) and reloaded silently."""
+        n, R, half = self.n, self.R, self.half
+        cache = os.path.join(cache_dir, f'build-p{self.p}-c{int(self.c)}.npz') if cache_dir else None
+        if cache and os.path.exists(cache):
+            z = np.load(cache)
+            if int(z['p']) != self.p or int(z['nhalf']) != len(half):
+                raise SystemExit(f'{cache}: built for p = {int(z["p"])}, not {self.p}. Remove it or use '
+                                 f'another --cache-dir.')
+            self.list = [dec_mono(int(v), n) for v in z['orbits']]
+            self.index = {m: i for i, m in enumerate(self.list)}
+            assert self.list[0] == (), 'the cached orbit 0 is not the constant monomial'
+            Fh = z['Fh']
+            self._qmemo = {dec_mono(int(b), n): dict(zip(z['qk'][z['qp'][i]:z['qp'][i + 1]].tolist(),
+                                                         z['qv'][z['qp'][i]:z['qp'][i + 1]].tolist()))
+                           for i, b in enumerate(z['qb'])}
+            say(f'build cache reloaded from {cache}: {len(self.list)} orbits, '
+                f'{Fh.shape[0]}x{Fh.shape[1]} product table, {len(self._qmemo)} q forms')
+        else:
+            # a sample check of the two symmetries the table's shape rests on, BEFORE using them
+            self._check_symmetries()
+            _FST['B'] = self
+            ctx = multiprocessing.get_context('fork')
+            chunks = [list(range(i, R, jobs)) for i in range(min(jobs, R))]
+            t0 = time.monotonic()
+            with ctx.Pool(processes=len(chunks)) as pool:
+                pieces = pool.map(_product_chunk, chunks)
+            _FST.clear()
+            enc = np.empty((R * (R + 1) // 2, len(half)), dtype=np.int64)
+            for part in pieces:
+                for ia, arr in part:
+                    enc[self.pairidx(ia, ia):self.pairidx(ia, R - 1) + 1] = arr
+            say(f'  {len(chunks)} forked workers built {enc.size} canonical forms '
+                f'[{time.monotonic()-t0:.1f} s]')
+            # orbit numbering: 0 is the constant, then every canonical form the table holds, sorted by
+            # (degree, tuple).  Deterministic and independent of the order the workers finished in.
+            uniq = np.unique(enc)
+            self.list = [()] + sorted((dec_mono(int(v), n) for v in uniq), key=lambda m: (len(m), m))
+            self.index = {m: i for i, m in enumerate(self.list)}
+            orb = np.array([self.index[dec_mono(int(v), n)] for v in uniq], dtype=np.int32)
+            Fh = orb[np.searchsorted(uniq, enc)]           # uniq is sorted, every entry of enc is in it
+        self._Fh = Fh
+        # F[i][j] as the plain sequence the exact accumulation indexes, sharing ONE array per pair
+        import array as _array
+        rowarr = [_array.array('i', Fh[pi][self.hidx].tolist()) for pi in range(Fh.shape[0])]
+        self.F = [[rowarr[self.pairidx(min(i, j), max(i, j))] for j in range(self.R)]
+                  for i in range(self.R)]
+        if cache and not os.path.exists(cache):
+            self._save_cache(cache)
+
+    def pairidx(self, ia, ib):
+        """the row of the half-range table holding the pair (ia, ib) with ia <= ib."""
+        R = self.R
+        return ia * R - ia * (ia - 1) // 2 + (ib - ia)
+
+    def _check_symmetries(self, trials=300):
+        """the two identities the quarter-size table rests on, on random (ia, ib, t).  A wrong table
+        could only WEAKEN U (plan §C.3) -- this guards the bound's quality, not its validity."""
+        import random
+        rng = random.Random(20260921)
+        for _ in range(trials):
+            ia, ib, t = rng.randrange(self.R), rng.randrange(self.R), rng.randrange(self.n)
+            a, b, mt = self.reps[ia], self.reps[ib], self.SUB[t][0]
+            f1 = self.canon(a + tuple(self.ADD[t][y] for y in b))
+            if f1 != self.canon(b + tuple(self.ADD[t][y] for y in a)):
+                raise SystemExit('F[ib][ia][t] != F[ia][ib][t]: the product table\'s swap symmetry fails')
+            if f1 != self.canon(a + tuple(self.ADD[mt][y] for y in b)):
+                raise SystemExit('F[ia][ib][-t] != F[ia][ib][t]: the table\'s shift symmetry fails')
+        say(f'  the two product-table symmetries hold on {trials} random (ia, ib, t)')
+
+    def _save_cache(self, cache):
+        os.makedirs(os.path.dirname(cache), exist_ok=True)
+        qb, qk, qv, qp = [], [], [], [0]
+        for base, d in self._qmemo.items():
+            qb.append(enc_mono(base, self.n))
+            qk.extend(d.keys())
+            qv.extend(d.values())
+            qp.append(len(qk))
+        tmp = cache + '.part'
+        np.savez(tmp, p=self.p, nhalf=len(self.half), Fh=self._Fh,
+                 orbits=np.array([enc_mono(m, self.n) for m in self.list], dtype=np.int64),
+                 qb=np.array(qb, dtype=np.int64), qk=np.array(qk, dtype=np.int32),
+                 qv=np.array(qv, dtype=np.int64), qp=np.array(qp, dtype=np.int64))
+        os.replace(tmp + '.npz', cache)
+        say(f'build cache written: {cache} ({os.path.getsize(cache)/1e6:.0f} MB)')
+
+    def _moment_blocks_fast(self):
+        """the moment blocks' NAMES and sizes only: their entries are never materialised as tuples
+        (52 million of them at p = 19).  assemble_fast reads self._Fh instead."""
+        self.blocks.append(('M2[u=0]', self.R + 1, None))
+        for u in self.ureps:
+            self.blocks.append((f'M2[u={u}]', self.R, None))
+
+    def _q_blocks_fast(self):
+        """the q localiser, grouped by canon((0, t)): Q((0,t)) depends on t only through it, and at
+        p = 19 the 361 shifts fall into a dozen classes."""
+        n = self.n
+        cls = {}
+        for t in range(n):
+            cls.setdefault(self.canon((0, t)), []).append(t)
+        acc = {}
+        for base, ts in cls.items():
+            w = len(ts) / n
+            for k, v in self.q_form(base).items():
+                acc[k] = acc.get(k, 0.0) + w * v
+        ent = ([(0, 0, k, w) for k, w in self.Q_empty.items()]
+               + [(0, 1, k, w) for k, w in self.Q_0.items()]
+               + [(1, 1, k, w) for k, w in acc.items()])
+        self.blocks.append(('locq[u=0]', 2, ent))
+        for u in self.ureps:
+            cosv = self.cosv[u]
+            acc = {}
+            for base, ts in cls.items():
+                w = float(cosv[ts].sum())
+                if w == 0.0:
+                    continue
+                for k, v in self.q_form(base).items():
+                    acc[k] = acc.get(k, 0.0) + w * v
+            self.rows.append(('locq', u, {k: v for k, v in acc.items() if abs(v) > 1e-13}))
 
     # -- the relaxation ----------------------------------------------------------------------------
     def _moment_blocks(self):
@@ -369,7 +596,9 @@ class Build:
 
 # ----------------------------------------------------------------------------- solve
 
-def assemble_and_solve(B, args):
+def assemble_reference(B, args):
+    """the constraint matrix, one Python tuple per nonzero.  The path the certificates at 7 and 11
+    came from; `assemble_fast` is the same matrix built in numpy, and --twin-build compares them."""
     rows, cols, vals, bvec, cones = [], [], [], [], []
     r = 0
     if B.eq_rows:
@@ -416,7 +645,11 @@ def assemble_and_solve(B, args):
     qobj = np.zeros(B.K - 1)
     qobj[B.idx((0,)) - 1] = -float(B.n)
     say(f'assembled: {A.shape}, nnz {A.nnz} [{time.monotonic()-T0:.1f} s]')
+    return A, b, qobj, block_off, row_off
 
+
+def assemble_and_solve(B, args):
+    A, b, qobj, block_off, row_off = assemble_reference(B, args)
     t1 = time.monotonic()
     if args.solver == 'clarabel':
         import clarabel
@@ -449,6 +682,177 @@ def assemble_and_solve(B, args):
     out['threads'] = args.threads
     out['solver_eps'] = args.eps
     return out, zdual, block_off, row_off
+
+
+# ----------------------------------------------------------------------- the fast assembly and the chunked solve
+
+def assemble_fast(B, args):
+    """the constraint matrix built straight from the half-range product table, in numpy.
+
+    The reference path materialises one Python tuple per nonzero -- 52 million of them at p = 19, about
+    4 GB of tuples before scipy sees a number.  This one never leaves numpy.  It is the SAME matrix:
+    --twin-build compares the two at p = 7 and p = 11, entry by entry.
+
+    Both symmetries are used here: the table holds only t <= -t, and a shift t != 0 is counted twice
+    because F(a,a',-t) = F(a,a',t) and cos(2*pi*<u,-t>/p) = cos(2*pi*<u,t>/p)."""
+    n, R, nh = B.n, B.R, len(B.half)
+    SQ2 = math.sqrt(2.0)
+    npair = R * (R + 1) // 2
+    t0 = time.monotonic()
+    mult = np.array([1.0 if t == 0 else 2.0 for t in B.half])
+    halfarr = np.array(B.half)
+    NB = 1 + len(B.ureps)
+    Wm = np.empty((NB, nh))
+    Wm[0] = mult / n
+    for bi, u in enumerate(B.ureps):
+        Wm[bi + 1] = mult * B.cosv[u][halfarr]
+
+    IA = np.empty(npair, dtype=np.int64)
+    IB = np.empty(npair, dtype=np.int64)
+    for ia in range(R):
+        s = B.pairidx(ia, ia)
+        IA[s:s + R - ia] = ia
+        IB[s:s + R - ia] = np.arange(ia, R)
+
+    UK = np.empty(npair * nh, dtype=np.int32)
+    CO = np.empty((NB, npair * nh))
+    cnt = np.empty(npair, dtype=np.int64)
+    Fh, m = B._Fh, 0
+    for pi in range(npair):
+        f = Fh[pi]
+        order = np.argsort(f, kind='stable')
+        sf = f[order]
+        starts = np.concatenate(([0], np.flatnonzero(sf[1:] != sf[:-1]) + 1))
+        g = starts.size
+        UK[m:m + g] = sf[starts]
+        CO[:, m:m + g] = np.add.reduceat(Wm[:, order], starts, axis=1)
+        cnt[pi] = g
+        m += g
+    UK, CO = UK[:m], CO[:, :m]
+    say(f'  grouped {npair} representative pairs into {m} (pair, orbit) cells '
+        f'[{time.monotonic()-t0:.1f} s]')
+
+    Rw, Cw, Vw, bparts = [], [], [], []
+    r = len(B.rows)                     # the scalar rows come first (no equality rows on this path)
+    row_off, block_off = 0, []
+    # -- the scalar rows
+    rr, rc, rv, rb = [], [], [], np.zeros(len(B.rows))
+    for i, (_, _, e) in enumerate(B.rows):
+        for k, w in e.items():
+            if k == 0:
+                rb[i] += w
+            else:
+                rr.append(i); rc.append(k - 1); rv.append(-w)
+    Rw.append(np.array(rr, dtype=np.int64)); Cw.append(np.array(rc, dtype=np.int64))
+    Vw.append(np.array(rv)); bparts.append(rb)
+    repcol = np.array([B.idx(a) for a in B.reps], dtype=np.int64)
+
+    for b in range(NB):
+        d = R + 1 if b == 0 else R
+        ioff = 1 if b == 0 else 0
+        block_off.append(r)
+        i, j = IA + ioff, IB + ioff
+        posv = i * d - i * (i - 1) // 2 + (j - i)
+        scv = np.where(IA == IB, 1.0, SQ2)
+        rowv = np.repeat(posv, cnt)
+        valv = np.repeat(scv, cnt) * CO[b]
+        isconst = UK == 0                       # (never fires: a product of two representatives has
+        keep = ~isconst                         #  degree >= 2, so it is never the constant monomial)
+        if b:
+            keep &= np.abs(CO[b]) > 1e-13       # the reference drops these from the character blocks
+        bb = np.zeros(d * (d + 1) // 2)
+        if isconst.any():
+            np.add.at(bb, rowv[isconst], valv[isconst])
+        Rw.append(rowv[keep] + r); Cw.append((UK[keep] - 1).astype(np.int64)); Vw.append(-valv[keep])
+        if b == 0:                              # the constant row of the trivial-character block
+            bb[0] += 1.0
+            p0 = np.arange(1, R + 1)            # pos(0, 1 + ia) = 1 + ia
+            Rw.append(p0 + r); Cw.append(repcol - 1); Vw.append(np.full(R, -SQ2))
+        bparts.append(bb)
+        r += d * (d + 1) // 2
+    # -- the small q block, entry by entry
+    for name, d, ent in B.blocks[NB:]:
+        block_off.append(r)
+        bb = np.zeros(d * (d + 1) // 2)
+        er, ec, ev = [], [], []
+        for i, j, k, w in ent:
+            if i > j:
+                i, j = j, i
+            sc = 1.0 if i == j else SQ2
+            pos = i * d - i * (i - 1) // 2 + (j - i)
+            if k == 0:
+                bb[pos] += sc * w
+            else:
+                er.append(r + pos); ec.append(k - 1); ev.append(-sc * w)
+        Rw.append(np.array(er, dtype=np.int64)); Cw.append(np.array(ec, dtype=np.int64))
+        Vw.append(np.array(ev)); bparts.append(bb)
+        r += d * (d + 1) // 2
+
+    A = sp.csc_matrix((np.concatenate(Vw), (np.concatenate(Rw), np.concatenate(Cw))),
+                      shape=(r, B.K - 1))
+    A.sum_duplicates()
+    bv = np.concatenate(bparts)
+    qobj = np.zeros(B.K - 1)
+    qobj[B.idx((0,)) - 1] = -float(B.n)
+    say(f'assembled: {A.shape}, nnz {A.nnz} [{time.monotonic()-T0:.1f} s, {rss_mb()} MB]')
+    return A, bv, qobj, block_off, row_off
+
+
+def solve_scs(B, A, bv, qobj, args):
+    """SCS, optionally in warm-started chunks with the iterate saved after every one.
+
+    If this process dies at any instant the relaunch redoes: the build (seconds, from --cache-dir),
+    the assembly, and the iterations since the last checkpoint (at most --chunk-iters).
+    Resume command: the same command line -- --solve-ckpt is reloaded when it exists."""
+    import scs
+    cone = dict(z=0, l=len(B.rows), s=[d for _, d, _ in B.blocks])
+    kw = dict(eps_abs=args.eps, eps_rel=args.eps, verbose=False)
+    if args.linear_solver:
+        kw['linear_solver'] = args.linear_solver
+    t1 = time.monotonic()
+    if not args.chunk_iters:
+        sv = scs.SCS(dict(A=A, b=bv, c=qobj), cone, max_iters=args.max_iters, **kw)
+        res = sv.solve()
+        done, info = int(res['info']['iter']), res['info']
+    else:
+        x0 = y0 = s0 = None
+        done = 0
+        if args.solve_ckpt and os.path.exists(args.solve_ckpt):
+            z = np.load(args.solve_ckpt)
+            x0, y0, s0, done = z['x'], z['y'], z['s'], int(z['iters'])
+            print(f'[scs] RESUMED from {args.solve_ckpt}: {done} iterations already done', flush=True)
+        sv = scs.SCS(dict(A=A, b=bv, c=qobj), cone, max_iters=args.chunk_iters, **kw)
+        chunks, res = 0, None
+        while done < args.max_iters:
+            t2 = time.monotonic()
+            res = (sv.solve(warm_start=True, x=x0, y=y0, s=s0) if x0 is not None else sv.solve())
+            info = res['info']
+            x0, y0, s0 = res['x'], res['y'], res['s']
+            done += int(info['iter']); chunks += 1
+            if args.solve_ckpt:
+                os.makedirs(os.path.dirname(os.path.abspath(args.solve_ckpt)), exist_ok=True)
+                np.savez(args.solve_ckpt + '.part', x=x0, y=y0, s=s0, iters=done)
+                os.replace(args.solve_ckpt + '.part.npz', args.solve_ckpt)
+            dt = time.monotonic() - t2
+            print(f'[scs] chunk {chunks}: +{info["iter"]} it ({done} total), {dt:.0f} s '
+                  f'({dt/max(1,int(info["iter"])):.3f} s/it, {args.linear_solver or "default"}), '
+                  f'pobj {-info["pobj"]:.6f} dobj {-info["dobj"]:.6f} res_pri {info["res_pri"]:.2e} '
+                  f'res_dual {info["res_dual"]:.2e} gap {info["gap"]:.2e} status {info["status"]}',
+                  flush=True)
+            st = info['status'].lower()
+            # SCS calls every chunk that reaches its cap "solved (inaccurate - reached max_iters)" --
+            # the cap IS the chunk size -- so only a clean "solved" ends the loop.
+            if st.startswith('solved') and 'inaccurate' not in st:
+                break
+            if 'reached max_iters' not in st and not st.startswith('solved'):
+                raise SystemExit(f'[scs] status {info["status"]} -- stopping without a value')
+            if args.stop_after_chunks and chunks >= args.stop_after_chunks:
+                raise SystemExit(f'[scs] stopping after {chunks} chunks (control); the checkpoint '
+                                 f'{args.solve_ckpt} holds {done} iterations. Resume: the same command.')
+    out = dict(value=-info['pobj'], dual_value=-info['dobj'], status=info['status'],
+               iterations=done, solver=f'scs {scs.__version__}',
+               solve_s=round(time.monotonic() - t1, 1), threads=args.threads, solver_eps=args.eps)
+    return out, np.array(res['y'])
 
 
 # ----------------------------------------------------------------------------- round to an exact certificate
@@ -762,10 +1166,143 @@ def record(args, solve_info, info, cert_path, cert_sha, kept=None):
     return rec
 
 
+# ----------------------------------------------------------------------------- the two controls
+
+def _linear_forms(B, A, bv, vals):
+    """every row of the relaxation evaluated at one moment functional, in the row order the SOLVER
+    sees.  `vals` maps a canonical monomial to a number, so the same functional can be fed to two
+    builds that number their orbits differently."""
+    y = np.array([vals[m] for m in B.list[1:]])
+    return bv - A @ y
+
+
+def twin_build(args):
+    """control: the fast build against the reference build of the SAME relaxation.
+
+    Orbit numbering differs between the two on purpose -- the fast path numbers deterministically by
+    (degree, tuple), the reference by order of discovery -- so nothing is compared by index.  Compared
+    instead: the orbit sets, the product table and the q forms as canonical monomials, the scalar rows
+    as (kind, payload) -> {canonical monomial: coefficient}, and every row of the assembled matrix
+    evaluated at one pseudo-random moment functional."""
+    import random
+    p = args.p
+    print(f'--- twin-build at p = {p}: reference against fast ---', flush=True)
+    t0 = time.monotonic()
+    ref = Build(p, c=args.c)
+    fast = Build(p, c=args.c, fast=True, jobs=args.build_jobs, cache_dir=None)
+    bad = []
+    if set(ref.list) != set(fast.list):
+        bad.append(f'orbit sets differ: reference {len(ref.list)}, fast {len(fast.list)}, '
+                   f'{len(set(ref.list) ^ set(fast.list))} symmetric difference')
+    if ref.list[0] != () or fast.list[0] != ():
+        bad.append('orbit 0 is not the constant monomial in one of the builds')
+    nbad = sum(1 for ia in range(ref.R) for ib in range(ref.R) for t in range(ref.n)
+               if ref.list[ref.F[ia][ib][t]] != fast.list[fast.F[ia][ib][t]])
+    if nbad:
+        bad.append(f'product table: {nbad} of {ref.R*ref.R*ref.n} entries differ')
+    for nm, a, b in (('Q_empty', ref.Q_empty, fast.Q_empty), ('Q_0', ref.Q_0, fast.Q_0)):
+        if {ref.list[k]: v for k, v in a.items()} != {fast.list[k]: v for k, v in b.items()}:
+            bad.append(f'{nm} differs')
+    nq = sum(1 for t in range(ref.n)
+             if {ref.list[k]: v for k, v in ref.Q_t[t].items()}
+             != {fast.list[k]: v for k, v in fast.Q_t[t].items()})
+    if nq:
+        bad.append(f'q forms: {nq} of {ref.n} shifts differ')
+
+    def rowkey(B, row):
+        kind, payload, e = row
+        key = (kind, (tuple(payload[0]), tuple(payload[1])) if kind in ('nonneg', 'le') else payload)
+        return key, {B.list[k]: v for k, v in e.items()}
+    rk = dict(rowkey(ref, r) for r in ref.rows)
+    fk = dict(rowkey(fast, r) for r in fast.rows)
+    if set(rk) != set(fk):
+        bad.append(f'scalar row sets differ: reference {len(rk)}, fast {len(fk)}')
+    else:
+        off = sum(1 for k in rk if any(abs(rk[k].get(m, 0.0) - fk[k].get(m, 0.0)) > 1e-12
+                                       for m in set(rk[k]) | set(fk[k])))
+        if off:
+            bad.append(f'{off} scalar rows differ in their coefficients')
+    if [(nm, d) for nm, d, _ in ref.blocks] != [(nm, d) for nm, d, _ in fast.blocks]:
+        bad.append('block names/sizes differ')
+
+    A1, b1, c1, off1, _ = assemble_reference(ref, args)
+    A2, b2, c2, off2, _ = assemble_fast(fast, args)
+    rng = random.Random(20260921)
+    vals = {m: 1.0 if m == () else rng.uniform(-1.0, 1.0) for m in ref.list}
+    v1, v2 = _linear_forms(ref, A1, b1, vals), _linear_forms(fast, A2, b2, vals)
+    if A1.shape != A2.shape:
+        bad.append(f'matrix shapes differ: {A1.shape} against {A2.shape}')
+    else:
+        sr = len(ref.rows)
+        d1 = float(np.max(np.abs(np.sort(v1[:sr]) - np.sort(v2[:sr]))))
+        d2 = float(np.max(np.abs(v1[sr:] - v2[sr:])))
+        print(f'  linear forms at a random moment functional: scalar rows agree to {d1:.2e}, '
+              f'block rows to {d2:.2e}', flush=True)
+        if d1 > 1e-9 or d2 > 1e-9:
+            bad.append(f'assembled rows differ: scalar {d1:.2e}, blocks {d2:.2e}')
+        if abs(float(c1 @ np.array([vals[m] for m in ref.list[1:]]))
+               - float(c2 @ np.array([vals[m] for m in fast.list[1:]]))) > 1e-9:
+            bad.append('objective vectors differ')
+    print(f'  orbits {len(ref.list)}; product table {ref.R*ref.R*ref.n} entries; '
+          f'scalar rows {len(ref.rows)}; matrix {A1.shape} nnz {A1.nnz}/{A2.nnz} '
+          f'[{time.monotonic()-t0:.1f} s]', flush=True)
+    if bad:
+        print('TWIN FAILED:')
+        for s in bad:
+            print('  ' + s)
+        return 1
+    print(f'TWIN PASSED at p = {p}: the fast build is the reference build, in every row.')
+    return 0
+
+
+def regression(args):
+    """control: reproduce the committed certificate at this p by the documented default command and
+    compare every key except the two an edit to this file must move (producer.utc, which changes on
+    every run, and producer.tool_sha256, which is this file's own digest)."""
+    path = os.path.join(REPO, 'data', 'fs66', 'b1', f'cert-p{args.p}.json')
+    if not os.path.exists(path):
+        print(f'ERROR: {path} does not exist; there is nothing to regress against.')
+        return 2
+    want = json.load(open(path))
+    B = Build(args.p, c=2.0)
+    solve_info, zdual, block_off, row_off = assemble_and_solve(B, args)
+    print(f'float reading {solve_info["value"]:.9f} ({solve_info["iterations"]} iterations)', flush=True)
+    results = run_scan(B, zdual, block_off, row_off, args,
+                       [float(s) for s in args.scan_shifts.split(',')],
+                       [int(d) for d in args.scan_digits.split(',')])
+    ok = [(c, i) for c, i in results if c is not None]
+    got = min(ok, key=lambda ci: Fraction(ci[1]['U_num'], ci[1]['scale']))[0]
+    diff = []
+    for k in sorted(set(want) | set(got)):
+        if k == 'producer':
+            for kk in sorted(set(want[k]) | set(got[k])):
+                if kk in ('utc', 'tool_sha256'):
+                    continue
+                if want[k].get(kk) != got[k].get(kk):
+                    diff.append(f'producer.{kk}: committed {want[k].get(kk)!r}, rebuilt {got[k].get(kk)!r}')
+        elif want.get(k) != got.get(k):
+            diff.append(f'{k}: differs' + ('' if k in ('weights', 'blocks', 'rows')
+                                           else f' (committed {want.get(k)!r}, rebuilt {got.get(k)!r})'))
+    print(f'committed U_num {want["U_num"]} / {want["scale"]}')
+    print(f'rebuilt   U_num {got["U_num"]} / {got["scale"]}')
+    if diff:
+        print(f'REGRESSION FAILED at p = {args.p}: {len(diff)} keys differ')
+        for s in diff:
+            print('  ' + s)
+        return 1
+    print(f'REGRESSION PASSED at p = {args.p}: every key of {os.path.relpath(path, REPO)} is '
+          f'reproduced except producer.utc and producer.tool_sha256.')
+    return 0
+
+
 # ----------------------------------------------------------------------------- main
 
 def main():
     args = ARGS
+    if args.twin_build:
+        return twin_build(args)
+    if args.regression:
+        return regression(args)
     # A warning must be louder than the claim it qualifies, and must survive --quiet: these two flags
     # make the run a CONTROL, and the bound printed at the end is then about a different object.
     control = []
@@ -779,8 +1316,16 @@ def main():
     for c in control:
         print(f'*** CONTROL RUN, NOT A CERTIFICATE: {c} ***', flush=True)
 
-    B = Build(args.p, c=args.c, with_q=not args.drop_q, edge_row=args.edge_row, pure=args.pure)
-    solve_info, zdual, block_off, row_off = assemble_and_solve(B, args)
+    B = Build(args.p, c=args.c, with_q=not args.drop_q, edge_row=args.edge_row, pure=args.pure,
+              fast=args.fast, jobs=args.build_jobs, cache_dir=args.cache_dir)
+    if args.fast:
+        if B.eq_rows:
+            raise SystemExit('--fast does not carry equality rows; --pure is a reference-path control')
+        A, bv, qobj, block_off, row_off = assemble_fast(B, args)
+        solve_info, zdual = solve_scs(B, A, bv, qobj, args)
+        del A, bv, qobj
+    else:
+        solve_info, zdual, block_off, row_off = assemble_and_solve(B, args)
     # the reading is a RESULT, not narration: it survives --quiet, or a control prints nothing and
     # its silence reads like a run that never happened.
     print(f'FLOAT READING (untrusted, double precision): value {solve_info["value"]:.6f} '
