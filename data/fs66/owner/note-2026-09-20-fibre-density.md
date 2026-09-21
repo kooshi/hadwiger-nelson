@@ -89,5 +89,14 @@ pinned (`ω = 3` at 11), which leaves no colour symmetry at four colours.
 
 **Controls, run and passed:** `(7, 3)` UNSATISFIABLE — the true answer; `(7, 4)` SATISFIABLE, decoded and **verified by
 `tools/fs66_owner_verify.py`** (class sizes 583, 582, 615, 621 — not multiples of 49, so a colouring the solver was never handed
-and that is not pulled back from level one). Both in seconds, single-threaded CaDiCaL. The probes at `(11, 5)` and `(11, 4)`:
-appended below when they finish.
+and that is not pulled back from level one). Both in seconds, single-threaded CaDiCaL. **The probes at 11** (single-threaded CaDiCaL from the toolchain, this encoder):
+
+| ask | pin | verdict | cost |
+|---|---|---|---|
+| `(11, 4)` — the pilot | triangle `(0,0), (0,1), (47,61)` | **UNSATISFIABLE** | 0.97 s, 1,279 conflicts |
+| `(11, 4)` | **none at all** | **UNSATISFIABLE** | 56 s, 83,102 conflicts — so the refusal is no artefact of a pin |
+| `(11, 5)` — the control | triangle | SATISFIABLE in 775 s; decoded and **VERIFIED** on all 966,306 edges by `tools/fs66_owner_verify.py`; class sizes 2683, 2904, 2787, 3000, 3267 — not pulled back, never handed over | |
+
+The planner reached the same refusal first and independently (plain encoding, 1.7 s; four solvers on the bare core; `data/fs66/planner/`), and caught that my first `(11, 4)` probe had never run: `cd X && (A) & (B) &` put the second subshell in the repository root, where its input did not exist, and it 'finished' in 0 s saying nothing — this file's own failure mode, a probe that reports nothing because it could not run. **`χ(UD(ℤ/121, 2)) = 5` on the solvers' word: the ceiling does not drop at level two of 11.** Not certified, not kernel; that is the plan's phase 1.
+
+**A consequence for every larger ask [hand]:** a resolution refutation of level two projects onto level one — substitute `c[v, a] ↦ c[x(v), a]` and every line variable `z[x, ·, ·, a] ↦ c[x, a]`; clauses go to clauses or to tautologies — so **level two's shortest refutation is at least as long as level one's.** Five colours at 23 was never decided by CDCL at level one (G56), so `UD(ℤ/529, 2)` at five cannot be refused by CDCL unless level one is first; there the all-levels inequality of §2 is the only refusal-side instrument in sight.
