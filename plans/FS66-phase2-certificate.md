@@ -1,0 +1,467 @@
+# FS-66 Phase 2 — the all-levels certificate. Subplan
+
+*Opened 2026-09-20 by the Phase-2 planner (one Fable agent). The implementer arrives with no memory of the planner or of any
+conversation: **everything needed is in this file or at a path it names.** The milestone's main plan is
+`plans/FS66-residue-tower-drop.md` (read its §0, §G, §S2, §S4–S5 for the mathematics this phase certifies; this file replaces
+its §I3, §I4 and "Phase 2" checklist, which were written before the measurements below). Measurements and prototype outputs:
+`data/fs66/b1/` (its `README.md` is the record this file cites as §M). Read order for a cold reader: §0, §M, §C, §S, then your
+phase in §H.*
+
+---
+
+## 0. What this phase is, in plain language, and what the planner found on its first evening
+
+**The question.** For a prime `p ≡ 3 (mod 4)` the unit-distance graphs `G_k` over the rings `ℤ/p^k` (points `(a, b)` modulo `p^k`,
+adjacent when the squared differences sum to 1) form a tower `… → G₃ → G₂ → G₁`, and a number field's plane that reduces into the
+tower needs at most `χ(G_k)` colours for every `k`. At `p = 11`, levels one, two and three each refuse four colours — but a refusal
+at one level says nothing about the next. **This phase produces one finite object that refuses four colours at every level at
+once**, and a small independent program that checks it.
+
+**The instrument** (the owner's inequality, main plan §S4; re-derived in §S below). If `I` is an independent set of `G_k` and
+`φ(x) ∈ [0,1]` is the share of the fibre over the level-one point `x` that `I` fills, then `φ` satisfies one quadratic inequality
+that does not mention `k`:
+
+> `q(φ) := 2·Σ_x φ_x(1 − φ_x) − Σ_x Σ_{s ∈ S} φ_x φ_{x+s} ≥ 0`  (`S` = the `p + 1` unit vectors of level one).
+
+So `B₁(p) := max {Σφ : φ ∈ [0,1]^{p²}, q(φ) ≥ 0}` bounds `α(G_k)/p^{2(k−1)}` for every `k`, and **`m·B₁(p) < p²` refuses `m` colours
+at every level.** Four colours at 11 need `B₁(11) < 30.25`. `B₁` is a non-convex quadratic programme in 121 variables; what is
+wanted is a **certificate** of an upper bound `U`: an explicit algebraic identity plus positive definiteness of a dozen small
+rational matrices, checkable in exact arithmetic by a program that trusts no solver.
+
+**What the planner measured (§M).** The second-level moment (sum-of-squares) relaxation reads **14.01 at 7** (need < 16.33) and
+**28.2016 at 11** (need < 30.25) on two solver code bases — a margin of 2.05, 6.8 % — and needs far less than was sketched: no
+edge or triangle cuts, no matrix localisers of the box, eleven blocks of size ≤ 63, **83 seconds on two CPU threads in ordinary
+double precision.** A prototype then rounded the solver's dual to an exact rational identity: **`U = 14.0176` at 7 and
+`U = 28.2251` at 11, every block positive definite by exact integer elimination, 1.5 s of exact arithmetic.** That prototype
+checks its own work with its own bookkeeping, so **it is a measurement of the design and not a certificate.** What is left — and
+it is the whole value of the phase — is the trust engineering: the independent checker, its controls, the soundness page, the
+records. **No GPU, no Julia, no extended precision is needed at 11** (said plainly because all three were offered).
+
+---
+
+## §G. Words
+
+| word | meaning here |
+|---|---|
+| **owner / planner / implementer** | the session that briefs and reviews by artifact / this file's author / you |
+| **`V`, `n`, `S`, `G₁`** | the level-one plane `𝔽_p²`, `n = p²`, the unit circle `{s : s₁² + s₂² = 1}` (`p + 1` points), and `G₁ = Cay(V, S)` |
+| **point index** | the point `(a, b)` is the integer `a·p + b`; the origin is `0`. Every file and both tools use this numbering |
+| **monomial** | a multiset of at most four points, written as a sorted list of point indices; `[]` is the constant 1, `[x, x]` is `φ_x²` |
+| **`Γ`** | the symmetry group: all translations of `V`, the `p + 1` rotations `z ↦ s·z` (`s ∈ S`, `V = 𝔽_p[i]`) and those composed with conjugation `(a, b) ↦ (a, −b)`; order `2p²(p+1)` — 784 at 7, 2,904 at 11. Every element preserves `S`, hence `q`, the box and `Σφ` |
+| **canonical form** `canon(m)` | the least (as a sorted tuple) image of the monomial `m` under `Γ`; computed by trying each point of `m` as the new origin and each of the `2(p+1)` linear maps. **It is always a genuine image `γ·m`** — the property soundness uses (§K.2) |
+| **moment functional `y`** | a `Γ`-invariant real function on monomials with `y([]) = 1`; the symmetrised moments `ȳ` of a feasible `φ` are one (§S.3) |
+| **representatives** | the `1 + (n+1)/2` monomials `φ_0` and `φ_{−h}φ_h` (one per class `{h, −h}`, in order of the smaller index; `h = 0` gives `φ_0²`): every monomial of degree 1 or 2 is a unique translate `τ_x(a)` of a unique representative `a`. 26 at 7, 62 at 11 |
+| **`F(a, a′, t)`** | `canon(a · τ_t(a′))` for representatives `a, a′` and a shift `t ∈ V` — the table through which the big moment matrix is read |
+| **`Q(m)`** | the linear form "moment of `q · m`": `2·Σ_x y(m ∪ x) − 2·Σ_x y(m ∪ x ∪ x) − Σ_x Σ_{s∈S} y(m ∪ x ∪ (x+s))` |
+| **box rows** | the scalar inequalities `y(m) ≥ 0` and `y(m ∖ x) − y(m) ≥ 0` (`x` a point of `m`): moments of products of `φ_x ≥ 0` and `1 − φ_x ≥ 0` |
+| **cascade** | the producer's rule that absorbs any leftover of either sign into box rows, down to the constant, so that `U` is computed, never guessed (§C.4) |
+| **trust word** | main plan §D's closed list, extended by one: `CERTIFIED (fs66_b1_cert_check)` — the checker's word plus the named hand steps of §S, never the kernel |
+
+---
+
+## §M. What has been measured (2026-09-20, planner; full tables and logs: `data/fs66/b1/README.md`)
+
+*Desktop, beside a running Lean build, 2–8 threads. Single runs: prices, not benchmarks. Floating point unless
+marked. Venv: **`~/venvs/fs66`** (outside `build/`; created with `--system-site-packages`, then `pip install clarabel scs`).*
+
+| # | what | result |
+|---|---|---|
+| B1 | full second-level relaxation at 7 (moment blocks, 50 × 50 localisers of `φ_0`, `1 − φ_0` and an edge cut, `q` localiser, box rows), `c = 2` | **14.0034** (need < 16.33), Clarabel 6.7 s. **GO.** |
+| B2 | controls at 7: `q` dropped → **24.5000**; `φ² = φ` added (the 0/1 problem) → **14.0000** `= α(G₁)` | both as they must be |
+| B3 | ablations at 7: no box rows 14.345; `q` only as the scalar `L(q) ≥ 0` 14.065; no edge localiser 14.0039; no box rows *and* no box localisers **1649.7** (the box rows carry the box) | which parts work |
+| B4 | **the minimal relaxation** — moment blocks + `q` localiser + box rows, nothing else — at 7 | **14.0149** (Clarabel 2.9 s; SCS 14.0149, 2.0 s) |
+| B5 | the minimal relaxation at **11**: 3,759 moment variables, blocks 63 + 10 × 62 + a 2 × 2, 18,223 scalar rows | **28.2016** Clarabel (4 threads, 635 s, 7.3 GB); **28.2015** SCS (2 threads, **82 s**). Need < 30.25: margin **2.05** |
+| B6 | the un-reduced 122 × 122 box localisers at 11 | killed at 6 min: 24 GB, no first iteration. Not needed (B4–B5) |
+| B7 | local search at `c = 2` exactly, with the cuts | 7: **14.0000** (60 starts); 11: **28.0000** (200 starts; local maxima 27.998, 27.986, …; fractional *ties* at 28, nothing above). Nulls at a budget |
+| B8 | **exact-rounding prototype** (`tools/fs66_b1_probe.py --round 12 --wdigits 9 --shift 1e-6`), duals from SCS at `1e-7` | 7: **`U = 14.01758`**; 11: **`U = 28.22513`** (`4U = 112.90 < 121`); all blocks positive definite exactly; 0.1 s / 1.5 s of exact arithmetic. Outputs `proto-cert-p7.json` (87 KB), `proto-cert-p11.json` (775 KB, 3,838 rows) |
+| B9 | how the rounding fails when it fails | never on the identity; on **positive definiteness**: 6 digits, or no diagonal shift, and blocks fail; a shift applied *after* the basis rescaling cost 0.9 in `U` at 7 (apply it in the solver's basis, §R.2) |
+| B10 | one independent control of the prototype's bookkeeping, at 7 | a block's linear form on moments averaged over all 784 group elements equals the brute-force quadratic form to 9 digits, at a pure independent set and at a random fractional feasible point |
+| B11 | the tightened relaxation at 11 (every box product of degree ≤ 4 and the edge/triangle cuts times monomials of degree ≤ 3, as scalar rows) — at 7 this reads **14.0000** | *running when this file was committed; recorded in `data/fs66/b1/README.md` and §R when it lands. It is a side reading (P-B5), not on the path* |
+
+**Three corrections to what the planner was handed.** (1) *"The relaxation cannot read below the three-point bound, 29.18"* — it
+reads 28.20: the second level is stronger than the triple level; its true floor is the second Lasserre level for `α(G₁)`, between
+28 and 28.20. (2) *"About eleven blocks of size 62–126 and 122 × 122 multiplier blocks for the box, the cuts and `q`"* — the
+blocks are real of size 62–63 (centred representatives make them real), and the 122 × 122 localisers are unnecessary: **the box
+lives in scalar rows and the cuts are not needed at all.** (3) *"An extended-precision interior-point solve is what makes
+rounding easy"* — the margin does; a first-order solver's double-precision dual rounds with a loss of 0.024.
+
+---
+
+## §F. The formulation
+
+**The problem certified is the BARE problem** `B₁(p) = max {Σφ : φ ∈ [0,1]^V, q(φ) ≥ 0}` with `c = 2`, without the edge and
+triangle cuts. Its feasible set contains the feasible set with cuts, so an upper bound for it is an upper bound for the main
+plan's registered quantity (`B₁` with cuts, main plan §S5). Chosen because B3–B5 show the cuts buy nothing the certificate needs,
+and every constraint left out is one fewer thing for a reviewer to believe valid at every level.
+
+**The relaxation** (the producer's business; nothing in it is on the trust surface). Unknowns: one real `y_k` per `Γ`-orbit of
+monomials of degree ≤ 4 (`K` = 495 at 7, 3,760 at 11), `y([]) = 1`. Maximise `n·y([0])` subject to:
+
+1. **the moment matrix is positive semidefinite**, read in the translation-Fourier basis: for the trivial character the matrix on
+   `{1} ∪ {ā}` (`ā` = the average of the translates of representative `a`) with entries `y(a)` and `(1/n)·Σ_t y(F(a,a′,t))`;
+   for one character `u` per nonzero norm class (`p − 1` of them; rotations permute the characters of one class and the blocks
+   are conjugate) the matrix `B_u[a,a′] = Σ_t cos(2π⟨u,t⟩/p)·y(F(a,a′,t))`. Real and symmetric because the representatives are
+   centred and `y` is invariant under `x ↦ −x`, so `F(a,a′,−t) = F(a,a′,t)` (asserted in the probe);
+2. **the localiser of `q`**: the 2 × 2 matrix `[[Q([]), Q([0])], [Q([0]), (1/n)Σ_t Q([0,t])]]` is positive semidefinite, and
+   `Σ_t cos(2π⟨u,t⟩/p)·Q([0,t]) ≥ 0` for each class representative `u`;
+3. **the box rows**: `y(m) ≥ 0` for every orbit, and `y(m ∖ x) − y(m) ≥ 0` for every orbit and every point `x` of its canonical
+   monomial.
+
+Sizes: 7 → blocks 27, 6 × 26, 2; 2,288 scalar rows. 11 → blocks 63, 10 × 62, 2; 18,223 scalar rows. **Available and unused**
+(each only tightens; `tools/fs66_b1_probe.py` has the switches): the box localisers (`--no-boxloc` off), cut localisers, all box
+products (`--sa`), cuts times monomials (`--edge-rows`). If a later prime needs a tighter reading, the scalar-row families come
+first — they cost rows, not matrices, and the certificate's shape (§C) does not change.
+
+---
+
+## §C. The certificate — what exactly it IS
+
+### C.1 The file (`format: "fs66-b1-cert-v1"`, JSON, integers and `"num/den"` strings only — a float anywhere is refused)
+
+```
+{ "format": "fs66-b1-cert-v1", "p": 11, "c": 2,
+  "U": "num/den",                      the bound claimed: every feasible phi has sum(phi) <= U
+  "slack": "num/den",                  lambda_0 >= 0, the multiplier of the trivial row y([]) >= 0 (normally "0")
+  "den": D, "weight_den": W,           positive integers: block entries are integers over D, weights integers over W
+  "blocks": [ {"kind": "trivial",   "R": [[int]]},                       size 1 + #representatives; row 0 is the constant
+              {"kind": "character", "wc": [int]*n, "ws": [int]*n,        two weight vectors on V, by point index
+                                     "R": [[int]], "mu": int}, ... ],    size #representatives; mu >= 0 scales the q term
+  "q0": [[int, int], [int, int]],      the 2x2 multiplier of q on span{1, sum_x phi_x}
+  "rows": [ ["nonneg", m, "num/den"],  multiplier of  y(m) >= 0
+            ["le", m, x, "num/den"] ]  multiplier of  y(m minus one copy of x) - y(m) >= 0;  x must be a point of m
+}
+```
+
+The colour count `m` is **not** in the file: the file proves a bound `U`; whether `U` refuses `m` colours is the checker's
+arithmetic (`m·U < p²`), asked on the command line. `"u"` fields the prototype writes beside `wc`/`ws` are comments and ignored.
+
+### C.2 The identity the checker verifies — (★)
+
+Write `κ_b(t) = Σ_x [wc_b(x)·wc_b(x+t) + ws_b(x)·ws_b(x+t)]` (an integer; the autocorrelation of block `b`'s weights). With
+`a, a′` over representatives, `t, x` over `V`:
+
+```
+T_triv(y) = R₀[0][0]·y([]) + 2n·Σ_a R₀[0][a]·y(a) + n·Σ_{a,a′} R₀[a][a′]·Σ_t y(F(a,a′,t))                       / D
+T_b(y)    = Σ_{a,a′} R_b[a][a′]·Σ_t κ_b(t)·y(F(a,a′,t))  +  mu_b·Σ_t κ_b(t)·Q([0,t])                             / (D·W²)
+T_q0(y)   = q0[0][0]·Q([]) + 2n·q0[0][1]·Q([0]) + n·q0[1][1]·Σ_t Q([0,t])                                       / D
+
+(★)   U·y([]) − n·y([0])  =  T_triv(y) + Σ_b T_b(y) + T_q0(y) + Σ_rows λ_r·row_r(y) + slack·y([])
+```
+
+as an equality of linear forms in the unknowns `y(canon(m))` — coefficient by coefficient over every canonical monomial of degree
+≤ 4, the constant `y([])` included. The checker also verifies: every `R` is symmetric and **positive definite** (exact
+fraction-free elimination, all leading minors > 0); `q0` symmetric with `q0[0][0] ≥ 0`, `q0[1][1] ≥ 0`, `det ≥ 0`; every `mu_b ≥ 0`,
+every `λ_r ≥ 0`, `slack ≥ 0`; every row well-formed.
+
+### C.3 Why each term is nonnegative at a feasible point — and why the weights are NOT trusted
+
+Let `ȳ` be the symmetrised moments of a feasible `φ` (§S.3). `T_b(ȳ)` is `⟨𝒵_b, M(ȳ)⟩ + mu_b·⟨𝒲_b, M_q(ȳ)⟩` where `M(ȳ)` is the
+moment matrix on monomials of degree 1–2 indexed as `(x, a) ↔ τ_x(a)`, `𝒵_b = (wc·wcᵀ + ws·wsᵀ) ⊗ R_b` and
+`𝒲_b = wc·wcᵀ + ws·wsᵀ` on `V`. A Kronecker product of positive semidefinite matrices is positive semidefinite, **whatever the
+integers `wc`, `ws` are**. The producer takes them to be rounded cosines and sines of `2π⟨u,x⟩/p` because that makes `U` small —
+a fact about the producer, exactly as in FS-50 (`plans/FS50-certificate-soundness.md` §7). Wrong weights, a wrong block
+structure, a wrong `F` *in the producer*: each can only weaken `U`, never make a false certificate pass. Likewise the
+representatives need not be "centred" for soundness: any list of monomials of degree ≤ 2 indexes a (possibly repeated)
+principal submatrix of the moment matrix.
+
+### C.4 The cascade — `U` is an output, and the rounding cannot fail to produce an identity
+
+After rounding the blocks and the solver's own row multipliers (negative ones clipped to zero), compute the linear form still
+owed, `need(y) = −n·y([0]) − (all T terms) − (rounded rows)`, and walk the canonical monomials **by decreasing degree**: a
+positive coefficient is paid by `["nonneg", m]`; a negative one by `["le", m, x]` with `x` the last point of `m`, which moves the
+debt to `canon(m ∖ x)`, one degree down. At the constant, `U := −need([])`. Every step is a maximum against zero, so **any**
+rational positive definite blocks yield a valid certificate for *some* `U`; rounding is scored by the bound it proves, never by a
+residual (FS-50 §5's rule, transplanted). Measured loss: 0.0027 at 7, 0.024 at 11 (B8).
+
+---
+
+## §S. Why the certificate proves the statement — the reviewer's page
+
+*Self-contained; the implementer lifts it to `data/fs66/b1/SOUNDNESS.md` and keeps it in step with the checker. The checker
+checks §C.2; this page is what turns §C.2 into the sentence of §ST. Each link is elementary and hand-checkable.*
+
+**S.1 The spectrum above level one (L1).** `G_k = Cay((ℤ/p^k)², S_k)`, `|S_k| = p^{k−1}(p+1)`. For `k ≥ 2` reduction `S_k → S_{k−1}`
+is a surjective homomorphism of the circle groups (Hensel) with fibres `{s(1 + p^{k−1}·i·a) : a ∈ 𝔽_p}` (norm
+`1 + p^{2k−2}a² ≡ 1`). For a character `u` of exact level `k`, summing over `a` gives `0` unless `s̄ ∥ ū` in `𝔽_p²`, which holds for
+at most two `s̄ ∈ S₁`; so at most `2p^{k−1}` terms of modulus 1 survive: `|λ_u(G_k)| ≤ 2p^{k−1}`. A character of exact level `j`,
+`2 ≤ j < k`, has `λ_u(G_k) = p^{k−j}·λ_u(G_j)`, the same bound. Characters of level ≤ 1 are the fibre-constant functions.
+*(Main plan §S4, owner's note §7; checked by FFT at (3; 2–4), (7; 2–3), (11; 2).)*
+
+**S.2 The inequality (L2).** `I` independent in `G_k`, `k ≥ 2`; `φ(x)` = share of the fibre over `x` in `I`. `1_I = Pφ + g`,
+`Pφ` fibre-constant, `g` orthogonal to fibre-constant functions; the adjacency operator preserves both parts. `⟨Pφ, A_k Pφ⟩ =
+p^{3(k−1)}·⟨φ, A₁φ⟩`; `‖g‖² = p^{2(k−1)}·Σφ(1−φ)`; `⟨g, A_k g⟩ ≥ −2p^{k−1}‖g‖²` by S.1. Independence is `⟨1_I, A_k 1_I⟩ = 0`, so
+`⟨φ, A₁φ⟩ ≤ 2Σφ(1−φ)`, i.e. `q(φ) ≥ 0`, and `|I| = p^{2(k−1)}·Σφ`. For `k = 1`, `φ = 1_I` is 0/1 and `q(φ) = −⟨φ,A₁φ⟩ = 0`. So:
+**every independent set of every level gives a feasible `φ` with `|I| = p^{2(k−1)}Σφ`.**
+
+**S.3 Symmetrised moments (L3).** For feasible `φ` put `ȳ(m) = |Γ|⁻¹·Σ_{γ∈Γ} Π_{x∈m} φ(γx)`. Each `γ` preserves `S`, so `φ∘γ` is
+feasible with the same `q` and the same sum. Then: `ȳ([]) = 1`; `n·ȳ([0]) = Σφ` (translations are transitive); `ȳ(γm) = ȳ(m)`;
+`ȳ(m) ≥ 0` and `ȳ(m∖x) − ȳ(m) ≥ 0` (a product of numbers in `[0,1]`, times `1 − ψ_x ≥ 0`); for any positive semidefinite `𝒵`
+indexed by monomials `m_i`, `Σ 𝒵_ij·ȳ(m_i m_j) ≥ 0` (an average of `vᵀ𝒵v`); and with `Q`, `Σ 𝒵_ij·Q(m_i m_j)(ȳ) = q(φ)·Σ 𝒵_ij·ȳ(m_i m_j)
+≥ 0` because `q(φ∘γ) = q(φ) ≥ 0`.
+
+**S.4 The identity (L4).** Evaluate (★) at `y = ȳ`: the left side is `U − Σφ`; every term on the right is `≥ 0` by S.3 and §C.3.
+Hence `Σφ ≤ U` for every feasible `φ`. (★) is checked on canonical monomials; since `canon(m) ∈ Γm` and `ȳ` is `Γ`-invariant,
+equality of the coefficient vectors implies equality at `ȳ`.
+
+**S.5 Positive definiteness (L5).** A symmetric integer matrix whose leading principal minors are all positive is positive
+definite (Sylvester); fraction-free elimination computes exactly those minors.
+
+**S.6 The count (L6).** By S.2 and S.4, `α(G_k) ≤ U·p^{2(k−1)}` for every `k ≥ 1`. An `m`-colouring of `G_k` covers `p^{2k}` points
+with `m` independent sets, so `p^{2k} ≤ m·U·p^{2(k−1)}`, i.e. `p² ≤ mU`. **If `m·U < p²`, no `G_k` is `m`-colourable.** Also, `G_k`
+being vertex-transitive, `χ_f(G_k) = p^{2k}/α(G_k) ≥ p²/U` at every level.
+
+---
+
+## §ST. The statement the certificate licenses, in words — and what it does not say
+
+> **At `p = 11`: for every `k ≥ 1`, every independent set of `UD(ℤ/11^k, 2)` has at most `U·121^{k−1}` points with
+> `U = 28.2251…` (the exact rational in the file); hence no level of the tower is four-colourable, the chromatic number of every
+> level is exactly 5, the clopen chromatic number of `ℤ₁₁²` is 5 (main plan §S2), the fractional chromatic number of every level
+> lies in `[121/U, 121/28] = [4.2869, 4.3215]`, and the supremum of the Haar measure of a measurable independent set of `ℤ₁₁²`
+> lies in `[28/121, U/121] = [0.23140, 0.23327]`.** At `p = 7` the same with `U = 14.0176`, three colours, `χ = 4`,
+> `χ_f ∈ [3.4956, 3.5]`.
+
+Trust word: **`CERTIFIED (fs66_b1_cert_check)` + hand links L1–L6**. Not kernel. The upper halves (`χ ≤ 5`, `α ≥ 28·121^{k−1}`)
+are pull-backs of level one (kernel at 11: `chromaticNumber_finitePlane11`; `α(G₁) = 28` is FS-54's exact value, tools).
+**It does not say:** anything about the plain (non-clopen) `χ(ℚ₁₁²)` or about any number field's plane beyond the ceiling staying
+5 (main plan §S2: the local–global conjecture lives at the link this does not touch); anything at `(23, 5)` (out of reach, main
+plan §Q4); that `B₁ = α(G₁)` (the main plan's §S5 conjecture stays a conjecture — `U` is 0.8 % above 28).
+
+---
+
+## §K. The checker — `tools/fs66_b1_cert_check.py`
+
+**Standard library only; imports nothing from `tools/`; shares no code with the producer or the probe; reads no float.** It is
+written from THIS section and §C, not by porting `tools/fs66_b1_probe.py` — independence of the bookkeeping is the point, and the
+prototype's files are its first test inputs, so a disagreement is informative whichever side is wrong.
+
+### K.1 Interface
+
+```
+fs66_b1_cert_check.py CERT.json --m M        ->  last line, exit status
+fs66_b1_cert_check.py --self-test            ->  one GREEN/RED row per control, exit 0 iff all as designed
+```
+
+Last line is exactly one of: `CERTIFIED: …` (exit 0) — (★) holds, everything is signed and positive definite, **and**
+`M·U < p²`; `BOUND ONLY: …` (exit 3) — the file is a valid proof of `Σφ ≤ U`, but `M·U ≥ p²`, so it refuses nothing at `M`
+colours (the reachable uninformative outcome: `--m 5` at 11, `--m 4` at 7 must end here); `REFUSED <CODE>: <detail>` (exit 1).
+Usage errors exit 2. The `CERTIFIED` sentence states `p`, `M`, `U` as an exact fraction and to 6 decimals, `M·U` against `p²`,
+the file's SHA-256, and the words "given the hand-proved links L1–L6 of plans/FS66-phase2-certificate.md §S; NOT the Lean kernel".
+
+### K.2 What it does, in order of marginal evidential value (cheap and decisive first)
+
+1. Parse strictly: format string, types, no floats (`FLOAT_IN_FILE`), lengths (`MALFORMED`), `p` prime and `≡ 3 (mod 4)`.
+2. Signs: `mu`, row multipliers, `slack` (`NEGATIVE_MULTIPLIER`); `q0` (`Q0_NOT_PSD`).
+3. Rebuild from `p` alone: points, `S`, the `2(p+1)` linear maps, **and verify each is a bijection with `h(x+s) − h(x) ∈ S` for
+   all `x, s`** (`NOT_A_SYMMETRY` — cannot fire on its own construction; it is the guard of the one property soundness needs).
+4. Rows: every `m` a sorted list of ≤ 4 valid indices, `x ∈ m` for `le` rows (`ROW_NOT_VALID`).
+5. Positive definiteness of every `R` by fraction-free elimination (`BLOCK_NOT_POSITIVE_DEFINITE`, naming the block and the
+   first non-positive minor).
+6. Build `F`, the `Q` forms and the `κ_b`; accumulate the right side of (★) as exact rationals per canonical monomial; compare
+   with the left (`IDENTITY_MISMATCH`, naming the canonical monomial and both coefficients — the constant first, because that
+   is where an overclaimed `U` shows).
+7. `M·U < p²` exactly → `CERTIFIED`, else `BOUND ONLY`.
+
+**Why `canon` cannot make a false certificate pass.** `canon(m)` is computed as an explicit image of `m` under a translation
+followed by a verified symmetry, so two monomials are merged only if they really are `Γ`-equivalent; *failing* to merge
+equivalent monomials only makes (★) stricter. So an incomplete canonicaliser is safe and a wrong-merging one is impossible by
+construction — say this in the checker's docstring.
+
+Expected cost at 11 (pure Python): ≈ 0.6 M canonicalisations (memoised), 2.6 M big-integer multiply-adds, twelve eliminations of
+size ≤ 63: **2–5 minutes, under 1 GB** [estimated from the prototype's 17 s build with numpy-free inner loops; P-B3].
+
+### K.3 Controls (`--self-test`) — each red for a named reason, beside a faithful twin that stays green
+
+Every plant is applied to a **copy** of a certifying file (`proto-cert-p7.json` until the production file exists), the twin —
+the same file re-serialised through the same scaffolding, no fault — is run beside it, and after the last plant the original is
+re-checked and its SHA-256 compared (a harness must verify its own restore). Expected last lines:
+
+| # | plant | must end on |
+|---|---|---|
+| 0 | faithful twin | `CERTIFIED` (at 7 with `--m 3`) |
+| 1 | `U` lowered by `1/10¹²` | `REFUSED IDENTITY_MISMATCH` at `[]` — **the overclaim, the fault that matters most** |
+| 2 | `U` raised by 1 with `slack` raised by 1 | `CERTIFIED` — a weaker true claim must pass (the plant's both-sides bound) |
+| 3 | `U` raised by 1, `slack` untouched | `REFUSED IDENTITY_MISMATCH` |
+| 4 | one diagonal entry of a character block negated | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` |
+| 5 | a character block replaced by a symmetric matrix with a zero eigenvalue and positive diagonal | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` (semidefinite is refused: Sylvester's strict form is what is checked) |
+| 6 | a row multiplier's sign flipped, identity repaired by hand elsewhere | `REFUSED NEGATIVE_MULTIPLIER` |
+| 7 | an `le` row whose `x` is not a point of `m` | `REFUSED ROW_NOT_VALID` |
+| 8 | one integer replaced by a float (`1.0`) | `REFUSED FLOAT_IN_FILE` |
+| 9 | a certificate produced for the WRONG problem, `c = 1` (`fs66_b1_probe.py … --c 1`; a stronger, false constraint) | `REFUSED IDENTITY_MISMATCH` — the checker has no `c` to read; `q` is rebuilt with 2 |
+| 10 | the 7 file checked with `--m 4`; the 11 file with `--m 5` | `BOUND ONLY` (exit 3) — both are colourable at every level, so `CERTIFIED` here would be a false theorem |
+| 11 | the 7 file with its `"p"` edited to 11 | `REFUSED MALFORMED` (lengths) |
+| 12 | weights replaced by arbitrary integers, `U` and rows recomputed by the producer | `CERTIFIED` or `BOUND ONLY` with a larger `U` — **never refused**: shows the weights are off the trust surface |
+
+**Two independent twins of the bookkeeping, run in `--self-test`.** (a) *Orbit twin:* at `p = 3` and `p = 7`, canonical forms
+against brute-force orbits (apply all of `Γ` to every monomial of degree ≤ 4, union-find): same partition. (b) *Assembled twin:*
+at `p = 3`, build the full matrices `𝒵 = Σ_b (wc·wcᵀ + ws·wsᵀ) ⊗ R_b` and the moment matrix of symbols explicitly, read the
+coefficient of every canonical monomial by brute force over all index pairs, and compare with the `F`/`κ` route — the path the
+fast code never takes. (A `p = 3` certificate: the producer at `p = 3`, `m = 2`; if `B₁(3)`'s relaxation does not refuse two
+colours the file ends `BOUND ONLY`, which serves the twin equally.)
+
+---
+
+## §R′. The producer — `tools/fs66_b1_cert_make.py` (untrusted; may use numpy, scipy, scs, clarabel)
+
+1. **Build and solve** the minimal relaxation of §F (the probe is the recipe; keep its controls `--no-q` → `n/2`-ish and
+   `--pure` → `α`). **Solver: SCS 3.3, `eps 1e-7`, double precision, 2–4 CPU threads** — 83 s at 11; Clarabel as the second
+   opinion on the value only (its KKT system is 7 GB at 11; do not give it matrix localisers). *No GPU:* the per-iteration work is
+   eleven 62 × 62 eigendecompositions and one cached sparse solve — nothing a GPU helps. *No extended precision:* the margin is
+   2.05 and the measured rounding loss 0.024.
+2. **Round** (B8–B9): take the dual blocks `Z`; add `shift·max(diag Z)·I` **in the solver's basis**; rescale by the congruence
+   that turns the solver's normalisation into §C.2's (trivial block `diag(1, 1/n, …)`, character blocks `1/√n`, `q0`
+   `diag(1, 1/n)`; `mu = dual/n`); multiply by `D = 10^{12}` and round to integers; weights `round(10⁹·cos)`, `round(10⁹·sin)`.
+   Check positive definiteness exactly; on failure raise the shift (×10) and retry; record every attempt.
+3. **Rows and cascade** (§C.4), then write the file and a record.
+4. **Scan** `shift ∈ {1e-7, 1e-6, 1e-5}` × `D ∈ {10¹⁰, 10¹²}` and keep the smallest `U` whose blocks are all positive definite.
+   There is no reason to chase digits: anything under 28.3 is as good as 28.21.
+
+Every run appends one record to `data/fs66/b1/records.jsonl` (main plan §D's discipline — flat, typed, a trust word):
+`{"kind": "fs66-b1", "record_version": 1, "utc", "command", "tool_sha256", "p", "c": 2, "relaxation": "minimal", "solver",
+"solver_eps", "threads", "float_value", "float_dual", "iterations", "solve_s", "rss_mb", "digits", "weight_digits", "shift",
+"pd_failures": [...], "U": "num/den", "U_float", "rows", "cert": "<path>", "cert_sha256", "machine", "trust": "float reading
+(untrusted)" | "prototype bound (producer's own arithmetic, untrusted)" | "CERTIFIED (fs66_b1_cert_check)"}`. The producer never
+writes the third word; only a checker run does (a second record, `"kind": "fs66-b1-check"`, carrying the checker's last line, its
+exit status, its SHA-256, `m`, and wall seconds).
+
+---
+
+## §P. Registered predictions (2026-09-20, before any implementer phase; scored in §R)
+
+| id | prediction | confidence | what would refute it | both outcomes reachable? |
+|---|---|---|---|---|
+| P-B1 | the independent checker ends `CERTIFIED` on a certificate at 11 with **`U` in [28.20, 28.30]**, `--m 4` | high | a refusal that is not a plant — then the prototype's bookkeeping and the checker's disagree, and finding which is wrong is the phase's most valuable hour | yes: the prototype is self-consistent but has never been checked by other code |
+| P-B2 | the checker's **first** run on `proto-cert-p7.json` does *not* certify, because of a convention mismatch between this file's §C and the prototype (index order, a factor `n`, row semantics) rather than a mathematical error | medium | a first-run `CERTIFIED` (then §C was unambiguous) | yes |
+| P-B3 | checker wall time at 11 **under 10 minutes**, pure Python, under 2 GB | medium-high | over 30 minutes — then the canonicaliser needs the rooted-at-origin shortcut before anyone reviews with it | yes |
+| P-B4 | plant 12 (arbitrary weights) yields `U > 40` at 11 — sound and useless | high | a refusal (the weights would be on the trust surface: a design error) | yes |
+| P-B5 | the tightened relaxation at 11 (B11) reads **28.00 ± 0.02** — the relaxation is exact at 11 as at 7 | low-medium | a reading above 28.05 | yes; the run is cheap |
+| P-B6 | at 19 (Phase 2C, if run) the minimal relaxation reads **in [80.6, 87]** and a certificate lands under 90.25 | low-medium — no measurement at 19 | a reading ≥ 90.25 (the second level is not enough at 19), or a build that does not fit (then §19's reductions are owed first) | yes |
+
+---
+
+## §X. Checkpoints, costs, hardware
+
+| run | cost [status] | if it dies now, what is redone? |
+|---|---|---|
+| producer at 7 / 11 | 3 s / ≈ 100 s incl. build [measured] | everything; under the 15-minute rule's threshold |
+| checker at 7 / 11 | seconds / 2–5 min [estimated] | everything; same |
+| `--self-test` | the `p = 7` orbit twin dominates: 292,825 monomials × 784 group elements, pure Python — **10–30 min [estimated]**. Cache nothing; if over 15 minutes in practice, restrict the orbit twin at 7 to monomials through the origin (every orbit has one) and say so in the docstring | the self-test; acceptable |
+| Phase 2C at 19 | build ≈ 30–60 min single-thread unless vectorised; solve 1–3 h on CPU with SCS's indirect solver, or minutes on the GPU build of SCS (`build/venv-sdp-gpu`, keyword `linear_solver=`; **this is the one place a GPU is appropriate**) [all estimated] | **must checkpoint**: cache `F` and the `Q` forms to `data/fs66/ckpt/b1-p19/` (never under `build/`); drive SCS in warm-started chunks saving `(x, y, s)` per chunk, as `tools/fplane_sdp_scs.py` does; resume command written in the docstring and in §R before launch; never under a `timeout` wall |
+
+Nothing in Phases 2A–2B needs more than 4 threads and 8 GB. One heavy job at a time; ask the owner before Phase 2C's solve.
+
+---
+
+## §19. The price of the same certificate at `p = 19`, four colours (needs `U < 90.25`)
+
+Sizes after the same reduction: `n = 361`, `|Γ| = 14,440`, 182 representatives, **19 real blocks of size 182–183** plus the 2 × 2,
+about 55,000 moment variables (orbits of monomials of degree ≤ 4), roughly 300,000 box rows, and a constraint matrix near 10⁸
+nonzeros. The same producer and checker code serves unchanged in shape; what changes is cost: the pure-Python canonicaliser
+(6 M + 3 M calls) wants vectorising or the rooted shortcut, SCS must run with its indirect (or GPU) linear solver and
+checkpointed chunks, the checker's exact accumulation grows to ≈ 10⁸ big-integer operations (tens of minutes), and splitting
+each block by the reflection that fixes its character (182 → 91 + 91) halves all of it if needed. The reading is unmeasured:
+it cannot be below FS-62's level-3 value 80.59 and the best set known is 76, so the expected margin is 4–10 % — comparable to
+11's 6.8 %. **Worth a phase (2C) after 11 lands, not before**: it would make 19 the second prime whose whole tower is decided,
+and it subsumes main plan §I5's level-two ask at `(19, 4)` exactly as 11's certificate subsumed level three. It is P-B6.
+
+---
+
+## §H. Phases for the implementer — each well under 400k tokens; one brief each
+
+*Rules that bind every phase (from `CLAUDE.md` and the main plan §H): no child agents of any kind; never `lake build` (no Lean
+is touched in this phase); kill by PID and verify by effect; venvs and checkpoints outside `build/`; commit by explicit path;
+a probe that reports nothing because it could not run reads like a slow solver — check the artifact exists and is non-empty.*
+
+### Phase 2A — the checker, its soundness page, its controls (the trusted half; do this FIRST, from §C, §S, §K — not from the probe)
+*Scoring (the owner runs these):* `python3 tools/fs66_b1_cert_check.py data/fs66/b1/proto-cert-p7.json --m 3; echo $?`;
+the same at 11 with `--m 4`; `--m 5` at 11 must exit 3; `python3 tools/fs66_b1_cert_check.py --self-test; echo $?`;
+`grep -c "^import\|^from" tools/fs66_b1_cert_check.py` against a standard-library list.
+- [ ] `tools/fs66_b1_cert_check.py`: standard library only, no float read, §K.1's three last lines and exit codes.
+- [ ] `--self-test` runs plants 0–8, 10, 11 of §K.3 on a copy, each ending on the named line, the faithful twin green beside
+      each, and the restore verified by digest. (Plants 9 and 12 need the producer: Phase 2B.)
+- [ ] The orbit twin at 3 and 7 and the assembled twin at 3 are green — and each has been **seen red once** on a deliberate
+      break (say which break in §R).
+- [ ] `data/fs66/b1/SOUNDNESS.md` lifted from §S, with the checker's actual refusal codes; every sentence of it re-read against
+      the code ("what must someone who trusts none of this actually check?").
+- [ ] P-B1 (on the prototype file), P-B2, P-B3 scored in §R; any disagreement with the prototype resolved **and its cause
+      written down** — if §C of this file was ambiguous, fix the sentence here in the same commit.
+
+### Phase 2B — the production producer, the certificates, the records
+*Scoring:* `data/fs66/b1/cert-p7.json` and `cert-p11.json` exist; `records.jsonl` has a `fs66-b1` record and a `fs66-b1-check`
+record for each whose `cert_sha256` match the files; the 11 check record's last line starts `CERTIFIED` with `m = 4`.
+- [ ] `tools/fs66_b1_cert_make.py` (§R′) with its two float controls reproduced at 7 (`q` dropped → 24.5; `φ² = φ` → 14.0).
+- [ ] The scan of §R′.4 recorded; the kept certificate at 11 has `U < 28.3`; both certificates `CERTIFIED` by Phase 2A's checker.
+- [ ] Plants 9 (`c = 1`) and 12 (arbitrary weights) added to `--self-test`'s documented manual controls with their outputs in
+      `data/fs66/b1/controls.out`; P-B4 scored.
+- [ ] `data/fs66/b1/README.md` extended: what each file is, what it licenses (§ST's sentence verbatim), its trust word.
+- [ ] B11 / P-B5 recorded if not already.
+
+### Phase 2C — 19 at four colours (optional; the owner's call after 2B; §19, §X)
+- [ ] The builder's cost measured on a sample before the full build; caches under `data/fs66/ckpt/b1-p19/`; the float reading
+      recorded **before** any rounding; P-B6 scored; a certificate `CERTIFIED` with `--m 4`, or a typed null saying which of
+      "reads ≥ 90.25", "did not fit", "rounded but not positive definite" happened.
+- [ ] The solve resumed from a checkpoint at least once on purpose.
+
+### The close is the owner's. The implementer hands over: §R filled; the sweep of this file for "conjecture" and "not claimed"
+(one: §ST's last sentence points at the main plan's §S5); and §PA below read back for what it taught about the object.
+
+---
+
+## §PA. Prior art — what this phase rests on, and what was NOT searched
+
+This phase certifies an inequality minted inside the milestone; the main plan's §PA is the gate for the tower question. The
+*method* is prior art and named as such: the moment/sum-of-squares hierarchy (Lasserre; Parrilo), symmetry reduction of invariant
+semidefinite programmes (Gatermann–Parrilo; de Klerk–Pasechnik–Schrijver; Bachoc–Gijswijt–Schrijver–Vallentin's survey),
+rational rounding of sum-of-squares certificates (Peyrl–Parrilo), and — inside this repository — FS-50's certificate shape
+(`plans/FS50-certificate-soundness.md`), from which the "rational weights are off the trust surface" and "`U` is an output"
+ideas are taken whole. **These are recalled, not re-read for this plan** (marked so per G50); none is relied on for soundness,
+which §S proves from scratch. **Not searched, and owed at the close if §ST's sentence goes into the ledger:** whether the
+independence ratio / fractional chromatic number of `UD(ℤ/p^k, 2)` or the measurable independence density of the `p`-adic
+plane has been bounded in print (the discipline's words: *measurable chromatic number*, *independence density*, *p-adic
+distance graph*, *Cayley graph over ℤ/p^k independence number*; zbMATH `cc:05C15 & ab:"p-adic"`). **What the phase taught
+about the object** (for WORKFLOW step 9's sweep): the fibre-density inequality is *strong* — its second-level relaxation pins
+the whole tower's independence ratio to within 0.8 % of level one's at 11 and 0.13 % at 7, and at 7 a slightly tighter
+relaxation reads `α` exactly; the main plan's §S5 conjecture (the tower never rises) may be *provable* at 7 by an exact
+certificate at the optimal face. That is a stub candidate, not this phase.
+
+---
+
+## §T. Traps found while planning
+
+1. **A 122 × 122 localiser per linear constraint is a trap at 11**: 24 GB and no first iteration in Clarabel. The box belongs in
+   scalar rows; if a matrix localiser is ever wanted, reduce it by its stabiliser first.
+2. **Apply the diagonal shift in the solver's basis, before the congruence rescaling** — after it, the shift is relative to the
+   one large entry and cost 0.9 in `U` at 7 (B9).
+3. **Six digits are not enough**: the rescaled blocks have entries near `10⁻⁶`; rounding to `10⁻⁶` destroys positive
+   definiteness. Use `D ≥ 10¹⁰`.
+4. **Clarabel uses every core by default** (`settings.max_threads`), and reports `AlmostSolved` on this problem at `1e-6`; that
+   status is fine for a reading and for rounding. SCS agrees to `1e-4`.
+5. **The probe's `--edge-rows` builds ≈ 10⁵ rows at 11** and takes several minutes to build in pure Python: a side reading only.
+6. **`canon` is memoised on sorted tuples**; without the memo the checker's time triples.
+7. **The prototype's own check is not a check** (it shares the producer's `F` table). Do not quote `U = 28.2251` as certified
+   anywhere until Phase 2A's checker has said so.
+
+---
+
+## §W. Decisions that were the planner's (choice · alternative · why · confidence)
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Python-first, hand-rolled symmetry reduction** | Julia `SumOfSquares.jl` + `SymbolicWedderburn.jl` (automatic reduction, `BigFloat` solvers) | the hand reduction is 40 lines once the centred representatives are seen, ran the first time, and yields blocks whose *exact* presentation (rational weights) is what the certificate needs — an automatic Wedderburn basis would have had to be re-expressed for the checker anyway; no new language in the repository | high (it ran: B4–B8) |
+| **Certify the bare problem, minimal relaxation** | the registered `B₁` with cuts; the full second level with localisers | reads 28.20 against 30.25 already; every omitted constraint is one fewer validity argument for a reviewer; 24 GB saved | high |
+| **Double precision, first-order solver, no GPU at 11** | extended-precision interior point (the owner's sketch); GPU SCS | margin 2.05 against a measured rounding loss of 0.024; 83 s on two threads | high |
+| **Positive definiteness by exact elimination on integer blocks** | FS-50's `Z = BᵀB` factor form (positive semidefinite by construction) | blocks are ≤ 63, so elimination costs seconds and the file holds the matrix a reviewer can look at; a factor form would double the file and hide the matrix. The strict form (definite, not semidefinite) is free because the producer shifts the diagonal | medium-high — at 19 (size 183) still seconds; revisit only if a block must be singular, which an exact-face certificate (§PA) would need |
+| **The colour count is a command-line argument, not a field of the file** | `"m"` inside the file | the file proves a bound; one file serves `χ`, `χ_f` and the density statement; and the `BOUND ONLY` control (`--m 5`) becomes a one-flag run | high |
+| **Checker first, from the specification; the prototype's files as its inputs** | producer first, checker ported from it | the checker is the trusted half and deserves the fresh context and the independent bookkeeping; a disagreement with the prototype is then evidence about one of two independently written programs | medium-high |
+| **One block per norm class, no expansion over rotations** | the full `Γ`-invariant multiplier (every character) | for `Γ`-invariant `y` the inner product with one class representative's block equals that with the class average, up to a factor the block absorbs; soundness needs only positive semidefiniteness, which holds either way; the file is 12× smaller | high |
+| **19 is priced, not planned in detail** | a full Phase 2C design now | unmeasured reading; the design is 11's with checkpoints; the owner rules after 2B | medium |
+
+---
+
+## §E. The modeling passes (WORKFLOW step 5) — what each changed
+
+*(filled by the planner as each pass is committed)*
+
+---
+
+## §R. Results — filled by the implementer, phase by phase (predictions scored here; decisions implementation overturned, in four parts)
