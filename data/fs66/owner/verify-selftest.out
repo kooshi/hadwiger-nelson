@@ -1,0 +1,24 @@
+positive control: level-one 4-colouring of UD(F_7,2) pulled back to Z/49: VERIFIED
+  plant fired: vertex (5, 3) given its neighbour (0, 8)'s colour
+  plant fired (refused): colour out of range: REFUSED: vertex (0,0) has colour 4, outside 0..3 (or missing)
+  plant fired (refused): one vertex missing: REFUSED: 2400 colours for 2401 vertices (n = 49)
+  plant fired (refused): a 4-colouring filed as k = 3: REFUSED: vertex (0,1) has colour 3, outside 0..2 (or missing)
+positive control: colour class of size 686 as an independent set: VERIFIED
+  plant fired: a neighbour of the set added to it
+  plant fired (refused): a member listed twice: REFUSED: member 1 listed twice
+positive control: level-one 5-colouring of UD(F_11,2) pulled back to Z/121: VERIFIED
+  plant fired: vertex (5, 3) given its neighbour (0, 61)'s colour
+  plant fired (refused): colour out of range: REFUSED: vertex (0,0) has colour 5, outside 0..4 (or missing)
+  plant fired (refused): one vertex missing: REFUSED: 14640 colours for 14641 vertices (n = 121)
+  plant fired (refused): a 5-colouring filed as k = 4: REFUSED: vertex (0,4) has colour 4, outside 0..3 (or missing)
+positive control: colour class of size 3388 as an independent set: VERIFIED
+  plant fired: a neighbour of the set added to it
+  plant fired (refused): a member listed twice: REFUSED: member 1 listed twice
+  plant fired (refused): a Z/49 colouring filed as n = 121: REFUSED: 2401 colours for 14641 vertices (n = 121)
+circle of Z/49: 56 (closed form p(p+1) = 56); undirected edges 67228
+circle of Z/121: 132 (closed form p(p+1) = 132); undirected edges 966306
+SELFTEST PASS
+
+real	0m11.127s
+user	0m9.718s
+sys	0m1.358s
