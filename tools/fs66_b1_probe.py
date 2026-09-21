@@ -42,6 +42,10 @@ ap.add_argument("--scs-eps", type=float, default=1e-6)
 ap.add_argument("--no-boxloc", action="store_true", help="drop the localisers of phi_0 and 1-phi_0 (scalar rows only)")
 ap.add_argument("--sa", action="store_true", help="all box products prod phi_x prod (1-phi_y) of degree <= 4 as scalar rows")
 ap.add_argument("--edge-rows", action="store_true", help="scalar rows L(cut * monomial) >= 0, monomial degree <= 3, for edge and triangle cuts")
+ap.add_argument("--round", type=int, default=0, help="PROTOTYPE of the exact rounding: digits for the PSD blocks and multipliers (0 = off)")
+ap.add_argument("--wdigits", type=int, default=9, help="digits of the rational cosine/sine weights")
+ap.add_argument("--shift", type=float, default=1e-6, help="relative diagonal shift added to each dual block before rounding")
+ap.add_argument("--cert-out", default=None, help="with --round: write the prototype certificate (format fs66-b1-cert-v1) here")
 ap.add_argument("--out", default=None)
 args = ap.parse_args()
 p, c = args.p, args.c
@@ -272,7 +276,9 @@ for _, e in scalar_rows:                      # expr >= 0  <=>  s = expr = b - A
     bvec.append(b0); r += 1
 if scalar_rows: cones.append(clarabel.NonnegativeConeT(len(scalar_rows)))
 SQ2 = math.sqrt(2.0)
+block_off = []
 for name, d, ent in psd_blocks:
+    block_off.append(r)
     if args.solver == "clarabel":
         pos = lambda i, j: j * (j + 1) // 2 + i      # column-major upper triangle, i <= j
     else:
@@ -296,6 +302,7 @@ if args.solver == "clarabel":
     st = clarabel.DefaultSettings(); st.verbose = True; st.max_iter = 200; st.max_threads = args.threads
     sol = clarabel.DefaultSolver(P, qobj, A, b, cones, st).solve()
     val, dval, status, iters = -sol.obj_val, -sol.obj_val_dual, str(sol.status), sol.iterations
+    zdual = np.array(sol.z)
     solver_name = "clarabel " + clarabel.__version__
 else:
     import scs
@@ -303,12 +310,138 @@ else:
     sv = scs.SCS(dict(A=A, b=b, c=qobj), cone, eps_abs=args.scs_eps, eps_rel=args.scs_eps, max_iters=args.scs_iters, verbose=True)
     res = sv.solve()
     val, dval, status, iters = -res["info"]["pobj"], -res["info"]["dobj"], res["info"]["status"], res["info"]["iter"]
+    zdual = np.array(res["y"])
     solver_name = "scs " + scs.__version__
 rec = dict(p=p, c=c, n=n, orbits=K, blocks=[(nm, d) for nm, d, _ in psd_blocks], scalar_rows=len(scalar_rows),
            options=dict(absorb=not args.no_absorb, edge=not args.no_edge, tri=(tri is not None and not args.no_tri),
                         q=not args.no_q, qloc=not args.no_qloc, pure=args.pure, boxloc=not args.no_boxloc, sa=args.sa, edge_rows=args.edge_rows),
            status=status, value=val, dual_value=dval, iterations=iters,
            build_s=round(T1 - T0, 1), solve_s=round(time.time() - T1, 1), solver=solver_name)
+if args.round:
+    # ---------------- PROTOTYPE PRODUCER (untrusted): round the dual to the exact certificate of
+    # plans/FS66-phase2-certificate.md (format fs66-b1-cert-v1) and compute the bound U it proves.  U is an OUTPUT.
+    from fractions import Fraction
+    assert not eq_rows and args.no_boxloc and not [1 for nm, _, _ in psd_blocks if nm.startswith("loc[")], "prototype covers the minimal relaxation only"
+    T2 = time.time()
+    DEN = 10 ** args.round; DW = 10 ** args.wdigits
+    def getZ(bi):
+        name, d, _ = psd_blocks[bi]; r0 = block_off[bi]; Z = np.zeros((d, d))
+        for j in range(d):
+            for i in range(j + 1):
+                if args.solver == "clarabel": v = zdual[r0 + j * (j + 1) // 2 + i]
+                else: v = zdual[r0 + i * d - i * (i - 1) // 2 + (j - i)]
+                Z[i, j] = Z[j, i] = v if i == j else v / SQ2
+        return Z
+    def pd_int(Mi):                                   # Sylvester by fraction-free (Bareiss) elimination
+        A_ = [row[:] for row in Mi]; prev = 1; d = len(A_)
+        for k in range(d):
+            if A_[k][k] <= 0: return False
+            for i in range(k + 1, d):
+                for j in range(i, d):
+                    A_[i][j] = (A_[i][j] * A_[k][k] - A_[i][k] * A_[k][j]) // prev
+                    A_[j][i] = A_[i][j]
+            prev = A_[k][k]
+        return True
+    def rnd(Z, Dg):                                   # float dual block -> integer matrix over DEN: Dg (Z + shift*I) Dg,
+        d = len(Z); sh = args.shift * float(np.max(np.diag(Z)))   # the shift applied in the solver's (well-scaled) basis
+        Zs = Dg @ (Z + sh * np.eye(d)) @ Dg
+        return [[int(round(Zs[i, j] * DEN)) for j in range(d)] for i in range(d)]
+    names = [nm for nm, _, _ in psd_blocks]
+    cert = dict(format="fs66-b1-cert-v1", p=p, m=None, c=2, den=DEN, weight_den=DW, blocks=[], q0=None, rows=[], U=None, slack="0")
+    assert c == 2.0
+    pdfail = []
+    Dn = np.diag([1.0] + [1.0 / n] * R)
+    R0 = rnd(getZ(names.index("M2[u=0]")), Dn)
+    if not pd_int(R0): pdfail.append("M2[u=0]")
+    cert["blocks"].append(dict(kind="trivial", R=R0))
+    mu_of = {}
+    for ri, (rn, e) in enumerate(scalar_rows):
+        if rn.startswith("locq[u="): mu_of[rn[5:-1]] = max(0.0, float(zdual[len(eq_rows) + ri]))
+    for u in ureps:
+        th = 2 * np.pi * dot(u) / p
+        Rb = rnd(getZ(names.index(f"M2[u={u}]")), np.eye(R) / math.sqrt(n))
+        if not pd_int(Rb): pdfail.append(f"M2[u={u}]")
+        cert["blocks"].append(dict(kind="character", u=list(u), wc=[int(round(v * DW)) for v in np.cos(th)],
+                                   ws=[int(round(v * DW)) for v in np.sin(th)], R=Rb,
+                                   mu=int(round(mu_of.get(f"u={u}", 0.0) / n * DEN))))
+    if "locq[u=0]" in names:
+        q0 = rnd(getZ(names.index("locq[u=0]")), np.diag([1.0, 1.0 / n]))
+        if not pd_int(q0): pdfail.append("locq[u=0]")
+    else: q0 = [[0, 0], [0, 0]]
+    cert["q0"] = q0
+    # ---- the linear form of the PSD parts, from the certificate's integers only (what the checker recomputes)
+    Kk = K
+    Qint = lambda m: {k: int(round(w)) for k, w in Lq_times(m).items()}
+    Q_empty, Q_0 = Qint(()), Qint((0,))
+    Q_t = [Qint((0, t)) for t in range(n)]
+    form = [Fraction(0)] * Kk
+    acc = [0] * Kk                                    # trivial block and q0, over DEN
+    acc[0] += R0[0][0]
+    for ia, a in enumerate(reps): acc[canon(a)] += 2 * n * R0[0][1 + ia]
+    for ia in range(R):
+        for ib in range(R):
+            zz = n * R0[1 + ia][1 + ib]
+            if zz:
+                for k in F[ia, ib].tolist(): acc[k] += zz
+    for k, w in Q_empty.items(): acc[k] += q0[0][0] * w
+    for k, w in Q_0.items(): acc[k] += 2 * n * q0[0][1] * w
+    for t in range(n):
+        for k, w in Q_t[t].items(): acc[k] += n * q0[1][1] * w
+    for k in range(Kk): form[k] += Fraction(acc[k], DEN)
+    for blk in cert["blocks"][1:]:
+        wc, ws, Rb = blk["wc"], blk["ws"], blk["R"]
+        kap = [sum(wc[x] * wc[addl[x][t]] + ws[x] * ws[addl[x][t]] for x in range(n)) for t in range(n)]
+        acc = [0] * Kk
+        for ia in range(R):
+            for ib in range(R):
+                zz = Rb[ia][ib]
+                if zz:
+                    Fr = F[ia, ib].tolist()
+                    for t in range(n): acc[Fr[t]] += zz * kap[t]
+        if blk["mu"]:
+            for t in range(n):
+                for k, w in Q_t[t].items(): acc[k] += blk["mu"] * kap[t] * w
+        for k in range(Kk):
+            if acc[k]: form[k] += Fraction(acc[k], DEN * DW * DW)
+    # ---- rows: the solver's own multipliers rounded (clipped at zero), then the remainder absorbed by the cascade
+    inv = {k: m for m, k in orbit_of.items()}
+    lam_plus, lam_le = {}, {}
+    for ri, (rn, e) in enumerate(scalar_rows):
+        if rn in ("nonneg", "le"):
+            li = int(round(float(zdual[len(eq_rows) + ri]) * DEN))
+            if li <= 0: continue
+            if rn == "nonneg": (k,) = e.keys(); lam_plus[k] = lam_plus.get(k, 0) + li
+            else:
+                k = [kk for kk, w in e.items() if w < 0][0]; k2 = [kk for kk, w in e.items() if w > 0][0]
+                lam_le[(k, k2)] = lam_le.get((k, k2), 0) + li
+    need = [Fraction(0)] * Kk                          # need = U*y0 - n*y1 - form - rows ; U fixed at the end
+    need[canon((0,))] -= n
+    for k in range(Kk): need[k] -= form[k]
+    for k, li in lam_plus.items(): need[k] -= Fraction(li, DEN)
+    for (k, k2), li in lam_le.items(): need[k] += Fraction(li, DEN); need[k2] -= Fraction(li, DEN)
+    extra_plus, extra_le = {}, {}
+    for k in sorted(range(1, Kk), key=lambda k: -len(inv[k])):
+        if need[k] > 0: extra_plus[k] = need[k]
+        elif need[k] < 0:
+            par = canon(inv[k][:-1]); extra_le[(k, par)] = -need[k]; need[par] += need[k]
+        need[k] = Fraction(0)
+    U = -need[0]                                       # U*y0 + need[0]*y0 = 0
+    def frac(v): return f"{v.numerator}/{v.denominator}"
+    for k in set(lam_plus) | set(extra_plus):
+        v = Fraction(lam_plus.get(k, 0), DEN) + extra_plus.get(k, 0)
+        cert["rows"].append(["nonneg", list(inv[k]), frac(v)])
+    for (k, k2) in set(lam_le) | set(extra_le):
+        v = Fraction(lam_le.get((k, k2), 0), DEN) + extra_le.get((k, k2), 0)
+        mk = list(inv[k]); x = next(x for x in set(mk) if canon(tuple(sorted(mk[:mk.index(x)] + mk[mk.index(x) + 1:]))) == k2)
+        cert["rows"].append(["le", mk, x, frac(v)])
+    cert["U"] = frac(U)
+    rec.update(dict(round_digits=args.round, weight_digits=args.wdigits, shift=args.shift, pd_failures=pdfail,
+                    exact_U=float(U), exact_U_minus_float=float(U) - val, rows_in_certificate=len(cert["rows"]),
+                    cascaded=len(extra_le), exact_seconds=round(time.time() - T2, 1)))
+    print("EXACT PROTOTYPE:", json.dumps({k: rec[k] for k in ("pd_failures", "exact_U", "exact_U_minus_float", "rows_in_certificate", "cascaded", "exact_seconds")}))
+    if args.cert_out and not pdfail:
+        with open(args.cert_out, "w") as fh: json.dump(cert, fh, separators=(",", ":"))
+        rec["cert_out"] = args.cert_out
 print(json.dumps(rec))
 if args.out:
     with open(args.out, "a") as f: f.write(json.dumps(rec) + "\n")

@@ -56,3 +56,26 @@ controls came out right: without `q` the relaxation reads 24.5, and with `φ² =
 | 11 | none | 200 (200) | 28.0000 | local maxima at 27.0, 26.857, 26.667 |
 
 So at the hand-proved constant `B₁` still reads `α(G₁)` numerically — nulls at a budget, never refusals.
+
+## The exact-rounding PROTOTYPE (planner, same evening) — a measurement of the design, NOT a certificate
+
+`tools/fs66_b1_probe.py … --round D --wdigits W --shift S --cert-out FILE` rounds the solver's dual to the certificate shape the
+subplan specifies (format `fs66-b1-cert-v1`: rational cosine/sine weights, one positive-definite integer matrix per character
+class, the `q` localiser, and the box rows, with the remainder of either sign absorbed by a cascade so that **the bound `U` is an
+output and the rounding cannot fail to produce an identity**) and computes the bound in exact rational arithmetic; positive
+definiteness is checked by fraction-free elimination (Sylvester). Records: `round-records.jsonl`; logs `round-*.log`.
+
+| `p` | solver | digits `D` / weights `W` / shift | exact `U` | loss against the float value | all blocks positive definite? | exact arithmetic |
+|---|---|---|---|---|---|---|
+| 7 | SCS `1e-7` | 12 / 9 / `1e-6` | **14.01758** (need < 16.33) | 0.0027 | yes | 0.1 s |
+| 7 | SCS `1e-7` | 12 / 9 / `1e-7` | 14.01520 | 0.0003 | yes | 0.1 s |
+| 7 | SCS `1e-7` | 6 / 6 / `1e-6` | 14.16 | 0.15 | **no — six blocks fail** | — |
+| 7 | SCS `1e-7` | 9 / 9 / `0` | 14.0150 | 0.0001 | **no — every block fails** (the solver's dual sits on the boundary) | — |
+| **11** | SCS `1e-7`, 2 threads, 83 s | 12 / 9 / `1e-6` | **28.22513** (need < 30.25; `4U = 112.90 < 121`) | 0.0237 | yes, all 12 | 1.5 s |
+
+`proto-cert-p7.json` (87 KB) and `proto-cert-p11.json` (775 KB) are the prototype's outputs, committed as **test inputs for the
+independent checker** the subplan's first phase builds. **They are not certificates until that checker says so**: the prototype
+checks its own work with its own bookkeeping, which is exactly what a certificate must not rest on. One independent control was
+run on the bookkeeping (`round-p7-selfcheck.log`, an earlier revision of the prototype): at a pure independent set and at a random
+fractional feasible point, a block's linear form evaluated on moments averaged over all 784 group elements equals the brute-force
+quadratic form to nine digits (0.390881637 and 0.004280977, both ways).
