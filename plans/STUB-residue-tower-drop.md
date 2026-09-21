@@ -1,10 +1,12 @@
 # FS-66 — does the residue ceiling drop up the tower? The second level of a residue plane, at one colour fewer
 
-> **OPEN AS A MILESTONE since 2026-09-20 (`plans/FS66-residue-tower-drop.md`), and the pilot below is ANSWERED on the solvers' word:
-> `UD(ℤ/121, 2)` is NOT four-colourable** — two independent encodings, five solvers, with and without a symmetry pin; the five-colour
-> control finds and verifies a colouring that is not pulled back (`data/fs66/planner/`, `data/fs66/owner/`). So the ceiling does not drop
-> at level two of 11. Certification, the higher levels, and the all-levels inequality (`data/fs66/owner/note-2026-09-20-fibre-density.md`)
-> are the milestone's business; read its plan for current state. This stub is kept as the question's statement.
+> **CLOSED 2026-09-21 — answered NO wherever it can be certified.** The milestone (`plans/FS66-residue-tower-drop.md`,
+> `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; `CLAUDE.md` row 75, G66) found that the residue ceiling does not
+> drop up the tower at 7, 11, 19 or 23: `χ(UD(ℤ/121,2)) = 5` in the Lean kernel, and exact all-levels certificates refuse three colours at
+> 7, four at 11 and 19 and five at 23 at **every** level. So the pilot below is answered (not four-colourable), the ask at `UD(ℤ/529,2)`
+> below can never land, `α(UD(𝔽₂₃,2)) ≤ 97`, and the `p`-adic Hadwiger–Nelson question is answered (`CLOSED-QUESTIONS.md` §1.8). **What
+> stays open is whether the ratio is exactly constant** — FS-68, `plans/STUB-tower-never-rises.md`. §3 below still carries a
+> correction record from before the milestone. This stub is kept as the question's statement.
 
 *Minted 2026-09-20 by the product owner of FS-61, out of a conversation with Kooshi about how to approach ℚ(√167) (FS-59), which
 has only ever been attacked from the lower-bound side. Written for a reader with no conversation memory. Read beside: `CLAUDE.md`
