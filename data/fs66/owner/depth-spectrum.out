@@ -1,0 +1,28 @@
+p=3 level 2: 81 vertices, degree 12 (p^(k-1)(p+1) = 12)
+   depth 0: 1 characters, eig in [12.0000, 12.0000];  2p^(k-1) = 6,  2p^(k-j/2) = 18.0000
+   depth 1: 8 characters, eig in [-6.0000, 3.0000];  2p^(k-1) = 6,  2p^(k-j/2) = 10.3923
+   depth 2: 72 characters, eig in [-5.6382, 4.5963];  2p^(k-1) = 6,  2p^(k-j/2) = 6.0000
+p=3 level 3: 729 vertices, degree 36 (p^(k-1)(p+1) = 36)
+   depth 0: 1 characters, eig in [36.0000, 36.0000];  2p^(k-1) = 18,  2p^(k-j/2) = 54.0000
+   depth 1: 8 characters, eig in [-18.0000, 9.0000];  2p^(k-1) = 18,  2p^(k-j/2) = 31.1769
+   depth 2: 72 characters, eig in [-16.9145, 13.7888];  2p^(k-1) = 18,  2p^(k-j/2) = 18.0000
+   depth 3: 648 characters, eig in [-10.3747, 9.9557];  2p^(k-1) = 18,  2p^(k-j/2) = 10.3923
+p=3 level 4: 6561 vertices, degree 108 (p^(k-1)(p+1) = 108)
+   depth 0: 1 characters, eig in [108.0000, 108.0000];  2p^(k-1) = 54,  2p^(k-j/2) = 162.0000
+   depth 1: 8 characters, eig in [-54.0000, 27.0000];  2p^(k-1) = 54,  2p^(k-j/2) = 93.5307
+   depth 2: 72 characters, eig in [-50.7434, 41.3664];  2p^(k-1) = 54,  2p^(k-j/2) = 54.0000
+   depth 3: 648 characters, eig in [-31.1242, 29.8672];  2p^(k-1) = 54,  2p^(k-j/2) = 31.1769
+   depth 4: 5832 characters, eig in [-17.9865, 17.9459];  2p^(k-1) = 54,  2p^(k-j/2) = 18.0000
+p=7 level 2: 2401 vertices, degree 56 (p^(k-1)(p+1) = 56)
+   depth 0: 1 characters, eig in [56.0000, 56.0000];  2p^(k-1) = 14,  2p^(k-j/2) = 98.0000
+   depth 1: 48 characters, eig in [-31.4577, 18.8442];  2p^(k-1) = 14,  2p^(k-j/2) = 37.0405
+   depth 2: 2352 characters, eig in [-13.9712, 13.8851];  2p^(k-1) = 14,  2p^(k-j/2) = 14.0000
+p=7 level 3: 117649 vertices, degree 392 (p^(k-1)(p+1) = 392)
+   depth 0: 1 characters, eig in [392.0000, 392.0000];  2p^(k-1) = 98,  2p^(k-j/2) = 686.0000
+   depth 1: 48 characters, eig in [-220.2040, 131.9091];  2p^(k-1) = 98,  2p^(k-j/2) = 259.2836
+   depth 2: 2352 characters, eig in [-97.7986, 97.1954];  2p^(k-1) = 98,  2p^(k-j/2) = 98.0000
+   depth 3: 115248 characters, eig in [-37.0308, 37.0401];  2p^(k-1) = 98,  2p^(k-j/2) = 37.0405
+p=11 level 2: 14641 vertices, degree 132 (p^(k-1)(p+1) = 132)
+   depth 0: 1 characters, eig in [132.0000, 132.0000];  2p^(k-1) = 22,  2p^(k-j/2) = 242.0000
+   depth 1: 120 characters, eig in [-52.7533, 62.8865];  2p^(k-1) = 22,  2p^(k-j/2) = 72.9657
+   depth 2: 14520 characters, eig in [-21.9926, 21.9703];  2p^(k-1) = 22,  2p^(k-j/2) = 22.0000
