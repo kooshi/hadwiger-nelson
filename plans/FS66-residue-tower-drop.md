@@ -125,3 +125,165 @@ Russian-language literature beyond zbMATH's coverage; the Geombinatorics archive
 4. **`G₂` is a regular abelian cover of the multigraph `p·G₁`**, and between two adjacent fibres it is `p` disjoint copies of
    `K_{p,p}` (§S1; found independently by the owner the same day). In that discipline's terms the milestone asks where one
    specific *algebraic* cover sits in the "spectrum of chromatic numbers of covers".
+
+---
+
+## §M. What has been measured (2026-09-20; records: `data/fs66/planner/README.md`, `data/fs66/owner/`)
+
+*Machine: the desktop (16 physical cores / 32 threads, 125 GB; graphics card A + graphics card B). Every time below is one
+single-threaded run on a quiet machine unless it says otherwise — a price, not a benchmark. Every verdict is a **solver's word**
+unless marked; nothing here is kernel-checked.*
+
+| # | what was asked, of which graph, by which tool | result |
+|---|---|---|
+| M1 | 4-colourability of **all of `UD(ℤ/121, 2)`** (14,641 vertices, degree 132, 966,306 edges; plain encoding, a triangle pinned; `fs66_planner_ask.py 11 4`) | **UNSAT, 1.7 s, 1,535 conflicts, 1.1 GB.** Owner's replication with a different encoder (bicliques): UNSAT 0.97 s / 1,279 conflicts pinned; **UNSAT 56 s / 83,102 conflicts with no pin** |
+| M2 | the refutation's LRAT core, iterated to a fixpoint (`fs66_planner_core.py`, `fs66_planner_shrink.py`) | 2,713 vertices / 12,914 edges at round 0 → **1,115 vertices / 4,405 edges** after 13 rounds (LRAT 716 KB text). Every core edge re-verified from the definition; **glucose4, minisat22, cadical153, maplechrono each refuse the bare edge list, no pin** (0.8–5.2 s); the same list 5-colours |
+| M3 | 5-colourability of all of `UD(ℤ/121, 2)`, same pipeline, **not handed the pulled-back colouring** | SAT in 251 s (572,161 conflicts); class sizes 2632, 2701, 2743, 3259, 3306 — not pulled back; **VERIFIED by `tools/fs66_owner_verify.py`** (all-pairs sweep, shares no code with the asker) |
+| M4 | controls at 7 (`fs66_planner_ask.py 7 3`, `7 4`): truth is UNSAT, SAT | UNSAT 0.0 s; SAT 0.1 s with a verified non-pulled-back colouring (543, 603, 624, 631) |
+| M5 | 4-colourability of the two types of **1,331-vertex periodic quotient** of `UD(ℤ/121,2)` (by an order-11 translation subgroup: tangent type, degree 112; other type, degree 132) | both UNSAT in 0.1 s (185, 188 conflicts); tangent type 5-colours in 0.4 s |
+| M6 | 4-colourability of **`UD(ℤ/1331, 2)` induced on the preimage of M2's core** (134,915 vertices, 16,457,815 edges; plain encoding, triangle pinned; `fs66_planner_level3.py`) | **UNSAT, 135 s, 12,311 conflicts, 11.0 GB** — one solver, no proof kept |
+| M7 | spectra by FFT from the definition (`fs66_planner_g2.py`; the owner's `depth-spectrum.out` agrees) | level two's eigenvalues on level-one characters are exactly `p·λ₁`; all others lie in `[−2p, 2p]` (−21.9926 at 11); Hoffman's ratio is equal at both levels (0.2855 at 11, 0.2756 at 19, 0.2491 at 23, 0.3597 at 7) |
+| M8 | the **single-class fibre-density problem** `B₁(p)` (§S5), local maxima by SLSQP (`fs66_planner_single_class.py`; owner's `alpha-fuzzy.out`) | 7: 14.0000 = `α(G₁)`; 11: **28.0000 = `α(G₁)`**, max = median (40 and 200 starts), best point pure; owner: 19 → 76.0000, 23 → 87.51 (fractional edge-like pairs, which §S5's cuts remove) |
+| M9 | **certifying `B₁`** by spatial branch and bound (Gurobi 13.0.3 size-limited licence, 4 threads; scratch script, recipe in §I3) with the edge/triangle cuts and sound symmetry breaks | **(7, three colours) LANDS: bound 16.165 < 16.333 in 300 s** (bare problem: 19.95 after 240 s; cuts only: 18.04). **(11, four): after 420 s the bound is 35.88 against the 30.25 needed**, 39,720 open nodes and growing, falling ≈ 0.1 per minute and slowing |
+| M10 | the largest subset of one fibre `AG(2, p)` with at most `b` lines used in each tangent parallel class (`fs66_planner_proj.py`, HiGHS) | 7: exactly 5 (`b = 3`), 9 (`b = 4`); 11: ≥ 10 (`b = 5`, dual bound 17), ≥ 14 (`b = 6`, dual bound 35), not closed in 120 s — against 30.25 points per fibre needed on average for four colours |
+| M11 | 4-colourability of all of **`UD(ℤ/361, 2)`** (130,321 vertices, degree 380; the owner's biclique encoder, 795,644 variables, 5,617,523 clauses, **an edge pinned and nothing else** — `ω = 2` at 19) | **not decided in 900 s** (≈ 120,000 conflicts at 655 s); one run. Level one's `(19, 4)` time under the same breaks was not measured first — Phase 3a's opening step |
+
+**What M1–M6 establish, in one sentence each.** `χ(UD(ℤ/121, 2)) = 5` on five solvers' words and two encoders: **at 11 the
+ceiling does not drop at level two.** `χ(UD(ℤ/1331, 2)) = 5` on one solver's word: nor at level three. No 4-colouring of level
+two is periodic under any order-11 translation. None of it is a certificate; Phase 1 makes level two one.
+
+---
+
+## §S. Structure — the derivations the plan rests on, each with its status
+
+### S1. Level two is `(p+1)/2` cyclic coordinates; between adjacent fibres it is `p` copies of `K_{p,p}` [hand; checked exhaustively at 7 and 11 by the owner's encoder, 0 failures]
+
+Write `R = ℤ/p²`, `R[i] = R[x]/(x²+1)` (a Galois ring), points `u = a + bi`, `S₂ = {s : s·s̄ = 1}`, `|S₂| = p(p+1)`. Reduction
+`S₂ → S₁` is onto with kernel `{1 + p·i·c : c ∈ 𝔽_p}`, so the lifts of `s̄ ∈ S₁` are `s(1 + pic) = s + p·(i s̄)c`: **a line of
+direction `i·s̄` in the fibre `𝔽_{p²}`**. Let `s_j` (`j = 1 … (p+1)/2`) represent `S₁/±`. For `w ∈ R[i]` put
+`ν_j(w) = Re(w·s̄_j) ∈ ℤ/p²` and `τ_j(w) = Im(w·s̄_j) mod p`. Then
+
+> **`u ~ v` in `UD(ℤ/p², 2)` ⟺ for some `j`: `ν_j(v − u) = ±1` and `τ_j(v − u) ≡ 0 (mod p)`.**
+
+(`w = ±s_j(1+pic)` gives `w s̄_j = ±(1 + pic)`; conversely `w s̄_j = ±1 + p·i·c′` has norm 1.) So each point has `(p+1)/2`
+coordinates `(ν_j, τ_j)`, each living on one of `p` cycles of length `p²`, and two points are adjacent iff some coordinate moves
+one step along its cycle. Consequences: (a) between the fibres over adjacent `x, y = x + s̄_j` the graph is `p` disjoint `K_{p,p}`
+(lines of direction `i s̄_j` over `x`, each completely joined to one line over `y`) — **966,306 edges = 7,986 bicliques at 11**,
+which is the owner's tenfold-smaller encoding; (b) in direction `j` the level-one `p`-cycle `x, x+s̄_j, …` unrolls into
+`p²`-cycles — the one family of level-one odd cycles that does **not** lift (holonomy 1), and the only place a level-two gain can
+live; every closed walk of `G₁` using two or more directions lifts to a closed walk of the same length (one free parameter `c`
+per step, and two directions span the fibre); (c) an independent set is a choice, per direction, of a set of lines with no two
+consecutive on their cycle, and a point is usable iff all `(p+1)/2` of its lines are chosen — so a fibre's usable points are an
+intersection of line-unions in `(p+1)/2` directions, and M10 says how small that is when the directions are balanced (≤ 17 of
+121 with five lines each; four colours need 30.25 on average).
+
+### S2. What the tower's limit is [hand]
+
+A finite clopen (locally constant) colouring of the compact group `ℤ_p²` is constant modulo `p^k` for some `k`, and every edge of
+`G_k` lifts to an edge of the `p`-adic graph (Hensel on `a² + b² = 1` at a unit), so such a colouring is exactly a proper
+colouring of some `G_k`. Hence
+
+> `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ χ_Bor(ℤ_p²) ≤ χ_clopen(ℤ_p²) = lim_k χ(G_k) ≤ χ(G₁)` for `F ⊂ ℚ_p`, `p ≡ 3 (mod 4)`.
+
+(The first equality is `[Madore2015]` Prop. 3.2: unit vectors are integral, so components are cosets of `ℤ_p²`.) **FS-66
+measures the last two links; the local–global conjecture lives at the first.** The plain link can be strict for the reason G45
+gives: a finite subgraph of `G_k` extends to `ℤ_p` only if it is a shadow. Likewise for densities: if `I ⊆ ℤ_p²` is measurable
+and independent, the cosets of `p^k ℤ_p²` that `I` more than half fills form an independent set of `G_k` (if two such cosets
+were adjacent, Fubini over the lifts of the connecting unit vector gives an edge inside `I`), and by Lebesgue density their
+share tends to `I`'s measure; conversely independent sets pull back. So
+
+> **`sup {Haar measure of a measurable independent set of ℤ_p²} = lim_k α(G_k)/p^{2k}`** — the `p`-adic analogue of `m₁(ℝ²)`.
+
+### S3. `[BardestaniMallahiKarai2017]`'s Question 1 appears to answer itself — for the owner to check; NOT claimed [hand]
+
+*Exact statements quoted in §PA.2 (Question 1: arXiv v4 p. 2; Theorem 2.5: p. 5).* **Which chromatic number:** the Borel one —
+the bound below is Hoffman's for Haar-measurable independent sets and says nothing about the plain `χ(ℚ_p²)`. **Argument.** Let
+`S = {(a, b) ∈ ℤ_p² : a² + b² = 1}`, `p ≡ 3 (mod 4)`: compact (the form is anisotropic), symmetric, Borel, `0 ∉ S̄`, so Theorem
+2.5 applies to the Haar probability measure `μ` of the compact group `S` (the norm-one group of `ℤ_p[i]`). For a frequency `u`
+of exact level `k` (`u ∈ p^{−k}ℤ_p² ∖ p^{−(k−1)}ℤ_p²`, modulo `ℤ_p²`), `μ̂(u) = λ_u(G_k)/|S_k|`: the normalised eigenvalue of
+`G_k` at the character `u`. By `[MMST1998]` (Thm 2.3 / Cor. 2.4 for inherited characters, Thm 2.9 / Cor. 2.10 for new ones — as
+recorded in `BIBLIOGRAPHY.md`; the planner re-checked the consequence by FFT at levels 2 of 3, 7, 11, 19, 23, and the owner at
+level 3 of 3 and 7) every new eigenvalue at level `k ≥ 2` has modulus at most `2p^{k/2}` against degree `p^{k−1}(p+1)`, i.e.
+normalised modulus `≤ 2/(p+1)`, while level one's least is `λ_min(G₁)/(p+1)` with `|λ_min(G₁)| ≤ 2√p` (Weil, `[MMST1996]`). So
+`sup μ̂ = 1`, `inf μ̂ = λ_min(G₁)/(p+1)`, and
+
+> `χ_Bor(QG_{ℚ_p}) ≥ 1 + (p+1)/|λ_min(G₁)| ≥ 1 + (p+1)/(2√p) > √p/2 → ∞` — **no universal bound `B` exists; Question 1's
+> answer is no.** At `p = 11` the bound reads `1 + 12/4.7958 = 3.502`, so `χ_Bor(ℚ₁₁²) ≥ 4` — below what the tower gives (5 at
+> every level asked), as Hoffman is below the truth at level one.
+
+**What to check before it goes anywhere:** that Theorem 2.5's hypotheses are met verbatim (they are stated for `ℚ_p`; `S ⊂ ℤ_p²`
+is bounded); that `μ̂(u)` for `u ∉ ℤ_p²`'s dual normalisation is the eigenvalue as claimed (their character is the Tate character
+`ψ(x) = exp(2πi·{x}_p)`, p. 4); `[MMST1998]`'s bound first-hand (our row says a literature agent read it in full — G50). No
+citing work addresses it (§PA item 5). If it stands it is a `CLOSED-QUESTIONS.md` entry of the small kind: their question, their
+theorem, a finite-field estimate they cite elsewhere.
+
+### S4. The fibre-density inequality [hand; the owner's, `data/fs66/owner/note-2026-09-20-fibre-density.md` §2; re-derived line by line by the planner — it is right]
+
+For an independent set `I` of `G_k` (`k ≥ 2`) let `φ(x) ∈ [0,1]` be the share of the fibre over `x ∈ G₁` that `I` fills.
+`1_I = Pφ + g` with `g` orthogonal to fibre-constant functions; `A_k` preserves both parts (they are sums of character
+spaces); `⟨Pφ, A_k Pφ⟩ = p^{3(k−1)}⟨φ, A₁φ⟩`; `‖g‖² = p^{2(k−1)}Σφ(1−φ)`; `⟨g, A_k g⟩ ≥ −c·p^{k−1}‖g‖²` with
+`c = c(p) = −λ_min(level two, new characters)/p < 2` (1.999326 at 11, 1.995891 at 7, 1.999924 at 19). Independence is
+`⟨1_I, A_k 1_I⟩ = 0`, so
+
+> **`⟨φ, A₁φ⟩ ≤ c·Σ_x φ(x)(1 − φ(x))`** for every independent set of every level `k ≥ 2`; and for an `m`-colouring, with
+> `Φ` the row-stochastic `p² × m` matrix of class densities, **`tr(Φᵀ(A₁ + cI)Φ) ≤ c·p²`**.
+
+Necessary, never sufficient. The planner had the same inequality with constant 2 before the note arrived; `c` is the sharp form.
+**Dependence to keep visible:** "the same `c` serves every level" rests on `[MMST1998]`'s bound for deeper characters (FFT-checked
+to level 4 at 3, level 3 at 7, level 2 at 11); at level two alone it is the FFT's exact number.
+
+### S5. The single-class problem `B₁(p)` and the cuts [hand + numerics; reached independently by the owner and the planner]
+
+> **`B₁(p) := max Σφ` over `φ ∈ [0,1]^{p²}` with `φᵀ(A₁ + cI)φ ≤ c·Σφ`** bounds `α(G_k)/p^{2(k−1)}` for every `k ≥ 2`; **if
+> `m·B₁(p) < p²`, no level of the `p`-adic tower is `m`-colourable.** At 11 with `m = 4`: need `B₁ < 30.25`; found 28.0000 (M8).
+
+*Valid linear cuts at every level (the owner's argument, which generalises the planner's level-two product bound):* if a
+subgraph `K ⊆ G₁` **lifts** to `G_k` (a section that is a homomorphism), its translates by the kernel `p(ℤ/p^k)²` partition the
+fibres over `K` into disjoint copies of `K`, so `Σ_{x∈K} φ(x) ≤ α(K)`. Edges lift; triangles lift (Hensel); odd cycles using two
+or more directions lift (S1(b)). So `φ_x + φ_y ≤ 1`, `φ_x + φ_y + φ_z ≤ 1`, `Σ_C φ ≤ (ℓ−1)/2`. The single-direction `p`-cycles
+do not lift. `G₁` itself does not (G45), which is why this is a relaxation. *Why the cuts matter:* under the bare inequality an
+edge carries `2c/(1+c) ≈ 4/3` and a triangle `3c/(2+c) ≈ 1.4997`, and "25 full vertices + two half-weight triangles" reaches
+27.9995 at 11 — `B₁ = α` survives there only because `c` is a hair under 2. *First-order criterion:* at a pure maximal
+independent set `I`, raising `φ_v` (`v ∉ I` with `t_v` neighbours in `I`) by `ε` must be paid by lowering neighbours by
+`η ≥ ((2t_v − c)/c)·ε`; so `I` is a strict local maximum iff every outside vertex has `t_v ≥ 2`.
+**The registered quantity is `B₁` WITH the edge and triangle cuts; the bare `B₁` is kept as a control.**
+
+*If `B₁(p) = α(G₁)` were a theorem, the independence ratio — hence the fractional chromatic number — would be constant up the
+whole tower.* It is not a theorem about graphs in general. **Conjecture, NOT claimed (WORKFLOW step 9's sweep will find this
+line): for `p ≡ 3 (mod 4)`, `α(UD(ℤ/p^k, 2)) = p^{2(k−1)}·α(UD(𝔽_p, 2))` for every `k`.** Its cheapest killing test is an
+independent set of `UD(ℤ/49, 2)` with more than `686 = 49·14` points (I6).
+
+### S6. Two instruments the brief proposed that are dead by derivation — recorded so nobody runs them
+
+* **`ϑ′(G₂)` (Delsarte's LP).** A feasible point of level one's LP pulls back to level two (a pulled-back positive-definite
+  function is positive definite, and `S₂ → S₁`), so `ϑ′(G₂)/p⁴ ≥ ϑ′(G₁)/p²`, which is the Hoffman ratio (measured on every
+  plane, row 68); and `ϑ′ ≤ ϑ =` Hoffman by arc-transitivity. Equality: 0.2855 > 1/4 at 11. It refuses nothing. The same
+  pull-back shows the triple-level value at level two is `≥ 0.2411`, as the brief said.
+* **A resolution refutation of level two projects onto level one** (the owner's observation): substitute `c[v,a] ↦ c[x(v),a]`
+  and every line variable to its fibre's colour variable; at-least-one clauses go to at-least-one clauses, edge and biclique
+  clauses to level one's edge clauses, implications to tautologies. So **level two's shortest refutation is at least as long
+  as level one's** — measured at 11: 1,535 conflicts at level two, 12,311 at level three. Where CDCL never refuted level one
+  (`(23, 5)`: undecided at four hours, M58; refused only by the level-3 semidefinite certificate, row 71), it cannot refuse
+  level two.
+
+---
+
+## §Q. The questions now, and the owner's rulings (2026-09-20) that order them
+
+1. **Certify level two at 11** — checked LRAT, a minimal core, the kernel theorem `χ(UD(ℤ/121, 2)) = 5`. *Ruled: yes, Phase 1.*
+2. **The whole tower at 11** — certify `B₁(11) < 30.25` (with cuts). *Ruled: this comes first in Phase 2, because it subsumes
+   level three and every level after it; level three by SAT is a data point beside it (already taken, M6).*
+3. **The rows that bear on the conjecture**, in this order: **(a)** `(19, 4)` at level two; **(b)** level ONE at `(23, 5)` with
+   the full symmetry checklist and cubes across the 32 threads — also FS-17's standing question's neighbour, and the
+   precondition for (c); **(c)** level two at `(23, 5)` as a *refusal* ask **only if (b) refuses**; **(d)** a finder at
+   `UD(ℤ/529, 2)` last, with a bounded budget and the sentence saying what its null would teach (§I7: little).
+4. **The ℚ(√167) row stays numerics-only in this milestone**: certifying `B₁(23) < 105.8` would have to prove
+   `α(UD(𝔽₂₃,2)) < 105.8`, which took the level-3 relaxation with 0.4 to spare; no certifier we own can land it. The numerics
+   (four-class minimum 1.4656 × budget; single-class 87.51 before cuts) predict no drop at 23 at any level. Said plainly so
+   nobody plans a run that cannot land.
+5. **Does the tower rise at all?** (S5's conjecture.) One cheap killing test at 7 (I6). Not a phase of its own.
+
+**What each outcome is worth now.** Phase 1 landing: the first kernel statement about a level-two plane, and the pilot closed
+with a certificate instead of a solver's word. Phase 2 landing: *"at 11, local bounds survive at every level of the tower"* — a
+theorem about the clopen chromatic number of `ℤ₁₁²`, by a level-one certificate; not landing: a typed null and levels two and
+three on solvers' words. Phase 3: a second prime's data point (19), and an honest statement of why 23 is out of reach.
