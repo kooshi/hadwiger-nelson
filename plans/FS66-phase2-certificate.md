@@ -262,28 +262,28 @@ being vertex-transitive, `χ_f(G_k) = p^{2k}/α(G_k) ≥ p²/U` at every level.
 | the clopen and measure statements of §ST | main plan §S2, by hand | **paper** |
 | nothing | — | **assumed** |
 
-*A consequence that doubles as the chain's sharpest falsifier:* at 7 the bound gives `α(UD(ℤ/49, 2)) ≤ ⌊14.0176 × 49⌋ = 686`, and
+*A consequence that doubles as the chain's sharpest falsifier:* at 7 the bound gives `α(UD(ℤ/49, 2)) ≤ ⌊14.0152 × 49⌋ = 686`, and
 the pull-back of a 14-set has 686 points — so **`α(UD(ℤ/49, 2)) = 686` exactly**, which settles the main plan's §I6 (its killing
 test of "the tower never rises" cannot fire at level two of 7) and means **a verified independent set of 687 points there would
-refute this phase's hand links or its checker.** At 11: `3,388 ≤ α(UD(ℤ/121, 2)) ≤ ⌊28.2251 × 121⌋ = 3,415`.
+refute this phase's hand links or its checker.** At 11: `3,388 ≤ α(UD(ℤ/121, 2)) ≤ ⌊28.2043 × 121⌋ = 3,412` (production certificates, Phase 2B; the prototype's figures were 14.0176, 28.2251 and 3,415).
 
 ---
 
 ## §ST. The statement the certificate licenses, in words — and what it does not say
 
 > **At `p = 11`: for every `k ≥ 1`, every independent set of `UD(ℤ/11^k, 2)` has at most `U·121^{k−1}` points with
-> `U = 28.2251…` (the exact rational in the file); hence no level of the tower is four-colourable, the chromatic number of every
+> `U = 28.204320…` (the exact rational in `cert-p11.json`); hence no level of the tower is four-colourable, the chromatic number of every
 > level is exactly 5, the clopen chromatic number of `ℤ₁₁²` is 5 (main plan §S2), the fractional chromatic number of every level
-> lies in `[121/U, 121/28] = [4.2869, 4.3215]`, and the supremum of the Haar measure of a measurable independent set of `ℤ₁₁²`
-> lies in `[28/121, U/121] = [0.23140, 0.23327]`.** At `p = 7` the same with `U = 14.0176`, three colours, `χ = 4`,
-> `χ_f ∈ [3.4956, 3.5]`.
+> lies in `[121/U, 121/28] = [4.2901, 4.3215]`, and the supremum of the Haar measure of a measurable independent set of `ℤ₁₁²`
+> lies in `[28/121, U/121] = [0.23140, 0.23310]`.** At `p = 7` the same with `U = 14.015224…`, three colours, `χ = 4`,
+> `χ_f ∈ [3.4961, 3.5]`.
 
 **What each clause rests on** (trust word for the sentence: `CERTIFIED (fs66_b1_cert_check)` + the hand links named; never the kernel):
 
 | clause | rests on |
 |---|---|
 | `α(G_k) ≤ U·p^{2(k−1)}` for every `k ≥ 1`; no level is `m`-colourable | the checker's `CERTIFIED` + L1–L6 |
-| `α(UD(ℤ/49, 2)) = 686` exactly; `3,388 ≤ α(UD(ℤ/121, 2)) ≤ 3,415` | the same + an **explicit** level-one independent set of 14 (28) points, committed and verified from the definition (Phase 2B) — only `α(G₁) ≥ 28` is used, never FS-54's `α(G₁) = 28` |
+| `α(UD(ℤ/49, 2)) = 686` exactly; `3,388 ≤ α(UD(ℤ/121, 2)) ≤ 3,412` | the same + an **explicit** level-one independent set of 14 (28) points, committed and verified from the definition (Phase 2B) — only `α(G₁) ≥ 28` is used, never FS-54's `α(G₁) = 28` |
 | `χ(G_k) = 5` at 11 (`= 4` at 7) | the first clause + the pull-back of a level-one colouring (kernel at 11: `chromaticNumber_finitePlane11`; at 7 `[Moorhouse2010]`'s value, a verified 4-colouring suffices) |
 | `χ_f(G_k) ∈ [p²/U, p²/α(G₁)-set]` | the first two clauses + vertex-transitivity of a Cayley graph |
 | the clopen chromatic number; the Haar-measure bracket | the above + main plan §S2 (clopen colourings are colourings of some level; the more-than-half-filled cosets of a measurable independent set are independent, and Lebesgue density) — **hand, the main plan's, not re-derived here** |

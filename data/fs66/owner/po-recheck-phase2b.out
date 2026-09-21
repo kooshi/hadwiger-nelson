@@ -1,0 +1,6 @@
+owner's check, p = 7: 14 distinct points of F_p^2, pairwise NOT at unit quadrance: True; index bridge a*p+b: True
+owner's check, p = 11: 28 distinct points of F_p^2, pairwise NOT at unit quadrance: True; index bridge a*p+b: True
+frozen checker on the production certificates (run by the owner): CERTIFIED U = 14.015224... (--m 3) and U = 28.204320... (--m 4); BOUND ONLY at (11, --m 5)
+records.jsonl: one producer record and two check records per certificate carry the committed files' SHA-256
+owner's perturbation: U_num - 1 (one part in 10^30) -> REFUSED IDENTITY_MISMATCH at y([])
+bracket at level two of 11: 3388 <= alpha(UD(Z/121,2)) <= 3412

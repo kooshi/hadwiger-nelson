@@ -251,15 +251,15 @@ why the checker names them in its own last line.
 
 ## 8. The statement this licenses, clause by clause
 
-At `p = 11`, with `U = 28.225133…`:
+At `p = 11`, with `U = 28.204320…` (the production certificate `cert-p11.json`):
 
 > For every `k ≥ 1`, every independent set of `UD(ℤ/11^k, 2)` has at most `U · 121^{k−1}` points. Hence no
 > level of the tower is four-colourable; the chromatic number of every level is exactly 5; the fractional
-> chromatic number of every level lies in `[121/U, 121/28] = [4.2869, 4.3215]`; the clopen chromatic number
+> chromatic number of every level lies in `[121/U, 121/28] = [4.2901, 4.3215]`; the clopen chromatic number
 > of `ℤ₁₁²` is 5; and the supremum of the Haar measure of a measurable independent set of `ℤ₁₁²` lies in
-> `[28/121, U/121] = [0.23140, 0.23327]`.
+> `[28/121, U/121] = [0.23140, 0.23310]`.
 
-At `p = 7`, with `U = 14.017576…`: the same with three colours, `χ = 4`, `χ_f ∈ [3.4956, 3.5]`; and since the
+At `p = 7`, with `U = 14.015224…` (`cert-p7.json`): the same with three colours, `χ = 4`, `χ_f ∈ [3.4961, 3.5]`; and since the
 pull-back of a level-one independent set of 14 points has `14 · 49 = 686` points while
 `⌊14.017576 · 49⌋ = 686`, the independence number of `UD(ℤ/49, 2)` is **exactly 686**. A verified independent
 set of 687 points there would refute either this page's hand links or the checker.
@@ -267,7 +267,7 @@ set of 687 points there would refute either this page's hand links or the checke
 | clause | rests on |
 |---|---|
 | `α(G_k) ≤ U·p^{2(k−1)}` for every `k`; no level is `m`-colourable | the checker's `CERTIFIED` + L1, L2, L6 |
-| `α(UD(ℤ/49,2)) = 686`; `3,388 ≤ α(UD(ℤ/121,2)) ≤ 3,415` | the same + an explicit level-one independent set of 14 (resp. 28) points, verified from the definition |
+| `α(UD(ℤ/49,2)) = 686`; `3,388 ≤ α(UD(ℤ/121,2)) ≤ 3,412` | the same + an explicit level-one independent set of 14 (resp. 28) points, verified from the definition |
 | `χ(G_k) = 5` at 11 (`= 4` at 7) | the first clause + a verified colouring of level one, pulled back |
 | `χ_f(G_k) ∈ [p²/U, p²/α(G₁)]` | the first two clauses + vertex-transitivity of a Cayley graph |
 | the clopen chromatic number; the Haar-measure bracket | the above + two hand steps: a clopen colouring of `ℤ_p²` is a colouring of some level, and the cosets more than half filled by a measurable independent set are themselves independent (Lebesgue density) |
