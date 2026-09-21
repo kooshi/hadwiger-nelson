@@ -1259,3 +1259,222 @@ visibility": they do not.
 absorb — 5 at 3,000, about 9 at 1,500, 47 at 300. **The test is cheap at 11 and nowhere else**: a
 1,500-chunk run at 11 costs about four minutes and either reaches a clean `status solved` or does not. Run
 that before shortening the interval at 23.
+
+---
+
+### Phase 2D — 23 at five colours, rounded from an unconverged checkpoint (implementer, 2026-09-21). **LANDED.**
+
+**The headline.** `data/fs66/b1/cert-p23.json`, **`U = 97.984637…`**, **`CERTIFIED`** by Phase 2A's frozen
+checker with `--m 5`: `5·U = 489.923187… < 529`, so **no level of the 23-adic tower is five-colourable**, and
+23 joins 7, 11 and 19 as a prime whose whole tower is decided from below. It was rounded from the solve's
+**second checkpoint, 6,000 iterations, `res_dual` 1.94e−03 — not from a converged solve**, which is the
+owner's go/no-go call in `plans/FS66-residue-tower-drop.md` §Q and is vindicated: the rounding loss is
+**0.416965** against a margin of **8.2**.
+
+**What it is worth, beyond the tower.** `B₁(p) ≥ α(UD(𝔽_p,2))` (R″.12 item 2), so **`α(UD(𝔽₂₃,2)) ≤ ⌊U⌋ = 97`**
+— against **FS-56's certified 105**, the best previously known, and FS-53's plateau of 87 from below. The
+bracket at 23 is now **[87, 97]** where it was [87, 105]. That is the second time this milestone's tower
+instrument has beaten the level-3 relaxation on a *finite plane's* independence number (19: 77 against 80).
+
+**R‴.1 The price, measured before the scan was sized, and what it overturned.**
+
+| | at 23 | the record's expectation |
+|---|---|---|
+| one exact rounding attempt, one core, quiet machine | **1,856 s** (31 min); 1,866 CPU s | `data/fs66/ckpt/b1-p23/README.md`: "well over the 243 s at 19 … 2.9× larger" — the true factor is **7.6×** |
+| its peak resident memory | **921 MB** (the parent holding the build: 733 MB) | not predicted |
+| the twelve-attempt scan | **38 min 11 s** wall, 16,958 CPU s, 741 % of one core, peak **1.52 GB** per worker | — |
+| the frozen checker on a 23-sized certificate | **51 min 50 s** wall, 3,095 CPU s, peak **8.60 GB** | R″.6 measured 8 min 21 s / 3.17 GB at 19 |
+
+The scan's width was chosen from the measured 921 MB: at 12 workers the wave needs ≈ 12 GB of the 107 GB
+free, so **memory was never the binding constraint and `--jobs` was set by the brief's rule to leave the
+live GPU solve its cores** (12 of 32 threads, the solve holding one). `#reps² × n` predicts the *product
+table*, which is the build's cost, not the rounding's: the rounding also walks the cascade over `K`
+canonical monomials (134,447 against 52,370) and multiplies integers that are longer at `D = 14`. **A cost
+model validated on one stage does not transfer to another stage of the same program** — the 2.9× was a true
+statement about the wrong quantity.
+
+**R‴.2 The certificate.**
+
+| | |
+|---|---|
+| `U_num / scale` | `9798463752088652446789757724702574 / 10^32` = **97.984637…** |
+| the claim | **`5·U = 489.923187… < 529`** — `--m 5`, exit 0, `CERTIFIED` |
+| not the claim | `6·U = 587.907825… ≥ 529` — `--m 6`, exit 3, `BOUND ONLY` |
+| blocks / rows / weights / cascade steps / bytes | 46 / 138,706 / 45 / 63,467 / 26,297,669 |
+| sha256 | `28cf189c83d2…` |
+| rounded from | `data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz` (sha256 `1f78c15c7c21…`), 6,000 iterations, `pobj` 97.567673, `dobj` 97.567172, `res_pri` 5.18e−05, **`res_dual` 1.94e−03**, `status solved (inaccurate - reached max_iters)` |
+| rounding loss | **0.416965** against the float reading 97.567673 — **215 × `res_dual`**, where 19 read ≈ 250 × |
+| shift / digits | `1e-10` / `D = 14` (weights `W = 9`) |
+
+**R‴.3 — the phase's sharpest finding: §R′.2's rounding law is FALSE at 23, and the recipe it prescribes
+produces no certificate here.** The law recorded at 7, 11 and 19 — *positive definiteness survives exactly
+when `shift ≥ 10^(3−D)`*, "three primes, no exception" (R″.7) — has an exception at the fourth prime. The
+threshold at 23 is one decade higher, **`shift ≥ 10^(4−D)`**, on all twelve attempts:
+
+| shift | `U`, `D = 12` | `U`, `D = 14` |
+|---|---|---|
+| `1e-07` | 98.031969… | 98.030948… |
+| `1e-08` | **97.987788…** (the smallest surviving at `D = 12`) | 97.987711… |
+| `1e-09` | **not positive definite** (11 blocks) — the law predicted it would survive | 97.984857… |
+| `1e-10` | not positive definite (23 blocks) | **97.984637…** (shipped) |
+| `1e-11` | not positive definite (23) | **not positive definite** (11 blocks) — the law predicted it would survive |
+| `1e-12` | not positive definite (23) | not positive definite (23) |
+
+Read the two bold refusals: at `D = 12` the law puts the threshold at `1e-9` and the blocks fail there; at
+`D = 14` it puts it at `1e-11` and they fail there too. **Both boundary cases fail, in the same direction,
+one decade apart — so this is the law's constant moving from 3 to 4, not noise.** The consequence is
+operational and it is the one thing to carry to the next prime: §R′.2's recipe as written — *round at
+`shift = 10^(3−D)` for the largest affordable `D`* — would have returned **NO CERTIFICATE AT ALL** at 23
+(`1e-11` at `D = 14`), and only the producer's `--escalate` loop, which raises the shift tenfold when
+*every* attempt fails, would have rescued a run that asked for that single point. **The rule that replaces
+it: scan at least three decades of shift at the largest affordable `D`, start at `10^(4−D)`, and treat
+`10^(3−D)` as the optimistic end of a range rather than as a threshold.** A plausible mechanism, not
+verified here: the rounding error in a block of size `d` is about `d · 10^{−D}` after the congruence
+rescaling, and `d` grew 182 → 266 while `n` grew 361 → 529; but a factor of ten is more than either, so the
+mechanism is a conjecture and the measurement is the finding.
+
+The curve's other half is the one already known: above the threshold `U` is essentially flat (97.9846 →
+97.9878 → 98.0320 over three decades), because at `res_dual` 1.94e−03 the bound is set by the **dual**, not
+by the digits. **`U` cannot go below 97.5677** — the certificate is a feasible point of the relaxation's
+dual, so `U ≥` the relaxation's own optimum, and the unconverged reading is already 97.5677. Hence
+**`⌊U⌋ = 97` is final for this relaxation at 23**, a converged solve can only make the decimals prettier,
+and six colours (`U < 88.1667`) are out of this instrument's reach at 23 by nine colours' worth of margin.
+
+**R‴.4 The checker at 23's size, measured on a real 23-sized file before anything depended on it, and where
+its time goes.** 51 min 50 s and 8.60 GB, all seven steps, the identity verified coefficient by coefficient
+on all **134,447** canonical monomials. R″.6 found the cost at 19 to be the naive product table (step 6);
+**at 23 the split has moved**: step 5, the Bareiss eliminations, takes **≈ 35 of the 52 minutes** — at 19
+they "were not the surprise" and passed inside an 8-minute run, at 23 twenty-three blocks of size 267 with
+`D = 14` entries dominate, because fraction-free elimination's `k`-th pivot is a `k × k` minor and its
+digit count grows like `k`. The memory is step 6's memos (0.4 GB through step 5, 8.6 GB at the end). The
+checker was **not touched**; R″.12 item 1's standing advice — if it is ever re-opened, give it the
+producer's two product-table symmetries — would now buy less than halving step 5 would.
+
+**R‴.5 The controls.**
+
+* **`--m 5` on the shipped file: `CERTIFIED`, exit 0** (51 min 50 s, 8.60 GB; record in `records.jsonl`).
+* **`--m 6` on the shipped file: `BOUND ONLY`, exit 3** — `6·U = 587.907825… ≥ 529`. Asked because
+  `U < 529/6 = 88.1667` would have refused six colours at every level, and `U < 89` alone would have given
+  `α(UD(𝔽₂₃,2)) ≤ 88 < 529/6`, i.e. **χ(UD(𝔽₂₃,2)) ≥ 7** — FS-53's open first digit at 23. The float
+  reading 97.5677 put both out of reach before the rounding started; the run is the record that they were
+  asked and refused, not a null at a budget.
+* **The perturbation, on a scratch copy of the shipped file**: `U_num` lowered by one, i.e. by one part in
+  `10^{33}` — the overclaim that every other check would wave through. **`REFUSED IDENTITY_MISMATCH`**, at
+  the constant monomial, the checker naming the `U_num` the file's blocks and rows actually support. The
+  committed file was never written to; the certificate's own run and this one differ in one digit of one
+  integer.
+* **The 87-point set**: `tools/fs66_b1_sets_check.py` says `VERIFIED` on all four sets, from the definition
+  against a rebuilt unit circle; an independent all-pairs check over the 3,741 pairs agrees; and a planted
+  point moved one unit vector off another is `REFUSED NOT_INDEPENDENT`, naming both points and the vector.
+* **Not run: `--ldl`.** §S.5's slow route re-does every elimination in exact rationals and re-multiplies;
+  step 5 already costs 35 minutes by the fast route at this size, so `--ldl` is hours. Phase 2A ran it at 11,
+  where it agreed with Bareiss; nothing at 23 tests the elimination code that 11 did not.
+
+**R‴.6 What the certificate licenses at 23 — and the one clause that is NOT an exact value.** With the
+committed 87-set (`data/fs66/b1/level-one-sets.json`):
+
+> For every `k ≥ 1`, every independent set of `UD(ℤ/23^k, 2)` has at most `U·529^{k−1}` points with
+> `U = 97.984637…`; hence **no level of the tower is five-colourable**, `χ(UD(ℤ/23^k, 2)) ≥ 6` at every `k`,
+> the fractional chromatic number of every level lies in `[529/U, 529/87] = [5.3988, 6.0805]`, the Haar-measure
+> supremum for `ℤ₂₃²` lies in `[87/529, U/529] = [0.164461, 0.185226]`, `46,023 ≤ α(UD(ℤ/529, 2)) ≤ 51,833`,
+> and `α(UD(𝔽₂₃,2)) ≤ 97`.
+
+**The Borel clause does not close at 23, and that is a fact about 23 rather than about this certificate.**
+`χ_Bor(ℚ₂₃²) ≥ ⌈529/U⌉ = 6` by the measure clause; the matching ceiling is `χ(UD(𝔽₂₃,2))`, which is
+**undecided** — FS-53/FS-56 leave it in `{6, 7, 8}` — so this gives `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8` and not the exact
+value that 7, 11 and 19 give. A six-colouring of `UD(𝔽₂₃,2)` would close it at 6 and settle that plane's
+first digit at once.
+
+**R‴.7 What this says about FS-66's question, at the prime the milestone is aimed at.** The ceiling a number
+field gets from the 23-adic tower is `χ(UD(ℤ/23^k, 2))` at the best level `k`, and the levels are
+non-increasing in `k` (reduction is a graph homomorphism `G_{k+1} → G_k`). This certificate puts a **floor of
+6 under every level at once**: the tower at 23 can never hand any field a ceiling below six, at any depth.
+So the route FS-66's stub named — *"leaves 'predicted ≥ 6 at ℚ(√167)' unproven until `UD(ℤ/529,2)` is asked
+at five, where a colouring is the theorem `χ(ℚ(√167)²) ≤ 5`"* — **is closed, at every level and not only at
+level two: there is no such colouring anywhere in the tower.** The conjecture's prediction
+`χ(ℚ(√167)²) ≥ 6` cannot be refuted through the 23-adic tower, and the way to attack it is now either the
+other usable plane (43, priced in R‴.8 and out of reach) or a construction over the field itself (FS-59).
+*This is resistance, which strengthens the prediction; it is not a proof of it.*
+
+**R‴.8 The price of 43, NOT run.** 43 is `ℚ(√167)`'s other usable residue plane below the spectral refusals,
+and the question is whether the same certificate can be had there. The model below reproduces the measured
+sizes at 19 and 23 to a few per cent (`K ≈ p⁵/48` orbits — 51,585 against 52,370 and 134,090 against
+134,447; scalar rows ≈ 4.97·K; `nnz ≈ (block rows)·(n+1)/2`), so its 43 figures are worth quoting.
+
+| | 19 (measured) | 23 (measured) | **43 (extrapolated)** |
+|---|---|---|---|
+| `n = p²`, representatives | 361, 182 | 529, 266 | **1,849, 926** |
+| blocks | 183 + 18×182 + 2×2 | 267 + 22×266 + 2×2 | **927 + 42×926 + 2×2** |
+| orbits `K` | 52,370 | 134,447 | **≈ 3,062,700** |
+| scalar rows | 259,271 | 667,774 | **≈ 15.2 M** |
+| constraint matrix, nonzeros | 53.7 M | 204.7 M | **≈ 1.71 × 10¹⁰** (78× of 23) |
+| Σ (block size)³, the per-iteration eigenwork | 1.15 × 10⁸ | 4.33 × 10⁸ | **3.41 × 10¹⁰** (79× of 23) |
+| host memory at assembly | 4.4 GB | 16.0 GB | **≈ 1.2 TB** |
+| GPU memory | 2.4 GB | 4.0 GB | **≈ 310 GB** (card A has 32) |
+| seconds per iteration, `gpu_indirect` | 0.675 (50 it), 0.875 avg | 3.926 (50 it), ≥ 6.6 long-run | **≈ 310 (50 it), ≈ 520 long-run** |
+| hours to converge (≈ 14,000 iterations) | 3.4 h | 19–28 h projected | **≈ 2,000 h — 84 days** |
+| one exact rounding attempt | 243 s | 1,856 s | **≈ 22 h** (`#reps² × n` is 42× of 23, and the cascade's `K` is 23×) |
+| the frozen checker | 8 min 21 s | 51 min 50 s | **≈ 1–2 days, ≈ 200 GB** |
+
+**43 is not a phase; it is a different instrument.** Nothing in the list fits this machine: the constraint
+matrix alone is 200 GB at twelve bytes a nonzero and the GPU needs ten times its memory. Splitting each
+character block by the reflection that fixes it (926 → 463 + 463, §19's suggestion, never needed at 19 or
+23) divides the eigenwork by four and the matrix by two — still ≈ 21 days of GPU and ≈ 100 GB, and the
+checker is untouched by it. **What a stub for 43 should ask instead** is whether the relaxation can be made
+smaller rather than the machine bigger: the reflection split, a *third*-level-free formulation with fewer
+box rows, or the observation that `B₁`'s optimum is wanted only to one integer (43 needs `U < 1849/6 =
+308.17` for six colours and `U < 369.8` for five, against a best known set of 258 — so the five-colour
+question at 43 has ≈ 30 % of margin, the roomiest of any open member).
+
+**R‴.9 Decisions (choice · alternative · why · confidence).**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Ship the certificate rounded from the 6,000-iteration checkpoint, and write the re-round commands down rather than wait** | wait for the solve's clean `status solved` (19–28 h projected) and round that | the margin decides: 8.2 of room against a loss of 0.417, and `⌊U⌋ = 97` cannot improve because `U ≥ 97.5677` is a theorem about the relaxation. Waiting buys decimals and costs a day. The owner's brief asked for exactly this and the numbers confirm it | high |
+| **A twelve-point scan (6 shifts × 2 digit counts) rather than the six-point grid 19 used** | re-run 19's `1e-8,1e-9,1e-10 × 12,14` | it cost nothing — 12 free cores, 1 GB each, one wave — and it is what caught §R′.2's law failing at 23. The six-point grid would have returned four refusals and two certificates and looked unremarkable | high |
+| **Measure the checker on the trial file, in parallel with the scan, before the shipped file existed** | check only the shipped file, after the scan | the brief's rule ("before anything depends on it"), and it bought the 52-minute figure an hour earlier than a serial plan. The cost: that timing is contended and is reported as such; the shipped file's own run, on a quieter machine, reads 51 min 50 s and is the number that travels | high |
+| **Run `--m 5`, `--m 6` and the perturbation control concurrently** | serially, three hours | four checkers use 4 of 32 threads and 4 × 8.6 GB of 107 GB free; the timings are reported with the load stated. The only care needed was staggering the two `--record` runs by two minutes so their appends to `records.jsonl` cannot interleave | high |
+| **Add 19 and 23 to `SOUNDNESS.md` §8** | leave the page at 7 and 11, as Phase 2C did | §8 is titled "the statement this licenses", and a page that licenses four primes while naming two reads as though two is all there is. Nothing about the *argument* changed, so the addition is numbers and one new caveat (the Borel clause does not close at 23) | medium-high — it is the trusted page, and a reviewer's eye on it is worth more than completeness if the two ever conflict |
+| **Leave `tools/fs66_b1_cert_make.py` and the frozen checker untouched** | teach the checker the producer's two product-table symmetries, now that step 5 rather than step 6 dominates | 23 forced no change: the producer ran unmodified and the checker finished inside a reviewer's patience. And the symmetries would attack step 6, which is no longer the expensive half at this size | high |
+
+**R‴.10 Where this brief, the records or the plan were wrong.**
+
+1. **`data/fs66/ckpt/b1-p23/README.md`'s "2.9× larger" for the rounding cost.** Measured **7.6×** (1,856 s
+   against 243 s). `#reps² × n` sizes the product table, not the rounding; the rounding also pays the
+   cascade over `K` and longer integers. R‴.1.
+2. **§R′.2's rounding law, "three primes, no exception", is false at the fourth.** R‴.3. This is the entry
+   that matters: following the recipe literally at 23 yields no certificate.
+3. **R″.6's reading of where the checker's time goes does not survive the size change.** At 19 it was the
+   naive product table; at 23 two thirds of the run is the Bareiss eliminations. R‴.4.
+4. **The brief's "from this checkpoint probably 98; a later checkpoint could make it 97"** — it is already
+   97, and 96 is unreachable by this relaxation at any checkpoint (`U ≥ 97.5677`). R‴.3.
+5. **A near miss worth recording, because it is this file's own rule.** A waiter for the price run was armed
+   on a PID obtained from `pgrep -u $USER -f "fs66_b1_cert_check.py /tmp"` — a pattern that **also matches
+   the shell running the pgrep**, whose command line contains it. It happened to return the `/usr/bin/time`
+   wrapper, so the wait was correct; had it returned the shell, the wait would never have ended and would
+   have looked exactly like a hung checker. `CLAUDE.md` records eight instances of this trap and it was
+   walked into anyway. Every later wait in this phase used a PID captured at launch.
+6. **One record row points outside the repository, and one control deliberately has no row.** The first
+   `fs66-b1` row at `p = 23` is the *priced* attempt and its `cert` field names a scratch path; that file
+   and the shipped one are byte-identical except `producer.utc` (checked key by key). It is kept because the
+   brief asked for the price to be recorded, and it is flagged here so a reviewer recounting
+   `records.jsonl` against files on disk knows why one path does not resolve. The perturbation control was
+   run **without** `--record` for the opposite reason — a check record whose `cert` is a scratch file is a
+   dangling path that also *claims a verdict*, which is worse — so `p = 23` has **15** rows: 13 rounding
+   attempts and 2 checker runs, with the third check in `controls.out`.
+
+**R‴.11 The handover sweep** (WORKFLOW step 9's two greps over this phase's additions; the close is the
+owner's). *"conjecture"* — two new hits, neither a new conjecture of this phase's. R‴.3: the mechanism
+offered for the law's constant moving from 3 to 4 (block size against digit count) is **labelled a
+conjecture and not claimed** — it is a stub candidate only if a fifth prime is ever certified, and the
+operational rule that replaces the law (scan the decades) does not depend on it. R‴.7: the local–global
+conjecture's prediction at `ℚ(√167)`, which is the milestone's, cited and not extended. *"not claimed"* —
+no new hit.
+*§PA read back for what this phase taught about the object:* the tower instrument's dividend on **finite**
+planes is now larger than its dividend on towers. At 7 and 11 `⌊U⌋ = α` and the bound was vacuous; at 19 it
+gave `α ≤ 77` against the level-3 relaxation's 80; at **23 it gives `α ≤ 97` against FS-56's 105, an
+eight-integer improvement on a plane whose independence number is one of the two numbers FS-53's whole
+window turns on.** The second-level moment relaxation *of the fibre-density problem* is, empirically, a
+stronger bound on `α(UD(𝔽_p,2))` than the level-3 relaxation *of `α` itself* — at both primes where the two
+have been compared. **That is a stub candidate in its own right and it is not about the tower at all:** if it
+holds at 43 and 47, it attacks FS-57's fractional wall from a direction that milestone never considered.

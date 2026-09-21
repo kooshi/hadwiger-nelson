@@ -364,3 +364,148 @@ build/venv-sdp-gpu/bin/python tools/fs66_b1_cert_make.py 19 --fast --build-jobs 
 # the verdict, which is the only thing above that anyone need trust
 python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p19.json --m 4 --record data/fs66/b1/records.jsonl
 ```
+
+---
+
+# Phase 2D — `p = 23` at five colours, from an unconverged checkpoint (implementer, 2026-09-21)
+
+**The certificate: `cert-p23.json`, `U = 97.984637…`, and the frozen checker says `CERTIFIED`.** Five
+colours at 23 need `U < 529/5 = 105.8`; this one has **8.2 of room**. It was rounded from the solve's
+**second checkpoint — 6,000 iterations, `res_dual` 1.94e−03, not a converged solve** — because the rounding
+loss tracks the dual residual and at 19 that ran about 250 × `res_dual`; here it ran 215 ×, i.e. **0.417
+against 8.2 of margin.** The solve is still running toward convergence; when it lands, the two commands in
+`../ckpt/b1-p23/README.md` re-round and re-check, and the tighter file replaces this one. **It will not
+change what the file licenses** (see the last paragraph of this section).
+
+| | `data/fs66/b1/cert-p23.json` |
+|---|---|
+| exact bound `U = U_num / scale` | **97.984637…** |
+| `U_num` | `9798463752088652446789757724702574` |
+| `scale` | `10^32` (digits `D = 14`, weight digits `W = 9`, diagonal shift `1e-10`) |
+| refuses | **`5·U = 489.923187… < 529`** (`--m 5`, exit 0) |
+| does not refuse | `6·U = 587.907825… ≥ 529` (`--m 6`, exit 3, `BOUND ONLY`) |
+| blocks / rows / weight vectors / cascade steps | 46 / 138,706 / 45 / 63,467 |
+| size | 26.3 MB |
+| sha256 | `28cf189c83d2…` |
+| checker's wall time / memory | **51 min 50 s / 8.60 GB** |
+| rounded from | `../ckpt/b1-p23/solve-gpu.it6000.npz` (sha256 `1f78c15c7c21…`), 6,000 SCS iterations, `res_pri` 5.18e−05, `res_dual` 1.94e−03, ≈ 10.6 h on graphics card A |
+| rounding loss | **0.416965** against the float reading 97.567673 |
+
+## What it licenses — §ST's sentence, at `p = 23`
+
+> **For every `k ≥ 1`, every independent set of `UD(ℤ/23^k, 2)` has at most `U·529^{k−1}` points with
+> `U = 97.984637…` (the exact rational in the file); hence no level of the tower is five-colourable,
+> `χ(UD(ℤ/23^k, 2)) ≥ 6` at every level, the fractional chromatic number of every level lies in
+> `[529/U, 529/87] = [5.3988, 6.0805]`, and the supremum of the Haar measure of a measurable independent
+> set of `ℤ₂₃²` lies in `[87/529, U/529] = [0.164461, 0.185226]`.**
+
+**The Borel clause does not close at 23** — and that is a fact about 23, not about this certificate.
+`χ_Bor(ℚ₂₃²) ≥ ⌈529/U⌉ = 6` by the measure clause, and the matching ceiling is `χ(UD(𝔽₂₃, 2))`, which is
+**undecided**: FS-53 and FS-56 leave it in `{6, 7, 8}`. So **`6 ≤ χ_Bor(ℚ₂₃²) ≤ 8`**, where 7, 11 and 19
+give exact values (4, 5, 5). A verified six-colouring of `UD(𝔽₂₃, 2)` would close both this and that
+plane's first digit at once.
+
+**And a bound on a finite plane, which is the largest single gain here.** `B₁(p) ≥ α(UD(𝔽_p, 2))`, because a
+level-one independent set is itself a feasible `φ`. So **`α(UD(𝔽₂₃, 2)) ≤ ⌊U⌋ = 97`**, against **FS-56's
+certified `≤ 105`** from the level-3 relaxation — an eight-integer improvement on a plane that FS-53's whole
+window turns on. With the committed 87-point set, **`α(UD(𝔽₂₃, 2)) ∈ [87, 97]`** where it was `[87, 105]`,
+and at level two **`46,023 ≤ α(UD(ℤ/529, 2)) ≤ 51,833`**.
+
+**What it says about the milestone's own question.** Reduction is a graph homomorphism `G_{k+1} → G_k`, so
+the ceilings a number field gets from the 23-adic tower are non-increasing in the level. This certificate
+puts a **floor of 6 under every level at once**, so the tower at 23 can never hand any field a ceiling below
+six, at any depth. The route FS-66's stub named — *ask `UD(ℤ/529, 2)` at five colours, where a colouring is
+the theorem `χ(ℚ(√167)²) ≤ 5`* — **is closed at every level, not only at level two: there is no such
+colouring anywhere in the tower.** The conjecture's prediction `χ(ℚ(√167)²) ≥ 6` therefore cannot be refuted
+through the 23-adic tower. *That is resistance, which strengthens the prediction; it is not a proof of it.*
+
+**Trust word for every sentence above: `CERTIFIED (fs66_b1_cert_check)` + the hand-proved links L1, L2, L6
+of `SOUNDNESS.md`. Never the Lean kernel**, and never the producer, which is untrusted by design.
+
+## The rounding scan at 23, and the law that **fails** here (`scan-p23.log`)
+
+Twelve independent exact attempts across twelve cores, no solver call: 38 min 11 s wall, 16,958 CPU s.
+
+| shift | `U` at `D = 12` | `U` at `D = 14` |
+|---|---|---|
+| `1e-07` | 98.031969… | 98.030948… |
+| `1e-08` | **97.987788…** | 97.987711… |
+| `1e-09` | **not positive definite** (11 blocks) | 97.984857… |
+| `1e-10` | not positive definite (23 blocks) | **97.984637…** (shipped) |
+| `1e-11` | not positive definite (23) | **not positive definite** (11 blocks) |
+| `1e-12` | not positive definite (23) | not positive definite (23) |
+
+**At 7, 11 and 19 positive definiteness survived exactly when `shift ≥ 10^(3−D)`, "three primes, no
+exception". At 23 the threshold is one decade higher, `shift ≥ 10^(4−D)`** — and both boundary cases fail,
+in the same direction, so this is the law's constant moving rather than noise. **The practical consequence:
+the recipe those three primes prescribed — *round at `shift = 10^(3−D)` for the largest affordable `D`* —
+names `1e-11` at `D = 14` and would have produced NO CERTIFICATE AT ALL at 23.** The rule that replaces it:
+**scan at least three decades of shift at the largest affordable `D`, starting at `10^(4−D)`, and treat
+`10^(3−D)` as the optimistic end of a range rather than as a threshold.**
+
+Above the threshold `U` is flat (97.9846 → 97.9878 → 98.0320 over three decades) because at `res_dual`
+1.94e−03 the bound is set by the dual and not by the digits.
+
+## Why a converged solve will not change the statement
+
+`U` can never fall below the relaxation's own optimum — the certificate is a feasible point of its dual —
+and the unconverged float reading is already **97.567673**. So `⌊U⌋ = 97` is final for this relaxation at
+23, and six colours (`U < 88.1667`) are out of its reach by nine colours' worth of margin. A converged
+re-round should land `U` near **97.573** in place of 97.984637: prettier decimals in the same sentence.
+
+## What it cost, measured
+
+| | at 19 | **at 23** |
+|---|---|---|
+| one exact rounding attempt, one core, quiet | 243 s | **1,856 s** (31 min), peak **921 MB** — 7.6×, where `../ckpt/b1-p23/README.md` predicted 2.9× |
+| the scan | ≈ 5 min, 6 attempts | **38 min 11 s**, 12 attempts on 12 cores, peak 1.52 GB per worker |
+| the frozen checker | 8 min 21 s, 3.17 GB | **51 min 50 s, 8.60 GB** |
+
+**Where the checker's time goes has moved with the size.** At 19 it was the naive product table (step 6, the
+identity); at 23 **about 35 of the 52 minutes are step 5**, the fraction-free eliminations on twenty-three
+blocks of size 267 — the `k`-th pivot is a `k × k` minor, so its digit count grows with `k`. Memory is
+step 6's: 0.4 GB through step 5, 8.6 GB at the end. The checker was not modified.
+
+## The controls (`controls.out`, Phase 2D block)
+
+* `--m 5` on the shipped file → **`CERTIFIED`, exit 0.**
+* `--m 6` → **`BOUND ONLY`, exit 3.** Asked and recorded because `U < 89` would also have given
+  `α(UD(𝔽₂₃,2)) ≤ 88 < 529/6`, i.e. `χ(UD(𝔽₂₃,2)) ≥ 7` — FS-53's open first digit at 23. The float reading
+  put it out of reach before the rounding began.
+* **The perturbation:** `U_num` lowered by one, one part in `10^{33}`, on a scratch copy — the overclaim that
+  the parse, the signs, the symmetries, the rows and the positive definiteness all wave through. →
+  **`REFUSED IDENTITY_MISMATCH`**, at the constant monomial `y([])`, the checker naming the `U_num` the
+  file's blocks and rows actually support. exit 1.
+* **The 87-point set** → `VERIFIED`; a point moved one unit vector off another → `REFUSED NOT_INDEPENDENT`,
+  naming both points and the vector.
+* **Not run: `--ldl`** — hours at this size, and it agreed with the fast route at 11.
+
+## Files added or changed by Phase 2D
+
+| file | what it is | trust word |
+|---|---|---|
+| `cert-p23.json` | **the certificate at 23**, format `fs66-b1-cert-v2`, integers only | **`CERTIFIED (fs66_b1_cert_check)`** + the hand links L1, L2, L6 |
+| `scan-p23.log` | all twelve rounding attempts, and the priced single attempt that sized the scan | producer bound (untrusted) |
+| `controls.out` | a Phase 2D block: the two verdicts, the perturbation, the sets control | controls, each red or green for a named reason |
+| `level-one-sets.json` | now also holds the 87-point set of `UD(𝔽₂₃,2)` (FS-53's, re-verified here from the definition) | **`VERIFIED (fs66_b1_sets_check)`** |
+| `records.jsonl` | **15** further rows at `p = 23`: 13 rounding attempts (12 in the scan, 1 priced) and 2 checker runs (`--m 5` `CERTIFIED`, `--m 6` `BOUND ONLY`). The perturbation control ran **without** `--record` on purpose — its input is a scratch file and a record naming a path outside the repository would not resolve for a reviewer; its output is in `controls.out` instead | each row's own `trust` field |
+| `../ckpt/b1-p23/README.md` | rewritten: the certificate exists, and the two commands that re-round and re-check when the solve converges | provenance, never a certificate |
+
+## The commands, exactly
+
+```
+# the price, run first and alone, to size the scan: 31 min on one core, 921 MB
+~/venvs/fs66/bin/python tools/fs66_b1_cert_make.py 23 --fast --cache-dir data/fs66/ckpt/b1-p23 \
+  --round-only --solve-ckpt data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz \
+  --digits 14 --shift 1e-10 --jobs 1 --out <scratch>/trial.json --record data/fs66/b1/records.jsonl
+
+# the scan: 12 exact attempts across 12 cores, no solver call, 38 min
+~/venvs/fs66/bin/python tools/fs66_b1_cert_make.py 23 --fast --cache-dir data/fs66/ckpt/b1-p23 \
+  --round-only --solve-ckpt data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz \
+  --scan --scan-shifts 1e-7,1e-8,1e-9,1e-10,1e-11,1e-12 --scan-digits 12,14 --jobs 12 \
+  --out data/fs66/b1/cert-p23.json --record data/fs66/b1/records.jsonl
+
+# the verdict, which is the only thing above that anyone need trust
+python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 5 --record data/fs66/b1/records.jsonl
+python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 6 --record data/fs66/b1/records.jsonl
+```

@@ -281,6 +281,27 @@ extends over the countably many cosets of `ℤ_p²` in `ℚ_p²` because unit ve
 This clause rests on the measure clause above (hand), the certificate, and L1–L6 — the same trust word as
 everything else on this page, and not a proof assistant's.
 
+**At `p = 19` and `p = 23`, the same clauses with the same links** (`cert-p19.json`, `U = 77.511742…`;
+`cert-p23.json`, `U = 97.984637…`). At 19: four colours refused at every level, `χ(G_k) = 5`,
+`χ_f ∈ [4.6574, 4.7500]`, Haar supremum in `[0.210526, 0.214714]`, `χ_Bor(ℚ₁₉²) = 5`, and
+`27,436 ≤ α(UD(ℤ/361, 2)) ≤ 27,981`. At 23: **five** colours refused at every level, so `χ(G_k) ≥ 6` at
+every `k`, `χ_f ∈ [5.3988, 6.0805]`, Haar supremum in `[0.164461, 0.185226]`, and
+`46,023 ≤ α(UD(ℤ/529, 2)) ≤ 51,833`.
+
+**Two of those clauses read differently at 23, and the difference is a fact about 23 rather than about the
+certificate.** (i) *The chromatic number of a level is not pinned*, only floored: `χ(UD(𝔽₂₃, 2))` is
+undecided — FS-53 and FS-56 leave it in `{6, 7, 8}` — so the pull-back argument that gave `χ(G_k) = 5` at
+11 and 19 gives only `6 ≤ χ(G_k) ≤ χ(UD(𝔽₂₃, 2))` here. (ii) *The Borel clause does not close*: the lower
+half stands, `χ_Bor(ℚ₂₃²) ≥ ⌈529/U⌉ = 6`, and the upper half is that same undecided `χ(UD(𝔽₂₃, 2))`, so
+this page licenses `6 ≤ χ_Bor(ℚ₂₃²) ≤ 8` and not an exact value. A verified six-colouring of `UD(𝔽₂₃, 2)`
+would close both at once.
+
+**One clause that is new at 19 and 23, and rests on §6 alone.** `B₁(p) ≥ α(UD(𝔽_p, 2))`, because a level-one
+independent set is itself a feasible `φ` (§2's `k = 1` case), so **the same `U` bounds the independence
+number of the finite plane**: `α(UD(𝔽₁₉, 2)) ≤ 77` and `α(UD(𝔽₂₃, 2)) ≤ 97`. At 7 and 11 this is vacuous
+(`⌊U⌋` is already `α`); at 19 and 23 it beats what a relaxation built for `α` itself had proved (80 and
+105). It uses no hand link beyond §2 and §6.
+
 **What none of this says:** anything about the ordinary (non-clopen) chromatic number of `ℚ_p²`; anything
 about a number field's plane beyond a ceiling; and nothing that would decide whether `U` is the true maximum
 — at 11 it is 0.8 % above the level-one independence number 28, and whether that gap is real is open.
