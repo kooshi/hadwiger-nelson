@@ -1,0 +1,42 @@
+p=7 n=49 |S|=8 |H|=16 reps=26
+moment structure built: 494 orbits so far, 0.6s
+triangles: none; localisers built, 495 orbits, 0.6s
+q rows built, 495 orbits, 0.9s
+orbits K=495; PSD blocks [('M2[u=0]', 27), ('M2[u=(0, 1)]', 26), ('M2[u=(0, 3)]', 26), ('M2[u=(1, 3)]', 26), ('M2[u=(0, 2)]', 26), ('M2[u=(1, 2)]', 26), ('M2[u=(2, 3)]', 26), ('locq[u=0]', 2)]; scalar rows 2288; eq rows 0
+assembled: (4775, 494), nnz 57404, 1.0s
+------------------------------------------------------------------
+	       SCS v3.3.1 - Splitting Conic Solver
+	(c) Brendan O'Donoghue, Stanford University, 2012
+------------------------------------------------------------------
+problem:  variables n: 494, constraints m: 4775
+cones: 	  l: linear vars: 2288
+	  s: psd vars: 2487, ssize: 8
+settings: eps_abs: 1.0e-06, eps_rel: 1.0e-06, eps_infeas: 1.0e-07
+	  alpha: 1.50, scale: 1.00e-01, adaptive_scale: 1
+	  max_iters: 20000, normalize: 1, rho_x: 1.00e-06
+	  acceleration_lookback: 10, acceleration_interval: 5
+lin-sys:  sparse-direct-mkl-pardiso
+	  nnz(A): 57404, nnz(P): 0
+------------------------------------------------------------------
+ iter | pri res | dua res |   gap   |   obj   |  scale  | time (s)
+------------------------------------------------------------------
+     0| 2.11e+00  4.49e+01  9.11e+01 -4.69e+01  1.00e-01  3.68e-02 
+   250| 3.67e-04  1.36e-01  1.90e-03 -1.40e+01  7.15e-01  2.24e-01 
+   500| 6.57e-05  1.43e-02  2.77e-03 -1.40e+01  2.05e-01  4.11e-01 
+   750| 3.09e-05  4.11e-03  8.21e-04 -1.40e+01  2.05e-01  6.07e-01 
+  1000| 1.27e-05  1.83e-03  7.50e-04 -1.40e+01  2.05e-01  7.92e-01 
+  1250| 7.25e-06  1.25e-03  6.95e-04 -1.40e+01  2.05e-01  9.81e-01 
+  1500| 1.85e-06  7.60e-04  3.78e-04 -1.40e+01  2.05e-01  1.16e+00 
+  1750| 1.46e-06  8.44e-04  3.78e-04 -1.40e+01  2.05e-01  1.33e+00 
+  2000| 4.94e-06  7.88e-04  3.55e-04 -1.40e+01  1.95e-02  1.51e+00 
+  2250| 3.01e-06  6.30e-04  2.83e-04 -1.40e+01  1.95e-02  1.69e+00 
+  2500| 6.55e-06  2.41e-02  2.60e-03 -1.40e+01  1.95e-02  1.88e+00 
+  2650| 8.92e-07  1.75e-05  1.11e-05 -1.40e+01  1.95e-02  2.00e+00 
+------------------------------------------------------------------
+status:  solved
+timings: total: 2.00e+00s = setup: 3.54e-02s + solve: 1.96e+00s
+	 lin-sys: 5.22e-01s, cones: 1.25e+00s, accel: 5.02e-02s
+------------------------------------------------------------------
+objective = -14.014907
+------------------------------------------------------------------
+{"p": 7, "c": 2.0, "n": 49, "orbits": 495, "blocks": [["M2[u=0]", 27], ["M2[u=(0, 1)]", 26], ["M2[u=(0, 3)]", 26], ["M2[u=(1, 3)]", 26], ["M2[u=(0, 2)]", 26], ["M2[u=(1, 2)]", 26], ["M2[u=(2, 3)]", 26], ["locq[u=0]", 2]], "scalar_rows": 2288, "options": {"absorb": true, "edge": false, "tri": false, "q": true, "qloc": true, "pure": false, "boxloc": false, "sa": false, "edge_rows": false}, "status": "solved", "value": 14.014901212113825, "dual_value": 14.014912361219631, "iterations": 2650, "build_s": 1.0, "solve_s": 2.0, "solver": "scs 3.3.1"}
