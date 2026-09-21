@@ -1,0 +1,7 @@
+p=7: the carry twist reproduces UD(Z/49,2) exactly (67228 edges)
+Witt/carry twist: full spectrum in [-31.4577, 56.0000]; off-level-one part in [-13.9712, 13.8851]  (bound +-14)
+zero twist (equal characteristic): full spectrum in [-31.4577, 56.0000]; off-level-one part in [-12.6136, 14.0000]  (bound +-14)
+random twist 0: full spectrum in [-31.4577, 56.0000]; off-level-one part in [-13.9712, 14.0000]  (bound +-14)
+random twist 1: full spectrum in [-31.4577, 56.0000]; off-level-one part in [-13.9712, 14.0000]  (bound +-14)
+random twist 2: full spectrum in [-31.4577, 56.0000]; off-level-one part in [-13.9712, 14.0000]  (bound +-14)
+no violation
