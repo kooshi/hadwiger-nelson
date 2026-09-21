@@ -1,0 +1,7 @@
+plain-seed11 exit=0
+   verdict not_found best_conflicts 37 verified_proper False restarts 2495
+fixclass87-seed12 exit=0
+   verdict not_found best_conflicts 30 verified_proper False restarts 2453
+plain-seed13 exit=0
+   verdict not_found best_conflicts 40 verified_proper False restarts 2464
+DONE, none found
