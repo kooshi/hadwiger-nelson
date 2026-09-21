@@ -128,6 +128,24 @@ Russian-language literature beyond zbMATH's coverage; the Geombinatorics archive
 
 ---
 
+## §G. Words this plan uses (the repository's own vocabulary — G-numbers, ledger rows — is in `CLAUDE.md`, which you have)
+
+| word | meaning here |
+|---|---|
+| **owner** | the product owner: the session that briefs, reviews by artifact and rules on proposals. **planner**: this file's author. **implementer**: you |
+| **`G_k`, level `k`** | `UD(ℤ/p^k, 2)`: points `(a, b)` with coordinates modulo `p^k`, two points adjacent when the squares of their coordinate differences sum to 1. Level one is the finite plane over `𝔽_p` |
+| **the tower, the ceiling** | the chain `… → G₃ → G₂ → G₁` of reductions, each a graph homomorphism, so `χ(G_{k+1}) ≤ χ(G_k)`; "the ceiling drops" means some inequality is strict |
+| **fibre** over a level-one point `x` | the `p^{2(k−1)}` points of `G_k` that reduce to `x`; no two are adjacent |
+| **pulled back** | a colouring or set of `G_k` that depends only on the level-one reduction: whole fibres, one colour each |
+| **direction class / tangent line** | §S1: the `(p+1)/2` classes `±s̄` of level-one unit vectors; the lifts of `s̄` differ along the line of direction `i·s̄` in the fibre |
+| **biclique encoding** | the owner's CNF for level two: one "line" variable per (fibre, direction class, line, colour), so each `K_{p,p}` costs one clause per colour instead of `p²` |
+| **pin** | unit clauses fixing the colours of a clique — sound only because the clique's vertices are pairwise adjacent *in the graph being asked* |
+| **core** | the vertices and edges a refutation actually uses (read off its LRAT proof by backward reachability); a core that refuses refutes every graph containing it |
+| **fibre density `φ`**, **`B₁(p)`**, **budget**, **cuts** | §S4–S5: the share of each fibre a set fills; the largest total `Σφ` the level-one inequality allows; `c·p²` in the owner's four-class form; the linear inequalities from subgraphs that lift |
+| **trust word** | the closed list in §D saying what a verdict rests on: a verified colouring, a solver's refusal, the checker's `CERTIFIED`, or the kernel |
+
+---
+
 ## §M. What has been measured (2026-09-20; records: `data/fs66/planner/README.md`, `data/fs66/owner/`)
 
 *Machine: the desktop (16 physical cores / 32 threads, 125 GB; graphics card A + graphics card B). Every time below is one
@@ -319,6 +337,20 @@ CNF's SHA-256 equals the one `tools/coloring.py` produces for the same witness: 
 reverse-unit-propagation checker (each added clause implied using exactly its hints in order, deletions honoured, the empty
 clause added). Output `CERTIFIED` (exit 0) or `REFUSED <CODE>: <detail>` (exit 1).
 
+**The output is the product — its reader holds nothing else** (a reviewer who trusts none of `tools/`; an agent scoring a
+phase from `check.out`). On success, in this order: the SHA-256 of the witness, of the proof and **of the checker itself**;
+`n`, `k`; points, listed edges, induced unit pairs among the points, clauses, proof lines, seconds; then one sentence in plain
+words and one last line a script can match:
+`the listed graph (… points, … edges, every pair re-verified as a unit pair modulo n) has no proper k-colouring; it is a
+subgraph of UD(Z/n,2), so UD(Z/n,2) has none` / `CERTIFIED by fs66_check_witness (standard-library checker; NOT the Lean kernel)`.
+On refusal: the code from a **closed list that `--help` prints with a one-line meaning each** (`BAD_POINT`, `REPEATED_POINT`,
+`NOT_UNIT_PAIR`, `PIN_NOT_CLIQUE`, `PROOF_STEP_NOT_RUP`, `PROOF_NO_EMPTY_CLAUSE`, `PROOF_BAD_HINT`, `CNF_DIGEST_MISMATCH`, `IO`),
+and **the first offending item in the reader's vocabulary** — for `NOT_UNIT_PAIR`: both indices, both points, and the quadrance
+computed (`edge 17: (3,40)–(91,7): 8² + 33² ≡ 64 (mod 121), not 1`), never a stack trace. `--controls` prints one row per plant
+— plant · expected code · observed code · `ok`/`FAIL` — then the faithful twin's row, then `ALL CONTROLS BEHAVED` or the count
+that did not, **and exits non-zero unless all behaved**. Nothing is accepted and ignored: an unknown JSON key, a `k` below the
+pin's size, an empty edge list are each refused by name.
+
 **Format** (`witness.json`): `{"kind": "fs66-witness", "n": 121, "k": 4, "points": [[a, b], …], "edges": [[i, j], …] (i < j,
 indices into points, sorted), "pin": [i, j, l], "provenance": {…}}` and `witness.lrat.gz` beside it. **`*.lrat` is gitignored
 repository-wide; `*.lrat.gz` under `data/fs58/` and `data/fs61/` are committed — check `.gitignore` and follow that precedent.**
@@ -504,6 +536,15 @@ import Proofs.HadwigerNelson.EdgeList
 import Proofs.HadwigerNelson.Gadget
 
 open SimpleGraph
+
+/-- The shifted natural subtraction IS subtraction in `ZMod n`. False at `n = 0` (`a = 0`, `b = 1`), hence `NeZero`. In
+Mathlib's namespace, as `ZMod.exists_eq_add_mul_of_castHom_eq` (`Lift.lean`) is: it is a fact about `ZMod`. NOT `@[simp]`
+and not `@[push_cast]` — it is cited by name at its one use; the cast normal form is Mathlib's to legislate. -/
+theorem ZMod.natCast_add_self_sub_mod {n : ℕ} [NeZero n] (a b : ℕ) :
+    ((a + n - b % n : ℕ) : ZMod n) = (a : ZMod n) - (b : ZMod n) := by
+  have hb : b % n ≤ a + n := (Nat.mod_lt b (NeZero.pos n)).le.trans (Nat.le_add_left n a)
+  rw [Nat.cast_sub hb, Nat.cast_add, ZMod.natCast_self, add_zero, ZMod.natCast_mod]
+
 namespace HadwigerNelson
 
 /-! ## The generic layer — PROVED in the planner's scratch file (no `sorry`), to be placed in `ResidueTower.lean` -/
@@ -516,24 +557,20 @@ theorem unitQuadrance_colorable_of_ringHom {R S : Type*} [CommRing R] [CommRing 
 
 /-- **The residue ceiling is monotone along divisibility** — up the tower `ZMod (p^k)`, across CRT composites, and (at
 `n = 0`) from `ℤ` itself: the kernel form of the second inequality of `[Madore2015]` Prop. 3.8. -/
-theorem chromaticNumber_unitQuadrance_zmod_le_of_dvd {m n : ℕ} [Fact (1 < m)] (h : m ∣ n) :
+theorem chromaticNumber_unitQuadrance_zmod_le_of_dvd {m n : ℕ} (hm : 1 < m) (h : m ∣ n) :
     (unitQuadrance (ZMod n)).chromaticNumber ≤ (unitQuadrance (ZMod m)).chromaticNumber :=
+  haveI : Fact (1 < m) := ⟨hm⟩
   chromaticNumber_le_of_forall_imp fun _ hk => unitQuadrance_colorable_of_ringHom (ZMod.castHom h (ZMod m)) hk
 
 /-- Over a nontrivial ring unit quadrance already excludes equality (`0 ≠ 1`): adjacency is the one equation. The
-argument was inlined in `unitQuadrance.map`; minted once here because the bridge below needs it again. -/
+argument was inlined in `unitQuadrance.map`; minted once here because the bridge below needs it again. **NOT `@[simp]`:**
+`unitQuadrance_adj` already is, with the same left side, and the set's normal form (`u ≠ v ∧ …`) is not ours to fork. -/
 theorem unitQuadrance_adj_iff_quadrance {R : Type*} [CommRing R] [Nontrivial R] {u v : R × R} :
     (unitQuadrance R).Adj u v ↔ (u.1 - v.1) ^ 2 + (u.2 - v.2) ^ 2 = 1 := by
   rw [unitQuadrance_adj]
   refine ⟨fun h => h.2, fun h => ⟨?_, h⟩⟩
   rintro rfl
   simp at h
-
-/-- The shifted natural subtraction IS subtraction in `ZMod n`. False at `n = 0` (`a = 0`, `b = 1`), hence `NeZero`. -/
-theorem natCast_add_self_sub_mod {n : ℕ} [NeZero n] (a b : ℕ) :
-    ((a + n - b % n : ℕ) : ZMod n) = (a : ZMod n) - (b : ZMod n) := by
-  have hb : b % n ≤ a + n := (Nat.mod_lt b (NeZero.pos n)).le.trans (Nat.le_add_left n a)
-  rw [Nat.cast_sub hb, Nat.cast_add, ZMod.natCast_self, add_zero, ZMod.natCast_mod]
 
 /-- The per-pair check on natural-number representatives, as a `Bool` the kernel evaluates; no `ZMod` literal is carried.
 `v`'s coordinates are reduced first, so the subtraction never truncates and no "entries are `< n`" hypothesis is needed. -/
@@ -542,22 +579,30 @@ def unitPairNat (n : ℕ) (u v : ℕ × ℕ) : Bool :=
 
 /-- **The bridge, both ways.** `1 < n` is load-bearing twice: at `n = 1` the check says `true` of a point and itself
 (the adversary below), and at `n = 0` its subtraction truncates. The ONLY place a cast appears. -/
-theorem unitPairNat_eq_true_iff {n : ℕ} [Fact (1 < n)] (u v : ℕ × ℕ) :
+theorem unitPairNat_eq_true_iff {n : ℕ} (hn : 1 < n) (u v : ℕ × ℕ) :
     unitPairNat n u v = true ↔
       (unitQuadrance (ZMod n)).Adj ((u.1 : ZMod n), (u.2 : ZMod n)) ((v.1 : ZMod n), (v.2 : ZMod n)) := by
-  haveI : NeZero n := ⟨by have := Fact.out (p := 1 < n); omega⟩
+  haveI : Fact (1 < n) := ⟨hn⟩
+  haveI : NeZero n := ⟨by omega⟩
   rw [unitQuadrance_adj_iff_quadrance, unitPairNat, beq_iff_eq, ← ZMod.natCast_eq_natCast_iff']
-  push_cast [natCast_add_self_sub_mod]
+  push_cast [ZMod.natCast_add_self_sub_mod]
   rfl
+
+-- the consumer's path at an instance — an explicit `1 < n`, discharged inline, no `haveI` ceremony:
+example : (unitQuadrance (ZMod 121)).Adj ((0 : ℕ), (0 : ℕ)) ((0 : ℕ), (120 : ℕ)) :=
+  (unitPairNat_eq_true_iff (by norm_num) (0, 0) (0, 120)).mp rfl
+example : (unitQuadrance (ZMod 121)).chromaticNumber ≤ (unitQuadrance (ZMod 11)).chromaticNumber :=
+  chromaticNumber_unitQuadrance_zmod_le_of_dvd (by norm_num) (by norm_num)
 
 example : unitPairNat 1 (0, 0) (0, 0) = true := rfl     -- the adversary: why `1 < n` cannot be dropped
 
-/-- The vertex table as ONE packed literal: entry `i` is the 14-bit field at offset `14·i`, holding `a·121 + b`. -/
-def unpackPt (packed : ℕ) (i : ℕ) : ℕ × ℕ :=
-  let id := (packed >>> (14 * i)) &&& 16383
-  (id / 121, id % 121)
+/-- Entry `i` of a vertex table packed into ONE literal: the `w`-bit field at offset `w·i` holds `a·n + b`. Parametric in
+`(n, w)` because the next instance is already planned (`n = 361`, `w = 17`). -/
+def unpackPt (n w packed i : ℕ) : ℕ × ℕ :=
+  let id := (packed >>> (w * i)) &&& (2 ^ w - 1)
+  (id / n, id % n)
 
-#guard unpackPt (120 + (5747 <<< 14)) 1 == (47, 60)
+#guard unpackPt 121 14 (120 + (5747 <<< 14)) 1 == (47, 60)
 #guard unitPairNat 121 (0, 0) (0, 120)                                          -- `(0,0) ~ (0,−1)`
 #guard unitPairNat 121 (0, 120) (47, 60) && unitPairNat 121 (0, 0) (47, 60)     -- the planner's pinned triangle 0, 120, 5747
 #guard !unitPairNat 121 (0, 0) (11, 0)                                          -- `11² = 121 ≡ 0`, not `1`
@@ -567,17 +612,17 @@ def unpackPt (packed : ℕ) (i : ℕ) : ℕ × ℕ :=
 
 -- GENERATED: `zmod121CorePacked : ℕ`, `zmod121CoreEdges : List (Fin N × Fin N)`, and `Cnf/` by `tools/emit_mask.py`
 
-theorem not_colorable_four_unitQuadrance_zmod121 : ¬ (unitQuadrance (ZMod 121)).Colorable 4 := by
+theorem unitQuadrance_zmod121_not_colorable_four : ¬ (unitQuadrance (ZMod 121)).Colorable 4 := by
   sorry
 
-theorem colorable_five_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).Colorable 5 :=
+theorem unitQuadrance_zmod121_colorable_five : (unitQuadrance (ZMod 121)).Colorable 5 :=
   haveI : Fact (1 < 11) := ⟨by decide⟩
   unitQuadrance_colorable_of_ringHom (ZMod.castHom (show 11 ∣ 121 by norm_num) (ZMod 11)) finitePlane11_colorable_five
 
 /-- **The ring of integers modulo 121 needs exactly five colours**: at 11 the residue ceiling does not drop at level two. -/
 theorem chromaticNumber_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).chromaticNumber = 5 :=
   chromaticNumber_eq_iff_colorable_not_colorable.mpr
-    ⟨colorable_five_unitQuadrance_zmod121, not_colorable_four_unitQuadrance_zmod121⟩
+    ⟨unitQuadrance_zmod121_colorable_five, unitQuadrance_zmod121_not_colorable_four⟩
 
 end HadwigerNelson
 ```
@@ -587,8 +632,8 @@ graph < headline; precedent for every line: `Instances/TwoAdicFive.lean`):
 
 | child | statement | how it closes |
 |---|---|---|
-| a | `zmod121CoreEdges.all (fun e => unitPairNat 121 (pt e.1) (pt e.2)) = true`, `pt i := unpackPt zmod121CorePacked i` | **leaf, `decide +kernel`** — ≤ 4,405 evaluations of a dozen GMP operations each; also excludes loops and coincident points, since `unitPairNat 121 u u = false` |
-| b | `zmod121CoreHom : edgeGraph N zmod121CoreEdges →g unitQuadrance (ZMod 121)`, `toFun i := (↑(pt i).1, ↑(pt i).2)` | proof, ~10 lines: `List.all_eq_true` on (a), `unitPairNat_eq_true_iff.mp`, and `.symm` for the reversed pair — `twoAdicFiveHom`'s shape |
+| a | `zmod121CoreEdges.all (fun e => unitPairNat 121 (pt e.1) (pt e.2)) = true`, `pt i := unpackPt 121 14 zmod121CorePacked i` | **leaf, `decide +kernel`** — ≤ 4,405 evaluations of a dozen GMP operations each; also excludes loops and coincident points, since `unitPairNat 121 u u = false` |
+| b | `zmod121CoreHom : edgeGraph N zmod121CoreEdges →g unitQuadrance (ZMod 121)`, `toFun i := (↑(pt i).1, ↑(pt i).2)` | proof, ~10 lines: `List.all_eq_true` on (a), `(unitPairNat_eq_true_iff (by norm_num) _ _).mp`, and `.symm` for the reversed pair — `twoAdicFiveHom`'s shape |
 | c | `zmod121Four_unsat : (coloringCNF 4 N zmod121CoreEdges ++ cubeCNF 4 N cube).Unsat` | **generated, kernel** — `tools/emit_mask.py`'s segments; a wrong table fails `…_agrees`, a wrong proof fails a segment |
 | d | the pinned triangle's three `Gadget.edge`s | **leaves, `decide +kernel`** on list membership — where "the pin is a clique *of the listed graph*" is checked (trap §T1) |
 | e | `¬ (edgeGraph N zmod121CoreEdges).Colorable 4` | `not_colorable_of_gadget (refuted.inter triangle) (by decide)` — 64 port colourings |
@@ -601,7 +646,7 @@ formula, and `agreesWithCNF` re-derives the table from Lean's own `coloringCNF`.
 cast is inside `unitPairNat_eq_true_iff`, stated for the literal type `ZMod 121`; nothing mentions `ZMod (11 ^ 2)`.
 *Vacuity:* every theorem here either concludes `False` from a colouring (a refutation), or has its hypothesis inhabited in
 the same file. *The mutation audit the implementer runs* (each must break the build, then be restored and re-verified):
-drop `[Fact (1 < n)]` from the bridge (the `example` above is the counter-model); change one table entry by 1 (child a
+drop `(hn : 1 < n)` from the bridge (the `example` above is the counter-model); change one table entry by 1 (child a
 fails); pin a non-triangle (child d fails); file the `k = 5` certificate (child c fails).
 
 **What is deliberately absent.** No field-level consumer (`χ(ℚ(√47)²)` is untouched by a refusal, and the number-field residue
@@ -634,11 +679,15 @@ tools/
   fs66_b1_global.py, fs66_cubes.py
 ```
 
-**One record shape for every ask** (one JSON object per line in a `.jsonl`, or one `.json` per single ask), so the owner can
-recount everything with one script: `{"kind": "fs66-ask", "graph": {"n": 121, "level": 2, "p": 11, "restriction": "all" |
-"core:<sha256>" | "preimage:<sha256>" | "quotient:p·(a,b)"}, "vertices": …, "edges": …, "k": 4, "encoding": "plain" |
-"biclique", "symmetry": {"pin": [...], "precedence": true}, "solver": "cadical-<version>", "seed": 0, "limit": "-t 900" |
-"conflicts 300000", "verdict": "SAT" | "UNSAT" | "UNKNOWN", "conflicts": …, "cpu_s": …, "wall_s": …, "rss_mb": …, "machine":
+**One record shape for every ask, in ONE file per directory named `records.jsonl`** (so `cat data/fs66/*/records.jsonl` is
+the whole milestone, and the owner's recount is one script over one glob; raw solver logs sit beside as `*.log`, and the files
+named in the tree above are those logs and artifacts, never a second copy of a verdict). **An `UNKNOWN` is a first-class
+record — a typed null — and must carry the limit that stopped it.** Every field is flat and typed; nothing is free text a
+script must parse: `{"kind": "fs66-ask", "record_version": 1, "utc": "2026-09-21T03:14:15Z", "command": "<the exact command line, so the record
+can be rerun>", "tool_sha256": "…", "graph": {"n": 121, "level": 2, "p": 11, "restriction": {"type": "all" | "subset" |
+"preimage" | "quotient", "of_sha256": "<the vertex list's digest, or null>", "detail": "<e.g. p·(1,0)>"}}, "vertices": …, "edges": …, "k": 4, "encoding": "plain" |
+"biclique", "symmetry": {"pin": [...], "precedence": true}, "solver": "cadical-<version>", "seed": 0, "limit": {"kind": "wall_s" | "conflicts" | "none", "value": 900},
+"verdict": "SAT" | "UNSAT" | "UNKNOWN", "conflicts": …, "cpu_s": …, "wall_s": …, "rss_mb": …, "machine":
 "desktop", "threads": 1, "artifact": "<path of colouring or proof>", "artifact_sha256": "…", "trust": "verified
 colouring" | "refused (solver, untrusted)" | "CERTIFIED (fs66_check_witness)" | "kernel"}`. **The trust word is mandatory and
 comes from that closed list** (FS-38's README is the model). Numbers travel with their population: every record says which
@@ -656,6 +705,11 @@ instructions, not suggestions (Kooshi, 2026-09-20: all 16 cores, and the GPU whe
 only).*
 
 ### Phase 1a — the witness and its checker (I1). Acceptance checklist, scorable from artifacts:
+*Scoring commands (the owner runs these; each must behave as stated):* `python3 tools/fs66_check_witness.py
+data/fs66/witness-p11-l2-k4/witness.json; echo $?` → last line `CERTIFIED by fs66_check_witness …`, status 0 ·
+`python3 tools/fs66_check_witness.py --controls data/fs66/witness-p11-l2-k4/witness.json; echo $?` → `ALL CONTROLS BEHAVED`,
+status 0 · `grep -nE "^(import|from) " tools/fs66_check_witness.py` → standard library only · `wc -l
+data/fs66/witness-p11-l2-k4/records.jsonl` and a recount of its verdicts by the owner's own script.
 - [ ] `tools/fs66_check_witness.py` exists, imports only the standard library (`grep -n "^import\|^from" ` shows nothing from `tools/`), and `--controls` prints one line per planted fault with the **expected refusal code** and ends `ALL CONTROLS BEHAVED`; `data/fs66/witness-p11-l2-k4/controls.out` is that output.
 - [ ] `data/fs66/witness-p11-l2-k4/check.out` ends `CERTIFIED`, and names the point count, listed-edge count, induced-edge count, clause count and proof-line count.
 - [ ] the witness regenerates from the definition by a documented command in `data/fs66/README.md` (CaDiCaL is deterministic at a fixed seed; say the seed).
@@ -664,6 +718,9 @@ only).*
 - [ ] P1, P2 scored in the plan's §R.
 
 ### Phase 1b — the kernel theorem (I2). Checklist:
+*Scoring:* the digests under `build/gate/{build,axioms,vacuity}/latest` (`scripts/gate-log.sh`; read them before re-running a
+gate); `grep -rn --include="*.lean" sorry Proofs/` empty; `#print axioms HadwigerNelson.chromaticNumber_unitQuadrance_zmod121`
+in `scripts/Axioms.lean`'s output reads exactly `[propext, Classical.choice, Quot.sound]`.
 - [ ] measured first: CPU seconds (user+sys, minimum of three) and peak RSS of the clause-table module and one segment, **written in the plan before the full build**.
 - [ ] `./scripts/build.sh` green; `grep -rn --include="*.lean" sorry Proofs/` empty; `./scripts/axioms.sh`: the three new theorems on the standard three axioms, no `native_decide`; `./scripts/vacuity.sh` and `--self-test` green, counts reconciled against `CLAUDE.md` § The gate (a silent change in counts is that gate's failure mode).
 - [ ] three negative controls each **seen red, restored, re-verified green** (I2), recorded with the error text.
@@ -671,6 +728,9 @@ only).*
 - [ ] the final statement read aloud against the informal claim, and the reading recorded in §R in one sentence.
 
 ### Phase 2 — the whole tower at 11 (I3, then I4's price; I6 rides along). Checklist:
+*Scoring:* `data/fs66/b1/records.jsonl` holds one record per solve with the bound's value at 10, 30, 60, 120 minutes as
+fields; `data/fs66/b1/gurobi-p11.log` exists and its last bound matches the record; `data/fs66/b1/moment-price.md` exists and
+its first line is the `p = 7` reading against 16.33.
 - [ ] `tools/fs66_b1_global.py` reproduces M9's control: at 7 with cuts and symmetry the bound crosses 16.333; **and its planted fault**: with the symmetry break replaced by an *unsound* one (`φ₀ ≥ 0.9`) the control must be flagged by a second, sound run disagreeing — the point being that an unsound break is invisible from inside one run.
 - [ ] `data/fs66/b1/gurobi-p11.log` committed with a line per minute; the kill line's verdict stated with the bound's trajectory (value at 10, 30, 60, 120 minutes); cause / measurement / forfeit written **before** any stop.
 - [ ] `data/fs66/b1/moment-price.md`: the `p = 7` moment-relaxation reading and the one-page price for 11 (I4). No 11 solve.
@@ -678,6 +738,10 @@ only).*
 - [ ] P3, P4, P6 scored.
 
 ### Phase 3 — 19, then 23 (I5, I7). Checklist:
+*Scoring:* in `data/fs66/level2-p19-k4/records.jsonl` the level-ONE record's `utc` precedes the level-two record's; a SAT
+record's `artifact` passes `python3 tools/fs66_owner_verify.py colouring <artifact>`; an UNSAT record's witness passes Phase
+1a's checker; `data/fs66/level1-p23-k5/cube-sample.jsonl` precedes `cubes.jsonl` and `summary.json` carries the projection
+beside the measured rate.
 - [ ] level one `(19, 4)` refused under edge pin + precedence, conflicts and CPU time recorded — **before** level two is asked.
 - [ ] level two `(19, 4)` in the biclique encoding with precedence: verdict in §D's shape; if UNSAT, a witness `CERTIFIED` by Phase 1a's checker (which is why it takes `n` as data); if SAT, the colouring VERIFIED by the owner's verifier and the owner told at once; if UNKNOWN, the cube sample's projection beside the measured rate.
 - [ ] I7(b): the 16-cube sample, the projected total, the owner's go/no-go recorded, then the run within its 8-hour budget, checkpointed and resumed at least once on purpose.
@@ -760,6 +824,22 @@ subtraction is subtraction; then the bridge is `rw` + `push_cast` + `rfl`), and 
 `ZMod.natCast_eq_natCast_iff'`, `ZMod.natCast_self`, `ZMod.natCast_mod` — every name taken from the elaborator's acceptance
 today, none from memory. *Adversarial validation:* `1 < n` and `NeZero n` each certified load-bearing by a counter-model;
 the mutation audit is written into §L for the implementer to run against the real build.
+
+**Experience modeling (fresh invocation, 2026-09-20).** *Crossed the wire for each consumer and took only the bytes.*
+**The Lean API's users** (the next instance; `exact?`; `simp`): the first draft made every user write `haveI : Fact (1 < n) :=
+…` before each call — an instance everyone supplies by hand is the argument being the bug — so `1 < m` and `1 < n` are now
+**explicit hypotheses discharged inline** (`by norm_num`), and the plan carries the two-line consumer paths as `example`s that
+elaborate; the `ZMod` cast lemma moved into Mathlib's namespace, where this repository already keeps such facts; the halves of
+the headline are named object-first (`unitQuadrance_zmod121_not_colorable_four`, `…_colorable_five`), the pattern
+`finitePlane11_*` taught; `unpackPt` takes `(n, w)` because its second use is already planned; and **nothing is tagged
+`@[simp]`** — `unitQuadrance_adj` owns that left side and its normal form, and a second rule there would fork the set.
+**The checker's reader** holds only its output: it now states its claim in a plain sentence, carries three digests including
+its own, prints its trust word so `CERTIFIED` cannot be read as the kernel's, refuses from a closed list of codes with the
+first offending item in the reader's vocabulary, and accepts-and-ignores nothing. **The owner recounting** gets one
+`records.jsonl` per directory, flat typed fields (the limit and the restriction were free text), the exact command, and
+`UNKNOWN` as a first-class record. **The owner scoring a phase** gets the commands to run and the line each must print.
+**The implementer arriving cold** gets §G. *Breakdown designed first:* every refusal code exists because a plant in
+`--controls` provokes it.
 
 ---
 
