@@ -1,0 +1,317 @@
+#!/usr/bin/env python3
+"""Fact audit for an edit of CLAUDE.md: which fact tokens were in the old version and are NOWHERE in the new one.
+
+Usage (standard library only; run from the repository root):
+
+    python3 tools/claude_md_fact_audit.py                      # git HEAD:CLAUDE.md  against  ./CLAUDE.md
+    python3 tools/claude_md_fact_audit.py --base d0df4f82      # any git revision as the old version
+    python3 tools/claude_md_fact_audit.py --old a.md --new b.md
+    python3 tools/claude_md_fact_audit.py --moves moves.txt    # also write the relocation map (see below)
+    python3 tools/claude_md_fact_audit.py --words              # also list vocabulary that vanished (noisy; a reading aid)
+    python3 tools/claude_md_fact_audit.py --self-test          # plant faults and watch each one fire
+
+What it checks, and what FAILS the run (exit status 1):
+  * every fact token of the old version still occurs at least once in the new one -- dates, bibliography keys,
+    backticked spans, identifiers (FS-nn, Mnn, Gnn, row nn, ...), theorem references, numbers, grade tags, proper
+    names, and every whitespace-delimited chunk holding a digit or a mathematical character;
+  * every grokking's status tag (the bracket after its title) is unchanged;
+  * the PROTECTED regions are byte-identical (a region is the blank-line-delimited block holding the tag
+    "[PROTECTED -- never compress" plus the blocks after it, up to the next block that opens with "**" or "#");
+  * the sentence scripts/gate_report.py reads ("current audit reads N clean and M declared purchases") still
+    matches, with the same N and M;
+  * no heading disappeared (other files cite sections by name).
+It prints bytes per section before and after.
+
+Deliberate re-spellings go in NORMALISE (applied to BOTH versions before extraction, so old and new spellings meet);
+tokens deliberately allowed to vanish go in ALLOW with the reason. Both tables are printed on every run: an allowance
+is a reviewed decision, never a silent one.
+
+WHAT THIS CANNOT SEE: a number can survive while the sentence that gave it meaning is gone, and a small number
+("5") that occurs a hundred times hides the loss of one occurrence. This audit is the floor, not the check.
+The relocation map (--moves) lists, per entry (ledger row, grokking, numbered item, table row, section), the tokens
+that LEFT that entry and the entries where they now occur -- the places a reader has to check by reading.
+"""
+from __future__ import annotations
+
+import argparse
+import re
+import subprocess
+import sys
+from collections import Counter, defaultdict
+from pathlib import Path
+
+# (regex, replacement, reason) -- applied to BOTH versions before token extraction.
+NORMALISE: list[tuple[str, str, str]] = [
+    (r"(?<=\d),(?=\d{3}(?!\d))", "", "thousands separators: 1,581 and 1581 are one number"),
+]
+
+# token -> reason it may vanish. Keep this small and reviewed.
+ALLOW: dict[str, str] = {}
+
+PROTECTED_TAG = "[PROTECTED — never compress"
+GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
+MATH = set("αβγδεζηθικλμνξπρστυφχψωΓΔΘΛΞΠΣΦΨΩℚℝℤℂℕ𝔽𝔭𝔓√≤≥≠≡≈∈∉⊆⊂⊇⊄∣∤∀∃∧∨¬⟹⟸⟺→↦×·∞∅∩∪⌈⌉⌊⌋₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ⁻⁺′̄±−½∑∏")
+STRIP = ".,;:!?\"'“”‘’—–-*`|…"
+
+
+def normalise(text: str, table=None) -> str:
+    for pat, rep, _ in (NORMALISE if table is None else table):
+        text = re.sub(pat, rep, text)
+    return text
+
+
+def _balance(tok: str) -> str:
+    for o, c in ("()", "[]", "{}"):
+        while tok.startswith(o) and tok.count(o) > tok.count(c):
+            tok = tok[1:]
+        while tok.endswith(c) and tok.count(c) > tok.count(o):
+            tok = tok[:-1]
+    return tok
+
+
+def chunks(text: str):
+    for raw in text.split():
+        tok = raw
+        for _ in range(4):
+            tok = _balance(tok.strip(STRIP))
+        tok = re.sub(r"-[A-Za-z][A-Za-z-]*$", "", tok)          # 1581-vertex -> 1581
+        if tok and (any(ch.isdigit() for ch in tok) or any(ch in MATH for ch in tok)):
+            yield tok
+
+
+def facts(text: str) -> dict[str, Counter]:
+    """Token classes of one text (already normalised)."""
+    out: dict[str, Counter] = defaultdict(Counter)
+    out["date"].update(re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text))
+    out["bib"].update(re.findall(r"`(\[[A-Za-z][A-Za-z0-9]+\])`", text))
+    out["code"].update(re.findall(r"`([^`\n]+)`", text))
+    out["id"].update(re.findall(r"\b(?:FS-\d+|arXiv:[\d.]+|[A-Z]{1,2}(?:-[A-Z]{1,2})?-?\d+(?:\.\d+)?[a-z]?)\b", text))
+    for m in re.finditer(r"\b[Rr]ows?\s+((?:\d+(?:[–-]\d+)?)(?:(?:,\s*|\s+and\s+|,\s+and\s+)\d+(?:[–-]\d+)?)*)", text):
+        for n in re.findall(r"\d+", m.group(1)):
+            out["row"][f"row {n}"] += 1
+    out["ref"].update(re.sub(r"\s+", " ", r) for r in re.findall(
+        r"(?:Thms?\.?|Theorems?|Props?\.|Lemma|Table|Remark|Cor\.|Example|Open Problem|OP|§|¶)\s*[\dA-Z][\w.]*(?:\([ivx]+\))?", text))
+    out["num"].update(re.findall(r"(?<![\w.])\d+(?:\.\d+)?", text))
+    out["tag"].update(m.group(0) for m in re.finditer(r"(?<!`)\[[a-z][^\]\n]{1,90}\]", text))
+    out["chunk"].update(chunks(text))
+    lower = set(re.findall(r"\b[a-z][a-zé'’-]+\b", text))
+    for w in re.findall(r"\b[A-Z][A-Za-zéúöü'’]+\b", text):
+        if w.lower() not in lower:
+            out["name"][w] += 1
+    return out
+
+
+def words(text: str) -> Counter:
+    return Counter(w for w in re.findall(r"\b[a-zé][a-zé'’-]{4,}\b", text.lower()))
+
+
+def entries(text: str) -> dict[str, str]:
+    """Split into named entries: ledger rows, grokkings, numbered items, stub rows, else the enclosing heading."""
+    out: dict[str, list[str]] = defaultdict(list)
+    heading, key = "(top)", "(top)"
+    for line in text.split("\n"):
+        if re.match(r"^#{1,4} ", line):
+            heading = key = line.lstrip("# ").strip()
+        elif m := re.match(r"^\| (\d+) \|", line):
+            key = f"row {m.group(1)}"
+        elif m := re.match(r"^\* \*\*(G\d+) ", line):
+            key = m.group(1)
+        elif (m := re.match(r"^(\d+)\. \*\*", line)) and "problem stands" in heading:
+            key = f"stands item {m.group(1)}"
+        elif m := re.match(r"^\| [\d–]+ \| \*{0,2}(FS-\d+)", line):
+            key = f"paths {m.group(1)}"
+        elif line.startswith("|") and not key.startswith(("row", "paths")):
+            key = heading
+        elif not line.strip() and not key.startswith("G"):
+            key = heading
+        out[key].append(line)
+    return {k: "\n".join(v) for k, v in out.items()}
+
+
+def protected_regions(text: str) -> list[str]:
+    blocks = re.split(r"\n[ \t]*\n", text)
+    regions, i = [], 0
+    while i < len(blocks):
+        if PROTECTED_TAG in blocks[i]:
+            j = i + 1
+            while j < len(blocks) and not blocks[j].lstrip().startswith(("**", "#")):
+                j += 1
+            regions.append("\n\n".join(blocks[i:j]))
+            i = j
+        else:
+            i += 1
+    return regions
+
+
+def section_bytes(text: str) -> list[tuple[str, int]]:
+    out, cur, size = [], "(preamble)", 0
+    for line in text.split("\n"):
+        if re.match(r"^#{1,3} ", line):
+            out.append((cur, size))
+            cur, size = line.strip(), 0
+        size += len(line.encode()) + 1
+    out.append((cur, size))
+    return out
+
+
+STRONG = ("date", "bib", "code", "id", "row", "ref", "num", "tag", "chunk", "name")
+
+
+def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = None, show_words=False, quiet=False) -> list[str]:
+    """Return the list of failures (empty = pass). Prints the report unless quiet."""
+    say = (lambda *a: None) if quiet else print
+    allow = ALLOW if allow is None else allow
+    fails: list[str] = []
+    o_n, n_n = normalise(old, table), normalise(new, table)
+    fo, fn = facts(o_n), facts(n_n)
+    if sum(len(c) for c in fo.values()) < 100:
+        fails.append("the extractor found almost nothing in the OLD version: the audit is blind, not green")
+    say(f"bytes: {len(old.encode()):,} -> {len(new.encode()):,}  ({len(new.encode()) - len(old.encode()):+,})")
+    for cls in STRONG:
+        lost = sorted(t for t in fo[cls] if t not in fn[cls] and t not in allow)
+        say(f"[{cls}] {len(fo[cls])} distinct before, {len(fn[cls])} after, LOST {len(lost)}")
+        for t in lost:
+            say(f"    LOST {cls}: {t!r}  (was ×{fo[cls][t]})")
+            fails.append(f"lost {cls} token {t!r}")
+    # grokking status tags
+    eo, en = entries(o_n), entries(n_n)
+    for k, body in eo.items():
+        if re.fullmatch(r"G\d+", k):
+            head = re.match(r"\* \*\*G\d+ — .*?\*\*", body, re.S)
+            tag_o = re.search(r"\[[^\]]+\]", head.group(0)) if head else None
+            nb = en.get(k)
+            if nb is None:
+                fails.append(f"grokking {k} is gone")
+                continue
+            head_n = re.match(r"\* \*\*G\d+ — .*?\*\*", nb, re.S)
+            tag_n = re.search(r"\[[^\]]+\]", head_n.group(0)) if head_n else None
+            a = re.sub(r"\s+", " ", tag_o.group(0)) if tag_o else None
+            b = re.sub(r"\s+", " ", tag_n.group(0)) if tag_n else None
+            if a != b and f"{k}:{a}" not in allow:
+                fails.append(f"grokking {k} status tag changed: {a} -> {b}")
+    for k in eo:
+        if k.startswith("row ") and k not in en:
+            fails.append(f"ledger {k} is gone")
+    # protected regions
+    po, pn = protected_regions(old), protected_regions(new)
+    say(f"PROTECTED regions: {len(po)} before ({', '.join(str(len(p.encode())) for p in po)} bytes), {len(pn)} after")
+    if len(po) < 3:
+        fails.append(f"found only {len(po)} PROTECTED regions in the OLD version (expected 3): the check is blind")
+    if po != pn:
+        fails.append("a PROTECTED region is not byte-identical")
+    # gate sentence
+    go, gn = GATE_RE.search(re.sub(r"\s+", " ", old)), GATE_RE.search(re.sub(r"\s+", " ", new))
+    if not gn:
+        fails.append("the gate-report sentence no longer matches scripts/gate_report.py's regex")
+    elif go and go.groups() != gn.groups():
+        fails.append(f"the gate-report counts changed: {go.groups()} -> {gn.groups()}")
+    say(f"gate sentence: {gn.group(0) if gn else 'MISSING'}")
+    # headings
+    ho = [l for l in old.split("\n") if re.match(r"^#{1,4} ", l)]
+    hn = set(l for l in new.split("\n") if re.match(r"^#{1,4} ", l))
+    for h in ho:
+        if h not in hn and h not in allow:
+            fails.append(f"heading disappeared (other files cite sections by name): {h!r}")
+    # sections
+    so, sn = section_bytes(old), dict(section_bytes(new))
+    say("\nbytes per section (before -> after):")
+    for name, b in so:
+        a = sn.pop(name, None)
+        say(f"  {b:8,} -> {a if a is None else format(a, '8,')}  {('' if a is None else format(a - b, '+,')):>8}  {name}")
+    for name, a in sn.items():
+        say(f"  {'new':>8} -> {a:8,}  {'':>8}  {name}")
+    if show_words:
+        wo, wn = words(o_n), words(n_n)
+        gone = sorted(w for w in wo if w not in wn)
+        say(f"\nvocabulary that vanished ({len(gone)} words; a reading aid, never a failure):")
+        say("  " + " ".join(gone))
+    if moves:
+        lines = []
+        where: dict[tuple[str, str], list[str]] = defaultdict(list)
+        f_en = {k: facts(v) for k, v in en.items()}
+        for k, f in f_en.items():
+            for cls in STRONG:
+                for t in f[cls]:
+                    where[(cls, t)].append(k)
+        for k, body in eo.items():
+            f_old, f_new = facts(body), f_en.get(k, defaultdict(Counter))
+            left = [(cls, t) for cls in ("date", "bib", "code", "id", "row", "ref", "num", "chunk", "name")
+                    for t in f_old[cls] if t not in f_new[cls] and not (cls == "num" and len(t) < 2)]
+            if left:
+                lines.append(f"== {k}: {len(left)} tokens left this entry")
+                for cls, t in sorted(set(left)):
+                    homes = where.get((cls, t), [])
+                    lines.append(f"   {cls:5} {t!r} -> {', '.join(homes[:5]) if homes else 'NOWHERE'}{' …' if len(homes) > 5 else ''}")
+        Path(moves).write_text("\n".join(lines) + "\n", encoding="utf-8")
+        say(f"\nrelocation map: {len(lines)} lines -> {moves}")
+    say("\nnormalisations in force:")
+    for pat, rep, why in (NORMALISE if table is None else table):
+        say(f"  {pat!r} -> {rep!r}: {why}")
+    say(f"allowances in force: {len(allow)}")
+    for t, why in allow.items():
+        say(f"  {t!r}: {why}")
+    say("")
+    for f in fails:
+        say("FAIL:", f)
+    say("AUDIT " + ("FAILED" if fails else "PASSED") + f" ({len(fails)} failure(s))")
+    return fails
+
+
+def self_test(text: str) -> int:
+    """Plant one fault at a time in a copy of `text`; each must fire for its own reason, and the faithful copy must pass."""
+    f = facts(normalise(text))
+    once_num = next(t for t, c in sorted(f["num"].items()) if c == 1 and len(t) >= 4 and text.count(t) == 1)
+    once_bib = next(t for t, c in sorted(f["bib"].items()) if c == 1 and text.count(t) == 1)
+    region = protected_regions(text)[1]
+    heading = next(l for l in text.split("\n") if l.startswith("### "))
+    respell = [(r"UD\(𝔽₂₃,2\)", "Γ₂₃", "self-test macro")]
+    plants = [
+        ("faithful copy", text, None, None, False),
+        (f"one number deleted ({once_num})", text.replace(once_num, "", 1), None, "lost num", True),
+        (f"one bibliography key deleted ({once_bib})", text.replace(once_bib, "[x]", 1), None, "lost bib", True),
+        ("one PROTECTED byte changed", text.replace(region, region[:200] + ("x" if region[200] != "x" else "y") + region[201:], 1), None, "PROTECTED", True),
+        ("gate sentence broken", text.replace("declared purchases", "declared purchase", 1), None, "gate-report", True),
+        ("heading renamed", text.replace(heading, heading + " (renamed)", 1), None, "heading disappeared", True),
+        ("re-spelling WITHOUT a normalisation entry", text.replace("UD(𝔽₂₃,2)", "Γ₂₃"), None, "lost", True),
+        ("the same re-spelling WITH its entry", text.replace("UD(𝔽₂₃,2)", "Γ₂₃"), NORMALISE + respell, None, False),
+    ]
+    bad = 0
+    for name, planted, table, needle, must_fail in plants:
+        fails = audit(text, planted, table=table, quiet=True)
+        fired = bool(fails)
+        right_reason = (not must_fail) or any(needle in x for x in fails)
+        ok = fired == must_fail and right_reason
+        bad += not ok
+        print(f"  {'ok ' if ok else 'BAD'}  {name}: {'fired' if fired else 'passed'}"
+              + (f" -- {fails[0]}" if fails else "") + ("" if right_reason else f"  [wrong reason; wanted {needle!r}]"))
+    if "UD(𝔽₂₃,2)" not in text:
+        print("  note: the re-spelling plants are vacuous here (the old spelling does not occur); they are controls on a text that has it")
+    print("SELF-TEST " + ("FAILED" if bad else "PASSED"))
+    return 1 if bad else 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--base", default="HEAD", help="git revision holding the old version (default HEAD)")
+    ap.add_argument("--old", help="read the old version from this file instead of git")
+    ap.add_argument("--new", default="CLAUDE.md")
+    ap.add_argument("--moves", help="write the relocation map to this path")
+    ap.add_argument("--words", action="store_true")
+    ap.add_argument("--self-test", action="store_true")
+    a = ap.parse_args()
+    if a.old:
+        old = Path(a.old).read_text(encoding="utf-8")
+    else:
+        r = subprocess.run(["git", "show", f"{a.base}:CLAUDE.md"], capture_output=True)
+        if r.returncode != 0:
+            print(f"AUDIT COULD NOT RUN: git show {a.base}:CLAUDE.md failed: {r.stderr.decode().strip()}", file=sys.stderr)
+            return 2
+        old = r.stdout.decode("utf-8")
+    if a.self_test:
+        return self_test(old)
+    new = Path(a.new).read_text(encoding="utf-8")
+    return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
