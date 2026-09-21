@@ -518,11 +518,15 @@ record for each whose `cert_sha256` match the files; the 11 check record's last 
 - [ ] `data/fs66/b1/README.md` extended: what each file is, what it licenses (§ST's sentence verbatim), its trust word.
 - [ ] B11 / P-B5 recorded if not already.
 
-### Phase 2C — 19 at four colours (optional; the owner's call after 2B; §19, §X)
-- [ ] The builder's cost measured on a sample before the full build; caches under `data/fs66/ckpt/b1-p19/`; the float reading
-      recorded **before** any rounding; P-B6 scored; a certificate `CERTIFIED` with `--m 4`, or a typed null saying which of
-      "reads ≥ 90.25", "did not fit", "rounded but not positive definite" happened.
-- [ ] The solve resumed from a checkpoint at least once on purpose.
+### Phase 2C — 19 at four colours (optional; the owner's call after 2B; §19, §X) — **DONE, §R″**
+- [x] The builder's cost measured on a sample before the full build (60.8 µs per canonical form, projecting 3.1 min
+      single-threaded; the full build then took 26 s on 16 cores); caches under `data/fs66/ckpt/b1-p19/` with their own README;
+      the float reading (**77.506086**) recorded **before** any rounding, in `records.jsonl` with trust `float reading
+      (untrusted)`; **P-B6 scored NOT MET** on its first conjunct (the reading is 77.506, below the predicted `[80.6, 87]`, and
+      below the 80.59 §19 said it could not go below — §19's premise was wrong, R″.8) and **MET** on its second (a certificate
+      lands under 90.25); `data/fs66/b1/cert-p19.json` **`CERTIFIED` with `--m 4`**, `U = 77.511742…`, `4·U = 310.046968… < 361`.
+- [x] The solve resumed from a checkpoint on purpose — rehearsed at `p = 11` before 19 was touched, then at 19 after the
+      300-chunk run was killed, and at every chunk boundary thereafter (R″.9).
 
 ### The close is the owner's. The implementer hands over: §R filled; the sweep of this file for "conjecture" and "not claimed"
 (one: §ST's last sentence points at the main plan's §S5); and §PA below read back for what it taught about the object.
