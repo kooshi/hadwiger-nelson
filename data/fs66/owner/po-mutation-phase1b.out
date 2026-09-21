@@ -1,0 +1,2 @@
+'HadwigerNelson.chromaticNumber_unitQuadrance_zmod121' depends on axioms: [propext, Classical.choice, Quot.sound]
+chromaticNumber_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).chromaticNumber = 5
