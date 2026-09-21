@@ -456,3 +456,205 @@ the finder** (it found the non-pulled-back 5-colouring of `UD(ℤ/121,2)` in 251
 find one it was not handed). A colouring, VERIFIED, would make `χ(ℚ(√167)²) ≤ 5` a theorem and is reported at once.
 **Decision on the brief's finder question** (§W): no new finder is built and no work order is opened in
 `~/source/descent-engine` in this milestone; the GPU is not used for search.
+
+---
+
+## §P. Registered predictions (registered 2026-09-20, before any phase runs; scored in §R at the close)
+
+*Each names the outcome that would teach nothing and the one predicted, and both are reachable on the measurements in §M.*
+
+| id | prediction | confidence | what would refute it | reachable? |
+|---|---|---|---|---|
+| P1 | Phase 1's witness certifies: a core of **between 600 and 1,115 vertices** is `CERTIFIED` by the new checker, and the kernel checks it in **under 15 minutes of CPU and under 12 GB** | medium-high on landing; low on the size band | a checker refusal that is not a planted one; a kernel cost an order of magnitude over (then I1's minimisation earns its keep) | both: the pipeline has certified 510 vertices at four colours (`Instances/Heule510`) and 125 at 5.9 s |
+| P2 | vertex-minimising below the fixpoint core is slow: **fewer than 300 vertices come off in the two-hour budget**, and probes turn `UNKNOWN` as the average degree falls toward 7 (G65) | medium | a 1-minimal core under 500 vertices | yes — FS-61's cores ranged 131–2,360 |
+| P3 | **I3's kill line fires**: Gurobi's bound on `B₁(11)` is above 33.0 at two hours | medium-high (M9: 35.88 at 7 min, slowing) | the bound crossing 30.25 — then "every level" holds on a solver's word and I4 becomes the milestone's priority | the crossing is reachable in kind (it happened at 7) |
+| P4 | I4's small case reads **below 16.33 at `p = 7`** (the second-level moment relaxation sees what the first cannot) | low-medium — no measurement behind it | a reading ≥ 16.33: the SDP route is dead, said in one line | both |
+| P5 | `(19, 4)`: level one refuses within minutes under edge pin + precedence; **level two then refuses, with 5–20× level one's conflicts** (the ratio at 11 was ×8 per level) | medium | a 4-colouring of `UD(ℤ/361,2)` (a drop — reported at once); or `UNKNOWN` after cubes (a typed null) | refusal: by analogy with 11 only; SAT: nothing forbids it except the owner's numerics (1.2763 × budget) |
+| P6 | I6 finds **no** independent set of 687 in `UD(ℤ/49,2)`, and its positive control (686 from a random start) **is** found | medium | a verified 687-set: §S5's conjecture is dead and the tower rises at 7 | the control's reachability is the point of running it first |
+| P7 | I7(b): level-one `(23, 5)` is **not** refused by cube-and-conquer in 8 hours | medium-high (M58: undecided at four hours, single solve) | a refusal — then (c) is priced and asked | the sample of 16 cubes tells which before the budget is spent |
+| P8 | the owner's check of §S3 finds the argument sound | medium-high | a hypothesis of Theorem 2.5 not met, or the normalisation of `μ̂` off by the level's scaling | both |
+
+**Scored already (kept for the record, the planner's own):** before M1 the planner's written prior was "probably no
+4-colouring, but CDCL will not be able to say so" — **half wrong**: the refusal took 1.7 s. And the brief's "`ϑ′` first" and the
+planner's first thought of an LP with subgraph cuts both died by derivation (§S6) before being run.
+
+---
+
+## §L. The Lean side — skeleton (elaborates under `lake env lean` with `autoImplicit false`, 2026-09-20; `sorry` at every leaf)
+
+*Where it goes:* `Proofs/HadwigerNelson/ResidueTower.lean` (the two generic lemmas) and `Proofs/HadwigerNelson/Instances/
+ZMod121Four.lean` + `Instances/ZMod121Four/{Pts.lean, Edges.lean, Cnf/…}` (generated). `ARCHITECTURE.md`'s module map is
+checked by `tools/check_architecture.py` — add the modules there in the same commit. Names follow Mathlib convention (the name
+is the statement); the experience pass (§E below) owns their final form.
+
+```lean
+import Proofs.HadwigerNelson.Instances.FinitePlane11
+import Proofs.HadwigerNelson.EdgeList
+import Proofs.HadwigerNelson.Gadget
+
+namespace HadwigerNelson
+
+/-- Reduction `ZMod n → ZMod m` for `m ∣ n` is a homomorphism of unit-quadrance graphs, so colourability climbs the tower:
+the kernel form of the second inequality of `[Madore2015]` Prop. 3.8. -/
+theorem unitQuadrance_zmod_colorable_of_dvd {m n k : ℕ} [Fact (1 < m)] (h : m ∣ n)
+    (hk : (unitQuadrance (ZMod m)).Colorable k) : (unitQuadrance (ZMod n)).Colorable k := by
+  sorry   -- `hk.of_hom`-shaped, through `unitQuadrance.map (ZMod.castHom h (ZMod m))`; QUERY the name, do not recall it
+
+/-- The per-pair check on natural-number representatives, as a `Bool` the kernel evaluates; no `ZMod` literal is carried. -/
+def unitPairNat (n : ℕ) (u v : ℕ × ℕ) : Bool :=
+  ((u.1 + n - v.1 % n) ^ 2 + (u.2 + n - v.2 % n) ^ 2) % n == 1 % n
+
+#guard unitPairNat 121 (0, 0) (0, 120)      -- `(0,0) ~ (0,−1)`
+#guard !unitPairNat 121 (0, 0) (11, 0)      -- `11² = 121 ≡ 0`, not `1`
+#guard !unitPairNat 121 (5, 7) (5, 7)       -- a point is not its own neighbour
+
+/-- The check decides adjacency over `ZMod n`. The ONLY place a cast appears. -/
+theorem unitQuadrance_adj_of_unitPairNat {n : ℕ} [Fact (1 < n)] {u v : ℕ × ℕ} (h : unitPairNat n u v = true) :
+    (unitQuadrance (ZMod n)).Adj ((u.1 : ZMod n), (u.2 : ZMod n)) ((v.1 : ZMod n), (v.2 : ZMod n)) := by
+  sorry
+
+-- generated: `zmod121CorePts : List (ℕ × ℕ)` (length N), `zmod121CoreEdges : List (Fin N × Fin N)`, `Cnf/` by `tools/emit_mask.py`
+-- leaf, `decide +kernel` through `List.all`:  every listed pair passes `unitPairNat 121` on its two table entries
+-- by the pipeline:                            `¬ (edgeGraph N zmod121CoreEdges).Colorable 4`  (triangle gadget ∩ LRAT gadget)
+
+theorem not_colorable_four_unitQuadrance_zmod121 : ¬ (unitQuadrance (ZMod 121)).Colorable 4 := by
+  sorry   -- `rintro ⟨C⟩; exact core_not_colorable ⟨C.comap coreHom⟩`, as `twoAdicFive_not_colorable_with_edge`
+
+theorem colorable_five_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).Colorable 5 :=
+  haveI : Fact (1 < 11) := ⟨by decide⟩
+  unitQuadrance_zmod_colorable_of_dvd (m := 11) (n := 121) ⟨11, by norm_num⟩ finitePlane11_colorable_five
+
+/-- **The ring of integers modulo 121 needs exactly five colours**: at 11 the residue ceiling does not drop at level two. -/
+theorem chromaticNumber_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).chromaticNumber = 5 := by
+  sorry
+
+end HadwigerNelson
+```
+
+**What is deliberately absent.** No field-level consumer (`χ(ℚ(√47)²)` is untouched by a refusal, and the number-field residue
+step is row 57's gap, FS-47). No statement about level three, the `p`-adic plane, or `B₁`: none has a certificate. No
+`ZMod (11 ^ 2)` — the type is `ZMod 121`, a literal, because a numeral at an unsimplified type index is paid per numeral
+(`CLAUDE.md` § The kernel's cost model). **Vacuity:** `not_colorable…` concludes `False` under a colouring and is a refutation
+(skipped by the gate); `unitQuadrance_zmod_colorable_of_dvd` takes a `Colorable` hypothesis whose inhabitant is
+`finitePlane11_colorable_five`, used in the same file; `unitQuadrance_adj_of_unitPairNat`'s hypothesis is inhabited by the
+first `#guard`.
+
+---
+
+## §D. Artifact layout and record format
+
+```
+data/fs66/
+  README.md                      the map of this directory, written at the close (what each file is, what it licenses, trust word)
+  owner/                         the owner's notes, encoder, verifier outputs            (exists; not the implementer's)
+  planner/                       the planner's measurements and scripts                  (exists; frozen as a record)
+  witness-p11-l2-k4/             witness.json, witness.lrat.gz, check.out, controls.out  (Phase 1a)
+  b1/                            gurobi-p7.log, gurobi-p11.log, b1-records.jsonl, moment-price.md   (Phase 2)
+  level2-p19-k4/                 level1.out, level2.out, [witness | colouring | null].json          (Phase 3a)
+  alpha-p7-l2/                   control-686.json, ask-687.json                                       (I6)
+  level1-p23-k5/                 cube-sample.jsonl, cubes.jsonl, summary.json                         (Phase 3b)
+  ckpt/                          every checkpoint of every run over 15 minutes — NEVER under build/
+tools/
+  fs66_owner_verify.py           exists (the owner's)
+  fs66_check_witness.py          I1's checker — standard library only, imports nothing from tools/
+  fs66_tower.py                  one tool, subcommands: build | ask | core | minimise | level | quotient   (the planner's scripts, tidied)
+  fs66_b1_global.py, fs66_cubes.py
+```
+
+**One record shape for every ask** (one JSON object per line in a `.jsonl`, or one `.json` per single ask), so the owner can
+recount everything with one script: `{"kind": "fs66-ask", "graph": {"n": 121, "level": 2, "p": 11, "restriction": "all" |
+"core:<sha256>" | "preimage:<sha256>" | "quotient:p·(a,b)"}, "vertices": …, "edges": …, "k": 4, "encoding": "plain" |
+"biclique", "symmetry": {"pin": [...], "precedence": true}, "solver": "cadical-<version>", "seed": 0, "limit": "-t 900" |
+"conflicts 300000", "verdict": "SAT" | "UNSAT" | "UNKNOWN", "conflicts": …, "cpu_s": …, "wall_s": …, "rss_mb": …, "machine":
+"desktop", "threads": 1, "artifact": "<path of colouring or proof>", "artifact_sha256": "…", "trust": "verified
+colouring" | "refused (solver, untrusted)" | "CERTIFIED (fs66_check_witness)" | "kernel"}`. **The trust word is mandatory and
+comes from that closed list** (FS-38's README is the model). Numbers travel with their population: every record says which
+graph, which restriction, which encoding, which breaks.
+
+---
+
+## §H. Phases for the implementer — one phase per brief; each fits well under 500k tokens
+
+*Every phase: read §0, §M, §S1, the instrument(s) named, and §T. Build only through `./scripts/build.sh`. One heavy job at a
+time on this machine. On any unexplained process crash: stop and tell the owner. **You start no agents of any kind** (`CLAUDE.md`
+§ Delegation: a child's children are unbudgeted and unreviewable); if the phase does not fit, stop at a clean boundary, persist,
+and say what is left. Commit by explicit path; never push. Use the machine: the per-instrument "hardware" lines are
+instructions, not suggestions (Kooshi, 2026-09-20: all 16 cores, and the GPU where appropriate — in this milestone that is I4
+only).*
+
+### Phase 1a — the witness and its checker (I1). Acceptance checklist, scorable from artifacts:
+- [ ] `tools/fs66_check_witness.py` exists, imports only the standard library (`grep -n "^import\|^from" ` shows nothing from `tools/`), and `--controls` prints one line per planted fault with the **expected refusal code** and ends `ALL CONTROLS BEHAVED`; `data/fs66/witness-p11-l2-k4/controls.out` is that output.
+- [ ] `data/fs66/witness-p11-l2-k4/check.out` ends `CERTIFIED`, and names the point count, listed-edge count, induced-edge count, clause count and proof-line count.
+- [ ] the witness regenerates from the definition by a documented command in `data/fs66/README.md` (CaDiCaL is deterministic at a fixed seed; say the seed).
+- [ ] the minimiser's checkpoint and resume were **exercised**: the log shows one deliberate kill (by PID) and a resume that redid at most one wave.
+- [ ] the four-solver no-pin recheck (M2's shape) is rerun on the final witness and recorded in §D's record shape.
+- [ ] P1, P2 scored in the plan's §R.
+
+### Phase 1b — the kernel theorem (I2). Checklist:
+- [ ] measured first: CPU seconds (user+sys, minimum of three) and peak RSS of the clause-table module and one segment, **written in the plan before the full build**.
+- [ ] `./scripts/build.sh` green; `grep -rn --include="*.lean" sorry Proofs/` empty; `./scripts/axioms.sh`: the three new theorems on the standard three axioms, no `native_decide`; `./scripts/vacuity.sh` and `--self-test` green, counts reconciled against `CLAUDE.md` § The gate (a silent change in counts is that gate's failure mode).
+- [ ] three negative controls each **seen red, restored, re-verified green** (I2), recorded with the error text.
+- [ ] `tools/check_architecture.py` green with the new modules in `ARCHITECTURE.md`.
+- [ ] the final statement read aloud against the informal claim, and the reading recorded in §R in one sentence.
+
+### Phase 2 — the whole tower at 11 (I3, then I4's price; I6 rides along). Checklist:
+- [ ] `tools/fs66_b1_global.py` reproduces M9's control: at 7 with cuts and symmetry the bound crosses 16.333; **and its planted fault**: with the symmetry break replaced by an *unsound* one (`φ₀ ≥ 0.9`) the control must be flagged by a second, sound run disagreeing — the point being that an unsound break is invisible from inside one run.
+- [ ] `data/fs66/b1/gurobi-p11.log` committed with a line per minute; the kill line's verdict stated with the bound's trajectory (value at 10, 30, 60, 120 minutes); cause / measurement / forfeit written **before** any stop.
+- [ ] `data/fs66/b1/moment-price.md`: the `p = 7` moment-relaxation reading and the one-page price for 11 (I4). No 11 solve.
+- [ ] I6: the 686 control found from a random start (or the instrument declared void); the 687 ask's verdict in §D's shape.
+- [ ] P3, P4, P6 scored.
+
+### Phase 3 — 19, then 23 (I5, I7). Checklist:
+- [ ] level one `(19, 4)` refused under edge pin + precedence, conflicts and CPU time recorded — **before** level two is asked.
+- [ ] level two `(19, 4)` in the biclique encoding with precedence: verdict in §D's shape; if UNSAT, a witness `CERTIFIED` by Phase 1a's checker (which is why it takes `n` as data); if SAT, the colouring VERIFIED by the owner's verifier and the owner told at once; if UNKNOWN, the cube sample's projection beside the measured rate.
+- [ ] I7(b): the 16-cube sample, the projected total, the owner's go/no-go recorded, then the run within its 8-hour budget, checkpointed and resumed at least once on purpose.
+- [ ] I7(c) only on (b)'s refusal; I7(d) only on the owner's word, with its positive control first.
+- [ ] P5, P7 scored; the census brackets (`4 ≤ χ ≤ 5` at `d = 47, 311, 335`, row 74) restated as unchanged by level two.
+
+### The close (WORKFLOW steps 8–10) is the owner's; the implementer hands over: §R filled, `data/fs66/README.md`, the sweep of this plan for "conjecture" and "not claimed" (there are two: §S3 and §S5), and the list of what §PA taught (PA.6) checked against what the milestone then found.
+
+---
+
+## §T. Traps and dead ends found while planning — so nobody walks into them again
+
+1. **A pin is sound only while its clique is in the graph.** The planner's first core-shrinker dropped the pinned triangle's
+   edges when the refutation did not use them; the next round's "core" was 4-colourable. Keep the clique's edges in every
+   round; the checker's step (3) is the guard.
+2. **`/usr/bin/time` does not exist on this machine**, and a `… | grep` after it turns "command not found" into silence. Read a
+   solver's exit status from the solver (10 SAT, 20 UNSAT, 0 unknown); write output to a file and grep the file.
+3. **CaDiCaL's second positional argument is a proof file, not a model file** — the first version of the planner's asker
+   handed it a `.model` path and got binary DRAT. Models come from stdout (`v` lines) or `-w`.
+4. **`-t` is wall-clock seconds.** Prefer conflict budgets for anything compared across runs.
+5. **`ϑ′`, first-level SDPs and LPs with pulled-back-feasible constraints cannot refuse anything at level two** (§S6): their
+   level-one optimum pulls back. Do not run them.
+6. **A level-two refusal says nothing about level three, and nothing about the `p`-adic plane** (§S2; the stub's first draft
+   had this wrong). Only a level-one certificate of `B₁` speaks to every level.
+7. **"Unions of parallel lines" is a dead family of level-two independent sets** (owner's note §4): a used line silences six of
+   its eleven parallels; the family tops out near 16–27 of 121 against 28. And **balanced fibres are tiny** (M10).
+8. **The owner's first `(11, 4)` probe never ran** (`cd X && (A) & (B) &` put the second subshell in the repository root and
+   left `b-11-4.err` saying the CNF did not exist, wall 0 s). A probe that reports nothing because it could not run reads like
+   a slow solver. Check that the artifact a run should write exists and is non-empty before reading its silence.
+9. **Gurobi's size-limited licence** stops at 2,000 variables or constraints: the 11 model fits (121 and ≈ 1,340); 19 (361
+   variables, 3,610 edge cuts) does not — drop to SCIP there, or to a subset of the cuts.
+10. **`build/` is scratch that agents clean.** Venvs with pip-installable contents may live there; checkpoints, node files
+    and logs may not.
+
+---
+
+## §W. Decisions that were the planner's, in four parts (choice · alternative · why · confidence)
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Ask the whole graph directly before building any finder** — which answered the pilot | the brief's order: periodic asks, then an independent-set finder, then blind search, with a GPU finder priced | a direct CDCL ask with a triangle pinned costs seconds to try and is decisive in both directions; G65 says degree 132 is far past the hard band, so it would answer fast or not at all | high (it ran) |
+| **No new finder, no work order in `~/source/descent-engine`, no GPU search in this milestone** | (a) a work order there adding `UD(ℤ/p^r,2)`; (b) a standalone tabu finder; (c) a CUDA finder | the only finder ask left is `UD(ℤ/529,2)` at five colours, whose null is the predicted outcome and teaches little (I7(d)); CaDiCaL on the biclique encoding already finds non-pulled-back colourings at this scale (M3). If a later milestone needs sets or colourings on rings, the work order's content is one paragraph: *accept a modulus `n` that is a prime power, build the circle from `a² + b² ≡ 1 (mod n)`, keep `check` independent, and add a line-move neighbourhood (S1)* | medium-high — changes if the owner wants I6 pushed hard, where (a) would be the right tool |
+| **The GPU is used only for I4, and only after its price is ruled on** | running the four-class or single-class SDP at once on card A | the relaxation's margin is thin (cannot read below 29.18, must read below 30.25) and unmeasured; a `p = 7` reading costs a CPU-minute and decides whether the route exists | medium |
+| **Subset semantics for the witness's edge list** (listed pairs must be unit; not "all unit pairs must be listed") | FS-58's equality semantics | a refusing subgraph refutes every supergraph, the kernel pays per clause, and the checker still reports the induced count so nothing is hidden | high |
+| **Level one is always asked before level two** | asking level two alone, as M11 did | §S6: level two's refutation is at least as long; level one's count prices it and catches an encoding that cannot refuse even the easy case | high |
+| **`B₁` with cuts is the registered quantity; the bare `B₁` a control** (the owner's suggestion, adopted) | certifying the bare problem | at 11 the bare problem's near-ties (27.9995) exist only because `c < 2` by a hair; the cuts are true at every level and M9 shows they move the bound (19.95 → 18.04 → 16.165 at 7) | high |
+| **Natural-number vertex table + one bridging lemma** for the kernel | a table of `ZMod 121` literals and `decide` on `unitQuadrance` adjacency | FS-38 measured 32.9 GB and a timeout for literals at an unsimplified index against seconds for evaluating on naturals | medium-high — to be measured in Phase 1b, which is the point of measuring first |
+
+---
+
+## §R. Results — filled by the implementer, phase by phase (predictions scored here; decisions implementation overturned, in four parts)
+
+*(empty at the plan's writing)*
