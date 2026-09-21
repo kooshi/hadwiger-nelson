@@ -961,3 +961,146 @@ than assumed either way, the run had already exited normally 15.7 s after launch
 * If a smaller instance turns out to matter, the lever is **not** more minimisation of this object: it is
   1-minimal, and edge deletion makes the proof 71× larger. A different seed changes nothing material (eight
   seeds all land at 888 ± 0 vertices through the shrink path).
+
+---
+
+### Phase 1b — the kernel theorem (2026-09-20/21, one Opus implementer)
+
+**What landed.** **`chromaticNumber_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).chromaticNumber = 5`**
+[kernel, axioms exactly `[propext, Classical.choice, Quot.sound]`, no `native_decide`] — the first kernel
+statement about a level-two residue plane, and the pilot closed with a certificate instead of a solver's word.
+Two modules and one generated family:
+
+* `Proofs/HadwigerNelson/ResidueTower.lean` — §L's generic layer, unchanged in substance: colourability pulls
+  back along any ring homomorphism (`unitQuadrance_colorable_of_ringHom`); the ceiling is monotone along
+  divisibility (`chromaticNumber_unitQuadrance_zmod_le_of_dvd`, the kernel form of `[Madore2015]` Prop. 3.8's
+  second inequality, covering the tower, CRT composites and `ℤ` at `n = 0`); the per-pair check `unitPairNat`
+  with its one bridge `unitPairNat_eq_true_iff`, **generic in `n`**, so Phase 3a's `n = 361` reuses it with no
+  new Lean; `unpackPt`. `1 < n` is explicit and both counter-models (`n = 1`, `n = 0`) are `example`s in the file.
+* `Proofs/HadwigerNelson/Instances/ZMod121Four{.lean,/Pts.lean,/Edges.lean,/Cnf/}` — Phase 1a's 883-point,
+  3,441-edge witness through the M05 pipeline, composed with its pinned triangle through `Gadget`. The lower
+  half is `unitQuadrance_zmod121_not_colorable_four`; the upper half is `finitePlane11_colorable_five` pulled
+  back along `ZMod.castHom (11 ∣ 121)`, with no data at all.
+* `tools/fs66_emit_lean.py` — the driver: it writes `Pts.lean` (the vertex table as one packed literal) and
+  `Edges.lean`, checks that the formula it would build has the witness's own recorded CNF digest before
+  emitting anything, and hands the rest to `tools/emit_mask.py`. Untrusted; a mistake in it can only produce
+  modules that fail to build.
+
+**The measurement, made before the full build** (desktop; `lake env lean` with the lakefile's options;
+CPU is user + sys; minimum of three runs where marked, single runs otherwise).
+
+| module | instance | table slots | proof hints | CPU s | peak RSS GB |
+|---|---|---|---|---|---|
+| `Cnf/Table.lean` | **the witness**, 883 v / 3,441 e | 16,262 | — | **31.59** (min of 3) | **6.14** |
+| `Cnf/Seg000.lean`, 2 segments | the witness | — | 96,820 / 2 | 79.57 (min of 3) | 14.01 |
+| `Cnf/Seg000.lean`, **8 segments** | the witness | — | 96,820 / 8 | **29.32** | **5.18** |
+| `Cnf/Table.lean` | `stages/round0`, 2,974 v / 14,190 e | 61,484 | — | **616.57** | **20.84** |
+| `Cnf/Seg000.lean`, 8 segments | `stages/round0` | — | 95,653 / 8 | **23.70** | **5.16** |
+
+Whole family, as built: **≈ 4.4 CPU-minutes and a 6.14 GB peak** (the clause table; every segment is smaller),
+against P1's 15 CPU-minutes and 12 GB.
+
+**Scored: P1 — the kernel half WON, on both numbers.** 4.4 CPU-minutes against 15, 6.14 GB against 12. It is
+worth saying *how*: at the emitter's natural 2-way split the peak is **14.01 GB**, which is over P1's 12 GB, so
+the prediction was met by a choice made inside the phase (eight segments) and not by the object. P1's checker
+half was already won at Phase 1a.
+
+**The finding, and it is the sentence to keep.** ***The kernel has two charges and they are paid on
+different things: the clause table is the graph's bill, the segments are the proof's.*** Two `CERTIFIED`
+instances of the same refusal, with proofs of the **same length** (96,820 against 95,653 hint entries, a 1.2 %
+difference) and clause tables differing **3.8×** (16,262 against 61,484 slots):
+
+* the **table** check costs **19.5× more CPU and 3.4× more memory** on the bigger graph (31.6 s / 6.14 GB
+  against 616.6 s / 20.84 GB) — and super-linearly, since `3.8² = 14.3` is nearer to 19.5 than `3.8` is;
+* the **segments** cost the *same* on both (29.3 s / 5.18 GB against 23.7 s / 5.16 GB) although one graph is
+  3.8× the other — indeed the bigger graph's segment is the cheaper one, so **the graph does not enter the
+  segment charge at all**. Whether that charge is exactly proportional to the proof was not measured: these two
+  proofs differ by 1.2 %, which is too little to fit a slope to.
+
+**Which charge dominates is a function of size, and the crossover is between these two objects.** On the
+committed 883-point witness the segments are **88 %** of the 4.4 CPU-minutes and the table 12 %; on the
+2,974-point stage the table is **76 %** of 13.4 CPU-minutes and the segments 24 %.
+
+**So Phase 1a's two levers are both real, and they are charged at different counters.** Vertex minimisation
+buys the *table* down super-linearly — 19.5× between these two objects. Edge minimisation past vertex
+1-minimality makes the proof 71× larger, which is a multiplier on the *segment* charge, i.e. on the 88 % that
+dominates at this size. Phase 1a's decision to commit the vertex-1-minimal graph is right; its stated reason,
+"the kernel pays for the proof", is the larger half of the truth **at this size only**, and it misses the
+table charge entirely — which is the one that would have bitten had the object not been minimised.
+**The operating rule for every later certificate: minimise vertices while the refutation stays easy, then
+stop; and expect the table charge to take over as the graph grows.**
+
+**Decisions, in four parts.**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Eight certificate segments, not the emitter's natural two** | `--segments 2`, which is what an instance this size suggests and what `Instances/SqrtEleven/Cnf/` uses | measured: peak RSS per segment 14.01 → 5.18 GB, CPU 79.6 → 29.3 s, and the eight elaborate in parallel. Total CPU rises 159 → 234 s, which buys a peak under P1's 12 GB and a wall clock of one segment instead of four | high on the measurement; **medium** on eight being the right number — 4 and 16 were not measured, and the marginal fit (`≈ 12.5 s + 4.6 s per certificate chunk`) says the per-segment overhead is small but not zero |
+| **One name prefix, `zmod121Four`, for the whole object** | §L's two prefixes — `zmod121Core*` for the graph, `zmod121Four*` for the certificate | `emit_mask.py` derives every certificate name from a single `--name`, so two prefixes make a reader ask which half of one object a name belongs to; `Instances/TwoAdicFive` uses one prefix throughout and reads better for it. The theorem names are §L's unchanged | high |
+| **The packed vertex table gets its own module `Pts.lean`, importing only `Mathlib.Data.Nat.Notation`** | keep it beside the edge list, as §L's "GENERATED: `zmod121CorePacked`, `zmod121CoreEdges`" reads | `ARCHITECTURE.md` § 3.10's rule — geometry never sits upstream of a certificate. `Cnf/Table` imports the edge list; had the packed literal sat there, re-emitting the geometry would re-check all eight segments | high |
+| **All fourteen new records go into `scripts/Axioms.lean`'s CLEAN section**, including the two generated ones | name only the three headline theorems | the audit is the trust receipt, and the records where a native purchase could hide are exactly the generated `zmod121Four_agrees` and `zmod121Four_unsat`. Both read `[propext]` | high |
+| **`scripts/vacuity-baseline.txt`'s recorded counts updated in this phase; `CLAUDE.md`'s reported to the owner instead** | leave both stale and report both | the baseline's header is the gate's own tripwire, and it prints `RECORDED COUNTS ARE STALE` until it matches — a line that is always red trains its reader to skip it. `CLAUDE.md` is the owner's file, so its § Trust ledger and § The gate counts are in the hand-over and not edited here | high |
+
+**Negative controls — four planted, each seen red for its named reason, restored, and re-verified green.**
+
+| plant | what went red |
+|---|---|
+| **A.** drop `(hn : 1 < n)` from `unitPairNat_eq_true_iff` | `failed to synthesize instance … Nontrivial (ZMod n)` and `omega could not prove the goal` for `NeZero n` — the hypothesis is load-bearing at **both** of the two places §L claimed, and the `n = 1` `example` below it then fails to elaborate as well |
+| **B.** move one point of the packed table (point 0, `(0,0) → (0,1)`) | ``Tactic `decide` proved that the proposition (zmod121FourEdges.all fun e => unitPairNat 121 (zmod121FourPt e.1) (zmod121FourPt e.2)) = true is false``, plus the `#guard` on that point and the `Reds` example on the cast |
+| **C.** pin a vertex that is not in the triangle (port 2, `430 → 431`) | ``pinCube zmod121FourPorts ![0, 1, 2] = zmod121FourCube is false`` **and** ``List.elem (zmod121FourPorts 0, zmod121FourPorts 2) zmod121FourEdges = true is false`` — the cube and the clique are checked separately and both fired |
+| **D.** file the certificate against five colours | `Application type mismatch: zmod121FourCube has type Cube 883 4 but is expected to have type Cube 883 5`, then ``decide failed for zmod121FourClauseTable.agreesWithCNF zmod121FourCnf = true`` |
+
+**The control that could not fire, and the general rule it gives.** As first written, control **B** planted the
+fault in `Pts.lean` and then ran `lake env lean` on the *consumer* module — which reads `Pts.olean`, not the
+source. **It passed silently**, looking exactly like a control that works. It fires only once the data module's
+own `.olean` is rebuilt from the planted source. `CLAUDE.md`'s "a control whose failure mode is unreachable has
+not been tested by passing" in a costume specific to this repository: **a fault planted in a generated data
+module must be compiled into that module, not only into the file that consumes it** — which is the same fact
+that makes generated data cheap to import and expensive to invalidate.
+
+**The final statement, read aloud against Mathlib.** `chromaticNumber_unitQuadrance_zmod121` says
+`(unitQuadrance (ZMod 121)).chromaticNumber = 5`, where `unitQuadrance R` is the graph on `R × R` joining two
+points whose coordinate differences satisfy `(Δx)² + (Δy)² = 1`, and `SimpleGraph.chromaticNumber` is
+`⨅ n ∈ {n | G.Colorable n}, n` in `ℕ∞` — so it says, in the informal claim's own words, **the unit-distance
+graph over the ring of integers modulo 121 needs exactly five colours**: five suffice and four do not.
+
+**Gate counts, for `CLAUDE.md` (the owner's to write).** Axioms: **990 → 1004 clean**, 10 axiom-free, **5
+declared purchases unchanged** (all five are M03's, none is this phase's); every one of the fourteen new records
+is clean, and `chromaticNumber_unitQuadrance_zmod121` reads exactly `[propext, Classical.choice, Quot.sound]`.
+Vacuity: **declarations 6632 → 6723, refutations-skipped 268 → 270**; `sites=262 vacuous=0 stale=0 declared=3
+witnessed=17 generic=240 unknown=2`, all unchanged, with `unitQuadrance_zmod121_colorable_five` added as
+evidence; `--self-test` OK, every control fired. `tools/check_architecture.py` **PASS**.
+
+**A process note, because it is this file's own rule catching its own author.** The finding above was first
+written as *"the kernel pays for the clause table, not for the proof"* — and then failed the arithmetic check
+that `CLAUDE.md` prescribes for exactly this shape (*when two numbers are compared, exactly ONE thing may
+differ*). The measurement varies the **graph** at a fixed proof length; it says nothing about varying the
+proof, and multiplying out the eight segments shows the proof is **88 %** of the committed witness's kernel
+cost. Both halves of the corrected sentence are in the same table; the wrong version was one sentence reading
+one column of it. The check that caught it was three lines of arithmetic over numbers already collected.
+
+**Where the plan, Phase 1a's hand-over or the brief was wrong, or is now out of date.**
+1. **§L's generic layer elaborated as written and needed no repair** — its one blind spot was the thing
+   `lake env lean` cannot see: a module with no `import` does not have `ℕ` (it is `Mathlib.Data.Nat.Notation`'s,
+   not core's), which the generated `Pts.lean` hit on its first build. One line.
+2. **§I2's fallback was never needed.** `Nat.shiftRight` and `Nat.land` are kernel-accelerated at the 12,362-bit
+   width of the packed literal, so `unpackPt` costs one shift and one mask; `zmod121FourEdges_all_ok` —
+   3,441 pairs, 6,882 table reads, `decide +kernel` — sits in a module that elaborates in **1.0 s** in the real
+   build. The `PtTable`-style balanced tree is not required at this scale and probably not at 19's either.
+3. **§I2's "measure on the round-0 witness *before* minimising further" was the right instruction, and its
+   answer is the opposite of the one it anticipated.** It said minimisation might stop mattering; the round-0
+   object's clause table alone costs 616.6 CPU s and 20.8 GB against the minimised object's 31.6 s and 6.14 GB,
+   so Phase 1a's 15.7-second minimisation bought a **19.5×** cheaper kernel check.
+4. **The brief's stop rule was not triggered** (4.4 CPU-minutes and 6.14 GB against 15 minutes and 12 GB), so no
+   ruling was sought.
+5. **§H Phase 1b's three controls and §L's four mutations overlap in three.** The union is four and all four were
+   run; the checklist and the mutation audit should say so in one place.
+6. **The desktop was not quiet.** Another FS-66 job (`tools/fs66_b1_probe.py`, four threads) ran during part of
+   the measurement window. Its visible effect is the 2-segment triple, whose CPU rose **79.6 → 97.7 → 119.3 s at
+   a constant 14.0 GB RSS** — the machine filling, not the module. Every number above is a minimum over its runs
+   or a single run, so all of them are **upper bounds** on a quiet machine, and the ratios (which is what the
+   finding rests on) are between numbers taken minutes apart under the same load. The brief's "one heavy job at
+   a time" cannot be honoured by one agent when two are staffed; that is the owner's call and is reported, not
+   worked around.
+7. **`lake lint` is not green in this repository and was not green before this phase**: one error,
+   `HadwigerNelson.CayleyCert.cert23_8` contains an underscore (`CayleyCertificate.lean`, FS-53), in a file
+   Phase 1b did not touch. Nothing in the new modules is reported.

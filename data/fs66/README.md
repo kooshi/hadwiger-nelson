@@ -6,9 +6,14 @@ The pilot is the prime 11: level one, `UD(𝔽₁₁, 2)`, needs five colours (k
 `UD(ℤ/121, 2)`, needs five as well: the ceiling does not drop.** The plan is
 `plans/FS66-residue-tower-drop.md`; this file is the map of what is on disk, written at the close of phase 1a.
 
-**Nothing here is kernel-checked.** The strongest word in this directory is `CERTIFIED`, which is
+**Nothing in this directory is kernel-checked.** The strongest word here is `CERTIFIED`, which is
 `tools/fs66_check_witness.py`'s — a standard-library program that re-derives every claim from the definition,
-not the Lean kernel. Turning it into a kernel theorem is phase 1b.
+not the Lean kernel. **The kernel theorem exists, and it is not here**: phase 1b put this witness into Lean as
+`HadwigerNelson.chromaticNumber_unitQuadrance_zmod121` (`Proofs/HadwigerNelson/Instances/ZMod121Four.lean`),
+`(unitQuadrance (ZMod 121)).chromaticNumber = 5` on the standard three axioms with no `native_decide`. What the
+kernel re-derives from the files below is every claim they make: that each listed pair really has unit
+quadrance modulo 121, that the clause table holds the formula those pairs generate, and that every step of the
+LRAT proof propagates.
 
 ## The directories
 
@@ -96,8 +101,29 @@ re-probed only the wave in flight.
 **That run's product is deliberately not the witness.** It deletes *edges*, and edge deletion is measured to
 be counterproductive for the thing phase 1a is for: shrinking 3,441 edges to 3,090 (a 10% smaller clause
 table) made CaDiCaL's refutation 100× harder — 1,503 conflicts to 148,524 — and its **LRAT proof 71× larger,
-55.9 MB against 784 KB.** The kernel pays for the proof. The committed witness is the vertex-1-minimal graph,
-with the small proof.
+55.9 MB against 784 KB.** The kernel pays for the proof — phase 1b measured how much, and at this size it is
+**88 %** of the whole check (next section). The committed witness is the vertex-1-minimal graph, with the
+small proof.
+
+## What phase 1b measured on these files, and the rule it gives
+
+The two `stages/` witnesses exist so the kernel's cost could be measured on a large instance and a small one
+with **the same proof length**, and that is what they settled:
+
+| instance | points | edges | clause-table slots | proof hints | `Cnf/Table.lean` | one of 8 `Cnf/SegNNN.lean` |
+|---|---|---|---|---|---|---|
+| the witness | 883 | 3,441 | 16,262 | 96,820 | **31.6 CPU s / 6.14 GB** | 29.3 CPU s / 5.18 GB |
+| `stages/round0` | 2,974 | 14,190 | 61,484 | 95,653 | **616.6 CPU s / 20.84 GB** | 23.7 CPU s / 5.16 GB |
+
+**The kernel has two charges, and they are paid on different things: the clause table is the graph's bill, the
+segments are the proof's.** The two proofs are the same length (1.2 % apart) and the segments cost the same,
+although one graph is 3.8× the other — so the graph does not enter the segment charge. The clause tables differ
+3.8× and the table check differs **19.5× in time and 3.4× in memory**, super-linearly (3.8² = 14.3 is nearer
+than 3.8). **Which charge dominates depends on the size, and these two objects straddle the crossover**: on the
+883-point witness the segments are 88 % of the 4.4 CPU-minutes, on the 2,974-point stage the table is 76 % of
+13.4. Read with this directory's other finding — that deleting edges past vertex-1-minimality makes the proof
+71× larger, i.e. multiplies the charge that dominates at this size — the rule for any later witness is:
+**minimise vertices while the refutation stays easy, then stop.**
 
 ## The numbers, in one table
 
