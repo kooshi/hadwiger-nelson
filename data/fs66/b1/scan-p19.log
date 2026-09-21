@@ -1,0 +1,52 @@
+p=19 n=361 |S|=20 |maps|=40 reps=182
+build cache reloaded from data/fs66/ckpt/b1-p19/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.4 s]
+q forms built: 52370 orbits [0.4 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 183), ('M2[u=1]', 182), ('M2[u=20]', 182), ('M2[u=81]', 182), ('M2[u=2]', 182), ('M2[u=9]', 182), ('M2[u=5]', 182), ('M2[u=8]', 182), ('M2[u=27]', 182), ('M2[u=3]', 182), ('M2[u=22]', 182), ('M2[u=7]', 182), ('M2[u=26]', 182), ('M2[u=41]', 182), ('M2[u=66]', 182), ('M2[u=45]', 182), ('M2[u=4]', 182), ('M2[u=6]', 182), ('M2[u=25]', 182), ('locq[u=0]', 2)]; scalar rows 259271; equality rows 0 [5.0 s]
+rounding the dual in data/fs66/ckpt/b1-p19/solve-gpu.npz at 13950 iterations; no solver was called
+FLOAT READING (untrusted, double precision): value 77.506086 (dual 77.506094), status solved (res_pri 7.09e-08, res_dual 1.12e-05), 13950 iterations, 0.0 s, 307.2 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+scan: 6 rounding attempts on 6 workers [316.0 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10   12 -- not positive definite                      89.45  M2[u=0], M2[u=1], M2[u=20] … (19 blocks)
+     1e-10   14         77.511742…   53545     27190   295.12  38
+     1e-09   12         77.512147…   53910     28570   217.74  38
+     1e-09   14         77.511890…   53531     27340   305.02  38
+     1e-08   12         77.513532…   52990     25545   226.13  38
+     1e-08   14         77.513710…   53313     26754   315.89  38
+wrote data/fs66/b1/cert-p19.json (10383708 bytes, sha256 055f031d1e69…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 7751174208860938222570365201256712 / 100000000000000000000000000000000 = 77.511742…
+  4*U = 310.046968… < 361 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 387.558710… >= 361, so it says nothing about 5
+  loss against the float reading: 0.005656
+
+Next: python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p19.json --m 2 --record data/fs66/b1/records.jsonl
+p=19 n=361 |S|=20 |maps|=40 reps=182
+build cache reloaded from data/fs66/ckpt/b1-p19/build-p19-c2.npz: 52370 orbits, 16653x181 product table, 21 q forms
+products a*tau_t(a'): 3014193 canonical forms (a quarter of 11957764 by the two symmetries), 52370 orbits [0.4 s]
+q forms built: 52370 orbits [0.4 s]
+orbits K=52370; PSD blocks [('M2[u=0]', 183), ('M2[u=1]', 182), ('M2[u=20]', 182), ('M2[u=81]', 182), ('M2[u=2]', 182), ('M2[u=9]', 182), ('M2[u=5]', 182), ('M2[u=8]', 182), ('M2[u=27]', 182), ('M2[u=3]', 182), ('M2[u=22]', 182), ('M2[u=7]', 182), ('M2[u=26]', 182), ('M2[u=41]', 182), ('M2[u=66]', 182), ('M2[u=45]', 182), ('M2[u=4]', 182), ('M2[u=6]', 182), ('M2[u=25]', 182), ('locq[u=0]', 2)]; scalar rows 259271; equality rows 0 [5.0 s]
+rounding the dual in data/fs66/ckpt/b1-p19/solve-gpu.npz at 13950 iterations; no solver was called
+FLOAT READING (untrusted, double precision): value 77.506086 (dual 77.506094), status solved (res_pri 7.09e-08, res_dual 1.12e-05), 13950 iterations, 0.0 s, 307.2 MB
+  p^2/m for m = 3, 4, 5: 120.3333, 90.2500, 72.2000
+scan: 6 rounding attempts on 6 workers [315.7 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10   12 -- not positive definite                      89.42  M2[u=0], M2[u=1], M2[u=20] … (19 blocks)
+     1e-10   14         77.511742…   53545     27190   294.72  38
+     1e-09   12         77.512147…   53910     28570   217.37  38
+     1e-09   14         77.511890…   53531     27340   304.48  38
+     1e-08   12         77.513532…   52990     25545   225.54  38
+     1e-08   14         77.513710…   53313     26754   315.55  38
+wrote ../../../../tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/logs/cert-p19-wide.json (10383708 bytes, sha256 4a87e6538bd8…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 7751174208860938222570365201256712 / 100000000000000000000000000000000 = 77.511742…
+  4*U = 310.046968… < 361 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 387.558710… >= 361, so it says nothing about 5
+  loss against the float reading: 0.005656
+
+Next: python3 tools/fs66_b1_cert_check.py ../../../../tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/logs/cert-p19-wide.json --m 2 --record data/fs66/b1/records.jsonl
