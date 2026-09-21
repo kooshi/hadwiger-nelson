@@ -192,7 +192,7 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    is fractional**: α < q²/6 at the five members and U₆₄ proves no target six-chromatic with no rounding heuristic, and closes the
    composite-ideal hatch too; 47 is nearest, 368 against the certified 371 (G59).
 12. **What the wall leaves, and where the conjecture points** (G59, row 70). The wall is finite — six graphs, 23, 27, 31, 43, 47
-   and U₆₄ — and in reach only at 47 and U₆₄ (FS-57); no uniform independence bound can carry it. A composite residue target
+   and U₆₄ — and in reach only at 47 and U₆₄ (FS-57); no uniform independence bound can carry all of it (one could close 31, 43 and 47, never 23: G59). A composite residue target
    escapes it only through an integrality gap, and inert towers keep the Hoffman bound. **If it holds, the conjecture's main clause
    says nothing above five**, and its sharpest remaining prediction is quadratic: **ℚ(√167)** — predicted to need at least six
    (five is refused at 23 by certificate), against a proven three (FS-56).
@@ -318,7 +318,7 @@ artifacts — provenance, never a certificate; the certificate is the Lean modul
 
 ### Paths forward, ranked
 
-*A mirror of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
+*A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
 **Open milestones, in order.** **FS-66 — does the residue ceiling drop up the tower? — open 2026-09-20** (Kooshi's go; `plans/FS66-residue-tower-drop.md`, stub `plans/STUB-residue-tower-drop.md`). **FS-61, the census of real quadratic fields, closed 2026-09-20** (row 74, G61, G65; `plans/FS61-quadratic-census.md`). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-20): FS-66 first, then FS-59's first experiment (R9).**
@@ -796,8 +796,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   83 — the last prime where six was spectrally possible — refuses it by certificate (row 68), as do 59, 67 and 79 (FS-53 phase B,
   row 69). Five is refused from 59 up. So over the residue fields a number field can have, **a plane with χ exactly 6 can live only
   at q ∈ {23, 27, 31, 43, 47}**, with floors 6, 6, 5, 6, 6 — five is refused by certificate at 23 and 27 (the level-3 relaxation,
-  α ≤ 105 and ≤ 141; FS-56 and FS-54, rows 71, 70), 43 and 47 (row 69) — and none decided: five is CDCL-undecided or spectrally
-  refused at every one, and no six-colouring was found (ceilings and searches: row 69). **The exclusion.** A prime is usable for a
+  α ≤ 105 and ≤ 141; FS-56 and FS-54, rows 71, 70), 43 and 47 (row 69) — and none decided: at 31, the one member where five is not
+  refused, it is CDCL-undecided, and no six-colouring was found (ceilings and searches: row 69). **The exclusion.** A prime is usable for a
   field only if the field's radicands are all squares in its residue field, and **every field this project has built in contains
   K**: 3 is a non-square modulo 31, 43, 67, 79 and 11 modulo 23, 47, 59, 71, and at 27 the residue 11 ≡ −1 (mod 3) is a non-square
   in every 𝔽_q with q ≡ 3 (mod 4); so such a field's usable primes are 11 and then nothing below 83, its local bound is 5 or ≥ 7,
