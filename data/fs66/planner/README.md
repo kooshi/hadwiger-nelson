@@ -38,6 +38,28 @@ What the verdict rests on, in the order a sceptic should check it:
 **Not done, and the plan's first phase:** an LRAT *check* (the proof was generated, never checked — there is no checker in
 `tools/` that is not frozen), a vertex-minimal core, and the kernel theorem. Nothing here is a certificate.
 
+## Level THREE at 11 refuses four colours too (one probe, solver's word)
+
+`fs66_planner_level3.py core-p11-k4-fixpoint-1115v.json 4 OUT.cnf` builds, from the definition over `ℤ/1331`, the subgraph of
+`UD(ℤ/1331, 2)` induced on the **preimage of the 1,115-vertex level-two core**: 134,915 vertices, 16,457,815 edges (every
+level-three edge between preimage points, not only the lifts of the core's 4,405 edges), induced degree min / mean / max
+55 / 244.0 / 638; the circle has `p²(p+1) = 1,452` points, asserted. Plain encoding, one triangle pinned, 1.16 GB of CNF
+(sha256 `6ffaaed6…`, scratch, not committed). **CaDiCaL: UNSATISFIABLE, 12,311 conflicts, 135 s, 11.0 GB**
+(`level3-core-preimage-k4.out`; exit status 20 read from the solver itself). So `χ(UD(ℤ/1331, 2)) = 5` on one solver's word,
+no proof log kept, no second solver, no core extracted: a data point that prices the ask, not a certificate. A first launch
+"returned nothing" because it was wrapped in `/usr/bin/time`, which this machine does not have, behind a `grep` — a check that
+reported nothing because it could not run; the rerun reads the exit status from the solver.
+
+## The single-class fibre-density relaxation (the owner's inequality, one colour class at a time)
+
+`fs66_planner_single_class.py P STARTS` maximises `Σφ` over `φ ∈ [0,1]^{p²}` subject to the owner's inequality
+`φᵀ(A₁ + cI)φ ≤ c·Σφ` (`data/fs66/owner/note-2026-09-20-fibre-density.md` §2), by SLSQP from random starts — **local maxima
+only**. At 7: max = median = 14.0000 = `α(UD(𝔽₇,2))`, best point pure. At 11: max = median = **28.0000 = `α(UD(𝔽₁₁,2))`**, best
+point pure, 35 of 40 starts converged. If 28 (or anything below 30.25) were the certified global maximum, no level of the 11-adic
+tower would be four-colourable and the independence ratio would be constant up the tower; a pure maximal independent set is a
+strict local maximum exactly when every outside vertex has at least two neighbours in it (the first-order computation is in
+the plan §S5).
+
 ## Other measurements in this directory's scripts
 
 * `fs66_planner_g2.py` — builds the circles from the definition and FFTs them: `|S₂| = p(p+1)`; depth-≤1 eigenvalues are exactly

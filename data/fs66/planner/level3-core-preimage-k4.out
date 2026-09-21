@@ -1,0 +1,7 @@
+s UNSATISFIABLE
+c conflicts:                 12311       102.62    per second
+c decisions:                 19495       162.51    per second
+c propagations:          434202815         3.62 M  per second
+c total process time since initialization:       135.25    seconds
+c total real time since initialization:          135.80    seconds
+c maximum resident set size of process:        11008.62    MB
