@@ -44,11 +44,16 @@ from pathlib import Path
 NORMALISE: list[tuple[str, str, str]] = [
     (r"(?<=\d),(?=\d{3}(?!\d))", "", "thousands separators: 1,581 and 1581 are one number"),
     (r"ℚ\(√3,√11\)", "K", "legend macro K := ℚ(√3,√11) (§ Notation)"),
+    (r"ℚ\(√3,√5,√7,√11\)", "K(√5,√7)", "K(√d) adjoins √d (§ Notation): de Grey's field"),
+    (r"ℚ\(√3,(√[57]),√11\)", r"K(\1)", "K(√d) adjoins √d (§ Notation)"),
+    (r"ℚ\(√3,√11,(√\d+)\)", r"K(\1)", "K(√d) adjoins √d (§ Notation)"),
     (r"UD\(𝔽(_[qp]|[₀-₉]+), ?2\)", r"Γ\1", "legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)"),
 ]
 
 # token -> reason it may vanish. Keep this small and reviewed.
-ALLOW: dict[str, str] = {}
+ALLOW: dict[str, str] = {
+    "ℚ(√p,√q)²": "row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'",
+}
 
 PROTECTED_TAG = "[PROTECTED — never compress"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
