@@ -234,7 +234,62 @@ never by a residual (`plans/FS50-certificate-soundness.md` §5): the six shipped
 point, untrusted, recorded before any rounding. The best explicit independent set of level one is 76, so the
 relaxation's own optimum is pinned in roughly `[76, 78]`.
 
-**The certificate: PENDING** — filled in when the frozen checker has spoken.
+**The certificate: `cert-p19.json`, `U = 77.511742…`, and the frozen checker says `CERTIFIED`.**
+
+| | `data/fs66/b1/cert-p19.json` |
+|---|---|
+| exact bound `U = U_num / scale` | **77.511742…** |
+| `U_num` | `7751174208860938222570365201256712` |
+| `scale` | `10^32` (digits `D = 14`, weight digits `W = 9`) |
+| refuses | **`4·U = 310.046968… < 361`** (`--m 4`, exit 0) |
+| does not refuse | `5·U = 387.558710… ≥ 361` (`--m 5`, exit 3, `BOUND ONLY`) |
+| blocks / rows / weight vectors | 38 / 53,545 / 37 |
+| size | 10.4 MB |
+| sha256 | `055f031d1e69…` |
+| checker's wall time / memory | **8 min 31 s / 3.17 GB** |
+| rounded from | the **converged** solve: 13,950 SCS iterations, `status solved`, `res_dual` 1.12e−05, 3 h 23 m on graphics card A |
+
+## What it licenses — §ST's sentence, at `p = 19`
+
+> **For every `k ≥ 1`, every independent set of `UD(ℤ/19^k, 2)` has at most `U·361^{k−1}` points with
+> `U = 77.511742…` (the exact rational in the file); hence no level of the tower is four-colourable, the
+> chromatic number of every level is exactly 5, the clopen chromatic number of `ℤ₁₉²` is 5 (main plan §S2),
+> the fractional chromatic number of every level lies in `[361/U, 361/76] = [4.6574, 4.7500]`, and the
+> supremum of the Haar measure of a measurable independent set of `ℤ₁₉²` lies in
+> `[76/361, U/361] = [0.210526, 0.214714]`.**
+
+**The Borel clause:** `χ_Bor(ℚ₁₉²) ≥ ⌈361/U⌉ = 5`, and a level-one 5-colouring pulled back is clopen, hence
+Borel, so **`χ_Bor(ℚ₁₉²) = 5`** — a third exact value for the problem `[BardestaniMallahiKarai2017]` pose,
+after `χ_Bor(ℚ₇²) = 4` and `χ_Bor(ℚ₁₁²) = 5`.
+
+**And a bound on level one that the phase was not aiming at.** `B₁(p) ≥ α(G₁)`, because a level-one
+independent set is itself a feasible `φ`. So the same `U` bounds the independence number of the finite plane:
+**`α(UD(𝔽₁₉,2)) ≤ ⌊U⌋ = 77`**, against FS-62's `≤ 80` from the level-3 relaxation. With the committed
+76-point set, **`α(UD(𝔽₁₉,2))` is 76 or 77** — a bracket of two where FS-62 left five. And at level two,
+**`27,436 ≤ α(UD(ℤ/361,2)) ≤ 27,981`**.
+
+`U < 77` is **not attainable by this route, ever**: the certificate is a feasible point of the relaxation's
+dual, so `U` is at least the relaxation's own optimum, and that optimum is `77.506086…`. Closing the last
+gap needs a *tighter relaxation*, which is another milestone's question.
+
+**Trust word for every sentence above: `CERTIFIED (fs66_b1_cert_check)` + the hand-proved links L1, L2, L6 of
+`SOUNDNESS.md`. Never the Lean kernel**, and never this phase's own producer, which is untrusted by design.
+
+## The rounding scan at 19, and §R′.2's law at a third prime (`scan-p19.log`)
+
+| shift | `U` at `D = 12` | `U` at `D = 14` |
+|---|---|---|
+| `1e-10` | **not positive definite** (19 blocks) | **77.511742…** (shipped) |
+| `1e-09` | 77.512147… | 77.511890… |
+| `1e-08` | 77.513532… | 77.513710… |
+| `1e-07` | 77.532568… | — |
+| `1e-06` | 77.729631… | — |
+| `1e-05` | 79.704437… | — |
+
+**Positive definiteness survives exactly when `shift ≥ 10^(3−D)`** — 7, 11 and now 19, with the one refusal
+falling precisely where the law puts it (`1e-10 < 10^(3−12)`, and fine at `D = 14`). §R′.2's recipe for the
+next prime — *round at `shift = 10^(3−D)` for the largest affordable `D`* — is what produced the shipped
+file, and it beats the 11-era default grid by 4.7× in rounding loss (0.005656 against 0.026482).
 
 ## What is new at 19, and what it cost
 
@@ -279,3 +334,33 @@ Two mechanical consequences, both measured:
    five chunks while `res_pri` fell two orders of magnitude; that run was killed (checkpoint and log kept) and
    relaunched with 3,000-iteration chunks. The solver class is not at fault: at 11 the **indirect** solver
    converges cleanly in 6,125 iterations (`status solved`, `res_dual` 5.4e−06).
+
+## Files added by Phase 2C
+
+| file | what it is | trust word |
+|---|---|---|
+| `cert-p19.json` | **the certificate at 19**, format `fs66-b1-cert-v2`, integers only | **`CERTIFIED (fs66_b1_cert_check)`** + the hand links L1, L2, L6 |
+| `scan-p19.log` | both rounding scans at 19 — the 11-era default grid and the widened one §R′.2 prescribes | producer bound (untrusted) |
+| `level-one-sets.json` | now also holds the 76-point set of `UD(𝔽₁₉,2)` (FS-62's, re-verified here from the definition) | **`VERIFIED (fs66_b1_sets_check)`** |
+| `records.jsonl` | 33 further rows at `p = 19`: 3 float readings (recorded before any rounding), 27 rounding attempts, 6 checker runs (3 `CERTIFIED` with `--m 4`, 3 `BOUND ONLY` with `--m 5`) | each row's own `trust` field |
+| `../ckpt/b1-p19/` | the build cache and the converged solve iterate, with a README naming what regenerates each and the resume commands | provenance, never a certificate |
+
+## The commands, exactly
+
+```
+# the solve: about 3 h 23 m on graphics card A, checkpointed every 3,000 iterations, resumable by re-running
+CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=1 \
+build/venv-sdp-gpu/bin/python tools/fs66_b1_cert_make.py 19 --fast --build-jobs 16 --threads 16 \
+  --cache-dir data/fs66/ckpt/b1-p19 --linear-solver gpu_indirect --eps 1e-7 \
+  --chunk-iters 3000 --max-iters 45000 --solve-ckpt data/fs66/ckpt/b1-p19/solve-gpu.npz \
+  --no-round --record data/fs66/b1/records.jsonl
+
+# the rounding: 6 exact attempts across the cores, no solver call, about 5 minutes
+~/venvs/fs66/bin/python tools/fs66_b1_cert_make.py 19 --fast --cache-dir data/fs66/ckpt/b1-p19 \
+  --round-only --solve-ckpt data/fs66/ckpt/b1-p19/solve-gpu.npz \
+  --scan --scan-shifts 1e-8,1e-9,1e-10 --scan-digits 12,14 --jobs 6 \
+  --out data/fs66/b1/cert-p19.json --record data/fs66/b1/records.jsonl
+
+# the verdict, which is the only thing above that anyone need trust
+python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p19.json --m 4 --record data/fs66/b1/records.jsonl
+```
