@@ -165,7 +165,12 @@ direction `i·s̄` in the fibre `𝔽_{p²}`**. Let `s_j` (`j = 1 … (p+1)/2`) 
 
 > **`u ~ v` in `UD(ℤ/p², 2)` ⟺ for some `j`: `ν_j(v − u) = ±1` and `τ_j(v − u) ≡ 0 (mod p)`.**
 
-(`w = ±s_j(1+pic)` gives `w s̄_j = ±(1 + pic)`; conversely `w s̄_j = ±1 + p·i·c′` has norm 1.) So each point has `(p+1)/2`
+(`w = ±s_j(1+pic)` gives `w s̄_j = ±(1 + pic)`; conversely `w s̄_j = ±1 + p·i·c′` has norm 1.) *Intrinsically:* for each direction class `σ ∈ S₁/±` let `L_σ = p·(i s_σ)·𝔽_p` and `Λ_σ = R[i]/L_σ ≅ ℤ/p² × ℤ/p`; then
+`u ~ v` iff the images of `u, v` in some `Λ_σ` differ by `±s_σ` — `(ν_j, τ_j)` are coordinates on `Λ_σ`, and the choice of
+representatives and lifts is incidental. **The same holds between any two consecutive levels** (the kernel of
+`S_k → S_{k−1}` is `{1 + p^{k−1}·i·c}`, a line), but *not* between level `k ≥ 3` and level one, where the lifts of `s̄` form a
+curve, not a coset — which is why the model that is generic in `k` is the fibre density over level ONE (S4), the only
+finite base every level shares. So each point has `(p+1)/2`
 coordinates `(ν_j, τ_j)`, each living on one of `p` cycles of length `p²`, and two points are adjacent iff some coordinate moves
 one step along its cycle. Consequences: (a) between the fibres over adjacent `x, y = x + s̄_j` the graph is `p` disjoint `K_{p,p}`
 (lines of direction `i s̄_j` over `x`, each completely joined to one line over `y`) — **966,306 edges = 7,986 bicliques at 11**,
@@ -301,12 +306,16 @@ verifier" is `tools/fs66_owner_verify.py` (all-pairs from the definition; shares
 **What.** A witness that `UD(ℤ/n, 2)` is not `k`-colourable is: a list of points of `(ℤ/n)²`, a list of pairs of them, a pinned
 clique, and an LRAT refutation of that edge list's `k`-colouring formula. **`tools/fs66_check_witness.py` — standard library
 only, importing nothing from `tools/`** — modelled on `tools/fs58_check_witness.py` (frozen: read it, never import or edit it)
-and doing, in order: (1) every point is a pair of integers in `[0, n)`, no point twice; (2) **every listed pair is re-verified
+and doing, in order: (1) every point is a pair of integers in `[0, n)`, no point twice (*hygiene, not soundness*: a repeated point would still be
+a homomorphic image and a valid refutation — the kernel needs only that listed pairs go to edges); (2) **every listed pair is re-verified
 from the definition** `(a−c)² + (b−e)² ≡ 1 (mod n)` in integer arithmetic, and the count of *all* unit pairs among the listed
 points is reported beside the listed count (subset semantics: a subgraph that refuses refutes every supergraph — the kernel
 needs only that listed pairs are edges, and fewer clauses are cheaper there); (3) the pinned vertices are pairwise listed
-edges; (4) it builds the CNF **itself** in a fixed documented order (`x(v,c) = k·v + c + 1`; at-least-one clauses in vertex
-order; per listed edge in listed order the `k` conflict clauses; then the pin units); (5) it checks the LRAT with its own
+edges; (4) it builds the CNF **itself**, in **exactly the order of `tools/coloring.py` and of `Sat/Encoding.lean`'s
+`coloringCNF k n E ++ cubeCNF k n cube`** (`x(v,c) = k·v + c + 1`; ids `0 … n−1` the at-least-one clauses in vertex order; then
+per listed edge, in listed order, its `k` conflict clauses; then one unit per pin) — **so ONE LRAT file serves both this
+checker and the kernel pipeline**; the checker re-implements the order (it imports nothing), and a control asserts that its
+CNF's SHA-256 equals the one `tools/coloring.py` produces for the same witness: two builders, agreement checked, never assumed; (5) it checks the LRAT with its own
 reverse-unit-propagation checker (each added clause implied using exactly its hints in order, deletions honoured, the empty
 clause added). Output `CERTIFIED` (exit 0) or `REFUSED <CODE>: <detail>` (exit 1).
 
@@ -344,8 +353,10 @@ context — `CLAUDE.md` § Toolchain on Python 3.14).
 `unitQuadrance.map (ZMod.castHom …)` — no data. Lower half: the witness through **the existing certificate pipeline**
 (`tools/emit_mask.py --edges … --n N --edges-name … --pins … --lrat … --name zmod121Four --out … --module …`; precedent
 `Instances/TwoAdicFive.lean` + `Instances/TwoAdicFive/{Edges.lean, Cnf/}`, FS-38 phase K3; and `Instances/Heule510` for a
-4-colour certificate on 510 vertices), a generated vertex table of **natural-number pairs**, a `Bool` edge check through
-`List.all` on ℕ arithmetic (`unitPairNat`), and one bridging lemma from that check to adjacency over `ZMod 121`.
+4-colour certificate on 510 vertices), a generated vertex table held as **one packed natural-number literal** (`unpackPt`; fallback if the measurement says
+otherwise: a balanced tree in the manner of `Certificate.lean`'s `PtTable` — never a `![…]` vector or a `List` indexed by
+position, whose access cost is linear), a `Bool` edge check through `List.all` on ℕ arithmetic (`unitPairNat`), and one
+bridging `iff` from that check to adjacency over `ZMod n` — generic in `n`, so 19's witness (Phase 3a) reuses it.
 **Measure before promising** (`CLAUDE.md` § The kernel's cost model — three of its rules bind here): `List.all f = true`, never
 `∀ e ∈ l`; **no `ZMod 121` literal in the data** (a numeral at a type index is paid per numeral — the table is `ℕ × ℕ` and the
 cast happens once, inside the bridging lemma's statement); feed the kernel the core, never the 14,641-vertex instance. Measure on
@@ -494,27 +505,46 @@ import Proofs.HadwigerNelson.Gadget
 
 namespace HadwigerNelson
 
-/-- Reduction `ZMod n → ZMod m` for `m ∣ n` is a homomorphism of unit-quadrance graphs, so colourability climbs the tower:
-the kernel form of the second inequality of `[Madore2015]` Prop. 3.8. -/
-theorem unitQuadrance_zmod_colorable_of_dvd {m n k : ℕ} [Fact (1 < m)] (h : m ∣ n)
-    (hk : (unitQuadrance (ZMod m)).Colorable k) : (unitQuadrance (ZMod n)).Colorable k := by
-  sorry   -- `hk.of_hom`-shaped, through `unitQuadrance.map (ZMod.castHom h (ZMod m))`; QUERY the name, do not recall it
+/-- Colourability pulls back along a ring homomorphism: the colouring face of `unitQuadrance.map`. GENERIC — this is
+the intrinsic statement; everything about `ZMod` below is its instance at `ZMod.castHom`. (Proved: two lines.) -/
+theorem unitQuadrance_colorable_of_ringHom {R S : Type*} [CommRing R] [CommRing S] [Nontrivial S] (f : R →+* S)
+    {k : ℕ} (h : (unitQuadrance S).Colorable k) : (unitQuadrance R).Colorable k := by
+  obtain ⟨C⟩ := h
+  exact ⟨C.comp (unitQuadrance.map f)⟩
 
-/-- The per-pair check on natural-number representatives, as a `Bool` the kernel evaluates; no `ZMod` literal is carried. -/
+/-- **The residue ceiling is monotone along divisibility** — up the tower `ZMod (p^k)`, across CRT composites, and (at
+`n = 0`) from `ℤ` itself: the kernel form of the second inequality of `[Madore2015]` Prop. 3.8. -/
+theorem chromaticNumber_unitQuadrance_zmod_le_of_dvd {m n : ℕ} [Fact (1 < m)] (h : m ∣ n) :
+    (unitQuadrance (ZMod n)).chromaticNumber ≤ (unitQuadrance (ZMod m)).chromaticNumber := by
+  sorry   -- from the lemma above through Mathlib's "colourable ⟹ chromaticNumber ≤"; QUERY the names, do not recall them
+
+/-- The per-pair check on natural-number representatives, as a `Bool` the kernel evaluates; no `ZMod` literal is carried.
+`v`'s coordinates are reduced first, so the subtraction never truncates and no "entries are `< n`" hypothesis is needed. -/
 def unitPairNat (n : ℕ) (u v : ℕ × ℕ) : Bool :=
   ((u.1 + n - v.1 % n) ^ 2 + (u.2 + n - v.2 % n) ^ 2) % n == 1 % n
 
-#guard unitPairNat 121 (0, 0) (0, 120)      -- `(0,0) ~ (0,−1)`
-#guard !unitPairNat 121 (0, 0) (11, 0)      -- `11² = 121 ≡ 0`, not `1`
-#guard !unitPairNat 121 (5, 7) (5, 7)       -- a point is not its own neighbour
-
-/-- The check decides adjacency over `ZMod n`. The ONLY place a cast appears. -/
-theorem unitQuadrance_adj_of_unitPairNat {n : ℕ} [Fact (1 < n)] {u v : ℕ × ℕ} (h : unitPairNat n u v = true) :
-    (unitQuadrance (ZMod n)).Adj ((u.1 : ZMod n), (u.2 : ZMod n)) ((v.1 : ZMod n), (v.2 : ZMod n)) := by
+/-- **The bridge, both ways** (one predicate, two costumes, one `iff`): `1 < n` is used twice — `ZMod n` must be
+nontrivial for adjacency to exclude `u = v`, and at `n = 0` the check's subtraction would truncate. The ONLY place a cast
+appears. -/
+theorem unitPairNat_eq_true_iff {n : ℕ} [Fact (1 < n)] (u v : ℕ × ℕ) :
+    unitPairNat n u v = true ↔
+      (unitQuadrance (ZMod n)).Adj ((u.1 : ZMod n), (u.2 : ZMod n)) ((v.1 : ZMod n), (v.2 : ZMod n)) := by
   sorry
 
--- generated: `zmod121CorePts : List (ℕ × ℕ)` (length N), `zmod121CoreEdges : List (Fin N × Fin N)`, `Cnf/` by `tools/emit_mask.py`
--- leaf, `decide +kernel` through `List.all`:  every listed pair passes `unitPairNat 121` on its two table entries
+/-- The vertex table as ONE packed literal (`CLAUDE.md` § The kernel's cost model: pack many values into few big `Nat`s;
+shifts and masks are GMP-backed): entry `i` is the 14-bit field at offset `14·i`, holding `a·121 + b` (`14641 < 2¹⁴`). -/
+def unpackPt (packed : ℕ) (i : ℕ) : ℕ × ℕ :=
+  let id := (packed >>> (14 * i)) &&& 16383
+  (id / 121, id % 121)
+
+#guard unpackPt (120 + (5747 <<< 14)) 1 == (47, 60)
+#guard unitPairNat 121 (0, 0) (0, 120)                                          -- `(0,0) ~ (0,−1)`
+#guard unitPairNat 121 (0, 120) (47, 60) && unitPairNat 121 (0, 0) (47, 60)     -- the planner's pinned triangle 0, 120, 5747
+#guard !unitPairNat 121 (0, 0) (11, 0)                                          -- `11² = 121 ≡ 0`, not `1`
+#guard !unitPairNat 121 (5, 7) (5, 7)                                           -- a point is not its own neighbour
+
+-- GENERATED (instance-only data): `zmod121CorePacked : ℕ`, `zmod121CoreEdges : List (Fin N × Fin N)`, `Cnf/` by `tools/emit_mask.py`
+-- leaf, `decide +kernel` through `List.all`:  every listed pair passes `unitPairNat 121` on its two unpacked entries
 -- by the pipeline:                            `¬ (edgeGraph N zmod121CoreEdges).Colorable 4`  (triangle gadget ∩ LRAT gadget)
 
 theorem not_colorable_four_unitQuadrance_zmod121 : ¬ (unitQuadrance (ZMod 121)).Colorable 4 := by
@@ -522,7 +552,7 @@ theorem not_colorable_four_unitQuadrance_zmod121 : ¬ (unitQuadrance (ZMod 121))
 
 theorem colorable_five_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).Colorable 5 :=
   haveI : Fact (1 < 11) := ⟨by decide⟩
-  unitQuadrance_zmod_colorable_of_dvd (m := 11) (n := 121) ⟨11, by norm_num⟩ finitePlane11_colorable_five
+  unitQuadrance_colorable_of_ringHom (ZMod.castHom (show 11 ∣ 121 by norm_num) (ZMod 11)) finitePlane11_colorable_five
 
 /-- **The ring of integers modulo 121 needs exactly five colours**: at 11 the residue ceiling does not drop at level two. -/
 theorem chromaticNumber_unitQuadrance_zmod121 : (unitQuadrance (ZMod 121)).chromaticNumber = 5 := by
@@ -536,8 +566,8 @@ step is row 57's gap, FS-47). No statement about level three, the `p`-adic plane
 `ZMod (11 ^ 2)` — the type is `ZMod 121`, a literal, because a numeral at an unsimplified type index is paid per numeral
 (`CLAUDE.md` § The kernel's cost model). **Vacuity:** `not_colorable…` concludes `False` under a colouring and is a refutation
 (skipped by the gate); `unitQuadrance_zmod_colorable_of_dvd` takes a `Colorable` hypothesis whose inhabitant is
-`finitePlane11_colorable_five`, used in the same file; `unitQuadrance_adj_of_unitPairNat`'s hypothesis is inhabited by the
-first `#guard`.
+`finitePlane11_colorable_five`, used in the same file (and the generic `unitQuadrance_colorable_of_ringHom` is parametric —
+`GENERIC`, the caller's obligation); `unitPairNat_eq_true_iff` is an `iff` with both sides inhabited by the `#guard`s.
 
 ---
 
@@ -651,7 +681,28 @@ only).*
 | **Subset semantics for the witness's edge list** (listed pairs must be unit; not "all unit pairs must be listed") | FS-58's equality semantics | a refusing subgraph refutes every supergraph, the kernel pays per clause, and the checker still reports the induced count so nothing is hidden | high |
 | **Level one is always asked before level two** | asking level two alone, as M11 did | §S6: level two's refutation is at least as long; level one's count prices it and catches an encoding that cannot refuse even the easy case | high |
 | **`B₁` with cuts is the registered quantity; the bare `B₁` a control** (the owner's suggestion, adopted) | certifying the bare problem | at 11 the bare problem's near-ties (27.9995) exist only because `c < 2` by a hair; the cuts are true at every level and M9 shows they move the bound (19.95 → 18.04 → 16.165 at 7) | high |
-| **Natural-number vertex table + one bridging lemma** for the kernel | a table of `ZMod 121` literals and `decide` on `unitQuadrance` adjacency | FS-38 measured 32.9 GB and a timeout for literals at an unsimplified index against seconds for evaluating on naturals | medium-high — to be measured in Phase 1b, which is the point of measuring first |
+| **One packed natural-number literal for the vertex table + one bridging `iff`, generic in `n`** | a table of `ZMod 121` literals and `decide` on `unitQuadrance` adjacency | FS-38 measured 32.9 GB and a timeout for literals at an unsimplified index against seconds for evaluating on naturals | medium-high — to be measured in Phase 1b, which is the point of measuring first |
+
+---
+
+## §E. The modeling passes (WORKFLOW step 5) — what each changed
+
+**Domain modeling (fresh invocation, 2026-09-20).** *Grokked by executing:* every statement below elaborates and every
+`#guard` passes under `lake env lean` with `autoImplicit false`. *The one cut, applied:* **intrinsic** — the ring-hom
+functoriality of colourability (so the minted lemma is `unitQuadrance_colorable_of_ringHom`, generic in the rings, proved in
+two lines, and the `ZMod` tower statement is its corollary along `m ∣ n` — which also covers CRT composites and `ℤ` at `n = 0`);
+the edge check as one predicate in two costumes joined by an **`iff`** (the first draft had only the forward implication, which
+left the negative `#guard`s meaning nothing); `1 < n` as the single hypothesis doing both jobs (the adversaries: at `n = 1`
+the check says *true* of a point and itself; at `n = 0` its subtraction truncates). **Incidental, and quarantined in
+generated data:** `121`, the core, the packing width 14. *Placement:* nothing is indexed — no `residuePlane p k` abbreviation
+is minted (one instance; and a `ZMod (p ^ k)` index is paid per numeral). *Ugliness read:* a position-indexed vertex table
+(`![…]` or `List.get`) is linear per access × 8,810 accesses — replaced by one packed literal (the repository's own `Sat/Mask`
+idiom); two CNF builders (checker, kernel pipeline) are one concept in two costumes — joined by a digest-equality control
+and one stated clause order (`tools/coloring.py`'s). *Seams:* the checker's "no point twice" is hygiene, not soundness, and
+says so; §S1 now states the level-two structure intrinsically (quotients `Λ_σ`, not chosen coordinates) and says which part
+is generic in the level (consecutive levels) and which is not (level `k ≥ 3` over level one), which is *why* the
+level-generic model is the fibre density over level one. *Next-lemma test:* `(19, 2)` needs no new Lean vocabulary —
+`unitPairNat 361`, the same `iff`, the same pipeline.
 
 ---
 
