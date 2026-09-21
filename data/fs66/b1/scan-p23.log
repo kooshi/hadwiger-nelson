@@ -1,0 +1,109 @@
+# FS-66 Phase 2D -- the rounding scan at p = 23, from the 6,000-iteration checkpoint
+# (data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz, sha256 1f78c15c7c21...; res_dual 1.94e-03)
+# 12 independent exact attempts on 12 cores, no solver call: 38 min 11 s wall, 16,958 CPU s.
+# The threshold at 23 is shift >= 10^(4-D), NOT the 10^(3-D) that held at 7, 11 and 19: see
+# plans/FS66-phase2-certificate.md section R''' item 3.  The single point the old recipe
+# prescribes (shift = 1e-11 at D = 14) is one of the refusals below.
+
+p=23 n=529 |S|=24 |maps|=48 reps=266
+build cache reloaded from data/fs66/ckpt/b1-p23/build-p23-c2.npz: 134447 orbits, 35511x265 product table, 25 q forms
+products a*tau_t(a'): 9410415 canonical forms (a quarter of 37429924 by the two symmetries), 134447 orbits [1.2 s]
+q forms built: 134447 orbits [1.2 s]
+orbits K=134447; PSD blocks [('M2[u=0]', 267), ('M2[u=1]', 266), ('M2[u=5]', 266), ('M2[u=7]', 266), ('M2[u=2]', 266), ('M2[u=25]', 266), ('M2[u=11]', 266), ('M2[u=34]', 266), ('M2[u=10]', 266), ('M2[u=3]', 266), ('M2[u=26]', 266), ('M2[u=74]', 266), ('M2[u=9]', 266), ('M2[u=6]', 266), ('M2[u=29]', 266), ('M2[u=80]', 266), ('M2[u=4]', 266), ('M2[u=27]', 266), ('M2[u=8]', 266), ('M2[u=31]', 266), ('M2[u=50]', 266), ('M2[u=78]', 266), ('M2[u=54]', 266), ('locq[u=0]', 2)]; scalar rows 667774; equality rows 0 [15.5 s]
+rounding the dual in data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz at 6000 iterations; no solver was called
+FLOAT READING (untrusted, double precision): value 97.567673 (dual 97.567172), status solved (inaccurate - reached max_iters) (res_pri 5.18e-05, res_dual 1.94e-03), 6000 iterations, 0.0 s, 714.5 MB
+  p^2/m for m = 3, 4, 5: 176.3333, 132.2500, 105.8000
+scan: 12 rounding attempts on 12 workers [2272.6 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-12   12 -- not positive definite                     524.86  M2[u=0], M2[u=1], M2[u=5] … (23 blocks)
+     1e-12   14 -- not positive definite                     854.59  M2[u=0], M2[u=1], M2[u=5] … (23 blocks)
+     1e-11   12 -- not positive definite                     525.96  M2[u=0], M2[u=1], M2[u=5] … (23 blocks)
+     1e-11   14 -- not positive definite                    1702.21  M2[u=34], M2[u=10], M2[u=3] … (11 blocks)
+     1e-10   12 -- not positive definite                     590.92  M2[u=0], M2[u=1], M2[u=5] … (23 blocks)
+     1e-10   14         97.984637…  138706     63467  2026.77  46
+     1e-09   12 -- not positive definite                    1181.47  M2[u=34], M2[u=10], M2[u=3] … (11 blocks)
+     1e-09   14         97.984857…  138713     63527  2107.77  46
+     1e-08   12         97.987788…  138711     63751  1480.36  46
+     1e-08   14         97.987711…  138703     63744  2190.63  46
+     1e-07   12         98.031969…  138605     63822  1554.75  46
+     1e-07   14         98.030948…  138543     63556   2272.1  46
+wrote data/fs66/b1/cert-p23.json (26297669 bytes, sha256 28cf189c83d2…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 9798463752088652446789757724702574 / 100000000000000000000000000000000 = 97.984637…
+  5*U = 489.923187… < 529 -- refuses 5 colours (and fewer) at every level, by the hand links L1, L2, L6; 6*U = 587.907825… >= 529, so it says nothing about 6
+  loss against the float reading: 0.416965
+
+Next: python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 2 --record data/fs66/b1/records.jsonl
+	Command being timed: "/home/kooshi/venvs/fs66/bin/python tools/fs66_b1_cert_make.py 23 --fast --cache-dir data/fs66/ckpt/b1-p23 --round-only --solve-ckpt data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz --scan --scan-shifts 1e-7,1e-8,1e-9,1e-10,1e-11,1e-12 --scan-digits 12,14 --jobs 12 --out data/fs66/b1/cert-p23.json --record data/fs66/b1/records.jsonl"
+	User time (seconds): 16958.21
+	System time (seconds): 17.46
+	Percent of CPU this job got: 741%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 38:10.58
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1522888
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 9873176
+	Voluntary context switches: 4246
+	Involuntary context switches: 115302
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 51408
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+### the single PRICED attempt, run first and alone on a quiet machine to size the scan
+### (shift 1e-10, D = 14; identical in every key but producer.utc to the shipped file)
+p=23 n=529 |S|=24 |maps|=48 reps=266
+build cache reloaded from data/fs66/ckpt/b1-p23/build-p23-c2.npz: 134447 orbits, 35511x265 product table, 25 q forms
+products a*tau_t(a'): 9410415 canonical forms (a quarter of 37429924 by the two symmetries), 134447 orbits [1.2 s]
+q forms built: 134447 orbits [1.2 s]
+orbits K=134447; PSD blocks [('M2[u=0]', 267), ('M2[u=1]', 266), ('M2[u=5]', 266), ('M2[u=7]', 266), ('M2[u=2]', 266), ('M2[u=25]', 266), ('M2[u=11]', 266), ('M2[u=34]', 266), ('M2[u=10]', 266), ('M2[u=3]', 266), ('M2[u=26]', 266), ('M2[u=74]', 266), ('M2[u=9]', 266), ('M2[u=6]', 266), ('M2[u=29]', 266), ('M2[u=80]', 266), ('M2[u=4]', 266), ('M2[u=27]', 266), ('M2[u=8]', 266), ('M2[u=31]', 266), ('M2[u=50]', 266), ('M2[u=78]', 266), ('M2[u=54]', 266), ('locq[u=0]', 2)]; scalar rows 667774; equality rows 0 [15.6 s]
+rounding the dual in data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz at 6000 iterations; no solver was called
+FLOAT READING (untrusted, double precision): value 97.567673 (dual 97.567172), status solved (inaccurate - reached max_iters) (res_pri 5.18e-05, res_dual 1.94e-03), 6000 iterations, 0.0 s, 714.2 MB
+  p^2/m for m = 3, 4, 5: 176.3333, 132.2500, 105.8000
+scan: 1 rounding attempts on 1 workers [1856.1 s wall]
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10   14         97.984637…  138706     63467  1855.77  46
+wrote ../../../../tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/p23/trial-d14-s1e-10.json (26297669 bytes, sha256 6f9f0125ceb6…)
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 9798463752088652446789757724702574 / 100000000000000000000000000000000 = 97.984637…
+  5*U = 489.923187… < 529 -- refuses 5 colours (and fewer) at every level, by the hand links L1, L2, L6; 6*U = 587.907825… >= 529, so it says nothing about 6
+  loss against the float reading: 0.416965
+
+Next: python3 tools/fs66_b1_cert_check.py ../../../../tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/p23/trial-d14-s1e-10.json --m 2 --record data/fs66/b1/records.jsonl
+	Command being timed: "/home/kooshi/venvs/fs66/bin/python tools/fs66_b1_cert_make.py 23 --fast --cache-dir data/fs66/ckpt/b1-p23 --round-only --solve-ckpt data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz --digits 14 --shift 1e-10 --jobs 1 --out /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/p23/trial-d14-s1e-10.json --record data/fs66/b1/records.jsonl"
+	User time (seconds): 1866.08
+	System time (seconds): 1.94
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 31:13.99
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 920996
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1234436
+	Voluntary context switches: 1924
+	Involuntary context switches: 10416
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 16
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

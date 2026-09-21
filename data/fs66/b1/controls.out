@@ -125,3 +125,47 @@ FLOAT READING (untrusted, double precision): value 14.000000 (dual 14.000000), s
 All three met exactly.  The bare minimal relaxation reads 14.014904, between the 14.0 of B
 and the 49 of A': the 0.0149 is the gap between the second moment level and the integer
 answer, and it is the whole reason U is 14.015 and not 14.
+
+############################################################################
+# Phase 2D -- p = 23 (implementer, 2026-09-21).  Three controls on the SHIPPED file
+# data/fs66/b1/cert-p23.json (sha256 28cf189c83d2...), each by the frozen checker
+# tools/fs66_b1_cert_check.py (sha256 735b926798ffac14...), which was not modified.
+############################################################################
+
+--- 1. the claim: --m 5.  Expected CERTIFIED (5*U = 489.92 < 529).  exit 0.
+step 7/7: 5 * U_num = 48992318760443262233948788623512870 < 529 * scale = 52900000000000000000000000000000000
+CERTIFIED: every phi in [0,1]^529 with q(phi) >= 0 has sum(phi) <= U = 97.984637… (exactly U_num/scale of the file, sha256 28cf189c83d2…); 5*U = 489.923187… < 529, so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/23^k, 2), k >= 1, is 5-colourable. Standard-library checker, NOT the Lean kernel.
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 51:49.57
+	Maximum resident set size (kbytes): 8602020
+	Exit status: 0
+
+--- 2. the colour count that is NOT refused: --m 6.  Six colours need U < 529/6 = 88.1667
+    and the float reading was already 97.5677, so BOUND ONLY is the expected word; it is
+    recorded because U < 89 would ALSO have given alpha(UD(F_23,2)) <= 88, i.e.
+    chi(UD(F_23,2)) >= 7 -- FS-53's open first digit at 23.  exit 3.
+step 7/7: 6 * U_num = 58790782512531914680738546348215444 >= 529 * scale = 52900000000000000000000000000000000
+BOUND ONLY: every phi in [0,1]^529 with q(phi) >= 0 has sum(phi) <= U = 97.984637… (exactly U_num/scale of the file, sha256 28cf189c83d2…); but 6*U = 587.907825… >= 529, so this file does not refuse 6 colours -- which says nothing about whether 6 colours suffice.
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 51:52.71
+	Maximum resident set size (kbytes): 8602132
+	Exit status: 3
+
+--- 3. the perturbation: U_num lowered by ONE, on a scratch COPY (one part in 10^33).
+    This is the overclaim no other step can see: the parse, the signs, the symmetries,
+    the rows and the positive definiteness are all untouched by it.  exit 1.
+REFUSED IDENTITY_MISMATCH: the two sides of the identity differ at 1 of 134447 canonical monomials, the first by degree being y([]): left 9798463752088652446789757724702573, right 9798463752088652446789757724702574, left - right = -1. The blocks and rows of this file support U_num = 9798463752088652446789757724702574 (U = 97.984637…) and no smaller value; the file claims U_num = 9798463752088652446789757724702573 (U = 97.984637…). Next: the producer recomputes the cascade, which by construction makes the identity exact.
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 51:55.93
+	Maximum resident set size (kbytes): 8602880
+	Exit status: 1
+
+--- 4. the 87-point level-one set, and a planted violation of it.
+    tools/fs66_b1_sets_check.py on data/fs66/b1/level-one-sets.json: VERIFIED, exit 0,
+    'p = 23: 87 points, all distinct, coordinates and indices agreeing; no two differ by
+    any of the 24 unit vectors (2088 (point, unit vector) pairs tested)'.
+    With one point moved onto a unit vector from another, on a scratch copy:
+    REFUSED NOT_INDEPENDENT: sets[3] is not independent in UD(F_23, 2): the points [0, 14]
+    and [1, 14] differ by the unit vector [1, 0], and 1^2 + 0^2 = 1 (mod 23).  exit 1.
+
+--- NOT run at 23: --ldl (section S.5's slow route).  Step 5 by the fast (Bareiss) route
+    already costs about 35 of the 52 minutes at this size, so the exact-rational route is
+    hours; it was run at p = 11 in Phase 2A, where it agreed, and nothing at 23 tests the
+    elimination code that 11 did not.
