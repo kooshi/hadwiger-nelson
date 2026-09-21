@@ -1,5 +1,11 @@
 # FS-66 — does the residue ceiling drop up the tower? The second level of a residue plane, at one colour fewer
 
+> **OPEN AS A MILESTONE since 2026-09-20 (`plans/FS66-residue-tower-drop.md`), and the pilot below is ANSWERED on the solvers' word:
+> `UD(ℤ/121, 2)` is NOT four-colourable** — two independent encodings, five solvers, with and without a symmetry pin; the five-colour
+> control finds and verifies a colouring that is not pulled back (`data/fs66/planner/`, `data/fs66/owner/`). So the ceiling does not drop
+> at level two of 11. Certification, the higher levels, and the all-levels inequality (`data/fs66/owner/note-2026-09-20-fibre-density.md`)
+> are the milestone's business; read its plan for current state. This stub is kept as the question's statement.
+
 *Minted 2026-09-20 by the product owner of FS-61, out of a conversation with Kooshi about how to approach ℚ(√167) (FS-59), which
 has only ever been attacked from the lower-bound side. Written for a reader with no conversation memory. Read beside: `CLAUDE.md`
 G48 (the local–global conjecture), G45 (a residue configuration lifts only if it is a shadow), G54 (tight or slack; towers), rows
@@ -63,9 +69,13 @@ one. **No prior worth stating.**
 * A second colouring mechanism: every colouring we own is a first-level residue colouring or the hexagonal 7.
 
 **Resistance** (no 4-colouring found; better, a refusal): evidence that local bounds survive up the tower, which makes the prediction
-of six at ℚ(√167) more credible and is worth a sentence in G48. A *certified* refusal would say the 11-adic plane itself needs five
-colours, hence (compactness) some finite graph with coordinates in `ℤ₁₁[i]` does — the first hint of a five-chromatic graph with no
-`√3` anywhere.
+of six at ℚ(√167) more credible and is worth a sentence in G48. **What a refusal at level `k` does NOT say:** anything about level
+`k + 1`, or about the `p`-adic plane. The tower's limit `lim_k χ(G_k)` is the **clopen** chromatic number of `ℤ_p²` (a finite clopen
+colouring is constant mod `p^k`, and every edge of `G_k` Hensel-lifts), and `χ(plain) ≤ χ_Borel ≤ χ_clopen = lim_k χ(G_k) ≤ χ(G₁)`; the
+plain number can be smaller, because a refutation's core in `G_k` need not lift to `ℤ_p` (G45). The conjecture lives at the plain end.
+*(Correction record: this paragraph first claimed a certified level-two refusal would give a five-chromatic finite graph over `ℤ₁₁[i]`
+"with no `√3` anywhere" — wrong twice: the core need not lift, and 3 is a square mod 11, so `ℤ₁₁` holds `√3` and these graphs have
+triangles. Caught by FS-66's planner, 2026-09-20.)*
 
 **Both outcomes are reachable on present knowledge** (§2's open rows), which is the check this file demands before any run.
 
