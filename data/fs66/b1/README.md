@@ -87,3 +87,14 @@ scale; subplan §C), and `planner_spec_inhabitant.py` — the planner's scratch,
 **not the checker** — evaluated the identity on them: **7: 0 mismatches over 495 canonical monomials, 14 blocks positive definite,
 1.6 s. 11: 0 mismatches over 3,760, 22 blocks positive definite, 36 s, `U = 28.225133`.** Lowering `U_num` by 1 (one part in 10³⁰)
 is caught at the constant monomial. Log of the re-emission: `round-p11-scs-d12-v2.log`.
+
+## After the obligation-modeling pass: the tightened reading, and a falsifier of the hand links
+
+* **The tightened relaxation at 11** (every box product of degree ≤ 4, and the edge and triangle cuts times every monomial of
+  degree ≤ 3, as 198,501 scalar rows; `probe-p11-scs-tight.log`): **28.0427** (SCS `1e-6`, 2 threads, 59 s build, 204 s solve) —
+  tighter than the minimal 28.2015 and **not exact** (at 7 the same tightening reads 14.0000). The planner's prediction "28.00 ±
+  0.02" was NOT met.
+* **`tools/fs66_b1_links_test.py`** (`links-test.out`): the fibre-density inequality checked in exact integers on 803 explicit
+  independent sets of `UD(ℤ/9,2)`, `UD(ℤ/27,2)` and `UD(ℤ/49,2)` — greedy sets, the pull-back of a level-one set, and random
+  independence-preserving perturbations of it. **No violation; the pull-back is tight (`q = 0` exactly).** A falsifier, never a
+  proof. Consequence recorded in the subplan §S.7: the bound at 7 gives `α(UD(ℤ/49,2)) = 686` exactly.

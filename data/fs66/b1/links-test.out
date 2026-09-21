@@ -1,0 +1,6 @@
+p=3 k=2: |S_k|=12, level-one set 3, pull-back 27 (q_int = 0: tight); 401 independent sets {'greedy': 200, 'pullback': 1, 'perturbed': 200}; sizes 15..27; least q_int = 0 (pullback, size 27)
+NO VIOLATION
+p=3 k=3: |S_k|=36, level-one set 3, pull-back 243 (q_int = 0: tight); 201 independent sets {'greedy': 100, 'pullback': 1, 'perturbed': 100}; sizes 69..243; least q_int = 0 (pullback, size 243)
+NO VIOLATION
+p=7 k=2: |S_k|=56, level-one set 14, pull-back 686 (q_int = 0: tight); 201 independent sets {'greedy': 100, 'pullback': 1, 'perturbed': 100}; sizes 186..686; least q_int = 0 (pullback, size 686)
+NO VIOLATION

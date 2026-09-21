@@ -77,7 +77,8 @@ marked. Venv: **`~/venvs/fs66`** (outside `build/`; created with `--system-site-
 | B9 | how the rounding fails when it fails | never on the identity; on **positive definiteness**: 6 digits, or no diagonal shift, and blocks fail; a shift applied *after* the basis rescaling cost 0.9 in `U` at 7 (apply it in the solver's basis, §R.2) |
 | B10 | one independent control of the prototype's bookkeeping, at 7 | a block's linear form on moments averaged over all 784 group elements equals the brute-force quadratic form to 9 digits, at a pure independent set and at a random fractional feasible point |
 | B12 | **the specification has an inhabitant**: a second program written from §C's formulas alone (`data/fs66/b1/planner_spec_inhabitant.py`, standard library, the planner's scratch — not the checker) evaluates (★) on the prototype files | 7: 0 mismatches over 495 canonical monomials, 14 blocks positive definite, 1.6 s; **11: 0 mismatches over 3,760, 22 blocks positive definite, 36 s**; the overclaim `U_num − 1` (one part in 10³⁰) is caught at `[]` |
-| B11 | the tightened relaxation at 11 (every box product of degree ≤ 4 and the edge/triangle cuts times monomials of degree ≤ 3, as scalar rows) — at 7 this reads **14.0000** | *running when this file was committed; recorded in `data/fs66/b1/README.md` and §R when it lands. It is a side reading (P-B5), not on the path* |
+| B11 | the tightened relaxation at 11 (every box product of degree ≤ 4 and the edge/triangle cuts times monomials of degree ≤ 3, as scalar rows: 198,501 rows) — at 7 this reads **14.0000** | **28.0427** (SCS `1e-6`, 2 threads, 59 s build, 204 s solve): tighter than the minimal 28.2015, **not exact** as at 7. A certificate from it would give `α(UD(ℤ/121,2)) ≤ 3,393` against the pull-back's 3,388. Side reading; not on the path |
+| B13 | **falsifier of the hand links** (`tools/fs66_b1_links_test.py`, exact integers, `data/fs66/b1/links-test.out`) | 803 explicit independent sets of levels two and three at (3;2), (3;3), (7;2): **no violation** of `q(φ) ≥ 0`; the pull-back of a level-one set is tight (`q = 0` exactly); Hensel's count asserted |
 
 **Three corrections to what the planner was handed.** (1) *"The relaxation cannot read below the three-point bound, 29.18"* — it
 reads 28.20: the second level is stronger than the triple level; its true floor is the second Lasserre level for `α(G₁)`, between
@@ -197,12 +198,17 @@ residual (FS-50 §5's rule, transplanted). Measured loss: 0.0027 at 7, 0.024 at 
 *Self-contained; the implementer lifts it to `data/fs66/b1/SOUNDNESS.md` and keeps it in step with the checker. The checker
 checks §C.2; this page is what turns §C.2 into the sentence of §ST. Each link is elementary and hand-checkable.*
 
-**S.1 The spectrum above level one (L1).** `G_k = Cay((ℤ/p^k)², S_k)`, `|S_k| = p^{k−1}(p+1)`. For `k ≥ 2` reduction `S_k → S_{k−1}`
-is a surjective homomorphism of the circle groups (Hensel) with fibres `{s(1 + p^{k−1}·i·a) : a ∈ 𝔽_p}` (norm
-`1 + p^{2k−2}a² ≡ 1`). For a character `u` of exact level `k`, summing over `a` gives `0` unless `s̄ ∥ ū` in `𝔽_p²`, which holds for
-at most two `s̄ ∈ S₁`; so at most `2p^{k−1}` terms of modulus 1 survive: `|λ_u(G_k)| ≤ 2p^{k−1}`. A character of exact level `j`,
-`2 ≤ j < k`, has `λ_u(G_k) = p^{k−j}·λ_u(G_j)`, the same bound. Characters of level ≤ 1 are the fibre-constant functions.
-*(Main plan §S4, owner's note §7; checked by FFT at (3; 2–4), (7; 2–3), (11; 2).)*
+**S.1 The spectrum above level one (L1).** `G_k = Cay((ℤ/p^k)², S_k)`. *Hensel:* each point of `S_j` has exactly `p^{k−j}` lifts in
+`S_k` (the gradient `(2x, 2y)` of `x² + y² − 1` is nonzero modulo `p` on the circle), so `|S_k| = p^{k−1}(p+1)`. For `k ≥ 2`,
+`N = {1 + p^{k−1}·i·a : a ∈ 𝔽_p}` is a subgroup of the circle group `S_k` (norm `1 + p^{2k−2}a² ≡ 1`, as `2k − 2 ≥ k`), so `S_k` is a
+union of cosets `sN = {s + p^{k−1}a·(i·s) : a ∈ 𝔽_p}`. Let `χ_u` be a character with `ū := u mod p ≠ 0` ("exact level `k`"). On a
+coset, `Σ_a χ_u(s + p^{k−1}a·is) = χ_u(s)·Σ_a e(a·⟨ū, i·s̄⟩/p)`, which is `0` unless `⟨ū, i·s̄⟩ = −ū₁s̄₂ + ū₂s̄₁ = 0`, i.e. `s̄` lies on the
+line through `ū`; that line meets `S₁` in at most two points, which have `2p^{k−1}` lifts, i.e. `2p^{k−2}` cosets, each
+contributing modulus `p`: **`|λ_u(G_k)| ≤ 2p^{k−1}`.** A character of exact level `j`, `2 ≤ j < k`, factors through level `j` and
+`λ_u(G_k) = p^{k−j}·λ_u(G_j)` (Hensel's count again): the same bound. The characters of exact level ≤ 1 span exactly the
+fibre-constant functions, so **every eigenvalue of `A_k` on the orthogonal complement of the fibre-constant functions is
+`≥ −2p^{k−1}`.** *(Surjectivity of `S_k → S_{k−1}` is not used — the obligation pass removed it. Checked by FFT at (3; 2–4),
+(7; 2–3), (11; 2): main plan §M7, owner's `depth-spectrum.out`.)*
 
 **S.2 The inequality (L2).** `I` independent in `G_k`, `k ≥ 2`; `φ(x)` = share of the fibre over `x` in `I`. `1_I = Pφ + g`,
 `Pφ` fibre-constant, `g` orthogonal to fibre-constant functions; the adjacency operator preserves both parts. `⟨Pφ, A_k Pφ⟩ =
@@ -210,22 +216,47 @@ p^{3(k−1)}·⟨φ, A₁φ⟩`; `‖g‖² = p^{2(k−1)}·Σφ(1−φ)`; `⟨g
 `⟨φ, A₁φ⟩ ≤ 2Σφ(1−φ)`, i.e. `q(φ) ≥ 0`, and `|I| = p^{2(k−1)}·Σφ`. For `k = 1`, `φ = 1_I` is 0/1 and `q(φ) = −⟨φ,A₁φ⟩ = 0`. So:
 **every independent set of every level gives a feasible `φ` with `|I| = p^{2(k−1)}Σφ`.**
 
-**S.3 Symmetrised moments (L3).** For feasible `φ` put `ȳ(m) = |Γ|⁻¹·Σ_{γ∈Γ} Π_{x∈m} φ(γx)`. Each `γ` preserves `S`, so `φ∘γ` is
-feasible with the same `q` and the same sum. Then: `ȳ([]) = 1`; `n·ȳ([0]) = Σφ` (translations are transitive); `ȳ(γm) = ȳ(m)`;
+**S.3 Symmetrised moments (L3).** Let `Γ` be the group **generated by** the translations and the linear maps the checker verified
+(step 3 of §K.2: bijections `h` with `h(x+s) − h(x) ∈ S` for all `x`, `s` — a property closed under composition, so closure of
+the list is never needed). For such `γ`, `s ↦ γ(x+s) − γ(x)` is an injection `S → S`, hence a bijection, so `q(φ∘γ) = q(φ)`,
+`Σ(φ∘γ) = Σφ` and `φ∘γ ∈ [0,1]^V`. For feasible `φ` put `ȳ(m) = |Γ|⁻¹·Σ_{γ∈Γ} Π_{x∈m} φ(γx)`. Then: `ȳ([]) = 1`; `n·ȳ([0]) = Σφ` (translations are transitive); `ȳ(γm) = ȳ(m)`;
 `ȳ(m) ≥ 0` and `ȳ(m∖x) − ȳ(m) ≥ 0` (a product of numbers in `[0,1]`, times `1 − ψ_x ≥ 0`); for any positive semidefinite `𝒵`
 indexed by monomials `m_i`, `Σ 𝒵_ij·ȳ(m_i m_j) ≥ 0` (an average of `vᵀ𝒵v`); and with `Q`, `Σ 𝒵_ij·Q(m_i m_j)(ȳ) = q(φ)·Σ 𝒵_ij·ȳ(m_i m_j)
 ≥ 0` because `q(φ∘γ) = q(φ) ≥ 0`.
 
-**S.4 The identity (L4).** Evaluate (★) at `y = ȳ`: the left side is `U − Σφ`; every term on the right is `≥ 0` by S.3 and §C.3.
-Hence `Σφ ≤ U` for every feasible `φ`. (★) is checked on canonical monomials; since `canon(m) ∈ Γm` and `ȳ` is `Γ`-invariant,
-equality of the coefficient vectors implies equality at `ȳ`.
+**S.4 The identity (L4).** Evaluate (★) at `y = ȳ`. Left side: `U_num − L·Σφ` (S.3: `ȳ([]) = 1`, `n·ȳ([0]) = Σφ`). Right side:
+each `T_block(ȳ) = Σ_ŵ ⟨E_ŵ R E_ŵᵀ, M⟩ ≥ 0` (§C.3 — the rewriting of `Σ_{x,x′} w_x w_{x′}·ȳ(τ_x a·τ_{x′} a′)` as `Σ_t κ(t)·ȳ(a·τ_t a′)`
+uses only `ȳ(τ_x m) = ȳ(m)`; for `times "q"`, `Q(m)(ȳ) = q(φ)·ȳ(m)` and `q(φ) ≥ 0`), each `lam·box(A,B)(ȳ) ≥ 0`. So
+`U_num − L·Σφ ≥ 0`, and **because `L > 0`**, `Σφ ≤ U_num/L = U`. (★) is checked on canonical monomials; since `canon(m) ∈ Γm` and
+`ȳ` is `Γ`-invariant, equality of the integer coefficient vectors implies equality at `ȳ`. *The division by `L` is the only place
+the sign of the scale is used — which is why `NONPOSITIVE_SCALE` is a refusal and not a formatting nicety.*
 
-**S.5 Positive definiteness (L5).** A symmetric integer matrix whose leading principal minors are all positive is positive
-definite (Sylvester); fraction-free elimination computes exactly those minors.
+**S.5 Positive definiteness (L5).** Two theorems are relied on: *Sylvester* (a symmetric real matrix with all leading principal
+minors positive is positive definite) and *Bareiss* (in fraction-free elimination without pivoting the `k`-th pivot **is** the
+`k`-th leading principal minor, and every division is exact). A reader who wants neither runs `--ldl`: the checker then computes
+`R = L·D·Lᵀ` in exact rationals, **re-multiplies and compares with `R`**, and checks `D > 0`; then `xᵀRx = (Lᵀx)ᵀD(Lᵀx) > 0` is two
+lines with no named theorem, and the elimination code itself is off the trust surface. The self-test runs both on every block
+of a real certificate and demands the same verdict and `D_k = minor_k/minor_{k−1}` (§K.3 twin (c)).
 
 **S.6 The count (L6).** By S.2 and S.4, `α(G_k) ≤ U·p^{2(k−1)}` for every `k ≥ 1`. An `m`-colouring of `G_k` covers `p^{2k}` points
 with `m` independent sets, so `p^{2k} ≤ m·U·p^{2(k−1)}`, i.e. `p² ≤ mU`. **If `m·U < p²`, no `G_k` is `m`-colourable.** Also, `G_k`
 being vertex-transitive, `χ_f(G_k) = p^{2k}/α(G_k) ≥ p²/U` at every level.
+
+**S.7 Where each obligation is discharged — decided once, here.**
+
+| obligation | discharged by | rung |
+|---|---|---|
+| (★), positive definiteness, signs, `L > 0`, the maps are symmetries, `m·U_num < p²·L` | the checker, every run, exact integers | **checked** |
+| the fast bookkeeping equals the definition (canonical forms; the `κ` route; Bareiss) | `--self-test`'s three twins, each seen red once | **tested** |
+| L1–L2 are not false | `tools/fs66_b1_links_test.py`: the inequality in exact integers on explicit independent sets of levels two and three (803 sets at (3;2), (3;3), (7;2): no violation; the pull-back is tight, `q = 0`), and the FFT spectra; **an example can falsify, never verify** | **tested (falsifier)** |
+| L1–L6 are true | §S, by hand — elementary, each link ≤ 8 lines | **paper** |
+| the clopen and measure statements of §ST | main plan §S2, by hand | **paper** |
+| nothing | — | **assumed** |
+
+*A consequence that doubles as the chain's sharpest falsifier:* at 7 the bound gives `α(UD(ℤ/49, 2)) ≤ ⌊14.0176 × 49⌋ = 686`, and
+the pull-back of a 14-set has 686 points — so **`α(UD(ℤ/49, 2)) = 686` exactly**, which settles the main plan's §I6 (its killing
+test of "the tower never rises" cannot fire at level two of 7) and means **a verified independent set of 687 points there would
+refute this phase's hand links or its checker.** At 11: `3,388 ≤ α(UD(ℤ/121, 2)) ≤ ⌊28.2251 × 121⌋ = 3,415`.
 
 ---
 
@@ -238,8 +269,16 @@ being vertex-transitive, `χ_f(G_k) = p^{2k}/α(G_k) ≥ p²/U` at every level.
 > lies in `[28/121, U/121] = [0.23140, 0.23327]`.** At `p = 7` the same with `U = 14.0176`, three colours, `χ = 4`,
 > `χ_f ∈ [3.4956, 3.5]`.
 
-Trust word: **`CERTIFIED (fs66_b1_cert_check)` + hand links L1–L6**. Not kernel. The upper halves (`χ ≤ 5`, `α ≥ 28·121^{k−1}`)
-are pull-backs of level one (kernel at 11: `chromaticNumber_finitePlane11`; `α(G₁) = 28` is FS-54's exact value, tools).
+**What each clause rests on** (trust word for the sentence: `CERTIFIED (fs66_b1_cert_check)` + the hand links named; never the kernel):
+
+| clause | rests on |
+|---|---|
+| `α(G_k) ≤ U·p^{2(k−1)}` for every `k ≥ 1`; no level is `m`-colourable | the checker's `CERTIFIED` + L1–L6 |
+| `α(UD(ℤ/49, 2)) = 686` exactly; `3,388 ≤ α(UD(ℤ/121, 2)) ≤ 3,415` | the same + an **explicit** level-one independent set of 14 (28) points, committed and verified from the definition (Phase 2B) — only `α(G₁) ≥ 28` is used, never FS-54's `α(G₁) = 28` |
+| `χ(G_k) = 5` at 11 (`= 4` at 7) | the first clause + the pull-back of a level-one colouring (kernel at 11: `chromaticNumber_finitePlane11`; at 7 `[Moorhouse2010]`'s value, a verified 4-colouring suffices) |
+| `χ_f(G_k) ∈ [p²/U, p²/α(G₁)-set]` | the first two clauses + vertex-transitivity of a Cayley graph |
+| the clopen chromatic number; the Haar-measure bracket | the above + main plan §S2 (clopen colourings are colourings of some level; the more-than-half-filled cosets of a measurable independent set are independent, and Lebesgue density) — **hand, the main plan's, not re-derived here** |
+
 **It does not say:** anything about the plain (non-clopen) `χ(ℚ₁₁²)` or about any number field's plane beyond the ceiling staying
 5 (main plan §S2: the local–global conjecture lives at the link this does not touch); anything at `(23, 5)` (out of reach, main
 plan §Q4); that `B₁ = α(G₁)` (the main plan's §S5 conjecture stays a conjecture — `U` is 0.8 % above 28).
@@ -311,12 +350,15 @@ re-checked and its SHA-256 compared (a harness must verify its own restore). Exp
 | 11 | the 7 file with its `"p"` edited to 11; to 5; to 9 | `REFUSED MALFORMED` (lengths); `BAD_PRIME`; `BAD_PRIME` |
 | 12 | weights replaced by arbitrary integers, `U` and rows recomputed by the producer | `CERTIFIED` or `BOUND ONLY` with a larger `U` — **never refused**: shows the weights are off the trust surface |
 
-**Two independent twins of the bookkeeping, run in `--self-test`.** (a) *Orbit twin:* at `p = 3` and `p = 7`, canonical forms
+**Three independent twins of the bookkeeping, run in `--self-test`.** (a) *Orbit twin:* at `p = 3` and `p = 7`, canonical forms
 against brute-force orbits (apply all of `Γ` to every monomial of degree ≤ 4, union-find): same partition. (b) *Assembled twin:*
 at `p = 3`, build the full matrices `Σ_ŵ E_ŵ R E_ŵᵀ` (§C.3) and the moment matrix of symbols explicitly, read the
 coefficient of every canonical monomial by brute force over all index pairs, and compare with the `F`/`κ` route — the path the
 fast code never takes. (A `p = 3` certificate: the producer at `p = 3`, `m = 2`; if `B₁(3)`'s relaxation does not refuse two
-colours the file ends `BOUND ONLY`, which serves the twin equally.)
+colours the file ends `BOUND ONLY`, which serves the twin equally.) (c) *Elimination twin:* on every block of the `p = 7` file, and on
+three planted matrices (indefinite with a positive diagonal; singular positive semidefinite; a 1 × 1 zero), the Bareiss verdict
+against the re-multiplied rational `L·D·Lᵀ` of §S.5 — same verdict, and `D_k = minor_k/minor_{k−1}`. `--ldl` runs the slow route
+on every block of any file (expect minutes at 11: the rationals reach ~2,000 digits).
 
 ---
 
@@ -354,7 +396,7 @@ exit status, its SHA-256, `m`, and wall seconds).
 | P-B2 | the checker's **first** run on `proto-cert-p7.json` does *not* certify, because of a convention read differently from §C (representative order, which factor of `a·τ_t(a′)` is translated, sub-multisets of `B`) rather than a mathematical error — *registered at medium before B12; after B12 showed §C executable as written by a second program, the planner holds it at* | low-medium | a first-run `CERTIFIED` (then §C was unambiguous) | yes |
 | P-B3 | checker wall time at 11 **under 3 minutes**, pure Python, under 1 GB (the planner's bare evaluator: 36 s, B12) | medium-high | over 10 minutes — a reviewer's patience is part of the trust surface; find what the evaluator does not do | yes |
 | P-B4 | plant 12 (arbitrary weights) yields `U > 40` at 11 — sound and useless | high | a refusal (the weights would be on the trust surface: a design error) | yes |
-| P-B5 | the tightened relaxation at 11 (B11) reads **28.00 ± 0.02** — the relaxation is exact at 11 as at 7 | low-medium | a reading above 28.05 | yes; the run is cheap |
+| P-B5 | the tightened relaxation at 11 (B11) reads **28.00 ± 0.02** — the relaxation is exact at 11 as at 7 | low-medium | a reading above 28.05 | yes; the run is cheap. **Scored by the planner the same evening: NOT MET — 28.0427.** Outside the predicted band though under the named refutation line; the honest reading is that the tightened second level is *not* exact at 11 |
 | P-B6 | at 19 (Phase 2C, if run) the minimal relaxation reads **in [80.6, 87]** and a certificate lands under 90.25 | low-medium — no measurement at 19 | a reading ≥ 90.25 (the second level is not enough at 19), or a build that does not fit (then §19's reductions are owed first) | yes |
 
 ---
@@ -399,8 +441,10 @@ the same at 11 with `--m 4`; `--m 5` at 11 must exit 3; `python3 tools/fs66_b1_c
 - [ ] `tools/fs66_b1_cert_check.py`: standard library only, no float read, §K.1's three last lines and exit codes.
 - [ ] `--self-test` runs plants 0–8, 10, 11 of §K.3 on a copy, each ending on the named line, the faithful twin green beside
       each, and the restore verified by digest. (Plants 9 and 12 need the producer: Phase 2B.)
-- [ ] The orbit twin at 3 and 7 and the assembled twin at 3 are green — and each has been **seen red once** on a deliberate
-      break (say which break in §R).
+- [ ] The orbit twin at 3 and 7, the assembled twin at 3 and the elimination twin are green — and each has been **seen red
+      once** on a deliberate break (say which break in §R). `--ldl` agrees with the default route on `proto-cert-p11.json`.
+- [ ] `python3 tools/fs66_b1_links_test.py 7 2 400; echo $?` ends `NO VIOLATION`, exit 0 (the planner's falsifier of L1–L2 —
+      kept as is; extend it only by adding families of independent sets, e.g. the best sets a local search on level two finds).
 - [ ] `data/fs66/b1/SOUNDNESS.md` lifted from §S, with the checker's actual refusal codes; every sentence of it re-read against
       the code ("what must someone who trusts none of this actually check?").
 - [ ] P-B1 (on the prototype file), P-B2, P-B3 scored in §R; any disagreement with the prototype resolved **and its cause
@@ -413,6 +457,9 @@ record for each whose `cert_sha256` match the files; the 11 check record's last 
 - [ ] The scan of §R′.4 recorded; the kept certificate at 11 has `U < 28.3`; both certificates `CERTIFIED` by Phase 2A's checker.
 - [ ] Plants 9 (`c = 1`) and 12 (arbitrary weights) added to `--self-test`'s documented manual controls with their outputs in
       `data/fs66/b1/controls.out`; P-B4 scored.
+- [ ] An explicit independent set of 28 points of `UD(𝔽₁₁, 2)` and of 14 points of `UD(𝔽₇, 2)` committed
+      (`data/fs66/b1/level-one-sets.json`) with a standard-library verification from the definition — the lower halves of §ST's
+      brackets rest on these and on nothing else.
 - [ ] `data/fs66/b1/README.md` extended: what each file is, what it licenses (§ST's sentence verbatim), its trust word.
 - [ ] B11 / P-B5 recorded if not already.
 
@@ -495,7 +542,22 @@ the character `u` is a comment, not a field (no consumer inspects it). *Not adde
 rows, a positive-*semi*definite block form — no ugliness demands them at 11; the last is what an exact-face certificate would
 need (§PA) and is named there.
 
-*(the remaining passes are appended as each is committed)*
+**Obligation modeling (`debruijn-obligation-modeling`, fresh invocation, 2026-09-20).** *The local obligation:* the global
+claim ("no level, no colouring") is unenumerable; the chain makes it six local links and one finite check, and the statement
+from which it derives is level-free — `∀ φ feasible, Σφ ≤ U` — so no induction on `k` exists anywhere. *Elided steps found and
+repaired:* L1 leaned on surjectivity of `S_k → S_{k−1}`; it needs only that `S_k` is a union of cosets of `{1 + p^{k−1}ia}` plus
+Hensel's lift count, now explicit. L3 averaged over "the symmetries", a list whose closure nobody checks; it now averages over
+the group *generated* by the verified maps, and the verified property is the one closed under composition. L4 hid the division
+by the scale; it is now the named place where `L > 0` is used. L5 rested on Bareiss's identity silently; it is named, and given
+a trust-minimal twin (`R = LDLᵀ`, re-multiplied). *Partition made once (§S.7):* checked / tested / paper / assumed (nothing).
+*Mutation audit of the chain's hypotheses:* drop `q` → 24.5 (B2); drop the box → 1,649 (B3); strengthen `c` to 1 → refused
+(plant 9); negate every sign → refused (plant 7b). *An example can falsify:* the hand links got a falsifier
+(`tools/fs66_b1_links_test.py`, B13: 803 explicit independent sets above level one, exact integers, no violation, the pull-back
+tight) — and the pass noticed that the certificate at 7 **settles the main plan's §I6**: `α(UD(ℤ/49, 2)) = 686` exactly, so a
+687-set would now refute this phase rather than a conjecture. §ST gained a clause-by-clause table of what rests on what; its
+lower brackets were resting on FS-54's exact `α = 28` where an explicit 28-set suffices — now an artifact in Phase 2B.
+
+*(the remaining pass is appended when committed)*
 
 ---
 
