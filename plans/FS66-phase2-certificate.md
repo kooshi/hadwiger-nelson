@@ -631,3 +631,139 @@ the from-the-spec evaluator agrees)** and is now the soundness page's worked exa
 ---
 
 ## §R. Results — filled by the implementer, phase by phase (predictions scored here; decisions implementation overturned, in four parts)
+
+### Phase 2A — the checker, its soundness page, its controls (implementer, 2026-09-21). **LANDED.**
+
+**The headline.** `tools/fs66_b1_cert_check.py`, written from §C, §S and §K and sharing no code with the
+producer or the probe, **certifies all three prototype files**, at the planner's own counts: 28 canonical
+monomials at `p = 3`, 495 at 7, **3,760 at 11**. At 11, `U = 28.225133…`, `4U = 112.900532… < 121`, in
+**6.6 s and 136 MB**, single-threaded pure Python. `--m 5` at 11 exits 3 on `BOUND ONLY`. `--ldl` agrees
+(22.9 s at 11). `--self-test`: **25 of 25**, 97 s. Nothing in this phase was compute-bound and none of it
+used more than one core.
+
+| deliverable | state |
+|---|---|
+| `tools/fs66_b1_cert_check.py`, standard library only (11 imports, all stdlib), no float read | done |
+| §K.1's four last-line words and four exit codes, including `BOUND ONLY` (3) | done |
+| `--self-test` plants 0–8, 10, 11 (17 runs), each on the code, each digest-compared to the faithful twin | done, +2 error rows (`E.1`, `E.2`) and +1 harness row (`H`) |
+| the three twins, each **seen red once** on a deliberate break | done (below) |
+| `--ldl` agrees with the default route on `proto-cert-p11.json` | done: `CERTIFIED`, 22.9 s |
+| `python3 tools/fs66_b1_links_test.py 7 2 400` still ends `NO VIOLATION`, exit 0 | done, 2.1 s, unmodified |
+| cold read | done (below) |
+| `data/fs66/b1/SOUNDNESS.md`, with the `p = 3` instance and the Borel clause | done, 9 sections |
+| P-B1, P-B2, P-B3 scored | done (below) |
+
+**R.1 The first run did NOT agree with the prototype, and the fault was the checker's.** At `p = 3` it
+refused with `IDENTITY_MISMATCH` at six of **31** canonical monomials where there are 28. Cause: in the
+reflection map `z ↦ s·z̄` the imaginary part was written `bc − ad` instead of `ad − bc`, so the map built was
+`conj(s)·z` — a rotation — and **conjugation dropped out of the group entirely**. The canonicaliser was then
+incomplete (it had `p + 1` distinct maps, not `2(p+1)`), classes that are genuinely `Γ`-equivalent stayed
+separate, and the identity could not close. Two things about this are worth keeping:
+
+* **The failure was in the safe direction, exactly as §K.2 says it must be.** An incomplete canonicaliser
+  makes (★) *stricter*: it can refuse a valid certificate, never pass a false one. That is what happened.
+* **The symmetry guard did not fire, and was right not to.** Every map the checker built *was* a genuine
+  symmetry (`h(x+s) − h(x) ∈ S`), so step 3 passed. The guard checks the property soundness uses, not that
+  the list is the intended one — and completeness of the list is not on the trust surface (§C.3). The
+  diagnosis came from the *count*: 31 against the record's 28.
+
+Nothing in §C was wrong or ambiguous here, so **P-B2's stated mechanism did not occur**: the disagreement
+was a transcription error in the checker's own rebuilt arithmetic, not a convention read differently. §C was
+executable as written — the representative order ("in order of the smaller index"), which factor of
+`a·τ_t(a′)` is translated, and the sub-multisets of `B` all worked first time, with no guessing.
+
+**R.2 Predictions scored.**
+
+| id | outcome |
+|---|---|
+| **P-B1** | **MET.** `CERTIFIED` at 11 with `--m 4` and `U = 28.225133…`, inside [28.20, 28.30]. |
+| **P-B2** | **MET in its letter, missed in its mechanism.** The first run did not certify (predicted, low-medium) — but the named cause, "a convention read differently from §C", is not what happened; see R.1. Since §C's conventions were all read right the first time, the honest reading is that the specification *was* unambiguous and the prediction was right for the wrong reason. |
+| **P-B3** | **MET, with an order of magnitude to spare.** 6.6 s and 136 MB at 11, against "under 3 minutes, under 1 GB", and against the planner's from-the-spec evaluator at 36 s. The gain is one design choice: `canon` is memoised in two stages, the outer on the translation-normal form, so the products `a·τ_t(a′)` and `a′·τ_{−t}(a)` — translates of one another — share the expensive minimisation. Building the 465,124-entry product table is 4.0 s of the 6.6. |
+
+**R.3 The three twins, each seen red once.** Breaks were made on copies of the checker under the session
+scratchpad; none was ever in the tree. Each break reds its own twin and leaves the others green, so the twins
+discriminate rather than merely co-fire.
+
+| break | what went red |
+|---|---|
+| `canon` tries only one point of `m` as the new origin | **twin (a)** at `p = 3` (`monomial [5,7,8]: fast [0,1,4], brute force [0,1,3]`) and at `p = 7`; twin (b) too, since the two routes then key translates differently; twin (c) green |
+| the cross term `2·R[0][a]·c·σ` loses its factor 2 | **twin (b)** (`first y([0,0]): fast −315154655298·10¹⁸, assembled 0`); (a) and (c) green |
+| Bareiss accepts a zero pivot (`piv <= 0` → `piv < 0`) | **twin (c)**, naming both planted matrices (`singular positive semidefinite: Bareiss 0, LDL 2`); (a) and (b) green |
+
+**R.4 What the first break exposed about the harness, and the fix.** The twins used to run *after* the
+plants, behind the gate "if the input itself does not certify, no plant would mean anything". A
+canonicaliser bug makes the input not certify — **so the diagnostic for a bookkeeping fault was suppressed
+by exactly that fault**, and the first two breaks printed only the gate's message. The twins now run first
+and depend on nothing certifying; when the gate does fire it says the twins above already ran and are where
+to look. This is `CLAUDE.md`'s "order a verification's steps by marginal evidential value" in its sharpest
+form: the checks that decide the question were queued behind one that cannot.
+
+**R.5 Two other repairs made before believing a green run.**
+
+* **A display rounding turned a red into something that read like a pass.** Large integers were abbreviated
+  to seven significant digits, so the overclaim plant (`U_num` lowered by 1) printed *"left 1.401757e+31,
+  right 1.401757e+31"* — a mismatch message showing two identical numbers. Integers now print exactly to 45
+  digits (every scale, `U_num`, `m·U_num` and multiplier is under 40), the abbreviation carries a digit count
+  and handles the sign, and an identity mismatch always prints `left − right`.
+* **The plant-did-not-apply branch had never been seen.** Added row `H`: a deliberately empty plant, checked
+  to have the twin's digest, so the branch that would mark a non-applying plant is known to be reachable.
+
+**R.6 The cold read (four deliberate mistakes; last lines verbatim).**
+
+```
+$ python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p7.json                    # a path that does not exist
+ERROR CANNOT_READ: data/fs66/b1/cert-p7.json: No such file or directory. The certificates in this repository
+are data/fs66/b1/proto-cert-p11.json, data/fs66/b1/proto-cert-p3.json, data/fs66/b1/proto-cert-p7.json.   [2]
+
+$ … proto-cert-p7.json --m 5                                                       # a colour count it does not refuse
+BOUND ONLY: every phi in [0,1]^49 with q(phi) >= 0 has sum(phi) <= U = 14.017576… (exactly U_num/scale of the
+file, sha256 502351003ab0…); but 5*U = 70.087884… >= 49, so this file does not refuse 5 colours -- which says
+nothing about whether 5 colours suffice.                                                                  [3]
+
+$ … float.json                                                                     # one integer replaced by 1.0
+REFUSED NOT_AN_INTEGER: blocks[3]["R"][2][2] is the float 1.0, not a JSON integer. Every number in a
+certificate is an exact integer over one scale; a float cannot be read back exactly, so the producer must
+write integers only.                                                                                      [1]
+
+$ … p11.json                                                                       # the 7 file with "p" edited to 11
+REFUSED MALFORMED: weights[0] has 50 entries; a weight vector over {[]} + V has 1 + n = 122 (the constant,
+then one per point index 0..120). Is the file's "p" = 11 the prime it was made for?                       [1]
+```
+
+The read changed one thing: the missing-path message said what happened but not what next, so it now lists
+the certificates in the repository. The no-argument call prints the three usage lines with the repository's
+real relative paths and a first call to try, and exits 2 on `ERROR USAGE`.
+
+**R.7 Decisions the implementer took (choice · alternative · why · confidence).**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **The orbit twin runs the COMPLETE degree-≤4 family at `p = 3` and `p = 7`** (715 and 292,825 monomials against all 72 and 784 group elements) | §X's fallback: restrict `p = 7` to monomials through the origin if the twin exceeds 15 minutes | it costs 97 s, so the fallback's condition never arose — and the fallback would have been blind to exactly the half of the fast route that chooses the *translation*, which is the half the first real bug lived in. An intermediate (degree ≤ 3 complete plus a 20,000 sample of degree 4) was built, measured at 13 s, and then discarded as strictly weaker for 84 s | high |
+| **Block size is checked in step 1 from `p` arithmetically** (`2 + (n+1)/2`, or 2), not only when the representatives are built in step 6 | leave it where the representatives are constructed | §K.2 puts index ranges in step 1, and a reader who mistypes `p` should not pay for five steps first; the step-6 construction still guards it redundantly | high |
+| **A non-symmetric `R` is `MALFORMED`, not symmetrised** | symmetrise and test `(R + Rᵀ)/2`, which would be sound | the identity's value is unchanged by symmetrising, so accepting one would be sound — but then the matrix a reviewer *reads* is not the matrix that was *tested*, and the elimination would be run on something the file does not contain | high |
+| **Two-stage memoisation of `canon`** (translation-normal form, then the full minimisation) | one memo on the raw monomial | halves the expensive minimisations, because `a·τ_t(a′)` and `a′·τ_{−t}(a)` are translates; it is why the checker is 5× faster than the planner's evaluator. It rests only on canon being translation-invariant, which is immediate from its own construction | high |
+| **`--orbit-twin-full` was added and then removed** | keep the flag | once the complete family became the default the flag could only weaken the test; a flag that only makes a control worse is surface with no consumer | high |
+| **The record's `U_float` is the one float the program creates**, formatted from the exact decimal | emit only `U_num`/`scale` and let a consumer divide | §R′ names the field, and a record is provenance; the certificate is still never *read* as a float, which is the property that matters. Stated in the module docstring so the claim "reads no float" is not overclaimed | high |
+
+**R.8 What Phase 2B should know.**
+
+1. **The checker is the specification now.** Three conventions it fixes from `p` alone, on which the producer
+   must agree exactly: the representative order (`φ_0`, then `φ_{−h}φ_h` by ascending smaller index of
+   `{h, −h}`); the block size `1 + #reps`, so a character block must be **padded** with the constant row
+   `[1, 0, …, 0]` as the prototype does; and `κ(t) = Σ_x w_x w_{x+t}`. All three were right in the prototype.
+2. **`U` is printed truncated with an ellipsis** (`28.225133…`), never rounded up: a printed `U` is never
+   smaller than the exact one, so the printed claim is never stronger than the proved one.
+3. **Provenance keys are allowed and ignored** — `"spec"` and `"producer"` only, and the checker says so in
+   its narration. **Any other unknown top-level key is `MALFORMED`**, so a misspelt field cannot be read as
+   an absent one. Free-text claims inside the file remain forbidden.
+4. **Plants 9 (`c = 1`) and 12 (arbitrary weights) are still owed**, as §H says; they need the producer.
+   Plant 12's expected outcome is `CERTIFIED` or `BOUND ONLY` with a larger `U` — a refusal there would mean
+   the weights are on the trust surface, i.e. a design error.
+5. **Cost at 19, re-estimated from measurement rather than from §19's guess.** The checker's time is
+   dominated by the product table, `#reps² × n` canonical forms: 465,124 at 11 for 4.0 s. At 19 that is
+   `182² × 361 ≈ 12.0 M`, about 26× more, so **2–4 minutes** if the per-entry cost holds, plus an
+   elimination on 19 blocks of size 183 (Bareiss is `O(size³)` big-integer operations on minors of ~2,500
+   digits — this, not the table, is the part that could surprise). Well inside a reviewer's patience; §19's
+   "tens of minutes" looks pessimistic.
+6. **`--record` is the only thing that writes**, and it appends. A reviewer's run leaves `git status` clean;
+   that is checked by hand here and is worth keeping.

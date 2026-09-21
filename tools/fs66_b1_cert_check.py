@@ -457,7 +457,17 @@ class Cert:
                     if M[r][c] != M[c][r]:
                         raise Refusal('MALFORMED', f'blocks[{i}]["R"] is not symmetric: entry [{r}][{c}] is '
                                                    f'{short_int(M[r][c])} and [{c}][{r}] is '
-                                                   f'{short_int(M[c][r])}.')
+                                                   f'{short_int(M[c][r])}. Only a symmetric matrix is '
+                                                   f'tested for positive definiteness here, so a '
+                                                   f'non-symmetric one is refused rather than symmetrised.')
+            # The block is indexed by the constant and the representative monomials, whose number depends
+            # only on p: 1 + (n+1)/2 of degree <= 2 for times "1", and 1 (phi_0) for times "q".
+            want = 2 if times == 'q' else 2 + (n + 1) // 2
+            if size != want:
+                raise Refusal('MALFORMED', f'blocks[{i}]["R"] is {size} x {size}; a block with times '
+                                           f'"{times}" is indexed by the constant and the '
+                                           f'{want - 1} representative monomials at p = {p}, so it must be '
+                                           f'{want} x {want}.')
             self.blocks.append({'times': times, 'weights': widx, 'R': M, 'size': size})
 
         self.rows = []
