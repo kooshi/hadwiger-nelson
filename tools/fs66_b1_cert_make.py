@@ -104,6 +104,10 @@ def parse_args(argv):
                     help='drive SCS in warm-started chunks of this many iterations, saving (x, y, s) to '
                          '--solve-ckpt after each and printing one residual line per chunk. 0 = one call.')
     ap.add_argument('--solve-ckpt', default=None, help='the chunked solve\'s checkpoint (.npz); resumed if present')
+    ap.add_argument('--scs-setting', action='append', default=[], metavar='KEY=VALUE',
+                    help="pass a setting straight to SCS, e.g. acceleration_lookback=0. Repeatable. "
+                         "Nothing here is on the trust surface: a solver setting can only change which "
+                         "dual comes out, and a worse dual rounds to a worse U (plan §C.3)")
     ap.add_argument('--round-only', action='store_true',
                     help='round the dual already in --solve-ckpt and call NO solver. Re-entering SCS to '
                          'reach a checkpoint perturbs the very dual one came for (measured at p = 19: five '
@@ -817,6 +821,16 @@ def solve_scs(B, A, bv, qobj, args):
     kw = dict(eps_abs=args.eps, eps_rel=args.eps, verbose=False)
     if args.linear_solver:
         kw['linear_solver'] = args.linear_solver
+    for kv in args.scs_setting:
+        k, _, v = kv.partition('=')
+        try:
+            kw[k] = int(v)
+        except ValueError:
+            try:
+                kw[k] = float(v)
+            except ValueError:
+                kw[k] = v
+        say(f'SCS setting {k} = {kw[k]!r}')
     t1 = time.monotonic()
     if not args.chunk_iters:
         sv = scs.SCS(dict(A=A, b=bv, c=qobj), cone, max_iters=args.max_iters, **kw)
