@@ -1,0 +1,4 @@
+# Regenerable or live; the README says what each is and what rebuilds it.
+build-p23-c2.npz     # 39 MB, rebuilt in 87 s on 16 cores by any --fast --cache-dir run
+solve-gpu.npz        # the live iterate, rewritten after every chunk
+solve.log            # the live log, one line per chunk
