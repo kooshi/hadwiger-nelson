@@ -767,3 +767,35 @@ real relative paths and a first call to try, and exits 2 on `ERROR USAGE`.
    "tens of minutes" looks pessimistic.
 6. **`--record` is the only thing that writes**, and it appends. A reviewer's run leaves `git status` clean;
    that is checked by hand here and is worth keeping.
+
+**R.9 The handover sweep (WORKFLOW step 9's two greps; the close itself is the owner's).**
+
+*"conjecture" / "not claimed" in this file* — **two hits, one of them owed a decision at the close.**
+(i) §ST's last sentence, that `B₁ = α(G₁)` stays the main plan's §S5 conjecture: flagged by §H itself, lives
+in the main plan, nothing owed here. (ii) **§PA's last sentence — "the main plan's §S5 conjecture (the tower
+never rises) may be *provable* at 7 by an exact certificate at the optimal face. That is a stub candidate,
+not this phase."** That is a conjecture-with-a-route surfaced inside a section about something else, which is
+the exact shape the sweep rule was minted for (M56's prime inversion, buried in a lemma paragraph, proved by
+an outsider eight days later). **It is owed a stub or an explicit decline in the owner's close**; the
+implementer does not mint it, `plans/STUB-*.md` being the owner's. Note that it would need what §E lists as
+deliberately *not added*: a positive-**semi**definite block form, since an exact-face certificate has a
+singular block. The checker as written refuses those by name (`BLOCK_NOT_POSITIVE_DEFINITE`, plant 5), so
+that direction is a format change and not just a producer change.
+
+*§PA read back for what this phase taught about the object* — three things, all small:
+
+1. **The bound is auditable in one addition, independently of the identity.** At the constant monomial only
+   two terms can contribute: `R[0][0]·c²` of a `times "1"` block whose weight has `c ≠ 0` (the character
+   blocks all have `c = 0`), and the multiplier of a row with `A = []`. The cascade produces exactly one of
+   each, so **`U_num` is always one matrix entry plus one row multiplier** — verified by hand at `p = 3` in
+   `SOUNDNESS.md` §9. A reviewer can check the *value* of `U` before checking anything else, and a write-up
+   gets a one-line account of where the number comes from.
+2. **The product table is symmetric in its representatives and even in its shift**: `a·τ_t(a′)` and
+   `a′·τ_{−t}(a)` are translates of one another, and (the representatives being negation-stable)
+   `F(a,a′,−t) = F(a,a′,t)`. The checker exploits only the first, through a memo on the translation-normal
+   form, and that alone is most of the 5× it has over the planner's evaluator. At 19, where the table is 26×
+   larger, the second is worth taking as well.
+3. **The specification was executable by a third program with no convention guessing**, which is now three
+   independent implementations of §C (the prototype, the planner's evaluator, this checker) agreeing on
+   `U = 28.225133…`. The one disagreement in the phase was arithmetic inside the checker, not a reading of
+   the format.
