@@ -1,0 +1,127 @@
+== FS-66 phase 2B -- the two producer-dependent controls of the frozen checker ==
+== plans/FS66-phase2-certificate.md §K.3, plants 9 and 12; §H Phase 2B's third item.
+== 2026-09-21T04:48:21Z, the machine. Checker sha256 735b926798ffac14…
+== Producer sha256 0a4bf94f089d83dd…
+==
+== These two need the PRODUCER, so --self-test (which runs plants 0-8, 10, 11 on a copy of a
+== certifying file, standard library only) cannot contain them: they are documented MANUAL
+== controls, and this file is their output.  Both are run on files written to a scratch
+== directory, never into the repository -- a plant must not sit beside a certificate.
+
+############################################################################
+# PLANT 9 -- a certificate produced for the WRONG PROBLEM (c = 1).
+#
+# q(phi) = c*sum phi(1-phi) - sum_S phi phi.  c = 2 is the hand-proved constant (§S.2);
+# c = 1 is a STRONGER constraint, so its B1 is smaller and its bound looks BETTER.
+# The checker has no c to read: it rebuilds q from p with 2 hard-coded.
+# MUST END: REFUSED IDENTITY_MISMATCH.
+############################################################################
+
+$ python3 tools/fs66_b1_cert_make.py 7 --c 1 --threads 4 --out <scratch>/plant9-c1-p7.json
+*** CONTROL RUN, NOT A CERTIFICATE: c = 1.0, not the hand-proved 2: this file is for a DIFFERENT problem (plan §K.3 plant 9). The checker rebuilds q with 2 and must REFUSE it. ***
+FLOAT READING (untrusted, double precision): value 14.000000 (dual 14.000000), status solved, 275 iterations, 0.2 s, 122.2 MB
+*** the bound below is a CONTROL's, about a different object: c = 1.0, not the hand-proved 2: this file is for a DIFFERENT problem (plan §K.3 plant 9). The checker rebuilds q with 2 and must REFUSE it. ***
+  U = 14002121709434441311357638455488 / 1000000000000000000000000000000 = 14.002121…
+  (file sha256 003ae116dd1bd53514bbc7b2b75e1f3ee01fca8bee8c842b1e6c7966b633f3f1)
+
+$ python3 tools/fs66_b1_cert_check.py <scratch>/plant9-c1-p7.json --m 3
+REFUSED IDENTITY_MISMATCH: the two sides of the identity differ at 156 of 495 canonical monomials, the first by degree being y([0]): left -49000000000000000000000000000000, right -35859162227063000000000000000000, left - right = -13140837772937000000000000000000; y([0, 0]): left 0, right -12223175158887000000000000000000, left - right = 12223175158887000000000000000000; y([0, 1]): left 0, right 7341300912400000000000000000000, left - right = -7341300912400000000000000000000. Next: the producer recomputes the cascade, which by construction makes the identity exact.
+  exit status 1   (1 = REFUSED, as designed)
+
+--- the faithful twin of plant 9: the SAME producer, the SAME prime, c = 2.
+$ python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p7.json --m 3
+CERTIFIED: every phi in [0,1]^49 with q(phi) >= 0 has sum(phi) <= U = 14.015224… (exactly U_num/scale of the file, sha256 f4b2ffa7c427…); 3*U = 42.045673… < 49, so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/7^k, 2), k >= 1, is 3-colourable. Standard-library checker, NOT the Lean kernel.
+  exit status 0   (0 = CERTIFIED)
+  twin  sha256 f4b2ffa7c42727f3b63f651e94fc2f1052ef10e0d13e8e43eb6a8fcf1c9fe1b4
+  plant sha256 003ae116dd1bd53514bbc7b2b75e1f3ee01fca8bee8c842b1e6c7966b633f3f1
+  -> the digests differ, so the plant really applied (a plant that did not apply is invisible).
+
+############################################################################
+# PLANT 12 -- every weight vector replaced by ARBITRARY integers.
+#
+# The weights are the producer's choice of rounded cosines and sines, and they are chosen
+# that way only because it makes U small.  Soundness never reads them (§C.3: E R E^T is
+# positive semidefinite for positive definite R whatever the integers in the weight vector
+# are -- the CONSTANT entry c included).  So replacing them must leave a file that still
+# checks, with a larger and useless bound.
+# MUST END: CERTIFIED or BOUND ONLY, never REFUSED.  A refusal here would mean the weights
+# are on the trust surface, i.e. a design error.
+# Registered prediction P-B4: U > 40 at p = 11.
+############################################################################
+
+$ python3 tools/fs66_b1_cert_make.py 11 --arbitrary-weights 20260921 --out <scratch>/plant12-arbw-p11.json
+*** CONTROL RUN, NOT A CERTIFICATE: every weight vector replaced by arbitrary integers (seed 20260921) (plan §K.3 plant 12). The file must still check, with a larger and useless U: the weights are off the trust surface. ***
+FLOAT READING (untrusted, double precision): value 28.201477 (dual 28.201476), status solved, 6275 iterations, 91.0 s, 745.0 MB
+  U = 71566440172701215126555766209984785820692071348037 / 1000000000000000000000000000000 = 71566440172701215126.555766…
+  (file sha256 eb7a298867a82731ec65220d7a4669bfb1a50da12dcb168465ff4ee0e1094dc5)
+
+$ python3 tools/fs66_b1_cert_check.py <scratch>/plant12-arbw-p11.json --m 4
+BOUND ONLY: every phi in [0,1]^121 with q(phi) >= 0 has sum(phi) <= U = 71566440172701215126.555766… (exactly U_num/scale of the file, sha256 eb7a298867a8…); but 4*U = 286265760690804860506.223064… >= 121, so this file does not refuse 4 colours -- which says nothing about whether 4 colours suffice.
+  exit status 3   (3 = BOUND ONLY: a VALID certificate of a useless bound)
+
+--- the faithful twin of plant 12: the SAME producer, the SAME prime, the cosine/sine weights.
+$ python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p11.json --m 4
+CERTIFIED: every phi in [0,1]^121 with q(phi) >= 0 has sum(phi) <= U = 28.204320… (exactly U_num/scale of the file, sha256 683236677e0d…); 4*U = 112.817280… < 121, so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/11^k, 2), k >= 1, is 4-colourable. Standard-library checker, NOT the Lean kernel.
+  exit status 0   (0 = CERTIFIED)
+  twin  sha256 683236677e0d55a4f9bd37d5266b370cebbb682831b3f0bc7493bce214bf0661
+  plant sha256 eb7a298867a82731ec65220d7a4669bfb1a50da12dcb168465ff4ee0e1094dc5
+  -> the digests differ, so the plant really applied.
+
+############################################################################
+# The colour-count controls on the PRODUCTION files (§K.3 plant 10's shape).
+#
+# The file proves a bound; whether it refuses m colours is the checker's arithmetic on the
+# command line.  Every level of both towers IS colourable with one more colour than these
+# files refuse, so a CERTIFIED here would be a false theorem.
+# MUST END: BOUND ONLY, exit 3.
+############################################################################
+
+$ python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p7.json --m 4
+BOUND ONLY: every phi in [0,1]^49 with q(phi) >= 0 has sum(phi) <= U = 14.015224… (exactly U_num/scale of the file, sha256 f4b2ffa7c427…); but 4*U = 56.060898… >= 49, so this file does not refuse 4 colours -- which says nothing about whether 4 colours suffice.
+  exit status 3
+
+$ python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p11.json --m 5
+BOUND ONLY: every phi in [0,1]^121 with q(phi) >= 0 has sum(phi) <= U = 28.204320… (exactly U_num/scale of the file, sha256 683236677e0d…); but 5*U = 141.021600… >= 121, so this file does not refuse 5 colours -- which says nothing about whether 5 colours suffice.
+  exit status 3
+
+############################################################################
+# What plant 12 found, recorded because a control that fires is worth more than one that passes.
+############################################################################
+
+This control is run in its STRONGEST form: every entry of every weight vector is replaced,
+the CONSTANT entry c included, because §C.3's claim is about the whole vector.  Run that way
+it went RED the first time, and the fault was the producer's: the linear form of a block was
+written three ways (the all-ones block, a character block, a q block) instead of once, and the
+character and q blocks' padded constant row R[0][0]*c^2 was omitted.  With the real cosine and
+sine weights c = 0, so the omitted term is zero and the production certificates were never
+affected -- which is exactly why only a control with c != 0 could see it.  The accumulation is
+now ONE loop over blocks x weight vectors applying the three terms of (*) as §C.2 states them,
+and the bug class is gone rather than the bug.  A weaker plant that had kept c would have
+passed and taught nothing.
+
+############################################################################
+# The producer's own float controls at p = 7 (§H Phase 2B, first item).
+#
+# These read the RELAXATION, not a certificate: they say whether the thing being solved is
+# the thing intended, before any rounding.  All three values are exact integers or halves,
+# so a builder error would show immediately.
+############################################################################
+
+--- A. the quadratic constraint q dropped, the symmetrised edge cut kept.
+    predicted 24.5 = n/2 (phi = 1/2 everywhere is feasible and the edge cut caps it there);
+    this is the planner's control B2, plan §M.
+FLOAT READING (untrusted, double precision): value 24.500000 (dual 24.500000), status solved, 100 iterations, 0.1 s, 121.0 MB
+
+--- A'. q dropped and NOTHING else added -- the MINIMAL relaxation's own control.
+    predicted 49 = n: phi = 1 everywhere is feasible for the moment blocks and the box rows,
+    so in the minimal relaxation q is the ONLY thing that binds.  (B2 was measured with the
+    edge-cut localiser present, which is why it read n/2 and this reads n.)
+FLOAT READING (untrusted, double precision): value 49.000000 (dual 49.000000), status solved, 150 iterations, 0.1 s, 122.1 MB
+
+--- B. phi^2 = phi added: the 0/1 problem, i.e. Lasserre level 2 for the independence number.
+    predicted 14.0 = alpha(UD(F_7,2)).
+FLOAT READING (untrusted, double precision): value 14.000000 (dual 14.000000), status solved, 275 iterations, 0.2 s, 122.8 MB
+
+All three met exactly.  The bare minimal relaxation reads 14.014904, between the 14.0 of B
+and the 49 of A': the 0.0149 is the gap between the second moment level and the integer
+answer, and it is the whole reason U is 14.015 and not 14.

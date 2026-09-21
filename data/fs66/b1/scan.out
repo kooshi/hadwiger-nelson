@@ -1,0 +1,81 @@
+== FS-66 phase 2B -- the rounding scan (plans/FS66-phase2-certificate.md §R'.4), WIDENED ==
+== 2026-09-21T04:46:21Z, the machine, tools/fs66_b1_cert_make.py
+==
+== One solve per prime in ordinary double precision (SCS 3.3.1, eps 1e-7, 4 threads); then
+== INDEPENDENT exact rounding attempts, one per (diagonal shift, rounding digits D), run across
+== the cores (multiprocessing, fork context).  An attempt whose blocks are not all positive
+== definite yields nothing and is listed as such; the rest are scored by the bound U they prove,
+== never by a residual (plans/FS50-certificate-soundness.md §5).
+==
+== The COMMITTED certificates come from the plan's own grid -- shift in {1e-7, 1e-6, 1e-5},
+== D in {10^10, 10^12} -- which is this tool's default --scan.  This run widens it in both
+== directions to map where positive definiteness breaks: the curve p = 19 will need.
+==
+== EVERY NUMBER BELOW IS THE PRODUCER'S OWN ARITHMETIC: UNTRUSTED.  Only
+== tools/fs66_b1_cert_check.py's word is a verdict.
+
+### p = 7
+FLOAT READING (untrusted, double precision): value 14.014904 (dual 14.014904), status solved, 5100 iterations, 3.3 s, 122.5 MB
+  p^2/m for m = 3, 4, 5: 16.3333, 12.2500, 9.8000
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10    8 -- not positive definite                       0.02  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-10   10 -- not positive definite                       0.01  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-10   12 -- not positive definite                       0.02  M2[u=17] (1 blocks)
+     1e-09    8 -- not positive definite                       0.01  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-09   10 -- not positive definite                       0.02  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-09   12         14.014996…     551       307     0.08  14
+     1e-08    8 -- not positive definite                       0.02  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-08   10 -- not positive definite                       0.02  M2[u=17] (1 blocks)
+     1e-08   12         14.015011…     544       301     0.08  14
+     1e-07    8 -- not positive definite                       0.01  M2[u=0], M2[u=1], M2[u=3] … (7 blocks)
+     1e-07   10         14.015226…     523       239     0.07  14
+     1e-07   12         14.015224…     524       235     0.08  14
+     1e-06    8 -- not positive definite                       0.02  M2[u=17] (1 blocks)
+     1e-06   10         14.017581…     522       173     0.07  14
+     1e-06   12         14.017579…     522       173     0.07  14
+     1e-05    8         14.042024…     535       267     0.06  14
+     1e-05   10         14.041344…     522       173     0.07  14
+     1e-05   12         14.041342…     522       173     0.07  14
+     1e-04    8         14.279363…     521       181     0.06  14
+     1e-04   10         14.278975…     522       173     0.07  14
+     1e-04   12         14.278973…     522       173     0.07  14
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 14014996680196943015251159736136 / 1000000000000000000000000000000 = 14.014996…
+  3*U = 42.044990… < 49 -- refuses 3 colours (and fewer) at every level, by the hand links L1, L2, L6; 4*U = 56.059986… >= 49, so it says nothing about 4
+  loss against the float reading: 0.000093
+
+### p = 11
+FLOAT READING (untrusted, double precision): value 28.201477 (dual 28.201476), status solved, 6275 iterations, 92.3 s, 744.1 MB
+  p^2/m for m = 3, 4, 5: 40.3333, 30.2500, 24.2000
+
+=== the rounding scan (plan §R'.4) ===
+     shift    D                  U    rows  cascaded  exact s  blocks
+     1e-10    8 -- not positive definite                       0.27  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-10   10 -- not positive definite                       0.34  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-10   12 -- not positive definite                       0.69  M2[u=0], M2[u=1], M2[u=12] … (10 blocks)
+     1e-09    8 -- not positive definite                       0.27  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-09   10 -- not positive definite                       0.34  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-09   12         28.202108…    3840      1700     1.82  22
+     1e-08    8 -- not positive definite                       0.27  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-08   10 -- not positive definite                       0.49  M2[u=0], M2[u=1], M2[u=12] … (10 blocks)
+     1e-08   12         28.202299…    3835      1730     1.85  22
+     1e-07    8 -- not positive definite                       0.28  M2[u=0], M2[u=1], M2[u=12] … (11 blocks)
+     1e-07   10         28.204721…    3973      2153      1.6  22
+     1e-07   12         28.204320…    3821      1486     1.89  22
+     1e-06    8 -- not positive definite                       0.35  M2[u=0], M2[u=1], M2[u=12] … (10 blocks)
+     1e-06   10         28.225416…    3831      1219     1.64  22
+     1e-06   12         28.225276…    3822      1165     1.92  22
+     1e-05    8         28.465517…    3881      1455     1.46  22
+     1e-05   10         28.436103…    3831      1219     1.66  22
+     1e-05   12         28.436113…    3822      1165     1.99  22
+     1e-04    8         30.573552…    3833      1075     1.43  22
+     1e-04   10         30.544439…    3831      1219     1.68  22
+     1e-04   12         30.544473…    3822      1165     1.96  22
+
+BOUND (the producer's own arithmetic -- UNTRUSTED until the checker says CERTIFIED):
+  U = 28202108972678082186699294709026 / 1000000000000000000000000000000 = 28.202108…
+  4*U = 112.808435… < 121 -- refuses 4 colours (and fewer) at every level, by the hand links L1, L2, L6; 5*U = 141.010544… >= 121, so it says nothing about 5
+  loss against the float reading: 0.000632
