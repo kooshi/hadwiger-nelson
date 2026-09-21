@@ -1,0 +1,16 @@
+p=7 k=3: c=1.995891 budget=97.799; 60 starts in 13s
+   local minima Q/budget: min 1.1911  5% 1.1911  median 1.1911  max 1.3155
+   best pure colouring seen: 14 monochromatic edges (pure Q/budget = 1.2863)
+   best Phi: 14 fractional rows of 49; verdict: never satisfied (null at this budget of starts; candidate refusal at EVERY level)
+p=7 k=4: c=1.995891 budget=97.799; 20 starts in 4s
+   local minima Q/budget: min 0.8813  5% 0.8813  median 0.8813  max 0.9371
+   best pure colouring seen: 0 monochromatic edges (pure Q/budget = 1.0000)
+   best Phi: 35 fractional rows of 49; verdict: SATISFIABLE (no information)
+p=11 k=4: c=1.999326 budget=241.918; 300 starts in 122s
+   local minima Q/budget: min 1.1115  5% 1.1115  median 1.1115  max 1.2033
+   best pure colouring seen: 18 monochromatic edges (pure Q/budget = 1.1488)
+   best Phi: 42 fractional rows of 121; verdict: never satisfied (null at this budget of starts; candidate refusal at EVERY level)
+p=11 k=5: c=1.999326 budget=241.918; 20 starts in 12s
+   local minima Q/budget: min 0.8930  5% 0.8931  median 0.8938  max 0.9303
+   best pure colouring seen: 2 monochromatic edges (pure Q/budget = 1.0165)
+   best Phi: 83 fractional rows of 121; verdict: SATISFIABLE (no information)

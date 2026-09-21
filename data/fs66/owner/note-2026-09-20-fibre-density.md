@@ -49,7 +49,7 @@ satisfiable instance says nothing.
 
 The best pure 4-colouring of `UD(𝔽₁₁,2)` seen has 18 monochromatic edges (`Q`/budget 1.1488); fuzziness buys back only a third of
 that. The minimiser is structured: 79 pure rows, 42 two-colour rows in orbits of 6 and 3, class weights 30.40, 30.40, 30.40, 29.80.
-(19 and 23 at their open colour counts: `fuzzy-19-23.out`, appended when the run finishes.)
+**At 19 and 23** (`fuzzy-19-23.out`; fewer starts, and the min-conflict seeds are poor there — 103 monochromatic edges at (19, 5), where a proper colouring exists — so these are weaker nulls): (19, 4) **1.2763**, min = median over 40 starts; (19, 5) 0.9549, satisfiable as it must be; **(23, 5) 1.4656** over 30 starts — the case that bears on ℚ(√167), whose usable planes below the spectral refusals (59 up, where the constant Hoffman ratio already carries the refusal to every level, G54) are 23 and 43 only; (23, 6) 1.1780; (23, 7) 0.9893 and (23, 8) 0.8627, satisfiable — 8 as it must be, 7 saying nothing.
 
 **What would make it a theorem: a certified lower bound on a non-convex QP over a product of simplices.** Any certificate must in
 particular prove `χ(UD(𝔽₁₁,2)) > 4`, which `ϑ`/`ϑ′`-strength relaxations cannot (Hoffman allows 34.5 > 30.25) and the triple-level
