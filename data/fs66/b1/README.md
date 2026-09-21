@@ -224,3 +224,58 @@ never by a residual (`plans/FS50-certificate-soundness.md` §5): the six shipped
   (block × weight vector) applying the three terms of (★) as §C.2 states them.
 * **`--self-test` of the frozen checker, run against `cert-p7.json` rather than the prototype: 25 of 25**,
   97 s, `git status` clean afterwards.
+
+---
+
+# Phase 2C — `p = 19` at four colours (implementer, 2026-09-21)
+
+**The reading: the minimal second-level relaxation at `p = 19` reads about `77.4`, against the
+`361/4 = 90.25` a four-colour certificate needs** — a margin of about 14 %, wider than 11's 6.8 %. Floating
+point, untrusted, recorded before any rounding. The best explicit independent set of level one is 76, so the
+relaxation's own optimum is pinned in roughly `[76, 78]`.
+
+**The certificate: PENDING** — filled in when the frozen checker has spoken.
+
+## What is new at 19, and what it cost
+
+Two symmetries of the product table, verified on 300 random `(ia, ib, t)` before being used:
+`a' · τ_{−t}(a)` is a translate of `a · τ_t(a')`, and `z ↦ −z` is a symmetry under which every
+representative is stable. Together they make the table a **quarter** of its naive size.
+
+| | |
+|---|---|
+| whole build | **26 s** (the subplan's §19 priced 30–60 min) |
+| product table | 3,014,193 canonical forms on 16 forked workers, against 11,957,764 naively |
+| orbits / blocks / scalar rows | 52,370 / 183 + 18 × 182 + 2 × 2 / 259,271 |
+| constraint matrix | 575,864 × 52,369, **53.7 M nonzeros** (§19 priced "near 10⁸") |
+| build cache | `../ckpt/b1-p19/build-p19-c2.npz`, 12 MB, reload 0.4 s |
+| one exact rounding attempt | **243 s** (§R′.3 predicted ≈ 50 s) |
+| the frozen checker on a 19-sized certificate | **8 min 21 s, 3.17 GB**, all seven steps, 52,370 monomials |
+
+**GPU against CPU, 50 iterations at the real size on a quiet machine:** `gpu_indirect` on graphics card A
+**0.675 s/iteration**, `cpu_indirect` on 16 threads **2.037 s/iteration** — 3.0×, agreeing on the objective to
+five digits. 2.4 GB of GPU memory. This is the one place in the milestone a GPU earns its keep, and it does.
+
+## The finding that decides how this method is used: `U` tracks the DUAL residual
+
+From three duals of one solve at 19:
+
+| dual | `res_pri` | `res_dual` | rounded `U` |
+|---|---|---|---|
+| 605 iterations (after a 5-iteration warm-started continuation) | 1.95 | 4.7e−01 | 192.574282 |
+| 1,200 iterations | 1.75e−04 | 6.0e−01 | **213.926704** — worse, on a far better primal |
+| `p = 11`, converged | < 1e−07 | < 1e−07 | loss over the reading 0.0028 |
+
+The cascade pays for the dual's infeasibility in box rows, so at `res_dual ≈ 0.6` that costs more than 100 in
+`U`. **A bound from this method travels with its dual residual as well as its shift.**
+
+Two mechanical consequences, both measured:
+
+1. **Re-entering SCS to reach a checkpoint destroys the dual you came for** — five warm-started iterations
+   took `res_pri` from 1.33e−03 to 1.95. `tools/fs66_b1_cert_make.py --round-only` loads the dual out of the
+   checkpoint and calls no solver; at `p = 11` it reproduces the normal path's certificate byte for byte.
+2. **Chunk size is not free.** At 11, 4,000-iteration chunks give `U = 28.204515…` against the committed
+   `28.204320…` from one uninterrupted call. At 19, 300-iteration chunks left `res_dual` flat at ~0.6 over
+   five chunks while `res_pri` fell two orders of magnitude; that run was killed (checkpoint and log kept) and
+   relaunched with 3,000-iteration chunks. The solver class is not at fault: at 11 the **indirect** solver
+   converges cleanly in 6,125 iterations (`status solved`, `res_dual` 5.4e−06).
