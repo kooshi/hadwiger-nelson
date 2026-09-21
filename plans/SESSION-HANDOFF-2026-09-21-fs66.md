@@ -39,7 +39,18 @@ then asked for the prover so the run can be cancelled if the conjecture is prove
   tools/claude_md_fact_audit.py --base <rev>` (and `--dupes`) at every close. **`CLAUDE.md` is back in my hands.**
 * **Harness fact learned:** a subagent gets `CLAUDE.md` as THIS session loaded it, not the disk file (memory note
   `subagent-claude-md-snapshot.md`) — say so in any brief that depends on the file's current text.
-* Still live: the GPU solve at 23 (first chunk line due ≈ 09:00–09:30) and the Phase 2C implementer waiting on it.
+* **Update 11:05 — the Phase 2C implementer has handed back (573k tokens: NEVER resume it).** Its last finding corrects the
+  projection: at 19 the per-iteration cost FELL chunk over chunk (1.132 → 0.932 → 0.814 → 0.769 → 0.648 s), the first chunk being
+  1.7× the 50-iteration figure — so at 23 the first 3,000-iteration chunk costs ≈ 6.6 s/it ≈ 5.5 h (due ≈ 11:00–11:30, not 09:00),
+  and 19–28 h to convergence stands. **In-chunk visibility for any relaunch: `--scs-setting verbose=1`** (SCS's own table every
+  250 iterations; run under `stdbuf -oL` so C stdio does not hold it back). **Before shortening the chunk at 23, test 1,500-iteration
+  chunks at 11 (~4 min): does it reach a clean `status solved`?** (300 failed at 19, 3,000 converged.)
+* Ready to launch, briefs in the scratchpad: `brief-fs66-impl-gate.md` (lint rename + full gate; launch once the first checkpoint
+  is on disk) and `brief-fs66-impl-2d.md` (rounding at 23; fill the `‹…›` from the log; launch on a clean `status solved`).
+* Close prepared and committed: `data/fs66/owner/close-draft.md` (row 75, G66, the touches), `CLOSED-QUESTIONS.md` §1.8 + the §1.7
+  caveat, `plans/STUB-tower-never-rises.md` (FS-68), the conjecture sweep in the main plan's §Q, the seven-colour null at 23
+  (`data/fs66/owner/p23-k7/`). Kooshi (10:50): no split close, no side runs — wait for the full close, then ℚ(√167).
+* Still live: the GPU solve at 23 only.
 
 ## 1. Standing rules (full text: the 2026-09-20 handoff §0, `CLAUDE.md` § Delegation, memory)
 
