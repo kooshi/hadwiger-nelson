@@ -299,6 +299,8 @@ class Build:
         self.Q_0 = self.q_form((0,))
         self.Q_t = [self.q_form((0, t)) for t in range(n)]
         say(f'q forms built: {len(self.list)} orbits [{time.monotonic()-t0:.1f} s]')
+        if fast and getattr(self, '_cache_owed', None):
+            self._save_cache(self._cache_owed)
 
         # ---- characters: u = 0 and one u per nonzero norm class
         ureps = {}
@@ -460,8 +462,9 @@ class Build:
         rowarr = [_array.array('i', Fh[pi][self.hidx].tolist()) for pi in range(Fh.shape[0])]
         self.F = [[rowarr[self.pairidx(min(i, j), max(i, j))] for j in range(self.R)]
                   for i in range(self.R)]
-        if cache and not os.path.exists(cache):
-            self._save_cache(cache)
+        # saved AFTER the q forms are built, in __init__, so that the cache holds both (plan §X); a
+        # cache written by an earlier version without them is re-saved once, with them.
+        self._cache_owed = cache if (cache and not self._qmemo) else None
 
     def pairidx(self, ia, ib):
         """the row of the half-range table holding the pair (ia, ib) with ia <= ib."""
