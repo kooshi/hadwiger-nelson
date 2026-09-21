@@ -1220,3 +1220,42 @@ this phase taught about the object* — two things:
    **new information**: `α ≤ 77` against FS-62's 80, from an instrument built for the tower. Any future prime
    this milestone certifies pays the same dividend, and at 23 it would read `α(UD(𝔽₂₃,2)) ≤ ⌊U⌋` against
    FS-56's certified 105 — a stub candidate the owner's close should consider.
+
+**R″.13 The `p = 23` extension (the owner's, mid-phase): the build and the solve exist; the reading does
+not yet. Handed over running.** Five colours at 23 need `U < 529/5 = 105.8`. Everything below is measured.
+
+| at `p = 23` | |
+|---|---|
+| representatives / orbits | 266 / **134,447** |
+| blocks | one 267, twenty-two 266, one 2 × 2 — **24** |
+| scalar rows | 667,774 |
+| constraint matrix | 1,484,797 × 134,446, **204,658,963 nonzeros** |
+| build | **87 s** (product table 52 s on 16 workers: 9,410,415 canonical forms, a quarter of 37,429,924); cache 39 MB |
+| memory | **16.0 GB** host peak at assembly, 6.3 GB steady; **4.0 GB of 32 on the GPU** |
+| per iteration, `gpu_indirect` on card A | **3.926 s at 50 iterations**; **at least 6.6 s in the long run** (5 h 30 m had not finished 3,000 iterations) |
+
+**Nothing at 23 is rounded or certified, deliberately.** The solve is left **running and detached** in the
+shape a certifying run needs (3,000-iteration chunks, the granularity that converged at 19), with its PID and
+process group in `data/fs66/ckpt/b1-p23/solve.{pid,pgid}`, its log beside them, and a README holding the
+resume command, the stopping criterion, the rounding command and how to find the process **by the log file it
+holds open** rather than by a pattern. Phase 2D picks up the converged iterate.
+
+**The per-iteration cost at 19 FELL over the run, monotonically** — 1.132 → 0.932 → 0.814 → 0.769 → 0.648
+s/iteration across the five chunks (the first contended with a rounding probe; the rest did not). Average
+0.875 against 0.675 measured at 50 iterations. **So the "×1.3" is not the cost climbing: it is the first
+chunk being the most expensive, by 1.7× over the last**, and the 50-iteration figure is close to the *final*
+rate rather than the average. If 23 has the same shape its first chunk is its worst, and the 19–28 h
+projection should fall as chunks land. *This corrects my own framing in the message that carried it.*
+
+**In-chunk progress is available and costs nothing.** `solve_scs` sets `verbose=False`, but the
+`--scs-setting` loop runs **after** that dict literal, so **`--scs-setting verbose=1` turns SCS's own
+iteration table back on** — it prints every 250 iterations, i.e. every ~28 minutes at 6.6 s/iteration —
+without touching convergence or the chunk shape. That is the answer to "3,000-iteration chunks mean no
+visibility": they do not.
+
+**Would 1,500-iteration chunks have converged at 19? Untested, and I would not assume it.** What is measured:
+300 failed (`res_dual` flat at ~0.6 over five chunks), 3,000 converged, and at 11 4,000-iteration chunks gave
+`U` within 2e−4 of the unchunked value. The damage is per **restart**, so the question is how many a run can
+absorb — 5 at 3,000, about 9 at 1,500, 47 at 300. **The test is cheap at 11 and nowhere else**: a
+1,500-chunk run at 11 costs about four minutes and either reaches a clean `status solved` or does not. Run
+that before shortening the interval at 23.
