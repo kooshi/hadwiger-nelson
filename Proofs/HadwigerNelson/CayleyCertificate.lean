@@ -30,7 +30,7 @@ runs of `lake env lean` on a pair of files differing in exactly one line. All th
 
 | what the kernel evaluates | tests | CPU | peak RSS |
 |---|---|---|---|
-| `cert23_8.check (IdArith.zmod 23 …)` — this module, at `q = 23` | 12,696 pairs + 529 quadrances | **1.49 s** | +324 MB |
+| `cert23Eight.check (IdArith.zmod 23 …)` — this module, at `q = 23` | 12,696 pairs + 529 quadrances | **1.49 s** | +324 MB |
 | the all-pairs `decide +kernel` at `q = 23` — `FinitePlane11.lean`'s shape, same colouring | 279,841 ordered pairs | **did not complete** | 31.4 GB |
 | the all-pairs `decide +kernel` at `q = 11` — `FinitePlane11.lean` as it stands | 14,641 ordered pairs | 9.47 s | +1,980 MB |
 
@@ -410,23 +410,23 @@ number. Re-verified here from the definition of `UD(𝔽₂₃, 2)` before packi
 monochromatic edges of 6,348.
 
 It is an **upper** bound and decides nothing: six at 23 is open, and `χ(UD(𝔽₂₃,2)) ∈ {5, 6, 7, 8}`. -/
-def cert23_8 : Cert :=
+def cert23Eight : Cert :=
   ⟨8, 3, 184618122629798387792121645237466383710703425883693632143438788017073065155621357143428249034984189576893819321437758172309172411181512148965727454609627777461633962492936391663273591075379431105169015898717477506176899676931241322880128544522843582921780427695276852495288468574397229917152503342388387371677363860868413058238915368011765143476365025765575168432797443237244175098545138132675297194139944557459318291071357740947214457201590322503727964164926230720794579332080,
    [1, 22, 23, 102, 105, 195, 196, 216, 221, 234, 249, 261, 268, 284, 291, 303, 318, 331, 336, 356, 357, 447, 450, 506]⟩
 
-#guard cert23_8.check (IdArith.zmod 23 one_lt_twentyThree)
+#guard cert23Eight.check (IdArith.zmod 23 one_lt_twentyThree)
 
 /-- **`χ(UD(𝔽₂₃, 2)) ≤ 8`**, by the packed certificate — the kernel's first statement about any
 member of FS-53's eight-member window. -/
 theorem colorable_finitePlane23_eight : (finitePlane 23).Colorable 8 :=
-  Cert.sound cert23_8 (IdArith.zmod 23 one_lt_twentyThree) (by decide +kernel)
+  Cert.sound cert23Eight (IdArith.zmod 23 one_lt_twentyThree) (by decide +kernel)
 
 -- The packed data, pinned: the origin's colour, its circle neighbour's, and the far corner's, so a
 -- regenerated table that silently changed is caught at the build.
-#guard unpackColor cert23_8.bits cert23_8.k cert23_8.table 0 = 0
-#guard unpackColor cert23_8.bits cert23_8.k cert23_8.table 1 = 6
-#guard unpackColor cert23_8.bits cert23_8.k cert23_8.table 528 = 0
-#guard cert23_8.circle.length = 24
+#guard unpackColor cert23Eight.bits cert23Eight.k cert23Eight.table 0 = 0
+#guard unpackColor cert23Eight.bits cert23Eight.k cert23Eight.table 1 = 6
+#guard unpackColor cert23Eight.bits cert23Eight.k cert23Eight.table 528 = 0
+#guard cert23Eight.circle.length = 24
 
 end Spec
 

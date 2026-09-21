@@ -16,7 +16,7 @@ on any measurement.
 
 | commit | what |
 |---|---|
-| `01ace26` | K1 — `CayleyCertificate.lean` from six `sorry`s to none; the certificate made generic over `IdArith R`; `cert3` and `cert23_8`; the FS-53 section of the axiom audit; the module map row |
+| `01ace26` | K1 — `CayleyCertificate.lean` from six `sorry`s to none; the certificate made generic over `IdArith R`; `cert3` and `cert23_8` (renamed `cert23Eight`, FS-66 close — every `cert23_8` below is the name as it stood on 2026-09-15); the FS-53 section of the axiom audit; the module map row |
 | `90bdbeb` | K2 — the equality schema moved to `LocalGlobal.lean` and proved; `Instances/SixthColour.lean` to zero `sorry`; the loop-order docstring corrected by measurement; the gates' recorded counts; this record |
 | *(follow-up)* | this table's own hash for `90bdbeb`, which a commit cannot contain before it exists |
 

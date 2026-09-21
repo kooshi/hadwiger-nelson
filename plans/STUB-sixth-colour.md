@@ -889,8 +889,8 @@ number 27 rather than resting on the planner's word.
 fields of `IdArith (ZMod q)`; the equality schema; the ring-level reduction (already closed: `h.of_hom
 (unitQuadrance.map O23.res)`). **Test:** `cert3` (`#guard cert3.check`), the two negative controls (a circle one point
 short, a table one bit off — each `#guard !check`), the four `#guard`s on `toId`/`addId`/`quadId`, and — added by this pass —
-**the model of `sound`'s hypothesis at a window prime:** `cert23_8 : Cert`, the line-periodic eight-colouring of the 23-plane
-(`data/fplane/periodic-below-71.json`, lifted) packed into a table, `#guard cert23_8.check`, and
+**the model of `sound`'s hypothesis at a window prime:** `cert23Eight : Cert`, the line-periodic eight-colouring of the 23-plane
+(`data/fplane/periodic-below-71.json`, lifted) packed into a table, `#guard cert23Eight.check`, and
 `example : (finitePlane 23).Colorable 8 := CayleyCert.sound …` — the first kernel-checked upper bound at any window member (**shipped as a named theorem, `colorable_finitePlane23_eight`, not an `example`: the implementer's correction, 2026-09-15 — an `example` has no name, so `scripts/Axioms.lean` cannot audit it, and the certificate had to become an explicit argument for the call to elaborate at all**),
 a positive control for the whole K1 pipeline before any digit, and the inhabitant that keeps `colorable_unitQuadrance_O23`'s
 hypothesis from being vacuous (it is: χ(23) ≤ 8 is on record). **Assume:** `Fact (1 < q)` / `NeZero q` only; every threshold
@@ -1100,8 +1100,8 @@ CERTIFIED, which is FS-50 §M3's behaviour and correct: the consequence is what 
 byte-identically; the wording is fixed here, not the tool.)
 
 **K1 — the packed Cayley certificate, in the kernel** (§S9, §S12.1 D-13, §S12.2; two days). `CayleyCert.Cert` generic over
-`IdArith R`; `sound` proved once; `IdArith (ZMod q)` with its five laws proved; `cert3` and **`cert23_8`** (the line-periodic
-8-colouring of the 23-plane from `data/fplane/periodic-below-71.json`, packed) with `#guard cert23_8.check` and
+`IdArith R`; `sound` proved once; `IdArith (ZMod q)` with its five laws proved; `cert3` and **`cert23Eight`** (the line-periodic
+8-colouring of the 23-plane from `data/fplane/periodic-below-71.json`, packed) with `#guard cert23Eight.check` and
 `example : (finitePlane 23).Colorable 8 := CayleyCert.sound …`; the cost of `check` at 23 measured and written in the module
 docstring. *Pass:* `./scripts/build.sh` green with **zero `sorry`** in `CayleyCertificate.lean`; `./scripts/vacuity.sh` green with
 the counts in `CLAUDE.md` § The gate updated in the same commit; `#print axioms` clean; **the five mutations of §S12.2's audit each
