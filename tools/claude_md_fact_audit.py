@@ -156,6 +156,24 @@ def protected_regions(text: str) -> list[str]:
     return regions
 
 
+def token_proxy(text: str) -> int:
+    """A PROXY for model tokens (no tokenizer is available offline): an ASCII word costs ceil(len/6), a digit run ceil(len/3),
+    every other ASCII non-space character 1, and a non-ASCII character 1 per 2 bytes of its UTF-8 form rounded up (so α is 1,
+    ≤ and ₂ are 2, 𝔽 is 2). Good for comparing two versions of one file; not a count."""
+    n = 0
+    for m in re.finditer(r"[A-Za-z]+|\d+|\S", text):
+        g = m.group(0)
+        if g[0].isascii() and g[0].isalpha():
+            n += -(-len(g) // 6)
+        elif g[0].isdigit():
+            n += -(-len(g) // 3)
+        elif g.isascii():
+            n += 1
+        else:
+            n += -(-len(g.encode()) // 2)
+    return n
+
+
 def section_bytes(text: str) -> list[tuple[str, int]]:
     out, cur, size = [], "(preamble)", 0
     for line in text.split("\n"):
@@ -180,6 +198,7 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     if sum(len(c) for c in fo.values()) < 100:
         fails.append("the extractor found almost nothing in the OLD version: the audit is blind, not green")
     say(f"bytes: {len(old.encode()):,} -> {len(new.encode()):,}  ({len(new.encode()) - len(old.encode()):+,})")
+    say(f"token PROXY (see token_proxy; not a tokenizer): {token_proxy(old):,} -> {token_proxy(new):,}  ({token_proxy(new) - token_proxy(old):+,})")
     for cls in STRONG:
         lost = sorted(t for t in fo[cls] if t not in fn[cls] and t not in allow)
         if cls == "name":   # a name survives inside a bibliography key: Cranston in [CranstonRabern2015]

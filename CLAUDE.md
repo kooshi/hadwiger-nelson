@@ -122,7 +122,10 @@ Titles seen only in search listings are marked as such until checked against the
 *The current state of the art, the ledger of everything novel this project has produced, and the ranked
 paths forward. Rewritten in place at every milestone close (WORKFLOW step 9); a milestone whose close does
 not update this section is not closed. The understanding the results add up to lives in § Grokkings, under
-the same rule.*
+the same rule. **One home per fact:** numbers, certificates, Lean names, addresses, prior art, credit and "not claimed" live in the
+ledger row; mechanism, reading, killing test and demotion record live in the grokking; "Where the problem stands" and § Paths
+forward orient and point (`row 68`, `G56`) and never retell. `tools/claude_md_fact_audit.py` checks an edit of this file against
+any earlier revision.*
 
 *Last updated: 2026-09-20 — **FS-61 closed** (row 74; G61 rewritten; G65 minted); **FS-66** and **FS-67** minted (§ Paths forward).
 Before that: 2026-09-19 — G64 corrected; 2026-09-17 — FS-58 closed (rows 72–73).*
@@ -231,8 +234,7 @@ observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz)
 
 ### The novel-results ledger
 
-*Kernel-checked unless marked **[tools]** (measured on exact arithmetic with controls) or **[hand]** (a hand
-proof). Row numbers are stable identifiers cited across `plans/`: never renumber, never reuse. Lean modules
+*Kernel-checked unless marked (grades: § Notation). Row numbers are stable identifiers cited across `plans/`: never renumber, never reuse. Lean modules
 are under `Proofs/HadwigerNelson/`. Paths under `build/` are local, untracked, regenerable measurement
 artifacts — provenance, never a certificate; the certificate is the Lean module.*
 
@@ -341,7 +343,7 @@ bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 | 3 | **FS-39 the bridge to the plane** — `plans/STUB-plane-bridge.md` | χ(ℝ²) = sup over number fields of χ(F²), invoked in prose since M58 and never stated. **Route C, new 2026-09-17 (G63):** χ(F(t)²) = χ(F²) for transcendental t, by the place t ↦ 0 through machinery that already exists — the remaining gap is a formally real residue field (Artin–Lang) rather than Tarski–Seidenberg, and the two should be priced against each other | none on finding a 6-forcer; high on every χ(ℝ²) sentence the programme writes, and it carries the one correct form of FS-62's statement as a corollary. Phase B′, the transcendence lemma, is a half-day kernel theorem by itself — **prior art, `[Fischer1990]` Thm 6**, whose Remark 1 is this very bridge with a false step (G63): the stub's product is the repair and the kernel form, not the statement |
 | 8 | **FS-65 exact independence numbers** — `plans/STUB-exact-independence-solver.md` | compute `α(Γ_q)` exactly at the window members, where every off-the-shelf exact solver fails: at 19 (361 vertices) branch-and-reduce returned 70 and `struction` 66 against a local search's 76, because no reduction fires on a vertex-transitive graph and triangle-freeness leaves the clique bound at `n/2`. D1 re-asked the decision problem in SAT with the symmetry breaking the toolchain section prescribes, and **the answer is that row 68's null is NOT about the encoding**: three sound normalisations of the translations leave `k = 78` undecided at 19 and the solver's frontier there is `k ≈ 108`, thirty above the answer — which is the case for D2 and D4, the symmetry-aware exact methods; D3 is the circle decomposition — the plane as `q−1` cosets of `μ_{q+1}`, an optimisation over 18 variables at 19 | **none on χ(ℝ²); idle compute only** — `α < ⌈q²/6⌉` closes a wall member outright, no relaxation and no rounding, and the wall decides the value set of L and whether the conjecture predicts 6 or 7 at ℚ(√167), never the plane (G64). Asymmetric: closes, never opens. Same target as FS-57 from the other direction |
 | 8 | FS-57 the fractional wall — `plans/STUB-fractional-wall.md` | α < Q²/6 at the members in reach: 47 (level 3 priced, 5.15 s/it, 9–23 h, low confidence) and U₆₄ (a characteristic-2 three-point port); side digit five refused at 31 (which now has three named consumers — ℚ(√887), ℚ(√1055), ℚ(√1823), whose local bound is [5, 8] through that digit alone; FS-61's frame); 23, 27, 31, 43 beyond any priced instrument | **none on χ(ℝ²), as its stub says; idle compute only** — the wall is what the residue method can certify: L(F) ≠ 6 for every F. It sharpens FS-56's prediction from ≥ 6 to 7, closes the composite-ideal hatch, and U₆₄ is the cheapest killing test of G64's norm reading |
-| 8 | FS-62 six is not a value — `plans/STUB-six-is-not-a-value.md` | **a frame, demoted 2026-09-19**: its headline equivalence held in one direction only (G64). What is left: the exact equivalence — χ(ℝ²) ≠ 6 ⟺ every six-chromatic number field has a seven-chromatic finite extension — as a small corollary riding on FS-39; the gap question in its two strengths; and an unrun prior-art gate (has anyone asked for the image of F ↦ χ(F²)?) | none; its strong statement is what the conjecture plus the wall would give, its weak one is Hadwiger–Nelson at the top rung |
+| 8 | FS-62 six is not a value — `plans/STUB-six-is-not-a-value.md` | **a frame, demoted 2026-09-19**: its headline equivalence held in one direction only (G64). What is left: the exact equivalence (G64) as a small corollary riding on FS-39; the gap question in its two strengths; and an unrun prior-art gate (has anyone asked for the image of F ↦ χ(F²)?) | none; its strong statement is what the conjecture plus the wall would give, its weak one is Hadwiger–Nelson at the top rung |
 | 9–13 | FS-41 `forces_of_tight`, FS-42 5-tight quotients, FS-44 the fifth colour, FS-51 the ratio bound in the kernel, FS-52 the triple certificate in the kernel | Hoffman's equality case in Fourier form, the mechanism behind rows 58 and 67; the one residue route to a five-forced pair row 66 leaves, a reading with its falsifier; what structures five-colourings of 6-open fabric when no residue or additive colouring exists | medium mechanism; medium-low reading; medium-high frame |
 | 14–16 | FS-20 the paper (**blocked 2026-09-19 on reading `[Fischer1994]`, which appears to hold Theorem B's value since 1994**), FS-17 the first digit at 23 (five refused by certificate, α ≤ 105; six needs α ≥ 89, the set found 87), FS-2 Kempe classes | Theorem A as the formulation seven lineages stopped short of, now carrying rows 57, 66, 67 and G55; is Γ₂₃ six- or seven-chromatic (five refused, row 71); what carries M56's depth-6 forcing | the publication trigger; the disproof-side digit; mechanism |
 | 17–20 | FS-13 finite-plane 6-critical cores, FS-12 the hub scan as a design instrument, FS-19 𝔭-adic classification of forbidden distances, FS-37 the 2-adic criteria at the field level | autopsy objects; a decidable fan filter over sealed fields; `[Chow1993]` with v_𝔭(d²); Theorem A's own gap, shared with FS-47 | low-medium each; FS-37 feeds FS-20 and FS-47 |
@@ -368,10 +370,7 @@ a class family enumerated over present vertices misses it.
 
 ## Grokkings — the working theory of the 5th colour
 
-*The Frontier records what is proven and what to try next; this section records what we understand. Every
-entry carries a status: **[kernel]**, **[measured]** (tools-side, exact arithmetic or a controlled
-instrument), **[reading]** (an interpretation, believed and falsifiable), **[external]** (claimed in the
-literature, unchecked here), **[method]** (a working rule). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
+*The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
 rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
