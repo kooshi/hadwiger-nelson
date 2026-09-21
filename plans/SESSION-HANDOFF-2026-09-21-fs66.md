@@ -61,7 +61,18 @@ then asked for the prover so the run can be cancelled if the conjecture is prove
   (`χ_Bor(ℚ₂₃²) ≥ 6`), re-rank `plans/FRONTIER-STUBS.md` (FS-66 closed; FS-68 added; FS-57/65/17 re-aimed; a stub for 43 from 2D's
   pricing), banner the FS-66 stub, final report. The solve may be left converging for a tighter `U` (`⌊U⌋` 98 → 97); 2D's README will
   hold the two commands to re-round from a later checkpoint — Kooshi decides whether it keeps running once ℚ(√167) work starts.
-* Still live: the GPU solve at 23 and the Phase 2D implementer.
+* **Update 18:30 — Phase 2D handed back (≈165k tokens): `data/fs66/b1/cert-p23.json`, `U = 97.984637…`, CERTIFIED `--m 5` by the frozen
+  checker (52 min, 8.6 GB), BOUND ONLY `--m 6`; `α(Γ₂₃) ≤ 97`. My scoring in progress: my own checker run (`data/fs66/owner/po-recheck-phase2d-23.out`),
+  records recounted (15 rows, digests match), the 87-set verified by my own all-pairs code, a negative row multiplier refused at step 2
+  in 1.2 s, and a one-unit block perturbation running (`scratchpad/plantB.out`). **The rounding law changed at 23** (`10^(4−D)`, not
+  `10^(3−D)`; the recipe followed literally gives no certificate) — in G66 and the plan. **The close is applied to `CLAUDE.md`**
+  (row 75, G66, § Notation's tower line, item 17, the touches, FS-66 → closed, FS-68 and FS-69 in the table; 249,994 bytes; fact audit
+  PASSED with four reviewed allowances for the closed stub row's phrasings) — **uncommitted until my checker run says CERTIFIED**.
+  Committed: FRONTIER-STUBS re-rank, the FS-66 stub banner, `CLOSED-QUESTIONS.md` §1.8 with 23, `SOUNDNESS.md` §8's twisted-cover
+  strengthening, `plans/STUB-certificate-at-43.md` (FS-69). Left: the closing commit (CLAUDE.md + the audit tool + delete
+  `data/fs66/owner/close-draft.md`), stop the GPU solve (cause: the certificate is in and `⌊U⌋ = 97` cannot improve — 96 is below
+  the relaxation's optimum 97.5677; forfeit: decimals of `U` only; resume command in the ckpt README), the final report, memory.
+* Still live: the GPU solve at 23 (to be stopped at the close) and my two checker runs.
 
 ## 1. Standing rules (full text: the 2026-09-20 handoff §0, `CLAUDE.md` § Delegation, memory)
 
