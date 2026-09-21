@@ -1191,9 +1191,24 @@ system LLVM, so any native/C compile fails unless you use the system clang plus 
 `LEAN_ABORT_ON_PANIC`; the installer wires it into `~/.profile`, and Claude's own shell gets it via
 `.claude/settings.local.json`).
 
-**The SAT solver.** The toolchain ships **`cadical`** at `$(lean --print-prefix)/bin/cadical`; nothing
-external needs installing. It is single-threaded: use `tools/portfolio.sh` (a configuration race) and
-colour-cube splits (one run per cube) to use the cores.
+**The SAT solver.** The toolchain ships **`cadical`** (2.1.2, LRAT-capable) at `$(lean --print-prefix)/bin/cadical` — that command
+works only from inside the repository; elsewhere use the path under `~/.elan/toolchains/`. It is single-threaded: use
+`tools/portfolio.sh` (a configuration race) and colour-cube splits (one run per cube) to use the cores.
+
+**What else is installed on the desktop** (inventory of 2026-09-21; Kooshi installs on request — *ask, with the reason*; verify with
+`command -v` before planning around any of it, and **a tool that is missing fails silently behind a pipe**: `/usr/bin/time` and `bc` were
+both absent until 2026-09-21 and turned three timed runs into non-runs that read like slow solvers):
+
+| kind | tools |
+|---|---|
+| SAT | `kissat` 4.0.4 (AUR; the strongest refuter), `cryptominisat5` 5.15, toolchain `cadical` 2.1.2; **PySAT** (`pysat` 1.9, system Python): `cadical103/153/195/300`, `glucose3/4/42`, `minisat22`, `maplechrono`, `maplecm`, `maplesat`, `mergesat3`, `lingeling`, `kissat404`, `cryptosat`, cardinality-aware `minicard`/`gluecard3/4` — four code bases in one process is the standing multi-solver recheck. **Not installed; build from source when wanted:** `march_cu` (lookahead cuber), `cake_lpr` (formally verified LRAT checker), `drat-trim`, BreakID |
+| optimisation | `scip` 10.1 (exact global optimisation, non-convex QCQP; open source). By `pip` into a venv: `pyscipopt`, and `gurobipy`, whose **size-limited licence stops at 2,000 variables or constraints** |
+| semidefinite | SCS in `build/venv-sdp` (CPU), `build/venv-sdp-mkl`, and **`build/venv-sdp-gpu`** (GPU-indirect source build; keyword `linear_solver=`; 0.33 s/iteration at 83 on card A). `cvxpy`, `clarabel` by `pip`. **Julia 1.13** (`julia`): `SumOfSquares.jl` + `SymbolicWedderburn.jl` reduce a moment/SOS relaxation by its symmetry automatically — the step FS-50 did by hand — and `Clarabel`/`Hypatia` solve in `BigFloat`, which is what makes rounding to an exact certificate easy |
+| algebra | `gap` 4.16, `gp` (PARI 2.17; `nflist`), `dreadnaut` (nauty 2.9), `sympy` |
+| build, GPU | `cargo`/`rustc` 1.98 (the tabu finders `plane-colour`, `plane-independent` live in `~/source/descent-engine`, fields only — a ring `ℤ/p^r` is refused by design), `nvcc` (CUDA 13.4, `/opt/cuda/bin`), `gcc`, `clang`, `cmake`, `ninja`, `uv`, `pip`, `paru`; Python 3.14 with `numpy` 2.5, `scipy` 1.18 — **no `torch`, no `cupy`** |
+| shell | GNU `time` 1.10 at `/usr/bin/time`, `bc` — and `grep -E` here is `ugrep` (§ Searching) |
+
+**Venvs and package depots live outside `build/`** when anything unrecoverable is in them (`build/` is scratch that agents clean); the three `venv-sdp*` are regenerable.
 
 **Break the symmetry before any (UN)SAT search, and treat an unbroken encoding's verdict as a measurement of the
 encoding** (Kooshi, 2026-09-15). These graphs are vertex- and arc-transitive with interchangeable colours, so a naive
