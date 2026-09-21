@@ -289,7 +289,12 @@ Certificates: `data/fs58/witness-*/` (FS-58: 11, 23, 47, 71, 95, 191) and `data/
 ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-four-colours.md` §R-B3, §R-D2, §R-B5, §C;
 `plans/FS61-quadratic-census.md` §R; `data/fs61/census.md`.
 
-**What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a bracket, not a value. His general question — *how much
+**What is answered and what is not.** Moorhouse's question about `ℚ(√47)` gets a bracket, not a value. **And the residue method cannot close that bracket at any depth** (FS-66, §1.8): every conjugation-fixed split prime of
+`ℚ(√47)` is a `p ≡ 3 (mod 4)` with 47 a square — 11, 19, 23, 31, 43, … (not 3, not 7; the dyadic place gives nothing, `47 ≡ 7 (mod 8)`) —
+and **no level of any of those towers `UD(ℤ/p^k, 2)` is four-colourable**: at 11 and 19 by the exact all-levels certificates, and at
+every `p ≥ 23` by the ratio bound, whose chromatic floor exceeds 4 there (4.0148 at 23, 4.000044 at 31, 4.68 at 43, 4.74 at 47, and Weil's bound from there up)
+and is the same at every level of the tower. So if `χ(ℚ(√47)²) = 4`, it is by a colouring local at no prime at any depth; the
+local–global conjecture, read with every level allowed, predicts 5. His general question — *how much
 can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for fourteen
 fields, and no real quadratic field is known to need five.** The census's candidate class theorem (*every squarefree `d ≡ 11 (mod 12)`
 needs four*) is **not proved**; 26 of the 40 fields are open, each with the kind of null recorded. And `ℚ(√167)`, where this project's
@@ -313,6 +318,45 @@ for a contrary claim:** `[Johnson2006]` (the compendium, which by `[Johnson2010]
 prior art. Not written up. `ℚ(√167)`, where the local–global conjecture predicts at least six, is not answered (FS-59).
 
 ---
+
+### 1.8 The `p`-adic Hadwiger–Nelson problem — is the Borel chromatic number of the `p`-adic plane bounded as `p` varies?
+
+> **`[BardestaniMallahiKarai2017]`, Question 1** (arXiv v4, p. 2; read first-hand, §1–§2): *"(The p–adic Hadwiger-Nelson problem). Is it
+> true that there exists a universal constant B (independent of p) such that χ_Bor(QG_{𝒬_p}) ≤ B, holds as p ranges over all primes
+> of the form 4k + 3?"* — asked after the remark that their own proof gives `χ_Bor = O(p²)`. `[Madore2015]` ¶1.5 poses the plain
+> `χ((ℚ_p)²)` as a quantity worth asking for, and his Prop. 3.8 is the chain `χ(F²) ≤ χ(ℚ_p²) = χ(ℤ_p²) ≤ lim_k χ(UD(ℤ/p^k, 2)) ≤ χ(UD(𝔽_p, 2))`
+> this whole entry stands on.
+
+**Our answer: no — and three exact values.** *(FS-66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md` §ST,
+`data/fs66/owner/note-2026-09-20-fibre-density.md` §7–8.)*
+
+* **No universal bound exists: `χ_Bor(ℚ_p²) ≥ 1 + (p+1)/(2√p) > √p/2` for every `p ≡ 3 (mod 4)`** [hand]. The tool is the paper's own
+  Theorem 2.5 (the Bachoc–DeCorte–de Oliveira Filho–Vallentin spectral bound, as they state it), fed the Haar measure of the compact
+  norm-one circle `{a² + b² = 1} ⊂ ℤ_p²`: its Fourier transform at a character of exact level `k` is `λ(UD(ℤ/p^k, 2))/|S_k|`; level
+  one is a Kloosterman sum (Weil: `≥ −2√p/(p+1)`); and **every level `k ≥ 2` is at least `−2/(p+1)` by an elementary fibre sum** —
+  the character sum over a fibre of `S_k → S_{k−1}` vanishes except over at most two residues. So the unknown growth is pinned between
+  `√p/2` and `χ(UD(𝔽_p, 2))`.
+* **`χ_Bor(ℚ₇²) = 4`, `χ_Bor(ℚ₁₁²) = 5`, `χ_Bor(ℚ₁₉²) = 5`** [exact certificate + hand]. Upper halves: the chain above and the known
+  level-one values (`[Moorhouse2010]` Table 6.1; row 53's kernel value at 11). Lower halves, ours: every independent set of every
+  level of the tower obeys one inequality on its fibre shares over level one; an exact integer sum-of-squares certificate of the
+  resulting level-one problem, accepted by a frozen standard-library checker written from the specification
+  (`tools/fs66_b1_cert_check.py`; `data/fs66/b1/cert-p{7,11,19}.json`; `U = 14.0152…, 28.2043…, 77.5117…` against `49/3`, `121/4`,
+  `361/4`), bounds the Haar measure of every measurable independent set of `ℤ_p²` by `U/p²` — so three colours cannot cover at 7, nor
+  four at 11 or 19. Six hand-proved links join the checker's word to the statement (`data/fs66/b1/SOUNDNESS.md`). At 11 the second
+  level is also in the Lean kernel: `(unitQuadrance (ZMod 121)).chromaticNumber = 5`
+  (`HadwigerNelson.chromaticNumber_unitQuadrance_zmod121`, standard three axioms).
+
+**What it does not say.** Nothing about the **plain** chromatic number `χ(ℚ_p²)` (axiom-of-choice colourings escape every measure
+argument) — Madore's quantity stays open at every `p`. Nothing, yet, at `p = 23`. And the lower bound is the spectral one: whether
+`χ_Bor(ℚ_p²)` grows like `√p` or faster is exactly the unknown gap between the ratio bound and `χ` on the finite planes.
+
+**Prior art checked** (WORKFLOW 3a item 8; a negative measures its queries): the complete zbMATH author listings of both posers
+(31 and 14 entries — after 2017 they return to chromatic numbers only in `[BardestaniMallahiKarai2018]` and `…2020`, never to this
+plane); `ab:"Borel chromatic number"`; `ab:"chromatic number" & ab:"p-adic"`; `ti:"Hadwiger-Nelson" & py:2015-2026`; the first
+planner's walk of the 2017 paper's citing lists. Found: no value and no lower bound for the Borel or plain chromatic number of an
+anisotropic `p`-adic plane. Not searched: MathSciNet; Russian-language literature. **Not ours:** the question, the spectral theorem,
+the chain, every level-one value. **Ours:** the elementary bound at levels `≥ 2`, the answer, the fibre-share inequality, the
+certificates and their checker, the three Borel values.
 
 ## §2 — Answered in one direction, or with a caveat that must travel
 
