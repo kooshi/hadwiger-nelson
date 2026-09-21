@@ -74,11 +74,12 @@ def _balance(tok: str) -> str:
 
 
 def chunks(text: str):
-    for raw in text.split():
+    for raw in text.replace("`", " ").split():
         tok = raw
         for _ in range(4):
             tok = _balance(tok.strip(STRIP))
         tok = re.sub(r"-[A-Za-z][A-Za-z-]*$", "", tok)          # 1581-vertex -> 1581
+        tok = re.sub(r"^[A-Za-z]+-(?=\d)", "", tok)              # disc-316 -> 316 (identifiers are the id class's business)
         if re.fullmatch(r"\d+(?:\.\d+)?", tok):
             continue                                            # a bare number is the num class's business
         if tok and (any(ch.isdigit() for ch in tok) or any(ch in MATH for ch in tok)):
