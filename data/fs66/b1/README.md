@@ -98,3 +98,21 @@ is caught at the constant monomial. Log of the re-emission: `round-p11-scs-d12-v
   independent sets of `UD(ℤ/9,2)`, `UD(ℤ/27,2)` and `UD(ℤ/49,2)` — greedy sets, the pull-back of a level-one set, and random
   independence-preserving perturbations of it. **No violation; the pull-back is tight (`q = 0` exactly).** A falsifier, never a
   proof. Consequence recorded in the subplan §S.7: the bound at 7 gives `α(UD(ℤ/49,2)) = 686` exactly.
+
+## After the experience-modeling pass: the instance a person can read whole
+
+`proto-cert-p3.json` — the same prototype at `p = 3` (9 points, 28 canonical monomials, six blocks of size ≤ 7, 27 rows, 4 KB):
+`U = 3.00011` against `α(UD(𝔽₃,2)) = 3`, so two colours are refused at every level of the 3-adic tower (true and trivial — which
+is what a worked example should be). The from-the-spec evaluator agrees (0 mismatches). It is the soundness page's worked
+example and the input of the checker's assembled twin.
+
+## Files
+
+| file | what it is | trust word |
+|---|---|---|
+| `probe-records.jsonl`, `probe-*.log` | floating-point readings of the relaxation | float reading (untrusted) |
+| `round-records.jsonl`, `round-*.log` | the rounding prototype's runs | prototype bound (producer's own arithmetic, untrusted) |
+| `proto-cert-p3.json`, `proto-cert-p7.json`, `proto-cert-p11.json` | prototype outputs in format `fs66-b1-cert-v2` — **test inputs for the checker, not certificates** | prototype bound (untrusted) |
+| `planner_spec_inhabitant.py` | the planner's scratch evaluator of the specification — not the checker; do not port it | — |
+| `localsearch-c2.jsonl` | local maxima at `c = 2` with the cuts | nulls at a budget |
+| `links-test.out` | the falsifier of the hand links, run | tested (falsifier): no violation |

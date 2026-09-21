@@ -139,6 +139,15 @@ one scale.
 }
 ```
 
+**The file as something a reviewer opens.** Keys are written in the order above, so the first 300 bytes show the claim. Two
+further top-level keys are allowed and ignored by the checker, and it says so in its narration (`note: "producer" and "spec"
+are provenance, not checked`): `"spec"`, the fixed string naming this section and the soundness page, and `"producer"`, an
+object of provenance (solver, tolerance, digits, shift, the float value, the tool's SHA-256, UTC). **No free-text claim lives
+in the file** — prose inside a certificate is a certainty nobody established. Any other unknown top-level key is `MALFORMED`
+(it catches `"U_nmu"`). **The instance a person can read whole is `p = 3`**: 9 points, 28 canonical monomials, six blocks of
+size ≤ 7, 27 rows, 4 KB (`data/fs66/b1/proto-cert-p3.json`; `U = 3.00011`, so two colours are refused at every level of the
+3-adic tower — true and trivial, which is what a worked example should be). `SOUNDNESS.md` walks it.
+
 The colour count `m` is **not** in the file: the file proves a bound; whether it refuses `m` colours is the checker's arithmetic
 (`m·U_num < p²·L`), asked on the command line. Unknown keys inside a block (the prototype writes `"u"`, the character the
 producer had in mind) are comments and ignored. What v1 of this format had and the domain pass removed: two block kinds, a
@@ -291,18 +300,51 @@ plan §Q4); that `B₁ = α(G₁)` (the main plan's §S5 conjecture stays a conj
 written from THIS section and §C, not by porting `tools/fs66_b1_probe.py` — independence of the bookkeeping is the point, and the
 prototype's files are its first test inputs, so a disagreement is informative whichever side is wrong.
 
-### K.1 Interface
+### K.1 Interface — designed from the consumer's side of the wire
+
+*Four consumers, and what each holds when the output arrives.* The **owner** holds an exit status and a last line. A **script**
+holds the first word of the last line and a record. A **hostile reviewer** holds the certificate file, the checker's source and
+`SOUNDNESS.md`, and nothing else. **The implementer at 19** holds this file. Everything the checker knows and they need must
+cross that wire; nothing else should.
 
 ```
-fs66_b1_cert_check.py CERT.json --m M        ->  last line, exit status
-fs66_b1_cert_check.py --self-test            ->  one GREEN/RED row per control, exit 0 iff all as designed
+fs66_b1_cert_check.py CERT.json [--m M] [--ldl] [--record FILE]
+fs66_b1_cert_check.py --self-test [--cert CERT.json]
+fs66_b1_cert_check.py                  (no arguments: prints these lines with the repository's real paths, exit 2)
 ```
 
-Last line is exactly one of: `CERTIFIED: …` (exit 0) — (★) holds, everything is signed and positive definite, **and**
-`M·U < p²`; `BOUND ONLY: …` (exit 3) — the file is a valid proof of `Σφ ≤ U`, but `M·U ≥ p²`, so it refuses nothing at `M`
-colours (the reachable uninformative outcome: `--m 5` at 11, `--m 4` at 7 must end here); `REFUSED <CODE>: <detail>` (exit 1).
-Usage errors exit 2. The `CERTIFIED` sentence states `p`, `M`, `U` as an exact fraction and to 6 decimals, `M·U` against `p²`,
-the file's SHA-256, and the words "given the hand-proved links L1–L6 of plans/FS66-phase2-certificate.md §S; NOT the Lean kernel".
+**The last line always begins with one of four words, and the exit status says the same thing** — never a traceback, never
+silence (wrap `main`; Python's own uncaught-exception status is 1, which would read as a refusal):
+
+| first word | exit | meaning |
+|---|---|---|
+| `CERTIFIED` | 0 | the file is a valid proof of `Σφ ≤ U`; and if `--m` was given, `M·U < p²` |
+| `BOUND ONLY` | 3 | the file is valid, `--m M` was given, and `M·U ≥ p²`: *this file does not refuse `M` colours — which says nothing about whether `M` colours suffice* (silence must not read as a positive) |
+| `REFUSED <CODE>` | 1 | the file is not a valid certificate; `<CODE>` from the closed list below |
+| `ERROR <CODE>` | 2 | the checker could not do its job — `CANNOT_READ` (missing or unparseable file), `USAGE`, `SELF_CHECK_FAILED` (a rebuilt map is not a symmetry: a bug in the checker, never the file's fault), `INTERNAL` (any exception, with its text) |
+
+**The `CERTIFIED` line asserts only what the checker established, and marks the rest as hand links** (a reviewer who reads
+"CERTIFIED: no level is 4-colourable" would rightly object that the checker never touched the tower):
+
+```
+CERTIFIED: every phi in [0,1]^121 with q(phi) >= 0 has sum(phi) <= U = 28.225133 (exactly U_num/scale of the file, sha256 3f…9a); 4*U = 112.900532 < 121, so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/11^k, 2), k >= 1, is 4-colourable. Standard-library checker, NOT the Lean kernel.
+```
+
+Without `--m` the sentence stops after the hash. **Before the last line** the checker narrates, one flushed line per step of
+§K.2, in §G's vocabulary and with counts — `step 6/7: identity (★) holds on 3,760 canonical monomials (22 blocks, 3,838 rows)` —
+and one progress line per block while accumulating (at 19 a silent half hour is indistinguishable from a hang).
+
+**Refusals carry three things the checker knows at that moment: what, in which space, what next.** Closed list:
+`NOT_AN_INTEGER`, `MALFORMED` (shape, index range, an unknown top-level key, a row with `len(A)+len(B) > 4` — the detail names
+the JSON path), `BAD_PRIME` (says why: `p` must be a prime `≡ 3 (mod 4)` — the anisotropic case is the only one this plan's group, counts and
+statement were written and checked for; nothing here was examined for `p ≡ 1 (mod 4)`), `NONPOSITIVE_SCALE`,
+`NEGATIVE_MULTIPLIER`, `BLOCK_NOT_POSITIVE_DEFINITE` (block index, its `times` and weights, size, the first non-positive leading
+minor and its index; "next: raise the producer's diagonal shift, §R′.2"), `IDENTITY_MISMATCH` (how many canonical monomials
+disagree; the first three by degree with both coefficients; **and, when the only disagreement is at `[]`, the `U_num` the file's
+blocks and rows actually support** — knowledge that otherwise dies with the process). Every noun in a message is a §G word.
+
+`--record FILE` appends the check record of §R′ (the checker never writes into the tree unasked: a reviewer's run must leave
+`git status` clean). `--ldl` is §S.5's slow route.
 
 ### K.2 What it does, in order of marginal evidential value (cheap and decisive first)
 
@@ -310,8 +352,9 @@ the file's SHA-256, and the words "given the hand-proved links L1–L6 of plans/
    index ranges (`MALFORMED`), `p` prime and `≡ 3 (mod 4)` (`BAD_PRIME`).
 2. Signs: `scale > 0` (`NONPOSITIVE_SCALE`); every row multiplier `≥ 0` (`NEGATIVE_MULTIPLIER`).
 3. Rebuild from `p` alone: points, `S`, the `2(p+1)` linear maps, **and verify each is a bijection with `h(x+s) − h(x) ∈ S` for
-   all `x, s`** (`NOT_A_SYMMETRY` — cannot fire on its own construction; it is the guard of the one property soundness needs).
-4. Rows: `A`, `B` lists of valid point indices with `len(A) + len(B) ≤ 4` (`ROW_MALFORMED`).
+   all `x, s`** (`ERROR SELF_CHECK_FAILED` — it cannot fire on a correct construction and is never the file's fault; it is the
+   guard of the one property soundness needs, and the self-test sees it fire once on a deliberately wrong map).
+4. Rows: `A`, `B` lists of valid point indices with `len(A) + len(B) ≤ 4` (`MALFORMED`).
 5. Positive definiteness of every `R` by fraction-free elimination (`BLOCK_NOT_POSITIVE_DEFINITE`, naming the block and the
    first non-positive minor).
 6. Build the autocorrelations `κ`, the products `a·τ_t(a′)` and the `Q` forms; accumulate the right side of (★) in integers per canonical monomial; compare
@@ -329,9 +372,14 @@ Cost at 11 (pure Python): ≈ 0.6 M canonicalisations (memoised), 2.6 M big-inte
 
 ### K.3 Controls (`--self-test`) — each red for a named reason, beside a faithful twin that stays green
 
-Every plant is applied to a **copy** of a certifying file (`proto-cert-p7.json` until the production file exists), the twin —
-the same file re-serialised through the same scaffolding, no fault — is run beside it, and after the last plant the original is
-re-checked and its SHA-256 compared (a harness must verify its own restore). Expected last lines:
+Every plant is applied to a **copy** of a certifying file (`--cert`, default `data/fs66/b1/proto-cert-p7.json`), the twin — the
+same file re-serialised through the same scaffolding, no fault — is run beside it, **the plant's digest must differ from the
+twin's** (a plant that did not apply is invisible wherever the expected word is `CERTIFIED`), and after the last plant the
+original is re-checked and its SHA-256 compared (a harness must verify its own restore). Each control prints one row —
+`ok   7b  expected REFUSED NONPOSITIVE_SCALE | observed REFUSED NONPOSITIVE_SCALE: scale = -10^30 …` or `FAIL …` followed by the
+failing run's whole output — **matching the code in the last line, never the exit status alone** (a checker that crashes on a
+malformed plant is a wrong-reason red). The self-test's own last line is `SELF-TEST PASSED: k of k controls behaved as designed`
+(exit 0) or `SELF-TEST FAILED: <first failing control, expected, observed>` (exit 1). Expected last lines:
 
 | # | plant | must end on |
 |---|---|---|
@@ -342,7 +390,7 @@ re-checked and its SHA-256 compared (a harness must verify its own restore). Exp
 | 4 | one diagonal entry of a character block negated | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` |
 | 5 | a character block replaced by a symmetric matrix with a zero eigenvalue and positive diagonal | `REFUSED BLOCK_NOT_POSITIVE_DEFINITE` (semidefinite is refused: Sylvester's strict form is what is checked) |
 | 6 | a row multiplier's sign flipped, identity repaired by hand elsewhere | `REFUSED NEGATIVE_MULTIPLIER` |
-| 7 | a row with `len(A) + len(B) = 5`; a row with a point index `n` | `REFUSED ROW_MALFORMED` |
+| 7 | a row with `len(A) + len(B) = 5`; a row with a point index `n`; a top-level key misspelt (`"U_nmu"`) | `REFUSED MALFORMED`, the detail naming the JSON path |
 | 7b | `scale` and `U_num` and every `R` and `lam` negated (the identity still holds; the inequality is flipped) | `REFUSED NONPOSITIVE_SCALE` — the adversarial file the domain pass found |
 | 8 | one integer replaced by the float `1.0`; another by the string `"1"` | `REFUSED NOT_AN_INTEGER` |
 | 9 | a certificate produced for the WRONG problem, `c = 1` (`fs66_b1_probe.py … --c 1`; a stronger, false constraint) | `REFUSED IDENTITY_MISMATCH` — the checker has no `c` to read; `q` is rebuilt with 2 |
@@ -354,8 +402,7 @@ re-checked and its SHA-256 compared (a harness must verify its own restore). Exp
 against brute-force orbits (apply all of `Γ` to every monomial of degree ≤ 4, union-find): same partition. (b) *Assembled twin:*
 at `p = 3`, build the full matrices `Σ_ŵ E_ŵ R E_ŵᵀ` (§C.3) and the moment matrix of symbols explicitly, read the
 coefficient of every canonical monomial by brute force over all index pairs, and compare with the `F`/`κ` route — the path the
-fast code never takes. (A `p = 3` certificate: the producer at `p = 3`, `m = 2`; if `B₁(3)`'s relaxation does not refuse two
-colours the file ends `BOUND ONLY`, which serves the twin equally.) (c) *Elimination twin:* on every block of the `p = 7` file, and on
+fast code never takes. (The `p = 3` input exists: `data/fs66/b1/proto-cert-p3.json`, `U = 3.00011`, which with `--m 2` must end `CERTIFIED`.) (c) *Elimination twin:* on every block of the `p = 7` file, and on
 three planted matrices (indefinite with a positive diagonal; singular positive semidefinite; a 1 × 1 zero), the Bareiss verdict
 against the re-multiplied rational `L·D·Lᵀ` of §S.5 — same verdict, and `D_k = minor_k/minor_{k−1}`. `--ldl` runs the slow route
 on every block of any file (expect minutes at 11: the rationals reach ~2,000 digits).
@@ -383,8 +430,10 @@ Every run appends one record to `data/fs66/b1/records.jsonl` (main plan §D's di
 "solver_eps", "threads", "float_value", "float_dual", "iterations", "solve_s", "rss_mb", "digits", "weight_digits", "shift",
 "pd_failures": [...], "U_num", "scale", "U_float", "rows", "cert": "<path>", "cert_sha256", "machine", "trust": "float reading
 (untrusted)" | "prototype bound (producer's own arithmetic, untrusted)" | "CERTIFIED (fs66_b1_cert_check)"}`. The producer never
-writes the third word; only a checker run does (a second record, `"kind": "fs66-b1-check"`, carrying the checker's last line, its
-exit status, its SHA-256, `m`, and wall seconds).
+writes the third word; only a checker run with `--record` does: `{"kind": "fs66-b1-check", "record_version": 1, "utc", "command",
+"checker_sha256", "cert", "cert_sha256", "p", "m": int | null, "verdict": "CERTIFIED" | "BOUND ONLY" | "REFUSED" | "ERROR", "code":
+str | null, "U_num", "scale", "U_float", "canonical_monomials", "blocks", "rows", "ldl": bool, "wall_s", "python", "machine",
+"last_line"}` — flat, typed, closed vocabularies; nothing a script must parse out of prose.
 
 ---
 
@@ -436,7 +485,8 @@ a probe that reports nothing because it could not run reads like a slow solver �
 
 ### Phase 2A — the checker, its soundness page, its controls (the trusted half; do this FIRST, from §C, §S, §K — not from the probe)
 *Scoring (the owner runs these):* `python3 tools/fs66_b1_cert_check.py data/fs66/b1/proto-cert-p7.json --m 3; echo $?`;
-the same at 11 with `--m 4`; `--m 5` at 11 must exit 3; `python3 tools/fs66_b1_cert_check.py --self-test; echo $?`;
+the same at 3 with `--m 2` and at 11 with `--m 4`; `--m 5` at 11 must exit 3 on a line starting `BOUND ONLY`; a missing path must
+exit 2 on a line starting `ERROR CANNOT_READ`; `git status --short` is unchanged by any of these; `python3 tools/fs66_b1_cert_check.py --self-test; echo $?`;
 `grep -c "^import\|^from" tools/fs66_b1_cert_check.py` against a standard-library list.
 - [ ] `tools/fs66_b1_cert_check.py`: standard library only, no float read, §K.1's three last lines and exit codes.
 - [ ] `--self-test` runs plants 0–8, 10, 11 of §K.3 on a copy, each ending on the named line, the faithful twin green beside
@@ -445,7 +495,10 @@ the same at 11 with `--m 4`; `--m 5` at 11 must exit 3; `python3 tools/fs66_b1_c
       once** on a deliberate break (say which break in §R). `--ldl` agrees with the default route on `proto-cert-p11.json`.
 - [ ] `python3 tools/fs66_b1_links_test.py 7 2 400; echo $?` ends `NO VIOLATION`, exit 0 (the planner's falsifier of L1–L2 —
       kept as is; extend it only by adding families of independent sets, e.g. the best sets a local search on level two finds).
-- [ ] `data/fs66/b1/SOUNDNESS.md` lifted from §S, with the checker's actual refusal codes; every sentence of it re-read against
+- [ ] **Cold read** (experience pass): run the no-argument call, then the naive first call it teaches, then one deliberate
+      mistake from each of: wrong path, `--m 5`, a float in the file, `p` edited — and confirm each response names what happened,
+      in which space, and what to do next, in §G's words. Paste the four last lines into §R.
+- [ ] `data/fs66/b1/SOUNDNESS.md` lifted from §S, ending with the `p = 3` instance walked through (its six blocks printed), with the checker's actual refusal codes; every sentence of it re-read against
       the code ("what must someone who trusts none of this actually check?").
 - [ ] P-B1 (on the prototype file), P-B2, P-B3 scored in §R; any disagreement with the prototype resolved **and its cause
       written down** — if §C of this file was ambiguous, fix the sentence here in the same commit.
@@ -557,7 +610,21 @@ tight) — and the pass noticed that the certificate at 7 **settles the main pla
 687-set would now refute this phase rather than a conjecture. §ST gained a clause-by-clause table of what rests on what; its
 lower brackets were resting on FS-54's exact `α = 28` where an explicit 28-set suffices — now an artifact in Phase 2B.
 
-*(the remaining pass is appended when committed)*
+**Experience modeling (`debruijn-experience-modeling`, fresh invocation, 2026-09-20).** *Inhabit the user:* four consumers, each
+holding something different when the output arrives (§K.1's first paragraph); the surface was redrawn from their side. *Quality
+maxim — assert only what you established:* the draft's `CERTIFIED: no level is 4-colourable` claimed for the checker what rests
+on hand links; the line now certifies the polynomial bound and marks L1, L2, L6 as the hand steps, in capitals, in the same
+sentence. *Implicature:* `BOUND ONLY` must not read as "M colours suffice" — it now says so. *Silence and wrong-reason reds:* a
+Python traceback exits 1, the same status as a refusal; the last line now always begins with one of four words, errors exit 2,
+and the self-test matches the refusal **code**, never the status, and requires every plant's digest to differ from its twin's.
+*Let breakdown teach:* each refusal carries what / in which space / what next, and `IDENTITY_MISMATCH` at the constant prints
+the `U_num` the file actually supports — knowledge the checker holds and that otherwise dies. `NOT_A_SYMMETRY` was reclassified
+from a refusal to `ERROR SELF_CHECK_FAILED`: it is never the file's fault. *Budget:* two codes merged into `MALFORMED`; `--m`
+made optional (a consumer who wants only the bound should not invent a colour count); the checker writes nothing unless
+`--record` is given. *The file as a surface:* key order puts the claim first; provenance allowed, free-text claims forbidden;
+and the pass asked for an instance a person can read whole — **`p = 3` was run (4 KB, 28 canonical monomials, `U = 3.00011`,
+the from-the-spec evaluator agrees)** and is now the soundness page's worked example and the assembled twin's input.
+*Validate as the user:* a cold-read item in Phase 2A's checklist.
 
 ---
 
