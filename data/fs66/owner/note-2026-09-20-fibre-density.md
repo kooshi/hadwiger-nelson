@@ -132,3 +132,31 @@ which is why this stays a relaxation.
 8 % is real slack. At `(23, 5)` no certifier we own can land it (it would have to prove `α(UD(𝔽₂₃,2)) < 105.8`, which took the level-3
 relaxation with 0.4 to spare): **the ℚ(√167) row stays numerics-only in this milestone.** Side effect worth keeping: this continuous
 relaxation found a 76-set at 19 in 12 starts, the size FS-62's local search needed 521,874 restarts to plateau at.
+
+## 7. The owner's check of the plan's §S3 (Bardestani–Mallahi-Karai's Question 1) — read first-hand, 2026-09-20 [hand]
+
+Read in the held PDF (`~/source/library/pdf/arXiv-1507.05300-…`, arXiv v4): **Question 1, p. 2**, verbatim — *"(The p–adic
+Hadwiger-Nelson problem). Is it true that there exists a universal constant B (independent of p) such that χ_Bor(QG_{𝒬_p}) ≤ B,
+holds as p ranges over all primes of the form 4k + 3?"*, after the sentence that their proof gives `χ_Bor = O(p²)`; and **Theorem
+2.5, p. 5** (credited to Bachoc–DeCorte–de Oliveira Filho–Vallentin): for `F = ℝ` or `ℚ_p`, `S ⊂ Fⁿ` bounded, symmetric, Borel,
+origin not in its closure, and any symmetric finite Borel measure `μ` supported in `S`, `1 − sup μ̂ / inf μ̂ ≤ χ_Bor(Cay(Fⁿ, S))`,
+with `μ̂(u) = ∫ ψ̄(x·u) dμ(x)` and `ψ` the Tate character (kernel `ℤ_p`), p. 4–5. Sections read: §1, §2.1 (pp. 1–5). Not read: §3–4.
+
+**The argument stands on my reading, and it does not need `[MMST1998]`.** For `p ≡ 3 (mod 4)` the circle `S = {a² + b² = 1}` lies
+in `ℤ_p²` (anisotropy), is compact, symmetric, and misses the origin; `μ` = Haar probability measure of the compact group `S`
+(symmetric because `−1 ∈ S`). Reduction `S → S_k` is a surjective homomorphism (Hensel), so Haar pushes forward to the uniform
+measure and, for `u` of exact level `k`, `μ̂(u) = λ_{p^k u}(G_k)/|S_k|`. `sup μ̂ = μ̂(0) = 1`. Level one: `λ_min(G₁) < 0` and
+`|λ_min(G₁)| ≤ 2√p` (Weil; the eigenvalues are Kloosterman sums, G44). **Level `k ≥ 2`, elementary:** the fibre of `S_k → S_{k−1}` over
+`s` is `{s(1 + p^{k−1}·i·a) : a ∈ 𝔽_p}`, and summing the character over `a` gives `0` unless `s̄ ∈ 𝔽_p·ū′` (`u′ = p^k u`, a unit
+mod `p`), which holds for at most two `s̄ ∈ S₁`; so at most `2p^{k−1}` of the `p^{k−1}(p+1)` terms survive and **`|μ̂(u)| ≤ 2/(p+1)`
+at every level `k ≥ 2`** (the FFTs in `depth-spectrum.out` show it is attained at depth 2). Hence `inf μ̂ ≥ −max(2√p, 2)/(p+1)` and
+
+> **`χ_Bor(QG_{ℚ_p}) ≥ 1 + (p+1)/(2√p) > √p/2`** for every `p ≡ 3 (mod 4)`: no universal `B` exists, and Question 1's answer is no.
+> With `χ_Bor ≤ χ_clopen ≤ χ(UD(𝔽_p, 2))` (plan §S2) the Borel chromatic number of the anisotropic `p`-adic plane grows like `√p` up
+> to the unknown gap between Hoffman and `χ` at level one. It bounds the **Borel** number only — nothing about the plain `χ(ℚ_p²)`.
+
+The same elementary step gives my §1's bound with `c = 2` at every level without citing anyone — so **the fibre-density inequality
+(§2) and the single-class problem (§6) rest on nothing unread** (the sharper `c < 2` is the FFT's, per prime). Prediction P8 of the
+plan: scored *met* on the hypotheses and the normalisation; what is NOT checked is whether someone has already said this in print
+(the planner found no citing work that does; the close should re-ask zbMATH for the authors' later papers before anything is
+written into `CLOSED-QUESTIONS.md`).
