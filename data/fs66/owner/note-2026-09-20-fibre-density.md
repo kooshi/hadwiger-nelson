@@ -100,3 +100,35 @@ and that is not pulled back from level one). Both in seconds, single-threaded Ca
 The planner reached the same refusal first and independently (plain encoding, 1.7 s; four solvers on the bare core; `data/fs66/planner/`), and caught that my first `(11, 4)` probe had never run: `cd X && (A) & (B) &` put the second subshell in the repository root, where its input did not exist, and it 'finished' in 0 s saying nothing — this file's own failure mode, a probe that reports nothing because it could not run. **`χ(UD(ℤ/121, 2)) = 5` on the solvers' word: the ceiling does not drop at level two of 11.** Not certified, not kernel; that is the plan's phase 1.
 
 **A consequence for every larger ask [hand]:** a resolution refutation of level two projects onto level one — substitute `c[v, a] ↦ c[x(v), a]` and every line variable `z[x, ·, ·, a] ↦ c[x, a]`; clauses go to clauses or to tautologies — so **level two's shortest refutation is at least as long as level one's.** Five colours at 23 was never decided by CDCL at level one (G56), so `UD(ℤ/529, 2)` at five cannot be refused by CDCL unless level one is first; there the all-levels inequality of §2 is the only refusal-side instrument in sight.
+
+## 6. The single-class form: 121 variables, and numerically the independence ratio never rises [numerics; `alpha-fuzzy.out`]
+
+Take ONE colour class: **`B₁(p) := max Σφ` over `φ ∈ [0,1]^{p²}` subject to `φᵀ(A₁ + cI)φ ≤ c·Σφ`** bounds `α(G_k)/p^{2(k−1)}` at every
+level `k ≥ 2`, and `m·B₁ < p²` refuses `m` colours at every level. (The planner and I reached this form independently within the
+hour, with the same numbers.) SLSQP, random and greedy-independent-set starts:
+
+| `p` | best `Σφ` found | level one's `α` | needed to refuse | starts |
+|---|---|---|---|---|
+| 7 | **14.0000**, pure | 14 | < 16.33 (three colours) | 30 |
+| 11 | **28.0000**, pure; fractional local maxima at 26.856, 26.999, 27.999 | 28 | **< 30.25 (four colours): 8 % of slack** | 200 |
+| 19 | **76.0000**, pure | best known 76 (`α ∈ [76, 80]`) | < 90.25 (four): 19 % | 12 |
+| 23 | 87.5111, with 16 fractional entries (0.889, 0.8, 0.667 — edge-like pairs) | best known 87 (`α ≤ 105`) | < 105.8 (five): 17 % | 8 |
+
+If `B₁ = α(G₁)` were a theorem the independence ratio — hence the fractional chromatic number — would be **constant up the whole
+tower**, the cleanest negative answer FS-66 could have. It is not a theorem about graphs in general (an isolated edge carries 4/3, a
+triangle `3c/(2+c) ≈ 1.4997`), and at 11 it survives by a hair: "25 full vertices + two half-weight triangles" reaches 27.9995 because
+`c` is just below 2. A pure maximum independent set is a strict local maximum exactly when every outside vertex has two neighbours in it.
+
+**Linear cuts valid at every level.** If a subgraph `K` of level one *lifts* to level `k` (a section that is a homomorphism), its
+translates by the kernel partition the fibres over `K` into disjoint copies of `K`, so `Σ_{x∈K} φ(x) ≤ α(K)`. Edges lift, triangles lift
+(Hensel), odd cycles using two directions lift (the closing condition is a surjective linear map in one free parameter per edge):
+`φ_x + φ_y ≤ 1`, `φ_x + φ_y + φ_z ≤ 1`, `Σ_C φ ≤ (ℓ−1)/2`. They cut off exactly the near-ties above (and 23's fractional pairs). The
+single-direction `p`-cycles do not lift (holonomy 1) and are where a genuine level-two gain lives. `G₁` itself does not lift (G45),
+which is why this stays a relaxation.
+
+**What a certificate must do.** Prove `B₁(11) < 30.25`, which includes proving `α(UD(𝔽₁₁,2)) ≤ 30`. No first-level relaxation can
+(Shor + RLT, symmetrised, contains `ϑ′ =` Hoffman `= 34.55`); the candidates are a second-level moment relaxation with `Aut(G₁)` (order
+2,904) divided out — which cannot read below the triple-level 29.18 — or exact spatial branch-and-bound on 121 variables, where the
+8 % is real slack. At `(23, 5)` no certifier we own can land it (it would have to prove `α(UD(𝔽₂₃,2)) < 105.8`, which took the level-3
+relaxation with 0.4 to spare): **the ℚ(√167) row stays numerics-only in this milestone.** Side effect worth keeping: this continuous
+relaxation found a 76-set at 19 in 12 starts, the size FS-62's local search needed 521,874 restarts to plateau at.
