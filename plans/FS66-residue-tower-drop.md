@@ -857,4 +857,103 @@ first offending item in the reader's vocabulary, and accepts-and-ignores nothing
 
 ## §R. Results — filled by the implementer, phase by phase (predictions scored here; decisions implementation overturned, in four parts)
 
-*(empty at the plan's writing)*
+### Phase 1a — the witness, its checker, and the minimal core (2026-09-20/21, one Opus implementer)
+
+**What landed.** `data/fs66/witness-p11-l2-k4/` holds an **883-point, 3,441-edge subgraph of `UD(ℤ/121, 2)`
+that cannot be four-coloured**, with its LRAT refutation, `CERTIFIED` in 0.08 s by
+`tools/fs66_check_witness.py` — standard library only, importing nothing from `tools/`, taking `n` and `k`
+from the witness. 23 planted-fault controls each refuse **for their named code**, a faithful twin passes
+through the same scaffolding, a second CNF builder (`tools/coloring.py`) agrees on the formula's SHA-256, an
+all-pairs test agrees with the circle walk, and the committed files come back byte-identical afterwards.
+Four other solver codebases refuse the bare edge list **with no pin and no symmetry breaking at all**
+(glucose4 1.0 s, minisat22 0.9 s, cadical153 1.0 s, maplechrono 5.2 s) and all four five-colour the same list
+with the model verified on every listed edge. The graph is **1-minimal in vertices**: all 880 deletable points
+probed against this exact graph under a 300,000-conflict budget, every deletion four-colourable, **no probe
+undecided**. `data/fs66/README.md` is the map and carries the five-command regeneration recipe (seed 2
+throughout). Two earlier stages (2,974 and 996 points) are committed in the same format and also `CERTIFIED`,
+so Phase 1b can measure the kernel on a large instance before choosing. **Nothing is kernel-checked**;
+`CERTIFIED` is this checker's word and says so on its own last line.
+
+**Scored: P1 — the checker half WON, the kernel half is Phase 1b's.** 883 vertices, inside the predicted
+600–1,115 band, `CERTIFIED`. The `< 15 min / < 12 GB` half is not this phase's to score.
+
+**Scored: P2 — one third won, two thirds lost.** *"Fewer than 300 vertices come off"* — **won**: 996 → 883
+from this phase's own fixpoint, 1,115 → 883 against the planner's. *"Vertex-minimising is slow … in the
+two-hour budget"* — **lost, by three orders of magnitude**: 2,656 probes, 56 accepted deletions, **15.7
+seconds** on sixteen cores, stopping at provable 1-minimality rather than at any budget. *"Probes turn
+UNKNOWN as the average degree falls toward 7"* — **lost**: zero of 2,656 probes undecided at a final average
+degree of 7.8, and the hardest accepted probe used ~1,700 of its 300,000 conflicts. The mechanism P2 was
+reaching for is real but appears elsewhere and as *conflicts*, not as `UNKNOWN`s: under **edge** deletion the
+probes climb to 120,000–150,000 conflicts each and slow to one edge per seven seconds.
+
+**The finding that should change Phase 1b's plan.** *The kernel pays for the proof, and past a point graph
+size and proof size move in opposite directions.* Deleting edges as well as vertices takes the graph from
+3,441 to 3,090 edges — a 10 % smaller clause table — and makes CaDiCaL's refutation **100× harder** (1,503
+conflicts → 148,524) and its **LRAT 71× larger: 55.9 MB / 204,288 lines against 784 KB / 3,023 lines**
+(`data/fs66/ckpt/minimise-resume-exercise.log`, and the measurement is one `fs66_tower.py witness` call on
+each). So §I1's *"the aim is a cheaper kernel check, not a record size"* needs its sharper form: **shrinking
+past the point where the refutation stops being easy makes the kernel check more expensive, not less.** The
+committed witness is the vertex-1-minimal graph with the small proof; `--mode edges|both` stays in the tool,
+unused.
+
+**Decisions, in four parts.**
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| **Commit the vertex-1-minimal graph (883 v / 3,441 e); keep edge deletion in the tool, unused** | commit the edge-minimised 883 v / 3,090 e, with 10 % fewer clauses | measured: its proof is 55.9 MB against 784 KB, because its refutation costs 148,524 conflicts against 1,503 | high on the measurement; **medium on the ranking**, because nobody has yet measured whether the kernel's cost is dominated by the clause table or by the LRAT replay — Phase 1b decides that, and the two stage witnesses are committed so it can |
+| **The production pipeline drops the `shrink` step**: round-0 core → minimiser, four commands | keep `shrink` in the path, as §I1 and `data/fs66/planner/README.md` do | the minimiser re-extracts an LRAT core after every acceptance, which is what `shrink` does; measured over eight seeds, round-0 → minimise lands at **883** where round-0 → shrink → minimise lands at **888** | high (eight seeds, all landing at 888 with the shrink step and 883 without) |
+| **Write `tools/fs66_mutation_audit.py`: remove one test at a time from a COPY of the checker and require the control rows that exist to catch it to go red** | rely on the planted-fault controls alone, which is all §I1 asks for | a control row whose failure mode is unreachable passes exactly like one that works. It **found a real gap**: no plant isolated the "every added clause id must be fresh" test, so that test was passing untested — now control 19, a proof line re-adding clause id 1 with a derivation that is itself valid RUP | high — it changed the artifact |
+| **Three refusal codes beyond §I1's list**: `BAD_WITNESS`, `BAD_EDGE`, `PROOF_MALFORMED` | force the nine listed codes to cover structural faults | §I1 requires an unknown JSON key, a `k` below the pin's size and an empty edge list each to be *"refused by name"*, and none of the nine names them; and a proof line that is not integers is not a bad hint | high |
+| **One `records.jsonl` at `witness-p11-l2-k4/`, covering its `stages/` subdirectories too** | one per subdirectory | §D's promise is that `cat data/fs66/*/records.jsonl` is the whole milestone, which is one glob level | high |
+| **The kill-and-resume exercise runs on the edge-deletion mode, not the production run** | slow the production run artificially (`--workers 1` gives ≈ 4 minutes) | the production run is 15.7 s end to end; the tool, the checkpoint code and the resume path are identical, and an artificially slowed run exercises scheduling rather than recovery. The log says plainly why, and that the run's product is deliberately not the witness | medium-high — it meets the checklist's intent; say the word and `--workers 1` interrupts the production path itself |
+| **The minimiser solves its own final graph before writing anything** | trust the accepted deletions | the loop only ever solves graphs one item *lighter* than the state; if the state itself were colourable, every probe would answer SAT and the run would report "1-minimal" about a graph that refuses nothing. It now asks the graph directly and refuses to write `--out` unless the answer is UNSAT | high |
+| **The stall rule reads the RECENT acceptance rate, not the lifetime one** | leave it as first written | as written it divided all acceptances by the whole elapsed time, so a run that accepted quickly for an hour and has accepted nothing for ten minutes still reads as healthy — the rule could not fire | high |
+
+**Where the plan or the brief was wrong, or is now out of date.**
+1. **§I1's stop rule, and the whole two-hour budget, are aimed at a step that costs 16 seconds.** Nothing in
+   Phase 1a was compute-bound. The budget, the 200-probe stall and the five-minute rate test all exist and all
+   went unused; the run stopped at 1-minimality.
+2. **§I1's refusal-code list does not cover the faults its own next sentence demands be refused by name**
+   (decision four above).
+3. **§I1's `n → 120` plant is refused at step 1, not step 2.** Point 27 of the witness is `(0, 120)`, which
+   leaves `(ℤ/120)²` before any pair is tested, so the code is `BAD_POINT`. The control accepts either code and
+   prints which fired; a *modulus doubled* plant (`n → 242`) was added, which does reach the unit-pair test and
+   names the first offending edge with its quadrance.
+4. **`data/fs66/planner/` was not used at all.** The committed witness descends from a fresh
+   `fs66_tower.py build/ask/core` run, so the artifact depends on no frozen scratch file. The planner's core
+   and this one differ (2,713/1,115 against 2,974/996 at the same stages) only because the pinned triangle is
+   chosen differently; both reproduce §M's graph exactly — **14,641 vertices, 966,306 edges, UNSAT in 1.4 s at
+   1,412 conflicts**, against §M's 1.7 s and 1,535.
+5. **§D's record shape has no honest slot for a non-solver verdict.** The checker's own `CERTIFIED` is filed as
+   `solver: "fs66_check_witness (no solver)"`, `verdict: "UNSAT"`, with the trust word carrying the meaning.
+   A `verdict: "CERTIFIED"` value would be cleaner if §D is ever revised.
+6. **The brief's "keep the round-0 and fixpoint witnesses" is honoured, but "fixpoint" is no longer a stage of
+   the production recipe** (decision two). Both are committed under `stages/` and regenerate from the same
+   round-0 core.
+
+**Two process notes, because both are instances of rules already in `CLAUDE.md`.** *(a)* `nohup … & echo $!`
+reported **2631420** while the process that mattered was **2631423** — the wrapper-shell trap, met exactly as
+written. Every kill and every wait in this phase therefore found its target by reading `/proc/<pid>/cmdline`,
+never by `pgrep -f`. *(b)* A waiter written as `until ! kill -0 $(pgrep -u $USER -f "fs66_minimise.py.*edgetest")`
+was armed and then caught before it ran: the shell executing it carries that pattern in its own command line,
+so the condition could never become false. That is the eight-times-recorded self-match bug wearing a waiter's
+costume — it does not kill the wrong process, it waits forever, and it looks exactly like a job that never
+finished. *(c)* A kill aimed at the production run returned `No such process`; **verified by effect** rather
+than assumed either way, the run had already exited normally 15.7 s after launch, with its own `stop:` and
+`final:` lines in the log. Nothing crashed. The log carries the correction directly under the kill header.
+
+**What Phase 1b needs, beyond `data/fs66/README.md`.**
+* The witness's CNF is **3,532 variables, 14,650 clauses, SHA-256 `2f2c2015…`**, and `tools/coloring.py`
+  reproduces that digest exactly (controls row 2), so `tools/emit_mask.py` must be handed **this edge list in
+  this order** — the LRAT addresses clauses by position.
+* The pin is witness indices `[0, 27, 430]`, i.e. the points **(0, 0), (0, 120), (47, 60)** — the same
+  triangle §L's `#guard`s already use, at different indices.
+* Every point's packed id `a·121 + b` is at most **14,618 < 2¹⁴**, so §L's `unpackPt 121 14` is right as
+  written.
+* Three instances to measure on, all `CERTIFIED`: **883 v / 3,441 e / 14,650 clauses / 2,642 proof lines**,
+  **996 / 4,283 / 18,131 / 3,023**, and **2,974 / 14,190 / 59,737 / 2,990**. Note the proof lengths barely
+  differ while the clause tables differ 4× — which is the sharpest available hint about which of the two the
+  kernel's cost follows, and measuring the 2,974-point one first answers it.
+* If a smaller instance turns out to matter, the lever is **not** more minimisation of this object: it is
+  1-minimal, and edge deletion makes the proof 71× larger. A different seed changes nothing material (eight
+  seeds all land at 888 ± 0 vertices through the shrink path).
