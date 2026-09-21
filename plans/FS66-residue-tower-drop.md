@@ -652,10 +652,10 @@ fails); pin a non-triangle (child d fails); file the `k = 5` certificate (child 
 **What is deliberately absent.** No field-level consumer (`χ(ℚ(√47)²)` is untouched by a refusal, and the number-field residue
 step is row 57's gap, FS-47). No statement about level three, the `p`-adic plane, or `B₁`: none has a certificate. No
 `ZMod (11 ^ 2)` — the type is `ZMod 121`, a literal, because a numeral at an unsimplified type index is paid per numeral
-(`CLAUDE.md` § The kernel's cost model). **Vacuity:** `not_colorable…` concludes `False` under a colouring and is a refutation
-(skipped by the gate); `unitQuadrance_zmod_colorable_of_dvd` takes a `Colorable` hypothesis whose inhabitant is
-`finitePlane11_colorable_five`, used in the same file (and the generic `unitQuadrance_colorable_of_ringHom` is parametric —
-`GENERIC`, the caller's obligation); `unitPairNat_eq_true_iff` is an `iff` with both sides inhabited by the `#guard`s.
+(`CLAUDE.md` § The kernel's cost model). **Vacuity:** `unitQuadrance_zmod121_not_colorable_four` concludes `False` under a colouring and is a refutation (skipped by
+the gate); `unitQuadrance_colorable_of_ringHom` is parametric (`GENERIC`, the caller's obligation) and its `Colorable`
+hypothesis is inhabited in the same file by `finitePlane11_colorable_five` at `ZMod.castHom`; `unitPairNat_eq_true_iff` is an
+`iff` with both sides inhabited by the `#guard`s and the consumer-path `example`.
 
 ---
 
@@ -668,14 +668,16 @@ data/fs66/
   planner/                       the planner's measurements and scripts                  (exists; frozen as a record)
   witness-p11-l2-k4/             witness.json, witness.lrat.gz, check.out, controls.out  (Phase 1a)
   b1/                            gurobi-p7.log, gurobi-p11.log, b1-records.jsonl, moment-price.md   (Phase 2)
-  level2-p19-k4/                 level1.out, level2.out, [witness | colouring | null].json          (Phase 3a)
+  level2-p19-k4/                 records.jsonl, level1.log, level2.log, [witness.json + .lrat.gz | colouring.json]   (Phase 3a)
   alpha-p7-l2/                   control-686.json, ask-687.json                                       (I6)
   level1-p23-k5/                 cube-sample.jsonl, cubes.jsonl, summary.json                         (Phase 3b)
   ckpt/                          every checkpoint of every run over 15 minutes — NEVER under build/
 tools/
   fs66_owner_verify.py           exists (the owner's)
   fs66_check_witness.py          I1's checker — standard library only, imports nothing from tools/
-  fs66_tower.py                  one tool, subcommands: build | ask | core | minimise | level | quotient   (the planner's scripts, tidied)
+  fs66_tower.py                  one tool, subcommands: build | ask | core | level | quotient   (the planner's scratch scripts, rewritten —
+                                 they were run only as recorded in §M and are NOT imported by anything; the checker imports nothing at all)
+  fs66_minimise.py               I1's checkpointed core minimiser
   fs66_b1_global.py, fs66_cubes.py
 ```
 
