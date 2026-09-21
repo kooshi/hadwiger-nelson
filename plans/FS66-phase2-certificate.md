@@ -985,3 +985,130 @@ of it and is still not exact.)
    the *problem*, and the checker rebuilds it. That is the sharp statement of where this design's trust
    boundary actually lies, and it is one line: **everything the producer chooses is off the trust surface
    except the problem it is solving.**
+
+---
+
+### Phase 2C — 19 at four colours (implementer, 2026-09-21). **IN PROGRESS — this section is written as the
+phase runs, so that nothing measured is lost if the session ends; the certificate row is marked pending until
+the frozen checker has spoken.**
+
+**The go/no-go, sent to the owner as a message before any rounding: GO.** The minimal second-level relaxation
+at `p = 19` reads **about 77.4**, against the `361/4 = 90.25` that a four-colour certificate needs — a margin
+of about 14 %. The best level-one independent set is 76, so the relaxation's own optimum is pinned in roughly
+`[76, 78]`.
+
+**R″.1 The build is two orders of magnitude cheaper than §19 priced it, because of two symmetries.**
+
+> `a' · τ_{−t}(a)` is the translate `τ_{−t}(a · τ_t(a'))`, so `F[ib][ia][t] = F[ia][ib][t]`; and `z ↦ −z` is
+> the rotation by the circle point `−1`, under which every representative (`φ_0` and `φ_{−h}φ_h`) is stable,
+> so `F[ia][ib][−t] = F[ia][ib][t]`.
+
+Together they make the product table a **quarter** of its naive size: **3,014,193 canonical forms against
+11,957,764**, and the constraint matrix **53,676,794 nonzeros against §19's "near 10⁸"**. Both identities are
+checked on 300 random `(ia, ib, t)` before they are used (`Build._check_symmetries`); a wrong table could only
+weaken `U` (§C.3), so this guards the bound's quality, not its validity.
+
+| at `p = 19` | |
+|---|---|
+| whole build | **26.1 s** — product table 14.0 s on 16 forked workers, q forms 5.3 s, box rows 4.2 s, assembly 2.4 s |
+| peak memory | 4.4 GB (the assembly; the build alone is under 1 GB) |
+| orbits `K` | **52,370** (§19 guessed ~55,000) |
+| blocks | 183, 18 × 182, 2 × 2 — **20**, no reflection split needed |
+| scalar rows | **259,271** (§19 guessed ~300,000) |
+| constraint matrix | 575,864 × 52,369, **53,676,794 nonzeros** |
+| build cache | `data/fs66/ckpt/b1-p19/build-p19-c2.npz`, 12 MB; reload 0.4 s |
+
+The q forms are memoised on `canon(m)`, which at 19 turns the 363 forms the relaxation asks for into a dozen
+distinct ones. The memo is on the **fast path only**: it changes the order in which new orbits are discovered,
+hence the orbit numbering, hence the bytes of the file — which must not move at 7 and 11.
+
+**R″.2 The two controls that make the extended producer safe.**
+
+* **`--twin-build`** builds the relaxation BOTH ways at one prime and compares them without ever comparing an
+  orbit *number* (the two paths number orbits differently on purpose): the orbit sets, the product table and
+  the q forms as canonical monomials, the scalar rows as `(kind, payload) → {canonical monomial: coefficient}`,
+  and **every row of the assembled matrix evaluated at one pseudo-random moment functional**. Green at
+  `p = 3, 7, 11`; at 11 the two matrices agree in shape, in nnz (1,202,121) and to 1.1e−12 on every row.
+* **Seen red on four deliberate breaks**, each in a different part and each leaving the other checks green:
+  the shift multiplicity dropped (block rows differ by 9.98); one shift of the product table wrong (1,352 of
+  33,124 entries, and the assembled rows by 4.91); the q-localiser class grouping losing the class size (rows
+  by 30.6); the pair symmetry read with a transposed index (15,652 of 33,124 entries).
+  **Two earlier plants applied textually and were semantic no-ops** — one broke the branch `j == 0`, which is
+  the zero shift where the "broken" expression is the correct one, and one made the q-form memo a pure
+  recomputation. A plant whose failure mode is unreachable has not been tested by passing; both were replaced.
+* **`--regression`** reproduces `cert-p7.json` and `cert-p11.json` from the documented production command and
+  compares **every key** against the committed files: identical, except `producer.utc` (which changes on every
+  run) and `producer.tool_sha256` (this file's own digest, which any edit must move). The committed
+  certificates are **left untouched on disk**; they were made by the production producer at commit `3c740871`,
+  and the extended producer reproduces them in every key but those two provenance fields.
+
+**R″.3 The hardware, measured rather than assumed.** 50 iterations at the real problem size, on a quiet
+machine, same iterate:
+
+| backend | seconds per iteration | objective at iteration 50 |
+|---|---|---|
+| **`gpu_indirect`, graphics card A** (`build/venv-sdp-gpu`) | **0.675** | 99.8221 |
+| `cpu_indirect`, 16 threads (`~/venvs/fs66`) | 2.037 | 99.8227 |
+
+**3.0×, and the two agree to five digits.** GPU memory 2.4 GB of 32. In the long run the per-iteration cost
+rises to about 1.0 s as the conjugate-gradient inner solve works harder. A chunk measured while a niced
+one-core rounding probe ran alongside read **1.310 s/it against 0.968 s/it uncontended** — the same trap
+`CLAUDE.md` names: a contended-wall timing is not a quiet-CPU cost, and the 0.675/2.037 pair is the one that
+travels.
+
+**R″.4 The rounding is 5× what §R′.3 predicted, and — the phase's sharpest finding — `U` tracks the DUAL
+residual, not the objective.**
+
+| | |
+|---|---|
+| one exact rounding attempt at 19 | **242.9 s** (§R′.3 predicted ≈ 50 s by scaling `#reps² × n`) |
+| the certificate it writes | 38 blocks, 54,056 rows, 31,306 cascade steps, 9.3 MB |
+
+and then, from three duals of the *same* solve:
+
+| dual | `res_pri` | `res_dual` | rounded `U` |
+|---|---|---|---|
+| 605 iterations, after a five-iteration warm-started continuation | 1.95 | 4.7e−01 | **192.574282** |
+| 1,200 iterations | 1.75e−04 | 6.0e−01 | **213.926704** — *worse, on a better primal* |
+| (for comparison, `p = 11` converged) | < 1e−07 | < 1e−07 | loss 0.0028 |
+
+So the objective converging says nothing: the cascade pays for the dual's infeasibility in box rows, and at
+`res_dual ≈ 0.6` that costs **more than 100** in `U`. Anyone reading a number off this method must be told the
+dual residual as well as the shift (§R′.9 item 1, sharpened).
+
+**R″.5 Two things about reaching a checkpoint's dual, both measured.**
+1. **Re-entering SCS to get at a checkpoint destroys the dual one came for.** Five warm-started
+   `cpu_indirect` iterations from the 600-iteration checkpoint took `res_pri` from 1.33e−03 to **1.95**. The
+   remedy is `--round-only`: load `y` out of the checkpoint and call no solver at all — which also skips the
+   assembly, since only the block offsets are needed, keeping 4.4 GB out of every forked worker.
+   **Control:** at `p = 11` the normal path and `--round-only` from its own checkpoint produce
+   **byte-identical** certificates.
+2. **Chunk size is not free.** The same relaxation at 11 solved in 4,000-iteration chunks gives
+   `U = 28.204515…` against the committed `28.204320…` from one uninterrupted call — SCS's adaptive scaling
+   is not checkpointed and drifts (FS-50's finding, here at a harmless magnitude *when the solve converges*).
+   At 19 with **300**-iteration chunks it was not harmless: over five chunks `res_pri` fell 1.19e−02 → 2.02e−04
+   while `res_dual` **did not move** (4.7e−01, 3.7e−01, 6.7e−01, 6.0e−01, 5.6e−01). That run was killed at
+   1,500 iterations (nothing forfeited: its checkpoint and log are kept as
+   `solve-gpu-300chunks-1500it.npz` and `p19-solve-300chunks.log`) and relaunched with **3,000**-iteration
+   chunks, the granularity that converged at 11, plus a second differently-configured solve
+   (`acceleration_lookback=0`) on the idle second GPU.
+
+**R″.6 The frozen checker handles 19, measured on a real 19-sized certificate before anything depended on it.**
+`tools/fs66_b1_cert_check.py`, unmodified, on the 9.3 MB dry certificate: **8 min 21 s wall, 3.17 GB resident**,
+all seven steps, the identity verified coefficient by coefficient on all **52,370** canonical monomials with 38
+blocks and 54,056 rows, ending `BOUND ONLY` (the correct word for `U = 192.57`). §R.8 item 5 estimated 2–4
+minutes and flagged the eliminations on blocks of size 183 as the part that could surprise: **they were not the
+surprise** — they passed, and the cost is the naive `#reps² × n = 11,957,764`-form product table, which the
+checker rebuilds without the two symmetries the producer now uses. Within a reviewer's patience, and the
+checker was not touched.
+
+**R″.7 The certificate. PENDING** — the solve is still running.
+
+**R″.8 P-B6.** Its first half is **NOT MET, on the low side**: the reading is about 77.4, below the predicted
+band `[80.6, 87]`. Its premise was wrong, and the error is worth keeping: §19 argued the reading "cannot be
+below FS-62's level-3 value 80.59" because `B₁ ≥ α`. But the second-level moment relaxation *of `B₁`* is
+stronger than the level-3 relaxation *of `α`*, and that dominates the gap `B₁ − α`. The consequence is a
+result the phase was not aiming at: since `B₁ ≥ α(G₁)`, a certified `U` is also an upper bound on the
+independence number of level one, so `α(UD(𝔽₁₉,2)) ≤ ⌊U⌋` — against FS-62's 80 from the level-3 relaxation.
+`U` can never be below the relaxation's own optimum (the certificate is a feasible point of its dual), so with
+that optimum at ≈ 77.4 the attainable floor is `⌊U⌋ = 77`, never 76.
