@@ -50,7 +50,18 @@ then asked for the prover so the run can be cancelled if the conjecture is prove
 * Close prepared and committed: `data/fs66/owner/close-draft.md` (row 75, G66, the touches), `CLOSED-QUESTIONS.md` §1.8 + the §1.7
   caveat, `plans/STUB-tower-never-rises.md` (FS-68), the conjecture sweep in the main plan's §Q, the seven-colour null at 23
   (`data/fs66/owner/p23-k7/`). Kooshi (10:50): no split close, no side runs — wait for the full close, then ℚ(√167).
-* Still live: the GPU solve at 23 only.
+* **Update 16:05.** Chunk 1 (11:27): `pobj 97.5679`, `res_dual 3.0e-01`, 7.30 s/it — **GO** (five need 105.8; six, needing < 89, is out of
+  reach — my "coin flip" to Kooshi was wrong; recorded in the main plan's §Q). Chunk 2 (15:59): **`pobj 97.567673`, `dobj 97.567172`,
+  `res_dual 1.94e-03`**, 5.44 s/it. **The closing gate is DONE and ACCEPTED** (commit `12376355`, the lint rename alone; every gate green,
+  counts match; valid as long as no `.lean` changes). **Phase 2D is LAUNCHED on my read-only copy
+  `data/fs66/ckpt/b1-p23/solve-gpu.it6000.npz`** — rounding does not need convergence here (loss ≈ 250 × `res_dual` at 19; 8.2 of room).
+  When it hands back `cert-p23.json` CERTIFIED `--m 5`: score it (frozen checker run by me at `--m 5` and `--m 6`, records vs digest, the
+  87-set by my verifier, one perturbation), then **do the close**: paste `data/fs66/owner/close-draft.md` into `CLAUDE.md` with the 23
+  numbers, run `tools/claude_md_fact_audit.py --base <pre-close rev>` and `--dupes`, extend `CLOSED-QUESTIONS.md` §1.8 with 23
+  (`χ_Bor(ℚ₂₃²) ≥ 6`), re-rank `plans/FRONTIER-STUBS.md` (FS-66 closed; FS-68 added; FS-57/65/17 re-aimed; a stub for 43 from 2D's
+  pricing), banner the FS-66 stub, final report. The solve may be left converging for a tighter `U` (`⌊U⌋` 98 → 97); 2D's README will
+  hold the two commands to re-round from a later checkpoint — Kooshi decides whether it keeps running once ℚ(√167) work starts.
+* Still live: the GPU solve at 23 and the Phase 2D implementer.
 
 ## 1. Standing rules (full text: the 2026-09-20 handoff §0, `CLAUDE.md` § Delegation, memory)
 
