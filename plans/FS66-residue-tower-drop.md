@@ -729,6 +729,16 @@ in `scripts/Axioms.lean`'s output reads exactly `[propext, Classical.choice, Quo
 - [ ] `tools/check_architecture.py` green with the new modules in `ARCHITECTURE.md`.
 - [ ] the final statement read aloud against the informal claim, and the reading recorded in §R in one sentence.
 
+### Phase 1c — level three's refusal, certified the same way (optional; the owner's call after 1a) 
+M6 refused four colours on a 134,915-vertex piece of `UD(ℤ/1331, 2)` in 135 s with **no proof kept**. The same recipe applies:
+rerun with `--lrat --no-binary` (expect a proof of tens of MB; **11 GB of memory — nothing else heavy beside it**), extract the
+core by backward reachability, iterate to a fixpoint, and hand the result to Phase 1a's checker at `n = 1331` (it takes `n` as
+data; the packing width becomes 21 bits). *Worth it because* it turns "level three, one solver's word" into a second
+`CERTIFIED` witness at the price of one more run, and a small core would make `χ(UD(ℤ/1331, 2)) = 5` a second kernel theorem
+through unchanged Lean (`unitPairNat 1331`). *Not worth more than half a day:* if the level-three core does not fall below
+≈ 20,000 vertices after the fixpoint rounds, record the size and stop. Checklist: the record in `data/fs66/witness-p11-l3-k4/
+records.jsonl`; `check.out` ending `CERTIFIED …` or the stop recorded with the core's size per round.
+
 ### Phase 2 — the whole tower at 11 (I3, then I4's price; I6 rides along). Checklist:
 *Scoring:* `data/fs66/b1/records.jsonl` holds one record per solve with the bound's value at 10, 30, 60, 120 minutes as
 fields; `data/fs66/b1/gurobi-p11.log` exists and its last bound matches the record; `data/fs66/b1/moment-price.md` exists and
