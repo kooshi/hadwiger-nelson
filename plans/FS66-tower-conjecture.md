@@ -357,3 +357,39 @@ constraints along the two 7-cycles of `K_{7/2}` must be combined non-linearly, a
 | Report NOT PROVED rather than PARTIAL | call Theorem E + Lemmas W, T a partial proof | none of them proves any case of (C-α), (C-χ) or (C-m) that was open; they locate the difficulty | high |
 | Did not re-derive the fibre-density inequality or the certificates' soundness | audit `SOUNDNESS.md` L1–L6 line by line | the brief said not to; Lemma T re-proves the one link I lean on (the spectral window) in greater generality, with its own falsifier | medium-high — I did not re-check the rounding or the checker |
 | Left the `χ_f` of the `ℚ(√11)` pieces uncomputed | build a column-generation `χ_f` solver with symmetry | it is a day's instrument, not an hour's; it is item 1 of §6 | medium — if a cheap exact `χ_f` instrument already exists in `tools/` (FS-56), this was an hour I should have found |
+
+---
+
+## Owner's review (product owner, 2026-09-21) — verdict ACCEPTED; the run at 23 continues
+
+**The verdict stands: NOT PROVED, do not cancel.** Kooshi's condition for cancelling the GPU solve at 23 ("if that comes back
+proven") is not met, and §0's account of why — any proof of (C-m) at `(23, 5)` is relative to a fact nobody holds or contains a
+proof that `α(UD(𝔽₂₃,2)) < 105.8` — is the right reading of where the difficulty sits. Checked by me, line by line and with my own
+code where code applies:
+
+* **Lemma W — sound.** Re-derived (`t ≡ 0 (mod p)` forces `s = ±1`; even representatives in `[0, p²−3]` never differ by `±1 mod p²`)
+  and checked from the definition at 3, 7, 11 with code of my own: `|S₂| = p(p+1)`, `|I| = p(p²−1)/2`, `I` independent, share sums
+  1.3333 / 3.4286 / 5.4545 against `α(C_p)` = 1 / 3 / 5. It sharpens my note's §4 (which priced the line family and stopped) into
+  the statement that matters: **fibre-share vectors leave `STAB(G₁)`**, so no pointwise transfer exists. Yours, and it closes my route (a).
+* **Theorem E — sound.** The coefficient field gives `UD(𝔽_q) → UD(A/𝔪^k)`, reduction goes back; the corollary's Teichmüller
+  representatives are additively closed in characteristic `p`, so `O/π^k ≅ 𝔽_q[ε]/ε^k` for `k ≤ e`. Consistent with the kernel's
+  `unitQuadrance.map` and with row 67 (the 2-adic tower, `e = 2`, forces only from level 5).
+* **Lemma T — sound, with one erratum in the Definition of §3.2.** The side condition is written `γ(x+s̄, −s̄) = −γ(x, s̄)`; for the
+  relation `⟨v − u, s̄⟩ = γ(x, s̄)` to be symmetric it must be `γ(x+s̄, −s̄) = +γ(x, s̄)` (the reversed edge pairs `u − v` with `−s̄`, the
+  same left-hand side), and that is also what makes the `u*`-isotypic operator Hermitian (`u* = r s̄ = (−r)(−s̄)`, so the backward
+  phase is `ψ(−r γ)`, the conjugate of the forward one). `tools/fs66_conj_twist.py` is unaffected: it defines `γ` on a half-system
+  of directions and symmetrises the adjacency, and its carry twist reproduces `UD(ℤ/p², 2)` entry for entry. The proof and the
+  conclusion stand: **every `B₁` certificate bounds every twisted cover.**
+* **The map `(x, y) ↦ 2x + 3y` onto the circular clique `K_{7/2}` — verified** (the eight unit vectors of `𝔽₇²` land on {2, 3, 4, 5}).
+
+**Not checked by me, and therefore not to be repeated as established until they are:** that `G₁(7)` and `G₁(11)` are cores (the
+author flags the Hahn–Tardif fact as recalled from memory); the count of 28 maximum independent sets at 7; that
+`[DeCorteOliveiraVallentin2022]`'s hypotheses hold for `ℤ_p²` as written (statements read by the author, proofs unread); the
+edge-criticality measurements.
+
+**Carried to the close** (mine): a grokking for *the carry is the whole content* (Theorem E, twist-blindness, the weighted form
+false) with the author's reading *no twist of `G₁` ever raises `α`* and its killing test; the free strengthening of
+`data/fs66/b1/SOUNDNESS.md` §ST to every twisted cover (a sentence, no new proof obligation beyond Lemma T); the first plan's §S5 to
+cite Lemma W; and stubs for the two experiments the author would run next — `χ_f(ℚ(√11)²) = 7/2` on FS-61's saturated lattice
+pieces (which would give (C-α) at 7 at every level with a human-checkable witness), and the zero twist as the positive control
+every level-two finder and relaxation has lacked.
