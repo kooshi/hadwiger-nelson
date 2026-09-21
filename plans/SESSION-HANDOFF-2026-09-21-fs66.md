@@ -23,6 +23,24 @@ the projection (about a day of card A), the default (continue on a good reading,
 then asked for the prover so the run can be cancelled if the conjecture is proved. He trusted my GPU smoke test after his `-Syu`
 (CUDA 13.4.1 → 13.4.2; driver and kernel untouched) and said carry on — on any GPU fault, stop and tell him.
 
+**Update, 2026-09-21 07:30 — two of the four live things are DONE and ACCEPTED:**
+* **The prover: NOT PROVED — the run at 23 continues** (`plans/FS66-tower-conjecture.md`, my review appended, commit `520d57d2`). Proved
+  and checked by me: the weighted form of the conjecture is false at every `p` (Lemma W — fibre shares leave `STAB(G₁)`, so no local
+  transfer can exist); equal-characteristic towers are impotent (Theorem E) so the whole content is the carry of integer addition;
+  every spectral fact and every `B₁` certificate holds for EVERY twisted cover (Lemma T; one sign erratum in its Definition,
+  recorded). Not checked by me: the cores claim, the 28 maximum sets at 7, DeCorte–Oliveira–Vallentin's hypotheses. Carried to the
+  close: a grokking, the free strengthening of `SOUNDNESS.md` §ST to twisted covers, two stubs (χ_f(ℚ(√11)²) = 7/2?; the zero
+  twist as a positive control).
+* **The `CLAUDE.md` compression: 242,682 → 239,565 bytes, no fact lost, ACCEPTED** (my own token diff, PROTECTED bytes, gate regex,
+  bib audit, its tool's self-test and a plant of mine; commit `b441fb56` holds three small currency fixes). **Its finding is the
+  result: the file is within ~5 % of its no-loss floor (~228 KB), so the ceiling is a STRUCTURAL decision for Kooshi** — a budget
+  that tracks growth, or a split by reader (every agent needs ~76 KB; only a hunting session needs the other ~160 KB). Put to him;
+  default: nothing changes, this close fits (10.4 KB of room against ~6 KB). New durable guard: `python3
+  tools/claude_md_fact_audit.py --base <rev>` (and `--dupes`) at every close. **`CLAUDE.md` is back in my hands.**
+* **Harness fact learned:** a subagent gets `CLAUDE.md` as THIS session loaded it, not the disk file (memory note
+  `subagent-claude-md-snapshot.md`) — say so in any brief that depends on the file's current text.
+* Still live: the GPU solve at 23 (first chunk line due ≈ 09:00–09:30) and the Phase 2C implementer waiting on it.
+
 ## 1. Standing rules (full text: the 2026-09-20 handoff §0, `CLAUDE.md` § Delegation, memory)
 
 One Fable planner and one Opus implementer **at a time** · a **fresh implementer per phase**, and never resume one that came back
