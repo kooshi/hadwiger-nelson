@@ -9,6 +9,7 @@ Usage (standard library only; run from the repository root):
     python3 tools/claude_md_fact_audit.py --moves moves.txt    # also write the relocation map (see below)
     python3 tools/claude_md_fact_audit.py --words              # also list vocabulary that vanished (noisy; a reading aid)
     python3 tools/claude_md_fact_audit.py --self-test          # plant faults and watch each one fire
+    python3 tools/claude_md_fact_audit.py --dupes              # literally repeated 10-word runs: the one-home rule's tripwire
 
 What it checks, and what FAILS the run (exit status 1):
   * every fact token of the old version still occurs at least once in the new one -- dates, bibliography keys,
@@ -20,6 +21,7 @@ What it checks, and what FAILS the run (exit status 1):
   * the sentence scripts/gate_report.py reads ("current audit reads N clean and M declared purchases") still
     matches, with the same N and M;
   * no heading disappeared (other files cite sections by name).
+  * every `row N` and `GN` the new version cites exists as a ledger row or a grokking (no dangling pointer).
 It prints bytes per section before and after.
 
 Deliberate re-spellings go in NORMALISE (applied to BOTH versions before extraction, so old and new spellings meet);
@@ -226,6 +228,15 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     for k in eo:
         if k.startswith("row ") and k not in en:
             fails.append(f"ledger {k} is gone")
+    # pointers: a file that points instead of retelling must not point at nothing
+    rows_n = {k[4:] for k in en if k.startswith("row ")}
+    groks_n = {k for k in en if re.fullmatch(r"G\d+", k)}
+    dangling = sorted({t for t in fn["row"] if t[4:] not in rows_n}
+                      | {g for g in re.findall(r"\bG\d{1,2}\b", n_n) if g not in groks_n})
+    say(f"pointers: {len(fn['row'])} distinct row references, {len(groks_n)} grokkings; dangling: {dangling or 'none'}")
+    for d in dangling:
+        if d not in allow:
+            fails.append(f"dangling pointer: {d} is cited and no such entry exists")
     # protected regions
     po, pn = protected_regions(old), protected_regions(new)
     say(f"PROTECTED regions: {len(po)} before ({', '.join(str(len(p.encode())) for p in po)} bytes), {len(pn)} after")
@@ -306,6 +317,7 @@ def self_test(text: str) -> int:
         ("one PROTECTED byte changed", text.replace(region, region[:200] + ("x" if region[200] != "x" else "y") + region[201:], 1), None, "PROTECTED", True),
         ("gate sentence broken", text.replace("declared purchases", "declared purchase", 1), None, "gate-report", True),
         ("heading renamed", text.replace(heading, heading + " (renamed)", 1), None, "heading disappeared", True),
+        ("a pointer to a row that does not exist", text.replace("(row 68)", "(row 968)", 1), None, "dangling pointer", True),
         ("re-spelling WITHOUT a normalisation entry", text.replace("ρ₆₃", "ϱ63"), None, "lost", True),
         ("the same re-spelling WITH its entry", text.replace("ρ₆₃", "ϱ63"), NORMALISE + respell, None, False),
     ]
@@ -325,6 +337,37 @@ def self_test(text: str) -> int:
     return 1 if bad else 0
 
 
+def dupes(text: str, n: int = 10) -> None:
+    """List every run of n words that occurs twice or more, outside the PROTECTED regions, merged into maximal runs:
+    the one-home-per-fact rule's tripwire at a milestone close (it sees literal retelling only, never paraphrase)."""
+    for r in protected_regions(text):
+        text = text.replace(r, "")
+    w = text.split()
+    seen: dict[tuple, int] = {}
+    hit = [False] * len(w)
+    for i in range(len(w) - n + 1):
+        k = tuple(w[i:i + n])
+        if k in seen:
+            for j in range(i, i + n):
+                hit[j] = True
+        else:
+            seen[k] = i
+    runs, i = [], 0
+    while i < len(w):
+        if hit[i]:
+            j = i
+            while j < len(w) and hit[j]:
+                j += 1
+            runs.append(" ".join(w[i:j]))
+            i = j
+        else:
+            i += 1
+    total = sum(len(r.encode()) for r in runs)
+    print(f"{len(runs)} repeated runs of >= {n} words, {total:,} bytes in second and later tellings:")
+    for r in sorted(runs, key=len, reverse=True):
+        print(f"  {len(r.encode()):5,} B  {r[:150]}{'…' if len(r) > 150 else ''}")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--base", default="HEAD", help="git revision holding the old version (default HEAD)")
@@ -333,7 +376,11 @@ def main() -> int:
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--dupes", action="store_true", help="list literally repeated 10-word runs in the NEW file, then exit")
     a = ap.parse_args()
+    if a.dupes:
+        dupes(Path(a.new).read_text(encoding="utf-8"))
+        return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
     else:

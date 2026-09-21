@@ -129,3 +129,176 @@ tool cannot see.*
 * **"The prior-art position"**: the five questions Theorem B's value closes (Madore's 4 ≤ χ ≤ 5, Moorhouse §1, Cranston–Rabern,
   Exoo–Ismailescu's closing question, one field of Benda–Perles OP 11.6) → row 57, which lists them with keys; "(summary read, paper
   unread)" → row 57, § Publication.
+# Phase 1b working notes
+
+## Measurements so far (desktop, `lake env lean` with the lakefile's options, min of 3 unless noted)
+
+| module | instance | table slots | hints | CPU s (min of 3) | peak RSS GB |
+|---|---|---|---|---|---|
+| `Cnf/Table.lean` | witness 883 v / 3,441 e | 16,262 | — | 31.59 | 6.14 |
+| `Cnf/Seg000.lean` (2 segments) | witness | — | 96,820 / 2 | 79.57 | 14.01 |
+| `Cnf/Seg000.lean` (8 segments) | witness | — | 96,820 / 8 | 29.32 (1 run) | 5.18 |
+| `Cnf/Table.lean` | round0 2,974 v / 14,190 e | 61,484 | — | RUNNING | RUNNING |
+| `Cnf/Seg000.lean` (8 segments) | round0 | — | 95,653 / 8 | TODO | TODO |
+
+Observation on the 2-segment triple: CPU rose 79.6 → 97.7 → 119.3 across the three runs at constant
+RSS (14.0 GB) — machine fill, not the module. Minimum of three is the right statistic and it is the
+first run here.
+
+## Decisions taken
+* 8 segments, not the plan's default: peak RSS 14.0 → 5.2 GB, CPU/segment 79.6 → 29.3 s, and 8-way
+  parallel elaboration. Total CPU rises 159 → 234 s; memory and wall clock both fall.
+* one prefix `zmod121Four` for all the witness data (§L had `zmod121Core*` for the graph and
+  `zmod121Four*` for the certificate).
+* `Pts.lean` holds the packed literal and imports only `Mathlib.Data.Nat.Notation`, so the geometry is
+  not upstream of the certificate (ARCHITECTURE § 3.10).
+
+## The big-instance table run: cause / measurement / forfeit (written BEFORE the stop)
+* **Cause.** It blocks the rest of phase 1b (the real build, the controls, the write-up), and its
+  marginal value is a sharper ratio, not a different answer.
+* **Measurement at the decision.** witness `Cnf/Table.lean` 31.59 CPU s / 6.14 GB at 16,262 table
+  slots; round0 `Cnf/Table.lean` still running at **8.5 CPU-minutes / 20.4 GB** at 61,484 slots —
+  ≥ 16× the time and ≥ 3.3× the memory for 3.8× the clauses, while the two proofs are the same
+  length (96,820 against 95,653 hints). The question ("does the kernel's cost follow the clause
+  table or the proof?") is answered by that alone.
+* **Forfeit.** The exact completion time and peak of the round0 table, and with it the round0
+  segment measurement (segments import `Table`), so the *segment* half of the table-vs-proof
+  comparison is not measured at all. Deadline set at 15 minutes elapsed.
+
+### Commit W — the window cluster: rows 68–71, G56–G59 (241,254 → 240,423)
+
+**Discovered here, by a guard firing: the copy of `CLAUDE.md` loaded into my context was the PRE-trim version (`d0df4f82^`, 246,496 B),
+not the file on disk.** A must-contain guard on G56 ("conductor-13") failed; `git show d0df4f82` showed that commit had removed that
+text. Every entry that commit touched (rows 68, 69; G56, G57, G58, G59, G64) was then re-read from disk and the batch re-based on the
+disk text, so nothing the morning trim removed or made current (G57's 371, G59's closed killing test at 19) was re-introduced.
+Anything else I rewrote was unchanged between the two versions (word-level diff of `d0df4f82` checked).
+
+* **row 68**: phrasing only. Home of every N, the checker, the SDP's shape, the rounding recipe.
+* **row 69**: GAINED from G56 — "each CERTIFIED with its LDL green and 18 of 18 cuts agreeing"; the ceilings 8, 7, 8, 8, 10 with
+  their two addresses; "no six-colouring found by local search (23, 31, 43, 47) or by the subgroup-periodic sweep at 27 (exhaustive
+  at indices 9 and 27)". LOST to G56 — the list of fields named (23 → ℚ(√167), 31 → ℚ(√1055), 43 → ℚ(√4703), 47 → ℚ(√2351); 27's
+  even degree ≥ 6 and the disc-316 cubic with √79): G56 held all of it already, with the argument. The closing "Grokkings: G56, G57,
+  G58" became "(the understanding is G56–G58)" in the title.
+* **row 70**: the trichotomy's one-line statement stays, its argument is G56's; "U₃₂'s 44 hyperplanes" and "inert towers keep
+  λ_min/d" stay as statements with "both G54"; "(G59)" added to the two derived sentences. "Cay(𝔽_{Q²}, μ_{Q+1})" → `U_Q` (legend).
+* **row 71**: "capped by every usable residue plane's χ_f (3 at 𝔽₃, 3.5 at 𝔽₇) and by 4.36" → now "The route's cap (3 at 𝔽₃, 3.5 at
+  𝔽₇, 4.36) is G60's" (numbers kept in both; the sentence about what the cap means is G60's).
+* **G56**: LOST to row 69 — the three items above (certification detail, ceilings, where six-colourings were sought). LOST to G59 —
+  "the fractional wall W_f … rules six out for every CRT product of first-level targets; a composite target with χ = 6 needs a factor
+  of residue size in {23, …, 83} at some tower level" (G59's "Escape hatches" now says both; G56 keeps a one-line pointer and W_f's
+  killing test). "Cayley graph of 𝔽_{Q²} on the (Q+1)-st roots of unity" → `U_Q`, whose legend line carries those words.
+* **G57, G58**: phrasing only. **G59**: GAINED "(the wall W_f)" and the CRT sentence from G56; "~96,000 restarts" → "row 69"; U₃₂'s
+  hyperplane rigidity → "(G54)", which holds the argument (Sidon set, Fourier support, eleven four-colourings).
+
+### Commit B — macros and four pointers (240,423 → 239,348)
+
+* Scripted: `ℚ(√3,√11)` → `K` and its extensions → `K(√d)`, `UD(𝔽_q,2)` → `Γ_q`; 45 sites; not inside § Notation, § The shape of
+  the proof (written for a reader meeting the field for the first time) or the sentence quoting Fischer "in those words".
+* **Rung D cell**: "under the conjecture's bold form, if the wall at six holds, no field is exactly six-chromatic … the next rung above
+  five is seven, first reachable at K(√7) where L = 7" → the target paragraph (1) two paragraphs below, and G64.
+* **row 57**: Fischer's theorem (the ℤ/4 colouring, the congruences on p and q, "summary read, paper unread", what stays ours) → § Publication,
+  its home; row 57 keeps the finding date, the pointer, and the rule for reading "B answers".
+* **"Open milestones"**: FS-66's pilot question → its row in the table below; "14 of forty certified" → row 74; "χ(ℚ(√11)²) = 4 with
+  the lower half in the kernel" → row 73.
+
+### Commit C and after — intros, the home rule, the legend corrected (239,348 → 239,565)
+
+* **Ledger intro, Grokkings intro**: the definitions of `[tools]`, `[hand]`, `[kernel]`, `[measured]`, `[reading]`, `[external]`,
+  `[method]` → § Notation "Grades" (one codebook; `[cert]` and `[derived]`, used in rows 69–71 and G56–G61 and never defined, got
+  a gloss there). Both intros keep their rules (never renumber; a reading names its killing test; a dead grokking keeps its record).
+* **Frontier intro**: GAINED the one-home-per-fact rule and the audit tool's name (+395 B) — the rule every pointer above relies on.
+* **Paths FS-62**: the exact equivalence spelled out → "(G64)", which states it with both directions' proofs.
+* **§ Notation, corrected on re-reading**: "k-sealed: some *usable plane* is k-colourable" was wrong for the file's own "sealed at 4"
+  (K and K(√35) are sealed by the residue target at 2, which is not a usable plane); now "some residue target — a usable plane, or the
+  target at a prime above 2". **Owed a look by the PO:** the glosses of `L(F)`, `[cert]` and `[derived]` are mine, written from
+  G48/G59 and rows 68–71; they are the only sentences in the file that are new claims rather than re-homed ones.
+* **G57**: "The tension this creates is the milestone's" restored after the vocabulary diff showed "creates" had vanished (the
+  attribution to the milestone went with it).
+
+## Step 4 — Audit: bytes, a token proxy, and the measured ceiling
+
+**Bytes (the budget Kooshi set).** `𝔽` 4 B; subscript and superscript digits, `ℚ ℝ ℤ √ ≤ ≥ ≡ ∈ ⟹ ⟺ ⌈ ⌉` 3 B; Greek, `× · ²` 2 B. So
+`UD(𝔽₂₃,2)` (16 B) → `Γ₂₃` (8 B) saves 8 B a use and `ℚ(√3,√11)` (15 B) → `K` saves 14 B; no ASCII spelling was converted to a longer
+Unicode one. **Tokens.** No tokenizer is available offline and none was sought. `token_proxy()` in the audit tool (ASCII word =
+⌈len/6⌉, digit run = ⌈len/3⌉, other ASCII = 1, non-ASCII = ⌈UTF-8 bytes/2⌉) reads **75,988 → 74,739 (−1.6 %)** against **−1.3 %** in
+bytes: the macros remove exactly the multi-token glyphs (`𝔽`, subscripts), so tokens fall slightly faster than bytes. It is a proxy.
+
+**The measured ceiling — why the result is 1.3 % and not the 25–35 % guessed.** Four measurements, each reproducible:
+1. **Literal repetition at the start was 2–4 % of the file**: 8-word runs occurring twice or more covered 4,970 B, 6-word runs
+   9,241 B (both tellings counted, so at most half is removable). Now: 1,511 B and 3,338 B (`--dupes`). What looked like triple
+   telling at section level is *paraphrase carrying different facts*.
+2. **The experiment on the most-duplicated cluster** (the window: rows 68–71, G56–G59; 28.3 KB, every entry re-typed under
+   one-home-per-fact): **−3.2 %.** Orientation item 11 alone held two facts that existed nowhere else (the best sets at 31 and 47; the
+   search's stages, seeds and rotation orders), and row 69 and G56 each held measurements the other lacked. De-duplicating *moved*
+   as many bytes as it removed.
+3. **Fact density.** Distinct fact tokens per KB, by entry: ledger rows 36–53, grokkings 18–48, "Where the problem stands" 42 — one
+   fact token every 20–50 bytes, so there is little connective prose to remove. The *lowest* densities are "Make the gate fail" (5.3),
+   G21 (6.9), § The standard of evidence (10.6), § Delegation (11.3), § Building (13.3): the method sections, where the prose **is** the
+   payload (diagnosis, substitute channel, boundary test) and the brief and the file's header both say not to cut.
+4. **Phrase-level tightening, calibrated on G31**: 10 % with every fact kept. On the 185 KB of reference text that is a ceiling of
+   roughly 8–12 KB more (about 3–5 %), at ~7 bytes re-typed per byte saved and with a drift risk the token audit cannot see (a
+   dropped "not", "sampled", "measured"). **Not done: the hard constraint is "no fact lost", and the file was already tightened twice
+   (`fd658af`, `d0df4f82`).** It is the PO's call, priced: ~40k tokens of agent time for one milestone-close of headroom.
+5. Mechanical options priced and declined: un-backticking pure mathematics (266 safe spans, 532 B); removing bold (835 spans,
+   3.3 KB — it is the skim path through 4 KB entries); unwrapping the grokkings' hard line breaks (≈ 1.4 KB — it would wreck diffs);
+   brace-factoring the ledger's path lists (< 1 KB — it breaks `rg <path> CLAUDE.md`).
+
+## Step 5 — Introspection: where adherence or comprehension could leak
+
+* **§ Notation is now load-bearing.** `K`, `Γ_q`, `U_Q`, "usable", "sealed", "6-open", `L(F)` are read top-down by a model, so a cold
+  agent is fine; the leak is a *search habit*: `rg "UD\(𝔽" CLAUDE.md` and `rg "ℚ\(√3,√11\)" CLAUDE.md` now find only the legend, the
+  quotation of Fischer, and § The shape of the proof. The audit tool's `NORMALISE` table is the record of every re-spelling.
+* **Orientation items now point instead of telling.** An agent that reads only "Where the problem stands" no longer sees the window's
+  certificate numbers or the census's list of d. Each item kept its decision-relevant sentence (floors, what is decided, what is
+  excluded); the leak would be an agent acting on an item without dereferencing `row 69` / `G56`. The dangling-pointer check in the
+  audit tool guards the other half of that risk.
+* **The one-home rule is stated once, in the Frontier's intro.** It binds only at a milestone close, so one mention suffices; its
+  tripwire is `--dupes`, which sees literal retelling only.
+* **Nothing in a method section changed** (§ Toolchain differs by one macro, `ω(Γ_q)`), so no counter-prior rule's adherence moved.
+* **Suspected mis-stated intent, flagged not fixed:** G56 still says "five is CDCL-undecided or spectrally refused at every one" two
+  clauses after saying five is refused *by certificate* at four of the five; "Where the problem stands" item 12 says "no uniform
+  independence bound can carry it" while G59 now shows a uniform bound would close three of the six (it cannot close 23). Both are
+  the file's words, kept; both read as stale to a cold reader.
+
+## Step 6 — Verification
+
+* `tools/claude_md_fact_audit.py --self-test`: nine plants, each fires for its own reason; the faithful copy and the declared
+  re-spelling pass. `--base 12ab550d`: **PASSED** — 0 lost tokens in ten classes, all 65 grokking status tags unchanged, the three
+  PROTECTED regions (1,495 + 2,567 + 2,899 B) byte-identical, the gate sentence matching with 1004 / 5, no heading gone, no dangling
+  pointer; one reviewed allowance (`ℚ(√p,√q)²`, a spelling of Fischer's plane whose home says "the plane over ℚ(√p,√q)").
+* `python3 tools/bib_audit.py`: 0 / 0 unresolved before and after (the totals moved 243 → 247 rows because the prover is writing
+  `BIBLIOGRAPHY.md` beside me).
+* `--words` (vocabulary that vanished entirely): 8 words, each traced — it is how G57's lost attribution was found and restored.
+* **The guard that mattered was not the audit.** A must-contain guard on G56 refused my window batch because the copy of `CLAUDE.md`
+  in my context was the **pre-trim** file (`d0df4f82^`): an agent is handed the file as its parent session first loaded it, not as it is
+  on disk. Every entry that commit had touched was re-read from disk before anything was written.
+* **Not done: a behavioural A/B** (old file against new, on prompts that stress each rule). It needs agents, and this task's
+  head-count was one. No method rule changed, so what an A/B would test is comprehension of the pointers; the cheap form is to give a
+  fresh agent the new file and ask it for the best independent set found at q = 31 (row 69, reached from item 11).
+
+## Step 7 — Report
+
+**242,682 → 239,565 bytes (−3,117, −1.3 %); proxy tokens −1.6 %.** Per section: "Where the problem stands" −3,211; Grokkings
+−1,299; ledger −351; mission −247; Paths forward −233; Frontier intro −188; § Notation +2,222 (new); everything else 0 (§ Toolchain −8).
+
+**Redundancy deliberately retained.** (1) Every method section, whole. (2) The "Theory in one paragraph" at the head of the grokkings
+— it retells G1, G43, G48, G54 and row 66 in 2 KB, and is the one place a cold reader gets the whole argument in order. (3) The
+bold one-line conclusions inside long entries. (4) Item 9 ("`[Parts2020a]`'s record") and item 8's last sentence, which are *homes*
+(row 64 points at item 8; no row holds M62–M63's reproduction numbers). (5) The window's member list {23, 27, 31, 43, 47} in item 11,
+row 69, G56 and G59: four tellings of 25 bytes that make each entry readable where it stands.
+
+**Could not be compressed without loss:** everything in steps 4.3–4.4 above. **Believed to belong elsewhere, left in place:** the
+ledger's long method narratives (row 65's six side-results, row 68's rounding recipe, row 57's quaternion paragraph) are plan-file
+material; the Paths-forward table is only 28 % verbatim in `plans/FRONTIER-STUBS.md`, so it is not the mirror its heading calls it.
+
+**The rule proposed for the header** (the header paragraph is PROTECTED, so it is proposed, not made): *"One home per fact; the
+other places point. At every close run `python3 tools/claude_md_fact_audit.py --base <last close>` (nothing lost, no pointer
+dangling) and `--dupes` (nothing retold). A new recurring term gets a line in § Notation, never a second in-line definition."* The
+first sentence is already in the Frontier's intro.
+
+**The structural finding, for Kooshi.** The file is within about 5 % of its no-loss floor (≈ 228 KB) and grows ≈ 6 KB per close, so
+250,000 bytes is reached again in one or two closes whatever is compressed. What is paid per agent is 76 KB of method and orientation
+that every agent needs and 160 KB of ledger, paths and grokkings that only a hunting session needs. The options are a budget that
+tracks the ledger's growth, or a split by reader — `CLAUDE.md` keeping the method sections, § Notation, the mission, "Where the
+problem stands" and an index, with the ledger and the grokkings in files a hunting session imports — which loses nothing and cuts what
+an implementer or a prover pays by two thirds. That is a decision about what every agent must know, and it is not mine.

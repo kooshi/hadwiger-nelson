@@ -37,7 +37,8 @@ comes out whether or not there is room for it. **A paragraph tagged `[PROTECTED 
 - **Usable prime** of F: one whose residue field is 𝔽_q with q ≡ 3 (mod 4) — for q = p^f that is p ≡ 3 (mod 4) **and f odd**; then
   χ(F²) ≤ χ(Γ_q) (row 52). **L(F)**, F's *local bound*: the least chromatic number among the residue targets its conjugation-fixed
   primes supply. **The conjecture** (local–global, G48): χ(F²) = L(F) wherever L(F) ≤ 6; its **bold form** is χ(ℝ²) = 7.
-- **k-sealed**: some usable plane of F is k-colourable, so χ(F²) ≤ k. **6-open**: none is 5-colourable. **The (2-adic) wall** stands
+- **Sealed at k** (*5-sealed*, G43): some residue target of F — a usable plane, or the target at a prime above 2 — is k-colourable, so
+  χ(F²) ≤ k. **6-open**: none is 5-colourable (the wall is broken and every usable plane needs ≥ 6; over K, row 53's criterion). **The (2-adic) wall** stands
   or is broken: G35. **The window**, **the wall at six**: G56, G59.
 - **Compulsions at k colours** (row 42): `Forces G k u v` — every proper k-colouring gives u and v one colour (a *forced pair*);
   `Separated G k u v` — every one gives them different colours (a *virtual edge*).
@@ -861,7 +862,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (`√3` for its rhombi, `√11` for the twist `cos θ = 5/6`), **no field whose local bound could be 6 contains a Moser spindle.**
   Every forcer this project holds is assembled from spindles or their relatives, so G31's "a χ ≥ 6 gadget must be constructed,
   not found" acquires its sharp form: over a window field there is nothing to build *from*, and at 31 and 43 not even a triangle.
-  **The tension, in one line:** the member where our construction vocabulary could apply is **47**, which has almost no room — six
+  **The tension this creates is the milestone's, in one line:** the member where our construction vocabulary could apply is **47**, which has almost no room — six
   needs `α ≥ 369` against the certified `α ≤ 371`, a three-integer window at 99.5 % of the ceiling — while the member with room is
   **43**, a fifty-seven-integer window at 84.7 % of the ceiling, in triangle-free territory where we have no vocabulary at all.
   *Killing test: a five- or six-forcer built over a field containing neither `√3` nor `√11`, which would show the vocabulary is
