@@ -302,6 +302,15 @@ number of the finite plane**: `α(UD(𝔽₁₉, 2)) ≤ 77` and `α(UD(𝔽₂�
 (`⌊U⌋` is already `α`); at 19 and 23 it beats what a relaxation built for `α` itself had proved (80 and
 105). It uses no hand link beyond §2 and §6.
 
+**A free strengthening (owner, 2026-09-21, from the prover's Lemma T in `plans/FS66-tower-conjecture.md` §3.2, checked line by
+line):** L1 uses only that a character of exact level `≥ 2` sums over each fibre `{s(1 + p^{k−1}·i·a)}` to zero unless `s̄` lies in one
+of at most two residues — a fact about the *fibre structure* of `S_k → S_{k−1}`, not about the carry of integer addition that makes
+`ℤ/p^k` the ring it is. So L1, L2 and every certificate above hold verbatim for **every twisted cover** of the level-one plane — the
+graphs `G₂^γ` on `𝔽_p² × 𝔽_p²` with `(x, u) ~ (x + s̄, v)` iff `⟨v − u, s̄⟩ = γ(x, s̄)` for any twist `γ` (the carry gives
+`UD(ℤ/p², 2)`; `γ = 0` gives `UD(𝔽_p[ε]/ε², 2)`), and likewise at every level. The bound is therefore blind to which twist it is
+bounding: `α(G₂^γ(7)) = 686` for every `γ`, and no twist of the plane at 11, 19 or 23 admits a fourth (fifth) colour class either.
+Nothing in §1–§7 changes; this paragraph only records that the hypotheses used are weaker than the conclusion stated.
+
 **What none of this says:** anything about the ordinary (non-clopen) chromatic number of `ℚ_p²`; anything
 about a number field's plane beyond a ceiling; and nothing that would decide whether `U` is the true maximum
 — at 11 it is 0.8 % above the level-one independence number 28, and whether that gap is real is open.
