@@ -43,6 +43,8 @@ from pathlib import Path
 # (regex, replacement, reason) -- applied to BOTH versions before token extraction.
 NORMALISE: list[tuple[str, str, str]] = [
     (r"(?<=\d),(?=\d{3}(?!\d))", "", "thousands separators: 1,581 and 1581 are one number"),
+    (r"ℚ\(√3,√11\)", "K", "legend macro K := ℚ(√3,√11) (§ Notation)"),
+    (r"UD\(𝔽(_[qp]|[₀-₉]+), ?2\)", r"Γ\1", "legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)"),
 ]
 
 # token -> reason it may vanish. Keep this small and reviewed.
@@ -51,7 +53,7 @@ ALLOW: dict[str, str] = {}
 PROTECTED_TAG = "[PROTECTED — never compress"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
 MATH = set("αβγδεζηθικλμνξπρστυφχψωΓΔΘΛΞΠΣΦΨΩℚℝℤℂℕ𝔽𝔭𝔓√≤≥≠≡≈∈∉⊆⊂⊇⊄∣∤∀∃∧∨¬⟹⟸⟺→↦×·∞∅∩∪⌈⌉⌊⌋₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ⁻⁺′̄±−½∑∏")
-STRIP = ".,;:!?\"'“”‘’—–-*`|…"
+STRIP = ".,;:!?\"'“”‘’—–-*`|…~"
 
 
 def normalise(text: str, table=None) -> str:
@@ -66,6 +68,8 @@ def _balance(tok: str) -> str:
             tok = tok[1:]
         while tok.endswith(c) and tok.count(c) > tok.count(o):
             tok = tok[:-1]
+    if len(tok) > 2 and tok[0] + tok[-1] in ("()", "[]") and not any(c in tok[1:-1] for c in "()[]"):
+        tok = tok[1:-1]                                         # "(161)" and "161" are one token
     return tok
 
 
@@ -75,6 +79,8 @@ def chunks(text: str):
         for _ in range(4):
             tok = _balance(tok.strip(STRIP))
         tok = re.sub(r"-[A-Za-z][A-Za-z-]*$", "", tok)          # 1581-vertex -> 1581
+        if re.fullmatch(r"\d+(?:\.\d+)?", tok):
+            continue                                            # a bare number is the num class's business
         if tok and (any(ch.isdigit() for ch in tok) or any(ch in MATH for ch in tok)):
             yield tok
 
@@ -84,7 +90,8 @@ def facts(text: str) -> dict[str, Counter]:
     out: dict[str, Counter] = defaultdict(Counter)
     out["date"].update(re.findall(r"\b\d{4}-\d{2}-\d{2}\b", text))
     out["bib"].update(re.findall(r"`(\[[A-Za-z][A-Za-z0-9]+\])`", text))
-    out["code"].update(re.findall(r"`([^`\n]+)`", text))
+    # backticked identifiers, paths and commands; backticked MATHEMATICS is covered chunk by chunk below
+    out["code"].update(c for c in re.findall(r"`([^`\n]+)`", text) if not any(ch in MATH for ch in c))
     out["id"].update(re.findall(r"\b(?:FS-\d+|arXiv:[\d.]+|[A-Z]{1,2}(?:-[A-Z]{1,2})?-?\d+(?:\.\d+)?[a-z]?)\b", text))
     for m in re.finditer(r"\b[Rr]ows?\s+((?:\d+(?:[–-]\d+)?)(?:(?:,\s*|\s+and\s+|,\s+and\s+)\d+(?:[–-]\d+)?)*)", text):
         for n in re.findall(r"\d+", m.group(1)):
@@ -112,14 +119,14 @@ def entries(text: str) -> dict[str, str]:
     for line in text.split("\n"):
         if re.match(r"^#{1,4} ", line):
             heading = key = line.lstrip("# ").strip()
+        elif m := re.match(r"^\| [\d–]+ \| \*{0,2}(FS-\d+)", line):
+            key = f"paths {m.group(1)}"
         elif m := re.match(r"^\| (\d+) \|", line):
             key = f"row {m.group(1)}"
         elif m := re.match(r"^\* \*\*(G\d+) ", line):
             key = m.group(1)
         elif (m := re.match(r"^(\d+)\. \*\*", line)) and "problem stands" in heading:
             key = f"stands item {m.group(1)}"
-        elif m := re.match(r"^\| [\d–]+ \| \*{0,2}(FS-\d+)", line):
-            key = f"paths {m.group(1)}"
         elif line.startswith("|") and not key.startswith(("row", "paths")):
             key = heading
         elif not line.strip() and not key.startswith("G"):
@@ -169,6 +176,8 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     say(f"bytes: {len(old.encode()):,} -> {len(new.encode()):,}  ({len(new.encode()) - len(old.encode()):+,})")
     for cls in STRONG:
         lost = sorted(t for t in fo[cls] if t not in fn[cls] and t not in allow)
+        if cls == "name":   # a name survives inside a bibliography key: Cranston in [CranstonRabern2015]
+            lost = [t for t in lost if re.sub(r"['’]s$", "", t) not in n_n]
         say(f"[{cls}] {len(fo[cls])} distinct before, {len(fn[cls])} after, LOST {len(lost)}")
         for t in lost:
             say(f"    LOST {cls}: {t!r}  (was ×{fo[cls][t]})")
@@ -264,7 +273,7 @@ def self_test(text: str) -> int:
     once_bib = next(t for t, c in sorted(f["bib"].items()) if c == 1 and text.count(t) == 1)
     region = protected_regions(text)[1]
     heading = next(l for l in text.split("\n") if l.startswith("### "))
-    respell = [(r"UD\(𝔽₂₃,2\)", "Γ₂₃", "self-test macro")]
+    respell = [("ϱ63", "ρ₆₃", "self-test macro: a spelling nobody will ever put in the real table")]
     plants = [
         ("faithful copy", text, None, None, False),
         (f"one number deleted ({once_num})", text.replace(once_num, "", 1), None, "lost num", True),
@@ -272,8 +281,8 @@ def self_test(text: str) -> int:
         ("one PROTECTED byte changed", text.replace(region, region[:200] + ("x" if region[200] != "x" else "y") + region[201:], 1), None, "PROTECTED", True),
         ("gate sentence broken", text.replace("declared purchases", "declared purchase", 1), None, "gate-report", True),
         ("heading renamed", text.replace(heading, heading + " (renamed)", 1), None, "heading disappeared", True),
-        ("re-spelling WITHOUT a normalisation entry", text.replace("UD(𝔽₂₃,2)", "Γ₂₃"), None, "lost", True),
-        ("the same re-spelling WITH its entry", text.replace("UD(𝔽₂₃,2)", "Γ₂₃"), NORMALISE + respell, None, False),
+        ("re-spelling WITHOUT a normalisation entry", text.replace("ρ₆₃", "ϱ63"), None, "lost", True),
+        ("the same re-spelling WITH its entry", text.replace("ρ₆₃", "ϱ63"), NORMALISE + respell, None, False),
     ]
     bad = 0
     for name, planted, table, needle, must_fail in plants:
@@ -284,8 +293,9 @@ def self_test(text: str) -> int:
         bad += not ok
         print(f"  {'ok ' if ok else 'BAD'}  {name}: {'fired' if fired else 'passed'}"
               + (f" -- {fails[0]}" if fails else "") + ("" if right_reason else f"  [wrong reason; wanted {needle!r}]"))
-    if "UD(𝔽₂₃,2)" not in text:
-        print("  note: the re-spelling plants are vacuous here (the old spelling does not occur); they are controls on a text that has it")
+    if "ρ₆₃" not in text:
+        print("  BAD  the re-spelling plants are vacuous: 'ρ₆₃' does not occur in the text under test")
+        bad += 1
     print("SELF-TEST " + ("FAILED" if bad else "PASSED"))
     return 1 if bad else 0
 
