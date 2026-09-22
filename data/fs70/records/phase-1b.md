@@ -169,12 +169,12 @@ Single-sample, one solver, recorded as a fact about two encodings of one graph.
 | control | **SAT** | 54.59 | 3 |
 | forces 4/3 | **SAT** | 250.90 | 3 |
 | forces 2 | **SAT** | 469.48 | 3 |
-| separated i√3 | UNKNOWN at a 600 s budget | 600.69 | 3 |
+| separated i√3 | **SAT** (at 2,400 s; the 600 s attempt reached its budget) | 983.70 | 3 |
 | forces 2/3 | UNKNOWN at a 600 s budget | 660.11 | 2 + precedence |
 | forces 8/3 | UNKNOWN at a 600 s budget | 660.12 | 2 + precedence |
-| forces 4 | *running at handback (§10a)* | — | 2 + precedence |
+| forces 4 | UNKNOWN at a 600 s budget | 660.14 | 2 + precedence |
 
-**The two UNKNOWNs are facts about a budget and an encoding, never about the graph** (G21). The three-pin asks
+**Every three-pin ask at this shape is SAT, and the split is the encoding, not the pin.** The three-pin ladder cost 55 s, 251 s, 469 s and 984 s — still climbing, which is why 600 s was too tight for the fourth and why re-asking `separated i√3` at 2,400 s settled it **SAT**. The three remaining UNKNOWNs are exactly the three pins with **no common neighbour**, which therefore carry the precedence encoding; all three are SAT at sums of ≤ 4. The three-pin asks
 on this shape cost 55 s, 251 s and 469 s — a ladder that was still climbing when the 600 s budget was set — so
 600 s was simply too tight, and `separated i√3` is re-asked at 2,400 s (§10a). The two-pin asks carry the
 precedence encoding: **38,820,402 clauses and 4,834,158 variables against 33,180,554 and 3,222,772** for a
