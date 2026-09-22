@@ -5,20 +5,18 @@ the repository. Agent ids live in the session scratchpad, never here.*
 
 ## 0. First acts, in order
 
-0. **Before FS-71: read `[Fischer1994]` first-hand — the interlibrary loan arrived 2026-09-22** (Kooshi: "examine that and fold in
-   its findings, then compact again, then FS-71"). The paper: K. G. Fischer, *A planar geometric graph of chromatic number four*,
-   Congressus Numerantium 104 (1994), 73–79; its zbMATH author's summary claims an additive 4-colouring — a homomorphism to ℤ/4 — of
-   the plane over ℚ(√p,√q) for p ≡ 3, q ≡ 11 (mod 16), pq ≡ 1 (mod 32), and concludes χ(ℚ(√3,√11)²) = 4 in those words — Theorem
-   B's value, thirty-two years before this project's kernel proof. **Read it per section (G50), then fold it in the same context:**
-   (a) `BIBLIOGRAPHY.md` row `[Fischer1994]`: what it proves, what its proof rests on, read status per section, held copy under
-   `~/source/library/`; (b) `CLAUDE.md` § Publication: the SUSPENDED trigger resolved — his if the proof stands (then Theorem B's
-   *value* is prior art and ours is the kernel proof, the 𝔽₄-valued residue form, Theorem A's general form and every consumer), or
-   the suspension lifted with the defect named; (c) `LEDGER.md` row 57's credit clause; (d) `CLOSED-QUESTIONS.md` §1.1;
-   (e) `plans/STUB-theorem-B-writeup.md` (FS-20); (f) G49 gains the instance if his is a proof. Things to check while reading:
-   whether his colouring is the whole plane's or a lattice's; ℤ/4-valued against our Klein-valued 𝔽₄ map (both exist on de Grey's
-   lattice — FS-70's `po_kempe_control_K.py` found 12 of each); whether his congruence family contains anything FS-48's table or
-   FS-70's field could use (5 ≢ 11 (mod 16), so ℚ(√3,√5) is outside it); and his reference list, mined into the bibliography the
-   same day. **Then compact, then item 1.**
+0. **DONE 2026-09-22 (same day, after the compaction): `[Fischer1994]` read first-hand and folded in.** The proof stands — every
+   lemma verified by hand, the theorem on 181,160 unit vectors and his family's arithmetic on nine fields by `tools/fischer1994_check.py`
+   (the reading: `~/source/library/notes/fischer-1994-reading.md`; the scan: `~/source/library/papers/fischer-1994-…-pp73-79.pdf`).
+   `χ(ℚ(√3,√11)²) = 4` is his (December 1994): an additive `ℤ/4`-colouring of the whole plane, the Moser spindle below. Folded in:
+   `BIBLIOGRAPHY.md` (§ A row rewritten as read; the R.1 row cleared; § B and § E lines — *planar geometric graph* is his term for
+   our field plane); `CLAUDE.md` § Publication (the trigger **has not fired**), the prior-art position, the FS-20 table row, G38, G41
+   (his colouring is the exponent-4 member of the additive family — it separates the distance-2 pair `(0, 2P)` at his Moser vertex,
+   which every residue colouring identifies — and, tools-grade, the 2-adic embedding at a finite tower level), G49 (the instance);
+   `LEDGER.md` row 57's credit clause; `CLOSED-QUESTIONS.md` §1.1 (rows 2–7 posed a settled question); `plans/STUB-theorem-B-writeup.md`
+   (re-scoped banner; the write-up is Kooshi's call); `plans/FRONTIER-STUBS.md` row 14; `plans/STUB-biquadratic-table.md` (the 1994
+   upper bound at `d ≡ 11 (mod 32)`); `WORKFLOW.md` 3.2 item 8. Nothing new to mine from his references (both held and read). Fact
+   audit and `--dupes` pass; `bib_audit.py` passes. **Next: compact, then item 1.**
 1. **Read `LEDGER.md` row 76** (FS-70's close), then `CLAUDE.md` § Frontier "Where the problem stands" item 18, G68 and G69, and
    `plans/STUB-theorem-audit.md` (FS-71 — Kooshi's next milestone: every theorem every prior milestone proved outside the kernel,
    found and filed). **WORKFLOW 2.0 applies in full**: FS-71 opens with the reframe (3.1 re-grokking with `CLAUDE.md` and

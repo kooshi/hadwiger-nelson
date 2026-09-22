@@ -60,6 +60,7 @@ NORMALISE: list[tuple[str, str, str]] = [
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
     "ℚ(√p,√q)²": "row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'",
+    "SUSPENDED": "§ Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his",
     # The FS-66 stub row's phrasings (FS-66 closed 2026-09-21; the row left the ranked table and its facts moved to row 75,
     # item 17 and § Notation, which spell the same objects `UD(ℤ/p^k, 2)`, `UD(ℤ/529, 2)` and "χ(G_k) is non-increasing").
     "UD(ℤ/p²,2)": "the FS-66 stub row; § Notation now writes the tower as UD(ℤ/p^k, 2)",

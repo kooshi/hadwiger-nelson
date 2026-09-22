@@ -25,7 +25,7 @@ is `ℚ(√3, √(d/3))`). The only prime of `ℚ(√3)` above 3 is `(√3)`, re
 | `d mod 3` | primes above 3 | `1/3 ∈ R`? | `χ(ℚ(√3,√d)²)` | how |
 |---|---|---|---|---|
 | 1 | residue `𝔽₃` | no (a stable prime exists) | **3** | Theorem 3.1 (`L = 3`); the unit triangle |
-| 2, wall standing (odd `d ≡ 1, 3 (mod 8)`) | residue `𝔽₉` | **yes** | **4** | ≥ 4 by an explicit rhombus chain; ≤ 4 by the dyadic `K₄` (Cor. 6.2's argument) |
+| 2, wall standing (odd `d ≡ 1, 3 (mod 8)`) | residue `𝔽₉` | **yes** | **4** | ≥ 4 by an explicit rhombus chain; ≤ 4 by the dyadic `K₄` (Cor. 6.2's argument) — and at `d ≡ 11 (mod 32)` the upper bound is `[Fischer1994]`'s (1994), by an additive `ℤ/4` colouring of the whole plane, a second colouring beside the dyadic residue one; read with `√3d` as its 2-adic root, his functional colours every `d ≡ 1, 3 (mod 8)` sampled (`tools/fischer1994_check.py`, tools grade; G41) |
 | 2, wall broken (odd `d ≡ 5, 7 (mod 8)`) | residue `𝔽₉` | **yes** | `∈ {4, 5, 6, 7}`, `≥ 4` explicit; `= L(F)` under the conjecture | the chain; the usable primes decide `L` |
 
 Instances the record can check today: `d = 2` (Astra's graph; `χ = 4`); `d = 11` (`K`, `χ = 4` by Theorem B, and `1/3 = 2ρ + 2ρ̄ − 3`

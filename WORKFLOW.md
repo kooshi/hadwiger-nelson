@@ -104,7 +104,8 @@ advancement (Kooshi, 2026-09-22).
       same paper, and the missing three were the informative ones.
    8. **Pull the COMPLETE author listing of everyone who posed or worked the question, and search abstracts in THEIR
       vocabulary, in a reviews database** — added 2026-09-19, after FS-61's gate found `[Fischer1994]` (Congressus
-      Numerantium 104), whose author's summary states this project's Theorem B thirty-two years before we proved it. Every
+      Numerantium 104), which proves this project's Theorem B's value thirty-two years before we proved it (read and verified
+      2026-09-22). Every
       earlier gate missed it, for three reasons items 1–7 do not reach: it is in neither OpenAlex nor Semantic Scholar and
       nothing cites it, so **no citation walk can arrive at it** — pre-2000 conference proceedings mostly exist in no
       citation graph at all; its title, *A planar geometric graph of chromatic number four*, carries none of the question's

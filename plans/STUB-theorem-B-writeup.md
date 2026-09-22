@@ -1,18 +1,26 @@
-# FS-20 — The paper: one reduction, six lineages, and the first exact value past the Moser obstruction
+# FS-20 — The paper, re-scoped: one reduction, seven lineages, a 1994 answer nobody cited, and the kernel form
 
-> **BLOCKED 2026-09-19 — read `[Fischer1994]` before anything else in this stub is acted on.** FS-61's prior-art gate found
-> K. G. Fischer, *A planar geometric graph of chromatic number four*, Congressus Numerantium 104 (1994) 73–79 (Zbl 0836.05030). Its
-> zbMATH record is an author's summary with no reviewer, read first-hand by the product owner through the zbMATH API: for squarefree
-> coprime `p ≡ 3`, `q ≡ 11 (mod 16)` with `pq ≡ 1 (mod 32)` the plane over `ℚ(√p, √q)` has an additive 4-colouring (a homomorphism
-> from the group the unit vectors generate to `ℤ/4`, nonzero on every unit vector), and *"Since the graph `ℚ(√3, √11)²` contains
-> finite graphs which require four colors, it follows that the chromatic number of this graph is 4."* `p = 3`, `q = 11` meet all three
-> congruences. **That is Theorem B's value, thirty-two years before this project's proof.** The paper is print-only (HathiTrust
-> lists Michigan and Penn State, search-only — the same holders as the `[Fischer1990b]` loan); nobody here has seen it. **If the proof
-> stands, this stub's title and premise are false** — the value was not past anyone's reach, and the six later posings were of a
-> question already answered in a venue none of them, nor we, searched (G49). What would be left to write: the kernel proof; Theorem A's
-> general form, which is what `[Madore2015]` Prop. 3.9 declines to formulate and which Fischer's congruence family does not obviously
-> contain; and the comparison of his `ℤ/4`-valued colouring with our `𝔽₄`-valued residue colouring — different groups, so possibly
-> different colourings of the same plane, which would itself be worth a paragraph. **First task: the library request.**
+> **RE-SCOPED 2026-09-22 — `[Fischer1994]` is read and its proof stands; this stub's original title and premise are false.**
+> K. G. Fischer, *A planar geometric graph of chromatic number four*, Congressus Numerantium 104 (1994) 73–79, proves an additive
+> 4-colouring — a homomorphism from the group the unit vectors generate to `ℤ/4`, nonzero on every unit vector, of the **whole plane**
+> — over `ℚ(√p,√q)` for squarefree coprime `p ≡ 3`, `q ≡ 11 (mod 16)`, `pq ≡ 1 (mod 32)`, exhibits the Moser spindle (and Golomb's
+> graph) in `ℚ(√3,√11)²`, and concludes *"the chromatic number of this graph is 4"*. Read in full by the product owner; every lemma
+> verified by hand; the theorem checked on 181,160 unit vectors and his family's arithmetic on nine fields
+> (`tools/fischer1994_check.py`; the reading: `~/source/library/notes/fischer-1994-reading.md`). **So the exact value was not past
+> anyone's reach: it was answered in 1994, and the six posings from 2010 on (`CLOSED-QUESTIONS.md` §1.1) were of a question already
+> answered in a venue none of them, nor we, searched** (G49; `WORKFLOW.md` 3.2 item 8 is the repair). §1 below — *"No, and here is the
+> evidence"* — is therefore wrong in its headline and right in its method: every search it ran was a citation walk, and the paper is in no
+> citation graph. **What the paper can still be, if Kooshi wants it written** (his call; the publication trigger did not fire,
+> `CLAUDE.md` § Publication): (1) the unification — seven lineages, now with Fischer 1994 as the one that *answered* rather than posed,
+> and the record corrected (Moorhouse, Madore, Cranston–Rabern, Exoo–Ismailescu, Polymath16 and Aggarwal all asked a settled question);
+> (2) Theorem A's general form, which Fischer's family does not contain — his is a proper subfamily of the wall-standing fields A
+> four-colours (`p, q ≡ 3 (mod 8)` suffices, G35), and A reaches five at `Γ₁₁` where the additive method stops (G38); (3) the kernel
+> certificate; (4) **the two colourings compared** — his `ℤ/4`-valued (exponent 4; it separates the distance-2 pair `(0, 2P)` at his
+> Moser vertex `P`) against the `𝔽₄`-valued residue map (exponent 2; identifies every distance-2 pair), both members of G41's
+> additive family; and the reading that his map is the 2-adic embedding at a finite tower level, which the paper could prove
+> (factor `v` through `Σ/(Σ ∩ 𝔓^m)`, check finitely many classes) and which would turn his congruence family into the local
+> statement. The ban list (§4) gains his term: *planar geometric graph* is what the discipline called our object in 1994, and the
+> paper adopts it or says why not. **Everything below this banner predates the find and is kept as the record of the search.**
 
 > **Read before this milestone opens (Kooshi, 2026-09-11).** `~/source/fermats-last-theorem/HADWIGER-NELSON-DETAILED.md`
 > (commit `e87f426e`, local only — keep it unpushed) analyses Anthropic's Lean proof of Fermat's Last Theorem
@@ -50,7 +58,7 @@ Three deliverables, in this order of weight:
    Cayley structure. **This is the formulation Madore explicitly declined to write** (§2).
 3. **The exact value.** `χ(ℚ(√3,√11)²) = 4`, closing `[Madore2015]`'s `4 ≤ χ ≤ 5`. Everything is kernel-checked.
 
-## 1. The search: is the exact value known? — **No, and here is the evidence (re-run 2026-09-09)**
+## 1. The search: is the exact value known? — **the 2026-09-09 answer was "No"; the true answer is YES, `[Fischer1994]` (see the banner)**
 
 Kooshi: *"are we sure no one has found this? Search for the claim exactly."*
 
