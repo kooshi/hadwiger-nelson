@@ -1,0 +1,48 @@
+[
+ {
+  "ask": "P4_forces_hmin",
+  "pair": [
+   [
+    0,
+    2,
+    0,
+    2
+   ],
+   [
+    2,
+    2,
+    2,
+    2
+   ]
+  ],
+  "verdict": "UNSAT",
+  "expected": "UNSAT",
+  "seconds": 5.8,
+  "common_neighbours": 64,
+  "vertices": 65536,
+  "edges": 6291456
+ },
+ {
+  "ask": "P4_forces_two",
+  "pair": [
+   [
+    2,
+    0,
+    0,
+    0
+   ],
+   [
+    2,
+    0,
+    0,
+    0
+   ]
+  ],
+  "verdict": "SAT",
+  "expected": "SAT",
+  "seconds": 6.0,
+  "common_neighbours": 64,
+  "vertices": 65536,
+  "edges": 6291456
+ }
+]

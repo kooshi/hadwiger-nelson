@@ -1,0 +1,86 @@
+{
+ "spec": "group6:u3:2+zeta6:rho15",
+ "rank": 6,
+ "g": 54,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": false,
+   "vertices": 64,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 3,
+   "admissible": false,
+   "vertices": 729,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 4,
+   "admissible": false,
+   "vertices": 4096,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "vertices": 15625,
+   "edges": 421875,
+   "avg_degree": 54.0,
+   "connection_set": 54,
+   "verdict": "SAT",
+   "seconds": 0.11,
+   "cnf_sha256": "76648b7d7fa91bfa1753ff7767bc52318107b4c47ba38e79d66e847aa48dac37",
+   "triangle_pinned": true,
+   "clauses": 1703128,
+   "monochromatic_edges": 0,
+   "gapped_vertices": 1250,
+   "gap_at_origin": [
+    3
+   ],
+   "non_adjacent_differences": 15570,
+   "differences_with_shared_gap": 1249,
+   "forces_closed_by_row66": true,
+   "separated_closed_by_row66": false
+  },
+  {
+   "N": 6,
+   "admissible": false,
+   "vertices": 46656,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 7,
+   "admissible": true,
+   "vertices": 117649,
+   "edges": 2117682,
+   "avg_degree": 36.0,
+   "connection_set": 36,
+   "verdict": "UNSAT",
+   "seconds": 63.93,
+   "cnf_sha256": "d77ef241be7a9bec4e1f7785af879e45290f0d737783a920d6a922e017b9a257",
+   "triangle_pinned": true,
+   "clauses": 8588380
+  },
+  {
+   "N": 8,
+   "admissible": true,
+   "vertices": 262144,
+   "edges": 4718592,
+   "avg_degree": 36.0,
+   "connection_set": 36,
+   "verdict": "SAT",
+   "seconds": 5.23,
+   "cnf_sha256": "65dc79e427789d7f448f00476214834a627b4be31d9d4a959b196e9f4429841a",
+   "triangle_pinned": true,
+   "clauses": 19136515,
+   "monochromatic_edges": 0,
+   "gapped_vertices": 0,
+   "gap_at_origin": [],
+   "non_adjacent_differences": 262107,
+   "differences_with_shared_gap": 0,
+   "forces_closed_by_row66": false,
+   "separated_closed_by_row66": false
+  }
+ ]
+}

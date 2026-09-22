@@ -1,0 +1,680 @@
+[
+ {
+  "lattice": "twounits:14",
+  "rank": 8,
+  "g": 212,
+  "saturation_complete": false,
+  "soundness": "RIGID is sound for every graph in the lattice; ESCAPE is sound only for graphs built from these generators (the saturation was unaffordable)",
+  "proper_Z4": 48,
+  "targets_in_lattice": {
+   "2": true,
+   "4/3": true,
+   "8/3": true,
+   "4": true,
+   "4/7": true,
+   "4/sqrt3": true,
+   "2/3": true
+  },
+  "per_target": {
+   "2": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   },
+   "4/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "8/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/7": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/sqrt3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "2/3": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   }
+  },
+  "reach_ranks": [
+   {
+    "phi": [
+     0,
+     1,
+     1,
+     0,
+     0,
+     1,
+     3,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     80,
+     80
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     52,
+     52
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     80,
+     80
+    ]
+   },
+   {
+    "phi": [
+     0,
+     1,
+     1,
+     0,
+     2,
+     1,
+     1,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     80,
+     80
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     52,
+     52
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     80,
+     80
+    ]
+   },
+   {
+    "phi": [
+     0,
+     1,
+     1,
+     3,
+     0,
+     0,
+     2,
+     0
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     52,
+     52
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     108,
+     108
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     52,
+     52
+    ]
+   },
+   {
+    "phi": [
+     0,
+     1,
+     1,
+     3,
+     2,
+     0,
+     2,
+     0
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     52,
+     52
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     108,
+     108
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     52,
+     52
+    ]
+   },
+   {
+    "phi": [
+     0,
+     1,
+     3,
+     0,
+     0,
+     3,
+     3,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     80,
+     80
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     52,
+     52
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     80,
+     80
+    ]
+   },
+   {
+    "phi": [
+     0,
+     1,
+     3,
+     0,
+     2,
+     3,
+     1,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     80,
+     80
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     52,
+     52
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     80,
+     80
+    ]
+   }
+  ],
+  "seconds": 0.5
+ },
+ {
+  "lattice": "twounits:30",
+  "rank": 8,
+  "g": 660,
+  "saturation_complete": false,
+  "soundness": "RIGID is sound for every graph in the lattice; ESCAPE is sound only for graphs built from these generators (the saturation was unaffordable)",
+  "proper_Z4": 48,
+  "targets_in_lattice": {
+   "2": true,
+   "4/3": true,
+   "8/3": true,
+   "4": true,
+   "4/7": true,
+   "4/sqrt3": true,
+   "2/3": true
+  },
+  "per_target": {
+   "2": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   },
+   "4/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "8/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/7": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/sqrt3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "2/3": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   }
+  },
+  "reach_ranks": [
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     1,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     1,
+     3,
+     1,
+     1,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     3,
+     1,
+     3,
+     3,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     3,
+     3,
+     3,
+     3,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   },
+   {
+    "phi": [
+     0,
+     2,
+     0,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   },
+   {
+    "phi": [
+     0,
+     2,
+     0,
+     1,
+     3,
+     1,
+     1,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     260,
+     260
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     140,
+     140
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     260,
+     260
+    ]
+   }
+  ],
+  "seconds": 2.9
+ },
+ {
+  "lattice": "twounits:42",
+  "rank": 8,
+  "g": 1220,
+  "saturation_complete": false,
+  "soundness": "RIGID is sound for every graph in the lattice; ESCAPE is sound only for graphs built from these generators (the saturation was unaffordable)",
+  "proper_Z4": 48,
+  "targets_in_lattice": {
+   "2": true,
+   "4/3": true,
+   "8/3": true,
+   "4": true,
+   "4/7": true,
+   "4/sqrt3": true,
+   "2/3": true
+  },
+  "per_target": {
+   "2": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   },
+   "4/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "8/3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/7": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "4/sqrt3": {
+    "escapes": 0,
+    "rigid_colourings": 48,
+    "in_reach_all_b": 48,
+    "rigid": true
+   },
+   "2/3": {
+    "escapes": 32,
+    "rigid_colourings": 16,
+    "in_reach_all_b": 16,
+    "rigid": false
+   }
+  },
+  "reach_ranks": [
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     1,
+     1,
+     1,
+     1,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     1,
+     3,
+     1,
+     1,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     3,
+     1,
+     3,
+     3,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   },
+   {
+    "phi": [
+     0,
+     0,
+     0,
+     3,
+     3,
+     3,
+     3,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   },
+   {
+    "phi": [
+     0,
+     2,
+     0,
+     1,
+     1,
+     1,
+     1,
+     1
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   },
+   {
+    "phi": [
+     0,
+     2,
+     0,
+     1,
+     3,
+     1,
+     1,
+     3
+    ],
+    "reach_rank_b1": 8,
+    "sizes_b1": [
+     472,
+     472
+    ],
+    "reach_rank_b2": 8,
+    "sizes_b2": [
+     276,
+     276
+    ],
+    "reach_rank_b3": 8,
+    "sizes_b3": [
+     472,
+     472
+    ]
+   }
+  ],
+  "seconds": 8.9
+ }
+]

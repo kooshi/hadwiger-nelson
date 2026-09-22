@@ -1,0 +1,102 @@
+{
+ "24": {
+  "denominator": 24,
+  "rank": 4,
+  "hnf": [
+   [
+    -1,
+    50,
+    10,
+    -23
+   ],
+   [
+    0,
+    5,
+    -21,
+    4
+   ],
+   [
+    0,
+    0,
+    2,
+    20
+   ],
+   [
+    0,
+    0,
+    0,
+    2
+   ]
+  ],
+  "index_in_Z4": 20,
+  "unit_vectors": 46,
+  "unit_vectors_of_E_prime_at_this_denominator": 46,
+  "two_units": 6,
+  "wall_breaking": 40,
+  "three_units": 10,
+  "three_adic_gate": "pass",
+  "half_in_lattice": true,
+  "third_in_lattice": true,
+  "additive_four_colouring": "none (1/2 in Lambda: the plan section 3.4 theorem)",
+  "targets_in_lattice": {
+   "2": true,
+   "4/3": true,
+   "8/3": true,
+   "4": true,
+   "2/3": true,
+   "4/7": false,
+   "1": true
+  },
+  "seconds": 0.1
+ },
+ "48": {
+  "denominator": 48,
+  "rank": 4,
+  "hnf": [
+   [
+    -1,
+    215,
+    13,
+    -41
+   ],
+   [
+    0,
+    5,
+    -3,
+    -12
+   ],
+   [
+    0,
+    0,
+    2,
+    -100
+   ],
+   [
+    0,
+    0,
+    0,
+    -2
+   ]
+  ],
+  "index_in_Z4": 20,
+  "unit_vectors": 66,
+  "unit_vectors_of_E_prime_at_this_denominator": 66,
+  "two_units": 6,
+  "wall_breaking": 60,
+  "three_units": 14,
+  "three_adic_gate": "pass",
+  "half_in_lattice": true,
+  "third_in_lattice": true,
+  "additive_four_colouring": "none (1/2 in Lambda: the plan section 3.4 theorem)",
+  "targets_in_lattice": {
+   "2": true,
+   "4/3": true,
+   "8/3": true,
+   "4": true,
+   "2/3": true,
+   "4/7": false,
+   "1": true
+  },
+  "seconds": 0.7
+ }
+}
