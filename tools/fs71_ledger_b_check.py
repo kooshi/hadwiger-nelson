@@ -40,7 +40,7 @@ def parse_entries(text: str, prefix: str) -> dict[str, dict]:
         body = text[m.end(): matches[i + 1].start() if i + 1 < len(matches) else len(text)]
         body = body.split("\n## ")[0]  # an entry ends at the next section heading
         fields = {f: (f in body) for f in FIELDS}
-        out[full] = {"grade": m.group("grade"), "title": m.group("title"), "fields": fields}
+        out[full] = {"grade": m.group("grade"), "title": m.group("title"), "fields": fields, "home": prefix}
     return out
 
 
@@ -101,12 +101,8 @@ def check(entries: dict[str, dict], rows: dict[str, str], placeholders: list[str
 
 def census(entries: dict[str, dict]) -> None:
     by_prefix: dict[str, int] = {}
-    for k in entries:
-        by_prefix[k.rsplit("-", 1)[0] if re.search(r"-[A-Z]+\d*(-[A-Z])?$", k) else k.split("-")[0]] = 0
-    for k in entries:
-        p = k.split("-T")[0] if "-T" in k else k.rsplit("-", 1)[0]
-        by_prefix[p] = by_prefix.get(p, 0) + 1
-    by_prefix = {k: v for k, v in by_prefix.items() if v}
+    for v in entries.values():
+        by_prefix[v["home"]] = by_prefix.get(v["home"], 0) + 1
     print("census:", sum(by_prefix.values()), "theorems in", len(by_prefix), "derivation files:",
           ", ".join(f"{k}={v}" for k, v in sorted(by_prefix.items())))
 
@@ -129,7 +125,7 @@ def self_test() -> int:
     if not entries or not rows:
         print("self-test: nothing to plant on"); return 1
     # Plant 1: an entry with no row.  Plant 2: a row with no entry.  Plant 3: a missing field (strict).
-    e2 = dict(entries); e2["FS99-T1"] = {"grade": "hand", "title": "planted", "fields": {f: True for f in FIELDS}}
+    e2 = dict(entries); e2["FS99-T1"] = {"grade": "hand", "title": "planted", "fields": {f: True for f in FIELDS}, "home": "FS99"}
     r2 = dict(rows); r2["FS98-T7"] = "FS-98"
     k0 = next(iter(entries))
     e2[k0] = {**entries[k0], "fields": {**entries[k0]["fields"], "*Kernel:*": False}}
