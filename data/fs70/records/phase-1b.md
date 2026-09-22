@@ -164,7 +164,23 @@ Single-sample, one solver, recorded as a fact about two encodings of one graph.
 
 ### 4.3 L6 at sums of ≤ 5 — 805,693 points, 6,885,174 edges, degree 17.09
 
-PLACEHOLDER-K5-TABLE
+| pin | verdict | solver seconds | pins |
+|---|---|---|---|
+| control | **SAT** | 54.59 | 3 |
+| forces 4/3 | **SAT** | 250.90 | 3 |
+| forces 2 | **SAT** | 469.48 | 3 |
+| separated i√3 | UNKNOWN at a 600 s budget | 600.69 | 3 |
+| forces 2/3 | UNKNOWN at a 600 s budget | 660.11 | 2 + precedence |
+| forces 8/3 | *running at handback (§10a)* | — | 2 + precedence |
+| forces 4 | *running at handback (§10a)* | — | 2 + precedence |
+
+**The two UNKNOWNs are facts about a budget and an encoding, never about the graph** (G21). The three-pin asks
+on this shape cost 55 s, 251 s and 469 s — a ladder that was still climbing when the 600 s budget was set — so
+600 s was simply too tight, and `separated i√3` is re-asked at 2,400 s (§10a). The two-pin asks carry the
+precedence encoding: **38,820,402 clauses and 4,834,158 variables against 33,180,554 and 3,222,772** for a
+three-pin ask on the same 805,693 vertices, and at that size the encoding is beyond a ten-minute single-solver
+attempt. Both are recorded with the budget, the solver and the CNF hash, and neither is reported as a property
+of L6.
 
 ### 4.4 The 14-core of the `k = 5` ball — 217,015 points, 2,059,614 edges, degree 18.98
 
@@ -384,6 +400,22 @@ python3 tools/fs70_arena.py build 'group6:u3:2' 4 --rot rho15 --out build/fs70/a
 ```
 
 **The three tools' self-tests and plants, all green:** `fs70_fabric` 5 plants, `fs70_ask` 3, `fs70_arena` 4.
+
+---
+
+## 10a. Still in flight at handback
+
+Left running deliberately, each with a self-describing marker in `data/fs70/inflight/` carrying its pid, its
+process group and the command that resumes it; each writes its own row to `data/fs70/asks.jsonl` at its verdict,
+or `UNKNOWN` at its budget. **Killing any of them costs solver time and no result** — the graphs and the CNFs
+are on disk.
+
+| what | where its verdict lands | budget | note |
+|---|---|---|---|
+| **L3's `k = 4` control** (1,886,761 points, degree 15.40) with `kissat --sat` | `asks.jsonl`; log `build/fs70/w4-sat-pass.log` | 2,400 s | the cube pass the plan owed (the owner's ruling 2), attempted first in the **satisfiable** direction — phase 1's default-configuration run on this same formula reached 1,500 s with no verdict. **L2's `k = 4` control runs next in the same script**, and was still queued at handback. |
+| **L6 at ≤ 5, `forces 8/3`** and then `forces 4` | `asks.jsonl`; log `build/fs70/L6-w5-asks.log` | 600 s each | the two-pin encoding at 805,693 vertices; `forces 2/3` already reached its budget, so these two most likely will too |
+| **L6 at ≤ 5, `separated i√3`, re-asked at 2,400 s** | `asks.jsonl`; log `build/fs70/L6-w5-sep-long.log` | 2,400 s | the 600 s attempt reached its budget on a ladder that was still climbing (55 → 251 → 469 s) |
+| **the two cross-checks of §9a** | `build/fs70/crosscheck-owner.log`, `build/fs70/crosscheck-geom.log` | — | neither is load-bearing: the lattice-against-geometry agreement is already established on the arena's 54,433 points by the same machinery (§5), and the owner's script is the owner's own instrument. **A defect of mine, recorded:** I first launched both writing only to a session scratchpad that does not outlive the session — a checkpoint one handback away from nothing. They were killed by pid, verified absent from `ps`, and relaunched writing to those two files. |
 
 ---
 
