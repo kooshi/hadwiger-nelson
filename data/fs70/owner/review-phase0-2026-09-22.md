@@ -34,8 +34,9 @@ none of it shared with `tools/fs70_*`.*
 
 ## 3. Two things I noticed that the record does not say
 
-* **`δ = 2/3` is chainable with three copies** (`3/2 = 1 + v + v̄`; the record's chain pool stopped at denominator 8 and length 4
-  and did not list it) — **but it is additively dead on 2-unit fabric**, and I wrote the opposite in this note's first draft: on a
+* **`δ = 2/3` is chainable with three copies** (`3/2 = 1 + v + v̄`; the record's chain enumeration finds it — the `targets` column
+  omits it because the `Λ_forced` filter drops it, as the implementer pointed out after reading this note's first draft, which had
+  blamed the pool) — **and it is additively dead on 2-unit fabric**; I had written the opposite in that first draft: on a
   lattice with `1/3`, `3φ(1/3) = φ(1)` gives `φ(1/3) = 3φ(1)`, so `φ(2/3) = 6φ(1) = 2φ(1) = φ(2)`, and the two-thirds of the
   colourings with `φ(1)` odd separate `0` from `2/3` exactly as they separate `0` from `2` (`2/3 ≡ 2 (mod 4Λ)`). It joins `eq 2` on
   the wall-breaking lattices L2/L3, where no additive colouring exists. Caught by re-deriving before ruling — the direction the error
