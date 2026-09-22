@@ -504,5 +504,21 @@
   "sha256_uncompressed": "c4b757ce6fcf6e0233750b043578e2ed1c098e5f7c206e01985832375588c366",
   "bytes_uncompressed": 2276112,
   "bytes_gz": 467784
+ },
+ {
+  "sha": "e6389b5d8ee5a6aab03d232d",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5
+  },
+  "pin": "separated",
+  "delta": "isqrt3",
+  "source": "build/fs70/asks/L6-w5-separated-isqrt3-long/colouring.json",
+  "file": "L6-w5-separated-isqrt3-long.colouring.json.gz",
+  "sha256_uncompressed": "31577ce7158f1ebdaefb75c14b784128028610d9c416d1ca4f2dc7a0b7234f5f",
+  "bytes_uncompressed": 8751565,
+  "bytes_gz": 1889297
  }
 ]
