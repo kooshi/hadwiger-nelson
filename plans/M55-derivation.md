@@ -85,9 +85,13 @@ greedy peel; the fact is textbook, e.g. any introductory graph-colouring text) �
 noticing the *forced-pair-localizing* reading ("nothing outside the core is ever visible"), which is D1's
 lens applied to degree rather than to a specific forced pair. zbMATH `ti:"degeneracy" & ab:"graph coloring" &
 ab:"greedy"` — standard, many hits, not searched exhaustively since the base fact is textbook. *Kernel:*
-**kernel** — `extends_compl_singleton_of_degree_le` (`Absorb.lean`); the iterated-peeling form (the
-`(k+1)`-core as a fixed point) is **not** separately stated as a Lean theorem, only the single-vertex step —
-declined as a further target, since no consumer has needed the iterated form as a standalone declaration.
+**kernel, and the ITERATED form is kernel too — corrected from an earlier pass of this entry that missed it.**
+`extends_of_extensionOrder` (`Absorb.lean`) is exactly the iterated-peeling statement (`ExtensionOrder G k A L`:
+a greedy order adding vertices of degree `≤ k` into `A` one at a time; if the order exhausts the complement,
+`A` extends); `extends_compl_singleton_of_degree_le` is its one-vertex instance, proved FROM
+`extends_of_extensionOrder` at `L = [b]` (`Absorb.lean` lines 359–376), not a separate primitive — the
+`data/m55/README.md` names `extends_of_extensionOrder` as "greedy absorption (the `k`-core)" in exactly these
+words, which is what caught the miss.
 
 **M55-T5 — D4: symmetric copies force only through fused points. [hand; the M55 implementer]** Let `G′` be two
 disjoint copies of `G` joined by chords `(a, a′)` for `a` in a set `S` (a spindle's *ring* chords, no fusion).
@@ -185,7 +189,7 @@ consumer yet.
 | M55-T1 | kernel (`Extends`, `Extends.forces_iff`, `Extends.separated_iff`, `Extends.not_forces_of_colorable`, `Extends.not_separated_of_colorable`) |
 | M55-T2 | kernel (`extends_of_hubs`, `extends_of_hub_matching`, `extends_of_matching`) — G40's cited target |
 | M55-T3 | kernel (`extends_of_repaint`) — not the spare-colour lemma's home; see cross-batch note |
-| M55-T4 | kernel (`extends_compl_singleton_of_degree_le`); the iterated-core form declined |
+| M55-T4 | kernel (`extends_of_extensionOrder`, the general iterated form; `extends_compl_singleton_of_degree_le` its one-vertex instance) |
 | M55-T5 | kernel (`symCopy`, `symCopy.coloringOfPerm`, `extends_symCopy`) |
 | M55-T6 | declined — ad hoc field computation, no Lean consumer |
 | D6(a),(b),(d) (no id) | not applicable — readings/measurements, not filed in § B |
