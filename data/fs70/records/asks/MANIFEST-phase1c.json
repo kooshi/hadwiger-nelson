@@ -2178,6 +2178,31 @@
    "file": "fs70-1c-k4-psi-9985_-7959_-5682_-6682_9150_-334_-11023_1947_43236.colouring.json.gz"
   },
   {
+   "arena": "k5-psi--11_0_0_0_0_0_0_3_16",
+   "psi": [
+    -11,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    3,
+    16
+   ],
+   "psi_str": "(-11/16, 3/16*sqrt15)",
+   "k": 5,
+   "points": 272041,
+   "edges": 2099208,
+   "cross": 72,
+   "verdict": "SAT",
+   "colours_used": 4,
+   "monochromatic_edges": 0,
+   "proper": true,
+   "sha256_uncompressed": "de404b9a96d0511aa431b07f9592bc77c904fadc7cb14ba481c6fc21a97f25f3",
+   "file": "fs70-1c-k5-psi--11_0_0_0_0_0_0_3_16.colouring.json.gz"
+  },
+  {
    "arena": "k5-psi--75_3_-3_-5_-3_25_-15_-3_96",
    "psi": [
     -75,

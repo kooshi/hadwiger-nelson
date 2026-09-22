@@ -1,0 +1,19 @@
+--- faithful twin
+fs70_rotations selftest OK
+  rho15's arena, rebuilt here: 54,433 points, 352,326 edges, 78 cross = 30 diagonal + 48 off-diagonal, 1 shared point -- phase 1b's numbers, by an independent route
+  the scan (denominators <= 8): 19 classes of 140 rotations, rho15 among them with that same anatomy (37.7s)
+  the (z+s)/w sweep on 4141 base points with 2020 unit vectors: 1,268,112 hits, 22,129 bins, 897 classes (14.6s); rho15's lower bound 32 against the exact 90
+  the lattice-only pool: 220 classes, every one commensurate, rho15 absent
+--- plant psi_digit: a check must refuse it
+    refused: (7/8 + 1/8*sqrt3, 1/8*sqrt15) is not a unit vector (|.|^2 = 67/64 + 7/32*sqrt3): it is not a rotation of this plane and no arena can be built on it
+--- plant norm_match_loose: a check must refuse it
+    refused: 8772 of 30901 bins produced a psi that is NOT a unit vector: the norm match is not exact (this is what --plant norm_match_loose does)
+--- plant centre_uncorrected: a check must refuse it
+    refused: AssertionError: the sweep is claimed to be a LOWER bound on the pair count: it reads 92 against the exact 90
+--- plant geom_tol_tight: a check must refuse it
+    refused: AssertionError: zeta6 maps the base onto itself, so the join must find 42660 pairs (twice its 21330 edges); it found 10288
+--- plant pool_truncated: a check must refuse it
+    refused: AssertionError: the scan did NOT find rho15: the one rotation this milestone has already built an arena on
+--- plant grid_radius_short: a check must refuse it
+    refused: AssertionError: zeta6 maps the base onto itself, so the join must find 42660 pairs (twice its 21330 edges); it found 42647
+all 6 plants fired; faithful twin green

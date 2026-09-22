@@ -19,7 +19,8 @@ Q(sqrt3, sqrt5).  This driver HALTS on one rather than continuing down the list.
 Each ask appends its row to `data/fs70/asks.jsonl` at its verdict and writes its colouring beside it, so a kill
 costs the arena currently being built (seconds) and nothing already decided.  Re-running skips what is done.
 
-  python3 tools/fs70_rot_asks.py LIST.jsonl [--top N] [--k K] [--budget S] [--out-root DIR] [--min-cross N]
+  python3 tools/fs70_rot_asks.py LIST.jsonl [--top N] [--k K] [--budget S] [--out-root DIR]
+                                  [--min-cross N] [--single-flags '--sat']
 """
 import json
 import os
@@ -54,6 +55,10 @@ def main(argv):
     budget = opt('--budget', 600, int)
     root = opt('--out-root', 'build/fs70/rot/asks')
     mincross = opt('--min-cross', 1, int)
+    # kissat's default configuration is tuned for refutation; these arenas are two four-colourable halves
+    # joined by ~80 edges and are certainly satisfiable, so `--sat` (= --target=2 --restartint=50) is the
+    # right aim.  Phase 1b measured the same on its k=5 ball (its record, section 10a).
+    sflags = opt('--single-flags')
 
     rows = [json.loads(l) for l in open(path)]
     header = rows[0]['header'] if 'header' in rows[0] else {}
@@ -90,6 +95,8 @@ def main(argv):
                 f'{idx+1} of the rotation list by off-diagonal cross edges.')
         cmd = [sys.executable, '-u', os.path.join('tools', 'fs70_ask.py'), 'run', d, 'control',
                '--single-budget', str(budget), '--no-cube', '--out', os.path.join(d, 'ask'), '--note', note]
+        if sflags:
+            cmd += ['--single-flags', sflags]
         print(f'--- [{idx+1}/{min(top,len(live))}] {r["psi_str"]}: {meta["points"]} points, {meta["edges"]} '
               f'edges, degree {meta["avg_degree"]:.2f}, cross {meta["arena"]["cross"]}', flush=True)
         before = sum(1 for _ in open(ASKS)) if os.path.exists(ASKS) else 0

@@ -1,0 +1,74 @@
+HEADER: {"base_spec": "group6:u3:2", "base_k": 4, "base_points": 27217, "pool": "atlas", "pool_size": 2020, "classes": 158, "classes_with_unequal_counts": 0, "seconds": 449.3}
+
+3499 symmetry classes
+  with at least one cross edge:      2625
+  trivial (psi a sixth root of 1):   1
+  2-unit  (DEAD by the residue map): 3290   of which with a cross edge: 2538
+  wall-breaking (depth2 != 0):       209   of which with a cross edge: 87
+  commensurate (psi in the CM field):3008   of which with a cross edge: 2495
+  type-M (|1-psi|^2 = 1/n):          1
+  with a diagonal circle:            6
+
+max cross edges by 2-adic depth (the wall costs coupling):
+   depth -11:    1 classes with a cross edge, largest      12
+   depth  -6:    2 classes with a cross edge, largest      72
+   depth  -5:    5 classes with a cross edge, largest      60
+   depth  -4:    4 classes with a cross edge, largest      60
+   depth  -3:    5 classes with a cross edge, largest      36
+   depth  -2:   15 classes with a cross edge, largest      48
+   depth  -1:   15 classes with a cross edge, largest      48
+   depth   0: 2538 classes with a cross edge, largest    2712
+   depth   1:   18 classes with a cross edge, largest      36
+   depth   2:    7 classes with a cross edge, largest      36
+   depth   3:    9 classes with a cross edge, largest      60
+   depth   4:    1 classes with a cross edge, largest      78
+   depth   5:    4 classes with a cross edge, largest      84
+   depth   6:    1 classes with a cross edge, largest      12
+
+THE TOP TWENTY BY OFF-DIAGONAL CROSS EDGES (all classes)
+| # | psi | den | 2-adic depth | 2-unit | CM | type-M n | cross | diagonal | off-diagonal |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `(11/14, -5/14*sqrt3)` | 14 | 0 | yes | yes | - | 2712 | 48 | 2664 |
+| 2 | `(-2/7, -3/7*sqrt5)` | 7 | 0 | yes | yes | - | 2004 | 0 | 2004 |
+| 3 | `(13/49 - 9/98*sqrt15, -3/49*sqrt3 - 39/98*sqrt5)` | 98 | 0 | yes | yes | - | 1896 | 0 | 1896 |
+| 4 | `(-2/21 - 4/21*sqrt15, 8/21*sqrt3 - 1/21*sqrt5)` | 21 | 0 | yes | yes | - | 1728 | 0 | 1728 |
+| 5 | `(-1/7 - 4/21*sqrt15, -2/21*sqrt3 + 2/7*sqrt5)` | 21 | 0 | yes | yes | - | 1476 | 0 | 1476 |
+| 6 | `(-4/7 - 2/21*sqrt15, -8/21*sqrt3 + 1/7*sqrt5)` | 21 | 0 | yes | yes | - | 1404 | 0 | 1404 |
+| 7 | `(-11/21, -8/21*sqrt5)` | 21 | 0 | yes | yes | - | 1356 | 0 | 1356 |
+| 8 | `(-19/21, -4/21*sqrt5)` | 21 | 0 | yes | yes | - | 1272 | 0 | 1272 |
+| 9 | `(-247/294 - 2/49*sqrt15, 19/98*sqrt3 - 26/147*sqrt5)` | 294 | 0 | yes | yes | - | 1188 | 0 | 1188 |
+| 10 | `(-121/294 - 20/147*sqrt15, 55/294*sqrt3 - 44/147*sqrt5)` | 294 | 0 | yes | yes | - | 1116 | 0 | 1116 |
+| 11 | `(-8/21 - 10/63*sqrt15, 16/63*sqrt3 - 5/21*sqrt5)` | 63 | 0 | yes | yes | - | 900 | 0 | 900 |
+| 12 | `(-1/63 - 16/63*sqrt15, 4/63*sqrt3 - 4/63*sqrt5)` | 63 | 0 | yes | yes | - | 804 | 0 | 804 |
+| 13 | `(-13/14 - 1/63*sqrt15, 13/126*sqrt3 - 1/7*sqrt5)` | 126 | 0 | yes | yes | - | 744 | 0 | 744 |
+| 14 | `(-62/63, -5/63*sqrt5)` | 63 | 0 | yes | yes | - | 696 | 0 | 696 |
+| 15 | `(-58/63, -11/63*sqrt5)` | 63 | 0 | yes | yes | - | 624 | 0 | 624 |
+| 16 | `(-377/441 - 11/294*sqrt15, 29/147*sqrt3 - 143/882*sqrt5)` | 882 | 0 | yes | yes | - | 552 | 0 | 552 |
+| 17 | `(-68/109 - 21/218*sqrt15, 28/109*sqrt3 - 51/218*sqrt5)` | 218 | 0 | yes | yes | - | 540 | 0 | 540 |
+| 18 | `(341/602 - 27/301*sqrt15, -99/602*sqrt3 - 93/301*sqrt5)` | 602 | 0 | yes | yes | - | 492 | 0 | 492 |
+| 19 | `(-403/441 - 5/294*sqrt15, -31/147*sqrt3 + 65/882*sqrt5)` | 882 | 0 | yes | yes | - | 492 | 0 | 492 |
+| 20 | `(-272/301 - 6/301*sqrt15, 32/301*sqrt3 - 51/301*sqrt5)` | 301 | 0 | yes | yes | - | 492 | 0 | 492 |
+
+THE TOP TWENTY WALL-BREAKING, NON-TRIVIAL (87 such classes) -- the ones that get asked
+| # | psi | den | 2-adic depth | 2-unit | CM | type-M n | cross | diagonal | off-diagonal |
+|---|---|---|---|---|---|---|---|---|---|
+| 1 | `(-25/32 + 1/32*sqrt3 - 1/32*sqrt5 - 5/96*sqrt15, -1/32 + 25/96*sqrt3 - 5/32*sqrt5 - 1/32*sqrt15)` | 96 | 5 | no | no | - | 84 | 0 | 84 |
+| 2 | `(-11/16, 3/16*sqrt15)` | 16 | -6 | no | no | - | 72 | 12 | 60 |
+| 3 | `(-7/12 - 5/24*sqrt3, 7/24*sqrt5 - 1/12*sqrt15)` | 24 | -4 | no | no | - | 60 | 0 | 60 |
+| 4 | `(-3/8 - 5/24*sqrt3, 3/8*sqrt5 - 1/24*sqrt15)` | 24 | 3 | no | no | - | 60 | 0 | 60 |
+| 5 | `(-1/48*sqrt5 - 35/144*sqrt15, 7/48 - 25/144*sqrt3)` | 144 | -5 | no | no | - | 60 | 0 | 60 |
+| 6 | `(7/8, -1/8*sqrt15)` | 8 | 4 | no | no | 4 | 78 | 30 | 48 |
+| 7 | `(-1/4*sqrt15, -1/4)` | 4 | -2 | no | no | - | 48 | 0 | 48 |
+| 8 | `(-1/12*sqrt5 - 1/6*sqrt15, -1/6 + 5/12*sqrt3)` | 12 | -2 | no | no | - | 48 | 0 | 48 |
+| 9 | `(-7/8 - 5/72*sqrt3, 1/8*sqrt5 - 7/72*sqrt15)` | 72 | 3 | no | no | - | 48 | 0 | 48 |
+| 10 | `(-41/244 - 33/244*sqrt3 + 9/122*sqrt5 - 12/61*sqrt15, -6/61 - 29/122*sqrt3 + 15/244*sqrt5 + 21/244*sqrt15)` | 244 | -1 | no | no | - | 48 | 0 | 48 |
+| 11 | `(-13/184 - 15/184*sqrt3 + 3/184*sqrt5 - 39/184*sqrt15, 45/184 + 13/184*sqrt3 - 39/184*sqrt5 + 1/184*sqrt15)` | 184 | -1 | no | no | - | 48 | 0 | 48 |
+| 12 | `(-29/122 + 45/488*sqrt3 - 9/122*sqrt5 - 87/488*sqrt15, -135/488 + 29/122*sqrt3 - 87/488*sqrt5 - 3/122*sqrt15)` | 488 | -2 | no | no | - | 48 | 0 | 48 |
+| 13 | `(-11/24 - 5/16*sqrt3, -11/48*sqrt5 + 1/8*sqrt15)` | 48 | -6 | no | no | - | 42 | 0 | 42 |
+| 14 | `(-7/144 - 5/36*sqrt3 + 1/48*sqrt5 - 7/36*sqrt15, -5/12 - 7/144*sqrt3 + 7/36*sqrt5 - 1/144*sqrt15)` | 144 | -4 | no | no | - | 42 | 0 | 42 |
+| 15 | `(-1/9*sqrt5 - 1/36*sqrt15, 1/36 - 5/9*sqrt3)` | 36 | 2 | no | no | - | 36 | 0 | 36 |
+| 16 | `(-1/8 - 9/40*sqrt15, -3/8 + 3/40*sqrt15)` | 40 | 3 | no | no | - | 36 | 0 | 36 |
+| 17 | `(-19/48 + 25/432*sqrt3 - 19/144*sqrt5 - 5/48*sqrt15, 25/144 - 19/48*sqrt3 + 5/48*sqrt5 + 19/432*sqrt15)` | 432 | -3 | no | no | - | 36 | 0 | 36 |
+| 18 | `(-10535/25352 + 489/12676*sqrt3 - 873/25352*sqrt5 - 1869/12676*sqrt15, 285/12676 + 6067/25352*sqrt3 - 3189/12676*sqrt5 + 297/25352*sqrt15)` | 25352 | 2 | no | no | - | 36 | 0 | 36 |
+| 19 | `(-7807/9608 + 711/9608*sqrt3 - 585/9608*sqrt5 - 423/9608*sqrt15, -3027/9608 - 1191/9608*sqrt3 + 159/9608*sqrt5 + 891/9608*sqrt15)` | 9608 | -1 | no | no | - | 36 | 0 | 36 |
+| 20 | `(-125/288 - 19/288*sqrt3 + 5/288*sqrt5 - 95/864*sqrt15, 19/288 + 125/864*sqrt3 - 95/288*sqrt5 + 5/288*sqrt15)` | 864 | -5 | no | no | - | 36 | 0 | 36 |

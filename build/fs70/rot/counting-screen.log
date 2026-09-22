@@ -1,0 +1,27 @@
+=== psi = -11,0,0,0,0,0,0,3,16 ===
+{
+ "circle": 12,
+ "radius_sq": "8/27",
+ "L": 0,
+ "ratio": 0.0,
+ "refutes": false,
+ "achieved": 0
+}
+=== psi = 7,0,0,0,0,0,0,-1,8 ===
+{
+ "circle": 30,
+ "radius_sq": "4",
+ "L": 0,
+ "ratio": 0.0,
+ "refutes": false,
+ "achieved": 0
+}
+=== psi = 1,0,0,0,0,0,0,-1,4 ===
+{
+ "circle": 24,
+ "radius_sq": "2/3",
+ "L": 0,
+ "ratio": 0.0,
+ "refutes": false,
+ "achieved": 0
+}

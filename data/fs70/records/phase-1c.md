@@ -9,7 +9,51 @@ that produced it.*
 
 ## 1. Headline
 
-*(filled in at the close)*
+**No refusal — and for the first time in this milestone the null is mostly a theorem. Of the 3,499 rotations
+of ℚ(√3,√5) that couple this base to a rotated copy of itself, 3,290 are four-colourable by a residue map with
+no solver, and all 87 of the rest that couple at all were asked and coloured.**
+
+1. **The literature's own method has now been run on this field, and `ρ₁₅` was not its best candidate.** Every
+   known five-colour forcer is a base plus a rotated copy joined at distance 1; phase 1b asked that shape at
+   one rotation. The list is now **complete for every rotation of denominator ≤ 42**, plus every class a second
+   enumeration found above that — 3,499 symmetry classes, each with the **exact** cross-edge anatomy of its
+   arena. `ρ₁₅` — the rotation the field screen selected and phase 1b spent its whole budget on — is **rank 6
+   by coupling among the live rotations, not rank 1**, and only **one class in 3,499 is type-M**, the family
+   that screen searches (§4c).
+2. **The theorem, and it was not in the brief (§3).** The base's ℚ-span is the CM field `E₀ = ℚ(√−3,√−5)`, so
+   a rotation is *commensurate* with the base exactly when it lies in `E₀`. `E₀` has **one** prime above 2,
+   with residue field `𝔽₄`, and it is **inert** over the one prime of `ℚ(√15)` below it — so complex
+   conjugation, which is the CM involution there, fixes it, and **every unit vector of `E₀` has valuation
+   zero: no commensurate rotation can break the 2-adic wall.** Its arena therefore lies in a 2-integral rank-4
+   lattice and the residue map to `𝔽₄` four-colours it outright, at any radius, for any base inside `E₀`.
+   Checked and not merely quoted: twelve explicit additive colourings, verified edge by edge, **0
+   monochromatic of up to 354,960**.
+3. **What that costs a forcer, as a number (§4b).** The whole top of the list by coupling — 2,712 cross edges
+   down to 492 at rank 20 — is commensurate and dead. The best rotation that can refuse anything has **84**.
+   **A factor of 32 separates the best coupling available from the best coupling that is allowed to matter**,
+   and that is G52's *"necessary and visibly not sufficient"* with a price attached.
+4. **All 87 live arenas colour** (§5), 54,433 points and ~352,330 edges each, in 0.15–2 s; the complete
+   population rather than the brief's top twenty. Every colouring is committed and re-verified on its own
+   arena's edges: **88 colourings, 0 monochromatic edges**.
+5. **G53's counting compulsion is absent, not weak, on every rotation that could carry it** (§4d): three
+   wall-breaking classes have a diagonal circle, and `L = 0` at all three — some proper four-colouring of the
+   base gives the centre a colour no circle point carries. `ρ₁₅`'s row reproduces phase 1b's exactly.
+6. **The instrument had a defect that was quietly shrinking every count, and a control written for something
+   else found it** (§6a). The geometric join's 3×3 grid lost pairs when a rotated coordinate landed at
+   `0.9999999999999998`: measured at `ψ = ζ₆`, where the answer is known by hand, **6 of 42,660 pairs**. A
+   missing cross edge makes an arena easier to colour, so the defect flattered exactly this phase's null. The
+   radius is now derived rather than guessed, the known-answer case is asserted on every run, and a plant puts
+   the defect back. **`ρ₁₅`'s arena came out right under the broken join** — the passing control proved
+   nothing, and the case that exercised the failure had to be provoked.
+
+**What this adds to phase 1b's null.** Phase 1b asked one rotation and found no compulsion. This phase asked
+the question the literature's method actually poses — *which* rotation — and the answer is that on the CM base
+over ℚ(√3,√5) the rotations divide cleanly in two: those with enough coupling to matter are, by an arithmetic
+theorem, unable to break the wall, and those that break the wall have two orders of magnitude less coupling
+and colour in under two seconds. *Said precisely: what is measured is the base `⟨ζ₆^m u^n : |n| ≤ 2⟩` at sums
+of ≤ 4 (and ≤ 5 for the top few), with the rotation list complete for denominator ≤ 42 and for whatever the
+`(z+s)/w` generator reached above it. Nothing here is about rotations outside those enumerations, about arity
+above 2, or about a base outside `E₀`.*
 
 ---
 
@@ -49,7 +93,7 @@ its pool is not closed under multiplication by `zeta6`. The bijection carrying `
 sends `s` to `zeta6.s`, whose denominator can be twice `s`'s, and so can fall outside the pool. (Galois does
 preserve denominators, so it does preserve the count.) The scan's identical control **is** sound, because there
 each member's count comes from the geometry rather than from the pool — and that is the control that found the
-defect in section 5.
+defect in section 6.
 
 ---
 
@@ -206,9 +250,36 @@ each arena's `graph.json`, `verdict.json` and colouring under `build/fs70/rot/as
 Every verdict is read from **the ledger row the ask wrote**, never from its log (§6e). No refusal, no
 UNKNOWN, nothing at a budget.
 
-### 5b. Base at sums of ≤ 5 — the top five
+### 5b. Base at sums of ≤ 5 — the top five, and one finding that does not depend on the verdicts
 
-*(filled in at the close)*
+Each arena is **272,041 points, ~2,099,210 edges, average degree 15.43** — five times the `k = 4` arena, and
+denser than anything phase 1b built below its 805,693-point ball.
+
+**The cross-edge count does not grow.** Rank 1 has **84** cross edges at `k = 4` and **84** at `k = 5`; rank 2
+has **72** and **72**; the `(z, w)` pair counts are 144 and 144, 132 and 132. The halves grow fivefold and the
+coupling between them does not move at all. Phase 1b saw the same of `ρ₁₅`'s diagonal *circle* (30 points at
+every radius from ≤ 2 to ≤ 5) and left it as an open question; this extends the observation **off the
+diagonal**, and it is still an observation and not a proof (§9, conjecture 2). If it is a theorem, growing a
+base can never buy a twisted bilayer over this field more compulsion than the rotation already gives it.
+
+| rank | ψ | cross at `k = 4` | cross at `k = 5` | verdict at `k = 5` | solver |
+|---|---|---|---|---|---|
+| 1 | `(−25/32 + √3/32 − √5/32 − 5√15/96, …)` | 84 | **84** | **SAT** | kissat, default, **699 s** |
+| 2 | `(−11/16, 3√15/16)` | 72 | **72** | **SAT** | kissat `--sat`, **710 s** |
+| 3–5 | | 60, 60, 60 | — | *running at handback* | kissat `--sat`, 1,200 s each |
+
+**A solver-effort note, and a prediction of mine that LOST.** At `k = 4` these arenas answer in 0.15–2 s; at
+`k = 5` the first took **699 s**. The default configuration had spent 712 s on rank 2 with no verdict when I
+stopped it and relaunched aimed at the satisfiable direction (`--sat = --target=2 --restartint=50`), on phase
+1b's measurement that this configuration settles large satisfiable instances its default cannot. **It bought
+nothing: rank 2 came back SAT in 710 s under `--sat`, against rank 1's 699 s under the default** — the same
+number, on instances that differ by twelve edges. So the cost at `k = 5` is the instance and not the
+configuration, and phase 1b's finding does not transfer to this shape. What the kill forfeited is named in the
+in-flight marker: twelve minutes of solver time and no result. Both numbers are facts about one solver on one
+encoding of one graph, never about the graph (G21).
+
+Whatever these return, they cannot change §5a: a colouring at `k = 5` would be one more colouring, and a
+refusal would be the milestone and would be verified three ways before anything else happened.
 
 ### 5c. What was not asked, and why it is a theorem rather than a budget
 
