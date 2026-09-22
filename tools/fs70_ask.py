@@ -36,6 +36,7 @@ Commands
   python3 tools/fs70_ask.py run DIR PIN [options]     # DIR holds graph.json from fs70_fabric
   python3 tools/fs70_ask.py resume                    # re-ask every formula in data/fs70/inflight/ and nothing else
   python3 tools/fs70_ask.py status                    # the owner's table, one block per lattice
+  python3 tools/fs70_ask.py screen SPEC... [--k 4] [--out F]   # the Kempe screen: which targets are already dead
   python3 tools/fs70_ask.py selftest [--plants]       # the calibration: an ask whose answer is known both ways
 
 PIN: control | forces:DELTA | separated:DELTA   (eq: and sep: are accepted as the aliases of the first two)
@@ -468,6 +469,102 @@ def cube_pass(inst, out, jobs, budget, nbranch, engine, resume, cap_seconds):
                      'engine': engine, 'per_cube_budget': budget if limited else None}, model
 
 
+# ---------------------------------------------------------------- the Kempe screen (phase 1)
+#
+# WHAT IT IS.  The additive screen of `fs70_fabric` kills a target `delta` when some proper additive colouring
+# `phi` of the lattice has `phi(delta) != 0`: that colouring separates the pair, so no graph in the lattice forces
+# it.  When every `phi` has `phi(delta) = 0` -- when `delta` lies in `Lambda_forced` -- the additive family is
+# silent and the plan sends the target to a solver.  This screen goes one step further for free.  A Kempe swap of
+# an additive colouring is still a proper colouring but is NOT additive, so it reaches outside the family: if the
+# (a, b)-Kempe component of the origin misses `delta`, swapping it separates the pair.  And the component is a
+# SUBLATTICE of the whole lattice, computable exactly, so the conclusion holds at EVERY radius -- it is a kill by
+# derivation, where a solver kills only the one graph it was handed.
+#
+# THE REACH.  Inside the class {p : phi(p) in {0, b}} a walk from the origin alternates 0, b, 0, b, ..., because a
+# unit vector never has phi = 0.  A step 0 -> b carries phi-value b and a step b -> 0 carries -b, so the points of
+# colour 0 the origin reaches are exactly the additive span of {z + w : z, w unit vectors, phi(z) = b,
+# phi(w) = -b} -- one formula for every colour count and for the Klein group, where -b = b.  The span is a
+# subgroup, hence infinite whenever it is non-trivial, which is why this was first written as a breadth-first
+# search and had to be thrown away: every one of L1's four targets came back "no escape found" at a cap of
+# 200,000 points in 59 s, which is what a search for an infinite object looks like.
+
+def additive_family(lat, k=4, group='Zk'):
+    """every proper additive k-colouring of the lattice, as a coordinate vector in the HNF basis.  `Zk` values are
+    read mod k; `K4` (k = 4 only) reads two bits added by XOR."""
+    import numpy as np
+    U = FB._coord_matrix(lat, lat.units)
+    A = FB.all_vectors_mod(k, lat.rank)
+    if group == 'Zk':
+        return A[(((A @ U.T) % k) != 0).all(axis=1)]
+    lo, hi = A & 1, (A >> 1) & 1
+    im = ((lo @ U.T) % 2) + 2 * ((hi @ U.T) % 2)
+    return A[(im != 0).all(axis=1)]
+
+
+def _colour(phi, coord, k=4, group='Zk'):
+    if group == 'Zk':
+        return int(sum(int(a) * int(b) for a, b in zip(phi, coord)) % k)
+    lo = sum((int(a) & 1) * int(b) for a, b in zip(phi, coord)) % 2
+    hi = sum(((int(a) >> 1) & 1) * int(b) for a, b in zip(phi, coord)) % 2
+    return lo + 2 * hi
+
+
+def _neg(b, k, group):
+    return b if group == 'K4' else (k - b) % k
+
+
+def kempe_reach(lat, phi, b, k=4, group='Zk'):
+    """the sublattice of colour-0 points the origin reaches inside the (0, b)-Kempe class, as an HNF basis"""
+    uc = [tuple(lat.coords(z)) for z in lat.units]
+    val = [_colour(phi, c, k, group) for c in uc]
+    nb = _neg(b, k, group)
+    P = [c for c, v in zip(uc, val) if v == b]
+    Q = [c for c, v in zip(uc, val) if v == nb]
+    rows = [[x + y for x, y in zip(z, w)] for z in P for w in Q]
+    return FB.hnf(rows, dim=lat.rank) if rows else []
+
+
+def kempe_escape(lat, delta, k=4, group='Zk', limit=None):
+    """Is there a proper additive k-colouring `phi` and a colour `b` whose (0, b)-Kempe component of the origin
+    misses `delta`?  If so, NO finite subgraph of this lattice forces (0, delta) equal at k colours, AT ANY
+    RADIUS: for a finite H the component of 0 inside H is a subset of the lattice's, so it misses `delta`;
+    swapping it is a proper k-colouring of H (a Kempe swap always is) with c(0) = b and c(delta) = 0."""
+    fam = additive_family(lat, k, group)
+    dc = tuple(lat.coords(delta))
+    for phi in (fam if limit is None else fam[:limit]):
+        v = _colour(phi, dc, k, group)
+        if v != 0:
+            return {'kind': 'additive', 'k': k, 'group': group, 'phi': [int(x) for x in phi],
+                    'detail': f'phi(delta) = {v} != 0: this additive colouring separates the pair, so no graph '
+                              f'in the lattice forces it'}
+        for b in range(1, k):
+            H = kempe_reach(lat, phi, b, k, group)
+            inside = H and FB.coords_in_basis(H, list(dc), lat.rank) is not None
+            if not inside:
+                return {'kind': 'kempe', 'k': k, 'group': group, 'phi': [int(x) for x in phi], 'b': b,
+                        'reach_rank': len(H), 'reach_basis': [[int(x) for x in r] for r in H],
+                        'detail': f'the (0, {b})-Kempe component of the origin is the rank-{len(H)} sublattice '
+                                  f'spanned by the consecutive step pairs, and the target is not in it: no '
+                                  f'finite subgraph of this lattice forces the pair, at any radius'}
+    return None
+
+
+def kempe_report(spec, deltas, k=4, group='Zk', limit=None, lat=None):
+    if lat is None:
+        lat = FB.Lattice(FB.generators(spec), spec)
+        lat.saturate('b')
+    out = {}
+    for d in deltas:
+        nm, z = d if isinstance(d, tuple) and len(d) == 2 and isinstance(d[0], str) else (d, FB.target_element(d))
+        if lat.coords(z) is None:
+            out[nm] = {'kind': 'absent', 'detail': 'not in the lattice'}
+            continue
+        r = kempe_escape(lat, z, k, group, limit)
+        out[nm] = r or {'kind': 'live', 'detail': 'no additive colouring separates the pair and no Kempe swap '
+                                                  'frees it: the ask is live and must go to a solver'}
+    return lat, out
+
+
 # ---------------------------------------------------------------- records
 
 def inflight_path(sha):
@@ -623,6 +720,51 @@ def cmd_status(argv):
                                             for v in ('SAT', 'UNSAT', 'UNKNOWN', 'DEFECT')))
 
 
+def cmd_screen(argv):
+    import json as _json
+    k = _opt(argv, '--k', 4, int)
+    out = _opt(argv, '--out')
+    specs = []
+    i = 0
+    while i < len(argv):
+        if argv[i].startswith('--'):
+            i += 2
+            continue
+        specs.append(argv[i])
+        i += 1
+    rows = []
+    scr = {}
+    path = os.path.join(ROOT, 'data', 'fs70', 'screen.jsonl')
+    if os.path.exists(path):
+        for line in open(path):
+            r = _json.loads(line)
+            scr[r['lattice']] = r
+    for spec in specs:
+        row = scr.get(spec, {})
+        seen = set()
+        deltas = [('2', FB.target_element('2')), ('isqrt3', FB.target_element('isqrt3'))]
+        for t in row.get('targets', []):
+            if t['delta'].startswith('-') or t['delta'] in seen:
+                continue
+            seen.add(t['delta'])
+            deltas.append((f"{t['delta']} (chain {t['chain']})", FB.e_from_ints(t['delta_ints'])))
+        lat, res = kempe_report(spec, deltas, k)
+        fam = len(additive_family(lat, k))
+        live = [d for d, r in res.items() if r['kind'] == 'live']
+        print(f'== {spec}  [{lat.sha()}]  g = {len(lat.units)}, proper additive Z/{k}: {fam}')
+        for d, r in res.items():
+            extra = (f" b={r['b']}, reach rank {r['reach_rank']}" if r['kind'] == 'kempe' else '')
+            print(f'   {d:34} {r["kind"]:9}{extra}')
+        print(f'   LIVE (a solver must be asked): {live or "none"}')
+        rows.append({'lattice': spec, 'lattice_sha': lat.sha(), 'g': len(lat.units), 'k': k,
+                     'additive_proper': fam, 'targets': res, 'live': live})
+    if out:
+        with open(out, 'w') as fh:
+            _json.dump(rows, fh, indent=1)
+        print('wrote', out)
+    return rows
+
+
 # ---------------------------------------------------------------- the calibration (selftest)
 
 def calibration_graphs(tmp):
@@ -766,6 +908,8 @@ if __name__ == '__main__':
         cmd_resume(argv[1:])
     elif argv[0] == 'status':
         cmd_status(argv[1:])
+    elif argv[0] == 'screen':
+        cmd_screen(argv[1:])
     elif argv[0] == 'selftest':
         run_plants() if '--plants' in argv else selftest()
     else:
