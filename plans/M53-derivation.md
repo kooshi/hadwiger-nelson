@@ -335,19 +335,20 @@ pair, no √5/√7). No independent zbMATH search run beyond the already-credite
 item 5 lists "kernel certificates: Theorem B and A′… the 1,175-point witness through the M06 pipeline with a
 √247 leaf added to the tower" as an open, unrun idea).
 
-**M53-T15 — The K(√23) witness: the 8/√3 forced pair spindled. [tools; the M53 implementer]** The same
-construction applied to the fabric's forced 8/√3 pair gives a 5-chromatic unit-distance graph with coordinates
-in `ℚ(√3,√11,√23)` (`759 = 3·11·23 ∼ 23` up to a square factor). *Proof:* `plans/FIELD-WALL-THEOREM.md` §7.5,
-one sentence ("the same construction at the 8/√3 pairs gives ℚ(√3,√11,√23)"); the full-object size and the
-1-minimal core are **not separately recorded** in the read material (only the 8/3 witness's core is shrunk to
-588 in the source; the 8/√3 witness is left at its full size). *Proof verdict:* **unsure** — the sentence
-asserts the construction succeeds but the source gives no independent certificate address for the 8/√3 case
-distinct from the 8/3 one (the SAT ask and the exact-geometry check are not separately quoted); the M54 plan
-later treats "pair 2 = (813, 1939)" as its own object with its own forcing-critical census (M54-T3), which
-appears to be the same forced pair carried forward, but nothing in this batch's material re-derives the 8/√3
-witness's four-colour refusal from scratch. *Rests on it:* row 47's text, which states the field as fact.
-*Prior art:* same as M53-T14 — an instance of the same spindle technique at a different forced distance.
-*Kernel:* declined — same reasoning as M53-T14, and additionally blocked on the *proof verdict: unsure* above.
+**M53-T15 — The K(√23) witness: the 8/√3 forced pair spindled. [tools; the M53 implementer; the record located by the
+owner at acceptance, 2026-09-22]** The same construction applied to the fabric's forced pair at distance `8/√3`
+(`d² = 64/3`, radicand `4d² − 1 = 253/3 ∼ 3·11·23`, field `ℚ(√3,√11,√23)`) gives a unit-distance graph of **3,905 points and
+27,593 unit edges** (the 1,953-point core `S29-…-depth1` plus one rotated copy fused at one point, 10 cross chords) that is
+**not four-colourable and is five-colourable** — the four-colour refusal asked directly on the union (CaDiCaL via PySAT, one
+refutation, 254.8 s), chords at 60 decimal digits with one `1e−6` near-miss rejected; never shrunk. *Proof:*
+`plans/FIELD-WALL-THEOREM.md` §7.5 (one sentence) and the record `data/m53/forced-spindle-full-8oversqrt3.json`
+(`claim_scope`: "forcing by one SAT refutation … the union's 4-refusal asked directly, not inferred from the spindle
+theorem"). *Proof verdict:* closes at tools grade **on one solver refusal** (no second engine, no proof log kept) — the
+same evidential standing as row 47 gives it; the batch-3a implementer marked it *unsure* because the plan text names no
+certificate, and the owner found the record under `data/m53/`. *Rests on it:* row 47's "and K(√23)"; G37's "the spindles a
+K-descent can run (ρ₁₅, 8/3) land in 5-sealed fields" (K(√23) is 5-sealed, row 52). *Prior art:* same as M53-T14 — an instance
+of the spindle technique at a different forced distance; the forced pair itself is the descent's, not Harder's (his is 8/3).
+*Kernel:* declined — a 3,905-point object on one refutation; row 47's K(√247) witness is the one the descent kept.
 
 ## Readings and measurements that were called theorems
 
