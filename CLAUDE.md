@@ -16,13 +16,16 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 250,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 275,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
-200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, and from 200,000 to 250,000
-on 2026-09-17 with the file at 199,785 bytes — a ceiling reached is a ceiling that starts costing content, and the
-current-state-only rule, not the byte count, is what keeps this file honest). The budget is
+200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
+on 2026-09-17 with the file at 199,785 bytes, and from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
+no-loss compression pass measured its floor at about 228,000 — a ceiling reached is a ceiling that starts costing content,
+and the current-state-only rule, not the byte count, is what keeps this file honest). The budget is
 a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
-comes out whether or not there is room for it. **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
+comes out whether or not there is room for it. **One home per fact** (2026-09-21): numbers, certificates, names and
+addresses live in a ledger row, mechanism and readings in a grokking, and every other mention points; at every close run
+`tools/claude_md_fact_audit.py` with `--base <the previous close>` (nothing lost) and `--dupes` (nothing retold). **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
 (Kooshi, 2026-09-15): the tag marks reasoning whose loss has already cost hours; trim elsewhere.**
 
 ## Notation
@@ -125,10 +128,8 @@ Titles seen only in search listings are marked as such until checked against the
 *The current state of the art, the ledger of everything novel this project has produced, and the ranked
 paths forward. Rewritten in place at every milestone close (WORKFLOW step 9); a milestone whose close does
 not update this section is not closed. The understanding the results add up to lives in § Grokkings, under
-the same rule. **One home per fact:** numbers, certificates, Lean names, addresses, prior art, credit and "not claimed" live in the
-ledger row; mechanism, reading, killing test and demotion record live in the grokking; "Where the problem stands" and § Paths
-forward orient and point (`row 68`, `G56`) and never retell. `tools/claude_md_fact_audit.py` checks an edit of this file against
-any earlier revision.*
+the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
+point (`row 68`, `G56`) and never retell.*
 
 *Last updated: 2026-09-21 — **FS-66 closed** (row 75; G66 and FS-68 minted): **the residue ceiling does not drop up the tower at 7, 11, 19 or 23** — exact all-levels certificates, level two at 11 in the kernel; `α(Γ₁₉) ∈ {76, 77}`, `α(Γ₂₃) ≤ 97`; the `p`-adic Hadwiger–Nelson question answered no (`CLOSED-QUESTIONS.md` §1.8). Before that: FS-61 closed 2026-09-20 (row 74).
 Before that: 2026-09-19 — G64 corrected; 2026-09-17 — FS-58 closed (rows 72–73).*

@@ -17,7 +17,8 @@ What it checks, and what FAILS the run (exit status 1):
     names, and every whitespace-delimited chunk holding a digit or a mathematical character;
   * every grokking's status tag (the bracket after its title) is unchanged;
   * the PROTECTED regions are byte-identical (a region is the blank-line-delimited block holding the tag
-    "[PROTECTED -- never compress" plus the blocks after it, up to the next block that opens with "**" or "#");
+    "[PROTECTED -- never compress, trim" plus the blocks after it, up to the next block that opens with "**" or "#";
+    the header's rule ABOUT the tag quotes it with an ellipsis and is not a region);
   * the sentence scripts/gate_report.py reads ("current audit reads N clean and M declared purchases") still
     matches, with the same N and M;
   * no heading disappeared (other files cite sections by name).
@@ -63,7 +64,9 @@ ALLOW: dict[str, str] = {
     "Pilot": "the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'",
 }
 
-PROTECTED_TAG = "[PROTECTED — never compress"
+# The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
+# "[PROTECTED — never compress …]" and is an ordinary paragraph (the budget line in it changes when Kooshi raises the budget).
+PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
 MATH = set("αβγδεζηθικλμνξπρστυφχψωΓΔΘΛΞΠΣΦΨΩℚℝℤℂℕ𝔽𝔭𝔓√≤≥≠≡≈∈∉⊆⊂⊇⊄∣∤∀∃∧∨¬⟹⟸⟺→↦×·∞∅∩∪⌈⌉⌊⌋₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ⁻⁺′̄±−½∑∏")
 STRIP = ".,;:!?\"'“”‘’—–-*`|…~"
@@ -246,8 +249,8 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     # protected regions
     po, pn = protected_regions(old), protected_regions(new)
     say(f"PROTECTED regions: {len(po)} before ({', '.join(str(len(p.encode())) for p in po)} bytes), {len(pn)} after")
-    if len(po) < 3:
-        fails.append(f"found only {len(po)} PROTECTED regions in the OLD version (expected 3): the check is blind")
+    if len(po) < 2:
+        fails.append(f"found only {len(po)} PROTECTED regions in the OLD version (expected 2): the check is blind")
     if po != pn:
         fails.append("a PROTECTED region is not byte-identical")
     # gate sentence
