@@ -185,6 +185,37 @@ The base control is **the defect check the brief names**: the CM base is 2-integ
 at the prime above 2 four-colours it and a refusal there would be a defect in the tool rather than a finding.
 It colours in 0.08 s.
 
+### 4.6 The structure instruments — the plan's §3.6, without which a null is not typed
+
+On L6's `k = 4` control colouring (`python3 tools/fs70_structure.py screen build/fs70/L6-w4 …`):
+
+* **The quotient screen** — no `Λ/pΛ` has all its classes monochromatic at any `p ∈ {2,…,7}`: 0 of 64 classes at
+  `2Λ`, 4 of 649 at `3Λ`, 89 of 1,909 at `4Λ`, 2,837 of 12,241 at `5Λ`, 2,192 of 8,906 at `6Λ`, 64 of 5,557 at
+  `7Λ`. **The colouring is a function of no residue at any of those primes.**
+* **The period screen** — 851 candidate periods with at least 20 testable pairs; the best agreement is **0.939**,
+  not 1. **No period at all**, not even an approximate one.
+
+* **The imposed-quotient ask** (`tools/fs70_structure.py quotient build/fs70/L6-w4 p`) — **no periodic
+  colouring rule exists at `2Λ`, `3Λ` or `4Λ`, at any colour count, and no solver is needed to say so**: in each
+  case a **unit-distance pair lies inside one class**, which is a self-loop in the quotient graph.
+
+  | `p` | classes the point set meets | quotient edges | unit pairs inside a class | verdict |
+  |---|---|---|---|---|
+  | 2 | 64 | 288 | 342,282 | UNSAT by self-loop — the pair `(0, 1)` |
+  | 3 | 649 | 5,157 | 325,212 | UNSAT by self-loop — the pair `(0, 7)` |
+  | 4 | 1,909 | 13,764 | 325,020 | UNSAT by self-loop — the pair `(0, 1)` |
+
+  **At `p = 2` and `p = 4` this is the §2 theorem again, from the other side.** `0` and `1` share a class of
+  `Λ/2Λ` exactly when `1 ∈ 2Λ`, i.e. when `½ ∈ Λ` — the very membership that empties the additive family — and
+  they are a unit edge. So *one* fact about L6 — that its saturation drags in `v = (1 + i√15)/4` and hence `½` —
+  simultaneously kills every additive four-colouring, every Kempe swap of one, and every `2Λ`- and
+  `4Λ`-periodic colouring rule. Every radius-free instrument this milestone owns is silent on L6 for a single
+  reason, and that is why only a solver can speak on it.
+
+So L6's four-colourings are, exactly like L2's and L3's (phase 1 §5.2–5.3), **free**: not additive (by the §2
+theorem, none exists), not residue-local at any small prime, not periodic. The fabric is simply far from forcing
+anything, at every density it can be asked at.
+
 ---
 
 ## 5. The type-M arena at `n = 4`, and G53's counting screen
