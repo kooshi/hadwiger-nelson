@@ -1,0 +1,63 @@
+######## twounits:14
+twounits:14: rank 8, g = 212 (GENERATORS ONLY -- escapes are sound for U-fabric only)
+          wrote data/fs70/quotient/twounits_14-N2.colouring.json
+  N =  2:     256 classes -> SAT in 0.0 s; gapped 0
+  2       : **ESCAPE** b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:OUT[Q0 16, V idx 283396522500]
+  2/3     : **ESCAPE** b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:OUT[Q0 16, V idx 283396522500]
+  4/3     : rigid     b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:in[Q0 16, V idx 283396522500]
+  8/3     : rigid     b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:in[Q0 16, V idx 283396522500]
+  4       : rigid     b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:in[Q0 16, V idx 283396522500]
+  4/7     : rigid     b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:in[Q0 16, V idx 283396522500]
+  4/sqrt3 : rigid     b=1:in[Q0 128, V idx 1] b=2:in[Q0 128, V idx 1] b=3:in[Q0 16, V idx 283396522500]
+  isqrt3  : **ESCAPE (level 0)** -- c(delta) = 2 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+  N =  3: not admissible (a unit vector lies in N*Lambda)
+          wrote data/fs70/quotient/twounits_14-N4.colouring.json
+  N =  4:   65536 classes -> SAT in 1.4 s; gapped 0
+  2       : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  2/3     : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  4/3     : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  8/3     : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  4       : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  4/7     : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  4/sqrt3 : rigid     b=1:in[Q0 32768, V idx 2313441] b=2:in[Q0 32768, V idx 2313441] b=3:in[Q0 8192, V idx 4375]
+  isqrt3  : **ESCAPE (level 0)** -- c(delta) = 3 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+wrote data/fs70/quotient/twounits_14-periodic-kempe.json
+######## twounits:30
+twounits:30: rank 8, g = 660 (GENERATORS ONLY -- escapes are sound for U-fabric only)
+          wrote data/fs70/quotient/twounits_30-N2.colouring.json
+  N =  2:     256 classes -> SAT in 0.0 s; gapped 0
+  2       : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  2/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  4/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  8/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  4       : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  4/7     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  4/sqrt3 : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 50866193783505138507482711581410365480625] b=3:in[Q0 64, V idx 50866193783505138507482711581410365480625]
+  isqrt3  : **ESCAPE (level 0)** -- c(delta) = 1 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+  N =  3: not admissible (a unit vector lies in N*Lambda)
+          wrote data/fs70/quotient/twounits_30-N4.colouring.json
+  N =  4:   65536 classes -> SAT in 2.2 s; gapped 0
+  2       : **ESCAPE (level 0)** -- c(delta) = 2 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+  2/3     : **ESCAPE (level 0)** -- c(delta) = 2 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+  4/3     : rigid     b=1:in[Q0 32768, V idx 1] b=2:in[Q0 1024, V idx 31791371114690711567176694738381478425390625] b=3:in[Q0 32768, V idx 1]
+  8/3     : rigid     b=1:in[Q0 32768, V idx 1] b=2:in[Q0 1024, V idx 31791371114690711567176694738381478425390625] b=3:in[Q0 32768, V idx 1]
+  4       : rigid     b=1:in[Q0 32768, V idx 1] b=2:in[Q0 1024, V idx 31791371114690711567176694738381478425390625] b=3:in[Q0 32768, V idx 1]
+  4/7     : rigid     b=1:in[Q0 32768, V idx 1] b=2:in[Q0 1024, V idx 31791371114690711567176694738381478425390625] b=3:in[Q0 32768, V idx 1]
+  4/sqrt3 : rigid     b=1:in[Q0 32768, V idx 1] b=2:in[Q0 1024, V idx 31791371114690711567176694738381478425390625] b=3:in[Q0 32768, V idx 1]
+  isqrt3  : **ESCAPE (level 0)** -- c(delta) = 3 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+wrote data/fs70/quotient/twounits_30-periodic-kempe.json
+######## twounits:42
+twounits:42: rank 8, g = 1220 (GENERATORS ONLY -- escapes are sound for U-fabric only)
+          wrote data/fs70/quotient/twounits_42-N2.colouring.json
+  N =  2:     256 classes -> SAT in 0.0 s; gapped 0
+  2       : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  2/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  4/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  8/3     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  4       : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  4/7     : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  4/sqrt3 : rigid     b=1:in[Q0 16, V idx 4] b=2:in[Q0 64, V idx 683806661006075422259844268516948359498392630625] b=3:in[Q0 64, V idx 683806661006075422259844268516948359498392630625]
+  isqrt3  : **ESCAPE (level 0)** -- c(delta) = 1 != c(0) = 0: the periodic colouring itself separates the pair.  Forces DEAD on this lattice
+  N =  3: not admissible (a unit vector lies in N*Lambda)
+          wrote data/fs70/quotient/twounits_42-N4.colouring.json
+  N =  4:   65536 classes -> SAT in 1.2 s; gapped 0

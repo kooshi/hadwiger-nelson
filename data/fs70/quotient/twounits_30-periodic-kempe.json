@@ -1,0 +1,722 @@
+{
+ "spec": "twounits:30",
+ "rank": 8,
+ "g": 660,
+ "saturated": false,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 256,
+   "verdict": "SAT",
+   "seconds": 0.0,
+   "cnf_sha256": "9e455d7198d738f87cb6e07631ba8e062489279c73c8da82b535db71e67698e4",
+   "note": "origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 256",
+   "saturated": false,
+   "gapped_vertices": 0,
+   "gap_at_origin": [],
+   "forces_closed_by_row66": false,
+   "targets": {
+    "2": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "2",
+     "delta": [
+      105867707400,
+      -52933853700,
+      -52933853700,
+      -52933853700,
+      -52933853700,
+      -26466926850,
+      0,
+      52933853700
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "2/3": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "2/3",
+     "delta": [
+      35289235800,
+      -17644617900,
+      -17644617900,
+      -17644617900,
+      -17644617900,
+      -8822308950,
+      0,
+      17644617900
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4/3": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "4/3",
+     "delta": [
+      70578471600,
+      -35289235800,
+      -35289235800,
+      -35289235800,
+      -35289235800,
+      -17644617900,
+      0,
+      35289235800
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "8/3": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "8/3",
+     "delta": [
+      141156943200,
+      -70578471600,
+      -70578471600,
+      -70578471600,
+      -70578471600,
+      -35289235800,
+      0,
+      70578471600
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "4",
+     "delta": [
+      211735414800,
+      -105867707400,
+      -105867707400,
+      -105867707400,
+      -105867707400,
+      -52933853700,
+      0,
+      105867707400
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4/7": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "4/7",
+     "delta": [
+      30247916400,
+      -15123958200,
+      -15123958200,
+      -15123958200,
+      -15123958200,
+      -7561979100,
+      0,
+      15123958200
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4/sqrt3": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "4/sqrt3",
+     "delta": [
+      0,
+      3527160,
+      0,
+      0,
+      0,
+      -1763580,
+      -1763580,
+      -1763580
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 16,
+       "component_edges": 6080,
+       "V_rank": 8,
+       "V_index_in_NLambda": 4,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 64,
+       "component_edges": 8960,
+       "V_rank": 8,
+       "V_index_in_NLambda": 50866193783505138507482711581410365480625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "isqrt3": {
+     "label": "twounits:30",
+     "N": 2,
+     "rank": 8,
+     "g": 660,
+     "target": "isqrt3",
+     "delta": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1322685,
+      0,
+      0
+     ],
+     "colour_origin": 0,
+     "colour_delta": 1,
+     "saturated": false,
+     "verdict": "escape",
+     "level": 0,
+     "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+    }
+   }
+  },
+  {
+   "N": 3,
+   "admissible": false
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 65536,
+   "verdict": "SAT",
+   "seconds": 2.18,
+   "cnf_sha256": "435ad3e8a341b8ad9707167f7907f6f774748f6245ae09fbbca6c33023a6439a",
+   "note": "origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512",
+   "saturated": false,
+   "gapped_vertices": 0,
+   "gap_at_origin": [],
+   "forces_closed_by_row66": false,
+   "targets": {
+    "2": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "2",
+     "delta": [
+      105867707400,
+      -52933853700,
+      -52933853700,
+      -52933853700,
+      -52933853700,
+      -26466926850,
+      0,
+      52933853700
+     ],
+     "colour_origin": 0,
+     "colour_delta": 2,
+     "saturated": false,
+     "verdict": "escape",
+     "level": 0,
+     "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+    },
+    "2/3": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "2/3",
+     "delta": [
+      35289235800,
+      -17644617900,
+      -17644617900,
+      -17644617900,
+      -17644617900,
+      -8822308950,
+      0,
+      17644617900
+     ],
+     "colour_origin": 0,
+     "colour_delta": 2,
+     "saturated": false,
+     "verdict": "escape",
+     "level": 0,
+     "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+    },
+    "4/3": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "4/3",
+     "delta": [
+      70578471600,
+      -35289235800,
+      -35289235800,
+      -35289235800,
+      -35289235800,
+      -17644617900,
+      0,
+      35289235800
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 32768,
+       "component_edges": 8462336,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 1024,
+       "component_edges": 143360,
+       "V_rank": 8,
+       "V_index_in_NLambda": 31791371114690711567176694738381478425390625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 32768,
+       "component_edges": 8577024,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "8/3": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "8/3",
+     "delta": [
+      141156943200,
+      -70578471600,
+      -70578471600,
+      -70578471600,
+      -70578471600,
+      -35289235800,
+      0,
+      70578471600
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 32768,
+       "component_edges": 8462336,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 1024,
+       "component_edges": 143360,
+       "V_rank": 8,
+       "V_index_in_NLambda": 31791371114690711567176694738381478425390625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 32768,
+       "component_edges": 8577024,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "4",
+     "delta": [
+      211735414800,
+      -105867707400,
+      -105867707400,
+      -105867707400,
+      -105867707400,
+      -52933853700,
+      0,
+      105867707400
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 32768,
+       "component_edges": 8462336,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 1024,
+       "component_edges": 143360,
+       "V_rank": 8,
+       "V_index_in_NLambda": 31791371114690711567176694738381478425390625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 32768,
+       "component_edges": 8577024,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4/7": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "4/7",
+     "delta": [
+      30247916400,
+      -15123958200,
+      -15123958200,
+      -15123958200,
+      -15123958200,
+      -7561979100,
+      0,
+      15123958200
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 32768,
+       "component_edges": 8462336,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 1024,
+       "component_edges": 143360,
+       "V_rank": 8,
+       "V_index_in_NLambda": 31791371114690711567176694738381478425390625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 32768,
+       "component_edges": 8577024,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "4/sqrt3": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "4/sqrt3",
+     "delta": [
+      0,
+      3527160,
+      0,
+      0,
+      0,
+      -1763580,
+      -1763580,
+      -1763580
+     ],
+     "colour_origin": 0,
+     "colour_delta": 0,
+     "saturated": false,
+     "level": 1,
+     "per_b": {
+      "1": {
+       "component_classes": 32768,
+       "component_edges": 8462336,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "2": {
+       "component_classes": 1024,
+       "component_edges": 143360,
+       "V_rank": 8,
+       "V_index_in_NLambda": 31791371114690711567176694738381478425390625,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      },
+      "3": {
+       "component_classes": 32768,
+       "component_edges": 8577024,
+       "V_rank": 8,
+       "V_index_in_NLambda": 1,
+       "delta_class_in_Q0": true,
+       "delta_in_K0": true
+      }
+     },
+     "verdict": "rigid",
+     "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+    },
+    "isqrt3": {
+     "label": "twounits:30",
+     "N": 4,
+     "rank": 8,
+     "g": 660,
+     "target": "isqrt3",
+     "delta": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1322685,
+      0,
+      0
+     ],
+     "colour_origin": 0,
+     "colour_delta": 3,
+     "saturated": false,
+     "verdict": "escape",
+     "level": 0,
+     "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+    }
+   }
+  }
+ ]
+}

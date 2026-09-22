@@ -67,6 +67,8 @@ An UNSAT from either says only that no N-periodic colouring of that shape exists
 Commands
   fs70_periodic_kempe.py screen SPEC --N n [--colouring F] [--targets a,b,..] [--out F] [--note T]
   fs70_periodic_kempe.py screen-additive SPEC [--group zk|k4] [--targets ...] [--out F]
+  fs70_periodic_kempe.py sweep SPEC [--nmin 2] [--nmax 6] [--targets ...] [--generators] [--out F]
+  fs70_periodic_kempe.py verify-escape SPEC --N n [--k 3] [--targets ...] [--out F]
   fs70_periodic_kempe.py find SPEC --aim gap|sep --targets ... [--nmin 2] [--nmax 12] [--budget 600] [--out F]
   fs70_periodic_kempe.py degrey --nmax 12 [--out F]          # control (i): de Grey's K-lattice at 8/3
   fs70_periodic_kempe.py selftest [--plants]
@@ -466,7 +468,13 @@ def find(U, N, rank, aim, delta=None, budget=600, solver='kissat'):
     units = [4 * 0 + 0 + 1]                       # the origin takes colour 0 (colour permutation)
     extra = []
     nb = min(Sidx)
-    if aim == 'gap':
+    if aim == 'plain':
+        units.append(4 * nb + 1 + 1)              # the least neighbour takes colour 1 (colour permutation)
+        pre = min(n, 512)
+        for v in range(pre):
+            extra.append([-(4 * v + 3 + 1)] + [4 * u + 2 + 1 for u in range(v)])
+        note = f'origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first {pre}'
+    elif aim == 'gap':
         units.append(-(4 * 0 + 3 + 1))            # redundant with the origin pin; kept for readability
         for s in Sidx:
             units.append(-(4 * s + 3 + 1))
@@ -485,7 +493,7 @@ def find(U, N, rank, aim, delta=None, budget=600, solver='kissat'):
             extra.append([-(4 * v + 3 + 1)] + [4 * u + 2 + 1 for u in range(v)])
         note = f'c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first {pre}'
     else:
-        raise SystemExit('aim must be gap or sep')
+        raise SystemExit('aim must be plain, gap or sep')
     cls = _cnf(n, edges, units, extra)
     v, secs, model, sha = solve_cnf(cls, 4 * n, budget, solver)
     if v == 'SAT':
@@ -523,9 +531,17 @@ def _fabric_lattice_uncached(spec, saturate=True):
 
 
 def fabric_target(lat, name):
-    z = FB.target_element(name)
+    z = _target_element(name)
     c = lat.coords(z)
     return tuple(c) if c is not None else None
+
+
+def _target_element(name):
+    """the targets plus the ones fs70_fabric's Fraction parser cannot spell (fs70_kempe_rich's spelling)"""
+    from fractions import Fraction as Fr
+    if name == '4/sqrt3':                      # 4/sqrt3 = (4/3) sqrt3
+        return ((Fr(0), Fr(4, 3), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(0), Fr(0)))
+    return FB.target_element(name)
 
 
 def degrey_lattice():
@@ -658,9 +674,9 @@ def cmd_verify_escape(argv):
         lat, U, saturated = fabric_lattice(spec, saturate=sat)
         rank = lat.rank
         steps = [lat.vec8(z) for z in (lat.units if saturated else lat.S)]
-        target_vec8 = lambda t: (lat.vec8(FB.target_element(t))
-                                 if FB.coords_in_basis(lat.H, lat.vec8(FB.target_element(t))) is not None
-                                 else None)
+        def target_vec8(t):
+            v = lat.vec8(_target_element(t))
+            return v if FB.coords_in_basis(lat.H, v) is not None else None
     if colf is None:
         tag = spec.replace(':', '_').replace('+', '_')
         colf = os.path.join(ROOT, 'data', 'fs70', 'quotient', f'{tag}-N{N}.colouring.json')
@@ -829,6 +845,68 @@ def _additive_reach_verdict(U, rank, phi, delta, group):
     return 'rigid'
 
 
+def cmd_sweep(argv):
+    """One pass per N: find a plain periodic four-colouring, commit it, read its gaps (row 66), and run the
+    periodic Kempe screen at every target.  This is the whole instrument on one lattice."""
+    spec = argv[1]
+    nmin = _opt(argv, '--nmin', 2, int)
+    nmax = _opt(argv, '--nmax', 6, int)
+    budget = _opt(argv, '--budget', 600, int)
+    cap = _opt(argv, '--cap', 400000, int)
+    tgts = (_opt(argv, '--targets', '2,2/3,4/3,8/3,4,isqrt3')).split(',')
+    out = _opt(argv, '--out')
+    sat = '--generators' not in argv
+    lat, U, saturated = fabric_lattice(spec, saturate=sat)
+    rank = lat.rank
+    print(f'{spec}: rank {rank}, g = {len(U)} '
+          f'({"saturation" if saturated else "GENERATORS ONLY -- escapes are sound for U-fabric only"})')
+    tvec = {}
+    for t in tgts:
+        d = fabric_target(lat, t)
+        tvec[t] = d
+        if d is None:
+            print(f'  target {t}: not in the lattice')
+    rows = []
+    for N in range(nmin, nmax + 1):
+        if any(all(x % N == 0 for x in s_) for s_ in U):
+            print(f'  N = {N:2d}: not admissible (a unit vector lies in N*Lambda)')
+            rows.append({'N': N, 'admissible': False})
+            continue
+        if N ** rank > cap:
+            print(f'  N = {N:2d}: {N**rank} classes -- over the cap of {cap}')
+            rows.append({'N': N, 'admissible': True, 'classes': N ** rank, 'verdict': 'not asked'})
+            continue
+        v, secs, model, sha, note = find(U, N, rank, 'plain', budget=budget)
+        row = {'N': N, 'admissible': True, 'classes': N ** rank, 'verdict': v,
+               'seconds': round(secs, 2), 'cnf_sha256': sha, 'note': note, 'saturated': saturated}
+        if v != 'SAT':
+            print(f'  N = {N:2d}: {N**rank:7d} classes -> {v} in {secs:.1f} s')
+            rows.append(row)
+            continue
+        _commit_colouring(spec, N, model, U, rank)
+        pc = PeriodicColouring(U, N, rank, model, label=spec, saturated=saturated)
+        gaps = pc.gapped_vertices()
+        row['gapped_vertices'] = len(gaps)
+        row['gap_at_origin'] = pc.gap_at(0)
+        row['forces_closed_by_row66'] = bool(gaps)
+        print(f'  N = {N:2d}: {N**rank:7d} classes -> SAT in {secs:.1f} s; gapped {len(gaps)}'
+              + ('   -> row 66 closes Forces on the WHOLE lattice' if gaps else ''))
+        row['targets'] = {}
+        for t in tgts:
+            if tvec[t] is None:
+                continue
+            r = pc.screen(tvec[t], t)
+            row['targets'][t] = r
+            _print_row(t, r)
+        rows.append(row)
+    if out:
+        os.makedirs(os.path.dirname(out), exist_ok=True)
+        json.dump({'spec': spec, 'rank': rank, 'g': len(U), 'saturated': saturated, 'rows': rows},
+                  open(out, 'w'), indent=1)
+        print('wrote ' + out)
+    return rows
+
+
 def cmd_find(argv):
     spec = argv[1]
     aim = _opt(argv, '--aim', 'gap')
@@ -882,14 +960,26 @@ def cmd_find(argv):
 
 
 def _commit_colouring(spec, N, col, U, rank, tag_extra=''):
+    """NEVER overwrites.  A committed colouring is the provenance of every verdict screened from it, and a
+    second solver run returns a DIFFERENT colouring with different verdicts (measured: two N = 2 colourings of
+    L3 disagree at `2` and `4`).  A clashing file gets an `-altK` name instead."""
     d = os.path.join(ROOT, 'data', 'fs70', 'quotient')
     os.makedirs(d, exist_ok=True)
     tag = spec.replace(':', '_').replace('+', '_')
     Smod = sorted({tuple(x % N for x in s) for s in U})
-    path = os.path.join(d, f'{tag}-N{N}{"-" + tag_extra if tag_extra else ""}.colouring.json')
-    json.dump({'spec': spec, 'N': N, 'colouring': col, 'connection_set': [list(s) for s in Smod]},
-              open(path, 'w'))
+    body = {'spec': spec, 'N': N, 'colouring': col, 'connection_set': [list(s) for s in Smod]}
+    base = f'{tag}-N{N}{"-" + tag_extra if tag_extra else ""}'
+    path = os.path.join(d, base + '.colouring.json')
+    k = 0
+    while os.path.exists(path):
+        if json.load(open(path)).get('colouring') == col:
+            print(f'          {os.path.relpath(path, ROOT)} already holds this colouring')
+            return path
+        k += 1
+        path = os.path.join(d, f'{base}-alt{k}.colouring.json')
+    json.dump(body, open(path, 'w'))
     print(f'          wrote {os.path.relpath(path, ROOT)}')
+    return path
 
 
 def cmd_degrey(argv):
@@ -1115,6 +1205,9 @@ def main():
     if cmd == 'screen-additive':
         a, d = cmd_screen_additive(argv)
         return 1 if d else 0
+    if cmd == 'sweep':
+        cmd_sweep(argv)
+        return 0
     if cmd == 'find':
         cmd_find(argv)
         return 0

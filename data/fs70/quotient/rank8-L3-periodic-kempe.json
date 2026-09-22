@@ -1,0 +1,22 @@
+{
+ "spec": "group:u3:2+w4",
+ "rank": 8,
+ "g": 324,
+ "saturated": true,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 256,
+   "verdict": "UNSAT",
+   "seconds": 0.03,
+   "cnf_sha256": "30c6f07cd250d5eb31c3a34508814b0d2a73b2e23f25ec5cf732fe45a0028e3d",
+   "note": "origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 256",
+   "saturated": true
+  },
+  {
+   "N": 3,
+   "admissible": false
+  }
+ ]
+}
