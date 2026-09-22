@@ -4,7 +4,7 @@
 steps 7 and 9): a milestone's hand theorems, derived theorems and tools-grade theorems are numbered here — statement, grade,
 where the proof lives, what rests on it, and its kernel status — and `LEDGER.md` § B indexes them one line each. Grades are
 `CLAUDE.md` § Notation's. A theorem's proof is not repeated here when a record holds it; this file is the index that survives
-the ledger row's compression. Entries T10 onward are filled at the close from phase 1e.*
+the ledger row's compression. T10 and T11 were filled from phase 1e's "Theorems this phase proved" heading.*
 
 ## The theorems
 
@@ -84,11 +84,31 @@ hexagonal fabric's `E₀` meets an inert prime at 5 and a totally split one at 7
 `data/fs70/owner/mechanism-periodic-colourings-2026-09-22.md`. *Kernel:* the identification `Λ/pΛ ≅ O/p` is textbook; declined.
 *Rests on it:* G69 (minted at the close if P-M1 survives phase 1e).
 
-**T10 — The periodic Kempe screen. [hand; phase 1e — filled at the close]** For a period-`N` colouring `c`, the `(a, b)`-Kempe
-component of the origin in the infinite lattice graph is the lift of the component `Q₀` of `0̄` in the quotient's two-colour
-subgraph: `K₀ ∩ (class x̄) = p(x̄) + V`, `V` the lattice of closed-walk voltages; `δ ∈ K₀` iff `δ̄ ∈ Q₀` and `δ − p(δ̄) ∈ V`. T2 is
-the case of an additive colouring (then `V` is the subgroup `R_b`); T6's gap is the case `K₀ = {0}`. *Status, controls, kernel:*
-at the close.
+**T10 — The periodic Kempe screen. [hand; the phase-1e implementer; the L3 exhibitions re-derived by the owner]** Let `c` be a
+proper four-colouring of `Cay(Λ/NΛ, U mod N)` (`U` the complete unit-vector set, `N` admissible), `C` its pull-back, `a = C(0)`,
+`b ≠ a`. Let `Q` be the quotient's two-colour subgraph (classes coloured `a` or `b`; one edge per `(ȳ, s)`, `s ∈ U`, carrying
+the voltage `s`), `Q₀` the component of `0̄`, `p(x̄)` the voltage of a spanning-tree walk `0̄ → x̄`, `V` the ℤ-span of the
+fundamental-cycle voltages `p(ȳ) + s − p(ȳ + s̄)`. Then the `(a, b)`-Kempe component `K₀` of the origin **in the infinite lattice
+graph** satisfies `K₀ ∩ (class x̄) = p(x̄) + V`, so **`δ ∈ K₀ ⟺ δ̄ ∈ Q₀ ∧ δ − p(δ̄) ∈ V`**. Corollaries: **(T10.1)** if `δ ∉ K₀` for
+some `b`, the swap `a ↔ b` on `K₀` is a proper four-colouring of every graph on `Λ` separating `(0, δ)`, so `¬ Forces` at `δ` on
+`Λ` at every radius; **(T10.2)** `V ⊆ NΛ`, and `[NΛ : V]` is the deciding invariant (81 on the rank-6 L3 at N = 2); **(T10.3)** the
+`Q₀` conjunct is redundant where the `V` test passes (`δ ∈ V ⟹ δ̄ = 0̄`); **(T10.4)** `c(δ̄) ≠ c(0̄)` separates outright;
+**(T10.5)** `c(δ̄) = c(0̄)` refutes `Separated` at `δ` on every graph on `Λ` — one periodic colouring kills one of the two
+compulsions at every target; **(T10.6)** with `U` a generator set only, the escape is sound for graphs whose edges lie in `U`. T2 is
+the additive case (`V = R_b`); phase 1d's fan gap (T6) is the case `Q₀ = {0̄}`. *Proof:* `data/fs70/records/phase-1e.md` §2.1
+and its "Theorems this phase proved". *Controls:* de Grey's K-lattice reads rigid at `8/3` under all six periodic colourings and
+escapes at `2` and `4` under five — discriminating; L1's gapped colouring escapes everywhere at the gap colour; the additive case
+agrees with T2 at every target. *Kernel:* **stub with T2/T6** (FS-2): the voltage-lattice form is the theorem to write; the
+exhibition on a finite ball is what the kernel would check.
+
+**T11 — The rank-6 L3 carries no four-colour compulsion at arity 2. [derived, on committed colourings; exhibited]** For
+`Λ = ⟨ζ₆^m u^n (|n| ≤ 2)⟩ + ζ₆·{w, w̄}` (42 unit vectors, wall-broken, 3-non-integral) and every chainable target
+`δ ∈ {2, 2/3, 4/3, 8/3, 4, i√3}`: `¬ Forces` (T10.1 at N = 2 and 4) and `¬ Separated` (T10.5 at N = 2 and 6), hence
+`arityFloor G 4 ≥ 3` for every unit-distance graph `G` on L3 — row 66's `three_le_arityFloor_heule510` one field over. The
+`Forces` half is exhibited on a 109,957-point, 758,196-edge word ball (the implementer's `verify-escape`; the owner's
+`po_verify_kempe_L3.py` on a ball, edges, components and swaps of its own — every target). **Note against T9:** L3's colourings
+are gap-free at every N tried and it is loose anyway — at rank 6 the quotient colourings are not a field's residue colourings, and
+the Kempe index, not the gap, decides. *Kernel:* the exhibition is `decide`-grade on a 110k-point graph — priced, not pursued.
 
 ## Conjectures surfaced, not claimed (the close's stub sweep)
 
