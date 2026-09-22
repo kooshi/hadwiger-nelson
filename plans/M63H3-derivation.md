@@ -194,11 +194,22 @@ commensurate/periodic/bounded chain and the `Σ7` identification appear as asser
 ("(Derived at M63 phase H3 and left in `plans/M63-phaseH3-prior-art.md` §PA.4; promoted here 2026-09-17.)"),
 and §PA.4 as read here contains the core identity (`M63H3-T7`) but not a written proof of the periodicity
 step or the `Σ7` computation; `Instances/Seven.lean`'s docstring (kernel, M36) independently confirms the
-`τ = −3+ζ₆`, norm-7 ideal fact the `Σ7` reading rests on. *Proof verdict:* **unsure — owner to re-derive**
-(the periodicity/bounded argument is plausible and elementary — a shared finite-index sublattice makes the
-graph a covering of a finite quotient graph, whose chromatic number bounds any of its covers' — but no
-written chain from "commensurate" to "bounded by the local bound" was found in the phase's own record, only
-in the grokking's own prose). *Rests on it:* `CLAUDE.md` G62 in full; G7's ladder (row 64, M63H2-T1) restated
+`τ = −3+ζ₆`, norm-7 ideal fact the `Σ7` reading rests on. *Proof verdict:* **closes — re-derived by the owner at acceptance (2026-09-22), the proof now on disk here.** Let `Λ` be
+the base's lattice with `ℚ`-span the CM field `E` (rank 4 for the Moser lattice, `E = ℚ(√−3,√−11)`), whose points have
+coordinates in the real field `F` (`Re z, Im z ∈ F` for `z ∈ E ⊂ F(i)`; `F = K` for the Moser lattice), and `ρ = ρ_n` the
+twist, `cos θ = (2n−1)/(2n) ∈ ℚ`. **(i) Commensurate ⟺ `ρ ∈ E` ⟺ `√(4n−1) ∈ E`:** two full lattices are commensurable iff they
+have the same `ℚ`-span; `ρΛ` has `ℚ`-span `ρE`, equal to `E` iff `ρ ∈ E`, and `ρ = cos θ + i sin θ` lies in `E` iff
+`i√(4n−1) ∈ E`. **(ii) Periodic:** `M = Λ ∩ ρΛ` has finite index in both; translation by any `m ∈ M` maps `Λ` to `Λ` and `ρΛ`
+to `ρΛ`, so the infinite unit-distance graph on `Λ ∪ ρΛ ⊆ L = Λ + ρΛ` (a lattice) is `M`-periodic, and every finite arena
+is a subgraph of it. **(iii) Bounded:** `L` is a finitely generated free abelian group and the graph on it is `Cay(L, U)`
+with `U` its unit vectors; for any `N` with `U ∩ NL = ∅` it maps homomorphically onto `Cay(L/NL, U mod N)`, so its chromatic
+number is at most the finite quotient's (row 56, `unitQuadrance_colorable_of_quotient`); and since every point of `L` has
+coordinates in `F`, the arena lies in `F²` and `χ(arena) ≤ χ(F²) ≤ L(F)` — a commensurate twist never leaves the base field,
+which is the sentence claimed. **(iv) The `Σ7` instance:** for `w ∈ ℤ[ζ₆]` primitive with `N(w) = |w|² = 7` (`w = −3 + ζ₆`),
+the rotation `R = w/w̄` has `cos θ = Re(w²)/7 = 13/14`, the hexagonal `Σ7` angle `21.79°`; `wΛ ⊆ Λ ∩ RΛ` (as `wΛ = R·(w̄Λ)` and
+`w̄Λ ⊆ Λ`), and `[Λ : wΛ] = N(w) = 7`, so the coincidence site lattice `Λ ∩ RΛ` is exactly the ideal `(w)` of index 7 — the
+sublattice whose cosets `Instances/Seven.lean` colours. The batch-4d implementer's *unsure* was right on the record: no
+written chain existed until this one. *Rests on it:* `CLAUDE.md` G62 in full; G7's ladder (row 64, M63H2-T1) restated
 as "rung by rung, commensurate or not". *Prior art:* the periodicity-implies-bounded mechanism is the same
 shape as row 56's finite-plane bound and G68's fan-gap closure (both kernel), applied here to a coincidence
 sublattice rather than a residue ideal; the `Σ7` computation is `Instances/Seven.lean`'s own kernel fact,
