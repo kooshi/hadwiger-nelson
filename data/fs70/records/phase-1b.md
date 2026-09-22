@@ -19,10 +19,11 @@ built, and it was asked at a density no earlier shape in this milestone reached.
    `½ = v + v̄` and `ζ₆/2 = ζ₆v + ζ₆v̄` lie in the lattice and the **plan's own §3.4 theorem** applies: no
    homomorphism to a group of order four is nonzero on every unit vector. L6 is silent to the additive screen
    and to the Kempe screen for the same structural reason as L2 and L3, and only a solver can speak on it.
-2. **Rank 6 buys density that rank 8 could not.** L6's word balls reach **average degree 17.09 at 805,693
-   points**, where phase 1's rank-8 lattices topped out at 15.5 at 1,864,417 points with an empty 14-core.
-   That is the largest degree this milestone has ever asked at, on 43 % of the point count — and it **decides**,
-   where phase 1's biggest shapes did not (§3).
+2. **Rank 6 buys density that rank 8 could not.** L6's word ball at sums of ≤ 5 is **805,693 points at average
+   degree 17.09**, and its 14-core is **217,015 points at degree 18.98**. Phase 1's densest ball was 1,864,417
+   points at 15.47 and its densest *object* the 12-core of that ball, 1,377,541 points at 16.08, with the
+   14-core empty. So L6 gains **+2.90 in average degree on 16 % of the points** against phase 1's best, and its
+   shapes **decide**, where phase 1's biggest two did not (§3, §4.4).
 3. **Every ask that returned a verdict returned SAT** (§4), at four densities: the balls at sums of ≤ 3
    (11,593 points, degree 10.95), ≤ 4 (109,957, degree 14.10) and ≤ 5 (805,693, degree 17.09), and the **14-core
    of the last — 217,015 points at degree 18.98**, the first object this milestone has produced above degree 18
@@ -84,6 +85,13 @@ Also: log₁₀ covolume **−3.3334**; lattice sha `cfb3453a912db9a2`; the **3-
 exactly the ζ₆-orbit of `v = (1 + i√15)/4` — four of denominator 4 (`±v`, `±v̄`) and eight of denominator 8
 (`ζ₆^m v`, `ζ₆^m v̄`), verified as a **set equality**, not a count. The reason is the identity the plan already
 records: `ρ₁₅ = −v̄²`. Adjoining the ζ₆-orbit of `ρ₁₅` to `ℤ[ζ₆, u]` pulls in its square root's whole orbit.
+
+**And `½ ∈ Λ` is the 2-adic wall being broken, realised at rank 6.** G35 and G55 put the wall-break at
+`1/2 ∈ ℤ[U]`, the ring the field's unit vectors generate; over ℚ(√3,√5) the wall is broken because
+`15 ≡ 7 (mod 8)`, and `v + v̄ = ½` with `v = (1 + i√15)/4` is the witness. Phase 1's wall-breaking fabrics, L2
+and L3, reach it at **rank 8** by adjoining `v` or `w` to a ζ₁₂-orbit lattice. **L6 reaches it at rank 6, and
+without adjoining `v` at all** — the ζ₆-orbit of `ρ₁₅ = −v̄²` drags `v` in through the saturation. So L6 is the
+cheapest wall-broken fabric this milestone has built, and it is the CM-shaped one.
 
 **So the empty additive family is the plan's §3.4 theorem, not a computation.** `v + v̄ = ½` and
 `ζ₆v + ζ₆v̄ = ζ₆/2` are both in the lattice (checked), so `Λ ⊇ ½·{1, ζ₆}`, and then `φ(1) = 2φ(½)` and
@@ -164,15 +172,20 @@ The core ladder on the `k = 5` ball (`python3 tools/fs70_fabric.py core build/fs
 | **14-core** | **217,015** | **2,059,614** | **18.98** |
 | 16-core | 0 | — | — |
 
-**Phase 1's densest object — L5's `k = 4` ball, 1,864,417 points at degree 15.47 — has an EMPTY 14-core** (its
-record, decision 7). L6's exists, holds a quarter of the ball, and reads two degrees higher than the ball it came
-from: **the first object this milestone has produced above degree 18, at 12 % of the point count of the largest
-thing phase 1 ever asked.** A core is a subgraph, so a **refusal** on it is a refusal on the whole ball and on
+**The comparison, with exactly one thing differing.** Phase 1's densest *object* was not its ball but the
+**12-core** of L5's `k = 4` ball: 1,377,541 points at degree **16.08**; its 14-core is **empty** (phase 1 record,
+decision 7). L6's best is the **14-core** at 217,015 points and degree **18.98** — so against phase 1's best
+density this is **+2.90 in average degree on 16 % of the points**, and against phase 1's best *ball* (degree
+15.47) it is +3.51. Either way it is the first object this milestone has produced above degree 18. A core is a subgraph, so a **refusal** on it is a refusal on the whole ball and on
 the lattice, while a colouring of it says nothing about the ball — which is the right trade when the hunt is for
 a refusal (G65: step up in degree). The origin and `4/3` survive the coring; `2`, `8/3` and `4` do not, and the
 tool says so rather than asking a pin it cannot pose.
 
-PLACEHOLDER-C14-TABLE
+| pin | verdict | solver seconds |
+|---|---|---|
+| control | **SAT** | **1.16** |
+| forces 4/3 | **SAT** | **1.17** |
+| separated i√3 | *refused by name* — `i√3` does not survive the coring; the tool says so with the point count rather than asking a pin it cannot pose | — |
 
 ### 4.5 The base alone, and the arena
 
