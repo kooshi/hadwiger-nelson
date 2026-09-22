@@ -259,7 +259,7 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **FS-71 — the theorem audit — next** (Kooshi, 2026-09-22; `plans/STUB-theorem-audit.md`): every theorem every prior milestone proved outside the kernel, found and filed in a per-milestone derivation file with a kernel decision and indexed in `LEDGER.md` § B. Opens in a fresh session at the reframe. **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
+**Open milestones, in order.** **FS-71 — the theorem audit — OPEN** (Kooshi, 2026-09-22; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): every theorem every prior milestone proved outside the kernel, found and filed in a per-milestone derivation file with a kernel decision and indexed in `LEDGER.md` § B. Six reading batches (M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38, FS-50–FS-66), Sonnet 5 implementers, every derivation the owner's; its gate's first instance is G35's correction. **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
 
 **Ranked stubs** (re-ranked 2026-09-22: FS-70 closed; FS-71 rank 1 as the next milestone; FS-73 minted at rank 3, FS-72 at rank 5; FS-48 and FS-59 re-aimed by G68/G69 — the quotient and periodic Kempe screens before any ball. Before that, 2026-09-21: FS-66 closed; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9;
 `plans/FRONTIER-STUBS.md` is authoritative):
@@ -609,21 +609,23 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   completion above 2 (norm 2 or 4). For multiquadratic F the wall stands iff no odd square class is
   ≡ 7 (mod 8); a glue point over K with radicand r breaks it iff −r is a square in both 2-adic completions
   of K — a congruence test before any solver (of the classes {1, 2, 5, 7, 10, 14, 35, 70}, exactly 5 and 7
-  break). The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U] (GPT Astra's prime inversion, G55; for real quadratic fields `[Fischer1990b]` Thm 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8)). **The wall is the ramification set of one algebra, and reciprocity bounds it** [hand;
-  the quaternion facts are textbook, the identification with our wall is ours and its prior art is **unchecked** — probably
-  folklore in the quaternion-algebra literature, and the G49 search is owed before any of it is claimed]: breaking the wall — −1 a square in every completion
-  above 2 — says exactly that the quaternion algebra `(−1,−1)_F` splits at every place above 2. That algebra splits at every
-  odd finite place (its coefficients are units there) and is a division algebra at every real place (there it is Hamilton's),
-  so **a broken wall forces its ramification set to be exactly the real places of F**; the set is even by Hilbert
-  reciprocity, so **no field with an odd number of real places can break the wall** — in particular none of odd degree, since
-  r ≡ [F:ℚ] (mod 2). That is G56's odd-degree two-colourability with its local-degree parity argument replaced by a
-  reciprocity law, and it restates the wall as the ramification of a single algebra rather than a congruence on square
-  classes. **Gate:** the field-level statement needs only that a number field with a conjugation-fixed prime
+  break). The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U] (GPT Astra's prime inversion, G55; for real quadratic fields `[Fischer1990b]` Thm 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8)). **Reciprocity bounds the wall, but the wall is not the ramification of one algebra** [hand; corrected 2026-09-22 at
+  FS-71's gate — the audit's first instance]: `(−1,−1)_F` splits at a place `v` above 2 iff −1 is a sum of two squares in `F_v`,
+  which for a 2-adic field is iff its local degree is even (`(−1,−1)_{F_v} = (−1, N_{F_v/ℚ₂}(−1))_{ℚ₂} = (−1)^{[F_v:ℚ₂]}`) —
+  implied by −1 being a square there (`ℚ₂(i) ⊆ F_v`) and **not implying it**: over ℚ(√2) and ℚ(√3) the algebra splits at the
+  one place above 2 and the wall stands. *Demotion record: as minted this entry said the broken wall "says exactly" that the
+  algebra splits above 2 and "restates the wall as the ramification of a single algebra"; both false, by those two fields.* What
+  survives: a broken wall makes every local degree above 2 even, so the algebra's ramification set is exactly the real places of
+  F (it splits at every odd finite place, its coefficients being units there, and is Hamilton's at every real place); that set is
+  even by Hilbert reciprocity, so **no field with an odd number of real places can break the wall** — none of odd degree, since
+  r ≡ [F:ℚ] (mod 2). The sharper form, odd degree ⟹ 2-colourable, is G56's by the local-degree parity argument and is
+  `[Moorhouse2010]` §7.1's. The wall itself is the behaviour of the quadratic extension `F_v(i)/F_v` at each place above 2 —
+  split, inert or ramified, G56's trichotomy — not of any single quaternion algebra. **Gate:** the field-level statement needs only that a number field with a conjugation-fixed prime
   supplies the valuation subring with residue field of size N(𝔭); closing it promotes G35 and G43. *Do: before any solver
   over F, decide the wall by congruence — for a K-glue point, is −r a square in both 2-adic completions; for multiquadratic
-  F, is some odd square class ≡ 7 (mod 8); for any F, does `(−1,−1)_F` split above 2, i.e. is 1/2 ∈ ℤ[U] — and expect no
-  odd-degree field to break it. Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at a
-  finite place.*
+  F, is some odd square class ≡ 7 (mod 8); for any F, is 1/2 ∈ ℤ[U], i.e. does every prime above 2 split in F(i) — and
+  expect no odd-degree field to break it. Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at
+  a finite place (which would refute the parity step, not the trichotomy).*
 * **G36 — The residue colouring is the canonical separating colouring. [theorem + measured]** On a K-point
   descent stage it is proper, monochromatic on every distance-2 cheat, and separates the seed's pair — one
   colouring every cheat set must kill, and a free geometry check (a misplaced point shows as a monochromatic
