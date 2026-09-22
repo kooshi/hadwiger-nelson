@@ -384,9 +384,9 @@ a class family enumerated over present vertices misses it.
 rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
-***Every milestone opens with the grokking audit (WORKFLOW step 3g, Kooshi, 2026-09-22): each entry below, each ledger row's mechanism and
-each method rule is read against the milestone and its bearing extracted into the plan's phases — before the prior-art gate, with the rigor of
-the modeling passes. These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
+***Every milestone opens with the reframe (WORKFLOW step 3, Kooshi, 2026-09-22): first the grokking audit (3g) — each entry below, each ledger
+row's mechanism and each method rule read against the milestone and its bearing extracted into the plan's phases, the recognition it yields
+being the prior-art gate's (3a) search query — then the subplan; with the rigor of the modeling passes. These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
 that reasons from the literature's analogies while they sit unread has used them as background. FS-70 is the instance: G54's classifier, G16/G32's
 pigeonhole form and G40's absorption each bore on it and none was run until asked for.***
 

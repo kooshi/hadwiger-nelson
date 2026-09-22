@@ -9,26 +9,24 @@ leaves.
    2026-08-09, Kooshi):** every future milestone on the roadmap is maintained as a *detailed*
    pre-subplan stub in `plans/` — full mission context in plain language, everything the deciding
    session knew (the observations, the registered expectations, the failure clauses, the named
-   deliverables including visualizers where the milestone produces an explorable object) — written
+   deliverables including visualizers where the milestone produces an explorable object, **and a provisional-bearings line
+   naming the grokkings the minting session believes bear**, step 3g) — written
    so a fresh session with zero conversation memory can subplan it with all meaning intact.
    Sessions die and compaction loses nuance; the stubs are the roadmap's memory. A direction
    change that does not rewrite the affected stubs is not recorded; a demoted milestone keeps its
    stub with a banner saying why (deprecate, never delete).
-3. **Subplan** — one milestone at a time, working up the DAG (opening with the grokking audit, step 3g, then the
-   prior-art gate, step 3a). Deep-dive its requirements and
-   *strictly specify its shape*: write the **skeleton** — every signature and full theorem statement,
-   `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent.
-   Validate the spec right there, where a wrong statement is cheap: `#eval` the definitions, keep a
-   sanity `example` per definition, and exhibit one concrete model of the hypotheses before trusting
-   anything that assumes them.
-   **Where cost decides the shape, measure before specifying, not after.** At this project's scale a
-   representation choice is routinely a 3–5× difference, and it is invisible until measured: M04's
-   vertex table and its squared-distance definition each turned out that way, and because both were
-   settled with numbers in the subplan, implementation overturned nothing. A shape chosen from
-   plausibility and then benchmarked is a shape you will rewrite. Refine scope here: if a milestone is bigger than it looked, push the
-   excess to a later milestone — and whenever we carry scope forward, drop a subplan **stub** in
-   `plans/` capturing the carry-forward notes → `plans/<Mxx-milestone>.md`.
-3g. **Grokking audit** — *first: before the subplan's routes are written, before the prior-art gate, before any derivation.*
+3. **Reframe** — the milestone's opening, in two acts **in this order**, before a route is written: **3g, the knowledge
+   audit** against the project's own theory (results, understanding, method — here the ledger, the grokkings and the method
+   rules), whose product is the *recognition*: the milestone's question restated in the theory's terms, with what the theory
+   predicts, supplies, forbids and what the milestone can falsify; then **3a, the prior-art gate** against the world's theory,
+   which *depends on 3g* — the recognition sentence is the search query (G49), and prior art found without a frame is filed
+   under "are we first?" and lost (the step-9 sweep exists for that failure). Their outputs are **§G** and **§PA** of the subplan,
+   in that order, ahead of everything else; then step 3s. (Minted in this shape 2026-09-22, Kooshi: FS-70's routes were written
+   from the literature's shapes by analogy because nothing had reframed the goal first. In a generic extraction of this workflow
+   the two acts are *the knowledge audit* and *the prior-art gate*, together *the reframe*, and they precede the subplan.)
+
+3g. **Grokking audit** (the knowledge audit) — *the first act of step 3: before the prior-art gate, before the subplan's routes, before any
+   derivation.*
    Its output is a **§G section of the subplan**, ahead of §PA; a subplan without one is not a subplan. **Minted 2026-09-22
    (Kooshi)**, after FS-70's plan — three implementer phases, an exact theorem and a typed null — was found to have skipped
    four things `CLAUDE.md` already held, each surfaced only by Kooshi asking a question a grokking answers: G54's tight/slack
@@ -59,6 +57,12 @@ leaves.
    5. **At the close (step 9), re-read §G against what happened**: which extractions paid, which entry should have been used
       and was not — each miss is a new instance recorded under this step, and the grokking that was missed gets one line
       saying which milestone it would have aimed.
+   6. **Two lighter touches at the milestone's edges.** *At minting* (step 2, the close that writes a stub): the stub carries a
+      **provisional bearings** line — the grokkings the minting session believes bear — so that *choosing* the milestone uses the
+      knowledge too; it is provisional and the audit at the opening replaces it (FS-70's stub named G48, G55, G57, G7, G62, G31
+      and missed G54, G16, G32, G40, G60). *At the close* (step 9): every newly minted grokking names the **open stubs it bears
+      on**, and those stubs' provisional lines are updated in the same commit — the knowledge reaches the milestones it aims
+      before they open.
 
 3a. **Prior-art gate** — *before any derivation, and before the modeling passes.* Thirty minutes, and its
    output is a **§PA section of the subplan**; a subplan without one is not a subplan. Minted 2026-09-08
@@ -109,6 +113,20 @@ leaves.
    about where the unworked ground is. **Sell this as AIMING the milestone, not as protecting novelty**, or it
    gets skipped: it hands over free theorems and it finds the open questions the work is answering. Anything
    found goes into `BIBLIOGRAPHY.md` the same day, per the bibliography rule.
+3s. **The subplan proper** — only now the routes, the skeleton, the measurements and the phases, each aimed by §G
+   and §PA. Deep-dive its requirements and
+   *strictly specify its shape*: write the **skeleton** — every signature and full theorem statement,
+   `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent.
+   Validate the spec right there, where a wrong statement is cheap: `#eval` the definitions, keep a
+   sanity `example` per definition, and exhibit one concrete model of the hypotheses before trusting
+   anything that assumes them.
+   **Where cost decides the shape, measure before specifying, not after.** At this project's scale a
+   representation choice is routinely a 3–5× difference, and it is invisible until measured: M04's
+   vertex table and its squared-distance definition each turned out that way, and because both were
+   settled with numbers in the subplan, implementation overturned nothing. A shape chosen from
+   plausibility and then benchmarked is a shape you will rewrite. Refine scope here: if a milestone is bigger than it looked, push the
+   excess to a later milestone — and whenever we carry scope forward, drop a subplan **stub** in
+   `plans/` capturing the carry-forward notes → `plans/<Mxx-milestone>.md`.
 4. **Commit** the subplan (skeleton included) and move directly to modeling without pausing.
 5. **Modeling pass** — reforge the subplan through the de Bruijn modeling skills before implementing.
    Each skill is a fresh **Skill**-tool invocation scoped to the current milestone — *always* freshly
@@ -160,6 +178,9 @@ leaves.
    stated honestly, demote with a banner, never delete; § Paths forward mirrors the top of the table.
    Both files hold current state only: rewrite the affected text in place — no dated amendments,
    correction trails or superseded rankings — and leave the history to git and the milestone's plan.
+   **And re-read the milestone's §G against what happened, and propagate forward** (2026-09-22, step 3g): which extractions
+   paid, which entry should have borne and was not used — each a new instance under 3g — and, for every grokking minted at this
+   close, the open stubs it bears on, their provisional-bearings lines updated in the same commit.
    **And sweep the milestone's §PA for recognitions that belong in the Grokkings** (2026-09-17). The
    conjecture sweep below catches claims the milestone *made*; this catches identifications it *found while
    checking whether it was first*. The rule exists because M63 phase H3's prior-art appendix derived, verified
