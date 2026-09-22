@@ -547,7 +547,7 @@ forced pair at `4/3` (the three-copy spindle, a new closing shape). *Halt-and-ve
 ## 9. Addresses
 
 `tools/fs70_field.py`, `tools/fs70_fabric.py` (planner's, 2026-09-21); `data/fs70/planner/pa/` (the gate's raw responses);
-`data/fs70/owner/gate-2026-09-21-fields.md`; `plans/STUB-five-over-sqrt3-sqrt5.md`; `Proofs/HadwigerNelson/Instances/ThreeFive.lean`
+`data/fs70/owner/gate-2026-09-21-fields.md`; `data/fs70/owner/fs70_owner_verify.py` (the owner's independent all-pairs verifier over ℚ(√3,√5), committed while this plan was written — the second opinion every phase-2 witness passes before the owner scores it; not the frozen checker); `plans/STUB-five-over-sqrt3-sqrt5.md`; `Proofs/HadwigerNelson/Instances/ThreeFive.lean`
 (the skeleton); `Proofs/HadwigerNelson/Instances/SqrtEleven.lean` and `Instances/CompositumFive.lean` (the certificate pattern);
 `tools/fs58_check_witness.py`, `tools/fs58_emit_witness.py`, `tools/emit_cert.py`, `tools/emit_mask.py` (the pipeline);
 `~/source/library/pdf/arXiv-2608.04542v3-haugland-2131.pdf` (Appendix A); `~/source/library/notes/polymath16-threads-1-18-text.txt`
