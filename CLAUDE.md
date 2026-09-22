@@ -409,18 +409,32 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
 * **G1 — The field wall. [kernel]** The Moser twist is a seam-group word (ρσ² = −1), the seam group's
   countable closures are exactly 4-chromatic, and all of K² is 4-chromatic (Theorem B). A 5-forcer's
   coordinates must break the 2-adic wall — contain an odd square class ≡ 7 (mod 8), such as √5, √7 or √247
-  (G35). The certified witnesses' √5 and √7 are instances, not the criterion.
+  (G35). The certified witnesses' √5 and √7 are instances, not the criterion. *Do: before any solver on a candidate,
+  read its field's square classes for an odd one ≡ 7 (mod 8) (G35's congruence); none means Theorem B four-colours the
+  object and the null is free — never run it. Nothing kills it; it kills every five-colour design in a wall-standing field.*
 * **G2 — Construction grammar. [measured]** Rings of vertices about a point ⟺ that point was a rotation
   centre of the construction: de Grey's graph has two ring-hearts (its spindle centres), Heule's one. Mirror
-  defects are the chirality of a rotated copy.
+  defects are the chirality of a rotated copy. *Do: when you see rings about a point, name it a rotation centre and look
+  for the copy; when you design, expect one ring-heart per rotation used and read mirror defects as the copy's chirality.
+  Killing test: a witness with rings about a point that was no rotation centre of its construction.*
 * **G3 — Radially crystal, angularly detuned. [measured]** Every exact radius of the three certified
   witnesses about their centres lies in ℚ(√33); the new-field content lives in the angles. This is the
-  hexagonal fabric's form.
+  hexagonal fabric's form. *Do: read a witness's new field in its angles, never its radii; when you build, the rotation is
+  the parameter — enumerate every in-field detune (G7's family) and screen the base against each, rather than asking the one
+  detune a base's norms happen to realise. Killing test: a certified witness with a centre radius outside ℚ(√33).*
 * **G4 — One shell vocabulary. [measured]** Every known 5-forcer stands on one inventory of ~30–44 seam radii; 25 of de Grey's 29 per-centre rings are Heule-510 rings.
+  *Do: check a new forcer's shells against the inventory first and expect nothing new from them — a fourth witness's radii
+  are a lookup, not a discovery. Killing test: a five-forcer over K whose shells lie mostly outside the inventory.*
 * **G5 — Ownership factorization. [measured]** De Grey's graph is two congruent 29-ring single-centre
   systems; as a graph it is a 1-sum of two 791-vertex halves at vertex 14 plus the one cross edge (11, 802).
+  *Do: when an object is a 1-sum, test the halves apart and expect the join to carry only its edge — a compulsion of the
+  whole is a compulsion of a half or it is the cross edge's (and then G40 says the copy absorbs). Killing test: a compulsion
+  of the 1581 that neither 791-half carries.*
 * **G6 — The hexagram is fabric, not seed. [measured]** Heule-510's centre carries the certified hexagram,
-  but the hexagram plus any single detuned copy stays 4-chromatic: containment, not causation.
+  but the hexagram plus any single detuned copy stays 4-chromatic: containment, not causation. *Do: when a base contains a
+  certified object, do not read it as the seed — one detuned copy over any fabric predicts a four-colourable arena before the
+  run, and containment (checked in seconds on the base half alone) proves nothing. Killing test: the hexagram plus a single
+  detuned copy refusing four colours.*
 * **G7 — Detuning, read arithmetically. [measured + theorem]** Every forcing rotation is a small detune off a
   crystal angle (ρ₁₅ 1.045° off 30°, the Moser twist 3.557° off 30°), but the angle is the metric shadow: a
   spindle at distance d adjoins √(4d² − 1) and forces the next colour only if that radicand breaks the
@@ -439,22 +453,33 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   radicand form `√(4n−1)` as the adjoined quantity, the field screen over it, 6-openness as the selection criterion,
   and dropping the restriction to Loeschian `t` (the wiki lists *"particularly the Loeschian numbers 1, 3, 4, 7, 9,
   12, …"*; **2 is not Loeschian** — a second reason, beside `plans/M63-phaseH2-prior-art.md` §PA.4's census-image
-  failure, that `n = 2` was never examined).
+  failure, that `n = 2` was never examined). *Do: read every rotation as its `n`, its radicand `4n−1` and the field that
+  radicand lands in, and screen it by the four gates (row 64: free circle; `sin θ ∉ K`; the wall; 11's residue degree) before
+  any base is built — the gates decide in seconds what a solver decides in hours; enumerate the family's in-field members,
+  never the one rotation a base happens to realise. Killing test: a five-forcer whose rotation is no spindle — `cos θ` not
+  of the form `(2n−1)/(2n)` — or a member whose radicand keeps the wall and still forces five.*
 * **G8 — The direction group. [measured]** ⟨ζ₁₂, σ, √ρ₁₅ = (√15 + i)/4, √ρ₆₃ = (3√7 + i)/8⟩ closes all 67 of
   the 1581's edge directions at exponent ≤ 6. `[Polymath16wiki]` derived the Moser ring's unit group ⟨ζ₆, η⟩
   with η = (√33 + i√3)/6 = iσ⁻¹ and η² = ρ — the index-2 subgroup {ζ₁₂^a σ^b : a + b even} of ours. **Open,
   an afternoon with `tools/anatomy.py`:** are Heule-510/553's six out-of-group direction classes words in
-  α = (√5 + i√11)/4, a wiki generator our set lacks?
+  α = (√5 + i√11)/4, a wiki generator our set lacks? *Do: factor an object's edge directions as words in the group before
+  anything else — an out-of-group class names a missing generator — and build fabric as a group's bounded-length words, never
+  as free directions. Killing test: a direction of a K(√5,√7)-object that is a word in no extension of these generators by α.*
 * **G9 — Rigidity lives only at the forcing level. [measured]** The 791-point forcer (the 1581's
   centrosymmetric core V ∩ −V) forces exactly six pairs at four colours: the axis pair at distance 4 and five
   **antipodal** pairs at 4/√3 — forced central symmetry on the radius-2/√3 circle. Closing the antipodal
   compulsion needs the √183 spindle, **outside de Grey's field** (K(√183) = K(√61) is itself 6-open). The hexagram chunk at four colours and the 1581 at five have no forced pair and no
-  virtual edge.
+  virtual edge. *Do: hunt compulsions one rung below the top — a core asked at χ−1 colours — and expect the top rung empty;
+  over K the forced distances are 4 and 4/√3 and the shape includes antipodal pairs on a circle: list those targets before a
+  search, and check the closing spindle's field for openness before closing. Killing test: a forced pair or virtual edge at
+  the top rung of a held object.*
 * **G10 — The forcing is distributed. [measured, sampled]** Random single edge deletions make the 1581
   4-colourable, and neither enrichment nor designed stacks localize the forcing. The exhaustive criticality
   sweep is unrun and no edge's witness is on disk; vertices 11, 802 and 14 are critical structurally (the
   1-sum; `data/e4-critical-vertices.json`) and a sweep should exclude them. "Minimal" should mean least
-  geometry, not fewest vertices.
+  geometry, not fewest vertices. *Do: expect no organ — minimise geometry, not vertices; exclude 11, 802 and 14 from any
+  criticality sweep, and run the exhaustive sweep before claiming edge-criticality. Killing test: an enrichment or stack that
+  localises the forcing to a small subgraph carrying it alone.*
 * **G11 — The Moser subgraph is not necessary for 5. [external, unverified here]** Voronov et al. (2021,
   64,513 vertices) and Haugland (arXiv:2608.04542; 2,131 vertices, float arithmetic and uncertified SAT) give
   Moser-free 5-chromatic graphs, by landing a forced pair at a spindle-able distance and spindling.
