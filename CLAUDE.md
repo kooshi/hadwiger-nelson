@@ -417,7 +417,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   Moser-free 5-chromatic graphs, by landing a forced pair at a spindle-able distance and spindling. *Do: when the field
   lacks √11, take their route — land a forced pair at a spindle-able distance, then spindle — and treat "the spindle is
   necessary" as refuted. Killing test: a verification here finding either graph five-colourable.*
-* **G12 — The quadrature law. [kernel for ρ₁₅; measured for ρ₆₃]** A detuned copy RX of seam material couples
+* **G12 — The quadrature law. [hand (M31-T1), confirmed at 26 exact censuses; kernel for the ρ₁₅ instance (row 28)]** A detuned copy RX of seam material couples
   to X only along anchor-collinear pairs (W an even half-spindle word) or anchor-perpendicular pairs (W odd),
   with radii on one conic; words mixing √ρ₁₅ and √ρ₆₃ couple nowhere. A single detune's colour pressure is one thin conic, which is why 5-forcers
   are built from forced pairs. *Do: rank rotations by cross-edge density on their conic, never by count; expect one detune to
@@ -472,7 +472,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   five-colour avoider for any class proves χ(ℝ²) ≤ 5; a six-colour avoider bounds only 7-forcers. *Do: run the class sweep
   only on fabric holding a wall-breaking root — inside K the zero is Theorem B's and free — and read an avoider by what it
   bounds. Nothing kills the K half; a class firing at five on wall-broken fabric is the finding the sweep exists for.*
-* **G20 — Brick colourings. [kernel + measured]** A brick 7-colouring of the plane exists and is
+* **G20 — Brick colourings. [hand (M36-T1: the coset-7 family is forced boundary-tight) + kernel (the certificate) + measured]** A brick 7-colouring of the plane exists and is
   boundary-tight by force (cell diagonal exactly 1), so every strict-separation certificate refuses the whole
   family. Under the exact certificate, brick colourings reach seven and refuse six and five. *Do: use the exact certificate,
   never strict separation, and read one brick refusal as the whole family's. Killing test: a brick six-colouring under the

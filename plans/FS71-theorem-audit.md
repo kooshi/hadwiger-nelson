@@ -336,8 +336,11 @@ and its grade-tagged clauses are the seed; the files are then read for what the 
 
 ### S.6 Budget, stop rules, checkpoint
 
-Six Sonnet 5 implementers, one at a time, ~300k tokens each (a fresh one above ~400k — the rotation rule, tightened for a model
-we have not run before); no CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
+Sonnet 5 implementers, one at a time, ~300k tokens each (a fresh one above ~400k — the rotation rule, tightened for a model
+we have not run before). **Revised after batch 1 (404k tokens on 670 KB): the heavy batches are split so no reader takes more than
+~700 KB of plan text** — batch 3 → M53–M57 and M58–M61 (+ the consolidation rows); batch 4 → M62 + M64 (+ `POROS-2026-09-10-*`),
+M63 phases C–G (+ `POROS-2026-09-11-*`), M63 phases H–H4 (+ `POROS-2026-09-12-*`); batch 6 → FS-50–FS-56 and FS-58–FS-66; ten
+batches in all, numbered 1, 2, 3a, 3b, 4a, 4b, 4c, 5, 6a, 6b. No CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
 ends when every milestone in it is filed, or at the token budget — then the report's progress section names the next milestone
 and the successor is briefed from the repository alone. **Checkpoint:** the committed derivation files; **resume:** read
 `data/fs71/batch-<n>.md` § progress. A kill redoes nothing committed.
@@ -410,7 +413,7 @@ S.1 is pasted into every brief, and the checker's warnings on the batch's own pr
 
 | batch | filed | prior art | gap / demoted | controls found / total | re-derived | verdict |
 |---|---|---|---|---|---|---|
-| 1 | | | | | | |
+| 1 | 5 (M18, M31, M32, M35, M36; 15 milestones hold nothing outside the kernel — each classified) | 0 | 0 (one *unsure*, M18-T1, closed by the owner's re-derivation with its statement sharpened: the claim is about regular unit polygons, `μ(F(i)) = ⟨ζ₁₂⟩`, not about odd cycles of the graph) | none planted | M18-T1 — closes; five proof addresses opened, all resolve | **accepted** 2026-09-22; P4 met (5 < 6); two grade tags corrected (G12, G20); enumeration complete, 404k tokens — the lightest batch spent a full context reading files whole, so the heavier batches are split (§S.6, revised) |
 | 2 | | | | | | |
 | 3 | | | | | | |
 | 4 | | | | | | |

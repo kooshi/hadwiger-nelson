@@ -33,8 +33,7 @@ radicals) is textbook Galois theory, not itself a citable result. zbMATH: `ti:"u
 *Kernel:* partial — the even-word instance at `W = ρ₁₅` is **kernel** (`quadrature_rho15`, `Quadrature.lean`, M32);
 the general law across all words (odd words, `ρ₆₃` words, mixed words) was explicitly deferred to instruments-only
 status at M31 ("Kernel certification of the ρ₁₅ instance is DEFERRED to M32 ... M31 stays instruments-only") and
-never generalised past that one instance in any later milestone found in this audit — **stub-worthy** alongside
-FS-45's chain-theorem kernel work, but not separately registered.
+never generalised past that one instance in any later milestone found in this audit — the general law is **declined** (owner, 2026-09-22): no row or kernel statement consumes it, and G12 reads it as a design rule (rank rotations by their conic); the instance already in the kernel is the one the certified witness needed.
 
 ## Readings and measurements that were called theorems
 
