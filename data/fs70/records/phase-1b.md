@@ -261,7 +261,7 @@ anything, at every density it can be asked at.
 **The two CNF hashes are identical**, so exactly one thing differs between the rows — the configuration and the
 budget — and the comparison is about the solver, not the formula. Aiming kissat at the *satisfiable* direction,
 which is what a 1.89 M-vertex degree-15.4 instance should want, bought nothing at 60 % more time. **So the
-single-solver route on this instance is exhausted and the cube pass is the instrument**, which is what the
+single-solver route on THIS instance is exhausted and the cube pass is the instrument**, which is what the
 owner's ruling 2 and the plan's stop rule say. **And the pricing says it is not affordable as configured** (`build/fs70/price_cubes.py`,
 log `build/fs70/price-cubes.log`), which is why it is priced and not launched:
 
@@ -277,6 +277,8 @@ log `build/fs70/price-cubes.log`), which is why it is priced and not launched:
   and four workers against 65,536 unbudgeted cubes is not a pass, it is a wall.
 * **And there is no per-cube budget on this engine** — PySAT's CaDiCaL supports neither `incr=True` nor
   `solve_limited` (phase 1 §3), so one bad cube runs unbounded.
+
+**L2's `k = 4` control, by contrast, is SAT** — 1,882,945 points, 14,314,842 edges, degree 15.21, `kissat --sat` in **848.63 s** of a 2,400 s budget, model verified on every edge. It is the *larger* of the two instances and it had never been asked at `k = 4` by anyone. **That corrects the reading I first wrote here:** `--sat` is not spent on 1.9 M-vertex fabric, it is spent on L3 specifically, and what phase 1 and I had each measured was one instance rather than one method. L3 stays undecided after two configurations on a byte-identical formula, and the pricing below is the number for whoever asks it next.
 
 So ask (iii) ends as a **priced refusal rather than a null**: the instrument the plan and the owner's ruling 2
 name is, in its present configuration, 65,536 unbudgeted cubes at 12 GB a worker — and the first thing to fix is
