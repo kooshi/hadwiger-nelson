@@ -741,13 +741,18 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   exp(G)·Λ ⊆ ker φ, no additive four-colouring separates a pair of 2-adic depth ≥ 2 on any object
   (`addMonoidHom_apply_eq_of_sub_eq_exponent_nsmul`; Fischer's k·G = 0 obstruction at the exponent). The
   valuation law is its exponent-2 member. On the Exoo–Ismailescu seed this bound is the truth; K-fabric's
-  16-pair residue sits at depth 3, beyond any additive four-colouring.
+  16-pair residue sits at depth 3, beyond any additive four-colouring. *Do: compute the additive family first — exact and
+  cheap — and read it one-sidedly: a pair some additive colouring separates is not forced, no solver needed; a pair none
+  separates is not thereby forced (depth ≥ 2 is beyond them all). Nothing kills the kernel half; the seed's equality of
+  colouring space and additive family dies with one non-additive colouring of it.*
 * **G42 — Additive rigidity is closure, and the family dies before it closes. [kernel + measured]** Rigidity
   needs every two-colour Kempe subgraph of every admissible hom connected (gauge γ = Σ(components − 1)).
   Only Exoo–Ismailescu's G has γ = 0 **with its cheats** — the gauge is measured on the graph including its
   non-unit cheat edges, never on the unit-distance graph alone; K-unit parts are 4-colourable; wall-broken thickening can erase the
   family (W plus 63 F₂₄₇ points), while de Grey's half-spindle closure keeps it. Forcing does not need
-  rigidity (the seed's 252-cheat subset forces with > 5,000 colourings).
+  rigidity (the seed's 252-cheat subset forces with > 5,000 colourings). *Do: measure γ on the unit-distance graph and on
+  the graph with its cheats and say which; expect every unit-distance object Kempe-open, so rigidity is not the route and
+  forcing is. Killing test: a unit-distance object without cheats at γ = 0.*
 * **G43 — The residue plane seals fields. [kernel over rings; field level gated as G35; prior art
   `[Moorhouse2010]`]** At a usable prime the residue map is a homomorphism into Γ_q, so
   χ(F²) ≤ χ(Γ_q) — non-linear, 5 at q = 11. Every field the descent used is 5-sealed. For F ⊇ K,
@@ -763,17 +768,25 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   of a categorical product is the minimum of its factors' (`[Zhu2011]`; for vertex-transitive factors the independence
   ratio is the maximum, `[Zhang2012]`), so a composite ideal beats its best prime only through an **integrality gap**
   χ_f ≤ k < χ in some factor (outside review, 2026-09-16). The shadow sieve: an object's direction residues seal every graph built from
-  those directions.
+  those directions. *Do: at the opening of any milestone over a field, run the sieve (`tools/fplane.py`) — its primes with
+  residue field 𝔽_q, q ≡ 3 (mod 4), checking the residue DEGREE, since a larger field can lose a prime its subfield had — and
+  read the smallest usable plane's χ as the ceiling and the free null. Nothing kills the ring-level theorem; the field-level
+  step is G35's gate.*
 * **G44 — Kloosterman control. [derived + measured; ω facts prior art]** Γ_p has eigenvalues
   −K(1, c/4), so Weil and Hoffman force χ > 5 from p = 59 and χ > 6 from p = 103 (exact spectra; 71 as well), and at 83 six is
   refused by the exact certificate (row 68) — the window between is G56's: small planes are SAT questions,
   large ones theorems, and over K the sieve is the single prime 11. ω = 3 iff char 3 or 3 is a square, else 2
   (`[Krebs2022]`); ω ≠ χ above p = 3 (`[SchneiderSilva2013]`). Open: the size of χ − ω (`[Krebs2022]`'s χ > ω result, his Prop. 6.1, is weaker than what we hold); χ(𝔽₁₇²) ∈ {5, 6, 7}.
+  *Do: at any new prime compute the spectrum first — seconds — and let Hoffman's floor say whether the plane is a SAT
+  question or a theorem before any solver runs; from 59 five is refused for free, from 103 six. Nothing kills an exact
+  spectrum; the open items stay open.*
 * **G45 — A residue configuration lifts only if it is a shadow. [kernel + derived]** Modulo p² a finite-plane
   subgraph lifts iff its defect pairs to zero with every self-stress; a 6-critical subgraph carries
   ≥ \|V\|/2 + 3 such conditions, and a rigid framework's lift is unique and algebraic. A field's sealing prime
   is never its lifting prime (11 ramifies in ℚ(√11)). Designing in a finite plane and lifting is closed; the
-  plane remains a filter and an enumerator (the hub scan).
+  plane remains a filter and an enumerator (the hub scan). *Do: use a finite plane as a filter and an enumerator, never as a
+  design bed to lift from; when a residue configuration is offered as a shadow, check the stress pairing first. Nothing
+  kills it; it kills design-and-lift.*
 * **G46 — Recognize the classical theory first. [method]** Name the object in the vocabulary of the theory it
   already belongs to (Cayley graphs → character sums; frameworks → rigidity) and let that theory decide the
   question's shape before any search; the search then produces predicted instances, and the controls correct
@@ -785,13 +798,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   implementation describe the same object, the implementation is the one that cannot round off.
 * **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]** Compulsions map forward along
   homomorphisms; on a Cayley graph a forced pair needs a period of every colouring. The distance law this entry
-  carried — over a field where 11 is usable, forced at five colours ⟹ 11 ∣ d² and virtual edge ⟹ d² ≡ 1 (mod 11)
-  — is now the level-one shadow of the fan-gap theorem: over every such field `Forces ↔ =` and
-  `Separated ↔ Adj`, so a
-  five-colour forced pair is a single vertex and a virtual edge a unit edge at every distance, and the
-  residue-allowed distances name nothing. Unchanged: no finite plane at p ≡ 3 (mod 4) has a
+  carried (row 55) is the level-one shadow of the fan-gap theorem (row 66), which frees every pair at every distance over
+  such a field, so the residue-allowed distances name nothing. Unchanged: no finite plane at p ≡ 3 (mod 4) has a
   forced pair at a colour count it admits (row 60), and at 11 its virtual edges are exactly its edges (kernel;
-  measured at 3, 7, 19; prime fields only).
+  measured at 3, 7, 19; prime fields only). *Do: over any field where 11 is usable, expect `Forces ↔ =` and
+  `Separated ↔ Adj` at five colours without asking, and ask for no residue-allowed distance list. Nothing kills it; it kills
+  FS-16's kind of list.*
 * **G48 — The tightness mechanism, and the six-level question answered no over sealed fields. [kernel]** Over a field
   sealed at k by a usable prime 𝔭 whose plane is k-colourable, a pair forced equal at k colours has 𝔭 ∣ d², its
   spindle adjoins √(4d² − 1) ≡ √−1 (mod 𝔭), and every prime above p stops being usable: the forcer deletes
@@ -807,9 +819,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   known — whose **bold form is χ(ℝ²) = 7**. It **loses its constructive route** (a forced pair spindled into
   6-openness) and keeps its predictions: Γ₈₃ is not six-colourable (row 68), so under it **χ(K(√7)²) = 7**
   — the boldest prediction, pinned to the field the ρ₆₃ arena was built in — and de Grey's field, all of whose usable primes have spectral floor ≥ 8, is 7 outright (FS-40, closed with FS-50).
-  **Proved range** (GPT Astra, G55): L ≤ 3 for every real number field; L ≤ 4 for every field containing √3; L ≤ 5 for every
-  multiquadratic F ⊇ K given the 8/3 forcer; L(F) is the sharp form — the residue graph's chromatic number, 2 at ℚ(√5) where |κ|
-  reads 4. *Falsifiers: a field with χ(F²) < min(7, L(F)) — ℚ(√11)² and ℚ(√23)², the cheapest, now meet their value (row 73), so next ℚ(√167)
+  **Proved range:** G55; L(F) is the sharp form — the residue graph's chromatic number, 2 at ℚ(√5) where |κ| reads 4. *Do:
+  state every milestone's target as a value of L(F) and say whether F sits inside the proved range; at L ≤ 5 outside it the
+  milestone is a test of the conjecture, so register its outcome as a prediction before the first solver runs. Falsifiers:
+  a field with χ(F²) < min(7, L(F)) — ℚ(√11)² and ℚ(√23)², the cheapest, now meet their value (row 73), so next ℚ(√167)
   (FS-59); a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime; for
   the six-question, a 5-colourable, 5-tight Cayley quotient of a 6-open plane (FS-42).*
 * **G49 — The prior-art gate. [method, measured]** Recognition is half the rule; the other half is a search
@@ -827,7 +840,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
 * **G50 — Read what the search found. [method]** A held-but-unread paper, or a bibliography title whose guess
   touches a live milestone, blocks that milestone's opening until scanned. An abstract is not a reading. Walk
   the citation graph of the paper that *posed* the question; cross-check citations in two databases; mine
-  every read paper's references into the bibliography the same day; mark reading per section.
+  every read paper's references into the bibliography the same day; mark reading per section. *Do: scan, at the opening
+  and before the derivation, every held-but-unread paper whose title touches the milestone. Killing test: three consecutive
+  gates whose blocking papers, read, changed nothing.*
 * **G52 — Breaking the wall is necessary and visibly not sufficient; the equal-radius family is the mechanism. [measured +
   reading, one instance with a positive control]** A wall-breaking rotation can still be four-colourable: breaking the wall is a
   property of the field the rotated copy lives in, while the residue colouring reads the base points, which never leave the
