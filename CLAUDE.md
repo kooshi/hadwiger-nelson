@@ -856,7 +856,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   field, so every circle point carries the centre's residue), and the record has `t = 2`; so "this object defeats the residue
   certificate" is not evidence about the object, and the live quantity is the **off-diagonal** share of monochromatic cross
   edges (the record 0 of 30, `ρ₆₃` 24 of 54). `|p|² = n` is free iff `n = k²·m` with `m` a squared distance the lattice already
-  realises (4, 16, 12 free; 2 not).
+  realises (4, 16, 12 free; 2 not). *Do: for every in-field rotation compute the live radius sums from its cosine before any
+  base exists — a free prime filter — and measure the off-diagonal monochromatic share under the base's colourings, never
+  the diagonal, which is free where the circle is free. Killing test: a rotation whose base realises the live radius sum and
+  stays four-colourable (sufficiency, untested), or a wall-breaking rotation forcing with no monochromatic cross pair.*
 * **G53 — The counting compulsion, and the refutation criterion it defines. [derived; one provisional measurement]** For a
   type-M arena — base `B` plus its rotated copy sharing the centre, joined by cross edges — any proper `k`-colouring `C` yields two
   proper `k`-colourings of `B` alone, `f(v) = C(v)` and `g(v) = C(Rv)` (G46). The shared centre forces `f(0) = g(0)` and each
@@ -866,7 +869,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   lacked — "at least `L` of these `n` points share one designated point's colour" — with a forced pair as `L = count`; it explains
   why both fail on `ρ₆₃`, where `L/count = 10/30` (provisional) and no circle point is forced. **The design target — maximise
   `L / (circle count)`, refute above `1/2` — is the first objective in M63 phase H2 that a free construction cannot supply**, the
-  circle count and the residue certificate's defeat both being free (G52).
+  circle count and the residue certificate's defeat both being free (G52). *Do: compute `L` on the base alone before any
+  arena solve and refuse above `1/2`; below it the screen says nothing. Nothing kills the derivation; the provisional
+  `10/30` dies with a recount.*
 * **G54 — Tight or slack: a residue plane's compulsions at k colours are classified by one sign. [kernel one
   way; derived the other; the table computed]** Let `P` be the level-one plane at a usable prime, `d` its degree,
   `λ_min` its least eigenvalue, `k` the colour count. **Slack** (`λ_min < −d/(k−1)`; Hoffman's α-bound exceeds
@@ -889,8 +894,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   committed table is tight for any k ≤ 7 (p = 31 misses 4-tightness by 4.4·10⁻⁵). **What it says about six:** the
   residue mechanism forces pairs only where the plane is tight, and no plane that seals a field at five is — so the
   only residue route left to a five-colour forced pair is a **quotient** of a 6-open plane that is 5-colourable and
-  5-tight (FS-42, a reading with its falsifier). The screen is a character sum, seconds per (field, k), and no
-  substitute for FS-17's ask.
+  5-tight (FS-42, a reading with its falsifier). *Do: when you meet a new prime, ring or quotient, compute the sign of
+  `λ_min + d/(k−1)` at the colour count FIRST — a character sum, seconds per (field, k). Tight: expect every k-colouring
+  balanced, gap-free and periodic under `H_min`, and forced pairs at some depth of its tower (row 67's mechanism) — go find
+  the depth. Slack: expect gaps, and with one gapped colouring the freedom of every pair above it (row 66) — ask no solver
+  for forced pairs on that plane's fabric. Neither is a substitute for FS-17's ask. Killing test: a k-colouring of a tight
+  plane that is unbalanced or gapped; a slack plane every one of whose k-colourings is gap-free (the middle case).*
 * **G55 — The unit-vector ring decides the walls, and the chain replaces the spindle. [hand, GPT Astra (OpenAI,
   2026-09-14, in conversation with Kooshi); read here and found sound; the identities verified twice in exact arithmetic —
   `reference/ChatGPT-local-global-tightness-conjecture/VERIFICATION.md`; every result below is a kernel target, FS-45–48 (Kooshi, 2026-09-14)]** Let R = ℤ[U] be the ring the unit vectors of F(i)
@@ -907,9 +916,14 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   *sufficient* for five over K where G35 had it necessary — and every multiquadratic F ⊇ K with L ≤ 5 has χ(F²) = L(F); over
   K(√7), w = (−3 + i√7)/4 has w³ + w̄³ − 3w² − 3w̄² = 3/8, so eight copies plus an edge, at most 4,697 vertices, need five colours
   by hand, against the ρ₆₃ arena's 51,133 by solver (FS-45 puts it in the kernel). An 18-vertex, 33-edge graph over ℚ(√2,√3)
-  (six chained rhombi) is four-chromatic with no Moser spindle in its field, and χ(ℚ(√2,√3)²) = 4. **On six:** one five-colour virtual edge at distance 2 over any F ⊇ K, transported onto the 892
-  length-2 edges of `[ExooIsmailescu2019]`'s {1, 2} graph, is a six-chromatic unit-distance graph (the sentence is the advisor's;
-  M49–M50 replaced those edges one at a time); its field must be 6-open (row 66), and the arena has no such pair. What the chain cannot do is produce the five-forcer it needs.
+  (six chained rhombi) is four-chromatic with no Moser spindle in its field, and χ(ℚ(√2,√3)²) = 4. **On six:** one five-colour
+  virtual edge at distance 2 over any F ⊇ K is a six-chromatic unit-distance graph (the sentence is the advisor's; M49–M50
+  replaced those edges one at a time; the host and the consumer are G26); its field must be 6-open (row 66), and the arena
+  has no such pair. What the chain cannot do is
+  produce the five-forcer it needs. *Do: for a pair forced at δ, look for 1/δ as a sum of unit vectors before adjoining any
+  radical — the closer stays in F, at most m(n − 1) + 1 vertices. Killing test: chained copies of a forced pair with 1/δ ∈ R
+  that are k-colourable (a defect in the proof); or the 8/3 forcer's one solver refusal failing to replicate, on which the
+  five-colour consequences over K rest.*
 * **G56 — The window for six, and reciprocity's exclusion of it. [derived: exact spectra and the 83 certificate; the
   exclusion is elementary and script-verified; the consequence for χ(ℝ²) rides on the conjecture's bold form and on FS-39's
   bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős]** Six colours on Γ_q need an independent set of ⌈q²/6⌉, which the
@@ -964,9 +978,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   2026-09-16.* **The rounding reading:** on a vertex-transitive graph
   χ_f = q²/α, so χ ≥ ⌈q²/α⌉ is a theorem and only the equality **χ = ⌈q²/α⌉** is the reading (true at 3, 7, 11; consistent at 19;
   it replaces the "+1 over the spectral floor" reading, which fails at the Hoffman-tight q = 3). The fractional wall W_f, which
-  proves the window empty with no reading at all, and what the conjecture makes of the window: G59. *Killing tests — of the
-  exclusion: a usable window member for some field containing K (impossible by reciprocity); of the reading: a decided plane with
-  χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.*
+  proves the window empty with no reading at all, and what the conjecture makes of the window: G59. *Do: for any field, list
+  its usable q first — six is possible only if one lies in {23, 27, 31, 43, 47}, or a prime above 2 is inert of norm 64, and
+  the wall is broken; otherwise L is 2, 3, 4, 5 or ≥ 7 before any solver, and over any F ⊇ K it is 5 or ≥ 7. Killing tests —
+  of the exclusion: a usable window member for some field containing K (impossible by reciprocity); of the reading: a decided
+  plane with χ ≠ ⌈q²/α⌉; of W_f: an independent set of ⌈Q²/6⌉ at an open member.*
 * **G57 — The window is triangle-free where it is roomy, and no candidate field holds a Moser spindle. [derived;
   the clique rule is `[Krebs2022]`, verified here; the correspondence and its consequence are ours]** Three mutual unit
   distances force an equilateral triangle, whose apex is `(1/2, √3/2)`, so **`ω(unit-distance graph over F) = 3` iff
@@ -986,8 +1002,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   **The tension this creates is the milestone's, in one line:** the member where our construction vocabulary could apply is **47**, which has almost no room — six
   needs `α ≥ 369` against the certified `α ≤ 371`, a three-integer window at 99.5 % of the ceiling — while the member with room is
   **43**, a fifty-seven-integer window at 84.7 % of the ceiling, in triangle-free territory where we have no vocabulary at all.
-  *Killing test: a five- or six-forcer built over a field containing neither `√3` nor `√11`, which would show the vocabulary is
-  not the binding constraint.*
+  *Do: read ω of a usable plane as a certificate — no triangles downstairs means `√3 ∉ F` — and over a window field look for
+  no spindle to build from: the vocabulary must be Moser-free (G11's route). Killing test: a five- or six-forcer built over a
+  field containing neither `√3` nor `√11`, which would show the vocabulary is not the binding constraint.*
 * **G58 — The antipodal conjecture: an optimal colouring can always be taken symmetric under `z ↦ −z`. [reading,
   4 of 4 planes with a known χ, each verified from the definition; the fixed-colour half is derived]** **Conjecture:
   every Γ_q has an optimal colouring `c` with `c(−z) = τ(c(z))` for some **involution** `τ` of the colours. Verified where χ is
@@ -1000,8 +1017,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   and the equivariant sweep's order-2 rows *are* that search. **Which relocates the open question**: at 11 and 19 the satisfiable
   rows are order 2 with `τ = (2,2,1)` or `(2,1,1,1)`, **exactly the rows left undecided** at 17 (k = 5) and 23, 43, 47 (k = 6). So
   the sweeps' zeros are not evidence of absence — they refused only the rows refused at 11 and 19 too, where a colouring
-  demonstrably exists — and the effort belongs on those half-size instances rather than on a full cube-and-conquer. *Killing test:
-  a plane with an optimal colouring but none antipodally invariant under any involution.* **Asked as a DECISION at 23 (k = 7, 8)
+  demonstrably exists — and the effort belongs on those half-size instances rather than on a full cube-and-conquer. **Asked as a DECISION at 23 (k = 7, 8)
   and 43 (k = 8), it returned nothing**: every refusal was free (the fixed-colour argument; an edge joining some `z` to `−z`) and
   every row that could carry a colouring was undecided at 3,000,000 conflicts. G58 asserts EXISTENCE, so its instrument is a FINDER
   on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. **Prior art** (searched 2026-09-16 under graph
@@ -1009,7 +1025,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer]`, arXiv:2303.06262) works on χ, not on invariance; **nothing
   found asserting or refuting this for any graph family** — the *distinguishing* chromatic number is the opposite question, and
   the failure of invariance under the FULL automorphism group says nothing about one involution up to a colour permutation.
-  Bibliography keys owed.
+  Bibliography keys owed. *Do: search with a FINDER on the antipodal quotient under a colour involution that fixes a colour;
+  filter every equivariant row by the fixed-colour test before any solver time; never a decider on the full plane. Killing
+  test: a plane with an optimal colouring but none antipodally invariant under any involution.*
 * **G59 — The wall at six is finite and fractional, its escape hatches close to integrality gaps, and what it leaves is a
   quadratic prediction. [cert + proof (GPT Astra, verified by recomputation) + derived]** **Finite:** χ(U_Q) ≠ 6 is settled
   everywhere except Q ∈ {23, 27, 31, 43, 47, 64} (floors 6, 6, 5, 6, 6, 6). **Fractional (the wall W_f):** χ_f = Q²/α on these
