@@ -274,6 +274,17 @@ not rewritten**. Sections, in order:
 5. **Prior art re-attributed** — one line each, pointing at the bibliography row updated.
 6. **Kernel decisions, summarised** — the table.
 
+The entry skeleton, copied verbatim so six batches produce one shape (the checker reads the five italic labels):
+
+```
+**<PREFIX>-T<n> — <title>. [<hand | derived (rows …) | tools | cert>; <who proved it>]** <the statement, quantifiers
+explicit, hypotheses named; a [tools] statement quantifies over exactly the set checked>. *Proof:* <file §section — a
+proof, not an assertion; or "not on disk — looked in …">. *Proof verdict:* <closes | gap: <the step> | unsure — owner to
+re-derive>. *Rests on it:* <rows, grokkings, stubs, later ids>. *Prior art:* <ours | prior art `[key]` §n | partly: … |
+check owed: `[key]`> — nearest held `[key]`; zbMATH: `<query 1>` (<hits>), `<query 2>` (<hits>). *Kernel:* <kernel (`decl`,
+module) | stub (<which>) | declined — <reason> | priced — <cost>>.
+```
+
 Grades are `CLAUDE.md` § Notation's; **[tools] entries state their enumeration in the statement** ("on every unit vector of
 denominator ≤ 20"; "at the 21 planes below 100"); a *derived* entry names the rows it derives from; a *hand* entry names the
 prover (the planner, the implementer, the owner, GPT Astra, ChatGPT — the credit rule of G55).
@@ -282,12 +293,17 @@ prover (the planner, the implementer, the owner, GPT Astra, ChatGPT — the cred
 
 `| <id> | <milestone> | <the theorem in one line> | <grade> | <derivation file §; the record> | <kernel decision> |`, inserted in
 milestone order **above** the FS-70 lines; the placeholder line ("`FS38-D2-A/B, FS66-W/E/T, … indexed by FS-71`") is removed by
-the batch that files FS-38. `tools/claude_md_fact_audit.py --base HEAD` and `tools/check_architecture.py` run after every edit.
+the batch that files FS-38. **§ B lists only theorems whose proof verdict is *closes* or *unsure* (the grade column then reads
+`hand — unsure`)**; a *gap* is a conjecture in the file's section 4 and never a § B line. The kernel column carries its reason in
+one word (`declined (instance)`, `stub (FS-2)`); the theorem column is a statement, under ~250 characters (the checker warns
+above 300). `tools/fs71_ledger_b_check.py`, `tools/claude_md_fact_audit.py --base HEAD` and `tools/check_architecture.py` run
+after every edit; the derivation file's name is `plans/<PREFIX>-derivation.md` for the id prefix `<PREFIX>`, always.
 
 ### S.3 The batch report — `data/fs71/batch-<n>.md`
 
-1. **The census table**: milestone · candidates found (from the seed and from the files) · filed as (ids) · classified as
-   kernel / measurement / reading / instance / prior art (one line why each).
+1. **The census table**: **one row per milestone in the batch, the empty ones included** ("no theorem outside the kernel; it
+   holds …" is a row, never an omission) · candidates found (from the seed and from the files) · filed as (ids) · classified as
+   kernel / measurement / reading / instance / prior art / conjecture (one line why each).
 2. **Progress and resume**: the milestones filed, in order; the next one to file if the batch stopped early (a successor resumes
    from this line and the committed files — the derivation files are the checkpoint; **commit after each milestone, by path**).
 3. **"Theorems this phase proved"** — expected empty: an audit proves nothing new; say so, or state what was proved.
@@ -315,7 +331,7 @@ and its grade-tagged clauses are the seed; the files are then read for what the 
 | 4 | every entry carries a prior-art verdict with recorded queries or a held key; every *prior art* and every *gap* verdict is checked by the owner (these change `CLAUDE.md`) | the owner reads each |
 | 5 | **the owner re-derives one theorem** from its recorded proof, plus every *unsure* | the derivation either closes or the entry becomes *gap* |
 | 6 | the owner's blind controls for the batch (P5) | found / missed, recorded in §R |
-| 7 | gates green: `tools/bib_audit.py`; `tools/claude_md_fact_audit.py --base <the commit before the batch>` and `--dupes`; `tools/check_architecture.py` | run by the implementer at each commit and by the owner at acceptance |
+| 7 | gates green: `tools/fs71_ledger_b_check.py` (§M.4 — every entry ↔ one § B row); `tools/bib_audit.py`; `tools/claude_md_fact_audit.py --base <the commit before the batch>` and `--dupes`; `tools/check_architecture.py` | run by the implementer at each commit and by the owner at acceptance |
 | 8 | commits by explicit path, one per milestone filed, never push, never amend; no `lake build`; no solver | `git log` |
 
 ### S.6 Budget, stop rules, checkpoint
@@ -330,6 +346,65 @@ The owner's work per batch: the acceptance table (≈ 30–40k tokens); applying
 §R below. The close: `LEDGER.md` row 77 (the census's numbers), the grokkings corrected in place with each demotion's refutation
 recorded, `plans/FRONTIER-STUBS.md` re-ranked with the kernel targets minted, `CLOSED-QUESTIONS.md` if any re-attribution touches
 a posed question, the memory file.
+
+## §M — the modeling passes (WORKFLOW step 6; `debruijn-domain-modeling` and `debruijn-experience-modeling`, freshly invoked 2026-09-22, applied to the one artefact FS-71 ships: the derivation entry)
+
+**M.1 The intrinsic cut: *kind* before *grade*.** § Notation's grade vocabulary conflates two axes. *How a claim was
+established* — hand / derived / tools / cert — is a grade of a **theorem**; *measured*, *reading*, *method*, *external* are not
+grades of theorems but **kinds of claim that are not theorems**. The audit classifies every candidate by kind first, from a closed
+set with a fixed disposition each:
+
+| kind | disposition |
+|---|---|
+| **theorem** (hand / derived / tools / cert) | an entry in the derivation file and a line in `LEDGER.md` § B |
+| **measurement called a theorem** | the file's section 3, with the sentence that called it one; the open theorem named (e.g. G61(2) → FS-67) |
+| **reading** | section 3; never § B |
+| **instance of a held theorem** | section 3, naming the theorem (kernel decl or id) it instantiates — G30 #6 is the case where the *theorem* is missing and only the instance was recorded: then the theorem is filed and the instance becomes its example |
+| **conjecture** — a proof that does not close (*gap*), or a claim never proved | section 4; a stub line if it has a consumer |
+| **method rule** | not the audit's object; noted only when a record graded it as a theorem |
+| **kernel** (already) | the ledger row's; not filed again |
+
+A **[tools] theorem's statement quantifies over exactly the finite set that was checked**; the general claim, when a record makes
+one, is a separate *reading* (section 3) with the tools theorem as its evidence. This is the adversarial member the pass
+found: a check of a general claim on a sample satisfies the letter of "tools grade" and is a measurement.
+
+**M.2 The home of a theorem is where it was proved; earlier appearances point forward.** M56 states L7 as a conjecture; GPT
+Astra proved it on 2026-09-14; `[Fischer1990b]` had special cases in 1989. One home: the proving event's file (`ASTRA-2026-09-14-Tn`
+with the credit and the prior-art split); M56's file lists L7 under *conjectures surfaced* with "proved: `ASTRA-2026-09-14-T2`".
+**Id prefixes for events that are not milestones**: the stub that is the theorem's home (`FS62-Tn` for G64's derivations, `FS39-Tn`
+for G63's), the credited prover's fold-in (`ASTRA-2026-09-14-Tn`), or the ledger row that recorded it (`R57-Tn` for the
+2026-09-08 quaternion instance, `R58` → `MASCOT-Tn` since `plans/MASCOT-DERIVATION.md` exists). A theorem re-attributed entirely
+to prior art **stays in § B** with the key in its one-line statement ("= `[Fischer1990b]` Thm 1"): it was proved here, and the
+honest record is that it was known.
+
+**M.3 The proof address points at a proof, never at an assertion.** A ledger row or a grokking that states the theorem is not
+its proof; if the only places the theorem appears assert it, the verdict is *not on disk — looked in …* and the kind is
+*conjecture* unless the owner's re-derivation closes it (then the derivation file itself becomes the proof's address, marked
+*re-derived 2026-09-xx by the owner*). A derivation file is an **index**: FS-38's narrative and FS-66's three plans keep their
+proofs where they are, and their derivation files (FS-38's completed at its top, FS-66's new) carry the entries pointing in.
+
+**M.4 The two costumes need a bridge.** The § B line is a projection of the entry, and six batches writing both will drift.
+`tools/fs71_ledger_b_check.py` (standard library; `--strict`; `--self-test` plants an orphan entry, an orphan row and a missing
+field and watches all three fire — it does) checks that every entry id has exactly one § B row and every row an entry, reports
+missing fields and the placeholder row, and prints the census by home (P3's instrument). It runs at every batch commit and at
+acceptance. Today: 11 ↔ 11 (FS-70), one placeholder, the FS-70 entries lacking the two fields this milestone adds (*Proof
+verdict*, *Prior art*) — **batch 6 completes FS-70's eleven entries** in passing (row 76 already holds their prior art).
+
+**M.5 What the pass removed.** "Rests on it" was going to be a reverse index that goes stale; it stays, dated by the audit, because
+the kernel decision reads it (a theorem nothing rests on is *declined*; one carrying a row is *stub*). The batch structure is
+incidental (the order the work arrived) and is kept as an execution partition only: cross-references are by id, never by batch.
+
+**M.6 The experience pass — the reader is the next milestone's planner at step 3.1.** They open `LEDGER.md` § B, scan one line per
+theorem, and follow the id to the entry; so (i) the § B line's theorem column is a *statement*, not a title — quantifiers in,
+coined vocabulary out where a discipline's word exists; (ii) the entry's first sentence *is* that line (the checker cannot compare
+prose, the batch report's census table does); (iii) every entry ends with its kernel decision so the FS-2/FS-45–48 stubs can be
+regenerated from § B alone; (iv) the fields are the five fixed labels of S.1 in that order, so a reader learns the shape once.
+The docstring of every batch's derivation file states its enumeration in the first paragraph, because "what did this audit look
+at" is the first question its reader asks. Two more from the pass: **the breakdown surface** — a reader who follows an address
+and finds an assertion instead of a proof must have been warned by the line itself, so § B carries *unsure* in its grade column
+and carries no *gap* at all (S.2); and **the silent non-error** — a batch that found nothing in a milestone says so in a row of
+its census table, never by leaving the milestone out (S.3). The implementer is a consumer of the brief: the entry skeleton in
+S.1 is pasted into every brief, and the checker's warnings on the batch's own prefixes must read zero before hand-back.
 
 ## §R — results (filled per batch by the owner)
 
