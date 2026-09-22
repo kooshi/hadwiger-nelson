@@ -42,7 +42,9 @@ Commands
 PIN: control | forces:DELTA | separated:DELTA   (eq: and sep: are accepted as the aliases of the first two)
 options: --single-budget S (default 600) --cube-budget S (900) --jobs N (22) --branch N (auto) --cap-cpu-hours H
          (40) --engine auto|kissat|pysat:NAME (the cube engine) --single-solver PATH (default kissat)
-         --out DIR (default build/fs70/asks/<sha>) --resume --no-single --no-cube --note TEXT
+         --single-flags 'F...' (extra flags for the single solver, recorded in the row -- e.g. '--sat' to aim
+         kissat at finding a model on a large instance) --out DIR (default build/fs70/asks/<sha>) --resume
+         --no-single --no-cube --note TEXT
 """
 from collections import defaultdict
 import hashlib
@@ -135,8 +137,15 @@ def build_instance(pts, edges, M, meta, pin):
                                                       # refusal vanishes and the null looks real (G21's direction)
     if kind == 'control':
         idx = {p: i for i, p in enumerate(pts)}
-        tri = [idx.get(tuple([0] * 8)), idx.get(FB.Lattice(FB.generators(spec), spec).vec8(FB.E_ONE)),
-               idx.get(FB.Lattice(FB.generators(spec), spec).vec8(FB.ZETA6))]
+        # the preferred pin is the unit triangle 0, 1, zeta6, which needs the lattice the spec names.  A shape
+        # that is not one SPEC's ball -- an arena (fs70_arena), a union, a cored graph -- has no parsable spec,
+        # and that is not a reason to refuse a control: fall through to the first triangle in the graph, which
+        # is the same statement (any unit triangle's three colours can be relabelled).
+        try:
+            lat = FB.Lattice(FB.generators(spec), spec)
+            tri = [idx.get(tuple([0] * 8)), idx.get(lat.vec8(FB.E_ONE)), idx.get(lat.vec8(FB.ZETA6))]
+        except SystemExit:
+            tri = [None, None, None]
         adj = adjacency(n, E)
         if None in tri or not (tri[1] in adj[tri[0]] and tri[2] in adj[tri[0]] and tri[2] in adj[tri[1]]):
             tri = first_triangle(n, adj)
@@ -254,13 +263,34 @@ STREAM_ABOVE = 400000            # vertices: above this the clause LIST is gigab
 
 def write_cnf_streaming(path, n, edges, pins, k=K):
     """the colouring CNF written clause by clause, never held as a list.  At 1.9 million vertices the list form
-    is ~54 million Python lists, several gigabytes before a byte reaches the disk.  No precedence break is
-    emitted: this path is used only where three colours are already pinned, and three pins leave no residual
-    value symmetry to break."""
+    is ~54 million Python lists, several gigabytes before a byte reaches the disk.
+
+    The LINEAR precedence break is streamed too (phase 1b).  It was left out when this writer was first written,
+    on the ground that the path is only used where three colours are already pinned -- but a `forces` ask gets
+    its third pin only when the pair has a COMMON NEIGHBOUR, and over L6 the targets 2/3, 8/3 and 4 have none,
+    so at the largest shape those three asks were refused outright instead of asked.  The break is O(n) clauses
+    over O(n) auxiliary variables (`s[v][c]` = "colour c occurs at some u <= v") and streams as easily as the
+    body; it is the same encoding as `fs70_fabric.coloring_cnf`'s, in the same variable numbering, which the
+    self-test asserts byte for byte."""
+    pinned = {c for _, c in pins}
+    # the break is emitted only when TWO or more colours are free -- one free colour carries no residual value
+    # symmetry, and `instance_clauses` makes the same call, so the two writers stay byte-identical
+    free = [c for c in range(k) if c not in pinned] if len(pinned) <= k - 2 else []
+    nv = k * n + len(free) * n
     ncl = n + n * (k * (k - 1) // 2) + len(edges) * k + len(pins)
+    if free:
+        # per free colour: 2 clauses at v = 0 and 3 at each v >= 1, so 3n - 1; then n per
+        # consecutive pair of free colours
+        ncl += len(free) * (3 * n - 1) + (len(free) - 1) * n
+    sv = {}
+    nxt = k * n
+    for c in free:
+        for v in range(n):
+            nxt += 1
+            sv[(v, c)] = nxt
     h = hashlib.sha256()
     with open(path, 'wb') as fh:
-        head = f'p cnf {k * n} {ncl}\n'.encode()
+        head = f'p cnf {nv} {ncl}\n'.encode()
         fh.write(head)
         h.update(head)
         buf = []
@@ -281,22 +311,30 @@ def write_cnf_streaming(path, n, edges, pins, k=K):
                 emit([-var(a, c), -var(b, c)])
         for v, c in pins:
             emit([var(v, c)])
+        for c in free:
+            for v in range(n):
+                emit([-var(v, c), sv[(v, c)]])                          # x[v][c] -> s[v][c]
+                if v:
+                    emit([-sv[(v - 1, c)], sv[(v, c)]])                 # s[v-1][c] -> s[v][c]
+                    emit([-sv[(v, c)], sv[(v - 1, c)], var(v, c)])      # s[v][c] -> s[v-1][c] or x[v][c]
+                else:
+                    emit([-sv[(v, c)], var(v, c)])
+        for j in range(1, len(free)):
+            c, cp = free[j], free[j - 1]
+            emit([-var(0, c)])
+            for v in range(1, n):
+                emit([-var(v, c), sv[(v - 1, cp)]])
         if buf:
             b = ''.join(buf).encode()
             fh.write(b)
             h.update(b)
-    return h.hexdigest(), ncl
+    return h.hexdigest(), ncl, nv
 
 
-def single_attempt(inst, out, budget, solver='kissat'):
+def single_attempt(inst, out, budget, solver='kissat', flags=()):
     path = os.path.join(out, 'instance.cnf')
     if inst['n'] > STREAM_ABOVE:
-        if len({c for _, c in inst['pins']}) < 3:
-            raise SystemExit(f'{inst["n"]} vertices with only {len(inst["pins"])} pins: the streaming writer '
-                             f'emits no precedence break, so this instance would be asked with its residual '
-                             f'colour symmetry unbroken -- refused (CLAUDE.md, the symmetry checklist)')
-        sha, ncl = write_cnf_streaming(path, inst['n'], inst['edges'], inst['pins'])
-        nv = K * inst['n']
+        sha, ncl, nv = write_cnf_streaming(path, inst['n'], inst['edges'], inst['pins'])
         cl = range(ncl)
     else:
         cl, prec = instance_clauses(inst)
@@ -304,7 +342,7 @@ def single_attempt(inst, out, budget, solver='kissat'):
         sha = FB.write_cnf(path, nv, cl)
     t0 = time.time()
     try:
-        r = subprocess.run([solver, '-q', f'--time={int(budget)}', path], capture_output=True, text=True,
+        r = subprocess.run([solver, '-q', f'--time={int(budget)}', *flags, path], capture_output=True, text=True,
                            timeout=budget + 60)
         rc = r.returncode
         stdout = r.stdout
@@ -730,6 +768,9 @@ def cmd_run(argv):
     cap = _opt(argv, '--cap-cpu-hours', 40.0, float) * 3600
     engine = _opt(argv, '--engine', 'auto')
     single_solver = _opt(argv, '--single-solver', 'kissat')
+    # extra flags for the single solver, recorded in the row: a verdict is a fact about ONE configuration of one
+    # solver (G21), so the configuration travels with it.  `--single-flags --sat` aims kissat at finding a model.
+    single_flags = tuple(_opt(argv, '--single-flags', '').split()) if '--single-flags' in argv else ()
     nbranch = _opt(argv, '--branch', 0, int)
     note = _opt(argv, '--note', '')
     resume = '--resume' in argv
@@ -761,10 +802,11 @@ def cmd_run(argv):
         fh.write(str(os.getpgid(0)) + '\n')
     verdict, model = 'UNKNOWN', None
     if '--no-single' not in argv:
-        v, secs, csha, model, ncl, nv = single_attempt(inst, out, single_budget, single_solver)
-        row['single'] = {'solver': single_solver, 'budget': single_budget, 'verdict': v, 'seconds': secs,
-                         'cnf_sha256': csha, 'clauses': ncl, 'variables': nv}
-        print(f'   single solver ({single_solver}, {single_budget}s): {v} in {secs}s '
+        v, secs, csha, model, ncl, nv = single_attempt(inst, out, single_budget, single_solver, single_flags)
+        row['single'] = {'solver': single_solver, 'flags': list(single_flags), 'budget': single_budget,
+                         'verdict': v, 'seconds': secs, 'cnf_sha256': csha, 'clauses': ncl, 'variables': nv}
+        print(f'   single solver ({single_solver}{" " + " ".join(single_flags) if single_flags else ""}, '
+              f'{single_budget}s): {v} in {secs}s '
               f'[{ncl} clauses, {nv} variables, cnf {csha}]', flush=True)
         verdict = v
     if verdict == 'UNKNOWN' and '--no-cube' not in argv:
@@ -993,9 +1035,35 @@ def selftest():
         s1 = instance_sha(pts, inst)
         s2 = instance_sha(list(reversed(pts)), inst)
         assert s1 == s2, 'the ask identity depends on the order of the point list'
+
+        # --- the STREAMING writer against the list writer, on the same instance, with BOTH pin counts.
+        # Above 400,000 vertices only the streaming path runs, and nothing else checks it; the two-pin case
+        # is the one phase 1b needed (the targets 2/3, 8/3 and 4 have no common neighbour with the origin,
+        # so a `forces` ask there pins two colours and the third is broken by precedence).
+        base_inst = build_instance(pts, edges, M, meta, 'forces:4/3')
+        for pin, npins in (('two pins (the no-common-neighbour case)', 2), ('three pins', 3)):
+            i2 = dict(base_inst, pins=base_inst['pins'][:npins])
+            assert len({c for _, c in i2['pins']}) == npins, (pin, i2['pins'])
+            a = os.path.join(tmp, f'stream-{npins}.cnf')
+            b = os.path.join(tmp, f'list-{npins}.cnf')
+            sha_s, ncl_s, nv_s = write_cnf_streaming(a, i2['n'], i2['edges'], i2['pins'])
+            cl, prec = instance_clauses(i2)
+            nv_l = FB.cnf_nvars(i2['n'], K, i2['pins']) if prec else K * i2['n']
+            sha_l = FB.write_cnf(b, nv_l, cl)
+            assert (nv_s, ncl_s) == (nv_l, len(cl)), \
+                f'{pin}: streaming writes {nv_s} vars / {ncl_s} clauses, the list writer {nv_l} / {len(cl)}'
+            assert open(a, 'rb').read() == open(b, 'rb').read(), \
+                f'{pin}: the streaming CNF is not byte-identical to the list CNF'
+            # and the comparison is SHOWN able to fail: one edge dropped must make the two differ
+            i3 = dict(i2, edges=i2['edges'][:-1])
+            write_cnf_streaming(a, i3['n'], i3['edges'], i3['pins'])
+            assert open(a, 'rb').read() != open(b, 'rb').read(), \
+                f'{pin}: dropping an edge left the two CNFs identical -- the comparison is blind'
     print('fs70_ask selftest OK')
     print('  calibration: K5 minus an edge refuses `forces` and colours `separated`; the twin colours both')
     print('  the cube pass reproduces the refusal; the S2 word ball k = 2 colours c(0) != c(4/3) as the plan says')
+    print('  the streaming CNF writer is byte-identical to the list writer at two and three pins, precedence '
+          'break included, and the comparison was shown able to fail')
 
 
 PLANTS = ('pin_swapped', 'edges_dropped', 'sha_unchecked')

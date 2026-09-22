@@ -197,16 +197,31 @@ def build_arena(spec, k, rot='rho15', out=None, geometric_check=True):
     # the two halves, as points of the arena lattice
     half0 = [FF.e_from_ints(FF.ints_reduce(list(p), lat.M)) for p in keys]
     half1 = [FF.e_mul(R, z) for z in half0]
-    pts = {}
-    for side, zs in ((0, half0), (1, half1)):
-        for z in zs:
-            pts.setdefault(A.vec8(z), side)
-    akeys = list(pts)
+    v0 = [A.vec8(z) for z in half0]
+    v1 = [A.vec8(z) for z in half1]
+    s0, s1 = set(v0), set(v1)
+    akeys = list(dict.fromkeys(v0 + v1))
     akeys, aedges = FB.unit_graph(akeys, A)
     print(f'arena {spec} at sums of <= {k} with {rot}: {len(akeys)} points ({len(half0)} per half, '
-          f'{2*len(half0)-len(akeys)} shared), {len(aedges)} edges, avg degree '
+          f'{len(s0 & s1)} shared), {len(aedges)} edges, avg degree '
           f'{2*len(aedges)/len(akeys):.2f}  ({time.time()-t0:.1f}s, arena lattice M = {A.M}, rank {A.rank}, '
           f'g = {len(A.units)})')
+    # the CROSS edges -- the arena's whole compulsion budget (G31): an edge inside one half is an edge of that
+    # half's own base graph and says nothing the base did not.  Of the cross edges the DIAGONAL ones (v -- Rv)
+    # are the ones G53's counting argument uses; the rest are off-diagonal.
+    inside = [akeys[i] in s0 and akeys[j] in s0 or akeys[i] in s1 and akeys[j] in s1 for i, j in aedges]
+    cross = [e for e, ins in zip(aedges, inside) if not ins]
+    idx = {p: i for i, p in enumerate(akeys)}
+    eset = set(aedges)
+    diag = sum(1 for a, b in zip(v0, v1)
+               if a in idx and b in idx and tuple(sorted((idx[a], idx[b]))) in eset)
+    anat = {'within_half0': sum(1 for i, j in aedges if akeys[i] in s0 and akeys[j] in s0),
+            'within_half1': sum(1 for i, j in aedges if akeys[i] in s1 and akeys[j] in s1),
+            'cross': len(cross), 'diagonal': diag, 'off_diagonal': len(cross) - diag,
+            'shared_points': len(s0 & s1)}
+    print(f'   cross edges: {anat["cross"]} of {len(aedges)} ({anat["diagonal"]} diagonal v--Rv, '
+          f'{anat["off_diagonal"]} off-diagonal); within half 0: {anat["within_half0"]}, '
+          f'within half 1: {anat["within_half1"]}')
     if planted('cross_dropped'):
         side = {p: pts[p] for p in akeys}
         aedges = [(a, b) for a, b in aedges if side[akeys[a]] == side[akeys[b]]]   # PLANT: no cross edges
@@ -220,8 +235,8 @@ def build_arena(spec, k, rot='rho15', out=None, geometric_check=True):
                              f'{len(gedges)}, symmetric difference {len(set(aedges) ^ set(gedges))}')
     if out:
         FB.write_shape(out, A, akeys, aedges, {'shape': 'arena', 'k': k, 'rot': rot, 'n': n},
-                       {'base_spec': spec, 'base_points': len(half0)}, cnfs_too=False)
-    return A, akeys, aedges
+                       {'base_spec': spec, 'base_points': len(half0), 'cross_edges': anat}, cnfs_too=False)
+    return A, akeys, aedges, anat
 
 
 # ---------------------------------------------------------------- self-test
@@ -265,7 +280,18 @@ def selftest():
     Lb, _, _ = min_share(5, [], 0, [1, 2, 3, 4], 4, 'cadical195', verbose=False)
     assert Lb == 0, f'the edgeless control reads L = {Lb}, not 0'
 
+    # --- the arena's anatomy, on the smallest arena: the two halves meet only at the centre, and the
+    # diagonal cross edges are exactly the circle points that the ball holds.
+    _, ak, ae, anat = build_arena('group6:u3:2', 2, 'rho15', None, geometric_check=True)
+    assert anat['shared_points'] == 1, f'the two halves share {anat["shared_points"]} points, not just the centre'
+    assert anat['diagonal'] == len(circ), \
+        f'{anat["diagonal"]} diagonal cross edges against {len(circ)} circle points: they must be in bijection'
+    assert anat['within_half0'] == anat['within_half1'] == len(edges), \
+        'a half\'s induced graph is not the base graph: the rotation is not an isometry of the point set'
+
     print('fs70_arena selftest OK')
+    print(f'  arena at k = 2: {len(ak)} points, {len(ae)} edges, {anat["cross"]} cross '
+          f'({anat["diagonal"]} diagonal, {anat["off_diagonal"]} off-diagonal)')
     print(f'  counting instrument: K4 circle L = {La} (UNSAT branch fired), edgeless circle L = {Lb}')
     print(f'  rho15: n = 4, diagonal circle |v| = 2, the CM base holds {len(circ)} of them '
           f'(= 2 x its {len(lat.units)} unit vectors)')
