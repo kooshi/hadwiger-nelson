@@ -351,7 +351,21 @@ Prior attempts on this exact formula: phase 1b, kissat default, 1,544 s → UNKN
 2,448 s → UNKNOWN. This phase adds two arms in the direction phase 1b did not try, run concurrently on
 separate cores of an otherwise idle machine:
 
-`IN FLIGHT AT THIS WRITING — see data/fs70/inflight/phase-1e-w4control.json`
+| arm | solver | configuration | budget | verdict |
+|---|---|---|---|---|
+| 1 | `kissat` 4.0.4 | `--unsat` (aimed at the direction that would be the finding) | 5,400 s | **UNKNOWN** at the wall (5,400.07 s; 71,302,690 clauses, 7,547,044 variables, CNF sha `89eadac4…`) |
+| 2 | `cadical` 2.1.2 (the toolchain's) | default, a second code base on the identical CNF | 5,400 s | **UNKNOWN** at the wall (exit 124) |
+
+Run concurrently on separate cores of an otherwise idle 32-thread machine, so neither measures contention.
+
+**The verdict is a typed null, and the type is "instrument", not "budget".** Four attempts now stand on this
+one formula — kissat default (1,544 s), kissat `--sat` (2,448 s), kissat `--unsat` (5,400 s), cadical default
+(5,400 s): **14,792 s ≈ 4.1 CPU-hours, two code bases, three configurations, one encoding.** By G21 that is a
+statement about the encoding and the configurations, never about the graph. What makes it a statement about
+the *instrument* rather than the budget is §6.3's two measurements: the ball's maximum core number is 12, so
+no denser subgraph exists to ask instead, and the lattice is too fine for a denser ball at any affordable
+size. **The two standard levers are measured to be unavailable here, not merely unaffordable.** What is left
+is cube-and-conquer on 71 M clauses, or a different encoding.
 
 ---
 
@@ -364,7 +378,7 @@ separate cores of an otherwise idle machine:
 | **P3** (brief) | the gap-aimed finder on L3 is UNSAT at every admissible `N ≤ 12` | **WON** to `N = 8` (the cap; 9–12 exceed 400,000 classes at rank 6) |
 | **P3′** (mine) | the target-separating finder kills at least one L3 target outright | **WON** — `2` and `2/3` at `N = 4`, one unit clause each, 0.1 s |
 | **P4** (brief) | the rich lattices at `N = 2, 3`: SAT and gap-free at both, escapes at `N = 3` | **SPLIT.** SAT and gap-free is right at the moduli that exist; **`N = 3` is inadmissible for all three**, so half the prediction has no instance. The brief's own expectation that `N = 3` would be the decisive modulus is wrong for the same reason |
-| **P5** (brief) | no solver refusal this phase | `PENDING the two arms of §6.3; every other ask this phase came back SAT or n/a` |
+| **P5** (brief) | no solver refusal this phase | **WON.** Nothing refused: the two arms on the live lattice are UNKNOWN at their walls, the two type-M arenas are SAT in 0.15 s, and no other solver was spent — L3 closed by theorem |
 | **P6** (mine) | `group:u3:2+w4` is SAT at `N = 3` and UNSAT at `N = 2` | **SPLIT, and the informative half won.** UNSAT at `N = 2`, as I said, for the reason I gave (324 unit vectors cannot avoid filling `(ℤ/2)⁸`); but `N = 3` is **inadmissible**, so the SAT half has no instance, and `N = 4` is UNSAT too |
 | **P7** (mine) | the periodic screen agrees with the additive closed form at every target | **WON** (control (iii)) |
 
