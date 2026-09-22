@@ -1,0 +1,11 @@
+{
+ "what": "FS-70 phase 1c: the exact cross-edge count of every rotation of denominator <= 42 on the CM base at sums of <= 4",
+ "command": "python3 -u tools/fs70_rotations.py scan 'group6:u3:2' 4 --pool atlas --jobs 14 --top 40 --partial build/fs70/rot/scan-k4.partial --out data/fs70/rotations.jsonl",
+ "pid": 373285,
+ "pgid": 373285,
+ "log": "build/fs70/rot/scan-k4.log",
+ "checkpoint": "build/fs70/rot/scan-k4.partial -- one JSON row per rotation, flushed as it lands",
+ "resume": "the same command: it reads the partial file and skips every rotation already in it",
+ "a_kill_redoes": "only the rotations in flight (14 of 2020, ~9 CPU-seconds each)",
+ "budget": "no wall; expected ~22 minutes on 14 workers"
+}
