@@ -37,6 +37,7 @@ Commands
   python3 tools/fs70_fabric.py wordunion SPEC k --target D [--out DIR] [--core m]   # the balls about 0 AND D
   python3 tools/fs70_fabric.py tn SPEC n [--out DIR] [--target D] [--core m]
   python3 tools/fs70_fabric.py ball SPEC R [--out DIR] [--core m]
+  python3 tools/fs70_fabric.py core DIR m [--out DIR2]    # the m-core of a shape already written
 options: --sat-method a|b|both (default b), --plant NAME, --no-cnf (graph.json alone; fs70_ask.py builds the CNF)
 
 Generator grammar (SPEC): family names joined by '+' -- zeta12, u3, v4, w4, rho15, q5, s5, q7, s7, d6 (each the
@@ -1179,6 +1180,31 @@ def cmd_ball(spec, R, out, core, method, cnfs_too=True):
     return lat, keys, edges
 
 
+def cmd_core(d, m, out=None):
+    """the m-core of a graph already written -- phase 1's densifier.  A core is a SUBGRAPH, so a refusal on it is
+    a refusal on the whole shape while a colouring of it says nothing about the whole shape; it is the right ask
+    only when the whole shape is too large to put to a solver.  The origin and every named target must survive,
+    or the asks that use them cannot be posed -- both are checked and reported."""
+    with open(os.path.join(d, 'graph.json')) as fh:
+        g = json.load(fh)
+    pts = [tuple(p) for p in g['points']]
+    edges = [tuple(e) for e in g['edges']]
+    meta = g['meta']
+    lat = Lattice(generators(meta['lattice']), meta['lattice'])
+    keep, e2 = m_core(len(pts), edges, m)
+    k2 = [pts[i] for i in keep]
+    print(f'{d}: {len(pts)} points, {len(edges)} edges, degree {2*len(edges)/max(1,len(pts)):.2f}'
+          f'  ->  {m}-core: {len(k2)} points, {len(e2)} edges, degree {2*len(e2)/max(1,len(k2)):.2f}')
+    idx = set(k2)
+    zero = tuple([0] * 8)
+    print(f'  origin survives: {zero in idx}; ' + ', '.join(
+        f'{nm}: {lat.vec8(target_element(nm)) in idx}' for nm in ('2', '4/3', '8/3', '4')
+        if lat.coords(target_element(nm)) is not None))
+    if out and k2:
+        write_shape(out, lat, k2, e2, dict(meta['shape'], core=m), {'core': m, 'from': d}, cnfs_too=False)
+    return k2, e2
+
+
 # ---------------------------------------------------------------- self-test
 
 def selftest():
@@ -1431,6 +1457,8 @@ if __name__ == '__main__':
         cmd_word(argv[1], int(argv[2]), out, target, core, method, union=True, cnfs_too='--no-cnf' not in argv)
     elif argv[0] == 'tn':
         cmd_tn(argv[1], int(argv[2]), out, target, core, method, cnfs_too='--no-cnf' not in argv)
+    elif argv[0] == 'core':
+        cmd_core(argv[1], int(argv[2]), out)
     elif argv[0] == 'ball':
         cmd_ball(argv[1], float(argv[2]), out, core, method, cnfs_too='--no-cnf' not in argv)
     else:
