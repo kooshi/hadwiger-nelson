@@ -48,3 +48,24 @@ Consequence if P8 holds, stated before it is tested: a **real** `delta` has `del
 congruence is free and the criterion collapses to `v_p(delta) >= 3` — `d_0 = 3`, and of the chainable targets
 only `2` and `2/3` (both `v_p = 2`) are killed, while `4/3`, `4`, `4/7`, `4/sqrt3` (`v_p = 4`) and `8/3`
 (`v_p = 6`) are **forced in the local plane** and therefore not killed by any residue argument at 2.
+
+## Registered for item 7 (the owner's Λ′), before the first ask (2026-09-22)
+
+**P9 — the control colours at every affordable radius (R ≤ 3).** Confidence **medium**, and lower than I would
+hold it for any earlier fabric of this milestone, for a reason worth writing down: **Λ′ is the first fabric here
+with no four-colouring from any structured source.** It has no additive four-colouring (`1/2 ∈ Λ′`, the plan's
+§3.4 theorem); it has no residue four-colouring at 2 (the prime splits, which is the owner's whole point) nor at
+3 (splits, the gate); the remaining primes of `ℚ(√3)` give residue graphs that themselves refuse four colours.
+So the only thing standing between this fabric and a refusal is the solver. Against that: every wall-broken
+lattice this milestone has asked has coloured, and `L(ℚ(√3,√5)) = 5` only *permits* five — it does not deliver it.
+**A refusal is the milestone.**
+
+**P10 — if the control colours, it colours in seconds, not at a budget.** By G65's degree law these balls sit at
+average degree 16–30, far past the hardness peak at 4–6, where "almost everything decides in seconds, colourable
+or not". So an `UNKNOWN` here would itself be information (it would put this fabric in a regime the degree law
+says should not exist at that density). Confidence **high**.
+
+**P11 — the quotient sweep on Λ′ (`N ≤ 30`, `N⁴` vertices) returns no SAT.** Confidence **medium-low**: `Λ′/NΛ′`
+is a rank-4 quotient with 46 directions, far denser per vertex than `L6`'s rank-6 one, so the quotient graphs are
+dense and a proper four-colouring is a strong demand; but a SAT at any admissible `N` four-colours the whole
+lattice by row 56 and closes it by theorem, which is the outcome worth aiming at.

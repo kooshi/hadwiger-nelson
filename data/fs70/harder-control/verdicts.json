@@ -1,0 +1,145 @@
+{
+ "meta": {
+  "field": [
+   3,
+   11
+  ],
+  "format": "nine integers [a,b,c,d,e,f,g,h,m] for ((a+b*sqrt3+c*sqrt11+d*sqrt33)/m, (e+f*sqrt3+g*sqrt11+h*sqrt33)/m) -- SQRT11 IS IN THE SQRT5 SLOT",
+  "construction": "V + V + H with V = {0} u {zeta6^a rho^b : |b| <= 2} (rho = (5+i sqrt11)/6) and H the unit hexagon with its centre; Harder, Polymath16 thread 1, 28 April 2018",
+  "points": 2341,
+  "edges": 13098,
+  "avg_degree": 11.190089705254165,
+  "origin_index": 1170,
+  "eight_thirds_index": 2314,
+  "common_neighbours": 0
+ },
+ "asks": [
+  {
+   "ask": "control",
+   "pins": [
+    [
+     1170,
+     0
+    ],
+    [
+     1813,
+     1
+    ],
+    [
+     1505,
+     2
+    ]
+   ],
+   "verdict": "SAT",
+   "expected": "SAT",
+   "solver": "kissat",
+   "seconds": 0.05,
+   "clauses": 54736,
+   "vertices": 2341,
+   "edges": 13098,
+   "cnf_sha256": "9cc452db130257f3fd3cc8dc064b38d2e2456640652c2a2e1cc3a79176ef8568",
+   "note": "the fabric is four-colourable",
+   "monochromatic_edges": 0
+  },
+  {
+   "ask": "forces_8over3",
+   "pins": [
+    [
+     1170,
+     0
+    ],
+    [
+     2314,
+     1
+    ]
+   ],
+   "verdict": "SAT",
+   "expected": "UNSAT",
+   "solver": "kissat",
+   "seconds": 0.14,
+   "clauses": 57076,
+   "vertices": 2341,
+   "edges": 13098,
+   "cnf_sha256": "02017ccd8b0f4c98fd537e6e6db76f175b1de3d2376c027441eadf01e7998bf3",
+   "note": "Harder's claim: every proper 4-colouring gives 0 and 8/3 one colour",
+   "monochromatic_edges": 0
+  },
+  {
+   "ask": "forces_depth0_control",
+   "pins": [
+    [
+     1170,
+     0
+    ],
+    [
+     1617,
+     1
+    ]
+   ],
+   "verdict": "SAT",
+   "expected": "SAT",
+   "solver": "kissat",
+   "seconds": 0.14,
+   "clauses": 57076,
+   "vertices": 2341,
+   "edges": 13098,
+   "cnf_sha256": "288e6953dc1244426c61acff06924a83a18573371c77fb1fc85ec0dd6cc5e2c7",
+   "note": "a non-edge pair at odd-denominator (depth 0) squared distance -- row 59 says never forced (vertex 1617)",
+   "monochromatic_edges": 0
+  },
+  {
+   "ask": "forces_8over3_single_edge_deletions",
+   "trials": [
+    {
+     "edge": [
+      1667,
+      1939
+     ],
+     "verdict": "SAT",
+     "seconds": 0.12
+    },
+    {
+     "edge": [
+      115,
+      287
+     ],
+     "verdict": "SAT",
+     "seconds": 0.11
+    },
+    {
+     "edge": [
+      170,
+      575
+     ],
+     "verdict": "SAT",
+     "seconds": 0.12
+    },
+    {
+     "edge": [
+      1314,
+      1686
+     ],
+     "verdict": "SAT",
+     "seconds": 0.13
+    },
+    {
+     "edge": [
+      217,
+      649
+     ],
+     "verdict": "SAT",
+     "seconds": 0.13
+    },
+    {
+     "edge": [
+      873,
+      1105
+     ],
+     "verdict": "SAT",
+     "seconds": 0.13
+    }
+   ],
+   "flipped_to_SAT": 6
+  }
+ ]
+}
