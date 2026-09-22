@@ -109,3 +109,5 @@ biquadratic plane over `ℚ(√3)` at three and four colours, names the fields w
 `tools/fplane.py` (`usable`), `tools/wall_break_test.py`, `reference/ChatGPT-local-global-tightness-conjecture/` (the JSON shape
 and both verifiers), `Proofs/HadwigerNelson/Copy.lean`/`Homogeneous.lean` (via FS-45), `SquareClass.lean` (`planeOver`); records to
 `data/fs48/` with a README row per file.
+
+**Provisional bearings, updated 2026-09-22 (FS-70's close):** G68 and G69 first — for d = 23, 47 the six quartic CM subfields of ℚ(√3,√d,i) classified at 2, 3, 5, 7, 11, 13 (T5's table, `data/fs70/owner/po_cm_subfield.py` parametrised by d), then the quotient and periodic Kempe screens on every candidate lattice before any ball: FS-70 built three phases of balls on lattices the screens close in minutes. The rhombus chain at four colours (this stub's χ = 4 half) is unaffected.

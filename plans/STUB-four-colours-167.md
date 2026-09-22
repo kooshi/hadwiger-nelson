@@ -171,3 +171,5 @@ them, re-aimed by R5.
 * **Not a failure:** an `Unknown` at a budget.
 
 **Bearing on χ(ℝ²) ≥ 6:** none directly; high for the conjecture's account of fields no residue plane bounds.
+
+**Provisional bearings, updated 2026-09-22 (FS-70's close):** G68 (the quotient/fan-gap screen — at three colours a gapped periodic 3-colouring of the lattice R9 would build on kills its chain route by theorem; run it first, minutes), G69 (rigidity prime by prime: the CM field of the 7-cycle triangle's directions, its primes above 5, 7, 11, 13 classified, decides whether any lattice there can be rigid), G65 (the shell-indexed core ceiling on word balls), FS70-T10 (the periodic Kempe screen, `tools/fs70_periodic_kempe.py`, needs only a generator grammar for the field).

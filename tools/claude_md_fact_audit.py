@@ -72,6 +72,8 @@ ALLOW: dict[str, str] = {
     "G1–G54": "the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)",
     "G1–G67": "the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)",
     "G1–G68": "the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)",
+    "6723": "the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)",
+    "declarations=6723": "the same count, as the gate report prints it",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as

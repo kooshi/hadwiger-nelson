@@ -1,5 +1,14 @@
 # FS-70 — five colours over ℚ(√3,√5): the conjecture's last meetable prediction, and forcing five without the Moser spindle
 
+> **CLOSED 2026-09-22 as a typed null — instrument, on one lattice** (`LEDGER.md` row 76; G68, G69; the theorems in
+> `plans/FS70-derivation.md`; the re-grokking and its close-read in `plans/FS70-grokking-audit.md`; the records under
+> `data/fs70/`). Not landed: no finite unit-distance graph over ℚ(√3,√5) refused four colours. Landed instead: every lattice the
+> milestone built but one is four-colourable at every radius by a periodic colouring and forces no pair at any distance — by
+> theorem (rows 56, 66 + the quotient, fan-gap and periodic Kempe screens); the split-prime tower at 2 is tight with `d₀ = 3`;
+> over this field rigidity and density pull apart (G69). The one lattice left, `group:u3:2+w4`, is **FS-72**
+> (`plans/STUB-last-lattice.md`); the mechanism question is **FS-73** (`plans/STUB-rigidity-dichotomy.md`). The kernel skeleton
+> that stated `χ ≥ 5` with a placeholder is in git at `a4af6ea4`; `Instances/ThreeFive.lean` keeps the subring only.
+
 *Minted 2026-09-21 by the product owner of FS-66, at Kooshi's choice for the next milestone ("Let's jump to 3,5 at 5 colors. That
 does sound interesting"), over FS-59's R9, which is deferred, not dropped. Written for a reader with no conversation memory: the next
 session subplans this from here (WORKFLOW 3–4), with the standing rules of `plans/SESSION-HANDOFF-2026-09-20.md` §0. Read
