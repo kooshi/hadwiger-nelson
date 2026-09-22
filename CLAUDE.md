@@ -384,6 +384,12 @@ a class family enumerated over present vertices misses it.
 rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
+***Every milestone opens with the grokking audit (WORKFLOW step 3g, Kooshi, 2026-09-22): each entry below, each ledger row's mechanism and
+each method rule is read against the milestone and its bearing extracted into the plan's phases — before the prior-art gate, with the rigor of
+the modeling passes. These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
+that reasons from the literature's analogies while they sit unread has used them as background. FS-70 is the instance: G54's classifier, G16/G32's
+pigeonhole form and G40's absorption each bore on it and none was run until asked for.***
+
 **The theory in one paragraph.** The 4/5 wall is arithmetic. A unit-distance graph over K is
 4-colourable by a residue colouring at the prime above 2, so a 5-forcer is K-fabric — a small vocabulary of
 seam shells about rotation centres, organized by the half-spindle group — plus a spindle whose radicand

@@ -14,7 +14,8 @@ leaves.
    Sessions die and compaction loses nuance; the stubs are the roadmap's memory. A direction
    change that does not rewrite the affected stubs is not recorded; a demoted milestone keeps its
    stub with a banner saying why (deprecate, never delete).
-3. **Subplan** — one milestone at a time, working up the DAG. Deep-dive its requirements and
+3. **Subplan** — one milestone at a time, working up the DAG (opening with the grokking audit, step 3g, then the
+   prior-art gate, step 3a). Deep-dive its requirements and
    *strictly specify its shape*: write the **skeleton** — every signature and full theorem statement,
    `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent.
    Validate the spec right there, where a wrong statement is cheap: `#eval` the definitions, keep a
@@ -27,6 +28,38 @@ leaves.
    plausibility and then benchmarked is a shape you will rewrite. Refine scope here: if a milestone is bigger than it looked, push the
    excess to a later milestone — and whenever we carry scope forward, drop a subplan **stub** in
    `plans/` capturing the carry-forward notes → `plans/<Mxx-milestone>.md`.
+3g. **Grokking audit** — *first: before the subplan's routes are written, before the prior-art gate, before any derivation.*
+   Its output is a **§G section of the subplan**, ahead of §PA; a subplan without one is not a subplan. **Minted 2026-09-22
+   (Kooshi)**, after FS-70's plan — three implementer phases, an exact theorem and a typed null — was found to have skipped
+   four things `CLAUDE.md` already held, each surfaced only by Kooshi asking a question a grokking answers: G54's tight/slack
+   classifier at the field's split prime (run in one minute, it says the 2-unit local plane is Hoffman-tight at four colours, so
+   it forces pairs at depth — the very mechanism of every known four-forcer, row 67 — which is a *reason to expect forcing* the
+   plan never had); G15/G16/G32's disjunctive pigeonhole form and the two-distance dial (a whole second route, with tools
+   already built); G40/G14, which predicted the arena's null before it was run; and the lens shape the plan itself named first
+   and no phase built. **Why the step exists, in Kooshi's words:** *the grokkings are perhaps the most important prior art we
+   have; they are always in context with the intent that they will be used to advance the frontier, in a way that no other
+   knowledge can; we are far enough into novel mathematics that you cannot rely on your priors any more.* An agent that reads
+   `CLAUDE.md` and then plans from analogy with the literature has used the corpus as background; this step makes it the
+   foundation. **The procedure, with the rigor of the modeling passes:**
+   1. **Walk every entry, one line each, no batching, no skipping**: every grokking G1–G66 (and every one minted since), every
+      ledger row's *mechanism* (rows 1–75), every `[method]` rule in `CLAUDE.md` § Grokkings and § Building. For each, one of
+      three verdicts with its reason: **bears** — say what the entry says about *this* milestone's object, question, fabric or
+      instruments, and which phase it changes; **silent** — say why; **falsifiable here** — the milestone can kill or confirm
+      it, so register it as a prediction. A verdict without a reason is not a verdict.
+   2. **Extract each *bears* into an instruction to a phase**: the shape it dictates (a lens, a core, a ball law), the screen it
+      supplies (a residue, a classifier, an additive family), the theorem it makes free (a null predicted before it is run), the
+      control it names (a known positive one field over), the route it adds or kills. Write it where the implementer will act
+      on it — in the phase table — not only in §G.
+   3. **The test of the audit:** its output must *change the plan* — a route added, removed or re-ordered, a screen run before
+      a solver, a prediction registered — or the plan says explicitly that nothing in the corpus bears, which is itself a
+      claim the owner pushes back on. An audit that changed nothing has measured its own reading, not the corpus (G21).
+   4. **Fresh, every milestone, never from memory** — like the modeling skills of step 5: a compaction summary, a previous
+      milestone's §G, or "I know the grokkings" is not the audit. The planner runs it with `CLAUDE.md` open; the owner scores
+      §G line by line before accepting the plan, and a skipped entry is a plan defect.
+   5. **At the close (step 9), re-read §G against what happened**: which extractions paid, which entry should have been used
+      and was not — each miss is a new instance recorded under this step, and the grokking that was missed gets one line
+      saying which milestone it would have aimed.
+
 3a. **Prior-art gate** — *before any derivation, and before the modeling passes.* Thirty minutes, and its
    output is a **§PA section of the subplan**; a subplan without one is not a subplan. Minted 2026-09-08
    (`CLAUDE.md` § Grokkings G49) after a check found that four consecutive milestones had reconstructed the
