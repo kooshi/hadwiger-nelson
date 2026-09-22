@@ -64,7 +64,8 @@ ALLOW: dict[str, str] = {
     "Pilot": "the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'",
     # WORKFLOW 2.0 (2026-09-22) renumbered the reframe: the prior-art gate is step 3.2 (was 3a), the knowledge audit 3.1 (was 3g).
     "3a": "WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2",
-    "3g": "WORKFLOW 2.0: the knowledge audit is step 3.1; the grokkings intro now says 3.1",
+    "3g": "WORKFLOW 2.0: the re-grokking is step 3.1; the grokkings intro now says 3.1",
+    "G1–G54": "the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
