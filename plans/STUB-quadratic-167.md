@@ -104,7 +104,7 @@ main clause predicts χ(ℚ(√167)²) = 6; if neither is (the wall W, `CLAUDE.m
   R (by radius, by denominator height): where does it reach 3, 4, …? A plateau at 3 over large pieces is evidence against the
   conjecture here, never a refutation: a finite piece can stay colourable long after the whole plane is not (G21).
 
-## 4. Prior-art gate (WORKFLOW 3a) — questions to search, in the discipline's words
+## 4. Prior-art gate (WORKFLOW 3.2) — questions to search, in the discipline's words
 
 * Chromatic number of the rational plane extended by one square root: Johnson 1987 (`[Johnson1987]`, two-colourings of real
   quadratic extensions), Fischer 1990 (additive colourings; Thm 8), Madore 2015, `[AxenovichEtAl2014]`, Soifer's Open

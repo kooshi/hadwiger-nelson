@@ -69,7 +69,7 @@ half lives. G36 already records the `d = 2` instance measured on our own objects
   kernel of `ψ` is bigger. *(Registered against my own inclination, because the rational case is so clean.)*
 * **P4** — the attainability question over a number field is the three-squares theorem's analogue and is
   classical; the literature to search first is **quadratic forms over number fields / Hasse–Minkowski**, not
-  the colouring literature. (Prior-art gate, `WORKFLOW.md` step 3a.)
+  the colouring literature. (Prior-art gate, `WORKFLOW.md` step 3.2.)
 
 ## 5. Bearing on χ(ℝ²) ≥ 6, stated honestly
 

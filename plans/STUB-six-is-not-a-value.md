@@ -223,7 +223,7 @@ about the wall. What the frame is good for: keeping S and W apart, and §5's gat
 
 ---
 
-## 5. Prior art owed (WORKFLOW 3a), and it is the first thing to run
+## 5. Prior art owed (WORKFLOW 3.2), and it is the first thing to run
 
 **Nothing here has been searched.** Before any derivation:
 

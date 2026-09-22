@@ -44,7 +44,7 @@ colourings are affine). It is not a theorem anyone here has found.
 
 | # | what | cost |
 |---|---|---|
-| D1 | **The prior-art gate, properly** (WORKFLOW 3a, items 5–8): Greenwell–Lovász 1974, Duffus–Sands–Woodrow 1985, HHMN 1988, Tardif's survey — *read*, not relayed; zbMATH author listings for each; the reconfiguration literature's "frozen" colourings of products. If the tight case is printed, this stub closes as a citation | hours + the papers (§ R.4) |
+| D1 | **The prior-art gate, properly** (WORKFLOW 3.2, items 5–8): Greenwell–Lovász 1974, Duffus–Sands–Woodrow 1985, HHMN 1988, Tardif's survey — *read*, not relayed; zbMATH author listings for each; the reconfiguration literature's "frozen" colourings of products. If the tight case is printed, this stub closes as a citation | hours + the papers (§ R.4) |
 | D2 | **Exhaustive small cases**: every Hoffman-tight 3-colourable Cayley graph on ≤ ~100 vertices against `K₄`, the Moser spindle, `UD(𝔽₇,2)`: count 3-colourings of the product against 3-colourings of `G`. One counterexample kills the conjecture as stated | an afternoon, SAT with model counting |
 | D3 | **The proof or its obstruction**: check the sweep's eigenvalue sketch; the gap-free case without tightness (is gap-freedom in *every* colouring enough, or is the spectrum doing work?) | open |
 | D4 | **The kernel form**, if D3 lands: `Coloring (G ×ˢ H) (Fin 3)` factors through `G` under `GapFree` — row 66's `FanGap` vocabulary already names the hypothesis's negation | days |

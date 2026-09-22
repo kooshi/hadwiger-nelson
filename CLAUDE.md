@@ -384,9 +384,9 @@ a class family enumerated over present vertices misses it.
 rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
-***Every milestone opens with the reframe (WORKFLOW step 3, Kooshi, 2026-09-22): first the grokking audit (3g) — each entry below, each ledger
-row's mechanism and each method rule read against the milestone and its bearing extracted into the plan's phases, the recognition it yields
-being the prior-art gate's (3a) search query — then the subplan; with the rigor of the modeling passes. These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
+***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the knowledge audit (3.1) — each entry below, each
+ledger row's mechanism and each method rule read against the milestone and its bearing extracted into the plan's phases, the recognition it
+yields being the prior-art gate's (3.2) search query — then the subplan (4); with the rigor of the modeling passes (6). These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
 that reasons from the literature's analogies while they sit unread has used them as background. FS-70 is the instance: G54's classifier, G16/G32's
 pigeonhole form and G40's absorption each bore on it and none was run until asked for.***
 
@@ -722,7 +722,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (FS-59); a wall-broken, 5-sealed field whose plane is 4-colourable by a colouring local at no prime; for
   the six-question, a 5-colourable, 5-tight Cayley quotient of a 6-open plane (FS-42).*
 * **G49 — The prior-art gate. [method, measured]** Recognition is half the rule; the other half is a search
-  at the milestone's opening (WORKFLOW step 3a): in the discipline's words, never ours; under two disciplines;
+  at the milestone's opening (WORKFLOW step 3.2): in the discipline's words, never ours; under two disciplines;
   for the question as well as the method; outside arXiv. Past misses came from checking at the close,
   searching coined vocabulary, and searching one literature when the object sat in two. The field-plane
   reduction was derived independently at least six times, and the Polymath16 corpus (2018–2026) poses

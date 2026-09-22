@@ -351,7 +351,7 @@ prior art. Not written up. `ℚ(√167)`, where the local–global conjecture pr
 argument) — Madore's quantity stays open at every `p`. Nothing exact at `p = 23` until its finite plane is decided. And the lower bound is the spectral one: whether
 `χ_Bor(ℚ_p²)` grows like `√p` or faster is exactly the unknown gap between the ratio bound and `χ` on the finite planes.
 
-**Prior art checked** (WORKFLOW 3a item 8; a negative measures its queries): the complete zbMATH author listings of both posers
+**Prior art checked** (WORKFLOW 3.2 item 8; a negative measures its queries): the complete zbMATH author listings of both posers
 (31 and 14 entries — after 2017 they return to chromatic numbers only in `[BardestaniMallahiKarai2018]` and `…2020`, never to this
 plane); `ab:"Borel chromatic number"`; `ab:"chromatic number" & ab:"p-adic"`; `ti:"Hadwiger-Nelson" & py:2015-2026`; the first
 planner's walk of the 2017 paper's citing lists. Found: no value and no lower bound for the Borel or plain chromatic number of an

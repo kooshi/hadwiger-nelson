@@ -187,7 +187,7 @@ Phase A a GPU-day; B hours (certificate) to days (SAT) per prime; C a day; D ope
 stub in either outcome** — a six-chromatic plane names the field a six-forcer must live in and the value the conjecture
 predicts there; no six-chromatic plane retires six for every number field under the conjecture and points the hunt at seven.
 
-## §PA. The prior-art gate (run 2026-09-15, before the subplan; WORKFLOW step 3a; about an hour; extends FS-50's gate, `plans/FS50-prior-art.md`, whose independence-side negatives stand and are not repeated)
+## §PA. The prior-art gate (run 2026-09-15, before the subplan; WORKFLOW step 3.2; about an hour; extends FS-50's gate, `plans/FS50-prior-art.md`, whose independence-side negatives stand and are not repeated)
 
 **In one sentence:** no finite Euclidean plane is known to be six-chromatic and no window prime has been decided or even
 bracketed in print; the only bracketed cells anywhere are Moorhouse's `χ(𝔽₁₃²) ∈ {5, 6}` (this project measured 5, M58) and
@@ -868,7 +868,7 @@ Two committed files carry the milestone's state, and every phase writes into the
 `data/fs53/periodic-q27.json` are committed with this subplan, so the two `q = 27` findings are reproducible from the
 number 27 rather than resting on the planner's word.
 
-### §S12. Modeling passes (WORKFLOW step 5; de Bruijn, 2026-09-15, each a fresh skill invocation on §S and the skeleton)
+### §S12. Modeling passes (WORKFLOW step 6; de Bruijn, 2026-09-15, each a fresh skill invocation on §S and the skeleton)
 
 **§S12.1 Domain modeling — the verdicts, each a decision in four parts (numbered on from §S7).**
 

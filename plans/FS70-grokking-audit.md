@@ -1,4 +1,4 @@
-# FS-70 — §G, the grokking audit (WORKFLOW step 3g; the step's first instance, run by the owner, 2026-09-22)
+# FS-70 — §G, the grokking audit (WORKFLOW step 3.1; the step's first instance, run by the owner, 2026-09-22)
 
 *Written after three implementer phases and a typed null, when Kooshi's questions ("is the radius hindering us?", "any other
 grokkings we skipped?") showed the plan had been built from the literature's analogies while `CLAUDE.md` held four things that
@@ -117,7 +117,7 @@ extractions marked ✗ are phase 1d's contract.*
 | rule | verdict |
 |---|---|
 | ask the whole graph directly before any finder (G66) | used ✓ |
-| measure before specifying (WORKFLOW 3) | used ✓ |
+| measure before specifying (WORKFLOW 4) | used ✓ |
 | a positive control proves an instrument finds the shape its generator can represent | **✗ — the only four-colour control was Haugland's, a virtual edge (contraction); the `forces` encoding at four colours has no positive control in any field.** Harder's forcer over K (V + V + H, 745 points) is it; it needs ℚ(√3,√11) arithmetic — my `po_kempe_control_K.py` has the field; the fabric tool does not. Phase 1d |
 | every check seen to fail; plants | used ✓ |
 | break the symmetry; UNKNOWN is about the encoding | used ✓ (G27's Galois symmetries not yet) |
@@ -147,4 +147,4 @@ extractions marked ✗ are phase 1d's contract.*
 | 14 | Kernel notes: `quadrature_rho15`, row 44 for two-copy closers, row 31 for the pigeonhole form | rows 28, 31, 44 | phase 2 |
 
 *At the close (WORKFLOW 9): this section is re-read against what 1d found; every extraction that paid and every entry that should
-have borne and did not is recorded under step 3g.*
+have borne and did not is recorded under step 3.1.*

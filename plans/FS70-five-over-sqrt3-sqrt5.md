@@ -15,7 +15,7 @@ from an unbroken encoding never reported as a fact about a graph; nothing is a r
 
 ---
 
-## G. The grokking audit (WORKFLOW step 3g) — `plans/FS70-grokking-audit.md`
+## G. The grokking audit (WORKFLOW step 3.1) — `plans/FS70-grokking-audit.md`
 
 *Added by the owner 2026-09-22, after phases 0–1b: the step's first instance. It found four bearings this plan never used (G54's
 classifier at the split prime; G15/G16/G32's pigeonhole form; G40/G14; the lens shape named below and never built) and ranks
@@ -37,7 +37,7 @@ Everything else — the closure, the certificate, the kernel form — is mechani
 
 ---
 
-## PA. The prior-art gate (WORKFLOW 3a, all eight items)
+## PA. The prior-art gate (WORKFLOW 3.2, all eight items)
 
 *Run 2026-09-21 by the planner. Raw API responses are under `data/fs70/planner/pa/` (`zb-*.json`), so every count below can be
 re-derived. The owner's part 1 (`data/fs70/owner/gate-2026-09-21-fields.md`) settled the fields of the two published
@@ -142,7 +142,7 @@ Haugland's Appendix A.
 
 ---
 
-## 2. What the planner measured before specifying (WORKFLOW 3: cost decides shape)
+## 2. What the planner measured before specifying (WORKFLOW 4: cost decides shape)
 
 All on the desktop, 2026-09-21, with `tools/fs70_field.py` (exact arithmetic for ℚ(√3,√5) and its `i`-extension, the
 valuations at the primes above 2, 3, 5) and `tools/fs70_fabric.py` (lattices, saturation, the additive screen, Haugland's
@@ -435,7 +435,7 @@ screen (both wall-broken, 11 usable; their 2-unit rotations are `(−2 + i√23)
 
 ---
 
-## 5. The skeleton (WORKFLOW 3; elaborates today)
+## 5. The skeleton (WORKFLOW 4; elaborates today)
 
 `Proofs/HadwigerNelson/Instances/ThreeFive.lean` — **not yet imported by `Proofs.lean`** (it carries one `sorry`, and the gates
 fail on `sorryAx`; the import line is phase 2.4's first edit). It holds:

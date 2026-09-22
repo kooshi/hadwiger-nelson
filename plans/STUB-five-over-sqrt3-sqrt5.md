@@ -2,13 +2,13 @@
 
 *Minted 2026-09-21 by the product owner of FS-66, at Kooshi's choice for the next milestone ("Let's jump to 3,5 at 5 colors. That
 does sound interesting"), over FS-59's R9, which is deferred, not dropped. Written for a reader with no conversation memory: the next
-session subplans this from here (WORKFLOW 3 and 3a), with the standing rules of `plans/SESSION-HANDOFF-2026-09-20.md` §0. Read
+session subplans this from here (WORKFLOW 3–4), with the standing rules of `plans/SESSION-HANDOFF-2026-09-20.md` §0. Read
 beside: `CLAUDE.md` § Notation, G48 (the conjecture), G55 (the chain theorem), G57 (no window field holds a Moser spindle), G7 and
 G62 (the type-M rotation family), G31 (a χ ≥ 6 gadget must be constructed), rows 64–66; `plans/STUB-biquadratic-table.md` (FS-48,
 whose open case this is); `plans/STUB-chain-theorem.md` (FS-45); `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH3-plan.md`
 (the arena machinery and why dropping the coordinate shape at n = 2 died); `reference/ChatGPT-local-global-tightness-conjecture/`.*
 
-*Provisional bearings (WORKFLOW 3g; superseded by the audit `plans/FS70-grokking-audit.md`, 2026-09-22): as minted, this stub named
+*Provisional bearings (WORKFLOW 3.1; superseded by the audit `plans/FS70-grokking-audit.md`, 2026-09-22): as minted, this stub named
 G48, G55, G57, G7, G62, G31 and rows 64–66; the audit found G54 (the split-prime tower is tight at four colours), G16/G32 (the
 pigeonhole form), G40/G14 (the arena's null), G60 (the fractional cap is 4.32 here) and G61 (the rich lattices) bearing as well.*
 
@@ -72,7 +72,7 @@ conjecture makes a prediction it has never met with an object.
 
 ## 4. Routes, cheapest first (the subplan chooses; price each before committing)
 
-1. **The prior-art gate and the field computation** (WORKFLOW 3a; a morning): the two Moser-free papers' coordinate fields; zbMATH and
+1. **The prior-art gate and the field computation** (WORKFLOW 3.2; a morning): the two Moser-free papers' coordinate fields; zbMATH and
    arXiv in the discipline's words (*five-chromatic unit-distance graph without Moser spindle*, *chromatic number of the plane over a
    biquadratic field*, *unit distance graph number field coordinates*); the poser's listing rule (item 8) for Voronov, Haugland, Parts.
 2. **The direct ask, before any finder** (G66's lesson), **in Haugland's shape**: saturate a lattice of ℚ(√3,√5)'s small-denominator

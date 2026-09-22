@@ -100,7 +100,7 @@ structure**, which is exactly why the general-purpose ones fall through to blind
 * **Informative failure:** D3's domain count coming back astronomically large. That is a finding, costs an
   afternoon, and closes the novel half of this stub honestly.
 
-## 7. Prior art owed (WORKFLOW 3a), before any derivation
+## 7. Prior art owed (WORKFLOW 3.2), before any derivation
 
 1. **Exact independence numbers of Cayley graphs on `𝔽_{q²}` with a multiplicative-subgroup connection set** — in
    that literature's words, not ours. Shared with FS-62 §5 item 5, whose first pass already returned a negative:

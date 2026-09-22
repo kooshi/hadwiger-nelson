@@ -129,7 +129,7 @@ necessary for any gain over a seven-chromatic residue plane.
 
 ---
 
-## 4. Prior art owed (WORKFLOW 3a) — shared with FS-63
+## 4. Prior art owed (WORKFLOW 3.2) — shared with FS-63
 
 In the discipline's words, never ours:
 

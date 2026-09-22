@@ -20,7 +20,7 @@ named **six times** across those literatures without any of them noticing each o
 
 That discovery produced two standing rules — `CLAUDE.md` § Grokkings **G49** (recognition is half the rule; the
 other half is a search) and **G50** (read what the search already found; an unread paper on your own shelf is a
-debt) — and a workflow step (`WORKFLOW.md` **step 3a**, the prior-art gate). **This milestone is the
+debt) — and a workflow step (`WORKFLOW.md` **step 3.2**, the prior-art gate). **This milestone is the
 consolidation those rules imply.** It is not a hunt for a theorem; it is making the project's map of the
 literature true, and making the project's language legible to the people who own the subject.
 
@@ -30,7 +30,7 @@ literature true, and making the project's language legible to the people who own
   conditional discharged, one published numerical error found. Its record is `plans/STUB-library-read.md` §R.
 * **The FS-20 prior-art repair (2026-09-09)** re-ran the "is the exact value known?" check properly after the
   first run characterised a held paper by its abstract. Record: `plans/STUB-theorem-B-writeup.md` §1. Its method
-  is now `WORKFLOW.md` step 3a sub-rules 5–7 and should be the template here.
+  is now `WORKFLOW.md` step 3.2 sub-rules 5–7 and should be the template here.
 * **A bibliography key audit (2026-09-09)** found and fixed three dangling citation keys; **zero remain**. The
   check is cheap and worth re-running at the end of this milestone:
 
@@ -85,7 +85,7 @@ The goal is a map that is **true**, not merely full. Three concrete deliverables
    Bardestani–Mallahi-Karai — and record the edges that *do not exist*. FS-20 §2 asserts they mostly do not; the
    graph makes it checkable, and it is the paper's central evidence.
 3. **Re-run the FS-20 §1 searches once more before submission** (they are cheap and the manuscript rests on
-   them), using step 3a sub-rules 5–7: walk the citations of the paper that **posed** the question, open every
+   them), using step 3.2 sub-rules 5–7: walk the citations of the paper that **posed** the question, open every
    neighbourhood title rather than characterising it, and cross-check two citation databases — OpenAlex and
    Semantic Scholar disagreed fourfold on the same paper.
 
@@ -131,7 +131,7 @@ this milestone, since they need exactly this reading.
 
 ## 5. Method, acceptance, and stop rules
 
-* **Run under `WORKFLOW.md` step 3a's discipline** — it is now seven sub-rules, three of them added on
+* **Run under `WORKFLOW.md` step 3.2's discipline** — it is now seven sub-rules, three of them added on
   2026-09-09 from the FS-20 repair's own failure.
 * **Every finding lands in `BIBLIOGRAPHY.md` the same day**, with the read column telling the truth about *what*
   was read (Table 1 and §6, not "read") — the honest granularity FS-18 used.

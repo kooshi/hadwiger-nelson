@@ -75,7 +75,7 @@ the **published chapter** separately with four citing works. Compare identifiers
 
 ## 4. Method and scope
 
-* **Half a day to a day**, per WORKFLOW 3a, with §PA-shaped output committed whatever the verdict.
+* **Half a day to a day**, per WORKFLOW 3.2, with §PA-shaped output committed whatever the verdict.
 * Search under **at least two disciplines** (G49): mathematical crystallography / aperiodic order, and condensed-matter physics
   (moiré materials, twisted bilayers). The physics literature is enormous and mostly electronic-structure; filter on
   *commensurate*, *superlattice period*, *coincidence*, and ignore band structure.

@@ -549,7 +549,7 @@ arXiv:1301.3998 (dihedral group actions).
 
 ## D. Standing rules for this file
 
-0. **The prior-art gate is a workflow step** (`WORKFLOW.md` step 3a, `CLAUDE.md` § Grokkings G49). Every milestone
+0. **The prior-art gate is a workflow step** (`WORKFLOW.md` step 3.2, `CLAUDE.md` § Grokkings G49). Every milestone
    runs a thirty-minute prior-art search at its OPENING, before any derivation, and records the result as a §PA
    section of its subplan — searching in the *discipline's* vocabulary and never in this project's coined one,
    under at least two disciplines for the same object, for the QUESTION as well as the method, and outside arXiv.

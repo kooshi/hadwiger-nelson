@@ -71,7 +71,7 @@ general (the function field of a curve of positive genus) — and then invokes d
 since 1990 and never correctly *proved* there; this stub's product is the repair — real places, or Tarski–Seidenberg — and the
 kernel form. B′ remains a fair half-day kernel theorem, credited to Fischer.
 
-## 3a. Prior-art gate (WORKFLOW 3a) — owed, never run
+## 3a. Prior-art gate (WORKFLOW 3.2) — owed, never run
 
 This stub predates its own gate. Before any of D2–D4 is written: search for the specialisation argument in the words of valuation
 theory and of real algebraic geometry (*real place*, *Artin–Lang homomorphism theorem*, *specialisation of a semialgebraic set*),

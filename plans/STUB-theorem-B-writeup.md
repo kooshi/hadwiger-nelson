@@ -110,7 +110,7 @@ named **six times across fifty years, in four literatures that do not cite one a
 *(Registered caveat, unchanged: Geombinatorics is print-first and poorly indexed, and `[Johnson2006]` — the
 compendium of this exact direction — is still not obtained. See §5 R2.)*
 
-**Method note for the next check (and for `WORKFLOW.md` step 3a):** walk the citation graph of the paper that
+**Method note for the next check (and for `WORKFLOW.md` step 3.2):** walk the citation graph of the paper that
 **posed** the question, not only of the paper that **proved** the nearest result; open every citing work whose
 title is in the neighbourhood rather than characterising it from its abstract; and cross-check the citation list
 in at least two databases, because they disagreed here by a factor of four.

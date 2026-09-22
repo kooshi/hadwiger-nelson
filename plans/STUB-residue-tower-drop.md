@@ -95,7 +95,7 @@ triangles. Caught by FS-66's planner, 2026-09-20.)*
   system that already equals level one's? That would close the question by theorem, in the negative.
 * **R4 — 23 at five colours**, only if R1/R2 show a drop at 11. 279,841 vertices, 77 M edges: a finder job, plausibly the GPU's.
 
-## 5. Prior art owed (WORKFLOW 3a) — NOT yet run
+## 5. Prior art owed (WORKFLOW 3.2) — NOT yet run
 
 In the discipline's words, not ours: *chromatic number of unit-distance (unit-quadrance) graphs over `ℤ/p^r`* (`[MMST1998]` holds
 their spectra — read for spectra, never for `χ`); *Cayley graphs over Galois rings*; *independence number of lifts / voltage graphs
