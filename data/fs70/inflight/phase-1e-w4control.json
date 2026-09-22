@@ -1,0 +1,7 @@
+{"phase": "1e", "what": "the plain four-colour control on group:u3:2+w4, word ball at sums of <= 4 (1,886,761 points, 14,523,840 edges, average degree 15.396) -- phase 1b's own shape, re-asked with kissat aimed at the UNSATISFIABLE direction, which phase 1b did not try (it tried --sat)",
+ "why": "this is the ONE lattice of the milestone with no additive and no periodic four-colouring in reach, so a refusal is five colours over Q(sqrt3,sqrt5) outright",
+ "shape_dir": "build/fs70/L3-w4",
+ "budget_seconds": 5400,
+ "safe_to_kill": true,
+ "what_a_kill_redoes": "nothing decided; the CNF is rebuilt from build/fs70/L3-w4/graph.json in about 3 minutes. A kill forfeits only this configuration's attempt, and an UNKNOWN from it would in any case be a fact about the configuration, not the graph (G21)",
+ "verify_kill_by": "no kissat process in ps, and the ask directory's files static for 10 s"}
