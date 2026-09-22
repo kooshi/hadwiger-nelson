@@ -1127,8 +1127,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   **The law prices balls bounded in every embedding; a word ball has a combinatorial ceiling it does not see** (FS-70, 2026-09-22): on the
   rank-8 lattice `group:u3:2+w4` the 1.9 M-point ball at sums of ≤ 4 has average degree 15.4, its ≤ 3 interior has 84 generator-neighbours
   each — and its 13-core is empty, because the interior's own induced degree is 11.5 and the shell that carries the rest peels first; the
-  denser-core lever of FS-61 does not exist there, and the Minkowski ball that the law does price is `10⁹` points at degree 18. *Do: on a
-  word ball, compute the core numbers before promising a denser core; in rank 8 expect none above ~12.*
+  denser-core lever of FS-61 does not exist there, and the Minkowski ball that the law does price is `10⁹` points at degree 18. **The
+  ceiling is radius-indexed, not rank-indexed** (FS-70 phase 1f): a word ball's core number is set by its outermost shell's mean degree,
+  and that shell is ≥ 93 % of the ball at every radius measured — 11.7 at sums of ≤ 4 (ceiling 12), 14.6 at ≤ 5 (29 M points, mean degree
+  19.2, ~103 GB of solver); the same lattice's radius-4 ball in its 132-unit-vector metric is 11 M points at 18.7. *Do: on a word ball,
+  compute the core numbers and the outermost shell's mean degree before promising a denser core; a shell one radius out raises the
+  ceiling by about the shell's degree gain, at the shell's size.*
   *Killing test: a refusing ball below average degree 6.5; or a family of lattice balls whose undecided fraction does not fall with degree.*
 * **G66 — Up a residue tower nothing drops where we can see, because a higher level is a *fuzzy* copy of level one and
   fuzziness is taxed; what is left of the question is the carry. [kernel + cert + hand; one reading]** The tower's
@@ -1220,12 +1224,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (`[2Λ : V] = 81`), which is the prediction the owner lost. Over `K` the hexagonal lattice is rank 4, meets refusing targets at 5,
   7, 11, 13 and is Kempe-rigid at `8/3` under all six periodic colourings found — **dense and rigid**, so Harder's forcer lives at
   23,083 points. Over ℚ(√3,√5) every lattice of rank ≤ 6 built is loose, and the one lattice with no periodic colouring found is
-  rank 8, whose word balls have core number ≤ 12 and whose Minkowski balls are `10⁹` points: **where rigidity is possible, density
-  is not — the two pull apart, and that is the whole difference between the two fields.** G61(4)'s "supply of unit vectors" has its
+  rank 8, whose dense finite pieces start at `~10⁷` points (a 29 M-point word ball at degree 19.2; an 11 M-point ball at 18.7 in a
+  132-vector metric; the 1.9 M-point ball's 13-core is empty) against the 2.3 × 10⁴ of the dense rigid object over `K`: **where
+  rigidity is possible, density costs three orders of magnitude more — the two pull apart, and that is the whole difference between
+  the two fields.** G61(4)'s "supply of unit vectors" has its
   mechanism here: supply is what covers the residue circles. *Do: before building fabric over a field, take the direction set's CM
   field, classify the primes above 5, 7, 11, 13 in `E/E⁺` and compute the targets; run the quotient at every admissible `N` and the
   periodic Kempe screen at every target; spend a solver only where every colouring found is rigid at the target — and if that
-  lattice's rank is the field's full degree, expect no dense finite piece and price the cube pass before building a ball. Killing
+  lattice's rank is the field's full degree, expect density only at `10⁷` points and price the shape (word ball, metric ball, core,
+  the two-stage survivor route) before building anything. Killing
   test: a lattice rigid under every periodic colouring found whose finite balls all four-colour with `(0, δ)` separated — a
   non-periodic escape, the inheritance question row 67 leaves; or a rank-4 lattice loose at every odd prime that still forces.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
