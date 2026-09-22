@@ -1,0 +1,11 @@
+{
+ "sha": "442b6c3322c0a09cbb993fe9",
+ "graph_dir": "build/fs70/L6-w5",
+ "pin": "forces:4",
+ "out": "build/fs70/asks/L6-w5-forces-4",
+ "pid": 326109,
+ "pgid": 277283,
+ "started": 1790066400.4489977,
+ "ledger": "build/fs70/asks/L6-w5-forces-4/cubes.jsonl",
+ "resume": "python3 tools/fs70_ask.py run build/fs70/L6-w5 forces:4 --out build/fs70/asks/L6-w5-forces-4 --resume"
+}

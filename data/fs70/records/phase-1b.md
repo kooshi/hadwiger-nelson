@@ -171,7 +171,7 @@ Single-sample, one solver, recorded as a fact about two encodings of one graph.
 | forces 2 | **SAT** | 469.48 | 3 |
 | separated i√3 | UNKNOWN at a 600 s budget | 600.69 | 3 |
 | forces 2/3 | UNKNOWN at a 600 s budget | 660.11 | 2 + precedence |
-| forces 8/3 | *running at handback (§10a)* | — | 2 + precedence |
+| forces 8/3 | UNKNOWN at a 600 s budget | 660.12 | 2 + precedence |
 | forces 4 | *running at handback (§10a)* | — | 2 + precedence |
 
 **The two UNKNOWNs are facts about a budget and an encoding, never about the graph** (G21). The three-pin asks
@@ -371,7 +371,7 @@ a typed null, not a skip.
 
 | check | what it re-derives, independently | result |
 |---|---|---|
-| **the owner's `po_cm_lattice.py 2 rho15`** — run here, unmodified | L6's `M`, rank, generators, `g`, additive counts and target liveness, in code that shares nothing with `tools/fs70_*` (its own complex arithmetic, its own HNF through sympy, its own unit enumeration) | *running at handback* — `build/fs70/crosscheck-owner.log`. My own `tools/fs70_fabric.py lattice` reading already matches, integer for integer, the numbers the owner published in the review (§2's table), so this is a third derivation of an agreement that already holds between two. |
+| **the owner's `po_cm_lattice.py 2 rho15`** — run here, unmodified | L6's `M`, rank, generators, `g`, additive counts and target liveness, in code that shares nothing with `tools/fs70_*` (its own complex arithmetic, its own HNF through sympy, its own unit enumeration) | **AGREES** (`build/fs70/crosscheck-owner.log`, run here unmodified): *"CM lattice ⟨zeta6, u^(|n|<=2) + rho15⟩: M=144 rank=6 generators=42 g=54"*, `Z/4: proper additive colourings 0`, `Klein: proper additive colourings 0`, and **every target LIVE** — `4/3`, `8/3`, `2`, `4`, `2/3`, `i√3` and `1/2`, each `separated by 0` with Kempe escapes `{1:0, 2:0, 3:0}` in both groups. Integer for integer with §2. **And it confirms §2's mechanism from the owner's own code**: its `targets in lattice` line reads `'1/2': True` — `½` really is in L6's ℤ-span, which is the hypothesis of the plan's §3.4 theorem and of the `2Λ` self-loop in §4.6. |
 | **the geometric edge derivation** on L6's `k = 4` ball | the complete unit-distance graph from the GEOMETRY (a float grid proposing, exact field arithmetic deciding) rather than from the lattice saturation; and the committed control colouring re-checked on those edges | *running at handback* — `build/fs70/crosscheck-geom.log`. Its planted twin (one point moved by `1/144` in one coordinate) must change the edge set, and the run does both. |
 | **the arena's two edge derivations** | saturation against geometry on 54,433 points | identical, 352,326 both ways |
 
@@ -413,9 +413,9 @@ are on disk.
 | what | where its verdict lands | budget | note |
 |---|---|---|---|
 | **L3's `k = 4` control** (1,886,761 points, degree 15.40) with `kissat --sat` | `asks.jsonl`; log `build/fs70/w4-sat-pass.log` | 2,400 s | the cube pass the plan owed (the owner's ruling 2), attempted first in the **satisfiable** direction — phase 1's default-configuration run on this same formula reached 1,500 s with no verdict. **L2's `k = 4` control runs next in the same script**, and was still queued at handback. |
-| **L6 at ≤ 5, `forces 8/3`** and then `forces 4` | `asks.jsonl`; log `build/fs70/L6-w5-asks.log` | 600 s each | the two-pin encoding at 805,693 vertices; `forces 2/3` already reached its budget, so these two most likely will too |
+| **L6 at ≤ 5, `forces 4`** | `asks.jsonl`; log `build/fs70/L6-w5-asks.log` | 600 s | the two-pin encoding at 805,693 vertices. `forces 2/3` and `forces 8/3` both reached their budget (660.11 s and 660.12 s, 38,820,402 clauses each), so this one most likely will too |
 | **L6 at ≤ 5, `separated i√3`, re-asked at 2,400 s** | `asks.jsonl`; log `build/fs70/L6-w5-sep-long.log` | 2,400 s | the 600 s attempt reached its budget on a ladder that was still climbing (55 → 251 → 469 s) |
-| **the two cross-checks of §9a** | `build/fs70/crosscheck-owner.log`, `build/fs70/crosscheck-geom.log` | — | neither is load-bearing: the lattice-against-geometry agreement is already established on the arena's 54,433 points by the same machinery (§5), and the owner's script is the owner's own instrument. **A defect of mine, recorded:** I first launched both writing only to a session scratchpad that does not outlive the session — a checkpoint one handback away from nothing. They were killed by pid, verified absent from `ps`, and relaunched writing to those two files. **Those files are under `build/`, which is scratch an agent may clean: read them before any tidy-up, or re-run the two commands, which is minutes.** |
+| **the geometric cross-check of §9a** (the owner-script one has landed and agrees) | `build/fs70/crosscheck-geom.log` | — | not load-bearing: the lattice-against-geometry agreement is already established on the arena's 54,433 points by the same machinery (§5), and the owner's script is the owner's own instrument. **A defect of mine, recorded:** I first launched both writing only to a session scratchpad that does not outlive the session — a checkpoint one handback away from nothing. They were killed by pid, verified absent from `ps`, and relaunched writing to those two files. **Those files are under `build/`, which is scratch an agent may clean: read them before any tidy-up, or re-run the two commands, which is minutes.** |
 
 ---
 
