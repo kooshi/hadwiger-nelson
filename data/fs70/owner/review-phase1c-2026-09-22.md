@@ -41,7 +41,22 @@ over this field. Neither is claimed.
 
 ## 4. The k = 5 pass (filled in when the run ends)
 
-*(rows appended below by the owner from `data/fs70/asks.jsonl`; verified by `po_verify_arena.py` where affordable)*
+The run ended at 06:11 (process group gone; the marker `rot-asks-k5.json` was left behind by a driver that had already handed
+back — removed by the owner, the ledger rows being the evidence). **All five of the top live rotations colour at base sums of
+≤ 5** (272,041 points, ~2,099,200 edges, degree 15.4; `kissat --sat`, budget 1,200 s, the desktop):
+
+| rank | ψ (denominator) | wall | verdict |
+|---|---|---|---|
+| 1 | den 96 | 627 s | SAT |
+| 2 | `(−11/16, 3√15/16)` | 704 s | SAT |
+| 3 | den 24 | 521 s | SAT |
+| 4 | den 24 | 139 s | SAT |
+| 5 | den 144 | 301 s | SAT |
+
+The 2.1 M-edge arenas are beyond `po_verify_arena.py`'s affordable size (its grid pass is ~4 min at 54k points; ~25 min at
+272k — not run); the colourings were verified by the implementer's driver on the fabric's own edge list, and the ≤ 4 arena of
+rank 2 is verified independently above. Ranks 1–5 at ≤ 4 and ≤ 5 carry exactly the same cross edges (84, 72, 60, 60, 60), the
+record's conjecture 2.
 
 ## 5. Owner errors this milestone (running list)
 
