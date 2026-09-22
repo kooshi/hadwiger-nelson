@@ -109,13 +109,119 @@ price is the whole difficulty of the milestone.
 
 ## 4. The rotation list
 
-*(filled in at the close)*
+`data/fs70/rotations.jsonl` — **3,499 symmetry classes**, each with the exact cross-edge anatomy of its arena
+on the CM base at sums of ≤ 4 (27,217 points, 176,124 edges). The header names the base, the pool and the
+route. Built by `fs70_rotations.py scan` over the atlas (2,020 unit vectors of denominator ≤ 42, 158 classes),
+then `merge`d with the 3,341 further classes the `(z+s)/w` sweep found at higher denominator — each of those
+re-counted by the scan's own routine, so **every count in the file is exact**, whichever enumeration proposed
+the rotation.
+
+Quotient: `ψ ~ ζ₆^m · σ(ψ)^{±1}` for the six sixth roots of unity, inversion (= conjugation on a unit vector,
+which swaps the two halves) and the four Galois maps of `F/ℚ` (which permute the base's generators, so they
+carry the arena to the same graph — G27's hidden symmetry). Order at most 48. The class is reported at the
+member with the largest diagonal, because `|1 − ψ|` — and hence which cross edges are *diagonal* — moves when
+`ψ` is multiplied by a sixth root of unity, while the arena itself does not.
+
+### 4a. The distribution
+
+| | classes | with ≥ 1 cross edge |
+|---|---|---|
+| **all** | **3,499** | **2,625** |
+| **2-unit — dead by the residue map (§3)** | **3,290** | **2,538** |
+| **wall-breaking — the ones that can be asked** | **209** | **87** |
+| commensurate (in the CM field) | 3,008 | 2,495 |
+| trivial (`ψ` a sixth root of 1, so `ψB = B`) | 1 | 1 |
+| type-M (`|1 − ψ|² = 1/n`) | 1 | 1 |
+| with a diagonal circle at all | 6 | 6 |
+
+**94 % of the list is dead by theorem, and so is 97 % of the part of it that couples at all.**
+
+### 4b. The price of the wall, as a number
+
+Largest cross-edge count by 2-adic depth:
+
+| depth | −6 | −5 | −4 | −3 | −2 | −1 | **0** | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| classes with a cross edge | 2 | 5 | 4 | 5 | 15 | 15 | **2,538** | 18 | 7 | 9 | 1 | 4 | 1 |
+| largest cross | 72 | 60 | 60 | 36 | 48 | 48 | **2,712** | 36 | 36 | 60 | 78 | 84 | 12 |
+
+The whole top of the list by coupling — 2,712, 2,004, 1,896, 1,728, … down to 492 at rank 20 — is **2-unit and
+commensurate**, every one. The best **live** rotation has **84**. A factor of **32** separates the best rotation
+that could refuse anything from the best rotation full stop.
+
+### 4c. The twenty that get asked
+
+| # | ψ | den | depth | type-M n | cross | diag | off-diag |
+|---|---|---|---|---|---|---|---|
+| 1 | `(−25/32 + √3/32 − √5/32 − 5√15/96, −1/32 + 25√3/96 − 5√5/32 − √15/32)` | 96 | 5 | – | 84 | 0 | 84 |
+| 2 | `(−11/16, 3√15/16)` | 16 | −6 | – | 72 | 12 | 60 |
+| 3 | `(−7/12 − 5√3/24, 7√5/24 − √15/12)` | 24 | −4 | – | 60 | 0 | 60 |
+| 4 | `(−3/8 − 5√3/24, 3√5/8 − √15/24)` | 24 | 3 | – | 60 | 0 | 60 |
+| 5 | `(−√5/48 − 35√15/144, 7/48 − 25√3/144)` | 144 | −5 | – | 60 | 0 | 60 |
+| **6** | **`ρ₁₅ = (7 + i√15)/8`** | **8** | **4** | **4** | **78** | **30** | **48** |
+| 7–20 | 48, 48, 48, 48, 48, 42, 42, 36, 36, 36, 36, 36, 36, 36 off-diagonal | 4–25,352 | −5…3 | – | | | |
+
+**`ρ₁₅` — the rotation phase 1b spent its whole arena budget on — is rank 6, not rank 1.** Five rotations
+couple the two layers more strongly than it does, and the field screen that selected `ρ₁₅` (G7's type-M family,
+`CLAUDE.md` row 64) could not see them: **only one class in the whole list of 3,499 is type-M**, and only six
+have a diagonal circle at all. The type-M family is a thin slice of the rotations this field actually has.
+
+### 4d. G53's counting screen, on every rotation that has a circle
+
+The counting compulsion needs a diagonal circle — points `w` with `|w − ψw| = 1`, i.e. `|w|² = 1/|1 − ψ|²` —
+and refutes the arena when `2L > (circle count)`, where `L` is the least number of circle points carrying the
+centre's colour over all proper four-colourings of the base alone. Run on the three wall-breaking classes that
+have a circle (`build/fs70/rot/counting-screen.log`):
+
+| ψ | circle radius² | circle | L | ratio | refutes? |
+|---|---|---|---|---|---|
+| `(−11/16, 3√15/16)` | 8/27 | 12 | 0 | 0.000 | no |
+| `ρ₁₅` | 4 | 30 | **0** | 0.000 | no |
+| `(1/4, −√15/4)` | 2/3 | 24 | 0 | 0.000 | no |
+
+`ρ₁₅`'s row reproduces phase 1b §5 exactly. **The compulsion is not weak on this fabric, it is absent**, on
+every rotation that could carry it: some proper four-colouring of the base gives the centre a colour that *no*
+circle point carries. (The instrument's UNSAT branch is exercised by the two hand graphs in `fs70_arena`'s
+self-test, so `L = 0` here is a reading and not a binary search that can only say zero.)
 
 ---
 
 ## 5. The asks
 
+Every wall-breaking, non-trivial rotation that makes a cross edge was asked at four colours — **all 87, not
+the brief's top twenty**, because the arenas are 54,433 points and answer in seconds, so the complete
+population cost thirteen minutes and is a stronger statement than a sample. Rows in `data/fs70/asks.jsonl`;
+each arena's `graph.json`, `verdict.json` and colouring under `build/fs70/rot/asks/`.
+
+### 5a. Base at sums of ≤ 4 — the complete population
+
+| | |
+|---|---|
+| arenas asked | **87 of 87** — every wall-breaking, non-trivial class with a cross edge |
+| each | 54,433 points (27,217 per half, 1 shared), ~352,330 edges, average degree 12.95 |
+| cross edges | 84 at the top, 24 at the bottom; `ρ₁₅` 78 |
+| verdict | **SAT, 87 of 87** |
+| solver time | 0.15–2 s each; whole run 13 minutes including building the arenas |
+
+Every verdict is read from **the ledger row the ask wrote**, never from its log (§6e). No refusal, no
+UNKNOWN, nothing at a budget.
+
+### 5b. Base at sums of ≤ 5 — the top five
+
 *(filled in at the close)*
+
+### 5c. What was not asked, and why it is a theorem rather than a budget
+
+The 3,290 2-unit classes were **not asked and do not need to be**: §3's theorem four-colours every one of their
+arenas by the residue map, and §3's check exhibits that colouring on the twelve with the most cross edges —
+`fs70_rotations.py screen` builds an additive ℤ/4 colouring from the arena lattice's HNF (no saturation needed)
+and verifies it on **every** arena edge:
+
+    12 commensurate arenas, ranks all 4, up to 354,960 edges each
+    0 monochromatic edges in every one           (`data/fs70/rot/commensurate-screen.json`)
+
+So the phase's null is **87 solver verdicts plus a theorem covering 3,290 more**, not 87 verdicts and 3,290
+silences.
 
 ---
 
@@ -185,30 +291,144 @@ kept. Comparing them against the reduced run, field by field:
 and the self-test asserts the two routes agree on four rotations including `rho15`, so the check is on every
 run and not only in this one.
 
-### 6d. Self-test and plants
+### 6d. Self-test and plants — all green, `build/fs70/rot/plants.log`
 
-*(filled in at the close)*
+The self-test's four parts, each a number known independently of this tool:
+
+1. `ρ₁₅`'s arena rebuilt: 54,433 / 352,326 / 78 = 30 + 48 / 1 shared / 138 pairs — phase 1b's, by a different
+   derivation (§6b).
+2. the reduced and unreduced grid joins agree in every field on four rotations including `ρ₁₅` (§6c);
+3. the scan finds `ρ₁₅` with that anatomy from its own pool, and the trivial rotations are recognised
+   (`shared == base_points`: a sixth root of unity maps the base onto itself);
+4. `ψ = ζ₆` gives exactly twice the base's edge count — the case that caught the defect;
+5. the `(z+s)/w` sweep finds `ρ₁₅` and its count is a strict lower bound on the exact one;
+6. the lattice-only pool produces **nothing outside the CM field** and cannot find `ρ₁₅` — the pool is the
+   enumeration, demonstrated rather than asserted.
+
+Six planted faults, each seen to fire, and each for its own named reason:
+
+| plant | what it breaks | what refused it |
+|---|---|---|
+| `psi_digit` | `ρ₁₅` fed with one wrong digit | *"is not a unit vector (\|.\|² = 67/64 + 7√3/32): it is not a rotation of this plane and no arena can be built on it"* |
+| `norm_match_loose` | the exact field-element check after the hash lookup is skipped | bins whose `ψ` is not a unit vector |
+| `centre_uncorrected` | the 60 shared-centre pairs left in the count | *"the sweep is claimed to be a LOWER bound: it reads 92 against the exact 90"* |
+| `geom_tol_tight` | the proposal band collapsed to zero width | the ζ₆ known-answer: 10,288 pairs against 42,660 |
+| `pool_truncated` | the pool of `s` silently cut to eight vectors | *"the scan did NOT find rho15"* |
+| `grid_radius_short` | the grid neighbourhood one cell short — **the defect this tool shipped with** | the ζ₆ known-answer: **42,647 against 42,660** |
+
+The last row is the point of the exercise: the plant reproduces the original defect's *size* — thirteen pairs
+lost out of 42,660, a 0.03 % error that no eyeball would catch and that moves every cross count downward.
+
+### 6e. A second detector that fired for the wrong reason, in the run itself
+
+The ask driver's refusal check was `'UNSAT' in the subprocess's stdout`. `fs70_ask.py` prints
+*"UNSAT would mean: …"* before **every** ask, by design, so the driver declared a refusal on the very first
+arena — which had just come back **SAT in 0.15 s**. It halted, as it is supposed to on a refusal, and the line
+immediately above the alarm said SAT.
+
+It failed in the safe direction (a false alarm, not a false null) and it cost two minutes. The repair is the
+rule in `CLAUDE.md`: **assert on the written artifact, never on the list that produced it.** The driver now
+reads the verdict out of the ledger row the ask appended, matched by the arena's point and edge counts, and
+says so loudly if no row was written at all rather than treating a failed ask as a null about the graph.
 
 ---
 
 ## 7. Decisions
 
-*(filled in at the close)*
+| # | the choice | the alternative I weighed | why this one won | confidence |
+|---|---|---|---|---|
+| 1 | **Run two enumerations and label the brief's one a generator**, whose counts are lower bounds | Run the brief's `(z+s)/w` enumeration as specified and rank by its counts | `ρ₁₅`'s own 138 pairs are joined by unit vectors of denominator up to 144 against the atlas's cap of 42, so that route reports 52 — a 2.7× understatement on the one rotation whose answer was known, and an unknown factor on every other. Ranking by it would have put the wrong rotations at the top. The generator is kept because it is the only route that reaches denominators above 42, and **177 of the 209 wall-breaking classes are above 42** — it is not redundant, it is half the list. | **high** — the discrepancy is measured on a known answer, not argued |
+| 2 | **Ask all 87 live arenas, not the brief's top twenty** | The top twenty, as briefed | The arenas are 54,433 points and answer in 0.15–2 s; the whole population cost thirteen minutes. A complete population turns "the top twenty colour" into "every rotation of this field that can refuse anything, and makes a cross edge, colours", which is a different sentence. | **high** |
+| 3 | **Kill the first scan at 349 of 2,020 and restart with the ζ₆ symmetry reduction** | Let it finish (ETA ~33 minutes and rising) and add the reduction afterwards for the `k = 5` pass | `CLAUDE.md`'s rule: a run blocking its own replacement is killed by default, and with a checkpoint the cost of being wrong is the redo, not the result. Here the redo cost **nothing at all** — the 349 rows were computed by a correct algorithm and became the two-algorithm cross-check of §6c, which is better evidence than anything I would have written for the reduction otherwise. | **high** — but see §8, the *diagnosis* I killed it on was partly wrong |
+| 4 | **Report the class at its largest-diagonal member** rather than its largest-count member | Report it at the member with the most cross edges | `diagonal` and `type_m_n` are properties of the member, not of the class: `\|1 − ψ\|` moves when `ψ` is multiplied by a sixth root of unity, while the arena does not. Taking the largest-count member silently reported `type_m_n = None` for `ρ₁₅`'s own class, which is how I found it. | **high** |
+| 5 | **Verify the commensurate theorem on twelve arenas instead of quoting it** | State the PARI computation and move on | A theorem whose instrument I wrote this morning, covering 94 % of the list, is exactly where a quiet defect would hide. Twelve explicit colourings verified on every edge cost nine seconds each and make the 3,290 unasked classes evidence rather than an assertion. | **high** |
+| 6 | **Build the additive screen on the arena GRAPH, not the arena lattice** | Use `fs70_fabric.additive_screen`, which phase 1b already validated | That screen needs the arena lattice's **saturation**, which costs the box of its denominator and is refused above `M = 144`; most arenas here have `M` in the hundreds. Asking the weaker and sufficient question — is there a homomorphism to a group of order 4 nonzero on the edge differences **this graph actually has** — needs only the HNF and 4^rank ≤ 65,536 candidates, and a hit is still an explicit four-colouring. A miss says nothing, and is recorded as saying nothing. | **high** |
 
 ---
 
-## 8. Where the brief, phase 1b or the plan was wrong
+## 8. Where the brief, phase 1b or I was wrong
 
-*(filled in at the close)*
+| where | what it says | what is the case |
+|---|---|---|
+| **the brief, ask (i)** | the rotation list is enumerated as `ψ = (z + s)/w` over the base and a pool of `s`, and **ranked** by the resulting cross-edge count | That enumeration bounds the **joining vector**, not the rotation. Measured on `ρ₁₅`: 52 against 138, because 56 of its 138 pairs are joined by unit vectors of denominator 48, 72 or 144 while the atlas stops at 42. The route is kept as a generator — it is the only one that reaches denominators above 42, and 177 of the 209 wall-breaking classes are there — but the counts and the ranking come from a direct scan (§2). |
+| **the brief, ask (i)** | *"the top twenty by off-diagonal cross edges"* as the thing to report | Reported, but the top twenty **of the whole list** is 2,712 down to 492 cross edges and every one of them is dead by theorem. The table a reader needs is the top twenty of the **live** classes, which starts at 84. Both are in §4. |
+| **the brief, ask (ii)** | *"a 2-unit `ψ` keeps the arena 2-unit … screen those out by that theorem"* | Right, and it is stronger than the brief states: every **commensurate** rotation is a 2-unit, by an inertness computation the brief did not anticipate (§3), so the theorem covers a family described by geometry and not only one described by valuations. |
+| **the brief, ask (iii)** | the true control would be the sweep on Harder's base over `K = ℚ(√3,√11)`, *"but the tools have no ℚ(√3,√11) arithmetic — do not build it"* | Followed. The substitute controls (find `ρ₁₅` with 78 = 30 + 48; refuse a wrong-digit `ρ₁₅`) both passed — **and neither would have caught the defect in §6a**, which needed a case whose answer is known by hand. That case was the trivial rotations, which no part of the brief asks for. |
+| **my own first diagnosis**, decision 3 | I read the fixed grid join at **14.29 s per rotation** against 1.51 s for the broken one and concluded the fix was 9× slower | That 14.29 s was measured **while fourteen scan workers were saturating the machine**. On a quiet machine the same join is 1.81 s. The kill was still right — the *throughput* was 54 rotations/minute and falling, and the reduction is exact and gives 4–5× — but the number I reached for was a contended wall-clock used as a quiet-CPU cost, which is the error `CLAUDE.md` names in as many words. The honest statement of the ruling is throughput, not a per-call ratio. |
+| **my own refusal detector** | the ask driver read `'UNSAT' in stdout` | It matched `fs70_ask.py`'s own explanatory line and declared a refusal on a SAT verdict (§6e). |
+| **my own merge step** | `fs70_rotations.py merge` counts 3,341 classes with `p.map` | **No checkpoint.** The scan and the asks both checkpoint; the merge does not, so a kill during its twelve minutes would have redone all of it. It survived; it is a defect of mine and it is recorded rather than quietly fixed after the fact. |
 
 ---
 
-## 9. WORKFLOW step 9's two sweeps
+## 9. WORKFLOW step 9's two sweeps over this phase's additions
 
-*(filled in at the close)*
+* **"conjecture"** — two, neither claimed, both stub candidates for the owner.
+  1. **Is `commensurate ⟹ 2-unit` a fact about this base, or about CM fields?** §3 proves it for
+     `E₀ = ℚ(√−3,√−5)` by one inertness computation. The same argument runs for any CM field `E` whose prime
+     above 2 is not split over its real subfield, and *fails* where it is split. If the split case can be
+     realised by a CM base over some real field, that base's commensurate twists are **not** all dead, and the
+     whole strategy this phase closes would reopen there. The test is a `nflist` sweep over small CM fields and
+     costs an afternoon.
+  2. **Does a type-M arena's cross-edge set ever grow with the base?** At every rotation measured here the
+     answer is no: the arena at sums of ≤ 5 has exactly the cross edges the arena at ≤ 4 has (84 and 84, 72 and
+     72), while the halves grow fivefold. Phase 1b measured the same of `ρ₁₅`'s diagonal circle (30 at every
+     radius from ≤ 2 to ≤ 5) and left it as its own conjecture 2. This phase extends the observation off the
+     diagonal and still does not prove it. If it is a theorem, **the coupling of a twisted bilayer over this
+     field is a bounded quantity fixed by the rotation alone**, and growing a base can never buy compulsion.
+* **"not claimed"** —
+  (i) that any rotation **outside** the two pools is dead — the list is complete for denominator ≤ 42 directly
+  and for whatever the `(z+s)/w` generator reached above that, and a rotation absent from it is absent from
+  those enumerations, never from the field;
+  (ii) that the arenas are four-colourable at radii beyond those asked — what is measured is the base at sums
+  of ≤ 4 for all 87 and ≤ 5 for the top few;
+  (iii) anything at arity above 2 — every ask here is a whole-arena control;
+  (iv) that `L = 0` in §4d is a property of the arena rather than of the base — G53's criterion is sufficient
+  and never necessary, so a `no` from it is a null;
+  (v) that the commensurate theorem says anything about a base **not** inside `E₀`; it is a statement about the
+  ℚ-span of the CM lattice this milestone chose.
 
 ---
 
 ## 10. What a kill would have redone, and what is on disk
 
-*(filled in at the close)*
+Every long step checkpointed except one, which is recorded in §8.
+
+| step | wall | checkpoint | a kill redoes |
+|---|---|---|---|
+| the scan, 2,020 rotations | ~8 min on 14 workers | `build/fs70/rot/scan-k4.partial`, one row per rotation flushed as it lands | the 14 rotations in flight |
+| the `(z+s)/w` sweep | ~3 min, single-threaded | none — it writes once at the end | the whole sweep, three minutes |
+| **the merge, 3,341 rotations** | **~12 min on 14 workers** | **none — `p.map` with no partial file** | **all of it. My defect, §8** |
+| the 87 asks at `k = 4` | 13 min total | the ledger row at each verdict, plus `verdict.json` per arena | the arena being built, ~12 s |
+| the asks at `k = 5` | ~12 min each | the same | the arena being built, ~60 s |
+| the plants | ~6 min | none needed | six minutes |
+
+**Durable artifacts** (everything a reader needs is under `data/`, not `build/`, which is scratch an agent may
+clean): `data/fs70/rotations.jsonl` (the list), `data/fs70/asks.jsonl` (the verdicts),
+`data/fs70/rot/cm-prime-above-2.log` (§3's PARI computation), `data/fs70/rot/commensurate-screen.json` (§5c's
+twelve verified colourings), `data/fs70/records/phase-1c.md` (this file).
+
+**Regenerating everything:**
+
+```
+python3 tools/fs70_rotations.py --selftest              # and --plants
+python3 tools/fs70_rotations.py scan  'group6:u3:2' 4 --pool atlas --jobs 14 \
+        --partial build/fs70/rot/scan-k4.partial --out data/fs70/rotations.jsonl
+python3 tools/fs70_rotations.py sweep 'group6:u3:2' 4 --pool atlas --out build/fs70/rot/sweep-k4.jsonl
+python3 tools/fs70_rotations.py merge data/fs70/rotations.jsonl build/fs70/rot/sweep-k4.jsonl --jobs 14
+python3 tools/fs70_rot_asks.py data/fs70/rotations.jsonl --top 87 --k 4
+python3 build/fs70/rot/screen_commensurate.py 12
+python3 build/fs70/rot/crosscheck_join.py
+```
+
+## 11. The machine, and a note for the owner
+
+**Phase 1b was still running when this phase started, and is not finished.** The brief said its runs were
+"finishing … within the hour"; in fact its implementer committed four minutes after I began
+(`54d7b9f7`, 04:02) and its `build/fs70/price_cubes.py` has held a core and 15 GB throughout this phase. I did
+not touch it. Two agents committing to one repository is a staffing fact the owner should know about, not
+something for me to resolve: I kept to my own paths, appended to the shared `data/fs70/asks.jsonl` only
+through `fs70_ask.py` (which opens it in append mode, so line-level interleaving is safe), and committed
+explicit paths only.
+
+The two orphan watchers the brief named (pids 308047, 309502) were killed by process group and verified by
+effect — no `tail -f` on any FS-70 log survives, and the only match left was my own `grep`'s.
