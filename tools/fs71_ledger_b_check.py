@@ -107,11 +107,28 @@ def census(entries: dict[str, dict]) -> None:
           ", ".join(f"{k}={v}" for k, v in sorted(by_prefix.items())))
 
 
+NEAR_RE = re.compile(r"^\*\*(?P<id>[A-Za-z0-9][A-Za-z0-9-]*?)\s+—\s", re.M)
+
+
+def near_misses(text: str, parsed: dict[str, dict], prefix: str, fname: str) -> None:
+    """A header that starts like an entry but did not parse (a `]` inside the grade bracket, a title wrapped onto a second
+    line) is a silent miss — batch 4a lost five entries to it. Say so, loudly, per header."""
+    seen = {k.split("-", 1)[1] if k.startswith(prefix + "-") else k for k in parsed}
+    for m in NEAR_RE.finditer(text):
+        raw = m.group("id")
+        if raw in seen or raw in parsed or f"{prefix}-{raw}" in parsed:
+            continue
+        line = text[m.start(): text.find("\n", m.start())]
+        print(f"warn: {fname}: header starts like an entry but did not parse (wrapped title, or `]` in the grade?): {line[:80]}")
+
+
 def load() -> tuple[dict[str, dict], dict[str, str], list[str]]:
     entries: dict[str, dict] = {}
     for f in sorted((ROOT / "plans").glob("*-derivation.md")):
         prefix = f.name[: -len("-derivation.md")]
-        e = parse_entries(f.read_text(encoding="utf-8"), prefix)
+        text = f.read_text(encoding="utf-8")
+        e = parse_entries(text, prefix)
+        near_misses(text, e, prefix, f.name)
         for k in e:
             if k in entries:
                 print(f"FAIL: id {k} defined in two files")
