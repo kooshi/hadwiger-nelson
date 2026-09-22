@@ -163,7 +163,9 @@ advancement (Kooshi, 2026-09-22).
 7. **Implement** the milestone against its subplan — burn the skeleton's `sorry`s down via the loop: select one obligation
    (the goal state is the machine's own prioritization), **query** the environment before inhabiting, then close it or split
    it into finitely many strictly-smaller, named `have`/lemma children. Replacing one `sorry` with smaller ones is the only
-   legal move.
+   legal move. **Every phase record carries a heading "Theorems this phase proved"** (Kooshi, 2026-09-22) — each theorem
+   stated in one line with its grade and where its proof lives, hand, derived and tools-grade alike; the close reads that
+   heading, never the prose, when it fills the derivation file.
 
 8. **Quality gate** — the full gate from DEBRUIJN's `<the_loop>` / `<commands>`, plus **`./scripts/vacuity.sh` green** (no
    new theorem quantifying over a provably empty domain, and no new carrier without a proved inhabitant — `CLAUDE.md` § The
@@ -191,7 +193,13 @@ advancement (Kooshi, 2026-09-22).
      what the object IS gets filed there too and is lost.** Read §PA back asking only *what did this teach us about our own
      object?* and promote each answer to a grokking or a stub.
    - **Sweep the milestone's own plan for unpursued conjectures** (Kooshi, 2026-09-14): grep it for "conjecture" and "not
-     claimed", and for each hit either mint a stub or record an explicit decline. M56's modeling pass wrote "Conjecture, NOT
+     claimed", and for each hit either mint a stub or record an explicit decline.
+   - **Sweep the milestone's phases for theorems and file them** (Kooshi, 2026-09-22): every theorem the milestone stated and
+     proved outside the kernel — hand, derived, tools — goes into `plans/FSnn-derivation.md` (statement, grade, the proof's
+     address, what rests on it, and a kernel decision: kernel / stub / declined with the reason) and gets one line in
+     `LEDGER.md` § B; the ledger row points at the derivation file. The intermediate theorems are the understanding's raw
+     material and were being lost in the rows' compression (FS-70 had nine before anyone counted; FS-38 and FS-66 had filed
+     theirs by name, unprompted, and nothing made the next milestone do the same). M56's modeling pass wrote "Conjecture, NOT
      claimed: 1/p ∈ Σ₀(F²) iff no conjugation-fixed prime of F(i) lies above p" inside a lemma paragraph on 2026-09-06, no
      stub was ever minted, and an outside advisor proved it eight days later — the stub rule fires on candidates a milestone
      *surfaces*, and a conjecture buried under a heading about something else is not surfaced.

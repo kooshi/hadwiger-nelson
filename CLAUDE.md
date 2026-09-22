@@ -253,13 +253,14 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **FS-70 — five colours over ℚ(√3,√5) — chosen 2026-09-21** (Kooshi; `plans/STUB-five-over-sqrt3-sqrt5.md`; opens in a fresh session at its prior-art gate). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-21, evening): FS-70 first; FS-59's R9 deferred behind it.**
+**Open milestones, in order.** **FS-70 — five colours over ℚ(√3,√5) — chosen 2026-09-21** (Kooshi; `plans/STUB-five-over-sqrt3-sqrt5.md`; running). **Then FS-71 — the theorem audit** (Kooshi, 2026-09-22; `plans/STUB-theorem-audit.md`): every theorem every prior milestone proved outside the kernel, found and filed in a per-milestone derivation file with a kernel decision and indexed in `LEDGER.md` § B. **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-21, evening): FS-70 first; FS-59's R9 deferred behind it.**
 
 **Ranked stubs** (re-ranked 2026-09-21: FS-66 closed; FS-70 minted at rank 1 as the next milestone; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9;
 `plans/FRONTIER-STUBS.md` is authoritative):
 
 | rank | stub | the question | bearing on χ ≥ 6 |
 |---|---|---|---|
+| 1 | **FS-71 the theorem audit** — `plans/STUB-theorem-audit.md` | every theorem every prior milestone proved by hand, by derivation or at tools grade, found and filed (`plans/<milestone>-derivation.md`, `LEDGER.md` § B, a kernel decision each; prior art re-attributed; proofs that do not close demoted to conjectures) | none directly; the derivations' census — the programme's own priority |
 | 1 | **FS-70 five colours over ℚ(√3,√5)** — `plans/STUB-five-over-sqrt3-sqrt5.md` | the smallest field outside the conjecture's proved range with allowance five (usable planes 11, 59, 71; wall broken; χ ≥ 4 by FS-48's rhombus chain; predicted 5) — and **no Moser spindle can be drawn in it** (√3 yes, √11 no). Target: a four-colour forced pair at distance 2 on ℚ(√3,√5) fabric closed by ρ₁₅ ∈ ℚ(√3,√5) (the chain, 1/2 ∈ ℤ[U]); gate first on the fields of `[Voronov2021]`'s and `[Haugland2026]`'s Moser-free five-forcers | **the conjecture's last meetable prediction, and the vocabulary a six-forcer needs**: the window fields admit no spindle either (G57); mechanism high, six indirect |
 | 1 | **FS-59 four colours over ℚ(√167)** — `plans/STUB-four-colours-167.md` | the conjecture predicts six; nothing above three proven. FS-61 asked 167 its first question that could refuse — the one lattice reaching degree 14 under a 2M-point cap, 1,474,541 points — and it coloured in 3.66 s: 167's 3-non-integral lattices hold too few unit vectors (20–36 against 11's 108). **First experiment (stub R9): the chain route seeded on Kooshi's 7-cycle triangle** — on pure 3-integral material, is there a 3-colouring with `c(0) ≠ c(3w)` across the triangle's base? a refusal is a forcer, and `1/6 = 1 + 1 − w − w̄ − w′ − w̄′` makes twelve transported copies and an edge four colours. Then R5–R8: degree-aimed asks, counterexample-guided growth of a core, the rigidity dial | **the conjecture's cheapest exposed prediction and therefore, under the 2026-09-17 target, the falsification target** — predicted ≥ 6 against a proven 3, and FS-66 made the prediction robust to every level of the tower at 23 (row 75) |
 | 4 | **FS-68 the tower never rises** — `plans/STUB-tower-never-rises.md` | is `α(UD(ℤ/p^k,2)) = p^{2(k−1)}·α(Γ_p)` for every p and k — is the measurable independence density of the `p`-adic plane exactly `α(Γ_p)/p²`? Certified within 0.1–11 % at 7–23, exact at level two of 7; the weighted form is false and the instruments are blind to the carry (G66). Cheapest first: the exact-face certificate at 7, `χ_f(ℚ(√11)²) = 7/2`, the zero twist as a positive control | none directly; mechanism — whether `L(F)` is the right invariant or must become its all-levels form, and the first exact density of a `p`-adic plane |
@@ -305,7 +306,7 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G67 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G68 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 ***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
@@ -1181,6 +1182,24 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   next re-grokking, count the* bears *verdicts drawn from a Do line against those drawn from an entry's body — if the form did
   the work, the first count dominates; and a §G written from entries in the form that still misses a bearing a memoir would
   have supplied.*
+* **G68 — Ask the quotient before the ball, and read its colouring for a gap. [derived from kernel rows 56 and 66; measured on
+  seven lattices; the instrument of FS-70 phase 1d]** A lattice unit-distance graph is periodic, so a proper k-colouring of the finite
+  quotient `Cay(Λ/NΛ, U mod N)` (`U` the lattice's *complete* unit-vector set, none in `NΛ`) colours every graph on the lattice at
+  once — and if one vertex's closed neighbourhood misses a colour, the quotient is slack, and every pair on every graph in the
+  lattice is free: `Forces ↔ =` at every distance and radius (`unitQuadrance_colorable_of_quotient`; `slack_addCayley_of_fanGap`,
+  `Slack.forces_iff_of_hom`). Minutes per lattice, no ball, one-sided: an UNSAT or a gap-free colouring at one `N` proves nothing
+  (L6 gives a gapped colouring at `N = 5` and a gap-free one at `N = 8`), so the finder is aimed at *gapped* colourings (a clause
+  that empties one closed neighbourhood of a colour). Over ℚ(√3,√5) it closed, by theorem, four lattices three phases had asked
+  with solvers; over K it finds no gapped colouring on de Grey's lattice at any `N ≤ 12`, as Harder's forced pair requires. The
+  gapped colourings are non-additive (`Hom((ℤ/p)^r, G) = 0` for odd `p`, `|G| = 4`) — the colourings the additive screens (G41,
+  G42, `FS70-T2`) are structurally blind to; G61(2)'s "quotient screens are blind" was a fact about *colourability* at three
+  colours on affine colourings, and the gap reading is the half it lacked. Its soundness edge is completeness of `U`: on a lattice
+  whose saturation is unaffordable, a gap read from the generators alone proves nothing. *Do: before building any ball over a
+  lattice, run the quotient at every admissible `N` the rank allows and read each colouring for a gap; one gapped colouring closes
+  `Forces` on the whole lattice — build nothing on it; where every colouring is gap-free, the lattice is rigid as far as periodic
+  colourings go and the periodic Kempe screen (`FS70-T10`) decides the target. Killing test: a lattice with a gapped quotient
+  four-colouring that carries a four-colour forced pair — which would refute the reduction's being a homomorphism, i.e. an
+  incomplete `U`, never row 66.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
