@@ -28,3 +28,23 @@ tower is tight at level `m` **iff no new character beats it**. By the shape of G
 characters are Kloosterman sums over `O/𝔭^m` of size about `2·2^m` against `4^{m−1}` — smaller from `m = 4` up, but
 **char 2 makes `t ↦ t²` inseparable, so the classical stationary-phase bound does not apply and the sums may be
 larger**. That is the whole reason the levels are computed rather than quoted.
+
+## Registered mid-phase, before the level-6 computation (2026-09-22)
+
+**P8 — the closed form of `H_min`.** Levels 4 and 5 read `|H_min| = 4` and `64`, with the valuation pairs
+`(3,3)` and `(3,3), (4,4), (4,5), (5,4)`. Both are exactly
+
+    H_min(m)  =  { (a, b) in R_m x R_m :  v(a) >= 3,  v(b) >= 3,  a = b  (mod pi^4) }
+
+(at level 4, `pi^4 R_4 = 0`, so the congruence is `a = b` and the order is `|pi^3 R_4| = 4`; at level 5 it is
+`|pi^3 R_5| * |pi^4 R_5| = 16 * 4 = 64`).  **Prediction: at level 6 the same formula holds, so `|H_min(6)| =
+|pi^3 R_6| * |pi^4 R_6| = 64 * 16 = 1024`, with valuation pairs `(3,3), (4,4), (5,5), (5,6), (6,5)` and no pair
+`(3,4)` or `(4,3)`.**  Confidence **medium-high** — it fits two levels exactly and it is the only closed form I
+can write that gives both orders.  A different order at level 6 means the formula is a coincidence of two small
+levels and the tower's forced set has no uniform shape, which would be the more interesting outcome and would
+stop me stating `d_0` as a single number.
+
+Consequence if P8 holds, stated before it is tested: a **real** `delta` has `delta_P = delta_Pbar`, so the
+congruence is free and the criterion collapses to `v_p(delta) >= 3` — `d_0 = 3`, and of the chainable targets
+only `2` and `2/3` (both `v_p = 2`) are killed, while `4/3`, `4`, `4/7`, `4/sqrt3` (`v_p = 4`) and `8/3`
+(`v_p = 6`) are **forced in the local plane** and therefore not killed by any residue argument at 2.
