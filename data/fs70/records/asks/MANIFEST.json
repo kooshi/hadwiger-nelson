@@ -212,5 +212,181 @@
   "verdict": "UNKNOWN",
   "colouring": null,
   "why": "no colouring recorded in row"
+ },
+ {
+  "sha": "64599bcae88611288752d885",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 3
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/L6-w3-control/colouring.json",
+  "file": "L6-w3-control.colouring.json.gz",
+  "sha256_uncompressed": "8893885c25d2a7373ef711504195a15f7711793201de8a8309b9f29480bcea13",
+  "bytes_uncompressed": 104877,
+  "bytes_gz": 27294
+ },
+ {
+  "sha": "9e45c5dc25a53d7ee4d8f3fb",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 3
+  },
+  "pin": "forces",
+  "delta": "2",
+  "source": "build/fs70/asks/L6-w3-forces-2/colouring.json",
+  "file": "L6-w3-forces-2.colouring.json.gz",
+  "sha256_uncompressed": "ce12fa42dd60c1c6bfa667d36d209296aa0e66f4771c35cd3273390bdcb3e3a8",
+  "bytes_uncompressed": 104877,
+  "bytes_gz": 27059
+ },
+ {
+  "sha": "25a4b4b607711cabdcc94a05",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 3
+  },
+  "pin": "forces",
+  "delta": "4/3",
+  "source": "build/fs70/asks/L6-w3-forces-4-3/colouring.json",
+  "file": "L6-w3-forces-4-3.colouring.json.gz",
+  "sha256_uncompressed": "9df970132d5a8e9d37ee421b073fa57b1158b2956d57f710dc364be2e815c7a9",
+  "bytes_uncompressed": 104877,
+  "bytes_gz": 27473
+ },
+ {
+  "sha": "51ff1a29204f20b2cc0dfd05",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 3
+  },
+  "pin": "separated",
+  "delta": "isqrt3",
+  "source": "build/fs70/asks/L6-w3-separated-isqrt3/colouring.json",
+  "file": "L6-w3-separated-isqrt3.colouring.json.gz",
+  "sha256_uncompressed": "52e5282ed2a781ef68a5580cf328dca085ca743879d06d25371359cf12b4f858",
+  "bytes_uncompressed": 104873,
+  "bytes_gz": 27799
+ },
+ {
+  "sha": "79dcf913bdff90f77ccc4268",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/L6-w4-control/colouring.json",
+  "file": "L6-w4-control.colouring.json.gz",
+  "sha256_uncompressed": "229725cf87f7174ae5598b118c72c38e87a27850fed0b5ed0c052995ee45bd0c",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 259972
+ },
+ {
+  "sha": "bb66cd2d185409fa075d4f9d",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "forces",
+  "delta": "2",
+  "source": "build/fs70/asks/L6-w4-forces-2/colouring.json",
+  "file": "L6-w4-forces-2.colouring.json.gz",
+  "sha256_uncompressed": "8c6ebf30e10ef12cc6ba4e34e1e52852d272b2285575eff1cfc182515490aa24",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 251696
+ },
+ {
+  "sha": "2baa53c07dc01c4c551df5f1",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "forces",
+  "delta": "4/3",
+  "source": "build/fs70/asks/L6-w4-forces-4-3/colouring.json",
+  "file": "L6-w4-forces-4-3.colouring.json.gz",
+  "sha256_uncompressed": "d0455387ff2bf043bf84e15c5f7dbf7413d3a17615974015934ac4eb36bcde3a",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 260540
+ },
+ {
+  "sha": "d9e0acd14f8acb76560466af",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "forces",
+  "delta": "2/3",
+  "source": "build/fs70/asks/L6-w4-forces-2-3/colouring.json",
+  "file": "L6-w4-forces-2-3.colouring.json.gz",
+  "sha256_uncompressed": "3ac7e931ba59a6fdb0aa4b8e813149093a47ac59833789c90f688bcf7b51c93b",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 258138
+ },
+ {
+  "sha": "a0f97db355e00f2020ec667b",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "forces",
+  "delta": "8/3",
+  "source": "build/fs70/asks/L6-w4-forces-8-3/colouring.json",
+  "file": "L6-w4-forces-8-3.colouring.json.gz",
+  "sha256_uncompressed": "739b2cd7e9ac818f04f5692957ebb84a060f83634db5b000f7123f62b1f52553",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 256081
+ },
+ {
+  "sha": "7e90df0672960fbb707009b8",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "forces",
+  "delta": "4",
+  "source": "build/fs70/asks/L6-w4-forces-4/colouring.json",
+  "file": "L6-w4-forces-4.colouring.json.gz",
+  "sha256_uncompressed": "94f7baba3758dcc3190cd339e733ddd4900c1dacd9439749b6fb3f6370092ea7",
+  "bytes_uncompressed": 1098474,
+  "bytes_gz": 261601
+ },
+ {
+  "sha": "0afb10f71c79561b1908634a",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "separated",
+  "delta": "isqrt3",
+  "source": "build/fs70/asks/L6-w4-separated-isqrt3/colouring.json",
+  "file": "L6-w4-separated-isqrt3.colouring.json.gz",
+  "sha256_uncompressed": "8f00df05d25ab25f494a7db73ba4c47a065bb14865d2ae82649b4ba913921ebb",
+  "bytes_uncompressed": 1098469,
+  "bytes_gz": 259730
  }
 ]
