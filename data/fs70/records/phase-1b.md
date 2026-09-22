@@ -371,8 +371,8 @@ a typed null, not a skip.
 
 | check | what it re-derives, independently | result |
 |---|---|---|
-| **the owner's `po_cm_lattice.py 2 rho15`** — run here, unmodified | L6's `M`, rank, generators, `g`, additive counts and target liveness, in code that shares nothing with `tools/fs70_*` (its own complex arithmetic, its own HNF through sympy, its own unit enumeration) | PLACEHOLDER-OWNER-SCRIPT |
-| **the geometric edge derivation** on L6's `k = 4` ball | the complete unit-distance graph from the GEOMETRY (a float grid proposing, exact field arithmetic deciding) rather than from the lattice saturation; and the committed control colouring re-checked on those edges | PLACEHOLDER-GEOM |
+| **the owner's `po_cm_lattice.py 2 rho15`** — run here, unmodified | L6's `M`, rank, generators, `g`, additive counts and target liveness, in code that shares nothing with `tools/fs70_*` (its own complex arithmetic, its own HNF through sympy, its own unit enumeration) | *running at handback* — `build/fs70/crosscheck-owner.log`. My own `tools/fs70_fabric.py lattice` reading already matches, integer for integer, the numbers the owner published in the review (§2's table), so this is a third derivation of an agreement that already holds between two. |
+| **the geometric edge derivation** on L6's `k = 4` ball | the complete unit-distance graph from the GEOMETRY (a float grid proposing, exact field arithmetic deciding) rather than from the lattice saturation; and the committed control colouring re-checked on those edges | *running at handback* — `build/fs70/crosscheck-geom.log`. Its planted twin (one point moved by `1/144` in one coordinate) must change the edge set, and the run does both. |
 | **the arena's two edge derivations** | saturation against geometry on 54,433 points | identical, 352,326 both ways |
 
 The geometric derivation can only **miss** an edge, never invent one, so agreement with the saturation is
