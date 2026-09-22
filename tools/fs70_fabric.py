@@ -1244,6 +1244,9 @@ def cmd_core(d, m, out=None):
     edges = [tuple(e) for e in g['edges']]
     meta = g['meta']
     lat = Lattice(generators(meta['lattice']), meta['lattice'])
+    # the saturation is needed for `g` in the written meta, and it is not optional: without it write_shape
+    # raises on `len(lat.units)` and the core is silently not written (phase 1b: it did exactly that).
+    lat.saturate('b' if lat.sat_b_cost() <= lat.SAT_B_BOX_CAP else 'gens')
     keep, e2 = m_core(len(pts), edges, m)
     k2 = [pts[i] for i in keep]
     print(f'{d}: {len(pts)} points, {len(edges)} edges, degree {2*len(edges)/max(1,len(pts)):.2f}'

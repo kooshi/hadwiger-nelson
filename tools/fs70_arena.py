@@ -223,8 +223,7 @@ def build_arena(spec, k, rot='rho15', out=None, geometric_check=True):
           f'{anat["off_diagonal"]} off-diagonal); within half 0: {anat["within_half0"]}, '
           f'within half 1: {anat["within_half1"]}')
     if planted('cross_dropped'):
-        side = {p: pts[p] for p in akeys}
-        aedges = [(a, b) for a, b in aedges if side[akeys[a]] == side[akeys[b]]]   # PLANT: no cross edges
+        aedges = [e for e, ins in zip(aedges, inside) if ins]     # PLANT: the two halves left disjoint
         print(f'   [PLANT cross_dropped] {len(aedges)} edges left')
     if geometric_check:
         _, gedges, _ = FB.unit_graph_geometric(akeys, A)
