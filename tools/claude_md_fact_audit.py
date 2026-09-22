@@ -77,6 +77,7 @@ ALLOW: dict[str, str] = {
     "[kernel for ρ₁₅; measured for ρ₆₃]": "G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance",
     "G12:[kernel for ρ₁₅; measured for ρ₆₃]": "FS-71 batch 1: G12 re-graded [hand, confirmed at 26 exact censuses; kernel for the ρ₁₅ instance] (M31-T1)",
     "G20:[kernel + measured]": "FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation",
+    "G52:[measured + reading, one instance with a positive control]": "FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so",
     "6723": "the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)",
     "declarations=6723": "the same count, as the gate report prints it",
 }

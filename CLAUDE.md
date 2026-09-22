@@ -785,8 +785,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   every read paper's references into the bibliography the same day; mark reading per section. *Do: scan, at the opening
   and before the derivation, every held-but-unread paper whose title touches the milestone. Killing test: three consecutive
   gates whose blocking papers, read, changed nothing.*
-* **G52 — Breaking the wall is necessary and visibly not sufficient; the equal-radius family is the mechanism. [measured +
-  reading, one instance with a positive control]** A wall-breaking rotation can still be four-colourable: breaking the wall is a
+* **G52 — Breaking the wall is necessary and visibly not sufficient; the equal-radius family is the mechanism. [hand for the
+  necessary half — the σ-criterion, M63G-T4/T5 in `plans/M63G-derivation.md`; measured + reading for sufficiency, one instance with a positive control]** A wall-breaking rotation can still be four-colourable: breaking the wall is a
   property of the field the rotated copy lives in, while the residue colouring reads the base points, which never leave the
   original field. The rotation escapes the colouring only through one family — cross edges joining two base points the colouring
   gives the same colour, which requires the base to realise a specific radius sum, via `d² = σ − (σ−1)/cos θ`. Measured on M63
