@@ -482,20 +482,29 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   localises the forcing to a small subgraph carrying it alone.*
 * **G11 — The Moser subgraph is not necessary for 5. [external, unverified here]** Voronov et al. (2021,
   64,513 vertices) and Haugland (arXiv:2608.04542; 2,131 vertices, float arithmetic and uncertified SAT) give
-  Moser-free 5-chromatic graphs, by landing a forced pair at a spindle-able distance and spindling.
+  Moser-free 5-chromatic graphs, by landing a forced pair at a spindle-able distance and spindling. *Do: when the field
+  lacks √11, take their route — land a forced pair at a spindle-able distance, then spindle — and treat "the spindle is
+  necessary" as refuted. Killing test: a verification here finding either graph five-colourable.*
 * **G12 — The quadrature law. [kernel for ρ₁₅; measured for ρ₆₃]** A detuned copy RX of seam material couples
   to X only along anchor-collinear pairs (W an even half-spindle word) or anchor-perpendicular pairs (W odd),
   with radii on one conic; words mixing √ρ₁₅ and √ρ₆₃ couple nowhere. A single detune's colour pressure is one thin conic, which is why 5-forcers
-  are built from forced pairs.
+  are built from forced pairs. *Do: rank rotations by cross-edge density on their conic, never by count; expect one detune to
+  press along one thin conic, so pressure comes from a forced pair or from two rotated copies (de Grey's two centres); never
+  expect mixed √ρ₁₅/√ρ₆₃ words to couple. Killing test: a single detune whose cross edges leave its conic, or a mixed word
+  that couples.*
 * **G13 — The fan ladder. [kernel + measured]** Colour steps happen by confinement at a centre
   (`fan_iff_coverage`): two circles are 3-colourable and their centre forces a fourth; Heule-510's centre is
   fanned at four colours by the ambient web, which its own two-circle system provably cannot deliver. Fans
   are not special to centres, and coverage is a k-set property invisible to pair sweeps. The ladder's other
   face is slack: a fan gap is exactly the failure of coverage at level k−1 (`exists_fanGap_iff_not_coverAtLeast`),
-  and one gap in a target colouring frees every pair above it (row 66).
+  and one gap in a target colouring frees every pair above it (row 66). *Do: when a pair sweep reads zero, ask the k-set
+  question — does every colouring cover N(p) ∪ Q at some centre — and when a target colouring has a gap, expect every pair
+  above it free without asking. Nothing kills the iff; it kills pair sweeps as evidence about fans.*
 * **G14 — Width without degree does not force. [measured + derivation]** Same-word copies at unit-separated
   anchors couple through an O(n) translation matching, and at separation 1/√3 through nothing. A matching is
-  1-regular and carries no colour pressure, even composed into forced-rainbow triangles.
+  1-regular and carries no colour pressure, even composed into forced-rainbow triangles. *Do: before an arena is built,
+  look at what its cross edges close — a matching-shaped cross set predicts the null; rank first the rotations whose cross
+  edges close cycles through both halves. Killing test: a forcer whose only inter-copy edges form a matching.*
 * **G15 — Pigeonhole × kill. [measured constructive half; universality a reading]** Every known 5-forcing
   argument composes a disjunctive class-level compulsion on fabric ("every 4-colouring puts some forbidden
   pattern somewhere") with a thin kill web refuting each placement; instance meters cannot see the
@@ -504,27 +513,38 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   cell-family core (23, 28, 53, 66, 117 vertices) factors, with Act One a monochromatic pair on a small
   non-edge class. Open: whether every χ ≥ 5 argument must factor so — the one registered falsifier, M43's
   non-factoring fine tail, was itself withdrawn (a G21 instance), so universality has never been tested
-  against a counterexample here.
-* **G16 — The distance-2 pigeonhole. [kernel carriers + measured]** The seam fabric cannot 4-colour without a
-  monochromatic distance-2 pair once it has seam depth ≥ 2 or radial extent past a fabric shell
-  (r² = 2 − √33/9 on de Grey's fabric). The reason: 2 lies in the prime above 2, so Theorem B's colouring
-  makes every positive-valuation distance monochromatic (row 59). The carrier is 122 vertices; the √3-pair
-  sibling concentrates to nine, because √3 is the one distance whose equilateral triangle has unit
-  circumradius — but it is an **assembly product**: only the full 1581 carries it, onset at the √21 shell
-  where cross-system material enters, and Heule's shrinking discarded it. Every kill of it needs a
-  wall-breaking root (ρ₁₅ adjoins √15).
+  against a counterexample here. *Do: design five as a class-level disjunction plus a kill web, and ask the class question
+  first — does every 4-colouring of this fabric put a monochromatic pair on class C? — because a pair meter cannot see it.
+  Killing test of universality: a χ ≥ 5 argument that does not factor, never yet met.*
+* **G16 — The distance-2 pigeonhole. [kernel carriers + measured]** Theorem B's colouring identifies every pair at
+  positive-valuation distance — 2 lies in the prime above 2 (row 59) — so seam fabric of seam depth ≥ 2, or of radial extent
+  past a fabric shell (r² = 2 − √33/9 on de Grey's fabric), cannot 4-colour without a monochromatic distance-2 pair: on such
+  fabric the pigeonhole is free, and every kill of it needs a wall-breaking root (ρ₁₅ adjoins √15). The carrier is 122
+  vertices; the √3-pair sibling concentrates to nine, because √3 is the one distance whose equilateral triangle has unit
+  circumradius — but it is an **assembly product**: only the full 1581 carries it, onset at the √21 shell where
+  cross-system material enters, and Heule's shrinking discarded it. *Do: on fabric a residue colouring identifies, expect the
+  monochromatic pair at every positive-valuation distance without asking, and spend the search on the kill — `separated` asks
+  at those distances on wall-broken material. Nothing kills the pigeonhole; it kills every in-field kill.*
 * **G17 — Globality lives only at the top rung. [measured]** The fan onset (χ ≥ 5 itself) arrives at the
   last vertex; every sub-rung compulsion measured has a small carrier (3-cover at 49 vertices, the distance-2
-  pigeonhole at 122).
+  pigeonhole at 122). *Do: ask sub-rung compulsions on modest fabric first (carriers of 9 to 122) and expect the top rung
+  only at the last vertex — a whole-object ask measures the top rung alone. Killing test: a sub-rung compulsion whose
+  minimal carrier is the whole object.*
 * **G18 — Composition sees what search cannot. [measured]** Monolithic CDCL capped on the 4,749-vertex union
   while the cubes a kernel pigeonhole covers refuted in minutes each. Certify components, compose in the
-  kernel, and pin palettes (6.5–160× measured).
+  kernel, and pin palettes (6.5–160× measured). *Do: when monolithic CDCL caps, split by a kernel-covered pigeonhole, pin
+  palettes, certify the components and compose in the kernel. Killing test: a split whose cubes each run slower than the
+  monolith.*
 * **G19 — 5-tight fabric. [measured + theorem]** No pattern class fires at five colours on the swept population
   (52/4/0 over 7 objects × 8 classes, M35 — not the whole inventory), and inside K none can (Theorem B); 5-tight fabric needs a wall-breaking root in the fabric itself. A
-  five-colour avoider for any class proves χ(ℝ²) ≤ 5; a six-colour avoider bounds only 7-forcers.
+  five-colour avoider for any class proves χ(ℝ²) ≤ 5; a six-colour avoider bounds only 7-forcers. *Do: run the class sweep
+  only on fabric holding a wall-breaking root — inside K the zero is Theorem B's and free — and read an avoider by what it
+  bounds. Nothing kills the K half; a class firing at five on wall-broken fabric is the finding the sweep exists for.*
 * **G20 — Brick colourings. [kernel + measured]** A brick 7-colouring of the plane exists and is
   boundary-tight by force (cell diagonal exactly 1), so every strict-separation certificate refuses the whole
-  family. Under the exact certificate, brick colourings reach seven and refuse six and five.
+  family. Under the exact certificate, brick colourings reach seven and refuse six and five. *Do: use the exact certificate,
+  never strict separation, and read one brick refusal as the whole family's. Killing test: a brick six-colouring under the
+  exact certificate.*
 * **G21 — A negative measures its enumeration. [method]** A search run against a sufficient-but-not-necessary
   check measures the check; a verdict — negative, positive count, or speedup — is a statement about its
   enumeration and conditioning, and both belong in the headline sentence. At registration, say whether the
