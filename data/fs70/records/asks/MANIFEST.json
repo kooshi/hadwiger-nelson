@@ -520,5 +520,21 @@
   "sha256_uncompressed": "31577ce7158f1ebdaefb75c14b784128028610d9c416d1ca4f2dc7a0b7234f5f",
   "bytes_uncompressed": 8751565,
   "bytes_gz": 1889297
+ },
+ {
+  "sha": "587fe01ff3aa5000f34118b2",
+  "verdict": "SAT",
+  "lattice": "group:u3:2+v4",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/L2-w4-control-sat/colouring.json",
+  "file": "L2-w4-control-sat.colouring.json.gz",
+  "sha256_uncompressed": "a18a69e6a97ba5257ac93ecaa5d07a24a5d7a832cd587415711afeeab97213ae",
+  "bytes_uncompressed": 21484287,
+  "bytes_gz": 4521542
  }
 ]
