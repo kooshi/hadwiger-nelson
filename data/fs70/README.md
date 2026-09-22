@@ -28,7 +28,11 @@ frozen checker that shares no code with them.
 | **`records/structure-control.json`** | the structure instruments' positive control: the imposed-quotient ask finds the 3-adic colouring rule on 3-unit fabric and refuses it on `S₂` fabric | `python3 tools/fs70_structure.py control` (37 s) |
 | **`records/haugland/`** | phase 0.3's positive control: Haugland's 740-vertex graph rebuilt exactly and its refusal reproduced | `python3 tools/fs70_haugland.py build` |
 | **`inflight/`** | one file per **ask in flight**: what is running, where its per-cube ledger is, its process-group file, and the command that resumes it. Deleted at the verdict. | every phase |
-| `asks.jsonl` | one row per SAT ask, appended **at its verdict** (phase 1) — `verdict, lattice, shape, points, edges, avg_degree, pin, solver, seconds, sha` | phase 1 |
+| **`asks.jsonl`** | one row per SAT ask, appended **at its verdict** — `verdict, lattice, shape, points, edges, avg_degree, pin, conclusion_if_unsat, sha`, plus the single-solver and cube blocks. **The pin is named by its CONCLUSION, never by the constraint it carries**: `forces δ` imposes `c(0) ≠ c(δ)` and its refutation is the forced-equal pair the chain theorem consumes; `separated δ` contracts the pair and its refutation is a virtual edge. Rendered by `python3 tools/fs70_ask.py status`. | phase 1 |
+| **`kempe-screen.json`** | one row per lattice: for each chainable target, whether some additive four-colouring plus **one Kempe swap** separates the pair — which kills the target on that lattice **at every radius**, with no solver. Five lattices are dead outright, four are live. | `python3 tools/fs70_ask.py screen SPEC… --out data/fs70/kempe-screen.json` (seconds) |
+| `periodic-screen.json`, `periodic-screen-p4.json` | the same question asked of `pΛ`-periodic colourings of the whole lattice (the graph on `Λ/pΛ`, `p⁸` classes). Silent on every chainable target, and structurally so: they all lie inside `4Λ`, where every additive and every periodic instrument is blind. | `fs70_ask.periodic_escape` |
+| `records/phase-1.md` | the running log of phase 1: the pin correction, the Kempe screen and its controls, the asks, the structure readings | the phase-1 implementer |
+| `records/asks/quotient-sweep.log` | the imposed-quotient ask at `p ≤ 4` on the four live fabrics (L4a and L5 carry periodic rules; L2 and L3 carry none) | `tools/fs70_structure.py quotient DIR P` |
 
 ## The tools
 

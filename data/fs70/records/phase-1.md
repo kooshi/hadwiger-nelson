@@ -125,6 +125,25 @@ like, and reads like a null. The algebraic form answers the same four in **0.8 s
   Polymath16 thread 1, 28 April 2018). The tool's field arithmetic is ℚ(√3,√5); that control needs ℚ(√3,√11)
   and is **owed**. It is the one test that would falsify the screen at the colour count the milestone uses.
 
+### 4.2a The mechanism, sharper: the escape is a RANK, and it lives only at `b = 2`
+
+Every kill the screen reports uses `b = 2` — the class `{0, 2}` of ℤ/4 — and the reason is visible in the reach
+ranks (40 colourings × 3 values of `b` per lattice, `tools/fs70_ask.py`):
+
+| lattice | reach rank at `b = 1` | at `b = 2` | at `b = 3` | escape? |
+|---|---|---|---|---|
+| L1 `group:u3:2` | 8 (40/40) | **4 once, 6 fourteen times**, 8 otherwise | 8 (40/40) | **yes** |
+| L1′ `zeta12+u3+q7` | 8 (40/40) | **6 (40/40)** | 8 (40/40) | **yes** |
+| L4b `zeta12+u3+q5+s5` | 8 (40/40) | **4 four times**, 8 otherwise | 8 (40/40) | **yes** |
+| L4a `zeta12+u3+q7+s7` | 8 (40/40) | 8 (40/40) | 8 (40/40) | no |
+| L5 `group:u3:2+d6` | 8 (40/40) | 8 (40/40) | 8 (40/40) | no |
+
+At `b` odd the reach is spanned by the **pair sums** `z + w` with `φ(z) = 1`, `φ(w) = 3` — a product-sized set
+that always spans. At `b = 2` it is spanned by `z + w` with both of `φ`-value 2, a far smaller set, and when
+those vectors fail to span the lattice the origin is trapped in a proper sublattice and every target outside it
+is free. **So the whole screen is one rank computation per additive colouring**, and the invariant that decides a
+lattice is *whether its unit vectors of `φ`-value 2 span it*.
+
 ### 4.3 The verdict per lattice (`data/fs70/kempe-screen.json`)
 
 | lattice | `g` | proper additive ℤ/4 | targets screened | live | verdict |
@@ -237,16 +256,43 @@ readings at `p ≤ 4` were re-run afterwards under a memory cap.
 
 ## 6. Decisions
 
-**(filled at the close)**
+| # | the choice | the alternative I weighed | why this one | confidence |
+|---|---|---|---|---|
+| 1 | **`forces`/`eq` pins `c(0) ≠ c(δ)` and `separated`/`sep` contracts** — the pin is named by its conclusion | Follow the owner's brief literally, which describes `eq` as the contracted encoding | The chain theorem consumes a **forced-equal** pair, and `Λ_forced` is by construction the screen for that pin; plan §1.2 and `fs70_fabric.write_shape`'s own CNF names agree with each other and with the mathematics. Following the brief's sentence would have inverted every verdict in the phase — which is the failure it warns about. | **high** — the mathematics and two independent artifacts agree |
+| 2 | **The Kempe reach computed algebraically (a span and an HNF), not searched** | Breadth-first search of the component with a cap, which is what I wrote first | The component is a **subgroup**, so it is infinite whenever non-trivial and a search can never terminate: the first version returned four "no escape found" verdicts at a 200,000-point cap in 59 s each, which would have gone into the record as nulls. The algebraic form answers the same four in 0.8 s and is exact. | **high** — two-line proof, and the kill is exhibited on a 478,333-point graph |
+| 3 | **The compute is aimed by the screen, not by the brief's lattice order** — L1 and L1′ were never put to a solver | Run the brief's order (L1 `eq 4/3`, `eq 8/3`; L1′ `eq 4/7`, …) | On a lattice the screen has killed, a solver ask can only return SAT, and it would measure the encoding rather than the field (G21). The same compute on L2, L3, L4a and L5 measures something. | **high** |
+| 4 | **The largest affordable shape first, not the smallest** | The plan's ladder, small to large | `Forces` is monotone in the graph, so a SAT at a big shape subsumes every subgraph and answers the whole ladder in one verdict; a refusal, which is what a ladder is for, survives growth anyway. | **high** |
+| 5 | **The cube pass is implemented, controlled — and was never needed** | Force a cube pass on every ask for uniformity | The owner's stop rule puts one single-solver attempt first and it answered every ask in seconds. Running cube passes anyway would have spent hours to reproduce verdicts already in hand. | **high** |
+| 6 | **A streaming CNF writer above 400,000 vertices, which refuses an instance with fewer than three pinned colours** | The list writer used everywhere else | At 1.86 M vertices the clause list is ~54 million Python lists — gigabytes before a byte reaches disk. The streaming path emits no precedence break, so rather than silently asking an instance with its residual colour symmetry unbroken it **refuses by name**. | **high** — byte-identical to the list writer on a controlled instance, and the comparison was shown able to fail (one edge dropped ⇒ files differ) |
+| 7 | **The k=4 word ball asked whole, not cored** | Take an `m`-core to densify | Measured: the L5 k=4 ball (1,864,417 points, degree 15.47) has **no 14-core at all** — the 12-core is 1,377,541 points at degree 16.08 and the 14-core is empty. There is no denser subgraph inside it, so coring buys nothing and loses the monotonicity a SAT gives. | **high** — measured, not assumed |
 
 ---
 
 ## 7. Where the plan, phase 0 or the brief was wrong
 
-**(filled at the close)**
+| where | what it says | what is the case |
+|---|---|---|
+| **the brief, §"Encoding"** | *"`eq (A, B)` — the pair **contracted** into one vertex …; `sep (A, B)` — `A = 0, B = 1`"* | **Inverted.** Contraction asks whether `c(A) = c(B)` is possible, whose refutation is a **virtual edge**; the milestone's target is the forced-equal pair, whose ask pins the two to *different* colours. Plan §1.2 and `fs70_fabric.write_shape` both name a pin by its conclusion, and so does `fs70_ask.py`. The likely cause is that phase 0's positive control — Haugland's `A = B` — really is a contracted encoding, because his object carries a virtual edge and not a forced pair. |
+| **plan §7, P2** | *"The Harder-shape fabric `S₂`, sums of ≤ 4, **does** force `(0, 8/3)` or `(0, 4/3)` at four colours"* | **Lost, and by derivation rather than at a budget.** No finite subgraph of that lattice forces either pair, at any radius — nor `S₃`, nor sums of ≤ 5, nor anything else drawn in it (§4). |
+| **plan §4.1, rows L1 and L1′** | the first asks of the milestone | Both lattices are dead at every radius, `4/7` (the field's cheapest closer, chain 2) included. No solver should be pointed at them. |
+| **plan §1.3 / the owner's ruling 3** (budgets: 10 min single, then cube-and-conquer, 40 CPU-hours per ask, 240 for the phase) | the stop rule | **Never binding.** Every one of the 14 asks closed by a single solver, the slowest in 17.7 s. The phase spent well under one CPU-hour on asks; what it spent compute on was building shapes. |
+| **phase 0 §0.5, the imposed-quotient ask** | one of the three structure instruments | **Does not scale to `p = 5`** on a 95,000-point rank-8 fabric: 118 GB of anon memory, OOM-killed by the kernel. Affordable at `p ≤ 4`. |
+| **plan §2.4 and G65's "step up in degree"** | the ball law as the calibration, and step up when a ball is undecided | On this field the step up **has a ceiling and it was reached**: the k=4 word ball tops out at average degree 15.5–15.8 on ~1.86 M points, there is no denser subgraph inside it (the 14-core is empty), and a Minkowski ball is unaffordable at any useful degree — the live lattices' covolumes are 2·10⁻⁸ to 2·10⁻⁵, so degree 12 costs 10⁵–10¹⁰ **million** points. The four-embedding exponent (`R⁸`, not FS-61's `R⁴`) is what makes a biquadratic field a different instrument problem from a quadratic one. |
 
 ---
 
 ## 8. WORKFLOW step 9's two sweeps over this phase's additions
 
-**(filled at the close)**
+* **"conjecture"** — one, and it is the phase's own open question rather than a claim: **is the Kempe reach rank
+  the invariant that decides whether a lattice can force?** Every lattice this phase killed has, at `b = 2`, a
+  reach of rank 6 or 4 for some additive colouring; the two it could not kill have rank 8 for all 120 tested
+  (colouring, `b`) pairs. The observation is exact where it was computed and is **not derived** — and the test
+  that would settle it is the out-of-field control below. **Flagged to the owner as a stub candidate**, together
+  with the second half: the same screen run over FS-61's real-quadratic lattices, where G61(4) says *"what
+  decides a field is how many unit vectors its lattices hold"* and the reach rank may be the sharper form of
+  that reading.
+* **"not claimed"** — (i) that L2 or L3 is four-colourable **as a lattice**: what is measured is that the shapes
+  asked (95k points at degree 11.5, and L5's 1.86 M-point k=4 ball) are; (ii) that anything holds at arity above
+  2 — every ask here is a pair or the whole fabric; (iii) that the Kempe screen has been controlled at four
+  colours against a *known* four-colour forced pair — the control that would do it is out of field and is
+  **owed** (§4.2); (iv) the reach-rank table is 40 colourings per lattice, not the whole family.
