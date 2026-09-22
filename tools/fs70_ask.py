@@ -46,6 +46,7 @@ options: --single-budget S (default 600) --cube-budget S (900) --jobs N (22) --b
 """
 from collections import defaultdict
 import hashlib
+import itertools
 import json
 import math
 import multiprocessing as mp
@@ -248,11 +249,59 @@ def verify_model(inst, model, pts=None, edges=None):
 
 # ---------------------------------------------------------------- the single-solver attempt
 
+STREAM_ABOVE = 400000            # vertices: above this the clause LIST is gigabytes of Python objects
+
+
+def write_cnf_streaming(path, n, edges, pins, k=K):
+    """the colouring CNF written clause by clause, never held as a list.  At 1.9 million vertices the list form
+    is ~54 million Python lists, several gigabytes before a byte reaches the disk.  No precedence break is
+    emitted: this path is used only where three colours are already pinned, and three pins leave no residual
+    value symmetry to break."""
+    ncl = n + n * (k * (k - 1) // 2) + len(edges) * k + len(pins)
+    h = hashlib.sha256()
+    with open(path, 'wb') as fh:
+        head = f'p cnf {k * n} {ncl}\n'.encode()
+        fh.write(head)
+        h.update(head)
+        buf = []
+        def emit(c):
+            buf.append(' '.join(map(str, c)) + ' 0\n')
+            if len(buf) >= 100000:
+                b = ''.join(buf).encode()
+                fh.write(b)
+                h.update(b)
+                buf.clear()
+        for v in range(n):
+            emit([var(v, c) for c in range(k)])
+            for c1 in range(k):
+                for c2 in range(c1 + 1, k):
+                    emit([-var(v, c1), -var(v, c2)])
+        for a, b in edges:
+            for c in range(k):
+                emit([-var(a, c), -var(b, c)])
+        for v, c in pins:
+            emit([var(v, c)])
+        if buf:
+            b = ''.join(buf).encode()
+            fh.write(b)
+            h.update(b)
+    return h.hexdigest(), ncl
+
+
 def single_attempt(inst, out, budget, solver='kissat'):
-    cl, prec = instance_clauses(inst)
-    nv = FB.cnf_nvars(inst['n'], K, inst['pins']) if prec else K * inst['n']
     path = os.path.join(out, 'instance.cnf')
-    sha = FB.write_cnf(path, nv, cl)
+    if inst['n'] > STREAM_ABOVE:
+        if len({c for _, c in inst['pins']}) < 3:
+            raise SystemExit(f'{inst["n"]} vertices with only {len(inst["pins"])} pins: the streaming writer '
+                             f'emits no precedence break, so this instance would be asked with its residual '
+                             f'colour symmetry unbroken -- refused (CLAUDE.md, the symmetry checklist)')
+        sha, ncl = write_cnf_streaming(path, inst['n'], inst['edges'], inst['pins'])
+        nv = K * inst['n']
+        cl = range(ncl)
+    else:
+        cl, prec = instance_clauses(inst)
+        nv = FB.cnf_nvars(inst['n'], K, inst['pins']) if prec else K * inst['n']
+        sha = FB.write_cnf(path, nv, cl)
     t0 = time.time()
     try:
         r = subprocess.run([solver, '-q', f'--time={int(budget)}', path], capture_output=True, text=True,
@@ -563,6 +612,87 @@ def kempe_report(spec, deltas, k=4, group='Zk', limit=None, lat=None):
         out[nm] = r or {'kind': 'live', 'detail': 'no additive colouring separates the pair and no Kempe swap '
                                                   'frees it: the ask is live and must go to a solver'}
     return lat, out
+
+
+# ---------------------------------------------------------------- the periodic screen (phase 1)
+#
+# The SECOND radius-free screen, and it needs no additive colouring at all.  Build the graph on the finite
+# quotient Lambda / p Lambda whose edge set is {(class(x), class(x + z)) : z a unit vector of Lambda}.  A proper
+# four-colouring of THAT graph lifts to a proper four-colouring of the whole lattice's unit-distance graph: two
+# lattice points at distance 1 differ by a unit vector, so their classes are joined.  So if the quotient graph
+# has a proper four-colouring that gives class(0) and class(delta) different colours, then no finite subgraph of
+# the lattice forces the pair -- at any radius, and with no solver run on any fabric.  A unit vector lying in
+# p Lambda is a self-loop and settles the ask with no solver at all.
+#
+# The quotient is tiny (p^8 classes at rank 8: 256 at p = 2), which is why this is cheaper than the same question
+# asked on a fabric -- phase 0's `fs70_structure.py quotient` asks it on a 95,000-point ball, and at p = 5 that
+# reached 118 GB and was OOM-killed.
+
+def quotient_graph_lattice(lat, p):
+    """(classes, edges, loops) for Lambda / p Lambda with an edge per unit vector"""
+    R = lat.rank
+    uc = [tuple(x % p for x in lat.coords(z)) for z in lat.units]
+    loops = [u for u in uc if all(x == 0 for x in u)]
+    classes = list(itertools.product(range(p), repeat=R))
+    index = {c: i for i, c in enumerate(classes)}
+    E = set()
+    for c in classes:
+        i = index[c]
+        for u in uc:
+            j = index[tuple((a + b) % p for a, b in zip(c, u))]
+            if i != j:
+                E.add((min(i, j), max(i, j)))
+    return classes, sorted(E), loops
+
+
+def periodic_escape(lat, delta, p, out=None, budget=300, solver='kissat'):
+    """Is there a p Lambda-periodic proper four-colouring of the WHOLE lattice separating 0 from delta?"""
+    classes, E, loops = quotient_graph_lattice(lat, p)
+    R = lat.rank
+    if loops:
+        return {'kind': 'none', 'p': p, 'classes': len(classes), 'edges': len(E),
+                'detail': f'a unit vector lies in {p}Lambda: no {p}Lambda-periodic colouring exists at any '
+                          f'colour count'}
+    index = {c: i for i, c in enumerate(classes)}
+    i0 = index[tuple([0] * R)]
+    dc = lat.coords(delta)
+    iD = index[tuple(x % p for x in dc)]
+    if i0 == iD:
+        return {'kind': 'same-class', 'p': p, 'classes': len(classes), 'edges': len(E),
+                'detail': f'delta lies in {p}Lambda, so every {p}Lambda-periodic colouring makes the pair '
+                          f'monochromatic: this screen says nothing at this p'}
+    pins = [(i0, 0), (iD, 1)]
+    cl = FB.coloring_cnf(len(classes), E, K, pins, precedence=True)
+    out = out or os.path.join(ROOT, 'build', 'fs70', 'periodic')
+    os.makedirs(out, exist_ok=True)
+    path = os.path.join(out, f'q{p}-{lat.sha()}-{abs(hash(tuple(dc))) % 10**8}.cnf')
+    sha = FB.write_cnf(path, FB.cnf_nvars(len(classes), K, pins), cl)
+    t0 = time.time()
+    try:
+        r = subprocess.run([solver, '-q', path], capture_output=True, text=True, timeout=budget)
+        v = 'UNSAT' if r.returncode == 20 else 'SAT' if r.returncode == 10 else 'UNKNOWN'
+    except subprocess.TimeoutExpired:
+        v = 'UNKNOWN'
+    secs = round(time.time() - t0, 2)
+    model = None
+    if v == 'SAT':
+        lits = []
+        for line in r.stdout.splitlines():
+            if line.startswith('v '):
+                lits.extend(int(x) for x in line[2:].split())
+        m = {abs(x): x > 0 for x in lits if x}
+        col = [next(c for c in range(K) if m.get(var(i, c))) for i in range(len(classes))]
+        for a, b in E:
+            assert col[a] != col[b], f'the lifted colouring is improper on quotient edge ({a}, {b})'
+        assert col[i0] != col[iD]
+        model = col
+    return {'kind': {'SAT': 'periodic', 'UNSAT': 'rigid', 'UNKNOWN': 'unknown'}[v], 'p': p,
+            'classes': len(classes), 'edges': len(E), 'seconds': secs, 'cnf_sha256': sha, 'model': model,
+            'detail': ({'SAT': f'a {p}Lambda-periodic proper four-colouring of the WHOLE lattice separates the '
+                               f'pair (verified proper on all {len(E)} quotient edges): no finite subgraph '
+                               f'forces it, at any radius',
+                        'UNSAT': f'no {p}Lambda-periodic four-colouring separates the pair',
+                        'UNKNOWN': f'undecided at {budget}s -- a fact about the encoding'}[v])}
 
 
 # ---------------------------------------------------------------- records

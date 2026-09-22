@@ -1,0 +1,37 @@
+### L2-w3 p=2
+build/fs70/L2-w3: 95317 points, 550014 edges; Lambda / 2Lambda meets 175 classes, 900 quotient edges, 390534 unit-distance pairs INSIDE a class
+  => no 2Lambda-periodic colouring exists at any colour count: the pair (0, 1) is a unit edge inside one class (no solver needed)
+### L2-w3 p=3
+build/fs70/L2-w3: 95317 points, 550014 edges; Lambda / 3Lambda meets 1257 classes, 7524 quotient edges, 394278 unit-distance pairs INSIDE a class
+  => no 3Lambda-periodic colouring exists at any colour count: the pair (0, 13) is a unit edge inside one class (no solver needed)
+### L2-w3 p=4
+build/fs70/L2-w3: 95317 points, 550014 edges; Lambda / 4Lambda meets 3436 classes, 21360 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 4Lambda, k = 4: UNSAT in 0.596s
+### L5-w3 p=2
+build/fs70/L5-w3: 95149 points, 548532 edges; Lambda / 2Lambda meets 256 classes, 3072 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 2Lambda, k = 4: SAT in 0.004s; lifted colouring proper on all 548532 edges: True
+### L5-w3 p=3
+build/fs70/L5-w3: 95149 points, 548532 edges; Lambda / 3Lambda meets 1257 classes, 7524 quotient edges, 392796 unit-distance pairs INSIDE a class
+  => no 3Lambda-periodic colouring exists at any colour count: the pair (0, 13) is a unit edge inside one class (no solver needed)
+### L5-w3 p=4
+build/fs70/L5-w3: 95149 points, 548532 edges; Lambda / 4Lambda meets 14809 classes, 96084 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 4Lambda, k = 4: SAT in 5.045s; lifted colouring proper on all 548532 edges: True
+### L4a-w3 p=2
+build/fs70/L4a-w3: 94849 points, 559536 edges; Lambda / 2Lambda meets 175 classes, 888 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 2Lambda, k = 4: SAT in 0.002s; lifted colouring proper on all 559536 edges: True
+### L4a-w3 p=3
+build/fs70/L4a-w3: 94849 points, 559536 edges; Lambda / 3Lambda meets 1257 classes, 7524 quotient edges, 403416 unit-distance pairs INSIDE a class
+  => no 3Lambda-periodic colouring exists at any colour count: the pair (0, 1) is a unit edge inside one class (no solver needed)
+### L4a-w3 p=4
+build/fs70/L4a-w3: 94849 points, 559536 edges; Lambda / 4Lambda meets 1789 classes, 9768 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 4Lambda, k = 4: SAT in 0.101s; lifted colouring proper on all 559536 edges: True
+### L3-w3 p=2
+build/fs70/L3-w3: 95389 points, 549744 edges; Lambda / 2Lambda meets 256 classes, 2172 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 2Lambda, k = 4: UNSAT in 0.026s
+### L3-w3 p=3
+build/fs70/L3-w3: 95389 points, 549744 edges; Lambda / 3Lambda meets 1257 classes, 7524 quotient edges, 394008 unit-distance pairs INSIDE a class
+  => no 3Lambda-periodic colouring exists at any colour count: the pair (0, 13) is a unit edge inside one class (no solver needed)
+### L3-w3 p=4
+build/fs70/L3-w3: 95389 points, 549744 edges; Lambda / 4Lambda meets 12448 classes, 87192 quotient edges, 0 unit-distance pairs INSIDE a class
+  imposed-quotient ask at L = 4Lambda, k = 4: UNSAT in 17.599s
+### QUOTIENT SWEEP DONE

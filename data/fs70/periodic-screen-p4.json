@@ -1,0 +1,62 @@
+{
+ "L5": {
+  "4/3": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "4": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "4/9": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "8/3": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  }
+ },
+ "L4a": {
+  "4/7": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "4/3": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "4": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  },
+  "8/3": {
+   "kind": "same-class",
+   "p": 4,
+   "classes": 65536,
+   "edges": 1572864,
+   "detail": "delta lies in 4Lambda, so every 4Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+  }
+ }
+}

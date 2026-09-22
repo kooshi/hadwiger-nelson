@@ -193,6 +193,35 @@ On L2's control colouring at k=3 (`tools/fs70_structure.py screen`):
 So the four-colourings these lattices carry are not additive, not residue-local at any small prime and not
 periodic — they are free colourings, and the fabric is simply far from forcing anything at this size.
 
+### 5.3 The periodic screen, at the lattice and at the fabric — and why it is silent where the Kempe screen is not
+
+The imposed-quotient ask (the plan's instrument (iii)) asked on the 95k-point fabrics
+(`tools/fs70_structure.py quotient`, `build/fs70/quotient-sweep.log`) splits the four live lattices in two:
+
+| fabric | `2Λ` | `3Λ` | `4Λ` |
+|---|---|---|---|
+| **L2** `group:u3:2+v4` | none (a unit edge inside a class) | none (a unit edge inside a class) | **UNSAT**, 0.6 s |
+| **L3** `group:u3:2+w4` | **UNSAT**, 0.03 s | none | **UNSAT**, 17.6 s |
+| **L4a** `zeta12+u3+q7+s7` | **SAT** 0.002 s, lifted and verified on all 559,536 edges | none | **SAT** 0.10 s, verified |
+| **L5** `group:u3:2+d6` | **SAT** 0.004 s, lifted and verified on all 548,532 edges | none | **SAT** 5.0 s, verified |
+
+So **L4a and L5 carry periodic four-colouring rules** — a theorem-shaped null in the plan's own words — while
+**L2 and L3 carry none at `2Λ`, `3Λ` or `4Λ`**: their four-colourings are genuinely free, which is the same fact
+as their having no additive colouring, seen from the other side.
+
+I also built the screen **at the lattice rather than at the fabric** (`periodic_escape` in `tools/fs70_ask.py`,
+`data/fs70/periodic-screen*.json`), which is both cheaper and radius-free: the graph on `Λ/pΛ` whose edges are
+`(class(x), class(x+z))` over the unit vectors has `p⁸` vertices (256 at `p = 2`), and a proper four-colouring of
+it lifts to the whole lattice, so a lift that separates `0` from `δ` kills the target at every radius. **It is
+silent on every target this milestone cares about, for a structural reason worth stating:** at `p = 2` and
+`p = 4` every one of them — `4/3`, `4`, `4/9`, `8/3` on L5, `4/7`, `4/3`, `4`, `8/3` on L4a — lies **inside
+`4Λ`**, so no `4Λ`-periodic colouring can separate it; and at `p = 3` a unit vector lies in `3Λ`, so no
+`3Λ`-periodic colouring exists at all. Since every *additive* colouring is a function of `Λ/4Λ`, this is the
+additive screen's own blind spot restated: **a chainable target is chainable because `1/δ` is a short sum of unit
+vectors, which puts `δ` deep in `4Λ`, which is exactly where every periodic and every additive instrument goes
+blind. The Kempe swap is the first instrument that is not a function of `Λ/4Λ`, and that is why it is the one
+that kills five lattices.**
+
 **An instrument limit, found the hard way and recorded so nobody else pays for it.** The *imposed-quotient* ask
 (instrument (iii): quotient the fabric by `pΛ` and re-ask, so a SAT is a periodic colouring rule) is affordable at
 `p = 2, 3, 4` on a 95,000-point rank-8 fabric and **is not at `p = 5`**: `tools/fs70_structure.py quotient

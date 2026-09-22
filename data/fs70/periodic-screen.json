@@ -1,0 +1,252 @@
+{
+ "L5": {
+  "4/3": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3072,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3072,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4/9": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3072,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "8/3": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3072,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  }
+ },
+ "L4a": {
+  "4/7": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 1536,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4/3": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 1536,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 1536,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "8/3": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 1536,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 104976,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  }
+ },
+ "L3": {
+  "2": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3456,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 288684,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4/3": {
+   "2": {
+    "kind": "same-class",
+    "p": 2,
+    "classes": 256,
+    "edges": 3456,
+    "detail": "delta lies in 2Lambda, so every 2Lambda-periodic colouring makes the pair monochromatic: this screen says nothing at this p"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 288684,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "isqrt3": {
+   "2": {
+    "kind": "rigid",
+    "p": 2,
+    "classes": 256,
+    "edges": 3456,
+    "seconds": 0.03,
+    "cnf_sha256": "8a7b012f3d5264a6",
+    "detail": "no 2Lambda-periodic four-colouring separates the pair"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 288684,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  }
+ },
+ "L2": {
+  "2": {
+   "2": {
+    "kind": "none",
+    "p": 2,
+    "classes": 256,
+    "edges": 3840,
+    "detail": "a unit vector lies in 2Lambda: no 2Lambda-periodic colouring exists at any colour count"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 446148,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "2/3": {
+   "2": {
+    "kind": "none",
+    "p": 2,
+    "classes": 256,
+    "edges": 3840,
+    "detail": "a unit vector lies in 2Lambda: no 2Lambda-periodic colouring exists at any colour count"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 446148,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "4/3": {
+   "2": {
+    "kind": "none",
+    "p": 2,
+    "classes": 256,
+    "edges": 3840,
+    "detail": "a unit vector lies in 2Lambda: no 2Lambda-periodic colouring exists at any colour count"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 446148,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  },
+  "isqrt3": {
+   "2": {
+    "kind": "none",
+    "p": 2,
+    "classes": 256,
+    "edges": 3840,
+    "detail": "a unit vector lies in 2Lambda: no 2Lambda-periodic colouring exists at any colour count"
+   },
+   "3": {
+    "kind": "none",
+    "p": 3,
+    "classes": 6561,
+    "edges": 446148,
+    "detail": "a unit vector lies in 3Lambda: no 3Lambda-periodic colouring exists at any colour count"
+   }
+  }
+ }
+}
