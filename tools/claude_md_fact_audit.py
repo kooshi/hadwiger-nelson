@@ -62,6 +62,9 @@ ALLOW: dict[str, str] = {
     "UD(ℤ/529,2)": "the FS-66 stub row; item 17 and row 75 write UD(ℤ/529, 2)",
     "χ(level": "the FS-66 stub row's 'χ(level two) ≤ χ(level one)'; § Notation says χ(G_k) is non-increasing in k",
     "Pilot": "the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'",
+    # WORKFLOW 2.0 (2026-09-22) renumbered the reframe: the prior-art gate is step 3.2 (was 3a), the knowledge audit 3.1 (was 3g).
+    "3a": "WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2",
+    "3g": "WORKFLOW 2.0: the knowledge audit is step 3.1; the grokkings intro now says 3.1",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
