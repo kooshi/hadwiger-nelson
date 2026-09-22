@@ -801,9 +801,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   carried (row 55) is the level-one shadow of the fan-gap theorem (row 66), which frees every pair at every distance over
   such a field, so the residue-allowed distances name nothing. Unchanged: no finite plane at p ≡ 3 (mod 4) has a
   forced pair at a colour count it admits (row 60), and at 11 its virtual edges are exactly its edges (kernel;
-  measured at 3, 7, 19; prime fields only). *Do: over any field where 11 is usable, expect `Forces ↔ =` and
-  `Separated ↔ Adj` at five colours without asking, and ask for no residue-allowed distance list. Nothing kills it; it kills
-  FS-16's kind of list.*
+  measured at 3, 7, 19; prime fields only). *Do: over any field where 11 is usable, expect five-colour `Forces ↔ =` and
+  `Separated ↔ Adj` without asking, and ask for no residue-allowed distance list. Nothing kills it; it kills FS-16's kind
+  of list.*
 * **G48 — The tightness mechanism, and the six-level question answered no over sealed fields. [kernel]** Over a field
   sealed at k by a usable prime 𝔭 whose plane is k-colourable, a pair forced equal at k colours has 𝔭 ∣ d², its
   spindle adjoins √(4d² − 1) ≡ √−1 (mod 𝔭), and every prime above p stops being usable: the forcer deletes
@@ -1063,9 +1063,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   six-chromatic unit-distance graph extends to a seven-chromatic one over its own field. The sharpest instance is **ℚ(√167)**, the
   smallest-discriminant real field with no such prime (usable planes 23, 43, 59, …): five being refused at 23 (FS-56), the
   conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way the wall goes (6 by the main clause, 7 by the bold form), against a proven 3,
-  in a field with no √3 and no triangles. *Killing tests: a six-colouring of a window member (the wall); an independent set of
-  ⌈Q²/6⌉ at one (W_f); a colouring of ℚ(√167)² with fewer than six colours (the conjecture above five; four there is FS-59).*
-* **G60 — Fractional colourings reach fields the residue method cannot, and stop where a residue plane is fractionally small. [hand, from `[MatolcsiEtAl2025]`; cert; measured; one reading]** Every congruence between subsets of `F²` is an isometry of `F²`, so the blow-up of a finite `H ⊂ F²` along a Følner set of the (solvable) group its congruences generate stays in `F²`, and **χ(F²) ≥ ⌈χ_gf(H)⌉** (`plans/FS56-field-blowup.md`) — a lower bound that uses no residue map, no additive structure and no forced pair; instance: χ_f(K²) = 4. Its **ceiling** is `min(4.36, χ_f` of every usable residue plane`)` — 3 at an `𝔽₃` place, 3.5 at `𝔽₇` — so it can never prove more than five colours. **The reading** (R-C; killing test in FS-58): its ratio-bound shadow on pieces `Cay(ℤ⁴, W)` tends to the least local character mean over the places where the unit circle is compact (real: `J₀`'s −0.40276; `𝔽₃` −1/2; `𝔽₇` −0.5617; `𝔽₂₃` −0.3317), the split places controlled by the weights, so a real field whose compact places all read above −1/2 — ℚ(√167) first — would have χ_f ≥ 3.48. What reached four colours over real quadratic fields was not this route but finite refutations (G61, row 73). *Killing tests: a real field whose compact places all read above −1/2 with a 3-colourable plane (the reading); a finite `H ⊂ F²` with χ_gf(H) above a usable plane's χ_f (a defect, never a finding).*
+  in a field with no √3 and no triangles. *Do: at any window member aim at α < Q²/6 — the fractional wall needs no rounding —
+  and report c = α/q^{3/2} beside every found set, marked found or exact. Killing tests: a six-colouring of a window member
+  (the wall); an independent set of ⌈Q²/6⌉ at one (W_f); a colouring of ℚ(√167)² with fewer than six colours (the conjecture
+  above five; four there is FS-59).*
+* **G60 — Fractional colourings reach fields the residue method cannot, and stop where a residue plane is fractionally small. [hand, from `[MatolcsiEtAl2025]`; cert; measured; one reading]** Every congruence between subsets of `F²` is an isometry of `F²`, so the blow-up of a finite `H ⊂ F²` along a Følner set of the (solvable) group its congruences generate stays in `F²`, and **χ(F²) ≥ ⌈χ_gf(H)⌉** (`plans/FS56-field-blowup.md`) — a lower bound that uses no residue map, no additive structure and no forced pair; instance: χ_f(K²) = 4. Its **ceiling** is `min(4.36, χ_f` of every usable residue plane`)` — 3 at an `𝔽₃` place, 3.5 at `𝔽₇` — so it can never prove more than five colours. **The reading** (R-C; killing test in FS-58): its ratio-bound shadow on pieces `Cay(ℤ⁴, W)` tends to the least local character mean over the places where the unit circle is compact (real: `J₀`'s −0.40276; `𝔽₃` −1/2; `𝔽₇` −0.5617; `𝔽₂₃` −0.3317), the split places controlled by the weights, so a real field whose compact places all read above −1/2 — ℚ(√167) first — would have χ_f ≥ 3.48. What reached four colours over real quadratic fields was not this route but finite refutations (G61, row 73). *Do: read the cap first — a usable plane with χ_f at or below the target kills the route by theorem; where every usable plane's χ_f sits above it (no `𝔽₃`, no `𝔽₇` place), price a finite `H` with χ_gf(H) > k − 1 before any forced-pair route: it proves k with no refusal, and FS-56's LP and checker exist. Killing tests: a real field whose compact places all read above −1/2 with a 3-colourable plane (the reading); a finite `H ⊂ F²` with χ_gf(H) above a usable plane's χ_f (a defect, never a finding).*
 * **G61 — Three colours break at arithmetic, not at size — and the arithmetic is the supply of unit vectors. [kernel + certified + measured; one reading]** Over a real
   quadratic field with `d ≡ 2 (mod 3)`: (1) **The barrier** [kernel, row 72]: directions integral at 3 are 3-colourable outright, so a refusal needs a direction with 3 in a
   denominator — met by count in every one of the 14 certified witnesses (89 to 4,328 such edges, never zero). (2) **Rigidity is periodic and local** [measured]: the 3-adic plane is
@@ -1075,12 +1077,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   norm equation is linear in `d`. (4) **What decides refusal is how many unit vectors a lattice holds** [measured, row 74]: one integral shape refuses over ℚ(√11) with 108 and is
   periodically 3-colourable over five fields with 20–36; refusing lattices are rich in classes, not coarse; odd girth ≤ 9 is necessary and far from sufficient; and the congruence class does
   not decide — 11 and 59 land at `d ≡ 3 (mod 8)`, cutting across `[Fischer1990]` Thm 10's split of the family (an additive 4-colouring there, none with few colours at `d ≡ −1 (mod 24)`).
+  *Demotion records:* this entry first read "every field with a usable plane
+  at 7 has χ = 4" (false at ℚ(√2), ℚ(√7)) and "forcing at small size tracks short odd cycles in a COARSE 3-non-integral lattice" (the census: rich, not coarse); FS-58's plan first derived
+  periodic affinity from "finite quotients of the 3-integral group are 3-groups" — false, since the unit vectors' lattice maps onto every stable residue plane.
   *Reading, with its test:* **T4: every squarefree d ≡ 11 (mod 12) has χ(ℚ(√d)²) ≥ 4** — the whole family that can need four (`[Fischer1990]` Thms 8–9: χ = 2 iff d ≢ 3 mod 4; χ = 3 for
   d ≡ 3, 7 mod 12); L = 4 by the dyadic bound at d ≡ 3 (mod 8) (his Thm 10(i)) or the plane at 7, L ≥ 5 exactly at d ≡ 47, 143, 167 (mod 168). Asked of all forty fields below 500: 14
   certified, 26 typed nulls, no counterexample, **no proof and no route to one** — no witness transfers between fields, and the chain route needs a forcer in every field's own
-  3-integral graph. *Killing test: a field in the family with a verified 3-colouring rule for its whole plane.* *Demotion records:* this entry first read "every field with a usable plane
-  at 7 has χ = 4" (false at ℚ(√2), ℚ(√7)) and "forcing at small size tracks short odd cycles in a COARSE 3-non-integral lattice" (the census: rich, not coarse); FS-58's plan first derived
-  periodic affinity from "finite quotients of the 3-integral group are 3-groups" — false, since the unit vectors' lattice maps onto every stable residue plane.
+  3-integral graph. *Do: over a real quadratic field, saturate a lattice of unit vectors with 3 in a denominator and count them before any ball is built — supply decides; screen by
+  odd girth ≤ 9 (necessary only), never by congruence class and never by a quotient, whose colourings are affine and blind. Killing test: a field in the family with a verified
+  3-colouring rule for its whole plane.*
 * **G62 — Every witness is a twisted bilayer, and the twist family is the coincidence rotations. [derived, the
   identification verified symbolically; the prior art external]** Every 5-chromatic object this project holds or reproduces —
   de Grey's 1581, Heule's 510, `[Parts2020a]`'s record, the `ρ₆₃` arena — is **a point set plus a rotated copy of itself,
@@ -1112,8 +1117,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   `[BaakeGrimm2004]`'s Bravais colourings are similarity submodules, and ours is neither map; the twisted-bilayer-graphene
   literature's commensurate family is the **hexagonal** one, `cos θ = (m²+n²+4mn)/(2(m²+n²+mn))`, a different one-parameter
   shape that does not contain ours; and **no source joins coincidence-site theory to unit-distance colouring.** The full
-  gate is FS-63. *Killing test: a commensurate twist whose arena's chromatic number exceeds its base field's local bound,
-  which would refute the periodic ⟹ finite-quotient ⟹ bounded step.*
+  gate is FS-63. *Do: name every bilayer by its `Σ = n` and decide commensurate or not by whether `√(4n−1)` lies in the
+  field: commensurate is periodic, so ask a finite quotient's colouring before any solver — one proper colouring of the
+  quotient colours every arena on that module at once; incommensurate names the new field, which the wall screens. Killing
+  test: a commensurate twist whose arena's chromatic number exceeds its base field's local bound, which would refute the
+  periodic ⟹ finite-quotient ⟹ bounded step.*
 * **G63 — The chromatic number of a field plane is arithmetic only: transcendence is free. [hand; prior art:
   `[Fischer1990]` Thm 6, statement and proof]** For any `F ⊆ ℝ` and any `t` transcendental over `F`, **`χ(F(t)²) = χ(F²)`**. At the place `t ↦ 0` the
   residue field is `F`, which is formally real, so `−1` is not a square there; a unit vector `(u,v)` with a pole would need
@@ -1136,8 +1144,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   "a purely transcendental extension of some finite algebraic extension" of ℚ, which is false in general (a function field of positive
   genus), and then invokes de Bruijn–Erdős. So the statement χ(ℝ²) = sup over number fields has been in print since 1990 with a flawed
   step; what is left to us is the repair (real places, or Tarski–Seidenberg) and the kernel form. Nothing in this entry is ours but
-  the valuation reading and the named gap.* *Killing test: a unit vector of `F(t)²` with a
-  pole at a place whose residue field is formally real.*
+  the valuation reading and the named gap.* *Do: when a construction adjoins a parameter or a transcendental, expect no
+  colour from it — reduce to the algebraic field first; asked about ℚ(π), ℚ(e) or ℚ(φ), answer 2 without computing. Killing
+  test: a unit vector of `F(t)²` with a pole at a place whose residue field is formally real.*
 * **G64 — Six may be a value no field attains: a claim about fields, stronger than χ(ℝ²) ≠ 6 and not equivalent to it. [derived; the pattern a reading]**
   **The two statements.** *S:* no subfield `F ⊆ ℝ` has `χ(F²) = 6`. *W:* `χ(ℝ²) ∈ {5, 7}`. **S ⟹ W trivially** (ℝ is a subfield;
   for *number* fields it is FS-39's bridge — if `χ(ℝ²) = 6`, de Bruijn–Erdős gives a finite 6-chromatic unit-distance graph, its
@@ -1173,13 +1182,14 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   no mechanism either, and five occurs**: the pattern already fails at the value immediately below the one it is being used to
   explain, and it fails at the finite plane, which is where the wall lives. The two criteria are also distinguishable — the
   three-mechanism union admits 11 (a prime power) where the two-form criterion forbids it — so the killing test below separates
-  them instead of merely testing one. *Killing tests: a six-colouring at 17 (`χ ∈ {5,6}`), at
-  `U₆₄` (`χ ∈ [6,8]`), or at any window member; or any plane pinned at exactly 11 (which refutes the two-form reading and
-  confirms the mechanism one).* **Measured** (`tools/fq_chi.py`, `data/fs62/`): an independent rebuild
+  them instead of merely testing one. **Measured** (`tools/fq_chi.py`, `data/fs62/`): an independent rebuild
   reproduces `χ = 3, 4, 3, 5, 5` at `q = 3, 7, 9, 11, 19` and the controls `χ(Γ₅) = 3`, `χ(Γ₁₃) = 5`; 17, 25, 29
   are `≥ 5` and undecided at five. **The dimension-3 probe returned nothing** — `χ(UD(𝔽₃,3)) = 3` and every other case decided
   is `≥ 7` — so a six outside dimension two was unreachable *at the sizes the budget could decide*, and whether the skipping is
-  specific to the plane stays untested.
+  specific to the plane stays untested. *Do: never cite "six is skipped" as evidence for seven; aim any six-hunt at the gap
+  between `L(F)` and `χ(F²)`, where the residue, additive and hexagonal ceilings are silent; keep S and W apart in every
+  sentence about six. Killing tests: a six-colouring at 17 (`χ ∈ {5,6}`), at `U₆₄` (`χ ∈ [6,8]`), or at any window member;
+  or any plane pinned at exactly 11 (which refutes the two-form reading and confirms the mechanism one).*
 * **G65 — The refusal phase diagram: a ball's average degree, not its size, decides whether a solver answers, and hardness marks the threshold, never the far side. [measured on 775 asked
   balls of FS-61; one registered prediction lost]** Put every asked ball of a lattice unit-distance graph at its average degree `2·edges/points`: below 4 everything 3-colours at once; **4–6 is the
   hardness peak** — most undecided balls sit there and every decided one is colourable (random graphs have their 3-colouring threshold at ≈ 4.7; 25 undecided balls sit on planes that are
@@ -1211,9 +1221,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   (Lemma T). So the certificates prove more than was asked, and the method can prove *the tower never rises* at a prime
   only if no twist of `Γ_p` rises there. *Reading — the tower never rises: `α(G_k) = p^{2(k−1)}α(Γ_p)` for every p and k
   (true at level two of 7, `α = 686`; `B₁ = α(Γ_p)` numerically at 7, 11, 19 — at 23 the relaxation reads 97.6
-  against a best set of 87: the gap grows with p, or `B₁(23) > α`), and the same for every twist.* **Killing
-  tests:** a verified independent set of 687 in `UD(ℤ/49, 2)` (which would refute a hand link or the checker, not only
-  the reading); of 3,389 in any twisted cover of `Γ₁₁`. **What it does to the conjecture:** `L(F)` with every level
+  against a best set of 87: the gap grows with p, or `B₁(23) > α`), and the same for every twist.* **What it does to the conjecture:** `L(F)` with every level
   allowed is the same number at 7, 11, 19 and 23, so the prediction at ℚ(√167) survives its first tower — and 43, its
   other plane, is beyond this instrument (priced at 84 GPU-days and 310 GB: a smaller relaxation, not a bigger machine)
   and ℚ(√47)'s bracket cannot close from above by residues (`CLOSED-QUESTIONS.md` §1.7). **Instrument lessons**
@@ -1225,7 +1233,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   the 19 reading overturned it); a rounded bound travels with its shift (positive definiteness survives iff `shift ≥
   10^(3−D)` at 7, 11, 19 and `10^(4−D)` at 23 — the recipe followed literally returns no certificate there, so scan
   three decades; at 11 one knob moves `U` from 28.2021 to 30.5445) and tracks the **dual** residual; in the kernel the
-  clause table is the graph's bill and the segments the proof's.
+  clause table is the graph's bill and the segments the proof's. *Do: read `L(F)` as the all-levels number at 7, 11, 19 and
+  23 without recomputing; at a new prime ask the whole graph clique-pinned before any finder, expect CDCL to refuse nothing
+  up a tower it cannot refuse at the bottom, and certify by the fibre-share relaxation rather than by SAT. Killing tests: a
+  verified independent set of 687 in `UD(ℤ/49, 2)` (which would refute a hand link or the checker, not only the reading); of
+  3,389 in any twisted cover of `Γ₁₁`.*
 * **G67 — A grokking is grokked by its form, and the reframe is re-grokking. [method; measured on one milestone]** The corpus
   is read in one of two modes — as background (understood, and left where it lies) or as an instrument (reasoned from) — and
   which mode an entry gets is set by its *shape*, not by its truth or its place in this file. On FS-70 the entries that fired
@@ -1239,7 +1251,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   from was not grokked. What failed was the mode of reading, and the shape of the entry sets the mode. Hence the act that
   opens every milestone (WORKFLOW 3.1) is named for what it is, **re-grokking the goal** — reading the theory from inside the
   new question — and not "audit", which is felt as an instruction to check where "re-grok" is felt as an instruction to
-  think. *Owed (Kooshi, 2026-09-22): every entry in this section re-examined for its form.* *Killing test: a milestone whose §G,
+  think. Every entry in this section has been re-examined for its form (2026-09-22) and given it where it was a memoir; a new
+  entry is held to the same form at minting. *Do: when you write or read an entry, find its "Do" and its killing test; an
+  entry without both is background, and a bearing it holds will be missed. Killing test: a milestone whose §G,
   written from entries in the operational form, still misses a bearing that an entry in the memoir form would have supplied.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
@@ -1253,7 +1267,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   retraction is free, and in that window it should be spent rather than rationed**; once retraction is expensive the
   same speed produces escalation. **Front-load the disagreement into the window before anything is paid for**, and
   **count the retractions in it: zero is not agreement, it means the disagreement has not started yet and will
-  arrive later at full price.**
+  arrive later at full price.** *Do: at a wall, bring a second mind in while retraction is still free, and count the
+  retractions. Killing test: a phase whose disagreement cost more than the error it caught.*
 
 ## Whose work this is
 
