@@ -1,0 +1,29 @@
+{
+ "shell<=4 (the old k=4 ball)": {
+  "sampled": 37735,
+  "fraction": 0.02,
+  "mean_degree": 85.389,
+  "min": 84,
+  "max": 104,
+  "ge13": 1.0,
+  "ge14": 1.0,
+  "ge16": 1.0,
+  "ge18": 1.0
+ },
+ "shell 5": {
+  "sampled": 271962,
+  "fraction": 0.01,
+  "mean_degree": 14.641,
+  "min": 4,
+  "max": 50,
+  "ge13": 0.8096,
+  "ge14": 0.6589,
+  "ge16": 0.1914,
+  "ge18": 0.0899
+ },
+ "k5_mean_degree": 19.231,
+ "k5_edges_lower_bound": 279644187,
+ "k5_points": 29082973,
+ "unit_vectors_inside_k5": 132,
+ "note": "a lower bound: unit vectors of word-length >= 6 can still join two k=5 points; in the k=4 ball that residue was 1.97 % of the edges"
+}

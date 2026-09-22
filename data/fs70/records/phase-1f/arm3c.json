@@ -1,0 +1,53 @@
+{
+ "generators": 132,
+ "rows": [
+  {
+   "radius": 1,
+   "points": 133,
+   "shell": 132,
+   "boundary_share": 0.9925,
+   "degree_sampled_fraction": 1.0,
+   "mean_degree": 3.97,
+   "min": 3,
+   "max": 132,
+   "edges_lower_bound": 264,
+   "seconds": 1.9
+  },
+  {
+   "radius": 2,
+   "points": 8713,
+   "shell": 8580,
+   "boundary_share": 0.9847,
+   "degree_sampled_fraction": 1.0,
+   "mean_degree": 8.054,
+   "min": 3,
+   "max": 132,
+   "edges_lower_bound": 35088,
+   "seconds": 2.1
+  },
+  {
+   "radius": 3,
+   "points": 368977,
+   "shell": 360264,
+   "boundary_share": 0.9764,
+   "degree_sampled_fraction": 0.01,
+   "mean_degree": 12.535,
+   "min": 3,
+   "max": 132,
+   "edges_lower_bound": 2312483,
+   "seconds": 2.8
+  },
+  {
+   "radius": 4,
+   "points": 11091217,
+   "shell": 10722240,
+   "boundary_share": 0.9667,
+   "degree_sampled_fraction": 0.01,
+   "mean_degree": 18.722,
+   "min": 3,
+   "max": 132,
+   "edges_lower_bound": 103825459,
+   "seconds": 65.5
+  }
+ ]
+}

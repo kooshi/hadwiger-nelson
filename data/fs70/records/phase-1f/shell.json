@@ -1,0 +1,25 @@
+{
+ "shells_0_to_4": [
+  1,
+  84,
+  3444,
+  91860,
+  1791372
+ ],
+ "k4_ball": 1886761,
+ "unlabelled": 0,
+ "shell5_exact": 27196212,
+ "k5_ball": 29082973,
+ "shell4_generator_incidences_leaving_the_ball": 130013172,
+ "mean_parents_per_new_point": 4.781,
+ "unit_vectors_in_shell5": 48,
+ "origin_degree_k4": 84,
+ "origin_degree_k5": 132,
+ "unit_vectors_of_the_lattice": 324,
+ "k5_max_norm": 5.0,
+ "seconds": 157.0,
+ "sample_fraction": 0.1,
+ "sample_distinct_new": 10727637,
+ "sample_naive_estimate": 107276370,
+ "sample_naive_over_exact": 3.9445
+}

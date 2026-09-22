@@ -1,0 +1,98 @@
+[
+ {
+  "tag": "hex40-0",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex40-0",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "SAT",
+  "seconds": 18.66
+ },
+ {
+  "tag": "hex40-1",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex40-1",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "SAT",
+  "seconds": 44.59
+ },
+ {
+  "tag": "hex58-0",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex58-0",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "SAT",
+  "seconds": 176.03
+ },
+ {
+  "tag": "hex58-1",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex58-1",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "SAT",
+  "seconds": 4.98
+ },
+ {
+  "tag": "hex82-0",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex82-0",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "UNSAT",
+  "seconds": 8.34
+ },
+ {
+  "tag": "hex82-1",
+  "radius": 2,
+  "vertices": 3529,
+  "edges": 13692,
+  "verdict": "SAT",
+  "seconds": 0.01
+ },
+ {
+  "tag": "hex82-1",
+  "radius": 3,
+  "vertices": 95389,
+  "edges": 549744,
+  "verdict": "UNSAT",
+  "seconds": 2.12
+ }
+]

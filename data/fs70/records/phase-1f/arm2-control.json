@@ -1,0 +1,11 @@
+{
+ "group_order": 96,
+ "residual": 8,
+ "orbit_survivors": 1,
+ "unbroken": "SAT",
+ "broken": "SAT",
+ "plant_strict": "UNSAT",
+ "break_clauses": 307740,
+ "plant_clauses": 419648,
+ "seconds": 60.1
+}

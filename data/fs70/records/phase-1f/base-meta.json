@@ -1,0 +1,10 @@
+{
+ "body_path": "build/fs70/1f/base_body.cnf",
+ "body_clauses": 71302690,
+ "variables": 7547044,
+ "sha256_of_header_plus_body": "89eadac453b93924617724fa2ceec48646048ad26cc1947b7a3635f48299e9b8",
+ "reproduces_prior_attempts_cnf": true,
+ "want": "89eadac453b93924617724fa2ceec48646048ad26cc1947b7a3635f48299e9b8",
+ "bytes": 1399212670,
+ "seconds": 43.7
+}

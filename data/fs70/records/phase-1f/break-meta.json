@@ -1,0 +1,21 @@
+{
+ "maps_that_permute_the_ball": [
+  "conj",
+  "gal15",
+  "gal3",
+  "gal5",
+  "i",
+  "neg",
+  "zeta12",
+  "zeta6"
+ ],
+ "group_order": 96,
+ "residual_after_the_pin": 8,
+ "nontrivial_used": 7,
+ "prefix": 4096,
+ "break_clauses": 307740,
+ "break_aux_vars": 27977,
+ "variables_total": 7575021,
+ "path": "build/fs70/1f/break.cnf",
+ "max_image_index_in_prefix": 90038
+}

@@ -1,0 +1,615 @@
+{
+ "sampled": 120,
+ "counts": {
+  "UNSAT": 120
+ },
+ "survival_rate": 0.0,
+ "mean_seconds": 1.74,
+ "mean_seconds_unsat": 1.74,
+ "mean_seconds_sat": 0.0,
+ "radius3_vertices": 95389,
+ "radius3_edges": 549744,
+ "budget": 300,
+ "rows": [
+  {
+   "tag": "004",
+   "verdict": "UNSAT",
+   "seconds": 1.66
+  },
+  {
+   "tag": "003",
+   "verdict": "UNSAT",
+   "seconds": 1.75
+  },
+  {
+   "tag": "000",
+   "verdict": "UNSAT",
+   "seconds": 1.7
+  },
+  {
+   "tag": "002",
+   "verdict": "UNSAT",
+   "seconds": 1.71
+  },
+  {
+   "tag": "001",
+   "verdict": "UNSAT",
+   "seconds": 1.71
+  },
+  {
+   "tag": "005",
+   "verdict": "UNSAT",
+   "seconds": 1.83
+  },
+  {
+   "tag": "007",
+   "verdict": "UNSAT",
+   "seconds": 1.69
+  },
+  {
+   "tag": "006",
+   "verdict": "UNSAT",
+   "seconds": 1.77
+  },
+  {
+   "tag": "009",
+   "verdict": "UNSAT",
+   "seconds": 1.67
+  },
+  {
+   "tag": "008",
+   "verdict": "UNSAT",
+   "seconds": 1.79
+  },
+  {
+   "tag": "010",
+   "verdict": "UNSAT",
+   "seconds": 1.8
+  },
+  {
+   "tag": "011",
+   "verdict": "UNSAT",
+   "seconds": 1.84
+  },
+  {
+   "tag": "012",
+   "verdict": "UNSAT",
+   "seconds": 1.53
+  },
+  {
+   "tag": "015",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "013",
+   "verdict": "UNSAT",
+   "seconds": 1.74
+  },
+  {
+   "tag": "016",
+   "verdict": "UNSAT",
+   "seconds": 1.65
+  },
+  {
+   "tag": "014",
+   "verdict": "UNSAT",
+   "seconds": 2.0
+  },
+  {
+   "tag": "017",
+   "verdict": "UNSAT",
+   "seconds": 2.9
+  },
+  {
+   "tag": "019",
+   "verdict": "UNSAT",
+   "seconds": 1.51
+  },
+  {
+   "tag": "021",
+   "verdict": "UNSAT",
+   "seconds": 1.45
+  },
+  {
+   "tag": "020",
+   "verdict": "UNSAT",
+   "seconds": 1.5
+  },
+  {
+   "tag": "018",
+   "verdict": "UNSAT",
+   "seconds": 1.8
+  },
+  {
+   "tag": "022",
+   "verdict": "UNSAT",
+   "seconds": 1.53
+  },
+  {
+   "tag": "023",
+   "verdict": "UNSAT",
+   "seconds": 1.52
+  },
+  {
+   "tag": "024",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "025",
+   "verdict": "UNSAT",
+   "seconds": 1.58
+  },
+  {
+   "tag": "027",
+   "verdict": "UNSAT",
+   "seconds": 1.65
+  },
+  {
+   "tag": "028",
+   "verdict": "UNSAT",
+   "seconds": 1.54
+  },
+  {
+   "tag": "026",
+   "verdict": "UNSAT",
+   "seconds": 2.15
+  },
+  {
+   "tag": "029",
+   "verdict": "UNSAT",
+   "seconds": 1.75
+  },
+  {
+   "tag": "030",
+   "verdict": "UNSAT",
+   "seconds": 1.79
+  },
+  {
+   "tag": "032",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "031",
+   "verdict": "UNSAT",
+   "seconds": 1.71
+  },
+  {
+   "tag": "033",
+   "verdict": "UNSAT",
+   "seconds": 1.58
+  },
+  {
+   "tag": "034",
+   "verdict": "UNSAT",
+   "seconds": 1.91
+  },
+  {
+   "tag": "038",
+   "verdict": "UNSAT",
+   "seconds": 1.48
+  },
+  {
+   "tag": "036",
+   "verdict": "UNSAT",
+   "seconds": 1.59
+  },
+  {
+   "tag": "037",
+   "verdict": "UNSAT",
+   "seconds": 1.64
+  },
+  {
+   "tag": "039",
+   "verdict": "UNSAT",
+   "seconds": 1.68
+  },
+  {
+   "tag": "040",
+   "verdict": "UNSAT",
+   "seconds": 1.58
+  },
+  {
+   "tag": "041",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "042",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "043",
+   "verdict": "UNSAT",
+   "seconds": 1.78
+  },
+  {
+   "tag": "044",
+   "verdict": "UNSAT",
+   "seconds": 1.83
+  },
+  {
+   "tag": "045",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "035",
+   "verdict": "UNSAT",
+   "seconds": 4.95
+  },
+  {
+   "tag": "046",
+   "verdict": "UNSAT",
+   "seconds": 1.63
+  },
+  {
+   "tag": "047",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "048",
+   "verdict": "UNSAT",
+   "seconds": 1.76
+  },
+  {
+   "tag": "049",
+   "verdict": "UNSAT",
+   "seconds": 1.75
+  },
+  {
+   "tag": "050",
+   "verdict": "UNSAT",
+   "seconds": 1.61
+  },
+  {
+   "tag": "053",
+   "verdict": "UNSAT",
+   "seconds": 1.6
+  },
+  {
+   "tag": "052",
+   "verdict": "UNSAT",
+   "seconds": 1.72
+  },
+  {
+   "tag": "051",
+   "verdict": "UNSAT",
+   "seconds": 1.88
+  },
+  {
+   "tag": "054",
+   "verdict": "UNSAT",
+   "seconds": 1.7
+  },
+  {
+   "tag": "055",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "056",
+   "verdict": "UNSAT",
+   "seconds": 1.6
+  },
+  {
+   "tag": "057",
+   "verdict": "UNSAT",
+   "seconds": 1.96
+  },
+  {
+   "tag": "059",
+   "verdict": "UNSAT",
+   "seconds": 1.79
+  },
+  {
+   "tag": "058",
+   "verdict": "UNSAT",
+   "seconds": 1.89
+  },
+  {
+   "tag": "061",
+   "verdict": "UNSAT",
+   "seconds": 1.64
+  },
+  {
+   "tag": "062",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "060",
+   "verdict": "UNSAT",
+   "seconds": 2.03
+  },
+  {
+   "tag": "065",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "063",
+   "verdict": "UNSAT",
+   "seconds": 1.64
+  },
+  {
+   "tag": "064",
+   "verdict": "UNSAT",
+   "seconds": 1.79
+  },
+  {
+   "tag": "066",
+   "verdict": "UNSAT",
+   "seconds": 1.53
+  },
+  {
+   "tag": "067",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "068",
+   "verdict": "UNSAT",
+   "seconds": 1.54
+  },
+  {
+   "tag": "070",
+   "verdict": "UNSAT",
+   "seconds": 1.62
+  },
+  {
+   "tag": "072",
+   "verdict": "UNSAT",
+   "seconds": 1.54
+  },
+  {
+   "tag": "071",
+   "verdict": "UNSAT",
+   "seconds": 1.65
+  },
+  {
+   "tag": "069",
+   "verdict": "UNSAT",
+   "seconds": 1.83
+  },
+  {
+   "tag": "073",
+   "verdict": "UNSAT",
+   "seconds": 1.59
+  },
+  {
+   "tag": "074",
+   "verdict": "UNSAT",
+   "seconds": 1.52
+  },
+  {
+   "tag": "075",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "077",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "076",
+   "verdict": "UNSAT",
+   "seconds": 1.64
+  },
+  {
+   "tag": "078",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "080",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "079",
+   "verdict": "UNSAT",
+   "seconds": 1.73
+  },
+  {
+   "tag": "081",
+   "verdict": "UNSAT",
+   "seconds": 1.55
+  },
+  {
+   "tag": "082",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "083",
+   "verdict": "UNSAT",
+   "seconds": 1.63
+  },
+  {
+   "tag": "084",
+   "verdict": "UNSAT",
+   "seconds": 1.62
+  },
+  {
+   "tag": "085",
+   "verdict": "UNSAT",
+   "seconds": 1.58
+  },
+  {
+   "tag": "086",
+   "verdict": "UNSAT",
+   "seconds": 2.64
+  },
+  {
+   "tag": "087",
+   "verdict": "UNSAT",
+   "seconds": 1.61
+  },
+  {
+   "tag": "088",
+   "verdict": "UNSAT",
+   "seconds": 1.62
+  },
+  {
+   "tag": "090",
+   "verdict": "UNSAT",
+   "seconds": 1.62
+  },
+  {
+   "tag": "091",
+   "verdict": "UNSAT",
+   "seconds": 1.81
+  },
+  {
+   "tag": "089",
+   "verdict": "UNSAT",
+   "seconds": 2.28
+  },
+  {
+   "tag": "092",
+   "verdict": "UNSAT",
+   "seconds": 1.59
+  },
+  {
+   "tag": "093",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "094",
+   "verdict": "UNSAT",
+   "seconds": 1.63
+  },
+  {
+   "tag": "095",
+   "verdict": "UNSAT",
+   "seconds": 1.65
+  },
+  {
+   "tag": "096",
+   "verdict": "UNSAT",
+   "seconds": 1.72
+  },
+  {
+   "tag": "097",
+   "verdict": "UNSAT",
+   "seconds": 1.73
+  },
+  {
+   "tag": "099",
+   "verdict": "UNSAT",
+   "seconds": 1.6
+  },
+  {
+   "tag": "098",
+   "verdict": "UNSAT",
+   "seconds": 1.74
+  },
+  {
+   "tag": "100",
+   "verdict": "UNSAT",
+   "seconds": 1.71
+  },
+  {
+   "tag": "101",
+   "verdict": "UNSAT",
+   "seconds": 1.75
+  },
+  {
+   "tag": "102",
+   "verdict": "UNSAT",
+   "seconds": 1.62
+  },
+  {
+   "tag": "103",
+   "verdict": "UNSAT",
+   "seconds": 1.56
+  },
+  {
+   "tag": "105",
+   "verdict": "UNSAT",
+   "seconds": 1.64
+  },
+  {
+   "tag": "104",
+   "verdict": "UNSAT",
+   "seconds": 1.68
+  },
+  {
+   "tag": "107",
+   "verdict": "UNSAT",
+   "seconds": 1.61
+  },
+  {
+   "tag": "106",
+   "verdict": "UNSAT",
+   "seconds": 1.76
+  },
+  {
+   "tag": "109",
+   "verdict": "UNSAT",
+   "seconds": 1.73
+  },
+  {
+   "tag": "111",
+   "verdict": "UNSAT",
+   "seconds": 1.52
+  },
+  {
+   "tag": "108",
+   "verdict": "UNSAT",
+   "seconds": 2.53
+  },
+  {
+   "tag": "110",
+   "verdict": "UNSAT",
+   "seconds": 1.85
+  },
+  {
+   "tag": "113",
+   "verdict": "UNSAT",
+   "seconds": 1.57
+  },
+  {
+   "tag": "112",
+   "verdict": "UNSAT",
+   "seconds": 1.61
+  },
+  {
+   "tag": "114",
+   "verdict": "UNSAT",
+   "seconds": 1.52
+  },
+  {
+   "tag": "116",
+   "verdict": "UNSAT",
+   "seconds": 1.7
+  },
+  {
+   "tag": "117",
+   "verdict": "UNSAT",
+   "seconds": 1.49
+  },
+  {
+   "tag": "119",
+   "verdict": "UNSAT",
+   "seconds": 1.49
+  },
+  {
+   "tag": "118",
+   "verdict": "UNSAT",
+   "seconds": 1.89
+  },
+  {
+   "tag": "115",
+   "verdict": "UNSAT",
+   "seconds": 4.12
+  }
+ ]
+}

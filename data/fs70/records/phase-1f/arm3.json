@@ -1,0 +1,90 @@
+{
+ "k4_degree_by_shell": {
+  "0": {
+   "points": 1,
+   "mean_degree": 84.0,
+   "min": 84,
+   "max": 84
+  },
+  "1": {
+   "points": 84,
+   "mean_degree": 86.857,
+   "min": 84,
+   "max": 88
+  },
+  "2": {
+   "points": 3444,
+   "mean_degree": 85.129,
+   "min": 84,
+   "max": 92
+  },
+  "3": {
+   "points": 91860,
+   "mean_degree": 84.682,
+   "min": 84,
+   "max": 92
+  },
+  "4": {
+   "points": 1791372,
+   "mean_degree": 11.705,
+   "min": 3,
+   "max": 34
+  }
+ },
+ "k4_core_profile": {
+  "6": {
+   "points": 1886425
+  },
+  "10": {
+   "points": 1395289
+  },
+  "12": {
+   "points": 1374661
+  },
+  "13": {
+   "points": 0
+  },
+  "14": {
+   "points": 0
+  },
+  "16": {
+   "points": 0
+  }
+ },
+ "k5": {
+  "points": 29082973,
+  "shell5": 27196212,
+  "shell4_incidences_into_shell5": 130013172,
+  "shell5_internal_incidences_sampled_at": 0.05,
+  "shell5_internal_incidences": 254530680,
+  "generator_edges": 271515888,
+  "mean_generator_degree": 18.672,
+  "k4_generator_edges": 14237376,
+  "k4_mean_generator_degree": 15.092,
+  "k4_mean_degree_all_edges": 15.396,
+  "non_generator_edge_share_k4": 0.01972
+ },
+ "k4_max_core_number": 12,
+ "k4_core_number_by_shell": {
+  "0": {
+   "mean": 12.0,
+   "max": 12
+  },
+  "1": {
+   "mean": 12.0,
+   "max": 12
+  },
+  "2": {
+   "mean": 11.899,
+   "max": 12
+  },
+  "3": {
+   "mean": 11.62,
+   "max": 12
+  },
+  "4": {
+   "mean": 11.129,
+   "max": 12
+  }
+ }
+}

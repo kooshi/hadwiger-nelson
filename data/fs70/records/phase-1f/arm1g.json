@@ -1,0 +1,14 @@
+{
+ "survivors_found": 269,
+ "seconds": 666.6,
+ "rate_per_second": 0.4,
+ "marks": [
+  [
+   200,
+   389.0
+  ]
+ ],
+ "radius3_vertices": 95389,
+ "shell_vertices": 82,
+ "note": "one-sided: many survivors kills the two-stage route; few measures the solver as much as the set"
+}
