@@ -15,8 +15,12 @@
 ## 2. What phase 1b adds to the null
 
 * **Rank 6 is the lever on density:** the rank-8 lattices' 14-cores are empty; L6's 14-core exists at degree 18.98 on 16 % of
-  the points, and **the solve time falls as the density rises** (8.2 s at degree 14.1; 1.2 s at 19.0 on twice the vertices) —
-  G65's colourable regime, far from any threshold.
+  the points. The solve time falls as the density rises (8.2 s at degree 14.1; 1.2 s at 19.0 on twice the vertices) — **which is
+  G65's phase diagram and nothing more** (Kooshi's correction, 2026-09-22): past the hardness peak a ball decides in seconds
+  *whichever way it decides* (FS-61's refusing balls at degree 14–18 refused in seconds too), so the speed says nothing about
+  which side of the threshold the fabric is on; only the verdict does. The first draft of this note read the speed as "far from
+  any threshold in the colourable direction", and the phase-1b record says the same — both over-read it. The honest sentence:
+  the asks were stepped up in degree into the regime where the diagram says a refusal would show itself quickly, and none did.
 * **One fact does all the killing on L6 and all the freeing:** `½ ∈ Λ` (the 2-adic wall broken inside the lattice) removes every
   additive colouring, every Kempe swap and every `2Λ`/`4Λ`-periodic rule at once, which is exactly why only a solver can speak
   there — and the solver colours everything.
