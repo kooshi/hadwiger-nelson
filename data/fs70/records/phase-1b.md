@@ -271,10 +271,10 @@ log `build/fs70/price-cubes.log`), which is why it is priced and not launched:
   or a tight neighbourhood** instead of on the degree ranking, where the graph's own edges cut the tree hard.
   Phase 0's control got 1,458 cubes from 7 branch vertices on a 740-point graph precisely because that graph's
   top-degree vertices *were* adjacent.
-* **One worker costs over 12 GB** and was still ingesting when this was written (the exact peak and the ingest
-  time land in the log). The engine above four million clauses is in-process CaDiCaL, one per worker, each
-  holding the whole 71.3 M-clause formula: **22 workers is upward of 220 GB on a 125 GB machine, and 8 is
-  already near the edge.**
+* **One worker peaks at 14.0 GB** (5.9 GB of it the Python side, 54 s of clause ingest). The engine above four
+  million clauses is in-process CaDiCaL, one per worker, each holding the whole 71.3 M-clause formula:
+  **22 workers is ≈ 308 GB on a 125 GB machine; 8 is ≈ 112 GB and still over the safe line.** Four would fit —
+  and four workers against 65,536 unbudgeted cubes is not a pass, it is a wall.
 * **And there is no per-cube budget on this engine** — PySAT's CaDiCaL supports neither `incr=True` nor
   `solve_limited` (phase 1 §3), so one bad cube runs unbounded.
 
