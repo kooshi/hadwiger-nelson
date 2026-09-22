@@ -22,7 +22,7 @@ Six results, in the order they bear on the milestone:
    theory predicts, and **UNSAT in 2.7 s** on Harder's own object over `K = ℚ(√3,√11)` (23,083 vertices), with
    matching SAT negative controls beside each.
 
-2. **A single instrument closes `Forces` on Λ′, on L6 and on L1, by theorem** (§5). For a lattice `Λ` and an `N`
+2. **A single instrument closes `Forces` on Λ′, on L6, on L2 and on L1, by theorem** (§5). For a lattice `Λ` and an `N`
    with no unit vector in `NΛ`, a proper four-colouring of `Cay(Λ/NΛ, U mod N)` **that has a fan gap anywhere**
    makes the quotient Slack (`slack_addCayley_of_fanGap`), and `Slack.forces_iff_of_hom` then gives, for **every**
    unit-distance graph `G` drawn in `Λ`,
@@ -30,8 +30,9 @@ Six results, in the order they bear on the milestone:
    > `Forces G 4 u v ↔ u = v` — at every distance, at every radius.
 
    Found at `N = 5` on the owner's Λ′ (597 of 625 classes gapped), at `N = 5` on **L6** — the lattice phase 1b
-   spent its whole budget on — and at `N = 5, 7` on **L1**, the 2-unit Harder transposition. Row 56 gives the
-   colouring; row 66 gives the closure; both are kernel theorems already in the repository.
+   spent its whole budget on — at `N = 5` on **L2**, and at `N = 5, 7` on **L1**, the 2-unit Harder transposition.
+   Row 56 gives the colouring; row 66 gives the closure; both are kernel theorems already in the repository.
+   **L3 was still running at handback** (§11); it is the last of the plan's lattices unscreened.
 
 3. **The instrument passes a falsification control that could have refuted it** (§5.3). On **de Grey's K-lattice**,
    where Harder's forced pair at `8/3` is in print, the screen finds quotient four-colourings at `N = 2, 4, 6, 8,
@@ -59,7 +60,7 @@ Six results, in the order they bear on the milestone:
    contradiction and exact agreement**, which is the outcome that would have been hardest to fake.
 
 **What this does to the milestone.** The route FS-70 was opened on — land a four-colour forced pair on
-ℚ(√3,√5) fabric, then close it with G55's chain — is **dead on Λ′, L6 and L1 by theorem**, not by a budget. It is
+ℚ(√3,√5) fabric, then close it with G55's chain — is **dead on Λ′, L6, L2 and L1 by theorem**, not by a budget. It is
 not dead on the rich 2-unit lattices, which are Kempe-rigid exactly where the tower forces and have never been
 asked; those are phase 1e's fabric, and §8 says what to ask of them.
 
@@ -257,6 +258,8 @@ pair's difference and does **not** follow.
 | **L6** = `group6:u3:2+zeta6:rho15` | 6 | 54 | broken | 5 | 15,625 | 421,875 | **SAT** | **1,250** | 1,249 of 15,570 | **YES** |
 | L6 | 6 | 54 | broken | 7 | 117,649 | 2,117,682 | UNSAT (63.9 s) | — | — | — |
 | L6 | 6 | 54 | broken | 8 | 262,144 | 4,718,592 | SAT (5.2 s) | **0** | 0 | no (this `N` alone) |
+| **L2** = `group6:u3:2+zeta6:v4` | 6 | 42 | broken | 5 | 15,625 | — | **SAT** | **1,867** | — | **YES** |
+| L2 | 6 | 42 | broken | 4 | 4,096 | — | SAT | 0 | — | no (this `N`) |
 | **L1** = `group6:u3:2` (Harder transposed) | 4 | 30 | standing (2-unit) | 5 | 625 | 9,375 | **SAT** | **50** | 0 of 594 | **YES** |
 | L1 | 4 | 30 | standing | 7 | 2,401 | 21,609 | **SAT** | **193** | 0 of 2,382 | **YES** |
 | L1 | 4 | 30 | standing | 2, 4, 6 | — | — | SAT | 0 | 0 | no (those `N`) |

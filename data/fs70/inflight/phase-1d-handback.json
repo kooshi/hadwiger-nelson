@@ -1,0 +1,6 @@
+{"what": "two FS-70 phase-1d runs still going at handback, neither load-bearing: (a) the Lambda-prime quotient sweep continuing to N = 30 (pid 503841, log build/fs70/1d/lp-quotient.log) -- it already gave the decisive SAT at N = 5 and N = 10, the rest is extra rows; (b) the quotient+fan-gap sweep on L3 = group6:u3:2+zeta6:w4 (pgid 516342, output only to the terminal) -- N = 5 is the row that matters and it has not reached it yet",
+ "ledger": "data/fs70/quotient/*.json",
+ "safe_to_kill": true,
+ "how": "kill -- -503841 and kill -- -516342, then verify by effect: no process of that name in ps, and the JSON files static for ten seconds",
+ "a_kill_redoes": "nothing that phase 1d's record rests on; re-run with the commands in data/fs70/records/phase-1d.md section 11",
+ "owner_note": "L1, L2, L6 and Lambda-prime are all already closed by the fan-gap theorem; L3 is the last of the plan's lattices unscreened"}
