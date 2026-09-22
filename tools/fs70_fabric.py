@@ -34,9 +34,10 @@ Commands
   python3 tools/fs70_fabric.py screen SPEC... [--out F]   # the same, one jsonl row per lattice
   python3 tools/fs70_fabric.py survivors SPEC [--target D] # the additive colourings that kill a target, described
   python3 tools/fs70_fabric.py word SPEC k [--out DIR] [--target D] [--core m]
+  python3 tools/fs70_fabric.py wordunion SPEC k --target D [--out DIR] [--core m]   # the balls about 0 AND D
   python3 tools/fs70_fabric.py tn SPEC n [--out DIR] [--target D] [--core m]
   python3 tools/fs70_fabric.py ball SPEC R [--out DIR] [--core m]
-options: --sat-method a|b|both (default b), --plant NAME
+options: --sat-method a|b|both (default b), --plant NAME, --no-cnf (graph.json alone; fs70_ask.py builds the CNF)
 
 Generator grammar (SPEC): family names joined by '+' -- zeta12, u3, v4, w4, rho15, q5, s5, q7, s7, d6 (each the
 zeta12-and-conjugation orbit of the named vector) -- and group:u3:k for Harder's S_k = {zeta12^m u^n, |n| <= k}.
@@ -637,12 +638,19 @@ SCREEN_TARGETS = {'i sqrt3': I_SQRT3, '2': real_scalar(2), '4/3': real_scalar(Fr
 
 # ---------------------------------------------------------------- shapes (integer arithmetic throughout)
 
-def word_ball(lat, k, steps=None):
-    """every point that is a sum of at most k generators (Harder's shape, plan section 3.3)"""
+def word_ball(lat, k, steps=None, centres=None):
+    """every point that is a sum of at most k generators (Harder's shape, plan section 3.3).
+
+    `centres` (phase 1): a list of 8-tuples to grow the ball about instead of the origin alone; the result is the
+    UNION of the balls, and the value at a point is its distance to the nearest centre.  The union of the balls
+    about `0` and about a target `B` CONTAINS the lens T_{2k+1}(0 -> B) (a lens point has word-distance <= k to one
+    of the two ends, since the two distances sum to at most 2k+1), so it is the affordable SUPERSET of a lens
+    whose own construction would need a ball of radius 2k+1 -- and a refusal on a superset is a refusal."""
     S = [lat.vec8(z) for z in (lat.S if steps is None else steps)]
     zero = tuple([0] * 8)
-    seen = {zero: 0}
-    frontier = [zero]
+    starts = [zero] if centres is None else [tuple(c) for c in centres]
+    seen = {c: 0 for c in starts}
+    frontier = list(seen)
     for d in range(1, k + 1):
         nxt = []
         for p in frontier:
@@ -656,24 +664,33 @@ def word_ball(lat, k, steps=None):
 
 
 def lens(lat, A8, B8, n, steps=None):
-    """Haugland's T_n: every point on a unit-vector path from A to B of graph length <= n"""
-    S = [lat.vec8(z) for z in (lat.S if steps is None else steps)]
+    """Haugland's T_n: every point on a unit-vector path from A to B of graph length <= n.
 
-    def bfs(start):
-        dist = {start: 0}
-        frontier = [start]
-        for d in range(1, n + 1):
-            nxt = []
-            for p in frontier:
-                for s in S:
-                    q = tuple(a + b for a, b in zip(p, s))
-                    if q not in dist:
-                        dist[q] = d
-                        nxt.append(q)
-            frontier = nxt
-        return dist
-    dA, dB = bfs(A8), bfs(B8)
-    return {p: d for p, d in dA.items() if p in dB and d + dB[p] <= n}
+    ONE breadth-first search, not two (phase 1): the generator set is symmetric (-S = S, since every family is a
+    zeta12-orbit), so word distance is translation-invariant and d_B(p) = d(p - B) with d the distance from the
+    origin.  A lens point has d(p) <= n and d(p - B) <= n, so a single ball of radius n about the origin carries
+    both numbers -- half the memory and half the time of the two-search form, and the same set (asserted in the
+    self-test against the old form)."""
+    S = [lat.vec8(z) for z in (lat.S if steps is None else steps)]
+    shift = tuple(b - a for a, b in zip(A8, B8))
+    dist = {tuple([0] * 8): 0}
+    frontier = [tuple([0] * 8)]
+    for d in range(1, n + 1):
+        nxt = []
+        for p in frontier:
+            for s in S:
+                q = tuple(a + b for a, b in zip(p, s))
+                if q not in dist:
+                    dist[q] = d
+                    nxt.append(q)
+        frontier = nxt
+    out = {}
+    for p, a in dist.items():
+        q = tuple(x - y for x, y in zip(p, shift))
+        b = dist.get(q)
+        if b is not None and a + b <= n:
+            out[tuple(x + y for x, y in zip(p, A8))] = a
+    return out
 
 
 def minkowski_ball(lat, R):
@@ -880,7 +897,10 @@ def write_cnf(path, nvars, clauses):
 
 # ---------------------------------------------------------------- writing a shape
 
-def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=None):
+def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=None, cnfs_too=True):
+    """`cnfs_too=False` (phase 1's `--no-cnf`) writes graph.json alone.  The CNF of a pin is O(edges) on disk --
+    about 400 MB per pin at half a million points -- and `fs70_ask.py` builds the one CNF it needs from
+    graph.json; writing ten of them per shape is minutes of I/O and gigabytes for nothing."""
     os.makedirs(out, exist_ok=True)
     N = len(keys)
     deg = 2 * len(edges) / N if N else 0
@@ -890,9 +910,17 @@ def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=No
     meta.update(extra)
     pt_sha = hashlib.sha256(json.dumps(sorted(keys), separators=(',', ':')).encode()).hexdigest()
     meta['points_sha256'] = pt_sha
+    cnfs = {}
+    if not cnfs_too:
+        meta['cnf_sha'] = {}
+        with open(os.path.join(out, 'graph.json'), 'w') as f:
+            json.dump({'meta': meta, 'M': lat.M, 'points': [list(k) for k in keys],
+                       'edges': [list(e) for e in edges]}, f)
+        print(f'  wrote {out}: {N} points, {len(edges)} edges, avg degree {deg:.2f}'
+              + (' [PARTIAL graph]' if partial else '') + '  [no CNFs: fs70_ask.py builds the one it needs]')
+        return meta
     with open(os.path.join(out, 'graph.json'), 'w') as f:
         json.dump({'meta': meta, 'M': lat.M, 'points': [list(k) for k in keys], 'edges': [list(e) for e in edges]}, f)
-    cnfs = {}
     # control: a unit triangle pinned where one exists (0, 1, zeta6), else the origin and one neighbour
     i0 = index.get(tuple([0] * 8))
     pins = []
@@ -1074,13 +1102,20 @@ def cmd_survivors(spec, method, target='isqrt3'):
     return orbits
 
 
-def cmd_word(spec, k, out, target, core, method, steps_spec=None):
+def cmd_word(spec, k, out, target, core, method, steps_spec=None, union=False, cnfs_too=True):
     lat = Lattice(generators(spec), spec)
     lat.saturate('b' if method == 'auto' else method)
     t0 = time.time()
-    pts = word_ball(lat, k)
+    centres = None
+    if union:
+        tz = target_element(target)
+        if lat.coords(tz) is None:
+            raise SystemExit(f'the target {target} is not in the lattice {spec}: no union ball can reach it')
+        centres = [tuple([0] * 8), lat.vec8(tz)]
+    pts = word_ball(lat, k, centres=centres)
     keys, edges = unit_graph(pts, lat)
-    print(f'word ball k = {k} over {spec}: |S| = {len(lat.S)}, g = {len(lat.units)}, '
+    print(f'word {"union " if union else ""}ball k = {k} over {spec}'
+          f'{f" (centres 0 and {target})" if union else ""}: |S| = {len(lat.S)}, g = {len(lat.units)}, '
           f'{len(keys)} points, {len(edges)} edges, avg degree {2*len(edges)/max(1,len(keys)):.2f} '
           f'({time.time()-t0:.1f}s)')
     if core:
@@ -1089,11 +1124,14 @@ def cmd_word(spec, k, out, target, core, method, steps_spec=None):
         print(f'  {core}-core: {len(keys)} points, {len(edges)} edges, '
               f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
     if out:
-        write_shape(out, lat, keys, edges, {'shape': 'word', 'k': k}, {'core': core})
+        shape = {'shape': 'wordunion' if union else 'word', 'k': k}
+        if union:
+            shape['target'] = target
+        write_shape(out, lat, keys, edges, shape, {'core': core}, cnfs_too=cnfs_too)
     return lat, keys, edges
 
 
-def cmd_tn(spec, n, out, target, core, method):
+def cmd_tn(spec, n, out, target, core, method, cnfs_too=True):
     lat = Lattice(generators(spec), spec)
     lat.saturate('b' if method == 'auto' else method)
     A = tuple([0] * 8)
@@ -1114,11 +1152,12 @@ def cmd_tn(spec, n, out, target, core, method):
         print(f'  {core}-core: {len(keys)} points, {len(edges)} edges, '
               f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
     if out:
-        write_shape(out, lat, keys, edges, {'shape': 'lens', 'n': n, 'target': target}, {'core': core})
+        write_shape(out, lat, keys, edges, {'shape': 'lens', 'n': n, 'target': target}, {'core': core},
+                    cnfs_too=cnfs_too)
     return lat, keys, edges
 
 
-def cmd_ball(spec, R, out, core, method):
+def cmd_ball(spec, R, out, core, method, cnfs_too=True):
     lat = Lattice(generators(spec), spec)
     lat.saturate('b' if method == 'auto' else method)
     pp, pd = ball_prediction(lat, R)
@@ -1135,7 +1174,8 @@ def cmd_ball(spec, R, out, core, method):
               f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
     if out:
         write_shape(out, lat, keys, edges, {'shape': 'ball', 'R': R},
-                    {'core': core, 'predicted_points': round(pp), 'predicted_degree': round(pd, 3)})
+                    {'core': core, 'predicted_points': round(pp), 'predicted_degree': round(pd, 3)},
+                    cnfs_too=cnfs_too)
     return lat, keys, edges
 
 
@@ -1272,6 +1312,39 @@ def selftest():
     assert keys_g == keys and edges_g == edges, (len(edges_g), len(edges))
     assert set(dirs_g) <= {lat.vec8(z) for z in lat.units}, 'an edge direction outside the saturation'
 
+    # --- phase 1: the one-search lens must give exactly the two-search lens's set (the old form, kept here as
+    # the control on the rewrite), and the union ball must contain the lens it is the affordable superset of
+    def lens_two_search(lt, A8, B8, nn):
+        SS = [lt.vec8(z) for z in lt.S]
+
+        def bfs(start):
+            dd = {start: 0}
+            fr = [start]
+            for d in range(1, nn + 1):
+                nx = []
+                for p in fr:
+                    for s in SS:
+                        q = tuple(a + b for a, b in zip(p, s))
+                        if q not in dd:
+                            dd[q] = d
+                            nx.append(q)
+                fr = nx
+            return dd
+        dA, dB = bfs(A8), bfs(B8)
+        return {p: d for p, d in dA.items() if p in dB and d + dB[p] <= nn}
+    A8 = tuple([0] * 8)
+    B8 = lat.vec8(target_element('4/3'))
+    for nn in (2, 3, 4):
+        one, two = lens(lat, A8, B8, nn), lens_two_search(lat, A8, B8, nn)
+        assert one == two, f'the one-search lens differs from the two-search lens at n = {nn}: ' \
+                           f'{len(one)} against {len(two)} points'
+    # T_{2k+1} is inside the union of the two balls of radius k (the superset claim the union shape rests on)
+    for kk in (1, 2):
+        uni = word_ball(lat, kk, centres=[A8, B8])
+        big = lens(lat, A8, B8, 2 * kk + 1)
+        assert set(big) <= set(uni), (f'the union of the two radius-{kk} balls misses {len(set(big) - set(uni))} '
+                                      f'points of the lens T_{2*kk+1}: the superset claim is false')
+
     # --- the LINEAR precedence break must not change any verdict (its own positive control): on three small
     # instances the broken and unbroken encodings must agree, and the broken one must still admit a model.
     import tempfile
@@ -1353,10 +1426,12 @@ if __name__ == '__main__':
     elif argv[0] == 'survivors':
         cmd_survivors(argv[1], method, target)
     elif argv[0] == 'word':
-        cmd_word(argv[1], int(argv[2]), out, target, core, method)
+        cmd_word(argv[1], int(argv[2]), out, target, core, method, cnfs_too='--no-cnf' not in argv)
+    elif argv[0] == 'wordunion':
+        cmd_word(argv[1], int(argv[2]), out, target, core, method, union=True, cnfs_too='--no-cnf' not in argv)
     elif argv[0] == 'tn':
-        cmd_tn(argv[1], int(argv[2]), out, target, core, method)
+        cmd_tn(argv[1], int(argv[2]), out, target, core, method, cnfs_too='--no-cnf' not in argv)
     elif argv[0] == 'ball':
-        cmd_ball(argv[1], float(argv[2]), out, core, method)
+        cmd_ball(argv[1], float(argv[2]), out, core, method, cnfs_too='--no-cnf' not in argv)
     else:
         raise SystemExit(f'unknown command {argv[0]!r}; see --help / no arguments for the grammar')
