@@ -8,7 +8,39 @@ physical cores / 32 threads, 125 GB). Every number names the command that produc
 
 ## 1. Headline
 
-**(filled at the close)**
+**No refusal. The null is typed, and most of it is a theorem rather than a budget.**
+
+1. **A correction had to be made before any ask.** The brief describes the `eq` pin as the *contracted* encoding;
+   that is `sep`'s encoding, and following it would have inverted every verdict in the phase (§2). The plan, the
+   fabric tool's own CNF names and the mathematics all agree the other way, and `fs70_ask.py` now prints
+   *"UNSAT would mean: …"* before every ask and writes the conclusion into the row.
+2. **The 2-unit route is dead at every radius, by derivation.** A **Kempe swap** of an additive four-colouring is
+   still proper but is no longer additive, so it sees past the additive screen; and the Kempe component of the
+   origin is a **sublattice**, so membership of a target in it is an exact finite computation. Five lattices —
+   including **L1, the plan's own P2 bet** (Harder's fabric transposed) and **L1′, which carries the field's
+   cheapest closer `δ = 4/7` at chain 2** — have **every chainable target killed at every radius, by no finite
+   subgraph, ever** (§4). The whole screen reduces to one rank: the escape lives only at the colour class
+   `{0, 2}`, and exists exactly when a lattice's unit vectors of `φ`-value 2 fail to span it (§4.2a).
+3. **What the screen leaves alive, the solver colours at every affordable size.** L2 and L3 (no additive
+   colouring at all), L4a and L5 (additive but Kempe-rigid): **14 asks**, all SAT, each model read back and
+   verified proper on every edge of the fabric and on the pin (§5). The slowest was 17.7 s.
+4. **The null is typed by the structure instruments** (§5.2–5.3). L4a and L5 carry **periodic four-colouring
+   rules** — `2Λ`- and `4Λ`-periodic colourings, lifted and verified on every edge — which is a theorem-shaped
+   null in the plan's own words. L2 and L3 carry **no periodic rule at `2Λ`, `3Λ` or `4Λ`**, and the colouring
+   L2's control produced is a function of no residue at any prime ≤ 7 and has no period (best agreement 0.874 of
+   247 candidates). And the periodic and additive instruments are **structurally blind** on exactly these
+   targets: a chainable `δ` is chainable because `1/δ` is a short sum of unit vectors, which puts `δ` deep inside
+   `4Λ`, where every function of `Λ/4Λ` is silent. The Kempe swap is the first instrument that is not one.
+5. **The shape ceiling over a biquadratic field was reached and measured.** G65 says step up in degree; here the
+   step has an end. The k=4 word ball gives average degree **15.4–15.8 at ~1.86 M points**, there is **no denser
+   subgraph inside it** (L5's 14-core is empty; the 12-core is 1,377,541 points at degree 16.08), and a
+   Minkowski ball is unaffordable at any useful degree — with covolumes of 2·10⁻⁸ to 2·10⁻⁵ and **four** real
+   embeddings, degree 12 costs 10⁵–10¹⁰ million points. FS-61's `R⁴` is this field's `R⁸`.
+
+**So the conjecture's prediction at ℚ(√3,√5) stays unmet, and the reason is now specific rather than general:**
+it is not that the field resists, it is that the fabric this milestone was designed around — 2-unit fabric, the
+transposition of Harder's recipe — provably cannot carry the pair, and the fabric that is not ruled out costs
+`R⁸` to make dense.
 
 ---
 
@@ -199,6 +231,22 @@ the cheapest closer the field has, two copies, one ρ₁₅ spindle — took **1
 for the control on the same fabric. That is a fact about one kissat run, not about the graph; it is here because
 `4/7` is the target most worth a bigger shape if one is ever affordable.
 
+### 5.1a Stepping up in degree: the k=4 word balls, and two of them answered with no solver at all
+
+| lattice | shape | points / edges / degree | control | how |
+|---|---|---|---|---|
+| **L5** `group:u3:2+d6` | word k=4 | **1,864,417 / 14,424,204 / 15.47** | **SAT** | by **exhibition**: an additive colouring of the lattice, verified proper on **all 14,424,204 edges** |
+| **L4a** `zeta12+u3+q7+s7` | word k=4 | **1,845,193 / 14,586,696 / 15.81** | **SAT** | by exhibition, proper on **all 14,586,696 edges** |
+| **L3** `group:u3:2+w4` | word k=4 | 1,886,761 / 14,523,840 / 15.40 | — | **no additive colouring exists**, so the control is a genuine question and must go to a solver |
+| **L2** `group:u3:2+v4` | word k=4 | (built; 84 generators, `g = 540`) | — | likewise |
+
+`data/fs70/records/asks/w4-controls-by-exhibition.json`. **A theorem beats a solver here and it was reached by
+noticing, not by waiting:** a kissat run on L5's 1.86 M-vertex instance had already spent 500 s without a verdict
+when the argument became clear — L5 has 144 proper additive four-colourings of its *lattice*, so every subgraph
+of it is four-colourable and the control is SAT before any solver is asked. The run was killed by pid and
+verified by effect. *What the kill forfeits, named:* how long kissat needs on an instance of that size, which is
+recorded here as ">500 s, no verdict" instead of measured.
+
 ### 5.2 The structure of the colourings (the plan's §3.6 — a null is not typed without these)
 
 On L2's control colouring at k=3 (`tools/fs70_structure.py screen`):
@@ -278,6 +326,33 @@ readings at `p ≤ 4` were re-run afterwards under a memory cap.
 | **plan §1.3 / the owner's ruling 3** (budgets: 10 min single, then cube-and-conquer, 40 CPU-hours per ask, 240 for the phase) | the stop rule | **Never binding.** Every one of the 14 asks closed by a single solver, the slowest in 17.7 s. The phase spent well under one CPU-hour on asks; what it spent compute on was building shapes. |
 | **phase 0 §0.5, the imposed-quotient ask** | one of the three structure instruments | **Does not scale to `p = 5`** on a 95,000-point rank-8 fabric: 118 GB of anon memory, OOM-killed by the kernel. Affordable at `p ≤ 4`. |
 | **plan §2.4 and G65's "step up in degree"** | the ball law as the calibration, and step up when a ball is undecided | On this field the step up **has a ceiling and it was reached**: the k=4 word ball tops out at average degree 15.5–15.8 on ~1.86 M points, there is no denser subgraph inside it (the 14-core is empty), and a Minkowski ball is unaffordable at any useful degree — the live lattices' covolumes are 2·10⁻⁸ to 2·10⁻⁵, so degree 12 costs 10⁵–10¹⁰ **million** points. The four-embedding exponent (`R⁸`, not FS-61's `R⁴`) is what makes a biquadratic field a different instrument problem from a quadratic one. |
+
+---
+
+## 7a. What is on disk for whoever continues, and what a kill would have redone
+
+**Built and ready, regenerable in minutes each** (`python3 tools/fs70_fabric.py word SPEC 4 --out DIR --no-cnf`):
+the k=4 word balls `build/fs70/{L5,L4a,L3,L2}-w4`, each ~1.86 M points at average degree 15.4–15.8, and the k=3
+balls beside them. Nothing in this phase held state only in a process: every ask writes its row at its verdict,
+every shape is a `graph.json` written once, and `data/fs70/inflight/` carried the pid, the process group and the
+resume command of each long job while it ran. The three kills this phase made each forfeited a timing datum and
+no result, and each is named where it happened (§5.1a, §5.2, §5.3).
+
+**The asks that are worth running next, in order:**
+
+1. **L3 and L2 at k=4, control** — the only two fabrics whose four-colourability is not already a theorem (no
+   additive colouring, no periodic rule at `2Λ`, `3Λ`, `4Λ`). A refusal is the milestone's whole deliverable, with
+   no chain needed. These are 1.86–1.89 M-vertex instances and a single solver may not close one; the cube pass
+   is built, calibrated and unused, and this is what it is for.
+2. **L5 and L4a at k=4, `forces 4/3`** — the step up in degree at the target, on the two lattices whose additive
+   families are Kempe-rigid. Their controls are SAT by theorem, so only the pin is in question.
+3. **The out-of-field control of the Kempe screen** (§4.2): run it on Harder's lattice over `K = ℚ(√3,√11)` at
+   `δ = 8/3`, where a four-colour forced pair is in print. It must read **live**. This needs ℚ(√3,√11) arithmetic,
+   which `tools/fs70_field.py` does not have, and it is the one test that would falsify the screen at the colour
+   count the milestone uses.
+4. **The screen over FS-61's real-quadratic lattices** — G61(4) reads *"what decides a field is how many unit
+   vectors its lattices hold"*; the Kempe reach rank may be the sharper form of that reading, and FS-61 has
+   fourteen certified refusals and twenty-six typed nulls to test it against.
 
 ---
 
