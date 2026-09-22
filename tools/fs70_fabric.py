@@ -44,8 +44,21 @@ Generator grammar (SPEC): family names joined by '+' -- zeta12, u3, v4, w4, rho1
 zeta12-and-conjugation orbit of the named vector) -- and group:u3:k for Harder's S_k = {zeta12^m u^n, |n| <= k}.
 Two spellings of one lattice give one HNF and one identity sha; a record stores both.
 
+THE ZETA6 GRAMMAR (phase 1b).  Every family above is a zeta12-orbit, so every lattice the plan built contains the
+QUARTER TURN -- and no known five-colour forcer lives on a lattice that does.  De Grey's and Harder's fabric over
+K = Q(sqrt3, sqrt11) is the rank-4 CM lattice {zeta6^m rho^n} of Q(sqrt-3, sqrt-11), plus a closing rotation.  The
+zeta6 forms build its transposition here:
+  zeta6:NAME     the <= 12 vectors zeta6^m NAME and zeta6^m conj(NAME)
+  group6:NAME:k  {zeta6^m NAME^n : 0 <= m < 6, |n| <= k} (closed under conjugation already, since |NAME| = 1 gives
+                 conj(NAME) = NAME^-1), the CM-shaped analogue of group:NAME:k
+  zeta6          the six sixth roots of unity alone
+So `group6:u3:2+zeta6:rho15` is L6: 42 generators, M = 144, rank 6, g = 54, no additive four-colouring of either
+kind, every chainable target live -- the one fabric with the structure of every known forcer.
+
 Planted faults (--plant): basis_drop (the last generator is dropped before the HNF), sat_generators (the
-saturation returns the generators only), screen_partial (the screen tests only the first unit vector).
+saturation returns the generators only), screen_partial (the screen tests only the first unit vector),
+zeta6_as_zeta12 (a zeta6 orbit is built with zeta12, so the quarter turn creeps back in and the rank moves),
+rho15_wrong (the rho15 seed is (5 + i sqrt15)/8, not a unit vector at all).
 """
 from collections import defaultdict
 from fractions import Fraction as Fr
@@ -68,6 +81,11 @@ from fs70_field import (ONE, ZERO, E_ZERO, E_ONE, ZETA6, ZETA12, I_SQRT3, U_SQRT
                         ints_float, real_scalar, units_over)                     # noqa: E402
 
 PLANT = None
+# Parsed at IMPORT, not in __main__, because the family seeds are built at module level and a plant on a seed
+# must reach them.  __main__ re-reads it and refuses an unknown name.
+for _i, _a in enumerate(sys.argv):
+    if _a == '--plant' and _i + 1 < len(sys.argv):
+        PLANT = sys.argv[_i + 1]
 
 
 def planted(name):
@@ -86,6 +104,20 @@ def orbit(z):
     return list(out.values())
 
 
+def orbit6(z):
+    """the <= 12 vectors zeta6^k z and zeta6^k conj(z) -- the CM-shaped orbit, with NO quarter turn.
+
+    Closed under negation, since zeta6^3 = -1, so a generator set built from these is symmetric and every shape
+    routine that assumes -S = S (the lens, the word ball) is unaffected."""
+    out = {}
+    rot = ZETA12 if planted('zeta6_as_zeta12') else ZETA6   # PLANT: the quarter turn creeps back in
+    for k in range(6):
+        for w in (z, e_conj(z)):
+            r = e_mul(e_pow(rot, k), w)
+            out[canonical(r)] = r
+    return list(out.values())
+
+
 # ((sqrt3 + sqrt15) + i(-sqrt3 + sqrt15))/6: the cheapest 3-depth +-1 family (atlas row, denominator 6)
 D6 = ((Fr(0), Fr(1, 6), Fr(0), Fr(1, 6)), (Fr(0), Fr(-1, 6), Fr(0), Fr(1, 6)))
 Q5 = ((Fr(3, 5), Fr(0), Fr(0), Fr(0)), (Fr(4, 5), Fr(0), Fr(0), Fr(0)))           # (3 + 4i)/5
@@ -93,12 +125,22 @@ S5V = ((Fr(0), Fr(0), Fr(2, 5), Fr(0)), (Fr(0), Fr(0), Fr(1, 5), Fr(0)))        
 Q7 = ((Fr(1, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(4, 7), Fr(0), Fr(0)))           # (1 + 4 i sqrt3)/7
 S7V = ((Fr(2, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(3, 7), Fr(0)))          # (2 + 3 i sqrt5)/7
 
-FAMILY_SEED = {'zeta12': E_ONE, 'u3': U_SQRT5, 'v4': V_SQRT15, 'w4': W_MIX, 'rho15': RHO15,
+RHO15_SEED = (((Fr(5, 8), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(0), Fr(1, 8)))  # PLANT: 25 + 15 != 64
+              if PLANT == 'rho15_wrong' else RHO15)
+
+FAMILY_SEED = {'zeta12': E_ONE, 'u3': U_SQRT5, 'v4': V_SQRT15, 'w4': W_MIX, 'rho15': RHO15_SEED,
                'q5': Q5, 's5': S5V, 'q7': Q7, 's7': S7V, 'd6': D6}
 FAMILIES = {nm: orbit(z) for nm, z in FAMILY_SEED.items()}
-for _nm, _fam in FAMILIES.items():
-    for _z in _fam:
-        assert e_is_unit_vector(_z), (_nm, e_str(_z))
+FAMILIES6 = {nm: orbit6(z) for nm, z in FAMILY_SEED.items()}
+for _src in (FAMILIES, FAMILIES6):
+    for _nm, _fam in _src.items():
+        for _z in _fam:
+            assert e_is_unit_vector(_z), f'family {_nm!r} contains {e_str(_z)}, which is NOT a unit vector'
+
+
+GRAMMAR = ('grammar: names joined by "+" from ' + ', '.join(sorted(FAMILY_SEED)) + ' (each a zeta12-orbit); '
+           'zeta6:NAME for the zeta6-orbit of one of them; "zeta6" alone for the six sixth roots of unity; '
+           'group:NAME:k for {zeta12^m NAME^n, |n| <= k}; group6:NAME:k for {zeta6^m NAME^n, |n| <= k}')
 
 
 def generators(spec):
@@ -112,24 +154,33 @@ def generators(spec):
                     keep = FF.is_two_unit(z) if kind == 'twounits' else FF.is_three_unit(z)
                     if keep:
                         S[canonical(z)] = z
-        elif part.startswith('group:'):
-            _, nm, k = part.split(':')
+        elif part.startswith('group:') or part.startswith('group6:'):
+            head, nm, k = part.split(':')
+            six = head == 'group6'
             if nm not in FAMILY_SEED:
-                raise SystemExit(f'unknown family {nm!r} in {part!r}.\n'
-                                 f'grammar: names joined by "+" from {", ".join(sorted(FAMILY_SEED))}, '
-                                 f'or group:NAME:k for {{zeta12^m NAME^n, |n| <= k}}')
+                raise SystemExit(f'unknown family {nm!r} in {part!r}.\n' + GRAMMAR)
             base = FAMILY_SEED[nm]
+            rot, turns = (ZETA6, 6) if six else (ZETA12, 12)
+            if six and planted('zeta6_as_zeta12'):
+                rot, turns = ZETA12, 12                    # PLANT: the quarter turn creeps back in
             for n in range(-int(k), int(k) + 1):
-                for m in range(12):
-                    z = e_mul(e_pow(ZETA12, m), e_pow(base, n))
+                for m in range(turns):
+                    z = e_mul(e_pow(rot, m), e_pow(base, n))
                     S[canonical(z)] = z
+        elif part.startswith('zeta6:'):
+            nm = part.split(':', 1)[1]
+            if nm not in FAMILIES6:
+                raise SystemExit(f'unknown family {nm!r} in {part!r}.\n' + GRAMMAR)
+            for z in FAMILIES6[nm]:
+                S[canonical(z)] = z
+        elif part == 'zeta6':
+            for z in FAMILIES6['zeta12']:                  # the zeta6-orbit of 1: the six sixth roots of unity
+                S[canonical(z)] = z
         elif part in FAMILIES:
             for z in FAMILIES[part]:
                 S[canonical(z)] = z
         else:
-            raise SystemExit(f'unknown family {part!r}.\n'
-                             f'grammar: names joined by "+" from {", ".join(sorted(FAMILY_SEED))}, '
-                             f'or group:NAME:k for {{zeta12^m NAME^n, |n| <= k}}')
+            raise SystemExit(f'unknown family {part!r}.\n' + GRAMMAR)
     return list(S.values())
 
 
@@ -632,9 +683,11 @@ def target_element(name):
     return real_scalar(Fr(name))
 
 
-TARGET_NAMES = ('isqrt3', '2', '4/3', '8/3', '4')
-SCREEN_TARGETS = {'i sqrt3': I_SQRT3, '2': real_scalar(2), '4/3': real_scalar(Fr(4, 3)),
-                  '8/3': real_scalar(Fr(8, 3)), '4': real_scalar(4)}
+# 2/3 joins the list at phase 1b: 1/(2/3) = 3/2 = 1 + v + vbar is a chain of three unit vectors (v = (1+i sqrt15)/4,
+# v + vbar = 1/2), so it is a chainable target exactly as 4/3, 4 and 8/3 are, and it is the SHORTEST chain after 2.
+TARGET_NAMES = ('isqrt3', '2', '2/3', '4/3', '8/3', '4')
+SCREEN_TARGETS = {'i sqrt3': I_SQRT3, '2': real_scalar(2), '2/3': real_scalar(Fr(2, 3)),
+                  '4/3': real_scalar(Fr(4, 3)), '8/3': real_scalar(Fr(8, 3)), '4': real_scalar(4)}
 
 
 # ---------------------------------------------------------------- shapes (integer arithmetic throughout)
@@ -1219,6 +1272,37 @@ def selftest():
     assert len(generators('zeta12')) == 12
     assert len(generators('zeta12+u3')) == 36
 
+    # --- the zeta6 grammar (phase 1b): the CM-shaped forms carry NO quarter turn.  Half the orbit size of the
+    # zeta12 forms, and zeta12 itself must NOT be in the lattice they span -- that absence is the whole point,
+    # and it is what the `zeta6_as_zeta12` plant destroys.
+    assert len(generators('zeta6')) == 6, len(generators('zeta6'))
+    assert len(generators('group6:u3:2')) == 30, len(generators('group6:u3:2'))
+    assert len(generators('zeta6:rho15')) == 12, len(generators('zeta6:rho15'))
+    assert len(generators('group6:u3:2+zeta6:rho15')) == 42, len(generators('group6:u3:2+zeta6:rho15'))
+    try:
+        generators('zeta6:nosuch')
+    except SystemExit as e:
+        assert 'unknown family' in str(e), str(e)
+    else:
+        raise AssertionError('an unknown family name was accepted after zeta6:')
+    # the CM lattice of u alone: rank 4, no quarter turn, and its unit vectors are its own generators
+    lcm = Lattice(generators('group6:u3:2'), 'group6:u3:2')
+    assert lcm.rank == 4, f'group6:u3:2 has rank {lcm.rank}, not the 4 of the CM lattice Z[zeta6, u]'
+    assert not lcm.contains(ZETA12), 'group6:u3:2 contains the quarter turn, which a zeta6 orbit cannot produce'
+    assert lcm.contains(ZETA6) and lcm.contains(U_SQRT5)
+    lcm.saturate('b')
+    assert len(lcm.units) == 30, f'g = {len(lcm.units)}: the CM lattice of u at |n| <= 2 holds 30 unit vectors'
+    # L6 = that lattice with the wall-breaker rho15 adjoined: the phase-1b fabric, the owner's numbers
+    l6 = Lattice(generators('group6:u3:2+zeta6:rho15'), 'group6:u3:2+zeta6:rho15')
+    assert (l6.M, l6.rank) == (144, 6), f'L6 reads M = {l6.M}, rank {l6.rank}; expected M = 144, rank 6'
+    assert not l6.contains(ZETA12), 'L6 contains the quarter turn: it is no longer the CM-shaped fabric'
+    l6.saturate('b')
+    assert len(l6.units) == 54, (f'L6 saturates to {len(l6.units)} unit vectors, not the 54 the owner\'s '
+                                 f'independent screen reads (data/fs70/owner/po_cm_lattice.py 2 rho15)')
+    s6 = additive_screen(l6, SCREEN_TARGETS)
+    assert s6['Z4']['proper'] == 0 and s6['K4']['proper'] == 0, \
+        f'L6 has additive colourings (Z/4 {s6["Z4"]["proper"]}, Klein {s6["K4"]["proper"]}); the owner reads none'
+
     # --- the lattice of zeta12 and u: the plan's section 2.2 head row, and the owner's re-derivation
     lat = Lattice(generators('zeta12+u3'), 'zeta12+u3')
     assert lat.M == 6, lat.M
@@ -1392,7 +1476,7 @@ def selftest():
           f'Lambda_forced index {scr["forced_index"]}')
 
 
-PLANTS = ('basis_drop', 'sat_generators', 'screen_partial')
+PLANTS = ('basis_drop', 'sat_generators', 'screen_partial', 'zeta6_as_zeta12', 'rho15_wrong')
 
 
 def run_plants():
@@ -1411,7 +1495,7 @@ def run_plants():
             print(f'    refused (exit {r.returncode}): {why[:170]}')
     if not ok:
         raise SystemExit('a planted fault did not fire')
-    print('all three plants fired; faithful twin green')
+    print(f'all {len(PLANTS)} plants fired; faithful twin green')
 
 
 # ---------------------------------------------------------------- main
