@@ -2,12 +2,10 @@
  "sha": "98eb34b3e2357c14da12db9a",
  "graph_dir": "build/fs70/L3-w4",
  "pin": "control",
- "out": "build/fs70/asks/L3-w4-control",
- "pid": 220267,
- "pgid": 220267,
- "started": 1790059739.2537003,
- "ledger": "build/fs70/asks/L3-w4-control/cubes.jsonl",
- "resume": "python3 tools/fs70_ask.py run build/fs70/L3-w4 control --out build/fs70/asks/L3-w4-control --resume",
- "log": "build/fs70/L3-w4-control.log",
- "note": "LIVE at the phase-1 implementer's handback (2026-09-22). One kissat on a ~1.86M-vertex instance; it will write its own row to data/fs70/asks.jsonl at its verdict and delete this file, or record UNKNOWN at its budget. Killing it costs only the solver time, never a result: the graph and the CNF are on disk. Phase 0's own reading says a single-solver UNKNOWN at this size carries no information -- the cube pass (tools/fs70_ask.py, engine auto) is the instrument for these two, and it is built, calibrated and so far unused."
+ "out": "build/fs70/asks/L3-w4-control-sat",
+ "pid": 290952,
+ "pgid": 290951,
+ "started": 1790064269.977644,
+ "ledger": "build/fs70/asks/L3-w4-control-sat/cubes.jsonl",
+ "resume": "python3 tools/fs70_ask.py run build/fs70/L3-w4 control --out build/fs70/asks/L3-w4-control-sat --resume"
 }

@@ -23,9 +23,16 @@ built, and it was asked at a density no earlier shape in this milestone reached.
    points**, where phase 1's rank-8 lattices topped out at 15.5 at 1,864,417 points with an empty 14-core.
    That is the largest degree this milestone has ever asked at, on 43 % of the point count — and it **decides**,
    where phase 1's biggest shapes did not (§3).
-3. **Nineteen asks, every one SAT** (§4). Four at sums of ≤ 3 (11,593 points, degree 10.95), seven at ≤ 4
-   (109,957, degree 14.10), and the ≤ 5 ball (805,693, degree 17.09). Every model was read back and verified
+3. **Every ask that returned a verdict returned SAT** (§4), at four densities: the balls at sums of ≤ 3
+   (11,593 points, degree 10.95), ≤ 4 (109,957, degree 14.10) and ≤ 5 (805,693, degree 17.09), and the **14-core
+   of the last — 217,015 points at degree 18.98**, the first object this milestone has produced above degree 18
+   and one where a refusal would have carried up to the whole ball. Every model was read back and verified
    proper on every fabric edge and on its pin before its row was written.
+   **And the solve time falls as the density rises.** The `k = 4` ball's control takes 8.23 s at degree 14.10;
+   the 14-core's takes **1.16 s at degree 18.98** on twice as many vertices, and `forces 4/3` on it takes 1.17 s.
+   That is G65's regime exactly — "from 14 up almost everything decides in seconds" — and it says the fabric is
+   nowhere near a colouring threshold from either side. The 55–470 s the `k = 5` ball costs is **size**, not
+   hardness.
 4. **The type-M arena at `n = 4` is built and answered, and G53's counting compulsion is not merely weak there
    but ABSENT** (§5). The diagonal circle of the CM base is exactly `2 ×` its unit-vector set — 30 points, and
    it does not grow with the base, at any radius from sums of ≤ 2 to ≤ 5. `L = min over proper four-colourings
@@ -147,7 +154,27 @@ Single-sample, one solver, recorded as a fact about two encodings of one graph.
 
 PLACEHOLDER-K5-TABLE
 
-### 4.4 The base alone, and the arena
+### 4.4 The 14-core of the `k = 5` ball — 217,015 points, 2,059,614 edges, degree 18.98
+
+The core ladder on the `k = 5` ball (`python3 tools/fs70_fabric.py core build/fs70/L6-w5 m`):
+
+| | points | edges | degree |
+|---|---|---|---|
+| the ball | 805,693 | 6,885,174 | 17.09 |
+| **14-core** | **217,015** | **2,059,614** | **18.98** |
+| 16-core | 0 | — | — |
+
+**Phase 1's densest object — L5's `k = 4` ball, 1,864,417 points at degree 15.47 — has an EMPTY 14-core** (its
+record, decision 7). L6's exists, holds a quarter of the ball, and reads two degrees higher than the ball it came
+from: **the first object this milestone has produced above degree 18, at 12 % of the point count of the largest
+thing phase 1 ever asked.** A core is a subgraph, so a **refusal** on it is a refusal on the whole ball and on
+the lattice, while a colouring of it says nothing about the ball — which is the right trade when the hunt is for
+a refusal (G65: step up in degree). The origin and `4/3` survive the coring; `2`, `8/3` and `4` do not, and the
+tool says so rather than asking a pin it cannot pose.
+
+PLACEHOLDER-C14-TABLE
+
+### 4.5 The base alone, and the arena
 
 | graph | points / edges / degree | pin | verdict | seconds |
 |---|---|---|---|---|
@@ -300,5 +327,31 @@ python3 tools/fs70_arena.py build 'group6:u3:2' 4 --rot rho15 --out build/fs70/a
 
 ## 11. WORKFLOW step 9's two sweeps over this phase's additions
 
-* **"conjecture"** — PLACEHOLDER-SWEEP-CONJECTURE
-* **"not claimed"** — PLACEHOLDER-SWEEP-NOTCLAIMED
+* **"conjecture"** — three, none of them claimed, each flagged to the owner as a stub candidate.
+  1. **The half-integer criterion.** Every lattice this milestone has found with no additive four-colouring —
+     L2, L3 and now L6 — contains `½` in its ℤ-span: L2 and L3 by construction (they adjoin `v` or `w`), L6
+     because its *saturation* holds the ζ₆-orbit of `v` even though no generator does. The plan's §3.4 gives one
+     direction (`½·{1, ζ₆} ⊆ Λ` ⟹ no additive four-colouring). **Is the converse true?** It is exact and cheap
+     to test against the 21 lattices already in `screen.jsonl`, and if it holds, the additive screen reduces to
+     one membership test and the phase-1 Kempe machinery becomes a statement about lattices that do *not* hold
+     `½`.
+  2. **Does a type-M arena's diagonal circle ever grow?** Over the CM base it is exactly `2 ×` the unit shell —
+     30 points — at base radius ≤ 2 and at ≤ 3, ≤ 4 and ≤ 5 alike. Finiteness is immediate (a lattice has
+     finitely many points of a given norm); what is measured, and not proved, is that it **saturates at the
+     smallest ball that reaches it at all**, so growing the base can never buy G53 a larger circle — only a
+     larger `L`, which here is 0.
+  3. **Is the largest non-empty core degree a function of the lattice rank?** Rank 8 at ball degree 15.47: the
+     14-core is empty (phase 1). Rank 6 at ball degree 17.09: the 14-core holds 217,015 points at degree 18.98
+     and the 16-core is empty. Two points, one variable, and a reading at best — but if it is real, the rank is
+     the dial for density and the milestone has been turning the wrong one.
+* **"not claimed"** —
+  (i) that L6 is four-colourable **as a lattice**: what is measured is that the shapes asked are — the balls at
+  sums of ≤ 3, ≤ 4, ≤ 5 and the 14-core of the last;
+  (ii) that the 14-core's colourability says anything about the ball it came from — a core is a subgraph, so its
+  SAT verdicts are about the core alone (only a refusal would travel upward);
+  (iii) anything at arity above 2 — every ask here is a pair or a whole fabric;
+  (iv) that `group6:u3:3+zeta6:rho15` behaves any differently: what is established is that its saturation is
+  unaffordable by either method, so it cannot be asked in a way whose colouring would mean anything;
+  (v) that the arena at base radius ≤ 5, or at any `n` other than 4, four-colours — neither was built;
+  (vi) a verdict on `separated i√3` at the ≤ 5 ball, on L2's `k = 4` control, or on L3's — each is recorded with
+  its budget and its encoding, never as a fact about a graph (G21).
