@@ -150,7 +150,59 @@ Kempe classes reach every target).
 
 ## 5. The asks
 
-**(table filled as verdicts land)**
+Every row is in `data/fs70/asks.jsonl`, rendered by `python3 tools/fs70_ask.py status`. Every SAT model is read
+back against the fabric — proper on every edge of the original graph, through the vertex map, and respecting the
+pin — before its row is written; a model that fails that check is recorded as `DEFECT`, not as a verdict.
+
+### 5.1 The four live lattices at sums of ≤ 3 (95k points, average degree 11.5)
+
+| lattice | shape | points / edges / degree | pin | verdict | wall |
+|---|---|---|---|---|---|
+| **L2** `group:u3:2+v4` | word k=3 | 95,317 / 550,014 / 11.54 | control | SAT | 0.2 s |
+| L2 | word k=3 | " | forces 2 | SAT | 1.0 s |
+| L2 | word k=3 | " | forces 4/3 | SAT | 0.2 s |
+| L2 | word k=3 | " | separated √3 | SAT | 0.2 s |
+| **L3** `group:u3:2+w4` | word k=3 | 95,389 / 549,744 / 11.53 | control | SAT | 12.1 s |
+| L3 | word k=3 | " | forces 2 | SAT | 3.5 s |
+| L3 | word k=3 | " | forces 4/3 | SAT | 3.8 s |
+| L3 | word k=3 | " | separated √3 | SAT | 3.4 s |
+| **L4a** `zeta12+u3+q7+s7` | word k=3 | 94,849 / 559,536 / 11.80 | control | SAT | 3.1 s |
+| L4a | word k=3 | " | **forces 4/7** (chain 2) | SAT | **17.7 s** |
+| L4a | word k=3 | " | forces 4/3 | SAT | 1.9 s |
+| **L5** `group:u3:2+d6` | word k=3 | 95,149 / 548,532 / 11.53 | control | SAT | 1.7 s |
+| L5 | word k=3 | " | forces 4/3 | SAT | 1.8 s |
+
+Three targets are **not in** the sums-of-≤-3 ball and the tool refused them by name with the point count rather
+than skipping them silently: `2/3` on L2, `4` on L4a and L5, `4/9` on L5.
+
+**One solver-effort signal, single-sample and recorded as such** (M41's precedent, G21): on L4a the `4/7` ask —
+the cheapest closer the field has, two copies, one ρ₁₅ spindle — took **17.7 s** against 1.9 s for `4/3` and 3.1 s
+for the control on the same fabric. That is a fact about one kissat run, not about the graph; it is here because
+`4/7` is the target most worth a bigger shape if one is ever affordable.
+
+### 5.2 The structure of the colourings (the plan's §3.6 — a null is not typed without these)
+
+On L2's control colouring at k=3 (`tools/fs70_structure.py screen`):
+
+* **the quotient screen** — no `Λ/pΛ` has all its classes monochromatic at any `p ∈ {2,3,4,5,6,7}`
+  (0 of 175 at `2Λ`, 936 of 1257 at `3Λ`, 1392 of 3436 at `4Λ`, 41248 of 55237 at `5Λ`, 936 of 5703 at `6Λ`,
+  6832 of 29449 at `7Λ`), so **the colouring is a function of no residue at any of those primes**;
+* **the period screen** — 247 candidate periods with at least 20 testable pairs, and the best agreement is
+  **0.874**, not 1: **no period at all**, not even an approximate one.
+
+So the four-colourings these lattices carry are not additive, not residue-local at any small prime and not
+periodic — they are free colourings, and the fabric is simply far from forcing anything at this size.
+
+**An instrument limit, found the hard way and recorded so nobody else pays for it.** The *imposed-quotient* ask
+(instrument (iii): quotient the fabric by `pΛ` and re-ask, so a SAT is a periodic colouring rule) is affordable at
+`p = 2, 3, 4` on a 95,000-point rank-8 fabric and **is not at `p = 5`**: `tools/fs70_structure.py quotient
+build/fs70/L2-w3 5` grew to **118 GB of anon memory and was OOM-killed by the kernel** (journal, 01:21:48, pid
+189941). Nothing else was lost — the two jobs beside it survived and their artifacts are complete — but the sweep
+that contained it was about to repeat the same ask on the next fabric, so it was killed at once by pid, verified
+by effect (no process of that name in `ps`). *What the kill forfeits, named out loud:* the imposed-quotient
+readings for L2 and L5, which were buffered behind a `tail -30` and had therefore never reached disk — **a
+pipeline that writes nothing until it ends is not a checkpoint**, and that was my error, not the tool's. The
+readings at `p ≤ 4` were re-run afterwards under a memory cap.
 
 ---
 
