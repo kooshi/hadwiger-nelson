@@ -262,11 +262,25 @@ anything, at every density it can be asked at.
 budget — and the comparison is about the solver, not the formula. Aiming kissat at the *satisfiable* direction,
 which is what a 1.89 M-vertex degree-15.4 instance should want, bought nothing at 60 % more time. **So the
 single-solver route on this instance is exhausted and the cube pass is the instrument**, which is what the
-owner's ruling 2 and the plan's stop rule say. Its price on one worker is in `build/fs70/price-cubes.log`
-(`python3 build/fs70/price_cubes.py`): the cube count, one worker's clause-ingest cost and peak RSS, and one
-cube's solve time, so the job count is chosen from a measurement rather than from the default 22. **It is priced
-and not launched**: 22 in-process CaDiCaL workers each holding a 71.3 M-clause formula is the kind of memory bet
-`CLAUDE.md` says not to take unattended, and the phase's budget is the owner's to spend.
+owner's ruling 2 and the plan's stop rule say. **And the pricing says it is not affordable as configured** (`build/fs70/price_cubes.py`,
+log `build/fs70/price-cubes.log`), which is why it is priced and not launched:
+
+* **65,536 cubes.** `branching_set` takes the eight highest-degree vertices; on a lattice ball they all have
+  degree 92 and are **mutually non-adjacent**, so `enumerate_cubes` — which prunes only by edges *inside* the
+  branching set — prunes **nothing**: `4⁸ = 65,536`, every one surviving. The repair is to branch on a **clique
+  or a tight neighbourhood** instead of on the degree ranking, where the graph's own edges cut the tree hard.
+  Phase 0's control got 1,458 cubes from 7 branch vertices on a 740-point graph precisely because that graph's
+  top-degree vertices *were* adjacent.
+* **One worker costs over 12 GB** and was still ingesting when this was written (the exact peak and the ingest
+  time land in the log). The engine above four million clauses is in-process CaDiCaL, one per worker, each
+  holding the whole 71.3 M-clause formula: **22 workers is upward of 220 GB on a 125 GB machine, and 8 is
+  already near the edge.**
+* **And there is no per-cube budget on this engine** — PySAT's CaDiCaL supports neither `incr=True` nor
+  `solve_limited` (phase 1 §3), so one bad cube runs unbounded.
+
+So ask (iii) ends as a **priced refusal rather than a null**: the instrument the plan and the owner's ruling 2
+name is, in its present configuration, 65,536 unbudgeted cubes at 12 GB a worker — and the first thing to fix is
+the branching set, not the job count.
 
 ---
 
