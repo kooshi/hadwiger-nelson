@@ -336,3 +336,19 @@ geometry did, except the two one-second residue-plane runs.
 * **"not claimed"** — the scope note of §4(iii) (the chain pool is denominator ≤ 8 and length ≤ 4); the
   `saturation_complete: false` rule of §0.2; the 9 uncovered vertices in Haugland's Appendix A, which is a claim
   about the printed list and not about `G₁`. All three are recorded where they are used, not as stubs.
+
+---
+
+## 8. Where the plan and the brief were wrong — consolidated
+
+| where | what it says | what is the case |
+|---|---|---|
+| plan §3.2 | saturation method A (PARI `qfminim`) is the method; B is the fallback where A overflows | **The order is backwards.** B is complete by construction and cheaper on every lattice this milestone uses; A's cost grows as `1/covolume` and is ~10⁷ vectors on phase 1's dense lattices. B is now the default and A the cross-check; `--sat-method both` asserts they agree, and they do on five lattices. |
+| plan §2.3 | the planner's structure test *"looked for a period and for factoring through `Λ/2Λ` and `Λ/4Λ` and found neither"* | Asked as an **existence** question by the imposed-quotient ask, `L = 4Λ` on that same ball is **SAT** — a `4Λ`-periodic four-colouring exists, found, lifted, and verified proper on all 111,990 edges. (`2Λ` really is impossible, and by a self-loop, with no solver.) The planner's test asked whether the colouring it had was periodic, which is the weaker question. |
+| plan §3.5 | `δ = 4` needs **4** copies, via `1 + 1 + v² + v̄² = 1/4` | **3 copies**: `1/4 = v̄ + v² − v̄²` exactly. |
+| plan §3.5 | the chainable distances are `2, 4/3, 4, 8/3` | **`4/7` is chainable with 2 copies** (`ρ₁₅ + ρ̄₁₅ = 7/4`, and `4/7 > 1/2` so a single `ρ₁₅` spindle closes it), on every lattice holding `1/7`. Also `4/9` at 4, `4/15` at 4, `4√15/15` at 2 on the 5-family lattice. |
+| plan §4.1, L4 | `S₂` plus the 7-family and the 5-family orbits, as one lattice | Its denominator is 630, so a complete saturation needs an 880 GB box (method B) or ~10¹⁵ lattice vectors (method A). **Phase 1 must treat L4 as two lattices** (`…+q7+s7` at `M = 42`, `…+q5+s5` at `M = 30`, both saturated completely here), or accept a generators-only screen whose kills are not sound. |
+| plan §1.3 | per ask: 30 min of kissat, then one cube pass of **8 cubes** | The 740-vertex control needed **1,458 cubes** on 22 cores after eight single-solver configurations failed at up to 27 minutes. Eight cubes is two orders of magnitude too few, and a single-solver UNKNOWN at this size carries no information. |
+| plan §7, P1 | *"measured, stable to denominator 30"* | Half of it is a **two-line lemma** (§4(i)): `φ(i√3) = 0 ⟺ φ(2) = 0 ⟺ φ(1) = 2` on any lattice with a unit triangle. What stays measured is one bit — does some proper `φ` have `φ(1) = 2`? — observed true, in exactly one third of the colourings, on all nine screened lattices that admit any `φ`. |
+| plan §7, P8 | phase 0.3 reproduces the refusal *"in under 60 s of solver time"* | **Lost.** 9,425 CPU seconds, and only by cube-and-conquer. |
+| the brief | *"the count of edge directions that are not in the lattice's saturation (which is what makes a graph `partial`)"* on `S₂` | **Zero, and necessarily so**: `|S₂| = 60 = g`, so Harder's generating set **is** the saturation of its own lattice. There is no `partial` risk on L1 at any depth. Confirmed by two independent edge derivations agreeing exactly. |
