@@ -562,9 +562,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
-  need seven because 2, 5, 6 are not of the form a² + ab + b².
+  need seven because 2, 5, 6 are not of the form a² + ab + b². *Do: never search for a six-colouring among cell-constant or
+  polygonal colourings; a candidate's classes must be non-polygonal and finer than 1/2. Nothing kills the kernel half; the
+  polygonal half stands or falls with `[SokolovVoronov2025]`.*
 * **G23 — Refining is not a route down. [kernel + measured]** The cell family's requirement is not monotone
-  in scale; the classical scale is a local optimum (dual form: `[deGreyParts2022]`).
+  in scale; the classical scale is a local optimum (dual form: `[deGreyParts2022]`). *Do: expect no colour saved by refining
+  the scale; "refine toward six" is closed. Killing test: a scale in the cell family needing fewer than seven colours.*
 * **G24 — The gap law. [kernel forcing half + measured]** Below the classical window the cell family needs ≥ 7
   at every scale (`[Voronov2023]`, `[SokolovVoronov2025]`) while ω falls to 3–5, the certified
   Hoffman/spectral bracket to ≈ 4.1 (3.56 at p = 1/7) and the fractional relaxation only to χ_f ≤ 48/7 at
@@ -572,30 +575,43 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   χ_f are 130/23 at the 23-core, 501/74 at the 53-core and ≈ 4.83796 at the 117-core. The plane's own
   pathology (ω = 3, relaxations below χ, χ = 7) in finite
   kernel-checkable objects, the smallest the 23-vertex core with χ = 7 at ω = 4. Open: the deep pocket's
-  χ ≥ 8 in the kernel; a relaxation that sees the gap.
+  χ ≥ 8 in the kernel; a relaxation that sees the gap. *Do: when a relaxation reads far below χ on a plane-like object,
+  expect integrality, not a low bound — certify χ on the exact object and spend no relaxation on the gap. Killing test: a
+  relaxation that certifies seven on a gap-band core (the open item; it would be a finding).*
 * **G25 — The forcing ladder is recursive. [reading]** For the objects held, χ ≥ 4 is holonomy of
   rainbow-clique propagation (triangle-free routes also exist: Wormald 1979, O'Donnell 1999) and χ ≥ 5 a
   regional pigeonhole whose kills are the previous level's forcer one field up; so a 6-forcer's kills
-  default to 5-forcer grade (~10⁵–10⁶ vertices, composition only) unless a shortcut shape fires. Falsifiers
-  per shape: `plans/SHAPES-OF-SIX.md` §3.
+  default to 5-forcer grade (~10⁵–10⁶ vertices, composition only) unless a shortcut shape fires. *Do: price a 6-forcer's
+  kills at 5-forcer grade and name the shortcut shape before spending on anything cheaper. Killing test: a 6-forcer whose
+  kills are cheaper than a 5-forcer's; per shape, `plans/SHAPES-OF-SIX.md` §3.*
 * **G26 — The 6-forcer reduction. [kernel]** `hexShell_plane` puts a monochromatic pair at √3 or 2 in every
   colouring with fewer than seven colours, so χ(ℝ²) ≥ k + 1 follows from k-colour virtual edges at √3 AND at
   2 — never either alone (row 43); at six colours that is χ ≥ 7. Over {1, 2} the diameters are already edges
   and one five-colour √3 gadget gives χ(ℝ²; {1,2}) ≥ 6 (row 61). Over any field where 11 is usable neither
   five-colour gadget exists (row 55): the gadgets' field must be 6-open. With `[ExooIsmailescu2019]`'s 426-vertex {1, 2}
   graph as host, one five-colour virtual edge at distance 2 gives χ(ℝ²) ≥ 6 (GPT Astra, G55) — M49's descent replaced its 892
-  length-2 edges one at a time; the ρ₆₃ arena has none (H4's sweep).
+  length-2 edges one at a time; the ρ₆₃ arena has none (H4's sweep). *Do: aim every six-gadget hunt at one five-colour
+  virtual edge at distance 2 (or at √3 over {1, 2}) in a 6-open field — over an 11-usable field the gadget cannot exist, so
+  do not ask there. Nothing kills it; it kills every six-gadget design over a sealed field.*
 * **G27 — Hidden arithmetic symmetry. [measured]** The Galois flip √3,√5,√11 ↦ −√3,−√5,−√11 is an automorphism
   of the 1581, which has no plane self-isometry; its Klein four-group orbit yields three new 5-chromatic
-  witnesses. Forced equivariance under non-geometric automorphisms is an unused compulsion vocabulary.
+  witnesses. Forced equivariance under non-geometric automorphisms is an unused compulsion vocabulary. *Do: before any SAT
+  ask over a multiquadratic field, test each Galois flip for automorphism and break the symmetry it gives; read a witness's
+  Galois orbit as free witnesses and the quotient as a finder's instance. Killing test of its value: a Galois-broken ask no
+  faster than the unbroken one.*
 * **G28 — The fine-tail forcing factors. [measured]** The p = 1/7 stage carries 7 triple-encoded virtual
   edges (51 on its critical stage), at offset norms 27, 28, 31 — none among the six smallest non-edge
   classes, which is why a six-class sweep reads zero. Act Two exists there. **Demotion record:** as minted at M43 this entry claimed the opposite — "the fine-tail forcing does NOT factor: pigeonhole × kill is not universal; zero virtual edges at k = 6" — from six anchored asks on the R = 8 stage; M45 re-asked 9,636 pairs on the identical stage (fingerprint `9d9599be0db64677`) and found the seven, so the claim measured its acceptance set, not the object (G21's second instance).
+  *Do: forcing sits at offset norms outside the smallest classes — sweep every non-edge class, never the six smallest, and
+  when a class sweep reads zero, say which classes it swept. Killing test: a full-class re-ask on the fingerprinted stage
+  finding no virtual edge.*
 * **G29 — The cell family is a dial, and it is closed. [kernel + measured]** As the scale p → 0 the cell
   family's limit is the unit-distance problem, and its value is 7 on the whole open ray. By the limit lemma
   (row 41) the divergence of the critical size N(p) is necessary for χ(ℝ²) ≤ 6; in the family the edge defect
   falls like p while the size grows like p^(−1.75), so it supplies no bounded family either — closed both
-  ways. Compare our measured refuting radius (1.02–1.38) with `[Voronov2023]` Thm 1.3's radius-3 disc.
+  ways. Compare our measured refuting radius (1.02–1.38) with `[Voronov2023]` Thm 1.3's radius-3 disc. *Do: spend nothing
+  on the cell family in either direction. Killing test: a scale with χ < 7, or a bounded refuting family whose defect tends
+  to zero.*
 * **G30 — Measurement generates; derivation kills. [method]** A measurement buys a candidate pattern; a
   conclusion is bought by a derivation or a pre-registered replication on fresh objects. Prefer dials to
   searches for a positive, and calibrated beds whose answer is known. Failure modes:
