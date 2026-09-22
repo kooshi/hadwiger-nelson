@@ -148,3 +148,43 @@ extractions marked ✗ are phase 1d's contract.*
 
 *At the close (WORKFLOW 9): this section is re-read against what 1d found; every extraction that paid and every entry that should
 have borne and did not is recorded under step 3.1.*
+
+## The re-read at the close (WORKFLOW 2.0 step 9; owner, 2026-09-22)
+
+*Scored against what phases 1d–1f did. Rule: an extraction paid if it changed a verdict or closed a route; an entry that bore
+and was not used is an instance for step 3.1, and its entry is rewritten in G67's form.*
+
+| # | extraction | paid? | what happened |
+|---|---|---|---|
+| 1 | split-prime tower | **yes** | tight at every level, `d₀ = 3`: two targets dead on all 2-unit fabric by an exhibited colouring; the forced depths named (T7) |
+| 2 | Harder's control | **yes** | the `forces` encoding refused for the first time — and the shape that forces is the plan's §3.3, not the brief's `V+V+H` |
+| 3 | the quotient sweep | **yes — decisively, and beyond what was extracted** | extracted as a colourability kill (row 56); the implementer joined it to row 66's fan gap and closed `Forces` on four lattices by theorem (T6). **The join was in the corpus (G13, row 66, both marked "bears ✓" in §G) and the extraction did not make it** — the first 3.1 instance below |
+| 4 | the rich 2-unit lattices' Kempe reach | yes | rigid at exactly the tower's five targets (T8); the join of two instruments |
+| 5 | lens shapes with cores | no | priced once over K (thin); never needed — every lattice closed by theorem before a lens was built; on the one live lattice the cores are empty (below) |
+| 6 | pigeonhole × kill | no | superseded: the tower decides the depths on 2-unit fabric; `Forces` dead on the wall-broken lattices |
+| 7 | sweep ranking corrections | 5(c) yes (two type-M members found, both coloured); the rest declined | the arena route closed by theorem (T4) |
+| 8 | Galois symmetry breaking | declined; **revived by 1f** as the second arm on the live lattice | — |
+| 9 | critical-set filter | moot | no candidate forcer ever existed |
+| 10 | arity floor | **yes, by theorem** (T11: ≥ 3 on L3) | not by `tools/arity.py` |
+| 11 | χ_gf on small H | declined with reason | every lattice built is four-colourable, so χ_gf ≤ 4 on any H inside one |
+| 12 | counterexample-guided growth | declined | nothing to grow toward |
+| 13 | Kempe screen prior art | **yes** | `[Polymath16wikiR2]`, unread in our own bibliography: the hand form of the rigidity the screens measure |
+| 14 | kernel notes | conditional | no refusal; T2/T6/T10 stubbed under FS-2, T7's core deferred |
+
+**Instances for step 3.1 (entries that bore and were used as background), each rewritten at this close:**
+1. **G13 / row 66 — the fan gap.** "One gap in a target colouring frees every pair above it" was in G13's Do and in the row; the
+   re-grokking marked both *bears ✓* and extracted the quotient only as a colouring. The instrument that decided the milestone
+   was the join, made by an implementer reading the theory, not by the re-grokking. *Rewritten:* G68 is the Do.
+2. **G42 — additive rigidity is closure.** Its sentence "rigidity needs every two-colour Kempe subgraph of every admissible hom
+   connected" *is* T10's statement for periodic colourings; read as a memoir of Exoo–Ismailescu's seed, it was extracted only in
+   its additive form (T2), and the periodic generalisation arrived a phase later. *Rewritten:* G69 carries the general form.
+3. **G61(4) — the supply of unit vectors decides.** Bore on every phase and was used as background; its mechanism — which residue
+   circles the directions cover — is T9. *Rewritten:* G69.
+4. **G65 — the degree law** was used and is incomplete: it prices balls bounded in every embedding; a word ball in rank 8 has a
+   combinatorial density ceiling the law does not see (core number ≤ 12 on the live lattice at 1.9 M points). *Rewritten:* a
+   clause added to G65.
+5. **The owner's own rank-6 prediction (P-M1)** read the fan gap as the classifier because the mechanism note was written from the
+   rank-4 cases; the loss is the rank-6 finding. Recorded in G69 as its first scored prediction.
+
+**Entries whose verdict was right and whose use was complete:** G54 (the sign computed first — the tower), G62 (the quotient
+before any solver), G55 (the closers), G21, G30, G49/G50, G65's aim-by-degree.
