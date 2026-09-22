@@ -30,6 +30,11 @@ at 25 and 49; Hoffman's floor ≥ 8 at 169); at 11 it is ramified. So de Grey's 
 prime tried, its four-colourings are all 2-adic (the residue colouring at 2 and what Kempe leaves of it — Polymath's "Coloring R_2"
 Cor. 9, `[Polymath16wikiR2]`), and it is **rigid**: Harder's forced pair. **The rigidity is the arithmetic of the odd primes.**
 
+**Checked (owner, on my own K-lattice):** the 54 unit vectors reduce mod 5 onto **exactly 24** residues — the whole split torus
+`𝔽₂₅^×` — so the N = 5 quotient *is* `UD(𝔽₂₅, 2)`, and mod 7 onto **exactly 48** — all of `𝔽₄₉^×` — so the N = 7 quotient *is*
+`UD(𝔽₄₉, 2)`; both refuse four colours by phase 0's computation, which is why de Grey's N = 5 and N = 7 rows are UNSAT. Mod 11 and
+13 the 54 residues are distinct, a proper subgraph of the targets (`|𝔽₁₆₉^×| = 168`), still refusing.
+
 At 11 (ramified over ℚ, inert over E⁺) the target is the level-2 norm-one Cayley graph on 11⁴ vertices, and it refuses too
 (N = 11 UNSAT) — so the splitting type names the *shape* of the target, and its four-colourability is computed, not read off.
 
