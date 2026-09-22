@@ -39,7 +39,10 @@ residue involution ⟹ the residue graph is a matching). Row 63's `[hand]` two-c
 
 **(ii) The conjecture's five-level, conditional on one measured object.** Over `K = ℚ(√3,√11)`, M56 measured a pair at distance
 `8/3` forced equal by every four-colouring of deep K-fabric (`data/m53/forced-spindle-core-8over3.json`: a 588-vertex,
-2,886-edge core, one solver refusal, the pair's spindle giving the 5-chromatic witness of row 47). Call that input `G₄`. For
+2,886-edge core, one solver refusal, the pair's spindle giving the 5-chromatic witness of row 47). **Prior art (found by FS-70's
+gate, 2026-09-21, read in the held thread text): Jannis Harder, Polymath16 first thread, 28 April 2018 — the same forced pair on
+de Grey's `V + V + H`, 745 vertices, spindled at `arccos(119/128)`; and `[Polymath2021]`'s strip forcer (Parts, March 2021,
+61,216 vertices). M56's core is a rediscovery, 588 against 745.** Call that input `G₄`. For
 any real field `F ⊇ K` with the wall broken, `1/2 ∈ R(F)`, so `3/8 = 3 · (1/2)³ ∈ R(F)`, and Theorem 4.1 with `δ = 8/3` gives
 **`χ(F²) ≥ 5`** (Theorem 6.1) — wall-broken is *sufficient* for five over `K`, where the record had it only as necessary
 (G35). **Corollary 6.2:** for every real multiquadratic `F ⊇ K` with `L(F) ≤ 5`, `χ(F²) = L(F)` — at 2 such a field's stable
