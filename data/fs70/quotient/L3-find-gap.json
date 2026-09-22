@@ -1,0 +1,73 @@
+{
+ "spec": "group6:u3:2+zeta6:w4",
+ "aim": "gap",
+ "rank": 6,
+ "g": 42,
+ "saturated": true,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 0.0,
+   "cnf_sha256": "ce0451895f00a5f7521dbf730b833fa3d589d7d9270e8873965564066864d311",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  },
+  {
+   "N": 3,
+   "admissible": false
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 0.02,
+   "cnf_sha256": "284baa3706a3751e260b9e2db88b7b0baad7b309e1b021440fe5177870e5db1d",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 0.52,
+   "cnf_sha256": "9cd0337ca4ab967042ea5d636569529d74e362d34ca46d5c4c5f53ba39a745f0",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 0.16,
+   "cnf_sha256": "62d96cf4b9f6f0003aef40c693ec4b400eb44162daa3aec195f4b814134a1eb3",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  },
+  {
+   "N": 7,
+   "admissible": true,
+   "classes": 117649,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 69.25,
+   "cnf_sha256": "037140e4c11cf911142ef488975ed6fc75f2f51a6401fb8a2b29f4e7e6977881",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  },
+  {
+   "N": 8,
+   "admissible": true,
+   "classes": 262144,
+   "aim": "gap",
+   "verdict": "UNSAT",
+   "seconds": 2.7,
+   "cnf_sha256": "90ab39bf89f5a7969829558d1c02be01496edf0d6943e319561773039e4f32e2",
+   "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+  }
+ ]
+}

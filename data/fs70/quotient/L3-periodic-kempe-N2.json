@@ -16,6 +16,7 @@
   "colour_origin": 0,
   "colour_delta": 0,
   "saturated": true,
+  "separated_refuted": true,
   "level": 1,
   "per_b": {
    "1": {
@@ -64,6 +65,7 @@
   "colour_origin": 0,
   "colour_delta": 0,
   "saturated": true,
+  "separated_refuted": true,
   "level": 1,
   "per_b": {
    "1": {
@@ -112,6 +114,7 @@
   "colour_origin": 0,
   "colour_delta": 0,
   "saturated": true,
+  "separated_refuted": true,
   "level": 1,
   "per_b": {
    "1": {
@@ -160,6 +163,7 @@
   "colour_origin": 0,
   "colour_delta": 0,
   "saturated": true,
+  "separated_refuted": true,
   "level": 1,
   "per_b": {
    "1": {
@@ -208,6 +212,7 @@
   "colour_origin": 0,
   "colour_delta": 0,
   "saturated": true,
+  "separated_refuted": true,
   "level": 1,
   "per_b": {
    "1": {
@@ -256,6 +261,7 @@
   "colour_origin": 0,
   "colour_delta": 1,
   "saturated": true,
+  "separated_refuted": false,
   "verdict": "escape",
   "level": 0,
   "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"

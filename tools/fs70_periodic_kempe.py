@@ -347,6 +347,13 @@ class PeriodicColouring:
         row = {'label': self.label, 'N': N, 'rank': rank, 'g': len(self.U), 'target': targets_name,
                'delta': list(delta), 'colour_origin': a, 'colour_delta': self.col[dbar],
                'saturated': self.saturated}
+        # THE OTHER COMPULSION, free from the same colouring.  `Separated G 4 u v` says every proper colouring
+        # gives u and v DIFFERENT colours, so exhibiting one that gives them the SAME colour refutes it.  The
+        # pulled-back periodic colouring does exactly that whenever c(deltabar) == c(0bar) -- i.e. at level 1.
+        # So one periodic colouring kills one compulsion or the other at every target, and two colourings at
+        # different N often kill both; when both are dead the arity floor at four colours is at least 3.
+        row['separated_refuted'] = bool(self.col[dbar] == a and dbar not in
+                                        {self._ix(tuple(x % N for x in s_)) for s_ in self.U})
         if self.col[dbar] != a:
             row['verdict'] = 'escape'
             row['level'] = 0
@@ -612,11 +619,12 @@ def _print_row(t, r):
         print(f'  {t:8s}: **ESCAPE (level 0)** -- c(delta) = {r["colour_delta"]} != c(0) = {r["colour_origin"]}: '
               f'the periodic colouring itself separates the pair.  Forces DEAD on this lattice')
         return
+    sep = '  [Separated DEAD]' if r.get('separated_refuted') else ''
     bits = ' '.join(f'b={b}:{"in" if v["delta_in_K0"] else "OUT"}'
                     f'[Q0 {v["component_classes"]}, V idx {v["V_index_in_NLambda"]}]'
                     for b, v in r['per_b'].items())
     head = '**ESCAPE**' if r['verdict'] == 'escape' else 'rigid    '
-    print(f'  {t:8s}: {head} {bits}')
+    print(f'  {t:8s}: {head} {bits}{sep}')
 
 
 def _word_ball8(steps, k):

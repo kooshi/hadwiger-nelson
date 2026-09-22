@@ -1,0 +1,213 @@
+{
+ "spec": "group6:u3:2+zeta6:w4",
+ "aim": "sep",
+ "rank": 6,
+ "g": 42,
+ "saturated": true,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "sep:2",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "sep:2/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "sep:4/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "sep:8/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 2,
+   "admissible": true,
+   "classes": 64,
+   "aim": "sep:4",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 3,
+   "admissible": false
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "sep:2",
+   "verdict": "SAT",
+   "seconds": 0.1,
+   "cnf_sha256": "65adffdc8bbed8b5889160c7c12006673c85b0d02149315d1f6f20b63c03e1c8",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "sep:2/3",
+   "verdict": "SAT",
+   "seconds": 0.1,
+   "cnf_sha256": "65adffdc8bbed8b5889160c7c12006673c85b0d02149315d1f6f20b63c03e1c8",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "sep:4/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "sep:8/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "classes": 4096,
+   "aim": "sep:4",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "sep:2",
+   "verdict": "UNSAT",
+   "seconds": 5.37,
+   "cnf_sha256": "d247298c13f06dc0879de5679982406ccb034c114403f0a9e31943db1905fb25",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "sep:2/3",
+   "verdict": "UNSAT",
+   "seconds": 11.36,
+   "cnf_sha256": "f335da6038ffbcb9872dc502800c87188ae74e1d1fa5c441b4de40c095af3b54",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "sep:4/3",
+   "verdict": "UNSAT",
+   "seconds": 7.85,
+   "cnf_sha256": "c7b9d50af5cacadca224a116178a4fa3719ef67ef8b1f2029a6a46fb803dd861",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "sep:8/3",
+   "verdict": "UNSAT",
+   "seconds": 11.5,
+   "cnf_sha256": "83da3f453d8e6b7acf1218e0219f9f8331311d5f5de2fbd68353112a9d863a77",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "classes": 15625,
+   "aim": "sep:4",
+   "verdict": "UNSAT",
+   "seconds": 11.25,
+   "cnf_sha256": "f335da6038ffbcb9872dc502800c87188ae74e1d1fa5c441b4de40c095af3b54",
+   "note": "c(delta) != c(0); origin pinned 0; least neighbour pinned 1; 2<3 precedence on the first 512"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "sep:2",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "sep:2/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "sep:4/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "sep:8/3",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "classes": 46656,
+   "aim": "sep:4",
+   "verdict": "n/a",
+   "seconds": 0.0,
+   "cnf_sha256": "",
+   "note": "delta lies in N*Lambda, so its class is the origin"
+  }
+ ]
+}
