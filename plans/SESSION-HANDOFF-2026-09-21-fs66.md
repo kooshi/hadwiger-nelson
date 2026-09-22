@@ -1,4 +1,4 @@
-# Session handoff — FS-66 mid-milestone: three towers certified, 23 solving on the GPU, a prover at work on the general conjecture
+# Session handoff — FS-66: CLOSED 2026-09-21 (four towers certified; the record of how the day went is below, newest updates first inside §0)
 
 *Written 2026-09-21 by the product owner just before a compaction, for a reader with no conversation memory (most likely myself).
 Everything here is checkable against the repository. Read this, then `plans/FS66-residue-tower-drop.md` §0 and §Q (the running
@@ -72,7 +72,12 @@ then asked for the prover so the run can be cancelled if the conjecture is prove
   strengthening, `plans/STUB-certificate-at-43.md` (FS-69). Left: the closing commit (CLAUDE.md + the audit tool + delete
   `data/fs66/owner/close-draft.md`), stop the GPU solve (cause: the certificate is in and `⌊U⌋ = 97` cannot improve — 96 is below
   the relaxation's optimum 97.5677; forfeit: decimals of `U` only; resume command in the ckpt README), the final report, memory.
-* Still live: the GPU solve at 23 (to be stopped at the close) and my two checker runs.
+* **19:10 — FS-66 CLOSED, commit `3bfdc209`.** My checker run: CERTIFIED (3,050 s, 8.6 GB); both plants refused for their named
+  reasons; scoring record `data/fs66/owner/po-recheck-phase2d-23.md`. The GPU solve at 23 is STOPPED (record first, then `kill -- -pgid`,
+  verified by effect: pid absent, checkpoint digest static, GPU idle); its checkpoint and resume command stay in `data/fs66/ckpt/b1-p23/`.
+  Nothing live. Tree clean but for the untracked checkpoint files. Nothing pushed. **Next: the final report to Kooshi (delivered in
+  chat), then FS-59's R9 in a fresh session** — its stub `plans/STUB-four-colours-167.md` §3a/R9; the handoff for that session is
+  `plans/SESSION-HANDOFF-2026-09-20.md` §0 (standing rules) plus this file.
 
 ## 1. Standing rules (full text: the 2026-09-20 handoff §0, `CLAUDE.md` § Delegation, memory)
 
