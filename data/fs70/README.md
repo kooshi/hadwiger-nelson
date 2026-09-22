@@ -33,6 +33,8 @@ frozen checker that shares no code with them.
 | `periodic-screen.json`, `periodic-screen-p4.json` | the same question asked of `pΛ`-periodic colourings of the whole lattice (the graph on `Λ/pΛ`, `p⁸` classes). Silent on every chainable target, and structurally so: they all lie inside `4Λ`, where every additive and every periodic instrument is blind. | `fs70_ask.periodic_escape` |
 | `records/phase-1.md` | the running log of phase 1: the pin correction, the Kempe screen and its controls, the asks, the structure readings | the phase-1 implementer |
 | `records/asks/quotient-sweep.log` | the imposed-quotient ask at `p ≤ 4` on the four live fabrics (L4a and L5 carry periodic rules; L2 and L3 carry none) | `tools/fs70_structure.py quotient DIR P` |
+| **`records/asks/*.colouring.json.gz`** and **`MANIFEST.json`** | **every SAT ask's model**, gzipped verbatim with its uncompressed sha256, its source path and the row it belongs to. A colouring is evidence and belongs beside its row, not in `build/`, which agents clean (the owner's ruling 5). | phase 1b, for phase 1's thirteen and its own |
+| `records/phase-1b.md` | the running log of phase 1b: the ζ₆ grammar, L6's screen, its asks at three densities, the type-M arena and G53's counting screen, and four instrument defects | the phase-1b implementer |
 
 ## The tools
 
@@ -44,5 +46,6 @@ frozen checker that shares no code with them.
 | `tools/fs70_structure.py` | the structure instruments: the quotient screen, the period screen, and the imposed-quotient ask, with the positive control the plan specifies. |
 | `tools/fs70_haugland.py` | Haugland's `G₁` rebuilt in `ℚ(ζ₈₄)` — the positive control one field over. |
 | `tools/fs70_cube.py` | cube-and-conquer for a four-colour refutation, checkpointed per cube (a kill costs the cubes in flight and nothing else). |
+| **`tools/fs70_arena.py`** | the **type-M arena**: a base point set plus its rotated copy sharing the centre, and **G53's counting screen** on it (`L` = the fewest circle points any proper four-colouring puts on the centre's colour, by binary search on a cardinality constraint; `2L >` the circle count refutes the arena with no arena solve). The rotation's `n` is derived from `\|1 − R\|² = 1/n` and a rotation that is not of type M is refused by name; the arena's edges are derived twice, from the lattice saturation and from the geometry, and must agree. `--plants` plants four faults, one of them (`card_ignored`) aimed at exactly the `L = 0` reading the tool returns on this field's fabric. |
 
 Scratch that is regenerable in minutes lives in `build/fs70/` (gitignored) and is never the only copy of anything.
