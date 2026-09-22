@@ -1,0 +1,102 @@
+[
+ {
+  "N": 2,
+  "admissible": true,
+  "vertices": 16,
+  "edges": 72,
+  "verdict": "SAT",
+  "connection_set": 9,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 3,
+  "admissible": false
+ },
+ {
+  "N": 4,
+  "admissible": true,
+  "vertices": 256,
+  "edges": 4608,
+  "verdict": "SAT",
+  "connection_set": 36,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 5,
+  "admissible": true,
+  "vertices": 625,
+  "edges": 7500,
+  "verdict": "UNSAT",
+  "connection_set": 24
+ },
+ {
+  "N": 6,
+  "admissible": true,
+  "vertices": 1296,
+  "edges": 21384,
+  "verdict": "SAT",
+  "connection_set": 33,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 7,
+  "admissible": true,
+  "vertices": 2401,
+  "edges": 57624,
+  "verdict": "UNSAT",
+  "connection_set": 48
+ },
+ {
+  "N": 8,
+  "admissible": true,
+  "vertices": 4096,
+  "edges": 73728,
+  "verdict": "SAT",
+  "connection_set": 36,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 9,
+  "admissible": false
+ },
+ {
+  "N": 10,
+  "admissible": true,
+  "vertices": 10000,
+  "edges": 270000,
+  "verdict": "SAT",
+  "connection_set": 54,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 11,
+  "admissible": true,
+  "vertices": 14641,
+  "edges": 395307,
+  "verdict": "UNSAT",
+  "connection_set": 54
+ },
+ {
+  "N": 12,
+  "admissible": true,
+  "vertices": 20736,
+  "edges": 559872,
+  "verdict": "SAT",
+  "connection_set": 54,
+  "gapped_vertices": 0,
+  "8over3_separated": false
+ },
+ {
+  "N": 13,
+  "admissible": true,
+  "vertices": 28561,
+  "edges": 771147,
+  "verdict": "UNSAT",
+  "connection_set": 54
+ }
+]

@@ -1,0 +1,20 @@
+{
+ "n": 5,
+ "core": 7,
+ "lens_points": 466,
+ "lens_edges": 1732,
+ "core_points": 0,
+ "core_edges": 0,
+ "unit_vectors": 54,
+ "M": 36,
+ "lens": {
+  "verdict": "SAT",
+  "seconds": 0.0,
+  "points": 466,
+  "edges": 1732,
+  "common_neighbours": 0,
+  "cnf_sha256": "5d31d240a24dbdd03886d77de688d8be03b4e27e8b20a15263fdbed00e28a25a",
+  "monochromatic_edges": 0
+ },
+ "core7": "endpoint absent"
+}

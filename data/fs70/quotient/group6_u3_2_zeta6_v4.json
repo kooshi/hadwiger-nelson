@@ -1,0 +1,78 @@
+{
+ "spec": "group6:u3:2+zeta6:v4",
+ "rank": 6,
+ "g": 42,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": false,
+   "vertices": 64,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 3,
+   "admissible": false,
+   "vertices": 729,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 4,
+   "admissible": true,
+   "vertices": 4096,
+   "edges": 43008,
+   "avg_degree": 21.0,
+   "connection_set": 21,
+   "verdict": "SAT",
+   "seconds": 0.08,
+   "cnf_sha256": "09da19d33b37825a6b72d979a24274f841678ea956b38ae69bd1c2f9b67848f4",
+   "triangle_pinned": true,
+   "clauses": 176131,
+   "monochromatic_edges": 0,
+   "gapped_vertices": 0,
+   "gap_at_origin": [],
+   "non_adjacent_differences": 4074,
+   "differences_with_shared_gap": 0,
+   "forces_closed_by_row66": false,
+   "separated_closed_by_row66": false
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "vertices": 15625,
+   "edges": 328125,
+   "avg_degree": 42.0,
+   "connection_set": 42,
+   "verdict": "SAT",
+   "seconds": 0.73,
+   "cnf_sha256": "33796e844dd44f9d7a29b65390d257a3824f74c0a8a522d7112fc53c1aa12f5f",
+   "triangle_pinned": true,
+   "clauses": 1328128,
+   "monochromatic_edges": 0,
+   "gapped_vertices": 1867,
+   "gap_at_origin": [],
+   "non_adjacent_differences": 15582,
+   "differences_with_shared_gap": 0,
+   "forces_closed_by_row66": true,
+   "separated_closed_by_row66": false
+  },
+  {
+   "N": 6,
+   "admissible": false,
+   "vertices": 46656,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 7,
+   "admissible": true,
+   "vertices": 117649,
+   "edges": 1764735,
+   "avg_degree": 30.0,
+   "connection_set": 30,
+   "verdict": "UNKNOWN",
+   "seconds": 300.09,
+   "cnf_sha256": "87e6a1d3499cb4731e73d2c7caf3b6bdd7e15eb825df6c7d2092473e6a0976d8",
+   "triangle_pinned": true,
+   "clauses": 7176592
+  }
+ ]
+}

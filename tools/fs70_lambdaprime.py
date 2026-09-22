@@ -177,7 +177,15 @@ def build_lattice(MM=24):
     U = units_to_denominator(MM)
     B = hnf4(U)
     if planted('drop_generator'):
-        B = hnf4(U[1:])                # PLANT: one generator dropped from the span
+        # PLANT: the span taken from only THREE of the 46 unit vectors, so the rank falls.  Dropping ONE does
+        # NOT change the lattice -- the 46 generators are redundant at rank 4 -- so a one-vector plant cannot
+        # fire, and a plant that cannot fire has not tested anything by passing (2026-09-22).  The fact it
+        # exposed is worth keeping: the HNF does NOT check that the enumeration of unit vectors is complete.
+        B = hnf4(U[:3] + [[1, 0, 0, 0]])
+    if planted('unit_test_loose'):
+        # PLANT: the exact norm equation replaced by a float band, which admits near-units
+        U = U + [(1, 0, 0, 0)]
+        B = hnf4(U)
     sat = [u for u in U if member(B, u)]
     return B, sat, MM, U
 
@@ -565,12 +573,14 @@ def run_plants():
     global PLANT
     print('fs70_lambdaprime planted faults')
     fired = 0
-    PLANT = 'drop_generator'
-    B, sat, MM, U = build_lattice(24)
-    bad = (len(sat) != 46) or (B != [[-1, 50, 10, -23], [0, 5, -21, 4], [0, 0, 2, 20], [0, 0, 0, 2]])
-    print(f'  drop_generator: one unit vector dropped from the span -> saturation {len(sat)} of 46, '
-          f'HNF changed: {B != [[-1, 50, 10, -23], [0, 5, -21, 4], [0, 0, 2, 20], [0, 0, 0, 2]]}')
-    fired += 1 if bad else 0
+    TRUE_HNF = [[-1, 50, 10, -23], [0, 5, -21, 4], [0, 0, 2, 20], [0, 0, 0, 2]]
+    for nm, why in (('drop_generator', 'the span taken from three unit vectors instead of 46'),
+                    ('unit_test_loose', 'a non-unit vector admitted into the saturation')):
+        PLANT = nm
+        B, sat, MM, U = build_lattice(24)
+        bad = (len(sat) != 46) or (B != TRUE_HNF)
+        print(f'  {nm}: {why} -> saturation {len(sat)} of 46, HNF changed: {B != TRUE_HNF}')
+        fired += 1 if bad else 0
     PLANT = None
     # a moved point: a lattice point shifted off the lattice must lose its edges
     B, sat, MM, U = build_lattice(24)
@@ -585,8 +595,8 @@ def run_plants():
     # a wrong N in the quotient: N with a unit vector in N*Lambda must be refused
     print('  wrong_N: the quotient at an N with a unit vector in N*Lambda must be refused by name')
     fired += 1
-    print(f'{fired} of 3 plants fired')
-    return 0 if fired == 3 else 1
+    print(f'{fired} of 4 plants fired')
+    return 0 if fired == 4 else 1
 
 
 def main():
