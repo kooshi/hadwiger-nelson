@@ -299,6 +299,15 @@ vectors of denominator at most **8** (140 vectors), exhaustively, using an exact
 imaginary part. A distance absent from the `targets` column is absent **from that pool at that length**, not from
 the field. The `8/3` row carries chain 6 from the plan's own identity, not from this enumeration.
 
+*One clarification, added 2026-09-22 after the owner's review §3 — verified before writing it.* A distance can
+also be absent from the `targets` column because the **additive screen** excluded it, which is a different and
+stronger reason. `δ = 2/3` is the case in point: `3/2 = 1 + v + v̄`, so the enumeration **does** reach it, at
+chain length 3 (`chainable_reciprocals(8, 4)` returns it), and it was dropped by the `Λ_forced` filter — `2/3`
+lies in `Λ` but **not** in `Λ_forced`, on `zeta12+u3`, `group:u3:2` and `twounits:42` alike. That is the owner's
+own conclusion (`2/3 ≡ 2 (mod 4Λ)`, so the two-thirds of the colourings with `φ(1)` odd separate it exactly as
+they separate distance 2) reached by the tool rather than by hand. **The chain enumeration has no hole here**, and
+`eq 2/3` belongs with `eq 2` on the wall-breaking lattices L2/L3, where no additive colouring exists.
+
 ---
 
 ## 5. Decisions
