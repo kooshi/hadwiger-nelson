@@ -32,7 +32,9 @@ Six results, in the order they bear on the milestone:
    Found at `N = 5` on the owner's Λ′ (597 of 625 classes gapped), at `N = 5` on **L6** — the lattice phase 1b
    spent its whole budget on — at `N = 5` on **L2**, and at `N = 5, 7` on **L1**, the 2-unit Harder transposition.
    Row 56 gives the colouring; row 66 gives the closure; both are kernel theorems already in the repository.
-   **L3 was still running at handback** (§11); it is the last of the plan's lattices unscreened.
+   **L3 is the one that survives**: its three quotient four-colourings (`N = 2, 4, 6`) are **all gap-free**, so
+   the screen does not close it — it sits on the same side of the line as de Grey's K-lattice, which has a forced
+   pair in print. `zeta12+rho15` (rank 8) is closed at `N = 3`. See §8 item 3.
 
 3. **The instrument passes a falsification control that could have refuted it** (§5.3). On **de Grey's K-lattice**,
    where Harder's forced pair at `8/3` is in print, the screen finds quotient four-colourings at `N = 2, 4, 6, 8,
@@ -263,6 +265,10 @@ pair's difference and does **not** follow.
 | **L1** = `group6:u3:2` (Harder transposed) | 4 | 30 | standing (2-unit) | 5 | 625 | 9,375 | **SAT** | **50** | 0 of 594 | **YES** |
 | L1 | 4 | 30 | standing | 7 | 2,401 | 21,609 | **SAT** | **193** | 0 of 2,382 | **YES** |
 | L1 | 4 | 30 | standing | 2, 4, 6 | — | — | SAT | 0 | 0 | no (those `N`) |
+| **L3** = `group6:u3:2+zeta6:w4` | 6 | 42 | broken | 2, 4, 6 | 64 / 4,096 / 46,656 | — | SAT | **0 at all three** | 0 | **NO — L3 SURVIVES** |
+| L3 | 6 | 42 | broken | 5 | 15,625 | 328,125 | UNSAT (3.3 s) | — | — | — |
+| L3 | 6 | 42 | broken | 7 | 117,649 | 1,764,735 | UNKNOWN at 300 s | — | — | a budget, not a fact about the lattice (G21) |
+| `zeta12+rho15` | 8 | 60 | broken | 3 | 6,561 | 118,098 | **SAT** | **1,692** | 0 of 6,524 | **YES** |
 | calibration: ⟨ζ₆⟩, the triangular lattice (χ = 3) | 2 | 6 | — | 3 | 9 | 27 | SAT | 3 | 0 | **YES**, as it must be |
 
 **P3 LOST and P11 LOST**, both in the informative direction: I predicted UNSAT everywhere on L6 and on Λ′.
@@ -385,9 +391,10 @@ Items 5(a), 5(b), 5(d) and item 6 were **not run**. §8 ranks them.
 
 | # | what | why now |
 |---|---|---|
+| 0 | **L3 is now the cheapest live fabric of the plan** (rank 6, 42 unit vectors, wall-broken, 3-non-integral) — the screen does not close it, and it has never been asked at four colours on a ball. Ask it before the rank-8 lattices: it is smaller and the screen has already told you it is not free by theorem. Re-run its `N = 7` row at a real budget first (300 s returned UNKNOWN, which is about the encoding). | the screen's own output names it |
 | 1 | **The rich 2-unit lattices, asked.** `twounits:14/30/42` are Kempe-rigid at `4/3`, `8/3`, `4`, `4/7`, `4/√3`, have never been asked, and are the only fabric left that the quotient screen has not closed (rank 8 puts `N^8` out of reach for every admissible `N`, so §5 cannot be run on them). **First: the quotient screen at `N = 2, 3`** (256 and 6,561 classes) — if a gapped colouring exists there, they close too and the milestone's 2-unit route is finished. Only if it does not, ask `forces δ` at the five rigid targets on a ball. | the one live fabric; and the screen is minutes against the ask's hours |
 | 2 | **The `N = 8` row of L6 is the counterexample to run down.** L6 has a **gapped** colouring at `N = 5` and a **gap-free** one at `N = 8`. Both are proper. So the gap is a property of the colouring, not the lattice, and the screen's power depends on finding a gapped one — which means an UNSAT or a gap-free SAT at one `N` proves nothing. A finder aimed at gapped colourings (maximise the number of gapped vertices) would make the screen decisive rather than lucky. | the instrument's own soundness boundary, found in its own data |
-| 3 | **The de Grey control, inverted into a question.** de Grey's K-lattice has six gap-free quotient four-colourings and a forced pair; Λ′, L6 and L1 have gapped ones and no forced pair. **What distinguishes them?** It is not the 2-adic wall (L1 is 2-unit and gapped, de Grey's is 2-unit and gap-free). A mechanism here would be a grokking, and the data for it is already on disk. | four objects, two classes, and the classifier is not the wall |
+| 3 | **The de Grey control, inverted into a question — and L3 is the second member of its class.** Gap-free only: **de Grey's K-lattice** (six colourings, and a forced pair in print) and **L3** (`group6:u3:2+zeta6:w4`, three colourings). Gapped, hence closed: Λ′, L6, L2, L1, `zeta12+rho15`. **What distinguishes the two classes?** It is not the 2-adic wall (L1 is 2-unit and gapped; de Grey's is 2-unit and gap-free; L3 is wall-broken and gap-free). A mechanism here would be a grokking, and every object it needs is already on disk. | seven objects, two classes, and the classifier is not the wall |
 | 4 | **The tower's LRAT core** (deferred from item 1). `P₄`'s refutation is 6 s on a 0.40 GB CNF; extracting the core by backward reachability (the `Instances/TwoAdicFive/Edges.lean` recipe) makes the tower's forcing a kernel statement, as row 67's is over `K`. Priced at an afternoon. | phase 2's kernel form |
 | 5 | **Items 5(a), 5(b), 5(d)** — cross-edge density, whether cross edges form a matching or close cycles through both halves, the live radius sums, the off-diagonal monochromatic share — and **item 6**, the Galois symmetry break | not done here. Their bearing fell when §5 closed the arena route by theorem: they rank arenas for asks that no longer need running. Keep them for a two-centre shape if one is built |
 | 6 | **The lens, priced against the word ball.** `T₅` on de Grey's K-lattice is 466 points and SAT where the word ball at sums of ≤ 3 is 23,083 points and UNSAT. Before phase 1e leads with a lens, measure at which `n` a lens reaches the word ball's forcing | the shape the plan leads with, now measured once and found thin |

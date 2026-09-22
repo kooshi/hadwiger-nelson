@@ -1,0 +1,60 @@
+{
+ "spec": "zeta12+rho15",
+ "rank": 8,
+ "g": 60,
+ "rows": [
+  {
+   "N": 2,
+   "admissible": false,
+   "vertices": 256,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 3,
+   "admissible": true,
+   "vertices": 6561,
+   "edges": 118098,
+   "avg_degree": 36.0,
+   "connection_set": 36,
+   "verdict": "SAT",
+   "seconds": 0.04,
+   "cnf_sha256": "a622c7a226740ea51dea633ebf6ffdaf5c56d9127bf46cbaf18117b35f32d889",
+   "triangle_pinned": true,
+   "clauses": 478956,
+   "monochromatic_edges": 0,
+   "gapped_vertices": 1692,
+   "gap_at_origin": [],
+   "non_adjacent_differences": 6524,
+   "differences_with_shared_gap": 0,
+   "forces_closed_by_row66": true,
+   "separated_closed_by_row66": false
+  },
+  {
+   "N": 4,
+   "admissible": false,
+   "vertices": 65536,
+   "reason": "a unit vector is 0 mod N"
+  },
+  {
+   "N": 5,
+   "admissible": true,
+   "vertices": 390625,
+   "verdict": "not asked",
+   "reason": "over cap"
+  },
+  {
+   "N": 6,
+   "admissible": true,
+   "vertices": 1679616,
+   "verdict": "not asked",
+   "reason": "over cap"
+  },
+  {
+   "N": 7,
+   "admissible": true,
+   "vertices": 5764801,
+   "verdict": "not asked",
+   "reason": "over cap"
+  }
+ ]
+}
