@@ -797,8 +797,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   the unit shell for an integer `t`, the certificate's defeat is automatic for even `t` (`φ` lands in a characteristic-2 residue
   field, so every circle point carries the centre's residue), and the record has `t = 2`; so "this object defeats the residue
   certificate" is not evidence about the object, and the live quantity is the **off-diagonal** share of monochromatic cross
-  edges (the record 0 of 30, `ρ₆₃` 24 of 54). `|p|² = n` is free iff `n = k²·m` with `m` a squared distance the lattice already
-  realises (4, 16, 12 free; 2 not). *Do: for every in-field rotation compute the live radius sums from its cosine before any
+  edges (the record 0 of 30, `ρ₆₃` 24 of 54). `|p|² = n` is free — nonempty by scaling alone — whenever `n = k²·m` with `m` a squared distance the lattice already
+  realises (4, 16, 12 free; 2 not); the converse fails (`n = 5` has 60 points and no such decomposition — M63H2-T2's own correction record; FS-71, batch 4c). *Do: for every in-field rotation compute the live radius sums from its cosine before any
   base exists — a free prime filter — and measure the off-diagonal monochromatic share under the base's colourings, never
   the diagonal, which is free where the circle is free. Killing test: a rotation whose base realises the live radius sum and
   stays four-colourable (sufficiency, untested), or a wall-breaking rotation forcing with no monochromatic cross pair.*
