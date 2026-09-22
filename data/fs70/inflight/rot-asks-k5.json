@@ -1,11 +1,12 @@
 {
  "what": "FS-70 phase 1c: the four-colour control on the top five wall-breaking arenas at base sums of <= 5 (136,021 points per half)",
  "command": "python3 -u tools/fs70_rot_asks.py data/fs70/rotations.jsonl --top 5 --k 5 --budget 1200 --single-flags '--sat' --out-root build/fs70/rot/asks",
- "pgid": 443649,
+ "pgid": 443653,
  "log": "build/fs70/rot/asks-k5-sat.log",
  "checkpoint": "each arena's graph.json and verdict.json under build/fs70/rot/asks/k5-*; the ledger row in data/fs70/asks.jsonl",
  "resume": "the same command -- an arena already built is not rebuilt and an ask already answered is not re-asked",
  "a_kill_redoes": "the arena being built (about a minute) and nothing decided",
- "pid": 443649,
- "note": "relaunched with kissat aimed at the SATISFIABLE direction.  The default configuration settled the first arena in 699 s and had spent 712 s on the second with no verdict; these arenas are two four-colourable halves joined by ~80 edges, so --sat is the right aim (phase 1b measured the same).  THE KILL FORFEITED twelve minutes of solver time on arena 2 and no result.  The pgid recorded here before the kill was 418450, read from a ps listing that included a wrapper; the real group was 418455 and the kill by the wrong number did nothing -- verified by effect, killed by pid, verified again."
+ "pid": 443653,
+ "note": "relaunched with kissat aimed at the SATISFIABLE direction.  The default configuration settled the first arena in 699 s and had spent 712 s on the second with no verdict; these arenas are two four-colourable halves joined by ~80 edges, so --sat is the right aim (phase 1b measured the same).  THE KILL FORFEITED twelve minutes of solver time on arena 2 and no result.  The pgid recorded here before the kill was 418450, read from a ps listing that included a wrapper; the real group was 418455 and the kill by the wrong number did nothing -- verified by effect, killed by pid, verified again.",
+ "progress": "ranks 1 and 2 landed SAT (699 s, 710 s); ranks 3, 4 and 5 running"
 }

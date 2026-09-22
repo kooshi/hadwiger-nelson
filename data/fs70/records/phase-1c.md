@@ -362,6 +362,21 @@ kept. Comparing them against the reduced run, field by field:
 and the self-test asserts the two routes agree on four rotations including `rho15`, so the check is on every
 run and not only in this one.
 
+### 6c-bis. The one scope limit on the arena graphs, stated
+
+An arena's edges come from two sources: **within a half**, the base lattice's saturation, complete by
+construction; **between the halves**, the geometric join. The two can be checked against each other only where
+the *arena lattice's* own saturation is affordable, which costs the box of its denominator and is refused above
+`M = 144`. That is affordable at `ρ₁₅` (`M = 144`) and the two derivations agree exactly — 352,326 edges both
+ways, phase 1b's number and mine. It is **not** affordable at the other rotations, whose arena denominators run
+to 864 and beyond, so for those the between-halves edges rest on the geometric route alone.
+
+What backs that route where it cannot be cross-checked: the float band is 1e-6 against a float error of ~1e-15,
+the neighbourhood radius is derived rather than guessed (§6a), every proposal is decided by exact field
+arithmetic, and the known-answer case (`ψ` a sixth root of unity, where the count must be twice the base's edge
+count) is asserted on **every run**. A missed edge would make an arena easier to colour; the plant
+`grid_radius_short` shows the check that would catch one firing at a loss of 13 in 42,660.
+
 ### 6d. Self-test and plants — all green, `build/fs70/rot/plants.log`
 
 The self-test's four parts, each a number known independently of this tool:

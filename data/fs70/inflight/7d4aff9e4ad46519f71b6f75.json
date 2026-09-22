@@ -1,0 +1,11 @@
+{
+ "sha": "7d4aff9e4ad46519f71b6f75",
+ "graph_dir": "build/fs70/rot/asks/k5-psi--14_-5_0_0_0_0_7_-2_24",
+ "pin": "control",
+ "out": "build/fs70/rot/asks/k5-psi--14_-5_0_0_0_0_7_-2_24/ask",
+ "pid": 456713,
+ "pgid": 443653,
+ "started": 1790074359.6690269,
+ "ledger": "build/fs70/rot/asks/k5-psi--14_-5_0_0_0_0_7_-2_24/ask/cubes.jsonl",
+ "resume": "python3 tools/fs70_ask.py run build/fs70/rot/asks/k5-psi--14_-5_0_0_0_0_7_-2_24 control --out build/fs70/rot/asks/k5-psi--14_-5_0_0_0_0_7_-2_24/ask --resume"
+}
