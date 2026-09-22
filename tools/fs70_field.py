@@ -201,7 +201,15 @@ def e_str(z):
 
 
 def e_denominator(z):
-    return max(f_denominator(z[0]), f_denominator(z[1]))
+    """the COMMON denominator of the pair: the lcm of the two coordinates' denominators, never the max.
+
+    It was `max` until FS-70 phase 1 (2026-09-22).  Max is right whenever one denominator divides the other,
+    which is why it survived every unit vector of every lattice this milestone uses -- x^2 + y^2 = 1 forces the
+    two denominators into that relation -- and it is wrong for a general lattice point: x with denominator 9 and
+    y with denominator 6 gives max 9 against lcm 18, and `e_to_ints` then silently truncated the halves with
+    `int()`.  Found on the k=4 ball of `group:u3:2+d6`, where 224 of 1,864,417 points round-tripped to a
+    different point and made a proper additive colouring read as having 208 monochromatic edges."""
+    return math.lcm(f_denominator(z[0]), f_denominator(z[1]))
 
 
 E_ZERO = (ZERO, ZERO)
@@ -241,7 +249,11 @@ def canonical(z):
 def e_to_ints(z):
     """(A,...,H, m) with m > 0 and gcd(A,...,H,m) = 1"""
     m = e_denominator(z)
-    nums = [int(q * m) for q in (tuple(z[0]) + tuple(z[1]))]
+    scaled = [q * m for q in (tuple(z[0]) + tuple(z[1]))]
+    for q in scaled:                       # fail loud: int() on a Fraction TRUNCATES, silently
+        assert q.denominator == 1, (f'e_to_ints: {q} is not an integer after scaling by the common denominator '
+                                    f'{m} -- e_denominator is not a common denominator of {z}')
+    nums = [int(q) for q in scaled]
     g = m
     for v in nums:
         g = math.gcd(g, abs(v))

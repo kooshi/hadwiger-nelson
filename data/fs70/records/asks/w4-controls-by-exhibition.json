@@ -1,0 +1,36 @@
+{
+ "L5-w4": {
+  "points": 1864417,
+  "edges": 14424204,
+  "degree": 15.473,
+  "monochromatic": 0,
+  "phi": [
+   0,
+   0,
+   0,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "lattice": "group:u3:2+d6"
+ },
+ "L4a-w4": {
+  "points": 1845193,
+  "edges": 14586696,
+  "degree": 15.81,
+  "monochromatic": 0,
+  "phi": [
+   1,
+   1,
+   1,
+   1,
+   2,
+   0,
+   2,
+   0
+  ],
+  "lattice": "zeta12+u3+q7+s7"
+ }
+}
