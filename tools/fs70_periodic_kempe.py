@@ -248,6 +248,7 @@ class PeriodicColouring:
                 tot += ((digits[p] + s[p]) % N) * self.pw[p]
             self.add.append(tot.astype(np.int32))
         self.colv = np.asarray(col, dtype=np.int8)
+        self._comp_cache = {}
         self._check_proper()
 
     def _ix(self, cls):
@@ -280,6 +281,8 @@ class PeriodicColouring:
         edge incidences, [N*Lambda : V])."""
         rank, N = self.rank, self.N
         assert self.col[0] == a
+        if (a, b, stop_at_top) in self._comp_cache:      # independent of the target, so computed once per (a,b)
+            return self._comp_cache[(a, b, stop_at_top)]
         top = N ** rank                          # [N*Lambda : V] == 1 means V == N*Lambda, the top
         inQ = np.logical_or(self.colv == a, self.colv == b)
         p = {0: tuple([0] * rank)}
@@ -330,7 +333,9 @@ class PeriodicColouring:
                         V, _ = hnf_insert(V, g, rank)
                         if stop_at_top and det_of(V, rank) == top:
                             Vfull = True
-        return p, V, edges, index_in_top(det_of(V, rank), top)
+        res = (p, V, edges, index_in_top(det_of(V, rank), top))
+        self._comp_cache[(a, b, stop_at_top)] = res
+        return res
 
     def screen(self, delta, targets_name='', stop_at_top=True):
         """delta in HNF coordinates.  Returns a row dict."""
@@ -598,6 +603,22 @@ def _print_row(t, r):
     print(f'  {t:8s}: {head} {bits}')
 
 
+def _word_ball8(steps, k):
+    """every point reachable from 0 by at most k steps, in integer 8-tuples over the lattice denominator"""
+    seen = {tuple([0] * 8)}
+    front = [tuple([0] * 8)]
+    for _ in range(k):
+        nxt = []
+        for p in front:
+            for s in steps:
+                q = tuple(a + b for a, b in zip(p, s))
+                if q not in seen:
+                    seen.add(q)
+                    nxt.append(q)
+        front = nxt
+    return sorted(seen)
+
+
 def cmd_verify_escape(argv):
     """The reviewer's check of an ESCAPE, using NONE of the voltage machinery.
 
@@ -618,15 +639,35 @@ def cmd_verify_escape(argv):
     colf = _opt(argv, '--colouring')
     out = _opt(argv, '--out')
     sat = '--generators' not in argv
-    lat, U, saturated = fabric_lattice(spec, saturate=sat)
+    if spec == 'degrey-K':
+        # de Grey's K-lattice, over a DIFFERENT field: its arithmetic comes from fs70_harder
+        units, U, rank, B, M, HD = degrey_lattice()
+        saturated = True
+        steps = [HD.vec8(z, M) for z in units]
+        Hbasis = B
+
+        class _L:                                     # the three things the body needs from a lattice
+            pass
+        lat = _L()
+        lat.rank, lat.H, lat.M = rank, B, M
+        lat.vec8 = lambda z: z                        # targets are handed in already as vec8
+        tmap = {'8/3': HD.vec8(HD.rational(8, 3), M), '2': HD.vec8(HD.rational(2), M),
+                '4': HD.vec8(HD.rational(4), M), '4/3': HD.vec8(HD.rational(4, 3), M)}
+        target_vec8 = lambda t: tmap.get(t)
+    else:
+        lat, U, saturated = fabric_lattice(spec, saturate=sat)
+        rank = lat.rank
+        steps = [lat.vec8(z) for z in (lat.units if saturated else lat.S)]
+        target_vec8 = lambda t: (lat.vec8(FB.target_element(t))
+                                 if FB.coords_in_basis(lat.H, lat.vec8(FB.target_element(t))) is not None
+                                 else None)
     if colf is None:
         tag = spec.replace(':', '_').replace('+', '_')
         colf = os.path.join(ROOT, 'data', 'fs70', 'quotient', f'{tag}-N{N}.colouring.json')
     col, _m = load_colouring(colf)
-    pc = PeriodicColouring(U, N, lat.rank, col, label=spec, saturated=saturated)
+    pc = PeriodicColouring(U, N, rank, col, label=spec, saturated=saturated)
 
-    steps = [lat.vec8(z) for z in (lat.units if saturated else lat.S)]
-    pts = FB.word_ball(lat, k, steps=steps)
+    pts = _word_ball8(steps, k)
     idx = {p: i for i, p in enumerate(pts)}
     edges = []
     for i, p8 in enumerate(pts):
@@ -638,7 +679,8 @@ def cmd_verify_escape(argv):
     # the pull-back colour of each ball point
     cof = []
     for p8 in pts:
-        c = lat.coords(FB.e_from_ints(FB.ints_reduce(p8, lat.M))) if False else FB.coords_in_basis(lat.H, p8)
+        c = FB.coords_in_basis(lat.H, p8)
+        assert c is not None, 'a ball point is outside the lattice'
         cof.append(pc.col[pc._ix(tuple(x % N for x in c))])
     zero = tuple([0] * 8)
     o = idx[zero]
@@ -653,10 +695,14 @@ def cmd_verify_escape(argv):
         adj[j].append(i)
     rows = []
     for t in tgts:
-        d = fabric_target(lat, t)
-        if d is None:
+        d8 = target_vec8(t)
+        if d8 is None:
+            print(f'  {t:6s}: not in the lattice')
             continue
-        d8 = lat.vec8(FB.target_element(t))
+        d = FB.coords_in_basis(lat.H, d8)
+        if d is None:
+            print(f'  {t:6s}: not in the lattice')
+            continue
         di = idx.get(tuple(d8))
         r = pc.screen(d, t)
         row = {'spec': spec, 'N': N, 'target': t, 'k': k, 'ball_points': len(pts), 'ball_edges': len(edges),
@@ -874,6 +920,11 @@ def cmd_degrey(argv):
             continue
         pc = PeriodicColouring(U, N, rank, model, label='degrey-K')
         gaps = pc.gapped_vertices()
+        Smod = sorted({tuple(x % N for x in s) for s in U})
+        json.dump({'spec': 'degrey-K', 'N': N, 'colouring': model,
+                   'connection_set': [list(x) for x in Smod]},
+                  open(os.path.join(ROOT, 'data', 'fs70', 'quotient',
+                                    f'degrey-K-N{N}.colouring.json'), 'w'))
         row = {'N': N, 'classes': n, 'verdict': 'SAT', 'seconds': round(secs, 2),
                'gapped_vertices': len(gaps), 'cnf_sha256': sha}
         for nm, dd in (('8/3', d83), ('2', d2), ('4', d4)):

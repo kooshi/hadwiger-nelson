@@ -1,0 +1,263 @@
+[
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "2",
+  "delta": [
+   144,
+   -72,
+   -36,
+   -72,
+   36,
+   54
+  ],
+  "colour_origin": 0,
+  "colour_delta": 0,
+  "saturated": true,
+  "level": 1,
+  "per_b": {
+   "1": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "2": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "3": {
+    "component_classes": 8,
+    "component_edges": 112,
+    "V_rank": 4,
+    "V_index_in_NLambda": null,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   }
+  },
+  "verdict": "escape",
+  "escape_colour": 3,
+  "reason": "the (a,b) = (0,3) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+ },
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "2/3",
+  "delta": [
+   48,
+   -24,
+   -12,
+   -24,
+   12,
+   18
+  ],
+  "colour_origin": 0,
+  "colour_delta": 0,
+  "saturated": true,
+  "level": 1,
+  "per_b": {
+   "1": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "2": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   },
+   "3": {
+    "component_classes": 8,
+    "component_edges": 112,
+    "V_rank": 4,
+    "V_index_in_NLambda": null,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   }
+  },
+  "verdict": "escape",
+  "escape_colour": 2,
+  "reason": "the (a,b) = (0,2) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+ },
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "4/3",
+  "delta": [
+   96,
+   -48,
+   -24,
+   -48,
+   24,
+   36
+  ],
+  "colour_origin": 0,
+  "colour_delta": 0,
+  "saturated": true,
+  "level": 1,
+  "per_b": {
+   "1": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "2": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   },
+   "3": {
+    "component_classes": 8,
+    "component_edges": 112,
+    "V_rank": 4,
+    "V_index_in_NLambda": null,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   }
+  },
+  "verdict": "escape",
+  "escape_colour": 2,
+  "reason": "the (a,b) = (0,2) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+ },
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "8/3",
+  "delta": [
+   192,
+   -96,
+   -48,
+   -96,
+   48,
+   72
+  ],
+  "colour_origin": 0,
+  "colour_delta": 0,
+  "saturated": true,
+  "level": 1,
+  "per_b": {
+   "1": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "2": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   },
+   "3": {
+    "component_classes": 8,
+    "component_edges": 112,
+    "V_rank": 4,
+    "V_index_in_NLambda": null,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   }
+  },
+  "verdict": "escape",
+  "escape_colour": 2,
+  "reason": "the (a,b) = (0,2) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+ },
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "4",
+  "delta": [
+   288,
+   -144,
+   -72,
+   -144,
+   72,
+   108
+  ],
+  "colour_origin": 0,
+  "colour_delta": 0,
+  "saturated": true,
+  "level": 1,
+  "per_b": {
+   "1": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "2": {
+    "component_classes": 16,
+    "component_edges": 224,
+    "V_rank": 6,
+    "V_index_in_NLambda": 81,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": true
+   },
+   "3": {
+    "component_classes": 8,
+    "component_edges": 112,
+    "V_rank": 4,
+    "V_index_in_NLambda": null,
+    "delta_class_in_Q0": true,
+    "delta_in_K0": false
+   }
+  },
+  "verdict": "escape",
+  "escape_colour": 3,
+  "reason": "the (a,b) = (0,3) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+ },
+ {
+  "label": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "rank": 6,
+  "g": 42,
+  "target": "isqrt3",
+  "delta": [
+   0,
+   0,
+   0,
+   0,
+   18,
+   -9
+  ],
+  "colour_origin": 0,
+  "colour_delta": 1,
+  "saturated": true,
+  "verdict": "escape",
+  "level": 0,
+  "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+ }
+]

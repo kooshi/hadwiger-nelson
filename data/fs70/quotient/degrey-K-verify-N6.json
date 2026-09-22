@@ -1,0 +1,47 @@
+[
+ {
+  "spec": "degrey-K",
+  "N": 6,
+  "target": "8/3",
+  "k": 3,
+  "ball_points": 23083,
+  "ball_edges": 167808,
+  "screen_verdict": "rigid",
+  "delta_in_ball": true
+ },
+ {
+  "spec": "degrey-K",
+  "N": 6,
+  "target": "2",
+  "k": 3,
+  "ball_points": 23083,
+  "ball_edges": 167808,
+  "screen_verdict": "escape",
+  "delta_in_ball": true,
+  "b1": {
+   "component_ball": 3191,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 1,
+   "colour_delta": 0
+  },
+  "b2": {
+   "component_ball": 3191,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 2,
+   "colour_delta": 0
+  },
+  "verified": true
+ },
+ {
+  "spec": "degrey-K",
+  "N": 6,
+  "target": "4",
+  "k": 3,
+  "ball_points": 23083,
+  "ball_edges": 167808,
+  "screen_verdict": "escape",
+  "delta_in_ball": false
+ }
+]

@@ -1,0 +1,866 @@
+{
+ "lattice": "degrey-K",
+ "rank": 4,
+ "g": 54,
+ "rows": [
+  {
+   "N": 2,
+   "classes": 16,
+   "verdict": "SAT",
+   "seconds": 0.0,
+   "gapped_vertices": 0,
+   "cnf_sha256": "7d8a3b84c7e292f710ec472fc8a4295dafff5ab8a7a62361837339eec26d62d8",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 2,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 2,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "3": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 2,
+    "reason": "the (a,b) = (0,2) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 2,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "3": {
+      "component_classes": 8,
+      "component_edges": 144,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 2,
+    "reason": "the (a,b) = (0,2) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   }
+  },
+  {
+   "N": 4,
+   "classes": 256,
+   "verdict": "SAT",
+   "seconds": 0.03,
+   "gapped_vertices": 0,
+   "cnf_sha256": "08320e99d90acacd061c077d2781d8b4d13957f48df9144fda186e95fd0a60e1",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 4,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 64,
+      "component_edges": 1152,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 4,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 64,
+      "component_edges": 1152,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": false,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 4,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 64,
+      "component_edges": 1152,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 128,
+      "component_edges": 2304,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   }
+  },
+  {
+   "N": 5,
+   "classes": 625,
+   "verdict": "UNSAT",
+   "seconds": 0.12
+  },
+  {
+   "N": 6,
+   "classes": 1296,
+   "verdict": "SAT",
+   "seconds": 0.07,
+   "gapped_vertices": 0,
+   "cnf_sha256": "95765cb891c9f4f8b926dc56cd7a58af82e5acd80201d26b7d9367284bb9d467",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 6,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 6,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "3": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 6,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "3": {
+      "component_classes": 648,
+      "component_edges": 11664,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   }
+  },
+  {
+   "N": 7,
+   "classes": 2401,
+   "verdict": "UNSAT",
+   "seconds": 2.34
+  },
+  {
+   "N": 8,
+   "classes": 4096,
+   "verdict": "SAT",
+   "seconds": 0.23,
+   "gapped_vertices": 0,
+   "cnf_sha256": "0d0f67da28ee844f5c8d44a8e2b57ce8bea78b3fefdc3924c6d8141f18870113",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 8,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 512,
+      "component_edges": 9216,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 2048,
+      "component_edges": 36864,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 2048,
+      "component_edges": 36864,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 8,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 1,
+    "saturated": true,
+    "verdict": "escape",
+    "level": 0,
+    "reason": "the periodic colouring already separates the pair: c(delta) != c(0)"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 8,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 512,
+      "component_edges": 9216,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": false,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 2048,
+      "component_edges": 36864,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 2048,
+      "component_edges": 36864,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   }
+  },
+  {
+   "N": 10,
+   "classes": 10000,
+   "verdict": "SAT",
+   "seconds": 1.06,
+   "gapped_vertices": 0,
+   "cnf_sha256": "ec1ae7e881b7a33c44df6770473d5c6a291f322794c842842577475bb0965c67",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 10,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 10,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 10,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     },
+     "2": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5000,
+      "component_edges": 90000,
+      "V_rank": 4,
+      "V_index_in_NLambda": 4,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": false
+     }
+    },
+    "verdict": "escape",
+    "escape_colour": 1,
+    "reason": "the (a,b) = (0,1) Kempe component of the origin misses delta; the swap is a proper four-colouring of every graph on the lattice separating the pair"
+   }
+  },
+  {
+   "N": 11,
+   "classes": 14641,
+   "verdict": "UNSAT",
+   "seconds": 2.33
+  },
+  {
+   "N": 12,
+   "classes": 20736,
+   "verdict": "SAT",
+   "seconds": 2.78,
+   "gapped_vertices": 0,
+   "cnf_sha256": "e38923f312b1de3a9ee51365484678daced05d1f0a3d6da9c6894278e0f86163",
+   "8/3": {
+    "label": "degrey-K",
+    "N": 12,
+    "rank": 4,
+    "g": 54,
+    "target": "8/3",
+    "delta": [
+     96,
+     -1200,
+     6480,
+     -216600
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5184,
+      "component_edges": 93312,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "2": {
+    "label": "degrey-K",
+    "N": 12,
+    "rank": 4,
+    "g": 54,
+    "target": "2",
+    "delta": [
+     72,
+     -900,
+     4860,
+     -162450
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5184,
+      "component_edges": 93312,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   },
+   "4": {
+    "label": "degrey-K",
+    "N": 12,
+    "rank": 4,
+    "g": 54,
+    "target": "4",
+    "delta": [
+     144,
+     -1800,
+     9720,
+     -324900
+    ],
+    "colour_origin": 0,
+    "colour_delta": 0,
+    "saturated": true,
+    "level": 1,
+    "per_b": {
+     "1": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "2": {
+      "component_classes": 10368,
+      "component_edges": 186624,
+      "V_rank": 4,
+      "V_index_in_NLambda": 1,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     },
+     "3": {
+      "component_classes": 5184,
+      "component_edges": 93312,
+      "V_rank": 4,
+      "V_index_in_NLambda": 2,
+      "delta_class_in_Q0": true,
+      "delta_in_K0": true
+     }
+    },
+    "verdict": "rigid",
+    "reason": "every Kempe component of the origin reaches delta: rigid under this periodic colouring"
+   }
+  }
+ ]
+}

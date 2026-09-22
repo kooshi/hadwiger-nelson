@@ -1,0 +1,107 @@
+[
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "2",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": true,
+  "b3": {
+   "component_ball": 575,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 3,
+   "colour_delta": 0
+  },
+  "verified": true
+ },
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "2/3",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": false
+ },
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "4/3",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": true,
+  "b2": {
+   "component_ball": 947,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 2,
+   "colour_delta": 0
+  },
+  "b3": {
+   "component_ball": 575,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 3,
+   "colour_delta": 0
+  },
+  "verified": true
+ },
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "8/3",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": false
+ },
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "4",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": false
+ },
+ {
+  "spec": "group6:u3:2+zeta6:w4",
+  "N": 2,
+  "target": "isqrt3",
+  "k": 3,
+  "ball_points": 11593,
+  "ball_edges": 62622,
+  "screen_verdict": "escape",
+  "delta_in_ball": true,
+  "b1": {
+   "component_ball": 947,
+   "monochromatic_after_swap": 0,
+   "separates": false,
+   "colour_0": 1,
+   "colour_delta": 1
+  },
+  "b2": {
+   "component_ball": 947,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 2,
+   "colour_delta": 1
+  },
+  "b3": {
+   "component_ball": 575,
+   "monochromatic_after_swap": 0,
+   "separates": true,
+   "colour_0": 3,
+   "colour_delta": 1
+  },
+  "verified": true
+ }
+]
