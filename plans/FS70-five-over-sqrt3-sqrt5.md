@@ -15,6 +15,12 @@ from an unbroken encoding never reported as a fact about a graph; nothing is a r
 
 ---
 
+## G. The grokking audit (WORKFLOW step 3g) — `plans/FS70-grokking-audit.md`
+
+*Added by the owner 2026-09-22, after phases 0–1b: the step's first instance. It found four bearings this plan never used (G54's
+classifier at the split prime; G15/G16/G32's pigeonhole form; G40/G14; the lens shape named below and never built) and ranks
+fourteen extractions; phase 1d is its contract.*
+
 ## 0. The question and the answer's shape
 
 **Is there a finite unit-distance graph with coordinates in ℚ(√3,√5) that cannot be four-coloured?** The local–global conjecture
