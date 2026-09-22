@@ -1,0 +1,22 @@
+=== (i)+(ii) the quotient and period screens on L6's k=4 control colouring ===
+build/fs70/L6-w4: 109957 points, 775458 edges
+  quotient screen at 2Lambda: 0 of 64 classes monochromatic
+  quotient screen at 3Lambda: 4 of 649 classes monochromatic
+  quotient screen at 4Lambda: 89 of 1909 classes monochromatic
+  quotient screen at 5Lambda: 2837 of 12241 classes monochromatic
+  quotient screen at 6Lambda: 2192 of 8906 classes monochromatic
+  quotient screen at 7Lambda: 64 of 5557 classes monochromatic
+  period screen: 851 candidate periods with >= 20 testable pairs; best agreement 0.939 (20372 pairs, sum), 0.939 (20372 pairs, sum), 0.936 (20372 pairs, sum), 0.936 (20372 pairs, sum), 0.932 (20372 pairs, sum)
+=== (iii) the imposed-quotient ask on the L6 k=4 fabric at 2Lambda ===
+build/fs70/L6-w4: 109957 points, 775458 edges; Lambda / 2Lambda meets 64 classes, 288 quotient edges, 342282 unit-distance pairs INSIDE a class
+  => no 2Lambda-periodic colouring exists at any colour count: the pair (0, 1) is a unit edge inside one class (no solver needed)
+{"dir": "build/fs70/L6-w4", "mod": 2, "k": 4, "classes": 64, "quotient_edges": 288, "self_loops": 342282, "verdict": "UNSAT", "by": "self-loop", "seconds": 0.0}
+=== (iii) the imposed-quotient ask on the L6 k=4 fabric at 3Lambda ===
+build/fs70/L6-w4: 109957 points, 775458 edges; Lambda / 3Lambda meets 649 classes, 5157 quotient edges, 325212 unit-distance pairs INSIDE a class
+  => no 3Lambda-periodic colouring exists at any colour count: the pair (0, 7) is a unit edge inside one class (no solver needed)
+{"dir": "build/fs70/L6-w4", "mod": 3, "k": 4, "classes": 649, "quotient_edges": 5157, "self_loops": 325212, "verdict": "UNSAT", "by": "self-loop", "seconds": 0.0}
+=== (iii) the imposed-quotient ask on the L6 k=4 fabric at 4Lambda ===
+build/fs70/L6-w4: 109957 points, 775458 edges; Lambda / 4Lambda meets 1909 classes, 13764 quotient edges, 325020 unit-distance pairs INSIDE a class
+  => no 4Lambda-periodic colouring exists at any colour count: the pair (0, 1) is a unit edge inside one class (no solver needed)
+{"dir": "build/fs70/L6-w4", "mod": 4, "k": 4, "classes": 1909, "quotient_edges": 13764, "self_loops": 325020, "verdict": "UNSAT", "by": "self-loop", "seconds": 0.0}
+=== L6 STRUCTURE DONE ===

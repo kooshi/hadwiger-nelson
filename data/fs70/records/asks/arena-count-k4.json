@@ -1,0 +1,23 @@
+{
+ "spec": "group6:u3:2",
+ "k": 4,
+ "rot": "rho15",
+ "n": 4,
+ "colours": 4,
+ "points": 27217,
+ "edges": 176124,
+ "avg_degree": 12.94220523937245,
+ "circle": 30,
+ "L": 0,
+ "ratio": 0.0,
+ "refutes": false,
+ "trail": [
+  {
+   "t": 15,
+   "verdict": "SAT",
+   "seconds": 0.04
+  }
+ ],
+ "lattice_sha": "d24ff06589b3ae70",
+ "best_achieved": 0
+}

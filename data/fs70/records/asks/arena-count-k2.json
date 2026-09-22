@@ -1,0 +1,43 @@
+{
+ "spec": "group6:u3:2",
+ "k": 2,
+ "rot": "rho15",
+ "n": 4,
+ "colours": 4,
+ "points": 451,
+ "edges": 1650,
+ "avg_degree": 7.317073170731708,
+ "circle": 30,
+ "L": 0,
+ "ratio": 0.0,
+ "refutes": false,
+ "trail": [
+  {
+   "t": 15,
+   "verdict": "SAT",
+   "seconds": 0.0
+  },
+  {
+   "t": 7,
+   "verdict": "SAT",
+   "seconds": 0.0
+  },
+  {
+   "t": 3,
+   "verdict": "SAT",
+   "seconds": 0.0
+  },
+  {
+   "t": 1,
+   "verdict": "SAT",
+   "seconds": 0.0
+  },
+  {
+   "t": 0,
+   "verdict": "SAT",
+   "seconds": 0.0
+  }
+ ],
+ "lattice_sha": "d24ff06589b3ae70",
+ "best_achieved": 0
+}

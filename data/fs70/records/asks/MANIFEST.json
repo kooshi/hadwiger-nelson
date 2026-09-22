@@ -388,5 +388,121 @@
   "sha256_uncompressed": "8f00df05d25ab25f494a7db73ba4c47a065bb14865d2ae82649b4ba913921ebb",
   "bytes_uncompressed": 1098469,
   "bytes_gz": 259730
+ },
+ {
+  "sha": "b94ad559cbee2c43c314901e",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/L6-w5-control/colouring.json",
+  "file": "L6-w5-control.colouring.json.gz",
+  "sha256_uncompressed": "e6717633615da1b2016d06184852337d7f85ec0bb95b1265e6c59599cc403ab4",
+  "bytes_uncompressed": 8751570,
+  "bytes_gz": 1861789
+ },
+ {
+  "sha": "6a8722aafeb6b5e005aa6045",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5
+  },
+  "pin": "forces",
+  "delta": "4/3",
+  "source": "build/fs70/asks/L6-w5-forces-4-3/colouring.json",
+  "file": "L6-w5-forces-4-3.colouring.json.gz",
+  "sha256_uncompressed": "376bf7acfb7de7ac32a7b22cb2157b6e5b3b46768c504d84f762da2e1dcfef7f",
+  "bytes_uncompressed": 8751570,
+  "bytes_gz": 1879853
+ },
+ {
+  "sha": "2751c52ef7de040e6f678780",
+  "verdict": "SAT",
+  "lattice": "arena(group6:u3:2,rho15)",
+  "shape": {
+   "shape": "arena",
+   "k": 4,
+   "rot": "rho15",
+   "n": 4
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/arena-n4-k4-control/colouring.json",
+  "file": "arena-n4-k4-control.colouring.json.gz",
+  "sha256_uncompressed": "5cdea95b006ed0b4e448967e62681640f11a71aed044e117e11ee9dcf65c065e",
+  "bytes_uncompressed": 533277,
+  "bytes_gz": 122466
+ },
+ {
+  "sha": "3914c12d933f457ee4ce7bb1",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5
+  },
+  "pin": "forces",
+  "delta": "2",
+  "source": "build/fs70/asks/L6-w5-forces-2/colouring.json",
+  "file": "L6-w5-forces-2.colouring.json.gz",
+  "sha256_uncompressed": "b149cf2858ff5e1f472495ba6a46cb87539fe7ecb44e4ac60e1d54a61ac00f78",
+  "bytes_uncompressed": 8751570,
+  "bytes_gz": 1903598
+ },
+ {
+  "sha": "31240d1effed4b6d5a1ac21a",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2",
+  "shape": {
+   "shape": "word",
+   "k": 4
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/CMbase-w4-control/colouring.json",
+  "file": "CMbase-w4-control.colouring.json.gz",
+  "sha256_uncompressed": "eeaa4abdce74935a28ea3857b830b1f70b3d69d6a60f30b7f3db047104540bbf",
+  "bytes_uncompressed": 261117,
+  "bytes_gz": 62031
+ },
+ {
+  "sha": "4dad214e09f9fb795c82fcf2",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5,
+   "core": 14
+  },
+  "pin": "control",
+  "delta": null,
+  "source": "build/fs70/asks/L6-c14-control/colouring.json",
+  "file": "L6-c14-control.colouring.json.gz",
+  "sha256_uncompressed": "0f3a6a07b3690a2d7c2fbad9707663935ffac3a46797839879ed838e8fc6c531",
+  "bytes_uncompressed": 2276112,
+  "bytes_gz": 468189
+ },
+ {
+  "sha": "54ae827ea6ef413abd809069",
+  "verdict": "SAT",
+  "lattice": "group6:u3:2+zeta6:rho15",
+  "shape": {
+   "shape": "word",
+   "k": 5,
+   "core": 14
+  },
+  "pin": "forces",
+  "delta": "4/3",
+  "source": "build/fs70/asks/L6-c14-forces-4-3/colouring.json",
+  "file": "L6-c14-forces-4-3.colouring.json.gz",
+  "sha256_uncompressed": "c4b757ce6fcf6e0233750b043578e2ed1c098e5f7c206e01985832375588c366",
+  "bytes_uncompressed": 2276112,
+  "bytes_gz": 467784
  }
 ]
