@@ -648,20 +648,30 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   vertices, and this 1-sum has 3), no virtual edge, and no compulsion at arity 3 or at arity 4 inside a
   neighbourhood, so its arity floor is 4 or 5; its gen-1 closure adds nothing. A χ ≥ 6 gadget must be constructed.
   Unswept: general 4-subsets, other witnesses. External null: `[Heule2019]`'s graphs up to 100,000 vertices were all
-  5-colourable.
+  5-colourable. *Do: never extract from a held witness — construct; on a sealed object the arity-2 zero is a theorem and
+  is not run; on a 6-open object rank candidate bases by compulsion budget, never by circle count, and ask arity 3 on the
+  standing candidates before any new arity-2 sweep. Killing test: a pair compulsion at the top rung of any held
+  unit-distance object.*
 * **G32 — The two-distance dial. [kernel + measured]** A pair forced equal at k colours is a
   (k+1)-chromatic graph with one non-unit edge, so μ(d) — the fewest d-edges of a non-5-colourable
   {1, d}-graph — is a dial whose value 1 is χ(ℝ²) ≥ 6, read by adding unit material to a forcer. Kills are
   coverage compulsions at points outside the object and are context-dependent. μ ≥ 3 inside K (G36); μ = 1
-  is impossible in any 5-sealed field.
+  is impossible in any 5-sealed field. *Do: on wall-broken fabric ask the `{1, d}` distance-graph question
+  (`tools/twodist.py`, `tools/killengine.py`) before any pair sweep — μ(d) = 1 is a forced pair, a small μ is the pigeonhole
+  form with its kill count — and read the dial as unit material is added; in K or any 5-sealed field expect μ ≥ 3 and μ ≠ 1
+  without asking. Nothing kills the sealed half; a `{1, d}` graph with one d-edge refusing k colours on 6-open fabric is
+  the finding the dial reads.*
 * **G33 — Batches compose; growth compounds. [measured]** A halo designed against a whole batch's separating
   colourings composes removals by construction; committed material's own partner lattice re-opens refusers;
   the cull (dropping jointly redundant cheats) needs no geometry. Reading: depth-one descent self-accelerates
-  until width-shaped stalls bind.
+  until width-shaped stalls bind. *Do: grow toward a forced pair by counterexample-guided growth — add the depth-one points
+  that kill each separating colouring, cull, iterate — instead of a fixed ball, and expect self-acceleration until a width
+  stall. Killing test of the reading: a descent whose per-wave kills fall before any width stall binds.*
 * **G34 — The field is the selection. [measured + theorem]** Every committed descent point lies in K, because
   every kept glue point is a parent plus a Moser-lattice unit vector; in-field material is 1.0% of the
   depth-1 pool, essentially the points with ≥ 3 object neighbours. By Theorem B it can never do the last
-  kill.
+  kill. *Do: use in-field points for intermediate kills only; expect no in-field endgame and commit the out-of-field
+  adjunction deliberately (G37). Nothing kills it (Theorem B); it kills every in-field endgame.*
 * **G35 — The wall is 2-adic. [kernel over subrings; field level gated]** For a real number field F, a
   conjugation-fixed prime 𝔭 of F(i) gives χ(F²) ≤ N(𝔭); one above 2 exists iff −1 is not a square in some
   completion above 2 (norm 2 or 4). For multiquadratic F the wall stands iff no odd square class is
@@ -676,14 +686,20 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   reciprocity, so **no field with an odd number of real places can break the wall** — in particular none of odd degree, since
   r ≡ [F:ℚ] (mod 2). That is G56's odd-degree two-colourability with its local-degree parity argument replaced by a
   reciprocity law, and it restates the wall as the ramification of a single algebra rather than a congruence on square
-  classes. *Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at a finite place.* **Gate:** the field-level statement needs only that a number field with a conjugation-fixed prime
-  supplies the valuation subring with residue field of size N(𝔭); closing it promotes G35 and G43.
+  classes. **Gate:** the field-level statement needs only that a number field with a conjugation-fixed prime
+  supplies the valuation subring with residue field of size N(𝔭); closing it promotes G35 and G43. *Do: before any solver
+  over F, decide the wall by congruence — for a K-glue point, is −r a square in both 2-adic completions; for multiquadratic
+  F, is some odd square class ≡ 7 (mod 8); for any F, does `(−1,−1)_F` split above 2, i.e. is 1/2 ∈ ℤ[U] — and expect no
+  odd-degree field to break it. Killing test: a field whose plane needs five colours and whose `(−1,−1)` ramifies at a
+  finite place.*
 * **G36 — The residue colouring is the canonical separating colouring. [theorem + measured]** On a K-point
   descent stage it is proper, monochromatic on every distance-2 cheat, and separates the seed's pair — one
   colouring every cheat set must kill, and a free geometry check (a misplaced point shows as a monochromatic
   unit edge). With a fifth colour on S it separates iff S is an independent exact transversal of the
   cheats, a 2-SAT system; while that is satisfiable no in-field halo makes the cheats force, so μ ≥ 3 inside
-  K. `tools/residue_floor.py`.
+  K. `tools/residue_floor.py`. *Do: on any K-point stage compute the residue colouring first — it is the one colouring every
+  kill set must beat, a free geometry check, and its 2-SAT transversal decides whether any in-field halo can make the cheats
+  force. Nothing kills it; it kills μ ≤ 2 inside K.*
 * **G37 — The endgame's shape. [theorem for necessity]** A descent's unit part becomes 5-chromatic only after
   an out-of-field point is committed; the endgame is one wall-breaking adjunction into a field that is also
   6-open, then the last kills. The spindles a K-descent can run (ρ₁₅, 8/3) land in 5-sealed fields. K-fabric
@@ -691,22 +707,35 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   √247). Over K the 6-open single radicals are the odd squarefree d ≡ 5, 7 (mod 8) that are non-residues
   mod 11 (7, 13, 79, 127, …). **This does not contradict G35's "≡ 7 (mod 8)"**, which is the test on the
   field's *square classes*, not on the radicand: 3 is already in K, so d ≡ 5 breaks the wall through the
-  class 3d ≡ 7 (mod 8). Hence 13 joins 7, 79, 127.
+  class 3d ≡ 7 (mod 8). Hence 13 joins 7, 79, 127. *Do: plan a descent as K-fabric grown to four-colour rigidity, then one
+  wall-breaking adjunction into a 6-open field chosen by the two congruences, then the kills; expect ρ₁₅ and 8/3 to land
+  5-sealed. Nothing kills the necessity; the sufficiency dies if fabric rigid at four colours supplies no wall-breaking
+  angle.*
 * **G38 — The linear method's thresholds. [hand theorem; Fischer's framework]** Colouring by cosets of a
   subgroup avoiding the reduced norm-one group gives 2, 3 or 4 colours and then nothing below 7. With
   conjugation in inertia the reduced group is {±1}, so ℚ(√N)² with N ≡ 5 (mod 8) is bipartite
   (`[Fischer1990]` Thm 8); ℚ(√3)² and ℚ(√7)² need 3; K² needs 4. Over a real multiquadratic field the two-colour case is exact: F² is 2-colourable iff no odd square class is ≡ 3 (mod 4) (hand; the mechanism is kernel, row 63), correcting `plans/FIELD-WALL-THEOREM.md` Prop. 6.4. The finite-plane bound sees 5 (G43); its
   usable primes are exactly those with residue field 𝔽_q, q ≡ 3 (mod 4). A 6-forcer's field is predicted by
-  its construction (a spindle at forced distance d lands in F(√(4d² − 1))), not by linear arithmetic.
+  its construction (a spindle at forced distance d lands in F(√(4d² − 1))), not by linear arithmetic. *Do: decide two and
+  three colours by the linear criterion before any plane — N ≡ 5 (mod 8) bipartite, an odd square class ≡ 3 (mod 4) forbids
+  two, a usable prime with residue field 𝔽₃ caps at three (G43) — and above four use the finite planes, never linear
+  arithmetic; predict a forcer's field from its spindle distance. Killing test: a multiquadratic plane two-colourable with
+  an odd square class ≡ 3 (mod 4).*
 * **G39 — Redundancy before rigidity. [kernel]** A forced-equal pair at χ(G) colours confines the critical
   set to the pair's common neighbourhood — in the plane at most two vertices, none beyond distance 2. So a
   6-forcer built as fabric plus a spindle at d > 2 needs fabric whose 5-chromaticity survives every vertex
-  deletion, and every descent stage has an empty critical set. Necessary, not sufficient (G40).
+  deletion, and every descent stage has an empty critical set. Necessary, not sufficient (G40). *Do: before asking whether a
+  candidate forces a pair at d > 2, delete each vertex once and confirm the fabric keeps its χ — a critical vertex beyond
+  distance 2 refutes the design without a solver. Nothing kills it; it kills every forcer at d > 2 on fabric with a
+  critical vertex.*
 * **G40 — Absorption. [kernel + measured]** A vertex set whose colourings all extend carries only its induced
   subgraph's compulsions — none when it has a spare colour. A spindle copy hangs by its fused centre plus one
   chord, so more spindles or centres cannot create a compulsion, and every K-coset piece is 4-colourable: a
   five-colour compulsion needs material thick in a wall-breaking field. Only the F₂₄₇ cross thickening has
-  moved the redundancy dial (238 critical vertices freed, all copy-side — why only that side is open).
+  moved the redundancy dial (238 critical vertices freed, all copy-side — why only that side is open). *Do: before an arena
+  is built, count how the copy is joined — a copy hanging by its centre plus few chords has a spare colour, absorbs, and
+  predicts the null; a five-colour compulsion needs the copy joined thickly, or several copies, in a wall-breaking field.
+  Nothing kills the kernel half; the "thick" reading dies if a thinly joined wall-broken copy carries a compulsion.*
 * **G41 — Additive colourings bound compulsions from one side. [kernel + measured]** An additive colouring
   (φ : Λ → G, nonzero on edges) is proper, so the pairs all such φ identify contain the forced ones; since
   exp(G)·Λ ⊆ ker φ, no additive four-colouring separates a pair of 2-adic depth ≥ 2 on any object
