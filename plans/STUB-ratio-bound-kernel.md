@@ -3,7 +3,7 @@
 *Read beside: `plans/STUB-independence-threshold.md` §S4 D9 and §M2 (the nonnegative-combination identity, whose pair-level
 case this is), `plans/FS50-certificate-soundness.md` (the one-page derivation), `tools/fplane_cert_check.py` (the exact
 checker whose pair-level restriction is the object here), `Proofs/HadwigerNelson/LocalGlobal.lean`
-(`add_one_le_chromaticNumber_of_indepNum_le`), `Instances/IndependenceThreshold.lean`; `CLAUDE.md` row 53, G44, G54, FS-41.*
+(`add_one_le_chromaticNumber_of_indepNum_le`), `Instances/IndependenceThreshold.lean`; `LEDGER.md` row 53, G44, G54, FS-41.*
 
 ## 1. Mission context, in plain language
 

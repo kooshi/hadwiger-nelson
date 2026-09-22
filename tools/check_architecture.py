@@ -228,8 +228,9 @@ for p in paths:
 print(f'[6] backticked paths: {len(paths)}; not found: {bad_paths}')
 
 # ---- 7: ledger rows named exist and mention the module or one of its identifiers --------------------
-claude = (REPO / 'CLAUDE.md').read_text()
-ledger_sec = claude.split('### The novel-results ledger', 1)[1].split('\n### ', 1)[0]
+# the ledger lives in LEDGER.md since 2026-09-22 (extracted from CLAUDE.md § Frontier); fall back to CLAUDE.md for older trees
+ledger_path = REPO / 'LEDGER.md' if (REPO / 'LEDGER.md').exists() else REPO / 'CLAUDE.md'
+ledger_sec = ledger_path.read_text().split('### The novel-results ledger', 1)[1].split('\n### ', 1)[0]
 ledger = {int(m.group(1)): m.group(2) for m in re.finditer(r'^\| (\d+) \|(.*)$', ledger_sec, re.M)}
 soft = []
 for name, cells in rows.items():

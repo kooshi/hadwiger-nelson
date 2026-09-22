@@ -4,7 +4,7 @@
 row 9; `plans/M49-two-distance-descent.md` (the two-distance dial, and the descent that replaced the seed's distance-2 edges one
 at a time), `plans/M63-phaseH4-sweep.md` (the arena's 1.3-billion-pair sweep, which already answers this stub's first test),
 `plans/STUB-arena-slack-census.md` (FS-43, the instrument that prunes the candidates before any ask), `plans/STUB-fifth-colour-structure.md`
-(FS-44); `CLAUDE.md` rows 43, 44, 61, 66, G26, G31, G32, G53, G55; `Proofs/HadwigerNelson/OneDefect.lean`, `Homogeneous.lean`
+(FS-44); `LEDGER.md` rows 43, 44, 61, 66, G26, G31, G32, G53, G55; `Proofs/HadwigerNelson/OneDefect.lean`, `Homogeneous.lean`
 (`Separated.transport`), `DistanceGraph.lean`.*
 
 **Credit.** The host sentence — one five-colour virtual edge at distance 2 suffices for `χ(ℝ²) ≥ 6`, with `[ExooIsmailescu2019]`'s

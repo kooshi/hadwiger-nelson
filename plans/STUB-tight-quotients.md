@@ -1,6 +1,6 @@
 # FS-42 — 5-tight quotients of 6-open planes: the one residue route to a five-colour forced pair that FS-38 leaves open (STUB, 2026-09-13; minted at the FS-38 close; a READING with its falsifier)
 
-*Read beside: `CLAUDE.md` ledger rows 66–67, G48, G54; `plans/FS38-derivation.md` D-2 (a) (Theorem D2-A) and D-3 (the
+*Read beside: `LEDGER.md` rows 66–67, G48, G54; `plans/FS38-derivation.md` D-2 (a) (Theorem D2-A) and D-3 (the
 classifier); `plans/M58-field-sieve.md` (which primes are usable where); `plans/M61-local-global-tightness.md` (the
 periodic quotient `unitQuadrance_colorable_of_quotient`, `addCayleyMap`); `[Moorhouse2010]` §9; `[Shitov2019]`.*
 

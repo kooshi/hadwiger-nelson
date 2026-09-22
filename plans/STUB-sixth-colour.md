@@ -14,7 +14,7 @@ blocks on the GPU, the exact rational certificate, the stranger-checkable checke
 by FS-50's certificate), `plans/STUB-arena-slack-census.md`, `plans/STUB-three-colour-classification.md` and
 `plans/STUB-biquadratic-table.md` (FS-46/48: fields without √11), `plans/STUB-bridge-to-plane.md` (FS-39: χ(ℝ²) = sup_F χ(F²)),
 `plans/STUB-unit-vector-ring-kernel.md` (FS-47: the field-level residue step), `plans/STUB-ratio-bound-kernel.md` and
-`plans/STUB-triple-certificate-kernel.md` (FS-51/52: the kernel forms of the certificates); `CLAUDE.md` rows 52–53, 56, 66–67,
+`plans/STUB-triple-certificate-kernel.md` (FS-51/52: the kernel forms of the certificates); `LEDGER.md` rows 52–53, 56, 66–67,
 G43, G44, G48, G54, G55. Vocabulary: a prime p ≡ 3 (mod 4) is **usable** for a real field F when every radicand of F is a
 square modulo p (residue field 𝔽_p at a prime above p, so F² maps onto UD(𝔽_p, 2) and χ(F²) ≤ χ(UD(𝔽_p, 2))); L(F) is the
 least χ of a usable prime's plane, with the 2-adic wall (four colours when it stands) and the primes above 3 (three) as the

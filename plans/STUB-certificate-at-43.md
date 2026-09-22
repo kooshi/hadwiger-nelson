@@ -1,7 +1,7 @@
 # FS-69 — the all-levels certificate at 43: a smaller relaxation, not a bigger machine
 
 *Minted 2026-09-21 at FS-66's close, from Phase 2D's pricing (`plans/FS66-phase2-certificate.md` §R‴.8). Written for a reader with
-no conversation memory. Read beside: `CLAUDE.md` row 75, G66, G56 (the window), G59; `plans/FS66-phase2-certificate.md` §F, §C, §R′,
+no conversation memory. Read beside: `LEDGER.md` row 75, G66, G56 (the window), G59; `plans/FS66-phase2-certificate.md` §F, §C, §R′,
 §R″, §R‴; `data/fs66/b1/SOUNDNESS.md`; `plans/STUB-fractional-wall.md` (FS-57), `plans/STUB-exact-independence-solver.md` (FS-65).*
 
 ## 1. The question, in plain language

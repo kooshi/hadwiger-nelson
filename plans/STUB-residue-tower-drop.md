@@ -1,7 +1,7 @@
 # FS-66 — does the residue ceiling drop up the tower? The second level of a residue plane, at one colour fewer
 
 > **CLOSED 2026-09-21 — answered NO wherever it can be certified.** The milestone (`plans/FS66-residue-tower-drop.md`,
-> `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; `CLAUDE.md` row 75, G66) found that the residue ceiling does not
+> `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; `LEDGER.md` row 75, G66) found that the residue ceiling does not
 > drop up the tower at 7, 11, 19 or 23: `χ(UD(ℤ/121,2)) = 5` in the Lean kernel, and exact all-levels certificates refuse three colours at
 > 7, four at 11 and 19 and five at 23 at **every** level. So the pilot below is answered (not four-colourable), the ask at `UD(ℤ/529,2)`
 > below can never land, `α(UD(𝔽₂₃,2)) ≤ 97`, and the `p`-adic Hadwiger–Nelson question is answered (`CLOSED-QUESTIONS.md` §1.8). **What

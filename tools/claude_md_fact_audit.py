@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
-"""Fact audit for an edit of CLAUDE.md: which fact tokens were in the old version and are NOWHERE in the new one.
+"""Fact audit for an edit of CLAUDE.md + LEDGER.md: which fact tokens were in the old version and are NOWHERE in the new one.
+
+The corpus audited is CLAUDE.md followed by LEDGER.md (the novel-results ledger, extracted from CLAUDE.md § Frontier on
+2026-09-22; at a base revision where LEDGER.md does not exist the ledger is still inside CLAUDE.md and the corpus is that file
+alone, so an audit across the extraction sees every row survive).
 
 Usage (standard library only; run from the repository root):
 
-    python3 tools/claude_md_fact_audit.py                      # git HEAD:CLAUDE.md  against  ./CLAUDE.md
+    python3 tools/claude_md_fact_audit.py                      # git HEAD:{CLAUDE,LEDGER}.md  against  ./{CLAUDE,LEDGER}.md
     python3 tools/claude_md_fact_audit.py --base d0df4f82      # any git revision as the old version
     python3 tools/claude_md_fact_audit.py --old a.md --new b.md
     python3 tools/claude_md_fact_audit.py --moves moves.txt    # also write the relocation map (see below)
@@ -386,25 +390,42 @@ def main() -> int:
     ap.add_argument("--base", default="HEAD", help="git revision holding the old version (default HEAD)")
     ap.add_argument("--old", help="read the old version from this file instead of git")
     ap.add_argument("--new", default="CLAUDE.md")
+    ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--dupes", action="store_true", help="list literally repeated 10-word runs in the NEW file, then exit")
     a = ap.parse_args()
+
+    def corpus_files(main: str, ledger: str) -> str:
+        text = Path(main).read_text(encoding="utf-8")
+        if ledger and Path(ledger).exists():
+            text += "\n\n" + Path(ledger).read_text(encoding="utf-8")
+        return text
+
+    def corpus_rev(rev: str) -> str | None:
+        r = subprocess.run(["git", "show", f"{rev}:CLAUDE.md"], capture_output=True)
+        if r.returncode != 0:
+            print(f"AUDIT COULD NOT RUN: git show {rev}:CLAUDE.md failed: {r.stderr.decode().strip()}", file=sys.stderr)
+            return None
+        text = r.stdout.decode("utf-8")
+        r2 = subprocess.run(["git", "show", f"{rev}:{a.ledger}"], capture_output=True)
+        if r2.returncode == 0:   # the ledger exists at that revision as its own file
+            text += "\n\n" + r2.stdout.decode("utf-8")
+        return text
+
     if a.dupes:
-        dupes(Path(a.new).read_text(encoding="utf-8"))
+        dupes(corpus_files(a.new, a.ledger))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
     else:
-        r = subprocess.run(["git", "show", f"{a.base}:CLAUDE.md"], capture_output=True)
-        if r.returncode != 0:
-            print(f"AUDIT COULD NOT RUN: git show {a.base}:CLAUDE.md failed: {r.stderr.decode().strip()}", file=sys.stderr)
+        old = corpus_rev(a.base)
+        if old is None:
             return 2
-        old = r.stdout.decode("utf-8")
     if a.self_test:
         return self_test(old)
-    new = Path(a.new).read_text(encoding="utf-8")
+    new = corpus_files(a.new, a.ledger)
     return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
 
 

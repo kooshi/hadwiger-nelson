@@ -2,7 +2,7 @@
 
 *Read beside: `plans/FS38-derivation.md` D-2 (a)–(c) (the theorem and its proof, by hand), D-3 (the classifier table),
 `plans/FS38-residue-tower.md` §R2 (what the kernel holds at levels 4 and 5), `Proofs/HadwigerNelson/TwoAdicTower.lean`,
-`Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`, `FanGap.lean`, `CLAUDE.md` ledger row 67 and G54,
+`Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`, `FanGap.lean`, `LEDGER.md` row 67 and G54,
 `BIBLIOGRAPHY.md` `[Hoffman1970]`, `[Haemers2021]`, `[AbiadEtAl2025]`, `[GodsilMeagher2016]`.*
 
 ## 1. Mission context, in plain language

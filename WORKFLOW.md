@@ -54,15 +54,15 @@ advancement (Kooshi, 2026-09-22).
 3. **Reframe** — the milestone's opening: two acts, in this order, before a route is written. Their outputs are **§G** and
    **§PA** of the subplan, in that order, ahead of everything else; a subplan without both is not a subplan.
 
-   **3.1 Re-grokking** — the project's own theory read from inside the new question: every grokking, every ledger row's
-   *mechanism*, every method rule. Its product is the *recognition*: the milestone's question restated in the theory's terms, with what the
+   **3.1 Re-grokking** — the project's own theory read from inside the new question: every grokking, every row's
+   *mechanism* in `LEDGER.md`, every method rule. Its product is the *recognition*: the milestone's question restated in the theory's terms, with what the
    theory predicts, supplies, forbids, and what the milestone can falsify. (Minted 2026-09-22, Kooshi; the instance is FS-70,
    above — G54's tight/slack classifier at the field's split prime, run in a minute, says the local plane forces pairs at
    depth, the mechanism of every known four-forcer and a reason to expect forcing the plan never had; G15/G16/G32's
    pigeonhole form and two-distance dial were a second route with tools built; G40/G14 predicted the arena's null; the lens
    shape was the plan's own first shape and no phase built it.) The procedure:
-   1. **Walk every entry, one line each, no batching, no skipping** — every grokking, every ledger row's mechanism, every
-      `[method]` rule in `CLAUDE.md` § Grokkings and § Building. For each, one of three verdicts with its reason: **bears** —
+   1. **Walk every entry, one line each, no batching, no skipping** — every grokking, every row's mechanism in `LEDGER.md`, every
+      `[method]` rule in `CLAUDE.md` § Grokkings and § Building — both files open. For each, one of three verdicts with its reason: **bears** —
       what the entry says about *this* milestone's object, question, fabric or instruments, and which phase it changes;
       **silent** — why; **falsifiable here** — the milestone can kill or confirm it, so register it as a prediction. A verdict
       without a reason is not a verdict.
@@ -73,7 +73,7 @@ advancement (Kooshi, 2026-09-22).
       a solver, a prediction registered — or the plan says explicitly that nothing in the corpus bears, which is itself a claim
       the owner pushes back on. A re-grokking that changed nothing has measured its own reading, not the corpus (G21).
    4. **Fresh, every milestone, never from memory** — like the modeling skills of step 6: a compaction summary, a previous
-      milestone's §G, or "I know the grokkings" is not the re-grokking. The planner runs it with `CLAUDE.md` open; the owner scores
+      milestone's §G, or "I know the grokkings" is not the re-grokking. The planner runs it with `CLAUDE.md` and `LEDGER.md` open; the owner scores
       §G line by line before accepting the plan; a skipped entry is a plan defect.
    5. **Two lighter touches at the milestone's edges.** *At minting* (step 2): the stub's provisional-bearings line, so that
       *choosing* the milestone uses the knowledge too — provisional, replaced by the re-grokking at the opening (FS-70's stub named
@@ -170,8 +170,8 @@ advancement (Kooshi, 2026-09-22).
    gate has the rationale and the baseline rule): the build green · zero `sorry` (`grep -rn --include="*.lean" "sorry"`) ·
    `#print axioms` clean on the public surface · linters silent (`lake lint`) · spec examples passing.
 
-9. **Close** — one closing commit that also **updates `CLAUDE.md` § Frontier** (the state-of-the-art summary, the
-   novel-results ledger, the ranked paths forward); a milestone whose close does not update the Frontier is not closed (rule
+9. **Close** — one closing commit that also **updates `CLAUDE.md` § Frontier and `LEDGER.md`** (the state-of-the-art summary, the
+   novel-results ledger's new row, the ranked paths forward); a milestone whose close does not update the Frontier is not closed (rule
    set 2026-08-04). In the same close:
    - **Re-rank the frontier set** (`plans/FRONTIER-STUBS.md`; Kooshi, 2026-09-06): add every candidate the milestone surfaced
      as a stub file, re-rank the table with each row's bearing on χ ≥ 6 stated honestly, demote with a banner, never delete;
