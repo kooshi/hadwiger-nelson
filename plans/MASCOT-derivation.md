@@ -139,7 +139,7 @@ its own doubling *is* `K₄ × K₄`, with the two factors being the two primes 
 every proper 4-colouring of K-fabric, either some `√3`-pair is monochromatic, or every pair whose difference lies
 in `2Σ₀` is monochromatic simultaneously — `2Σ₀` contains `2, 4, 8/3, 8/√3, 2√3, 4/3, 4/√3, 2/√3`, so this
 explains in one line the shape of `[Parts2020hv]`'s published mono/non-mono table (§4 of the source). *Proof:*
-`plans/COXETER-2026-09-08-mascot.md` §2–3 (lines 30–77). *Proof verdict:* closes, **with a scope correction the
+`plans/COXETER-2026-09-08-mascot.md` §2–3 (lines 30–77). *Proof verdict:* closes — re-derived by the owner at acceptance (2026-09-22): the rim of a √3-clean shell is forced to the pattern `a,c,b,a,c,b`, so antipodal rim points agree and, shifting the shell to `O + u`, `c(O + 2u) = c(O)`; `R` here is the rank-4 Moser lattice `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩`, an order of the CM field `ℚ(√−3,√−11)` in which 2 splits (`33 ≡ 1 (mod 8)`) into two primes of residue field `𝔽₄` (each inert from `ℚ(√−3)`), so `R/2R ≅ 𝔽₄ × 𝔽₄`, the unit vectors land in `𝔽₄ˣ × 𝔽₄ˣ`, and the quotient graph is `K₄ × K₄`, whose proper 4-colourings are the two projections up to relabelling — the two residue colourings; the statement's "K-fabric" means that rank-4 lattice, not the rank-8 order `Σ₀` of `K(i)` — **with a scope correction the
 source records against its own first reading**: an early message claimed "the strata stand or fall together"
 (that the 2-adic depth stratification is not a hierarchy of difficulty), refuted by Poros against M56's own
 measured table (depth 2 free, depth 3 forced, simultaneously on one fabric) — the theorem itself is unaffected,
