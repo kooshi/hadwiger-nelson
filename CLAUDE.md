@@ -930,9 +930,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   ratio bound permits only while 5|λ_min| ≥ q + 1: by Weil that fails from q = 98, the exact spectrum already fails it at 71, and
   83 — the last prime where six was spectrally possible — refuses it by certificate (row 68), as do 59, 67 and 79 (FS-53 phase B,
   row 69). Five is refused from 59 up. So over the residue fields a number field can have, **a plane with χ exactly 6 can live only
-  at q ∈ {23, 27, 31, 43, 47}**, with floors 6, 6, 5, 6, 6 — five is refused by certificate at 23 and 27 (the level-3 relaxation,
-  α ≤ 105 and ≤ 141; FS-56 and FS-54, rows 71, 70), 43 and 47 (row 69) — and none decided: at 31, the one member where five is not
-  refused, it is CDCL-undecided, and no six-colouring was found (ceilings and searches: row 69). **The exclusion.** A prime is usable for a
+  at q ∈ {23, 27, 31, 43, 47}**, with floors 6, 6, 5, 6, 6 (five refused by certificate everywhere but 31: rows 69–71) and none
+  decided (ceilings and searches: row 69). **The exclusion.** A prime is usable for a
   field only if the field's radicands are all squares in its residue field, and **every field this project has built in contains
   K**: 3 is a non-square modulo 31, 43, 67, 79 and 11 modulo 23, 47, 59, 71, and at 27 the residue 11 ≡ −1 (mod 3) is a non-square
   in every 𝔽_q with q ≡ 3 (mod 4); so such a field's usable primes are 11 and then nothing below 83, its local bound is 5 or ≥ 7,
@@ -958,10 +957,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   43 or 47 usable, so its L is 6 exactly when a usable one of those is six-chromatic and ≥ 7 otherwise — the smallest are
   **ℚ(√167)** (23 or 43), ℚ(√1319) (23 or 47) and **ℚ(√2351)** (47 alone). **Five is refused at all three, so a six-colouring at
   23, 43 or 47 makes χ(ℚ(√167)²), χ(ℚ(√4703)²) or χ(ℚ(√2351)²) ≤ 6 a theorem: the first number field with local bound exactly 6.**
-  **All three deciding planes are implausible on the measurements** (`data/fs53/CLOSE.md`): six at 23 needs α ≥ 89 against a
-  plateau of 87; at 47 a certificate 99.4 % tight, seen only at q = 7; at 43 the independent set stuck at 258 against 309 for three
-  hours, the six-colour search stalled 2 h 52 m, the equivariant sweep 0 of 21 — nulls at a budget, not refusals, but they put
-  these fields most likely at local bound ≥ 7. **And 27 is the unique non-prime member, permanently:** `q = p^f` is usable iff p ≡ 3 (mod 4) **and f is odd** — "odd residue
+  **All three deciding planes are implausible on the measurements** (row 69's plateaus at 23 and 43 and the 99.4 % tightness six
+  needs at 47; `data/fs53/CLOSE.md`) — nulls at a budget, not refusals, but they put these fields most likely at local bound ≥ 7. **And 27 is the unique non-prime member, permanently:** `q = p^f` is usable iff p ≡ 3 (mod 4) **and f is odd** — "odd residue
   degree" is the congruence restated; 25 fails twice, 49 on the degree alone, the mechanism that costs de Grey's field the prime 11
   — and of the non-prime prime powers below Weil's cap of 97 only 27 qualifies; the next, 243 and 343, are far beyond it, so the
   tooling's prime-only assumption costs exactly one member. **What the window decides is whether six
