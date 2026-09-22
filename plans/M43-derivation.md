@@ -55,7 +55,11 @@ M42's `M=4`) are each separately kernel-checked already.
 
 - The whole flank-band census (D2, D3, D4; the 1/7 flanks' exact edge classes, the ball/torus SAT results, the
   160-vertex core) is [tools]/[cert] measurement, already correctly captured by row 40's "nineteen further bands ≥ 7"
-  and its own honesty ledger.
+  and its own honesty ledger. **This includes the seed's G24 target "the Hoffman bracket at p = 1/7"**: §R states
+  "the certified Hoffman bracket at the coarse flank is χ ≥ 3.56 (degree 114, `λ_min ∈ [−44.4937, −44.4737]`,
+  converged 246,635 boxes)" — a [tools]-grade *instance* of M40-T3's torus-wrap Hoffman bound (already filed, this
+  milestone's `tools/celllat.py` inherited from M40), computed at the flank adjacent to `p = 1/7`, not a separate
+  theorem; nothing new to file.
 - **D6, "coset sixes are already dead at every scale."** A one-line corollary of M37's kernel theorem
   (`Coset.seven_le_card`, already established); not independent content.
 - **D7's soundness argument for the pinning ladder** (items 1–5, the SAT-encoding design) is method, not mathematics
