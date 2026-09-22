@@ -276,7 +276,11 @@ log `build/fs70/price-cubes.log`), which is why it is priced and not launched:
   **22 workers is ≈ 308 GB on a 125 GB machine; 8 is ≈ 112 GB and still over the safe line.** Four would fit —
   and four workers against 65,536 unbudgeted cubes is not a pass, it is a wall.
 * **And there is no per-cube budget on this engine** — PySAT's CaDiCaL supports neither `incr=True` nor
-  `solve_limited` (phase 1 §3), so one bad cube runs unbounded.
+  `solve_limited` (phase 1 §3), so one bad cube runs unbounded. *Measured by the owner, 2026-09-22 ~06:00: the
+  pricing script's last step — one cube, this engine, no budget — had run **1 h 58 min** at 15.7 GB RSS with no
+  verdict (its log static since 03:48); the owner stopped it by pid. What it forfeits: the exact time of one cube,
+  which cannot move the decision (65,536 cubes × ≥ 2 h is ≈ 15 core-years). The measurement it leaves is the bound
+  itself: one cube ≥ 2 h.*
 
 **L2's `k = 4` control, by contrast, is SAT** — 1,882,945 points, 14,314,842 edges, degree 15.21, `kissat --sat` in **848.63 s** of a 2,400 s budget, model verified on every edge. It is the *larger* of the two instances and it had never been asked at `k = 4` by anyone. **That corrects the reading I first wrote here:** `--sat` is not spent on 1.9 M-vertex fabric, it is spent on L3 specifically, and what phase 1 and I had each measured was one instance rather than one method. L3 stays undecided after two configurations on a byte-identical formula, and the pricing below is the number for whoever asks it next.
 

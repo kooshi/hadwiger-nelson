@@ -1245,16 +1245,21 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   built*), G53's counting screen, G55's chain closers. The ones that sat silent while bearing directly were written as
   descriptions or memoirs: G54 says "classified by one sign" and never *when you meet a new prime, compute the sign first*;
   G16 and G32 narrate a milestone's route in the past tense; G40 states absorption as a result, not as the prediction to make
-  before an arena is built. So **every entry ends with what it makes you do and what would kill it** — *when you see X, expect
-  Y; the test that kills it is Z* — and an entry without both is understood, not grokked. The word was already right:
+  before an arena is built. So **every entry ends with what it makes you do and what would kill it**, under one marker —
+  `*Do: … Killing test: …*` — so the form can be scanned for: the *Do* opens with its **trigger** (*when you meet a new prime;
+  before an arena is built; when a pair sweep reads zero*), never a bare verb, and the second half takes one of two shapes, by
+  grade — a reading or a measurement names its **falsifier**; a theorem names what it **forbids** (*nothing kills it; it kills
+  X*), and a falsifier invented for a theorem is a category error. An entry without both is understood, not grokked. The word was already right:
   "grokking" is first-person, held knowledge, and it indicts the failure by its name — an entry in context and not reasoned
   from was not grokked. What failed was the mode of reading, and the shape of the entry sets the mode. Hence the act that
   opens every milestone (WORKFLOW 3.1) is named for what it is, **re-grokking the goal** — reading the theory from inside the
   new question — and not "audit", which is felt as an instruction to check where "re-grok" is felt as an instruction to
   think. Every entry in this section has been re-examined for its form (2026-09-22) and given it where it was a memoir; a new
-  entry is held to the same form at minting. *Do: when you write or read an entry, find its "Do" and its killing test; an
-  entry without both is background, and a bearing it holds will be missed. Killing test: a milestone whose §G,
-  written from entries in the operational form, still misses a bearing that an entry in the memoir form would have supplied.*
+  entry is held to the same form at minting. *Do: when you write or read an entry, find its trigger, its Do, and its killing
+  test or what it forbids; an entry without them is background, and a bearing it holds will be missed. Killing test: at the
+  next re-grokking, count the* bears *verdicts drawn from a Do line against those drawn from an entry's body — if the form did
+  the work, the first count dominates; and a §G written from entries in the form that still misses a bearing a memoir would
+  have supplied.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
