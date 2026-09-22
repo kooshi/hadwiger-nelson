@@ -1,0 +1,11 @@
+{
+ "sha": "587fe01ff3aa5000f34118b2",
+ "graph_dir": "build/fs70/L2-w4",
+ "pin": "control",
+ "out": "build/fs70/asks/L2-w4-control-sat",
+ "pid": 331923,
+ "pgid": 290951,
+ "started": 1790066764.6906166,
+ "ledger": "build/fs70/asks/L2-w4-control-sat/cubes.jsonl",
+ "resume": "python3 tools/fs70_ask.py run build/fs70/L2-w4 control --out build/fs70/asks/L2-w4-control-sat --resume"
+}

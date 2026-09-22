@@ -251,6 +251,25 @@ anything, at every density it can be asked at.
 
 ---
 
+## 4.7 Ask (iii): the single-solver route on L3's `k = 4` control is exhausted
+
+| attempt | solver | budget | verdict | CNF sha256 |
+|---|---|---|---|---|
+| phase 1's | `kissat`, default | 1,500 s | UNKNOWN at 1,500.34 s | `89eadac453b93924…` |
+| **mine** | `kissat --sat` (`--target=2 --restartint=50`) | 2,400 s | **UNKNOWN at 2,400.07 s** | `89eadac453b93924…` |
+
+**The two CNF hashes are identical**, so exactly one thing differs between the rows — the configuration and the
+budget — and the comparison is about the solver, not the formula. Aiming kissat at the *satisfiable* direction,
+which is what a 1.89 M-vertex degree-15.4 instance should want, bought nothing at 60 % more time. **So the
+single-solver route on this instance is exhausted and the cube pass is the instrument**, which is what the
+owner's ruling 2 and the plan's stop rule say. Its price on one worker is in `build/fs70/price-cubes.log`
+(`python3 build/fs70/price_cubes.py`): the cube count, one worker's clause-ingest cost and peak RSS, and one
+cube's solve time, so the job count is chosen from a measurement rather than from the default 22. **It is priced
+and not launched**: 22 in-process CaDiCaL workers each holding a 71.3 M-clause formula is the kind of memory bet
+`CLAUDE.md` says not to take unattended, and the phase's budget is the owner's to spend.
+
+---
+
 ## 5. The type-M arena at `n = 4`, and G53's counting screen
 
 `tools/fs70_arena.py` (new). The rotation arithmetic is **derived, not assumed**: `|1 − R|²` must be the
