@@ -839,11 +839,35 @@ def coloring_cnf(n, edges, k, pins, precedence=True, amo=True):
     if precedence:
         pinned = {c for _, c in pins}
         free = [c for c in range(k) if c not in pinned]
+        # LINEAR precedence: s[v][c] = "colour c occurs at some u <= v", so colour free[j] may appear at v only
+        # if free[j-1] already has.  The naive form is one clause of length v per vertex -- O(n^2) literals, which
+        # is 1.1 GB of CNF at n = 20,000 and is why this encoding is auxiliary-variable based.
+        nxt = k * n
+        sv = {}
+        for c in free:
+            for v in range(n):
+                nxt += 1
+                sv[(v, c)] = nxt
+        for c in free:
+            for v in range(n):
+                clauses.append([-var(v, c, k), sv[(v, c)]])                       # x[v][c] -> s[v][c]
+                if v:
+                    clauses.append([-sv[(v - 1, c)], sv[(v, c)]])                 # s[v-1][c] -> s[v][c]
+                    clauses.append([-sv[(v, c)], sv[(v - 1, c)], var(v, c, k)])   # s[v][c] -> s[v-1][c] or x[v][c]
+                else:
+                    clauses.append([-sv[(v, c)], var(v, c, k)])
         for j in range(1, len(free)):
             c, cp = free[j], free[j - 1]
-            for v in range(n):
-                clauses.append([-var(v, c, k)] + [var(u, cp, k) for u in range(v)])
+            clauses.append([-var(0, c, k)])
+            for v in range(1, n):
+                clauses.append([-var(v, c, k), sv[(v - 1, cp)]])
     return clauses
+
+
+def cnf_nvars(n, k, pins):
+    pinned = {c for _, c in pins}
+    free = [c for c in range(k) if c not in pinned]
+    return k * n + len(free) * n
 
 
 def write_cnf(path, nvars, clauses):
@@ -879,7 +903,7 @@ def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=No
             if j is not None:
                 pins.append((j, c))
     if pins:
-        cnfs['control'] = write_cnf(os.path.join(out, 'control.cnf'), 4 * N,
+        cnfs['control'] = write_cnf(os.path.join(out, 'control.cnf'), cnf_nvars(N, 4, pins),
                                     coloring_cnf(N, edges, 4, pins))
         meta['control_pins'] = pins
     # the target asks
@@ -891,10 +915,12 @@ def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=No
         if jt is None or i0 is None:
             continue
         tag = nm.replace('/', 'over').replace(' ', '')
-        cnfs[f'eq_{tag}'] = write_cnf(os.path.join(out, f'eq_{tag}.cnf'), 4 * N,
-                                      coloring_cnf(N, edges, 4, [(i0, 0), (jt, 1)]))
-        cnfs[f'sep_{tag}'] = write_cnf(os.path.join(out, f'sep_{tag}.cnf'), 4 * N,
-                                       coloring_cnf(N, edges, 4, [(i0, 0), (jt, 0)]))
+        pe = [(i0, 0), (jt, 1)]
+        ps = [(i0, 0), (jt, 0)]
+        cnfs[f'eq_{tag}'] = write_cnf(os.path.join(out, f'eq_{tag}.cnf'), cnf_nvars(N, 4, pe),
+                                      coloring_cnf(N, edges, 4, pe))
+        cnfs[f'sep_{tag}'] = write_cnf(os.path.join(out, f'sep_{tag}.cnf'), cnf_nvars(N, 4, ps),
+                                       coloring_cnf(N, edges, 4, ps))
     meta['cnf_sha'] = cnfs
     with open(os.path.join(out, 'graph.json'), 'w') as f:
         json.dump({'meta': meta, 'M': lat.M, 'points': [list(k) for k in keys], 'edges': [list(e) for e in edges]}, f)
@@ -1245,6 +1271,21 @@ def selftest():
     keys_g, edges_g, dirs_g = unit_graph_geometric(pts, lat)
     assert keys_g == keys and edges_g == edges, (len(edges_g), len(edges))
     assert set(dirs_g) <= {lat.vec8(z) for z in lat.units}, 'an edge direction outside the saturation'
+
+    # --- the LINEAR precedence break must not change any verdict (its own positive control): on three small
+    # instances the broken and unbroken encodings must agree, and the broken one must still admit a model.
+    import tempfile
+    for (kk, pins, want) in ((4, [(0, 0)], 'SAT'), (3, [(0, 0)], 'SAT'), (2, [(0, 0)], 'UNSAT')):
+        cl_b = coloring_cnf(len(keys), edges, kk, pins, precedence=True)
+        cl_u = coloring_cnf(len(keys), edges, kk, pins, precedence=False)
+        vs = []
+        with tempfile.TemporaryDirectory() as td:
+            for nm, cl, nv in (('b', cl_b, cnf_nvars(len(keys), kk, pins)), ('u', cl_u, kk * len(keys))):
+                pth = os.path.join(td, nm + '.cnf')
+                write_cnf(pth, nv, cl)
+                r = subprocess.run(['kissat', '-q', pth], capture_output=True, text=True)
+                vs.append('SAT' if r.returncode == 10 else 'UNSAT' if r.returncode == 20 else 'UNKNOWN')
+        assert vs[0] == vs[1] == want, f'precedence changed the verdict at k = {kk}: broken {vs[0]}, plain {vs[1]}'
 
     print('fs70_fabric selftest OK')
     print(f'  zeta12+u3: M = {lat.M}, rank {lat.rank}, g = {len(lat.units)}, covolume {lat.covolume():.4f}')

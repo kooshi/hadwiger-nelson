@@ -1,0 +1,50 @@
+{
+ "ball_v4_R2.5_mod3": {
+  "dir": "build/fs70/ball-v4-25",
+  "mod": 3,
+  "k": 4,
+  "classes": 4893,
+  "quotient_edges": 52134,
+  "self_loops": 0,
+  "verdict": "SAT",
+  "seconds": 0.327,
+  "sha256": "2a68eead2cc5352ae761efdb292826699ceb148342e51b3a3933b5e17abbe660",
+  "lifted_proper": true,
+  "lift_error": null
+ },
+ "word_u3k2_k2_mod3": {
+  "dir": "build/fs70/word-u3k2-2",
+  "mod": 3,
+  "k": 4,
+  "classes": 249,
+  "quotient_edges": 972,
+  "self_loops": 4140,
+  "verdict": "UNSAT",
+  "by": "self-loop",
+  "seconds": 0.0
+ },
+ "ball_v4_R2.5_mod2": {
+  "dir": "build/fs70/ball-v4-25",
+  "mod": 2,
+  "k": 4,
+  "classes": 256,
+  "quotient_edges": 1536,
+  "self_loops": 38094,
+  "verdict": "UNSAT",
+  "by": "self-loop",
+  "seconds": 0.0
+ },
+ "ball_v4_R2.5_mod4": {
+  "dir": "build/fs70/ball-v4-25",
+  "mod": 4,
+  "k": 4,
+  "classes": 12376,
+  "quotient_edges": 80100,
+  "self_loops": 0,
+  "verdict": "SAT",
+  "seconds": 7.427,
+  "sha256": "da8906fb85b9a80bb48c731c82a44038a002bb8f8c80bcd2ed2a0d12b12dd3dd",
+  "lifted_proper": true,
+  "lift_error": null
+ }
+}

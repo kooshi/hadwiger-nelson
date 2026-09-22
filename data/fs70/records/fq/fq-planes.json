@@ -1,0 +1,252 @@
+[
+ {
+  "q": 9,
+  "vertices": 81,
+  "edges": 324,
+  "degree": 8,
+  "circle": 8,
+  "clique_pinned": 3,
+  "asks": [
+   {
+    "tag": "k2",
+    "k": 2,
+    "verdict": "UNSAT",
+    "seconds": 0.001,
+    "sha256": "6ba2cdbfeb1e41cf159115a4c1e8d3e2fb882148d68983f13a3267a2f737cec7",
+    "clauses": 812,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      1
+     ]
+    ]
+   },
+   {
+    "tag": "k3",
+    "k": 3,
+    "verdict": "SAT",
+    "seconds": 0.001,
+    "sha256": "88c69efea0424a27d46842cab67241b1264243c0b4b13646c4dc397b81b8d62c",
+    "clauses": 1299,
+    "model_verified": true,
+    "model_error": null,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      6,
+      2
+     ]
+    ]
+   }
+  ],
+  "chi_lower": 3,
+  "chi_upper": 3
+ },
+ {
+  "q": 25,
+  "vertices": 625,
+  "edges": 7500,
+  "degree": 24,
+  "circle": 24,
+  "clique_pinned": 3,
+  "asks": [
+   {
+    "tag": "k2",
+    "k": 2,
+    "verdict": "UNSAT",
+    "seconds": 0.002,
+    "sha256": "4ce5201d133e1d515fa3557d03929fd4419451417673e313f253933334a6e34f",
+    "clauses": 16252,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   {
+    "tag": "k3",
+    "k": 3,
+    "verdict": "UNSAT",
+    "seconds": 0.002,
+    "sha256": "a0b9c5a5245811d02dd43a3973d6e86290b30246a19c313b9f3c0d265bb99a30",
+    "clauses": 25003,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      40,
+      2
+     ]
+    ]
+   },
+   {
+    "tag": "k4",
+    "k": 4,
+    "verdict": "UNSAT",
+    "seconds": 0.05,
+    "sha256": "3e429fdd1037a2fd562a35b268eee814863c172c5bef5b6c350339686c0c37cc",
+    "clauses": 34378,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      40,
+      2
+     ]
+    ]
+   }
+  ],
+  "chi_lower": 5
+ },
+ {
+  "q": 49,
+  "vertices": 2401,
+  "edges": 57624,
+  "degree": 48,
+  "circle": 48,
+  "clique_pinned": 3,
+  "asks": [
+   {
+    "tag": "k2",
+    "k": 2,
+    "verdict": "UNSAT",
+    "seconds": 0.01,
+    "sha256": "1e36722f7321bf4c910d2fde0417b8eda33f94f7d684073e10085058e81f6113",
+    "clauses": 120052,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      7,
+      1
+     ]
+    ]
+   },
+   {
+    "tag": "k3",
+    "k": 3,
+    "verdict": "UNSAT",
+    "seconds": 0.011,
+    "sha256": "64650fe1853d8b714646bf2000f3bc6bef55ed90e38129c822cd986b0037eda4",
+    "clauses": 182479,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      175,
+      2
+     ]
+    ]
+   },
+   {
+    "tag": "k4",
+    "k": 4,
+    "verdict": "UNSAT",
+    "seconds": 0.378,
+    "sha256": "99922d6ef782c23498a2b61291da7390ae5b6391eaf74f358c877cff77e12d04",
+    "clauses": 247306,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      7,
+      1
+     ],
+     [
+      175,
+      2
+     ]
+    ]
+   }
+  ],
+  "chi_lower": 5
+ },
+ {
+  "q": 5,
+  "vertices": 25,
+  "edges": 50,
+  "degree": 4,
+  "circle": 4,
+  "clique_pinned": 2,
+  "asks": [
+   {
+    "tag": "k2",
+    "k": 2,
+    "verdict": "UNSAT",
+    "seconds": 0.001,
+    "sha256": "3fac95c7bafe68cd485d46c950a679909ba0f1c517d434eba51610576dbf1c6b",
+    "clauses": 152,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ]
+   },
+   {
+    "tag": "k3",
+    "k": 3,
+    "verdict": "SAT",
+    "seconds": 0.001,
+    "sha256": "379824aabeb8df68f56284245dec1e5ae6e24d20471b1cd58acd44c0288c1fc0",
+    "clauses": 252,
+    "model_verified": true,
+    "model_error": null,
+    "pins": [
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ]
+    ]
+   }
+  ],
+  "chi_lower": 3,
+  "chi_upper": 3
+ }
+]
