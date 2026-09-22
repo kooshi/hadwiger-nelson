@@ -1,6 +1,0 @@
-{"what": "one FS-70 phase-1d run still going, not load-bearing: the Lambda-prime quotient sweep continuing to N = 30 (pid 503841, log build/fs70/1d/lp-quotient.log). It already gave the decisive SAT at N = 5 and N = 10; the rest is extra rows. The L3 sweep FINISHED after handback and its rows are in the record.",
- "ledger": "data/fs70/quotient/*.json",
- "safe_to_kill": true,
- "how": "kill -- -503841, then verify by effect: no process of that name in ps, and data/fs70/quotient/lambdaprime.json static for ten seconds",
- "a_kill_redoes": "nothing the record rests on",
- "owner_note": "L1, L2, L6, zeta12+rho15 and Lambda-prime are closed by the fan-gap theorem. L3 (group6:u3:2+zeta6:w4) SURVIVES -- its three quotient colourings are all gap-free, like de Grey's K-lattice. L3 is phase 1e's cheapest live fabric."}
