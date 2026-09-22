@@ -126,7 +126,7 @@ Haugland's Appendix A.
 1. **Either** a certified five-chromatic unit-distance graph over ℚ(√3,√5) — exact coordinates in the nine-integer point format
    of §4.2, the complete unit-distance graph on those points re-derived by a frozen standard-library checker that also replays
    the LRAT refutation and refuses twelve named planted faults, a 1-minimal core, and the kernel form
-   `five_le_chromaticNumber_planeOver_threeFive` through the `UDCert` pipeline (§5) — **or** a typed null: every lattice asked,
+   `five_le_chromaticNumber_planeOver_three_five` through the `UDCert` pipeline (§5) — **or** a typed null: every lattice asked,
    every ball's size and degree, every verdict with its solver, budget and encoding, the additive screen's table, and the
    structure of the colourings found (§3.6), so that the null says which instrument stopped and not "the field".
 2. The records under `data/fs70/` in the format of §6, one jsonl row per ask, appendable and resumable.
@@ -413,7 +413,7 @@ re-derive the complete unit-distance graph exactly, re-ask with two more solvers
 | 2.1 | The chain: from the forced pair `(A, B)` at `δ`, the `m` copies of §3.5 placed by `z ↦ s_{j−1} + u_j (z − A)`, the closing edge; **the whole graph as one point set** — its complete unit-distance graph then contains every copy's edges and the cross edges, all of which only help | the union refuses four colours (`kissat`), and **is five-colourable** (a verified colouring; P2's control: a refusal at five is a six-chromatic graph in a 6-open-like field and is HALT-AND-VERIFY, not a jackpot) |
 | 2.2 | 1-minimisation (`tools/fs66_minimise.py`'s lineage: delete vertices while the four-refusal holds, LRAT-guided core first), keeping the point set closed under nothing — the certificate is a point set and its complete unit graph | a 1-minimal witness; size recorded against P4 |
 | 2.3 | `tools/fs70_check_witness.py`, copied from `fs58_check_witness.py`'s contract with: nine-integer points `((a+b√3+c√5+d√15)/m, (e+f√3+g√5+h√15)/m)`, exact unit-distance re-derivation by bucketing on integer brackets of each irrational term, the CNF built from its own edge set with the triangle pin, its own LRAT replay, twelve planted faults each refused for its named reason (a moved point, a dropped edge, an added edge, a wrong radicand, a proof with a hint removed, a satisfiable formula, …) beside a faithful twin that passes; frozen (sha256 recorded) at the first CERTIFIED | CERTIFIED on the witness; every plant refused by name |
-| 2.4 | The kernel form, by route A or B of §3.8 (decide by the union's LRAT size measured at 2.1): `tools/fs70_emit_witness.py` drives `tools/emit_cert.py` (slots 0–3 of the sixteen: `1, √3, √5, √15`) and `tools/emit_mask.py` (four colours; the triangle pin for route A, the pair pin `A = 0, B = 1` on the forcer for route B) into `Proofs/HadwigerNelson/Instances/ThreeFive/`; `Instances/ThreeFive.lean` (§5) consumes them, and route B adds `not_colorable_chainUnion` (FS-45's D1) beside `Copy.lean`; then the import line in `Proofs.lean`; build through `./scripts/build.sh` with `MEMMAX` set | `five_le_chromaticNumber_planeOver_threeFive` on the standard three axioms; every hypothesis seen load-bearing by deletion once; the gate green |
+| 2.4 | The kernel form, by route A or B of §3.8 (decide by the union's LRAT size measured at 2.1): `tools/fs70_emit_witness.py` drives `tools/emit_cert.py` (slots 0–3 of the sixteen: `1, √3, √5, √15`) and `tools/emit_mask.py` (four colours; the triangle pin for route A, the pair pin `A = 0, B = 1` on the forcer for route B) into `Proofs/HadwigerNelson/Instances/ThreeFive/`; `Instances/ThreeFive.lean` (§5) consumes them, and route B adds `not_colorable_chainUnion` (FS-45's D1) beside `Copy.lean`; then the import line in `Proofs.lean`; build through `./scripts/build.sh` with `MEMMAX` set | `five_le_chromaticNumber_planeOver_three_five` on the standard three axioms; every hypothesis seen load-bearing by deletion once; the gate green |
 
 *Cost model for 2.4:* Heule-510's four-colour refutation (13 MB of Lean, 88 segment files) and de Grey's (216 MB) are the
 kernel precedents; a 1-minimal witness of 1,000–3,000 points at four colours is in that class — hours of build, not days. If
@@ -443,7 +443,7 @@ fail on `sorryAx`; the import line is phase 2.4's first edit). It holds:
   `Gadget.ofUnsat`, exactly as `Instances/SqrtEleven.lean` does at three colours. The proof then reads
   `(five_le_chromaticNumber_of_not_colorable_four).trans (c.chromaticNumber_le_planeOver (by decide) c_valid c_coords (fun _ hx => Q4.eval_mem_of_mem_threeFive h3 h5 hx))`,
   with `UDCert.chromaticNumber_le_planeOver` already generic in the subring (`SqrtEleven.lean`).
-* `five_le_chromaticNumber_planeOver_threeFive : 5 ≤ χ(planeOver (fieldOfRadicands {3, 5}))` — the instance, from
+* `five_le_chromaticNumber_planeOver_three_five : 5 ≤ χ(planeOver (fieldOfRadicands {3, 5}))` — the instance, from
   `sqrt_mem_fieldOfRadicands`.
 
 **Read aloud:** the conclusion is about the unit-distance graph of `ℂ` induced on the points with both coordinates in
@@ -451,6 +451,58 @@ fail on `sorryAx`; the import line is phase 2.4's first edit). It holds:
 (`χ ≤ 5` is the residue plane at 11, `chromaticNumber_finitePlane11`, whose number-field step is row 57's gap and FS-47's).
 
 ---
+
+## 5b. The surfaces, from the consumer's side [the experience-modeling pass]
+
+Four consumers, each cold: the implementer who arrives with this file and nothing else; the owner who scores by artifact; a
+reviewer who trusts none of `tools/` and runs one checker; the kernel, which reads a name and a docstring.
+
+**The tools' command surface** (phase 0.1 hardens the two planner tools to this contract; `fs70_ask.py` is new):
+
+| command | what it does | its refusals (never silent) |
+|---|---|---|
+| `fs70_field.py --selftest \| atlas MMAX [--out atlas.jsonl]` | the identities; every unit vector to denominator `MMAX` with depths | a non-unit "vector" is refused by the exact check, by name |
+| `fs70_fabric.py --selftest \| lattice SPEC… \| word SPEC k \| tn SPEC n \| ball SPEC R` with `--target δ`, `--out DIR`, `--core m`, `--sat-method a\|b` | a lattice's saturation, gate and screen; the three shapes, each writing `DIR/graph.json` and the CNFs of every pin the screen allows | an unknown family name prints the grammar and the known names; a target not in the fabric says so and names the smallest `k`/`n` that reaches it; method A's PARI overflow says "use `--sat-method b`"; **a graph whose edge directions are not the lattice's full saturation is labelled `partial` in `graph.json` and its SAT verdicts are recorded as verdicts about a subgraph** (a refusal still stands; a colouring does not) |
+| `fs70_ask.py run DIR PIN [--solver kissat\|cadical\|pysat:*] [--budget S] \| resume \| status` | one ask, appended to `asks.jsonl` at its verdict; `resume` re-asks every `inflight/` formula and nothing else; `status` prints the owner's table (per lattice: shapes, sizes, degrees, verdicts, seconds) | a budget expiry is recorded as `UNKNOWN` with the encoding named, never as a fact about the graph |
+
+**The generator grammar** (`SPEC`): family names joined by `+` — `zeta12`, `u3`, `v4`, `w4`, `rho15`, `q5`, `s5`, `q7`, `s7` (each the
+`ζ₁₂`-and-conjugation orbit of the named vector) — and `group:u3:k` for Harder's `S_k = {ζ₁₂^m u^n : \|n\| ≤ k}`. Two spellings of one
+lattice give one HNF and one identity sha; the record stores both the spelling and the sha.
+
+**The witness format** (`witness.json`), read by the checker and by the emitter alike — one file, no second copy of anything:
+
+```
+{"field": [3, 5], "colours": 4,
+ "points": [[a, b, c, d, e, f, g, h, m], …],      # ((a+b√3+c√5+d√15)/m, (e+f√3+g√5+h√15)/m), m > 0, gcd = 1, no duplicates
+ "edges":  [[i, j], …],                          # i < j, sorted; MUST equal the complete unit-distance graph on the points
+ "pin":    {"kind": "triangle", "vertices": [0, 1, 2]}    # route A; route B: {"kind": "pair", "vertices": [A, B]}
+ "construction": "…"}                            # provenance in words: the forcer, δ, the copies — never read by the checker
+```
+
+**The checker's contract** (`tools/fs70_check_witness.py`; standard library only; imports nothing from `tools/`; frozen at its
+first CERTIFIED with its sha256 in the witness directory's README). Verdicts: `CERTIFIED` (exit 0) or `REFUSED <CODE>: <detail>`
+(exit 1), the codes fixed here so a reviewer can match them: `FIELD` (not `[3, 5]`), `POINT_FORMAT`, `DUPLICATE_POINT`,
+`EDGE_NOT_UNIT`, `EDGE_MISSING` (a unit pair the file omits — the file's graph must be the whole induced graph),
+`PIN_NOT_TRIANGLE` / `PIN_NOT_PAIR` (the pinned vertices are not pairwise adjacent, or for route B the pair is adjacent),
+`PROOF_FORMAT`, `PROOF_STEP <id>` (a hint not unit under the running assignment, or the last hint not falsified), `PROOF_NO_EMPTY`.
+The CNF it builds, so the proof's clause ids address it: `x(v, c) = 4v + c + 1`; for each vertex in order the clause
+`[x(v,0), x(v,1), x(v,2), x(v,3)]`; for each edge `(i, j)` in sorted order and each `c`, `[−x(i,c), −x(j,c)]`; then the pin —
+`[x(p₀,0)], [x(p₁,1)], [x(p₂,2)]` for a triangle (sound: the three colours of a unit triangle can be relabelled in any proper
+colouring), `[x(A,0)], [x(B,1)]` for a pair (sound: `A ≠ B` in colour is the ask, and the two colours can be relabelled). **No
+at-most-one clauses and no precedence clauses**: the solver may add symmetry breaking to *find* a proof, but the proof it files
+must replay against this formula. `--controls` plants twelve faults, each refused for its named code, beside a faithful twin
+that must pass — the pairs are what make a `REFUSED` evidence rather than noise.
+
+**The records the owner reads.** `asks.jsonl` rows carry, in this order, the fields a score needs first: `verdict`, `lattice`,
+`shape`, `points`, `edges`, `avg_degree`, `pin`, `solver`, `seconds`, `sha` — and `fs70_ask.py status` renders them as one table
+per lattice. A row is appended only at a verdict; the in-flight file is the only other state. `screen.jsonl` rows read `gate`
+(`pass`/`fail`, with the 3-non-unit that passes it named) before anything else, then `g`, `additive`, `forced_basis`, `targets`.
+
+**The Lean surface.** `five_le_chromaticNumber_planeOver_three_five` follows `four_le_chromaticNumber_planeOver_eleven` and
+`…_fourteen_sup_seventy` (number words, snake case); the general form `…_of_sqrt_three_five_mem` follows
+`…_of_sqrt_eleven_mem`; the subring `Q4.threeFive` sits beside `Q4.elevenOnly`, `Q4.sevenFree`, `Q4.seamFree`. The docstring
+states what the theorem is about (the unit-distance graph of `ℂ` induced on points with both coordinates in the field), what
+its proof rests on, and what it does **not** prove (the upper bound) — the reader mid-proof needs those three and nothing else.
 
 ## 6. Records
 

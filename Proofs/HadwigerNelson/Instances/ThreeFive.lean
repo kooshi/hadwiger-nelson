@@ -3,7 +3,7 @@ import Proofs.HadwigerNelson.Instances.SqrtEleven
 /-!
 # The plane over `ℚ(√3,√5)` needs five colours — the skeleton (FS-70)
 
-FS-70 (`plans/FS70-five-over-sqrt3-sqrt5.md` §5): **`five_le_chromaticNumber_planeOver_threeFive`** — `χ(ℚ(√3,√5)²) ≥ 5`, from a
+FS-70 (`plans/FS70-five-over-sqrt3-sqrt5.md` §5): **`five_le_chromaticNumber_planeOver_three_five`** — `χ(ℚ(√3,√5)²) ≥ 5`, from a
 finite unit-distance graph in `ℚ(√3,√5)²` with no proper 4-colouring. The field has no `√11`, so the witness contains no Moser
 spindle; it is a four-colour forced pair at a chainable distance closed inside the field by the chain theorem (`CLAUDE.md` G55),
 built in FS-70's phases 1–2.
@@ -111,7 +111,7 @@ theorem five_le_chromaticNumber_planeOver_of_sqrt_three_five_mem {F : Subfield �
 /-- **The plane over `ℚ(√3,√5)` needs five colours**: `χ(ℚ(√3,√5)²) ≥ 5` — the first kernel five outside the towers over
 `K = ℚ(√3,√11)`, and the first from a graph with no Moser spindle. The matching upper bound (`χ ≤ 5`, the residue plane at 11,
 `chromaticNumber_finitePlane11`) is **not** proved here: its number-field step is row 57's gap. -/
-theorem five_le_chromaticNumber_planeOver_threeFive :
+theorem five_le_chromaticNumber_planeOver_three_five :
     5 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {3, 5}))).chromaticNumber :=
   five_le_chromaticNumber_planeOver_of_sqrt_three_five_mem sqrt_three_mem_fieldOfRadicands_three_five
     sqrt_five_mem_fieldOfRadicands_three_five
