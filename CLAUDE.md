@@ -306,7 +306,7 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G68 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G69 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 ***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
@@ -1124,6 +1124,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   population extrapolated past its own edge. And certification cost is predicted by none of the three statistics proposed for it in one day — ball points, plain solve time, the first core round's output: the largest of five balls
   certified in 44 s, the smallest needed a second, denser ball — so the instrument is a **stop rule on the measured rate (points per second, on the current window), not a predictor**; certificate weight is a cliff (1,004 points → 19 MB, 1,739 → 40 MB, 2,360 → 43 MB). Minted from
   Kooshi's question — *is there a cliff we can traverse instead of searching blindly?* — which the records already answered. It bears on every SAT search here, not only on quadratic fields.
+  **The law prices balls bounded in every embedding; a word ball has a combinatorial ceiling it does not see** (FS-70, 2026-09-22): on the
+  rank-8 lattice `group:u3:2+w4` the 1.9 M-point ball at sums of ≤ 4 has average degree 15.4, its ≤ 3 interior has 84 generator-neighbours
+  each — and its 13-core is empty, because the interior's own induced degree is 11.5 and the shell that carries the rest peels first; the
+  denser-core lever of FS-61 does not exist there, and the Minkowski ball that the law does price is `10⁹` points at degree 18. *Do: on a
+  word ball, compute the core numbers before promising a denser core; in rank 8 expect none above ~12.*
   *Killing test: a refusing ball below average degree 6.5; or a family of lattice balls whose undecided fraction does not fall with degree.*
 * **G66 — Up a residue tower nothing drops where we can see, because a higher level is a *fuzzy* copy of level one and
   fuzziness is taxed; what is left of the question is the carry. [kernel + cert + hand; one reading]** The tower's
@@ -1200,6 +1205,29 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   colourings go and the periodic Kempe screen (`FS70-T10`) decides the target. Killing test: a lattice with a gapped quotient
   four-colouring that carries a four-colour forced pair — which would refute the reduction's being a homomorphism, i.e. an
   incomplete `U`, never row 66.*
+* **G69 — Rigidity is arithmetic, decided on the quotient, and over ℚ(√3,√5) it pulls apart from density. [hand + tools; FS-70
+  phases 1c–1e; one prediction of the owner's lost on the way]** The chain route (G55) needs a four-colourable lattice with a
+  *forced* pair — a rigid colouring space — and rigidity is decided before any ball is built. **Periodic colourings are residue
+  colourings, prime by prime:** for a rank-4 lattice whose ℚ-span is a CM field `E`, a period-`p` four-colouring is Theorem A's
+  colouring at `p` on the target the unit vectors' reductions generate — a prime of `E⁺` **split** in `E` supplies the residue plane
+  `UD(𝔽_q, 2)`, five-chromatic from `q = 25` (de Grey's 54 unit vectors are *exactly* the torus of `𝔽₂₅` mod 5 and of `𝔽₄₉` mod 7,
+  which is why his lattice has no odd-period colouring and Harder's `8/3` pair is forced); **inert** or **ramified** supplies a
+  norm-one Cayley graph that is computed, not read off, and over ℚ(√3,√5) four-colours with a gap at 5 and 7 for the hexagonal
+  fabric's CM field `ℚ(√−3,√−5)` and at 5 for the doubly split `ℚ(√3,√−5)` (`FS70-T5`, `T9`). **A forced pair at `δ` then needs
+  every periodic colouring's Kempe component of the origin to reach `δ`** — the lift of the quotient's two-colour component, a coset
+  `p + V` of the closed-walk voltage lattice, with the index `[NΛ : V]` the deciding quantity (`FS70-T10`); the fan gap (G68) is the
+  degenerate case `V`-trivial and **is not the classifier**: the rank-6 L3 is gap-free at every period and escapes at every target
+  (`[2Λ : V] = 81`), which is the prediction the owner lost. Over `K` the hexagonal lattice is rank 4, meets refusing targets at 5,
+  7, 11, 13 and is Kempe-rigid at `8/3` under all six periodic colourings found — **dense and rigid**, so Harder's forcer lives at
+  23,083 points. Over ℚ(√3,√5) every lattice of rank ≤ 6 built is loose, and the one lattice with no periodic colouring found is
+  rank 8, whose word balls have core number ≤ 12 and whose Minkowski balls are `10⁹` points: **where rigidity is possible, density
+  is not — the two pull apart, and that is the whole difference between the two fields.** G61(4)'s "supply of unit vectors" has its
+  mechanism here: supply is what covers the residue circles. *Do: before building fabric over a field, take the direction set's CM
+  field, classify the primes above 5, 7, 11, 13 in `E/E⁺` and compute the targets; run the quotient at every admissible `N` and the
+  periodic Kempe screen at every target; spend a solver only where every colouring found is rigid at the target — and if that
+  lattice's rank is the field's full degree, expect no dense finite piece and price the cube pass before building a ball. Killing
+  test: a lattice rigid under every periodic colouring found whose finite balls all four-colour with `(0, δ)` separated — a
+  non-periodic escape, the inheritance question row 67 leaves; or a rank-4 lattice loose at every odd prime that still forces.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
