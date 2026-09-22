@@ -176,8 +176,8 @@ its full unit-vector count (§3.2's method), and the additive screen (§3.4): th
 | `ζ₁₂` | 12 | 36 (12, 12, 0, 0) | 36 (0, 36, 0, 0) | rank 4; `4/3, 8/3 ∉ Λ` |
 | `ζ₁₂, u` (2-units) | 36 | **1296 (432, 432, 1296, 1296)** | 1296 (0, 1296, 1296, 1296) | √3 virtual edge **dead**; distance-2 forced pair **dead**; `4/3`, `8/3` **allowed** |
 | `ζ₁₂, u, q₇` (2-units, `q₇ = (1+4i√3)/7`) | 60 | 1296 (432, 432, 1296, 1296) | 1296 (0, 1296, 1296, 1296) | as above — the 7-family adds unit vectors and no constraint |
-| `ζ₁₂, v` (depth ±2) | 36 | **0** | **0** | **no additive four-colouring exists** |
-| `ζ₁₂, w` (depth ±1) | 36 | 288 (96, 96, –, –) | 480 (0, 480, –, –) | √3 dead, distance 2 dead; `4/3, 8/3 ∉ Λ` |
+| `ζ₁₂, v` (depth ±2) | 36 | **0** | **0** | no additive four-colouring exists — **but every vector is a 3-unit: dead by the 3-adic gate (§3.1)** |
+| `ζ₁₂, w` (depth ±1) | 36 | 288 (96, 96, –, –) | 480 (0, 480, –, –) | √3 dead, distance 2 dead; `4/3, 8/3 ∉ Λ`; **all 3-units: dead by the 3-adic gate** |
 | `ζ₁₂, u, v` | **300** | 0 | 0 | none; the lattice is dense (covolume 1.3·10⁻⁴) |
 | `ζ₁₂, u, w` | 180 | 0 | 0 | none; dense (2.1·10⁻³) |
 | `ζ₁₂, u, ρ₁₅` | — | — | — | saturation by `qfminim` overflows a 4 GB PARI stack: use §3.2's method B |
@@ -200,20 +200,25 @@ this screen and nothing is coloured for free.
 | `ζ₁₂, u` | `T₄, T₆ (0 → 4/3)` | 136 / 396; 2,188 / 10,128 / 9.3 | control; eq `4/3`; sep `4/3` | all SAT ≤ 0.06 s |
 | `ζ₁₂, u` | `T₈ (0 → 4/3)` | not built | — | the rational-arithmetic BFS reached 5.8 GB in 7.5 min and was killed by PID (verified gone): **integer coordinates are mandatory** (§3.7) |
 
-The 20k-point colouring found at `R = 2.5` is not a function of `Λ/2Λ` (0 of 256 classes monochromatic) nor of `Λ/4Λ`, and no
-tested translation is an exact period (best agreement 0.895 under `1 + v`): **the fabric is coloured by something the additive
-family does not contain, and phase 1 must find out what before any null is believed (§3.6).**
+**Every one of these verdicts is predicted by a theorem the plan had not yet stated when they were run** (§3.1's 3-adic
+gate, found by the domain-modeling pass): the lattices `ζ₁₂, v` and `ζ₁₂, w` consist entirely of 3-units, so every graph drawn in
+them is 3-colourable through the residue plane `UD(𝔽₉²)`, and a 3-colourable graph carries no four-colour compulsion of any kind.
+The planner's structure test on the 20k-point colouring looked for a period and for factoring through `Λ/2Λ` and `Λ/4Λ` and found
+neither — it asked at the wrong prime (G21: the instrument measured its own enumeration); the 3-adic rule is a function of `Λ/3Λ`,
+and §3.6's instruments now test every split prime. The `ζ₁₂, u` asks (`T₄`, `T₆`) are honest but far below the degree the law
+names (§2.4).
 
-### 2.4 The ball law with four embeddings
+### 2.4 The ball law with four embeddings, and why balls are out
 
 The finite fabric FS-61 used — every lattice point whose real embeddings all lie in a disc of radius `R` — has four embeddings
 here, so the count is `≈ π⁴R⁸/covol(Λ)` and G65's degree law becomes **`degree ≈ g·φ(R)⁴`** with `φ(R) = [2R²·acos(1/2R) −
 ½√(4R²−1)]/(πR²)`. Measured against predicted at `ζ₁₂, v`: `R = 2`: 3,793 points / degree 8.43 against 3,152 / 7.9; `R = 2.5`:
-19,957 / 11.22 against 18,790 / 11.2. **Degree 14 needs `R ≈ 3` whatever `g` is** (`φ(3)⁴ = 0.387`), and at `R = 3` the
-sparse lattices cost 45,000–81,000 points while the 2-unit lattice `ζ₁₂, u` costs 1.16 M (covolume 0.55) and the dense mixed
-lattices are out of reach as balls (10⁹). So: **balls for the sparse wall-breaking lattices; path shapes (Harder's "sums of at
-most four vectors", Haugland's `T_n` lens with a `k`-core) for the 2-unit lattice.** Covolumes: `ζ₁₂, v` 7.91; `ζ₁₂, w` 14.06;
-`ζ₁₂, u` 0.549; `ζ₁₂, u, q₇` 2.3·10⁻⁴.
+19,957 / 11.22 against 18,790 / 11.2. **Degree 14 needs `R ≈ 3` whatever `g` is** (`φ(3)⁴ = 0.387`). Covolumes: `ζ₁₂, v` 7.91;
+`ζ₁₂, w` 14.06; **`ζ₁₂, u` 0.549** (1.16 M points at `R = 3`); `ζ₁₂, u, q₇` 2.3·10⁻⁴; `ζ₁₂, u, v` 1.3·10⁻⁴. Every lattice that
+passes the 3-adic gate of §3.1 contains `u`, hence `1/3`, hence is dense (covolume `≤ 0.55`), so **a Minkowski ball at degree 14
+costs a million points on every honest lattice: the ball is not a shape for this milestone.** The shapes are the path shapes —
+Harder's *sums of at most `k` vectors* and Haugland's `T_n` lens with a `k`-core — whose size is governed by `|S|` and `k`, not by
+the covolume. The ball law stays as the calibration of the degree an ask has reached.
 
 ---
 
@@ -237,8 +242,16 @@ swaps them) and `v_𝔓` for the valuation normalised by `v_𝔓(𝔓) = 1` (so 
 * **Under `ψ`,** `ψ(2) = 0` (distance-2 pairs are monochromatic — G16's pigeonhole in residue form), `ψ(i√3) = ψ(ζ₆) + ψ(ζ₆²)
   = ω² + ω = 1 ≠ 0` (a √3 pair is bichromatic), and a four-colour forced-equal pair on 2-unit fabric needs `ψ(d) = ψ̄(d) = 0`,
   i.e. `d ∈ 𝔓 ∩ 𝔓̄`: distances `2, 4/3, 8/3, 4` qualify and `√3` does not.
-* The other split primes (3, with residue `𝔽₉`; 5, with `𝔽₂₅`) give residue colourings with 9 and 25 colours — no four-colour
-  constraint — and the 3-adic barrier (row 72) says a four-forcer needs directions of nonzero 3-depth: `u`'s family.
+* **The 3-adic gate [derived from row 72's mechanism; the value `χ(UD(𝔽₉²)) = 3` measured 2026-09-21 with a symmetry-broken
+  encoding, two colours refused].** The prime of `F` above 3 has residue field `𝔽₉` and splits in `E` too (`i ∈ ℚ₃(√5)`), so a
+  unit vector of 3-depth zero is a 3-integral point of `F²` whose reduction lies on the eight-point circle of `𝔽₉²`, and Theorem A
+  maps every graph drawn in a lattice of 3-units into `UD(𝔽₉²)`, which is 3-colourable. **A 3-colourable graph has no four-colour
+  pair compulsion at any distance** (row 45's spare-colour lemma: recolour one endpoint, or both, with the spare colour). So **every
+  lattice asked at four colours must contain a unit vector of nonzero 3-depth** — `u`'s family (depth ±2) or the denominator-6
+  family (depth ±1) — and the lattices `ζ₁₂, v` and `ζ₁₂, w`, whatever their additive screen says, are dead by theorem. The
+  residue planes at the other split primes do not obstruct: `UD(𝔽₂₅²)` and `UD(𝔽₄₉²)` refuse three and four colours (measured,
+  same encoding, `χ ≥ 5`), and the plane at 11 has no four-colouring. **The gate runs before the additive screen, on every
+  lattice: no 3-non-unit, no ask.**
 
 ### 3.2 The saturation of a lattice, two methods [exact]
 
@@ -270,6 +283,14 @@ whence `φ(ζ₆ − 1) = φ(ζ₆²) = 0`; the lattices `ζ₁₂, v` and every
 On 2-unit fabric, `3 · (1/3) = 1` forces `φ(1/3) = −φ(1)` in ℤ/4, so `φ(4/3) = φ(8/3) = 0` always (allowed) while `φ(2) = 2φ(1)`
 and `φ(i√3)` vary (dead as forced pair and as virtual edge respectively, by the explicit colourings the screen exhibits).
 
+**The screen's product is a sublattice, not four booleans** (the domain-modeling pass): every additive colouring factors through
+`Λ/4Λ`, and the set of differences every additive colouring makes monochromatic is **`Λ_forced := ⋂_φ ker φ`, a sublattice with
+`4Λ ⊆ Λ_forced ⊆ Λ`**, computed once per lattice as an HNF basis. A forced-equal pair at `δ` is additively allowed iff `δ ∈
+Λ_forced`; the chainable targets of a lattice are then `Λ_forced ∩ {δ : 1/δ ∈ ℤ[U]}`, read off in one pass rather than tested one
+`δ` at a time (the four-entry table of §2.2 is the same object sampled). The residue colourings `ψ, ψ̄` of §3.1 are themselves
+Klein-additive colourings of any 2-unit lattice, so `Λ_forced ⊆ ker ψ ∩ ker ψ̄ = 𝔭Λ`-ish automatically: one instrument covers both.
+Phase 0.2 emits `Λ_forced` per lattice into `screen.jsonl`.
+
 ### 3.5 The chain closers over the field [exact, `fs70_field.py --selftest`]
 
 With `v = (1+i√15)/4`, `v + v̄ = ½`, `v² + v̄² = −7/4`, `ρ₁₅ = −v̄²`:
@@ -288,11 +309,15 @@ avoids needing it.
 ### 3.6 What colours the fabric — the structure instruments [G21's obligation]
 
 A SAT-found four-colouring is a measurement of the encoding until its structure is known. Three cheap instruments, run on
-every colouring the phase records: (i) **quotient screen** — is the colouring a function of `Λ/L` for `L ∈ {2Λ, 4Λ, 3Λ, 6Λ}`
+every colouring the phase records: (i) **quotient screen** — is the colouring a function of `Λ/L` for `L ∈ {2Λ, 3Λ, 4Λ, 5Λ, 6Λ,
+7Λ}` — one `L` per split prime at which the lattice is integral, because a residue colouring at `p` is a function of `Λ/pΛ`
 (count monochromatic classes); (ii) **period screen** — for each candidate period `t` (all `2s, 3s, 4s`, `s + s'` over `S`), the
 fraction of points with `c(p + t) = c(p)`; (iii) **the imposed-quotient ask** — add `c(p) = c(p + t)` clauses for a candidate
 period and re-ask: a SAT answer is a periodic colouring rule and a theorem-shaped null (FS-61's quotient screens), an UNSAT
 answer says the free colourings are the only ones. A null in phase 1 is reported with (i)–(iii)'s readings or it is not typed.
+**Positive control for the instruments** (phase 0.4): on the `ζ₁₂, v` ball of §2.3 the imposed-quotient ask with `L = 3Λ` must
+return SAT (the 3-adic residue colouring lives there) while the same ask on an `S₂` fabric of §3.3 must not find a `3Λ`-periodic
+colouring at all — the instrument sees the rule the planner's `2Λ`/`4Λ` test missed.
 
 ### 3.7 Arithmetic and shape costs [measured, §2.3]
 
@@ -313,24 +338,29 @@ artifact) and to the jsonl files of §6. **Cheapest first; a refusal anywhere ju
 | step | what | acceptance |
 |---|---|---|
 | 0.1 | Harden `tools/fs70_field.py` / `fs70_fabric.py`: integer coordinates over a lattice denominator; §3.2 method B; a `--selftest` that plants three faults (a non-unit vector accepted, a wrong depth, a lattice basis that drops a generator) and watches each refuse | `python3 tools/fs70_field.py --selftest` and `tools/fs70_fabric.py --selftest` green; the §2.1 table reproduced to `M = 24` and extended to 42 (`data/fs70/atlas.jsonl`) |
-| 0.2 | The screen table of §2.2 reproduced and extended to every lattice named in phase 1 (§4.1), plus `ζ₁₂, u, ρ₁₅` by method B | `data/fs70/screen.jsonl`; a lattice whose screen changes from §2.2 is a defect to explain, not a finding |
+| 0.2 | The screen table of §2.2 reproduced and extended to every lattice named in phase 1 (§4.1), plus `ζ₁₂, u, ρ₁₅` by method B; per lattice the 3-adic gate (does `Λ ∩ U` hold a 3-non-unit?) and the HNF basis of `Λ_forced` with its chainable targets (§3.4) | `data/fs70/screen.jsonl`; a lattice whose screen changes from §2.2 is a defect to explain, not a finding; `ζ₁₂, v` and `ζ₁₂, w` must read "gate: fails" |
 | 0.3 | **The positive control**: Haugland's `G₁` rebuilt exactly in ℚ(ζ₈₄) from Appendix A (the 84 vectors as `ζ₈₄`-polynomials: `u_{2j} = ζ₈₄^{2j}`, `u_{2j+1} = ε·ζ₈₄^{2j}`, `ε = u₂₉ ζ₈₄^{−28}`, `u₂₉ = (−√3 + i(4cos(π/7) − 1))/(4 sin(2π/7))` with `√3 = ζ⁷+ζ⁻⁷`, `i = ζ²¹`, `cos(π/7) = (ζ⁶+ζ⁻⁶)/2`, `sin(2π/7) = (ζ¹²−ζ⁻¹²)/(2ζ²¹)`); verify `|u₂₉|² = 1` exactly and that his 740 vertices / 3,985 edges come out; ask `A = B` at four colours with our encoding | UNSAT, reproducing his CaDiCaL refusal — the instrument sees a known positive one field over. Budget 2 h; if the counts differ, the derivation of `ε` is wrong before anything else is |
-| 0.4 | The records skeleton (§6) and `data/fs70/README.md` | the owner can read every file's role |
+| 0.4 | The residue-plane values behind §3.1 re-derived: `χ(UD(𝔽₉²)) = 3`, `UD(𝔽₂₅²)` and `UD(𝔽₄₉²)` refuse four colours (symmetry-broken; a 2-colour refusal at 9 as the control that the encoding can refuse) | recorded in `data/fs70/records/phase-0.md` with the encodings' shas |
+| 0.5 | The structure instruments of §3.6 with their positive control: the imposed-quotient ask at `L = 3Λ` on the planner's `ζ₁₂, v` ball (`build/fs70/ball-v4-25`, regenerable) returns SAT | the instrument finds the 3-adic rule the planner missed |
+| 0.6 | The records skeleton (§6) and `data/fs70/README.md` | the owner can read every file's role |
 
 *Kill/redo:* nothing here runs long; everything is regenerable in minutes.
 
 ### Phase 1 — the asks (two to three days; the milestone's core)
 
-**1.1 The lattices, in order, and the asks on each** (the target list per lattice comes from the screen — never ask a target the
-screen has killed):
+**1.1 The lattices, in order, and the asks on each.** Every lattice passes the 3-adic gate (a 3-non-unit in `S`) and the additive
+screen (`Λ_forced` computed) before its first ask; the targets are read off `Λ_forced` — never ask a target the screen has killed.
 
 | # | lattice (generators) | why | shapes | asks (all at four colours, symmetry-broken) |
 |---|---|---|---|---|
-| L1 | `S₂ = {ζ₁₂^m u^n : \|n\| ≤ 2}`, Harder's shape (§3.3) | the 2-unit template; the screen allows `4/3, 8/3` | sums of ≤ 4 (then ≤ 5) | **eq `4/3`**, **eq `8/3`**; control |
-| L2 | `ζ₁₂, v` (no additive colouring) | nothing is ruled out; the fabric is de Grey's half-spindle group without the Moser part | Minkowski balls `R = 3` (~81k points, degree ~14), `3.5` (~280k, ~16) | control **first** (a refusal is the headline outright); sep `√3`; eq `2`; eq `4/3`, `8/3` if in the lattice |
-| L3 | `ζ₁₂, w` (`w⁴ = ρ₁₅`) | depth-1 breaker; sparser | balls `R = 3` (~45k), `3.5` (~160k) | control; eq `4/3`; eq `8/3` (`√3`, `2` killed by the screen) |
-| L4 | `ζ₁₂, u, v` and `ζ₁₂, u, w` (no additive colouring, `g = 300 / 180`) | the union of 2-unit and wall-breaking fabric | Harder shape on `S₂ ∪ ζ₁₂·{v, v̄}`; `T_n` lens with a 7-core | control; eq `4/3`; eq `8/3`; eq `2`; sep `√3` |
-| L5 | `ζ₁₂, u, q₇` and the 5-family | more 2-units | Harder shape | eq `4/3`; eq `8/3` |
+| L1 | `S₂ = {ζ₁₂^m u^n : \|n\| ≤ 2}`, Harder's shape (§3.3) | the 2-unit template: passes the 3-adic gate through `u`, `Λ_forced ∋ 4/3, 8/3`; the residue at 2 four-colours it, so a refusal here is a forced pair and not a five-forcer outright | sums of ≤ 4, then ≤ 5; then `S₃` (`\|n\| ≤ 3`) | control (must colour — `ψ` exists; a refusal is a defect); **eq `4/3`**, **eq `8/3`**, and every other `δ ∈ Λ_forced` with `1/δ ∈ ℤ[U]` of small chain length |
+| L2 | `S₂ ∪ ζ₁₂·{v, v̄}` — 2-unit fabric plus the depth-2 wall-breaker (`g = 300` in the full lattice) | no additive colouring exists (§3.4's theorem, `1/2 ∈ Λ`) and the 3-adic gate passes through `u`: **nothing is ruled out by any residue** — the control itself can refuse | sums of ≤ 3, then ≤ 4, of the 84 vectors; `T_n` lens between `0` and the target with a 7-core | **control first**; eq `4/3`; eq `8/3`; eq `2`; sep `√3` |
+| L3 | `S₂ ∪ ζ₁₂·{w, w̄}` — with the depth-1 breaker (`g = 180`) | as L2, sparser | as L2 | as L2 |
+| L4 | `S₂` plus the 7-family `{q₇, s₇}` and the 5-family `{q₅, s₅}` orbits | more 2-units; the residues at 7 and 5 do not obstruct (§3.1) | Harder shape, sums of ≤ 4 | eq `4/3`; eq `8/3` |
+| L5 | the denominator-6 family (3-depth ±1) with `ζ₁₂` | the cheapest 3-non-units after `u`; its `Λ_forced` decides its targets | Harder shape | per `Λ_forced` |
+
+**Dead by theorem, never to be asked:** `ζ₁₂, v` and `ζ₁₂, w` alone (3-unit lattices, §3.1); any 2-unit lattice at the targets `√3`
+(virtual edge) and `2` (forced pair) (§3.4).
 
 **1.2 The encoding** (`tools/fs70_ask.py`): one-hot, at-least-one and at-most-one per vertex, edge clauses; the pin — control:
 the triangle `0, 1, ζ₆` at colours 0, 1, 2 with precedence on the fourth colour; forced-equal ask at `(A, B)`: `A = 0, B = 1`,
@@ -403,8 +433,14 @@ fail on `sorryAx`; the import line is phase 2.4's first edit). It holds:
 
 ## 6. Records
 
+**Identity.** An ask is identified by `sha256(canonical point set, pin)` — the sorted list of points in the nine-integer format
+of §4.2 plus the pin — never by the generator names (two spellings of one lattice, or two shapes reaching one point set, are one
+ask). A shape is a tagged record: `{"shape": "word", "k": 4}` (Harder), `{"shape": "lens", "n": 6, "B": …}` (Haugland),
+`{"shape": "ball", "R": 3}`; a pin is `{"kind": "control"}`, `{"kind": "eq", "delta": …}` or `{"kind": "sep", "delta": …}`.
+
 `data/fs70/atlas.jsonl` (one row per unit vector to denominator 42: coordinates, denominator, depths), `screen.jsonl` (one row
-per lattice: generators, `M`, rank, `g`, covolume, the screen's counts), `asks.jsonl` (one row per ask: lattice, shape, size,
+per lattice: generators, `M`, rank, `g`, covolume, whether the 3-adic gate passes, the HNF basis of `Λ_forced`, and the chainable
+targets it admits), `asks.jsonl` (one row per ask: its identity sha, lattice, shape, size,
 degree predicted/measured, target, pin, encoding sha, solver, budget, verdict, wall and CPU seconds, model sha or proof sha, the
 §3.6 readings for a SAT), `inflight/`, `records/phase-{0,1,2}.md` (running logs), `witness-<sha>/` (phase 2: `witness.json`,
 `witness.lrat.gz`, `README.md` with the construction). Ball and CNF files stay in `build/fs70/` (regenerable; never the only copy
@@ -418,10 +454,10 @@ of anything).
 |---|---|---|---|
 | P1 | No lattice of 2-units carries a √3 virtual edge or a distance-2 forced pair at four colours (§3.4); every such ask colours | high (a theorem given the screen's exhaustiveness) | a refusal there — which would mean the screen's basis or coordinates are wrong, not that the theorem is |
 | P2 | The Harder-shape fabric `S₂`, sums of ≤ 4, **does** force `(0, 8/3)` or `(0, 4/3)` at four colours | medium-low — Harder's fabric over K has the Moser twist (a rigid four-chromatic seed); ours has the chain (not rigid) | the L1 asks colouring at sums of ≤ 5 with non-periodic colourings: then the 2-unit route is a typed null and L2–L4 carry the milestone |
-| P3 | The additive-free lattice `ζ₁₂, v` four-colours at `R = 3` and `R = 3.5` (E2's spirit: 20k points coloured in 0.3 s) | medium | a refusal at `R = 3` — a five-chromatic graph of ~80k points with 36 directions, the headline |
-| P4 | If a five-forcer lands, its 1-minimal size is between 700 and 3,000 points (Haugland 2,131; Heule 1,441; Harder's forcer 745 before the spindle) | medium | a refusal on a lattice with `g ≥ 180` (dense fabric refuses small) |
-| P5 | The colourings found at L2's balls are **not** periodic under any sublattice of index ≤ 64 (§3.6) — the fabric is coloured "by accident", not by a rule | low-medium | a periodic rule found by the imposed-quotient ask: then a theorem-shaped null for that lattice |
-| P6 | Wall-breaking directions are **not** needed for the forced pair (P2's route) but are for the √3 virtual edge (P1) | medium (P1 is derived; P2 is the bet) | P2 losing while an L4 ask refuses |
+| P3 | **No lattice of 3-units refuses anything at four colours** — a theorem (§3.1), of which the pilot's seven SAT verdicts on `ζ₁₂, v` are instances; the imposed-quotient ask with `L = 3Λ` finds the residue rule there | high (derived) | a refusal on a 3-unit lattice, which would falsify the checker of the lattice's saturation before the theorem |
+| P4 | If a five-forcer lands, its 1-minimal size is between 700 and 3,000 points (Haugland 2,131; Heule 1,441; Harder's forcer 745 before the spindle) | medium | a refusal on L2 or L3 at sums of ≤ 3 (dense mixed fabric refuses small) |
+| P5 | On L1 the four-colourings found at sums of ≤ 4 are **not** all periodic under a sublattice of index ≤ 4⁸ — the residue colouring `ψ` is among them, but non-additive, non-periodic ones exist | medium | every colouring found factoring through `Λ/4Λ`: then L1's colouring space is the additive family and the forced targets are exactly `Λ_forced`'s — a theorem-shaped reading for the 2-unit route |
+| P6 | Wall-breaking directions are **not** needed for a forced pair at `4/3` or `8/3` (P2's route, L1) but are needed for a control refusal (L2/L3, no residue colouring at all) | medium (P2 is the bet) | P2 losing while an L2 control refuses |
 | P7 | The kernel form, if reached, costs under 12 hours of `build.sh` wall time | medium-high (Heule-510's precedent) | an LRAT above 50 M lines |
 | P8 | Phase 0.3 reproduces Haugland's 740 / 3,985 and his refusal in under 60 s of solver time | high | a count mismatch, which is the `ε` derivation |
 
