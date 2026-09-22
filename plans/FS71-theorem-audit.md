@@ -337,10 +337,12 @@ and its grade-tagged clauses are the seed; the files are then read for what the 
 ### S.6 Budget, stop rules, checkpoint
 
 Sonnet 5 implementers, one at a time, ~300k tokens each (a fresh one above ~400k — the rotation rule, tightened for a model
-we have not run before). **Revised after batch 1 (404k tokens on 670 KB): the heavy batches are split so no reader takes more than
-~700 KB of plan text** — batch 3 → M53–M57 and M58–M61 (+ the consolidation rows); batch 4 → M62 + M64 (+ `POROS-2026-09-10-*`),
-M63 phases C–G (+ `POROS-2026-09-11-*`), M63 phases H–H4 (+ `POROS-2026-09-12-*`); batch 6 → FS-50–FS-56 and FS-58–FS-66; ten
-batches in all, numbered 1, 2, 3a, 3b, 4a, 4b, 4c, 5, 6a, 6b. No CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
+we have not run before). **Revised after batches 1–2b (400–500k tokens per 330–670 KB — Sonnet reads whole regardless of the grep rule): every reader
+takes ≤ ~350 KB of primary text, or a larger volume with named files to read in full and the rest grepped.** Seventeen readers:
+1 (M17–M36) · 2a (M37–M48) · 2b (M49–M52) · 3a (M53–M55 + `FIELD-WALL-THEOREM.md`) · 3b (M56–M57, Mascot, R57, Q8) · 3c (M58–M61,
+R52) · 4a (M62, M64, FS-32) · 4b (M63 phases C–G) · 4c (M63 phase H2) · 4d (M63 phases H3–H4) · 5a (FS-24–FS-28, FS-36, the ChatGPT
+fold-in) · 5b (FS-38, completed in place) · 5c (the 2026-09-14 Astra fold-in) · 6a (FS-50, FS-53) · 6b (FS-54, FS-56) · 6c (FS-58,
+FS-62/G63/G64) · 6d (FS-61) · 6e (FS-66, and FS-70's two new fields). The briefs are in the session scratchpad (`brief-fs71-batch*.md`). No CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
 ends when every milestone in it is filed, or at the token budget — then the report's progress section names the next milestone
 and the successor is briefed from the repository alone. **Checkpoint:** the committed derivation files; **resume:** read
 `data/fs71/batch-<n>.md` § progress. A kill redoes nothing committed.
@@ -419,9 +421,18 @@ S.1 is pasted into every brief, and the checker's warnings on the batch's own pr
 | 3a | 25 (M53 ×14 — every proposition of `FIELD-WALL-THEOREM.md`; M54 ×4; M55 ×7) | 4 confirmations of attributions already recorded (Theorem B's value `[Fischer1994]`; Lemma 4.1 `[Moorhouse2010]` Prop. 1.4(b); Cor. 6.5 `[Fischer1990]` Thms 8–10; Prop. 6.4's correction = row 63) — nothing new | 0 (one *unsure*, M53-T15, the K(√23) witness: the owner located its record `data/m53/forced-spindle-full-8oversqrt3.json` — 3,905 points, four colours refused directly, one refutation — and it closes at tools grade) | C8 (Prop. 6.4 superseded, not a theorem) — **found**; C9 — correctly traced elsewhere (FS25-P2) | M53-T12 (the 2-SAT residue obstruction: a fifth colour on a satisfying set over the residue colouring is proper and separates the pair, for every finite K-extension) — closes; the wall criterion (M53-T5/6.4: `[−1] ∈ ⟨[d]⟩ ⊂ ℚ₂^×/ℚ₂^{×2}` iff some odd square class ≡ 7 (mod 8)) — closes | **accepted** 2026-09-22; the implementer caught and fixed its own M55-T4 mis-grade before hand-back (the iterated core absorption is kernel, `extends_of_extensionOrder`); Theorems A and B's hand proofs (2026-09-05) filed as M53's with the kernel event named; 517k tokens on 390 KB |
 | 3b | 30 (M56 ×7, M57 ×9, MASCOT ×11 — six of them a same-day parallel session's, "Coxeter", with no grokking-level presence anywhere; R57 ×1 + the named gap; Q8 ×2 beyond M51-T1) | 0 new (M56-T2 `[Fischer1990]` Thm 1(i), M56-T6 `[Fischer1990b]` Thm 4 for the quadratic instance — recorded; L7 forward-pointed to the Astra fold-in, batch 5) | 0; 2 conjectures surfaced | C10 — found in its true form (M56's lemmas are additive-colouring lemmas; the prime-inversion conjecture L7 is the one with `[Fischer1990b]` prior art, filed where it was proved) | MASCOT-T6 (Coxeter's rigidity theorem: a √3-clean 4-colouring of the rank-4 Moser lattice is one of the two residue colourings, via `R/2R ≅ 𝔽₄ × 𝔽₄` and `K₄ × K₄`'s unique colourability) — closes, the lattice's rank made explicit | **accepted** 2026-09-22; M51-T1 reconciled against Q8 (numbers match); the Coxeter theorems (T6–T11) are the batch's headline and a candidate grokking for the close — Kooshi's call; 438k tokens on 340 KB |
 | 3c | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
-| 6 | | | | | | |
+| 4a | | | | | | |
+| 4b | | | | | | |
+| 4c | | | | | | |
+| 4d | | | | | | |
+| 5a | | | | | | |
+| 5b | | | | | | |
+| 5c | | | | | | |
+| 6a | | | | | | |
+| 6b | | | | | | |
+| 6c | | | | | | |
+| 6d | | | | | | |
+| 6e | | | | | | |
 
 **Theorems this milestone proved:** none expected; the audit's own products are demotions and attributions. (The G35 correction is
 a refutation of a hand claim, recorded in the grokking, not a theorem.)
