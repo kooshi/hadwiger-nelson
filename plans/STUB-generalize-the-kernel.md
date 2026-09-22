@@ -189,8 +189,10 @@ until you check.
   heptagonal witness — needs cubic-field machinery this repository does not have. **Declined outright**, not
   merely deferred.
 * **`Coset.lean` to a general planar lattice.** The whole file runs on `hexQ = a² + ab + b²`. The Frontier
-  already prices this: the crude Hermite-plus-covering chain gives `k ≥ 6` for every planar lattice, and closing
-  `k = 6` needs a near-equality rigidity argument from reduction theory — **mathematics we do not have.** Lowest.
+  already prices this. **Corrected by FS-71 (2026-09-22, `plans/M37-derivation.md` C1):** the crude Hermite-plus-covering chain
+  proves only `λ₁(Λ') > 2λ₁(Λ)`, hence `k > 2√3·λ₁²/det Λ` — `k ≥ 5` at the hexagonal lattice and no universal constant at all;
+  "`k ≥ 6` for every planar lattice" is a conjecture, and closing it needs an argument nobody has written — **mathematics we
+  do not have.** Lowest.
 
 ## 3. Consolidation — the same thing proved twice
 
