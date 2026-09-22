@@ -1,0 +1,19 @@
+E0 = Q(sqrt-3,sqrt-5) -- the Q-span of the CM base lattice <zeta6^m u^n>
+  degree 4, discriminant 3600
+  primes above 2: 1
+    e = 2   f = 2   residue field size = 4
+Q(sqrt15) -- its maximal real subfield, the fixed field of complex conjugation
+  primes above 2: 1
+    e = 2   f = 1
+
+ONE prime above 2 in each, so the relative extension at 2 is e = 1, f = 2: INERT, not split.
+The CM involution therefore FIXES that prime, and for psi in E0 with psi*conj(psi) = 1,
+    v(psi) + v(conj(psi)) = 2 v(psi) = v(1) = 0,   so   v(psi) = 0.
+EVERY unit vector of the CM field is a 2-unit.  A commensurate twist's arena lies in the rank-4
+lattice Lambda + psi.Lambda inside E0, which is 2-integral with every edge difference a unit at
+that prime, so reduction to the residue field of size 4 is a proper FOUR-COLOURING of the whole
+arena (Theorem A, CLAUDE.md row 57) -- at any radius, for any base inside E0, with no solver.
+
+For contrast, F = Q(sqrt3,sqrt5), the field the milestone lives in:
+  primes above 2: 1
+    e = 2   f = 2

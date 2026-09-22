@@ -523,6 +523,12 @@ def near_pairs(bf, pf, target=1.0, tol=GEOM_TOL):
     return out
 
 
+def cross_pairs_sub(B, PB, bf, pf, sub, tol=GEOM_TOL):
+    """`cross_pairs` with the `z` side restricted to the index set `sub` (the zeta6 fundamental domain)"""
+    return [(int(sub[i]), j) for i, j in near_pairs(bf[sub], pf, 1.0, tol)
+            if FF.e_normF(FF.e_sub(B[int(sub[i])], PB[j])) == FF.ONE]
+
+
 def cross_pairs(B, PB, bf, pf, tol=GEOM_TOL):
     """every (i, j) with |B[i] - PB[j]| = 1 EXACTLY: the grid proposes, the field decides.
 
@@ -595,18 +601,54 @@ def flags(psi):
 _SCAN = {}
 
 
+def zeta6_domain(lat, pts):
+    """one representative of each zeta6-orbit of the base, and the origin's index.
+
+    The base is zeta6-invariant and the action is FREE off the origin (`zeta6.z = z` forces `z = 0`), so the
+    27,217-point ball is the origin plus 4,536 free orbits."""
+    idx = {p: i for i, p in enumerate(pts)}
+    zero = idx[tuple([0] * 8)]
+    seen, reps = set(), []
+    for i, p in enumerate(pts):
+        if i in seen or i == zero:
+            continue
+        z = FF.e_from_ints(FF.ints_reduce(list(p), lat.M))
+        orb = []
+        for m in range(6):
+            j = idx.get(lat.vec8(FF.e_mul(_Z6[m], z)))
+            assert j is not None, 'the base is not zeta6-invariant, so the reduction below is unsound'
+            orb.append(j)
+        assert len(set(orb)) == 6, 'a zeta6-orbit of the base is not free off the origin'
+        seen.update(orb)
+        reps.append(i)
+    return reps, zero
+
+
 def _scan_init(spec, k):
     lat, pts = base_ball(spec, k)
     B = [FF.e_from_ints(FF.ints_reduce(list(p), lat.M)) for p in pts]
     bf = np.array([complex(FF.f_float(z[0]), FF.f_float(z[1])) for z in B])
-    _SCAN.update(lat=lat, pts=pts, B=B, bf=bf)
+    reps, zero = zeta6_domain(lat, pts)
+    _SCAN.update(lat=lat, pts=pts, B=B, bf=bf, reps=np.array(reps, dtype=np.int64), zero=zero,
+                 nunits=len(lat.units))
 
 
-def scan_one(psi9):
+def scan_one(psi9, reduce6=True):
     """the EXACT cross-edge anatomy of one rotation on the shared base -- the scan's unit of work.
 
-    psi.B is taken in FLOAT for the grid join (instant) and EXACTLY only on the few hundred pairs the join
-    proposes, which is what makes a 2,020-rotation scan a few minutes rather than a day."""
+    TWO THINGS MAKE THIS AFFORDABLE, both exact.
+    (1) `psi.B` is taken in FLOAT for the grid join and EXACTLY only on the few hundred pairs the join
+        proposes.
+    (2) EVERY quantity here is `zeta6`-equivariant, so the `z` side of the join runs over one representative
+        of each orbit and the answer is multiplied by six.  `(z, w) -> (zeta6 z, zeta6 w)` preserves
+        `|z - psi.w|` (zeta6 and psi are both complex numbers, so they commute); it preserves `psi.w in B`
+        because `B` is zeta6-invariant; and it preserves `z in psi.B`, because `zeta6 z in psi.B` iff
+        `psi^-1 zeta6 z = zeta6 psi^-1 z in B` iff `psi^-1 z in B`.  The action is free off the origin, so the
+        pair set is a free zeta6-set and the count is exactly six times the count over a fundamental domain.
+        The 30 pairs with `z = 0` (the origin is a fixed point) are added back by hand, and they are inside-half
+        edges for every psi, never cross edges.  `reduce6=False` runs the unreduced join; the self-test asserts
+        the two agree, and `data/fs70/records/phase-1c.md` reports the two-algorithm comparison on 349
+        rotations counted before the reduction existed."""
     psi = FF.e_from_ints(tuple(psi9))
     B, bf = _SCAN['B'], _SCAN['bf']
     pf = bf * complex(FF.f_float(psi[0]), FF.f_float(psi[1]))
@@ -616,12 +658,22 @@ def scan_one(psi9):
             return FF.e_mul(psi, B[j])
     PB = _PB()
     jb, ip = overlap_indices(B, bf, PB, pf)
-    pairs = cross_pairs(B, PB, bf, pf)
-    cross = [(i, j) for i, j in pairs if j not in jb and i not in ip]
-    diag = sum(1 for i, j in cross if i == j)
+    if reduce6:
+        reps, zero = _SCAN['reps'], _SCAN['zero']
+        sub = cross_pairs_sub(B, PB, bf, pf, reps)
+        cross = [(i, j) for i, j in sub if j not in jb and i not in ip]
+        diag = sum(1 for i, j in cross if i == j)
+        # the origin's own pairs: |0 - psi.w| = 1 iff |w| = 1, so one per unit vector of the base, and every
+        # one of them joins the shared centre to a point of half 1 -- inside a half, never a cross edge
+        pairs_all = 6 * len(sub) + _SCAN['nunits']
+        cross, diag = 6 * len(cross), 6 * diag
+    else:
+        pairs = cross_pairs(B, PB, bf, pf)
+        cr = [(i, j) for i, j in pairs if j not in jb and i not in ip]
+        pairs_all, cross, diag = len(pairs), len(cr), sum(1 for i, j in cr if i == j)
     row = flags(psi)
-    row.update(pairs_all=len(pairs), shared=len(jb), cross=len(cross), diagonal=diag,
-               off_diagonal=len(cross) - diag)
+    row.update(pairs_all=pairs_all, shared=len(jb), cross=cross, diagonal=diag,
+               off_diagonal=cross - diag)
     return row
 
 
@@ -927,6 +979,18 @@ def selftest():
     assert anat['cross_pairs_all'] == 138, anat['cross_pairs_all']
     assert anat['cross_pairs_all'] - 60 == anat['cross'], \
         'the sixty shared-centre pairs are not the whole difference between the pair count and the arena'
+
+    # --- part 1a: THE SYMMETRY REDUCTION IS EXACT.  The scan runs the `z` side of the join over one
+    # representative per zeta6-orbit and multiplies by six; here the reduced and unreduced routes are run on
+    # the same rotations and must agree in every field, including on rho15, whose answer is known.
+    _scan_init('group6:u3:2', 3)
+    for p9 in (RHO15_9, (1, 0, 0, 0, 0, 0, 0, 1, 4), (-2, 0, 0, 0, 0, 0, 1, 0, 3), (1, 0, 0, 0, 0, 1, 0, 0, 2)):
+        a = scan_one(list(p9), reduce6=True)
+        b = scan_one(list(p9), reduce6=False)
+        for f in ('pairs_all', 'shared', 'cross', 'diagonal', 'off_diagonal'):
+            assert a[f] == b[f], (f'the zeta6 reduction disagrees with the full join at psi = {a["psi_str"]}: '
+                                  f'{f} reads {a[f]} reduced and {b[f]} unreduced')
+    _SCAN.clear()
 
     # --- part 2: the SCAN must find rho15 with exactly that anatomy, from its own pool
     want = canonical_psi(rho)

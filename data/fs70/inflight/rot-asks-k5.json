@@ -1,0 +1,8 @@
+{
+ "what": "FS-70 phase 1c: the four-colour control on the top five wall-breaking arenas at base sums of <= 5 (136,021 points per half)",
+ "command": "python3 -u tools/fs70_rot_asks.py data/fs70/rotations.jsonl --top 5 --k 5 --budget 1200 --out-root build/fs70/rot/asks",
+ "pgid": 418450, "log": "build/fs70/rot/asks-k5.log",
+ "checkpoint": "each arena's graph.json and verdict.json under build/fs70/rot/asks/k5-*; the ledger row in data/fs70/asks.jsonl",
+ "resume": "the same command -- an arena already built is not rebuilt and an ask already answered is not re-asked",
+ "a_kill_redoes": "the arena being built (about a minute) and nothing decided"
+}

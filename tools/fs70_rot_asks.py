@@ -70,6 +70,14 @@ def main(argv):
         d = os.path.join(root, f'k{k}-{tag}')
         psi = FF.e_from_ints(tuple(r['psi']))
         t0 = time.time()
+        vpath = os.path.join(d, 'verdict.json')
+        if os.path.exists(vpath):
+            v = json.load(open(vpath))
+            print(f'--- [{idx+1}] {r["psi_str"][:60]}: already asked, verdict {v["verdict"]} '
+                  f'(ledger row in {ASKS})', flush=True)
+            if v['verdict'] == 'UNSAT':
+                return 2
+            continue
         if not os.path.exists(os.path.join(d, 'graph.json')):
             lat, apts, edges, anat, _ = RT.arena_exact(spec, k, psi, verbose=True)
             RT.write_arena(d, spec, k, psi, apts, edges, anat, lat)
@@ -84,17 +92,34 @@ def main(argv):
                '--single-budget', str(budget), '--no-cube', '--out', os.path.join(d, 'ask'), '--note', note]
         print(f'--- [{idx+1}/{min(top,len(live))}] {r["psi_str"]}: {meta["points"]} points, {meta["edges"]} '
               f'edges, degree {meta["avg_degree"]:.2f}, cross {meta["arena"]["cross"]}', flush=True)
+        before = sum(1 for _ in open(ASKS)) if os.path.exists(ASKS) else 0
         res = subprocess.run(cmd, capture_output=True, text=True)
         tail = [l for l in res.stdout.split('\n') if l.strip()][-4:]
         print('\n'.join('    ' + l for l in tail), flush=True)
         if res.returncode != 0:
             print(f'    the ask exited {res.returncode}:\n' + res.stderr[-800:], flush=True)
-        if 'UNSAT' in res.stdout and 'verdict' in res.stdout.lower():
+        # THE VERDICT IS READ FROM THE LEDGER ROW THE ASK WROTE, NEVER FROM ITS LOG.  The first version of
+        # this driver matched the string "UNSAT" in the subprocess's stdout -- which `fs70_ask.py` prints in
+        # its own explanatory line "UNSAT would mean: ..." before every single ask -- and so declared a
+        # refusal on an ask that had just come back SAT in 0.15 s.  A detector that fires for the wrong
+        # reason (CLAUDE.md, the gate section), caught because the line above it said SAT.
+        rows_after = [json.loads(l) for l in open(ASKS)][before:] if os.path.exists(ASKS) else []
+        mine = [x for x in rows_after if x.get('points') == meta['points']
+                and x.get('edges') == meta['edges']]
+        if not mine:
+            print(f'    NO LEDGER ROW for this ask: it wrote nothing to {ASKS}, so there is no verdict to '
+                  f'read.  Treated as a failure of the ask, not as a null about the graph.', flush=True)
+            continue
+        verdict = mine[-1].get('verdict')
+        json.dump({'verdict': verdict, 'psi': r['psi'], 'psi_str': r['psi_str'], 'k': k,
+                   'points': meta['points'], 'edges': meta['edges'], 'arena': meta['arena'],
+                   'seconds': mine[-1].get('seconds')}, open(vpath, 'w'), indent=1)
+        print(f'    ledger verdict: {verdict}   ({time.time()-t0:.1f}s total)', flush=True)
+        if verdict == 'UNSAT':
             print(f'!!! A REFUSAL AT {r["psi_str"]} -- HALTING.  Verify before anything else: rebuild the '
                   f'arena, re-derive its edges both ways, re-ask under a second solver, read the pin from '
                   f'the file.', flush=True)
             return 2
-        print(f'    ({time.time()-t0:.1f}s total)', flush=True)
     print('ALL ASKS DONE')
     return 0
 
