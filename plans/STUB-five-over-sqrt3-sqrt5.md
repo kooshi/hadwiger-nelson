@@ -8,7 +8,7 @@ G62 (the type-M rotation family), G31 (a χ ≥ 6 gadget must be constructed), r
 whose open case this is); `plans/STUB-chain-theorem.md` (FS-45); `plans/M63-phaseH2-the-family.md`, `plans/M63-phaseH3-plan.md`
 (the arena machinery and why dropping the coordinate shape at n = 2 died); `reference/ChatGPT-local-global-tightness-conjecture/`.*
 
-*Provisional bearings (WORKFLOW 3.1; superseded by the audit `plans/FS70-grokking-audit.md`, 2026-09-22): as minted, this stub named
+*Provisional bearings (WORKFLOW 3.1; superseded by the re-grokking `plans/FS70-grokking-audit.md`, 2026-09-22): as minted, this stub named
 G48, G55, G57, G7, G62, G31 and rows 64–66; the audit found G54 (the split-prime tower is tight at four colours), G16/G32 (the
 pigeonhole form), G40/G14 (the arena's null), G60 (the fractional cap is 4.32 here) and G61 (the rich lattices) bearing as well.*
 

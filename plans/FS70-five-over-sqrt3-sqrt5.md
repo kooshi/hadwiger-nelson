@@ -15,7 +15,7 @@ from an unbroken encoding never reported as a fact about a graph; nothing is a r
 
 ---
 
-## G. The grokking audit (WORKFLOW step 3.1) — `plans/FS70-grokking-audit.md`
+## G. The re-grokking (WORKFLOW 2.0 step 3.1) — `plans/FS70-grokking-audit.md`
 
 *Added by the owner 2026-09-22, after phases 0–1b: the step's first instance. It found four bearings this plan never used (G54's
 classifier at the split prime; G15/G16/G32's pigeonhole form; G40/G14; the lens shape named below and never built) and ranks

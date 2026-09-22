@@ -24,14 +24,16 @@ the plan itself named first), every one surfaced only when Kooshi asked a questi
 
 **Second: knowledge is the world's as well as ours, and ours supplies the vocabulary to find theirs.** A prior-art search
 in coined vocabulary finds nothing; one made with the object named in its discipline's terms finds what was published
-decades earlier — and that naming is what the theory's audit produces. So the world's knowledge is searched *after* our own
+decades earlier — and that naming is what the re-grokking produces. So the world's knowledge is searched *after* our own
 has reframed the goal, and what the search finds about *what the object is* flows back into the theory at the close.
 
 Hence **the reframe**: every milestone opens with two acts, in this order, before a single route is written — the
-**knowledge audit** (our theory, entry by entry, against the goal) and the **prior-art gate** (the world's, in the
-recognition's words) — and their outputs stand at the head of the subplan. The reframe is carried out with the rigor of the
+**re-grokking** (our theory, entry by entry, read from inside the new question) and the **prior-art gate** (the world's, in
+the recognition's words) — and their outputs stand at the head of the subplan. The first act is named for what it is: not an
+audit, which is an instruction to check, but re-grokking, an instruction to think (G67); and the theory is written to be
+reasoned from — each grokking ends with what it makes you do and what would kill it. The reframe is carried out with the rigor of the
 modeling passes: fresh every milestone, never from memory or a summary, walked in full, scored line by line. And the loop
-closes at every close: results to the ledger, understanding to the grokkings, each miss to the audit's instances, and every
+closes at every close: results to the ledger, understanding to the grokkings, each miss to the re-grokking's instances, and every
 new grokking forward to the open stubs it bears on. It is the foundation of every milestone; to omit it risks all future
 advancement (Kooshi, 2026-09-22).
 
@@ -52,8 +54,8 @@ advancement (Kooshi, 2026-09-22).
 3. **Reframe** — the milestone's opening: two acts, in this order, before a route is written. Their outputs are **§G** and
    **§PA** of the subplan, in that order, ahead of everything else; a subplan without both is not a subplan.
 
-   **3.1 The knowledge audit** — against the project's own theory: every grokking, every ledger row's *mechanism*, every
-   method rule. Its product is the *recognition*: the milestone's question restated in the theory's terms, with what the
+   **3.1 Re-grokking** — the project's own theory read from inside the new question: every grokking, every ledger row's
+   *mechanism*, every method rule. Its product is the *recognition*: the milestone's question restated in the theory's terms, with what the
    theory predicts, supplies, forbids, and what the milestone can falsify. (Minted 2026-09-22, Kooshi; the instance is FS-70,
    above — G54's tight/slack classifier at the field's split prime, run in a minute, says the local plane forces pairs at
    depth, the mechanism of every known four-forcer and a reason to expect forcing the plan never had; G15/G16/G32's
@@ -67,14 +69,14 @@ advancement (Kooshi, 2026-09-22).
    2. **Extract each *bears* into an instruction to a phase**: the shape it dictates, the screen it supplies, the theorem it
       makes free (a null predicted before it is run), the control it names (a known positive, perhaps one field over), the
       route it adds or kills. Write it where the implementer acts on it — in the phase table — not only in §G.
-   3. **The test of the audit: its output must change the plan** — a route added, removed or re-ordered, a screen run before
+   3. **The test of the re-grokking: its output must change the plan** — a route added, removed or re-ordered, a screen run before
       a solver, a prediction registered — or the plan says explicitly that nothing in the corpus bears, which is itself a claim
-      the owner pushes back on. An audit that changed nothing has measured its own reading, not the corpus (G21).
+      the owner pushes back on. A re-grokking that changed nothing has measured its own reading, not the corpus (G21).
    4. **Fresh, every milestone, never from memory** — like the modeling skills of step 6: a compaction summary, a previous
-      milestone's §G, or "I know the grokkings" is not the audit. The planner runs it with `CLAUDE.md` open; the owner scores
+      milestone's §G, or "I know the grokkings" is not the re-grokking. The planner runs it with `CLAUDE.md` open; the owner scores
       §G line by line before accepting the plan; a skipped entry is a plan defect.
    5. **Two lighter touches at the milestone's edges.** *At minting* (step 2): the stub's provisional-bearings line, so that
-      *choosing* the milestone uses the knowledge too — provisional, replaced by the audit at the opening (FS-70's stub named
+      *choosing* the milestone uses the knowledge too — provisional, replaced by the re-grokking at the opening (FS-70's stub named
       G48, G55, G57, G7, G62, G31 and missed G54, G16, G32, G40, G60). *At the close* (step 9): the §G re-read and the forward
       propagation of every new grokking to the open stubs it bears on.
 
@@ -82,7 +84,7 @@ advancement (Kooshi, 2026-09-22).
    its output is **§PA**. (Minted 2026-09-08, `CLAUDE.md` G49, after a check found that four consecutive milestones had
    reconstructed the contents of a 2010 draft that was one web search away, and that a paper systematizing one of their
    kernel theorems had been sitting unread in our own bibliography.) Eight questions, the last four each added after a miss:
-   1. **Name the object in the vocabulary of the discipline it belongs to, and search THAT.** The audit's recognition
+   1. **Name the object in the vocabulary of the discipline it belongs to, and search THAT.** The re-grokking's recognition
       sentence is the query: "the finite planes are Cayley graphs of an abelian group" → search *Cayley graph chromatic
       number abelian group*. **Never search in this project's coined vocabulary** — "field wall", "finite-plane bound",
       "5-sealed" appear in no paper, and a private vocabulary is a perfect filter against finding out you are not first.
@@ -176,7 +178,8 @@ advancement (Kooshi, 2026-09-22).
      § Paths forward mirrors the top of the table. Both files hold current state only: rewrite the affected text in place —
      no dated amendments, correction trails or superseded rankings — and leave the history to git and the milestone's plan.
    - **Re-read §G against what happened, and propagate forward** (step 3.1): which extractions paid, which entry should have
-     borne and was not used — each miss a new instance under 3.1 — and, for every grokking minted at this close, the open
+     borne and was not used — each miss a new instance under 3.1, and the entry that was missed re-written in the form G67
+     asks for — and, for every grokking minted at this close, the open
      stubs it bears on, their provisional-bearings lines updated in the same commit.
    - **Sweep §PA for recognitions that belong in the Grokkings** (2026-09-17). The conjecture sweep below catches claims
      the milestone *made*; this catches identifications it *found while checking whether it was first*. M63 phase H3's

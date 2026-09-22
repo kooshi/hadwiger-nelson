@@ -1,4 +1,4 @@
-# FS-70 — §G, the grokking audit (WORKFLOW step 3.1; the step's first instance, run by the owner, 2026-09-22)
+# FS-70 — §G, the re-grokking (WORKFLOW 2.0 step 3.1; the step's first instance, run by the owner, 2026-09-22; named 'audit' when written, renamed by G67)
 
 *Written after three implementer phases and a typed null, when Kooshi's questions ("is the radius hindering us?", "any other
 grokkings we skipped?") showed the plan had been built from the literature's analogies while `CLAUDE.md` held four things that

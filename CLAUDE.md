@@ -381,12 +381,13 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G54 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G67 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
-***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the knowledge audit (3.1) — each entry below, each
-ledger row's mechanism and each method rule read against the milestone and its bearing extracted into the plan's phases, the recognition it
-yields being the prior-art gate's (3.2) search query — then the subplan (4); with the rigor of the modeling passes (6). These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
+***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
+ledger row's mechanism and each method rule read from inside the milestone's question and its bearing extracted into the plan's phases, the
+recognition it yields being the prior-art gate's (3.2) search query — then the subplan (4); with the rigor of the modeling passes (6). The
+entries are written to be reasoned from, not looked up: each ends with what it makes you do and what would kill it (G67). These entries are the most important prior art this project holds; they are in context so that they are used, and a plan
 that reasons from the literature's analogies while they sit unread has used them as background. FS-70 is the instance: G54's classifier, G16/G32's
 pigeonhole form and G40's absorption each bore on it and none was run until asked for.***
 
@@ -1102,6 +1103,21 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   10^(3−D)` at 7, 11, 19 and `10^(4−D)` at 23 — the recipe followed literally returns no certificate there, so scan
   three decades; at 11 one knob moves `U` from 28.2021 to 30.5445) and tracks the **dual** residual; in the kernel the
   clause table is the graph's bill and the segments the proof's.
+* **G67 — A grokking is grokked by its form, and the reframe is re-grokking. [method; measured on one milestone]** The corpus
+  is read in one of two modes — as background (understood, and left where it lies) or as an instrument (reasoned from) — and
+  which mode an entry gets is set by its *shape*, not by its truth or its place in this file. On FS-70 the entries that fired
+  were the ones written as laws and dials with an imperative and a falsifier: G65's degree law (*aim a ball before it is
+  built*), G53's counting screen, G55's chain closers. The ones that sat silent while bearing directly were written as
+  descriptions or memoirs: G54 says "classified by one sign" and never *when you meet a new prime, compute the sign first*;
+  G16 and G32 narrate a milestone's route in the past tense; G40 states absorption as a result, not as the prediction to make
+  before an arena is built. So **every entry ends with what it makes you do and what would kill it** — *when you see X, expect
+  Y; the test that kills it is Z* — and an entry without both is understood, not grokked. The word was already right:
+  "grokking" is first-person, held knowledge, and it indicts the failure by its name — an entry in context and not reasoned
+  from was not grokked. What failed was the mode of reading, and the shape of the entry sets the mode. Hence the act that
+  opens every milestone (WORKFLOW 3.1) is named for what it is, **re-grokking the goal** — reading the theory from inside the
+  new question — and not "audit", which is felt as an instruction to check where "re-grok" is felt as an instruction to
+  think. *Owed (Kooshi, 2026-09-22): every entry in this section re-examined for its form.* *Killing test: a milestone whose §G,
+  written from entries in the operational form, still misses a bearing that an entry in the memoir form would have supplied.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
