@@ -16,3 +16,14 @@ kissat -q <dir>/{control,pinned,pinned_neq,sep_isqrt3,eq_isqrt3,sep_2,eq_2}.cnf 
 
 The `units_of_denominator(M)` table for M ≤ 16 and the depth-by-denominator counts are in the plan's §2.1 (regenerate with
 `python3 -c "import sys; sys.path.insert(0,'tools'); from fs70_field import *; ..."`, or the atlas command phase 0.1 adds).
+
+## The residue planes at the split primes (2026-09-21, kissat, origin + one circle neighbour pinned, precedence on the rest)
+
+| q | circle | vertices / edges | verdicts |
+|---|---|---|---|
+| 9 | 8 | 81 / 324 | k = 2 UNSAT (the control that the encoding refuses), k = 3 SAT — `χ(UD(𝔽₉²)) = 3` |
+| 25 | 24 | 625 / 7,500 | k = 3 UNSAT, k = 4 UNSAT — `χ ≥ 5` |
+| 49 | 48 | 2,401 / 57,624 | k = 3 UNSAT, k = 4 UNSAT, k = 5 undecided at 600 s — `χ ≥ 5` |
+| 169 | 168 | 28,561 / 2,399,124 | not asked (killed by PID; not needed) |
+
+Script: the scratch `fq2.py` of the session (𝔽_{p²} = 𝔽_p[t]/(t² − nr), nr a non-residue: 2, 2, 3, 2); phase 0.4 re-derives it into `tools/`.
