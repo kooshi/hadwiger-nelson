@@ -76,7 +76,75 @@ and looked like a hung solver.
 
 ## 4. The Kempe screen: the 2-unit route is dead by derivation, not at a budget
 
-**(section filled below as the screen lands)**
+### 4.1 What it says
+
+Phase 0's additive screen kills a target `δ` when some proper additive colouring `φ` of the lattice has
+`φ(δ) ≠ 0`: that colouring separates the pair, so no graph in the lattice forces it. When *every* `φ` makes the
+pair monochromatic — when `δ ∈ Λ_forced` — the additive family is silent and the plan sends the target to a
+solver. **One step further is free.** A Kempe swap of an additive colouring is still proper but is no longer
+additive, so it reaches outside the family:
+
+> **The Kempe escape.** Let `φ : Λ → G` be a proper additive four-colouring of a lattice `Λ` of unit vectors
+> (`φ(z) ≠ 0` for every unit vector `z ∈ Λ`), and let `δ ∈ Λ` with `φ(δ) = 0`. If the `(0, b)`-Kempe component of
+> the origin in the whole lattice's unit-distance graph does not contain `δ`, then **no finite subgraph of `Λ`
+> forces `0` and `δ` equal at four colours, at any radius.**
+>
+> *Proof.* Let `H ⊆ Λ` be finite. `φ|_H` is proper. The `(0, b)`-Kempe component of `0` inside `H` is a subset of
+> the one in `Λ`, so it misses `δ`. Swapping it is a proper four-colouring of `H` (a Kempe swap always is) with
+> `c(0) = b` and `c(δ) = φ(δ) = 0`, so `H` does not force the pair. ∎
+
+**The component is a sublattice**, which is what makes the test exact and cheap. A walk inside the class
+`{p : φ(p) ∈ {0, b}}` alternates the two colours, because a unit vector never has `φ = 0`; a step `0 → b` carries
+`φ`-value `b` and a step `b → 0` carries `−b`; and the unit vectors are closed under negation. So the colour-`0`
+points the origin reaches are exactly the additive span of `{z + w : z, w ∈ Λ ∩ U, φ(z) = b, φ(w) = −b}` — one
+formula for every colour count and for the Klein group, where `−b = b`. Membership of `δ` is then a Hermite
+normal form and a back-substitution.
+
+**It was written as a search first, and the search could not work**: a subgroup is infinite whenever it is
+non-trivial, so a breadth-first Kempe component never terminates. All four of L1's targets came back *"no escape
+found"* at a cap of 200,000 points in 59 s each — which is exactly what a search for an infinite object looks
+like, and reads like a null. The algebraic form answers the same four in **0.8 s**.
+
+### 4.2 The controls: both outcomes reachable, both seen
+
+* **A kill that would be FALSE must not be claimed.** At **three** colours on `ℤ[ζ₁₂]` (4 proper additive
+  ℤ/3-colourings, so the screen has something to work with) the pair `(0, i√3)` **is** genuinely forced equal —
+  `0, ζ₆, ζ₆²` is a unit triangle and `ζ₆ + ζ₆² = i√3` completes a second one on the edge `{ζ₆, ζ₆²}`, so the
+  fourth vertex sees both of the shared edge's colours and must take the origin's. The screen reads **live**
+  there. On the same lattice it kills `δ = 1` and `δ = 2` additively, so it is not simply silent.
+* **The screen is not merely reporting the presence of an additive family.** In the field at four colours it
+  kills every target on five lattices and leaves every target alive on two others that also have additive
+  families (L4a: 144 colourings; L5: 144).
+* **The kill is exhibited.** On L1's sums-of-at-most-4 ball — **478,333 points, 3,460,848 edges, average degree
+  14.47** — the additive colouring is proper on all 3,460,848 edges with `c(0) = c(4/3) = 0`; its `(0,2)`-Kempe
+  component of the origin is 8,385 points and does not contain `4/3`; and after the swap the colouring is
+  **still proper on all 3,460,848 edges**, with `c(0) = 2` and `c(4/3) = 0`.
+  (`build/fs70/L1-w4/kempe-colouring-4over3.json`.)
+* **The control this phase could NOT run, named:** whether the same screen reads *live* on Harder's own lattice
+  over `K = ℚ(√3,√11)` at `δ = 8/3`, where a four-colour forced pair is in print (`[Polymath2021]`; Harder,
+  Polymath16 thread 1, 28 April 2018). The tool's field arithmetic is ℚ(√3,√5); that control needs ℚ(√3,√11)
+  and is **owed**. It is the one test that would falsify the screen at the colour count the milestone uses.
+
+### 4.3 The verdict per lattice (`data/fs70/kempe-screen.json`)
+
+| lattice | `g` | proper additive ℤ/4 | targets screened | live | verdict |
+|---|---|---|---|---|---|
+| **`group:u3:2`** (L1, Harder's shape transposed) | 60 | 1296 | 10 | **0** | **dead at every radius** |
+| `zeta12+u3` | 36 | 1296 | 9 | **0** | dead at every radius |
+| **`zeta12+u3+q7`** (L1′, holds `1/7`) | 60 | 1296 | 10 | **0** | dead at every radius — including `4/7`, the chain-2 target |
+| **`zeta12+u3+q5+s5`** (L4b) | 180 | 336 | 14 | **0** | dead at every radius |
+| `zeta12+d6` | 36 | 240 | 4 | **0** | dead at every radius |
+| **`zeta12+u3+q7+s7`** (L4a) | 276 | 144 | 16 | **8** | **live** — `4/7` (chain 2), `4/3`, `4`, `8/3`, … |
+| **`group:u3:2+d6`** (L5) | 108 | 144 | 10 | **8** | **live** — `4/3`, `4`, `4/9`, `8/3`, … |
+| **`group:u3:2+v4`** (L2) | 540 | **0** | 120 | **120** | **live** — no additive colouring at all |
+| **`group:u3:2+w4`** (L3) | 324 | **0** | 89 | **89** | **live** — no additive colouring at all |
+
+**So the plan's P2 bet is lost by derivation, not at a budget.** P2 predicted that Harder's fabric `S₂` at sums of
+≤ 4 forces `(0, 8/3)` or `(0, 4/3)`. It cannot — and neither can `S₃`, nor sums of ≤ 5, nor any other finite
+subgraph of that lattice, at any radius. The same closes L1′ (where the cheapest closer in the field, `δ = 4/7`
+at chain 2, lives), L4b, `zeta12+u3` and `zeta12+d6`. What survives is exactly the fabric the additive family
+cannot four-colour for free: L2 and L3 (no additive colouring at all) and L4a and L5 (an additive family whose
+Kempe classes reach every target).
 
 ---
 
