@@ -24,7 +24,7 @@ built, and it was asked at a density no earlier shape in this milestone reached.
    points at 15.47 and its densest *object* the 12-core of that ball, 1,377,541 points at 16.08, with the
    14-core empty. So L6 gains **+2.90 in average degree on 16 % of the points** against phase 1's best, and its
    shapes **decide**, where phase 1's biggest two did not (§3, §4.4).
-3. **Every ask that returned a verdict returned SAT** (§4), at four densities: the balls at sums of ≤ 3
+3. **Every ask that returned a verdict returned SAT — 18 of them** (§4), at four densities: the balls at sums of ≤ 3
    (11,593 points, degree 10.95), ≤ 4 (109,957, degree 14.10) and ≤ 5 (805,693, degree 17.09), and the **14-core
    of the last — 217,015 points at degree 18.98**, the first object this milestone has produced above degree 18
    and one where a refusal would have carried up to the whole ball. Every model was read back and verified
@@ -56,10 +56,14 @@ built, and it was asked at a density no earlier shape in this milestone reached.
    ever returned. So the knob buys nothing at any price we can pay.
 
 **What this adds to phase 1's null.** Phase 1 killed the 2-unit route by derivation and left one fabric
-unasked. That fabric is now asked, at higher density than anything before it, and it colours. The conjecture's
-prediction at ℚ(√3,√5) stays unmet, and the reason has narrowed again: it is not the quarter turn. Removing
-ζ₁₂ — the one structural difference between this milestone's fabric and every known forcer's — buys a denser,
-cheaper, better-behaved lattice and **no compulsion at all**.
+unasked. That fabric is now asked — at four densities, the last two above anything phase 1 reached — and it
+colours every time. The conjecture's prediction at ℚ(√3,√5) stays unmet, and the reason has narrowed:
+**the quarter turn was not what was in the way.** Dropping ζ₁₂ for ζ₆ — the structural difference the owner's
+review named between this milestone's fabric and every known forcer's — buys a cheaper, denser, better-behaved
+lattice and **no compulsion at all**. *Said precisely, because it is one lattice: what is measured is that L6's
+balls at sums of ≤ 3, ≤ 4 and ≤ 5 and the 14-core of the last are four-colourable, with every `forces` pin
+separated by an exhibited colouring. Nothing here says L6 is four-colourable as a lattice, and nothing here
+reaches arity above 2.*
 
 ---
 
@@ -344,6 +348,20 @@ a typed null, not a skip.
 | **the brief, ask (ii)** | asks for the counting screen *"first … then the control on `A`"* | Both were run, and the order did not matter here because `L = 0` makes the screen's answer "no refutation" rather than a decision. Worth recording that the screen is **1,000× cheaper** than the arena solve only when it refutes; when it does not, it costs a binary search and the arena still has to be asked. |
 | **plan §7, P2 / phase 1 §7** | the 2-unit route dead by derivation, *"the fabric that is not ruled out costs `R⁸` to make dense"* | The `R⁸` ceiling is a fact about **rank-8** lattices. L6 is rank 6, and its word balls reach degree 17.09 at 805,693 points — denser than anything phase 1 built, at 43 % of the size. The ceiling moved with the rank. |
 | **phase 1 §5.1a and the plan §1.2** | *"do not ask below average degree 12 except as a calibration point"* | Kept: the `k = 3` ball at degree 10.95 is recorded as a calibration point and the verdicts that matter are at 14.10 and 17.09. |
+
+---
+
+## 9a. Cross-checks of my own numbers
+
+| check | what it re-derives, independently | result |
+|---|---|---|
+| **the owner's `po_cm_lattice.py 2 rho15`** — run here, unmodified | L6's `M`, rank, generators, `g`, additive counts and target liveness, in code that shares nothing with `tools/fs70_*` (its own complex arithmetic, its own HNF through sympy, its own unit enumeration) | PLACEHOLDER-OWNER-SCRIPT |
+| **the geometric edge derivation** on L6's `k = 4` ball | the complete unit-distance graph from the GEOMETRY (a float grid proposing, exact field arithmetic deciding) rather than from the lattice saturation; and the committed control colouring re-checked on those edges | PLACEHOLDER-GEOM |
+| **the arena's two edge derivations** | saturation against geometry on 54,433 points | identical, 352,326 both ways |
+
+The geometric derivation can only **miss** an edge, never invent one, so agreement with the saturation is
+evidence the saturation is complete — and its planted twin (one point moved by `1/144` in one coordinate) must
+change the edge set, which is the half that makes the agreement mean something.
 
 ---
 
