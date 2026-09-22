@@ -1,42 +1,81 @@
 #!/usr/bin/env python3
-"""fs70_fabric -- lattices of unit vectors over Q(sqrt3, sqrt5), their saturation (every unit vector the lattice holds),
-the additive four-colouring screen, Haugland's T_n bidisc between A = 0 and B = i*sqrt3, and the CNF of the pinned ask.
-Standard library plus a call to PARI/gp (`qfminim`, exact flag) for the saturation.  UNTRUSTED (tools/).
+"""fs70_fabric -- lattices of unit vectors over F = Q(sqrt3, sqrt5), their saturation (every unit vector the lattice
+holds), the 3-adic gate, the additive four-colouring screen with its forced sublattice, the three fabric shapes
+(Harder words, Haugland lenses, Minkowski balls) and the CNF of every pin the screen allows.  UNTRUSTED (tools/).
 
-Objects.  A lattice is the Z-span of a finite set S of unit vectors (S is taken closed under negation).  Its points live in
-F^2 = Q^8 (coordinates a..d of x and e..h of y); with a common denominator M they are integer 8-vectors, and the lattice is a
-row-HNF over Z.  Its saturation Lambda cap U is finite: under the Minkowski embedding F^2 -> R^8 the form
-    B(lambda, mu) = Tr_{F/Q}(x x' + y y')
-is positive definite, B(lambda, lambda) = Tr(|lambda|^2) = 4 for a unit vector, so the unit vectors of Lambda are among the
-lattice vectors of B-norm exactly 4, which qfminim enumerates exactly; the exact identity |lambda|^2 = 1 then decides.
+ARITHMETIC.  Inside one lattice everything is an INTEGER 8-tuple over the lattice denominator M (plan section 3.7:
+Fraction arithmetic blew 5.8 GB on a depth-8 word ball).  Addition is tuple addition, a hash is a tuple, and the
+exact unit test happens once per lattice (on the saturation) rather than once per pair.
 
-The additive screen (Haugland section 4; CLAUDE.md G41).  An additive 4-colouring of Lambda is a homomorphism phi from
-Lambda to a group of order 4 (Z/4 or the Klein group) that is nonzero on every unit vector of Lambda; it colours every finite
-graph drawn in Lambda properly.  Hom(Lambda, G) = G^rank is enumerated in full.  Reported: how many exist; how many send the
-target difference B - A = i sqrt3 to 0 (each such phi is a four-colouring in which A and B share a colour, so the sqrt3
-virtual edge is impossible on any graph drawn in Lambda); how many send 2 to a nonzero value (each such phi separates every
-pair at distance 2, so no distance-2 forced pair exists on any graph drawn in Lambda).
+SATURATION, two methods (plan section 3.2).
+  B (default, and complete BY CONSTRUCTION): Lambda is inside (1/M)Z^8, so every unit vector of Lambda has
+    coordinate denominator dividing M; `fs70_field.units_over(M)` enumerates exactly those and lattice membership
+    filters.  Cost is the box of M, which is tiny for every lattice this milestone uses (M <= 120).
+  A (cross-check): PARI's qfminim on the trace form B(l,m) = Tr(x x' + y y'), for which a unit vector has
+    B(l,l) = 4; gp enumerates the vectors of norm <= 4 exactly and the exact test decides.  Overflows a 4 GB stack
+    on a dense lattice (`zeta12+u3+rho15`), which is why B is the default -- the plan had it the other way round.
+  `--sat-method both` runs both and asserts they agree: two independent enumerations are the real control.
 
-Usage:
-  python3 tools/fs70_fabric.py lattice NAME [NAME ...]     # the named generating sets, saturation, screen
-  python3 tools/fs70_fabric.py tn NAME n [--out DIR]       # build T_n over lattice NAME, write the pinned CNF + control CNF
-The named generating sets are in GENERATORS below; NAME can also be a '+'-joined list of family names.
+THE 3-ADIC GATE (plan section 3.1).  A lattice all of whose unit vectors are 3-units maps homomorphically into
+UD(F_9^2), which is 3-colourable, and a 3-colourable graph carries no four-colour pair compulsion.  So a lattice
+with no unit vector of nonzero 3-depth is DEAD and must not be asked.  The gate reports pass/fail and names the
+3-non-unit that passes it.
+
+THE ADDITIVE SCREEN (plan section 3.4; CLAUDE.md G41).  An additive 4-colouring of Lambda is a homomorphism phi to
+a group of order 4 (Z/4 or the Klein group) nonzero on every unit vector of Lambda; it four-colours every finite
+graph drawn in Lambda.  So if some phi has phi(delta) != 0 there is no forced-equal pair at delta in Lambda, and if
+some phi has phi(delta) = 0 there is no virtual edge at delta.  The screen's product is a SUBLATTICE, not four
+booleans: Lambda_forced = intersection over all proper phi of ker phi, with 4 Lambda contained in it; a
+forced-equal pair at delta is additively allowed iff delta lies in Lambda_forced.
+
+Commands
+  python3 tools/fs70_fabric.py --selftest [--plants]
+  python3 tools/fs70_fabric.py lattice SPEC...            # saturation, gate, screen, Lambda_forced, targets
+  python3 tools/fs70_fabric.py screen SPEC... [--out F]   # the same, one jsonl row per lattice
+  python3 tools/fs70_fabric.py survivors SPEC [--target D] # the additive colourings that kill a target, described
+  python3 tools/fs70_fabric.py word SPEC k [--out DIR] [--target D] [--core m]
+  python3 tools/fs70_fabric.py tn SPEC n [--out DIR] [--target D] [--core m]
+  python3 tools/fs70_fabric.py ball SPEC R [--out DIR] [--core m]
+options: --sat-method a|b|both (default b), --plant NAME
+
+Generator grammar (SPEC): family names joined by '+' -- zeta12, u3, v4, w4, rho15, q5, s5, q7, s7, d6 (each the
+zeta12-and-conjugation orbit of the named vector) -- and group:u3:k for Harder's S_k = {zeta12^m u^n, |n| <= k}.
+Two spellings of one lattice give one HNF and one identity sha; a record stores both.
+
+Planted faults (--plant): basis_drop (the last generator is dropped before the HNF), sat_generators (the
+saturation returns the generators only), screen_partial (the screen tests only the first unit vector).
 """
+from collections import defaultdict
+from fractions import Fraction as Fr
+import hashlib
 import itertools
 import json
 import math
 import os
 import subprocess
 import sys
-from fractions import Fraction as Fr
+import time
+
+import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from fs70_field import *  # noqa: E402,F401,F403
+import fs70_field as FF                                                          # noqa: E402
+from fs70_field import (ONE, ZERO, E_ZERO, E_ONE, ZETA6, ZETA12, I_SQRT3, U_SQRT5, V_SQRT15, W_MIX, RHO15,
+                        canonical, depths, e_add, e_conj, e_denominator, e_is_unit_vector, e_mul, e_neg, e_sub,
+                        e_pow, e_scale, e_str, e_to_ints, e_from_ints, f_scale, ints_over, ints_reduce,
+                        ints_float, real_scalar, units_over)                     # noqa: E402
 
-# ---------------------------------------------------------------- families of unit vectors (each closed under zeta12 and conj)
+PLANT = None
+
+
+def planted(name):
+    return PLANT == name
+
+
+# ---------------------------------------------------------------- families of unit vectors
 
 def orbit(z):
-    """the 24-or-fewer vectors zeta12^k z and zeta12^k conj(z)"""
+    """the <= 24 vectors zeta12^k z and zeta12^k conj(z) (closed under negation, since zeta12^6 = -1)"""
     out = {}
     for k in range(12):
         for w in (z, e_conj(z)):
@@ -45,42 +84,61 @@ def orbit(z):
     return list(out.values())
 
 
-FAMILIES = {
-    'zeta12': orbit(E_ONE),                                  # 12 roots of unity            (2-units)
-    'u3': orbit(U_SQRT5),                                    # (-2 + i sqrt5)/3 family      (2-units, 3-depth +-2)
-    'v4': orbit(V_SQRT15),                                   # (1 + i sqrt15)/4 family      (2-depth +-2)
-    'w4': orbit(W_MIX),                                      # ((s3+s5) + i(s5-s3))/4       (2-depth +-1)
-    'rho15': orbit(RHO15),                                   # (7 + i sqrt15)/8             (2-depth +-4)
-    'q5': orbit(((Fr(3, 5), ZERO[1], ZERO[2], ZERO[3]), (Fr(4, 5), ZERO[1], ZERO[2], ZERO[3]))),  # (3+4i)/5 (5-depths)
-    's5': orbit(((Fr(0), Fr(0), Fr(2, 5), Fr(0)), (Fr(0), Fr(0), Fr(1, 5), Fr(0)))),               # (2 sqrt5 + i sqrt5)/5
-    'q7': orbit(((Fr(1, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(4, 7), Fr(0), Fr(0)))),               # (1 + 4 i sqrt3)/7
-    's7': orbit(((Fr(2, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(3, 7), Fr(0)))),               # (2 + 3 i sqrt5)/7
-}
+# ((sqrt3 + sqrt15) + i(-sqrt3 + sqrt15))/6: the cheapest 3-depth +-1 family (atlas row, denominator 6)
+D6 = ((Fr(0), Fr(1, 6), Fr(0), Fr(1, 6)), (Fr(0), Fr(-1, 6), Fr(0), Fr(1, 6)))
+Q5 = ((Fr(3, 5), Fr(0), Fr(0), Fr(0)), (Fr(4, 5), Fr(0), Fr(0), Fr(0)))           # (3 + 4i)/5
+S5V = ((Fr(0), Fr(0), Fr(2, 5), Fr(0)), (Fr(0), Fr(0), Fr(1, 5), Fr(0)))          # (2 sqrt5 + i sqrt5)/5
+Q7 = ((Fr(1, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(4, 7), Fr(0), Fr(0)))           # (1 + 4 i sqrt3)/7
+S7V = ((Fr(2, 7), Fr(0), Fr(0), Fr(0)), (Fr(0), Fr(0), Fr(3, 7), Fr(0)))          # (2 + 3 i sqrt5)/7
+
+FAMILY_SEED = {'zeta12': E_ONE, 'u3': U_SQRT5, 'v4': V_SQRT15, 'w4': W_MIX, 'rho15': RHO15,
+               'q5': Q5, 's5': S5V, 'q7': Q7, 's7': S7V, 'd6': D6}
+FAMILIES = {nm: orbit(z) for nm, z in FAMILY_SEED.items()}
 for _nm, _fam in FAMILIES.items():
     for _z in _fam:
         assert e_is_unit_vector(_z), (_nm, e_str(_z))
 
 
-def generators(name):
+def generators(spec):
+    """the generator list of a SPEC.  Raises with the grammar on an unknown name (never silent)."""
     S = {}
-    for part in name.split('+'):
-        for z in FAMILIES[part]:
-            S[canonical(z)] = z
+    for part in spec.split('+'):
+        if part.startswith('twounits:') or part.startswith('threeunits:'):
+            kind, D = part.split(':')
+            for M in range(1, int(D) + 1):
+                for z in FF.units_of_denominator(M):
+                    keep = FF.is_two_unit(z) if kind == 'twounits' else FF.is_three_unit(z)
+                    if keep:
+                        S[canonical(z)] = z
+        elif part.startswith('group:'):
+            _, nm, k = part.split(':')
+            if nm not in FAMILY_SEED:
+                raise SystemExit(f'unknown family {nm!r} in {part!r}.\n'
+                                 f'grammar: names joined by "+" from {", ".join(sorted(FAMILY_SEED))}, '
+                                 f'or group:NAME:k for {{zeta12^m NAME^n, |n| <= k}}')
+            base = FAMILY_SEED[nm]
+            for n in range(-int(k), int(k) + 1):
+                for m in range(12):
+                    z = e_mul(e_pow(ZETA12, m), e_pow(base, n))
+                    S[canonical(z)] = z
+        elif part in FAMILIES:
+            for z in FAMILIES[part]:
+                S[canonical(z)] = z
+        else:
+            raise SystemExit(f'unknown family {part!r}.\n'
+                             f'grammar: names joined by "+" from {", ".join(sorted(FAMILY_SEED))}, '
+                             f'or group:NAME:k for {{zeta12^m NAME^n, |n| <= k}}')
     return list(S.values())
 
 
-# ---------------------------------------------------------------- integer lattices in Q^8
+# ---------------------------------------------------------------- integer lattices in F^2 = Q^8
 
 def to_vec8(z):
     return tuple(z[0]) + tuple(z[1])
 
 
-def from_vec8(v):
-    return (tuple(v[:4]), tuple(v[4:]))
-
-
 def hnf(rows, dim=8):
-    """row Hermite normal form of the Z-span of integer vectors"""
+    """row Hermite normal form of the Z-span of integer vectors (pivot columns increasing)"""
     work = [list(r) for r in rows if any(r)]
     basis = []
     for col in range(dim):
@@ -110,6 +168,35 @@ def hnf(rows, dim=8):
     return [tuple(r) for _, r in basis]
 
 
+def _log10_int(n):
+    if n == 0:
+        return -math.inf
+    s = str(abs(n))
+    return (len(s) - 1) + math.log10(float('0.' + s[:17]) * 10)
+
+
+def bareiss_det(Aint):
+    """exact integer determinant by fraction-free Gaussian elimination"""
+    A = [list(r) for r in Aint]
+    n = len(A)
+    if n == 0:
+        return 1
+    sign = 1
+    prev = 1
+    for k in range(n - 1):
+        if A[k][k] == 0:
+            piv = next((i for i in range(k + 1, n) if A[i][k] != 0), None)
+            if piv is None:
+                return 0
+            A[k], A[piv] = A[piv], A[k]
+            sign = -sign
+        for i in range(k + 1, n):
+            for j in range(k + 1, n):
+                A[i][j] = (A[i][j] * A[k][k] - A[i][k] * A[k][j]) // prev
+        prev = A[k][k]
+    return sign * A[n - 1][n - 1]
+
+
 def coords_in_basis(H, v, dim=8):
     """integer coordinates of v in the HNF basis H, or None"""
     v = list(v)
@@ -127,42 +214,154 @@ def coords_in_basis(H, v, dim=8):
 
 
 class Lattice:
-    def __init__(self, S):
-        self.S = S
+    """The Z-span of a set of unit vectors, as an integer lattice over one denominator M."""
+
+    def __init__(self, S, spec=None):
+        self.spec = spec
+        self.S = list(S)
         self.M = 1
-        for z in S:
-            self.M = self.M * e_denominator(z) // math.gcd(self.M, e_denominator(z))
-        rows = [tuple(int(q * self.M) for q in to_vec8(z)) for z in S]
+        for z in self.S:
+            d = e_denominator(z)
+            self.M = self.M * d // math.gcd(self.M, d)
+        rows = [ints_over(e_to_ints(z), self.M) for z in self.S]
         self.H = hnf(rows)
+        if planted('basis_drop'):
+            self.H = self.H[:-1]               # PLANT: the basis loses a row, so it no longer spans
         self.rank = len(self.H)
-        # basis as E elements
-        self.basis = [from_vec8(tuple(Fr(x, self.M) for x in row)) for row in self.H]
+        self.basis = [e_from_ints(ints_reduce(row, self.M)) for row in self.H]
+        # steps (the saturation) are filled in by saturate()
+        self.units = None
+        self.unit_vec8 = None
+        self.sat_complete = None
+
+    # -- identity
+    def key(self):
+        return f'{self.M}|' + ';'.join(','.join(str(x) for x in r) for r in self.H)
+
+    def sha(self):
+        return hashlib.sha256(self.key().encode()).hexdigest()[:16]
+
+    # -- membership
+    def contains_vec8(self, v8):
+        return coords_in_basis(self.H, v8) is not None
 
     def contains(self, z):
-        v = to_vec8(z)
-        for q in v:
-            if (q * self.M).denominator != 1:
-                return False
-        return coords_in_basis(self.H, tuple(int(q * self.M) for q in v)) is not None
+        d = e_denominator(z)
+        if self.M % d:
+            return False
+        return self.contains_vec8(ints_over(e_to_ints(z), self.M))
 
     def coords(self, z):
-        v = to_vec8(z)
-        return coords_in_basis(self.H, tuple(int(q * self.M) for q in v))
+        d = e_denominator(z)
+        if self.M % d:
+            return None
+        return coords_in_basis(self.H, ints_over(e_to_ints(z), self.M))
 
+    def vec8(self, z):
+        d = e_denominator(z)
+        assert self.M % d == 0, (e_str(z), self.M)
+        return ints_over(e_to_ints(z), self.M)
+
+    # -- the trace form and the covolume
     def gram(self):
-        """the trace form on the basis, as Fractions"""
         G = []
         for bi in self.basis:
             row = []
             for bj in self.basis:
-                s = f_add(f_mul(bi[0], bj[0]), f_mul(bi[1], bj[1]))
-                row.append(f_trace(s))
+                s = FF.f_add(FF.f_mul(bi[0], bj[0]), FF.f_mul(bi[1], bj[1]))
+                row.append(FF.f_trace(s))
             G.append(row)
         return G
 
-    def saturation(self):
-        """every unit vector in the lattice: qfminim (exact flag) enumerates the lattice vectors of trace-norm <= 4 (millions
-        when the lattice is dense), gp filters them by the four real embeddings numerically, Python decides exactly"""
+    def gram_int(self):
+        """M^2 * Gram, an integer matrix: the basis rows are integers over M, so M^2 B(b_i, b_j) = Tr of a product
+        of integral elements, an integer."""
+        G = []
+        for ri in self.H:
+            row = []
+            for rj in self.H:
+                xi, yi = (tuple(Fr(q) for q in ri[:4]), tuple(Fr(q) for q in ri[4:]))
+                xj, yj = (tuple(Fr(q) for q in rj[:4]), tuple(Fr(q) for q in rj[4:]))
+                s = FF.f_add(FF.f_mul(xi, xj), FF.f_mul(yi, yj))
+                t = FF.f_trace(s)
+                assert t.denominator == 1, t
+                row.append(int(t))
+            G.append(row)
+        return G
+
+    def covolume(self):
+        """sqrt(det of the trace-form Gram) -- the covolume of the Minkowski embedding into R^8.  Exact integer
+        determinant (Bareiss) divided by M^rank, so it survives an astronomically large denominator."""
+        det = bareiss_det(self.gram_int())
+        assert det > 0, det
+        try:
+            return math.sqrt(det) / self.M ** self.rank
+        except OverflowError:
+            return float('inf')
+
+    def log10_covolume(self):
+        det = bareiss_det(self.gram_int())
+        return 0.5 * _log10_int(det) - self.rank * math.log10(self.M)
+
+    # -- saturation
+    def saturate(self, method='b'):
+        """`method` = 'b' (default, complete), 'a' (gp cross-check), 'both' (agree or raise), or 'gens' (the
+        GENERATOR set only -- an incomplete constraint set, used where M is astronomical).  With 'gens' the screen's
+        proper counts are UPPER bounds: "no additive colouring exists" stays sound, and a kill does NOT."""
+        self.sat_complete = method != 'gens'
+        if method == 'gens':
+            units = list(self.S)
+            for z in units:
+                assert e_is_unit_vector(z) and self.contains(z)
+            self.units = units
+            self.unit_vec8 = [self.vec8(z) for z in units]
+            return units
+        if method == 'both':
+            ub = self._sat_b()
+            ua = self._sat_a()
+            ka, kb = {canonical(z) for z in ua}, {canonical(z) for z in ub}
+            assert ka == kb, (f'the two saturation methods disagree: A found {len(ka)}, B found {len(kb)}, '
+                              f'symmetric difference {len(ka ^ kb)}')
+            units = ub
+        elif method == 'a':
+            units = self._sat_a()
+        else:
+            units = self._sat_b()
+        if planted('sat_generators'):
+            units = list(self.S)               # PLANT: the generators pass for the whole saturation
+        for z in units:                        # every returned vector really is a unit vector of the lattice
+            assert e_is_unit_vector(z), e_str(z)
+            assert self.contains(z), f'saturation returned {e_str(z)}, which is not in the lattice'
+        self.units = units
+        self.unit_vec8 = [self.vec8(z) for z in units]
+        return units
+
+    # method B is affordable while the embedding box fits in memory: 90 bytes and 2.3 us per element, so
+    # 3e7 is about 2.7 GB and a minute.  Above that the enumeration is refused BY NAME rather than truncated
+    # silently -- a truncated saturation would make the additive screen's kills unsound (a colouring proper on a
+    # subset of the unit vectors is not a colouring), while leaving "no additive colouring exists" sound.
+    SAT_B_BOX_CAP = 3e7
+
+    def sat_b_cost(self):
+        return FF.box_estimate(self.M)
+
+    def _sat_b(self):
+        """method B: every unit vector of denominator dividing M, filtered by membership.  Complete."""
+        if self.sat_b_cost() > self.SAT_B_BOX_CAP:
+            raise SystemExit(
+                f'saturation method B on {self.spec} needs the embedding box of M = {self.M}, about '
+                f'{self.sat_b_cost():.3g} elements (~{self.sat_b_cost()*90/2**30:.0f} GB, '
+                f'~{self.sat_b_cost()/4.6e5/60:.0f} min) -- above the cap {self.SAT_B_BOX_CAP:.0g}.  '
+                f'Split the lattice (one extra family at a time keeps M small), or try --sat-method a, which '
+                f'costs about {1039/max(self.covolume(), 1e-12):.3g} lattice vectors in gp.')
+        out = []
+        for v8 in units_over(self.M):
+            if self.contains_vec8(v8):
+                out.append(e_from_ints(ints_reduce(v8, self.M)))
+        return out
+
+    def _sat_a(self):
+        """method A: qfminim on the trace form at norm 4, filtered by the four embeddings then decided exactly."""
         G = self.gram()
         L = 1
         for row in G:
@@ -170,14 +369,13 @@ class Lattice:
                 L = L * q.denominator // math.gcd(L, q.denominator)
         Gi = [[int(q * L) for q in row] for row in G]
         mat = '[' + ';'.join(','.join(str(x) for x in row) for row in Gi) + ']'
-        # embedding matrix: row j = (s1(x_j), s1(y_j), ..., s4(x_j), s4(y_j)) for the four sign choices of (sqrt3, sqrt5)
         emb_rows = []
         for (x, y) in self.basis:
             row = []
-            for s3 in (math.sqrt(3), -math.sqrt(3)):
-                for s5 in (math.sqrt(5), -math.sqrt(5)):
-                    row.append(repr(f_float(x, s3, s5)))
-                    row.append(repr(f_float(y, s3, s5)))
+            for s3 in (FF.S3F, -FF.S3F):
+                for s5 in (FF.S5F, -FF.S5F):
+                    row.append(repr(FF.f_float(x, s3, s5)))
+                    row.append(repr(FF.f_float(y, s3, s5)))
             emb_rows.append(','.join(row))
         emb = '[' + ';'.join(emb_rows) + ']'
         script = (f'G = {mat}; Emb = {emb}; v = qfminim(G, {4 * L}, , 2); n = 0; '
@@ -185,7 +383,8 @@ class Lattice:
                   f'if(ok, n++; print(Vec(v[3][,k])))); print("count ", n)')
         out = subprocess.run(['gp', '-q', '-s', '4000000000'], input=script + '\n', capture_output=True, text=True)
         if out.returncode != 0 or 'count' not in out.stdout:
-            raise RuntimeError('gp failed: ' + out.stderr[-2000:] + out.stdout[-500:])
+            raise RuntimeError('method A (gp qfminim) failed -- use --sat-method b.  gp said: '
+                               + (out.stderr[-600:] or out.stdout[-600:]))
         units = {}
         for line in out.stdout.strip().split('\n'):
             if line.startswith('count'):
@@ -200,109 +399,405 @@ class Lattice:
                     units[canonical(z)] = z
         return list(units.values())
 
-
-# ---------------------------------------------------------------- the additive screen
-
-def hom_values(rank, group):
-    """all homomorphisms from Z^rank to the group, as tuples of images of the basis"""
-    if group == 'Z4':
-        elems = [0, 1, 2, 3]
-    else:
-        elems = [(0, 0), (0, 1), (1, 0), (1, 1)]
-    return itertools.product(elems, repeat=rank), elems
-
-
-def apply_hom(images, coords, group):
-    if group == 'Z4':
-        return sum(i * c for i, c in zip(images, coords)) % 4
-    a = sum(i[0] * c for i, c in zip(images, coords)) % 2
-    b = sum(i[1] * c for i, c in zip(images, coords)) % 2
-    return (a, b)
+    # -- the 3-adic gate
+    def gate(self):
+        """(passes, witness, counts): a lattice passes when its saturation holds a unit vector of nonzero 3-depth."""
+        assert self.units is not None, 'saturate() first'
+        best = None
+        n_non = 0
+        for z in self.units:
+            d3 = depths(z)[1]
+            if d3 != 0:
+                n_non += 1
+                if best is None or e_denominator(z) < e_denominator(best):
+                    best = z
+        return (best is not None, best, {'three_non_units': n_non, 'three_units': len(self.units) - n_non})
 
 
-def additive_screen(lat, units, targets):
-    """targets: dict name -> E element (a difference).  Returns per group: count of proper additive colourings, and for each
-    target the number of colourings with phi(target) = 0."""
-    ucoords = [lat.coords(z) for z in units]
-    assert all(c is not None for c in ucoords)
-    tcoords = {nm: lat.coords(t) for nm, t in targets.items()}
-    res = {}
-    for group in ('Z4', 'K4'):
-        zero = 0 if group == 'Z4' else (0, 0)
-        homs, _ = hom_values(lat.rank, group)
-        count = 0
-        zeros = {nm: 0 for nm in targets}
-        examples = {nm: None for nm in targets}
-        for images in homs:
+# ---------------------------------------------------------------- the additive screen and Lambda_forced
+
+def _coord_matrix(lat, zs):
+    C = []
+    for z in zs:
+        c = lat.coords(z)
+        assert c is not None, e_str(z)
+        C.append(c)
+    return np.array(C, dtype=np.int64)
+
+
+def all_vectors_mod(q, rank):
+    """every vector of (Z/q)^rank, as rows (q^rank x rank); rank <= 8 so this is at most 65536 x 8"""
+    return np.array(list(itertools.product(range(q), repeat=rank)), dtype=np.int64)
+
+
+def additive_screen(lat, targets, chunk=8192):
+    """Every proper additive 4-colouring of the lattice, in both groups of order 4, and Lambda_forced.
+
+    Z/4: a hom is a coefficient vector a in (Z/4)^rank, phi(c) = a.c mod 4; proper iff a.c(z) != 0 for every unit
+    vector z.  Klein: a hom is a PAIR (b, c) of (Z/2)^rank functionals, phi(v) = (b.v, c.v) mod 2; proper iff no
+    unit vector is killed by both.  Both enumerations are complete (4^rank and 2^rank x 2^rank = 4^rank maps)."""
+    R = lat.rank
+    U = _coord_matrix(lat, lat.units)                                  # g x R
+    if planted('screen_partial'):
+        U = U[:1]                              # PLANT: only the first unit vector constrains the screen
+    T = {nm: lat.coords(z) for nm, z in targets.items()}
+
+    # ---- Z/4
+    A = all_vectors_mod(4, R)                                          # 4^R x R
+    proper4 = np.ones(len(A), dtype=bool)
+    for i in range(0, len(A), chunk):
+        blk = A[i:i + chunk]
+        vals = (blk @ U.T) % 4                                         # chunk x g
+        proper4[i:i + len(blk)] = (vals != 0).all(axis=1)
+    A4 = A[proper4]
+    z4 = {}
+    for nm, c in T.items():
+        if c is None:
+            z4[nm] = None
+        else:
+            z4[nm] = int(((A4 @ np.array(c, dtype=np.int64)) % 4 == 0).sum())
+
+    # ---- Klein: b, c range over (Z/2)^R; kill[b] is the bitmask of unit vectors b annihilates
+    B = all_vectors_mod(2, R)                                          # 2^R x R
+    killmat = ((B @ U.T) % 2 == 0)                                     # 2^R x g
+    masks = [int(''.join('1' if v else '0' for v in row[::-1]), 2) for row in killmat]
+    properK = []
+    for ib, mb in enumerate(masks):
+        if mb == 0:
+            # b alone is already nonzero on every unit vector: every partner c works
+            properK.extend((ib, ic) for ic in range(len(masks)))
+        else:
+            for ic, mc in enumerate(masks):
+                if mb & mc == 0:
+                    properK.append((ib, ic))
+    zK = {}
+    for nm, c in T.items():
+        if c is None:
+            zK[nm] = None
+            continue
+        cv = np.array(c, dtype=np.int64)
+        bt = ((B @ cv) % 2 == 0)                                       # does b kill the target?
+        zK[nm] = int(sum(1 for ib, ic in properK if bt[ib] and bt[ic]))
+
+    # ---- Lambda_forced: the mod-4 conditions a.v = 0 (proper Z/4) and 2 b.v = 0 (each component of a proper Klein)
+    rows = [tuple(int(x) for x in a) for a in A4]
+    comps = set()
+    for ib, ic in properK:
+        comps.add(ib)
+        comps.add(ic)
+    for ib in comps:
+        rows.append(tuple(2 * int(x) for x in B[ib]))
+    forced_basis, forced_index = forced_sublattice(rows, R)
+    return {'rank': R, 'g': len(lat.units),
+            'Z4': {'proper': int(len(A4)), 'target_zero': z4},
+            'K4': {'proper': int(len(properK)), 'target_zero': zK},
+            'forced_basis': forced_basis, 'forced_index': forced_index,
+            'targets_in_lattice': {nm: (c is not None) for nm, c in T.items()},
+            'z4_examples': [list(int(x) for x in a) for a in A4[:3]]}
+
+
+def forced_sublattice(rows, R, chunk=8192):
+    """{v in Z^R : r.v = 0 mod 4 for every row r}, as an HNF basis over Z (it contains 4 Z^R), and its index."""
+    if not rows:
+        return [list(r) for r in np.eye(R, dtype=int).tolist()], 1
+    Rm = np.array(sorted(set(rows)), dtype=np.int64) % 4
+    V = all_vectors_mod(4, R)
+    keep = np.ones(len(V), dtype=bool)
+    for i in range(0, len(V), chunk):
+        blk = V[i:i + chunk]
+        keep[i:i + len(blk)] = (((blk @ Rm.T) % 4) == 0).all(axis=1)
+    sols = V[keep]
+    gens = [tuple(int(x) for x in s) for s in sols] + [tuple(4 if j == k else 0 for j in range(R)) for k in range(R)]
+    Hf = hnf(gens, dim=R)
+    index = 1
+    for k, row in enumerate(Hf):
+        c = next(j for j in range(R) if row[j])
+        index *= row[c]
+    return [list(r) for r in Hf], index
+
+
+def in_forced(lat, screen, z):
+    """is the difference z additively allowed as a forced-equal pair?  (z in Lambda_forced)"""
+    c = lat.coords(z)
+    if c is None:
+        return None
+    return coords_in_basis(screen['forced_basis'], list(c), dim=lat.rank) is not None
+
+
+# ---------------------------------------------------------------- chainable distances over the field
+
+def chain_pool(dmax=8):
+    """the unit vectors of F(i) of denominator <= dmax -- the pool the chain enumeration searches."""
+    pool = []
+    for M in range(1, dmax + 1):
+        pool.extend(FF.units_of_denominator(M))
+    return pool
+
+
+_CHAIN_CACHE = {}
+
+
+def chainable_reciprocals(dmax=8, maxlen=4):
+    """{real r != 0 that is a sum of at most maxlen unit vectors of denominator <= dmax} -> the least such length.
+    delta = 1/r is then chainable with that many copies (G55).  Lengths 1 and 2 exhaustively; length 3 as
+    (pair, single) and length 4 as (pair, pair), matched on the imaginary part -- which is exact and complete for
+    those lengths over this pool.  The pool is the enumeration: a distance absent from the answer is absent from
+    THIS pool at THIS length (G21)."""
+    if (dmax, maxlen) in _CHAIN_CACHE:
+        return _CHAIN_CACHE[(dmax, maxlen)]
+    pool = chain_pool(dmax)
+    out = {}
+
+    def note(r, n):
+        if r[1] != ZERO or r[0] == ZERO:
+            return
+        key = tuple(r[0])
+        if key not in out or out[key] > n:
+            out[key] = n
+
+    for z in pool:
+        note(z, 1)
+    pairs = []
+    by_im = defaultdict(list)
+    for i, a in enumerate(pool):
+        for b in pool[i:]:
+            s = e_add(a, b)
+            pairs.append(s)
+            by_im[tuple(s[1])].append(s)
+            note(s, 2)
+    if maxlen >= 3:
+        single_by_im = defaultdict(list)
+        for z in pool:
+            single_by_im[tuple(z[1])].append(z)
+        for s in pairs:
+            neg = tuple(-q for q in s[1])
+            for t in single_by_im.get(neg, ()):
+                note(e_add(s, t), 3)
+    if maxlen >= 4:
+        for s in pairs:
+            neg = tuple(-q for q in s[1])
+            for t in by_im.get(neg, ()):
+                note(e_add(s, t), 4)
+    _CHAIN_CACHE[(dmax, maxlen)] = out
+    return out
+
+
+# the closers of plan section 3.5, verified exactly in fs70_field's self-test
+KNOWN_CLOSERS = {'2': 2, '4/3': 3, '4': 4, '8/3': 6}
+
+
+def f_max_embedding(u):
+    """max over the four real embeddings of |u| -- the size of a field element, for capping a target list"""
+    a, b, c, d = (float(q) for q in u)
+    return max(abs(a + sb * b * FF.S3F + sc * c * FF.S5F + sb * sc * d * FF.S15F)
+               for sb in (1, -1) for sc in (1, -1))
+
+
+def chainable_targets(lat, screen, dmax=8, maxlen=4, size_cap=8.0):
+    """every real delta in Lambda_forced whose reciprocal the pool reaches, with its chain length.  Capped at
+    size_cap in every real embedding (a huge delta is chainable and useless: the copies' fabric scales with it)."""
+    recips = chainable_reciprocals(dmax, maxlen)
+    out = []
+    for key, n in recips.items():
+        inv = (FF.f_inv(tuple(key)), ZERO)
+        size = f_max_embedding(inv[0])
+        if size > size_cap:
+            continue
+        if lat.coords(inv) is None or not in_forced(lat, screen, inv):
+            continue
+        out.append({'delta': FF.f_str(inv[0]), 'chain': n, 'size': round(size, 6),
+                    'delta_ints': list(e_to_ints(inv))})
+    # the known closers, whose chain lengths come from the exact identities of plan section 3.5
+    for label, n in KNOWN_CLOSERS.items():
+        d = real_scalar(Fr(label))
+        if lat.coords(d) is None or not in_forced(lat, screen, d):
+            continue
+        have = next((o for o in out if o['delta_ints'] == list(e_to_ints(d))), None)
+        if have is None:
+            out.append({'delta': label, 'chain': n, 'size': float(Fr(label)),
+                        'delta_ints': list(e_to_ints(d))})
+        else:
+            have['chain'] = min(have['chain'], n)
+    out.sort(key=lambda o: (o['chain'], o['size']))
+    return out
+
+
+# ---------------------------------------------------------------- targets
+
+def target_element(name):
+    if name in ('isqrt3', 'i sqrt3'):
+        return I_SQRT3
+    return real_scalar(Fr(name))
+
+
+TARGET_NAMES = ('isqrt3', '2', '4/3', '8/3', '4')
+SCREEN_TARGETS = {'i sqrt3': I_SQRT3, '2': real_scalar(2), '4/3': real_scalar(Fr(4, 3)),
+                  '8/3': real_scalar(Fr(8, 3)), '4': real_scalar(4)}
+
+
+# ---------------------------------------------------------------- shapes (integer arithmetic throughout)
+
+def word_ball(lat, k, steps=None):
+    """every point that is a sum of at most k generators (Harder's shape, plan section 3.3)"""
+    S = [lat.vec8(z) for z in (lat.S if steps is None else steps)]
+    zero = tuple([0] * 8)
+    seen = {zero: 0}
+    frontier = [zero]
+    for d in range(1, k + 1):
+        nxt = []
+        for p in frontier:
+            for s in S:
+                q = tuple(a + b for a, b in zip(p, s))
+                if q not in seen:
+                    seen[q] = d
+                    nxt.append(q)
+        frontier = nxt
+    return seen
+
+
+def lens(lat, A8, B8, n, steps=None):
+    """Haugland's T_n: every point on a unit-vector path from A to B of graph length <= n"""
+    S = [lat.vec8(z) for z in (lat.S if steps is None else steps)]
+
+    def bfs(start):
+        dist = {start: 0}
+        frontier = [start]
+        for d in range(1, n + 1):
+            nxt = []
+            for p in frontier:
+                for s in S:
+                    q = tuple(a + b for a, b in zip(p, s))
+                    if q not in dist:
+                        dist[q] = d
+                        nxt.append(q)
+            frontier = nxt
+        return dist
+    dA, dB = bfs(A8), bfs(B8)
+    return {p: d for p, d in dA.items() if p in dB and d + dB[p] <= n}
+
+
+def minkowski_ball(lat, R):
+    """every lattice point all four of whose real embeddings lie in the disc of radius R (the FS-61 ball shape with
+    four embeddings).  Enumerated from the coordinate box of the embedding: both coordinates' numerators over M lie
+    in embedding_box(ceil(M R)), and lattice membership plus the exact four-embedding test decide."""
+    M = lat.M
+    box = FF.embedding_box(int(math.ceil(M * R)) + 1)
+    R2 = Fr(int(round(R * 10 ** 6)), 10 ** 6) ** 2
+    # exact-ish embedding constants as high-precision rationals (the test has a 1e-6 margin, as the ball's radius does)
+    s3 = Fr(1732050807568877, 10 ** 15)
+    s5 = Fr(2236067977499790, 10 ** 15)
+    s15 = Fr(3872983346207417, 10 ** 15)
+    marg = Fr(1, 10 ** 6)
+    # bucket the box by the embedding vector to prune: |sigma(x)|^2 <= R^2 M^2 needed componentwise
+    out = {}
+    bnd = float(R * M) + 1e-6
+    box_f = []
+    for e in box:
+        a, b, c, d = e
+        v = (a + b * FF.S3F + c * FF.S5F + d * FF.S15F, a - b * FF.S3F + c * FF.S5F - d * FF.S15F,
+             a + b * FF.S3F - c * FF.S5F - d * FF.S15F, a - b * FF.S3F - c * FF.S5F + d * FF.S15F)
+        if max(abs(t) for t in v) <= bnd:
+            box_f.append((e, v))
+    for (ex, vx) in box_f:
+        rem = [bnd * bnd - t * t + 1e-6 for t in vx]
+        if min(rem) < 0:
+            continue
+        for (ey, vy) in box_f:
             ok = True
-            for c in ucoords:
-                if apply_hom(images, c, group) == zero:
+            for t in range(4):
+                if vy[t] * vy[t] > rem[t]:
                     ok = False
                     break
             if not ok:
                 continue
-            count += 1
-            for nm, tc in tcoords.items():
-                if tc is None:
-                    continue
-                if apply_hom(images, tc, group) == zero:
-                    zeros[nm] += 1
-                    if examples[nm] is None:
-                        examples[nm] = images
-        res[group] = {'proper': count, 'target_zero': zeros, 'in_lattice': {nm: tc is not None for nm, tc in tcoords.items()},
-                      'example': {nm: (list(ex) if ex is not None else None) for nm, ex in examples.items()}}
-    return res
+            v8 = ex + ey
+            if not lat.contains_vec8(v8):
+                continue
+            # exact decision
+            n2 = FF.e_normF((tuple(Fr(q, M) for q in ex), tuple(Fr(q, M) for q in ey)))
+            a, b, c, d = n2
+            good = True
+            for sb in (1, -1):
+                for sc in (1, -1):
+                    if a + sb * b * s3 + sc * c * s5 + sb * sc * d * s15 > R2 + marg:
+                        good = False
+            if good:
+                out[v8] = 0
+    return out
 
 
-# ---------------------------------------------------------------- T_n
-
-def t_n(units, A, B, n):
-    """points on unit-vector paths from A to B of length <= n over the direction set `units`; returns (points, dA, dB)"""
-    def bfs(start):
-        dist = {canonical(start): 0}
-        frontier = [start]
-        pts = {canonical(start): start}
-        for d in range(1, n + 1):
-            nxt = []
-            for p in frontier:
-                for s in units:
-                    q = e_add(p, s)
-                    k = canonical(q)
-                    if k not in dist:
-                        dist[k] = d
-                        pts[k] = q
-                        nxt.append(q)
-            frontier = nxt
-        return dist, pts
-    dA, pA = bfs(A)
-    dB, pB = bfs(B)
-    keep = {}
-    for k, d in dA.items():
-        if k in dB and d + dB[k] <= n:
-            keep[k] = pA[k]
-    return keep, dA, dB
-
-
-def unit_graph(points, units):
-    """edges of the unit-distance graph on the point dict {key: E element}, directions restricted to `units` (complete when
-    `units` is the saturation of the lattice the points lie in)"""
+def unit_graph(points, lat):
+    """the COMPLETE unit-distance graph on a point set of the lattice: every edge direction is a unit vector of the
+    lattice, and lat.units is the whole saturation, so stepping by each of them finds every edge."""
     keys = list(points)
     index = {k: i for i, k in enumerate(keys)}
+    steps = lat.unit_vec8
     edges = set()
     for k in keys:
-        p = points[k]
-        for s in units:
-            q = canonical(e_add(p, s))
-            j = index.get(q)
-            if j is not None:
-                i = index[k]
-                if i < j:
+        i = index[k]
+        for s in steps:
+            j = index.get(tuple(a + b for a, b in zip(k, s)))
+            if j is not None and i < j:
+                edges.add((i, j))
+    return keys, sorted(edges)
+
+
+def unit_graph_geometric(points, lat, cell=1.0):
+    """the complete unit-distance graph derived from the GEOMETRY rather than from the saturation: a float grid of
+    cell size 1 proposes every pair within 1 +- 1e-6, and exact integer arithmetic decides.  Independent of the
+    saturation, so it is the control on it -- and it also reports the edge DIRECTIONS that occur, which is how a
+    graph built from a subset of the directions is caught (section 5b's `partial`)."""
+    keys = list(points)
+    M = lat.M
+    xs = []
+    for k in keys:
+        x, y = ints_float(k, M)
+        xs.append((x, y))
+    grid = defaultdict(list)
+    for i, (x, y) in enumerate(xs):
+        grid[(math.floor(x / cell), math.floor(y / cell))].append(i)
+    N2 = (ONE, ZERO)
+    edges = set()
+    dirs = defaultdict(int)
+    tol = 1e-6
+    for (gx, gy), idxs in grid.items():
+        near = []
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                near.extend(grid.get((gx + dx, gy + dy), ()))
+        for i in idxs:
+            xi, yi = xs[i]
+            for j in near:
+                if j <= i:
+                    continue
+                d2 = (xs[j][0] - xi) ** 2 + (xs[j][1] - yi) ** 2
+                if abs(d2 - 1.0) > tol:
+                    continue
+                dv = tuple(a - b for a, b in zip(keys[j], keys[i]))
+                z = (tuple(Fr(q, M) for q in dv[:4]), tuple(Fr(q, M) for q in dv[4:]))
+                if FF.e_normF(z) == ONE:
                     edges.add((i, j))
+                    dirs[dv] += 1
+    return keys, sorted(edges), dirs
+
+
+def unit_graph_from_steps(points, lat, steps_e):
+    """the graph built from a PROPER SUBSET of the saturation -- a partial graph (a refusal still stands; a
+    colouring does not)."""
+    keys = list(points)
+    index = {k: i for i, k in enumerate(keys)}
+    steps = [lat.vec8(z) for z in steps_e]
+    edges = set()
+    for k in keys:
+        i = index[k]
+        for s in steps:
+            j = index.get(tuple(a + b for a, b in zip(k, s)))
+            if j is not None and i < j:
+                edges.add((i, j))
     return keys, sorted(edges)
 
 
 def m_core(n, edges, m):
-    """vertices of the m-core, as a sorted list of original indices; and the induced edges"""
     adj = [set() for _ in range(n)]
     for a, b in edges:
         adj[a].add(b)
@@ -317,8 +812,7 @@ def m_core(n, edges, m):
                 changed = True
     keep = sorted(alive)
     pos = {v: i for i, v in enumerate(keep)}
-    es = [(pos[a], pos[b]) for a, b in edges if a in alive and b in alive]
-    return keep, es
+    return keep, [(pos[a], pos[b]) for a, b in edges if a in alive and b in alive]
 
 
 # ---------------------------------------------------------------- CNF
@@ -328,8 +822,8 @@ def var(v, c, k=4):
 
 
 def coloring_cnf(n, edges, k, pins, precedence=True, amo=True):
-    """one-hot k-colouring; pins: list of (vertex, colour); precedence: colour c at v needs colour c-1 at some u < v, for
-    c >= 2 (colour 0 and 1 are fixed by the pins / the first free vertex), applied to colours not pinned anywhere."""
+    """one-hot k-colouring.  pins: [(vertex, colour)].  precedence breaks the residual value symmetry among the
+    colours no pin names (CLAUDE.md, the symmetry checklist): colour c at v needs colour c-1 somewhere earlier."""
     clauses = []
     for v in range(n):
         clauses.append([var(v, c, k) for c in range(k)])
@@ -345,7 +839,6 @@ def coloring_cnf(n, edges, k, pins, precedence=True, amo=True):
     if precedence:
         pinned = {c for _, c in pins}
         free = [c for c in range(k) if c not in pinned]
-        # among the free colours in increasing order: free[j] at v implies free[j-1] at some u < v
         for j in range(1, len(free)):
             c, cp = free[j], free[j - 1]
             for v in range(n):
@@ -358,206 +851,471 @@ def write_cnf(path, nvars, clauses):
         f.write(f'p cnf {nvars} {len(clauses)}\n')
         for cl in clauses:
             f.write(' '.join(str(x) for x in cl) + ' 0\n')
+    return hashlib.sha256(open(path, 'rb').read()).hexdigest()[:16]
+
+
+# ---------------------------------------------------------------- writing a shape
+
+def write_shape(out, lat, keys, edges, shape, extra, partial=False, A=None, B=None):
+    os.makedirs(out, exist_ok=True)
+    N = len(keys)
+    deg = 2 * len(edges) / N if N else 0
+    index = {k: i for i, k in enumerate(keys)}
+    meta = {'lattice': lat.spec, 'lattice_sha': lat.sha(), 'M': lat.M, 'rank': lat.rank, 'g': len(lat.units),
+            'shape': shape, 'points': N, 'edges': len(edges), 'avg_degree': deg, 'partial': partial}
+    meta.update(extra)
+    pt_sha = hashlib.sha256(json.dumps(sorted(keys), separators=(',', ':')).encode()).hexdigest()
+    meta['points_sha256'] = pt_sha
+    with open(os.path.join(out, 'graph.json'), 'w') as f:
+        json.dump({'meta': meta, 'M': lat.M, 'points': [list(k) for k in keys], 'edges': [list(e) for e in edges]}, f)
+    cnfs = {}
+    # control: a unit triangle pinned where one exists (0, 1, zeta6), else the origin and one neighbour
+    i0 = index.get(tuple([0] * 8))
+    pins = []
+    if i0 is not None:
+        pins = [(i0, 0)]
+        for z, c in ((E_ONE, 1), (ZETA6, 2)):
+            j = index.get(lat.vec8(z))
+            if j is not None:
+                pins.append((j, c))
+    if pins:
+        cnfs['control'] = write_cnf(os.path.join(out, 'control.cnf'), 4 * N,
+                                    coloring_cnf(N, edges, 4, pins))
+        meta['control_pins'] = pins
+    # the target asks
+    for nm in TARGET_NAMES:
+        z = target_element(nm)
+        if lat.coords(z) is None:
+            continue
+        jt = index.get(lat.vec8(z))
+        if jt is None or i0 is None:
+            continue
+        tag = nm.replace('/', 'over').replace(' ', '')
+        cnfs[f'eq_{tag}'] = write_cnf(os.path.join(out, f'eq_{tag}.cnf'), 4 * N,
+                                      coloring_cnf(N, edges, 4, [(i0, 0), (jt, 1)]))
+        cnfs[f'sep_{tag}'] = write_cnf(os.path.join(out, f'sep_{tag}.cnf'), 4 * N,
+                                       coloring_cnf(N, edges, 4, [(i0, 0), (jt, 0)]))
+    meta['cnf_sha'] = cnfs
+    with open(os.path.join(out, 'graph.json'), 'w') as f:
+        json.dump({'meta': meta, 'M': lat.M, 'points': [list(k) for k in keys], 'edges': [list(e) for e in edges]}, f)
+    print(f'  wrote {out}: {N} points, {len(edges)} edges, avg degree {deg:.2f}'
+          + (' [PARTIAL graph]' if partial else ''))
+    print(f'  cnfs: {", ".join(sorted(cnfs))}')
+    return meta
+
+
+# ---------------------------------------------------------------- the ball law (G65, four embeddings)
+
+def phi_overlap(R):
+    """the overlap of a disc of radius R with its unit translate, as a fraction of the disc (G65's phi)"""
+    if R < 0.5:
+        return 0.0
+    return (2 * R * R * math.acos(1 / (2 * R)) - 0.5 * math.sqrt(4 * R * R - 1)) / (math.pi * R * R)
+
+
+def ball_prediction(lat, R):
+    pts = math.pi ** 4 * R ** 8 / lat.covolume()
+    return pts, len(lat.units) * phi_overlap(R) ** 4
 
 
 # ---------------------------------------------------------------- commands
 
-def cmd_lattice(names):
-    for name in names:
-        S = generators(name)
-        lat = Lattice(S)
-        units = lat.saturation()
-        dep = {}
-        for z in units:
-            dep[depths(z)] = dep.get(depths(z), 0) + 1
-        print(f'== {name}: |S| = {len(S)}, denominator {lat.M}, rank {lat.rank}, g = |Lambda cap U| = {len(units)}')
-        print('   depths of the saturation (P2,P3,P5):', dict(sorted(dep.items())))
-        two = (f_scale(2, ONE), ZERO)
-        res = additive_screen(lat, units, {'i sqrt3': I_SQRT3, '2': two, '4/3': (f_scale(Fr(4, 3), ONE), ZERO),
-                                           '8/3': (f_scale(Fr(8, 3), ONE), ZERO)})
-        for g, r in res.items():
-            print(f'   additive {g}: proper colourings {r["proper"]}; target in lattice {r["in_lattice"]}; '
-                  f'phi(target)=0 counts {r["target_zero"]}')
-        # covolume-ish figure: det of gram
+def lattice_record(spec, method='auto', dmax=8, maxlen=4):
+    lat = Lattice(generators(spec), spec)
+    t0 = time.time()
+    if method == 'auto':
+        method = 'b' if lat.sat_b_cost() <= lat.SAT_B_BOX_CAP else 'gens'
+    lat.saturate(method)
+    passes, witness, counts = lat.gate()
+    screen = additive_screen(lat, SCREEN_TARGETS)
+    targets = chainable_targets(lat, screen, dmax, maxlen)
+    dep = defaultdict(int)
+    for z in lat.units:
+        dep[str(depths(z))] += 1
+    rec = {'gate': 'pass' if passes else 'fail',
+           'saturation_complete': lat.sat_complete,
+           'gate_witness': (e_str(witness) if witness is not None else None),
+           'gate_witness_ints': (list(e_to_ints(witness)) if witness is not None else None),
+           'gate_counts': counts,
+           'lattice': spec, 'lattice_sha': lat.sha(), 'M': lat.M, 'rank': lat.rank,
+           'generators': len(lat.S), 'g': len(lat.units),
+           'covolume': lat.covolume(), 'log10_covolume': round(lat.log10_covolume(), 4),
+           'depth_classes': dict(sorted(dep.items())),
+           'additive': {'Z4': screen['Z4'], 'K4': screen['K4']},
+           'forced_basis': screen['forced_basis'], 'forced_index': screen['forced_index'],
+           'targets_in_lattice': screen['targets_in_lattice'],
+           'targets': targets,
+           'sat_method': method, 'seconds': round(time.time() - t0, 2)}
+    return lat, screen, rec
+
+
+def print_record(rec):
+    print(f'== {rec["lattice"]}  [{rec["lattice_sha"]}]  M = {rec["M"]}, rank {rec["rank"]}, '
+          f'|S| = {rec["generators"]}, g = {rec["g"]}'
+          + ('' if rec['saturation_complete'] else ' (GENERATORS ONLY: proper counts are upper bounds)')
+          + f', log10 covolume {rec["log10_covolume"]:.3f}')
+    print(f'   3-adic gate: {rec["gate"].upper()}'
+          + (f' via {rec["gate_witness"]} ({rec["gate_counts"]["three_non_units"]} of {rec["g"]} are 3-non-units)'
+             if rec['gate'] == 'pass' else '  -- every unit vector is a 3-unit: DEAD by the 3-adic gate'))
+    for g in ('Z4', 'K4'):
+        a = rec['additive'][g]
+        print(f'   additive {g}: {a["proper"]:6d} proper;  phi(target) = 0 at ' +
+              ', '.join(f'{nm} {v}' for nm, v in a['target_zero'].items()))
+    print(f'   Lambda_forced: index {rec["forced_index"]} in Lambda; basis rows {len(rec["forced_basis"])}')
+    print(f'   chainable targets in Lambda_forced: '
+          + (', '.join(f'{t["delta"]} (chain {t["chain"]})' for t in rec['targets'][:12]) or 'none'))
+
+
+def cmd_lattice(specs, method, out=None):
+    rows = []
+    for spec in specs:
+        lat, screen, rec = lattice_record(spec, method)
+        print_record(rec)
         print()
-
-
-TARGETS = {'isqrt3': I_SQRT3, '4/3': (f_scale(Fr(4, 3), ONE), ZERO), '8/3': (f_scale(Fr(8, 3), ONE), ZERO),
-           '2': (f_scale(2, ONE), ZERO), '4': (f_scale(4, ONE), ZERO)}
-
-
-def cmd_tn(name, n, out=None, core=None, target='isqrt3'):
-    S = generators(name)
-    lat = Lattice(S)
-    units = lat.saturation()
-    A = E_ZERO
-    B = TARGETS[target]
-    pts, dA, dB = t_n(units, A, B, n)
-    keys, edges = unit_graph(pts, units)
-    N = len(keys)
-    deg = 2 * len(edges) / N if N else 0
-    print(f'T_{n} over {name}: |S|={len(S)} g={len(units)} points={N} edges={len(edges)} avg degree={deg:.2f}')
-    if core:
-        keep, edges2 = m_core(N, edges, core)
-        keys = [keys[i] for i in keep]
-        edges = edges2
-        N = len(keys)
-        deg = 2 * len(edges) / N if N else 0
-        print(f'  {core}-core: points={N} edges={len(edges)} avg degree={deg:.2f}')
-    ia = keys.index(canonical(A))
-    ib = keys.index(canonical(B))
+        rows.append(rec)
     if out:
-        os.makedirs(out, exist_ok=True)
-        # relabel so A = 0, B = 1
-        order = [ia, ib] + [i for i in range(N) if i not in (ia, ib)]
-        pos = {v: i for i, v in enumerate(order)}
-        edges_r = sorted(tuple(sorted((pos[a], pos[b]))) for a, b in edges)
-        pts_r = [pts[keys[i]] for i in order]
-        meta = {'lattice': name, 'n': n, 'points': N, 'edges': len(edges_r), 'avg_degree': deg,
-                'A': 0, 'B': 1, 'core': core, 'target': target}
-        with open(os.path.join(out, 'graph.json'), 'w') as f:
-            json.dump({'meta': meta, 'points': [[str(q) for q in to_vec8(p)] for p in pts_r], 'edges': edges_r}, f)
-        # pinned ask: A and B both colour 0 ; a neighbour of A gets colour 1 (arc-transitivity is NOT available here, so
-        # only the colour-permutation symmetry is broken: precedence over the free colours)
-        cl = coloring_cnf(N, edges_r, 4, [(0, 0), (1, 0)])
-        write_cnf(os.path.join(out, 'pinned.cnf'), 4 * N, cl)
-        # the forced-equal ask: A = 0, B = 1 (the other colours are interchangeable: precedence over {2, 3}); UNSAT means
-        # every 4-colouring gives A and B one colour
-        cl3 = coloring_cnf(N, edges_r, 4, [(0, 0), (1, 1)])
-        write_cnf(os.path.join(out, 'pinned_neq.cnf'), 4 * N, cl3)
-        # the control: a triangle pinned (A, A+1, A+zeta6 if present), four colours
-        tri = []
-        for i, p in enumerate(pts_r):
-            if canonical(p) == canonical(E_ONE):
-                tri.append((i, 1))
-            if canonical(p) == canonical(ZETA6):
-                tri.append((i, 2))
-        cl2 = coloring_cnf(N, edges_r, 4, [(0, 0)] + tri)
-        write_cnf(os.path.join(out, 'control.cnf'), 4 * N, cl2)
-        print(f'  wrote {out}/graph.json, pinned.cnf ({len(cl)} clauses), control.cnf ({len(cl2)} clauses; pins {[(0,0)]+tri})')
+        with open(out, 'w') as fh:
+            for r in rows:
+                fh.write(json.dumps(r, separators=(',', ':')) + '\n')
+        print('wrote', out)
+    return rows
 
 
-# ---------------------------------------------------------------- Minkowski balls (FS-61's ball shape, four embeddings)
-
-def minkowski_ball(lat, R):
-    """all lattice points p with |sigma(p)| <= R under each of the four real embeddings sigma of F (a 4-disc product in R^8,
-    finite): qfminim on the trace form with bound 4R^2 proposes, gp filters by the embeddings, Python keeps the exact points"""
-    G = lat.gram()
-    L = 1
-    for row in G:
-        for q in row:
-            L = L * q.denominator // math.gcd(L, q.denominator)
-    Gi = [[int(q * L) for q in row] for row in G]
-    mat = '[' + ';'.join(','.join(str(x) for x in row) for row in Gi) + ']'
-    emb_rows = []
-    for (x, y) in lat.basis:
-        row = []
-        for s3 in (math.sqrt(3), -math.sqrt(3)):
-            for s5 in (math.sqrt(5), -math.sqrt(5)):
-                row.append(repr(f_float(x, s3, s5)))
-                row.append(repr(f_float(y, s3, s5)))
-        emb_rows.append(','.join(row))
-    emb = '[' + ';'.join(emb_rows) + ']'
-    bound = int(math.ceil(4 * R * R * L))
-    script = (f'G = {mat}; Emb = {emb}; v = qfminim(G, {bound}, , 2); n = 0; '
-              f'for(k=1, #v[3], w = v[3][,k]~ * Emb; ok = 1; for(t=0,3, if(w[2*t+1]^2 + w[2*t+2]^2 > {R * R} + 1e-9, ok = 0)); '
-              f'if(ok, n++; print(Vec(v[3][,k])))); print("count ", n)')
-    out = subprocess.run(['gp', '-q', '-s', '4000000000'], input=script + '\n', capture_output=True, text=True)
-    if out.returncode != 0 or 'count' not in out.stdout:
-        raise RuntimeError('gp failed: ' + out.stderr[-2000:] + out.stdout[-500:])
-    pts = {canonical(E_ZERO): E_ZERO}
-    R2 = Fr(R).limit_denominator(1000) ** 2
-    for line in out.stdout.strip().split('\n'):
-        if line.startswith('count'):
+def cmd_survivors(spec, method, target='isqrt3'):
+    """The proper additive Z/4-colourings that kill a target (phi(target) = 0), described: their images on the HNF
+    basis, their values on the named vectors, and their orbit structure under the symmetries of the lattice
+    (multiplication by zeta12, complex conjugation, and the colour automorphism phi -> -phi).  This is what the
+    owner's re-grade of P1 asks for: the survivors are the four-colourings that make the target monochromatic, so
+    what they ARE is what kills the ask."""
+    lat = Lattice(generators(spec), spec)
+    if method == 'auto':
+        method = 'b' if lat.sat_b_cost() <= lat.SAT_B_BOX_CAP else 'gens'
+    lat.saturate(method)
+    R = lat.rank
+    U = _coord_matrix(lat, lat.units)
+    A = all_vectors_mod(4, R)
+    proper = (((A @ U.T) % 4) != 0).all(axis=1)
+    A4 = A[proper]
+    tz = target_element(target)
+    tc = np.array(lat.coords(tz), dtype=np.int64)
+    surv = A4[((A4 @ tc) % 4) == 0]
+    print(f'{spec}: {len(A4)} proper Z/4 additive colourings, {len(surv)} with phi({target}) = 0 '
+          f'(saturation {"complete" if lat.sat_complete else "GENERATORS ONLY: an upper bound"}, g = {len(lat.units)})')
+    named = {'1': E_ONE, 'zeta12': ZETA12, 'zeta6': ZETA6, 'i sqrt3': I_SQRT3, 'u': U_SQRT5,
+             '2': real_scalar(2), '1/3': real_scalar(Fr(1, 3)), '4/3': real_scalar(Fr(4, 3))}
+    ncoords = {nm: np.array(lat.coords(z), dtype=np.int64) for nm, z in named.items() if lat.coords(z) is not None}
+    # the symmetry group action: phi -> phi o sigma^{-1} for sigma in <zeta12 multiplication, conjugation>, and
+    # phi -> -phi.  Realised on coordinate vectors by the integer matrix of sigma in the HNF basis.
+    def matrix_of(sigma):
+        rows = []
+        for b in lat.basis:
+            c = lat.coords(sigma(b))
+            if c is None:
+                return None
+            rows.append(list(c))
+        return np.array(rows, dtype=np.int64)
+    gens_act = []
+    for nm, sigma in (('zeta12*', lambda z: e_mul(ZETA12, z)), ('conj', e_conj), ('neg', lambda z: e_neg(z))):
+        Mx = matrix_of(sigma)
+        if Mx is None:
+            print(f'  (the lattice is not stable under {nm}: not a symmetry here)')
+        else:
+            gens_act.append((nm, Mx))
+    sset = {tuple(int(x) for x in a) for a in surv}
+    seen = set()
+    orbits = []
+    for a in sorted(sset):
+        if a in seen:
             continue
-        c = [int(x) for x in line.strip('[] \n').split(',')]
-        for sign in (1, -1):
-            z = E_ZERO
-            for ci, b in zip(c, lat.basis):
-                if ci:
-                    z = e_add(z, e_scale(sign * ci, b))
-            # exact check: every embedding of |z|^2 is <= R^2
-            n2 = e_normF(z)
-            ok = True
-            for s3 in (1, -1):
-                for s5 in (1, -1):
-                    a, b_, c_, d = n2
-                    val = a + b_ * s3 * Fr(1732050807568877, 10**15) + c_ * s5 * Fr(2236067977499790, 10**15) + \
-                        d * s3 * s5 * Fr(3872983346207417, 10**15)
-                    if val > R2 + Fr(1, 10**6):
-                        ok = False
-            if ok:
-                pts[canonical(z)] = z
-    return pts
+        orb = {a}
+        stack = [a]
+        while stack:
+            cur = np.array(stack.pop(), dtype=np.int64)
+            cands = [tuple(int(x) for x in (cur @ Mx) % 4) for _, Mx in gens_act]
+            cands.append(tuple(int((-x) % 4) for x in cur))
+            for c in cands:
+                if c in sset and c not in orb:
+                    orb.add(c)
+                    stack.append(c)
+        seen |= orb
+        orbits.append(sorted(orb))
+    print(f'  orbits under <zeta12 multiplication, conjugation, phi -> -phi>: {len(orbits)}, sizes '
+          f'{[len(o) for o in orbits]}')
+    for oi, orb in enumerate(orbits):
+        a = np.array(orb[0], dtype=np.int64)
+        vals = {nm: int((a @ c) % 4) for nm, c in ncoords.items()}
+        print(f'  orbit {oi}: size {len(orb)}; representative images on the HNF basis {orb[0]}; values {vals}')
+    return orbits
 
 
-def cmd_ball(name, R, out=None, core=None, targets=('isqrt3', '4/3', '8/3', '2')):
-    S = generators(name)
-    lat = Lattice(S)
-    units = lat.saturation()
-    pts = minkowski_ball(lat, R)
-    keys, edges = unit_graph(pts, units)
-    N = len(keys)
-    deg = 2 * len(edges) / N if N else 0
-    print(f'ball R={R} over {name}: |S|={len(S)} g={len(units)} points={N} edges={len(edges)} avg degree={deg:.2f}')
+def cmd_word(spec, k, out, target, core, method, steps_spec=None):
+    lat = Lattice(generators(spec), spec)
+    lat.saturate('b' if method == 'auto' else method)
+    t0 = time.time()
+    pts = word_ball(lat, k)
+    keys, edges = unit_graph(pts, lat)
+    print(f'word ball k = {k} over {spec}: |S| = {len(lat.S)}, g = {len(lat.units)}, '
+          f'{len(keys)} points, {len(edges)} edges, avg degree {2*len(edges)/max(1,len(keys)):.2f} '
+          f'({time.time()-t0:.1f}s)')
     if core:
-        keep, edges2 = m_core(N, edges, core)
+        keep, edges = m_core(len(keys), edges, core)
         keys = [keys[i] for i in keep]
-        edges = edges2
-        N = len(keys)
-        deg = 2 * len(edges) / N if N else 0
-        print(f'  {core}-core: points={N} edges={len(edges)} avg degree={deg:.2f}')
+        print(f'  {core}-core: {len(keys)} points, {len(edges)} edges, '
+              f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
     if out:
-        os.makedirs(out, exist_ok=True)
-        index = {k: i for i, k in enumerate(keys)}
-        pts_l = [pts[k] for k in keys]
-        with open(os.path.join(out, 'graph.json'), 'w') as f:
-            json.dump({'meta': {'lattice': name, 'R': R, 'points': N, 'edges': len(edges), 'avg_degree': deg, 'core': core},
-                       'points': [[str(q) for q in to_vec8(p)] for p in pts_l], 'edges': edges}, f)
-        i0 = index[canonical(E_ZERO)]
-        tri = [(i0, 0)]
-        for z, c in ((E_ONE, 1), (ZETA6, 2)):
-            if canonical(z) in index:
-                tri.append((index[canonical(z)], c))
-        cl = coloring_cnf(N, edges, 4, tri)
-        write_cnf(os.path.join(out, 'control.cnf'), 4 * N, cl)
-        print(f'  control.cnf: {len(cl)} clauses, pins {tri}')
-        for t in targets:
-            tz = TARGETS[t]
-            if canonical(tz) not in index:
-                continue
-            it = index[canonical(tz)]
-            cl_eq = coloring_cnf(N, edges, 4, [(i0, 0), (it, 0)])   # refuses => virtual edge at t
-            cl_ne = coloring_cnf(N, edges, 4, [(i0, 0), (it, 1)])   # refuses => forced equal at t
-            tn = t.replace('/', 'over')
-            write_cnf(os.path.join(out, f'sep_{tn}.cnf'), 4 * N, cl_eq)
-            write_cnf(os.path.join(out, f'eq_{tn}.cnf'), 4 * N, cl_ne)
-            print(f'  target {t}: vertex {it}; sep_{tn}.cnf / eq_{tn}.cnf written')
+        write_shape(out, lat, keys, edges, {'shape': 'word', 'k': k}, {'core': core})
+    return lat, keys, edges
+
+
+def cmd_tn(spec, n, out, target, core, method):
+    lat = Lattice(generators(spec), spec)
+    lat.saturate('b' if method == 'auto' else method)
+    A = tuple([0] * 8)
+    tz = target_element(target)
+    if lat.coords(tz) is None:
+        raise SystemExit(f'the target {target} is not in the lattice {spec}: no lens can reach it')
+    B = lat.vec8(tz)
+    t0 = time.time()
+    pts = lens(lat, A, B, n)
+    if not pts:
+        raise SystemExit(f'no path of length <= {n} from 0 to {target} in {spec}: raise n')
+    keys, edges = unit_graph(pts, lat)
+    print(f'lens n = {n} over {spec} (0 -> {target}): {len(keys)} points, {len(edges)} edges, '
+          f'avg degree {2*len(edges)/max(1,len(keys)):.2f} ({time.time()-t0:.1f}s)')
+    if core:
+        keep, edges = m_core(len(keys), edges, core)
+        keys = [keys[i] for i in keep]
+        print(f'  {core}-core: {len(keys)} points, {len(edges)} edges, '
+              f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
+    if out:
+        write_shape(out, lat, keys, edges, {'shape': 'lens', 'n': n, 'target': target}, {'core': core})
+    return lat, keys, edges
+
+
+def cmd_ball(spec, R, out, core, method):
+    lat = Lattice(generators(spec), spec)
+    lat.saturate('b' if method == 'auto' else method)
+    pp, pd = ball_prediction(lat, R)
+    t0 = time.time()
+    pts = minkowski_ball(lat, R)
+    keys, edges = unit_graph(pts, lat)
+    deg = 2 * len(edges) / max(1, len(keys))
+    print(f'ball R = {R} over {spec}: {len(keys)} points, {len(edges)} edges, avg degree {deg:.2f} '
+          f'({time.time()-t0:.1f}s);  predicted {pp:.0f} points / degree {pd:.2f} (G65 with four embeddings)')
+    if core:
+        keep, edges = m_core(len(keys), edges, core)
+        keys = [keys[i] for i in keep]
+        print(f'  {core}-core: {len(keys)} points, {len(edges)} edges, '
+              f'avg degree {2*len(edges)/max(1,len(keys)):.2f}')
+    if out:
+        write_shape(out, lat, keys, edges, {'shape': 'ball', 'R': R},
+                    {'core': core, 'predicted_points': round(pp), 'predicted_degree': round(pd, 3)})
+    return lat, keys, edges
+
+
+# ---------------------------------------------------------------- self-test
+
+def selftest():
+    # --- the grammar
+    try:
+        generators('zeta12+nosuch')
+    except SystemExit as e:
+        assert 'unknown family' in str(e), str(e)
+    else:
+        raise AssertionError('an unknown family name was accepted')
+    assert len(generators('group:u3:2')) == 60, len(generators('group:u3:2'))
+    assert len(generators('zeta12')) == 12
+    assert len(generators('zeta12+u3')) == 36
+
+    # --- the lattice of zeta12 and u: the plan's section 2.2 head row, and the owner's re-derivation
+    lat = Lattice(generators('zeta12+u3'), 'zeta12+u3')
+    assert lat.M == 6, lat.M
+    assert lat.rank == 8, f'rank {lat.rank}, not 8: the basis does not span the generators\' Z-module'
+    # every generator is in the lattice (the faithful twin of the basis_drop plant)
+    for z in lat.S:
+        assert lat.contains(z), f'generator {e_str(z)} is not in its own lattice'
+    lat.saturate('b')
+    assert len(lat.units) == 36, f'g = {len(lat.units)}: the saturation of zeta12+u3 is 36 (plan section 2.2)'
+    # the saturation holds u and every twelfth root of unity
+    assert lat.contains(U_SQRT5) and lat.contains(ZETA12)
+    assert canonical(U_SQRT5) in {canonical(z) for z in lat.units}
+    # the two methods agree
+    lat2 = Lattice(generators('zeta12+u3'), 'zeta12+u3')
+    lat2.saturate('both')
+    assert len(lat2.units) == 36
+    # a lattice whose saturation is STRICTLY bigger than its generator set (the faithful twin of sat_generators):
+    # the plan's section 2.2 reads g = 300 for zeta12+u3+v4 from 60 generators, and g = 60 for zeta12+u3+q7
+    lbig = Lattice(generators('zeta12+u3+v4'), 'zeta12+u3+v4')
+    lbig.saturate('b')
+    assert len(lbig.S) == 60 and len(lbig.units) == 300, (
+        f'zeta12+u3+v4: |S| = {len(lbig.S)}, g = {len(lbig.units)}; the plan section 2.2 reads 60 generators and '
+        f'g = 300 -- a saturation equal to the generator set means the enumeration never ran')
+    assert len(lbig.units) > len(lbig.S), 'the saturation must exceed the generator set on this lattice'
+    lq7 = Lattice(generators('zeta12+u3+q7'), 'zeta12+u3+q7')
+    lq7.saturate('b')
+    assert len(lq7.units) == 60, len(lq7.units)
+
+    # --- the 3-adic gate: zeta12+u3 passes (u has 3-depth -2), zeta12+v4 and zeta12+w4 fail
+    ok, wit, _ = lat.gate()
+    assert ok and depths(wit)[1] != 0, (ok, e_str(wit) if wit else None)
+    for dead in ('zeta12+v4', 'zeta12+w4'):
+        ld = Lattice(generators(dead), dead)
+        ld.saturate('b')
+        okd, _, _ = ld.gate()
+        assert not okd, f'{dead} passed the 3-adic gate; the plan says every one of its unit vectors is a 3-unit'
+        assert len(ld.units) == 36, (dead, len(ld.units))
+
+    # --- the additive screen: the plan's and the owner's counts, exactly
+    scr = additive_screen(lat, SCREEN_TARGETS)
+    assert scr['Z4']['proper'] == 1296, (
+        f"proper Z/4 additive colourings {scr['Z4']['proper']}, not 1296: the screen did not test every unit vector")
+    assert scr['K4']['proper'] == 1296, (
+        f"proper Klein additive colourings {scr['K4']['proper']}, not 1296: the screen did not test every unit vector")
+    tz4 = scr['Z4']['target_zero']
+    assert (tz4['i sqrt3'], tz4['2'], tz4['4/3'], tz4['8/3']) == (432, 432, 1296, 1296), tz4
+    tzk = scr['K4']['target_zero']
+    assert (tzk['i sqrt3'], tzk['2'], tzk['4/3'], tzk['8/3']) == (0, 1296, 1296, 1296), tzk
+    # every "proper" hom really is nonzero on every unit vector (the faithful twin of screen_partial)
+    U = _coord_matrix(lat, lat.units)
+    A = all_vectors_mod(4, lat.rank)
+    prop = np.array([bool(((a @ U.T) % 4 != 0).all()) for a in A[:4096]])
+    assert prop.sum() == int((((A[:4096] @ U.T) % 4) != 0).all(axis=1).sum())
+    # --- Lambda_forced: 4/3 and 8/3 are in it, i sqrt3 and 2 are not (the screen's own reading, as a sublattice)
+    assert in_forced(lat, scr, real_scalar(Fr(4, 3))) is True
+    assert in_forced(lat, scr, real_scalar(Fr(8, 3))) is True
+    assert in_forced(lat, scr, I_SQRT3) is False
+    assert in_forced(lat, scr, real_scalar(2)) is False
+    # 4 Lambda is inside Lambda_forced
+    for k in range(lat.rank):
+        v = [4 if j == k else 0 for j in range(lat.rank)]
+        assert coords_in_basis(scr['forced_basis'], list(v), dim=lat.rank) is not None
+
+    # --- THE TRIANGLE LEMMA (derived, two lines; holds on ANY lattice containing the unit triangle {0, 1, zeta6}).
+    # For a proper additive phi : Lambda -> Z/4,  phi(i sqrt3) = 0  <=>  phi(2) = 0  <=>  phi(1) = 2.
+    #   phi(2) = 2 phi(1) vanishes iff phi(1) in {0, 2}, and phi(1) != 0 because 1 is a unit vector.
+    #   i sqrt3 = 2 zeta6 - 1, so phi(i sqrt3) = 2 phi(zeta6) - phi(1).
+    #   (<=) phi(1) = 2: zeta6 and zeta6 - 1 are unit vectors, so phi(zeta6) is neither 0 nor 2, hence odd, hence
+    #        2 phi(zeta6) = 2 and phi(i sqrt3) = 0.
+    #   (=>) phi(i sqrt3) = 0 gives phi(1) = 2 phi(zeta6) in {0, 2}, and phi(1) != 0.
+    # So the sqrt3 virtual edge and the distance-2 virtual edge are killed by exactly the same colourings, and the
+    # kill reduces to one bit: does some proper phi have phi(1) = 2?  Checked here on four lattices.
+    assert lat.contains(E_ONE) and lat.contains(ZETA6) and lat.contains(e_sub(ZETA6, E_ONE))
+    for spec_t in ('zeta12+u3', 'zeta12+w4', 'zeta12+d6'):
+        lt = Lattice(generators(spec_t), spec_t)
+        lt.saturate('b')
+        Ut = _coord_matrix(lt, lt.units)
+        At = all_vectors_mod(4, lt.rank)
+        A4t = At[((((At @ Ut.T) % 4) != 0)).all(axis=1)]
+        v1 = (A4t @ np.array(lt.coords(E_ONE), dtype=np.int64)) % 4
+        vs = (A4t @ np.array(lt.coords(I_SQRT3), dtype=np.int64)) % 4
+        v2 = (A4t @ np.array(lt.coords(real_scalar(2)), dtype=np.int64)) % 4
+        assert ((v1 == 2) == (vs == 0)).all(), f'the triangle lemma failed at sqrt3 on {spec_t}'
+        assert ((v1 == 2) == (v2 == 0)).all(), f'the triangle lemma failed at 2 on {spec_t}'
+
+    # --- the screen's theorem: a lattice containing (1/2){1, zeta6} has no additive four-colouring
+    lv = Lattice(generators('zeta12+v4'), 'zeta12+v4')
+    lv.saturate('b')
+    assert lv.contains(real_scalar(Fr(1, 2))), 'v + vbar = 1/2 should be in the lattice'
+    sv = additive_screen(lv, SCREEN_TARGETS)
+    assert sv['Z4']['proper'] == 0 and sv['K4']['proper'] == 0, (sv['Z4']['proper'], sv['K4']['proper'])
+
+    # --- the chain pool finds the plan's closers
+    rec = chainable_reciprocals(8, 4)
+    assert tuple(real_scalar(Fr(1, 2))[0]) in rec, '1/2 = v + vbar not found by the chain enumeration'
+    assert rec[tuple(real_scalar(Fr(1, 2))[0])] == 2
+    assert tuple(real_scalar(Fr(3, 4))[0]) in rec, '3/4 = -1 - v^2 - vbar^2 not found'
+    assert rec[tuple(real_scalar(Fr(3, 4))[0])] <= 3
+    assert tuple(real_scalar(Fr(1, 4))[0]) in rec and rec[tuple(real_scalar(Fr(1, 4))[0])] <= 4
+
+    # --- shapes, in integer arithmetic; the complete graph against a partial one
+    pts = word_ball(lat, 2)
+    keys, edges = unit_graph(pts, lat)
+    assert len(keys) == len(pts)
+    keys_p, edges_p = unit_graph_from_steps(pts, lat, lat.S)
+    assert len(edges_p) <= len(edges), (len(edges_p), len(edges))
+    # every edge really has length 1 (exact)
+    for (i, j) in edges[:300]:
+        d = tuple(a - b for a, b in zip(keys[i], keys[j]))
+        z = (tuple(Fr(q, lat.M) for q in d[:4]), tuple(Fr(q, lat.M) for q in d[4:]))
+        assert e_is_unit_vector(z), (i, j)
+    # a unit triangle exists in this lattice (omega = 3 since sqrt3 is in F): 0, 1, zeta6
+    assert lat.contains(E_ONE) and lat.contains(ZETA6)
+    # the geometric derivation (float grid proposes, exact integers decide) must agree with stepping through the
+    # saturation -- two independent edge derivations, which is the control on both
+    keys_g, edges_g, dirs_g = unit_graph_geometric(pts, lat)
+    assert keys_g == keys and edges_g == edges, (len(edges_g), len(edges))
+    assert set(dirs_g) <= {lat.vec8(z) for z in lat.units}, 'an edge direction outside the saturation'
+
+    print('fs70_fabric selftest OK')
+    print(f'  zeta12+u3: M = {lat.M}, rank {lat.rank}, g = {len(lat.units)}, covolume {lat.covolume():.4f}')
+    print(f'  additive Z/4 {scr["Z4"]["proper"]} / Klein {scr["K4"]["proper"]}; '
+          f'Lambda_forced index {scr["forced_index"]}')
+
+
+PLANTS = ('basis_drop', 'sat_generators', 'screen_partial')
+
+
+def run_plants():
+    import subprocess as sp
+    print('--- faithful twin')
+    selftest()
+    ok = True
+    for name in PLANTS:
+        print(f'--- plant {name}: the self-test must fail')
+        r = sp.run([sys.executable, __file__, '--selftest', '--plant', name], capture_output=True, text=True)
+        if r.returncode == 0:
+            print(f'    NOT REFUSED -- plant {name} left the self-test green: the check is blind')
+            ok = False
+        else:
+            why = (r.stderr.strip().split('\n') or [''])[-1]
+            print(f'    refused (exit {r.returncode}): {why[:170]}')
+    if not ok:
+        raise SystemExit('a planted fault did not fire')
+    print('all three plants fired; faithful twin green')
+
+
+# ---------------------------------------------------------------- main
+
+def _opt(argv, name, default=None, cast=str):
+    return cast(argv[argv.index(name) + 1]) if name in argv else default
 
 
 if __name__ == '__main__':
-    args = sys.argv[1:]
-    if not args:
+    argv = sys.argv[1:]
+    if '--plant' in argv:
+        PLANT = _opt(argv, '--plant')
+        FF.PLANT = None
+        if PLANT not in PLANTS:
+            raise SystemExit(f'unknown plant {PLANT}; known: {", ".join(PLANTS)}')
+    method = _opt(argv, '--sat-method', 'auto')
+    out = _opt(argv, '--out')
+    core = _opt(argv, '--core', None, int)
+    target = _opt(argv, '--target', 'isqrt3')
+    if not argv:
         print(__doc__)
-        sys.exit(0)
-    if args[0] == 'lattice':
-        cmd_lattice(args[1:])
-    elif args[0] == 'tn':
-        out = None
-        core = None
-        if '--out' in args:
-            out = args[args.index('--out') + 1]
-        if '--core' in args:
-            core = int(args[args.index('--core') + 1])
-        target = 'isqrt3'
-        if '--target' in args:
-            target = args[args.index('--target') + 1]
-        cmd_tn(args[1], int(args[2]), out, core, target)
-    elif args[0] == 'ball':
-        out = None
-        core = None
-        if '--out' in args:
-            out = args[args.index('--out') + 1]
-        if '--core' in args:
-            core = int(args[args.index('--core') + 1])
-        cmd_ball(args[1], float(args[2]), out, core)
+    elif '--plants' in argv:
+        run_plants()
+    elif '--selftest' in argv:
+        selftest()
+    elif argv[0] in ('lattice', 'screen'):
+        specs = [a for a in argv[1:] if not a.startswith('--')
+                 and a not in (method, out, target, str(core))]
+        specs = []
+        i = 1
+        while i < len(argv):
+            if argv[i].startswith('--'):
+                i += 2
+                continue
+            specs.append(argv[i])
+            i += 1
+        cmd_lattice(specs, method, out if argv[0] == 'screen' else None)
+    elif argv[0] == 'survivors':
+        cmd_survivors(argv[1], method, target)
+    elif argv[0] == 'word':
+        cmd_word(argv[1], int(argv[2]), out, target, core, method)
+    elif argv[0] == 'tn':
+        cmd_tn(argv[1], int(argv[2]), out, target, core, method)
+    elif argv[0] == 'ball':
+        cmd_ball(argv[1], float(argv[2]), out, core, method)
+    else:
+        raise SystemExit(f'unknown command {argv[0]!r}; see --help / no arguments for the grammar')
