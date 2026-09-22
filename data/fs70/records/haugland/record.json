@@ -1,0 +1,59 @@
+{
+ "source": "[Haugland2026] sections 2-3 and Appendix A, rebuilt exactly in Q(zeta_84)",
+ "field_degree": 24,
+ "epsilon_denominator": 7,
+ "checks": {
+  "|u_29|^2 = 1": "exact",
+  "appendix_A_paths": 228,
+  "appendix_A_path_lengths": {
+   "5": 32,
+   "6": 196
+  },
+  "appendix_A_sums_equal_B": "exact, all 228",
+  "appendix_A_distinct_vertices": 731,
+  "appendix_A_subset_of_G1": true,
+  "G1_vertices_not_covered_by_appendix": 9
+ },
+ "T5": 1042,
+ "T6": 12856,
+ "G0": [
+  1294,
+  6727
+ ],
+ "G1": [
+  740,
+  3985
+ ],
+ "haugland_states": {
+  "T5": 1042,
+  "T6": 12856,
+  "G1": [
+   740,
+   3985
+  ]
+ },
+ "match": true,
+ "ask_A_eq_B": {
+  "method": "cube-and-conquer on the contracted instance (739 vertices, 3983 edges), unit triangle pinned at the contracted vertex, branching on the 7 highest-degree vertices",
+  "cubes_total": 16384,
+  "cubes_surviving_branching_edges": 1458,
+  "verdicts": {
+   "UNSAT": 1458
+  },
+  "VERDICT": "UNSAT",
+  "wall_seconds": 436,
+  "jobs": 22,
+  "cpu_seconds_sum": 9425.3,
+  "solver": "kissat 4.0.4",
+  "ledger": "cubes.jsonl.gz (one row per cube)"
+ },
+ "ask_A_neq_B_control": {
+  "VERDICT": "SAT",
+  "seconds": 1.68,
+  "solver": "kissat 4.0.4"
+ },
+ "single_solver_attempts": "8 configurations (kissat and CaDiCaL, each with and without the symmetry break, kissat --unsat on both, and both on the contracted encoding) ran 27 / 27 / 27 / 27 / 12 / 12 / 9 / 9 minutes with NO verdict and were killed once the cube pass had settled it; P8 (\"under 60 s of solver time\") LOST",
+ "cnf_sha256": {
+  "eq_AB_merged": "b21814a542732ad34b3ea5cca01ff80c95c6b46f0bb4e6ed96f02981a6a0dc18"
+ }
+}
