@@ -24,6 +24,254 @@ first case is kernel-checked and its work begins at m = 6. The theorem of the da
 > differences of norm-one units ≡ 1 (mod 𝔓) span a lattice containing 𝔓⁴ and not 𝔓³.** (A character that sees
 > the newest layer sums to at most `2^{m−1}` in absolute value — **a third of the degree `d = 3·2^{m−1}`**, which
 > is exactly the value `λ_min = −d/3` — and reaches it only by being trivial on that lattice.)
+## The theorems (FS-71 index)
+
+*Added 2026-09-23 by the FS-71 batch-5b implementer, per the theorem-tracking rule (Kooshi, 2026-09-22): FS-38's
+narrative below already names and proves its own theorems (D-1–D-4, Theorems D2-A/D2-B, Lemmas 1–3), so this file is
+**completed in place**, not rewritten — the narrative is untouched and every entry's `*Proof:*` field points into the
+section below it. Ids are the narrative's own names, prefixed. Row 66 (`CLAUDE.md`/`LEDGER.md`) is kernel throughout
+and files nothing here; the one hand step it names — the field-level step of M58/M60 that a number field's
+conjugation-fixed prime supplies a valuation subring with residue field of size `N(𝔭)` — is row 57's gap, already
+filed as a conjecture under `plans/R57-derivation.md`, pointing at stub FS-47; not re-filed here. D-4's uniform-gap
+question is open and is filed below as a conjecture, never as a theorem.*
+
+**FS38-D1 — the period-set structure at levels 2–4. [hand + tools; de Bruijn, FS-38 phase D]**
+
+At level 2 (`P₂ = K₄ □ K₄`, the isomorphism `x + εy ↦ (y, y − x)`), every proper 4-colouring is periodic under a
+nonzero element `δ = δx + εδy` with `δy ≠ 0`: order 4 for the 144 of 576 colourings whose row set is `V₄` (`δ` the
+graph of an additive automorphism of `𝔽₄`), order 2 for the 432 whose row set is a cyclic group of order 4 (`δ` a
+single nonzero element) — proved from the classification of sharply transitive sets of `S₄` containing the identity
+(`V₄` or one of three cyclic groups of order 4). [tools, complete finite enumeration] At levels 3 and 4 the period
+structure is a complete census (4,896 colourings at level 3, period-group orders `4·3456 + 8·1152 + 16·288`; 1,179,936
+at level 4, orders `8·1154304 + 16·23616 + 32·1728 + 64·288`): every colouring has a period in each fixed `μ₃`-triple
+`2x·{1,ω,ω²}` (`x` ranging over five triples at level 4), no single element and no two of a triple are unavoidable,
+and the norm-one classes of `x` obey the `μ₃`-triple law while the others (`x ≡ 1 + πω, 1 + πω²` mod `𝔓²`) have
+counterexamples (2 of 5 triples at level 4, 8 of 21 at level 5).
+
+*Proof:* `plans/FS38-derivation.md` §D-1 ("Level 2 by hand"; the census via `periods.py`, `enum4.py`, `lawL.py`). *Proof verdict:* closes.
+
+*Rests on it:* explanatory background for §D-2(d)'s account of the 45-minimiser stabilisation at level 4; not
+consumed by any later theorem in this file or elsewhere.
+
+*Prior art:* ours — searched (the level-2 Latin-square / sharply-transitive argument, and the period-census of a
+small Cayley tower) — nearest held: none specific; zbMATH: `ab:"Latin square" & ab:"sharply transitive" & ab:"regular
+subgroup"` (0 hits), `ab:"period" & ab:"colouring" & ab:"finite abelian group" & ab:"census"` (0 hits).
+
+*Kernel:* declined — a complete finite census not consumed by any kernel theorem (Theorem D2-B supersedes it as the
+operative fact from level 5 up); not pursued.
+
+**FS38-D2-A — Hoffman-tight Cayley graphs force balanced, gap-free, `H_min`-periodic colourings. [hand; de Bruijn, FS-38 phase D]**
+
+Let `Γ = Cay(G,S)` be a `d`-regular Cayley graph on a finite abelian group `G` (`S = −S`, `0 ∉ S`) with least
+eigenvalue `λ_min`. Call `Γ` **k-tight** if `λ_min = −d/(k−1)` (Hoffman's ratio bound `α ≤ n(−λ_min)/(d−λ_min)` holds
+with equality). If `Γ` is k-tight, every proper `k`-colouring `C` satisfies: (i) every colour class has exactly `n/k`
+elements, attaining the ratio bound; (ii) every colour class's indicator lies in `span(1, E_min)` (`E_min` the least
+eigenspace); (iii) with `H_min := ⋂{ker χ : λ_χ = λ_min}` over the characters of `G`, `C` is `H_min`-periodic —
+`Forces (addCayley S) k 0 h` for every `h ∈ H_min`; (iv) `C` has no fan gap.
+
+*Proof:* `plans/FS38-derivation.md` §D-2(a), the six-line argument from the ratio bound's equality case (write `1_A =
+(a/n)·1 + z`, expand `xᵀMx = 0` against `λ_min‖z‖²`) plus Fourier inversion on a finite abelian group.
+*Proof verdict:* closes.
+
+*Rests on it:* `LEDGER.md` row 67's "Derived" clause; FS38-D2-B (the 2-adic instance); FS38-D3 (the general
+classifier and its propagation); stubs FS-41 (`forces_of_tight`) and FS-42 (5-tight quotients), both minted from this
+theorem at the FS-38 close.
+
+*Prior art:* **partly — the split the brief asks for**: (i) and (iv), the balance and gap-freedom of an extremal
+Hoffman colouring, are Blokhuis–Brouwer–Haemers 2007 Prop. 2.3, cited through `[AbiadEtAl2025]` Prop. 2.1 ("the color
+classes have equal size and every vertex is adjacent to exactly `−λ_min(G)` vertices of every colour other than its
+own"), which also names the object — a graph meeting the ratio bound is **Hoffman colorable**, its optimal colourings
+**Hoffman colorings**; the ratio bound itself is unpublished by Hoffman (`[Haemers2021]` §3: `[Hoffman1970]` is "the
+wrong reference" for it, traced instead to a c. 1974 conversation with Seidel about `[Delsarte1973]`'s
+strongly-regular clique bound; `[Lovasz1979]` Thm 9 implies it). **(ii)–(iii), the Fourier periodicity of a Hoffman
+colouring under `H_min` on an abelian Cayley graph, are ours** — searched at the FS-38 close
+(`plans/FS38-residue-tower.md` §PA: "ratio bound equality Cayley graph cosets characters", "Hoffman coloring Cayley
+graph abelian characters kernel", "chromatic number Cayley graph local ring Hoffman tight" — nothing found beyond the
+uniquely-colourable-graph line, `[KlotzSander2017]`, `[Basic2026]`) and re-searched here — nearest held
+`[AbiadEtAl2025]`; zbMATH: `ab:"Hoffman colorable" & ab:"periodic"` (0 hits), `ab:"least eigenspace" & ab:"coloring" &
+ab:"abelian group"` (2 hits, both irrelevant — link-diagram and HNN-extension colourings).
+
+*Kernel:* **stub** (FS-41, `plans/STUB-forces-of-tight.md`: `forces_of_tight`, `not_fanGap_of_tight`,
+`colorable_balanced_of_tight`).
+
+**FS38-D2-B — the 2-adic tower's 4-colourings are pulled back from level 4, for every m ≥ 5. [hand; de Bruijn, FS-38 phase D]**
+
+Let `P_m := twoAdicPlane m`, the record's ring-free `addCayley` representation of `Cay(O/𝔓^m, S_m)` (`O = ℤ₂[ω][√3]`,
+`𝔓² = (2)`; **that `twoAdicPlane m` IS `Cay(O/𝔓^m, S_m)` is [hand], three independent constructions agreeing** — the
+record's own, an independent ring-axiom build (`build/fs38-d/tower.py`, §0), and T's closed-form circle lists,
+matching at levels 4 and 5). `P_m` is 4-tight at every level `m ≥ 1` (FS38-L1 + `P₁ = K₄`), with exactly 45 minimising
+characters at level 4 whose common kernel is trivial (a finite `decide`: sums of 24 fourth roots of unity). For every
+`m ≥ 5`: a character of `O/𝔓^m` is either primitive with `|λ| < 2^{m−1}` (FS38-L2–L3) or a pullback of a level-`(m−1)`
+character with eigenvalue `2λ' ≥ −2^{m−1}`, equality iff the level-`(m−1)` character minimises; hence `λ_min(P_m) =
+−2^{m−1}` and the minimisers of `P_m` are exactly the pullbacks of the 45 minimisers of `P₄`, so `H_min(P_m) =
+𝔓⁴/𝔓^m`. By FS38-D2-A(iii): **every 4-colouring of `P_m` is `𝔓⁴`-periodic**, `Forces (twoAdicPlane m) 4 x y ↔ x − y ∈
+𝔓⁴` and `Separated (twoAdicPlane m) 4 x y ↔ y − x ∈ S_m + 𝔓⁴`, for every `m ≥ 5`; the tower's colouring space is
+exactly `P₄`'s (1,179,936 colourings); the forcing lives in no natural proper subgroup (18 sub-Cayley graphs of `P₅`
+down to index 2 are all free at `(0,4)`, verified colourings) and is an extremal property of the whole Cayley graph,
+transferring freeness only to any finite chunk that maps into it — never forcing.
+
+*Proof:* `plans/FS38-derivation.md` §D-2(c) (Theorem D2-B and its induction) and corollaries (1)–(6).
+*Proof verdict:* closes.
+
+*Rests on it:* `LEDGER.md` row 67 in full; the m = 4, 5 base cases are already **kernel** independently
+(`twoAdicFour_forces_iff`, `twoAdicFive_forces_iff` — `Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`), so
+this theorem's own first two instances were kernel-checked before the hand proof of the general case existed; stub
+FS-42 (5-tight quotients) cites row 67 directly; row 66's `not_forces_of_fanGap`-style consumers at other primes are a
+different mechanism (slack, not tight) and do not rest on this theorem.
+
+*Prior art:* ours — the tower's spectra alone are prior art in listing/read form (`[MMST1998]`, read in full
+2026-09-16: Thms 2.1, 2.3, 2.9 give the degree and the inherited eigenvalues of an inert tower over `ℤ/p^r` for
+**odd** primes `p`, nothing for `p = 2` and no colouring value for any level); the propagation to a forced-set
+characterisation, the colouring-space finiteness, and the extremality transfer are not found — nearest held
+`[MMST1998]`; zbMATH: `ab:"eigenvalue" & ab:"tower" & ab:"chromatic number"` (0 hits), `ti:"period" & ti:"colouring" &
+ab:"Cayley graph" & ab:"quotient"` (0 hits); positive control on the search mechanics: `ti:"finite Euclidean graphs
+over rings"` returns exactly `[MMST1998]` (1 hit).
+
+*Kernel:* **stub** (FS-41; the base cases m = 4, 5 are independently kernel already — see "Rests on it" — and the
+general induction over FS38-L1–L3 plus FS38-D2-A is the theorem `forces_of_tight`'s consumer, not separately stubbed).
+
+**FS38-L1 — tightness (and slackness) propagate up a level map with onto, constant-size fibres. [hand; de Bruijn, FS-38 phase D]**
+
+If `S_{m+1} → S_m` is onto with fibres of size two, a character `χ` of `O/𝔓^m` pulled back to level `m+1` has
+eigenvalue `2λ_χ`, and `d_{m+1} = 2d_m`. So if `P_m` is 4-tight, `λ_min(P_{m+1}) ≤ 2λ_min(P_m) = −d_{m+1}/3`; since
+`P_{m+1}` is 4-colourable (pull back any colouring of `P_m`), Hoffman's bound gives `≥`, so `P_{m+1}` is 4-tight. With
+`P₁ = K₄` 4-tight (`λ_min = −1 = −3/3`), **every level `m ≥ 1` is 4-tight, balanced, gap-free, with no solver.** The
+same one-line computation shows `λ_min/d` is non-increasing under pullback, so **slackness propagates up too**: a
+tower whose level one is slack is slack at every level.
+
+*Proof:* `plans/FS38-derivation.md` §D-2(c) Lemma 1. *Proof verdict:* closes.
+
+*Rests on it:* FS38-D2-B's induction; FS38-D3's general-tower restatement of the same argument (the hypothesis
+"surjective level maps, constant fibre size" generalised off the 2-adic case); `LEDGER.md` row 67's "tightness and
+slackness both propagate up a tower".
+
+*Prior art:* ours — searched at the FS-38 close ("nothing on tightness propagating up a tower of quotients `O/𝔓^m`",
+`plans/FS38-residue-tower.md` §PA) and re-searched here — nearest held `[MMST1998]` (the spectra of the tower, not the
+propagation argument); zbMATH: `ab:"tight" & ab:"eigenvalue" & ab:"periodic coloring"` (0 hits), `ab:"chromatic
+number" & ab:"local ring" & ab:"Cayley graph"` (0 hits).
+
+*Kernel:* with FS38-D2-A's stub (FS-41) — the pulled-back-eigenvalue computation is a short character-sum lemma over
+`AddChar`, not separately stubbed.
+
+**FS38-L2 — the primitive-character bound. [hand; de Bruijn, FS-38 phase D]**
+
+For `m ≥ 2` and `χ` a character of `O/𝔓^m` nontrivial on the top fibre `𝔓^{m−1}/𝔓^m ≅ 𝔽₄`: pairing the two lifts `s₀,
+s₀(1 + π^{m−1})` of each `s̄ ∈ S_{m−1}` gives `λ_χ = 2·Σ{χ(s₀) : s̄ ≡ a₀ (mod 𝔓)}` for the unique `a₀ ∈ 𝔽₄` with
+`ψ(a₀) = 1` (`ψ(t) := χ(π^{m−1}t)`, a nontrivial character of `(𝔽₄,+)`), a sum of `2^{m−2}` roots of unity, so `|λ_χ|
+≤ 2^{m−1}`, **with equality only if `χ` is trivial on `a₀·M_m`** (`M_m := ⟨t − 1 : t ∈ S_m^{(1)}⟩`, the norm-one units
+of `O/𝔓^m` congruent to 1 mod `𝔓`). If `M_m ⊇ 𝔓^{m−1}/𝔓^m`, equality forces `χ` trivial on `𝔓^{m−1}` — a
+contradiction; **so every primitive character has `|λ_χ| < 2^{m−1}`, given that hypothesis on `M_m`** (supplied by
+FS38-L3 for `m ≥ 5`).
+
+*Proof:* `plans/FS38-derivation.md` §D-2(c) Lemma 2. *Proof verdict:* closes.
+
+*Rests on it:* FS38-D2-B's induction (the "primitive, hence strictly smaller" branch); consumes FS38-L3's `M_m ⊇
+𝔓^{m−1}/𝔓^m` for `m ≥ 5`.
+
+*Prior art:* ours — a character-sum bound tied to the specific unit-vector-generated subgroup `M_m`, sharper than
+and different in kind from the uniform Weil/Kloosterman bound (`[MMST1998]`, `[Weil1948]`: every character bounded by
+`2√Q` uniformly) — this bound is conditional on `M_m`'s size and is what makes the *exact* stabilisation at level 4
+provable rather than merely asymptotically bounded — nearest held `[MMST1998]`; zbMATH: `ab:"primitive character" &
+ab:"local ring" & ab:"eigenvalue bound"` (0 hits), `ab:"norm one units" & ab:"additive subgroup"` (0 hits).
+
+*Kernel:* declined — a finite-ring character-sum computation specific to this tower; not separately worth a stub (the
+general theorem `forces_of_tight`, FS-41, does not need this instance; only the 2-adic application, FS38-D2-B, does,
+and that application is priced together, not separately).
+
+**FS38-L3 — the elementary-divisor certificate: `𝔓⁴ ⊆ M` and `𝔓³ ⊄ M`. [hand + tools; de Bruijn, FS-38 phase D; re-verified on a second code path on the advisor Poros's audit ask]**
+
+Let `U₁` be the norm-one units of `O` congruent to 1 mod `𝔓`, `M := ℤ₂-span{t − 1 : t ∈ U₁}`. The image of `M` in
+`O/𝔓^m` is contained in `M_m` (FS38-L2's subgroup) for every `m` (only this direction is used or claimed — no
+surjectivity of `U₁ → S_m^{(1)}`). [tools, exact integer arithmetic, independently re-verified on a second code path]
+Four explicit elements `u ∈ ℤ[ω,√3]`, each `≡ 1 (mod 𝔓)` of odd rational norm, give vectors `t − 1` (`t = u/ū`) whose
+ℤ-span has 2-adic elementary divisors `1, 2, 4, 4`; since `O ≅ ℤ₂⁴` in this basis and the rational norms are 2-adic
+units, **`𝔓⁴ = 4O ⊆ M` and `2O = 𝔓² ⊄ M`** — sharp, and located: the second code path (built independently, without
+clearing denominators) confirms `2π·O = 𝔓³ ⊄ M`, failing on the `ω` and `√3ω` directions and succeeding on `1` and
+`√3`. Consequently `[O/𝔓^m : M_m] = 32` and **`M_m ⊇ 𝔓^{m−1}/𝔓^m` for `m = 5,6,7,8`, not for `m = 3,4`** (computed at
+levels 4–8 on both code paths).
+
+*Proof:* `plans/FS38-derivation.md` §D-2(c) Lemma 3 (the certificate) and the following paragraph, "Re-verified by a
+second code path". *Proof verdict:* closes.
+
+*Rests on it:* FS38-L2 (supplies the hypothesis FS38-L2 needs, at `m ≥ 5`); FS38-D2-B's induction — this
+certificate is the reason the stabilisation happens at level 4 and not earlier, and everything for `m ≥ 9` rests on
+this receipt alone (per the narrative's own scepticism note at the file's end) plus the level-4 spectrum.
+
+*Prior art:* ours — an explicit elementary-divisor computation on the norm-one units of `ℤ₂[ω][√3]` congruent to 1
+mod `𝔓`; not found. Distinct from `[Fischer1990b]`'s prime-inversion question (whether `1/p` lies in the unit-vector
+ring `ℤ[U]` at all, G55) — this is a sharper, exact 2-adic-index question inside a ring already known to contain `1/2`
+— nearest held: none specific; zbMATH: `ab:"Smith normal form" & ab:"norm one units"` (0 hits), `ab:"unit group" &
+ab:"quotient" & ab:"norm one" & ab:"lattice"` (0 hits).
+
+*Kernel:* priced — the narrative's own closing note: "a 4×4 determinant over `ℤ[ω, √3]`: kernel-able by
+`decide`/`norm_num`"; not attempted; folds under FS-41's stub if FS38-D2-B's induction is pursued in full, not
+separately stubbed.
+
+**FS38-D3 — the tight/slack classifier propagates up a tower, and no usable prime above 3 is tight at any k ≤ 7. [derived, from FS38-L1 generalised + FS38-D2-A; de Bruijn, FS-38 phase D, with T and Poros on the Weil-cutoff closure]**
+
+For a tower `Cay(G_m, S_m)` whose level maps `S_{m+1} → S_m` are onto with constant fibre size: k-tightness of level
+one propagates to every level (FS38-L1's argument in general form), carrying with it gap-freedom and
+`H_min`-periodicity of every k-colouring (FS38-D2-A); slackness propagates too. The sign of `λ_min + d/(k−1)` at level
+one classifies the tower — zero is tight, negative is slack — and **this is the correct one-line form of `CLAUDE.md`
+G54**: a residue plane seals a field's pair compulsions at k colours when it is slack (gap ⇒ free, kernel, row 66) and
+forces them when it is tight (FS38-D2-A); "no gap at level one" is not the hypothesis that propagates ("gap-freedom
+above level 2 is not inherited from level one by any local mechanism", since the clique number drops to 3 from level 3
+on). [tools, exact character sums, `tightsweep.py`] Computed: tight at 2 (k=4, this file) and at 3 (k=3, the rhombus,
+row 58); slack at 7 (k=4), 11, 19, 23 (k=5), 83 (k=6).
+
+**No usable prime plane above 3** (`p ∈ {7,11,19,23,31,43,47,59,67,71,79,83,103,107}`, `p ≡ 3 mod 4`, `p ≤ 149`) **is
+k-tight for any k ≤ 7** (closed by T and Poros, the same day, via the Weil cutoff): tightness at `k` needs
+`(p+1)/(k−1) ≤ 2√p`, which holds only for `p ≤ 13, 31, 61, 97, 139` at `k = 3,4,5,6,7`, and over the committed table
+`d/|λ_min|` is integral only at `p = 3` (exactly 2.000000), with `p = 31` the nearest miss at `k = 4` (margin
+`+4.4·10⁻⁵`, the last prime the cutoff could have allowed) and `p = 23` next (`+0.0148` at `k=4`); two scope riders —
+`k ≤ 7` only, and only the usable primes in the committed table.
+
+[tools, exact, solver-free, two engines as a control only] **The 3-adic instance**: `Cay((ℤ/3^m)², {a²+b²=1})` at
+three colours is 3-tight at levels 1–4 (`λ_min = −2,−6,−18` against `d = 4,12,36`, exactly `−d/2`), four minimising
+characters throughout, `H_min = 3·(ℤ/3^m)²` from level 2 (confirmed to level 3 on an independent construction), so
+**every 3-colouring of `UD(ℤ/9,2)` is 3-periodic** — a prediction met with no solver by FS38-D2-A's mechanism; the ℤ/9
+asks were run only as a control on the corollary (all eight nonzero fibre differences refused at three colours on two
+engines, CaDiCaL and Glucose, agreeing; the valuation-0 non-edge control free), never as its test.
+
+*Proof:* `plans/FS38-derivation.md` §D-3 (the mis-posed-question correction and items 1–3) and the registered
+predictions P-D2 and P-D5 (both closed the same day). *Proof verdict:* closes.
+
+*Rests on it:* `CLAUDE.md` G54 (this is its correct restated form, per the narrative's own words); `LEDGER.md` row
+67's "classifier" clause; stub FS-42 (5-tight quotients), whose own §2 cites P-D5 verbatim as the reason a tight
+quotient of a 6-open plane is expected to be rare; FS70-T9 (a different milestone's application of the same
+tight/slack mechanism to CM lattices over ℚ(√3,√5)) is a sibling instance, not a consumer.
+
+*Prior art:* partly — the Weil/Kloosterman eigenvalue bound is classical (`[Weil1948]`, `[MMST1998]`); this file's
+contribution is turning it into an exhaustive tightness sweep with exact margins (ours); the 3-adic tower's tightness
+and `H_min` are ours, checked against no prior source; the classifier itself (tight ⇒ forced, slack ⇒ gap-permitted,
+both propagate) restates FS38-D2-A/FS38-L1, already scored there — nearest held `[MMST1998]`, `[Weil1948]`; zbMATH:
+`ab:"Kloosterman" & ab:"Hoffman bound" & ab:"tight"` (0 hits), `ab:"finite Euclidean graph" & ab:"chromatic"` (0 hits;
+positive control on the API's mechanics, `ti:"finite Euclidean graphs over rings"`, returns exactly `[MMST1998]`, 1
+hit, confirming the two zero-hit queries are genuine negatives and not a broken query).
+
+*Kernel:* declined — the Weil-cutoff sweep and the 3-adic control are exact finite computations consumed as a reading
+(G54), not currently the target of any stub; the general classifier's kernel form is FS-41/FS-42's territory (already
+named under FS38-D2-A).
+
+## Conjectures surfaced, not claimed (the FS-71 index)
+
+- **D-4 — why 11 is slack: a uniformly gapped 5-colouring?** `plans/FS38-derivation.md` §D-4: whether the maximum
+number of simultaneously gapped vertices in a 5-colouring of `UD(𝔽₁₁,2)` reaches all 121 — the strongest form of
+slackness. **Not derived, stalls at:** the cardinality ask (121 selector variables) did not terminate in an hour on
+either of two engines; the file's own words: "not needed for any theorem". Not a theorem; not filed to `LEDGER.md` §
+B.
+
+## Kernel decisions, summarised (the FS-71 index)
+
+| theorem | decision |
+|---|---|
+| FS38-D2-A | **stub** (FS-41, `plans/STUB-forces-of-tight.md`) |
+| FS38-D2-B | **stub** (FS-41); base cases m = 4, 5 already kernel independently (`Instances/TwoAdicFour.lean`, `Instances/TwoAdicFive.lean`) |
+| FS38-L1 | with FS38-D2-A's stub (FS-41), not separately stubbed |
+| FS38-L2 | declined — finite-ring character-sum computation, not separately worth a stub |
+| FS38-L3 | priced — "kernel-able by `decide`/`norm_num`" (a 4×4 determinant); not attempted |
+| FS38-D1 | declined — complete finite census, not consumed by any kernel theorem |
+| FS38-D3 | declined — exact finite computations (G54's reading); kernel form is FS-41/FS-42's territory |
 
 ## 0. Inputs, verified before use (independent construction; a control, not the record's code)
 
