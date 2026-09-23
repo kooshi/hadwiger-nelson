@@ -1,0 +1,22 @@
+  [ok ] de Grey P_2 = 2 Lambda (fs73_screen census)  {'free': 0, 'torsion': [2, 2, 2, 2]}, exact
+  [ok ] de Grey P_4 = 4 Lambda (fs73_screen census)  {'free': 0, 'torsion': [4, 4, 4, 4]}, exact
+  [ok ] de Grey P_6 = 2 Lambda (fs73_screen census)  {'free': 0, 'torsion': [2, 2, 2, 2]}, exact
+  [ok ] de Grey P_8 = 8 Lambda (fs73_screen census)  {'free': 0, 'torsion': [8, 8, 8, 8]}, exact
+  [ok ] de Grey N = 8: no gapped colouring (Harder + T6)  UNSAT
+  [ok ] L1 at N = 5: a gapped colouring (T6 instance), gap read from the colouring  SAT
+  [ok ] kper_k(k = 4) = fs73_screen kper on a de Grey N = 8 colouring  {'free': 0, 'torsion': [2, 8]}
+  [ok ] kper_k at k = 5 on a four-colouring (colour 4 unused) is 0  []
+  [ok ] break = no break: de Grey N=4 plain k=4  SAT / SAT
+  [ok ] break = no break: de Grey N=5 plain k=4  UNSAT / UNSAT
+  [ok ] break = no break: de Grey N=8 gap k=4  UNSAT / UNSAT
+  [ok ] break = no break: L1 N=5 gap k=4  SAT / SAT
+  [ok ] break = no break: de Grey N=4 sep 2 k=4  SAT / SAT
+  [ok ] break = no break: de Grey N=4 gap k=5  SAT / SAT
+  [ok ] break = no break: Q(sqrt11) shape N=7 plain k=3  UNSAT / UNSAT
+  [ok ] the comparison saw both outcomes (a SAT and an UNSAT case)  {'de Grey N=4 plain k=4': 'SAT', 'de Grey N=5 plain k=4': 'UNSAT', 'de Grey N=8 gap k=4': 'UNSAT', 'L1 N=5 gap k=4': 'SAT', 'de Grey N=4 sep 2 k=4': 'SAT', 'de Grey N=4 gap k=5': 'SAT', 'Q(sqrt11) shape N=7 plain k=3': 'UNSAT'}
+  -- plants
+  [ok ] plant pin_prec fires (the unsound break refuses a colourable quotient; the comparison sees it)  UNSAT / SAT
+  [ok ] plant kper_skip_unused fires (KPer no longer 0)  {'free': 0, 'torsion': [2, 2, 8, 8]}
+  [ok ] plant gap_pin_clash fires (L1 gap refused)  UNSAT
+SELF-TEST PASSED
+EXIT 0
