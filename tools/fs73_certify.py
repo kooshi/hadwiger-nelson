@@ -412,6 +412,65 @@ def cmd_emit(target, R, budget):
     return 0
 
 
+def cmd_trim(target, R):
+    """shrink OUT/witness.lrat.gz to the additions the empty clause's derivation reaches (backward over the hints), in their original
+    order, with no deletion lines: every kept addition's hints are kept or original clauses, so the trimmed file is again an LRAT proof
+    of the same CNF.  The original is replaced only after the standalone checker (tools/fs73_cert_check.py) certifies the trimmed file."""
+    lat, r, T = S.degrey_setup()
+    delta = S.parse_target(lat, target)
+    od = outdir(delta, R)
+    src = os.path.join(od, 'witness.lrat.gz')
+    W = json.load(open(os.path.join(od, 'witness.json')))
+    ncl = len(W['points']) + 4 * (len(W['unit_edges']) + 1) + len(W['pin_clique'])
+    hints, empty = {}, None
+    with gzip.open(src, 'rb') as f:
+        for line in f:
+            t = line.split()
+            if not t or t[1] == b'd':
+                continue
+            z = t.index(b'0', 1)
+            cid = int(t[0])
+            hints[cid] = np.array([int(x) for x in t[z + 1:-1]], dtype=np.int64)
+            if z == 1:
+                empty = cid
+                break
+    assert empty is not None, 'no empty clause in the proof'
+    need, stack = {empty}, [empty]
+    while stack:
+        c = stack.pop()
+        for h in hints[c].tolist():
+            if h > ncl and h not in need:
+                need.add(h)
+                stack.append(h)
+    tmp = os.path.join(od, 'witness-trim.lrat.gz.tmp')
+    kept = 0
+    with gzip.open(src, 'rb') as f, gzip.GzipFile(tmp, 'wb', compresslevel=9, mtime=0) as g:
+        for line in f:
+            t = line.split()
+            if not t or t[1] == b'd':
+                continue
+            if int(t[0]) in need:
+                g.write(line)
+                kept += 1
+                if int(t[0]) == empty:
+                    break
+    print(f'trim: {len(hints)} additions -> {kept} reachable from the empty clause (id {empty}); original clauses {ncl}', flush=True)
+    chk = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'fs73_cert_check.py'), os.path.join(od, 'witness.json'), tmp],
+                         capture_output=True, text=True)
+    print(chk.stdout.strip(), flush=True)
+    assert chk.returncode == 0 and chk.stdout.startswith('CERTIFIED'), 'the trimmed proof is not certified: the original is kept'
+    full_bytes = os.path.getsize(src)
+    os.replace(tmp, src)
+    W['lrat_trimmed'] = {'additions_before': len(hints), 'additions_after': kept, 'gz_bytes_before': full_bytes,
+                         'gz_bytes_after': os.path.getsize(src),
+                         'how': 'backward reachability over the hints from the empty clause; deletion lines dropped; order kept'}
+    with gzip.open(src, 'rb') as f:
+        W['lrat_sha256'] = hashlib.sha256(f.read()).hexdigest()
+    json.dump(W, open(os.path.join(od, 'witness.json'), 'w'), separators=(',', ':'))
+    print(f'trim: {full_bytes} -> {os.path.getsize(src)} gz bytes; witness.json updated', flush=True)
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if len(a) < 2 or a[1] != 'K':
@@ -426,6 +485,8 @@ def main():
         return cmd_delete(tg, R, budget)
     if a[0] == 'emit':
         return cmd_emit(tg, R, budget)
+    if a[0] == 'trim':
+        return cmd_trim(tg, R)
     print(__doc__)
     return 2
 
