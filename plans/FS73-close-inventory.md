@@ -35,6 +35,51 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
   `[ChandgotiaPakTassy2019]`, `[MooreNewman2000]`, Liu's 2008 survey, Gao–Jackson–Krohne–Seward). § Delegation unchanged. ⏳ the
   fact audit and the size check run last.
 
+**The first close planner stopped here (2026-09-23, near its ~450k-token budget), at a clean boundary: §1–§4 done and committed
+(`2cda3170`, `7c459f86`, `ebe1c597`). A successor continues with §3's three sweeps, then §5–§9, in this order:**
+1. **Dangling addresses to create first** (committed text already points at them): `plans/STUB-algebraic-explanation.md` (Kooshi's
+   milestone: the K half of `F = 8Λ` — leads B's tight-prime reading now in G54, `Λ = (1/9)O_E`, `O_E/8O_E` against row 67's
+   tower, Baxter's height on hexagonal fabric, `[MooreNewman2000]`; the ℚ(√11) half is derived, T25), `plans/STUB-three-colour-
+   criterion-kernel.md` (T22's ⟹ and a box-LP / relation-form certificate checker over ℚ with its soundness theorem; smallest
+   instance T41's 36 vectors, then T39; FS-60's Θ route), `data/fs73/table/CORRECTIONS.md` (§5's four stale rows; `report`
+   regenerates TABLE.md from rows, so the corrections live beside it and TABLE.md gains a pointer paragraph).
+2. **§3's sweeps** into a new §R close section of `plans/FS73-rigidity-dichotomy.md`. The first planner's notes for them:
+   *paid* — G68 (gap finder first; the fixed-prime lemma), G21 (H1-found vs H1: the census design), G27 (the Galois point group
+   gave `v`'s orbit its rank 4), R3/T10 (membership), G65, G51, FS58-T4 (R1 to the kernel); *missed* — G21 itself, twice (P2's
+   `N ≤ 20` and P2b's `N ≤ 30` period caps were not read as the enumeration's measure); **G62/G7: `L21cc6506`'s unit vectors are
+   five rotated copies of the rational pattern (`U = B5·U_R`), a five-layer twisted multilayer — G62's "name every bilayer by its
+   rotation and decide layer by layer" predicted the product route E found, and nobody extracted it** (Coxeter's float tree stalled
+   on the 1,764 lifts); G65 (the owner's "smallest refusing ball" walked into its hardness band). *§PA sweep* — the gate named
+   Chandgotia's height functions for four-cycle-free targets and Moore–Newman's four-colour height, and did not extract "three
+   colours have heights, four do not" into §C; the competitors found it themselves → now G71. *Conjecture sweep* — done in
+   `plans/FS73-derivation.md` §8. *Forward propagation of G71*: add a provisional-bearings line to STUB-biquadratic-table (χ = 3
+   against 4 decided by `Θ₃`), STUB-last-lattice (four colours: no `Θ`; L3's gap-free looseness; the Kempe-period criterion),
+   STUB-quadratic-witnesses-kernel (the `Θ` certificate replaces LRATs: T26, T39), STUB-three-colour-classification, STUB-tight-
+   product-colourings (plus §8's FS-67 note), and the FS-59 rewrite.
+3. **§5** — the plan's edits (T10.2's wording; §0's looseness criterion and consequence 5 closed; §C's "depth 6 (8/3)", "K may be
+   the instance under test", "rank 2 at K" superseded; P1d′ outcome "P = F certified"; P-R1 per Kempe component; P4's "one ρ₁₅
+   word" = KR6; P1e's first step; P1f's W′ column; T9 assumes integrality) and B's four (in phase-P2.md "proposed plan edits"),
+   FS70-derivation T5's prose (3 splits in ℚ(√5,i)), P4's "2L3-periodic" note, the prediction table (already scored in rows 78–79;
+   write it once in §R, with V2's one retraction — a planted fault that could not fire — in the tally beside Poros 1, de Bruijn 1,
+   Coxeter 0 and the plan stage's Poros 4 / planner 4).
+4. **§6** — owner errors 1–7 and the agents' slips into §R; `plans/PROTOCOL-competitor-and-advisor.md` (working files and the
+   advisor's record in scratch until hand-back; the advisor reads exactly the two working files; competitors do not open each
+   other's file before hand-back; this run's outcomes); `CLAUDE.md` § Building's kill rule gains its ninth instance (killing a
+   `flock` wrapper orphaned a child holding the lock ~17 min — kill the process group, verify against the work); P2's quotient
+   code takes the lock itself (a `flock` wrap deadlocks) and writes CNFs into B's scratch — note in the tool's docstring or §R.
+5. **§7** — the prior-art queries (zbMATH API, recorded in §R): `8/9` or `v` as a forced pair over K in Polymath16/Parts;
+   `χ(ℚ(√167)²) ≥ 4` in print; the three-colour criterion for abelian Cayley graphs with arbitrary finite generating sets and its
+   rank-1 case; decidability of 4-colourability of Cayley graphs of ℤ^r; the Semantic Scholar cross-check of `[AbrishamiEtAl2025]`;
+   `[PeledSpinka2023]`'s notion (bibliography row). Mohar–Salas: declined (P4 did not use Kempe classes on tori).
+6. **§8** — new stubs: C3-aper at `k ≥ 4` (`[AbrishamiEtAl2025]` 4.6; FS-72's lattice; T30's rank-1 lab), four-colour certificates
+   and decidability (T29), KR6's four-colourability (T34), optionally the `k = 5` rigidity table (T15's pilot); banners on
+   `plans/STUB-rigidity-dichotomy.md` (closed, rows 78–79); FS-59's stub rewritten (first question answered: `χ ≥ 4`; next is five,
+   a four-colour question where no `Θ` exists; C's design rule heads R2); FS-60 and FS-67 notes; `plans/FRONTIER-STUBS.md`
+   re-ranked with a closed row for FS-73; `CLAUDE.md` § Paths forward (the open-milestones paragraph still names FS-73 next; the
+   ranked table's FS-73 row and FS-59's "nothing above three proven" are stale).
+7. **§9** — `tools/claude_md_fact_audit.py --base a640efec` and `--dupes` (was 15 runs); `CLAUDE.md` is 240,166 bytes (budget
+   275,000); the close commit; the owner pushes.
+
 ---
 
 ## 1. Results → `LEDGER.md` rows (row 78 onward) and the Frontier
