@@ -1,0 +1,4 @@
+(1, 5, 7, 10) recurrent classes 187 transient core states 0 cross edges 192
+(3, 5, 9, 10) recurrent classes 262 transient core states 0 cross edges 96
+(3, 7, 9, 10) recurrent classes 369 transient core states 504 cross edges 576
+(5, 7, 9, 10) recurrent classes 163 transient core states 0 cross edges 48
