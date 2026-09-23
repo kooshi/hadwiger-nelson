@@ -1582,4 +1582,5 @@ settled).
 | the Semantic Scholar cross-check of `[AbrishamiEtAl2025]` | Semantic Scholar citations API; OpenAlex `cites:` | Semantic Scholar 2 (`[Waite2026]`, new `[TanZhang2026]`); OpenAlex 0 for the published version. Both in `BIBLIOGRAPHY.md` |
 | `[PeledSpinka2023]`'s notion | the arXiv abstract (1808.03597) | long-range order of random proper colourings — confirmed a different notion; the bibliography row upgraded from listing to abstract |
 | Mohar–Salas 2009 | — | **declined**: P4 did not use Kempe classes on tori |
+| row 79's headline in the held threads (G49's new rule, applied at once) | grep for "3-colourable", "three-colour", "3-colouring" beside lattice, periodic, ring, distance graph or height; "height function" | nothing on the criterion: `A₂`'s unique 3-colouring by cosets, strips, the Moser spindle's minimality |
 | new in the neighbourhood | `ab:"Moser lattice"` 4 | `[Ruhland2024]` (rank-4 lattice families with unbounded unit-vector counts; `L₃` the Moser lattice), abstract read, added |
