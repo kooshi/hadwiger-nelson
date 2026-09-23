@@ -74,9 +74,9 @@ interchangeable get a value-precedence break over **all** vertices through auxil
 **Plants** (each must move the `N = 12` bed or the precedence check): `dedup_steps` (KPer rank 4 → 0), `per_sample` (a one-point
 sample accepts false periods; the descended colouring then fails its properness assertion), `kper_first` (`ℤ/2 × ℤ/8 → ℤ/2 × ℤ/4`),
 `prec_wrong` (on FS-61's `ℚ(√11)` shape at `N = 7`, whose quotient has no triangle: the faithful CNF accepts the found colouring,
-the inverted one refuses it). **Two plants first failed to fire, and that was a defect in the controls, not a pass**: `per_sample`
+the inverted one refuses it), `loop_stale` (P1d's counterexample-guided loop re-uses the previous colouring for a SAT answer; on its own bed, the `N = 4` loop seeded with FS-70's colouring, the faithful loop returns `4Λ` and the planted one trips the shrink assertion). **Three plants first failed to fire, and that was a defect in the controls, not a pass**: `per_sample`
 still ran the 64-point sampled filter, which rejects every false period by itself, and `prec_wrong` was first tested on a
-quotient with a triangle, where no precedence clause exists. Both beds were changed so the failure mode is reachable.
+quotient with a triangle, where no precedence clause exists; `loop_stale` was first driven through the Per/KPer bed, which never runs the loop. Each bed was changed so its failure mode is reachable.
 
 **Regenerate:** `python3 tools/fs73_screen.py selftest --plants` (about 1 minute) and
 `python3 tools/fs70_periodic_kempe.py selftest --plants` (about 12 minutes).
@@ -171,7 +171,17 @@ torsion orbit `(8/9)√−3` lies in that span, and `P_found / F_known ≅ ℤ²
 are 24 (one point-group orbit) of modulus `8√3/9 ≈ 1.540` in every embedding, e.g. `(−16, 8, 8, 0)`, off the `F`-plane: a forced
 one would give `F` rank 4 (P-C4's informative outcome). It is asked next.
 
-**Predictions touched.** P-C2 ("every H1-found target in the box has 2-adic depth ≥ 3 at both primes above 2, and every one
+| `v = −(4/9)(1 + √−11)` = `(−16, 8, 8, 0)`, off the `F`-plane | `R = 1.5` | 39,829 / 366,660 / 18.41 | SAT | **UNSAT** | 36.6 | empty (the pair has common neighbours; deleting each leaves the ball not 3-colourable) | **measured, pending replication** |
+
+`v = −(8/9)·(1 + √−11)/2`: `8/9` times an algebraic integer of norm 3, modulus `8√3/9 ≈ 1.540` in every embedding, one of the 24
+vectors (one point-group orbit) that are the shortest of `8Λ` off the `F`-plane. **What-if, exact, used by nothing downstream
+until both refusals replicate:** the span of the orbits of `8/9` and `v` is exactly `8Λ` (`Λ/F ≅ (ℤ/8)⁴`), which equals `P_found`.
+If both replicate, **`F_known = F = P = P_found = 8Λ`**: C3-inherit holds at de Grey's lattice for every `δ` (§0 consequence 1,
+with the refusals and the exhibited periodic colourings as its certificates), and every proper four-colouring of `Cay(Λ, U)` is
+`8Λ`-periodic. Harder's `8/3` is one element of this `F`.
+
+**Predictions touched.** P-C4 (Poros: `F_known` rank 2 and nothing forced off the plane): **lost, if `v` replicates** — its
+informative outcome ("a forced vector off that plane, giving F rank 4 … C3 at K trivial, fallback (b) at once"). P-C2 ("every H1-found target in the box has 2-adic depth ≥ 3 at both primes above 2, and every one
 asked is forced"): `8/9` has depth 3 at both primes (2 splits in `E`, `e = 1`), as predicted; its refusal, if it replicates, is
 the second half's first instance. P-C4 (`F_known` rank 2, nothing forced off the plane): `F_known` stays rank 2 with `8/9`; the
 off-plane asks decide the rest.
@@ -197,3 +207,40 @@ off-plane asks decide the rest.
   - no at-most-one clauses.
 - **Rebuild and re-ask:** `python3 tools/fs73_screen.py confirm K --key force:32,-16,-16,-8:R1.5 --solver cadical` rebuilds the
   CNF from this recipe and asserts that its sha256 equals the recorded one.
+
+### The replication recipe for `v = −(4/9)(1 + √−11)`
+Identical to `8/9`'s, except the pair: the points `∓(2/9)(1 + √−11)` (lattice coordinates `±(−8, 4, 4, 0)`, both in the ball), and
+these two have common neighbours in the ball (so this file pins one of them to colour 2 in the forcing CNF, a sound symmetry break,
+since a common neighbour's colour differs from both pinned colours). Rebuild and re-ask:
+`python3 tools/fs73_screen.py confirm K --key force:-16,8,8,0:R1.5 --solver cadical`.
+
+---
+
+## P1d′ — the period extension at K: does `P_found` stabilise?
+
+`python3 tools/fs73_screen.py periods K --resume [--only …] [--past-plateau]` → `data/fs73/census/K-periods.jsonl` (one
+stabilisation row per period; `P_found` recomputed from the colourings' rows every time, never stored alone).
+
+| N | 16 | 14 | 15 | 20 | 21 | 22 | 24 |
+|---|---|---|---|---|---|---|---|
+| plain ask | SAT | SAT | **UNSAT** | SAT | **UNSAT** | SAT | SAT |
+| `P_N` (exact) | `8Λ` | `2Λ` | — | `4Λ` | — | `2Λ` | `8Λ` |
+| `P_found` after | `8Λ` | `8Λ` | (no step) | `8Λ` | (no step) | `8Λ` | `8Λ` |
+
+**The pattern:** every colouring found at a period `N = 2^a·m` (`m` odd) has period `2^min(a,3)·Λ`: the odd part never contributes
+(`N = 15`, `21` are UNSAT outright; at `14`, `22`, `20`, `24` the colourings are `2`-, `2`-, `4`-, `8`-periodic), and the 2-power
+periods stop at 8 (`P_16 = P_8 = 8Λ`, so `16Λ ⊊ P_16 = 8Λ`). If `F = 8Λ` (above), this pattern is a theorem, not a coincidence,
+and `P_32 = 8Λ` is its prediction at the next 2-power period (queued).
+
+**Decision (four parts): run past the plan's stop rule.** *Choice:* run `N = 24` and `N = 32` although the rule "unchanged across
+three consecutive colourable periods" fired at `N = 20` (16, 14, 20 unchanged; 15 UNSAT not counted). *Alternative:* stop at the rule
+and declare outcome (b), a counterexample candidate. *Why:* the rule's defect is G21's — periods whose 2-part is at most 4 (14, 20,
+22) cannot move `P_found = 8Λ`'s 2-adic structure at all, so a plateau over them measures the enumeration, not the lattice; only a
+new 2-power period (32) or a new 8-multiple (24) can. The budget is unchanged (8 core-hours for P1d′). Approved by the PO.
+*Confidence:* high.
+
+**A fix, with its mechanism.** `per()` first verified every candidate period with a full `O(n)` pass; on a colouring whose period
+group has index 4 (40,000 of 160,000 classes are periods at `N = 20`) that is 40,000 full passes, 215 s per colouring (profiled).
+The periods form a group, so a candidate already in the span of fully verified periods is a period by closure; only candidates that
+would enlarge the span now get a full pass. The P1b self-test and all plants pass on the new code. The slow run was stopped by pgid
+(verified: process gone, rows file static over 10 s) and resumed from its rows.

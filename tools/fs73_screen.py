@@ -265,17 +265,19 @@ class PColour:
             D = np.mod(digs[S][None, :, :] + cd[:, None, :], Q.mods)
             ok = (col[(D * Q.pw).sum(axis=2)] == col[S][None, :]).all(axis=1)
             surv += cand[lo:lo + 20000][ok].tolist()
-        periods = []
-        for t in surv:
+        # the periods form a group: a candidate already in the span of FULLY verified periods is a period by closure, so only a
+        # candidate that would enlarge the span gets the O(n) full pass (the full pass is what the plant per_sample skips)
+        H = hnf(list(Q.W), Q.r)
+        X = Q.rep(np.array(surv, dtype=np.int64)) if surv else np.zeros((0, Q.r), dtype=np.int64)
+        full = 0
+        for t, x in zip(surv, X):
+            if member(H, x):
+                continue
+            full += 1
             if planted('per_sample') or bool(np.array_equal(col[Q.shift(digs[t])], col)):
-                periods.append(t)
-        rows = list(Q.W)
-        H = hnf(rows, Q.r)
-        for t in periods:
-            x = Q.rep([t])[0]
-            if not member(H, x):
                 H = hnf(list(H) + [tuple(int(v) for v in x)], Q.r)
-        return H, len(periods)
+        nper = Q.n // math.prod(abs(row[next(j for j in range(Q.r) if row[j])]) for row in H) if H else 0
+        return H, nper
 
     def descend(self, W2):
         Q2 = Quot(W2, self.Q.r)
@@ -594,6 +596,8 @@ def solve(Q, U, aim='plain', target=None, budget=600, solver='kissat', heavy=Non
     rec['cpu_s'] = round((ru1.children_user - ru0.children_user) + (ru1.children_system - ru0.children_system), 2)
     rec['verdict'] = v
     rec['lock'] = bool(heavy)
+    import resource
+    rec['children_maxrss_gb'] = round(resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss / 1e6, 3)   # peak over this process's asks
     os.remove(path)
     if v != 'SAT':
         if v == 'UNKNOWN':
@@ -1194,6 +1198,18 @@ def cmd_periods_K(resume, budget_core_s=8 * 3600, only=None, stop_rule=True):
         if spent > budget_core_s:
             print(f'budget spent ({spent:.0f} s of {budget_core_s} s): stopping before N = {N}', flush=True)
             break
+        if N >= 32:
+            # the dry price: exact clause count at N, scaled by the largest measured bytes per clause of any earlier ask
+            nres = len({tuple(x % N for x in u) for u in U})
+            ncl = 4 * N ** r + 4 * (N ** r * nres // 2) + 3 * N ** r
+            meas = [(d_['children_maxrss_gb'] * 1e9 / d_['clauses']) for d_ in rows.rows.values()
+                    if d_.get('children_maxrss_gb') and d_.get('clauses', 0) > 1e6]
+            bpc = max(meas) if meas else 200.0
+            gb = ncl * bpc / 1e9
+            print(f'N = {N}: dry price {ncl:,} clauses x {bpc:.0f} bytes/clause (largest measured) = {gb:.1f} GB', flush=True)
+            if gb > 40:
+                prow.put({'key': key, 'N': N, 'colourable': 'not asked', 'note': f'priced {gb:.1f} GB > 40 GB cap', 'clauses': ncl})
+                continue
         Q = Quot(NW(N, r), r)
         if not Q.admissible(U):
             prow.put({'key': key, 'N': N, 'colourable': 'inadmissible', 'note': 'a unit vector lies in N Lambda'})
@@ -1230,6 +1246,9 @@ def cmd_periods_K(resume, budget_core_s=8 * 3600, only=None, stop_rule=True):
         if d['P_found']['rank'] == len(Fk):
             print('OUTCOME (a): rank P_found fell to rank F_known', flush=True)
             break
+        if unchanged >= 3 and not stop_rule:
+            print('the plan\'s stop rule would declare OUTCOME (b) here; continuing past it (PO ruling: a plateau over periods whose '
+                  '2-part is at most 4 measures the enumeration)', flush=True)
         if unchanged >= 3 and stop_rule:
             print('OUTCOME (b): P_found unchanged across three consecutive colourable periods, rank above F_known', flush=True)
             break
@@ -1372,6 +1391,7 @@ def selftest(plants=False):
         if not ok:
             fails.append(nm)
 
+    global COLDIR
     print('fs73_screen self-test (P1b controls)', flush=True)
     lat, r, T = degrey_setup()
     U = lat.U
@@ -1447,7 +1467,28 @@ def selftest(plants=False):
         for nm in VALID_PLANTS:
             PLANT = nm
             try:
-                if nm == 'prec_wrong':
+                if nm == 'loop_stale':
+                    # its own bed: the loop at N = 4 seeded with FS-70's colouring, rows in scratch; the plant must trip the shrink
+                    # assertion, and the faithful loop on the same bed must return P_4 = 4 Lambda
+                    PLANT = None
+                    coldir_saved, COLDIR = COLDIR, os.path.join(SCRATCH, 'bed-colourings')     # the bed writes nothing committed
+                    tmp = os.path.join(SCRATCH, f'loop-bed-{os.getpid()}.jsonl')
+                    Q4, c4 = fs70_degrey_colouring(lat, 4)
+                    G4, _, st4 = p_N(Rows(tmp), 'degrey-bed', U, r, 4, seeds=[c4])
+                    faithful = hnf(G4, r) == hnf(NW(4, r), r)
+                    os.remove(tmp)
+                    PLANT = nm
+                    try:
+                        p_N(Rows(tmp), 'degrey-bed', U, r, 4, seeds=[c4])
+                        raised = False
+                    except AssertionError:
+                        raised = True
+                    if os.path.exists(tmp):
+                        os.remove(tmp)
+                    COLDIR = coldir_saved
+                    moved = faithful and raised
+                    why = f'faithful loop returns 4 Lambda: {faithful}; planted loop raised: {raised}'
+                elif nm == 'prec_wrong':
                     PLANT = None                  # the bed: FS-61's Q(sqrt11) shape at the first N whose quotient has no triangle
                     Lq = FL.q11shape()
                     Lq.saturate('trace')

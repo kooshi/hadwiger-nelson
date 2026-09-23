@@ -15,4 +15,5 @@ fs73_screen self-test (P1b controls)
   [ok ] plant per_sample fires  raised: plant|descended: the colouring is not proper on its quotient (36 monochromatic i
   [ok ] plant kper_first fires  Per {'free': 0, 'torsion': [2, 4]}, KPer rank 4 {'free': 0, 'torsion': [2, 4]}
   [ok ] plant prec_wrong fires  bed N = 7, 2401 classes; faithful accepted True, planted accepted False
+  [ok ] plant loop_stale fires  faithful loop returns 4 Lambda: True; planted loop raised: True
 SELF-TEST PASSED
