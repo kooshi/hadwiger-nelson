@@ -1,0 +1,38 @@
+{
+ "what": "FS-73 P2b: L3e1c94c6 (FS-61, data/fs61/fields/167/lattices.jsonl) is 3-colourable by a gapped residue colouring at 23",
+ "lattice_id": "L3e1c94c6",
+ "fs61_key": "120|1,1,1,3;0,2,0,2;0,0,2,2;0,0,0,4",
+ "d": 167,
+ "M": 120,
+ "H": [
+  [
+   1,
+   1,
+   1,
+   3
+  ],
+  [
+   0,
+   2,
+   0,
+   2
+  ],
+  [
+   0,
+   0,
+   2,
+   2
+  ],
+  [
+   0,
+   0,
+   0,
+   4
+  ]
+ ],
+ "q": 23,
+ "s": 11,
+ "alpha": 14,
+ "beta": 9,
+ "unit_count": 36
+}
