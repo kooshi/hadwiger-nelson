@@ -35,8 +35,10 @@ disagreement before anything is paid for, and count the retractions — zero mea
 7. **A correction to the record earns the record's standard**: the advisor refused a competitor's claimed correction to a ledger
    result until it carried an address, and reported its own errors against itself as they were found.
 8. **Count the retractions** in the window and record them; the record keeps what was withdrawn and what killed it.
-9. **Cost.** A standing advisor is the expensive part (Kooshi, 2026-09-19: no standing Poros by default); the design is for a named
-   derivation wall, one phase, not a milestone's whole length. Every agent is one level deep — no child spawns children.
+9. **Cost and head-count.** Up to three agents at once — the working agent (de Bruijn), the competitor (Coxeter) and the advisor
+   (Poros) — every one on Opus 5.5 (Kooshi, 2026-09-23, lifting the one-at-a-time rule because Opus 5.5 is much cheaper than Fable
+   5.1 was; the 2026-09-19 "no standing Poros" rule was a cost rule under the old models). Every agent is one level deep — no child
+   spawns children.
 
 ## 2. What the advisor actually did — the review (2026-09-22)
 

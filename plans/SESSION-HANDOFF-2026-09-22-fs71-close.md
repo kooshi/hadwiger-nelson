@@ -18,8 +18,9 @@ the repository. Agent ids live in the session scratchpad, never here.*
    only if a wall is named). The Agent tool's `model: "opus"` launches Opus 5.5 (checked 2026-09-22 by asking a spawned agent for
    its model id: `claude-opus-5-5[1m]`); an omitted model inherits the session's. The theorems FS-71 filed that the stub consumes are listed in
    its bearings line.
-2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): one planner + one
-   implementer at a time, both Opus 5.5; **an agent that returns above ~500k tokens is replaced, not reused** (Kooshi, 2026-09-22:
+2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): at most three agents at
+   once, all Opus 5.5 (Kooshi, 2026-09-23 — de Bruijn, Coxeter, Poros), and for FS-73 the product owner coordinates and reviews
+   rather than contributes; **an agent that returns above ~500k tokens is replaced, not reused** (Kooshi, 2026-09-22:
    "500k-600k is still a good signal to replace rather than reuse an agent" — the rule outlives the model it was first seen on), so
    read each agent's token count on hand-back and brief a fresh one from its phase record; **no child agent spawns children — say
    so, with the reason, in every brief**; review by

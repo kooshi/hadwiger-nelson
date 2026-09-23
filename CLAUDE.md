@@ -1332,8 +1332,9 @@ mechanism that starts another agent. If the work does not fit in your context, s
 tell the session that briefed you what is left** — that is a good report, never a failure. Minted the day a planner briefed as
 "exactly one planner" delegated part of its prior-art gate to a subagent that spawned two more: three agents nobody had budgeted,
 could review, or knew existed. **Why, in two parts.** *Cost:* nested agents multiply token spend, and a milestone's staffing — at
-present one planner and one implementer, no standing advisor, an advisor only as a one-off query at a named wall, **every role on
-Opus 5.5** (Kooshi, 2026-09-22: "Opus 5.5 should be used for all purposes until further notice", a step above Opus 5 and Fable 5.1,
+present **at most three agents at once** — a working agent, a competitor and an advisor (Kooshi, 2026-09-23: "the one agent at a
+time rule is lifted, as Opus 5.5 is much cheaper than Fable 5.1 was. Now it can be up to 3 to accommodate debruijn, coxeter, and
+poros"), **every role on Opus 5.5** (Kooshi, 2026-09-22: "Opus 5.5 should be used for all purposes until further notice", a step above Opus 5 and Fable 5.1,
 which held the planner and implementer roles until then; every rule this project recorded about those models' quirks is retired,
 except one that holds for every model: an agent returning with ~500k–600k tokens of context is replaced, not reused) —
 is a budget decision Kooshi makes, which a child silently overrides by delegating. *Review:* the product owner scores work by
