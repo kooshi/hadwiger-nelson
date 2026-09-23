@@ -326,7 +326,7 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G70 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G71 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 ***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
@@ -509,7 +509,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   not**, and when an artifact and its written record disagree, suspect the newest thing in the file first. **The census's own
   instance (FS-71, row 77):** of four hand claims that had no proof on disk, the one that was wrong (M37's general-lattice bound)
   was the one stated as a bare number — a conclusion with no chain is the shape to re-derive first, and the corpus under-graded
-  its hand derivations four times for every over-grade.
+  its hand derivations four times for every over-grade. **And a periodic search measures its period cap** (FS-73, twice in one
+  milestone, row 79): ℚ(√167)'s `L3e1c94c6` read as having no periodic three-colouring because the search stopped at `N = 20` —
+  its least period is 23 — and the survivor `Ld14c588b` colours linearly with period index 1,080, past `N ≤ 30` and circular
+  `N ≤ 120`. **Read a solver's colouring before searching its periods:** one Fourier transform of FS-61's 1.47 M-point colouring
+  showed a single character of amplitude 0.74 that named the period 23 at once.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
@@ -864,7 +868,12 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   balanced, gap-free and periodic under `H_min`, and forced pairs at some depth of its tower (row 67's mechanism) — go find
   the depth. Slack: expect gaps, and with one gapped colouring the freedom of every pair above it (row 66) — ask no solver
   for forced pairs on that plane's fabric. Neither is a substitute for FS-17's ask. Killing test: a k-colouring of a tight
-  plane that is unbalanced or gapped; a slack plane every one of whose k-colourings is gap-free (the middle case).*
+  plane that is unbalanced or gapped; a slack plane every one of whose k-colourings is gap-free (the middle case).* *Reading (FS-73's implementer B, restated at the close):*
+  a full-rank forced group appears where a lattice is integral at a prime whose target is Hoffman-tight at `k` and no other prime's
+  quotient has a gap — K at 2 with four colours (`F = 8Λ`, row 78), ℚ(√11)'s `Λ₁₀` at 3 with three (`F = 3Λ`, row 79). At ℚ(√11)
+  the prime above 3 is split in `ℚ(√11, i)`, not conjugation-fixed (Poros), and `Θ₃` explains that instance (G71); the K instance
+  is unexplained (`plans/STUB-algebraic-explanation.md`). Killing test: a lattice integral at a tight prime, with no gapped
+  quotient, whose `F` is not of full rank.
 * **G55 — The unit-vector ring decides the walls, and the chain replaces the spindle. [hand, GPT Astra (OpenAI,
   2026-09-14, in conversation with Kooshi); read here and found sound; the identities verified twice in exact arithmetic —
   `reference/ChatGPT-local-global-tightness-conjecture/VERIFICATION.md`; every result below is a kernel target, FS-45–48 (Kooshi, 2026-09-14)]** Let R = ℤ[U] be the ring the unit vectors of F(i)
@@ -885,7 +894,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   virtual edge at distance 2 over any F ⊇ K is a six-chromatic unit-distance graph (the sentence is the advisor's; M49–M50
   replaced those edges one at a time; the host and the consumer are G26); its field must be 6-open (row 66), and the arena
   has no such pair. What the chain cannot do is
-  produce the five-forcer it needs. *Do: for a pair forced at δ, look for 1/δ as a sum of unit vectors before adjoining any
+  produce the five-forcer it needs. **Over K a second four-colour forced pair is known, at `8/9 = −(v + v̄)`** (row 78): `9/8 ∉ ℤ[U]`
+  over K, so no chain contradicts χ(K²) = 4, but its spindle lands straight in the 6-open K(√7), since `4(8/9)² − 1 = 175/81 =
+  (5√7/9)²`. *Do: for a pair forced at δ, look for 1/δ as a sum of unit vectors before adjoining any
   radical — the closer stays in F, at most m(n − 1) + 1 vertices. Killing test: chained copies of a forced pair with 1/δ ∈ R
   that are k-colourable (a defect in the proof); or the 8/3 forcer's one solver refusal failing to replicate, on which the
   five-colour consequences over K rest.*
@@ -1030,12 +1041,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   and report c = α/q^{3/2} beside every found set, marked found or exact. Killing tests: a six-colouring of a window member
   (the wall); an independent set of ⌈Q²/6⌉ at one (W_f); a colouring of ℚ(√167)² with fewer than six colours (the conjecture
   above five; five there is FS-59's next question).*
-* **G60 — Fractional colourings reach fields the residue method cannot, and stop where a residue plane is fractionally small. [hand, from `[MatolcsiEtAl2025]`; cert; measured; one reading]** Every congruence between subsets of `F²` is an isometry of `F²`, so the blow-up of a finite `H ⊂ F²` along a Følner set of the (solvable) group its congruences generate stays in `F²`, and **χ(F²) ≥ ⌈χ_gf(H)⌉** (`plans/FS56-field-blowup.md`) — a lower bound that uses no residue map, no additive structure and no forced pair; instance: χ_f(K²) = 4. Its **ceiling** is `min(4.36, χ_f` of every usable residue plane`)` — 3 at an `𝔽₃` place, 3.5 at `𝔽₇` — so it can never prove more than five colours. **The reading** (R-C; killing test in FS-58): its ratio-bound shadow on pieces `Cay(ℤ⁴, W)` tends to the least local character mean over the places where the unit circle is compact (real: `J₀`'s −0.40276; `𝔽₃` −1/2; `𝔽₇` −0.5617; `𝔽₂₃` −0.3317), the split places controlled by the weights, so a real field whose compact places all read above −1/2 — ℚ(√167) first — would have χ_f ≥ 3.48. What reached four colours over real quadratic fields was not this route but finite refutations (G61, row 73). *Do: read the cap first — a usable plane with χ_f at or below the target kills the route by theorem; where every usable plane's χ_f sits above it (no `𝔽₃`, no `𝔽₇` place), price a finite `H` with χ_gf(H) > k − 1 before any forced-pair route: it proves k with no refusal, and FS-56's LP and checker exist. Killing tests: a real field whose compact places all read above −1/2 with a 3-colourable plane (the reading); a finite `H ⊂ F²` with χ_gf(H) above a usable plane's χ_f (a defect, never a finding).*
+* **G60 — Fractional colourings reach fields the residue method cannot, and stop where a residue plane is fractionally small. [hand, from `[MatolcsiEtAl2025]`; cert; measured; one reading]** Every congruence between subsets of `F²` is an isometry of `F²`, so the blow-up of a finite `H ⊂ F²` along a Følner set of the (solvable) group its congruences generate stays in `F²`, and **χ(F²) ≥ ⌈χ_gf(H)⌉** (`plans/FS56-field-blowup.md`) — a lower bound that uses no residue map, no additive structure and no forced pair; instance: χ_f(K²) = 4. Its **ceiling** is `min(4.36, χ_f` of every usable residue plane`)` — 3 at an `𝔽₃` place, 3.5 at `𝔽₇` — so it can never prove more than five colours. **The reading** (R-C; killing test in FS-58): its ratio-bound shadow on pieces `Cay(ℤ⁴, W)` tends to the least local character mean over the places where the unit circle is compact (real: `J₀`'s −0.40276; `𝔽₃` −1/2; `𝔽₇` −0.5617; `𝔽₂₃` −0.3317), the split places controlled by the weights, so a real field whose compact places all read above −1/2 — ℚ(√167) first — would have χ_f ≥ 3.48. What reached four colours over real quadratic fields was not this route but finite refutations (G61, row 73). *Do: read the cap first — a usable plane with χ_f at or below the target kills the route by theorem; where every usable plane's χ_f sits above it (no `𝔽₃`, no `𝔽₇` place), price a finite `H` with χ_gf(H) > k − 1 before any forced-pair route: it proves k with no refusal, and FS-56's LP and checker exist. Killing tests: a real field whose compact places all read above −1/2 with a 3-colourable plane (the reading); a finite `H ⊂ F²` with χ_gf(H) above a usable plane's χ_f (a defect, never a finding).* *The same engine splits the inheritance
+  question* (FS-73): `Λ ≅ ℤ^r` is amenable, so the differences no invariant probability measure on the colouring shift separates form
+  a subgroup `F_μ` with `F ⊆ F_μ ⊆ P` — a walls half and a recurrent half (`plans/FS73-derivation.md` T38); at three colours both
+  close (row 79).
 * **G61 — Three colours break at arithmetic, not at size — and the arithmetic is the supply of unit vectors. [kernel + certified + measured; one reading]** Over a real
   quadratic field with `d ≡ 2 (mod 3)`: (1) **The barrier** [kernel, row 72]: directions integral at 3 are 3-colourable outright, so a refusal needs a direction with 3 in a
   denominator — met by count in every one of the 14 certified witnesses (89 to 4,328 such edges, never zero). (2) **Rigidity is periodic and local** [measured]: the 3-adic plane is
   Hoffman-tight at three colours and rigid from level 1, and stays rigid tensored with the residue planes at 7 and 11 (the general statement is FS-67, unproved, and false without
-  gap-freedom); every periodic colouring of the 3-integral pools tried is affine, so quotient screens never kill and thick pieces force where word-length balls never do. (3) **The
+  gap-freedom); every periodic colouring of the 3-integral pools tried is affine, so quotient screens never kill and thick pieces force where word-length balls never do — and at three colours **colourability is now exact by `Θ₃`** (G71): on ℚ(√11)'s `Λ₁₀` "every colouring is affine" is a theorem, and an empty `Θ₃` refuses with no ball. (3) **The
   rational directions are load-bearing** [measured]: the `√d`-vectors alone force nothing; and two fields' unit vectors in one lattice shape share *only* the rational ones, because the
   norm equation is linear in `d`. (4) **What decides refusal is how many unit vectors a lattice holds** [measured, row 74]: one integral shape refuses over ℚ(√11) with 108 and is
   periodically 3-colourable over five fields with 20–36; refusing lattices are rich in classes, not coarse; odd girth ≤ 9 is necessary and far from sufficient; and the congruence class does
@@ -1209,7 +1223,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   23 without recomputing; at a new prime ask the whole graph clique-pinned before any finder, expect CDCL to refuse nothing
   up a tower it cannot refuse at the bottom, and certify by the fibre-share relaxation rather than by SAT. Killing tests: a
   verified independent set of 687 in `UD(ℤ/49, 2)` (which would refute a hand link or the checker, not only the reading); of
-  3,389 in any twisted cover of `Γ₁₁`.*
+  3,389 in any twisted cover of `Γ₁₁`.* *The first sentence reaches colourings too* (FS-73): a lattice graph's periodic colourings
+  are exactly the continuous colourings of the odometer `Λ ↷ Λ̂`, so `P = F_clopen`, and the inheritance question is the compulsion
+  analogue of `χ_clopen = χ`, with the measurable colourings between (`F ⊆ F_μ ⊆ F_meas ⊆ P`).
 * **G67 — A grokking is grokked by its form, and the reframe is re-grokking. [method; measured on one milestone]** The corpus
   is read in one of two modes — as background (understood, and left where it lies) or as an instrument (reasoned from) — and
   which mode an entry gets is set by its *shape*, not by its truth or its place in this file. On FS-70 the entries that fired
@@ -1250,7 +1266,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   `Forces` on the whole lattice — build nothing on it; where every colouring is gap-free, the lattice is rigid as far as periodic
   colourings go and the periodic Kempe screen (`FS70-T10`) decides the target. Killing test: a lattice with a gapped quotient
   four-colouring that carries a four-colour forced pair — which would refute the reduction's being a homomorphism, i.e. an
-  incomplete `U`, never row 66.*
+  incomplete `U`, never row 66.* **A gap is sufficient for looseness, not necessary** (FS-73, row 78): the rank-6 L3 is gap-free at
+  every period and still loose — one period-2 colouring's Kempe period group (the translations fixing every Kempe component) is 0 —
+  so a lattice is loose exactly when finitely many periodic colourings' Kempe period groups meet in 0, a gap being the case of an
+  isolated component. *Where every colouring is gap-free, compute the Kempe period groups before calling a lattice rigid.*
 * **G69 — Rigidity is arithmetic, decided on the quotient, and over ℚ(√3,√5) it pulls apart from density. [hand + tools; FS-70
   phases 1c–1e; one prediction of the owner's lost on the way]** The chain route (G55) needs a four-colourable lattice with a
   *forced* pair — a rigid colouring space — and rigidity is decided before any ball is built. **Periodic colourings are residue
@@ -1264,12 +1283,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   `p + V` of the closed-walk voltage lattice, with the index `[NΛ : V]` the deciding quantity (`FS70-T10`); the fan gap (G68) is the
   degenerate case `V`-trivial and **is not the classifier**: the rank-6 L3 is gap-free at every period and escapes at every target
   (`[2Λ : V] = 81`), which is the prediction the owner lost. Over `K` the hexagonal lattice is rank 4, meets refusing targets at 5,
-  7, 11, 13 and is Kempe-rigid at `8/3` under all six periodic colourings found — **dense and rigid**, so Harder's forcer lives at
-  23,083 points. Over ℚ(√3,√5) every lattice of rank ≤ 6 built is loose, and the one lattice with no periodic colouring found is
+  7, 11, 13 and is Kempe-rigid at `8/3` under all six periodic colourings found — **dense and rigid**, so a forced pair exists — Harder's
+  at `8/3` (745 points his smallest forcing subgraph; our control ball was 23,083) — and **every four-colouring of de Grey's lattice is
+  `8Λ`-periodic: `F = P = 8Λ`, from one 2,044-point certificate at `v = −(4/9)(1+√−11)` (row 78)**; rigidity there is complete. Over ℚ(√3,√5) every lattice of rank ≤ 6 built is loose, and the one lattice with no periodic colouring found is
   rank 8, whose dense finite pieces start at `~10⁷` points (a 29 M-point word ball at degree 19.2; an 11 M-point ball at 18.7 in a
-  132-vector metric; the 1.9 M-point ball's 13-core is empty) against the 2.3 × 10⁴ of the dense rigid object over `K`: **where
-  rigidity is possible, density costs three orders of magnitude more — the two pull apart, and that is the whole difference between
-  the two fields.** G61(4)'s "supply of unit vectors" has its
+  132-vector metric; the 1.9 M-point ball's 13-core is empty) against the 745 to 2,044 points of the forcing objects over `K`: **where
+  rigidity is possible, density costs nearly four orders of magnitude more — the two pull apart, and that is the whole difference between
+  the two fields.** (Our *rigid* — every colouring identifies the pair — is
+  the symbolic-dynamics literature's *frozen*, `[AlonEtAl2021]`; `[PeledSpinka2023]`'s *rigidity* of ℤ^d colourings is another notion.)
+  G61(4)'s "supply of unit vectors" has its
   mechanism here: supply is what covers the residue circles. *Do: before building fabric over a field, take the direction set's CM
   field, classify the primes above 5, 7, 11, 13 in `E/E⁺` and compute the targets; run the quotient at every admissible `N` and the
   periodic Kempe screen at every target; spend a solver only where every colouring found is rigid at the target — and if that
@@ -1296,7 +1318,26 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   K-fabric ask the √3-pair question first — a colouring with no monochromatic √3-pair IS the residue colouring and identifies every
   `2R`-pair without a solver — and read rigidity (FS-73) as "which colourings are √3-clean"; a five-forcer over K(√7) starts from
   the `ρ₄` pigeonhole and needs a kill drawn in a field with no √5 (FS-49). Killing test: a four-colouring of the Moser lattice with
-  no monochromatic √3-pair that is not a residue colouring — a defect in the hexagon lemma or in `R/2R ≅ 𝔽₄ × 𝔽₄`.*
+  no monochromatic √3-pair that is not a residue colouring — a defect in the hexagon lemma or in `R/2R ≅ 𝔽₄ × 𝔽₄`.* **Held exhaustively on de Grey's lattice** (FS-73, row 78): of its 12
+  classes of four-colourings — all of them, since `F = 8Λ` — exactly one is √3-clean, and it is Theorem B's pair.
+* **G71 — Three colours are linear, four are not: a three-colouring of a lattice graph has a height and a slope, a four-colouring
+  only a parity. [hand, two independent derivations (row 79); the lift is prior art — Chandgotia's height functions]** `K₃`'s
+  universal cover is a line, so every proper three-colouring of a Cayley graph of a finitely generated torsion-free abelian group
+  lifts, through the grid that covers it, to an integer height with a winding on the relation lattice and a slope in a rational
+  polytope. Hence three-colourability is the non-emptiness of `Θ₃ = {θ : θ(S) ⊆ [1/3, 2/3] + ℤ}` on the character torus, periodic
+  three-colourings are dense (so a pair every periodic colouring identifies is forced, and colourable means periodically
+  colourable — with no arithmetic of the lattice), and the forced group has finite index exactly when `Θ₃` is finitely many points;
+  isolated points of order 3 make every colouring affine, which is how ℚ(√11)'s `F = 3Λ` falls out with no forcer. `K₄`'s square
+  complex is `ℝP²` (the cube modulo its antipode), so a four-colouring carries only a winding in `Hom(R, ℤ/2)`: no height, no slope,
+  no polytope — `G(ℤ, {1,3,4,5})` four-colours with no linear colouring — and whatever makes de Grey's lattice rigid at four colours
+  (`F = 8Λ`, row 78) is not this mechanism. Everything the hunt asks lives at four colours and above. *Do: when a question is at
+  three colours on a lattice — a quadratic field's four-colour lower bound is one — decide it by `Θ₃`, an exact polytope tree with
+  Farkas leaves, never by a ball and a solver, and read its cells: empty refuses; points of order 3 mean every colouring affine and a
+  finite-index `F`; a fat cell means infinitely many colourings. At four colours expect no slope, no linear criterion and no
+  two-sided certificate: a refusal there is still a finite graph. Nothing kills the three-colour theorem; it forbids a three-colour
+  counterexample to the inheritance question on any abelian Cayley graph, and a `Θ`-type two-sided certificate at four colours.
+  Killing test of the reading "at four colours the arithmetic must enter": a four-colour rigidity theorem over a class of lattices
+  that uses no arithmetic of the lattice.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
@@ -1311,9 +1352,15 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   same speed produces escalation. **Front-load the disagreement into the window before anything is paid for**, and
   **count the retractions in it: zero is not agreement, it means the disagreement has not started yet and will
   arrive later at full price.** *Do: at a wall, bring a second mind in while retraction is still free, and count the
-  retractions — the next wall named for it (Kooshi, 2026-09-22) is FS-73's inheritance question, a derivation with a known
-  positive instance (Harder's object over K) where two independent attempts meeting one obstruction would license the negative.
-  Killing test: a phase whose disagreement cost more than the error it caught.*
+  retractions — the wall FS-73 named for it — the inheritance question — returned a theorem at three colours; the next is the
+  four-colour question (G71), where two independent attempts meeting one obstruction would license the negative.
+  Killing test: a phase whose disagreement cost more than the error it caught.* **Its second run** (FS-73's competition, 2026-09-23):
+  both competitors reached the same frame — heights through `K₃`'s universal cover — independently, one proving the class theorem
+  (Coxeter's density), the other the rigidity criterion and the ℚ(√11) instance (de Bruijn's), and the advisor closed the one step
+  between them (the choice of period that kills de Bruijn's residual case); retractions Poros 1 (a pointer recalled as fact), de
+  Bruijn 1 (a labelled guess), Coxeter 0, all inside the free window; the advisor was stood down near 480 k tokens and its successor
+  cancelled because advising had ended. Caught before launch: the working files and the advisor's record drafted into `plans/`,
+  which every competitor reads — a covert channel; they now live in scratch until hand-back (the protocol document).
 
 ## Whose work this is
 
@@ -1382,7 +1429,9 @@ convince someone who trusts none of this and reads none of the Python:
 
 ## What compute actually helps
 
-Ask before provisioning; measure before believing.
+Ask before provisioning; measure before believing. **A kernel leaf priced after a fine obligation pass is priced high** (FS-73):
+`Kempe.lean`'s 22 leaves, priced at 1½ days, closed in about 40 minutes of work, every leaf on its first or second elaboration, once
+the obligation pass had named each child and its route — re-price a kernel phase from its first two leaves, never from the plan's table.
 
 | Work | Right instrument |
 |---|---|

@@ -97,8 +97,10 @@ citing de Bruijn–Erdős 1951) but **no direct `SimpleGraph.Colorable` wrapper 
 `Mathlib/Combinatorics/SimpleGraph/Coloring*.lean` finds no `iSup`/compactness lemma tied to `Colorable`) — this is exactly
 FS-39's phase-A target (`plans/STUB-plane-bridge.md` D2). zbMATH `ab:"compactness" & ab:"chromatic number" & ab:"infinite
 graph"` (1 hit, an Oberwolfach report, not a citable source) and `ab:"de Bruijn" & ab:"Erdos" & ab:"colouring theorem"`
-(0 hits). *Kernel:* stub (FS-39, phase A/D2) — Mathlib's Rado-selection lemmas exist; a `SimpleGraph.Colorable`-specific
-wrapper does not.
+(0 hits). *Kernel:* **in the kernel at every colour count** (FS-73, `Proofs/HadwigerNelson/Kempe.lean`): `forces_iff_exists_finite`
+— a pair is forced iff some finite induced subgraph forces it — over `exists_coloring_ne_of_forall_finset`, which is Mathlib's
+`Finset.rado_selection` (de Bruijn–Erdős); Mathlib also holds `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`, the subgraph
+form. FS-39's phase A can cite the same two lemmas.
 
 **FS58-T5 — The direction-set quotient screen. [hand]** Let `W₀` be a finite symmetric set of unit vectors,
 `Λ₀ = ℤ[W₀]`, `L ≤ Λ₀` a finite-index subgroup with `W₀ ∩ L = ∅`. If the finite quotient Cayley graph

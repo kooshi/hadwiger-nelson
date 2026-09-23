@@ -82,7 +82,7 @@ we have and is cited in prose only.
 
 | phase | what | cost |
 |---|---|---|
-| A | (i) — compactness of colourings for `unitDistance ℂ`, or the citation of Mathlib's lemma | half a day |
+| A | (i) — compactness of colourings for `unitDistance ℂ`, or the citation of Mathlib's lemma. **Mathlib holds it** (found at FS-73): `Finset.rado_selection` (de Bruijn–Erdős) and `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom`; `Kempe.lean`'s `exists_coloring_ne_of_forall_finset` and `forces_iff_exists_finite` are the pattern | an hour or two |
 | B | (ii) — the algebraic-drawing lemma, or its statement with the named gap | one to two days, Mathlib-dependent |
 | B′ | **D4's transcendence lemma in the kernel** — `chromaticNumber_planeOver_adjoin_transcendental_eq`, plus `χ(ℚ(π)²) = 2` as its named inhabitant | half a day; the two valuation lemmas already exist |
 | C | the corollary `chromaticNumber_plane_eq_iSup_numberField` and a rewrite of the prose sentences to cite it | an hour |

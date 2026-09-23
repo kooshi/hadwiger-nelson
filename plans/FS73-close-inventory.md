@@ -16,7 +16,16 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
   shape is one row per milestone or per theorem family (rows 72–73, 76, 77), and eighteen rows would bury the two results that
   matter.
 - §2 theorems: ✅ `plans/FS73-derivation.md` T1–T38, `LEDGER.md` § B 38 lines, `tools/fs71_ledger_b_check.py --strict` PASS;
-  ⏳ §7 of the file (E's and V2's theorems) waits for R9.
+  ✅ §7 of the file: E's and V2's theorems as T39–T44 (final records `909cf054`, `7931a25e`, `0e7b95e7`); row 79's R9 slots
+  filled from them (three independent routes; the half-page proof; no finite witness exhibited; E's prediction lost).
+- §3 grokkings: ✅ **G71 minted** (three colours linear, four not). Candidates folded as instances rather than entries: the period
+  cap and the Fourier read → G21; B's tight-prime reading → G54 (restated with Poros's N3); the covert channel → G51 and the
+  protocol document; the leaf-pricing rule → § What compute actually helps (a rule about cost, not about the mathematics).
+  Corrections applied: G69 (745 / 2,044 against the balls; "nearly four orders"; `F = 8Λ` complete rigidity; *rigid* qualified
+  against *frozen* and `[PeledSpinka2023]`), G61(2), G68 (gap sufficient, not necessary; the Kempe-period criterion), G60 and G66
+  (the `F_μ` and odometer sentences), G70 (exhaustive on de Grey's lattice), G51 (the second run; its Do line moved to the
+  four-colour question), G55 (the `8/9` pair and its spindle into K(√7) — the owner's note), FS58-T4's kernel note (and FS-39's
+  phase A). ⏳ the §G re-read, the §PA sweep and the forward propagation: next commit (plan §R and the stubs).
 
 ---
 
@@ -71,7 +80,7 @@ Read every "Theorems this phase proved" heading, never the prose:
 
 ## 3. Understanding → `CLAUDE.md` § Grokkings (G67's form: trigger, Do, killing test or what it forbids)
 
-**New entries, candidates:**
+✅ **New entries, candidates:** (see the status block)
 - **Three colours are linear, four are not.** K₃'s universal cover is a line, so every 3-colouring of an abelian Cayley graph has a height with a slope. Periodic colourings are dense, and 3-colourability is an exact polytope question. K₄'s square complex is ℝP², so four colours carry only a parity. *Do:* at three colours, decide by Θ (a certificate, no solver); at four, expect no slope. *Forbids:* a Θ-type two-sided certificate at four colours.
 - **Implementer B's tight-prime reading**, now half-explained: full-rank F where the lattice is integral at a conjugation-fixed prime with a Hoffman-tight target (2 at K, 3 at ℚ(√11)). At ℚ(√11) the Θ derivation explains it. Poros N3: the prime is split at ℚ(√11), not conjugation-fixed, and the reading had lost its clause "no other prime's quotient has a gap". Killing test in B's record.
 - **Method:** a periodic search measures its period cap. Ld14c588b's colouring has index 1,080, beyond N ≤ 30 and circular N ≤ 120; L3e1c94c6's has period 23, beyond N ≤ 20. That is two G21 instances in one milestone.
@@ -79,7 +88,7 @@ Read every "Theorems this phase proved" heading, never the prose:
 - **Method:** price leaves in minutes after a fine obligation pass (implementer K: priced at 1.5 days, took 40 minutes).
 - **Method:** a competitor's working file is a covert channel if it lives in `plans/` (the owner's pre-launch catch; see §6).
 
-**Corrections to existing entries:**
+✅ **Corrections to existing entries:**
 - **G69:** Harder's smallest forcer is 745 points, not our 23,083-point ball; "three orders of magnitude" is nearer four. Add F = 8Λ at K (rigidity is now complete there, not just "Kempe-rigid at 8/3").
 - **G61:** "(2) … quotient screens never kill … blind" — three-colourability is now exact by Θ, and the affine-colouring observation at ℚ(√11) is a theorem (T1).
 - **G68:** L3 is loose without a gap, so a gap is sufficient, not necessary; add the Kempe-period criterion.
