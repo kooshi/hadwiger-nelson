@@ -1334,7 +1334,8 @@ tell the session that briefed you what is left** — that is a good report, neve
 could review, or knew existed. **Why, in two parts.** *Cost:* nested agents multiply token spend, and a milestone's staffing — at
 present one planner and one implementer, no standing advisor, an advisor only as a one-off query at a named wall, **every role on
 Opus 5.5** (Kooshi, 2026-09-22: "Opus 5.5 should be used for all purposes until further notice", a step above Opus 5 and Fable 5.1,
-which held the planner and implementer roles until then; every rule this project recorded about those models' quirks is retired) —
+which held the planner and implementer roles until then; every rule this project recorded about those models' quirks is retired,
+except one that holds for every model: an agent returning with ~500k–600k tokens of context is replaced, not reused) —
 is a budget decision Kooshi makes, which a child silently overrides by delegating. *Review:* the product owner scores work by
 artifact, and cannot score work done by an agent it does not know about — nor trust a bibliography entry's read-status when the
 reading was a grandchild's summary (G50). **For the session that briefs:** the rule goes into *every* brief, in words, with its

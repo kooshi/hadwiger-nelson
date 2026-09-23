@@ -19,9 +19,10 @@ the repository. Agent ids live in the session scratchpad, never here.*
    its model id: `claude-opus-5-5[1m]`); an omitted model inherits the session's. The theorems FS-71 filed that the stub consumes are listed in
    its bearings line.
 2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): one planner + one
-   implementer at a time, both Opus 5.5; the old ~500k-token rotation rule was measured on Opus 5 and is retired — no threshold is
-   known for Opus 5.5, so read each agent's token count on hand-back, and one nearing its window hands over at a clean boundary with
-   its phase record complete; **no child agent spawns children — say so, with the reason, in every brief**; review by
+   implementer at a time, both Opus 5.5; **an agent that returns above ~500k tokens is replaced, not reused** (Kooshi, 2026-09-22:
+   "500k-600k is still a good signal to replace rather than reuse an agent" — the rule outlives the model it was first seen on), so
+   read each agent's token count on hand-back and brief a fresh one from its phase record; **no child agent spawns children — say
+   so, with the reason, in every brief**; review by
    artifact with your own code, plant a fault of your own; write cause / measurement / forfeit before stopping any run; **tell every
    briefed agent its `CLAUDE.md`, `WORKFLOW.md` and the ledger's location are the session's loaded snapshot and the disk is
    authoritative**; commits by explicit path, never push, never amend; never `lake build` (`./scripts/build.sh` only); kill by pid or
