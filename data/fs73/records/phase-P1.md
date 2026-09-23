@@ -790,7 +790,9 @@ Total, about 2.2 core-hours. N = 32 used about 1 of P1d′'s remaining 7.3 core-
 |---|---|---|
 | `--controls` | CONTROLS PASSED (twin passes; IMPROPER, PERIOD_FALSE, PER_NOT_EXACT, KPER_MISMATCH, NOT_UNIT, F_KNOWN_MISMATCH each refused for its reason) | under 1 s |
 | `--only degrey --cert` | CENSUS VERIFIED. U complete by the box search; 48 colourings; F_known = 8Λ from the witness; `tools/fs73_cert_check.py` CERTIFIED; step (iv): 33 UNSAT claims up to 65,536 classes re-asked on the checker's own encoding and confirmed by kissat, 17 above the 100,000-class cap listed with their CNF hashes | 271 s |
-| `--only tu14,tu30,tu42 --no-solver` | CENSUS VERIFIED: 74 colourings; the three P_found recomputed and equal | 16 s |
+| `--only tu14,tu30,tu42 --no-solver` | CENSUS VERIFIED: 74 colourings; the three P_found recomputed and equal; 1/p ∈ Λ re-derived from the lattice files | 18 s |
+| `--only tu14` (with step (iv)) | CENSUS VERIFIED: all 34 UNSAT claims of tu14 then on file (sep confirmations, non-colourable periods, gap asks) re-asked on the checker's own encoding and confirmed by kissat. The later 6Λ gap row (1.68M classes) is above the default cap | 797 s |
+| `--no-solver` (final code, all four lattices) | CENSUS VERIFIED | under 30 s |
 
 - *The first rich run was REFUSED, and that was correct:* `COLOURING_MISSING`. The FS-70 seeds had been analysed but never saved.
   `export` now files them.
