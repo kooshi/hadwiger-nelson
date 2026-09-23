@@ -156,18 +156,7 @@ in print giving `χ ≥ 4` for any real quadratic field; ℚ(√47)'s bracket is
 11.6). *Kernel:* stub (FS-60, `plans/STUB-quadratic-witnesses-kernel.md` — a certificate type over `Adjoin d ℤ`, priced
 against a generic `UDCert` on the `ℚ(√23)` witness first; not yet built).
 
-**FS58-T9 — No rational odd-parity diamond chord exists for `d ≡ 7 (mod 8)`. [hand; unsure — owner to re-derive]** For
-`d ≡ 7 (mod 8)` squarefree, no diamond of the shape underlying `ℚ(√11)`'s forcer construction (the "diamond plus three
-rational steps" 5-cycle mechanism, §R-B2) has a rational chord of odd parity — the mechanism that builds `ℚ(√11)`'s
-52-point forcer from rational directions does not transfer to any such field. *Proof:* `plans/FS58-four-colours.md`
-§R-B5 states the conclusion in one sentence ("a hand obstruction: for `d ≡ 7 (mod 8)` no diamond chord is a rational
-vector of odd parity, which removes the 'diamond + three rational steps' 5-cycles that drive `ℚ(√11)`'s forcer") with no
-derivation chain written out on disk. *Proof verdict:* **unsure — owner to re-derive** (the claim is plausible — it is the
-stated reason `ℚ(√23)`'s route to a forced pair had to diverge from `ℚ(√11)`'s, R-B5 — but the parity/valuation argument
-itself is not on disk anywhere searched: `plans/FS58-four-colours.md`, `data/fs58/`). *Rests on it:* explains (if it
-closes) why `ℚ(√23)`'s route used a saturated 3-non-integral lattice instead of a diamond chain, and by extension why
-`ℚ(√167)` (also `d ≡ 7 (mod 8)`, R-B5 confirms) is not landed by the direct route. *Prior art:* not searched separately
-(this is FS-58's own unwritten lemma, not a literature claim). *Kernel:* declined — pending the owner's re-derivation.
+**FS58-T9 — No rational diamond chord over `ℚ(√d)`, `d ≡ 7 (mod 8)`, is a 2-adic unit. [hand; stated in one sentence by the FS-58 implementer ("no diamond chord is a rational vector of odd parity"); re-derived and sharpened by the owner, 2026-09-22]** A *diamond* is a unit rhombus `0, v, v̄, v + v̄` on a unit vector `v = x + iy`, `x, y ∈ ℚ(√d)`, `v ∉ ℚ(i)`; its long chord `v + v̄ = 2x` is rational iff `x ∈ ℚ`, and then `y = s√d` with `s ∈ ℚ` and `x² + d s² = 1`. Writing `x = a/m`, `s = b/m` with `gcd(a, b, m) = 1`, `a² + d b² = m²`. For `d ≡ 7 (mod 8)` the residues mod 8 leave two cases: `m` odd, whence `a` odd and `4 ∣ b`; or `4 ∣ m`, whence `a` and `b` odd (`m ≡ 2 (mod 4)` is impossible — this is row 74's dyadic lemma in chord form). So the chord `2x = 2a/m` has 2-adic valuation `+1` (first case) or `≤ −1` (second), **never 0**: no rational diamond chord is a 2-adic unit. Over `d ≡ 3 (mod 8)` one can be — `ℚ(√11)`'s `v = (−5 + i√11)/6` has `m = 6 ≡ 2 (mod 4)` and chord `−5/3`, the unit that closes the chain `1/3 = 1 + 1 + v + v̄` behind row 73's forcer. *"Odd parity" in the source means exactly "a 2-adic unit" (odd numerator and odd denominator in lowest terms).* *Proof:* the derivation above (the owner's; `plans/FS58-four-colours.md` §R-B5 states only the conclusion). *Proof verdict:* closes. *Rests on it:* the *reading* — not filed as a theorem — that `ℚ(√11)`'s "diamond plus three rational steps" mechanism cannot transfer to any `d ≡ 7 (mod 8)` field, which is why `ℚ(√23)`'s route used a saturated 3-non-integral lattice (R-B5) and why `ℚ(√167)` is not landed by the direct route; whether the mechanism *needs* a unit chord is that reading's content. *Prior art:* ours — a two-line congruence; the dyadic lemma it restates is row 74's (FS-61, hand). *Kernel:* declined — a corollary of FS61's dyadic lemma, whose kernel decision it follows.
 
 ## Readings and measurements that were called theorems
 
