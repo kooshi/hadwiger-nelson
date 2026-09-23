@@ -11,8 +11,8 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
 ## Close status (the close planner's ticks; ✅ done, ⏳ waiting, ✗ declined with its reason)
 
 - §1 results: ✅ rows 78 (four colours, the census, the table, rank 6, the kernel) and 79 (three colours, ℚ(√11), the `Θ`
-  certificate, ℚ(√167)); ✅ R9 verified (the owner's message): the "≥ 4" branch kept, the other two deleted; ⏳ two number slots in row 79
-  (`⟨R9#E⟩`, `⟨R9#V2⟩`) wait for the final records. One judgement: the inventory's R1–R18 went into **two** rows, not one per result — the house
+  certificate, ℚ(√167)); ✅ R9 verified (the owner's message): the "≥ 4" branch kept, the other two deleted; ✅ the two number slots in row 79
+  were filled from the final records (see §2's tick). One judgement: the inventory's R1–R18 went into **two** rows, not one per result — the house
   shape is one row per milestone or per theorem family (rows 72–73, 76, 77), and eighteen rows would bury the two results that
   matter.
 - §2 theorems: ✅ `plans/FS73-derivation.md` T1–T38, `LEDGER.md` § B 38 lines, `tools/fs71_ledger_b_check.py --strict` PASS;
@@ -77,8 +77,10 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    a four-colour question where no `Θ` exists; C's design rule heads R2); FS-60 and FS-67 notes; `plans/FRONTIER-STUBS.md`
    re-ranked with a closed row for FS-73; `CLAUDE.md` § Paths forward (the open-milestones paragraph still names FS-73 next; the
    ranked table's FS-73 row and FS-59's "nothing above three proven" are stale).
-7. ✅ (second close planner: `--base de5af0f8` (the hand-off) PASSES; `--base a640efec` fails only on the gate-report sentence (1004 → 1034 clean), which the audit fails on by design at any close that moves the gate; the intended losses — the vacuity counts, the row range 1–75, the old FS-59 row's R9/R5–R8 route text (kept in its stub), the old open-milestones sentence — are in the audit's `ALLOW` table with reasons; FS-61's degree-14 ask (1,474,541 points, 3.66 s) moved into row 79, its home; `--dupes` back to 15 runs after two new ones were rephrased; `CLAUDE.md` 243,978 bytes, under the 275,000 budget; architecture PASS, bibliography audit green, `fs71_ledger_b_check --strict` PASS. The push is the owner's) **§9** — `tools/claude_md_fact_audit.py --base a640efec` and `--dupes` (was 15 runs); `CLAUDE.md` is 240,166 bytes (budget
+7. ✅ (second close planner: `--base de5af0f8` (the hand-off) PASSES; `--base a640efec` fails only on the gate-report sentence (1004 → 1034 clean), which the audit fails on by design at any close that moves the gate; the intended losses — the vacuity counts, the row range 1–75, the old FS-59 row's R9/R5–R8 route text (kept in its stub), the old open-milestones sentence — are in the audit's `ALLOW` table with reasons; FS-61's degree-14 ask (1,474,541 points, 3.66 s) moved into row 79, its home; `--dupes` back to 15 runs after two new ones were rephrased; `CLAUDE.md` 243,978 bytes, under the 275,000 budget; architecture PASS, bibliography audit green, `fs71_ledger_b_check --strict` PASS. The push is the owner's. A slip of mine, recorded: `fffcf47f` was committed with `--base de5af0f8` failing on row 79's theorem range (T39–T44 → T39–T45, intended); the ALLOW entry followed in `2fde80db`) **§9** — `tools/claude_md_fact_audit.py --base a640efec` and `--dupes` (was 15 runs); `CLAUDE.md` is 240,166 bytes (budget
    275,000); the close commit; the owner pushes.
+
+**The second close planner finished the list above (2026-09-23): every item is ticked, with its declines stated in the tick (Mohar–Salas; the rows of `TABLE.md` not regenerated; the plan's body marked, not rewritten). Commits: `632f4150`, `e0ce27a5`, `d394f099`, `5b9a1575`, `5c74d697`, `ad0a46a0`, `47752ea9`, `fffcf47f`, `2fde80db` and this one. The push is the owner's.**
 
 ---
 
