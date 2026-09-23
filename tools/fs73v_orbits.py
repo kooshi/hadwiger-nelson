@@ -1,0 +1,164 @@
+#!/usr/bin/env python3
+"""FS-73 independent verifier: the point group of Cay(Lambda, U) and the span of the orbits of 8/9 and v.
+
+The point group G here is computed, not assumed: every Z-linear bijection g of Lambda with g(U) = U (these are exactly
+the Cayley-graph automorphisms of Cay(Lambda, U) that fix 0 and are additive). Since Lambda = Z-span(U) (the 30
+generators lie in U and U lies in Lambda), a Q-linear map with g(U) = U maps Lambda onto Lambda.
+
+Search: the Q-basis (1, zeta6, rho, zeta6*rho) lies in U; a candidate g is a choice of images w1..w4 in U. Stage 1: the six
+roots of unity (the elements of U in span(1, zeta6)) must map into U, which fixes (w1, w2) to few choices; stage 2: every one
+of the 54 elements of U must map to an integer vector in U (exact rational arithmetic), and the images must have rank 4.
+Then compare the HNF of span{g(8/9), g(v) : g in G} with the HNF of 8*Lambda.
+"""
+from __future__ import annotations
+
+import json
+import os
+import sys
+from fractions import Fraction as Fr
+
+import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import fs73v_lattice as L  # noqa: E402
+
+
+def solve_rational(M, b):
+    """Solve M x = b exactly (M square, list of lists of Fractions); columns of M are basis vectors."""
+    n = len(M)
+    A = [[Fr(M[i][j]) for j in range(n)] + [Fr(b[i])] for i in range(n)]
+    for c in range(n):
+        piv = next(r for r in range(c, n) if A[r][c] != 0)
+        A[c], A[piv] = A[piv], A[c]
+        pv = A[c][c]
+        A[c] = [t / pv for t in A[c]]
+        for r in range(n):
+            if r != c and A[r][c] != 0:
+                f = A[r][c]
+                A[r] = [x - f * y for x, y in zip(A[r], A[c])]
+    return [A[i][n] for i in range(n)]
+
+
+def rank(vectors):
+    return len(L.hnf_rows([list(v) for v in vectors])) if vectors else 0
+
+
+if __name__ == "__main__":
+    B = L.build(verbose=False)
+    U = B["U"]
+    Uset = set(U)
+    # the Q-basis (1, zeta6, rho, zeta6*rho), all in U; the span of the first two holds the six roots of unity,
+    # which gives the staged search its pruning.
+    basis = [L.to_int(L.ONE), L.to_int(L.ZETA6), L.to_int(L.RHO), L.to_int(L.mul(L.ZETA6, L.RHO))]
+    assert all(b in Uset for b in basis) and rank(basis) == 4
+    M = [[basis[j][i] for j in range(4)] for i in range(4)]
+    coords = {u: solve_rational(M, u) for u in U}
+    for u in U:  # exactness check of the coordinates
+        rec = tuple(sum(coords[u][j] * basis[j][i] for j in range(4)) for i in range(4))
+        assert rec == tuple(Fr(t) for t in u)
+    den = 1
+    for u in U:
+        for t in coords[u]:
+            den = den * t.denominator // __import__("math").gcd(den, t.denominator)
+    Cint = np.array([[int(coords[u][j] * den) for j in range(4)] for u in U], dtype=object)  # 54 x 4, exact ints
+    stage1 = [k for k, u in enumerate(U) if coords[u][2] == 0 and coords[u][3] == 0]  # u in span(1, zeta6)
+    key = lambda v: tuple(int(t) for t in v)
+
+    def images_ok(ws, rows):
+        """Exact: for each u in rows, sum_j C[u,j] w_j / den is an integer vector lying in U."""
+        for k in rows:
+            acc = [0, 0, 0, 0]
+            for j, w in enumerate(ws):
+                c = Cint[k][j]
+                if c:
+                    for i in range(4):
+                        acc[i] += c * w[i]
+            if any(a % den for a in acc):
+                return False
+            if tuple(a // den for a in acc) not in Uset:
+                return False
+        return True
+
+    allrows = list(range(len(U)))
+    G = []
+    for w1 in U:
+        for w2 in U:
+            if not images_ok((w1, w2, (0, 0, 0, 0), (0, 0, 0, 0)), stage1):
+                continue
+            for w3 in U:
+                for w4 in U:
+                    ws = (w1, w2, w3, w4)
+                    if images_ok(ws, allrows) and rank(list(ws)) == 4:
+                        G.append(ws)
+    out_stage1 = len(stage1)
+    out = {"basis_in_U_int36": basis, "point_group_order": len(G), "stage1_rows": out_stage1, "coord_den": den}
+
+    def apply(w, z):
+        c = solve_rational(M, z)
+        gz = tuple(sum(c[j] * w[j][i] for j in range(4)) for i in range(4))
+        assert all(t.denominator == 1 for t in gz)
+        return tuple(int(t) for t in gz)
+
+    # identify the named field symmetries inside G (as images of the basis)
+    def field_map(f):
+        return tuple(L.to_int(f(L.from_int(b))) for b in basis)
+
+    Z6 = L.ZETA6
+    named = {
+        "mult_zeta6": field_map(lambda z: L.mul(Z6, z)),
+        "conj": field_map(L.conj),
+        "sigma3": field_map(L.sigma3),
+        "sigma11": field_map(L.sigma11),
+        "mult_rho": None,
+    }
+    try:
+        named["mult_rho"] = field_map(lambda z: L.mul(L.RHO, z))
+    except AssertionError:
+        named["mult_rho"] = None
+    Gset = set(G)
+    out["named_in_G"] = {k: (v in Gset) if v is not None else "not integral" for k, v in named.items()}
+    # the subgroup generated by the named field symmetries that lie in G
+    gens = [v for k, v in named.items() if v is not None and v in Gset]
+
+    def compose(w2, w1):  # g2 o g1 as basis images
+        return tuple(apply(w2, w1[i]) for i in range(4))
+
+    ident = tuple(basis)
+    sub_G = {ident}
+    frontier = [ident]
+    while frontier:
+        nf = []
+        for g in frontier:
+            for h in gens:
+                k = compose(h, g)
+                if k not in sub_G:
+                    sub_G.add(k)
+                    nf.append(k)
+        frontier = nf
+    out["field_generated_subgroup_order"] = len(sub_G)
+    out["field_subgroup_equals_G"] = sub_G == Gset
+
+    eight_ninths = (32, 0, 0, 0)
+    v = (-16, 0, -16, 0)  # -(4/9)(1 + sqrt-11), scaled by 36
+    H = B["H"]
+    H8 = [[8 * t for t in r] for r in H]
+
+    def span_report(vecs, label):
+        Hs = L.hnf_rows([list(x) for x in vecs])
+        det = 1
+        for r in Hs:
+            det *= next(t for t in r if t != 0)
+        return {"label": label, "rank": len(Hs), "hnf": Hs, "index_in_Lambda": (det // 16) if len(Hs) == 4 else None,
+                "equals_8Lambda": Hs == L.hnf_rows(H8), "contained_in_8Lambda": all(L.member(H8, x) is not None for x in vecs)}
+
+    for grp, gname in ((G, "G"), (sorted(sub_G), "field_subgroup")):
+        o1 = sorted({apply(w, eight_ninths) for w in grp})
+        o2 = sorted({apply(w, v) for w in grp})
+        out[f"orbit_sizes_{gname}"] = (len(o1), len(o2))
+        out[f"span_89_{gname}"] = span_report(o1, "orbit(8/9)")
+        out[f"span_v_{gname}"] = span_report(o2, "orbit(v)")
+        out[f"span_both_{gname}"] = span_report(o1 + o2, "orbit(8/9) + orbit(v)")
+    out["hnf_8Lambda"] = L.hnf_rows(H8)
+    # Lambda/8Lambda: Smith form of H8 relative to H is 8*I since H8 = 8H; state it
+    out["Lambda_mod_8Lambda"] = "(Z/8)^4 (8Lambda = 8 * Lambda, Lambda free of rank 4)"
+    print(json.dumps(out, default=str, indent=1))
