@@ -76,7 +76,7 @@ K(√7), where L = 7 — the field the ρ₆₃ arena already produced a five-ch
 held is a belief to be attacked where it is cheapest.** The conjecture is proved only for L ≤ 3 generally, L ≤ 4 given √3, and
 L ≤ 5 for multiquadratic F ⊇ K (G55). Its remaining *testable* range is L ≤ 5 outside those classes (FS-61, FS-46, FS-48), then
 **nothing at L = 6 if the wall holds**, and then L ≥ 7, which is the problem itself — so **the conjecture has one cheap exposed
-prediction left and it is ℚ(√167): predicted ≥ 6, proven 3, and FS-58 failed to land even 4 (FS-59).** A gap of three colours at
+prediction left and it is ℚ(√167): predicted ≥ 6, proven 4 (row 79), where FS-58 and FS-61 had failed to land even 4 (FS-59).** A gap of two colours at
 a field of discriminant 668 is the best available place to be wrong, and belief should be spent there first. **(3) Nothing about
 the standard of evidence moves.** Believing the answer is seven is not evidence for seven; the value-skipping that motivates the
 belief is itself compatible with five (G64); a rung that does not land is reported as not landed; and no measurement's
@@ -132,7 +132,7 @@ not update this section is not closed. The understanding the results add up to l
 the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
 point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-09-22 (evening) — **FS-71 closed** (row 77): the theorem audit — 254 theorems in 53 derivation files, indexed in `LEDGER.md` § B; one proof wrong (demoted), three unwritten (now written), one grokking wrong at the gate (G35), four grade tags under-stated, three kernel modules no row named, six prior-art re-attributions, six theorems of a forgotten session surfaced. Before that, the same day: **FS-70 closed** (row 76; G68, G69 minted; `LEDGER.md` extracted; the theorem-tracking rule): five colours over ℚ(√3,√5) **not landed** — every lattice built but one is four-colourable at every radius by a periodic colouring and forces no pair, by theorem; rigidity and density pull apart in that field. Before that: 2026-09-21 — **FS-66 closed** (row 75; G66 and FS-68 minted): **the residue ceiling does not drop up the tower at 7, 11, 19 or 23** — exact all-levels certificates, level two at 11 in the kernel; `α(Γ₁₉) ∈ {76, 77}`, `α(Γ₂₃) ≤ 97`; the `p`-adic Hadwiger–Nelson question answered no (`CLOSED-QUESTIONS.md` §1.8). Before that: FS-61 closed 2026-09-20 (row 74).
+*Last updated: 2026-09-23 — **FS-73 closed** (rows 78–79; G71 minted): **de Grey's lattice over K has `F = P = 8Λ` at four colours** — one certified forced pair makes every four-colouring of it 8Λ-periodic; **at three colours the inheritance question is a theorem for every abelian Cayley graph** (a character criterion, dense periodic colourings, a finite-index dichotomy), which derives ℚ(√11)'s `F = 3Λ` with no forcer and certifies non-three-colourability with no LRAT; FS-61's null at ℚ(√167) is explained and **χ(ℚ(√167)²) ≥ 4** — its last lattice is not three-colourable, by two independent exact certificates; four colours carry no height. Before that: 2026-09-22 (evening) — **FS-71 closed** (row 77): the theorem audit — 254 theorems in 53 derivation files, indexed in `LEDGER.md` § B; one proof wrong (demoted), three unwritten (now written), one grokking wrong at the gate (G35), four grade tags under-stated, three kernel modules no row named, six prior-art re-attributions, six theorems of a forgotten session surfaced. Before that, the same day: **FS-70 closed** (row 76; G68, G69 minted; `LEDGER.md` extracted; the theorem-tracking rule): five colours over ℚ(√3,√5) **not landed** — every lattice built but one is four-colourable at every radius by a periodic colouring and forces no pair, by theorem; rigidity and density pull apart in that field. Before that: 2026-09-21 — **FS-66 closed** (row 75; G66 and FS-68 minted): **the residue ceiling does not drop up the tower at 7, 11, 19 or 23** — exact all-levels certificates, level two at 11 in the kernel; `α(Γ₁₉) ∈ {76, 77}`, `α(Γ₂₃) ≤ 97`; the `p`-adic Hadwiger–Nelson question answered no (`CLOSED-QUESTIONS.md` §1.8). Before that: FS-61 closed 2026-09-20 (row 74).
 Before that: 2026-09-19 — G64 corrected; 2026-09-17 — FS-58 closed (rows 72–73).*
 
 ### Where the problem stands
@@ -143,7 +143,7 @@ the standard three axioms.
 **What the kernel holds, beyond the interval** (addresses in `LEDGER.md`): **χ(ℚ(√11)²) ≥ 4** and the 3-adic barrier (rows 72–73);
 **Theorems A and B** and the finite-plane machinery around them (rows 52–60); Theorem A's two-colour case and the 2-adic splitting
 of real multiquadratic fields, with two test-passing fields whose compositum needs five colours (row 63); the compulsion toolkit —
-arity floor, homogeneity, the spindle theorem, critical sets, absorption, additive rigidity (rows 42–51); **the χ ≥ 6 target as a
+arity floor, homogeneity, the spindle theorem, critical sets, absorption, additive rigidity (rows 42–51); the Kempe layer and the inheritance question in subgroup form — Kempe swaps, forcing as a finite property, the voltage-escape certificate, the forced and periodic-forced subgroups (row 78); **the χ ≥ 6 target as a
 theorem** (rows 43, 61; G26); the seam-field closures, each exactly 4-chromatic (rows 1–25); the pigeonhole carriers (rows 31–32);
 the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de Grey's 1581) ≤ 5.
 
@@ -199,16 +199,16 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    and U₆₄ — and in reach only at 47 and U₆₄ (FS-57); no uniform independence bound can carry all of it (one could close 31, 43 and 47, never 23: G59). A composite residue target
    escapes it only through an integrality gap, and inert towers keep the Hoffman bound. **If it holds, the conjecture's main clause
    says nothing above five**, and its sharpest remaining prediction is quadratic: **ℚ(√167)** — predicted to need at least six
-   (five is refused at 23 by certificate — at every level of the tower, row 75), against a proven three (FS-56).
+   (five is refused at 23 by certificate — at every level of the tower, row 75), against a proven four (row 79).
 13. **Fractional colourings see fields the residue method cannot** (G60, row 71). `[MatolcsiEtAl2025]`'s blow-up never leaves the
    field, so a finite `H ⊂ F²` with geometric fractional chromatic number above `k` proves `χ(F²) ≥ k + 1`; with their `G27` and
    Theorem B, **χ_f(K²) = 4**. Capped by every usable residue plane's `χ_f` (3.5 at 𝔽₇) and by 4.36, so it proves at most five.
-14. **Real quadratic fields need four colours, and a census says where we can show it** (G61, G65, rows 72–74). None was known to
+14. **Real quadratic fields need four colours, and a census says where we can show it** (G61, G65, rows 72–74, 79). None was known to
    need more than three. **χ(ℚ(√11)²) = 4**, the lower half in the kernel; certified by tools, χ = 4 at nine further d and
-   4 ≤ χ ≤ 5 at four — **14 of the forty** squarefree d ≡ 11 (mod 12) below 500, the only real quadratic fields that *can* need
-   four; the other 26 are **typed nulls, never negatives**. What decides a field is how many unit vectors its lattices hold, not its
+   4 ≤ χ ≤ 5 at four, and χ ≥ 4 at 167 by a `Θ` certificate (row 79) — **15 of the forty** squarefree d ≡ 11 (mod 12) below 500, the only real quadratic fields that *can* need
+   four; the other 25 are **typed nulls, never negatives**. What decides a field is how many unit vectors its lattices hold, not its
    congruence class. Every witness uses a direction with 3 in a denominator, as the kernel's **3-adic barrier** requires; **T4 —
-   every such d needs four — is unproved.** ℚ(√167), where the conjecture predicts six: not landed (FS-59); the bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` cannot close from above by residues at any depth (§1.7, row 75).
+   every such d needs four — is unproved.** ℚ(√167), where the conjecture predicts six: FS-61's null is explained — 55 of its 57 lattices carry certified periodic three-colourings (a period-23 residue colouring among them), a 56th colours by a linear form of period index 1,080, and the 57th, `L21cc6506`, is **not three-colourable** — two independent exact `Θ`-emptiness certificates — so **χ(ℚ(√167)²) ≥ 4**, the first bound above three where the conjecture predicts six (row 79); a `Θ`-emptiness tree certifies a lattice's non-three-colourability with no LRAT (row 79); the bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` cannot close from above by residues at any depth (§1.7, row 75).
 15. **Six may be a value no field attains — a claim stronger than χ(ℝ²) ≠ 6, not equivalent to it** (G64, FS-62). *"No subfield of
    ℝ has χ(F²) = 6"* implies χ(ℝ²) ∈ {5, 7} and is not implied by it; the exact form of χ(ℝ²) ≠ 6 restates the problem. So the wall
    at six (G56, G59) is no half of a two-value Hadwiger–Nelson: it decides the value set of L — hence, under the conjecture's bold
@@ -230,13 +230,21 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    periodic colourings are residue colourings prime by prime, so a lattice is rigid — the chain route's fabric — only where every
    odd prime's target refuses, which de Grey's lattice over K does at 5, 7, 11, 13 (its unit vectors are the residue tori) and no
    lattice of rank ≤ 6 over ℚ(√3,√5) does; the rank-8 lattice with no periodic colouring found is dense only from `10⁷` points and
-   undecided six times (FS-72). The split-prime tower at 2 is tight with forcing from depth 3. **Not landed: five over ℚ(√3,√5).**
+   undecided six times (FS-72). The split-prime tower at 2 is tight with forcing from depth 3. **Not landed: five over ℚ(√3,√5).** **Over K the question is closed** (row 78): `F = P = 8Λ` — every four-colouring of de Grey's lattice is 8Λ-periodic, forced by one 2,044-point certificate — and no other rank-4 CM lattice in FS-73's table is rigid at four colours; rank 6 adds a lattice loose with no gap (L3) and one with `F ⊇ 8Λ_dG` whose four-colourability is open (KR6).
 19. **The derivations are counted, and the corpus graded itself down more often than up** (row 77, FS-71). 254 theorems proved
    outside the kernel since M17 are filed one entry each in `plans/<home>-derivation.md` and indexed in `LEDGER.md` § B — 184 by hand.
    Of the four hand claims found with no proof on disk, three closed when written and one was wrong (the general-lattice coset bound,
    now a conjecture); four grokkings had graded a hand derivation as measured or derived, one had asserted a false "exactly" (G35);
    six results sat in a session record no grokking cited (MASCOT-T6–T11: a √3-clean four-colouring of the Moser lattice is one of
    Theorem B's two residue colourings). Every kernel target the audit named already had a stub; none was minted.
+20. **At three colours the inheritance question is a theorem, and the answer is topological, not arithmetic** (row 79, G71). For
+   every Cayley graph of a finitely generated torsion-free abelian group, three-colourability is a polytope question on the character
+   torus, periodic three-colourings are dense — so a pair every periodic colouring identifies is forced — and the forced group has
+   finite index exactly when the polytope is finitely many points. It derives ℚ(√11)'s `F = 3Λ` with no forcer, answers
+   `[AbrishamiEtAl2025]` Problem 4.6 at `χ = 3` for these graphs, and certifies non-three-colourability far more cheaply than a
+   refusal's LRAT. **It stops at three by a fact about `K₄`**: a four-colouring carries no height (`K₄`'s square complex is `ℝP²`), so
+   four colours — where every question the hunt asks lives — have no such criterion, and a two-sided certificate exists only if
+   four-colourability of these graphs is decidable.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -247,7 +255,7 @@ formulation); Theorem B's kernel proof and its 𝔽₄-valued residue colouring 
 the fan-gap transport and its compulsion consumers (row 66); the tight/slack classifier of a residue plane's
 compulsions and its propagation up a tower (row 67, G54); plane freedom at every prime p ≡ 3 (mod 4); the field-internal reading of
 the fractional blow-up and `χ_f(K²) = 4` (row 71); the 3-adic barrier and the four-colour lower bounds for real quadratic
-fields (rows 72–73); the fibre-share inequality and the all-levels certificates, with the answer to the `p`-adic Hadwiger–Nelson question (row 75); every kernel certificate. **Not ours:** the value χ(K²) = 4 and the additive ℤ/4-colouring of the plane over his congruence family of biquadratic fields (`[Fischer1994]`, § Publication); the geometric fractional chromatic number, the blow-up and `G27` (`[AmbrusEtAl2023]`,
+fields (rows 72–73); the fibre-share inequality and the all-levels certificates, with the answer to the `p`-adic Hadwiger–Nelson question (row 75); the forced group of de Grey's lattice and its census; the three-colour criterion, density and dichotomy for abelian Cayley graphs and the `Θ` certificate (rows 78–79); every kernel certificate. **Not ours:** the height lift behind the three-colour theorem (Chandgotia's height functions for four-cycle-free targets); the forced pair at 8/3 (Harder, Polymath16, 2018); the value χ(K²) = 4 and the additive ℤ/4-colouring of the plane over his congruence family of biquadratic fields (`[Fischer1994]`, § Publication); the geometric fractional chromatic number, the blow-up and `G27` (`[AmbrusEtAl2023]`,
 `[MatolcsiEtAl2025]`); the finite-plane bound
 and χ(𝔽₁₁²) = 5 (Moorhouse, Manturov, Madore); the unit argument and the 1/k obstruction (Fischer); the unit-vector ring's prime inversion for multiquadratic fields at odd unramified primes, the p-integrality of unit vectors behind it, the ring in closed form for real quadratic fields, and 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8) (`[Fischer1990b]`, 1989, read 2026-09-16); ω and
 ω ≠ χ on finite planes (Vinh, Krebs, Schneider–Silva); the cell family's ≥ 7 floor (Sokolov–Voronov); the
@@ -255,7 +263,7 @@ observed 2-adic compulsion pattern and its coordinate form (Heule, Parts, Dúcz)
 
 ### The novel-results ledger
 
-**Rows 1–75 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
+**Rows 1–79 live in `LEDGER.md`** (extracted 2026-09-22): one row per result, kernel-checked unless graded otherwise, with its
 address in `Proofs/` or `tools/` and its milestone. **Row numbers are stable identifiers cited across `plans/` and this file: never
 renumber, never reuse.** The file is not loaded here by design — results are looked up by row, understanding is reasoned from — and
 it is read in full at the reframe (step 3.1) and extended at the close (step 9).
@@ -1017,11 +1025,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   ramified (2) or inert of norm ≤ 32 (4) — and the bold form makes every other field 7: χ(F²) ∈ {2, 3, 4, 5, 7}, and every
   six-chromatic unit-distance graph extends to a seven-chromatic one over its own field. The sharpest instance is **ℚ(√167)**, the
   smallest-discriminant real field with no such prime (usable planes 23, 43, 59, …): five being refused at 23 (FS-56), the
-  conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way the wall goes (6 by the main clause, 7 by the bold form), against a proven 3,
+  conjecture predicts χ(ℚ(√167)²) ≥ 6 whichever way the wall goes (6 by the main clause, 7 by the bold form), against a proven 4 (row 79),
   in a field with no √3 and no triangles. *Do: at any window member aim at α < Q²/6 — the fractional wall needs no rounding —
   and report c = α/q^{3/2} beside every found set, marked found or exact. Killing tests: a six-colouring of a window member
   (the wall); an independent set of ⌈Q²/6⌉ at one (W_f); a colouring of ℚ(√167)² with fewer than six colours (the conjecture
-  above five; four there is FS-59).*
+  above five; five there is FS-59's next question).*
 * **G60 — Fractional colourings reach fields the residue method cannot, and stop where a residue plane is fractionally small. [hand, from `[MatolcsiEtAl2025]`; cert; measured; one reading]** Every congruence between subsets of `F²` is an isometry of `F²`, so the blow-up of a finite `H ⊂ F²` along a Følner set of the (solvable) group its congruences generate stays in `F²`, and **χ(F²) ≥ ⌈χ_gf(H)⌉** (`plans/FS56-field-blowup.md`) — a lower bound that uses no residue map, no additive structure and no forced pair; instance: χ_f(K²) = 4. Its **ceiling** is `min(4.36, χ_f` of every usable residue plane`)` — 3 at an `𝔽₃` place, 3.5 at `𝔽₇` — so it can never prove more than five colours. **The reading** (R-C; killing test in FS-58): its ratio-bound shadow on pieces `Cay(ℤ⁴, W)` tends to the least local character mean over the places where the unit circle is compact (real: `J₀`'s −0.40276; `𝔽₃` −1/2; `𝔽₇` −0.5617; `𝔽₂₃` −0.3317), the split places controlled by the weights, so a real field whose compact places all read above −1/2 — ℚ(√167) first — would have χ_f ≥ 3.48. What reached four colours over real quadratic fields was not this route but finite refutations (G61, row 73). *Do: read the cap first — a usable plane with χ_f at or below the target kills the route by theorem; where every usable plane's χ_f sits above it (no `𝔽₃`, no `𝔽₇` place), price a finite `H` with χ_gf(H) > k − 1 before any forced-pair route: it proves k with no refusal, and FS-56's LP and checker exist. Killing tests: a real field whose compact places all read above −1/2 with a 3-colourable plane (the reading); a finite `H ⊂ F²` with χ_gf(H) above a usable plane's χ_f (a defect, never a finding).*
 * **G61 — Three colours break at arithmetic, not at size — and the arithmetic is the supply of unit vectors. [kernel + certified + measured; one reading]** Over a real
   quadratic field with `d ≡ 2 (mod 3)`: (1) **The barrier** [kernel, row 72]: directions integral at 3 are 3-colourable outright, so a refusal needs a direction with 3 in a
@@ -1036,8 +1044,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   at 7 has χ = 4" (false at ℚ(√2), ℚ(√7)) and "forcing at small size tracks short odd cycles in a COARSE 3-non-integral lattice" (the census: rich, not coarse); FS-58's plan first derived
   periodic affinity from "finite quotients of the 3-integral group are 3-groups" — false, since the unit vectors' lattice maps onto every stable residue plane.
   *Reading, with its test:* **T4: every squarefree d ≡ 11 (mod 12) has χ(ℚ(√d)²) ≥ 4** — the whole family that can need four (`[Fischer1990]` Thms 8–9: χ = 2 iff d ≢ 3 mod 4; χ = 3 for
-  d ≡ 3, 7 mod 12); L = 4 by the dyadic bound at d ≡ 3 (mod 8) (his Thm 10(i)) or the plane at 7, L ≥ 5 exactly at d ≡ 47, 143, 167 (mod 168). Asked of all forty fields below 500: 14
-  certified, 26 typed nulls, no counterexample, **no proof and no route to one** — no witness transfers between fields, and the chain route needs a forcer in every field's own
+  d ≡ 3, 7 mod 12); L = 4 by the dyadic bound at d ≡ 3 (mod 8) (his Thm 10(i)) or the plane at 7, L ≥ 5 exactly at d ≡ 47, 143, 167 (mod 168). Asked of all forty fields below 500: 15
+  certified (167 by FS-73's `Θ` certificate, row 79), 25 typed nulls, no counterexample, **no proof and no route to one** — no witness transfers between fields, and the chain route needs a forcer in every field's own
   3-integral graph. *Do: over a real quadratic field, saturate a lattice of unit vectors with 3 in a denominator and count them before any ball is built — supply decides; screen by
   odd girth ≤ 9 (necessary only), never by congruence class and never by a quotient, whose colourings are affine and blind. Killing test: a field in the family with a verified
   3-colouring rule for its whole plane.*
