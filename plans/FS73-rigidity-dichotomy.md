@@ -74,7 +74,7 @@ were the standard generators. Its **periodic points** are the colourings invaria
   through T10 tests H1 at every period `W′ ⊇ V` at once. **What decides an escape is `δ − p(δ̄) ∈ V`, not the index
   `[NΛ : V]`** (T10.2's wording is corrected in §S phase 4). The only approximation the instruments make is **"-found"**:
   H1 has only ever been measured over the colourings a solver returned, at `N ≤ 12`. Kernel leaf
-  `not_periodicForces_of_voltageEscape` (§K).
+  `notMem_periodicForcedSubgroup_of_voltageEscape` (§K).
 
 **The normal form: two subgroups of Λ.** This comes from the PO's amendments A1–A3 and Poros (§X 14, 20), and was settled
 by the domain pass (§M.1).
@@ -82,7 +82,8 @@ by the domain pass (§M.1).
 *The groups.*
 - For a colouring `c ∈ X`, let `Per(c)` be its group of periods.
 - Let `KPer(c)` be its **Kempe period group**: the translations that fix every `(a, b)`-Kempe component of `c`, for every pair
-  of colours.
+  of colours `a ≠ b`. The pair must be distinct. With `a = b`, every set of `a`-coloured vertices is Kempe-closed, and
+  `KPer` would collapse to `{0}`; the domain pass found this adversarial member.
 - Since `k ≥ 3`, `KPer(c) ⊆ Per(c)`: a translate of `x` lying in `x`'s `(c(x), b)`-component for two different `b` has
   `x`'s colour.
 
@@ -91,7 +92,9 @@ by the domain pass (§M.1).
   The second equality holds because a swap on any one component is again a colouring.
 - The **H1 group** is `P = {δ : every periodic colouring identifies 0 and δ} = ⋂_{c periodic} Per(c) = ⋂_{c periodic} KPer(c)`.
   The second equality is R3: a swap on `K + W′` is periodic.
-- `F ⊆ P`, and **C3-inherit holds at Λ for every δ exactly when `P = F`.**
+- `F ⊆ P`, and **C3-inherit holds at Λ for every δ exactly when `P = F`.** With no periodic colouring, `P = ⊤`: that is R2's
+  vacuous case, which is why the question carries the existence hypothesis. In the kernel this is `InheritanceQuestion`
+  and `inheritanceQuestion_iff` (§K).
 - Speak in vectors (cosets), never distances. √3 ∉ E = ℚ(√−3,√−11), so "8/√3" on de Grey's lattice is the vector
   `(8/3)(1+ζ₆) ∈ (8/3)ℤ[ζ₆]`.
 
@@ -370,7 +373,7 @@ table as an instruction; §G.5 is the index of those extractions.*
 - **26** B — the 791-point forcer forces exactly six pairs. Known answers for the census's K rows → P1d.
 - **27–30** S — quadrature, kill engine, stacking, mechanism hunt (arenas and carriers).
 - **31** B (as a warning) — `core9_plane` and `core122_plane` are vacuous. The standing instance of G30's mode 5, to which
-  `PeriodicForces`' vacuous case is sibling → §K.
+  `periodicForcedSubgroup`'s vacuous case (`P = ⊤` with no periodic colouring) is sibling → §K.
 - **32–41** S — six-programme hosts, brick and coset colourings, cell family, limit lemma.
 - **42** B — arity floor, `Forces`/`Separated` at arity 2. The census reports both pins (T10.5 kills `Separated`) → P1.
 - **43** B — homogeneity (`transport_pair_of_isometry`): forced pairs transport along isometries of the lattice → §C.
@@ -648,7 +651,7 @@ F none (the falsifiable items are in §G.1–2 and §P).*
 | P2 | G59: the quotient is a diagonal subgraph of the product of targets, so column (e) is computed, never inferred. G1/G35/G56/M53-T5/FS54-T2/row 63/M58-T3: column (b). G43/G44/R52-T1/M58-T1/M61-T1/T2/FS53-T4/rows 52–53: columns (c) with the target and quotient spectra separate. FS58-T1/T2/T3/row 72: `k = 3` locality and the composite column. FS70-T3/T4/T5/T9: the table's template. FS61-T3/row 74: lattice per field by supply, none transferred. M63H2-T6: saturation priced. FS38-D2-A/FS53-T1/FS54-T7: the spectral column. ASTRA-T2/G55: chainable-target column. G48/row 64: the `k = 5` pilot row. G61/row 73: the `k = 3` row with ℚ(√11) as positive control. FS66-E/T: ramified targets' impotence and the carry caveat |
 | P3 | G51: the protocol, retractions counted. G15: fallback (b) as pigeonhole × kill. G16/G70/MASCOT-T6/T8/T10/T11/row 11/FS58-T6/T7/rows 70, 75/FS66-W/FS66-T8/FS38-D2-B/M57-T1/T3/T6/T7/M56-T4/G42/G47/row 43/M62-T4/FS56-T1/ASTRA-T5/M61-T4/FS25-T2/M63H3-T3/FS54-T6: §C's "mathematics you stand on" and "things worth knowing" |
 | P4 | G64 (NΛ/V a module quotient, P-R2). G7/G12/G14/G62/M31-T1/M32-T1/MASCOT-T7/M63H2-T1/M63H3-T1/T4/T7/T8/row 65: rank-6 lattices as bilayers, their cross sets in closed form, the additive slice at `4 | n`. FS58-T3: the tensor shape. Row 60: residue targets never force |
-| P5 | G30/row 31/M56-T2: vacuity (`InheritanceQuestion` carries existence; `VoltageEscape` has a named inhabitant). G40/M55-T1/T3/row 49: the swap as a repaint. Rows 51, 56, 66: existing kernel lemmas. Searching rules: query Mathlib by shape before writing |
+| P5 | G30/row 31/M56-T2: vacuity (`InheritanceQuestion` carries existence, and a spec `example` inhabits it; `VoltageEscape` has a named inhabitant; F is shown to be neither `⊥` nor `⊤` on the path ℤ). G40/M55-T1/T3/row 49: the swap as a repaint. Rows 51, 56, 66: existing kernel lemmas. Searching rules: query Mathlib by shape before writing |
 | §0, §C | G60 (A4): the invariant-measure subgroup `F_μ` and the walls/recurrent split. G66's first sentence (A4): `P = F_clopen` on the odometer, with the measurable colourings in between |
 | P6 | G67: form of new entries. G69 correction (745 vs 23,083). Row 77 / FS58-T4 kernel note and FS-39's phase A (Mathlib holds the compactness lemma) |
 
@@ -851,7 +854,7 @@ arXiv:2411.01951, arXiv:1607.08357 (abstracts), then the three PDFs in §PA.3.
   *subgraph* of the product of the two targets, so neither factor's refusal nor a product theorem decides it: computed
   (G59, FS58-T3's shape without its infinite-`U` identification); (f) T10 at the **chainable** targets `1/δ ∈ ℤ[U]` (ASTRA-T2, G55). **Verdict, in the subgroup form (§0):** the ranks and invariant factors of `F_known` and `P_found`, with the periods searched, and where each chainable target sits. A target is *loose by theorem* if it lies outside `P_found`; a gap makes `P_found = 0`. It is *rigid-found* if it lies in `P_found ∖ F_known`, and *forced* if it lies in `F_known`. A lattice with no periodic colouring at any `N` searched is *refusing*, which is C3-aper's case. Lattices are chosen per field by supply, never carried between fields (FS61-T3, row 74). Ramified targets' first levels are impotent (FS66-E), and every spectral column is blind to the carry (FS66-T); both are stated in the table's header | ≤ 8 core-h; ≤ 300 s per quotient ask | `data/fs73/table/rows.jsonl`; `python3 tools/fs73_screen.py table FIELD --resume`; a kill redoes one ask |
 | **P3** | competitors "de Bruijn" and "Coxeter" (fresh Opus 5.5 each) + advisor "Poros" (fresh, or this one if its context allows; the PO decides) | **The competition on C3-inherit**, under `plans/PROTOCOL-competitor-and-advisor.md`: briefs from §C with the census and table pasted in, identical but for the names; isolated scratchpads; teasing hints only; prior art shared; retractions counted by the advisor. **Deliverable** (the PO's ruling, 2026-09-23): a theorem or a counterexample. If neither lands, the headline is **"not landed"**, and under it, each reported as exactly what it is: **(a)** the sharpened reductions; **(b)** the K instance explained by its local lemma (G70, `[Polymath16wikiR2]` Cor. 9) or the statement of why not; **(c)** a sufficient condition (a class of lattices where C3-inherit is proved); **(d)** the census's candidate list, including any counterexample candidate. A theorem's key step is re-derived by the other competitor or by the advisor, and one step by the PO. A counterexample is an explicit construction with proof, plus exact verification of properness and separation on a large finite window | ≤ 400k tokens per competitor; one working session each (≤ 8 h wall); stop when both report | each competitor keeps `plans/FS73-C3-<name>.md` current at every claim or retraction; a killed competitor is replaced by a fresh one reading its file; a kill redoes the thinking in flight |
-| **P4** | implementer (A, B, or fresh C) | **Rank 6, re-aimed** (question 3). P1g's answer first. Then for L2, L3, L6 and any rank-6 K-lattice (de Grey's lattice with one ρ₁₅ word, if rank 6): `NΛ/V` under every periodic colouring at `N ≤ 6`, the targets' images, and the re-periodised separators' periods. Read against: C2 and the cross-set closed forms (MASCOT-T7, M63H3-T1, M31-T1, M32-T1, G12, G14); the bilayer as a Σ = n coincidence rotation (G7, G62, M63H2-T1, M63H3-T7/T8); the additive slice at `4 | n` (row 65, M63H3-T4); and Poros's reading that `[NΛ:V]` is an ideal norm (P-R2). Residue targets never force (row 60), so any rank-6 forcing is composite or 2-adic. Deliverable: a mechanism statement (hand) or a typed null. **T10.2's "the deciding invariant" is re-worded at the close** | ≤ 4 core-h; ≤ 250k tokens; stop when every rank-6 lattice held has its `NΛ/V` table at `N ≤ 6` | `data/fs73/rank6/rows.jsonl`; `python3 tools/fs73_screen.py rank6 SPEC --resume`; a kill redoes one lattice-period pair |
+| **P4** | implementer (A, B, or fresh C) | **Rank 6, re-aimed** (question 3). P1g's answer first. Then for L2, L3, L6 and any rank-6 K-lattice (de Grey's lattice with one ρ₁₅ word, if rank 6): `NΛ/V` for *every* Kempe component (not only the origin's) under every periodic colouring at `N ≤ 6`, hence each colouring's `KPer(c)` and the lattice's `P_found` in the normal form (§0), the targets' images, and the re-periodised separators' periods. Read against: C2 and the cross-set closed forms (MASCOT-T7, M63H3-T1, M31-T1, M32-T1, G12, G14); the bilayer as a Σ = n coincidence rotation (G7, G62, M63H2-T1, M63H3-T7/T8); the additive slice at `4 | n` (row 65, M63H3-T4); and Poros's reading that `[NΛ:V]` is an ideal norm (P-R2). Residue targets never force (row 60), so any rank-6 forcing is composite or 2-adic. Deliverable: a mechanism statement (hand) or a typed null. **T10.2's "the deciding invariant" is re-worded at the close** | ≤ 4 core-h; ≤ 250k tokens; stop when every rank-6 lattice held has its `NΛ/V` table at `N ≤ 6` | `data/fs73/rank6/rows.jsonl`; `python3 tools/fs73_screen.py rank6 SPEC --resume`; a kill redoes one lattice-period pair |
 | **P5** | implementer K (Opus 5.5) | **The kernel**: every `sorry` of `Proofs/HadwigerNelson/Kempe.lean` (§K). Query Mathlib by shape before writing (the Searching rules; FS58-T4's note missed `Finsubgraph.lean`). The residual-finiteness step of `not_periodicForces_of_voltageEscape` may need the structure theorem (`AddCommGroup.equiv_free_prod_directSum_zmod`) or a Smith-form argument; price it before starting and report if it exceeds a day. `voltageEscapeZ` must be fully proved (vacuity: every structure-typed hypothesis has a named inhabitant). No statement changes without the planner's re-check | ≤ 2 working days; ≤ 400k tokens | the file itself; every `./scripts/build.sh` run is a checkpoint; a kill redoes the current leaf |
 | **P6** | planner (fresh) | **The close** (WORKFLOW 9): `plans/FS73-derivation.md` and `LEDGER.md` § B lines; row 78; the §G re-read; new grokkings in G67's form; P1–P4's predictions scored. Corrections: G69 (745 against 23,083 and "three orders"); FS58-T4's kernel note and FS-39 phase A (Mathlib holds the compactness lemma); T10.2's wording; "rigid" qualified against `[PeledSpinka2023]` and `[AlonEtAl2021]`; the Semantic Scholar re-check. New stubs: C3-aper (`[AbrishamiEtAl2025]` 4.6 at ℤ^r); a `k = 5` rigidity table for 6-open fields if P2's pilot is informative; C3-local as a note on FS-67's stub (context, not a route: the finite-`U` quotient is a subgraph of the product) | — | — |
 
@@ -1080,9 +1083,14 @@ fresh advisor writes its own before its first message.
 
 ## §K. The Lean skeleton
 
-`Proofs/HadwigerNelson/Kempe.lean`, not imported by `Proofs.lean` until P5 closes it. Elaborated by `./scripts/build.sh`
-(2026-09-23: build OK, 177/177 batches, the module rebuilt, `sorry` only at leaves, no other warning after the field
-docstrings). Statements:
+`Proofs/HadwigerNelson/Kempe.lean`, not imported by `Proofs.lean` until P5 closes it. It is elaborated by
+`./scripts/build.sh`.
+- 2026-09-23, planner: build OK, 177/177 batches.
+- 2026-09-23, after the domain pass: build OK, 177/177 batches, the module rebuilt, `sorry` only at leaves (15 warnings,
+  all `sorry`), log `build/gate/build/20260923T061337Z-124350.log`.
+
+The domain pass (§M.1) put the H1 half into the subgroup normal form: `IsPeriodicUnder` and `PeriodicForces` were
+replaced by `periods`, `IsPeriodic`, `forcedSubgroup` and `periodicForcedSubgroup`. Statements:
 
 | declaration | kind | status | source |
 |---|---|---|---|
@@ -1097,11 +1105,16 @@ docstrings). Statements:
 | `not_forces_of_voltageEscape` | theorem | **proved from the leaves** | T10.1 |
 | `forces_iff_of_quotient_fanGap` | theorem | **proved** (two lines over `FanGap.lean`) | **T6** |
 | `not_forces_of_additiveKempe` | theorem | `sorry` | **T2** |
-| `IsPeriodicUnder`, `PeriodicForces` | def | — | H1 |
-| `not_periodicForces_of_voltageEscape` | theorem | `sorry` | **R3** |
-| `InheritanceQuestion` | def (a `Prop`, never a theorem) | — | C3-inherit |
+| `periods C` | def (`AddSubgroup`, carrier `Function.Periodic C`) | **proved** (closure from Mathlib's `Periodic.add_period`, `.neg`) | `Per(c)`, §0 |
+| `IsPeriodic C` | def: `(periods C).FiniteIndex` | — | "periodic" with no existential over `W` |
+| `forcedSubgroup S k`, `periodicForcedSubgroup S k` | def (`⨅` of `periods`) | — | **F** and **P** (§0); `P = ⊤` with no periodic colouring (R2) |
+| `mem_forcedSubgroup`, `mem_periodicForcedSubgroup` | theorem | `sorry` | the bridges to `Forces … 0 δ` and to H1 pointwise |
+| `forcedSubgroup_le_periodicForcedSubgroup` | theorem | **proved** | `F ≤ P` |
+| `notMem_periodicForcedSubgroup_of_voltageEscape` | theorem | `sorry` | **R3** (escape direction) |
+| `InheritanceQuestion S k` | def (a `Prop`, never a theorem): existence ⟹ `P ≤ F` | — | C3-inherit, normal form |
+| `inheritanceQuestion_iff` | theorem | **proved** | C3-inherit ⟺ `P = F` |
 | `voltageEscapeZ` | def | `sorry` in five proof fields | the named inhabitant of `VoltageEscape` (the fan-gap case on ℤ) |
-| two `example`s | spec | one `sorry`, one `rfl` | — |
+| four `example`s | spec | three `sorry`, one `rfl` | the escape at 2 on ℤ; the certificate's projection; **a periodic 2-colouring of the path ℤ** (the model of `InheritanceQuestion`'s hypothesis); **`2 ∈ F`, `1 ∉ F` on the path** (F is neither `⊥` nor `⊤`) |
 
 **Read aloud against the informal claims.**
 - `not_forces_of_voltageEscape` says: no graph on `A` with edges in `S` forces `(0, δ)` when `δ` lies outside the
@@ -1109,10 +1122,20 @@ docstrings). Statements:
 - `forces_iff_of_quotient_fanGap` says: any graph with a homomorphism into the lattice graph has `Forces ↔ =` once one gapped
   quotient colouring exists. That is T6.
 - `forces_iff_exists_finite` is R1.
-- `InheritanceQuestion` is §C.2's challenge with `k` general: the existence hypothesis (i) is its first premise, H1 its
-  second.
+- `InheritanceQuestion S k` is §C.2's challenge with `k` general, for every `δ` at once: if some colouring is periodic
+  (hypothesis (i)), then `P ≤ F`. Per target the question is `δ ∈ P → δ ∈ F`. Hypothesis (ii) is `δ ∈ P`, which is H1
+  by `mem_periodicForcedSubgroup`, and the conclusion `δ ∈ F` is "forced" by `mem_forcedSubgroup`.
+- `notMem_periodicForcedSubgroup_of_voltageEscape` says: an escape certificate at a finite-index period produces a
+  periodic colouring separating `0` and `δ`. That is R3's escape direction, stated as non-membership in `P`.
 
-**Kernel decision:** the escape direction only; no "rigid" verdict has a kernel consumer. The instances (Λ′, L6, L3,
+**Kernel decision:** the escape direction only; no "rigid" verdict has a kernel consumer. **The Kempe period group
+`KPer(c)`, and R3 in its intrinsic form, are declined for FS-73's kernel, with this reason.** The intrinsic form is
+`P = ⋂_{c periodic} KPer(c)`, that is, `P ≤ KPer(c)` for every periodic `c`. It needs Kempe *components* as a kernel
+notion: the least Kempe-closed set containing a point, disjointness of components, and the stabiliser of a component.
+Every tools-side use is covered by the certificate form, whose lift is given. Both identities are hand theorems for
+`plans/FS73-derivation.md` (§0 states them):
+- `F = ⋂_c KPer(c)`. It is two lines: swap on one component.
+- `P = ⋂_{c periodic} KPer(c)`. It is R3 with components. The instances (Λ′, L6, L3,
 FS-70's exhibitions) stay tools-grade unless P5 finishes early. Their price is a finite ball with an explicit escape, which
 is FS-2's second target.
 
@@ -1142,6 +1165,43 @@ is FS-2's second target.
 
 *By a fresh de Bruijn (Opus 5.5), 2026-09-23. Order: domain, then obligation, then experience. Each pass was a fresh Skill-tool
 invocation and has its own commit. Filled pass by pass below.*
+
+### §M.1 Domain pass (`debruijn-domain-modeling`, fresh invocation)
+
+**The model it converged on.** Both sides of C3 are subgroups of Λ. Each is an intersection of period groups (and of
+Kempe period groups): `F` over every colouring, `P` over the periodic ones. The whole question is `P ≤ F`. Everything
+else the milestone computes is an upper bound for `P` or a lower bound for `F`: `F_known ⊆ F ⊆ P ⊆ P_found`. The
+convergence signal is that the statements shortened:
+- `F ≤ P` is one line (`le_iInf₂`).
+- "C3 ⟺ `P = F`" is one line.
+- R3's conclusion needs one periodic colouring and one point, because non-membership in an infimum is witnessed by a
+  single factor.
+
+**What changed, and why.**
+
+| change | the ugliness or the intrinsic fact that demanded it |
+|---|---|
+| **Skeleton: `IsPeriodicUnder C W` and `PeriodicForces S k δ` were replaced.** The replacements are `periods C : AddSubgroup A` (carrier `Function.Periodic C`), `IsPeriodic C := (periods C).FiniteIndex`, `forcedSubgroup S k := ⨅ C, periods C` and `periodicForcedSubgroup S k := ⨅ C (_ : IsPeriodic C), periods C` | The old H1 was `∀ W, W.FiniteIndex → ∀ C, (∀ w ∈ W, ∀ x, …) → C 0 = C δ`. That was a pointwise costume of a subgroup, with an existential period threaded through a hypothesis no consumer inspected. As an infimum, closure under sums and negatives comes free (no translation argument), and "periodic" loses its existential. R2 becomes visible as `P = ⊤`. It also reuses the corpus's predicate `Function.Periodic`, which `ResidueObstruction.not_forces_zero_of_not_periodic` already consumes, instead of minting a parallel `∀ w ∈ W, ∀ x` form |
+| `InheritanceQuestion S k δ` became `InheritanceQuestion S k`: existence ⟹ `P ≤ F`. Also added: `inheritanceQuestion_iff` (⟺ `P = F`), `forcedSubgroup_le_periodicForcedSubgroup`, and the bridges `mem_forcedSubgroup` (to `Forces … 0 δ`) and `mem_periodicForcedSubgroup` (to H1 pointwise) | The PO's A3, and the fact that C3 at a lattice is one inequality between two groups. The per-target form is membership (`δ ∈ P → δ ∈ F`), so nothing is lost |
+| R3 became `notMem_periodicForcedSubgroup_of_voltageEscape` (`δ ∉ P`) | Same statement in the normal form. The name follows Mathlib's `notMem_` convention: 130 declarations at our pin against 2 for `not_mem_` |
+| `not_forces_of_additiveKempe` lost its hypothesis `φ δ = 0` | G30 mode 6: the hypothesis was narrower than the truth. The pair-sum closure lies in `ker φ`, so any `δ` off the kernel satisfies `hδ` and is separated by `φ` itself. The proof splits on the case, and the statement is stronger |
+| Two spec `example`s: a periodic 2-colouring of the path ℤ (the model of `InheritanceQuestion`'s hypothesis), and `2 ∈ F ∧ 1 ∉ F` on the path | G30 mode 7 (the premise must be inhabited). The second guards the definitions against drifting to `⊥` or `⊤`. On the path, `P = F = 2ℤ`: the smallest instance where C3-inherit holds and is non-trivial |
+| **Declined in the kernel**: `KPer(c)` and R3's intrinsic form `P = ⋂_{periodic} KPer` | They need Kempe components as a kernel notion. Every consumer is tools-side and covered by the certificate form. Both identities are hand theorems for the derivation file (§K) |
+| Plan: the census computes `P_N` *exactly*, by a counterexample-guided loop over generators, and `KPer(c)` over *every* component (P1d, P1d′, P4) | FS-70's screen read only the origin's component, and only the colourings a finder happened to return. Its "rigid" therefore measured the finder (G21). `P_N` by a loop whose UNSAT answers confirm generators is a statement about every colouring at period `N`. `KPer` over one component is an upper bound on `KPer`, not `KPer` |
+| Plan: `KPer`'s colour pairs are distinct (§0) | The adversarial member. With `a = b`, every set of `a`-coloured vertices is Kempe-closed, and `KPer` collapses to `{0}`, which would make the sandwich's upper bound read "C3 holds" whenever `F = 0` |
+
+**What did not change, and why.**
+- `KempeClosed` stays graph-generic and set-valued, not component-valued. Kempe-closed sets are exactly the unions of
+  components, and they are closed under intersection. So every statement the kernel needs is expressible without
+  connectivity machinery. Components enter only where they are declined above.
+- `VoltageEscape` keeps `V` as a parameter bounded by the kernel of `π`, not the voltage span. That makes the
+  certificate monotone in `V`, and monotonicity is R3's proof engine (enlarge `V` to a finite-index `W′` that misses the
+  escape). `D` stays for compatibility with `addCayleyMap`.
+- `forces_iff_exists_finite` keeps `Set` + `.Finite`, which matches Mathlib's `Subgraph.verts.Finite` in
+  `nonempty_hom_of_forall_finite_subgraph_hom`.
+- The plan's phases, routes and sequencing are unchanged. The normal form re-states what P1 computes, not what is run.
+
+**Build:** `./scripts/build.sh` under the heavy lock, OK, 177/177 batches, `sorry` only at leaves (§K).
 
 ---
 

@@ -27,11 +27,15 @@ inheritance question (C3):
   induced subgraph, by Mathlib's `nonempty_hom_of_forall_finite_subgraph_hom` applied to the graph plus the edge
   `uv`. So "some finite ball forces `(0, δ)`" is the same statement as "the infinite lattice graph forces it"
   (FS-73 §G, reduction R1).
-* **The hypothesis H1 and its equivalence with Kempe rigidity** (`PeriodicForces`,
-  `not_periodicForces_of_voltageEscape`): if every periodic colouring identifies `0` and `δ`, no voltage
-  certificate escapes at `δ`. The swap is re-periodised through a finite-index subgroup that contains `V` and
-  misses the escape (residual finiteness of finitely generated abelian groups; Poros, 2026-09-23).
-* **The question itself** (`InheritanceQuestion`): a `Prop`, stated and never claimed.
+* **The normal form** (`periods`, `IsPeriodic`, `forcedSubgroup`, `periodicForcedSubgroup`): the forced vectors form
+  a subgroup `F`, the common periods of every colouring. The vectors every periodic colouring identifies (H1) form a
+  subgroup `P`, the common periods of the periodic ones. `F ≤ P` holds by definition. A colouring is periodic when its
+  period group has finite index.
+* **R3, the escape direction** (`notMem_periodicForcedSubgroup_of_voltageEscape`): an escape certificate at a
+  finite-index period puts `δ` outside `P`. The swap is re-periodised through a finite-index subgroup that contains
+  `V` and misses the escape (residual finiteness of finitely generated abelian groups; Poros, 2026-09-23).
+* **The question itself** (`InheritanceQuestion`): `P ≤ F` once a periodic colouring exists, stated as a `Prop` and
+  never claimed. `inheritanceQuestion_iff` restates it as `P = F`.
 -/
 
 namespace HadwigerNelson
@@ -174,50 +178,91 @@ theorem forces_iff_of_quotient_fanGap (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s
 
 /-- **T2, the additive Kempe screen**: the case `π = φ`, an additive colouring into a group of order `k`, where
 the colour-`0` part of the `(0, b)`-Kempe component of the origin is the subgroup `R_b` of pair sums `z + w`,
-`φ z = b`, `φ w = −b`. A target in the kernel of `φ` outside `R_b` escapes. To be derived from
-`not_forces_of_voltageEscape` with `Q0 = {0, b}`, `V = R_b`. -/
+`φ z = b`, `φ w = −b`. Any target outside `R_b` escapes. `R_b` lies in the kernel of `φ`, so a target off the kernel
+is covered, and there `φ` itself separates the pair. The modeling stage dropped the old hypothesis `φ δ = 0`, which
+the proof never needed (G30 mode 6). The proof splits on that case. On the kernel it applies
+`not_forces_of_voltageEscape` with `Q0 = {0, b}` (or `{0}` when no `s ∈ S` has `φ s = b`) and `V = R_b`. -/
 theorem not_forces_of_additiveKempe {Γ : Type*} [AddCommGroup Γ] [Fintype Γ] (hk : Fintype.card Γ = k)
     (φ : A →+ Γ) (hφ : ∀ s ∈ S, φ s ≠ 0) (hSneg : ∀ s ∈ S, -s ∈ S) {b : Γ} (hb : b ≠ 0) {δ : A}
-    (hδ0 : φ δ = 0)
     (hδ : δ ∉ AddSubgroup.closure {x | ∃ z ∈ S, ∃ w ∈ S, φ z = b ∧ φ w = -b ∧ x = z + w}) :
     ¬ Forces (addCayley S) k 0 δ := by
   sorry
 
 end Voltage
 
-/-! ### The inheritance question: its hypothesis H1, and H1 ⟺ Kempe rigidity -/
+/-! ### The normal form: the forced group `F`, the H1 group `P`, and the question `P ≤ F` -/
 
 section Inheritance
 
-variable {A : Type*} [AddCommGroup A] {k : ℕ}
+variable {A : Type*} [AddCommGroup A] {S : Set A} {k : ℕ}
 
-/-- A colouring of `addCayley S` is **periodic under `W`** when every translation by `W` preserves it. -/
-def IsPeriodicUnder {S : Set A} (C : (addCayley S).Coloring (Fin k)) (W : AddSubgroup A) : Prop :=
-  ∀ w ∈ W, ∀ x, C (x + w) = C x
+/-- **The period group of a colouring**: the translations `d` with `C (x + d) = C x` for every `x`, that is
+`Function.Periodic C d`, the predicate `not_forces_zero_of_not_periodic` consumes. -/
+def periods (C : (addCayley S).Coloring (Fin k)) : AddSubgroup A where
+  carrier := {d | Function.Periodic C d}
+  add_mem' h₁ h₂ := h₁.add_period h₂
+  zero_mem' := Function.periodic_with_period_zero _
+  neg_mem' h := h.neg
 
-/-- **H1 (FS-73 §0):** every periodic `k`-colouring (periodic under some finite-index subgroup) identifies `0` and
-`δ`. On a lattice with no periodic colouring it holds vacuously. That is why `InheritanceQuestion` carries the
-existence of one as a hypothesis (reduction R2). -/
-def PeriodicForces (S : Set A) (k : ℕ) (δ : A) : Prop :=
-  ∀ W : AddSubgroup A, W.FiniteIndex → ∀ C : (addCayley S).Coloring (Fin k), IsPeriodicUnder C W → C 0 = C δ
+@[simp] theorem mem_periods {C : (addCayley S).Coloring (Fin k)} {d : A} :
+    d ∈ periods C ↔ Function.Periodic C d := Iff.rfl
 
-/-- **H1 implies Kempe rigidity (H2), contrapositive form** (Poros, 2026-09-23). An escape certificate at a period
-of finite index gives a *periodic* separating colouring. `NΛ` permutes the Kempe components of the `NΛ`-periodic
-pull-back, and a finitely generated abelian group is residually finite, so some finite-index `W′` with
-`V ⊆ W′ ⊆ ker π` misses the escape. Swapping on `lift + W′` is then `W′`-periodic. -/
-theorem not_periodicForces_of_voltageEscape [AddGroup.FG A] {B : Type*} [AddCommGroup B] {π : A →+ B}
-    {S : Set A} {D : Set B} (e : VoltageEscape π S D k) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D)
-    (hfin : π.ker.FiniteIndex) {δ : A} (hδ : δ ∉ e.lift) : ¬ PeriodicForces S k δ := by
+/-- A colouring is **periodic** when its period group has finite index. Equivalently, some finite-index subgroup
+`W` has `W ≤ periods C`, since a supergroup of a finite-index subgroup has finite index
+(`AddSubgroup.finiteIndex_of_le`). -/
+def IsPeriodic (C : (addCayley S).Coloring (Fin k)) : Prop :=
+  (periods C).FiniteIndex
+
+/-- **The forced group `F`** (FS-73 §0, "The normal form"): the common periods of every proper `k`-colouring.
+`mem_forcedSubgroup` identifies membership with `Forces (addCayley S) k 0 δ`, so the forced vectors are closed under
+sums and negatives, with no argument beyond the definition. -/
+def forcedSubgroup (S : Set A) (k : ℕ) : AddSubgroup A :=
+  ⨅ C : (addCayley S).Coloring (Fin k), periods C
+
+/-- **The H1 group `P`**: the common periods of every *periodic* proper `k`-colouring. When no periodic colouring
+exists it is `⊤`. That is reduction R2's vacuous case, visible in the definition, and it is why `InheritanceQuestion`
+carries the existence of one as a hypothesis. -/
+def periodicForcedSubgroup (S : Set A) (k : ℕ) : AddSubgroup A :=
+  ⨅ (C : (addCayley S).Coloring (Fin k)) (_ : IsPeriodic C), periods C
+
+/-- Membership in the forced group is a forced pair at the origin. -/
+theorem mem_forcedSubgroup {δ : A} : δ ∈ forcedSubgroup S k ↔ Forces (addCayley S) k 0 δ := by
   sorry
 
-/-- **C3-inherit, stated and never claimed** — the question the FS-73 competition works: on a Cayley graph of an
-abelian group, if some periodic `k`-colouring exists and every periodic `k`-colouring identifies `0` and `δ`, are
-`0` and `δ` forced? By `forces_iff_exists_finite` the conclusion is "some finite piece forces the pair". The
-existence hypothesis excludes the vacuous case, which is its own question (C3-aper, `[AbrishamiEtAl2025]`
-Problem 4.6 restricted to Cayley graphs of `ℤ^r`). -/
-def InheritanceQuestion (S : Set A) (k : ℕ) (δ : A) : Prop :=
-  (∃ W : AddSubgroup A, W.FiniteIndex ∧ ∃ C : (addCayley S).Coloring (Fin k), IsPeriodicUnder C W) →
-    PeriodicForces S k δ → Forces (addCayley S) k 0 δ
+/-- **H1, pointwise**: membership in the H1 group says every periodic colouring identifies `0` and `δ`. The backward
+direction translates each periodic colouring, which stays periodic with the same periods. -/
+theorem mem_periodicForcedSubgroup {δ : A} :
+    δ ∈ periodicForcedSubgroup S k ↔ ∀ C : (addCayley S).Coloring (Fin k), IsPeriodic C → C 0 = C δ := by
+  sorry
+
+/-- `F ≤ P`: a period of every colouring is a period of every periodic one. -/
+theorem forcedSubgroup_le_periodicForcedSubgroup : forcedSubgroup S k ≤ periodicForcedSubgroup S k :=
+  le_iInf₂ fun C _ => iInf_le _ C
+
+/-- **R3, the escape direction** (Poros, 2026-09-23). An escape certificate at a period of finite index puts `δ`
+outside the H1 group: some *periodic* colouring separates `0` and `δ`. `V` may be enlarged to any `W′` with
+`V ≤ W′ ≤ ker π`, and the certificate stays valid (see `VoltageEscape`). Since `ker π / V` is a finitely generated
+abelian group, some finite-index `W′` of that kind misses `δ − p (π δ)`. Swapping on the enlarged lift is then
+`W′`-periodic. So a single period-`N` certificate tests H1 at every period `W′ ⊇ V`. -/
+theorem notMem_periodicForcedSubgroup_of_voltageEscape [AddGroup.FG A] {B : Type*} [AddCommGroup B] {π : A →+ B}
+    {D : Set B} (e : VoltageEscape π S D k) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D)
+    (hfin : π.ker.FiniteIndex) {δ : A} (hδ : δ ∉ e.lift) : δ ∉ periodicForcedSubgroup S k := by
+  sorry
+
+/-- **C3-inherit, stated and never claimed**: the question the FS-73 competition works, in its normal form. On a
+Cayley graph of an abelian group that has some periodic proper `k`-colouring, is every common period of the periodic
+colourings a common period of all colourings, `P ≤ F`? Per target the question is `δ ∈ P → δ ∈ F`, and
+`mem_forcedSubgroup` turns the conclusion into "`(0, δ)` is forced", or, by `forces_iff_exists_finite`, "some finite
+piece forces it". The existence hypothesis excludes the vacuous case, `P = ⊤`, which is its own question: C3-aper,
+`[AbrishamiEtAl2025]` Problem 4.6 restricted to Cayley graphs of `ℤ^r`. -/
+def InheritanceQuestion (S : Set A) (k : ℕ) : Prop :=
+  (∃ C : (addCayley S).Coloring (Fin k), IsPeriodic C) → periodicForcedSubgroup S k ≤ forcedSubgroup S k
+
+/-- C3-inherit is the equality of the two groups, `P = F`, once a periodic colouring exists. -/
+theorem inheritanceQuestion_iff :
+    InheritanceQuestion S k ↔
+      ((∃ C : (addCayley S).Coloring (Fin k), IsPeriodic C) → periodicForcedSubgroup S k = forcedSubgroup S k) :=
+  ⟨fun h hex => le_antisymm (h hex) forcedSubgroup_le_periodicForcedSubgroup, fun h hex => (h hex).le⟩
 
 end Inheritance
 
@@ -250,5 +295,15 @@ example : (2 : ℤ) ∉ voltageEscapeZ.lift := by
 
 -- Spec check on the certificate's projection, one line.
 example : voltageEscapeZ.a = 0 := rfl
+
+/-- The model of `InheritanceQuestion`'s hypothesis: the path graph `ℤ` has a periodic `2`-colouring (parity, period
+group `2ℤ`). Without an inhabitant, the question's premise could be empty, which is G30's failure mode 7. -/
+example : ∃ C : (addCayley ({1, -1} : Set ℤ)).Coloring (Fin 2), IsPeriodic C := by
+  sorry
+
+/-- The forced group is neither `⊥` nor `⊤` on the smallest instance: every `2`-colouring of the path graph `ℤ`
+alternates, so `2` is forced, while the edge `1` never is. On this toy `P = F = 2ℤ`, and C3-inherit holds. -/
+example : (2 : ℤ) ∈ forcedSubgroup ({1, -1} : Set ℤ) 2 ∧ (1 : ℤ) ∉ forcedSubgroup ({1, -1} : Set ℤ) 2 := by
+  sorry
 
 end HadwigerNelson
