@@ -173,6 +173,23 @@ one would give `F` rank 4 (P-C4's informative outcome). It is asked next.
 
 | `v = −(4/9)(1 + √−11)` = `(−16, 8, 8, 0)`, off the `F`-plane | `R = 1.5` | 39,829 / 366,660 / 18.41 | SAT | **UNSAT** | 36.6 | empty (the pair has common neighbours; deleting each leaves the ball not 3-colourable) | **measured, pending replication** |
 
+**Replication so far** (the PO's rulings: a second solver on the identical CNF; the smallest refusing ball; its LRAT kept):
+
+| target | second solver on the identical CNF (sha256 asserted equal) | smaller balls | smallest refusing ball | LRAT |
+|---|---|---|---|---|
+| `8/9` | **cadical 2.1.2: UNSAT, 435.6 s CPU** | `R = 1.0` (7,879 points, degree 8.3): UNKNOWN at the 1,500 s cap (control and ask), typed: budget; `R = 1.25` stopped mid-control (below) | `R = 1.5` so far | pending (queue 5) |
+| `v` | **cadical 2.1.2: UNSAT, 112.3 s CPU** (a first cadical run, 91.4 s, was on a CNF *not* identical — `confirm` had dropped the original's common-neighbour pin, which changes the symmetry break; it is a second, equally sound encoding and also UNSAT; `confirm` now rebuilds the pins exactly) | `R = 1.0`: UNKNOWN at 1,500 s (control SAT by pullback) | `R = 1.5` so far | pending (queue 5) |
+
+`R = 1.0` sits at average degree 8.3, inside the four-colour hardness band (G65: near the threshold the smaller ball is the slow
+one), and both asks there ran to the cap. The degree ladder, measured without a solver: `R = 1.1` 10.57, `1.2` 12.79, `1.25` 13.75,
+**`1.3` 14.73** (22,453 points, the first at G65's aim of ≥ 14), `1.4` 16.60, `1.5` 18.41. Queue 5 runs `R = 1.25, 1.3, 1.4` for both.
+
+**The control is now a verified pullback, not a solver ask.** Any ball in `Λ` is four-coloured by Theorem B's residue colouring
+pulled back, checked on every edge in milliseconds (on the `R = 1.5` ball: 0 of 366,660 edges monochromatic; its paired plant,
+one basis value flipped, 81,488). Near the threshold a solver control ran to its 1,500 s cap on a question the pullback answers.
+`8/9`'s `R = 1.25` ask, which was spending its cap on such a control under the old code, was stopped by pgid (verified by effect)
+and is redone in queue 5; the forfeit is about 20 minutes of solver time on a question already answered.
+
 `v = −(8/9)·(1 + √−11)/2`: `8/9` times an algebraic integer of norm 3, modulus `8√3/9 ≈ 1.540` in every embedding, one of the 24
 vectors (one point-group orbit) that are the shortest of `8Λ` off the `F`-plane. **What-if, exact, used by nothing downstream
 until both refusals replicate:** the span of the orbits of `8/9` and `v` is exactly `8Λ` (`Λ/F ≅ (ℤ/8)⁴`), which equals `P_found`.
@@ -244,3 +261,47 @@ group has index 4 (40,000 of 160,000 classes are periods at `N = 20`) that is 40
 The periods form a group, so a candidate already in the span of fully verified periods is a period by closure; only candidates that
 would enlarge the span now get a full pass. The P1b self-test and all plants pass on the new code. The slow run was stopped by pgid
 (verified: process gone, rows file static over 10 s) and resumed from its rows.
+
+**Registered prediction P-C6 (the PO's ruling, 2026-09-23, registered before `N = 32` ran).** `P_32 = 8Λ`, the next 2-power term of
+the pattern "every colouring found at `N = 2^a·m` is `2^min(a,3)`-periodic". *Both outcomes reachable:* `P_32 = 8Λ` (consistent with
+`F = 8Λ`); or `P_32 ⊊ 8Λ`, which **refutes `F = 8Λ`** (`F ⊆ P ⊆ P_32`), so one of the two pending refusals would be wrong (or
+their span computation). `N = 32` runs only if its dry price fits the remaining budget and the 40 GB cap.
+
+---
+
+## P-D3 checked against the depths (the PO's ruling)
+
+**Depths at the two primes of `E = ℚ(√−3, √−11)` above 2** (both of residue degree 2, `e = 1`), computed with Theorem B's 2-adic
+model (`tools/residue_colouring.py`, `√33 ↦ ±S`, `S ≡ 17 mod 256`): `v_𝔭(z) ≥ k` iff `z/2^k` has a residue there.
+
+| vector | 2 | 4 | 8/3 | 8/9 | `v = −(4/9)(1+√−11)` | 16/3 | 16/9 | 16 | 48 |
+|---|---|---|---|---|---|---|---|---|---|
+| depths at the two primes | 1, 1 | 2, 2 | 3, 3 | 3, 3 | 3, 3 | 4, 4 | 4, 4 | 4, 4 | 4, 4 |
+
+`8Λ`'s Hermite generators have depths `(3, 6)`, `(3, 3)`, `(4, 3)`, `(3, 3)`; since `Λ` is 2-integral, **every vector of `8Λ` has
+depth ≥ 3 at both primes**, so P-C2's first half ("every H1-found target has depth ≥ 3 at both primes") holds on all of `P_found`,
+and no depth-2 target is H1-found (`4 ∉ P_found`).
+
+**P-D3 ("no finite unit-distance graph in K² forces a four-colour pair at depth 4: 16/3, 16, 16/9, 48", FS38-derivation.md) is
+refuted as stated, and by Harder's pair alone, independently of this phase's pending refusals.** Derivation: if a finite graph `G`
+forces `(0, 8/3)`, then `G ∪ (G + 8/3)` forces `(0, 16/3)` (`c(0) = c(8/3) = c(16/3)`; `Forces` is monotone upward in the graph), and
+`16/3` has depth 4 at both primes; `16 = 6·(8/3)` and `48 = 18·(8/3)` follow by longer chains of translates, and `16/9 = 2·(8/9)`
+would follow from `8/9`. **The verified instance** (P-D3's own falsifier asks for "one K² graph with a verified forced pair"): the
+radius-1.5 Minkowski ball `B` united with `B + 8/3` (79,571 points, 747,290 edges), the pair `(−4/3, 4)`, asked by
+`python3 tools/fs73_screen.py pd3 K` (row `pd3:union:R1.5`): control SAT (pullback); **the single ask ran to its 1,500 s cap —
+UNKNOWN, typed: budget** (CDCL does not find the two-step chain within the cap). So the refutation rests on the derivation, not on
+one refusal: `B` forces `(−4/3, 4/3)` (refused, 122 s, `force:96,-48,-48,-24:R1.5`), its translate `B + 8/3` forces `(4/3, 4)`
+(the same CNF up to renaming), and `Forces` composes; a reviewer checks the one refusal and the translation. *Reading:* P-D3's mechanism ("the tower's depth-4 forcing … has no finite sub-witness") cannot have been
+about the group generated by forced vectors, since forced vectors form a group and any depth-3 forced vector has depth-4 multiples;
+if it meant a primitive depth-4 forcing (a forced vector of depth 4 no smaller forced vector divides), it needs restating.
+
+---
+
+## The enumeration of `Λ/8Λ`'s colourings — priced (the PO asked for a price, not a run)
+
+The price came out as the whole thing: with the finder's pins (origin 0, least neighbour 1, a quotient triangle 2 — which fixes the
+colour permutation completely) and at-most-one clauses, an incremental cadical153 enumeration with blocking clauses **exhausted in 8 s
+at exactly 380 pinned colourings** of `Cay(Λ/8Λ, U mod 8)` (4,096 classes). By period group `Λ/Per`: `ℤ/2 × ℤ/8` 336, `ℤ/8` 24,
+`ℤ/2 × ℤ/4` 12, `ℤ/4` 6, `(ℤ/2)²` 2. Nothing was classified or kept: the classification up to translation and point group, and the
+G70 test (the two √3-clean colourings should be Theorem B's pair), are left for the fresh implementer. If `F = 8Λ` stands, these 380
+are, up to colour permutation, every proper four-colouring of de Grey's lattice graph.

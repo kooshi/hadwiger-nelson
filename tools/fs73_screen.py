@@ -913,7 +913,7 @@ def run_cnf(parts, n, nvars, budget, solver='kissat', heavy=False, tag='g', proo
     return rec, col
 
 
-def forcing_ask(points, U, delta, budget=1500, solver='kissat', heavy=None, critical=True):
+def forcing_ask(points, U, delta, budget=1500, solver='kissat', heavy=None, critical=True, control_vals=None):
     """on the finite graph over `points`: (1) the plain control (must be SAT); (2) the forcing ask c(0) = 0, c(delta) = 1 (a common
     neighbour pinned 2 when one exists): UNSAT is a refusal, the pair forced in this graph; (3) for a refusal, the critical-set check
     (G39, M54-T1): the critical set lies in N(0) n N(delta), so it is empty when that is empty; otherwise each common neighbour w is
@@ -932,9 +932,19 @@ def forcing_ask(points, U, delta, budget=1500, solver='kissat', heavy=None, crit
     nb = min(adj0)
     adjnb = set(E[E[:, 0] == nb, 1].tolist()) | set(E[E[:, 1] == nb, 0].tolist())
     tri = next((w for w in sorted(adj0 & adjnb)), None)
-    ctl_pins = [(o, 0), (nb, 1)] + ([(tri, 2)] if tri is not None else [])
-    parts, nv = graph_cnf(n, E, ctl_pins)
-    out['control'], col = run_cnf(parts, n, nv, budget, solver, heavy, 'ctl')
+    if control_vals is not None:
+        # the control needs no solver: a periodic colouring of the lattice (Theorem B's residue colouring) pulled back to the graph,
+        # verified on every edge -- certain where a solver control near the four-colour threshold can run to its cap (G65)
+        X = np.array(points, dtype=np.int64)
+        ph = np.array(control_vals, dtype=np.int64)
+        colc = (np.mod(X @ (ph & 1), 2) + 2 * np.mod(X @ (ph >> 1), 2)).astype(np.int8)
+        mono = int(np.count_nonzero(colc[E[:, 0]] == colc[E[:, 1]]))
+        out['control'] = {'verdict': 'SAT' if mono == 0 else f'NOT PROPER ({mono} monochromatic edges)',
+                          'how': "Theorem B's residue colouring pulled back and verified on every edge", 'wall_s': 0, 'cpu_s': 0}
+    else:
+        ctl_pins = [(o, 0), (nb, 1)] + ([(tri, 2)] if tri is not None else [])
+        parts, nv = graph_cnf(n, E, ctl_pins)
+        out['control'], col = run_cnf(parts, n, nv, budget, solver, heavy, 'ctl')
     pins = [(o, 0), (dl, 1)] + ([(common[0], 2)] if common else [])
     parts, nv = graph_cnf(n, E, pins)
     out['forces'], _ = run_cnf(parts, n, nv, budget, solver, heavy, 'frc')
@@ -1289,7 +1299,7 @@ def cmd_force_K(targets, radii, budget=1500):
                 keep = core(len(pts), E, 4, keep=(idx[a], idx[b]))
                 sub = [pts[i] for i in keep]
                 shifted = [tuple(x - y for x, y in zip(p_, a)) for p_ in sub]        # the pair becomes (0, delta)
-                fa = forcing_ask(shifted, U, delta, budget=budget)
+                fa = forcing_ask(shifted, U, delta, budget=budget, control_vals=named_colouring_values(lat, 'residue'))
                 got = rows.put({'key': key, 'target': t, 'delta': list(delta), 'R': R, 'ball_points': len(pts),
                                 'core4_points': len(sub), **fa})
             v = got['verdict']
@@ -1322,7 +1332,11 @@ def cmd_confirm_K(key, solver, budget):
     idx2, E2 = ball_graph(shifted, U)
     n = len(shifted)
     o, dl = idx2[tuple([0] * r)], idx2[delta]
-    parts, nv = graph_cnf(n, E2, [(o, 0), (dl, 1)])
+    # the original ask's pins, rebuilt exactly: a common neighbour of the pair, when one exists, is pinned to colour 2 (forcing_ask)
+    adj0 = set(E2[E2[:, 0] == o, 1].tolist()) | set(E2[E2[:, 1] == o, 0].tolist())
+    adjd = set(E2[E2[:, 0] == dl, 1].tolist()) | set(E2[E2[:, 1] == dl, 0].tolist())
+    common = sorted(adj0 & adjd)
+    parts, nv = graph_cnf(n, E2, [(o, 0), (dl, 1)] + ([(common[0], 2)] if common else []))
     exe = os.path.expanduser('~/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical') if solver == 'cadical' else solver
     proof = None
     if '--lrat' in sys.argv:
@@ -1335,9 +1349,33 @@ def cmd_confirm_K(key, solver, budget):
         rec['lrat_bytes'] = os.path.getsize(proof) if os.path.exists(proof) else None
     rec['solver'] = solver
     same = rec['cnf_sha256'] == d['forces']['cnf_sha256']
-    out = rows.put({'key': f'confirm:{key}:{solver}', 'of': key, 'cnf_identical': same, **rec})
+    k2 = f'confirm:{key}:{solver}' + ('' if rows.get(f'confirm:{key}:{solver}') is None else f':{len(rows.rows)}')
+    out = rows.put({'key': k2, 'of': key, 'cnf_identical': same, 'pins': 'pair + first common neighbour' if common else 'pair', **rec})
     print(f'{key}: {solver} -> {rec["verdict"]} ({rec["cpu_s"]} s CPU); CNF identical to the recorded one: {same}', flush=True)
     return 0 if (same and rec['verdict'] == 'UNSAT') else 1
+
+
+def cmd_pd3_K(R=1.5, budget=1500):
+    """P-D3's falsifier, verified on a finite graph: B = the Minkowski ball of radius R, B u (B + 8/3), the pair (-4/3, 4) at difference
+    16/3 (2-adic depth 4 at both primes above 2).  By the group law the refusal is certain once B forces (-4/3, 4/3); the ask verifies
+    the union on the graph itself."""
+    lat, r, T = degrey_setup()
+    U = lat.U
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))
+    key = f'pd3:union:R{R}'
+    got = rows.get(key)
+    if got is None:
+        B = minkowski_ball(lat, R)
+        t = T['8/3']
+        pts = sorted(set(B) | {tuple(a + b for a, b in zip(p_, t)) for p_ in B})
+        a = FL.rational_point(lat, -4, 3)
+        delta = FL.rational_point(lat, 16, 3)
+        shifted = [tuple(x - y for x, y in zip(p_, a)) for p_ in pts]
+        fa = forcing_ask(shifted, U, delta, budget=budget, control_vals=named_colouring_values(lat, 'residue'))
+        got = rows.put({'key': key, 'what': 'B u (B + 8/3), pair (-4/3, 4), difference 16/3 (depth 4, 4)', 'R': R, **fa})
+    print(f"P-D3 falsifier: {got['points']} points, {got['edges']} edges; control {got['control']['verdict']}; forces 16/3 "
+          f"{got['forces']['verdict']} ({got['forces']['cpu_s']} s CPU); {got['verdict']}; critical set {got.get('critical_set')}", flush=True)
+    return 0
 
 
 # ================================================================ P1c: the two-instrument cross-check
@@ -1547,6 +1585,8 @@ def main():
     if argv[0] == 'confirm' and argv[1] == 'K':
         return cmd_confirm_K(argv[argv.index('--key') + 1], argv[argv.index('--solver') + 1],
                              int(argv[argv.index('--budget') + 1]) if '--budget' in argv else 3000)
+    if argv[0] == 'pd3' and argv[1] == 'K':
+        return cmd_pd3_K()
     if argv[0] == 'crosscheck':
         return cmd_crosscheck()
     if argv[0] == 'spectrum':
