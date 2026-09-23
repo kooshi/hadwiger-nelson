@@ -3,12 +3,43 @@
 *Planner: de Bruijn (Opus 5.5), 2026-09-23, from `plans/STUB-rigidity-dichotomy.md`, under WORKFLOW 2.0 steps 3–5. Product
 owner: the coordinating session (review by artifact). Advisor for this stage: Poros (agent `a20773e5a80987272`, its own
 record `plans/POROS-2026-09-23-fs73-plan.md`). This file has one writer (the planner of the stage in hand). The modeling
-passes (step 6) have NOT run. They come after the product owner scores §G and the plan.*
+passes (step 6) are recorded in §M, by a fresh de Bruijn (Opus 5.5), after the product owner's amendments below.*
 
-*How to read it: §0 is the milestone after the reframe, in one page. §G is the re-grokking (every grokking, every ledger
-row, every § B line, every method rule, one verdict each). §PA is the prior-art gate. §S is the subplan (routes, phases,
-sequencing). §C is the text for the competition's briefs. §K is the Lean skeleton. §P is the registered predictions.
-§X records the exchange with Poros and its retractions. §R is empty and fills as phases report.*
+*The plan was **accepted by the product owner on 2026-09-23**, at `9d1fe367`, `974ec8fa` and `73114a7f`. Poros's final
+record is `ed7be12b`.*
+- *The planner's four settled decisions stood:*
+  1. *census and classification before the competition;*
+  2. *the existence hypothesis in the challenge;*
+  3. *question 3 re-aimed at the voltage set;*
+  4. *the kernel phase in parallel with phase 1.*
+- *The PO's two rulings stood.*
+  - *R1: two advisor items (H-1, H-2) are held by the PO for the competition's advisor, and are deliberately not in this
+    plan.*
+  - *R2: question (1)'s target stays "a theorem or a counterexample", with the "not landed" headline and fallbacks (a)–(d).*
+- *One spec defect was routed to the modeling stage: P1d's "the finite group `P_found / F_known`", which is infinite when
+  `F_known` has rank 2. It was fixed under amendment A1, below.*
+
+*The PO's review amendments (2026-09-23), applied before the modeling passes:*
+- *A1: P1d's instance list became a finite generating set, and P-C4's informative outcome was extended.*
+- *A2: the period-search extension got its own row, P1d′.*
+- *A3: the subgroup form is the plan's normal form (§0 "The normal form", §C, P1d–P1f, P2's verdict column).*
+- *A4: the discretionary items. The decision on each is recorded in §G.1 at G60 and G66.*
+
+*One refinement of A1 is the modeling stage's own. With the Kempe re-periodisations included, `P_found` lies inside every
+voltage group. So it contains `lcm(N)·Λ` only when every voltage group has full rank. That holds at K and fails on L3
+(§0).*
+
+*How to read it:*
+- *§0 is the milestone after the reframe, in one page, with the subgroup normal form.*
+- *§G is the re-grokking: every grokking, every ledger row, every § B line and every method rule, one verdict each.*
+- *§PA is the prior-art gate.*
+- *§S is the subplan: routes, phases, sequencing, and each stage-1 phase's "what to read first".*
+- *§C is the text for the competition's briefs.*
+- *§K is the Lean skeleton.*
+- *§P is the registered predictions.*
+- *§M records the modeling passes.*
+- *§X records the exchange with Poros and its retractions.*
+- *§R holds the phase records, and fills as phases report.*
 
 ---
 
@@ -44,6 +75,86 @@ were the standard generators. Its **periodic points** are the colourings invaria
   `[NΛ : V]`** (T10.2's wording is corrected in §S phase 4). The only approximation the instruments make is **"-found"**:
   H1 has only ever been measured over the colourings a solver returned, at `N ≤ 12`. Kernel leaf
   `not_periodicForces_of_voltageEscape` (§K).
+
+**The normal form: two subgroups of Λ.** This comes from the PO's amendments A1–A3 and Poros (§X 14, 20), and was settled
+by the domain pass (§M.1).
+
+*The groups.*
+- For a colouring `c ∈ X`, let `Per(c)` be its group of periods.
+- Let `KPer(c)` be its **Kempe period group**: the translations that fix every `(a, b)`-Kempe component of `c`, for every pair
+  of colours.
+- Since `k ≥ 3`, `KPer(c) ⊆ Per(c)`: a translate of `x` lying in `x`'s `(c(x), b)`-component for two different `b` has
+  `x`'s colour.
+
+*The two sides of C3.* Both are subgroups, by translation invariance.
+- The **forced group** is `F = {δ : (0, δ) forced} = ⋂_{c ∈ X} Per(c) = ⋂_{c ∈ X} KPer(c)`.
+  The second equality holds because a swap on any one component is again a colouring.
+- The **H1 group** is `P = {δ : every periodic colouring identifies 0 and δ} = ⋂_{c periodic} Per(c) = ⋂_{c periodic} KPer(c)`.
+  The second equality is R3: a swap on `K + W′` is periodic.
+- `F ⊆ P`, and **C3-inherit holds at Λ for every δ exactly when `P = F`.**
+- Speak in vectors (cosets), never distances. √3 ∉ E = ℚ(√−3,√−11), so "8/√3" on de Grey's lattice is the vector
+  `(8/3)(1+ζ₆) ∈ (8/3)ℤ[ζ₆]`.
+
+*What the census works with.* The census computes a sandwich of four subgroups:
+```
+F_known  ⊆  F  ⊆  P  ⊆  P_found
+```
+- `F_known` is the span of the orbits of certified forced vectors under the graph automorphisms fixing 0 (ζ₆, conjugation,
+  the Galois flip; G27, M62-T4).
+- `P_found = ⋂_{N searched} P_N ∩ ⋂_{c found} KPer(c)`.
+- `P_N` is the H1 group at period `N`. It is computed exactly by a counterexample-guided loop over generators (P1d).
+- `KPer(c)` is read off every Kempe component of `c`, at every colour pair, not only the origin's (T10's voltage groups).
+
+*Consequences, each two lines.*
+1. **`F_known = P_found` proves C3 at Λ.** It is a theorem whose certificates are the forcing refusals and the exhibited
+   periodic colourings.
+2. **C3 at Λ needs `rank F = rank P`.** When `rank P_found = rank F_known`, the quotient `P_found / F_known` is finite, and
+   the census asks once per nontrivial coset.
+3. **If `P` has finite index, C3 at Λ holds exactly when `F` has finite index.**
+   - If `F` has finite index, every colouring is `F`-periodic, hence periodic, so `P = F`.
+   - Conversely, `P = F` makes `F` of finite index.
+   - So under a finite-index `P`, an `F` of lower rank is a counterexample at Λ.
+4. **`P_found ⊇ lcm(N)·Λ` only when every voltage group `V` of every found colouring has full rank**, because
+   `KPer(c) ⊆ V`.
+   - At K this holds. `V` has rank 4 and index 1–4 in `NΛ` at every `N ≤ 12` and every `b`
+     (`data/fs70/quotient/degrey-K-periodic-kempe.json`).
+   - So at K, `P_found` has finite index, and with `F_known = (8/3)ℤ[ζ₆]` of rank 2 (P-C4), `P_found / F_known ≅ ℤ² × finite`.
+   - On L3 it fails: the `b = 3` component has `V` of deficient rank (`data/fs70/records/phase-1e.md` §7, P2).
+5. **K itself may be the instance under test.** Suppose `P_found` stabilises at finite index as periods are added, while `F`
+   stays rank 2. Then K is a *counterexample candidate* (P1d′, P-C4, P-C5). It stays a candidate, because a finite search
+   never proves that `P` has finite index.
+6. **The census can confirm C3 at a lattice (consequence 1), but it never refutes C3.** A refutation needs `δ ∈ P`
+   *proved*, over every period, together with a separating colouring given by a rule.
+
+*Credit for consequence 4.* The rank condition is the modeling stage's correction of A1's premise (de Bruijn, 2026-09-23;
+the PO checked and accepted it). A1 had assumed every voltage group has full rank.
+
+**The gap between F and P, split by invariant measures (A4; the PO's ruling of 2026-09-23 puts it in §0, §G and §C).**
+Λ ≅ ℤ^r is amenable, so the colouring shift `X` carries Λ-invariant probability measures.
+
+*The third subgroup.* Let **`F_μ`** be the set of `δ` with `μ{c : c(0) ≠ c(δ)} = 0` for every invariant probability
+measure `μ` on `X`.
+- `F_μ` is a subgroup. The separation events obey a triangle inequality, and shift-invariance does the rest.
+- `F ⊆ F_μ`: a forced pair has an empty separation event.
+- `F_μ ⊆ P`: a periodic separator's finite orbit carries an invariant uniform measure, with positive mass on the separation
+  event.
+
+*So C3-inherit splits into two halves.*
+- **The walls half, `F = F_μ`.** It fails exactly when some colouring separates `(0, δ)` only on a set of zero upper Banach
+  density. When the density is positive, a Følner limit gives a separating `μ` (the Furstenberg correspondence principle).
+  MASCOT-T10's phase walls and the tri-sectors are the corpus's candidates.
+- **The recurrent half, `F_μ = P`.** It holds whenever the periodic-orbit measures are weak-* dense among the invariant
+  measures on `X`, because the separation event is a clopen cylinder. That is a density-of-periodic-measures question, in
+  ergodic theory's words.
+- G66's analytic chain sits here as well. The *continuous* colourings of the odometer (Λ acting on its profinite
+  completion Λ̂) are exactly the periodic colourings. Its *measurable* colourings push Haar measure to invariant measures on
+  `X`. So `F ⊆ F_μ ⊆ F_meas ⊆ F_clopen = P`: C3-inherit is the compulsion analogue of `χ_clopen = χ`, and the Borel and
+  measurable colourings sit between the two (descriptive combinatorics; Gao–Jackson–Krohne–Seward's Memoir, §PA.2).
+
+*No instrument for `F_μ` runs at K.* A window LP on pattern frequencies certifies `δ ∈ F_μ` only when the window
+contains a forcing set, because the LP converges from above. At 8/3 that is 745 points, and no pattern LP of that size is
+priced. The split is a statement of the question, offered to both competitors as fallback (a)'s kind of product. It is not
+a phase.
 
 **The three questions, re-posed.**
 
@@ -86,7 +197,8 @@ Hoffman sign.
 - For (2): the table.
 - For (3): the composite-period finding and a mechanism statement, or its null.
 - The kernel forms of T2, T6, T10's escape direction, R1 and R3 (§K).
-- A census of informative instances (phase 1).
+- The census (phase 1): one subgroup sandwich per lattice, P1d′'s stabilisation series at K, and the informative
+  instances read off them.
 
 **Bearing on χ ≥ 6: none directly.** High on the programme: it is the statement of where a forcer can live in a field,
 which every six-forcer question over a window field will need in the same words (k = 5, a pilot row in phase 2).
@@ -210,7 +322,10 @@ table as an instruction; §G.5 is the index of those extractions.*
   targets. A lattice quotient `Cay(Λ/NΛ, U mod N)` is only a diagonal *subgraph* of the product of its local targets,
   because `U` is finite (de Grey's 54 vectors against 24 × 48 pairs at N = 35). So product bounds bound the quotient from
   one side only, and FS58-T3's tensor identification, which used an infinite `U`, does not transfer → P2 column (e), §0.
-- **G60** S — fractional colourings.
+- **G60** B (moved from S at the PO's amendment A4, decided at the modeling stage). The blow-up's engine is an
+  invariant measure on an amenable group, and Λ ≅ ℤ^r is amenable. So a separating colouring's orbit closure carries an
+  invariant measure, which defines the third subgroup `F_μ` with `F ⊆ F_μ ⊆ P`. That splits C3-inherit into a walls half
+  and a recurrent half (§0). G60's own LP instrument does not run at K (§0, last paragraph) → §0, §C.
 - **G61** B — at three colours rigidity is periodic and local, and supply of unit vectors decides. The three-colour
   classification over ℚ(√167) (FS-59's question) is P2's `k = 3` row. "Quotient screens are blind at three colours on
   affine colourings" is the reason that row uses the gap-aimed finder and T10, not colourability → P2.
@@ -224,7 +339,9 @@ table as an instruction; §G.5 is the index of those extractions.*
 - **G66** B — "ask the whole graph clique-pinned before any finder", and "CDCL refuses nothing up a tower it cannot refuse at
   the bottom" (FS66-T6). The census's ball asks at a target outside every refusing quotient's reach are expected to be hard
   from the start. Lemma W (fibre shares leave the polytope) is the corpus's own warning that local-to-global transfers can
-  fail → P1, §C.
+  fail → P1, §C. **Also its first sentence (A4, modeling stage):** periodic colourings are exactly the continuous colourings of
+  the odometer Λ ↷ Λ̂, so `P = F_clopen`, and C3-inherit is the compulsion analogue of `χ_clopen = χ`, with the measurable
+  colourings in between (`F ⊆ F_μ ⊆ F_meas ⊆ P`) → §0, §C.
 - **G67** B (method) — every grokking minted at the close carries a trigger-led *Do* and a killing test → P6.
 - **G68** B — ask the quotient before the ball, and read it for a gap. P1b runs it at every admissible `N` before any census
   ball, with the complete-U soundness edge stated per row.
@@ -524,6 +641,7 @@ F none (the falsifiable items are in §G.1–2 and §P).*
 | P1b | G13/row 4: gap-aimed finder first. G68/FS58-T5: quotient at every admissible `N` before any ball. G38/M53-T8/M56-T1/FS25-T4/row 50: additive rows as the `N = 2, 4` slice. G41/row 57/M53-T3: Fischer's ℤ/4 and Theorem B's colouring as finder controls. G31/T10.6: re-verify every escape on the saturated graph. G27: Galois symmetry break. R3: report the separating periodic colouring's period `W′`, not the index |
 | P1c | G54 relabelled: forces refusal vs gap finder, a two-instrument cross-check (no claim about G54's middle case) |
 | P1d | G9/row 26: known-answer rows. G17/G65/FS61-T5: ball ladder aimed at degree ≥ 14. G18: cubes when monolithic CDCL caps. G33: growth mode. G36/M53-T12: the no-finite-extension certificate where it applies. G39/M54-T1/row 48: critical-set check on every refusal. M55-T4/M63H4-T2/T3: ask cores. FS66-T6/G66: expect hardness where no quotient refuses. MASCOT-T1/T2/row 59/R59-T1: targets graded by depth. Row 67/P-D3: register depth-by-depth. FS38-D1: period census at 2 |
+| P1d′ | A2 (PO): the period extension with its own budget and stop rule. G59 and the composite column: composite and prime-power periods. G21 and the § Gate rule on reachable uninformative outcomes: an UNSAT period is no plateau step, and outcome (c) is declared |
 | P1e | FS70-T8 (generator-only, `N ∈ {2,4}`): odd-`N` gap-aimed quotients at 5, 7 first (P-M2's live half), then saturation, then balls. FS70-T1/T7: targets by depth |
 | P1f | G21: every row states its graph (saturated or generators), periods, finder, verdict. M63D-T7: no H1-found target promoted to a forcing claim. Rows 22–24: check their explicit colourings for periodicity |
 | P1g | Poros's L3 card (composite period), minutes, before P4 is written in detail |
@@ -531,10 +649,11 @@ F none (the falsifiable items are in §G.1–2 and §P).*
 | P3 | G51: the protocol, retractions counted. G15: fallback (b) as pigeonhole × kill. G16/G70/MASCOT-T6/T8/T10/T11/row 11/FS58-T6/T7/rows 70, 75/FS66-W/FS66-T8/FS38-D2-B/M57-T1/T3/T6/T7/M56-T4/G42/G47/row 43/M62-T4/FS56-T1/ASTRA-T5/M61-T4/FS25-T2/M63H3-T3/FS54-T6: §C's "mathematics you stand on" and "things worth knowing" |
 | P4 | G64 (NΛ/V a module quotient, P-R2). G7/G12/G14/G62/M31-T1/M32-T1/MASCOT-T7/M63H2-T1/M63H3-T1/T4/T7/T8/row 65: rank-6 lattices as bilayers, their cross sets in closed form, the additive slice at `4 | n`. FS58-T3: the tensor shape. Row 60: residue targets never force |
 | P5 | G30/row 31/M56-T2: vacuity (`InheritanceQuestion` carries existence; `VoltageEscape` has a named inhabitant). G40/M55-T1/T3/row 49: the swap as a repaint. Rows 51, 56, 66: existing kernel lemmas. Searching rules: query Mathlib by shape before writing |
+| §0, §C | G60 (A4): the invariant-measure subgroup `F_μ` and the walls/recurrent split. G66's first sentence (A4): `P = F_clopen` on the odometer, with the measurable colourings in between |
 | P6 | G67: form of new entries. G69 correction (745 vs 23,083). Row 77 / FS58-T4 kernel note and FS-39's phase A (Mathlib holds the compactness lemma) |
 
 *Tally, counted by script and by hand after Poros's review of the silent verdicts (G21: a count typed before counting was
-wrong by 16 in § B and by 4 in the grokkings, and is corrected here): grokkings B 46 / S 24; rows B 33 / S 44 (22–24
+wrong by 16 in § B and by 4 in the grokkings, and is corrected here): grokkings B 47 / S 23 (G60 moved at A4, recounted by script at the modeling stage); rows B 33 / S 44 (22–24
 pending one check); § B B 92 / S 162; method rules in §G.4 B 17 / S 2. Every B appears as an instruction in the
 table above or in §S's phase rows.*
 
@@ -723,13 +842,14 @@ arXiv:2411.01951, arXiv:1607.08357 (abstracts), then the three PDFs in §PA.3.
 | **P1a** | implementer A | `tools/fs73_lattice.py`, a field-generic lattice layer: `E = ℚ(√a,√b)(i)`, `ℚ(√d)(i)` or K(i); generators → HNF lattice → **saturation to denominator `D`** (complete `U`, priced first by M63H2-T6's shell count); integer coordinates; the lattice's point group and the Galois automorphisms preserving it (G27, M62-T4). Controls reproduce FS-70's numbers: de Grey's 54 / rank 4 (G8, row 46, the owner's construction), Λ′'s 46, L3's 42, and ℚ(√11)'s 108-vector shape (row 74). Python workers use the fork context | ≤ 3 h; stop when the four controls reproduce | none needed (minutes) |
 | **P1b** | A | `tools/fs73_screen.py`, the screens as one driver, reusing `fs70_periodic_kempe`'s algorithms: **(i)** the lattice spectrum `m(Λ)` and each quotient's minimum, reproducing §R0 exactly; **(ii)** at every admissible `N ≤ 12` (5 and 7 always): quotient colourability with a pinned clique (triangle iff `√3` in the field, G57) and colour precedence. **The gap-aimed finder first** (G13, G68), then `sep`-aimed finders per target, then T10 on every colouring found. **Escapes report the period `W′` of the re-periodised separating colouring** (R3, from the Smith form of `NΛ/V`), never the index, and are re-verified on the saturated graph (G31, T10.6). **(iii)** The additive screen as the `N = 2, 4` slice (G38, M56-T1, FS25-T4); `1/2 ∈ Λ` ⟹ empty (row 50). Controls: Theorem B's colouring (N = 2) and `[Fischer1994]`'s ℤ/4 colouring (N = 4) on de Grey's lattice are verified as solutions (G41, row 57); L1's gapped `N = 5` colouring is found (T6 plant); `fs70_periodic_kempe selftest --plants` passes | ≤ 4 h; stop when every control passes | none |
 | **P1c** | A | The two-instrument cross-check on de Grey's lattice at N = 8, 10, 12. Instrument one: the gap finder (a second encoding and a second solver). Instrument two: Harder's forces refusal on the 23,083-point ball. **Uninformative outcome (expected):** they agree, no gap. **Informative:** a gapped colouring, which falsifies one instrument. **Not** a test of G54's middle case (§X) | ≤ 1 h | none |
-| **P1d** | A | **The H1 census over K, as a finite subgroup computation** (Poros's spec fix, §X 14). Both sides of C3 are **subgroups** of Λ: the forced set `F`, and the common periods `P` of all periodic colourings, are each closed under sums and negatives by translation invariance, and `F ⊆ P`. So C3-inherit at one lattice, for every δ, is `P = F`. The census computes **`P_found`** exactly: the common periods of the found colourings at `N ∈ {2,4,6,8,10,12}` together with their Kempe re-periodisations (R3). It contains `lcm(N)·Λ`, so it has finite index. It also computes **`F_known`**: the subgroup generated by the orbits of the known forced vectors under the graph's automorphisms fixing 0 (ζ₆, complex conjugation, the Galois flip √−11 ↦ −√−11; G27, M62-T4). **Targets are cosets, never distances**: √3 ∉ E = ℚ(√−3,√−11), so "8/√3" is the vector `(8/3)(1+ζ₆)`, already in `F_known` (coordinates `[24,0,24,0]`). The informative-instance list is the finite group **`P_found / F_known`**: one forcing ask per nontrivial coset, at a short representative. Asks use Minkowski balls aimed at average degree ≥ 14 by G65's law, never word balls; asked on their `k+1`-cores (M55-T4, M63H4-T2/T3); cubes on a pinned pigeonhole when monolithic CDCL caps (G18); growth mode after the first undecided radius (G33); M53-T12's no-finite-extension certificate wherever it applies (G36); every refusal checked for an empty critical set (G39, M54-T1). Report **the ranks of `F_known` and `P_found`**: at K the transport orbit of 8/3 spans only `(8/3)ℤ[ζ₆]`, rank 2, because ρ is not a multiplier of Λ (ρ³ ∉ Λ, checked on the lattice's coordinates). **Positive control**: Harder's 8/3 refuses (reproduce 2.7 s at 23,083 points). **Negative controls**: the vectors 2 and 4 escape. Register row 67's P-D3 coset by coset (§P) | ≤ 5 core-h; ≤ 1,500 s per ask; stop per coset after 3 radii or 3 undecided asks | `data/fs73/census/K-rows.jsonl`, one row per verdict; `python3 tools/fs73_screen.py census K --resume` skips rows present; a kill redoes the one ask in flight |
-| **P1e** | A | **The rich 2-unit lattices over ℚ(√3,√5)** (`twounits:14/30/42`), rigid under FS-70 only on generator graphs at `N ∈ {2,4}` plus the 48 additive colourings (T8). **First** the gap-aimed finder at `N = 5, 7` (P-M2's live half; a gap closes them by T6). Then saturation, priced first; if unaffordable, every row is labelled "generator graph". Then forcing asks at the five depth classes (FS70-T1/T7), P-D3 in view | ≤ 3 core-h; ≤ 1,500 s per ask; stop per target as P1d | `data/fs73/census/rich-rows.jsonl`; `python3 tools/fs73_screen.py census RICH --resume`; a kill redoes the one ask in flight |
-| **P1f** | A | Census record `data/fs73/census/README.md`: every row gives lattice, saturated or generators, `N`, finder, verdict, target, `W′`, seconds, machine (G21). The **informative-instance list**: targets that are H1-found with forcing undecided, or forced where H1 was established another way. **Uninformative outcome, declared and reachable:** every target is known-forced, escapes, or is undecided at every radius afforded. Then the competition is briefed with that negative list, which is itself §C content | — | — |
+| **P1d** | A | **The H1 census over K: compute the sandwich `F_known ⊆ F ⊆ P ⊆ P_found`** (§0, "The normal form"). This is Poros's spec fix (§X 14), corrected at A1 and at the modeling stage. Four steps. **(1) `P_N` exactly, at N ∈ {2, 4, 6, 8, 10, 12}**, by a counterexample-guided loop over generators. The first guess is the common periods of the colourings found at `N`. For each generator `g` of the guess modulo `NΛ`, make one SAT ask on the quotient, clique-pinned and with colour precedence, adding the constraint `c(0̄) ≠ c(ḡ)`. SAT returns a new colouring, which shrinks the guess. UNSAT confirms `g`. Stop when every generator is confirmed; the guess is then `P_N`. At rank 4 this is a few dozen asks per `N`. **(2) `KPer(c)` for every colouring `c` found.** First read `c`'s true period group, checked on `Λ/NΛ`. Then compute the voltage group `V_Q` of *every* component `Q` of every two-colour quotient subgraph, at all six colour pairs; FS-70 computed only the origin's component. `KPer(c) = ⋂_Q V_Q`. **(3) Form `P_found = ⋂_N P_N ∩ ⋂_c KPer(c)` and `F_known`.** `F_known` is the span of the certified forced vectors' orbits under the automorphisms fixing 0: ζ₆, complex conjugation, and the Galois flip √−11 ↦ −√−11 (G27, M62-T4). Compute both by exact HNF. **Targets are vectors, never distances**: "8/√3" is `(8/3)(1+ζ₆)`, coordinates `[24,0,24,0]`, already in `F_known`. For each of `F_known` and `P_found`, report its rank and the invariant factors of Λ modulo it. Also report the structure `ℤ^m × T` of `P_found / F_known`. At K, `F_known` should have rank 2: the transport orbit of 8/3 spans only `(8/3)ℤ[ζ₆]`, because ρ is not a multiplier of Λ (ρ³ ∉ Λ, checked on the lattice's coordinates). **(4) The informative-instance list.** It is a finite generating set of `P_found` modulo `F_known`. (i) If `rank P_found = rank F_known`, the quotient is finite: make one forcing ask per nontrivial coset, at a short representative (§0, consequence 2). (ii) Otherwise the quotient is `ℤ^m × finite`; at K, `ℤ² × finite` is expected (§0, consequence 4). Make one forcing ask per *short* generator, and one per short vector of `P_found ∖ F_known` within the askable Minkowski radius, up to translation by `F_known` and the automorphisms. (iii) Some generators are forced only because they lie in the periods searched: in `lcm(N)·Λ`, or in a voltage group bounded by `NΛ`. They are artifacts of the search, and they are Minkowski-long: a vector of `27,720·Λ` is about 10⁴ times Harder's radius in both embeddings (Poros, §X 20). No ball can ask them. Decide those directions by extending the period search (P1d′), and report whether `P_found` shrinks toward `F_known`. (iv) If the true `P` has finite index, C3 at K holds exactly when `F` has full rank, and a rank-2 `F` is a counterexample at K (§0, consequence 3). **Ask discipline.** Use Minkowski balls aimed at average degree ≥ 14 by G65's law, never word balls. Ask on their `k+1`-cores (M55-T4, M63H4-T2/T3). Use cubes on a pinned pigeonhole when monolithic CDCL caps (G18). Switch to growth mode after the first undecided radius (G33). Use M53-T12's no-finite-extension certificate wherever it applies (G36). Check every refusal for an empty critical set (G39, M54-T1). **Controls.** Positive: Harder's 8/3 refuses; reproduce 2.7 s at 23,083 points. Negative: the vectors 2 and 4 lie outside `P_found`, with their separators exhibited. On the subgroup computation: assert `F_known ⊆ P_found`; a planted colouring that separates a known generator must shrink the guess; the loop, re-run from an empty found set, reproduces `P_N`. Register row 67's P-D3 coset by coset (§P). | ≤ 5 core-h; ≤ 1,500 s per ask; stop per target after 3 radii or 3 undecided asks | `data/fs73/census/K-rows.jsonl`, one row per verdict; `python3 tools/fs73_screen.py census K --resume` skips rows present; a kill redoes the one ask in flight |
+| **P1d′** | A | **The period extension. Does `P_found` stabilise? This is the census's decisive quantity** (A2). It repeats P1d's steps (1)–(3) one period at a time. Periods are taken in order of the quotient's class count `N⁴`, admissible `N` only (`9 ∣ N` is inadmissible, since `1 ∈ 9Λ`): the 2-power periods 16 and 32; the `3·2^k` periods 24 (and 48 if affordable); and the composite and prime-power periods built from K's refusing primes 5, 7, 11, 13, namely 14, 15, 20, 21, 22, 25, 26, 28, 33, 35. Why the composite periods: a quotient at a composite or prime-power `N` is only a diagonal subgraph of its local targets' product. A colouring at a prime quotient pulls back to it, but a refusal there does not push up, so it can colour where every prime refuses (G59, the composite column's reason). Ask each period for colourability first. After each period is added, write one row: `P_N`, the `KPer` of each new colouring, **`P_found`'s rank and invariant factors, and the structure of `P_found / F_known`**. **Outcomes.** (a) `rank P_found` falls to `rank F_known`: the quotient is finite, and P1d's step (4)(i) closes it coset by coset. (b) `P_found` plateaus, unchanged across three consecutive *colourable* periods, with rank above `F_known`'s: K becomes a counterexample candidate (§0, consequence 5; P-C4, P-C5). (c) **Uninformative, declared and reachable**: `P_found` shrinks at every colourable period through the budget, with no plateau and no rank drop. It says only that the colourings found are not yet representative. It is reachable: the voltage groups' index in `NΛ` already varies (1, 2, 4) across `N ≤ 12`, and each new colourable 2-power period can supply new Kempe structure. **An UNSAT period counts as no step.** It adds nothing to `P_found`. It is reported but not counted toward a plateau, because a run of UNSAT periods is a vacuous stabilisation. | ≤ 8 core-h; ≤ 1,500 s per ask; skip any `N` whose CNF would exceed 40 GB RSS at the measured bytes per clause (price `N = 32` by a dry build of its CNF first); stop at outcome (a), at outcome (b), or at the budget | `data/fs73/census/K-periods.jsonl`, one row per `(N, ask)` verdict, with the guess's generators before and after; `P_found` is recomputed from the rows, never stored alone; `python3 tools/fs73_screen.py periods K --resume` skips rows present; a kill redoes the one ask in flight |
+| **P1e** | A | **The rich 2-unit lattices over ℚ(√3,√5)** (`twounits:14/30/42`), rigid under FS-70 only on generator graphs at `N ∈ {2,4}` plus the 48 additive colourings (T8). **First** the gap-aimed finder at `N = 5, 7` (P-M2's live half; a gap closes them by T6). Then saturation, priced first; if unaffordable, every row is labelled "generator graph". Then forcing asks at the five depth classes (FS70-T1/T7), P-D3 in view. **Every lattice's row reports the sandwich (§0): the ranks and invariant factors of `F_known` and `P_found`, with the periods searched.** A gapped colouring makes `P_found = 0`, and then `F = P = 0` by T6 | ≤ 3 core-h; ≤ 1,500 s per ask; stop per target as P1d | `data/fs73/census/rich-rows.jsonl`; `python3 tools/fs73_screen.py census RICH --resume`; a kill redoes the one ask in flight |
+| **P1f** | A | Census record `data/fs73/census/README.md`. **Its headline is one sandwich per lattice**: the ranks and invariant factors of `F_known` and `P_found`, the structure of `P_found / F_known`, and P1d′'s stabilisation series at K. Below that, every row gives the lattice, whether its graph is saturated or generators-only, `N`, the finder, the verdict, the target *vector*, `W′`, seconds and machine (G21). The **informative-instance list** holds two kinds of vector: those in `P_found ∖ F_known` whose forcing is undecided, and those forced where H1 was established by another route. If K's `P_found` plateaus above rank 2, K itself heads the list as a counterexample candidate. **Uninformative outcome, declared and reachable:** every target is known-forced, escapes, or is undecided at every radius afforded. Then the competition is briefed with that negative list, which is itself §C content | — | — |
 | **P1g** | A | **Poros's card** (P-R1): on L3's `N = 2` colouring, the Smith form of `V` in `2Λ`, the escape at each target, the re-periodised colouring's period, and whether it is constant on the cosets of `2Λ` or of some `3^jΛ` | ≤ 30 min | none |
 | **P2** | A (if < 300k tokens), else a fresh B | **The classification.** Rows: **K** (control), **ℚ(√3,√5)** (control: reproduce T5's six-subfield table), **ℚ(√3,√23)**, **ℚ(√3,√47)** (FS-48), **ℚ(√11) at k = 3** (positive control, row 73), **ℚ(√167) at k = 3** (FS-59's question), **one CM subfield of K(√7) at k = 5** (the pilot for six: G48, row 64). Columns per quartic CM subfield `E` and saturated lattice `Λ_D` (D ∈ {6, 12, 24}, priced): (a) the 3-adic pole (FS70-T3, row 45); (b) the 2-adic column, 2-unit or wall-broken, with C1 as a sub-column (G1, G35, G56, M53-T5, FS54-T2, row 63, M58-T3); (c) **spectral**: `m(Λ)/d` against `−1/(k−1)` and the minimisers' torsion orders (FS38-D2-A, FS53-T1, FS54-T7); (d) per admissible `N ≤ 12`: colourable or refused, gapped, with **target and quotient spectra kept apart** (G44, R52-T1, M58-T1, M61-T2); (e) **composite**: `N` a product of two primes whose single-prime quotients both refuse. The quotient is a diagonal
   *subgraph* of the product of the two targets, so neither factor's refusal nor a product theorem decides it: computed
-  (G59, FS58-T3's shape without its infinite-`U` identification); (f) T10 at the **chainable** targets `1/δ ∈ ℤ[U]` (ASTRA-T2, G55). Verdict: loose by theorem (a gap, or an exhibited periodic separator) / rigid-found (with the periods searched) / refusing. Lattices are chosen per field by supply, never carried between fields (FS61-T3, row 74). Ramified targets' first levels are impotent (FS66-E), and every spectral column is blind to the carry (FS66-T); both are stated in the table's header | ≤ 8 core-h; ≤ 300 s per quotient ask | `data/fs73/table/rows.jsonl`; `python3 tools/fs73_screen.py table FIELD --resume`; a kill redoes one ask |
+  (G59, FS58-T3's shape without its infinite-`U` identification); (f) T10 at the **chainable** targets `1/δ ∈ ℤ[U]` (ASTRA-T2, G55). **Verdict, in the subgroup form (§0):** the ranks and invariant factors of `F_known` and `P_found`, with the periods searched, and where each chainable target sits. A target is *loose by theorem* if it lies outside `P_found`; a gap makes `P_found = 0`. It is *rigid-found* if it lies in `P_found ∖ F_known`, and *forced* if it lies in `F_known`. A lattice with no periodic colouring at any `N` searched is *refusing*, which is C3-aper's case. Lattices are chosen per field by supply, never carried between fields (FS61-T3, row 74). Ramified targets' first levels are impotent (FS66-E), and every spectral column is blind to the carry (FS66-T); both are stated in the table's header | ≤ 8 core-h; ≤ 300 s per quotient ask | `data/fs73/table/rows.jsonl`; `python3 tools/fs73_screen.py table FIELD --resume`; a kill redoes one ask |
 | **P3** | competitors "de Bruijn" and "Coxeter" (fresh Opus 5.5 each) + advisor "Poros" (fresh, or this one if its context allows; the PO decides) | **The competition on C3-inherit**, under `plans/PROTOCOL-competitor-and-advisor.md`: briefs from §C with the census and table pasted in, identical but for the names; isolated scratchpads; teasing hints only; prior art shared; retractions counted by the advisor. **Deliverable** (the PO's ruling, 2026-09-23): a theorem or a counterexample. If neither lands, the headline is **"not landed"**, and under it, each reported as exactly what it is: **(a)** the sharpened reductions; **(b)** the K instance explained by its local lemma (G70, `[Polymath16wikiR2]` Cor. 9) or the statement of why not; **(c)** a sufficient condition (a class of lattices where C3-inherit is proved); **(d)** the census's candidate list, including any counterexample candidate. A theorem's key step is re-derived by the other competitor or by the advisor, and one step by the PO. A counterexample is an explicit construction with proof, plus exact verification of properness and separation on a large finite window | ≤ 400k tokens per competitor; one working session each (≤ 8 h wall); stop when both report | each competitor keeps `plans/FS73-C3-<name>.md` current at every claim or retraction; a killed competitor is replaced by a fresh one reading its file; a kill redoes the thinking in flight |
 | **P4** | implementer (A, B, or fresh C) | **Rank 6, re-aimed** (question 3). P1g's answer first. Then for L2, L3, L6 and any rank-6 K-lattice (de Grey's lattice with one ρ₁₅ word, if rank 6): `NΛ/V` under every periodic colouring at `N ≤ 6`, the targets' images, and the re-periodised separators' periods. Read against: C2 and the cross-set closed forms (MASCOT-T7, M63H3-T1, M31-T1, M32-T1, G12, G14); the bilayer as a Σ = n coincidence rotation (G7, G62, M63H2-T1, M63H3-T7/T8); the additive slice at `4 | n` (row 65, M63H3-T4); and Poros's reading that `[NΛ:V]` is an ideal norm (P-R2). Residue targets never force (row 60), so any rank-6 forcing is composite or 2-adic. Deliverable: a mechanism statement (hand) or a typed null. **T10.2's "the deciding invariant" is re-worded at the close** | ≤ 4 core-h; ≤ 250k tokens; stop when every rank-6 lattice held has its `NΛ/V` table at `N ≤ 6` | `data/fs73/rank6/rows.jsonl`; `python3 tools/fs73_screen.py rank6 SPEC --resume`; a kill redoes one lattice-period pair |
 | **P5** | implementer K (Opus 5.5) | **The kernel**: every `sorry` of `Proofs/HadwigerNelson/Kempe.lean` (§K). Query Mathlib by shape before writing (the Searching rules; FS58-T4's note missed `Finsubgraph.lean`). The residual-finiteness step of `not_periodicForces_of_voltageEscape` may need the structure theorem (`AddCommGroup.equiv_free_prod_directSum_zmod`) or a Smith-form argument; price it before starting and report if it exceeds a day. `voltageEscapeZ` must be fully proved (vacuity: every structure-typed hypothesis has a named inhabitant). No statement changes without the planner's re-check | ≤ 2 working days; ≤ 400k tokens | the file itself; every `./scripts/build.sh` run is a checkpoint; a kill redoes the current leaf |
@@ -742,11 +862,12 @@ arXiv:2411.01951, arXiv:1607.08357 (abstracts), then the three PDFs in §PA.3.
 | P1a | lattice layer | the four controls | de Grey 54/rank 4, Λ′ 46/rank 4, L3 42/rank 6, ℚ(√11) shape 108; saturation complete to `D` (a brute-force enumeration to `D` agrees) |
 | P1b | screens | §R0 reproduced; Theorem B's and Fischer's colourings accepted as solutions; L1 gap found; FS-70's selftest plants all fire | every number equal; every plant fires; no control passes "for the wrong reason" (a paired faithful stub passes) |
 | P1c | cross-check | the two instruments' verdicts | agree (the expected, uninformative outcome), or the disagreement is traced to one instrument |
-| P1d | K census | rows file; `P_found` and `F_known` printed with generators, index and ranks; the positive and negative controls | `P_found ⊇ F_known` checked; Harder's 8/3 refuses; 2 and 4 escape; every refusal has an empty critical set; every UNKNOWN is typed with its budget; no H1-found target is reported as forced without a refusal (M63D-T7: refusals carry only down) |
-| P1e | rich lattices | N = 5, 7 gap finder rows; saturation stated per row | every verdict names its graph (saturated or generators) |
+| P1d | K census | rows file; `P_found` and `F_known` printed with generators, ranks and invariant factors, and `P_found / F_known`'s structure; the loop's three controls; the positive and negative controls | each `P_N` confirmed generator by generator (every generator's UNSAT on file); `P_found ⊇ F_known` checked; Harder's 8/3 refuses; 2 and 4 escape; every refusal has an empty critical set; every UNKNOWN is typed with its budget; no H1-found target is reported as forced without a refusal (M63D-T7: refusals carry only down) |
+| P1d′ | period extension | `K-periods.jsonl`; one stabilisation row per colourable `N` | the outcome is (a), (b) or (c), named in the record; every plateau step is a colourable period; UNSAT periods are listed separately |
+| P1e | rich lattices | N = 5, 7 gap finder rows; saturation stated per row | every verdict names its graph (saturated or generators) and its lattice's `F_known` / `P_found` ranks |
 | P1f | census record; rows 22–24's explicit colourings checked for periodicity | the PO reads the informative-instance list against the rows | every listed instance traceable to rows; the uninformative outcome, if it happened, stated as such |
 | P1g | Poros's card | Smith form printed; coset-constancy test on the swapped colouring, with a planted colouring that *is* 2Λ-periodic as the control | the answer is one of three, stated with the control's pass |
-| P2 | table | T5 reproduced for ℚ(√3,√5); K rigid-found at 8/3; ℚ(√11) rigid-found at 3u (k = 3) | the three controls pass; every row's verdict carries its periods searched and its lattice's saturation |
+| P2 | table | T5 reproduced for ℚ(√3,√5); K has 8/3 ∈ `F_known`; ℚ(√11) has 3u ∈ `P_found` (k = 3) | the three controls pass; every row's verdict carries its periods searched, its lattice's saturation, and the ranks of `F_known` and `P_found` |
 | P3 | competition | each report classified (theorem, counterexample, not landed); the verification steps above | a theorem survives the other side's re-derivation and the PO's one-step check; a counterexample's window check is exact; "not landed" lists (a)–(d) |
 | P4 | rank 6 | rows file; the mechanism statement's proof or null | the null is typed; T10.2's re-wording drafted |
 | P5 | kernel | `./scripts/build.sh`, `scripts/axioms.sh`, `scripts/vacuity.sh`, linters | zero `sorry` in `Kempe.lean`; axioms the standard three; `voltageEscapeZ` proved; vacuity counts updated in `CLAUDE.md` at the close |
@@ -848,7 +969,8 @@ budget).*
 **Decide C3-inherit.** Let `Λ ⊂ ℂ` be a finitely generated additive group of unit vectors of a real field's plane,
 `U = Λ ∩ S¹` (finite), `k = 4`, `δ ∈ Λ`. Suppose **(i)** some proper 4-colouring of `Cay(Λ, U)` is periodic, and **(ii)**
 every periodic proper 4-colouring has `c(0) = c(δ)`. **Is `(0, δ)` forced**, that is, does some finite piece of
-`Cay(Λ, U)` force it (equivalently, by R1, does every proper 4-colouring identify `0` and `δ`)?
+`Cay(Λ, U)` force it (equivalently, by R1, does every proper 4-colouring identify `0` and `δ`)? At one lattice and every
+`δ` at once, the question is whether the H1 subgroup `P` equals the forced subgroup `F`.
 
 - **A theorem** proves it, for every such lattice or for a named class (a class-level theorem is fallback (c) below; say
   which you have).
@@ -882,9 +1004,34 @@ every periodic proper 4-colouring has `c(0) = c(δ)`. **Is `(0, δ)` forced**, t
   lattice (ρ³ = (16/9)ρ − 5/3, and every lattice element's ρ-coefficient lies in (1/3)ℤ[ζ₆]). So 8/3's orbit spans
   `(8/3)ℤ[ζ₆]`, rank 2. Every colouring is periodic along that plane, and the effective shift at K is two-dimensional,
   where Berger/Robinson-type aperiodicity lives (Poros; checked by the planner).
-- **Both sides are subgroups.** The forced set `F` and the common periods `P` of all periodic colourings are subgroups
-  of Λ, with `F ⊆ P`. So C3-inherit at a lattice, for every δ, is exactly `P = F`. Speak in vectors (cosets), never in
-  distances: "8/√3" on de Grey's lattice is the vector (8/3)(1+ζ₆), already forced by transport.
+- **Both sides are subgroups, and that is the question's normal form** (the plan's §0, "The normal form").
+  - The forced set `F` and the H1 set `P` are subgroups of Λ, with `F ⊆ P`.
+  - Each is an intersection of *Kempe period groups*, the translations that fix every Kempe component of a colouring: `F`
+    over all colourings, `P` over the periodic ones.
+  - So C3-inherit at a lattice, for every δ, is exactly `P = F`. It needs `rank F = rank P`. If `P` has finite index, it
+    holds exactly when `F` does, that is, when every colouring is periodic.
+  - Speak in vectors (cosets), never distances: "8/√3" on de Grey's lattice is the vector `(8/3)(1+ζ₆)`, already forced by
+    transport.
+- **K itself may be the instance under test.** The census reports four nested subgroups, `F_known ⊆ F ⊆ P ⊆ P_found`, at
+  K. There `F_known = (8/3)ℤ[ζ₆]` has rank 2, and `P_found` has had finite index at every period searched.
+  - If `P_found` stays of finite index as the periods grow, K is a counterexample candidate. Deciding it would take a
+    non-periodic separating colouring of de Grey's lattice given by a rule.
+  - If `P_found` falls to rank 2, C3 at K reduces to finitely many cosets.
+  - [CENSUS] says which happened.
+- **The gap between `F` and `P` splits in two, by invariant measures.**
+  - Λ is amenable. Let `F_μ` be the set of `δ` to which every Λ-invariant probability measure on the colouring shift gives
+    zero separation mass, `μ{c(0) ≠ c(δ)} = 0`. It is a subgroup, and `F ⊆ F_μ ⊆ P`: a periodic separator's finite orbit
+    carries a uniform invariant measure.
+  - **The walls half, `F = F_μ`.** By the **Furstenberg correspondence principle** (a Følner limit of a colouring's
+    translates), it fails exactly when some colouring separates `(0, δ)` only on a set of zero upper Banach density. MASCOT-
+    T10's phase walls and the tri-sectors are the corpus's shapes of that kind.
+  - **The recurrent half, `F_μ = P`.** It holds whenever periodic-orbit measures are weak-* dense among invariant measures,
+    because the separation event is a clopen cylinder.
+  - In descriptive combinatorics' words: the periodic colourings are exactly the *continuous* colourings of the odometer
+    (Λ acting on its profinite completion), and the measurable ones sit between. So C3-inherit is the compulsion analogue of
+    "the continuous chromatic number equals the chromatic number" (Gao–Jackson–Krohne–Seward, *Continuous combinatorics of
+    abelian group actions*, is the discipline's reference for ℤ^d).
+  - The split is a restatement, not a result. A sharpened statement of this kind is fallback (a).
 - **The 2-adic side is proved at the level of the local plane.** Every 4-colouring of the 2-adic tower of K(i) is pulled
   back from level 4 (FS38-D2-B, row 67). But row 67 registers **P-D3: no finite K²-graph forces 2-adic depth 4**, although
   the tower forces it. The local plane's forcing does not inherit at depth 4, and it does at depth 6 (8/3). That depth
@@ -917,8 +1064,9 @@ every periodic proper 4-colouring has `c(0) = c(δ)`. **Is `(0, δ)` forced**, t
 ### §C.3 The advisor's slots (§5 of the protocol)
 
 **"The situation"**, items: the object and the three reductions (§C.1 items 1–3 verbatim); the known instance and why it is
-uninformative (§C.2's third bullet); the census and table ([CENSUS], [TABLE]); the four "things worth knowing" on the
-discipline, transport, the 2-adic depth split and local-transfer failure.
+uninformative (§C.2's third bullet); the census and table ([CENSUS], [TABLE]); the "things worth knowing" on the
+discipline, the subgroup form and K as the instance under test, the invariant-measure split, transport, the 2-adic depth split
+and local-transfer failure.
 
 **"The challenge"**: §C.2's first paragraph, verbatim, and the reporting rule with its four fallbacks.
 
@@ -984,8 +1132,16 @@ is FS-2's second target.
 | P-T1 | P2: K is the only field in the table with a rigid-found rank-4 CM lattice at k = 4 | medium-low | a second rigid-found lattice (which becomes a census instance) / only K |
 | P-T2 | P2: ℚ(√167)'s lattices at k = 3 are loose by theorem at every chainable target | medium | a rigid-found ℚ(√167) lattice: FS-59's first informative object / loose |
 | P-T3 | P2 pilot: the chosen CM subfield of K(√7) is loose at k = 5 (a gapped period colouring, the 5-colourable slack targets at 11 or 19 being the likely source) | medium | rigid-found at five colours / loose |
-| **P-C4** | (Poros) At K the census finds `F_known` of rank 2 (the plane `(8/3)ℤ[ζ₆]`) and forces no vector outside it | medium | a forced vector off that plane, giving F rank 4: every colouring periodic, C3 at K trivial, fallback (b) at once / F stays rank 2 and the effective shift is two-dimensional |
+| **P-C4** | (Poros) At K the census finds `F_known` of rank 2 (the plane `(8/3)ℤ[ζ₆]`) and forces no vector outside it | medium | a forced vector off that plane, giving F rank 4: every colouring periodic, C3 at K trivial, fallback (b) at once; **or `P_found` stabilises at finite index while `F` stays rank 2: a counterexample candidate at K** (A1; §0, consequence 3) / F stays rank 2 and `P_found` keeps shrinking, so the effective shift is two-dimensional and C3 at K is open |
+| **P-C5** | P1d′, the stabilisation series at K. Outcome (c), no stabilisation within budget: 0.50. Outcome (b), a plateau above rank 2 (a counterexample candidate at K): 0.25. Outcome (a), a rank drop to 2: 0.25 | low | (a) or (b) / (c). (c) is the uninformative outcome, and the modeling stage expects it most, because the voltage groups' index already moves with `N` at `N ≤ 12`. It is registered so that a plateau or a drop, if one comes, is read as evidence against a stated expectation |
 | P-K1 | P5: every leaf closes within budget; the residual-finiteness step of R3 is the costliest | medium | a leaf that needs a statement change / all close |
+
+---
+
+## §M. The modeling passes (WORKFLOW 6)
+
+*By a fresh de Bruijn (Opus 5.5), 2026-09-23. Order: domain, then obligation, then experience. Each pass was a fresh Skill-tool
+invocation and has its own commit. Filled pass by pass below.*
 
 ---
 
