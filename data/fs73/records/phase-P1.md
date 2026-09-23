@@ -273,9 +273,18 @@ off-plane asks decide the rest.
   CNF from this recipe and asserts that its sha256 equals the recorded one.
 
 ### The replication recipe for `v = −(4/9)(1 + √−11)`
-Identical to `8/9`'s, except the pair: the points `∓(2/9)(1 + √−11)` (lattice coordinates `±(−8, 4, 4, 0)`, both in the ball), and
-these two have common neighbours in the ball (so this file pins one of them to colour 2 in the forcing CNF, a sound symmetry break,
-since a common neighbour's colour differs from both pinned colours). Rebuild and re-ask:
+The field, lattice, `U` and ball are `8/9`'s; **the pair and the symmetry break differ** *(wording corrected by implementer A2 at the
+PO's request: it used to read "identical to 8/9's", which suggested the precedence clauses stay; they do not)*:
+- **the pair:** the points `∓(2/9)(1 + √−11)` (lattice coordinates `±(−8, 4, 4, 0)`, both in the ball). These two have common
+  neighbours in the ball.
+- **the pins:** `x[−h][0]`, `x[+h][1]`, and the first common neighbour (in the vertex order) pinned to colour 2. That is sound,
+  because a common neighbour's colour differs from both pinned colours, so a swap of 2 and 3 can always make it 2.
+- **no value precedence.** `graph_cnf` applies precedence only among colours that no pin uses. Here only colour 3 is unpinned, so
+  the CNF has no precedence clauses and no auxiliary variables. (A pin on colour 2 together with precedence of 2 over 3 would be
+  unsound unless the pinned vertex came first in the order; the encoding never combines them.)
+- As for `8/9`: at-least-one clauses, four clauses per edge, no at-most-one clauses.
+
+Rebuild and re-ask:
 `python3 tools/fs73_screen.py confirm K --key force:-16,8,8,0:R1.5 --solver cadical`.
 
 ---

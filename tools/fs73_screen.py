@@ -51,9 +51,9 @@ PLANT = None
 for _i, _a in enumerate(sys.argv):
     if _a == '--plant' and _i + 1 < len(sys.argv):
         PLANT = sys.argv[_i + 1]
-VALID_PLANTS = ('dedup_steps', 'per_sample', 'kper_first', 'prec_wrong', 'loop_stale')
+VALID_PLANTS = ('dedup_steps', 'per_sample', 'kper_first', 'prec_wrong', 'loop_stale', 'sline_any')
 SCRATCH = os.environ.get('FS73_SCRATCH', '/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/'
-                         'scratchpad/fs73-implA')
+                         'scratchpad/fs73-implA2')
 LOCK = '/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock'
 MACHINE = 'desktop (16 physical cores / 32 threads, 128 GB)'
 
@@ -585,12 +585,9 @@ def solve(Q, U, aim='plain', target=None, budget=600, solver='kissat', heavy=Non
         try:
             p = subprocess.run([solver, '-q', path], capture_output=True, text=True, timeout=budget)
             out = p.stdout
-            v = 'UNKNOWN'
-            for line in out.splitlines():
-                if line.startswith('s '):
-                    v = 'UNSAT' if 'UNSATISFIABLE' in line else 'SAT'
+            v, sline = sline_verdict(out, p.returncode)
         except subprocess.TimeoutExpired:
-            out, v = '', 'UNKNOWN'
+            out, v, sline = '', 'UNKNOWN', None
     ru1 = os.times()
     rec['wall_s'] = round(time.time() - t0, 2)
     rec['cpu_s'] = round((ru1.children_user - ru0.children_user) + (ru1.children_system - ru0.children_system), 2)
@@ -601,7 +598,8 @@ def solve(Q, U, aim='plain', target=None, budget=600, solver='kissat', heavy=Non
     os.remove(path)
     if v != 'SAT':
         if v == 'UNKNOWN':
-            rec['unknown_type'] = f'budget: {budget} s wall, {solver}'
+            rec['unknown_type'] = (f'budget: {budget} s wall, {solver}' if sline is None else
+                                   f'the solver answered neither SAT nor UNSAT: {sline!r}, {solver}')
         return rec, None
     lits = []
     for line in out.splitlines():
@@ -873,6 +871,23 @@ def graph_cnf(n, E, pins, forbid=(), k=4):
     return (cls, E, extra), nvars
 
 
+def sline_verdict(out, returncode):
+    """the verdict from a DIMACS solver's status line: exactly 's SATISFIABLE' is SAT and exactly 's UNSATISFIABLE' is UNSAT; any
+    other status line (e.g. 's UNKNOWN', a limit reached) is UNKNOWN, returned with the line; no status line is UNKNOWN with line None
+    only when the caller timed it out, so here it is typed as a missing line.  A status line contradicting the SAT-competition exit code
+    (10 SAT, 20 UNSAT) raises: a refusal read from a disagreeing solver is never recorded (G21: the failure path is the loud one)."""
+    lines = [ln.strip() for ln in out.splitlines() if ln.startswith('s ')]
+    if planted('sline_any'):                    # the old parse: any status line without the word UNSATISFIABLE read as SAT
+        return ('UNSAT' if lines and 'UNSATISFIABLE' in lines[-1] else 'SAT' if lines else 'UNKNOWN'), (lines[-1] if lines else '')
+    if not lines:
+        return 'UNKNOWN', '(no status line)'
+    s = lines[-1]
+    v = {'s SATISFIABLE': 'SAT', 's UNSATISFIABLE': 'UNSAT'}.get(s, 'UNKNOWN')
+    want = {'SAT': 10, 'UNSAT': 20}.get(v)
+    assert want is None or returncode == want, f'status line {s!r} contradicts the exit code {returncode}'
+    return v, (None if v != 'UNKNOWN' else s)
+
+
 def run_cnf(parts, n, nvars, budget, solver='kissat', heavy=False, tag='g', proof=None):
     os.makedirs(SCRATCH, exist_ok=True)
     path = os.path.join(SCRATCH, f'{tag}-{os.getpid()}-{n}.cnf')
@@ -885,17 +900,15 @@ def run_cnf(parts, n, nvars, budget, solver='kissat', heavy=False, tag='g', proo
             cmd = [solver, '-q', path] if proof is None else [solver, '-q', '--lrat=true', '--binary=false', path, proof]
             pr = subprocess.run(cmd, capture_output=True, text=True, timeout=budget)
             out = pr.stdout
-            v = 'UNKNOWN'
-            for line in out.splitlines():
-                if line.startswith('s '):
-                    v = 'UNSAT' if 'UNSATISFIABLE' in line else 'SAT'
+            v, sline = sline_verdict(out, pr.returncode)
         except subprocess.TimeoutExpired:
-            out, v = '', 'UNKNOWN'
+            out, v, sline = '', 'UNKNOWN', None
         ru1 = os.times()
     rec.update({'verdict': v, 'wall_s': round(time.time() - t0, 2),
                 'cpu_s': round((ru1.children_user - ru0.children_user) + (ru1.children_system - ru0.children_system), 2)})
     if v == 'UNKNOWN':
-        rec['unknown_type'] = f'budget: {budget} s wall, {solver}'
+        rec['unknown_type'] = (f'budget: {budget} s wall, {solver}' if sline is None else
+                               f'the solver answered neither SAT nor UNSAT: {sline!r} (exit {pr.returncode}), {solver}')
     os.remove(path)
     col = None
     if v == 'SAT':
@@ -1526,6 +1539,33 @@ def selftest(plants=False):
                     COLDIR = coldir_saved
                     moved = faithful and raised
                     why = f'faithful loop returns 4 Lambda: {faithful}; planted loop raised: {raised}'
+                elif nm == 'sline_any':
+                    # its own bed: two stub solvers in scratch, one printing 's UNKNOWN' (exit 0) and its faithful twin printing
+                    # 's UNSATISFIABLE' (exit 20), run through run_cnf on a two-vertex CNF.  Faithful: UNKNOWN typed with the line, and
+                    # UNSAT from the twin.  Planted (the old parse): the 's UNKNOWN' line read as SAT (then the model assertion raises)
+                    PLANT = None
+                    os.makedirs(SCRATCH, exist_ok=True)
+                    stubs = {}
+                    for tag_, body in (('unknown', "echo 's UNKNOWN'; exit 0"), ('unsat', "echo 's UNSATISFIABLE'; exit 20")):
+                        sp = os.path.join(SCRATCH, f'stub-solver-{tag_}.sh')
+                        with open(sp, 'w') as fh:
+                            fh.write('#!/bin/sh\n' + body + '\n')
+                        os.chmod(sp, 0o755)
+                        stubs[tag_] = sp
+                    E1 = np.array([[0, 1]], dtype=np.int64)
+                    pa, nva = graph_cnf(2, E1, [(0, 0)])
+                    fu, _ = run_cnf(pa, 2, nva, 30, stubs['unknown'], False, 'stub')
+                    ft, _ = run_cnf(pa, 2, nva, 30, stubs['unsat'], False, 'stub')
+                    faithful = fu['verdict'] == 'UNKNOWN' and "s UNKNOWN" in fu.get('unknown_type', '') and ft['verdict'] == 'UNSAT'
+                    PLANT = nm
+                    try:
+                        pu, _ = run_cnf(pa, 2, nva, 30, stubs['unknown'], False, 'stub')
+                        pv = pu['verdict']
+                    except AssertionError:
+                        pv = 'raised'
+                    moved = faithful and pv != 'UNKNOWN'
+                    why = (f"faithful: 's UNKNOWN' -> {fu['verdict']}, twin 's UNSATISFIABLE' -> {ft['verdict']}; "
+                           f"planted: 's UNKNOWN' -> {pv}")
                 elif nm == 'prec_wrong':
                     PLANT = None                  # the bed: FS-61's Q(sqrt11) shape at the first N whose quotient has no triangle
                     Lq = FL.q11shape()
