@@ -1527,6 +1527,46 @@ back along `ZMod.castHom` and buys nothing at all. **No native evaluation.** -/
 #print axioms chromaticNumber_unitQuadrance_zmod121
 #print axioms chromaticNumber_unitQuadrance_zmod121_eq_finitePlane11
 
+/-! ## FS-73 phase P5 — Kempe swaps, the voltage certificate, compactness, and the normal form `P ≤ F`
+
+`Kempe.lean`: the Kempe swap and its properness; the escape certificate `VoltageEscape` (FS-70 T10) with its lift's
+Kempe closure, its monotonicity in `V`, and the named inhabitant `voltageEscapeZ`; the fan-gap closure (T6); the
+additive Kempe screen (T2); compactness R1 by `Finset.rado_selection`; the forced group `F` and the H1 group `P` as
+infima of period groups, with their membership bridges; residual finiteness of finitely generated abelian groups in
+the form R3 consumes (through a character into `ℚ/ℤ`); and R3's escape direction. `InheritanceQuestion` is a
+`Prop`, stated and not claimed. **No native evaluation.** -/
+
+#print axioms kempeClosed_empty
+#print axioms kempeClosed_twoColour
+#print axioms kempeSwap
+#print axioms kempeSwap_apply_of_mem
+#print axioms kempeSwap_apply_of_notMem
+#print axioms kempeSwap_ne_of_mem_of_notMem
+#print axioms not_forces_of_kempeClosed
+#print axioms exists_coloring_ne_of_forall_finset
+#print axioms forces_iff_exists_finite
+#print axioms VoltageEscape.zero_mem_lift
+#print axioms VoltageEscape.enlarge
+#print axioms VoltageEscape.add_mem_lift_iff
+#print axioms VoltageEscape.kempeClosed
+#print axioms not_forces_of_voltageEscape
+#print axioms forces_iff_of_quotient_fanGap
+#print axioms not_forces_of_additiveKempe
+#print axioms periods
+#print axioms mem_periods
+#print axioms mem_forcedSubgroup
+#print axioms periods_le_periods_comap_translate
+#print axioms mem_periodicForcedSubgroup
+#print axioms ker_le_periods_comap
+#print axioms isPeriodic_comap
+#print axioms periodic_kempeSwap
+#print axioms exists_finiteIndex_between_notMem
+#print axioms notMem_periodicForcedSubgroup_of_ne
+#print axioms forcedSubgroup_le_periodicForcedSubgroup
+#print axioms notMem_periodicForcedSubgroup_of_voltageEscape
+#print axioms inheritanceQuestion_iff
+#print axioms voltageEscapeZ
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
