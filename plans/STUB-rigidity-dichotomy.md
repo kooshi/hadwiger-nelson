@@ -35,7 +35,7 @@ G69 (the whole entry is this stub's question), G68, G54 (tight towers force — 
 **Added at FS-71's close (2026-09-22):** **G70** — Coxeter's theorem that a √3-clean four-colouring of the Moser lattice is one of the two
 residue colourings (`plans/MASCOT-derivation.md` T6–T11): rigidity over K is "which colourings are √3-clean", and the inheritance question
 C3 is whether that criterion transfers to a finite ball; **G51** — Kooshi's competitor design is to be run here, on the inheritance
-question, with the count of retractions recorded (a derivation wall with a known positive instance, Harder's object). The
+question, with the count of retractions recorded (a derivation wall with a known positive instance, Harder's object). The briefs to fill in and the rules: `plans/PROTOCOL-competitor-and-advisor.md`. The
 theorems FS-71 filed that this stub consumes: MASCOT-T6–T8, FS70-T9/T10, FS38-D2-A/B, FS25-T1.
 **Next milestone (Kooshi, 2026-09-22, at FS-71's close).**
 

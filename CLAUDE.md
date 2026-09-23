@@ -1294,7 +1294,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
   agent's scratchpad (a shared temp directory is a covert channel), brief both identically, give the advisor
   the record and a written expectation, rule prior art shared. Records: `plans/COXETER-2026-09-08-mascot.md`,
-  `plans/POROS-2026-09-08-mascot.md`. **The mechanism is not carefulness — it is a COST WINDOW** (2026-09-12): in
+  `plans/POROS-2026-09-08-mascot.md`. **The protocol and both briefs verbatim, with the review of what the advisor did (frame, instrument, refutation,
+  method — decisive on all four): `plans/PROTOCOL-competitor-and-advisor.md` (2026-09-22), the template for the next use.** **The mechanism is not carefulness — it is a COST WINDOW** (2026-09-12): in
   one phase three agents exchanged about twenty messages, eight constructions or registrations were retracted, and
   the final plan contains none of those errors — **every retraction was free** (nothing committed, no solver time
   paid, nothing claimed to a third party). **Fast public error is the cheapest instrument available, but only while
