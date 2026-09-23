@@ -815,7 +815,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   arena solve and refuse above `1/2`; below it the screen says nothing. Nothing kills the derivation; the provisional
   `10/30` dies with a recount.*
 * **G54 — Tight or slack: a residue plane's compulsions at k colours are classified by one sign. [kernel one
-  way; derived the other; the table computed]** Let `P` be the level-one plane at a usable prime, `d` its degree,
+  way; hand the other (FS38-D2-A/B, `plans/FS38-derivation.md`); the table computed]** Let `P` be the level-one plane at a usable prime, `d` its degree,
   `λ_min` its least eigenvalue, `k` the colour count. **Slack** (`λ_min < −d/(k−1)`; Hoffman's α-bound exceeds
   n/k): gaps are permitted, and where one exists — found at 7, 11, 19; 23 and 83 slack by the spectrum with no
   colouring asked — **gap ⟹ free** is kernel (row 66). **Tight** (`λ_min = −d/(k−1)`, the literature's Hoffman
