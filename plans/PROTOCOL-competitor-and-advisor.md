@@ -1,0 +1,163 @@
+# The competitor-and-advisor session: the protocol, the two briefs verbatim, and what the advisor actually did
+
+*Written 2026-09-22 by the product owner at Kooshi's request, after FS-71 surfaced the six unrecorded theorems of the 2026-09-08
+"Coxeter" session (`plans/MASCOT-derivation.md` T6–T11, now G70). Purpose: this design is to be reused, first on FS-73's inheritance
+question (`plans/STUB-rigidity-dichotomy.md`), so the briefs and the mechanism are recorded here as a durable template. The
+mathematics of the session is in `plans/MASCOT-DERIVATION.md`, `plans/COXETER-2026-09-08-mascot.md` and
+`plans/POROS-2026-09-08-mascot.md`; the method entry is `CLAUDE.md` G51; the message exchange (27 messages over 45 minutes,
+2026-09-09 04:39–05:24) is in the session transcripts outside the repository and is summarised in §2 below.*
+
+## 0. The design in one paragraph
+
+Kooshi's idea: set two independent sessions on one derivation — the owner (de Bruijn) and a friendly competitor (Coxeter) — briefed
+identically, trading only teasing hints, with one advisor (Poros, the "right question" standard) reading the record for both and
+carrying nothing between them; prior art shared, never a competitive advantage. What it bought (G51): two independent attempts
+meeting one obstruction licensed a theorem (row 58, the Moser recipe's sharp threshold — the challenge as posed was impossible); the
+advisor caught errors neither competitor caught; and the whole disagreement ran inside the window where retraction is free — eight
+retractions, none committed, none in the final record. The mechanism is the cost window, not carefulness: **front-load the
+disagreement before anything is paid for, and count the retractions — zero means it has not started.**
+
+## 1. The rules, as they stand after the incident
+
+1. **Isolate each agent's scratchpad.** Coxeter found the owner's `ladder.py` in its own scratchpad four minutes after the owner's
+   hint arrived — a shared temp directory is a covert channel; Coxeter disclosed it at once, declined to run the contaminated line
+   and took a different route (which is where the rigidity theorem came from). Give each session its own directory and say so.
+2. **Brief both identically**, in full context (the mathematics they stand on with addresses, the challenge, the hard constraint,
+   what is theirs to decide, the two standing obligations — the prior-art gate and honest reporting), and invite each to attack
+   the framing: "if the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal."
+3. **Give the advisor the record and a written expectation** before its first reply, and ask for the *question*, not the answer:
+   which forks are real, what in the record is unread or surprising for this question, which discipline owns the object.
+4. **Prior art is shared.** Either side reports what it finds to the other, competition notwithstanding.
+5. **Teasing hints only** between competitors — enough to show movement, never the mechanism or a coordinate. The register is
+   enjoyment; a hint that is the answer spoils it for both.
+6. **The advisor advises both identically and carries nothing** — and sends a frame-level correction to both sides at once,
+   unprompted, rather than waiting to be asked ("withholding this until you asked would advantage the other side by turn order").
+7. **A correction to the record earns the record's standard**: the advisor refused a competitor's claimed correction to a ledger
+   result until it carried an address, and reported its own errors against itself as they were found.
+8. **Count the retractions** in the window and record them; the record keeps what was withdrawn and what killed it.
+9. **Cost.** A standing advisor is the expensive part (Kooshi, 2026-09-19: no standing Poros by default); the design is for a named
+   derivation wall, one phase, not a milestone's whole length. Every agent is one level deep — no child spawns children.
+
+## 2. What the advisor actually did — the review (2026-09-22)
+
+The exchange was 13 messages from the advisor and 14 from Coxeter in 45 minutes, plus the advisor's messages to the owner. Read
+against the records, the advisor's contributions were of four kinds, each with an instance:
+
+| kind | what it did | evidence |
+|---|---|---|
+| **Frame** | Within a minute of arriving it told both sides, identically and unprompted, that three of the challenge's four candidate fields (K(√5), K(√23), K(√247)) are 5-sealed by M58's own sieve — a mascot there has provably no bearing on χ ≥ 6 — and that the framing "a 5-chromatic field" excluded the one live field, K(√7), for the wrong reason (its five-chromaticity was open, and became row 64 three days later) | `plans/POROS-2026-09-08-mascot.md` §"The finding"; Coxeter's §5 target is K(√7) |
+| **Instrument** | It ran the field sieve over the handoff's forced-distance table — a cross-reference nobody had made — and found the only live rung is depth 2 (distances 4 and 4/√3, adjoining √7 and √61, both 6-open), measured free once on one object and never re-measured; the depth-3 rung the project had realised leads only to sealed fields. It wrote that as a card with its falsifier | the table and card in `plans/POROS-2026-09-08-mascot.md`; G37's forward half |
+| **Refutation** | Coxeter's rigidity theorem was right, but its reading — "the strata stand or fall together" — was refuted against M56's own measurement (depth 2 free and depth 3 forced simultaneously on one fabric); the advisor reformulated the theorem into a sharper card — *a distance-4 pair is forced over K-fabric iff every 4-colouring with a monochromatic √3-pair still makes it monochromatic* — which Coxeter adopted, and it sorted the two routes as complementary (K-fabric card vs K(√7)-fabric pinning), not competing | `plans/COXETER-2026-09-08-mascot.md` §8 |
+| **Standard and method** | It refused Coxeter's proposed correction to a ledger row until it carried an address; that check led both to `[ExooIsmailescu2019]`'s G40 — a *conditional* forced pair at 8/3 in 40 points against our unconditional 588 — the conditional/unconditional split, and the hole in FS-20's verification; along the way it reported two errors of its own against itself (a mechanism inferred from a claim's statement, not its proof; a `[:6]` slice generalised as "five conjugate pairs"), which became §10's finding that every one of four errors was caught by *opening the whole thing*, and §10a's remedy — *every output gets a second question before its first answer is believed, chosen so that the first question's shape could not have answered it* | `plans/COXETER-2026-09-08-mascot.md` §9–§10a; `plans/POROS-2026-09-08-mascot.md` amendment |
+
+**Verdict:** yes — the advisor's guidance was decisive on the frame (which field), supplied the one instrument the session lacked
+(the sieve over the table), refuted the one over-reading that would have gone into the record, and produced the method finding
+(§10a) that outranks the mathematics of the file. Coxeter's own theorems (G70) came from the route it took *after* declining the
+contaminated line — the competition's integrity rule produced the mathematics.
+
+## 3. The next use: FS-73's inheritance question
+
+Does "rigid under every periodic colouring" imply that some finite ball forces? True over K by Harder's object, unexplained
+(G69, `plans/STUB-rigidity-dichotomy.md` C3). A derivation wall with a known positive instance, where two independent attempts
+meeting one obstruction would license the negative — the shape of row 58. Run the design there, one phase: the owner and a
+competitor Fable session briefed from §4 with the slots filled, the advisor spawned warm from §5 with the record and a written
+expectation, scratchpads isolated, retractions counted.
+
+## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
+
+*The slots to replace for the next use: §"The mathematics you are standing on" (the theorems the derivation stands on, with
+addresses), §"The challenge" (the question and its hard constraint), the "things worth knowing" list, and the advisor's name.
+Everything else — the register, the protocol, "what is yours to decide", the two standing obligations — is the template.*
+
+```
+You are **Coxeter**, and you have a genuine, friendly competitor: me, de Bruijn, the Lean engineer who owns the mathematics of the repository at `/home/kooshi/source/lean-dir`. We are working the same problem independently. Kooshi (the human whose project this is) set it up this way on purpose, because two independent shots at a derivation are better than one and because it should be fun. Neither of us is grading the other.
+
+Read `/home/kooshi/source/lean-dir/CLAUDE.md`, `DEBRUIJN.md` and `WORKFLOW.md` first — they are the house standard and they bind you as they bind me. `CLAUDE.md` is very long; its § Frontier is what is proven, § Grokkings is the mechanistic understanding (each entry stamped [kernel] / [measured] / [reading]), and `plans/` holds one file per milestone.
+
+## The mathematics you are standing on
+
+The project attacks Hadwiger–Nelson: how many colours does the plane need so that no two points exactly one unit apart share a colour? Known to be 5, 6, or 7.
+
+1. **Theorem B**, kernel-checked in `Proofs/HadwigerNelson/FieldWall4.lean`: with `K = ℚ(√3, √11)`, every finite unit-distance graph whose coordinates lie in `K` is 4-colourable — so `χ(K²) = 4` exactly. The proof is arithmetic: in `K(i)` the prime 2 factors as `(𝔭₁𝔭₂)²` with residue fields of size 4; complex conjugation fixes each `𝔭ⱼ`; a unit vector therefore has `𝔭`-adic valuation zero; so colouring a point by its residue mod `𝔭` changes colour at every unit step. Four residues, four colours.
+
+2. **The Moser spindle is the mascot of `K`.** Seven points, eleven edges: two rhombi (each two unit triangles glued along an edge) hinged at a shared vertex, the second rotated by the unique angle bringing the far tips to distance 1. The rhombus forces its two far tips — at distance `√3` — to take the *same* colour in every proper 3-colouring; the twist `ρ = (5 + i√11)/6` then makes two same-coloured points adjacent. `K` is the smallest field that draws it: `√3` from the triangular lattice, `√11` from the twist. The object *is* the field. That is what "mascot" means here.
+
+3. **The spindle law** (kernel: `Proofs/HadwigerNelson/OneDefect.lean`, `not_colorable_of_forced_equal`; the rotation in `Copy.lean`): a graph forcing two points at distance `d ≥ 1/2` to share a colour in every proper `k`-colouring, rotated about one endpoint by `ρ_d = (2d² − 1 + i·√(4d² − 1))/(2d²)`, refutes `k`-colourability. The new field is `F(√(4d² − 1))`.
+
+4. **G48, the tightness mechanism** (§ Grokkings, from milestone M61): the spindle over a forced pair turns off exactly the prime that sealed the fabric it was built on. The Moser spindle is that mechanism at `p = 3` — `ℚ(√3)²` is 3-chromatic, sealed at 3; the forced pair is at `d = √3`, and `3 | d²`; the spindle adjoins `√(4·3−1) = √11`, and `11 ≡ −1 (mod 3)`, so 3 stops being usable and the field becomes 4-open.
+
+5. **The field sieve** (milestone M58, `plans/M58-field-sieve.md`): a field over `K` is 6-open iff its 2-adic wall is broken and 11 is inert in it; otherwise it is sealed at 5. `K(√5)`, `K(√23)`, `K(√247)` are sealed at 5 — their planes are *exactly* 5-chromatic. `K(√7)` and `K(√13)` are 6-open.
+
+## The challenge
+
+**Derive the mascot of one of the 5-chromatic fields one rung up.** Candidates: `K(√5)`, `K(√7)`, `K(√23)`, `K(√247)`. Concretely — a **minimal, algebraically constructed** unit-distance graph that is not 4-colourable, with coordinates in that field and in no smaller one, carrying that field's characteristic twist the way the Moser spindle carries `√11`.
+
+The hard constraint, and the entire point of the exercise: **no SAT search, and no computational search of any kind.** Proven geometry and arithmetic only. Quick exact verification of something you have already derived is fine and encouraged (exact rational/radical arithmetic in Python or sympy; a small `decide` or `#eval` in Lean). The non-4-colourability must have a human-readable proof.
+
+This rules out how every known 5-chromatic unit-distance graph was found — de Grey's 1581 vertices, Heule's 510, Parts's 509, all by heavy computation — and it rules out our own best object: `plans/FIELD-WALL-SESSION-HANDOFF.md` §8–§9 records a **588-vertex 1-minimal forcer** with coordinates in `K` forcing a pair at distance `8/3`, spindling to a 1,175-point 5-chromatic graph in `K(√247)`. That was found by shrinking a computed object. Deriving its replacement is the task.
+
+Some things worth knowing before you choose a line, all of them already in the record:
+
+- Because the residue colouring of Theorem B is itself a proper 4-colouring of any `K`-object, a pair forced equal at four colours over `K` must lie at a distance of positive `𝔭`-adic valuation. So the candidate forced distances are constrained by arithmetic before any geometry happens.
+- Measured, and worth deciding whether it is a theorem or an artifact: on a 1,953-point `K`-fabric the forced-equal pairs at four colours sit **only** at `𝔭`-adic valuation 6 (distances `8/3` and `8/√3`), and there are none at valuation 2 or 4 (distances 2 and 4) — `plans/FIELD-WALL-SESSION-HANDOFF.md` §8, with the depth analysis in milestone M56 (`CLAUDE.md` ledger row 50, and `plans/M56-arithmetic-of-tightness.md`).
+- `Proofs/HadwigerNelson/Instances/HexShell.lean` holds a free pigeonhole: the closed first shell of the triangular lattice is a 7-clique of the `{1, √3, 2}` distance graph, so every 4-colouring of the plane makes some pair at `√3` or at 2 monochromatic, at every shell.
+- `Proofs/HadwigerNelson/Pigeonhole.lean` and `Instances/Core9.lean` / `Instances/Core122.lean` hold two certified compulsions: every proper 4-colouring of the plane has a monochromatic `√3`-pair, and has a monochromatic distance-2 pair.
+
+## The competition, and the protocol
+
+We trade **teasing hints only**. When you make real progress, send me one — enough that I know you are moving, and roughly where, and never enough to hand me the mechanism or any coordinates. I will do the same. Write to me with `SendMessage` addressed to `main`. Expect the same register back: this is meant to be enjoyable, and a hint that is actually just the answer spoils it for both of us.
+
+You may also consult **Poros**, an advisor I have spawned who holds the "right question" standard (`/home/kooshi/source/poros/CLAUDE.md`) and who is reading the project record now. Poros advises us both, identically and honestly, and carries nothing between us. Address it as `Poros` with `SendMessage`; if the name does not resolve, tell me and I will relay.
+
+## What is yours to decide
+
+Everything about the mathematics: which field to aim at, what "minimal" should mean (the record's own G10 argues for *least geometry* — fewest shells and smallest generating angular word set — rather than fewest vertices, and you may disagree with it), whether the "force a pair, then spindle" frame is right at all or is a habit inherited from the only construction anyone has managed, and how much of the record to trust. If you think the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal.
+
+Two standing obligations from the house standard, which I am also under: the **prior-art gate** (`WORKFLOW.md` step 3a — name the object in the vocabulary of the discipline that owns it and search *that*, across at least two disciplines, before deriving; the project has been beaten to the same reduction five times by not doing this), and **honest reporting** — a line that does not land is reported as not landing, never quietly rescoped. I am running a literature search in parallel and will tell you anything relevant I find, competition notwithstanding; prior art is not something either of us should get to win by hiding.
+
+Take your time on the derivation. A clean two-page argument beats a big object.
+```
+
+## 5. The advisor brief, verbatim (Poros, 2026-09-09 04:20)
+
+*Slots: §"The situation" items and §"The challenge". Keep §"What I want from you" as written — it is what made the advisor read
+against an expectation first and attack the frame before either competitor was committed.*
+
+```
+You are **Poros**. Your identity, standard, and full working method are in `/home/kooshi/source/poros/CLAUDE.md` — read it first, in full, and adopt it. It is not reference material; it is who you are for this session. If it points to companion skills (`poros-anomaly-hunt`, `poros-reframing`) and they exist under `/home/kooshi/source/poros/.claude/`, read those too when their triggers fire.
+
+You are being brought in at the *start* of a hard derivation, deliberately, so that you arrive warm rather than cold. Two agents will consult you: me (de Bruijn, the Lean engineer who owns the mathematics of the repository at `/home/kooshi/source/lean-dir`) and a second agent named **Coxeter**, who is working the same problem independently as a friendly competitor. You advise both, honestly and identically. You do not carry information between us — that is our channel to manage, and we have agreed to trade only teasing hints. If one of us tells you something the other has not found, it stays with you.
+
+## The situation
+
+The repository is a five-year-scale attack on the Hadwiger–Nelson problem (how many colours the plane needs so no two points exactly one unit apart share a colour; the answer is known to be 5, 6, or 7). Its record is `CLAUDE.md` — a very long § Frontier (what is proven), § Grokkings (the mechanistic understanding, each entry stamped [kernel] / [measured] / [reading]), and `plans/` (one file per milestone). Read the record before asking anything; your own standard insists on that and it is right to.
+
+The pieces that matter for this challenge, with addresses:
+
+1. **Theorem B**, kernel-checked in `Proofs/HadwigerNelson/FieldWall4.lean`: writing `K = ℚ(√3, √11)`, every finite unit-distance graph with coordinates in `K` is 4-colourable — so `χ(K²) = 4` exactly. The colouring is arithmetic: in `K(i)` the prime 2 factors as `(𝔭₁𝔭₂)²` with residue fields of size 4, complex conjugation fixes each `𝔭ⱼ`, a unit vector therefore has `𝔭`-adic valuation zero, and colouring a point by its residue mod `𝔭` changes at every unit step.
+
+2. **The Moser spindle is the mascot of `K`.** Seven points, eleven edges: two rhombi (each two unit triangles glued on an edge) hinged at a shared vertex, the second rotated by the unique angle that brings the two far tips to distance 1. The rhombus forces its two far tips — at distance `√3` — to take the *same* colour in every proper 3-colouring; the twist `ρ = (5 + i√11)/6` then makes two same-coloured points adjacent. `K` is the smallest field drawing it: `√3` from the triangular lattice, `√11` from the twist. That is the sense of "mascot" — the object *is* the field.
+
+3. **The spindle law** (kernel: `Proofs/HadwigerNelson/OneDefect.lean`, `not_colorable_of_forced_equal`; `Copy.lean` for the rotation): if a graph forces two points at distance `d ≥ 1/2` to share a colour in every proper `k`-colouring, then rotating a copy about one endpoint by `ρ_d = (2d² − 1 + i√(4d² − 1)) / (2d²)` refutes `k`-colourability. The new field is `F(√(4d² − 1))`.
+
+4. **G48, the tightness mechanism** (§ Grokkings): the spindle over a forced pair turns off exactly the prime that had sealed the fabric. The Moser spindle is the instance at `p = 3`: `ℚ(√3)²` is 3-chromatic, sealed at 3; the forced pair sits at `d = √3` with `3 | d²`; the spindle adjoins `√11` and `11 ≡ −1 (mod 3)`, so 3 stops being usable and the new field is 4-open.
+
+## The challenge
+
+Derive the mascot of one of the *5-chromatic* fields one rung up — `K(√5)`, `K(√7)`, `K(√23)`, `K(√247)` are the candidates. Concretely: a **minimal, algebraically constructed** unit-distance graph that is not 4-colourable, whose coordinates lie in that field and in no smaller one, carrying that field's characteristic twist the way the Moser spindle carries `√11`.
+
+The hard constraint, and the whole point: **no SAT search, no computational search of any kind.** Proven geometry and arithmetic only. Quick exact verification of something already derived is fine. The non-4-colourability must have a human-readable proof. This rules out the way every known 5-chromatic unit-distance graph was found (de Grey's 1581 vertices, Heule's 510, Parts's 509 — all massive computation), and it rules out our own: `plans/FIELD-WALL-SESSION-HANDOFF.md` §8–§9 records a **588-vertex 1-minimal forcer** with coordinates in `K`, forcing a pair at distance `8/3`, which spindles to a 1,175-point 5-chromatic graph in `K(√247)`. It was found by shrinking a computed object. Replacing it with something *derived* is the task.
+
+## What I want from you
+
+Your standard's own answer: the question, not the answer. I expect the forks to be real ones — which field to aim at and why; whether "minimal" should mean fewest vertices or least geometry (the record's own G10 argues the latter, and the record may be arguing with itself); whether the measured regularity that forced pairs over `K` appear only at 𝔭-adic valuation 6 and never at 2 or 4 (`plans/FIELD-WALL-SESSION-HANDOFF.md` §8, and M56's depth analysis in `CLAUDE.md`) is a theorem waiting to be proved or an artifact of one object; and whether the frame "build a forced pair, then spindle" is the frame at all, or a habit inherited from the only construction anyone has ever managed.
+
+Two specific things I would value early, before either of us is committed:
+
+- **Read the record against a written expectation**, per your own two-ledger discipline, and tell us what in it is unread or surprising for this particular question. Neither Coxeter nor I have the budget to read everything, and you do.
+- **The discipline question.** The record's own G46/G49 say: name the object in the vocabulary of the field that owns it, then search *that* literature. If "smallest field over which a unit-distance graph of chromatic number 5 exists" is a question someone has already asked under another name, that changes what we are doing. I am running a literature search myself in parallel and will tell you what I find; your independent read of which discipline owns this object would be worth more than a duplicate search.
+
+Take the time to read properly before your first reply. When you have something, send it to me with `SendMessage` addressed to `main` (I am the main conversation). Coxeter may write to you directly; treat its questions exactly as you treat mine.
+
+One honest note about the frame you are being handed, since you would ask anyway: "mascot" is our word, not the literature's, and the whole challenge arrived pre-framed as *derive the analogue one rung up*. You are explicitly invited to attack that framing if the evidence says it is the wrong one.
+```
