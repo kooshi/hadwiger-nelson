@@ -1,28 +1,42 @@
 {
  "F_known": {
-  "rank": 2,
+  "rank": 4,
   "generators": [
    [
-    48,
-    -24,
+    8,
     0,
-    -24
+    0,
+    0
+   ],
+   [
+    0,
+    8,
+    0,
+    0
    ],
    [
     0,
     0,
-    48,
-    -24
+    8,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    8
    ]
   ],
   "Lambda_mod": {
-   "free": 2,
+   "free": 0,
    "torsion": [
-    24,
-    24
+    8,
+    8,
+    8,
+    8
    ]
   },
-  "index": null
+  "index": 4096
  },
  "P_found": {
   "rank": 4,
@@ -64,14 +78,46 @@
   "index": 4096
  },
  "P_found_mod_F_known": {
-  "free": 2,
-  "torsion": [
-   3,
-   3
-  ]
+  "free": 0,
+  "torsion": []
  },
+ "F_known_from": [
+  {
+   "name": "v = -(4/9)(1 + sqrt-11)",
+   "coords": [
+    -16,
+    8,
+    8,
+    0
+   ],
+   "grade": "cert",
+   "evidence": "data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json + witness.lrat.gz (2,044 points; LRAT checked by the standalone tools/fs73_cert_check.py, which also computes the orbit span 8 Lambda); independently re-refused by Glucose + drat-trim (b5f32334, data/fs73/records/verify-P1d.md)"
+  },
+  {
+   "name": "8/3 (Harder, Polymath16 2018)",
+   "coords": [
+    96,
+    -48,
+    -48,
+    -24
+   ],
+   "grade": "tools",
+   "evidence": "solver refusals: FS-70 data/fs70/harder-control/forces_8over3.cnf (23,083-point word ball); here K-rows force:96,-48,-48,-24:R1.5 (39,829-point Minkowski ball)"
+  },
+  {
+   "name": "8/9",
+   "coords": [
+    32,
+    -16,
+    -16,
+    -8
+   ],
+   "grade": "tools",
+   "evidence": "kissat and cadical on one CNF (K-rows force:32,-16,-16,-8:R1.5); Glucose + drat-trim by the independent verifier (b5f32334); and 8/9 = -(v + conj v), so the certificate implies it"
+  }
+ ],
  "point_group_order": 24,
- "orbit_of_8over3": 6,
+ "orbit_of_certified_generators": 12,
  "colourings": 25,
  "P_N": {
   "2": {

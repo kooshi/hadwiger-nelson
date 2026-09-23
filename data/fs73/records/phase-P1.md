@@ -682,3 +682,159 @@ Total, about 2.2 core-hours. N = 32 used about 1 of P1d′'s remaining 7.3 core-
    - deletion of `v`'s certificate toward 1-minimal (about 34 h), if the kernel replay of the 56.5 MB LRAT is too costly.
 4. **For the kernel:** `v`'s certificate is in `forces_of_not_colorable_append_single`'s form. The transport to `8Λ` is group-law
    work (ζ₆, conjugation, translations).
+
+---
+
+# Implementer D's sections (Opus 5.5, 2026-09-23, desktop, 16 physical cores / 32 threads, 128 GB): P1e and P1f
+
+*D finished P1 from A2's hand-back. A's and A2's sections above are unchanged. The census record for a reviewer is
+`data/fs73/census/README.md`; this section is the phase record.*
+
+## D's headline
+
+- **De Grey's lattice: the census now says F_known = 8Λ = P_found.**
+  - It takes F_known from v's certificate (`K_FORCED` in `tools/fs73_screen.py`).
+  - `K-sandwich.json` was regenerated: P_found / F_known is **0**.
+  - Rows written before the certificate still print ℤ² × (ℤ/3)². The README marks them superseded.
+- **P1e: the three rich 2-unit lattices over ℚ(√3,√5) are rigid-found with forcing undecided,** on their **generator graphs**. This is
+  the informative-instance shape, and the PO was told at once.
+  - Their saturation is unaffordable, so every row is a generator graph.
+  - On each: F_known = 0, and P_found has rank 8 (finite index).
+  - 4/3, 8/3, 4, 4/7 and 4/√3 lie in P_found. 2, 2/3 and i√3 do not.
+  - No gapped periodic colouring exists at any period group asked.
+- **P1e's first step had no instance.**
+  - N = 5 and N = 7 are inadmissible on all three lattices, because 1/5 and 1/7 lie in Λ (the unit vector −1 is in 5Λ and 7Λ).
+  - So **P-C3(a) is void, not lost**: its informative outcome was unreachable at registration. The PO's ruling carries it to the
+    close as a planning defect.
+- **P1f: the census README and the standalone checker `tools/fs73_census_check.py`.** Standard library only, and it imports nothing
+  from `tools/`.
+  - It re-verifies every sandwich: 48 colourings at K and 74 on the rich lattices, each proper with an exact period group, and each
+    Kempe period group recomputed.
+  - It re-derives F_known from the certificate's own witness.
+  - It runs `tools/fs73_cert_check.py` on request.
+  - It re-asks the solver claims on its own encoding.
+  - Seven planted faults are each refused for their own reason.
+
+## Theorems this phase proved (D)
+
+- **[tools, exact] 1/p ∈ Λ for every odd prime p dividing the denominator, on all three rich lattices.**
+  - Measured for p ≤ 41: for twounits:14, p = 3, 5, 7, 13; twounits:30 adds 17, 19, 23, 29; twounits:42 adds 31, 37, 41. And
+    1/11 ∉ Λ on all three.
+  - So NΛ is inadmissible for every such p, including N = 5, 7, 9, 13.
+  - **[hand]** Why the primes are those: a unit vector is a unit at every conjugation-stable prime of E, so a prime in a unit vector's
+    denominator has none. At such a prime G55's prime inversion puts 1/p in the ring ℤ[U]; here it is already in the additive span.
+  - *Where:* `rich-rows.jsonl` `…|inadmissible` (the lattice coordinates of each 1/p); the checker's step (0) re-derives it from the
+    lattice files.
+- **[tools, exact] Every exhibited periodic four-colouring of the three rich generator graphs is gap-free, at each period group asked.**
+  - The period groups: 2Λ, 4Λ, **6Λ**, and 2Λ ∩ W₁₁ for each of the four conjugation-fixed primes above 11.
+  - The gap-aimed finder was UNSAT at every one.
+  - W₁₁ alone (target Γ₁₁) and W₁₁ ∩ W₁₁′ (three pairs) are not four-colourable at all.
+  - *Where:* `rich-rows.jsonl` `…|gap:*`, `…|seeded:N…:plain`.
+- **[tools, exact] P_W exactly on the rich generator graphs.**
+  - P₂ = 2Λ.
+  - P₄: Λ/P₄ ≅ (ℤ/2)²×(ℤ/4)⁶ at twounits:14, and (ℤ/2)⁴×(ℤ/4)⁴ at twounits:30 and :42.
+  - P_W = 2Λ at every 2Λ ∩ W₁₁: the 11-part never adds a period.
+  - Each is confirmed generator by generator, and reproduced by a cold re-run of the loop.
+- **[tools, exact; checked by the standalone checker] The rich sandwiches (generator graphs).**
+  - F_known = 0.
+  - Λ/P_found ≅ ℤ/10²×ℤ/20²×ℤ/5460⁴ (twounits:14); ℤ/9690²×ℤ/222870²×ℤ/193896900⁴ (twounits:30);
+    ℤ/310²×ℤ/7130²×ℤ/122331335100⁴ (twounits:42).
+  - The odd torsion is carried by the Kempe period groups, at exactly the primes with 1/p ∈ Λ.
+- **[hand] The soundness split for generator graphs.**
+  - Cay(Λ, S) ⊆ Cay(Λ, U) as a spanning subgraph, so the saturated graph's colourings are a subset of the generator graph's.
+  - Hence F(S) ⊆ F(U) and P(S) ⊆ P(U).
+  - A forcing refusal on a generator-graph ball carries up to the saturated lattice; a colouring, a period group, a gap or an escape
+    does not. Neither sandwich bounds the other's gap.
+- **[tools] Word balls on twounits:14 are thin at radius 2.** The union of the radius-2 word balls about 0 and 4/3 has:
+  - 44,630 points and average degree 6.94;
+  - an outermost shell of 99% of the points, with mean degree 4.97;
+  - an empty 8-core (only the two pinned points survive).
+  - G65's second half. No forcing ask was run on it.
+
+## P1e: what ran
+
+`python3 tools/fs73_screen.py census RICH` (stage 1). Every row is in `data/fs73/census/rich-rows.jsonl`, fsynced per verdict.
+- **Solver CPU, desktop:** tu14 187 s, tu30 229 s, tu42 180 s, all in asks under 1 GB.
+- **Controls:**
+  - FS-70's committed N = 2 and 4 colourings, mapped class by class through the points, are proper on this file's quotients (asserted)
+    and seeded the loops.
+  - The cold re-runs reproduce every P_W.
+  - Γ₁₁ (W₁₁ alone) refuses four colours, as χ(Γ₁₁) = 5 requires. The residue map is the ring homomorphism √3 ↦ ±5, √5 ↦ ±4,
+    i ↦ j in 𝔽₁₂₁, and every generator is asserted to land in μ₁₂.
+- **Stage 2** (`census RICH --six`): the 6Λ gap asks, 1,679,616 classes with 56–72 generator classes. **All three are UNSAT:**
+  - tu14: 216,670,532 clauses, 32.5 s kissat CPU;
+  - tu30: 189,796,668 clauses, 25.0 s;
+  - tu42: 243,544,396 clauses, 36.3 s.
+  - Each ran under the shared lock (`…/scratchpad/locks/heavy.lock`).
+  - Peak solver RSS was 3.6–4.2 GB, against a price of 13–17 GB. The price used K's 66 bytes per clause; kissat used about 17 here.
+  - The job ran detached (pgid 992772) and **finished before hand-back**; nothing is left running. A kill would redo only the one ask in
+    flight: `census RICH --six` skips keys present.
+  - So **P-C3(b) lost at 6Λ as well**: no gapped colouring at the cheapest admissible period with an odd part.
+- **The code:**
+  - `Quot` now reduces points modulo the quotient's exponent before the Smith product, and asserts the int64 bound. The rich lattices'
+    coordinates reach 10^15.
+  - `p_N` and `analyse` take a key prefix, so one rows file can hold three lattices.
+  - `fs73_screen.py selftest --plants` passes on the edited file (17 checks, every plant fires).
+
+## P1f: what ran
+
+- **`python3 tools/fs73_screen.py export`.** It writes:
+  - `lattice-{degrey,tu14,tu30,tu42}.json`;
+  - the FS-70 seed colourings. P1d and P1e analysed them but never saved them in these coordinates; each one's sha is asserted equal
+    to its analyse row's;
+  - Smith data (`smith_C`, `smith_Cinv`, `smith_d`) into every colouring whose W is not NΛ.
+- **`python3 tools/fs73_screen.py rows-table`** writes `ROWS.md`: 560 rows, one line each.
+- **`python3 tools/fs73_census_check.py`:**
+
+| run | result | time |
+|---|---|---|
+| `--controls` | CONTROLS PASSED (twin passes; IMPROPER, PERIOD_FALSE, PER_NOT_EXACT, KPER_MISMATCH, NOT_UNIT, F_KNOWN_MISMATCH each refused for its reason) | under 1 s |
+| `--only degrey --cert` | CENSUS VERIFIED. U complete by the box search; 48 colourings; F_known = 8Λ from the witness; `tools/fs73_cert_check.py` CERTIFIED; step (iv): 33 UNSAT claims up to 65,536 classes re-asked on the checker's own encoding and confirmed by kissat, 17 above the 100,000-class cap listed with their CNF hashes | 271 s |
+| `--only tu14,tu30,tu42 --no-solver` | CENSUS VERIFIED: 74 colourings; the three P_found recomputed and equal | 16 s |
+
+- *The first rich run was REFUSED, and that was correct:* `COLOURING_MISSING`. The FS-70 seeds had been analysed but never saved.
+  `export` now files them.
+
+## Predictions scored (D)
+
+| id | prediction | outcome |
+|---|---|---|
+| P-C3 (a) | a rich 2-unit lattice has a gapped colouring at N = 5 or 7 (0.55) | **void, not lost**: N = 5 and 7 are inadmissible on all three (1/5, 1/7 ∈ Λ). Neither outcome was reachable at registration |
+| P-C3 (b) | if not, the depth-4 targets escape under some odd or composite period | **lost at every composite period asked**: at 2Λ ∩ W₁₁ (four primes) the colourings are all 2Λ-periodic; W₁₁ ∩ W₁₁′ does not colour; 6Λ has no gapped colouring (P_6 itself not computed) |
+| P-C3 (c) | 8/3 stays H1-found | **won**, on the generator graphs: 8/3 ∈ P_found on all three |
+
+## Decisions (four parts)
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| re-aim P1e's first step at the admissible periods with an odd part, including composite period groups that are not NΛ (2Λ ∩ W₁₁, W₁₁ ∩ W₁₁′) | stop at "N = 5, 7 inadmissible" and go straight to forcing asks | the gap is the one outcome that closes a lattice with no further work; the composite groups are cheap (at most 31k classes) and a single-prime refusal does not decide them (the quotient is a subgraph of the product); approved by the PO | high |
+| label every rich row "generator graph" | saturate by trace or box | 10^22.6 to 10^92 vectors | high |
+| no forcing ask on the radius-2 word ball | ask it anyway at 1,500 s | its 8-core is empty and 99% of it is a degree-5 shell, so an UNKNOWN or SAT there measures the ball's shape (G65; the PO's caution) | high |
+| the checker's step (iv) uses its OWN encoding (Hermite classes, two pins, no precedence), not a rebuild of the writer's CNF | reproduce the writer's CNF and match its sha256 | an independent encoding checks the claim and the symmetry break at once; the writer's hashes stay on file as provenance | high |
+| one file for the three rich lattices, keys prefixed tu14/tu30/tu42 | three files | the plan names `rich-rows.jsonl` | high |
+
+## What is left (D's hand-back)
+
+1. **The forcing question on the rich generator graphs.** It is the live informative instance. Balls affordable at radius 2 are too
+   thin (above). Radius 3 is about 3·10⁶ points before cores, unpriced. A denser shape (a union of word balls about several points of
+   4/3·ℤ, or a ball in a sublattice where the degree is higher) is the next thing to price.
+2. **P_6 on the rich generator graphs** (the sep loop at 6Λ, about 4 GB per ask by stage 2's measurement): not run. It could only
+   shrink P_found.
+3. **Rows 22–24's explicit colourings, checked for periodicity (P1f's acceptance): NOT DONE.**
+   - What was learned: the ladder colouring (`Ladder.lean` `colTab`) is b-independent, so it depends only on the side, the circle and
+     a mod 6. On the outer circle it alternates with a.
+   - So it is not constant on the cosets of 2L, where −1 ≡ 1. Nor is it Theorem B's residue colouring, under which ζ₆ has order 3.
+   - The span L of the ladder set is not finitely generated. σ = w/√3 has unbounded 3-adic denominators, though the 2-adic completion
+     is finitely generated. So "periodic" needs a finite-index W of a ℤ[1/3]-module, and the check is a residue-map search: 2-adic
+     levels, plus the odd primes that split completely in K(i).
+   - Priced at about half a day. The verdict on rows 22–24 stays "pending".
+
+## Regenerate (D)
+
+```
+python3 tools/fs73_screen.py census RICH             # stage 1, resumes from rich-rows.jsonl
+python3 tools/fs73_screen.py census RICH --six       # stage 2: the 6 Lambda gap asks, under the shared lock
+python3 tools/fs73_screen.py census K --resume       # rewrites K-sandwich.json with the certified F_known (every ask cached)
+python3 tools/fs73_screen.py export; python3 tools/fs73_screen.py rows-table
+python3 tools/fs73_census_check.py --controls; python3 tools/fs73_census_check.py --cert
+```

@@ -28,6 +28,11 @@ Commands
   python3 tools/fs73_screen.py crosscheck                    # P1c
   python3 tools/fs73_screen.py census K [--resume]            # P1d
   python3 tools/fs73_screen.py periods K [--resume]           # P1d'
+  python3 tools/fs73_screen.py census RICH [--only SPEC,...] [--six]   # P1e: the rich 2-unit lattices' GENERATOR graphs (resumes)
+  python3 tools/fs73_screen.py export                         # P1f: lattice files, FS-70 seed colourings, Smith data for the checker
+  python3 tools/fs73_screen.py rows-table                     # P1f: data/fs73/census/ROWS.md, every verdict row
+F_known at K is the span of the certified forced vectors' orbits (K_FORCED: v's LRAT certificate) = 8 Lambda; it was Harder's 8/3
+alone (rank 2) until the certificate, and rows written before it say P_found / F_known = Z^2 x (Z/3)^2.
 Plants (--plant): dedup_steps (parallel edges dropped from the voltage computation), per_sample (Per accepted on the sampled pass
 alone), kper_first (KPer taken from the first component only), prec_wrong (the precedence break inverted, 3 before 2).
 """
@@ -200,10 +205,15 @@ class Quot:
         self._digs = None
         idx_hnf = math.prod(abs(row[next(j for j in range(r) if row[j])]) for row in W)
         assert self.n == idx_hnf, f'Smith form and Hermite form disagree on the index: {self.n} vs {idx_hnf}'
+        # the exponent m of Lambda/W: m Lambda <= W, so a point's class depends only on the point mod m.  Points are reduced mod m
+        # BEFORE the product with C, so int64 cannot overflow on lattices with huge coordinates (the rich lattices of P1e reach 10^15);
+        # the bound below is asserted, never assumed.
+        self.m = int(max(d))
+        assert self.m * max(1, int(np.abs(self.C).max())) * r < 2 ** 62, 'Quot: the class computation could overflow int64'
 
     def digits_of(self, X):
         """lattice points (m x r) -> class digits (m x k)"""
-        Y = np.asarray(X, dtype=np.int64) @ self.C
+        Y = np.mod(np.asarray(X, dtype=np.int64), self.m) @ self.C
         return np.mod(Y[:, self.keep], self.mods)
 
     def cls(self, X):
@@ -1033,11 +1043,12 @@ def lat_rows(H):
     return [list(map(int, h)) for h in H]
 
 
-def analyse(U, W, col, r, rows, tag):
-    """Per and KPer of one colouring, cached in the rows by the colouring's sha"""
+def analyse(U, W, col, r, rows, tag, prefix=''):
+    """Per and KPer of one colouring, cached in the rows by the colouring's sha (prefix: the lattice's key prefix, when one rows file
+    holds several lattices; '' for K's file, whose keys predate it)"""
     s_ = ''.join(map(str, col.tolist()))
     sha = hashlib.sha256(s_.encode()).hexdigest()[:16]
-    key = f'analyse:{sha}'
+    key = f'{prefix}analyse:{sha}'
     got = rows.get(key)
     if got:
         return got
@@ -1068,14 +1079,15 @@ def ask(rows, key, Q, U, aim, target, budget, lat_name, tag):
     return rows.put(rec), col
 
 
-def p_N(rows, lat_name, U, r, N, seeds=(), budget=1500, run='seeded', W=None):
+def p_N(rows, lat_name, U, r, N, seeds=(), budget=1500, run='seeded', W=None, prefix=''):
     """the H1 group at period W (default N Lambda), exactly: guess = common periods of the colourings found; each guess generator not
-    yet confirmed is asked 'sep'; SAT shrinks the guess (asserted), UNSAT confirms.  Returns (P_N rows, colourings, status)"""
+    yet confirmed is asked 'sep'; SAT shrinks the guess (asserted), UNSAT confirms.  Returns (P_N rows, colourings, status).
+    N is a label when W is given (it names the keys); prefix names the lattice when one rows file holds several."""
     W = NW(N, r) if W is None else W
     Q = Quot(W, r)
     cols = list(seeds)
     if not cols and run != 'cold':
-        rec, col = ask(rows, f'{run}:N{N}:plain', Q, U, 'plain', None, budget, lat_name, f'{lat_name}-N{N}')
+        rec, col = ask(rows, f'{prefix}{run}:N{N}:plain', Q, U, 'plain', None, budget, lat_name, f'{lat_name}-N{N}')
         if col is None:
             return None, [], rec['verdict']
         cols.append(col)
@@ -1091,7 +1103,8 @@ def p_N(rows, lat_name, U, r, N, seeds=(), budget=1500, run='seeded', W=None):
         if not gens:
             break
         g = gens[0]
-        rec, col = ask(rows, f'{run}:N{N}:sep:{",".join(map(str, g))}', Q, U, 'sep', g, budget, lat_name, f'{lat_name}-N{N}')
+        rec, col = ask(rows, f'{prefix}{run}:N{N}:sep:{",".join(map(str, g))}', Q, U, 'sep', g, budget, lat_name,
+                       f'{lat_name}-N{N}')
         if rec['verdict'] == 'SAT':
             if planted('loop_stale'):
                 col = cols[-1]                    # PLANT: the previous colouring re-used instead of the separating one
@@ -1165,9 +1178,10 @@ def cmd_census_K(resume):
         P_found = a['KPer'] if P_found is None else intersect(P_found, a['KPer'], r)
     for N in PN:
         P_found = intersect(P_found, PN[N][0], r)
-    Fk, gord, osz = forced_span(lat, [T['8/3']])
+    Fk, gord, osz = k_forced_known(lat)
     sand = {'F_known': describe(Fk, r), 'P_found': describe(P_found, r), 'P_found_mod_F_known': quotient_structure(P_found, Fk, r),
-            'point_group_order': gord, 'orbit_of_8over3': osz, 'colourings': len(ana),
+            'F_known_from': [{k_: (list(v_) if k_ == 'coords' else v_) for k_, v_ in f.items()} for f in K_FORCED],
+            'point_group_order': gord, 'orbit_of_certified_generators': osz, 'colourings': len(ana),
             'P_N': {N: {'status': PN[N][1], **describe(PN[N][0], r)} for N in PN}, 'cold_rerun_reproduces': cold}
     assert all(member(P_found, f) for f in Fk), 'F_known is not inside P_found'
     neg = {}
@@ -1186,6 +1200,33 @@ def cmd_census_K(resume):
 PERIODS_K = (16, 14, 15, 20, 21, 22, 24, 25, 26, 28, 32, 33, 35)     # 16 first (the plan's 2-power period), then by class count
 
 
+# The forced vectors on de Grey's lattice, in its lattice coordinates (fs73_lattice.degrey's Hermite basis), with their evidence.
+# F_known is generated by the CERTIFIED ones only (grade 'cert': an LRAT proof checked by a standalone checker); the others are listed
+# as corroboration and are asserted to lie inside it.  Until implementer A2's certificate (d723e0fb) F_known was Harder's 8/3 alone,
+# rank 2, and the census printed P_found / F_known = Z^2 x (Z/3)^2; with v it is 8 Lambda = P_found, and the quotient is trivial.
+K_FORCED = [
+    {'name': 'v = -(4/9)(1 + sqrt-11)', 'coords': (-16, 8, 8, 0), 'grade': 'cert',
+     'evidence': 'data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json + witness.lrat.gz (2,044 points; LRAT checked by the standalone '
+                 'tools/fs73_cert_check.py, which also computes the orbit span 8 Lambda); independently re-refused by Glucose + drat-trim '
+                 '(b5f32334, data/fs73/records/verify-P1d.md)'},
+    {'name': '8/3 (Harder, Polymath16 2018)', 'coords': (96, -48, -48, -24), 'grade': 'tools',
+     'evidence': 'solver refusals: FS-70 data/fs70/harder-control/forces_8over3.cnf (23,083-point word ball); here K-rows '
+                 'force:96,-48,-48,-24:R1.5 (39,829-point Minkowski ball)'},
+    {'name': '8/9', 'coords': (32, -16, -16, -8), 'grade': 'tools',
+     'evidence': 'kissat and cadical on one CNF (K-rows force:32,-16,-16,-8:R1.5); Glucose + drat-trim by the independent verifier '
+                 '(b5f32334); and 8/9 = -(v + conj v), so the certificate implies it'},
+]
+
+
+def k_forced_known(lat):
+    """F_known at K: the span of the point-group orbits of the certified forced vectors; asserts every corroborating vector lies in it"""
+    cert = [tuple(f['coords']) for f in K_FORCED if f['grade'] == 'cert']
+    Fk, gord, osz = forced_span(lat, cert)
+    for f in K_FORCED:
+        assert member(Fk, f['coords']), f'{f["name"]} is not inside the certified F_known'
+    return Fk, gord, osz
+
+
 def census_state(lat, r, T, rows):
     """P_found and F_known recomputed from the rows (never stored alone): the intersection of KPer over every analysed colouring"""
     P = None
@@ -1194,7 +1235,7 @@ def census_state(lat, r, T, rows):
         if d['key'].startswith('analyse:'):
             P = d['KPer'] if P is None else intersect(P, d['KPer'], r)
             n += 1
-    Fk, _, _ = forced_span(lat, [T['8/3']])
+    Fk, _, _ = k_forced_known(lat)
     return (hnf(P, r) if P else None), Fk, n
 
 
@@ -1392,6 +1433,393 @@ def cmd_pd3_K(R=1.5, budget=1500):
 
 
 # ================================================================ P1c: the two-instrument cross-check
+
+# ================================================================ P1e: the rich 2-unit lattices over Q(sqrt3, sqrt5) -- GENERATOR GRAPHS
+#
+# twounits:D (fs70_fabric) = the Z-span of every unit vector of Q(sqrt3, sqrt5)(i) of denominator <= D that is a unit at 2.  Rank 8, and
+# a denominator M of 16,380 / 5.3e10 / 2.5e15, so the saturation is priced (rich_saturation_price) and is unaffordable: every row here
+# is about the GENERATOR GRAPH Cay(Lambda, S), S = the generators, a unit-distance Cayley graph of Lambda in its own right.
+# SOUNDNESS SPLIT (G31): Cay(Lambda, S) is a spanning subgraph of the saturated Cay(Lambda, U).  A forcing refusal on a generator-graph
+# ball therefore carries UP to the saturated lattice (Forces is monotone upward in the graph); a colouring, a period, a gap, an escape
+# does NOT (it may be improper on a unit vector outside S).  The sandwich below is the generator graph's own.
+
+RICH = {'twounits:14': 'tu14', 'twounits:30': 'tu30', 'twounits:42': 'tu42'}
+RICH_ROWS = os.path.join(CENSUS, 'rich-rows.jsonl')
+# the targets of FS70-T1/T7/T8 (the five depth classes 4/3, 8/3, 4, 4/7, 4/sqrt3; the dead 2, 2/3; the level-0 i sqrt3), as
+# (x numerators on (1, sqrt3, sqrt5, sqrt15), y numerators, denominator)
+RICH_TARGETS = {'2': ((2, 0, 0, 0), (0, 0, 0, 0), 1), '2/3': ((2, 0, 0, 0), (0, 0, 0, 0), 3), '4/3': ((4, 0, 0, 0), (0, 0, 0, 0), 3),
+                '8/3': ((8, 0, 0, 0), (0, 0, 0, 0), 3), '4': ((4, 0, 0, 0), (0, 0, 0, 0), 1), '4/7': ((4, 0, 0, 0), (0, 0, 0, 0), 7),
+                '4/sqrt3': ((0, 4, 0, 0), (0, 0, 0, 0), 3), 'isqrt3': ((0, 0, 0, 0), (0, 1, 0, 0), 1)}
+_RICH_CACHE = {}
+
+
+def rich_setup(spec):
+    """(lat, r, U, targets): the lattice spanned by fs70_fabric's generators of SPEC, and U = those generators ('gens': NOT a saturation)"""
+    if spec in _RICH_CACHE:
+        return _RICH_CACHE[spec]
+    import fs70_fabric as FB
+    lat = FL.fabric(spec)
+    U8 = []
+    for z in FB.generators(spec):
+        x, y = z
+        den = 1
+        for q in x + y:
+            den = den * q.denominator // math.gcd(den, q.denominator)
+        U8.append(lat.to_M(tuple(int(q * den) for q in x + y), den))
+    lat.saturate('gens', gens=U8)
+    U = [tuple(int(t) for t in u) for u in lat.U]
+    assert set(U) == {tuple(-x for x in u) for u in U}, 'the generator set is not symmetric'
+    T = {}
+    for nm, (x4, y4, den) in RICH_TARGETS.items():
+        w = lat.to_M(tuple(x4) + tuple(y4), den)
+        T[nm] = None if w is None else tuple(lat.coords(w))
+    _RICH_CACHE[spec] = (lat, lat.rank, U, T)
+    return _RICH_CACHE[spec]
+
+
+def rich_saturation_price(lat):
+    """what a complete saturation would enumerate: (log10 of the trace method's Fincke-Pohst count, Gaussian heuristic = the volume of
+    the trace-norm-4 ball in R^r over the covolume; log10 of the box method's per-coordinate candidates at D = M)"""
+    G = lat.gram_int()
+    det = abs(FL._det(G))
+    r = lat.rank
+    log_covol = (math.log10(det) - 2 * r * math.log10(lat.M)) / 2
+    log_ball = math.log10(math.pi ** (r / 2) / math.gamma(r / 2 + 1) * 2 ** r)
+    return {'trace_log10_vectors': round(log_ball - log_covol, 2), 'box_log10_candidates': round(math.log10(FL.box_estimate(lat.F, lat.M)), 2),
+            'M': lat.M, 'verdict': 'unaffordable: every row is a generator graph'}
+
+
+def residue11(lat, sg):
+    """the residue map Lambda -> F_121 = F_11[j]/(j^2 + 1) at the prime of F above 11 where sqrt3 -> 5 sg[0], sqrt5 -> 4 sg[1] (11 splits
+    completely in F and each prime is inert in E = F(i), so the four are conjugation-fixed, residue field F_121, target Gamma_11 = Cay(F_121,
+    mu_12)).  Returns (the images of the Hermite basis, the map on 2n-vectors over M).  Requires 11 not dividing M."""
+    assert lat.M % 11 and (5 * 5 - 3) % 11 == 0 and (4 * 4 - 5) % 11 == 0
+    s3, s5 = (5 * sg[0]) % 11, (4 * sg[1]) % 11
+    ev = [1, s3, s5, (s3 * s5) % 11]
+    Minv = pow(lat.M % 11, -1, 11)
+
+    def phi8(v):
+        return (sum(e * x for e, x in zip(ev, v[:4])) * Minv % 11, sum(e * x for e, x in zip(ev, v[4:])) * Minv % 11)
+    return [phi8(h) for h in lat.H], phi8
+
+
+def kernel_mod(A, p, r):
+    """{c in Z^r : sum_i c_i A_i = 0 mod p} for A a list of r vectors over F_p: the lifted F_p-nullspace plus p Z^r, as an HNF"""
+    m = len(A[0])
+    R = [[A[i][j] % p for i in range(r)] for j in range(m)]
+    pivots = []
+    row = 0
+    for col in range(r):
+        k = next((i for i in range(row, m) if R[i][col]), None)
+        if k is None:
+            continue
+        R[row], R[k] = R[k], R[row]
+        inv = pow(R[row][col], -1, p)
+        R[row] = [x * inv % p for x in R[row]]
+        for i in range(m):
+            if i != row and R[i][col]:
+                f = R[i][col]
+                R[i] = [(a - f * b) % p for a, b in zip(R[i], R[row])]
+        pivots.append(col)
+        row += 1
+    gens = []
+    for fcol in (c for c in range(r) if c not in pivots):
+        v = [0] * r
+        v[fcol] = 1
+        for i, pc in enumerate(pivots):
+            v[pc] = (-R[i][fcol]) % p
+        gens.append(tuple(v))
+    gens += [tuple(p if i == j else 0 for j in range(r)) for i in range(r)]
+    H = hnf(gens, r)
+    assert all(sum(c[i] * A[i][j] for i in range(r)) % p == 0 for c in H for j in range(m))
+    assert math.prod(abs(row_[next(j for j in range(r) if row_[j])]) for row_ in H) == p ** len(pivots)
+    return H
+
+
+SIGNS11 = {'a': (1, 1), 'b': (-1, 1), 'c': (1, -1), 'd': (-1, -1)}
+
+
+def rich_period_groups(lat, r, U):
+    """the period groups P1e asks, each with its price: N Lambda for N = 2, 4, 6, and the composite groups that are not N Lambda --
+    one fixed prime above 11 alone (Gamma_11, a control that must refuse four colours), 2 Lambda times one fixed prime above 11 (the four
+    primes; the Galois flips permute them, a consistency control), and two fixed primes above 11 together (the three pairs up to the flips)"""
+    W11 = {}
+    for s, sg in SIGNS11.items():
+        A, phi8 = residue11(lat, sg)
+        for u in lat.U8:
+            a, b = phi8(u)
+            assert (a * a + b * b) % 11 == 1, 'a unit vector does not reduce into the norm-one circle mu_12'
+        W11[s] = kernel_mod(A, 11, r)
+    out = {f'N{N}': NW(N, r) for N in (2, 4, 6)}
+    out['11a'] = W11['a']
+    for s in 'abcd':
+        out[f'2x11{s}'] = intersect(NW(2, r), W11[s], r)
+    for s in 'bcd':
+        out[f'11a11{s}'] = intersect(W11['a'], W11[s], r)
+    return out
+
+
+def price_W(W, r, U):
+    """classes, generator classes, edges and clauses of the four-colour CNF on Cay(Lambda/W, U mod W), without building it"""
+    Q = Quot(W, r)
+    res = {int(c) for c in Q.cls(np.array(U))}
+    adm = 0 not in res
+    # an involution-free generator class set: every class appears with its negative, so edges = n |res| / 2 (+ n/2 per class of order 2)
+    order2 = sum(1 for c in res if int((np.mod(2 * Q.digits()[c], Q.mods) * Q.pw).sum()) == 0) if Q.n <= 5_000_000 else None
+    edges = (Q.n * (len(res) - (order2 or 0)) // 2 + (Q.n // 2) * (order2 or 0)) if order2 is not None else Q.n * len(res) // 2
+    return {'classes': Q.n, 'generator_classes': len(res), 'admissible': adm, 'edges': edges, 'clauses': 4 * Q.n + 4 * edges + 2 * Q.n,
+            'est_gb': round((4 * Q.n + 4 * edges + 2 * Q.n) * 66 / 1e9, 2), 'Lambda_mod_W': describe(hnf(W, r), r)['Lambda_mod']}
+
+
+def fs70_rich_colouring(lat, spec, N):
+    """FS-70's committed colouring of SPEC at N (data/fs70/quotient/), mapped class by class through the points into this file's
+    coordinates; None if FS-70 committed none"""
+    import fs70_fabric as FB
+    fn = os.path.join(ROOT, 'data', 'fs70', 'quotient', f'{spec.replace(":", "_")}-N{N}.colouring.json')
+    if not os.path.exists(fn):
+        return None
+    d = json.load(open(fn))
+    L70 = FB.Lattice(FB.generators(spec), spec)
+    assert L70.M == lat.M and len(L70.H) == lat.rank
+    r = lat.rank
+    Q = Quot(NW(N, r), r)
+    col = np.full(Q.n, -1, dtype=np.int8)
+    pw = [N ** (r - 1 - i) for i in range(r)]
+    for i, c in enumerate(d['colouring']):
+        digs = [(i // p) % N for p in pw]
+        v8 = tuple(sum(dj * L70.H[j][t] for j, dj in enumerate(digs)) for t in range(2 * lat.F.n))
+        mine = lat.coords(v8)
+        assert mine is not None
+        col[int(Q.cls(np.array([mine]))[0])] = c
+    assert (col >= 0).all(), 'the FS-70 colouring does not cover every class'
+    return col
+
+
+def rich_state(spec, rows):
+    """the sandwich of one rich lattice, recomputed from the rows (never stored alone): P_found = the intersection of KPer over every
+    analysed colouring and of every exact P_W; F_known = the span of the certified forced vectors' orbits (none yet on these lattices)"""
+    lat, r, U, T = rich_setup(spec)
+    tag = RICH[spec]
+    P = None
+    n = 0
+    for d in rows.rows.values():
+        if d['key'].startswith(f'{tag}|analyse:') or (d['key'].startswith(f'{tag}|P:') and d.get('status') == 'exact'):
+            G = d['KPer'] if 'KPer' in d else d['P']['generators']
+            P = G if P is None else intersect(P, G, r)
+            n += 1
+    Fk = [tuple(v) for v in RICH_FORCED.get(spec, [])]
+    Fk = forced_span(lat, Fk)[0] if Fk else []
+    return (hnf(P, r) if P else None), Fk, n
+
+
+RICH_FORCED = {}          # certified forced vectors per rich lattice, in its lattice coordinates (none: no refusal on file)
+
+
+def cmd_census_rich(specs, six=False, budget=1500):
+    """P1e: per rich lattice, the generator graph's sandwich.  Stage 1 (cheap): the exact P_W loop at N = 2 and 4 (seeded with FS-70's
+    colouring, which must be proper here, and re-run cold), the gap-aimed finder at every period group of rich_period_groups but N = 6,
+    and the exact P_W at every composite group that colours.  Stage 2 (--six, heavy, under the lock): the gap-aimed finder at N = 6."""
+    os.makedirs(CENSUS, exist_ok=True)
+    rows = Rows(RICH_ROWS)
+    for spec in specs:
+        lat, r, U, T = rich_setup(spec)
+        tag = RICH[spec]
+        if not rows.get(f'{tag}|setup'):
+            rows.put({'key': f'{tag}|setup', 'spec': spec, 'rank': r, 'M': lat.M, 'generators': len(U), 'saturation': 'gens (generator graph)',
+                      'saturation_price': rich_saturation_price(lat), 'H_over_M': [list(h) for h in lat.H],
+                      'targets': {k: (list(v) if v else None) for k, v in T.items()}, 'machine': MACHINE})
+        if not rows.get(f'{tag}|inadmissible'):
+            # P1e's first step (N = 5, 7) has no instance: 1/p lies in Lambda for the odd primes p dividing M, so -1 lies in p Lambda
+            inv = {}
+            for p_ in (3, 5, 7, 9, 11, 13, 17, 19, 23, 29, 31, 37, 41):
+                w = lat.to_M(tuple([1] + [0] * (2 * lat.F.n - 1)), p_)
+                c = None if w is None else lat.coords(w)
+                inv[str(p_)] = None if c is None else [int(x) for x in c]
+            rows.put({'key': f'{tag}|inadmissible', 'one_over_p_in_Lambda': inv,
+                      'note': 'coords of 1/p in the Hermite basis, or null if 1/p is not in Lambda; 1/p in Lambda puts the unit vector -1 in '
+                              'p Lambda, so N Lambda is inadmissible for every multiple N of such p'})
+        Ws = rich_period_groups(lat, r, U)
+        print(f'{spec}: rank {r}, |S| = {len(U)} generators (generator graph), M = {lat.M}', flush=True)
+        for nm, W in Ws.items():
+            key = f'{tag}|price:{nm}'
+            pr = rows.get(key) or rows.put({'key': key, 'W_name': nm, 'W': lat_rows(hnf(W, r)), **price_W(W, r, U)})
+            print(f'  {nm}: {pr["classes"]:,} classes, {pr["generator_classes"]} generator classes, admissible {pr["admissible"]}, '
+                  f'{pr["clauses"]:,} clauses (~{pr["est_gb"]} GB)', flush=True)
+        for nm, W in Ws.items():
+            pr = rows.get(f'{tag}|price:{nm}')
+            if not pr['admissible'] or (nm == 'N6') != six:
+                continue
+            Q = Quot(W, r)
+            heavy = pr['est_gb'] > 8 or pr['classes'] > 150000
+            # the gap-aimed finder first (G13, G68: one gapped colouring frees every pair of the generator graph)
+            rec = rows.get(f'{tag}|gap:{nm}')
+            if rec is None:
+                rec_, col = solve(Q, U, 'gap', None, budget=budget, heavy=heavy)
+                rec_.update({'key': f'{tag}|gap:{nm}', 'W_name': nm, 'W': lat_rows(Q.W)})
+                if col is not None:
+                    assert gap_vertex_count(Q, U, col) > 0
+                    rec_['colouring'], rec_['colouring_sha'] = save_colouring(f'{tag}-{nm}-gap', spec, Q.W, col)
+                    rec_['gapped_vertices'] = gap_vertex_count(Q, U, col)
+                rec = rows.put(rec_)
+            print(f'  {nm} gap-aimed: {rec["verdict"]} ({rec.get("cpu_s")} s CPU)', flush=True)
+            if nm == 'N6':
+                continue
+            # the exact P_W: seeded with FS-70's colouring at N = 2, 4 (a control: it must be proper here), then cold
+            pkey = f'{tag}|P:{nm}'
+            if rows.get(pkey):
+                continue
+            seeds = []
+            if nm in ('N2', 'N4'):
+                c70 = fs70_rich_colouring(lat, spec, int(nm[1:]))
+                if c70 is not None:
+                    PColour(U, Q, c70, f'fs70-{spec}-{nm}')        # asserts properness on this file's quotient
+                    seeds = [c70]
+            lab = nm[1:] if nm.startswith('N') else nm
+            G, cols, status = p_N(rows, tag, U, r, lab, seeds=seeds, budget=budget, W=W, prefix=f'{tag}|')
+            if G is None:
+                rows.put({'key': pkey, 'W_name': nm, 'status': 'not colourable', 'plain': status})
+                print(f'  {nm}: plain ask {status}', flush=True)
+                continue
+            Gc, colsc, stc = p_N(rows, tag, U, r, lab, budget=budget, W=W, prefix=f'{tag}|', run='cold')
+            same = hnf(Gc, r) == hnf(G, r)
+            for c in cols + colsc:
+                analyse(U, W, c, r, rows, f'{tag}-{nm}', prefix=f'{tag}|')
+            rows.put({'key': pkey, 'W_name': nm, 'status': status if same else f'{status}; COLD RE-RUN DIFFERS', 'P': describe(hnf(G, r), r),
+                      'cold_reproduces': same, 'colourings': len(cols) + len(colsc), 'fs70_seed': bool(seeds),
+                      'targets_in_P': {k: (member(G, v) if v else None) for k, v in T.items()}, 'machine': MACHINE})
+            print(f'  {nm}: P_W {status}; Lambda/P_W = {describe(hnf(G, r), r)["Lambda_mod"]}; cold re-run reproduces: {same}', flush=True)
+        P, Fk, na = rich_state(spec, rows)
+        if P is not None:
+            s = {'key': f'{tag}|sandwich:{len(rows.rows)}', 'spec': spec, 'graph': 'generator graph', 'analysed_colourings': na,
+                 'P_found': describe(P, r), 'F_known': describe(Fk, r), 'P_found_mod_F_known': quotient_structure(P, Fk, r),
+                 'targets_in_P_found': {k: (member(P, v) if v else None) for k, v in T.items()},
+                 'periods_searched': sorted(d['W_name'] for d in rows.rows.values() if d['key'].startswith(f'{tag}|P:')),
+                 'machine': MACHINE}
+            rows.put(s)
+            print(f'  SANDWICH (generator graph): F_known rank {s["F_known"]["rank"]}; P_found rank {s["P_found"]["rank"]}, '
+                  f'Lambda/P_found = {s["P_found"]["Lambda_mod"]}; P_found/F_known = {s["P_found_mod_F_known"]}; targets in P_found '
+                  f'{s["targets_in_P_found"]}', flush=True)
+    return 0
+
+
+def gap_vertex_count(Q, U, col):
+    """the number of classes whose closed neighbourhood misses some colour (the colouring's gaps, re-read from the colouring itself)"""
+    res = sorted({int(c) for c in Q.cls(np.array(U))})
+    seen = np.zeros((Q.n, 4), dtype=bool)
+    seen[np.arange(Q.n), col] = True
+    for rc in res:
+        j = Q.shift(Q.digits()[rc])
+        seen[np.arange(Q.n), col[j]] = True
+    return int((~seen.all(axis=1)).sum())
+
+
+# ================================================================ P1f: the files the standalone checker reads
+
+def lattice_file(tag, lat, U8, saturation):
+    """data/fs73/census/lattice-TAG.json: the field, the denominator, the Hermite basis every lattice coordinate in the census is
+    taken in, and the constraint set U, all as integer 2n-vectors over M"""
+    path = os.path.join(CENSUS, f'lattice-{tag}.json')
+    d = {'tag': tag, 'name': lat.name, 'field_radicands': list(lat.F.rad),
+         'coordinates': 'a point (x, y) of F^2 is the integer 2n-vector (x_S)_S + (y_S)_S over M, S over the subsets of the radicands '
+                        'in the order (), (r1), (r2), (r1 r2): the basis 1, sqrt r1, sqrt r2, sqrt(r1 r2) of F',
+         'M': lat.M, 'H': [list(map(int, h)) for h in lat.H], 'U': sorted([list(map(int, u)) for u in U8]), 'saturation': saturation}
+    json.dump(d, open(path, 'w'), indent=0)
+    return os.path.relpath(path, ROOT)
+
+
+def cmd_export():
+    """write the lattice files; file FS-70's six seed colourings of de Grey's lattice (analysed in P1d but never saved in this file's
+    coordinates) under colourings/, asserting each one's sha equals its analyse row's; annotate every composite-period colouring with
+    its Smith data (C, d), so the checker needs no Smith form of its own"""
+    lat, r, T = degrey_setup()
+    print(lattice_file('degrey', lat, lat.U8, 'complete: trace method = box method at D = M (fs73_lattice, P1a)'))
+    for spec, tag in RICH.items():
+        latR, rR, UR, TR = rich_setup(spec)
+        print(lattice_file(tag, latR, latR.U8, f'generators only: the {len(UR)} unit vectors of fs70_fabric spec {spec}; the '
+                                                f'saturation is unaffordable (rich_saturation_price), so the graph is Cay(Lambda, S)'))
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))
+    shas = {d['colouring_sha'] for d in rows.rows.values() if d['key'].startswith('analyse:')}
+    for N in (2, 4, 6, 8, 10, 12):
+        Q, col = fs70_degrey_colouring(lat, N)
+        rel, sha = save_colouring(f'degrey-N{N}-fs70seed', 'degrey', Q.W, col)
+        assert sha in shas, f'the FS-70 seed at N = {N} is not the colouring P1d analysed'
+        print(rel)
+    rrows = Rows(RICH_ROWS)
+    for spec, tag in RICH.items():
+        latR, rR, UR, TR = rich_setup(spec)
+        shasR = {d['colouring_sha'] for d in rrows.rows.values() if d['key'].startswith(f'{tag}|analyse:')}
+        for N in (2, 4):
+            if not rrows.get(f'{tag}|P:N{N}'):
+                continue
+            col = fs70_rich_colouring(latR, spec, N)
+            if col is None:
+                continue
+            rel, sha = save_colouring(f'{tag}-N{N}-fs70seed', tag, NW(N, rR), col)
+            assert sha in shasR, f'the FS-70 seed of {spec} at N = {N} is not the colouring P1e analysed'
+            print(rel)
+    import gzip
+    n_ann = 0
+    for fn in sorted(os.listdir(COLDIR)):
+        path = os.path.join(COLDIR, fn)
+        d = json.load(gzip.open(path, 'rt'))
+        if 'smith_C' in d:
+            continue
+        W = d['W']
+        r_ = len(W)
+        if all(W[i][j] == (W[0][0] if i == j else 0) for i in range(r_) for j in range(r_)):
+            continue                                  # W = N Lambda: C = I, d = (N, ..., N), the checker's default
+        C, Cinv, dd = snf(W, r_)
+        d['smith_C'] = [list(map(int, row)) for row in C]
+        d['smith_Cinv'] = [list(map(int, row)) for row in Cinv]
+        d['smith_d'] = [int(x) for x in dd]
+        with gzip.open(path, 'wt') as f:
+            json.dump(d, f)
+        n_ann += 1
+    print(f'{n_ann} composite-period colourings annotated with their Smith data')
+    return 0
+
+
+def cmd_rows_table():
+    """data/fs73/census/ROWS.md: every verdict row of the census, one line each (P1f, G21): lattice, graph, period group, finder,
+    verdict, target vector, the escape's W' where one was computed, CPU seconds, machine"""
+    out = ['# FS-73 census: every verdict row', '',
+           '*Rendered from `K-rows.jsonl`, `K-periods.jsonl` and `rich-rows.jsonl` by `python3 tools/fs73_screen.py rows-table`. '
+           'Graph: "saturated" (every unit vector of the lattice) or "generators" (the rich lattices: Cay(Lambda, S)). Period group: '
+           'Lambda/W as invariant factors. Finder: plain (is there a colouring), sep (one with c(target) != c(0)), gap (one with a '
+           'colour missing from the origin\'s closed neighbourhood), force (a ball ask), analyse (Per and KPer of a found colouring). '
+           'W\': none of these rows computes one (the census asks never escape through a re-periodisation; P1g\'s card does). '
+           'Seconds are CPU seconds of the solver child. Machine: desktop (16 physical cores / 32 threads, 128 GB) '
+           'unless the row says otherwise.*', '',
+           '| file | key | lattice | graph | period group Lambda/W | finder | verdict | target (lattice coords) | CPU s |',
+           '|---|---|---|---|---|---|---|---|---|']
+
+    def lam_w(d, r):
+        if d.get('W'):
+            return str(describe(hnf([tuple(w) for w in d['W']], r), r)['Lambda_mod']['torsion'])
+        return '-'
+    for fname, lattice, graph, r in (('K-rows.jsonl', 'degrey', 'saturated', 4), ('K-periods.jsonl', 'degrey', 'saturated', 4),
+                                     ('rich-rows.jsonl', None, 'generators', 8)):
+        for line in open(os.path.join(CENSUS, fname)):
+            if not line.strip():
+                continue
+            d = json.loads(line)
+            key = d['key']
+            lat_ = lattice or key.split('|')[0]
+            body = key.split('|', 1)[1] if '|' in key else key
+            kind = body.split(':')[0]
+            finder = ('analyse' if kind == 'analyse' else 'force' if kind in ('force', 'confirm', 'pd3') else
+                      d.get('aim', kind))
+            verdict = d.get('verdict') or d.get('status') or d.get('colourable') or ('Per ' + str(d.get('Per_desc', {}).get('torsion'))
+                                                                                      + ', KPer ' + str(d.get('KPer_desc', {}).get('torsion'))
+                                                                                      if kind == 'analyse' else '-')
+            tgt = d.get('target')
+            out.append(f'| {fname} | `{key[:70]}` | {lat_} | {graph} | {lam_w(d, r)} | {finder} | {str(verdict)[:60]} | '
+                       f'{tgt if tgt else "-"} | {d.get("cpu_s", d.get("seconds", "-"))} |')
+    path = os.path.join(CENSUS, 'ROWS.md')
+    open(path, 'w').write('\n'.join(out) + '\n')
+    print(f'{path}: {len(out) - 7} rows')
+    return 0
+
 
 def cmd_crosscheck():
     import fs70_periodic_kempe as PK
@@ -1627,6 +2055,13 @@ def main():
                              int(argv[argv.index('--budget') + 1]) if '--budget' in argv else 3000)
     if argv[0] == 'pd3' and argv[1] == 'K':
         return cmd_pd3_K()
+    if argv[0] == 'census' and argv[1] == 'RICH':
+        specs = argv[argv.index('--only') + 1].split(',') if '--only' in argv else list(RICH)
+        return cmd_census_rich(specs, six='--six' in argv)
+    if argv[0] == 'export':
+        return cmd_export()
+    if argv[0] == 'rows-table':
+        return cmd_rows_table()
     if argv[0] == 'crosscheck':
         return cmd_crosscheck()
     if argv[0] == 'spectrum':
