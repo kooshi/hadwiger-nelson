@@ -87,8 +87,9 @@ did not; Harder's `8/3` and `8/9` are elements of `F`. *Prior art:* the rigidity
 9,120 without reading his comment, an independent confirmation): the Moser ring as his computation uses it —
 closed under rotation by `η = ω₃^{1/2}`, which `Λ` is not — has exactly 9,120 four-colourings, 380 with a triangle fixed, all
 8-periodic, with a stripe-and-chirality structure; on the ring 8-periodicity follows from Harder's `8/3` by transport. The lattice form
-is ours: on `Λ` the `8/3` pair transports only to rank 2 (P-C4), so the lattice needed `v`; and the equal count says the lattice has no
-colouring beyond the ring's restrictions (if Hubai's count holds). *Kernel:* declined with T6.
+is ours: on `Λ` the `8/3` pair transports only to rank 2 (P-C4), so the lattice needed `v`; and the lattice statement implies the ring's 8-periodicity (each coset of `Λ` in
+`R₂` carries a four-colouring of `Λ`'s graph), so it is the stronger; the equal counts suggest, and do not prove, that the lattice has no
+colouring beyond the ring's restrictions. *Kernel:* declined with T6.
 
 **T8 — G70 holds on de Grey's lattice: the √3-clean four-colourings are Theorem B's two residue colourings, one orbit. [tools exact; A2]** Of the 380 pinned colourings of `Λ/8Λ`, exactly two have no monochromatic pair at any of Λ's 66 vectors of length √3, and they
 are the residue colourings at the two primes above 2 (period group `2Λ`, `Λ/Per ≅ (ℤ/2)²`). *Proof:* phase-P1.md, Task 3;
@@ -363,6 +364,8 @@ before reading E's files. `L21cc6506` is FS-61's key `420|1,0,0,1;0,1,1,0;0,0,2,
 **T43 — The P3b controls. [tools exact / cert; E (P3b-T5–T7), V2 (V2-T4)]** `Ld65c8ee8` over ℚ(√11) has `Θ₃ = ∅` by exact certificates (E: 20,843 nodes, 4.9 MB, accepted by the unmodified `certcheck.py`; V2 independently) — FS-61's refusal re-derived through the criterion; over ℚ(√59) it has a point `ψ = (5/18, 1/2, 5/18, −1/2)` in a degenerate (slack 0) cell; `Ld14c588b`'s cell is full-dimensional with maximal slack `133/115872`, and V2 exhibits a second colouring `θ`. *Proof:* phase-P3b-q167-theta.md §4; verify-P3b-q167.md §4. *Proof verdict:* closes. *Rests on it:* trust in T39 (both outcomes produced by each pipeline). *Prior art:* ours. *Kernel:* declined.
 
 **T44 — `L21cc6506`'s unit vectors span the key lattice, and no four of them form a basis. [tools + hand; V2]** Every integer unit vector of the key `420|1,0,0,1;0,1,1,0;0,0,2,0;0,0,0,2` already lies in the key lattice (a mod-4 parity argument); the 60 unit vectors span it; the least index of four of them is 34,650. *Proof:* verify-P3b-q167.md §3 (V2-T5). *Proof verdict:* closes. *Rests on it:* the graph taken on the key lattice or on `span U` gives the same `Θ₃`. *Prior art:* ours. *Kernel:* declined.
+
+**T45 — `L21cc6506`'s rotation `v = (83 + i√167)/84` is the type-M rotation at `n = 42`, and `[Fischer1990]` Example 4's unit vector. [hand; the close]** `cos θ = 83/84 = (2n − 1)/(2n)` and `sin θ = √167/84 = √(4n − 1)/(2n)` at `n = 42`, so `v` is G7's family member of radicand `4·42 − 1 = 167` — by G62 the `Σ = 42` coincidence rotation of the order of discriminant −167 (with `w = (1 + i√167)/2`, `|w|² = 42`, `w̄/w = −v`) — and `L21cc6506 = {1, v, v̄, z, z̄}·U_R` (T40) is the rational pattern twisted by it and by `z`, whose cosine `(15 + √167)/28` is irrational (not a type-M member). Fischer used the same vector in 1990 to put `1/2, 1/3, 1/7` in the unit-vector ring (no additive `k`-colouring for `k < 11`). *Proof:* the two lines above; `plans/FS73-rigidity-dichotomy.md` §R-close.1. *Proof verdict:* closes. *Rests on it:* G62's multilayer instance; FS-59's §0. *Prior art:* the vector is Fischer's (1990); the family is `[Polymath16wikiMain]`'s; the identification with `L21cc6506`'s structure is ours. *Kernel:* declined.
 
 ## §8. Conjectures and readings this milestone stated and did not prove (the close's sweep)
 

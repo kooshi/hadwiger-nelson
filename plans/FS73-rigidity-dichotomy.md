@@ -1461,7 +1461,7 @@ four-colour headline was on the Polymath16 blog in 2018** (Hubai's count) and it
   four-colour mono-pair at `(0,0)–(8/9,0)` in his graph 4H4, two of them joined by an edge as a five-chromatic graph in ℚ(√3,√7,√11)
   (seventeenth thread, February 2021); a graph forcing every vertex at radius `8/√27 = |v|` (twelfth thread, April 2019) — checked: its six
   vertices there are `(8/9)√−3·ζ₆^m`, not `v`'s orbit (`data/fs73/prior-art/parts_v.py`). **What is left ours** is the lattice form on the
-  smaller graph (`Λ` is not closed under `η`; `8/3` reaches only rank 2 on it; the same 9,120 colourings, so a strengthening), `v` and
+  smaller graph (`Λ` is not closed under `η`; `8/3` reaches only rank 2 on it; the lattice statement implies the ring's 8-periodicity, so it is the stronger; the equal counts suggest the same colourings, unproved), `v` and
   `Λ = (1/9)·O_E`, the independently verified certificate, `F = P` as an inheritance instance, the 12-class table and G70's test (row 78,
   rewritten). **Why the gate missed it:** the text was held and had been read thirteen days earlier (2026-09-10) for a different question —
   who first stated the 2-adic law — and the bibliography row it produced recorded Hubai's "22 colourings" without the count or the

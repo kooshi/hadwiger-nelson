@@ -2,7 +2,7 @@
 
 ## 0. After FS-73 (2026-09-23): the first question is answered, and the stub's question is now five
 
-**`χ(ℚ(√167)²) ≥ 4`** (`LEDGER.md` row 79; `plans/FS73-derivation.md` T39–T44). FS-61's lattice `L21cc6506` (60 unit vectors,
+**`χ(ℚ(√167)²) ≥ 4`** (`LEDGER.md` row 79; `plans/FS73-derivation.md` T39–T45). FS-61's lattice `L21cc6506` (60 unit vectors,
 denominator 420) has an empty rotation set `Θ₃`, so it has no proper three-colouring — three independent exact certificates, four
 checkers, and a half-page hand proof on 36 of its vectors (`{1, v, z}·U_R`, a minimal obstruction). No finite non-three-colourable
 graph is exhibited; compactness guarantees one. The conjecture's prediction here (≥ 6) now stands against a proven **4**. Whether the
@@ -220,4 +220,4 @@ screens are colour-generic: a gapped periodic four-colouring kills a lattice's f
 compute the Kempe period groups (L3's lesson) before calling it rigid. **G62 / G7** — factor every lattice's unit vectors as rotations
 times a base pattern before any tree: `L21cc6506` is a five-layer twist at `n = 42`. **G55** — the chain route, with `1/2, 1/3, 1/7 ∈
 ℤ[U]`. **G21** — a periodic search measures its period cap (FS-73 twice). **G65** — aim balls by degree. Row 79; FS73-T17–T20 (C's
-screen and design rule), T26–T28, T39–T44.
+screen and design rule), T26–T28, T39–T45.
