@@ -104,6 +104,7 @@ ALLOW: dict[str, str] = {
     "w̄′": "the same identity",
     "G68/G69": "the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered",
     "MASCOT-T6's": "the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source",
+    "T39–T44": "row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
