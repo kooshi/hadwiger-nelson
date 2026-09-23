@@ -14,8 +14,7 @@ object M18 built; the argument uses only that `F` is real multiquadratic and `2 
 `F(i)` when the vertices do; so the only odd order is 3 — "1/3 is the only class that closes an odd regular cycle" is a
 theorem about the field. (b) In particular the classes at `r² = (5 ± √5)/10`, which close into unit pentagons over ℝ, hold no
 five points of `F²` at 72° spacing (`cos 72° = (√5−1)/4 ∈ F`, but the rotation `ζ₅` is not in `F(i)`). *Not claimed:* anything
-about odd cycles of the unit-distance graph that are not regular polygons (the Moser spindle in `F²` has 5-cycles). *Proof
-(owner's re-derivation):* `F(i)/ℚ` is Galois with group `(ℤ/2)⁵`, so every subfield is Galois over ℚ with an elementary abelian
+about odd cycles of the unit-distance graph that are not regular polygons (the Moser spindle in `F²` has 5-cycles). *Proof:* (owner's re-derivation) `F(i)/ℚ` is Galois with group `(ℤ/2)⁵`, so every subfield is Galois over ℚ with an elementary abelian
 2-group as Galois group. `ζ_n ∈ F(i)` forces `ℚ(ζ_n) ⊆ F(i)`, hence `(ℤ/n)^× ≅ Gal(ℚ(ζ_n)/ℚ)` elementary abelian of exponent 2,
 which holds iff `n ∣ 24`. Of those, `ζ₈ ∉ F(i)`: `ζ₈ = (1+i)/√2` would give `√2 = (1+i)/ζ₈ ∈ F(i) ∩ ℝ = F`, and `2` is not in the
 square-class group `⟨3,5,7,11⟩`; so `ζ₂₄ ∉ F(i)` either, and `ζ₁₂ = (√3+i)/2 ∈ F(i)`. Hence `μ(F(i)) = ⟨ζ₁₂⟩`. For (a): if
