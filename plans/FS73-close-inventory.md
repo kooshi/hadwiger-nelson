@@ -37,7 +37,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
 
 **The first close planner stopped here (2026-09-23, near its ~450k-token budget), at a clean boundary: §1–§4 done and committed
 (`2cda3170`, `7c459f86`, `ebe1c597`). A successor continues with §3's three sweeps, then §5–§9, in this order:**
-1. **Dangling addresses to create first** (committed text already points at them): `plans/STUB-algebraic-explanation.md` (Kooshi's
+1. ✅ (second close planner: `plans/STUB-algebraic-explanation.md` minted as FS-74, `plans/STUB-three-colour-criterion-kernel.md` as FS-75, `data/fs73/table/CORRECTIONS.md` with **five** stale rows, not four — the four "REFUSING (C3-aper case)" verdicts, `Q11|D30` identified as `Ld65c8ee8` by its key, plus `Q11|3int|D50`'s spectral label — and a pointer paragraph in `TABLE.md`'s hand-written header; the rows are not regenerated, because each correction comes from outside the row pipeline) **Dangling addresses to create first** (committed text already points at them): `plans/STUB-algebraic-explanation.md` (Kooshi's
    milestone: the K half of `F = 8Λ` — leads B's tight-prime reading now in G54, `Λ = (1/9)O_E`, `O_E/8O_E` against row 67's
    tower, Baxter's height on hexagonal fabric, `[MooreNewman2000]`; the ℚ(√11) half is derived, T25), `plans/STUB-three-colour-
    criterion-kernel.md` (T22's ⟹ and a box-LP / relation-form certificate checker over ℚ with its soundness theorem; smallest
