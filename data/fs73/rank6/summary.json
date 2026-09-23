@@ -1,0 +1,115 @@
+{
+ "L3": {
+  "rank": 6,
+  "M": 72,
+  "U": 42,
+  "point_group": 24,
+  "periods": {
+   "2": "2304 colourings",
+   "3": "inadmissible",
+   "4": "3 colourings",
+   "5": "0 colourings",
+   "6": "4 colourings"
+  },
+  "P_found": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed_rows": [],
+  "targets_in_P_found_pg": {
+   "2": false,
+   "2/3": false,
+   "4/3": false,
+   "8/3": false,
+   "4": false,
+   "8/9": false,
+   "16/3": false,
+   "i sqrt3": false
+  }
+ },
+ "L2": {
+  "rank": 6,
+  "M": 72,
+  "U": 42,
+  "point_group": 48,
+  "periods": {
+   "2": "inadmissible",
+   "3": "inadmissible",
+   "4": "2 colourings",
+   "5": "3 colourings",
+   "6": "inadmissible"
+  },
+  "P_found": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed_rows": [],
+  "targets_in_P_found_pg": {
+   "2": false,
+   "2/3": false,
+   "4/3": false,
+   "8/3": false,
+   "4": false,
+   "8/9": false,
+   "16/3": false,
+   "i sqrt3": false
+  }
+ },
+ "L6": {
+  "rank": 6,
+  "M": 144,
+  "U": 54,
+  "point_group": 48,
+  "periods": {
+   "2": "inadmissible",
+   "3": "inadmissible",
+   "4": "inadmissible",
+   "5": "4 colourings",
+   "6": "inadmissible"
+  },
+  "P_found": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed": {
+   "free": 6,
+   "torsion": []
+  },
+  "P_found_point_group_closed_rows": [],
+  "targets_in_P_found_pg": {
+   "2": false,
+   "2/3": false,
+   "4/3": false,
+   "8/3": false,
+   "4": false,
+   "8/9": false,
+   "16/3": false,
+   "i sqrt3": false
+  }
+ },
+ "KR6": {
+  "rank": 6,
+  "M": 144,
+  "U": 78,
+  "point_group": 48,
+  "periods": {
+   "2": "inadmissible",
+   "3": "inadmissible",
+   "4": "inadmissible",
+   "5": "0 colourings",
+   "6": "inadmissible"
+  },
+  "P_found": null,
+  "P_found_point_group_closed": null,
+  "P_found_point_group_closed_rows": null,
+  "targets_in_P_found_pg": null
+ }
+}
