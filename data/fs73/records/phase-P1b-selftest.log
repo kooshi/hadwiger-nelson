@@ -1,0 +1,18 @@
+fs73_screen self-test (P1b controls)
+  [ok ] Smith form of 2Z x 3Z is Z/6  [1, 6]
+  [ok ] intersection 2Z^2 n 3Z^2 = 6Z^2  
+  [ok ] (i) quotient minima at N = 2..12 equal section R0 to 1e-6  2:-18.000000 3:+24.000000 4:-18.000000 5:-18.034442 6:-18.000000 7:-14.344814 8:-18.142136 9:-9.517541 10:-18.270510 11:-21.580897 12:-18.928203
+  [ok ] (i) continuous minimum over T^4 is -22.4095 (section R0), 1000 BFGS starts  -22.409530102
+  [ok ] (iii) residue colouring (period 2) is proper, accepted by the plain CNF, and in the k4 additive family  basis values [3, 2, 0, 1]; family size 12; origin 0, least neighbour 1, triangle 2
+  [ok ] (iii) fischer colouring (period 4) is proper, accepted by the plain CNF, and in the z4 additive family  basis values [1, 1, 0, 0]; family size 12; origin 0, least neighbour 1, triangle 2
+  [ok ] (iii) 1/2 is not in de Grey's lattice, so the additive family may be nonempty  None
+  [ok ] (ii) FS-70's six de Grey colourings: 8/3 rigid at 6 of 6; 2 and 4 escape at N = 2..10 and not at 12 (FS-70 1e §3.2)  {2: 'ree', 4: 'ree', 6: 'ree', 8: 'ree', 10: 'ree', 12: 'rrr'}
+  [ok ] (ii) the gap-aimed finder finds a gapped colouring of L1 at N = 5 (T6), verified from the colouring  SAT in 0.0 s, 625 classes
+  [ok ] (ii) paired: the gap finder refuses de Grey at N = 8 (Harder + T6 forbid a gap there)  UNSAT in 0.02 s
+  [ok ] KPer of the N = 12 colouring: contains 8/3 (it is forced) and lies inside Per  Per: {'free': 0, 'torsion': [2, 4]}; KPer: rank 4, {'free': 0, 'torsion': [2, 8]}
+  -- plants: each must move the N = 12 bed (Per, KPer or the prec check)
+  [ok ] plant dedup_steps fires  Per {'free': 0, 'torsion': [2, 4]}, KPer rank 0 {'free': 4, 'torsion': []}
+  [ok ] plant per_sample fires  raised: plant|descended: the colouring is not proper on its quotient (36 monochromatic i
+  [ok ] plant kper_first fires  Per {'free': 0, 'torsion': [2, 4]}, KPer rank 4 {'free': 0, 'torsion': [2, 4]}
+  [ok ] plant prec_wrong fires  bed N = 7, 2401 classes; faithful accepted True, planted accepted False
+SELF-TEST PASSED

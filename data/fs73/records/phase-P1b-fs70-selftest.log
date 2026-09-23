@@ -1,0 +1,18 @@
+fs70_periodic_kempe self-test
+  [ok ] member/det on 2Z x 3Z  
+  [ok ] triangular lattice, N = 2: the quotient four-colours  4 classes, SAT
+  [ok ]   and its proper-ness assertion passed  
+  [ok ] independent rebuild: L1 at N = 5 is proper and has 50 gapped vertices (phase 1d's row)  0 monochromatic, 50 gapped
+  [ok ] control (ii): a gap at the origin gives the trivial component K0 = {0}  |Q0| = 1
+  [ok ] control (ii): under a gap at the origin every same-coloured class escapes at level 1, and the gap colour is one of the escaping b  120 classes (of 125), readings [(1, 'escape', True)]
+  [ok ] control (iii) miniature: the periodic screen = the additive closed form on zeta12+u3  6 colourings x 4 targets
+  -- plants on the bed group6:u3:2+zeta6:w4 at N = 4, targets ('4/3', '8/3', '4') (each must move the reading)
+     unplanted: (('4/3', 'escape', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, None, 128, True, False))), ('8/3', 'escape', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, None, 128, True, False))), ('4', 'escape', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, None, 128, True, False))))
+  [ok ] the bed reaches level 1 (so the plants have something to break)  levels {1}
+  [ok ] plant dedup_steps fires  -> (('4/3', 'escape', 1, ((1, 9, 2048, True, True), (2, 9, 2048, True, True), (3, None, 128, True, False))), ('8/3', 'escape', 1, ((1, 9, 2048, True, True), (2, 9, 2048, True, True), (3, None, 128, True, False))), ('4', 'escape', 1, ((1, 9, 2048, True, True), (2, 9, 2048, True, True), (3, None, 128, True, False))))
+  [ok ] plant voltage_off fires  -> (('4/3', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1024, N^r = 4096'), ('8/3', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1024, N^r = 4096'), ('4', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1024, N^r = 4096'))
+  [ok ] plant p_zero fires  -> (('4/3', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1, N^r = 4096'), ('8/3', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1, N^r = 4096'), ('4', 'RAISED', 'InvariantError', 'V is not inside N*Lambda: [Z^r:V] = 1, N^r = 4096'))
+  [ok ] plant component_all fires  -> (('4/3', 'rigid', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, 1, 2048, True, True))), ('8/3', 'rigid', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, 1, 2048, True, True))), ('4', 'rigid', 1, ((1, 1, 2048, True, True), (2, 1, 2048, True, True), (3, 1, 2048, True, True))))
+  [ok ] plant tree_only fires  -> (('4/3', 'escape', 1, ((1, None, 2048, True, False), (2, None, 2048, True, False), (3, None, 128, True, False))), ('8/3', 'escape', 1, ((1, None, 2048, True, False), (2, None, 2048, True, False), (3, None, 128, True, False))), ('4', 'escape', 1, ((1, None, 2048, True, False), (2, None, 2048, True, False), (3, None, 128, True, False))))
+SELF-TEST PASSED
+EXIT 0
