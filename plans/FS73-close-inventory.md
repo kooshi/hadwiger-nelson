@@ -26,6 +26,14 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
   (the `F_μ` and odometer sentences), G70 (exhaustive on de Grey's lattice), G51 (the second run; its Do line moved to the
   four-colour question), G55 (the `8/9` pair and its spindle into K(√7) — the owner's note), FS58-T4's kernel note (and FS-39's
   phase A). ⏳ the §G re-read, the §PA sweep and the forward propagation: next commit (plan §R and the stubs).
+- §4 mechanics: ✅ gates re-run 2026-09-23 22:44 UTC under the heavy lock — build up to date (1,698 modules, 2 s); axioms **1034 clean**,
+  10 axiom-free, 5 declared purchases, no record changed since the previous run; vacuity OK, `declarations=6795
+  refutations-skipped=278 sites=275`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2` — § The gate, § Trust
+  ledger and `scripts/vacuity-baseline.txt`'s header updated (the header's stale 6723 and 240 corrected); architecture PASS;
+  bibliography audit green after two fixes: the alias table now resolves a yearless key (`[GarciaMarcoKnauer]`, from FS-71's
+  committed brief; `tools/bib_audit.py`, a planted `[FooBarBaz]` still fires), and FS-73's owed entries added (`[Chandgotia2017]`,
+  `[ChandgotiaPakTassy2019]`, `[MooreNewman2000]`, Liu's 2008 survey, Gao–Jackson–Krohne–Seward). § Delegation unchanged. ⏳ the
+  fact audit and the size check run last.
 
 ---
 

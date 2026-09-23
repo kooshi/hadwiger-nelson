@@ -45,7 +45,7 @@ def scan(extra_text=""):
     aliases = set()
     m = re.search(r"### A′\. Retired and alternate keys(.*?)\n## ", bib, re.S)
     if m:
-        aliases = {a for a in KEY.findall(m.group(1))}
+        aliases = {a for a in KEY.findall(m.group(1))} | set(YEARLESS.findall(m.group(1)))  # a yearless alias resolves too (FS-73)
     bib_arxiv = {g for t in ARXIV.findall(bib) for g in t if g}
 
     cited_arxiv, cited_keys = {}, {}

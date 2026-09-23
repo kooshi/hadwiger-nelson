@@ -1467,7 +1467,7 @@ the emitted data. A generator bug can only produce data Lean refuses to certify.
 ## Trust ledger
 
 Audited at every milestone with `#print axioms` (`scripts/Axioms.lean`, run by `scripts/axioms.sh`); the
-current audit reads 1004 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
+current audit reads 1034 clean and 5 declared purchases, each listed in `ARCHITECTURE.md` § Trust. Rung B
 holds none.
 
 | Entry | Status |
@@ -1774,8 +1774,8 @@ because a formalization that proves the *wrong* theorem is the characteristic fa
   `VACUITY DECLARED:` and printed every run); `VACUOUS` (undeclared emptiness) and `STALE` (claimed emptiness
   not proved), which fail unconditionally before the baseline; `GENERIC` (parametric — the caller's
   obligation); `UNKNOWN` (counted, never silent, and the only thing the baseline may hold). **Counts** — a
-  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6728 refutations-skipped=270
-  sites=262`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=240 unknown=2`. The baseline's two entries,
+  silent change in them is this gate's own failure mode (declarations are the library's; the audit's own are not counted): `declarations=6795 refutations-skipped=278
+  sites=275`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2`. The baseline's two entries,
   `hexShell_plane5` and `hexShell_plane6`, cannot be discharged: their inhabitant *is* Hadwiger–Nelson.
   `--self-test` plants seven controls and watches each fire; the load-bearing one — the same carrier family
   at an instantiation nothing refutes — must read `UNKNOWN`, never `VACUOUS`.
