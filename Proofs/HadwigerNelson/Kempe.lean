@@ -68,11 +68,13 @@ noncomputable def kempeSwap (C : G.Coloring (Fin k)) (a b : Fin k) (K : Set V) (
   classical
   exact Coloring.mk (fun v => if v ∈ K then Equiv.swap a b (C v) else C v) (by sorry)
 
-theorem kempeSwap_apply_of_mem (C : G.Coloring (Fin k)) {a b : Fin k} {K : Set V} (hK : KempeClosed C a b K)
+/-- The swap exchanges `a` and `b` on members of `K`. -/
+@[simp] theorem kempeSwap_apply_of_mem (C : G.Coloring (Fin k)) {a b : Fin k} {K : Set V} (hK : KempeClosed C a b K)
     {v : V} (hv : v ∈ K) : kempeSwap C a b K hK v = Equiv.swap a b (C v) := by
   sorry
 
-theorem kempeSwap_apply_of_not_mem (C : G.Coloring (Fin k)) {a b : Fin k} {K : Set V} (hK : KempeClosed C a b K)
+/-- The swap fixes every non-member of `K`. -/
+@[simp] theorem kempeSwap_apply_of_notMem (C : G.Coloring (Fin k)) {a b : Fin k} {K : Set V} (hK : KempeClosed C a b K)
     {v : V} (hv : v ∉ K) : kempeSwap C a b K hK v = C v := by
   sorry
 
@@ -240,6 +242,7 @@ def periods (C : (addCayley S).Coloring (Fin k)) : AddSubgroup A where
   zero_mem' := Function.periodic_with_period_zero _
   neg_mem' h := h.neg
 
+/-- Membership in the period group is `Function.Periodic`, by definition. -/
 @[simp] theorem mem_periods {C : (addCayley S).Coloring (Fin k)} {d : A} :
     d ∈ periods C ↔ Function.Periodic C d := Iff.rfl
 
@@ -284,6 +287,8 @@ theorem ker_le_periods_comap {B : Type*} [AddCommGroup B] {π : A →+ B} {D : S
     π.ker ≤ periods ((addCayleyColoring tab h).comap (addCayleyMap π hS hD)) := by
   sorry
 
+/-- **A pulled-back quotient colouring is periodic** when the period map's kernel has finite index. This is the
+colouring every `VoltageEscape` and every FS-70 quotient screen talks about. -/
 theorem isPeriodic_comap {B : Type*} [AddCommGroup B] {π : A →+ B} {D : Set B} (tab : B → Fin k)
     (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D)
     (hfin : π.ker.FiniteIndex) : IsPeriodic ((addCayleyColoring tab h).comap (addCayleyMap π hS hD)) := by
