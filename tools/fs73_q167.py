@@ -242,13 +242,13 @@ def circular_search(coords, nmax, nmin=2, first_only=False):
     return out
 
 
-def cmd_circular(key, nmax):
+def cmd_circular(key, nmax, nmin=2):
     print(f'fs73_q167 circular: rational circular 3-colourings of {key}, N <= {nmax}', flush=True)
     M, S, B, coords, cov = lattice(key)
-    res = circular_search(coords, nmax)
+    res = circular_search(coords, nmax, nmin=nmin)
     for N, sols in res:
         print(f'N = {N}: {len(sols)} forms, e.g. {sols[0]}', flush=True)
-    rec = {'what': 'circular', 'key': key, 'nmax': nmax, 'units': len(S), 'basis': [list(b) for b in B],
+    rec = {'what': 'circular', 'key': key, 'nmin': nmin, 'nmax': nmax, 'units': len(S), 'basis': [list(b) for b in B],
            'N_with_solutions': [N for N, _ in res], 'solutions_at_least_N': res[0][1] if res else [],
            'least_N': res[0][0] if res else None, 'machine': MACHINE}
     append(OUT / 'circular.jsonl', rec)
@@ -689,7 +689,7 @@ def main():
     ap.add_argument('--q', type=int, default=23)
     ap.add_argument('--mmax', type=int, default=420)
     ap.add_argument('--ids', default='Ld14c588b,L21cc6506')
-    ap.add_argument('--nmin', type=int, default=13)
+    ap.add_argument('--nmin', type=int, default=None)       # circular: 2; quotients: 13
     ap.add_argument('--mmin', type=int, default=1)
     ap.add_argument('--maxsize', type=int, default=None)
     ap.add_argument('--qs', default='7,11,19,23,43,47,59,67,71,79,83')
@@ -700,7 +700,7 @@ def main():
     elif a.cmd == 'fourier':
         cmd_fourier()
     elif a.cmd == 'circular':
-        cmd_circular(a.key, a.nmax)
+        cmd_circular(a.key, a.nmax, a.nmin if a.nmin is not None else 2)
     elif a.cmd == 'residue':
         cmd_residue(a.key, qs)
     elif a.cmd == 'agree':
@@ -712,7 +712,7 @@ def main():
     elif a.cmd == 'witnesses':
         cmd_witnesses()
     elif a.cmd == 'quotients':
-        cmd_quotients(a.ids.split(','), a.nmin, a.nmax)
+        cmd_quotients(a.ids.split(','), a.nmin if a.nmin is not None else 13, a.nmax)
     elif a.cmd == 'cover':
         cmd_cover(a.mmax, a.mmin)
     elif a.cmd == 'extend':

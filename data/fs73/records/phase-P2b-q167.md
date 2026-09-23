@@ -69,8 +69,7 @@ message of 2026-09-23 (FS-73, after phase P2's table). Tools: `tools/fs73_q167.p
      explicit table of 𝔽_q² (checked edge by edge on the Cayley graph, with the reduction proved onto), or the form mod 24 on the
      Hermite rows.
    - The **3 unclaimed 3-integral** lattices are coloured by the kernel's 3-adic barrier (row 72).
-   - **Not coloured by anything: `Ld14c588b` and `L21cc6506`.** This is a typed null: no residue target at q ≤ 300, no circular form
-     at N ≤ 60, and the full quotients at the N recorded in `quotients.jsonl`.
+   - **Not coloured by anything: `Ld14c588b` and `L21cc6506`.** This is a typed null; theorem 9 gives the edges of the search.
 4. **[tools, exact; refusals replicated] The residue-set classification at 23.** Symmetric subsets of the 24-point circle mod 23 (a
    cyclic group; 12 antipodal pairs) were asked up to rotation and reflection: 224 orbits.
    - **98 colourable, 126 refusing**, and the verdict is monotone under adding pairs (0 violations).
@@ -105,6 +104,16 @@ message of 2026-09-23 (FS-73, after phase P2's table). Tools: `tools/fs73_q167.p
    - The target is the *sub-circle the lattice reaches*, not the whole circle. At 23 the whole circle is Γ₂₃, which refuses five
      colours; the sub-circle of `L3e1c94c6`'s units is 3-colourable.
    - This is P2's fixed-prime gap lemma, with the circle replaced by the image of U.
+9. **[tools; every refusal replicated by cadical on a break-free encoding] The two survivors have no periodic 3-colouring at any
+   admissible N ≤ 30.**
+   - Phase P2 asked N ≤ 12. This phase asked N = 13–30, through P2's own quotient ask with the rows written to `quotients.jsonl`.
+   - Every admissible N refused: `Ld14c588b` at 13–28 and 30 (29 is inadmissible); `L21cc6506` at 13, 16–20 and 22–29 (14, 15,
+     21 and 30 are inadmissible).
+   - Each refusal took 0.1–24 s CPU on the desktop, on 28,561–810,000 classes.
+   - Neither survivor has a circular 3-colouring at any N ≤ 120 (`circular.jsonl`), nor a residue 3-colouring at any prime
+     q ≤ 300 with residue field 𝔽_q, or at 167 (`extend.jsonl`).
+   - **These are the milestone's only C3-aper candidates at 167, and FS-59's only refusal candidates among FS-61's lattices.** A
+     degree-18 ball of either is priced at 4–5·10⁸ points, so neither can be asked under the stop rule.
 
 ## Predictions scored
 
@@ -121,7 +130,9 @@ message of 2026-09-23 (FS-73, after phase P2's table). Tools: `tools/fs73_q167.p
 | `L3e1c94c6`, degree 20 | R = 2.483, 7.28 M points, 226 M clauses, about 5–16 GB (model) | not asked (same reason) |
 | `Ld14c588b`, degree 18 | R = 1.742, 5.0·10⁸ points, 1.4·10¹⁰ clauses | **over the stop rule**; not asked |
 | `L21cc6506`, degree 18 | R = 1.376, 4.1·10⁸ points, 1.15·10¹⁰ clauses | **over the stop rule**; not asked |
-| full quotients Λ/NΛ, N = 23–30, `L3e1c94c6`, `Ld14c588b`, `L21cc6506` | 279,841–810,000 classes; seconds each | see `quotients.jsonl` (the section below) |
+| full quotients Λ/NΛ at 3 colours: `L3e1c94c6`, N = 23–26 | 279,841–456,976 classes; 3–7 s CPU each | N = 23 **SAT** (the positive control); 24, 25 and 26 refused, replicated. The run was then restarted on the survivors only |
+| full quotients Λ/NΛ at 3 colours: `Ld14c588b` and `L21cc6506`, N = 13–30 | 28,561–810,000 classes; 0.1–24 s CPU each | **every admissible N refused, and replicated** (theorem 9) |
+| circular forms, N = 61–120, on both survivors | seconds | none |
 
 Solver time spent: under 0.3 core-hours in total (census about 2 min; extended screen about 15 min; classifications about 4 min;
 quotients about 10 min).
@@ -185,7 +196,7 @@ a residue colouring prime by prime, or a linear form through a joint quotient.
 - **P2's table** (`data/fs73/table/TABLE.md`, `rows.jsonl`): the ℚ(√167) rows' "REFUSING at every N ≤ 12 searched (C3-aper case)"
   should read, for `L3e1c94c6`, "loose by theorem: a gapped residue colouring at 23 (N = 23)". The informative-instance paragraph of
   `phase-P2.md` should say that the C3-aper candidate dissolved at N = 23. For `Ld14c588b` and `L21cc6506` the label stands, now
-  with the typed null of theorem 3.
+  "no periodic colouring at admissible N ≤ 30" (theorem 9).
 - **FS-59's stub:** R5's "167's 3-non-integral lattices hold too few unit vectors" has a mechanism. Too few means too few *residues*
   at 23, 43 and 59. The rule above should head R2 (the lattice search beyond denominator 2520): screen U_M's residue sets before
   pricing any ball.
