@@ -5,13 +5,16 @@ the repository. Agent ids live in the session scratchpad, never here.*
 
 ## 0. First acts, in order
 
-1. **Read `LEDGER.md` row 77** (FS-71's close), then `CLAUDE.md` § Frontier "Where the problem stands" item 19 and § Paths forward,
-   then `plans/FS71-theorem-audit.md` §R (the per-batch scoring) and the predictions scored at its end. **The next milestone is
-   Kooshi's call**: the ranked table's top is FS-59 (ℚ(√167), re-aimed — the CM-subfield table and the quotient/periodic Kempe
-   screens before any ball) and the programme's own pick is FS-73 (the rigidity dichotomy), on which MASCOT-T6 — Coxeter's theorem
-   that a √3-clean four-colouring of the Moser lattice is one of Theorem B's two residue colourings, surfaced by the audit — now
-   bears. Whichever opens, **WORKFLOW 2.0 applies in full**: the reframe (3.1 with `CLAUDE.md` and `LEDGER.md` open — § B is now 254
-   lines and is part of the walk; 3.2 the prior-art gate), then the subplan.
+1. **The next milestone is FS-73, the rigidity dichotomy** (Kooshi, 2026-09-22, at FS-71's close; `plans/STUB-rigidity-dichotomy.md`,
+   rank 3 in the table — his pick over FS-59). **Read `LEDGER.md` row 77** (FS-71's close), then `CLAUDE.md` § Frontier "Where the
+   problem stands" items 18–19, **G70** (minted at this close: Coxeter's theorem — a √3-clean four-colouring of the Moser lattice is one
+   of Theorem B's two residue colourings; the dichotomy; the `ρ₄` pigeonhole inside K(√7)-fabric), G69, G68, G51 (the competitor design,
+   to be run on FS-73's inheritance question with the retractions counted), and the stub. **WORKFLOW 2.0 applies in full**: the reframe
+   (3.1 with `CLAUDE.md` and `LEDGER.md` open — § B is now 254 lines and part of the walk; 3.2 the prior-art gate), then the subplan.
+   Staffing: one Fable planner + one Opus implementer (the Sonnet readers were FS-71's shape only); **plus, at the inheritance
+   question's wall, a second Fable session as a friendly competitor** briefed identically with an isolated scratchpad (G51's design —
+   no standing advisor; a one-off Poros query only if a wall is named). The theorems FS-71 filed that the stub consumes are listed in
+   its bearings line.
 2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): one Fable planner + one
    Opus implementer at a time (FS-71 used Sonnet 5 readers by Kooshi's call for that milestone only); fresh implementer per phase,
    never resume one above ~500k tokens; **no child agent spawns children — say so, with the reason, in every brief**; review by

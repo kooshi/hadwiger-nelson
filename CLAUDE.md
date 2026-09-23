@@ -265,7 +265,7 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **FS-71 — the theorem audit — CLOSED 2026-09-22** (row 77; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): seventeen Sonnet 5 reading batches over M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38 and FS-50–FS-66, 254 theorems in 53 files `plans/<milestone>-derivation.md`, every one indexed in `LEDGER.md` § B. **Next: Kooshi's call at this close** — the table's top is FS-59 (re-aimed: the screens before any ball) and the programme's own pick is FS-73 (the rigidity dichotomy, which MASCOT-T6's √3-clean rigidity theorem now bears on). **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
+**Open milestones, in order.** **FS-71 — the theorem audit — CLOSED 2026-09-22** (row 77; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): seventeen Sonnet 5 reading batches over M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38 and FS-50–FS-66, 254 theorems in 53 files `plans/<milestone>-derivation.md`, every one indexed in `LEDGER.md` § B. **Next: FS-73, the rigidity dichotomy** (Kooshi, 2026-09-22; `plans/STUB-rigidity-dichotomy.md`) — opens in a fresh session at the reframe, with G70 (MASCOT-T6's √3-clean rigidity theorem, Coxeter's) and G51 (a competitor session on its inheritance question) in its bearings; FS-59's screens stay rank 1 in the table behind it. **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
 
 **Ranked stubs** (re-ranked 2026-09-22: FS-71 closed (row 77); FS-70 closed; FS-73 minted at rank 3, FS-72 at rank 5; FS-48 and FS-59 re-aimed by G68/G69 — the quotient and periodic Kempe screens before any ball. Before that, 2026-09-21: FS-66 closed; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9;
 `plans/FRONTIER-STUBS.md` is authoritative):
@@ -318,7 +318,7 @@ a class family enumerated over present vertices misses it.
 ## Grokkings — the working theory of the 5th colour
 
 *The Frontier records what is proven and what to try next; this section records what we understand. Every entry carries a status (grades: § Notation). A reading is never silently promoted, and a **[reading]** names its killing test. Entries are
-rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G69 are stable
+rewritten in place to current state — but **a grokking that dies is demoted with its refutation recorded, never deleted**: the entry keeps, in one or two sentences, what it wrongly claimed and what killed it. G1–G70 are stable
 identifiers cited across `plans/`: never renumber (the numbering order in this section is not chronological).*
 
 ***Every milestone opens with the reframe (WORKFLOW 2.0 step 3, Kooshi, 2026-09-22): first the re-grokking (3.1) — each entry below, each
@@ -1269,6 +1269,26 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   the two-stage survivor route) before building anything. Killing
   test: a lattice rigid under every periodic colouring found whose finite balls all four-colour with `(0, δ)` separated — a
   non-periodic escape, the inheritance question row 67 leaves; or a rank-4 lattice loose at every odd prime that still forces.*
+* **G70 — √3-clean is residue: on the Moser lattice a four-colouring escapes Theorem B's colouring only through a monochromatic
+  √3-pair. [hand; Coxeter, 2026-09-08 (MASCOT-T6–T11, `plans/MASCOT-derivation.md`); re-derived by the owner at FS-71; minted at
+  Kooshi's call, 2026-09-22]** A proper four-colouring of the rank-4 Moser lattice `ℤ⟨1, ζ₆, ω₃, ζ₆ω₃⟩` with no monochromatic pair
+  at distance √3 is one of Theorem B's two residue colourings up to relabelling: a √3-clean hexagonal shell forces its antipodal rim
+  points equal, so `c(x + 2u) = c(x)` for every unit vector `u` and the colouring factors through `R/2R ≅ 𝔽₄ × 𝔽₄` (2 splits in
+  `ℚ(√−3,√−11)`, `33 ≡ 1 (mod 8)`, each factor of residue field `𝔽₄`), where the unit vectors land in `𝔽₄ˣ × 𝔽₄ˣ` and the quotient
+  graph is `K₄ × K₄`, whose only proper four-colourings are its two projections (Greenwell–Lovász). **The dichotomy:** every
+  four-colouring of K-fabric either has a monochromatic √3-pair or identifies every pair whose difference lies in `2R` — the
+  distances 2, 4, 8/3, 8/√3, 4/3, 4/√3, 2/√3 at once — which is why `[Parts2020hv]`'s table of mono and non-mono gadget distances
+  has the shape it has, and the √3-*dirty* colourings are where row 67's 2-adic depth stratification lives (the theorem says
+  nothing about them). **Consequences (MASCOT-T7–T10):** the `ρ₄` theorem realises an unconditional √3-pigeonhole inside
+  K(√7)-fabric — a 6-open field — so Act One of a five-forcer exists there by theorem and only the kill is open; `core9_plane`'s
+  nine-point carrier is intrinsically a ℚ(√5)-object and cannot be drawn in K(√7)², so the kill cannot be borrowed from Heule's
+  field; and the mascot — `[Parts2020hv]`'s human-verifiable proof with its one √5 step (the `arccos(7/8)` pinning rotation)
+  replaced by the Moser twist `arccos(5/6)` — is one open lemma away (T10's one-case dichotomy). Prior art: the `K₄ × K₄` step is
+  classical; the hexagon lemma and the identification of the doubling quotient with the two primes above 2 are Coxeter's. *Do: on
+  K-fabric ask the √3-pair question first — a colouring with no monochromatic √3-pair IS the residue colouring and identifies every
+  `2R`-pair without a solver — and read rigidity (FS-73) as "which colourings are √3-clean"; a five-forcer over K(√7) starts from
+  the `ρ₄` pigeonhole and needs a kill drawn in a field with no √5 (FS-49). Killing test: a four-colouring of the Moser lattice with
+  no monochromatic √3-pair that is not a residue colouring — a defect in the hexagon lemma or in `R/2R ≅ 𝔽₄ × 𝔽₄`.*
 * **G51 — A competitor and an advisor beat one mind. [measured, one session]** A friendly competitor on the
   same problem plus an advisor (Poros, `~/source/poros`) advising both caught errors one agent missed, and
   two independent attempts hitting one wall licensed an impossibility theorem (row 58). Design: isolate each
@@ -1282,7 +1302,9 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   same speed produces escalation. **Front-load the disagreement into the window before anything is paid for**, and
   **count the retractions in it: zero is not agreement, it means the disagreement has not started yet and will
   arrive later at full price.** *Do: at a wall, bring a second mind in while retraction is still free, and count the
-  retractions. Killing test: a phase whose disagreement cost more than the error it caught.*
+  retractions — the next wall named for it (Kooshi, 2026-09-22) is FS-73's inheritance question, a derivation with a known
+  positive instance (Harder's object over K) where two independent attempts meeting one obstruction would license the negative.
+  Killing test: a phase whose disagreement cost more than the error it caught.*
 
 ## Whose work this is
 
