@@ -1,0 +1,86 @@
+{
+ "N": 8,
+ "quotient_vertices": 4096,
+ "U_mod_N": 36,
+ "quotient_edges": 73728,
+ "asks": {
+  "sqrt33*4/9": {
+   "target_class": [
+    0,
+    0,
+    0,
+    4
+   ],
+   "adjacent_to_0": false,
+   "verdict": "SAT",
+   "cpu_s": 0.08,
+   "quotient_monochromatic_edges": 0,
+   "pullback_ball_check": {
+    "directed_edges_checked": 733320,
+    "monochromatic": 0,
+    "colours_used": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "c0_c_target": [
+    0,
+    1
+   ]
+  },
+  "(2/9)(sqrt-3+sqrt33)": {
+   "target_class": [
+    0,
+    4,
+    0,
+    0
+   ],
+   "adjacent_to_0": false,
+   "verdict": "SAT",
+   "cpu_s": 0.07,
+   "quotient_monochromatic_edges": 0,
+   "pullback_ball_check": {
+    "directed_edges_checked": 733320,
+    "monochromatic": 0,
+    "colours_used": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "c0_c_target": [
+    0,
+    1
+   ]
+  },
+  "(2/9)(sqrt-3+sqrt-11)+(4/9)sqrt33": {
+   "target_class": [
+    0,
+    4,
+    4,
+    0
+   ],
+   "adjacent_to_0": false,
+   "verdict": "SAT",
+   "cpu_s": 0.08,
+   "quotient_monochromatic_edges": 0,
+   "pullback_ball_check": {
+    "directed_edges_checked": 733320,
+    "monochromatic": 0,
+    "colours_used": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "c0_c_target": [
+    0,
+    1
+   ]
+  }
+ }
+}
