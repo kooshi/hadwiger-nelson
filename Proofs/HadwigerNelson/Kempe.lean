@@ -76,6 +76,13 @@ theorem kempeSwap_apply_of_not_mem (C : G.Coloring (Fin k)) {a b : Fin k} {K : S
     {v : V} (hv : v ∉ K) : kempeSwap C a b K hK v = C v := by
   sorry
 
+/-- **The swap separates a member from a non-member of the same colour.** This is the one computation behind both
+`not_forces_of_kempeClosed` and R3: `u ∈ K` moves to `swap (C u) ≠ C u`, and `v ∉ K` stays put. -/
+theorem kempeSwap_ne_of_mem_of_notMem (C : G.Coloring (Fin k)) {a b : Fin k} (hab : a ≠ b) {K : Set V}
+    (hK : KempeClosed C a b K) {u v : V} (hu : u ∈ K) (hv : v ∉ K) (huv : C u = C v) :
+    kempeSwap C a b K hK u ≠ kempeSwap C a b K hK v := by
+  sorry
+
 /-- **A Kempe-closed set that holds `u` and misses `v` refutes `Forces`.** If `C` already separates the pair
 there is nothing to do; otherwise the swap moves `u` off the common colour and leaves `v` on it. -/
 theorem not_forces_of_kempeClosed (C : G.Coloring (Fin k)) {a b : Fin k} (hab : a ≠ b) {K : Set V}
@@ -89,6 +96,15 @@ end Kempe
 section Compactness
 
 variable {V : Type*} {G : SimpleGraph V} {k : ℕ}
+
+/-- **De Bruijn–Erdős for a separated pair**, the statement R1's forward direction derives from. If every finite set
+of vertices carries a function to `Fin k` that is proper on the edges inside it and separates `u` from `v`, some proper
+colouring of `G` separates them. The proof is Mathlib's `Finset.rado_selection` with `g s` the given function, read at
+`s = {x, y}` (an edge) and at `s = {u, v}`. -/
+theorem exists_coloring_ne_of_forall_finset {u v : V}
+    (h : ∀ s : Finset V, ∃ f : V → Fin k, (∀ x ∈ s, ∀ y ∈ s, G.Adj x y → f x ≠ f y) ∧ f u ≠ f v) :
+    ∃ C : G.Coloring (Fin k), C u ≠ C v := by
+  sorry
 
 /-- **R1 (compactness).** A pair is forced at `k` colours in `G` iff it is forced in some finite induced subgraph
 holding it. The backward direction is `Forces.comap` along the induced embedding. The forward direction is
@@ -157,7 +173,24 @@ def VoltageEscape.lift (e : VoltageEscape π S D k) : Set A :=
 theorem VoltageEscape.zero_mem_lift (e : VoltageEscape π S D k) : (0 : A) ∈ e.lift := by
   sorry
 
-/-- **The lift is Kempe-closed for the pulled-back colouring.** -/
+/-- **The certificate is monotone in `V`.** Any subgroup of the kernel that contains `V` is again a valid `V`, and it
+gives a larger lift. This is R3's engine: enlarge `V` to a finite-index subgroup that misses the escape. -/
+def VoltageEscape.enlarge (e : VoltageEscape π S D k) (W : AddSubgroup A) (hVW : e.V ≤ W)
+    (hW : ∀ w ∈ W, π w = 0) : VoltageEscape π S D k :=
+  { e with
+    V := W
+    p_zero := hVW e.p_zero
+    V_ker := hW
+    voltage := fun x hx s hs t ht hc => hVW (e.voltage x hx s hs t ht hc) }
+
+/-- **The lift is a union of `V`-cosets**: translation by `V` preserves it, since `V` lies in the kernel of `π`. -/
+theorem VoltageEscape.add_mem_lift_iff (e : VoltageEscape π S D k) {w : A} (hw : w ∈ e.V) {y : A} :
+    y + w ∈ e.lift ↔ y ∈ e.lift := by
+  sorry
+
+/-- **The lift is Kempe-closed for the pulled-back colouring.** Adjacency in `addCayley S` is a step `y ↦ y + t`,
+`t = ±s` (Mathlib's `addCayley_adj'`). The step's image is closed in `Q0` by `closed`, and the voltage identity
+`(y + t) − p (π y + π t) = (y − p (π y)) + (p (π y) + t − p (π y + π t))` puts it in `V` by `voltage`. -/
 theorem VoltageEscape.kempeClosed (e : VoltageEscape π S D k) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D) :
     KempeClosed ((addCayleyColoring e.tab e.proper).comap (addCayleyMap π hS hD)) e.a e.b e.lift := by
   sorry
@@ -180,8 +213,11 @@ theorem forces_iff_of_quotient_fanGap (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s
 the colour-`0` part of the `(0, b)`-Kempe component of the origin is the subgroup `R_b` of pair sums `z + w`,
 `φ z = b`, `φ w = −b`. Any target outside `R_b` escapes. `R_b` lies in the kernel of `φ`, so a target off the kernel
 is covered, and there `φ` itself separates the pair. The modeling stage dropped the old hypothesis `φ δ = 0`, which
-the proof never needed (G30 mode 6). The proof splits on that case. On the kernel it applies
-`not_forces_of_voltageEscape` with `Q0 = {0, b}` (or `{0}` when no `s ∈ S` has `φ s = b`) and `V = R_b`. -/
+the proof never needed (G30 mode 6). The proof splits on `φ δ = 0`.
+- Off the kernel, the additive colouring separates the pair.
+- On the kernel, apply `not_forces_of_kempeClosed` with the choice-free Kempe-closed set
+  `{y | φ y = 0 ∧ y ∈ R_b} ∪ {y | φ y = b ∧ ∃ z ∈ S, φ z = b ∧ y − z ∈ R_b}`. Unlike a `VoltageEscape` certificate, this
+  set needs no chosen voltage `p b`, and no case split on whether `b` is hit. -/
 theorem not_forces_of_additiveKempe {Γ : Type*} [AddCommGroup Γ] [Fintype Γ] (hk : Fintype.card Γ = k)
     (φ : A →+ Γ) (hφ : ∀ s ∈ S, φ s ≠ 0) (hSneg : ∀ s ∈ S, -s ∈ S) {b : Γ} (hb : b ≠ 0) {δ : A}
     (hδ : δ ∉ AddSubgroup.closure {x | ∃ z ∈ S, ∃ w ∈ S, φ z = b ∧ φ w = -b ∧ x = z + w}) :
@@ -234,6 +270,47 @@ direction translates each periodic colouring, which stays periodic with the same
 theorem mem_periodicForcedSubgroup {δ : A} :
     δ ∈ periodicForcedSubgroup S k ↔ ∀ C : (addCayley S).Coloring (Fin k), IsPeriodic C → C 0 = C δ := by
   sorry
+
+/-- A translate of a colouring has at least the same periods, so translation preserves periodicity. This is the
+backward direction of `mem_periodicForcedSubgroup`. -/
+theorem periods_le_periods_comap_translate (C : (addCayley S).Coloring (Fin k)) (x : A) :
+    periods C ≤ periods (C.comap (addCayleyTranslate S x)) := by
+  sorry
+
+/-- **A pulled-back quotient colouring is periodic under the kernel of the period map.** It is shared by R3 and by the
+spec example on the path `ℤ`. -/
+theorem ker_le_periods_comap {B : Type*} [AddCommGroup B] {π : A →+ B} {D : Set B} (tab : B → Fin k)
+    (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D) :
+    π.ker ≤ periods ((addCayleyColoring tab h).comap (addCayleyMap π hS hD)) := by
+  sorry
+
+theorem isPeriodic_comap {B : Type*} [AddCommGroup B] {π : A →+ B} {D : Set B} (tab : B → Fin k)
+    (h : ∀ d ∈ D, ∀ x, tab (x + d) ≠ tab x) (hS : ∀ s ∈ S, π s ≠ 0) (hD : ∀ s ∈ S, π s ∈ D)
+    (hfin : π.ker.FiniteIndex) : IsPeriodic ((addCayleyColoring tab h).comap (addCayleyMap π hS hD)) := by
+  haveI := hfin
+  exact AddSubgroup.finiteIndex_of_le (ker_le_periods_comap tab h hS hD)
+
+/-- **A swap on a `w`-invariant set preserves the period `w`.** This is how R3's swapped colouring stays periodic. -/
+theorem periodic_kempeSwap {C : (addCayley S).Coloring (Fin k)} {a b : Fin k} {K : Set A}
+    (hK : KempeClosed C a b K) {w : A} (hC : Function.Periodic C w) (hKw : ∀ x, x + w ∈ K ↔ x ∈ K) :
+    Function.Periodic (kempeSwap C a b K hK) w := by
+  sorry
+
+/-- **Residual finiteness, in the form R3 consumes.** In a finitely generated abelian group, a vector `e` outside `V`
+is missed by some finite-index `W` between `V` and any finite-index `H ⊇ V`. Mathlib has the class
+`AddGroup.ResiduallyFinite` and `exists_finiteIndexNormalSubgroup_notMem`, but at this pin it has no instance for
+finitely generated abelian groups. The route is to apply the class to `A ⧸ V`, with the instance built from
+`AddCommGroup.equiv_free_prod_directSum_zmod` (`ℤ` and finite groups are residually finite; products preserve it).
+Then take `W = (pull-back of the missing subgroup) ⊓ H`. -/
+theorem exists_finiteIndex_between_notMem [AddGroup.FG A] {V H : AddSubgroup A} (hVH : V ≤ H)
+    (hH : H.FiniteIndex) {e : A} (he : e ∉ V) :
+    ∃ W : AddSubgroup A, V ≤ W ∧ W ≤ H ∧ W.FiniteIndex ∧ e ∉ W := by
+  sorry
+
+/-- **One periodic separator refutes H1**: the statement R3 and every tools-side escape derive from. -/
+theorem notMem_periodicForcedSubgroup_of_ne {C : (addCayley S).Coloring (Fin k)} (hC : IsPeriodic C) {δ : A}
+    (h : C 0 ≠ C δ) : δ ∉ periodicForcedSubgroup S k :=
+  fun hδ => h (mem_periodicForcedSubgroup.mp hδ C hC)
 
 /-- `F ≤ P`: a period of every colouring is a period of every periodic one. -/
 theorem forcedSubgroup_le_periodicForcedSubgroup : forcedSubgroup S k ≤ periodicForcedSubgroup S k :=

@@ -855,7 +855,7 @@ arXiv:2411.01951, arXiv:1607.08357 (abstracts), then the three PDFs in §PA.3.
   (G59, FS58-T3's shape without its infinite-`U` identification); (f) T10 at the **chainable** targets `1/δ ∈ ℤ[U]` (ASTRA-T2, G55). **Verdict, in the subgroup form (§0):** the ranks and invariant factors of `F_known` and `P_found`, with the periods searched, and where each chainable target sits. A target is *loose by theorem* if it lies outside `P_found`; a gap makes `P_found = 0`. It is *rigid-found* if it lies in `P_found ∖ F_known`, and *forced* if it lies in `F_known`. A lattice with no periodic colouring at any `N` searched is *refusing*, which is C3-aper's case. Lattices are chosen per field by supply, never carried between fields (FS61-T3, row 74). Ramified targets' first levels are impotent (FS66-E), and every spectral column is blind to the carry (FS66-T); both are stated in the table's header | ≤ 8 core-h; ≤ 300 s per quotient ask | `data/fs73/table/rows.jsonl`; `python3 tools/fs73_screen.py table FIELD --resume`; a kill redoes one ask |
 | **P3** | competitors "de Bruijn" and "Coxeter" (fresh Opus 5.5 each) + advisor "Poros" (fresh, or this one if its context allows; the PO decides) | **The competition on C3-inherit**, under `plans/PROTOCOL-competitor-and-advisor.md`: briefs from §C with the census and table pasted in, identical but for the names; isolated scratchpads; teasing hints only; prior art shared; retractions counted by the advisor. **Deliverable** (the PO's ruling, 2026-09-23): a theorem or a counterexample. If neither lands, the headline is **"not landed"**, and under it, each reported as exactly what it is: **(a)** the sharpened reductions; **(b)** the K instance explained by its local lemma (G70, `[Polymath16wikiR2]` Cor. 9) or the statement of why not; **(c)** a sufficient condition (a class of lattices where C3-inherit is proved); **(d)** the census's candidate list, including any counterexample candidate. A theorem's key step is re-derived by the other competitor or by the advisor, and one step by the PO. A counterexample is an explicit construction with proof, plus exact verification of properness and separation on a large finite window | ≤ 400k tokens per competitor; one working session each (≤ 8 h wall); stop when both report | each competitor keeps `plans/FS73-C3-<name>.md` current at every claim or retraction; a killed competitor is replaced by a fresh one reading its file; a kill redoes the thinking in flight |
 | **P4** | implementer (A, B, or fresh C) | **Rank 6, re-aimed** (question 3). P1g's answer first. Then for L2, L3, L6 and any rank-6 K-lattice (de Grey's lattice with one ρ₁₅ word, if rank 6): `NΛ/V` for *every* Kempe component (not only the origin's) under every periodic colouring at `N ≤ 6`, hence each colouring's `KPer(c)` and the lattice's `P_found` in the normal form (§0), the targets' images, and the re-periodised separators' periods. Read against: C2 and the cross-set closed forms (MASCOT-T7, M63H3-T1, M31-T1, M32-T1, G12, G14); the bilayer as a Σ = n coincidence rotation (G7, G62, M63H2-T1, M63H3-T7/T8); the additive slice at `4 | n` (row 65, M63H3-T4); and Poros's reading that `[NΛ:V]` is an ideal norm (P-R2). Residue targets never force (row 60), so any rank-6 forcing is composite or 2-adic. Deliverable: a mechanism statement (hand) or a typed null. **T10.2's "the deciding invariant" is re-worded at the close** | ≤ 4 core-h; ≤ 250k tokens; stop when every rank-6 lattice held has its `NΛ/V` table at `N ≤ 6` | `data/fs73/rank6/rows.jsonl`; `python3 tools/fs73_screen.py rank6 SPEC --resume`; a kill redoes one lattice-period pair |
-| **P5** | implementer K (Opus 5.5) | **The kernel**: every `sorry` of `Proofs/HadwigerNelson/Kempe.lean` (§K). Query Mathlib by shape before writing (the Searching rules; FS58-T4's note missed `Finsubgraph.lean`). The residual-finiteness step of `not_periodicForces_of_voltageEscape` may need the structure theorem (`AddCommGroup.equiv_free_prod_directSum_zmod`) or a Smith-form argument; price it before starting and report if it exceeds a day. `voltageEscapeZ` must be fully proved (vacuity: every structure-typed hypothesis has a named inhabitant). No statement changes without the planner's re-check | ≤ 2 working days; ≤ 400k tokens | the file itself; every `./scripts/build.sh` run is a checkpoint; a kill redoes the current leaf |
+| **P5** | implementer K (Opus 5.5) | **The kernel**: every `sorry` of `Proofs/HadwigerNelson/Kempe.lean` (§K), burned down in the order and by the routes of §M.2's table (children first; R1 by `Finset.rado_selection`; R3 last, over its children; the residual-finiteness instance priced at ½ day). Query Mathlib by shape before writing (the Searching rules; FS58-T4's note missed `Finsubgraph.lean`). The residual-finiteness step of `not_periodicForces_of_voltageEscape` may need the structure theorem (`AddCommGroup.equiv_free_prod_directSum_zmod`) or a Smith-form argument; price it before starting and report if it exceeds a day. `voltageEscapeZ` must be fully proved (vacuity: every structure-typed hypothesis has a named inhabitant). No statement changes without the planner's re-check | ≤ 2 working days; ≤ 400k tokens | the file itself; every `./scripts/build.sh` run is a checkpoint; a kill redoes the current leaf |
 | **P6** | planner (fresh) | **The close** (WORKFLOW 9): `plans/FS73-derivation.md` and `LEDGER.md` § B lines; row 78; the §G re-read; new grokkings in G67's form; P1–P4's predictions scored. Corrections: G69 (745 against 23,083 and "three orders"); FS58-T4's kernel note and FS-39 phase A (Mathlib holds the compactness lemma); T10.2's wording; "rigid" qualified against `[PeledSpinka2023]` and `[AlonEtAl2021]`; the Semantic Scholar re-check. New stubs: C3-aper (`[AbrishamiEtAl2025]` 4.6 at ℤ^r); a `k = 5` rigidity table for 6-open fields if P2's pilot is informative; C3-local as a note on FS-67's stub (context, not a route: the finite-`U` quotient is a subgraph of the product) | — | — |
 
 ### §S.3 Acceptance checklists (what · verified how · pass condition)
@@ -1088,6 +1088,8 @@ fresh advisor writes its own before its first message.
 - 2026-09-23, planner: build OK, 177/177 batches.
 - 2026-09-23, after the domain pass: build OK, 177/177 batches, the module rebuilt, `sorry` only at leaves (15 warnings,
   all `sorry`), log `build/gate/build/20260923T061337Z-124350.log`.
+- 2026-09-23, after the obligation pass: build OK, 177/177, 22 warnings, all `sorry`, log
+  `build/gate/build/20260923T062152Z-144678.log`.
 
 The domain pass (§M.1) put the H1 half into the subgroup normal form: `IsPeriodicUnder` and `PeriodicForces` were
 replaced by `periods`, `IsPeriodic`, `forcedSubgroup` and `periodicForcedSubgroup`. Statements:
@@ -1114,6 +1116,8 @@ replaced by `periods`, `IsPeriodic`, `forcedSubgroup` and `periodicForcedSubgrou
 | `InheritanceQuestion S k` | def (a `Prop`, never a theorem): existence ⟹ `P ≤ F` | — | C3-inherit, normal form |
 | `inheritanceQuestion_iff` | theorem | **proved** | C3-inherit ⟺ `P = F` |
 | `voltageEscapeZ` | def | `sorry` in five proof fields | the named inhabitant of `VoltageEscape` (the fan-gap case on ℤ) |
+| **the obligation pass's children** (§M.2): `kempeSwap_ne_of_mem_of_notMem`, `exists_coloring_ne_of_forall_finset`, `VoltageEscape.add_mem_lift_iff`, `periods_le_periods_comap_translate`, `ker_le_periods_comap`, `periodic_kempeSwap`, `exists_finiteIndex_between_notMem` | theorem | `sorry` | the statements the leaves derive from; routes and prices in §M.2 |
+| `VoltageEscape.enlarge`, `isPeriodic_comap`, `notMem_periodicForcedSubgroup_of_ne` | def / theorem | **proved** | R3's engine (monotone in `V`), periodicity of a pulled-back colouring, one separator refutes H1 |
 | four `example`s | spec | three `sorry`, one `rfl` | the escape at 2 on ℤ; the certificate's projection; **a periodic 2-colouring of the path ℤ** (the model of `InheritanceQuestion`'s hypothesis); **`2 ∈ F`, `1 ∉ F` on the path** (F is neither `⊥` nor `⊤`) |
 
 **Read aloud against the informal claims.**
@@ -1202,6 +1206,63 @@ convergence signal is that the statements shortened:
 - The plan's phases, routes and sequencing are unchanged. The normal form re-states what P1 computes, not what is run.
 
 **Build:** `./scripts/build.sh` under the heavy lock, OK, 177/177 batches, `sorry` only at leaves (§K).
+
+### §M.2 Obligation pass (`debruijn-obligation-modeling`, fresh invocation)
+
+**The partition.**
+- *Prove*: every leaf in the table below.
+- *Test*: the spec `example`s; the tools' controls in P1b and P1d.
+- *Assume*, as named hypotheses:
+  - `hab : a ≠ b` for swaps;
+  - `hS`, `hD` (the quotient map is a graph homomorphism);
+  - `hfin` (the period map has finite-index kernel);
+  - `[AddGroup.FG A]`, for R3 only;
+  - `hSneg`, for T2 only (the unit-vector set is symmetric).
+
+**The statements the proofs derive from.** Every leaf is decomposed into a named child, with no induction anywhere; the
+proofs are case splits and one compactness citation. The children now in the skeleton, each `sorry` (22 in all,
+counted from the build):
+
+| leaf | the statement it derives from (a child in the skeleton unless marked "plan") | route | price |
+|---|---|---|---|
+| `kempeSwap` properness | case split on `v ∈ K`, `w ∈ K`. A non-member neighbour of a member wears neither `a` nor `b` (`KempeClosed`'s second clause, read in the contrapositive), and `Equiv.swap a b` is injective and preserves `{a, b}` | four cases, two symmetric | 1 h |
+| `kempeSwap_apply_of_mem` / `_not_mem` | unfold `Coloring.mk`, then `if_pos` / `if_neg` | `simp [kempeSwap, hv]` | minutes |
+| **`kempeSwap_ne_of_mem_of_notMem`** (new) | `swap a b c ≠ c` for `c ∈ {a, b}` and `a ≠ b` (`Equiv.swap_apply_ne_self_iff`) | the one computation shared by `not_forces_of_kempeClosed` and R3 | 30 min |
+| `not_forces_of_kempeClosed` | case `C u ≠ C v` (C separates), else the child above | 4 lines | minutes |
+| **`exists_coloring_ne_of_forall_finset`** (new) | Mathlib's **`Finset.rado_selection`** (`Combinatorics/Compactness.lean`, de Bruijn–Erdős) with `g s` the given function. Properness is read at `s = {x, y}`, separation at `s = {u, v}` | no subgraph coercions; this replaces the `nonempty_hom_of_forall_finite_subgraph_hom` route, which needs `G ⊔ edge u v` and `Subgraph.coe` | 2 h |
+| `forces_iff_exists_finite` | ⟸: `Forces.comap` along `Embedding.induce`. ⟹: the contrapositive. For a finset `t`, take `s = t ∪ {u, v}`, use the separating colouring of `G.induce s`, extend it by a default colour (inhabited through `u ∈ s`), and apply the child | ⟸ one line, ⟹ 20 lines | 2 h |
+| `VoltageEscape.zero_mem_lift` | `map_zero`, `zero_mem`, `neg_mem p_zero` | 2 lines | minutes |
+| **`VoltageEscape.enlarge`** (new, **proved**) | the certificate is monotone in `V` | a record update | — |
+| **`VoltageEscape.add_mem_lift_iff`** (new) | `V_ker` and `add_sub_right_comm` | 3 lines | 30 min |
+| `VoltageEscape.kempeClosed` | `addCayley_adj'` (adjacency is a step `±s`), then `closed` and the voltage identity in the docstring | 20 lines | 2 h |
+| `not_forces_of_additiveKempe` (T2) | split on `φ δ = 0`. Off the kernel, the additive colouring separates. On it, `not_forces_of_kempeClosed` with the choice-free set in the docstring, which needs no voltage `p b` and no case split on whether `b` is hit | a `Γ ≃ Fin k` from `hk`, one Kempe-closure check with three step cases | 3 h |
+| `mem_forcedSubgroup` | `AddSubgroup.mem_iInf`. ⟹ is `Periodic` at `0`; ⟸ is `not_forces_zero_of_not_periodic` (`ResidueObstruction`) | 6 lines | 30 min |
+| **`periods_le_periods_comap_translate`** (new) | `C (x + (y + d)) = C ((x + y) + d)`, by `add_assoc` | 3 lines | 30 min |
+| `mem_periodicForcedSubgroup` | ⟹ `Periodic` at `0`. ⟸ translate by `x` and apply the child with `AddSubgroup.finiteIndex_of_le` | 8 lines | 1 h |
+| **`ker_le_periods_comap`** (new); `isPeriodic_comap` (**proved** from it) | `π (x + w) = π x` for `w ∈ ker π`; the `addCayleyColoring` and `addCayleyMap` apply lemmas | 3 lines | 30 min |
+| **`periodic_kempeSwap`** (new) | case split on `x ∈ K`, with `hKw` and `hC` | 6 lines | 30 min |
+| **`exists_finiteIndex_between_notMem`** (new) | **residual finiteness.** Mathlib holds `AddGroup.ResiduallyFinite` and `exists_finiteIndexNormalSubgroup_notMem`, but at our pin no instance for finitely generated abelian groups. Build one for `A ⧸ V` from `AddCommGroup.equiv_free_prod_directSum_zmod`: `ℤ` by `n ∉ (\|n\|+1)ℤ`; `Fin r → ℤ` as a finite product; the torsion part is finite (instance exists); transport along the equivalence. Then `W = comap mk M ⊓ H` | 60–80 lines. **The costliest leaf** (P-K1) | ½ day |
+| **`notMem_periodicForcedSubgroup_of_ne`** (new, **proved**) | one periodic separator refutes H1: non-membership in an infimum, witnessed by one factor | 1 line | — |
+| **R3**, `notMem_periodicForcedSubgroup_of_voltageEscape` | Let `C` be the pulled-back colouring (periodic by `isPeriodic_comap`). If `C 0 ≠ C δ`, the previous child applies. Else choose `W`: `ker π` when `π δ ∉ Q0`, and otherwise `exists_finiteIndex_between_notMem` applied to `e = δ − p (π δ) ∈ ker π ∖ V`. Swap `C` on `(e.enlarge W …).lift`, which is Kempe-closed and `W`-invariant by `add_mem_lift_iff`; `periodic_kempeSwap` makes the swap `W`-periodic, `kempeSwap_ne_of_mem_of_notMem` makes it separate, and `notMem_periodicForcedSubgroup_of_ne` closes | 25 lines over the children | 2 h |
+| `voltageEscapeZ` (5 fields), the escape `example` | finite facts over `ZMod 2` and `t ∈ {±1}`: `fin_cases`, `decide`, `simp` | 15 lines | 1 h |
+| spec: periodic 2-colouring of the path | `isPeriodic_comap` with `Int.castAddHom (ZMod 2)` and an equivalence `ZMod 2 ≃ Fin 2`; the kernel has finite index by `AddSubgroup.finiteIndex_ker` (a finite range) | 6 lines | 1 h |
+| spec: `2 ∈ F ∧ 1 ∉ F` on the path | `mem_forcedSubgroup`. `2`: two colours and two edges `0–1–2` force `C 0 = C 2` (`omega` on the values in `Fin 2`). `1`: the parity colouring separates an edge | 10 lines | 1 h |
+
+**The price.** Roughly 1½ working days of focused work for the whole file, inside P5's 2-day budget. The residual
+finiteness instance is the one leaf that could overrun, and it is also a candidate Mathlib contribution
+("finitely generated abelian groups are residually finite"; deferred with every upstreaming, § Publication). P-K1's
+"the residual-finiteness step is the costliest" now has a number.
+
+**Changes this pass made.**
+- *Skeleton*: nine children added as named declarations. Three are proved outright (`enlarge`, `isPeriodic_comap`,
+  `notMem_periodicForcedSubgroup_of_ne`); six are `sorry` leaves. T2's docstring now names the choice-free route.
+  Build OK under the heavy lock, 177/177, 22 `sorry` warnings and nothing else
+  (`build/gate/build/20260923T062152Z-144678.log`).
+- *Plan*: R1's route moves from `nonempty_hom_of_forall_finite_subgraph_hom` to `Finset.rado_selection`, which is the
+  same compactness (Mathlib's file cites de Bruijn–Erdős 1951) without subgraph coercions. The correction owed at P6 to
+  FS58-T4's kernel note should name both lemmas.
+- *No statement of the domain pass changed.* Every obligation closed against the normal form as stated, which is the
+  convergence signal.
 
 ---
 
