@@ -147,7 +147,7 @@ conjecture because it was never claimed as a theorem in FS-53's own record.
 - FS53-T2(b)(c): **`[Vinh2008]` Theorem 13 is prior art for the triangle-free classification and its Ramsey use**, older
   than `[Krebs2022]` and found by the advisor (Poros) during FS-53's planning, already recorded in `CLAUDE.md` G56/G57 and
   `BIBLIOGRAPHY.md`; this audit confirms rather than newly finds the attribution.
-- **`[GarciaMarcoKnauer]` (cited in G58 with arXiv:2303.06262, no `BIBLIOGRAPHY.md` entry) is a miscitation, found at this
+- **The yearless key `GarciaMarcoKnauer` (cited in G58 with arXiv:2303.06262, no `BIBLIOGRAPHY.md` entry) is a miscitation, found at this
   gate**: arXiv:2303.06262 is `[Cervantes, Krebs, *Chromatic numbers of Cayley graphs of abelian groups: a matrix method*]`,
   already held as `[CervantesKrebs2023]`. The paper actually by I. García-Marco and K. Knauer on this topic is *Coloring
   minimal Cayley graphs*, **arXiv:2405.19543** (Math. Comb., 9 pp., v3 2024-12-06) — verified live (`arxiv.org/abs/2405.19543`).
