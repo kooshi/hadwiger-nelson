@@ -132,7 +132,7 @@ not update this section is not closed. The understanding the results add up to l
 the same rule, and both under the header's one-home-per-fact rule: "Where the problem stands" and § Paths forward orient and
 point (`row 68`, `G56`) and never retell.*
 
-*Last updated: 2026-09-22 — **FS-70 closed** (row 76; G68, G69 minted; `LEDGER.md` extracted; the theorem-tracking rule): five colours over ℚ(√3,√5) **not landed** — every lattice built but one is four-colourable at every radius by a periodic colouring and forces no pair, by theorem; rigidity and density pull apart in that field. Before that: 2026-09-21 — **FS-66 closed** (row 75; G66 and FS-68 minted): **the residue ceiling does not drop up the tower at 7, 11, 19 or 23** — exact all-levels certificates, level two at 11 in the kernel; `α(Γ₁₉) ∈ {76, 77}`, `α(Γ₂₃) ≤ 97`; the `p`-adic Hadwiger–Nelson question answered no (`CLOSED-QUESTIONS.md` §1.8). Before that: FS-61 closed 2026-09-20 (row 74).
+*Last updated: 2026-09-22 (evening) — **FS-71 closed** (row 77): the theorem audit — 254 theorems in 53 derivation files, indexed in `LEDGER.md` § B; one proof wrong (demoted), three unwritten (now written), one grokking wrong at the gate (G35), four grade tags under-stated, three kernel modules no row named, six prior-art re-attributions, six theorems of a forgotten session surfaced. Before that, the same day: **FS-70 closed** (row 76; G68, G69 minted; `LEDGER.md` extracted; the theorem-tracking rule): five colours over ℚ(√3,√5) **not landed** — every lattice built but one is four-colourable at every radius by a periodic colouring and forces no pair, by theorem; rigidity and density pull apart in that field. Before that: 2026-09-21 — **FS-66 closed** (row 75; G66 and FS-68 minted): **the residue ceiling does not drop up the tower at 7, 11, 19 or 23** — exact all-levels certificates, level two at 11 in the kernel; `α(Γ₁₉) ∈ {76, 77}`, `α(Γ₂₃) ≤ 97`; the `p`-adic Hadwiger–Nelson question answered no (`CLOSED-QUESTIONS.md` §1.8). Before that: FS-61 closed 2026-09-20 (row 74).
 Before that: 2026-09-19 — G64 corrected; 2026-09-17 — FS-58 closed (rows 72–73).*
 
 ### Where the problem stands
@@ -231,6 +231,12 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    odd prime's target refuses, which de Grey's lattice over K does at 5, 7, 11, 13 (its unit vectors are the residue tori) and no
    lattice of rank ≤ 6 over ℚ(√3,√5) does; the rank-8 lattice with no periodic colouring found is dense only from `10⁷` points and
    undecided six times (FS-72). The split-prime tower at 2 is tight with forcing from depth 3. **Not landed: five over ℚ(√3,√5).**
+19. **The derivations are counted, and the corpus graded itself down more often than up** (row 77, FS-71). 254 theorems proved
+   outside the kernel since M17 are filed one entry each in `plans/<home>-derivation.md` and indexed in `LEDGER.md` § B — 184 by hand.
+   Of the four hand claims found with no proof on disk, three closed when written and one was wrong (the general-lattice coset bound,
+   now a conjecture); four grokkings had graded a hand derivation as measured or derived, one had asserted a false "exactly" (G35);
+   six results sat in a session record no grokking cited (MASCOT-T6–T11: a √3-clean four-colouring of the Moser lattice is one of
+   Theorem B's two residue colourings). Every kernel target the audit named already had a stub; none was minted.
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;
@@ -259,14 +265,13 @@ it is read in full at the reframe (step 3.1) and extended at the close (step 9).
 *A summary of `plans/FRONTIER-STUBS.md`, which is authoritative: every row there is a full stub with its
 bearing on χ ≥ 6 stated honestly. Kooshi picks; the default is the top.*
 
-**Open milestones, in order.** **FS-71 — the theorem audit — OPEN** (Kooshi, 2026-09-22; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): every theorem every prior milestone proved outside the kernel, found and filed in a per-milestone derivation file with a kernel decision and indexed in `LEDGER.md` § B. Six reading batches (M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38, FS-50–FS-66), Sonnet 5 implementers, every derivation the owner's; its gate's first instance is G35's correction. **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
+**Open milestones, in order.** **FS-71 — the theorem audit — CLOSED 2026-09-22** (row 77; `plans/FS71-theorem-audit.md`, from `plans/STUB-theorem-audit.md`): seventeen Sonnet 5 reading batches over M17–M36, M37–M52, M53–M61, M62–M64, FS-24–FS-38 and FS-50–FS-66, 254 theorems in 53 files `plans/<milestone>-derivation.md`, every one indexed in `LEDGER.md` § B. **Next: Kooshi's call at this close** — the table's top is FS-59 (re-aimed: the screens before any ball) and the programme's own pick is FS-73 (the rigidity dichotomy, which MASCOT-T6's √3-clean rigidity theorem now bears on). **FS-70 closed 2026-09-22** (row 76, G68, G69; `plans/STUB-five-over-sqrt3-sqrt5.md` carries the banner; FS-72 and FS-73 minted from it). **FS-66, the residue tower, closed 2026-09-21** (row 75, G66; `plans/FS66-residue-tower-drop.md`, `plans/FS66-phase2-certificate.md`, `plans/FS66-tower-conjecture.md`; its GPU solve at 23 may still be converging for a tighter `U`; `data/fs66/ckpt/b1-p23/README.md` has the commands that re-round from a later checkpoint). **FS-61 closed 2026-09-20** (row 74). **FS-58 closed 2026-09-17** (rows 72–73). Earlier closes are recorded in `plans/FRONTIER-STUBS.md` and git. **M63** stands at phases H2–H3 closed (rows 64–65); **M62** stays paused behind it. **Kooshi's sequencing (2026-09-22): FS-71 next; FS-59's R9 stays deferred, re-aimed by G68/G69 (the screens before any ball).**
 
-**Ranked stubs** (re-ranked 2026-09-22: FS-70 closed; FS-71 rank 1 as the next milestone; FS-73 minted at rank 3, FS-72 at rank 5; FS-48 and FS-59 re-aimed by G68/G69 — the quotient and periodic Kempe screens before any ball. Before that, 2026-09-21: FS-66 closed; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9;
+**Ranked stubs** (re-ranked 2026-09-22: FS-71 closed (row 77); FS-70 closed; FS-73 minted at rank 3, FS-72 at rank 5; FS-48 and FS-59 re-aimed by G68/G69 — the quotient and periodic Kempe screens before any ball. Before that, 2026-09-21: FS-66 closed; FS-68 and FS-69 minted; FS-57, FS-65 and FS-17 re-aimed at the second-level relaxation; FS-59 re-aimed by G65 and by its stub's R9;
 `plans/FRONTIER-STUBS.md` is authoritative):
 
 | rank | stub | the question | bearing on χ ≥ 6 |
 |---|---|---|---|
-| 1 | **FS-71 the theorem audit** — `plans/STUB-theorem-audit.md` | every theorem every prior milestone proved by hand, by derivation or at tools grade, found and filed (`plans/<milestone>-derivation.md`, `LEDGER.md` § B, a kernel decision each; prior art re-attributed; proofs that do not close demoted to conjectures) | none directly; the derivations' census — the programme's own priority |
 | 3 | **FS-73 the rigidity dichotomy** — `plans/STUB-rigidity-dichotomy.md` | does *rigid under every periodic colouring* imply a finite ball forces (G69's inheritance question; true over K by Harder's object, unexplained)? which real fields have a rank-4 CM lattice that is 3-non-integral and rigid at every odd prime (K yes; ℚ(√3,√5) no — its six quartic CM subfields each loose at 5 or 7)? what decides the Kempe index at rank 6? | none directly; high on the programme — the statement of where a forcer can live, which every six-forcer over a window field needs in the same words |
 | 5 | **FS-72 the last lattice** — `plans/STUB-last-lattice.md` | decide `group:u3:2+w4` (rank 8, no additive or periodic four-colouring found) at four colours: the two-stage survivor route (cost `\|survivors\| ≥ 269`, unmeasured above — a projected model counter settles it), the 132-metric ball (11 M points at degree 18.7), the 5-adic fibre-share certificate as a rigidity theorem, a lookahead cuber; six attempts undecided so far | none directly; the conjecture's last cheap prediction's last object — five, or a four-colouring of a lattice with no periodic colouring, G48's falsifier |
 | 1 | **FS-59 four colours over ℚ(√167)** — `plans/STUB-four-colours-167.md` | the conjecture predicts six; nothing above three proven. FS-61 asked 167 its first question that could refuse — the one lattice reaching degree 14 under a 2M-point cap, 1,474,541 points — and it coloured in 3.66 s: 167's 3-non-integral lattices hold too few unit vectors (20–36 against 11's 108). **First experiment (stub R9): the chain route seeded on Kooshi's 7-cycle triangle** — on pure 3-integral material, is there a 3-colouring with `c(0) ≠ c(3w)` across the triangle's base? a refusal is a forcer, and `1/6 = 1 + 1 − w − w̄ − w′ − w̄′` makes twelve transported copies and an edge four colours. Then R5–R8: degree-aimed asks, counterexample-guided growth of a core, the rigidity dial. **Re-aimed 2026-09-22 (G68, G69):** before R9's ball, the quotient screen at three colours on the 7-cycle triangle's lattice — a gapped periodic 3-colouring kills the chain route there by theorem (row 66 is colour-generic), and the CM-subfield table names which lattices can be rigid at all | **the conjecture's cheapest exposed prediction and therefore, under the 2026-09-17 target, the falsification target** — predicted ≥ 6 against a proven 3, and FS-66 made the prediction robust to every level of the tower at 23 (row 75) |
@@ -454,7 +459,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   fabric the pigeonhole is free, and every kill of it needs a wall-breaking root (ρ₁₅ adjoins √15). The carrier is 122
   vertices; the √3-pair sibling concentrates to nine, because √3 is the one distance whose equilateral triangle has unit
   circumradius — but it is an **assembly product**: only the full 1581 carries it, onset at the √21 shell where
-  cross-system material enters, and Heule's shrinking discarded it. *Do: on fabric a residue colouring identifies, expect the
+  cross-system material enters, and Heule's shrinking discarded it. **The converse on the Moser lattice is a theorem** (MASCOT-T6,
+  Coxeter, 2026-09-08; surfaced by FS-71): a four-colouring of the rank-4 lattice with no monochromatic √3-pair IS one of Theorem B's
+  two residue colourings — the doubling quotient is `𝔽₄ × 𝔽₄`, the two primes above 2, and `K₄ × K₄` is uniquely colourable — so on
+  K-fabric the √3-pigeonhole is the only escape from the residue colouring. *Do: on fabric a residue colouring identifies, expect the
   monochromatic pair at every positive-valuation distance without asking, and spend the search on the kill — `separated` asks
   at those distances on wall-broken material. Nothing kills the pigeonhole; it kills every in-field kill.*
 * **G17 — Globality lives only at the top rung. [measured]** The fan onset (χ ≥ 5 itself) arrives at the
@@ -490,7 +498,10 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   count of eliminations is the outcome to be least satisfied with**. **The mechanism is selection**: a defect whose
   result displeases is investigated within the hour; one whose result pleases is kept — five independent defects in
   three phases of M63 were every one flattering. **Audit the results you like at the same rate as the ones you do
-  not**, and when an artifact and its written record disagree, suspect the newest thing in the file first.
+  not**, and when an artifact and its written record disagree, suspect the newest thing in the file first. **The census's own
+  instance (FS-71, row 77):** of four hand claims that had no proof on disk, the one that was wrong (M37's general-lattice bound)
+  was the one stated as a bare number — a conclusion with no chain is the shape to re-derive first, and the corpus under-graded
+  its hand derivations four times for every over-grade.
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
@@ -778,7 +789,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   identifier and both were the *preprint*, while one held the **published** chapter separately, with four citing
   works. **A zero from two databases sharing a source is one database's zero**: compare identifiers and versions,
   not counts, and open the citing lists; run that way it surfaced a 2007 paper counting sums of two squares over a
-  **real quadratic** base.
+  **real quadratic** base. **And the audit's own gate, run on 254 theorems (FS-71):** six re-attributions, all in held papers read
+  for a different question — a shell-counting formula in the quasicrystal literature (`[BaakeGrimm2003]`), a two-colour criterion
+  in `[Fischer1990]` Thm 1's general form, odd-degree bipartiteness in `[Moorhouse2010]` §7.1; and one citation whose yearless key
+  the bibliography audit could not see pointed at the wrong paper for six days. *Do: at every close, run the gate on the theorems
+  filed, in the words of the discipline each belongs to; a held paper is prior art for questions it was not read for.*
 * **G50 — Read what the search found. [method]** A held-but-unread paper, or a bibliography title whose guess
   touches a live milestone, blocks that milestone's opening until scanned. An abstract is not a reading. Walk
   the citation graph of the paper that *posed* the question; cross-check citations in two databases; mine
@@ -1208,7 +1223,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   test or what it forbids; an entry without them is background, and a bearing it holds will be missed. Killing test: at the
   next re-grokking, count the* bears *verdicts drawn from a Do line against those drawn from an entry's body — if the form did
   the work, the first count dominates; and a §G written from entries in the form that still misses a bearing a memoir would
-  have supplied.*
+  have supplied. First data point (FS-71): a milestone whose object is the corpus itself drew its verdicts from grade tags and bodies,
+  not Do lines — expected, and not a count against the form.*
 * **G68 — Ask the quotient before the ball, and read its colouring for a gap. [derived from kernel rows 56 and 66; measured on
   seven lattices; the instrument of FS-70 phase 1d]** A lattice unit-distance graph is periodic, so a proper k-colouring of the finite
   quotient `Cay(Λ/NΛ, U mod N)` (`U` the lattice's *complete* unit-vector set, none in `NΛ`) colours every graph on the lattice at
