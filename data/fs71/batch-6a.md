@@ -23,7 +23,7 @@ files and § B rows.
 ## Theorems this phase proved
 
 None — as `plans/FS71-theorem-audit.md` §R's own template expects, the audit's products are demotions, re-attributions and
-an index. The one new finding this phase made **outside the audit's own object** — the `[GarciaMarcoKnauer]` miscitation in
+an index. The one new finding this phase made **outside the audit's own object** — the `GarciaMarcoKnauer` (the old yearless key) miscitation in
 G58 (arXiv:2303.06262 is `[CervantesKrebs2023]`'s paper; the real García-Marco–Knauer paper on this subject is
 arXiv:2405.19543) — is a bibliographic correction, not a mathematical theorem, and is filed as such (§ "Proposed edits").
 
@@ -31,7 +31,7 @@ arXiv:2405.19543) — is a bibliographic correction, not a mathematical theorem,
 
 | # | exact current sentence | proposed sentence | reason |
 |---|---|---|---|
-| 1 | (G58, § Grokkings) `"and the abelian-Cayley colouring literature (\`[GarciaMarcoKnauer]\`, arXiv:2303.06262) works on χ, not on invariance;"` | `"and the abelian-Cayley colouring literature (\`[GarciaMarcoKnauer2024]\`, arXiv:2405.19543) works on χ, not on invariance;"` | **miscitation, found and verified live** (`arxiv.org/abs/2303.06262` is Cervantes–Krebs's *Chromatic numbers of Cayley graphs of abelian groups: a matrix method*, already held as `[CervantesKrebs2023]`; the actual García-Marco–Knauer paper on Cayley-graph colouring is *Coloring minimal Cayley graphs*, arXiv:2405.19543, verified via `arxiv.org/abs/2405.19543`). The bibliography key also needs the year suffix `2024` to match this project's naming convention and to be visible to `tools/bib_audit.py`'s citation regex (`\[([A-Z][A-Za-z]+\d{4}[a-z]?)\]`) — `[GarciaMarcoKnauer]` with no digits is invisible to that regex, which is *why* the miscitation passed every prior `bib_audit.py` run silently: the tool never saw the citation at all. `BIBLIOGRAPHY.md` § A now carries the corrected entry, listing only |
+| 1 | (G58, § Grokkings) `"and the abelian-Cayley colouring literature (\`GarciaMarcoKnauer (yearless, old)\`, arXiv:2303.06262) works on χ, not on invariance;"` | `"and the abelian-Cayley colouring literature (\`[GarciaMarcoKnauer2024]\`, arXiv:2405.19543) works on χ, not on invariance;"` | **miscitation, found and verified live** (`arxiv.org/abs/2303.06262` is Cervantes–Krebs's *Chromatic numbers of Cayley graphs of abelian groups: a matrix method*, already held as `[CervantesKrebs2023]`; the actual García-Marco–Knauer paper on Cayley-graph colouring is *Coloring minimal Cayley graphs*, arXiv:2405.19543, verified via `arxiv.org/abs/2405.19543`). The bibliography key also needs the year suffix `2024` to match this project's naming convention and to be visible to `tools/bib_audit.py`'s citation regex (`\[([A-Z][A-Za-z]+\d{4}[a-z]?)\]`) — `GarciaMarcoKnauer` (the old yearless key) with no digits is invisible to that regex, which is *why* the miscitation passed every prior `bib_audit.py` run silently: the tool never saw the citation at all. `BIBLIOGRAPHY.md` § A now carries the corrected entry, listing only |
 
 No other correction is proposed: every other clause of G56, G57, G58 and row 68/row 69's ledger text was checked against
 its source file and found to state exactly what the source supports.

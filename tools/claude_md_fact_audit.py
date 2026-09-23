@@ -79,6 +79,8 @@ ALLOW: dict[str, str] = {
     "G20:[kernel + measured]": "FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation",
     "G52:[measured + reading, one instance with a positive control]": "FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so",
     "G54:[kernel one way; derived the other; the table computed]": "FS-71 batch 5b: the tight-forcing direction is a hand theorem (FS38-D2-A/B), graded so in row 67 and its entry",
+    "[GarciaMarcoKnauer]": "G58's yearless key, corrected to [GarciaMarcoKnauer2024] by FS-71 batch 6a",
+    "arXiv:2303.06262": "G58 cited the wrong arXiv id (it is Cervantes–Krebs); the García-Marco–Knauer paper is arXiv:2405.19543 (FS-71 batch 6a)",
     "6723": "the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)",
     "declarations=6723": "the same count, as the gate report prints it",
     "FS38-D2-A/B": "the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending",

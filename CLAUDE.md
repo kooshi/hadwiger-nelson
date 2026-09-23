@@ -961,7 +961,7 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   every row that could carry a colouring was undecided at 3,000,000 conflicts. G58 asserts EXISTENCE, so its instrument is a FINDER
   on the antipodal quotient, `(q²+1)/2` orbits, never a decider on the full plane. **Prior art** (searched 2026-09-16 under graph
   theory and algebraic combinatorics, in their words): the frame is the Burnside chromatic polynomial of group-invariant graphs,
-  and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer]`, arXiv:2303.06262) works on χ, not on invariance; **nothing
+  and the abelian-Cayley colouring literature (`[GarciaMarcoKnauer2024]`, arXiv:2405.19543 — the key and id corrected by FS-71 batch 6a: 2303.06262 is `[CervantesKrebs2023]`) works on χ, not on invariance; **nothing
   found asserting or refuting this for any graph family** — the *distinguishing* chromatic number is the opposite question, and
   the failure of invariance under the FULL automorphism group says nothing about one involution up to a colour permutation.
   Bibliography keys owed. *Do: search with a FINDER on the antipodal quotient under a colour involution that fixes a colour;

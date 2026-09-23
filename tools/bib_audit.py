@@ -23,12 +23,17 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BIB = os.path.join(ROOT, "BIBLIOGRAPHY.md")
 ARXIV = re.compile(r"arXiv:(\d{4}\.\d{4,5})|arXiv:(math/\d+)|(?<![\w/])(math/\d{7})")
 KEY = re.compile(r"\[([A-Z][A-Za-z]+\d{4}[a-z]?)\]")
+# A CamelCase key with no year digits — `[GarciaMarcoKnauer]` — is a citation the KEY pattern cannot see; FS-71 batch 6a found one
+# that had pointed at the wrong arXiv id for six days. Such keys are cited keys too, and must resolve or be given their year.
+YEARLESS = re.compile(r"\[([A-Z][a-z]+(?:[A-Z][a-z]+)+)\]")
+# CamelCase words in brackets that are code identifiers, not citations (reviewed; extend with a reason).
+NOT_KEYS = {"NoZeroDivisors": "a Mathlib class named in HANDOFF-p6", "OrbitRow": "a record type in M63 phase C"}
 DEFN = re.compile(r"\*\*\[([A-Za-z0-9]+)\]\*\*")
 
 
 def _md_files(extra_text=None):
     for dirpath, dirnames, names in os.walk(ROOT):
-        dirnames[:] = [d for d in dirnames if d not in (".git", ".lake", "build", "node_modules")]
+        dirnames[:] = [d for d in dirnames if d not in (".git", ".lake", "build", "node_modules", ".claude")]  # .claude holds stale worktree copies
         for n in names:
             if n.endswith(".md"):
                 yield os.path.join(dirpath, n)
@@ -50,9 +55,9 @@ def scan(extra_text=""):
             for g in t:
                 if g:
                     cited_arxiv.setdefault(g, f)
-        for k in KEY.findall(txt):
+        for k in KEY.findall(txt) + YEARLESS.findall(txt):
             cited_keys.setdefault(k, f)
-    for k in KEY.findall(extra_text):
+    for k in KEY.findall(extra_text) + YEARLESS.findall(extra_text):
         cited_keys.setdefault(k, "<planted>")
     for t in ARXIV.findall(extra_text):
         for g in t:
@@ -60,7 +65,7 @@ def scan(extra_text=""):
                 cited_arxiv.setdefault(g, "<planted>")
 
     miss_a = {k: v for k, v in cited_arxiv.items() if k not in bib_arxiv}
-    miss_k = {k: v for k, v in cited_keys.items() if k not in defined and k not in aliases}
+    miss_k = {k: v for k, v in cited_keys.items() if k not in defined and k not in aliases and k not in NOT_KEYS}
     return defined, aliases, cited_arxiv, cited_keys, miss_a, miss_k
 
 

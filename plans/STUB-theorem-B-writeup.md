@@ -348,7 +348,7 @@ not be used in the manuscript.**
 **The two sides.**
 
 * **The number-field side** — `[Fischer1990]`, `[Fischer1990b]`, `[Moorhouse2010]`, `[Manturov2012]`,
-  `[Madore2015]`, `[BardestaniMallahiKarai]`, plus the finite-field line
+  `[Madore2015]`, `[BardestaniMallahiKarai2017]`, plus the finite-field line
   `[MMST1996]` → `[Vinh2005]` → `[Vinh2006]` → `[SchneiderSilva2013]` → `[Krebs2022]` →
   `[LorenzZimmermann2023]`, `[CervantesKrebs2023]`, and `[Johnson2006]`/`[Chow1993]`.
 * **The Polymath16 / Moser-lattice side** — `[Polymath16wiki]`, `[Hubai2018]`, `[Heule2018]`, `[Heule2019]`,
@@ -384,12 +384,12 @@ not be used in the manuscript.**
    covering 2018 to 2026. `[Heule2019]` writes `ℚ[√3,√11]` in a section title and cites no number theory at
    all. `[Ducz2026]` proves a residue colouring of the Moser ring in five pages with three references.
 4. **Not one work on the number-field side cites any Polymath16 output** (no counterexample found; marked `~`
-   because `[Krebs2022]`, `[Johnson2006]` and `[BardestaniMallahiKarai]` are unread).
+   because `[Krebs2022]`, `[Johnson2006]` and `[BardestaniMallahiKarai2017]` are unread).
 5. **The only bridges in either direction are `[ExooIsmailescu2019]` → `[Madore2015]` and
    `[Aggarwal2025]` → `[Madore2015]`.** Two edges, both into Madore, both from the Polymath16 side, and
    neither is reciprocated.
 
-**Still to verify before the figure ships**: `[Krebs2022]`, `[Johnson2006]`, `[BardestaniMallahiKarai]`,
+**Still to verify before the figure ships**: `[Krebs2022]`, `[Johnson2006]`, `[BardestaniMallahiKarai2017]`,
 `[MMST1996]`, `[Chow1993]` reference lists (all unread), and the seventeen Polymath16 blog threads (R6).
 
 ## 5. Still owed before submission (blocking, per G50)
