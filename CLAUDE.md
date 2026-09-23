@@ -1674,7 +1674,10 @@ and both would have fired here. **A hand-rolled scan of `/proc/*/cmdline` is `pk
 different costume** (2026-09-15, FS-53 phase B): an agent stopping one solve matched its own pattern in the command line
 of the shell running the scan and killed its own process group. Nothing was lost — the certificate was already filed —
 but the repair is the one to copy: find a process by the **inode of the log file it holds open**, which cannot match a
-command line.
+command line. **Ninth instance, 2026-09-23 (FS-73): a lock wrapper is a parent like any other.** A `flock` wrapper believed to be
+still waiting was killed and reported stopped — but it had already started its child, which inherited the lock's descriptor and
+ran an obsolete search orphaned, holding the machine's one heavy lock for about 17 minutes while every queued job waited; found
+by a `ps` sorted by CPU. Kill the process group, and verify against the work: the child absent from `ps` and the lock free.
 
 **A pipe can kill the producer, and `| tail` can hide that it did.** Same session: a mutation harness run as
 `./plant.sh … | head -6` died of `SIGPIPE` when `head` closed the pipe — **before its `git checkout` restore** — leaving

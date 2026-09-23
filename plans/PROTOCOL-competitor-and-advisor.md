@@ -22,6 +22,11 @@ disagreement before anything is paid for, and count the retractions — zero mea
 1. **Isolate each agent's scratchpad.** Coxeter found the owner's `ladder.py` in its own scratchpad four minutes after the owner's
    hint arrived — a shared temp directory is a covert channel; Coxeter disclosed it at once, declined to run the contaminated line
    and took a different route (which is where the rigidity theorem came from). Give each session its own directory and say so.
+   **The working files and the advisor's record live in those scratch directories until hand-back, never in `plans/`** — every
+   agent reads `plans/`, so a competitor's file there is the same covert channel one directory up (FS-73: the first drafts put
+   them in `plans/`; the owner caught it before launch). **The advisor may read exactly the two working files**, and **each
+   competitor is told, in words, not to open the other's file until it has handed back.** At hand-back the owner moves the files
+   into `plans/` and commits them.
 2. **Brief both identically**, in full context (the mathematics they stand on with addresses, the challenge, the hard constraint,
    what is theirs to decide, the two standing obligations — the prior-art gate and honest reporting), and invite each to attack
    the framing: "if the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal."
@@ -57,14 +62,31 @@ against the records, the advisor's contributions were of four kinds, each with a
 (§10a) that outranks the mathematics of the file. Coxeter's own theorems (G70) came from the route it took *after* declining the
 contaminated line — the competition's integrity rule produced the mathematics.
 
-## 3. The next use: FS-73's inheritance question
+## 3. The second run: FS-73's inheritance question (2026-09-23), and the next use
 
-Does "rigid under every periodic colouring" imply that some finite ball forces? True over K by Harder's object, unexplained
-(G69, `plans/STUB-rigidity-dichotomy.md` C3). A derivation wall with a known positive instance, where two independent attempts
-meeting one obstruction would license the negative — the shape of row 58. Run the design there, one phase: the owner and a
-competitor session briefed from §4 with the slots filled, the advisor spawned warm from §5 with the record and a written
-expectation, scratchpads isolated, retractions counted. Both run on Opus 5.5, the model for every role until Kooshi says otherwise
-(2026-09-22; `model: "opus"` launches it). The briefs below are verbatim from 2026-09-09 and name no model, so they need no edit for it.
+**The run.** Two competitors (de Bruijn, Coxeter) on the inheritance question — does a lattice whose every periodic colouring
+identifies a pair force that pair? — with Poros advising both. Briefs as sent: `data/fs73/briefs/P3-competitor-brief-{deBruijn,Coxeter}.md`,
+`P3-advisor-brief.md`, the held items `held-items-H1-H2.md`; the working files `plans/FS73-C3-deBruijn.md`, `plans/FS73-C3-Coxeter.md`;
+the advisor's record `plans/POROS-2026-09-23-fs73-competition.md`.
+- **Outcome: a theorem at three colours, for every Cayley graph of a finitely generated torsion-free abelian group** (`LEDGER.md` row 79;
+  G71). Both competitors reached the same frame — heights through the triangle's universal cover — independently; Coxeter proved the
+  class theorem (density of periodic colourings), de Bruijn the rigidity criterion and the ℚ(√11) instance, and the advisor closed the
+  one step between them (the choice of period that kills de Bruijn's residual case). Four colours: not landed, with the reason (no
+  height; `K₄`'s square complex is `ℝP²`).
+- **Retractions: Poros 1, de Bruijn 1, Coxeter 0**, all inside the free window (G51).
+- **The held items** (H-1, H-2, from the plan-stage advisor) were offered to both at the same moment (~15:15), only after each had
+  written its first route (the owner's ruling R1).
+- **An asymmetric card, logged.** One of the advisor's cards answered a question about de Bruijn's own route (circular colourings have
+  cyclic `Λ/Per`, and 9 of the 12 census classes are not cyclic); it was deliberately route-specific, and at the owner's request it is
+  logged in the advisor's record so the asymmetry is visible. **Rule:** a card that answers one side's own route may go to that side
+  alone, and is logged where the other side reads it at hand-back.
+- **Stopping the advisor.** The advisor was stood down near 480k tokens (the replace-don't-reuse signal); its successor was cancelled
+  because advising had ended. **Rule:** a successor advisor is spawned only while there is advising left to do; the record's
+  hand-off section (§2 of the advisor's record) is written so one could start.
+
+**The next use** (G51's *Do*): the four-colour inheritance question (FS-76, `plans/STUB-four-colour-inheritance.md`) — at four colours
+there is no height, and two independent attempts meeting one obstruction would license the negative. Run it the same way, with the
+rules of §1 as they now stand.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 

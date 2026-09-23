@@ -62,7 +62,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    FS70-derivation T5's prose (3 splits in ℚ(√5,i)), P4's "2L3-periodic" note, the prediction table (already scored in rows 78–79;
    write it once in §R, with V2's one retraction — a planted fault that could not fire — in the tally beside Poros 1, de Bruijn 1,
    Coxeter 0 and the plan stage's Poros 4 / planner 4).
-4. **§6** — owner errors 1–7 and the agents' slips into §R; `plans/PROTOCOL-competitor-and-advisor.md` (working files and the
+4. ✅ (second close planner: owner errors, slips and kills in the plan's §R-close.8; the protocol document's rule 1 gains the scratch-until-hand-back, read-exactly-two-files and do-not-open rules, and its §3 is rewritten as the second run's outcomes (the asymmetric card logged, the successor-advisor rule) with the next use named — FS-76; `CLAUDE.md` § Building's kill rule gains its ninth instance; the table tool's docstring names its self-locking and session paths, in the previous commit) **§6** — owner errors 1–7 and the agents' slips into §R; `plans/PROTOCOL-competitor-and-advisor.md` (working files and the
    advisor's record in scratch until hand-back; the advisor reads exactly the two working files; competitors do not open each
    other's file before hand-back; this run's outcomes); `CLAUDE.md` § Building's kill rule gains its ninth instance (killing a
    `flock` wrapper orphaned a child holding the lock ~17 min — kill the process group, verify against the work); P2's quotient
