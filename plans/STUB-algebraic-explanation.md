@@ -9,7 +9,8 @@ T6, kernel decision). Rank 2: mechanism, no compute to speak of, and Kooshi's ow
 FS-73 proved that on de Grey's lattice over K = ℚ(√3,√11) — the 54 unit vectors of the Moser construction and every integer
 combination of them — **every proper four-colouring repeats with period `8Λ`**: the forced group `F` (differences every
 four-colouring identifies) equals the periodic one `P`, and both are `8Λ` (`LEDGER.md` row 78; T7). The proof is a certificate, not
-an explanation. One direction is cheap — three exhibited `8Λ`-periodic colourings separate everything outside `8Λ`, so `P ⊆ 8Λ`.
+an explanation — and its count is not new: Tamás Hubai found the same 9,120 colourings (380 with a triangle fixed), all 8-periodic, on
+the Moser ring in 2018 by computer search (`[Hubai2018]`; lead 1). One direction is cheap — three exhibited `8Λ`-periodic colourings separate everything outside `8Λ`, so `P ⊆ 8Λ`.
 The other is a single solver refusal: a 2,044-point graph plus the edge `{0, v}`, `v = −(4/9)(1+√−11)`, is not four-colourable
 (a 56.5 MB LRAT), and `v`'s orbit under the order-24 point group spans `8Λ` (T6). Nothing says *why* the answer is `8Λ`, why it is a
 power of 2 only, or why the lattice is rigid at all when every other rank-4 CM lattice in FS-73's table is loose.
@@ -33,12 +34,22 @@ and G71 says the three-colour mechanism cannot be it**: a four-colouring carries
 - The spectrum (`plans/FS73-rigidity-dichotomy.md` §R0, floats): the lattice graph is **slack** at four colours (the continuous
   minimum of `Σ_u cos 2πθ·u` is −22.41 against `−d/3 = −18`); the quotients at `N = 2, 4, 6` are **tight** (−18); `N = 8` is already
   slack (−18.142 ≈ −4 − 10√2). So Hoffman tightness alone (G54's D2-A) cannot be the whole reason `F` stops at level 3.
-- Harder's `8/3` (Polymath16, 2018) and FS-73's `8/9` and `v` all lie in `F`; `P-D3` (row 67) is refuted — `G ∪ (G + 8/3)` forces
+- Harder's `8/3` (Polymath16, 2018), Parts's `8/9` (Polymath16, 2021) and FS-73's `v` all lie in `F`; `P-D3` (row 67) is refuted — `G ∪ (G + 8/3)` forces
   `16/3` (T3).
 
 ## Leads, each a question
 
-1. **Implementer B's tight-prime reading** (G54, restated at FS-73's close): a full-rank `F` appears where the lattice is integral at
+1. **Hubai's structure description** (`[Hubai2018]`, Polymath16 fourth thread, 9 May 2018 — the ring form of this milestone's result,
+   found at FS-73's close). On the Moser ring `R₂` (closed under rotation by `η = ω₃^{1/2}`; de Grey's lattice `Λ` is not) he found by
+   computer search exactly 9,120 four-colourings, 380 with a triangle fixed — the numbers FS-73 reached independently on `Λ` — and
+   described them: **restricted to the Eisenstein sublattice every colouring is stripes of two colours with period 2 in one direction; any
+   stripe pattern periodic by 8 extends, in exactly two ways — rotation by `k·arccos(5/6)` acts on colours as rotation by `+k·2π/3` or by
+   `−k·2π/3` for all `k`, the same direction about every vertex.** That is a structure theorem in all but proof: a two-colour stripe
+   pattern (the 2-adic residue, level 1) plus a chirality (a character of the rotation by `ω₃`, which reduces to a cube root of unity at the
+   primes above 2). **The first task: prove his description on `Λ`** — every four-colouring of `Cay(Λ, U)` restricts to stripes on
+   `ℤ[ζ₆]` and is determined by its stripes and a chirality — and read `8Λ` off it. On the ring, 8-periodicity follows from Harder's `8/3`
+   by transport (he says so); on `Λ` it does not, which is where the lattice form needs its own reason.
+2. **Implementer B's tight-prime reading** (G54, restated at FS-73's close): a full-rank `F` appears where the lattice is integral at
    a prime whose target is Hoffman-tight at `k` and no other prime's quotient has a gap — K at 2 with `U₂ × U₂ = K₄ × K₄` (G70),
    tight at 4. At ℚ(√11) the prime above 3 is split in ℚ(√11, i), not conjugation-fixed (Poros), and `Θ₃` explained that instance
    anyway. **Is `F = 8Λ` a level of the 2-adic tower of the lattice's own completion, `O_E ⊗ ℤ₂ ≅ W(𝔽₄) × W(𝔽₄)`, restricted to the
@@ -46,14 +57,14 @@ and G71 says the three-colour mechanism cannot be it**: a four-colouring carries
    stabilises at level 4: a different graph (the full local norm-one group, not 54 vectors) with a forcing depth by a lattice
    certificate (four units whose `t − 1` span has 2-adic elementary divisors 1, 2, 4, 4). The same certificate shape on the 54
    generators is the first computation.
-2. **The √3 dichotomy** (G70): a √3-clean colouring *is* the residue colouring. Eleven of the twelve classes are √3-dirty. Is there a
+3. **The √3 dichotomy** (G70): a √3-clean colouring *is* the residue colouring. Eleven of the twelve classes are √3-dirty. Is there a
    finite list of ways a colouring can be dirty, each of which propagates periodically — a structure theorem over the 11 classes?
-3. **Baxter's height on hexagonal fabric** (Coxeter, `plans/FS73-C3-Coxeter.md` §6; `[MooreNewman2000]`): on a lattice containing
+4. **Baxter's height on hexagonal fabric** (Coxeter, `plans/FS73-C3-Coxeter.md` §6; `[MooreNewman2000]`): on a lattice containing
    `ζ₆`, every triangle of a four-colouring has three distinct `V₄`-labels, so each triangular coset carries a proper 3-edge-colouring
    of the dual honeycomb, which has a two-dimensional height (Kondev–Henley). **Do the other 48 unit vectors act on that height by
    translations?** If yes, a slope theory — and a `Θ`-type certificate — exists at K after all, and G71's "four colours are not
    linear" has an exception on hexagonal fabric; if no, the obstruction is the answer to "why not three-colour-like".
-4. **The ℚ(√11) template** (T23–T25): isolated order-3 points of `Θ₃` ⟹ affine colourings ⟹ `F = ⋂ ker φ`. The four-colour
+5. **The ℚ(√11) template** (T23–T25): isolated order-3 points of `Θ₃` ⟹ affine colourings ⟹ `F = ⋂ ker φ`. The four-colour
    analogue would be a finite set of "phases" (the 12 classes) each rigid, with no walls between them — the rank-1 lab's wall
    criterion (T30) is the nearest tool.
 

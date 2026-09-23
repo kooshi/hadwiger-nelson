@@ -1433,7 +1433,8 @@ forward propagation, the predictions scored once, the retraction tally, the erra
 3. **G65 — the owner's "smallest refusing ball".** The owner asked for the smallest refusing ball, which G65 names as the
    slow one; it walked a solver into the hardness band (5 UNKNOWNs, about 2 hours; §R-close.8, owner error 1).
 
-**The miss that the §PA sweep holds** (§R-close.2): the gate found the heights and did not carry them into §C.
+**The misses the §PA sweep holds** (§R-close.2): the gate found the heights and did not carry them into §C; and **the milestone's
+four-colour headline was on the Polymath16 blog in 2018** (Hubai's count) and its `8/9` pair in 2021 (Parts), in a text we hold.
 
 ### §R-close.2 The §PA sweep: what the gate taught us about our own object
 
@@ -1451,6 +1452,22 @@ forward propagation, the predictions scored once, the retraction tally, the erra
 - **Colouring periodic graphs is undecidable** (`[Burr1984]`, several vertex orbits), and whether 4-colourability of
   Cayley graphs of ℤ^r is decidable is unknown (T29). *Promoted:* FS-76.
 - Mohar–Salas 2009 (Kempe classes on tori): **declined** — P4 did not use Kempe classes on tori.
+- **The miss, found at the close: row 78's headline count is Hubai's (2018), and `8/9` is Parts's (2021).** Grepping the archived
+  Polymath16 threads we hold (`~/source/library/notes/polymath16-threads-1-18-text.txt`, `[Polymath16threads]`) for the milestone's own
+  numbers found Tamás Hubai's comment of 9 May 2018 (fourth thread): the Moser ring `R₂` — closed, as his computation uses it, under
+  rotation by `η = ω₃^{1/2}` — has *"9120 colourings (380 if we fix the colouring of a triangle)"*, all unchanged by translation by 8, with
+  stripes of period 2 on the Eisenstein sublattice and one chirality choice. FS-73's census reached 380 and 9,120 **without anyone having
+  looked at his comment — an independent confirmation of his count, credited to him** (`[Hubai2018]`). And Jaan Parts's comments: a
+  four-colour mono-pair at `(0,0)–(8/9,0)` in his graph 4H4, two of them joined by an edge as a five-chromatic graph in ℚ(√3,√7,√11)
+  (seventeenth thread, February 2021); a graph forcing every vertex at radius `8/√27 = |v|` (twelfth thread, April 2019) — checked: its six
+  vertices there are `(8/9)√−3·ζ₆^m`, not `v`'s orbit (`data/fs73/prior-art/parts_v.py`). **What is left ours** is the lattice form on the
+  smaller graph (`Λ` is not closed under `η`; `8/3` reaches only rank 2 on it; the same 9,120 colourings, so a strengthening), `v` and
+  `Λ = (1/9)·O_E`, the independently verified certificate, `F = P` as an inheritance instance, the 12-class table and G70's test (row 78,
+  rewritten). **Why the gate missed it:** the text was held and had been read thirteen days earlier (2026-09-10) for a different question —
+  who first stated the 2-adic law — and the bibliography row it produced recorded Hubai's "22 colourings" without the count or the
+  periodicity; §PA's zbMATH and citation searches cannot reach blog comments. **The rule it instances** (WORKFLOW 3.2: a held paper is prior
+  art for questions it was not read for): **re-read the held Polymath16 threads for every milestone's headline object, in the discipline's
+  words** ("ring", "periodic", "colourings of `R₂`", the milestone's own numbers). Written into G49.
 
 ### §R-close.3 The conjecture sweep
 
@@ -1529,6 +1546,8 @@ None was committed; none cost solver time.
    implementer F caught it before any run (T14's scope).
 7. The first competition drafts put the working files and the advisor's record in `plans/`, which every competitor reads — a
    covert channel. Caught by the owner before launch; now the protocol's rule.
+8. The P1 brief and the close inventory both called `F = P = 8Λ` new without re-reading the held Polymath16 threads, where Hubai's
+   2018 count sat (§R-close.2). Found at the close; row 78 rewritten.
 
 **The agents' slips, recorded without blame:** two reported commit hashes that did not exist (A, V) — every hash is now checked
 against `git log`; Coxeter's `pkill -f` killed its own shell (exit 144; nothing lost); two runs over 2 minutes without the lock
@@ -1549,3 +1568,18 @@ settled).
   repoint both. Recorded in the tool's docstring at this close.
 - Killing a `flock` wrapper can orphan a child that holds the lock: `CLAUDE.md` § Building's kill rule, its ninth instance.
 - The table's stale spectral label and the four "REFUSING" verdicts: `data/fs73/table/CORRECTIONS.md`.
+
+### §R-close.10 The prior-art items owed at the close (WORKFLOW 3.2; queries through the zbMATH Open API, 2026-09-23)
+
+*Every query and its hit count; a negative measures its query's words (G21). Script: `…/scratchpad/fs73-close/pa/zb.py` (throwaway).*
+
+| item | what was run | result |
+|---|---|---|
+| `8/9` or `v` as a four-colour forced pair over K | grep of the held Polymath16 threads for `8/9`, `4/9`, `8/√27`, `sqrt{-11}` | **found — Parts (2019, 2021) and Hubai (2018)**; §R-close.2 and row 78. Parts's radius-`8/√27` vertices checked against `v`'s orbit: not among them (`data/fs73/prior-art/parts_v.py`) |
+| is `χ(ℚ(√167)²) ≥ 4` in print? | `ab:"unit distance" & ab:"quadratic field"` 0; `ab:"real quadratic" & ab:"chromatic number"` 0; `ti:"chromatic number" & ab:"quadratic field"` 0; `ab:"chromatic number" & ab:"number field" & ab:"unit distance"` 0; `ab:"sqrt{167}"` (three spellings) 0; `ab:"rational plane" & ab:"chromatic number"` 2 (Fischer 1990; Axenovich et al. 2014, both held or known); `au:"Fischer, Klaus G."` colouring entries 2 (1990, 1994, both read); `ab:"Hadwiger-Nelson" & py:2024-2026` 11 (none on quadratic fields); the held threads mention 167 three times, none as a field | **not found.** FS-61's gate (2026-09-19) had searched the real-quadratic question in full; nothing since. Row 79 keeps "that it is new: not claimed" → now "not found in print (zbMATH, the held threads)" |
+| the three-colour criterion for abelian Cayley graphs with arbitrary `S`, and its rank-1 case (`G(ℤ, D)` 3-colourable ⟺ `κ(D) ≥ 1/3`) | `ab:"distance graph" & ab:"fractional chromatic number"` 14; `… & ab:"circular chromatic number" & py:1995-2015` 9; `ab:"distance graph" & ab:"kappa(D)"` 1 (Liu–Robinson–Chavez 2020); `ab:"distance graph" & ab:"3-colorable"` 0; `ab:"lonely runner" & ab:"distance graph" & ab:"chromatic"` 2; `ab:"height function" & ab:"proper 3-coloring" & ab:"Z^d"` 0; `ab:"3-colorings" & ab:"Z^d"` 3 (Galvin–Kahn–Randall–Sorkin, Chandgotia–Peled–Sheffield–Tassy: statistical mechanics); `ab:"circular coloring" & ab:"Cayley graph" & ab:"abelian"` 0; `ab:"hom-shift"` 1 (`[GangloffEtAl2026]`, held as listing); `ti:"Kirszbraun"` 22 (`[ChandgotiaPakTassy2019]`, already listed) | **not found stated.** Read: Chang–Liu–Zhu 1999's review (it fixes `D = {1..m} ∖ {k}`), Liu–Zhu 2005's summary (fractional and circular numbers for large cliques; the `κ`/lonely-runner link). The ⟸ direction (`⌊3{tx}⌋`) is classical; the ⟹ direction at rank 1 is in no text read. Liu's 2008 survey (Zbl 1168.05310) has its summary withheld and stays owed before any write-up |
+| is 4-colourability of Cayley graphs of ℤ^r decidable? | `ab:"Cayley graph" & ab:"Z^d" & ab:"undecidable" & ab:"colo"` 0; `ab:"periodic graph" & ab:"coloring" & ab:"decidable"` 0; `ab:"chromatic number" & ab:"undecidable" & ab:"periodic"` 0; `ab:"Cayley graphs of Z^n" & ab:"chromatic"` 0 | **not found.** `[Burr1984]` (several vertex orbits) stays the nearest; FS-76 carries the question |
+| the Semantic Scholar cross-check of `[AbrishamiEtAl2025]` | Semantic Scholar citations API; OpenAlex `cites:` | Semantic Scholar 2 (`[Waite2026]`, new `[TanZhang2026]`); OpenAlex 0 for the published version. Both in `BIBLIOGRAPHY.md` |
+| `[PeledSpinka2023]`'s notion | the arXiv abstract (1808.03597) | long-range order of random proper colourings — confirmed a different notion; the bibliography row upgraded from listing to abstract |
+| Mohar–Salas 2009 | — | **declined**: P4 did not use Kempe classes on tori |
+| new in the neighbourhood | `ab:"Moser lattice"` 4 | `[Ruhland2024]` (rank-4 lattice families with unbounded unit-vector counts; `L₃` the Moser lattice), abstract read, added |

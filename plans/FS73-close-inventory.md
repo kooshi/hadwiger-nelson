@@ -31,7 +31,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
   refutations-skipped=278 sites=275`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2` — § The gate, § Trust
   ledger and `scripts/vacuity-baseline.txt`'s header updated (the header's stale 6723 and 240 corrected); architecture PASS;
   bibliography audit green after two fixes: the alias table now resolves a yearless key (`[GarciaMarcoKnauer]`, from FS-71's
-  committed brief; `tools/bib_audit.py`, a planted `[FooBarBaz]` still fires), and FS-73's owed entries added (`[Chandgotia2017]`,
+  committed brief; `tools/bib_audit.py`, a planted fake key still fires), and FS-73's owed entries added (`[Chandgotia2017]`,
   `[ChandgotiaPakTassy2019]`, `[MooreNewman2000]`, Liu's 2008 survey, Gao–Jackson–Krohne–Seward). § Delegation unchanged. ⏳ the
   fact audit and the size check run last.
 
@@ -67,7 +67,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    other's file before hand-back; this run's outcomes); `CLAUDE.md` § Building's kill rule gains its ninth instance (killing a
    `flock` wrapper orphaned a child holding the lock ~17 min — kill the process group, verify against the work); P2's quotient
    code takes the lock itself (a `flock` wrap deadlocks) and writes CNFs into B's scratch — note in the tool's docstring or §R.
-5. **§7** — the prior-art queries (zbMATH API, recorded in §R): `8/9` or `v` as a forced pair over K in Polymath16/Parts;
+5. ✅ (second close planner: §R-close.10 of the plan, every query with its count. **Found:** row 78's headline count is Hubai's (Polymath16, 9 May 2018: 9,120 colourings, 380 with a triangle fixed, all 8-periodic, on the ring) and `8/9` with its K(√7) spindle is Parts's (2021) — both in the threads we hold; the PO approved the correction and its framing; row 78, T6, T7, G49, G55, G69, the Frontier, the prior-art paragraph, `[Hubai2018]`, `[Polymath16threads]`, FS-74's first lead and the plan's §R-close.2 and owner error 8 rewritten; Parts's radius-`8/√27` vertices checked, not `v`'s orbit (`data/fs73/prior-art/parts_v.py`). **Not found:** `χ(ℚ(√167)²) ≥ 4` in print; the rank-1 ⟹ direction; decidability. New rows `[Ruhland2024]`, `[TanZhang2026]`; `[PeledSpinka2023]` abstract read; the Semantic Scholar cross-check done; Mohar–Salas declined) **§7** — the prior-art queries (zbMATH API, recorded in §R): `8/9` or `v` as a forced pair over K in Polymath16/Parts;
    `χ(ℚ(√167)²) ≥ 4` in print; the three-colour criterion for abelian Cayley graphs with arbitrary finite generating sets and its
    rank-1 case; decidability of 4-colourability of Cayley graphs of ℤ^r; the Semantic Scholar cross-check of `[AbrishamiEtAl2025]`;
    `[PeledSpinka2023]`'s notion (bibliography row). Mohar–Salas: declined (P4 did not use Kempe classes on tori).
