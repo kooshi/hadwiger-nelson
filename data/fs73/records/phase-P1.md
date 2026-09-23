@@ -4,7 +4,7 @@
 `plans/FS73-rigidity-dichotomy.md` §S.2 rows P1a–P1g and P1d′, with §S.3's acceptance rows. This record is written so a fresh
 implementer can resume from the repository alone: every section ends with the command that regenerates it.*
 
-## Headline (implementer A's hand-back, 2026-09-23; P1a–P1d′ in part; P1e–P1g not started)
+## Headline (implementer A's hand-back, 2026-09-23; P1a–P1d′ in part; P1e–P1g not started. Implementer A2's headline is further down: `F = P = 8Λ` certified, N = 32 run, the 8Λ classification, P1g done)
 
 - **P1a–P1c done**, every control reproduced (below).
 - **At de Grey's K-lattice**, with every `P_N` exact:
@@ -54,6 +54,37 @@ implementer can resume from the repository alone: every section ends with the co
   would give `F = P = 8Λ`.
 - **[tools] The enumeration.** `Cay(Λ/8Λ, U mod 8)` has exactly 380 proper four-colourings under the finder's pins (exhausted in
   8 s).
+
+*Implementer A2's entries (2026-09-23):*
+- **[tools, exact] Λ = (1/9)·O_E.** The four vectors 1/9, ζ₆/9, w/9, ζ₆w/9 (w = (1+√−11)/2) have integer Λ-coordinates `(4,−2,−2,−1)`,
+  `(2,−1,0,−1)`, `(2,−1,−1,0)`, `(1,−1,0,0)` with determinant −1, so Λ = ℤ⟨1, ζ₆, w, ζ₆w⟩/9. **[hand]** That ℤ-span is O_E for
+  E = ℚ(√−3, √−11), since the discriminants −3 and −11 are coprime. *Where:* `tools/fs73_certify.py` (`OE_IN_LAMBDA`, asserted in `to_oe`).
+  Poros's observation, verified here.
+- **[tools, exact] 8/9 = −(v + v̄)**, v = −(4/9)(1+√−11): in Λ-coordinates v = `(−16,8,8,0)`, v̄ = `(−16,8,8,8)`, sum `(−32,16,16,8)` =
+  −(8/9). **[hand]** Hence a graph forcing (0, v) yields one forcing (0, 8/9), H ∪ (conj(H) + v), since complex conjugation is in the
+  point group and forced differences form a group. Poros's observation.
+- **[tools, exact] v's orbit spans 8Λ.** The orbit of v under the order-24 point group has 12 elements, and their Hermite form is 8·I₄.
+  So **a certificate forcing (0, v) alone gives F ⊇ 8Λ**; the 8/9 refusal becomes corroboration, not a dependency.
+- **[tools, exact] The classification of `Cay(Λ/8Λ, U mod 8)`'s four-colourings.** The 380 pinned colourings form **12 orbits** under
+  the translations, the order-24 point group and the colour permutations (sizes 48 ×6, 24 ×3, 12, 6, 2; `data/fs73/census/K-8Lambda-classes.json`).
+- **[tools, exact] G70 holds on de Grey's lattice at period 8.** Of the 380, exactly two are √3-clean (no monochromatic pair at any of Λ's
+  66 vectors of length √3), and they are Theorem B's two residue colourings (the primes above 2, √33 ↦ ±S 2-adically), which form one
+  orbit (period group 2Λ, Λ/Per ≅ (ℤ/2)²).
+- **[tools, exact] P1g, Poros's card.** On L3 at N = 2 (2,304 pinned colourings, FS-70's is #1), the escapes of 2/3, 4/3 and 8/3
+  through the index-81 component (V of full rank, 2L3/V ≅ (ℤ/9)²) have separators with L3/Per ≅ (ℤ/2)⁴ × ℤ/18, local at neither 2
+  nor 3, and no 2-power W′ exists for them. The same targets also escape through a rank-4 component (2L3/V ≅ ℤ²), where a 2-power W′
+  always exists; there the separator is local at 2. *Where:* `tools/fs73_card.py`, `data/fs73/census/P1g-L3-card.json`.
+- **[hand] A rank-deficient voltage group always admits a 2-local separator.** If V has a free Smith coordinate j of W/V on which the
+  escape e has coordinate y ≠ 0, the choice ℓ = 2^(v₂(y)+1) gives W′ of 2-power index in W, so the swapped colouring's period group
+  has 2-power index when W does. *Checked:* on every rank-4 escape in the card.
+- **[cert] `(0, v)` is forced at four colours on de Grey's lattice**, v = −(4/9)(1+√−11). A 2,044-point unit-distance graph plus the
+  edge `{0, v}` is not 4-colourable. The LRAT is checked by `tools/fs73_cert_check.py` (standalone, standard library only); kissat
+  refuses the identical CNF and the pin-free one. *Where:* `data/fs73/census/cert/t-16_8_8_0-R1.5/`.
+- **[cert + tools, exact] F = 8Λ at K.** From the line above by the transport: the orbit of v under ⟨ζ₆, conj⟩ spans 8Λ; the checker
+  computes it. With the verifier's `P ⊆ 8Λ` (the PO's report) and `F ⊆ P`: **`F = P = 8Λ`, so C3-inherit holds at de Grey's lattice**.
+- **[derived] Every proper four-colouring of de Grey's lattice graph is 8Λ-periodic**, so the 380 pinned colourings of `Λ/8Λ` (12
+  classes) are all of them, up to colour permutation.
+- **[tools] `P_32 = 8Λ`**, exact: four UNSAT confirmations on the 1,048,576-class quotient (P-C6). It is also implied by `F = 8Λ`.
 
 ---
 
@@ -407,3 +438,247 @@ are, up to colour permutation, every proper four-colouring of de Grey's lattice 
    - The forcing control is Theorem B's pulled-back colouring.
    - `per()` uses group closure.
    - `HeavyLock` waits up to 3,600 s.
+
+---
+
+# Implementer A2's sections (Opus 5.5, 2026-09-23, desktop, 16 physical cores / 32 threads, 128 GB)
+
+*A2 continued P1 from A's hand-back. A's sections above are unchanged, except for the wording of the `v` recipe, which the PO asked
+to be corrected (marked in place). A2's theorem entries are under "Theorems this phase proved" above, marked as A2's.*
+
+## A2's headline
+
+- **`F = 8Λ` at de Grey's lattice, certified.**
+  - The certificate is one refusal: the pair `(0, v)`, `v = −(4/9)(1 + √−11)`, on 2,044 points. It comes with an LRAT proof and a
+    standalone checker.
+  - The rest is transport by exact arithmetic. `Λ = (1/9)O_E`, and `v`'s orbit under `ζ₆` and complex conjugation spans `8Λ`.
+  - The PO reports that the independent verifier certified both refusals (Glucose with drat-trim) and exhibited 8Λ-periodic
+    separators, which give `P ⊆ 8Λ`. So **`F = P = 8Λ`: C3-inherit holds at K, and every proper four-colouring of de Grey's lattice
+    graph is `8Λ`-periodic.**
+- **Every four-colouring of de Grey's lattice graph, classified.** Since `F = 8Λ`, the four-colourings are exactly the proper
+  four-colourings of `Cay(Λ/8Λ, U mod 8)`. There are 380 of them up to the colour permutation fixed by the pins (9,120 in all), in
+  **12 classes** under translations, the point group and colour permutations.
+- **G70 holds here.** The √3-clean colourings are exactly Theorem B's two residue colourings.
+- **P1g (Poros's card): P-R1 holds for the index-81 component.** Its separators are local at neither 2 nor 3. The same targets also
+  escape 2-locally, through a rank-deficient component.
+- **N = 32 (P-C6):** see the section below.
+
+## Task 1: the certificate for `(0, v)` (`tools/fs73_certify.py`, `tools/fs73_cert_check.py`, `data/fs73/census/cert/t-16_8_8_0-R1.5/`)
+
+**The route.** The rounds start from A's recorded R = 1.5 refusal, not from a denser ball. The rebuilt CNF's sha256 is asserted equal
+to the row `force:-16,8,8,0:R1.5` (`94bcc0600aff…`) before the rounds start. Then come assumption-core rounds:
+- the solver is pysat's CaDiCaL 1.9.5, with one selector per unpinned vertex guarding its at-least-one clause;
+- the pinned pair and the pinned common neighbour are never selectable;
+- each round is checkpointed to `steps.jsonl` and taken under the shared lock.
+
+| round | 0 | 1 | 2 | 3 | 4 | 5 | 6–10 | 11–20 | 21–34 | 35 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| points in → out | 39,829 → 14,830 | → 6,819 | → 3,887 | → 3,348 | → 3,024 | → 2,732 | → 2,322 | → 2,120 | → 2,044 | 2,044 → 2,044 (fixpoint) |
+| CPU s per round | 705 | 396 | 64 | 70 | 75 | 61 | 55–78 | 50–76 | 55–78 | 69 |
+
+Every round's verdict is UNSAT. Total 3,294 CPU s, pysat in-process, desktop. The wall clock was longer, because the rounds waited
+on the lock while the verifier's asks held it.
+
+**The certificate** (`emit`, then `trim`):
+- **The graph.** 2,044 points, written as `Z ∈ O_E = ℤ⟨1, ζ₆, w, ζ₆w⟩` with the point `Z/9`. The 10,703 unit edges are re-derived
+  from `U` over the kept list alone, and the non-unit edge `{0, v}` is added.
+- **The CNF** (sha256 `65d3897d32698809…`): at-least-one per vertex, four clauses per edge, and the triangle `{0, v, w₀}` pinned
+  to 0, 1, 2 (`w₀` a common neighbour). No other symmetry break.
+- **The runs, all UNSAT, desktop:**
+
+| run | CPU s |
+|---|---|
+| toolchain CaDiCaL 2.1.2, LRAT | 31.0 |
+| kissat 4.0.4, the identical CNF | 24.9 |
+| kissat 4.0.4, the CNF with **no pins at all** ("the graph plus one edge is not 4-colourable") | 32.3 |
+
+- **The LRAT.** 520,365 additions and 75.8 MB gzipped. Trimmed by backward reachability from the empty clause to 383,771 additions,
+  56.5 MB gzipped (sha256 of the text `5c0bec7b722be0df…`). The trimmed file was re-certified by the standalone checker before it
+  replaced the original. Four other CaDiCaL configurations gave proofs no smaller (220–375 MB raw), so none was used.
+- **The standalone checker** (`python3 tools/fs73_cert_check.py data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json`): standard
+  library only, and it imports nothing from `tools/`. It returns **CERTIFIED in 21 s** (88 MB RSS). In order, it:
+  1. checks the points;
+  2. re-derives every unit edge by `D·D̄ = 81` in `O_E` (floats only propose pairs);
+  3. checks that the pair is not an edge and that the pins form a clique of G + pair;
+  4. rebuilds the CNF itself;
+  5. checks the LRAT with its own RUP checker (RAT steps refused);
+  6. checks the transport: the orbit of `v` under `⟨ζ₆, conj⟩` has 12 elements, and its span's Hermite form is `8·I₄`.
+- **The checker's controls** (`--controls`), each refused for its named reason:
+
+| control | refused as |
+|---|---|
+| a point moved ten units | `EDGE_NOT_UNIT` |
+| an edge dropped from the file | `EDGE_MISSING` |
+| the pair replaced by another non-adjacent pair | `PROOF_STEP` |
+| a pin on a vertex outside the clique | `PIN_NOT_CLIQUE` |
+| the proof with one step's conflicting hint dropped | `PROOF_STEP` |
+| the faithful twin | `CERTIFIED` (as required) |
+
+  *Two controls first fired for the wrong reason or not at all, and each was a defect in the control:*
+  - the moved point first moved one unit and landed on another point of the set (`POINT_DUPLICATE`);
+  - "hints reversed" was accepted by a correct checker, because a reversed hint order can still be a valid RUP sequence.
+  Both were replaced with moves whose failure is guaranteed.
+
+**For the kernel** (Poros's note): `OneDefect.lean`'s `forces_of_not_colorable_append_single` already turns "the edge list plus the
+one pair is not k-colourable" into `Forces`. The certificate is in exactly that form: G plus `{0, v}`, with the pins a clique of it.
+
+**8/9 stays corroboration.** `8/9 = −(v + v̄)`, and `8/9 ∈ 8Λ`, so the transport covers it. The graph `H ∪ (conj(H) + v)` is a
+derived witness. A's two solver refusals, and the verifier's, stand as independent evidence. No direct small certificate of 8/9 was
+built.
+
+**Decisions (four parts).**
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| certify `v` only | the degree ladder (R = 1.75, 2.0) for both pairs | Poros's identities make `v` alone sufficient for `F ⊇ 8Λ`, and `v` refused in 37 s where `8/9` took 1,407 s | high |
+| start the rounds from the existing R = 1.5 refusal | refuse first on a denser ball | the rounds reached a fixpoint in 36 rounds at 50–80 s each once below 7,000 points; the R = 1.5 CNF is the one on record, and its hash ties the certificate to it | high |
+| no deletion to 1-minimal | Glucose deletion from 2,044 | about 2,000 asks at about 60 s each is about 34 h, and the certificate needs no minimality | medium: it would change if a kernel replay of a 56 MB LRAT proves too costly (then deletion or a different proof shape) |
+| the final CNF carries only a clique pin | keep the round CNF's pins and precedence | a clique pin needs no symmetry argument, and the pin-free recheck removes even that | high |
+| commit the 56.5 MB LRAT | leave it out of git, or use a binary proof | the kernel needs it; FS-61 committed 45 MB for ℚ(√239) | medium: the PO's call |
+
+**Regenerate:**
+```
+python3 tools/fs73_certify.py rounds K --target 'c:-16,8,8,0' --R 1.5 --resume
+python3 tools/fs73_certify.py emit K --target 'c:-16,8,8,0' --R 1.5
+python3 tools/fs73_certify.py trim K --target 'c:-16,8,8,0' --R 1.5
+python3 tools/fs73_cert_check.py data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json [--controls]
+```
+
+## Task 3: every four-colouring of `Λ/8Λ`, classified; G70 tested (`tools/fs73_classify.py`, `data/fs73/census/K-8Lambda-classes.json`)
+
+**The enumeration.** Pins: origin 0, least neighbour 1, a quotient triangle 2. At-most-one clauses. pysat CaDiCaL 1.5.3 with a
+blocking clause per model. **Exhausted at 380 models in 2.5 s**, which reproduces A's count. Every model is verified proper. A's
+period-group counts are reproduced exactly: `ℤ/2 × ℤ/8` 336, `ℤ/8` 24, `ℤ/2 × ℤ/4` 12, `ℤ/4` 6, `(ℤ/2)²` 2.
+
+**The orbits.** The action is by the four translations, the order-24 point group's generators (rotation, conjugation, the Galois
+flips), and the colour permutations. Act, then relabel so the pins hold again; orbits by union-find. Every image is asserted to be
+among the enumerated colourings, which is a completeness check on the enumeration.
+
+| orbit size | 48 (×6) | 24 (×2) | 24 | 12 | 6 | 2 |
+|---|---|---|---|---|---|---|
+| `Λ/Per` | `ℤ/2 × ℤ/8` | `ℤ/2 × ℤ/8` | `ℤ/8` | `ℤ/2 × ℤ/4` | `ℤ/4` | `(ℤ/2)²` |
+| √3-clean | no | no | no | no | no | **yes: the residue pair** |
+
+**G70, registered as falsifiable here.** The prediction: a four-colouring with no monochromatic √3-pair is one of Theorem B's two
+residue colourings. The transfer to this lattice is the hexagon lemma with `Λ/2Λ = O_E/2O_E ≅ 𝔽₄ × 𝔽₄`, because 2 splits in `E`.
+- Λ has **66** vectors of length √3, found exactly as `D·D̄ = 243` in the Minkowski ball of radius 1.75.
+- Exactly **2** of the 380 colourings are √3-clean.
+- They are Theorem B's residue colourings at the two primes above 2 (`√33 ↦ +S` and `−S`, `S ≡ 17 mod 256`), both pulled back and
+  verified proper.
+- They form one orbit, because the Galois flip `√3 ↦ −√3` swaps the primes.
+- **Held.**
+
+**Reading, used nowhere downstream until the PO accepts it.** With `F = 8Λ`, this table is the complete list of four-colourings of
+de Grey's lattice graph: 9,120 colourings, 12 classes. The residue pair is the only √3-clean class. The other 11 each carry a
+monochromatic √3-pair, which is where G70 says every non-residue colouring must go.
+
+**Regenerate:** `python3 tools/fs73_classify.py classify` (under a minute).
+
+## P1g: Poros's card on L3 (`tools/fs73_card.py`, `data/fs73/census/P1g-L3-card.json`)
+
+**What was computed.** Every pinned four-colouring of `Cay(L3/2L3, U mod 2)`: **2,304**. FS-70's committed colouring, re-read class
+by class through its points, is #1. Every chainable target (`2, 2/3, 4/3, 8/3, 4, i√3`) and every escape colour `b` were run. For each
+escape, the tool computes:
+- the Smith form of `V` in `2L3`;
+- R3's `W′` (the least-ℓ rule), and also the least 2-power `W′` and the least 3-power `W′`, where one exists;
+- the separating colouring built on `L3/W′`, verified proper and separating;
+- its exact period group, and whether `L3/Per` is a 2-group (local at 2), a 3-group (local at 3), or neither.
+
+**On FS-70's colouring:**
+
+| target | `b = 2`: `V` full rank, `2L3/V ≅ (ℤ/9)²` (index 81, the card's component) | `b = 3`: `V` rank 4, `2L3/V ≅ ℤ²` |
+|---|---|---|
+| 2, 4 | rigid | escape; separator local at 2 |
+| 2/3, 4/3, 8/3 | escape; `L3/Per ≅ (ℤ/2)⁴ × ℤ/18`: **neither**; no 2-power `W′` exists, and the 3-power `W′` also gives neither | escape; local at 2 via a 2-power `W′` (for 8/3 the least-ℓ rule picks ℓ = 5, which gives neither; ℓ = 8 gives local at 2) |
+| i√3 | escape at level 0: `c` itself separates, local at 2 | — |
+
+**Over all 2,304 colourings.** For each of 2/3, 4/3 and 8/3:
+- 301 colourings escape **only** through separators that are local at neither prime;
+- 995 have a 2-local separator;
+- 1,008 are rigid.
+
+**The answer (one of three, as the acceptance row asks).** For the index-81 component, **neither**: P-R1 holds as Poros stated it. But
+"L3's escape" is not one object. The same targets also separate through a rank-deficient component, and there a 2-power `W′` always
+exists (the [hand] entry above), so the separator is local at 2. T9's single-prime reading therefore survives at rank 6 for those
+colourings, and fails for the 301 whose only escapes are index-81 components.
+
+**Controls.**
+- FS-70's colouring itself reads **local at 2**, as required.
+- **Plant:** swapping on `K₀ + 2L3` instead of `K₀ + W′` is refused. The swap no longer separates, because it swaps `δ`'s copy too,
+  which is exactly the reason `W′` must exclude `e`.
+
+**Regenerate:** `python3 tools/fs73_card.py card` (about 5 minutes).
+
+## The status-line fix (the PO's instruction, from Poros's note)
+
+`fs73_screen.run_cnf` and `solve` read the status line exactly:
+- `s SATISFIABLE` is SAT and `s UNSATISFIABLE` is UNSAT;
+- any other status line is **UNKNOWN**, typed with the line itself;
+- a status line that contradicts the exit code (10 or 20) raises.
+
+**Plant `sline_any`** (the old parse). Two stub solvers in scratch:
+
+| stub | faithful parse | planted parse |
+|---|---|---|
+| prints `s UNKNOWN`, exits 0 | UNKNOWN, typed with the line | read as SAT; the model assertion raises |
+| prints `s UNSATISFIABLE`, exits 20 (the faithful twin) | UNSAT | — |
+
+`selftest --plants`: **SELF-TEST PASSED**, all six plants fire.
+
+## Task 2: N = 32 (P1d′, P-C6)
+
+`python3 tools/fs73_screen.py periods K --resume --only 32 --past-plateau` (rows in `K-rows.jsonl` under `seeded:N32:*`, the
+stabilisation row in `K-periods.jsonl`, four colourings in `colourings/degrey-N32-*`).
+- **Dry price:** 120,586,240 clauses × 66 bytes per clause = 7.9 GB, under the 40 GB cap. The largest ask measured 6.6 GB RSS.
+- **Colourable:** the plain ask is SAT in 34 s. Three `sep` asks were SAT (43–101 s), each shrinking the guess.
+- **The four generators of `8Λ` confirmed** by UNSAT asks (`c(0) ≠ c(8eᵢ)` on the 1,048,576-class quotient, kissat 4.0.4):
+
+| generator | `8e₁` | `8e₂` | `8e₃` | `8e₄` |
+|---|---|---|---|---|
+| kissat CPU s | 975 | 1,052 | 298 | 1,179 |
+
+- **Result:** `P_32 = 8Λ`, exact. `P_found` is unchanged at `8Λ`. 3,741 s of solver CPU in all, desktop.
+- **P-C6 won.** Once `F = 8Λ` is certified, the outcome is also a theorem: `8Λ = F ⊆ P ⊆ P_32 ⊆ P_8 = 8Λ`. The last inclusion holds
+  because every 8-periodic colouring is 32-periodic. So the run is a consistency check that could have refuted the certificate (the
+  informative outcome, `P_32 ⊊ 8Λ`, was reachable), and it did not.
+- **The census's `F_known` is not yet updated in the tool.** `K-sandwich.json` and `census_state` still take `F_known` from Harder's
+  8/3 alone, so they print `P_found / F_known ≅ ℤ² × (ℤ/3)²`. With `v` certified, `F_known = 8Λ = P_found`. The row that changes
+  this belongs to P1f (the census README and its checker), which is not started.
+
+## Predictions scored (A2)
+
+| id | prediction | outcome |
+|---|---|---|
+| P-C4 | (Poros) `F_known` rank 2, nothing forced off the plane | **lost**: `v` is forced (certified), so `F` has rank 4 and equals `8Λ` |
+| P-C2 | every H1-found target has depth ≥ 3 at both primes, and every one asked is forced | **won**: `P = F = 8Λ` |
+| P-C5 | P1d′'s stabilisation series | **decided: `P = F`**, the plateau is real, and there is no counterexample at K: C3-inherit holds at K |
+| P-C6 | `P_32 = 8Λ` | **won** (and now implied by the certificate) |
+| G70 (falsifiable here) | √3-clean ⟹ residue | **held** at period 8, which is every four-colouring of the lattice |
+| P-R1 | L3's escape colouring is local at neither prime | **held for the index-81 component**. The same targets also escape 2-locally through a rank-4 component (P1g) |
+| Poros E2 | at R = 2.0, 8/9 refuses in < 400 s and `v` in < 36 s | **not run**: `v`'s certificate did not need the ladder |
+
+## Budget spent (A2; desktop, CPU seconds)
+
+| item | CPU s |
+|---|---|
+| core rounds (36 rounds) | 3,294 |
+| certificate runs (CaDiCaL with LRAT, kissat ×2) | 88 |
+| four CaDiCaL configurations tried for a smaller proof | 137 |
+| checker runs | about 150 |
+| N = 32 | 3,741 |
+| P1g and the classification (light, no lock) | about 600 |
+
+Total, about 2.2 core-hours. N = 32 used about 1 of P1d′'s remaining 7.3 core-hours.
+
+## What is left (A2's hand-back)
+
+1. **P1e** (the rich 2-unit lattices over ℚ(√3,√5)): not started.
+2. **P1f** (the census README and `tools/fs73_census_check.py`): not started. Two things are new since A's hand-back:
+   - `F_known` must take `v`'s certificate (`data/fs73/census/cert/t-16_8_8_0-R1.5/`) as its generator;
+   - the checker's step (iii), "`F_known`'s generators trace to certified refusals", can call `tools/fs73_cert_check.py`.
+3. **Optional:**
+   - a direct small certificate for 8/9 (the core rounds from A's R = 1.5 refusal; round 0 is priced at about 45 min with pysat);
+   - Poros's E2 at R = 2.0, a four-colour data point for G65;
+   - deletion of `v`'s certificate toward 1-minimal (about 34 h), if the kernel replay of the 56.5 MB LRAT is too costly.
+4. **For the kernel:** `v`'s certificate is in `forces_of_not_colorable_append_single`'s form. The transport to `8Λ` is group-law
+   work (ζ₆, conjugation, translations).
