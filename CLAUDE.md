@@ -889,7 +889,8 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   6 ≤ χ ≤ 8), so **U₆₄ is a sixth window member, in characteristic 2**, realised only by fields of degree ≥ 12; Q = 128 has floor 8
   (`data/fs54/char2/`). So "the wall is broken" means **every prime above 2 splits in F(i)**, i.e. −1 is a square in every
   completion above 2, and **every field of odd degree is 2-colourable** (some prime above 2 has odd local degree, so i is not in
-  that completion and it ramifies; the reciprocity form, and the wall as a ramification set, are in G35). With that criterion the
+  that completion and it ramifies; the reciprocity form is in G35) — **`[Moorhouse2010]` §7.1's theorem**, by the same residue
+  mechanism (attributed by FS-71, batch 6b; FS54-T2). With that criterion the
   smallest fields are **23 → ℚ(√167), 31 → ℚ(√1055), 43 → ℚ(√4703), 47 → ℚ(√2351)** — every field of degree 3 or 4 with
   |disc| ≤ 20,000 fails at 2 — and **27 needs even degree ≥ 6** (a quadratic field cannot reach 𝔽₂₇, a quartic reaching it also has
   an 𝔽₃ plane, an odd-degree field is 2-colourable); the smallest found, among composita of a cubic with a quadratic field, is **the
