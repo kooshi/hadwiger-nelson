@@ -1,5 +1,7 @@
 # FS-73 — the rigidity dichotomy: when does a lattice force a pair? (stub)
 
+> **CLOSED 2026-09-23** (record `plans/FS73-rigidity-dichotomy.md`, its §R-close first; `LEDGER.md` rows 78–79; theorems `plans/FS73-derivation.md`; G71). Question (1), inheritance: **a theorem at three colours** for every Cayley graph of a finitely generated torsion-free abelian group (row 79), **open at four** (FS-76). Question (2), the classification: de Grey's lattice has `F = P = 8Λ` at four colours (the lattice form of Hubai's 2018 count for the Moser ring) and is the only rigid rank-4 CM lattice in the table (row 78). Question (3), rank 6: decided by membership in the fibre-collision group, not the index (T33); KR6 → FS-77. The stub below is kept as written.
+
 *Minted 2026-09-22 at FS-70's close, from G69 and the derivation file's C1–C3. Rank 3: mechanism, no compute to speak of.*
 
 ## The question

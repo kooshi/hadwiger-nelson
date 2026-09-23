@@ -2,7 +2,7 @@
 
 *Minted 2026-09-23 at FS-73's close, at Kooshi's request: he declined a kernel proof of the 2,044-point certificate in favour of
 "an attempt at an algebraic explanation in a separate milestone rather than formalizing a big graph" (`plans/FS73-derivation.md`
-T6, kernel decision). Rank 2: mechanism, no compute to speak of, and Kooshi's own milestone.*
+T6, kernel decision). Rank 1: mechanism, no compute to speak of, Kooshi's own milestone, and now sharply aimed by Hubai's 2018 description (lead 1).*
 
 ## Mission, in plain language
 

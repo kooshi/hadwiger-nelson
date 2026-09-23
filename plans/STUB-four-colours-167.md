@@ -1,4 +1,44 @@
-# FS-59 — four colours over ℚ(√167)
+# FS-59 — ℚ(√167): four colours proven; the next question is five
+
+## 0. After FS-73 (2026-09-23): the first question is answered, and the stub's question is now five
+
+**`χ(ℚ(√167)²) ≥ 4`** (`LEDGER.md` row 79; `plans/FS73-derivation.md` T39–T44). FS-61's lattice `L21cc6506` (60 unit vectors,
+denominator 420) has an empty rotation set `Θ₃`, so it has no proper three-colouring — three independent exact certificates, four
+checkers, and a half-page hand proof on 36 of its vectors (`{1, v, z}·U_R`, a minimal obstruction). No finite non-three-colourable
+graph is exhibited; compactness guarantees one. The conjecture's prediction here (≥ 6) now stands against a proven **4**. Whether the
+bound is in print: not found (zbMATH and the held Polymath16 threads, FS-73's close). The kernel route is FS-75
+(`plans/STUB-three-colour-criterion-kernel.md`).
+
+**How it was found — none of §3's routes.** FS-73's screen explained FS-61's null (row 79): 52 of FS-61's 57 lattices carry certified
+gapped periodic three-colourings (`L3e1c94c6` at period 23, a residue colouring at `(23, √167 − 11)`), 3 are 3-integral, `Ld14c588b`
+colours by a linear form of period index 1,080, and `L21cc6506` alone refuses — decided by the three-colour theorem (G71), not by a
+ball. **Its structure is a twisted multilayer**: `U = {1, v, v̄, z, z̄}·U_R`, the 12 rational unit vectors in five rotations, and
+`v = (83 + i√167)/84` is the type-M rotation at `n = 42` (G7, G62) — **the same unit vector `[Fischer1990]` Example 4 used in 1990 to
+show this field has no additive `k`-colouring for `k < 11`** (§2 below). R9's chain route on Kooshi's triangle is superseded at three
+colours: `Θ₃` decides three-colourability on any lattice, exactly, with no forcer.
+
+**The question now: does ℚ(√167)² need five colours?** It is a **four-colour** question, and G71 says four colours have no height, no
+slope and no `Θ`: a refusal is a finite graph again, and a forced pair is a four-colour compulsion. Routes, cheapest first:
+
+1. **Implementer C's design rule, re-run at four colours** (the rule is colour-generic; `data/fs73/records/phase-P2b-q167.md`, "The
+   residue-set rule for FS-59"). A lattice can refuse four colours, or carry a four-colour forced pair, only if **every** screen fails:
+   at each prime of residue field `𝔽_q` (23, 29, 43, …) the unit vectors' residue set refuses four colours, no circular form and no
+   quotient `Λ/NΛ` four-colours it (G68, the Kempe-period criterion where colourings are gap-free). Γ₂₃ refuses five (row 71), so it
+   refuses four; **which residue sets at 23 and 43 refuse four colours** is the first table — minutes, like C's three-colour one
+   (224 classes at 23). Screen `L21cc6506` first (its periodic four-colourings, gapped or not), then FS-61's richest lattices.
+2. **The chain route at four colours** (G55): a four-colour forced pair at `δ` on a ℚ(√167) lattice with `1/δ` a sum of unit vectors
+   gives `χ ≥ 5` in the field itself; `1/2, 1/3, 1/7 ∈ ℤ[U]` here (`[Fischer1990]` Ex. 4), so chainability is plentiful. The forced pair
+   needs rigid fabric (G69): only a lattice passing route 1's screens can carry one.
+3. **A ball and a solver**, aimed by G65 (degree ≥ 14; the cheapest three-colour candidate passing both screens already cost
+   3.4·10⁷ points), only after 1–2 name a lattice.
+
+**Registered expectation (candidate, for the subplan):** route 1 finds most of FS-61's lattices four-colourable with a gap at 23 or
+43 (loose), as at three colours; if every lattice at `M ≤ 420` is loose at four, five over ℚ(√167) needs lattices beyond FS-61's
+depth, and the stub is priced by that.
+
+*Sections 1–5 below are the four-colour question's record (2026-09-17 to 2026-09-22), kept as written: the instruments they
+describe (R5's degree law, R6's growth, R7's dial, R8's order parameter) carry over to four colours; the three-colour routes R1–R4
+and R9 are answered by §0.*
 
 *Minted 2026-09-17 at FS-58's close. Written for a session with zero conversation memory. Read beside: `plans/FS58-four-colours.md`
 (§2 D1–D3, §R-B2–B5, §C), `plans/FS58-prelude-seven-cycle-gadget.md`, `data/fs58/search-167/README.md`, `CLAUDE.md` G59, G60, G61.*
@@ -173,3 +213,11 @@ them, re-aimed by R5.
 **Bearing on χ(ℝ²) ≥ 6:** none directly; high for the conjecture's account of fields no residue plane bounds.
 
 **Provisional bearings, updated 2026-09-22 (FS-70's close):** G68 (the quotient/fan-gap screen — at three colours a gapped periodic 3-colouring of the lattice R9 would build on kills its chain route by theorem; run it first, minutes), G69 (rigidity prime by prime: the CM field of the 7-cycle triangle's directions, its primes above 5, 7, 11, 13 classified, decides whether any lattice there can be rigid), G65 (the shell-indexed core ceiling on word balls), FS70-T10 (the periodic Kempe screen, `tools/fs70_periodic_kempe.py`, needs only a generator grammar for the field).
+
+**Provisional bearings, updated 2026-09-23 (FS-73's close), for the five-colour question:** **G71** — four colours carry no height,
+slope or `Θ`; decide nothing at four by a polytope, and expect a refusal to be a finite graph again. **G68 / G69** — at four colours the
+screens are colour-generic: a gapped periodic four-colouring kills a lattice's forcing by theorem, and where every colouring is gap-free
+compute the Kempe period groups (L3's lesson) before calling it rigid. **G62 / G7** — factor every lattice's unit vectors as rotations
+times a base pattern before any tree: `L21cc6506` is a five-layer twist at `n = 42`. **G55** — the chain route, with `1/2, 1/3, 1/7 ∈
+ℤ[U]`. **G21** — a periodic search measures its period cap (FS-73 twice). **G65** — aim balls by degree. Row 79; FS73-T17–T20 (C's
+screen and design rule), T26–T28, T39–T44.
