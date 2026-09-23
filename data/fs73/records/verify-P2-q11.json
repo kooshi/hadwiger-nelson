@@ -1,0 +1,451 @@
+{
+ "check1": {
+  "unit_vectors_denominator_10": 36,
+  "rank": 4,
+  "hnf_10Lambda": [
+   [
+    1,
+    0,
+    0,
+    1
+   ],
+   [
+    0,
+    1,
+    1,
+    0
+   ],
+   [
+    0,
+    0,
+    2,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    2
+   ]
+  ],
+  "index_in_Z4": 4,
+  "complete_U_note": "Lambda_10 is in (1/10)Z^4 (span of vectors there), so its unit vectors are exactly these",
+  "all_in_Lambda": true,
+  "closed_under_minus": true
+ },
+ "forcers": {
+  "u1": {
+   "u_pqrs": [
+    -6,
+    8,
+    0,
+    0
+   ],
+   "points": 52,
+   "distinct": 52,
+   "edges": 111,
+   "recorded_edges": 111,
+   "all_in_Lambda": true,
+   "has_0": true,
+   "has_3u": true,
+   "0_3u_adjacent": false,
+   "controlA_graph_3colourable": {
+    "exit": 10,
+    "mono_edges": 0,
+    "c0_c3u": [
+     0,
+     0
+    ]
+   },
+   "ask": {
+    "cnf_sha256": "87c95b88dd8b6fefb62d94683a43c289533c3d1d9d313a10d4cfa8fef86c2926",
+    "clauses": 546,
+    "glucose_exit": 20,
+    "verdict": "UNSAT",
+    "drat_faithful": [
+     "s VERIFIED"
+    ],
+    "planted_sat": true,
+    "drat_planted": [
+     "s NOT VERIFIED"
+    ],
+    "planted_removed_clauses": 4
+   },
+   "pairs_in_graph": {
+    "separable": 44,
+    "separable_in_3Lambda": 2,
+    "forced": [
+     [
+      -18,
+      24,
+      0,
+      0
+     ]
+    ],
+    "forced_all_in_3Lambda": true
+   }
+  },
+  "u2": {
+   "u_pqrs": [
+    -3,
+    -6,
+    -2,
+    1
+   ],
+   "points": 65,
+   "distinct": 65,
+   "edges": 139,
+   "recorded_edges": null,
+   "all_in_Lambda": true,
+   "has_0": true,
+   "has_3u": true,
+   "0_3u_adjacent": false,
+   "controlA_graph_3colourable": {
+    "exit": 10,
+    "mono_edges": 0,
+    "c0_c3u": [
+     0,
+     0
+    ]
+   },
+   "ask": {
+    "cnf_sha256": "a96613a9af0bf9c5c75579d915589af13a46238c195b62d1be4933261d9e0ffa",
+    "clauses": 682,
+    "glucose_exit": 20,
+    "verdict": "UNSAT",
+    "drat_faithful": [
+     "s VERIFIED"
+    ],
+    "planted_sat": true,
+    "drat_planted": [
+     "s NOT VERIFIED"
+    ],
+    "planted_removed_clauses": 4
+   },
+   "pairs_in_graph": {
+    "separable": 55,
+    "separable_in_3Lambda": 4,
+    "forced": [
+     [
+      -9,
+      -18,
+      -6,
+      3
+     ],
+     [
+      -9,
+      9,
+      3,
+      3
+     ]
+    ],
+    "forced_all_in_3Lambda": true
+   }
+  }
+ },
+ "check4": {
+  "point_group_order": 16,
+  "stage1_rows": 12,
+  "orbit_sizes": [
+   8,
+   16
+  ],
+  "span_3u1": {
+   "rank": 2,
+   "index_in_Lambda": null,
+   "equals_3Lambda": false,
+   "inside_3Lambda": true
+  },
+  "span_3u2": {
+   "rank": 4,
+   "index_in_Lambda": 729,
+   "equals_3Lambda": false,
+   "inside_3Lambda": true
+  },
+  "span_both": {
+   "rank": 4,
+   "index_in_Lambda": 81,
+   "equals_3Lambda": true,
+   "inside_3Lambda": true
+  }
+ },
+ "check5": {
+  "lines": 40,
+  "orbits_of_lines": [
+   2,
+   2,
+   4,
+   8,
+   2,
+   4,
+   4,
+   8,
+   4,
+   2
+  ],
+  "quotient_edges": 324,
+  "U_mod_3": 8,
+  "asks": [
+   {
+    "orbit_size": 2,
+    "rep_class": [
+     0,
+     0,
+     0,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     0,
+     0,
+     2
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 2,
+    "rep_class": [
+     0,
+     0,
+     1,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     0,
+     2,
+     2
+    ],
+    "rep_adjacent_to_0": true,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 4,
+    "rep_class": [
+     0,
+     1,
+     0,
+     0
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     1,
+     1,
+     0
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 8,
+    "rep_class": [
+     0,
+     1,
+     0,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     1,
+     1,
+     2
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 2,
+    "rep_class": [
+     0,
+     1,
+     1,
+     0
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     1,
+     3,
+     0
+    ],
+    "rep_adjacent_to_0": true,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 4,
+    "rep_class": [
+     0,
+     1,
+     1,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     0,
+     1,
+     3,
+     2
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 4,
+    "rep_class": [
+     1,
+     1,
+     0,
+     0
+    ],
+    "rep_vector_pqrs_over10": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 8,
+    "rep_class": [
+     1,
+     1,
+     0,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     1,
+     1,
+     1,
+     3
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 4,
+    "rep_class": [
+     1,
+     1,
+     0,
+     2
+    ],
+    "rep_vector_pqrs_over10": [
+     1,
+     1,
+     1,
+     5
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   },
+   {
+    "orbit_size": 2,
+    "rep_class": [
+     1,
+     1,
+     1,
+     1
+    ],
+    "rep_vector_pqrs_over10": [
+     1,
+     1,
+     3,
+     3
+    ],
+    "rep_adjacent_to_0": false,
+    "verdict": "SAT",
+    "quotient_mono": 0,
+    "pullback_points": 2401,
+    "pullback_edges": 7156,
+    "pullback_mono": 0,
+    "c0_crep": [
+     0,
+     1
+    ],
+    "affine": true
+   }
+  ]
+ }
+}
