@@ -1,4 +1,4 @@
-# Session handoff — FS-71 closed (2026-09-22, evening); the next milestone is Kooshi's call
+# Session handoff — FS-71 closed (2026-09-22, evening); FS-73, the rigidity dichotomy, opens next
 
 *Written by the product owner at FS-71's close, for a reader with no conversation memory. Everything below is checkable against
 the repository. Agent ids live in the session scratchpad, never here.*
@@ -35,9 +35,9 @@ the repository. Agent ids live in the session scratchpad, never here.*
 * 254 theorems in 53 files — 184 hand, 23 derived, 31 tools, 2 cert; all close except one demoted (M37-T1, the general-lattice
   coset bound, now conjecture M37-C1).
 * Four hand claims had no proof on disk; the owner wrote three (M18-T1, M63H3-T8, FS58-T9) and refuted one (M37-T1).
-* Six theorems of a same-day parallel session ("Coxeter", 2026-09-08) had no grokking presence — MASCOT-T6–T11; G16 now carries T6.
-  **Whether to mint a grokking from them is Kooshi's call** (the rigidity theorem, the `ρ₄` √3-pigeonhole inside K(√7)-fabric, and
-  the non-embeddability of `core9_plane`'s carrier in K(√7)² all bear on FS-49 and FS-73).
+* Six theorems of a same-day parallel session ("Coxeter", 2026-09-08) had no grokking presence — MASCOT-T6–T11; **G70 minted
+  from them at Kooshi's call** (the rigidity theorem, the dichotomy, the `ρ₄` √3-pigeonhole inside K(√7)-fabric, the
+  non-embeddability of `core9_plane`'s carrier in K(√7)²); G16 points at it.
 * Kernel modules no row named: `SpareColour.lean`, `EntropyFloor.lean` (row 45 now names them), `Critical.lean`'s
   `colorable_succ_of_colorable_delete`.
 * Prior art: `[BaakeGrimm2003]` (the shell count), `[Fischer1990]` Thm 1 (the two-colour mechanism), `[Moorhouse2010]` §7.1,
