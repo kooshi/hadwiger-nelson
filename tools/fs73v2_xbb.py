@@ -356,12 +356,20 @@ def main() -> None:
     ap.add_argument("out")
     ap.add_argument("--maxlen", type=int, default=6)
     ap.add_argument("--log-every", type=int, default=500)
+    ap.add_argument("--units-file", default=None,
+                    help="JSON list of unit vectors (one per ± pair) to use instead of the full U: a SUB-configuration")
     ap.add_argument("--cover-through-points", action="store_true",
                     help="PLANT MODE: keep covering past points of Θ, writing a bogus leaf at each (the checker must FAIL)")
     a = ap.parse_args()
     t0 = time.time()
     info = analyse(a.d, a.key, want_unit_basis=False)
     pos = [tuple(u) for u in info["pos"]]
+    if a.units_file:
+        with open(a.units_file) as fh:
+            sub = [tuple(u) for u in json.load(fh)]
+        full = set(pos) | {tuple(-x for x in u) for u in pos}
+        assert all(u in full for u in sub), "a listed vector is not a unit vector of the key lattice"
+        pos = sub
     basis = kernel_basis(pos)
     short = short_relations(pos, a.maxlen) if a.maxlen > 0 else []
     pool = []

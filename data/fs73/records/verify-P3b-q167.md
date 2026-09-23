@@ -222,3 +222,83 @@ relations. Its checker is ~150 lines of Fraction arithmetic. It is a natural ker
 
 V2-T1 is the costly piece: amenability / Følner averaging, or an LP-duality replacement. This is flagged as a stub candidate for
 the owner, not minted here.
+
+## 7. After the verdict (committed at 7931a25e): comparison with implementer E and the competition proofs
+
+I read `data/fs73/records/phase-P3b-q167-theta.md`, `plans/FS73-C3-Coxeter.md` §3 and `plans/FS73-C3-deBruijn.md` §2 C1 only
+after that commit.
+
+- **The verdicts agree.** E has Θ = ∅ by two routes: a θ-space tree of 605,203 nodes (7.7 MB gzipped), and a product-structure
+  certificate (106 KB). My tree is a third, independent route. It uses different variables (relation values, not θ), a different
+  root (the box [1/3, 2/3]^30, not a fundamental domain), different code, and a different checker.
+  - My relation-form tree is **20× fewer nodes** than E's route 1, and 149 KB gzipped against 7.7 MB. It needs none of the
+    lattice's structure.
+  - E's §4 found that coordinates up to about 6,000 wreck a float MIP. My formulation never has that problem: every
+    coefficient is a small relation entry (|r_j| ≤ 3), and the box is the unit-scale cube.
+- **The ⟹ proofs agree in substance.** Coxeter's H-i and de Bruijn C1 lift to ±1 steps, use parity to make w − 3Σρ even, and
+  extend by Hahn–Banach, with Poros's invariant mean as the second route. Mine lifts forward to {1, 2} steps, so no parity step
+  is needed, and extends by the invariant mean. Both need torsion-freeness at the same place: R is a direct summand.
+- **E's attack list, item by item.**
+  1. *H-i "only if".* I re-derived it independently (§1). I found no gap. Generation is not needed.
+  2. *R3, the completeness of Θ_R.* I checked it independently with `tools/fs73v2_thetaR.py`. It enumerates exactly every
+     vertex of every cell of the 2-D arrangement in a window covering a period, and groups them by cell. Result: **modulo 5ℤ²
+     there is exactly one 12-vertex cell centred at (5/2, 5/2), whose vertices are D0's 12, and four single-point cells at
+     (5/2 ± 5/6, 5/2 ± 5/6).** That is P3b-T3 exactly, with no degenerate piece missed. (The argument: every cell is a closed
+     convex polygon bounded by the ±1 and ±i strips, so it is the hull of its vertices, and every vertex is an intersection
+     of two boundary lines.)
+  3. *The enumeration of U.* My two loops (`fs73v2_units.py`, and the checker's own) are a fifth and sixth; both give 60.
+- **E's structure, re-checked independently.**
+  - U = {1, v, v̄, z, z̄}·U_R as a set equality: `tools/fs73v2_b5.py`, in exact field arithmetic over ℚ(√167)(i).
+  - E's rotation formulas, derived by hand. Put m_b = θ(b) + iθ(ib). Then m_{cb} = c̄·m_b for c ∈ ℚ(i). With i√167 = 84v − 83
+    this gives z = (1+i)(7/2 − 3v) and z̄ = (1−i)(3v − 17/7), hence μ_z = (1−i)((7/2)μ₁ − 3ν), μ_z̄ = (1+i)(3ν − (17/7)μ₁) and
+    μ_v̄ = (83/42)μ₁ − ν. All three match §3 of E's record.
+
+## 8. The extra question: a short, hand-checkable argument
+
+**Yes, there is one. It is E's P3b-T4, and I have checked it line by line.** My machine runs independently locate it as the
+*minimal* obstruction.
+
+**The obstruction is exactly the product {1, v, z}·U_R.**
+- I ran my finder on every sub-configuration b·U_R with b ranging over the 3-subsets of B5 = {1, v, v̄, z, z̄} (all ten), and on
+  four of the 2-subsets.
+- **Exactly two are empty:** {1, v, z}·U_R and its complex conjugate {1, v̄, z̄}·U_R. Each has an exact certificate of 1,050
+  leaves (`data/fs73/verify-v2/L21cc6506-sub-1vz-empty.json.gz`, 5.7 KB), and the checker passes it. All other twelve are
+  nonempty, each with an exactly checked θ.
+- This matches E's control, in which v̄ and z̄ alone give nonempty sets.
+- A greedy deletion over the 18 pairs of {1, v, z}·U_R finds that **every pair is necessary**: removing any one makes Θ
+  nonempty. So no sub-configuration of it with fewer unit vectors refutes 3-colouring.
+
+**The hand argument.** It is P3b-T4, which I verified step by step.
+- θ ∈ Θ(b·U_R) iff μ_b ∈ Θ_R. So the three conditions read:
+  - μ₁ = c0 + 5k + δ₁,
+  - ν = c0 + δ₂,
+  - (1−i)((7/2)μ₁ − 3ν) ∈ Θ_R,
+  with δ₁, δ₂ ∈ D0 ∪ F4, and D0 contained in the square |δ_x|, |δ_y| ≤ 1/6.
+- Reduced mod 5ℤ[i], the third condition becomes η := (1−i)((7/2)δ₁ − 3δ₂) ∈ (5/2)·(i or 1) + (D0 ∪ F4), according to the
+  parity of k₁ + k₂. The four cases then close by coordinate bounds:
+  - **Both δ in D0.** |η_coord| ≤ 13/6 < 7/3, so no D0 target is reachable. An F4 target forces a = (1+i)η/2 to have a
+    coordinate ±5/4 > 13/12.
+  - **δ₂ in F4.** 3(1−i)δ₂ ≡ 0, so |η| ≤ 7/6 < 5/3.
+  - **δ₁ in F4.** (7/2)(1−i)δ₁ ≡ (5/6)σ, and hitting a target needs (1−i)δ₂ = (−5/18, ∓5/18), so |δ₂| has a coordinate
+    5/18 > 1/6.
+  - **Both in F4.** η ≡ (5/6)σ, whose coordinates lie in {0, ±5/6}, and none of the targets has those.
+
+I found no error. A half-page proof of χ(ℚ(√167)²) ≥ 4 therefore exists, modulo the criterion's ⟹ direction:
+- the 36 unit vectors {1, v, z}·U_R;
+- Θ_R's shape, which is a 2-D computation checkable by hand from the six strip families;
+- four inequality cases.
+
+**What I did not find.**
+- A finite non-3-colourable subgraph. Neither certificate yields one directly, and I did not run the optional SAT search on a
+  word ball.
+- Any simplification below 36 vectors inside this family. Minimality under deletion is proved above; other families of
+  sub-configurations were not searched.
+
+## 9. Theorems this phase proved (continued from §6)
+
+| # | statement | grade | where |
+|---|---|---|---|
+| V2-T6 | Θ({1, v, z}·U_R) = ∅, and the same for its conjugate {1, v̄, z̄}·U_R. The other 12 sub-configurations b·U_R tested (every 3-subset and four 2-subsets of B5) are nonempty | [cert] (empty: checked certificate; nonempty: exactly checked θ) | §8 |
+| V2-T7 | {1, v, z}·U_R is minimal: deleting any one of its 18 ± pairs makes Θ nonempty | [tools] (finder verdicts; each NONEMPTY carries an exactly checked θ) | §8, `scratchpad/greedy.py` |
+| V2-T8 | Θ_R = (5/2, 5/2) + (D0 ∪ F4) + 5ℤ², with exactly one 12-vertex cell and four single-point cells per period. This confirms E's P3b-T3 | [tools] exact + [hand] (the cell argument) | §7, `tools/fs73v2_thetaR.py` |
+| V2-T9 | E's P3b-T4 hand proof, checked line by line, together with the rotation formulas μ_z, μ_z̄, μ_v̄ re-derived from m_{cb} = c̄·m_b | [hand], second reading | §7–§8 |
