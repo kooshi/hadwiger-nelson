@@ -88,14 +88,14 @@ hunch: inheritance-is-periodic-point-witnessing
   basis: derived
   falsifier: a reading of the stub's / FS70's definition of "rigid" or "forces" under which compactness does not apply (e.g. U infinite, or "forces" not quantified over all proper colourings)
   registered: 2026-09-23
-  status: open
+  status: confirmed (by: derivation — König/Tychonoff, checked independently by the planner; and read — FS58-T4 held it at three colours; Mathlib `nonempty_hom_of_forall_finite_subgraph_hom`, Finsubgraph.lean:154)
 
 hunch: literal-C3-contains-FS72
   claim: C3 stated for every δ, with no non-vacuity hypothesis, implies every 4-colourable lattice graph has a periodic 4-colouring; FS-72's rank-8 lattice is its killing test if 4-colourable
   basis: derived
   falsifier: C3's written statement (FS70-derivation) presupposes a periodic colouring exists, or quantifies δ outside U
   registered: 2026-09-23
-  status: open
+  status: confirmed (by: derivation, accepted by the planner; the plan splits it off as C3-aper = `[AbrishamiEtAl2025]` Problem 4.6 restricted to 1-ended abelian Cayley graphs)
 
 hunch: K-is-explained-by-a-local-lemma-not-by-inheritance
   claim: over K the forcing of 8/3 follows from G70's hexagon lemma (clean colourings are 2R-periodic, 8/3 ∈ 2R) plus a separate finite argument on √3-dirty colourings; periodic rigidity plays no role in the mechanism
@@ -109,20 +109,20 @@ hunch: composite-periods-escape-the-prime-table
   basis: prior (Tardif 2023 at four colours; G66's non-increasing tower)
   falsifier: a lemma in FS70-derivation (T9 or nearby) showing every period-N colouring factors through one prime, or that the diagonal Cayley graph refuses whenever each factor does
   registered: 2026-09-23
-  status: open
+  status: open (no such lemma in the record — T9's mechanism file flags rank 6 as "a subgraph of a product … not derived"; the test is the plan's P-R1 on L3, a period dividing 2·3⁴ forced by [2Λ : V] = 81)
 
 hunch: kempe-index-is-a-norm
   claim: V (the closed-walk voltage lattice of a two-colour Kempe component) is stable under the colouring's stabiliser in the multiplier ring, so [NΛ : V] is an ideal norm — 81 = 3⁴ at rank 6
   basis: analogy (G64's norm reading; Gross–Tucker local voltage group)
   falsifier: a Kempe index at rank 6 that is not a norm of any ideal of the relevant order, or a V not stable under the colouring's symmetries
   registered: 2026-09-23
-  status: open
+  status: open, demoted in weight (R3 shows membership e ∈ V decides escapes, not the index; the plan carries it as P-R2, low-medium)
 hunch: H1-equals-H2
   claim: for a lattice unit-distance graph, "every periodic 4-colouring identifies (0,δ)" (H1) is equivalent to "every periodic 4-colouring is Kempe-rigid at δ for every b" (H2)
   basis: derived
   falsifier: a periodic colouring C, C(0)=C(δ), with δ ∉ K₀ for some b, on a lattice where H1 holds — i.e. an error in the re-periodisation (the union K₀+W′ not a union of components, or W′ not of finite index)
   registered: 2026-09-23
-  status: open (sent to the planner to check)
+  status: confirmed (by: derivation, re-derived independently by the planner, message 4; in the plan as R3 with a kernel leaf `not_periodicForces_of_voltageEscape`)
 
 hunch: lattice-is-hoffman-tight-over-K
   claim: de Grey's rank-4 lattice graph Cay(Λ,U) over K has min over T⁴ of Σ_u cos 2πθ·u equal to −d/3, attained only at 2-power-torsion characters, so every odd-period quotient refuses four colours by Hoffman
@@ -167,7 +167,7 @@ hunch: lattice-is-hoffman-tight-over-K
   periodic).
 - `plans/MASCOT-derivation.md` T6–T11 — expected: G70's content; the phase walls as the non-periodic family — **surprised: no** (as
   expected), one detail: MASCOT-T10's striped colourings are periodic along rows with an arbitrary phase sequence across them —
-  rank-1-transversal configurations, the shape my held item H-1 is about.
+  rank-1-transversal configurations.
 - `LEDGER.md` rows 66, 67, 76 — expected: row 67 says the tower "says nothing about any finite chunk" — **surprised: yes, once.**
   Row 67 registers **P-D3**: "no finite K²-graph forces depth 4", although the 2-adic tower forces depth 4 — the corpus's own
   registered prediction that local (2-adic periodic) forcing does not inherit to finite graphs at depth 4 over K; sent to the planner
@@ -269,12 +269,66 @@ hunch: lattice-is-hoffman-tight-over-K
    products (sharpened reductions; the K instance explained by its local lemma; a sufficient condition; the census's candidate list),
    headline "not landed" if neither lands. The PO tells the planner the same, without the held items.
 
+14. **Planner → Poros.** Plan committed as `9d1fe367` (`plans/FS73-rigidity-dichotomy.md`, with this record as it then stood).
+   Asked which SILENT entries bear (counts: grokkings 43 B / 27 S; rows 33 / 44; § B 91 / 163), naming its least-sure: G15, G58,
+   rows 22–24, M45-T1, MASCOT-T5, M63D-T7, FS66-T9. P-Q1 registered: not landed 0.60, counterexample 0.30 (mostly abstract class),
+   theorem 0.10.
+15. **Poros → planner.** (1) **G59 is a trap, and a correction of my message 11:** Cay(Λ/NΛ, U) is a *subgraph* of the product of
+   local targets (U mod N a finite diagonal subset — 54 of 24 × 48 pairs at N = 35), not the product; FS58-T3's tensor identification
+   used weak approximation over an infinite U; so FS-67-type pull-back results and G59's χ_f-of-products hatch bound the quotient only
+   from above; C3-local is not "FS-67 at four colours" for finite-U lattices. (2) G15 bears on fallback (b): the K explanation
+   factors as G70's dichotomy (Act One) × a kill on the dirty branch. (3) M63D-T7 bears weakly — C3's bookkeeping (separations
+   transfer up, refusals only down); cite in the census acceptance. (4) G58: bears through a PO-held item — leave the verdict. (5) Rows
+   22–24: one periodicity check. (6) G64 weak bear for (3). Agreed silent: M45-T1, MASCOT-T5, FS66-T9.
+16. **Poros → planner (after reading the committed plan §0, §S, §C, §P, §X).** **P1d's target box "every lattice point with |δ| ≤ 4"
+   is infinite** (a rank-4 subgroup of ℂ is dense). Both sides of C3 are **subgroups**: F (forced; X translation-invariant) and P
+   (common periods of periodic colourings), and P_found (finite index, ⊇ lcm(N)Λ, exact from the found colourings and R3). **C3-inherit
+   at a lattice for all δ ⟺ P = F.** The census = the finite group P_found / F_known, one ask per nontrivial coset; at K, P_found =
+   F_known would be a complete found-level confirmation. Vectors, not distances: √3 ∉ ℚ(√−3,√−11), so "8/√3 (M56)" on de Grey's
+   rank-4 lattice is the distance of (8/3)(1+ζ₆) ∈ F already. Card: report rank F_known and rank P_found — ρ is not a multiplier
+   (ρ³ = (16/9)ρ − 5/3 ∉ Λ), so 8/3's transport orbit spans rank 2; rank 4 would make X finite and C3 at K trivial; rank 2 makes the
+   K instance a genuinely 2-D shift. **Verified after sending** (sympy, HNF of the 30 generators ζ₆^m ρ^n, |n| ≤ 2: rank 4,
+   denominator 36; ρ³ ∉ Λ, ρ·ρ² ∉ Λ, 8/3 ∈ Λ, (8/3)(1+ζ₆) ∈ Λ, 1/9 ∈ Λ, 1/27 ∉ Λ).
+17. **Planner → Poros (crossed message 16).** Adopted message 15 in `974ec8fa`: G15, G59, G64, M63D-T7 now bear; C3-local corrected to a
+   diagonal subgraph; **fourth retraction** ("FS-67 at four colours"); rows 22–24 get a periodicity check in P1f; G58 left silent with
+   the PO-held note; §X records both counting conventions (mine 2, planner's 4). Handing back to the PO. Message 16 may not have
+   reached the plan — flagged to the PO.
+
+18. **Poros → product owner.** Message 16 crossed the planner's hand-back and is not in the plan at `974ec8fa` (P1d still reads
+   "every lattice point with |δ| ≤ 4"); asked the PO to carry the subgroup census (P_found / F_known, vectors not distances, the ranks
+   of F_known and P_found) into P1's implementer brief or have the planner amend.
+
+19. **Planner → Poros.** Message 16's P1d fix adopted in `73114a7f`, checked on the lattice's coordinates (ρ³ ∉ Λ; 8/3's ζ₆-orbit
+   rank 2, (24,0,0,0), (0,0,24,0), …; (8/3)(1+ζ₆) = (24,0,24,0)). The census now computes P_found / F_known, one ask per nontrivial
+   coset, both ranks reported; the rank-2 point is in §C as a thing worth knowing and registered as P-C4 (Poros).
+
+20. **Product owner → Poros (correction, with the final-report request).** P_found ⊇ lcm(N)·Λ has rank 4 while P-C4 predicts F_known
+   of rank 2, so P_found / F_known ≅ ℤ² × finite — **infinite**, not "the finite group" of message 16. The finite version: one forcing
+   ask per *generator* of P_found modulo F_known (F a subgroup, so forcing every generator forces all of P_found). Generators in
+   lcm(N)·Λ are H1-found only because of the periods searched, so the census's decisive quantity may be whether P_found stabilises as
+   the periods grow; if the true P has finite index at K, C3 at K holds exactly when F has full rank, and a rank-2 F would be a
+   **counterexample at K**, not only a two-dimensional shift.
+   **Poros's check: the PO is right on both counts, and I was wrong on both.** (i) The quotient is infinite; the finite object is a
+   generating set. (ii) Given P of finite index: F of finite index ⟹ every colouring is F-periodic, X is finite, all colourings are
+   periodic, so P = F and C3 holds for every δ; conversely C3 ⟹ P = F ⟹ F of finite index. So "C3 at K ⟺ F full rank" holds under
+   finite-index P, and my P-C4 consequence ("rank 2 ⟹ a genuinely 2-D shift") understated it: under finite-index P, rank-2 F is a
+   counterexample at K. One addition of mine: generators of P_found inside lcm(N)·Λ are also *unaskable* — a vector of 27,720·Λ is
+   long in the conjugate embedding too, so any Minkowski ball holding it is ~10⁴ times the radius of Harder's. Forcing asks can
+   only be made at short generators; the artifact generators are decided by searching larger periods (does P_found shrink toward
+   F_known?), never by balls.
+
 ## 3. Retraction count
 
 | side | count | what was withdrawn, and what killed it |
 |---|---|---|
-| planner | 3 | (3) "the N = 8, 10, 12 gap-freedom is the first observation of G54's middle case" — killed as a corollary of Harder's forcing + T6/row 66 (message 6→8). (1) "under H1 every escape the screen can find has rank V < rank Λ" — killed by the re-periodisation (swap K₀ + W′, W′ ⊇ V of finite index missing e; ℤ^r/V residually finite); (2) "Weil/Hoffman refuse four colours from q ≈ 37 up" — killed because the period-p quotient is Cay(Λ/pΛ, U mod p), a subgraph of the target once the circle outgrows U, whose Hoffman floor tends to the lattice's own ≤ 4. Both in the free window, 2026-09-23. |
-| Poros | 1 | (1) the frame note "tightness controls invariant measures, so C3-inherit at H1 comes down to walls" as a statement of the competition's question at K — killed by the planner's measurement that de Grey's lattice is Hoffman-slack at four colours (−22.41 vs −18). Retracted in message 6, free window. (The hunch lattice-is-hoffman-tight-over-K itself is a *lost prediction*, counted in §4, not as a retraction.) |
+| planner | 4 | (4) "C3-local is FS-67's question at four colours" — killed by the finite-U point (message 15): the quotient is a diagonal subgraph of the product, not the product. (3) "the N = 8, 10, 12 gap-freedom is the first observation of G54's middle case" — killed as a corollary of Harder's forcing + T6/row 66 (message 6→8). (1) "under H1 every escape the screen can find has rank V < rank Λ" — killed by the re-periodisation (swap K₀ + W′, W′ ⊇ V of finite index missing e; ℤ^r/V residually finite); (2) "Weil/Hoffman refuse four colours from q ≈ 37 up" — killed because the period-p quotient is Cay(Λ/pΛ, U mod p), a subgraph of the target once the circle outgrows U, whose Hoffman floor tends to the lattice's own ≤ 4. Both in the free window, 2026-09-23. |
+| Poros | 2 | (2) message 11's "FS58-T3's tensor-product shape is the precedent for column (c)" — for finite-U lattices the quotient is a subgraph of the tensor product (FS58-T3 used weak approximation over an infinite U); retracted in message 15, free window. (1) the frame note "tightness controls invariant measures, so C3-inherit at H1 comes down to walls" as a statement of the competition's question at K — killed by the planner's measurement that de Grey's lattice is Hoffman-slack at four colours (−22.41 vs −18). Retracted in message 6, free window. (The hunch lattice-is-hoffman-tight-over-K itself is a *lost prediction*, counted in §4, not as a retraction.) |
+
+*After the planner's hand-back (outside the free window): two more of mine, caught by the product owner — "the finite group
+P_found / F_known" (the quotient is ℤ² × finite; the finite object is a generating set) and P-C4's consequence understated (under a
+finite-index P, rank-2 F is a counterexample at K). The first is committed in `73114a7f`'s P1d row and needs its wording fixed; exact
+replacement text is in the hand-back. Counting both: Poros 4, planner 4. The planner's §X records its own count (4) and mine at
+hand-back (2).*
 
 ## 4. My own errors, against myself
 
@@ -292,18 +346,20 @@ hunch: lattice-is-hoffman-tight-over-K
    before sending a "reduction". The rule: a reduction offered to the owner is searched in the owner's own ledger first.
 4. **A mis-cited grokking** (message 9: the 10⁷ figure attributed to G65; it is G69's). Caught by me on re-reading, corrected in
    message 10. Cost: none. Mechanism: citing from memory of two adjacent entries on the same subject.
+5. **"The finite group P_found / F_known"** (message 16, adopted into the plan at `73114a7f`). Wrong: P_found has rank 4 (it
+   contains lcm(N)·Λ) and my own P-C4 predicts F_known of rank 2, so the quotient is ℤ² × finite. Caught by the product owner at the
+   final-report request. Cost: one planner commit carries the wrong word "finite"; the census logic survives with "a finite generating
+   set of P_found modulo F_known" in its place. Mechanism: I checked the subgroup claim and the vector arithmetic (sympy) and did not
+   check the rank of the quotient against the prediction I sent in the same message. The rule: when a message carries both a
+   construction and a prediction, check the construction against the prediction before sending.
+6. **P-C4's consequence understated** (message 16: rank-2 F ⟹ "a genuinely two-dimensional shift"). If the true P has finite index,
+   rank-2 F is a counterexample to C3 at K. Caught by the product owner. Mechanism: I reasoned about F alone and never combined it with
+   the finite-index structure of P that I had stated three lines earlier.
 
 ## 5. Held for the product owner (not sent to the planner — possible head start for the competition)
 
-*The planner is writing the plan both competitors will read; these are partial approaches to C3-inherit itself, not sharpenings of
-its statement. **PO ruling (message 13):** out of the plan and §C; in full in my final report; offered by the competition's advisor to
-both competitors identically and simultaneously, only after each has written down its own first route. Content is in my
-hand-back message; the scratch copy is `…/scratchpad/fs73-poros-plan/held-items.md`.*
-
-- **H-1, wall reversal.** A counterexample built from a colouring periodic in r − 1 directions reduces to a 1-D SFT across the wall,
-  where every pattern of an irreducible component occurs in a periodic point; so such a counterexample needs an *irreversible*
-  (transient) wall. The central symmetry x ↦ −x reverses walls up to reflecting the phases, which connects to G58 (antipodal
-  colourings up to a colour involution).
-- **H-2, window colourings.** The recurrent non-periodic part of the gap has a natural constructive family: colourings through the
-  lattice's other archimedean place (c(x) = f(x′), f a measurable colouring of the conjugate plane avoiding U′) — FS-64's adelic
-  window instrument pointed at FS-73. Periodic colourings are the ones continuous through the non-archimedean places.
+*Two partial approaches to C3-inherit itself (not sharpenings of its statement). **PO ruling (message 13):** out of the plan and §C;
+in full in my final report; offered by the competition's advisor to both competitors identically and at the same moment, only after
+each has written down its own first route. **Their content is deliberately not written in this committed record**, so that the
+record cannot brief a competitor who reads it: H-1 is a necessary condition on one shape of counterexample; H-2 is a
+constructive family for the recurrent part of the gap. Full text: the hand-back to the product owner, 2026-09-23.*
