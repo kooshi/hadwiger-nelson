@@ -11,13 +11,17 @@ the repository. Agent ids live in the session scratchpad, never here.*
    of Theorem B's two residue colourings; the dichotomy; the `ρ₄` pigeonhole inside K(√7)-fabric), G69, G68, G51 (the competitor design,
    to be run on FS-73's inheritance question with the retractions counted), and the stub. **WORKFLOW 2.0 applies in full**: the reframe
    (3.1 with `CLAUDE.md` and `LEDGER.md` open — § B is now 254 lines and part of the walk; 3.2 the prior-art gate), then the subplan.
-   Staffing: one Fable planner + one Opus implementer (the Sonnet readers were FS-71's shape only); **plus, at the inheritance
-   question's wall, a second Fable session as a friendly competitor** briefed identically with an isolated scratchpad (G51's design —
-   no standing advisor; a one-off Poros query only if a wall is named). The theorems FS-71 filed that the stub consumes are listed in
+   Staffing: one planner + one implementer, **every role on Opus 5.5** (Kooshi, 2026-09-22, after FS-71's close: "Opus 5.5 should be
+   used for all purposes until further notice" — the Fable 5.1 planner / Opus 5 implementer split and FS-71's Sonnet readers are
+   retired, and so is every recorded quirk of those models); **plus, at the inheritance question's wall, a second Opus 5.5 session as
+   a friendly competitor** briefed identically with an isolated scratchpad (G51's design — no standing advisor; a one-off Poros query
+   only if a wall is named). The Agent tool's `model: "opus"` launches Opus 5.5 (checked 2026-09-22 by asking a spawned agent for
+   its model id: `claude-opus-5-5[1m]`); an omitted model inherits the session's. The theorems FS-71 filed that the stub consumes are listed in
    its bearings line.
-2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): one Fable planner + one
-   Opus implementer at a time (FS-71 used Sonnet 5 readers by Kooshi's call for that milestone only); fresh implementer per phase,
-   never resume one above ~500k tokens; **no child agent spawns children — say so, with the reason, in every brief**; review by
+2. **Standing rules** (one line each; `plans/SESSION-HANDOFF-2026-09-22-fs70-mid.md` §0 has the reasons): one planner + one
+   implementer at a time, both Opus 5.5; the old ~500k-token rotation rule was measured on Opus 5 and is retired — no threshold is
+   known for Opus 5.5, so read each agent's token count on hand-back, and one nearing its window hands over at a clean boundary with
+   its phase record complete; **no child agent spawns children — say so, with the reason, in every brief**; review by
    artifact with your own code, plant a fault of your own; write cause / measurement / forfeit before stopping any run; **tell every
    briefed agent its `CLAUDE.md`, `WORKFLOW.md` and the ledger's location are the session's loaded snapshot and the disk is
    authoritative**; commits by explicit path, never push, never amend; never `lake build` (`./scripts/build.sh` only); kill by pid or

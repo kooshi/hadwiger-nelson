@@ -60,8 +60,9 @@ contaminated line — the competition's integrity rule produced the mathematics.
 Does "rigid under every periodic colouring" imply that some finite ball forces? True over K by Harder's object, unexplained
 (G69, `plans/STUB-rigidity-dichotomy.md` C3). A derivation wall with a known positive instance, where two independent attempts
 meeting one obstruction would license the negative — the shape of row 58. Run the design there, one phase: the owner and a
-competitor Fable session briefed from §4 with the slots filled, the advisor spawned warm from §5 with the record and a written
-expectation, scratchpads isolated, retractions counted.
+competitor session briefed from §4 with the slots filled, the advisor spawned warm from §5 with the record and a written
+expectation, scratchpads isolated, retractions counted. Both run on Opus 5.5, the model for every role until Kooshi says otherwise
+(2026-09-22; `model: "opus"` launches it). The briefs below are verbatim from 2026-09-09 and name no model, so they need no edit for it.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 
