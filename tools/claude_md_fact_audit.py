@@ -86,6 +86,24 @@ ALLOW: dict[str, str] = {
     "declarations=6723": "the same count, as the gate report prints it",
     "FS38-D2-A/B": "the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending",
     "FS66-W/E/T": "the same placeholder row's FS-66 half; the whole row is one line, so batch 5b's removal (on filing FS-38, per the brief) drops it too — batch 6 adds FS-66's own § B rows fresh, with no placeholder to clean up",
+    # FS-73's close (2026-09-23): the gate counts moved and rows 78-79 joined the ledger; FS-59's three-colour routes were answered.
+    "6728": "the vacuity gate's declaration count, 6728 -> 6795 at FS-73's close (the Kempe layer and FS-72's lattices joined the library)",
+    "declarations=6728": "the same count, as the gate report prints it",
+    "270": "vacuity's refutations-skipped count, 270 -> 278 at FS-73's close",
+    "refutations-skipped=270": "the same count, as the gate report prints it",
+    "262": "vacuity's sites count, 262 -> 275 at FS-73's close",
+    "sites=262": "the same count, as the gate report prints it",
+    "240": "vacuity's generic count, 240 -> 253 at FS-73's close",
+    "generic=240": "the same count, as the gate report prints it",
+    "1–75": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close",
+    "R9": "the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a",
+    "R9's": "the same, possessive",
+    "R5–R8": "the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there",
+    "c(3w)": "R9's pinned ask c(0) != c(3w); plans/STUB-four-colours-167.md §3a",
+    "w′": "R9's identity 1/6 = 1 + 1 - w - w-bar - w' - w-bar'; plans/STUB-four-colours-167.md §3a",
+    "w̄′": "the same identity",
+    "G68/G69": "the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered",
+    "MASCOT-T6's": "the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as

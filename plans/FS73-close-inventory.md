@@ -25,15 +25,15 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
   against *frozen* and `[PeledSpinka2023]`), G61(2), G68 (gap sufficient, not necessary; the Kempe-period criterion), G60 and G66
   (the `F_μ` and odometer sentences), G70 (exhaustive on de Grey's lattice), G51 (the second run; its Do line moved to the
   four-colour question), G55 (the `8/9` pair and its spindle into K(√7) — the owner's note), FS58-T4's kernel note (and FS-39's
-  phase A). ⏳ the §G re-read, the §PA sweep and the forward propagation: next commit (plan §R and the stubs).
+  phase A). ✅ the §G re-read, the §PA sweep and the forward propagation: the plan's §R-close (second close planner, `e0ce27a5`).
 - §4 mechanics: ✅ gates re-run 2026-09-23 22:44 UTC under the heavy lock — build up to date (1,698 modules, 2 s); axioms **1034 clean**,
   10 axiom-free, 5 declared purchases, no record changed since the previous run; vacuity OK, `declarations=6795
   refutations-skipped=278 sites=275`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2` — § The gate, § Trust
   ledger and `scripts/vacuity-baseline.txt`'s header updated (the header's stale 6723 and 240 corrected); architecture PASS;
   bibliography audit green after two fixes: the alias table now resolves a yearless key (`[GarciaMarcoKnauer]`, from FS-71's
   committed brief; `tools/bib_audit.py`, a planted fake key still fires), and FS-73's owed entries added (`[Chandgotia2017]`,
-  `[ChandgotiaPakTassy2019]`, `[MooreNewman2000]`, Liu's 2008 survey, Gao–Jackson–Krohne–Seward). § Delegation unchanged. ⏳ the
-  fact audit and the size check run last.
+  `[ChandgotiaPakTassy2019]`, `[MooreNewman2000]`, Liu's 2008 survey, Gao–Jackson–Krohne–Seward). § Delegation unchanged. ✅ the
+  fact audit and the size check (second close planner, section 9 below).
 
 **The first close planner stopped here (2026-09-23, near its ~450k-token budget), at a clean boundary: §1–§4 done and committed
 (`2cda3170`, `7c459f86`, `ebe1c597`). A successor continues with §3's three sweeps, then §5–§9, in this order:**
@@ -77,7 +77,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    a four-colour question where no `Θ` exists; C's design rule heads R2); FS-60 and FS-67 notes; `plans/FRONTIER-STUBS.md`
    re-ranked with a closed row for FS-73; `CLAUDE.md` § Paths forward (the open-milestones paragraph still names FS-73 next; the
    ranked table's FS-73 row and FS-59's "nothing above three proven" are stale).
-7. **§9** — `tools/claude_md_fact_audit.py --base a640efec` and `--dupes` (was 15 runs); `CLAUDE.md` is 240,166 bytes (budget
+7. ✅ (second close planner: `--base de5af0f8` (the hand-off) PASSES; `--base a640efec` fails only on the gate-report sentence (1004 → 1034 clean), which the audit fails on by design at any close that moves the gate; the intended losses — the vacuity counts, the row range 1–75, the old FS-59 row's R9/R5–R8 route text (kept in its stub), the old open-milestones sentence — are in the audit's `ALLOW` table with reasons; FS-61's degree-14 ask (1,474,541 points, 3.66 s) moved into row 79, its home; `--dupes` back to 15 runs after two new ones were rephrased; `CLAUDE.md` 243,978 bytes, under the 275,000 budget; architecture PASS, bibliography audit green, `fs71_ledger_b_check --strict` PASS. The push is the owner's) **§9** — `tools/claude_md_fact_audit.py --base a640efec` and `--dupes` (was 15 runs); `CLAUDE.md` is 240,166 bytes (budget
    275,000); the close commit; the owner pushes.
 
 ---
