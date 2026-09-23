@@ -1,0 +1,129 @@
+{
+ "what": "P1c: gap finder (two encodings, two solvers) against Harder's forcing refusal, de Grey's lattice",
+ "gap_rows": [
+  {
+   "N": 8,
+   "classes": 4096,
+   "instrument_1": {
+    "encoding": "fs73 (clique pins + full precedence)",
+    "solver": "kissat",
+    "aim": "gap",
+    "classes": 4096,
+    "note": "origin 0, least neighbour 1, triangle 2; colour 3 absent from N[0]",
+    "budget_s": 1500,
+    "machine": "desktop (16 physical cores / 32 threads, 128 GB)",
+    "cnf_sha256": "1a7be24afbae4086fd565c3886a92defd35a4f410bba5886d6d2a3761810eb1c",
+    "clauses": 299048,
+    "vars": 16384,
+    "edges": 73728,
+    "wall_s": 0.02,
+    "cpu_s": 0.02,
+    "verdict": "UNSAT",
+    "lock": true
+   },
+   "instrument_1b": {
+    "encoding": "fs70_periodic_kempe.find (origin + least neighbour pins)",
+    "solver": "cadical 2.1.2",
+    "verdict": "UNSAT",
+    "wall_s": 0.07,
+    "cnf_sha256": "1b790c0f5a3ea81d4b9e782029a941e4504896338d9fc2f04e260a2d4ac41487",
+    "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+   }
+  },
+  {
+   "N": 10,
+   "classes": 10000,
+   "instrument_1": {
+    "encoding": "fs73 (clique pins + full precedence)",
+    "solver": "kissat",
+    "aim": "gap",
+    "classes": 10000,
+    "note": "origin 0, least neighbour 1, triangle 2; colour 3 absent from N[0]",
+    "budget_s": 1500,
+    "machine": "desktop (16 physical cores / 32 threads, 128 GB)",
+    "cnf_sha256": "70de16bd48aa52958efdf93e4badad771a5ca647ba146d17e21784416979e6b4",
+    "clauses": 1090058,
+    "vars": 40000,
+    "edges": 270000,
+    "wall_s": 1.05,
+    "cpu_s": 1.04,
+    "verdict": "UNSAT",
+    "lock": true
+   },
+   "instrument_1b": {
+    "encoding": "fs70_periodic_kempe.find (origin + least neighbour pins)",
+    "solver": "cadical 2.1.2",
+    "verdict": "UNSAT",
+    "wall_s": 0.19,
+    "cnf_sha256": "02c5306c72a7e3fd5261f169bfdaaf8fffe5e4f418e7aebab20b1a31ee430dd7",
+    "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+   }
+  },
+  {
+   "N": 12,
+   "classes": 20736,
+   "instrument_1": {
+    "encoding": "fs73 (clique pins + full precedence)",
+    "solver": "kissat",
+    "aim": "gap",
+    "classes": 20736,
+    "note": "origin 0, least neighbour 1, triangle 2; colour 3 absent from N[0]",
+    "budget_s": 1500,
+    "machine": "desktop (16 physical cores / 32 threads, 128 GB)",
+    "cnf_sha256": "6379ce0558c76caf3f0481cf625928acf8fcf92b686d1a4d6442868303d005df",
+    "clauses": 2260282,
+    "vars": 82944,
+    "edges": 559872,
+    "wall_s": 2.88,
+    "cpu_s": 2.87,
+    "verdict": "UNSAT",
+    "lock": true
+   },
+   "instrument_1b": {
+    "encoding": "fs70_periodic_kempe.find (origin + least neighbour pins)",
+    "solver": "cadical 2.1.2",
+    "verdict": "UNSAT",
+    "wall_s": 0.44,
+    "cnf_sha256": "e9164ec30b938134fd76df3c62ffd362d603c78c400f1379028905061df187f6",
+    "note": "colour 3 absent from N[0]; origin pinned 0; least neighbour pinned 1"
+   }
+  }
+ ],
+ "harder": {
+  "points": 23083,
+  "edges": 167808,
+  "avg_degree": 14.54,
+  "control": {
+   "vertices": 23083,
+   "edges": 167808,
+   "clauses": 694318,
+   "cnf_sha256": "5a3731b9d9445c1e3d6248a21049dc0f5582e1c2043bd2379d1c4a2a9531b621",
+   "solver": "kissat",
+   "budget_s": 1500,
+   "machine": "desktop (16 physical cores / 32 threads, 128 GB)",
+   "lock": false,
+   "verdict": "SAT",
+   "wall_s": 0.39,
+   "cpu_s": 0.39
+  },
+  "forces": {
+   "vertices": 23083,
+   "edges": 167808,
+   "clauses": 740484,
+   "cnf_sha256": "833fbf9703a0d7969689faf27458c9c7c4ff35a6d88ba78c3e8e5465d5eac04a",
+   "solver": "kissat",
+   "budget_s": 1500,
+   "machine": "desktop (16 physical cores / 32 threads, 128 GB)",
+   "lock": false,
+   "verdict": "UNSAT",
+   "wall_s": 8.5,
+   "cpu_s": 8.47
+  },
+  "common_neighbours": 0,
+  "critical_set": "empty: N(0) n N(delta) is empty (G39)",
+  "critical_checks": [],
+  "verdict": "refused (forced in this graph)"
+ },
+ "agree": true,
+ "reading": "agree: no gapped colouring at N = 8, 10, 12 and the pair forced (the expected, uninformative outcome)"
+}

@@ -1,0 +1,347 @@
+{
+ "F_known": {
+  "rank": 2,
+  "generators": [
+   [
+    48,
+    -24,
+    0,
+    -24
+   ],
+   [
+    0,
+    0,
+    48,
+    -24
+   ]
+  ],
+  "Lambda_mod": {
+   "free": 2,
+   "torsion": [
+    24,
+    24
+   ]
+  },
+  "index": null
+ },
+ "P_found": {
+  "rank": 4,
+  "generators": [
+   [
+    8,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    8,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    8,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    8
+   ]
+  ],
+  "Lambda_mod": {
+   "free": 0,
+   "torsion": [
+    8,
+    8,
+    8,
+    8
+   ]
+  },
+  "index": 4096
+ },
+ "P_found_mod_F_known": {
+  "free": 2,
+  "torsion": [
+   3,
+   3
+  ]
+ },
+ "point_group_order": 24,
+ "orbit_of_8over3": 6,
+ "colourings": 25,
+ "P_N": {
+  "2": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     2,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     2,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     2
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   "index": 16
+  },
+  "4": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     4,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     4,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     4
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   "index": 256
+  },
+  "6": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     2,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     2,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     2
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   "index": 16
+  },
+  "8": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     8,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     8,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     8,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     8
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     8,
+     8,
+     8,
+     8
+    ]
+   },
+   "index": 4096
+  },
+  "10": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     2,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     2,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     2
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     2,
+     2,
+     2,
+     2
+    ]
+   },
+   "index": 16
+  },
+  "12": {
+   "status": "exact",
+   "rank": 4,
+   "generators": [
+    [
+     4,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     4,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     4
+    ]
+   ],
+   "Lambda_mod": {
+    "free": 0,
+    "torsion": [
+     4,
+     4,
+     4,
+     4
+    ]
+   },
+   "index": 256
+  }
+ },
+ "cold_rerun_reproduces": {
+  "2": true,
+  "4": true,
+  "6": true,
+  "8": true,
+  "10": true,
+  "12": true
+ },
+ "negative_controls": {
+  "2": {
+   "in_P_found": false,
+   "separator": [
+    2,
+    "degrey-N2",
+    "4dcc74d0b3b87b16",
+    "KPer"
+   ]
+  },
+  "4": {
+   "in_P_found": false,
+   "separator": [
+    2,
+    "degrey-N2",
+    "4dcc74d0b3b87b16",
+    "KPer"
+   ]
+  }
+ },
+ "kper_rank_min": 4
+}

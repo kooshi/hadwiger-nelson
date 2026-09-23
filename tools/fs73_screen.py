@@ -51,7 +51,7 @@ PLANT = None
 for _i, _a in enumerate(sys.argv):
     if _a == '--plant' and _i + 1 < len(sys.argv):
         PLANT = sys.argv[_i + 1]
-VALID_PLANTS = ('dedup_steps', 'per_sample', 'kper_first', 'prec_wrong')
+VALID_PLANTS = ('dedup_steps', 'per_sample', 'kper_first', 'prec_wrong', 'loop_stale')
 SCRATCH = os.environ.get('FS73_SCRATCH', '/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/'
                          'scratchpad/fs73-implA')
 LOCK = '/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock'
@@ -537,7 +537,7 @@ def write_cnf(path, n, parts, nvars, k=4):
 
 
 class HeavyLock:
-    """the shared heavy-job lock, taken per ask and only for asks priced heavy (> 2 min or > 8 GB); waits up to 600 s"""
+    """the shared heavy-job lock, taken per ask and only for asks priced heavy (> 2 min or > 8 GB); waits up to 3600 s"""
     def __init__(self, heavy):
         self.heavy, self.f = heavy, None
 
@@ -551,8 +551,8 @@ class HeavyLock:
                     fcntl.flock(self.f, fcntl.LOCK_EX | fcntl.LOCK_NB)
                     break
                 except BlockingIOError:
-                    if time.time() - t0 > 600:
-                        raise RuntimeError('the heavy lock was not free within 600 s')
+                    if time.time() - t0 > 3600:
+                        raise RuntimeError('the heavy lock was not free within 3600 s')
                     time.sleep(2)
         return self
 
@@ -574,7 +574,7 @@ def solve(Q, U, aim='plain', target=None, budget=600, solver='kissat', heavy=Non
     path = os.path.join(SCRATCH, f'ask-{os.getpid()}-{Q.n}-{aim}.cnf')
     sha, ncl = write_cnf(path, Q.n, parts, nvars)
     rec.update({'cnf_sha256': sha, 'clauses': ncl, 'vars': nvars, 'edges': int(len(parts[1]))})
-    heavy = (Q.n > 150000 or budget > 120) if heavy is None else heavy
+    heavy = (Q.n > 150000) if heavy is None else heavy          # by expected cost (seconds below this), never by the cap
     t0 = time.time()
     ru0 = os.times()
     with HeavyLock(heavy):
@@ -768,6 +768,592 @@ def fs70_degrey_colouring(lat, N):
     return Q, col
 
 
+# ================================================================ finite balls and the forcing ask
+
+def word_ball(U, k):
+    """every sum of at most k unit vectors, in lattice coordinates"""
+    seen = {tuple([0] * len(U[0]))}
+    front = list(seen)
+    for _ in range(k):
+        nxt = []
+        for p in front:
+            for u in U:
+                q = tuple(a + b for a, b in zip(p, u))
+                if q not in seen:
+                    seen.add(q)
+                    nxt.append(q)
+        front = nxt
+    return sorted(seen)
+
+
+def minkowski_ball(lat, R, cap=3_000_000):
+    """every lattice point z with |sigma(z)| <= R under every embedding sigma of F (acting on x and y): enumerated from the trace-form
+    ellipsoid Tr(x^2 + y^2) <= n R^2 by PARI's qfminim, then filtered exactly enough (floats decide membership in a ball, which is any
+    legitimate finite graph; edges are exact by construction)"""
+    G = lat.gram_int()
+    n, M = lat.F.n, lat.M
+    bound = int(math.floor(n * R * R * M * M)) + 1
+    mat = '[' + ';'.join(','.join(str(x) for x in row) for row in G) + ']'
+    script = f'v = qfminim({mat}, {bound}, {cap}, 0); print(#v[3]); for(k=1, #v[3], print(Vec(v[3][,k])))'
+    pr = subprocess.run(['gp', '-q', '-s', '4000000000'], input=script + '\n', capture_output=True, text=True)
+    lines = pr.stdout.strip().split('\n')
+    cnt = int(lines[0])
+    if cnt >= cap:
+        raise RuntimeError(f'minkowski_ball: the ellipsoid holds more than {cap} vectors at R = {R}')
+    Hf = np.array(lat.H, dtype=float) / M
+    pts = [tuple([0] * lat.rank)]
+    rows = [[int(x) for x in line.strip('[] \n').split(',')] for line in lines[1:1 + cnt]]
+    if rows:
+        C = np.array(rows, dtype=np.int64)
+        P = C.astype(float) @ Hf                      # (m x 2n) coordinates over the field basis
+        ok = np.ones(len(C), dtype=bool)
+        for sg in lat.F.signs:
+            ev = np.array([lat.F.emb(tuple(1 if a == b else 0 for b in range(n)), sg) for a in range(n)])
+            x, y = P[:, :n] @ ev, P[:, n:] @ ev
+            ok &= x * x + y * y <= R * R + 1e-9
+        for c in C[ok]:
+            pts.append(tuple(int(t) for t in c))
+            pts.append(tuple(-int(t) for t in c))
+    return sorted(set(pts))
+
+
+def ball_graph(points, U):
+    idx = {p: i for i, p in enumerate(points)}
+    E = []
+    for i, p in enumerate(points):
+        for u in U:
+            j = idx.get(tuple(a + b for a, b in zip(p, u)))
+            if j is not None and i < j:
+                E.append((i, j))
+    return idx, np.array(sorted(set(E)), dtype=np.int64).reshape(-1, 2)
+
+
+def core(n, E, m, keep=()):
+    """the m-core, never deleting the vertices in keep; returns the surviving vertex list"""
+    deg = np.bincount(E.ravel(), minlength=n).astype(np.int64)
+    alive = np.ones(n, dtype=bool)
+    adj = [[] for _ in range(n)]
+    for i, j in E.tolist():
+        adj[i].append(j)
+        adj[j].append(i)
+    stack = [v for v in range(n) if deg[v] < m and v not in keep]
+    keep = set(keep)
+    while stack:
+        v = stack.pop()
+        if not alive[v]:
+            continue
+        alive[v] = False
+        for w in adj[v]:
+            if alive[w]:
+                deg[w] -= 1
+                if deg[w] < m and w not in keep:
+                    stack.append(w)
+    return np.nonzero(alive)[0]
+
+
+def graph_cnf(n, E, pins, forbid=(), k=4):
+    """a k-colouring CNF of a finite graph: pins, forbidden (vertex, colour) literals, value precedence among unpinned colours"""
+    x = lambda v, c: k * v + c + 1
+    cls = [[x(v, c) for c in range(k)] for v in range(n)]
+    extra = [[x(v, c)] for v, c in pins] + [[-x(v, c)] for v, c in forbid]
+    free = [c for c in range(k) if c not in {c_ for _, c_ in pins}]
+    nvars = k * n
+    for f1, f2 in zip(free, free[1:]):
+        base = nvars
+        nvars += n + 1
+        s = lambda v: base + v + 1
+        extra.append([-s(0)])
+        for v in range(n):
+            extra.append([-x(v, f2), s(v)])
+            extra.append([-s(v + 1), s(v), x(v, f1)])
+    return (cls, E, extra), nvars
+
+
+def run_cnf(parts, n, nvars, budget, solver='kissat', heavy=False, tag='g', proof=None):
+    os.makedirs(SCRATCH, exist_ok=True)
+    path = os.path.join(SCRATCH, f'{tag}-{os.getpid()}-{n}.cnf')
+    sha, ncl = write_cnf(path, n, parts, nvars)
+    rec = {'vertices': n, 'edges': int(len(parts[1])), 'clauses': ncl, 'cnf_sha256': sha, 'solver': solver, 'budget_s': budget,
+           'machine': MACHINE, 'lock': bool(heavy)}
+    with HeavyLock(heavy):
+        t0, ru0 = time.time(), os.times()
+        try:
+            cmd = [solver, '-q', path] if proof is None else [solver, '-q', '--lrat=true', '--binary=false', path, proof]
+            pr = subprocess.run(cmd, capture_output=True, text=True, timeout=budget)
+            out = pr.stdout
+            v = 'UNKNOWN'
+            for line in out.splitlines():
+                if line.startswith('s '):
+                    v = 'UNSAT' if 'UNSATISFIABLE' in line else 'SAT'
+        except subprocess.TimeoutExpired:
+            out, v = '', 'UNKNOWN'
+        ru1 = os.times()
+    rec.update({'verdict': v, 'wall_s': round(time.time() - t0, 2),
+                'cpu_s': round((ru1.children_user - ru0.children_user) + (ru1.children_system - ru0.children_system), 2)})
+    if v == 'UNKNOWN':
+        rec['unknown_type'] = f'budget: {budget} s wall, {solver}'
+    os.remove(path)
+    col = None
+    if v == 'SAT':
+        lits = []
+        for line in out.splitlines():
+            if line.startswith('v '):
+                lits += [int(t) for t in line[2:].split()]
+        pos = np.zeros(nvars + 1, dtype=bool)
+        L = np.array(lits, dtype=np.int64)
+        pos[L[L > 0]] = True
+        X = pos[1:4 * n + 1].reshape(n, 4)
+        col = np.argmax(X, axis=1).astype(np.int8)
+        E = parts[1]
+        assert X.any(axis=1).all() and not np.any(col[E[:, 0]] == col[E[:, 1]]), 'improper model'
+    return rec, col
+
+
+def forcing_ask(points, U, delta, budget=1500, solver='kissat', heavy=None, critical=True):
+    """on the finite graph over `points`: (1) the plain control (must be SAT); (2) the forcing ask c(0) = 0, c(delta) = 1 (a common
+    neighbour pinned 2 when one exists): UNSAT is a refusal, the pair forced in this graph; (3) for a refusal, the critical-set check
+    (G39, M54-T1): the critical set lies in N(0) n N(delta), so it is empty when that is empty; otherwise each common neighbour w is
+    tested by asking for a 3-colouring of G - w."""
+    idx, E = ball_graph(points, U)
+    n = len(points)
+    o, dl = idx[tuple([0] * len(U[0]))], idx.get(tuple(delta))
+    out = {'points': n, 'edges': int(len(E)), 'avg_degree': round(2 * len(E) / n, 2)}
+    if dl is None:
+        out['verdict'] = 'target outside the graph'
+        return out
+    heavy = True if heavy is None else heavy       # a ball ask is priced over ~2 minutes: always under the shared lock (the brief)
+    adj0 = set(E[E[:, 0] == o, 1].tolist()) | set(E[E[:, 1] == o, 0].tolist())
+    adjd = set(E[E[:, 0] == dl, 1].tolist()) | set(E[E[:, 1] == dl, 0].tolist())
+    common = sorted(adj0 & adjd)
+    nb = min(adj0)
+    adjnb = set(E[E[:, 0] == nb, 1].tolist()) | set(E[E[:, 1] == nb, 0].tolist())
+    tri = next((w for w in sorted(adj0 & adjnb)), None)
+    ctl_pins = [(o, 0), (nb, 1)] + ([(tri, 2)] if tri is not None else [])
+    parts, nv = graph_cnf(n, E, ctl_pins)
+    out['control'], col = run_cnf(parts, n, nv, budget, solver, heavy, 'ctl')
+    pins = [(o, 0), (dl, 1)] + ([(common[0], 2)] if common else [])
+    parts, nv = graph_cnf(n, E, pins)
+    out['forces'], _ = run_cnf(parts, n, nv, budget, solver, heavy, 'frc')
+    out['common_neighbours'] = len(common)
+    if out['forces']['verdict'] == 'UNSAT' and critical:
+        crit = []
+        for w in common:
+            keep = [v for v in range(n) if v != w]
+            remap = {v: i for i, v in enumerate(keep)}
+            E2 = np.array([(remap[a], remap[b]) for a, b in E.tolist() if a != w and b != w], dtype=np.int64)
+            parts3, nv3 = graph_cnf(n - 1, E2, [(remap[o], 0)], forbid=[(v, 3) for v in range(n - 1)])
+            r3, _ = run_cnf(parts3, n - 1, nv3, budget, solver, heavy, 'crit')
+            crit.append({'vertex': w, 'three_colourable_after_deletion': r3['verdict']})
+        out['critical_set'] = ('empty: N(0) n N(delta) is empty (G39)' if not common else
+                               'empty' if all(c['three_colourable_after_deletion'] == 'UNSAT' for c in crit) else 'NONEMPTY')
+        out['critical_checks'] = crit
+    out['verdict'] = ('refused (forced in this graph)' if out['forces']['verdict'] == 'UNSAT' and out['control']['verdict'] == 'SAT'
+                      else 'VACUOUS: the control is not SAT' if out['forces']['verdict'] == 'UNSAT'
+                      else 'separated in this graph' if out['forces']['verdict'] == 'SAT' else 'UNKNOWN')
+    return out
+
+
+# ================================================================ the census records
+
+CENSUS = os.path.join(ROOT, 'data', 'fs73', 'census')
+COLDIR = os.path.join(CENSUS, 'colourings')
+
+
+class Rows:
+    """an append-only jsonl of verdict rows, fsynced per row; a key present is never re-asked (the resume rule)"""
+    def __init__(self, path):
+        self.path = path
+        self.rows = {}
+        if os.path.exists(path):
+            for line in open(path):
+                if line.strip():
+                    d = json.loads(line)
+                    self.rows[d['key']] = d
+
+    def get(self, key):
+        return self.rows.get(key)
+
+    def put(self, d):
+        assert 'key' in d
+        with open(self.path, 'a') as f:
+            f.write(json.dumps(d, sort_keys=True) + '\n')
+            f.flush()
+            os.fsync(f.fileno())
+        self.rows[d['key']] = d
+        return d
+
+
+def save_colouring(tag, lat_name, W, col):
+    import gzip
+    os.makedirs(COLDIR, exist_ok=True)
+    s_ = ''.join(map(str, col.tolist()))
+    sha = hashlib.sha256(s_.encode()).hexdigest()[:16]
+    path = os.path.join(COLDIR, f'{tag}-{sha}.json.gz')
+    if not os.path.exists(path):
+        with gzip.open(path, 'wt') as f:
+            json.dump({'lattice': lat_name, 'W': [list(w) for w in W], 'classes': len(col), 'colouring': s_,
+                       'index': 'big-endian mixed radix of (x C) mod d, C and d the Smith form of W (tools/fs73_screen.py Quot)'}, f)
+    return os.path.relpath(path, ROOT), sha
+
+
+def load_colouring(rel):
+    import gzip
+    d = json.load(gzip.open(os.path.join(ROOT, rel), 'rt'))
+    return d['W'], np.array([int(c) for c in d['colouring']], dtype=np.int8)
+
+
+def lat_rows(H):
+    return [list(map(int, h)) for h in H]
+
+
+def analyse(U, W, col, r, rows, tag):
+    """Per and KPer of one colouring, cached in the rows by the colouring's sha"""
+    s_ = ''.join(map(str, col.tolist()))
+    sha = hashlib.sha256(s_.encode()).hexdigest()[:16]
+    key = f'analyse:{sha}'
+    got = rows.get(key)
+    if got:
+        return got
+    Q = Quot(W, r)
+    pc = PColour(U, Q, col, tag)
+    with HeavyLock(Q.n > 150000):
+        t0 = time.time()
+        Wp, nper = pc.per()
+        pd = pc.descend(Wp) if len(Wp) and hnf(Wp, r) != hnf(W, r) else pc
+        KP, st = pd.kper()
+    return rows.put({'key': key, 'tag': tag, 'colouring_sha': sha, 'Per': lat_rows(Wp), 'Per_desc': describe(Wp, r)['Lambda_mod'],
+                     'KPer': lat_rows(KP), 'KPer_desc': describe(KP, r)['Lambda_mod'], 'KPer_rank': len(KP),
+                     'component_stats': st, 'seconds': round(time.time() - t0, 2), 'machine': MACHINE})
+
+
+def ask(rows, key, Q, U, aim, target, budget, lat_name, tag):
+    """one finder ask, recorded; a key present is reused (resume); SAT colourings are saved and re-verified on load"""
+    got = rows.get(key)
+    if got:
+        col = load_colouring(got['colouring'])[1] if got.get('colouring') else None
+        if col is not None:
+            PColour(U, Q, col, key)                       # re-verify properness on load
+        return got, col
+    rec, col = solve(Q, U, aim, target, budget=budget)
+    rec.update({'key': key, 'W': lat_rows(Q.W), 'target': list(map(int, target)) if target is not None else None})
+    if col is not None:
+        rec['colouring'], rec['colouring_sha'] = save_colouring(tag, lat_name, Q.W, col)
+    return rows.put(rec), col
+
+
+def p_N(rows, lat_name, U, r, N, seeds=(), budget=1500, run='seeded', W=None):
+    """the H1 group at period W (default N Lambda), exactly: guess = common periods of the colourings found; each guess generator not
+    yet confirmed is asked 'sep'; SAT shrinks the guess (asserted), UNSAT confirms.  Returns (P_N rows, colourings, status)"""
+    W = NW(N, r) if W is None else W
+    Q = Quot(W, r)
+    cols = list(seeds)
+    if not cols and run != 'cold':
+        rec, col = ask(rows, f'{run}:N{N}:plain', Q, U, 'plain', None, budget, lat_name, f'{lat_name}-N{N}')
+        if col is None:
+            return None, [], rec['verdict']
+        cols.append(col)
+    # the cold control starts from NO colouring: the guess is all of Lambda, and every generator is asked
+    G = hnf([tuple(1 if i == j else 0 for j in range(r)) for i in range(r)], r) if run == 'cold' else None
+    for c in cols:
+        Wc, _ = PColour(U, Q, c).per()
+        G = Wc if G is None else intersect(G, Wc, r)
+    conf = hnf(W, r)
+    status = 'exact'
+    while True:
+        gens = [g for g in G if not member(conf, g)]
+        if not gens:
+            break
+        g = gens[0]
+        rec, col = ask(rows, f'{run}:N{N}:sep:{",".join(map(str, g))}', Q, U, 'sep', g, budget, lat_name, f'{lat_name}-N{N}')
+        if rec['verdict'] == 'SAT':
+            if planted('loop_stale'):
+                col = cols[-1]                    # PLANT: the previous colouring re-used instead of the separating one
+            cols.append(col)
+            Wc, _ = PColour(U, Q, col).per()
+            G = intersect(G, Wc, r)
+            assert not member(G, g), 'a separating colouring failed to shrink the guess'
+        elif rec['verdict'] == 'UNSAT':
+            conf = hnf(list(conf) + [tuple(g)], r)
+        else:
+            status = f'upper bound: UNKNOWN at generator {g}'
+            break
+    return G, cols, status
+
+
+def forced_span(lat, vectors):
+    """F_known: the span of the orbits of the certified forced vectors under the named point group"""
+    Gp, _ = FL.point_group(lat)
+    orbit = set()
+    for v in vectors:
+        for A in Gp:
+            orbit.add(tuple(sum(v[i] * A[i][j] for i in range(len(v))) for j in range(len(v))))
+    return hnf(sorted(orbit), lat.rank), len(Gp), len(orbit)
+
+
+def emb_length(lat, c):
+    """the largest modulus of the point over the embeddings of F (the Minkowski radius a ball needs to hold it)"""
+    v = lat.point(c)
+    n = lat.F.n
+    best = 0.0
+    for sg in lat.F.signs:
+        x = lat.F.emb(v[:n], sg) / lat.M
+        y = lat.F.emb(v[n:], sg) / lat.M
+        best = max(best, math.hypot(x, y))
+    return best
+
+
+def cmd_census_K(resume):
+    lat, r, T = degrey_setup()
+    U = lat.U
+    os.makedirs(CENSUS, exist_ok=True)
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))
+    print(f"de Grey's K-lattice: rank {r}, |U| {len(U)}, M {lat.M}; targets (lattice coordinates) {T}", flush=True)
+    allcols = []
+    PN = {}
+    for N in (2, 4, 6, 8, 10, 12):
+        Qn, fs70col = fs70_degrey_colouring(lat, N)
+        G, cols, status = p_N(rows, 'degrey', U, r, N, seeds=[fs70col])
+        PN[N] = (G, status)
+        allcols += [(N, c) for c in cols]
+        print(f'N = {N:2d}: P_N {status}; {len(cols)} colourings; Lambda/P_N = {describe(G, r)["Lambda_mod"]}; '
+              f'8/3 in P_N: {member(G, T["8/3"])}, 2: {member(G, T["2"])}, 4: {member(G, T["4"])}', flush=True)
+    # control (c): the loop re-run cold (no colouring given, guess = Lambda) reproduces P_N
+    cold = {}
+    for N in (2, 4, 6, 8, 10, 12):
+        Gc, colsc, stc = p_N(rows, 'degrey', U, r, N, run='cold')
+        cold[N] = hnf(Gc, r) == hnf(PN[N][0], r)
+        allcols += [(N, c) for c in colsc]
+        print(f'  cold re-run at N = {N}: {"reproduces" if cold[N] else "DIFFERS FROM"} P_N ({len(colsc)} colourings, {stc})', flush=True)
+    # KPer of every colouring found
+    P_found = None
+    ana = []
+    seen = set()
+    for N, c in allcols:
+        sha = hashlib.sha256(''.join(map(str, c.tolist())).encode()).hexdigest()[:16]
+        if sha in seen:
+            continue
+        seen.add(sha)
+        a = analyse(U, NW(N, r), c, r, rows, f'degrey-N{N}')
+        ana.append((N, a))
+        P_found = a['KPer'] if P_found is None else intersect(P_found, a['KPer'], r)
+    for N in PN:
+        P_found = intersect(P_found, PN[N][0], r)
+    Fk, gord, osz = forced_span(lat, [T['8/3']])
+    sand = {'F_known': describe(Fk, r), 'P_found': describe(P_found, r), 'P_found_mod_F_known': quotient_structure(P_found, Fk, r),
+            'point_group_order': gord, 'orbit_of_8over3': osz, 'colourings': len(ana),
+            'P_N': {N: {'status': PN[N][1], **describe(PN[N][0], r)} for N in PN}, 'cold_rerun_reproduces': cold}
+    assert all(member(P_found, f) for f in Fk), 'F_known is not inside P_found'
+    neg = {}
+    for t in ('2', '4'):
+        sep = next(((N, a['tag'], a['colouring_sha'], 'Per' if not member(a['Per'], T[t]) else 'KPer') for N, a in ana
+                    if not member(a['KPer'], T[t])), None)
+        neg[t] = {'in_P_found': member(P_found, T[t]), 'separator': sep}
+    sand['negative_controls'] = neg
+    sand['kper_rank_min'] = min(a['KPer_rank'] for _, a in ana)
+    rows.put({'key': f'sandwich:{len(rows.rows)}', **sand})
+    json.dump(sand, open(os.path.join(CENSUS, 'K-sandwich.json'), 'w'), indent=1)
+    print(json.dumps({k: sand[k] for k in ('F_known', 'P_found', 'P_found_mod_F_known', 'negative_controls')}, indent=1))
+    return 0
+
+
+PERIODS_K = (16, 14, 15, 20, 21, 22, 24, 25, 26, 28, 32, 33, 35)     # 16 first (the plan's 2-power period), then by class count
+
+
+def census_state(lat, r, T, rows):
+    """P_found and F_known recomputed from the rows (never stored alone): the intersection of KPer over every analysed colouring"""
+    P = None
+    n = 0
+    for d in rows.rows.values():
+        if d['key'].startswith('analyse:'):
+            P = d['KPer'] if P is None else intersect(P, d['KPer'], r)
+            n += 1
+    Fk, _, _ = forced_span(lat, [T['8/3']])
+    return (hnf(P, r) if P else None), Fk, n
+
+
+def cmd_periods_K(resume, budget_core_s=8 * 3600, only=None, stop_rule=True):
+    lat, r, T = degrey_setup()
+    U = lat.U
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))            # the colourings and analyses of P1d, shared
+    prow = Rows(os.path.join(CENSUS, 'K-periods.jsonl'))          # one stabilisation row per period
+    P0, Fk, na = census_state(lat, r, T, rows)
+    print(f'start: P_found from {na} analysed colourings: Lambda/P_found = {describe(P0, r)["Lambda_mod"]}; '
+          f'P_found/F_known = {quotient_structure(P0, Fk, r)}', flush=True)
+    spent = sum(d.get('cpu_s', 0) + d.get('analyse_s', 0) for d in prow.rows.values())
+    prev, unchanged = hnf(P0, r), 0
+    for N in (only or PERIODS_K):
+        key = f'period:N{N}'
+        if prow.get(key):
+            d = prow.get(key)
+            P_now = hnf(d['P_found']['generators'], r)
+            if d['colourable'] == 'SAT':
+                unchanged = unchanged + 1 if P_now == prev else 0
+            prev = P_now
+            print(f'N = {N}: (resumed) {d["colourable"]}; Lambda/P_found = {d["P_found"]["Lambda_mod"]}', flush=True)
+            continue
+        if spent > budget_core_s:
+            print(f'budget spent ({spent:.0f} s of {budget_core_s} s): stopping before N = {N}', flush=True)
+            break
+        Q = Quot(NW(N, r), r)
+        if not Q.admissible(U):
+            prow.put({'key': key, 'N': N, 'colourable': 'inadmissible', 'note': 'a unit vector lies in N Lambda'})
+            print(f'N = {N}: inadmissible', flush=True)
+            continue
+        t0 = time.time()
+        G, cols, status = p_N(rows, 'degrey', U, r, N, budget=1500)
+        cpu = sum(rows.get(k_).get('cpu_s', 0) for k_ in rows.rows if k_.startswith(f'seeded:N{N}:'))
+        if G is None:
+            spent += cpu
+            prow.put({'key': key, 'N': N, 'colourable': status, 'cpu_s': cpu, 'note': 'an UNSAT period counts as no step'})
+            print(f'N = {N}: plain ask {status} ({cpu:.1f} s CPU) -- no step', flush=True)
+            continue
+        ta = time.time()
+        kp_new = []
+        for c in cols:
+            a = analyse(U, NW(N, r), c, r, rows, f'degrey-N{N}')
+            kp_new.append({'colouring_sha': a['colouring_sha'], 'Per': a['Per_desc'], 'KPer': a['KPer_desc'], 'KPer_rank': a['KPer_rank']})
+        P_now, Fk, na = census_state(lat, r, T, rows)
+        P_now = hnf(intersect(P_now, G, r), r)
+        changed = P_now != prev
+        unchanged = 0 if changed else unchanged + 1
+        d = {'key': key, 'N': N, 'colourable': 'SAT', 'P_N_status': status, 'P_N': describe(G, r), 'colourings': len(cols),
+             'KPer_new': kp_new, 'P_found': describe(P_now, r), 'P_found_mod_F_known': quotient_structure(P_now, Fk, r),
+             'changed': changed, 'consecutive_colourable_unchanged': unchanged, 'cpu_s': cpu, 'analyse_s': round(time.time() - ta, 1),
+             'wall_s': round(time.time() - t0, 1), 'targets_in_P_found': {t: member(P_now, T[t]) for t in T},
+             'eight_ninths_in_P_found': member(P_now, FL.rational_point(lat, 8, 9)), 'machine': MACHINE}
+        prow.put(d)
+        spent += cpu + d['analyse_s']
+        print(f'N = {N}: P_N {status}, Lambda/P_N = {d["P_N"]["Lambda_mod"]}; {len(cols)} colourings; Lambda/P_found = '
+              f'{d["P_found"]["Lambda_mod"]} (rank {d["P_found"]["rank"]}); P_found/F_known = {d["P_found_mod_F_known"]}; '
+              f'changed {changed}; 8/9 in P_found {d["eight_ninths_in_P_found"]}; {cpu:.0f} s solver CPU', flush=True)
+        prev = P_now
+        if d['P_found']['rank'] == len(Fk):
+            print('OUTCOME (a): rank P_found fell to rank F_known', flush=True)
+            break
+        if unchanged >= 3 and stop_rule:
+            print('OUTCOME (b): P_found unchanged across three consecutive colourable periods, rank above F_known', flush=True)
+            break
+    return 0
+
+
+def parse_target(lat, t):
+    """'8/3' (a rational point) or 'c:a,b,c,d' (lattice coordinates)"""
+    if t.startswith('c:'):
+        return tuple(int(x) for x in t[2:].split(','))
+    num, den = (t.split('/') + ['1'])[:2]
+    return FL.rational_point(lat, int(num), int(den))
+
+
+def cmd_force_K(targets, radii, budget=1500):
+    """P1d step (4): forcing asks on Minkowski balls about the origin, the pair placed symmetrically (-h, h) when delta = 2h with h in
+    Lambda (translation invariance), else (0, delta); the graph is the ball's 4-core (a vertex of degree < 4 other than the pair can
+    always be coloured last, so deleting it changes no verdict); stop per target after 3 radii or 3 undecided asks"""
+    lat, r, T = degrey_setup()
+    U = lat.U
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))
+    for t in targets:
+        delta = parse_target(lat, t)
+        assert delta is not None, f'{t} is not in the lattice'
+        assert len(delta) == r and any(delta), f'{t}: not a nonzero lattice vector of rank {r} (targets are separated by ";")'
+        half = tuple(x // 2 for x in delta) if all(x % 2 == 0 for x in delta) else None
+        undecided = 0
+        for R in radii:
+            key = f'force:{",".join(map(str, delta))}:R{R}'
+            got = rows.get(key)
+            if got is None:
+                pts = minkowski_ball(lat, R)
+                idx, E = ball_graph(pts, U)
+                a, b = (tuple(-x for x in half), half) if half else (tuple([0] * r), delta)
+                if a not in idx or b not in idx:
+                    print(f'{t} R={R}: the pair is not in the ball', flush=True)
+                    continue
+                keep = core(len(pts), E, 4, keep=(idx[a], idx[b]))
+                sub = [pts[i] for i in keep]
+                shifted = [tuple(x - y for x, y in zip(p_, a)) for p_ in sub]        # the pair becomes (0, delta)
+                fa = forcing_ask(shifted, U, delta, budget=budget)
+                got = rows.put({'key': key, 'target': t, 'delta': list(delta), 'R': R, 'ball_points': len(pts),
+                                'core4_points': len(sub), **fa})
+            v = got['verdict']
+            print(f'{t} R={R}: ball {got.get("ball_points")} -> 4-core {got.get("core4_points")} points, degree {got.get("avg_degree")}; '
+                  f'control {got.get("control", {}).get("verdict")}; forces {got.get("forces", {}).get("verdict")} '
+                  f'({got.get("forces", {}).get("cpu_s")} s CPU); {v}; critical set {got.get("critical_set")}', flush=True)
+            if v.startswith('refused') or v.startswith('separated'):
+                break
+            undecided += 1
+            if undecided >= 3:
+                break
+    return 0
+
+
+def cmd_confirm_K(key, solver, budget):
+    """re-ask one recorded forcing refusal with another solver: the graph and CNF rebuilt from the recipe, the CNF's sha256 asserted
+    equal to the recorded one, the ask run under the lock"""
+    lat, r, T = degrey_setup()
+    U = lat.U
+    rows = Rows(os.path.join(CENSUS, 'K-rows.jsonl'))
+    d = rows.get(key)
+    assert d and d['forces']['verdict'] == 'UNSAT', f'{key}: no recorded refusal'
+    delta = tuple(d['delta'])
+    half = tuple(x // 2 for x in delta) if all(x % 2 == 0 for x in delta) else None
+    pts = minkowski_ball(lat, d['R'])
+    idx, E = ball_graph(pts, U)
+    a, b = (tuple(-x for x in half), half) if half else (tuple([0] * r), delta)
+    keep = core(len(pts), E, 4, keep=(idx[a], idx[b]))
+    shifted = [tuple(x - y for x, y in zip(pts[i], a)) for i in keep]
+    idx2, E2 = ball_graph(shifted, U)
+    n = len(shifted)
+    o, dl = idx2[tuple([0] * r)], idx2[delta]
+    parts, nv = graph_cnf(n, E2, [(o, 0), (dl, 1)])
+    exe = os.path.expanduser('~/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical') if solver == 'cadical' else solver
+    proof = None
+    if '--lrat' in sys.argv:
+        pdir = os.path.join(CENSUS, 'proofs')
+        os.makedirs(pdir, exist_ok=True)
+        proof = os.path.join(pdir, key.replace(':', '_').replace(',', '_') + '.lrat')
+    rec, _ = run_cnf(parts, n, nv, budget, exe, True, 'confirm', proof=proof)
+    if proof:
+        rec['lrat'] = os.path.relpath(proof, ROOT)
+        rec['lrat_bytes'] = os.path.getsize(proof) if os.path.exists(proof) else None
+    rec['solver'] = solver
+    same = rec['cnf_sha256'] == d['forces']['cnf_sha256']
+    out = rows.put({'key': f'confirm:{key}:{solver}', 'of': key, 'cnf_identical': same, **rec})
+    print(f'{key}: {solver} -> {rec["verdict"]} ({rec["cpu_s"]} s CPU); CNF identical to the recorded one: {same}', flush=True)
+    return 0 if (same and rec['verdict'] == 'UNSAT') else 1
+
+
+# ================================================================ P1c: the two-instrument cross-check
+
+def cmd_crosscheck():
+    import fs70_periodic_kempe as PK
+    lat, r, T = degrey_setup()
+    U = lat.U
+    cad = os.path.expanduser('~/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical')
+    rows = []
+    for N in (8, 10, 12):
+        Q = Quot(NW(N, r), r)
+        rec1, col1 = solve(Q, U, 'gap', budget=1500)
+        v2, secs2, model2, sha2, note2 = PK.find(U, N, r, 'gap', budget=1500, solver=cad)
+        row = {'N': N, 'classes': Q.n, 'instrument_1': {'encoding': 'fs73 (clique pins + full precedence)', 'solver': 'kissat', **rec1},
+               'instrument_1b': {'encoding': 'fs70_periodic_kempe.find (origin + least neighbour pins)', 'solver': 'cadical 2.1.2',
+                                 'verdict': v2, 'wall_s': round(secs2, 2), 'cnf_sha256': sha2, 'note': note2}}
+        print(f'N = {N:2d}: gap ask fs73/kissat {rec1["verdict"]} ({rec1["wall_s"]} s), fs70/cadical {v2} ({secs2:.2f} s)', flush=True)
+        rows.append(row)
+    pts = word_ball(U, 3)
+    fa = forcing_ask(pts, U, T['8/3'], budget=1500)
+    print(f"Harder's word ball (sums of <= 3 of the 54): {fa['points']} points, {fa['edges']} edges, degree {fa['avg_degree']}; "
+          f"control {fa['control']['verdict']} ({fa['control']['wall_s']} s); forces 8/3 {fa['forces']['verdict']} "
+          f"({fa['forces']['wall_s']} s wall, {fa['forces']['cpu_s']} s CPU); critical set {fa.get('critical_set')}", flush=True)
+    agree = all(r_['instrument_1']['verdict'] == 'UNSAT' and r_['instrument_1b']['verdict'] == 'UNSAT' for r_ in rows) and \
+        fa['forces']['verdict'] == 'UNSAT'
+    out = {'what': 'P1c: gap finder (two encodings, two solvers) against Harder\'s forcing refusal, de Grey\'s lattice',
+           'gap_rows': rows, 'harder': fa, 'agree': agree,
+           'reading': 'agree: no gapped colouring at N = 8, 10, 12 and the pair forced (the expected, uninformative outcome)'
+           if agree else 'DISAGREE: one instrument is defective; trace it'}
+    json.dump(out, open(os.path.join(ROOT, 'data', 'fs73', 'census', 'P1c-crosscheck.json'), 'w'), indent=1)
+    print('P-C1:', out['reading'])
+    return 0 if agree else 1
+
+
 # ================================================================ P1b: the self-test
 
 def degrey_setup():
@@ -908,6 +1494,20 @@ def main():
         return 0
     if argv[0] == 'selftest':
         return selftest('--plants' in argv)
+    if argv[0] == 'census' and argv[1] == 'K':
+        return cmd_census_K('--resume' in argv)
+    if argv[0] == 'periods' and argv[1] == 'K':
+        only = [int(x) for x in argv[argv.index('--only') + 1].split(',')] if '--only' in argv else None
+        return cmd_periods_K('--resume' in argv, only=only, stop_rule='--past-plateau' not in argv)
+    if argv[0] == 'force' and argv[1] == 'K':
+        tg = argv[argv.index('--targets') + 1].split(';') if '--targets' in argv else ['8/9']
+        rd = [float(x) for x in argv[argv.index('--radii') + 1].split(',')] if '--radii' in argv else [1.0, 1.25, 1.5]
+        return cmd_force_K(tg, rd)
+    if argv[0] == 'confirm' and argv[1] == 'K':
+        return cmd_confirm_K(argv[argv.index('--key') + 1], argv[argv.index('--solver') + 1],
+                             int(argv[argv.index('--budget') + 1]) if '--budget' in argv else 3000)
+    if argv[0] == 'crosscheck':
+        return cmd_crosscheck()
     if argv[0] == 'spectrum':
         cmd_spectrum(argv[1], int(argv[argv.index('--nmax') + 1]) if '--nmax' in argv else 12)
         return 0
