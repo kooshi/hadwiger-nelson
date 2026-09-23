@@ -39,6 +39,11 @@ Commands
   python3 tools/fs73_table.py table FIELD [--resume]      # the computed columns and the verdict, rows to data/fs73/table/rows.jsonl
   python3 tools/fs73_table.py selftest [--plants]         # the code controls (k-generic finder and KPer against fs73_screen at k = 4)
 FIELD: K, Q35, Q3_23, Q3_47, Q11, Q167, PILOT.  --resume is the default behaviour: a row key present is never re-asked.
+
+OPERATIONAL NOTES (FS-73's close, 2026-09-23).  The quotient asks take the machine's heavy lock THEMSELVES (fs73_screen's Lock
+on fs73_screen.LOCK), so never wrap this tool in `flock` -- the outer lock deadlocks it (implementer C lost ~2 minutes to exactly
+that).  SCRATCH (where the CNFs go) and fs73_screen.LOCK are FS-73's session scratchpad under /tmp: a later session must repoint
+both before running anything.  Five rows of the rendered table are stale; the corrections are data/fs73/table/CORRECTIONS.md.
 """
 import gzip
 import hashlib

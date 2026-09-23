@@ -61,3 +61,5 @@ place?* — which is the local–global conjecture's shape (G48) and FS-66's and
   not measured, and A.7's missing rule has its first half.
 * **Informative failure:** a tight `G` and a non-3-colourable `H` with a 3-colouring of `G × H` that is not pulled back. FS-58's
   D3.4 reading and G61 (2) would then be measurements of two planes and nothing more, and would be reworded.
+
+**Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — on a lattice graph the three-colourings are governed by `Θ₃`, and at ℚ(√11)'s `Λ₁₀` "every colouring is affine" is now a theorem (16 isolated points of order 3; `plans/FS73-derivation.md` T25) — one of the two measured facts under G61 (2) that this stub was to justify, proved by a different route (the character torus, not the product). **A caution from FS-73's plan stage** (Poros, G59): a finite-`U` quotient `Cay(Λ/NΛ, U mod N)` is a *diagonal subgraph* of the product of its residue targets, not the product, so FS-58's tensor identification does not transfer to lattice quotients; this stub's question stays about the true categorical product.

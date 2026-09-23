@@ -51,3 +51,5 @@ decorrelated recheck (`data/fs61/owner/recheck-all.out`, a sha256 per file).
    holds (`Instances/SqrtEleven.lean`). They are different graphs; the direct one's provenance is a single ball and it may be the
    easier object for a generic certificate type.
 
+
+**Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — every witness here is a *three-colour* refusal on a lattice, and FS-73 showed such a refusal is certified by an empty rotation set `Θ₃`: ℚ(√47)'s shape in 2,997 nodes (653 KB) against a ball's LRAT of tens of MB (T26), ℚ(√11)'s `Ld65c8ee8` in 20,843 nodes (T43), and **ℚ(√167) joins the input set** — `χ(ℚ(√167)²) ≥ 4` by `L21cc6506`'s empty `Θ₃` (T39; row 79), with a 36-vector minimal obstruction and a half-page proof (T41). The kernel route is FS-75 (`plans/STUB-three-colour-criterion-kernel.md`): one checker and one soundness theorem for every field, in place of one LRAT per field. Price the `Θ` route on ℚ(√23) against the `UDCert` route before choosing the shape.

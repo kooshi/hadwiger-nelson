@@ -1094,7 +1094,11 @@ quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
   `[BaakeGrimm2004]`'s Bravais colourings are similarity submodules, and ours is neither map; the twisted-bilayer-graphene
   literature's commensurate family is the **hexagonal** one, `cos θ = (m²+n²+4mn)/(2(m²+n²+mn))`, a different one-parameter
   shape that does not contain ours; and **no source joins coincidence-site theory to unit-distance colouring.** The full
-  gate is FS-63. *Do: name every bilayer by its `Σ = n` and decide commensurate or not by whether `√(4n−1)` lies in the
+  gate is FS-63. **A lattice can be a multilayer, and then it decides layer by layer** (FS-73, missed and then found by hand):
+  ℚ(√167)'s `L21cc6506` is `U = {1, v, v̄, z, z̄}·U_R`, the rational pattern in five rotations, and `v = (83 + i√167)/84` is the
+  `Σ = 42` rotation (`cos θ = 83/84`, radicand 167) — so `Θ₃` is the set of `θ` whose every layer pulls back into the rational
+  pattern's rotation set, the product route that proved χ(ℚ(√167)²) ≥ 4 (row 79). *Do: name every bilayer by its `Σ = n` —
+  and factor a lattice's unit vectors as rotations times a base pattern before any tree — and decide commensurate or not by whether `√(4n−1)` lies in the
   field: commensurate is periodic, so ask a finite quotient's colouring before any solver — one proper colouring of the
   quotient colours every arena on that module at once; incommensurate names the new field, which the wall screens. Killing
   test: a commensurate twist whose arena's chromatic number exceeds its base field's local bound, which would refute the

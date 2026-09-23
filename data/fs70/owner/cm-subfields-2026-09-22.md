@@ -13,7 +13,7 @@ element a `p`-unit (`v(ψ) + v(ψ̄) = 0` with `v(ψ̄) = v(ψ)`); a split pair 
 |---|---|---|---|---|---|---|---|---|
 | `ℚ(√3, i)` | `ℚ(√3)` | inert (`i ∉ ℚ₂(√3)`; `ℚ₂(√3,i) ∋ √−3` unramified) | inert | 12 | 0 | 0 | 0 | all 2-units: dead by the residue map |
 | **`ℚ(√3, √−5)`** | `ℚ(√3)` | **split** (`−15 ≡ 1 (mod 8)`, so `√−5 = √−15/√3 ∈ ℚ₂(√3)`) | **split** (`−5 ≡ 1 (mod 3)`) | 46 | 40 | 36 | 32 | **the one: wall broken, gate passed, rank 4** |
-| `ℚ(√5, i)` | `ℚ(√5)` | ramified | inert then ramified: one prime | 12 | 0 | 8 | 0 | 2-units: dead |
+| `ℚ(√5, i)` | `ℚ(√5)` | ramified | split (3 is inert in `ℚ(√5)`, and −1 is a square in `𝔽₉`) — *corrected at FS-73's close from "inert then ramified: one prime"; FS-73 phase P2 found it by PARI, and the column's count of 8 poles is the split's* | 12 | 0 | 8 | 0 | 2-units: dead |
 | `ℚ(√5, √−3)` | `ℚ(√5)` | split (`ℚ₂(√5) = ℚ₂(√−3)`) | one prime (3 inert in `ℚ(√5)`, then ramified) | 22 | 16 | 0 | 0 | 3-integral: dead by the 3-adic gate |
 | `ℚ(√15, i)` | `ℚ(√15)` | split (`−15 ≡ 1 (mod 8)`) | one prime (3 ramified, then `𝔽₃ → 𝔽₉` inert) | 20 | 16 | 0 | 0 | 3-integral: dead by the 3-adic gate |
 | `E₀ = ℚ(√15, √−3)` | `ℚ(√15)` | inert (phase 1c) | split | 18 | 0 | 12 | 0 | 2-units: dead (phase 1c's theorem) |

@@ -1,5 +1,7 @@
 # FS-73 — the rigidity dichotomy: when does a lattice force a pair? (subplan)
 
+**Closed 2026-09-23** (rows 78–79 in `LEDGER.md`; theorems `plans/FS73-derivation.md`; G71). **Read §R-close at the end first:** the §G re-read, the §PA sweep, the predictions scored once, the retraction tally, the honesty record and the errata E1–E13 to this plan. The body below is the plan as accepted and run; statements it superseded are marked "[superseded: E#]", not rewritten.
+
 *Planner: de Bruijn (Opus 5.5), 2026-09-23, from `plans/STUB-rigidity-dichotomy.md`, under WORKFLOW 2.0 steps 3–5. Product
 owner: the coordinating session (review by artifact). Advisor for this stage: Poros (agent `a20773e5a80987272`, its own
 record `plans/POROS-2026-09-23-fs73-plan.md`). This file has one writer (the planner of the stage in hand). The modeling
@@ -123,7 +125,7 @@ F_known  ⊆  F  ⊆  P  ⊆  P_found
      (`data/fs70/quotient/degrey-K-periodic-kempe.json`).
    - So at K, `P_found` has finite index, and with `F_known = (8/3)ℤ[ζ₆]` of rank 2 (P-C4), `P_found / F_known ≅ ℤ² × finite`.
    - On L3 it fails: the `b = 3` component has `V` of deficient rank (`data/fs70/records/phase-1e.md` §7, P2).
-5. **K itself may be the instance under test.** Suppose `P_found` stabilises at finite index as periods are added, while `F`
+5. **K itself may be the instance under test.** [superseded: E2 — `F = P = 8Λ`] Suppose `P_found` stabilises at finite index as periods are added, while `F`
    stays rank 2. Then K is a *counterexample candidate* (P1d′, P-C4, P-C5). It stays a candidate, because a finite search
    never proves that `P` has finite index.
 6. **The census can confirm C3 at a lattice (consequence 1), but it never refutes C3.** A refutation needs `δ ∈ P`
@@ -1066,7 +1068,7 @@ every periodic proper 4-colouring has `c(0) = c(δ)`. **Is `(0, δ)` forced**, t
     holds exactly when `F` does, that is, when every colouring is periodic.
   - Speak in vectors (cosets), never distances: "8/√3" on de Grey's lattice is the vector `(8/3)(1+ζ₆)`, already forced by
     transport.
-- **K itself may be the instance under test.** The census reports four nested subgroups, `F_known ⊆ F ⊆ P ⊆ P_found`, at
+- **K itself may be the instance under test.** [superseded: E2] The census reports four nested subgroups, `F_known ⊆ F ⊆ P ⊆ P_found`, at
   K. There `F_known = (8/3)ℤ[ζ₆]` has rank 2, and `P_found` has had finite index at every period searched.
   - If `P_found` stays of finite index as the periods grow, K is a counterexample candidate. Deciding it would take a
     non-periodic separating colouring of de Grey's lattice given by a rule.
@@ -1088,7 +1090,7 @@ every periodic proper 4-colouring has `c(0) = c(δ)`. **Is `(0, δ)` forced**, t
   - The split is a restatement, not a result. A sharpened statement of this kind is fallback (a).
 - **The 2-adic side is proved at the level of the local plane.** Every 4-colouring of the 2-adic tower of K(i) is pulled
   back from level 4 (FS38-D2-B, row 67). But row 67 registers **P-D3: no finite K²-graph forces 2-adic depth 4**, although
-  the tower forces it. The local plane's forcing does not inherit at depth 4, and it does at depth 6 (8/3). That depth
+  the tower forces it. The local plane's forcing does not inherit at depth 4, and it does at depth 6 (8/3) [superseded: E4 — depth 3 per prime]. That depth
   split is data your answer must explain.
 - **Local transfers can fail.** FS-66's Lemma W (`plans/FS66-tower-conjecture.md` §3.1): fibre shares of a level-two set
   leave level one's polytope, so no pointwise transfer works there. `U₃₂` (row 70) is completely rigid and forces nothing.
@@ -1385,3 +1387,165 @@ C3, with the uninformative outcome declared in P1f. Poros agreed to that form (m
 - **Reading:** slack as a lattice graph; tight at N = 2, 4, 6; the odd refusals at 5 and 11 are arithmetic or
   combinatorial, not spectral.
 - P-S1 lost. The N = 8 gap-freedom is a corollary of Harder + T6 (§X, message 6).
+
+---
+
+## §R-close. The close (WORKFLOW 9, 2026-09-23)
+
+*Written by the second close planner (de Bruijn, Opus 5.5) from the phase records, the first close planner's notes
+(`plans/FS73-close-inventory.md`) and the owner's running notes. Results: `LEDGER.md` rows 78–79; theorems:
+`plans/FS73-derivation.md` T1–T44 (§8 holds the conjecture sweep); understanding: G71 and the corrections listed in the
+inventory's §3. This section holds what the close must not lose and has no other home: the §G re-read, the §PA sweep, the
+forward propagation, the predictions scored once, the retraction tally, the errata to this plan, and the honesty record.*
+
+### §R-close.1 The §G re-read: which extractions paid, and which entries should have borne and did not
+
+**Paid** (the extraction in §G.5, then what it bought):
+
+| entry → phase | what it bought |
+|---|---|
+| G68 → P1b, P2 (the gap-aimed finder before any ball) | every rank-4 CM lattice in the table but de Grey's closed as loose by a gapped periodic colouring at `N ∈ {2, 3, 5, 7}`, in minutes (row 78); the fixed-prime gap lemma (T14) is G68 lifted from a lattice to a CM field; C's period-23 colouring of `L3e1c94c6` is gapped (T17) |
+| G21 → P1f (every row names its graph, periods and finder; "H1-found", never "H1") | the census design: the rich ℚ(√3,√5) lattices were recorded as "rigid-found, forcing undecided" and never promoted (T10, row 78) |
+| G27 → P1b (the Galois point group) | more than its instruction: the order-24 group `⟨ζ₆·⟩ ⋊ Gal(E/ℚ)` gave `v`'s orbit rank 4 and index 4,096 (T6), where P-C4 expected rank 2 from `ζ₆` alone |
+| R3 / T10 → P1b, P4 (report `W′`; membership) | T10.2's membership reading became F's fibre-collision sandwich `D_Q ⊆ V_Q` (T33) |
+| G65 → P1d (the ball ladder aimed at degree ≥ 14) | the census's certification: `v` refused on the degree-aimed ball (T6) |
+| G51 → P3 (the protocol, retractions counted) | a theorem at three colours, reached twice independently, with every retraction free (§R-close.6) |
+| FS58-T4 / R1 → P5 (compactness) | the kernel's `forces_iff_exists_finite` (row 78) |
+| G70 → P1 (as a test) | held on all 12 classes of de Grey's lattice (T8) |
+| G54 → P1c, P2 (the spectral column, target and quotient kept apart) | a classifier, once its two sign defects were fixed (phase-P2.md "Defects" 1–2; `data/fs73/table/CORRECTIONS.md`) |
+| G60, G66 → §0 (A4) | the frame `F ⊆ F_μ ⊆ F_meas ⊆ P = F_clopen` (T38) |
+
+**Missed** (each an instance of WORKFLOW 3.1's failure: an entry in context and not reasoned from):
+
+1. **G21, twice — a periodic search measures its period cap.** P2 read `L3e1c94c6` as having no periodic three-colouring
+   because its search stopped at `N = 20`; the least period is 23 (T17). P2b's `N ≤ 30` and circular `N ≤ 120` missed
+   `Ld14c588b`'s linear colouring of period index 1,080 (T27). Both were read as "none", not as "none at the periods
+   searched". Now written into G21.
+2. **G7 and G62 — `L21cc6506` is a five-layer twist, and its rotation is G7's `n = 42`.** Its unit vectors are
+   `U = {1, v, v̄, z, z̄}·U_R`, the 12 rational unit vectors rotated five ways (T40), and `v = (83 + i√167)/84` **is the type-M
+   rotation at `n = 42`**: `cos θ = 83/84 = (2n − 1)/(2n)`, `sin θ = √167/84 = √(4n − 1)/(2n)`, radicand `4·42 − 1 = 167` — by
+   G62 the `Σ = 42` coincidence rotation of the order of discriminant −167. (The second rotation
+   `z = (1 + i)(15 − i√167)/28` is not a type-M member: its cosine `(15 + √167)/28` is irrational; it carries the Gaussian
+   prime `1 + i`.) G62's *Do* — name every bilayer by its rotation and decide it layer by layer — predicts T40's product
+   route (`θ ∈ Θ₃` iff each layer's pull-back lies in the rational pattern's rotation set `Θ_R`). Nobody extracted it:
+   Coxeter's float tree stalled on the 1,764 lifts, E found the product structure by hand, and V2's relation tree succeeded
+   without it. The identification `v = ρ₄₂` is this close's (checked by the arithmetic above); it is written into G62.
+3. **G65 — the owner's "smallest refusing ball".** The owner asked for the smallest refusing ball, which G65 names as the
+   slow one; it walked a solver into the hardness band (5 UNKNOWNs, about 2 hours; §R-close.8, owner error 1).
+
+**The miss that the §PA sweep holds** (§R-close.2): the gate found the heights and did not carry them into §C.
+
+### §R-close.2 The §PA sweep: what the gate taught us about our own object
+
+- **The object is a hom-shift.** The colourings of `Cay(Λ, U)` with `k` colours are the graph-homomorphism shift
+  `X(Λ, k) = Hom(Cay(Λ, U), K_k)`, and the inheritance question is the density of its periodic points (`P = F_clopen`, G66's
+  odometer sentence). §PA.1 found Chandgotia's height functions for four-cycle-free targets and Moore–Newman's height for the
+  four-state triangular Potts antiferromagnet, **and §PA.3 did not extract "three colours have heights, four do not" into
+  §C.** Both competitors derived it for themselves (T21, T29). *Promoted:* **G71** (three colours are linear, four are not).
+- **"Rigid" is the discipline's *frozen*** (`[AlonEtAl2021]`); `[PeledSpinka2023]`'s *rigidity* is another notion. *Promoted:*
+  the qualifier in G69.
+- **C3-aper is `[AbrishamiEtAl2025]` Problem 4.6.** Answered at three colours for every Cayley graph of a finitely generated
+  torsion-free abelian group (row 79). *Promoted:* FS-76 at `k ≥ 4`.
+- **The one four-colour height**: Baxter's three-colouring model on hexagonal fabric (Coxeter §6, after Moore–Newman). *Promoted:*
+  FS-74's third lead.
+- **Colouring periodic graphs is undecidable** (`[Burr1984]`, several vertex orbits), and whether 4-colourability of
+  Cayley graphs of ℤ^r is decidable is unknown (T29). *Promoted:* FS-76.
+- Mohar–Salas 2009 (Kempe classes on tori): **declined** — P4 did not use Kempe classes on tori.
+
+### §R-close.3 The conjecture sweep
+
+`grep -n -i "conjecture\|not claimed"` over this plan: four hits, none new (G48, G58, the periodic tiling conjecture, FS-66's
+tower conjecture). The milestone's own readings — B's tight-prime reading, F's collision reading, Coxeter's chirality reading,
+Baxter's height, C3-aper at four colours, decidability — are filed with their fates in `plans/FS73-derivation.md` §8.
+
+### §R-close.4 Forward propagation (every new grokking to the open stubs it bears on)
+
+**G71** goes into the provisional-bearings lines of: FS-48 (`plans/STUB-biquadratic-table.md`: χ = 3 against 4 is decided by
+`Θ₃`), FS-72 (`plans/STUB-last-lattice.md`: four colours have no `Θ`; L3's gap-free looseness; the Kempe-period criterion), FS-60
+(`plans/STUB-quadratic-witnesses-kernel.md`: the `Θ` certificate replaces LRATs, T26, T39), FS-46
+(`plans/STUB-three-colour-classification.md`), FS-67 (`plans/STUB-tight-product-colourings.md`, with the finite-`U` quotient
+note) and FS-59 (`plans/STUB-four-colours-167.md`, rewritten). **G70's hold** (all 12 classes) and **G54's restated reading**
+go into FS-74. The new stubs FS-74 to FS-78 carry their own bearings.
+
+### §R-close.5 The registered predictions, scored once
+
+| outcome | predictions |
+|---|---|
+| won | P-C1 (gap finder and forces refusal agree at N = 8, 10, 12), P-C2 (every H1-found target at K has depth ≥ 3), P-C6 (`P_32 = 8Λ`, registered before the run), P-T1 (K the only rigid rank-4 lattice at four colours — the registered uninformative outcome), P-R1 (the index-81 component's escapes local at neither prime; T9), C's P-C1 and P-C1b (the dense ball colours; a longer circular period — 23, exactly), P-F1, P-F2, P-F4 |
+| lost | P-S1 (Poros: de Grey's lattice Hoffman-tight — slack, §R0), P-C4 (Poros: `F_known` rank 2 at K — rank 4 by the Galois group), P-C3(b), E's P3b prediction (`Θ₃(L21cc6506)` nonempty, 0.60), **P-T2 (final score):** loose by theorem on the 52 lattices with gapped colourings, but `L21cc6506` is not three-colourable, so "loose at every chainable target" fails there (vacuously rigid) |
+| decided | P-C5: `P_found` plateaued at `8Λ` from `N = 8` (outcome (b)'s plateau, registered at 0.25), and the certificate `F = 8Λ` closed it as `P = F` — no counterexample candidate |
+| split | P-Q1: "theorem" (0.10) at three colours, "not landed" (0.60) at four; P-T3 won on the verdict, lost on the mechanism (the pilot field has no fixed prime at 11 or 19); P-K1: every leaf closed within budget (won), "residual finiteness the costliest" (lost; T2 was, by length) |
+| void | P-C3(a) (registered on inadmissible periods — owner error 3), P-F3 (unreachable at registration: `F ⊇ 8Λ_dG` by monotonicity) |
+| unscored | P-R2 (`[NΛ : V]` an ideal norm): T33 relocated the index to the unit vectors' fibres mod 2, and the norm question was not asked |
+| held / killed | G70 held; Poros's hunches "both competitors drift to rigidity" and "no inheritance theorem" killed (the latter at three colours) |
+
+*A namespace collision, recorded so it does not recur:* the plan's P-C1 and implementer C's P-C1 (phase-P2b-q167.md) are
+different predictions under one id. Registrations name their phase in the id from now on.
+
+### §R-close.6 Retractions, counted (G51)
+
+| stage | count | what |
+|---|---|---|
+| plan (§X) | planner 4; Poros 2 (3 by the planner's first convention, which counted P-S1) | the inventory's "Poros 4 / planner 4" is corrected here from §X's own list |
+| competition (P3) | Poros 1 (a pointer recalled as fact: the rank-1 criterion "κ(D) ≥ 1/3"), de Bruijn 1 (a labelled guess, R1), Coxeter 0 | all inside the free window |
+| verification (V2) | 1 | a planted fault that could not fire ("scale one multiplier by 3": a scaled Farkas combination with slack stays valid), replaced before the verdict by zeroed and negated plants (verify-P3b-q167.md §4) |
+
+None was committed; none cost solver time.
+
+### §R-close.7 Errata to this plan (read these before the body; the body is not edited except for pointers)
+
+- **E1** (§0 l. 72–75, T10.2): what decides an escape is `e ∉ V_Q`, with `V_Q = D_Q +` the cycle voltages (T33) —
+  membership, not the index.
+- **E2** (§0, consequence 5, "K itself may be the instance under test"; §C's bullet of the same name; P-C4's and P-C5's framing
+  of K at rank 2): **superseded.** `F = P = 8Λ` has rank 4 (T7); K is not a counterexample candidate.
+- **E3** (§0): a lattice is loose ⟺ finitely many periodic colourings' Kempe period groups intersect in 0; a gap is one way,
+  L3 (gap-free at every period, T32) the other.
+- **E4** (§C, "it does at depth 6 (8/3)"): the convention clashes with 2-adic depth per prime; `8/3` has depth 3 at each of
+  the two primes above 2 (T4), and `16/3` depth 4 (T3, P-D3 refuted).
+- **E5** (P1d′'s outcomes): add "P = F certified" — the outcome that happened.
+- **E6** (P-R1): restate per Kempe component. The least-`ℓ` rule is a convention; 301 of 2,304 colourings escape only
+  non-locally (phase-P1.md, P1g).
+- **E7** (P4's row, "de Grey's lattice with one ρ₁₅ word"): that lattice is KR6 (T34).
+- **E8** (P1e's first step): "the gap finder at every admissible period with an odd part, including composite period groups".
+- **E9** (P1f): the `W′` column is n/a for census asks.
+- **E10** (T9's single-prime reading, §G.6 item 3): it assumes integrality at the prime.
+- **E11** (implementer B's four, phase-P2.md "proposed plan edits"): the 2-unit verdict is not inherited from T5; rank-2
+  denominator lattices are marked; chainability is field-relative (`1/2 ∉ ℤ[U]` over K, so `8/3` is not chainable in K²);
+  the command is `tools/fs73_table.py table FIELD`.
+- **E12** (FS70-T5's table): the prime of ℚ(√5) above 3 splits in ℚ(√5, i); the table read "inert then ramified". Corrected in
+  place in `data/fs70/owner/cm-subfields-2026-09-22.md` at this close (the derivation file's T5 prose never stated it).
+- **E13** (P4's record): L3's certificate colouring is "2L3-periodic"; its exact period group is coarser (index 4, additive
+  into `V₄`). Harmless (`data/fs73/table/CORRECTIONS.md`).
+
+### §R-close.8 Honesty: the owner's errors, the agents' slips, the kills
+
+**The product owner's errors, each caught and each with its cost:**
+1. Asked for the "smallest refusing ball", which walked the solver into G65's hardness band: 5 UNKNOWNs, about 2 hours.
+2. Paraphrased to the verifier "2 separable by a period-2 colouring"; `2 ∈ 2Λ`, so no period-2 colouring separates it.
+3. Registered P-C3(a) on inadmissible periods (void).
+4. The first briefs omitted the `to: "main"` reply channel (Kooshi caught it).
+5. Retired the ~500k-token replacement rule together with the Opus quirks (Kooshi restored it; `CLAUDE.md` § Delegation).
+6. The P4 brief claimed the rank-6 lattices were loose by the fixed-prime gap lemma; the lemma does not reach them, and
+   implementer F caught it before any run (T14's scope).
+7. The first competition drafts put the working files and the advisor's record in `plans/`, which every competitor reads — a
+   covert channel. Caught by the owner before launch; now the protocol's rule.
+
+**The agents' slips, recorded without blame:** two reported commit hashes that did not exist (A, V) — every hash is now checked
+against `git log`; Coxeter's `pkill -f` killed its own shell (exit 144; nothing lost); two runs over 2 minutes without the lock
+(Coxeter); **a killed `flock` wrapper's child held the lock about 17 minutes** (Coxeter, 15:29–15:46: the wrapper had already
+started its child, which inherited the lock's descriptor and ran an obsolete search orphaned — found by a `ps` sorted by CPU,
+killed by PID, verified absent); C's self-deadlock (an outer `flock` around a tool that takes the lock itself; killed by
+process group, verified by effect, forfeit about 2 minutes); an orphaned kissat (pid 884222) outlived its table driver; F's
+finished agent kept re-waking and re-sending its hand-back until stopped.
+
+**The owner's kills this milestone, with what each forfeited:** the orphan kissat 884222 (nothing: nothing read its result);
+A's down-ladder run (the forfeit recorded in phase-P1.md); de Bruijn's redundant `q167.py 348` run (nothing: that lattice was
+settled).
+
+### §R-close.9 Tool defects and their homes
+
+- `tools/fs73_table.py`'s quotient ask takes the heavy lock itself (through `fs73_screen`'s lock), so a `flock` wrap
+  deadlocks; its scratch path (`SCRATCH`) and `fs73_screen.LOCK` are this session's `/tmp` scratchpad, so a later session must
+  repoint both. Recorded in the tool's docstring at this close.
+- Killing a `flock` wrapper can orphan a child that holds the lock: `CLAUDE.md` § Building's kill rule, its ninth instance.
+- The table's stale spectral label and the four "REFUSING" verdicts: `data/fs73/table/CORRECTIONS.md`.

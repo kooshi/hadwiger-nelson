@@ -43,7 +43,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    criterion-kernel.md` (T22's ⟹ and a box-LP / relation-form certificate checker over ℚ with its soundness theorem; smallest
    instance T41's 36 vectors, then T39; FS-60's Θ route), `data/fs73/table/CORRECTIONS.md` (§5's four stale rows; `report`
    regenerates TABLE.md from rows, so the corrections live beside it and TABLE.md gains a pointer paragraph).
-2. **§3's sweeps** into a new §R close section of `plans/FS73-rigidity-dichotomy.md`. The first planner's notes for them:
+2. ✅ (second close planner: `plans/FS73-rigidity-dichotomy.md` §R-close.1–.4, with a close banner at the top and "[superseded: E#]" markers at the three misleading spots. The G62/G7 miss is sharper than the note: `v = (83 + i√167)/84` **is** G7's type-M rotation at `n = 42` — written into G62 in `CLAUDE.md`. G71 forwarded into FS-48, FS-72, FS-60, FS-46 and FS-67's bearings; FS-59 at its rewrite, §8. One correction to the note: FS-48's d = 23, 47 lattices are loose **as built** (`Λ₂₄` per subfield), not every lattice of those fields) **§3's sweeps** into a new §R close section of `plans/FS73-rigidity-dichotomy.md`. The first planner's notes for them:
    *paid* — G68 (gap finder first; the fixed-prime lemma), G21 (H1-found vs H1: the census design), G27 (the Galois point group
    gave `v`'s orbit its rank 4), R3/T10 (membership), G65, G51, FS58-T4 (R1 to the kernel); *missed* — G21 itself, twice (P2's
    `N ≤ 20` and P2b's `N ≤ 30` period caps were not read as the enumeration's measure); **G62/G7: `L21cc6506`'s unit vectors are
@@ -56,7 +56,7 @@ Grades are those of `CLAUDE.md` § Notation. "Owner-checked" means the product o
    against 4 decided by `Θ₃`), STUB-last-lattice (four colours: no `Θ`; L3's gap-free looseness; the Kempe-period criterion),
    STUB-quadratic-witnesses-kernel (the `Θ` certificate replaces LRATs: T26, T39), STUB-three-colour-classification, STUB-tight-
    product-colourings (plus §8's FS-67 note), and the FS-59 rewrite.
-3. **§5** — the plan's edits (T10.2's wording; §0's looseness criterion and consequence 5 closed; §C's "depth 6 (8/3)", "K may be
+3. ✅ (second close planner: the plan's edits as errata E1–E13 in §R-close.7 — the body is not rewritten, only marked; B's four as E11; the FS-70 table cell corrected in place in `data/fs70/owner/cm-subfields-2026-09-22.md` (the defect is in that table, not in FS70-derivation T5's prose); the predictions scored once in §R-close.5, with P-T2's final score (lost at `L21cc6506`), P-C5 as outcome (b)'s plateau closed by `F = P`, P-K1 split, P-R2 unscored, and the P-C1 id collision recorded; the retraction tally in §R-close.6 — **the plan stage is planner 4 / Poros 2 (3 by the first convention), not Poros 4**, per §X) **§5** — the plan's edits (T10.2's wording; §0's looseness criterion and consequence 5 closed; §C's "depth 6 (8/3)", "K may be
    the instance under test", "rank 2 at K" superseded; P1d′ outcome "P = F certified"; P-R1 per Kempe component; P4's "one ρ₁₅
    word" = KR6; P1e's first step; P1f's W′ column; T9 assumes integrality) and B's four (in phase-P2.md "proposed plan edits"),
    FS70-derivation T5's prose (3 splits in ℚ(√5,i)), P4's "2L3-periodic" note, the prediction table (already scored in rows 78–79;

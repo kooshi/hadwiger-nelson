@@ -138,3 +138,5 @@ leaf may not close at all.
 `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` §3; `Proofs/HadwigerNelson/Mascot.lean`
 (row 58), `Instances/PlaneFreedom.lean`, `LocalGlobal.lean` (`addCayleyMap`), `Copy.lean`, `Homogeneous.lean`; `data/fplane/map.md`,
 `spectral-below-600.json`; `plans/STUB-chain-theorem.md` (FS-45).
+
+**Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — the lattice form of this stub's descent is a theorem: a Cayley graph of a finitely generated torsion-free abelian group is three-colourable iff a character puts every generator in `[1/3, 2/3]`, periodic three-colourings are dense, and if `Θ₃` is finitely many points of order 3 every three-colouring is affine (`plans/FS73-derivation.md` T22–T24) — the lattice-level analogue of the rhombus period's "every three-colouring is 3R-periodic", with no arithmetic of the lattice. ℚ(√11)'s `Λ₁₀` is the instance (`F = 3Λ`, T25). The height lift (T21) is FS-75's kernel leaf; the two stubs should share it.
