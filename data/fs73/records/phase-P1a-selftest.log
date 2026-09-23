@@ -1,0 +1,15 @@
+fs73_lattice self-test: the four controls of P1a (FS-70 and FS-61 numbers), each by BOTH saturations
+  [ok ] de Grey: rank 4, 54 unit vectors, trace = box (the owner's numbers)  rank 4, |U| 54, M 36
+  [ok ] de Grey: the point group holds conjugation and the Galois flips  order 24, generators ['conj', 'gal+-', 'gal-+', 'mul']
+  [ok ] de Grey: rho^3 is NOT in the lattice (rho is no multiplier, so the orbit of 8/3 spans only (8/3)Z[zeta6])  rho^3 denominator 27
+  [ok ] de Grey: 8/3 is in the lattice  (96, -48, -48, -24)
+  [ok ] Lambda': 46 unit vectors of E' at denominator 24, rank 4, the saturation is all 46  generators 46, rank 4, |U| 46
+  [ok ] L3 (group6:u3:2+zeta6:w4): rank 6, 42 unit vectors  rank 6, |U| 42, M 72; box agrees (42)
+  [ok ] Q(sqrt11)'s shape Ld65c8ee8: 108 unit vectors (row 74)  rank 4, |U| 108
+  [ok ] box to D = 12 < M: a subset of the saturation, labelled incomplete  30 of 54; box:12 (INCOMPLETE: D is not a multiple of M)
+  -- plants (each must move a control)
+  [ok ] plant sat_drop fires  raised: degrey: the two saturations disagree: trace 53, box 54, symmetric diff
+  [ok ] plant box_tight fires  raised: degrey: the two saturations disagree: trace 54, box 52, symmetric diff
+  [ok ] plant gal_sign fires  |U| 54, group 12
+  [ok ] plant unit_loose fires  raised: degrey: the two saturations disagree: trace 486, box 54, symmetric dif
+SELF-TEST PASSED
