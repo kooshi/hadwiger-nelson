@@ -342,7 +342,7 @@ takes ≤ ~350 KB of primary text, or a larger volume with named files to read i
 1 (M17–M36) · 2a (M37–M48) · 2b (M49–M52) · 3a (M53–M55 + `FIELD-WALL-THEOREM.md`) · 3b (M56–M57, Mascot, R57, Q8) · 3c (M58–M61,
 R52) · 4a (M62, M64, FS-32) · 4b (M63 phases C–G) · 4c (M63 phase H2) · 4d (M63 phases H3–H4) · 5a (FS-24–FS-28, FS-36, the ChatGPT
 fold-in) · 5b (FS-38, completed in place) · 5c (the 2026-09-14 Astra fold-in) · 6a (FS-50, FS-53) · 6b (FS-54, FS-56) · 6c (FS-58,
-FS-62/G63/G64) · 6d (FS-61) · 6e (FS-66, and FS-70's two new fields). The briefs are in the session scratchpad (`brief-fs71-batch*.md`). No CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
+FS-62/G63/G64) · 6d (FS-61) · 6e (FS-66, and FS-70's two new fields). The briefs are committed under `data/fs71/briefs/` (with the owner's blind-control list, `owner-blind-controls.md`, released at the close). No CPU beyond `rg`, `curl` and `lake env lean` for a `#check`; two to three days. **Stop rule:** a batch
 ends when every milestone in it is filed, or at the token budget — then the report's progress section names the next milestone
 and the successor is briefed from the repository alone. **Checkpoint:** the committed derivation files; **resume:** read
 `data/fs71/batch-<n>.md` § progress. A kill redoes nothing committed.

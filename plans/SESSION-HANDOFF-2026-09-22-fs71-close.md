@@ -58,5 +58,5 @@ partition put `POROS-2026-09-10-b-closure-equality.md` and G59's material in the
 
 `plans/FS71-theorem-audit.md` (the plan: §G, §PA, §S, §M, §R with every batch scored), `plans/*-derivation.md` (53),
 `data/fs71/batch-{1,2a,2b,3a,3b,3c,4a,4b,4c,4d,5a,5b,5c,6a,6b,6c,6d,6e}.md` (17 reports, each with its census table and
-enumeration), `tools/fs71_ledger_b_check.py`, the session scratchpad's `brief-fs71-batch*.md` (the briefs; not in the repository)
-and `fs71-controls.md` (the blind controls; not in the repository). Memory: `hadwiger-nelson-project.md`.
+enumeration), `tools/fs71_ledger_b_check.py`, `data/fs71/briefs/` (the seventeen briefs and the owner's blind-control list, committed at
+the close). Memory: `hadwiger-nelson-project.md`.
