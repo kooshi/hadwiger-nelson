@@ -1,0 +1,15 @@
+8/3 coords [24, 0, 0, 0]
+rank=4 d=54 (unit vectors) target -d/3 = -18.000000
+N= 2 quotient lambda_min=-18.000000  #argmin=6  Hoffman floor 1+d/|lmin|=4.0000
+N= 3 quotient lambda_min=+24.000000  #argmin=36  Hoffman floor 1+d/|lmin|=3.2500
+N= 4 quotient lambda_min=-18.000000  #argmin=18  Hoffman floor 1+d/|lmin|=4.0000
+N= 5 quotient lambda_min=-18.034442  #argmin=24  Hoffman floor 1+d/|lmin|=3.9943
+N= 6 quotient lambda_min=-18.000000  #argmin=6  Hoffman floor 1+d/|lmin|=4.0000
+N= 7 quotient lambda_min=-14.344814  #argmin=24  Hoffman floor 1+d/|lmin|=4.7644
+N= 8 quotient lambda_min=-18.142136  #argmin=12  Hoffman floor 1+d/|lmin|=3.9765
+N= 9 quotient lambda_min=-9.517541  #argmin=144  Hoffman floor 1+d/|lmin|=6.6737
+N=10 quotient lambda_min=-18.270510  #argmin=24  Hoffman floor 1+d/|lmin|=3.9556
+N=11 quotient lambda_min=-21.580897  #argmin=12  Hoffman floor 1+d/|lmin|=3.5022
+N=12 quotient lambda_min=-18.928203  #argmin=48  Hoffman floor 1+d/|lmin|=3.8529
+continuous min over T^4: -22.409530102 at theta = [0.070023 0.841994 0.035011 0.956009]
+minimisers at N=8 (x8): [(2, 4, 5, 7), (2, 6, 5, 0), (3, 5, 5, 0), (3, 5, 6, 0), (3, 6, 5, 0), (3, 6, 6, 1), (5, 2, 2, 7), (5, 2, 3, 0), (5, 3, 2, 0), (5, 3, 3, 0), (6, 2, 3, 0), (6, 4, 3, 1)]
