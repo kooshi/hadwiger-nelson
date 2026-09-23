@@ -208,7 +208,7 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    4 ≤ χ ≤ 5 at four, and χ ≥ 4 at 167 by a `Θ` certificate (row 79) — **15 of the forty** squarefree d ≡ 11 (mod 12) below 500, the only real quadratic fields that *can* need
    four; the other 25 are **typed nulls, never negatives**. What decides a field is how many unit vectors its lattices hold, not its
    congruence class. Every witness uses a direction with 3 in a denominator, as the kernel's **3-adic barrier** requires; **T4 —
-   every such d needs four — is unproved.** ℚ(√167), where the conjecture predicts six: FS-61's null is explained — 55 of its 57 lattices carry certified periodic three-colourings (a period-23 residue colouring among them), a 56th colours by a linear form of period index 1,080, and the 57th, `L21cc6506`, is **not three-colourable** — two independent exact `Θ`-emptiness certificates — so **χ(ℚ(√167)²) ≥ 4**, the first bound above three where the conjecture predicts six (row 79); a `Θ`-emptiness tree certifies a lattice's non-three-colourability with no LRAT (row 79); the bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` cannot close from above by residues at any depth (§1.7, row 75).
+   every such d needs four — is unproved.** ℚ(√167), where the conjecture predicts six: FS-61's null is explained — 55 of its 57 lattices carry certified periodic three-colourings (a period-23 residue colouring among them), a 56th colours by a linear form of period index 1,080, and the 57th, `L21cc6506`, is **not three-colourable** — two independent exact `Θ`-emptiness certificates — so **χ(ℚ(√167)²) ≥ 4** — four colours, at last, where the conjecture predicts six (row 79); a `Θ`-emptiness tree certifies a lattice's non-three-colourability with no LRAT (row 79); the bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` cannot close from above by residues at any depth (§1.7, row 75).
 15. **Six may be a value no field attains — a claim stronger than χ(ℝ²) ≠ 6, not equivalent to it** (G64, FS-62). *"No subfield of
    ℝ has χ(F²) = 6"* implies χ(ℝ²) ∈ {5, 7} and is not implied by it; the exact form of χ(ℝ²) ≠ 6 restates the problem. So the wall
    at six (G56, G59) is no half of a two-value Hadwiger–Nelson: it decides the value set of L — hence, under the conjecture's bold
@@ -240,8 +240,8 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
 20. **At three colours the inheritance question is a theorem, and the answer is topological, not arithmetic** (row 79, G71). For
    every Cayley graph of a finitely generated torsion-free abelian group, three-colourability is a polytope question on the character
    torus, periodic three-colourings are dense — so a pair every periodic colouring identifies is forced — and the forced group has
-   finite index exactly when the polytope is finitely many points. It derives ℚ(√11)'s `F = 3Λ` with no forcer, answers
-   `[AbrishamiEtAl2025]` Problem 4.6 at `χ = 3` for these graphs, and certifies non-three-colourability far more cheaply than a
+   finite index exactly when the polytope is finitely many points. It derives ℚ(√11)'s `F = 3Λ` with no forcer, settles
+   `[AbrishamiEtAl2025]` Problem 4.6 at three colours for them, and certifies non-three-colourability far more cheaply than a
    refusal's LRAT. **It stops at three by a fact about `K₄`**: a four-colouring carries no height (`K₄`'s square complex is `ℝP²`), so
    four colours — where every question the hunt asks lives — have no such criterion, and a two-sided certificate exists only if
    four-colourability of these graphs is decidable.
