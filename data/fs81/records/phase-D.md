@@ -170,19 +170,24 @@ place as the ω = 2 colourable family, at whatever `d_ball` their covolume allow
 
 ## Resume
 
-**D0b, the ladder** (under the heavy lock; one JSONL row per ask appended with fsync to `data/fs81/phaseD/d0b-asks.jsonl`):
+**D0b, the ladder** (the machine's resource rule of 2026-09-24: RAM is rationed through `scripts/slot.py`, threads are not; CNFs and
+solver logs go to disk under `~/fs81-phaseD-work/`, never /tmp; one JSONL row per ask appended with fsync to
+`data/fs81/phaseD/d0b-asks.jsonl`). **Measured before sizing:** at the largest radius, R = 1.7, X_B has 65,575 points and 717,523
+edges (`d_ball` 21.88), its CNF 3,066,820 clauses (51 MiB), and kissat refused it in 82.3 s CPU at a peak RSS of 681 MiB (a probe
+under `slot.py --mem 8 --cpus 1`). Twelve workers × 681 MiB × 1.5 ≈ 12 GiB for the solvers, plus the parent's graphs (≈ 2 GiB) and up to
+twelve transient clause lists being written (≈ 4 GiB): `--mem 24`.
 
 ```
 cd /home/kooshi/source/lean-dir
-setsid nohup flock -w 1800 /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock \
-    python3 tools/fs81_phaseD.py ladder --workers 8 --wall 1800 >> data/fs81/phaseD/d0b-run.log 2>&1 &
+setsid nohup python3 scripts/slot.py --mem 24 --cpus 12 --name d0b --wait 1800 -- \
+    python3 tools/fs81_phaseD.py ladder --workers 12 --wall 1800 >> data/fs81/phaseD/d0b-run.log 2>&1 &
 ```
 
-*If it dies at any instant, what is redone:* the asks in flight (at most eight, each at most 1,800 s of kissat plus, for an UNSAT, one
-CaDiCaL re-ask), because a row is written only when its ask ends; the CNFs are rebuilt in seconds. *Resume:* the same command — it skips
-every key already in the JSONL with a verdict. *Check the launch:* `flock -w` exits 1 without running anything when the wait expires, so
-the log's first line must be "D0b ladder: …"; the pgid is the `setsid` child's, read from `ps -o pgid= -p <pid>` and written to
-`data/fs81/phaseD/d0b.pgid`; a kill is verified by the pid absent from `ps` and the JSONL static for ten seconds.
+*If it dies at any instant, what is redone:* the asks in flight (at most twelve, each at most 1,800 s of kissat plus, for an UNSAT,
+one CaDiCaL re-ask), because a row is written only when its ask ends; the graphs are rebuilt in seconds. *Resume:* the same command —
+it skips every key already in the JSONL with a verdict. *Exit status:* 75 = not admitted within the wait (nothing ran); 137 = killed
+by its RAM cap (raise `--mem` from the measured peak, never guess). The pgid of the `setsid` child goes to `data/fs81/phaseD/d0b.pgid`;
+a kill is by that group, verified by the pid absent from `ps` and the JSONL static for ten seconds.
 
 **D1, the screen at 47** (`tools/fs81_d47.py`, a copy of FS-79's `fs79_p0.py` at d = 47; writes `data/fs81/phaseD/d47/`):
 `sweep --mmax 2520`, then `screen --ids all`, then `screen --ids survivors`; each resumable by re-running (every record keyed and

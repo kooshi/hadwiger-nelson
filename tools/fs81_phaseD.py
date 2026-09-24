@@ -43,6 +43,7 @@ MACHINE = 'desktop (16 physical cores / 32 threads, 128 GB)'
 CADICAL = os.path.expanduser('~/.elan/toolchains/leanprover--lean4---v4.32.0/bin/cadical')
 KISSAT = 'kissat'
 XA_CERT = ROOT / 'data' / 'fs73' / 'census' / 'cert' / 't-16_8_8_0-R1.5'
+WORK = Path(os.path.expanduser('~/fs81-phaseD-work'))    # CNFs and solver logs: on DISK (/tmp is RAM here, CLAUDE.md S Building)
 
 
 def append(path, rec):
@@ -616,17 +617,20 @@ def cmd_ladder(radii, workers, wall, only, second):
             meta = {'family': f'{spec[1]} (instrument control; refutation rank 1)', 'shape': f'{spec[2]} consecutive integers' + (' x 2' if spec[1] == 'T7' else ''),
                     'R': None, 'n': n, 'm': len(E), 'n4': n, 'm4': len(E), 'pins': 'an edge pinned to 0, 1; chain [2, 3]',
                     'precedence': 'chain [2, 3] over the unpinned colours'}
-        cl, nv = cnf_clauses(n, E, pins, chains)
-        path = SCR / f'd0b-{abs(hash(key)) % 10**10}.cnf'
-        sha = write_cnf(path, cl, nv)
+        path = WORK / f'd0b-{key.replace("|", "_").replace(":", "-")}.cnf'
         meta.update({'d_ball': round(2 * meta['m'] / meta['n'], 3), 'd4': round(2 * meta['m4'] / meta['n4'], 3) if meta['n4'] else None})
-        built.append((key, meta, n, E, pins, chains, path, sha))
+        built.append((key, meta, n, E, pins, chains, path, None))
         print(f'  built {key}: n {meta["n"]}, d_ball {meta["d_ball"]}, 4-core {meta["n4"]} at {meta["d4"]}' +
               (f', contains the certified core: {meta["contains_certified_core"]}' if 'contains_certified_core' in meta else ''), flush=True)
     _DG.clear()
 
+    WORK.mkdir(parents=True, exist_ok=True)
+
     def one(item):
-        key, meta, n, E, pins, chains, path, sha = item
+        key, meta, n, E, pins, chains, path, _ = item
+        cl, nv = cnf_clauses(n, E, pins, chains)          # written just before its ask, on disk, removed after it
+        sha = write_cnf(path, cl, nv)
+        del cl
         w = 3.0 if key.startswith('control:wall-plant') else wall
         with lock:
             inflight[0] += 1
@@ -668,7 +672,8 @@ def cmd_reask(key, times, wall):
     R = float(R[1:])
     meta, n, E, pins, chains = build_degrey({'X_A': 'X_A', 'X_B': 'X_B', 'colourable': 'colourable'}[fam], enc, R)
     cl, nv = cnf_clauses(n, E, pins, chains)
-    path = SCR / f'reask-{os.getpid()}.cnf'
+    WORK.mkdir(parents=True, exist_ok=True)
+    path = WORK / f'reask-{os.getpid()}.cnf'
     sha = write_cnf(path, cl, nv)
     meta.update({'d_ball': round(2 * meta['m'] / meta['n'], 3), 'd4': round(2 * meta['m4'] / meta['n4'], 3)})
     have = [r for r in load_jsonl(OUT / 'd0b-reask.jsonl') if r['key'] == key and r['cnf_sha256'] == sha]
