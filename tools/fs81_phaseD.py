@@ -16,6 +16,11 @@ Commands:
                clause's derivation reaches.
   k1-fixture   K1's d = 47 self-test fixtures: additive four-colourings of small lattices Lambda_M by enumeration, and the N = 4
                quotient witnesses they induce (no solver).
+  harvest      D0a: every recorded four-colour ask into the S B.1.1 schema (no solver) -> data/fs81/phaseD/d0a-harvest.jsonl
+  ladder [--radii 1.0,...,1.7] [--workers 8] [--wall 1800] [--only KEYPART,...] [--no-second]
+               D0b: X_A (target and triangle encodings), X_B and the colourable ball at each radius, plus the instrument controls (T5, T7,
+               the wall plant); one row per ask appended with fsync to data/fs81/phaseD/d0b-asks.jsonl; a relaunch skips recorded asks.
+               Every UNSAT is re-asked by a second solver (toolchain CaDiCaL) unless --no-second.  Run it under the heavy lock.
 """
 import gzip
 import hashlib
@@ -428,6 +433,232 @@ def cmd_harvest():
     return 0
 
 
+# ================================================================ D0b: the rank-4 ladder
+LADDER = OUT / 'd0b-asks.jsonl'
+XA_TARGET = 'c:-16,8,8,0'          # v = -(4/9)(1 + sqrt-11) in fs73_lattice's reduced Hermite coordinates (FS73-T6's target)
+
+
+def degrey_graphs(R):
+    """X_A, X_B and the colourable graph on ONE point set: the embedding-bounded ball of radius R about the midpoint of the pair
+    (0, v), shifted so the pair is (0, v) -- exactly fs73_certify.build's construction.  Returns the points (lattice coordinates),
+    the unit edges, the v-translate edges, and the pair's indices."""
+    sys.path.insert(0, str(ROOT / 'tools'))
+    import fs73_screen as S
+    lat, r, T = S.degrey_setup()
+    delta = S.parse_target(lat, XA_TARGET)
+    half = tuple(x // 2 for x in delta)
+    assert all(x % 2 == 0 for x in delta)
+    pts = [tuple(p + h for p, h in zip(q, half)) for q in S.minkowski_ball(lat, R)]
+    idx, E = S.ball_graph(pts, lat.U)
+    o, dl = idx[tuple([0] * r)], idx[delta]
+    V = sorted({(min(i, idx[q]), max(i, idx[q])) for i, p in enumerate(pts) for q in [tuple(a + b for a, b in zip(p, delta))] if q in idx})
+    return pts, [tuple(e) for e in E.tolist()], V, o, dl, lat
+
+
+def core4(n, edges, keep):
+    adj = [[] for _ in range(n)]
+    for i, j in edges:
+        adj[i].append(j)
+        adj[j].append(i)
+    deg = [len(a) for a in adj]
+    alive = [True] * n
+    stack = [v for v in range(n) if deg[v] < 4 and v not in keep]
+    while stack:
+        v = stack.pop()
+        if not alive[v]:
+            continue
+        alive[v] = False
+        for w in adj[v]:
+            if alive[w]:
+                deg[w] -= 1
+                if deg[w] < 4 and w not in keep:
+                    stack.append(w)
+    kept = [v for v in range(n) if alive[v]]
+    ren = {v: k for k, v in enumerate(kept)}
+    return kept, sorted((ren[i], ren[j]) for i, j in edges if alive[i] and alive[j]), ren
+
+
+def ladder_tasks(radii, only=None):
+    """(key, builder) for every D0b ask; a builder returns (graph meta, n4, edges4, pins, chains)"""
+    tasks = []
+    for R in radii:
+        for fam, enc in (('X_A', 'target'), ('X_A', 'triangle'), ('X_B', 'target'), ('colourable', 'target')):
+            key = f'{fam}|{enc}|R{R}'
+            if only and not any(o in key for o in only):
+                continue
+            tasks.append((key, ('degrey', fam, enc, R)))
+    return tasks
+
+
+_DG = {}
+
+
+def build_degrey(fam, enc, R):
+    if R not in _DG:
+        _DG[R] = degrey_graphs(R)
+    pts, U, V, o, dl, lat = _DG[R]
+    n = len(pts)
+    if fam == 'X_A':
+        E = sorted(set(U) | {(min(o, dl), max(o, dl))})
+        keep = {o, dl}
+        shape = 'embedding-bounded ball about the midpoint of (0, v), shifted; unit edges + the ONE edge {0, v}'
+    elif fam == 'X_B':
+        E = sorted(set(U) | set(V))
+        keep = {o, dl}
+        shape = 'the same ball; unit edges + EVERY v-translate edge {p, p + v} inside it (balls of Cay(Lambda_dG, U u {+-v}))'
+    else:
+        E = sorted(set(U))
+        keep = {o}
+        shape = 'the same ball; unit edges only (Cay(Lambda_dG, U), four-colourable by Theorem B)'
+    kept, E4, ren = core4(n, E, keep)
+    o4 = ren[o]
+    Uset = set(U)
+    # the least UNIT neighbour of 0 in the 4-core (never the pair partner, whose edge is not unit)
+    nb = min(ren[j] for j in range(n) if j in ren and (min(o, j), max(o, j)) in Uset)
+    if enc == 'target':
+        pins, chains = [o4, nb], [(2, 3)]
+        pdesc = 'unit-edge pin: the pair\'s first point 0 (colour 0) and its least unit neighbour (colour 1); chain [2, 3]'
+    else:
+        d4 = ren[dl]
+        n0 = {j for i, j in E4 if i == o4} | {i for i, j in E4 if j == o4}
+        nd = {j for i, j in E4 if i == d4} | {i for i, j in E4 if j == d4}
+        cm = sorted((n0 & nd) - {o4, d4})
+        pins, chains = [o4, d4] + cm[:1], []
+        pdesc = 'triangle pin (FS73-T6\'s): 0, v and their least common neighbour to colours 0, 1, 2; no chain (one unpinned colour)'
+    core_pts = {tuple(pts[v]) for v in kept}
+    meta = {'family': {'X_A': 'X_A', 'X_B': 'X_B', 'colourable': 'colourable: Cay(Lambda_dG, U) ball'}[fam], 'shape': shape, 'R': R, 'n': n,
+            'm': len(E), 'n4': len(kept), 'm4': len(E4), 'pins': pdesc, 'precedence': 'chain [2, 3] over the unpinned colours' if chains else 'none'}
+    if fam in ('X_A', 'X_B'):
+        W = json.load(open(XA_CERT / 'witness.json'))
+        lc = [tuple(c) for c in W['provenance']['lattice_coordinates']]
+        meta['contains_certified_core'] = all(c in core_pts for c in lc)
+    return meta, len(kept), E4, pins, chains
+
+
+def int_graphs(which, L):
+    """FS79-T5 (G(Z, {1,3,7,12,17,22}) on L consecutive points) and T7 (the same times a path of 2: Cay(Z^2, (+-d, 0), (0, +-1)) on L x 2)"""
+    D = (1, 3, 7, 12, 17, 22)
+    if which == 'T5':
+        return L, sorted((i, i + d) for i in range(L) for d in D if i + d < L)
+    idx = lambda i, j: 2 * i + j          # noqa: E731
+    E = [(idx(i, j), idx(i + d, j)) for i in range(L) for j in range(2) for d in D if i + d < L] + [(idx(i, 0), idx(i, 1)) for i in range(L)]
+    return 2 * L, sorted((min(a, b), max(a, b)) for a, b in E)
+
+
+def run_ask(cmd, wall, logpath):
+    """one solver process, its own rusage (os.wait4), killed at the wall; the status line read from its output file"""
+    t0 = time.time()
+    with open(logpath, 'w') as lg:
+        p = subprocess.Popen(cmd, stdout=lg, stderr=subprocess.STDOUT)
+    fired = False
+    while True:
+        pid, st, ru = os.wait4(p.pid, os.WNOHANG)
+        if pid:
+            break
+        if time.time() - t0 > wall:
+            p.kill()
+            pid, st, ru = os.wait4(p.pid, 0)
+            fired = True
+            break
+        time.sleep(0.2)
+    rc = os.waitstatus_to_exitcode(st)
+    out = open(logpath).read()
+    if fired:
+        v, sline = 'UNKNOWN', None
+    else:
+        v, sline = status(out, rc)
+    rec = {'verdict': v, 'wall_s': round(time.time() - t0, 2), 'cpu_s': round(ru.ru_utime + ru.ru_stime, 2), 'maxrss_mb': round(ru.ru_maxrss / 1024),
+           'wall_fired': fired}
+    if v == 'UNKNOWN':
+        rec['unknown_type'] = f'the wall fired at {wall} s' if fired else f'no verdict: {sline!r} (exit {rc})'
+    return rec, out
+
+
+def model_check(out, n, E, pins, k=4):
+    lits = []
+    for line in out.splitlines():
+        if line.startswith('v '):
+            lits += [int(t) for t in line[2:].split()]
+    pos = {l for l in lits if l > 0}
+    col = []
+    for v in range(n):
+        cs = [c for c in range(k) if k * v + c + 1 in pos]
+        if not cs:
+            return f'vertex {v} has no colour'
+        col.append(cs[0])
+    bad = sum(1 for i, j in E if col[i] == col[j])
+    pin_ok = all(col[v] == c for c, v in enumerate(pins))
+    return 'proper, pins respected' if bad == 0 and pin_ok else f'IMPROPER: {bad} monochromatic edges, pins ok {pin_ok}'
+
+
+def cmd_ladder(radii, workers, wall, only, second):
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    done = {r['key'] for r in load_jsonl(LADDER) if r.get('verdict') in ('SAT', 'UNSAT', 'UNKNOWN')}
+    tasks = [t for t in ladder_tasks(radii, only) if t[0] not in done]
+    # the instrument controls (plan S.D: T5 and T7 once each; the wall on a plant; the pins never refuse a colourable graph)
+    ctl = [('T5|target|L32', ('int', 'T5', 32)), ('T5|target|L33', ('int', 'T5', 33)), ('T7|target|L32x2', ('int', 'T7', 32)),
+           ('T7|target|L33x2', ('int', 'T7', 33)), ('control:wall-plant|colourable|target|R1.0', ('degrey', 'colourable', 'target', 1.0))]
+    if not only:
+        tasks = [t for t in ctl if t[0] not in done] + tasks
+    lock = threading.Lock()
+    inflight = [0]
+    print(f'D0b ladder: {len(tasks)} asks to run ({len(done)} already recorded); {workers} at a time; wall {wall} s', flush=True)
+    # build every graph in the parent first (the builders share the ball cache and are not thread-safe)
+    built = []
+    for key, spec in tasks:
+        if spec[0] == 'degrey':
+            meta, n, E, pins, chains = build_degrey(*spec[1:])
+        else:
+            n, E = int_graphs(spec[1], spec[2])
+            pins, chains = [0, 1] if spec[1] == 'T5' else [0, 2], [(2, 3)]
+            meta = {'family': f'{spec[1]} (instrument control; refutation rank 1)', 'shape': f'{spec[2]} consecutive integers' + (' x 2' if spec[1] == 'T7' else ''),
+                    'R': None, 'n': n, 'm': len(E), 'n4': n, 'm4': len(E), 'pins': 'an edge pinned to 0, 1; chain [2, 3]',
+                    'precedence': 'chain [2, 3] over the unpinned colours'}
+        cl, nv = cnf_clauses(n, E, pins, chains)
+        path = SCR / f'd0b-{abs(hash(key)) % 10**10}.cnf'
+        sha = write_cnf(path, cl, nv)
+        meta.update({'d_ball': round(2 * meta['m'] / meta['n'], 3), 'd4': round(2 * meta['m4'] / meta['n4'], 3) if meta['n4'] else None})
+        built.append((key, meta, n, E, pins, chains, path, sha))
+        print(f'  built {key}: n {meta["n"]}, d_ball {meta["d_ball"]}, 4-core {meta["n4"]} at {meta["d4"]}' +
+              (f', contains the certified core: {meta["contains_certified_core"]}' if 'contains_certified_core' in meta else ''), flush=True)
+    _DG.clear()
+
+    def one(item):
+        key, meta, n, E, pins, chains, path, sha = item
+        w = 3.0 if key.startswith('control:wall-plant') else wall
+        with lock:
+            inflight[0] += 1
+            load = inflight[0]
+        rec, out = run_ask([KISSAT, '-q', str(path)], w, str(path) + '.log')
+        with lock:
+            inflight[0] -= 1
+        row = dict(meta, key=key, solver='kissat', version='kissat 4.0.4', wall_s_budget=w, machine=MACHINE, workers=workers,
+                   in_flight_at_start=load, cnf_sha256=sha, **rec)
+        if rec['verdict'] == 'SAT':
+            row['model_check'] = model_check(out, n, E, pins)
+        if key.startswith('control:wall-plant'):
+            row['control_verdict'] = 'PASS' if rec['wall_fired'] and rec['verdict'] == 'UNKNOWN' else 'FAIL: the wall did not fire'
+        if rec['verdict'] == 'UNSAT' and second:
+            r2, _ = run_ask([CADICAL, '-q', str(path)], wall, str(path) + '.cad.log')
+            row['second_solver'] = dict(r2, solver='CaDiCaL 2.1.2 (toolchain)')
+        with lock:
+            append(LADDER, row)
+        os.remove(str(path) + '.log')
+        if os.path.exists(str(path) + '.cad.log'):
+            os.remove(str(path) + '.cad.log')
+        os.remove(path)
+        print(f'  {key}: {rec["verdict"]} {rec["cpu_s"]} s CPU (load {load})' + (f'; second solver {row["second_solver"]["verdict"]} '
+              f'{row["second_solver"]["cpu_s"]} s' if 'second_solver' in row else '') + (f'; model {row.get("model_check")}' if 'model_check' in row else '')
+              + (f'; {row["control_verdict"]}' if 'control_verdict' in row else ''), flush=True)
+        return row
+
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        list(ex.map(one, built))
+    print('DONE ladder', flush=True)
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -440,6 +671,17 @@ def main():
         return cmd_k1_fixture()
     if a[0] == 'harvest':
         return cmd_harvest()
+    if a[0] == 'ladder':
+        import argparse
+        ap = argparse.ArgumentParser()
+        ap.add_argument('cmd')
+        ap.add_argument('--radii', default='1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7')
+        ap.add_argument('--workers', type=int, default=8)
+        ap.add_argument('--wall', type=float, default=1800.0)
+        ap.add_argument('--only', default=None)
+        ap.add_argument('--no-second', action='store_true')
+        g = ap.parse_args(a)
+        return cmd_ladder([float(x) for x in g.radii.split(',')], g.workers, g.wall, g.only.split(',') if g.only else None, not g.no_second)
     print(__doc__)
     return 2
 

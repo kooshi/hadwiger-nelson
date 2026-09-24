@@ -138,6 +138,28 @@ radii where δ = 8/9 ran to the wall, so the ladder's lower bracket may cost sev
 ("bracketed" = the least UNSAT and the greatest SAT radius), and every UNKNOWN rung between them is reported as the undecided band,
 which is itself the band datum.
 
+## Predictions (registered 2026-09-24, before the first band solver run)
+
+The plan's (§P): **P-D0** (scoped by stage B) 0.5 — four-colour refusals on the refutation-rank ≥ 2 families (X_A, X_B) decide within
+1 h only above `d_ball` ≈ 12; **P-D1** 0.7 — the screen at 47 leaves at least one survivor at M ≤ 2,520; **P-D2** 0.15 — D2's ask
+refuses within its wall. Mine, each with the other outcome and why it is reachable:
+
+| id | prediction | p | the other outcome, reachable because |
+|---|---|---|---|
+| PD-1 | X_A under the target encoding (unit-edge pin + chain [2, 3]) refuses at R = 1.5 within 1,800 s | 0.85 | UNKNOWN at the wall: one object already spans 36.6–678.7 s across solvers and pins (D0a item 3) |
+| PD-2 | some R ∈ {1.0, …, 1.4} returns SAT for X_A (target encoding) within the wall, so `R*` is bracketed below | 0.45 | every lower rung UNKNOWN (or UNSAT): δ = 8/9 ran to the wall at `d_ball` 13.75–16.60 |
+| PD-3 | the least UNSAT radius for X_A (target) is 1.4 or 1.5 | 0.6 | ≤ 1.3 (a smaller refusing core exists, 0.25) or none (1.5 UNKNOWN, 0.15) |
+| PD-4 | X_B refuses at every radius where X_A refuses, never slower than X_A there | 0.6 | X_B slower somewhere: more edges also mean a larger formula |
+| PD-5 | §B.1.5's degree-universality on X_A against X_B: CPU times to refusal within a factor of 3 at every radius where both refuse | 0.4 | a factor above 3: the solver spread at one object is already 10–20 |
+| PD-6 | the colourable family (target encoding) is SAT within 60 s at every R ≥ 1.3 and UNKNOWN at the wall at R = 1.0 | 0.6 | SAT at R = 1.0 under the new pins (the recorded UNKNOWN used a triangle pin), or slow SAT above 1.3 |
+| PD-7 | at R = 1.5 X_A refuses faster under the target encoding than under the triangle pin (same solver, same load) | 0.55 | the reverse: pinning three colours leaves one free, which may prune more |
+| PD-8 | at least one ℚ(√47) survivor of D1 needs at most 10⁷ points to reach `d*` (G65's `N(d*)`) | 0.25 | every survivor far denser: at 167 the survivors' `N` at degree 14 was 10⁸–10¹¹ (FS-79 price), and L21cc6506 needs 2.3·10⁸ |
+
+**Dropped from D0b, with the reason** (a measured price, not a choice): "L21cc6506 at matched `d_ball`". Its covolume is 8.6·10⁻⁸
+against ≈ 1.25·10⁻³ for de Grey's lattice (39,829 points at R = 1.5), so G65's `N = π²R⁴/covol` is 2.3·10⁸ points at degree 14 and
+7.5·10⁷ even at R = 0.9 (FS-79's sweep row for M = 420). No matched ask of it can be built. ℚ(√47)'s own coloured lattices from D1 take its
+place as the ω = 2 colourable family, at whatever `d_ball` their covolume allows.
+
 ## Theorems this phase proved
 
 | id | statement | grade | proof |
@@ -148,4 +170,20 @@ which is itself the band datum.
 
 ## Resume
 
-*(Written before the first long run; see D0b.)*
+**D0b, the ladder** (under the heavy lock; one JSONL row per ask appended with fsync to `data/fs81/phaseD/d0b-asks.jsonl`):
+
+```
+cd /home/kooshi/source/lean-dir
+setsid nohup flock -w 1800 /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock \
+    python3 tools/fs81_phaseD.py ladder --workers 8 --wall 1800 >> data/fs81/phaseD/d0b-run.log 2>&1 &
+```
+
+*If it dies at any instant, what is redone:* the asks in flight (at most eight, each at most 1,800 s of kissat plus, for an UNSAT, one
+CaDiCaL re-ask), because a row is written only when its ask ends; the CNFs are rebuilt in seconds. *Resume:* the same command — it skips
+every key already in the JSONL with a verdict. *Check the launch:* `flock -w` exits 1 without running anything when the wait expires, so
+the log's first line must be "D0b ladder: …"; the pgid is the `setsid` child's, read from `ps -o pgid= -p <pid>` and written to
+`data/fs81/phaseD/d0b.pgid`; a kill is verified by the pid absent from `ps` and the JSONL static for ten seconds.
+
+**D1, the screen at 47** (`tools/fs81_d47.py`, a copy of FS-79's `fs79_p0.py` at d = 47; writes `data/fs81/phaseD/d47/`):
+`sweep --mmax 2520`, then `screen --ids all`, then `screen --ids survivors`; each resumable by re-running (every record keyed and
+skipped when present). Written before launch in full, with its budgets, when D1 starts.
