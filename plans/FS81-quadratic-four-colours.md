@@ -735,9 +735,18 @@ So D measures the four-colour band on known material before it aims anything at 
 
 | step | what | budget |
 |---|---|---|
-| **D0 the four-colour band** | **refusing families:** balls of `Cay(Λ_dG, U ∪ {±v})` at increasing radius; FS79-T5's rank-1 `G(ℤ, {1,3,7,12,17,22})` and T7's rank-2 product. **Colourable families:** balls of `Cay(Λ_dG, U)` (four-colourable, `F = 8Λ`), of `L21cc6506` (four-colourable and loose), and of ℚ(√47)'s own lattices that D1 finds four-colourable. Per ball: points, average degree, solver, verdict, CPU time, machine. Output: the four-colour phase diagram — where undecided asks cluster, and where refusals decide. Symmetry: pin an edge (ω = 2 on these triangle-free planes) plus value precedence | ≈ ½ desktop day |
+| **D0a the harvest (first; no solver)** | *(domain pass, §B.1.4.)* Put every four-colour ask already on record into the ask schema of §B.1.1, one row each, with its machine and encoding: X_A's source ball (FS73-T6: 39,829 points, `d_ball` 18.41, kissat UNSAT in 36.6 s CPU under a triangle pin, `data/fs73/census/cert/t-16_8_8_0-R1.5/steps.jsonl`) and its 35 core rounds to 2,044 points (`d_c` 10.47); FS-73 P1d's DRUP runs on the same ball for `8/9`, `v`, `8/3` (`verify-P1d.md` checks 3–4); the held unit-distance witnesses as cores (Heule-510, Heule-553, de Grey's 1581: `d` 9.82, 9.84, 9.96, measured at stage B); T5's 33-point refusal (`d` 8.24); FS-79's four-colour asks at 167 (colourable rows only). No new solve until this table exists | ≈ 1 h |
+| **D0b the rank-4 ladder** | *(domain pass.)* **X_A** = embedding-bounded balls `σ_R(Λ_dG, U)` plus the one edge `{0, v}` (the certified shape, built by the certified ball's own generator `tools/fs73_certify.py`), R descending from 1.5 in steps of 0.1 until the ask colours, which brackets `R*(X_A)`; then R = 1.6, 1.7. **X_B** = balls of `Cay(Λ_dG, U ∪ {±v})` at the same radii (the only family that differs from X_A in one axis: how many v-edges). **Colourable:** `Cay(Λ_dG, U)` at the same radii; `L21cc6506` at matched `d_ball`; ℚ(√47)'s own lattices that D1 colours. Every ask is run under the **target's encoding** (an edge pin plus value precedence, since ω = 2 at 47), and X_A also under its recorded triangle pin, so every matched comparison holds the encoding fixed and the pin's own effect is measured once. Asks go on the 4-core of each ball (exact at four colours; §B.1.1). **T5 and T7 run once each as instrument controls** (the wall fires on an UNKNOWN plant, the refusal checker certifies, the pins are symmetry reductions), and are never read as band: their refutation rank is 1, which no unit-distance lattice graph can have (FS79-T7) | ≈ ½ desktop day |
 | **D1 the screen at 47** | a copy of `fs79_p0.py` for d = 47 (`tools/fs81_d47.py`). The saturated chain Λ_M for M ≤ 2,520. Per lattice, in this order: additive four-colourings; the targets' spectra at 11, 19, 23, 31, 43 (G44), then gapped residue four-colourings (owner's review, §R-review item 1: the spectrum is the lattice's *image* target's, not Γ_q's; at 11 and 19 the sign is slack, so no spectrum refuses there and the gapped ask is a solver's); quotients at every admissible N ≤ 15, gapped colourings aimed at (G68); the periodic Kempe screen (G69); the calibrated exact `Θ₄` finder (`fs79_p3b_theta4.py`, calibrated at 47's coefficient size on lattices known loose, FS79-T45). Survivors are typed by the screens and caps they met; compute their `Θ₄` cells before calling any "rigid" (G73) | ≤ 1 desktop day |
-| **D2 one priced ask** | on the densest *minimal* survivor, at the size and degree where D0 says refusals decide, symmetry-broken, under the lock, with a wall from D0 (at most 4× the matched control's refusal time, and at most 6 h). If refused: shrink to a core and certify with the frozen `tools/fs58_check_witness.py`. That would make ℚ(√47) the first real quadratic field needing five (with Γ₁₁: χ = 5), the conjecture's exact prediction met. If not refused: report the price in D0's units | ≤ 1 desktop day |
+| **D2 one priced ask** | *(domain pass, §B.1.6.)* On the **minimal survivor with the least `N(d*)`** — the points an embedding-bounded ball needs to reach `d_ball = d*` (G65's figure of merit, `N = π²R⁴/covol` at `φ(R)² = d*/g`), where `d*` is the least `d_ball` at which X_A refuses within the wall's quarter at R ≥ R*(X_A); a survivor with `g ≤ d*` cannot reach `d*` at any size and is excluded. Symmetry-broken as D0b's target encoding, under the lock, with the wall `min(4 × t_A, 6 h)`, `t_A` the refusal time of the **matched X_A ask** (nearest `d_ball`, then nearest `n`; same encoding, solver, machine). If refused: shrink to a core and certify it with a four-colour checker over ℚ(√47) (the frozen `tools/fs58_check_witness.py` is three-colour-only: see the obligation pass). That would make ℚ(√47) the first real quadratic field needing five (with Γ₁₁: χ = 5), the conjecture's exact prediction met. If not refused: report the price as the ratio `t_47 / t_A` with both denominators in words, grade [reading] (§B.1.5), never as evidence that four colours suffice | ≤ 1 desktop day |
+
+*Superseded rows (the planner's, kept for the record; replaced by the domain pass, §B.1, because (1) D0 read the refusing controls as one
+population with the rank-1 ones, which cannot be unit-distance (refutation rank 1), (2) its only rank-4 refusing family was X_B, where
+the certified object is X_A (a ball plus ONE non-unit edge), (3) "densest" in D2 was undefined, and (4) the refusal checker named in D2
+is three-colour-only):*
+
+> | **D0 the four-colour band** | **refusing families:** balls of `Cay(Λ_dG, U ∪ {±v})` at increasing radius; FS79-T5's rank-1 `G(ℤ, {1,3,7,12,17,22})` and T7's rank-2 product. **Colourable families:** balls of `Cay(Λ_dG, U)` (four-colourable, `F = 8Λ`), of `L21cc6506` (four-colourable and loose), and of ℚ(√47)'s own lattices that D1 finds four-colourable. Per ball: points, average degree, solver, verdict, CPU time, machine. Output: the four-colour phase diagram — where undecided asks cluster, and where refusals decide. Symmetry: pin an edge (ω = 2 on these triangle-free planes) plus value precedence | ≈ ½ desktop day |
+> | **D2 one priced ask** | on the densest *minimal* survivor, at the size and degree where D0 says refusals decide, symmetry-broken, under the lock, with a wall from D0 (at most 4× the matched control's refusal time, and at most 6 h). If refused: shrink to a core and certify with the frozen `tools/fs58_check_witness.py`. That would make ℚ(√47) the first real quadratic field needing five (with Γ₁₁: χ = 5), the conjecture's exact prediction met. If not refused: report the price in D0's units | ≤ 1 desktop day |
 
 **Stop rule.**
 - D0 ends when the band's edges are located on at least two families.
@@ -809,7 +818,7 @@ not the verification of a fixed statement.
 | P-G61a | G61's "no route to T4" is falsified at the close | 0.8 (= P-F) | C finds a gap that survives the stall |
 | P-G61b | at fixed small K, the EMPTY fraction is higher at d ≡ 7 (mod 8) (n even) than at d ≡ 3 (mod 8) (n odd): a 2-adic skew at finite level, while the field-level answer ignores d mod 8 | 0.6 | no skew, or the reverse. Poros's weak form of R-mod8, never scored |
 | P0.1-cells | `Θ(U^(25))` has cells beyond the parity polygon and the four order-3 points | 0.5 | exactly the parity polygon and four points. Uninformative for L2 either way; informative for C4 |
-| P-D0 | four-colour refusals on the refusing families decide within 1 h only above an average degree of about 12 | 0.5 | the band sits elsewhere. Unmeasured; the point is to measure it |
+| P-D0 | four-colour refusals on the **refutation-rank ≥ 2** refusing families (X_A, X_B) decide within 1 h only above a **ball** average degree `d_ball` of about 12 *(scope added by the domain pass, §B.1.7: as first registered, over all refusing families, it was already decided by the record — FS79-T5 refuses four on 33 points at degree 8.24 in seconds — so its informative outcome was unreachable; the evidence, FS79-T5 of 2026-09-23, predates D0)* | 0.5 | the band sits elsewhere. Unmeasured at rank 4; the point is to measure it |
 | P-D1 | the four-colour screen at 47 leaves at least one survivor at M ≤ 2,520 | 0.7 | every lattice four-colours at the screens |
 | P-D2 | D2's single ask refuses within its wall | 0.15 | not refused. The conjecture predicts five, but the cost is unknown |
 | P-G72 | the close records F-T4 as having come through the structural question | 0.85 | recorded as coming from elsewhere, for instance from P0's tables |
@@ -832,6 +841,13 @@ not the verification of a fixed statement.
   - The kernel route belongs to FS-75's re-aim at the close: T22's ⟹ direction with compactness, C1(5)'s finite input as a
     `decide`-able cell list, and L4's algebra, parametric in d.
   - The modeling agent may revisit this if the domain pass finds a statement that is cheaper to fix in Lean than in prose.
+  - **Re-examined by the domain pass (§B.1.9): the decision stands**, with two reasons added and one consequence for FS-75.
+    (a) The library gate is zero `sorry`, so a skeleton of L1–L4 cannot live in `Proofs/` before its proofs; now it would be an ungated
+    second costume of statements that are frozen in prose and under verification — two copies with no bridge between them.
+    (b) Nothing was found cheaper to settle in Lean than in prose: the one statement-level question Lean would answer (is every object
+    in §F well-defined as written?) the pass answered by hand (§B.1.8). (c) For FS-75's re-aim at the close: if proposal P-F3 (§B.1.8)
+    is adopted, the kernel statement is about subgroups of Mathlib's `Circle` containing the 5-power rational unit vectors, with the
+    field version (over `planeOver F`, `Proofs/HadwigerNelson/SquareClass.lean`) an instance.
 
 ---
 
@@ -895,3 +911,181 @@ listed here and bind the stages that follow.*
 
 **Tokens.** The planner reported about 230k of working context. The harness counter ended near 600k and counts cumulatively. The
 planner delegated nothing.
+
+---
+
+## §B. Stage B — the modeling passes (WORKFLOW 6)
+
+*Run 2026-09-24 by a fresh de Bruijn (Opus 5.5), not the planner, each pass a fresh Skill invocation, committed separately. §0, §IQ
+items 1–2, §F and §S.P0 are not edited: stage C reads the first three and phase 0 runs from the fourth. Changes proposed for them are
+sent to the owner and listed here as proposals. Every edit this stage made to the plan body is marked where it stands; superseded text
+is kept beside it.*
+
+### §B.1 The domain pass (`debruijn-domain-modeling`)
+
+#### §B.1.1 Stage D's four-colour band, as an object
+
+The plan's "four-colour band" was a picture ("where undecided asks cluster, and where refusals decide") with no object under it. The
+object is built from one atom.
+
+- **The ask** is the atom: (family `X`, shape `σ`, radius `R`, the finite graph `G = σ_R(X)`, `k = 4`, encoding (pins, value
+  precedence), solver and version, wall `W`, machine) ↦ (verdict ∈ {SAT, UNSAT, UNKNOWN at `W`}, CPU seconds). One JSONL row per ask.
+- **Three statistics per ask, all measured, never predicted:**
+  - `d_ball = 2m/n` of the asked graph: the *aiming* statistic, the one G65's law predicts from `R` and `g`;
+  - the **4-core** `(n₄, d₄)`: exact at four colours (a vertex of degree below 4 always takes a free colour last, so `G` is
+    four-colourable iff its 4-core is), so every ask is posed on the 4-core and both are recorded;
+  - for a refusal, the **UNSAT core** after core rounds, `(n_c, d_c)`: the degree of the refusing object itself. `d_ball` above `R*` is
+    inflated by material the refusal does not use; `d_c` is the statistic that compares across families and shapes.
+- **The family** `X` = `Cay(Λ, S)`, or a Cayley ball plus one named extra edge, carries: rank `r`; `g = |S|`, which is also the ceiling
+  on `d_ball` at any size; the **refutation rank** `ρ₄` (FS79-T7: the least rank of a subgroup whose induced graph refuses four);
+  whether every generator is a unit vector; `ω`; the refusal mechanism (forcing-mediated: a rigid unit part plus an edge on a forced
+  pair; or none known); status (refusing, four-colourable, unknown).
+- **The band is per family and is never pooled until pooling is licensed (§B.1.5).** For a refusing `X`: `R*(X)`, the least refusing
+  radius (bracketed); `t(R)` for `R ≥ R*`; `d_ball(R*)`; `d_c`. For every `X`: the UNKNOWN fraction at `W` by `d_ball` bin. The plot is
+  verdict and CPU time against `d_ball`, one panel per family, with `R*` marked and `d_c` beside it.
+- **G65's second lesson, applied.** The degree law `g·φ(R)²` describes embedding-bounded balls of rank-4 lattices whose two
+  embeddings are discs. Intervals (T5), boxes (T7) and word balls are not described by it, and a word ball has its own ceiling
+  (FS-70). So every D ask *measures* `d_ball`, records observed/predicted where the law applies, and D builds no word ball.
+
+#### §B.1.2 Measured at stage B (seconds; exact graph statistics of files on record)
+
+| object | `n` | `d` (the 4-core is the whole graph in every row) | triangles | every edge unit? | rank of its lattice |
+|---|---|---|---|---|---|
+| Heule-510 (`tools/heule510.json`) | 510 | 9.82 | 999 | yes | 8 (its edge lattice, `data/m56/lattice-heule510.json`) |
+| Heule-553 (`tools/heule553.json`) | 553 | 9.84 | 1,093 | yes | — |
+| de Grey's 1581 (`tools/degrey_cert.json`) | 1,581 | 9.96 | 2,840 | yes | ℚ-span 16 (G43) |
+| X_A's certified core (FS73-T6) | 2,044 | 10.47 | present (K ∋ √3) | all but the one pair edge | 4 |
+| X_A's source ball, R = 1.5 | 39,829 | 18.41 | present | all but the pair edge | 4 |
+| FS79-T5, `G(ℤ, {1,3,7,12,17,22})` on 33 points | 33 | 8.24 | 0 | no | 1 (`ρ₄ = 1`) |
+
+X_A's source ball refused in **36.6 s CPU** (kissat, triangle pin; `steps.jsonl`); its first core round took 705 s.
+
+**Reading** [measured, five objects; a reading]: minimal four-colour refusals of unit-distance graphs sit at average degree 9.8–10.5,
+just above the random-graph four-colouring threshold (≈ 8.9 [external, from memory — unchecked here]), and **X_A's refusing core sits
+with the three held unit-distance witnesses (10.47 against 9.82–9.96)**, while the rank-1, triangle-free T5 sits below them (8.24). This is
+the one measured sign that X_A behaves like a unit-distance refusal at its core despite its one non-unit edge. *Killing test:* D0b's
+X_A ladder finding cores well away from 10 at other radii, or X_B's core far from X_A's.
+
+#### §B.1.3 The families, and what each may be read for
+
+| family | `r` | `ρ₄` | unit generators | ω | mechanism | read for |
+|---|---|---|---|---|---|---|
+| **X_A** = `σ_R(Λ_dG, U)` + edge `{0, v}` | 4 | ≥ 2 | all but one edge | 3 | forcing-mediated (`F = 8Λ`, `v ∈ F`) | **the band at rank 4**; bears on 47's survivors that D1 types rigid, and only on those |
+| X_B = `Cay(Λ_dG, U ∪ {±v})` | 4 | ≥ 2 | no (one ± pair) | 3 | forcing-mediated, repeated | second rank-4 family; differs from X_A in one axis (how many v-edges) |
+| X_W = held unit-distance witnesses | 8–16 | ≥ 2 | yes | 3 | — | `d_c` of genuine unit-distance four-colour refusals (cores only; no radius ladder) |
+| T5, T7 | 1, 2 | **1** | no | 2 | — | **instrument controls only**: `ρ₄ = 1` is impossible for a unit-distance lattice graph (a line through 0 holds one ± pair of unit vectors, FS79-T7), and T7's refusal is its rank-1 fibre's |
+| colourable: `Cay(Λ_dG, U)`, `L21cc6506`, 47's coloured lattices | 4 | — | yes | 3, 2, 2 | — | where SAT answers, and where UNKNOWN clusters with no refusal to find |
+| **target T_47**: balls of 47's minimal survivors | 4 | ≥ 2 | yes | 2 | unknown | — |
+
+The planner's D0 put T5 and T7 in the refusing population beside X_B. Their refutation rank makes them a different population, so they
+calibrate the instrument (encoding, pins, the wall firing, the checker) and never the band.
+
+#### §B.1.4 D0's order: the record first
+
+Every number D0b would otherwise buy first is partly on record (§B.1.2; FS-73 P1d's DRUP runs; FS-79's colourable asks). D0 is split:
+**D0a** puts the record into the ask schema with no solver, and **D0b** runs only the ladder the record lacks — X_A's `R*`, which no
+record brackets, and the matched X_B and colourable asks.
+
+#### §B.1.5 The transfer to ℚ(√47): its grade, and what would raise it
+
+Correction 2 (§R-review) grades the transfer a [reading]. The model says exactly why and what would change it. Every control differs
+from the target in at least two axes:
+
+| control | differs from T_47 in |
+|---|---|
+| X_A | ω (3 against 2); one non-unit edge; field (K against ℚ(√47)); the mechanism is unknown at 47 |
+| X_B | ω; a non-unit generator; field |
+| X_W | ω; rank (8–16 against 4); cores, not balls |
+| T5, T7 | refutation rank 1 (impossible for the target); rank; non-unit generators |
+
+- **What would make it more than a reading: degree-universality at four colours**, stated as a law with a killing test: *on refutation-rank
+  ≥ 2 families, time-to-refusal and the UNKNOWN fraction are functions of `(d_ball, n)` to within a factor of 3, and `d_c` is family-
+  independent to within 10 %.* D0 tests it on X_A against X_B (one axis differs) and on `d_c` across X_A and X_W (already within 7 %,
+  §B.1.2). If it survives, carrying the band to 47 is an interpolation along measured axes, graded [measured] on every axis but one.
+- **The axis no control covers is ω.** No triangle-free, refutation-rank ≥ 2 graph refusing four colours is anywhere in the record. So
+  the transfer stays a reading on that axis whatever D0 measures, and D's record says so beside every price.
+- **The right control does not exist in the record, and cannot at rank 4 without answering D itself.** A rank-4 unit-distance lattice
+  graph over a field where four colours are refused by theorem would need a field of degree ≤ 4 known to need five, and no such field is
+  known (that is D's question). The least-rank unit-distance lattice graph known to refuse four is Heule-510's edge lattice, rank 8.
+- **A null at 47 is unreadable as evidence, for a reason no calibration removes:** `R*(T_47)` is unknown and may be infinite. The null
+  is a price in control units, `t_47 / t_A` at matched `(d_ball, n)`, with both denominators written in words.
+
+#### §B.1.6 D2's survivor and its matched control
+
+- "Densest" was undefined. `g` alone ignores covolume, and a lattice's `d_ball` can never exceed `g`. So D2 takes the minimal survivor
+  with the least `N(d*)`, the points an embedding-bounded ball needs to reach `d_ball = d*` (G65's figure of merit), and excludes any
+  survivor with `g ≤ d*`. For scale: `cert_47.json`'s lattice lists 14 unit pairs (`g = 28` listed), so on that lattice `d_ball = 12`
+  needs `φ(R)² ≥ 12/28 ≈ 0.43`.
+- **The matched control** is the X_A ask nearest in `d_ball`, then in `n`, under the same encoding, solver and machine: one thing differs,
+  the family. The recorded X_A refusal (36.6 s) used a triangle pin, which the target cannot use (ω = 2), so D0b re-asks X_A under the
+  edge pin before any ratio is formed.
+
+#### §B.1.7 P-D0's scope
+
+P-D0 as first registered covered every refusing family. The record already decides it on one of them: T5 refuses four colours on 33
+points at degree 8.24, trivially within an hour, so its informative outcome was unreachable as worded. The prediction is scoped to the
+refutation-rank ≥ 2 families and to `d_ball` (edited in §P and marked). The evidence (FS79-T5, 2026-09-23) predates D0, which is the
+test between a diagnosis and an escape.
+
+#### §B.1.8 §F's field-level object (checked; three proposals to the owner, to apply only after C1's verdicts)
+
+**Well-definedness, checked by hand** (the statements are not changed):
+- `R_F = ℤ[U_F]` is closed under multiplication, since `U_F·U_F ⊆ U_F`, and it is the vertex set of the component of 0.
+- `λ_e(x) = Re(ē x)` is a homomorphism `R₅ → ℝ/ℤ`.
+- The disc part and F4 are disjoint: F4 characters have order 3, and `θ₂ + λ_e` has finite order only if `λ_e` does, which forces `e = 0`
+  and leaves order 2.
+- The four F4 characters are exactly the characters of `R₅/3R₅ = ℤ[i]/3 = 𝔽₉` with `χ(1), χ(i) ∈ {1/3, 2/3}`, since `w ≡ −i (mod 3)`
+  sends every `iᵏwᵐ` to `±1, ±i`.
+- L3 needs only `U₅ ⊆ U_F`, which holds for every `F`, since rational unit vectors lie in every field.
+
+**Proposals**, sent to the owner and not applied:
+- **P-F1: one lemma where there are three costumes.** For an additive map `φ : A → B` with `φ(S_A) ⊆ S_B`, `θ ↦ θ ∘ φ` maps
+  `Θ(B, S_B)` into `Θ(A, S_A)`. L3 is this lemma for `φ = (x ↦ bx) : (R₅, U₅) → (R_F, U_F)`, so a "layer" is a pullback and stops being
+  an informal word. FS73-T11 and §S.P0's "a sub-configuration's EMPTY proves the field" are the lemma for the inclusion
+  `(⟨S⟩, S) → (R_F, U_F)`. L1's restriction maps are the lemma again.
+- **P-F2: L1 as an identity, then a theorem.** `Θ₃(F) = lim_S Θ₃(⟨S⟩, S)` over the directed set of finite symmetric `S ⊆ U_F`, because
+  `R_F` is the directed union of the `⟨S⟩`, `Hom(−, ℝ/ℤ)` turns that union into a limit, and the band condition is pointwise. Non-emptiness
+  is then the inverse-limit theorem for non-empty compact spaces, with T22 ⟹ used only at finite stages. This is Poros's indexing, stated
+  as the object it is. It is the shape the kernel route (FS-75) would state.
+- **P-F3: the field is incidental; the intrinsic object is a subgroup of the circle.** Every step uses only a subgroup `U` of the unit
+  circle with `U₅ ⊆ U`, its ring `R = ℤ[U]`, the hypothesis `1/3 ∈ R`, and one odd relation. L1 needs only that `R` is torsion-free
+  abelian; L2 concerns `U₅`; L3 needs `U·U ⊆ U`; L4 is algebra. So the general form is: **for every subgroup `U` of the circle group
+  containing `U₅`, with `1/3 ∈ ℤ[U]` and an odd closed walk in `Cay(ℤ[U], U)`, that unit-distance graph is not three-colourable.** F-T4
+  is the instance `U = U_F`. It is strictly stronger, because it refuses three colours on smaller graphs: for d ≡ 11 (mod 12) the group
+  `U = U₅·⟨v_d⟩` already carries the relation `1 = n(2 − v − v̄)`, whose coefficient sum is 0, so no odd-walk hypothesis is needed there.
+  It is also the class §IQ item 2 asks for: "the most general class where the question makes sense". *Killing test:* a step of
+  stage C's proof that uses a field property of `F` beyond `U_F` being a group containing `U₅`.
+
+#### §B.1.9 §M's Lean decision: re-examined, it stands (the reasons are in §M, marked)
+
+#### §B.1.10 Phase 0's configurations, as objects (a proposal to the owner for phase 0; §S.P0 not edited)
+
+- **The objects.** A configuration is a finite symmetric set `S ⊂ U_F`. Its lattice is `Λ_S = ⟨S⟩`, and the certificate's "key" is only
+  `Λ_S`'s coordinate system. There are two graphs on `Λ_S`: the **listed** graph `Cay(Λ_S, S)` and the **saturated** graph
+  `Cay(Λ_S, U_F ∩ Λ_S)`. Phase 0's driver already saturates a NONEMPTY configuration while `D ≤ 5,000` (its `-sat` rows).
+- **Which object each verdict speaks about:**
+
+  | verdict | speaks about | licenses | grade |
+  |---|---|---|---|
+  | EMPTY on the listed `S` | `Cay(Λ_S, S)` and every graph containing a copy of it | χ(F²) ≥ 4 | [cert + hand: T22 ⟹] |
+  | NONEMPTY on the listed `S` (`--no-enumerate`) | `Cay(Λ_S, S)` only | that graph is three-colourable; nothing about `Λ_S`'s full graph or about F | [cert] |
+  | NONEMPTY on the saturated set (enumeration on, or a `-sat` row) | `Cay(Λ_S, U(Λ_S))` | the lattice graph is three-colourable; nothing about F | [cert] |
+
+  An EMPTY on the saturated set is implied by one on `S`, so it is never needed. A saturated ask is needed only after a listed NONEMPTY.
+- **A configuration's identity is its orbit** under multiplication by `U_F`, complex conjugation, and `√d ↦ −√d`. `Θ₃` is equivariant
+  under all three, so every member of an orbit must get the same verdict. With `z = (1+i)(a − i√d)/(2c)`, conjugation and the Galois map
+  both send `{1, v, z}·U₅` to `{1, v̄, z̄}·U₅` (the Galois map sends `z` to `i z̄`), while `{1, v, z̄}·U₅` lies in a different orbit. That is
+  consistent with T41's split verdict (one empty, one not; inventory item 37).
+  - **Proposal to phase 0:** key each row by an orbit representative plus its generating data (`(a, c, sign)` for the twists).
+  - **Proposal:** run one conjugate pair both ways as a free control. A split verdict inside one orbit is a builder bug, a positive
+    signal for what should not happen.
+  - **Proposal:** give the per-field table an **object** column (listed / saturated).
+
+#### §B.1.11 What the domain pass changed in the plan
+
+1. §S.D's table was rewritten: D0 split into D0a (the record, no solver) and D0b (the rank-4 ladder); X_A named as the primary
+   refusing family; T5 and T7 demoted to instrument controls; every ask posed on its 4-core under the target's encoding; D2's
+   survivor defined by `N(d*)` and its matched control defined. The planner's rows are kept as superseded.
+2. P-D0 was scoped to refutation-rank ≥ 2 families and to `d_ball`, marked in §P.
+3. §M's Lean decision was re-examined and stands, with its reasons and a consequence for FS-75 recorded.
+4. **To the owner, not applied:** P-F1, P-F2 and P-F3 (§F, after C1); the configuration proposals (§S.P0, for the implementer).
