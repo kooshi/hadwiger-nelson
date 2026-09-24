@@ -322,3 +322,70 @@ they differ.
 and the statement fixes that outline. They differ in how the F4 chain closes, in how L4 separates the torsion from the real part, and
 in whether T22 is cited or re-derived. The one input both rest on without re-derivation is `[Fischer1990]`'s role in "the only
 fields that can need four", which C3 checks.
+
+### §2.1 The modeling agent's proposals P-F1–P-F3 (plan §B.1.8), judged at the owner's request
+
+- **P-F1 (the pullback lemma) — correct.**
+  - For additive `φ : A → B` with `φ(S_A) ⊆ S_B`, `θ ↦ θ∘φ` maps `Θ(B, S_B)` into `Θ(A, S_A)`. The proof is one line: `θ(φ(s)) ∈ B`
+    for every `s ∈ S_A`.
+  - L3 is the instance `φ = (x ↦ bx) : (R₅, U₅) → (R_F, U_F)`. L1's restriction maps are the instance for the inclusion
+    `(⟨S⟩, S) → (R_F, U_F)`.
+  - It adds no content; it names the common form. Apply it.
+- **P-F2 (L1 as an inverse limit) — correct.**
+  - `R_F` is the directed union of the `⟨S⟩` over finite symmetric `S ⊆ U_F`. `Hom(−, T)` turns a directed colimit into a limit: a
+    compatible family of characters is one character on the union.
+  - The band condition is pointwise, so `Θ₃(F) = lim_S Θ₃(⟨S⟩, S)` as a set, and as a space in the product topology.
+  - Each `Θ₃(⟨S⟩, S)` is a closed subset of the torus `Hom(⟨S⟩, T)`, so it is compact and Hausdorff, and nonempty by T22 ⟹. A
+    directed inverse limit of nonempty compact Hausdorff spaces is nonempty.
+  - The verifier's §1.1 uses the same indexing in finite-intersection form inside `Hom(R_F, T)`. That form needs `T`'s injectivity to
+    extend `θ_S`; the inverse-limit form does not. Both are correct. **The inverse-limit form is the better statement for the kernel
+    route (FS-75).** Apply it.
+- **P-F3 (the field-free form) — correct, and it follows from §1's proofs as written.**
+  - Audit of every step against "a subgroup `U` of the unit circle with `U₅ ⊆ U`, `R = ℤ[U]`":
+    - L1 uses only that `R ⊂ ℂ` is torsion-free.
+    - L2 is about `U₅` alone.
+    - L3 uses `U·U₅ ⊆ U`.
+    - L4′ uses that `R` is a ring containing `1/25` (true, since `U·U ⊆ U` and `1/5 ∈ ℤ[U₅]`), that `1/3 ∈ R`, and, for the final
+      contradiction, an odd closed walk in `Cay(R, U)`.
+  - **No step uses that `F` is a field, or `U_F`'s maximality.** The killing test named in §B.1.8 is not met.
+  - The conclusion is about the Cayley graph `Cay(ℤ[U], U)`. That graph is a spanning subgraph of the unit-distance graph on `ℤ[U]`,
+    so the unit-distance graph is not three-colourable either.
+  - **The instance `U = U₅·⟨v_d⟩` is correct** for squarefree `d ≡ 11 (mod 12)`: the relation `1 = 2n − nv − nv̄` lies in `ℤ[U]`.
+    It supplies both `1/3 ∈ ℤ[U]` and non-bipartiteness (coefficient sum 0), so no separate odd-walk hypothesis is needed.
+  - **A sharpening the verifier adds.** The whole group `⟨v⟩` is not needed. The proof uses the relation only at `u ∈ {1, v, v̄}`, so it
+    touches only the five cosets `v^k U₅`, `|k| ≤ 2`, and the listed configuration `{v^k : |k| ≤ 2}·U₅` already has empty `Θ₃` at the
+    field level. (This is the sketch's "only the layers `{1, v, v̄, v², v̄²}·U₅` are used", now as a statement.)
+  - **Three layers are not enough at half the family; see §4.0.**
+
+## §4.0 C4, registered before any phase-0 data is read: which configurations can empty at all
+
+*Derived by the verifier after C2, before opening `data/fs81/`. Grade [hand]. It is a statement about the field-level object, and it
+implies statements about every finite `K`.*
+
+Let `n = (d+1)/4`, `3 | n`, `M₃ = R₅ + vR₅ + v̄R₅`, `S₃ = {1, v, v̄}·U₅` (the listed three-layer configuration), and
+`S₅ = {v^k : |k| ≤ 2}·U₅`.
+- **The relations of `M₃` are exactly `R₅·(2n − 1, −n, −n)`.** `1, v, v̄` span a 2-dimensional ℚ(i)-space, and
+  `v̄ = (2 − 1/n) − v`. So `x + vy + v̄z = 0` forces `y = z` and `x = −((2n−1)/n)z`. With `n = 5^a n′`, `5 ∤ n′`, this requires
+  `z ∈ n′R₅`, which gives the multiples of `(2n−1, −n, −n)` stated.
+- **At `d ≡ 11 (mod 24)` (`n` odd), `Θ₃(M₃, S₃) ≠ ∅` at the field level.** An explicit point: `θ(x + vy + v̄z) = θ₂(x) + θ₂(y) + χ(z)`
+  for any `χ ∈ X₃`.
+  - It is well defined: on a relation it gives `(3n − 1)θ₂(r) + nχ(r) = 0`, because `3n − 1` is even and `3 | n`.
+  - It bands every element of `S₃` (the values are `1/2`, `1/2` and `χ(ω) ∈ {1/3, 2/3}`).
+  - By P-F1 it restricts to every finite truncation `{1, v, v̄}·U^(5^K)`. **So the listed configuration A is NONEMPTY at every K for every
+    `d ≡ 11 (mod 24)`**: 11, 35, 59, 83, 107, 131, 155, 179, 203, 227, 251, 299, 323, 347, 371, 395, 419, 443, 467, 491 among the census's
+    fields.
+  - For A, "least K" is ∞ there. This is a theorem, not a measurement of K.
+- **At `d ≡ 23 (mod 24)` (`n ≡ 0 mod 6`), `Θ₃(M₃, S₃) = ∅` at the field level.**
+  - The relation gives `(2n−1)θ_1 = n(θ_v + θ_{v̄})` on `R₅`. Its torsion part (the `τ` of §1.4) reads `(2n−1)t_1 = 0`, because `n` kills
+    both order 2 and order 3.
+  - `2n − 1` is odd and `≡ 2 (mod 3)`, so `t_1 = 0`, which is impossible for either type.
+  - By P-F2 (compactness), **some finite truncation of `S₃` is already EMPTY, so A's `K(d)` is finite at every `d ≡ 23 (mod 24)`.**
+- **`S₅` has empty `Θ₃` at every `d ≡ 11 (mod 12)`** (§1.4, §2.1). So configuration B, `{v^k : |k| ≤ 2}·U^(5^K)`, has finite `K(d)` for
+  the whole family.
+- **Registered expectation for phase 0's data** (to be checked in C4):
+  - every listed configuration-A row at `d ≡ 11 (mod 24)` reads NONEMPTY, at every K; an EMPTY there is a builder or checker bug, or a
+    refutation of this section;
+  - A can read EMPTY only at `d ≡ 23 (mod 24)`;
+  - a *saturated* A row (a `-sat` row) may read EMPTY at `d ≡ 11 (mod 24)`, because saturation adds unit vectors of the lattice, such
+    as rational ones of denominator dividing `n·5^K`, since `1/n = 2 − v − v̄` lies in the lattice. This section says nothing about
+    saturated rows.
