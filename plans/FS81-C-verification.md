@@ -449,8 +449,10 @@ So on these examples each hypothesis is necessary. **Neither can be weakened to 
   `𝔽₉`, as at ℚ(√7, √10) in §3.1.
 - **What is left open: the residual case.** A non-bipartite `F` whose primes above 3 of odd residue degree all have degree `≥ 3`. F-T4
   is silent there (`1/3 ∉ ℤ[U]`), and the residue bound is `χ(Γ_{27}) ≥ 6`.
-  - No additive 3-colouring passes through such a prime: an `𝔽₃`-functional on `𝔽_{729}` nonzero on the 28 norm-one elements would
-    3-colour `Γ₂₇`.
+  - No additive 3-colouring passes through such a prime. The unit vectors `z/z̄` reduce onto the **whole** norm-one group of the
+    residue field: complex conjugation acts on it as Frobenius, so `z/z̄ ≡ z^{1−q}`, and `x ↦ x^{1−q}` maps `𝔽_{q²}^×` onto `μ_{q+1}`
+    (Hilbert 90). So an `𝔽₃`-functional on `𝔽_{729}` nonzero on every unit vector's image would be nonzero on all 28 norm-one
+    elements, and would 3-colour `Γ₂₇` (`χ ≥ 6`).
   - So `χ(F²) = 3` there would need a non-additive slope.
   - **Example:** `F = ℚ(α, √7)` with `α³ = α + 1`. 3 is inert in the cubic (`x³ − x − 1` has no root mod 3) and splits in ℚ(√7), so
     both primes of `F` above 3 have residue degree 3. `F` is non-bipartite, and neither F-T4 nor any residue bound decides it.
