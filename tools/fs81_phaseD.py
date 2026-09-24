@@ -21,7 +21,8 @@ Commands:
                D0b: X_A (target and triangle encodings), X_B and the colourable ball at each radius, plus the instrument controls (T5, T7,
                the wall plant); one row per ask appended with fsync to data/fs81/phaseD/d0b-asks.jsonl; a relaunch skips recorded asks.
                Every UNSAT is re-asked by a second solver (toolchain CaDiCaL) unless --no-second.  Run it under the heavy lock.
-  reask KEY [TIMES] [WALL]   a decision number: the ladder ask KEY ('X_A|target|R1.5') alone, TIMES times, min CPU -> d0b-reask.jsonl
+  reask KEY [TIMES] [WALL] [--contended] [--tag=T]   the ladder ask KEY ('X_A|target|R1.5') alone in its slot, TIMES times, min CPU ->
+               d0b-reask.jsonl, with `slot.py --status` stored beside each run; --contended marks a run made beside other jobs
 """
 import gzip
 import hashlib
@@ -664,7 +665,7 @@ def cmd_ladder(radii, workers, wall, only, second):
     return 0
 
 
-def cmd_reask(key, times, wall):
+def cmd_reask(key, times, wall, quiet=True, tag='decision'):
     """a number that enters a decision (t_A, the matched control, d*): the ask re-run ALONE, `times` times in sequence, each a fresh
     kissat on the same CNF; rows appended to d0b-reask.jsonl with load 1; the minimum CPU s is the decision number (CLAUDE.md
     S Toolchain: CPU seconds, minimum of three, machine named).  Run it under the heavy lock with nothing else of ours running."""
@@ -676,12 +677,14 @@ def cmd_reask(key, times, wall):
     path = WORK / f'reask-{os.getpid()}.cnf'
     sha = write_cnf(path, cl, nv)
     meta.update({'d_ball': round(2 * meta['m'] / meta['n'], 3), 'd4': round(2 * meta['m4'] / meta['n4'], 3)})
-    have = [r for r in load_jsonl(OUT / 'd0b-reask.jsonl') if r['key'] == key and r['cnf_sha256'] == sha]
+    have = [r for r in load_jsonl(OUT / 'd0b-reask.jsonl') if r['key'] == key and r['cnf_sha256'] == sha and r.get('tag', 'decision') == tag
+            and r.get('wall_s_budget') == wall]
     cpus = [r['cpu_s'] for r in have if r['verdict'] != 'UNKNOWN']
     for t in range(len(have), times):
+        st = subprocess.run([sys.executable, str(ROOT / 'scripts' / 'slot.py'), '--status'], capture_output=True, text=True).stdout
         rec, out = run_ask([KISSAT, '-q', str(path)], wall, str(path) + '.log')
         row = dict(meta, key=key, repeat=t + 1, solver='kissat', version='kissat 4.0.4', wall_s_budget=wall, machine=MACHINE, workers=1,
-                   in_flight_at_start=1, quiet=True, cnf_sha256=sha, **rec)
+                   in_flight_at_start=1, quiet=quiet, tag=tag, slot_status_at_start=st, cnf_sha256=sha, **rec)
         append(OUT / 'd0b-reask.jsonl', row)
         print(f'  {key} repeat {t + 1}: {rec["verdict"]} {rec["cpu_s"]} s CPU', flush=True)
         if rec['verdict'] != 'UNKNOWN':
@@ -705,7 +708,10 @@ def main():
     if a[0] == 'harvest':
         return cmd_harvest()
     if a[0] == 'reask':
-        return cmd_reask(a[1], int(a[2]) if len(a) > 2 else 3, float(a[3]) if len(a) > 3 else 1800.0)
+        quiet = '--contended' not in a
+        tag = next((x.split('=', 1)[1] for x in a if x.startswith('--tag=')), 'decision')
+        pos = [x for x in a[1:] if not x.startswith('--')]
+        return cmd_reask(pos[0], int(pos[1]) if len(pos) > 1 else 3, float(pos[2]) if len(pos) > 2 else 1800.0, quiet, tag)
     if a[0] == 'ladder':
         import argparse
         ap = argparse.ArgumentParser()

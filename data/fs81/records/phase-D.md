@@ -245,6 +245,18 @@ it skips every key already in the JSONL with a verdict. *Exit status:* 75 = not 
 by its RAM cap (raise `--mem` from the measured peak, never guess). The pgid of the `setsid` child goes to `data/fs81/phaseD/d0b.pgid`;
 a kill is by that group, verified by the pid absent from `ps` and the JSONL static for ten seconds.
 
+**The R = 1.3 long re-asks** (the owner's decision: now, beside D1, two pinned single-core asks, a 4-hour wall, marked contended):
+
+```
+cd /home/kooshi/source/lean-dir
+for k in 'X_A|target|R1.3' 'X_B|target|R1.3'; do n=$(echo "$k" | cut -d'|' -f1)
+  setsid nohup python3 scripts/slot.py --mem 3 --cpus 1 --name "d0b-long-$n" --wait 1800 -- \
+    python3 tools/fs81_phaseD.py reask "$k" 1 14400 --contended --tag=long-R1.3 >> "data/fs81/phaseD/d0b-long-$n.log" 2>&1 &
+done
+```
+
+*What a kill redoes:* the one ask (a row is written when it ends). *Resume:* the same loop (a recorded (key, tag, wall) is skipped).
+
 **D1, the screen at 47** (`tools/fs81_d47.py`, a copy of FS-79's `fs79_p0.py` at d = 47; writes `data/fs81/phaseD/d47/`):
 each step resumable by re-running (every record keyed and skipped when present; a kill redoes the one denominator or screen in flight):
 
