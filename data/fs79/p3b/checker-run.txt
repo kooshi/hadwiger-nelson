@@ -1,0 +1,36 @@
+# tools/fs79_p0_check.py (untouched) on every P3b witness, 2026-09-24T11:34:52+00:00
+== data/fs79/p3b/witnesses/1344-theta3-cal.json
+CERTIFIED: Cay(Z<U_1344>, U_1344) over Q(sqrt167), 68 unit vectors, is properly 3-coloured by the linear form of order 167 on the basis
+rc=0
+== data/fs79/p3b/witnesses/1344-theta4-loose-cal.json
+CERTIFIED: Cay(Z<U_1344>, U_1344) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 167 on the basis
+rc=0
+== data/fs79/p3b/witnesses/1584-theta4-loose-cal.json
+CERTIFIED: Cay(Z<U_1584>, U_1584) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 6253632 on the basis
+rc=0
+== data/fs79/p3b/witnesses/2352-theta3-cal.json
+CERTIFIED: Cay(Z<U_2352>, U_2352) over Q(sqrt167), 68 unit vectors, is properly 3-coloured by the linear form of order 117902 on the basis
+rc=0
+== data/fs79/p3b/witnesses/2352-theta4-loose-cal.json
+CERTIFIED: Cay(Z<U_2352>, U_2352) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 117902 on the basis
+rc=0
+== data/fs79/p3b/witnesses/L21cc6506-theta4-loose-ctl2.json
+CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 913500 on the basis
+rc=0
+== data/fs79/p3b/witnesses/L21cc6506-theta4-loose.json
+CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 23186880 on the basis
+rc=0
+
+# control 2: the first L21cc6506 witness with coordinate i moved by +1/8 (must be refused)
+FAIL: THETA_OUT_OF_BAND: (-332, -3, -249, 4): theta(u) mod 1 = 114491/1932240
+rc=1
+FAIL: THETA_OUT_OF_BAND: (-415, 0, 0, -5): theta(u) mod 1 = 181/5312
+rc=1
+FAIL: THETA_OUT_OF_BAND: (-336, 0, -252, 0): theta(u) mod 1 = 30243/32204
+rc=1
+FAIL: THETA_OUT_OF_BAND: (-332, -3, 249, -4): theta(u) mod 1 = 125711/1932240
+rc=1
+
+# the Λ1584 calibration witness read at k = 3 (not in Θ3; must be refused)
+FAIL: THETA_OUT_OF_BAND: (-1422, 0, 0, 54): theta(u) mod 1 = 6341/21714
+rc=1
