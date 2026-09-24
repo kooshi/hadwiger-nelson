@@ -911,3 +911,20 @@ Draw and Null measure only the week's narrow experiment (whether algebra reaches
 not the milestone's worth. Every proven new theorem — a "no" in a named class, a no-go of a named format, or a derivation of `8Λ` inside
 K — is a success of the milestone and is reported as one. Nothing registered above changes.
 
+**Ruling 3 (2026-09-24, on the competition advisor's question, before any round-1 report): a proved "yes" passes the killing test.**
+§S.4's K1–K3 had no clause for the plan's own outcome (b) as a "yes": a named graph with `F₄ ≠ 0`. **Ruled: a named Cayley graph in
+`𝒞^tf₄` (or in `𝒰^tf`) with `F₄ ≠ 0`, proved by derivation at `F` itself (not at `P` or `F_μ`; §IQ item 2's strengths) and shipped with its
+inhabitant (G30 mode 5), passes as K4**, scored at its scope: Paid (abstract) unless realised in `𝒰^tf`, and for five colours only if
+chainable in a wall-broken field. The alternative weighed was requiring it as K2; a "yes" is not a necessary condition, so it cannot be
+stated in K2's form. Confidence high.
+
+**Ruling 4 (the same day): a K1 whose load-bearing step is a finite case analysis found by search passes only with a derived step
+beyond it.** A K1 whose load-bearing step rests on a finite case analysis found by search — one's own this week (banned) or one in the
+literature — is recorded as **"K1 by prior art"**, and it is a result (it establishes the stripes on `Λ`, and establishing a known
+argument on a new object is new knowledge). **It does not pass the killing test on its own.** It passes if either (i) that step, or the
+stripes themselves, is derived with no finite case analysis, or (ii) it comes with a derived step beyond it: the coupling between cosets
+(the chirality stated on `Λ`), or `F ⊇ 8Λ`. The alternative weighed was passing on the letter, since a published human-checkable case
+analysis is mathematics and existing certificates are in scope this week. It lost because the test exists to detect movement by
+derivation in this week, and Part 1 asks for `8Λ` "with no solver refusal". Confidence medium: it would change if Kooshi reads K1 as "is
+step 1's first half established on `Λ`" rather than "did the competition derive it".
+
