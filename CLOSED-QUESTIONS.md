@@ -265,6 +265,13 @@ record, 0); none addresses a field plane.
 > bracket `4 ≤ χ(ℚ(√47)²) ≤ 5` below is a partial answer to that question; FS-61's census (`plans/FS61-quadratic-census.md`) is the
 > answer to the general one as far as finite witnesses reach.
 
+> **Pointer (FS-81's close, 2026-09-24) — this section is NOT rewritten as answered, by rule:** FS-81 certified the census's remaining 25
+> fields (`LEDGER.md` row 83, [cert + hand]; all 40 squarefree `d ≡ 11 (mod 12)` below 500 now need four) and proved at the field level,
+> by hand with two independent derivations, that every such `d` needs four (row 82: `χ(F²) ≥ 4` whenever `1/3 ∈ ℤ[U_F]` and `F²` is not
+> bipartite; `χ(ℚ(√167)²) ≥ 4` is row 79). The counts and statuses below are as of FS-61 and are superseded by rows 79, 82 and 83.
+> **Nothing here is recorded as closed until `[Johnson2000]` and `[Johnson2006]` are read** (`plans/FS81-quadratic-four-colours.md`
+> §PA.4); `[Fischer1990]` Thm 10(ii) and Ex. 4 hold the relation and conclude only the additive case.
+
 **Our answer, field by field.** Below four, the classification is prior art: `χ = 2` iff `d ≢ 3 (mod 4)` (`[Johnson1987]`,
 `[Fischer1990]` Thm 8) and `χ = 3` for `d ≡ 3, 7 (mod 12)` (`[Fischer1990]` Thm 9 and the sentence after it). So the only real quadratic
 fields whose plane **can** need four are the squarefree `d ≡ 11 (mod 12)` — forty of them below 500 — and this project has now
@@ -471,8 +478,17 @@ and the dichotomy for every such graph.
   §1.1 row 5: *"More generally, what is the smallest subfield of E2 that requires 5 colors?"* `ℚ(√3,√11)` does
   not (Theorem B). The fields known here to need exactly five — `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
   `ℚ(√3,√11,√23)` (ledger rows 47, 52–53) — all have degree 8. Any field needing five must break the 2-adic
-  wall (`CLAUDE.md` G1, G35), which screens candidates by congruence; whether a field of smaller degree needs
-  five has not been examined here.
+  wall (`CLAUDE.md` G1, G35), which screens candidates by congruence. The smallest candidates examined are quadratic:
+  `4 ≤ χ(ℚ(√47)²) ≤ 5` (§1.7; the local–global conjecture predicts 5), and FS-81 screened ℚ(√47) at four colours without landing five
+  (`LEDGER.md` row 84; FS-84 carries it).
+- **A triangle-free 5-chromatic unit-distance graph, and one of the smallest order.** `[Soifer2024]` ch. 55, p. 699: **Open Problem
+  55.1 (Soifer 2019)**, *"Construct a triangle-free 5-chromatic unit-distance graph"*, and **55.2**, one of the smallest order (found
+  2026-09-24 by the algebra-week advisor, `plans/POROS-2026-09-24-algebra-week.md` §6.7; the text confirmed in the held PDF by the owner).
+  Still open in the plane per the Polymath16 threads (Haugstrup, December 2025); de Grey found one only in ℝ³ (`[deGrey2026]`, 61
+  vertices) and Haugstrup's pseudo-edges give triangle-free forcing in ℝ⁴. **We are well placed and have not answered it:** a field
+  without √3 has no unit triangles (`CLAUDE.md` G57), so a certified `χ(ℚ(√47)²) = 5` — the local–global conjecture's prediction —
+  would answer 55.1, and with it `[ExooIsmailescu2019]`'s smallest-subfield question above and Moorhouse's `ℚ(√47)` question (§1.7).
+  FS-81 got four colours calibrated and ℚ(√47) screened, not five (`LEDGER.md` row 84); FS-84 carries it.
 - **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
   Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
   unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
