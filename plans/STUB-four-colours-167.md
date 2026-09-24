@@ -1,5 +1,19 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+## 00. After FS-81 (2026-09-24): four is a theorem of the family; a ball-and-solver refusal of five is priced out
+
+- **The premise at four is now field-level** (`LEDGER.md` row 82): `χ(ℚ(√167)²) ≥ 4` follows from FS-81's theorem (167 ≡ 11 mod 12),
+  besides row 79's certificate; the five listed layers `{vᵏ : |k| ≤ 2}·U^(5³)` carry an explicit structural certificate (row 83).
+- **The four-colour hardness band is measured** (row 84), on de Grey's lattice with the certified forcing graph X_A: undecided at
+  `d_ball` 8.3–14.7, a certified refusal at 16.6 (R = 1.4), 55 s quiet at 18.41. **A matched-control ask is infeasible**: at ℚ(√47) the
+  cheapest survivor needs 1,284 times the control's points to reach that degree, and ℚ(√167)'s lattices are sparser still
+  (`L21cc6506`: 2.3·10⁸ points at degree 14). So step 5 below (a ball) is priced out at matched density [reading], and the week after
+  FS-81's close bans SAT solvers.
+- **The solver-free routes, in order:** the exact `Θ₄` cells of the seven survivors (P3b's finder and FS-79's partial census; a
+  full-dimensional cell makes a survivor loose); the chain route on any survivor that stays rigid; FS-80's averaged certificate; FS-83's
+  field-level `Θ₅` (a point falsifies the conjecture, emptiness says a character colouring cannot).
+- **FS-84** is this stub's sibling at ℚ(√47), where five would pin the value exactly.
+
 ## 0. After FS-79 (2026-09-24): `L21cc6506` is loose at four colours, and the instances are the chain's survivors
 
 **What FS-79 settled** (`LEDGER.md` row 81; `plans/FS79-derivation.md` T1, T2, T8–T16, T38–T43):

@@ -263,8 +263,8 @@ an explicit decline.*
   `d ≡ 7 (mod 8)`. Killing test: a census-style search that lands the `d ≡ 11 (mod 24)` fields at the `d ≡ 23 (mod 24)` rate. In
   G61 (declined as a stub: the census is closed, so only a re-run of its search tests it).
 - **R2 — the d ≡ 23 (mod 48) lead** [observation, T16]: T41's shape C empties at K = 1 only at 23, 71, 119, 167, all ≡ 23 (mod 48),
-  not at 263, 311, 359 — a threshold in n like B's. Declined as a stub (T8's method would decide it in an afternoon; recorded in the
-  residual stub's "cheap follow-ups").
+  not at 263, 311, 359 — a threshold in n like B's. Not a stub of its own: FS-75's re-aim carries it as the cheap first derivation
+  (T8's norm-bound method should decide it in an afternoon).
 - **R3 — D2's price as a size ratio** [reading]: the cheapest minimal survivor over ℚ(√47) needs at least 1,284 times the calibration
   control's points at the density where the control refuses four colours in 55 s; carried from an abelian Cayley graph with one
   non-unit edge, the triangle axis uncovered; not evidence that four colours suffice. In row 84 and the ℚ(√47) stub.

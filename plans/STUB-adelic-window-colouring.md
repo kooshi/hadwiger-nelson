@@ -1,5 +1,12 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+> **Routed here at FS-81's close (2026-09-24; close inventory items 12, 18): the plan-phase advisor's one-character question.** Can one
+> character of the unit-vector ring `ℤ[U_F]` put every unit vector of a whole field in `[1/k, 1 − 1/k]`? That is a colouring of the whole
+> plane local at no prime when its archimedean part is nonzero — this stub's target in its simplest form (one place, no window). At
+> `k = 5` over ℚ(√167) a yes falsifies the conjecture; at `k = 4` over ℚ(√47), its five-clause. FS-81's layer method (G74) is the tool,
+> and the question now has its own stub, **FS-83** (`plans/STUB-layer-method-five-colours.md`); this stub keeps the mixed-place
+> construction (ℝ² × ℝ² × ℚ₃²) of which a character colouring is the degenerate case.
+
 *Minted 2026-09-17, from the observation (G64) that six can only hide in the gap between `L(F)` and `χ(F²)`, and that every ceiling
 instrument this project owns goes silent exactly there. Read beside: `CLAUDE.md` G60 (the fractional route and its cap), G62 (the
 Moiré frame — an incommensurate bilayer is a projection of something periodic upstairs), G64, row 72 (the 3-adic barrier),

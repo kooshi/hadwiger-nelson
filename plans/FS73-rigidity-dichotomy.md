@@ -1568,6 +1568,11 @@ settled).
   repoint both. Recorded in the tool's docstring at this close.
 - Killing a `flock` wrapper can orphan a child that holds the lock: `CLAUDE.md` § Building's kill rule, its ninth instance.
 - The table's stale spectral label and the four "REFUSING" verdicts: `data/fs73/table/CORRECTIONS.md`.
+- **Found at FS-81 (2026-09-24; `plans/FS81-derivation.md` T19):** the frozen `tools/fs73v2_check.py`'s own `--self-test` is blind to
+  both coverage mutants — a low child at `r·x ≤ lo − 2` or a high child at `r·x ≥ hi + 2` (one value left uncovered) passes it, because
+  its low-side "range-shifted" plant is excused by a try/except and it has no high-side plant. **The checker itself is unchanged and
+  sound**; a coverage regression in it would not be caught by its own self-test. The frozen file is not edited; its successor
+  `tools/fs81_theta_check.py` carries both plants strictly (`634d75d3`), and every FS-73 certificate is also readable by it.
 
 ### §R-close.10 The prior-art items owed at the close (WORKFLOW 3.2; queries through the zbMATH Open API, 2026-09-23)
 

@@ -1,5 +1,16 @@
 # FS-48 — Extensions of ℚ(√2,√3): the ℚ(√3,√d) table, explicit rhombus chains, and the fields where the three-colour theorem is non-constructive (STUB, 2026-09-14; Kooshi: explore derivations and extensions of the ℚ(√2,√3) result)
 
+> **Re-aimed at FS-81's close (2026-09-24): extended to multiquadratic fields without √3** (close inventory item 28). FS-81's
+> theorem (`LEDGER.md` row 82) decides three colours over every multiquadratic field, with or without √3: residue degrees there are 1 or
+> 2, so FS81-T7's residual case cannot occur, and `χ(F²) ≥ 4` iff `1/3 ∈ ℤ[U_F]` and `F²` is not bipartite, `χ ≤ 3` when a prime above 3
+> has residue field `𝔽₃`. **First instance: `χ(ℚ(√2,√7)²) ≥ 4`** (relation `1 = 12 + 3u + 3ū − 6v₇ − 6v̄₇`, `u = (−1 + 2√2 i)/3`) — no
+> √3, no four-chromatic quadratic subfield (ℚ(√2), ℚ(√14) bipartite; ℚ(√7) three-chromatic), the 2-adic wall broken, and by the
+> verifier's reading its first usable planes at 31 and 47, so L ≥ 5 and the conjecture predicts at least five there [reading; re-derive
+> the usable-prime list at the opening]. **The table's new columns:** for each ℚ(√a, √b) without √3, `1/3 ∈ ℤ[U]` (prime inversion at 3),
+> bipartite or not, the value at three colours (decided), L, and the upper bound. The question the table raises at four colours is
+> FS-59's and FS-84's at another field. Solver needs: none for the three-colour columns; SAT for any four-colour refusal. The text below
+> is the stub as minted (fields with √3).
+
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` §5 (the 18-vertex graph) and
 §3 (Theorem 3.1); `plans/STUB-chain-theorem.md` (FS-45, the chain lemma every witness here is an instance of),
 `plans/STUB-three-colour-classification.md` (FS-46), `plans/STUB-unit-vector-ring-kernel.md` (FS-47, prime inversion, which

@@ -1,5 +1,18 @@
 # FS-75 — the three-colour criterion in the kernel, and `χ(ℚ(√167)²) ≥ 4` with it (stub)
 
+> **Re-aimed at FS-81's close (2026-09-24).** The target is now **T4 for the whole family**, not one field. FS-81 proved at [hand, two
+> independent derivations] (`LEDGER.md` row 82; `plans/FS81-derivation.md` T1–T5) that `χ(ℚ(√d)²) ≥ 4` for every squarefree
+> `d ≡ 11 (mod 12)`, and the sharpest form is parametric: **the five listed layers `{vᵏ : |k| ≤ 2}·U₅` have empty `Θ₃`**, `v` the
+> type-M rotation. The kernel route, leaf by leaf: (1) FS73-T22's ⟹ direction (this stub's leaf 1, unchanged — everything rests on it);
+> (2) the pull-back lemma (FS81-T1, two lines); (3) L1 as an inverse limit over finite symmetric sets (FS81-T2; state it in that form);
+> (4) C1(5), the rational layer (FS81-T3: T40's cell list is a finite exact computation, the chain argument short); (5) L3, the torsion
+> character `τ` and L4′ (FS81-T4); (6) the five-layer statement parametric in `d` (FS81-T5), whose instance at 167 subsumes this stub's
+> old target. **Fallback, per field:** a kernel checker for FS-81's structural certificate (R1–R4; FS81-T9, T12) run on the 40 census
+> fields at `K_B(d) ≤ 3`, or V2's relation-form checker (leaf 2 below) on the old certificates. **Cheap first derivation** (FS81 §5 R2):
+> T41's shape `{1, v, z}·U^(5)` empties at K = 1 only at d = 23, 71, 119, 167 (all ≡ 23 mod 48), not at 263, 311, 359 — a threshold in
+> `n` like configuration B's (FS81-T8); T8's norm-bound method should decide it in an afternoon. Solver needs: **none**. The text below
+> is the stub as minted at FS-73's close; its leaves 1–3 stand.
+
 *Minted 2026-09-23 at FS-73's close, from the kernel decisions of `plans/FS73-derivation.md` T22 (stub) and T39 (stub). Rank 3:
 none on six, high on trust — it moves the first bound above three at the conjecture's cheapest exposed prediction from a
 checker's word to the kernel's, and it is the kind of certificate Kooshi prefers to a large graph.*

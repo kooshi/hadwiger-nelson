@@ -95,16 +95,18 @@ supremum of χ(F²) over such F). What the residue methods give:
   Kooshi's direction stands as the programme's aim; this paragraph is the part of the record that says where the
   ratchet actually is.
 
-## 5. The order of work
+## 5. Where the programme stands (rewritten at FS-81's close, 2026-09-24; the order of work is `plans/FRONTIER-STUBS.md`)
 
-| step | what | the derivation it produces |
+The step table written here on 2026-09-07 (M59–M61, then FS-6 re-aimed, then the write-up, then §4) is closed out: M60 and M61 are
+done, FS-6 is dead by theorem (`LEDGER.md` row 66: over every 5-sealed multiquadratic field the five-colour compulsions at arity 2 are
+trivial), and the order of work lives in the ranked table. What stands, strand by strand:
+
+| strand | where it stands | what carries it now |
 |---|---|---|
-| M59 | FS-11: the 6-critical cores of UD(𝔽₅₉,2) and UD(𝔽₁₃₁,2); the local lift test; a global lift attempt on any core that passes | which residue configurations are shadows of unit-distance configurations |
-| M60 | the 5-colour residue obstruction one prime up (T17 at 11) — DONE 2026-09-07 (`plans/M60-five-colour-residue-obstruction.md` §R): compulsions map forward along the reduction and the sealing plane has none, so over a sealed field a forced pair has `d² ≡ 0` and a virtual edge `d² ≡ 1 (mod 11)`; each hex-shell gadget impossible on its own | the lower bound's mechanism as arithmetic, at the level of single gadgets |
-| M61 | FS-15, the local–global tightness conjecture — DONE 2026-09-08 (`plans/M61-local-global-tightness.md` §R): the mechanism of tightness (G48) derived and in the kernel; the first digit undecided (FS-17) | the spindle over a forced pair removes exactly the sealing prime — the local bound is attained one level up by construction; the 6-level is one question: a pair forced equal at five colours over a 5-sealed field (11 ∣ d²) |
-| then | **FS-6 re-aimed by G48**: 5-rigidity over a SEALED field (Heule's, K(√247), K(√23)), the forced distance read off the dial at 11 ∣ d², the spindle's field 6-open by construction | whether any 5-sealed field's fabric forces a pair equal at five colours — G19's 5-tight fabric, with its distances named |
-| then | the write-up of the lower bound's derivation, if one lands — the paper is the algebra, the object its example | — |
-| then | §4 (a) and (b): the two upper-bound questions, derivation-first | whether any mechanism reaches the upper bound |
+| **The lower bound's mechanism (§3)** | a 6-forcer's every compulsion lives in a 6-open field, where no residue plane is five-colourable (G48, row 66); it must be constructed, not found (G31); ball-and-solver refusals at the fields that matter are priced out at matched density (row 84) | FS-59 (ℚ(√167), the widest gap), FS-49, FS-45, FS-83 |
+| **Class theorems by derivation (§1: "the derivations are an order of magnitude more important")** | three colours are decided by a derivation for every abelian Cayley graph (row 79) and at the field level for every real quadratic field — `χ(F²) ≥ 4` whenever `1/3 ∈ ℤ[U_F]` and the plane is not bipartite (row 82, [hand, two independent derivations], the Johnson papers unread); four colours have no linear criterion and four cell-local formats are empty (rows 80, G71, G73) | FS-75 (the three-colour theorem in the kernel), FS-82 (the residual three-colour case), FS-74, FS-76, FS-80 |
+| **The upper bound (§4)** | every ceiling we own uses one place; the conjecture falls only to a whole-plane colouring local at no prime (G48, G64) | FS-83 (character colourings at four and five colours), FS-64 (mixed places) |
+| **The write-up** | Theorem B's value is `[Fischer1994]`'s (FS-20 re-scoped); row 82 answers, at three colours, questions posed in print — a candidate paper once `[Johnson2000]` and `[Johnson2006]` are read (Kooshi's call) | FS-20 |
 
 ## 6. The rule this adds
 

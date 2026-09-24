@@ -1,5 +1,14 @@
 # FS-81: four colours over real quadratic fields (stub)
 
+> **CLOSED 2026-09-24.** Record `plans/FS81-quadratic-four-colours.md` (its §R-close first); theorems `plans/FS81-derivation.md` T1–T25;
+> `LEDGER.md` rows 82–84; G74 minted, G61 rewritten. **T4 proved at the field level** [hand, two independent derivations]: `χ(F²) ≥ 4`
+> for every `F ⊆ ℝ` with `1/3 ∈ ℤ[U_F]` and `F²` not bipartite, so `χ(ℚ(√d)²) ≥ 4` for every squarefree `d ≡ 11 (mod 12)` and χ = L for
+> every real quadratic field with L ≤ 4 — not by FS73-T41's family but by a field-level slope read layer by layer (row 82). **The census
+> completed**, 40 of 40, by structural certificates independent of that argument [cert + hand] (row 83). **ℚ(√47) at four colours:**
+> calibrated (`R*(X_A) ≤ 1.4` certified; the undecided band `d_ball` 8.3–14.7), 25 survivors of 127 lattices, and the price of a matched
+> refusal read as a size ratio ≥ 1,284 — **five not landed** (row 84; carried to FS-84). **Not claimed new:** `[Johnson2000]` and
+> `[Johnson2006]` are unread. Minted from it: FS-82, FS-83, FS-84; re-aimed: FS-48, FS-59, FS-64, FS-75.
+
 *Minted 2026-09-24, just after FS-79's close. Kooshi chose it as the next milestone on a fresh Poros's advice
 (`plans/POROS-2026-09-24-next-direction.md` §5; "prove first"), with the owner concurring. Rank 1.*
 
