@@ -695,6 +695,62 @@ def cmd_reask(key, times, wall, quiet=True, tag='decision'):
     return 0
 
 
+def cmd_certify(key, wall):
+    """a K2 certificate for one ladder refusal: the same CNF (K2's layout), a toolchain-CaDiCaL LRAT on disk, trimmed to what the empty
+    clause reaches, and the witness in K2's point format (de Grey's lattice point -> its (x, y) over Q(sqrt3, sqrt11) by fs73_lattice's
+    own field coordinates); then K2 (tools/fs81_check_witness_k.py) and the second check (tools/fs81_rup_recheck.py: cake_lpr + kissat)"""
+    fam, enc, R = key.split('|')
+    R = float(R[1:])
+    assert fam in ('X_A', 'X_B')
+    if R not in _DG:
+        _DG[R] = degrey_graphs(R)
+    pts, U, V, o, dl, lat = _DG[R]
+    meta, n, E, pins, chains = build_degrey(fam, enc, R)
+    kept_pts = [pts[v] for v in sorted(set(range(len(pts))))]          # the 4-core is the whole ball at every radius asked (asserted)
+    assert n == len(pts), 'the 4-core is not the whole ball: the witness would need the kept list'
+    od = OUT / f'cert-{fam}-{enc}-R{R}'
+    od.mkdir(parents=True, exist_ok=True)
+    WORK.mkdir(parents=True, exist_ok=True)
+    cl, nv = cnf_clauses(n, E, pins, chains)
+    cnf = WORK / f'cert-{fam}-{enc}-R{R}.cnf'
+    sha = write_cnf(cnf, cl, nv)
+    ncl = len(cl)
+    del cl
+    proof = WORK / f'cert-{fam}-{enc}-R{R}.lrat'
+    rec, _ = run_ask([CADICAL, '-q', '--lrat=true', '--binary=false', str(cnf), str(proof)], wall, str(cnf) + '.log')
+    print(f'certify {key}: CaDiCaL {rec}; proof {os.path.getsize(proof) // 2**20} MiB', flush=True)
+    assert rec['verdict'] == 'UNSAT', 'no refusal to certify'
+    tot, kept = trim_lrat(proof, od / 'witness.lrat.gz', ncl)
+    os.remove(proof)
+    os.remove(str(cnf) + '.log')
+    k2pts = []
+    for c in pts:
+        v = list(lat.point(c)) + [lat.M]
+        g = 0
+        for t in v:
+            g = math.gcd(g, t)
+        k2pts.append([t // g for t in v])
+    Uset = sorted(set(U))
+    W = {'what': f'FS-81 D0b: the ladder refusal {key} -- the embedding-bounded ball of radius {R} of de Grey\'s lattice about the midpoint '
+                 'of the pair (0, v), v = -(4/9)(1 + sqrt-11), shifted; its unit-distance graph plus the one edge {0, v} (X_A)',
+         'k': 4, 'radicands': [3, 11], 'points': k2pts, 'edges': [list(e) for e in Uset], 'extra_edge': sorted([o, dl]),
+         'pins': pins, 'precedence_chains': [list(c) for c in chains], 'cnf_sha256': sha,
+         'proof': f'witness.lrat.gz: toolchain CaDiCaL 2.1.2 text LRAT for exactly this CNF, trimmed ({tot} -> {kept} additions)',
+         'solve': dict(rec, machine=MACHINE)}
+    if fam == 'X_B':
+        raise SystemExit('X_B has many non-unit edges; K2 admits one: not certifiable by K2 as is')
+    (od / 'witness.json').write_text(json.dumps(W))
+    print(f'certify {key}: LRAT {tot} -> {kept} additions, {os.path.getsize(od / "witness.lrat.gz") // 2**20} MiB gz; witness written', flush=True)
+    r1 = subprocess.run([sys.executable, str(ROOT / 'tools' / 'fs81_check_witness_k.py'), str(od / 'witness.json')], capture_output=True, text=True)
+    (od / 'K2.out').write_text(r1.stdout + r1.stderr)
+    print(r1.stdout.strip()[:600], flush=True)
+    r2 = subprocess.run([sys.executable, str(ROOT / 'tools' / 'fs81_rup_recheck.py'), str(od / 'witness.json')], capture_output=True, text=True)
+    (od / 'rup-recheck.out').write_text(r2.stdout + r2.stderr)
+    print(r2.stdout.strip()[:600], flush=True)
+    os.remove(cnf)
+    return 0 if r1.returncode == 0 and r2.returncode == 0 else 1
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -707,6 +763,8 @@ def main():
         return cmd_k1_fixture()
     if a[0] == 'harvest':
         return cmd_harvest()
+    if a[0] == 'certify':
+        return cmd_certify(a[1], float(a[2]) if len(a) > 2 else 7200.0)
     if a[0] == 'reask':
         quiet = '--contended' not in a
         tag = next((x.split('=', 1)[1] for x in a if x.startswith('--tag=')), 'decision')
