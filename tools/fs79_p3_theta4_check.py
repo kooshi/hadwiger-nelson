@@ -4,6 +4,13 @@
 STANDARD LIBRARY ONLY.  Imports units_be, units_ac, hnf, coords_in from tools/fs79_p0_check.py (standard library only; the brief's named
 enumeration) and nothing from the builder tools/fs79_p3_theta4.py.  Given the tree directory (header.json + one gzipped preorder node list per depth-1 subtree) and the cell file it re-derives:
 
+KNOWN DEFECT (the owner's plant, FS-79 close-inventory item 96; recorded at the close, 2026-09-24): the summary counts `n_const` and
+`n_edge` written beside each cell's lists are NOT checked -- a cells file with one `n_const` raised by 1 still prints CERTIFIED.  The
+lists themselves are checked (an extra constant vector is refused as CELL_CONST), and every conclusion is recomputed from the lists, so
+nothing certified rests on the counts; but read the counts from the lists, not from the summary fields.  The fix -- assert each count
+equals its list's length, and plant a raised count -- is owed before this checker certifies anything new; it was not made at the close
+because the P3b phase was running beside it.
+
   U      the 60 unit vectors, by both of fs79_p0_check's loops (they must agree); Λ = span U must have the L21cc6506 Hermite form.
   frame  the header's basis B must be a Z-basis of Λ (rows in Λ, |det| = 1 in Hermite coordinates); every half-set vector's
          coordinates C are recomputed and compared; the order must list every half-set vector exactly once (unless a plant).

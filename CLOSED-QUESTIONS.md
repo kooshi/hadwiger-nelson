@@ -429,6 +429,35 @@ candidate material for FS-20.
 
 ---
 
+### 2.4 Periodic colourings of abelian Cayley graphs — answered at three colours, open at four
+
+> **`[Ellenberg2018]`** (MathOverflow question 304715, *Chromatic numbers of infinite abelian Cayley graphs*, 10 July 2018): for `A`
+> finitely generated free abelian and `S = −S` finite, is `χ(Cay(A, S)) = inf_N χ(Cay(A/NA, S̄))` — does a `k`-colourable one always have a
+> periodic `k`-colouring? *"I don't even know how to do this for A = Z!"* **[paraphrase except the quoted sentence: the thread was read
+> in full through the StackExchange API at FS-79's gate and is not held in the repository; `BIBLIOGRAPHY.md` `[Ellenberg2018]` records
+> the reading.]** Posed also on Polymath16 in 2018 (`[Polymath16threads]`, held): P. Gibbs, *"If a group can be coloured, are there
+> always periodic colourings?"*; and D. Mixon's sixth-thread opening post, *"Is it easy to check whether an infinite k-colorable graph has
+> finitely many k-colorings?"* — with Boris Alexeev's lemma that finitely many `k`-colourings of an infinite-diameter unit-distance graph
+> give `χ ≥ k + 1`. Carried as open in 2025, with the decidability of emptiness for ℤ^d with arbitrary generators, by `[CGHO2025bg]`
+> §6.2.1 (Question 6.2).
+
+**Our answer at `k = 3`: yes, for every rank, with no arithmetic** (`LEDGER.md` row 79; `plans/FS73-derivation.md` T22–T24; FS-73's
+competition, two independent derivations read by Poros). A Cayley graph of a finitely generated torsion-free abelian group is
+three-colourable iff it has a periodic (circular) three-colouring, iff a character puts every generator in `[1/3, 2/3]`; periodic
+three-colourings are dense, so a pair every periodic colouring identifies is forced; and the colouring space is finite exactly when every
+cell of `Θ₃` is a point — Mixon's finiteness question answered at `k = 3` for these graphs, decidably. **Not kernel-checked** (FS-75).
+**At `k = 4` it is open here** (`LEDGER.md` row 80): plain density fails in rank 1, and FS-79's no-gos are of four named certificate
+formats, not an answer; decidability is open in print.
+
+**Prior art checked, and its scope** (FS-79's gate, `plans/FS79-invariant-question.md` §PA): the MathOverflow thread in full (one answer:
+F. Lehner, yes for `A = ℤ`, `[EggletonErdosSkilton1990]` Thm 2; M. Krebs, 2020, yes for two colours, *"for > 2 colors ... the problem
+seems to be much more difficult"*); `[CGHO2025bg]` §1 and §6.2 and `[CGHO2025coh]` §1–§3.2 (read); the zbMATH author listings of Krebs,
+Hellouin de Menibus, Chandgotia and Ellenberg. None settles `k = 3` with arbitrary generators. **Not read:** the rest of the two CGHO
+papers' reference lists, and the homshift literature on non-standard generating sets beyond the gate's queries; density at the
+**standard** generators is expected folklore (Chandgotia's height functions) and not claimed. **Not ours:** the questions; the height
+lift (Chandgotia's device for four-cycle-free targets). **Ours:** the arbitrary-generator criterion through the relation lattice, density
+and the dichotomy for every such graph.
+
 ## §3 — Adjacent and open
 
 *Questions others posed in writing that we have not answered but are unusually well placed to.*

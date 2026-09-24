@@ -274,8 +274,12 @@ fibre, no McShane extension. So **no `Θ`-type two-sided certificate exists at f
 iff 4-colourability of Cayley graphs of ℤ^r is decidable (refusals by compactness; colourability iff C3-aper holds at four). *Proof:*
 FS73-C3-Coxeter.md §4 C-5 and §6; FS73-C3-deBruijn.md §4. The owner checked the `ℝP²` identification. *Proof verdict:* closes (the
 decidability equivalence is a reduction, not a decision). *Rests on it:* Kooshi's four-colour question answered; the four-colour
-certificate stub. *Prior art:* Chandgotia's dividing line for hom-shifts (four-cycle-free targets have heights); `[Burr1984]`'s
-undecidability is for several vertex orbits, not Cayley graphs. *Kernel:* declined.
+certificate stub. *Prior art:* Chandgotia's dividing line for hom-shifts (four-cycle-free targets have heights); for the grid at standard generators the
+"no height" is `[CGHO2025coh]` Thm 1.1 (a mixing homshift is cohomologically trivial iff its square group is ℤ/2), found at FS-79's gate;
+`[Burr1984]`'s undecidability is for several vertex orbits, not Cayley graphs. **Scoped at FS-79's close** (`plans/FS79-derivation.md` T17,
+T21): the "winding in `Hom(R, ℤ/2)`" is each relation's length parity, the same for every colouring, so the square complex gives a
+four-colouring no loop invariant of its own; "no height" holds for edge-local heights except on sum-closed halves of `S` (rank ≤ 2, all
+four-colourable — Moore–Newman's triangular lattice), with wider windows open. *Kernel:* declined.
 
 **T30 — Rank-1 walls at four colours, and the wall criterion. [tools + hand; Coxeter]** A wall between two rigid phases of a common
 period `p` separates `p ∈ P`, so it is a rank-1 counterexample to C3 (sufficient, not necessary); at three colours there are no walls
