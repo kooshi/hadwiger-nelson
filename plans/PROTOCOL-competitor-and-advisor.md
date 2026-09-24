@@ -26,10 +26,18 @@ disagreement before anything is paid for, and count the retractions — zero mea
    agent reads `plans/`, so a competitor's file there is the same covert channel one directory up (FS-73: the first drafts put
    them in `plans/`; the owner caught it before launch). **The advisor may read exactly the two working files**, and **each
    competitor is told, in words, not to open the other's file until it has handed back.** At hand-back the owner moves the files
-   into `plans/` and commits them.
-2. **Brief both identically**, in full context (the mathematics they stand on with addresses, the challenge, the hard constraint,
+   into `plans/` and commits them. **Hand-backs are content-free, and every report goes by an explicit message to a named recipient**
+   (FS-79, 2026-09-24): the harness delivers an agent's hand-back to **whichever agent last woke it**, not to the one that launched it,
+   so when a competitor's message resumed the advisor, the advisor's interim hand-back — its status notes and Coxeter's progress —
+   reached de Bruijn, who disclosed it at once and fenced off what it had seen. Every hand-back is exactly "<name> idle; no content in
+   this hand-back; my reports go to the owner by SendMessage", every report to the owner goes by SendMessage to "main", every card to a
+   competitor by SendMessage to that competitor, and a background watcher's completion is treated the same way.
+2. **Brief both with identical information**, in full context (the mathematics they stand on with addresses, the challenge, the hard constraint,
    what is theirs to decide, the two standing obligations — the prior-art gate and honest reporting), and invite each to attack
-   the framing: "if the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal."
+   the framing: "if the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal." **Optionally
+   prime them differently** (Kooshi, 2026-09-23): a short personal preamble per competitor, a passion outside mathematics, to shift the
+   mindset — FS-79's de Bruijn built wooden boats by hand, its Coxeter danced Argentine tango (`data/fs79/briefs/persona-*.md`). The
+   mathematics, questions, scoring and rules stay word for word the same, and the advisor is told of the difference.
 3. **Give the advisor the record and a written expectation** before its first reply, and ask for the *question*, not the answer:
    which forks are real, what in the record is unread or surprising for this question, which discipline owns the object.
 4. **Prior art is shared.** Either side reports what it finds to the other, competition notwithstanding.
@@ -43,7 +51,15 @@ disagreement before anything is paid for, and count the retractions — zero mea
 9. **Cost and head-count.** Up to three agents at once — the working agent (de Bruijn), the competitor (Coxeter) and the advisor
    (Poros) — every one on Opus 5.5 (Kooshi, 2026-09-23, lifting the one-at-a-time rule because Opus 5.5 is much cheaper than Fable
    5.1 was; the 2026-09-19 "no standing Poros" rule was a cost rule under the old models). Every agent is one level deep — no child
-   spawns children.
+   spawns children. **Budget anchors per role:** FS-73 — competitors 360–410k tokens, the advisor about 480k; FS-79 — de Bruijn about
+   552k (over its 400k budget, stood down), Coxeter about 360k, the competition advisor about 315k, the plan-phase advisor about 220k;
+   brief competitors at 400k with the replace-don't-reuse line at 500k.
+10. **Small concurrent jobs and the heavy-job lock** (the owner's ruling R8 at FS-79, recorded here as a practice and a **proposal**):
+   a single-process job under about 8 GB may run outside the lock beside another small job, because the lock protects headroom that two
+   such jobs do not threaten; state the lock rule by resources (cores, memory), not by duration alone, in handoff and brief templates.
+   The failure it avoids: a job queued under `flock -w` behind another whose wait expires **exits without running** — a silent non-run
+   (Coxeter's census nearly did). `CLAUDE.md` § Building's "one heavy job at a time" is Kooshi's rule and is unchanged; amending it to
+   a resource rule is his call.
 
 ## 2. What the advisor actually did — the review (2026-09-22)
 
@@ -84,9 +100,25 @@ the advisor's record `plans/POROS-2026-09-23-fs73-competition.md`.
   because advising had ended. **Rule:** a successor advisor is spawned only while there is advising left to do; the record's
   hand-off section (§2 of the advisor's record) is written so one could start.
 
-**The next use** (G51's *Do*): the four-colour inheritance question (FS-76, `plans/STUB-four-colour-inheritance.md`) — at four colours
-there is no height, and two independent attempts meeting one obstruction would license the negative. Run it the same way, with the
-rules of §1 as they now stand.
+**The third run: FS-79's invariant question at four colours (2026-09-24).** Two fresh competitors, de Bruijn and Coxeter, primed
+differently (rule 2) with identical information, and a fresh advisor holding four held items (the owner's H-A and H-B, the plan-phase
+advisor's H-P2 and H-P3), offered to both at once after both first routes were written. **Outcome:** both first routes took the same
+face and the same kind, and converged on one theorem — four-colour edge-local heights are trivial on triangle-free presentations
+(`LEDGER.md` row 80) — with different second lines: de Bruijn proved it for the whole class (the format certifies nothing anywhere) and
+added the chirality reduction and the rank-1 criterion; Coxeter went one dimension up (the cube lemma, the face-flux no-go) and to
+Lovász's bounds. The owner's registered prediction that priming would diverge the first routes won only weakly (item 84 of the close
+inventory). The owner's and the plan-phase advisor's held flux constructions had converged independently, and both competitors killed
+them by derivation. **Retractions:** de Bruijn 2, Coxeter 2, Poros 0, all in the free window. **The advisor** pinned one format
+definition when the two competitors' claims appeared to disagree, which settled it (de Bruijn proved what Coxeter had left open);
+logged four errors of its own, including the misrouted hand-back (rule 1) and scoring a claim met before checking the format against its
+own positive control; and scored its expectations: its five mathematical hunches confirmed, its path predictions mostly lost. **The
+leak** (rule 1) affected no score: de Bruijn's mechanism was in its first route, and the advisor found Coxeter's in its §0 before the
+leak. **Confounds for reading run-to-run differences** (runs 1–3): run 1 (2026-09-08/09) had unequal starts — the main session was one
+competitor, with the whole history, Kooshi's words verbatim, the authorship of Coxeter's brief, the advisor's reports and a shared
+scratch folder — and a different problem; run 2 had identical briefs; run 3 identical information and distinct priming; one run each.
+
+**The next use** (G51's *Do*): FS-80's window-frequency certificate, or FS-76's rank-1 proof — two routes that two minds could take
+apart. Run it the same way, with the rules of §1 as they now stand.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 
