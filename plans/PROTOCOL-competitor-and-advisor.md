@@ -118,8 +118,43 @@ leak. **Confounds for reading run-to-run differences** (runs 1–3): run 1 (2026
 competitor, with the whole history, Kooshi's words verbatim, the authorship of Coxeter's brief, the advisor's reports and a shared
 scratch folder — and a different problem; run 2 had identical briefs; run 3 identical information and distinct priming; one run each.
 
+**The fourth run: FS-81, three colours over real quadratic fields (2026-09-24) — a blind verifier in place of a competition.** The
+shape: a planner and a **plan-phase advisor** (Poros) in stage A; then, because the planner's plan contained a one-mind field-level
+proof (§F), a **blind verifier in the V2 pattern** (FS-73's V2: a second agent derives the statements itself before it may read the
+first derivation) in place of two competitors, beside a modeling agent (stage B) and two implementers (phase 0, stage D) — never more
+than three agents at once. Briefs as sent, agent ids removed: `data/fs81/briefs/` (A-planner, A-poros-plan, B-modeling, C-verifier,
+P0-implementer, D-implementer, CL-close-planner); the advisor's record `plans/POROS-2026-09-24-fs81-plan.md`; the verifier's record
+`plans/FS81-C-verification.md`.
+- **The blind-read list.** The verifier received §F's statements only. The sketch, the advisor's record, the close inventory, the plan's
+  other sections and `data/fs81/` stayed closed to it until its own verdicts (C1) were committed. Its predictions (C0) were committed
+  first, and it said openly that they were written after some unwritten thought.
+- **The stall criterion never fired.** A second mind (a competitor on the disputed lemma, with Poros advising) would have joined on any
+  of four triggers: a named gap the verifier could not close; a contradiction one exchange did not settle; the second-code-path cell list
+  disagreeing with FS73-T40; or 200k tokens with no verdict on every lemma. None held. C2 found 14 divergences between the two
+  derivations, all of route or wording, none of truth.
+- **Outcome:** `LEDGER.md` row 82 at [hand, two independent derivations], the FS-73 standard reached with one agent fewer than a
+  competition. The verifier also sharpened the statement: it found the field-free form's five-layer instance and the exact finite
+  threshold (FS81-T5, T8).
+- **What it cannot do, stated so the next use chooses well.** A blind verifier checks a fixed statement. It cannot supply a route the
+  planner never had. A competition is still the instrument when the question has no statement yet (FS-73, FS-79). The pattern fits a
+  milestone whose plan already holds a one-mind proof.
+- **The plan-phase advisor** attacked §F on the five points the planner named and found no break. It proposed the compactness indexing
+  by finite symmetric sets (adopted) and the extension §F.5 (proved three times). It kept three held items out of `plans/`.
+  Retractions: planner 0, advisor 0 in stage A. The disagreement then arrived in stages B and C, where it was still free: the modeling
+  agent found six planner errors and one of the owner's; the verifier voided one of the modeling agent's proposals.
+- **Budget anchors** (working tokens as reported; the harness counter is cumulative and reads higher):
+  - planner about 230k;
+  - plan-phase advisor about 200k;
+  - phase-0 implementer about 265k;
+  - modeling agent about 230k;
+  - verifier about 520k by the harness counter, retired at the replace threshold with its work complete;
+  - stage-D implementer about 345k.
+
+  Nothing was delegated below any agent.
+
 **The next use** (G51's *Do*): FS-80's window-frequency certificate, or FS-76's rank-1 proof — two routes that two minds could take
-apart. Run it the same way, with the rules of §1 as they now stand.
+apart. Run it the same way, with the rules of §1 as they now stand. A milestone whose plan arrives with a one-mind proof takes the
+fourth run's shape instead: a blind verifier with a stall criterion.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 
