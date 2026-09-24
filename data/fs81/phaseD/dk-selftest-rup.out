@@ -1,0 +1,5 @@
+  [PASS] faithful: X_A core, unit-edge pin + chain [2, 3]: ok {'cnf_sha256': '2fa4129e23a0235c05fca0a34fff0f50c3496a27e80ec412ffcf270622bd6875', 'cake_lpr': 's VERIFIED UNSAT', 'cake_lpr_s': 4.03, 'kissat': 's UNSATISFIABLE', 'kissat_cpu_s': 26.31}
+  [PASS] plant: another formula's proof: cake_lpr says 'c Checking failed at line: 0. Reason: clause not empty or singleton after reduction' (must not verify)
+  [PASS] plant: the proof truncated to half: cake_lpr says 'c empty clause not derived at end of proof' (must not verify)
+SELFTEST ALL PASS
+exit 0

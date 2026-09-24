@@ -1,0 +1,26 @@
+  [PASS] L36-additive-gapfree.json: CERTIFIED: the lattice graph Cay(Z<U_36>, U_36) over Q(sqrt47) (d = 47), 20 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at t
+        control faithful: CERTIFIED
+        control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+        control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+        control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+        control zero_phi: refused ADDITIVE_ZERO_ON_UNIT (want ADDITIVE_ZERO_ON_UNIT)
+        control unit_dropped_from_count: refused UNIT_COUNT (want UNIT_COUNT)
+        control d_changed_to_167: refused UNIT_COUNT (want UNIT_COUNT)
+        control d_not_squarefree: refused BAD_D (want BAD_D)
+        control false_gap_claim: refused GAP_CLAIM_FALSE (want GAP_CLAIM_FALSE)
+      CONTROLS: PASS
+  [PASS] L36-quotient-N4-gapfree.json: CERTIFIED: the lattice graph Cay(Z<U_36>, U_36) over Q(sqrt47) (d = 47), 20 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4
+        control faithful: CERTIFIED
+        control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+        control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+        control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+        control constant_table: refused IMPROPER_EDGE (want IMPROPER_EDGE)
+        control unit_dropped_from_count: refused UNIT_COUNT (want UNIT_COUNT)
+        control d_changed_to_167: refused UNIT_COUNT (want UNIT_COUNT)
+        control d_not_squarefree: refused BAD_D (want BAD_D)
+        control one_class_recoloured: refused IMPROPER_EDGE (want IMPROPER_EDGE)
+        control period_not_a_period: refused INADMISSIBLE (want INADMISSIBLE)
+        control false_gap_claim: refused GAP_CLAIM_FALSE (want GAP_CLAIM_FALSE)
+      CONTROLS: PASS
+SELFTEST ALL PASS (2 fixtures)
+exit 0
