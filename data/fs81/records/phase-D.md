@@ -11,7 +11,7 @@ This file is kept current enough that a successor can resume from the repository
 | DK — the two checkers | **done**: self-tests pass (`data/fs81/phaseD/dk-selftest-*.out`); the owner's plants refused by each (K1: an index-2 quotient basis → `SPAN_MISMATCH`, a sheared basis with the table not re-indexed → `IMPROPER_EDGE`; K2: the conflict hint dropped at three positions of fixture (b)'s LRAT → `PROOF_STEP` each); committed `677d59e9` |
 | D0a — the harvest | **done**: 558 recorded asks in the schema (`data/fs81/phaseD/d0a-harvest.jsonl`, summary `d0a-summary.md`) |
 | D0b — the rank-4 ladder | **ladder run** (37 asks, `data/fs81/phaseD/d0b-asks.jsonl`); `R*(X_A)` bracketed from above only (below: the undecided band); quiet re-asks of the decision numbers pending |
-| D1 — the screen at 47 | sweep done (116 candidates + 11 undecided); screen running (8 slots) |
+| D1 — the screen at 47 | **first pass done**: 127 lattices; 102 four-colourable (177 witnesses, all K1-CERTIFIED), **25 survivors, 10 minimal**; the deep pass, the long residue re-asks and the calibrated `Θ₄` finder remain (successor) |
 | D2 — one priced ask | not started (needs the heavy lock) |
 
 ## DK — the checkers
@@ -193,6 +193,30 @@ only if one enters a decision.
 | PD-6 (0.6) colourable SAT within 60 s at every R ≥ 1.3 and UNKNOWN at 1.0 | 87 s at 1.3; UNKNOWN at 1.0 | **lost** (first half) |
 | PD-7 (0.55) X_A target faster than triangle at R = 1.5 | 167.9 against 161.0 s | **lost**, within the noise; at 1.4 the triangle pin is 5.4× faster |
 | P-D0 (0.5) rank-≥2 refusals decide within 1 h only above `d_ball` ≈ 12 | within 30 min only from 16.6 (X_A, X_B); 14.7 undecided at 30 min | **not scored**: the ladder's wall was 30 min, not 1 h; a 1-hour re-ask at R = 1.3 decides it |
+
+## D1 — the screen at 47 (first pass; `tools/fs81_d47.py`, slots of one core each)
+
+**The sweep** (564 s): 2,520 denominators; 116 candidates (every residue set at 11, 19, 23, 31, 43 refuses four colours and a 3-pole
+exists) plus 11 left undecided by a residue set at the 120 s budget. **The screen** (additive; the float `Θ₄` finder capped at 60 s;
+residue targets at every q < 100 over which 47 splits and at 47 itself, 120 s per ask; quotients `Λ/NΛ` for N ≤ 15, gap-aimed, 900 s
+per lattice): **102 four-colourable** — every one with a witness K1 certifies (177 witnesses, 177 CERTIFIED, 0 failed:
+`data/fs81/phaseD/d47/K1-checker-run.txt`), 49 of them with a gapped colouring (so every pair on them is free, G68) — and **25
+survivors**. K1's gap branch had its first positive test here: Λ₁₆₈'s residue colouring at the ramified prime 47 (image 8 of the circle,
+fan gap at the origin) CERTIFIED with its controls passing (`K1-first-gapped-controls.out`).
+
+**The survivors, typed by the screens and caps they met** (full table with covolumes: `data/fs81/phaseD/d47/survivors.md`). Every
+survivor: no additive colouring into ℤ/4 or V₄ exists (enumerated, exact); the float `Θ₄` finder hit its 60 s cap (CAPPED, not
+EXHAUSTED: no cell found, none excluded); every residue target asked refused four colours or was UNKNOWN at 120 s (the UNKNOWN ones
+are typed nulls, not refusals); every quotient asked at N ≤ 15 refused (UNSAT) except three UNKNOWNs (Λ₂₁₃₆ at N = 13, Λ₂₃₂₈ at N = 9)
+and one budget stop (Λ₂₃₂₈). **None is called rigid**: no `Θ₄` cell has been computed for any of them (G73), and the quotients refute
+only periodic colourings of those periods.
+
+**Minimal survivors** (no survivor Λ_M′ ⊂ Λ_M, i.e. no survivor M′ | M): Λ₂₄₀, Λ₃₆₀, Λ₄₀₈, Λ₈₄₀, Λ₁₂₇₂, Λ₁₄₆₄, Λ₂₁₃₆, Λ₂₁₈₄,
+Λ₂₃₂₈, Λ₂₄₂₄. P-D1 (at least one survivor, 0.7): **won**.
+
+**Their price at `d*`** (G65: `N = π²R⁴/covol` at `g·φ(R)² = d*`; `d*` below): the cheapest is **Λ₂₄₀ (108 unit vectors, covolume
+2.27·10⁻⁷): 5.1·10⁷ points at `d_ball` 18.41** (R = 1.041), then Λ₄₀₈ 2.0·10⁸, Λ₃₆₀ 2.6·10⁸, Λ₈₄₀ 3.5·10⁹, the rest 2·10¹⁰–2.5·10¹¹.
+**PD-8 (some survivor within 10⁷ points, 0.25): lost.** The four-colourable Λ₁₂₀ was the only lattice below 10⁷.
 
 ## Predictions (registered 2026-09-24, before the first band solver run)
 
