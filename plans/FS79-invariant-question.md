@@ -1379,3 +1379,150 @@ So the experience pass is not triggered by Lean; §M records its decision.
 - De Grey's lattice as the finite-`X` member of (Q-rig) (9,120 colourings).
 - For Kind 1: the grid, where only ℤ/2 is carried (`[CGHO2025coh]`), and the triangular lattice, which carries a height in ℤ²
   (`[MooreNewman2000]`).
+
+## §R-close. The close (WORKFLOW 9, 2026-09-24)
+
+*Written by the close planner (de Bruijn, Opus 5.5), worked item by item from `plans/FS79-close-inventory.md` (items 1–98, each ticked
+there). Results: `LEDGER.md` rows 80–81; theorems: `plans/FS79-derivation.md` T1–T43 (§5 holds P3b's slot, §6 the conjecture sweep);
+understanding: G73 minted, G71 and G68 scoped, instances to G21, G49, G50, G51, G30, G60, G72. This section holds what has no other
+home: the §G and §IQ re-reads, the §PA sweep, the forward propagation, the predictions scored once, the retractions, the errata to this
+plan, and the honesty record. **P3b was running when this was written**; its results enter at the marked slots (rows 81, the Frontier,
+FS-59, the derivation file §5, §R-close.5).*
+
+### §R-close.1 The §G re-read: which extractions paid, and which entries should have borne and did not
+
+**Paid:**
+
+| entry → phase | what it bought |
+|---|---|
+| row 45, T18, T27, row 72 → P0 (no screen on 56 lattices) | T1: 56 of FS-61's 57 lattices settled at four colours for free; phase 0 screened only `L21cc6506` and the chain |
+| G61, the enumerate-the-parameter rule → P0.2 | the chain `Λ_M` swept before any object was screened: 370 lattices, 115 candidates (T13) |
+| G41, G38, row 57 → P0.3 (additive first) | `L21cc6506` coloured additively (T8); 64 of 118 first rules additive |
+| G43, G44, T19 → P0.1, P0.3 (residue targets) | the circle mod 23 classified at four colours (T11); 36 lattices coloured by gapped residue colourings, 167 the commonest prime |
+| T22 (⟸) → P0.3(a) | the Θ₄ screen, and then P3's exact tree (T38–T40) |
+| G68, G69 → P0.3(d) (quotients) | eight survivors of the cheap pass coloured by quotients at `N ≤ 12` in seconds (phase-P0.md defect 8) — though the extraction put quotients in the deep screen, not the cheap one (errata) |
+| G21 → P0, P2 ("survivor at the screens searched") | every survivor typed by its screens and caps (T15); no "none" claimed |
+| G62, G7, T40 → P0, P3 | the multilayer factoring priced P3's tree (T43) and ordered its layers |
+| G53, G42, G46, G30.5 → §IQ item 3, §C | the kinds named so that no-gos could be stated per format; every class claim shipped an inhabitant |
+| G51 → P2 | two independent attempts met one obstruction (edge-local heights), licensing the negative for that format (row 80) |
+
+**Missed** (each an instance of WORKFLOW 3.1's failure):
+1. **T30 → density** (item 26): §G.5 marked FS73-T30 as bearing and did not draw that its one-way walls falsify plain density; the
+   plan-phase advisor's late card did (T3). A *bears* verdict whose consequence was not extracted.
+2. **G72's own *Do*** (item 98): "when a new exact decision procedure lands, point it at the open-instance list the same day" — P3's
+   exact Θ₄ tree found full-dimensional cells in three minutes on `L21cc6506` and was not aimed at phase 0's seven survivors, whose
+   status rested on a capped float-LP finder. Run the next day as P3b.
+3. **G21 on the census** (items 73, 83, 92): 4,490 Kempe-rigid orbits of one period were logged by the owner as a "live route" to five;
+   G21's "a periodic search measures its period cap" bore directly and was not applied. P3 answered it (T40).
+4. **G65's caveat** (items 42, 97(4)): phase 0 wrote that its degree-18 prices are three-colour-law balls; the owner's morning report
+   dropped the caveat.
+5. **G68's "exactly"** had never been tested against a lattice loose at unbounded periods; `L21cc6506` is one (G68 scoped at the close).
+
+### §R-close.2 The §PA sweep: what the gate taught us about our own object
+
+- **The question is in print** (`[Ellenberg2018]`, `[CGHO2025bg]` §6.2.1; Gibbs and Mixon on Polymath16): → `CLOSED-QUESTIONS.md` §2.4,
+  row 79's prior art, G49's instance.
+- **G71's grid half is a theorem** (`[CGHO2025coh]` Thm 1.1) → G71 and FS73-T29 attributed.
+- **Moore–Newman's triangular-lattice height** (`[MooreNewman2000]` §III) → the competition found what it *is*: the `V₄` structure of
+  `K₄`'s three perfect matchings, visible exactly on sum-closed halves of `S` (T21–T22) → G73.
+- **Our object is a relation-lattice sub-shift of the grid homshift, and the relation cycles are the extra 2-cells** (§PA.3 item 1) →
+  this is G73's "cell by cell" reading: every no-go of row 80 is a statement about those cells.
+- **Simonyi–Tardos's scope** (read in the paper at P3, item 90) → T26, G30, FS-9: the coindex bounds only.
+- The Kempe-invariant literature (`[Cepas2016]`, `[CepasAkhmetiev2020]`, `[MoharSalas2009]`) was not used by either competitor; kept
+  in FS-74's and FS-76's reading lists.
+
+### §R-close.3 The §IQ re-read: G72's first count
+
+- **Through the structural question, by derivation:** the class-level results — the four no-gos of named formats (edge-local heights
+  on all of 𝒞; the loop winding; face-local parity-free fluxes; coindex bounds) and the exact rank-1 criterion (row 80). P-G72 (0.8:
+  "if anything lands, it comes through the structural question") **won**.
+- **From elsewhere:** the instance result — `L21cc6506` loose at four colours (row 81) — came from an exact computation, an extension of
+  FS-73's Θ tree, aimed at a derived claim (Coxeter's C8′) by the advisor's second question. Phase 0's results are measurements.
+- **The *Do* missed once** (§R-close.1 item 2).
+- **Honest reading:** the structural question produced the no-gos a direct attack would not have (nobody would have classified
+  edge-local heights while aiming at ℚ(√167)); it did not produce the positive, and the target is where it was. One milestone; one count
+  each way. G72 carries the count.
+
+### §R-close.4 Forward propagation (G73 to the open stubs)
+
+FS-59 (§0 bearings), FS-74 (banner), FS-76 (re-aim), FS-80 (minted around it), FS-9 (banner), FS-77 and FS-72 (verdict lines) — all at
+`891dfdff`. **Declined:** FS-10 (algebraic certificates) is not re-aimed; FS-80 points at it as the structure-derived route.
+
+### §R-close.5 The registered predictions, scored once
+
+| id | p | outcome |
+|---|---|---|
+| P-A (Q) yes reaching ℚ(√167) | 0.05 | not landed |
+| P-A′ (Q)/(Q-rig) yes in a subclass | 0.15 | not landed (the split presentations carry a height but are loose; no rigidity or inheritance theorem) |
+| P-B (Q-comp) no | 0.12 | not landed |
+| **P-B′ a no-go of a named kind** | 0.18 | **won** (row 80) |
+| P-O (Q-obs) yes on an explicit graph | 0.08 | not landed |
+| P-C not landed | 0.42 | lost (P-B′ landed) |
+| **P-G72** | 0.8 | **won** (§R-close.3) |
+| P-G71 a K₄-free four-colour rigidity theorem, no arithmetic | 0.15 | not met (the 0.85 side won) |
+| P-G15 a non-factoring obstruction | 0.05 | void: no obstruction landed |
+| P-G54 Γ₂₃ slack at four colours | 0.8 | **unscored**: phase 0's record reports no step-0 result (an unreported deliverable; errata) |
+| P-MO, P-rank | 0.7, 0.75 | unscored ((Q-comp) not settled) |
+| P0-a, P0-b, P0-c | 0.75, 0.6, 0.65 | won, won, won (phase-P0.md) |
+| I-1, I-2, I-3, I-4 (the implementer's) | 0.85, 0.50, 0.25, 0.60 | won; won (point estimate off ×5); the 0.75 side won; won |
+| P3-1: `W = 0` / the rational plane / other | 0.50 / 0.45 / 0.05 | won / lost / lost |
+| P3: no cell full-dimensional; cell count < 10⁴ | 0.70; 0.80 | lost; unscored (census not run) |
+| P-persona (the owner's) | 0.6 | won, weakly (item 84) |
+| Poros (plan): its seven failure points | — | four fired and were caught, one missed (density), two handled unprompted (its §5) |
+| Poros (competition) E1–E7 | 0.45, 0.40, 0.30, 0.10, 0.05, 0.60, 0.50 | E2 won; E1, E3, E6, E7 lost; E4, E5 not landed as expected; its card 1 hunch a typed null (T16) |
+| P3b's B-1…B-5 | — | ⟨P3B-SLOT-PRED⟩ |
+
+### §R-close.6 Retractions, counted (G51)
+
+Plan phase: planner 0, Poros (plan) 1 ("realised periodically", unchecked). Competition: de Bruijn 2 (C1's step 3, found by the advisor;
+the "cross squares" derivation, found itself — the advisor counts 1), Coxeter 2 (R1 "small colouring space", R2 the format), Poros 0.
+All free. The modeling agent corrected the planner three times (§R-review); those are corrections, not retractions.
+
+### §R-close.7 Errata to this plan (read these before the body; the body is not edited except where marked)
+
+1. §0 item 5's "route (ii) is how five was reached over K" (fixed at the modeling pass; χ(K²) = 4).
+2. §IQ item 3's single "Kind 0" (split into 0₁ and 0_W at the modeling pass, owner finding 1).
+3. §IQ item 2's "a window of 176" → 33 points (modeling pass).
+4. §IQ item 2's "no rank-≥2 K₄-free graph …" → false (T7); the refutation rank `ρ₄` replaced it.
+5. (Q) as first posed (plain density) is false in rank 1 (T3; amended at 61495ca1).
+6. §S.2 P0's stop rule was ambiguous (ruling R3), and quotients belonged in the cheap screen, not the deep one (item 60).
+7. §S.2 P0's step 0 (G54 at `k = 4`) is not reported in the phase record, so P-G54 is unscored.
+8. §C's head "identical except `{NAME}` / `{OTHER}`" was superseded at launch by distinct priming (item 52; the protocol, rule 2).
+9. §S.2's P3 record name `phase-P3.md` became `phase-P3-theta4.md`; P3b's is `phase-P3b-survivors.md`.
+10. §IQ item 5's open instances: verdicts in the FS-79 stub's banner (KR6, FS-72, the rich ℚ(√3,√5) lattices not reached).
+
+### §R-close.8 Honesty: the owner's errors, the agents' slips, the kills
+
+**The owner's errors:** (1) held items' content in the inventory (item 10; redacted before any launch); (2) a population transposed into
+the stub's premise — 10⁷/10⁸ from other fields and colour counts (item 13; caught by Poros); (3) "richest" survivors first, reversed to
+minimal before any deep work (item 57); (4) the census logged as a "live route" to five (items 73, 83; P3 killed it, T40); (5) **seven
+overstatements in the next report** (item 97): "four whole kinds ruled out" (four formats); "at five colours edge-local heights don't
+exist at all" (on presentations with two or more generator classes); "no loop invariant at all" (the colour complex's is the parity);
+"refutations would take 10⁸–10¹¹ points" (balls at a three-colour degree aim); "three survivors provably aren't loose at 167" (one
+solver's unchecked UNSAT); "what's left" presented as exhaustive; "370 lattices swept" (a finite part of the chain) — every result is
+restated at its scope in rows 80–81, the derivation file's scope paragraph and the Frontier; (6) G72's *Do* not applied (item 98).
+**The agents' slips:** the planner's T30 miss (item 26), its false rank-2 sentence (item 44) and two spec defects (items 41, 60); the
+phase-0 implementer's waiter on a killed chain's log (item 61) and eight tool defects of its own, each caught (its record); de Bruijn's
+lonely-runner citation from memory (disclosed, replaced) and its overrun (about 552k against 400k); Coxeter's "empty interior is a point"
+(C6→C8′), its C2 scope sentence and typo (item 90) and a lemma from memory (item 74); the competition advisor's four errors (its §5);
+the P3 implementer's IndexError under a plant and its overrun (about 356k against 250k), both disclosed. **Kills and what they forfeited:**
+phase 0's deep pass (the automatic deep stage, classify-43, 300 s re-asks, the P0.5 controls — all carried to FS-59); P3's full tree,
+killed about five minutes in by process group and verified by effect (the complete census and the whole-list symmetry control); the
+owner's 167 re-ask paused and resumed (nothing); phase 0's unbounded pysat ask (nothing). **The incident** (item 66): a hand-back routed
+to the agent that last woke the advisor carried Coxeter's progress to de Bruijn; disclosed at once; no score affected; now protocol
+rule 1.
+
+### §R-close.9 Tool defects and their homes
+
+pysat's CaDiCaL ignores `interrupt()` → `CLAUDE.md` § Toolchain; FS-73's `fs73_q167.residue_ask` has no wall → not edited (FS-73's files
+are read-only), covered by the toolchain line; phase 0's eight defects → its record; `quot_total` checked only between values of `N` →
+FS-59 step 1; `tools/fs79_p0_check.py` prints a traceback, not a usage line, with no argument → recorded here, not fixed;
+`tools/fs79_p3_theta4_check.py` does not check its summary counts → its docstring (the fix owed before it certifies anything new); the
+waiter on a killed chain → `CLAUDE.md` § The gate.
+
+### §R-close.10 The conjecture sweep
+
+`plans/FS79-derivation.md` §6: R1 (`8 ∤ M`) → FS-59; R2 (rank-1 "all rigid ⟹ no wall") → FS-76; R3 (the residue-label reading) →
+G73 and FS-80; R4 (what is left at ℚ(√167)) → G73; R5–R6 (the flat tetrahedron; the quadratic slope relation) → FS-74; R7 (G68 at
+`L21cc6506`) → G68 and FS-59; the plan's own sweep (7 hits of "conjecture") → FS-80 for §D.4's `M`-independence, the rest held
+elsewhere. One stub minted (FS-80).
