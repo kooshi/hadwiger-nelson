@@ -446,7 +446,18 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
 1. **The existence form.** Does ℚ(√167)'s plane need five colours: is some saturated lattice `Λ_M` not four-colourable, or does some
    four-colourable `Λ_M` carry a four-colour forced pair `δ` with `1/δ ∈ ℤ[U]` (then G55's chain closes in the field)?
 
-2. **The structural form.** One yes/no question about every four-colouring:
+2. **The structural form: three questions about every four-colouring, ranked** (amended after Poros's answer to the planner's
+   question 1; the ranking is the owner's call, see below). The first draft posed one question (Q) with three faces. Poros's objection,
+   adopted: only (Q-comp) follows from (Q); (Q) says nothing about (Q-rig), since density holds trivially on a finite colouring space; and
+   (Q-obs) is independent of both. Worse for the target, MathOverflow expects (Q) to be answered **no** by a domino reduction, and a no
+   reached that way is an aperiodic encoding, probably at high rank and built from cliques, which answers `[Ellenberg2018]` and gives
+   nothing at ℚ(√167). G72's bet paid at three colours because the answer there was yes. So the three faces below are **three
+   structural questions**, each G72-shaped (about every colouring, answerable only through an invariant), each with its own class and
+   success test. **Recommended ranking, and the default if the owner does not rule: (Q-obs) first, (Q-rig) second — both aim at the
+   target — and (Q) with (Q-comp) third, where a no is still a finding (Kooshi's certificate question).** Alternative: (Q) first, as the
+   stub framed it around Kooshi's certificate question; it wins if the product aim is the certificate question rather than five at 167.
+
+   The density question, as first posed:
 
    > **(Q) For every graph in 𝒞_r, are the periodic four-colourings dense in the space of all four-colourings — does every finite
    > pattern that occurs in some proper four-colouring also occur in a periodic one?**
@@ -470,7 +481,15 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
    - **(Q-obs) the obstruction face — route (i) to the target.** *Is there an invariant carried by every four-colouring, of a kind named in
      item 3, whose admissible values form a set computable from `S` that is empty for some graph in 𝒞_r^{K₄-free} that is not
      four-colourable but has fractional chromatic number at most four?* (A finite refuting subgraph always exists by compactness; the
-     question is for a certificate that is an invariant of every colouring, not a subgraph.) A yes is a certificate of non-four-colourability that lives on the group and sees
+     question is for a certificate that is an invariant of every colouring, not a subgraph.) **Its success test requires rank ≥ 2 and a
+     stated scaling** (Poros): in rank 1 the benchmark is inhabited and met vacuously — `G(ℤ, {1,3,7,12,17,22})` is triangle-free (the set
+     is sum-free), has a periodic independent set of density 8/29 so `χ_f ≤ 29/8 < 4`, and refuses four colours on a window of 176 (a
+     CaDiCaL measurement of Poros's; T28's decider can confirm it), and the rank-1 transfer matrix is already a certificate on the group.
+     So a (Q-obs) success is: a K₄-free graph of rank ≥ 2 refused four colours by an invariant certificate that is not a density
+     certificate and whose size does not grow with the smallest refuting finite subgraph (the precedent: `Θ₃`'s 5.7 KB against refuting
+     patches priced near 10⁸ points). **No rank-≥2 K₄-free graph with `χ_f ≤ 4` certified and `χ = 5` is known** (Theorem B four-colours
+     every K-lattice; the five-chromatic lattices over K(√5), K(√7) and de Grey's field have no `χ_f ≤ 4` certificate); finding one, or
+     working with "not refuted by any density certificate" in its place, is part of the task (G30.5). A yes is a certificate of non-four-colourability that lives on the group and sees
      integrality (the four-colour analogue of `Θ₃ = ∅`). A no-go says every invariant of that kind is controlled by the colour-class
      densities. **This face is independent of (Q-comp)**: undecidability would leave it open, because the target needs only a sound,
      one-sided certificate that scales with the symmetry (Poros's Q2).
@@ -489,8 +508,13 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
    - **Kind C, counting compulsions on a base pattern** (G53: `L = min` over the base's colourings of how many circle points share the
      centre's colour; refuse when `2L` exceeds the count): one-sided and **integral**, computed on the pattern and not the graph — the
      corpus's precedent for certifying a multilayer on its layers, and `L21cc6506` is a multilayer (T40).
-   - **Higher kinds** (invariants taken from the target's topology above its loops): not found in any text searched (§PA.2's
-     topological-combinatorics row returned nothing for infinite Cayley graphs).
+   - **Kind T, the domain's topology** (Lovász's bound: the ℤ₂-index of the graph's box or neighbourhood complex, `[Lovasz1978]`): the
+     classical integral obstruction that sees past `χ_f` (Kneser graphs: `χ_f = n/k`, `χ = n − 2k + 2`). §PA found no application to
+     infinite abelian Cayley graphs — unworked ground, not a reason to omit it (Poros).
+   - **Kind A, algebraic** (an equivariant Nullstellensatz or ideals in the group ring `ℤ[Λ]`; K. Schmidt's algebraic ℤ^d-actions for the
+     linear part; the project's stub FS-10): exact rather than a relaxation, and it can see parity where a linear programme cannot (Poros).
+   - **Higher kinds from the target** (invariants taken from the target complex's topology above its loops): not found in any text
+     searched (§PA.2's topological-combinatorics row returned nothing for infinite Cayley graphs).
 
    **Finding an invariant that answers one face, or proving that no invariant of a named kind can, is the milestone.**
 
@@ -508,7 +532,8 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      `k`-colourable graph has a periodic colouring (`[EggletonErdosSkilton1990]` Thm 2) and density is the live question;
    - **controls every class-level answer must reproduce:** de Grey's lattice (**the known positive**: finite colouring space, `F = P = 8Λ`,
      12 classes, one √3-clean — Theorem B's pair); the triangular lattice (a two-dimensional height, `[MooreNewman2000]`); the grid
-     `ℤ²` with standard generators (no height, `[CGHO2025coh]`).
+     `ℤ²` with standard generators (no height, `[CGHO2025coh]`); `Cay(ℤ, {1,2,3})`, the clique-rigid member (24 colourings, all
+     4-periodic) that any K₄-free (Q-rig) theorem must exclude; `G(ℤ, {1,3,7,12,17,22})`, the rank-1 inhabitant of (Q-obs)'s benchmark.
 
 ## §S. The subplan (WORKFLOW 4)
 
@@ -670,6 +695,8 @@ The uninformative outcome is P-C; the most informative for the target are P-A an
 | P-G71 | a four-colour rigidity theorem over a class of **K₄-free** Cayley graphs that uses no arithmetic of the lattice (G71's killing test, restated so a clique cannot meet it — Poros's card A) | 0.15 | `[MooreNewman2000]`'s height is arithmetic-free and could force rigidity where extra directions fix the tilt |
 | P-G15 | an obstruction from P2 that does not factor as pigeonhole × kill | 0.05 (0.6 given P-O) | a polytope-emptiness certificate has no class pigeonhole |
 | P-G54 | step 0 finds `Γ₂₃` Hoffman-**slack** at four colours (so no usable prime of ℚ(√167) is four-tight and G54's tight mechanism cannot give full-rank `F` there) | 0.8 | 23 passes divisibility and the Weil bound; only the exact spectrum decides |
+| P-MO | if (Q-comp) is settled in P2, it is settled **no** (MathOverflow's expectation, Poros's registration request) | 0.7 | the three-colour answer was yes, with no arithmetic; a height or spectral argument could extend in low rank |
+| P-rank | if a no to (Q-comp) lands, it needs rank ≥ 5 or cliques, so it does not reach ℚ(√167) | 0.75 | a rank-4 triangle-free encoding is not excluded by anything known |
 
 **Phase 0 (the planner's; the implementer registers its own before any run):**
 
@@ -746,7 +773,11 @@ Jordan Ellenberg's MathOverflow question (2018, `mathoverflow.net/q/304715`: *if
 `k = 4`, strengthened to density; Chandgotia, Gangloff, Hellouin de Menibus and Oprocha carry it as open in 2025, together with the
 decidability of emptiness for ℤ^d with an arbitrary generating set (`[CGHO2025bg]` §6.2.1). FS-73 proved it at `k = 3` (item 1).
 
-It has three faces. Say which your result answers, **in which class and at which rank**:
+**These are three questions, not one**, and they are ranked [RANKING — the owner fills it; the planner's recommendation and the default:
+(Q-obs), then (Q-rig), then (Q)]. Only (Q-comp) follows from (Q): density holds trivially on a finite colouring space, so it says nothing
+about (Q-rig), and (Q-obs) is independent of both. MathOverflow's commenters expect (Q) to be answered no by a domino reduction; such a no
+answers Ellenberg's question and **does not answer (Q-obs)**, and a no that needs rank ≥ 5 or cliques does not reach ℚ(√167). Say which
+question your result answers, **in which class and at which rank**:
 - **(Q-comp) completeness** — in the abstract class. A yes makes four-colourability decidable and gives two-sided certificates and `P = F`.
   A no is an explicit four-colourable graph with no periodic four-colouring (proved both ways), or undecidability.
 - **(Q-rig) rigidity** — in the **K₄-free** subclass (every unit-distance lattice graph is K₄-free): *when is the four-colouring space
@@ -754,7 +785,13 @@ It has three faces. Say which your result answers, **in which class and at which
   through a residue colouring at a usable prime gives nothing).
 - **(Q-obs) obstruction** — in the K₄-free subclass: *is there an invariant carried by every four-colouring whose admissible values form a
   set computable from `S`, empty for some non-four-colourable graph whose fractional chromatic number is at most four?* A finite refuting
-  subgraph always exists by compactness; the question is for a certificate that is an invariant of every colouring.
+  subgraph always exists by compactness; the question is for a certificate that is an invariant of every colouring. **Success needs rank
+  ≥ 2**, a certificate that is not a density certificate, and a size that does not grow with the smallest refuting subgraph: in rank 1 the
+  transfer matrix is already such a certificate, and `G(ℤ, {1,3,7,12,17,22})` (triangle-free, `χ_f ≤ 29/8`, refuses four on a window of
+  176) meets the benchmark vacuously. No rank-≥2 K₄-free graph with a certified `χ_f ≤ 4` and `χ = 5` is known; naming one, or working with
+  "refuted by no density certificate" in its place, is part of the task. Admissible kinds, not exhaustive: densities, heights, Kempe-class
+  invariants, counting compulsions (G53), the domain's topology (Lovász's box complex, `[Lovasz1978]`), algebraic certificates (ideals in
+  the group ring), or a kind you name.
 
 **Why the class, and why the rank.** Cliques make both of the last two faces trivial in the abstract class (`S ⊇ {s, 2s, 3s}` forces period
 4 along `s`; `S ⊇ {s, …, 4s}` is a `K₅`); the K₄-free subclass removes them. ℚ(√167)'s lattices have rank ≤ 4 and no triangles, so a
@@ -833,8 +870,9 @@ the work outgrows it.
 **"The situation"**, items: §C.1 items 1–6 verbatim; the known positive and why it proves nothing about the inference (§C.2); §C.2's
 "things worth knowing" 1–10; the instance list with [P0-SURVIVORS] filled.
 
-**"The challenge"**: §C.2's question (Q), its three faces with their classes, "why the class, and why the rank", "what a no would look
-like", and the reporting rule.
+**"The challenge"**: §C.2's three questions with their classes, the [RANKING] as the owner filled it, (Q-obs)'s success test (rank ≥ 2,
+not a density certificate, size independent of refuting subgraphs), "why the class, and why the rank", "what a no would look like", and
+the reporting rule.
 
 **Keep "What I want from you" as the template has it**, with these additions:
 - *"Count the retractions on both sides, with what killed each; before either competitor's first theorem is believed, ask the second
@@ -859,5 +897,10 @@ like", and the reporting rule.
 | 7 | Poros, card A | cliques make the rigidity and obstruction faces trivial in the abstract class; P-G71 could be met by a clique | adopted: faces name their classes; P-G71 restated to K₄-free |
 | 8 | Poros, card B | a finite-index `F` does not give a chainable `δ`; a residue-rigid lattice gives nothing | adopted: §0.5, (Q-rig)'s target-grade form |
 
-**Retractions, counted (G51):** Poros 1 (item 5); planner 0. **Disagreements recorded:** none so far.
+| 9 | Poros, answer to question 1 | the three faces are three questions; only (Q-comp) follows from (Q); a domino-type no gives nothing at ℚ(√167); rank them, obstruction first, and let the owner rule on which success is scored | adopted: §IQ item 2 now three ranked questions, the ranking an owner slot with the planner's recommendation as default; P-MO and P-rank registered |
+| 10 | Poros | (Q-obs)'s benchmark is inhabited only in rank 1, where it is met vacuously (`G(ℤ, {1,3,7,12,17,22})`, measured by Poros); require rank ≥ 2 or a stated scaling; name a rank-≥2 inhabitant or register finding one as part of the task | adopted: rank ≥ 2 and a size that does not grow with refuting subgraphs; no rank-≥2 inhabitant with certified `χ_f ≤ 4` is known, registered as part of the task. The rank-1 refusal is Poros's solver measurement, not re-run by the planner |
+| 11 | Poros, answer to question 2 | two kinds missing: T (Lovász's topological bound, the domain's topology) and A (algebraic: Nullstellensatz, group-ring ideals, FS-10); a control `Cay(ℤ,{1,2,3})` | adopted in §IQ items 3 and 5 and in §C.2 |
+
+**Retractions, counted (G51):** Poros 1 (item 5); planner 0. **Disagreements recorded:** none; the one open point (which question
+P2's success is scored on) is a product decision referred to the owner with a recommendation.
 
