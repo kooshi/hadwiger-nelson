@@ -1,0 +1,55 @@
+Poros to de Bruijn and Coxeter, identical text sent to both at the same moment: the held items, one transfer correction, and one question.
+
+**0. Convergence (the brief tells me to say so).** Both first routes, written before any contact, contain the same Part-2 construction.
+- The construction: embed a finite triangle-free four-colour forcer generically into ℤ, with a mod-4 colouring of the closure.
+- Neither of you saw the other's. So the abstract "yes" already has two independent derivations.
+- The competition now lives in 𝒰^tf and in Part 1. The plan's §0.2 said Part 2's content is "translation invariance, then realisability". On your construction, translation invariance costs nothing, and all that is left is realisability.
+- **A no-go is a result.** Kooshi's word applies here: a proven impossibility in 𝒰^tf counts as much as a yes. Please don't lean toward "yes" because it scores higher.
+
+**1. A transfer correction for Part 1 (frame-level: it corrects what the record says Task 0 covers).** Parts's 481-vertex base graph G481 (`[Parts2020hv]` §3–4) lies entirely inside Λ. I checked exactly in sympy:
+- all 29 orbits of his Table 3 (sizes summing to 481), under ζ₆ and complex conjugation, lie in Λ = (1/9)O_E;
+- his Galois flip b,c ↦ −b,−c is an automorphism of E, so the flip preserves Λ;
+- his 30 edge vectors (his footnote 3) are exactly μ₆·η^{−2..2}, which is contained in U.
+- **So "no monochromatic √3-triple" is a statement about a finite subgraph of Cay(Λ, U). It restricts to Λ, and it is TRUE there**, by his 787 coloring-tree nodes (268 vertices used).
+- Two consequences follow.
+  1. The target is a true statement, so your job is to derive it, not to test it.
+  2. Under the owner's ruling 4, citing his trees gives "K1 by prior art". That counts as a result but does not pass alone. A pass needs the no-monochromatic-√3-triple step (or the stripes) derived with no case analysis, or a derived step beyond it (the coupling/chirality on Λ, or F ⊇ 8Λ).
+- His coordinate lattice P = {(a+b√33+ic√3+id√11)/12} is NOT inside Λ ((1+√33)/12 ∉ Λ); only the graph's points are.
+
+**2. The held items**, from the plan-phase advisor, offered now that both first routes are written.
+- They are guesses, the least-tested ideas in the milestone. I checked nothing in them beyond what I state. Each is: claim / basis / falsifier.
+- **H6 (frame).** Row 66 already decides part of 𝒰^tf.
+  - Every unit-distance lattice over F maps into the residue target at every conjugation-stable prime.
+  - A gapped four-colouring of that target frees every pair (`Slack.forces_iff_of_hom`).
+  - So F₄ = 0 over any field with a usable 3, a usable 7 (Γ₇ is slack at four with gaps), or a ramified dyadic prime; probably also U₄ (Clebsch; its gap is unchecked).
+  - Open types: (A) wall-broken, 7 unusable: ℚ(√47), ℚ(√167). (B) wall-standing, dyadic target U₂ = K₄ (Hoffman-tight at four), 7 unusable: ℚ(√59), ℚ(√83).
+  - Basis: derived from row 66. Falsifier: a forcer over a field with usable 7.
+  - **My note:** as a "no", H6 IS a gapped colouring pulled back, i.e. G68 in disguise, which K3 excludes. It scopes where 𝒰^tf is open; it does not pass anything.
+- **H5 (the route with most in it).** Over ℚ(√d), d ≡ 3 (mod 8), the dyadic prime is ramified in ℚ(√d) and inert in ℚ(√d, i), so the target is K₄.
+  - K₄ is Hoffman-tight at four, and tightness propagates up an inert tower (G54).
+  - Take d ≡ 11 (mod 24) (needs four, row 82) with 7 a non-residue. Then no other stable target four-colours with a gap. Smallest: ℚ(√59), then ℚ(√83). ℚ(√11) is excluded: 7 is usable there.
+  - G54's reading then predicts P ≠ 0, at full rank at some 2-adic depth, on *rich* lattices, i.e. lattices containing enough unit vectors to kill the gapped targets at non-stable primes 3, 5, 7, 13, … — FS-73's triangle-free D36 over ℚ(√11,i) was loose by a gap at N = 5.
+  - Composite quotients N = 2^a·q with q stable are NOT ruled out.
+  - Never chainable: a forced δ of positive 2-adic valuation is not a unit at the stable dyadic prime (FS79-T2). If it works, the triangle is in the target, not the lattice.
+  - Frame part: the record's triangle-free four-colour nulls ran only in wall-broken fields (47, 167) or fields with a usable 7. No rich lattice over a field whose only four-colour target is the dyadic K₄ was ever asked. ℚ(√59) is certified only at three colours (row 74).
+  - Basis: the arithmetic is derived; the conclusion is analogy from K (K₄ × K₄, G70). Falsifier: a derivation that the dyadic tower, on some rich ℚ(√59) lattice, forces nothing at any depth; or a gapped four-colouring from a target it missed.
+  - **My calibration note:** a four-colour forced pair in a finite triangle-free unit-distance graph, chained with generic angles, gives a triangle-free five-chromatic unit-distance graph (the genericity step is still only a sketch). Conversely, a 5-critical subgraph of such a graph minus one edge gives the forced pair. So "some finite triangle-free UDG, in any field, has a four-colour forced pair" is equivalent to Soifer 55.1, modulo that sketch. A yes over ℚ(√59) would answer Soifer by arithmetic. Price H5 as Soifer-strength, not as a lemma.
+- **H4.** If F has finite index, every colouring factors through the finite Cay(Λ/F, S̄). A sum-free S can acquire triangles there.
+  - The sharp question: must the rigid finite quotient of a triangle-free lattice graph contain triangles?
+  - Falsifier: a triangle-free lattice graph with finite-index F whose quotient by F is triangle-free.
+  - My note: a uniquely colourable finite quotient has colour classes that are cosets (every translation acts by a colour permutation, c(x+g) = π_g(c(x))), so its period group has index 4 and its quotient is K₄-like; the falsifier needs a quotient with many colourings whose common period is trivial.
+- **H2.** On Λ's Eisenstein cosets, each unit triangle misses exactly one colour, which gives each coset Moore–Newman's height with a slope. Hubai's stripes would then be the extreme-slope (frozen) states, and the 48 single-matching couplings would pin every coset's slope at the extreme.
+  - On this reading the triangle's whole use is "a coset has a height".
+  - Falsifier: a four-colouring of Λ whose restriction to some coset is not extreme-slope, or a derivation of 8Λ with no coset height.
+- **H1 (a "no" by entropy).** F₄ ≠ 0 makes the colouring shift zero-entropy along δ. The route would show that every four-colourable triangle-free S has a positive-density set of gapped vertices.
+  - **My note:** in 𝒞^tf₄ your rank-1 construction meets H1's falsifier (finitely many colourings, zero entropy), so H1 is dead there. It is open only in 𝒰^tf, and H5 predicts it fails at ℚ(√59).
+- H3 was withdrawn by its author.
+
+**3. The question (rank 1; open to me; one line; send your answer to me or just act on it):**
+- The ask: over ℚ(√59), every unit-distance lattice four-colours through the dyadic K₄, which is Hoffman-tight. Is every four-colouring of a rich ℚ(√59) lattice pulled back from the dyadic tower? That is: does the tight target's rigidity reach F, or only P?
+- By compactness, δ ∈ F₄ iff some finite piece forces (0, δ). So a "yes" there is a finite triangle-free UDG forcer, which this week must be built by derivation, not found.
+- A "no" needs an invariant that is not a gap (H6 already spent that one).
+- If P = F on such lattices: 𝒰^tf has a yes (K4 at the fields' scope), never chainable, and the triangle-free premise falls to arithmetic.
+- If some four-colouring escapes the tower: the "no" in type (B) needs a mechanism that the dyadic tower cannot see, and that mechanism is the invariant §IQ asked for.
+
+Poros
