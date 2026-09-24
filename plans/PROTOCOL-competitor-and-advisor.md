@@ -54,12 +54,13 @@ disagreement before anything is paid for, and count the retractions — zero mea
    spawns children. **Budget anchors per role:** FS-73 — competitors 360–410k tokens, the advisor about 480k; FS-79 — de Bruijn about
    552k (over its 400k budget, stood down), Coxeter about 360k, the competition advisor about 315k, the plan-phase advisor about 220k;
    brief competitors at 400k with the replace-don't-reuse line at 500k.
-10. **Small concurrent jobs and the heavy-job lock** (the owner's ruling R8 at FS-79, recorded here as a practice and a **proposal**):
-   a single-process job under about 8 GB may run outside the lock beside another small job, because the lock protects headroom that two
-   such jobs do not threaten; state the lock rule by resources (cores, memory), not by duration alone, in handoff and brief templates.
-   The failure it avoids: a job queued under `flock -w` behind another whose wait expires **exits without running** — a silent non-run
-   (Coxeter's census nearly did). `CLAUDE.md` § Building's "one heavy job at a time" is Kooshi's rule and is unchanged; amending it to
-   a resource rule is his call.
+10. **Concurrent jobs: RAM is the discriminator** (Kooshi, 2026-09-24; it supersedes the owner's FS-79 ruling R8, which proposed
+   exactly this direction). Threads are not rationed — every thread can and should be used, jobs pinned to disjoint cores — and RAM is,
+   against a global maximum of about 100 GB, enforced by `scripts/slot.py` (a shared reservation ledger, a hard `MemoryMax` cap per job,
+   core pinning, a loud exit 75 when not admitted; `CLAUDE.md` § Building). /tmp and swap are RAM on the desktop, so large outputs go to
+   disk. Every brief states the rule and the command in place of the old single `flock` lock. The failure the old lock caused — a job
+   queued under `flock -w` whose wait expires **exits without running**, a silent non-run (Coxeter's census nearly did) — is why the
+   wrapper's refusal is loud and carries its own exit status.
 
 ## 2. What the advisor actually did — the review (2026-09-22)
 

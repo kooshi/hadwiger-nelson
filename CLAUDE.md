@@ -1680,7 +1680,19 @@ ps -C lean -o rss= --no-headers | awk '{s+=$1} END {print s/1048576 " GB"}'
 
 **On any unexplained process crash, from any process: HALT and report to Kooshi immediately.** Do not
 diagnose, retry, or work past it — the 2026-08-02 filesystem event (kernel ext4 oopses, ~50 compiled modules lost) is what working past one looks like.
-**One heavy job at a time**: the box has no headroom for a replay, a hunt and a build together.
+**RAM is the discriminator; threads are not rationed** (Kooshi, 2026-09-24, replacing "one heavy job at a time", which was
+conservative and easy to enforce). Every thread can and should be used, jobs pinned to disjoint cores; RAM is rationed because
+exhausting it crashes the machine, against a global maximum of about 100 GB of the desktop's 125 GiB. **/tmp and swap are RAM here**
+(a tmpfs and zram): every agent's scratch directory holds RAM, so large outputs (over about 1 GiB) go to disk — `data/`, or under
+`~` — never to /tmp. **The enforcement is `scripts/slot.py`:** `scripts/slot.py --mem <GiB> [--cpus N] -- <cmd>` reserves RAM in a
+shared ledger, admitting the job only while the reservations stay within 90 GiB and MemAvailable keeps 25 GiB free; runs it under a
+hard `MemoryMax` cap with no swap, so an over-cap job is killed inside its own scope and never takes the machine; pins it to free
+cores, one thread per physical core first; and exits 75, loudly, if not admitted within `--wait` (default 1800 s). `--status` shows
+the ledger; `--self-test` plants an over-cap job and a full ledger and watches both refused. A job under about 2 GiB and 2 minutes
+may run without a slot; anything bigger or longer declares an honest `--mem`, since an under-declared job is killed by its cap. **A
+job that calls `systemd-run` itself escapes the slot's cap** (the new scope is a sibling, not a child), so a Lean build reserves and
+caps at the same number: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh`. And `systemd-run` expands `$`
+in a command's arguments unless told `--expand-environment=no` (the wrapper passes it; `bash -c '… $$ …'` arrived as `$`).
 
 **Every long-running phase checkpoints and resumes exactly** (Kooshi, 2026-08-26). **[PROTECTED — never compress, trim or
 paraphrase this paragraph; rewrite it only to add an instance (Kooshi, 2026-09-15).]** A run expected to exceed ~15 minutes

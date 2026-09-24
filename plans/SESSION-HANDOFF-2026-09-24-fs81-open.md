@@ -46,7 +46,7 @@ on a fresh Poros's advice with the owner concurring.*
 | **New at FS-79: every hand-back is content-free, and every report goes by explicit SendMessage.** The harness delivers a hand-back to whichever agent last woke the sender (protocol §1 rule 1) | FS-79 incident |
 | **New at FS-79: every result is stated at its exact scope and grade, in reports to Kooshi too.** A narrow-format no-go is not "a kind ruled out"; a single solver's UNSAT is not "provably" | Kooshi's question, 2026-09-24; FS-79 inventory item 97 |
 | **New at FS-79: the owner plants one fault of its own in every new checker** and checks one step of every key claim | FS-73 lesson 7, applied throughout FS-79 |
-| Lock by resources (a single-process job under ~8 GB may share the machine) is **a proposal**; `CLAUDE.md` § Building's "one heavy job at a time" is Kooshi's rule and is unchanged | protocol rule 10 |
+| **Superseded 2026-09-24 (Kooshi): RAM is the discriminator, threads are not rationed** — `scripts/slot.py` (a ~100 GB global cap, per-job hard caps, pinned cores); /tmp and swap are RAM. See `CLAUDE.md` § Building | Kooshi, 2026-09-24 |
 | Commit by explicit path; check every agent's hash against `git log`; frozen tools never edited (FS-79 added `tools/fs79_p0_check.py`'s and `tools/fs79_p3*` families as read-only for later phases) | standing |
 
 **The lock:** `flock -w 1800 /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock <cmd>`.
