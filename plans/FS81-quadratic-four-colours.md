@@ -1223,3 +1223,173 @@ the round-trip law for a log line.
 
 1. §S.D gained "D's record surface" (the ask row, the price line, K2's object-dependent conclusion).
 2. **To the owner, for the implementer, not applied:** the verdict-line proposals (§B.3.1) and the table header and column (§B.3.2).
+
+---
+
+## §R-close. The close (WORKFLOW 9, 2026-09-24)
+
+*Written by the close planner (de Bruijn, Opus 5.5), worked item by item from `plans/FS81-close-inventory.md` (86 items, each ticked
+there). Every number is read from its source record. What landed: LEDGER rows 82–84; `plans/FS81-derivation.md` T1–T25 and its §5;
+G61 rewritten with a demotion record; G74 minted; FS-82, FS-83, FS-84 minted; FS-48, FS-59, FS-64, FS-75 re-aimed. The body above is
+not edited; errata are in §R-close.7.*
+
+### §R-close.1 The §G re-read: which extractions paid, and which entries should have borne and did not
+
+**Paid.**
+1. **G7 + G62 + G55 + FS73-T40 produced §F** (§G.8 item 1): G7 gave the one rotation `v_d`, G62 the layer decomposition
+   `U_F = ⋃ b·U₅`, G55/ASTRA-T4 the shape of the missing half (a relation among unit vectors in place of the rhombus), T40 the exact
+   cell list L2 consumes. Stage C verified it blind (row 82). The largest return a re-grokking has produced in this project: a class
+   theorem where the stub asked for 25 certificates.
+2. **G21** made stage C adversarial and put the Johnson papers ahead of any claim; its "controls in both classes mod 8" (Poros's card 1)
+   produced the ℚ(√59) certificate (T15); and phase 0 found a new instance of it (the relation tree is a weak finder of isolated points).
+3. **G65 + G73 + rows 78–81** made stage D measure the four-colour band on known refusing material first. That measurement is what
+   priced D2 as infeasible **without a solve** (row 84), where the stub had "one refusal ask on the densest survivor".
+4. **G68** (quotients first, read for a gap): 49 of D1's 102 four-colourable lattices were loose by a gapped colouring.
+5. **G51**: the blind verifier in the V2 pattern gave the second independent derivation; the stall criterion never fired.
+6. **G35/G55's prime inversion at 3** turned F-T4's hypothesis into arithmetic (`1/3 ∈ ℤ[U_F]` iff no conjugation-stable prime above 3)
+   and gave T7's contrapositive.
+
+**Should have borne, and did not (or bore wrongly).**
+1. **G54**, read by the planner at ℚ(√47): §G.1 said every usable plane refuses four by the ratio bound; at 11 and 19 the sign is slack
+   (the owner's §R-review item 1). And G54's *Do* names two signs where three are reachable (the owner's P-G54 lost to the third).
+   *Repair:* G54's *Do* now names all three signs (`CLAUDE.md`, this close).
+2. **§ The gate's "confirm both outcomes are reachable"**: P-D0 as registered had its informative outcome already decided by the record
+   (FS79-T5 refuses four at degree 8.24). The planner missed it; the modeling agent caught it (§B.1.7).
+3. **FS79-T7** (a line through 0 holds one ± pair of unit vectors, so refutation rank 1 is impossible for a unit-distance lattice
+   graph) bore on D0's refusing population and was missed by the planner; the modeling agent caught it (§B.1.3).
+4. **FS73-T6's object**: the certified control is X_A (the 2,044-point unit-distance graph plus one edge), not X_B; the planner's D0 and
+   then the owner's correction 2 each named X_B (inventory items 50, 51).
+5. **§ Toolchain's symmetry checklist item 2** was ambiguous (value precedence with pins); read literally it builds an unsound encoding.
+   The modeling agent found the obligation (§B.2.2) and the stage-D implementer proved the sound form (D-T1). *Repair:* the item is
+   reworded at this close.
+6. **§ The gate's "a number in a ruling travels with its conditions"**: PD-6 and PD-7 were registered on contended times (the
+   stage-D implementer's slip, inventory item 84); the owner's edit (a) had required quiet minimum-of-three numbers for decisions only.
+
+Each miss is recorded as an instance where its entry lives (`CLAUDE.md`, this close).
+
+### §R-close.2 The §PA sweep: what the gate taught us about our own object
+
+1. **Fischer's relation** (§PA.3). The relation `1 = n(2 − v − v̄)` and `1/3 ∈ C₀` at `N ≡ −1 (mod 24)` are `[Fischer1990]` Thm 10(ii)
+   and Ex. 4; he stopped at additive colourings, saying they are "too special", and asked for a criterion. What it taught: the
+   obstruction was never the hard part; the missing piece was a reason every colouring is additive on enough of the ring, and the
+   field-level slope with its layer types is that reason. → G38 and G55 instances; G49 instance (a held paper holding the relation);
+   the attribution line of rows 82 and of any write-up.
+2. **The torus-coset reading** (§PA.5 item 1). The unit vectors are the rational points of a torus, and the layers `b·U₅` are its
+   cosets through the rational pattern, so `Θ₃(F)` is a closed set invariant under the whole group, rigid only modulo the archimedean
+   places. → G74 (minted), as its mechanism.
+3. **Circular colouring is the discipline's name for a `Θ` point** (`[DeVosEtAl2007]`, `[NaserasrPujolWang2026]`): a `Θ_k` point is a
+   circular `k`-colouring whose colour is a character. The known circular results for the plane go through √3, which FS-81's fields
+   lack. → `BIBLIOGRAPHY.md` § E translation table; the vocabulary of a write-up (FS-20-type).
+
+### §R-close.3 The §IQ re-read: G72's second count
+
+**The field-level result (row 82) came through the structural question.** §IQ posed "classify `Θ₃(F)` for every `F ⊆ ℝ`", and named
+the invariant it forces (the type of each layer) as new, where at the lattice level the question was degenerate. The derivation (§F)
+answered the structural form, T4 fell out as the special case "empty", and §F.5 answered the other side (at `d ≡ 3, 7 mod 12` every
+slope is additive mod 3). Search played no part in it: stage C re-derived it blind by hand, and phase 0's computations checked finite
+shadows only. Honest caveat: the planner reached §F while writing §IQ from the re-grokking (G7 + G62 + G55 + T40), so the structural
+question and the recognition arrived together; they are not separable in the record.
+
+**The phase-0 certificates (row 83) came by a different route, stated separately.** They were aimed by the verifier's finite threshold
+(T8), which is the structural answer's finite shadow, and certified by a structural certificate that follows T8's mechanism; the
+extension of FS-73's relation tree (a search over a polytope, exact) certified 11 fields a second time and was priced out on the uniform
+configuration (30-minute caps). So row 83 is derived-then-certified, not searched; the 11 second certificates are an extension of a known
+tool. **Stage D (row 84) did not come through the structural question**: it is a calibration and a screen.
+
+**The count both ways.** On the plain count (G72's killing test as written): FS-73 one result through the structural question, FS-79
+its class-level no-gos through it and its instance result from an exact computation, FS-81 its class theorem through it — the method has
+not yet been ceremony. On the advisor's proposed split (inventory item 7; target-moving results apart from no-gos): FS-73 moved a target
+(χ(ℚ(√167)²) ≥ 4), FS-79 produced no-gos, FS-81 moved a target (T4 for the whole family; χ = L for real quadratic fields with L ≤ 4), so
+two for three. **Whether to adopt the split is Kooshi's call; the proposal stays open** (`CLAUDE.md` G72 records the count both ways).
+
+### §R-close.4 Forward propagation (the new grokking and the findings to the open stubs)
+
+- **G74** (the field-level three-colour theorem and its layer method) → FS-75 (the kernel route), FS-83 (the layer method at five
+  colours), FS-64 (the advisor's one-character question), FS-48 (multiquadratic fields without √3), FS-82 (the residual case), FS-59
+  (its premise at four is now a theorem; five is the question).
+- **Row 84's band and the matched-control infeasibility** → FS-59 and FS-84 (a ball-and-solver refusal of four at ℚ(√47) or of five at
+  ℚ(√167) is priced out at matched density; the week after this close bans SAT solvers).
+- **The mod-8 skew reading** → G61 (its killing test).
+- **The d ≡ 23 (mod 48) lead** (T16) → FS-75's cheap first derivation.
+
+### §R-close.5 The registered predictions, scored once
+
+**The plan's §P.**
+
+| id | p | outcome |
+|---|---|---|
+| P-F | 0.8 | **won**: stage C verified F-T4 as stated, no gap (row 82) |
+| P-F-prior | 0.05 | **unscored**: the Johnson papers are unread |
+| P-F-gen | 0.75 | **won**: the general form needed no extra hypothesis, and the field is incidental (T5) |
+| P0-K1 (= PL-1) | 0.6 | **lost** on its first clause (no listed K = 1 configuration EMPTY at 35 or 47); the second clause held |
+| P0-VK (= PL-2) | 0.7 | **won** at every d (T8: the true threshold is about 5^K > 0.95n) |
+| P0-47 (= PL-3) | 0.55 | **lost**: T41's shape at 47 NONEMPTY, both (a, c), both signs |
+| P0-T41-finite | 0.65 | **won as far as it can be scored**: its named alternative (EMPTY at every d computed) lost — T41's shape at K = 1 empties only at 23, 71, 119, 167 (T16); finiteness itself is not proved (derivation §5 R2) |
+| P-G61a | 0.8 | **won**: G61's "no route to T4" is demoted (`CLAUDE.md`, this close) |
+| P-G61b | 0.6 | **won**: at K = 1 the listed configurations empty at 4 fields ≡ 7 (mod 8) against 1 ≡ 3 (mod 8), and for configuration A the skew is a theorem (T8: A never empties at d ≡ 11 mod 24); configuration B's threshold ignores d mod 8, so the skew belongs to configurations, not to the fields |
+| P0.1-cells | 0.5 | **lost** (one polygon and four points at every depth measured) |
+| P-D0 | 0.5 | **not scorable as worded** (no refusal below `d_ball` 16.6 is known; the R = 1.3 re-asks ran to 4-hour walls) |
+| P-D1 | 0.7 | **won** (25 survivors) |
+| P-D2 | 0.15 | **not asked**: D2 closed as a size-ratio price without a solve (the owner's ruling, inventory item 86) |
+| P-G72 | 0.85 | **won** (§R-close.3) |
+
+**Phase 0's** (the record §1, scored by the implementer, re-read here): DB-1, DB-6 (25 of 25), DB-7, PL-2 won; PL-1 (first clause),
+PL-3, DB-2, DB-3, DB-4, DB-8 lost; DB-5 lost on the rule (the K = 1 landings came through saturations, added after registration).
+
+**The verifier's C0** (`plans/FS81-C-verification.md` §0): L1 0.85, L2 0.85, L3 0.97, L4 0.85, F-T4 0.80, §F.5 0.75 — all **won**; "all
+six proved" (0.55) **won**. Written after some unwritten thought, as the record says: informed priors.
+
+**Stage D's** (the record, "Predictions"): PD-1, PD-3 (grid-limited), PD-5 won; PD-2, PD-4, PD-6, PD-7, PD-8 lost (PD-4 and PD-7 within
+contended noise; PD-6 and PD-7 registered on contended times, a slip).
+
+**P-G54** (FS-79's, scored at this milestone's opening): **lost by 0.039** at Γ₂₃ (the third sign, refusing, happened).
+
+**Tally:** 35 scored — the plan 11, phase 0's DB-1–DB-8 (its PL-1–PL-3 are the plan's P0-K1, P0-VK, P0-47, counted once), C0 7,
+stage D 8, P-G54 1 — and 3 unscored or not asked (P-F-prior, P-D0, P-D2). The derivations' predictions (P-F, P-F-gen, C0) all won; the instance
+predictions about finite configurations mostly lost, which is the finite-level trap the verifier quantified (at depth J the real parts
+absorb the parity discrepancy only while 5^J ≲ 0.25·d).
+
+### §R-close.6 Retractions, counted (G51)
+
+Stage A: the planner 0, Poros 0 (§X). Stage C: the verifier 0 (14 divergences of route, none of truth; one garbled sentence fixed).
+Stage B: the modeling agent's "least configuration worth testing is A" (§B.2.3) was voided at half the family by T8(b) — a withdrawn
+proposal, counted as one. The owner: correction 2's object (X_B for X_A), corrected by the modeling agent — one. All inside the free
+window: nothing had been paid for on them. G51's warning held in the right direction: stage A's zero was followed by disagreement in
+stages B and C, where it was still cheap.
+
+### §R-close.7 Errata to this plan (read these before the body)
+
+1. §G.1's G54 line: slack at 11 and 19 (§R-review item 1).
+2. §X card 5: "answered for abelian Cayley graphs" (§R-review item 2).
+3. §S.D's D0 family: X_A is the certified control, X_B secondary; T5 and T7 are instrument controls only (§B.1.3).
+4. PL-2's and §S.C's `5^K ≳ 2n`: the threshold is `d < 21·5^{K−1}`, about `5^K ≳ 0.95n` (T8); `2n` is implied and twice too large.
+5. §B.2.3's "least configuration worth testing": A is NONEMPTY at every K at `d ≡ 11 (mod 24)` (T8(b)).
+6. §S.2's lock sequencing: superseded by the resource rule of 2026-09-24 (`CLAUDE.md` § Building; inventory item 71).
+7. §S.D's D2: closed as a size-ratio price without a solve (inventory item 86); D1's deep pass carried to FS-84.
+8. §IQ item 5's ℚ(√2,√11) example (the planner's slip, caught before commit): it contains ℚ(√11); ℚ(√2,√7) replaced it.
+
+### §R-close.8 Honesty: the owner's errors, the agents' slips, the kills, the tool defects
+
+**The owner's errors.** (1) P-G54's registration named two of its three reachable outcomes (inventory item 15). (2) Correction 2
+described X_B as the certified control (item 51). Both caught by others; neither changed a conclusion.
+
+**The agents' slips.** The plan-phase advisor saved its expectation after the planner's first note had arrived (item 21; the expectation
+predated it and was left unchanged). The planner's ℚ(√2,√11) example (item 31) and its §G.1 G54 line; the six planner errors the modeling
+agent found (item 50). The verifier: one garbled sentence; C0 written after some unwritten thought (said so); a `$!` that returned a
+wrapper pid (the real pgid used) (item 67). The stage-D implementer: PD-6 and PD-7 registered on contended times; the ladder rows'
+`maxrss_mb` counts the parent's pages (item 84).
+
+**The kills and their forfeits.** D1's three three-wide screen processes were killed by process group and verified by effect (gone from
+`ps`, output static for 10 s) to relaunch eight-wide; the three in-flight lattices were forfeited and re-run, finished screens kept
+(item 77). The verifier stopped a K = 2 cross-check queued behind phase 0's lock by process group, verified phase 0 untouched, and
+replaced it by single instances capped at 100 s (item 67). Nothing registered was forfeited.
+
+**Tool defects.** The frozen `tools/fs73v2_check.py`'s own self-test is blind to both coverage mutants (T19; the checker sound; a note
+added to FS-73's plan); the new `tools/fs81_theta_check.py`'s self-test had the high-side gap until the owner's plant (item 36; fixed
+`634d75d3`); phase 0's int64 overflow, PARI's 8 MB stack at 162 pairs, and group 6 OOM-killed inside its own 3 GiB slot by an uncapped
+pool (the resource rule's cap working as designed); certificate files named by object overwrote each other across stages (covered by the
+acceptance pass, 411 of 411) (item 81).
+
+**Budgets** (working tokens, as reported): planner about 230k; plan-phase advisor about 200k; phase-0 implementer about 265k; modeling
+agent about 230k; verifier about 520k by the harness counter (retired at the threshold, work complete); stage-D implementer about 345k;
+close planner recorded in its report. Nothing was delegated by any agent.
