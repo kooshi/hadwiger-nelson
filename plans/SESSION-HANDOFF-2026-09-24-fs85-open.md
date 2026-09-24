@@ -3,12 +3,11 @@
 *Written by the product owner for a reader with no conversation memory. It supersedes
 `plans/SESSION-HANDOFF-2026-09-24-fs81-open.md`, whose §1 rules table and §3 lessons still apply except where this file updates them.*
 
-**Current state (updated 2026-09-24 evening; read before §0):** stage A is closed. The plan is `plans/FS85-rigidity-without-triangles.md`,
-with the owner's §R-review at its end. **Stage C is running:** a competition advisor and two competitors, de Bruijn and Coxeter. Their
-briefs are `data/fs85/briefs/C-competitor-brief-*.md`; the advisor's brief and held file stay in the session scratch directory until the
-competition ends. Round 1 ends at both round-1 reports or at 2026-09-26 18:00, whichever comes first, and then the advisor adjudicates
-the killing test (§S.4). The close inventory, `plans/FS85-close-inventory.md` (items 1–30), is the full state; §0 below describes the
-milestone's opening and is kept for its rules.
+**Current state (updated 2026-09-24 night; read before §0):** stages A and C and the first blind verification are done; every
+record is in the repository (`plans/FS85-C-*.md`, `plans/FS85-V-verification.md`, `plans/POROS-2026-09-24-fs85-*.md`, `data/fs85/`).
+Round 3 is running: the 5-part lemma (proved, `plans/FS85-R3-five-part.md`) now under a second blind verifier
+(`data/fs85/briefs/V2-verifier-brief.md`, record `plans/FS85-V2-verification.md`), and an input audit (`plans/FS85-input-audit.md`).
+The close inventory, `plans/FS85-close-inventory.md`, is the full state. The close is due by 2026-10-01.
 
 ## 0. First acts
 
