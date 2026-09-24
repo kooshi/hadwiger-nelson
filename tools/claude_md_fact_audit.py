@@ -73,6 +73,7 @@ ALLOW: dict[str, str] = {
     "G1–G54": "the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)",
     "G1–G67": "the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)",
     "G1–G68": "the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)",
+    "G1–G71": "the stable-identifier range, extended to G1–G72 when G72 (the invariant question, a method) was minted (2026-09-23)",
     "G1–G69": "the stable-identifier range, extended to G1–G70 when G70 (√3-clean is residue, Coxeter's theorem) was minted at FS-71's close (2026-09-22)",
     # FS-71, the theorem audit (2026-09-22): grade tags corrected where the audit found the mechanism was a hand derivation.
     "[kernel for ρ₁₅; measured for ρ₆₃]": "G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance",

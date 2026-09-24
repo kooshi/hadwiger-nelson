@@ -4,6 +4,8 @@
 the three-colour `Θ` exists at four colours. Rank 4: mechanism; the next use of the competitor-and-advisor design
 (`plans/PROTOCOL-competitor-and-advisor.md` §3).*
 
+**Overlap with FS-79 (2026-09-23).** `plans/STUB-invariant-question-four-colours.md` asks the structural question that G72 prescribes: what invariant does every four-colouring carry? It takes this stub's questions 2 (certificates) and 3 (decidability) as its outcomes. This stub keeps question 1, the extension question (C3-aper and C3-inherit at four colours), and its rank-1 scan. Run FS-79 first; its answer re-aims this one.
+
 ## Mission, in plain language
 
 FS-73 settled the inheritance question at three colours for every Cayley graph of a finitely generated torsion-free abelian group

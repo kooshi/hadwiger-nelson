@@ -51,8 +51,9 @@ advancement (Kooshi, 2026-09-22).
    direction change that does not rewrite the affected stubs is not recorded; a demoted milestone keeps its stub with a banner
    saying why (deprecate, never delete).
 
-3. **Reframe** — the milestone's opening: two acts, in this order, before a route is written. Their outputs are **§G** and
-   **§PA** of the subplan, in that order, ahead of everything else; a subplan without both is not a subplan.
+3. **Reframe** — the milestone's opening: two acts, in this order, before a route is written, and for a derivation milestone a
+   third (3.3). Their outputs are **§G**, **§PA** and, for a derivation milestone, **§IQ** of the subplan, in that order, ahead of
+   everything else. A subplan without them is not a subplan.
 
    **3.1 Re-grokking** — the project's own theory read from inside the new question: every grokking, every row's
    *mechanism* in `LEDGER.md`, every method rule. Its product is the *recognition*: the milestone's question restated in the theory's terms, with what the
@@ -129,6 +130,24 @@ advancement (Kooshi, 2026-09-22).
    same day, per the bibliography rule. **A new instrument minted mid-milestone gets its own gate before it is relied on**
    (FS-70's Kempe screen was minted without one).
 
+   **3.3 The invariant question** — for every **derivation milestone**, meaning one whose deliverable is a theorem or a
+   derivation rather than an object, a measurement, a kernel port or an audit. When unsure, run it. Its output is **§IQ**.
+   (Minted 2026-09-23, Kooshi; `CLAUDE.md` G72. The instance: FS-73 asked whether every colouring looks like a periodic one,
+   with the arithmetic removed and search forbidden. That forced the height function whose slope decided χ(ℚ(√167)²) ≥ 4, a
+   bound two direct attacks on ℚ(√167) had not reached.) Five items, each written out:
+   1. **The existence form**: the milestone's question as it is usually asked. Is there an object, a colouring, a forcer?
+   2. **The structural form**: *a question that cannot be answered without an invariant every solution carries.*
+      - It is about **every** solution, not one.
+      - It is posed in the most general class where it still makes sense, with the arithmetic stripped when it can be.
+      - §PA's naming (3.2 item 1) is where the invariant usually comes from: the home discipline's standard handle on an
+        arbitrary solution.
+   3. **The invariant it forces**: named if the discipline has one. Otherwise write "none known", and then finding it is the
+      milestone.
+   4. **Its route**: derivation only. A search may check a derived claim; it never answers the structural form.
+   5. **The open instances it would decide**: listed, so that a new exact decision procedure is aimed at them the day it lands.
+
+   The owner scores §IQ with §G. A structural form that is the existence form reworded has not done 3.3.
+
 4. **Subplan** — only now the routes, the skeleton, the measurements and the phases, each aimed by §G and §PA. Deep-dive
    the milestone's requirements and *strictly specify its shape*: write the **skeleton** — every signature and full theorem
    statement, `sorry` at every leaf — so the *specification* elaborates before any proof effort is spent. Validate the spec
@@ -183,7 +202,8 @@ advancement (Kooshi, 2026-09-22).
    - **Re-read §G against what happened, and propagate forward** (step 3.1): which extractions paid, which entry should have
      borne and was not used — each miss a new instance under 3.1, and the entry that was missed re-written in the form G67
      asks for — and, for every grokking minted at this close, the open
-     stubs it bears on, their provisional-bearings lines updated in the same commit.
+     stubs it bears on, their provisional-bearings lines updated in the same commit. For a derivation milestone, re-read §IQ
+     too, and record whether the result came through the structural question or from elsewhere. That count is G72's killing test.
    - **Sweep §PA for recognitions that belong in the Grokkings** (2026-09-17). The conjecture sweep below catches claims
      the milestone *made*; this catches identifications it *found while checking whether it was first*. M63 phase H3's
      prior-art appendix derived, verified symbolically and correctly recorded that this project's whole rotation family is the
