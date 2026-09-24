@@ -5,7 +5,7 @@
 (`data/fs79/records/phase-P0.md`, `phase-P3-theta4.md`, `phase-P3b-survivors.md`), the two competitors' working files
 (`plans/FS79-C-deBruijn.md` §2–§4, §2a, §2b, §3a, §7; `plans/FS79-C-Coxeter.md` §1, §4 — neither has that heading) and the advisors'
 records. Grades are `CLAUDE.md` § Notation's. A proof held in a record is not repeated here; this file is the index that survives the
-ledger rows' compression (rows 80–81). `LEDGER.md` § B indexes every entry, one line each (`tools/fs71_ledger_b_check.py --strict`).
+ledger rows' compression (rows 80–81); T44–T49 are P3b's. `LEDGER.md` § B indexes every entry, one line each (`tools/fs71_ledger_b_check.py --strict`).
 **FS-79 added no Lean**, so nothing below is kernel-checked and every kernel decision is recorded per entry.*
 
 **Who found what** (credited per entry): the **planner** (the plan, §0, §PA, §IQ); **Poros (plan)**, the plan-phase advisor; the
@@ -322,9 +322,42 @@ P3-T6 reproduces FS73-T44 independently; P3-T7 makes the full Θ₄ tree intrins
 
 ## §5. The survivors (P3b: the P3b implementer)
 
-<!-- SLOT-P3B: filled from data/fs79/records/phase-P3b-survivors.md when the owner releases it. -->
-*P3b (the exact Θ₄ tool aimed at phase 0's seven minimal survivors, and quotients at `N = 13–24`) was running when this file was
-written; its theorems are entered here from its record's "Theorems this phase proved" when the owner releases it.*
+*P3b's record: `data/fs79/records/phase-P3b-survivors.md` (registration `8a5e9903`, result `99523d6c`); its "Theorems this phase
+proved" P3b-T1…T6 are T44–T49 below. Tool `tools/fs79_p3b_theta4.py`; data `data/fs79/p3b/`; every witness CERTIFIED by the
+untouched `tools/fs79_p0_check.py` (`data/fs79/p3b/checker-run.txt`), and the owner re-certified the three-colour witnesses and saw
+his plant (`L21cc6506`'s loose witness read at `k = 3`) refused THETA_OUT_OF_BAND.*
+
+**T44 — P3b-T1: `L21cc6506` has a Θ₄ cell of maximum margin exactly 3/56, reconfirming `F = P = 0` at four colours. [cert + tools exact + hand; the P3b implementer]**
+P3's witness point had margin 1/324; the finder's control run found the cell's exact maximum 3/56 (the point used has margin
+1289/32204). *Proof:* `data/fs79/p3b/witnesses/L21cc6506-theta4-loose.json`; `steps.jsonl`; P3's five-step argument (T38–T40).
+*Proof verdict:* closes. *Rests on it:* the finder's positive control. *Prior art:* none. *Kernel:* declined.
+
+**T45 — P3b-T2: Λ₁₃₄₄, Λ₁₅₈₄ and Λ₂₃₅₂ are four-colourable and loose at four colours (`F = P = 0`), by cells of maximum margin 141/668, 173/11844 and 93/668. [cert + hand; the P3b implementer]**
+Phase 0 had them only as four-colourable. They were the finder's calibration: known positives at the survivors' coefficient size (ℓ¹
+up to 1,548 against the survivors' 1,644–17,430), each found loose within 150 s. None is on the instance list. *Proof:*
+`data/fs79/p3b/witnesses/{1344,1584,2352}-theta4-loose-cal.json`; P3's argument holds for any lattice. *Proof verdict:* closes.
+*Rests on it:* the calibration that types the survivors' nulls (T49). *Prior art:* none. *Kernel:* declined.
+
+**T46 — P3b-T3: Λ₁₃₄₄ and Λ₂₃₅₂ are three-colourable: their Θ₄ witnesses keep every unit vector at distance ≥ 77/167 and ≥ 260/668 > 1/3 from the integers, so they lie in Θ₃. [cert; the P3b implementer; the owner re-certified at `k = 3`]**
+*Proof:* `data/fs79/p3b/witnesses/{1344,2352}-theta3-cal.json`, CERTIFIED at `k = 3`. *Proof verdict:* closes. *Rests on it:* nothing
+downstream. *Prior art:* FS73-T22 (the criterion). *Kernel:* declined.
+
+**T47 — P3b-T4: Λ₂₄₄₈ is admissible at `N = 11` and `Λ₂₄₄₈/11Λ₂₄₄₈` is not four-colourable — a correction to phase 0's survivor table. [tools, replicated (kissat and cadical UNSAT), no proof checked; the P3b implementer]**
+Phase 0's quotient budget ran out after `N = 10`, and its table called every other `N ≤ 12` inadmissible. A quotient refusal is not a
+refusal of the lattice. *Proof:* `data/fs79/p3b/quotients.jsonl`; `steps.jsonl` quot-N11. *Proof verdict:* a solver verdict. *Rests on it:*
+the corrected survivor row (phase-P0.md, noted there). *Prior art:* none. *Kernel:* declined.
+
+**T48 — P3b-T5: no quotient colours any survivor: refusals at `N = 13` (Λ₂₄₄₈, Λ₂₄₀₀, Λ₄₂₀₀ and so its five superlattices, Λ₁₄₂₈₀, Λ₂₄₃₆₀) and at `N = 14` (Λ₂₃₂₈ replicated; Λ₂₄₄₈, Λ₂₄₀₀ by one solver); undecided at Λ₂₃₂₈'s `N = 13` and Λ₂₄₄₈'s `N = 15`. [tools, no proof checked; the P3b implementer]**
+Λ₁₀₉₂₀ had no admissible `N ≤ 15` asked (its first admissible `N ≥ 13` is 16). The cap was checked only between asks (a 9-minute overrun).
+*Proof:* the record's quotient table; `quotients.jsonl`. *Proof verdict:* solver verdicts. *Rests on it:* row 81; FS-59's next screens.
+*Prior art:* none. *Kernel:* declined.
+
+**T49 — P3b-T6 and the Θ₄ step: no Θ₄ point found on any of the seven survivors by HiGHS in 1,100 s — calibrated by T45, not a certificate — and the exact emptiness tree priced, not run: least quadruple determinants 34,650 (`L21cc6506`) and 4,928,028 (Λ₂₄₄₈), 476 root children on Λ₂₄₄₈. [tools, calibrated; tools exact for the determinants; the P3b implementer]**
+The one-core pilot left Λ₂₄₄₈'s first subtree unfinished past 31,144 nodes; projected ≥ ~1.5·10⁷ nodes (a lower bound) and ~2·10⁹ by
+determinant scaling — neither is a count. The implementer's first statement ("~10⁹, far beyond the cap") was corrected by itself to this
+scope. The same engine could not prove `Θ₃(L21cc6506) = ∅` in 300 s, so its nulls are uninformative about emptiness. *Proof:* the
+record's "What happened" and `steps.jsonl` (price-tree-k4). *Proof verdict:* a typed null plus exact determinants. *Rests on it:* row
+81; FS-59 step 3. *Prior art:* FS73-T44 (the 34,650). *Kernel:* declined.
 
 ## §6. Conjectures and readings this milestone stated and did not prove (the close's sweep)
 

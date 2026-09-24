@@ -1386,8 +1386,8 @@ So the experience pass is not triggered by Lean; §M records its decision.
 there). Results: `LEDGER.md` rows 80–81; theorems: `plans/FS79-derivation.md` T1–T43 (§5 holds P3b's slot, §6 the conjecture sweep);
 understanding: G73 minted, G71 and G68 scoped, instances to G21, G49, G50, G51, G30, G60, G72. This section holds what has no other
 home: the §G and §IQ re-reads, the §PA sweep, the forward propagation, the predictions scored once, the retractions, the errata to this
-plan, and the honesty record. **P3b was running when this was written**; its results enter at the marked slots (rows 81, the Frontier,
-FS-59, the derivation file §5, §R-close.5).*
+plan, and the honesty record. P3b's results (commit 99523d6c) were entered at the close's marked slots once it finished: rows 81, the Frontier,
+FS-59, the derivation file §5, §R-close.5.*
 
 ### §R-close.1 The §G re-read: which extractions paid, and which entries should have borne and did not
 
@@ -1470,7 +1470,7 @@ FS-59 (§0 bearings), FS-74 (banner), FS-76 (re-aim), FS-80 (minted around it), 
 | P-persona (the owner's) | 0.6 | won, weakly (item 84) |
 | Poros (plan): its seven failure points | — | four fired and were caught, one missed (density), two handled unprompted (its §5) |
 | Poros (competition) E1–E7 | 0.45, 0.40, 0.30, 0.10, 0.05, 0.60, 0.50 | E2 won; E1, E3, E6, E7 lost; E4, E5 not landed as expected; its card 1 hunch a typed null (T16) |
-| P3b's B-1…B-5 | — | ⟨P3B-SLOT-PRED⟩ |
+| P3b's B-1 (0 of 7 coloured) / B-2 (0 loose) / B-3 (a certified empty Θ₄) / B-4 (a quotient colours one) / B-5 | 0.40 / 0.65 / 0.35 / 0.25 / 0.60 | won / won / lost (not attempted) / lost / unscored (no survivor had a point) |
 
 ### §R-close.6 Retractions, counted (G51)
 
@@ -1508,7 +1508,9 @@ lonely-runner citation from memory (disclosed, replaced) and its overrun (about 
 the P3 implementer's IndexError under a plant and its overrun (about 356k against 250k), both disclosed. **Kills and what they forfeited:**
 phase 0's deep pass (the automatic deep stage, classify-43, 300 s re-asks, the P0.5 controls — all carried to FS-59); P3's full tree,
 killed about five minutes in by process group and verified by effect (the complete census and the whole-list symmetry control); the
-owner's 167 re-ask paused and resumed (nothing); phase 0's unbounded pysat ask (nothing). **The incident** (item 66): a hand-back routed
+owner's 167 re-ask paused and resumed (nothing); phase 0's unbounded pysat ask (nothing); P3b's five dominated Θ₄ runs on the lattices containing Λ₄₂₀₀, stopped by process group and
+verified by effect (only searches Λ₄₂₀₀'s own null already covered). The P3b implementer corrected itself: its first "~10⁹ nodes, far
+beyond the cap" became a measured lower bound (≥ ~1.5·10⁷) with a scaling projection. **The incident** (item 66): a hand-back routed
 to the agent that last woke the advisor carried Coxeter's progress to de Bruijn; disclosed at once; no score affected; now protocol
 rule 1.
 
@@ -1518,7 +1520,9 @@ pysat's CaDiCaL ignores `interrupt()` → `CLAUDE.md` § Toolchain; FS-73's `fs7
 are read-only), covered by the toolchain line; phase 0's eight defects → its record; `quot_total` checked only between values of `N` →
 FS-59 step 1; `tools/fs79_p0_check.py` prints a traceback, not a usage line, with no argument → recorded here, not fixed;
 `tools/fs79_p3_theta4_check.py` does not check its summary counts → its docstring (the fix owed before it certifies anything new); the
-waiter on a killed chain → `CLAUDE.md` § The gate.
+waiter on a killed chain → `CLAUDE.md` § The gate; P3b's three → its record: scipy reports no node count when HiGHS has no incumbent,
+a `pgrep -f` pgid read matched its own shell (caught before any kill; the self-match rule's standing instances cover it), and the
+quotient step's cap is checked only between asks (a 9-minute overrun; FS-59 step 1).
 
 ### §R-close.10 The conjecture sweep
 

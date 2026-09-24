@@ -5,7 +5,7 @@
 > (empty on every graph of the class at four colours; from five colours up on every presentation with two generator classes), the loop
 > winding (the relation's parity), parity-free face fluxes, coindex topological bounds — **not a no-go for a kind of invariant**;
 > plain density of periodic four-colourings false in rank 1; (Q-obs) and (Q-rig) not landed, typed. **The open instances (§IQ item 5):**
-> `L21cc6506` decided — four-colourable and loose, `F = P = 0` (row 81); phase 0's seven minimal survivors carried to FS-59 ⟨P3B-STUB79⟩;
+> `L21cc6506` decided — four-colourable and loose, `F = P = 0` (row 81); phase 0's seven minimal survivors carried to FS-59 (P3b: no Θ₄ point from a calibrated finder, no quotient colouring to `N = 15` — calibrated nulls, not refusals);
 > KR6 (FS-77), FS-72's rank-8 lattice and the rich ℚ(√3,√5) lattices **not reached**; FS-76's rank-1 walls — the exact rank-1 criterion
 > and a scan to `max D = 14` (row 80); de Grey's lattice, the known positive — its rigidity is not an edge-local height (row 80). Kooshi's
 > certificate question goes on in FS-80 (averaged, one-sided) and FS-76 (decidability). **Correction:** the bearing below said

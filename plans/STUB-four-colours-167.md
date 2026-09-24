@@ -12,17 +12,27 @@
   130 screened lattices four-colourable, 39 loose by a gap (T15); **7 minimal survivors** — Λ₂₄₄₈, Λ₂₃₂₈, Λ₂₄₀₀, Λ₄₂₀₀, Λ₁₀₉₂₀, Λ₁₄₂₈₀,
   Λ₂₄₃₆₀ — **of capped screens, not refusals** (the survivor table in the record lists each one's screens and budgets). At the ramified
   prime 167 none coloured at 300 s; three have no gapped colouring there by one solver's unchecked UNSAT (T16).
-- ⟨P3B-SLOT-FS59: P3b aimed the exact Θ₄ tool at the seven survivors, with quotients at `N = 13–24`; its result goes here.⟩
+- **P3b** (`data/fs79/records/phase-P3b-survivors.md`; FS79-T44–T49) aimed an exact Θ₄ finder at the seven — HiGHS proposing band
+  vectors, each cell re-solved exactly, every witness certified by the phase-0 checker — and found **no point on any in 1,100 s**,
+  calibrated by three known positives at the survivors' coefficient size (Λ₁₃₄₄, Λ₁₅₈₄, Λ₂₃₅₂), each found loose within 150 s. That
+  is a finder's null, not an empty Θ₄: the exact emptiness tree was priced from a pilot at ≥ ~1.5·10⁷ nodes for Λ₂₄₄₈ (~2·10⁹ by
+  determinant scaling; neither is a count) and not attempted. **No quotient colours any survivor**: refused at `N = 13` (Λ₂₄₄₈, Λ₂₄₀₀,
+  Λ₄₂₀₀ and its five superlattices, Λ₁₄₂₈₀, Λ₂₄₃₆₀) and at `N = 14` (Λ₂₃₂₈ replicated; Λ₂₄₄₈, Λ₂₄₀₀ by one solver); undecided at
+  Λ₂₃₂₈'s `N = 13` and Λ₂₄₄₈'s `N = 15`; Λ₁₀₉₂₀'s first admissible `N ≥ 13` is 16, unasked. Phase 0 had missed that Λ₂₄₄₈ is admissible
+  at `N = 11`; it refuses there, replicated. Every quotient verdict is a solver's with no checked proof, and a quotient refusal is not a
+  refusal of the lattice.
 - **Prices, with their caveat:** every candidate's degree-18 ball holds ≥ 1.38·10⁸ points, the cheapest survivor's 1.57·10¹¹ (T13). Those
   are balls at G65's **three-colour** degree aim; the four-colour hardness band is unmeasured.
 
 **Next, cheapest first** (the owed work from phase 0's trimming, close-inventory items 54, 60, 62, 98):
-1. **Quotients at `N = 13–24`** on every survivor, gap-aimed first (phase 0 stopped at `N ≤ 12`; fix `quot_total`, checked only between
-   values of `N`).
+1. **Quotients at `N ≥ 16`** on all seven and `N = 15` on all but Λ₂₄₄₈ (P3b reached `N = 13–15`; the admissible `N ≤ 24` per lattice are
+   listed in its record), longer asks at Λ₂₃₂₈'s `N = 13` and Λ₂₄₄₈'s `N = 15`; fix `quot_total` and P3b's cap, both checked only between
+   asks.
 2. **Longer residue asks** at 59, 67, 71, 79, 83 and 29 (phase 0 used 15–30 s), the seven undecided 43-sets at 300 s, and the
    classification at 43 (only the sets real lattices produce were asked).
-3. **Each survivor's Θ₄ cells by an exact finder** (phase 0's was a float-LP finder capped at 60 s, stopping at its first point): one
-   full-dimensional cell makes a survivor loose (G73) — if P3b has not already decided it.
+3. **A real price of the exact Θ₄ tree** — one subtree of Λ₂₄₄₈ run to completion, then a sample — and a **second finder with a
+   different search order** (P3b's HiGHS found nothing in 1,100 s): one full-dimensional cell makes a survivor loose (G73), and an
+   exhausted tree would show it has no circular colouring (not that it refuses four).
 4. **Kempe period groups** of every colouring found (G68), and the question P3 left at `L21cc6506`: do finitely many periodic
    colourings' Kempe groups already meet in 0 there, or does its looseness need infinitely many (FS79 §6 R7)?
 5. **Route (ii)** on any survivor that stays rigid (a forced δ prime to 23, 43, 59, …; G55).

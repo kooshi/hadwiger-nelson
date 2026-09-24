@@ -57,6 +57,10 @@ kissat at 300 s, refusals re-asked by cadical with no break (`quotients.jsonl`).
 | 14280 | 324 | 5.40·10¹³ | 167 | N = 8, 9, 11 | — |
 | 24360 | 852 | 2.59·10¹⁴ | 167 | N = 8, 9, 11 | — |
 
+**Corrected by P3b** (`data/fs79/records/phase-P3b-survivors.md`, 2026-09-24): Λ₂₄₄₈ is admissible at `N = 11`, which this phase never
+asked (its quotient budget ran out after `N = 10`); it refuses there, replicated. Its row should read: refused at `N = 5, 7, 11, 13`;
+`N = 14` by one solver; undecided at `N = 10` (plain) and `N = 15`.
+
 The 5 non-minimal survivors each contain Λ₄₂₀₀ (and 16800 also Λ₂₄₀₀): 12600, 16800, 21000, 25200, 29400. They need no separate
 screen: a quotient colouring of Λ_Y at N restricts to one of Λ_X ⊆ Λ_Y at N, so Λ₄₂₀₀'s refusals at N = 8, 9, 11 hold for them (T2).
 Containment is by divisibility of true denominators. Every lattice in the pool was screened; no row is "not screened".
