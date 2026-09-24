@@ -180,3 +180,60 @@ Launch (the new resource rule: RAM rationed by `scripts/slot.py`, threads not; l
 scripts/slot.py --mem 2 --cpus 1 --name fs81-p03-struct -- python3 tools/fs81_struct.py sweep 35,83,107,131,155,179,203,215,227,251,263,287,299,323,347,371,383,395,407,419,443,455,467,479,491,11,23,47,59,71,95,119,143,167,191,239,311,335,359,431 data/fs81/phase0/p03-struct.jsonl data/fs81/phase0/struct
 ```
 (resumable: recorded (d, K) pairs are skipped; each item is seconds.)
+
+**P0.2 resumed under the new resource rule (2026-09-24), in six disjoint field groups, each its own stage file; each command resumes itself:**
+```
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs --fields 131,155,179,203,215
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g6 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g6 --fields 95,119,143,167,191,239,311,335,359,431
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g4 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g4 --fields 407,419,443,455,467
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g5 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g5 --fields 479,491,11,23,47,59,71
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g2 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g2 --fields 227,251,263,287,299
+scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g3 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g3 --fields 323,347,371,383,395
+```
+
+### P0.3 results: B at K_B(d), structural certificates (checker verdicts PENDING the owner's plant)
+
+| d | mod 8 | mod 24 | census | K_B | pairs | at K_B: verdict (checked Farkas combinations) | certificate | at K_B − 1 |
+|---|---|---|---|---|---|---|---|---|
+| 35 | 3 | 11 | open | 2 | 50 | EMPTY (0) | `data/fs81/phase0/struct/d35-B-K2.json` | δ-system feasible (first case found) |
+| 83 | 3 | 11 | open | 2 | 50 | EMPTY (256) | `data/fs81/phase0/struct/d83-B-K2.json` | δ-system feasible (first case found) |
+| 107 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d107-B-K3.json` | δ-system feasible (first case found) |
+| 131 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d131-B-K3.json` | δ-system feasible (first case found) |
+| 155 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d155-B-K3.json` | δ-system feasible (first case found) |
+| 179 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d179-B-K3.json` | δ-system feasible (first case found) |
+| 203 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d203-B-K3.json` | δ-system feasible (first case found) |
+| 215 | 7 | 23 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d215-B-K3.json` | δ-system feasible (first case found) |
+| 227 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d227-B-K3.json` | δ-system feasible (first case found) |
+| 251 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d251-B-K3.json` | δ-system feasible (first case found) |
+| 263 | 7 | 23 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d263-B-K3.json` | δ-system feasible (first case found) |
+| 287 | 7 | 23 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d287-B-K3.json` | δ-system feasible (first case found) |
+| 299 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d299-B-K3.json` | δ-system feasible (first case found) |
+| 323 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d323-B-K3.json` | δ-system feasible (first case found) |
+| 347 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d347-B-K3.json` | δ-system feasible (first case found) |
+| 371 | 3 | 11 | open | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d371-B-K3.json` | δ-system feasible (first case found) |
+| 383 | 7 | 23 | open | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d383-B-K3.json` | δ-system feasible (first case found) |
+| 395 | 3 | 11 | open | 3 | 70 | EMPTY (256) | `data/fs81/phase0/struct/d395-B-K3.json` | δ-system feasible (first case found) |
+| 407 | 7 | 23 | open | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d407-B-K3.json` | δ-system feasible (first case found) |
+| 419 | 3 | 11 | open | 3 | 70 | EMPTY (256) | `data/fs81/phase0/struct/d419-B-K3.json` | δ-system feasible (first case found) |
+| 443 | 3 | 11 | open | 3 | 70 | EMPTY (256) | `data/fs81/phase0/struct/d443-B-K3.json` | δ-system feasible (first case found) |
+| 455 | 7 | 23 | open | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d455-B-K3.json` | δ-system feasible (first case found) |
+| 467 | 3 | 11 | open | 3 | 70 | EMPTY (256) | `data/fs81/phase0/struct/d467-B-K3.json` | δ-system feasible (first case found) |
+| 479 | 7 | 23 | open | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d479-B-K3.json` | δ-system feasible (first case found) |
+| 491 | 3 | 11 | open | 3 | 70 | EMPTY (256) | `data/fs81/phase0/struct/d491-B-K3.json` | δ-system feasible (first case found) |
+| 11 | 3 | 11 | certified | 1 | 30 | EMPTY (0) | `data/fs81/phase0/struct/d11-B-K1.json` | — |
+| 23 | 7 | 23 | certified | 2 | 50 | EMPTY (0) | `data/fs81/phase0/struct/d23-B-K2.json` | δ-system feasible (first case found) |
+| 47 | 7 | 23 | certified | 2 | 50 | EMPTY (0) | `data/fs81/phase0/struct/d47-B-K2.json` | δ-system feasible (first case found) |
+| 59 | 3 | 11 | certified | 2 | 50 | EMPTY (0) | `data/fs81/phase0/struct/d59-B-K2.json` | δ-system feasible (first case found) |
+| 71 | 7 | 23 | certified | 2 | 50 | EMPTY (0) | `data/fs81/phase0/struct/d71-B-K2.json` | δ-system feasible (first case found) |
+| 95 | 7 | 23 | certified | 2 | 50 | EMPTY (64) | `data/fs81/phase0/struct/d95-B-K2.json` | δ-system feasible (first case found) |
+| 119 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d119-B-K3.json` | δ-system feasible (first case found) |
+| 143 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d143-B-K3.json` | δ-system feasible (first case found) |
+| 167 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d167-B-K3.json` | δ-system feasible (first case found) |
+| 191 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d191-B-K3.json` | δ-system feasible (first case found) |
+| 239 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d239-B-K3.json` | δ-system feasible (first case found) |
+| 311 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d311-B-K3.json` | δ-system feasible (first case found) |
+| 335 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d335-B-K3.json` | δ-system feasible (first case found) |
+| 359 | 7 | 23 | certified | 3 | 70 | EMPTY (0) | `data/fs81/phase0/struct/d359-B-K3.json` | δ-system feasible (first case found) |
+| 431 | 7 | 23 | certified | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d431-B-K3.json` | δ-system feasible (first case found) |
+
+Every row at K_B: `fs81_struct_check.py` PASS. Relation-tree route on the same object: d = 11, K = 1 EMPTY (9,186 nodes), the frozen checker PASS; d = 35, K = 2 UNDECIDED at 1,821 s and 835,827 nodes (`data/fs81/phase0/p03.jsonl`).
