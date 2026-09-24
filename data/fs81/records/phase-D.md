@@ -281,6 +281,17 @@ done
 
 *What a kill redoes:* the one ask (a row is written when it ends). *Resume:* the same loop (a recorded (key, tag, wall) is skipped).
 
+**The certificate for R*(X_A) ≤ 1.4** (the owner's request: the X_A target-encoding refusal at R = 1.4 through K2 and cake_lpr):
+
+```
+cd /home/kooshi/source/lean-dir
+setsid nohup python3 scripts/slot.py --mem 16 --cpus 1 --name d0b-cert14 --wait 1800 -- \
+    python3 tools/fs81_phaseD.py certify 'X_A|target|R1.4' 7200 >> data/fs81/phaseD/d0b-cert14.log 2>&1 &
+```
+
+*What a kill redoes:* all of it (CaDiCaL ≈ 6–8 min, the trim, K2's check); the proof lives on disk in `~/fs81-phaseD-work/` while it is
+made, and the trimmed certificate in `data/fs81/phaseD/cert-X_A-target-R1.4/`.
+
 **D1, the screen at 47** (`tools/fs81_d47.py`, a copy of FS-79's `fs79_p0.py` at d = 47; writes `data/fs81/phaseD/d47/`):
 each step resumable by re-running (every record keyed and skipped when present; a kill redoes the one denominator or screen in flight):
 
