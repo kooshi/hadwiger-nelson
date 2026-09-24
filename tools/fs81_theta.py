@@ -295,7 +295,10 @@ def small_order_point(units, screen=(3, 6, 9, 12), chunk=200000):
     import numpy as np
     from fs73v2_units import solve
     B = hnf([list(u) for u in units])
-    C = np.array([[int(t) for t in solve(B, list(u))] for u in units], dtype=np.int64)          # integer coordinates
+    L = math.lcm(*screen)
+    # integer coordinates in the Hermite basis, reduced mod lcm(screen) (only their residues matter; unreduced they can
+    # exceed int64 — the defect that stopped P0.2's first launch at d = 83)
+    C = np.array([[int(t) % L for t in solve(B, list(u))] for u in units], dtype=np.int64)
     for m in screen:
         grid = np.array(list(itertools.product(range(m), repeat=4)), dtype=np.int64)
         for k in range(0, len(grid), chunk):
