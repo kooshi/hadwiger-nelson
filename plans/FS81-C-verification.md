@@ -146,3 +146,61 @@ in `𝔽₉` lies in the norm-one group `{±1, ±i}` (`uū = 1`), where `χ` tak
   character of `R₅`. The separation is used in L4 (§1.4 below).
 
 No gap. Scope: field level, on `R₅`.
+
+### §1.3 L3 — every layer of a field-level slope lies in `Θ(U₅)`. **Verdict: PROVED** (field level, every `F ⊆ ℝ`)
+
+For `θ ∈ Θ₃(F)` and `b ∈ U_F`, `θ_b(x) := θ(bx)` is defined on `R₅`, because `bR₅ = b·ℤ[U₅] ⊆ ℤ[U_F] = R_F` (`R_F` is a ring
+containing `R₅` and `b`). It is a homomorphism, and for `u ∈ U₅`, `bu ∈ U_F` (a product of unit vectors), so `θ_b(u) = θ(bu) ∈ B`.
+Hence `θ_b ∈ Θ(U₅)`. ∎ With L2, every layer is of exactly one of two **types**:
+- *parity type*, `θ_b = θ₂ + λ_{e_b}` with `|e_b| ≤ 1/6`;
+- *order-3 type*, `θ_b = χ_b ∈ X₃`.
+
+The two are disjoint at the field level: `θ₂ + λ_e` has order 2 modulo the archimedean characters, and `χ` has order 3. The type of
+`b` depends only on the coset `bU₅`, because `θ_{bω} = θ_b∘ω` for `ω ∈ U₅`, `θ₂∘ω = θ₂`, `λ_e∘ω = λ_{ω̄e}` and `X₃∘ω = X₃`.
+
+### §1.4 L4 — gluing. **Verdict: PROVED** (field level, every `F ⊆ ℝ`), with the conditions derived rather than assumed
+
+**The layer torsion character (the verifier's route).** For `θ ∈ Θ₃(F)` and `x ∈ R_F`, put **`τ(x) := lim_{k→∞} θ(25^{−k}x)`**.
+- *It exists.* `R_F` is a ring containing `1/5`, so `25^{−k}x ∈ R_F`. Write `x = Σ n_j u_j` with `u_j ∈ U_F`. Then
+  `θ(25^{−k}x) = Σ n_j θ_{u_j}(25^{−k})`, and each term converges by L2/L3:
+  - on a parity layer, `θ₂(25^{−k}) + Re(ē)·25^{−k} → 1/2`, because `25^{−k} ≡ 1 (mod 1+i)` and the real part tends to 0 in ℝ;
+  - on an order-3 layer, `χ(25^{−k}) = χ(1)`, constant, because `25 ≡ 1 (mod 3R₅)`.
+- *It is a character.* It is a pointwise limit of the characters `x ↦ θ(25^{−k}x)`.
+- *Its values on units.* `τ(u) = 1/2` if the layer of `u` has parity type, and `τ(u) = χ_u(1) ∈ {1/3, 2/3}` if it has order-3 type.
+  So `6τ = 0`.
+- *Its parts.* Split `τ = τ₂ + τ₃`, with `τ₂ := 3τ ∈ Hom(R_F, (1/2)ℤ/ℤ)` and `τ₃ := 4τ ∈ Hom(R_F, (1/3)ℤ/ℤ)` (CRT: `3 + 4 ≡ 1 (mod 6)`).
+  **For every `u ∈ U_F` exactly one of `τ₂(u)`, `τ₃(u)` is nonzero, and which one is the layer's type.**
+
+**Theorem L4′ (the verifier's form).** *If `1/3 ∈ R_F` and `Θ₃(F) ≠ ∅`, then `F²` is bipartite.*
+- Proof. `R_F = 3R_F`, so `τ₃(x) = 3τ₃(x/3) = 0` for every `x ∈ R_F`, and in particular `τ₃(U_F) = 0`.
+- So every layer has parity type and `τ(u) = τ₂(u) = 1/2` for every `u ∈ U_F`.
+- Then `x ↦ τ(x) ∈ {0, 1/2}` properly 2-colours `Cay(R_F, U_F)`, and translates colour every other component. ∎
+
+**L4 as stated follows.** Let `1 = Σ c_j u_j` with every `3 | c_j` and `Σ c_j` even.
+- Then `1/3 = Σ (c_j/3)u_j ∈ R_F`.
+- If `Θ₃(F) ≠ ∅`, L4′'s proof gives `τ(u) = 1/2` on `U_F`.
+- Then `1/2 = τ(1) = Σ c_j τ(u_j) = (Σ c_j)/2 = 0` in `T`, a contradiction. So `Θ₃(F) = ∅`. ∎
+
+**Which conditions kill which layer type** (the brief's item 5; derived, not corrected toward the statement).
+- *Order-3 layers are killed, at every layer at once, by `1/3 ∈ R_F`.* This is exactly what "every `c_j ≡ 0 (mod 3)`" supplies. The
+  relation multiplied by any `u ∈ U_F` gives `τ₃(u) = Σ c_j τ₃(uu_j) = 0`, the same thing seen layer by layer.
+  - A relation with some `c_j ≢ 0 (mod 3)` only links `τ₃` values; it kills nothing by itself (§1.6 uses exactly such links at
+    `3 ∤ n`).
+- *Parity layers*, once they are the only type left, are killed by `Σ c_j` even, **used at the single layer `u = 1`**.
+- *The two conditions together are equivalent to "`1/3 ∈ R_F` and `F²` not bipartite".*
+  - ⟹: a bipartition character `β` would give `β(1) = 1/2 = Σ c_j β(u_j) = (Σ c_j)/2 = 0`.
+  - ⟸: from `1/3 = Σ a_j u_j` and an odd closed walk `Σ m_j u_j = 0` with `Σ m_j` odd, take the relation
+    `1 = Σ 3a_j u_j + 3ε Σ m_j u_j`, with `ε ∈ {0, 1}` chosen to make the coefficient sum even.
+- So the statement's conditions are exactly the right ones. No weaker condition on the `c_j` alone suffices: ℚ(√2) has
+  `1/3 ∈ R_F` and is bipartite, so the parity condition cannot be dropped; ℚ(√7) has a relation with `Σ c_j` even and is
+  three-chromatic, so the mod-3 condition cannot be dropped (§3 below checks both).
+
+**Where the field level is used**, named exactly:
+- `τ` exists only because every layer contains `5^{−k}` for every `k`: along `25^{−k}` the archimedean part `Re(ē)25^{−k}` dies and the
+  torsion part survives.
+- On a finite lattice `5^{−J}ℤ[i]·b`, the parity part of a layer is itself an archimedean character `λ_{5^J c0}` there. So no finite
+  lattice separates "parity" from "real", and the finite-level analogue of L4′ is false in general (C4 measures the depth at which it
+  starts to hold).
+- This is the brief's "archimedean parts cannot absorb a finite-order discrepancy", made into a limit.
+
+Scope: field level, every subfield `F ⊆ ℝ`.
