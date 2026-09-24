@@ -13,9 +13,13 @@ carries its kernel decision.*
   §4.
 - The **owner**: T40's grid check at 1/600, and the relation arithmetic checked at all 41 d below 500.
 
-**Grade of the chain.** Every entry T1–T7 has **two independent derivations**: the planner's, with Poros's check, and the
-verifier's, written blind and compared line by line in the verification record §2 (14 divergences of route, none of truth). That is the
-FS-73 standard [hand, two independent derivations].
+**Grade of the chain.**
+- **T2–T6** each have **two independent derivations**: the planner's, with Poros's check, and the verifier's, written blind and
+  compared line by line in the verification record §2 (14 divergences of route, none of truth). That is the FS-73 standard
+  [hand, two independent derivations].
+- **T1** is a one-line lemma, stated by the modeling agent and checked by the verifier.
+- **T7 and T8 are the verifier's alone: one mind**, checked by exact computation where noted. They wait on a second reading before
+  any ledger row cites them as more than [hand].
 
 ## §1. Stage C — the field-level three-colour theorem
 
