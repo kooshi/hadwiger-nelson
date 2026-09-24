@@ -10,7 +10,9 @@ Corollary U (`F ⊇ 120Λ` from Parts's G481, prior art) this says the spectrum 
 ## State (a fresh agent resumes from here)
 
 - **2026-09-24, later: the 5-part lemma is PROVED** (§1, FS85-R3a), in a stronger form: the five-family graph alone forces it.
-  Stop rule's first condition met. Owed: the blind verifier; the one step to check first is F5's plane complementarity and Step 4.
+  Stop rule's first condition met; standing down after report 2 (commit 2199e552). Owed: the blind verifier; the step to check
+  first is F5's plane complementarity with Step 4(a), then Step 2. Slip: report 1 gave ~190k tokens; the harness counter read ~330k
+  (about 370k at report 2).
 - 2026-09-24: brief and the six inputs read in the brief's order (`CLAUDE.md` from context, checked current against `git log`; the
   FS-85 plan §0, §IQ, §R-review; Coxeter R2.0–R2.12; de Bruijn dB5–dB11; the verification; Poros §13). §IQ and the prediction below
   written before any tool beyond `lat.py` (the unit vectors) and `phi.py` (the 48 order-10 characters, recomputed from the
