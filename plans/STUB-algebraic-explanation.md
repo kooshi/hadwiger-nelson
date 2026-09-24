@@ -1,5 +1,9 @@
 # FS-74 — the algebraic explanation: why is every four-colouring of de Grey's lattice `8Λ`-periodic? (stub)
 
+> **Absorbed into FS-85 (2026-09-24).** Kooshi chose FS-85, *can four-colour rigidity exist without triangles?*
+> (`plans/STUB-four-colour-rigidity-without-triangles.md`), and this stub's question, why every four-colouring of de Grey's lattice
+> is `8Λ`-periodic, is its step 1, with the triangles' role recorded. Everything below stands as FS-85's reading for that step.
+
 *Minted 2026-09-23 at FS-73's close, at Kooshi's request: he declined a kernel proof of the 2,044-point certificate in favour of
 "an attempt at an algebraic explanation in a separate milestone rather than formalizing a big graph" (`plans/FS73-derivation.md`
 T6, kernel decision). Rank 1: mechanism, no compute to speak of, Kooshi's own milestone, and now sharply aimed by Hubai's 2018 description (lead 1).*
