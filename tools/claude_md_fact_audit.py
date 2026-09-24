@@ -97,6 +97,8 @@ ALLOW: dict[str, str] = {
     "240": "vacuity's generic count, 240 -> 253 at FS-73's close",
     "generic=240": "the same count, as the gate report prints it",
     "1–75": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close",
+    "1–79": "the ledger's row range, extended to 1–81 at FS-79's close (2026-09-24)",
+    "R1–R9": "the FS-59 row's 'the stub's three-colour routes R1–R9 are answered'; the row was rewritten at FS-79's close around the survivors and the four-colour question, and the routes with their answered status stay in plans/STUB-four-colours-167.md",
     "R9": "the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a",
     "R9's": "the same, possessive",
     "R5–R8": "the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there",
