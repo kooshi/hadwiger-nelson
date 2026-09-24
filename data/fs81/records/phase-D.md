@@ -10,9 +10,9 @@ This file is kept current enough that a successor can resume from the repository
 |---|---|
 | DK — the two checkers | **done**: self-tests pass (`data/fs81/phaseD/dk-selftest-*.out`); the owner's plants refused by each (K1: an index-2 quotient basis → `SPAN_MISMATCH`, a sheared basis with the table not re-indexed → `IMPROPER_EDGE`; K2: the conflict hint dropped at three positions of fixture (b)'s LRAT → `PROOF_STEP` each); committed `677d59e9` |
 | D0a — the harvest | **done**: 558 recorded asks in the schema (`data/fs81/phaseD/d0a-harvest.jsonl`, summary `d0a-summary.md`) |
-| D0b — the rank-4 ladder | **ladder run** (37 asks, `data/fs81/phaseD/d0b-asks.jsonl`); `R*(X_A)` bracketed from above only (below: the undecided band); quiet re-asks of the decision numbers pending |
+| D0b — the rank-4 ladder | **done**: 37 ladder asks; **`R*(X_A)` ≤ 1.4, certified** (K2 + cake_lpr + kissat); not bracketed below (R = 1.3 UNKNOWN at 4 h for X_A and X_B); quiet `t_A` = 55.41 s, `d*` = 18.41 (R = 1.4 quiet 462.7 s) |
 | D1 — the screen at 47 | **first pass done**: 127 lattices; 102 four-colourable (177 witnesses, all K1-CERTIFIED), **25 survivors, 10 minimal**; the deep pass, the long residue re-asks and the calibrated `Θ₄` finder remain (successor) |
-| D2 — one priced ask | not started (needs the heavy lock) |
+| D2 — one priced ask | **handed over** (§ D2 — the handover): as specified it cannot discharge its matched-control obligation; three ways forward for the owner |
 
 ## DK — the checkers
 
@@ -200,7 +200,7 @@ certify command in about five minutes plus the trim).
 | PD-5 (0.4) X_A/X_B times within a factor of 3 wherever both refuse | 0.41–1.03 | **won** (contended; the quiet re-asks may move it) |
 | PD-6 (0.6) colourable SAT within 60 s at every R ≥ 1.3 and UNKNOWN at 1.0 | 87 s at 1.3; UNKNOWN at 1.0 | **lost** (first half) |
 | PD-7 (0.55) X_A target faster than triangle at R = 1.5 | 167.9 against 161.0 s | **lost**, within the noise; at 1.4 the triangle pin is 5.4× faster |
-| P-D0 (0.5) rank-≥2 refusals decide within 1 h only above `d_ball` ≈ 12 | within 30 min only from 16.6 (X_A, X_B); 14.7 undecided at 30 min | **not scored**: the ladder's wall was 30 min, not 1 h; a 1-hour re-ask at R = 1.3 decides it |
+| P-D0 (0.5) rank-≥2 refusals decide within 1 h only above `d_ball` ≈ 12 | the owner's long re-asks at R = 1.3 (`d_ball` 14.73 / 14.91): X_A and X_B both **UNKNOWN at a 4-hour wall** (14,354.8 and 14,347.3 s CPU, one core each, contended; the measured contention factor is 2.1–3.0×, so ≥ 1.3 h quiet); the least-degree refusal known decides at 16.60 in 462.7 s quiet | **not scorable as worded**: no ask at `d_ball` ≤ 14.9 is known to BE a refusal (`R*` is not bracketed below, and R = 1.3 may be colourable), so no refusal below 16.6 exists to time. What stands: if X_A at R = 1.3 refuses, its refusal does not decide within 1 h, and the threshold sits above 14.7, not at 12 |
 
 ## D1 — the screen at 47 (first pass; `tools/fs81_d47.py`, slots of one core each)
 

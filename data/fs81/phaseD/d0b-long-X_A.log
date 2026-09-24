@@ -1,0 +1,3 @@
+slot: admitted d0b-long-X_A: mem 3 GiB (hard cap), cpus 8
+  X_A|target|R1.3 repeat 1: UNKNOWN 14354.75 s CPU
+DONE reask X_A|target|R1.3: min CPU None s over 0 decided runs
