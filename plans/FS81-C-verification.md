@@ -255,8 +255,9 @@ Whether every additive 3-colouring is one of `[Fischer1990]` Thm 9's maps up to 
 - **The relation at layer 1** (`θ_1 = 6θ_1 − 3θ_v − 3θ_{v̄}` on `R₅`) is **satisfiable**:
   - the order-2 parts give `θ₂ = θ₂`, since `3χ = 0` and `5θ₂ = 3θ₂ = θ₂`;
   - the real parts give `5e = 3e′`, which small `e`, `e′` meet.
-- **The relation at layer `v̄`** (`θ_{v̄} = 6θ_{v̄} − 3θ_1 − 3θ_{v̄²}`) is not. Its order-3 part reads `χ = 0 − 0 − 0`, since
-  `6χ = 3·(anything of order ≤ 2 or 3 with 3 | coefficient)`, which is impossible for `χ` of order 3.
+- **The relation at layer `v̄`** (`θ_{v̄} = 6θ_{v̄} − 3θ_1 − 3θ_{v̄²}`) is not. Its order-3 part reads `χ = 0`: on the right, `6χ = 0`,
+  and `3θ_1`, `3θ_{v̄²}` have no order-3 part whatever their types (3 times a parity-type layer has none, 3 times an order-3 one is 0).
+  That is impossible for `χ` of order 3.
 - So the attempt fails at **a different layer from the one where the parity layer was placed**, for exactly the proof's reason:
   `1/3 ∈ R_F` forbids order-3 layers everywhere (`τ₃ = 0`).
 - Making every layer parity instead fails at layer 1 on the order-2 part: `θ₂ = 6θ₂ − 3θ₂ − 3θ₂ = 0`. That is the proof's second reason,
