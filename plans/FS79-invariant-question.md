@@ -679,7 +679,7 @@ first route (the owner's ruling R1 of FS-73).
 - *Checkpoint:* each competitor's working file `{SCRATCH}/FS79-C-{NAME}.md`, current at every claim and every retraction (kept and
   marked); the advisor's record in its scratch. *Resume:* a successor reads the working file. *A kill redoes* the step since the last
   write.
-- *Acceptance:* every claim carries its class (𝒞_r, K₄-free, triangle-free), its rank, its kind, its grade, and a named inhabitant of its
+- *Acceptance:* every claim is scored against §C.4's obligations for its face and shape (the obligation pass). As the first draft put it, every claim carries its class (𝒞_r, K₄-free, triangle-free), its rank, its kind, its grade, and a named inhabitant of its
   hypotheses (G30.5); every theorem's key step read by the advisor; retractions counted; each working file ends with the heading
   "Theorems this phase proved"; the working files moved into `plans/` by the owner only after both hand back.
 
@@ -706,7 +706,7 @@ G71 and T29 corrected by §PA.3 item 2, G50's new instance, `CLOSED-QUESTIONS.md
 | P0 | the price formula | `φ(R)` at de Grey's lattice ball, `R = 1.5`, `g = 54` | degree ≈ 18.4, within 2 % |
 | P0 | predictions | registered in the record before any run | timestamp before the first run |
 | P1 | each pass | a fresh Skill invocation, committed before the next | one commit per pass |
-| P2 | each claim | class, rank, kind, grade, inhabitant | all five present |
+| P2 | each claim | §C.4's obligations for its face and shape (O-0 for every claim) | every non-optional obligation met, or the face reported "not landed" |
 | P2 | each theorem | its key step read by the advisor | the advisor's note in its record |
 | P2 | retractions | counted in each working file and by the advisor | a tally in both |
 | P3 | each theorem | re-derived by the other side or the advisor, and one step by the owner | two independent readings |
@@ -789,6 +789,10 @@ The uninformative outcome is P-C; the most informative for the target are P-A an
 - **Record.** The owner's review was resolved first (§R-review), then the **domain pass** (§D) ran. It settled the canonical form and
   the two rank parameters, the definition of a kind, and the size test. It found the false rank-2 sentence, and it kept §K. No Lean was
   written, so the experience pass is not triggered by Lean.
+  Then the **obligation pass** ran on the acceptance criteria, not on proofs. It wrote §C.4: the obligations common to every claim
+  (O-0), and for each face and shape (a yes, a no, a no-go of a named kind) the obligations a claim must discharge, each typed prove,
+  test or state. It closes with eleven adversarial claims and the obligation that rejects each. §C.2's reporting rule, §S.2's P2
+  acceptance and §S.3's P2 row now point to §C.4. **The experience pass** is judged in §M's closing line.
 
 ## §C. The competition's brief: the slots of `plans/PROTOCOL-competitor-and-advisor.md` §4 and §5, filled
 
@@ -947,7 +951,9 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
    window-state graph. One exists iff that graph has a cycle, iff the colouring space is nonempty. So the linear programme over window
    frequencies decides rank 1 exactly, including `G(ℤ,{1,3,7,12,17,22})` with `χ_f ≤ 29/8`. In rank ≥ 2 each fixed window is a
    relaxation, and a window big enough to contain a refuting subgraph is that refutation in disguise. That is why success is scored by
-   size. How FS-73's `Θ₃` relates to window frequencies is a question worth asking. The counting compulsion (G53) is one-sided and
+   size. **The plan-phase advisor's reading** [reading, not checked by the plan]: FS-73's slope is the invariant mean of a pair-cylinder
+   function (the ±1 height step is fixed by `(c(x), c(x+s))`). So `Θ₃ = ∅` is a two-point-density certificate plus the integrality of
+   the winding. Whether the discrete part is ever essential at comparable size is open (§IQ item 3). The counting compulsion (G53) is one-sided and
    integral, computed on a base pattern alone, and `L21cc6506` is a multilayer of the rational pattern.
 7. **Local transfers fail** (`plans/FS66-tower-conjecture.md` Lemmas W and T): a pointwise transfer invariant can leave the relevant
    polytope; keep invariants global.
@@ -960,7 +966,7 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
     lattice over ℚ(√3,√5); the rich 2-unit lattices (T10); the rank-1 walls (T30). Controls: de Grey's lattice, the triangular lattice, the
     grid.
 
-**Reporting.** The target is an answer to one face, in a named class and rank, with its kind of invariant named (`plans/FS79-invariant-
+**Reporting.** Your claim is scored against the obligations of §C.4 below for its face and shape, stated before you were briefed. The target is an answer to one face, in a named class and rank, with its kind of invariant named (`plans/FS79-invariant-
 question.md` §IQ item 3: colour-class densities, window frequencies, heights, Kempe-class invariants, counting compulsions, the domain's
 topology, algebraic certificates, or another kind you name). If none lands, report
 "not landed" and list under it, each as exactly what it is: (a) a sharpened reduction; (b) a subclass where an invariant exists, with the
@@ -997,6 +1003,106 @@ reporting rule.
   each has written its own first route (FS-73's ruling R1). A card that answers one side's own route may go to that side alone, and is
   logged where the other reads it at hand-back (protocol §3)."*
 - A fresh advisor writes its own expectation before its first message.
+
+### §C.4 Acceptance criteria per face (the obligation pass; stated before any competitor is briefed)
+
+*The competitors and the advisor both receive this section verbatim. The advisor scores each claim against the obligations of its
+face and shape: **met**, **partial** (with what is missing) or **not met**. A face counts as landed only when every non-optional
+obligation of the claimed shape is met. Each obligation is also typed:*
+- ***prove***: *a derivation, read by the advisor and re-derived at P3;*
+- ***test***: *an exact check that someone other than its author re-runs, with a planted fault;*
+- ***state***: *a sentence the claim must contain.*
+
+*Definitions (class, `r`, `ρ₄`, kind, size, plain refutation) are those of §C.2 and §D.*
+
+**O-0. Every claim, whatever its face**
+
+| id | obligation | type |
+|---|---|---|
+| O-0.1 | The class: 𝒞, K₄-free, triangle-free, or lattices over a named field. The claim is posed in canonical form `Λ = ⟨S⟩`, with `r = rank ⟨S⟩` stated, and `ρ₄` stated for any non-colourable graph | state |
+| O-0.2 | A named inhabitant of every hypothesis (G30.5): one explicit graph that satisfies them all, with its membership checked | test |
+| O-0.3 | The grade of each step: hand, tools, or certificate | state |
+| O-0.4 | Reach: whether the class contains triangle-free graphs with `r = 4`, and so whether the claim says anything at ℚ(√167) | state |
+| O-0.5 | The key step read by the advisor before the claim is believed. The advisor also asks the second question, whose shape the first could not answer | prove |
+| O-0.6 | Every retraction on the way is kept in the working file and marked | state |
+
+**(Q-obs), a yes: a certificate scheme that refutes four colours**
+
+| id | obligation | type |
+|---|---|---|
+| OBS-Y1 | The kind as a format: what a certificate `C` contains, and what the checker does with it | state |
+| OBS-Y2 | Soundness for **every** four-colouring of every graph in the class: acceptance implies no four-colouring. For an invariant-derived kind: the datum `(d, m)`, the admissible set `A(pres)`, and a proof that every ergodic invariant measure's data lies in `A`. **An argument that sees only periodic colourings does not discharge this**, unless C3-aper is proved for the class | prove |
+| OBS-Y3 | Checkability: the acceptance condition is computed from the presentation alone. A checker (written, or specified exactly enough for P3 to write) reads only the presentation and `C`, re-derives `S`, and runs in polynomial time | test (P3) |
+| OBS-Y4 | A benchmark instance `G*`, all of it checked: K₄-free; `ρ₄ ≥ 2`, by the rank-1 decider on every primitive direction; `χ_f ≤ 4`, by an exhibited periodic independent set of density ≥ 1/4; and `C` accepted on `G*`. If no such `G*` can be named, the substitute used ("refuted by no colour-class density bound") is stated and the grade drops accordingly | test |
+| OBS-Y5 | Size, per §D.4: (a) a closed-form bound `B(r, n, M)`; (b) `|C|` against the best plain refutation of `G*` known (vertices, bits, source), or "none known" with a price ≥ 10⁶ points; (c) optionally, a family with a proved lower bound | state (a, b); prove (c) |
+| OBS-Y6 | Controls: the checker **rejects** every `C` on a four-colourable graph (de Grey's lattice, the triangular lattice), and at least one planted fault in `C` is refused by name | test |
+| OBS-Y7 | Aimed the day it lands: run on `L21cc6506` and [P0-SURVIVORS], with the outcome reported either way; or the reason it cannot run there (for example, the class excludes triangle-free `r = 4`) | test / state |
+
+**(Q-obs), a no-go of a named kind**
+
+| id | obligation | type |
+|---|---|---|
+| OBS-N1 | The kind is fixed as a format (checker and soundness theorem) **before** the no-go is stated. A no-go against "every invariant of roughly this sort" is not one | state |
+| OBS-N2 | One of the three shapes, fully discharged. **Blind:** a named non-four-colourable graph (non-colourability proved independently) and a point of its admissible set, for example a consistent frequency vector, so that the format accepts nothing. **Too large:** a named family, a proved lower bound on accepted certificates, and a plain refutation proved smaller. **Trivial:** the invariant type (e.g. continuous `ℤ^m`-cocycles) and a proof that every one on the class is a coboundary plus a homomorphism | prove |
+| OBS-N3 | Controls: a triviality no-go reproduces the grid (`[CGHO2025coh]`) as a special case, and **must not cover** the triangular lattice (Moore–Newman's height) unless its class excludes triangles | test |
+| OBS-N4 | Scope: which kinds and which mixtures the no-go leaves open | state |
+
+**(Q-rig), a yes: a criterion for a finite colouring space**
+
+| id | obligation | type |
+|---|---|---|
+| RIG-Y1 | The statement: for `G` in a class `𝒟` inside the K₄-free graphs, the colouring space is finite (equivalently `F` has finite index, T37) **iff / if** a condition `Φ` holds, with `Φ` computable from the presentation. Which direction is proved is stated | prove |
+| RIG-Y2 | The known positive **explained**: de Grey's lattice satisfies `Φ`, and the theorem predicts `F = 8Λ`, or the 9,120 colourings, or says which part it does not predict | prove / test |
+| RIG-Y3 | A negative control: a K₄-free graph where `Φ` fails and `F` has infinite index (L3, `F = 0`; or a rank-1 wall graph, `P = F = 0`), so that `Φ` is not vacuously true | test |
+| RIG-Y4 | Cliques: where the argument uses K₄-freeness, stated; `Cay(ℤ, {1,2,3})` must not be what the theorem is really about | state |
+| RIG-Y5 | The target grade: on lattices over a field, whether `Φ` yields a forced `δ` that is a unit at every conjugation-stable prime (so G55's chain closes). A residue-rigid `F = 𝔭Λ` at a usable 𝔭 gives nothing (Poros's card B) | prove / state |
+| RIG-Y6 | Whether `Φ` uses the lattice's arithmetic (P-G71 is scored on this) | state |
+
+**(Q-rig), a no: rigidity undecidable, or not captured by a named kind**
+
+| id | obligation | type |
+|---|---|---|
+| RIG-N1 | For undecidability: a computable reduction with correctness in both directions, and the rank and clique content of its image | prove |
+| RIG-N2 | For "no criterion of kind `𝒦`": two graphs with equal `𝒦`-data, one with finite colouring space and one without | prove / test |
+
+**(Q), a yes on a class `𝒟`: existence and inheritance**
+
+| id | obligation | type |
+|---|---|---|
+| Q-Y1 | Existence: every `G ∈ 𝒟` with a four-colouring has a periodic one. The construction is given and its period group shown to have finite index | prove |
+| Q-Y2 | Inheritance, `P = F` on `𝒟`: for every `δ ∉ F`, a periodic colouring separates `0` and `δ` | prove |
+| Q-Y3 | Consistency with rank 1: if `𝒟` contains FS73-T30's walls, the claim asserts existence and `P = F` there, **and does not assert plain density**, which the walls refute. `G(ℤ, {1,3,4,5})`, four-colourable with no linear colouring but with periodic ones, is reproduced | test |
+| Q-Y4 | The consequence named: decidability and two-sided certificates on `𝒟`, with both semi-decision procedures stated | state |
+| Q-Y5 | Optional, the sharper form `F_μ = P`: periodic-orbit measures dense among invariant measures | prove |
+
+**(Q), a no**
+
+| id | obligation | type |
+|---|---|---|
+| Q-N1 | **C3-aper fails.** An explicit graph (`r`, `S`, K₄- and triangle-content), with two things proved. **Four-colourability**: by a rule, or by compactness from explicit colourings of arbitrarily large patches; "no refutation was found" does not count. **No periodic four-colouring, for every finite-index `W`**: periods searched up to a cap do not count (G21) | prove |
+| Q-N2 | **C3-inherit fails.** A graph and a `δ` such that every periodic colouring identifies `0` and `δ` (proved over all of them), and some colouring separates them (exhibited, or proved to exist) | prove |
+| Q-N3 | **Undecidability.** A computable reduction from a named undecidable tiling problem to four-colourability on the class: tileable iff four-colourable, both directions proved, with the rank of the image graphs and their clique content | prove |
+| Q-N4 | Reach, stated: whether the construction needs `r ≥ 5` or cliques (P-rank and P-MO are scored on this) | state |
+
+**Not landed.** Report "not landed", then type each item as (a) a sharpened reduction, (b) a subclass with an invariant, or (c) a
+candidate family together with what deciding it would take. Each item carries O-0.1–O-0.3.
+
+**The adversarial members these criteria must reject** (the pass's mutation audit: each is a claim that meets the letter of a looser
+criterion and misses its intent):
+
+| adversarial claim | rejected by |
+|---|---|
+| a (Q-obs) yes on `G(ℤ,{1,3,7,12,17,22}) □ ℤ` | OBS-Y4 (`ρ₄ = 1`) |
+| a window programme whose window contains a refuting patch | OBS-Y5(b) (it carries the patch's refutation, so it is no smaller) |
+| a one-point density refutation on a graph with `χ_f > 4` | OBS-Y4 (`χ_f ≤ 4`) |
+| an invariant computed only on periodic colourings, offered as an obstruction | OBS-Y2 (it proves nothing unless C3-aper holds) |
+| a (Q-rig) yes whose engine is a clique, `S ⊇ {s, 2s, 3s}` | the class (K₄-free), RIG-Y4 |
+| a residue-rigid lattice (`F = 23Λ`) offered as a route to five | RIG-Y5 |
+| "no periodic colouring up to period `N`" offered as C3-aper's failure | Q-N1 (every finite-index `W`) |
+| "no refutation found" offered as colourability | Q-N1 |
+| a yes that asserts plain density on a class containing rank 1 | Q-Y3 (T30's one-way walls) |
+| a no at `r ≥ 5` with cliques, read as reaching ℚ(√167) | O-0.4, Q-N4 |
+| "every invariant of kind 0 is controlled by `χ_f`" offered as a no-go | OBS-N1 (not a fixed format), OBS-N2 (false for window frequencies) |
 
 ## §X. The exchange with Poros (this stage), and its retractions
 
@@ -1041,8 +1147,11 @@ as the owner asked.*
   independent; four colours are refused on 33 consecutive points and possible on 32; the window-state graph has 3,555 states modulo
   colour permutation and none essential. The plan-phase advisor checked the finding independently the same day, agreed, and corrected
   its own benchmark figure (176 → 33, by two further solvers). The advisor also gave a further argument for dropping the "not a density
-  certificate" clause. It is **not reproduced here**, because it answers a question §IQ item 3 now poses, and answering is the
-  competitors' job; it stays with the advisor's record (inventory item 12). **Resolution:**
+  certificate" clause. The modeling agent first held it out of the plan, reading the owner's "pose, don't answer" as covering it. **The
+  owner reversed that** (medium-high confidence). The reading is a fact about FS-73's own certificate, which both competitors will read
+  in `plans/FS73-derivation.md` anyway. FS-73's close recorded the opposite failure: §PA knowledge not carried into §C was re-derived
+  at cost. So the reading is stated in §C.2 item 6, graded [reading] and attributed. What stays posed is only whether the discrete part
+  is ever essential (§IQ item 3). **Resolution:**
   - §IQ item 3 splits the kind into **0₁, one-point densities** (controlled by `χ_f`, true as the plan had it) and **0_W,
     window-pattern frequencies** (exact in rank 1, a relaxation at each fixed window in rank ≥ 2). It poses, and does not answer, how
     `Θ₃` relates to 0_W.
