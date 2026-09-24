@@ -49,13 +49,44 @@ def obj(r):
     if name.startswith("conj|"):
         conf = "complex conjugate of " + conf
     if r.get("saturated"):
-        return f"saturation of configuration {tag} ({r['N']} pairs, D = {r.get('D')})"
+        return f"saturation of configuration {name} ({r['N']} pairs, D = {r.get('D')})"
     return f"listed configuration {tag} = {conf} ({r['N']} pairs, D = {r.get('D')})"
 
 
+def summary(recs, struct):
+    """The phase's per-field table: the P0.3 structural certificate (listed B at K_B) and the P0.2 tree-route EMPTY objects."""
+    st = {}
+    for r in struct:
+        if r["K"] == r["K_B"]:
+            st[r["d"]] = r
+    by = defaultdict(list)
+    for r in recs:
+        by[r["d"]].append(r)
+    print("| d | mod 8 | mod 24 | census | χ ≥ 4 certified by: P0.3 structural (object; certificate; checker) | "
+          "also certified by the relation tree (P0.2 objects; frozen checker) | P0.2 nulls (typed) |")
+    print("|---|---|---|---|---|---|---|")
+    for d in sorted(set(st) | set(by), key=lambda d: (d not in OPEN, d)):
+        s3 = st.get(d)
+        c3 = (f"listed B = {{vᵏ : \\|k\\| ≤ 2}}·U^(5^{s3['K']}) ({10 * (2 * s3['K'] + 1)} pairs); `{s3['cert']}`; "
+              f"fs81_struct_check.py {s3.get('check')}") if s3 else "—"
+        emp = [obj(r) for r in by[d] if r["verdict"] == "EMPTY" and r.get("check") == "PASS"]
+        nn = sum(1 for r in by[d] if r["verdict"] == "NONEMPTY")
+        un = sum(1 for r in by[d] if r["verdict"] == "UNDECIDED")
+        nulls = f"{nn} NONEMPTY" + (f", {un} UNDECIDED at the cap (weak finder of isolated points)" if un else "")
+        print(f"| {d} | {d % 8} | {d % 24} | {'open' if d in OPEN else 'certified'} | {c3} | {'; '.join(emp) or '—'} | {nulls} |")
+
+
 def main():
+    args = sys.argv[1:]
+    if args and args[0] == "--summary":
+        struct = [json.loads(l) for l in open(args[1]) if l.strip()]
+        recs = []
+        for p in args[2:]:
+            recs += [json.loads(l) for l in open(p) if l.strip()]
+        summary(recs, struct)
+        return
     recs = []
-    for p in sys.argv[1:]:
+    for p in args:
         recs += [json.loads(l) for l in open(p) if l.strip()]
     by = defaultdict(list)
     for r in recs:

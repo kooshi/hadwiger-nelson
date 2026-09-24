@@ -20,17 +20,17 @@ Registered 2026-09-24T13:12+00:00, before any tree was run on any lattice in thi
 
 | id | prediction | probability | outcome |
 |---|---|---|---|
-| PL-1 (planner) | the K = 1 configurations are EMPTY for the small-n fields (d ≤ 47) but NONEMPTY for most d ≥ 200 | 0.60 | |
-| PL-2 (planner) | `V(d, K)` is EMPTY at the K where 5^K > 2.1n | 0.70 | |
-| PL-3 (planner) | the T41 shape `{1, v, z}·U^(5)` at ℚ(√47) is EMPTY | 0.55 | |
-| DB-1 | `{1, v, v̄}·U^(5)` is NONEMPTY at every census d ≥ 100 | 0.75 | |
-| DB-2 | `{1, v, v̄}·U^(5)` is EMPTY at d = 11 | 0.50 | |
-| DB-3 | `{vᵏ : \|k\| ≤ 2}·U^(5)` is EMPTY at some census d ≥ 100 | 0.35 | |
-| DB-4 | at ℚ(√47), at least one of the two T41 variants (`z` and `z̄`) is EMPTY | 0.65 | |
-| DB-5 | at least one of the 25 open fields is landed by a K = 1 configuration (P0.2) | 0.45 | |
-| DB-6 | at the phase's end at least 5 of the 25 open fields have a certified EMPTY | 0.50 | |
-| DB-7 | where `V(d, K)` is run, it is EMPTY at the first K with 5^K > 2.1n for a majority of those fields | 0.45 | |
-| DB-8 | every control returns its known outcome (positives EMPTY, negatives NONEMPTY) on the first pipeline that runs them | 0.90 | |
+| PL-1 (planner) | the K = 1 configurations are EMPTY for the small-n fields (d ≤ 47) but NONEMPTY for most d ≥ 200 | 0.60 | **lost** on its first clause: at K = 1 no listed configuration is EMPTY at 35 or 47 (A, B NONEMPTY; C at 47 NONEMPTY); 11 (B) and 23 (C) are. The second clause holds (no listed configuration EMPTY at any d ≥ 200); the verifier decided it by theorem too (inventory item 65) |
+| PL-2 (planner) | `V(d, K)` is EMPTY at the K where 5^K > 2.1n | 0.70 | **won** at every d (T8: the true threshold is d < 21·5^(K−1), about 5^K > 0.95n, so 2.1n is past it); P0.3 certified B at K_B at all 40 fields |
+| PL-3 (planner) | the T41 shape `{1, v, z}·U^(5)` at ℚ(√47) is EMPTY | 0.55 | **lost**: NONEMPTY at both (a, c) = (5, 6), (9, 8), both signs, each certified (orbit control included) |
+| DB-1 | `{1, v, v̄}·U^(5)` is NONEMPTY at every census d ≥ 100 | 0.75 | **won** (NONEMPTY at all 40 census d) |
+| DB-2 | `{1, v, v̄}·U^(5)` is EMPTY at d = 11 | 0.50 | **lost** (NONEMPTY; the verifier's §4.0 at d ≡ 11 mod 24) |
+| DB-3 | `{vᵏ : \|k\| ≤ 2}·U^(5)` is EMPTY at some census d ≥ 100 | 0.35 | **lost** (at K = 1 B is EMPTY only at d = 11: T8's d < 21) |
+| DB-4 | at ℚ(√47), at least one of the two T41 variants (`z` and `z̄`) is EMPTY | 0.65 | **lost** (all four NONEMPTY) |
+| DB-5 | at least one of the 25 open fields is landed by a K = 1 configuration (P0.2) | 0.45 | **lost** as registered (no listed K = 1 configuration is EMPTY at an open field); P0.2 landed 11 open fields only through **saturations** of K = 1 configurations, an object added after registration — reported, not counted as a win |
+| DB-6 | at the phase's end at least 5 of the 25 open fields have a certified EMPTY | 0.50 | **won**: 25 of 25 (P0.3), 11 of them twice |
+| DB-7 | where `V(d, K)` is run, it is EMPTY at the first K with 5^K > 2.1n for a majority of those fields | 0.45 | **won** (at every field; T8) |
+| DB-8 | every control returns its known outcome (positives EMPTY, negatives NONEMPTY) on the first pipeline that runs them | 0.90 | **lost**: the tree alone left Λ₂₆ over ℚ(√3) UNDECIDED at 312 s; the screen-then-tree pipeline returned every known outcome |
 
 Known before any run, from FS-73's record (not predictions): at d = 167 `{1, v, z}·U^(5)` is EMPTY and `{1, v, v̄}·U^(5)` is
 NONEMPTY (T41: of the ten 3-subsets of `{1, v, v̄, z, z̄}` only `{1, v, z}` and `{1, v̄, z̄}` are empty).
@@ -244,3 +244,123 @@ the hand part being R2 (the ℚ-linear extension and the recurrence), R4 (the co
 (re-proved by the checker at the given K), not F-T4's lemmas L1 or L4 — the two routes are separate evidence. **The structural form
 is the instrument, not a convenience:** the relation tree was priced out on B (UNDECIDED at 835,827 nodes in 30 minutes over ℚ(√35),
 50 pairs), while the structural certificate decides each field in about a second.
+
+## 7. P0.2 — results (complete, 2026-09-24)
+
+331 objects over the 40 census fields (records `data/fs81/phase0/configs*.jsonl`, six groups; every object in
+`data/fs81/records/phase-P0-objects.md`, derived by `tools/fs81_table.py`). Every EMPTY and every NONEMPTY verdict passed its checker:
+222 through the frozen `fs73v2_check.py`, 72 through `fs81_theta_check.py --no-enumerate` (after the owner's plant); no ERROR row.
+
+| object | EMPTY | NONEMPTY | UNDECIDED at the cap |
+|---|---|---|---|
+| listed configurations (A, B, C, D at K = 1) | 6 — all at certified fields | 198 | 0 |
+| saturations (every unit vector of a NONEMPTY configuration's span, D ≤ 5,000) | 83, at 22 fields (11 of them open) | 27 | 17 (600 s cap; 1,800 s for the first) |
+
+- **Listed configurations at K = 1.** EMPTY exactly at: B over ℚ(√11); the T41 shape C over ℚ(√23) at (a, c, s) = (3, 4, +), ℚ(√71) at
+  (1, 6, +), ℚ(√119) at (9, 10, −), ℚ(√167) at (11, 12, −) and (15, 14, +). **A is NONEMPTY at all 40 fields** (the verifier's §4.0 at
+  d ≡ 11 mod 24; at d ≡ 23 mod 24 T8's threshold is d < 21 at K = 1); **B at every d ≥ 23**; **D (the N = 5 layer) at every field where
+  it exists**; **C is NONEMPTY at 47 (both (a, c), both signs)** and at every d ≡ 7 (mod 8) from 191 up, open or certified. The T41
+  shape empties at K = 1 only at d ∈ {23, 71, 119, 167}, all ≡ 23 (mod 48), and not at the next members of that class with a C layer
+  (263, 311, 359) — a threshold in n, as for B [measured; a lead for the family derivation, not a claim].
+- **The stop guard never fired:** no EMPTY on A's listed configuration at d ≡ 11 (mod 24).
+- **Saturations landed 11 open fields by the relation tree and the frozen checker**, independently of P0.3's structural route:
+  35, 131, 155, 179, 251, 287, 395, 407, 467, 479, 491. The other 14 open fields (83, 107, 203, 215, 227, 263, 299, 323, 347, 371, 383,
+  419, 443, 455) have no tree-route certificate at this depth: their saturations were NONEMPTY, UNDECIDED at the cap, or above D = 5,000.
+- **Failures on the way, each explained, none a process crash:** an int64 overflow in the screen (`a7fa50e5`); PARI's 8 MB stack
+  overflowing on a 162-pair relation basis (`f9969a6c`, gp now at 2 GB); group 6's first run OOM-killed inside its own 3 GiB slot
+  at the saturation of A over ℚ(√311), by the uncapped short-relation pool (fixed in `f9969a6c`; relaunched at 4 GiB, completed).
+  Each relaunch resumed past the recorded items.
+
+## 8. The per-field table (the phase's result)
+
+**Only an EMPTY certificate speaks about the field**: it proves χ(ℚ(√d)²) ≥ 4 at [cert + hand]. Every other count is a typed null for
+the object named. The P0.3 column's hand part is R2, R4 (re-derived by the owner) and FS73-T22's ⟹; the tree column's is T22's ⟹ alone.
+
+| d | mod 8 | mod 24 | census | χ ≥ 4 certified by: P0.3 structural (object; certificate; checker) | also certified by the relation tree (P0.2 objects; frozen checker) | P0.2 nulls (typed) |
+|---|---|---|---|---|---|---|
+| 35 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d35-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (30 pairs, D = 90); saturation of configuration B (54 pairs, D = 810) | 2 NONEMPTY |
+| 83 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d83-B-K2.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 107 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d107-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 131 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d131-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration D:7:6:- (32 pairs, D = 1650) | 7 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 155 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d155-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (74 pairs, D = 390); saturation of configuration D:5:6:+ (36 pairs, D = 1950) | 7 NONEMPTY |
+| 179 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d179-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration D:1:6:- (32 pairs, D = 450) | 7 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 203 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d203-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 215 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d215-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 227 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d227-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 251 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d251-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (42 pairs, D = 630); saturation of configuration D:27:14:+ (36 pairs, D = 3150); saturation of configuration D:27:14:- (24 pairs, D = 3150); saturation of configuration D:37:18:+ (24 pairs, D = 3150); saturation of configuration D:37:18:- (36 pairs, D = 3150) | 6 NONEMPTY |
+| 263 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d263-B-K3.json`; fs81_struct_check.py PASS | — | 9 NONEMPTY |
+| 287 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d287-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:1:12:- (36 pairs, D = 720); saturation of configuration C:15:16:+ (36 pairs, D = 1440); saturation of configuration C:15:16:- (24 pairs, D = 1440) | 7 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 299 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d299-B-K3.json`; fs81_struct_check.py PASS | — | 2 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 323 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d323-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 347 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d347-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 371 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d371-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 383 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d383-B-K3.json`; fs81_struct_check.py PASS | — | 9 NONEMPTY |
+| 395 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d395-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration D:35:18:+ (36 pairs, D = 4950); saturation of configuration D:35:18:- (24 pairs, D = 4950); saturation of configuration D:45:22:+ (24 pairs, D = 4950); saturation of configuration D:45:22:- (36 pairs, D = 4950) | 6 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 407 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d407-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (42 pairs, D = 1020) | 2 NONEMPTY |
+| 419 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d419-B-K3.json`; fs81_struct_check.py PASS | — | 6 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 443 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d443-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 455 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d455-B-K3.json`; fs81_struct_check.py PASS | — | 3 NONEMPTY |
+| 467 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d467-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (54 pairs, D = 1170) | 2 NONEMPTY |
+| 479 | 7 | 23 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d479-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:13:18:+ (30 pairs, D = 3600); saturation of configuration C:13:18:- (44 pairs, D = 3600); saturation of configuration D:49:24:+ (24 pairs, D = 1200); saturation of configuration D:49:24:- (50 pairs, D = 1200) | 10 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 491 | 3 | 11 | open | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d491-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (54 pairs, D = 1230) | 6 NONEMPTY |
+| 11 | 3 | 11 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^1) (30 pairs); `data/fs81/phase0/struct/d11-B-K1.json`; fs81_struct_check.py PASS | saturation of configuration A (54 pairs, D = 30); listed configuration B = {vᵏ : \|k\| ≤ 2}·U^(5) (30 pairs, D = 90); saturation of configuration D:3:2:+ (48 pairs, D = 150); saturation of configuration D:3:2:- (48 pairs, D = 150); saturation of configuration D:13:6:+ (48 pairs, D = 150); saturation of configuration D:13:6:- (72 pairs, D = 150) | 5 NONEMPTY |
+| 23 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d23-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (30 pairs, D = 60); saturation of configuration B (90 pairs, D = 360); listed configuration C = {1, v, z}, (a, c) = (3, 4), sign +·U^(5) (18 pairs, D = 120) | 8 NONEMPTY |
+| 47 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d47-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (30 pairs, D = 120); saturation of configuration C:9:8:- (24 pairs, D = 240) | 9 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 59 | 3 | 11 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d59-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (50 pairs, D = 150); saturation of configuration D:11:6:+ (32 pairs, D = 150); saturation of configuration D:11:6:- (26 pairs, D = 150); saturation of configuration D:21:10:+ (26 pairs, D = 750); saturation of configuration D:21:10:- (40 pairs, D = 750) | 6 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 71 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d71-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (66 pairs, D = 180); saturation of configuration B (210 pairs, D = 3240); listed configuration C = {1, v, z}, (a, c) = (1, 6), sign +·U^(5) (18 pairs, D = 180); saturation of configuration C:1:6:- (44 pairs, D = 180); saturation of configuration C:21:16:+ (64 pairs, D = 1440); saturation of configuration C:21:16:- (80 pairs, D = 1440); saturation of configuration D:3:4:+ (52 pairs, D = 900); saturation of configuration D:3:4:- (32 pairs, D = 900); saturation of configuration D:53:24:+ (70 pairs, D = 1800); saturation of configuration D:53:24:- (72 pairs, D = 1800) | 9 NONEMPTY |
+| 95 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^2) (50 pairs); `data/fs81/phase0/struct/d95-B-K2.json`; fs81_struct_check.py PASS | saturation of configuration A (54 pairs, D = 240); saturation of configuration D:15:8:+ (36 pairs, D = 1200); saturation of configuration D:15:8:- (24 pairs, D = 1200); saturation of configuration D:25:12:+ (24 pairs, D = 1200); saturation of configuration D:25:12:- (48 pairs, D = 1200) | 6 NONEMPTY |
+| 119 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d119-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:3:8:+ (48 pairs, D = 1200); saturation of configuration C:3:8:- (38 pairs, D = 1200); saturation of configuration C:9:10:+ (28 pairs, D = 300); listed configuration C = {1, v, z}, (a, c) = (9, 10), sign -·U^(5) (18 pairs, D = 300) | 5 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 143 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d143-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (30 pairs, D = 360) | 2 NONEMPTY |
+| 167 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d167-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (30 pairs, D = 420); saturation of configuration C:11:12:+ (24 pairs, D = 840); listed configuration C = {1, v, z}, (a, c) = (11, 12), sign -·U^(5) (18 pairs, D = 840); listed configuration C = {1, v, z}, (a, c) = (15, 14), sign +·U^(5) (18 pairs, D = 420) | 5 NONEMPTY |
+| 191 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d191-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:3:10:+ (60 pairs, D = 2400); saturation of configuration C:3:10:- (54 pairs, D = 2400); saturation of configuration C:31:24:+ (42 pairs, D = 480); saturation of configuration C:31:24:- (42 pairs, D = 480); saturation of configuration D:23:12:- (42 pairs, D = 2400); saturation of configuration D:33:16:+ (42 pairs, D = 2400) | 10 NONEMPTY, 3 UNDECIDED at the cap (weak finder of isolated points) |
+| 239 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d239-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (102 pairs, D = 600); saturation of configuration C:7:12:+ (36 pairs, D = 600); saturation of configuration C:7:12:- (36 pairs, D = 600); saturation of configuration D:9:8:+ (34 pairs, D = 600); saturation of configuration D:9:8:- (46 pairs, D = 600); saturation of configuration D:79:36:+ (52 pairs, D = 1800); saturation of configuration D:79:36:- (44 pairs, D = 1800) | 10 NONEMPTY |
+| 311 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d311-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:29:24:+ (64 pairs, D = 3120); saturation of configuration C:29:24:- (54 pairs, D = 3120) | 10 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 335 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d335-B-K3.json`; fs81_struct_check.py PASS | — | 2 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+| 359 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d359-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration A (74 pairs, D = 900); saturation of configuration C:17:18:+ (34 pairs, D = 900); saturation of configuration C:17:18:- (26 pairs, D = 900); saturation of configuration C:21:20:+ (26 pairs, D = 1800); saturation of configuration C:21:20:- (48 pairs, D = 1800); saturation of configuration D:19:12:+ (36 pairs, D = 900); saturation of configuration D:19:12:- (28 pairs, D = 900) | 10 NONEMPTY |
+| 431 | 7 | 23 | certified | listed B = {vᵏ : \|k\| ≤ 2}·U^(5^3) (70 pairs); `data/fs81/phase0/struct/d431-B-K3.json`; fs81_struct_check.py PASS | saturation of configuration C:9:16:+ (30 pairs, D = 4320); saturation of configuration C:9:16:- (40 pairs, D = 4320) | 10 NONEMPTY, 1 UNDECIDED at the cap (weak finder of isolated points) |
+
+**All 25 open census fields are landed** by P0.3's structural certificates on the listed configuration
+`{vᵏ : |k| ≤ 2}·U^(5^K_B(d))` (K_B = 2 at d = 35, 83; 3 elsewhere), and 11 of them also by the relation tree on a saturated lattice
+through the frozen checker. With FS-61's 14 and FS-73's ℚ(√167), **all 40 squarefree d ≡ 11 (mod 12) below 500 now have a certified
+χ(ℚ(√d)²) ≥ 4.** Not claimed: a three-colouring of any plane; anything about d ≥ 500 (the verifier's F-T4 is the field-level route).
+
+**P0.4 not run, by the stop rule:** every open field had a certified EMPTY after P0.3, so the census lattices and the saturated chain
+were not needed. (P0.2's saturations are the nearest thing: several are the census's own open lattices, e.g. ℚ(√35)'s `Ldb4246f8`.)
+
+## 9. Theorems this phase proved
+
+*(Grades per `CLAUDE.md` § Notation. "Structural checker" = `tools/fs81_struct_check.py`, planted by the owner; "frozen" =
+`tools/fs73v2_check.py`; "new checker" = `tools/fs81_theta_check.py`, planted by the owner.)*
+
+| id | statement | grade | where the proof lives |
+|---|---|---|---|
+| P0-T1 | **χ(ℚ(√d)²) ≥ 4 for each of the 25 open census d** (35, 83, 107, 131, 155, 179, 203, 215, 227, 251, 263, 287, 299, 323, 347, 371, 383, 395, 407, 419, 443, 455, 467, 479, 491): the listed configuration `{vᵏ : \|k\| ≤ 2}·U^(5^K_B(d))` has empty Θ₃ | cert + hand (R2, R4, FS73-T22 ⟹) | `data/fs81/phase0/struct/d<d>-B-K<K>.json`, structural checker PASS; §6 |
+| P0-T2 | the same at the 15 census fields certified earlier (11, 23, 47, 59, 71, 95, 119, 143, 167, 191, 239, 311, 335, 359, 431) — a second, uniform witness for each | cert + hand | as P0-T1 |
+| P0-T3 | χ(ℚ(√d)²) ≥ 4 at 35, 131, 155, 179, 251, 287, 395, 407, 467, 479, 491 **also** by relation-tree certificates on saturated lattices (D ≤ 5,000), independent of the structural route | cert + hand (T22 ⟹) | `data/fs81/phase0/certs/*-sat.json.gz`, frozen PASS; §7 |
+| P0-T4 | the reduction for B: θ ∈ Θ₃ ⟹ δ-system (L_k(δ) = nΔ²δ_k + δ_k ∈ 5^K(ℤ + ½)², δ_k ∈ P ∪ F) is solvable | hand (re-derived by the owner) | `tools/fs81_struct_check.py` docstring R2, R4; §6 |
+| P0-T5 | the rational layer: Θ_K ⊆ c_K + (P_K ∪ F_K) + 5^K ℤ² at K ≤ 3 by the checker's induction; equality with one polygon and four order-3 points per period at K ≤ 6 by exact lifting | tools exact (the verifier proved every K) | `tools/fs81_struct_check.py` R3; `tools/fs81_rational.py`; §3 |
+| P0-T6 | at K_B(d) − 1 the δ-system is solvable at all 40 fields (the generator's side of T8's threshold; a necessary condition only, not a point of Θ₃) | tools exact (float LP proposes feasibility; not certified) | `data/fs81/phase0/p03-struct.jsonl` |
+| P0-T7 | a new EMPTY certificate for ℚ(√59) on the 23 edge-direction pairs of its FS-61 witness | cert + hand | `data/fs81/phase0/certs/ctl-pos-59-witness.json.gz`, frozen PASS |
+| P0-T8 | at K = 1 the listed configurations are EMPTY exactly at: B over ℚ(√11); C over ℚ(√23) (3, 4, +), ℚ(√71) (1, 6, +), ℚ(√119) (9, 10, −), ℚ(√167) (11, 12, −) and (15, 14, +); NONEMPTY with a certified point at the other 198 tested | cert (EMPTY: + hand) | `data/fs81/records/phase-P0-objects.md` |
+| P0-T9 | A = `{1, v, v̄}·U^(5)`'s span over ℚ(√167) is L21cc6506's lattice (its θ fails on z̄ = (225, 15, −225, 15)), so a configuration's span can decide where the configuration does not | cert | `data/fs81/phase0/checker-fixtures/wide-A167-on-L21cc6506.json` |
+| P0-T10 | complex conjugation and √d ↦ −√d send the T41 configuration C(s = +) to the same set, neither C(+) nor C(−): the two signs are the two orbits; conjugate pairs agree at 167 and 47 | tools exact + cert | `data/fs81/phase0/orbits.jsonl` |
+| P0-T11 | the frozen `fs73v2_check.py`'s own `--self-test` passes both coverage mutants (low child r·x ≤ lo − 2; high child r·x ≥ hi + 2); the checker itself is unchanged and sound | tools (mutation test) | §3's note; the mutants in the implementer's scratch |
+
+## 10. What is left, and how to resume
+
+- **Nothing of P0.0–P0.3 is open.** 17 saturations stay UNDECIDED at their caps (listed in `phase-P0-objects.md`); their checkpoints
+  are under `data/fs81/phase0/ckpt/` (449 MB, git-ignored), resumable by re-running their group's command with a larger `--cap-s`.
+- **Leads for the family derivation (not claims):** the T41 shape empties at K = 1 only at d ∈ {23, 71, 119, 167} (≡ 23 mod 48) and
+  not at 263, 311, 359 — a threshold in n like B's; the N = 5 layer never empties at K = 1.
+- **Relation-tree prices on B** (for anyone tempted to use the tree there): K = 2, ℚ(√35): UNDECIDED at 835,827 nodes, 30 min;
+  K = 2, ℚ(√83): UNDECIDED at 541,772 nodes, 30 min (`data/fs81/phase0/p03.jsonl`); K = 2, ℚ(√23) (the one K = 2 case the frozen checker could have read, D = 1,800): UNDECIDED at 458,007 nodes, 30 min; K = 1, ℚ(√11): EMPTY at 9,186 nodes (`data/fs81/phase0/p03-tree-xcheck.jsonl`).
+
+## 11. The acceptance pass: every certificate re-checked
+
+`scripts/slot.py --mem 8 --cpus 12 --name fs81-recheck -- env WORKERS=12 python3 tools/fs81_recheck.py data/fs81/phase0/{controls,orbits,configs,configs-g2,configs-g3,configs-g4,configs-g5,configs-g6,p03-tree-xcheck,p03-struct}.jsonl`
+re-ran, on the files as committed, the checker each record names (frozen `fs73v2_check.py`, `fs81_theta_check.py --no-enumerate`,
+or `fs81_struct_check.py`), and required the verdict the record states: **411 certificates, 0 failed**
+(`data/fs81/records/phase-P0-recheck.out`). **A naming defect it covers:** certificate files are named by object (d, configuration,
+K), so a second stage deciding the same object (the orbit control, the ℚ(√11) cross-check) and P0.2's own run wrote the same file,
+the later overwriting the earlier; the two trees are the same deterministic computation on the same object, and the re-check ran every
+referencing record against the file now on disk.

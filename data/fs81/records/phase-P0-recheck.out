@@ -1,0 +1,414 @@
+slot: admitted fs81-recheck: mem 8 GiB (hard cap), cpus 3,10,11,12,13,14,15,16,17,18,19,20
+OK   controls.jsonl ctl-neg-167-Ld14c588b-scr :: PASS NONEMPTY: theta is a point of Theta for all 44 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-167-Ld14c588b :: PASS NONEMPTY: theta is a point of Theta for all 44 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L10-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L10 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L13-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L13 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L14-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L14 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L19-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L19 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L2-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L2 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L26-scr :: PASS NONEMPTY: theta is a point of Theta for all 108 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L31-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L31 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L34-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L34 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L35-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L35 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L37-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L37 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L38-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L38 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L43-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L43 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L49-scr :: PASS NONEMPTY: theta is a point of Theta for all 20 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L49 :: PASS NONEMPTY: theta is a point of Theta for all 20 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L50-scr :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L50 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L58-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L58 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L7-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-3-L7 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-59-Ld65c8ee8-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-59-Ld65c8ee8 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L11-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L11 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L16-scr :: PASS NONEMPTY: theta is a point of Theta for all 52 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L16 :: PASS NONEMPTY: theta is a point of Theta for all 52 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L20-scr :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L20 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L23-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L23 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L29-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L29 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L32-scr :: PASS NONEMPTY: theta is a point of Theta for all 68 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L32 :: PASS NONEMPTY: theta is a point of Theta for all 68 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L37-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L37 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L4-scr :: PASS NONEMPTY: theta is a point of Theta for all 20 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L4 :: PASS NONEMPTY: theta is a point of Theta for all 20 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L40-scr :: PASS NONEMPTY: theta is a point of Theta for all 108 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L40 :: PASS NONEMPTY: theta is a point of Theta for all 108 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L43-scr :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L43 :: PASS NONEMPTY: theta is a point of Theta for all 12 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L44-scr :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L44 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L52-scr :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L52 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L53-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L53 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L55-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L55 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L8-scr :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-neg-7-L8 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   controls.jsonl ctl-pos-11-Ld65c8ee8-scr :: PASS EMPTY: 9652 leaves refuted; 1345 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   controls.jsonl ctl-pos-11-Ld65c8ee8 :: PASS EMPTY: 9652 leaves refuted; 1345 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   controls.jsonl ctl-pos-167-T41-1vz-scr :: PASS EMPTY: 1058 leaves refuted; 21 relations verified; units 18 pairs, the complete unit set of the key lattice (36 vectors)
+OK   controls.jsonl ctl-pos-167-T41-1vz :: PASS EMPTY: 1058 leaves refuted; 21 relations verified; units 18 pairs, the complete unit set of the key lattice (36 vectors)
+OK   controls.jsonl ctl-pos-47-cert47-scr :: PASS EMPTY: 358 leaves refuted; 14 relations verified; units 14 pairs, the complete unit set of the key lattice (28 vectors)
+OK   controls.jsonl ctl-pos-47-cert47 :: PASS EMPTY: 358 leaves refuted; 14 relations verified; units 14 pairs, the complete unit set of the key lattice (28 vectors)
+OK   controls.jsonl ctl-pos-59-witness-scr :: PASS EMPTY: 5404 leaves refuted; 32 relations verified; units 23 pairs, NOT the complete unit set of the key lattice (48 vectors)
+OK   controls.jsonl ctl-pos-59-witness :: PASS EMPTY: 5404 leaves refuted; 32 relations verified; units 23 pairs, NOT the complete unit set of the key lattice (48 vectors)
+OK   configs.jsonl d107-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs.jsonl d107-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d11-A-K1-sat :: PASS EMPTY: 9652 leaves refuted; 1345 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g5.jsonl d11-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d11-B-K1 :: PASS EMPTY: 6124 leaves refuted; 49 relations verified; units 30 pairs, NOT the complete unit set of the key lattice (180 vectors)
+OK   configs-g5.jsonl d11-D_13_6_m-K1-sat :: PASS EMPTY: 38695 leaves refuted; 2517 relations verified; units 72 pairs, the complete unit set of the key lattice (144 vectors)
+OK   configs-g5.jsonl d11-D_13_6_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d11-D_13_6_p-K1-sat :: PASS EMPTY: 3286 leaves refuted; 1080 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g5.jsonl d11-D_13_6_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d11-D_3_2_m-K1-sat :: PASS EMPTY: 3538 leaves refuted; 1073 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g5.jsonl d11-D_3_2_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d11-D_3_2_p-K1-sat :: PASS EMPTY: 3286 leaves refuted; 1080 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g5.jsonl d11-D_3_2_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d119-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d119-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d119-C_3_8_m-K1-sat :: PASS EMPTY: 4818 leaves refuted; 86 relations verified; units 38 pairs, the complete unit set of the key lattice (76 vectors)
+OK   configs-g6.jsonl d119-C_3_8_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d119-C_3_8_p-K1-sat :: PASS EMPTY: 9332 leaves refuted; 132 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g6.jsonl d119-C_3_8_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d119-C_9_10_m-K1 :: PASS EMPTY: 214 leaves refuted; 18 relations verified; units 18 pairs, NOT the complete unit set of the key lattice (48 vectors)
+OK   configs-g6.jsonl d119-C_9_10_p-K1-sat :: PASS EMPTY: 7722 leaves refuted; 40 relations verified; units 28 pairs, the complete unit set of the key lattice (56 vectors)
+OK   configs-g6.jsonl d119-C_9_10_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d131-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d131-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d131-D_57_26_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d131-D_57_26_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d131-D_7_6_m-K1-sat :: PASS EMPTY: 55176 leaves refuted; 50 relations verified; units 32 pairs, the complete unit set of the key lattice (64 vectors)
+OK   configs.jsonl d131-D_7_6_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d131-D_7_6_p-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 44 unit vectors of the key lattice
+OK   configs.jsonl d131-D_7_6_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d143-A-K1-sat :: PASS EMPTY: 7576 leaves refuted; 42 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g6.jsonl d143-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d143-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d155-A-K1-sat :: PASS EMPTY: 26888 leaves refuted; 252 relations verified; units 74 pairs, the complete unit set of the key lattice (148 vectors)
+OK   configs.jsonl d155-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d155-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d155-D_5_6_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 48 unit vectors of the key lattice
+OK   configs.jsonl d155-D_5_6_p-K1-sat :: PASS EMPTY: 19226 leaves refuted; 62 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs.jsonl d155-D_5_6_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d155-D_75_34_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d155-D_75_34_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d167-A-K1-sat :: PASS EMPTY: 30344 leaves refuted; 39 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g6.jsonl d167-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d167-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d167-C_11_12_m-K1 :: PASS EMPTY: 1064 leaves refuted; 21 relations verified; units 18 pairs, the complete unit set of the key lattice (36 vectors)
+OK   configs-g6.jsonl d167-C_11_12_p-K1-sat :: PASS EMPTY: 5844 leaves refuted; 28 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g6.jsonl d167-C_11_12_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   orbits.jsonl d167-C_15_14_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   orbits.jsonl d167-C_15_14_p-K1 :: PASS EMPTY: 1058 leaves refuted; 21 relations verified; units 18 pairs, the complete unit set of the key lattice (36 vectors)
+OK   orbits.jsonl d167-conj-C_15_14_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   orbits.jsonl d167-conj-C_15_14_p-K1 :: PASS EMPTY: 1056 leaves refuted; 20 relations verified; units 18 pairs, the complete unit set of the key lattice (36 vectors)
+OK   configs.jsonl d179-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d179-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d179-D_111_50_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d179-D_111_50_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d179-D_1_6_m-K1-sat :: PASS EMPTY: 4980 leaves refuted; 48 relations verified; units 32 pairs, the complete unit set of the key lattice (64 vectors)
+OK   configs.jsonl d179-D_1_6_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d179-D_1_6_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 40 unit vectors of the key lattice
+OK   configs-g6.jsonl d191-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d191-C_31_24_m-K1-sat :: PASS EMPTY: 4758 leaves refuted; 150 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g6.jsonl d191-C_31_24_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-C_31_24_p-K1-sat :: PASS EMPTY: 3938 leaves refuted; 121 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g6.jsonl d191-C_31_24_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-C_3_10_m-K1-sat :: PASS EMPTY: 16850 leaves refuted; 233 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g6.jsonl d191-C_3_10_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-C_3_10_p-K1-sat :: PASS EMPTY: 126638 leaves refuted; 298 relations verified; units 60 pairs, the complete unit set of the key lattice (120 vectors)
+OK   configs-g6.jsonl d191-C_3_10_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-D_23_12_m-K1-sat :: PASS EMPTY: 7716 leaves refuted; 142 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g6.jsonl d191-D_23_12_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-D_23_12_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-D_33_16_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d191-D_33_16_p-K1-sat :: PASS EMPTY: 5488 leaves refuted; 143 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g6.jsonl d191-D_33_16_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d203-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 84 unit vectors of the key lattice
+OK   configs.jsonl d203-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d215-A-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 52 unit vectors of the key lattice
+OK   configs.jsonl d215-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d215-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d227-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g2.jsonl d227-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d23-A-K1-sat :: PASS EMPTY: 3394 leaves refuted; 53 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g5.jsonl d23-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d23-B-K1-sat :: PASS EMPTY: 100430 leaves refuted; 416 relations verified; units 90 pairs, the complete unit set of the key lattice (180 vectors)
+OK   configs-g5.jsonl d23-B-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d23-C_3_4_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g5.jsonl d23-C_3_4_p-K1 :: PASS EMPTY: 1138 leaves refuted; 20 relations verified; units 18 pairs, NOT the complete unit set of the key lattice (48 vectors)
+OK   configs-g5.jsonl d23-C_7_6_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g5.jsonl d23-C_7_6_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g6.jsonl d239-A-K1-sat :: PASS EMPTY: 76962 leaves refuted; 465 relations verified; units 102 pairs, the complete unit set of the key lattice (204 vectors)
+OK   configs-g6.jsonl d239-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d239-C_27_22_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d239-C_27_22_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d239-C_7_12_m-K1-sat :: PASS EMPTY: 1722 leaves refuted; 75 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g6.jsonl d239-C_7_12_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-C_7_12_p-K1-sat :: PASS EMPTY: 2062 leaves refuted; 75 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g6.jsonl d239-C_7_12_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-D_79_36_m-K1-sat :: PASS EMPTY: 10124 leaves refuted; 89 relations verified; units 44 pairs, the complete unit set of the key lattice (88 vectors)
+OK   configs-g6.jsonl d239-D_79_36_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-D_79_36_p-K1-sat :: PASS EMPTY: 37406 leaves refuted; 128 relations verified; units 52 pairs, the complete unit set of the key lattice (104 vectors)
+OK   configs-g6.jsonl d239-D_79_36_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-D_9_8_m-K1-sat :: PASS EMPTY: 5618 leaves refuted; 126 relations verified; units 46 pairs, the complete unit set of the key lattice (92 vectors)
+OK   configs-g6.jsonl d239-D_9_8_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d239-D_9_8_p-K1-sat :: PASS EMPTY: 3712 leaves refuted; 73 relations verified; units 34 pairs, the complete unit set of the key lattice (68 vectors)
+OK   configs-g6.jsonl d239-D_9_8_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d251-A-K1-sat :: PASS EMPTY: 52802 leaves refuted; 68 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g2.jsonl d251-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d251-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d251-D_27_14_m-K1-sat :: PASS EMPTY: 1886 leaves refuted; 33 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g2.jsonl d251-D_27_14_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d251-D_27_14_p-K1-sat :: PASS EMPTY: 9310 leaves refuted; 53 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g2.jsonl d251-D_27_14_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d251-D_37_18_m-K1-sat :: PASS EMPTY: 10030 leaves refuted; 53 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g2.jsonl d251-D_37_18_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d251-D_37_18_p-K1-sat :: PASS EMPTY: 1852 leaves refuted; 33 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g2.jsonl d251-D_37_18_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d263-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g2.jsonl d263-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d263-C_33_26_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d263-C_33_26_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d263-C_5_12_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g2.jsonl d263-C_5_12_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g2.jsonl d287-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d287-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g2.jsonl d287-C_15_16_m-K1-sat :: PASS EMPTY: 6190 leaves refuted; 33 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g2.jsonl d287-C_15_16_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d287-C_15_16_p-K1-sat :: PASS EMPTY: 146536 leaves refuted; 54 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g2.jsonl d287-C_15_16_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d287-C_1_12_m-K1-sat :: PASS EMPTY: 25094 leaves refuted; 57 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g2.jsonl d287-C_1_12_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d287-C_1_12_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g2.jsonl d299-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g2.jsonl d299-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d311-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-C_29_24_m-K1-sat :: PASS EMPTY: 14916 leaves refuted; 136 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g6.jsonl d311-C_29_24_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d311-C_29_24_p-K1-sat :: PASS EMPTY: 3466 leaves refuted; 60 relations verified; units 64 pairs, the complete unit set of the key lattice (128 vectors)
+OK   configs-g6.jsonl d311-C_29_24_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d311-C_9_14_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-C_9_14_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-D_133_60_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-D_133_60_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-D_3_8_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d311-D_3_8_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d323-A-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   configs-g3.jsonl d323-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d323-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d335-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d335-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d347-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   configs-g3.jsonl d347-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs.jsonl d35-A-K1-sat :: PASS EMPTY: 1414 leaves refuted; 51 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs.jsonl d35-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d35-B-K1-sat :: PASS EMPTY: 4664 leaves refuted; 105 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs.jsonl d35-B-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-A-K1-sat :: PASS EMPTY: 41020 leaves refuted; 70 relations verified; units 74 pairs, the complete unit set of the key lattice (148 vectors)
+OK   configs-g6.jsonl d359-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d359-C_17_18_m-K1-sat :: PASS EMPTY: 5002 leaves refuted; 40 relations verified; units 26 pairs, the complete unit set of the key lattice (52 vectors)
+OK   configs-g6.jsonl d359-C_17_18_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-C_17_18_p-K1-sat :: PASS EMPTY: 25896 leaves refuted; 54 relations verified; units 34 pairs, the complete unit set of the key lattice (68 vectors)
+OK   configs-g6.jsonl d359-C_17_18_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-C_21_20_m-K1-sat :: PASS EMPTY: 112398 leaves refuted; 98 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g6.jsonl d359-C_21_20_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-C_21_20_p-K1-sat :: PASS EMPTY: 5116 leaves refuted; 40 relations verified; units 26 pairs, the complete unit set of the key lattice (52 vectors)
+OK   configs-g6.jsonl d359-C_21_20_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-D_19_12_m-K1-sat :: PASS EMPTY: 5198 leaves refuted; 44 relations verified; units 28 pairs, the complete unit set of the key lattice (56 vectors)
+OK   configs-g6.jsonl d359-D_19_12_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-D_19_12_p-K1-sat :: PASS EMPTY: 4442 leaves refuted; 63 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g6.jsonl d359-D_19_12_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d359-D_69_32_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d359-D_69_32_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d371-A-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 52 unit vectors of the key lattice
+OK   configs-g3.jsonl d371-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d371-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d383-A-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   configs-g3.jsonl d383-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d383-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d383-C_3_14_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d383-C_3_14_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d383-C_47_36_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g3.jsonl d383-C_47_36_p-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 48 unit vectors of the key lattice
+OK   configs-g3.jsonl d383-C_47_36_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d395-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d395-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g3.jsonl d395-D_35_18_m-K1-sat :: PASS EMPTY: 1942 leaves refuted; 34 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g3.jsonl d395-D_35_18_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d395-D_35_18_p-K1-sat :: PASS EMPTY: 10768 leaves refuted; 58 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g3.jsonl d395-D_35_18_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d395-D_45_22_m-K1-sat :: PASS EMPTY: 12322 leaves refuted; 54 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g3.jsonl d395-D_45_22_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g3.jsonl d395-D_45_22_p-K1-sat :: PASS EMPTY: 1942 leaves refuted; 34 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g3.jsonl d395-D_45_22_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d407-A-K1-sat :: PASS EMPTY: 5612 leaves refuted; 74 relations verified; units 42 pairs, the complete unit set of the key lattice (84 vectors)
+OK   configs-g4.jsonl d407-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d407-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d419-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d419-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d419-D_119_54_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d419-D_119_54_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d419-D_9_10_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d419-D_9_10_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d431-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d431-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-C_37_30_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-C_37_30_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-C_9_16_m-K1-sat :: PASS EMPTY: 60660 leaves refuted; 62 relations verified; units 40 pairs, the complete unit set of the key lattice (80 vectors)
+OK   configs-g6.jsonl d431-C_9_16_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d431-C_9_16_p-K1-sat :: PASS EMPTY: 3704 leaves refuted; 42 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g6.jsonl d431-C_9_16_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d431-D_17_12_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-D_17_12_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-D_87_40_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d431-D_87_40_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d443-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   configs-g4.jsonl d443-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d455-A-K1-sat :: PASS NONEMPTY: theta is a point of Theta for all 60 unit vectors of the key lattice
+OK   configs-g4.jsonl d455-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d455-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g4.jsonl d467-A-K1-sat :: PASS EMPTY: 3364 leaves refuted; 149 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g4.jsonl d467-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g4.jsonl d467-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d47-A-K1-sat :: PASS EMPTY: 20016 leaves refuted; 46 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g5.jsonl d47-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d47-B-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   orbits.jsonl d47-C_5_6_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   orbits.jsonl d47-C_5_6_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g5.jsonl d47-C_9_8_m-K1-sat :: PASS EMPTY: 618 leaves refuted; 32 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g5.jsonl d47-C_9_8_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d47-C_9_8_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   orbits.jsonl d47-conj-C_5_6_m-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   orbits.jsonl d47-conj-C_5_6_p-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs-g5.jsonl d479-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d479-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d479-C_13_18_m-K1-sat :: PASS EMPTY: 26582 leaves refuted; 71 relations verified; units 44 pairs, the complete unit set of the key lattice (88 vectors)
+OK   configs-g5.jsonl d479-C_13_18_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d479-C_13_18_p-K1-sat :: PASS EMPTY: 5534 leaves refuted; 45 relations verified; units 30 pairs, the complete unit set of the key lattice (60 vectors)
+OK   configs-g5.jsonl d479-C_13_18_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d479-C_33_28_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d479-C_33_28_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d479-D_39_20_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d479-D_39_20_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d479-D_49_24_m-K1-sat :: PASS EMPTY: 28052 leaves refuted; 107 relations verified; units 50 pairs, the complete unit set of the key lattice (100 vectors)
+OK   configs-g5.jsonl d479-D_49_24_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d479-D_49_24_p-K1-sat :: PASS EMPTY: 1426 leaves refuted; 36 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g5.jsonl d479-D_49_24_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d491-A-K1-sat :: PASS EMPTY: 37906 leaves refuted; 94 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g5.jsonl d491-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d491-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d491-D_173_78_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d491-D_173_78_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d491-D_3_10_m-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d491-D_3_10_p-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d59-A-K1-sat :: PASS EMPTY: 8724 leaves refuted; 231 relations verified; units 50 pairs, the complete unit set of the key lattice (100 vectors)
+OK   configs-g5.jsonl d59-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d59-B-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d59-D_11_6_m-K1-sat :: PASS EMPTY: 1176 leaves refuted; 61 relations verified; units 26 pairs, the complete unit set of the key lattice (52 vectors)
+OK   configs-g5.jsonl d59-D_11_6_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d59-D_11_6_p-K1-sat :: PASS EMPTY: 1560 leaves refuted; 85 relations verified; units 32 pairs, the complete unit set of the key lattice (64 vectors)
+OK   configs-g5.jsonl d59-D_11_6_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d59-D_21_10_m-K1-sat :: PASS EMPTY: 3158 leaves refuted; 140 relations verified; units 40 pairs, the complete unit set of the key lattice (80 vectors)
+OK   configs-g5.jsonl d59-D_21_10_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d59-D_21_10_p-K1-sat :: PASS EMPTY: 824 leaves refuted; 65 relations verified; units 26 pairs, the complete unit set of the key lattice (52 vectors)
+OK   configs-g5.jsonl d59-D_21_10_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-A-K1-sat :: PASS EMPTY: 5040 leaves refuted; 62 relations verified; units 66 pairs, the complete unit set of the key lattice (132 vectors)
+OK   configs-g5.jsonl d71-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-B-K1-sat :: PASS EMPTY: 2316 leaves refuted; 206 relations verified; units 210 pairs (completeness in the key lattice not checked: --no-enumerate). Completeness i
+OK   configs-g5.jsonl d71-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g5.jsonl d71-C_1_6_m-K1-sat :: PASS EMPTY: 30742 leaves refuted; 113 relations verified; units 44 pairs, the complete unit set of the key lattice (88 vectors)
+OK   configs-g5.jsonl d71-C_1_6_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-C_1_6_p-K1 :: PASS EMPTY: 644 leaves refuted; 22 relations verified; units 18 pairs, NOT the complete unit set of the key lattice (52 vectors)
+OK   configs-g5.jsonl d71-C_21_16_m-K1-sat :: PASS EMPTY: 8138 leaves refuted; 76 relations verified; units 80 pairs, the complete unit set of the key lattice (160 vectors)
+OK   configs-g5.jsonl d71-C_21_16_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-C_21_16_p-K1-sat :: PASS EMPTY: 4436 leaves refuted; 60 relations verified; units 64 pairs, the complete unit set of the key lattice (128 vectors)
+OK   configs-g5.jsonl d71-C_21_16_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-D_3_4_m-K1-sat :: PASS EMPTY: 8738 leaves refuted; 58 relations verified; units 32 pairs, the complete unit set of the key lattice (64 vectors)
+OK   configs-g5.jsonl d71-D_3_4_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-D_3_4_p-K1-sat :: PASS EMPTY: 1534 leaves refuted; 186 relations verified; units 52 pairs, the complete unit set of the key lattice (104 vectors)
+OK   configs-g5.jsonl d71-D_3_4_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-D_53_24_m-K1-sat :: PASS EMPTY: 9020 leaves refuted; 68 relations verified; units 72 pairs, the complete unit set of the key lattice (144 vectors)
+OK   configs-g5.jsonl d71-D_53_24_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g5.jsonl d71-D_53_24_p-K1-sat :: PASS EMPTY: 4546 leaves refuted; 66 relations verified; units 70 pairs, the complete unit set of the key lattice (140 vectors)
+OK   configs-g5.jsonl d71-D_53_24_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs.jsonl d83-A-K1 :: PASS NONEMPTY: theta is a point of Theta for all 36 unit vectors of the key lattice
+OK   configs.jsonl d83-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d95-A-K1-sat :: PASS EMPTY: 10308 leaves refuted; 122 relations verified; units 54 pairs, the complete unit set of the key lattice (108 vectors)
+OK   configs-g6.jsonl d95-A-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d95-B-K1 :: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lat
+OK   configs-g6.jsonl d95-D_15_8_m-K1-sat :: PASS EMPTY: 1948 leaves refuted; 36 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g6.jsonl d95-D_15_8_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d95-D_15_8_p-K1-sat :: PASS EMPTY: 3756 leaves refuted; 64 relations verified; units 36 pairs, the complete unit set of the key lattice (72 vectors)
+OK   configs-g6.jsonl d95-D_15_8_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d95-D_25_12_m-K1-sat :: PASS EMPTY: 7048 leaves refuted; 94 relations verified; units 48 pairs, the complete unit set of the key lattice (96 vectors)
+OK   configs-g6.jsonl d95-D_25_12_m-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   configs-g6.jsonl d95-D_25_12_p-K1-sat :: PASS EMPTY: 1948 leaves refuted; 36 relations verified; units 24 pairs, the complete unit set of the key lattice (48 vectors)
+OK   configs-g6.jsonl d95-D_25_12_p-K1 :: listed-units: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourabl
+OK   p03-struct.jsonl 107 :: PASS EMPTY (structural): d = 107, K = 3, n = 27; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 11 :: PASS EMPTY (structural): d = 11, K = 1, n = 3; B = {v^k : |k| <= 2}.U^(5^1), 60 unit vectors (30 pairs); rational layer proved at every level <= 1 (5 
+OK   p03-struct.jsonl 119 :: PASS EMPTY (structural): d = 119, K = 3, n = 30; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 131 :: PASS EMPTY (structural): d = 131, K = 3, n = 33; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 143 :: PASS EMPTY (structural): d = 143, K = 3, n = 36; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 155 :: PASS EMPTY (structural): d = 155, K = 3, n = 39; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 167 :: PASS EMPTY (structural): d = 167, K = 3, n = 42; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 179 :: PASS EMPTY (structural): d = 179, K = 3, n = 45; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 191 :: PASS EMPTY (structural): d = 191, K = 3, n = 48; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 203 :: PASS EMPTY (structural): d = 203, K = 3, n = 51; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 215 :: PASS EMPTY (structural): d = 215, K = 3, n = 54; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 227 :: PASS EMPTY (structural): d = 227, K = 3, n = 57; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 23 :: PASS EMPTY (structural): d = 23, K = 2, n = 6; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (1
+OK   p03-struct.jsonl 239 :: PASS EMPTY (structural): d = 239, K = 3, n = 60; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 251 :: PASS EMPTY (structural): d = 251, K = 3, n = 63; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 263 :: PASS EMPTY (structural): d = 263, K = 3, n = 66; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 287 :: PASS EMPTY (structural): d = 287, K = 3, n = 72; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 299 :: PASS EMPTY (structural): d = 299, K = 3, n = 75; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 311 :: PASS EMPTY (structural): d = 311, K = 3, n = 78; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 323 :: PASS EMPTY (structural): d = 323, K = 3, n = 81; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 335 :: PASS EMPTY (structural): d = 335, K = 3, n = 84; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 347 :: PASS EMPTY (structural): d = 347, K = 3, n = 87; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 35 :: PASS EMPTY (structural): d = 35, K = 2, n = 9; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (1
+OK   p03-struct.jsonl 359 :: PASS EMPTY (structural): d = 359, K = 3, n = 90; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 371 :: PASS EMPTY (structural): d = 371, K = 3, n = 93; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 383 :: PASS EMPTY (structural): d = 383, K = 3, n = 96; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 395 :: PASS EMPTY (structural): d = 395, K = 3, n = 99; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3 
+OK   p03-struct.jsonl 407 :: PASS EMPTY (structural): d = 407, K = 3, n = 102; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 419 :: PASS EMPTY (structural): d = 419, K = 3, n = 105; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 431 :: PASS EMPTY (structural): d = 431, K = 3, n = 108; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 443 :: PASS EMPTY (structural): d = 443, K = 3, n = 111; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 455 :: PASS EMPTY (structural): d = 455, K = 3, n = 114; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 467 :: PASS EMPTY (structural): d = 467, K = 3, n = 117; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 47 :: PASS EMPTY (structural): d = 47, K = 2, n = 12; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (
+OK   p03-struct.jsonl 479 :: PASS EMPTY (structural): d = 479, K = 3, n = 120; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 491 :: PASS EMPTY (structural): d = 491, K = 3, n = 123; B = {v^k : |k| <= 2}.U^(5^3), 140 unit vectors (70 pairs); rational layer proved at every level <= 3
+OK   p03-struct.jsonl 59 :: PASS EMPTY (structural): d = 59, K = 2, n = 15; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (
+OK   p03-struct.jsonl 71 :: PASS EMPTY (structural): d = 71, K = 2, n = 18; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (
+OK   p03-struct.jsonl 83 :: PASS EMPTY (structural): d = 83, K = 2, n = 21; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (
+OK   p03-struct.jsonl 95 :: PASS EMPTY (structural): d = 95, K = 2, n = 24; B = {v^k : |k| <= 2}.U^(5^2), 100 unit vectors (50 pairs); rational layer proved at every level <= 2 (
+TALLY: 411 certificates re-checked, 0 failed
+exit 0
