@@ -441,7 +441,14 @@ faces, and item 3 names the **kinds** of invariant each face admits, so that "no
 `0 ∉ S`; `S` need not generate (T42). No field, no metric, no arithmetic. `X(Λ, S, k)` is the space of proper `k`-colourings, a ℤ^r
 shift of finite type; `P`, `F` are the H1 group and the forced group (row 78's normal form, T36). **The rank is a parameter of every
 answer**: ℚ(√167)'s lattices have `r ≤ 4` (its plane is a four-dimensional ℚ-space), so a no at rank `r ≥ 5` does not reach the
-target, and a yes proved only in rank 2 does not either.
+target, and a yes proved only in rank 2 does not either. **Canonical form and the two rank parameters (domain pass, §D.1–D.2):**
+the graph is a disjoint union of copies of `Cay(⟨S⟩, S)`, and colourability, `F` and `P` are those of `(⟨S⟩, S)` (Lemma D1). So every
+face is posed with `Λ = ⟨S⟩`, and **`r` means `rank ⟨S⟩`**; a rank-1 graph is rank 1 in whatever group it is drawn. Rank alone does
+not say that a graph is genuinely of higher rank: `G(ℤ,{1,3,7,12,17,22}) □ ℤ` has `r = 2` and inherits non-four-colourability and
+`χ_f ≤ 29/8` from its rank-1 factor. So a non-colourable graph also carries its **refutation rank `ρ₄`**, the least rank of a subgroup
+`L` with `Cay(L, S ∩ L)` not four-colourable. `ρ₄ ≥ 2` is decidable (the rank-1 pieces are distance graphs, T28), and every
+unit-distance lattice graph has it for free: a line through 0 holds at most one ± pair of unit vectors. ℚ(√167)'s lattice graphs have
+`r = 4`, are triangle-free, and have `ρ ≥ 2`.
 
 **Each face names its class** (Poros's card A). In the fully abstract class both the rigidity and the obstruction faces have trivial
 members: `S ⊇ {s, 2s, 3s}` puts a `K₄` on every `s`-line and forces period 4 along `s` (`Cay(ℤ, {1,2,3})` has exactly 24 colourings,
@@ -507,7 +514,9 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      in time polynomial in its bit size, whose bit size is bounded by a stated function of the presentation of `(Λ, S)` that mentions no
      refuting subgraph, and which on the instance is smaller than the best finite refutation known.* The benchmark's `χ_f ≤ 4` already
      rules out the one-point density bound. A clause excluding "density certificates" is therefore unnecessary, and it would exclude the
-     averaging move G72 names (item 3, kind 0_W). **It requires rank ≥ 2** (Poros), because rank 1 is decided already:
+     averaging move G72 names (item 3, kind 0_W). "Size", "plain refutation" and the three-part test (scheme bound, instance, optional
+scaling) are defined in §D.4. **It requires refutation rank `ρ₄ ≥ 2`** (Poros asked for rank ≥ 2; the domain pass found that rank
+alone is met by gluing a rank-1 inhabitant to a path, §D.2), because rank 1 is decided already:
      `G(ℤ, {1,3,7,12,17,22})` is triangle-free (the set is sum-free) and has the periodic independent set `{0, 2, 4, 6, 10, 15, 20, 25}`
      mod 29, of density 8/29, so `χ_f ≤ 29/8 < 4`. It refuses four colours on **33** consecutive points and is colourable on 32 (the
      advisor's check and the modeling agent's, independently; the first draft's "a window of 176" was true but not sharp). Its window-state
@@ -516,9 +525,10 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      rank-1 control, the advisor's: `D = {1,6,8,11,12}` is K₄-free, has independence density ≥ 1/4 (a period-20 set; the advisor reports
      exactly 1/4), and has 2,348 window states, none essential. The precedent for a certificate that beats the finite route is `Θ₃`'s
      5.7 KB against refuting patches priced near 10⁸ points. *[Amended at the modeling pass. The first draft required "a certificate that
-     is not a density certificate" and called the rank-1 benchmark "met vacuously"; see §R-review.]* **No rank-≥2 K₄-free graph with `χ_f ≤ 4` certified and `χ = 5` is known** (Theorem B four-colours
-     every K-lattice; the five-chromatic lattices over K(√5), K(√7) and de Grey's field have no `χ_f ≤ 4` certificate); finding one, or
-     working with "not refuted by any density certificate" in its place, is part of the task (G30.5). A yes is a certificate of non-four-colourability that lives on the group and sees
+     is not a density certificate" and called the rank-1 benchmark "met vacuously"; see §R-review.]* **No K₄-free graph with `ρ₄ ≥ 2`, a certified `χ_f ≤ 4` and `χ = 5` is known.** Theorem B four-colours
+     every K-lattice, and the five-chromatic lattices over K(√5), K(√7) and de Grey's field have no `χ_f ≤ 4` certificate. Finding one,
+     or working with "refuted by no colour-class density bound" in its place, is part of the task (G30.5). *[Amended at the domain pass
+     (§D.2). The first draft said "no rank-≥2 K₄-free graph", which is false: `G(ℤ,{1,3,7,12,17,22}) □ ℤ` is one.]* A yes is a certificate of non-four-colourability that lives on the group and sees
      integrality (the four-colour analogue of `Θ₃ = ∅`). A no-go says either that the kind cannot refute some named instance at all, or
      that its certificates fail the size test on some family (their size tracks the refuting subgraphs). *[The first draft read "every
      invariant of that kind is controlled by the colour-class densities", which holds only for one-point densities (finding 1).]*
@@ -540,7 +550,10 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      holds iff the colouring space is nonempty. So there the programme is exact, and it refutes `G(ℤ,{1,3,7,12,17,22})` although
      `χ_f ≤ 29/8` (owner finding 1, checked by the advisor and by the modeling agent). In rank ≥ 2 each fixed window gives a relaxation.
      A window large enough to hold a refuting subgraph gives only that subgraph's refutation in LP form, which is why (Q-obs) is scored by
-     size (item 2). **Posed, not answered:** how does FS-73's `Θ₃` relate to this kind?
+     size (item 2). **Posed, not answered:** how does FS-73's `Θ₃` relate to this kind? In §D.3's terms: which part of a
+     three-colour certificate is averaged and which is discrete, and is the discrete part essential — does a window programme of
+     comparable size ever refute where `Θ₃` does? ("Comparable size" matters: by compactness some window refutes every non-colourable
+     graph, so the question is only meaningful at a stated size.)
    *[Amended at the modeling pass (owner finding 1). The first draft had a single "Kind 0, densities (invariant means of cylinder events:
    colour-class densities, pair statistics)" and called it controlled by `χ_f`. That conflated the two rows above.]*
    - **Kind 1, heights** (continuous cocycles into ℤ^m in K. Schmidt's sense, their slopes): the three-colour tool (T21). For the grid at
@@ -560,6 +573,13 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      searched (§PA.2's topological-combinatorics row returned nothing for infinite Cayley graphs).
 
    **Finding an invariant that answers one face, or proving that no invariant of a named kind can, is the milestone.**
+
+   *What "kind" means (domain pass, §D.3).* A kind is a certificate format with a soundness theorem (a checker, and a proof that
+   acceptance implies no four-colouring). Kinds 0₁, 0_W and 1 are **invariant-derived**: a pointwise invariant `d` (continuous,
+   translation-invariant, discrete-valued — a winding) and an averaged one `m` (the mean of a finite-window function over an ergodic
+   invariant measure — a density, a frequency, a slope), with an admissible set computed from `S` that every colouring's data must hit.
+   C, T and A are **structure-derived** (sound for another reason). K bears on (Q-rig). A no-go of a named kind has one of three shapes:
+   blind on a named instance, too large on a named family, or trivial on the class.
 
 4. **Its route: derivation only**, by two competitors and an advisor (P2). Exact computation checks a derived claim (a certificate, a
    control, an instance); no search answers (Q). Phase 0 is a measurement that runs beside the plan and answers none of the faces.
@@ -713,7 +733,9 @@ P1 ≤ 300k; P2 ≤ 3 × 450k [360–410k, 480k]; P3 ≤ 300k; close ≤ 500k [4
 colouring; finiteness of the colouring space). *Why not:* no theorem of this milestone consumes them yet, a new module costs a build, and
 FS-73's `InheritanceQuestion` already states the one face the kernel has a use for; a `Prop` with no consumer is a statement nobody reads.
 *Confidence:* medium — if P2 lands a class theorem whose kernel form is cheap, P1's successor (P3) writes the skeleton with its
-inhabitants then. The P1 domain pass may overturn this; it records why.
+inhabitants then. The P1 domain pass may overturn this; it records why. **Reviewed by the domain pass (§D.5): the decision stands.**
+Every object of (Q) is already a kernel definition. (Q-obs) and (Q-rig) are not propositions. The class risks a skeleton would have
+caught (generation, rank) were caught by the adversarial member instead.
 
 ## §P. Registered predictions (each with both outcomes reachable)
 
@@ -726,7 +748,7 @@ inhabitants then. The P1 domain pass may overturn this; it records why.
 | P-A | **(Q) answered yes** in a class that contains rank-4 triangle-free graphs (reaches ℚ(√167)): existence of periodic colourings (hence decidability and two-sided certificates) and `P = F` there | 0.05 | at three colours the same question fell in one competition; nothing known forbids it at four in low rank |
 | P-A′ | (Q) or (Q-rig) answered yes in a **subclass that does not reach ℚ(√167)** (rank 2; triangle lattices through `[MooreNewman2000]`'s height; Hoffman-tight graphs through FS38-D2-A) | 0.15 | the height and spectral theorems already exist for such subclasses |
 | P-B | **(Q-comp) answered no**: an explicit four-colourable graph in 𝒞_r with no periodic four-colouring, or undecidability, with proof and its rank | 0.12 | the frame-product mechanism (T34) and the domino problem make it plausible; MathOverflow's intuition points there |
-| P-B′ | a **no-go of a named kind** (e.g. every kind-1 invariant is trivial on 𝒞_r^{△-free}; or window-frequency certificates at a fixed window fail the size test on a named family) without settling (Q) | 0.18 | `[CGHO2025coh]`'s method is available and G71's grid half is already such a theorem. *[Amended at the modeling pass (finding 1): the first example, "every kind-0 invariant is controlled by `χ_f`", is false for window frequencies and already known for one-point densities (kind 0₁), so it was no result P2 could land.]* |
+| P-B′ | a **no-go of a named kind**, in one of §D.3's three shapes: blind, too large, or trivial (e.g. every kind-1 invariant is trivial on 𝒞_r^{△-free}; or window-frequency certificates at a fixed window fail the size test on a named family) without settling (Q) | 0.18 | `[CGHO2025coh]`'s method is available and G71's grid half is already such a theorem. *[Amended at the modeling pass (finding 1): the first example, "every kind-0 invariant is controlled by `χ_f`", is false for window frequencies and already known for one-point densities (kind 0₁), so it was no result P2 could land.]* |
 | P-O | **(Q-obs) answered yes on at least one explicit graph**: a certificate from an invariant of every four-colouring that refuses four colours where `χ_f ≤ 4` | 0.08 | Θ₃'s emptiness did exactly this at three colours; G53's counting compulsion is an integral precedent |
 | P-C | **not landed**: sharpened reductions, a subclass with an invariant candidate, a candidate family (the stub's fallbacks) | 0.42 | the default |
 
@@ -741,7 +763,7 @@ The uninformative outcome is P-C; the most informative for the target are P-A an
 | P-G15 | an obstruction from P2 that does not factor as pigeonhole × kill | 0.05 (0.6 given P-O) | a polytope-emptiness certificate has no class pigeonhole |
 | P-G54 | step 0 finds `Γ₂₃` Hoffman-**slack** at four colours (so no usable prime of ℚ(√167) is four-tight and G54's tight mechanism cannot give full-rank `F` there) | 0.8 | 23 passes divisibility and the Weil bound; only the exact spectrum decides |
 | P-MO | if (Q-comp) is settled in P2, it is settled **no** (MathOverflow's expectation, Poros's registration request) | 0.7 | the three-colour answer was yes, with no arithmetic; a height or spectral argument could extend in low rank |
-| P-rank | if a no to (Q-comp) lands, it needs rank ≥ 5 or cliques, so it does not reach ℚ(√167) | 0.75 | a rank-4 triangle-free encoding is not excluded by anything known |
+| P-rank | if a no to (Q-comp) lands, it needs rank ≥ 5 or cliques, so it does not reach ℚ(√167) (rank is `r = rank ⟨S⟩`, §D.2) | 0.75 | a rank-4 triangle-free encoding is not excluded by anything known |
 
 **Phase 0 (the planner's; the implementer registers its own before any run):**
 
@@ -764,6 +786,9 @@ The uninformative outcome is P-C; the most informative for the target are P-A an
   docstrings. The milestone crosses no consumer boundary otherwise; §C is a brief, and its register is the protocol's.
 - **Order:** domain → obligation (→ experience if triggered), each a fresh Skill invocation, each committed before the next. A fresh agent
   runs them (FS-73: the plan and the passes together overran one agent).
+- **Record.** The owner's review was resolved first (§R-review), then the **domain pass** (§D) ran. It settled the canonical form and
+  the two rank parameters, the definition of a kind, and the size test. It found the false rank-2 sentence, and it kept §K. No Lean was
+  written, so the experience pass is not triggered by Lean.
 
 ## §C. The competition's brief: the slots of `plans/PROTOCOL-competitor-and-advisor.md` §4 and §5, filled
 
@@ -777,7 +802,9 @@ owner's held items are not here and reach the competitors only through the advis
 The project attacks the Hadwiger–Nelson problem: how many colours the plane needs so that no two points one unit apart share a colour
 (5, 6 or 7). Over a real field `F` a **lattice** is the ℤ-span `Λ ⊂ ℂ` of finitely many unit vectors of `F²`; `U = Λ ∩ S¹` is finite
 and `Cay(Λ, U)` is its unit-distance graph. **The abstract class** is every Cayley graph `Cay(Λ, S)` of a finitely generated
-torsion-free abelian group `Λ` of rank `r`, with `S = −S` finite and `0 ∉ S`; no field, no metric. `X(Λ, S, k)` is its space of proper
+torsion-free abelian group `Λ`, with `S = −S` finite and `0 ∉ S`; no field, no metric. `S` need not generate `Λ`, but the graph is a
+disjoint union of copies of `Cay(⟨S⟩, S)`, so pose everything with `Λ = ⟨S⟩` and read the rank `r` as `rank ⟨S⟩` (§C.2's
+definitions). `X(Λ, S, k)` is its space of proper
 `k`-colourings, a ℤ^r shift of finite type; a colouring is **periodic** if a finite-index subgroup fixes it. The forced group `F` (the
 differences every `k`-colouring identifies) and the H1 group `P` (the differences every periodic `k`-colouring identifies) are subgroups,
 `F ⊆ P` (`Proofs/HadwigerNelson/Kempe.lean`: `forcedSubgroup`, `periodicForcedSubgroup`, `InheritanceQuestion`,
@@ -838,17 +865,43 @@ question your result answers, **in which class and at which rank**:
   subgraph always exists by compactness; the question is for a certificate that is an invariant of every colouring. **Success is scored
   by size, not by kind**: a sound certificate of any kind, densities included, checkable in time polynomial in its bit size, whose bit
   size is bounded by a stated function of the presentation of `(Λ, S)` that mentions no refuting subgraph, and which on the instance is
-  smaller than the best finite refutation known. The benchmark's `χ_f ≤ 4` already rules out colour-class densities. **Success also needs
-  rank ≥ 2**, because rank 1 is decided already. `G(ℤ, {1,3,7,12,17,22})` is triangle-free, has `χ_f ≤ 29/8`, and refuses four colours on
-  33 consecutive points. Its transfer matrix, a certificate on the group, decides it at about the size of that 33-point refutation. No
-  rank-≥2 K₄-free graph with a certified `χ_f ≤ 4` and `χ = 5` is known; naming one, or working with "refuted by no colour-class density
-  bound" in its place, is part of the task. Admissible kinds, not exhaustive: colour-class densities, window-pattern frequencies, heights,
+  smaller than the best plain refutation known (the definitions below). The benchmark's `χ_f ≤ 4` already rules out colour-class
+  densities. **Success also needs refutation rank `ρ₄ ≥ 2`** (no rank-1 subgroup already refutes), because rank 1 is decided already.
+  `G(ℤ, {1,3,7,12,17,22})` is triangle-free, has `χ_f ≤ 29/8`, and refuses four colours on 33 consecutive points. Its transfer matrix, a
+  certificate on the group, decides it at about the size of that 33-point refutation. Rank alone does not measure this: the product
+  `G(ℤ, {1,3,7,12,17,22}) □ ℤ` has rank 2 and inherits both properties from its factor. No K₄-free graph with `ρ₄ ≥ 2`, a certified
+  `χ_f ≤ 4` and `χ = 5` is known; naming one, or working with "refuted by no colour-class density bound" in its place, is part of the
+  task. Admissible kinds, not exhaustive: colour-class densities, window-pattern frequencies, heights,
   Kempe-class invariants, counting compulsions (G53), the domain's topology (Lovász's box complex, `[Lovasz1978]`), algebraic
   certificates (ideals in the group ring), or a kind you name.
 
 **Why the class, and why the rank.** Cliques make both of the last two faces trivial in the abstract class (`S ⊇ {s, 2s, 3s}` forces period
-4 along `s`; `S ⊇ {s, …, 4s}` is a `K₅`); the K₄-free subclass removes them. ℚ(√167)'s lattices have rank ≤ 4 and no triangles, so a
-result that reaches them must hold in rank 4, triangle-free.
+4 along `s`; `S ⊇ {s, …, 4s}` is a `K₅`); the K₄-free subclass removes them. ℚ(√167)'s lattice graphs have rank 4 (their unit
+vectors span), no triangles, and refutation rank at least 2 for free (a line through the origin holds at most one ± pair of unit
+vectors). So a result that reaches them must hold for triangle-free graphs of rank 4, and a no that needs rank ≥ 5 does not reach them.
+
+**Definitions the scoring uses** (the plan's §D, condensed; read §D for the proofs):
+- **Canonical form.** `Cay(Λ, S)` is a disjoint union of copies of `Cay(⟨S⟩, S)`, and colourability, `F` and `P` are those of
+  `(⟨S⟩, S)`. Pose everything with `Λ = ⟨S⟩`. **Rank** means `r = rank ⟨S⟩`.
+- **Refutation rank** `ρ₄` of a non-four-colourable graph: the least rank of a subgroup `L` with `Cay(L, S ∩ L)` not four-colourable.
+  `ρ₄ ≥ 2` is decidable (the rank-1 pieces are distance graphs; FS-73 T28 has the decider).
+- **A kind** is a certificate format with a soundness theorem: a checker, and a proof that acceptance implies no four-colouring.
+  - *Invariant-derived* kinds use a pointwise invariant `d` and an averaged invariant `m`. `d` is continuous, translation-invariant and
+    discrete-valued (a winding). `m` is the mean of a finite-window function over an ergodic invariant measure (a density, a frequency,
+    a slope). Every colouring's `(d, m)` must lie in an admissible set computed from `S`. Since `ℤ^r` is amenable, an empty admissible
+    set means no colouring exists.
+  - *Structure-derived* kinds are sound for another reason: counting on a base pattern, box complexes, algebraic certificates.
+  - A no-go of a named kind has one of three shapes: it cannot refute a named instance, its certificates are too large on a named
+    family, or its invariants are trivial on the class.
+- **Size.**
+  - *The certificate:* `|C|` is its bit length, for a checker that reads only the presentation and `C`, re-derives `S` itself, and runs in
+    time polynomial in their size. The time bound stops a checker from hiding a search.
+  - *The baseline:* a **plain refutation**, meaning a finite subgraph together with an LRAT proof that it cannot be four-coloured. Report
+    the best one known (vertices, bits, source), or "none known" with the degree-law price for one, labelled a price.
+  - *The test:* (a) a closed-form bound `|C| ≤ B(r, n, M)` in the presentation's parameters (`n` generator pairs, `M` the largest
+    generator's ℓ¹ norm), not defined through refutations; (b) on the instance, `|C|` is below the best plain refutation, or none is
+    known and its price is at least 10⁶ points; (c) optionally, a family on which a proved lower bound for plain refutations outgrows
+    `B`.
 
 **What a no would look like.** An explicit graph (its rank, its `S`) with a proof that it is four-colourable and a proof that no periodic
 four-colouring exists; or a reduction from the domino problem (Wang tiles) to four-colourability in the class, with the rank at which it
@@ -931,7 +984,8 @@ the work outgrows it.
 "things worth knowing" 1–10; the instance list with [P0-SURVIVORS] filled.
 
 **"The challenge"**: §C.2's three questions with their classes, the ranking ((Q-obs), (Q-rig), (Q); owner ruling R2), (Q-obs)'s success
-test (scored by size, not by kind; rank ≥ 2; `χ_f ≤ 4`), "why the class, and why the rank", "what a no would look like", and the
+test (scored by size, not by kind; refutation rank `ρ₄ ≥ 2`; `χ_f ≤ 4`), "why the class, and why the rank", the definitions the
+scoring uses, the acceptance criteria per face (§C.4, which the advisor scores against), "what a no would look like", and the
 reporting rule.
 
 **Keep "What I want from you" as the template has it**, with these additions:
@@ -1005,3 +1059,196 @@ as the owner asked.*
     both re-checked here; independence density ≥ 1/4 from a period-20 set; the advisor reports exactly 1/4).
 - **Finding 2** (inventory item 30). **Holds.** χ(K²) = 4. §0 item 5 is reworded: over K, rigidity (`F = 8Λ ∋ 8/3`) gives five only
   in wall-broken extensions, where `1/2 ∈ ℤ[U]` and hence `3/8 ∈ ℤ[U]` (G55).
+
+## §D. The domain pass (WORKFLOW 6, `debruijn-domain-modeling`, fresh invocation, 2026-09-23)
+
+*The owner asked this pass to settle four objects: the formal meaning of "an invariant carried by every four-colouring" and of "kind";
+the class and its rank; the "size" in (Q-obs)'s success test; and §K. It poses no face and answers none. Its lemmas are graded, and
+each is proved in one or two lines here, or the line says it is a sketch. §D.6 lists every edit it made.*
+
+### D.1 The object and its canonical form
+
+A **presentation** is `(Λ, S)`: `Λ` finitely generated torsion-free abelian, `S = −S` finite, `0 ∉ S`. From it:
+- `π : ℤⁿ → Λ` sends one basis vector to each ± pair of `S`, and `R = ker π` is the relation lattice;
+- `X = X(Λ, S, k) ⊆ [k]^Λ` is the compact space of proper `k`-colourings;
+- `Λ` acts on `X` by translation (and `ℤⁿ` acts through `π`), and `Sym(k)` acts by relabelling the colours.
+
+**The incidental part is `Λ` beyond `⟨S⟩`.** `Cay(Λ, S)` is the disjoint union of the copies `Cay(x + ⟨S⟩, S)`, so `X(Λ, S, k)` is a
+product, over the cosets, of copies of `X(⟨S⟩, S, k)`.
+
+**Lemma D1 [hand, this pass; the P half is a sketch].**
+- Colourability of `(Λ, S)` is that of `(⟨S⟩, S)`.
+- `F(Λ, S) = F(⟨S⟩, S) ⊆ ⟨S⟩`. Colourings of different components are independent, so relabelling one component separates any
+  `δ ∉ ⟨S⟩`.
+- When a periodic colouring exists, `P(Λ, S) = P(⟨S⟩, S) ⊆ ⟨S⟩`. Sketch: extend a periodic colouring of `⟨S⟩` coset by coset, with a
+  relabelling chosen through a finite quotient of `Λ/⟨S⟩` in which `δ`'s image is nonzero (residual finiteness). T24's care with
+  saturation applies.
+- `X` is finite only if `[Λ : ⟨S⟩] < ∞`.
+
+**Canonical form: `Λ = ⟨S⟩`.** Every face is posed in canonical form, and a result stated for a general `Λ` says what it gives there.
+`[Λ : ⟨S⟩] < ∞` changes nothing of substance: `X` becomes a finite power, and `F` and `P` are unchanged. `S` need not generate
+(T42), but that is a statement about `Λ`, not about the graph.
+
+### D.2 Rank: two parameters
+
+- **`r := rank ⟨S⟩`**, which is `rank Λ` in canonical form. This is what "rank" means everywhere in this plan. A rank-1 graph is rank 1
+  in whatever group it is drawn. That settles the owner's question: read as the rank of `Λ`, "rank" would place every rank-1 graph in
+  every rank.
+- **The adversarial member.** `H := G(ℤ, {1,3,7,12,17,22}) □ ℤ = Cay(ℤ², {(±d, 0)} ∪ {(0, ±1)})`.
+  - It has `r = 2`.
+  - It is K₄-free: a clique of a Cartesian product lies in one fibre.
+  - It is not four-colourable, because it contains the factor.
+  - `χ_f(H) ≤ 29/8`, since `χ_f` of a Cartesian product is the larger factor's.
+
+  So §IQ's first-draft sentence "no rank-≥2 K₄-free graph with `χ_f ≤ 4` certified and `χ = 5` is known" was false. Read with `r`,
+  "(Q-obs) needs rank ≥ 2" is met by gluing a rank-1 answer to a path.
+- **`ρ_k`, the refutation rank** of a non-`k`-colourable `(Λ, S)`: the least rank of a subgroup `L ≤ Λ` such that `Cay(L, S ∩ L)` is not
+  `k`-colourable. It suffices to range over pure subgroups, since saturating `L` keeps its rank and only adds edges.
+- **Lemma D2 [hand, this pass].**
+  - *`ρ_k ≥ 2` is decidable.* The rank-1 pure subgroups meeting `S` are the finitely many lines `ℤλ` through the primitive directions of
+    `S`. Each piece `Cay(ℤλ, S ∩ ℤλ)` is a rank-1 distance graph, which T28's transfer-matrix decider settles exactly.
+  - *Every unit-distance lattice graph has `ρ_k ≥ 2`, for every `k ≥ 2`.* A line through 0 holds at most one ± pair of unit vectors, so
+    each rank-1 piece is `G(ℤ, {d})`, a union of paths.
+- **Consequences for the plan.**
+  - (Q-obs)'s rank requirement becomes **`ρ₄ ≥ 2`**. Its motive, that rank 1 is already decided, is exactly what `ρ` measures.
+  - "Reaches ℚ(√167)" means the class contains triangle-free graphs with `r = 4`. The ℚ(√167) lattice graphs have `r = 4` (their unit
+    vectors span, T44), are triangle-free (G57), and have `ρ ≥ 2` for free.
+  - "A no at rank ≥ 5" means `r ≥ 5`.
+
+### D.3 "An invariant carried by every four-colouring", and "kind"
+
+**Finding.** The plan uses "invariant" for two different objects:
+- a **per-colouring quantity**: a winding, a slope, a Kempe class;
+- a **certificate that no colouring exists**: `Θ₃ = ∅`, a Farkas vector, a box-complex index.
+
+(Q-obs) scores the second. The first is one way to produce it. So the model is:
+
+**A kind is a certificate format with a soundness theorem.** A kind consists of a checker `Check(pres, C) ∈ {accept, reject}` and a
+proof that `accept ⟹ X(pres, 4) = ∅`. A no-go "of a named kind" (P-B′) is a statement only about a fixed format. It takes one of three
+shapes:
+- **(N-blind)**: for a named non-colourable graph, the format accepts no `C`;
+- **(N-size)**: on a named family, every accepted `C` is at least as large as the family's plain refutations, or grows at least as fast
+  (D.4);
+- **(N-trivial)**, for invariant-derived formats: every invariant of the format's type is trivial on the class. For example, every
+  continuous cocycle is a coboundary plus a homomorphism, which is the shape of `[CGHO2025coh]` Theorem 1.1.
+
+**Invariant-derived formats: the G72 template.** An *invariant datum* is a pair `(d, m)`.
+- **`d : X → D`**, the pointwise, integral part (G72's move 2, integers from the target's topology). `d` is continuous (it reads a finite
+  window), `Λ`-invariant, and takes values in a discrete set `D`.
+- **`m`**, the averaged part (G72's move 3). It maps each ergodic `Λ`-invariant probability measure `μ` on `X` to
+  `m(μ) = ∫ f dμ ∈ ℝ^V`, for a continuous `f : X → ℝ^V` that reads a finite window `W`. So `m` is linear in `μ`'s `W`-marginal.
+
+The datum comes with an admissible set `A(pres) ⊆ D × ℝ^V`, computable from the presentation, and a soundness theorem:
+`(d(c), m(μ)) ∈ A` for every ergodic `μ` and every `c ∈ supp μ`. (`d` is constant on `supp μ`: being invariant, it is `μ`-almost
+everywhere constant, and it is continuous.)
+
+**Lemma D3 [standard].** `Λ ≅ ℤ^r` is amenable, so `X ≠ ∅` iff an ergodic invariant measure on `X` exists (Krylov–Bogoliubov, then
+ergodic decomposition). Hence `A = ∅ ⟹ X = ∅`, and a certificate is a checkable proof that `A = ∅`.
+
+The named kinds as instances of the template:
+- **Kind 0₁**: `d` trivial; `f` = the colour indicators at 0; `A` comes from a certified bound on the independence density.
+- **Kind 0_W**: `d` trivial; `f` = the `W`-pattern indicators; `A` = the local-consistency polytope.
+- **Kind 1, heights.** A continuous cocycle `a : ℤⁿ × X → M`, with `M` an abelian group, `ℤⁿ` acting through `π`, and
+  `a(λ + λ′, c) = a(λ, c) + a(λ′, λ·c)`.
+  - Its restriction to `R`, where the action is trivial, is additive and `Λ`-invariant. This is the **winding**,
+    `d(c) = a(·, c)|_R ∈ Hom(R, M)`.
+  - For torsion-free `M`, the mean `m(μ) = (∫ a(e_i, ·) dμ)_i` is the **slope**, and it extends the winding.
+  - FS-73's three-colour height is the case `M = ℤ` (T21). Moore–Newman's triangular-lattice height is a case `M = ℤ²`. On square
+    relations at four colours, only `M = ℤ/2` survives (T29, `[CGHO2025coh]`), and it has no mean.
+- **Mixtures** (a winding together with window frequencies) are allowed. Whether the discrete part is ever essential is §IQ item 3's
+  posed question, and this pass does not answer it.
+
+**Structure-derived formats** are sound for reasons other than invariant measures:
+- **C**: a count on a base pattern (G53);
+- **T**: the ℤ₂-map a colouring induces between box complexes (`[Lovasz1978]`);
+- **A**: the colouring as a point of a variety, refuted by an equivariant Nullstellensatz certificate in the group ring;
+- **K**: Kempe classes. These bear on (Q-rig), not on existence.
+
+Each becomes a kind once its checker and soundness theorem are stated. A competitor who names a kind states both.
+
+**Why not the owner's three candidates alone.**
+- *A shift-equivariant map out of `X`* is a factor map, and the identity is one. So "invariant" in that sense admits the colouring itself
+  and names nothing. What restricts the notion is the value space (discrete and invariant, or linear and averaged) and, in the end, the
+  certificate's size (D.4).
+- *Cocycles only* would miss one-point densities, window frequencies, box complexes and counting compulsions, none of which is a cocycle.
+- *Measure functionals only* would miss the winding, which is pointwise rather than averaged, and is the part that saw integrality at
+  three colours.
+
+### D.4 Size
+
+**The presentation.**
+- `pres` consists of `r` and `S` as integer vectors in a basis of `Λ`. For a field lattice it is FS-73's key, from which `U` is
+  re-enumerated.
+- `|pres|` is its bit length, `n = |S|/2`, and `M(pres) = max ‖s‖₁` in that basis.
+
+**The certificate size `|C|`** is the certificate's bit length, for a checker that:
+1. reads only `pres` and `C`;
+2. re-derives `S` itself (for a field lattice, re-enumerates `U` from the key);
+3. is deterministic and runs in time polynomial in `|pres| + |C|`.
+
+Clause 3 stops a certificate from hiding a search inside its checker. A window programme at a window with no admissible pattern has an
+empty Farkas vector, and only the time bound forces that window's refutation into `C`.
+
+**The baseline is a plain refutation**: a finite subgraph together with a proof of its non-`k`-colourability in a standard propositional
+system (an LRAT file for its CNF). `N_k` is the least vertex count of a non-`k`-colourable finite subgraph; it is finite by compactness,
+and rarely known. Every claim reports one of two things:
+- the best plain refutation known: its vertices, its LRAT bits and its source; or
+- "none known", together with G65's price for one (points at average degree 14–18), labelled a price and never a bound.
+
+**The (Q-obs) size test** has three parts:
+- **(a) Scheme.** The claim states a bound `|C| ≤ B(r, n, M)` in closed form. The bound must be explicit in the presentation's parameters,
+  and it must not be defined through refutations, searches or `N_k`.
+- **(b) Instance.** On each benchmark instance, `|C|` is smaller than the best plain refutation known; or none is known and its G65 price
+  is at least 10⁶ points.
+- **(c) Scaling** (optional, the strongest form). A family along which a proved lower bound on `N_k`, or on plain refutations in a named
+  system, outgrows `B`.
+
+**Checked against the precedent and the adversaries.**
+- `Θ₃` on `L21cc6506`'s 36 vectors (5.7 KB, 1,050 leaves; no plain refutation known; priced near 10⁸) passes (b). So the test can be
+  passed by the kind of success it is modelled on.
+- The rank-1 transfer certificate of `G(ℤ,{1,3,7,12,17,22})`, a potential on 3,555 states, set against a plain refutation on 33
+  vertices, ties or fails (b). Rank 1 shows nothing, as §IQ says.
+- A window programme whose window contains a refuting subgraph must carry that refutation, by clause 3 of the checker, so it fails (b)
+  against itself.
+
+**The advisor's stronger wording, "bit size bounded by a function of `|S|` and `r`", is kept as an optional strengthening of (a), not as
+the test.** `Θ₃`'s own trees branch on integer bands whose number grows with the coefficients: in rank 1 the constraint at `d` has `d`
+bands. So `M`-independence is a conjecture about certificates, not a property the precedent is known to have.
+
+### D.5 §K: the decision stands, for a sharper reason
+
+The pass checked the kernel. `Proofs/HadwigerNelson/Kempe.lean` already holds `IsPeriodic` (the period group has finite index),
+`forcedSubgroup`, `periodicForcedSubgroup` and `InheritanceQuestion`, over any `AddCommGroup A` with `S : Set A`. C3-aper at `k` is one
+line over `IsPeriodic`. The faces that are not already there are not propositions: (Q-obs) is a checker with a soundness theorem (FS-75's
+shape, which waits for a kind), and (Q-rig) is a characterisation.
+- **Decision:** no Lean at this stage.
+- **Alternative weighed:** state `PeriodicExistence S k := Nonempty ((addCayley S).Coloring (Fin k)) → ∃ C, IsPeriodic C` beside
+  `InheritanceQuestion`. It would pin "periodic" to the kernel's definition. It has no consumer, and an edit to `Kempe.lean` rebuilds its
+  dependents.
+- **Why this one won:** the risks a skeleton would catch here are class risks (generation, rank). D.1 and D.2 caught them with an
+  adversarial member and exhibited inhabitants, which a one-line `Prop` would not have done.
+- **Confidence:** medium-high. It changes if a competitor's claim turns on what "periodic" means; then P3 writes the `Prop`, with the
+  parity colouring of `addCayley {±1}` already in `Kempe.lean` as its inhabitant.
+
+So the experience pass is not triggered by Lean; §M records its decision.
+
+### D.6 What the pass changed
+
+- §IQ's class paragraph: the canonical form and the two rank parameters, with pointers here.
+- §IQ item 2, (Q-obs): the rank requirement is `ρ₄ ≥ 2`; the false "no rank-≥2 inhabitant" sentence is corrected, with the old text
+  bracketed; the size test points to D.4.
+- §IQ item 3: each kind is named as an instance of D.3's format; the posed question is sharpened to "is the discrete part ever
+  essential".
+- §C.1 and §C.2: a "definitions the scoring uses" paragraph (D.1–D.4 condensed); "why the class, and why the rank" rewritten; the (Q-obs)
+  bullet's rank clause.
+- §P: P-B′ names the three no-go shapes; P-rank and P-A read "rank" as `r`.
+- §M: the domain pass recorded.
+
+### D.7 Inhabitants exhibited
+
+- `G(ℤ,{1,3,7,12,17,22})` and `D = {1,6,8,11,12}` (re-checked, §R-review).
+- The product `H` (D.2), by the two product theorems.
+- The ℚ(√167) lattices' `ρ ≥ 2` (D2, one line).
+- De Grey's lattice as the finite-`X` member of (Q-rig) (9,120 colourings).
+- For Kind 1: the grid, where only ℤ/2 is carried (`[CGHO2025coh]`), and the triangular lattice, which carries a height in ℤ²
+  (`[MooreNewman2000]`).
