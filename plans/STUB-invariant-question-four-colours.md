@@ -12,10 +12,10 @@ of the reframing that allowed us to see it". It is **the first milestone planned
 - FS-73 proved χ(ℚ(√167)²) ≥ 4 (row 79). Kooshi's local–global conjecture predicts at least six there.
 - The next step up is a lattice over ℚ(√167) that cannot be four-coloured. That is FS-59's question now.
 
-**Why a direct attack is priced out.** The lattices over ℚ(√167) that could need five colours are high-rank ones. Their unit vectors
-cover every small prime's residue circle, which is what rigidity needs (G69). Their finite pieces start near 10⁷ points (G65, G69; FS-70's
-rank-8 lattice). Only a certificate that works at the level of the lattice's symmetry scales to them. That is the kind that decided four
-colours: 5.7 KB against refuting patches priced near 10⁸ points.
+**What a direct attack would cost is not yet measured.** Every lattice over ℚ(√167) has rank at most 4, because ℚ(√167)² is a
+four-dimensional space over ℚ. The price of refuting four colours on the richest of them with a finite patch has never been measured;
+phase 0 measures it. The precedent is at three colours: FS-61 priced ℚ(√167)'s refuting patches near 10⁸ points, and the `Θ₃`
+certificate that decided the question is 5.7 KB. A certificate at the level of the lattice's symmetry is the kind that scales.
 
 **How four was found, and why this milestone is not "Θ at four colours".**
 - The proof did not come from aiming at ℚ(√167). Two attacks did aim at it: FS-61 searched for a refuting finite patch, and FS-73's
@@ -56,8 +56,10 @@ colours: 5.7 KB against refuting patches priced near 10⁸ points.
 
 - **(a) An invariant with local bounds, and a certificate scheme**, one-sided or two-sided. Aimed at §IQ item 5 the same day.
 - **(b) A theorem that no invariant of a stated kind exists, or that four-colourability is undecidable.** Kooshi's certificate question
-  is then answered negatively, and five over ℚ(√167) must come from the field's arithmetic (FS-59's residue-set route; FS-64's mixed
-  places). This is a redirection, stated as one.
+  is then answered negatively. That does not by itself send five over ℚ(√167) to the field's arithmetic: the target needs only a
+  one-sided obstruction, which a no-go on complete invariants leaves open. What (b) redirects is the certificate question; if no
+  one-sided obstruction of the admitted kind exists either, five comes from arithmetic (FS-59's residue-set route; FS-64's mixed
+  places).
 - **(c) Not landed.** Report it as not landed, with fallbacks:
   - a sharpened reduction;
   - a subclass where an invariant exists (candidates: triangle-free lattices, the ℚ(√167) case by G57; hexagonal fabric, where Baxter's
@@ -122,8 +124,9 @@ colours: 5.7 KB against refuting patches priced near 10⁸ points.
 ## Bearing on χ ≥ 6
 
 Medium-high on the programme, and speculative.
-- **Up side:** a four-colour invariant with a certificate would be the first solver-free route to five colours on high-rank lattices.
+- **Up side:** a four-colour invariant with a certificate would be the first solver-free route to five colours on lattices whose refuting patches are out of a solver's reach.
   The same move one dimension further up (five colours make the colour complex a 3-sphere) is the shape a six-colour certificate
   would take.
-- **Down side:** the outcome may be (b), a no-go. That redirects the hunt to arithmetic rather than advancing it, and it is still a
+- **Down side:** the outcome may be (b), a no-go. That redirects the certificate question, and the hunt goes to arithmetic only if no
+  one-sided obstruction survives either. It is still a
   finding.
