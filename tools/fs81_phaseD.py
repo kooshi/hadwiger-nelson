@@ -21,6 +21,7 @@ Commands:
                D0b: X_A (target and triangle encodings), X_B and the colourable ball at each radius, plus the instrument controls (T5, T7,
                the wall plant); one row per ask appended with fsync to data/fs81/phaseD/d0b-asks.jsonl; a relaunch skips recorded asks.
                Every UNSAT is re-asked by a second solver (toolchain CaDiCaL) unless --no-second.  Run it under the heavy lock.
+  reask KEY [TIMES] [WALL]   a decision number: the ladder ask KEY ('X_A|target|R1.5') alone, TIMES times, min CPU -> d0b-reask.jsonl
 """
 import gzip
 import hashlib
@@ -659,6 +660,33 @@ def cmd_ladder(radii, workers, wall, only, second):
     return 0
 
 
+def cmd_reask(key, times, wall):
+    """a number that enters a decision (t_A, the matched control, d*): the ask re-run ALONE, `times` times in sequence, each a fresh
+    kissat on the same CNF; rows appended to d0b-reask.jsonl with load 1; the minimum CPU s is the decision number (CLAUDE.md
+    S Toolchain: CPU seconds, minimum of three, machine named).  Run it under the heavy lock with nothing else of ours running."""
+    fam, enc, R = key.split('|')
+    R = float(R[1:])
+    meta, n, E, pins, chains = build_degrey({'X_A': 'X_A', 'X_B': 'X_B', 'colourable': 'colourable'}[fam], enc, R)
+    cl, nv = cnf_clauses(n, E, pins, chains)
+    path = SCR / f'reask-{os.getpid()}.cnf'
+    sha = write_cnf(path, cl, nv)
+    meta.update({'d_ball': round(2 * meta['m'] / meta['n'], 3), 'd4': round(2 * meta['m4'] / meta['n4'], 3)})
+    have = [r for r in load_jsonl(OUT / 'd0b-reask.jsonl') if r['key'] == key and r['cnf_sha256'] == sha]
+    cpus = [r['cpu_s'] for r in have if r['verdict'] != 'UNKNOWN']
+    for t in range(len(have), times):
+        rec, out = run_ask([KISSAT, '-q', str(path)], wall, str(path) + '.log')
+        row = dict(meta, key=key, repeat=t + 1, solver='kissat', version='kissat 4.0.4', wall_s_budget=wall, machine=MACHINE, workers=1,
+                   in_flight_at_start=1, quiet=True, cnf_sha256=sha, **rec)
+        append(OUT / 'd0b-reask.jsonl', row)
+        print(f'  {key} repeat {t + 1}: {rec["verdict"]} {rec["cpu_s"]} s CPU', flush=True)
+        if rec['verdict'] != 'UNKNOWN':
+            cpus.append(rec['cpu_s'])
+        os.remove(str(path) + '.log')
+    os.remove(path)
+    print(f'DONE reask {key}: min CPU {min(cpus) if cpus else None} s over {len(cpus)} decided runs', flush=True)
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -671,6 +699,8 @@ def main():
         return cmd_k1_fixture()
     if a[0] == 'harvest':
         return cmd_harvest()
+    if a[0] == 'reask':
+        return cmd_reask(a[1], int(a[2]) if len(a) > 2 else 3, float(a[3]) if len(a) > 3 else 1800.0)
     if a[0] == 'ladder':
         import argparse
         ap = argparse.ArgumentParser()
