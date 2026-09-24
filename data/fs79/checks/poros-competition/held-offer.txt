@@ -1,0 +1,68 @@
+Poros to both competitors (sent to each at the same moment, word for word): the held items, a scoring note, and one caution.
+
+Both of you have written a first route, so the held items go out now. There are four, from two sources. They are GUESSES, not results, and the least-tested ideas in this milestone. Two of them (H-A and H-P2) were written independently by different authors and reach the same construction from two directions; the direction is public through G72's wording ("one dimension up, its spheres"), so reaching it unaided is a good sign, not a loss.
+
+=== From the product owner (verbatim) ===
+
+H-A: the dimension shift, a four-colour "flux"
+- The three-colour mechanism (G71): three colours form a triangle, which is a loop. A colouring unwinds along the loop's cover (a line) to an integer height. Its winding on relation cycles is an integer; averaged, it is a slope with ±1 bounds. Emptiness of the slope polytope refuses the colouring.
+- At four colours: the colours' clique complex is the surface of a tetrahedron, a 2-sphere. Loops give only Z/2, which is Coxeter's no-go (K4's square complex is RP²). But the sphere has its own integer: the degree with which a closed surface wraps it.
+- So the candidate invariant lives one dimension up.
+  - On a lattice, two commuting relation cycles span a torus in the square complex of the grid that covers the Cayley graph.
+  - A four-colouring maps that torus to the sphere, so it has a degree, bilinear and antisymmetric in the pair of relations.
+  - Averaging over translations would give a real 2-form, a "flux", with local bounds from the per-square contributions.
+  - If no flux satisfies them, the lattice is not four-colourable.
+- The known snag. A square coloured with all four colours bounds two different discs on the sphere (triangles abc + acd, or abd + bcd), and they differ by the whole sphere. So the degree needs a filling convention, and a convention creates point "charges": 3-cubes whose boundary has non-zero degree. What survives is a flux with sources, a conservation law with charges.
+- Disciplines that own this shape: statistical mechanics (Coulomb phases, emergent gauge fields, height and flux mappings of constrained configurations: Baxter; Moore–Newman on four-colourings of the triangular lattice); algebraic topology (Lovász's topological method, box complexes, Hom complexes).
+- First cheap test: a small graph known to need five colours (a five-chromatic distance graph on Z, or a circulant). Does the flux obstruction see it?
+- Killing test: the flux is forced to zero for every four-colouring of every abelian Cayley graph, which would make it vacuous.
+- Beyond: at five colours the complex is a 3-sphere, so the same shift one dimension further up is the shape of a six-colour certificate.
+
+H-B: change the target, keep the dimension
+- The three-colour win came from the target (a triangle) having an infinite cover.
+- Q(√167)'s unit-distance graphs have no triangles (no √3; G57). For triangle-free graphs, four-colourability can be equivalent to mapping into some other triangle-free target.
+  - Example of the phenomenon, cited from memory and unchecked: every triangle-free planar graph maps to the 16-vertex Clebsch graph (Naserasr, JCTB 2007).
+- If our class (triangle-free four-colourable Cayley graphs of Z^r, or the Q(√167) lattices) has a universal target whose loops or spheres do unwind, heights come back at four colours.
+- Discipline: homomorphism duality and universal targets (Nešetřil–Tardif; Häggkvist–Hell).
+- First cheap test: a literature check. Is there a finite universal triangle-free target for triangle-free four-colourable graphs of bounded or Cayley type?
+- Killing test: a proof that no finite universal target exists for the class.
+
+The owner's check of H-B's citation (zbMATH Open API, 2026-09-23):
+- Existence: R. Naserasr, Homomorphisms and edge-colourings of planar graphs, J. Combin. Theory Ser. B 97 (2007) 394–400, Zbl 1116.05032. Read: the zbMATH review only. It states Naserasr's conjecture (planar graphs of odd girth 2k+1 map to the Cayley graph C(Z₂^{2k+1}, S_{2k+1}), S = vectors with two cyclically consecutive 1s) and its equivalence with Seymour's edge-colouring conjecture for planar (2k+1)-graphs. The Clebsch case (k = 2: C(Z₂⁵, S₅) is the Clebsch graph; odd girth ≥ 5 means triangle-free) is the one the literature cites as proved there; the review does not state it in words.
+- Minimality: R. Naserasr, Mapping planar graphs into projective cubes, J. Graph Theory 74 (2013) 249–259, Zbl 1276.05035. Read: the author's summary only (a claim, not a reading): "the Clebsch graph … is the smallest triangle-free graph to which every triangle-free planar graph admits a homomorphism".
+- Verdict: right in substance. Caveat: both theorems are about PLANAR graphs; our lattice graphs are not planar, so this is an instance of the phenomenon, not a tool. The target is itself a Cayley graph of an elementary abelian 2-group (a projective cube), which bears on "does the target's topology unwind".
+
+=== From the plan-phase advisor (verbatim) ===
+
+H-P2 (a candidate invariant, a construction with a snag and tests)
+- The coincidence. K4's square complex is RP² = S²/antipode (through the cube Q₃, FS73-T29). Lovász's box complex satisfies B(K4) ≃ S² Z₂-equivariantly, with the antipodal action. So the plan's "higher kinds (target topology above loops)" and its Kind T (the domain's Z₂-index) may be one kind: an equivariant degree into (S², antipode).
+- Candidate. Pass to the winding's double cover, where the colouring lifts to a Q₃-colouring and hence to the sphere. There, take the π₂-charge per unit area on each 2-dimensional sublattice plane: a "skyrmion density" 2-form on Λ⊗R. It is the slope one dimension up (G72's "spheres").
+- Snag 1 (sign). π₁(RP²) acts on π₂ by −1. A deck translation with w = 1 flips the charge while averaging preserves the density, so the density must vanish on every 2-plane not contained in ker(w). This is a test, not only a snag.
+- Snag 2 (fillings). For generating sets whose relation cycles are not squares (Pythagorean relators, long odd cycles), each relator 2-cell's filling in S² is unique only up to π₂. So the charge is defined only modulo the integer contributions of the relator cells. Whether the density survives that ambiguity is the real question.
+- Tests: every one of de Grey's 12 classes should carry a well-defined density, and F = 8Λ should be visible; compare with Moore–Newman's height on the triangular lattice; on the grid, CGHO says there is no height; is a charge still defined?; on T30's rank-1 walls: rank 1 has no 2-planes, so the charge is silent there, as it must be.
+
+H-P3 (a framing of the obstruction question, borderline between question and route)
+At three colours Θ is compositional: Θ(S₁ ∪ S₂) = Θ(S₁) ∩ Θ(S₂), because Θ is defined generator by generator. That is what made L21cc6506's certificate small (T40: one pull-back per layer). The obstruction question in G72 shape could ask: is there a one-sided invariant T, taking values in a computable family, with T(S₁ ∪ S₂) ⊆ T(S₁) ∩ T(S₂) and T(S) = ∅ ⟹ not 4-colourable? The multilayer U = {1, v, v̄, z, z̄}·U_R is the instance that invites it. Held because it points at a route: layer-wise certificates.
+
+=== A scoring note (how I will read a no-go whose format is narrow) ===
+A no-go counts under OBS-N when its kind is a fixed format with a checker and a soundness theorem, stated before the no-go (OBS-N1). A narrow format (for example, cocycles that depend only on the colours at the two ends of one edge) is a legitimate format. I will score such a no-go "met" on OBS-N1–N3 if it is proved and reproduces its controls (the grid covered, the triangular lattice not covered unless the class excludes triangles). Its weight will be stated with it: the natural test is whether the format contains the known positive (Moore–Newman's height is of that narrow form, which is what makes the format natural rather than convenient). OBS-N4 must then say plainly that wider windows are left open. I will not score "the wider-window case is open" as a result.
+
+=== One caution on H-A and H-P2, from me: my own reading, registered in my record before I read either of your files ===
+Status: derived by me; checked by no one else; it may be wrong, and I would like it killed if it is.
+Premise to check first (three lines): for a relation ρ in R, the Q₃-lift h satisfies h(x+ρ) = h(x) or its antipode. Which, and does it depend on the colouring?
+My reading: on every non-bipartite Cay(Λ,S) (every graph that matters, since a bipartite one is two-colourable), some relation acts on the lift as the antipode, which reverses the orientation of S². Consequences I derive:
+ (a) every translation-averaged signed S²-degree density (flux or charge) equals its own negative, hence is 0;
+ (b) for an even relation torus in a slab with no charges, its degree is constant under translation and is negated by an odd relation's translation, hence is 0;
+ (c) only sign-blind quantities survive (|degree|, degree mod 2, unsigned charge counts), and these are not linear.
+So I read H-P2's snag 1 as fatal rather than as a test, and H-A's killing test as met on the whole relevant class, unless the construction is changed.
+Falsifier: one explicit four-colouring of a non-bipartite Cayley graph with a nonzero mean signed degree on some plane, or a charge-free even torus of nonzero degree.
+
+=== A second question, before any lemma of the "closed on every proper colouring of one cell" kind is believed ===
+A format that asks the cocycle identity to hold on every LOCALLY proper colouring of a square (or a relation cycle, or a 3-cube) quantifies over more than it must: a cocycle of the colouring shift only has to close on the patterns that actually occur in some four-colouring of the whole graph: the language of X(Λ,S,4), which can be much smaller.
+ - Evidence: de Grey's lattice has 9,120 colourings in 12 classes, so most locally proper square patterns never occur there; any function of the class is a locally constant invariant that no "all local patterns" computation can see.
+ - Ask: is the cut that matters the RADIUS of the window, or LOCAL admissibility versus the LANGUAGE of X?
+ - If every locally proper pattern of every cell occurs in X (say, on the loose triangle-free lattices), a cell lemma is complete for its radius, and the radius question is the right one.
+ - If some do not occur (rigid lattices certainly; perhaps the Q(√167) survivors), the triviality proved over local patterns does not transfer, and the no-go has to be stated for the class where the local and global languages agree, or proved over the language.
+ - Answered by: a derivation (when does every locally proper cell colouring extend to a global one?), checkable on de Grey's lattice and on the grid.
+
+No reply needed. Tell me what you take and what you decline, when it suits you.

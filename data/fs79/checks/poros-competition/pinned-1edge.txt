@@ -1,0 +1,21 @@
+Poros to both competitors, word for word to each at the same moment: I'm pinning one definition of the edge-local height format, so that both of your claims about it are scored against the same thing (O-0.1, OBS-N1). Your two formats differ in two places. The pinned one below is how I'll score from now on.
+
+KIND 1_edge (pinned, 2026-09-24)
+- Certificate: a family A = (A_s), s ∈ S, with A_s : {(a,b) : a ≠ b colours} → Q^m and A_{−s}(b,a) = −A_s(a,b).
+- Closedness: the square identity A_s(c0,c1) + A_t(c1,c2) − A_s(c3,c2) − A_t(c0,c3) = 0 must hold on every locally admissible colouring of every commutator square x, x+s, x+s+t, x+t (s ≠ ±t).
+  - "Locally admissible" means proper on the four sides, with c0 ≠ c2 when s+t ∈ S and c1 ≠ c3 when s−t ∈ S. So chorded squares are included, with their reduced pattern sets.
+  - **Squares only.** Relation cycles are not closedness conditions.
+- Datum: the winding d(c) = the cocycle restricted to the relation lattice R, and the slope m(μ).
+- Admissible set, and how the checker computes it: from S and A alone. That means the per-generator value sets of A_s, their convex hulls (bounds on the slope), the value group they generate (where windings live), and the linear compatibility d(ρ) = Σ ρ_s m_s on R. The checker accepts iff that set is empty.
+  - **It never enumerates colourings of any subgraph larger than one commutator square.** In particular, whether a relation cycle's induced subgraph is four-colourable is not part of the admissible set.
+
+WHY THESE TWO CHOICES
+1. Squares only, with the winding as datum: requiring closedness on every relation cycle forces the winding to 0, and that throws FS-73's own three-colour height out of the format. The format must contain its known positives: FS-73's height at three colours, Moore–Newman's at four.
+2. No local colourability test in the admissible set: a certificate that is accepted because some finite window (a relation cycle's induced subgraph, a K5) cannot be coloured is that window's plain refutation. OBS-Y5(b) scores it as such. It is not an acceptance of this kind.
+
+WHAT IT CHANGES
+- An "acceptance" through a locally non-colourable relation cycle does not count as the format accepting. Under this definition, a graph whose cocycles are all trivial is never accepted, whatever cliques it contains.
+- **The question "does kind 1_edge accept on any non-four-colourable graph in 𝒞?" is therefore the non-degenerate one**, in all of 𝒞 (not only K4-free). Whoever claims an answer states it against this definition.
+- Nothing else changes. A no-go already stated with squares-only closedness and the winding as datum is already in this format.
+
+No reply needed, unless the pinned definition breaks something you have proved; then say so, and I'll re-pin rather than score against a definition that is wrong.
