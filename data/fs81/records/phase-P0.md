@@ -171,7 +171,7 @@ writing μ_k = c + 5^K m_k + δ_k forces L_k(δ) = n Δ²δ_k + δ_k ∈ 5^K(ℤ
 interval range, and demands a checked Farkas vector for each surviving combination. Hand steps: R2 (ℚ-linearity and the recurrence)
 and R4's algebra, plus T22's ⟹; grade [cert + hand]. The checker's own self-test: 8 plants (a case dropped, a multiplier doubled or
 negated, the equality multipliers zeroed, a field past the threshold, a level too low, d ≢ 3 mod 4, and R3 run without the
-order-3 points, which must fail because they are real points of Θ_K). **Awaiting the owner's plant** before its verdicts are believed.
+order-3 points, which must fail because they are real points of Θ_K). **The owner's plant passed** (Farkas vectors swapped between two cases, 10 random swaps in each of `d83-B-K2.json` and `d491-B-K3.json`: all 20 refused), and a mutant whose target enumeration skips the lowest half-integer target fails this self-test; the owner re-derived R2 and R4 by hand.
 The generator reports a missing exact Farkas vector as an error, never as "feasible"; at the other side of the threshold
 (K_B − 1) it stops at the first feasible case.
 
@@ -191,7 +191,7 @@ scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g2 -- python3 tools/fs81_p0
 scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g3 -- python3 tools/fs81_p0.py configs --cap-s 1800 --stage configs-g3 --fields 323,347,371,383,395
 ```
 
-### P0.3 results: B at K_B(d), structural certificates (checker verdicts PENDING the owner's plant)
+### P0.3 results: B at K_B(d), structural certificates — **all 25 open fields landed** [cert + hand]
 
 | d | mod 8 | mod 24 | census | K_B | pairs | at K_B: verdict (checked Farkas combinations) | certificate | at K_B − 1 |
 |---|---|---|---|---|---|---|---|---|
@@ -237,3 +237,10 @@ scripts/slot.py --mem 3 --cpus 1 --name fs81-configs-g3 -- python3 tools/fs81_p0
 | 431 | 7 | 23 | certified | 3 | 70 | EMPTY (64) | `data/fs81/phase0/struct/d431-B-K3.json` | δ-system feasible (first case found) |
 
 Every row at K_B: `fs81_struct_check.py` PASS. Relation-tree route on the same object: d = 11, K = 1 EMPTY (9,186 nodes), the frozen checker PASS; d = 35, K = 2 UNDECIDED at 1,821 s and 835,827 nodes (`data/fs81/phase0/p03.jsonl`).
+
+**Scope of the P0.3 certificates (the owner's wording, adopted).** Each certificate proves `χ(ℚ(√d)²) ≥ 4` at grade **[cert + hand]**,
+the hand part being R2 (the ℚ-linear extension and the recurrence), R4 (the coefficients n, −(2n−1), n sum to 1, so L_k lands in
+5^K(ℤ + ½)²) and FS73-T22's ⟹ direction. It is **independent of the field-level theorem F-T4**: it uses T22 and the rational layer
+(re-proved by the checker at the given K), not F-T4's lemmas L1 or L4 — the two routes are separate evidence. **The structural form
+is the instrument, not a convenience:** the relation tree was priced out on B (UNDECIDED at 835,827 nodes in 30 minutes over ℚ(√35),
+50 pairs), while the structural certificate decides each field in about a second.
