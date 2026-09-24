@@ -14,12 +14,13 @@ this"**, meaning FS-79. That is the owner plus up to three agents.*
    - WORKFLOW step 3.3;
    - `plans/PROTOCOL-competitor-and-advisor.md` (the design, as amended at FS-73's close);
    - FS-73's record `plans/FS73-rigidity-dichotomy.md` §R-close.
-3. **The owner's held items for FS-79** are at `~/source/lean-dir-owner/FS79-held-items.md`, outside the repository on purpose.
+3. **Keep `plans/FS79-close-inventory.md` current.** Log every item the moment it comes up (WORKFLOW step 5).
+4. **The owner's held items for FS-79** are at `~/source/lean-dir-owner/FS79-held-items.md`, outside the repository on purpose.
    - The owner reads them.
    - The planner, the plan-phase advisor and the competitors never do.
    - The competition-phase advisor gets them in its brief, to offer both competitors at once after each has written its own first
      route (FS-73's ruling R1).
-4. **Then open FS-79 at stage A** (§2).
+5. **Then open FS-79 at stage A** (§2).
 
 ## 1. Rules in force
 
@@ -56,7 +57,7 @@ this"**, meaning FS-79. That is the owner plus up to three agents.*
 | **Phase 0: a measurement** | one implementer, run during stage A if the cap allows | A periodic four-colour screen of ℚ(√167) lattices, by rank, plus implementer C's residue-set rule (FS-73 P2b) re-run at four colours. It lists which lattices *could* need five colours, which is §IQ item 5 and feeds FS-59. It must not shape the competition's question. |
 | **B: modeling passes** | the planner, or a fresh one above about 500k tokens | Probably light. It is a derivation milestone and may add no Lean; the planner says which passes apply. |
 | **C: the competition** | fresh de Bruijn and Coxeter competitors, and a fresh Poros | Identical briefs written from §IQ. Working files and the advisor's record live in scratch until hand-back. The advisor's brief carries both held-item sets (the owner's and plan-phase Poros's). Retractions are counted. Each theorem's key step is re-derived by the other side or by Poros, plus one step by the owner. |
-| **D: the close** | a fresh planner, from an owner-written inventory (FS-73's `plans/FS73-close-inventory.md` is the template) | WORKFLOW 9, including the re-read of §IQ: did the result come through the structural question? That is G72's first count. |
+| **D: the close** | a fresh planner, working from `plans/FS79-close-inventory.md`, which the owner keeps current from the start (WORKFLOW 5) | WORKFLOW 9, including the re-read of §IQ: did the result come through the structural question? That is G72's first count. |
 
 **Budget anchors from FS-73:**
 - the plan-phase planner used about 580k tokens, too many; brief the plan and the modeling passes as separate agents;
@@ -72,7 +73,7 @@ this"**, meaning FS-79. That is the owner plus up to three agents.*
 2. **Private files never go in `plans/`.** Working files and advisor records live in scratch until hand-back.
 3. **Grep the held Polymath16 threads for every headline object** (G49). Hubai had row 78's count in 2018, in
    `~/source/library/notes/polymath16-threads-1-18-text.txt`.
-4. **Write the close inventory early,** as soon as the last agents are running, and have the close planner tick it.
+4. **The close inventory runs from the start** (WORKFLOW step 5, Kooshi): log every item the moment it comes up, so nothing lives only in the coordinator's context. FS-79's is already open and seeded: `plans/FS79-close-inventory.md`.
 5. **Verify every commit hash an agent reports.** Two agents reported hashes that did not exist.
 6. **Stop a finished agent that keeps waking** (TaskStop) once its work is committed and nothing of its is running.
 7. **For every result,** register the prediction before any run, have the owner check one step independently, and plant one fault of

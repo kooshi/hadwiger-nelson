@@ -160,7 +160,29 @@ advancement (Kooshi, 2026-09-22).
    excess to a later milestone — and whenever we carry scope forward, drop a stub in `plans/` capturing the carry-forward
    notes. Every phase names its budget, its stop rule, its checkpoint path and resume command, and what a kill redoes.
 
-5. **Commit** the subplan (skeleton included) and move directly to modeling without pausing.
+5. **Commit** the subplan (skeleton included), **together with the milestone's close inventory**, and move directly to modeling
+   without pausing.
+
+   **The close inventory** (`plans/FSnn-close-inventory.md`; Kooshi, 2026-09-23) is opened at this commit and written to **the
+   moment an item comes up**, never at the end. The rule: **nothing the close will need lives only in the coordinator's context, or
+   in a scratch directory.**
+   - **One line per item, with its source address.** The items are:
+     - a result, or a theorem proved outside the kernel;
+     - a correction owed to `CLAUDE.md`, `LEDGER.md`, a plan or a record;
+     - a prediction registered or scored;
+     - an owner ruling, or an owner error;
+     - an agent's slip;
+     - a tool defect;
+     - a prior-art debt;
+     - a stub to mint or re-aim;
+     - a file that must move out of `/tmp` into the repository.
+   - **The coordinator is its only writer until the close.** Agents send their items to the coordinator, who logs them the same
+     turn. Agent ids and anything the competitors must not read (held items) stay out of it.
+   - **The close (step 9) is worked from it.** The close planner ticks each item "done" or "declined, with the reason", reads
+     every number from the item's source rather than from the inventory, and adds anything it finds missing.
+   - **Why:** at FS-73's close the material was spread across a pre-compaction handoff, the coordinator's scratch notes and ten
+     records. It survived only because an inventory was written at the end, from memory. Written as it happens, a compaction or a
+     crash costs nothing. `plans/FS73-close-inventory.md` is the template.
 
 6. **Modeling passes** — reforge the subplan through the de Bruijn modeling skills before implementing. Each skill is a
    fresh **Skill**-tool invocation scoped to the current milestone — *always* freshly invoked, *never* worked from memory,
@@ -192,9 +214,9 @@ advancement (Kooshi, 2026-09-22).
    gate has the rationale and the baseline rule): the build green · zero `sorry` (`grep -rn --include="*.lean" "sorry"`) ·
    `#print axioms` clean on the public surface · linters silent (`lake lint`) · spec examples passing.
 
-9. **Close** — one closing commit that also **updates `CLAUDE.md` § Frontier and `LEDGER.md`** (the state-of-the-art summary, the
-   novel-results ledger's new row, the ranked paths forward); a milestone whose close does not update the Frontier is not closed (rule
-   set 2026-08-04). In the same close:
+9. **Close**, worked item by item from the close inventory (step 5), which the close planner ticks. One closing commit also
+   **updates `CLAUDE.md` § Frontier and `LEDGER.md`** (the state-of-the-art summary, the novel-results ledger's new row, the ranked
+   paths forward); a milestone whose close does not update the Frontier is not closed (rule set 2026-08-04). In the same close:
    - **Re-rank the frontier set** (`plans/FRONTIER-STUBS.md`; Kooshi, 2026-09-06): add every candidate the milestone surfaced
      as a stub file, re-rank the table with each row's bearing on χ ≥ 6 stated honestly, demote with a banner, never delete;
      § Paths forward mirrors the top of the table. Both files hold current state only: rewrite the affected text in place —

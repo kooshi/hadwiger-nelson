@@ -4,6 +4,8 @@
 proof over ℚ(√167) was found and what the next step up could be — "specifically not an extension to what we found, but an abstraction
 of the reframing that allowed us to see it". It is **the first milestone planned under G72 and WORKFLOW 3.3 from the start**. Rank 1.*
 
+**Close inventory:** `plans/FS79-close-inventory.md`, opened at minting and kept current by the coordinator (WORKFLOW step 5).
+
 ## Mission, in plain language
 
 **The target is five colours over ℚ(√167).**
