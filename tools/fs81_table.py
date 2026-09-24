@@ -61,8 +61,13 @@ def main():
     for r in recs:
         by[r["d"]].append(r)
     fields = sorted(by, key=lambda d: (d not in OPEN, d))
+    print("**Only an `E` cell speaks about the field.** It proves χ(ℚ(√d)²) ≥ 4 at grade [cert + hand: FS73-T22 ⟹]. Every other "
+          "cell is a typed null for the object named. Codes: `E` EMPTY, certificate PASSed; `N` NONEMPTY certified on the listed "
+          "configuration only; `N*` NONEMPTY certified on every unit vector of the object's span (its saturation); `N(θ)` a saturation "
+          "the configuration's own θ already colours; `U` UNDECIDED at the cap (the tree is a weak finder of isolated points: an "
+          "isolated point of order above 12 reads UNDECIDED).\n")
     print("### Per field\n")
-    print("| d | mod 8 | census | first certified EMPTY (object; certificate) | otherwise |")
+    print("| d | mod 8 | census | χ ≥ 4 certified by (object; certificate) | otherwise |")
     print("|---|---|---|---|---|")
     for d in fields:
         first = next((r for r in by[d] if r["verdict"] == "EMPTY" and r.get("check") == "PASS"), None)
@@ -88,7 +93,12 @@ def main():
                 chk = r.get("finder", "")
             ver = code(r)
             if r["verdict"] == "UNDECIDED":
-                ver += " at cap"
+                ver += " at cap (weak finder of isolated points)"
+            if (r.get("by_theorem") or (r.get("config") == "A" and r["d"] % 24 == 11)) and not r.get("saturated"):
+                ver += ("; NONEMPTY by theorem [hand, verifier §4.0]" if r["verdict"] == "NONEMPTY"
+                        else "; nonempty by theorem [hand, verifier §4.0]")
+            if r.get("config") == "A" and not r.get("saturated"):
+                ver += f"; d ≡ {r['d'] % 24} (mod 24)"
             print(f"| {d} | {obj(r)} | {ver} | {chk} | {st.get('nodes', '')} | {st.get('wall_s', '')} |")
 
 

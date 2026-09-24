@@ -181,9 +181,12 @@ def check(cert, enumerate_units: bool = True) -> str:
             if not THIRD <= v - math.floor(v) <= TWOTHIRD:
                 raise Fail(f"theta({u}) = {v} is not in [1/3, 2/3] mod 1")
         if enumerate_units:
-            return f"PASS NONEMPTY: theta is a point of Theta for all {len(everything)} unit vectors of the key lattice"
+            return (f"PASS NONEMPTY: theta is a point of Theta for all {len(everything)} unit vectors of the key lattice "
+                    f"({len(everything) // 2} pairs), so the key lattice's unit-distance graph is 3-coloured by floor(3 theta(x)) "
+                    f"mod 3; a typed null for Q(sqrt {d})^2, never a colouring of the plane")
         return (f"PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the {len(units)} listed "
-                f"pairs, so Cay(span U, +-U) is 3-colourable; the key lattice's other unit vectors were NOT checked")
+                f"pairs, so Cay(span U, +-U) is 3-colourable; the key lattice's other unit vectors were NOT checked; a typed "
+                f"null for the field")
     if cert["verdict"] != "EMPTY":
         raise Fail("unknown verdict")
     N = len(units)
@@ -196,11 +199,15 @@ def check(cert, enumerate_units: bool = True) -> str:
         if any(sum(r[j] * units[j][i] for j in range(N)) != 0 for i in range(4)):
             raise Fail(f"not a relation: {r}")
     leaves = check_tree(cert["tree"], relations, N)
+    conclusion = (f"So Cay(span U, +-U), a subgraph of the unit-distance graph of Q(sqrt {d})^2, is not 3-colourable: "
+                  f"chi(Q(sqrt {d})^2) >= 4 [cert + hand: FS73-T22 =>]")
     if not enumerate_units:
         return (f"PASS EMPTY: {leaves} leaves refuted; {len(relations)} relations verified; units {N} pairs "
-                f"(completeness in the key lattice not checked: --no-enumerate)")
+                f"(completeness in the key lattice not checked: --no-enumerate). Completeness is irrelevant to an EMPTY verdict. "
+                + conclusion)
     return (f"PASS EMPTY: {leaves} leaves refuted; {len(relations)} relations verified; units {N} pairs, "
-            f"{'the complete' if complete else 'NOT the complete'} unit set of the key lattice ({len(everything)} vectors)")
+            f"{'the complete' if complete else 'NOT the complete'} unit set of the key lattice ({len(everything)} vectors "
+            f"= {len(everything) // 2} pairs). " + conclusion)
 
 
 # ---------------------------------------------------------------- planted faults
@@ -455,8 +462,11 @@ def main() -> None:
     if len(args) != 1:
         raise SystemExit(__doc__)
     cert = load(args[0])
+    import hashlib
+    with open(args[0], "rb") as fh:
+        sha = hashlib.sha256(fh.read()).hexdigest()[:16]
     try:
-        print(check(cert, enum))
+        print(f"{check(cert, enum)} [d = {cert.get('d')}; certificate file sha256 {sha}]")
     except Fail as e:
         print(f"FAIL: {e}")
         sys.exit(1)

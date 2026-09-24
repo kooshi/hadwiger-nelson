@@ -230,6 +230,7 @@ def cmd_controls(cap_s):
 # ================================================================ P0.2 configurations
 
 SAT_DMAX = 5000                  # saturate a NONEMPTY configuration (all unit vectors of its span) while D ≤ this
+SAT_CAP = 600.0                  # the saturation tree's cap in P0.2 (the step is an addition to the brief; kept inside its day)
 
 
 def saturation(d, D, U):
@@ -248,14 +249,29 @@ def cmd_configs(cap_s, fields, names, K, stage, saturate=True):
                 continue
             D, U = T.units_of(d, layers, K)
             tag = f"d{d}-{name.replace(':', '_').replace('+', 'p').replace('-', 'm').replace('|', '-')}-K{K}"
-            meta = {"config": name, "K": K, "open": d in OPEN}
-            run_item(stage, tag, d, D, U, cap_s, meta, screen=SCREEN)
+            meta = {"config": name, "K": K, "open": d in OPEN, "d_mod_24": d % 24}
+            # the verifier's theorem (stage C §4.0, [hand]): A's listed configuration is NONEMPTY at every K for d ≡ 11 (mod 24);
+            # there it gets the screen only (a tree would only look for a point known to exist), never tree time
+            a_by_theorem = name == "A" and d % 24 == 11
+            if a_by_theorem:
+                meta["by_theorem"] = "NONEMPTY by theorem [hand, verifier §4.0] (d ≡ 11 mod 24)"
+            run_item(stage, tag, d, D, U, 0.0 if a_by_theorem else cap_s, meta, screen=SCREEN)
+            rec = next((json.loads(l) for l in open(P0 / f"{stage}.jsonl") if json.loads(l)["tag"] == tag), None)
+            if a_by_theorem and rec is not None and rec["verdict"] == "EMPTY":
+                raise SystemExit(f"STOP: a certified EMPTY on A's listed configuration at d = {d} ≡ 11 (mod 24) contradicts the "
+                                 f"verifier's theorem (§4.0); either the claim or the builder is wrong. Record: {tag}")
             if not saturate or D > SAT_DMAX:
                 continue
-            rec = next((json.loads(l) for l in open(P0 / f"{stage}.jsonl") if json.loads(l)["tag"] == tag), None)
-            if rec is None or rec["verdict"] != "NONEMPTY" or (tag + "-sat") in done_tags(P0 / f"{stage}.jsonl"):
+            if rec is None or (tag + "-sat") in done_tags(P0 / f"{stage}.jsonl"):
+                continue
+            if rec["verdict"] != "NONEMPTY" and not (a_by_theorem and rec["verdict"] == "UNDECIDED"):
                 continue
             sat = saturation(d, D, U)
+            if "theta_abce_dual" not in rec:                     # A by theorem with no point found: saturate blind
+                if len(sat) > len(U):
+                    run_item(stage, tag + "-sat", d, D, sat, min(cap_s, SAT_CAP), dict(meta, saturated=True, N_config=len(U)),
+                             screen=SCREEN)
+                continue
             th = [F(a, b) for a, b in rec["theta_abce_dual"]]
             if len(sat) == len(U) or all(F(1, 3) <= (x := sum(t * c for t, c in zip(th, u))) - math.floor(x) <= F(2, 3)
                                           for u in sat):
@@ -263,7 +279,7 @@ def cmd_configs(cap_s, fields, names, K, stage, saturate=True):
                                                    finder=f"the configuration's θ colours all {len(sat)} pairs of its span",
                                                    saturated=True))
                 continue
-            run_item(stage, tag + "-sat", d, D, sat, cap_s, dict(meta, saturated=True, N_config=len(U)), screen=SCREEN)
+            run_item(stage, tag + "-sat", d, D, sat, min(cap_s, SAT_CAP), dict(meta, saturated=True, N_config=len(U)), screen=SCREEN)
 
 
 def census_open(d):
