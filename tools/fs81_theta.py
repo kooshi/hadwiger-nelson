@@ -131,6 +131,10 @@ def configuration(d, name, K=1):
     """The layer set of a named configuration; its units are layers·U^(5^K).
     A = {1, v, v̄};  B = {v^k : |k| ≤ 2};  C:a:c:s = {1, v, z} with z at p = 2 (T41's shape);  D:a:c:s = {1, v, z₅} (p = 5);
     E:a:c = {1, v, v̄, z, z̄} at p = 2 (L21cc6506's five layers)."""
+    if name.startswith("conj|"):                       # complex conjugation of every layer (an isometry: Θ equivariant)
+        return [conj(b) for b in configuration(d, name[5:], K)]
+    if name.startswith("gal|"):                        # √d ↦ −√d on every layer (additive, preserves the unit set)
+        return [(a, -b, c, -e) for a, b, c, e in configuration(d, name[4:], K)]
     v = v_rot(d)
     one = (F(1), F(0), F(0), F(0))
     if name == "A":

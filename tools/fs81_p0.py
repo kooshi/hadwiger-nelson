@@ -247,7 +247,7 @@ def cmd_configs(cap_s, fields, names, K, stage, saturate=True):
             except (AssertionError, ValueError, IndexError):
                 continue
             D, U = T.units_of(d, layers, K)
-            tag = f"d{d}-{name.replace(':', '_').replace('+', 'p').replace('-', 'm')}-K{K}"
+            tag = f"d{d}-{name.replace(':', '_').replace('+', 'p').replace('-', 'm').replace('|', '-')}-K{K}"
             meta = {"config": name, "K": K, "open": d in OPEN}
             run_item(stage, tag, d, D, U, cap_s, meta, screen=SCREEN)
             if not saturate or D > SAT_DMAX:

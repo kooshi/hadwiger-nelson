@@ -52,7 +52,7 @@ NONEMPTY (T41: of the ten 3-subsets of `{1, v, v̄, z, z̄}` only `{1, v, z}` an
 ```
 L=/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock
 flock -w 1800 $L python3 tools/fs81_p0.py controls --cap-s 1800          # P0.0
-flock -w 1800 $L python3 tools/fs81_p0.py configs  --cap-s 1800          # P0.2, all 40 census fields, K = 1
+flock -w 1800 $L python3 tools/fs81_p0.py configs  --cap-s 1800 --fields 35,83,107,131,155,179,203,215,227,251,263,287,299,323,347,371,383,395,407,419,443,455,467,479,491,11,23,47,59,71,95,119,143,167,191,239,311,335,359,431   # P0.2: the 25 open fields first, then the 15 certified (controls)
 ```
 
 ## 3. P0.1 — the rational layer, exactly (a measurement of a finite shadow)
@@ -104,3 +104,30 @@ every tree: a NONEMPTY configuration whose points are isolated and of small orde
 UNDECIDED. Isolated points of order beyond 12 are still found only by the tree (G21: a finder measures its search order).
 **Checker parity:** `tools/fs81_theta_check.py` in its default mode printed the same line as the frozen checker on all 73 control
 certificates.
+
+## 5. P0.2 — the K = 1 configurations over the 40 census fields
+
+**The configurations.** `n = (d+1)/4`, `v = ((2n−1) + i√d)/(2n)`. A = `{1, v, v̄}·U^(5)`; B = `{vᵏ : |k| ≤ 2}·U^(5)`;
+C = `{1, v, z}·U^(5)` with `z = (1+i)(a − s·i√d)/(2c)`, `a² + d = 2c²`; D = `{1, v, z₅}·U^(5)` with `z₅ = (2+i)(a − s·i√d)/(5c)`,
+`a² + d = 5c²`. **The (a, c) is not unique** (the brief's form is right, the spec must name the solution): at d = 167 the smallest
+solution of `a² + 167 = 2c²` is (11, 12), and T40's z is (15, 14). P0.2 runs the two smallest (a, c) at each field, each with
+both signs s = ±. C exists only at d ≡ 7 (mod 8) (a² + d = 2c² forces it), D wherever −d is a square mod 5 and the norm equation
+is solvable (131, 155, 179, 251, 395, 419, 479, 491 among the open fields; the brief's "d ≡ 3 (mod 8)" is not required).
+
+**Saturation (added, approved by the owner):** a configuration's span can hold unit vectors it does not list. At d = 167,
+span A is L21cc6506's lattice, whose Θ is empty, while A's own 18 pairs are 3-colourable. So for every NONEMPTY configuration with
+D ≤ 5,000, the driver enumerates every unit vector of the span (O(D²)); if the configuration's θ fails on one, the saturation gets
+its own tree (`…-sat`). An EMPTY saturation proves `χ(ℚ(√d)²) ≥ 4` at the same grade (FS73-T11: a refusal on a subgraph carries
+up). In every table below a saturation is its own object.
+
+**Orbits (the modeling agent's §B.1.10, adopted at the owner's request, 2026-09-24).** Θ₃ is equivariant under multiplication by a
+unit vector, complex conjugation and `√d ↦ −√d`. Computed: complex conjugation and the Galois map send C(s = +) to the same set,
+`{1, v̄, z̄}·U^(5)`, which is neither C(+) nor C(−); likewise for D. So the two signs are the two orbits (T41's `{1, v, z}` and
+`{1, v, z̄}`), and **the orbit keying removed no item from P0.2's list**: it held one representative per orbit already. **The free
+control:** each orbit run both ways must agree. At d = 167: C(15, 14, +) EMPTY and its conjugate EMPTY (1,587 and 1,584 nodes,
+frozen PASS); C(15, 14, −) NONEMPTY and its conjugate NONEMPTY. At d = 47: C(5, 6, ±) and their conjugates all NONEMPTY.
+Records: `data/fs81/phase0/orbits.jsonl`.
+
+**An int64 overflow stopped the first launch** at d = 83's saturated B (the screen's Hermite coordinates exceed int64 at D = 4,410);
+a Python exception, not a process crash; fixed by reducing the coordinates mod lcm(3, 6, 9, 12) first (commit `a7fa50e5`), and the
+relaunch resumed past the recorded items.
