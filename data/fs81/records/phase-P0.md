@@ -131,3 +131,52 @@ Records: `data/fs81/phase0/orbits.jsonl`.
 **An int64 overflow stopped the first launch** at d = 83's saturated B (the screen's Hermite coordinates exceed int64 at D = 4,410);
 a Python exception, not a process crash; fixed by reducing the coordinates mod lcm(3, 6, 9, 12) first (commit `a7fa50e5`), and the
 relaunch resumed past the recorded items.
+
+**Mid-run changes (each at a clean boundary; no finished item re-run).**
+- *The verifier's theorem (stage C §4.0, [hand]):* A's listed configuration is NONEMPTY at every K for d ≡ 11 (mod 24). There A now
+  gets the small-order screen only, never tree time; a row whose screen misses reads "UNDECIDED; nonempty by theorem"; any certified
+  EMPTY on A's listed configuration at d ≡ 11 (mod 24) stops the driver (it would contradict a derived claim). A's rows carry d mod 24.
+  Saturations are outside the theorem and still run.
+- *The experience pass (plan §B.3.1–§B.3.2).* **Adopted:** every PASS line of `tools/fs81_theta_check.py` now names d, the
+  certificate file's sha256 (16 hex) and the conclusion with its grade ("… not 3-colourable: χ(ℚ(√d)²) ≥ 4 [cert + hand: FS73-T22 ⟹]";
+  NONEMPTY lines end "a typed null for the field, never a colouring of the plane"), and counts in one unit ("M vectors = M/2 pairs");
+  the table has the header sentence ("only an `E` cell speaks about the field"), the column "χ ≥ 4 certified by", and the words
+  "listed configuration" / "saturation". The self-test (10 EMPTY plants per mode, 9 NONEMPTY) and both coverage mutants were re-run
+  after the change: the shipped checker passes, each mutant fails. **Declined:** rewording the `--no-enumerate` parenthesis — the
+  explanation is appended after it instead, so every earlier record's `check_line` stays an exact prefix of the new line.
+- *Saturation trees are capped at 600 s in P0.2* (the configurations keep the brief's 30 min): the saturation step is an addition to
+  the brief and must fit its one-day budget. The first 54-pair saturation (d = 83, B, D = 4,410) ran its full 30 min: UNDECIDED at
+  653,274 nodes, its checkpoint kept (`data/fs81/phase0/ckpt/d83-B-K1-sat.json*`) for a later resume.
+
+## 6. P0.3 — B at the verifier's threshold (T8: B at level K is EMPTY iff d < 21·5^(K−1))
+
+P0.2 is paused (15 records; resumable by its command in §2) so that P0.3, predicted decisive for every open field, runs first; the
+owner asked for the node counts at the first two fields before the day is committed. Targets: B = `{vᵏ : |k| ≤ 2}·U^(5^K)` at
+`K_B(d)`, the least K with `d < 21·5^(K−1)`: K = 2 at d = 35, 83 (50 pairs; D = 4,050 and 22,050); K = 3 at the other 23 open
+fields (70 pairs; D from 182,250 to 3,782,250). Certification by `tools/fs81_theta_check.py --no-enumerate` (the frozen checker's
+enumeration would cost 8·10⁹ loop iterations already at d = 35).
+
+```
+flock -w 1800 $L python3 tools/fs81_p0.py configs --stage p03 --no-saturate --cap-s 1800 --names B --K 2 --fields 35,83
+flock -w 1800 $L python3 tools/fs81_p0.py configs --stage p03 --no-saturate --cap-s 1800 --names B --K 3 --fields <the other 23>
+```
+
+**The structural route (chosen for P0.3; the relation tree kept as a secondary, independent route).** The relation tree on B at
+K = 2, d = 35 (50 pairs) had searched 695,570 nodes in 1,440 s without a verdict. The verifier's T8 mechanism gives a certificate
+whose size does not grow with n: `tools/fs81_struct.py` (generator) and `tools/fs81_struct_check.py` (standalone checker,
+standard library only). The reduction, stated in both files' docstrings: μ_k = (θ(vᵏ), θ(ivᵏ)) satisfies n Δ²μ_k + μ_k = 0;
+μ_k ∈ Θ_K ⊆ c + (P ∪ F) + 5^K ℤ² (the rational layer, P0.1, which the checker re-proves by induction on the level at the given K);
+writing μ_k = c + 5^K m_k + δ_k forces L_k(δ) = n Δ²δ_k + δ_k ∈ 5^K(ℤ + ½)² for k = −1, 0, 1; the checker re-enumerates all
+3,125 assignments of δ-types (the polygon P or one of the four order-3 points) and every half-integer target meeting L_k's exact
+interval range, and demands a checked Farkas vector for each surviving combination. Hand steps: R2 (ℚ-linearity and the recurrence)
+and R4's algebra, plus T22's ⟹; grade [cert + hand]. The checker's own self-test: 8 plants (a case dropped, a multiplier doubled or
+negated, the equality multipliers zeroed, a field past the threshold, a level too low, d ≢ 3 mod 4, and R3 run without the
+order-3 points, which must fail because they are real points of Θ_K). **Awaiting the owner's plant** before its verdicts are believed.
+The generator reports a missing exact Farkas vector as an error, never as "feasible"; at the other side of the threshold
+(K_B − 1) it stops at the first feasible case.
+
+Launch (the new resource rule: RAM rationed by `scripts/slot.py`, threads not; light, one core):
+```
+scripts/slot.py --mem 2 --cpus 1 --name fs81-p03-struct -- python3 tools/fs81_struct.py sweep 35,83,107,131,155,179,203,215,227,251,263,287,299,323,347,371,383,395,407,419,443,455,467,479,491,11,23,47,59,71,95,119,143,167,191,239,311,335,359,431 data/fs81/phase0/p03-struct.jsonl data/fs81/phase0/struct
+```
+(resumable: recorded (d, K) pairs are skipped; each item is seconds.)
