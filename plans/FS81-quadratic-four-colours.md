@@ -846,3 +846,47 @@ not the verification of a fixed statement.
 
 **Retractions:** planner 0, Poros 0. By G51's warning, zero retractions means the disagreement has not started; stage C is where it
 should.
+
+---
+
+## §R-review. The owner's scoring of stage A (2026-09-24)
+
+*Written by the product owner after reading the plan in full. The body above is the planner's and is not edited; corrections are
+listed here and bind the stages that follow.*
+
+**Accepted.** Every hand-back acceptance item is met.
+
+| item | verdict |
+|---|---|
+| §G | every grokking G1–G73 has a verdict with a reason. Rows 1–81 are grouped only where silent for one reason. Method rules and FS-73 T1–T45 are walked individually, with T31–T35 and T36–T37 in groups. The § B and derivation blocks carry named bearing lines. §G.7 turns every B into an instruction, and §G.8 records what changed. **The test of 3.1 is met emphatically:** the re-grokking (G7 + G62 + G55 + T40) produced §F and re-aimed the milestone. |
+| §PA | the eight questions are answered, and the queries are logged with hit counts and whose text each is. `[Fischer1990]` was re-read, and **the relation is his** (Thm 10(ii), Ex. 4). `[DeVosEtAl2007]` was read in full. The Johnson debt is stated with a claim boundary (§PA.4), and §PA.5 carries the object-level lessons forward. |
+| §IQ | my challenge is answered: 3.3 is degenerate at the lattice level and not at the field level. The structural form is about every three-colouring of every F ⊆ ℝ. Its check lies on the other side (Fischer's Thm 9), and the open-instance list is complete. |
+| the plan | every phase names its budget, stop rule, checkpoint, resume and acceptance. Stage C has a blind-read list and a stall criterion. Stage D calibrates before it aims. The sequencing respects the cap. |
+
+**Corrections, binding on the later stages:**
+1. **§G.1's G54 line is wrong at 11 and 19.** It says every usable plane of ℚ(√47) refuses four colours by the ratio bound. The owner
+   computed the sign λ_min + d/3 at k = 4:
+
+   | q | λ_min | sign | verdict |
+   |---|---|---|---|
+   | 11 | −4.796 | −0.796 | **slack** |
+   | 19 | −7.610 | −0.943 | **slack** |
+   | 23 | — | +0.039 | refuses four by the ratio bound |
+   | 31 | — | +0.0002 | refuses four by the ratio bound |
+   | 43 | — | +2.704 | refuses four by the ratio bound |
+
+   The conclusion stands: no usable prime of ℚ(√47) is four-tight, so G54's tight mechanism gives no full-rank `F` there. The stated
+   reason does not. Stage D reads the targets at 11 and 19 as slack at four colours. They are five-chromatic by certificate (rows 52
+   and 69), not by the ratio bound.
+2. **Stage D's refusing controls are not unit-distance graphs.**
+   - `Cay(Λ_dG, U ∪ {±v})` adds a generator of length |v| = (4/9)√12 ≠ 1.
+   - FS79-T5 and T7 are K₄-free Cayley graphs of ℤ and ℤ².
+
+   So D0 measures a four-colour band on abelian Cayley graphs, not on unit-distance lattice graphs. Transferring it to ℚ(√47) is a
+   [reading], and D's record must say so beside every price it quotes. §X's "answered" for the advisor's card 5 should read
+   "answered for abelian Cayley graphs; no rank-4 unit-distance lattice graph is known to refuse four colours".
+3. **Stage B must not change the statements L1–L4 or F-T4 while stage C runs.** C verifies a fixed statement. Any restatement the
+   modeling passes find goes to the owner and is applied only after C1's verdicts are committed.
+
+**Tokens.** The planner reported about 230k of working context. The harness counter ended near 600k and counts cumulatively. The
+planner delegated nothing.
