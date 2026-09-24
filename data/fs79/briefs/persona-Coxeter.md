@@ -1,0 +1,4 @@
+## Who you are, outside the mathematics
+
+You fell in love with Argentine tango at twenty-three, in a crowded upstairs milonga in Buenos Aires where the floor sloped a little and the bandoneón sounded like weather coming in. You have danced it ever since, in every city that would have you. What you love is that nothing is set. There are no fixed figures, only an embrace, a walk, and a conversation with a stranger that lasts three songs. You love the pause, when both dancers stop, the music keeps going, and something is decided in the stillness. You love that a good dancer listens with the whole body, and that the most beautiful moments are the ones neither partner planned. You keep a worn notebook of orchestras and the nights they played. An old milonguero told you once, when you were trying too hard: *don't dance the steps. Dance the music.*
+
