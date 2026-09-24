@@ -196,6 +196,20 @@ each step resumable by re-running (every record keyed and skipped when present; 
 cd /home/kooshi/source/lean-dir
 setsid nohup python3 scripts/slot.py --mem 4 --cpus 1 --name d1-sweep --wait 1800 -- \
     python3 tools/fs81_d47.py sweep --mmax 2520 >> data/fs81/phaseD/d47/sweep-run.log 2>&1 &
-# then, per the sweep's candidates:  ... -- python3 tools/fs81_d47.py screen --ids all  (the budgets: per-ask 120 s residue asks,
-#   quotients N <= 15 with a total per lattice, Theta_4 cap), and screen --ids survivors (the deep pass)
 ```
+
+The sweep finished in 564 s: 2,520 denominators, **116 candidates** plus 11 left undecided by a residue set (127 lattices to screen),
+listed cheapest first by G65's price in `data/fs81/phaseD/d47/screen-ids.txt`, split round-robin into three lists (one per line).
+The screen's first pass, three processes in three slots (each one core, 12 GiB for the N ≤ 15 quotient CNFs):
+
+```
+for i in 1 2 3; do ids=$(sed -n "${i}p" data/fs81/phaseD/d47/screen-ids.txt)
+  setsid nohup python3 scripts/slot.py --mem 12 --cpus 1 --name d1-screen-$i --wait 1800 -- \
+    python3 tools/fs81_d47.py screen --ids "$ids" --theta_cap 60 --quot_total 900 --quot_nmax 15 --budget 120 \
+    >> data/fs81/phaseD/d47/screen-run-$i.log 2>&1 &
+done
+```
+
+*A kill redoes* the lattice in flight in that process (every screen of a lattice is a keyed row in `screen.jsonl`, skipped when
+present; a quotient ask is a keyed row in `quotients.jsonl`). *Resume:* the same loop. The deep pass on the survivors
+(`screen --ids survivors`) follows, then P3b's calibrated `Θ₄` finder and the cells.
