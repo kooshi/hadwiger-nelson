@@ -86,3 +86,63 @@ For each finite `S ⊂ U_F` with `S = −S` let `K_S = {θ ∈ Hom(R_F, T) : θ(
 No finite generation of `R_F` is used (the index set is all finite symmetric subsets, and `Hom(R_F, T)` is compact for any discrete
 `R_F`). The finite form needs its `Λ` finitely generated and torsion-free, which `⟨S⟩` is. **Scope:** field level, every subfield of ℝ.
 The converse (`Θ₃(F) ≠ ∅ ⟹ χ(F²) ≤ 3`, by `x ↦ ⌊3{θ(x)}⌋` on `R_F` and translates) is immediate and is not used by F-T4.
+
+### §1.2 L2 = C1(5) — the rotation set of the rational pattern. **Verdict: PROVED** (field level, on `R₅`)
+
+*Statement.* `Θ(U₅) := {θ ∈ Hom(R₅, T) : θ(U₅) ⊆ B}` equals `{θ₂ + λ_e : |e| ≤ 1/6} ∪ X₃`, where `X₃` is the set of the four
+characters of `R₅` that factor through `R₅/3R₅` and are nonzero on `1` and `i`.
+
+**The computational input, on a second code path.** `tools/fs81_verify_thetaR.py` (the verifier's, written blind; commit `7f1a08fb`)
+computes the characters `λ_μ` of `L = (1/5)ℤ[i]` with `λ_μ(U_R) ⊆ B` by exact half-plane clipping in Fractions (a window `[−2, 7]²`
+cut by the closed strips of the six ± directions; not V2's vertex enumeration). Result, per period `5ℤ²`: **exactly five cells — the
+12-gon `c0 + D0` and the four points `c0 + (±5/6, ±5/6)`** (`c0 = (5/2, 5/2)`; `D0`'s vertices `(±1/6, ±1/18)`, `(±1/18, ±1/6)`,
+`(±5/42, ±5/42)`), i.e. **`Θ_R = c0 + (D0 ∪ F4) + 5ℤ²`, FS73-T40 reproduced.** Planted faults, each seen to fire: dropping the direction
+`(3+4i)/5` gives 11 cells; the band `[1/3, 3/5]` gives one 10-gon; the band `[2/5, 2/3]` gives one 10-gon; each run exits 1 with
+"DIFFERENT ARRANGEMENT". The same script checks, exactly, the four facts the proof below consumes:
+- **(T1)** `R_D² = 5/162` (`D0`'s circumradius, at the vertices `(±1/6, ±1/18)`), and `4R_D² < 5`;
+- **(T2)** `min |f + π̄z|² = min |f + πz|² = 25/18` over `f ∈ F4`, `z ∈ ℤ[i]`, which exceeds `R_D²`;
+- **(T3)** `F4` is injective modulo `π̄ℤ[i]` and modulo `πℤ[i]` (its differences are `(5/3)·{±1, ±i, ±1±i}`, not Gaussian integers);
+- **(T4)** the four characters in `X₃` restrict to `L` as exactly `c0 + F4`. (By hand: `R₅/3R₅ ≅ ℤ[i]/3 ≅ 𝔽₉` because 5 is invertible
+  mod 3; `1/5 ≡ 2 (mod 3R₅)`; so `χ(x) = (a x₁ + b x₂ mod 3)/3` on `ℤ[i]`, `a, b ∈ {1, 2}`, has `μ = (5χ(1/5), 5χ(i/5)) = (10a/3,
+  10b/3) mod 5 = (5/2 ± 5/6, 5/2 ± 5/6)`.)
+
+**⊇.** `θ₂(u) = 1/2` and `|λ_e(u)| ≤ |e| ≤ 1/6` for `u ∈ U₅` (a unit), so `(θ₂ + λ_e)(u) ∈ [1/3, 2/3]`. For `χ ∈ X₃`: the image of `U₅`
+in `𝔽₉` lies in the norm-one group `{±1, ±i}` (`uū = 1`), where `χ` takes values in `{1/3, 2/3}` because it is nonzero on `1` and `i`.
+
+**⊆.** Let `θ ∈ Θ(U₅)`. Since `w^m U₅ = U₅`, each `θ∘w^m` is again in `Θ(U₅)`, so its restriction `ψ_m := (θ∘w^m)|_L` satisfies
+`ψ_m(U_R) ⊆ B` (`U_R ⊆ U₅`), i.e. `ψ_m = λ_{c0 + g_m}` with a unique representative `g_m ∈ D0 ∪ F4` (unique: `D0` has diameter
+`2R_D < 5`, and `F4` is disjoint from `D0 + 5ℤ[i]` by (T2), since `5ℤ[i] ⊆ π̄ℤ[i]`).
+1. *Sublattice arithmetic.* As fractional ideals of the PID `ℤ[i]`: `L = π⁻¹π̄⁻¹`, `w^m L = π^{m−1}π̄^{−m−1}`. So `L ∩ w̄L = π⁻¹ℤ[i]`,
+   whose dual under `⟨x, y⟩ = Re(x̄y)` is `π̄ℤ[i]` (the dual of `αℤ[i]` is `ᾱ⁻¹ℤ[i]`), and `Σ_{|m| ≤ M} w^m L = π^{−M−1}π̄^{−M−1} =
+   5^{−(M+1)}ℤ[i]` (a sum of fractional ideals is their gcd).
+2. *Compatibility.* For `x ∈ L ∩ w̄L`: `ψ_{m+1}(x) = θ(w^{m+1}x) = ψ_m(wx) = λ_{w̄(c0+g_m)}(x)`. `θ₂` is a character of `R₅` with
+   `θ₂∘w = θ₂` and `θ₂|_L = λ_{c0}|_L`, so the `c0` parts agree on `L ∩ w̄L`, and therefore **`g_{m+1} ≡ w̄ g_m (mod π̄ℤ[i])` for every
+   `m ∈ ℤ`**.
+3. *No mixing, and rigidity inside `D0`.* For a consecutive pair: both in `D0` ⟹ `|g_{m+1} − w̄g_m|² ≤ 4R_D² < 5`, the least nonzero
+   norm of `π̄ℤ[i]`, so `g_{m+1} = w̄g_m` (T1). `g_m ∈ D0`, `g_{m+1} ∈ F4` ⟹ `w̄g_m ∈ F4 + π̄ℤ[i]` with `|w̄g_m|² ≤ R_D² < 25/18`:
+   impossible (T2). `g_m ∈ F4`, `g_{m+1} ∈ D0` ⟹ `g_{m+1} = w̄(g_m + πz)` (`wπ̄ = π`), so `|g_{m+1}|² ≥ 25/18 > R_D²`: impossible (T2).
+   Both in `F4` ⟹ `g_{m+1}` is the unique element of `F4` in the class `w̄g_m + π̄ℤ[i]` (T3), and `g_m` the unique one in `w g_{m+1} +
+   πℤ[i]`. Hence **all `g_m` are of one type.**
+4. *`D0` type.* Then `g_m = w̄^m g₀` for every `m ∈ ℤ` (forwards and backwards), and for `y = w^m x ∈ w^m L`:
+   `θ(y) = ψ_m(x) = θ₂(x) + λ_{w̄^m g₀}(x) = θ₂(y) + λ_{g₀}(y)`. So `θ − θ₂ − λ_{g₀}` vanishes on every `w^m L`, hence on
+   `5^{−(M+1)}ℤ[i]` for every `M`, hence on `R₅ = ⋃_M 5^{−M}ℤ[i]`: **`θ = θ₂ + λ_{g₀}` on `R₅`**. Finally `|g₀| ≤ 1/6`: for every
+   `m`, `1/2 + Re(ḡ₀ w^m) ∈ B` with `|Re(ḡ₀ w^m)| ≤ R_D < 5/6`, which forces `|Re(ḡ₀ w^m)| ≤ 1/6`; `w` is not a root of unity (those
+   of `ℚ(i)` are `±1, ±i`), so `{w^m}` is dense in the unit circle and `|g₀| = sup_m Re(ḡ₀ w^m) ≤ 1/6`.
+5. *`F4` type.* By (T4), `ψ₀ = χ|_L` for some `χ ∈ X₃`. Each `χ∘w^m` is in `Θ(U₅)` and of `F4` type on `L`, and satisfies step 2's
+   compatibility, as every character of `R₅` does; by the uniqueness in step 3, induction in both directions gives `ψ_m = (χ∘w^m)|_L`
+   for every `m`. So `θ − χ` vanishes on every `w^m L`, hence on `R₅`: **`θ = χ ∈ X₃`.** ∎
+
+**The steps that use infinitely many layers and denominators** (the brief's item 3), named exactly:
+- **(∞-a)** Step 4/5's passage from "agrees on every layer `w^m L`" to "agrees on `R₅`": the denominator `5^{−j}` is reached only by the
+  layers `|m| ≤ j − 1` (step 1's gcd), so all of `R₅` needs all `m ∈ ℤ`. The induction of step 3 runs over all of ℤ, which is legitimate
+  because each step is the same finite exact check (T1–T3), used once per consecutive pair.
+- **(∞-b)** Step 4's bound `|g₀| ≤ 1/6` uses the whole orbit `{w^m}` (density). At a finite level `|m| ≤ M` one gets only
+  `g₀ ∈ ⋂_{|m| ≤ M} w^m D0`, a polygon slightly larger than the disc.
+- **Finite level, kept apart.** Restricted to `5^{−j}ℤ[i]`, steps 1–5 prove only: *θ equals `θ₂ + λ_{g₀}` or some `χ ∈ X₃` there.* But
+  `θ₂|_{5^{−j}ℤ[i]} = λ_{5^j c0}|_{5^{−j}ℤ[i]}` is archimedean at that level, so at a finite level the first alternative is "an
+  archimedean character `λ_{5^j c0 + g₀}`" and does not separate a parity part from a small real part. The separation holds only on
+  `R₅`, where `θ₂` is a genuine character of order 2 and no `λ_e`, `e ≠ 0`, is torsion. L2's *statement* is at the field level; its
+  *proof* never separates the parts. It identifies `θ` with one explicit character of `R₅`, built from `θ₂`, which is itself a
+  character of `R₅`. The separation is used in L4 (§1.4 below).
+
+No gap. Scope: field level, on `R₅`.
