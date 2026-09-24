@@ -1,0 +1,5 @@
+slot: admitted d0b-dstar: mem 3 GiB (hard cap), cpus 0
+  X_A|target|R1.4 repeat 1: UNSAT 480.08 s CPU
+  X_A|target|R1.4 repeat 2: UNSAT 462.7 s CPU
+  X_A|target|R1.4 repeat 3: UNSAT 466.55 s CPU
+DONE reask X_A|target|R1.4: min CPU 462.7 s over 3 decided runs

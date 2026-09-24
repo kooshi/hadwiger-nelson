@@ -161,9 +161,17 @@ ball) fired and was recorded UNKNOWN. Every SAT model was checked proper with it
 UNKNOWN, never UNSAT (the family is four-colourable by Theorem B, so an UNSAT there would be a defect).
 
 **Certification of the refusals.** At R ≥ 1.5 every X_A and X_B ball contains the K2-certified 2,044-point core (checked point by point,
-column `contains_certified_core`), so those refusals are certified by containment. **The three refusals at R = 1.4 are not:** that ball
-does not contain the core, so they rest on two solvers agreeing (kissat and CaDiCaL), not on a certificate. They need a K2 certificate
-only if one enters a decision.
+column `contains_certified_core`), so those refusals are certified by containment. The R = 1.4 ball does not contain the core. **X_A's
+target-encoding refusal at R = 1.4 is now certified** (the owner's request, so that "R*(X_A) ≤ 1.4" stands as a certified bound;
+`data/fs81/phaseD/cert-X_A-target-R1.4/`, by `fs81_phaseD.py certify`): CaDiCaL 2.1.2 refused the same CNF in 238.3 s CPU with a
+1,246 MiB LRAT, trimmed from 2,594,894 to 952,894 additions (133 MiB gzipped); **K2 CERTIFIED** it (30,181 points of ℚ(√3,√11)², all
+250,536 unit pairs re-derived exactly from 455,431,290 candidates and equal to the file's list, the one non-unit edge of squared length
+64/27, a unit-edge pin and the chain [2, 3]; "a FORCED PAIR at 4 colours … not a chromatic bound"); **cake_lpr** said `s VERIFIED UNSAT`
+(16.4 s) and **kissat** refused the same CNF (474.2 s). CNF sha256 `0169f9b4…`, proof text sha256 `3894439e…`, witness sha256
+`a72270cf…` (`K2.out`, `rup-recheck.out`). So **R*(X_A) ≤ 1.4 is certified**: the unit-distance graph on the R = 1.4 ball of de Grey's
+lattice forces the pair (0, v) at four colours. The X_A triangle-pin and X_B refusals at 1.4 still rest on two solvers (X_B has many
+non-unit edges, which K2 does not admit). The 140 MB LRAT is on disk, not committed: the owner decides (it regenerates exactly by the
+certify command in about five minutes plus the trim).
 
 **What D0b measured** (each [measured], per family, contended times):
 1. **`R*(X_A)` ≤ 1.4 under both encodings** (a refusal smaller than the certified core's ball: R = 1.4 < 1.4997), **and it is not

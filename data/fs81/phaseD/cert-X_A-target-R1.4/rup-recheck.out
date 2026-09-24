@@ -1,0 +1,1 @@
+RECHECKED: K2 certified; cake_lpr (verified) says s VERIFIED UNSAT; kissat refuses the same CNF. {"cnf_sha256": "0169f9b47fcfd2009ea4aa0ca6419f9a9de9494273c118a4366f68345d796db7", "cake_lpr": "s VERIFIED UNSAT", "cake_lpr_s": 16.41, "kissat": "s UNSATISFIABLE", "kissat_cpu_s": 474.2}

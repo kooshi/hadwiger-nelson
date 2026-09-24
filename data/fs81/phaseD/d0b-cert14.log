@@ -1,0 +1,5 @@
+slot: admitted d0b-cert14: mem 16 GiB (hard cap), cpus 0
+certify X_A|target|R1.4: CaDiCaL {'verdict': 'UNSAT', 'wall_s': 239.34, 'cpu_s': 238.33, 'maxrss_mb': 320, 'wall_fired': False}; proof 1246 MiB
+certify X_A|target|R1.4: LRAT 2594894 -> 952894 additions, 133 MiB gz; witness written
+CERTIFIED: 30181 points of Q(sqrt3, sqrt11)^2; all 250536 pairs at distance exactly 1 re-derived in integer arithmetic (455431290 candidate pairs tested) and equal to the file's edge list; plus ONE non-unit edge [10117, 20063] of squared length 64/27; pins [20063, 1890] to colours 0..1 (a clique); precedence chains [[2, 3]] over unpinned colours; CNF built here at k = 4: 150906 variables, 1092694 clauses, sha256 0169f9b47fcfd200; LRAT checked here: 952894 additions, 0 deletion lines, empty clause at id 3687588. The unit-distance graph plus that one edge has no proper 4-colouring, hence every p
+RECHECKED: K2 certified; cake_lpr (verified) says s VERIFIED UNSAT; kissat refuses the same CNF. {"cnf_sha256": "0169f9b47fcfd2009ea4aa0ca6419f9a9de9494273c118a4366f68345d796db7", "cake_lpr": "s VERIFIED UNSAT", "cake_lpr_s": 16.41, "kissat": "s UNSATISFIABLE", "kissat_cpu_s": 474.2}
