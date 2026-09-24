@@ -109,6 +109,27 @@ ALLOW: dict[str, str] = {
     "G68/G69": "the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered",
     "MASCOT-T6's": "the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source",
     "T39–T44": "row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close",
+    # FS-81's close (2026-09-24): the ranges extended, the stub table re-ranked one rank per row, the open-milestones
+    # paragraph compressed to pointers, G61 rewritten (T4 proved, row 82).
+    "1–81": "the ledger's row range, extended to 1–84 at FS-81's close (2026-09-24)",
+    "G1–G73": "the stable-identifier range, extended to G1–G74 when G74 (the layer method) was minted at FS-81's close",
+    "G61:[kernel + certified + measured; one reading]": "G61's grade gained 'hand' at FS-81's close: T4 is proved at [hand, two independent derivations] (row 82); the old claim 'no proof and no route' is kept as a demotion record",
+    "[kernel + certified + measured; one reading]": "G61's old status tag, replaced by '[kernel + certified + hand + measured; one reading]' (the entry above)",
+    "9–13": "the paths-forward table's group rank, renumbered 29–33 when the stubs were re-ranked one rank per row at FS-81's close",
+    "14–16": "the same re-rank: now 34–36",
+    "17–20": "the same re-rank: now 37–40",
+    "21–22": "the same re-rank: now 41–42",
+    "23–25": "the same re-rank: now 43–45",
+    "26–27": "the same re-rank: now 46–47",
+    "28–30": "the same re-rank: now 48–50",
+    "9's": "the old ranked-stubs intro's 'FS-9's bearing rewritten' (FS-79's re-rank narrative); FS-9's row carries its bearing",
+    "plans/STUB-five-over-sqrt3-sqrt5.md": "the old open-milestones paragraph's banner pointer for FS-70; the stub and its banner are in plans/FRONTIER-STUBS.md's closed list",
+    "plans/STUB-invariant-question-four-colours.md": "the same, for FS-79",
+    "plans/STUB-rigidity-dichotomy.md": "the same, for FS-73",
+    "plans/STUB-theorem-audit.md": "the same, for FS-71",
+    "§ B.": "the old open-milestones sentence 'every one indexed in `LEDGER.md` § B.'; item 19 keeps the pointer to LEDGER.md § B",
+    "56th": "old item 14's ℚ(√167) sentence (55 of 57 lattices periodic, a 56th linear, the 57th L21cc6506 refusing); row 79 holds the census of the 57",
+    "57th": "the same",
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
