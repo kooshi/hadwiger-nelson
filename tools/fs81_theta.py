@@ -287,12 +287,48 @@ class IterSearch(X.Search):
         return {"nodes": self.n_nodes, "leaves": self.n_leaves, "lp": self.n_lp, "bad_farkas": self.n_bad_farkas}
 
 
-def decide(d, D, units, out_path, ckpt_path=None, cap_s=1800.0, ckpt_s=60.0, maxlen=6, log=print):
+def small_order_point(units, screen=(3, 6, 9, 12), chunk=200000):
+    """A point θ of Θ of order dividing m, for m in `screen`: θ(b_j) = t_j/m on the Hermite basis b of span U, t ∈ (ℤ/m)⁴,
+    tested on every listed unit at once (numpy, exact integers).  Returns (m, θ in (a,b,c,e)-dual coordinates) or None.
+    A finder only: its θ is re-checked exactly here and by the checkers."""
+    import itertools
+    import numpy as np
+    from fs73v2_units import solve
+    B = hnf([list(u) for u in units])
+    C = np.array([[int(t) for t in solve(B, list(u))] for u in units], dtype=np.int64)          # integer coordinates
+    for m in screen:
+        grid = np.array(list(itertools.product(range(m), repeat=4)), dtype=np.int64)
+        for k in range(0, len(grid), chunk):
+            T = grid[k:k + chunk]
+            V = (C @ T.T) % m                                                          # N × chunk
+            ok = ((3 * V >= m) & (3 * V <= 2 * m)).all(axis=0)
+            hit = np.nonzero(ok)[0]
+            if len(hit):
+                t = [F(int(x), m) for x in T[hit[0]]]
+                # θ on ℚ⁴ with θ(b_j) = t_j: solve Bᵀ-system  Σ_k θ_k B[j][k] = t_j
+                th = solve([[B[j][k] for j in range(4)] for k in range(4)], t)
+                vals = [sum(th[k] * u[k] for k in range(4)) for u in units]
+                assert all(THIRD <= v - math.floor(v) <= TWOTHIRD for v in vals)
+                return m, th
+    return None
+
+
+def decide(d, D, units, out_path, ckpt_path=None, cap_s=1800.0, ckpt_s=60.0, maxlen=6, log=print, screen=()):
     """Decide Θ for Cay(span U, ±U).  Returns a result dict (also written to out_path unless UNDECIDED)."""
     t0 = time.time()
     units = [tuple(u) for u in units]
     check_units(d, D, units)
     key = key_of(units, D)
+    if screen:
+        hit = small_order_point(units, screen)
+        if hit is not None:
+            m, th = hit
+            res = {"d": d, "key": key, "units": [list(u) for u in units], "N": len(units), "verdict": "NONEMPTY",
+                   "finder": f"small-order screen, order {m}", "theta_abce_dual": [[v.numerator, v.denominator] for v in th],
+                   "exact_check": True, "stats": {"nodes": 0, "wall_s": round(time.time() - t0, 1)}}
+            with open(out_path, "w") as fh:
+                json.dump(res, fh)
+            return res
     state = None
     if ckpt_path and os.path.exists(ckpt_path):
         state = json.load(open(ckpt_path))
@@ -337,7 +373,7 @@ def decide(d, D, units, out_path, ckpt_path=None, cap_s=1800.0, ckpt_s=60.0, max
         th, n = X.theta_from_x(units, basis, f.x)
         vals = [sum(th[k] * u[k] for k in range(4)) for u in units]
         ok = all(THIRD <= v - math.floor(v) <= TWOTHIRD for v in vals)
-        res = dict(base, verdict="NONEMPTY", x=[[v.numerator, v.denominator] for v in f.x],
+        res = dict(base, verdict="NONEMPTY", finder="relation tree", x=[[v.numerator, v.denominator] for v in f.x],
                    theta_abce_dual=[[v.numerator, v.denominator] for v in th], exact_check=ok,
                    stats=dict(S.stats(), wall_s=round(elapsed0 + time.time() - t0, 1)))
         with open(out_path, "w") as fh:
@@ -347,7 +383,7 @@ def decide(d, D, units, out_path, ckpt_path=None, cap_s=1800.0, ckpt_s=60.0, max
     except Capped:
         return dict(base, verdict="UNDECIDED", stats=dict(S.stats(), wall_s=round(elapsed0 + time.time() - t0, 1)),
                     cap_s=cap_s)
-    res = dict(base, verdict="EMPTY", relations=pool, tree=tree,
+    res = dict(base, verdict="EMPTY", finder="relation tree", relations=pool, tree=tree,
                stats=dict(S.stats(), wall_s=round(elapsed0 + time.time() - t0, 1)))
     with open(out_path, "w") as fh:
         json.dump(res, fh, separators=(",", ":"))

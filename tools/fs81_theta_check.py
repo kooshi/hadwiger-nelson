@@ -282,10 +282,18 @@ def self_test(cert, enum: bool = True) -> None:
         br = first_branch_with_mid(c["tree"])
         br[2] += 1
         br[4].pop(1)
-    try:
-        plant("range-shifted", "leaf not refuted", m_range_shift)
-    except SystemExit as e:
-        print(f"note: range-shifted plant: {e} (acceptable only if the extended low region is itself empty)")
+    # strict (the frozen checker's copy excused a non-firing plant with a note; here a plant that does not fire fails the
+    # self-test, so a checker that leaves the value lo − 1 uncovered is caught)
+    plant("range-shifted", "leaf not refuted", m_range_shift)
+
+    def m_range_shift_high(c):
+        # the owner's plant (FS-81, 2026-09-24), the mirror image: claim the range ends one earlier and drop that child; the
+        # high child's constraint moves to r·x ≥ hi, which its old multipliers (for r·x ≥ hi + 1) no longer refute.  A checker
+        # that leaves the value hi + 1 uncovered (high child r·x ≥ hi + 2) accepts this certificate.
+        br = first_branch_with_mid(c["tree"])
+        br[3] -= 1
+        br[4].pop(-2)
+    plant("range-shifted-high", "leaf not refuted", m_range_shift_high)
 
     def m_neg_ineq(c):
         # find a leaf with a multiplier on an inequality position and flip its sign

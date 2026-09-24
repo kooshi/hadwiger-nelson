@@ -36,6 +36,7 @@ CERTS = P0 / "certs"
 CKPT = P0 / "ckpt"
 FROZEN = ROOT / "tools/fs73v2_check.py"
 NEWCHK = ROOT / "tools/fs81_theta_check.py"
+SCREEN = (3, 6, 9, 12)          # the small-order point screen run before every tree in P0.2 (a finder only)
 FROZEN_BUDGET = 1.5e9          # 4.2·D³/d loop iterations the frozen checker's enumeration may cost (≈ 5–8 min)
 
 CENSUS = [11, 23, 35, 47, 59, 71, 83, 95, 107, 119, 131, 143, 155, 167, 179, 191, 203, 215, 227, 239, 251, 263, 287, 299, 311,
@@ -128,7 +129,7 @@ def run_check(cert_path, d, D, verdict, listed_only):
     return name, status, f"{line} ({time.time() - t0:.1f} s)"
 
 
-def run_item(stage, tag, d, D, units, cap_s, meta):
+def run_item(stage, tag, d, D, units, cap_s, meta, screen=()):
     out = P0 / f"{stage}.jsonl"
     if tag in done_tags(out):
         return None
@@ -137,13 +138,14 @@ def run_item(stage, tag, d, D, units, cap_s, meta):
     cert = CERTS / f"{tag}.json"
     t0 = time.time()
     try:
-        res = T.decide(d, D, units, str(cert), str(CKPT / f"{tag}.json"), cap_s=cap_s, ckpt_s=60.0)
+        res = T.decide(d, D, units, str(cert), str(CKPT / f"{tag}.json"), cap_s=cap_s, ckpt_s=60.0, screen=screen)
     except RuntimeError as e:
         rec = dict(meta, tag=tag, d=d, D=D, N=len(units), verdict="ERROR", error=str(e), wall_s=round(time.time() - t0, 1))
         append(out, rec)
         print(json.dumps(rec), flush=True)
         return rec
-    rec = dict(meta, tag=tag, d=d, D=D, N=len(units), key=res["key"], verdict=res["verdict"], stats=res["stats"])
+    rec = dict(meta, tag=tag, d=d, D=D, N=len(units), key=res["key"], verdict=res["verdict"], stats=res["stats"],
+               finder=res.get("finder"), cap_s=cap_s)
     if res["verdict"] == "NONEMPTY":
         rec["theta_abce_dual"] = res["theta_abce_dual"]
         rec["exact_check_listed"] = res["exact_check"]
@@ -216,8 +218,12 @@ def cmd_controls(cap_s):
             seen.add(pts)
             items.append(("neg", f"ctl-neg-{d}-L{M}", d, M, U, f"Λ_{M} over ℚ(√{d}) (plane 3-colourable)"))
     for kind, tag, d, D, U, what in items:
-        run_item("controls", tag, d, D, U, cap_s, {"kind": kind, "expect": "EMPTY" if kind == "pos" else "NONEMPTY",
-                                                   "what": what})
+        meta = {"kind": kind, "expect": "EMPTY" if kind == "pos" else "NONEMPTY", "what": what}
+        # the tree alone (the pipeline that produces every EMPTY certificate), capped
+        run_item("controls", tag, d, D, U, cap_s, dict(meta, route="tree alone"))
+        # the small-order screen before the tree (the pipeline P0.2 uses)
+        run_item("controls", tag + "-scr", d, D, U, cap_s, dict(meta, route="screen (orders 3, 6, 9, 12) then tree"),
+                 screen=SCREEN)
 
 
 # ================================================================ P0.2 configurations
@@ -231,7 +237,7 @@ def cmd_configs(cap_s, fields, names, K, stage):
                 continue
             D, U = T.units_of(d, layers, K)
             tag = f"d{d}-{name.replace(':', '_').replace('+', 'p').replace('-', 'm')}-K{K}"
-            run_item(stage, tag, d, D, U, cap_s, {"config": name, "K": K, "open": d in OPEN})
+            run_item(stage, tag, d, D, U, cap_s, {"config": name, "K": K, "open": d in OPEN}, screen=SCREEN)
 
 
 def main():
