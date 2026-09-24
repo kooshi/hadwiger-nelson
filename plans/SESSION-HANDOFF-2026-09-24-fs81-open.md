@@ -9,8 +9,9 @@ on a fresh Poros's advice with the owner concurring.*
 
 1. **Nothing is running.** No agent is live, and no job holds the lock (`…/scratchpad/locks/heavy.lock`). FS-79 is **closed**: `LEDGER.md`
    rows 80–81, G73, FS-80 minted, and all 106 close-inventory items done.
-2. **Nothing is pushed** since `bdb7e133`: about 60 local commits, FS-79 in full plus FS-81's minting. Kooshi said "I agree" to the
-   recommendations, but a push needs its own explicit word (FS-81 inventory item 14). **Ask him before pushing.**
+2. **Everything is pushed** (Kooshi, 2026-09-24: "Yes, push. You can always push on this repo … just never force push without my
+   auth"). **Standing rule from now on: push freely to this repository's origin (the backup remote); never force-push without his
+   explicit authorisation.**
 3. **Read, in order:**
    - `plans/STUB-quadratic-four-colour-classification.md` (FS-81, the milestone);
    - `plans/POROS-2026-09-24-next-direction.md` §5 (why it was chosen, and what the advisor pushed back on);
@@ -38,7 +39,8 @@ on a fresh Poros's advice with the owner concurring.*
 |---|---|
 | Opus 5.5 for every role; replace, don't reuse, above ~500k tokens | Kooshi, 2026-09-22 |
 | At most three agents at once; **no child spawns children** (say so, with the reason, in every brief) | Kooshi, 2026-09-23; `CLAUDE.md` § Delegation |
-| The owner coordinates and reviews, and does not contribute; drive phase to phase without go-aheads; never push unless told; never amend; halt on an unexplained crash | Kooshi, 2026-09-23 |
+| The owner coordinates and reviews, and does not contribute; drive phase to phase without go-aheads; never amend; halt on an unexplained crash | Kooshi, 2026-09-23 |
+| **Push freely to this repository's origin; never force-push without Kooshi's explicit authorisation** | Kooshi, 2026-09-24 |
 | Every derivation milestone runs WORKFLOW 3.3 (§IQ), scored with §G; G72's count at the close | Kooshi, 2026-09-23 |
 | The close inventory is opened at minting and written to as items arise (WORKFLOW step 5) | Kooshi, 2026-09-23 |
 | **New at FS-79: every hand-back is content-free, and every report goes by explicit SendMessage.** The harness delivers a hand-back to whichever agent last woke the sender (protocol §1 rule 1) | FS-79 incident |
