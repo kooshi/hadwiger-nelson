@@ -261,13 +261,13 @@ the nearest to periodic colourings.*
 | T21 | B | the height lift through `K₃`'s universal cover: §C's statement of what stops at four, with `[CGHO2025coh]` as its grid form |
 | T22 | B | the three-colour criterion: its ⟸ half is colour-generic (`⌊k{θ}⌋` with `θ(S) ⊆ [1/k, 1−1/k]`) — P0.3(a)'s `Θ₄` screen; its ⟹ half is what fails at four (C-5) |
 | T23 | B | tight directions are affine; frozen fibres give `F` of finite index — the three-colour model of §IQ's rigidity half |
-| T24 | B | density at three colours, with no arithmetic: the theorem §IQ asks for at four; and the dichotomy (finite colouring space ⟺ points) answers Mixon's 2018 question at three colours |
+| T24 | B | density at three colours, with no arithmetic; at four colours §IQ asks only for its consequences (existence, `P = F`), since plain density fails there (T30); and the dichotomy (finite colouring space ⟺ points) answers Mixon's 2018 question at three colours |
 | T25 | S | `Θ₃(Λ₁₀)` at ℚ(√11) |
 | T26 | B | the `Θ`-emptiness certificate type: the model of a certificate on the group (§IQ's obstruction half) |
 | T27 | B | `Ld14c588b` three-colourable by a linear form: one of the 56 lattices §0.4 drops |
 | T28 | B | the rank-1 transfer-matrix decider (2,299 sets): a laboratory P2 may use to check claims in rank 1 |
 | T29 | B | the four-colour no-go and the decidability equivalence: §IQ items 2–3, now with `[CGHO2025coh]` as its grid form and `[MooreNewman2000]` as its limit |
-| T30 | B | rank-1 walls at four colours (first at `max D = 10`), all with `P = F = 0`: §IQ item 5 (FS-76's walls) |
+| T30 | B | rank-1 walls at four colours (first at `max D = 10`), all with `P = F = 0`: §IQ item 5 (FS-76's walls) — **and one-way, so they falsify plain density at four colours** (drawn only after Poros's late card; the first draft missed it) |
 | T31 | B | gapped ⟹ `KPer = 0`; exponent-2 colourings achiral; additive iff index 4: P0's reporting |
 | T32 | S | L3 loose without a gap (ℚ(√3,√5)) |
 | T33 | B | the fibre-collision sandwich `D_Q ⊆ V_Q`: P0's Kempe test is membership, not index |
@@ -457,16 +457,26 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
    target — and (Q) with (Q-comp) third, where a no is still a finding (Kooshi's certificate question).** Alternative: (Q) first, as the
    stub framed it around Kooshi's certificate question; it wins if the product aim is the certificate question rather than five at 167.
 
-   The density question, as first posed:
+   **Density as first posed is false in rank 1, and (Q) is restated** (Poros's late card, 2026-09-23; the planner re-checked it with its
+   own code, `…/scratchpad/fs79-plan/check/rank1.py`: the window-state graph of `G(ℤ, D)` modulo colour permutation, restricted to
+   essential states, has edges between different strongly connected components — patterns that occur in a four-colouring and in no
+   periodic one — for exactly `{1,5,7,10}` (8 such edges), `{3,5,9,10}` (4), `{3,7,9,10}` (24), `{5,7,9,10}` (2), the numbers Poros
+   reported, and none on the controls `{1,3,4,5}`, `{1,2,4,8}`, `{2,3,5,9}` at four colours or on the three-colour controls). These are
+   FS73-T30's four walls: **one-way walls**, legal four-colourings whose local patterns no periodic four-colouring contains. They are
+   K₄-free (not triangle-free), have `P = F = 0` (T30) and have periodic four-colourings (`[EggletonErdosSkilton1990]`), so existence and
+   inheritance survive in rank 1 while density fails. **A planner's miss**: §G.5 marked T30 as bearing on item 5's instances and did not
+   reason that a one-way wall falsifies density. The restated question keeps what FS-73 proved at three colours and what is still open:
 
-   > **(Q) For every graph in 𝒞_r, are the periodic four-colourings dense in the space of all four-colourings — does every finite
-   > pattern that occurs in some proper four-colouring also occur in a periodic one?**
+   > **(Q) For every graph in 𝒞_r: does four-colourability imply a periodic four-colouring (C3-aper, `[Ellenberg2018]`'s question at
+   > `k = 4`), and is every difference identified by all periodic four-colourings identified by all four-colourings (C3-inherit,
+   > `P = F`)?** *Sharper optional form:* are periodic colourings dense in the support of every invariant measure (`F_μ = P`, T38's
+   > recurrent half)? One-way walls carry no invariant measure, so rank 1 does not refute it.
 
-   It is `[Ellenberg2018]`'s question (and `[CGHO2025bg]`'s Question 6.2) at `k = 4`, strengthened from existence to density; FS-73 proved
-   it at `k = 3` for every rank (T24), with no arithmetic. **Why it is not the existence form reworded:** no single colouring answers it.
-   A yes needs something every four-colouring carries that lets an arbitrary colouring be approximated by a periodic one (at three colours:
-   the height, its slope, the McShane extension). A no needs a four-colouring whose local patterns no periodic colouring shares, with a
-   proof that none does — which only an invariant can certify. It has three faces, each with its own consequence:
+   At `k = 3` all three hold for every rank (T22–T24). **Why it is not the existence form reworded:** no single colouring answers it. A
+   yes needs something every four-colouring carries that lets it be matched by periodic colourings (at three colours: the height, its
+   slope, the McShane extension). A no needs a four-colourable graph with no periodic colouring, or a pair every periodic colouring
+   identifies and some colouring separates, with a proof — which only an invariant can certify. (C3-inherit at four colours is FS-76's
+   question 1; the owner's ruling R1 lets FS-79 take it.) It has three faces, each with its own consequence:
    - **(Q-comp) the completeness face — Kooshi's certificate question.** A yes on 𝒞_r makes four-colourability decidable there (refusals
      by compactness, colourability by a periodic colouring) and gives two-sided certificates (FS73-T29's equivalence), and `P = F`, so
      every forced pair is visible to periodic colourings. A no is either an explicit four-colourable graph in 𝒞_r with no periodic
@@ -529,7 +539,9 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
    - **FS-72's rank-8 lattice** `group:u3:2+w4` over ℚ(√3,√5): no additive or periodic four-colouring found, six undecided attempts;
    - **the rich 2-unit lattices over ℚ(√3,√5)** (T10): rigid-found, forcing undecided;
    - **FS-76's rank-1 walls** (T30): four-colour walls first at `max D = 10`, all with `P = F = 0` — the rank-1 laboratory, where every
-     `k`-colourable graph has a periodic colouring (`[EggletonErdosSkilton1990]` Thm 2) and density is the live question;
+     `k`-colourable graph has a periodic colouring (`[EggletonErdosSkilton1990]` Thm 2) and the walls are **one-way** (they falsify
+     plain density at four colours; Poros's scan and the planner's re-check), so rank 1 is settled for existence and density and open only
+     for the recurrent half;
    - **controls every class-level answer must reproduce:** de Grey's lattice (**the known positive**: finite colouring space, `F = P = 8Λ`,
      12 classes, one √3-clean — Theorem B's pair); the triangular lattice (a two-dimensional height, `[MooreNewman2000]`); the grid
      `ℤ²` with standard generators (no height, `[CGHO2025coh]`); `Cay(ℤ, {1,2,3})`, the clique-rigid member (24 colourings, all
@@ -678,7 +690,7 @@ inhabitants then. The P1 domain pass may overturn this; it records why.
 
 | id | outcome | p | reachable because |
 |---|---|---|---|
-| P-A | **(Q) answered yes** in a class that contains rank-4 triangle-free graphs (reaches ℚ(√167)): density, hence decidability and two-sided certificates there | 0.05 | at three colours the same question fell in one competition; nothing known forbids it at four in low rank |
+| P-A | **(Q) answered yes** in a class that contains rank-4 triangle-free graphs (reaches ℚ(√167)): existence of periodic colourings (hence decidability and two-sided certificates) and `P = F` there | 0.05 | at three colours the same question fell in one competition; nothing known forbids it at four in low rank |
 | P-A′ | (Q) or (Q-rig) answered yes in a **subclass that does not reach ℚ(√167)** (rank 2; triangle lattices through `[MooreNewman2000]`'s height; Hoffman-tight graphs through FS38-D2-A) | 0.15 | the height and spectral theorems already exist for such subclasses |
 | P-B | **(Q-comp) answered no**: an explicit four-colourable graph in 𝒞_r with no periodic four-colouring, or undecidability, with proof and its rank | 0.12 | the frame-product mechanism (T34) and the domino problem make it plausible; MathOverflow's intuition points there |
 | P-B′ | a **no-go of a named kind** (e.g. every kind-1 invariant is trivial on 𝒞_r^{△-free}; or every kind-0 invariant is controlled by `χ_f`) without settling (Q) | 0.18 | `[CGHO2025coh]`'s method is available and G71's grid half is already such a theorem |
@@ -767,15 +779,19 @@ differences every `k`-colouring identifies) and the H1 group `P` (the difference
 
 ### §C.2 "The challenge"
 
-**The question (Q).** For every graph in the abstract class, **are the periodic four-colourings dense in the space of all
-four-colourings** — does every finite pattern that occurs in some proper four-colouring also occur in a periodic one? This is
-Jordan Ellenberg's MathOverflow question (2018, `mathoverflow.net/q/304715`: *if G has a k-colouring, does it have a periodic one?*) at
-`k = 4`, strengthened to density; Chandgotia, Gangloff, Hellouin de Menibus and Oprocha carry it as open in 2025, together with the
-decidability of emptiness for ℤ^d with an arbitrary generating set (`[CGHO2025bg]` §6.2.1). FS-73 proved it at `k = 3` (item 1).
+**The question (Q).** For every graph in the abstract class: **does four-colourability imply a periodic four-colouring**, and **is every
+difference that all periodic four-colourings identify identified by all four-colourings** (`P = F`)? The first half is Jordan Ellenberg's
+MathOverflow question (2018, `mathoverflow.net/q/304715`: *if G has a k-colouring, does it have a periodic one?*) at `k = 4`; Chandgotia,
+Gangloff, Hellouin de Menibus and Oprocha carry it as open in 2025, together with the decidability of emptiness for ℤ^d with an arbitrary
+generating set (`[CGHO2025bg]` §6.2.1). FS-73 proved both halves at `k = 3` (item 1). *Sharper, optional:* are periodic colourings dense
+in the support of every invariant measure (`F_μ = P`)? **Plain density is false at four colours already in rank 1**: FS73-T30's four walls
+(`D = {1,5,7,10}`, `{3,5,9,10}`, `{3,7,9,10}`, `{5,7,9,10}`) are one-way — legal four-colourings with local patterns no periodic
+four-colouring contains — while those graphs have periodic colourings and `P = F = 0` (checked by the advisor and the planner
+independently, on the window-state graph). Do not spend the competition re-deriving that.
 
 **These are three questions, not one**, and they are ranked [RANKING — the owner fills it; the planner's recommendation and the default:
-(Q-obs), then (Q-rig), then (Q)]. Only (Q-comp) follows from (Q): density holds trivially on a finite colouring space, so it says nothing
-about (Q-rig), and (Q-obs) is independent of both. MathOverflow's commenters expect (Q) to be answered no by a domino reduction; such a no
+(Q-obs), then (Q-rig), then (Q)]. Only (Q-comp) follows from (Q); (Q) says nothing about (Q-rig) (it holds trivially on a finite
+colouring space), and (Q-obs) is independent of both. MathOverflow's commenters expect (Q) to be answered no by a domino reduction; such a no
 answers Ellenberg's question and **does not answer (Q-obs)**, and a no that needs rank ≥ 5 or cliques does not reach ℚ(√167). Say which
 question your result answers, **in which class and at which rank**:
 - **(Q-comp) completeness** — in the abstract class. A yes makes four-colourability decidable and gives two-sided certificates and `P = F`.
@@ -801,7 +817,8 @@ result that reaches them must hold in rank 4, triangle-free.
 four-colouring exists; or a reduction from the domino problem (Wang tiles) to four-colourability in the class, with the rank at which it
 works. A reduction that needs rank ≥ 5 answers Kooshi's certificate question and does not reach ℚ(√167).
 
-**The known positive proves nothing about the inference**: its colouring space is finite, so density holds there trivially. What any
+**The known positive proves nothing about the inference**: its colouring space is finite, so existence and inheritance hold there
+trivially. What any
 class-level answer must do is **explain** it (why 9,120 and not infinitely many), and reproduce two controls: the triangular lattice
 (item 2 of "things worth knowing") and the grid.
 
@@ -829,7 +846,7 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
 4. **A Cayley-graph four-colouring problem can carry a finite-alphabet ℤ² SFT** (T34): KR6 is de Grey's lattice plus the ζ₆-orbit of
    `ρ₁₅` (rank 6); each coset of de Grey's lattice carries one of its 9,120 colourings, and the `ρ₁₅` directions become adjacency rules
    between cosets. Whether such frame products encode arbitrary Wang tile sets is a question, not a result.
-5. **Additive colourings are achiral** (`−φ` is a colour permutation of `φ`); a four-colour counterexample to density that is periodic in
+5. **Additive colourings are achiral** (`−φ` is a colour permutation of `φ`); a four-colour counterexample to inheritance that is periodic in
    `r − 1` directions needs a chiral, non-additive phase (Coxeter's reading, FS73 §8); chiral non-additive colourings are common on loose
    lattices (T35); statistical mechanics has a chirality parity invariant under Kempe moves on hexagonal lattices (`[Cepas2016]`) and
    Kempe invariants that are linking numbers (`[CepasAkhmetiev2020]`); Hubai's "one chirality choice" is the same word.
@@ -899,6 +916,7 @@ the reporting rule.
 
 | 9 | Poros, answer to question 1 | the three faces are three questions; only (Q-comp) follows from (Q); a domino-type no gives nothing at ℚ(√167); rank them, obstruction first, and let the owner rule on which success is scored | adopted: §IQ item 2 now three ranked questions, the ranking an owner slot with the planner's recommendation as default; P-MO and P-rank registered |
 | 10 | Poros | (Q-obs)'s benchmark is inhabited only in rank 1, where it is met vacuously (`G(ℤ, {1,3,7,12,17,22})`, measured by Poros); require rank ≥ 2 or a stated scaling; name a rank-≥2 inhabitant or register finding one as part of the task | adopted: rank ≥ 2 and a size that does not grow with refuting subgraphs; no rank-≥2 inhabitant with certified `χ_f ≤ 4` is known, registered as part of the task. The rank-1 refusal is Poros's solver measurement, not re-run by the planner |
+| 12 | Poros, late card | plain density is false at four colours in rank 1: T30's four walls are one-way (transient window states), while existence and `P = F = 0` hold there; restate (Q) | adopted after an independent re-check with the planner's own code (cross-edge counts 8, 4, 24, 2 reproduced; controls 0): (Q) is now existence + inheritance, with `F_μ = P` as the optional sharper form. **A planner's miss**, logged for the close: T30 was in §G.5 as bearing and its consequence for density was not drawn |
 | 11 | Poros, answer to question 2 | two kinds missing: T (Lovász's topological bound, the domain's topology) and A (algebraic: Nullstellensatz, group-ring ideals, FS-10); a control `Cay(ℤ,{1,2,3})` | adopted in §IQ items 3 and 5 and in §C.2 |
 
 **Retractions, counted (G51):** Poros 1 (item 5); planner 0. **Disagreements recorded:** none; the one open point (which question
