@@ -772,6 +772,20 @@ is three-colour-only):*
 | **a refusal at 47** *(§B.2.1: its eight obligations)* | the record's refusal section | the object (exact points); K2 CERTIFIED; a second solver; the symmetry rule's soundness stated; the statement read aloud ("no proper four-colouring of this finite unit-distance graph over ℚ(√47)² exists, so χ(ℚ(√47)²) ≥ 5"); the upper bound's grade stated (χ ≤ 5 through Γ₁₁ is row 52's, whose field-level step is row 57's gap); the carry-up by the chain (FS79-T9) named only if used; **no "first"** until a prior-art gate on five-chromatic real quadratic planes is run and written into the record |
 | the record | the survivors' types | every survivor typed by the screen and cap it met |
 
+
+**D's record surface** *(experience pass, §B.3.3).*
+- **One JSONL row per ask** carries the §B.1.1 schema in full. Those fields are family, shape, R, n, m, `d_ball`, `n₄`, `d₄`, pins,
+  precedence rule, solver and version, wall, machine, verdict, CPU s, the wall's firing (yes/no), and the CNF sha256. A refusal row also
+  carries K2's verdict line and the certificate's path.
+- **Every price is printed as one self-contained line** that carries both denominators, so that it can be quoted without its table:
+  `PRICE [reading]: <survivor>, ball R = …, n₄ = … points at d_ball = …, edge pin + precedence, <solver>, <machine>: UNKNOWN at W = … s
+  (the wall fired). Matched control X_A (de Grey's lattice ball plus one non-unit edge), n₄ = … at d_ball = …, same encoding: UNSAT in
+  t_A = … s CPU (minimum of 3; K2 CERTIFIED). Ratio > W/t_A. Carried from an abelian Cayley graph; the triangle axis is uncovered; not
+  evidence that four colours suffice.`
+- **K2's CERTIFIED line states its conclusion by object:**
+  - with no non-unit edge: "hence χ(ℚ(√d)²) ≥ k + 1";
+  - with X_A's one non-unit edge {p, q}: "hence every proper k-colouring of the unit part gives p and q one colour". It never says χ ≥ 5
+    there.
 **What a result may claim.**
 - A certified refusal at 47 proves χ(ℚ(√47)²) = 5. This confirms the conjecture and cannot falsify it.
 - A null is a price, not evidence that four colours suffice. Only a four-colouring of the whole plane, local at no prime, would
@@ -1150,3 +1164,51 @@ involves only the layers `b·u_j`. So the least configuration family worth C4's 
    written RUP checker, because K2 has no positive control at `k = 4` in its class.
 2. §S.C's acceptance table gained C4's seven obligations.
 3. Found on the way: the precedence-with-pins soundness obligation (§B.2.2).
+
+### §B.3 The experience pass (`debruijn-experience-modeling`, light)
+
+*The consumer is a reviewer who trusts none of this, holding one output line and one certificate file, and later a close planner
+reading tables with no conversation behind them. The test is whether each line answers the reviewer's first question without the
+reviewer opening anything: **what object was checked, and what does a PASS license?***
+
+#### §B.3.1 `tools/fs81_theta_check.py`'s verdict lines (phase 0's tool; proposals to the owner for the implementer, not applied)
+
+| line as printed now | what the cold reader cannot tell | proposal |
+|---|---|---|
+| `PASS EMPTY: L leaves refuted; R relations verified; units N pairs (completeness in the key lattice not checked: --no-enumerate)` | which field; which certificate; what follows. The parenthesis reads as a weakness of the EMPTY verdict, although the docstring says completeness is irrelevant to EMPTY soundness | print `d`, the certificate's sha256 (first 16 hex) and the conclusion with its grade: "… so Cay(span U, ±U), a subgraph of the unit-distance graph of ℚ(√d)², is not 3-colourable: χ(ℚ(√d)²) ≥ 4 [cert + hand: FS73-T22 ⟹]"; reword the parenthesis to "(completeness of the listed units is irrelevant to EMPTY and was not checked)" |
+| `PASS EMPTY: …, the complete / NOT the complete unit set of the key lattice (M vectors)` | as above; also "pairs" for N and "vectors" for M in one line | the same conclusion; **one unit of count per line** (± pairs everywhere, or both named). Check what `all_units` counts before choosing the word |
+| `PASS NONEMPTY: theta is a point of Theta for all M unit vectors of the key lattice` | whether this says anything about the field (it does not) | append "so the key lattice's unit-distance graph is 3-coloured by ⌊3θ(x)⌋ mod 3; a typed null for ℚ(√d)², never a colouring of the plane"; print `d` and the sha |
+| `PASS NONEMPTY (listed units only, no enumeration): …; the key lattice's other unit vectors were NOT checked` | good as it stands: it names the object and the gap | print `d` and the sha, and add "a typed null for the field" |
+| `FAIL: <reason>` (exit 1) | nothing missing | none |
+
+Each proposal is **additive**, so earlier records' `check_line` strings stay valid prefixes. The sha makes a pasted line re-checkable,
+the round-trip law for a log line.
+
+#### §B.3.2 Phase 0's per-field table (`tools/fs81_table.py`; proposals, not applied)
+
+- The legend is already honest. It separates `E`, `E?`, `N`, `N*`, `N(θ)` and `U`, and it says the tree is a weak finder of isolated
+  points of high order.
+- **Two things are missing for the cold reader:**
+  1. **A header sentence:** "Only an `E` cell speaks about the field. It proves χ(ℚ(√d)²) ≥ 4 at grade [cert + hand: FS73-T22 ⟹]. Every
+     other cell is a typed null for the configuration named."
+  2. **One derived column per field:** "χ ≥ 4 certified by", naming the first `E` configuration and its certificate path, or "—".
+
+  The close then reads the milestone's result off one column instead of re-deriving it from cell codes.
+- `N` and `N*` are the listed and saturated objects of §B.1.10. The legend should use those words, so that the table and the plan share
+  one vocabulary.
+
+#### §B.3.3 Stage D's record surface (applied to §S.D)
+
+- The ask row carries the §B.1.1 schema in full.
+- Every price is one self-contained line with both denominators and its grade, so that a price quoted in a report without its table
+  still says what it measured against.
+- K2's CERTIFIED line switches its conclusion by object: with X_A's non-unit edge it states a forced pair, never χ ≥ 5.
+
+  **This last point is a breakdown case the plan did not have.** A refusal certificate of "a unit-distance graph plus one edge" is a
+  forcing certificate, not a chromatic bound. A checker printing one conclusion for both would put a false "χ ≥ 5" on the record the
+  first time it certifies a control.
+
+#### §B.3.4 What the experience pass changed
+
+1. §S.D gained "D's record surface" (the ask row, the price line, K2's object-dependent conclusion).
+2. **To the owner, for the implementer, not applied:** the verdict-line proposals (§B.3.1) and the table header and column (§B.3.2).
