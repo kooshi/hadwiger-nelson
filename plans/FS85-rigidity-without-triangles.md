@@ -904,3 +904,10 @@ is scored as Draw.
 **Ruling 2: round 1's end.** The killing test is adjudicated when both competitors have sent their round-1 reports **or** at 2026-09-26
 18:00, whichever comes first (the agents run continuously; a wall-clock deadline alone would leave the adjudication waiting on an idle
 day).
+
+**Kooshi's reading of the verdicts (2026-09-24, after the rulings above):** *"The week has barely begun. If it doesn't pay off in one
+milestone, that's fine. A proven theorem about why its impossible is also valid. All novel knowledge is a success."* So Paid, Draw (K),
+Draw and Null measure only the week's narrow experiment (whether algebra reaches four colours outside K where search could not); they are
+not the milestone's worth. Every proven new theorem — a "no" in a named class, a no-go of a named format, or a derivation of `8Λ` inside
+K — is a success of the milestone and is reported as one. Nothing registered above changes.
+
