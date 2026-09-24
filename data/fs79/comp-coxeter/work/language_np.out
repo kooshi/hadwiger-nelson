@@ -1,0 +1,4 @@
+N=4: 3000 colourings; of 435 generator pairs, number missing each square type in the sample: {'abab': 33, 'abac': 32, 'abcb': 40, 'abcd': 39}  (2s)
+N=4: generator triples with a monopole in some sampled colouring: 2862 of 4060  (30s)
+N=8: 300 colourings; of 435 generator pairs, number missing each square type in the sample: {'abab': 27, 'abac': 23, 'abcb': 31, 'abcd': 30}  (10s)
+N=8: generator triples with a monopole in some sampled colouring: 2889 of 4060  (114s)

@@ -1,0 +1,9 @@
+H [[1, 0, 0, 1], [0, 1, 1, 0], [0, 0, 2, 0], [0, 0, 0, 2]]
+additive Z/4 colourings: 8
+pinned colourings 266928 orbits 4490 187s
+KPer ranks over orbits: {4: 4490} least rank 4
+intersection of all full-rank KPers: index in Lambda 20736 [(12, 0, 0, 0), (0, 12, 0, 0), (0, 0, 12, 0), (0, 0, 0, 12)]
+L21cc6506-linear.json Per index 4200
+L21cc6506-linear-probe.json Per index 5880
+intersection with both Theta_4 Pers: index 1778112000 [(12, 0, 204, 22716), (0, 12, 324, 25872), (0, 0, 420, 8820), (0, 0, 0, 29400)]
+exponent of Lambda / intersection (least m with m*Lambda inside): 29400 {2: 3, 3: 1, 5: 2, 7: 2}
