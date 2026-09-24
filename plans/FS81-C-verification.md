@@ -291,3 +291,34 @@ consequence of a single relation only, not a statement about `V(d, K)`; it is wh
 named. Every prediction of §0 is met as "proved". One divergence from the statement's own framing is recorded for C2 rather than
 corrected: the verifier's L4 route proves the stronger L4′ ("`1/3 ∈ R_F` and `Θ₃ ≠ ∅` ⟹ bipartite") through one global character `τ`,
 with no case analysis over pairs of layers.
+
+## §2. C2 — comparison with the planner's sketch and Poros's record (read only after C1 was committed at `371c371c`/`4f64e1d2`)
+
+Read: `plans/FS81-F-sketch.md` in full; `plans/POROS-2026-09-24-fs81-plan.md` in full; the plan's §S.C. **No verdict contradicts the
+sketch.** Every divergence below is a difference of route or wording; none is a disagreement about truth. Both routes are kept where
+they differ.
+
+| # | where | the sketch (and Poros) | the verifier (§1) | resolution |
+|---|---|---|---|---|
+| 1 | L1, finite form | cites T22 ⟹ via T21–T22 and T42 ("no generation hypothesis"); not re-derived | applies T22 to `Λ = ⟨S⟩`, where generation holds by definition, and re-derives it: ±1 height lift, winding `W`, Hahn–Banach, then the explicit band map `t = 𝟙/2 − a/6`, which needs `W ≡ Σρ (mod 2)` | both valid. The verifier's re-derivation follows T21's outline, which it had read in `plans/FS73-derivation.md`; it did not read the FS-73 competitors' proofs. The band map is written out here and is not stated in T21/T22's text. **Kept both.** |
+| 2 | L1, compactness | indexed by finite symmetric `S` (Poros's form); `⋂ K_S = Θ₃(F)` | the same indexing, with closedness, nonemptiness (injectivity of `T`) and FIP written out | agree |
+| 3 | L2, compatibility lattice | `L″ = ((2−i)/5)ℤ[i]`, `(L″)* = (2−i)ℤ[i]`, `c0 − w̄c0 = −1 + 3i` (the owner's computation) | `L ∩ w̄L = π⁻¹ℤ[i]` (the same lattice), dual `π̄ℤ[i]`; `c0(w̄ − 1) = 1 − 3i` (the same number up to sign), and the `c0` parts cancel because `θ₂∘w = θ₂` | agree, three times over |
+| 4 | L2, no D0 ↔ F4 switch | triangle inequality with the chosen representatives: a D0–F4 difference has norm in `[1.003, 1.354]`, nonzero and below `√5` | the coset form: `min ‖F4 + π̄ℤ[i]‖² = min ‖F4 + πℤ[i]‖² = 25/18 > R_D² = 5/162`, exact | the same fact: `5√2/6 ± R_D = 1.1785 ± 0.1757`. **Kept both.** |
+| 5 | L2, D0 rigidity | differences within D0 are at most 0.351 < `√5` | `4R_D² = 10/81 < 5`, exact | agree |
+| 6 | L2, the F4 type | every `ψ_m` has order 3 (`3·(10/3) ∈ 5ℤ`), so `3θ = 0` on every piece and hence on `R₅`; `θ` factors through `𝔽₉` | uniqueness of the F4 representative modulo `π̄ℤ[i]` and `πℤ[i]` (T3), then induction along `m` against a fixed `χ ∈ X₃` | **different routes, both valid.** The sketch's is shorter and needs no T3; the verifier's gives the same conclusion and also shows the chain `ψ_m` is determined by `ψ₀`. **Kept both.** |
+| 7 | L2, generation | the pieces for `m` and `−m` sum to `5^{−(m+1)}ℤ[i]` (`(2+i)^{2m}`, `(2−i)^{2m}` coprime) | `Σ_{|m|≤M} w^m L = 5^{−(M+1)}ℤ[i]` (gcd of fractional ideals) | agree |
+| 8 | L2, wording | "every point is in D0's disc or exactly at F4"; "F4" names both the four points and the four characters | D0 is a dodecagon (inradius 1/6, circumradius `√(5/162)`); the disc `|e| ≤ 1/6` is `⋂_m w^m D0` | cosmetic; no effect on any step |
+| 9 | L4 | per-layer case analysis (R1) with the lemma "an archimedean character of finite order on `R₅` is zero" | one global character `τ = lim θ(25^{−k}·)`, the torsion projection made explicit, which gives the stronger L4′ ("`1/3 ∈ R_F`, `Θ₃ ≠ ∅` ⟹ `F²` bipartite") | **the same mechanism** (`λ_e` is never torsion on `R₅`) packaged two ways. The verifier's form makes F-T4 need no relation construction. **Kept both.** |
+| 10 | F-T4, building the relation | `1 = 3·(1 + odd walk) − 2·(3-divisible relation)`; odd walk by ASTRA-T3 or `[Fischer1990]` Thm 3 | `1 = Σ3a_j u_j + 3ε·(odd walk)` | equivalent. The verifier checked Fischer's Thm 3: with `r = 1` it is "`F²` 2-colourable iff every closed walk has even length", so the citation is correct |
+| 11 | F-T4, layers used | `{1, v, v̄, v², v̄²}·U₅` | the relation at `u ∈ {1, v, v̄}`, which touches the same five cosets | agree |
+| 12 | §F.5 | case analysis on a parity layer's two neighbours (both parity; one order-3; both order-3) | the components `τ₂`, `τ₃` of the relation: `n` even kills parity at once; `n` odd forces exactly one parity neighbour, and `τ₃` kills the other | the same three cases. The sketch's "both parity" case is the verifier's `τ₂` step, and its "one order-3" case the `τ₃` step. Agree |
+| 13 | Poros, T40 grid | 8,185 feasible grid points at step 1/300: 8,181 within 0.175 of `c0`, 4 isolated at `c0 + (±5/6, ±5/6)` | exact: `R_D = √(5/162) = 0.17568`, and the four points | consistent (a grid point within `R_D` of `c0` is inside the dodecagon only if it satisfies the strips; the 0.175 radius is below `R_D`) |
+| 14 | Poros's claim that "the parity branch needs no `3 | n`" | stated | the verifier's §1.4 and §1.6: the all-parity contradiction uses only `Σ c_j` even | agree |
+
+**Escalations: none.** The stall criterion did not fire: no gap, no contradiction, and the second-code-path cell list agrees with T40.
+
+**What the comparison adds to the grade.** L1–L4, F-T4 and §F.5 now each have two derivations written independently: the planner's
+(with Poros's check) and the verifier's, written blind. They share one outline for L2 (the layer chain and its compatibility lattice),
+and the statement fixes that outline. They differ in how the F4 chain closes, in how L4 separates the torsion from the real part, and
+in whether T22 is cited or re-derived. The one input both rest on without re-derivation is `[Fischer1990]`'s role in "the only
+fields that can need four", which C3 checks.
