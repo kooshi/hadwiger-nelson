@@ -389,3 +389,73 @@ Let `n = (d+1)/4`, `3 | n`, `M₃ = R₅ + vR₅ + v̄R₅`, `S₃ = {1, v, v̄}
   - a *saturated* A row (a `-sat` row) may read EMPTY at `d ≡ 11 (mod 24)`, because saturation adds unit vectors of the lattice, such
     as rational ones of denominator dividing `n·5^K`, since `1/n = 2 − v − v̄` lies in the lattice. This section says nothing about
     saturated rows.
+
+## §3. C3 — scope
+
+### §3.1 The general form's two hypotheses, each shown necessary on an example
+
+For F-T4 (`F ⊆ ℝ`, `1/3 ∈ ℤ[U_F]`, `F²` not bipartite ⟹ `χ(F²) ≥ 4`), each example states 1/3's membership and bipartiteness with an
+explicit relation or by prime inversion. Every unit vector below is checked by `|z|² = 1` by hand.
+
+| field | `1/3 ∈ ℤ[U]`? | bipartite? | `χ(F²)` | role |
+|---|---|---|---|---|
+| **ℚ(√11)** | **yes**: `1/3 = 2 − v − v̄`, `v = (5 + i√11)/6` | **no**: `1 = 6 − 3v − 3v̄` gives the closed walk `5·1 − 3v − 3v̄ = 0` of length 11 | 4 (the kernel's `four_le_chromaticNumber_planeOver_eleven`; ≤ 4 by the plane at 7) | the inhabitant; F-T4's conclusion agrees with the kernel |
+| **ℚ(√2, √7)** | **yes**: `u = (−1 + 2√2 i)/3` (`1 + 8 = 9`) has `u + ū = −2/3`, so **`1/3 = 1 + u + ū`**, already in ℚ(√2). Cross-check by prime inversion: `Frob₃` in `Gal(ℚ(√2, √7, i)/ℚ)` negates `√2` (`(2/3) = −1`) and `i` (`(−1/3) = −1`) and fixes `√7` (`(7/3) = 1`), so it is not complex conjugation, and no prime above 3 is conjugation-stable (the planner's check, re-derived) | **no**: `v₇ = (3 + i√7)/4` gives `3·1 − 2v₇ − 2v̄₇ = 0`, a closed walk of length 7 | **≥ 4 by F-T4.** L4's relation, explicitly: `1 = 12 + 3u + 3ū − 6v₇ − 6v̄₇` (check: `12 − 2 − 9 = 1`), coefficients all divisible by 3, sum 6 | the new instance: its quadratic subfields are 2-colourable (ℚ(√2), ℚ(√14)) or 3-colourable (ℚ(√7)); its 2-adic wall is broken (7 ≡ 7 mod 8), and its first usable planes are at 31 and 47. Its upper bound is outside this stage |
+| **ℚ(√3)** | **no**: 3 is ramified in ℚ(√3) and inert in ℚ(i), so ℚ(ζ₁₂) has one prime above 3; it is conjugation-stable | **no**: triangles (`1 − ζ₆ + ζ₆² = 0`, length 3) | 3 (`[Fischer1990]` Thm 9) | shows `1/3 ∈ ℤ[U]` is necessary |
+| **ℚ(√7)** | **no**: `Frob₃` fixes `√7` and moves `i`, so it *is* complex conjugation, and both primes above 3 are stable | **no** (length-7 walk above) | 3 (Fischer Thm 9) | shows `1/3 ∈ ℤ[U]` is necessary, with no √3 and no triangle |
+| **ℚ(√7, √10)** | **no**: `(7/3) = (10/3) = 1`, `(−1/3) = −1`, so `Frob₃ = c` and every prime above 3 is stable (the planner's check, re-derived) | **no** (contains √7) | **3**: 3 splits completely in F, so a prime of F has residue field `𝔽₃`, and the residue map to `𝔽₉ = 𝔽₃(i)` sends every unit vector to `{±1, ±i}`. An `𝔽₃`-functional nonzero on `1` and `i` is then an additive 3-colouring. | necessity again, at a biquadratic field without √3 |
+| **ℚ(√2)** | **yes**: `1/3 = 1 + u + ū` as above | **yes** (`[Fischer1990]` Thm 8: `2 ≢ 3 (mod 4)`) | 2 | shows non-bipartiteness is necessary |
+
+So on these examples each hypothesis is necessary. **Neither can be weakened to a condition on one relation's coefficients alone**
+(§1.4).
+
+### §3.2 §F.5 against `[Fischer1990]` Thm 9
+
+- **Fischer's maps are points of `Θ₃`.** Fischer's Thm 9 colourings (N ≡ 0 mod 3: `ξ ↦ (a₁ + b₁)/c mod 3`; N ≡ 1 mod 3:
+  `ξ ↦ (a₁ + b₁ + a₂ + b₂)/c mod 3`, for `ξ = ((a₁ + b₁i) + (a₂ + b₂i)√N)/c`) are homomorphisms `R_F → 𝔽₃` nonzero on unit vectors, so
+  `θ = φ/3` lies in `Θ₃`.
+- **Consistency with §F.5.** §F.5 (proved blind, §1.6) says every point of `Θ₃(ℚ(√d))` at `d ≡ 3, 7 (mod 12)` is such a homomorphism.
+  Fischer's are, so the negative control passes, and **at these fields `Θ₃` is exactly the set of additive 3-colourings**.
+- **Checked numerically** (`fischer9_check.py`, the verifier's scratch):
+  - on every primitive unit vector with `c ≤ 60` (N = 3, 7, 15, 19) or `c ≤ 40` (N = 31, 43, 51, 67), 84 to 372 vectors per field, `c` is
+    never divisible by 3 and Fischer's map is never 0;
+  - the same map at `N = 11, 23, 35` meets `c ≡ 0 (mod 3)` on 56–112 vectors, so the check can fail.
+- **Fischer's maps are local at one prime above 3.**
+  - At `N ≡ 0 (mod 3)`, the map reduces modulo `𝔓 = (3, √N)` (the unique prime above 3, ramified over ℚ(i)) to `(a₁ + b₁i)/c ∈ 𝔽₉` and
+    applies `x + yi ↦ x + y`.
+  - At `N ≡ 1 (mod 3)`, it reduces modulo the prime where `√N ≡ 1` and applies the same functional.
+  - Negation, complex conjugation (`y ↦ −y`) and `√N ↦ −√N` (which swaps the two primes at `N ≡ 1`) give 4 (N ≡ 0) or 8 (N ≡ 1) such
+    maps.
+- **Not settled here:** whether *every* additive 3-colouring is one of these. That needs `R_F/3R_F`, which at `N ≡ 0 (mod 3)` could be
+  larger than `𝔽₉` (a square-zero part at the ramified prime). `[Fischer1990b]`'s closed form of the ring for real quadratic fields
+  is the natural input. **§F.5's claim, "every slope is additive mod 3", does not depend on it.**
+
+### §3.3 The contrapositive, against ASTRA-T3 and ASTRA-T4
+
+**Statement (verifier's form, [hand]).** Let `F` be a real number field.
+- If `χ(F²) = 3`, then `F²` is 3-colourable (so `Θ₃(F) ≠ ∅` by L1) and not bipartite. F-T4 then gives `1/3 ∉ ℤ[U_F]`.
+- Prime inversion (ASTRA-T2, [hand]; for multiquadratic `F` at odd unramified `p` it is `[Fischer1990b]` Thm 1) gives a
+  conjugation-stable prime `𝔓` of `F(i)` above 3.
+- Since `F(i)/F` is unramified above 3, a stable `𝔓` is inert over `𝔭 = 𝔓 ∩ F`, i.e. `𝔭`'s residue field `𝔽_{3^f}` has no `√−1`,
+  i.e. **`f` is odd**.
+- So: ***χ(F²) = 3 ⟹ some prime of `F` above 3 has odd residue degree.***
+
+**Against ASTRA-T3 and ASTRA-T4.**
+- **T3** (`χ = 2 ⟺ L = 2`): consistent. F-T4 needs non-bipartiteness exactly where T3 says `χ ≠ 2`.
+- **T4** (`√3 ∈ F`: `χ = 3 ⟺` some prime has residue field `𝔽₃`) is **sharper** for √3-fields: residue degree exactly 1, not merely
+  odd. The contrapositive is the weaker necessary condition, but it holds **without √3**. That is the case T4's rhombus argument
+  cannot reach (no triangles, G57).
+- **The converse at residue degree 1 holds** for every `F`: a prime of `F` with residue field `𝔽₃` gives an additive 3-colouring through
+  `𝔽₉`, as at ℚ(√7, √10) in §3.1.
+- **What is left open: the residual case.** A non-bipartite `F` whose primes above 3 of odd residue degree all have degree `≥ 3`. F-T4
+  is silent there (`1/3 ∉ ℤ[U]`), and the residue bound is `χ(Γ_{27}) ≥ 6`.
+  - No additive 3-colouring passes through such a prime: an `𝔽₃`-functional on `𝔽_{729}` nonzero on the 28 norm-one elements would
+    3-colour `Γ₂₇`.
+  - So `χ(F²) = 3` there would need a non-additive slope.
+  - **Example:** `F = ℚ(α, √7)` with `α³ = α + 1`. 3 is inert in the cubic (`x³ − x − 1` has no root mod 3) and splits in ℚ(√7), so
+    both primes of `F` above 3 have residue degree 3. `F` is non-bipartite, and neither F-T4 nor any residue bound decides it.
+- **For real quadratic fields the residual case cannot occur** (residue degrees are 1 or 2). So with `[Fischer1990]` Thms 8–9, F-T4
+  and §F.5, **three-colourability of every real quadratic plane is decided exactly**, and `Θ₃` is classified: empty at
+  `d ≡ 11 (mod 12)`, the additive 3-colourings at `d ≡ 3, 7 (mod 12)`. The bipartite `d ≢ 3 (mod 4)` are not classified here.
+- **Stub candidate for the close:** "three colours at residue degree ≥ 3", the residual case above, with `ℚ(α, √7)` as its first
+  instance. It is the one place the three-colour question over real number fields remains open after F-T4.
