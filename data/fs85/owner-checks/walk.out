@@ -1,0 +1,10 @@
+S: WALKS  (nodes, roots, ends, vertices, non-root) = (11, 7, 1, 11, 4) = Table 2; Table 3 counts agree
+L1: WALKS  (nodes, roots, ends, vertices, non-root) = (147, 13, 5, 113, 134) = Table 2; Table 3 counts agree
+L2: WALKS  (nodes, roots, ends, vertices, non-root) = (43, 11, 1, 43, 32) = Table 2; Table 3 counts agree
+L3: WALKS  (nodes, roots, ends, vertices, non-root) = (144, 13, 6, 130, 131) = Table 2; Table 3 counts agree
+L4: WALKS  (nodes, roots, ends, vertices, non-root) = (80, 11, 3, 74, 69) = Table 2; Table 3 counts agree
+L5: WALKS  (nodes, roots, ends, vertices, non-root) = (49, 13, 2, 46, 36) = Table 2; Table 3 counts agree
+L6: WALKS  (nodes, roots, ends, vertices, non-root) = (65, 13, 2, 64, 52) = Table 2; Table 3 counts agree
+L7: WALKS  (nodes, roots, ends, vertices, non-root) = (105, 13, 5, 88, 92) = Table 2; Table 3 counts agree
+L8: WALKS  (nodes, roots, ends, vertices, non-root) = (247, 10, 14, 155, 237) = Table 2; Table 3 counts agree
+ALL WALK
