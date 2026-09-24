@@ -4,7 +4,23 @@
 the three-colour `Θ` exists at four colours. Rank 4: mechanism; the next use of the competitor-and-advisor design
 (`plans/PROTOCOL-competitor-and-advisor.md` §3).*
 
-**Overlap with FS-79 (2026-09-23).** `plans/STUB-invariant-question-four-colours.md` asks the structural question that G72 prescribes: what invariant does every four-colouring carry? It takes this stub's questions 2 (certificates) and 3 (decidability) as its outcomes. This stub keeps question 1, the extension question (C3-aper and C3-inherit at four colours), and its rank-1 scan. Run FS-79 first; its answer re-aims this one.
+**Re-aimed at FS-79's close (2026-09-24; `LEDGER.md` row 80, `plans/FS79-derivation.md` T3, T21, T34–T36).**
+- **Question 1 restated.** Plain density of periodic four-colourings is **false** in rank 1: FS73-T30's walls are one-way (T3). What is
+  left is existence (C3-aper, `[Ellenberg2018]`'s question at `k = 4`) and inheritance (`P = F`), with `F_μ = P` as the sharper optional
+  form. Coxeter's chirality reading is now a theorem (T34, with a torsion repair), the rank-1 criterion is exact (T35: `P ≠ F` iff every
+  cyclic phase is rigid and a wall exists), and a scan to `max D = 14`, `|D| ≤ 5` found no counterexample (T36). **Rank 1 closes if
+  "every phase rigid ⟹ no wall" is proved** (the reading, unrefuted on 377 of 377 all-rigid sets) — the cheapest open item here.
+- **Question 2 (certificates).** The edge-local height format certifies nothing on any graph of the class at four colours (T21); the
+  averaged route is FS-80's.
+- **Question 3 (decidability).** Stated open in print: `[CGHO2025bg]` §6.2.1 (Question 6.2) carries decidability of emptiness for ℤ^d
+  with arbitrary generators as not understood; the MathOverflow thread (`[Ellenberg2018]`) expects "no" by a domino reduction, which
+  nobody has carried out; a Cayley graph has one vertex orbit where `[Burr1984]`'s undecidability needs several. A domino-type no would
+  likely need cliques or rank ≥ 5 and reach nothing at ℚ(√167) (FS-79's P-rank).
+- **Corrections to the text below:** "the one four-colour height is Baxter's on hexagonal fabric" — the edge-local four-colour heights
+  are exactly Moore–Newman's on sum-closed halves of `S` (rank ≤ 2, always four-colourable; T21); and "a four-colouring carries no height
+  and no slope" holds cell by cell (G73), with wider windows open.
+
+**Overlap with FS-79 (2026-09-23).** `plans/STUB-invariant-question-four-colours.md` asks the structural question that G72 prescribes: what invariant does every four-colouring carry? It takes this stub's questions 2 (certificates) and 3 (decidability) as its outcomes. This stub keeps question 1, the extension question (C3-aper and C3-inherit at four colours), and its rank-1 scan. FS-79 ran first; its answer is the re-aim above.
 
 ## Mission, in plain language
 

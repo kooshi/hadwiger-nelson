@@ -2,6 +2,10 @@
 
 *Minted 2026-09-23 at FS-73's close, from `plans/FS73-derivation.md` T34 (implementer F, phase P4). Rank 6: one object, priced.*
 
+> **FS-79's verdict (2026-09-24): not reached.** FS-79 named KR6 as an open instance (§IQ item 5) and did not decide it. By G73, no
+> cell-local topological invariant will certify its four-colourability either way; a window-frequency LP (FS-80) or a periodic colouring
+> with `W ⊇ 8Λ_dG` is what could.
+
 ## The object and the question
 
 **KR6** is de Grey's lattice over K plus the ζ₆-orbit of `ρ₁₅` — rank 6, 78 unit vectors, over K(√5) (`data/fs73/rank6/lattice-KR6.json`).

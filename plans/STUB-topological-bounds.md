@@ -1,5 +1,12 @@
 # FS-9 — Topological lower bounds on unit-distance graphs: the one technique sharp at every integer (STUB, 2026-09-06)
 
+> **Bearing rewritten at FS-79's close (2026-09-24): the room is entered.** Coxeter's C2, scoped by the owner's reading of the paper
+> (`plans/FS79-derivation.md` T26): by `[SimonyiTardos2006]`'s Zig-zag Theorem the **coindex** bounds — `coind(B₀) + 1`, `coind(H) + 2`
+> and below them Lovász's `conn(N) + 3` — are at most 4 on every K₂,₃-free graph, so on every unit-distance graph: topology of this kind
+> can reach four and never five. **The index bounds** `ind(B₀) + 1` and `ind(H) + 2`, which the paper's chain (1) places above them, are
+> not constrained, and are this stub's question now: can an index bound certify five on a unit-distance graph? And the target's topology
+> read one cell at a time is empty at four colours (G73, row 80). Rank unchanged: a reading room.
+
 > **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` LEAVE (reading room)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
 
 *Minted while mining Kooshi's web-Claude analysis (`reference/Chat-analysis/analysis.txt`, "the lower-bound side: what sees

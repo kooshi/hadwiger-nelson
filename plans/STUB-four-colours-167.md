@@ -1,6 +1,45 @@
-# FS-59 — ℚ(√167): four colours proven; the next question is five
+# FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
-## 0. After FS-73 (2026-09-23): the first question is answered, and the stub's question is now five
+## 0. After FS-79 (2026-09-24): `L21cc6506` is loose at four colours, and the instances are the chain's survivors
+
+**What FS-79 settled** (`LEDGER.md` row 81; `plans/FS79-derivation.md` T1, T2, T8–T16, T38–T43):
+- **`L21cc6506` is four-colourable** (8 additive colourings into ℤ/4 and a Θ₄ point of order 5,880; T8) **and loose at four colours:
+  `F = P = 0`**, from a full-dimensional Θ₄ cell (T38–T40). No pair is forced there, so the chain route (§0′ route 2) has no input on
+  this lattice. Its exact target elsewhere (T2): a forced δ that is a unit at every conjugation-stable prime; over ℚ(√167), 2, 3, 5 and 7
+  are all invertible in `ℤ[U]`.
+- **§0′'s route 1 was run** as FS-79's phase 0 (`data/fs79/records/phase-P0.md`): the circle mod 23 classified at four colours (T11);
+  the saturated chain `Λ_M` swept on **a finite part** — every `M ≤ 2,520`, then the multiples of 420 and 2,520 to 30,240 (T13); 118 of
+  130 screened lattices four-colourable, 39 loose by a gap (T15); **7 minimal survivors** — Λ₂₄₄₈, Λ₂₃₂₈, Λ₂₄₀₀, Λ₄₂₀₀, Λ₁₀₉₂₀, Λ₁₄₂₈₀,
+  Λ₂₄₃₆₀ — **of capped screens, not refusals** (the survivor table in the record lists each one's screens and budgets). At the ramified
+  prime 167 none coloured at 300 s; three have no gapped colouring there by one solver's unchecked UNSAT (T16).
+- ⟨P3B-SLOT-FS59: P3b aimed the exact Θ₄ tool at the seven survivors, with quotients at `N = 13–24`; its result goes here.⟩
+- **Prices, with their caveat:** every candidate's degree-18 ball holds ≥ 1.38·10⁸ points, the cheapest survivor's 1.57·10¹¹ (T13). Those
+  are balls at G65's **three-colour** degree aim; the four-colour hardness band is unmeasured.
+
+**Next, cheapest first** (the owed work from phase 0's trimming, close-inventory items 54, 60, 62, 98):
+1. **Quotients at `N = 13–24`** on every survivor, gap-aimed first (phase 0 stopped at `N ≤ 12`; fix `quot_total`, checked only between
+   values of `N`).
+2. **Longer residue asks** at 59, 67, 71, 79, 83 and 29 (phase 0 used 15–30 s), the seven undecided 43-sets at 300 s, and the
+   classification at 43 (only the sets real lattices produce were asked).
+3. **Each survivor's Θ₄ cells by an exact finder** (phase 0's was a float-LP finder capped at 60 s, stopping at its first point): one
+   full-dimensional cell makes a survivor loose (G73) — if P3b has not already decided it.
+4. **Kempe period groups** of every colouring found (G68), and the question P3 left at `L21cc6506`: do finitely many periodic
+   colourings' Kempe groups already meet in 0 there, or does its looseness need infinitely many (FS79 §6 R7)?
+5. **Route (ii)** on any survivor that stays rigid (a forced δ prime to 23, 43, 59, …; G55).
+6. **Derive the `8 ∤ M` pattern** (FS79 §6 R1): along the multiples computed, ℤ/4-colourings appear exactly when `8 ∤ M` — a 2-adic
+   statement beside `1/2 ∈ ℤ[U]` (G35, G41), an hour's derivation.
+7. **A ball only after**, and only once the four-colour hardness band is measured on refusing controls (phase 0's encoder `refusal_ask`
+   exists, untested; FS-73's 2,044-point graph and Heule-510 are the controls).
+
+The obstruction route that needs no ball — a window-frequency certificate kept small by the symmetry — is FS-80
+(`plans/STUB-window-frequency-certificate.md`), not this stub.
+
+**Provisional bearings, updated at FS-79's close:** G73 (no cell-local certificate; one full-dimensional cell makes a lattice loose),
+G68 (corrected: a gap or finitely many Kempe groups meeting in 0 is sufficient for looseness, not necessary), G21 (a one-period census,
+and a finder that stops at its first point, measure themselves), G72's *Do* (aim every new exact tool at the survivors the day it
+lands), G55 with FS79-T2, G65 (the four-colour band unmeasured).
+
+## 0′. After FS-73 (2026-09-23): the first question is answered, and the stub's question is now five
 
 **`χ(ℚ(√167)²) ≥ 4`** (`LEDGER.md` row 79; `plans/FS73-derivation.md` T39–T45). FS-61's lattice `L21cc6506` (60 unit vectors,
 denominator 420) has an empty rotation set `Θ₃`, so it has no proper three-colouring — three independent exact certificates, four
@@ -38,7 +77,7 @@ depth, and the stub is priced by that.
 
 *Sections 1–5 below are the four-colour question's record (2026-09-17 to 2026-09-22), kept as written: the instruments they
 describe (R5's degree law, R6's growth, R7's dial, R8's order parameter) carry over to four colours; the three-colour routes R1–R4
-and R9 are answered by §0.*
+and R9 are answered by §0′.*
 
 *Minted 2026-09-17 at FS-58's close. Written for a session with zero conversation memory. Read beside: `plans/FS58-four-colours.md`
 (§2 D1–D3, §R-B2–B5, §C), `plans/FS58-prelude-seven-cycle-gadget.md`, `data/fs58/search-167/README.md`, `CLAUDE.md` G59, G60, G61.*

@@ -2,6 +2,9 @@
 
 *Minted 2026-09-22 at FS-70's close. Rank 5 (below FS-71, FS-59); a priced object, not a mechanism.*
 
+> **FS-79's verdict (2026-09-24): not reached.** Named as an open instance (§IQ item 5), not decided. By G73, no cell-local
+> topological invariant will certify it; its routes below stand, with FS-80's window-frequency LP beside them.
+
 ## Mission, in plain language
 
 FS-70 closed every lattice it built but one: `group:u3:2+w4` over ℚ(√3,√5) — rank 8, 84 generators, 324 unit vectors in its

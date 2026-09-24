@@ -4,6 +4,16 @@
 "an attempt at an algebraic explanation in a separate milestone rather than formalizing a big graph" (`plans/FS73-derivation.md`
 T6, kernel decision). Rank 1: mechanism, no compute to speak of, Kooshi's own milestone, and now sharply aimed by Hubai's 2018 description (lead 1).*
 
+> **Re-aimed at FS-79's close (2026-09-24).** De Grey's rigidity is **not an edge-local height**, even on its own language: every
+> edge-local cocycle of its colouring shift is trivial, exactly on all 9,120 colourings (`plans/FS79-derivation.md` T23). And each of its
+> 48 non-Eisenstein unit vectors lies alone in its coset of the Eisenstein sublattice, so the cosets — each carrying a triangular-lattice
+> colouring with its own Moore–Newman height — are coupled only by single matchings (T37): the stripes and `F = 8Λ` are a **many-layer
+> effect**, not a two-layer rule. The only edge-local four-colour heights are Moore–Newman's on sum-closed halves (T21), so lead 4's
+> height lives on each coset and does not globalise. Two readings join the leads (FS79 §6 R5–R6): `K₄`'s clique complex with unit
+> triangles is the flat orbifold `ℝ²/p2`, whose developing map is Moore–Newman's height; and on one hexagon system the triangle-orientation
+> density equals the slope's determinant for every ergodic measure — a non-convex admissible set. An explanation of `8Λ` must read windows
+> wider than one square (G73).
+
 ## Mission, in plain language
 
 FS-73 proved that on de Grey's lattice over K = ℚ(√3,√11) — the 54 unit vectors of the Moser construction and every integer

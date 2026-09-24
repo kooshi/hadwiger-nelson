@@ -1,5 +1,16 @@
 # FS-79 — the invariant question at four colours (stub)
 
+> **CLOSED 2026-09-24.** Record `plans/FS79-invariant-question.md` (its §R-close first); theorems `plans/FS79-derivation.md` T1–T43;
+> `LEDGER.md` rows 80–81; G73. **Outcome (b) in a narrow form, and (c):** four no-gos, each for its named format — edge-local heights
+> (empty on every graph of the class at four colours; from five colours up on every presentation with two generator classes), the loop
+> winding (the relation's parity), parity-free face fluxes, coindex topological bounds — **not a no-go for a kind of invariant**;
+> plain density of periodic four-colourings false in rank 1; (Q-obs) and (Q-rig) not landed, typed. **The open instances (§IQ item 5):**
+> `L21cc6506` decided — four-colourable and loose, `F = P = 0` (row 81); phase 0's seven minimal survivors carried to FS-59 ⟨P3B-STUB79⟩;
+> KR6 (FS-77), FS-72's rank-8 lattice and the rich ℚ(√3,√5) lattices **not reached**; FS-76's rank-1 walls — the exact rank-1 criterion
+> and a scan to `max D = 14` (row 80); de Grey's lattice, the known positive — its rigidity is not an edge-local height (row 80). Kooshi's
+> certificate question goes on in FS-80 (averaged, one-sided) and FS-76 (decidability). **Correction:** the bearing below said
+> "high-rank lattices"; every lattice over ℚ(√167) has rank ≤ 4 (close-inventory items 13–14).
+
 *Minted 2026-09-23, just after FS-73's close. Kooshi asked for it as "its own standalone milestone", after asking how the four-colour
 proof over ℚ(√167) was found and what the next step up could be — "specifically not an extension to what we found, but an abstraction
 of the reframing that allowed us to see it". It is **the first milestone planned under G72 and WORKFLOW 3.3 from the start**. Rank 1.*
