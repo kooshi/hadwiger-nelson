@@ -17,7 +17,7 @@ split unchecked.
 |---|---|---|
 | **A1** trees L1–L8 walked as a fixed certificate | **all eight walk**, and S again; every one of the 880 cells of L1–L8 read by eye, none unreadable; the transcription reproduces Table 2's five parameters for all nine trees and Table 3's 261 per-orbit used-vertex counts exactly; nine planted faults, one per tree, each refused for its planted reason | [tools exact] on a by-eye transcription |
 | **A2** Table 1's root case split | **exhaustive, and every branch reaches its tree's root** — proved by hand (Lemma G below; no gap); each of the 36 root colourings carried onto its tree's root by an exhibited symmetry, checked exactly against the roots read in A1; Parts's counts (6 + 10 + 10 + 10 = 36; 19 with a monochromatic opposite pair) confirmed | [hand] + [tools exact] |
-| **A3** prior-art debts | *pending* | |
+| **A3** prior-art debts | **(1)** the wiki's "Algebraic formulation" page *claims* 8-periodicity of every four-colouring of `R₂` as a computer result and proves nothing about periodicity; nothing on de Grey's lattice. In the threads, Gibbs announced a hand route from "no monochromatic √3-triangle" to period 16 on `R₂` (3 June 2018) and dropped it because the input was missing; Tao's Cor. 9 stops one step in; nothing later. **No hand proof of periodicity found anywhere — FS-85's is the first found, on its exact scope.** **(2)** zbMATH, 39 queries: nothing on periodicity of all colourings of a lattice unit-distance graph. **(3)** "every `k`" is **not found stated in print**, but it is a two-line corollary of Klotz–Sander's own Theorem 4.2 (after Greenwell–Lovász 1974), given a triangle-free circulant of chromatic number `> k`, which FS-85's embedding supplies; Bašić stops at `k = 3`; Nešetřil 1973 has triangle-free uniquely `k`-colourable graphs for every `k`, none of them circulant. **(4)** a triangle-free distance graph or circulant with a forced pair, or unique up to period: **not found** | [searched; negatives recorded] |
 
 ## A1. The trees L1–L8, walked
 
@@ -192,6 +192,173 @@ gray cells are the large ones.
 - The symmetry carrying each S-entry to S's root could have been found by trying all 12 × 24 (symmetry, recolouring) pairs.
   Not done: the proof names it (the rotation that moves the monochromatic pair to (10, 13)), and the script only applies it.
 
+## A3. The prior-art debts
+
+Every negative below is a finding about where the unworked ground is (WORKFLOW 3.2); each measures the words it was searched
+in (G21). The zbMATH queries, verbatim, are `data/fs85/audit/zbmath_queries.py` (39 queries; run with `--full` for the review
+texts). New and re-read works are filed in `BIBLIOGRAPHY.md` (§ A rows `[Parts2020hv]`, `[Polymath16wiki]`,
+`[KlotzSander2017]`, `[Basic2026]`; § B library rows; § C block "FS-85 input audit's prior-art gate").
+
+### A3.1 The Polymath16 wiki's "Algebraic formulation" page, and the threads
+
+**The page was already held** (`~/source/library/notes/polymath16-algebraic-formulation-2018.txt`, read in full at FS-23,
+2026-09-09); the brief's "not held", and the verifier's "we do not hold" (`plans/FS85-V-verification.md` C3), are a slip in
+the record, not a missing copy. Re-fetched anyway: the Wayback index has **five captures** (asone.ai 2021-04-12, 2021-06-21,
+2021-09-19, 2022-06-25; michaelnielsen.org 2026-05-12) and none of the history page. All carry **one revision, last modified
+4 June 2018, 20:40**, and their text, normalised, is identical (2021 against 2026). The 2026 capture's HTML is now saved beside
+the text (`library/notes/polymath16-algebraic-formulation-2018-snapshot-20260512.html`). Read in full again.
+
+**Verdict: the page claims periodicity, and proves none of it.** Its one sentence on the matter: *"A computer assisted analysis
+has confirmed that R̄₂ has non-linear 4-colorings and that all 4-colorings are periodic with period 8. See also this"*. The
+link goes to comment 4206 of the third thread. Its table enters `R₂` at four colours as "L+P 8". Nothing on the page is a
+periodicity argument. It proves only: the linear-colouring obstruction (if `1/n ∈ R` and `k ∣ n`, there is no linear
+`k`-colouring); the unit-modulus group `⟨ω, η⟩` of `R̄₂`, by factorisation in two UFDs; and linear five-colourings mod 5. It
+also states `c(8/3) = c(0)` as known, which is Harder's computer result. **It says nothing about de Grey's lattice**; its rings
+are `R̄₂ = ℤ[ζ₆, (1+i√11)/2, 1/3]` and extensions, and `Λ ⊂ R̄₂`.
+
+**The threads** (`[Polymath16threads]`, searched in full for every periodicity passage in threads 6–18, each with its author
+and date):
+- **Mixon's question** opens the sixth thread (June 2018): *"Is Tamas's result that every 4-coloring of ℤ[ω₁,ω₃] is 8-periodic
+  human-provable?"* The result is `[Hubai2018]` (9 May 2018, fourth thread): a computer search giving 9,120 colourings.
+- **Gibbs, 30 May 2018** (sixth thread), three things:
+  - (i) *"c₄(8/3) = c₄(0). This can be shown to be equivalent to general periodicity of 8, i.e. c₄(x) = c₄(x+8y)."* This is
+    the forced-pair transport (G55's chain theorem, periodicity step, at `δ = 8/3` with `1/3 ∈ R₂`). Its input is Harder's
+    computer-found forced pair.
+  - (ii) His aim: *"showing that the periodicity of 8 follows by human proof from the absence of monochromatic triangles. As far
+    as I know this has not been done yet but I think it is in reach."*
+  - (iii) A hand sketch that no monochromatic √3-triangle makes every Eisenstein sublattice two-coloured along one edge
+    direction. These are the stripes, the step Parts §3 makes in 2020 and FS-85 inherits through (S).
+- **Hubai, same day:** stripes on `R₁` alone give no periodicity in other directions; *"we'll need to use that our colouring
+  extends to R₂ in some stronger way."*
+- **Gibbs, 2 June:** *"apart from the 8-periodicity all other features follow from the lack of a √3 monochromatic triangle."*
+  A claim, with no argument.
+- **Gibbs, 3 June 2018:** *"I think I know how to get from the lack of the monochromatic triangle to a periodicity of 16 using
+  mostly algebraic methods. It might be possible to get to the known periodicity of 8 by similar means. However, I realise that
+  this is not useful because showing the lack of a monochromatic triangle by human proof is already the missing part."* Never
+  written. The wiki page's last edit is the next day, and it contains none of it.
+- **Tao, 12 June 2018** (sixth thread, and the "Coloring R_2" page, `[Polymath16wikiR2]`): Corollary 9 extends `2R₁`-periodicity
+  on `R₁` to `R₁ + η²R₁`. He *"was not able to finish this off yet, and also I would of course like to remove the initial
+  hypothesis of periodicity on R₁."* **Gibbs, 14 June:** *"I have to come back to looking at 4-colourings of R₂ soon."*
+- **Nothing later.** Every "periodic" passage in threads 7–18 (2018–2026) is about tilings, colouring periods of distance graphs
+  or higher dimensions. Parts's human-verifiable proof (Geombinatorics, October 2020; sixteenth thread) supplies exactly the
+  input Gibbs lacked, and spends it on χ ≥ 5, not on periodicity.
+
+**Finding.** The periodicity *values* are computer results: Hubai's `8R₂` on the ring (2018), and on `Λ` FS-73's `F = P = 8Λ`
+(one 2,044-point certificate). **A hand proof of periodicity, for `R₂` or for `Λ`, is in none of the page, the threads, or
+zbMATH (A3.2).** FS-85's route is the one Gibbs announced on 3 June 2018 and dropped for want of (S). Parts's 2020 input and
+FS-85's lemmas complete it on `Λ`, with period lattice `1680Λ` (Coxeter's `120Λ`); that is weaker than the computed `8Λ`.
+- **Credit must name** Gibbs's announcement, Tao's Corollary 9, Parts's (S) and Hubai's computation.
+- **It answers Mixon's 2018 question on its exact scope:** a finite-index period lattice on `Λ`, by hand, given Parts's checked
+  trees. The verifier has already put it forward as a `CLOSED-QUESTIONS.md` candidate.
+
+### A3.2 zbMATH, in the discipline's words
+
+| topic | queries (verbatim in the script) | hits of note | bears? |
+|---|---|---|---|
+| periodicity of all colourings | `unit distance`+`periodic`+`color*`; `chromatic number of the plane`+`periodic`; `periodic`+`4-coloring*`; `colorings`+`lattice`+`periodic` (05C15); `colorings`+`Z^d`+`periodic` | Klee–Wagon 1991; Coulson 1997 (periodic colourings of space); Alkauskas 2025 (tilings); Chappell 1998 and Zhu 1998 (periods of distance-graph colourings) | no: all about *existence* of periodic colourings |
+| frozen / rigid colourings | `frozen`+`coloring*`; `frozen`+`Z^d`; `proper colorings`+`Z^d`; `hom-shift*` | `[AlonEtAl2021]` (held; mixing of colourings of the grid), `[BrewsterEtAl2020]`, Chandgotia–Marcus 2018, Gangloff–Hellouin–Oprocha 2026 (hom-shifts) | no: the grid, and dynamics, not unit-distance lattices |
+| the people | `au:"Hubai, Tamás"` (10), `au:"Parts, Jaan"` (12), `au:"Mixon, Dustin G."` (100, titles scanned), `au:"Gibbs, Philip*"`+`chromatic` (0), `au:"Polymath"`+`chromatic` (1) | Frankl–Hubai–Pálvölgyi 2020/2023 (almost-monochromatic sets); Parts's Geombinatorics papers; D.H.J. Polymath 2021 (disks and strips) | no: **Hubai's `R₂` result lives only in the blog comment** |
+| the ring | `unit distance`+`ring`+`coloring*` | `[Ducz2026]` (held, read): geometric colourings of the Moser lattice — only the colourings where "same colour" depends only on distance; exactly two | no: a special class, not all colourings |
+
+**Negative, as a finding:** no indexed work states or proves that every four-colouring of a unit-distance lattice or ring (the
+Moser lattice, `R₂`, de Grey's lattice) is periodic, by computer or by hand. The ground is unworked in the indexed literature;
+the only prior statements are the 2018 blog comments and wiki claims above.
+
+### A3.3 "Triangle-free, uniquely `k`-colourable circulants for every `k ≥ 3`" (FS85-dB3, FS85-C2)
+
+**Read:**
+- `[Basic2026]` §§1, 3–5 (held):
+  - §3 is `k = 3` only: `ICG_{12p}({2, p})`, with `ω = 2` and unique three-colourability.
+  - §4 answers Klotz–Sander's Problem 2.4 with `Cay(Γ, Γ∖U)` for `U` a non-normal subgroup. That graph is complete
+    multipartite and has no bearing here.
+  - §5 poses no every-`k` question.
+- `[KlotzSander2017]` §§1, 3, 4 (now held):
+  - Problem 3.6 is on p. 161, as quoted.
+  - **§4, Theorem 4.2**, extending `[GreenwellLovasz1974]`: *if X is uniquely n-colourable and 2K₂-free, and Y is connected with
+    χ(Y) > n, then X × Y is uniquely n-colourable.* §4 also notes that a direct product of Cayley graphs is a Cayley graph over
+    the product group.
+- `[Nesetril1973]` in full (fetched from DML-CZ, held): Theorem 2 gives a **triangle-free uniquely (k+2)-colourable graph for
+  every k ≥ 1**, a long path plus one vertex per chosen independent set. It is not vertex-transitive. The large-girth line after
+  it — Bollobás–Sauer 1976, Zhu 1996, Emden-Weinert–Hougardy–Kreuter 1998, seen as zbMATH listings only — is probabilistic or
+  explicit, and none of it is circulant as far as those listings show.
+
+**The corollary the literature does not draw.** Take `X = K_k`, which is uniquely `k`-colourable and 2K₂-free. Take `Y` a
+connected triangle-free circulant `Cay(ℤ/m, S)` with `gcd(m, k) = 1` and `χ(Y) > k`. Then:
+- `K_k × Y = Cay(ℤ/k × ℤ/m, (ℤ/k∖0) × S)` is a circulant on `ℤ/km`, by the Chinese remainder theorem;
+- it is triangle-free, because a triangle in a direct product projects to a triangle in each factor;
+- `ω = 2`;
+- it is uniquely `k`-colourable, by Theorem 4.2.
+
+**That is "every `k`", one application of a printed theorem, in the paper that poses 3.6 a page earlier.** The only input it
+needs is `Y`: a triangle-free circulant with chromatic number above `k` and order prime to `k`. zbMATH queries 29–32 (triangle-free
+circulants; triangle-free Cayley graphs with large chromatic number; girth; "induced subgraph of a circulant") found no such
+family in print. FS-85's own embedding supplies it. Put a triangle-free `(k+1)`-chromatic `H` (an iterated Mycielskian) into
+`ℤ` by a B₃-type set `D`, as in `plans/FS85-C-Coxeter.md` C1 items 1–3. For a prime `p > 3·max D`, `Cay(ℤ/p, ±D)` is then
+triangle-free, contains `H`, and is connected.
+
+**Citing works, compared by identifier** (G49):
+- OpenAlex (`W2562747661`) and Semantic Scholar (CorpusId `55418791`) each list **four** citing works of Klotz–Sander, and
+  **not the same four**:
+  - OpenAlex alone has `[Matsumoto2021]`.
+  - Semantic Scholar alone has `[Basic2026]`.
+  - Both have `[JanssenMacKeigan2020]`, `[Hujdurovic2020]` and `[ErskineGriggsSiran2022]`.
+  - The union is five. A count comparison would have read "agree".
+- What was opened:
+  - Janssen–MacKeigan and Erskine–Griggs–Širáň: the passages using Klotz–Sander (Thms 2.2, 3.3 and the `ℤ_{p²}` circulant),
+    all with cliques.
+  - Hujdurović: Klotz–Sander is only in the reference list, as far as the extraction shows.
+  - Matsumoto: paywalled; abstract only (game chromatic number).
+- `[Basic2026]` has no citing works in either database (OpenAlex `W7208766586`).
+
+**Verdict.** "Every `k ≥ 3`" is **not found stated in print**. It is **folklore-grade**: it is a direct corollary of a printed
+theorem (Klotz–Sander Thm 4.2 / Greenwell–Lovász 1974), given triangle-free circulants of large chromatic number. The honest
+claim is therefore narrower:
+- **not seen in print:** the family, and the explicit input `Y` built from FS-85's embedding;
+- **credit:** `[Basic2026]` for `k = 3`, `[GreenwellLovasz1974]` / `[KlotzSander2017]` for the product mechanism, and
+  `[Nesetril1973]` for triangle-free uniquely `k`-colourable graphs of every `k`;
+- **the product route is the shorter proof to write:** `K_k × Cay(ℤ/p, ±D)`, order `kp`, the same order as FS85-dB3's.
+
+*Leads not followed (titles from memory, unverified, so not filed):* work on chromatic numbers of Cayley graphs on `ℤ` and
+Bohr recurrence (Katznelson; Kříž) may already hold triangle-free circulants of large chromatic number. Worth one query before
+any claim that `Y` is new.
+
+### A3.4 The abstract "yes" (FS85-dB2, Coxeter's C1)
+
+The claim: a triangle-free distance graph on `ℤ` with `χ = 4` and `F₄ = 4ℤ`, whose 24 four-colourings are the maps
+`x ↦ f(x mod 4)`. Queries 23–28 and 35–38 (distance graphs with integers, triangle-free, periodic, sum-free, uniquely; Sidon
+sets; Mycielski; circulants with "all colorings"), and one web search.
+- **The integer distance graph literature asks other questions.** It studies `χ`, circular and fractional `χ`, and whether
+  optimal periodic colourings exist and how short their period can be: Eggleton–Erdős–Skilton; Kemnitz–Kolberg and
+  Kemnitz–Marangio; Zhu 1998 and 2002; Liu–Zhu; Chappell; Cervantes–Krebs 2025, whose title is about periods. None of it is
+  about forced pairs or unique colourability.
+- `[OravcovaSotak2024]` (read §1 and the statements) quotes **Zhu's conjecture** (`[Zhu2002]` Conj. 4.1): a triangle-free
+  `G(ℤ, D)` with `|D| ≥ 3` has `χ ≤ |D|`. It also quotes the `|D| = 3` classification, whose four-chromatic cases all contain
+  triangles. So a triangle-free four-chromatic distance graph needs `|D| ≥ 4`. FS-85's has `|D| = 70`, consistent with the
+  conjecture and no test of it. Their forced-period argument (Thm 2.2) works at the maximal colour count, with triangles.
+- **Circulants:** Klotz–Sander Thm 3.3 has cliques; Bašić is finite, `k = 3`.
+- **Frozen colourings of `ℤ^d`** (`[AlonEtAl2021]`, `[BrewsterEtAl2020]`): the grid, not a triangle-free distance graph with a
+  forced pair.
+
+**Verdict: not found in print.** The ingredients are classical (Mycielski 1955; dissociated/B₃-type sets), so the folklore risk
+is real, but no statement of a triangle-free distance graph or circulant with a forced pair, or with a colouring unique up to
+period, was found. The unworked question in the discipline's words is **rigidity of colourings of distance graphs on `ℤ`**.
+
+### Would have searched here (A3)
+
+Nothing in A3 called for a colouring search. The one temptation was a positive control for the product corollary: build
+`K_3 × Y` for a small triangle-free circulant `Y` and colour it. Not done, on two grounds: the corollary is an instance of a
+printed theorem, and colouring it would have been a colouring search.
+
+### Record corrections this audit owes (three for the close inventory; the fourth corrected here)
+
+- `plans/FS85-V-verification.md` C3 says the "Algebraic formulation" page is not held. It has been held since 2026-09-09.
+- The same record's count "776 non-root nodes in L1–L8" should be 783.
+- `BIBLIOGRAPHY.md`'s `[Parts2020hv]` row said *"his proof imports one computer step, that every √3-triple is
+  non-monochromatic (221 vtx)"*. That is false: the step is the nine checkable trees, and the 221-vertex graph is a §2 dead end.
+  **Corrected in place in this commit**, since the audit is the reading that shows it.
+- `tools/bib_audit.py` reports one unlogged arXiv id, `arXiv:2001.08801`, first seen in `plans/FS85-C-deBruijn.md`. It is not
+  this audit's, and is left for its owner.
+
 ## Theorems this phase proved
 
 - **FS85-IA1 — Parts's trees S, L1–L8 are valid refutations of their root colourings.** For each T ∈ {S, L1, …, L8}, the
@@ -204,3 +371,8 @@ gray cells are the large ones.
 - **FS85-IA3 — every R_ab reaches its tree's root (Lemma T).** [tools exact] `data/fs85/audit/golomb.py`, plant `--plant`.
 - **FS85-IA4 — (S) for G481.** No proper four-colouring of G481 gives vertices 2, 3, 4 one colour. [tools exact + hand:
   IA1 + IA2 + IA3] With V-T12 (G481's placements in Λ), this is FS-85's input (S) on Λ in the five inner orientations.
+- **FS85-IA5 — triangle-free uniquely `k`-colourable circulants for every `k ≥ 3`, by the product route.** For `Y` a connected
+  triangle-free circulant of order prime to `k` with `χ(Y) > k`, `K_k × Y` is a triangle-free (`ω = 2`) uniquely `k`-colourable
+  circulant. [hand; an instance of `[KlotzSander2017]` Thm 4.2 / `[GreenwellLovasz1974]`, with `Y` from FS-85's C1 embedding]
+  Proof: A3.3. Prior art: the mechanism is printed; the family is not seen stated. Kernel: declined — a corollary of a
+  printed theorem, owed a citation, not a certificate.
