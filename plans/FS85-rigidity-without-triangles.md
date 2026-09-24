@@ -870,3 +870,37 @@ Stated and not proved:
 - the record reads in §0.3, a measurement of FS79-T36's range, owner-checked;
 - §PA.4(b), a reading of the wiki's Lemma 1: a triangle's three unit vectors reduce to the three non-zero classes of `𝔽₄`;
 - §PA.4(c), a reading of `[Basic2026]` §3.
+
+## §R-review. The owner's scoring of the plan (2026-09-24, at stage A's hand-back)
+
+*Written by the product owner, who scores and does not contribute mathematics. The plan above is the planner's; this section records
+the score, one owner check and two rulings. Everything here is logged in `plans/FS85-close-inventory.md`.*
+
+**Scores.**
+
+| part | score | reason |
+|---|---|---|
+| §G | **pass** | every grokking G1–G74, every ledger row 1–84, the method rules and the nearest derivations walked one line each, with a reason; two silent verdicts corrected on the advisor's review (G60/G66 by their addenda, G9/row 26), both counted as planner retractions; the test "it must change the plan" is met six ways (§G.5's last paragraph) |
+| §PA | **pass, with debts** | 17 queries in four disciplines' words, the question searched as well as the method, zbMATH author listings, the held threads grepped; it found the G50 instances (the wiki page, Parts's lemma, Bašić) and a record error. Debts carried to the competitors' gate, named in §C: Soifer ch. 55's "[Soi46]", the OpenAlex cross-check of Klotz–Sander's citing works, Klotz–Sander's full text, Bašić §3.1's case analysis and §4, `[Parts2020hv]` §4 on, T721 unchecked |
+| §IQ | **pass** | S1 classifies *every* four-colouring of `Cay(Λ, U)`; S2 asks `F₄ = 0` for every member of a class, separates "some colouring frozen" from "every colouring frozen", and names its strengths (`F ⊆ F_μ ⊆ P`). Neither is the existence form reworded. Item 3 is labelled the planner's hypothesis and kept out of §C |
+| §S.4 | **pass** | the replacement killing test can fire (K1–K3 each need a proof no held result supplies; T's twelve items police K2) and can pass (K1 is reachable in a day if Task 0 succeeds) |
+| §C | **pass** | identical for both competitors; shared prior art stated as such; no route from §IQ item 3; the ban and the log; the protocol's rules (content-free hand-backs, no subagents with the reason, retractions counted) |
+
+**The owner's check of one step** (the rule: one step of every key claim). FS85-A1 re-verified **exactly** in sympy: 9η, 9η², 9η³, 9η̄³
+have integer coordinates `(−3,6,3,−6)`, `(6,0,3,0)`, `(−5,10,2,−4)`, `(3,−6,2,−4)` in the basis `1, ζ₆, w, ζ₆w` of `O_E`, so each lies in
+`Λ = (1/9)·O_E`. The control that must land outside does: 9η⁶ has coordinates `(−13/3, 0, 16/3, 0)`. My first control, η/3, came back
+integral (3η ∈ O_E), so it was a control that could not fail; η⁶ replaced it. **FS85-A1's grade is therefore [tools exact]**, and Task 0
+remains an independent re-verification. Row 78's and FS73-T6's clause "`η^{±3} ∉ Λ`" is false as written, by row 78's own definition of
+`Λ`; the correction is owed at the close (inventory).
+
+**Ruling 1: a verdict the registration left unassigned.** P-V's four verdicts do not cover "a four-colour result on `Λ` only" (Part 1
+landed, nothing outside K): it is not Paid or Paid (abstract) (the note after P-V), not Draw as defined ("only three-colour results")
+and not Null ("nothing at four colours"). **Ruled, before the competition starts: it scores as "Draw (K)"** — algebra matched a search
+certificate inside K and reached nothing new outside it. The alternative weighed was a separate verdict ("Explained"), which would
+reward replacing a known certificate as if it were a new result; the week's question is whether algebra reaches four colours *where
+search could not*, and inside K search already could. P-V's registered probabilities are left as registered; at the close, this outcome
+is scored as Draw.
+
+**Ruling 2: round 1's end.** The killing test is adjudicated when both competitors have sent their round-1 reports **or** at 2026-09-26
+18:00, whichever comes first (the agents run continuously; a wall-clock deadline alone would leave the adjudication waiting on an idle
+day).
