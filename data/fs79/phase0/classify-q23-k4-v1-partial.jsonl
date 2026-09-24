@@ -1,0 +1,132 @@
+{"by": "empty set", "gapped": "SAT", "orbit": [], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 1], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 2], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.009402, "orbit": [0, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.117898, "orbit": [0, 1, 2], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.061906, "orbit": [0, 1, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 1, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.061906, "orbit": [0, 1, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 1, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 2, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 2, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 2, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.172767, "orbit": [0, 2, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088106, "orbit": [0, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.034988, "orbit": [0, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 3.015804, "orbit": [0, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.132248, "orbit": [0, 1, 2, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.110858, "orbit": [0, 1, 2, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.088644, "orbit": [0, 1, 2, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.156297, "orbit": [0, 1, 2, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.226885, "orbit": [0, 1, 2, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.048274, "orbit": [0, 1, 3, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.110858, "orbit": [0, 1, 3, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088644, "orbit": [0, 1, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.110858, "orbit": [0, 1, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.226885, "orbit": [0, 1, 3, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088644, "orbit": [0, 1, 3, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.132248, "orbit": [0, 1, 3, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.088644, "orbit": [0, 1, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088644, "orbit": [0, 1, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.110858, "orbit": [0, 1, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.641931, "orbit": [0, 1, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.181389, "orbit": [0, 1, 4, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.132248, "orbit": [0, 1, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.199845, "orbit": [0, 1, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.048274, "orbit": [0, 1, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.048274, "orbit": [0, 1, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.048274, "orbit": [0, 2, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.002, "gapped": "SAT", "hoffman_floor": 2.150992, "orbit": [0, 2, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.662889, "orbit": [0, 2, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.181389, "orbit": [0, 2, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.237064, "orbit": [0, 2, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.048274, "orbit": [0, 2, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.132248, "orbit": [0, 2, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.181389, "orbit": [0, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.099, "gapped": "SAT", "hoffman_floor": 2.417409, "orbit": [0, 1, 2, 3, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.015, "gapped": "SAT", "hoffman_floor": 2.196888, "orbit": [0, 1, 2, 3, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.176201, "orbit": [0, 1, 2, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.23885, "orbit": [0, 1, 2, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.005, "gapped": "SAT", "hoffman_floor": 2.088967, "orbit": [0, 1, 2, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.005, "gapped": "SAT", "hoffman_floor": 2.142457, "orbit": [0, 1, 2, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.016, "gapped": "SAT", "hoffman_floor": 2.196888, "orbit": [0, 1, 2, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.055, "gapped": "SAT", "hoffman_floor": 2.591974, "orbit": [0, 1, 2, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.012, "gapped": "SAT", "hoffman_floor": 2.270422, "orbit": [0, 1, 2, 4, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088967, "orbit": [0, 1, 2, 4, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.123594, "orbit": [0, 1, 2, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.176201, "orbit": [0, 1, 2, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.2167, "orbit": [0, 1, 2, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.617, "gapped": "SAT", "hoffman_floor": 2.52444, "orbit": [0, 1, 2, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.2167, "orbit": [0, 1, 2, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.2167, "orbit": [0, 1, 2, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.123594, "orbit": [0, 1, 3, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.142457, "orbit": [0, 1, 3, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.012, "gapped": "SAT", "hoffman_floor": 2.491038, "orbit": [0, 1, 3, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.196888, "orbit": [0, 1, 3, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.018, "gapped": "SAT", "hoffman_floor": 2.204624, "orbit": [0, 1, 3, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.01, "gapped": "SAT", "hoffman_floor": 2.292767, "orbit": [0, 1, 3, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.093, "gapped": "SAT", "hoffman_floor": 2.536072, "orbit": [0, 1, 3, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.196888, "orbit": [0, 1, 3, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.088967, "orbit": [0, 1, 3, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.303112, "orbit": [0, 1, 3, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.025, "gapped": "SAT", "hoffman_floor": 2.261822, "orbit": [0, 1, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.256765, "orbit": [0, 1, 3, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.188, "gapped": "SAT", "hoffman_floor": 2.303112, "orbit": [0, 1, 3, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.233976, "orbit": [0, 1, 3, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.176201, "orbit": [0, 1, 3, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.249, "gapped": "SAT", "hoffman_floor": 2.491038, "orbit": [0, 1, 4, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.031, "gapped": "SAT", "hoffman_floor": 2.605881, "orbit": [0, 1, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.204624, "orbit": [0, 1, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.02, "gapped": "SAT", "hoffman_floor": 2.459069, "orbit": [0, 1, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.022, "gapped": "SAT", "hoffman_floor": 2.504817, "orbit": [0, 2, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.013, "gapped": "SAT", "hoffman_floor": 2.447736, "orbit": [0, 2, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.002, "gapped": "SAT", "hoffman_floor": 2.233976, "orbit": [0, 2, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.035, "gapped": "SAT", "hoffman_floor": 2.577083, "orbit": [0, 1, 2, 3, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.093, "gapped": "SAT", "hoffman_floor": 2.327948, "orbit": [0, 1, 2, 3, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.3499, "orbit": [0, 1, 2, 3, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.03, "gapped": "SAT", "hoffman_floor": 2.637457, "orbit": [0, 1, 2, 3, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.160949, "orbit": [0, 1, 2, 3, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.014, "gapped": "SAT", "hoffman_floor": 2.211335, "orbit": [0, 1, 2, 3, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.262047, "orbit": [0, 1, 2, 3, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.025, "gapped": "SAT", "hoffman_floor": 2.565869, "orbit": [0, 1, 2, 3, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.011, "gapped": "SAT", "hoffman_floor": 2.321817, "orbit": [0, 1, 2, 3, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.193629, "orbit": [0, 1, 2, 3, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.242839, "orbit": [0, 1, 2, 3, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.002, "gapped": "SAT", "hoffman_floor": 2.280367, "orbit": [0, 1, 2, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.03, "gapped": "SAT", "hoffman_floor": 2.300762, "orbit": [0, 1, 2, 3, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.117898, "orbit": [0, 1, 2, 4, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.160949, "orbit": [0, 1, 2, 4, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.092, "gapped": "SAT", "hoffman_floor": 2.452278, "orbit": [0, 1, 2, 4, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.011, "gapped": "SAT", "hoffman_floor": 2.404962, "orbit": [0, 1, 2, 4, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.217932, "orbit": [0, 1, 2, 4, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.018, "gapped": "SAT", "hoffman_floor": 2.211335, "orbit": [0, 1, 2, 4, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.056, "gapped": "SAT", "hoffman_floor": 2.531993, "orbit": [0, 1, 2, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.004, "gapped": "SAT", "hoffman_floor": 2.350027, "orbit": [0, 1, 2, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1), (196, 2)], precedence True", "cpu_s": 0.029, "gapped": "SAT", "hoffman_floor": 2.531993, "orbit": [0, 1, 2, 4, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.185, "gapped": "SAT", "hoffman_floor": 2.614016, "orbit": [0, 1, 2, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.056, "gapped": "SAT", "hoffman_floor": 2.456245, "orbit": [0, 1, 2, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.001, "gapped": "SAT", "hoffman_floor": 2.488705, "orbit": [0, 1, 2, 4, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.597, "gapped": "SAT", "hoffman_floor": 2.503782, "orbit": [0, 1, 2, 4, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.193629, "orbit": [0, 1, 2, 5, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.242839, "orbit": [0, 1, 2, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.043, "gapped": "SAT", "hoffman_floor": 2.582734, "orbit": [0, 1, 2, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.002, "gapped": "SAT", "hoffman_floor": 2.300762, "orbit": [0, 1, 2, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.003, "gapped": "SAT", "hoffman_floor": 2.677883, "orbit": [0, 1, 2, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.280367, "orbit": [0, 1, 2, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.117898, "orbit": [0, 1, 3, 4, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.057, "gapped": "SAT", "hoffman_floor": 2.48855, "orbit": [0, 1, 3, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.337, "gapped": "SAT", "hoffman_floor": 2.412912, "orbit": [0, 1, 3, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.207449, "orbit": [0, 1, 3, 4, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1), (284, 2)], precedence True", "cpu_s": 0.007, "gapped": "SAT", "hoffman_floor": 2.381198, "orbit": [0, 1, 3, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.337627, "orbit": [0, 1, 3, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.0, "gapped": "SAT", "hoffman_floor": 2.262047, "orbit": [0, 1, 3, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (1, 1)], precedence True", "cpu_s": 0.09, "gapped": "SAT", "hoffman_floor": 2.614016, "orbit": [0, 1, 3, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.084, "gapped": "SAT", "hoffman_floor": 2.321817, "orbit": [0, 1, 3, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.165, "gapped": "SAT", "hoffman_floor": 2.671339, "orbit": [0, 1, 3, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.005, "gapped": "SAT", "hoffman_floor": 2.396191, "orbit": [0, 1, 3, 5, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.074, "gapped": "SAT", "hoffman_floor": 2.625748, "orbit": [0, 1, 3, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "cadical195, pins [(0, 0), (23, 1)], precedence True", "cpu_s": 0.006, "gapped": "SAT", "hoffman_floor": 2.396191, "orbit": [0, 1, 3, 5, 8, 10], "verdict": "SAT", "what": "orbit"}

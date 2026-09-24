@@ -1,0 +1,225 @@
+{"by": "empty set", "gapped": "SAT", "orbit": [], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 0) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 1) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 1) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 0) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 2) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 0) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 1) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 1) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 0) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 4) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 1) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 11) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 5) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 22) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 2) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 12) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 4, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 7) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 2, 4, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 11) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 6], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 21) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 9.19, "hoffman_floor": 2.622326, "orbit": [0, 1, 2, 3, 4, 6, 10], "replication": "UNKNOWN (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 6, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 6, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 9, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 17) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 5, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 4, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 10) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 3, 5, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 11) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 6, 7], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.72, "hoffman_floor": 2.686033, "orbit": [0, 1, 2, 3, 4, 5, 6, 8], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.19, "hoffman_floor": 2.825219, "orbit": [0, 1, 2, 3, 4, 5, 6, 9], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 21) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.23, "hoffman_floor": 2.529051, "orbit": [0, 1, 2, 3, 4, 6, 7, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.12, "hoffman_floor": 2.983595, "orbit": [0, 1, 2, 3, 4, 6, 8, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7, 8], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 9, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 7, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 6, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 6, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 6, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (8, 16) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (7, 15) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 4, 5, 7, 9, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.12, "hoffman_floor": 2.983595, "orbit": [0, 1, 2, 4, 6, 7, 8, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 59.82, "hoffman_floor": 2.612804, "orbit": [0, 1, 3, 4, 6, 7, 9, 10], "verdict": "UNKNOWN", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.71, "hoffman_floor": 2.630264, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 8], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.29, "hoffman_floor": 2.698034, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 9], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.22, "hoffman_floor": 3.100447, "orbit": [0, 1, 2, 3, 4, 5, 6, 8, 9], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.06, "hoffman_floor": 3.112788, "orbit": [0, 1, 2, 3, 4, 5, 6, 8, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (6, 13) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 6, 7, 8, 9], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.06, "hoffman_floor": 2.791484, "orbit": [0, 1, 2, 3, 4, 6, 7, 8, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.12, "hoffman_floor": 2.789781, "orbit": [0, 1, 2, 3, 4, 6, 7, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (7, 8) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7, 8, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "linear form (10, 6) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 5, 6, 7, 9, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.17, "hoffman_floor": 3.53348, "orbit": [0, 1, 2, 4, 5, 6, 8, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 60.0 s", "cpu_s": 0.17, "hoffman_floor": 2.976084, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.07, "hoffman_floor": 3.176442, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 8, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.1, "hoffman_floor": 2.962019, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.04, "hoffman_floor": 3.310527, "orbit": [0, 1, 2, 3, 4, 5, 6, 8, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "linear form (9, 20) shift 0", "cpu_s": null, "gapped": "SAT", "hoffman_floor": null, "orbit": [0, 1, 2, 3, 4, 5, 7, 8, 9, 10], "verdict": "SAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.05, "hoffman_floor": 2.785572, "orbit": [0, 1, 2, 3, 4, 6, 7, 8, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "kissat, pins [(0, 0), (1, 1), (196, 2)], precedence True, budget 60.0 s", "cpu_s": 0.05, "hoffman_floor": 3.359049, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "replication": "UNSAT (cadical, no pins, no precedence)", "verdict": "UNSAT", "what": "orbit"}
+{"by": "Hoffman ratio bound 4.014815 > 4 (floats; margin 0.0148)", "cpu_s": null, "hoffman_floor": 4.014815, "orbit": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "verdict": "UNSAT", "what": "orbit"}
+{"by_size": {"0": {"SAT": 1, "UNKNOWN": 0, "UNSAT": 0}, "1": {"SAT": 1, "UNKNOWN": 0, "UNSAT": 0}, "10": {"SAT": 1, "UNKNOWN": 0, "UNSAT": 5}, "11": {"SAT": 0, "UNKNOWN": 0, "UNSAT": 1}, "12": {"SAT": 0, "UNKNOWN": 0, "UNSAT": 1}, "2": {"SAT": 6, "UNKNOWN": 0, "UNSAT": 0}, "3": {"SAT": 12, "UNKNOWN": 0, "UNSAT": 0}, "4": {"SAT": 29, "UNKNOWN": 0, "UNSAT": 0}, "5": {"SAT": 38, "UNKNOWN": 0, "UNSAT": 0}, "6": {"SAT": 50, "UNKNOWN": 0, "UNSAT": 0}, "7": {"SAT": 37, "UNKNOWN": 0, "UNSAT": 1}, "8": {"SAT": 23, "UNKNOWN": 1, "UNSAT": 5}, "9": {"SAT": 5, "UNKNOWN": 0, "UNSAT": 7}}, "colourable": 203, "colourable_without_gapped_colouring": [], "convention": "pair j = {g^j, g^(j+h)}, powers in (x1x2 - y1y2, x1y2 + x2y1)", "generator": [4, 10], "k": 4, "machine": "desktop (16 physical cores / 32 threads, 128 GB)", "maximal_colourable": [[0, 1, 2, 3, 4, 5, 6, 7], [0, 1, 2, 4, 5, 6, 8, 10], [0, 1, 2, 3, 4, 5, 7, 8, 9, 10]], "maxsize": null, "minimal_refusing": [[0, 1, 2, 3, 4, 6, 10], [0, 1, 2, 3, 4, 5, 6, 9], [0, 1, 2, 4, 6, 7, 8, 10], [0, 1, 2, 4, 5, 6, 8, 9, 10]], "monotonicity_violations": 0, "orbits": 224, "pairs": 12, "q": 23, "refused_by_spectrum": 1, "refusing": 20, "replications_not_unsat": [[0, 1, 2, 3, 4, 6, 10]], "seconds_this_run": 196.1, "unknown": [[0, 1, 3, 4, 6, 7, 9, 10]], "what": "summary"}

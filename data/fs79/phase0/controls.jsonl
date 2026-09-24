@@ -1,0 +1,4 @@
+{"control": "degrey-quotients", "fails_if": "N = 8 not SAT, or N = 5 or 7 not UNSAT", "pass": true, "units": 54, "verdicts": {"5": "UNSAT", "7": "UNSAT", "8": "SAT"}}
+{"control": "L3e1c94c6-residue", "fails_if": "either ask is not SAT", "image": 12, "k3_by": "linear form (9, 9) shift 0", "k3_gap": "SAT", "k4": "SAT", "pass": true}
+{"all_on_circle_under_true_roots": true, "control": "wrong-root-plant", "fails_if": "the planted non-square sends every unit vector onto the circle", "pass": true, "planted_nonsquare": 5, "roots": [11, 12], "units_off_circle_under_plant": 48}
+{"G65_value": 18.4, "ball_points": 39829, "control": "price-formula", "fails_if": "the formula differs from 18.4 by 2 % or more", "measured_mean_degree": 18.412, "pass": true, "predicted_degree_R1.5": 18.391, "units": 54}
