@@ -461,3 +461,118 @@ So on these examples each hypothesis is necessary. **Neither can be weakened to 
   `d ≡ 11 (mod 12)`, the additive 3-colourings at `d ≡ 3, 7 (mod 12)`. The bipartite `d ≢ 3 (mod 4)` are not classified here.
 - **Stub candidate for the close:** "three colours at residue degree ≥ 3", the residual case above, with `ℚ(α, √7)` as its first
   instance. It is the one place the three-colour question over real number fields remains open after F-T4.
+
+## §4. C4 — finite witnesses: the least `K(d)`, derived and measured
+
+*Everything here is about **finite, listed** configurations. A NONEMPTY at a finite K is a statement about K, never a refutation of
+F-T4. Tools: `tools/fs81_verify_c4.py` (the verifier's exact geometry and constructions); cross-checks through phase 0's own tree
+and checker (outputs in the verifier's scratch, `fs81-verifier/c4/`).*
+
+### §4.1 The finite-level rational layer, proved at every K
+
+- *Statement.* At level K, `Θ_K = c_K + (D_K ∪ F_K) + 5^Kℤ²` exactly, where:
+  - `c_K = (5^K/2)(1 + i)` is the parity character restricted to `L_K = 5^{−K}ℤ[i]`;
+  - `D_K = ⋂_{|m| ≤ K−1} w^m D0` is a `4(2K+1)`-gon;
+  - `F_K` is the four order-3 points `c_K + 5^K(±1 ± i)/6`.
+- *Proof.* §1.2's proof run with only the layers `|m| ≤ K − 1`: the sum of those layers is `L_K` (step 1), and T1–T3 are unchanged.
+- This **proves P0.1's reading** ("measured at K ≤ 6, not proved for all K") for every K.
+- `tools/fs81_verify_c4.py` recomputes `D_K` on its own code path (half-plane clipping) and matches **P0.1's polygons vertex for vertex
+  at K = 1..6**.
+
+### §4.2 The threshold (grade [hand], checked exactly)
+
+**Setup.**
+- For a listed configuration `S = {v^k : k ∈ I}·U^(5^K)`, a point of `Θ₃` is a family of layer characters `μ_k ∈ Θ_K`.
+- **Gauss's lemma** (the minimal polynomial `nX² − (2n−1)X + n` of `v` is primitive over `ℤ[i]`) makes the relation lattice of
+  `⊕ v^k L_K` exactly the `L_K`-span of the shifts of `(−n, 2n−1, −n)`.
+- So `Θ₃(S)` is exactly: `μ_k ∈ Θ_K`, with `(2n−1)μ_b − n(μ_{b−1} + μ_{b+1}) ∈ 5^Kℤ[i]` at every interior `b`.
+- Write `μ_k = c_K + g_k`: parity type `g_k ∈ D_K`, order-3 type `g_k ∈ F_K`. Then each relation reads
+  `(2n−1)g_b − n(g_{b−1} + g_{b+1}) ≡ c_K (mod 5^Kℤ[i])`.
+
+**Its torsion residual.** In units of `5^K`, with `h = (1+i)/2` and `3 | n`:
+- a parity-type `b` leaves the residual `h(1 + [n odd]·#{order-3 neighbours})`. It is 0 or at distance `√2/2` from `ℤ[i]`.
+- an order-3 `b` leaves a residual at distance `√2/6` or `√2/3`.
+- The real parts must bridge it with at most `(2n−1)|ε_b| + n|ε_{b−1}| + n|ε_{b+1}|`, where `|ε| ≤ r_K/5^K` and `r_K` is `D_K`'s
+  circumradius.
+- Minimised over all 32 patterns of layer types (`fs81_verify_c4.py`, and the §1.7 bookkeeping), the binding pattern is
+  **all-parity**, needing `√2/2 ≤ (4n−1)r_K/5^K`. Hence:
+  - **EMPTY whenever `5^K > √2·r_K·d`** (`d = 4n − 1`), for B at every `d ≡ 11 (mod 12)` and for A at `d ≡ 23 (mod 24)`.
+- A at `d ≡ 11 (mod 24)` has a pattern with residual 0 (§4.0's point), so it is NONEMPTY at every K.
+
+**The matching construction (NONEMPTY).** The **alternating point** `g_k = (−1)^k c_K/d` satisfies every relation exactly:
+`(4n−1)g ≡ c_K`, and `−c_K ≡ c_K`. It lies in `D_K` iff `5^K ≤ 2·s_K·d`, where `(s_K, s_K)` is `D_K`'s diagonal vertex. So the
+construction gives **NONEMPTY whenever `5^K ≤ √2·h_K·d`**, with `h_K = √2 s_K` the diagonal extent. This is §1.7(c)'s absorption bound
+made exact: the finite-level trap is precisely this point.
+
+**The constants, exact:**
+
+| K | `√2 r_K` (EMPTY above) | `2 s_K` (NONEMPTY at or below) |
+|---|---|---|
+| 1 | `√5/9 ≈ 0.24845` | `5/21 ≈ 0.23810` |
+| 2 | `≈ 0.23957` (`r₂² = 125/4356`) | `5/21` |
+| 3–5 | `5/21` (`r_K² = 25/882`: the 45° gap of the direction set is the widest) | `5/21` |
+| 6 | `≈ 0.23698` | `≈ 0.23622` (the 45° gap is split by `w^{±6}`) |
+
+**Consequences, per d:**
+- For every `d ≡ 11 (mod 12)`, `5^K > c·d` decides EMPTY for some `c ∈ [√2/6, √5/9] = [0.2357, 0.2485]`. In the owner's variable
+  that is **`5^K ≳ (0.94 to 0.99)·n`**.
+- **Exact below 65,625:** `K_B(d) = min{K : d < 21·5^{K−1}}`. No admissible `d` falls in a gap between the two bounds; the tool checks
+  every `d ≡ 11 (mod 12)` below 65,625. The first undecided pairs are at K = 6, `d ∈ [65,939, 66,143]`.
+- **An upper bound for all d:** the same formula, because `√2 r_K ≤ 5/21` for K ≥ 3, and K = 1, 2 have no admissible `d` in the gap.
+- **On the census:**
+  - `K_B = 1` at d = 11;
+  - `K_B = 2` at d = 23, …, 95;
+  - `K_B = 3` at every census field from 107 to 491.
+  - `K_A = K_B` at `d ≡ 23 (mod 24)`, and **`K_A = ∞` at `d ≡ 11 (mod 24)`** (§4.0).
+- **The two estimates the owner asked about agree in form and differ by a factor of about 2 in the constant.** The planner's crude
+  `5^K ≳ 2n` is safe but twice too large. The verifier's §1.7(c) `5^J ≲ 0.25·d` was the all-parity absorption bound, and it is the
+  true threshold up to `D_K`'s shape (`r_K` against `h_K`). So phase 0's **PL-2** ("EMPTY at the K where `5^K > 2.1n`") and **DB-7**
+  are implied by this theorem at every `d`.
+- **What replaces each infinite-depth step at level K:**
+  - "an archimedean character of finite order is zero" becomes the norm bound `(4n−1)r_K/5^K < √2/2`;
+  - the density of `{w^m}` becomes `D_K`'s polygon in place of the disc;
+  - the layers `|m| ≤ K − 1` replace all of `ℤ`.
+
+### §4.3 Checked against phase 0 and against independent code
+
+**Phase 0's configuration rows, row by row** (`data/fs81/phase0/configs.jsonl` as of this writing; every census d here is
+`≡ 11 (mod 24)`):
+
+| row | object | phase 0 | the theorem | agree |
+|---|---|---|---|---|
+| d35-A-K1 | listed | NONEMPTY (order-6 point) | NONEMPTY (every K) | yes; the order-6 point is §4.0's `(θ₂, θ₂, χ)` type |
+| d83-A-K1 | listed | NONEMPTY (order 6) | NONEMPTY | yes |
+| d107-A-K1 | listed | NONEMPTY (order 6) | NONEMPTY | yes |
+| d131-A-K1 | listed | NONEMPTY (order 6) | NONEMPTY | yes |
+| d35-B-K1 | listed | NONEMPTY | NONEMPTY (`35 ≥ 21`) | yes |
+| d83-B-K1 | listed | NONEMPTY | NONEMPTY | yes |
+| d107-B-K1 | listed | NONEMPTY | NONEMPTY | yes |
+| d35-A-K1-sat, d35-B-K1-sat | saturated | EMPTY | outside the theorem (saturation adds unit vectors) | — |
+| d83-A-K1-sat | saturated, no new units | NONEMPTY | NONEMPTY (the listed object) | yes |
+
+**The verifier's cross-checks through phase 0's tree** (`tools/fs81_theta.py`, imported unmodified; each verdict re-checked by
+`tools/fs81_theta_check.py --no-enumerate`):
+- d = 11, B, K = 1: **EMPTY**, as predicted (`11 < 21`): 9,186 nodes, checker PASS. The 30-pair configuration `{v^k}·U^(5)` certifies
+  `χ(ℚ(√11)²) ≥ 4`.
+- d = 11 A K = 1 and 2, d = 59 A K = 2: **NONEMPTY** at order 6, as predicted.
+- d = 23 A K = 1 and d = 47 A K = 1: **NONEMPTY** (`23 ≥ 21`, `47 ≥ 21`). d = 23 sits 0.48 above the threshold `5/(5/21) = 21`: the
+  sharpest test available.
+- d = 23 A K = 2 (predicted EMPTY) and d = 119 A K = 2 (predicted NONEMPTY): **UNDECIDED at 100 s** (about 60,000 nodes each). That is
+  a measurement of the tree, not of the configuration (G21). The rest waits on P0.3 with longer caps.
+
+**The explicit NONEMPTY points as certificates.**
+- The layer formula gives the band values; V2's `theta_from_x` (PARI's integer solver) lifts them to `θ` in `(a, b, c, e)`
+  coordinates, which **fails unless `r·x ∈ ℤ` for every relation of the listed units**. That is an independent check of the Gauss-lemma
+  reduction. The checker then verifies every listed band value.
+- **PASS** at d = 119 A K = 2, d = 107 B K = 2, d = 23 A K = 1, d = 11 A K = 3, d = 35 A K = 3, and **d = 527 B K = 3** (`527 ≥ 525`).
+- **At d = 491 B K = 3 (`491 < 525`) and d = 2603 B K = 4 (`2603 < 2625`)**, the construction leaves the band, as the threshold
+  requires.
+- A planted point (one layer moved by `1/1000`) fails the lift.
+
+**Kernel shape.** The theorem is **parametric in d**: one construction and one inequality. The finite certificates are one per d, at
+`K_B(d) = O(log d)`, over 50–70 listed pairs for the census. FS-75 can take either. The parametric route is the natural kernel
+statement, because the EMPTY direction is a norm inequality with no tree at all.
+
+**The negative control** (acceptance item 6): at `d ≡ 3, 7 (mod 12)` every configuration is NONEMPTY at every K, since the plane is
+3-colourable (`[Fischer1990]` Thm 9), so an EMPTY there would be a bug. None was observed: phase 0's d = 3, 7 controls are all
+NONEMPTY.
