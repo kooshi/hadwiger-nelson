@@ -291,6 +291,24 @@ class IterSearch(X.Search):
         return {"nodes": self.n_nodes, "leaves": self.n_leaves, "lp": self.n_lp, "bad_farkas": self.n_bad_farkas}
 
 
+def kernel_basis(pos):
+    """V2's relation basis (`fs73v2_xbb.kernel_basis`: PARI's matkerint, verified here), with a 2 GB PARI stack: the default
+    8 MB overflows at about 160 pairs (the saturation of B over ℚ(√59) stopped P0.2's group 5)."""
+    import subprocess
+    N = len(pos)
+    M = "[" + ";".join(",".join(str(pos[j][i]) for j in range(N)) for i in range(4)) + "]"
+    gp = f"K = matkerint({M}); print(#K); for(j=1,#K, print(Vec(K[,j])))\n"
+    r = subprocess.run(["gp", "-q", "-f", "-s", "2G"], input=gp, capture_output=True, text=True, check=True)
+    if r.stderr.strip():
+        raise RuntimeError(f"gp: {r.stderr.strip()[:300]}")
+    out = r.stdout.split("\n")
+    rels = [json.loads(l.replace(" ", "")) for l in out[1:] if l.strip()]
+    assert len(rels) == int(out[0]) == N - 4, (len(rels), out[0])
+    for rr in rels:
+        assert all(sum(rr[j] * pos[j][i] for j in range(N)) == 0 for i in range(4))
+    return rels
+
+
 def small_order_point(units, screen=(3, 6, 9, 12), chunk=200000):
     """A point θ of Θ of order dividing m, for m in `screen`: θ(b_j) = t_j/m on the Hermite basis b of span U, t ∈ (ℤ/m)⁴,
     tested on every listed unit at once (numpy, exact integers).  Returns (m, θ in (a,b,c,e)-dual coordinates) or None.
@@ -344,7 +362,10 @@ def decide(d, D, units, out_path, ckpt_path=None, cap_s=1800.0, ckpt_s=60.0, max
     if state and "pool" in state:
         basis, pool = state["basis"], state["pool"]
     else:
-        basis = X.kernel_basis(units)
+        basis = kernel_basis(units)
+        # short relations cost (2N)^3/6 multisets, each carrying an N-vector: cap the length as N grows (the pool is only
+        # a branching order; the relation basis alone keeps the tree complete)
+        maxlen = maxlen if len(units) <= 60 else (4 if len(units) <= 120 else 0)
         short = X.short_relations(units, maxlen) if maxlen > 0 else []
         pool, seen = [], set()
         for r in short + sorted(basis, key=lambda r: sum(map(abs, r))):
