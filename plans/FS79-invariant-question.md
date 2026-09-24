@@ -792,7 +792,16 @@ The uninformative outcome is P-C; the most informative for the target are P-A an
   Then the **obligation pass** ran on the acceptance criteria, not on proofs. It wrote §C.4: the obligations common to every claim
   (O-0), and for each face and shape (a yes, a no, a no-go of a named kind) the obligations a claim must discharge, each typed prove,
   test or state. It closes with eleven adversarial claims and the obligation that rejects each. §C.2's reporting rule, §S.2's P2
-  acceptance and §S.3's P2 row now point to §C.4. **The experience pass** is judged in §M's closing line.
+  acceptance and §S.3's P2 row now point to §C.4.
+  **The experience pass ran, light, on §C only.** *Choice:* run it. *Alternative:* skip it, as §M's rule allows when no Lean is
+  written. *Why run it:* §C is this milestone's consumer surface. Three agents will act on it cold, with nothing else in context, and
+  the obligation pass had just added §C.4 after §C.3's paste instructions. *What it changed:*
+  - a paste map at §C's head, saying which subsections go into which brief;
+  - every bare section label inside pasted text (§D, §IQ item 3, §PA.2, "§C.4 below", "§C.2's definitions", "item N above")
+    rewritten to name the plan file or the brief's own heading;
+  - glosses for C3-aper and C3-inherit, which §C.4 used without defining.
+  It left the mathematics and the protocol's register alone. *Confidence:* high that §C is now paste-ready, apart from the three
+  template variables and [P0-SURVIVORS].
 
 ## §C. The competition's brief: the slots of `plans/PROTOCOL-competitor-and-advisor.md` §4 and §5, filled
 
@@ -801,14 +810,21 @@ register, the hint protocol, "what is yours to decide", the two standing obligat
 phase 0: the one phase-0 slot is the instance list [P0-SURVIVORS], which the owner fills from `data/fs79/records/phase-P0.md`. The
 owner's held items are not here and reach the competitors only through the advisor, after each has written a first route.*
 
+**Paste map** (the experience pass). Every reference inside the pasted text names the plan file, so a cold reader can follow it.
+- **Each competitor's brief:** the template of `plans/PROTOCOL-competitor-and-advisor.md` §4, with its "mathematics" slot
+  replaced by §C.1 and its "challenge" slot replaced by §C.2 followed by §C.4.
+- **The advisor's brief:** the template of §5, with its slots filled as §C.3 lists, followed by §C.4 verbatim.
+- **Fill before sending:** `{NAME}`, `{OTHER}` and `{SCRATCH}` per brief, and [P0-SURVIVORS] (it appears in §C.1 item 6, §C.2
+  item 10 and §C.4's OBS-Y7). No other slot is open.
+
 ### §C.1 "The mathematics you are standing on"
 
 The project attacks the Hadwiger–Nelson problem: how many colours the plane needs so that no two points one unit apart share a colour
 (5, 6 or 7). Over a real field `F` a **lattice** is the ℤ-span `Λ ⊂ ℂ` of finitely many unit vectors of `F²`; `U = Λ ∩ S¹` is finite
 and `Cay(Λ, U)` is its unit-distance graph. **The abstract class** is every Cayley graph `Cay(Λ, S)` of a finitely generated
 torsion-free abelian group `Λ`, with `S = −S` finite and `0 ∉ S`; no field, no metric. `S` need not generate `Λ`, but the graph is a
-disjoint union of copies of `Cay(⟨S⟩, S)`, so pose everything with `Λ = ⟨S⟩` and read the rank `r` as `rank ⟨S⟩` (§C.2's
-definitions). `X(Λ, S, k)` is its space of proper
+disjoint union of copies of `Cay(⟨S⟩, S)`, so pose everything with `Λ = ⟨S⟩` and read the rank `r` as `rank ⟨S⟩` ("Definitions the scoring uses", in
+the challenge). `X(Λ, S, k)` is its space of proper
 `k`-colourings, a ℤ^r shift of finite type; a colouring is **periodic** if a finite-index subgroup fixes it. The forced group `F` (the
 differences every `k`-colouring identifies) and the H1 group `P` (the differences every periodic `k`-colouring identifies) are subgroups,
 `F ⊆ P` (`Proofs/HadwigerNelson/Kempe.lean`: `forcedSubgroup`, `periodicForcedSubgroup`, `InheritanceQuestion`,
@@ -847,7 +863,7 @@ differences every `k`-colouring identifies) and the H1 group `P` (the difference
 difference that all periodic four-colourings identify identified by all four-colourings** (`P = F`)? The first half is Jordan Ellenberg's
 MathOverflow question (2018, `mathoverflow.net/q/304715`: *if G has a k-colouring, does it have a periodic one?*) at `k = 4`; Chandgotia,
 Gangloff, Hellouin de Menibus and Oprocha carry it as open in 2025, together with the decidability of emptiness for ℤ^d with an arbitrary
-generating set (`[CGHO2025bg]` §6.2.1). FS-73 proved both halves at `k = 3` (item 1). *Sharper, optional:* are periodic colourings dense
+generating set (`[CGHO2025bg]` §6.2.1). FS-73 proved both halves at `k = 3` (item 1 of "The mathematics you are standing on"). *Sharper, optional:* are periodic colourings dense
 in the support of every invariant measure (`F_μ = P`)? **Plain density is false at four colours already in rank 1**: FS73-T30's four walls
 (`D = {1,5,7,10}`, `{3,5,9,10}`, `{3,7,9,10}`, `{5,7,9,10}`) are one-way — legal four-colourings with local patterns no periodic
 four-colouring contains — while those graphs have periodic colourings and `P = F = 0` (checked by the advisor and the planner
@@ -884,7 +900,7 @@ question your result answers, **in which class and at which rank**:
 vectors span), no triangles, and refutation rank at least 2 for free (a line through the origin holds at most one ± pair of unit
 vectors). So a result that reaches them must hold for triangle-free graphs of rank 4, and a no that needs rank ≥ 5 does not reach them.
 
-**Definitions the scoring uses** (the plan's §D, condensed; read §D for the proofs):
+**Definitions the scoring uses** (condensed from `plans/FS79-invariant-question.md` §D, which has the proofs):
 - **Canonical form.** `Cay(Λ, S)` is a disjoint union of copies of `Cay(⟨S⟩, S)`, and colourability, `F` and `P` are those of
   `(⟨S⟩, S)`. Pose everything with `Λ = ⟨S⟩`. **Rank** means `r = rank ⟨S⟩`.
 - **Refutation rank** `ρ₄` of a non-four-colourable graph: the least rank of a subgroup `L` with `Cay(L, S ∩ L)` not four-colourable.
@@ -926,7 +942,7 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
    `R`-invariant configuration of the grid homshift `Hom(ℤⁿ, K₄)`. The discipline's handle on invariants is Klaus Schmidt's
    **cohomology of ℤ^d shifts** (continuous cocycles; a height is a nontrivial one). `[CGHO2025coh]` (arXiv:2510.11969) Theorem 1.1: a
    mixing grid homshift is cohomologically trivial iff its **square group** (the fundamental group of the target with a square 2-cell on
-   every 4-cycle) is ℤ/2 — so the four-colour **grid** homshift has no nontrivial cocycle: item 2 above, in print, for standard
+   every 4-cycle) is ℤ/2 — so the four-colour **grid** homshift has no nontrivial cocycle: item 2 of "The mathematics you are standing on", in print, for standard
    generators. **Our class adds the images of `S`'s relation cycles** (triangles, Pythagorean relations, longer odd cycles), which the
    discipline has not studied.
 2. **With triangles there is a four-colour height.** `[MooreNewman2000]` (arXiv:cond-mat/9902295) §III: proper four-colourings of the
@@ -953,7 +969,7 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
    relaxation, and a window big enough to contain a refuting subgraph is that refutation in disguise. That is why success is scored by
    size. **The plan-phase advisor's reading** [reading, not checked by the plan]: FS-73's slope is the invariant mean of a pair-cylinder
    function (the ±1 height step is fixed by `(c(x), c(x+s))`). So `Θ₃ = ∅` is a two-point-density certificate plus the integrality of
-   the winding. Whether the discrete part is ever essential at comparable size is open (§IQ item 3). The counting compulsion (G53) is one-sided and
+   the winding. Whether the discrete part is ever essential at comparable size is open (`plans/FS79-invariant-question.md` §IQ item 3). The counting compulsion (G53) is one-sided and
    integral, computed on a base pattern alone, and `L21cc6506` is a multilayer of the rational pattern.
 7. **Local transfers fail** (`plans/FS66-tower-conjecture.md` Lemmas W and T): a pointwise transfer invariant can leave the relevant
    polytope; keep invariants global.
@@ -961,12 +977,12 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
    F. Lehner's MathOverflow answer); four-colour walls first appear at `max D = 10`, all with `P = F = 0` (T30); a transfer-matrix
    decider exists (T28). Rank 1 checks claims; it does not answer (Q).
 9. **Topological combinatorics has not been applied here.** No application of Lovász's box or Hom complexes to infinite abelian Cayley
-   graphs was found (§PA.2).
+   graphs was found (`plans/FS79-invariant-question.md` §PA.2).
 10. **The instances** a new procedure is aimed at the day it lands: `L21cc6506` and [P0-SURVIVORS] over ℚ(√167); KR6 (T34); FS-72's rank-8
     lattice over ℚ(√3,√5); the rich 2-unit lattices (T10); the rank-1 walls (T30). Controls: de Grey's lattice, the triangular lattice, the
     grid.
 
-**Reporting.** Your claim is scored against the obligations of §C.4 below for its face and shape, stated before you were briefed. The target is an answer to one face, in a named class and rank, with its kind of invariant named (`plans/FS79-invariant-
+**Reporting.** Your claim is scored against the acceptance criteria below ("Acceptance criteria per face") for its face and shape, stated before you were briefed. The target is an answer to one face, in a named class and rank, with its kind of invariant named (`plans/FS79-invariant-
 question.md` §IQ item 3: colour-class densities, window frequencies, heights, Kempe-class invariants, counting compulsions, the domain's
 topology, algebraic certificates, or another kind you name). If none lands, report
 "not landed" and list under it, each as exactly what it is: (a) a sharpened reduction; (b) a subclass where an invariant exists, with the
@@ -1013,7 +1029,9 @@ obligation of the claimed shape is met. Each obligation is also typed:*
 - ***test***: *an exact check that someone other than its author re-runs, with a planted fault;*
 - ***state***: *a sentence the claim must contain.*
 
-*Definitions (class, `r`, `ρ₄`, kind, size, plain refutation) are those of §C.2 and §D.*
+*Definitions (class, `r`, `ρ₄`, kind, size, plain refutation) are those of "Definitions the scoring uses" in the challenge, and of
+`plans/FS79-invariant-question.md` §D. Two shorthands used below: **C3-aper** (at four colours) = every four-colourable graph in the
+class has a periodic four-colouring; **C3-inherit** = `P = F`.*
 
 **O-0. Every claim, whatever its face**
 
@@ -1034,7 +1052,7 @@ obligation of the claimed shape is met. Each obligation is also typed:*
 | OBS-Y2 | Soundness for **every** four-colouring of every graph in the class: acceptance implies no four-colouring. For an invariant-derived kind: the datum `(d, m)`, the admissible set `A(pres)`, and a proof that every ergodic invariant measure's data lies in `A`. **An argument that sees only periodic colourings does not discharge this**, unless C3-aper is proved for the class | prove |
 | OBS-Y3 | Checkability: the acceptance condition is computed from the presentation alone. A checker (written, or specified exactly enough for P3 to write) reads only the presentation and `C`, re-derives `S`, and runs in polynomial time | test (P3) |
 | OBS-Y4 | A benchmark instance `G*`, all of it checked: K₄-free; `ρ₄ ≥ 2`, by the rank-1 decider on every primitive direction; `χ_f ≤ 4`, by an exhibited periodic independent set of density ≥ 1/4; and `C` accepted on `G*`. If no such `G*` can be named, the substitute used ("refuted by no colour-class density bound") is stated and the grade drops accordingly | test |
-| OBS-Y5 | Size, per §D.4: (a) a closed-form bound `B(r, n, M)`; (b) `|C|` against the best plain refutation of `G*` known (vertices, bits, source), or "none known" with a price ≥ 10⁶ points; (c) optionally, a family with a proved lower bound | state (a, b); prove (c) |
+| OBS-Y5 | Size, per the definitions (plan §D.4): (a) a closed-form bound `B(r, n, M)`; (b) `|C|` against the best plain refutation of `G*` known (vertices, bits, source), or "none known" with a price ≥ 10⁶ points; (c) optionally, a family with a proved lower bound | state (a, b); prove (c) |
 | OBS-Y6 | Controls: the checker **rejects** every `C` on a four-colourable graph (de Grey's lattice, the triangular lattice), and at least one planted fault in `C` is refused by name | test |
 | OBS-Y7 | Aimed the day it lands: run on `L21cc6506` and [P0-SURVIVORS], with the outcome reported either way; or the reason it cannot run there (for example, the class excludes triangle-free `r = 4`) | test / state |
 
