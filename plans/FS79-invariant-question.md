@@ -38,9 +38,15 @@ predicts at least six, G59).
    `1/δ ∈ ℤ[U]` needs `δ` to be a unit at every conjugation-stable prime of `ℚ(√167, i)`, so a lattice whose four-colourings were all
    residue colourings at 23 would have `F = 23Λ` — finite index, rigid, and no five, because 23 is usable. Route (ii)'s exact target is
    **a forced `δ` prime to every stable prime**; `1/2, 1/3, 1/7 ∈ ℤ[U]` over ℚ(√167) (`[Fischer1990]` Ex. 4), so a forced `δ` whose
-   norm involves only 2, 3, 7 and non-stable primes suffices. P0 reads each candidate's stable primes first. Route (ii) is how five was reached over K (row 78: finitely many four-colourings), and "is the colouring
-   space finite?" was posed on Polymath16 in 2018 (D. Mixon, the sixth thread's opening post: *"Is it easy to check whether an infinite
-   k-colorable graph has finitely many k-colorings?"*).
+   norm involves only 2, 3, 7 and non-stable primes suffices. P0 reads each candidate's stable primes first. Route (ii) has one
+   precedent, and it gives five colours only *above* K, never over K itself: `χ(K²) = 4` (Theorem B), while de Grey's lattice over K is
+   rigid at four colours (`F = 8Λ`, row 78, which contains Harder's pair `8/3`). The chain needs `1/(8/3) = 3/8 ∈ ℤ[U]`, which holds
+   exactly when `1/2 ∈ ℤ[U]`, that is, when the 2-adic wall is broken (G55). So rigidity over K gives five in every wall-broken real
+   `F ⊇ K` (K(√7) first) and nothing over K. ℚ(√167)'s wall is already broken (G1), so there a forced `δ` of the right kind would give five
+   in the field itself. *[Reworded at the modeling pass, owner finding 2 (inventory item 30): the text read "Route (ii) is how five was
+   reached over K (row 78: finitely many four-colourings)", but χ(K²) = 4.]* "Is the colouring space finite?" was posed on Polymath16
+   in 2018 (D. Mixon, the sixth thread's opening post: *"Is it easy to check whether an infinite k-colorable graph has finitely many
+   k-colorings?"*).
 
 **The shape of the milestone** (§S has the phases): phase 0, a measurement (one implementer, now); the modeling passes (a fresh agent,
 light); the competition on the structural question (two competitors and a fresh advisor); a verification-and-aiming phase (the key
@@ -302,7 +308,7 @@ the nearest to periodic colourings.*
 | symmetry break: edge pin + precedence (ω = 2) | P0.5 | G57, § Toolchain |
 | refusing controls (T6's 2,044-point graph; Heule-510) because the edges are law-derived | P0.5 | T6, the measured/derived rule |
 | the structural question in the normal form, `F ⊆ F_μ ⊆ P`, with the arithmetic stripped and the generation hypothesis dropped | §IQ, §C | T36–T38, T42, G66 |
-| the kind of invariant each half admits: not a linear relaxation; must see past `χ_f` | §IQ | G24, G38, G60, M61-T3, FS56-T5 |
+| the kind of invariant each half admits: not a vertex-level relaxation (`χ_f`, Hoffman, ϑ); must see past `χ_f`. *[Amended at the modeling pass (finding 1): the first draft said "not a linear relaxation", but a linear programme over window-pattern frequencies is exact in rank 1.]* | §IQ | G24, G38, G60, M61-T3, FS56-T5 |
 | the rigidity half is route (ii) to the target, through G55's chain | §IQ | G55, ASTRA-T5, row 44, T23–T24 |
 | things worth knowing: the grid no-go is a theorem, triangles give a height, the spectral every-colouring theorems, KR6's frame product, the walls half and the recurrent half, local transfers fail | §C | G71, `[CGHO2025coh]`, `[MooreNewman2000]`, row 67, FS54-T6, T34, T38, FS66-W/T |
 | the known positive and its anatomy | §C | row 78, T5–T8, G70, G16 |
@@ -317,8 +323,10 @@ the nearest to periodic colourings.*
 2. **Phase 0 gained a step 0** (G54 at `k = 4`, divisibility first) and a prime classification (G69/T14) before any residue ask.
 3. **§IQ gained the rigidity half** (row 44, G55, T23–T24): route (ii) to the target is a question about every four-colouring, and it was
    posed on Polymath16 in 2018.
-4. **§IQ's "kind" is fixed by G24/G38/G60/M61-T3**: the obstruction half must see past `χ_f`, which rules out every linear relaxation and
-   makes the fractional route at 167 equivalent to improving `χ_f(ℝ²) > 4`.
+4. **§IQ's "kind" is fixed by G24/G38/G60/M61-T3**: the obstruction half must see past `χ_f`, which rules out every vertex-level
+   relaxation (`χ_f`, Hoffman, ϑ) and makes the fractional route at 167 equivalent to improving `χ_f(ℝ²) > 4`. *[Amended at the
+   modeling pass (finding 1): "every linear relaxation" overstated it. A linear programme over window-pattern frequencies of invariant
+   measures is exact in rank 1.]*
 5. **§C gained a list of every-colouring theorems at four colours that the corpus already holds** (row 67/FS38-D2-A, FS54-T6), which the
    stub's "none known" had missed, and the frame-product mechanism of T34.
 6. **Three predictions registered from the corpus** (P-G15, P-G54, P-G71; §P).
@@ -456,6 +464,9 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
    success test. **Recommended ranking, and the default if the owner does not rule: (Q-obs) first, (Q-rig) second — both aim at the
    target — and (Q) with (Q-comp) third, where a no is still a finding (Kooshi's certificate question).** Alternative: (Q) first, as the
    stub framed it around Kooshi's certificate question; it wins if the product aim is the certificate question rather than five at 167.
+   **Ruled (owner ruling R2, inventory item 31): (Q-obs) first, (Q-rig) second, (Q) third** (existence plus inheritance, as restated
+   below). This matches Kooshi's stated aims: a new certificate at four colours, and new routes to five over ℚ(√167). Medium confidence;
+   Kooshi may reverse it until the competition launches.
 
    **Density as first posed is false in rank 1, and (Q) is restated** (Poros's late card, 2026-09-23; the planner re-checked it with its
    own code, `…/scratchpad/fs79-plan/check/rank1.py`: the window-state graph of `G(ℤ, D)` modulo colour permutation, restricted to
@@ -488,28 +499,50 @@ all 4-periodic), and `S ⊇ {s, …, 4s}` is a `K₅`. So:
      For the target, finiteness is not the whole requirement: five follows in the field from a forced `δ` that is a unit at every
      conjugation-stable prime (§0.5, Poros's card B), so the face's target-grade form is *when does `F` contain an element prime to the
      stable primes?* — a residue-rigid lattice (`F = 𝔭Λ` at a usable 𝔭) is rigid and gives nothing.
-   - **(Q-obs) the obstruction face — route (i) to the target.** *Is there an invariant carried by every four-colouring, of a kind named in
-     item 3, whose admissible values form a set computable from `S` that is empty for some graph in 𝒞_r^{K₄-free} that is not
-     four-colourable but has fractional chromatic number at most four?* (A finite refuting subgraph always exists by compactness; the
-     question is for a certificate that is an invariant of every colouring, not a subgraph.) **Its success test requires rank ≥ 2 and a
-     stated scaling** (Poros): in rank 1 the benchmark is inhabited and met vacuously — `G(ℤ, {1,3,7,12,17,22})` is triangle-free (the set
-     is sum-free), has a periodic independent set of density 8/29 so `χ_f ≤ 29/8 < 4`, and refuses four colours on a window of 176 (a
-     CaDiCaL measurement of Poros's; T28's decider can confirm it), and the rank-1 transfer matrix is already a certificate on the group.
-     So a (Q-obs) success is: a K₄-free graph of rank ≥ 2 refused four colours by an invariant certificate that is not a density
-     certificate and whose size does not grow with the smallest refuting finite subgraph (the precedent: `Θ₃`'s 5.7 KB against refuting
-     patches priced near 10⁸ points). **No rank-≥2 K₄-free graph with `χ_f ≤ 4` certified and `χ = 5` is known** (Theorem B four-colours
+   - **(Q-obs) the obstruction face — route (i) to the target.** *Is there an invariant carried by every four-colouring, of a named kind
+     (item 3's list is not exhaustive), whose admissible values form a set computable from `S` that is empty for some graph in
+     𝒞_r^{K₄-free} that is not four-colourable but has fractional chromatic number at most four?* (A finite refuting subgraph always
+     exists by compactness; the question is for a certificate that is an invariant of every colouring, not a subgraph.) **Its success
+     test is by size, not by kind** (owner finding 1, inventory item 29): *a sound certificate of any kind, densities included, checkable
+     in time polynomial in its bit size, whose bit size is bounded by a stated function of the presentation of `(Λ, S)` that mentions no
+     refuting subgraph, and which on the instance is smaller than the best finite refutation known.* The benchmark's `χ_f ≤ 4` already
+     rules out the one-point density bound. A clause excluding "density certificates" is therefore unnecessary, and it would exclude the
+     averaging move G72 names (item 3, kind 0_W). **It requires rank ≥ 2** (Poros), because rank 1 is decided already:
+     `G(ℤ, {1,3,7,12,17,22})` is triangle-free (the set is sum-free) and has the periodic independent set `{0, 2, 4, 6, 10, 15, 20, 25}`
+     mod 29, of density 8/29, so `χ_f ≤ 29/8 < 4`. It refuses four colours on **33** consecutive points and is colourable on 32 (the
+     advisor's check and the modeling agent's, independently; the first draft's "a window of 176" was true but not sharp). Its window-state
+     graph has 3,555 states modulo colour permutation, none on a bi-infinite walk. So the rank-1 transfer matrix decides it with a
+     certificate on the group, and that certificate is about as large as the 33-point refutation: rank 1 shows nothing either way. A second
+     rank-1 control, the advisor's: `D = {1,6,8,11,12}` is K₄-free, has independence density ≥ 1/4 (a period-20 set; the advisor reports
+     exactly 1/4), and has 2,348 window states, none essential. The precedent for a certificate that beats the finite route is `Θ₃`'s
+     5.7 KB against refuting patches priced near 10⁸ points. *[Amended at the modeling pass. The first draft required "a certificate that
+     is not a density certificate" and called the rank-1 benchmark "met vacuously"; see §R-review.]* **No rank-≥2 K₄-free graph with `χ_f ≤ 4` certified and `χ = 5` is known** (Theorem B four-colours
      every K-lattice; the five-chromatic lattices over K(√5), K(√7) and de Grey's field have no `χ_f ≤ 4` certificate); finding one, or
      working with "not refuted by any density certificate" in its place, is part of the task (G30.5). A yes is a certificate of non-four-colourability that lives on the group and sees
-     integrality (the four-colour analogue of `Θ₃ = ∅`). A no-go says every invariant of that kind is controlled by the colour-class
-     densities. **This face is independent of (Q-comp)**: undecidability would leave it open, because the target needs only a sound,
+     integrality (the four-colour analogue of `Θ₃ = ∅`). A no-go says either that the kind cannot refute some named instance at all, or
+     that its certificates fail the size test on some family (their size tracks the refuting subgraphs). *[The first draft read "every
+     invariant of that kind is controlled by the colour-class densities", which holds only for one-point densities (finding 1).]*
+     **This face is independent of (Q-comp)**: undecidability would leave it open, because the target needs only a sound,
      one-sided certificate that scales with the symmetry (Poros's Q2).
 
 3. **The invariant it forces: none known for 𝒞_r at four colours.** What is known, by kind (so that a no-go can name its kind):
-   - **Kind 0, densities** (invariant means of cylinder events: colour-class densities, pair statistics). Averaged and linear; the
-     fractional bound (G60) and the ratio/Hoffman bound are its shadows. Sound and one-sided, but controlled by `χ_f` — and at ℚ(√167) a
-     density certificate of five would prove `χ_f(ℝ²) > 4`, beyond the best known bound (`[MatolcsiEtAl2025]`, ≥ 4). Where the graph is
-     Hoffman-tight, densities already force structure: every colouring is periodic under `H_min` (FS38-D2-A), and `U₃₂` is completely
-     rigid (FS54-T6).
+   - **Kind 0₁, one-point densities** (the colour-class densities of invariant measures on the colouring space; each class is an
+     invariant independent set). Averaged and linear; the fractional bound (G60) and the ratio/Hoffman bound are its shadows. Sound and
+     one-sided, and **controlled by `χ_f`**: it refutes `k` colours only where the independence density is below `1/k`, and for Cayley
+     graphs of ℤ^r that density is `1/χ_f` (standard, by Følner averaging). At ℚ(√167) a certificate of this kind for five would prove
+     `χ_f(ℝ²) > 4`, beyond the best known bound (`[MatolcsiEtAl2025]`, ≥ 4). Where the graph is Hoffman-tight, densities already force
+     structure: every colouring is periodic under `H_min` (FS38-D2-A), and `U₃₂` is completely rigid (FS54-T6).
+   - **Kind 0_W, window-pattern frequencies at a finite window `W ⊂ Λ`** (the `W`-marginals of invariant measures: the frequency of each
+     admissible colouring of `W`; pair statistics are the case `W = {0, s}`). Their admissible set lies in the local-consistency polytope:
+     probability vectors on the admissible `W`-patterns that agree on the overlaps of `W` with its translates. Its emptiness is the
+     infeasibility of a linear programme, certified by a Farkas vector. **This kind is not controlled by `χ_f`.** In rank 1, at the window
+     `[0, max D]`, a consistent vector is a circulation on the window-state graph. A circulation exists iff that graph has a cycle, which
+     holds iff the colouring space is nonempty. So there the programme is exact, and it refutes `G(ℤ,{1,3,7,12,17,22})` although
+     `χ_f ≤ 29/8` (owner finding 1, checked by the advisor and by the modeling agent). In rank ≥ 2 each fixed window gives a relaxation.
+     A window large enough to hold a refuting subgraph gives only that subgraph's refutation in LP form, which is why (Q-obs) is scored by
+     size (item 2). **Posed, not answered:** how does FS-73's `Θ₃` relate to this kind?
+   *[Amended at the modeling pass (owner finding 1). The first draft had a single "Kind 0, densities (invariant means of cylinder events:
+   colour-class densities, pair statistics)" and called it controlled by `χ_f`. That conflated the two rows above.]*
    - **Kind 1, heights** (continuous cocycles into ℤ^m in K. Schmidt's sense, their slopes): the three-colour tool (T21). For the grid at
      four colours there is provably none (`[CGHO2025coh]` Thm 1.1: the square group of `K₄` is ℤ/2). With triangle relations there is a
      two-dimensional one (`[MooreNewman2000]` §III). For arbitrary `S` — which relation cycles the lattice has — unknown.
@@ -693,7 +726,7 @@ inhabitants then. The P1 domain pass may overturn this; it records why.
 | P-A | **(Q) answered yes** in a class that contains rank-4 triangle-free graphs (reaches ℚ(√167)): existence of periodic colourings (hence decidability and two-sided certificates) and `P = F` there | 0.05 | at three colours the same question fell in one competition; nothing known forbids it at four in low rank |
 | P-A′ | (Q) or (Q-rig) answered yes in a **subclass that does not reach ℚ(√167)** (rank 2; triangle lattices through `[MooreNewman2000]`'s height; Hoffman-tight graphs through FS38-D2-A) | 0.15 | the height and spectral theorems already exist for such subclasses |
 | P-B | **(Q-comp) answered no**: an explicit four-colourable graph in 𝒞_r with no periodic four-colouring, or undecidability, with proof and its rank | 0.12 | the frame-product mechanism (T34) and the domino problem make it plausible; MathOverflow's intuition points there |
-| P-B′ | a **no-go of a named kind** (e.g. every kind-1 invariant is trivial on 𝒞_r^{△-free}; or every kind-0 invariant is controlled by `χ_f`) without settling (Q) | 0.18 | `[CGHO2025coh]`'s method is available and G71's grid half is already such a theorem |
+| P-B′ | a **no-go of a named kind** (e.g. every kind-1 invariant is trivial on 𝒞_r^{△-free}; or window-frequency certificates at a fixed window fail the size test on a named family) without settling (Q) | 0.18 | `[CGHO2025coh]`'s method is available and G71's grid half is already such a theorem. *[Amended at the modeling pass (finding 1): the first example, "every kind-0 invariant is controlled by `χ_f`", is false for window frequencies and already known for one-point densities (kind 0₁), so it was no result P2 could land.]* |
 | P-O | **(Q-obs) answered yes on at least one explicit graph**: a certificate from an invariant of every four-colouring that refuses four colours where `χ_f ≤ 4` | 0.08 | Θ₃'s emptiness did exactly this at three colours; G53's counting compulsion is an integral precedent |
 | P-C | **not landed**: sharpened reductions, a subclass with an invariant candidate, a candidate family (the stub's fallbacks) | 0.42 | the default |
 
@@ -789,8 +822,9 @@ in the support of every invariant measure (`F_μ = P`)? **Plain density is false
 four-colouring contains — while those graphs have periodic colourings and `P = F = 0` (checked by the advisor and the planner
 independently, on the window-state graph). Do not spend the competition re-deriving that.
 
-**These are three questions, not one**, and they are ranked [RANKING — the owner fills it; the planner's recommendation and the default:
-(Q-obs), then (Q-rig), then (Q)]. Only (Q-comp) follows from (Q); (Q) says nothing about (Q-rig) (it holds trivially on a finite
+**These are three questions, not one**, and they are ranked: **(Q-obs) first, (Q-rig) second, (Q) third** (existence plus inheritance).
+The first two aim at five colours over ℚ(√167); the third is Kooshi's certificate question, where a no is still a finding. Only
+(Q-comp) follows from (Q); (Q) says nothing about (Q-rig) (it holds trivially on a finite
 colouring space), and (Q-obs) is independent of both. MathOverflow's commenters expect (Q) to be answered no by a domino reduction; such a no
 answers Ellenberg's question and **does not answer (Q-obs)**, and a no that needs rank ≥ 5 or cliques does not reach ℚ(√167). Say which
 question your result answers, **in which class and at which rank**:
@@ -801,13 +835,16 @@ question your result answers, **in which class and at which rank**:
   through a residue colouring at a usable prime gives nothing).
 - **(Q-obs) obstruction** — in the K₄-free subclass: *is there an invariant carried by every four-colouring whose admissible values form a
   set computable from `S`, empty for some non-four-colourable graph whose fractional chromatic number is at most four?* A finite refuting
-  subgraph always exists by compactness; the question is for a certificate that is an invariant of every colouring. **Success needs rank
-  ≥ 2**, a certificate that is not a density certificate, and a size that does not grow with the smallest refuting subgraph: in rank 1 the
-  transfer matrix is already such a certificate, and `G(ℤ, {1,3,7,12,17,22})` (triangle-free, `χ_f ≤ 29/8`, refuses four on a window of
-  176) meets the benchmark vacuously. No rank-≥2 K₄-free graph with a certified `χ_f ≤ 4` and `χ = 5` is known; naming one, or working with
-  "refuted by no density certificate" in its place, is part of the task. Admissible kinds, not exhaustive: densities, heights, Kempe-class
-  invariants, counting compulsions (G53), the domain's topology (Lovász's box complex, `[Lovasz1978]`), algebraic certificates (ideals in
-  the group ring), or a kind you name.
+  subgraph always exists by compactness; the question is for a certificate that is an invariant of every colouring. **Success is scored
+  by size, not by kind**: a sound certificate of any kind, densities included, checkable in time polynomial in its bit size, whose bit
+  size is bounded by a stated function of the presentation of `(Λ, S)` that mentions no refuting subgraph, and which on the instance is
+  smaller than the best finite refutation known. The benchmark's `χ_f ≤ 4` already rules out colour-class densities. **Success also needs
+  rank ≥ 2**, because rank 1 is decided already. `G(ℤ, {1,3,7,12,17,22})` is triangle-free, has `χ_f ≤ 29/8`, and refuses four colours on
+  33 consecutive points. Its transfer matrix, a certificate on the group, decides it at about the size of that 33-point refutation. No
+  rank-≥2 K₄-free graph with a certified `χ_f ≤ 4` and `χ = 5` is known; naming one, or working with "refuted by no colour-class density
+  bound" in its place, is part of the task. Admissible kinds, not exhaustive: colour-class densities, window-pattern frequencies, heights,
+  Kempe-class invariants, counting compulsions (G53), the domain's topology (Lovász's box complex, `[Lovasz1978]`), algebraic
+  certificates (ideals in the group ring), or a kind you name.
 
 **Why the class, and why the rank.** Cliques make both of the last two faces trivial in the abstract class (`S ⊇ {s, 2s, 3s}` forces period
 4 along `s`; `S ⊇ {s, …, 4s}` is a `K₅`); the K₄-free subclass removes them. ℚ(√167)'s lattices have rank ≤ 4 and no triangles, so a
@@ -850,10 +887,15 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
    `r − 1` directions needs a chiral, non-additive phase (Coxeter's reading, FS73 §8); chiral non-additive colourings are common on loose
    lattices (T35); statistical mechanics has a chirality parity invariant under Kempe moves on hexagonal lattices (`[Cepas2016]`) and
    Kempe invariants that are linking numbers (`[CepasAkhmetiev2020]`); Hubai's "one chirality choice" is the same word.
-6. **Averaged invariants and integrality.** Colour-class densities give the fractional bound; at ℚ(√167) its cap is 4.36 > 4, but a density
-   certificate of five there would prove `χ_f(ℝ²) > 4`, beyond the best known bound (`[MatolcsiEtAl2025]`: ≥ 4). An obstruction must see
-   integrality, as the height did at three colours. The counting compulsion (G53) is one-sided and integral, computed on a base pattern
-   alone — and `L21cc6506` is a multilayer of the rational pattern.
+6. **Averaged invariants: one-point densities against window frequencies.** Colour-class densities (one-point) give the fractional
+   bound and nothing more. At ℚ(√167) its cap is 4.36 > 4, but a certificate of that kind for five there would prove `χ_f(ℝ²) > 4`,
+   beyond the best known bound (`[MatolcsiEtAl2025]`: ≥ 4). **Frequencies of colour patterns on a window are a different kind, and they
+   are not controlled by `χ_f`.** In rank 1, at the window `[0, max D]`, a shift-consistent frequency vector is a circulation on the
+   window-state graph. One exists iff that graph has a cycle, iff the colouring space is nonempty. So the linear programme over window
+   frequencies decides rank 1 exactly, including `G(ℤ,{1,3,7,12,17,22})` with `χ_f ≤ 29/8`. In rank ≥ 2 each fixed window is a
+   relaxation, and a window big enough to contain a refuting subgraph is that refutation in disguise. That is why success is scored by
+   size. How FS-73's `Θ₃` relates to window frequencies is a question worth asking. The counting compulsion (G53) is one-sided and
+   integral, computed on a base pattern alone, and `L21cc6506` is a multilayer of the rational pattern.
 7. **Local transfers fail** (`plans/FS66-tower-conjecture.md` Lemmas W and T): a pointwise transfer invariant can leave the relevant
    polytope; keep invariants global.
 8. **The rank-1 laboratory is decidable**: every `k`-colourable `G(ℤ, D)` has a periodic `k`-colouring (`[EggletonErdosSkilton1990]` Thm 2;
@@ -866,7 +908,8 @@ a small object, a `decide` in Lean). A new solver search over lattices is not pa
     grid.
 
 **Reporting.** The target is an answer to one face, in a named class and rank, with its kind of invariant named (`plans/FS79-invariant-
-question.md` §IQ item 3: densities, heights, Kempe-class invariants, counting compulsions, or another kind you name). If none lands, report
+question.md` §IQ item 3: colour-class densities, window frequencies, heights, Kempe-class invariants, counting compulsions, the domain's
+topology, algebraic certificates, or another kind you name). If none lands, report
 "not landed" and list under it, each as exactly what it is: (a) a sharpened reduction; (b) a subclass where an invariant exists, with the
 invariant; (c) a candidate family and what deciding it would take.
 
@@ -887,9 +930,9 @@ the work outgrows it.
 **"The situation"**, items: §C.1 items 1–6 verbatim; the known positive and why it proves nothing about the inference (§C.2); §C.2's
 "things worth knowing" 1–10; the instance list with [P0-SURVIVORS] filled.
 
-**"The challenge"**: §C.2's three questions with their classes, the [RANKING] as the owner filled it, (Q-obs)'s success test (rank ≥ 2,
-not a density certificate, size independent of refuting subgraphs), "why the class, and why the rank", "what a no would look like", and
-the reporting rule.
+**"The challenge"**: §C.2's three questions with their classes, the ranking ((Q-obs), (Q-rig), (Q); owner ruling R2), (Q-obs)'s success
+test (scored by size, not by kind; rank ≥ 2; `χ_f ≤ 4`), "why the class, and why the rank", "what a no would look like", and the
+reporting rule.
 
 **Keep "What I want from you" as the template has it**, with these additions:
 - *"Count the retractions on both sides, with what killed each; before either competitor's first theorem is believed, ask the second
@@ -922,3 +965,43 @@ the reporting rule.
 **Retractions, counted (G51):** Poros 1 (item 5); planner 0. **Disagreements recorded:** none; the one open point (which question
 P2's success is scored on) is a product decision referred to the owner with a recommendation.
 
+
+## §R-review. The owner's acceptance, and how the modeling stage resolved the review
+
+*Written by the modeling agent (de Bruijn, Opus 5.5, a fresh reader of the plan), 2026-09-23. Committed before the modeling passes,
+as the owner asked.*
+
+- **Accepted** by the owner at `aebd48f7`, with two findings routed to this stage and one slot filled by ruling.
+- **Blind-control score** (inventory item 32). Of the owner's controls B1–B11, the plan found 7, found 1 and turned it into a
+  correction (B10, Moore–Newman), met 2 partially (B2: Greenfeld–Tao not named; B3: the averaging object named but misstated, which is
+  finding 1), and missed 1 (B7, the universal-target route, kept independent for held item H-B). §G was complete: 72 grokkings and 45
+  FS-73 theorems, checked by script.
+- **Ruling R1** (inventory item 17): FS-79 may take the density question (FS-76's question 1); FS-76 is re-aimed at the close.
+- **Ruling R2** (inventory item 31): the ranking is (Q-obs), then (Q-rig), then (Q), the last being existence plus inheritance. Filled in
+  §IQ item 2 and §C.2, and named in §C.3.
+- **Finding 1** (inventory item 29, "Kind 0 conflates two things"). **Checked, and it holds.** A shift-invariant measure on the
+  colouring space, read on windows of length `max D + 1`, is a circulation on the window-state graph. A circulation exists iff the
+  graph has a cycle, and in rank 1 that holds iff the colouring space is nonempty. So invariant means of window events decide rank 1
+  exactly, and they refute `G(ℤ,{1,3,7,12,17,22})` at four colours although `χ_f ≤ 29/8`. The modeling agent re-ran the example
+  (`…/scratchpad/fs79-modeling/rank1_bench.py`, `rank1_states.py`): the set is sum-free; `{0,2,4,6,10,15,20,25}` mod 29 is
+  independent; four colours are refused on 33 consecutive points and possible on 32; the window-state graph has 3,555 states modulo
+  colour permutation and none essential. The plan-phase advisor checked the finding independently the same day, agreed, and corrected
+  its own benchmark figure (176 → 33, by two further solvers). The advisor also gave a further argument for dropping the "not a density
+  certificate" clause. It is **not reproduced here**, because it answers a question §IQ item 3 now poses, and answering is the
+  competitors' job; it stays with the advisor's record (inventory item 12). **Resolution:**
+  - §IQ item 3 splits the kind into **0₁, one-point densities** (controlled by `χ_f`, true as the plan had it) and **0_W,
+    window-pattern frequencies** (exact in rank 1, a relaxation at each fixed window in rank ≥ 2). It poses, and does not answer, how
+    `Θ₃` relates to 0_W.
+  - (Q-obs)'s success test is **restated by size** (§IQ item 2 and §C.2), in the advisor's wording adapted: a sound certificate of any
+    kind, densities included, checkable in polynomial time, whose bit size is bounded by a stated function of the presentation that
+    mentions no refuting subgraph, and which on the instance is smaller than the best finite refutation known. The domain pass pins
+    "size" formally (§D).
+  - One more consequence the finding did not state: in rank 1 the transfer certificate for `G(ℤ,{1,3,7,12,17,22})` (3,555 states) is
+    about as large as the 33-point refutation. So rank 1 is excluded because it is already decided (T28, `[EggletonErdosSkilton1990]`),
+    not because the benchmark is "met vacuously" there.
+  - §C.2 item 6, P-B′'s example, §G.6's kind row and §G.7 item 4 are amended to match. Each amendment carries a bracketed note with
+    the text it replaced.
+  - The advisor's second rank-1 control, `D = {1,6,8,11,12}`, is added beside the first (K₄-free; 2,348 window states, none essential,
+    both re-checked here; independence density ≥ 1/4 from a period-20 set; the advisor reports exactly 1/4).
+- **Finding 2** (inventory item 30). **Holds.** χ(K²) = 4. §0 item 5 is reworded: over K, rigidity (`F = 8Λ ∋ 8/3`) gives five only
+  in wall-broken extensions, where `1/2 ∈ ℤ[U]` and hence `3/8 ∈ ℤ[U]` (G55).
