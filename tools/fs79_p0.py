@@ -575,7 +575,7 @@ def cmd_sweep(mlist):
 
 
 # ================================================================ P0.3 the periodic four-colour screens
-SCREEN_QS = (23, 43, 59, 67, 71, 79, 83, 29, 167)      # usable q <= 100, plus 29 (split, q = 1 mod 4) and 167's ramified prime (T18)
+SCREEN_QS = (23, 43, 167, 59, 67, 71, 79, 83, 29)      # usable q <= 100, plus 29 (split, q = 1 mod 4) and 167's ramified prime (T18)
 
 
 def lattice_M(M, U):
@@ -784,15 +784,22 @@ def cmd_screen(ids, qbudget=120.0, quot_nmax=24, quot_total=2700.0, theta_cap=90
             found.append(('linear', {'basis': r_['basis'], 'theta_on_basis': r_['theta_on_basis']}, None))
         # (b) residue targets
         for q in SCREEN_QS:
-            if M % q == 0 or any(g for _, _, g in found):
-                continue
+            if M % q == 0 or any(g for _, _, g in found) or (found and not quotients):
+                continue                 # the cheap pass stops at the first colouring; the deep pass looks on for a gap
             for s_ in sorted({x for x in range(q) if x * x % q == D % q}):
                 key = f'residue:{q}/{s_}'
                 if (lid, key) not in have:
                     Ub = sorted({reduce_vec(u, M, q, s_) for u in U})
                     circ = set(circle(q))
                     assert all(p in circ for p in Ub), 'a unit vector did not reduce into the circle'
-                    rp = residue_ask(q, Ub, 4, False, budget=qbudget)
+                    if q in (23, 43):       # the sweep's verdict on this canonical set (addition 2), never re-asked at a smaller budget
+                        T, h = pairs_of(set(Ub), q)
+                        cr = cached_residue(q, T, 4)
+                        rp = {'verdict': cr['verdict'], 'by': 'sweep cache: ' + (cr.get('by') or cr.get('how') or '')}
+                        if cr['verdict'] == 'SAT':
+                            rp = residue_ask(q, Ub, 4, False, budget=qbudget)
+                    else:
+                        rp = residue_ask(q, Ub, 4, False, budget=qbudget)
                     rec = {'q': q, 's': s_, 'image': len(Ub), 'circle': len(circ), 'plain': rp['verdict'], 'plain_by': rp['by']}
                     if rp['verdict'] == 'SAT':
                         rg = residue_ask(q, Ub, 4, True, budget=qbudget)
@@ -1042,7 +1049,9 @@ def auto_ids(which='all'):
         last = {}
         for r in load_jsonl(OUT / 'verdicts.jsonl'):
             last[r['lattice']] = r
-        return [l for l, r in last.items() if r['verdict'] == 'SURVIVOR']
+        sv = [l for l, r in last.items() if r['verdict'] == 'SURVIVOR']
+        pr = {str(r['M']): ((r.get('price18') or {}).get('points') or 10 ** 30) for r in load_jsonl(OUT / 'sweep.jsonl')}
+        return sorted(sv, key=lambda l: (l != '2520', pr.get(l, 10 ** 30)))      # the owner's steer: Lambda_2520 first
     sw = [r for r in load_jsonl(OUT / 'sweep.jsonl')
           if r.get('candidate') or any(d.startswith('undecided') for d in r.get('drop', []))]
     sw.sort(key=lambda r: ((r.get('price18') or {}).get('points') or 10 ** 30))
@@ -1064,6 +1073,7 @@ def main():
     ap.add_argument('--quot_total', type=float, default=900.0)
     ap.add_argument('--theta_cap', type=float, default=300.0)
     ap.add_argument('--noquot', action='store_true')
+    ap.add_argument('--quot_nmax', type=int, default=24)
     a = ap.parse_args()
     if a.cmd == 'classify':
         cmd_classify(a.q, a.k, a.maxsize, replicate=not a.norep, budget=a.budget)
@@ -1077,7 +1087,11 @@ def main():
         cmd_additive(a.mmax)
     elif a.cmd == 'screen':
         ids = auto_ids(a.ids) if a.ids in ('all', 'survivors') else a.ids.split(',')
-        cmd_screen(ids, qbudget=a.budget, quot_total=a.quot_total, theta_cap=a.theta_cap, quotients=not a.noquot)
+        tc, qt = a.theta_cap, a.quot_total
+        if a.ids == 'survivors' and ids:           # the deep pass shares about two hours among the survivors (the phase's wall)
+            tc, qt = min(tc, max(120.0, 3600.0 / len(ids))), min(qt, max(120.0, 3600.0 / len(ids)))
+            print(f'deep pass: {len(ids)} survivors {ids[:20]}; per-lattice Theta_4 cap {tc:.0f} s, quotient budget {qt:.0f} s', flush=True)
+        cmd_screen(ids, qbudget=a.budget, quot_total=qt, theta_cap=tc, quotients=not a.noquot, quot_nmax=a.quot_nmax)
     elif a.cmd == 'recheck':
         cmd_recheck(a.budget)
     elif a.cmd == 'sweep':

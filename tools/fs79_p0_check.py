@@ -61,9 +61,15 @@ def units_be(M, d, plant=None):
 
 def units_ac(M, d):
     out = set()
+    roots = {}                                    # square roots mod d: c^2 = M^2 - a^2 (mod d) is necessary, so only those c
+    for x in range(d):
+        roots.setdefault(x * x % d, []).append(x)
     for a in range(-M, M + 1):
         cm = math.isqrt(M * M - a * a)
-        for c in range(-cm, cm + 1):
+        cs = []
+        for r0 in roots.get((M * M - a * a) % d, []):
+            cs.extend(range(-cm + ((r0 + cm) % d), cm + 1, d))
+        for c in cs:
             s = M * M - a * a - c * c
             if s % d:
                 continue

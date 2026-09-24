@@ -19,3 +19,5 @@
 {"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 120.0 s", "cpu_s": 3.93, "gap": false, "hoffman_floor": 3.249171, "how": "direct ask", "k": 4, "orbit": [0, 1, 2, 3, 5, 7, 9, 11, 12, 13, 14, 16, 18, 20], "q": 43, "verdict": "UNSAT"}
 {"by": "linear form (11, 19) shift 0", "cpu_s": null, "gap": false, "hoffman_floor": null, "how": "direct ask", "k": 4, "orbit": [0, 1, 2, 11, 12, 13], "q": 43, "verdict": "SAT"}
 {"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 120.0 s", "cpu_s": 119.59, "gap": false, "hoffman_floor": 2.709791, "how": "direct ask", "k": 4, "orbit": [0, 1, 3, 4, 6, 7, 9, 11, 12, 14, 15, 17, 18, 20], "q": 43, "verdict": "UNKNOWN"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 120.0 s", "cpu_s": 119.54, "gap": false, "hoffman_floor": 2.500437, "how": "direct ask", "k": 4, "orbit": [0, 1, 2, 6, 7, 11, 12, 13, 17, 18], "q": 43, "verdict": "UNKNOWN"}
+{"by": "kissat, pins [(0, 0), (1, 1)], precedence True, budget 300.0 s", "cpu_s": 298.83, "gap": false, "how": "direct ask (recheck)", "k": 4, "orbit": [0, 1, 2, 4, 5, 8, 9, 11, 12, 13, 15, 16, 19, 20], "q": 43, "verdict": "UNKNOWN"}

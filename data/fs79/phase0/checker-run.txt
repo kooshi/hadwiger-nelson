@@ -1,0 +1,195 @@
+10080-residue-167-0.json :: CERTIFIED: Cay(Z<U_10080>, U_10080) over Q(sqrt167), 300 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1008-residue-167-0.json :: CERTIFIED: Cay(Z<U_1008>, U_1008) over Q(sqrt167), 76 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+10500-additive.json :: CERTIFIED: Cay(Z<U_10500>, U_10500) over Q(sqrt167), 140 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1056-residue-167-0.json :: CERTIFIED: Cay(Z<U_1056>, U_1056) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+1068-additive.json :: CERTIFIED: Cay(Z<U_1068>, U_1068) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1068-linear.json :: CERTIFIED: Cay(Z<U_1068>, U_1068) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 1920 on the basis
+1080-residue-167-0.json :: CERTIFIED: Cay(Z<U_1080>, U_1080) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1092-additive.json :: CERTIFIED: Cay(Z<U_1092>, U_1092) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+11340-additive.json :: CERTIFIED: Cay(Z<U_11340>, U_11340) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1140-additive.json :: CERTIFIED: Cay(Z<U_1140>, U_1140) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1140-linear.json :: CERTIFIED: Cay(Z<U_1140>, U_1140) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 456 on the basis
+1155-additive.json :: CERTIFIED: Cay(Z<U_1155>, U_1155) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1155-linear.json :: CERTIFIED: Cay(Z<U_1155>, U_1155) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 2060 on the basis
+11760-residue-167-0.json :: CERTIFIED: Cay(Z<U_11760>, U_11760) over Q(sqrt167), 204 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1176-linear.json :: CERTIFIED: Cay(Z<U_1176>, U_1176) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 11633645819272 on the basis
+1188-additive.json :: CERTIFIED: Cay(Z<U_1188>, U_1188) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1188-linear.json :: CERTIFIED: Cay(Z<U_1188>, U_1188) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the linear form of order 53037422460 on the basis
+12180-quotient-N4.json :: CERTIFIED: Cay(Z<U_12180>, U_12180) over Q(sqrt167), 444 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+1281-additive.json :: CERTIFIED: Cay(Z<U_1281>, U_1281) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1281-linear.json :: CERTIFIED: Cay(Z<U_1281>, U_1281) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 9819684230 on the basis
+13020-additive.json :: CERTIFIED: Cay(Z<U_13020>, U_13020) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1305-additive.json :: CERTIFIED: Cay(Z<U_1305>, U_1305) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1320-residue-167-0.json :: CERTIFIED: Cay(Z<U_1320>, U_1320) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1335-additive.json :: CERTIFIED: Cay(Z<U_1335>, U_1335) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1335-linear.json :: CERTIFIED: Cay(Z<U_1335>, U_1335) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 475260 on the basis
+13440-residue-167-0.json :: CERTIFIED: Cay(Z<U_13440>, U_13440) over Q(sqrt167), 252 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1344-linear.json :: CERTIFIED: Cay(Z<U_1344>, U_1344) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 32747093015 on the basis
+1368-linear.json :: CERTIFIED: Cay(Z<U_1368>, U_1368) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the linear form of order 145272223096 on the basis
+1383-additive.json :: CERTIFIED: Cay(Z<U_1383>, U_1383) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1383-linear.json :: CERTIFIED: Cay(Z<U_1383>, U_1383) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the linear form of order 2124614692336062 on the basis
+13860-additive.json :: CERTIFIED: Cay(Z<U_13860>, U_13860) over Q(sqrt167), 252 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1428-additive.json :: CERTIFIED: Cay(Z<U_1428>, U_1428) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1440-residue-167-0.json :: CERTIFIED: Cay(Z<U_1440>, U_1440) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1464-quotient-N11.json :: CERTIFIED: Cay(Z<U_1464>, U_1464) over Q(sqrt167), 100 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/11Lambda; fan gap at the origin: yes
+14700-additive.json :: CERTIFIED: Cay(Z<U_14700>, U_14700) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+15120-residue-167-0.json :: CERTIFIED: Cay(Z<U_15120>, U_15120) over Q(sqrt167), 300 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1512-linear.json :: CERTIFIED: Cay(Z<U_1512>, U_1512) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 1062518093649233 on the basis
+15540-additive.json :: CERTIFIED: Cay(Z<U_15540>, U_15540) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1560-additive.json :: CERTIFIED: Cay(Z<U_1560>, U_1560) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1584-linear.json :: CERTIFIED: Cay(Z<U_1584>, U_1584) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 960 on the basis
+15960-residue-167-0.json :: CERTIFIED: Cay(Z<U_15960>, U_15960) over Q(sqrt167), 276 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1596-additive.json :: CERTIFIED: Cay(Z<U_1596>, U_1596) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1596-linear.json :: CERTIFIED: Cay(Z<U_1596>, U_1596) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the linear form of order 85087318030 on the basis
+1620-additive.json :: CERTIFIED: Cay(Z<U_1620>, U_1620) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1620-linear.json :: CERTIFIED: Cay(Z<U_1620>, U_1620) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 4014360 on the basis
+1629-additive.json :: CERTIFIED: Cay(Z<U_1629>, U_1629) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1629-linear.json :: CERTIFIED: Cay(Z<U_1629>, U_1629) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 4 on the basis
+1632-quotient-N5.json :: CERTIFIED: Cay(Z<U_1632>, U_1632) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/5Lambda; fan gap at the origin: yes
+1644-additive.json :: CERTIFIED: Cay(Z<U_1644>, U_1644) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1644-linear.json :: CERTIFIED: Cay(Z<U_1644>, U_1644) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 655699423111104 on the basis
+17220-additive.json :: CERTIFIED: Cay(Z<U_17220>, U_17220) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1740-quotient-N4.json :: CERTIFIED: Cay(Z<U_1740>, U_1740) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+17640-residue-167-0.json :: CERTIFIED: Cay(Z<U_17640>, U_17640) over Q(sqrt167), 228 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1815-additive.json :: CERTIFIED: Cay(Z<U_1815>, U_1815) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1815-linear.json :: CERTIFIED: Cay(Z<U_1815>, U_1815) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 12100 on the basis
+1827-additive.json :: CERTIFIED: Cay(Z<U_1827>, U_1827) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1827-linear.json :: CERTIFIED: Cay(Z<U_1827>, U_1827) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 581662831192730 on the basis
+18480-residue-167-0.json :: CERTIFIED: Cay(Z<U_18480>, U_18480) over Q(sqrt167), 372 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1848-residue-167-0.json :: CERTIFIED: Cay(Z<U_1848>, U_1848) over Q(sqrt167), 92 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+1860-additive.json :: CERTIFIED: Cay(Z<U_1860>, U_1860) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1869-additive.json :: CERTIFIED: Cay(Z<U_1869>, U_1869) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+1869-linear.json :: CERTIFIED: Cay(Z<U_1869>, U_1869) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 8 on the basis
+18900-additive.json :: CERTIFIED: Cay(Z<U_18900>, U_18900) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1920-residue-167-0.json :: CERTIFIED: Cay(Z<U_1920>, U_1920) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+1920-residue-67-10.json :: CERTIFIED: Cay(Z<U_1920>, U_1920) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the residue colouring at (67, sqrt167 - 10), image 20 of the circle; fan gap at the origin: yes
+1920-residue-67-57.json :: CERTIFIED: Cay(Z<U_1920>, U_1920) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the residue colouring at (67, sqrt167 - 57), image 20 of the circle; fan gap at the origin: yes
+19740-additive.json :: CERTIFIED: Cay(Z<U_19740>, U_19740) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+1980-additive.json :: CERTIFIED: Cay(Z<U_1980>, U_1980) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2013-additive.json :: CERTIFIED: Cay(Z<U_2013>, U_2013) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+2013-linear.json :: CERTIFIED: Cay(Z<U_2013>, U_2013) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 444 on the basis
+20160-residue-167-0.json :: CERTIFIED: Cay(Z<U_20160>, U_20160) over Q(sqrt167), 348 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2016-residue-167-0.json :: CERTIFIED: Cay(Z<U_2016>, U_2016) over Q(sqrt167), 100 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+2037-additive.json :: CERTIFIED: Cay(Z<U_2037>, U_2037) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+2037-linear.json :: CERTIFIED: Cay(Z<U_2037>, U_2037) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 362498625987 on the basis
+2040-additive.json :: CERTIFIED: Cay(Z<U_2040>, U_2040) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2052-additive.json :: CERTIFIED: Cay(Z<U_2052>, U_2052) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2052-linear.json :: CERTIFIED: Cay(Z<U_2052>, U_2052) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 393485103655728 on the basis
+20580-additive.json :: CERTIFIED: Cay(Z<U_20580>, U_20580) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2076-additive.json :: CERTIFIED: Cay(Z<U_2076>, U_2076) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2076-linear.json :: CERTIFIED: Cay(Z<U_2076>, U_2076) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 14416182495 on the basis
+2100-additive.json :: CERTIFIED: Cay(Z<U_2100>, U_2100) over Q(sqrt167), 100 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2112-residue-167-0.json :: CERTIFIED: Cay(Z<U_2112>, U_2112) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+2115-additive.json :: CERTIFIED: Cay(Z<U_2115>, U_2115) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+2115-linear.json :: CERTIFIED: Cay(Z<U_2115>, U_2115) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 1780 on the basis
+2136-quotient-N5.json :: CERTIFIED: Cay(Z<U_2136>, U_2136) over Q(sqrt167), 100 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/5Lambda; fan gap at the origin: yes
+2160-residue-167-0.json :: CERTIFIED: Cay(Z<U_2160>, U_2160) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2172-additive.json :: CERTIFIED: Cay(Z<U_2172>, U_2172) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2172-linear.json :: CERTIFIED: Cay(Z<U_2172>, U_2172) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 1186148112104158 on the basis
+2184-residue-167-0.json :: CERTIFIED: Cay(Z<U_2184>, U_2184) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2196-quotient-N4.json :: CERTIFIED: Cay(Z<U_2196>, U_2196) over Q(sqrt167), 76 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+2199-additive.json :: CERTIFIED: Cay(Z<U_2199>, U_2199) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+2199-linear.json :: CERTIFIED: Cay(Z<U_2199>, U_2199) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the linear form of order 4398 on the basis
+2223-additive.json :: CERTIFIED: Cay(Z<U_2223>, U_2223) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+2223-linear.json :: CERTIFIED: Cay(Z<U_2223>, U_2223) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 23631333660 on the basis
+22260-additive.json :: CERTIFIED: Cay(Z<U_22260>, U_22260) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+22680-residue-167-0.json :: CERTIFIED: Cay(Z<U_22680>, U_22680) over Q(sqrt167), 276 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2268-additive.json :: CERTIFIED: Cay(Z<U_2268>, U_2268) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2268-linear.json :: CERTIFIED: Cay(Z<U_2268>, U_2268) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 2339255734963411 on the basis
+2280-residue-167-0.json :: CERTIFIED: Cay(Z<U_2280>, U_2280) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+23100-additive.json :: CERTIFIED: Cay(Z<U_23100>, U_23100) over Q(sqrt167), 220 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+23520-residue-167-0.json :: CERTIFIED: Cay(Z<U_23520>, U_23520) over Q(sqrt167), 252 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2352-linear.json :: CERTIFIED: Cay(Z<U_2352>, U_2352) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the linear form of order 300200282868410 on the basis
+2376-residue-167-0.json :: CERTIFIED: Cay(Z<U_2376>, U_2376) over Q(sqrt167), 68 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 8 of the circle; fan gap at the origin: yes
+2379-additive.json :: CERTIFIED: Cay(Z<U_2379>, U_2379) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+23940-additive.json :: CERTIFIED: Cay(Z<U_23940>, U_23940) over Q(sqrt167), 276 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2436-quotient-N4.json :: CERTIFIED: Cay(Z<U_2436>, U_2436) over Q(sqrt167), 148 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+2508-additive.json :: CERTIFIED: Cay(Z<U_2508>, U_2508) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+2508-linear.json :: CERTIFIED: Cay(Z<U_2508>, U_2508) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 867307178940 on the basis
+2520-residue-167-0.json :: CERTIFIED: Cay(Z<U_2520>, U_2520) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+25620-quotient-N4.json :: CERTIFIED: Cay(Z<U_25620>, U_25620) over Q(sqrt167), 420 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+26040-residue-167-0.json :: CERTIFIED: Cay(Z<U_26040>, U_26040) over Q(sqrt167), 276 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+26460-additive.json :: CERTIFIED: Cay(Z<U_26460>, U_26460) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+264-linear.json :: CERTIFIED: Cay(Z<U_264>, U_264) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 2282031024 on the basis
+264-residue-71-5.json :: CERTIFIED: Cay(Z<U_264>, U_264) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the residue colouring at (71, sqrt167 - 5), image 20 of the circle; fan gap at the origin: yes
+264-residue-71-66.json :: CERTIFIED: Cay(Z<U_264>, U_264) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the residue colouring at (71, sqrt167 - 66), image 20 of the circle; fan gap at the origin: yes
+26880-residue-167-0.json :: CERTIFIED: Cay(Z<U_26880>, U_26880) over Q(sqrt167), 300 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+27300-additive.json :: CERTIFIED: Cay(Z<U_27300>, U_27300) over Q(sqrt167), 300 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+27720-residue-167-0.json :: CERTIFIED: Cay(Z<U_27720>, U_27720) over Q(sqrt167), 444 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+2940-additive.json :: CERTIFIED: Cay(Z<U_2940>, U_2940) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+30240-residue-167-0.json :: CERTIFIED: Cay(Z<U_30240>, U_30240) over Q(sqrt167), 396 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+3360-residue-167-0.json :: CERTIFIED: Cay(Z<U_3360>, U_3360) over Q(sqrt167), 156 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+3780-additive.json :: CERTIFIED: Cay(Z<U_3780>, U_3780) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+4620-additive.json :: CERTIFIED: Cay(Z<U_4620>, U_4620) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+480-linear.json :: CERTIFIED: Cay(Z<U_480>, U_480) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 131610 on the basis
+5040-residue-167-0.json :: CERTIFIED: Cay(Z<U_5040>, U_5040) over Q(sqrt167), 228 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+540-additive.json :: CERTIFIED: Cay(Z<U_540>, U_540) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+540-linear.json :: CERTIFIED: Cay(Z<U_540>, U_540) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 23052 on the basis
+540-residue-59-52.json :: CERTIFIED: Cay(Z<U_540>, U_540) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the residue colouring at (59, sqrt167 - 52), image 12 of the circle; fan gap at the origin: yes
+540-residue-59-7.json :: CERTIFIED: Cay(Z<U_540>, U_540) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the residue colouring at (59, sqrt167 - 7), image 12 of the circle; fan gap at the origin: yes
+5460-additive.json :: CERTIFIED: Cay(Z<U_5460>, U_5460) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+5880-residue-167-0.json :: CERTIFIED: Cay(Z<U_5880>, U_5880) over Q(sqrt167), 156 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+588-additive.json :: CERTIFIED: Cay(Z<U_588>, U_588) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+588-linear.json :: CERTIFIED: Cay(Z<U_588>, U_588) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 13881418166 on the basis
+600-additive.json :: CERTIFIED: Cay(Z<U_600>, U_600) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+600-linear.json :: CERTIFIED: Cay(Z<U_600>, U_600) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 912 on the basis
+6720-residue-167-0.json :: CERTIFIED: Cay(Z<U_6720>, U_6720) over Q(sqrt167), 204 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+672-linear.json :: CERTIFIED: Cay(Z<U_672>, U_672) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 909496028697870 on the basis
+684-additive.json :: CERTIFIED: Cay(Z<U_684>, U_684) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+684-linear.json :: CERTIFIED: Cay(Z<U_684>, U_684) over Q(sqrt167), 28 unit vectors, is properly 4-coloured by the linear form of order 82478 on the basis
+7140-additive.json :: CERTIFIED: Cay(Z<U_7140>, U_7140) over Q(sqrt167), 180 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+720-residue-167-0.json :: CERTIFIED: Cay(Z<U_720>, U_720) over Q(sqrt167), 84 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+732-additive.json :: CERTIFIED: Cay(Z<U_732>, U_732) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+732-linear.json :: CERTIFIED: Cay(Z<U_732>, U_732) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 147000 on the basis
+7560-residue-167-0.json :: CERTIFIED: Cay(Z<U_7560>, U_7560) over Q(sqrt167), 204 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+756-additive.json :: CERTIFIED: Cay(Z<U_756>, U_756) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+756-linear.json :: CERTIFIED: Cay(Z<U_756>, U_756) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 12720147000 on the basis
+792-linear.json :: CERTIFIED: Cay(Z<U_792>, U_792) over Q(sqrt167), 52 unit vectors, is properly 4-coloured by the linear form of order 202208412 on the basis
+7980-additive.json :: CERTIFIED: Cay(Z<U_7980>, U_7980) over Q(sqrt167), 132 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+840-residue-167-0.json :: CERTIFIED: Cay(Z<U_840>, U_840) over Q(sqrt167), 108 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+855-additive.json :: CERTIFIED: Cay(Z<U_855>, U_855) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+855-linear.json :: CERTIFIED: Cay(Z<U_855>, U_855) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 3420 on the basis
+915-additive.json :: CERTIFIED: Cay(Z<U_915>, U_915) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: yes
+9240-residue-167-0.json :: CERTIFIED: Cay(Z<U_9240>, U_9240) over Q(sqrt167), 276 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+924-additive.json :: CERTIFIED: Cay(Z<U_924>, U_924) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+924-linear.json :: CERTIFIED: Cay(Z<U_924>, U_924) over Q(sqrt167), 44 unit vectors, is properly 4-coloured by the linear form of order 14620058810874 on the basis
+L21cc6506-additive.json :: CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+L21cc6506-additive-probe.json :: CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+L21cc6506-linear.json :: CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 4200 on the basis
+L21cc6506-linear-probe.json :: CERTIFIED: Cay(Z<U_420>, U_420) over Q(sqrt167), 60 unit vectors, is properly 4-coloured by the linear form of order 5880 on the basis
+== controls on 10500-additive.json
+CERTIFIED: Cay(Z<U_10500>, U_10500) over Q(sqrt167), 140 unit vectors, is properly 4-coloured by the additive into Z4; fan gap at the origin: no
+  control faithful: CERTIFIED
+  control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+  control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+  control zero_phi: refused ADDITIVE_ZERO_ON_UNIT (want ADDITIVE_ZERO_ON_UNIT)
+  control false_gap_claim: refused GAP_CLAIM_FALSE (want GAP_CLAIM_FALSE)
+CONTROLS: PASS
+== controls on 1068-linear.json
+CERTIFIED: Cay(Z<U_1068>, U_1068) over Q(sqrt167), 36 unit vectors, is properly 4-coloured by the linear form of order 1920 on the basis
+  control faithful: CERTIFIED
+  control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+  control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+  control zero_theta: refused THETA_OUT_OF_BAND (want THETA_OUT_OF_BAND)
+CONTROLS: PASS
+== controls on 10080-residue-167-0.json
+CERTIFIED: Cay(Z<U_10080>, U_10080) over Q(sqrt167), 300 unit vectors, is properly 4-coloured by the residue colouring at (167, sqrt167 - 0), image 24 of the circle; fan gap at the origin: yes
+  control faithful: CERTIFIED
+  control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+  control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+  control nonsquare_root: refused ROOT_NOT_SQUARE_ROOT (want ROOT_NOT_SQUARE_ROOT)
+  control neighbour_same_colour: refused IMPROPER_EDGE (want IMPROPER_EDGE)
+CONTROLS: PASS
+CHECKALL DONE 2026-09-24T05:50:22+00:00
+== controls on 12180-quotient-N4.json
+CERTIFIED: Cay(Z<U_12180>, U_12180) over Q(sqrt167), 444 unit vectors, is properly 4-coloured by the periodic colouring of Lambda/4Lambda; fan gap at the origin: no
+  control faithful: CERTIFIED
+  control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+  control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+  control constant_table: refused IMPROPER_EDGE (want IMPROPER_EDGE)
+  control false_gap_claim: refused GAP_CLAIM_FALSE (want GAP_CLAIM_FALSE)
+CONTROLS: PASS
