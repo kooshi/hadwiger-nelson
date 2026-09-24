@@ -712,6 +712,7 @@ at the next lemma; a kill redoes at most one lemma.
 | the inverse limit (L1) | written for a non-finitely-generated R_F, indexed by finite symmetric subsets (Poros's form) | no step assumes finite generation |
 | the scope (C3) | inhabitants and non-examples computed: 1/3 ∈ ℤ[U] by an explicit relation or by prime inversion; bipartiteness by an odd relation | each hypothesis shown necessary on an example |
 | the comparison (C2) | the sketch read line by line | every divergence listed, each resolved or escalated |
+| **a claimed `K(d)` (C4)** *(obligation pass, §B.2.3)* | the verifier's C4 section | (1) the configuration family is named exactly, since the least K is relative to it; (2) monotonicity in K is stated (`U^(5^K) ⊆ U^(5^(K+1))`, so EMPTY at K stays EMPTY above it, and "least K" is well-defined); (3) a formula for every d is [hand] with its proof, and a table is [cert] per d, kept apart; (4) the finite-level argument names what replaces every infinite-depth step (an archimedean character of finite order vanishes only at infinite depth; at finite depth the parity character is itself archimedean), with the constant in `5^K ≳ c·n` derived; (5) the formula is checked against P0.1's exact polygons `D_K` and P0.3's least-K table, and any computed d where the formula undershoots the observed K refutes it; (6) the negative control: at d ≡ 3, 7 (mod 12) the planes are three-colourable (`[Fischer1990]` Thm 9), so every configuration there is NONEMPTY at every K, and an EMPTY there is a builder or checker bug; (7) "kernel shape" says which: parametric in d, or one certificate per d, which covers finitely many d only |
 | the record | `plans/FS81-C-verification.md` | carries "Theorems this phase proved" |
 
 **What passing buys.** F-T4 at [hand, two independent derivations], the FS-73 standard. It still does not buy a novelty claim: that
@@ -735,6 +736,7 @@ So D measures the four-colour band on known material before it aims anything at 
 
 | step | what | budget |
 |---|---|---|
+| **DK the two checkers (before anything is believed)** | *(obligation pass, §B.2.2; the owner's instruction.)* K1, the d = 47 four-colouring checker, and K2, the four-colour refusal checker over ℚ(√d): specs, plants and controls in the acceptance table below. Each is committed with its self-test before the first D verdict it would check, and each is believed only after **the owner's plant** is refused | ≈ 3 h for both |
 | **D0a the harvest (first; no solver)** | *(domain pass, §B.1.4.)* Put every four-colour ask already on record into the ask schema of §B.1.1, one row each, with its machine and encoding: X_A's source ball (FS73-T6: 39,829 points, `d_ball` 18.41, kissat UNSAT in 36.6 s CPU under a triangle pin, `data/fs73/census/cert/t-16_8_8_0-R1.5/steps.jsonl`) and its 35 core rounds to 2,044 points (`d_c` 10.47); FS-73 P1d's DRUP runs on the same ball for `8/9`, `v`, `8/3` (`verify-P1d.md` checks 3–4); the held unit-distance witnesses as cores (Heule-510, Heule-553, de Grey's 1581: `d` 9.82, 9.84, 9.96, measured at stage B); T5's 33-point refusal (`d` 8.24); FS-79's four-colour asks at 167 (colourable rows only). No new solve until this table exists | ≈ 1 h |
 | **D0b the rank-4 ladder** | *(domain pass.)* **X_A** = embedding-bounded balls `σ_R(Λ_dG, U)` plus the one edge `{0, v}` (the certified shape, built by the certified ball's own generator `tools/fs73_certify.py`), R descending from 1.5 in steps of 0.1 until the ask colours, which brackets `R*(X_A)`; then R = 1.6, 1.7. **X_B** = balls of `Cay(Λ_dG, U ∪ {±v})` at the same radii (the only family that differs from X_A in one axis: how many v-edges). **Colourable:** `Cay(Λ_dG, U)` at the same radii; `L21cc6506` at matched `d_ball`; ℚ(√47)'s own lattices that D1 colours. Every ask is run under the **target's encoding** (an edge pin plus value precedence, since ω = 2 at 47), and X_A also under its recorded triangle pin, so every matched comparison holds the encoding fixed and the pin's own effect is measured once. Asks go on the 4-core of each ball (exact at four colours; §B.1.1). **T5 and T7 run once each as instrument controls** (the wall fires on an UNKNOWN plant, the refusal checker certifies, the pins are symmetry reductions), and are never read as band: their refutation rank is 1, which no unit-distance lattice graph can have (FS79-T7) | ≈ ½ desktop day |
 | **D1 the screen at 47** | a copy of `fs79_p0.py` for d = 47 (`tools/fs81_d47.py`). The saturated chain Λ_M for M ≤ 2,520. Per lattice, in this order: additive four-colourings; the targets' spectra at 11, 19, 23, 31, 43 (G44), then gapped residue four-colourings (owner's review, §R-review item 1: the spectrum is the lattice's *image* target's, not Γ_q's; at 11 and 19 the sign is slack, so no spectrum refuses there and the gapped ask is a solver's); quotients at every admissible N ≤ 15, gapped colourings aimed at (G68); the periodic Kempe screen (G69); the calibrated exact `Θ₄` finder (`fs79_p3b_theta4.py`, calibrated at 47's coefficient size on lattices known loose, FS79-T45). Survivors are typed by the screens and caps they met; compute their `Θ₄` cells before calling any "rigid" (G73) | ≤ 1 desktop day |
@@ -762,9 +764,12 @@ is three-colour-only):*
 
 | what | verified how | pass |
 |---|---|---|
-| every colouring | an exact checker, frozen or a copy with plants | certified |
-| every refusal | the frozen LRAT checker | CERTIFIED |
-| every price | reported with its units: points, degree, solver time, machine; the three-colour law never quoted as a four-colour cost | stated with its units |
+| **K1: the four-colouring checker for d = 47, before D1's first verdict** *(obligation pass, §B.2.2)* | a copy of `tools/fs79_p0_check.py` (which hard-codes d = 167) with `d` read from the witness and checked squarefree, `tools/fs81_colour_check.py`; standard library, no imports from `tools/`. **It proves:** every unit vector of `Λ_M` is enumerated twice by two loops and each is mapped to a colour class it does not share with its difference partner, so `Cay(Λ_M, U_M)` is four-coloured, and for a gapped witness, that the named vertex's closed neighbourhood misses the named colour. **Plants it must refuse, each for its named reason:** a unit vector dropped from `U_M`; one colour changed on one class; a period that is not a period (`N` not admissible); `d` changed to 167 with the witness unchanged; a gap claimed on a neighbourhood that has every colour; a faithful twin that must pass | its self-test passes, then **the owner's plant** is refused, and only then is any D1 colouring believed |
+| **K2: the four-colour refusal checker over ℚ(√d), before D0b's first refusal is read and before D2** *(§B.2.2)* | a copy of the frozen `tools/fs58_check_witness.py` with `k` read from the witness (`x(v, c) = k·v + c + 1`), `tools/fs81_check_witness_k.py`; standard library; shares no code with the generator or solver. **It proves:** the points are exact tuples of ℚ(√d)²; every unit pair is re-derived in integers and equals the edge list (so the graph is the induced unit-distance graph, plus at most one named non-unit edge for X_A, whose length the checker reports); the CNF is built from its own edges; **every symmetry clause (pins, value precedence) is generated by the checker from a rule it states, and the rule is sound** (§B.2.2: precedence ranges over the unpinned colours only); the LRAT proof derives the empty clause. **Plants it must refuse:** a point moved off the lattice; an edge added that is not unit; one edge dropped from the list; the pin moved to a non-adjacent pair; `k` changed from 4 to 3 with the proof unchanged; a precedence clause over a pinned colour; the proof truncated; a faithful twin that must pass. **Controls, and the one it cannot have:** at `k = 3` it must certify FS-58's ℚ(√11) witness exactly as the frozen checker does; the same witness and proof at `k = 4` must be refused (that graph is four-colourable, so no proof of it can exist). **No positive control at `k = 4` exists in its class** — no real quadratic plane is known to refuse four colours; that is D's question — so a D refusal would be K2's first `k = 4` CERTIFIED, the result the team would like. Hence a D refusal's proof is also checked by a **second, independently written RUP checker** (the frozen `tools/fs73_cert_check.py`'s routine through a wrapper that feeds it K2's CNF, or `cake_lpr` built from source) | self-test passes, **the owner's plant** is refused, both controls behave; only then is any D refusal believed |
+| every colouring | K1 | certified |
+| every refusal | K2, and a second solver refusing the same CNF | CERTIFIED and replicated |
+| **every price** *(§B.2.1: its five obligations)* | the ask's row and its matched X_A row, side by side | **units** (CPU s, user + sys, the minimum of three for any number that enters a decision; the machine); **population** (the family, the shape, the 4-core's `n₄` and `d₄`, measured `d_ball`); **control** (the matched X_A ask: `d_ball` within 10 %, `n` within a factor of 2, same encoding, solver and version, machine, and its refusal certified by K2); **wall** (the subprocess timeout fired and is recorded as the reason, with no crash or OOM; a pysat CaDiCaL ask is never the bounded one); **grade** (the words "[reading]: carried from X_A, an abelian Cayley graph with one non-unit edge; the triangle axis is uncovered" beside the number). The three-colour law is never quoted as a four-colour cost |
+| **a refusal at 47** *(§B.2.1: its eight obligations)* | the record's refusal section | the object (exact points); K2 CERTIFIED; a second solver; the symmetry rule's soundness stated; the statement read aloud ("no proper four-colouring of this finite unit-distance graph over ℚ(√47)² exists, so χ(ℚ(√47)²) ≥ 5"); the upper bound's grade stated (χ ≤ 5 through Γ₁₁ is row 52's, whose field-level step is row 57's gap); the carry-up by the chain (FS79-T9) named only if used; **no "first"** until a prior-art gate on five-chromatic real quadratic planes is run and written into the record |
 | the record | the survivors' types | every survivor typed by the screen and cap it met |
 
 **What a result may claim.**
@@ -1089,3 +1094,59 @@ test between a diagnosis and an escape.
 2. P-D0 was scoped to refutation-rank ≥ 2 families and to `d_ball`, marked in §P.
 3. §M's Lean decision was re-examined and stands, with its reasons and a consequence for FS-75 recorded.
 4. **To the owner, not applied:** P-F1, P-F2 and P-F3 (§F, after C1); the configuration proposals (§S.P0, for the implementer).
+
+### §B.2 The obligation pass (`debruijn-obligation-modeling`, run on acceptance criteria, not on proofs)
+
+*The space here is the set of claims stages D and C4 may make. Each claim gets a finite list of local obligations whose discharge makes
+it honest. A claim with an undischarged obligation is not made. L1–L4 are not touched: they are stage C's.*
+
+#### §B.2.1 Stage D's claims, partitioned
+
+| claim | kind | its obligations |
+|---|---|---|
+| "this ask refused (UNSAT)" | **prove** | K2 CERTIFIED; a second solver refuses the same CNF; for a D2 refusal, the proof also passes a second, independently written RUP checker |
+| "this lattice is four-colourable" | **prove** | K1 CERTIFIED on its periodic witness (never on a ball: a ball's colouring says nothing about the lattice) |
+| "this survivor is loose / rigid" | prove / type | loose: a gapped witness through K1, or a full-dimensional `Θ₄` cell (G73). "Rigid" is never claimed from a finite set of periodic colourings; it is typed "no looseness found at screens X, caps Y" |
+| "the band at rank 4 is …" | **test**, [measured] per family | per family only; pooled only if the degree-universality law of §B.1.5 survives its test on X_A against X_B |
+| "the price of refusing four at 47 is …" | **assume → [reading]** | the five obligations: units, population, control, wall, grade (the acceptance table's row) |
+| "χ(ℚ(√47)²) = 5" | **prove** | the eight obligations in the acceptance table's row, with the upper half's grade stated separately |
+
+**Where the price's obligations come from.** Each is a failure the record has already seen once:
+- **units:** CPU seconds, minimum of three, machine named (`CLAUDE.md` § Toolchain);
+- **population:** a word ball's ceiling (G65) and a three-colour law priced as a four-colour cost (FS-79's R-close miss 4);
+- **control:** "when two numbers are compared, exactly one thing may differ" (§ The gate). The recorded X_A refusal used a triangle pin,
+  so it cannot be the matched control for an edge-pinned ask at 47;
+- **wall:** pysat CaDiCaL ignores `interrupt()`, a `timeout` wrapper kills its child, and "an exit-waiter can tell you a thing has ended,
+  never that it is late";
+- **grade:** correction 2.
+
+#### §B.2.2 The two checkers (the owner's instruction), and one soundness obligation found on the way
+
+K1 and K2 are specified in §S.D's acceptance table: what each proves, the plants each must refuse, and the owner's plant before any
+verdict. **One obligation the plan did not have:** the target's encoding is an edge pin plus value precedence (`CLAUDE.md` § Toolchain,
+item 2), and precedence is sound only in one of two forms:
+- precedence ranges over the **unpinned** colours (`c` may appear at `v` only if `c − 1` appears earlier, for `c` above the pinned
+  colours); or
+- the pinned clique occupies the **first positions** of the vertex order.
+
+Applied literally to every colour with the pinned pair placed later in the order, the clause for the first free colour forbids it
+before the pinned vertex of colour 1. No colour permutation can repair that, because colour 1 is pinned. The refusal checker must state
+which rule it builds, build the clauses itself, and refuse a plant that violates the rule. This is K2's "precedence over a pinned
+colour" plant.
+
+#### §B.2.3 C4's claim (a finite witness bound `K(d)`)
+
+The seven obligations are in §S.C's acceptance table. They name the configuration family, prove monotonicity in K, keep formula and
+table apart, name the replacement for every infinite-depth step, check against P0.1 and P0.3, use the negative control at
+d ≡ 3, 7 (mod 12), and say which kernel shape. **One note for the owner, kept out of §S.C** because it touches L4's proof and the
+verifier is blind until C1 is committed: reading L4's *statement shape*, a relation `1 = Σ c_j u_j` is applied at one layer `b` and
+involves only the layers `b·u_j`. So the least configuration family worth C4's first test is `{1, v, v̄}·U^(5^K)`, not
+`{vᵏ : |k| ≤ 2}·U^(5^K)`. That is phase 0's configuration "A" at K = 1. This is a question for C4, not a claim about the proof.
+
+#### §B.2.4 What the obligation pass changed in the plan
+
+1. §S.D gained a step **DK** (the two checkers, before any verdict), and its acceptance table was rewritten. K1 and K2 are specified with
+   plants and controls. The price's five obligations and the refusal's eight are listed. A D2 refusal needs a second, independently
+   written RUP checker, because K2 has no positive control at `k = 4` in its class.
+2. §S.C's acceptance table gained C4's seven obligations.
+3. Found on the way: the precedence-with-pins soundness obligation (§B.2.2).
