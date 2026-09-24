@@ -204,3 +204,89 @@ The two are disjoint at the field level: `θ₂ + λ_e` has order 2 modulo the a
 - This is the brief's "archimedean parts cannot absorb a finite-order discrepancy", made into a limit.
 
 Scope: field level, every subfield `F ⊆ ℝ`.
+
+### §1.5 F-T4. **Verdict: PROVED** (field level; every subfield `F ⊆ ℝ`, and every squarefree `d ≡ 11 (mod 12)`)
+
+*General form.* Let `F ⊆ ℝ` have `1/3 ∈ R_F` and `F²` not 2-colourable. If `χ(F²) ≤ 3`, then L1 gives `Θ₃(F) ≠ ∅`, and L4′ then makes `F²`
+bipartite, a contradiction. So `χ(F²) ≥ 4`. ∎ (Equivalently: by §1.4 such an `F` has a relation meeting L4's hypotheses, and L1 + L4
+close.)
+
+*Quadratic case.* Let `d ≡ 3 (mod 4)` be squarefree, `n = (d+1)/4 ∈ ℤ`, and `v = ((2n−1) + i√d)/(2n)`.
+- `v` is a unit vector: `|v|² = ((2n−1)² + d)/(4n²) = (4n² − 4n + 1 + 4n − 1)/(4n²) = 1`. It is G7's type-M rotation with
+  `cos = (2n−1)/(2n)`, and it is Fischer's `ξ = (b + √N i)/a` of Thm 10(ii), with `a = 2n = (N+1)/2`, `b = a − 1`.
+- `v + v̄ = 2 − 1/n`, so **`1 = 2n·1 − n·v − n·v̄`**. The coefficients are `(2n, −n, −n)` and their sum is 0, which is even.
+- For `d ≡ 3 (mod 4)`: `3 | n ⟺ 4n = d + 1 ≡ 0 (mod 12) ⟺ d ≡ 11 (mod 12)`. So at every squarefree `d ≡ 11 (mod 12)` the relation meets
+  L4's hypotheses, `Θ₃(ℚ(√d)) = ∅`, and L1 gives **`χ(ℚ(√d)²) ≥ 4`**. ∎
+- Non-bipartiteness here comes from the relation itself (§1.4); it needs neither `[Fischer1990]` Thm 8 nor anything else. The relation
+  at `d = 11` is `1 = 6 − 3v − 3v̄`, `v = (5 + i√11)/6`, the same vector row 73's chain uses (`1/3 = 2 − v − v̄`, up to the sign of
+  `√11`). Its conclusion agrees with the kernel's `four_le_chromaticNumber_planeOver_eleven`, as a consistency check.
+
+**Outside this verdict:**
+- The upper bounds that turn `≥ 4` into `= 4` or `4 ≤ χ ≤ 5` (`[Fischer1990]` Thm 10(i) at `d ≡ 3 (mod 8)`, the finite-plane bound
+  elsewhere) are cited in §F and are not re-verified here.
+- "These are the only real quadratic fields that can need four colours" is `[Fischer1990]` Thms 8–9, checked in §3.
+
+### §1.6 §F.5 — at `d ≡ 3, 7 (mod 12)` every slope has only order-3 layers. **Verdict: PROVED** (field level)
+
+Let `d ≡ 3 (mod 4)` be squarefree with `3 ∤ n`, and `θ ∈ Θ₃(ℚ(√d))`, with `τ = τ₂ + τ₃` as in §1.4 (it needs only L2 and L3). Multiply the
+relation by `u ∈ U_F`: `u = 2n·u − n·uv − n·uv̄`. Apply the two components:
+- **(τ₂)** `τ₂(u) = n(τ₂(uv) + τ₂(uv̄))`, since `2nτ₂ = 0` and `−τ₂ = τ₂`.
+- **(τ₃)** `(1 − 2n)τ₃(u) = −n(τ₃(uv) + τ₃(uv̄))`.
+
+*n even* (`d ≡ 7 (mod 8)`): (τ₂) gives `τ₂(u) = 0` for every `u`, so there is no parity layer.
+
+*n odd*, suppose `τ₂(u₀) = 1/2`.
+- By (τ₂), exactly one of `u₀v`, `u₀v̄` is a parity layer; the relation is symmetric in `v ↔ v̄`, so say `u₀v`.
+- Then (τ₃) at `u₀` reads `nτ₃(u₀v̄) = 0`, because `τ₃(u₀) = τ₃(u₀v) = 0`.
+- `3 ∤ n`, so `τ₃(u₀v̄) = 0`, and then `u₀v̄` is a layer of neither type: a contradiction.
+
+So every layer has order-3 type. By L2, `θ(b) = χ_b(1) ∈ {1/3, 2/3}` for every `b ∈ U_F`, hence **`θ(R_F) ⊆ (1/3)ℤ/ℤ`**: `θ` is a
+homomorphism `R_F → 𝔽₃` with no unit vector in its kernel, i.e. **an additive 3-colouring in Fischer's sense**. Conversely every such
+homomorphism lies in `Θ₃` (values `1/3`, `2/3`). Hence, at the field level:
+- `Θ₃(ℚ(√d)) = {additive 3-colourings}` for `d ≡ 3, 7 (mod 12)`;
+- `Θ₃(ℚ(√d)) = ∅` for `d ≡ 11 (mod 12)`.
+
+Whether every additive 3-colouring is one of `[Fischer1990]` Thm 9's maps up to symmetry is a question about `R_F/3R_F`, taken up in §3.
+
+### §1.7 The adversarial attempt (the brief's item 6)
+
+**(a) By hand, at `d = 11` (`n = 3`): try to keep a parity layer by mixing types.**
+- Put layer `1` and layer `v` in parity type, `θ_1 = θ₂ + λ_e`, `θ_v = θ₂ + λ_{e′}`, and layer `v̄` in order-3 type, `θ_{v̄} = χ`.
+- **The relation at layer 1** (`θ_1 = 6θ_1 − 3θ_v − 3θ_{v̄}` on `R₅`) is **satisfiable**:
+  - the order-2 parts give `θ₂ = θ₂`, since `3χ = 0` and `5θ₂ = 3θ₂ = θ₂`;
+  - the real parts give `5e = 3e′`, which small `e`, `e′` meet.
+- **The relation at layer `v̄`** (`θ_{v̄} = 6θ_{v̄} − 3θ_1 − 3θ_{v̄²}`) is not. Its order-3 part reads `χ = 0 − 0 − 0`, since
+  `6χ = 3·(anything of order ≤ 2 or 3 with 3 | coefficient)`, which is impossible for `χ` of order 3.
+- So the attempt fails at **a different layer from the one where the parity layer was placed**, for exactly the proof's reason:
+  `1/3 ∈ R_F` forbids order-3 layers everywhere (`τ₃ = 0`).
+- Making every layer parity instead fails at layer 1 on the order-2 part: `θ₂ = 6θ₂ − 3θ₂ − 3θ₂ = 0`. That is the proof's second reason,
+  `Σ c_j` even.
+- No failure for a reason the proof does not name.
+
+**(b) By brute force, along one orbit of `v`** (`tools/fs81_verify_torsion.py`).
+- Every assignment of `τ ∈ {1/2, 1/3, 2/3}` to `u₀v^k`, `|k| ≤ 3`, subject to the relation at the five interior `k`, for 18 values of
+  `d`:
+  - **0 survivors at every `d ≡ 11 (mod 12)`** (11, 23, 35, 47, 59, 71, 83, 167, 179, 191);
+  - at `d ≡ 3, 7 (mod 12)` (3, 7, 15, 19, 31, 43, 51, 67), 2 or 4 survivors, **none with a parity-type interior layer**: the survivors are
+    the period-6 order-3 words `(1/3, 2/3, …)` at `d ≡ 3` and the period-4 words `(1/3, 1/3, 2/3, 2/3, …)` at `d ≡ 7 (mod 12)`.
+- A planted fault (the coefficient `n → n + 1` at `d = 11`, which breaks `3 | n`) produces 2 survivors, so the check can report
+  something other than the prediction.
+- This checks the gluing's torsion bookkeeping only; L2 is its input.
+
+**(c) The finite-level trap, where the attempt does succeed.** On a finite configuration whose layers are `5^{−J}ℤ[i]·b`, a
+"parity-type" layer is an archimedean character `λ_{5^{J−1}c0 + e_b}` there. The all-parity relation at layer 1 then asks
+`5^{J−1}c0 + E ∈ 5^Jℤ[i]` with `E = (1−2n)e_1 + ne_v + ne_{v̄}` and `|E| ≤ (4n−1)R_D = d·R_D`. Since
+`dist(5^{J−1}c0, 5^Jℤ[i]) = 5^J/√2`, this is possible only if **`5^J ≤ √2·d·R_D ≈ 0.25·d`**. So at shallow depth the real parts *can*
+absorb the parity discrepancy, and a finite configuration can carry a parity-layer slope that the field does not. This is a
+consequence of a single relation only, not a statement about `V(d, K)`; it is why a finite `Θ₃ ≠ ∅` measures its depth (C4).
+
+**(d) Positive controls, at the field level.**
+- At a bipartite field (e.g. ℚ(√2)), the bipartition character `β` lies in `Θ₃`, and every one of its layers is `θ₂` exactly (the only
+  homomorphism `R₅ → 𝔽₂` that is 1 on `1` and `i`): parity layers are realisable.
+- At `d ≡ 3, 7 (mod 12)`, `[Fischer1990]` Thm 9's additive 3-colourings lie in `Θ₃`: order-3 layers are realisable.
+- So both types occur somewhere, and the kill at `d ≡ 11 (mod 12)` is not vacuous.
+
+**C1 summary.** L1, L2, L3, L4, F-T4 and §F.5 are each **proved**, by the verifier's own derivation, at the field level, with no gap
+named. Every prediction of §0 is met as "proved". One divergence from the statement's own framing is recorded for C2 rather than
+corrected: the verifier's L4 route proves the stronger L4′ ("`1/3 ∈ R_F` and `Θ₃ ≠ ∅` ⟹ bipartite") through one global character `τ`,
+with no case analysis over pairs of layers.
