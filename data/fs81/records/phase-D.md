@@ -218,6 +218,38 @@ only periodic colourings of those periods.
 2.27·10⁻⁷): 5.1·10⁷ points at `d_ball` 18.41** (R = 1.041), then Λ₄₀₈ 2.0·10⁸, Λ₃₆₀ 2.6·10⁸, Λ₈₄₀ 3.5·10⁹, the rest 2·10¹⁰–2.5·10¹¹.
 **PD-8 (some survivor within 10⁷ points, 0.25): lost.** The four-colourable Λ₁₂₀ was the only lattice below 10⁷.
 
+## D2 — the handover (D2 goes to a successor; the owner's ruling)
+
+**What is fixed for D2, each from a measurement above:**
+
+| item | value | source |
+|---|---|---|
+| `d*` | **18.41** (X_A, target encoding, R = 1.5): the least `d_ball` at which X_A refuses within a quarter of the ladder's 1,800 s wall. The quiet re-ask at R = 1.4 (`d_ball` 16.60) took **462.7 s** (min of 3: 480.1, 462.7, 466.6), 2.8 % over the quarter (450 s), so by the letter `d*` stays 18.41; read at 16.60 instead, every price below falls by about 14 % | `d0b-reask.jsonl` tags `tA`, `dstar` |
+| `t_A` | **55.41 s** CPU (min of 3: 56.03, 55.45, 55.41), X_A at R = 1.5 (`d_ball` 18.41, n 39,829, 4-core = the ball), kissat 4.0.4, target encoding, desktop; `slot.py --status` at each start recorded on its row (beside it: only this stage's two R = 1.3 long asks) | `d0b-reask.jsonl`, tag `tA` |
+| the wall | **W = min(4·t_A, 6 h) = 221.6 s** | §S.D |
+| the encoding | K2's CNF: a unit-edge pin (the ball's origin, colour 0; its least unit neighbour, colour 1) plus the chain [2, 3] over the unpinned colours; kissat 4.0.4; CNF on disk | `tools/fs81_phaseD.py` `cnf_clauses` |
+| the survivor | **Λ₂₄₀** = Z⟨U₂₄₀⟩ over ℚ(√47): M = 240, 108 unit vectors, Hermite basis rows (over 240) (1,0,0,1), (0,1,1,0), (0,0,2,0), (0,0,0,2), covolume 2.27·10⁻⁷; the minimal survivor with the least `N(d*)`; `g` = 108 > `d*` | `data/fs81/phaseD/d47/survivors.md` |
+| its ball | the embedding-bounded ball (both real embeddings of (x, y) within R), as `fs73_screen.minkowski_ball` builds it on `fs81_d47.lattice_M(240, units_M(240))`; **R = 1.0411 for `d_ball` = 18.41: N ≈ 5.1·10⁷ points** (G65's law, not yet built) | `fs81_d47.price` |
+
+**The obstruction the successor meets first, stated before any solve (the brief invited an obligation that cannot be met).** §S.D's
+price needs a matched control with `n` within a factor of 2. At `d*` Λ₂₄₀'s ball has ≈ 5.1·10⁷ points against X_A's 39,829: **a factor
+of 1,284**, and no X_A ball has `d_ball` ≈ 18 at 5·10⁷ points (X_A's balls grow in degree with radius: 21.5 at 65,575 points). The other
+direction fails too: at sizes a solver can hold, Λ₂₄₀'s ball sits at low degree — `d_ball` ≈ 3.3 at 1.05·10⁷ points (R = 0.7), 7.3 at
+1.8·10⁷ (R = 0.8, the hardness peak), 11.8 at 2.9·10⁷, 16.5 at 4.35·10⁷ (G65's law) — so every buildable ask lands in or below the
+undecided band X_A itself shows (`d_ball` 8.3–14.7). And the D2 ask at `d*` (≈ 2·10⁹ clauses, tens of GB of DIMACS) cannot be parsed
+within W = 221.6 s: its UNKNOWN would measure the parser, not the band (G21). **So, as specified, D2 cannot produce a price that
+discharges its five obligations.** Three ways forward, for the owner:
+1. **Report the price as the size ratio itself**, with no solve: "reaching X_A's refusal degree over ℚ(√47) costs ≥ 1,284 times X_A's
+   points on the cheapest minimal survivor (≥ 5,000 times on the next two)" — [measured] arithmetic, carried from X_A as a [reading].
+2. **Pose a denser object**: a sublattice-free shape of Λ₂₄₀ (a word ball is excluded by §B.1.1, since G65's law does not describe it),
+   or the finite quotients — which refuse at every N ≤ 15 tried, and prove only that no N-periodic colouring exists.
+3. **The chain route (G55)** on a survivor that stays rigid after its `Θ₄` cells are computed, which needs no ball.
+
+**What D1 leaves for the successor:** the deep pass (`fs81_d47.py screen --ids survivors`), the UNKNOWN residue targets re-asked at a
+longer budget (`fs81_d47.py recheck --budget 600`), and P3b's calibrated exact `Θ₄` finder and cell analysis on the ten minimal
+survivors (a copy of `tools/fs79_p3b_theta4.py` with D = 47 and its output under `data/fs81/phaseD/d47/p3b/`) — no survivor is called
+rigid before its cells are computed (G73).
+
 ## Predictions (registered 2026-09-24, before the first band solver run)
 
 The plan's (§P): **P-D0** (scoped by stage B) 0.5 — four-colour refusals on the refutation-rank ≥ 2 families (X_A, X_B) decide within
