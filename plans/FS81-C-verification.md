@@ -576,3 +576,22 @@ statement, because the EMPTY direction is a norm inequality with no tree at all.
 **The negative control** (acceptance item 6): at `d ≡ 3, 7 (mod 12)` every configuration is NONEMPTY at every K, since the plane is
 3-colourable (`[Fischer1990]` Thm 9), so an EMPTY there would be a bug. None was observed: phase 0's d = 3, 7 controls are all
 NONEMPTY.
+
+## §5. Theorems this phase proved
+
+Each is filed in `plans/FS81-derivation.md` with its statement, grade, both proofs' addresses, what rests on it, prior art and kernel
+decision. One line each here:
+- **T1** — the pull-back lemma (P-F1). [hand] §2.1.
+- **T2** — L1 at the field level, as an inverse limit over finite symmetric `S ⊆ U_F`, with T22 ⟹ re-derived and its band map
+  `t = 𝟙/2 − a/6` written out. [hand, two derivations] §1.1, §2.1.
+- **T3** — L2 = C1(5), the classification of `Θ(U₅)`, from T40's cell list reproduced on a second code path with planted faults.
+  [hand + tools exact, two derivations] §1.2.
+- **T4** — L3; the layer torsion character `τ = lim θ(25^{−k}·)`; L4′ (`1/3 ∈ ℤ[U_F]` and `Θ₃(F) ≠ ∅` ⟹ bipartite); L4 as stated.
+  [hand, two derivations] §1.3–§1.4.
+- **T5** — the field-free form (five listed layers suffice) and F-T4, including `χ(ℚ(√d)²) ≥ 4` for every squarefree
+  `d ≡ 11 (mod 12)` and the new instance `χ(ℚ(√2, √7)²) ≥ 4`. [hand, two derivations] §1.5, §2.1, §3.1.
+- **T6** — §F.5: at `d ≡ 3, 7 (mod 12)`, `Θ₃` is exactly the set of additive 3-colourings. [hand, two derivations] §1.6, §3.2.
+- **T7** — the contrapositive for real number fields (`χ = 3` ⟹ a prime above 3 of odd residue degree), and the residual case it
+  leaves. [derived] §3.3.
+- **T8** — the finite threshold: `Θ_K` at every level; configuration A NONEMPTY at every K at `d ≡ 11 (mod 24)`; B EMPTY iff
+  `d < 21·5^{K−1}` (exact below 65,625, an upper bound always). [hand + tools exact] §4.
