@@ -726,6 +726,8 @@ waits on §PA.4.
   (§R-close.1 item 4).
 - No rank-4 lattice graph is known to refuse four colours (Poros's card 5). But **de Grey's lattice plus the one extra generator
   ±v is known to**: `Cay(Λ_dG, U ∪ {±v})`, v = −(4/9)(1 + √−11), refuses four colours on 2,044 points (FS73-T6, LRAT, frozen checker).
+  *(Domain pass, §B.1.3: precisely, the certified object is a 2,044-point unit-distance graph on Λ_dG **plus the one edge {0, v}**,
+  family X_A. Balls of `Cay(Λ_dG, U ∪ {±v})`, which carry every translate of the v-edge, contain it: that is family X_B.)*
 - **These refusing controls are abelian Cayley graphs, not unit-distance graphs** (owner's review, §R-review item 2). `Cay(Λ_dG, U ∪ {±v})`
   adds a generator of length |v| = (4/9)√12 = 8/(3√3) ≈ 1.540 ≠ 1, and FS79-T5 and T7 are K₄-free Cayley graphs of ℤ and ℤ² with
   integer generators. **No rank-4 unit-distance lattice graph is known to refuse four colours.** So D0 measures a four-colour band on
@@ -750,10 +752,16 @@ is three-colour-only):*
 > | **D0 the four-colour band** | **refusing families:** balls of `Cay(Λ_dG, U ∪ {±v})` at increasing radius; FS79-T5's rank-1 `G(ℤ, {1,3,7,12,17,22})` and T7's rank-2 product. **Colourable families:** balls of `Cay(Λ_dG, U)` (four-colourable, `F = 8Λ`), of `L21cc6506` (four-colourable and loose), and of ℚ(√47)'s own lattices that D1 finds four-colourable. Per ball: points, average degree, solver, verdict, CPU time, machine. Output: the four-colour phase diagram — where undecided asks cluster, and where refusals decide. Symmetry: pin an edge (ω = 2 on these triangle-free planes) plus value precedence | ≈ ½ desktop day |
 > | **D2 one priced ask** | on the densest *minimal* survivor, at the size and degree where D0 says refusals decide, symmetry-broken, under the lock, with a wall from D0 (at most 4× the matched control's refusal time, and at most 6 h). If refused: shrink to a core and certify with the frozen `tools/fs58_check_witness.py`. That would make ℚ(√47) the first real quadratic field needing five (with Γ₁₁: χ = 5), the conjecture's exact prediction met. If not refused: report the price in D0's units | ≤ 1 desktop day |
 
-**Stop rule.**
-- D0 ends when the band's edges are located on at least two families.
+**Stop rule** *(DK, D0a, D0b added by stage B; the planner's D0 line kept below as superseded)*.
+- DK ends when both checkers' self-tests pass and the owner's plant is refused by each.
+- D0a ends when every recorded four-colour ask named in its row is in the schema.
+- D0b ends when `R*(X_A)` is bracketed and X_B and the colourable family have been asked at the same radii (T5 and T7 once each).
 - D1 ends at M ≤ 2,520 or one desktop day.
 - D2 ends at its wall.
+- *Superseded (the planner's):* "D0 ends when the band's edges are located on at least two families."
+
+**Sequencing** *(stage B)*: DK and D0a run no solver and need no heavy lock, so they may start before phase 0 releases the lock. D0b, D1
+and D2 wait for it (§S.2).
 
 **Checkpoint and resume.**
 - One JSONL record per ask under `data/fs81/phaseD/`; solver runs go through a subprocess with a wall.
@@ -786,8 +794,11 @@ is three-colour-only):*
   - with no non-unit edge: "hence χ(ℚ(√d)²) ≥ k + 1";
   - with X_A's one non-unit edge {p, q}: "hence every proper k-colouring of the unit part gives p and q one colour". It never says χ ≥ 5
     there.
+
 **What a result may claim.**
-- A certified refusal at 47 proves χ(ℚ(√47)²) = 5. This confirms the conjecture and cannot falsify it.
+- A certified refusal at 47 proves χ(ℚ(√47)²) = 5. This confirms the conjecture and cannot falsify it. *(Obligation pass: the lower
+  half is K2's certificate; the upper half is Γ₁₁'s ceiling (row 52), whose field-level step is row 57's gap. The record states the two
+  grades separately and says "first" only after a prior-art gate.)*
 - A null is a price, not evidence that four colours suffice. Only a four-colouring of the whole plane, local at no prime, would
   falsify the prediction (G48).
 
