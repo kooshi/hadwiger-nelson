@@ -190,5 +190,12 @@ by its RAM cap (raise `--mem` from the measured peak, never guess). The pgid of 
 a kill is by that group, verified by the pid absent from `ps` and the JSONL static for ten seconds.
 
 **D1, the screen at 47** (`tools/fs81_d47.py`, a copy of FS-79's `fs79_p0.py` at d = 47; writes `data/fs81/phaseD/d47/`):
-`sweep --mmax 2520`, then `screen --ids all`, then `screen --ids survivors`; each resumable by re-running (every record keyed and
-skipped when present). Written before launch in full, with its budgets, when D1 starts.
+each step resumable by re-running (every record keyed and skipped when present; a kill redoes the one denominator or screen in flight):
+
+```
+cd /home/kooshi/source/lean-dir
+setsid nohup python3 scripts/slot.py --mem 4 --cpus 1 --name d1-sweep --wait 1800 -- \
+    python3 tools/fs81_d47.py sweep --mmax 2520 >> data/fs81/phaseD/d47/sweep-run.log 2>&1 &
+# then, per the sweep's candidates:  ... -- python3 tools/fs81_d47.py screen --ids all  (the budgets: per-ask 120 s residue asks,
+#   quotients N <= 15 with a total per lattice, Theta_4 cap), and screen --ids survivors (the deep pass)
+```
