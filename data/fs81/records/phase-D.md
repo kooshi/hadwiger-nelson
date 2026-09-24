@@ -10,8 +10,8 @@ This file is kept current enough that a successor can resume from the repository
 |---|---|
 | DK — the two checkers | **done**: self-tests pass (`data/fs81/phaseD/dk-selftest-*.out`); the owner's plants refused by each (K1: an index-2 quotient basis → `SPAN_MISMATCH`, a sheared basis with the table not re-indexed → `IMPROPER_EDGE`; K2: the conflict hint dropped at three positions of fixture (b)'s LRAT → `PROOF_STEP` each); committed `677d59e9` |
 | D0a — the harvest | **done**: 558 recorded asks in the schema (`data/fs81/phaseD/d0a-harvest.jsonl`, summary `d0a-summary.md`) |
-| D0b — the rank-4 ladder | not started (needs the heavy lock) |
-| D1 — the screen at 47 | not started (needs the heavy lock) |
+| D0b — the rank-4 ladder | **ladder run** (37 asks, `data/fs81/phaseD/d0b-asks.jsonl`); `R*(X_A)` bracketed from above only (below: the undecided band); quiet re-asks of the decision numbers pending |
+| D1 — the screen at 47 | sweep done (116 candidates + 11 undecided); screen running (8 slots) |
 | D2 — one priced ask | not started (needs the heavy lock) |
 
 ## DK — the checkers
@@ -137,6 +137,62 @@ X_A's 35 assumption-core rounds (pysat CaDiCaL 1.9.5): 39,829 → 2,044 points, 
 radii where δ = 8/9 ran to the wall, so the ladder's lower bracket may cost several walls of UNKNOWN before a SAT. The stop rule is kept
 ("bracketed" = the least UNSAT and the greatest SAT radius), and every UNKNOWN rung between them is reported as the undecided band,
 which is itself the band datum.
+
+## D0b — the rank-4 ladder (run 2026-09-24, slot "d0b": 12 cores, 24 GiB; commit of the tool `3a5cbd8f`)
+
+Every ask: kissat 4.0.4, wall 1,800 s enforced by the parent, the 4-core of the ball (= the whole ball at every radius), one fixed CNF
+writer (K2's layout). **Times are contended** (up to twelve asks at once; the load is on every row as `[L n]`) and read the bracket
+only; no number here enters a decision until it is re-asked alone. `cad` = the toolchain CaDiCaL re-asking the same CNF after an UNSAT.
+
+| R | n (every family) | `d_ball` X_A / X_B | X_A, target encoding (unit-edge pin + chain [2, 3]) | X_A, triangle pin | X_B, target encoding | colourable, target encoding |
+|---|---|---|---|---|---|---|
+| 1.0 | 7,879 | 8.30 / 8.33 | UNKNOWN (wall) [L7] | UNKNOWN (wall) [L1] | UNKNOWN (wall) [L3] | UNKNOWN (wall) [L5] |
+| 1.1 | 11,539 | 10.57 / 10.64 | UNKNOWN [L6] | UNKNOWN [L4] | UNKNOWN [L9] | UNKNOWN [L8] |
+| 1.2 | 16,381 | 12.79 / 12.90 | UNKNOWN [L10] | UNKNOWN [L11] | UNKNOWN [L12] | UNKNOWN [L12] |
+| 1.3 | 22,453 | 14.73 / 14.91 | UNKNOWN [L1] | UNKNOWN [L2] | UNKNOWN [L3] | SAT 86.9 s [L4] |
+| 1.4 | 30,181 | 16.60 / 16.83 | **UNSAT 983.4 s**; cad UNSAT 365.1 [L5] | **UNSAT 181.1 s**; cad 557.4 [L8] | **UNSAT 894.3 s**; cad 667.4 [L6] | SAT 15.2 s [L7] |
+| 1.5 | 39,829 | 18.41 / 18.70 | UNSAT 167.9; cad 470.5 [L11] | UNSAT 161.0; cad 481.3 [L10] | UNSAT 129.0; cad 448.5 [L12] | SAT 4.9 [L9] |
+| 1.6 | 51,493 | 20.00 / 20.34 | UNSAT 253.8; cad 104.7 [L12] | UNSAT 232.1; cad 335.3 [L12] | UNSAT 262.0; cad 142.1 [L12] | SAT 1.0 [L6] |
+| 1.7 | 65,575 | 21.49 / 21.88 | UNSAT 465.2; cad 114.2 [L6] | UNSAT 155.9; cad 91.3 [L7] | UNSAT 189.0; cad 103.7 [L8] | SAT 2.2 [L9] |
+
+Instrument controls (all pass): T5 and T7 SAT at 32 points and UNSAT at 33 under the target encoding (CaDiCaL agreeing), so the pins
+and chain manufacture no refusal on a graph known colourable and keep the known refusal; the wall plant (3 s on the R = 1.0 colourable
+ball) fired and was recorded UNKNOWN. Every SAT model was checked proper with its pins. Every colourable-family verdict is SAT or
+UNKNOWN, never UNSAT (the family is four-colourable by Theorem B, so an UNSAT there would be a defect).
+
+**Certification of the refusals.** At R ≥ 1.5 every X_A and X_B ball contains the K2-certified 2,044-point core (checked point by point,
+column `contains_certified_core`), so those refusals are certified by containment. **The three refusals at R = 1.4 are not:** that ball
+does not contain the core, so they rest on two solvers agreeing (kissat and CaDiCaL), not on a certificate. They need a K2 certificate
+only if one enters a decision.
+
+**What D0b measured** (each [measured], per family, contended times):
+1. **`R*(X_A)` ≤ 1.4 under both encodings** (a refusal smaller than the certified core's ball: R = 1.4 < 1.4997), **and it is not
+   bracketed from below.** No X_A, X_B or even colourable ask at R ≤ 1.2 (`d_ball` ≤ 12.8) decided within 1,800 s, and the forcing asks
+   stayed undecided at R = 1.3 (`d_ball` 14.7), where the plain colourable ask took 87 s to answer SAT. The undecided band on this lattice,
+   under this encoding and wall: `d_ball` 8.3 – 14.7 for the forcing families, 8.3 – 12.8 for the colourable one.
+2. **The refusal at the threshold is the slow one** (G65's rank-4 four-colour instance): X_A (target) took 983 s at R = 1.4 and 168–465 s
+   above; X_B 894 s at 1.4 and 129–262 s above.
+3. **The triangle pin is worth 5.4× at the threshold and nothing clear above it**: X_A at R = 1.4, 181 s (triangle) against 983 s (edge
+   pin + chain); at 1.5, 161 against 168. At ℚ(√47) (ω = 2) the triangle pin is unavailable, so the target's encoding is the slower one
+   exactly where it matters.
+4. **X_B against X_A, the one axis that differs (the number of v-edges):** both refuse at exactly the same radii (1.4 up) and neither
+   decides at 1.3; CPU ratios X_B/X_A 0.91, 0.77, 1.03, 0.41 at R = 1.4 … 1.7 — within a factor of 3 at every radius (contended).
+5. **Solver spread persists**: CaDiCaL was 2.7× faster than kissat at X_A's threshold (365 against 983 s) and 2.8× slower at R = 1.5.
+6. `maxrss_mb` on these rows is **not** the solver's peak: each child was forked from a ≈ 2.5 GB parent holding every graph, and Linux
+   counts the pre-exec pages; the probe (681 MiB at R = 1.7, from a small parent) is the solver's figure.
+
+**Predictions scored** (contended times; the ladder's grid is 0.1 in R):
+
+| id | outcome | verdict |
+|---|---|---|
+| PD-1 (0.85) X_A target refuses at R = 1.5 within 1,800 s | UNSAT 167.9 s | **won** |
+| PD-2 (0.45) some R ≤ 1.4 gives SAT for X_A target | no SAT at any R | **lost** |
+| PD-3 (0.6) least UNSAT radius for X_A target is 1.4 or 1.5 | 1.4 (1.3 UNKNOWN) | **won**, grid-limited |
+| PD-4 (0.6) X_B refuses wherever X_A does, never slower | same radii; slower at 1.6 by 3 % (262.0 against 253.8 s, contended) | **lost**, narrowly and within the noise of contended times |
+| PD-5 (0.4) X_A/X_B times within a factor of 3 wherever both refuse | 0.41–1.03 | **won** (contended; the quiet re-asks may move it) |
+| PD-6 (0.6) colourable SAT within 60 s at every R ≥ 1.3 and UNKNOWN at 1.0 | 87 s at 1.3; UNKNOWN at 1.0 | **lost** (first half) |
+| PD-7 (0.55) X_A target faster than triangle at R = 1.5 | 167.9 against 161.0 s | **lost**, within the noise; at 1.4 the triangle pin is 5.4× faster |
+| P-D0 (0.5) rank-≥2 refusals decide within 1 h only above `d_ball` ≈ 12 | within 30 min only from 16.6 (X_A, X_B); 14.7 undecided at 30 min | **not scored**: the ladder's wall was 30 min, not 1 h; a 1-hour re-ask at R = 1.3 decides it |
 
 ## Predictions (registered 2026-09-24, before the first band solver run)
 

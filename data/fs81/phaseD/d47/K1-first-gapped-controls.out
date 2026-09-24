@@ -1,0 +1,11 @@
+CERTIFIED: the lattice graph Cay(Z<U_168>, U_168) over Q(sqrt47) (d = 47), 68 unit vectors, is properly 4-coloured by the residue colouring at (47, sqrt47 - 0), image 8 of the circle; fan gap at the origin: yes. So that lattice graph is 4-colourable (a typed null for the plane, never a colouring of Q(sqrt47)^2); witness sha256 402c3a21caaa4946
+  control faithful: CERTIFIED
+  control drop_unit: refused UNIT_ENUMERATION_DISAGREES (want UNIT_ENUMERATION_DISAGREES)
+  control unit_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control sublattice_H: refused SPAN_MISMATCH (want SPAN_MISMATCH)
+  control nonsquare_root: refused ROOT_NOT_SQUARE_ROOT (want ROOT_NOT_SQUARE_ROOT)
+  control neighbour_same_colour: refused IMPROPER_EDGE (want IMPROPER_EDGE)
+  control unit_dropped_from_count: refused UNIT_COUNT (want UNIT_COUNT)
+  control d_changed_to_167: refused UNIT_COUNT (want UNIT_COUNT)
+  control d_not_squarefree: refused BAD_D (want BAD_D)
+CONTROLS: PASS

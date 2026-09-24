@@ -1,0 +1,77 @@
+slot: admitted d0b: mem 24 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11
+D0b ladder: 37 asks to run (0 already recorded); 12 at a time; wall 1800.0 s
+  built T5|target|L32: n 32, d_ball 8.125, 4-core 32 at 8.125
+  built T5|target|L33: n 33, d_ball 8.242, 4-core 33 at 8.242
+  built T7|target|L32x2: n 64, d_ball 9.125, 4-core 64 at 9.125
+  built T7|target|L33x2: n 66, d_ball 9.242, 4-core 66 at 9.242
+  built control:wall-plant|colourable|target|R1.0: n 7879, d_ball 8.296, 4-core 7879 at 8.296
+  built X_A|target|R1.0: n 7879, d_ball 8.296, 4-core 7879 at 8.296, contains the certified core: False
+  built X_A|triangle|R1.0: n 7879, d_ball 8.296, 4-core 7879 at 8.296, contains the certified core: False
+  built X_B|target|R1.0: n 7879, d_ball 8.33, 4-core 7879 at 8.33, contains the certified core: False
+  built colourable|target|R1.0: n 7879, d_ball 8.296, 4-core 7879 at 8.296
+  built X_A|target|R1.1: n 11539, d_ball 10.57, 4-core 11539 at 10.57, contains the certified core: False
+  built X_A|triangle|R1.1: n 11539, d_ball 10.57, 4-core 11539 at 10.57, contains the certified core: False
+  built X_B|target|R1.1: n 11539, d_ball 10.641, 4-core 11539 at 10.641, contains the certified core: False
+  built colourable|target|R1.1: n 11539, d_ball 10.57, 4-core 11539 at 10.57
+  built X_A|target|R1.2: n 16381, d_ball 12.786, 4-core 16381 at 12.786, contains the certified core: False
+  built X_A|triangle|R1.2: n 16381, d_ball 12.786, 4-core 16381 at 12.786, contains the certified core: False
+  built X_B|target|R1.2: n 16381, d_ball 12.903, 4-core 16381 at 12.903, contains the certified core: False
+  built colourable|target|R1.2: n 16381, d_ball 12.786, 4-core 16381 at 12.786
+  built X_A|target|R1.3: n 22453, d_ball 14.733, 4-core 22453 at 14.733, contains the certified core: False
+  built X_A|triangle|R1.3: n 22453, d_ball 14.733, 4-core 22453 at 14.733, contains the certified core: False
+  built X_B|target|R1.3: n 22453, d_ball 14.905, 4-core 22453 at 14.905, contains the certified core: False
+  built colourable|target|R1.3: n 22453, d_ball 14.733, 4-core 22453 at 14.733
+  built X_A|target|R1.4: n 30181, d_ball 16.602, 4-core 30181 at 16.602, contains the certified core: False
+  built X_A|triangle|R1.4: n 30181, d_ball 16.602, 4-core 30181 at 16.602, contains the certified core: False
+  built X_B|target|R1.4: n 30181, d_ball 16.829, 4-core 30181 at 16.829, contains the certified core: False
+  built colourable|target|R1.4: n 30181, d_ball 16.602, 4-core 30181 at 16.602
+  built X_A|target|R1.5: n 39829, d_ball 18.412, 4-core 39829 at 18.412, contains the certified core: True
+  built X_A|triangle|R1.5: n 39829, d_ball 18.412, 4-core 39829 at 18.412, contains the certified core: True
+  built X_B|target|R1.5: n 39829, d_ball 18.696, 4-core 39829 at 18.696, contains the certified core: True
+  built colourable|target|R1.5: n 39829, d_ball 18.412, 4-core 39829 at 18.412
+  built X_A|target|R1.6: n 51493, d_ball 20.002, 4-core 51493 at 20.002, contains the certified core: True
+  built X_A|triangle|R1.6: n 51493, d_ball 20.002, 4-core 51493 at 20.002, contains the certified core: True
+  built X_B|target|R1.6: n 51493, d_ball 20.343, 4-core 51493 at 20.343, contains the certified core: True
+  built colourable|target|R1.6: n 51493, d_ball 20.002, 4-core 51493 at 20.002
+  built X_A|target|R1.7: n 65575, d_ball 21.49, 4-core 65575 at 21.49, contains the certified core: True
+  built X_A|triangle|R1.7: n 65575, d_ball 21.49, 4-core 65575 at 21.49, contains the certified core: True
+  built X_B|target|R1.7: n 65575, d_ball 21.884, 4-core 65575 at 21.884, contains the certified core: True
+  built colourable|target|R1.7: n 65575, d_ball 21.49, 4-core 65575 at 21.49
+  T7|target|L32x2: SAT 0.01 s CPU (load 3); model proper, pins respected
+  T5|target|L32: SAT 0.01 s CPU (load 1); model proper, pins respected
+  T7|target|L33x2: UNSAT 0.02 s CPU (load 4); second solver UNSAT 0.01 s
+  T5|target|L33: UNSAT 0.01 s CPU (load 2); second solver UNSAT 0.01 s
+  control:wall-plant|colourable|target|R1.0: UNKNOWN 2.9 s CPU (load 2); PASS
+  X_A|triangle|R1.0: UNKNOWN 1786.48 s CPU (load 1)
+  X_B|target|R1.0: UNKNOWN 1786.8 s CPU (load 3)
+  X_A|triangle|R1.1: UNKNOWN 1786.17 s CPU (load 4)
+  colourable|target|R1.0: UNKNOWN 1785.0 s CPU (load 5)
+  X_A|target|R1.1: UNKNOWN 1786.31 s CPU (load 6)
+  X_A|target|R1.0: UNKNOWN 1786.88 s CPU (load 7)
+  colourable|target|R1.1: UNKNOWN 1786.06 s CPU (load 8)
+  X_B|target|R1.1: UNKNOWN 1787.52 s CPU (load 9)
+  X_A|triangle|R1.2: UNKNOWN 1787.62 s CPU (load 11)
+  X_A|target|R1.2: UNKNOWN 1786.09 s CPU (load 10)
+  X_B|target|R1.2: UNKNOWN 1787.59 s CPU (load 12)
+  colourable|target|R1.2: UNKNOWN 1787.67 s CPU (load 12)
+  colourable|target|R1.5: SAT 4.86 s CPU (load 9); model proper, pins respected
+  colourable|target|R1.4: SAT 15.23 s CPU (load 7); model proper, pins respected
+  colourable|target|R1.3: SAT 86.94 s CPU (load 4); model proper, pins respected
+  X_A|target|R1.6: UNSAT 253.82 s CPU (load 12); second solver UNSAT 104.68 s
+  colourable|target|R1.6: SAT 1.01 s CPU (load 6); model proper, pins respected
+  X_B|target|R1.6: UNSAT 262.01 s CPU (load 12); second solver UNSAT 142.08 s
+  X_B|target|R1.5: UNSAT 128.96 s CPU (load 12); second solver UNSAT 448.51 s
+  X_A|triangle|R1.6: UNSAT 232.14 s CPU (load 12); second solver UNSAT 335.25 s
+  colourable|target|R1.7: SAT 2.15 s CPU (load 9); model proper, pins respected
+  X_A|target|R1.5: UNSAT 167.88 s CPU (load 11); second solver UNSAT 470.45 s
+  X_A|triangle|R1.5: UNSAT 160.97 s CPU (load 10); second solver UNSAT 481.32 s
+  X_A|triangle|R1.4: UNSAT 181.09 s CPU (load 8); second solver UNSAT 557.44 s
+  X_A|triangle|R1.7: UNSAT 155.93 s CPU (load 7); second solver UNSAT 91.28 s
+  X_B|target|R1.7: UNSAT 189.04 s CPU (load 8); second solver UNSAT 103.73 s
+  X_A|target|R1.7: UNSAT 465.23 s CPU (load 6); second solver UNSAT 114.22 s
+  X_A|target|R1.4: UNSAT 983.44 s CPU (load 5); second solver UNSAT 365.1 s
+  X_B|target|R1.4: UNSAT 894.31 s CPU (load 6); second solver UNSAT 667.35 s
+  X_A|target|R1.3: UNKNOWN 1788.96 s CPU (load 1)
+  X_A|triangle|R1.3: UNKNOWN 1789.54 s CPU (load 2)
+  X_B|target|R1.3: UNKNOWN 1789.19 s CPU (load 3)
+DONE ladder
