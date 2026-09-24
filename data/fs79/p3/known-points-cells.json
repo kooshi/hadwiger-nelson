@@ -1,0 +1,16 @@
+{
+ "L21cc6506-linear.json": {
+  "order": 4200,
+  "dim": 0,
+  "n_const": 60,
+  "const_is_rational_layer": false,
+  "n_edge_at_barycentre": 14
+ },
+ "L21cc6506-linear-probe.json": {
+  "order": 5880,
+  "dim": 2,
+  "n_const": 12,
+  "const_is_rational_layer": true,
+  "n_edge_at_barycentre": 8
+ }
+}

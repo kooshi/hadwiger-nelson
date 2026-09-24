@@ -1,0 +1,68 @@
+{
+ "lattice": "L21cc6506",
+ "M": 420,
+ "d": 167,
+ "H": [
+  [
+   1,
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   0,
+   0,
+   2,
+   0
+  ],
+  [
+   0,
+   0,
+   0,
+   2
+  ]
+ ],
+ "unit_count": 60,
+ "k": 4,
+ "kind": "linear",
+ "claims_gap": false,
+ "basis": [
+  [
+   0,
+   1,
+   1,
+   0
+  ],
+  [
+   1,
+   0,
+   0,
+   1
+  ],
+  [
+   0,
+   0,
+   2,
+   0
+  ],
+  [
+   -2,
+   0,
+   0,
+   0
+  ]
+ ],
+ "theta_on_basis": [
+  "-4723/324",
+  "-1196/81",
+  "1/324",
+  "-73/648"
+ ],
+ "note": "a rational point strictly inside a full-dimensional cell of Theta_4 (FS-79 P3)"
+}

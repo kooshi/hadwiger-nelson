@@ -1,0 +1,2 @@
+CERTIFIED: {"k": 3, "drop": null, "subtrees_checked": 2, "nodes": 11348, "dead_ends": 3024, "leaves": 0, "classes": 0}
+CERTIFIED: {"k": 4, "drop": 4, "subtrees_checked": 2, "nodes": 159618, "dead_ends": 28511, "leaves": 63, "classes": 57, "cells_by_dim": {"0": 13, "1": 2, "2": 15, "4": 27}, "const_intersection": [], "W_dim": 0}
