@@ -37,6 +37,7 @@ CKPT = P0 / "ckpt"
 FROZEN = ROOT / "tools/fs73v2_check.py"
 NEWCHK = ROOT / "tools/fs81_theta_check.py"
 SCREEN = (3, 6, 9, 12)          # the small-order point screen run before every tree in P0.2 (a finder only)
+NEG_TREE_CAP = 300.0           # the tree-alone measurement on a negative control (its point-finding power), capped
 FROZEN_BUDGET = 1.5e9          # 4.2·D³/d loop iterations the frozen checker's enumeration may cost (≈ 5–8 min)
 
 CENSUS = [11, 23, 35, 47, 59, 71, 83, 95, 107, 119, 131, 143, 155, 167, 179, 191, 203, 215, 227, 239, 251, 263, 287, 299, 311,
@@ -220,7 +221,7 @@ def cmd_controls(cap_s):
     for kind, tag, d, D, U, what in items:
         meta = {"kind": kind, "expect": "EMPTY" if kind == "pos" else "NONEMPTY", "what": what}
         # the tree alone (the pipeline that produces every EMPTY certificate), capped
-        run_item("controls", tag, d, D, U, cap_s, dict(meta, route="tree alone"))
+        run_item("controls", tag, d, D, U, cap_s if kind == "pos" else NEG_TREE_CAP, dict(meta, route="tree alone"))
         # the small-order screen before the tree (the pipeline P0.2 uses)
         run_item("controls", tag + "-scr", d, D, U, cap_s, dict(meta, route="screen (orders 3, 6, 9, 12) then tree"),
                  screen=SCREEN)
@@ -228,7 +229,17 @@ def cmd_controls(cap_s):
 
 # ================================================================ P0.2 configurations
 
-def cmd_configs(cap_s, fields, names, K, stage):
+SAT_DMAX = 5000                  # saturate a NONEMPTY configuration (all unit vectors of its span) while D ≤ this
+
+
+def saturation(d, D, U):
+    """Every unit vector of span U (at denominator D), one per ± pair: the configuration's lattice's full unit set."""
+    from fs73v2_units import in_lattice
+    H = T.hnf([list(u) for u in U])
+    return half(u for u in enumerate_units(d, D) if in_lattice(H, u))
+
+
+def cmd_configs(cap_s, fields, names, K, stage, saturate=True):
     for d in fields:
         for name in (names or T.config_names(d)):
             try:
@@ -237,7 +248,42 @@ def cmd_configs(cap_s, fields, names, K, stage):
                 continue
             D, U = T.units_of(d, layers, K)
             tag = f"d{d}-{name.replace(':', '_').replace('+', 'p').replace('-', 'm')}-K{K}"
-            run_item(stage, tag, d, D, U, cap_s, {"config": name, "K": K, "open": d in OPEN}, screen=SCREEN)
+            meta = {"config": name, "K": K, "open": d in OPEN}
+            run_item(stage, tag, d, D, U, cap_s, meta, screen=SCREEN)
+            if not saturate or D > SAT_DMAX:
+                continue
+            rec = next((json.loads(l) for l in open(P0 / f"{stage}.jsonl") if json.loads(l)["tag"] == tag), None)
+            if rec is None or rec["verdict"] != "NONEMPTY" or (tag + "-sat") in done_tags(P0 / f"{stage}.jsonl"):
+                continue
+            sat = saturation(d, D, U)
+            th = [F(a, b) for a, b in rec["theta_abce_dual"]]
+            if len(sat) == len(U) or all(F(1, 3) <= (x := sum(t * c for t, c in zip(th, u))) - math.floor(x) <= F(2, 3)
+                                          for u in sat):
+                append(P0 / f"{stage}.jsonl", dict(meta, tag=tag + "-sat", d=d, D=D, N=len(sat), verdict="NONEMPTY",
+                                                   finder=f"the configuration's θ colours all {len(sat)} pairs of its span",
+                                                   saturated=True))
+                continue
+            run_item(stage, tag + "-sat", d, D, sat, cap_s, dict(meta, saturated=True, N_config=len(U)), screen=SCREEN)
+
+
+def census_open(d):
+    """FS-61's Open lattices at d (the last filter record per lattice id), as (id, key), cheapest key denominator first."""
+    last = {}
+    path = ROOT / f"data/fs61/fields/{d}/filter.jsonl"
+    for l in open(path):
+        if l.strip():
+            r = json.loads(l)
+            last[r["id"]] = r
+    out = [(i, r["key"]) for i, r in last.items() if str(r.get("state", "")).startswith("Open") and r.get("rank") == 4]
+    return sorted(out, key=lambda t: int(t[1].split("|")[0]))
+
+
+def cmd_census(cap_s, fields, stage):
+    for d in fields:
+        for lid, key in census_open(d):
+            D, U = units_of_key(d, key)
+            run_item(stage, f"d{d}-{lid}", d, D, U, cap_s, {"census_id": lid, "census_key": key, "open": d in OPEN},
+                     screen=SCREEN)
 
 
 def main():
@@ -251,13 +297,21 @@ def main():
     g.add_argument("--names", default=None)
     g.add_argument("--K", type=int, default=1)
     g.add_argument("--stage", default="configs")
+    g.add_argument("--no-saturate", action="store_true")
+    h = sub.add_parser("census")
+    h.add_argument("--cap-s", type=float, default=1800.0)
+    h.add_argument("--fields", default=None)
+    h.add_argument("--stage", default="census")
     a = ap.parse_args()
+    if a.cmd == "census":
+        cmd_census(a.cap_s, [int(x) for x in a.fields.split(",")] if a.fields else OPEN, a.stage)
+        return
     if a.cmd == "controls":
         cmd_controls(a.cap_s)
     else:
         fields = [int(x) for x in a.fields.split(",")] if a.fields else CENSUS
         names = a.names.split(",") if a.names else None
-        cmd_configs(a.cap_s, fields, names, a.K, a.stage)
+        cmd_configs(a.cap_s, fields, names, a.K, a.stage, not a.no_saturate)
 
 
 if __name__ == "__main__":

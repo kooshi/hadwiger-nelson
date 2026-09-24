@@ -54,3 +54,53 @@ L=/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943c
 flock -w 1800 $L python3 tools/fs81_p0.py controls --cap-s 1800          # P0.0
 flock -w 1800 $L python3 tools/fs81_p0.py configs  --cap-s 1800          # P0.2, all 40 census fields, K = 1
 ```
+
+## 3. P0.1 — the rational layer, exactly (a measurement of a finite shadow)
+
+`tools/fs81_rational.py 6 --out data/fs81/phase0/rational` (0.1 s; exact Fractions; closed half-plane clipping keeps degenerate
+cells). `U^(5^K)` spans `(1/5^K)ℤ[i]`; θ on it is `μ = (θ(1), θ(i))`, and its rotation set `Θ_K` has period `5^K ℤ²`. Lifting:
+`Θ_K ⊆ Θ_(K−1)`, so the 25 translates of each level-(K−1) cell are clipped by the four new direction pairs. Every vertex of every
+cell is re-checked against all directions of its level.
+
+| K | period | direction pairs | cells per period | the polygon | its area | the points |
+|---|---|---|---|---|---|---|
+| 1 | 5 | 6 | 1 polygon + 4 points | 12-gon centred (5/2, 5/2) | 17/189 ≈ 0.08995 | (5/3)·(1 or 2, 1 or 2) |
+| 2 | 25 | 10 | 1 polygon + 4 points | 20-gon centred (25/2, 25/2) | 61/693 ≈ 0.08802 | (25/3)·(1 or 2, 1 or 2) |
+| 3 | 125 | 14 | 1 polygon + 4 points | 28-gon centred (125/2, 125/2) | 437/4977 ≈ 0.08780 | (125/3)·(1 or 2, 1 or 2) |
+| 4 | 625 | 18 | 1 polygon + 4 points | 36-gon | ≈ 0.08768 | order 3 |
+| 5 | 3,125 | 22 | 1 polygon + 4 points | 44-gon | ≈ 0.08755 | order 3 |
+| 6 | 15,625 | 26 | 1 polygon + 4 points | 52-gon | ≈ 0.08746 | order 3 |
+
+**Reading (measured at K ≤ 6, not proved for all K):** `Θ_K = (5^K/2)(1,1) + (D_K ∪ F_K) + 5^K ℤ²`, where
+`D_K = {δ : |⟨δ, x⟩| ≤ 1/6 for every x ∈ U^(5^K)}` is a `4(2K+1)`-gon (one edge pair per direction pair) shrinking to the disc of
+radius 1/6 (area π/36 ≈ 0.087266), and `F_K` is four isolated points of order 3: `θ(1), θ(i) ∈ {5^K/3, 2·5^K/3}` mod `5^K`,
+the additive `𝔽₃`-colourings `(p + iq)/5^K ↦ pa + qb (mod 3)`. At the polygon's centre `θ(x) ≡ 1/2` on every unit vector (the
+bipartite point: `p + q` is odd whenever `p² + q² = 25^K`). K = 1 reproduces FS73-T40's `Θ_R`. The fraction of the torus in `Θ_K`
+falls like `25^(−K)`: each level keeps exactly one of the 25 lifts of the polygon. Data: `data/fs81/phase0/rational/rational-layer-K{1..6}.json`.
+
+## 4. P0.0 — controls, both sides, before any null is read
+
+`python3 tools/fs81_p0.py controls --cap-s 1800` (records `data/fs81/phase0/controls.jsonl`, certificates
+`data/fs81/phase0/certs/ctl-*.json.gz`). Every lattice ran twice: through **the tree alone** (the pipeline that produces every EMPTY
+certificate; capped at 300 s on negatives) and through **the small-order screen, then the tree** (the pipeline P0.2 uses; the screen
+tries every θ of order 3, 6, 9 or 12 on the Hermite basis — a finder only, its θ checked like any other). Every verdict went to the
+frozen `tools/fs73v2_check.py`, all key denominators here being small enough for its enumeration.
+
+| control | lattice | pairs | tree alone | screen, then tree | frozen checker |
+|---|---|---|---|---|---|
+| positive, d = 167 (7 mod 8) | T41's `{1, v, z}·U^(5)`, z at (a, c) = (15, 14) | 18 | EMPTY, 1,587 nodes, 2.5 s | EMPTY | PASS (the complete unit set of its span) |
+| positive, d = 47 (7 mod 8) | Coxeter's `cert_47` lattice `60\|5,1,5,3;…` | 14 | EMPTY, 537 nodes | EMPTY | PASS; `certcheck.py cert_47.json` also OK |
+| positive, d = 11 (3 mod 8) | E's `Ld65c8ee8` | 54 | EMPTY, 14,478 nodes (V2's count exactly) | EMPTY | PASS |
+| positive, d = 59 (3 mod 8) | **new:** the 23 edge-direction pairs of the certified ℚ(√59) witness (D = 90) | 23 | EMPTY, 8,106 nodes, 13 s | EMPTY | PASS |
+| negative, d = 59 | `Ld65c8ee8` over ℚ(√59) | 18 | point, 1,077 nodes | point of order 9 | PASS NONEMPTY (all 36 unit vectors) |
+| negative, d = 167 | `Ld14c588b` | 22 | point, 1,189 nodes | point (tree) | PASS NONEMPTY (all 44) |
+| negative, d = 3 | every distinct rank-4 `Λ_M`, M ≤ 60 (16 lattices, 6–54 pairs) | | 15 points; **`Λ₂₆` UNDECIDED at 312 s, 171,657 nodes** | 16 points, all of order 3 | PASS on all 31 certificates |
+| negative, d = 7 | every distinct rank-4 `Λ_M`, M ≤ 60 (15 lattices, 6–54 pairs) | | 15 points | 15 points, all of order 3 | PASS on all 30 |
+
+**Verdict: the controls pass, on both sides, through the pipeline P0.2 uses** — every positive EMPTY and every negative NONEMPTY,
+each certified by the frozen checker. **The tree alone is a weak finder of isolated points:** on `Λ₂₆` over ℚ(√3) (54 pairs) it
+searched 171,657 nodes in 312 s without landing on the order-3 point the screen finds in 3 ms. This is why the screen runs before
+every tree: a NONEMPTY configuration whose points are isolated and of small order would otherwise cost a 30-minute cap and come back
+UNDECIDED. Isolated points of order beyond 12 are still found only by the tree (G21: a finder measures its search order).
+**Checker parity:** `tools/fs81_theta_check.py` in its default mode printed the same line as the frozen checker on all 73 control
+certificates.
