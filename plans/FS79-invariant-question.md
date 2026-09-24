@@ -1461,7 +1461,7 @@ FS-59 (§0 bearings), FS-74 (banner), FS-76 (re-aim), FS-80 (minted around it), 
 | **P-G72** | 0.8 | **won** (§R-close.3) |
 | P-G71 a K₄-free four-colour rigidity theorem, no arithmetic | 0.15 | not met (the 0.85 side won) |
 | P-G15 a non-factoring obstruction | 0.05 | void: no obstruction landed |
-| P-G54 Γ₂₃ slack at four colours | 0.8 | **unscored**: phase 0's record reports no step-0 result (an unreported deliverable; errata) |
+| P-G54 Γ₂₃ slack at four colours | 0.8 | **lost, by 0.039** (scored at FS-81's opening, 2026-09-24, by the owner): λ_min(Γ₂₃) = −7.9607 > −24/3, so the ratio bound refuses four colours outright (α ≤ 131.76 < 529/4) — neither slack nor tight; the consequence it was registered for holds a fortiori: no usable prime of ℚ(√167) is four-tight (43: −11.962, 59: −14.918, both refuse four), so G54's tight mechanism gives no full-rank `F` there. Phase 0's record reported no step-0 result (errata item 7) |
 | P-MO, P-rank | 0.7, 0.75 | unscored ((Q-comp) not settled) |
 | P0-a, P0-b, P0-c | 0.75, 0.6, 0.65 | won, won, won (phase-P0.md) |
 | I-1, I-2, I-3, I-4 (the implementer's) | 0.85, 0.50, 0.25, 0.60 | won; won (point estimate off ×5); the 0.75 side won; won |

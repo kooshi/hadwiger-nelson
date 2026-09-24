@@ -24,6 +24,14 @@
 - **Prices, with their caveat:** every candidate's degree-18 ball holds ≥ 1.38·10⁸ points, the cheapest survivor's 1.57·10¹¹ (T13). Those
   are balls at G65's **three-colour** degree aim; the four-colour hardness band is unmeasured.
 
+**What five here would and would not do** (FS-81's opening, 2026-09-24): the conjecture predicts at least six at ℚ(√167), so a five
+confirms and **cannot falsify**; the prediction falls only to a colouring of the whole plane with ≤ 5 colours, local at no prime, which
+only FS-64 aims at. §1's "a proof that three suffices kills the main clause" was two-sided when written and stopped being so when four
+was proven (row 79). The long-run case is the advisor's six-arena reading [reading, Poros, 2026-09-24]: ℚ(√167) is the smallest 6-open
+real field and every lattice over it has rank ≤ 4, so the conjecture predicts a six-chromatic unit-distance graph inside a Cayley graph
+of ℤ⁴ there — the cheapest arena for six by rank. Where the conjecture predicts exactly five against a proven four (ℚ(√47) first) is
+FS-81's last phase.
+
 **Next, cheapest first** (the owed work from phase 0's trimming, close-inventory items 54, 60, 62, 98):
 1. **Quotients at `N ≥ 16`** on all seven and `N = 15` on all but Λ₂₄₄₈ (P3b reached `N = 13–15`; the admissible `N ≤ 24` per lattice are
    listed in its record), longer asks at Λ₂₃₂₈'s `N = 13` and Λ₂₄₄₈'s `N = 15`; fix `quot_total` and P3b's cap, both checked only between
