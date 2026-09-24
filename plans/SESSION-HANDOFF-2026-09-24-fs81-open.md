@@ -41,6 +41,7 @@ on a fresh Poros's advice with the owner concurring.*
 | At most three agents at once; **no child spawns children** (say so, with the reason, in every brief) | Kooshi, 2026-09-23; `CLAUDE.md` § Delegation |
 | The owner coordinates and reviews, and does not contribute; drive phase to phase without go-aheads; never amend; halt on an unexplained crash | Kooshi, 2026-09-23 |
 | **Push freely to this repository's origin; never force-push without Kooshi's explicit authorisation** | Kooshi, 2026-09-24 |
+| **No SAT solver runs from 2026-09-24 (FS-81's close) to 2026-10-01**; the week is algebra-only, advised by a fresh Poros (`plans/POROS-2026-09-24-algebra-week.md`); the solver column of `plans/FRONTIER-STUBS.md` marks which stubs it can run | Kooshi, 2026-09-24 (close inventory item 82); `CLAUDE.md` § Toolchain |
 | Every derivation milestone runs WORKFLOW 3.3 (§IQ), scored with §G; G72's count at the close | Kooshi, 2026-09-23 |
 | The close inventory is opened at minting and written to as items arise (WORKFLOW step 5) | Kooshi, 2026-09-23 |
 | **New at FS-79: every hand-back is content-free, and every report goes by explicit SendMessage.** The harness delivers a hand-back to whichever agent last woke the sender (protocol §1 rule 1) | FS-79 incident |
