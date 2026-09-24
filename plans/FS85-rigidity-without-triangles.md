@@ -29,6 +29,13 @@ the coordinator writes. It runs in **the finite-witness-free week, 2026-09-24 to
    The FS-74 stub's leads cite none of the three (a G50 instance, §PA.4). **Forcing is monotone upward** (`Forcer.Forces.mono`). So a
    theorem about every colouring of a *larger* graph (the ring `R₂`) does not restrict to `Λ`. One about a *smaller* graph (`ℤ[ζ₆]`,
    one coset) does. Every held piece must be checked edge by edge against `Λ` before it is used (the advisor's point 2, §Y).
+   **One check is done, and it corrects the record** (§PA.6):
+   - `η = (√33 + i√3)/6` (so `η² = ω₃`, the Moser twist) and `η^{±3}` all lie in `Λ = (1/9)·O_E`. The coordinates of 9η, 9η² and 9η³
+     in the basis `1, ζ₆, w, ζ₆w` are `(−3, 6, 3, −6)`, `(6, 0, 3, 0)` and `(−5, 10, 2, −4)`.
+   - So row 78's and FS73-T6's "reached through `η^{±3} ∉ Λ`" is false as written. That `Λ` is not closed under *multiplication* by
+     `η` is a different statement, which this check leaves alone.
+   - The wiki's identities (8)–(9) hold exactly with `ω = ζ₆ = e^{iπ/3}`, not with the page's stated `ω = e^{2πi/3}`.
+   - Whether the wiki's Prop. 7 / Cor. 9 then runs on `Cay(Λ, U)` step by step is Task 0 (§C).
 2. **Step 2, as the stub poses it, is trivially yes, and its content is translation invariance, then realisability.**
    - A triangle-free 5-critical graph minus an edge carries a four-colour forced pair: the Mycielskian of the Grötzsch graph, or de
      Grey's 61-vertex girth-4 graph in ℝ³ (`[deGrey2026]`).
@@ -85,7 +92,7 @@ verdict:*
 | G6 | S | the hexagram as fabric |
 | G7 | B | The type-M rotations are the layers of both kinds of lattice: de Grey's non-Eisenstein vectors come from `n = 3`, and every triangle-free quadratic field's layers are `{vᵏ}·U₅` (G74). → C (step 2's vocabulary on `𝒰^tf`) |
 | G8 | B | A lookup only: name `Λ`'s 54 unit vectors as `ζ₆`-orbits of a few generators. → C (addresses) |
-| G9 | S | its forced pairs (4, 4/√3) live on the 1581's core, whose directions leave `Λ` |
+| G9 | B | *(corrected on the advisor's review; first marked S)* the 791-point core's six four-colour forced pairs (one at 4, five antipodal at 4/√3) are triangle-full forced pairs missing from the stub's list; both distances lie in `2R` (G70's list). They bear on the premise (every known four-colour forced pair uses triangles) and support P-2adic → §0, §C item 1 |
 | G10 | S | a sampled criticality claim; no search this week |
 | G11 | B | Moser-free five-forcers exist, all with triangles. Step 2 is strictly stronger than Moser-freeness. → IQ item 5 |
 | G12 | B | One detuned copy couples along one thin conic; with FS79-T37 (single matchings) it says no pair of cosets presses alone. → C (step 1 is many-layer) |
@@ -136,13 +143,13 @@ verdict:*
 | G57 | B | ω = 3 iff √3 ∈ F, which defines `𝒰^tf`. → IQ, C |
 | G58 | S | antipodal colourings |
 | G59 | S | the wall at six |
-| G60 | S | fractional bounds produce no forced pair. Its FS-79 scoping (window frequencies are not capped) is carried by G73 |
+| G60 | B | *(corrected; first marked S by reading the title, not the addendum: a G67 instance of the planner's own)* its FS-73 addendum gives `F ⊆ F_μ ⊆ P` (`F_μ`: the differences no shift-invariant measure separates), so S2 has strengths, and `F ⊆ F_μ` is a trivial condition → IQ item 2, T |
 | G61 | B | Three-colour triangle-free rigidity (`Λ₁₀`) is arithmetic at 1/3 and levelled at `K₃ = K_k`, so it is a mis-levelled control for four (§0.5). → C (stated as such) |
 | G62 | B | Lattices are multilayers. De Grey's is Eisenstein cosets coupled by matchings, and `L21cc6506` is `{1, v, v̄, z, z̄}·U_R`. → C |
 | G63 | S | transcendence |
 | G64 | S | six as a value |
 | G65 | S | no solver; the four-colour band is noted only as why finite witnesses are priced out |
-| G66 | S | odd-prime towers |
+| G66 | B | *(corrected, as G60)* its FS-73 addendum: periodic colourings are the continuous colourings of the odometer, so `P = F_clopen` and `F ⊆ F_μ ⊆ F_meas ⊆ P` → IQ item 2 |
 | G67 | B | *(method)* This walk reads the *Do* lines. → §G's form |
 | G68 | B | A gapped periodic colouring, or a full-dimensional `Θ_k` cell, makes a lattice loose. A gap is sufficient, not necessary. → T |
 | G69 | B, F | "Rigidity is arithmetic, decided on the quotient; over K dense and rigid", which is the bet §IQ strips. → IQ, §P P-arith |
@@ -181,7 +188,7 @@ verdict:*
 | 23 | S | the four-ladder object |
 | 24 | S | the hexagram |
 | 25 | S | ρσ² = −1 |
-| 26 | S | the 1581 anatomy; its forced pairs leave `Λ` (G9) |
+| 26 | B | *(corrected with G9)* the 791-core's six forced pairs at 4 and 4/√3, triangle-full and 2-adic → §0, P-2adic |
 | 27 | S | the quadrature law measured; G12 carries its bearing |
 | 28 | S | the 2-adic kill engine |
 | 29 | S | the stacking law; G14 carries its bearing |
@@ -405,7 +412,8 @@ claim), a reviewer's **review**, or an **editorial** proceedings record):
 4. **Outside arXiv**: the held Polymath16 threads and wiki, and Geombinatorics listings.
 5. **The citation graph of the posing paper.** Soifer's chapter 55 and its "[Soi46]" were not walked this stage: a debt, carried to the
    competition's gate (C).
-6. **Citing works opened, not abstracts**: Bašić 2026 was read only from its summary: **a debt**. Klotz–Sander: summary only.
+6. **Citing works opened, not abstracts**: Bašić 2026 was read (§1–§3.1, §PA.5) before §C was written, on the owner's question.
+   Klotz–Sander: summary only, still a debt.
 7. **Two databases**: zbMATH only this stage. The OpenAlex cross-check of Klotz–Sander's citing works is a debt, and the most promising
    one (what else answers Problem 3.6).
 8. **Complete author listings**: de Grey (9), Hubai (10), Haugstrup (2), in zbMATH, above.
@@ -423,7 +431,9 @@ claim), a reviewer's **review**, or an **editorial** proceedings record):
   - The wiki's Lemma 1 uses exactly that the three unit vectors of a triangle reduce to the three non-zero classes of `𝔽₄ = ℤ[ζ₆]/2`.
   - Triangles and the inert prime above 2 in ℚ(√−3) enter together.
   - This is the concrete form of the advisor's arithmetic bet (P-2adic).
-- **(c) Triangle-free rigidity exists in finite abelian Cayley graphs at three colours** (Bašić 2026). The finite question at four
+- **(c) Triangle-free rigidity exists in finite abelian Cayley graphs at three colours** (Bašić 2026). The mechanism is extremal, not
+  spectral: α = n/χ, and the only maximum independent sets are the colour classes of an additive colouring (mod 3). The Hoffman bound
+  is loose there. The finite question at four
   colours is open as far as found. Finite-quotient rigidity bears on `P`, not on `F` (a periodic colouring is a quotient colouring):
   G21's "a periodic search measures its period" in theorem form.
 - **(d) In abstract graphs triangle-free forced pairs are classical** (Nešetřil 1973: uniquely colourable graphs of any girth). The
@@ -440,8 +450,19 @@ claim), a reviewer's **review**, or an **editorial** proceedings record):
 - **`[KlotzSander2017]`** and **`[Basic2026]`**: summaries only. **Both were already in the bibliography's § C since FS-38 (2026-09-13)**,
   Bašić with the verdict "nothing of ours rests on it", and neither was connected to FS-85 when it was minted: a second G50 instance.
   They are re-verdicted today.
+- **The owner's question (a) or (b) on Bašić, decided (a):** read before §C, because G50 blocks an opening on a held-but-unread paper
+  that touches the milestone. It is also shared reading in §C for both competitors at once, marked with its read status, because it may be
+  a route and not only background. Read: abstract, §1, §3 up to Theorem 3.1 with Lemmas 3.1–3.2 in full, and Lemma 3.3's statement and
+  the start of its proof. §4 was read as a statement only. The PDF is now in the library.
 - **`[BrewsterEtAl2020]`** (existing, FS-38) and **Nešetřil 1973** (new listing row): listings.
 - **T721**: unchecked (§PA.2 #16).
+
+**§PA.6 A record correction found by the gate's transfer check** (exact, the planner, 2026-09-24):
+- `η = (√33 + i√3)/6 ∈ Λ`, and `η^{±3} ∈ Λ`. Floating linear solves give integer coordinates to six decimals.
+- So the clause in row 78 and FS73-T6 ("`(8/9)√−3·ζ₆^m` … reached through `η^{±3} ∉ Λ`") is false as written.
+- **Proposed to the owner** (the planner does not edit `LEDGER.md`): re-read Parts's orbit and `v`'s orbit claim with `η³ ∈ Λ`. The claim
+  that `v`'s orbit is not among Parts's forced vertices is separate, and it is unaffected.
+- The wiki's identities (8)–(9) hold with `ω = ζ₆`, a notational slip on the page.
 
 ## §IQ. The invariant question (WORKFLOW 3.3)
 
@@ -464,8 +485,10 @@ claim), a reviewer's **review**, or an **editorial** proceedings record):
        "*some* four-colouring is frozen" (a rigid phase, an isolated periodic colouring) happens without triangles — 27 of rank 1's 50
        four-chromatic triangle-free sets have a rigid phase beside a loose one (inventory item 11) — while "*every* four-colouring is
        frozen along δ" (`δ ∈ F₄`) never appears there. A frozen colouring that forces nothing answers S2 with nothing.
+     - **S2 has strengths** (G60, G66): `F ⊆ F_μ ⊆ F_meas ⊆ P = F_clopen`. A "no" proved at `P` or at `F_μ` implies `F₄ = 0`, and a
+       "yes" must be proved at `F` itself.
 3. **The invariant it forces.**
-   - **(S1)** A per-coset finite-valued invariant: the *type* of the renormalised colouring `ρ_z` on `z + T₀` (constant, two-valued
+   - **(S1)** *The planner's hypothesis, not a prescription (the competitors are pointed to items 1, 2, 4 and 5 only):* a per-coset finite-valued invariant: the *type* of the renormalised colouring `ρ_z` on `z + T₀` (constant, two-valued
      periodic in a direction `ω^j`, three-valued, tri-sector; the wiki's classification). Plus a global sign, the chirality. The
      coupling between cosets lives in the 48 non-Eisenstein unit vectors, one per coset (FS79-T37).
    - **(S2)** **None known**, and finding one, or proving there is none in a class, is the milestone.
@@ -539,9 +562,12 @@ has one of these, each checked by the advisor:
 - **(K1)** a written derivation that every proper four-colouring of `Cay(Λ, U)` restricts, on `T₀` itself, to a stripe pattern in the
   pinned form (§M), using only edges of `Λ` (the transfer check done);
 - **(K2)** a proved statement "if `Cay(ℤ^r, S) ∈ 𝒞^tf₄` (or `𝒰^tf`) has `F₄ ≠ 0`, then X", where X is **not implied by T**, and X is
-  shown to fail on at least one named graph of the class not already known loose;
-- **(K3)** a proved `F₄ = 0` theorem for a named class containing all of rank-1 `𝒞^tf₄`, or `𝒰^tf`, or all of any lattice family not
-  already loose by a held certificate.
+  shown to fail on at least one named graph of the class on which **every item of T holds or is undecided**, so that X does work T
+  cannot (the advisor's fix: "not already known loose" is met by any graph nobody has examined);
+- **(K3)** a proved `F₄ = 0` theorem for a named class containing all of rank-1 `𝒞^tf₄`, or `𝒰^tf`, or a lattice family **named by
+  a property of `S`** (rank, point group, field), never of its colourings. The proof must not reduce to G68 (a gapped colouring),
+  FS79-T39 (a full-dimensional `Θ₄` cell) or FS79-T1 (three-colourability): a family defined by a held sufficient condition is that
+  condition in disguise.
 
 **Otherwise it fires**: stand the competition down and run FS-83 (§S.5).
 
@@ -552,7 +578,15 @@ has one of these, each checked by the advisor:
 4. `F ⊆ P ⊆ ⋂ ker φ` over the additive four-colourings (G41, row 50);
 5. zero topological entropy along any direction in `F`, since a δ-periodic shift has none (the advisor's point);
 6. finitely many colourings modulo `F` when `F` has finite index (FS73-T24's analogue, T37 consequence 3);
-7. a chainable δ is a unit at every conjugation-stable prime (FS79-T2).
+7. a chainable δ is a unit at every conjugation-stable prime (FS79-T2);
+8. every four-colouring is **frozen**: no non-trivial finitely supported modification, so no finite Kempe component (it follows from
+   δ-periodicity, and it is the most likely thing to be "proved");
+9. `F ⊆ ⋂ KPer(c)` over the periodic colourings (FS70-T10, FS73-T1), stronger than item 4;
+10. `F ⊆ F_μ` (G60's addendum);
+11. in rank 1, FS79-T35 itself, so K2 is empty in rank 1, correctly, since rank 1 is decidable instance by instance;
+12. the quotient restatement: the colourings are exactly those of `Cay(Λ/⟨δ⟩, S̄)`.
+
+*T items 8–12 were added on the plan-phase advisor's review.*
 
 It can fire: at FS-79 neither competitor proved K1-type structure on `Λ` in a day, and its no-gos would not have passed K2 (they
 exclude formats, not graphs). It can pass: the held wiki tools make K1 reachable in a day if the transfer check succeeds.
@@ -589,7 +623,8 @@ independently. Kooshi (the human whose project this is) set it up this way on pu
 than one, and it should be fun. Neither of you grades the other. The product owner coordinates; an advisor, **Poros**, advises you both.
 
 Read `/home/kooshi/source/lean-dir/CLAUDE.md`, `DEBRUIJN.md` and `WORKFLOW.md` from disk first; they bind you. Then read this milestone's
-plan, `plans/FS85-rigidity-without-triangles.md`, §0, §IQ, §S.4 and §M (the pinned definitions). Its §G and §PA are the record's
+plan, `plans/FS85-rigidity-without-triangles.md`, §0, §IQ items 1, 2, 4 and 5, §S.4 and §M (the pinned definitions). §IQ item 3 is the
+planner's hypothesis, not a prescription; ignore it if you like. Its §G and §PA are the record's
 background; everything you need from them is restated below.
 
 ## The mathematics you are standing on (with addresses)
@@ -663,6 +698,11 @@ forced pair.
 word, Parts's striping lemma), list the difference vectors it uses and check exactly whether each lies in `Λ` (exact arithmetic, a few
 lines of sympy). A piece using a vector outside `Λ` proves a statement about a larger graph, which does NOT restrict to `Λ`.
 
+The planner has already checked one fact, which corrects the record. `η = (√33 + i√3)/6`, `η² = ω₃` and `η^{±3}` all lie in `Λ` (the
+coordinates of 9η, 9η², 9η³ in the basis `1, ζ₆, w, ζ₆w` are `(−3,6,3,−6)`, `(6,0,3,0)`, `(−5,10,2,−4)`), so row 78's "`η^{±3} ∉ Λ`" is
+false as written. The wiki's identities (8)–(9) hold with `ω = ζ₆ = e^{iπ/3}`, not with the page's stated `e^{2πi/3}`. Re-verify both, then
+check whether every step of the wiki's Prop. 7 uses only points and differences of `Λ`.
+
 **What outcome (a) or (b) would look like.** (a) Part 1 landed: a readable derivation of the stripes on `Λ` and `F ⊇ 8Λ`, triangles' role
 stated, controls failing. (b) Part 2 decided in a named class: a theorem with its inhabitant (G30 mode 5), or a graph with a proof.
 
@@ -671,11 +711,15 @@ implied by the plan's list T does not count. Send your round-1 report to the own
 
 **What the prior-art gate found, shared (prior art is never a competitive advantage):** the items in 3–4 above; Klotz–Sander 2017
 (*Uniquely colorable Cayley graphs*, Problem 3.6: must a uniquely colourable circulant have χ = ω?) answered NO at three colours by a
-triangle-free uniquely 3-colourable circulant family (Bašić, arXiv:2609.03184, 2026) — a finite-quotient result bears on `P`, not `F`;
+triangle-free uniquely 3-colourable circulant family (Bašić, arXiv:2609.03184, 2026; held at
+`~/source/library/pdf/arXiv-2609.03184-basic-uniquely-colorable-cayley.pdf`, **shared reading for both of you**, §1–§3.1 read by the planner).
+Its mechanism: `G_p = ICG_{12p}({2, p})`, the Cayley graph of ℤ/12p on the x with gcd(x, 12p) ∈ {2, p}, is triangle-free, coloured by
+x mod 3, and uniquely 3-colourable because α = n/3 and the only maximum independent sets are the three classes mod 3 (a combinatorial
+layer count on ℤ/4 × ℤ/p; the Hoffman bound is not tight there). A finite-quotient result bears on `P`, not `F`;
 triangle-free uniquely colourable graphs of any girth are classical (Nešetřil 1973), so the content of Part 2 is translation invariance;
 de Grey 2026 (a 61-vertex girth-4 five-chromatic UDG in ℝ³) and Haugstrup 2026 (tetrahedron-free six-chromatic in ℝ³) use spheres of
 radius below `1/√3`; `[BrewsterEtAl2020]` (frozen H-colourings: one colouring that reconfigures to no other); `[AlonEtAl2021]`'s "frozen". Unread and owed: Soifer ch. 55's
-"[Soi46]", `[Parts2020hv]` §4 on, Bašić 2026 in full, the OpenAlex citing works of Klotz–Sander.
+"[Soi46]", `[Parts2020hv]` §4 on, Bašić 2026 §3.1's case analysis and §4, the OpenAlex citing works of Klotz–Sander.
 
 ## The ban, and the search log
 
@@ -740,7 +784,9 @@ reported as not landing). Take your time; a clean two-page argument beats a big 
 | P-S1a | K1 met by round 1: stripes on `T₀` for every four-colouring of `Cay(Λ, U)`, by derivation | 0.40 | not met: reachable |
 | P-S1b | `F ⊇ 8Λ` derived with no certificate, at two independent derivations, by the close | 0.25 | not derived: reachable |
 | P-W3 | (the algebra-week advisor's) the first round proves Hubai's stripes on de Grey's lattice | 0.35 | carried |
-| P-task0 | at least one of the wiki's Prop. 7 difference vectors (`η`, `η³`, `(2/3)(1+ω)η²`) lies outside `Λ`, so the wiki's propagation does not run on `Λ` as written | 0.55 | reachable both ways, by exact membership; decided on day 1 |
+| P-task0 | *(registered, then decided in stage A)* at least one of the wiki's Prop. 7 difference vectors lies outside `Λ` | 0.55 | **lost in stage A**: `η, η², η³ ∈ Λ` (§PA.6). The advisor had read it as decided the other way by row 78, whose clause is itself the error |
+| P-wiki | the wiki's Prop. 7 / Cor. 9 runs on `Cay(Λ, U)` step by step, with `ω` read as `ζ₆` (every translate and difference it uses lies in `Λ`) | 0.65 | reachable both ways, decided by Task 0 on day 1 |
+| P-K1held | the held pieces that survive Task 0 suffice for K1 with at most one new lemma | 0.35 | reachable both ways |
 | P-2adic | a landed step-1 derivation uses `ℤ[ζ₆] → 𝔽₄` essentially (the three unit vectors of a triangle hit the three non-zero classes) | 0.70 | falsifier: a step-1 derivation valid for any abstract `S` with the same combinatorics and no residue map; reachable if step 1 lands |
 | P-arith | the answer to S2 on `𝒞^tf₄` (arithmetic stripped) differs from its answer on `𝒰^tf`, or a landed Part-2 result needs the lattice's arithmetic | 0.30 | falsifier: one arithmetic-free proof covering `𝒰^tf`; reachable both ways only if Part 2 lands |
 | P-S2 | Part 2 at the close, a partition: (i) a yes realised in `𝒰^tf` 0.03; (ii) a yes in `𝒞^tf₄` only 0.12; (iii) a no in a class ⊇ `𝒰^tf` 0.10; (iv) a no in rank 1 or another class ⊉ `𝒰^tf` only 0.15; (v) not landed 0.60 | — | (v) is the uninformative one, reachable |
@@ -748,7 +794,7 @@ reported as not landing). Take your time; a clean two-page argument beats a big 
 | P-G71′ | a four-colour rigidity theorem over a class, with no arithmetic of the lattice (G71's killing test) | 0.15 | not met: reachable |
 | P-W4 | (carried) the week proves some triangle-free field needs five | 0.05 | carried |
 | P-W5 | (carried) at least one four-colour result about every colouring, outside K | 0.55 | carried |
-| P-V | the week's verdict: Paid 0.45, Draw 0.10, Null 0.45 | — | all three reachable; Paid needs a four-colour result outside K at two derivations — a Part-2 result or a step-1 result stated as a class theorem (step 1 alone is inside K) |
+| P-V | the week's verdict at two scopes: **Paid** (a four-colour result at two derivations for a class containing `𝒰^tf`) 0.20; **Paid (abstract)** (for `𝒞^tf₄`, rank 1, or any class narrower than `𝒰^tf`, including a step-1 result stated as a class theorem) 0.25; Draw 0.10; Null 0.45 | — | all reachable; step 1 alone is inside K. Rank 1 is decidable instance by instance (FS79-T35), so a rank-1-only result is Paid (abstract), never Paid (the advisor's pre-mortem item 4) |
 | P-log | the planner's own search log has ≥ 3 lines, and each competitor's ≥ 2 by round 1 | 0.70 | zero lines (the ban constrained nothing): reachable |
 
 Note on Paid (a scope the stub left implicit): step 1 is a result *inside* K, so a Paid verdict needs Part 2 (a triangle-free class)
@@ -780,8 +826,10 @@ or a Part-1 result stated for a class beyond `Λ`. Registered before the competi
 3. **Would have searched small circulants for a triangle-free uniquely four-colourable one** (Klotz–Sander 3.6 at four colours). Instead
    it is recorded as prior art and a question for derivation (§PA.4(c)). A finite quotient bears on `P` only, which is why it is not the
    milestone's instrument.
-4. **Would have computed membership of the wiki's unit vectors in `Λ` myself.** That is not a search, and it is left undone
-   deliberately: it is Task 0 for both competitors, to keep their start identical (P-task0).
+4. **Membership of the wiki's unit vectors in `Λ`: at first left for Task 0, then computed.** This is not a search. It was computed
+   because the advisor's review read row 78 as settling it, and the planner's one-line reading of the wiki's identity (9) contradicted
+   row 78. The check found a record error (§PA.6). The fact is shared with both competitors identically in §C, so their start stays
+   identical. The step-by-step transfer of Prop. 7 stays Task 0.
 
 ## §Y. The exchange with the plan-phase Poros, and its dispositions
 
@@ -793,14 +841,32 @@ or a Part-1 result stated for a class beyond `Λ`. Registered before the competi
 | 4 | the controls are mis-levelled; use the triangle-full loose ones | **adopted**: §0.5, §C Part 1 |
 | 5 | stripping the arithmetic is an unpriced bet; register it with its falsifier | **adopted**: P-arith, P-2adic, P-G71′ |
 | 6 | the stub's killing test cannot fire | **adopted**: §S.4 with the list T |
+| 8 | (review) G60, G66 bear through their addenda; G9 and row 26 bear on the premise | **adopted**, the planner's verdicts corrected (two planner retractions) |
+| 9 | (review) K2's and K3's gameable clauses; T items 8–12 | **adopted**: §S.4 |
+| 10 | (review) P-task0 already decided by row 78 | **partly**: decided, but the other way. The planner's exact check found row 78's clause false (§PA.6); P-task0 is scored lost, and P-wiki and P-K1held are registered in its place |
+| 11 | (review) Paid at two scopes | **adopted**: P-V |
+| 12 | (review) §IQ item 3 is a route handed to both | **adopted**: labelled the planner's hypothesis; §C points to items 1, 2, 4, 5 |
 | 7 | (second card) S2 must separate "some colouring frozen" from "every colouring frozen"; the owner's recount: 27 of the 50 have a rigid phase beside a loose one | **adopted**: §IQ item 2, §C Part 2 |
 
-Retractions in stage A: planner 0, advisor 0. By G51 this is not agreement: the disagreement has not started, and the competition is
-where it is expected.
+Retractions in stage A: **planner 2** (the silent verdicts on G60/G66 and on G9/row 26, both corrected), **advisor 0**. The advisor's
+P-task0 point rested on a ledger clause that turned out false, which counts against the record, not the advisor. The advisor stood down
+at about 468k tokens after its review (it held its items for the competition advisor).
 
 ## Phase records (filled as phases run)
 
 ### Stage A — Theorems this phase proved
 
-None. The stage stated, and did not prove, the record reads in §0.3 (a measurement of FS79-T36's range, owner-checked) and §PA.4(b).
-§PA.4(b) is a reading of the wiki's Lemma 1: a triangle's three unit vectors reduce to the three non-zero classes of `𝔽₄`.
+- **FS85-A1.** `η = (√33 + i√3)/6`, `η² = ω₃` and `η^{±3}` lie in de Grey's lattice `Λ = (1/9)·O_E`. The coordinates of 9η, 9η², 9η³
+  and 9η̄³ in the basis `1, ζ₆, w, ζ₆w` are `(−3,6,3,−6)`, `(6,0,3,0)`, `(−5,10,2,−4)` and `(3,−6,2,−4)`.
+  - **Grade:** [tools: a floating linear solve with integer results to six decimals; exact re-verification is Task 0's].
+  - **Where:** §PA.6.
+  - **Rests on it:** the correction of row 78's and FS73-T6's clause "`η^{±3} ∉ Λ`".
+- **FS85-A2.** The wiki's identities (8) `η = (ω⁴+ω⁵)η² + (ω+ω²)` and (9) `η³ = (2/3)(ω⁴+ω⁵)η² + (ω+ω²)` hold with `ω = ζ₆`. With the
+  page's stated `ω = e^{2πi/3}` they fail.
+  - **Grade:** [tools, float]: residuals `10⁻¹⁵` against 2.9 and 2.5.
+  - **Where:** §PA.6.
+
+Stated and not proved:
+- the record reads in §0.3, a measurement of FS79-T36's range, owner-checked;
+- §PA.4(b), a reading of the wiki's Lemma 1: a triangle's three unit vectors reduce to the three non-zero classes of `𝔽₄`;
+- §PA.4(c), a reading of `[Basic2026]` §3.
