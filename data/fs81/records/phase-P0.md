@@ -34,3 +34,23 @@ Registered 2026-09-24T13:12+00:00, before any tree was run on any lattice in thi
 
 Known before any run, from FS-73's record (not predictions): at d = 167 `{1, v, z}·U^(5)` is EMPTY and `{1, v, v̄}·U^(5)` is
 NONEMPTY (T41: of the ten 3-subsets of `{1, v, v̄, z, z̄}` only `{1, v, z}` and `{1, v̄, z̄}` are empty).
+
+## 2. Tools, checkpoints and the resume commands (written before the first long launch)
+
+- `tools/fs81_theta.py` — V2's relation tree (`tools/fs73v2_xbb.py`, imported, not edited) on **listed** unit vectors, driven
+  iteratively; the stack of branch nodes under construction (with every finished child) is saved atomically every 60 s to
+  `data/fs81/phase0/ckpt/<tag>.json.stack` beside the static part `<tag>.json` (units, relation basis, pool); a cumulative wall cap
+  turns an unfinished tree into an UNDECIDED record. Tested: a ℚ(√11) tree capped at 8 s and relaunched resumed at 4,363 nodes
+  and finished at 14,478 nodes, exactly V2's count, and the frozen checker passed the result.
+- `tools/fs81_p0.py` — the driver. One fsync'd JSON line per item in `data/fs81/phase0/<stage>.jsonl`; certificates gzipped under
+  `data/fs81/phase0/certs/`; each verdict handed at once to the frozen `tools/fs73v2_check.py` when its enumeration is affordable
+  (4.2·D³/d ≤ 1.5·10⁹ loop iterations), otherwise to `tools/fs81_theta_check.py --no-enumerate`.
+- **If a run dies at any instant**, the relaunch skips every recorded item and resumes the in-flight tree from its last save: it
+  redoes at most 60 s of tree plus that item's checker run. The checkpoints live under `data/fs81/`, outside `build/`.
+- **Resume commands** (each under the heavy lock; the same command resumes):
+
+```
+L=/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/locks/heavy.lock
+flock -w 1800 $L python3 tools/fs81_p0.py controls --cap-s 1800          # P0.0
+flock -w 1800 $L python3 tools/fs81_p0.py configs  --cap-s 1800          # P0.2, all 40 census fields, K = 1
+```
