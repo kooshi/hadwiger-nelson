@@ -277,6 +277,157 @@ def cmd_k1_fixture():
     return 0 if wrote else 1
 
 
+# ================================================================ D0a: the harvest (no solver)
+SCHEMA = ('family', 'shape', 'R', 'n', 'm', 'd_ball', 'n4', 'd4', 'pins', 'precedence', 'solver', 'version', 'wall_s', 'machine',
+          'verdict', 'cpu_s', 'wall_fired', 'cnf_sha256', 'source', 'note')
+
+
+def ask_row(**kw):
+    r = {k: kw.get(k) for k in SCHEMA}
+    if r['n'] and r['m'] is not None and r['d_ball'] is None:
+        r['d_ball'] = round(2 * r['m'] / r['n'], 3)
+    extra = {k: v for k, v in kw.items() if k not in SCHEMA}
+    if extra:
+        r['extra'] = extra
+    return r
+
+
+def fired(rec, budget):
+    if rec.get('verdict') != 'UNKNOWN':
+        return False
+    c = rec.get('cpu_s') or rec.get('wall_s') or 0
+    return bool(budget) and c >= 0.95 * budget
+
+
+def cmd_harvest():
+    """every recorded four-colour ask named in S.D's D0a row (and the rest of the same records), one row each in the S B.1.1 schema;
+    fields the record does not hold are null with a note; no solver is run"""
+    out = []
+    M73 = MACHINE
+    # (1) FS-73's census force asks on de Grey's lattice balls (K-rows.jsonl): each row holds a plain control and the forcing ask
+    K = load_jsonl(ROOT / 'data' / 'fs73' / 'census' / 'K-rows.jsonl')
+    names = {'c:-16,8,8,0': 'v', '8/9': '8/9', '8/3': '8/3', '0': '0 (the pair is one point: a trivial refusal)'}
+    for r in K:
+        if not r['key'].startswith('force'):
+            continue
+        tgt = names.get(str(r.get('target')), str(r.get('target')))
+        fam = 'X_A' if tgt == 'v' else f'X_delta(delta = {tgt})'
+        pins = ('the pair (0, delta) to colours 0, 1' + (' and a common neighbour to 2 (a triangle through the extra edge)' if r.get('common_neighbours') else
+                                                        ' (an edge pin on the extra edge; no common neighbour)'))
+        prec = 'fs73 graph_cnf chain over the unpinned colours' + (' (none: one unpinned colour)' if r.get('common_neighbours') else ' [2, 3]')
+        base = dict(shape='embedding-bounded ball of radius R about the pair\'s midpoint, its 4-core with the pair kept, + extra edge {0, delta}',
+                    R=r['R'], n=r['points'], m=r['edges'] + 1, n4=r.get('core4_points'), machine=M73, version='kissat 4.0.4',
+                    source=f'data/fs73/census/K-rows.jsonl {r["key"]}')
+        f = r['forces']
+        out.append(ask_row(family=fam, pins=pins, precedence=prec, solver=f.get('solver'), wall_s=f.get('budget_s'), verdict=f.get('verdict'),
+                           cpu_s=f.get('cpu_s'), wall_fired=fired(f, f.get('budget_s')), cnf_sha256=f.get('cnf_sha256'),
+                           note='the forcing ask (ball + extra edge)', **base))
+        c = r['control']
+        if 'how' in c:          # decided by an exhibited colouring (Theorem B's residue colouring), not by a solver: not an ask
+            out.append(ask_row(family='colourable: Cay(Lambda_dG, U) ball', pins=None, precedence=None, solver=None, verdict='SAT (exhibited)',
+                               cpu_s=None, note=f'NOT A SOLVER ASK: {c["how"]}', **dict(base, m=r['edges'])))
+            continue
+        out.append(ask_row(family='colourable: Cay(Lambda_dG, U) ball', pins='origin 0, its least neighbour 1, a triangle vertex 2 (fs73 forcing_ask)',
+                           precedence='fs73 graph_cnf chain over the unpinned colours (none: one unpinned colour)',
+                           solver=c.get('solver'), wall_s=c.get('budget_s'), verdict=c.get('verdict'), cpu_s=c.get('cpu_s'),
+                           wall_fired=fired(c, c.get('budget_s')), cnf_sha256=c.get('cnf_sha256'),
+                           note='the plain control of the same ball (no extra edge); four-colourable by Theorem B', **dict(base, m=r['edges'])))
+    # (2) X_A's core rounds (FS73-T6's certificate): assumption-core rounds, pysat CaDiCaL 1.9.5
+    for st in load_jsonl(XA_CERT / 'steps.jsonl'):
+        if not st['step'].startswith('core-round'):
+            continue
+        out.append(ask_row(family='X_A', shape='core round: the induced subgraph on the kept set + extra edge, selector per unpinned vertex',
+                           R=1.5, n=st['points_in'], m=st['edges_in'], pins='the pair and a common neighbour (triangle)',
+                           precedence='none (one unpinned colour)', solver=st['solver'], version='CaDiCaL 1.9.5 (pysat Cadical195)',
+                           wall_s=st.get('budget_s'), machine=st.get('machine'), verdict=st['verdict'], cpu_s=st.get('cpu_s'),
+                           wall_fired=fired(st, st.get('budget_s')), source=f'data/fs73/census/cert/t-16_8_8_0-R1.5/steps.jsonl {st["step"]}',
+                           note=f'points out {st.get("points_out")}; the last round is the certified 2,044-point core (d_c 10.47)'))
+    # (3) FS-73 P1d's independent re-asks on the same R = 1.5 ball (verify-P1d-asks.jsonl), solver rows only
+    for r in load_jsonl(ROOT / 'data' / 'fs73' / 'records' / 'verify-P1d-asks.jsonl'):
+        if 'verdict' not in r:
+            continue
+        tgt = {'v': 'v', 'eight_ninths': '8/9', 'harder_eight_thirds': '8/3', 'two': '2', 'four_ninths': '4/9'}[r['pair']]
+        brk = r.get('cnf_path', '').split('-')[-2] if r.get('cnf_path') else None
+        refusing = tgt in ('v', '8/9', '8/3')
+        out.append(ask_row(family='X_A' if tgt == 'v' else f'X_delta(delta = {tgt})' + ('' if refusing else ' [negative control: not forced]'),
+                           shape='embedding-bounded ball R = 1.5 about the pair\'s midpoint + extra edge (the verifier\'s own rebuild)',
+                           R=1.5, n=39829, m=366660 + 1, n4=39829, pins=f'the verifier\'s break "{brk}" (nb: pair + a neighbour; cn: pair + '
+                           'common neighbour; none: the pair only)', precedence='none recorded', solver=r['solver'], version=r['solver'],
+                           wall_s=r.get('budget_s'), machine=MACHINE, verdict=r['verdict'], cpu_s=r.get('cpu_s_solver', r.get('cpu_s_process')),
+                           wall_fired=fired({'verdict': r['verdict'], 'cpu_s': r.get('wall_s')}, r.get('budget_s')),
+                           cnf_sha256=(r.get('cnf') or '').split("'sha256': '")[-1][:64] if isinstance(r.get('cnf'), str) else None,
+                           source=f'data/fs73/records/verify-P1d-asks.jsonl pair {r["pair"]}', note='DRUP-verified by drat-trim' if r['verdict'] == 'UNSAT' else None))
+    # (4) FS-73's quotient asks on de Grey's lattice (K-rows seeded/cold/confirm): Cay(Lambda/W, U mod W), not balls
+    for r in K:
+        if r['key'].split(':')[0] not in ('seeded', 'cold', 'confirm') or 'verdict' not in r:
+            continue
+        out.append(ask_row(family='quotient: Cay(Lambda_dG/W, U)', shape=f'finite quotient, W = {r.get("W")}', n=r.get('classes'), m=r.get('edges'),
+                           n4=r.get('classes'), pins=r.get('note'), precedence='fs73 chain over unpinned colours', solver=r.get('solver'),
+                           version=r.get('solver'), wall_s=r.get('budget_s'), machine=r.get('machine'), verdict=r.get('verdict'), cpu_s=r.get('cpu_s'),
+                           wall_fired=fired(r, r.get('budget_s')), cnf_sha256=r.get('cnf_sha256'), source=f'data/fs73/census/K-rows.jsonl {r["key"]}',
+                           note=f'aim {r.get("aim")}; a regular Cayley graph: the 4-core is the whole graph'))
+    # (5) the held unit-distance witnesses (cores; refusal times are not on record in machine-readable form)
+    for name, path, n, d in (('Heule-510', 'tools/heule510.json', 510, 9.82), ('Heule-553', 'tools/heule553.json', 553, 9.84),
+                             ("de Grey's 1581", 'tools/degrey_cert.json', 1581, 9.96)):
+        out.append(ask_row(family='X_W (held unit-distance witnesses)', shape='a minimal-ish core, no radius', n=n, d_ball=d, n4=n, d4=d,
+                           pins=None, precedence=None, solver=None, verdict='UNSAT (known: chi = 5, kernel for Heule-510)', cpu_s=None,
+                           source=path, note='d measured at stage B (plan S B.1.2); no timed four-colour ask of this object is on record'))
+    # (6) FS79-T5: G(Z, {1,3,7,12,17,22}) on consecutive points (bench_recheck.py; times not recorded)
+    for L, v in ((33, 'UNSAT'), (32, 'SAT')):
+        m = sum(1 for i in range(L) for dd in (1, 3, 7, 12, 17, 22) if i + dd < L)
+        out.append(ask_row(family='T5 (instrument control; refutation rank 1)', shape=f'{L} consecutive integers', n=L, m=m, n4=None,
+                           pins='none', precedence='none', solver='pysat Glucose4 (bisection), Minisat22 agreeing', verdict=v, cpu_s=None,
+                           source='data/fs79/checks/bench_recheck.py; plans/FS79-derivation.md T5', note='seconds; not recorded'))
+    # (7) FS-79 at 167: quotient asks (phase 0, controls, P3b) and the solver-decided target asks at 23
+    for fn, tag in (('data/fs79/phase0/quotients.jsonl', 'P0'), ('data/fs79/phase0/controls-quotients.jsonl', 'P0 controls'),
+                    ('data/fs79/p3b/quotients.jsonl', 'P3b')):
+        for r in load_jsonl(ROOT / fn):
+            if 'verdict' not in r:
+                continue
+            k = r.get('key', '')
+            fam = 'colourable: Cay(Lambda_dG, U) quotient' if k.startswith('K|') else f'Q(sqrt167) lattice quotient ({k.split("|")[1] if "|" in k else "?"})'
+            out.append(ask_row(family=fam, shape=f'finite quotient Cay(Lambda/NLambda, U), W = {r.get("W")}', n=r.get('classes'), m=r.get('edges'),
+                               n4=r.get('classes'), pins=r.get('note'), precedence='chain over unpinned colours (fs73 graph_cnf)', solver=r.get('solver'),
+                               version=r.get('solver'), wall_s=r.get('budget_s'), machine=r.get('machine'), verdict=r.get('verdict'),
+                               cpu_s=r.get('cpu_s'), wall_fired=fired(r, r.get('budget_s')), cnf_sha256=r.get('cnf_sha256'),
+                               source=f'{fn} {k}', note=f'FS-79 {tag}; aim {r.get("aim")}'))
+    for r in load_jsonl(ROOT / 'data' / 'fs79' / 'phase0' / 'screen.jsonl'):
+        if not r['screen'].startswith('residue') or not str(r.get('plain_by', '')).startswith('kissat'):
+            continue
+        q, img = r['q'], r['image']
+        out.append(ask_row(family=f'Q(sqrt167) residue target at {q} (image of U_M)', shape=f'Cay(F_{q}^2, image), {img} generators', n=q * q,
+                           m=q * q * img // 2, n4=q * q, pins=r['plain_by'], precedence='as in the pins line', solver='kissat', version='kissat 4.0.4',
+                           wall_s=None, machine=r.get('machine'), verdict=r['plain'], cpu_s=None, wall_fired=None,
+                           source=f'data/fs79/phase0/screen.jsonl {r["lattice"]} {r["screen"]}', note='CPU not recorded; UNKNOWN = the budget in the pins line'))
+    for r in load_jsonl(ROOT / 'data' / 'fs79' / 'phase0' / 'classify-q23-k4.jsonl'):
+        if not str(r.get('by', '')).startswith('kissat') or r.get('what') != 'orbit':
+            continue
+        img = sum(2 if o else 1 for o in r['orbit'])       # rough: the recorded orbit list names circle representatives, not the set size
+        out.append(ask_row(family='Gamma_23 subgraphs (classify, k = 4)', shape='Cay(F_23^2, S), S an antipodal circle subset', n=529, m=None,
+                           n4=529, pins=r['by'], precedence='as in the pins line', solver='kissat', version='kissat 4.0.4', wall_s=60.0, machine=MACHINE,
+                           verdict=r['verdict'], cpu_s=r.get('cpu_s'), wall_fired=None, source='data/fs79/phase0/classify-q23-k4.jsonl',
+                           note=f'orbit {r["orbit"]}; replication {r.get("replication")}; |S| not recorded as a number, so d is left null'))
+    path = OUT / 'd0a-harvest.jsonl'
+    with open(path, 'w') as f:
+        for r in out:
+            f.write(json.dumps(r, sort_keys=True) + '\n')
+    # the summary: per family, verdict counts and d bins
+    import collections
+    fams = collections.OrderedDict()
+    for r in out:
+        fams.setdefault(r['family'], []).append(r)
+    print(f'D0a harvest: {len(out)} asks -> {path.relative_to(ROOT)}')
+    print('| family | asks | SAT | UNSAT | UNKNOWN | d range | CPU s range (decided) |')
+    print('|---|---|---|---|---|---|---|')
+    for fam, rs in fams.items():
+        cnt = collections.Counter(str(r['verdict']).split(' ')[0] for r in rs)
+        ds = [r['d_ball'] for r in rs if r['d_ball'] is not None]
+        cs = [r['cpu_s'] for r in rs if r['cpu_s'] is not None and str(r['verdict']).split(' ')[0] in ('SAT', 'UNSAT')]
+        print(f'| {fam} | {len(rs)} | {cnt.get("SAT", 0)} | {cnt.get("UNSAT", 0)} | {cnt.get("UNKNOWN", 0)} | '
+              f'{(f"{min(ds):.2f}-{max(ds):.2f}" if ds else "-")} | {(f"{min(cs):.2f}-{max(cs):.2f}" if cs else "-")} |')
+    return 0
+
+
 def main():
     a = sys.argv[1:]
     if not a:
@@ -287,6 +438,8 @@ def main():
         return cmd_k2_fixture()
     if a[0] == 'k1-fixture':
         return cmd_k1_fixture()
+    if a[0] == 'harvest':
+        return cmd_harvest()
     print(__doc__)
     return 2
 

@@ -8,8 +8,8 @@ This file is kept current enough that a successor can resume from the repository
 
 | step | state |
 |---|---|
-| DK — the two checkers | built; self-tests pass (`data/fs81/phaseD/dk-selftest-*.out`); **awaiting the owner's plant** on each before any verdict they check is believed |
-| D0a — the harvest | not started |
+| DK — the two checkers | **done**: self-tests pass (`data/fs81/phaseD/dk-selftest-*.out`); the owner's plants refused by each (K1: an index-2 quotient basis → `SPAN_MISMATCH`, a sheared basis with the table not re-indexed → `IMPROPER_EDGE`; K2: the conflict hint dropped at three positions of fixture (b)'s LRAT → `PROOF_STEP` each); committed `677d59e9` |
+| D0a — the harvest | **done**: 558 recorded asks in the schema (`data/fs81/phaseD/d0a-harvest.jsonl`, summary `d0a-summary.md`) |
 | D0b — the rank-4 ladder | not started (needs the heavy lock) |
 | D1 — the screen at 47 | not started (needs the heavy lock) |
 | D2 — one priced ask | not started (needs the heavy lock) |
@@ -39,8 +39,9 @@ s(v) = [f1 appears before v]. This is exactly `fs73_screen.graph_cnf`'s chain, r
    value precedence, and the target encoding (edge pin + precedence) is what every matched comparison must hold fixed.
 2. **K2 therefore has a k = 4 positive control after all — a forcing one.** X_A's certified 2,044-point core certifies under K2 at
    k = 4 twice: (a) under fs73's triangle pin with fs73's own LRAT (K2's CNF sha256 `65d3897d…` equals fs73's: the same formula clause
-   for clause); (b) under a unit-edge pin plus the chain [2, 3] with a fresh CaDiCaL LRAT. The class the spec named — a unit-distance
-   graph over ℚ(√d) refusing four — still has no positive control, so the second checker stays mandatory for any D refusal.
+   for clause); (b) under a unit-edge pin plus the chain [2, 3] with a fresh CaDiCaL LRAT. So K2 has no k = 4 **chromatic** positive control
+   (the owner's wording): a unit-distance graph refusing four with no extra edge — over ℚ(√d) none is known — has never passed through
+   it, and the second checker stays mandatory for any D refusal.
 
 **Self-test** (`python3 tools/fs81_check_witness_k.py --selftest`, 59 s; output `data/fs81/phaseD/dk-selftest-K2.out`): all pass.
 - Controls: FS-58's ℚ(√11) witness at k = 3 CERTIFIED ("hence χ(ℚ(√11)²) ≥ 4"), with the same variable and clause counts as the frozen
@@ -57,7 +58,9 @@ s(v) = [f1 appears before v]. This is exactly `fs73_screen.graph_cnf`'s chain, r
 
 **The second RUP check: `tools/fs81_rup_recheck.py`.** K2 writes its CNF; `cake_lpr` — the CakeML-verified LRAT checker, built from
 `github.com/tanyongkiam/cake_lpr` commit `a36874a` at `~/source/cake_lpr/cake_lpr` (`cake_lpr.S` sha256 `2f3af32d…`; built with
-`env -u LIBRARY_PATH make`, since the Lean toolchain's library path breaks the link) — must print `s VERIFIED UNSAT`; kissat must refuse
+`cd ~/source/cake_lpr && env -u LIBRARY_PATH -u LEAN_CC make`, i.e. `gcc -O2 basis_ffi.c cake_lpr.S -o cake_lpr -std=c99`; the Lean
+toolchain's library path breaks the link; full `cake_lpr.S` sha256 `2f3af32d55083839b3fa0e693afd817679c0b8944bef41def05a8b0ec72b7d4a`;
+it lives outside the repository, so a successor rebuilds it with that command at that commit) — must print `s VERIFIED UNSAT`; kissat must refuse
 the same CNF. Self-test: fixture (b) rechecked (cake_lpr 3.8 s, kissat 25.4 s CPU); a proof for another formula and a half-truncated
 proof both not verified. This replaces the spec's first option (fs73's RUP routine through a wrapper), which is fs58's routine again and
 so not independently written.
@@ -89,6 +92,51 @@ gapped witness, where `--controls` is run before the witness is believed.
 | the same CNF | | | kissat 4.0.4 | UNSAT | 25.37 |
 
 (The LRAT: 369,404 additions, trimmed to the 272,119 the empty clause reaches, 39.8 MB gzipped.)
+
+## D0a — the harvest (no solver)
+
+`python3 tools/fs81_phaseD.py harvest` (deterministic; rewrites `data/fs81/phaseD/d0a-harvest.jsonl`, one row per recorded four-colour
+ask in the §B.1.1 schema: family, shape, R, n, m, `d_ball`, `n₄`, `d₄`, pins, precedence, solver, version, wall, machine, verdict, CPU s,
+wall fired, CNF sha256, source, note; a field the record does not hold is null). 558 rows: every item §S.D's D0a row names, plus the rest
+of the same records (FS-73's 113 quotient asks on de Grey's lattice; FS-79's quotient asks at 167, including refusals; its solver-decided
+residue-target and Γ₂₃ asks). Rows decided by an exhibited colouring or by the Hoffman bound are marked "not a solver ask" or omitted.
+The per-family summary is `data/fs81/phaseD/d0a-summary.md`.
+
+**The rank-4 ball asks on record** (de Grey's lattice, embedding-bounded balls about the pair's midpoint, 4-core with the pair kept;
+kissat 4.0.4 unless named; pins: the pair plus a common neighbour when one exists, else the pair alone plus the chain [2, 3]):
+
+| family | R | n | `d_ball` | verdict | CPU s | wall |
+|---|---|---|---|---|---|---|
+| X_A (δ = v) | 1.0 | 7,879 | 8.30 | UNKNOWN | 1,494 | 1,500 (fired) |
+| X_A | 1.5 | 39,829 | 18.41 | UNSAT | 36.6 (kissat); 37.2 (Glucose, P1d); 678.7 (Lingeling, pair pins only) | — |
+| X_δ, δ = 8/9 (no common neighbour: edge pin + chain) | 1.0, 1.25, 1.3, 1.4 | 7,879 – 30,181 | 8.30, 13.75, 14.73, 16.60 | UNKNOWN ×4 | ~1,494 each | 1,500 (fired) |
+| X_δ, δ = 8/9 | 1.5 | 39,829 | 18.41 | UNSAT | 1,406.9 (kissat); 130.2 (Glucose) | — |
+| X_δ, δ = 8/3 | 1.5 | 39,829 | 18.41 | UNSAT | 122.2 (kissat); 13.2 (Glucose) | — |
+| colourable, Cay(Λ_dG, U), plain | 1.0 | 7,879 | 8.30 | **UNKNOWN** | 1,494 | 1,500 (fired) |
+| colourable, plain | 1.5 | 39,829 | 18.41 | SAT ×4 | 1.1 – 3.9 | — |
+
+X_A's 35 assumption-core rounds (pysat CaDiCaL 1.9.5): 39,829 → 2,044 points, 705 s CPU for round 0 falling to ~70 s per round at the end.
+
+**What the record already says, before any new solve** (each [measured], one encoding per row, not yet matched):
+1. **The four-colour hardness peak sits near `d_ball` ≈ 8.3 on this lattice.** The plain ask on the colourable R = 1.0 ball — a
+   satisfiable instance — ran to its 1,500 s wall; at 18.41 the same family answers in seconds. (The random-graph four-colouring
+   threshold ≈ 8.9 is still [external, unchecked], inventory item 54.)
+2. **A rank-4 refusal can stay undecided far above the peak.** δ = 8/9's forcing asks ran to the 1,500 s wall at `d_ball` 13.75, 14.73
+   and 16.60, and refused at 18.41 only after 1,407 s (kissat). So, under that encoding, four-colour refusals on this family did not
+   decide within 25 minutes below `d_ball` ≈ 18. This bears on P-D0 (threshold ≈ 12, within 1 h); it is δ = 8/9, not X_A, and a 25-minute
+   wall, not an hour, so it scores nothing yet.
+3. **Solver spread at one object is a factor of 10–20**: X_A at R = 1.5 refused in 36.6 s (kissat, triangle pin), 37.2 s (Glucose) and
+   678.7 s (Lingeling, pair pins only); δ = 8/9 in 1,407 s (kissat) against 130 s (Glucose). A price formed across solvers or encodings
+   would measure them, not the band.
+4. **`R*(X_A)` ≤ 1.4997 with no solver.** The certified 2,044-point core lies inside the embedding-bounded ball of radius 1.49822 /
+   1.49966 (the two embeddings) about the pair's midpoint, so every such ball with R ≥ 1.4997 contains it, and so does its 4-core (a
+   vertex of degree < 4 can be deleted from a refusing graph without making it colourable). Below that, no ask on record decides: R = 1.0
+   is UNKNOWN, not SAT, so **the record does not bracket `R*(X_A)` from below**.
+
+**Consequence for D0b's design** (to the owner with the D0a report): descending from R = 1.5 in steps of 0.1 walks X_A through the
+radii where δ = 8/9 ran to the wall, so the ladder's lower bracket may cost several walls of UNKNOWN before a SAT. The stop rule is kept
+("bracketed" = the least UNSAT and the greatest SAT radius), and every UNKNOWN rung between them is reported as the undecided band,
+which is itself the band datum.
 
 ## Theorems this phase proved
 
