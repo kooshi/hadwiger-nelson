@@ -577,3 +577,10 @@ prose; a GAP verdict on the deciding step scores the claim as not landed.
 | X3 | run FS-66's second-level relaxation at 43 to certify the all-levels ratio `< 1/5` | not run (a machine-long certificate, banned; 84 GPU-days); D1-43 left to hand derivation or named open |
 | X4 | search Polymath16's MCNP ≥ 6 criterion (a five-colouring of `V_A ⊕ V_A ⊕ V_A` with a forced {1,2}-vertex) | not run; quoted in §PA as the archimedean corner's state of the art |
 | X5 | read `LEDGER.md` § B in full | read by keyword scan (rank-1, entropy, measurable, window, Kempe, periodic, distance graph): budget; every § B entry the derivations cite is named in their briefs by id |
+
+**The briefs written at this stage** (under `data/crunch-2026-09-25/briefs/`): `J18-M3-rank-one-derivation.md`,
+`J19-M3-rank-one-second-mind-SKELETON.md` (two slots the owner fills from J18's stall), `J20-M3-rank-one-verifier.md` (fixed list = §S's
+Q1 statements, quoted, route parentheticals removed), `J21-M3-windows-five-derivation.md`, `J22-M3-windows-five-verifier.md` (fixed list =
+§S's Q2 statements). Every brief carries the no-children rule with its reason, the resume paragraph, the ban and the would-have-searched
+log. **The planner's check behind D1-43** (float character sums, seconds): level-one Hoffman ratios `0.24908` (23), `0.21376` (43),
+`0.19912` (59).
