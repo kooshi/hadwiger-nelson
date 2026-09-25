@@ -369,3 +369,143 @@ query's words (G21).*
    the nearest printed relative.
 5. **Debts** (for the close's gate): `[Johnson2000]` (the status report) and `[Johnson2006]` still unread and not held; Johnson 2011's
    survey not held; Liu's 2008 survey not held; DeVos et al. 2007 not held; the eight unanswered queries.
+
+## Stage 4 — SAVED (§IQ, §S, §P; re-aimed at the owner's news of J01, J02 and J03a)
+
+### 0. What M1 decides now (the re-aim; the owner's request 1)
+
+Stage 0 landed the stub's headline. **J01** (blind) verified PA-B2 and PA-B3: band rigidity `RS_k(S)` at every `|S| ≥ 2` and `RQ_k` for
+`k ≤ 9` — **consumed here as verified** (the owner's ruling); its all-`k` extension J01-7 (Lemma SW-m) has one reader and is being read
+blind by **J03a** — consumed only as the named hypothesis "given J01-7, one reader". **J02** proved FS-82's three statements (S1: the
+conjecture at `L ≤ 3` for every real number field; S2: at `L ≤ 4`; S3: `χ(ℚ(α,√7)²) = 4`) — one mind until **J09** (blind) lands, so
+consumed as "given J02-T2/T3, one mind". What M1 still decides:
+1. **The class theorem** (J07): a character colouring of any real number field's plane comes from one residue target — the conjecture for
+   character colourings, at every `k` where band rigidity holds. Nothing in stage 0 proved it; J02-T1 is its `k = 3` torsion case.
+2. **The character chromatic number at the exposed fields** (J08): whether Γ₂₃ or Γ₄₃ carries a band six-character (the window's one
+   character-level question), `χ_char` of ℚ(√167)'s, K(√7)'s and de Grey's planes, and, last, the explicit band-1/6 torsion list of `Q`
+   (N₀'s analogue, which J01 names as missing).
+3. **One prime** (J12): U3 at every `p ≡ 1 (mod 4)`, `MS₄({5})`, U5.
+4. **FS-82** closes when J09 reports; nothing more is queued on it.
+
+### §IQ. The invariant question (WORKFLOW 3.3)
+
+1. **The existence form.** Is there a real number field `F` and a band character `θ ∈ Θ_k(R_F)` such that no residue target of `F`
+   carries a band `k`-character — a character colouring of a field plane local at no prime, i.e. a character falsifier of the
+   conjecture? And, at the exposed field: is there a character six-colouring of ℚ(√167)'s plane?
+2. **The structural form.** *For a finite family of compact abelian groups `G_v` with symmetric subsets `S_v = −S_v`, and a closed
+   symmetric arc `B ⊂ ℝ/ℤ` centred at ½, classify every character `χ = Σ_v χ_v` of `∏ G_v` with `Σ_v χ_v(S_v) ⊆ B`: must some single
+   `χ_v(S_v)` lie in `B`, and what may the others contribute?* The arithmetic is stripped to one input — that the unit vectors of `F` are
+   jointly dense in the product of the stable local norm-one groups (every level) and the archimedean circles — after which the field
+   disappears and the question is about value sets on the circle.
+3. **The invariant it forces.** The **value-set profile** `(A_v)_v`, `A_v = χ_v(S_v)`, each symmetric and closed, with the archimedean
+   factors' `A_v` intervals `[−|e_v|, |e_v|]` containing 0; its peel order and margins. Per target, the invariant is the trace set on the
+   circle, `V_c` (§PA.1), a quadratic-residue pattern. At one prime (J12) the invariant is FS-89's leaf itinerary (the wall set), which at
+   rank one need not vanish.
+4. **Its route.** Derivation only. The exact computations admitted are complete lists over sets a derivation fixes first: J08's `(q, c)`
+   below an explicit Weil threshold, J12's characters of `ℤ[i]/N` for `N` in a derived family.
+5. **The open instances it would decide.** At once, for characters: ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√3,√5) (`L = 5`: no character
+   four-colouring); ℚ(√167) (`χ_char`, the six question); K(√7) and de Grey's field (every target refuses six: no character six-colouring
+   given the theorem at six); ℚ(α,√7) (`k = 3`, J02); G64's sentence becomes "six, or any falsifier, hides only in a non-character
+   colouring" (the advisor's F2). **The control** the day a new procedure lands: row 96's three corollaries, J02-T1, `[Fischer1994]` on K
+   (dyadic, level 3) and C9 on ℚ(√11) (Γ₇ plus an archimedean term) must fall out.
+
+**Is it already answered?** Not found in print (§PA); posed as a question by `[Fischer1990]` §1 and Johnson's 2000 status report (for `χ`).
+
+### §S. The subplan: stages as jobs
+
+| stage | job | kind | decides | deps | size |
+|---|---|---|---|---|---|
+| S0 | J01 | blind verifier | PA-B2, PA-B3 — **DONE, TRUE** (k ≤ 9); J01-7 proposed | — | — |
+| S0 | J03a | blind verifier | J01-7 (Lemma SW-m, all `k`) | — (launched) | 2 h, 250k |
+| S0 | J02 / J09 | derivation / blind derivation | FS-82 — J02 **DONE, TRUE** (one mind); J09 running | — | — |
+| S1 | **J07** | derivation | the class theorem (statements CLG-a to CLG-g below) | J03 | 3 h, 350k |
+| S1 | **J08** | derivation + fixed finite list | six at the exposed fields (SIX-a to SIX-f) | J03 | 3 h, 350k |
+| S1 | **J12** | derivation + fixed finite lists | one prime (ONE-a to ONE-c) | J03 | 3 h, 350k |
+| S2 | J10, J11, J13 | blind verifiers | J07's, J08's, J12's claims, from fixed lists written now | J07, J08, J12 | 2–2.5 h each |
+
+**Shape** (G51, the seventh run): one derivation agent per question, a blind verifier on a fixed list written before any claim exists,
+the lemma-statement phase as the fallback after a blind stall. J07 and J08 are independent and run in parallel; J08 consumes the class
+theorem only as a named hypothesis ("given CLG_k, J07, unverified") for SIX-e.
+
+**The target statements** (quoted verbatim by the briefs and the verifiers' lists; objects: FS-89's §0.1 notation, plus these).
+*Definitions.* `F` a real number field (a subfield of ℝ of finite degree; other embeddings may be complex), `L = F(i)`, `c` complex
+conjugation, `U_F` the unit vectors of `F²` read in `L`, `R_F = ℤ[U_F]`. A **stable place** is a prime `𝔓` of `L` with `c(𝔓) = 𝔓`. The
+**residue target at level `m`** is `T_{𝔓,m} = Cay(O_𝔓/𝔓^m, S_{𝔓,m})`, `S_{𝔓,m}` the image of the local norm-one group. A **band
+`k`-character** of an abelian Cayley graph `Cay(G, S)` is a homomorphism `λ : G → ℝ/ℤ` with `λ(S) ⊆ B_k`; `χ_char(G, S)` is the least
+such `k` (∞ if none); `χ_char(F²)` is the least `k` with `Θ_k(R_F) ≠ ∅`. **`H_k`** is the hypothesis `Θ_k(R_F) ⊆ T + A` for every real
+number field `F` (row 95 and the gluing at `k = 4, 5`; PA-B3 with the gluing at `k ≤ 9`, verified by J01; every `k` given J01-7).
+
+**J07 — the class theorem.**
+- **CLG_k.** "Let `k ≥ 3` satisfy `H_k`, and let `F` be a real number field. Then `Θ_k(R_F) ≠ ∅` if and only if some stable place `𝔓` of
+  `F(i)` and some level `m ≥ 1` have a band `k`-character of `T_{𝔓,m}`. Hence `χ_char(F²) = min_{𝔓,m} χ_char(T_{𝔓,m})`, and a character
+  `k`-colouring of `F²` exists only if some residue target of `F` is `k`-colourable."
+- **CLG-a (pullback).** "A band `k`-character of `T_{𝔓,m}` composed with `R_F → O_𝔓/𝔓^m` lies in `Θ_k(R_F)`."
+- **CLG-b (the peeling lemma).** "Let `k ≥ 2`, `X, Y ⊆ ℝ/ℤ`, `X = −X`, `X + Y ⊆ B_k`. If some `x ∈ X` lies outside `B_k`, then
+  `Y ⊆ [1/k + ‖x‖, 1 − 1/k − ‖x‖]`."
+- **CLG-c (joint surjectivity).** "For every `N ≥ 1`, the image of `U_F` in `R_F/NR_F` is the product, over the stable places `𝔓 | N`, of
+  the images of the local norm-one groups, and it is jointly dense with the real places' unit circles" — or the weaker statement the
+  proof needs, named; without `[FS86-B1-LR]`'s Galois scope (J02-L3 proves the reduced level).
+- **CLG-d (the archimedean factor).** "If `θ = τ + ψ ∈ Θ_k(R_F)` with `τ` torsion and `ψ` archimedean, then `τ ∈ Θ_k(R_F)`" — for every
+  real number field, including those with complex places (J02 §2.8: S0A-7's density step assumes compact archimedean norm-one groups).
+- **CLG-e (level collapse).** "At a stable place of residue characteristic `p > k/2`, every band `k`-character of `T_{𝔓,m}` factors
+  through `T_{𝔓,1}`" — and what holds at dyadic places and at `p ≤ k/2` (S0A-4 did bands 1/4, 1/5).
+- **CLG-f (controls).** `[Fischer1994]`'s ℤ/4 colouring of K (row 89) returns a dyadic target at level 3; row 94's C9 on ℚ(√11) returns Γ₇;
+  row 96's HD1, C-47, C-167 and J02-T1 fall out.
+- **CLG-g (the conjecture for characters).** "Under `H_k`, for every real number field `F`: a character `k`-colouring of `F²` exists only if
+  `L(F) ≤ k`, except possibly through a place of residue characteristic `p ≤ k/2` above level one" — with the exception made explicit.
+
+**J08 — six at the exposed fields** (characters only; every statement read aloud against "never `χ`").
+- **SIX-a (the reduction).** "For a prime `q ≡ 3 (mod 4)`, every band `k`-character of `Γ_q = Cay(𝔽_{q²}, μ_{q+1})` is
+  `λ_a(x) = Tr_{𝔽_{q²}/𝔽_q}(ax)/q` for some `a ≠ 0`, and `λ_a` is band `k` iff no `t ∈ V_{N(a)}` has `|t| < q/k` (`t` read in
+  `(−q/2, q/2)`), where `V_c = {t ∈ 𝔽_q : t² − 4c is a non-square or 0}`."
+- **SIX-b (the two window members).** The complete list of `c ∈ 𝔽_q^×` giving band `k`-characters for `q ∈ {23, 43}`, `k ∈ {6, 7, 8}`; hence
+  `χ_char(Γ₂₃)` and `χ_char(Γ₄₃)`.
+- **SIX-c (every other usable prime).** For `k ∈ {6, 7}`: an explicit `Q_k` from Weil (or Burgess) above which no `Γ_q` has a band
+  `k`-character, and the complete list below it.
+- **SIX-d (ramified and higher levels).** The ramified place above 167 in ℚ(√167) and higher levels at 23 and 43: band 6- and 7-characters,
+  or CLG-e's collapse.
+- **SIX-e (the fields).** "Given CLG_6 and CLG_7 (J07, unverified): `Θ₆(R_{ℚ(√167)}) = ∅` iff no target of ℚ(√167) carries a band
+  six-character, and `χ_char(ℚ(√167)²) = min` over its targets; the same for K(√7) and de Grey's field `K(√5,√7)`."
+- **SIX-f (last, if budget allows).** The band-1/6 torsion characters of `Q` (N₀'s analogue).
+
+**J12 — one prime.**
+- **ONE-a (U3).** "For every prime `p ≡ 1 (mod 4)`, `Θ₄(R_{{p}}) ⊄ T + A`."
+- **ONE-b (`MS₄({5})`).** Is every `U₅`-minimal closed subset of `Θ₄(R₅)` contained in `T + A`?
+- **ONE-c (U5).** Are the orders of band torsion characters of `R_{{p}}` unbounded at one prime — by a derived infinite family, each member
+  checked by an exact finite computation; never a list extended in search of a pattern.
+
+**Budgets, stop rules, checkpoints** (every job): stages saved and committed by path; a halt costs one stage; resume from the brief file.
+Stop at 350k harness (hand back by 420k), or at a verdict per claim saved.
+
+### §P. Registered predictions (before any stage-1 job runs; both outcomes reachable for each)
+
+**P.1 The milestone's outcome** (exclusive, the highest rung; sum 1):
+
+| id | outcome | p |
+|---|---|---|
+| O1 | CLG_k proved (J07) and blind-verified (J10) at every `k` (J03a TRUE), controls reproduced, and `χ_char(ℚ(√167)²)` pinned (J08) | 0.30 |
+| O2 | CLG_k proved and verified at `k ≤ 9` only (or every `k` without the pin) | 0.25 |
+| O3 | CLG proved with a named gap left (totally real `F` only, or CLG-c at nilpotent levels) | 0.22 |
+| O4 | J07 GAP at a named step; J08 and J12 land | 0.18 |
+| O5 | a counterexample: a band character of some `R_F` with no band target | 0.05 |
+
+**P.2 Side predictions**
+
+| id | statement | p |
+|---|---|---|
+| P-J03a | J03a finds Lemma SW-m TRUE at every `k ≥ 3` | 0.80 |
+| P-W6 | a band six-character exists at level one of Γ₂₃ or Γ₄₃ (it would six-colour a window member of floor six) | 0.15 |
+| P-167 | `χ_char(ℚ(√167)²) ≥ 7` (given CLG) | 0.80 |
+| P-167-8 | `χ_char(ℚ(√167)²) = 8` exactly (given CLG) | 0.45 |
+| P-CM | CLG-d holds for real number fields with complex places | 0.60 |
+| P-U3 | ONE-a proved at every `p` | 0.75 |
+| P-MS5 | ONE-b answered "no" (a non-`T + A` minimal set exists at one prime) | 0.60 |
+| P-U5 | ONE-c answered "unbounded" by a derived infinite family | 0.35 |
+| P-log | every M1 job's would-have-searched log non-empty and no search run | 0.85 |
+
+*G74's reading at bands 1/6–1/9 over every split prime was decided before this registration (J01, TRUE at `k ≤ 9`); not registered.*
+
+**P.basis (fenced from J08 and J11).** The planner's hand evaluation of SIX-a at `q = 23` (one mind, unverified; SIX-a itself unverified):
+at `k = 6` and `k = 7` the excluded traces are `|t| ≤ 3`, and no `c` makes `−4c, 1 − 4c, 4 − 4c, 9 − 4c` all non-zero squares mod 23 (`c`
+must be a non-square since `−1` is; the 11 non-squares each fail); at `k = 8` (`|t| ≤ 2`) exactly `c ∈ {11, 20, 21}` pass — matching row
+69's verified eight-colour ceiling at 23. Hence P-W6's weight sits on 43 (a heuristic `21/2⁷` expected passing classes at `k = 6`).
