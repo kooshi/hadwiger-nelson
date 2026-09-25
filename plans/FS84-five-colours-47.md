@@ -133,3 +133,196 @@ finders).*
 - G76 — bears: ℚ(√47) is not in S2 (no tight place); a "no" is a colouring no character or window gives; count the primes → S0, S1.
 
 **§G.1 counts** (by `grep -cE "^- G[0-9]+ — <verdict>"`): 76 entries (G1–G76); bears 40, silent 33, falsifiable 3 (P-G15, P-int, P-G75).
+
+## Stage 2 — SAVED
+
+### 2.1 §G.2 — the ledger rows, one line each (rows 1–97, by mechanism)
+
+- R1 — silent: two-circle three-colourability on K-fabric.
+- R2 — silent: seam identity.
+- R3 — silent: coverage ratchet.
+- R4 — silent: fan ⟺ coverage (a five-colour-rung tool here).
+- R5 — silent: class-only graphs.
+- R6 — silent: unit triangles; ℚ(√47) has none.
+- R7 — silent: greedy colouring.
+- R8 — silent: de Grey's balanced 5-colouring.
+- R9 — silent: 120° compulsion on the two circles.
+- R10 — silent: one-pivot cap.
+- R11 — silent: strip automaton.
+- R12 — silent: extension profile.
+- R13 — silent: growth-family hunt.
+- R14 — silent: pair-gluing classification.
+- R15 — silent: extension pressure.
+- R16 — silent: coupled automaton.
+- R17 — silent: general gluing (any field; not a question here).
+- R18 — silent: near-relation.
+- R19 — silent: kill mechanism on K.
+- R20 — silent: pivot-triangle layer.
+- R21 — silent: registered statistics (M23).
+- R22 — silent: ladder pair.
+- R23 — silent: four-ladder object.
+- R24 — silent: hexagram.
+- R25 — silent: field-wall identity (K).
+- R26 — silent: de Grey anatomy.
+- R27 — silent: quadrature census.
+- R28 — silent: 2-adic kill engine (√5, √15).
+- R29 — silent: stacking law.
+- R30 — silent: mechanism hunt on K.
+- R31 — bears: the kernel pigeonhole bridge and its vacuity lesson (`core9_plane` vacuous) → S1 states every "every four-colouring" theorem two-way, S3's kernel consumer.
+- R32 — silent: two-sided six-programme.
+- R33 — silent: the classical interval.
+- R34 — silent: coset colourings.
+- R35 — silent: coarse cells.
+- R36 — silent: scale monotonicity.
+- R37 — silent: gap atlas.
+- R38 — silent: gradient hunt.
+- R39 — silent: gap bands in the kernel.
+- R40 — silent: fine tail.
+- R41 — silent: limit lemma.
+- R42 — bears: `Forces`/`Separated` and the arity floor are the chain input's kernel vocabulary → S3.
+- R43 — bears: homogeneity (`transport_pair_of_isometry`) moves a forced pair by every isometry — the chain's transport step → S3.
+- R44 — bears: the spindle theorem stays in ℚ(√47) whenever `4d² − 1` is a square there (e.g. `d² = 12`, the `n = 12` member) — a two-copy closer → S3.
+- R45 — bears: the spare-colour lemma: a four-colour forcer over ℚ(√47) must be non-three-colourable (contain a row-73-type witness) → S3.
+- R46 — silent: copy unions over K.
+- R47 — silent: M53's K-descent.
+- R48 — bears: a four-colour forced pair confines criticality to its common neighbourhood → G39's deletion check in S3.
+- R49 — bears: absorption (`Extends`) — thinly joined layers carry no compulsion → S1's layer-joining count.
+- R50 — bears: `[Fischer1990]` Thm 10(ii): `47 ≡ −1 (mod 24)`, so no additive colouring with ≤ 6 colours — the survivors' 0/0 is a theorem → S0.
+- R51 — silent: additive rigidity.
+- R52 — bears: 11 of residue degree one gives χ ≤ 5 → S0.
+- R53 — bears: `chromaticNumber_finitePlane11` = 5 (kernel) — the ceiling's kernel input → S0.
+- R54 — silent: lift obstruction.
+- R55 — silent: five-colour residue obstruction.
+- R56 — bears: `card_le_chromaticNumber_mul_indepNum` and `addCayleyMap` — the kernel consumers of S2's density bound → S2.
+- R57 — bears: Theorem A supplies the ceiling; its field-level gap (FS-47) travels with "χ ≤ 5" → S0.
+- R58 — bears: at four colours no minimal gadget exists in the plane — a ℚ(√47) forcer is non-minimal and large → S3 pricing.
+- R59 — silent: 2-adic law over K.
+- R60 — silent: plane freedom (the planes at ℚ(√47)'s stable primes refuse four).
+- R61 — silent: statements at six.
+- R62 — silent: Parts's record anatomy.
+- R63 — silent: two colours and multiquadratic splitting.
+- R64 — silent: the ρ₆₃ arena.
+- R65 — silent: the `n = 2` shape screen.
+- R66 — silent: five-colour fan gaps (ℚ(√47) is five-sealed; FS-84 asks four).
+- R67 — silent: the 2-adic tower (ℚ(√47) has no stable dyadic place).
+- R68 — silent: six at 83.
+- R69 — silent: the six-window.
+- R70 — bears: the dyadic trichotomy: all primes above 2 split in `ℚ(√47, i)` — no dyadic target → S0.
+- R71 — bears: the blow-up stays in F, so `χ(F²) ≥ ⌈χ_gf(H)⌉`; FS-56's LP and checker are S2's instruments → S2.
+- R72 — silent: the 3-adic barrier is a three-colour statement.
+- R73 — bears: ℚ(√47)'s 169-point certified witness is S3's seed and control → S3.
+- R74 — bears: the census method and "no witness transfers between fields"; odd girth ≤ 9 necessary → S3.
+- R75 — bears: all-levels four-colour refusal at 11 (`U = 28.20 < 30.25`) and 19 — the type-(A) inputs; `UD(ℤ/121,2)` refuses four in 1.7 s → S1.
+- R76 — bears: FS-70's typed null on its last lattice (six undecided attempts) is the precedent for S3's stop rule → S3.
+- R77 — bears (method): theorems filed in `plans/FS84-derivation.md` at the close → close.
+- R78 — bears: the forced-group vocabulary in the kernel (`forces_iff_exists_finite`, voltage escape) → S3's consumers.
+- R79 — bears: the `Θ`-emptiness certificate format (tree, Farkas leaves, re-enumerating checker) → S4; at four colours it is one-sided.
+- R80 — bears: window-frequency LPs are exact in rank 1 and see past `χ_f` (33 points refuse four at `χ_f ≤ 29/8`) → S2's four-class format.
+- R81 — bears: ℚ(√167)'s seven survivors outlasted P3b; a full-dimensional cell makes a survivor loose → S4 and P-surv.
+- R82 — bears: `χ(ℚ(√47)²) ≥ 4` by the layer theorem (`d ≡ 11 mod 12`); the layer method's four-colour version is one-sided → S0, S1.
+- R83 — bears: five-layer structural certificates; at `d = 47` the three-colour threshold is `K = 2` (47 < 105) — the configuration S1 starts from → S1.
+- R84 — bears: the calibration, the survivor list and the price — S3 and S4 directly; P-D0 unscored.
+- R85 — bears: the annihilator (Kari–Szabados) mechanism — a local linear identity pinning the spectrum — is P-G75's test → S1.
+- R86 — bears: dB4: a triangle-free four-colour forced pair exists iff Soifer 55.1 has an answer — S3's route is Soifer-hard → S0, S3.
+- R87 — bears: radius-1 second moments cannot lift on `Λ`; averaged certificates need joint four-class windows at radius ≥ 2 → S2.
+- R88 — bears: Lemma P carries FS-66's certificates to ramified towers (the 47-place) → S1.
+- R89 — silent: K's classification.
+- R90 — silent: the rigid local plane at `ℚ₂(√3)` (ℚ(√47)'s dyadic completions are split).
+- R91 — silent: its no-gos are relative to pullbacks, which do not exist at ℚ(√47).
+- R92 — bears: the type-(A) corollary (no measurable window four-colouring) — S1 re-derives its periodic case without `[AmbrusEtAl2023]` → S0, S1.
+- R93 — silent: dyadic towers containing √3.
+- R94 — bears: C9's formula colouring needs a stable place of ratio ≥ 1/4; ℚ(√47) has none — the formula route to four is closed → S4; Theorem C's invariant-colouring frame → S2.
+- R95 — bears: band rigidity at ≥ 2 split primes → S1 (the survivors' split-prime count).
+- R96 — bears: `Θ₄(R_{ℚ(√47)}) = ∅`; by compactness some finitely generated `Λ_M` already has `Θ₄ = ∅` → S1, S4.
+- R97 — bears: at one split prime heteroclinic band characters exist — **every minimal survivor's `M` has exactly one prime ≡ 1 (mod 4)** → S4, P-1p.
+
+**§G.2 counts** (by grep): 97 rows; bears 36, silent 61.
+
+### 2.2 §G.3 — the method rules, one line each
+
+*§ Grokkings' method entries (G21, G30, G46, G49–G51, G67, G72) are walked in §G.1. Below, `CLAUDE.md` § The standard of evidence (E), § What
+compute actually helps (C), § Toolchain (T), § Building and the kernel cost model (B), § Searching (Se) and § The gate (Ga).*
+
+- E1 no native evaluation in a headline — bears: a ℚ(√47) refusal is headline-grade; its route is LRAT to the kernel (FS-60/75) → S3.
+- E2 certificate plus checker — bears: K2 (`tools/fs81_check_witness_k.py`) is the refusal checker; S2 needs its own → S2, S3.
+- E3 re-derivable witness — bears: state the construction (lattice key, radius) → S3.
+- E4 read the statement aloud — bears → close.
+- E5 report the hunt — bears: typed nulls in every stage → all.
+- E6 write the reviewer's certificate early — bears: S2's dual is written as an identity first → S2.
+- E7 order verification by marginal value — bears → S3.
+- C1 re-price kernel leaves from the first two — silent: no kernel phase planned.
+- C2 a GPU is not a SAT accelerator — bears: S3 is CPU cubes; S2's LP may use the GPU → S2, S3.
+- T1 the ban to 2026-10-01 — bears: every stage below is dated from 2026-10-01.
+- T2 verify tools with `command -v`; a missing tool fails silently — bears → every brief.
+- T3 pysat CaDiCaL ignores `interrupt()` — bears → S3 (subprocess timeouts).
+- T4 venvs outside `build/` — silent.
+- T5 pin a maximal clique — bears: `ω = 2` here, the pin is one edge (weak) → S3.
+- T6 precedence over unpinned colours only — bears → S3.
+- T7 price cubes on a sample — bears → S3.
+- T8 no UNKNOWN from an unbroken encoding — bears → S3.
+- T9 Python 3.14 `forkserver` — bears → S2, S3 tools.
+- T10 CPU seconds, minimum of three, machine named; contended times 2–3× — bears → every price.
+- T11 predicted throughput beside measured — bears → S3.
+- B1 `scripts/build.sh` only — silent: no kernel build planned.
+- B2 `lake env lean` is not the gate — silent.
+- B3 the batch is the plan — silent.
+- B4 halt on an unexplained crash — bears → every brief.
+- B5 RAM is the discriminator; `scripts/slot.py` — bears → every brief.
+- B6 checkpoint and resume (PROTECTED) — bears: every S2/S3/S4 brief names its checkpoint and resume command.
+- B7 a blocking run is presumed killable (PROTECTED) — bears → S3.
+- B8 kill by pgid, verify by effect — bears → S3.
+- B9 pipes kill producers; read the gate's own exit status — bears → S3.
+- B10 never edit a running script — bears → S3.
+- B11 generated-module invalidation — silent.
+- B12 `decide +kernel`, literals, `List.all` — silent: no kernel phase.
+- B13 feed the kernel the refutation's core — bears: a ℚ(√47) refusal's kernel form (FS-60) → S3.
+- Se1 `ugrep` alternation and `^` — bears: count certificates with `grep -oF` or `rg` → all.
+- Se2 `rg` hides `.lake/`, `build/` — silent.
+- Se3 a failed `exact?` is not an absence — silent.
+- Ga1 `vacuity.sh` — bears: "every four-colouring of ℚ(√47)² …" is a ∀ over a possibly empty domain → S1 states two-way.
+- Ga2 gates keep their output — silent.
+- Ga3 structure hypotheses ship an inhabitant — bears: S1's type-(A) theorem needs an inhabited instance (ℚ(√167) or a non-field model) → S1.
+- Ga4 one `#eval` per definition — silent.
+- Ga5 the spindle twice — silent.
+- Ga6 negative controls every milestone — bears → S2, S3.
+- Ga7 a positive signal for what did not happen — bears → S3 waiters.
+- Ga8 a waiter false at arming; no pattern that matches the shell — bears → S3.
+- Ga9 both outcomes reachable — bears → §P.
+- Ga10 pre-decide the response to your own gate failing — bears → §P.
+- Ga11 a sharp instrument loses the broad one's coverage — bears: S2's LP sees averages, not the finite witness S3 sees → S2.
+- Ga12 one thing differs; carry what a number measures — bears: row 84's 1,284 compares an ω = 3 control to an ω = 2 survivor, two things differing → S3 pricing.
+- Ga13 measured versus derived halves — bears: the saturated lattices' edges are exact (derived); a refusal there is the verdict to audit → S3.
+- Ga14 a check reads the shipped value — bears → tools.
+- Ga15 the failure path's formatting — bears → tools.
+- Ga16 two-sided plant bounds — bears → S2 tools.
+- Ga17 replay policies over a recorded log — silent.
+- Ga18 a failing run's cost understates a succeeding one — bears → S3 pricing.
+- Ga19 a caveat stepped over — bears → report.
+- Ga20 count the generator's free parameters — bears: S2's window family and S4's character shapes → S2, S4.
+- Ga21 a true explanation stops the search for a second — bears: the one-prime reading of the survivors must be checked against every screen → S4.
+- Ga22 a mutation harness verifies its restore — bears → tools.
+- Ga23 mutate the constant — bears → tools.
+- Ga24 archiving a checker (module identity) — silent.
+- Ga25 enumerate the parameter first — bears: the survivors' split-prime structure is enumerated before screening → S4.
+- Ga26 a positive control finds only representable shapes — bears: P3b's calibration positives were torsion+archimedean, not heteroclinic → S4.
+- Ga27 enumerate how a one-sided filter becomes inapplicable — bears → S2.
+- Ga28 plant faults routinely — bears → tools.
+
+**§G.3 counts** (by grep): 64 rules; bears 50, silent 14.
+
+### 2.3 §G.4 — what the re-grokking changed
+
+1. **The stub's step 1 is demoted and re-aimed.** Exact `Θ₄` cells on the survivors were billed as a refusal step. G71 and row 96 say it can
+   only *colour*: `Θ₄` emptiness is one-sided at four colours, and `Θ₄(R) = ∅` is already a theorem. It moves to S4 (the colouring side), and
+   row 97 aims it: **all ten minimal survivors have a denominator with exactly one prime ≡ 1 (mod 4)** (240, 360, 840: 5; 408: 17; 1272: 53;
+   1464: 61; 2136: 89; 2184: 13; 2328: 97; 2424: 101 — hand factorisation), which is exactly where band rigidity fails. P3b's calibration
+   positives were torsion+archimedean shapes (Ga26), so its null says nothing about one-prime heteroclinic characters.
+2. **A route the stub lacked, S2 (averaged).** G60's cap is `121/28 > 4` at ℚ(√47), G73 leaves averaged and structure-derived formats, and
+   amenability makes the invariant-measure formulation exact. This is FS-80's window-frequency format aimed at ℚ(√47) instead of ℚ(√167).
+3. **The stub's step 3 is demoted.** Residue re-asks at 600 s and quotients at `N ≥ 16` can only colour a finite lattice (type (A): no quotient
+   colours the plane), and a quotient refusal is not a lattice refusal (row 81). They go to S4, behind the one-prime reading.
+4. **The chain (stub step 2) is priced honestly.** dB4 (row 86) makes its input — a triangle-free four-colour forced pair — exactly as hard as
+   Soifer 55.1; row 44 adds an in-field two-copy closer at `4d² − 1 ∈ ℚ(√47)²`; R45 and G39 add two free design checks.
+5. **A derivation stage, S1**, collects what the corpus holds only in pieces: the type-(A) theorem for ℚ(√47) with its periodic case free of
+   `[AmbrusEtAl2023]`, the invariant-measure equivalence, and the one-prime reading.
+6. **Predictions registered in §P:** P-G15, P-int, P-G75 (from §G.1), P-surv, P-1p (from rows 81, 97).
