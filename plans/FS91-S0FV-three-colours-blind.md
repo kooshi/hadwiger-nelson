@@ -317,6 +317,32 @@ needs no level collapse (it evaluates `τ` only on Teichmüller elements, which 
 proves the level collapse; and J02's T1 is stated for `τ` only, while this record's J4 classifies all of `Θ₃(R_F)` (`4N₃` points) — J02's
 statements imply S1–S3 but not that classification.
 
+## Stage 5 — SAVED: the divergence table against J02's record
+
+Read after stage 4's commit: `plans/FS91-S0F-three-colours.md` (J02), §2.0–§2.10, §3.1–§3.2, headings of §4. **Are the two S1/S2
+statements the same statement?** Yes: both are "for every real number field `F`, `χ(F²) ≤ 3 ⟹ L(F) ≤ 3`" and "`χ(F²) = L(F)` whenever
+`L(F) ≤ 4`", with the same hypotheses — `[F : ℚ] < ∞`, no Galois condition, no condition at 2, no √3, non-bipartiteness not used — and
+the ramified-dyadic case inside the statement (J02 as a disjunct of T2 (4); here disposed of first by G56). They differ in what else is
+claimed and in route:
+
+| # | kind | J02 (`plans/FS91-S0F-three-colours.md`) | J09 (this record) | resolution |
+|---|---|---|---|---|
+| 1 | **truth (small)** | §2.10: "a stable ramified dyadic prime [restricts] to a stable dyadic one that is ramified **or inert**", so the algebraic case is "**Not claimed**" | §2.6: a ramified stable dyadic prime restricts to a **ramified** one | J09's: if the prime below were inert (unramified) in `F_n(i)`, the base change `F_{n+1,𝔭′}(i)/F_{n+1,𝔭′}` would be unramified; if split, `i` would lie in the completion above. So König applies cleanly and S1 holds on every algebraic `F ⊆ ℝ` under the place reading |
+| 2 | scope | T1/T2: existence only ("additive and any coincide **for existence**"); "FS81-T6's additivity of every slope … left open here outside `d ≡ 3, 7 (mod 12)`" (§3.2 remark 2) | J4: **every** point of `Θ₃(R_F)` is additive, `Θ₃` is exactly `4N₃` points (no ramified stable dyadic prime); FS81-T6's open item settled (J4-T6) | not a conflict; J09 claims more, one mind |
+| 3 | scope / route | the sketch's step 3 "`R/3R` = the product over stable 𝔭 \| 3" is "Lemma R(b), unproved outside `L/ℚ` Galois" — avoided by the Teichmüller section | J2 proves `R_(p) = O′_(p)` for every `p` with no ramified stable prime above it, **without the Galois hypothesis**; J2′ (= J02-L2) for every `p` | not a conflict; J09 closes what J02 routed around |
+| 4 | route | no level collapse: `τ` evaluated on Teichmüller unit vectors only (L3) | level collapse proved (J4 step 6) | both valid; J02's is shorter |
+| 5 | route | torsion part `τ` of one point, via L1, then T1 on `τ` | the P/O typing of **every** unit (J1) plus independence (J3); applied to `θ` itself | same core idea — the dyadic and 3-adic parts are independent (J02: the product set `𝒩(T₃) × 𝒩(T₂)`; J09: weak approximation on `S₂ ∪ S₃`) — reached independently |
+| 6 | route (a failed one) | the advisor's sketch: GAPs at steps 2–5, repaired by T1's joint form (§2.9) | C0's own route (rotation invariance + character count): **K1 FALSE at `q = 27`** (§2.4) | both first routes failed where they ignored the parity half; different failures |
+| 7 | inputs | GPT Astra's Lemma 1.1 and §3.1–3.3; Astra's Thm 2.1 re-derived (⟹) | not used; J2 derived from scratch (orders, class group, density); Astra's Thm 2.1 re-derived as C2's second half (§4.2) | independent inputs for the ring structure |
+| 8 | where finite degree enters | L2(a) and Lemma 1.1 | J2 (class number; `O_L` finitely generated; finitely many primes above `p`) | same role |
+| 9 | transcendental `F` | "S1 does not extend as a statement about `L(F)`"; G63 handles purely transcendental extensions; FS-39's gap | GAP at two named steps (definition of `L`; J2's finiteness), TRUE on `E(t₁,…,t_d)` under the place reading | the same substance; J09 states the purely transcendental case as a claim |
+| 10 | S3 | arithmetic by PARI; `L(F) = 4`, `Θ₃ = ∅`, `χ = 4` | the same arithmetic line for line; two routes (J4; and route B through `1/2 ∈ R`) | agree |
+| 11 | exact checks | `tools/crunch_j02_additive_check.py` at `q = 27, 243`, `Q ≤ 32` (not opened) | `tools/crunch_j09_lemma_k.py` at `q = 3, 27, 243` + PARI `ffgen` | agree on the zero-count claim (L4 (a)); J09 also records K1's failure, which J02 did not need |
+
+**No divergence of truth on S1, S2 or S3.** The one divergence of truth is item 1 (a restriction claim J02 used to withhold the algebraic
+case); J09's derivation of it is two lines and one mind. **Grade:** with J02's derivation and this one, independent and compared here,
+S1–S3 meet row 82's standard, "two independent derivations"; J2 and J4's classification (items 2–3) remain **one mind**.
+
 ## Would-have-searched-here log
 
 | # | the move I would have made by search | what I did instead |
