@@ -357,3 +357,109 @@ line 266). J21-MX is M3's, and bears on M1 only as the product step's spectral f
   Neumann-Lara; Tardif) and `[Zhang2012]`'s MIS-normality are the nearest printed product theorems (not re-read here). **Undecided:** the
   Borel-combinatorics literature on products (Conley–Kechris; Bernshteyn; the Kechris–Marks survey's Problem 4.23 context), which no query in
   the discipline's words reached; a reading, not a query, is what would decide it.
+
+*(Stage 5 was saved in the same commit as stage 4, `92f70ae3`; both headings are in it.)*
+
+## Stage 7 — SAVED (result 7: character colourings of the finite planes at the exposed fields)
+
+**Statements searched** (J08-1 … J08-5, J11-T1 … T5): "SIX-a: every band `k`-character of Γ_q is `λ_a`, with value set `V_{N(a)}` …; band
+iff `min_{V_c}|t| ≥ q/k`; only non-square `c` can be band"; "`χ_char(Γ₂₃) = 8`, `κ = 3/23`"; "`χ_char(Γ₄₃) = 9`, `κ = 5/43`"; "band `k` on Γ_q
+⟹ … `q < 4(k−1)²`"; "band 6 and band 7 characters exist exactly at `q ∈ {3, 7, 11, 19}`" (`plans/FS91-S1D-six.md` lines 304–308).
+
+**Named:** the **regular chromatic number** (stage 2) of the finite Euclidean (unit-quadrance) graph `UD(𝔽_q, 2)`; equivalently, for each
+`c`, the least `|t|` over the trace set `{Tr(z) : z ∈ 𝔽_{q²}, N(z) = c}` — gaps in the values of a quadratic polynomial's residue pattern.
+
+### 7.1 Queries (raw `data/fs91/j23p/r27-zb.out`, `r57-zb.out`)
+
+| query | hits | what bears |
+|---|---|---|
+| `ab:"finite Euclidean" & ab:"chromatic number"`; `ab:"unit-quadrance"`; `ab:"Euclidean graphs" & ab:"finite fields" & ab:"coloring"` | 1; 3; 1 | `[Krebs2022]`, Vinh 2005, 2006, 2012 — all held (`[Vinh2005]`, `[Vinh2006]`, …); chromatic and clique numbers, not character colourings |
+| `ab:"Kloosterman" & ab:"chromatic"` | 2 | `[BardestaniMallahiKarai2018]` (held; structured Cayley graphs, spectral bounds), Sarnak 1990 (tract) |
+| `ab:"quadratic residue" & ab:"polynomial" & ab:"interval"` | 3 | Watson 1962 (gaps between values of a rational quadratic polynomial), Mazur 1969 (runs of residues of polynomials): the classical tools, not the norm-one question |
+| `ab:"trace" & ab:"norm one" & ab:"finite field" & ab:"values"`; `ab:"finite Euclidean" & ab:"circular"`; `ab:"circular chromatic number" & ab:"Paley"`; `ab:"unit circle" & ab:"finite field" & ab:"Cayley graph"`; `ab:"Euclidean graph" & ab:"finite field" & ab:"chromatic"`; `ab:"finite Euclidean graph"` | 0 each | — |
+| arXiv `abs:"chromatic number" AND abs:"unit circle" AND abs:"finite field"` | 0 | — |
+
+### 7.2 The verdict for result 7 — **not found by these searches**
+
+No printed value of the character (regular, circular-by-a-character) chromatic number of any finite Euclidean plane `UD(𝔽_q, 2)` was
+found, nor the trace-set law J08-1 stated for norm-one circles (it is an elementary fact about `N` and `Tr` of `𝔽_{q²}/𝔽_q`; folklore-grade,
+not claimed). The finite-plane literature (Medrano–Myers–Stark–Terras → Vinh → Krebs; all held) computes `χ`, `ω`, spectra, never the
+character chromatic number. **The Weil threshold J08-4** is Weil's bound applied; the method is classical.
+
+## Close — SAVED (the lists)
+
+### C.1 Verdicts, one line each
+
+| # | result | verdict |
+|---|---|---|
+| 1 | band rigidity at every band (J01, J03a) | **partly in print**: `[Manners2015]` Lemma 5.3 on `ℤ[i][1/P₅, 1/P₁₃]`; the solenoid form of `[Wang2012]` Thm 1.10 stated unwritten by `[EinsiedlerLindenstrauss2022]`; `R_S` with both primes and the group, other `S`, and the field clause not found; undecided: Muchnik 2005 |
+| 2 | CLG (J07, J10) | **not found**; `χ_char` is `[BarajasSerra2008]`'s regular chromatic number, in print for cyclic groups; undecided: Johnson 2000, 2006 |
+| 3 | three colours, every real number field (J02, J09) | **not found**; posed by `[Fischer1990]` §1; undecided: Johnson 2000, 2006 (standing debt) |
+| 4 | Lemma C / C′ (J07, J10) | **partly in print** (`[Fischer1990b]`'s special cases); general form not found; undecided: Shimura 1964 |
+| 5 | peeling lemma; J21-MX | **not found**; folklore-grade both; undecided: Borel product literature (Conley–Kechris, Bernshteyn) |
+| 6 | one prime (J12; blind check J13 pending) | **not found as stated**; `[Manners2015]` §5.5 asserts the one-prime failure without proof; undecided: Bosio–Vivaldi 2000, Vivaldi 2006 |
+| 7 | `χ_char` of the finite planes (J08, J11) | **not found** |
+
+### C.2 Papers for Kooshi to fetch (exact references; none reachable by script)
+
+1. R. Muchnik, *Semigroup actions on `T^n`*, Geom. Dedicata 110 (2005), doi 10.1007/s10711-004-4321-7, Zbl 1071.37008 — decides result 1's
+   residue (Manners names it among "generalizations that allow an isometric direction").
+2. D. Bosio, F. Vivaldi, *Round-off errors and p-adic numbers*, Nonlinearity 13 (2000) 309–?, doi 10.1088/0951-7715/13/1/315, Zbl 1009.65077 —
+   result 6's coding (J12-B1).
+3. F. Vivaldi, *The arithmetic of discretized rotations*, in *p-adic Mathematical Physics*, AIP Conf. Proc. 826 (2006), doi
+   10.1063/1.2193120, Zbl 1152.37329 — result 6, survey.
+4. R. Adler, B. Kitchens, C. Tresser, *Dynamics of non-ergodic piecewise affine maps of the torus*, ETDS 21 (2001), doi
+   10.1017/S0143385701001468, Zbl 1055.37048 — result 6 (substitution/odometer codings).
+5. J. Barajas, O. Serra, *On the chromatic number of circulant graphs*, Discrete Math. (2009), Zbl 1213.05064 — result 2/7 (regular
+   colourings; zbMATH withholds the text; DOI not looked up).
+6. G. Shimura, *Arithmetic of unitary groups*, Ann. of Math. 79 (1964) — result 4 (JSTOR).
+7. The standing debts `[Johnson2000]`, `[Johnson2006]` (routes in `BIBLIOGRAPHY.md` § R) — results 2 and 3.
+
+(Held now, downloaded by this job: `Manners2015-solution-pyjama-problem.pdf`, `Wang2012-rigidity-commutative-non-hyperbolic-toral.pdf`,
+`EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf`, `KravitzLeng2025-quantitative-pyjama.pdf`,
+`BarajasSerra2008-lonely-runner-seven-runners.pdf`, all in `~/source/library/pdf/`.)
+
+### C.3 Proposed `BIBLIOGRAPHY.md` entries (proposals; this job does not edit the file)
+
+| key | reference | role | copy | read |
+|---|---|---|---|---|
+| `[Manners2015]` | F. Manners, *A solution to the pyjama problem*, Invent. Math. (2015), doi 10.1007/s00222-014-0571-7, Zbl 1332.52009, arXiv 1305.1514 | **Lemma 5.3 is band rigidity (result 1) for `ℤ[i][1/P₅, 1/P₁₃]`**; §5.5 asserts the one-prime failure (result 6); MMR's "rational obstructions" are our torsion band characters | `pdf/Manners2015-solution-pyjama-problem.pdf` | §1–§5 in full; §6.4–6.5 in part; §6.1–6.3, §7, App. A not read |
+| `[Wang2012]` | Z. Wang, *Rigidity of commutative non-hyperbolic actions by toral automorphisms*, ETDS 32 (2012) 1752–1782, doi 10.1017/S0143385711000484, Zbl 1278.37007, arXiv 1101.0321 | the torus form of result 1 with an isometric direction (Thm 1.8, 1.10); Prop. 4.3 + Lemma 4.2 are PA-B2's architecture | `pdf/Wang2012-rigidity-commutative-non-hyperbolic-toral.pdf` | abstract, §1, §2.3, §4.1, start of §4.2 |
+| `[EinsiedlerLindenstrauss2022]` | M. Einsiedler, E. Lindenstrauss, *Rigidity properties for commuting automorphisms on tori and solenoids*, ETDS (2022), arXiv 2101.11120 | p. 3: the solenoid form of Wang's classification "does not seem to have been written"; Manners is its special case | `pdf/EinsiedlerLindenstrauss2022-…pdf` | §1 pp. 1–3 (FS-89: abstract) |
+| `[KravitzLeng2025]` | N. Kravitz, J. Leng, *Quantitative pyjama*, arXiv 2510.17744 (2025) | effective Manners: torsion orders `≤ exp exp exp(ε^{−C})` — an effective `N_k` for the half ring | `pdf/KravitzLeng2025-quantitative-pyjama.pdf` | abstract, §1 pp. 1–3 |
+| `[MalikiosisMatolcsiRuzsa2013]` | R. D. Malikiosis, M. Matolcsi, I. Z. Ruzsa, *A note on the pyjama problem*, Eur. J. Combin. (2013), Zbl 1292.52016, arXiv 1211.6138 | no periodic (rational) covering for `ε < 1/3`: torsion band characters as obstructions | not held | abstract |
+| `[BarajasSerra2008]` | J. Barajas, O. Serra, *The lonely runner with seven runners*, Electron. J. Combin. 15 (2008), Zbl 1206.11030, arXiv 0710.4495 | **defines the regular chromatic number** = `χ_char` of circulant/distance graphs (result 2's vocabulary) | `pdf/BarajasSerra2008-lonely-runner-seven-runners.pdf` | abstract, §1 |
+| `[Muchnik2005]` | R. Muchnik, *Semigroup actions on `T^n`*, Geom. Dedicata 110 (2005), doi 10.1007/s10711-004-4321-7 | isometric-direction generalisation of Berend (per Manners) | not held (C.2 item 1) | not read |
+| `[BosioVivaldi2000]`, `[Vivaldi2006]`, `[AdlerKitchensTresser2001]`, `[AkiyamaPetho2013]` | C.2 items 2–4; Akiyama–Pethő, Nonlinearity 2013, arXiv 1206.3868 | result 6's neighbourhood (discretised rational rotations, `p`-adic embeddings, codings) | not held (Akiyama–Pethő on arXiv, not downloaded) | author summaries only |
+
+### C.4 `CLOSED-QUESTIONS.md` candidates (for the front-page lane to judge)
+
+1. **`[Fischer1990]` §1**, verbatim: *"This still begs the general question, however, whether some algebraic criterion can be found to
+   determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* — answered at `χ ≤ 3` and `L(F) ≤ 4` over every
+   real number field (J02-T2, T3, with J09), and for character colourings at every `k` (CLG, given `H_k`). A §2 entry (answered in part);
+   gated on `[Johnson2000]`, `[Johnson2006]`.
+2. **Not answered by M1, recorded so that no one claims it:** `[Manners2015]` Remark 5.4(i), "We know of no reason why the result could not be
+   strengthened to give `Y = Â`" (density) — M1 proves values near 0, not density; and Green's request for quantitative bounds (answered by
+   `[KravitzLeng2025]` for the half ring, not by M1, whose `N_k` is non-effective).
+3. **An assertion in print that J12 may prove:** `[Manners2015]` §5.5, "the appropriate results are false for the smaller set `{θ₅^r : r ≥ 0}`"
+   — not a posed question; if J13 confirms ONE-a, the record can say J12 supplies a proof in the band form on `R_p`.
+
+### C.5 What this gate changes (for the owner and the close planner)
+
+- **Result 1's wording must change** wherever it would read "not in print": `[Manners2015]` Lemma 5.3 holds the two-prime, one-ring form, and
+  the band condition is the pyjama condition. Row 95's and the FS-91 row's "Not ours" line should add Manners (for the method and the
+  statement on `ℤ[i][1/P₅, 1/P₁₃]`) and Wang (the torus form); the "Ours" line keeps `R_S` with both primes and the group, all `S`, the field
+  clause with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`, and the band-form one-prime failure (pending J13).
+- **A cheap route the records did not use:** whether `R_S`'s statement follows from Manners's on `A` and `Ā` is one gluing step; J12's
+  heteroclinic shows the step is where one prime fails. Recorded as a question for the owner, not pursued (no derivation in this job).
+- **G49's pattern, once more:** the object sat in a third literature (combinatorial geometry's pyjama problem, which Einsiedler–Lindenstrauss
+  cite from dynamics) that no query in the colouring or number-theory vocabulary reached; it was found by walking the citers of the
+  dynamics paper (Wang 2012) and reading the survey paragraph that names it.
+
+## Theorems this phase proved
+
+None. This job proves no theorem; it reads.
+
+## Would-have-searched-here log
+
+Empty (stage 0.4): no finite-witness search was tempted.
