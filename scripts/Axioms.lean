@@ -1602,6 +1602,27 @@ transcendental over `F`, by the place `t = 0` and one valuation lemma. No solver
 #print axioms HadwigerNelson.RouteC.transcendental_liouvilleNumber_bot
 #print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_liouville
 
+/-! ## FS-47 — prime inversion, valuation form (J16)
+
+`1/n ∈ ℤ[U]` iff no conjugation-stable valuation subring has `n` in its maximal ideal (Chevalley's domination and row 57's
+integrality); the plane's unit-vector ring and its sums of unit vectors; the chain theorem in ring form; the 2-adic wall broken
+over `K(√7)`. The number-field reading (stable valuation subrings = stable primes) is row 57's gap. No solver, no native
+evaluation. -/
+
+#print axioms HadwigerNelson.UnitRing.normOne_subset_iff_stable
+#print axioms HadwigerNelson.UnitRing.inv_mem_iff_forall_valuationSubring
+#print axioms HadwigerNelson.UnitRing.inv_natCast_mem_unitRing_iff
+#print axioms HadwigerNelson.UnitRing.inv_natCast_mem_unitRing_iff_not_mem_nonunits
+#print axioms HadwigerNelson.UnitRing.inv_two_mem_unitRing_iff
+#print axioms HadwigerNelson.UnitRing.coe_mem_unitRingOver_iff
+#print axioms HadwigerNelson.UnitRing.inv_natCast_mem_unitRingOver_iff
+#print axioms HadwigerNelson.UnitRing.exists_sum_eq_of_mem_unitRingOver
+#print axioms HadwigerNelson.UnitRing.add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver
+#print axioms HadwigerNelson.UnitRing.inv_five_mem_unitRing_conj
+#print axioms HadwigerNelson.SevenUnitRing.inv_two_mem_unitRingOver_seven
+#print axioms HadwigerNelson.SevenUnitRing.three_div_eight_mem_unitRingOver_seven
+#print axioms HadwigerNelson.SevenUnitRing.wall_broken_seven
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes
