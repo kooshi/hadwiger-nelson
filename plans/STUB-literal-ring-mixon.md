@@ -1,5 +1,7 @@
 # FS-88 — Mixon's follow-up: the literal ring `ℤ[ζ₆, ω₃]` — are its four-colourings periodic, and finitely many? (stub)
 
+**Carried from FS-86 (B1's prior-art check, inventory item 34):** Speyer (Polymath16, 25 April 2018) identifies `ℤ[ω₁, ω₃]` with `O_E[1/3]`, which conflicts with FS85-V2-T8 (the literal ring is not conjugation-closed); not examined — settle it first here.
+
 *Minted 2026-09-24 at FS-85's close, from `plans/FS85-derivation.md` FS85-V2-T8 and §7, and `CLOSED-QUESTIONS.md` §2.5. Rank 15.
 Written for a session with zero conversation memory.*
 

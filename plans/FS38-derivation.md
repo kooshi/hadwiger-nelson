@@ -77,7 +77,7 @@ eigenspace); (iii) with `H_min := ⋂{ker χ : λ_χ = λ_min}` over the charact
 classifier and its propagation); stubs FS-41 (`forces_of_tight`) and FS-42 (5-tight quotients), both minted from this
 theorem at the FS-38 close.
 
-*Prior art:* **partly — the split the brief asks for**: (i) and (iv), the balance and gap-freedom of an extremal
+*Prior art:* **[FS-86's gate: (ii) is `[GodsilRobersonRooney2017]` Thm 4.9 in vector-colouring words — for a 1-walk-regular graph every optimal vector colouring lies in the least eigenspace; a Hoffman-tight four-colouring's tetrahedral embedding is one — so (ii) is prior art on that class]** **partly — the split the brief asks for**: (i) and (iv), the balance and gap-freedom of an extremal
 Hoffman colouring, are Blokhuis–Brouwer–Haemers 2007 Prop. 2.3, cited through `[AbiadEtAl2025]` Prop. 2.1 ("the color
 classes have equal size and every vertex is adjacent to exactly `−λ_min(G)` vertices of every colour other than its
 own"), which also names the object — a graph meeting the ratio bound is **Hoffman colorable**, its optimal colourings

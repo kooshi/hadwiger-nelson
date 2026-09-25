@@ -303,7 +303,7 @@ the 9 pairs meet in a line). **What is not established (D1):** the unconditional
 lemma — G481 gives only NT₀ there (V2-T1) — and so R3's answer to Coxeter's R2.12 item 3 ("the five inner families alone kill the
 5-part") stands only in the conditional form; the unconditional consequence is on `Cay(Λ, U)`. *Proof:* `plans/FS85-R3-five-part.md` §1
 (`data/fs85/r3/split.py`, F0–F6, four plants); `plans/FS85-V2-verification.md` §W3 (`w3_facts.py`, six plants). *Proof verdict:* closes
-in the conditional form. *Rests on it:* R3b. *Prior art:* none found (the CRT slicing, the two-line lemma and the Fourier disjointness are
+in the conditional form. *Rests on it:* R3b. *Prior art:* [FS-86's gate: the product step is the vector form of `[GodsilEtAl2020]` Cor. 4.4 — a uniquely vector-colourable `G` times a connected `H` of larger vector chromatic number is uniquely vector colourable — and `[Zhang2012]` Thm 1.8(i) in the colouring form] none found (the CRT slicing, the two-line lemma and the Fourier disjointness are
 this milestone's). *Kernel:* declined for now (F0–F7 are small exact tables; the Fourier steps need finite Fourier analysis on
 `Λ₅/40Λ₅`).
 
