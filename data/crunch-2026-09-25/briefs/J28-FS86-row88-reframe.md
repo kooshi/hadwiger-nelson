@@ -19,7 +19,7 @@ forced**". The queue states the milestone as: "row 88's own question: a non-char
 `(0, 4)` is forced. The true frontier; prior 0.05–0.1."
 
 **What is already known, and must be read first** (CLAUDE.md item 24 and G76 point to all of it): rows 88–94 and 96; the FS-86 records
-(`plans/FS86-rigidity-field-level.md` or as `plans/FRONTIER-STUBS.md`'s closed list names it; `plans/FS86-derivation.md`); FS-89's row 96
+(the plan `plans/FS86-dyadic-rigidity.md`, its §R-close first; `plans/FS86-derivation.md`; the competitors' and verifiers' records `plans/FS86-C-*.md`, `plans/FS86-V-*.md`, `plans/FS86-B*.md`); FS-89's row 96
 (HD1: no character four-colouring breaks inheritance on these fields). **And today's crunch** (M1–M3 closes, in their plans' §R-close; the
 index `plans/CRUNCH-2026-09-25-INDEX.md`): M1's class theorem CLG (an **existence** statement: a band k-character exists iff one exists at
 some stable place — never "every character colouring is local"); band rigidity at every band (`[Manners2015]` Lemma 5.3 is the one-ring
