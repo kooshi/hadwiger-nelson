@@ -6,11 +6,22 @@ green gate at `47ed6c60` (J17K's close). This job stands in for a blind verifier
 
 ## Theorems this phase proved
 
-*(filled at each stage; every entry [kernel] unless marked)*
+All **[kernel]**, on axioms exactly `[propext, Classical.choice, Quot.sound]`, in `Proofs/HadwigerNelson/NoParam.lean`
+(namespace `HadwigerNelson.NoParam`).
 
-| theorem | grade | address |
+| theorem | what it says | grade |
 |---|---|---|
-| — | — | — |
+| `exists_eq_C_mul_sq_of_mul_eq_sq` | in `k[X]`, a factor coprime to its cofactor in a square is a nonzero constant times a square | kernel |
+| `natDegree_eq_zero_of_mul_mul_sub_eq_sq` | NP's polynomial core: `p`, `q` coprime and `p·q·(p² − q²)` a square ⟹ `p`, `q` constant (`2 ≠ 0`) | kernel |
+| `exists_algebraMap_eq_of_sq_eq` | a rational function whose square is a polynomial is a polynomial | kernel |
+| `not_isSquare_cube_sub_self` | **Lemma NP** (J17-T4), over every field with `2 ≠ 0` | kernel |
+| `not_isSquare_cube_sub_self_of_charZero` | NP in the brief's form (characteristic zero; `IsAlgClosed` unused and dropped) | kernel |
+| `twin_not_mem_range_C`, `isSquare_twin_sq_sub_one` | **the genus-0 twin is false**: `a = (X² + 1)/(2X)` is nonconstant and `a² − 1` is a square | kernel |
+| `X_sq_not_mem_range_C`, `isSquare_cube_sub_self_X_sq_zmod_two` | **NP is false in characteristic 2**: over `𝔽₂`, `(X²)³ − X² = (X(X² + 1))²` | kernel |
+| `not_mem_adjoinTranscendental_of_sq_eq` | C3's core: `x ∉ F`, `y² = x³ − x`, `t` transcendental over `F ⊆ ℝ` ⟹ not both `x, y ∈ F(t)` | kernel |
+| `transcendental_two_add_liouvilleNumber` | `2 + L` is transcendental over `ℚ` | kernel |
+| `not_mem_adjoinTranscendental_liouville` | **C3, one-variable containment form** (J17-T5's kernel form) | kernel |
+| `sqrt_not_mem_adjoinTranscendental_bot_liouville` | its inhabitant: `√((2 + L)³ − (2 + L)) ∉ ℚ(L)` | kernel |
 
 ## Stage 1 — SAVED
 
@@ -81,3 +92,67 @@ Iteration: 2.0 s wall per `lake env lean` of the skeleton and of the leaf file, 
 
 ### Would-have-searched log (stage 1)
 - None.
+
+## Stage 2 — SAVED
+
+### 2.1 Lemma NP, leaf by leaf
+
+Every leaf of the skeleton closed; the module elaborates with zero `sorry`, and the real build (`scripts/slot.py --mem 60 --cpus 16 --
+env MEMMAX=60G ./scripts/build.sh`) is green: 178 of 178 batches, 2 modules rebuilt (`NoParam`, `Proofs`), **0 with warnings**, 3 m 35 s
+(`build/gate/build/20260925T230317Z-169920.log`; the build output is also in `data/m2/j17k2/build-stage2.log`). NP's part of the module
+(the core, the square-root lemma, the wrapper, the corollary) is **99 lines**, docstrings included.
+
+| leaf | elaborations to green | note |
+|---|---|---|
+| `exists_eq_C_mul_sq_of_mul_eq_sq` | 1 | `exists_associated_pow_of_mul_eq_pow'` + `Polynomial.isUnit_iff` |
+| `natDegree_eq_zero_of_mul_mul_sub_eq_sq` | 1 | degenerate cases `p = 0`, `q = 0`, `p² = q²` by `IsCoprime.isUnit_of_dvd'`; the relation `r₁²α⁴ − r₂²β⁴ − r₃γ² = 0` by one `linear_combination`; `Polynomial.flt_catalan` at `(4, 4, 2)` |
+| `exists_algebraMap_eq_of_sq_eq` | 1 | `IsIntegrallyClosed.exists_algebraMap_eq_of_isIntegral_pow` (the UFD instance is in `RingTheory/Polynomial/RationalRoot`) |
+| `not_isSquare_cube_sub_self` | 1 | `(b·q²)² = p·q·(p² − q²)` by one `linear_combination` over `a·Q = P`; then the core; then `a = C(p₀/q₀)` |
+| twin, `𝔽₂` control, C3 | 2–3 | fixes were names only (`_root_.map_ne_zero`, `push_cast` for a subfield power, an `nlinarith` hint) |
+
+**Read aloud against the informal claim.** `not_isSquare_cube_sub_self`: for every field `k` in which `2 ≠ 0` and every rational
+function `a ∈ k(X)` that is not a constant (`a ∉ Set.range RatFunc.C`), `a³ − a` is not of the form `r·r` with `r ∈ k(X)`. NP's source
+statement is the case `k = ℂ`. ✓ It is **stronger** than the source in two directions (any field, any characteristic but 2), and both
+controls show the extra generality is not free: characteristic 2 is a genuine exception, and constants are (the second spec example,
+`C(2)³ − C(2) = C(√6)²` over `ℝ`).
+
+### 2.2 The plant: NP's route run on the genus-0 twin — watched red for the genus, not for scaffolding
+
+`data/m2/j17k2/TwinProbe.lean` (not in the library) transports every step of NP's proof to the twin `a² − 1`, reusing the module's
+own lemmas: lowest terms, `(b·q)² = (p − q)(p + q)`, the integrally-closed step, the two coprime factors each a unit times a square
+(`p − q = r₁γ²`, `p + q = r₂δ²`), and the relation `r₂δ² − r₁γ² − 2q = 0`, which has signature `(2, 2, 1)`; then
+`Polynomial.flt_catalan`. Run (`lake env lean`, under the slot):
+
+    data/m2/j17k2/TwinProbe.lean:55:5: error: unsolved goals
+    ⊢ False
+    'twin_core_attempt' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+
+**Exactly one error, and it is at line 55, the signature hypothesis** `q·r + r·p + p·q ≤ p·q·r` at `(2, 2, 1)`, which `norm_num`
+reduces to `False` (`8 ≤ 4`; in reciprocals `1/2 + 1/2 + 1 > 1`, the Fermat–Catalan curve of genus 0). Every scaffolding step — the
+coprimality of `p ∓ q` (which needs `2` a unit), the square-root lemma, the unit-times-square lemma, the relation, the degree
+bookkeeping, the whole `RatFunc` wrapper — elaborated. The probe's last `example : False` also elaborated: it feeds the errored theorem
+the kernel's twin counterexample (`isSquare_twin_sq_sub_one`, `twin_not_mem_range_C`), so the signature step is the **only** thing
+standing between this route and a contradiction. At NP the same step reads `32 ≤ 32` (`1/4 + 1/4 + 1/2 = 1`, genus 1) and holds.
+
+Getting there took one round of scaffolding fixes in the probe itself (a `simp` that made no progress on `2 = C 2`, twice; an unused
+coprimality lemma with a malformed field-notation step, deleted) — errors of the probe's writing, found and removed before the reading
+above; recorded so the "exactly one" is not mistaken for a first-try result.
+
+**Restored:** `NoParam.lean` untouched by the probe (it lives under `data/`); the module re-elaborates green, and the build above is of it.
+
+### 2.3 The predictions registered at 1.3, scored so far
+
+| product | p | outcome |
+|---|---|---|
+| NP lands in full, any field with `2 ≠ 0` | 0.80 | **HELD** |
+| NP's module part ≤ 200 lines | 0.70 | **HELD** (99) |
+| twin counterexample in the kernel | 0.90 | **HELD** |
+| NP's route on the twin fails only at the signature inequality | 0.65 | **HELD** (after the probe's own scaffolding was fixed, 2.2) |
+| C3 one-variable lands | 0.75 | **HELD** (landed in stage 2, ahead of stage 3) |
+| C3⁺ | 0.15 | open — stage 3 |
+
+**J17K's P-J17Kc** ("Lemma NP lands via `Polynomial.abc` in at most 200 lines", p = 0.50), passed here unscored: **HELD** — through
+`Polynomial.flt_catalan`, which is `Polynomial.abc` (Mason–Stothers) plus the signature arithmetic, in 99 lines.
+
+### Would-have-searched log (stage 2)
+- None. The probe is a derivation run on a second instance, not a search.
