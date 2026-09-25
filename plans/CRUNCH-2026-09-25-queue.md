@@ -274,3 +274,126 @@ Copy `data/fs89/briefs/CL2-close-planner-brief.md`'s form, with these outputs:
 - every inventory item ticked or declined.
 
 Then SPAWN the front-page job if none is queued.
+
+---
+
+## §5. Registered expectations (the planner's, before any job runs; scored once by J25)
+
+Kooshi's line applies: *"All novel knowledge is a success."* A no-go, a GAP with its step named, or a counterexample is a result, and
+these probabilities are about which result, never about whether a job "worked".
+
+| id | expectation | p |
+|---|---|---|
+| E1 | J01: PA-B2 TRUE | 0.85 |
+| E1b | J01: PA-B3 TRUE at `k = 6` (so `RQ₆`) | 0.65 |
+| E1c | J01: PA-B3 TRUE at every `k ≤ 9` | 0.50 |
+| E1d | J01: FALSE at some `k ≤ 9` | 0.10 |
+| E2 | J02 proves S1 (the advisor holds 0.75) | 0.65 |
+| E2b | J09 reaches S1 TRUE blind, and the two agree ("two independent derivations") | 0.40 |
+| E2c | a point of `Θ₃(ℚ(α,√7))` (a falsifier at `L = 4`) | 0.03 |
+| E3 | J07 and J10: the character local–global theorem at `k = 4, 5` proved and blind-verified | 0.40 |
+| E4 | J08 decides the character six-colourings of ℚ(√167), either way | 0.35 |
+| E4b | given E4: none exists | 0.80 |
+| E4c | a six-colour band character of `Γ₂₃` at level one, hence `χ(Γ₂₃) = 6` | 0.03 |
+| E5 | J12: U3 proved at every `p ≡ 1 (mod 4)` | 0.35 |
+| E6 | FS-76 rank one: "every phase rigid ⟹ no wall" proved | 0.25 |
+| E6b | FS-76 rank one: a counterexample | 0.05 |
+| E6c | FS-76 rank one: J18 stalls at a named step, and J19 runs | 0.55 |
+| E7 | FS-64: five-colour measurable windows over ℚ(√167) excluded | 0.30 |
+| E7b | FS-64: such a window colouring constructed | 0.03 |
+| E8 | kernel: J14's chain theorem and 18-vertex instance green | 0.60 |
+| E8b | kernel: J15's route C green | 0.55 |
+| E8c | kernel: J16 green | 0.35 |
+| E8d | kernel: at least one new module through the full gate | 0.80 |
+| E9 | the advisor's hunch's falsifier: at least 3.5 agents on derivation, verification or kernel work, averaged over the first 8 h | 0.40 |
+| E9b | at least 20 jobs reach DONE | 0.50 |
+| E9c | a halt costs more than one stage anywhere | 0.10 |
+| E10 | M1 closed on the front page | 0.60 |
+| E10b | at least two milestones closed | 0.45 |
+| E10c | all three milestones closed | 0.25 |
+| E11 | at least three new `LEDGER.md` rows | 0.60 |
+| E12 | a lower bound above five | < 0.01 |
+
+**A good crunch**, stated so it can be scored:
+1. At least one class theorem at the grade "two independent derivations" or "derivation plus blind verification", from E2b or E3. I put
+   this at 0.65.
+2. At least one kernel promotion (E8d).
+3. Every milestone that landed is closed on the front page, within the byte cap.
+4. No work is lost to a halt beyond one stage.
+
+Every no-go filed at its grade counts toward (1) as fully as a yes.
+
+## §6. The advisor's advice, and where I disagreed
+
+Poros's record: `plans/POROS-2026-09-25-crunch-plan.md`. One draft was exchanged: the protocol at 7e35da20, and its reply.
+
+| item | advice | taken? |
+|---|---|---|
+| F1 | FS-82 as a corollary of row 95; the sketch sharpened to seven steps and three checks | **yes**: J02, stage 0, carries it verbatim |
+| F2 | the character local–global theorem as the unifying target | **yes**: M1's question 1, J07 |
+| F3 | concurrent milestones need Kooshi's word; amortise the reframe and the close; open inventories at launch | **yes** (§1.1, §1.5, §7 item 1), **except** "the crunch planner carries §G for the first milestones" (below) |
+| F4, F6 | one serial kernel lane with a slot-refusal rule; no machine-long certificates | **yes** (§1.6, §1.7) |
+| F5 | say first that the crunch cannot land a bound above five | **yes**, the opening paragraph |
+| (a) | kernel order FS-45 → FS-39 route C → FS-87, FS-47 if K2 runs long; Artin–Lang by hand only | **yes** (J14–J17) |
+| (b) | FS-76 rank one: one mind plus a verifier, and a second mind only on a named stall | **yes** (J18–J20) |
+| (c) | FS-45's unconditional `K(√7)` instance needs a solver: condition it on G₄ | **yes** (J14; the post-ban item in §2) |
+| change 1 | J05 off minute zero | **yes**; Kooshi's 300,000-byte ruling made it optional |
+| change 2 | J09 blind beside J02 from minute zero | **yes**; the cost is that J06 moves to the first free slot |
+| frame | if F1 lands, `L = 5` is the only testable range below the problem, so FS-84's post-ban plan comes first of P3 | **yes** (J29) |
+
+**Disagreements, recorded:**
+1. **"The crunch planner carries the §G bearings for the first milestones" — declined.**
+   - WORKFLOW 3.1 item 4 wants the milestone's own planner to walk the corpus with `LEDGER.md` open, fresh.
+   - My budget (about 300k) cannot hold `LEDGER.md` (about 75k tokens) and a three-column walk as well.
+   - The reframe jobs pay the corpus load once per pair instead (§1.9).
+   - Confidence: high.
+2. **"A prior-art reader for F1 and F2 at minute zero" — declined.**
+   - M1's reframe runs §PA in the recognition's words within its first two hours.
+   - The papers that actually block a novelty claim, the Johnson pair, are not held (§7 item 3).
+   - A separate reader would duplicate §PA's queries.
+   - Confidence: medium. If J03's §PA overruns its time box, the owner can split it into a reader job.
+
+**My own deviations from WORKFLOW, for the owner to hold me to:**
+- the clerk writes close inventories as the owner's pen (§1.3);
+- the close is split into close-math and a batched front page (§1.5);
+- stage-0 jobs run before their milestone's reframe (§1.1, FS-89's precedent).
+
+## §7. For Kooshi, through the owner (ranked)
+
+**Must decide before the crunch starts (1)**
+1. **Several milestones open at once.**
+   - WORKFLOW says "finish and commit a milestone's quality gate before reframing the next". Five agents need up to three open milestones.
+   - **Recommendation:** at most three open at once, and no job consumes another open milestone's unverified claim except as a named
+     hypothesis.
+   - **Alternative:** one milestone at a time with five agents on it. That starves: M1 has at most four parallel jobs, and its reframe
+     gates most of them.
+   - **Default if he says nothing:** the owner runs the queue as written, reading his "4–5 agents nonstop … jobs can spawn new jobs" as
+     that word, and records it. Confidence: high.
+
+**Decide when convenient (1)**
+
+3. **Obtain `[Johnson2000]` and `[Johnson2006]`** (Geombinatorics IX(4) 170–179 and XVI(1) 209–218; `BIBLIOGRAPHY.md` rows 2–3 of the
+   request list).
+   - They block the novelty claim on row 82, and would block one on J02's result.
+   - **Default:** both rows say "not claimed new while unread".
+
+**Already settled, skip (1)**
+
+2. **CLAUDE.md's budget.** Kooshi raised it to 300,000 bytes (commit 1263d964), so the compression job J05 is an optional filler.
+   - Each close adds at most 4,000 bytes net, against about 25,000 of room for the whole crunch.
+   - The owner had asked for either an early compression job or a question to Kooshi. The ruling arrived first; the byte cap is the
+     planner's choice. Confidence: high.
+
+**Know, don't decide (3)**
+
+4. **Not queued without his ruling:**
+   - FS-90's two sanctioned search hours (FS-89 item 6);
+   - FS-57's machine-long relaxation;
+   - FS-45's unconditional `K(√7)` instance (post-ban).
+5. **FS-89's carried items 5 and 17 stay his.** The crunch applies item 17's reading pending his ruling: a complete enumeration of a
+   finite set that a derivation fixed first is in, and logged.
+6. **The crunch cannot land a lower bound above five** (the opening paragraph).
+
+## §8. The crunch's close
+
+*Written by J25: the jobs run and their harness totals; §5 scored; the milestones closed; what the queue hands to 2026-10-01.*
