@@ -1,0 +1,28 @@
+QUERY 'ab:"bipartite hole" & ab:"chromatic"': None hits
+
+QUERY 'ab:"Hedetniemi" & ab:"independent set"': 3 hits
+  2011 | Balakrishnan, R.; Kavaskar, T. | Color chain of a graph |  | zbl 1244.05086
+  2015 | Chang, Ting-Pang; Tong, Li-Da | The Hamiltonian numbers in graphs. |  | zbl 1363.05150
+  1991 |  | Graph theory, combinatorics, and applications, Vol. 1. Proceedings of the sixth quadrennial international conf |  | zbl 0831.05002
+
+QUERY 'ab:"Hedetniemi" & ab:"independence"': 17 hits
+  2007 | Klostermeyer, William F.; MacGillivray, Gary | Eternal security in graphs of fixed independence number |  | zbl 1138.05053
+  1996 | Nowakowski, Richard J.; Rall, Douglas F. | Associative graph products and their independence, domination and coloring numbers |  | zbl 0865.05071
+  1997 | Hahn, Geňa; Tardif, Claude | Graph homomorphisms: Structure and symmetry |  | zbl 0880.05079
+  1996 | Bo, Cheng; Liu, Bolian | Some inequalities about connected domination number |  | zbl 0859.05053
+  2022 | Bessy, S.; Rautenbach, D. | Algorithmic aspects of broadcast independence |  | zbl 1486.05070
+  2015 | Gera, Ralucca; Larson, Craig E.; Pepper, Ryan | Independence in function graphs |  | zbl 1335.05139
+  2011 | Hammack, Richard; Imrich, Wilfried; Klavžar, Sand | Handbook of product graphs |  | zbl 1283.05001
+  1985 | Borowiecki, Mieczysław; Michalak, Danuta | The independence graphs of hypergraphs and middle graphs |  | zbl 0639.05049
+  2011 | Špacapan, Simon | The \(k\)-independence number of direct products of graphs and Hedetniemi's conjecture |  | zbl 1284.05204
+  2022 | Tardif, Claude | Counterexamples to Hedetniemi's conjecture with large fractional chromatic numbers |  | zbl 1498.05107
+  2019 | Kim, Se-Jin; Mehta, Arthur | Chromatic numbers, Sabidussi's theorem and Hedetniemi's conjecture for non-commutative graphs |  | zbl 1477.05076
+  2026 | Rafik Sahbi | Sub-quorum colorings of graphs |  | zbl arXiv:2609.25128
+  2011 | Marimuthu, G.; Saraswathy, M. Sivanandha; Maheshwari, G. Uma | The upper and lower independence number of graphs |  | zbl 1223.05213
+  1985 | Michalak, Danuta | Strong independence graphs of hypergraphs and middle graphs |  | zbl 0665.05048
+  1995 |  | Graph theory, combinatorics, algorithms and applications. Vol. 2. Proceedings of the seventh quadrennial inter |  | zbl 0839.00020
+  1991 | Wang, Chaorui; Shi, Minyong | Two disjoint maximal independent sets in vertex-transitive graphs |  | zbl 0822.05035
+  2017 | Se-Jin Kim; Arthur Mehta | Chromatic numbers and a Lovász type inequality for non-commutative graphs |  | zbl arXiv:1709.05595
+
+QUERY 'ab:"categorical product" & ab:"pseudorandom"': None hits
+

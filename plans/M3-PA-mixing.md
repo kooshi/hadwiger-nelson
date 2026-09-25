@@ -256,6 +256,63 @@ refinement (Krivelevich–Sudakov's survey, ADFS's [23]; equivalently Haemers's 
 and the interlacing section, grep for a two-set form: none). The compact-group form is the same two lines with Parseval on `K`; its one-set
 case is the compact Hoffman bound of `[BachocDeCorteOliveiraVallentin2014]` (held, arXiv 1301.1054; not re-read).
 
+## Stage 6 — SAVED: the verdict, proposals, and the list for Kooshi
+
+### The verdict on J21-MX, part by part (never "new")
+
+| part | position | where, exactly |
+|---|---|---|
+| **J21-MX as stated** (compact abelian `K`, weighted `ν`, every Borel `X`; Borel and measurable (N′) forms) | **not found by these searches** | 41 zbMATH queries (J21 §3.7: 9; J23c R3.10: 14; here: 18 + 4 in `data/m3/j23cpa/gate-queries-3.out`), 3 + 3 web searches, six papers read at the sections that bear (stages 1–5) |
+| **(S) the threshold `λ(H)/r < 1/(k−1)` on a regular factor of a categorical product** | **in print** (2013) | `[PakVilenchik2013]` Thm 3: "Let H be an r-regular graph with `λ < r/(k − 1)`. Then `G = Kk ⊗ H` is uniquely k-colorable and uniquely vector k-colorable" — first factor `K_k` only; generalised to vector colourings by `[GodsilEtAl2020]` Cor. 4.4 (§4.1) |
+| **(F) the finite case, arbitrary first factor, integral conclusion** (`K_k^{Cay(K,T)} → K_k`) | **not found**; **partly in print** at `K = ℤ/n`, `T = K ∖ 0`: the classical `χ(G × K_n) = min(χ(G), n)` | `[Tardif2008]` Thm 3.2, credited to Burr–Erdős–Lovász 1976 (every vertex in an `n`-clique; `K_n` is the case J21-MX recovers). The genre — "the factor G is heavily constrained … but the factor H is free" — is `[Tardif2008]` §3's; none of its members is spectral |
+| the vector analogue of (F) | **in print**, weaker | `[GodsilEtAl2020]` Thm 2.12: `χv(G × H) = min{χv(G), χv(H)}`; with `χv(H) > k` it gives `χv(X) ≤ k`, not `χ(X) ≤ k` |
+| **(B) Borel, (M) measurable** | **not found** | `[KechrisMarks2020]` §4.6: `C_B(2)`, `C_B(3)`, `C_B(2^ℵ0)` only; "We do not know any other results along these lines." J21-MX is a positive special case of Problem 4.23 (`C_B(k+1)` for pairs with a `k`-mixing compact Cayley factor), not an answer |
+| **(C) the compact mixing lemma** | **classical in finite form** [external, not re-read]; compact form a routine transcription | the expander mixing lemma at `e(P, Q) = 0` with the `(1 − μ)` refinement (Krivelevich–Sudakov, *Pseudo-random graphs*; Haemers's two-set bound); one-set compact case `[BachocEtAl2014]` |
+| the three named neighbours | **none contains J21-MX or a part of it except GRRSV's (S) passage** | ADFS 2004 (maximum independent sets of powers under Hoffman tightness; stage 1); Tardif–Wrochna 2019 (multiplicativity of targets, topological; stage 2); `[GodsilEtAl2020]` (vector colourings; stage 3) |
+
+**Undecided at:** one unread neighbour, paywalled — Špacapan 2011 (below); its title ("k-independence number of direct products … and
+Hedetniemi's conjecture") is the one listing that could hold a density form of (F). Low expectation, not zero.
+
+**Scope note for whoever writes J21-MX up.** The proof is two classical ingredients — the plurality selection of the Burr–Erdős–Lovász argument
+("a colour of measure `> θ`" in place of "a colour appearing twice") and the expander mixing lemma — so a reviewer may call the finite case
+folklore even if no printed statement exists; any claim should be for the statement (arbitrary first factor, two-sided `λ*`, compact `K`,
+Borel/measurable) and should cite Pak–Vilenchik and GRRSV as the printed uses of the same threshold.
+
+### Corrections owed (proposals; J23c's files are not touched)
+
+1. `plans/M3-exotic-colourings.md` R3.10: "Godsil–Roberson–Rooney 2020 … (zbl 1442.05056)" → five authors (Godsil, Roberson, Rooney,
+   Šámal, Varvitsiotis), **held and part-read** as `[GodsilEtAl2020]`; and "'new' waits on ADFS and Tardif–Wrochna being read" → read: neither
+   contains it; the nearest printed relatives are `[PakVilenchik2013]` Thm 3 and `[GodsilEtAl2020]` Cor. 4.4 (same threshold, first factor
+   `K_k`).
+2. `plans/M3-S1D-windows-five.md` §3.2 and `plans/M3-derivation.md` (M3-J21-MX): "(Burr–Erdős–Lovász 1976, as cited in `[Zhu2025]` §1)" →
+   "(Burr–Erdős–Lovász 1976, `[Tardif2008]` Thm 3.2)": `[Zhu2025]` §1 credits BEL only with the conjecture's first appearance in print.
+3. `[KechrisMarks2020]`'s body says "C(k) for k ≥ 5 is unknown"; its Addendum records Shitov. Anyone quoting §4.6 should quote both.
+
+### Proposed `BIBLIOGRAPHY.md` rows (for the front-page lane)
+
+| key | reference | role · copy · read |
+|---|---|---|
+| **[AlonDinurFriedgutSudakov2004]** | N. Alon, I. Dinur, E. Friedgut, B. Sudakov, *Graph products, Fourier analysis and spectral techniques*, GAFA 14(5) (2004) 913–940, doi 10.1007/s00039-004-0478-3, zbMATH 1056.05104 | maximum and near-maximum independent sets of weak (= categorical) powers `H^n` under Hoffman tightness are dictatorships, with stability; the printed form of the cylinder lemma J21-NG1 refutes above the near-maximum range. `pdf/AlonDinurFriedgutSudakov2004-graph-products-fourier-spectral.pdf` (authors' preprint, 21 Oct 2003). Read: abstract, §1, §4.1, §4.2, §5, §5.1 to Kneser, §6; §2–§4 statements only (2026-09-25, J23cpa) |
+| **[TardifWrochna2019]** | C. Tardif, M. Wrochna, *Hedetniemi's conjecture and strongly multiplicative graphs*, SIAM J. Discrete Math. 33(4) (2019), zbl 1427.05090; arXiv:1808.04778 | multiplicative and strongly multiplicative **targets** (odd cycles, square-free graphs, graphs with every edge in at most one square — **the Moser spindle among them** — cubes of girth-`> 12` graphs). `pdf/TardifWrochna2019-hedetniemi-strongly-multiplicative.pdf` (arXiv v1). Read: abstract, §1, §2.1–2.2; theorem statements of §3–§6 and App. A–B |
+| **[PakVilenchik2013]** | I. Pak, D. Vilenchik, *Constructing uniquely realizable graphs*, Discrete Comput. Geom. 50(4) (2013) 1051–1071, doi 10.1007/s00454-013-9545-6, zbl 1280.05092 | Thm 3: `λ(H) < r/(k−1)` ⟹ `K_k ⊗ H` uniquely `k`-colourable and uniquely vector `k`-colourable — the printed home of J21-MX's threshold. `pdf/PakVilenchik2013-constructing-uniquely-realizable-graphs.pdf` (authors' copy via the Wayback Machine; the host's TLS chain is incomplete). Read: abstract, §1.2, Thms 1–3 statements, §8 |
+| **[BrakensiekDavies2024]** | J. Brakensiek, S. Davies, *Robust factorizations and colorings of tensor graphs*, SIAM J. Discrete Math. 38(1) (2024) 883–916, doi 10.1137/23M1552474, zbl 1533.05210; arXiv:2207.08913 | 3-colouring graphs ϵ-near `K3 × G`, polynomial when `G` is an edge expander (Thm 1.2), NP-hard in general. `pdf/BrakensiekDavies2024-robust-factorizations-colorings-tensor-graphs.pdf` (arXiv v2). Read: abstract, §1–§1.1, §1.3.3, §5's "Extending past `K3`" |
+| `[GodsilEtAl2020]` (update) | — | read status add: §1.1–§1.3, §2.3 (Thm 2.12 with proof), §4.1 Cor. 4.4 to Lemma 4.5 (2026-09-25, J23cpa); the two held copies are byte-identical |
+| `[Tardif2008]` (update) | — | read status add: §3 and §6.1 in full (2026-09-25, J23cpa); Thm 3.2 [14] is the citation for BEL's `χ(G × K_n) = min` |
+| listing rows | Langberg–Vilenchik, *Edge distribution in generalized graph products* (arXiv 1211.1467; abstract read, negative); Špacapan 2011 (below; not held); Kechris–Solecki–Todorčević 1999 (not held; by `[KechrisMarks2020]` about uncountable Borel chromatic numbers) | — |
+
+### Papers for Kooshi (paywalled or not fetchable by script)
+
+1. S. Špacapan, *The k-independence number of direct products of graphs and Hedetniemi's conjecture*, European J. Combin. 32(8) (2011)
+   1377–1383, doi 10.1016/j.ejc.2011.07.002, zbl 1284.05204 (review withheld; not on arXiv). The one unread listing that could decide (F).
+2. *(low)* A. S. Kechris, S. Solecki, S. Todorčević, *Borel chromatic numbers*, Adv. Math. 141 (1999) 1–44, doi 10.1006/aima.1998.1771 — §6 (E), (F),
+   for completeness of the Borel-product row.
+Also owed but openly available (not fetched, budget): M. Krivelevich, B. Sudakov, *Pseudo-random graphs* (2006), for (C)'s attribution.
+
+## Theorems this phase proved
+
+None. A reading job; every statement above is quoted or scored, not derived.
+
+
 ## Would have searched here (the ban to 2026-10-01)
 
-*(Empty so far: a reading job runs no finite-witness search.)*
+*Empty: a reading job, no move was a finite-witness search.*
