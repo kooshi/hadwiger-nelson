@@ -145,3 +145,47 @@ Proposition 1's proof — all hand, all read and found sound (Proposition 1's pr
 periodic approximation), and nothing about non-measurable sets or `χ_f(ℝ²)`.** What a reader must trust even after the notebook runs:
 Mathematica's `Simplify` for H1/H2 (exact, sound), its machine-precision `BesselJ` for H4/H5 (no enclosures), `FindMinimum`/`NMaximize`
 for the derivative sups and `s0` (numerical), and — by the two gaps — **an argument the notebook does not contain for H2 and H4**.
+
+## Stage 3 — SAVED: the run's price, and an independent re-check of the certificate
+
+### 3.1 The authors' checker, unmodified: priced, not run
+
+| item | price |
+|---|---|
+| what it needs | a Wolfram kernel **and front end**: the first cell is `SetDirectory[NotebookDirectory[]]`, which needs a notebook front end (from `wolframscript`, `UsingFrontEnd[NotebookEvaluate["verification23.nb"]]`); with a bare kernel that line fails, and the `Import["g23.csv"]` then depends on the launch directory. The notebook was produced by Mathematica 13.0.0 (Windows); a current Wolfram Engine is 14.x, so `FindMinimum`/`NMaximize`/`Simplify` may differ in their printed digits. |
+| installed here | nothing (Stage 1 §1.3) |
+| to install | the free Wolfram Engine for Developers (Linux x86-64; a download of about 1.5 GB) needs a Wolfram ID, online activation, and acceptance of its licence, whose terms are for development use — **whether an audit run falls under them is Kooshi's call, not mine**; or a paid Mathematica licence |
+| runtime | **not documented** anywhere (paper, page, notebook). Estimate from the notebook's loops [reading, unmeasured]: the `2²³` loop that finds independent atoms (8.4 M iterations of `IntegerDigits`, a 23×47 dot and `FirstPosition`) ~1–3 min; the `V(ε)` loop (13,552 atoms × a 2,321-term `Sum` with two dot products per term) ~3–15 min; the float grids (~640 k evaluations of a 27-term `BesselJ` sum) ~1–3 min; the 529 `Simplify[Abs[…]]` distances and the 2,321 `Simplify`s of the congruence test — nested radicals, divisions by algebraic complex numbers — the uncertain part, minutes to over an hour. **Total ~15 min to ~2 h; memory well under 2 GiB.** |
+| what running it would establish | that a current Mathematica reproduces the authors' recorded outputs (§2.4). **It would not close either checker gap** (§2.4): its congruence test would still prove only similarity, and its `W(t)` step would still use a Lipschitz constant that omits the chain-rule factors. |
+
+### 3.2 An independent re-check (`tools/j26_ambrus_check.py`)
+
+Exact arithmetic of seconds on the existing certificate, reading the shipped files directly (the 23 points from the notebook source's
+`X = {…}` cell, the 2,350 coefficients from `g23.csv` as exact decimals) — in under the ban; **no search, no optimisation, the certificate
+not re-derived**. Run: `python3 tools/j26_ambrus_check.py` (2.7 s, 0.8 GB, desktop; exit 0) → `data/pa-ambrus2023/j26-check.out`
+(sha256 `58bf8dc2…`); `--self-test` → `data/pa-ambrus2023/j26-selftest.out`, "SELF-TEST OK: every plant fired its check".
+
+| # | what the tool checks | grade | result |
+|---|---|---|---|
+| H1 | squared distances exactly in ℚ(√3, √11) | exact | **47 unit pairs, 27 distinct distances** — the notebook's numbers |
+| H2 | for each of the 2,321 listed pairs `(I, J)`: equal sizes, distinct indices, `I ≠ J` as sets, and **every pairwise squared distance equal under the listed correspondence** (for planar point sets with a fixed correspondence this is congruence, reflections included) | exact | **0 failures of 2,321** (sizes: 22 one-point, 180 two-point, 666, 870, 446, 116, 20, 1 up to eight points). **So the notebook's similarity-only test is harmless for this certificate**: every listed pair is congruent, not merely similar. |
+| H3 | the independent atoms (every independent set of the 23-vertex unit graph, by a complete recursion — the LP's variable set, whose extent the paper fixes) and `V(ε)` on each, exactly, by 64-bit dot products on 32-bit halves of the integer-scaled coefficients | exact | **13,552 atoms**; **min V(ε) = −671224377807/10¹⁹ = −6.712244·10⁻⁸ exactly** — the notebook's "6.71224 × 10⁻⁸"; ≥ −10⁻⁶ (the notebook's ν) and ≥ −10⁻⁵ (the paper's) |
+| H5 | `d_min` over the 26 pairs with `w2 ≠ 0`, exactly (`d² ≥ 1/100` decided by sympy on the exact algebraic number); `s₀` (the largest zero of `J₁` below 1000) and `|J₀(s₀)|` by mpmath at 40 digits; the tail bound with the certificate's own `|w0| + Σ|w2|` | exact (`d_min`); 40-digit numerics, Watson §15.31 cited | `d_min = 0.21494 ≥ 0.1`; `s₀ = 999.811486934`, `|J₀(s₀)| = 0.0252337` (the notebook's); `|w0| + Σ|w2| = 1.930624`; tail bound **1.01067 > 1** |
+| H4a | the notebook's grids re-evaluated with scipy's `j0` (cephes), independent of Mathematica | double precision, not interval | step-1 grid min 1.038294 (nb 1.03829); step-0.1 min 1.011020 (nb 1.01102); 2,629 selected points (nb 2629); fine min 0.999950031 (nb 0.99995 at 3.77488); `1 − min + 10⁻⁵` = 0.000059969 (nb 0.000059969) — **every recorded output reproduced** |
+| H4b | Lipschitz constants of `W` with the chain rule: `L ≤ sup|J₁| · (|w0| + Σ|w2| d_ij)` on `[0, 100]`; on `t ≥ 100`, `|J₁(u)| ≤ C/√u` for `u ≥ 10` with `C = √10 · M₁(10) = 0.79937` (`M₁² = J₁² + Y₁²`; `x M₁(x)²` is decreasing for `ν = 1 > 1/2`, Watson §13.74, sampled on `[10, 10⁴]`), so `L ≤ C (|w0| + Σ|w2| √d_ij)/√t_min` | derived from the certificate; classical Bessel facts cited | `L[0,100] ≤ 1.5365`, `L[100,1000] ≤ 0.1773`, `L[1000,10000] ≤ 0.0561` — against the notebook's implicit "< 1", "< 0.1", "< 0.03" |
+| H4c | **the covering**: every `t ∈ [0, 10000]` lies between two consecutive points `a < b` of the notebook's own evaluation grids (coarse, fine where it refined, and `t = 0`), and `W ≥ (W(a) + W(b))/2 − L (b − a)/2` there | double-precision values, derived constants | **min lower bound 0.999942348 ≥ 1 − μ = 0.99994** (worst interval `[3.77488, 3.77489]`, the minimum); a margin of 2.3·10⁻⁶ against double-precision `j0` errors near 10⁻¹⁶ |
+| H6 | `(w_T + ν)/(1 − μ)` exactly | exact | ν = 10⁻⁶: 0.246988449; ν = 10⁻⁵: 0.246997449; both < 0.2470 |
+
+**Plants** (each breaks one input and must fail its check; all fired): `coord` (vertex 2 moved by 1/100) → H1 (41 unit pairs, 49
+distances) and H2, H3; `cong2` (a two-point pair `{1,4}` listed as congruent to `{1,2}`, which the notebook's similarity test passes, since
+both normalise to `{0, 1}`) → H2 (and H3, the constraint being load-bearing); `cong_order` (two entries of a three-point `J` swapped) → H2
+alone; `wT` (`w_T` lowered by 10⁻⁶) → H3, with the two-sided bound `0 < min V_guarded − min V_planted ≤ 10⁻⁶` asserted; `w2scale` (every
+`w2` doubled) → H4 (`L[0,100] ≤ 2.85 > 2`), and H3, H5.
+
+**What the re-check establishes** [tools: exact for H1–H3, H6 and `d_min`; measured for H4 — two independent double-precision Bessel
+implementations agree, not interval-certified; H5 and H4b rest on Watson §13.74 and §15.31, cited]: **the certificate `(X₂₃, g23.csv)`
+satisfies Proposition 1's hypotheses with ν = 10⁻⁶ and μ = 6·10⁻⁵, so `m₁(ℝ²) ≤ 0.246989 < 0.2470`**, given Proposition 1 and the paper's
+§2–§6 (hand; read and found sound) — and it does so **with arguments the authors' notebook lacks** for H2 (congruence, not similarity) and
+H4 (a Lipschitz constant with the chain rule). The one step still taken on numerical trust is the value of `J₀` at about 640,000 points in
+double precision, with a margin of 2.3·10⁻⁶ at the worst; a certified version would evaluate the same points with ball arithmetic (arb,
+via `python-flint`, not installed — an install request, not made).

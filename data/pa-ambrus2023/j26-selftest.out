@@ -1,0 +1,95 @@
+H1 unit pairs: 47 (notebook: 47); distinct distances: 27 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 0
+H3 independent atoms (incl. the empty one): 13552 (notebook: 13,552)
+H3 min V(eps) = -6.712244e-08 exactly -671224377807/10000000000000000000 (notebook: -6.71224e-8); >= -1e-6: True; >= -1e-5: True
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 1.930624; w1 - (|w0|+sum|w2|)|J0(s0)| = 1.010666876 (> 1: True)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.038294 (nb 1.03829); on [100.1,1000] step 0.1 = 1.011020 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 2629 (nb 2629); fine min = 0.999950031 (nb 0.99995); 1 - fine + 1e-5 = 0.000059969 (nb 0.000059969; mu = 6e-5); W(0) = 1.000000
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 2.640708; |w0|+sum|w2|sqrt(d) = 2.217466
+    L[0,100] <= 1.53654  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.177257  (needs <= 0.2215)
+    L[1000,10000] <= 0.0560535  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.999942348 on [3.77488, 3.77489] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.078927, W(1000.0) = 1.068869
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246988449; nu=1e-5 -> 0.246997449; both < 0.2470: True
+VERDICTS: H1=PASS H2=PASS H3=PASS H5=PASS H4=PASS H6=PASS
+
+--- plant coord (must fail H1) ---
+H1 unit pairs: 41 (notebook: 47); distinct distances: 49 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 655  e.g. [([2, 5], [3, 6]), ([2, 5], [2, 8]), ([2, 5], [2, 10])]
+H3 independent atoms (incl. the empty one): 24508 (notebook: 13,552)
+H3 min V(eps) = -4.465387e-01 exactly -1395433355724798507/3125000000000000000 (notebook: -6.71224e-8); >= -1e-6: False; >= -1e-5: False
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 1.930624; w1 - (|w0|+sum|w2|)|J0(s0)| = 1.010666876 (> 1: True)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.038294 (nb 1.03829); on [100.1,1000] step 0.1 = 1.011020 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 2629 (nb 2629); fine min = 0.999950031 (nb 0.99995); 1 - fine + 1e-5 = 0.000059969 (nb 0.000059969; mu = 6e-5); W(0) = 1.000000
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 2.640708; |w0|+sum|w2|sqrt(d) = 2.217466
+    L[0,100] <= 1.53654  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.177257  (needs <= 0.2215)
+    L[1000,10000] <= 0.0560535  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.999942348 on [3.77488, 3.77489] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.078927, W(1000.0) = 1.068869
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246988449; nu=1e-5 -> 0.246997449; both < 0.2470: True
+VERDICTS: H1=FAIL H2=FAIL H3=FAIL H5=PASS H4=PASS H6=PASS
+plant coord: fired ['H1', 'H2', 'H3']
+
+--- plant cong2 (must fail H2) ---
+H1 unit pairs: 47 (notebook: 47); distinct distances: 27 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 1  e.g. [([1, 4], [1, 2])]
+H3 independent atoms (incl. the empty one): 13552 (notebook: 13,552)
+H3 min V(eps) = -7.041569e-02 exactly -3520784308787807773/50000000000000000000 (notebook: -6.71224e-8); >= -1e-6: False; >= -1e-5: False
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 1.930624; w1 - (|w0|+sum|w2|)|J0(s0)| = 1.010666876 (> 1: True)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.038294 (nb 1.03829); on [100.1,1000] step 0.1 = 1.011020 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 2629 (nb 2629); fine min = 0.999950031 (nb 0.99995); 1 - fine + 1e-5 = 0.000059969 (nb 0.000059969; mu = 6e-5); W(0) = 1.000000
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 2.640708; |w0|+sum|w2|sqrt(d) = 2.217466
+    L[0,100] <= 1.53654  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.177257  (needs <= 0.2215)
+    L[1000,10000] <= 0.0560535  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.999942348 on [3.77488, 3.77489] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.078927, W(1000.0) = 1.068869
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246988449; nu=1e-5 -> 0.246997449; both < 0.2470: True
+VERDICTS: H1=PASS H2=FAIL H3=FAIL H5=PASS H4=PASS H6=PASS
+plant cong2: fired ['H2', 'H3']
+
+--- plant cong_order (must fail H2) ---
+H1 unit pairs: 47 (notebook: 47); distinct distances: 27 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 1  e.g. [([2, 6, 8], [8, 3, 6])]
+H3 independent atoms (incl. the empty one): 13552 (notebook: 13,552)
+H3 min V(eps) = -6.712244e-08 exactly -671224377807/10000000000000000000 (notebook: -6.71224e-8); >= -1e-6: True; >= -1e-5: True
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 1.930624; w1 - (|w0|+sum|w2|)|J0(s0)| = 1.010666876 (> 1: True)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.038294 (nb 1.03829); on [100.1,1000] step 0.1 = 1.011020 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 2629 (nb 2629); fine min = 0.999950031 (nb 0.99995); 1 - fine + 1e-5 = 0.000059969 (nb 0.000059969; mu = 6e-5); W(0) = 1.000000
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 2.640708; |w0|+sum|w2|sqrt(d) = 2.217466
+    L[0,100] <= 1.53654  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.177257  (needs <= 0.2215)
+    L[1000,10000] <= 0.0560535  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.999942348 on [3.77488, 3.77489] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.078927, W(1000.0) = 1.068869
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246988449; nu=1e-5 -> 0.246997449; both < 0.2470: True
+VERDICTS: H1=PASS H2=FAIL H3=PASS H5=PASS H4=PASS H6=PASS
+plant cong_order: fired ['H2']
+
+--- plant wT (must fail H3) ---
+H1 unit pairs: 47 (notebook: 47); distinct distances: 27 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 0
+H3 independent atoms (incl. the empty one): 13552 (notebook: 13,552)
+H3 min V(eps) = -1.067122e-06 exactly -10671224377807/10000000000000000000 (notebook: -6.71224e-8); >= -1e-6: False; >= -1e-5: True
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 1.930624; w1 - (|w0|+sum|w2|)|J0(s0)| = 1.010666876 (> 1: True)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.038294 (nb 1.03829); on [100.1,1000] step 0.1 = 1.011020 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 2629 (nb 2629); fine min = 0.999950031 (nb 0.99995); 1 - fine + 1e-5 = 0.000059969 (nb 0.000059969; mu = 6e-5); W(0) = 1.000000
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 2.640708; |w0|+sum|w2|sqrt(d) = 2.217466
+    L[0,100] <= 1.53654  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.177257  (needs <= 0.2215)
+    L[1000,10000] <= 0.0560535  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.999942348 on [3.77488, 3.77489] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.078927, W(1000.0) = 1.068869
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246987449; nu=1e-5 -> 0.246996449; both < 0.2470: True
+VERDICTS: H1=PASS H2=PASS H3=FAIL H5=PASS H4=PASS H6=PASS
+plant wT: fired ['H3']
+
+--- plant w2scale (must fail H4) ---
+H1 unit pairs: 47 (notebook: 47); distinct distances: 27 (notebook: 27)
+H2 congruences listed: 2321; set sizes {1: 22, 2: 180, 3: 666, 4: 870, 5: 446, 6: 116, 7: 20, 8: 1}; FAILING exact pairwise-distance check: 0
+H3 independent atoms (incl. the empty one): 13552 (notebook: 13,552)
+H3 min V(eps) = -2.792957e-01 exactly -2792956713771971387/10000000000000000000 (notebook: -6.71224e-8); >= -1e-6: False; >= -1e-5: False
+H5 d_min over w2 pairs = 0.214936722204 (>= 0.1 exactly: True); s0 = 999.811486934, |J0(s0)| = 0.02523369904; |w0|+sum|w2| = 3.482664; w1 - (|w0|+sum|w2|)|J0(s0)| = 0.9715031589 (> 1: False)
+H4a float grids (scipy): min on [1001,10000] step 1 = 1.023667 (nb 1.03829); on [100.1,1000] step 0.1 = 0.985975 (nb 1.01102); #points with fi<1.00095 on step 0.001 = 19107 (nb 2629); fine min = 0.562033041 (nb 0.99995); 1 - fine + 1e-5 = 0.437976959 (nb 0.000059969; mu = 6e-5); W(0) = 0.562033
+H4b sup|J1| = 0.5818652243; C = sqrt(10)*M1(10) = 0.7993657558; |w0|+sum|w2|d = 4.902832; |w0|+sum|w2|sqrt(d) = 4.056348
+    L[0,100] <= 2.85279  (needs <= 2.0 for the fine step's +eps, 2.0200 for the coarse)
+    L[100,1000] <= 0.324251  (needs <= 0.2215)
+    L[1000,10000] <= 0.102537  (needs <= 0.0767)
+H4c covering of [0, 10000] by the notebook's evaluation points with the corrected constants: min lower bound 0.562018778 on [0.00000, 0.00001] (needs >= 1 - mu = 0.99994); max gap 1.000; W(100.0) = 1.090905, W(1000.0) = 1.068971
+H6 (wT+nu)/(1-mu): nu=1e-6 -> 0.246988449; nu=1e-5 -> 0.246997449; both < 0.2470: True
+VERDICTS: H1=PASS H2=PASS H3=FAIL H5=FAIL H4=FAIL H6=PASS
+plant w2scale: fired ['H3', 'H5', 'H4']
+
+SELF-TEST OK: every plant fired its check
