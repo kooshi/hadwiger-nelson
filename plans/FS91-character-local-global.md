@@ -314,3 +314,58 @@ prime), J10/J11/J13 their blind verifiers; S0 = the stage-0 jobs J01 (PA-B2/B3),
 5. **Lemma R's scope named as a hypothesis** (R88, CL2), with the ramified-dyadic case split off (L = 2; R63).
 6. **Nothing removed.** J12 stays as stubbed, its torsion-order list fixed by a derivation first (U5, R97). FS-83's `k ≥ 6` remainder is J08
    plus J01.
+
+## Stage 3 — SAVED (§PA, the prior-art gate)
+
+*Time-boxed; zbMATH Open API for discovery (WORKFLOW 3.2 item 8). Queries and raw output: `data/fs91/j03/queries-{1..4}.txt`,
+`pa-queries-{1..4}.txt`, `pa-johnson-listing.txt`, `pa-reviews-1.txt`; tools `data/fs91/j03/zb.py`, `zbrev.py`. **The API returned
+HTTP 502 or timed out on 13 of 41 requests** (logged in the output files); a 404 is its empty result. Every negative below measures its
+query's words (G21).*
+
+### PA.1 The objects named in their disciplines' words
+
+- **A character colouring is a circular colouring that is a group homomorphism.** `x ↦ kθ(x)` maps `F²` to `ℝ/kℤ` with every edge moved
+  by at least 1, so it is a circular `k`-colouring; the least `k` with a band character is `⌈1/κ(U_F)⌉`, where
+  `κ(U) = sup_θ min_{u∈U} ‖θ(u)‖` over characters of `ℤ[U]` — the **lonely-runner / view-obstruction parameter** of the set `U` in the
+  character-theory form used for distance graphs (row 79 already reads rank 1 this way: `G(ℤ, D)` is 3-colourable iff `κ(D) ≥ 1/3`).
+  Discipline: circular colouring of Cayley and distance graphs (Vince; Zhu; Liu), diophantine approximation (Cusick, Wills, Chen).
+- **The class theorem is a local–global statement about `κ`**: `κ(U_F)` against the `κ` of each residue target's norm-one circle, the
+  product step being a **sumset of symmetric sets inside an interval centred at ½** on the circle group — additive combinatorics — and the
+  joint surjectivity being **weak approximation on the norm-one torus** `R¹_{F(i)/F}𝔾_m`, a rational variety (arithmetic of algebraic tori).
+- **The per-target question is a quadratic-character sum over a short interval.** For `q` prime and `a ∈ 𝔽_{q²}^×` with `N(a) = c`, the
+  values `Tr(az)` on `z ∈ μ_{q+1}` are exactly `V_c = {t ∈ 𝔽_q : t² − 4c is a non-square or 0}` (a line `Tr(ax) = t` meets the circle
+  iff `X² − tX + c` has roots of norm `c` — the planner's derivation, to be re-derived by J08); a band `k`-character exists iff some `c`
+  makes `t² − 4c` a non-zero square for every `|t| < q/k`. Discipline: runs of quadratic residues of a polynomial, Burgess's bounds for
+  characters of polynomials, Weil.
+
+### PA.2 Queries and what they returned (hits as returned; review or author summary marked)
+
+| query (zbMATH) | hits | what bears |
+|---|---|---|
+| `ab:"circular chromatic number" & ab:"unit distance"` | 2 | **DeVos–Ebrahimi–Ghebleh, *Circular coloring the plane*, SIAM J. Discrete Math. 2007 (Zbl 1140.05303; author summary): `χ_c(ℝ²) ≥ 4`.** Character colourings are circular colourings, so `χ_c ≤ χ_char`; not about characters or fields. Kamiński–Medvedev–Milanič, plane-width (off the question) |
+| `ab:"distance graph" & ab:"circular chromatic number"` | 9 | Zhu 2002, 2003; Liu–Zhu 2005; **Liu, *From rainbow to the lonely runner* (survey, 2008)**; Chang–Liu–Zhu 1999: the `κ` literature for `G(ℤ, D)` — rank 1, no number fields |
+| `ab:"chromatic number" & ab:"p-adic"` | 3 | **Kang–Maharaj, *Distance graphs from p-adic norms*, Integers 2010 (Zbl 1213.05061; review): upper bounds on `χ(G(ℤ, D))` from `p`-adic divisibility of `D`** — a one-place residue colouring of a distance graph, the rank-1 shadow of the pullback direction; Bardestani–Mallahi-Karai 2020 (held as `[BardestaniMallahiKarai2017]`'s journal form) |
+| `ti:"chromatic number" & ab:"rational points"` | 2 | Zaks 1992, Chilakamarri 1990 (rational spaces; off the question) |
+| `au:"Fischer, Klaus G."` | 27 | the three held papers (1990, 1990b, 1994); nothing further on colouring |
+| `au:"Johnson, Peter D." & cc:05C15` | 52 | **Johnson, *Problems posed in or arising from "Colorings of metric spaces": status report* (2000; Zbl 0974.05029; review): problem (1) is "the chromatic number … of `(X,1)`, when `X` is a finite algebraic extension of `Q²`"** — the question the class theorem answers for characters; **Johnson, *Euclidean distance graphs on the rational points* (2011 survey, Zbl 1243.05082)**; *Product colorings* (Geombinatorics 1991, Zbl 0848.05029; review one line: "two related problems on product colorings of the plane") — none held |
+| `ab:"quadratic residues" & ab:"consecutive"` | 39 | Burgess 1963 (two papers, incl. *On Dirichlet characters of polynomials*), Buell–Hudson 1984/1986 (runs of residues), Caragiu 1993: the classical tools for J08's per-target question; nothing on norm-one circles |
+| `ab:"Hedetniemi" & ab:"circular" & ab:"Cayley"`; `… & ab:"circular chromatic"` | 1; 1 | Hahn–Tardif 1997 (survey), Alishahi–Hajiabolhassan–Meunier 2017 (topological) — off the question |
+| `ab:"local-global" & ab:"chromatic number"` | 3 | off the question (tree-depth; SDP gaps; Borel graphs) |
+| `ab:"lonely runner" & ab:"distance graph" & ab:"circular chromatic"` | 1 | Liu–Zhu 2005 |
+| empty (404): `unit distance & number field & coloring`; `additive coloring & unit distance`; `character & coloring & unit distance`; `unit circle & finite field & chromatic`; `lonely runner & finite field`; `unit distance graph & rational & circular`; `coloring & rational points & quadratic field`; `character sum & short interval & quadratic polynomial`; `quadratic residues & consecutive & polynomial & interval`; `Cayley graph & finite field & circular chromatic`; `sumset & circle & interval & symmetric` | 0 | — |
+| unanswered (502 or timeout): `circular chromatic number & Cayley graph`; `circular chromatic number & abelian group`; `finite Euclidean & chromatic number`; `quadratic residue & polynomial & interval`; `view obstruction & chromatic`; `multiplicative subgroup & interval & finite field & avoid`; `lonely runner & chromatic number & Cayley`; `unit distance graph & field & chromatic number, 2000–2026` | — | **not searched**, recorded as a debt for the close's gate |
+
+### PA.3 What the gate found, and what it changes
+
+1. **The question is posed in print** (J02 flagged `[Fischer1990]` §1; the gate adds Johnson's 2000 status report, problem (1), quoting
+   Benda–Perles). The class theorem answers it **for character colourings only** — never for `χ` — and says so in every statement.
+2. **The discipline is circular colouring / the lonely-runner parameter `κ`**, which gives the milestone its sharp quantity: the
+   **character chromatic number** `χ_char(G) = min{k : Θ_k ≠ ∅}` of a field plane and of each residue target, and the theorem
+   `χ_char(F²) = min over stable places and levels of χ_char(target)`. J08 computes `χ_char` of Γ₂₃, Γ₄₃ and of ℚ(√167)'s plane.
+3. **The per-target bound for large `q` is classical** (Weil, Burgess): J08 cites it, derives the explicit threshold, and enumerates below
+   it — a complete list fixed by a derivation (standing rule 3's edge).
+4. **Nothing found states the class theorem or the peeling lemma**; the peeling lemma is elementary and is to be treated as folklore-grade
+   until a gate on it is answered (the 502 queries above). Kang–Maharaj is the one-place colouring of distance graphs in rank 1 — cited as
+   the nearest printed relative.
+5. **Debts** (for the close's gate): `[Johnson2000]` (the status report) and `[Johnson2006]` still unread and not held; Johnson 2011's
+   survey not held; Liu's 2008 survey not held; DeVos et al. 2007 not held; the eight unanswered queries.
