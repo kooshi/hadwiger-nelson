@@ -471,6 +471,18 @@ def main() -> int:
             expect(c == want, f"no mixing at {name}, N = {N}")
 
     say()
+    say("E. (stage 4) the real cyclotomic fields Q(zeta_m)^+, m = 2^k - 1: residue degree of every dyadic prime (= k) and its")
+    say("   behaviour in L/F -- the bipartite algebraic field Q(zeta_m : m odd)^+ has no place above 2 with finite residue field")
+    for m, k in ((7, 3), (31, 5)):
+        gp = ("pol=subst(polsubcyclo(%d,%d),x,y); nf=nfinit(pol); rnf=rnfinit(nf,x^2+1); P=idealprimedec(nf,2); s=\"\";"
+              "for(j=1,#P, Q=rnfidealprimedec(rnf,P[j]); s=Str(s,P[j].f,\",\",#Q,\",\",Q[1].e/P[j].e,\";\")); print(s);") % (m, (m - 1) // 2)
+        out = subprocess.run(["gp", "-q", "--default", "parisize=256000000"], input=gp, capture_output=True, text=True,
+                             check=True).stdout.strip().splitlines()[-1]
+        rows = [tuple(int(t) for t in r.split(",")) for r in out.strip(";").split(";")]
+        say(f"  m = {m:3d}: dyadic primes (f, #above in L, relative e) = {rows}")
+        expect(all(f == k and n == 1 and e == 2 for f, n, e in rows), f"Q(zeta_{m})^+: residue degree {k}, ramified in L/F")
+
+    say()
     say("Plants (each must move its count; the faithful partner is the run above)")
     p1 = product_band3([U3, U3], [1, 1], diagonal=True)
     say(f"  P1 diagonal joint image at Q(sqrt7), N = 3: {p1} (faithful 8)")

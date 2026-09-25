@@ -120,6 +120,9 @@ leaves open "whether every additive 3-colouring is Fischer's up to symmetry"; J4
 `N₃ = 1` at `d ≡ 3 (mod 12)` (3 ramified; 4 characters), `N₃ = 2` at `d ≡ 7 (mod 12)` (3 split; 8 characters, the two places swapped by
 `√d ↦ −√d`), `N₃ = 0` at `d ≡ 11 (mod 12)`. Whether that is T6's "Fischer's up to symmetry" depends only on Fischer's colourings being
 residue characters, which T6's own negative control reports ("local at one prime above 3"); I have not re-read his construction for it.
+*(Resolved at stage 4: the `4N₃` characters form one orbit under rotation by `μ₄` — `(λ(1), λ(i)) ↦ (λ(i), −λ(1))` cycles the four — and,
+at `d ≡ 7 (mod 12)`, the flip `√d ↦ −√d` swapping the two places; one Fischer colouring in the set then makes all of them Fischer's up to
+symmetry. This agrees with J09's J4-T6.)*
 
 ### 2.3 Exact checks (`tools/crunch_j09v_check.py`, 2.2 s; output `data/fs91/j09v/check.txt`: ALL CHECKS PASS)
 
@@ -171,7 +174,8 @@ place). For a field that is not a number field I read "place" as a valuation rin
 - *S1.* `χ ≤ 3 ⟹ L ≤ 3`: bipartite gives a ramified stable dyadic place (J4.0), target a matching, `L = 2`; otherwise the `χ = 3` case
   gives an `𝔽₃`-place, `L ≤ χ(Γ₃) = 3`. `L ≤ 3 ⟹ χ ≤ 3` is (RB). **No chromatic number of any other target is needed** — in particular not
   `χ(U_Q) ≥ 4` at even `f`, which I did not establish; the route through (RB) makes it a corollary instead: every stable place other than the
-  two good kinds has a target that is not three-colourable, whenever a field realising it exists (else (RB) would give `χ ≤ 3` against J4).
+  two good kinds, occurring in a field that has **no** good place, has a target that is not three-colourable (else (RB) would give `χ ≤ 3`
+  against J4 and T2). *(Wording corrected at stage 4: the stage-3 text said "whenever a field realising it exists", which overclaims.)*
 - *Consequence, checked (tool part A):* **ℚ(α, √7), `α³ = α + 1` — `plans/STUB-three-colours-residue-degree-three.md`'s first field (FS-82)
   — has both primes above 3 of residue degree 3 (`N₃ = 0`) and its one dyadic prime split in `L` (so (H) holds), hence `χ ≥ 4` by J4-C, and
   a prime above 7 of residue field `𝔽₇`, hence `χ ≤ χ(Γ₇) = 4`: `χ(ℚ(α, √7)²) = 4`.** J4-C closes FS81-T7's residual case (every prime above 3
@@ -231,3 +235,76 @@ on disk that I could check.
 | 1 | a `Θ₃` relation tree or float finder on lattices over ℚ(√7) to look for a mixed character | derived J4.8, then enumerated every character of `∏ O_𝔓/N` at `N ≤ 36` (a finite set the derivation fixed; at the edge, logged) |
 | 2 | a SAT three-colouring of `U₄` to settle `χ(U₄)` for S1 | routed S1 through (RB), which needs no target's chromatic number |
 | 3 | a colouring search over ℚ(α, √7) | read `N₃` and the dyadic splitting from gp and applied J4-C |
+
+## Stage 4 — SAVED — the divergence table
+
+*Opened after stage 3's commit (`e23cbecc`): J09's record `plans/FS91-S0FV-three-colours-blind.md` §2–§5 and its theorem list, and J02's
+record `plans/FS91-S0F-three-colours.md` §2.2, §2.6–§2.10 and its theorem list. J09's own stage-5 table (J09 against J02) is not repeated;
+where I concur with one of its items I say so.*
+
+### 4.1 One new divergence of truth: J4-A under J09's stated reading of `L(F)`
+
+J09 §2.6 reads `L(F)` for an algebraic `F` "through places (valuations) of `F` **with finite residue field**" and closes the bipartite case
+with "a ramified stable dyadic place" obtained by König's lemma. **The König limit need not have a finite residue field, and there are
+bipartite algebraic fields with no place of finite residue field above 2 at all.** Example: `F = ℚ(ζ_m + ζ_m^{−1} : m odd) ⊆ ℝ`.
+- Each `F_m = ℚ(ζ_m)⁺` (`m` odd) is unramified at 2, while `F_m(i) ⊇ ℚ(i)` is ramified there, so every dyadic prime of `F_m` is ramified in
+  `F_m(i)/F_m`, hence stable: `F_m²` is bipartite (J4.0), and so is `F²` (compactness). `χ(F²) = 2`.
+- At `m = 2^k − 1` the residue degree of 2 in `ℚ(ζ_m)` is `ord_m 2 = k`, and in `ℚ(ζ_m)⁺` it is still `k` (`−1 ∉ ⟨2⟩ mod 2^k − 1` for
+  `k ≥ 3`). A place of `F` above 2 restricts to a dyadic prime of every `ℚ(ζ_{2^k−1})⁺`, so its residue field contains `𝔽_{2^k}` for every
+  `k`: **infinite**. (Tool part E: `m = 7`, `f = 3`; `m = 31`, three primes with `f = 5`; all ramified in `L/F`.)
+- Places above odd `p` likewise have infinite residue fields. So under the finite-residue-field reading `F` has no place to read `L(F)` from,
+  and **S1's "`χ(F²) ≤ 3 ⟹ L(F) ≤ 3`" fails literally at `F`** (and at `F(t)`, the purely transcendental case over it).
+- **Repair (either suffices):** read `L(F)` over all stable valuation rings (my stage-3 reading), or let a ramified stable dyadic place count
+  as the matching target whatever its residue field. The non-bipartite case is unaffected: its König limit has residue field `𝔽₃`.
+
+So **J4-A is TRUE under my reading and FALSE, at the bipartite case only, under the reading J09's §2.6 states**. The claim's line 367 names
+no reading, so the verdict on the line itself is TRUE-with-the-reading-fixed; the record's §2.6 sentence needs the repair.
+
+### 4.2 The table
+
+| # | kind | J09 | J02 | J09v (this record) | resolution |
+|---|---|---|---|---|---|
+| 1 | **truth** (J4-A, bipartite) | `L(F)` read through places with **finite** residue field; bipartite case by König on ramified dyadic primes | S1 not extended to algebraic `F` ("Not claimed") | TRUE with `L` over all stable valuation rings; **FALSE under J09's finite-residue reading**, at `ℚ(ζ_m : m odd)⁺` | §4.1; the repair is one clause in J09 §2.6 |
+| 2 | **truth** (descent of a ramified stable dyadic prime) | descends: split and unramified base-change upward (contrapositive) | §2.10: restricts to "ramified **or inert**", so König "not clean" | descends, by a second argument: `c` lies in inertia above, so acts trivially on `k(𝔔′) ⊇ k(𝔔)`, so `𝔔` is not inert, and it is stable, so not split | concur with J09's table item 1; two independent derivations now |
+| 3 | **truth** (J02's remark) | heading of J4: "parity everywhere or additive mod 3 at one `𝔽₃`-prime" | §2.6 Remark 2: "**Mixed types are real, and harmless.** Nothing above shows that all unit vectors of a point share one type" | no point of `Θ₃(R_F)` has mixed types, at **any** real number field: under (H) by J4.8; without (H), the image of `U` in `R/2R × R/3R` is the product of the two images ((W)), so the allowed pairs `(τ₂, τ₃) ∈ {(½,0), (0,±⅓)}` force `τ₂ ≡ ½` on `U` or `τ₂ ≡ 0` on `U` | J02's remark is FALSE as an existence claim (it is a remark, not a filed theorem); J09's table item 2 calls it scope. J02's own T1 steps 2–3 give it once the Teichmüller set is replaced by the full image |
+| 4 | scope (level collapse at ramified 3) | J4 step 6: proved at ramified 3 | §2.8: "Whether `τ₃` vanishes on `J₃` is **not decided here**" | J4.6: every band-3 character of `T_{𝔓,m}` factors through level one at every stable place unramified in `L/F`, odd or dyadic, any `e(𝔭\|p)`; exact at `ℤ₃[√3][i]` mod 9 | decided twice (J09, J09v) |
+| 5 | route (J4) | FS81-T3/T4's layer typing (`τ = lim θ(25^{−k}·)`, J1), J2 (Lemma R without Galois, derived), J3; **no** archimedean analysis; parity case via G55/G56 | — (J02 proves existence only: T1/T2) | `H₃` (J01-7) for torsion plus archimedean, Lemma C′ (J07), (W); band-Minkowski (J4.5, J4.8); archimedean part killed by the band (J4.4, the complex-place repair J02 L1 remark 2 asks for); (H) ⟺ non-bipartite derived from C′ (J4.0) | two independent routes to J4's statement; they share only weak approximation and the local decomposition of `R/NR` (J09's J2, J07's C′) |
+| 6 | route (excluding other places) | only 3-adic places arise (`θ = τ₃` has order 3); Weil via a Kloosterman zero-count at `q = 3^f ≥ 27` | L4(a) the same, exact at 27, 243 | every stable place arises a priori; odd `q ≥ 7` excluded by Lemma AV + Hoffman–Weil (`q ≥ 19`) and exact enumeration (`q ≤ 27`); inert dyadic by `Σμ_{Q+1} = 0` | agree on every place both treat; the `q = 27` fact (no band-3 character) is J09's "at least 4 zeros", my part B's 0 |
+| 7 | route (J4-C, S1 converse) | S1 as `⟹`; converse by row 52 and G55 | T2's five-way equivalence | both directions through (RB), which needs no target's chromatic number | agree |
+| 8 | inputs | FS81-T2 named for S1 | FS81-T2 named | FS81-T2 named, and flagged as **absent from my brief's input list** | agree on the dependency |
+| 9 | scope (J4-A, transcendental) | `E(t₁,…,t_d)`, finitely many `t` | not claimed | any cardinality of `T` (compactness), and a rank-one place (pull back `F_𝔭` along an embedding) if rank one is required | the claim's "every purely transcendental extension" is J09v's scope; J09's proof as written covers finite `d` (compactness closes the rest in one line) |
+| 10 | scope (FS81-T6's open item) | J4-T6: Fischer's up to symmetry | left open outside `d ≡ 3, 7 (mod 12)` | agree after stage 4 (one orbit under `μ₄` and the flip; §2.2's note) | concur with J09 |
+| 11 | ℚ(α, √7) | `χ = 4`, two routes | `χ = 4` | `χ = 4` via J4-C; gp: `N₃ = 0`, dyadic split, `𝔽₇` prime | agree (three derivations) |
+| 12 | exact checks | `tools/crunch_j09_lemma_k.py` (K1's failure at 27) | `tools/crunch_j02_additive_check.py` | `tools/crunch_j09v_check.py`: level one at 3–27 and `U_Q`, higher levels in explicit local rings, no-mixing enumerations on five fields, three plants | agree wherever they overlap; mine adds the higher-level and product enumerations |
+
+**No divergence of truth on J4 or J4-C.** The new divergence is item 1 (J09's stated reading for J4-A); items 2–3 are truths J02 withheld
+or mis-stated, on which J09 and I agree by different arguments.
+
+### 4.3 Proposed edits for the front-page lane (not made here; standing rule 7)
+
+- `LEDGER.md` / the M1 close: J4 and J4-C now have **two independent derivations** (J09; J09v, blind, different route) — row 82's standard.
+  J4-A likewise, **with `L(F)` defined over all stable valuation rings** (or the matching target counted at any residue field); J09 §2.6's
+  "with finite residue field" to be repaired (§4.1).
+- `plans/FS91-S0F-three-colours.md` §2.6 Remark 2 ("Mixed types are real"): false at every real number field (item 3); §2.8's open level
+  collapse: decided (item 4).
+- The FS-82 stub: answered (J4-C at ℚ(α, √7), three derivations now).
+- `data/fs91/j07/lemma-statements.md`'s `L(F)` is defined only by finite targets; any statement of S1 beyond number fields should carry
+  its extended definition.
+
+## Theorems this phase proved
+
+- **J09v-1 (= J4, second derivation)** — for a real number field with no stable dyadic prime ramified in `F(i)/F` (equivalently, `F²` not
+  bipartite), `Θ₃(R_F)` is exactly the `4N₃` residue characters at the primes of residue field `𝔽₃`; both readings of "additive" name this
+  set. [hand, second mind, blind to J09's route; Weil external `q ≥ 31`; tools exact `q ≤ 27`] — §2.2 (J4.0–J4.9); `tools/crunch_j09v_check.py`.
+- **J09v-2** — (H) ⟺ `F²` non-bipartite, from Lemma C′ and `[Fischer1990]` Thm 1 (the residue field `𝔽_{Q²}` of an inert dyadic place has
+  no ring map to `𝔽₂`). [hand] — §2.2 J4.0.
+- **J09v-3** — band-3 level reduction at every stable place unramified in `L/F` (odd or dyadic, any `e(𝔭|p)`), with the explicit coset
+  `x + x̄π^{m−1}·ker Tr`. [hand + tools exact at `ℤ₃[i]` mod 27, `ℤ₃[√3][i]` mod 9, `ℤ₂[√3][ω]` mod 8] — §2.2 J4.6; §2.3 C.
+- **J09v-4 (= J4-C, second derivation)** — S1 for every real number field, both directions through the residue bound (RB), no target's
+  chromatic number used; `χ(F²) = 3 ⟺` non-bipartite and `N₃ ≥ 1`. [hand, second mind; FS81-T2 an input] — §3.1.
+- **J09v-5** — `χ(ℚ(α, √7)²) = 4`, `α³ = α + 1`. [hand + tools exact (gp)] — §3.1; `data/fs91/j09v/check.txt` part A.
+- **J09v-6 (= J4-A, second derivation)** — S1 for every algebraic `F ⊆ ℝ` and every purely transcendental extension of one (any
+  transcendence degree), with `L` over all stable valuation rings; ramified stable dyadic primes descend (inertia argument). [hand] — §3.2.
+- **J09v-7** — under the reading "places with finite residue field", S1 fails at the bipartite field `ℚ(ζ_m + ζ_m^{−1} : m odd)`, which has
+  no place of finite residue field. [hand + tools exact (gp, `m = 7, 31`)] — §4.1; tool part E.
+- **J09v-8** — no point of `Θ₃(R_F)` has mixed P/O types, at any real number field (J02's Remark 2 refuted). [hand] — §4.2 item 3.
