@@ -799,3 +799,110 @@ delegated nothing; retractions planner 0, advisor 0 (G51's warning shape, which 
 | R4 | **B1's fence.** B1 receives the statements only (an owner-held file, `data/fs86/briefs/B1-statements.md`); it does not read this plan's §0, §G.6, §IQ, §C, §P, §Y or §R-review, the close inventory, the plan-phase advisor's record, `data/fs86/briefs/A-*`, or commit bodies, until its derivations are committed. Prior art (the library, `BIBLIOGRAPHY.md`, `CLAUDE.md`, `LEDGER.md`, the derivation files) is open | give B1 the plan and ask it to derive first | the V2 pattern worked at FS-85 only where the sketch was physically out of reach; this plan's §0.3 contains the sketch in full | high |
 | R5 | **Stage C launches after B1's verdict on §0.3 (ii)–(iii)**, not on a fixed date. If B1 finds a defect, §C items 3–4 and S1 are rewritten before launch. B2/B3 results reach both competitors as one dated addendum, identically, whenever they land | launch C on 09-26 regardless | §C item 3 states the frame as "what is free"; launching on a frame that a blind derivation then breaks would hand both competitors a false premise | high |
 | R6 | **From the first competitive commit on**, commit subjects are neutral and competitor progress stays out of `plans/` and `data/` (the protocol, rule 1); before launching any agent mid-competition, the owner checks `git log -5` for content | — (standing rule) | FS-85's two channels | high |
+
+## §R-close. The close (2026-09-25; the close planner, de Bruijn, Opus 5.5)
+
+*Worked from `plans/FS86-close-inventory.md` (items 1–70 and § Held items). Results: `plans/FS86-derivation.md` (67 entries) and
+`LEDGER.md` rows 88–94. Kooshi's words for the close: "Awesome results. Let's close out, then we'll spawn an advisor to decide what to do
+next: the missing theorem, 2 hours of sanctioned search time, or something else."*
+
+### R-close.1 The §G re-read
+
+**Extractions that paid.** G55's transport → V2 (`F(R)` an ideal; FR-1). G66, G59 and `[Zhang2012]` → V3 (the weak yes free; P-free
+registered as uninformative, G21). G54's killing test on `Q_m` → B2's profile, which found the propagation sentence false (a *bears* that
+paid by refuting its own entry). G41's additive control → B1's Fischer control on VK (one prime, level 3). G71's reading → P-G71′ (met:
+every field-level result uses the tight place). G73's open formats → the advisor's K3 pins, and Coxeter's C14 closed the window format.
+G75's killing test → registered (P-G75, 0.05), not fired. dB2 (row 86) → §0.5's class keeping the rotation structure. **Entries that should
+have borne and did not, or bore wrongly:** G54's propagation sentence was used in §0.1 as a source for tightness at every level (via FS38-L1)
+— a defective entry carried into a plan (B1's D3; corrected at this close with a demotion record); `[Zhang2012]`'s MIS-normal half sat in a
+held, read paper cited for its α half only (G50's shape; now G49's instance); §G.2 walked the rows in blocks (R.1's logged defect). **No
+entry named measure rigidity**, where both competitors ended: minted as G76. Forward propagation: G76 → FS-89, FS-90, FS-59, FS-83, FS-84,
+FS-64 (their rows re-aimed).
+
+### R-close.2 The §PA sweep for recognitions (what the gate taught about the object)
+
+- **Vector colourings** (GRR 2017 Thm 4.9; GRRŠV 2020 Cor. 4.4): a Hoffman-tight four-colouring's tetrahedral embedding is an optimal vector
+  colouring in the least eigenspace — FS38-D2-A(ii) in their words, and V3's product step in the vector form. Promoted into the prior-art
+  position and G49; no grokking (the recognition changes attribution, not method).
+- **Zhang's MIS-normality**: re-aims FS-67 (its main case answered in print); G49's instance.
+- **The annihilator method** (Kari–Szabados; Herva–Kari; Puzynina's exception): row 85's periodicity step is an instance; G75 rewritten with it,
+  and C11 shows that on type-(B) planes an identity valid for every colouring exists iff `F(R) ≠ 0` — the identity is the question.
+- **Valued-field model theory** (`[Kuhlmann2016]`): T1's singular case; D showed the smooth case suffices. Not promoted (not needed).
+- **Measure rigidity** (Berend 1984; Einsiedler–Lindenstrauss; both unread): the missing theorem; promoted to G76 and FS-89.
+
+### R-close.3 The §IQ re-read, and G72's count
+
+S1 (classify every four-colouring of `Cay(R, U_F)`) was answered as far as it went **by derivation from the structural question**: the frame
+(row 88), the local theorem (row 90), the classification at K (row 89) and every no-go (rows 91–92) are statements about every colouring,
+and the invariant they use is locality at the tight place. The invariant §IQ item 3 hoped for — an operator for which every four-colouring
+is an eigenvector — was neither found nor excluded (C11 shows it exists iff `F(R) ≠ 0`). **G72's fourth count: through the structural
+question; five of five** (FS-73, FS-79, FS-81, FS-85, FS-86).
+
+### R-close.4 The predictions, scored once
+
+| id | p | outcome |
+|---|---|---|
+| P-free | 0.85 | met — free, uninformative, as registered |
+| P-dich | 0.90 | met (B1 blind) |
+| P-K | 0.80 | met (B1 blind; two derivations) |
+| P-sat | 0.55 | met: `m* = 5` exactly |
+| P-slack | 0.80 | met: slack at 6–10 |
+| P-undec | 0.70 | split: 6–10 decided through the tight `Q₁₄`; ≥ 24 undecided |
+| P-yes | 0.02 | not met |
+| P-no | 0.20 | not met |
+| P-nogo | 0.35 | **not met by its letter** (the one pinning-format no-go, C0, is the recorded second-moment format transferred); the no-gos landed on the construction side (R-close.5) |
+| P-K-fires | 0.35 | not met: passed on K1 (Theorem A, "holds") |
+| P-G75 | 0.05 | not met (no triangle-free pinning identity) |
+| P-G71′ | 0.75 | met |
+| P-83 | 0.80 | met, with 19 on FS-66's certificate (B1's D4) |
+| P-log | 0.70 | met: planner 4 lines; round 1 de Bruijn 3, Coxeter 2 |
+
+**The agents' C0s.** B1: V0 0.97, V1 0.95, V2 0.85, V3 0.55, V3-ram 0.7, V4 0.85, VK 0.4 — all proved (V3 and VK needing FS-66 at 11 and
+19, and at K's ramified 11). B2: P-B2-inj met; P-B2-L3 and P-B3 not met; the non-monotone profile unpredicted. W: W-A 0.85, W-A1 0.85, W-B
+0.80 proved; W-C0 "scope repair" 0.55 met in letter (a gap against the brief's paraphrase, repaired); W-D₀ "with a non-degeneracy condition"
+0.55 met. X: X-D′ 0.70 proved; X-D periodicity "gap 0.50" lost (proved, by the Eulerian step); X-D pullback 0.90 met (stronger: no V3);
+X-H 0.85 met (non-real 0.70 met). C: VC-14 "gap 0.50" lost (proved, stronger); VC-12.1 0.75, VC-13.0 0.90, VC-10 0.65 met. D: VD-cert 0.80 /
+0.75 / 0.70 met; VD-C split (refuted as briefed, proved under H*); the side's gap claim 0.70 confirmed; VD-T1 0.95 / 0.80 met, "smooth case
+suffices" 0.60 met. **The advisors:** Poros (plan) F1–F4 confirmed (by B1), "prior F = 0" open; Poros (competition) E3, E4, E5, E8, E9 won,
+E1, E2 (narrowly), E6, E7, E10 lost (its §0.6).
+
+### R-close.5 The verdict, ruled
+
+**The outcome:** verified no-gos of named formats of a *non-periodic four-colouring* on type-(B) planes (D, D′, H, D₀, stripes, B, HD4, C7,
+HD1-fin, C14), the frame and the K classification at two derivations, the local theorem, and nothing decided at `F`. **By the letter of §P
+it falls in a gap:** Paid (no-go) names *pinning* formats or a K1 that *fails*, and neither happened; Draw (frame) names "only §0.3's frame",
+which is too small (the competition advisor's §7a reading).
+- **The ruling: Paid (no-go).**
+- **Alternative weighed:** Draw (frame), the largest row the letter reaches.
+- **Why this one:** the row's purpose — a proved impossibility of a named format, nothing decided at `F` — is met, and met twice over. The
+  plan named pinning formats because it expected the no-gos on the "yes" side; a format of a "no" is as much a format of an answer to S1.
+  The ruling does not rest on C14 or its external input: D, D′, H, HD4 and HD1-fin are each two derivations with a blind verifier. Kooshi counts
+  no-gos ("All novel knowledge is a success"), and verdicts score only the experiment.
+- **Its weakness, stated because R3 warns that after-the-fact placement is the least trustworthy kind:** this placement was made after the
+  outcome was known, and the letter-reading (a gap) is recorded beside it. **For the next verdict table:** name both sides' formats in the no-go
+  row.
+- **Confidence:** medium-high. If Kooshi reads §P's letter as binding, the verdict is "gap, between Paid (no-go) and Draw (frame)", and nothing
+  else in this close changes.
+
+### R-close.6 Retractions, errata and the honesty record
+
+**Retractions (all inside the free window):** de Bruijn side 2 (seat I, Prop. S (iii)–(iv), within the hour; seat III, Theorem C's
+equidistribution step, self-found); Coxeter side 1 (C11's "iff", before anyone relied on it); Poros (plan) 0; Poros (competition) 0; the
+planner 0 (its four-line K corollary missing the equal-ratio step was counted a slip); verifier D 1 (a CRT step through Lemma R's idempotent,
+before any report — which is how CL2 was found); W, X, C, B1, B2 0. **Errata:** Poros (plan) E1 (the saturation-depth direction reversed;
+not inherited); Poros (competition) E0 (a `git log` before reading its fence; nothing competitive seen) and E1 (woke a stood-down competitor —
+the owner's error, item 44). **Owner errors and slips:** FS-85's known negatives corrected in the owner's own draft before launch (item 9);
+competitors not briefed to work in stages (item 39); the advisor not told of a stand-down (item 44); two brief paraphrases that dropped a
+qualifier (items 46, 67); G54's unlabelled margin (item 29). **Agent slips:** the planner's `git stash` on a shared tree (item 15); B1's silent
+PARI stability checker and unreachable `ζ ↦ ζ⁵` plant (item 34); D's `Γ₂₇` plant firing first for the wrong reason (H-74). **The close's own
+brief** attributed the unreachable plant to W; it was B1's (inventory item 28).
+
+### R-close.7 The "would have searched here" log, counted
+
+34 lines across 11 records, **0 searches run** (D's positivity loop over one integer was a scaling, logged as borderline): the planner 4, Poros
+(plan) 1, B1 4, B2 4, de Bruijn's three seats 8, Coxeter's three seats 3, Poros (competition) 0, W 3, X 3, C 0, D 4. **Read with Kooshi's
+question — were the ban's constraints creative or friction?** Mostly creative: at least ten lines record a derivation that replaced the
+search and became a theorem (B2's T1 through the tight cover; X's Lemma C; W's descent; D's counterexample built by formula; de Bruijn's
+Theorem D steps; HD1-cert, which turned a search into a theorem that prices it). The friction is concentrated where the question is genuinely
+a finite witness — HD1-cert's certificate, the `√3` virtual edge at ℚ(√2,√3), 29's certificate for `Λ₅₁₀` — and those are exactly FS-90's
+candidates for the sanctioned two hours.
