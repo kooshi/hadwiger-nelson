@@ -9,11 +9,11 @@ That file's §1 rules table still applies, with the additions in §1 below.*
    `…/scratchpad/owner-fs89/live-agents.md`; never quote them to Kooshi.
    - **Verifier G** is blind-checking the next-step advisor's gluing sketch.
      - Brief: `data/fs89/briefs/S0A-gluing-verifier-brief.md`. Record: `plans/FS89-S0A-gluing-verification.md`.
-     - Done: C0 and G1 (G1 true; inventory item 10). Next: G0, G2, G3, then C2 (compare with `plans/POROS-2026-09-25-fs86-next.md` §3), C3 and C4.
+     - Done: C0, G1 (true; inventory item 10), G0, G2, G3 (all true; item 12). Next: C2 (compare with `plans/POROS-2026-09-25-fs86-next.md` §3), C3 and C4.
    - **S0B** is computing the exact four-colour band set `Θ₄(U₅)` of the rational unit circle at the prime 5. Kooshi ruled this computation allowed under the ban.
      - Brief: `data/fs89/briefs/S0B-band-set-brief.md`. Record: `plans/FS89-S0B-band-set.md`.
      - Done: C0 (0.40 that the set is torsion plus archimedean). Next: the positive control (FS-81's three-colour set), then the four-colour set depth by depth.
-2. **Verify every agent commit hash against `git log`, push, and log each result in `plans/FS89-close-inventory.md`** (items 1–10 so far). You are its only writer. Check one step of every key claim yourself.
+2. **Verify every agent commit hash against `git log`, push, and log each result in `plans/FS89-close-inventory.md`** (items 1–12 so far). You are its only writer. Check one step of every key claim yourself.
 3. **Read, in this order:**
    - `plans/FS89-close-inventory.md`;
    - `plans/POROS-2026-09-25-fs86-next.md` (the advisor's recommendation Kooshi accepted);
