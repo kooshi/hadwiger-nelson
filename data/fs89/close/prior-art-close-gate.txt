@@ -1,0 +1,203 @@
+# FS-89 close: the close's own prior-art gate, zbMATH Open API (2026-09-25). Hit counts as returned; HTTP 404 = no hits. kind: review = reviewer's review, summary = author's summary (a claim), editorial = text withheld (licence), none = no text.
+### ab:"closed invariant" & ab:"solenoid" -> 0 (HTTP Error 404: Not Found)
+### ab:"invariant sets" & ab:"non-expansive" -> 1
+  1171.37304 2009 | Cheng, Dandan; Wang, Yangeng; Wei, Guo | The product symbolic dynamical systems | summary
+### ab:"isometric" & ab:"invariant sets" & ab:"automorphisms" -> 0 (HTTP Error 404: Not Found)
+### ab:"compact factor" & ab:"invariant sets" -> 0 (HTTP Error 404: Not Found)
+### ab:"S-adic" & ab:"solenoid" & ab:"invariant" -> 2
+  1537.37014 2024 | Bekka, Bachir; Guivarc'H, Yves | On the spectral theory of groups of automorphisms of \(S\)-adic nilmanifolds | review
+  1518.22005 2022 | Bekka, Bachir; Francini, Camille | Characters of algebraic groups over number fields | review
+### ab:"ID property" -> 2
+  0532.10028 1983 | Berend, Daniel | Multi-invariant sets on tori | review
+  1374.03057 2016 | Wang, Chun Yong | Notes on a comprehensive study of implicator-conjunctor-based and noise-tolerant fuzzy rough sets: definitions | summary
+### ab:"minimal sets" & ab:"solenoid" -> 4
+  0261.54033 1973 | Thomas, E. S. jun. | One-dimensional minimal sets | none
+  1403.37005 2018 |  | Dynamical systems in theoretical perspective. Łódź, Poland, December 11--14, 2017. Based on the 14th internati | editorial
+  1318.57001 2014 |  | Foliations: dynamics, geometry and topology. Lecture notes of some of the courses, Barcelona, Spain, May 2010 | review
+  0999.37009 2002 | Lagrange, Maxime | Braiding minimal sets of vector fields | review
+### ab:"orbit closures" & ab:"solenoid" -> 0 (HTTP Error 404: Not Found)
+### ab:"invariant" & ab:"solenoid" & ab:"automorphism" & ab:"closed" -> 3
+  0987.37034 2000 | Buzzard, Gregery T. | Extensions of Hénon maps to the closed 4-ball | review
+  1269.37014 2012 | Pinto, Alberto Adrego; Almeida, João P.; Portela, Aldo | Golden tilings | review
+  1318.57001 2014 |  | Foliations: dynamics, geometry and topology. Lecture notes of some of the courses, Barcelona, Spain, May 2010 | review
+### ab:"Furstenberg" & ab:"non-hyperbolic" -> 1
+  1502.37038 2022 | Díaz, L. J.; Gelfert, K.; Rams, M. | Variational principle for nonhyperbolic ergodic measures: skew products and elliptic cocycles | summary
+### ab:"Furstenberg" & ab:"rotation" & ab:"invariant" -> 8
+  0883.60062 1997 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | summary
+  0906.34001 1998 | Arnold, Ludwig | Random dynamical systems | review
+  1493.37064 2022 | Dorsch, Florian; Schulz-Baldes, Hermann | Random Möbius dynamics on the unit disc and perturbation theory for Lyapunov exponents | summary
+  1403.37013 2019 | Tahzibi, Ali; Yang, Jiagang | Invariance principle and rigidity of high entropy measures | summary
+  1206.37001 2011 | Einsiedler, Manfred; Ward, Thomas | Ergodic theory. With a view towards number theory | review
+  0763.34060 1992 | Obaya, Rafael; Paramio, Miguel | Directional differentiability of the rotation number for the almost- periodic Schrödinger equation | review
+  1127.37301 1999 | Ruffino, Paulo R. | Matrix of rotation for stochastic dynamical systems | summary
+  1055.37002 2004 |  | Fractal geometry and applications: A jubilee of Benoît Mandelbrot. Analysis, number theory, and dynamical syst | review
+### ab:"multi-parameter" & ab:"invariant sets" -> 0 (HTTP Error 404: Not Found)
+### ab:"Berend" & ab:"invariant" -> 7
+  1071.37008 2005 | Muchnik, Roman | Semigroup action on \(\mathbb T^n\) | editorial
+  1258.37031 2012 | Lindenstrauss, Elon; Wang, Zhiren | Topological self-joinings of Cartan actions by toral automorphisms | review
+  1209.37005 2010 | Raja, C. R. E. | On the existence of ergodic automorphisms in ergodic \(\mathbb Z^d\)-actions on compact groups | review
+  0984.37004 1999 | Starkov, A. N. | The first cohomology group, mixing and minimal sets of the commutative group of algebraic actions on a torus | editorial
+  1235.37003 2011 | Wang, Zhiren | Quantitative density under higher rank Abelian algebraic toral actions | review
+  0797.00031 1994 |  | Systems and networks: mathematical theory and applications. Proceedings of the 10th international symposium on | review
+  0971.00038 2001 |  | Computational intelligence. Theory and applications. International conference, 7th fuzzy days, Dortmund, Germa | review
+### ab:"times 2 times 3" | ab:"x2 x3" -> 34
+  arXiv:2407.13150 2024 | Taekyun Kim; Dae San Kim | Moments of a random variable arising Laplacian random variable | summary
+  1059.34048 2003 | Zhang, Zhengqiu; Zeng, Xianwu; Wang, Zhicheng | Periodic solution of a nonautonomous diffusive food chain system of three species with time delays | review
+  arXiv:2302.13588 2023 | Chengyuan Ma | Invariants of Unimodular Quadratic Polynomial Poisson Algebras of Dimension 3 | summary
+  0576.68027 1985 | Borwein, Peter B. | On the complexity of calculating factorials | summary
+  1495.37039 2022 | Yu, Han | Times two, three, five orbits on \(\mathbb{T}^2\) | summary
+  0769.05006 1992 | Loeb, Daniel E. | A generalization of the binomial coefficients | review
+  1330.51013 2013 | Shirakawa, Toshihiro; Uehara, Ryuhei | Common developments of three incongruent orthogonal boxes | summary
+  1254.15009 2012 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | summary
+  1479.11132 2021 | Yu, Han | An improvement on Furstenberg's intersection problem | review
+  arXiv:2607.20147 2026 | Math Dicker | The Significance of Proposition II in Galois' Mémoire, The Origin of Galois Automorphisms | summary
+  1019.11001 2002 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | review
+  1377.37067 2017 | Kloeckner, Benoît R. | Counter-examples to an infinitesimal version of the Furstenberg conjecture | review
+  1185.52013 2008 | Hougardy, Stefan; Lutz, Frank H.; Zelke, Mariano | Polyhedral tori with minimal integer coordinates | summary
+  1253.65020 2012 | Lo, Sai-Huen | Parallel Delaunay triangulation in three dimensions | summary
+  1535.37056 2023 | Cabrera, Carlos; Makienko, Peter | On amenability and measure of maximal entropy for semigroups of rational maps. II | summary
+  1561.28100 2023 | Shmerkin, Pablo | Slices and distances: on two problems of Furstenberg and Falconer | summary
+  arXiv:2510.17744 2025 | Noah Kravitz; James Leng | Quantitative pyjama | summary
+  0312.05020 1973 | Meeus, Jean | Tetracubes | none
+  1244.37009 2010 | Maass, Alejandro | Rigidity results in cellular automata theory: probabilistic and ergodic theory approach | summary
+  1362.37043 2017 | Cyr, Van; Kra, Bryna | Free ergodic \(\mathbb {Z}^2\)-systems and complexity | review
+  1499.65609 2018 | Dosiyev, Adiguzel A.; Sarikaya, Hediye | 14-point difference operator for the approximation of the first derivatives of a solution of Laplace's equatio | summary
+  arXiv:1711.06533 2017 | Han Yu | WITHDRAWN: Cubes, side lengths and centres | summary
+  1446.49033 2020 | Gladkov, Nikita A.; Zimin, Alexander P. | An explicit solution for a multimarginal mass transportation problem | review
+  1499.65608 2018 | Dosiyev, Adiguzel A.; Abdussalam, Ahlam | On the high order convergence of the difference solution of Laplace's equation in a rectangular parallelepiped | summary
+  1332.52009 2015 | Manners, Freddie | A solution to the pyjama problem | review
+### ab:"Furstenberg" & ab:"unit circle" -> 9
+  arXiv:2206.13569 2026 | Yunping Jiang | Geometry in the Furstenberg Conjecture | summary
+  1280.28006 2012 | Molter, Ursula; Rela, Ezequiel | Furstenberg sets for a fractal set of directions | review
+  1436.28005 2020 | Orponen, Tuomas | An improved bound on the packing dimension of Furstenberg sets in the plane | review
+  1451.43001 2020 | Badea, Catalin; Grivaux, Sophie | Kazhdan constants, continuous probability measures with large Fourier coefficients and rigidity sequences | summary
+  1273.28006 2013 | Molter, Ursula; Rela, Ezequiel | Small Furstenberg sets | review
+  0801.28009 1994 | Lemańczyk, Mariusz; Mauduit, Christian | Ergodicity of a class of cocycles over irrational rotations | review
+  arXiv:1411.4522 2014 | Huichi Huang | WITHDRAWN: Equidistribution and measure rigidity under $\times p,\times q$ | summary
+  1474.43003 2020 | Bahramian, Z.; Jabbari, A. | On Lau-Loy's decomposition of a measure algebra on CHART groups | summary
+  0917.28015 1998 | Carvalho, Maria | Contributions to a rigidity conjecture | review
+### ab:"Gaussian integers" & ab:"invariant" & ab:"closed" -> 0 (HTTP Error 404: Not Found)
+### ab:"Pythagorean" & ab:"rigidity" -> 0 (HTTP Error 404: Not Found)
+### ab:"topological rigidity" & ab:"abelian" & ab:"automorphisms" -> 4
+  1258.37031 2012 | Lindenstrauss, Elon; Wang, Zhiren | Topological self-joinings of Cartan actions by toral automorphisms | review
+  0951.22005 2000 | Bhattacharya, Siddhartha | Orbit equivalence and topological conjugacy of affine actions on compact abelian groups | review
+  arXiv:1210.1405 2012 | Rupert McCallum | Topological rigidity in totally disconnected locally compact groups | summary
+  None 2026 | Zamora, Sergio; Zhu, Xingyu | Topological rigidity of small \(RCD(K, N)\) spaces with maximal rank | review
+### ab:"Furstenberg" & ab:"Gaussian" -> 18
+  1160.11006 2006 | Tao, Terence | The Gaussian primes contain arbitrarily shaped constellations | summary
+  1105.05052 2006 | Tao, Terence | A variant of the hypergraph removal lemma | summary
+  arXiv:2301.09730 2023 | Neil MacVicar | Multiplicative Invariance for a Class of Subsets of the Complex Plane | summary
+  1047.37027 2003 | Frączek, K.; Lemańczyk, M. | On symmetric logarithm and some old examples in smooth ergodic theory | summary
+  1118.37007 2006 | Ryzhikov, V. V.; Thouvenot, J.-P. | Disjointness, divisibility, and quasi-simplicity of measure-preserving actions | review
+  0923.28007 1999 | Lemańczyk, M.; Parreau, F. | On the disjointness problem for Gaussian automorphisms | review
+  1093.37001 2005 | Frączek, Krzysztof; Lemańczyk, Mariusz | On disjointness properties of some smooth flows | summary
+  1072.37003 2004 | Frączek, K.; Lemańczyk, M. | A class of special flows over irrational rotations which is disjoint from mixing flows | review
+  0698.60028 1990 | Venttsel, A. D.; Molchanov, S. A.; Tutubalin, V. N. | Asymptotic problems of the theory of probability and the theory of random media | review
+  1038.37002 2003 | Glasner, Eli | Ergodic theory via joinings | review
+  0848.28009 1995 | Thouvenot, J.-P. | Some properties and applications of joinings in ergodic theory | review
+  1567.37006 2025 | Austin, Tim | Non-convergence of some non-commuting double ergodic averages | review
+  0694.60058 1989 | Minami, Nariyuki | Exponential and super-exponential localizations for one-dimensional Schrödinger operators with Lévy noise pote | review
+  1558.60023 2024 | Liu, Dang-Zheng; Wang, Yanhui | Phase transitions for infinite products of large non-Hermitian random matrices | review
+  arXiv:2503.11574 2025 | Chuanwei Gao; Diankun Liu; Yakun Xi | Curved Kakeya sets and Nikodym problems on manifolds | summary
+  1056.37035 2003 | Schapira, Barbara | Ergodic properties of a horocyclic flow of a geometrically finite hyperbolic surface | review
+  1378.60010 2016 | Bhattacharya, Rabi N. | Selected papers. Edited by Manfred Denker and Edward C. Waymire | review
+  0537.22016 1984 | Falkowski, B.-J. | An analogue of the Levy-Khintchin formula on SL(2,\({\mathbb{C}})\) | review
+### ab:"Pythagorean triples" & ab:"dense" -> 5
+  0835.11011 1992 | Jenkyns, T. A.; McCarthy, D. | Integers in Pythagorean triples | summary
+  1471.11123 2019 | Skalba, Mariusz; Ulas, Maciej | Pairs of Pythagorean triangles with given ratios between catheti | review
+  1568.14052 2025 | Corvaja, Pietro; Turchet, Amos; Zannier, Umberto | Rational distances from given rational points in the plane | review
+  0969.00084 2001 |  | Fundamentals of computation theory. 13th international symposium, FCT 2001, Riga, Latvia, August 22--24, 2001. | review
+  0764.11013 1992 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | review
+### ab:"invariant subsets" & ab:"torus" & ab:"not hyperbolic" -> 0 (HTTP Error 404: Not Found)
+### ab:"Berend" & ab:"hyperbolicity" -> 0 (HTTP Error 404: Not Found)
+### ab:"orbit closure" & ab:"endomorphisms" & ab:"torus" -> 0 (HTTP Error 404: Not Found)
+### ab:"diagonal" & ab:"torus" & ab:"orbit closures" & ab:"rank one factor" -> 0 (HTTP Error 404: Not Found)
+### ab:"characters" & ab:"unit circle" & ab:"band" -> 0 (HTTP Error 404: Not Found)
+### ab:"circular colouring" | ab:"circular coloring" & ab:"character" -> 4
+  1022.05027 2002 | Klostermeyer, William | Circular coloring with defects | review
+  1162.05316 2008 | Lin, Wensong; Yang, Daqing; Yang, Chung-Ying | Circular consecutive choosability of graphs | summary
+  1223.05078 2010 | Lukoťka, Robert; Mazák, Ján | Cubic graphs with given circular chromatic index | summary
+  arXiv:2007.15556 2020 | Benjamin Moore | Sparse $4$-critical graphs have low circular chromatic number | summary
+### an:0984.37004 -> 1
+  0984.37004 1999 | Starkov, A. N. | The first cohomology group, mixing and minimal sets of the commutative group of algebraic actions on a torus | editorial
+### an:1071.37008 -> 1
+  1071.37008 2005 | Muchnik, Roman | Semigroup action on \(\mathbb T^n\) | editorial
+### an:1209.37005 -> 1
+  1209.37005 2010 | Raja, C. R. E. | On the existence of ergodic automorphisms in ergodic \(\mathbb Z^d\)-actions on compact groups | review
+### au:"Urban, Roman" & ab:"invariant" -> 16
+  1087.37022 2005 | Guivarc'h, Yves; Urban, Roman | Semigroup actions on tori and stationary measures on projective spaces | review
+  1002.31007 2001 | Damek, Ewa; Hulanicki, Andrzej; Urban, Roman | Martin boundary for homogeneous Riemannian manifolds of neagtive curvature at the bottom of the spectrum | review
+  1268.43004 2012 | Penney, Richard; Urban, Roman | Estimates for the Poisson kernel and the evolution kernel on the Heisenberg group | review
+  1008.22003 2002 | Urban, Roman | Estimates for derivatives of the Poisson kernels on homogeneous manifolds of negative curvature | review
+  1294.43004 2013 | Penney, Richard; Urban, Roman | The evolution and Poisson kernels on nilpotent meta-abelian groups | review
+  None 2022 | Penney, Richard C.; Urban, Roman | Poisson measures on semi-direct products of infinite-dimensional Hilbert spaces | summary
+  1346.43003 2016 | Penney, Richard; Urban, Roman | Gaussian-type upper bound for the evolution kernels on nilpotent meta-abelian groups | review
+  1399.43020 2016 | Penney, Richard; Urban, Roman | Poisson kernels on semi-direct products of abelian groups | summary
+  1296.22010 2014 | Penney, Richard; Urban, Roman | Estimates for the derivatives of the Poisson kernel on nilpotent meta-abelian groups | review
+  1295.60091 2014 | Urban, Roman | An explicit formula for the heat kernel of a left invariant operator | summary
+  1279.43013 2013 | Penney, Richard; Urban, Roman | Upper bound for the heat kernel on higher-rank \(NA\) groups | review
+  0993.43008 2001 | Urban, Roman | Estimates for the Poisson kernels on homogeneous manifolds of negative curvature and the boundary Harnack ineq | review
+  1077.22009 2004 | Urban, Roman | Estimates for the mixed derivatives of the Green functions on homogeneous manifolds of negative curvature | review
+  1041.43004 2003 | Urban, Roman | Estimates for derivatives of the Green functions for the noncoercive differential operators on homogeneous man | review
+  1024.22007 2002 | Urban, Roman | A remark on the Poisson kernels on homogeneous manifolds of negative curvature | review
+  0968.22007 2001 | Urban, Roman | Noncoercive differential operators on homogeneous manifolds of negative curvature and their Green functions | review
+### au:"MacVicar, Neil" -> 3
+  arXiv:2604.19986 2026 | Neil MacVicar | On the intersections of homogeneous self-similar sets with their translates in $\mathbb{R}^{n}$ and a formulat | summary
+  arXiv:2410.19237 2024 | Neil MacVicar | Intersections of Cantor Sets Derived from Complex Radix Expansions | summary
+  arXiv:2301.09730 2023 | Neil MacVicar | Multiplicative Invariance for a Class of Subsets of the Complex Plane | summary
+
+# OpenAlex: works citing Berend 1984 TAMS (W1980222967), with abstracts where the keyword filter fired
+https://openalex.org/W1980222967 1984 Multi-invariant sets on compact abelian groups 42
+https://openalex.org/W4233499988 1984 Multi-Invariant Sets on Compact Abelian Groups 12
+https://openalex.org/W2086114750 1995 On the Vassiliev knot invariants 1034
+citers: 42
+- 1985 | Daniel Berend | Ergodic semigroups of epimorphisms
+    ABS: The conditions for ergodicity of semigroups of epimorphisms of compact groups are studied. In certain cases ergodic semigroups are shown to contain small ergodic subsemigroups. Properties related to ergodicity, such as that of admitting no infinite closed invariant proper subset of the group, are discussed for semigroups of epimorphisms and of affine transformations.
+- 1987 | Daniel Berend | Dense (mod 1) dilated semigroups of algebraic numbers
+- 1994 | Michael Boshernitzan | Elementary proof of Furstenberg’s Diophantine result
+- 2002 | Manfred Einsiedler, Klaus H. Schmidt | Irreducibility, Homoclinic Points and Adjoint Actions of Algebraic ℤ d -Actions of Rank One
+- 2003 | Manfred Einsiedler, Elon Lindenstrauss | Rigidity properties of ℤ^{𝕕}-actions on tori and solenoids
+    ABS: We show that Haar measure is a unique measure on a torus or more generally a solenoid X X invariant under a not virtually cyclic totally irreducible Z d \mathbb Z^d -action by automorphisms of X X such that at least one element of the action acts with positive entropy. We also give a corresponding theorem in the non-irreducible case. These results have applications regarding measurable factors and joinings of these algebraic Z d \mathbb Z^d -actions.
+- 2004 | Alex J Clark, Robbert Fokkink | On a homoclinic group that is not isomorphic to the character group
+- 2004 | Elon Lindenstrauss | Rigidity of multiparameter actions
+- 2005 | Manfred Einsiedler, Anatole Katok | Rigidity of measures—The high entropy case and non-commuting foliations
+- 2005 | Roman Muchnik | Semigroup Actions on $${\mathbb{T}^n}$$
+- 2005 | Elon Lindenstrauss | Rigidity of multiparameter actions
+- 2006 | Richard Miles, TOM WARD | Mixing actions of the rationals
+- 2006 | Klaus H. Schmidt | Algebra, Arithmetic and Multi–Parameter Ergodic Theory
+- 2007 | Manfred Einsiedler, Elon Lindenstrauss | Diagonalizable flows on locally homogeneous spaces and number theory
+- 2007 | Roman Urban | Algebraic numbers and density modulo 1
+- 2008 | Richard Miles | The entropy of algebraic actions of countable torsion-free abelian groups
+- 2008 | Roman Urban | Sequences of algebraic numbers and density modulo 1
+- 2008 | Artūras Dubickas | On the limit points of (𝑎_{𝑛}𝜉)_{𝑛=1}^{∞} mod 1 for slowly increasing integer sequences (𝑎_{𝑛})_{𝑛=1}^{∞}
+- 2008 | Richard Miles | Homoclinic points of non-expansive automorphisms
+    ABS: 
+- 2008 | Roman Urban | A survey of results on density modulo $1$ of double sequences containing algebraic numbers
+- 2009 | Artūras Dubickas | Distribution of Some Sequences Modulo 1
+- 2009 | Viorel Niţică | Ergodic Theory: Rigidity
+- 2009 | Viorel Niţică | Ergodic Theory: Rigidity
+- 2010 | Jean Bourgain, Alex Furman, Elon Lindenstrauss | Stationary measures and equidistribution for orbits of nonabelian semigroups on the torus
+- 2010 | Yair Hartman | Large Semigroup of Cellular Automata
+- 2011 | Elon Lindenstrauss | Equidistribution in Homogeneous Spaces and Number Theory
+- 2011 | Viorel Niţică | Ergodic Theory: Rigidity
+- 2011 | Yair Hartman | Large semigroups of cellular automata
+- 2012 | Alexander Gorodnik, Shirali Kadyrov | Algebraic numbers, hyperbolicity, and density modulo one
+- 2013 | Zhiren Wang | Multi-invariant measures and subsets on nilmanifolds
+- 2013 | Alan Haynes, Sara Munday | Density of orbits of semigroups of endomorphisms acting on the Adeles
+- 2014 | Roman Urban | Equidistribution in the dual group of the S-adic integers
+    ABS: Let X be the quotient group of the S-adele ring of an algebraic number field by the discrete group of S-integers. Given a probability measure µ on X d and an endomorphism T of X d , we consider the relation between uniform distribution of the sequence T n x for µ-almost all x ∈ X d and the behavior of µ relative to the translations by some rational subgroups of X d . The main result of this note is an extension of the corresponding result for the d-dimensional torus T d due to B.Host.
+- 2015 | Nicolai Stammeier | On C*-algebras of irreversible algebraic dynamical systems
+- 2015 | Freddie Manners | A solution to the pyjama problem
+- 2015 | Kevin J. McGown | On the S-Euclidean minimum of an ideal class
+- 2016 |  | LARGE SEMIGROUPS OF CELLULAR AUTOMATA
+- 2018 | Michel Abramoff, Daniel Berend | A polynomial-exponential variation of Furstenberg’s theorem
+- 2018 | Zhiren Wang | Multi-invariant measures and subsets on nilmanifolds
+- 2020 | Han Yu | Times two, three, five orbits on $\mathbb{T}^2$
+    ABS: In this paper, we study orbit closures under diagonal torus actions. We show that if $(x,y)\in\mathbb{T}^2$ is not contained in any rational lines, then its orbit under the $\times 2, \times 3, \times 5$ actions is dense in $\mathbb{T}^2.$
+- 2021 | Elon Lindenstrauss | Recent progress on rigity properties of higher rank diagonalizable actions and applications
+- 2021 | Manfred Einsiedler, Elon Lindenstrauss | Rigidity properties for commuting automorphisms on tori and solenoids
+    ABS: Abstract Assuming positive entropy, we prove a measure rigidity theorem for higher rank actions on tori and solenoids by commuting automorphisms. We also apply this result to obtain a complete classification of disjointness and measurable factors for these actions.
+- 2022 | Han Yu | Times two, three, five orbits on T 2
+    ABS: In this paper, we study orbit closures under diagonal torus actions. We show that if (x,y)∈T2 is not contained in any rational lines, then its orbit under the ×2,×3,×5 actions is dense in T2.
+- 2023 | Chris Bruce, Eduardo Scarparo | A tracial characterization of Furstenberg’s conjecture
+    ABS: Abstract We investigate almost minimal actions of abelian groups and their crossed products. As an application, given multiplicatively independent integers p and q, we show that Furstenberg’s $\times p,\times q$ conjecture holds if and only if the canonical trace is the only faithful extreme tracial state on the $C^*$ -algebra of the group $\mathbb {Z}[\frac {1}{pq}]\rtimes \mathbb {Z}^2$ . We also compute the primitive ideal space and K-theory of $C^*(\mathbb {Z}[\frac {1}{pq}]\rtimes \mathbb {Z}^2)$ .

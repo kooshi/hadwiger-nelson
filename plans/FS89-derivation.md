@@ -17,7 +17,8 @@ D's §3 (FS89-D1-T2); verifier H's precision on U2's order-4 types (FS89-S1V-5).
 **Who found what.** **Verifier G** (Stage 0A, blind to S0B): S0A-1 to S0A-13. **S0B** (Stage 0B): S0B-T1 to T6, C1, L4. **The planner**:
 P-R1. **D** (Stage 1, the derivation agent): D0-T1, D1-*, D2-*, D5-*. **Verifier H** (Stage 1 V-A, blind to D): S1V-1 to S1V-10. **Verifier
 I** (Stage 1 V-B; phase B1 blind to D's routes, phase B2 given D's lemma statements without proofs): S1VB-1 to S1VB-14. The **owner** (one-step
-checks, cited by close-inventory item) and the **close planner** (§9, one entry of tools grade and four compositions).
+checks, cited by close-inventory item), the **close planner** (§9, one entry of tools grade and four compositions) and the **prior-art reader**
+of `[Berend1983]`/`[Berend1984]` (§9a: PA-B1, PA-B2; its PA-B3 is a reading, §10).
 
 **Notation, fixed once** (the plan's §0.1). `R_S = ℤ[i][1/p : p ∈ S]` for a set `S` of primes `p ≡ 1 (mod 4)`; `w_p = π_p/π̄_p`
 (`w₅ = (3+4i)/5`, `w₁₃ = (5+12i)/13`); `U_S = ⟨i⟩ × ⟨w_p : p ∈ S⟩`; `Q = R_{all} = ℤ[U_ℚ]`; `R₆₅ = R_{{5,13}}`. The band `B_k = [1/k, 1 − 1/k]`;
@@ -28,9 +29,11 @@ A **corner** is a character `x` with `2x = θ₂` (orbit coordinates `(1+i)/4 + 
 
 **Scope, stated once.** Every statement below is about **characters** (colourings `x ↦ ⌊kθ(x)⌋`), never about `χ`: at four colours emptiness
 of `Θ₄` is one-sided (G71), and a non-character colouring is untouched. A result on `Q` or `R_S` is a result on the rational unit circle; it
-reaches a real field `F` only through the gluing (FS89-S0A-2) and at that entry's grade. "Not found in print" is not "new": `[Berend1984]`
-(TAMS 286), the nearest theorem, was saved by Kooshi at the close and is being read statement by statement (`plans/FS89-PA-berend1984.md`);
-every novelty line below is **pending that reading** (plan §R-close.6).
+reaches a real field `F` only through the gluing (FS89-S0A-2) and at that entry's grade. "Not found in print" is not "new". **Prior art,
+read:** `[Berend1983]` and `[Berend1984]` (TAMS 280 and 286), saved by Kooshi at the close, were read in full by a prior-art reader
+(`plans/FS89-PA-berend1984.md`, verdicts in its §4): **none of FS-89's statements is in them or in `[Berend1984min]`; the method is Berend's**
+— D1-L3's above all, which is 1984 §II.3 written out `p`-adically. "New" still waits on Berend's later citers, of which the close's gate
+opened what it could reach (plan §R-close.6).
 
 ## §1. The gluing and its consequences (verifier G, blind; the owner)
 
@@ -114,8 +117,10 @@ none. *Kernel:* declined.
 T5; `RS₄({5})` false. *Prior art:* the heteroclinic points of algebraic `ℤ^d`-actions (`[LindSchmidt1999]`, vocabulary). *Kernel:* declined.
 
 **FS89-S0B-T4 — A band character reading `τ₁ + λ` forward and `τ₂ + λ` backward, `τ₁ ≠ τ₂`, is not in `T + A`; hence `Θ₄(U₅) ⊄ T + A` and `RS₄({5})` is false. [hand; S0B; the owner (density, inventory item 16)]**
-*Proof:* S0B §3. *Proof verdict:* closes. *Rests on it:* "one prime is not enough" (row 96). *Prior art:* `[Berend1984min]` Lemma 3.3 (one
-parameter has minimal sets of positive dimension) is the phenomenon's general form. *Kernel:* declined.
+*Proof:* S0B §3. *Proof verdict:* closes. *Rests on it:* "one prime is not enough" (row 97). *Prior art:* `[Berend1984min]` Lemma 3.3 (one
+parameter has minimal sets of positive dimension) is the phenomenon's general form; `[Berend1984]` Lemma II.6 and Prop. II.3 (and `[Berend1983]`
+Lemma 3.6) build a one-parameter orbit **homoclinic** to 0 — S0B's points are **heteroclinic** between two torsion leaves inside a band set,
+not found as stated. *Kernel:* declined.
 
 **FS89-S0B-T5 — From `e₀ = q` the forward orbits form a perfect tree: continuum many non-`T + A` points, with a Cantor fibre of irrational 5-adic parts. [hand, exact prefixes; S0B]**
 *Proof:* S0B §3; `tools/fs89_s0b_switching.py`, `data/fs89/s0b/switching-prefixes.txt`. *Proof verdict:* closes. *Rests on it:* the
@@ -184,22 +189,28 @@ The discs are disjoint in `Q̂` (`T ∩ A = 0`); their layer-0 shadows overlap, 
 **FS89-D1-L2 — Berend's case 2: if small differences in a closed `U_S`-invariant `M` have zero `S`-adic part, then `M` meets `T + A`; a minimal such `M` lies in `T + A` (= S1VB-8, verifier I's VB5, the minimal form). [hand; two derivations, independent (D, via `x∘(w_pⁿ − 1) = λ_v` on a recurrent point; verifier I blind, via finitely many cosets of `A` and `(u − 1)b_v = r`)]**
 *Proof:* S1D §2; S1VB §B1.2 (VB5), §B2; S1VB §B3 row D1-L2. *Proof verdict:* closes; D's route is shorter and gives "meets `T + A`" for any
 closed invariant set. *Rests on it:* D1-T1, D1-T2, D5-T1, S1VB-14. *Prior art:* `[Berend1984min]` Prop. 4.1, case 2, with the archimedean
-plane, which nothing contracts, in place of the strictly contracted subspace. *Kernel:* declined.
+plane, which nothing contracts, in place of the strictly contracted subspace; **method in print, statement not** (`[Berend1984]` Lemmas
+II.14–II.15, `[Berend1983]` Lemmas 5.1–5.2: finite kernels, finite invariant sets torsion; the kernel taken modulo `A` is not in print).
+*Kernel:* declined.
 
 **FS89-D1-L3 — Case 1 at `|S| ≥ 2`: if small differences in `M` have non-zero `S`-adic parts, then `M − M = R̂_S`; the orbit closure of any non-zero pure local element is `R̂_S` (= S1VB-10). [hand; two derivations, the second from the statement (D: expand at `v` by `w_p`, rotate by `⟨i, w_q⟩`, an open subgroup of `ℤ_v^×`, then strong approximation with `v` omitted; verifier I in B2, after seeing the statement: the same expansion and rotation based at 0, density by the annihilator of the image of `K_v` in `R_S` being 0 — verifier I's disclosure: its blind B1 did not find the difference set based at 0)]**
 Fails at rank one, as it must (Berend's Lemma 3.3; S0B-T3–T5). *Proof:* S1D §2; S1VB §B2 D1-L3; inventory items 27, 36. *Proof verdict:*
 closes; the whole milestone rests on its step from one pure local element to density. *Rests on it:* D1-T1, D1-T2, D5-T1, S1VB-14. *Prior art:*
- `[Berend1984min]` Prop. 4.1, case 1, which in print needs Furstenberg Prop. IV.1 and Berend 1983 §4 (not held); at the band neither is
-needed (D1-L4). *Kernel:* declined.
+ `[Berend1984min]` Prop. 4.1, case 1; **method in print, statement not**: `[Berend1984]` §II.3 (Lemma II.7's pure local element; Lemmas
+II.8–II.11, the `p`-adic arc from two independent elements; Prop. II.4), its principle stated in words in Prop. III.4's proof (p. 527), never
+with a rotated archimedean direction present. *Kernel:* declined.
 
 **FS89-D1-L4 — The parity line: `M ⊆ Θ₄` with `θ₂ ∈ M − M` contains a corner (`2x = θ₂`); `θ₂(u) = 1/2` on every rational unit vector, so `x(u), x(u) + ½ ∈ [1/4, 3/4]` forces `x(u) ∈ {1/4, 3/4}` (= S1VB-11). [hand, two lines; D; verifier I from the statement; the owner]**
 *Proof:* S1D §2; S1VB §B2; inventory item 27. *Proof verdict:* closes. *Rests on it:* D1-T1, D1-T2, S1VB-14. *Prior art:* none (the band
-replaces Furstenberg's "`M − M` is proper"). *Kernel:* declined.
+replaces Furstenberg's "`M − M` is proper"); its band-free replacement is in print and applies verbatim (`[Berend1984]` Thm I.2 with Prop.
+II.6; FS89-PA-B2). *Kernel:* declined.
 
 **FS89-D1-T1 — `MS₄(S)` for every finite `S` with `|S| ≥ 2`: every `U_S`-minimal closed subset of `Θ₄(R_S)` is a finite torsion orbit or a finite union of leaf circles. [hand; D; verifier I (B2: TRUE from D1-L2 to L4, no finite lemma); B1's blind verdict GAP was its own route's]**
 *Proof:* S1D §2; S1VB §B2 assembly, claim 1. *Proof verdict:* closes. *Rests on it:* S1VB-5, S1VB-14. *Prior art:* `[Berend1984min]` Thm 2.1
 (MT ⟺ hyperbolic and multi-parameter) and Lemma 3.1 (isometric directions carry minimal circles, our leaves) — this is MT **modulo the
-isometric direction**, not found in print by the plan's gate or the close's (plan §R-close.6); **pending** the reading of `[Berend1984]` (TAMS). *Kernel:* declined.
+isometric direction**. **Method in print, statement not:** its skeleton is `[Berend1984]` Prop. II.7 (p. 523) and `[Berend1983]` Prop. 5.1,
+whose conclusion (every minimal set finite torsion) is false for this action; not found by the plan's gate or the close's (plan §R-close.6).
+*Kernel:* declined.
 
 **FS89-S1VB-1 — Lemma E (expansion): small differences with a non-zero local part in a closed invariant set expand to a pure local difference. [hand; verifier I blind]**
 *Proof:* S1VB §B1.0. *Proof verdict:* closes. *Rests on it:* VB1, VB3. *Prior art:* the expansion step of `[Berend1984min]` Prop. 4.1. *Kernel:* declined.
@@ -255,7 +266,9 @@ D2-T1. *Prior art:* as D1-T1. *Kernel:* declined.
 
 **FS89-S1VB-14 — `RS₄(S)` and `MS₄(S)` for every finite `S` with `|S| ≥ 2`; `RS₅(S)` and `MS₅(S)` for every `S ∋ 5` with `|S| ≥ 2`; with VB4, RQ₄ and RQ₅; no finite computation. [hand; verifier I's assembly of D's D1-L2 to L4 and D5-L1 with its own VB1 and VB4 (the lemmas each derived twice, as their entries say)]**
 *Proof:* S1VB §B2 "The assembly" and its consequence; §B3. *Proof verdict:* closes. *Rests on it:* rows 95–96's scope "every `|S| ≥ 2`".
-*Prior art:* as D1-T1; not found in print (plan §R-close.6). *Kernel:* declined.
+*Prior art:* **not in `[Berend1983]`, `[Berend1984]` or `[Berend1984min]`**: VB1 has no analogue there (Berend's point step, the end of
+`[Berend1984]` Thm II.1's proof, needs no continuous part), though Lemma JC's joint closure is the device of Lemma II.10's proof; the band
+sweep SW is ours. Not found by the close's gate (plan §R-close.6). *Kernel:* declined.
 
 ## §7. All primes (D; verifier I)
 
@@ -264,9 +277,10 @@ D2-T1. *Prior art:* as D1-T1. *Kernel:* declined.
 *Kernel:* declined.
 
 **FS89-D2-T1 — RQ₄: `Θ₄(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`; with S1V-5, `Θ₄(Q)` is exactly the 13 discs and 16 points of U2, an explicit compact set. [hand + tools exact; D (D2-L1 with `R = R₆₅`, `N` from D1-C2); verifier I (every lemma re-derived, from the statements; a second assembly by VB1 and VB4 needing no finite lemma); inventory item 36]**
-*Proof:* S1D §4; S1VB §B2 assembly, claim 4. *Proof verdict:* closes. *Rests on it:* FS89-CL2, CL3, CL4; row 95. *Prior art:* not found in
-print by the plan's gate (26 queries) or the close's (plan §R-close.6); **pending** the reading of `[Berend1984]` (TAMS 286), held since the
-close, whose hypotheses may be weaker than 1983's. *Kernel:* declined (no Lean this milestone; a kernel route would need the solenoid's dual and strong approximation, far from Mathlib).
+*Proof:* S1D §4; S1VB §B2 assembly, claim 4. *Proof verdict:* closes. *Rests on it:* FS89-CL2, CL3, CL4; row 95. *Prior art:* **not in
+`[Berend1983]`, `[Berend1984]` or `[Berend1984min]`, all read in full; the method is Berend's** (no band and no `T + A` in print; the
+finite-to-infinite-type passage is a method analogue of `[Berend1984]` Ch. IV, Lemma IV.2 and Prop. IV.1, while the archimedean alignment
+on `R ∩ uR` is not in print); not found by the plan's gate (26 queries) or the close's (plan §R-close.6). *Kernel:* declined (no Lean this milestone; a kernel route would need the solenoid's dual and strong approximation, far from Mathlib).
 
 ## §8. Five colours (D; verifier I)
 
@@ -320,6 +334,17 @@ not known to carry it). *Proof:* this entry. *Proof verdict:* closes at the comp
 *Proof:* this entry. *Proof verdict:* closes at the composed grade. *Rests on it:* row 96; FS-83 at `k = 5`, FS-59, FS-64's windowless case.
 *Prior art:* none. *Kernel:* declined.
 
+## §9a. The prior-art reader (`plans/FS89-PA-berend1984.md`, "Theorems this phase proved")
+
+**FS89-PA-B1 — `(R̂_S, U_S)` in Berend's coordinates: `R̂_S = Ω_a²` (`a = ∏_{p∈S} p`) and `Q̂ = Ω_P²` (his Ch. IV); the action meets his irreducibility condition (1) at every `S ≠ ∅`, his multi-parameter condition (3) exactly when `|S| ≥ 2`, and his hyperbolicity (2) at every finite place but not at `∞`; it is an ℱ-flow (`[Berend1984]` Prop. II.6: `w_p` ergodic, every determinant 1) at every finite `S`. [hand, a hypothesis check; the reader, one mind]**
+*Proof:* the reader's §2 table. *Proof verdict:* closes. *Rests on it:* PA-B2; the prior-art verdicts (D1-L3's hypothesis `|S| ≥ 2` *is*
+Berend's condition (3)). *Prior art:* the frame is `[Berend1984]`'s. *Kernel:* declined.
+
+**FS89-PA-B2 — Band-free minimal sets: for every finite `S` with `|S| ≥ 2`, every `U_S`-minimal closed `M ⊊ R̂_S` lies in `T + A` (case 2 by D1-L2; case 1 gives `M − M = R̂_S` by D1-L3, hence `M = R̂_S` by `[Berend1984]` Thm I.2 with Prop. II.6 — Furstenberg's Prop. IV.1 in held form). So `MS_k(S)` holds at every band `k`, and D1-L4 and D5-L1 are not needed for it. [hand; the reader, one mind, unverified; resting on D1-L2 and D1-L3, each derived twice]**
+*Proof:* the reader's §5 (a)–(b). *Proof verdict:* closes as a composition; the one new input (Thm I.2 with Prop. II.6) is in print and its
+hypotheses are PA-B1's. *Rests on it:* the stub FS-91 (band rigidity at six colours needs only the point step). *Prior art:* `[Berend1984]`
+Thm I.2; `[Berend1983]` p. 530 quotes Furstenberg's Prop. IV.1 for commutative toral semigroups. *Kernel:* declined.
+
 ## §10. Conjectures and readings this milestone stated and did not prove (the close's sweep)
 
 | statement | who | status at the close | where it goes |
@@ -330,6 +355,6 @@ not known to carry it). *Proof:* this entry. *Proof verdict:* closes at the comp
 | U4: 13 kills the switching family | S0B's reading | **proved** (D1-T2) | done |
 | U1's hypothesis "may fail at every `S`" | verifier H's aside | **false**: S1VB-14 proves it at every `|S| ≥ 2` | done |
 | the band-1/6 exit lemma: are the corner leaves (radius 1/12) and the order-6 points over `X₃` isolated at band 1/6? | D (§5 "Where it stops") | unchecked | stub FS-91 |
-| **the close planner's reading:** the route of S1VB-14 needs no isolation lemma, and its band restriction sits only in Lemma SW (a sweep of step `1/p ≤ 1/5` against the excluded interval of width `2/k`, which it meets for every `k ≤ 9`) and in the parity line (`x, x + ½ ∈ B_k` ⟹ `2x ∈ B_{k/2}`, i.e. `Θ₃` at `k = 6`, `Θ₄` at `k = 8`, both rigid). So `RS₆(S)` and `RS₈(S)` at `|S| ≥ 2` may follow by the same assembly | the close planner, one mind, **unchecked**: VB1's and SW's proofs were not re-read at band 1/6 | reading; the first thing FS-91 checks | stub FS-91 |
+| **the close planner's reading:** the route of S1VB-14 needs no isolation lemma, and its band restriction sits only in Lemma SW (a sweep of step `1/p ≤ 1/5` against the excluded interval of width `2/k`, which it meets for every `k ≤ 9`) and in the parity line (`x, x + ½ ∈ B_k` ⟹ `2x ∈ B_{k/2}`, i.e. `Θ₃` at `k = 6`, `Θ₄` at `k = 8`, both rigid). So `RS₆(S)` and `RS₈(S)` at `|S| ≥ 2` may follow by the same assembly | the close planner, one mind, **unchecked**: VB1's and SW's proofs were not re-read at band 1/6 | reading; the first thing FS-91 checks. **The Berend reader reached the same observation from Lemma SW (PA-B3: `RS_k(S)` for every `|S| ≥ 2` and `k < 2·min S`, so `RQ_k` for every `k ≤ 9` via `{5, 13}`, and `RS₅(S)` without `5 ∈ S`, with PA-B2 in place of D1-L4/D5-L1)** — the same observation twice, not independent evidence; unverified | stub FS-91, as its first question for a verifier |
 | the four-colour band set of `ℤ[U₅]` has entropy at most about `log 1.7` per layer, fibre dimension at most about 0.33 | S0B §6 | measured bound, not a value | declined (no consumer) |
 | G76's reading "the obstruction is the real place" | FS-86 | **for characters, answered**: at rank ≥ 2 the real place is not an obstruction modulo `A` | G76 rewritten |
