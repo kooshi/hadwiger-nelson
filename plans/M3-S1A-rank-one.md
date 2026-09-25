@@ -210,3 +210,13 @@ In an all-rigid shift: every periodic point is gap-free with all Kempe component
 window carries at least three colours (so `G̃ → G_lab` is a free quotient on phases), and a wall leaves `C` only at a left gap of its
 periodic point where a second colour survives (A-K2). **Nothing so far uses `k = 4`**: K0-loc, A-K1 (with `k`), A-K2, A-Kq and the
 equivalences hold for every `k`. At `k = 3` walls are excluded by FS73-T24 (density), a height argument with no analogue at four.
+
+---
+
+## Stage 3 — in progress (registration written before the one derived check)
+
+**Registered 2026-09-25, before the run (P-J18-DC):** the derived set `D′ = {1, 5, 7, 10, 13, 27, 33}` — the Δ-completion at `M = 40`
+(twice the common period 20) of the BFS wall point from rigid phase 81 to rigid phase 49 of the control `X₄({1,5,7,10})` (§3.2) — has
+**every phase rigid with probability 0.20** (which would be A-C, with the wall `81 → 49` surviving by construction), and a non-rigid
+phase with probability 0.80. Both outcomes reachable: the wall and its two rigid ends survive by construction (§3.2), and nothing
+forces the control's entropic phase to survive `13, 27, 33`. Priced first: 20,023 canonical proper words of length 33.
