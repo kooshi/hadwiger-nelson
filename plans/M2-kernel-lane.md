@@ -361,3 +361,37 @@ plus a page; the stripe lemma is a combinatorial induction. Stage 3 prices both 
 8. **J17 shrinks to a write-up**: the bridge is `[Madore2015]` ¶5.4's; the novelty is nil, the value is citation and pricing. Its blind check
    J17V is offered as optional (HELD FOR THE OWNER).
 9. **No solver anywhere in the lane**: the 18-vertex refusal's second oracle is the gadget algebra by `decide`, not a CaDiCaL certificate.
+
+## Stage 3 — SAVED
+
+### 3.1 The skeletons (`data/m2/j04/`, each elaborating with `scripts/slot.py --mem 16 --cpus 4 -- lake env lean <file>`, `autoImplicit` off in-file)
+
+| file | target | declarations | `sorry` left | closed by J04 (the two-leaf price) | elaboration (desktop, one run) |
+|---|---|---|---|---|---|
+| `K1Chain.lean` | K1 = J14 | 20 | 16 lines (13 declarations) | `junction_zero`, `junction_succ`, `junction_last`, `chainDrawing_b` (leaf 1: consecutive copies share their junction), `copyHom` (leaf 2: each copy is a hom into the induced chain graph) — **first elaboration, no error** after two name fixes (`rhombus` is not in `Gadget`; `seamField` is `FieldWall4.seamField`) | 1.9 s wall, 3.4 GB peak |
+| `K2Transcendental.lean` | K2 = J15 | 12 | 7 declarations | `planeOverEquiv`, `dist_eq_one_iff_quadrance`, `planeOverIso` (leaf A: `(unitDistance ℂ).induce (planeOver L) ≃g unitQuadrance L`), `unitQuadrance_colorable_of_subring` (leaf B: coset reduction through a subring holding every unit vector, by `cosetResidue`) — **first elaboration, zero errors** (two linter nits fixed) | 2.5 s wall, 3.4 GB peak |
+| `K3PrimeInversion.lean` | K3 option B = J16 | 5 | 2 declarations | `normOne_subset_iff_stable` (leaf 1: a valuation subring holds every norm-one element iff it is σ-stable — the three-line converse is new), `inv_mem_iff_forall_valuationSubring` (leaf 2: `x⁻¹ ∈ R` iff in every valuation subring above `R`, via `Ideal.image_subset_nonunits_valuationSubring`) — **second elaboration** (one argument-order fix) | ~2 s wall |
+| `K3Stripe.lean` | K3 option A | 7 | 1 declaration + one placeholder | leaf S1, the wheel classification: all `4⁷ = 16,384` wheels checked by `decide +kernel` through nested `List.all` (a flat `List.range 16384` hit `maxRecDepth` — § The kernel's cost model's rule, met again); **plant** `diag == 3` only → `decide` proves the proposition false, so the check can go red for its reason | 18.4 s wall, 17.0 s user, 9.8 GB peak (whole-`Mathlib` import) |
+
+### 3.2 The prices, from the leaves (never from a table)
+
+| target | leaves closed / named | what the first two leaves measured | price of the rest | verdict |
+|---|---|---|---|---|
+| **K1** (J14) | 5 closed / 13 named | the core geometry (junctions, copy homs) is one elaboration per leaf; the transport API was not needed (a copy's placement is a hom into the induced graph directly) | `not_colorable_chain` (an induction over junctions, ~30 lines); `planeOverSubring` (~20); the field form (~25); the instance — `rhombusX_unit`, `sixUnits` with norm and sum identities over `√2, √3` (the riskiest: `Complex.ext_iff`, `Real.sq_sqrt`, ~40–60 lines), field membership in `fieldOfRadicands {2, 3}` (~20); the gadget oracle (six `Gadget.transport`s, `inter`, `decide`; the `survivors` cost is unmeasured); the four-colouring (~15); `G4` conditional with the eight `w`-multipliers over `√7` (~40–60) | **one job, about 3 hours; 300–350 lines** |
+| **K2** (J15) | 4 closed / 7 named | the two generic leaves (the coordinate isomorphism and the coset reduction) were each one elaboration | the adjunction as the `fieldRange` of `RatFunc.liftRingHom` (~15); `le_adjoinTranscendental` (~10); **the one real leaf**: the `t`-integral subring, evaluation at 0 as a ring hom, and the integrality of unit vectors (100–200 lines; two routes: Laurent series with `HahnSeries.coeff_mul_order_add_order` and `IsFormallyReal`, or polynomials with the `X`-adic content — J15 prices both from their first leaf); assembly (~30); the Liouville inhabitant (~20) | **one job, 2.5–3 hours, medium risk at one named leaf** |
+| **K3-B** (FS-47, valuation form) | 2 closed / 2 named | Mathlib carries the "if" in one lemma; the converse of `normOne_subset_valuationSubring` is three lines | the theorem (a composition, ~10 lines) and a spec example (`1/5 ∈ ℤ[U]` over `ℂ`, ~15) | **about one hour — below one job** |
+| **K3-A** (FS-87 stripe lemma) | 1 closed / S2–S5 named | a finite local leaf costs ~15 s of kernel per `4⁷` patterns | S2 propagation (10 points: `4¹⁰ ≈ 10⁶` patterns ≈ 16 kernel-minutes and ~10 GB by the S1 rate, or fewer by pinning colours); the line induction and line-to-line induction over `ℤ` (150–250 lines); the type-O case (`c(x + 2u) = c(x)`, factoring through `(ℤ/2)²`, ~80); the `Striped` assembly (~60) | **4–6 hours, 400–500 lines — more than one job** |
+
+**The choice for J16, with the four parts:** J16 is **FS-47's prime inversion in valuation form**, then its two consequences in the same
+form (the 2-adic wall: `1/2 ∈ ℤ[U]` iff no σ-stable valuation subring has 2 in its maximal ideal; and the explicit `1/2 ∈ ℤ[U]` over K(√7),
+whence `3/8`, the number J14's conditional theorem uses), then the stripe lemma's leaves S1–S2 as a start with its remainder proposed as a
+queued job. *Alternative weighed:* the stripe lemma alone, as the queue's first-named option. *Why this won:* measured prices — K3-B fits in an
+hour and K3-A does not fit in one job; the advisor's ranking (FS-47 first) agrees; and the number-field translation that K3-B leaves open is
+row 57's gap, named, not hidden. *Confidence:* high on K3-B's price (two of its four leaves are closed and the rest is a composition); medium on
+K3-A's (S2's pattern count is an estimate from S1's rate).
+
+### 3.3 §X additions
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X4 | none — the wheel check is a complete exact enumeration of a set a derivation fixed (`4⁷` wheels), run in the kernel, logged here as the ban's "at the edge" case | — |
