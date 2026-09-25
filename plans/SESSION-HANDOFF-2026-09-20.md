@@ -119,6 +119,7 @@ This is a second opinion, never the certificate: **the certificate is `tools/fs5
   (a printed ℚ³ sibling of the 3-denominator rule — second-hand); a new stub at the close, *3-colourings of tight ×
   non-3-colourable products* (FS-58 D3.4's repair: the measured fact is NOT Greenwell–Lovász, is false in general — C₅ × K₄ — and
   true under gap-freedom/tightness); FS-59's stub gets the size-law reading once E.4 delivers the number.
+  *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §3): "true under gap-freedom/tightness" overstates — the repaired statement is FS-67's open question, proved in print only when the tight factor is `K_k` or a power `K_k^s` (Greenwell–Lovász 1974, Thm 1; `[Larose2002]`).]*
 
 ## 6. Open items that are Kooshi's
 

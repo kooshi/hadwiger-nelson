@@ -61,6 +61,8 @@ categorical product); it is classical and no novelty is claimed for it. What is 
 quotient of the K-fabric by its own doubling *is* `K₄ × K₄`, with the two factors being the two
 primes above 2 — the combinatorial rigidity and the arithmetic are literally the same object.
 
+*[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §0 item 2, §3; the paper read in full): the fact used holds, but the gloss names the wrong result. `K₄ × K₄` is not uniquely 4-colourable: it has two 4-colourings up to relabelling, the two projections (48 labelled). That is Greenwell–Lovász 1974's Corollary 3 (p. 336, `n = 4`, `k = 2`: "(K_n)^k has exactly k n-colourings", for `n ≥ 3`). Their "uniquely `n`-colourable" statement is Corollary 1 — `K_n × G` with `G` connected and `χ(G) > n` — which does not apply here, since `χ(K₄) = 4`.]*
+
 ## 3. The dichotomy, and what it says about distances
 
 **Corollary.** In every proper 4-colouring of the K-fabric, either some `√3`-pair is monochromatic,

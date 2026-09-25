@@ -26,6 +26,7 @@ land, and what arithmetic decides it?
   of norm-one elements, `[AkhtariVaalerWidmer2025]`; `[DutourSikiricEtAl2021]` for the fixed-height bound) is in `BIBLIOGRAPHY.md`.
 * **Prior-art owed:** the multiplicativity of `K₃` (3-colourings of `G × H` with `χ(H) > 3` factor through `G`; Häggkvist–Hell–Miller–
   Neumann-Lara 1988, Greenwell–Lovász 1974) behind FS-58 D3.4; Johnson's 2000 status report and `[Johnson2006]` for any printed value.
+  *[At FS-89's close, 2026-09-25: the Greenwell–Lovász reading is paid (`plans/PA-products-GL1974-LT2002.md`); it settles the product statement for tight factors `K_k^s` only, not FS-58's `S₁`; FS-67 holds what is left.]*
 
 ## 3. Expectations and clauses
 

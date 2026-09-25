@@ -802,6 +802,7 @@ a cast-free census, a literature check; all controls green; no crashes)
   every obstruction is unit-distance realizability. Consequence (iii) overclaimed: the lists
   still carry the palette quotient, the seed's automorphisms, and the cluster structure the
   enumeration exploits — only colour-side POINTWISE operations are dead.
+  *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §0 item 6, §3; both papers read in full): "strongly projective graphs" is not in Larose–Tardif 2002 (`[LaroseTardif2002]`, J. Graph Theory 40, a paper on powers, which never uses the phrase) — it is B. Larose's single-author "Strongly projective graphs", Can. J. Math. 54 (2002) 757–768 (`[Larose2002]`, not held, its review read). The fact used here — every polymorphism of `K₅` is a projection up to a palette permutation — is Greenwell–Lovász 1974's Corollary 3 at `n = 5`. The Inv–Pol consequence is the general Galois correspondence given that fact, in neither paper; and "trivial polymorphism clone" is inexact: `Pol(K₅)` is the permuted projections, and only its idempotent part is trivial.]*
 
 ### The constructive centrepiece: the spare-colour lemma (adopted as an M51 kernel opener)
 

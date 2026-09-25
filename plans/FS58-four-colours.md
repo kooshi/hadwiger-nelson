@@ -175,6 +175,7 @@ an edge direction), and `R = ℤ[U]` the ring the unit vectors of `F(i)` generat
    product of levels; the relevant graph-theoretic fact — 3-colourings of `G × H` with `χ(H) > 3` factor through `G` — is a
    multiplicativity-type property of `K₃` whose prior art (Häggkvist–Hell–Miller–Neumann-Lara 1988, Greenwell–Lovász 1974 for `K_n`
    factors) is owed a reading before it is cited. The lifting step (every circle point modulo `𝔮^m` and `3^m` lifts jointly) stays.
+   *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §3–§4): Greenwell–Lovász 1974 is read; its Theorem 1 covers `K_n × G` for connected gap-free `G`, so FS-67 for tight factors `K_k^s`, but not `S₁`, which is no direct power of `K₃`. The reading debt stays for HHMN 1988.]*
 5. **The dichotomy, by compactness.** A finite forcer of `(p, p + 3u)` among 3-integral graphs exists **iff `G₃` forces it** (if every
    finite subgraph had a separating colouring, a limit colouring of `G₃` would separate it). So route C over 3-integral forcers asks one
    question per field: **is `G₃` rigid at three colours?** A non-affine 3-colouring of `G₃`, if one exists, is aperiodic (4.).

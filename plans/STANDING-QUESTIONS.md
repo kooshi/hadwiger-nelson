@@ -110,6 +110,7 @@ continuation is `plans/M51-descent-engine.md`; the gadget question is
   obstruction to gadget existence is unit-distance realizability** (the field wall, G1). NOT
   licensed: "the lists have no exploitable structure" — they keep the palette quotient, the
   seed's automorphisms, and the cluster structure the cube enumeration exploits.
+  *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §3): the second citation has the wrong authors — "Strongly projective graphs", Canad. J. Math. 54 (2002) 757–768, is B. Larose's alone (`[Larose2002]`, not held, its review read); Larose–Tardif 2002 (`[LaroseTardif2002]`, J. Graph Theory 40) is a different paper and never uses the phrase. The projectivity fact itself is Greenwell–Lovász 1974's Corollary 3 (`n = 5`: `(K₅)^k` has exactly `k` five-colourings up to relabelling). "Trivial polymorphism clone" is inexact: only its idempotent part is trivial.]*
 * **T7 — the phase monitor** [instrument, armed]. One SAT ask per commit: is the object's pure
   unit part still 4-colourable? By K1 the answer flips before the descent ends, and the
   flipping commit holds a NEW 5-chromatic unit-distance graph (glue-lattice-grown — no

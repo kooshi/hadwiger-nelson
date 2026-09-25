@@ -153,7 +153,7 @@ doubling quotient with `K₄ × K₄` (the two factors being the two primes abov
 `ti:"chromatic number" & ab:"categorical product" & ab:"uniquely colorable"` (0 hits recorded — not re-queried in
 this batch after the source's own attribution; check owed: the Greenwell–Lovász citation). *Kernel:* declined (no
 Lean consumer named; the mechanism is subsumed in spirit by `CLAUDE.md` G54's tight/slack classifier and FS-70's
-periodic-colouring machinery, neither of which cites this theorem).
+periodic-colouring machinery, neither of which cites this theorem). *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §0 item 2, §3; the paper read in full): the `K₄ × K₄` step holds, but not as "`K_n` is uniquely `n`-colourable in the categorical product" — `K₄ × K₄` has two 4-colourings up to relabelling (48 labelled, as stated), which is `[GreenwellLovasz1974]` Corollary 3 (p. 336, `n = 4`, `k = 2`); the uniqueness statement is their Corollary 1 and needs `χ > n`. The check owed above is paid: the citation holds, as Corollary 3.]*
 
 **MASCOT-T7 — The cross-edge theorem of a twisted lattice pair, and the forced field of the pinning gadget.
 [hand; Coxeter, 2026-09-08]** Let `d > 0` with `d²` a Loeschian integer, `ρ_d = (2d²−1 + i√(4d²−1))/(2d²)`,

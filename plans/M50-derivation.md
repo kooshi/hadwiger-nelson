@@ -105,7 +105,7 @@ not a Lean structure.
   from old ones; (ii) no colour-side algebraic obstruction to a χ ≥ 6 gadget can exist, only geometric
   ones; (iii) separating-colouring lists have no exploitable algebraic closure structure — are the
   project's own corollaries of an unread theorem, filed as *readings*, not theorems, pending the
-  check owed against the two papers.
+  check owed against the two papers. *[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §0 item 6, §3; both papers read in full): the check is paid. The base fact holds: `[GreenwellLovasz1974]` Corollary 3 at `n = 5`. "Strongly projective" is misattributed: it is `[Larose2002]` (Larose alone, Can. J. Math. 54 (2002) 757–768; not held, its review read), not `[LaroseTardif2002]`, which never uses the phrase. The Inv–Pol consequence is the general Galois correspondence given Corollary 3, in neither paper, and "trivial polymorphism clone" is inexact (`Pol(K₅)` is the permuted projections; only its idempotent part is trivial). The reader judges the `S₅` consequence promotable from reading to hand grade on that basis; this close notes it and leaves the grades above as filed.]*
 - **§R5's exact geometric observations** (the blind centres v58/v115, the metapivot hexagon, the
   four-point total pigeonhole, the full forcing sweep's fifteen minimal 4-set pigeonholes) are exact,
   complete-enumeration checks of Kooshi's own hand observations on ONE object (`H`) — genuinely
@@ -130,7 +130,7 @@ not a Lean structure.
 
 - K₅'s projectivity and its "strongly projective" strengthening: `[GreenwellLovasz1974]`,
   `[LaroseTardif2002]` — new bibliography row added (§ R.4, item 11) this commit; both remain "not
-  held; not read", so the consequences above stay *readings* pending a read.
+  held; not read", so the consequences above stay *readings* pending a read. *[At FS-89's close, 2026-09-25: both are now held and read in full (`plans/PA-products-GL1974-LT2002.md`); the "strongly projective" strengthening is `[Larose2002]`'s, not `[LaroseTardif2002]`'s, and the row is § R.4 item 14 — see the note above.]*
 
 ## Kernel already, one milestone later (found while tracing the seed for T1)
 

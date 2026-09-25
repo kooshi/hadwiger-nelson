@@ -79,6 +79,7 @@ Neumann-Lara (1988) and Greenwell–Lovász (1974) are named but unread; zbMATH 
 number" & ab:"tensor product"` (0 hits) and `ab:"Hedetniemi" & ab:"three colourable"` (0 hits) — this specific three-colour
 multiplicativity question was not found in print; FS-67's stub is the standing target. *Kernel:* declined — the open
 half (FS-67) is what would need a kernel target, not this factorisation lemma.
+*[Correction at FS-89's close, 2026-09-25, from the products reader (`plans/PA-products-GL1974-LT2002.md` §3–§4): Greenwell–Lovász 1974 is now read in full, so "unread" is stale for it (Häggkvist–Hell–Miller–Neumann-Lara 1988 stays unread). It does not reach the claim here: its Theorem 1 settles `K_n × G` for connected gap-free `G`, hence FS-67 for tight factors `K_k^s` (among them `UD(𝔽₃, 2) ≅ K₃ × K₃`), but `S₁` (81 vertices, degree 8) is no direct power of `K₃` (`K₃⁴` has degree 16).]*
 
 **FS58-T4 — The finite/infinite forcing dichotomy, by compactness. [hand]** For the countably infinite graph `G₃`
 (3-integral unit vectors of `F²`) with an exhausting chain of finite subgraphs: a difference `δ` is forced equal at three
