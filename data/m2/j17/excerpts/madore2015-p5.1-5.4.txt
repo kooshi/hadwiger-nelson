@@ -1,0 +1,134 @@
+23 + 4 33 is a unit having inverse 23 − 4 33).
+
+
+5 Remarks on algebraically and real closed fields
+¶5.1. In the introduction, we mention the question of computing χ(Cd ). In fact, for
+algebraically closed fields E, the value of χ(E d ) depends only on the characteristic p
+of E and not on the field E itself. Indeed, the finite graphs G for which there exists
+a graph homomorphism G → Γ(E d ) with E algebraically closed depends only on the
+characteristic of E (and, of course, on d).
+    Here is one way of seeing this fact: if E is any field, for any finite graph G with
+N vertices, saying that there does not exist a graph homomorphism G → Γ(E d )
+
+                                            12
+means that the set of (Nd)-tuples of elements (xγ,i ) of E, indexed by the vertices
+γ of G and 1 ≤ i ≤ d, subject to the relations (xγ ′ ,1 − xγ,1 )2 + · · · + (xγ ′ ,d −
+xγ,d )2 − 1 = 0 for each edge {γ, γ ′} of G, is empty. Now if E is algebraically
+closed, by Hilbert’s Nullstellensatz, this is equivalent to saying that the polynomials
+h{γ,γ ′ } := (xγ ′ ,1 − xγ,1 )2 + · · · + (xγ ′ ,d − xγ,d )2 − 1 (again, where {γ, γ ′ } ranges over
+the set E(G) of edges of G) generateP             the unit ideal of the polynomial ring E[(xγ,i )]
+in Nd variables (i.e., that we can write {γ,γ ′ }∈E(G) g{γ,γ ′ } h{γ,γ ′ } = 1 for some g{γ,γ ′ } ∈
+E[(xP  γ,i )]). But this depends only on the characteristic. Indeed, if there is a combina-
+tion {γ,γ ′ }∈E(G) g{γ,γ ′ } h{γ,γ ′ } = 1 then, for any Z-linear form λ : E → F such that
+                        P
+λ(1) = 1, we have {γ,γ ′ }∈E(G) λ(g{γ,γ ′ } ) h{γ,γ ′ } = 1 where λ(g) means λ is applied to
+all coefficients of g (note that h{γ,γ ′ } has integer coefficients!); now if E and F are two
+algebraically closed fields of the same characteristic, we can obviously find such λ.
+     Another possible proof notes that the statement that there does, or does not, exist
+a graph homomorphism G → Γ(E d ) is a first-order statement when interpreted in the
+field E, and the (first-order) theory of algebraically closed fields of fixed characteris-
+tic is complete, i.e., all of its models are elementarily equivalent, so the validity of a
+first-order statement does not depend on the model. (Cf. [Poizat 2000, theorem 6.4] or
+[Fried & Jarden 2008, chapter 9].)
+     One consequence of the above remarks is that χ(Cd ) = χ((Qalg )d ) where Qalg
+stands for the algebraic closure of Q. Furthermore, χ(Cd ) is the greatest value of the
+χ(E d ) for all fields E of characteristic zero, just as χ((Falg         d
+                                                                     p ) ) is the greatest value of
+the χ(E d ) for all fields of characteristic p. Another fact worthy of note is that, for any
+n, d the fact that χ(Cd ) ≥ n, if true, is provable (by enumerating all finite graphs G
+until one finds one with chromatic number ≥ n and which admits a homomorphism to
+Γ(Cd ), a fact which can be tested using the Nullstellensatz and Gröbner bases, or some
+other decision procedure for algebraically closed fields).
+     One could argue from the above presentation that, from an algebraic point of view,
+the question of computing χ(Cd ), or more generally, deciding which finite graphs admit
+a homomorphism to Γ(E d ) for an algebraically closed field E of a given characteristic,
+is more fundamental and perhaps more interesting than the case χ(Rd ) of real closed
+field (cf. 5.4 below) considered by the classical Hadwiger-Nelson problem. Certainly,
+if it turns out that χ(C2 ) = 4, this would be a more profound result than χ(R2 ) = 4
+(which it implies).
+¶5.2. We have explained above why the finite graphs which admit a homomorphism
+to Γ(E d ) for E an algebraically closed field depend only on (d and) the characteristic
+of E. We can state the following fact in comparing characteristic 0 to the others:
+    If G is a finite graph that admits a graph homomorphism G S   → Γ((Falg    d
+                                                                            p ) ) for in-
+                                  alg                               ∞
+finitely many primes p (where Fp refers to the algebraic closure n=1 Fpn of Fp ), then
+there is a graph homomorphism G → Γ(Cd ). Equivalently: if a given finite graph G
+admits a homomorphism to Γ(K d ) for fields K of arbitrarily large finite characteristic,
+
+
+                                                13
+then it admits one to a field of characteristic zero (which, as we have seen, can be chosen
+to be Qalg or C).
+      An algebraically minded proof proceeds as follows: if thereP   is no graph homomor-
+                     d
+phism G → Γ(C ), then as in the discussion above, we can write {γ,γ ′ }∈E(G) g{γ,γ ′ } h{γ,γ ′ } =
+1 for some g{γ,γ ′ } ∈ C[(xγ,i )] labeled by the edges of G, and h{γ,γ ′ } := (xγ ′ ,1 − xγ,1 )2 +
+· · · + (xγ ′ ,d − xγ,d )2 − 1. Using some Z-linear form λ : C → Q such that λ(1) = 1, we
+can even find the g{γ,γ ′ } with coefficients in Q. Now only finitely many primes divide
+the denominators of these g{γ,γ ′ } , and reducing modulo any other p gives a relation of
+the same sort that precludes the existence of G → Γ((Falg      d
+                                                            p ) ).
+      A more logically minded proof of the same thing proceeds by noting that the theory
+of algebraically closed fields of characteristic 0 consists of infinitely many axioms, any
+finite number of which are valid for sufficiently large characteristics. So if the inexis-
+tence4 of a graph homomorphism G → Γ(Cd ) can be proved from these axioms, it can
+be proved from finitely many of them, giving the desired conclusion.
+      This fact does not seem to have any exploitable consequence on the chromatic num-
+ber, but here is a converse that does:
+
+Proposition 5.3. Let G be a finite graph that admits a graph homomorphism G →
+Γ(Cd ). Then there is a graph homomorphism G → Γ((Fp )d ) for a set P of prime num-
+bers having positive density. In particular, we have χ(Cd ) ≤ lim supp→+∞ χ((Fp )d ).
+
+Proof. We know that G admits a homomorphism to Γ((Qalg )d ). So (since the vertices
+of the image generate a finite extension) there is one to Γ(K d ) for some finite extension
+K of Q (=number field). Given such a graph homomorphism, there are only finitely
+many primes p of OK such that the coordinates of the image vertices are not all inte-
+gers at p (“have denominators in p”). Furthermore, by the Čebotarëv density theorem
+([Neukirch 1999, theorem 13.4] or [Fried & Jarden 2008, theorem 6.3.1]), there exists
+a set P of primes with positive density such that p ∈ P iff p is unramified in K and
+there is a prime p of OK lying over p and having degree 1 (i.e., same residue field Fp ).
+(Precisely, if Σ is the Galois group over Q of the Galois closure of K, then the density of
+P is the proportion of elements of Σ whose conjugacy class meets the fixator of K.) So
+possibly removing finitely many elements from P, we obtained the required conditions:
+G admits a homomorphism to Γ((OK,p)d ) for some p such that OK,p/p ∼       = Fp .
+    Note that we do not need to use 3.2 here: we are considering an infinite set of
+primes, so one simply excludes those in which there are denominators. Note that the
+above result implies a bound for the classical Hadwiger-Nelson problem, viz. χ(Rd ) ≤
+lim supp→+∞ χ((Fp )d ), where each term of the sequence in the right hand side is finitely
+computable (although this bound is quite possibly infinite).
+   4
+     This also works for the existence of such a morphism, but the conclusion is subsumed in proposi-
+tion 5.3 anyway.
+
+
+                                                 14
+¶5.4. We can say for real closed fields much of what we said in 5.1 above for al-
+gebraically closed fields. Specifically, the finite graphs G for which there exists a
+graph homomorphism G → Γ(E d ) with E real closed do not depend on E, and in
+particular, the value of χ(E d ) is the same for all real closed field E (it depends only
+on d). This time, the proof invokes Tarski’s theorem on the decidability of the first-
+order theory of real closed fields ([Poizat 2000, theorem 6.41]). One consequence is
+that χ(Rd ) = χ((Qr−alg )d ) where Qr−alg stands for the real closure of Q (which can be
+seen as the set of real algebraic numbers)5. Another is that, for any n, d the fact that
+χ(Rd ) ≥ n, if true, is provable (by enumerating all finite graphs G until one finds one
+with chromatic number ≥ n and which admits a homomorphism to Γ(Rd ), a fact which
+can be tested using some other decision procedure for real closed fields).
+    In particular, if the answer to the classical Hadwiger-Nelson problem turns out to be
+χ(R2 ) = 7, then this fact is provable.
+
+
+6 Remarks on changing the quadratic form
+We can generalize 2.1 as follows:
+
+Definition 6.1. Let E be any field (or even any commutative ring) and q a quadratic
+form in d ≥ 1 variables over E. We define a graph Γ(E d , q) as follows: vertices
+the quadratic form. The graph Γ(E d , q) (up to isomorphism), and its chromatic number
+χ(E d , q) only depend on this signature. But note that if E is a subfield of R, in general,
+   5
+     This answers [Soifer 2009, problem 11.1], but the question is perhaps misstated since the MathSciNet
+review of [Benda & Perles 2000] (the present author does not have access to the paper itself) suggests that
+the remark above is already contained there.
+
+                                                   15

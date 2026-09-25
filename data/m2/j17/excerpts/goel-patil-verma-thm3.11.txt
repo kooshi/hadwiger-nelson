@@ -1,0 +1,29 @@
+Affine algebras over a field are important in algebraic geometry because they are coordinate rings
+of algebraic sets. The Artin-Lang theory of affine algebras (over a field K) and their associated
+function fields provide applications to real algebraic geometry. To simplify matters, we shall
+always assume that the base field K is a real closed field. The case when K is an ordered field
+can be treated by passing to the real closure of K.
+3.11 Theorem ( A r t i n - L a n g H o m o m o r p h i s m T h e o r e m ) Let K be a real closed
+field and let A be a real affine domain over K. Then there exists a K-algebra homomorphism
+ϕ : A −→ K.
+For a proof we refer the reader to the article by S. Lang [31] , see also [30]. In fact, Lang proved
+a stronger result than the above Theorem : Let V be an affine irreducible K-variety over a real
+closed field K and K[V ] = K[X1 , . . . , Xn ]/p be the coordinate ring of V over K. Then the function
+field K(V ) of V over K is formally real if and only if V has a non-singular K-rational point.
+For further use in our exposition we note the following three improved supplements of the
+Artin-Lang Homomorphism Theorem.
+say that A is unreal. A ring A is called (formally) real if for all a1 , . . . , an ∈ A, a21 +· · ·+a2n = 0 implies
+a1 = · · · = an = 0.
+We can also define these notions of reality for ideals in A. An ideal a ⊆ A is called semi-real (resp. real)
+if the residue class ring A/a is semi-real (resp. real).
+The zero ring is real but not semi-real. A nonzero real ring is a semi-real. If a non-unit ideal a in a ring A
+is real, then it is also semi-real. The characteristic of a real field is 0. The two notions of reality for fields
+and maximal ideals coincide. A field is semi-real if and only if it is real. Similarly, for every maximal
+ideal m, A/m is semi-real if and only if it is real.
+The ring R[X,Y ]/(X 2 + Y 2 ) is semi-real but not real. More generally, R[X1 , . . . , Xn ]/(X12 + · · · + Xn2 )
+                                                                   2
+                √ but not real. The ideal a = hX − 2i in the ring Q[X] is a real prime ideal, since
+is semi-real ring
+Q[X]/a ≃ Q[ 2] is a real field. If A is real, then A is reduced and every subring is also real. An integral
+domain A is real if and only if its quotient field Q(A) is real.
+For a local ring, it is convenient to introduce the third notion of reality : a local ring (A, mA ) is called

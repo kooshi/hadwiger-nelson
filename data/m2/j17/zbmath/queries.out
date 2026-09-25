@@ -1,0 +1,40 @@
+Q0-control	HTTP 200	2 hits	ab:"chromatic number" & ab:"plane" & ab:"algebraic" & ab:"de Bruijn"
+	1250.05004	2010	Discrete mathematics	
+	0612.05001	1987	Classic papers in combinatorics	
+Q1	HTTP 404	0 hits (genuine zero)	ab:"unit distance" & ab:"real closed"
+Q2	HTTP 404	0 hits (genuine zero)	ab:"chromatic number of the plane" & ab:"number field"
+Q3	HTTP 404	0 hits (genuine zero)	ab:"unit distance graph" & ab:"algebraic numbers"
+Q4	HTTP 200	1 hits	ab:"chromatic number" & ab:"real algebraic" & ab:"plane"
+	1014.00040	2003	Discrete and computational geometry. The Goodman-Pollack Festschrift	Algorithms and Combinatorics
+Q5	HTTP 200	1 hits	ab:"chromatic number" & ab:"subfield" & ab:"plane"
+	1074.05003	2002	Papers of the 9th quadrennial international conference on graph theory, combinatorics, algorithms, and applications, Kalamazoo, MI, USA, June 4--9, 2000	Electronic Notes in Discrete Mathematics
+Q6	HTTP 404	0 hits (genuine zero)	ab:"specialization" & ab:"unit distance"
+Q7	HTTP 404	0 hits (genuine zero)	ab:"real place" & ab:"chromatic"
+Q8-madore	HTTP 200	13 hits	au:"Madore, David"
+	1327.14095	2015	Calculability of étale cohomology modulo \(\ell\)	Algebra \& Number Theory
+	1167.14007	2008	Rational equivalence on cubic hypersurfaces of bad reduction	Journal of Number Theory
+	1261.94025	2010	Efficient indifferentiable hashing into ordinary elliptic curves	
+	1376.94060	2015	On existence (based on an arithmetical problem) and constructions of bent functions	
+	1056.14030	2004	Del Pezzo surfaces without rational points on a field of cohomological dimension one	Journal of the Institute of Mathematics of Jussieu
+	1073.14509	2003	Rational equivalence on cubic hypersurfaces on \(p\)-adic fields. (Équivalence rationnelle sur les hypersurfaces cubiques sur les corps \(p\) -adiques.)	Manuscripta Mathematica
+	1479.05123	2021	Coloring the Voronoi tessellation of lattices	Journal of the London Mathematical Society. Second Series
+	1133.14036	2006	Weak approximation at places of good reduction on cubic surfaces over function fields	Bulletin de la Société Mathématique de France
+	arXiv:1509.07023	2015	The Hadwiger-Nelson problem over certain fields	
+	1445.14042	2020	Anticanonical codes from del Pezzo surfaces with Picard rank one	Transactions of the American Mathematical Society
+	arXiv:math/0605662	2006	Les hypersurfaces cubiques sont séparablement rationnellement connexes	
+	arXiv:2603.19946	2026	An order-reversing embedding of Turing degrees into Arthur-Nimue-Merlin degrees	
+	0978.14032	2000	Theta divisors and the Frobenius morphism	
+Q9-rag	HTTP 404	0 hits (genuine zero)	ab:"real closed" & ab:"chromatic number"
+Q10-rag	HTTP 200	4 hits	ab:"Tarski" & ab:"chromatic number"
+	0865.01010	1997	Paul Erdős' set theory	
+	0572.05025	1985	On the chromatic number of certain highly symmetric graphs	Discrete Mathematics
+	1018.03002	2002	Relation algebras by games	Studies in Logic and the Foundations of Mathematics
+	0915.03011	1998	Chromatic-number-type theorems are logically non-trivial	Geombinatorics
+Q11-rag	HTTP 404	0 hits (genuine zero)	ab:"real algebraic numbers" & ab:"unit distance"
+Q12-poser	HTTP 200	1 hits	ab:"chromatic number" & ab:"finitely generated" & ab:"extension"
+	1421.68162	2012	Computing all maps into a sphere	
+Q13-benda-perles	HTTP 200	1 hits	an:0951.05037
+	0951.05037	2000	Colorings of metric spaces	Geombinatorics
+Q14-fischer1990	HTTP 200	2 hits	an:0703.05018 | ti:"Additive k-colorable extensions of the rational plane"
+	0744.05061	1990	Additive \(k\)-colorable extensions of the rational plane	Discrete Mathematics
+	0703.05018	1984	Difference arrays and their application in the construction of main effect plans	

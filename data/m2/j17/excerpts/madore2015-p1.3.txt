@@ -1,0 +1,15 @@
+¶1.3. It is also worth recalling the De Bruijn-Erdős theorem ([de Bruijn & Erdős 1951,
+theorem 1]), which guarantees that an infinite graph G is n-colorable iff every finite
+subgraphs of G is (i.e., χ(G) is the upper bound of the χ(G0 ) for all finite subgraphs G0
+of G). This relies on some form of the axiom of choice (which we assume throughout,
+but see section 7 for comments) and can be seen, for example, as an immediate conse-
+quence of the compactness theorem for propositional calculus (see, e.g., [Poizat 2000,
+theorem 4.5]) applied to the (infinite) set of propositional variables “vertex v has color i”
+and the (infinite) set of axioms stating that each vertex has exactly one color and no two
+adjacent vertices have the same color.
+    In the case of the Hadwiger-Nelson problem, this tells us that any lower bound on
+χ(R2 ) can be obtained by finding a finite unit-distance graph with that chromatic num-
+ber (one immediate consequence of this is that lower bounds on χ(R2 ) are necessarily
+provable: see 5.4 for details).
+
+¶1.4. There are several ways the Hadwiger-Nelson problem can be generalized. An

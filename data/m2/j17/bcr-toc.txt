@@ -1,0 +1,140 @@
+Jacek Bochnak
+Michel Coste
+Marie-Francoise Roy
+
+
+
+Real Algebraic
+Geometry
+
+
+
+
+    Springer
+Table of Contents
+
+
+
+
+Preface                                                                  V
+Introduction                                                             1
+
+1.   Ordered Fields, Real Closed Fields                                   7
+     1.1 Ordered Fields, Real Fields                                      7
+     1.2 Real Closed Fields                                               9
+     1.3 Real Closure of an Ordered Field                                14
+     1.4 The Tarski-Seidenberg Principle                                 17
+2.   Semi-algebraic Sets                                                 23
+     2.1 Algebraic and Semi-algebraic Sets                               23
+     2.2 Projection of Semi-algebraic Sets. Semi-algebraic Mappings ..   26
+     2.3 Decomposition of Semi-algebraic Sets                            30
+     2.4 Connectedness                                                   34
+     2.5 Closed and Bounded Semi-algebraic Sets. Curve-selection
+         Lemma                                                           35
+     2.6 Continuous Semi-algebraic Functions. Lojasiewicz's Inequality   42
+     2.7 Separation of Closed Semi-algebraic Sets                        46
+     2.8 Dimension of Semi-algebraic Sets                                50
+     2.9 Some Analysis over a Real Closed Field                          54
+3.   Real Algebraic Varieties                                            59
+     3.1 Real and Complex Algebraic Sets                                 59
+     3.2 Real Algebraic Varieties                                        62
+     3.3 Nonsingular Points                                              65
+     3.4 Projective Spaces and Grassmannians                             70
+     3.5 Some Useful Constructions                                       76
+4.   Real Algebra                                                        83
+     4.1 The Artin-Lang Homomorphism Theorem and the Real Null-
+         stellensatz                                                     83
+     4.2 Cones, Convex Ideals                                            86
+     4.3 Prime Cones                                                     88
+     4.4 The Positivstellensatz                                          90
+     4.5 Real Principal Ideals                                           94
+VIII     Table of Contents
+
+5.     T h e Tarski-Seidenberg Principle as a Transfer Tool               97
+       5.1 Extension of Semi-algebraic Sets                               97
+       5.2 The Füll Strength of the Tarski-Seidenberg Principle           98
+       5.3 Further Results on Extension of Semi-algebraic Sets and Map-
+             pings                                                        100
+
+6.     Hilbert's 1 7 t h Problem. Quadratic Forms                         103
+       6.1 Solution of Hilbert's 17 th Problem                            103
+       6.2 The Equivariant Version of Hilbert's 17 th Problem             106
+       6.3 Hilbert's Theorem about Positive Forms                         111
+       6.4 Quantitative Aspects of Hilbert's 17 th Problem                114
+       6.5 A Bound on the Number of Inequalities                          122
+       6.6 Bibliographie and Historical Notes                             128
+
+7.     Real Spectrum                                                      133
+       7.1 Definition and General Properties of the Real Spectrum         133
+       7.2 Real Spectrum of a Ring of Polynomial Functions                142
+       7.3 Semi-algebraic Functions on the Real Spectrum                  146
+       7.4 Semi-algebraic Families of Sets and Mappings                   149
+       7.5 Semi-algebraically Connected Components. Dimension             154
+       7.6 Orderings and Central Points                                   157
+
+8.     Nash Functions                                                     161
+       8.1 Germs of Nash Functions and Algebraic Power Series             161
+       8.2 Local Properties of Nash Functions                             167
+       8.3 Approximation of Formal Solutions of a System of Nash
+            Equations                                                     171
+       8.4 The Artin-Mazur Description of Nash Functions                  172
+       8.5 The Substitution Theorem. The Positivstellensatz for Nash
+            Functions                                                     175
+       8.6 Nash Sets, Germs of Nash Sets                                  178
+       8.7 Henselian Properties. Noetherian Property                      184
+       8.8 Efroymson's Approximation Theorem                              192
+       8.9 Tubulär Neighbourhood. Extension Theorem                       197
+       8.10 Families of Nash Functions                                    202
+
+9.     Stratifications                                                    207
+       9.1 Stratifying Families of Polynomials                            207
+       9.2 Triangulation of Semi-algebraic Sets                           216
+       9.3 Semi-algebraic Triviality of Semi-algebraic Mappings           221
+       9.4 Triangulation of Semi-algebraic Functions                      227
+       9.5 Half-branches of Algebraic Curves                              232
+       9.6 The Theorems of Sard and Bertini                               235
+       9.7 \yhitney's Conditions a and b                                  236
+                                                  Table of Contents    IX
+
+10. Real Places                                                       245
+    10.1 Real Places and Orderings                                    245
+    10.2 Real Places and Specialization in the Real Spectrum          249
+    10.3 Half-branches of Algebraic Curves Again                      254
+    10.4 Fans and Basic Semi-algebraic Sets                           256
+11. Topology of Real Algebraic Varieties                              263
+    11.1 Combinatorial Properties of Algebraic Sets                   264
+    11.2 Local Euler-Poincare Characteristic of Algebraic Sets        266
+    11.3 Fundamental Class of a Real Algebraic Variety. Algebraic Ho-
+         mology                                                       271
+    11.4 Injective Regulär Self-Mappings of an Algebraic Set          278
+    11.5 Upper Bound for the Sum of the Betti Numbers of an Alge-
+         braic Set                                                    281
+    11.6 Nonsingular Algebraic Curves in the Real Projective Plane .. 285
+    11.7 Appendix: Homology of Semi-algebraic Sets over a Real Closed
+         Field                                                        290
+12. Algebraic Vector Bundles                                           297
+    12.1 Algebraic Vector Bundles                                      297
+    12.2 Algebraic Line Bundles and the Divisor Class Group            306
+    12.3 Approximation of Continuous Sections by Algebraic Sections . 308
+    12.4 Algebraic Approximation of C°° Hypersurfaces                  312
+    12.5 Vector Bundles over Algebraic Curves and Surfaces             320
+    12.6 Algebraic C-vector Bundles                                    325
+    12.7 Nash Vector Bundles and Semi-algebraic Vector Bundles . . . . 331
+13. Polynomial or Regulär Mappings with Values in Spheres . 339
+    13.1 Polynomial Mappings from Sn into Sk                           339
+    13.2 Hopf Forms and Nonsingular Bilinear Forms                     346
+    13.3 Approximation of Mappings with Values in S1, S2 or S4 . . . . 352
+    13.4 Homotopy Classes of Mappings into Sn                          361
+    13.5 Mappings from a Product of Spheres into a Sphere              368
+14. Algebraic Models of C°° Manifolds                                 373
+    14.1 Algebraic Models of C°° Manifolds                            373
+    14.2 More about the Topology of Real Algebraic Sets               380
+15. W i t t Rings in Real Algebraic Geometry                          383
+    15.1 K0 and the Witt Ring                                         383
+    15.2 Separation of Connected Components by Signatures             392
+    15.3 Comparison between W(P(V)) and W(S°(V))                      399
+
+Bibliography                                                          407
+Index of Notation                                                     421
+Index                                                                 427
+

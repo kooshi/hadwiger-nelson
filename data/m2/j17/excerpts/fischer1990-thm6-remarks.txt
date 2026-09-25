@@ -1,0 +1,58 @@
+can be k-colored (has an additive k-coloring) iff F(cu)d can be k-colored (has an
+additive k-coloring).
+
+Proof.  If F(w)~ can be k-colored, then surely so can Fd.
+   To show the converse, since (Yis transcendental over F, the field F(a) can be
+viewed as the rational function field F(x) in the indeterminate X. Therefore, let
+
+          g(a) =   ($$ ...,‘$)         E F(a)d
+
+
+
+where C(X) and pi(X) for i = 1, . . . , d are polynomials    in F[x]. If llE((u)ll = 1,
+then it may be assumed that
+
+          i   Pi(x)2 = c(x)2
+
+and that these polynomials have no common factor.
+   Setting x = 0, one sees that if c(0) = 0, then pi(O) = 0 for all i since all the
+polynomials have real coefficients. But since x would then be a common factor of
+all the polynomials, it follows that c(0) #O. Hence,
+
+          ,(O)=($...,‘+)FF~                  and still 11c(O)11= 1
+
+because Cy=, pi(O)’ = ~(0)~.
+   In order to k-color F(a)d, it is clearly sufficient to k-color Co (F(cu)d). Since
+the evaluation at 0 is linear, the above shows that if 5((u) E Co (F(a)d), then
+E(O) E Co (Fd). Assign to E(a) the color c(O) which it receives from the assumed
+k-coloring of C,(Fd). To show that this gives a k-coloring of Co (F(cx)d) it
+suffices to show that if Ei((u), E2(~) E Co (F(~w)~) with E,(a) - E2(~) = E(o) and
+where llE(a%l = 1, then C1(a) and E2((Y1 are assigned different colors. But then
+El(O), c2(0) E Co (Fd) with El(O) - E2(0) = C(O) and where llE(O)II = 1. But since
+Fd can be k-colored, El(O) and E2(0) must receive different colors and hence also
+L(a) and E2(a).
+   To show the assertion for an additive k-coloring, it is sufficient to show that the
+given map v : Co (Fd) + G may be extended to a map V : Co (F(a)d)+ G. Using
+the notation above, if &J(r) E C, (F(a)d), then define fi(E(a)) = v(E(0)). Since
+the evaluation at 0 is a mapping of groups, so is 0. As above, if 11E(~)ll = 1, then
+~~~(0)~~= 1 and it follows that V(~((U)) = v(Q0)) f0.     Cl
+
+Remark 1. Given a finitely generated    extension E c R over Q, it may be realized
+as a purely transcendental extension of some finite algebraic extension F over Q.
+It follows from the above theorem that Ed can be k-colored iff Fd can be
+k-colored. Given a finite number of points in Rd, one may adjoin the coordinates
+of these points to form a finitely generated extension E over Q. Using the result
+                     Additive   k-colorable   extensions    of the rational plane             189
+
+
+of de Bruijn and Erdos as stated in the introduction, it follows that the question
+of the k-colorability of an arbitrary extension of Q may be reduced to that of the
+k-colorability of a finite algebraic extension of Q.
+
+Remark 2. Again using the result of de Bruijn and Erdos and the above
+theorem, it can be seen that there exist fields F0 so that F$ is maximal in respect
+to being k-colored provided that Qd is k-colorable. Because of the above
+theorem, R must also be algebraic over FO.
+
+
+3. Real quadratic   extensions     of Q

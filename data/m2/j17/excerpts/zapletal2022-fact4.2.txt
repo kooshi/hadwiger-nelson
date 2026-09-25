@@ -1,0 +1,11 @@
+
+The proof of Theorem 4.1 requires a fair amount of familiarity with real algebraic
+geometry. The following remarks record some of the facts used. The theory of
+real closed fields uses the ordering symbol, addition, multiplication, and 0, 1
+constants, and includes the axioms of ordered fields as well as axioms stating
+that every polynomial of odd degree has a root. A good reference for treatment
+of real closed fields is [7, Section 3.3]
+Fact 4.2. The theory of real closed fields admits quantifier elimination.
+Corollary 4.3. If F ⊂ R is a real closed subfield then F is an elementary
+submodel of R.
+All of the consequences of these facts needed below concern algebraic subsets of

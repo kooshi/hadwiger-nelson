@@ -1,0 +1,46 @@
+unit vectors.
+   If k is a positive integer, a k-coloring of Fd is an assignment u of the vertices to
+a set of k elements so that v(P) # v(Q) whenever IIP - QII = 1. It is easy to see
+that Fd can be k-colored iff C,(Fd) can be k-colored. A group homomorphism
+n: Co (Fd)+ G to an additive group G of order k so that ~(5) #O whenever
+llgll = 1, is said to be an additive k-coloring of Fd.
+   An additive k-coloring clearly provides a k-coloring of Fd. The converse of this
+is not true although it easy to see that Fd can be 2-colored iff it posesses an
+additive 2-coloring. It is shown, for example, that Q*, Q3 and Q4 have additive 2,
+2 and 4-colorings respectively. That these are also the chromatic numbers of the
+spaces was known to Woodall [9], Johnson [7] and to Benda and Perles [3]
+respectively. Quite generally it is shown that if (Yis a real transcendental over F,
+then Fd has an additive k-coloring iff F(cY)~ does. The same statement holds true
+
+0012-365X/90/$3.50     @ 1990, Elsevier Science Publishers     B.V. (North-Holland)
+182                                     K. G. Fischer
+
+
+for non-additive k-colorings. Additive k-colorings place restrictions on the cycles
+in Fd since these must now satisfy group identities. Thus, for example, if F2 is two
+colorable and V? $ F, then F2 contains no regular polygon except for the square.
+In view of the fact that Q2 is two-colorable, this generalizes the known result for
+the rational plane [6, p. 41.
+   This paper considers possible additive k-colorings of the plane formed by a real
+quadratic extension of Q. If N is a square free positive integer, it is shown that
+the plane Q(<M” has an additive 2-coloring iff N # 3 mod 4. That Q(<w2 has a
+two coloring in this case also follows by a recent result of Johnson’s in [8]. The
+converse answers a problem posed by him in that paper. If N 22 mod 3, it is
+shown here that Q(<w” h as an additive 3-coloring. It follows, for example, that
+the chromatic number of a(@’        *IS 3. Furthermore, if N = 3 mod 8, then Q(<w2
+has an additive 4-coloring and therefore places 4 as a bound on its chromatic
+number. In the remaining cases, it is shown that l/k E Co (Q(<w2) for 1 s k s 6.
+Hence, no additive k-coloring for these values of k can exist since if
+u : Co (Q(V@2) +a G is such a coloring, then k - v(l/k) = v(1) #O and yet
+k - G = 0. In fact, Q($%?)2 does not allow an additive k-coloring for k < 11.
+   In view of the fact that the chromatic number of R2 is at least 4 but not more
+than 7 [5, p. 161, the above example among others shows that additive k-colorings
+even on quadratic extensions of Q are too special to provide k-colorings in most
+cases. This still begs the general question, however, whether some algebraic
+criterion can be found to determine the chromatic number of F2 where F is a
+subfield of R, of finite degree over Q. That the answer to this question would
+suffice to find the chromatic number of R2 has already been noted by Benda and
+Perles in [2]. The assertion also follows easily here from the result of de Bruijn
+and Erdijs in [l] which states that the chromatic number of R2 is the same as the
+number of colors required to paint any finite number of points in R2, and the
+above theorem on adjoining transcendentals.

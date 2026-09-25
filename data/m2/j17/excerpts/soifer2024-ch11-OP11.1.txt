@@ -1,0 +1,31 @@
+ De Bruijn–Erdős Theorem assumes the axiom of choice – see later chapters of this book,
+analyzing the inﬂuence of axioms we choose for set theory on combinatorial results.
+Chapter 11
+Rational Coloring
+
+
+
+
+I would like to mention here one more direction of assault on the chromatic number of the
+plane. By placing Cartesian coordinates on the plane E2, we get an algebraic representation of
+the plane as the set of all ordered pairs (x, y) with coordinates x and y from the set R of real
+numbers and the Euclidean distance function:
+
+                                         E 2 = fðx; yÞ : x; y 2 Rg                            ð11:1Þ
+
+   Due to De Bruijn–Erdős Theorem 5.1, it sufﬁces to deal with ﬁnite subsets of E2; thus, we
+can restrict the coordinates in (11.1) to some subset of R. The problem is, which one should be
+chosen?
+   A set A is called countable if there is a one-to-one correspondence between A and the set of
+positive integers N.
+   For any set C, we deﬁne C2 as the set of all ordered pairs (c1, c2), where c1 and c2 are
+elements of C:
+
+                                       C2 = fðc1 , c2 Þ : c1 , c2 2 C g
+
+Open Problem 11.1 Find a countable subset C of the set of real numbers R such that the
+chromatic number χ(C2) is equal to the chromatic number χ(E2) of the plane.
+   The set of all algebraic numbers would work, but it would not advance our search for the
+chromatic number of the plane. The set Q of all rational numbers would not work, as Douglas
+R. Woodall showed in 1973.
+Result 11.2 (D.R. Woodall, [Woo1]). χ(Q2) = 2.
