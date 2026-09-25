@@ -6,7 +6,26 @@ from the green gate at `b1ec47a9`.*
 
 ## Theorems this phase proved
 
-*(filled at each stage; grades per `CLAUDE.md` § Notation)*
+All **[kernel]**, on axioms exactly `[propext, Classical.choice, Quot.sound]`; the `_of_descent` ones conditional on the named
+hypothesis `RealAlgebraicDescent` (true — Tarski; Artin–Lang — and unproved here).
+
+| theorem | grade | address |
+|---|---|---|
+| `realAlgebraicDescent_one` — the hypothesis in one variable (partial inhabitant) | kernel | `Proofs/HadwigerNelson/Bridge.lean` |
+| `not_rationalDescent` — the rational twin is false (`X₀² − 2`) | kernel | same |
+| `RealAlgebraicDescent.of_finite` — the hypothesis for any finite variable type | kernel | same |
+| `numberField_adjoinReal` — finitely many real algebraic numbers generate a number field | kernel | same |
+| `exists_numberField_drawing_of_descent` — **C1** | kernel, conditional | same |
+| `iSup_numberField_le_chromaticNumber_plane` — the free half of C2 | kernel | same |
+| `chromaticNumber_plane_eq_iSup_numberField_of_descent` — **C2** | kernel, conditional | same |
+| `exists_numberField_chromaticNumber_eq_plane_of_descent` — attainment | kernel, conditional | same |
+| `numberField_sup` — the compositum of two real number fields | kernel | same |
+| `chromaticNumber_plane_ne_six_iff_of_descent` — **C4** (FS62-T2) | kernel, conditional | same |
+| `Polynomial.exists_isRoot_of_odd_natDegree_real` — odd-degree real polynomials have real roots | kernel | `Proofs/HadwigerNelson/RealClosed.lean` |
+| `Real.isRealClosed` — **B0**, `IsRealClosed ℝ` | kernel | same |
+| `algebraicClosure.isRealClosed` — **B0**, general: the relative algebraic closure in a real closed field is real closed | kernel | same |
+| `isRealClosed_algebraicClosure_rat_real` — **B0**, `IsRealClosed (algebraicClosure ℚ ℝ)` | kernel | same |
+| `IsSumSq.map`, `IsSemireal.of_ringHom` — sums of squares along ring homs; semireality pulls back along any ring hom | kernel | same |
 
 ## Stage 1 — SAVED
 
@@ -57,3 +76,62 @@ attempt:
 **§3.2's day-prices for B0 and B1 were high by about two orders of magnitude**, because Mathlib at this pin already holds
 the two non-obvious inputs (the eventual-sign lemmas, and `algebraicClosure_eq_bot`'s tower integrality). Iteration peak:
 3.4 GB per `lake env lean` of `Bridge.lean` (2.4 s wall), so `--mem 10` is honest.
+
+## Stage 2 — SAVED
+
+`Proofs/HadwigerNelson/Bridge.lean` (namespace `HadwigerNelson.Bridge`). Every statement of the brief landed; changes from the
+brief's proposed Lean, each with its reason:
+
+| change | reason |
+|---|---|
+| `RealAlgebraicDescent` kept verbatim (over `Fin n`); a lemma `RealAlgebraicDescent.of_finite` gives it for any finite variable type | the drawing's variables are `ι ⊕ ι` (real and imaginary parts); renaming along `σ ≃ Fin n` (`MvPolynomial.aeval_rename`) keeps the hypothesis in the brief's shape |
+| added `adjoinReal S := (IntermediateField.adjoin ℚ S).toSubfield`, `numberField_adjoinReal` | "finitely many real algebraic numbers generate a number field" as a reusable lemma; `NumberField ↥(E.toSubfield)` is accepted from `FiniteDimensional ℚ ↥E` by defeq (`exact ⟨⟩` after `show`), no instance transport needed |
+| added `numberField_sup` (the compositum), via `Subfield.toIntermediateField` and `IntermediateField.sup_toSubfield` | C4's (⟹) takes `F′ := F ⊔ E` |
+| added `chromaticNumber_complex_le_seven`, `iSup_numberField_le_seven`, `nonempty_numberField` | the supremum is finite and its index nonempty, the two inputs of attainment |
+| the free half and C2's `≤` half stated separately | the free half has no hypothesis and is its own theorem |
+
+**Read aloud against the informal claims.**
+- `exists_numberField_drawing_of_descent`: for a finite vertex type `ι`, a graph `G` on it and a map `f : ι → ℂ` with every edge
+  at distance exactly 1, there are a subfield `F ⊆ ℝ` that is a number field and a map `g : ι → ℂ` with both coordinates of every
+  `g i` in `F` and every edge at distance exactly 1. That is C1 ("non-injective `g` allowed": nothing asks `g` injective). ✓
+- `chromaticNumber_plane_eq_iSup_numberField_of_descent`: the chromatic number of the unit-distance graph on `ℂ` (= `ℝ²`,
+  `chromaticNumber_plane_eq_complex`) equals the supremum, over subfields `F ⊆ ℝ` that are number fields, of the chromatic number
+  of the unit-distance graph induced on `F × F` (`planeOver F`). That is C2. ✓
+- `exists_numberField_chromaticNumber_eq_plane_of_descent`: one real number field attains it. §2.2's attainment. ✓
+- `chromaticNumber_plane_ne_six_iff_of_descent`: `χ(ℝ²) ≠ 6` iff for every real number field `F` with `χ(F²) = 6` there is a real
+  number field `F′ ⊇ F` with `χ(F′²) = 7`. C4 says "a finite extension `F′ ⊂ ℝ`": a number field containing `F` is a finite
+  extension of it, and conversely, so the two read the same. ✓
+- Each carries the hypothesis `hD : RealAlgebraicDescent`; its docstring says "Conditional, and not vacuous" and why, with no
+  `VACUITY DECLARED:` marker (the brief's ruling; J14's precedent).
+
+**Controls.** `realAlgebraicDescent_one` (the partial inhabitant: if a nonzero member vanishes at `x`, `x` is not algebraically
+independent, so by `algebraicIndependent_unique_type_iff` its coordinate is algebraic; else `0`); `not_rationalDescent` (the twin
+with rational coordinates, refuted by `{X₀² − 2}`: a rational `q` with `q² = 2` makes `√2 = |q|` rational, against
+`irrational_sqrt_two`). Spec examples: `edgePoly` vanishing at a unit segment and not at a length-two one; `ofCoords`; `adjoinReal`
+holding `√2`.
+
+**Why the conditional statement cannot be cheated.** The only way `RealAlgebraicDescent` enters is through
+`exists_numberField_drawing_of_descent`; the free half, the `≤ 7` and the compositum are unconditional. The twin shows that a
+hypothesis of this exact shape is not automatically consistent.
+
+### Would-have-searched log (stages 1–2)
+- None. No move here would have been a search; the one candidate (checking a drawing numerically before encoding it) was replaced
+  by the exact identity `dist_ofCoords_eq_one_iff`.
+
+## Stage 3 — SAVED
+
+`Proofs/HadwigerNelson/RealClosed.lean`, Mathlib style, imports Mathlib only (upstream candidate; docstrings say delete when
+Mathlib gains them).
+
+- `Polynomial.exists_isRoot_of_odd_natDegree_real` — a root-free odd-degree real polynomial would be, at `0`, of the sign of
+  its leading coefficient (as `0` lies above all roots, `zero_lt_eval_of_roots_lt_of_leadingCoeff_nonneg`) and of the opposite
+  sign (as `0` lies below all roots, `zero_lt_negOnePow_mul_eval_of_lt_roots_of_leadingCoeff_nonneg` with `(−1)^odd = −1`).
+- `Real.isRealClosed` — by `IsRealClosed.of_linearOrderedField` with `√x`.
+- **Stronger than the brief asked:** `algebraicClosure.isRealClosed` — for any fields `F`, `E` with `E` real closed, the relative
+  algebraic closure of `F` in `E` is real closed (semireal by the ring map into `E`; a square root, or a root of the odd-degree
+  polynomial mapped to `E`, is integral over the closure and so, by `isIntegral_trans`, in it). No order on the closure is used.
+  At `ℚ ⊆ ℝ`: `isRealClosed_algebraicClosure_rat_real`.
+- Two general lemmas on the way: `IsSumSq.map` (ring homs preserve sums of squares) and `IsSemireal.of_ringHom` (a ring with a
+  ring hom into a semireal ring is semireal — no injectivity needed; the draft asked for it and the unused-variable linter caught it).
+- Spec: `2` is a square and `−1` is not among the real algebraic numbers; `2` has a real algebraic cube root; `X² + 1` has no real
+  root (the odd-degree hypothesis is not idle).
