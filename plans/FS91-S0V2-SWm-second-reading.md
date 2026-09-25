@@ -58,6 +58,61 @@ step `p^{−m}`), so C1's number is a posterior of that pass; the C2 numbers are
 Where I expect the weight: nowhere in the sweep. If anything fails it is a scope question (what `A` means over `R_F`; what `N` is at a
 general `k`), or a line of VB1 that reads the band implicitly.
 
+## Stage 2 — SAVED
+
+### 2.1 C1, Lemma SW-m, derived blind from its statement
+
+*Conventions* (verifier I's, `plans/FS89-S1VB-verification.md` §B1.0, quoted there and not changed): a point of
+`R̂_S = (ℂ × ∏_{v|S} K_v)/Δ(R_S)` with data `(e; b)` is the character `x ↦ Re(ē x) − Σ_v ψ_v(b_v x)`, `ψ_v` the local component of the
+standard additive character (trivial on `O_v`, non-trivial on `π_v^{−1}O_v`); `c̄` is the image of `(0; c at v, 0 elsewhere)`. Every `p ∈ S`
+splits in `ℚ(i)`, so `K_v = ℚ_p`, `O_v = ℤ_p`, `π_v^s O_v = p^s ℤ_p`, and `ψ_v` is the `p`-adic fractional part `{·}_p` (up to a sign,
+which changes no image below). For `u ∈ U_S`: `(x + c̄)(u) = x(u) − ψ_v(c u)`.
+
+**Lemma SW-m, the statement as quoted in §1.1, proved at every `k ≥ 2`.** [hand + tools exact]
+
+*Proof.*
+1. **(The one line that reads `k`.)** Fix `m ≥ 1` with `2p^m > k`. Any `k` works; `k ≥ 3` is not used.
+2. `w_p = π_p/π̄_p` has valuation `+1` at one place above `p` and `−1` at the other: `p = π_p π̄_p` with `π_p`, `π̄_p` coprime, so in each
+   embedding `ℤ[i] → ℤ_p` exactly one of them has valuation 1 and the other is a unit (tool check S1, at 5, 13, 17, 29, 37). So for every
+   integer `n` there is `t` with `v(w_p^t) = n`. Take `u := w_p^t ∈ U_S` (`p ∈ S`) with `v(u) = −(m + s)`.
+3. For `c = c₀ + b`, `b ∈ p^s ℤ_p`: `(x + c̄)(u) = a − ψ_v(bu)`, `a := x(u) − ψ_v(c₀u)` fixed. As `b` runs over `p^s ℤ_p`, `bu` runs over
+   `u p^s ℤ_p = p^{−m} ℤ_p`, and `{·}_p` maps `p^{−m}ℤ_p` **onto** `p^{−m}ℤ/ℤ` (it is a homomorphism with kernel `ℤ_p`, and
+   `p^{−m}ℤ_p/ℤ_p ≅ ℤ/p^m`). So the values `(x + c̄)(u)` over the ball are the full coset `a + p^{−m}ℤ/ℤ` (tool check S2: the image
+   enumerated in exact `p`-adic arithmetic, both places, four balls including `s < 0` and `c₀ ∉ ℤ_p`, `m = 1, 2`).
+4. Every point of `ℝ/ℤ` lies within `1/(2p^m)` of that coset, so some value lies at distance `≤ 1/(2p^m) < 1/k` from 0, i.e. in the open
+   arc `(−1/k, 1/k)`, the complement of `B_k = [1/k, 1 − 1/k]`. That `x + c̄` is not in `Θ_k(R_S)`. ∎ (Tool check S3: at every
+   `k = 2..200` and each of the five primes, the least such `m` is `m_k`, and one fewer digit leaves the worst-shifted coset inside the band;
+   S4: the enumerated image of step 3, shifted adversarially, meets the arc at the largest `k` with that `m`.)
+
+**What the proof uses, and what it does not.** It uses `p ∈ S` (so that `w_p ∈ U_S`) and `v | p` split. It does **not** use `k ≥ 3`, `|S| ≥ 2`,
+the finiteness of `S` beyond the definition of `R̂_S`, `x ∈ Θ_k`, or any property of `c₀` and `s`. Its one `k`-reading line is step 1.
+
+**At `k = 2`.** `B_2 = {1/2}`; the complement is everything but `1/2`; `m = 1` already gives a coset of `p ≥ 5` points, so SW-m holds at
+`k = 2` (and so does FS-89's one-digit SW, since `2 < 2p`). The statement's `k ≥ 3` is a convention, not a hypothesis the proof needs.
+
+**Why FS-89's SW stopped at `k < 2p`, and why SW-m does not.** SW took `v(u) = −(1 + s)`, one digit: its coset has step `1/p`, and its worst
+shift sits at distance exactly `1/(2p)` from 0, which is `< 1/k` iff `k < 2p` (`k ≤ 9` at `p = 5`). A deeper power of the same `w_p` is
+just as available, and the step `p^{−m}` beats any band. Plant P1 checks the edge: at `k = 2p` the one-digit coset at its worst shift lies
+in the band (distance `1/(2p) = 1/k`, not `< 1/k`), while `m = 2` meets the arc.
+
+**Verdict C1: TRUE** — at every `k ≥ 2`, not only `k ≥ 3`. [hand + tools exact] The lemma is two lines once the expanding power is allowed
+to be deep; the depth `m` depends on `k` and `p`, never on `x`, `c₀` or `s` (`s` enters only through `t`).
+
+### 2.2 The tool
+
+`tools/crunch_j03a_sweep.py` (1.5 s, exact `Fraction` and `p`-adic integer arithmetic at 60 digits) → `data/fs91/j03a/sweep-check.txt`,
+`ALL CHECKS PASS`, exit 0. Checks S1–S5 as in its docstring; S5 is Lemma JC's radius, used in stage 3 (`w_{p′}^{p−1} = 1 + p^j·unit` with
+`j = 1` at every pair among 5, 13, 17, so the ball VB1 produces has radius `p^{−(v(c)+1)}` when `w_{p′} ∈ U₀`). **Plants, each paired
+with a faithful twin that passes, each firing for its stated reason:**
+- P1: the one-digit sweep at `k = 2p` stays in the band at its worst shift, distance `1/(2p) = 1/k` (all five primes); twin `m = 2` meets
+  the arc.
+- P2: sweeping with `u = w₁₃` (a unit at `v | 5`) instead of a power of `w₅`: the ball's image is one point (size 1), not a coset; twin full.
+- P3: Lemma JC with `p′ = p = 5`: refused because `w₅` has valuation 1 at `v`, not a unit (so JC needs a second prime); twin `p′ = 13`
+  gives `j = 1`.
+
+The extent (five primes, `k ≤ 200`, `m ≤ 2` for the enumeration) was fixed by the derivation before the run; the tool checks a derived
+formula and searches for nothing.
+
 ## Theorems this phase proved
 
 *(filled at stage 3)*
@@ -65,3 +120,4 @@ general `k`), or a line of VB1 that reads the band implicitly.
 ## Would-have-searched-here log
 
 - Stage 1: none.
+- Stage 2: none. (No move was tempted toward search: the sweep is a formula, and the tool enumerates only the ball's image at fixed `m`, which the derivation names.)
