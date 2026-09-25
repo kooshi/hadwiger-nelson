@@ -170,7 +170,19 @@ onto the whole of `G_N` there (`|U₅ mod N| = |G_N|` = 2, 4, 4, 8, 8). S0B's ot
 prime (26, 41), are mixed (22, 48, 76), or sit at an inert prime where `U₅` is not dense (`|U₅ mod 31| = 16 < 32 = |G_{31}|`,
 `|U₅ mod 79| = 20 < 80`): at `Q` they disappear, which is Lemmas V2b–V2e at work (the band set of `Q` sees `G_N`, the full local circle).
 
-**Divergence table** — to be filled after S0A's proof of Lemma N₀ is opened (only after this verdict is committed).
+**Divergence table** (S0A §C1's proof of Lemma N₀, opened after commit 78b5638d).
+
+| step | S0A (verifier G) | V | kind |
+|---|---|---|---|
+| density | Cayley `u = (1 + is)²/(1 + s²)`, weak approximation for the rational torus | the same map written `(1 + it)/(1 − it)`, a homeomorphism `ℙ¹(ℚ_v) → T(ℚ_v)` at every non-split `v` | agree |
+| odd level ≥ 2 | the lines `t̄₀·i·𝔽_q` give a full coset of step `1/q` | Hensel gives `1 + q^{k−1}bi ∈ G`, same coset; the span of `iG` mod `q` is `𝔽_{q²}` | agree (two wordings) |
+| middle half | arc `(B − c) ∩ (B + c)` holds `(q+1)/2` residues only if `‖c‖ ≤ 1/(4q)`; the arc about 0 holds too few | `V_q + y` lies in an arc of length 1/2, so `n` is a non-square and `V_q` is the unique symmetric run of `(q+1)/2` points | agree |
+| `q ≥ 11` excluded | two routes: `λ` would four-colour `Γ_q` (`χ(Γ_q) ≥ 5`), and the Fourier coefficient `1/sin(π/2q)` of the middle-half multiset exceeds Weil's `2√q` from 11 on | one route: the complement is `{x + n/x}`, a Kloosterman sum; `1/sin(π/2q) ≥ 2q/π ≤ 2√q` forces `q ≤ π²` | agree (the same inequality; V has no graph-colouring input) |
+| 2-level ≤ 3 | at `k ≥ 4` the values over `s′ mod 4` fill a coset of step `1/4` | at `k ≥ 3` the kernel `{1, 1 + 2^{k−1}i}` forces the values of one type to `{1/4, 3/4}`; then `b′ = 4c` sweeps `βc/2^{k−2}`, forcing `k ≤ 3` | agree in result; different mechanism; S0A's is shorter |
+| 2-part beside an odd part | a non-zero 2-part of order ∣ 8 takes a non-zero value in `(1/8)ℤ`, and `1/8 > 1/(4q)` | levels 1, 2: values in `(1/4)ℤ`, and `G` spans; level ≥ 3: the pair `x, x + 1/2` | agree |
+| two odd primes | too many residues of `(1/q′)ℤ` for an arc of length `1/(2q)` | the extreme points of `A_{q′}/q′` are `1/2 − 1/(2q′)` apart | agree |
+| types that occur | parity, `(x + y)/4`, `(3x + 2y)/8`, order 3, `(2x + 3y)/7` | the same, plus a second order-4 type `(x + 2y)/4` (values `{1/4, 1/2, 3/4}`), with counts 1, 4, 4 + 4, 8, 8 and an exact check | **addition** (a precision; N₀'s "each occurs" does not claim a complete list) |
+| U2 | (not in S0A) | the union is 13 discs and 16 points; the discs are disjoint in `Q̂` though their layer-0 shadows overlap | **addition** |
 
 ## Would-have-searched-here log
 
