@@ -1,0 +1,17 @@
+p=5 pi=(1+2i) w=(-3/5+4/5i) w mod 3=(0+2i) in mu4=True glue=True band fails fwd/back=0/0 step fails=[]  -> PASS
+  P1 band [1/3,2/3]: fwd fails=0 back fails=80 (first (-40, 1, Fraction(7313042815599400968788824273, 27284841053187847137451171875))) -> FIRES (backward only, its reason)
+  P2 lattice pibar^-1: step fails at 70 of 80 steps -> FIRES
+  P3 junction fault: glue=False step fails at [-1] -> FIRES (junction only, its reason)
+p=13 pi=(2+3i) w=(-5/13+12/13i) w mod 3=(1+0i) in mu4=True glue=True band fails fwd/back=0/0 step fails=[]  -> PASS
+  P1 band [1/3,2/3]: fwd fails=0 back fails=80 (first (-40, 1, Fraction(736840126490866443173194661524315630960942801, 1083565944253594337789762632924020469632952803))) -> FIRES (backward only, its reason)
+  P2 lattice pibar^-1: step fails at 80 of 80 steps -> FIRES
+  P3 junction fault: glue=False step fails at [-1] -> FIRES (junction only, its reason)
+p=17 pi=(1+4i) w=(-15/17+8/17i) w mod 3=(0+1i) in mu4=True glue=True band fails fwd/back=0/0 step fails=[]  -> PASS
+  P1 band [1/3,2/3]: fwd fails=0 back fails=80 (first (-40, 0, Fraction(13104840140661683624056605390781230239023123264801, 49553930780341518008501402488594752086930182089603))) -> FIRES (backward only, its reason)
+  P2 lattice pibar^-1: step fails at 80 of 80 steps -> FIRES
+  P3 junction fault: glue=False step fails at [-1] -> FIRES (junction only, its reason)
+p=29 pi=(2+5i) w=(-21/29+20/29i) w mod 3=(0+1i) in mu4=True glue=True band fails fwd/back=0/0 step fails=[]  -> PASS
+  P1 band [1/3,2/3]: fwd fails=0 back fails=80 (first (-40, 1, Fraction(25237740263194965959577759482562414656326324220053451353201, 93981239960732968248743815871924759239528251081343456322403))) -> FIRES (backward only, its reason)
+  P2 lattice pibar^-1: step fails at 80 of 80 steps -> FIRES
+  P3 junction fault: glue=False step fails at [-1] -> FIRES (junction only, its reason)
+ALL PASS
