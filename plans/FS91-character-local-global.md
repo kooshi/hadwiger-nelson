@@ -567,3 +567,24 @@ both directions that is uniformly recurrent; the obligation is whether S0B-T5's 
 - **Question 1:** would have sampled random band characters of small rings to look for a two-place counterexample to the peeling; instead
   derived the peeling lemma (§M.2), for which none can exist.
 - **§PA:** zbMATH discovery queries only (the gate's instrument, not a witness search).
+
+### The briefs written (stage 5)
+
+`data/crunch-2026-09-25/briefs/`: J03a-SWm-blind-reading.md (the owner's first request; launched), J07-M1-character-local-global.md,
+J10-M1-character-blind-verifier.md, J08-M1-six-at-exposed-fields.md, J11-M1-six-blind-verifier.md, J12-M1-one-prime.md,
+J13-M1-one-prime-blind-verifier.md. Each verifier's fixed list quotes §S verbatim and was written before any claim existed.
+
+## Theorems this phase proved (the planner; all one mind, unverified, handed to J07/J08 to re-derive)
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J03-1 | the peeling lemma: `X = −X`, `X + Y ⊆ B_β`, some `x ∈ X` outside `B_β` ⟹ `Y ⊆ [β + ‖x‖, 1 − β − ‖x‖]`; its `n`-fold form by induction | hand, one mind | §S CLG-b, §M.2 |
+| J03-2 | SIX-a: the trace set of `λ_a` on `μ_{q+1}` is `V_{N(a)} = {t : t² − 4N(a)` a non-square or 0`}` | hand, one mind | §PA.1, §S |
+| J03-3 | at `q = 23` no band six- or seven-character; band eight-characters exactly at `c ∈ {11, 20, 21}` (given J03-2) | hand, one mind | §P.basis (fenced) |
+| J03-4 | archimedean places (real and complex) have local `κ = 0`; a finite-index subgroup of a dense subgroup of a connected group is dense | hand, one mind | §M.1, §M.2 |
+
+## Proposed edits (for the front-page lane; this job edits none of these files)
+- `plans/FRONTIER-STUBS.md` / `CLAUDE.md` FS-91 row: the milestone is opened as "the character local–global theorem"; its band-rigidity
+  question is answered at `k ≤ 9` (J01) and pending J03a at every `k`.
+- `BIBLIOGRAPHY.md`: candidate rows (listing only, unread) — DeVos–Ebrahimi–Ghebleh 2007; Kang–Maharaj 2010; Liu 2008 (survey);
+  Johnson 2011 (survey, Zbl 1243.05082); Johnson, *Product colorings* (1991, Zbl 0848.05029); Burgess 1963 (characters of polynomials).
