@@ -786,7 +786,8 @@ Kooshi's ruling (inventory item 17).
 > I'm the product owner. One derivation agent works on the milestone's questions; you check statements **blind**: you derive or refute
 > each from its statement alone, never from anyone's route.
 >
-> **What you may read:** the plan `plans/FS89-rational-band-rigidity.md` §0, §PA.1–PA.2 and §IQ (not §S.2's route notes or §C.1);
+> **What you may read:** the plan `plans/FS89-rational-band-rigidity.md` §0.1–§0.3, §PA.1–PA.2 and §IQ (not §0.4, §PA.3–PA.4, §S or §C.1,
+> which name the route the derivation agent is asked to test first: your derivations should not start from it);
 > Stage 0's records `plans/FS89-S0A-gluing-verification.md` and `plans/FS89-S0B-band-set.md`; `plans/FS86-derivation.md`;
 > `plans/FS81-derivation.md`; `CLAUDE.md`, `LEDGER.md`, `BIBLIOGRAPHY.md`; any held paper. **What you must not read:**
 > `plans/FS89-S1D-*`, `data/fs89/s1d/`, `tools/fs89_s1d_*`, the derivation agent's scratch, and `git log -p` / `git show` of its commits,
