@@ -337,3 +337,83 @@ forces a torsion (or `T + A`) point into `M`. **All seven claims: TRUE.** The B1
 
 **Hardest step, after B2:** D1-L3's step 2 to 3, the passage from one pure local element to density. It is short once the difference set
 is based at `0`, and the whole milestone rests on it.
+
+## B3 — divergence table (the derivation agent's record `plans/FS89-S1D-derivation.md` §2–§6, opened after commit 1eb9a783)
+
+**Truth: no divergence.** Every lemma and every claim is TRUE in both records. The differences are of route and of scope:
+
+| item | the derivation agent (D) | verifier I (V-B) | kind |
+|---|---|---|---|
+| D1-L2 | `x` in a `⟨w_p⟩`-minimal subset is recurrent; case 2 makes `x∘c = λ_v` with `c = w_pⁿ − 1`; `y = x − λ_{v/c̄}` kills the ideal `cR_S`, so it is torsion | finitely many cosets of `A` cover `M`; a finite-index subgroup fixes each; `(u − 1)b_v = r` puts every `v`-component at one rational (VB5) | **route**; D's is shorter and gives "meets `T + A`" for any closed invariant set directly |
+| D1-L3 | expand at `v`, rotate by `⟨i, w_q⟩` (open in `ℤ_v^×`); density of the image of `ℚ_v` by strong approximation with `v` omitted | the same expansion and rotation, based at `0`; density by the annihilator of the image of `K_v` in `Ĝ = R_S` being 0 | **route** (density argument only); same idea, both sound. **V-B found this idea only after reading D's statement** (B2 disclosure) |
+| D1-L4 | same two-line argument | same | none |
+| D1-T1 | case 2 ⟹ D1-L2; case 1 ⟹ D1-L3, L4 ⟹ a finite corner orbit, which contradicts case 1 | same | none |
+| D1-L5 | the same cone argument (`Re(w̄₅ζ) = (3s + 4t)/5 > 0` on the first quadrant) | cone intersection, checked exactly over all corners and directions | none |
+| D1-L6 | admissible 13-classes `{5, 6, 10}` / `{3, 7, 8}` (D's labelling of `𝔽₁₃`); orbits `6 → 3 → 8`, `7 → 10 → 5` | admissible classes `{2, 4, 5}` / negatives (V-B's labelling: the real coordinate of `(x + yi)/13`); `5 → 9 → 11`; independent tool, 48 cases, 0 survivors; the plant at row length 2 leaves exactly the one predicted chain per case | **none of truth**; labellings differ. Both find length 3 necessary and sufficient |
+| D1-C1 | from a `3 × 2` box | from a single vertical domino, which is stronger; its closure is checked | **minor strengthening** |
+| D1-T2 | case 1 forces a corner into the orbit closure, and D1-C1 (isolation at `{5, 13}`) finishes | **VB1**: an orbit closure meeting `T + A` puts the point in `T + A` (expansion, rotation by the second prime, sweep), for **every** `|S| ≥ 2`, with no isolation lemma | **route; scope**. V-B's route needs no finite computation |
+| D1-C2 | the closure of the non-corner band torsion characters is case 1, so it holds a corner, which contradicts D1-C1 | **VB3**: expansion from an accumulation point produces a non-`T + A` point, contradicting RS (any `S`) | **route**; D's is specific to `{5, 13}`, V-B's general and non-effective |
+| D2-L1 | the archimedean parts are aligned on the ideals `R ∩ uR`, then `Nψ = 0` on every layer | S0A's G1 (the 5-adic real lift) with base `R` | **route**; both sound |
+| D5-L1 | FS81-T3 (`Θ₃(R₅)`) gives `Θ_{2/5}(R₅) = θ₂ + D(1/10)`, layered by D2-L1 to `R_S` | narrow-band rigidity proved directly: 5-steps are exact (`0.283 < 1/√5`), and the other primes' defects are killed by `w̄₅^m` | **route**; V-B's is elementary and needs no FS-81 input |
+| D5-L2 | digit spacing | the same; its hypothesis `|d| ≤ 1/20` is not needed | none |
+| D5-L3 | admissible sets computed by D's tool; exits die by step 2 (columns) or step 3 (rows) | independent tool with a sound over-approximation of the continuous `d′`; the plants show the stated lengths (3 and 4) are exactly tight | none |
+| D5-T1, D5-C2 | isolation near the corner leaf (D5-L2, L3) on the window `|m| ≤ 3, |n| ≤ 2` | VB1/VB2 with D5-L1; VB3 | **route** (as D1-T2, D1-C2) |
+| D2-T1, D5-T2 | D2-L1 with `N` from D1-C2 / D5-C2 | VB4 (`RS_k(S)` alone suffices, since VB3 gives the bound) | **route**; D1-C2 is not an independent input |
+| **scope of RS** | §3: "D1-T2 is about `R₆₅` exactly … What is missing [for `S ⊋ {5, 13}`] is D1-L6 in each new direction `p′` … not a theorem for all `p′`" | `RS₄(S)` holds for **every** `S` with `|S| ≥ 2`, and `RS₅(S)` for every `S ∋ 5` with `|S| ≥ 2` (VB1 with D1-L2 to L4 and D5-L1). And even on D's own route, D's general D2-L1 (its theorem table: `R ⊆ R′ ⊆ Q`) already gives `RS_k(S′)` for every `S′ ⊇ {5, 13}` | **scope: D understates what is proved.** D's §3 scope paragraph is inconsistent with its own D2-L1 in general form |
+| `MS₄({5})` | "not decided here" | not decided here either. The minimal sets of the rank-one system are untouched by both | none |
+
+**Claims stated wider than proved?** None. Every headline is about characters only, and D repeats the plan's §0.2 scope line at §4 and
+§5. The consequences D lists (C-HD1, C-47, C-167) are marked "at their own grades (not re-derived here)". I did not re-derive them
+either; they are outside this brief.
+
+**What D asked V to hit hardest** (§6): D1-L3, then the exit lemmas, then finiteness, layering, D1-L2 and D5-L1. All six are re-derived
+here, each by at least one route different from D's. The two routes that differ most, D1-T2 without isolation (VB1) and D1-C2 by
+expansion (VB3), agree with D's conclusions.
+
+## C0 scored
+
+| claim | predicted P(TRUE) | outcome |
+|---|---|---|
+| 1. D1-T1 | 0.45 | TRUE (B1: GAP at my route's step; B2: TRUE) |
+| 2. D1-T2 | 0.40 | TRUE |
+| 3. D1-C2 standalone | 0.40 | TRUE |
+| 3′. D1-T2 ⟹ D1-C2 | 0.85 | TRUE (VB3) |
+| 4. the implication to D2-T1 | 0.92 | TRUE |
+| 4′. D2-T1 | 0.38 | TRUE |
+| 5. D5-T1 | 0.30 | TRUE |
+| 6. D5-C2 | 0.30 | TRUE |
+| 7. the implication to D5-T2 | 0.92 | TRUE |
+| 7′. D5-T2 | 0.28 | TRUE |
+
+The implications were called right. The substantive claims were under-predicted: I expected the isometric direction to block a proof,
+and it does block the route I took (base points in `M`). It does not block the difference set based at `0`.
+
+## Would-have-searched-here log
+
+- **B1, the stall.** I would have run the rank-two window at `{5, 13}` outward from S0B's lens, to look for a switching array or a
+  Toeplitz-type minimal set with a 5-adic odometer factor. Instead I recorded the stall as a named GAP and moved on; B2 closed it by
+  derivation.
+- **D1-C2.** I would have enumerated band torsion characters of `ℤ[i]/N` modulo `⟨i, w₅, w₁₃⟩` for growing `N`, to "see" finiteness.
+  Instead: VB3 (finiteness from rigidity, by expansion).
+- **The finite lemmas (B2).** `tools/fs89_s1vb_corner_check.py` loops over the lattice points of a fixed bounded box and the corner and
+  direction cases each lemma names. No witness is sought; each check asserts that the survivor set is exactly the corner pattern. It is
+  logged here because it loops over classes. Six planted faults fire, each for its stated reason.
+
+## Theorems this phase proved
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| S1VB-1 | Lemma E (expansion): small differences with a non-zero local part in a closed invariant set expand to a pure local difference | hand | § B1.0 |
+| S1VB-2 | Lemma SW: no ball of pure local translates lies in `Θ_k(R_S)`, `k ∈ {4, 5}` | hand | § B1.0 |
+| S1VB-3 | Lemma JC: `⟨(w̄_{p′}, w_{p′}|_v)⟩` is dense in `S¹ × W₀`, `W₀` open in `ℤ_p^×` | hand | § B1.0 |
+| S1VB-4 | VB1: for `|S| ≥ 2`, a band point whose orbit closure meets `T + A` is in `T + A` (bands 1/4, 1/5) | hand | § B1.1 |
+| S1VB-5 | VB2: for `|S| ≥ 2`, `MS_k(S) ⟺ RS_k(S)` ⟺ every minimal subset of `Θ_k(R_S)` meets `T + A` | hand | § B1.1 |
+| S1VB-6 | VB3: `RS_k(S)` ⟹ `Θ_k(R_S) ∩ T` finite (any nonempty `S`; non-effective) | hand | § B1.1 |
+| S1VB-7 | VB4: `RS_k(S)` ⟹ `RS_k(S′)` for every `S′ ⊇ S`, finite or not; in particular RQ_k | hand | § B1.1 |
+| S1VB-8 | VB5: a minimal set whose small differences are archimedean lies in `T + A` | hand | § B1.2 |
+| S1VB-9 | VB6: a minimal set with a pure local pair and an infinite fibre group is impossible | hand | § B1.2 |
+| S1VB-10 | D1-L3 re-derived: case 1 and `|S| ≥ 2` ⟹ `M − M = G`; the orbit closure of any non-zero pure local element is `G` | hand | § B2 |
+| S1VB-11 | D1-L4 re-derived (parity line ⟹ corner) | hand | § B2 |
+| S1VB-12 | narrow-band rigidity: for `5 ∈ S`, a character with `φ(U_S) ⊆ [−1/10, 1/10]` is `λ_e`, `|e| ≤ 1/10`; hence D5-L1 | hand | § B2 |
+| S1VB-13 | D1-L5, D1-L6, D1-C1 (from one vertical domino), D5-L3 checked exactly; the stated segment lengths 3 and 4 are tight | tools exact (`tools/fs89_s1vb_corner_check.py`, `data/fs89/s1vb/corner-check.txt`) | § B2 |
+| S1VB-14 | **`RS₄(S)` and `MS₄(S)` for every finite `S` with `|S| ≥ 2`; `RS₅(S)` and `MS₅(S)` for every `S ∋ 5`, `|S| ≥ 2`**; with VB4, RQ₄ and RQ₅ (no finite computation) | hand (D1-L2 to L4, D5-L1, VB1, VB4) | § B2 assembly |
