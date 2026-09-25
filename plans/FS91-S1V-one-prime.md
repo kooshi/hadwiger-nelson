@@ -206,3 +206,37 @@ place of `ω` — returned `C₉` too and **could not fire**; it was replaced an
 - J13-T8 — J12-CL′'s density, with the explicit inverse `(x, y) = (z̄/z, (z − D)/(z̄ − D))` [hand; this record, Stage 3]
 - J13-T9 — J12-MSp at every `l ≡ 1 (mod 4)`, by J12's hierarchy on the frame J13-T1 [hand; Stage 3]
 - J13-C9 — the admissible centres at `p = 5` are exactly `C₉` [tools exact, E1]
+
+## Stage 4 — SAVED (divergence table: J12's record `plans/FS91-S1D-one-prime.md` opened after Stage 3's commit)
+
+| point | J12 | J13 (phase 1 blind; phase 2 from statements) | kind |
+|---|---|---|---|
+| X1 verdict and route | TRUE at every `p`; glue `τ_C` on `S₊` to `θ₂ + λ_{C−P}` on `S₋` | the same gluing (J13-T2), any `e` in the lens; checked at 8 primes from the characters' own values | **agree**, same route |
+| X2 verdict | "no" (J12-MS) | "no" (J13-T7) | **agree** |
+| X2 route | a hierarchy of periodic orbits `W_{n+1} = W_n^{a_n}W_{n−1}^{b_n}` closed by CL/CL′; the limit's coding is an S-adic minimal subshift; the minimal set lies in the closure of the torsion points | a branching region `Ω` (two admissible blocks `b a^{n−1}`, `n ≤ 200`, from every state) and entropy compression for 9-power-free block words; the minimal set is any minimal subset of an orbit closure with no periodic coding | **independent routes**, both sound (J12's lemmas each derived here from their statements, Stage 3). Different objects: J12's is constructive and zero-entropy-coded; mine is existence only |
+| X2 at every `p` | corollary, one mind, model re-derived only at 5 | my route is proved at 5 only (J13-T6 is a numeric inequality at 5); J12's route checked at every `l` on my blind frame J13-T1 (Part B at 8 primes) | **J12's route is the better one for `MS₄({p})`**; its "every `p`" now has a second derivation of the frame, the hierarchy checked from statements |
+| the frame | `z_m = lift(ī^m e_m) − P`, centres `C₉`; at general `p`, `ε_p = w̄_p mod 3` | `e_t = P + ζ̄^t u_t`, `ζ = w mod 3`; digits in `π⁻¹ℤ[i]` | **agree** (`ζ̄ = ε_p`); E1 finds `C₉` by an independent test (polygon meeting, not kicks) |
+| X3 verdict | "unbounded" (J12-C3), at every `p` as a one-mind corollary | "unbounded" (J13-T5), at every `l` | **agree** |
+| X3 family | `c₀^a 0^b` under **two** disc conditions (CL) | `b a^p` (= `c₀^1 0^p`) under **one** condition `|c_p| ≤ 1/4` | **mine is weaker in hypothesis at `a = 1`**: it admits `p = 0, 3` (orders 3, 48 — both in S0B-L4's list) and `p = 8, 13, …`, which J12's condition rejects; J12's admits `a ≥ 2`, which mine does not consider. J12's sentence "none is `≤ 130`, so the list does not overlap S0B-L4's (… S0B's 12 orders are not this family's)" is true of its two-condition family only: orders 3 and 48 **are** closing-family orders (word `b a^p`). A wording point for the front-page lane, not an error |
+| X3 order bound | `N_{a,b} > √(a + b)` (orbit size `< N²`) | at 5, `N_p ≥ |D_p|/2 ≥ 2·5^{p/2}` (`c_p = (−i)^{p+1}π̄^p/D_p` in lowest terms) | **mine is exponential** for its family; J12's is general for its family (whose numerators need not be coprime to `D_L`) |
+| X3 where the orders live | `N | 2Nm(π^L − (−i)^Lπ̄^L)` (C4) | the same `D_p`, `L = p + 1` | **agree** |
+| X3 instances | 14 pairs `1 ≤ a, b ≤ 10`, orders listed | E2 recomputes the 14 pairs and 14 orders exactly, and each band on `U₅ mod N` independently | **agree** exactly |
+| §M.2 (the plan's reduction of X2) | checked: first clause TRUE, second GAP, obligation non-deciding; the right reduction is B5 | fenced for me; B5 derived here from its statement | no divergence (not assessed blind) |
+| entropy | C0-b′ cites Buzzi (piecewise rotations have zero entropy) against "no" | the band set is a correspondence, not a map; on `Ω` it has two choices per block, so entropy `≥ (log 2)/200` per step | **no conflict**: Buzzi's theorem is for maps; J12 listed it as a prior against, not a claim |
+
+**Nothing in J12's record contradicts a J13 verdict or a J13 theorem.** One wording point (the "no overlap with S0B-L4" sentence) and one
+scope point (X2 at every `p` rests on J12's route) are forwarded.
+
+### Proposed edits for the front-page lane (not made here)
+
+- `LEDGER.md` row 97, "Not claimed": the three open items are now answered, each by two derivations — `RS₄({p})` fails at every `p ≡ 1 (mod 4)`
+  (J12-ONEa, J13-T2); one-prime torsion orders are unbounded at every such `p` (J12-C3/C3p, J13-T5; exponential lower bound on the `b a^p`
+  family at 5); `MS₄({5})` is false (J12-MS, J13-T7, independent routes), and `MS₄({p})` at every `p` by J12's route (frame re-derived by J13).
+- `CLAUDE.md` G76's *Do* ("at one prime two leaves glue"): a one-prime closed invariant band set can carry a minimal set off `T + A`, built
+  either by a closing-lemma hierarchy or from any two-choice branching region.
+
+### Theorems this job proved (all stages; addresses in this record)
+
+J13-T1 (frame), J13-T2 (X1), J13-T3 (digit criterion), J13-T4 (no bubbles), J13-T5 (X3 family, every `l`), J13-T6 (branching at 5),
+J13-L1 (entropy compression, method prior art), J13-T7 (X2 = no), J13-T8 (CL′ with explicit inverse), J13-T9 (MSp by J12's route on J13-T1),
+J13-C9 (centres at 5) — grades as listed under Stages 2 and 3.
