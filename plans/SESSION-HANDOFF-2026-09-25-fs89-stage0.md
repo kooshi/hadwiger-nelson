@@ -39,12 +39,12 @@ That file's §1 rules table still applies, with the additions in §1 below.*
   - The milestone's object becomes **the rational statement**: every four-colour band character of `ℤ[U_ℚ]` is torsion plus archimedean.
   - Verifier G's caveat: that statement is the `F = ℚ` case and carries the same infinitely-many-split-places difficulty. The route is a reduction, not an escape.
   - The closed-set rigidity of Furstenberg and Berend is the lever. Read Berend 1983 and 1984 in full; add a `[Furstenberg1967]` entry.
-- **The shape after Stage 0 is Kooshi's call** (inventory item 9). The owner leans towards a competition, per his FS-86 remark "It works well for derivations". The advisor proposed one derivation agent plus a blind verifier.
+- **The shape after Stage 0 is decided: one derivation agent plus a blind verifier** (Kooshi, inventory item 11: "Let's go ahead and try one agent plus verifier this time"). The planner designs Stage 1 in that shape.
 - **If the gluing fails:** the advisor recommends FS-87 kernel work plus the T721 audit, keeping FS-89 as reading only.
 
 ## 3. Pending decisions for Kooshi (the defaults hold if he says nothing)
 
-1. **Stage 1's shape.** Default: the planner designs a competition, and Kooshi confirms it at plan review.
+1. ~~Stage 1's shape~~: **decided** — one derivation agent plus a blind verifier (item 11).
 2. **The name "de Grey's lattice"** (FS-89 item 5; `BIBLIOGRAPHY.md` § E). Default: keep it in closed records, and describe the lattice in new writing.
 3. **FS-90's two sanctioned hours.** Default: T721's audit only if Heule's graph can be fetched; otherwise banked to 2026-10-01.
 
