@@ -64,3 +64,12 @@ of the conjecture at L = 4 in a field with neither √3 nor a four-chromatic qua
 
 **Cost:** the field's small type-M rotations and a first configuration, an afternoon; a structural certificate, a day; the field-level
 classification, unpriced.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S0F-three-colours.md` §3.2, §4.5 — job J02's record: this stub's field; tool `tools/crunch_j02_field.py`
+- `plans/FS91-S0FV-three-colours-blind.md` §2.5, §3.3 — job J09's record: the blind derivation
+- `data/crunch-2026-09-25/reports/J02.md`, `J09.md` — the job reports
+- `plans/FS91-close-inventory.md` rows 7, 8, 15, 117 — items for this stub, including a banner owed and a correction owed to its text (rows 8, 15)

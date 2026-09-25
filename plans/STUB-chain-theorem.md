@@ -150,3 +150,13 @@ witness generator than the spindle once a five-forced pair exists, and whether o
 `Proofs/HadwigerNelson/Copy.lean`, `Homogeneous.lean`, `OneDefect.lean`, `Arity.lean`, `SquareClass.lean` (`planeOver`),
 `Instances/CompositumFive.lean` (`chromaticNumber_le_planeOver_of_sevenFree`, the `planeOver` bound pattern); `data/m53/forced-spindle-core-8over3.json`;
 `tools/forced_spindle.py`; records to `data/fs45/` with a README row per file.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M2-kernel-lane.md` — the kernel lane's plan (M2)
+- `plans/M2-S1K-chain.md` — job J14's record: this stub's theorem and instances in the kernel
+- `Proofs/HadwigerNelson/Chain.lean`, `Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean`, `Proofs/HadwigerNelson/Instances/SevenConditional.lean` — the modules
+- `data/crunch-2026-09-25/reports/J14.md` — the job report
+- `plans/M2-close-inventory.md` rows 18–28, 35 — items for this stub, including its re-aim (row 35)

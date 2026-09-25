@@ -1393,3 +1393,11 @@ acceptance pass, 411 of 411) (item 81).
 **Budgets** (working tokens, as reported): planner about 230k; plan-phase advisor about 200k; phase-0 implementer about 265k; modeling
 agent about 230k; verifier about 520k by the harness counter (retired at the threshold, work complete); stage-D implementer about 345k;
 close planner recorded in its report. Nothing was delegated by any agent.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S0F-three-colours.md` — job J02's record: three colours over every real number field, from FS81-T3 and T4
+- `plans/FS91-S0FV-three-colours-blind.md` §2.5 — job J09's record, on FS81-T6's open item
+- `plans/FS91-close-inventory.md` rows 7, 12, 15 — the related items

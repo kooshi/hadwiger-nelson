@@ -174,6 +174,8 @@ With 2.1 this is CLG_k's equivalence; Stage 3 assembles it and adds the level.
 
 ### 3.1 CLG_k — TRUE for every real number field and every `k ≥ 2`, given `H_k` [hand; inputs named]
 
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1V-character.md` §2.3 and §4 row 6; carried in `plans/FS91-close-inventory.md` row 89. Not applied here; the close rewrites this entry.
+
 *"Let `k ≥ 3` satisfy `H_k`, and let `F` be a real number field. Then `Θ_k(R_F) ≠ ∅` if and only if some stable place `𝔓` of `F(i)` and some
 level `m ≥ 1` have a band `k`-character of `T_{𝔓,m}`. Hence `χ_char(F²) = min_{𝔓,m} χ_char(T_{𝔓,m})`, and a character `k`-colouring of
 `F²` exists only if some residue target of `F` is `k`-colourable."*
@@ -247,6 +249,8 @@ of residue characteristic `p ≤ k/2` above level one."* Proved in the sharper f
   `[F : ℚ] ≥ 6`. *For every real quadratic field and every `k ≥ 3`: a character `k`-colouring exists only if `L(F) ≤ k`.* This is SIX-e's
   hypothesis at ℚ(√167) with no exception: every stable place is odd with prime `q ≥ 23 > 7/2`, so a character six- or seven-colouring of
   ℚ(√167)'s plane exists iff some level-one `Γ_q`, `q` stable, has a band six- (seven-) character.
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1V-character.md` §3.1 item 19 and §4 row 10 (J10-T8); carried in `plans/FS91-close-inventory.md` row 105. Not applied here; the close rewrites this entry.
+
 - **(g3) At `k ∈ {6, 7}`** *(sharpened in 4.2: at `k = 6` no `q = 3^f` exception at all)*, the exception is at most `q = 27` (levels 2–3; `χ(Γ₂₇) ≥ 6`, G56) and `Q = 64` (`6 ≤ χ(U₆₄) ≤ 8`), *given* the
   odd-tower Hoffman ratio at `q = p^f` for every level (FS86-LP is stated at prime `q`; its fibre argument reads one `𝔽_q`-line per
   fibre and should give `max(h(Γ_q), 2/(q+3))` — sketched, one mind, not relied on). Without it, add every `q = 3^f`, `f ≥ 5`, at levels

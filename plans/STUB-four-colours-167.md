@@ -304,3 +304,14 @@ compute the Kempe period groups (L3's lesson) before calling it rigid. **G62 / G
 times a base pattern before any tree: `L21cc6506` is a five-layer twist at `n = 42`. **G55** — the chain route, with `1/2, 1/3, 1/7 ∈
 ℤ[U]`. **G21** — a periodic search measures its period cap (FS-73 twice). **G65** — aim balls by degree. Row 79; FS73-T17–T20 (C's
 screen and design rule), T26–T28, T39–T45.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S1D-six.md` stages 3–5 — job J08's record: character colourings at ℚ(√167) and the window members
+- `plans/FS91-S1V-six.md` — job J11's record: its blind verification
+- `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` §2.3 — jobs J07 and J10 on C-167
+- `plans/M3-S1D-windows-five.md` — job J21's record: measurable windows over ℚ(√167) at five colours
+- `data/crunch-2026-09-25/reports/J08.md`, `J11.md`, `J21.md` — the job reports
+- `plans/FS91-close-inventory.md` rows 81–85, 106–110 and `plans/M3-close-inventory.md` rows 16–26 — items for this stub (row 85 of the first: its re-aim)

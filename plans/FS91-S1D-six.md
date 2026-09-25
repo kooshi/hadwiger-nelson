@@ -207,6 +207,8 @@ was computed; by J08-6 no higher level does better (`m < 2p` at every stable pla
 circle equals the law at every `c` for `q = 59, 83, 131, 167` (`tools/crunch_j08_crosscheck.py`, plant fires).
 
 **The statements, each read aloud against "characters only, never `χ`":**
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1V-six.md` stage 4 (the divergence table and its closing notes); carried in `plans/FS91-close-inventory.md` row 109. Not applied here; the close rewrites this entry.
+
 - **ℚ(√167).** *Unconditional (J08-7 + J08-3):* `Θ₈(R_{ℚ(√167)}) ≠ ∅` — a character eight-colouring of ℚ(√167)'s plane exists (the
   pullback of `λ_a`, `N(a) = 11`, at either place above 23; `χ ≤ 8` itself was already row 69's via the residue map). *Given CLG_7 (J07,
   unverified):* `Θ₇(R_{ℚ(√167)}) = ∅`, hence `Θ₆ = ∅` (`Θ_k` grows with `k`), so **`χ_char(ℚ(√167)²) = 8`** = min over its targets. SIX-e's

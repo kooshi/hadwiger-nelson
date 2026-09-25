@@ -84,3 +84,12 @@ the open certificate formats), G21 (a triangle-free null so far measured only th
 its citation graph; `[deGrey2026]` (ℝ³, triangle-free, five-chromatic) and `[Haugstrup2026]`, both read by the author's summary only.
 
 **Solver:** none for routes 1–3; route 4 needs a solver (after the week). **Cost:** route 1 hours; route 3 days.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` §2.3 (V4) — jobs J07 and J10 on HD1
+- `plans/FS91-S0FV-three-colours-blind.md` §2.2, `plans/FS91-S1D-character.md` §2.4, `plans/FS91-S1V-character.md` §3.2 — on FS86-B1-LR's scope
+- `plans/M3-S1D-windows-five.md` §2.5, §4.6 — job J21's record, on FS86-CL1
+- `plans/FS91-close-inventory.md` rows 13, 75, 78, 87, 92 and `plans/M3-close-inventory.md` row 18 — the related items

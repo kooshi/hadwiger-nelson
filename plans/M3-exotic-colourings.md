@@ -344,6 +344,8 @@ Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
 
 ### PA.1 Question 2 — measurable colourings, products, windows
 
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1D-windows-five.md` §1.1 (Q7); carried in `plans/M3-close-inventory.md` row 19. Not applied here; the close rewrites this entry.
+
 | # | query or source | found | verdict |
 |---|---|---|---|
 | 1 | zbMATH `ab:"measurable chromatic number"` (17 hits: Falconer's line, Székely–Wormald on ℝ, Bachoc–Nebe–Oliveira–Vallentin 2009, Oliveira–Vallentin 2010, Bachoc–Passuello–Thiery 2015, Bogolubsky–Raigorodskii 2015, Miller 2008, Conley–Miller 2016, Bernshteyn 2019, Weilacher 2022, Malen 2015, Payne 2009) | no paper proving `χ_m(ℝ²) ≥ 6` | negative |
@@ -432,6 +434,8 @@ periods are finitely many cycles, so `P` has finite index.
    against `ℝ²` (the two real places); the same questions at ℚ(√47) at four colours are already closed (FS86-CL1).
 
 ### S. The stages as jobs
+
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.4; carried in `plans/M3-close-inventory.md` row 9. Not applied here; the close rewrites this entry.
 
 | job | kind | question | record | stages (harness k) | stop rule |
 |---|---|---|---|---|---|
@@ -526,6 +530,8 @@ prose; a GAP verdict on the deciding step scores the claim as not landed.
 
 ### M. The modeling passes (fresh Skill invocations: `debruijn-domain-modeling`, then `debruijn-obligation-modeling`, applied to §S's statements; no Lean this milestone, so the passes act on the statements and the obligation trees)
 
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.1 and §2.4, and `plans/M3-S1D-windows-five.md` §3.6; carried in `plans/M3-close-inventory.md` rows 9, 10, 20. Not applied here; the close rewrites this entry.
+
 **Domain pass — what changed in §S.**
 1. *The quotient seam* (the placement cut): FS79-T35 reads phases modulo colour permutation, T36's tool computes in the quotient, and the
    stub states R2 without saying which. Both forms are equivalent (a single cycle's preimage in the colour cover is a disjoint union of
@@ -584,3 +590,11 @@ Q1 statements, quoted, route parentheticals removed), `J21-M3-windows-five-deriv
 §S's Q2 statements). Every brief carries the no-children rule with its reason, the resume paragraph, the ban and the would-have-searched
 log. **The planner's check behind D1-43** (float character sums, seconds): level-one Hoffman ratios `0.24908` (23), `0.21376` (43),
 `0.19912` (59).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- the jobs' records: `plans/M3-S1A-rank-one.md` (J18), `plans/M3-S1D-windows-five.md` (J21), `plans/M3-S1B-rank-one.md` (J19, in progress); the verifiers' records `plans/M3-S1V-rank-one.md` (J20) and `plans/M3-S1V-windows-five.md` (J22) when they run
+- tools `tools/crunch_j18_*`, `tools/crunch_j21_*`; data `data/m3/j18/`, `data/m3/j21/`
+- reports `data/crunch-2026-09-25/reports/J06.md`, `J18.md`, `J21.md`; close inventory `plans/M3-close-inventory.md`

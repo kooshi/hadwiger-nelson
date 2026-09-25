@@ -86,3 +86,12 @@ kernel through `forces_iff_exists_finite`).
 
 None directly. It puts the conjecture's falsification field's best lower bound in the kernel, and it is the first kernel
 certificate type that refuses colourings of an infinite graph by a polytope rather than a finite graph by a resolution proof.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S0F-three-colours.md` §4.5 — job J02's record, its re-aim of this stub
+- `plans/FS91-S0FV-three-colours-blind.md` §3.5 — job J09's record, its re-aim of this stub
+- `data/crunch-2026-09-25/reports/J02.md`, `J09.md` — the job reports
+- `plans/FS91-close-inventory.md` rows 11, 117 — the re-aims

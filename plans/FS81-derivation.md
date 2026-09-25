@@ -98,6 +98,8 @@ carries its kernel decision.*
 - *Kernel:* **stub (FS-75, re-aimed)**. The five-layer statement parametric in d is the target. Per-d certificates exist at `K_B(d)`
   (T8) as the fallback.
 
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S0FV-three-colours-blind.md` §2.5 (J4-T6); carried in `plans/FS91-close-inventory.md` row 15. Not applied here; the close rewrites this entry.
+
 **T6 — §F.5: at `d ≡ 3, 7 (mod 12)` every slope is additive mod 3, so `Θ₃(ℚ(√d))` is exactly the set of additive 3-colourings. [hand; Poros (the extension), the planner (both mixed cases), the verifier (blind, record §1.6)]**
 - *Statement.* For squarefree `d ≡ 3 (mod 4)` with `3 ∤ n`, every point of `Θ₃(ℚ(√d))` has only order-3 layers and
   `θ(ℤ[U]) ⊆ (1/3)ℤ/ℤ`. With T5, this classifies `Θ₃` for every real quadratic `d ≡ 3 (mod 4)`.

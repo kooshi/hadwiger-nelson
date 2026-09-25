@@ -162,3 +162,14 @@ A negative is a finding and goes in §PA.
 the gap between `L(F)` and `χ(F²)`; closing that gap from above is exactly what this would do, and nothing else we own points
 there. It is also the only stub in the set whose *success* would refute the conjecture's bold form rather than support it — which is the
 right relationship between an instrument and a belief, and the reason both are worth holding.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M3-exotic-colourings.md` — crunch milestone M3's plan (question 2 is this stub at five colours)
+- `plans/M3-S1D-windows-five.md` — job J21's record
+- `data/crunch-2026-09-25/briefs/J22-M3-windows-five-verifier.md` — the queued blind verifier's brief (record `plans/M3-S1V-windows-five.md` when it runs)
+- `plans/FS91-S1D-six.md` "Proposed edits" — job J08's re-aim of this stub
+- `data/crunch-2026-09-25/reports/J06.md`, `J08.md`, `J21.md` — the job reports
+- `plans/M3-close-inventory.md` rows 5, 16–26 and `plans/FS91-close-inventory.md` row 85 — items for this stub (row 23 of the first: a stub to mint)

@@ -82,3 +82,14 @@ T29, T30, T31–T35, T36–T38.
 
 None directly; high on the programme. Every five- or six-forcer the hunt builds is a four- or five-colour compulsion on lattice fabric,
 and whether such compulsions are always visible to periodic colourings — and certifiable — is this stub's question.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M3-exotic-colourings.md` — crunch milestone M3's plan (question 1 is this stub in rank one)
+- `plans/M3-S1A-rank-one.md` — job J18's record
+- `plans/M3-S1B-rank-one.md` — job J19's record (in progress at this writing)
+- `data/crunch-2026-09-25/briefs/J20-M3-rank-one-verifier.md` — the queued blind verifier's brief
+- `data/crunch-2026-09-25/reports/J06.md`, `J18.md` — the job reports
+- `plans/M3-close-inventory.md` rows 5, 8–15 — items for this stub (row 14: its re-aim)

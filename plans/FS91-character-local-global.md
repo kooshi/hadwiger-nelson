@@ -464,6 +464,8 @@ number field `F` (row 95 and the gluing at `k = 4, 5`; PA-B3 with the gluing at 
   `k`-character, and the complete list below it.
 - **SIX-d (ramified and higher levels).** The ramified place above 167 in ℚ(√167) and higher levels at 23 and 43: band 6- and 7-characters,
   or CLG-e's collapse.
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1V-six.md` stages 3–4; carried in `plans/FS91-close-inventory.md` row 110. Not applied here; the close rewrites this entry.
+
 - **SIX-e (the fields).** "Given CLG_6 and CLG_7 (J07, unverified): `Θ₆(R_{ℚ(√167)}) = ∅` iff no target of ℚ(√167) carries a band
   six-character, and `χ_char(ℚ(√167)²) = min` over its targets; the same for K(√7) and de Grey's field `K(√5,√7)`."
 - **SIX-f (last, if budget allows).** The band-1/6 torsion characters of `Q` (N₀'s analogue).
@@ -588,3 +590,11 @@ J13-M1-one-prime-blind-verifier.md. Each verifier's fixed list quotes §S verbat
   question is answered at `k ≤ 9` (J01) and pending J03a at every `k`.
 - `BIBLIOGRAPHY.md`: candidate rows (listing only, unread) — DeVos–Ebrahimi–Ghebleh 2007; Kang–Maharaj 2010; Liu 2008 (survey);
   Johnson 2011 (survey, Zbl 1243.05082); Johnson, *Product colorings* (1991, Zbl 0848.05029); Burgess 1963 (characters of polynomials).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- the jobs' records: `plans/FS91-S0V-band-to-nine.md` (J01), `plans/FS91-S0F-three-colours.md` (J02), `plans/FS91-S0V2-SWm-second-reading.md` (J03a), `plans/FS91-S1D-character.md` (J07), `plans/FS91-S1D-six.md` (J08), `plans/FS91-S0FV-three-colours-blind.md` (J09), `plans/FS91-S1V-character.md` (J10), `plans/FS91-S1V-six.md` (J11); `plans/FS91-S1D-one-prime.md` (J12, in progress) and `plans/FS91-S1V-one-prime.md` (J13, queued)
+- tools `tools/crunch_j01_*`, `tools/crunch_j02_*`, `tools/crunch_j03a_*`, `tools/crunch_j07_*`, `tools/crunch_j08_*`, `tools/crunch_j09_*`, `tools/crunch_j10_*`, `tools/crunch_j11_*`; data `data/fs91/j01/` to `data/fs91/j11/`
+- reports `data/crunch-2026-09-25/reports/J01.md` … `J11.md`; close inventory `plans/FS91-close-inventory.md`

@@ -279,6 +279,8 @@ Every quoted statement in the brief, checked against its source on disk:
 
 ### 2.1 §PA — the repository's own modules, read at their source (G46: "read the construction's own data layout")
 
+> **Correction owed (2026-09-25 crunch):** see `plans/M2-S1K-chain.md` stages 1 and 3; carried in `plans/M2-close-inventory.md` row 23. Not applied here; the close rewrites this entry.
+
 | name | where | what it gives the lane | target |
 |---|---|---|---|
 | `Forces G k p q := ∀ C : G.Coloring (Fin k), C p = C q` | `Forcer.lean:41` | the chain's hypothesis; `Forces.comap` pulls it along any hom | K1 |
@@ -298,6 +300,8 @@ Every quoted statement in the brief, checked against its source on disk:
 | `forces_iff_exists_finite` (via `Finset.rado_selection`) | `Kempe.lean` | de Bruijn–Erdős already used in the repository | K2 (J17) |
 
 ### 2.2 §PA — Mathlib and core, per statement (queried at the pinned Mathlib, `.lake/packages/mathlib`, with `grep -rn`)
+
+> **Correction owed (2026-09-25 crunch):** see `plans/M2-S2K-route-c.md` §1.1; carried in `plans/M2-close-inventory.md` row 32. Not applied here; the close rewrites this entry.
 
 | need | found | not found (query) |
 |---|---|---|
@@ -327,6 +331,8 @@ stub's own D2 fallback says ("a cheaper first form takes the valuation subring `
 plus a page; the stripe lemma is a combinatorial induction. Stage 3 prices both from their leaves.
 
 ### 2.3 §PA — the prior-art gate on the bridge (J17), time-boxed
+
+> **Correction owed (2026-09-25 crunch):** see `plans/M2-S1D-bridge.md` §1.1 (Q5–Q7); carried in `plans/M2-close-inventory.md` row 14. Not applied here; the close rewrites this entry.
 
 - **The bridge is in print with a correct proof: `[Madore2015]` ¶5.4 with ¶1.3** (held, `~/source/library/pdf/arXiv-1509.07023-…pdf`; ¶5.4 read
   first-hand at this stage). ¶5.4, verbatim: "the finite graphs G for which there exists a graph homomorphism G → Γ(E^d) with E real closed do not
@@ -522,3 +528,11 @@ them into `Proofs/` and the build checks them again).*
 | a unit vector `a² + b² = 1` lies in every valuation subring `B` with `1 + x² ∉ B.nonunits` for all `x ∈ B` (route C's integrality, general form) | hand (§4.4 obligation item 3; J15 ports it) | this plan §4.4 |
 
 **Prior-art finding (not a theorem):** `χ(ℝ²) = sup_F χ(F²)` is `[Madore2015]` ¶5.4 with ¶1.3 (Tarski), 2015 — the FS-39 stub undersold it (§2.3).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- the jobs' records: `plans/M2-S1K-chain.md` (J14), `plans/M2-S2K-route-c.md` (J15), `plans/M2-S1D-bridge.md` (J17), `plans/M2-S3K-unit-ring.md` (J16, in progress)
+- modules: `Proofs/HadwigerNelson/Chain.lean`, `Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean`, `Proofs/HadwigerNelson/Instances/SevenConditional.lean`, `Proofs/HadwigerNelson/Transcendental.lean`; audit lines in `scripts/Axioms.lean` (sections FS-45 and FS-39 route C)
+- data `data/m2/j14/`, `data/m2/j15/`, `data/m2/j17/`; reports `data/crunch-2026-09-25/reports/J14.md`, `J15.md`, `J17.md`; close inventory `plans/M2-close-inventory.md`

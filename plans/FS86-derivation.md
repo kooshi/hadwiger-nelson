@@ -62,6 +62,8 @@ FS79-T1. *Kernel:* declined.
 *Proof:* plan §0.3 (i); B1 V1. *Proof verdict:* closes. *Rests on it:* V4; "on a lattice, `F` is the field's `F` restricted, `P` a lower
 question". *Prior art:* row 78's kernel theorem. *Kernel:* declined (a corollary of a kernel theorem).
 
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1D-character.md` §2.4 (J07-4), `plans/FS91-S0FV-three-colours-blind.md` §2.2 (J2) and `plans/FS91-S1V-character.md` §3.2 (J10-T6); carried in `plans/FS91-close-inventory.md` rows 13, 73, 78. Not applied here; the close rewrites this entry.
+
 **FS86-B1-LR — Lemma R: `ℤ[U_F]` is the ring of elements of `L` integral at every stable prime, and it is dense in the product of the stable completions — for real `F` with `L/ℚ` Galois and no stable prime ramified in `L/F` (scope corrected at the close, FS86-CL2). [hand; B1; the scope, the close planner and D]**
 Prime inversion by Chevalley's extension theorem; `cO′ ⊆ R`; density through the parametrisation `(1+it)/(1−it)`, Teichmüller idempotents
 and a uniformizer; `O′/R` finite with no torsion. *Proof:* B1 Lemma R. *Proof verdict:* closes on the corrected scope; **fails as B1 stated
@@ -407,6 +409,8 @@ Choquet–Deny. *Kernel:* declined.
 **FS86-Cx-C14K — The window form of VK: over any real field whose stable places are each four-tight at every level or of all-levels ratio `< 1/4` (K included), every measurable window colouring is a pullback from exactly one tight place, on all of `G_S` (= VC-C7). [hand; Coxeter (a sketch resting on VK), C blind (local, no VK: `P_m × P′_m` is four-tight with only pure minimisers)]**
 *Proof:* Coxeter § Round 2 step 5; C C2 (C14-K), C3 item 3. *Proof verdict:* closes by C's route. *Rests on it:* C14's K control. *Prior art:*
 plan §0.4's product-tightness step. *Kernel:* declined.
+
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1D-windows-five.md` §2.5, §4.6; carried in `plans/M3-close-inventory.md` row 18. Not applied here; the close rewrites this entry.
 
 **FS86-CL1 — The type-(A) corollary: over ℚ(√47) and ℚ(√167), no four-colouring of the plane is a measurable window colouring over a finite set `S` of places whose split places are odd (`W` proper on `Γ_S`, or off a null set as in C14′); likewise for every real field with no stable dyadic place and every stable place of all-levels ratio `< 1/4`. [hand, one mind (the close planner), from C14.1–C14.3 (two derivations) and the all-levels ratios; external input AmbrusEtAl2023 at real places]**
 Every factor of `Γ_S` has measurable independence ratio `< 1/4`: real places `m₁ ≤ 0.2470`; the stable odd places (ℚ(√47): 11 and 19 by FS-66's

@@ -1530,3 +1530,11 @@ quotient step's cap is checked only between asks (a 9-minute overrun; FS-59 step
 G73 and FS-80; R4 (what is left at ℚ(√167)) → G73; R5–R6 (the flat tetrahedron; the quadratic slope relation) → FS-74; R7 (G68 at
 `L21cc6506`) → G68 and FS-59; the plan's own sweep (7 hits of "conjecture") → FS-80 for §D.4's `M`-independence, the rest held
 elsewhere. One stub minted (FS-80).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M3-S1A-rank-one.md` — job J18's record: FS-76 in rank one, from FS73-T30 and FS79-T34 to T36
+- `plans/M3-exotic-colourings.md` §IQ.1 — crunch milestone M3's plan
+- `plans/M3-close-inventory.md` rows 1, 8–15 — the related items

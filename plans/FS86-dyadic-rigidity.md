@@ -906,3 +906,13 @@ search and became a theorem (B2's T1 through the tight cover; X's Lemma C; W's d
 Theorem D steps; HD1-cert, which turned a search into a theorem that prices it). The friction is concentrated where the question is genuinely
 a finite witness — HD1-cert's certificate, the `√3` virtual edge at ℚ(√2,√3), 29's certificate for `Λ₅₁₀` — and those are exactly FS-90's
 candidates for the sanctioned two hours.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S1D-character.md` §2.4, §4.4 and `plans/FS91-S1V-character.md` §2.3, §3.2 — jobs J07 and J10 on HD1 and on FS86-B1-LR's scope
+- `plans/FS91-S0FV-three-colours-blind.md` §2.2 — job J09's record, on FS86-B1-LR's scope
+- `plans/M3-S1D-windows-five.md` §2.5, §4.6 — job J21's record, on FS86-CL1
+- `plans/M3-S1A-rank-one.md` §2.1 — job J18's record, on FS86-dB-H in rank one
+- `plans/FS91-close-inventory.md` rows 13, 78, 87 and `plans/M3-close-inventory.md` rows 10, 18 — the related items

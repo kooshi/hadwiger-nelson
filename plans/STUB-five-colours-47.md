@@ -55,3 +55,11 @@ None directly: ℚ(√47) is 5-sealed (11 usable). On the programme: it would pi
 conjecture's five-clause where it is cheapest.
 
 **Cost:** the `Θ₄` finder on ten survivors, hours; cell analysis, a day; the chain route, unpriced.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S1D-character.md` §4.4 — job J07's record: C-47 through the character local–global route
+- `plans/FS91-S1V-character.md` §2.3 (V4) — job J10's record: the blind re-derivation
+- `plans/FS91-close-inventory.md` rows 75, 92 — the related items

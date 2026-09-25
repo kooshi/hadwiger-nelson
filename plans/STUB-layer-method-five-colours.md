@@ -59,3 +59,12 @@ Speculative, and the only solver-free instrument aimed at the conjecture's falsi
 `k = 5` over ℚ(√167) says the conjecture cannot fall to a character colouring there.
 
 **Cost:** the rational layer at two bands, a day (T40's code); the gluing at one field, unpriced.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S0V-band-to-nine.md` — job J01's record: band rigidity from four and five colours upward
+- `plans/FS91-S0V2-SWm-second-reading.md` — job J03a's record: the second blind reading
+- `plans/FS91-character-local-global.md` §S — crunch milestone M1's plan
+- `plans/FS91-close-inventory.md` rows 1–6, 59–70 — the related items

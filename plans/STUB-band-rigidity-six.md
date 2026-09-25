@@ -50,3 +50,14 @@ G21 (a finite window measures its depth), G49/G50 (`[Berend1984]` and 1983 held 
 
 Speculative and indirect: a character statement at six colours is not a statement about `χ`. It would decide whether the layer method
 (FS-83) or any single character can six-colour ℚ(√167)'s plane, the conjecture's widest gap.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-character-local-global.md` — crunch milestone M1's plan: this stub, opened
+- `plans/FS91-S0V-band-to-nine.md` (J01), `plans/FS91-S0V2-SWm-second-reading.md` (J03a), `plans/FS91-S0F-three-colours.md` (J02), `plans/FS91-S0FV-three-colours-blind.md` (J09) — stage 0's records
+- `plans/FS91-S1D-character.md` (J07), `plans/FS91-S1V-character.md` (J10), `plans/FS91-S1D-six.md` (J08), `plans/FS91-S1V-six.md` (J11) — stage 1's records
+- `plans/FS91-S1D-one-prime.md` (J12, in progress at this writing) and `plans/FS91-S1V-one-prime.md` (J13, queued) — one prime
+- `data/crunch-2026-09-25/reports/` — the job reports; `data/fs91/` — their data
+- `plans/FS91-close-inventory.md` — the milestone's close inventory

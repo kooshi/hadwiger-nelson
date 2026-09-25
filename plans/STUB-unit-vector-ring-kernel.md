@@ -128,3 +128,14 @@ the conjecture. It closes, from the ring side, the one hand step every field-lev
 `Proofs/HadwigerNelson/ResidueColouring.lean`, `TwoColourResidue.lean`, `SquareClass.lean`, `FieldWall.lean` (`moserTwist`),
 `Copy.lean`/`Homogeneous.lean` (via FS-45); Mathlib `RingTheory/Ideal/GoingUp.lean`, `RingTheory/Valuation/ValuationSubring.lean`,
 `NumberTheory/NumberField/Basic.lean`; `reference/ChatGPT-local-global-tightness-conjecture/`; records to `data/fs47/` if any.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M2-kernel-lane.md` §2.2 — the kernel lane's plan on this stub; scratch skeleton `data/m2/j04/K3PrimeInversion.lean`
+- `plans/M2-S3K-unit-ring.md` — job J16's record (in progress at this writing); module `Proofs/HadwigerNelson/UnitRing.lean`
+- `plans/FS91-S1D-character.md` §2.3–§2.4 — job J07's record: the unit-vector ring's completions (Lemma C, C′)
+- `plans/FS91-S0FV-three-colours-blind.md` §2.2 — job J09's record: its localisation lemma J2
+- `plans/FS91-S1V-character.md` §3.2 — job J10's record: the blind re-derivation
+- `plans/FS91-close-inventory.md` rows 13, 73, 79 — items for this stub, including its re-aim (row 79)

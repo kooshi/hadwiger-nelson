@@ -104,3 +104,14 @@ and it belongs here as phase C's second corollary:**
 
 (⟸: a number field attaining the plane's 6 has no such extension; ⟹: take the compositum with a number field holding a 7-chromatic
 graph. Both use the bridge.) The stub keeps rank 3 on phase B′ alone — a half-day kernel theorem whose two valuation lemmas exist.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M2-kernel-lane.md` — the kernel lane's plan (crunch milestone M2), §2.3 and §4.1 on this stub
+- `plans/M2-S2K-route-c.md` — job J15's record: route C in the kernel; module `Proofs/HadwigerNelson/Transcendental.lean`
+- `plans/M2-S1D-bridge.md` — job J17's record: the bridge's hand step
+- `data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md` — the brief of the queued kernel job on the bridge
+- `data/crunch-2026-09-25/reports/J04.md`, `J15.md`, `J17.md` — the job reports
+- `plans/M2-close-inventory.md` rows 1, 12–15, 29–34 — items for this stub, including a correction owed to it (row 13)

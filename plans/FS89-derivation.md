@@ -20,6 +20,8 @@ I** (Stage 1 V-B; phase B1 blind to D's routes, phase B2 given D's lemma stateme
 checks, cited by close-inventory item), the **close planner** (§9, one entry of tools grade and four compositions) and the **prior-art reader**
 of `[Berend1983]`/`[Berend1984]` (§9a: PA-B1, PA-B2; its PA-B3 is a reading, §10).
 
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S0V2-SWm-second-reading.md` §3.4, §3.7 and `plans/FS91-S1D-character.md` §4.4; carried in `plans/FS91-close-inventory.md` rows 61, 69, 78. Not applied here; the close rewrites this entry.
+
 **Notation, fixed once** (the plan's §0.1). `R_S = ℤ[i][1/p : p ∈ S]` for a set `S` of primes `p ≡ 1 (mod 4)`; `w_p = π_p/π̄_p`
 (`w₅ = (3+4i)/5`, `w₁₃ = (5+12i)/13`); `U_S = ⟨i⟩ × ⟨w_p : p ∈ S⟩`; `Q = R_{all} = ℤ[U_ℚ]`; `R₆₅ = R_{{5,13}}`. The band `B_k = [1/k, 1 − 1/k]`;
 `Θ_k(R) = {θ ∈ Hom(R, ℝ/ℤ) : θ(U) ⊆ B_k}`, a **band character** a point of it. `A`: archimedean characters `λ_e(x) = Re(ē x)`; `T`: torsion;
@@ -83,6 +85,8 @@ frequency-1 coefficient has modulus `1/sin(π/2q)`, an eigenvalue of `Γ_q`, so 
 *Proof:* S0A §C1 G3; §C2 D7 (the advisor's sketch omitted 43, and "the same argument" fails at 1/5 if the product includes the real places,
 `χ_f ≤ 4.36 < 5`; it closes through S0A-7). *Proof verdict:* closes. *Rests on it:* FS89-CL5. *Prior art:* none. *Kernel:* declined (rests on
 FS-53's and FS-66's certificates, themselves tools-checked).
+
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S1D-six.md` stage 6 (J08-11) and J08's "Proposed edits"; carried in `plans/FS91-close-inventory.md` row 85. Not applied here; the close rewrites this entry.
 
 **FS89-S0A-10 — The equivalence: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ`, every band; the rational statement is the uniform statement at its hardest-looking instance, not a lemma on the way to it. [hand; verifier G]**
 ⟸ is `F = ℚ`; ⟹ is S0A-2 with the order bound (automatic at four colours by S0A-3; finite, not computed, at five). *Proof:* S0A §C3.
@@ -316,6 +320,8 @@ different eights, both correct: at depth one the order-8 characters sit on the b
 S0B saw at depth one are the very points D's proof isolates. *Proof:* `tools/fs89_close_cell_reconcile.py` → `data/fs89/close/cell-reconcile.txt`
 (119 fixed points, exact; the plant, order 9 for order 8, goes red); inventory item 25. *Proof verdict:* closes. *Rests on it:* nothing; it
 retires the owner's reconciliation note. *Prior art:* none. *Kernel:* declined.
+
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S0V2-SWm-second-reading.md` §3.4 (J03a-9) and `plans/FS91-S1D-character.md` §4.4 (J07-14); carried in `plans/FS91-close-inventory.md` rows 61, 69, 78. Not applied here; the close rewrites this entry.
 
 **FS89-CL2 — For every subfield `F ⊆ ℝ`: `Θ₄(R_F) ⊆ T₁₆₈ + A` and `Θ₅(R_F) ⊆ T + A`; every four- or five-colour character colouring of any real field's plane is a torsion character plus an archimedean one. [hand; a composition: S0A-10 and S0A-3 (verifier G; N₀ twice) with D2-T1 and D5-T2 — no new step]**
 *Proof:* this entry. *Proof verdict:* closes at the composed grades. *Rests on it:* CL3–CL5; row 95's field clause. *Prior art:* as D2-T1.

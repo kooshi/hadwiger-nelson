@@ -680,3 +680,253 @@ the entry's line in that file). Today's crunch work that bears on an entry is in
 
 Corrections owed **to** FS-89's closed record by today's crunch (the Notation's `A`, FS89-CL2's wording, FS86-B1-LR's Galois scope) are
 carried in `plans/FS91-close-inventory.md` (rows 61, 69, 78) and bannered in stage 4.
+
+## Stage 4 — SAVED (wiring)
+
+### 4.1 What was wired
+
+**Pointer blocks** — a section headed "Where the 2026-09-25 work on this lives", addresses and neutral titles only, appended at the end of:
+
+| file | why |
+|---|---|
+| `plans/STUB-plane-bridge.md` (FS-39) | M2's route C and bridge (J04, J15, J17; J17K queued) |
+| `plans/STUB-chain-theorem.md` (FS-45) | J14's kernel chain theorem |
+| `plans/STUB-unit-vector-ring-kernel.md` (FS-47) | J04's skeleton, J16 (in progress), J07's Lemma C/C′, J09's J2, J10 |
+| `plans/STUB-biquadratic-table.md` (FS-48) | J02, J09 (its three-colour half) |
+| `plans/STUB-four-colours-167.md` (FS-59) | J08, J11, J07/J10 on C-167, J21 |
+| `plans/STUB-adelic-window-colouring.md` (FS-64) | M3's question 2 (J06, J21; J22 queued), J08's re-aim |
+| `plans/STUB-tight-product-colourings.md` (FS-67) | J21's product lemmas |
+| `plans/STUB-three-colour-criterion-kernel.md` (FS-75) | J02's and J09's re-aims |
+| `plans/STUB-four-colour-inheritance.md` (FS-76) | M3's question 1 (J06, J18; J19 in progress; J20 queued) |
+| `plans/STUB-three-colours-residue-degree-three.md` (FS-82) | J02, J09 on its field |
+| `plans/STUB-layer-method-five-colours.md` (FS-83) | J01, J03a |
+| `plans/STUB-five-colours-47.md` (FS-84) | J07, J10 on C-47 |
+| `plans/STUB-dyadic-rigidity-triangle-free.md` (FS-86) | J07, J10 (HD1), J09 (FS86-B1-LR), J21 (FS86-CL1) |
+| `plans/STUB-de-grey-chain-kernel.md` (FS-87) | J04's stripe skeleton, J16 (in progress) |
+| `plans/STUB-isometric-measure-rigidity.md` (FS-89) | J01, J03a, J07, J10 |
+| `plans/STUB-band-rigidity-six.md` (FS-91) | all of M1 |
+| `plans/FS91-character-local-global.md`, `plans/M2-kernel-lane.md`, `plans/M3-exotic-colourings.md` | each crunch milestone's plan: its jobs' records, tools, data, reports, inventory |
+| `plans/FS89-rational-band-rigidity.md`, `plans/FS86-dyadic-rigidity.md`, `plans/FS81-quadratic-four-colours.md`, `plans/FS79-invariant-question.md` | the closed milestones whose derivation entries today's work extends or corrects |
+
+Before this stage none of the 16 stubs and none of the four closed plans held any pointer to today's records (checked at `HEAD` = `a78991d2`,
+before the edits: zero matches for the crunch records' paths); the three crunch plans held some.
+
+**Correction-owed banners** — one line each, `> **Correction owed (2026-09-25 crunch):** see <source>; carried in <inventory> <rows>. Not
+applied here; the close rewrites this entry.`, inserted at:
+
+| file | entry | source of the correction | inventory row |
+|---|---|---|---|
+| `plans/FS89-derivation.md` | the Notation paragraph | `plans/FS91-S0V2-SWm-second-reading.md` §3.4, §3.7; `plans/FS91-S1D-character.md` §4.4 | FS91 61, 69, 78 |
+| `plans/FS89-derivation.md` | FS89-CL2 | the same (J03a-9, J07-14) | FS91 61, 69, 78 |
+| `plans/FS89-derivation.md` | FS89-S0A-10 ("finite, not computed, at five") | `plans/FS91-S1D-six.md` stage 6 (J08-11) | FS91 85 |
+| `plans/FS86-derivation.md` | FS86-B1-LR (Lemma R's Galois scope) | `plans/FS91-S1D-character.md` §2.4; `plans/FS91-S0FV-three-colours-blind.md` §2.2; `plans/FS91-S1V-character.md` §3.2 | FS91 13, 73, 78 |
+| `plans/FS86-derivation.md` | FS86-CL1 | `plans/M3-S1D-windows-five.md` §2.5, §4.6 | M3 18 |
+| `plans/FS81-derivation.md` | T6 (its open item) | `plans/FS91-S0FV-three-colours-blind.md` §2.5 | FS91 15 |
+| `plans/FS91-S0F-three-colours.md` (J02, closed) | §2.10 | `plans/FS91-S0FV-three-colours-blind.md` §5 item 1 | FS91 113 |
+| `plans/FS91-S1D-six.md` (J08, closed) | stage 5, the ℚ(√167) bullet | `plans/FS91-S1V-six.md` stage 4 | FS91 109 |
+| `plans/FS91-S1D-character.md` (J07, closed) | §3.3 (g3) | `plans/FS91-S1V-character.md` §3.1 item 19, §4 row 10 | FS91 105 |
+| `plans/FS91-S1D-character.md` (J07, closed) | §3.1 (CLG_k's "Hence") | `plans/FS91-S1V-character.md` §2.3, §4 row 6 | FS91 89 |
+| `plans/FS91-character-local-global.md` (M1 plan) | §S, SIX-e | `plans/FS91-S1V-six.md` stages 3–4 | FS91 110 |
+| `plans/M2-kernel-lane.md` (M2 plan) | §2.1 | `plans/M2-S1K-chain.md` stages 1, 3 | M2 23 |
+| `plans/M2-kernel-lane.md` | §2.2 | `plans/M2-S2K-route-c.md` §1.1 | M2 32 |
+| `plans/M2-kernel-lane.md` | §2.3 | `plans/M2-S1D-bridge.md` §1.1 (Q5–Q7) | M2 14 |
+| `plans/M3-exotic-colourings.md` (M3 plan) | §PA.1 | `plans/M3-S1D-windows-five.md` §1.1 (Q7) | M3 19 |
+| `plans/M3-exotic-colourings.md` | §S | `plans/M3-S1A-rank-one.md` §2.4 | M3 9 |
+| `plans/M3-exotic-colourings.md` | §M | `plans/M3-S1A-rank-one.md` §2.1, §2.4; `plans/M3-S1D-windows-five.md` §3.6 | M3 9, 10, 20 |
+
+Control: `tools/fs71_ledger_b_check.py --strict` still reads `RESULT: PASS` (544 theorems in 59 derivation files) after the banners.
+Stubs carry their corrections owed inside the pointer block, as an inventory address (FS-39 row 13 of M2; FS-82 rows 8, 15 of FS91).
+
+### 4.2 Close inventories cross-checked; lines added (the owner's pen)
+
+Every result under a record's "Theorems this phase proved" heading, and every correction owed and held item in a record or report, was
+checked for an inventory line (by id, or by a line that states it). Missing ones were appended, each with the source suffix "added by
+J30's cross-check, 2026-09-25", status `open`:
+
+| inventory | rows added | what they cover |
+|---|---|---|
+| `plans/FS91-close-inventory.md` | 95–117 (23) | theorems not yet carried (J01-1; J02-L1–L4, A2.1′; J03a-6; J07-1, 2, 5, 6; J09's J1, J3, J4-C, J4-A, J2′, J-L4b; J10's phase-2 lemmas and results L2–L8, T6, T7, T9); the J10 final report's (g3) correction (105); J11's report in full (106–112); stage 2 §2.4's uncarried corrections and held items (113–116); J09's stub line (117) |
+| `plans/M2-close-inventory.md` | 29–36 (8) | J15's report in full (29–34); J14's FS-45 re-aim (35); J17's theorems table by id (36) |
+| `plans/M3-close-inventory.md` | 8–28 (21) | J18's report in full (8–15); J21's report in full (16–24, 26); J21's theorems not in its report lines (25); J06's held item (27); the missing theorems heading (28) |
+
+Stage 2 §2.4 and stage 3 §3.4, §3.7 marked these "added in stage 4"; their rows: FS91 #6 → 113, #8 → 105, #9 → 109, #10 → 110, #12's C0
+remark → 116, #15 → 114, #16's one-mind half → 115; M2 #5 → 32, #6 → 33, #12 → 34, #13 → 35; M3 #2's § B scan → 27, #3 → 9, #4 → 10, #5 →
+15, #6 → 18, #7 → 19, #8 → 20, #9 → 26, #10 → 28.
+
+**Duplication risk:** the clerk has not folded the reports of J10 (final), J11, J15, J18 and J21 (`FOLDED.txt`); when it does, it will
+append their INVENTORY lines a second time. This job did not touch `FOLDED.txt` or the queue (the clerk's).
+
+### 4.3 The reverse index
+
+For every older item today's work mentions, where. Generated by a script (kept at `data/crunch-2026-09-25/j30-reverse-index.py`) from the crunch records, plans and reports (35 files;
+the close inventories and this job's own report excluded). A mention is a bearing candidate, not a verdict; the pointer blocks above are
+the curated subset.
+
+**Stubs** (every mention of `FS-NN` in a crunch record, plan or report; the stub file is the one whose text names that number).
+
+| stub | file | crunch addresses (file:lines) |
+|---|---|---|
+| FS-37 | `STUB-field-level-criteria.md` | `M2-kernel-lane`:329 |
+| FS-39 | `STUB-plane-bridge.md` | `reports/J03`:34; `reports/J04`:5,15; `reports/J15`:11; `reports/J17`:6; `FS91-S0F-three-colours`:276; `FS91-S0FV-three-colours-blind`:186,197,338; `FS91-S1D-character`:195; `FS91-character-local-global`:114; `M2-S1D-bridge`:3,16,42,335,345…; `M2-S2K-route-c`:1,24,194,208,214…; `M2-kernel-lane`:1,5,6,9,99… |
+| FS-45 | `STUB-chain-theorem.md` | `reports/J04`:14; `reports/J14`:12; `FS91-S0F-three-colours`:27,280; `M2-S1K-chain`:1,167,193,197,198; `M2-kernel-lane`:1,5,9,21,537 |
+| FS-47 | `STUB-unit-vector-ring-kernel.md` | `reports/J04`:2,16,19; `reports/J07`:12; `FS91-S1D-character`:385; `M2-S1K-chain`:84; `M2-S3K-unit-ring`:1,24; `M2-kernel-lane`:1,6,11,22,28… |
+| FS-48 | `STUB-biquadratic-table.md` | `reports/J09`:10; `FS91-S0FV-three-colours-blind`:258 |
+| FS-49 | `STUB-distance-two-gadget.md` | `M2-kernel-lane`:61,502 |
+| FS-53 | `—` | `reports/J17`:7; `FS91-S1D-character`:317; `FS91-S1V-character`:166,209,255; `FS91-S1V-six`:155; `M2-S1D-bridge`:42,389 |
+| FS-54 | `STUB-sixth-colour.md`, `STUB-twenty-seven.md` | `FS91-S0FV-three-colours-blind`:198; `FS91-S1D-character`:239 |
+| FS-59 | `STUB-four-colours-167.md` | `reports/J08`:7,9; `FS91-S1D-six`:331 |
+| FS-64 | `STUB-adelic-window-colouring.md` | `reports/J06`:6,9; `reports/J08`:7,9; `reports/J21`:12; `FS91-S1D-six`:331; `M3-S1D-windows-five`:181,186; `M3-exotic-colourings`:1,5,49,138,232… |
+| FS-66 | `STUB-residue-tower-drop.md` | `reports/J07`:2; `FS91-S1D-character`:315,317,321,371,379; `FS91-S1V-character`:166,176,177,200,209…; `FS91-S1V-six`:155; `M3-S1D-windows-five`:103,157; `M3-exotic-colourings`:61,488,583 |
+| FS-68 | `STUB-tower-never-rises.md` | `FS91-character-local-global`:117 |
+| FS-70 | `STUB-five-over-sqrt3-sqrt5.md` | `FS91-character-local-global`:208; `M2-kernel-lane`:190 |
+| FS-73 | `STUB-rigidity-dichotomy.md` | `FS91-character-local-global`:30 |
+| FS-75 | `STUB-three-colour-criterion-kernel.md` | `reports/J02`:9; `reports/J09`:10; `FS91-S0F-three-colours`:457; `FS91-S0FV-three-colours-blind`:259; `M2-kernel-lane`:193 |
+| FS-76 | `STUB-four-colour-inheritance.md` | `reports/J06`:9; `reports/J18`:11; `M3-S1A-rank-one`:1,34,369; `M3-S1B-rank-one`:1; `M3-exotic-colourings`:1,5,399 |
+| FS-79 | `STUB-invariant-question-four-colours.md` | `reports/J18`:6,9; `M3-S1A-rank-one`:14,34,39,142,173…; `M3-exotic-colourings`:19,35,372,373 |
+| FS-80 | `STUB-window-frequency-certificate.md` | `M3-exotic-colourings`:147 |
+| FS-81 | `STUB-quadratic-four-colour-classification.md` | `FS91-S0F-three-colours`:68,405; `FS91-S0FV-three-colours-blind`:18,41 |
+| FS-82 | `STUB-three-colours-residue-degree-three.md` | `reports/J02`:6; `reports/J03`:16,33; `reports/J09`:8,10; `FS91-S0F-three-colours`:26,51,53,316,354…; `FS91-S0FV-three-colours-blind`:255,257; `FS91-character-local-global`:50,58,112,204,379… |
+| FS-83 | `STUB-layer-method-five-colours.md` | `FS91-character-local-global`:315 |
+| FS-86 | `STUB-dyadic-rigidity-triangle-free.md` | `reports/J07`:9; `FS91-S1D-character`:284; `FS91-character-local-global`:22; `M3-exotic-colourings`:21 |
+| FS-87 | `STUB-de-grey-chain-kernel.md` | `reports/J04`:16; `M2-S3K-unit-ring`:1; `M2-kernel-lane`:1,5,10,22,51… |
+| FS-89 | `STUB-isometric-measure-rigidity.md` | `reports/J03a`:10; `reports/J07`:8; `FS91-S0FV-three-colours-blind`:26; `FS91-S0V-band-to-nine`:5,28,279; `FS91-S0V2-SWm-second-reading`:33,34,37,91,93…; `FS91-S1D-character`:19,315; `FS91-S1D-one-prime`:48,80; `FS91-S1V-character`:23,27,45,257; `FS91-character-local-global`:29,402,430; `M3-exotic-colourings`:25 |
+| FS-91 | `STUB-band-rigidity-six.md` | `reports/J01`:7,10; `reports/J02`:9; `reports/J03`:14; `FS91-S0F-three-colours`:1,459; `FS91-S0FV-three-colours-blind`:1,5; `FS91-S0V-band-to-nine`:1,12,289; `FS91-S0V2-SWm-second-reading`:1; `FS91-S1D-character`:1,3,385; `FS91-S1D-one-prime`:1; `FS91-S1D-six`:1; `FS91-S1V-character`:1; `FS91-S1V-six`:1; `FS91-character-local-global`:1,3,589 |
+
+**Ledger rows** (mentions outside the three plans' re-grokking walks, §G.1–§G.3, which name every row by design; table-row and `§`-row references filtered out).
+
+| row | crunch addresses |
+|---|---|
+| 14 | `M2-kernel-lane`:335 |
+| 19 | `M3-exotic-colourings`:347 |
+| 23 | `M2-kernel-lane`:282 |
+| 32 | `M2-kernel-lane`:304 |
+| 33 | `reports/J11`:9; `FS91-S1V-six`:251; `M2-S1D-bridge`:24,200,279; `M3-S1D-windows-five`:411; `M3-exotic-colourings`:333,335 |
+| 45 | `M2-S1K-chain`:150; `M2-kernel-lane`:266; `M3-S1A-rank-one`:41,155; `M3-exotic-colourings`:331,557 |
+| 50 | `FS91-S1D-six`:227; `FS91-character-local-global`:309 |
+| 52 | `FS91-S0F-three-colours`:38,216,234,288,350; `FS91-S0FV-three-colours-blind`:16,167,198,206,282… |
+| 53 | `reports/J08`:8; `FS91-S1D-six`:17; `FS91-S1V-six`:105 |
+| 57 | `reports/J04`:7; `FS91-S0F-three-colours`:288,289; `FS91-S0FV-three-colours-blind`:180,195; `M2-S1K-chain`:150; `M2-S3K-unit-ring`:85; `M2-kernel-lane`:329,366,396,512 |
+| 58 | `M2-kernel-lane`:265 |
+| 63 | `FS91-S0F-three-colours`:27,291; `FS91-S1D-character`:300; `FS91-character-local-global`:306,314; `M2-S2K-route-c`:40,156; `M2-kernel-lane`:267,314 |
+| 66 | `M3-exotic-colourings`:331 |
+| 68 | `reports/J08`:8; `FS91-S1D-six`:17,37,152; `FS91-character-local-global`:308 |
+| 69 | `reports/J03`:7; `reports/J08`:7; `reports/J11`:11; `FS91-S1D-six`:37,95,97,152,213…; `FS91-S1V-six`:22; `FS91-character-local-global`:308,309; `M3-S1D-windows-five`:23,69,215 |
+| 70 | `FS91-S1D-six`:157,315; `FS91-S1V-six`:164,249 |
+| 71 | `M3-exotic-colourings`:333 |
+| 72 | `M3-exotic-colourings`:334 |
+| 75 | `FS91-S1D-six`:17,164; `FS91-character-local-global`:23,312; `M3-S1D-windows-five`:17,70,90,169,219… |
+| 78 | `M3-exotic-colourings`:372 |
+| 79 | `FS91-S1V-six`:251; `FS91-character-local-global`:330 |
+| 80 | `M3-exotic-colourings`:330 |
+| 82 | `FS91-S0F-three-colours`:309,316,439,450; `FS91-S0FV-three-colours-blind`:17,18,212,344 |
+| 86 | `M3-S1A-rank-one`:42; `M3-exotic-colourings`:332,565 |
+| 88 | `FS91-S1D-character`:23; `FS91-S1V-character`:27; `FS91-character-local-global`:303,314 |
+| 89 | `FS91-S1D-character`:177,301; `FS91-S1V-character`:22,153; `FS91-character-local-global`:305,452 |
+| 91 | `M3-exotic-colourings`:331 |
+| 92 | `reports/J21`:7; `FS91-character-local-global`:301; `M3-S1D-windows-five`:471 |
+| 94 | `FS91-S1D-character`:302; `FS91-S1V-character`:22,159; `FS91-character-local-global`:306,452; `M3-exotic-colourings`:335 |
+| 95 | `reports/J01`:7; `reports/J03a`:14; `reports/J07`:11; `FS91-S0F-three-colours`:25,37,68; `FS91-S0V-band-to-nine`:29,33,50,259,287…; `FS91-S0V2-SWm-second-reading`:251; `FS91-S1D-character`:19,320,378; `FS91-S1D-one-prime`:80; `FS91-S1V-character`:18,124,163,165,176; `FS91-character-local-global`:436,544; `M2-kernel-lane`:268 |
+| 96 | `FS91-S0V-band-to-nine`:50; `FS91-S0V2-SWm-second-reading`:251; `FS91-S1D-character`:320,379; `FS91-S1V-character`:22,162,165,169; `FS91-S1V-six`:155,183; `FS91-character-local-global`:21,306,409,453,554 |
+| 97 | `FS91-S0V-band-to-nine`:42,50,115,265; `FS91-S0V2-SWm-second-reading`:251; `FS91-character-local-global`:21,45,315 |
+
+**Grokkings** (the same exclusion; lines naming FS-89's gluing lemmas G0–G3 filtered out).
+
+| grokking | crunch addresses |
+|---|---|
+| G1 | `FS91-S0V-band-to-nine`:159,181,195,260; `FS91-S0V2-SWm-second-reading`:272; `FS91-S1D-character`:300; `FS91-character-local-global`:306 |
+| G4 | `reports/J14`:2,12,13; `M2-S1K-chain`:23,35,50,131,146…; `M2-S3K-unit-ring`:83,96; `M2-kernel-lane`:386,429,469,511 |
+| G13 | `M3-exotic-colourings`:42,331 |
+| G21 | `FS91-character-local-global`:323; `M2-S1D-bridge`:106; `M3-S1A-rank-one`:49,61,281; `M3-S1B-rank-one`:54; `M3-S1D-windows-five`:378; `M3-exotic-colourings`:343 |
+| G22 | `M3-exotic-colourings`:333,355 |
+| G24 | `M3-exotic-colourings`:60,333,356 |
+| G27 | `M3-exotic-colourings`:69 |
+| G30 | `FS91-S1D-character`:354; `M2-kernel-lane`:265,266 |
+| G35 | `FS91-S1D-six`:196 |
+| G38 | `FS91-S0FV-three-colours-blind`:255; `M2-kernel-lane`:267 |
+| G41 | `FS91-character-local-global`:305 |
+| G42 | `M3-exotic-colourings`:331 |
+| G43 | `FS91-character-local-global`:301; `M3-exotic-colourings`:60,333 |
+| G44 | `FS91-S0F-three-colours`:82,166; `FS91-S1D-six`:152; `FS91-S1V-six`:96,176 |
+| G46 | `M2-kernel-lane`:280; `M3-exotic-colourings`:330 |
+| G48 | `reports/J02`:6; `reports/J06`:2; `FS91-S0F-three-colours`:452; `M2-kernel-lane`:419 |
+| G49 | `M3-exotic-colourings`:343 |
+| G50 | `FS91-character-local-global`:304 |
+| G51 | `FS91-character-local-global`:426 |
+| G54 | `reports/J10`:5; `FS91-S1D-character`:242,370; `FS91-S1V-character`:250,307,359; `FS91-character-local-global`:308; `M3-exotic-colourings`:63 |
+| G55 | `reports/J02`:6; `FS91-S0F-three-colours`:27,291,316,450,453; `FS91-S0FV-three-colours-blind`:18,35,138,154,167…; `FS91-S1D-character`:104; `FS91-character-local-global`:37,303; `M2-S1K-chain`:31,174; `M2-S3K-unit-ring`:19,78,115; `M2-kernel-lane`:25 |
+| G56 | `reports/J03`:2; `reports/J08`:7; `FS91-S0F-three-colours`:83,166,288; `FS91-S0FV-three-colours-blind`:129,138,154,165,171…; `FS91-S1D-character`:218,235,239,254,370; `FS91-S1D-six`:106,152,328; `FS91-S1V-character`:111,123,146,147,250…; `FS91-S1V-six`:22; `M2-S1D-bridge`:42,375; `M2-kernel-lane`:342 |
+| G59 | `reports/J08`:7; `FS91-S0F-three-colours`:311; `FS91-S1D-six`:328; `M3-exotic-colourings`:24,60 |
+| G61 | `FS91-S0FV-three-colours-blind`:255 |
+| G63 | `reports/J04`:5; `reports/J15`:8; `reports/J17`:6; `FS91-S0F-three-colours`:276; `FS91-S0FV-three-colours-blind`:181,186,196,197,338…; `M2-S1D-bridge`:264,297,299,358; `M2-S2K-route-c`:24,33,154,207; `M2-kernel-lane`:347,474 |
+| G64 | `reports/J08`:7; `FS91-S1D-character`:381; `FS91-S1D-six`:223,328; `FS91-character-local-global`:21,408; `M2-S1D-bridge`:286,288; `M2-kernel-lane`:418 |
+| G66 | `FS91-character-local-global`:312; `M3-exotic-colourings`:61 |
+| G71 | `FS91-S1D-character`:6; `FS91-S1D-six`:6; `FS91-S1V-six`:76 |
+| G74 | `reports/J02`:6; `reports/J03`:2; `FS91-S0F-three-colours`:316,451,453; `FS91-S0FV-three-colours-blind`:254; `FS91-character-local-global`:508 |
+| G76 | `FS91-S0V2-SWm-second-reading`:251; `FS91-S1D-character`:380; `FS91-S1D-six`:330 |
+
+**FS-89's derivation entries and records** (`plans/FS89-derivation.md` ids; file names of FS-89's records are listed as files).
+
+| entry | crunch addresses |
+|---|---|
+| `FS89-CL2` | `reports/J03a`:7; `reports/J07`:11; `FS91-S0F-three-colours`:21; `FS91-S0V2-SWm-second-reading`:216,250; `FS91-S1D-character`:311,319,378 |
+| `FS89-CL3` | `FS91-S1D-character`:306,373 |
+| `FS89-D1-L2` | `FS91-S0V2-SWm-second-reading`:118 |
+| `FS89-D1-L4` | `FS91-S0V2-SWm-second-reading`:37 |
+| `FS89-PA-B2` | `FS91-S0V2-SWm-second-reading`:29 |
+| `FS89-PA-berend1984` | `reports/J01`:8; `FS91-S0V-band-to-nine`:9,24,25,26,27… |
+| `FS89-S0A-1` | `M2-kernel-lane`:109,209 |
+| `FS89-S0B-T3` | `FS91-S1D-one-prime`:18 |
+| `FS89-S0B-band` | `reports/J01`:9; `FS91-S0V-band-to-nine`:52; `FS91-S1D-one-prime`:21 |
+| `FS89-S1D-derivation` | `FS91-S1D-one-prime`:22 |
+| `FS89-S1V-verification` | `reports/J01`:9; `FS91-S0V-band-to-nine`:52 |
+| `FS89-S1VB-14` | `reports/J03a`:10; `FS91-S0V2-SWm-second-reading`:34 |
+| `FS89-S1VB-2` | `FS91-S0V2-SWm-second-reading`:24 |
+| `FS89-S1VB-4` | `FS91-S0V2-SWm-second-reading`:25 |
+| `FS89-S1VB-6` | `FS91-S0V2-SWm-second-reading`:26 |
+| `FS89-S1VB-7` | `FS91-S0V2-SWm-second-reading`:27 |
+| `FS89-S1VB-verification` | `FS91-S0V-band-to-nine`:50,135,141; `FS91-S0V2-SWm-second-reading`:5,65,126 |
+| `FS89-close-inventory` | `FS91-S0V-band-to-nine`:11 |
+| `FS89-derivation` | `reports/J01`:8; `reports/J03a`:7; `FS91-S0F-three-colours`:7,21; `FS91-S0V-band-to-nine`:10,24,25,26,283; `FS91-S0V2-SWm-second-reading`:5,24,30,248; `FS91-S1V-character`:27; `FS91-character-local-global`:24 |
+| `FS89-rational-band` | `FS91-S0V-band-to-nine`:6,28; `FS91-S1D-one-prime`:18; `FS91-S1V-character`:23; `M2-kernel-lane`:5,27 |
+
+**Earlier derivation entries** (ids of `plans/FS<nn>-derivation.md` and the other milestones' records).
+
+| entry | crunch addresses |
+|---|---|
+| `FS39-T1` | `M2-S1D-bridge`:174,296 |
+| `FS54-T2` | `FS91-character-local-global`:28 |
+| `FS54-T5` | `M3-exotic-colourings`:230 |
+| `FS62-T2` | `M2-S1D-bridge`:277,279,288,342,354…; `M2-kernel-lane`:99,418,442 |
+| `FS62-derivation` | `M2-S1D-bridge`:410 |
+| `FS66-T8` | `M3-S1D-windows-five`:121,213 |
+| `FS73-T22` | `FS91-S0F-three-colours`:24,77; `FS91-S0FV-three-colours-blind`:153,171,194; `FS91-character-local-global`:29 |
+| `FS73-T24` | `M3-S1A-rank-one`:216,241; `M3-S1B-rank-one`:34 |
+| `FS73-T30` | `reports/J06`:5; `M3-S1A-rank-one`:37,40,43,143,312; `M3-exotic-colourings`:20,413,545,582 |
+| `FS73-T40` | `FS91-S0F-three-colours`:426 |
+| `FS73-derivation` | `FS91-S0F-three-colours`:24; `M3-S1A-rank-one`:37; `M3-exotic-colourings`:20 |
+| `FS79-C-deBruijn` | `M3-S1A-rank-one`:143,262 |
+| `FS79-T30` | `reports/J06`:5; `M3-S1A-rank-one`:37 |
+| `FS79-T34` | `M3-S1A-rank-one`:36; `M3-S1B-rank-one`:34; `M3-exotic-colourings`:469,553 |
+| `FS79-T35` | `M3-S1A-rank-one`:35,39; `M3-exotic-colourings`:453,536 |
+| `FS79-T6` | `M3-exotic-colourings`:31,79 |
+| `FS79-derivation` | `M3-S1A-rank-one`:35,36,37; `M3-exotic-colourings`:20 |
+| `FS81-T1` | `FS91-S0F-three-colours`:90; `FS91-character-local-global`:29 |
+| `FS81-T2` | `reports/J02`:9; `FS91-S0F-three-colours`:24,40,77,230,251…; `FS91-S0FV-three-colours-blind`:153,166,171,194,198… |
+| `FS81-T3` | `FS91-S0F-three-colours`:23,78,85,426,467; `FS91-S0FV-three-colours-blind`:63,65,153,171,194…; `FS91-S0V-band-to-nine`:170 |
+| `FS81-T4` | `reports/J02`:2; `FS91-S0F-three-colours`:32,79,90,264,428; `FS91-S0FV-three-colours-blind`:39,61,68,273 |
+| `FS81-T5` | `FS91-S0F-three-colours`:53 |
+| `FS81-T6` | `reports/J09`:8; `FS91-S0F-three-colours`:360; `FS91-S0FV-three-colours-blind`:157,331,372 |
+| `FS81-T7` | `FS91-S0FV-three-colours-blind`:60; `FS91-character-local-global`:214 |
+| `FS81-derivation` | `FS91-S0FV-three-colours-blind`:158,256 |
+| `FS85-dB1` | `M3-S1B-rank-one`:34; `M3-exotic-colourings`:565 |
+| `FS85-dB2` | `M3-S1A-rank-one`:42; `M3-exotic-colourings`:246,300,317,414,545… |
+| `FS85-derivation` | `M2-kernel-lane`:23,85 |
+| `FS86-B1-LD` | `FS91-S1D-character`:371 |
+| `FS86-B1-LR` | `reports/J07`:11; `FS91-S0F-three-colours`:42,64; `FS91-S0FV-three-colours-blind`:45,99,160,256,359; `FS91-S1D-character`:111,187,384; `FS91-S1V-character`:69,284; `FS91-character-local-global`:29,447 |
+| `FS86-CL1` | `reports/J21`:7; `M3-S1D-windows-five`:61,205,471; `M3-exotic-colourings`:22,23,434,473 |
+| `FS86-CL2` | `FS91-S0FV-three-colours-blind`:100,298; `FS91-S1D-character`:26,111,350; `FS91-S1V-character`:154; `M2-kernel-lane`:111,202 |
+| `FS86-Cx-C14` | `M3-S1D-windows-five`:60; `M3-exotic-colourings`:473 |
+| `FS86-Cx-C9` | `M3-S1D-windows-five`:73 |
+| `FS86-LP` | `FS91-S1D-character`:255; `FS91-S1V-character`:308; `M3-S1D-windows-five`:63 |
+| `FS86-dB-H` | `reports/J06`:11; `reports/J18`:7; `M3-S1A-rank-one`:14,43,142,335,368; `M3-S1B-rank-one`:34; `M3-exotic-colourings`:541 |
+| `FS86-derivation` | `FS91-S1D-character`:384; `M3-S1D-windows-five`:60,471; `M3-exotic-colourings`:22 |

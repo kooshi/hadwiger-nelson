@@ -258,6 +258,8 @@ In particular **`χ(F²) ≤ 3 ⟹ L(F) ≤ 3` (S1)**.
 
 ### 2.10 Hypotheses used; finite degree; other subfields of ℝ
 
+> **Correction owed (2026-09-25 crunch):** see `plans/FS91-S0FV-three-colours-blind.md` §5 item 1; carried in `plans/FS91-close-inventory.md` row 113. Not applied here; the close rewrites this entry.
+
 - **Uses `[F : ℚ] < ∞`** in two places: L2(a) (`R/pR` finite, `dim ≤ [L:ℚ]`, which the Teichmüller construction needs) and Lemma 1.1
   (`O_L` a finite `ℤ`-module, for integrality of `R·O_L`). L1, FS81-T2 and FS81-T4 hold for every `F ⊆ ℝ`.
 - **No other hypothesis:**

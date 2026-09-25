@@ -1076,3 +1076,13 @@ condition" is Berend's word, Furstenberg's is "non-lacunary"; §PA.3 — `[Beren
 Berend from **four** of Furstenberg's results (Prop. III.1 and Th. III.2 are the lacunary side), and Furstenberg 1967 is now held and read;
 §G.1's FS-73 row — the correspondence principle cited at FS73-T38 is Furstenberg's later work, not `[Furstenberg1967]`, which also poses no
 invariant-measure question (so inventory item 1's "open ×2×3-type problem" is folklore, not this paper).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-S0V-band-to-nine.md` — job J01's record: the blind verification of this milestone's PA-B2 and PA-B3
+- `plans/FS91-S0V2-SWm-second-reading.md` — job J03a's record: the second reading, and the Notation's archimedean part
+- `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` — jobs J07 and J10 on FS89-CL2 to CL5
+- `plans/FS91-S1D-six.md` stage 6 — job J08's record: the band-1/6 and band-1/5 lists for `Q`
+- `plans/FS91-close-inventory.md` rows 1–6, 18, 59–70, 75, 78, 85, 92 — the related items, including corrections owed to `plans/FS89-derivation.md`

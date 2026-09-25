@@ -56,3 +56,13 @@ confidence of landing in a week.
 G76 (the obstruction), G71 and G73 (four colours have no height; averaged formats), G72 (pose it for every invariant measure), G60 (the
 invariant-measure engine, `F ⊆ F_μ ⊆ P`), G66 (the odometer frame), G21 (a finite certificate's range), G51 (two minds met one wall: this
 licenses a negative only if proved).
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/FS91-character-local-global.md` — crunch milestone M1's plan (FS-91)
+- `plans/FS91-S0V-band-to-nine.md` — job J01's record: the blind verification of FS-89's PA-B2 and PA-B3
+- `plans/FS91-S0V2-SWm-second-reading.md` — job J03a's record
+- `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` — jobs J07 and J10 on FS89-CL2 to CL5
+- `plans/FS91-close-inventory.md` rows 1–6, 18, 59–70, 75, 78, 92 — the related items, including corrections owed to `plans/FS89-derivation.md` (rows 61, 69, 78)

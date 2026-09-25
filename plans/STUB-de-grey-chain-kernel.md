@@ -41,3 +41,11 @@ residue colouring — the conditional theorem's inhabitant); rows 78, 85, 86.
 
 **Solver:** none — the kernel and existing checkers; runs in the finite-witness-free week. **Cost:** targets 1–2 a day or two; 3 days;
 4 weeks.
+
+## Where the 2026-09-25 work on this lives
+
+*Addresses and titles only, added by the 2026-09-25 crunch's bookkeeper (job J30). The index of that day's work, with its results, is `plans/CRUNCH-2026-09-25-INDEX.md`; a blind verifier does not open it.*
+
+- `plans/M2-kernel-lane.md` §3 — the kernel lane's plan: the stripe lemma's skeleton and price; scratch `data/m2/j04/K3Stripe.lean`
+- `plans/M2-S3K-unit-ring.md` — job J16's record (in progress at this writing; the stripe lemma is its second half)
+- `plans/M2-close-inventory.md` rows 4, 10 — the related items
