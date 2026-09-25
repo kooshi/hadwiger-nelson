@@ -580,10 +580,54 @@ the same `4⁷`)", `plans/M2-S3K-unit-ring.md` §3.2). *Alternative weighed:* de
 both). *Why this won:* a recorded timing should keep its source; they are 29 lines, outside `Proofs/`, and no build reads them.
 *Confidence:* high.
 
-**Gate verdict:** green — build, lint (first `lake lint` at a close since it was wired; passed with a control that fires), axioms, vacuity and
+**Gate verdict:** green — build, lint (passed, with a control that fires), axioms, vacuity and
 its self-test, architecture, zero `sorry` terms. Two recorded counts are stale and are the front-page lane's to correct: `CLAUDE.md` § Trust
 ledger ("1034 clean" → **1130**, after item 5) and `CLAUDE.md` § The gate plus `scripts/vacuity-baseline.txt`'s header (the vacuity counts
 above). *Negative controls this stage:* lint (2c) and vacuity (4c) were each watched to fire; the build's and the axiom audit's plants were
 run by the kernel jobs themselves (J14 stage 3, J15 stage 3, J16 stage 2, J17K2 stage 2; each record's plant section) and are not re-run here.
 
 **Would have searched here (stage 0):** none — every step was a gate or an existing checker.
+
+### Stage 1 — SAVED (the quotation check; the inventory walk; the corrections to this record)
+
+**1a. The quotation check (standing rule 5).** Every quotation in J23b's brief, its template (J23a's) and the owner's launch message,
+against its source:
+
+| # | quotation | source | verdict |
+|---|---|---|---|
+| Q1 | "gate green at 7fb8fcb7: build 0 warnings, axioms 1109 clean / 11 axiom-free / 5 purchases, vacuity declarations 7051, refutations 304, sites 279, generic 257, architecture PASS" (launch message) | `plans/M2-S5K-noparam.md` §4.1; stage 0's own runs | **matches** both |
+| Q2 | "`scripts/Axioms.lean` does not print 13 record-named M2 helper theorems" (brief, stage 0 item 5) | `plans/CRUNCH-2026-09-25-INDEX.md` §3.3 | **matches the index**, which lists exactly 13 — from J14's and J15's files only, J16's and J17K's being in flight when it was written; at `HEAD` the count was 21 (stage 0, item 5a) |
+| Q3 | "`data/m2/j16/WheelProbe*.lean` are uncommitted leftovers of J16" | `git status` at launch | **true** |
+| Q4 | "The lakefile's driver is `batteries/runLinter` on `Proofs`" | `lakefile.toml` lines 9–10 | **verbatim** (`lintDriver = "batteries/runLinter"`, `lintDriverArgs = ["Proofs"]`) |
+| Q5 | "every M2 leaf was priced high" | the six records' price tables | **true of every priced product** — scored in stage 3's prices-against-actuals table |
+| Q6 | Kooshi's close rules: "close out with the findings"; "I don't want to lose anything from before"; "All novel knowledge is a success." (J23a's template) | `plans/FS89-rational-band-rigidity.md:923` | **verbatim** |
+
+**1b. The inventory walk.** `plans/M2-close-inventory.md` (rows 1–57 at the clerk's last fold `491161bb`; J17K2's report folded here as rows
+58–63; stage 0's findings rows 64–65; one settled decision row 66). Every row now carries a status: **done** with its hash or stage (20
+rows: 2, 5 (library half), 6, 9, 10, 14, 16, 23, 25, 27, 32 (plan half), 37, 38, 50 (record half), 54, 55, 56, 63, 64, 66), or the stage that
+closes it — **stage 2** the kernel register (19 rows), **stage 3** the re-reads, predictions and tallies (19), **stage 4** the drafts (19;
+some rows are split across two stages). No row was declined. One prior-art debt closed here: **the Snyder citation** (row 63) — zbMATH
+`Zbl 1031.11012`, N. Snyder, "An alternate proof of Mason's theorem", *Elem. Math.* 55, No. 3, 93–94 (2000), one query
+(`au:"Snyder, Noah" & ti:"Mason"`, `data/m2/j23b/zbmath-snyder.json`); J17's from-memory citation was right.
+
+**1c. Corrections to this record's earlier stages, and to the job records** (their banners say "the close rewrites this entry"; the brief
+confines the close to §R-close, so each correction lives here and the stage text stays as the history; the job records are frozen and are
+corrected here, not edited):
+
+| # | where | as written | corrected | source |
+|---|---|---|---|---|
+| C-1 | §2.1, row `Gadget.transport` | carries the rhombus gadget into the 18-vertex graph ("the second oracle") | `Gadget.transport` moves a gadget along `φ : Fin n → Fin n`, one vertex type; the carrier is the four-line cross-size pull `SqrtTwoThree.pullGadget` (`Instances/SqrtTwoThree.lean:135`), kept in the instance module so `Gadget.lean`'s dependents are not rebuilt | `plans/M2-S1K-chain.md` §1.0, stage 3; inventory 23 |
+| C-2 | §2.2, row "K2: `F(t)` as rational functions" | "not found: an `IntermediateField.adjoin F {t} ≃ RatFunc F` equivalence" | it exists: `RatFunc.algEquivOfTranscendental (f : L) (h : Transcendental K f) : RatFunc K ≃ₐ[K] K⟮f⟯` (`FieldTheory/RatFunc/AsPolynomial.lean:229`); the query looked in the wrong directory. The adjunction landed as `(IntermediateField.adjoin F {t}).toSubfield` with Mathlib's equivalence | `plans/M2-S2K-route-c.md` §1.1; inventory 32 |
+| C-3 | §2.3, the bridge's prior art | "The bridge is in print with a correct proof: `[Madore2015]` ¶5.4 with ¶1.3"; the lineage Fischer → Madore | **a re-finding**: `BIBLIOGRAPHY.md`'s `[Madore2015]` row (FS-53, 2026-09-15) and `CLAUDE.md` G56 already named ¶5.4 as the bridge. The lineage is **Benda–Perles (1976 manuscript, printed 2000; credited in `[Fischer1990]`'s introduction; unread) → Fischer 1990 Remark 1 (a false step) → Soifer 2009/2024, Open Problem 11.1's comment (asserted, no proof) → Madore 2015 ¶5.4 (a correct one-sentence proof by Tarski; "decidability" stands for completeness; the last step to number fields, one line, is not written)** | `plans/M2-S1D-bridge.md` §1.1 Q5–Q7; inventory 14 |
+| C-4 | §2.3, last bullet | "The gate is partial: J17 re-runs the seven zbMATH queries first" | completed: J17 re-ran the seven (J04's control reproduced) and eight more; nothing beyond `[Madore2015]`, `[Fischer1990]`, `[Soifer2024]` ch. 11 and the unread `[BendaPerles2000]`; one adjacent paper, `[WangKosheleva1998]` | `plans/M2-S1D-bridge.md` §1.3; inventory 6 |
+| C-5 | §2.4 item 5 | route C uses "`cosetResidue` + `unitQuadrance_colorable_of_ringHom` (or `normOne_subset_valuationSubring` in the complex form)" | as landed: `unitQuadrance_colorable_of_subring` (by `cosetResidue`) with J15's own valuation lemma `mem_valuationSubring_of_sq_add_sq_eq_one`; `normOne_subset_valuationSubring` is not used by route C (J16 uses it, for prime inversion) | `Proofs/HadwigerNelson/Transcendental.lean:107, 141, 177`; inventory 2 |
+| C-6 | §1.1 G30's K1 (7), §1.4 item 2, §4.2 J14's gate column | "`VACUITY DECLARED`, with G₄ named" | **withheld, rightly**: the marker asserts a provably empty domain, and `G4` is unproved, not empty; the docstring says "Conditional, and not vacuous". The same holds for `RealAlgebraicDescent` (J17K) | `plans/M2-S1K-chain.md` stage 4; `plans/M2-S1D-bridge.md` §3.2; inventory 25, 26 |
+| C-7 | §2.2, row "K2 (J17)" ("the bridge's kernel form is weeks"); §4.1 item 5 ("the kernel form waits for real closed field theory") | weeks; waiting | the conditional kernel form landed in under an hour: `Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent`, with `RealAlgebraicDescent` its one named hypothesis, and `IsRealClosed ℝ` from Mathlib's eventual-sign lemmas. The **unconditional** form needs `(∃T)` in the kernel — months (J17 §3.2) | `plans/M2-S4K-bridge.md` §1.3, stage 2 |
+| C-8 | §3.2, K3-A's price; §4.2, J16's stop rule ("propose J16b") | "4–6 hours, 400–500 lines — more than one job" | the stripe lemma landed in full in 17 minutes of work, 447 lines with its controls; no J16b. The saving was the plan's own §4.4 item 5 (S2 as a wheel statement) and a properness-only line-to-line step | `plans/M2-S3K-unit-ring.md` §3.5, §4.3 item 5 |
+| C-9 | §4.1 item 4 | "Bochnak–Coste–Roy, *Real Algebraic Geometry*, Thm 4.1.2" | BCR §4.1's title is confirmed ("The Artin-Lang Homomorphism Theorem and the Real Nullstellensatz"), the number 4.1.2 is not (book not held); the statement read is `[GoelPatilVerma2022]` Thm 3.11, after Lang 1953 | `plans/M2-S1D-bridge.md` §1.1 Q11 |
+| C-10 | J17's record §3.2 (frozen) | B0 and B1 "~1 day" each | each under half an hour at this Mathlib pin: Mathlib already holds the eventual-sign lemmas and the tower integrality | `plans/M2-S4K-bridge.md` §1.3; inventory 50 |
+| C-11 | J17's record, "Theorems this phase proved", kernel-decision column (frozen) | T2 "kernel candidate"; T3, T9 "kernel as a conditional theorem"; T4 "declined (value low)"; T5, T6 "declined" | T2 **kernel** (J17K, `RealClosed.lean`); T3, T9 **kernel, conditional on `RealAlgebraicDescent`** (J17K, `Bridge.lean`); T4 **kernel, stronger** (every field with `2 ≠ 0`); T5 **kernel** in its one-variable containment form; T6 **kernel** up to the tower reading of "purely transcendental" (J17K2, `NoParam.lean`) | inventory 61 |
+| C-12 | J17's record §2.3, Lemma NP's proof (frozen) | "pairwise coprime (characteristic 0)"; the base `ℂ` | coprimality of `p ± q` needs characteristic ≠ 2, and no algebraically closed base is needed; NP is **false** in characteristic 2 (`a = X²` over `𝔽₂`) | `plans/M2-S5K-noparam.md` §1.2, §4.2; inventory 61 |
+| C-13 | J17K's brief, `data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md` line 130 (frozen) | "(Dropping `CharZero k` is *not* a good plant: NP stays true in odd characteristic; only the proof's derivative step breaks.)" | in odd characteristic **no step breaks** — Mathlib's `Polynomial.flt_catalan` descends in characteristic `p`; the boundary is characteristic 2, where NP is false | `plans/M2-S5K-noparam.md` §1.1; inventory 62 |
+
+**Would have searched here (stage 1):** none — one zbMATH lookup of a known paper (row 63) is a citation check, not a finite-witness search.
