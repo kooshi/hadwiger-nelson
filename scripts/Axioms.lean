@@ -1585,6 +1585,23 @@ no native evaluation. -/
 #print axioms HadwigerNelson.SevenConditional.sum_eightUnits
 #print axioms HadwigerNelson.SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4
 
+/-! ## FS-39 route C — transcendence is free (J15)
+
+`χ(F(t)²) = χ(F²)` for every field in which `−1` is not a square, for every formally real field, and over `ℝ` for `t`
+transcendental over `F`, by the place `t = 0` and one valuation lemma. No solver, no native evaluation. -/
+
+#print axioms HadwigerNelson.RouteC.planeOverIso
+#print axioms HadwigerNelson.RouteC.unitQuadrance_colorable_of_subring
+#print axioms HadwigerNelson.RouteC.mem_valuationSubring_of_sq_add_sq_eq_one
+#print axioms HadwigerNelson.RouteC.unitQuadrance_colorable_of_valuationSubring
+#print axioms HadwigerNelson.RouteC.evalZero_eq_zero_of_mem_maximalIdeal
+#print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero
+#print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc
+#print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_rat
+#print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq
+#print axioms HadwigerNelson.RouteC.transcendental_liouvilleNumber_bot
+#print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_liouville
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

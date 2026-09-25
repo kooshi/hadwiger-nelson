@@ -134,6 +134,7 @@ import Proofs.HadwigerNelson.Instances.SqrtEleven
 import Proofs.HadwigerNelson.Chain
 import Proofs.HadwigerNelson.Instances.SqrtTwoThree
 import Proofs.HadwigerNelson.Instances.SevenConditional
+import Proofs.HadwigerNelson.Transcendental
 import Proofs.HadwigerNelson.Instances.ThreeFive
 import Proofs.HadwigerNelson.Instances.ZMod121Four
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold

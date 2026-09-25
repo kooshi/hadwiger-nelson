@@ -87,7 +87,7 @@ noncomputable def planeOverIso (L : Subfield ℝ) :
       apply Subtype.ext
       simpa using h
 
-/-- Isomorphic graphs have one chromatic number. -/
+/-- Isomorphic graphs have one chromatic number. Inhabited by `planeOverIso`. -/
 theorem chromaticNumber_eq_of_iso {V W : Type*} {G : SimpleGraph V} {H : SimpleGraph W} (e : G ≃g H) :
     G.chromaticNumber = H.chromaticNumber :=
   le_antisymm (chromaticNumber_le_of_forall_imp fun _ h => h.of_hom e.toHom)
@@ -102,7 +102,8 @@ theorem chromaticNumber_planeOver_eq (L : Subfield ℝ) :
 
 /-- **Colourability pulls back through a subring that holds every unit vector.** The plane over `R` splits into cosets
 of `A × A` with no edge between cosets (edge differences are unit vectors, in `A × A`); on each coset `cosetResidue`
-of `φ × φ` is additive, so a unit edge maps to a unit edge of `S²`. Fischer's evaluation at `0` is `φ`. -/
+of `φ × φ` is additive, so a unit edge maps to a unit edge of `S²`. Fischer's evaluation at `0` is `φ`. Inhabited in this
+file at `A = zeroPlace ℚ`, `φ = evalZero ℚ` (through `chromaticNumber_unitQuadrance_ratFunc_rat`). -/
 theorem unitQuadrance_colorable_of_subring {R S : Type*} [CommRing R] [CommRing S] [Nontrivial S]
     (A : Subring R) (hA : ∀ v : R × R, v.1 ^ 2 + v.2 ^ 2 = 1 → v.1 ∈ A ∧ v.2 ∈ A)
     (φ : A →+* S) {k : ℕ} (h : (unitQuadrance S).Colorable k) : (unitQuadrance R).Colorable k := by
@@ -136,7 +137,7 @@ theorem unitQuadrance_colorable_of_subring {R S : Type*} [CommRing R] [CommRing 
 
 /-- **Unit vectors are integral at a place whose residue ring has no square root of `−1`.** If `1 + x²` is a unit of
 the valuation subring `B` for every `x ∈ B`, then `a² + b² = 1` forces `a, b ∈ B`: were `a` the coordinate with the
-larger pole, `b/a ∈ B` and `1 + (b/a)² = a⁻²` would be a non-unit. -/
+larger pole, `b/a ∈ B` and `1 + (b/a)² = a⁻²` would be a non-unit. Inhabited in this file at `B = zeroPlace ℚ`. -/
 theorem mem_valuationSubring_of_sq_add_sq_eq_one {K : Type*} [Field K] (B : ValuationSubring K)
     (hB : ∀ x ∈ B, 1 + x ^ 2 ∉ B.nonunits) {a b : K} (h : a ^ 2 + b ^ 2 = 1) : a ∈ B ∧ b ∈ B := by
   have key : ∀ {a b : K}, a ^ 2 + b ^ 2 = 1 → B.valuation b ≤ B.valuation a → a ∈ B := by
@@ -171,7 +172,8 @@ theorem one_add_sq_ne_zero {S : Type*} [CommRing S] [Nontrivial S] [IsFormallyRe
 
 /-- **Colourings pull back through a place whose residue ring has no square root of `−1`.** A ring hom `φ` out of a
 valuation subring `B` of `K` that kills its maximal ideal, into a ring `S` in which `1 + s² ≠ 0`: every unit vector of
-`K²` lies in `B²` (the valuation lemma), so the coset step carries every colouring of `S²` to `K²`. -/
+`K²` lies in `B²` (the valuation lemma), so the coset step carries every colouring of `S²` to `K²`. Inhabited in this file
+at `B = zeroPlace ℚ`, `φ = evalZero ℚ`, `S = ℚ`. -/
 theorem unitQuadrance_colorable_of_valuationSubring {K S : Type*} [Field K] [CommRing S] [Nontrivial S]
     (B : ValuationSubring K) (φ : B →+* S) (hφ : ∀ x ∈ IsLocalRing.maximalIdeal B, φ x = 0)
     (hS : ∀ s : S, 1 + s ^ 2 ≠ 0) {k : ℕ} (h : (unitQuadrance S).Colorable k) :
@@ -321,7 +323,8 @@ theorem chromaticNumber_unitQuadrance_ratFunc_rat :
 
 /-! ### The plane over `F(t) ⊆ ℝ` -/
 
-/-- A ring isomorphism is a graph isomorphism of unit-quadrance graphs, so it keeps the chromatic number. -/
+/-- A ring isomorphism is a graph isomorphism of unit-quadrance graphs, so it keeps the chromatic number. Inhabited by
+`adjoinTranscendentalEquiv` at Liouville's constant (`chromaticNumber_planeOver_liouville`). -/
 theorem chromaticNumber_unitQuadrance_eq_of_ringEquiv {R S : Type*} [CommRing R] [CommRing S] [Nontrivial R]
     [Nontrivial S] (e : R ≃+* S) : (unitQuadrance R).chromaticNumber = (unitQuadrance S).chromaticNumber :=
   le_antisymm

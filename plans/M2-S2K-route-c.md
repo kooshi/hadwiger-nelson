@@ -173,3 +173,61 @@ Each elaboration runs under `scripts/slot.py --mem 8 --cpus 4`.
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | X3 | none — derivation, elaboration and four textual plants whose outcome a derivation fixed in advance | — |
+
+## Stage 4 — SAVED
+
+### 4.1 The gate (desktop; every run under `scripts/slot.py`)
+
+| gate | result | log |
+|---|---|---|
+| `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` | **OK — 177 of 177 batches, 2 modules rebuilt (`Transcendental` 2.2 s, `Proofs`), 0 with warnings**, 3 m 27 s | `data/m2/j15/build-stage4.log`; `build/gate/build/20260925T214716Z-4173573.log` |
+| zero `sorry` (`grep -rn --include="*.lean" sorry Proofs/HadwigerNelson/Transcendental.lean`) | none | — |
+| `./scripts/axioms.sh` | **OK — 1056 clean (was 1045), 10 axiom-free, 5 declared purchases**; the 11 new entries all `[propext, Classical.choice, Quot.sound]`; purchase ledgers agree | `data/m2/j15/axioms.log` |
+| `./scripts/vacuity.sh` | **OK** — `declarations 6875 → 6908, refutations-skipped 280 → 286`, `sites=278 vacuous=0 stale=0 declared=3 witnessed=17 generic=256 unknown=2` (unchanged; no new `Coloring` binder site); rows: none changed. It repeats J14's notice that the recorded counts in `scripts/vacuity-baseline.txt`'s header and `CLAUDE.md` § The gate are stale (`6795 → 6908`, `278 → 286`, `275 → 278`, `253 → 256`) | `data/m2/j15/vacuity.log` |
+| `./scripts/vacuity.sh --self-test` | **OK** — every control fired, the two silent ones stayed silent | `data/m2/j15/vacuity-selftest.log` |
+| `python3 tools/check_architecture.py` | **PASS** (the new row: imports `SquareClass`, `ResidueColouring`, `ResidueTower`, matching `scripts/build_order.py`) | — |
+| `python3 tools/j15_plants.py`, `--self-test` | four plants red for their reason, faithful copy green; the harmless mutation refused a red verdict | §3.2 |
+| an inhabitant per structure hypothesis | the valuation lemma, its colouring form and the coset step at `B = zeroPlace ℚ`, `φ = evalZero ℚ` (through `chromaticNumber_unitQuadrance_ratFunc_rat`); `chromaticNumber_eq_of_iso` at `planeOverIso`; `chromaticNumber_unitQuadrance_eq_of_ringEquiv` at `adjoinTranscendentalEquiv` (through `chromaticNumber_planeOver_liouville`) — each named in its docstring | module |
+| a spec example per definition | `zeroPlace` (`X ∈`, `X⁻¹ ∉`), `evalZero` (`3 ↦ 3`, `X ↦ 0`), `adjoinTranscendental` (`√2 ∈ ℚ(√2)(L)`); `zeroIntegral` shares `zeroPlace`'s carrier (`mem_zeroPlace` is `Iff.rfl`); `planeOverEquiv`, `adjoinTranscendentalEquiv` are exercised by the two headline theorems | module |
+| `lake lint` | not run: not in the brief's gate list, and the build's `linter.missingDocs` reported nothing | — |
+
+Registered: `Proofs.lean` imports the module; `ARCHITECTURE.md` § 3 has its row after `Chain`; `scripts/Axioms.lean` has an FS-39 route C
+block of 11 entries in CLEAN.
+
+### 4.2 Predictions scored
+
+| id | p | outcome |
+|---|---|---|
+| P-J15a "J15 closes the integrality leaf with no hypothesis left" | 0.55 | **TRUE** — the residue hom closed in about 15 minutes of stage 2, no hypothesis, no stop rule |
+| P-J15b "Mathlib already holds an identification of the residue field of the `X`-adic valuation subring of `RatFunc K` with `K`" | 0.30 | **FALSE** (§1.2) |
+| P-lane "no lane job touches a module a certificate imports" | 0.90 | **TRUE for J15** — a new leaf module; the build rebuilt it and `Proofs` only |
+
+### 4.3 Proposed edits (standing rule 7: the front-page lane writes them)
+
+1. **`CLAUDE.md` G63**, grade and body: from "[hand; prior art: `[Fischer1990]` Thm 6, statement and proof]" to "[kernel (`Transcendental.lean`,
+   `chromaticNumber_planeOver_adjoin_transcendental_eq`); prior art: `[Fischer1990]` Thm 6]"; the sentence "a route to FS-39 that
+   `plans/STUB-plane-bridge.md` does not consider — valuation-theoretic …, using `normOne_subset_valuationSubring` and
+   `colorable_unitDistance_induce_of_valuationSubring`, which already exist" is wrong on its tools (the second needs a finite residue ring) and is
+   now superseded: the kernel route is `mem_valuationSubring_of_sq_add_sq_eq_one` + `unitQuadrance_colorable_of_valuationSubring` at the place
+   `t = 0`. The general lemma (any valuation subring whose residue ring has no square root of `−1`) is also the kernel tool for J17's C3′ and
+   Q-const, once a place is supplied.
+2. **`LEDGER.md`**: a row, or a line under FS-39's, for `chromaticNumber_unitQuadrance_ratFunc` and its `ℝ` form — not new mathematics
+   (`[Fischer1990]` Thm 6), the kernel form ours; and § B lines for this record's "Theorems this phase proved".
+3. **`plans/FRONTIER-STUBS.md`** / **`plans/STUB-plane-bridge.md`**: FS-39 route C (phase B′) landed in the kernel; what is left of FS-39 is the
+   finitely generated case (J17: Madore's Tarski route or Artin–Lang; neither has a Mathlib base) and the `sup` statement.
+4. **`plans/M2-kernel-lane.md` §2.2** (correction, §1.1): `RatFunc.algEquivOfTranscendental` exists (`FieldTheory/RatFunc/AsPolynomial.lean:229`).
+5. **`CLAUDE.md` § The gate and `scripts/vacuity-baseline.txt`'s header**: the vacuity counts, stale since J14 (§4.1).
+
+### 4.4 Surfaced, not claimed
+
+- **The engine's generality.** `χ(F(t)²) = χ(F²)` holds in the kernel for every field `F` in which `−1` is not a square — in particular every
+  `𝔽_q` with `q ≡ 3 (mod 4)`, where `χ(𝔽_q(t)²) = χ(Γ_q)`. Whether it fails when `−1` **is** a square (then `((t + 1/t)/2, (t − 1/t)/(2i))` is a
+  unit vector with a pole at `0`, and the integrality step fails) is not asked here. Bearing on χ ≥ 6: none.
+- **No instance for `𝔽₃`**: `RatFunc (ZMod 3)`'s field instance timed out at `whnf` in the module and failed to synthesise under a minimal
+  import (§2.2). A Mathlib-instance question, not pursued.
+
+### 4.5 Would-have-searched log (stage 4)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X4 | none — the gate's scripts only | — |
