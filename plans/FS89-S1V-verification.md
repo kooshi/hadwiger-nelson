@@ -257,6 +257,87 @@ was found by re-deriving the adelic form of V3b while writing the table below.*
 | order-26 characters | consistent (`k = 1` allowed) | consistent (`J = 1`) | agree |
 | the switching family | a reading, with a sketch and a killing test | not reached by V4 | no divergence (not claimed) |
 
+## V-A4 — the rank-`r` orbit model: derived (arrays, one step rule per prime, a unique square fill, orthant reading, one leaf ⟺ `T + A`)
+
+**Task (quoted):** "Derive the rank-`r` orbit model: `Θ_β(U_S)` for `|S| = r` as arrays `(e_m)_{m ∈ ℤ^r}` in `Q_β` with one step rule
+per prime; state the gluing condition across directions, and the criterion for `T + A` (the rank-`r` form of S0B-T2)."
+
+*Notation.* `S = {p₁, …, p_r}` split, `π_j := π_{p_j}`, `w_j := π_j/π̄_j`, `w^m := ∏ w_j^{m_j}`. The layers are
+`A_m := w^mℤ[i] = ∏_j π_j^{m_j}π̄_j^{−m_j}ℤ[i]`, fractional ideals. The pairing is `⟨e, x⟩ = Re(ē x)`, and `ℤ[i]` is self-dual under it.
+
+**Theorem V5 (the model).** [hand; tools exact at `S = {5, 13}`]
+1. *Layers.* `θ|_{A_m}` is `w^m z ↦ ⟨e_m, z⟩` for a unique `e_m ∈ ℂ/ℤ[i]`; equivalently `e_m = θ(w^m) + i·θ(iw^m)`.
+2. *One step rule per prime.* `A_m ∩ A_{m+ε_j} = w^mπ_jℤ[i]`, and the two layers agree there iff
+   **`e_{m+ε_j} − w̄_j e_m ∈ π_j^{−1}ℤ[i]`**. This is S0B's rule, with `(π, w)` replaced by `(π_j, w_j)`.
+3. *Gluing.* An array satisfying every step rule is the array of exactly one character of `R_S`.
+   - For any `m, m′`, `A_m ∩ A_{m′}` lies in every `A_{m″}` with `m″` in the box between them. So the adjacent agreements along any
+     monotone path give agreement on `A_m ∩ A_{m′}`.
+   - Fractional ideals of `ℤ[i]` form a distributive lattice, so pairwise-compatible characters glue box by box, into the divisible
+     group `ℝ/ℤ`.
+   - `Σ_{|m_j|≤K} A_m = ∏_j p_j^{−K}ℤ[i]` exhausts `R_S`.
+   - So `Hom(R_S, ℝ/ℤ) ≅ {(e_m) ∈ (ℂ/ℤ[i])^{ℤ^r} : all step rules}`.
+4. *Band.* `θ(i^k w^m) = ⟨e_m, i^k⟩ ∈ {±Re e_m, ±Im e_m}`. So `θ ∈ Θ_β(U_S)` iff every `e_m` lifts into `Q_β = [β, 1 − β]²`, and that
+   lift is unique. So **`Θ_β(U_S) ≅ {(e_m)_{m∈ℤ^r} : e_m ∈ Q_β, e_{m+ε_j} − w̄_j e_m ∈ π_j^{−1}ℤ[i] ∀m, j}`**.
+
+**The gluing condition across directions: the square is forced, not free.** For `j ≠ k`, the two rules around a unit square pin the
+fourth corner uniquely mod `ℤ[i]`:
+`e_{m+ε_j+ε_k} ∈ (w̄_k e_{m+ε_j} + π_k^{−1}ℤ[i]) ∩ (w̄_j e_{m+ε_k} + π_j^{−1}ℤ[i])`.
+- The two cosets meet: their difference is `w̄_k a − w̄_j b` with `a ∈ π_j^{−1}ℤ[i]`, `b ∈ π_k^{−1}ℤ[i]`, which lies in
+  `(π_jπ_k)^{−1}ℤ[i] = π_j^{−1}ℤ[i] + π_k^{−1}ℤ[i]` (coprime).
+- Their intersection is one coset of `π_j^{−1}ℤ[i] ∩ π_k^{−1}ℤ[i] = ℤ[i]`: a single point of `ℂ/ℤ[i]`.
+
+Consequences:
+- **A point of the rank-`r` model is `r` one-prime orbits (S0B-T1) through a common `e₀`**, i.e. `2r` half-orbits. The rest of the array
+  is their CRT fill. Algebraically: `R_S = Σ_j R_{p_j}` with pairwise intersections `ℤ[i]`.
+- **Every constraint across directions is the band at the off-axis sites.** Freedom lives on the axes (at most `p_j` candidates per
+  step on axis `j`). The fill has no freedom, and the band must hold on it. This is where U4's "13 kills the switching family" would
+  have to be decided, and where IQ's wall set lives.
+
+**Orthant reading (rank-`r` form of "forward reads `b₊`, backward reads `b₋`").** Write `θ = (e; (b_{π_j}, b_{π̄_j})_j)` with every
+`b` integral. Then `e_m` is `w̄^m e` plus, for each `j` with `m_j > 0`, a term read from `b_{π̄_j}` modulo `π̄_j^{m_j}`, and, for each
+`j` with `m_j < 0`, a term read from `b_{π_j}` modulo `π_j^{|m_j|}`. (At `π̄_j` the element `w^m` has a pole of order `m_j`.) So the
+sites of the orthant of sign vector `σ` read `e` and exactly the `r` components `b_{σ_j}`, one per prime. The faces read fewer.
+[checked exactly: perturbing an unread component moves no `e_m` in a 7 × 7 box; perturbing a read one moves some; the swapped reading
+is refuted]
+
+**Theorem V6 (`T + A`, rank `r`).** For a character `θ` of `R_S`, the following are equivalent. [hand]
+- (a) `θ ∈ T + A`.
+- (b) The `2r` normalized local components are the images of one `q ∈ ℚ(i)`.
+- (c) One leaf everywhere: `e_m = c_τ(m) + w̄^m d` for all `m`, with one torsion `τ` (order prime to `S`) and one `d ∈ ℂ`. Here
+  `c_τ(m)`, the `ℤ[i]`-parameter of `τ∘w^m`, is periodic modulo the finite-index lattice `{m : w^m ≡ 1 mod ord τ}`.
+- (d) One leaf on the cross: (c) for `m` on the `r` coordinate axes only.
+- (e) The `2r` half-axis restrictions (to `ℤ[i][1/π_j]` and `ℤ[i][1/π̄_j]`) are all in `T + A` with **one common archimedean part**.
+
+*Proof.*
+- (a)⟺(b) is V-A1's adelic remark.
+- (a)⟹(c)⟹(d) are trivial.
+- (d)⟹(c): the axes determine the array (the square is forced), and `τ + λ_d` has an array that agrees on the axes.
+- (c)⟹(a): the array determines the character.
+- (e)⟺(a): if every half-axis is `τ_{j,±} + λ_d` with one `d`, then `θ − λ_d` is torsion on each half-axis group. Those groups sum to
+  `R_S`, so `θ − λ_d` is torsion. The converse is trivial.
+- If the half-axis archimedean parts differ, the torsion differences `D = d′ − d ∈ ℚ(i)` are non-zero. That is S0B-T4, one pair of
+  half-axes at a time.
+
+**The leaves and margins in rank `r` (rank-`r` S0B-T2).** `τ + λ_d ∈ Θ_β(U_S)` iff `|d| ≤ r_τ := min_{u∈U_S} dist(τ(u), ∂B_β)`
+(with `τ(U_S) ⊆ B_β`). ⟸ because `|λ_d(u)| ≤ |d|`. ⟹ because each value class `{u : u ≡ c mod ord τ}` is a coset of the group
+`{w^m : m ∈ P_τ}`, and that group is dense in the circle, since it contains a non-trivial power of `w₁`, not a root of unity. So a leaf
+meets `Q_β` in a disc of radius `r_τ` about `c_τ(m)`, moving with `m ∈ ℤ^r` through a finite set of centres. The margin is read on
+`U_S mod N`, which grows with `S`. At `S = all` it becomes V-A2's `G_N` and V3's list.
+
+**Checked** (`tools/fs89_s1v_array_check.py`, exact rationals, 5-adic and 13-adic precision `5^{10}`, `13^{10}`, six random characters
+of `ℤ[i][1/65]`, box `|m_j| ≤ 3`, 0.7 s):
+- the step rule for both primes at every edge;
+- the square rule, by brute force over `π₁₃^{−1}ℤ[i]/ℤ[i]`: exactly one class, and it is the array's;
+- the orthant reading;
+- (b)⟹(c) at `q = (1+i)/3`, with `c_τ` of period 4 in `m₁`.
+
+Two planted faults fire: the step lattice `π̄_j^{−1}ℤ[i]`, and the swapped reading.
+
+**Verdict: derived as asked. The prediction (0.85, "derivable as described") is met, with one sharpening the statement did not
+carry: the gluing across directions is a uniquely solvable CRT square, so the model's freedom is `2r` half-orbits and its whole
+difficulty is the band on the fill.** No divergence table: V-A4 is a derivation task, not a claim of another agent's. The comparable
+Stage-0 text (S0B §1, rank 1) agrees.
+
 ## Would-have-searched-here log
 
 (one line per move I would have made by search, and what I did instead)
@@ -265,6 +346,10 @@ was found by re-deriving the adelic form of V3b while writing the table below.*
   nothing beyond order 8, 3, 7 appears. Instead the classification was derived (V2a–V2e, with the Kloosterman bound closing all
   `q ≥ 11` at once), and the exact check was run only on a fixed list the derivation names (the divisors of 336, and 9, 11, 19, 23,
   32, 49), with three planted faults; it is a check of a derived finite claim, labelled so, 0.5 s.
+- **V-A3.** I would have run a rank-two window (the `(e_{m,n})` array over `R_{5,13}`) outward from `θ*` to see it die. Instead the
+  death was derived (Theorem V4) and located by hand at row 2 from one exact number, `v_{π₁₃}(w₅^{12} − 1) = 1`.
+- **V-A4.** I would have enumerated rank-two windows to see the square rule. Instead the rule was derived and checked on six random
+  characters built from adelic data, a fixed small box, no enumeration of windows.
 
 ## Theorems this phase proved
 
@@ -278,3 +363,5 @@ was found by re-deriving the adelic form of V3b while writing the table below.*
 | S1V-6 | rows of a band character of `R_{5,p}` over a rational heteroclinic of `R₅` are rational heteroclinics with archimedean parts rotated by `w̄_p^b` (the `p^b w_p^b = π_p^{2b}` trick) | hand | § V-A3, V3a |
 | S1V-7 | the sweep bound: a band torsion character of `S₊` with no `π̄_p`-part has `π_p`-level `≤ v_{π_p}(w₅^o − 1)`, `o` fixed by its prime-to-`p` order | hand | § V-A3, V3c |
 | S1V-8 | any second split prime `p ≠ 5` kills every rational heteroclinic of `Θ₄(R₅)` (no torsion-difference hypothesis); `θ*` dies by row 2 of `R_{5,13}` | hand + exact arithmetic | § V-A3, Theorem V4 |
+| S1V-9 | the rank-`r` orbit model: `Θ_β(U_S)` ≅ arrays in `Q_β` with `e_{m+ε_j} − w̄_j e_m ∈ π_j^{−1}ℤ[i]`; the square is a uniquely solvable CRT fill; site `m` reads `e` and one local component per prime with `m_j ≠ 0` | hand + tools exact (`tools/fs89_s1v_array_check.py`) | § V-A4, Theorem V5 |
+| S1V-10 | rank-`r` `T + A`: one rational at all `2r` places ⟺ one leaf on the axes ⟺ one leaf everywhere ⟺ one archimedean part on all half-axes; leaf discs of radius `min_{U_S} dist(τ, ∂B)` | hand | § V-A4, Theorem V6 |
