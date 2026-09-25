@@ -1,5 +1,7 @@
 # FS-86 — four-colour rigidity over ℚ(√59) and ℚ(√83): does the tight dyadic `K₄` force pairs in a triangle-free field? (stub)
 
+**Chosen 2026-09-25 as the next milestone** (Kooshi: "I agree with FS-86"). Close inventory: `plans/FS86-close-inventory.md`, opened at the choice and kept by the coordinator (WORKFLOW step 5). It opens in the finite-witness-free week (to 2026-10-01; `CLAUDE.md` § Toolchain): routes 1–3 are in scope, route 4 waits for the week's end.
+
 *Minted 2026-09-24 at FS-85's close, from the plan-phase advisor's held item H5 and its frame item H6 (public since the competition's
 fence lifted: `data/fs85/held/HELD-plan-advisor.md`), FS85-dB4's calibration, and Coxeter's R2.6 reading (`plans/FS85-derivation.md` §7).
 It was the owner's option C during FS-85's round 3; Kooshi did not choose it for that week. Rank 2. Written for a session with zero

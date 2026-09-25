@@ -3,7 +3,7 @@
 *Written by the product owner for a reader with no conversation memory. It supersedes
 `plans/SESSION-HANDOFF-2026-09-24-fs81-open.md`, whose §1 rules table and §3 lessons still apply except where this file updates them.*
 
-**Current state (updated 2026-09-25; read before §0): FS-85 is CLOSED.** Rows 85–87, G75 minted, G54 rewritten with a demotion
+**Superseded by `plans/SESSION-HANDOFF-2026-09-25-fs86-open.md` (FS-86 chosen). Current state (2026-09-25): FS-85 is CLOSED.** Rows 85–87, G75 minted, G54 rewritten with a demotion
 record; `plans/FS85-derivation.md` (39 entries); the plan's §R-close (the week's verdict Paid (abstract)); the close inventory ticked
 (items 1–86). Headline: `F = P = 8Λ` on de Grey's lattice derived from Parts's trees, checked here in full, at two independent
 derivations (row 85). **No milestone is open; the next is Kooshi's choice** (`plans/FRONTIER-STUBS.md`: FS-59, FS-86, FS-83 at the

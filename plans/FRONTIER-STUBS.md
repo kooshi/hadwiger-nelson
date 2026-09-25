@@ -24,7 +24,7 @@ FS-12 as B6, FS-8 as B7, FS-5 as B8, FS-13 as a measure-only run); none of them 
 
 ## Open milestones, in order
 
-**No FS milestone is open. FS-85 closed 2026-09-24** (`LEDGER.md` rows 85–87; G75; the closed list). **The next milestone is Kooshi's choice**; the default is the top of the table. The finite-witness-free week runs to **2026-10-01** (`CLAUDE.md` § Toolchain: no SAT, MILP, Θ trees, finders or survivor sweeps; derivation, computer algebra, formula colourings, the kernel and existing checkers only), and the solver column below marks what it can run. The M-series below is paused, not open. Kooshi, 2026-09-10: *"the next session will be 100% repro of his algo. The session after that will be
+**No FS milestone is open. FS-85 closed 2026-09-24** (`LEDGER.md` rows 85–87; G75; the closed list). **Next, Kooshi's choice (2026-09-25): FS-86** (four-colour rigidity over ℚ(√59) and ℚ(√83); `plans/STUB-dyadic-rigidity-triangle-free.md`). The finite-witness-free week runs to **2026-10-01** (`CLAUDE.md` § Toolchain: no SAT, MILP, Θ trees, finders or survivor sweeps; derivation, computer algebra, formula colourings, the kernel and existing checkers only), and the solver column below marks what it can run. The M-series below is paused, not open. Kooshi, 2026-09-10: *"the next session will be 100% repro of his algo. The session after that will be
 introducing our new angle on it."*
 
 | milestone | what it is | state | next, and bearing on χ ≥ 6 |
