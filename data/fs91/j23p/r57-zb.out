@@ -1,0 +1,17 @@
+Q: ti:"Hedetniemi" & ti:"true"
+  hits: 1
+  1229.05108 | 2011 | Zhu, Xuding | The fractional version of Hedetniemi's conjecture is true | European Journal of Combinatorics | summary
+Q: ti:"Hedetniemi" & ti:"holds"
+  hits: 0
+Q: ab:"Hedetniemi" & ab:"multiplicative" & ab:"Cayley"
+  hits: 0
+Q: ab:"unit-quadrance"
+  hits: 3
+  1520.05039 | 2023 | Krebs, Mike | Clique numbers of finite unit-quadrance graphs | Journal of Algebraic Combinatorics | summary
+  arXiv:math/0606482 | 2006 | Le Anh Vinh | Some colouring problems for unit-quadrance graphs |  | summary
+  arXiv:math/0510092 | 2005 | Le Anh Vinh | On chromatic number of unit-quadrance graphs (finite Euclidean graphs) |  | summary
+Q: ab:"finite Euclidean" & ab:"circular"
+  hits: 0
+Q: ab:"Euclidean graphs" & ab:"finite fields" & ab:"coloring"
+  hits: 1
+  1255.05086 | 2012 | Vinh, Le Anh | On kaleidoscopic pseudo-randomness of finite Euclidean graphs | Discussiones Mathematicae. Graph Th | summary
