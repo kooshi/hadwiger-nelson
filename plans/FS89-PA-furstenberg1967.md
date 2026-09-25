@@ -24,7 +24,7 @@ their exact scope: "the method is Furstenberg's" and "the theorem is Furstenberg
 | part / section | pages | read | heading and what it holds |
 |---|---|---|---|
 | §0 Summary | 1–2 | in full | see below |
-| Part I | 2–23 | headings and theorem statements only; proofs not read | see §1.1 |
+| Part I | 2–23 | headings and theorem statements only; proofs not read (enough to see Part III uses none of it) | see the end of §1.3 |
 | Part II | 23–34 | in full | see §1.2 |
 | Part III | 34–45 | in full | see §1.3 |
 | Part IV | 45–49 | in full; pp. 45, 47, 48 image-checked | see §1.4 |
@@ -154,3 +154,81 @@ and the analogy "the processes disjoint from Bernoulli processes are precisely t
 touches tori (p. 14, after Theorem I.1): unimodular `A`, `B` with no root-of-unity eigenvalues give positive-entropy processes on `K^m`,
 `K^n`, hence non-disjoint, so an `A × B`-invariant measure on `K^{m+n}` with Lebesgue marginals other than Lebesgue exists; "It would be
 of interest to construct such a measure directly." Measure-theoretic; not our question.
+
+### 1.4 Part IV. A Problem in Diophantine Approximation (pp. 45–49) — read in full; pp. 45, 47, 48 image-checked
+
+**§1. Minimal Sets on Tori (pp. 45–46).**
+- **The lead-in (p. 45, image-checked), verbatim:** "We let K^r denote the r-dimensional torus considered as an additive group: K^r =
+  R^r/Z^r. The endomorphisms of K^r correspond to r × r integer matrices, and these form a semigroup E(r). Each σ ∈ E(r) determines a flow
+  on K^r, and under certain mild conditions, (K^r,σ) will be an 𝓕-flow. Theorem III.1 then gives us certain information about minimal
+  sets of (K^r,σ): If M is minimal and B is an invariant set, then M + B = K^r implies B = K^r."
+- **The multi-parameter remark (p. 45, image-checked), verbatim:** "In all this we have been dealing exclusively with a "one-parameter"
+  semigroup of transformations. It is not difficult to see that the various notions we have used generalize to the situation where a
+  more complicated semigroup acts on the space. Namely, we can allow flows (Ω,Σ) where Σ is now not a single transformation, but an
+  abelian semigroup of transformations. The notions of minimal flows, semi-simple flows, 𝓕-flows, and the notion of disjointness all
+  generalize to this situation. Developing the analogy we may obtain a generalization of Theorem III.1 to abelian groups on which an
+  abelian semigroup of endomorphisms acts. Specifically, we may obtain the following result whose usefulness will develop presently."
+  **The general form (any compact abelian group) is announced here in words, never stated or proved in this paper**; what is stated and
+  proved is the torus.
+- **Proposition IV.1 (p. 45, image-checked), verbatim:** "Let Σ denote a commutative semigroup of endomorphisms of the r-torus K^r. We
+  assume (i) that the adjoint semigroup of endomorphisms Σ* of the dual group Z^r possesses no finite invariant subset in Z^r − {0}, and
+  (ii) that there exists a prime q with the property that all det σ, σ ∈ Σ, are relatively prime to q. Then if M and B are two closed
+  Σ-invariant subsets of K^r and M is minimal with respect to these properties, M + B = K^r implies M = K^r."
+  - **A misprint in the conclusion.** The printed statement ends "implies **M** = K^r". The lead-in (above) and the proof's last line
+    (p. 46, "Hence ξ + B = K^r, whence B = K^r. This proves the proposition.") both give **B**. Read literally, the printed conclusion is
+    false: take `B = K^r`; `K^r` is never minimal, since `{0}` is a closed invariant proper subset. Berend 1983 p. 530 (as quoted in
+    `plans/FS89-PA-berend1984.md`) prints it with "B = T^r" and with hypothesis (i) replaced by "there exists some ergodic endomorphism σ
+    in Σ". That is **Berend's corrected paraphrase, not Furstenberg's words.** Furstenberg's proof asserts the step between the two forms of
+    (i) (p. 46: "hypothesis (i) ensures the existence in Σ of an endomorphism with no roots of unity among its eigenvalues") with no
+    argument; the converse direction is one line.
+  - **Remark (p. 45, image-checked), verbatim:** "We do not know whether condition (ii) is essential. Condition (i) is indispensable
+    because, for example, if Σ were finite, the conclusion of the proposition would be false."
+  - **Proof (pp. 45–46), "in a disguised form, avoiding the language of flows".**
+    1. `Σ^(n) := {σ ∈ Σ : σ ≡ 1 mod q^n}`. Every `σ ∈ Σ` has a power in `Σ^(n)`, because `Σ mod q^n` is a finite group of matrices, by (ii).
+    2. Nested `Σ^(n)`-minimal sets `M^(n) ⊆ M`. Their translates `σ_i M^(n)` over coset representatives cover `M`; commutativity is used
+       here.
+    3. So some translate of `M^(n) + B` has interior, and then `M^(n) + B` itself does. It is invariant under an element with no
+       root-of-unity eigenvalue, which acts ergodically on Lebesgue measure (Halmos [8]). So it has full measure, and being closed it is
+       `K^r`.
+    4. The points `(a₁q^{−n}, …, a_rq^{−n})` are fixed by `Σ^(n)`, and they are dense. For `ξ` in every `M^(n)`, `ξ + B` contains all of
+       them, so `ξ + B = K^r` and `B = K^r`.
+
+    **No step asks any element to expand any direction.** Eigenvalues of modulus 1 that are not roots of unity are allowed, and only
+    (i) and (ii) are used.
+- **What "M − M is proper" is, exactly.** Take `B = −M`, which is closed and Σ-invariant. The (corrected) proposition then gives
+  `M − M = K^r ⟹ M = K^r`, which is impossible for a minimal `M`. So **for every Σ-minimal `M`, `M − M ≠ K^r`**. Furstenberg never states
+  this corollary separately. He uses it once, in the proof of Proposition IV.2 (p. 48): "M − M = K. Now this contradicts Proposition
+  IV.1."
+
+**§2. Semigroups of Endomorphisms of K (pp. 46–49).** `r = 1`: Σ is a multiplicative semigroup of integers.
+- **Definition IV.1 (p. 47, image-checked), verbatim:** "A multiplicative semigroup Σ of integers is lacunary if all the members of Σ⁺ are
+  powers of a single integer a. Otherwise, Σ is non-lacunary." Examples: "{a^p, a^{p+1}, a^{p+2}, ···} is a lacunary semigroup.
+  {2^n3^m; n,m = 1,2,3, ···} is a non-lacunary semigroup."
+- **Lemma IV.1 (p. 47, image-checked), verbatim:** "Let Σ be a non-lacunary semigroup, and suppose Σ⁺ = {s₁,s₂,s₃, ···} with s_i <
+  s_{i+1}. Then, as n → ∞, s_{n+1}/s_n → 1." Proof: "an additive semigroup of positive real numbers is either contained in a discrete
+  subgroup, or becomes more and more dense as the numbers tend to ∞", applied to `log Σ`.
+- **Lemma IV.2 (p. 47, image-checked), verbatim:** "Let Σ be a non-lacunary semigroup and let A be a closed Σ-invariant subset of K with
+  the property that 0 is a non-isolated point of A. Then A = K." Proof (p. 48): for `δ_n ∈ A`, `δ_n → 0`, the multiples `s_nδ_{n₂}`
+  step by less than ε once the ratios are within `1 + ε`, so they are ε-dense in `[0,1]`.
+- **Proposition IV.2 (p. 48, image-checked), verbatim:** "If Σ is a non-lacunary semigroup of integers, the only minimal sets in K for Σ
+  are finite sets (of rationals)." Proof, verbatim in its core: "Let M be a minimal set for Σ. M − M is a Σ-invariant set. If M is
+  infinite then M − M contains 0 as a non-isolated point. But then, by the foregoing lemma, M − M = K. Now this contradicts Proposition
+  IV.1. We conclude that M is finite. Since Σ is infinite, a Σ-invariant set can be finite only if it consists of rationals." (It first
+  passes to a non-lacunary `Σ′ ⊆ Σ` with a prime `q` prime to all its members, so that (ii) holds.)
+- **Theorem IV.1 (p. 48, image-checked), verbatim:** "If Σ is a non-lacunary semigroup of integers and α is an irrational, then Σα is
+  dense in K." Proof, in outline:
+  1. The orbit closure `Δ` contains a minimal set, hence a rational `p/q` (Proposition IV.2). It is non-isolated in `Δ`, because `Σα`
+     consists of irrationals.
+  2. So `0` is non-isolated in `qΔ`, and `qΔ = K` by Lemma IV.2.
+  3. Hence `Δ ∪ (Δ + 1/q) ∪ ··· ∪ (Δ + (q−1)/q) = K`, so `Δ` has interior, and `sΔ ⊂ Δ` for `s > 1` gives `Δ = K`.
+- **The lacunary counterexample (p. 48, image-checked), verbatim:** "The conclusion of the theorem is clearly false for lacunary
+  semigroups. For, let a be a positive integer and set α = Σ_{k=1}^∞ a^{−k²}. Then {a^n α} modulo 1 has only the limit points 0, a^{−1},
+  a^{−2}, ···."
+- The rest (pp. 48–49):
+  - Hardy–Littlewood (`{n^r α}` is dense) as a special case.
+  - "The semigroup {2^n3^m} corresponds to a subset which is thinner than any of the {n^r} and for which the same conclusion still holds."
+  - Equidistribution fails in this generality (p. 49): for `α = Σ 6^{−n_k}` with `n_k` of sufficiently rapid growth, `{s_n α}` is not
+    equidistributed ("We mention without proof").
+- **No invariant-measure question is posed in this paper.** Part IV's only measure is Lebesgue measure, in Proposition IV.1's proof. So
+  the "×2×3 measure problem" (the close inventory's item 1: "the open ×2×3-type problem") is not stated here, and its attribution to
+  Furstenberg needs another source.
