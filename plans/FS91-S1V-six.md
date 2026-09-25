@@ -199,3 +199,29 @@ GAP**, and it is a statement about what the hypothesis carries, not a doubt abou
 W1 TRUE (0.97, not independent). No band six at 23 or 43 (P(exists) 0.04): held. No band seven (0.05): held. Band eight at 23 (0.88):
 held; at 43 (0.50): **none**. `χ_char(Γ₂₃) = 8` (0.80): held; `χ_char(Γ₄₃) ∈ {8, 9}` (0.70): 9. W4 GAP risk (0.40): fired, at the step
 named in C0 (the minimising `k` exceeding the named CLG_k), for two of the three fields. W2/W3 agreement with J08: stage 4.
+
+## Stage 3 — SAVED (phase 2: the W4 gap, against J08's lemma statements only)
+
+*Opened: `plans/FS91-S1D-six.md` "Theorems this phase proved" (its l. 298–314), statements only; no proof, data, tool or commit of J08.*
+
+J08's statement of the field result, verbatim: **J08-8** "`χ_char` = 8 (ℚ(√167)), 17 (K(√7)), 22 (de Grey's field) given CLG_7, CLG_16,
+CLG_21; `Θ₈`, `Θ₁₇`, `Θ₂₂ ≠ ∅` unconditionally" (hand + tools exact; lower halves given CLG (J07, unverified)).
+
+**The step I lacked, derived.** I wrote in stage 2 that equality with the minimum `m` needs "CLG_8 … CLG_{m−1}". One instance suffices:
+`B_k ⊆ B_{k+1}` gives `Θ_k(R_F) ⊆ Θ_{k+1}(R_F)`, so `Θ_{m−1} = ∅` forces `Θ_k = ∅` for every `k ≤ m − 1`. With CLG_{m−1}'s iff half, the
+level collapse J11-T7 (it needs `p > (m − 1)/2`: `83 > 8` for K(√7) at `m − 1 = 16`, `131 > 10.5` for de Grey's field at 21), and no
+level-1 target carrying a band `(m − 1)`-character (that is what "min = `m`" says, `targets.json`), `Θ_{m−1}(R_F) = ∅`; with the
+unconditional pullback J11-T8, `χ_char(F²) = m`. **So J08-8, with the hypotheses it names (CLG_7, CLG_16, CLG_21), is TRUE.**
+
+**Verdicts after phase 2.**
+- **W4 as quoted in the brief** ("Given CLG_6 and CLG_7 … `χ_char = min` … the same for K(√7) and de Grey's field"): **GAP stands** for the
+  second clause at K(√7) and de Grey's field — CLG_6 and CLG_7 give only `8 ≤ χ_char ≤ 17` and `8 ≤ χ_char ≤ 22` — and the missing step
+  is exactly **CLG_16** (resp. **CLG_21**), one instance each, by monotonicity. TRUE for ℚ(√167) and for the first clause everywhere.
+- **J08-8 as J08 states it:** TRUE (given the CLG instances it names). J08 did not state anything wider than the quoted W4; it stated the
+  narrower, correct hypothesis.
+- **Correction to my stage 2** (kept above, corrected here): "needs CLG_8 … CLG_16 (resp. … CLG_21)" → "needs CLG_16 (resp. CLG_21); the
+  intermediate instances follow by monotonicity". J11-T11 reads: given CLG_{m−1}, `χ_char(K(√7)²) = 17` and `χ_char(K(√5,√7)²) = 22`.
+
+| id | statement | grade | address |
+|---|---|---|---|
+| J11-T12 | `Θ_k(R_F) ⊆ Θ_{k+1}(R_F)`; hence `χ_char(F²) = m` follows from the pullback and CLG_{m−1} alone, `m` the minimum over targets, whenever every stable place has `p > (m − 1)/2` | hand | stage 3 |
