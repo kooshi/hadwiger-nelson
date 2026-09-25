@@ -1,0 +1,12 @@
+defining polynomial of F: x^6 - 23*x^4 + 2*x^3 + 148*x^2 + 40*x - 251
+cubic x^3 - x - 1, quadratic x^2 - 7; signature (2, 2)
+  prime above 2: e=2 f=3 residue field F_8; in L=F(i): split; stable=False
+  prime above 3: e=1 f=3 residue field F_27; in L=F(i): inert; stable=True
+  prime above 3: e=1 f=3 residue field F_27; in L=F(i): inert; stable=True
+  prime above 7: e=2 f=1 residue field F_7; in L=F(i): inert; stable=True
+  prime above 7: e=2 f=2 residue field F_49; in L=F(i): split; stable=False
+A1 signature [2,2]: True
+A2 no stable F_3 prime above 3: True
+A3 no stable prime above 2: True
+A4 one stable F_7 prime above 7: True
+RESULT: PASS

@@ -50,6 +50,7 @@ blind priors; they measure confidence in a route already seen, before any line o
 
 - Stage 2: would have built a finite configuration of unit vectors over `ℚ(α, √7)` and run a `Θ₃` relation tree on it (the FS-82 stub's route 3); instead derived S1 for every real number field, which gives S3 as a corollary.
 - Stage 2: would have searched `𝔽₇₂₉` for a hyperplane missing `μ₂₈` with a solver; instead, a complete exact enumeration of all 728 functionals (and all 59,048 at `q = 243`). This is **at the ban's edge**: a finite set whose extent the derivation fixed first. It is a control only; the proof is Weil's bound, L4(a).
+- Stage 3: would have searched for a finite configuration `{vᵏ}·U₅` over `ℚ(α, √7)` with empty `Θ₃` (FS81-T5's shape; the FS-82 stub's route 3); instead read `χ ≥ 4` off J02-T2 and the prime data at 2 and 3 (PARI, exact, seconds). No finite witness is exhibited.
 
 ## Stage 2 — SAVED: S1 derived
 
@@ -271,6 +272,93 @@ In particular **`χ(F²) ≤ 3 ⟹ L(F) ≤ 3` (S1)**.
     restricts to a stable `𝔽₃` prime, and a stable ramified dyadic prime to a stable dyadic one that is ramified or inert. So a
     compatible choice exists by König's lemma — but the dyadic restriction step makes this **not** a clean statement. **Not claimed.**
   - For transcendental `F`, `[Fischer1990]` Thm 6 (G63) handles only purely transcendental extensions; FS-39's gap stands.
+
+## Stage 3 — SAVED: S2 and S3
+
+*Q9 of §1.1 resolved: `plans/STUB-chain-theorem.md` (FS-45) lists "Theorem 2.1 (`χ = 2 ⟺ L = 2`, all real number fields) | hand, GPT
+Astra; read here | §2". The brief's address is correct; the theorem is Astra's.*
+
+### 3.1 S2 — the conjecture's `L ≤ 4` clause for every real number field [hand; a composition]
+
+*Statement (J02-T3).* For every real number field `F` with `L(F) ≤ 4`, `χ(F²) = L(F)`.
+
+*Inputs.*
+- **(U)** `χ(F²) ≤ L(F)`: the residue bound, row 52 [hand + tools], through Theorem A (row 57) and G56's dyadic trichotomy. Prior art
+  `[Moorhouse2010]` §8.2 and §10.3, `[Madore2015]` Cor. 3.4. The field-level step is proved by hand (row 57's "not proved" is the
+  kernel form).
+- **(T2)** `χ(F²) = 2 ⟺ L(F) = 2`: GPT Astra's Thm 2.1 [hand; read here] (G55, row 63). **A second derivation of its ⟹**, through this
+  record's L3:
+  - a bipartite `F²` has the walk-parity character `π` with `π(U) = 1/2` and `2π = 0` (Astra's `φ`);
+  - J02-T1 step 5 applies verbatim to `π` in place of `τ₂`, and finds a stable dyadic prime ramified in `L/F`, so `L(F) = 2`.
+  - Astra's route applies Lemma 1.1 to `ker φ`; this one goes through the Teichmüller set. They share Lemma 1.1.
+- **(S1)** J02-T2.
+
+*Proof, by the value of `L(F)`.*
+- **`L = 2`:** `χ ≤ 2` by (U), and `χ ≥ 2` since there is an edge.
+- **`L = 3`:** `χ ≤ 3` by (U), and `χ ≠ 2` by (T2).
+- **`L = 4`:** `χ ≤ 4` by (U), and `χ ≤ 3` would give `L ≤ 3` by S1. ∎
+
+*What each clause rests on.*
+
+| L | upper | lower | new here |
+|---|---|---|---|
+| 2 | (U) | an edge | — |
+| 3 | (U) | Astra Thm 2.1 (or this record's second derivation) | — |
+| 4 | (U) | **S1** | **yes: the clause was proved before only for fields containing √3 (Astra Thm 3.1) and for real quadratic fields (row 82 with `[Fischer1990]` Thms 8–10)** |
+
+**Consequence for the frontier.** With the wall standing, `L(F)` is a finite rule read off the conjugation-fixed primes (G59). The
+conjecture's testable range below the problem itself is now `L = 5` alone:
+- outside multiquadratic `F ⊇ K`: ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√3, √5);
+- and `L = 6`, which is empty if the wall holds.
+
+The FS-82 stub's question is closed, and so is the "`L ≤ 4` for real quadratic fields / with √3" caveat in G55, G74 and row 82.
+
+### 3.2 S3 — `ℚ(α, √7)`, `α³ = α + 1` [hand + tools exact (PARI)]
+
+*The arithmetic, by hand first, then in PARI* (`tools/crunch_j02_field.py`, output `data/fs91/j02/field-check.txt`).
+- **At 3.**
+  - `x³ − x − 1` has no root mod 3 (its values at 0, 1, 2 are 2, 2, 2), and `3 ∤ disc = −23`. So 3 is inert in `ℚ(α)`, with residue
+    field `𝔽₂₇`.
+  - `(7/3) = 1`, so 3 splits in ℚ(√7).
+  - So `F ⊗ ℚ₃ = ℚ_{27} × ℚ_{27}`: **two primes, `e = 1`, `f = 3`, residue field `𝔽₂₇`**.
+  - `27 ≡ 3 (mod 4)`, so both are inert in `L`, hence stable, with target `Γ₂₇`. **Neither has residue field `𝔽₃`.** PARI: both
+    `e = 1`, `f = 3`, inert in `L`.
+- **At 2.**
+  - `x³ + x + 1` is irreducible over `𝔽₂`, so 2 is inert in `ℚ(α)`.
+  - `7 ≡ −1 (mod 8)` and `−7 ≡ 1 (mod 8)` is a square in `ℚ₂`, so `ℚ₂(√7) = ℚ₂(i)`.
+  - So `F ⊗ ℚ₂ = ℚ_8(i)`: **one prime, `e = 2`, `f = 3`, and `i` lies in its completion, so it splits in `L`**. No stable dyadic prime:
+    the wall is broken and there is no dyadic target. PARI: `e = 2`, `f = 3`, split.
+- **At 7.**
+  - `x³ − x − 1 ≡ (x − 5)(x² + 5x + 3) (mod 7)`. The quadratic has discriminant `13 ≡ 6`, a non-square, and `7 ∤ −23`. So `7 = 𝔭₁𝔭₂`
+    in `ℚ(α)`, with `f = 1, 2`.
+  - 7 ramifies in ℚ(√7). So `F` has a prime with `e = 2`, `f = 1` (residue field `𝔽₇`, inert in `L` because `7 ≡ 3 (mod 4)`: stable,
+    target `Γ₇`), and one with `e = 2`, `f = 2` (`𝔽₄₉ ∋ √−1`: split). PARI agrees.
+- **Signature `[2, 2]`**: two real places and two complex ones (`ℚ(α)` has one real embedding).
+- **Plants.**
+  - `x³ − 2` for the cubic: 3 is totally ramified, residue `𝔽₃`, and "no stable `𝔽₃` prime above 3" fires.
+  - `√11` for `√7`: `ℚ₂(√11) = ℚ₂(√3)`, and the dyadic prime is inert in `L`, so "no stable dyadic prime" fires.
+  - Each also trips a second assertion: `cubic2` loses the `𝔽₇` prime, and `sqrt11` has a split prime above 3. Each fires its own
+    target assertion (`data/fs91/j02/field-check-plants.txt`).
+
+*Statement (J02-C1).* For `F = ℚ(α, √7)`: `Θ₃(ℤ[U_F]) = ∅`, `χ(F²) = 4` and `L(F) = 4`.
+
+*Proof.*
+- By the arithmetic, `F` has no stable prime above 3 with residue field `𝔽₃` and no stable prime above 2. So J02-T2 (4) fails.
+- By J02-T2, (2) and (1) fail: `Θ₃(R_F) = ∅` and `χ(F²) ≥ 4`.
+- The stable `𝔽₇` prime gives `χ(F²) ≤ χ(Γ₇) = 4` (row 52; `χ(Γ₇) = 4` is `[Moorhouse2010]` Table 6.1).
+- `L(F) = 4`: `≤ 4` from the same prime, and `≥ 4` because J02-T2's (5) ⟺ (4) forbids `L ≤ 3`. ∎
+
+*Remarks.*
+1. **The conjecture's prediction at `L = 4` is met**, and the falsifier the FS-82 stub named (a non-additive three-colouring local at no
+   prime) **does not exist.** The reason is now structural: every point of `Θ₃` has a torsion part in `Θ₃` (J02-L1), and a torsion
+   point is local at one prime (J02-T1).
+2. **What made this field look hard is not where the proof works.** The stub expected a three-colouring here to be "non-additive — a
+   field-level slope with real (archimedean) parts". J02-L1 shows the archimedean part of a three-colour slope can always be dropped:
+   the torsion part is itself a slope. So at three colours "additive" and "any" coincide **for existence**. (Not for the colourings
+   themselves: FS81-T6's additivity of every slope is a stronger, per-point statement, left open here outside `d ≡ 3, 7 (mod 12)`.)
+3. **Uses `√7` only through the arithmetic at 2, 3, 7.** No layer relation of the field and no finite configuration is used. The FS-82
+   stub's route 3 (a finite `Θ₃`-empty configuration) was not run (logged below). It would give a finite witness of `χ ≥ 4`, which
+   compactness guarantees exists and nothing here exhibits.
 
 ### Theorems this phase proved
 
