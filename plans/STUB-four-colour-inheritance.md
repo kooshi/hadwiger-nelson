@@ -1,5 +1,7 @@
 # FS-76 — four colours: inheritance, certificates and decidability (stub)
 
+**At FS-89's close (2026-09-25):** over the type-(B) fields ℚ(√59), ℚ(√83), ℚ(√131) character colourings cannot break four-colour inheritance either: HD1 holds (`LEDGER.md` row 96), every four-colour band character of those planes being a dyadic pullback. A failure `P(R) ≠ F(R)` there needs a colouring no character gives; `F(R)` stays undecided (row 88).
+
 **Re-aimed at FS-86's close (2026-09-25):** over type-(B) fields Kempe swaps (HD4), patchworks (D, D′) and half-space defects (H) cannot break inheritance (row 91); `P(R) ≠ F(R)` there would be a four-colour inheritance failure on a non-finitely-generated abelian Cayley graph.
 
 > **Re-aimed at FS-85's close (2026-09-24).** **`P = F` now holds on de Grey's lattice by derivation, by three mechanisms** (row 85: the

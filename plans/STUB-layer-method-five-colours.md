@@ -1,5 +1,7 @@
 # FS-83 — the layer method at four and five colours: can one character colour a whole field's plane? (stub)
 
+**Answered at FS-89's close (2026-09-25), for characters of the whole field:** no, at `k = 4` over ℚ(√47) and at `k = 5` over ℚ(√167) — `Θ₄(R_{ℚ(√47)}) = Θ₅(R_{ℚ(√167)}) = ∅` (`LEDGER.md` row 96; `plans/FS89-derivation.md` CL4, CL5), because every four- and five-colour band character of every real field's unit-vector ring is torsion plus archimedean (row 95), and the band collapses the torsion part to level one, where nothing survives. So the layer method cannot falsify the conjecture at either exposed field. The rational pattern's band set `Θ_k(U₅)` alone is **not** enough (row 97: at one prime a heteroclinic character exists); two primes are. **Left:** `k ≥ 6`, now the stub FS-91 (`plans/STUB-band-rigidity-six.md`). Moved below FS-84 in `plans/FRONTIER-STUBS.md`.
+
 **Re-aimed at FS-86's close (2026-09-25):** at `k = 4` dead on type-(B) planes (finite-type characters, row 91; every measurable window, row 92) and for measurable windows over ℚ(√47) (FS86-CL1); live at `k = 5` over ℚ(√167) and for band characters of infinite type (FS-89). FS-86's §S.5 fallback (this stub at `k = 4`) was dead before it ran.
 
 *Minted 2026-09-24 at FS-81's close, from FS-81's §IQ item 5, the plan-phase advisor's open question (close inventory items 12 and 18),

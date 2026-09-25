@@ -23,6 +23,13 @@ fails (row 97).
    `Θ₄`, rigid by row 95). So step one is to re-read VB1 and Lemma SW (`plans/FS89-S1VB-verification.md` §B1.0–B1.1) at band 1/6 and 1/8
    and say exactly which line uses `k ∈ {4, 5}`. D's own route needs the band-1/6 exit lemma (`plans/FS89-S1D-derivation.md` §5 "Where it
    stops"), which VB1 would make unnecessary.
+   **Since the Berend reading (`plans/FS89-PA-berend1984.md` §5, at the close):** (i) the minimal-set step needs no band at all —
+   `[Berend1984]` Thm I.2 with Prop. II.6 gives "a minimal `M` with `M − M = R̂_S` is `R̂_S`" for this action, so `MS_k(S)` holds at every
+   `k` and every `|S| ≥ 2` (FS89-PA-B2, hand, one mind, resting on D1-L2 and D1-L3), and only the point step (VB1, Lemma SW) carries the
+   band; (ii) the reader reached the same widening from Lemma SW — `RS_k(S)` for every `k < 2·min S`, so `RQ_k` for every `k ≤ 9` via
+   `{5, 13}`, and `RS₅(S)` without `5 ∈ S` (PA-B3). **The same observation twice, not independent evidence, and unverified.** So the
+   milestone's first act is a **blind verifier** given PA-B2's and PA-B3's statements (not their arguments), asked to re-derive VB1 and
+   SW at `k = 6, 8, 9` and say which line, if any, uses `k ≤ 5`.
 2. **What six would give.** At ℚ(√167) the conjecture predicts at least six (CLAUDE.md, the target). A character six-colouring of
    ℚ(√167)'s plane would then be a torsion character at the stable places 23, 43, … in the band at level one; whether `Γ₂₃` and `Γ₄₃` admit
    a six-colour band character is a finite exact question at level one (`α(Γ₂₃) ≤ 97` gives ratio 0.183 > 1/6, so the five-colour argument

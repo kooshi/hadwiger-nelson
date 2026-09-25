@@ -1,5 +1,7 @@
 # FS-90 — two hours of sanctioned search: FS-86's finite-witness questions, priced side by side (stub)
 
+**Re-aimed at FS-89's close (2026-09-25).** **(a)** HD1 is proved (`LEDGER.md` row 96), so by FS86-dB-HDcert a finite exact certificate exists on some finitely generated lattice (existence only, no size bound); two hours on `Λ₅₁₀` would price its size and a kernel-checkable form, and `Λ₅₁₀` is not known to carry it — the candidate is now a measurement of a certificate known to exist, never a test of HD1. **(b)** needs an **acquisition step first** (the next-step advisor's correction, `plans/POROS-2026-09-25-fs86-next.md` §5): Heule's T721 graph is not held and `[Heule2021]` is a loan; about an hour if the graph can be fetched, days if borrowed, and the audit runs only then. Kooshi has not ruled on the hours (FS-89 close inventory item 6); the default is T721's audit only if the graph can be fetched, otherwise banked until 2026-10-01.
+
 *Minted 2026-09-25 at FS-86's close for the post-close advisor and Kooshi, whose grant it is ("2 hours of sanctioned search time"). Rank 3 in
 `plans/FRONTIER-STUBS.md`. Outside a grant, everything below waits for the ban's end on 2026-10-01 (`CLAUDE.md` § Toolchain). Every price here is
 an estimate from held records; **nothing was run to price it**, because a pricing run is itself a search.*

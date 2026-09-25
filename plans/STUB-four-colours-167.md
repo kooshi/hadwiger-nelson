@@ -1,5 +1,7 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+**At FS-89's close (2026-09-25):** no **character** five-colouring of ℚ(√167)'s plane exists (`LEDGER.md` row 96; `plans/FS89-derivation.md` CL5; hand + cert, given FS-53's and FS-66's certificates at 43 and 23). This stub's question — does ℚ(√167)² need five colours at all? — is untouched: a five-colouring that is no character is not excluded. It removes one kind of falsifier of the conjecture's widest prediction (FS-64's windowless case, FS-83).
+
 **Re-aimed at FS-86's close (2026-09-25):** at four colours no measurable window colouring over finitely many places exists here (row 92, FS86-CL1, one mind); at five colours the window count fails at the real place (Croft's `m₁ ≥ 0.22936 > 1/5`), so the five-colour question is untouched.
 
 > **Re-aimed at FS-85's close (2026-09-24).** ℚ(√167)'s plane is triangle-free (√3 ∉ F), so two FS-85 results bear. **FS85-dB4

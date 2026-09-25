@@ -1,5 +1,7 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+**At FS-89's close (2026-09-25):** this stub's one-place, windowless case — one character colouring the whole field (FS-83) — is closed at both exposed fields: no character four-colours ℚ(√47)'s plane and none five-colours ℚ(√167)'s (`LEDGER.md` row 96), since every four- and five-colour band character of a real field is torsion plus archimedean (row 95). With FS-86's row 92 (measurable windows over finitely many places cannot four-colour a type-(B) plane non-periodically), what is left of the five-colour aim over ℚ(√167) is a window colouring over **several** places that is not a character; it is untouched.
+
 **Re-aimed at FS-86's close (2026-09-25):** with any finite set of places and measurable windows it cannot four-colour a type-(B) plane non-periodically (row 92, C14), and over type (A) no such four-colouring exists (FS86-CL1); the five-colour aim at ℚ(√167) is untouched.
 
 > **Routed here at FS-81's close (2026-09-24; close inventory items 12, 18): the plan-phase advisor's one-character question.** Can one
