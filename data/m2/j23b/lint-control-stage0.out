@@ -1,0 +1,21 @@
+slot: admitted lake: mem 30 GiB (hard cap), cpus 0,1,2,3
+COVERAGE: getDeclsInPackage `Proofs returns 11817 declarations
+data/m2/j23b/LintControl.lean:12:47: warning: Variable name `k` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/m2/j23b/LintControl.lean:14:0: error: -- Found 2 errors in 1 declarations (plus 0 automatically generated ones) in j23bPlantedUnusedArg with 2 linters
+
+/- The `docBlame` linter reports:
+DEFINITIONS ARE MISSING DOCUMENTATION STRINGS:
+This linter can be disabled with `@[nolint docBlame]`. -/
+-- data.m2.j23b.LintControl
+#check j23bPlantedUnusedArg /- definition missing documentation string -/
+
+/- The `unusedArguments` linter reports:
+UNUSED ARGUMENTS.
+This linter can be disabled with `@[nolint unusedArguments]`. -/
+-- data.m2.j23b.LintControl
+#check j23bPlantedUnusedArg /- 1 unused argument:
+  argument 3: (k : ℕ) -/

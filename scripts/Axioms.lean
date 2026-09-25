@@ -1578,7 +1578,12 @@ no native evaluation. -/
 #print axioms HadwigerNelson.Chain.add_one_le_chromaticNumber_unitDistance_of_chain
 #print axioms HadwigerNelson.Chain.add_one_le_chromaticNumber_planeOver_of_chain
 #print axioms HadwigerNelson.Chain.spindle_of_chain
+#print axioms HadwigerNelson.Chain.norm_eq_one_of_sq
+#print axioms HadwigerNelson.Chain.rhombus_unit_of
 #print axioms HadwigerNelson.SqrtTwoThree.sixUnits_sum
+#print axioms HadwigerNelson.SqrtTwoThree.sum_sixUnits
+#print axioms HadwigerNelson.SqrtTwoThree.delta_mul_one_add_omegaBar
+#print axioms HadwigerNelson.SqrtTwoThree.one_add_v_add_conj
 #print axioms HadwigerNelson.SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three
 #print axioms HadwigerNelson.SqrtTwoThree.eighteen_not_colorable_three
 #print axioms HadwigerNelson.SqrtTwoThree.eighteen_colorable_four
@@ -1591,13 +1596,21 @@ no native evaluation. -/
 transcendental over `F`, by the place `t = 0` and one valuation lemma. No solver, no native evaluation. -/
 
 #print axioms HadwigerNelson.RouteC.planeOverIso
+#print axioms HadwigerNelson.RouteC.chromaticNumber_eq_of_iso
+#print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_eq
 #print axioms HadwigerNelson.RouteC.unitQuadrance_colorable_of_subring
 #print axioms HadwigerNelson.RouteC.mem_valuationSubring_of_sq_add_sq_eq_one
+#print axioms HadwigerNelson.RouteC.one_add_sq_ne_zero
 #print axioms HadwigerNelson.RouteC.unitQuadrance_colorable_of_valuationSubring
 #print axioms HadwigerNelson.RouteC.evalZero_eq_zero_of_mem_maximalIdeal
+#print axioms HadwigerNelson.RouteC.inv_mem_zeroIntegral_of_not_mem
 #print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero
 #print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc
 #print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_rat
+#print axioms HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_eq_of_ringEquiv
+#print axioms HadwigerNelson.RouteC.one_add_sq_ne_zero_of_subfield
+#print axioms HadwigerNelson.RouteC.le_adjoinTranscendental
+#print axioms HadwigerNelson.RouteC.mem_adjoinTranscendental_self
 #print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq
 #print axioms HadwigerNelson.RouteC.transcendental_liouvilleNumber_bot
 #print axioms HadwigerNelson.RouteC.chromaticNumber_planeOver_liouville
@@ -1631,13 +1644,19 @@ to line, and the rotation by `ζ₆`. The class-mod-2 colouring inhabits the hyp
 be dropped. No solver, no native evaluation. -/
 
 #print axioms HadwigerNelson.Stripe.wheel_all
+#print axioms HadwigerNelson.Stripe.wheelFacts
 #print axioms HadwigerNelson.Stripe.wheel
 #print axioms HadwigerNelson.Stripe.typeP_line
 #print axioms HadwigerNelson.Stripe.striped_of_line
+#print axioms HadwigerNelson.Stripe.rot_rim
+#print axioms HadwigerNelson.Stripe.proper_comp_rot
+#print axioms HadwigerNelson.Stripe.nt0_comp_rot
+#print axioms HadwigerNelson.Stripe.typeP_comp_rot
 #print axioms HadwigerNelson.Stripe.striped_of_comp_rot
 #print axioms HadwigerNelson.Stripe.striped_of_proper_nt0
 #print axioms HadwigerNelson.Stripe.proper_modTwo
 #print axioms HadwigerNelson.Stripe.nt0_modTwo
+#print axioms HadwigerNelson.Stripe.proper_threeCol
 #print axioms HadwigerNelson.Stripe.not_striped_threeCol
 
 /-! ## FS-39 phases B0–B1 and C — the bridge, conditional on real algebraic descent; `ℝ` and the real algebraic numbers
@@ -1661,6 +1680,8 @@ instances are Mathlib's TODO, upstream candidates. -/
 #print axioms Real.isRealClosed
 #print axioms algebraicClosure.isRealClosed
 #print axioms isRealClosed_algebraicClosure_rat_real
+#print axioms IsSumSq.map
+#print axioms IsSemireal.of_ringHom
 
 /-! ## FS-39 phase C — Lemma NP (no rational parametrisation of `y² = x³ − x`) and C3's one-variable form (J17K2)
 

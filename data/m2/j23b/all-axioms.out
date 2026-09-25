@@ -1,0 +1,279 @@
+slot: admitted lake: mem 30 GiB (hard cap), cpus 0,1,2,3
+'HadwigerNelson.Chain.junction' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.chainDrawing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.chainPoints' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.junction_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.junction_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.junction_last' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.chainDrawing_a' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.chainDrawing_b' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.copyHom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.not_colorable_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.chainPoints_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.add_one_le_chromaticNumber_induce_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Chain.add_one_le_chromaticNumber_unitDistance_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Chain.norm_eq_one_of_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.rhombus_unit_of' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.planeOverSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.coe_planeOverSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.add_one_le_chromaticNumber_planeOver_of_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Chain.spindleRhombus' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.moserTwist' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Chain.spindle_of_chain' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.rhombusX' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.omegaBar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.v' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sixUnits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sqrt3_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sqrt2_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.rhombusX_unit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.norm_omegaBar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.norm_v' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sixUnits_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sum_sixUnits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.delta_mul_one_add_omegaBar' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.one_add_v_add_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sixUnits_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.F23' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sqrt2_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sqrt3_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.rhombusX_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.omegaBar_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.v_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.conj_v_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.sixUnits_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SqrtTwoThree.eighteenEdges' depends on axioms: [propext]
+'HadwigerNelson.SqrtTwoThree.pullGadget' does not depend on any axioms
+'HadwigerNelson.SqrtTwoThree.diamond' depends on axioms: [propext]
+'HadwigerNelson.SqrtTwoThree.ports' depends on axioms: [propext]
+'HadwigerNelson.SqrtTwoThree.diamond_hom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.diamondGadget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.closingGadget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.eighteenGadget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.eighteen_not_colorable_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.eighteen_colorable_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SqrtTwoThree.plantedEdges' depends on axioms: [propext]
+'HadwigerNelson.SevenConditional.G4' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.w' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.eightUnits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.sqrt7_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.norm_w' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.eightUnits_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.conj_w' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.w_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.sum_eightUnits' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.F7' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.w_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.conj_w_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.eightUnits_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.planeOver_seam_subset' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.planeOverEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.dist_eq_one_iff_quadrance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.planeOverIso' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_eq_of_iso' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_planeOver_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.unitQuadrance_colorable_of_subring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.mem_valuationSubring_of_sq_add_sq_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.one_add_sq_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.unitQuadrance_colorable_of_valuationSubring' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.eval_zero_ne_zero_of_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.zeroIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.mem_zeroIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.algebraMap_mem_zeroIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.inv_algebraMap_mem_zeroIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.inv_mem_zeroIntegral_of_not_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.zeroPlace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.mem_zeroPlace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.evalZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.evalZero_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.evalZero_eq_zero_of_mem_maximalIdeal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_rat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_eq_of_ringEquiv' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.one_add_sq_ne_zero_of_subfield' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.adjoinTranscendental' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.le_adjoinTranscendental' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.mem_adjoinTranscendental_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.adjoinTranscendentalEquiv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.RouteC.transcendental_liouvilleNumber_bot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.RouteC.chromaticNumber_planeOver_liouville' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unitRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.normOne_subset_unitRing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unitRing_le_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.normOne_subset_iff_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unitRing_le_valuationSubring_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.inv_mem_iff_forall_valuationSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.inv_natCast_mem_unitRing_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.inv_natCast_mem_unitRing_iff_not_mem_nonunits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UnitRing.inv_two_mem_unitRing_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.conj_mem_planeOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.planeOverSubfield' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.mem_planeOverSubfield' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.conj_mem_planeOverSubfield' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unit_mem_unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.unitRingOver_le_planeOverSubring' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.mem_normOne_conjOn_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.coe_mem_unitRingOver_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.inv_natCast_mem_unitRingOver_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.exists_sum_eq_of_mem_unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.UnitRing.add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.UnitRing.inv_five_mem_unitRing_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenUnitRing.w_mem_unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenUnitRing.conj_w_mem_unitRingOver' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenUnitRing.inv_two_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenUnitRing.inv_two_mem_unitRingOver_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.SevenUnitRing.three_div_eight_mem_unitRingOver_seven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.SevenUnitRing.wall_broken_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.rim' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_zero' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_one' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_two' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_three' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_four' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rim_five' depends on axioms: [propext]
+'HadwigerNelson.Stripe.Proper' depends on axioms: [propext]
+'HadwigerNelson.Stripe.NT0' depends on axioms: [propext]
+'HadwigerNelson.Stripe.Striped' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.TypeP' depends on axioms: [propext]
+'HadwigerNelson.Stripe.WheelFacts' does not depend on any axioms
+'HadwigerNelson.Stripe.wheel_all' does not depend on any axioms
+'HadwigerNelson.Stripe.wheelFacts' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.rim_add_rim_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.rim_ne_succ' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.wheel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.typeP_zero_iff' depends on axioms: [propext]
+'HadwigerNelson.Stripe.typeP_zero_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.typeP_three_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.typeP_line' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.pairOf' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.pairOf_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.pairOf_step' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.ne_add_rim' depends on axioms: [propext]
+'HadwigerNelson.Stripe.striped_of_line' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.rot' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rotInv' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rot_rotInv' depends on axioms: [propext]
+'HadwigerNelson.Stripe.rot_rim' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.proper_comp_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.nt0_comp_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.striped_of_comp_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.typeP_comp_rot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.striped_of_typeP' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.striped_of_proper_nt0' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.enc' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.modTwo' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.modTwo_add' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.proper_modTwo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.nt0_modTwo' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.threeCol' depends on axioms: [propext, Quot.sound]
+'HadwigerNelson.Stripe.proper_threeCol' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Stripe.not_striped_threeCol' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.RealAlgebraicDescent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.realAlgebraicDescent_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.RationalDescent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.not_rationalDescent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.RealAlgebraicDescent.of_finite' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.adjoinReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.subset_adjoinReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.numberField_adjoinReal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.edgePoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.aeval_edgePoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.ofCoords' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.dist_ofCoords_eq_one_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.exists_numberField_drawing_of_descent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.chromaticNumber_planeOver_le_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.chromaticNumber_complex_le_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.iSup_numberField_le_chromaticNumber_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Bridge.iSup_numberField_le_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.chromaticNumber_plane_le_iSup_numberField_of_descent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Bridge.nonempty_numberField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.exists_numberField_chromaticNumber_eq_plane_of_descent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.Bridge.toRatIntermediateField' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.numberField_sup' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.Bridge.chromaticNumber_plane_ne_six_iff_of_descent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'IsSumSq.map' depends on axioms: [propext]
+'IsSemireal.of_ringHom' depends on axioms: [propext]
+'Polynomial.exists_isRoot_of_odd_natDegree_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Real.isRealClosed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IsRealClosed.mem_algebraicClosure_of_isIntegral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IsRealClosed.mem_algebraicClosure_of_mul_self_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'algebraicClosure.isRealClosed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'isRealClosed_algebraicClosure_rat_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.exists_eq_C_mul_sq_of_mul_eq_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.natDegree_eq_zero_of_mul_mul_sub_eq_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.exists_algebraMap_eq_of_sq_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.not_isSquare_cube_sub_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.mem_range_C_of_sq_eq_cube_sub_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.not_isSquare_cube_sub_self_of_charZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.twin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.twin_not_mem_range_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.isSquare_twin_sq_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.X_sq_not_mem_range_C' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.isSquare_cube_sub_self_X_sq_zmod_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.not_mem_adjoinTranscendental_of_sq_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.transcendental_two_add_liouvilleNumber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.not_mem_adjoinTranscendental_liouville' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.sqrt_not_mem_adjoinTranscendental_bot_liouville' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'HadwigerNelson.NoParam.IsPureTower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.mem_of_isPureTower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.not_forall_mem_isPureTower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.isPureTower_bot_liouville' depends on axioms: [propext, Classical.choice, Quot.sound]
+'HadwigerNelson.NoParam.not_forall_mem_adjoinTranscendental_bot_liouville' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

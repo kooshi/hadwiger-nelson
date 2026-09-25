@@ -536,3 +536,54 @@ them into `Proofs/` and the build checks them again).*
 - the jobs' records: `plans/M2-S1K-chain.md` (J14), `plans/M2-S2K-route-c.md` (J15), `plans/M2-S1D-bridge.md` (J17), `plans/M2-S3K-unit-ring.md` (J16, in progress)
 - modules: `Proofs/HadwigerNelson/Chain.lean`, `Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean`, `Proofs/HadwigerNelson/Instances/SevenConditional.lean`, `Proofs/HadwigerNelson/Transcendental.lean`; audit lines in `scripts/Axioms.lean` (sections FS-45 and FS-39 route C)
 - data `data/m2/j14/`, `data/m2/j15/`, `data/m2/j17/`; reports `data/crunch-2026-09-25/reports/J14.md`, `J15.md`, `J17.md`; close inventory `plans/M2-close-inventory.md`
+
+## §R-close — M2's close (crunch job J23b, de Bruijn, Opus 5.5, 2026-09-25)
+
+*WORKFLOW steps 8–9 for M2, from `data/crunch-2026-09-25/briefs/J23b-M2-close-math.md` (template J23a's, with `STANDING-RULES.md`). The
+inventory is `plans/M2-close-inventory.md`; the kernel register is `plans/M2-derivation.md`; working files `data/m2/j23b/`. Drafts for
+`LEDGER.md`, `CLAUDE.md`, `plans/FRONTIER-STUBS.md` and the stub banners live here only; the front-page job J24 applies them.*
+
+### Stage 0 — SAVED (the full gate, once; WORKFLOW step 8)
+
+Desktop, every run under `scripts/slot.py`, each exit status read from the gate itself (captured to a file, never through a
+pipe). Copies of each gate's digest in `data/m2/j23b/*-stage0*.out`.
+
+| # | gate | command | exit | result | log |
+|---|---|---|---|---|---|
+| 1 | build | `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` | 0 | all 1,708 modules up to date, nothing built, 0 modules with warnings (a no-op build: the last build that compiled M2's modules is J17K2's, green with 0 warnings at `7fb8fcb7`, `plans/M2-S5K-noparam.md` §4.1) | `build/gate/build/20260925T232354Z-242469.log` |
+| 2 | lint (the owner's ruling: once, at M2's close) | `scripts/slot.py --mem 60 --cpus 16 -- lake lint` | 0 | "-- Linting passed for Proofs." — the driver `batteries/runLinter` rebuilt nothing (its `buildIfNeeded` builds a module only when its `.olean` is missing, `.lake/packages/batteries/scripts/runLinter.lean:107–128`; both `.olean`s present); re-run with `--trace --no-build`: 14 linters (`checkType`, `defsWithUnderscore`, `deprecatedNoSince`, `docBlame`, `impossibleInstance`, `nonClassInstance`, `simpComm`, `simpNF`, `structureInType`, `subsetDotNotationLinter`, `synTaut`, `tacticDocs`, `unusedArguments`, `unusedHavesSuffices`) all passed, 3.5 s wall, 4.2 GB peak | `data/m2/j23b/lint-stage0.out`, `lint-trace-stage0.out` |
+| 2c | lint's negative control | `lake env lean data/m2/j23b/LintControl.lean` (a scratch file, not in the library) | 1 (the plant) | **coverage**: runLinter's selector `getDeclsInPackage \`Proofs` hands the linters **11,817 declarations** (the auto-generated ones included), so the pass is not an empty scan; **firing**: a planted `def` with an unused argument and no docstring is reported by `docBlame` and `unusedArguments` both | `data/m2/j23b/lint-control-stage0.out` |
+| 3 | axioms (before item 5) | `scripts/slot.py --mem 30 --cpus 4 -- ./scripts/axioms.sh` | 0 | **1,125 records — 1,109 clean on the standard axioms, 11 axiom-free, 5 declared purchases** (matches J17K2's gate); purchase ledgers agree; "RECORDED COUNT IS STALE — update CLAUDE.md § Trust ledger: 1034 clean → 1109" | `build/gate/axioms/20260925T232524Z-246256.log` |
+| 3′ | axioms (after item 5) | same | 0 | **1,146 records — 1,130 clean, 11 axiom-free, 5 declared purchases**; the 21 new rows each CLEAN, none appeared elsewhere or changed | `build/gate/axioms/20260925T232928Z-253944.log` |
+| 4 | vacuity | `scripts/slot.py --mem 30 --cpus 4 -- ./scripts/vacuity.sh` | 0 | `declarations=7051 refutations-skipped=304`; `sites=279 vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2` (the baseline's two, `hexShell_plane5`, `hexShell_plane6`); "RECORDED COUNTS ARE STALE — update scripts/vacuity-baseline.txt's header and CLAUDE.md § The gate: declarations 6795 → 7051, refutations-skipped 278 → 304, sites 275 → 279, generic 253 → 257" | `build/gate/vacuity/20260925T232531Z-246575.log` |
+| 4c | vacuity self-test | `… ./scripts/vacuity.sh --self-test` | 0 | seven planted defects, each fired; the two silent ones stayed silent; the load-bearing control read `UNKNOWN` | `build/gate/vacuity-self-test/20260925T232629Z-248246.log` |
+| 5 | architecture | `python3 tools/check_architecture.py` | 0 | PASS, before and after item 5 | `data/m2/j23b/arch-stage0.out`, `arch-stage0-after.out` |
+| 6 | sorry | `grep -rn --include="*.lean" "sorry" Proofs/` | 0 (one match) | the one match is prose inside a docstring (`Proofs/HadwigerNelson/Packed.lean:266`, "a `sorry` waiting to be written into a definition"), no `sorry` term; the axiom audit finds no `sorryAx` | `data/m2/j23b/sorry-stage0.out` |
+| 7 | M2's whole surface | `lake env lean data/m2/j23b/AllAxioms.lean` (`#print axioms` on all 226 declarations of M2's ten files, parsed by `data/m2/j23b/decls.py`) | 0 | **every one within the standard three**: 195 on all three, 21 on `[propext]`, 7 on `[propext, Quot.sound]`, 3 on none; no `sorryAx`, no native axiom | `data/m2/j23b/all-axioms.out`, `decls.json` |
+
+**Item 5a — the audit's missing lines. The choice:** add to `scripts/Axioms.lean` every theorem an M2 record's "Theorems this phase proved"
+table names and the audit did not print — 21 lines: the index's 13 (`Chain.norm_eq_one_of_sq`, `Chain.rhombus_unit_of`;
+`SqrtTwoThree.sum_sixUnits`, `delta_mul_one_add_omegaBar`, `one_add_v_add_conj`; `RouteC.chromaticNumber_eq_of_iso`,
+`chromaticNumber_planeOver_eq`, `one_add_sq_ne_zero`, `inv_mem_zeroIntegral_of_not_mem`, `chromaticNumber_unitQuadrance_eq_of_ringEquiv`,
+`one_add_sq_ne_zero_of_subfield`, `le_adjoinTranscendental`, `mem_adjoinTranscendental_self`), plus eight the index did not reach because
+J16's and J17K's files were in flight when it was written: `Stripe.wheelFacts`, `Stripe.proper_threeCol` and "the rotation transfers"
+(`Stripe.rot_rim`, `proper_comp_rot`, `nt0_comp_rot`, `typeP_comp_rot`), and `IsSumSq.map`, `IsSemireal.of_ringHom`. *Alternative weighed:*
+leave them unprinted, as the index recommended ("listed for the owner, not as a defect"), since each is used by an audited theorem and so its
+axioms are bounded by that theorem's line. *Why this won:* a bound through a user is not a receipt — the kernel register below gives every
+record-named theorem its own axioms line, and the audit's rule is "one `#print axioms` line per public theorem on the milestone's surface";
+a theorem a record names as a result is on the surface (all 21 are public, none `private`). Cost: 21 lines, no build. *Confidence:* high.
+
+**Item 5b — J16's leftovers. The choice:** commit `data/m2/j16/WheelProbe.lean` and `WheelProbe2.lean` as data, unchanged. They are the two
+encodings J16 timed for the wheel check — the vector form `s2f ![a, b, c, d, e, f, g]` and the direct-argument form — and J16's record cites
+the measurement they produced ("the per-wheel check on direct arguments beats J04's vector form (`![…]` indexing measured 15 s for one fact on
+the same `4⁷`)", `plans/M2-S3K-unit-ring.md` §3.2). *Alternative weighed:* delete them as scratch (the library's `Stripe.wheel_all` supersedes
+both). *Why this won:* a recorded timing should keep its source; they are 29 lines, outside `Proofs/`, and no build reads them.
+*Confidence:* high.
+
+**Gate verdict:** green — build, lint (first `lake lint` at a close since it was wired; passed with a control that fires), axioms, vacuity and
+its self-test, architecture, zero `sorry` terms. Two recorded counts are stale and are the front-page lane's to correct: `CLAUDE.md` § Trust
+ledger ("1034 clean" → **1130**, after item 5) and `CLAUDE.md` § The gate plus `scripts/vacuity-baseline.txt`'s header (the vacuity counts
+above). *Negative controls this stage:* lint (2c) and vacuity (4c) were each watched to fire; the build's and the axiom audit's plants were
+run by the kernel jobs themselves (J14 stage 3, J15 stage 3, J16 stage 2, J17K2 stage 2; each record's plant section) and are not re-run here.
+
+**Would have searched here (stage 0):** none — every step was a gate or an existing checker.
