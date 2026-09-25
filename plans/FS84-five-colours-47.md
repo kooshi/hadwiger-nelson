@@ -408,7 +408,7 @@ four-class (window-frequency) form, which row 80 shows can refute where `χ_f < 
 |---|---|---|---|---|---|
 | **S1** | derivation: S1a the type-(A) theorem at ℚ(√47) (periodic case without `[AmbrusEtAl2023]`); S1b the invariant-measure equivalence and its single-class corollary, with Johnson's infinite-graph `χ_f` papers read first; S1c the one-prime reading of the ten minimal survivors, each ending in a **formula** character or a named obstruction; S1d the shape and price of S2's LP; S1e P-G75's linear-identity question | hand + exact checks of seconds | one agent, ~3 h, 350k | a stage whose derivation stalls twice is written as GAP with the missing step named | the record's `Stage n — SAVED` sections; resume at the first unsaved |
 | **S1V** | blind verifier of S1a–S1c against a fixed claim list | hand | one agent, ~2 h, 300k | per claim TRUE / FALSE / GAP; a blind phase that stalls moves to the lemma statements (FS-89's fallback) | its record's stages |
-| **S4** | the colouring side: (i) S1c's formula characters checked exactly on each survivor's unit vectors; (ii) the UNKNOWN residue targets re-asked (`tools/fs81_d47.py recheck --budget 600`); (iii) quotients at `N = 16–20`; (iv) a four-colour finder on the antipodal quotient (G58) | exact check, then SAT and finders | (i) seconds; (ii) ≤ 375 asks × 600 s ≈ 62 CPU-h worst case (15 survivors carry UNKNOWN targets, ≤ 25 each; `survivors.md`), 4 h wall on 16 cores; (iii)–(iv) 4 h wall | a lattice leaves the list at its first certified colouring (K1 checker); the stage ends at its wall | per-ask JSONL appended by the tool; resume by re-running with `--skip-done` (verify the flag exists before launch, T2) |
+| **S4** | the colouring side: (i) S1c's formula characters checked exactly on each survivor's unit vectors; (ii) the UNKNOWN residue targets re-asked (`tools/fs81_d47.py recheck --budget 600`); (iii) quotients at `N = 16–20`; (iv) a four-colour finder on the antipodal quotient (G58) | exact check, then SAT and finders | (i) seconds; (ii) ≤ 375 asks × 600 s ≈ 62 CPU-h worst case (15 survivors carry UNKNOWN targets, ≤ 25 each; `survivors.md`), 4 h wall on 16 cores; (iii)–(iv) 4 h wall | a lattice leaves the list at its first certified colouring (K1 checker); the stage ends at its wall | the tool is resumable by its own JSONL caches (`residue-cache.jsonl`, `screen.jsonl` under its OUT directory; checked: `load_jsonl` of the done set at start); resume = re-run the same command |
 | **S2** | the four-class window LP of S1d's shape on the smallest lattice S4 leaves | exact LP | set by S1d; declined if S1d prices it above one machine-day | infeasible → a Farkas dual, read back as an identity and checked exactly; feasible → a typed null at that shape | LP instances written to `data/fs84/s2/` before solving; one instance per process under 15 min, else split |
 | **S3** | the finite refusal: forced-pair asks at chainable distances (`d² ∈ {1/2, 5/2, 12, …}`, where `4d² − 1` is a square in ℚ(√47) and the spindle closes in-field, row 44; or `1/δ ∈ ℤ[U]`, G55) by counterexample-guided growth (G33) from the 169-point witness (row 73) | SAT (kissat, CaDiCaL LRAT), K2 checker | **runs only if S1–S4 hand it a candidate** (a lattice with `N(d*) ≤ 5·10⁶`, or a derived forcing gadget); default declined: row 84 prices a matched ball at ≥ 5.1·10⁷ points | the first UNKNOWN at the matched radius ends it (FS-70's six-attempt precedent, row 76) | per-wave halo files under `data/fs84/s3/`; resume from the last wave |
 
@@ -433,3 +433,34 @@ four-class (window-frequency) form, which row 80 shows can refute where `χ_f < 
 
 **Pre-decided responses (Ga10):** if S4 colours every minimal survivor, the next survivors are the two-split-prime lattices, and the report
 says the ten were a one-prime artefact, not that ℚ(√47) is "closer to four". If S2's LP is feasible, the report names the shape, not the field.
+
+## Stage 5 — SAVED
+
+### 5.1 §M.1 — domain modeling (fresh `debruijn-domain-modeling` invocation, applied to the statements)
+
+- **S1a, modeled as a number, not a non-existence.** The intrinsic object is the *periodic independence ratio*
+  `ρ_per(F) = sup_L α(Cay(R/L, U+L)) / [R : L]` over finite-index `L ≤ R = ℤ[U_F]` with `U ∩ L = ∅`. Statement: **`ρ_per(ℚ(√47)) < 1/4`**,
+  bounded by the maximum over stable places of the all-levels ratios (Lemma C factors every quotient through the stable places; `[Zhang2012]`
+  Thm 1.8(i) makes the product's ratio the factors' maximum). The binding factor is **31** (Hoffman in an inert tower, `1/4 − 2.745·10⁻⁶`), not 11
+  (`28.2043/121 = 0.2331`); the margin is named, the conclusion ("no periodic four-colouring") is the `k = 4` shadow via
+  `card_le_chromaticNumber_mul_indepNum` (row 56). It concludes a refusal, so it is not vacuous. **Unsampled member:** the ramified 47-place
+  (Lemma P, Theorem E) — its all-levels ratio must be stated, not assumed (P-S1a's GAP risk).
+- **S1b, modeled with the arithmetic stripped.** *For a countable amenable group `G` acting on a graph `Γ` by automorphisms: `Γ` is
+  `k`-colourable iff there is a `G`-invariant Borel probability measure on its proper `k`-colourings; hence, with
+  `ι_G(Γ) = sup_μ μ{I ∋ v₀}` over `G`-invariant measures on independent sets (vertex-transitive `G`), `k`-colourable ⟹ `ι_G(Γ) ≥ 1/k`.* Density
+  as `P(v₀ ∈ I)` needs no Følner sets in the statement. **Adversarial member:** a non-amenable `G` (free-group Cayley tree, two-colourable,
+  no invariant colouring measure under its full automorphism group is not the issue — the ⟹ direction's averaging fails) — amenability is the
+  named hypothesis. Instance: `G = R ⋊ U_F` (solvable). Prior art owed: Johnson–Rodger 2005, `[MatolcsiEtAl2025]`'s blow-up.
+- **S1c, and the cut it failed.** The one-prime reading (§G.4 item 1) is **confounded by the sweep's range**: among `M ≤ 2,520` with `24 | M`
+  only 1560 (`5·13`) and 2040 (`5·17`) have two primes ≡ 1 (mod 4), so "every minimal survivor has one" is nearly forced by the enumeration
+  (Ga25, G21) — incidental, not intrinsic. The one discriminating datum on disk cuts against it: **Λ₁₅₆₀ is a candidate that four-colours by a
+  quotient** (`data/fs81/phaseD/d47/screen.jsonl`), while Λ₂₀₄₀ survives only because it contains Λ₄₀₈. P-1p is lowered to 0.25 (§P
+  amended below). S1c's output is modeled as a **parsed witness**: a rational `θ` on a ℤ-basis of `Λ_M` with every `θ(u)`, `u ∈ U_M`, checked in
+  `[1/4, 3/4]` by Fractions (a periodic colouring of period `ord θ`), or a named obstruction — never an irrational or float `θ`.
+- **S2's LP, modeled as the level-`W` relaxation of the invariant measure.** Variables: frequencies of proper colourings of a window `W`
+  up to the stabiliser of `W` in the point group × Galois flip × `S₄`; constraints: shift-consistency of marginals on `W ∩ (W + u)`, `u ∈ U_M`.
+  Its dual is a discharging identity (a weight on window patterns whose translates sum to a strictly negative constant). The window must
+  reach radius ≥ 2 (row 87) and hold more than pair constraints; S1d names `W` and counts its orbit-reduced variables before any run.
+
+**§P amended:** P-1p 0.35 → **0.25** (the confound above); P-surv 0.45 → 0.50.
+
