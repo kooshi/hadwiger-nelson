@@ -1,0 +1,56 @@
+Q: ti:"chromatic number" & ab:"rational points"
+  hits: 2
+  0766.05032 | 1992 | Zaks, Joseph | On the chromatic number of some rational spaces | Ars Combinatoria
+  0705.05034 | 1990 | Chilakamarri, Kiran B. | On the chromatic number of rational five-space | Aequationes Mathematicae
+Q: ab:"chromatic number" & ab:"p-adic" & ab:"plane"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: au:"Johnson, Peter D."
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"circular coloring" & ab:"plane" & ab:"unit"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"circular chromatic number" & ab:"Cayley graph"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"quadratic residues" & ab:"consecutive"
+  hits: 39
+  0118.04703 | 1963 | Burgess, D. A. | A note on the distribution of residues and non-residues | Journal of the London Mathematical Socie
+  0701.11055 | 1990 | Newman, Morris | Consecutive units | Proceedings of the American Mathematical
+  1248.11008 | 2012 | Aebi, Christian; Cairns, Grant | A property of twin primes | Integers
+  1321.11012 | 2015 | Dartyge, Cécile; Mauduit, Christian; Sárközy, András | Polynomial values and generators with missing digits in finite fields | Functiones et Approximatio. Commentarii 
+  0564.10002 | 1985 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | The Fibonacci Quarterly
+  0118.04704 | 1963 | Burgess, D. A. | On Dirichlet characters of polynomials | Proceedings of the London Mathematical S
+  0814.11004 | 1993 | Caragiu, Mihai | Counting the maximal sequences of consecutive quadratic residues modulo \(p\) | Revue Roumaine de Mathématiques Pures et
+  0537.10027 | 1984 | Buell, Duncan A.; Hudson, Richard H. | On runs of consecutive quadratic residues and quadratic nonresidues | BIT
+  0973.11083 | 2000 | Shiu, D. K. L. | Strings of congruent primes | Journal of the London Mathematical Socie
+  1133.11056 | 2007 | Gun, Sanoli; Luca, Florian; Rath, Purusottam | Distribution of residues modulo~\(p\) | Acta Arithmetica
+  0106.04003 | 1962 | Burgess, D. A. | On character sums and primitive roots | Proceedings of the London Mathematical S
+  0593.10003 | 1986 | Buell, Duncan A.; Hudson, Richard H. | Sequences in power residue classes | International Journal of Mathematics and
+Q: ab:"quadratic residue" & ab:"polynomial" & ab:"interval"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"unit circle" & ab:"finite field" & ab:"chromatic"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"finite Euclidean" & ab:"chromatic number"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"local-global" & ab:"chromatic number"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"Hedetniemi" & ab:"circular chromatic"
+  hits: 1
+  1365.05081 | 2017 | Alishahi, Meysam; Hajiabolhassan, Hossein; Meunier, Frédéric | Strengthening topological colorful results for graphs | European Journal of Combinatorics
+Q: ab:"distance graph" & ab:"circular chromatic number"
+  hits: 9
+  1055.05059 | 2005 | Liu, Daphne Der-Fen; Zhu, Xuding | Fractional chromatic number and circular chromatic number for distance graphs with large clique size | Journal of Graph Theory
+  1012.05071 | 2002 | Zhu, Xuding | Circular chromatic number of distance graphs with distance sets of cardinality 3 | Journal of Graph Theory
+  1021.05040 | 2003 | Zhu, Xuding | Circular chromatic numbers of a class of distance graphs | Discrete Mathematics
+  1168.05310 | 2008 | Liu, Daphne Der-Fen | From rainbow to the lonely runner: A survey on coloring parameters of distances graphs | Taiwanese Journal of Mathematics
+  0930.05037 | 1999 | Chang, Gerard J.; Liu, Daphne D.-F.; Zhu, Xuding | Distance graphs and \(T\)-coloring | Journal of Combinatorial Theory. Series 
+  1140.05303 | 2007 | DeVos, Matt; Ebrahimi, Javad; Ghebleh, Mohammad | Circular coloring the plane | SIAM Journal on Discrete Mathematics
+  0939.05035 | 2000 | Huang, Lingling; Chang, Gerard J. | Circular chromatic numbers of distance graphs with distance sets missing multiples | European Journal of Combinatorics
+  1082.05038 | 2005 | Lam, Peter Che Bor; Lin, Wensong | Coloring of distance graphs with intervals as distance sets | European Journal of Combinatorics
+  1041.05033 | 2001 | Yin, Xiang; Wu, Jianzhuan | Circular chromatic numbers of some distance graphs | Journal of Southeast University. English

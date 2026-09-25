@@ -1,0 +1,48 @@
+Q: ti:"chromatic number" & ab:"rational points" & ab:"plane"
+  hits: ERROR The read operation timed out
+
+Q: ab:"unit distance" & ab:"number field" & ab:"coloring"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"circular chromatic number" & ab:"unit distance"
+  hits: 2
+  1140.05303 | 2007 | DeVos, Matt; Ebrahimi, Javad; Ghebleh, Mohammad | Circular coloring the plane | SIAM Journal on Discrete Mathematics
+  1273.05054 | 2009 | Kamiński, Marcin; Medvedev, Paul; Milanič, Martin | On the plane-width of graphs | 
+Q: ab:"additive coloring" & ab:"unit distance"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: au:"Johnson, Peter D." & ti:"color"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: au:"Fischer, Klaus G."
+  hits: 27
+  0864.15016 | 1996 | Fischer, Klaus G.; Shapiro, Jay | Mixed matrices and binomial ideals | Journal of Pure and Applied Algebra
+  0756.52015 | 1992 | Fischer, Klaus G.; Shapiro, Jay | The prime ideal structure of the Minkowski ring of polytopes | Journal of Pure and Applied Algebra
+  0656.13003 | 1988 | Fischer, Klaus G. | Symmetric polynomials and Hall's theorem | Discrete Mathematics
+  0792.13008 | 1993 | Fischer, Klaus G.; Shapiro, Jay | Generating prime ideals in the Minkowski ring of polytopes | 
+  0744.05061 | 1990 | Fischer, Klaus G. | Additive \(k\)-colorable extensions of the rational plane | Discrete Mathematics
+  0893.20047 | 1997 | Fischer, Klaus G.; Morris, Walter; Shapiro, Jay | Affine semigroup rings that are complete intersections | Proceedings of the American Mathematical
+  0889.15020 | 1998 | Fischer, Klaus G.; Morris, Walter; Shapiro, Jay | Mixed dominating matrices | Linear Algebra and its Applications
+  0426.60081 | 1980 | Beichelt, Frank; Fischer, Klaus | General failure model applied to preventive maintenance policies | IEEE Transactions on Reliability
+  0836.05030 | 1994 | Fischer, Klaus G. | A planar geometric graph of chromatic number four | Congressus Numerantium
+  1098.68913 | 2005 | Fischer, Klaus | Self-organisation in holonic multiagent systems | 
+  0338.14007 | 1978 | Fischer, Klaus G. | The decomposition of the module of \(n\)-th order differentials in arbitrary characteristic | Canadian Journal of Mathematics
+  0733.05048 | 1990 | Fischer, Klaus G. | The connected components of the graph \({\mathbb{Q}}(\sqrt{N_ 1},\dots ,\sqrt{N_ d})^ 2\) | 
+Q: ab:"quadratic residues" & ab:"consecutive" & ab:"polynomial" & ab:"interval"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"character sum" & ab:"short interval" & ab:"quadratic polynomial"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"Cayley graph" & ab:"finite field" & ab:"circular chromatic"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"sumset" & ab:"circle" & ab:"interval" & ab:"symmetric"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"Hedetniemi" & ab:"circular" & ab:"Cayley"
+  hits: 1
+  0880.05079 | 1997 | Hahn, Geňa; Tardif, Claude | Graph homomorphisms: Structure and symmetry | 
+Q: ab:"chromatic number" & ab:"p-adic" & ab:"plane"
+  hits: ERROR The read operation timed out
+
