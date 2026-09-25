@@ -312,9 +312,9 @@ of each isomorphic pair (the two real places; the two places above 23, 29, 43, 6
 *Proof.* "⟸": pullback (D0 (ii); `Z × G` stays null). "⟹": delete thick places one at a time by J21-MX (format N′ is preserved, §3.2), and
 merge isomorphic pairs by J21-SL (which preserves E and N′: the slice of a null set is null for a.e. `s`). ∎
 
-**Corollaries at ℚ(√167).** (a) With no real place: if `S_red ∌ 43` then no window five-colouring over `S` exists (D1 on `S_red`; the
-factors 2, 3, 5, 7, 29, 61 have ratio 0, 23 ratio `≤ 0.18523`). **Every finite-place window falsifier must read a place above 43**, and it
-exists iff the 43-adic plane together with non-thick places admits one. (b) With a real place and only thick finite places: a Borel window
+**Corollaries at ℚ(√167).** (a) With no real place: if `S` contains no place above 43, D1 with D1-fac excludes every window five-colouring
+over `S` directly (formats E, N, L). **Every finite-place window falsifier must read a place above 43**, and a Borel one exists iff one exists
+over `S_red ⊆ {43, 2, 3, 5, 7, 23, 29, 61}` (one place per conjugate pair) containing 43. (b) With a real place and only thick finite places: a Borel window
 five-colouring over `S` exists iff `χ_B(ℝ²) ≤ 5`; a measurable one (E) forces a measurable five-colouring of `ℝ²` proper off a null vertex
 set, and `χ_µ(ℝ²) ≤ 5` gives one. (c) Everything else — `S_red` containing `∞` and one of 2, 3, 5, 7, 23, 29, 43, 61 — is open.
 
@@ -346,14 +346,15 @@ disc are `< 1` apart, of two discs `> 1` apart; density `π/(8√3) = 0.2267`); 
 the even squares and `E′` the union of the odd squares shrunk by 2 on each side, so `E′` misses the 1-neighbourhood of `E`. Take `J ⊆ G_B`
 independent of positive Haar measure (at a stable place a pulled-back independent set of `Γ_p`; at a split place the ball `πO²`, since
 `(y₁ − x₁)(y₂ − x₂) ∈ π²O` is never 1). Then `S = ((D₀ ∩ E) × G_B) ∪ (E′ × J)` is independent in `A × B`, its fibre over each point of `E′`
-is `J` (neither null nor conull), and its density is `≈ ½(0.2267 + d(J)) > β` whenever `d(J) < 0.2267`, which holds for every D2-eligible
-`B` (`β ≤ 0.18523`). Zhang's Thm 1.8 (i) is about **maximum** independent sets; a five-colouring's classes need not be maximum because
+is `J` (neither null nor conull), and its density is `≈ ½(0.2267 + d(J))`, which exceeds `β` as soon as `d(J) > 2β − 0.2267` — possible
+for every D2-eligible `B`, since `β ≤ 0.18523 < 0.2267` (take `J` near-optimal: at 23 a pulled-back independent set of 87 points of `Γ₂₃`,
+`d(J) = 0.1645 > 0.1438`; at a split place `β = 0` and `J = πO²` already works). Zhang's Thm 1.8 (i) is about **maximum** independent sets; a five-colouring's classes need not be maximum because
 `5m₁ > 1`.
 
 **J21-NG2 — the ratio alone cannot carry D2 (a finite no-go of that format).** `[Zhu2025]` §3, Theorem 3.5 (verbatim): "Let F be a graph of
 odd girth at least 7, with p vertices. Then for q ≥ (p − 1)/2 and n = 3q + 2, χ(K_n^{F[K_q]}) > n", applied there with "the 83-vertex graph
-of odd girth 7 with χf(F) > 3.07 (hence p = 83), and let q = 41 and n = 3q + 2 = 125" (the circulant `Cay(ℤ₈₃, {±2, ±22, ±25, ±34}`, §3.2
-of the survey). Put `B = F[K₄₁]` and `A = K₁₂₅^B`. `B` is a Cayley graph of the abelian group `ℤ₈₃ × ℤ₄₁` (connection set
+of odd girth 7 with χf(F) > 3.07 (hence p = 83), and let q = 41 and n = 3q + 2 = 125" (the circulant `Cay(ℤ₈₃, {±2, ±22, ±25, ±34})`, named in
+the survey's §3 after Theorem 3.3). Put `B = F[K₄₁]` and `A = K₁₂₅^B`. `B` is a Cayley graph of the abelian group `ℤ₈₃ × ℤ₄₁` (connection set
 `(S_F × ℤ₄₁) ∪ ({0} × ℤ₄₁∖0)`), so vertex-transitive, with `α(B)/|B| = 1/χ_f(B) = 1/(41·χ_f(F)) < 1/(41·3.07) < 1/125`; evaluation is a proper
 125-colouring of `A × B`; and `χ(A) > 125`. So **"`B` abelian Cayley with independence ratio `< 1/k` ⟹ (`χ(A × B) ≤ k ⟹ χ(A) ≤ k`)" is false
 at `k = 125`**; any proof of D2(a) must use more of `B` than its ratio (J21-MX uses mixing, which `F[K₄₁]` lacks: its blow-up blocks carry
