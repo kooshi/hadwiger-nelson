@@ -1,0 +1,15 @@
+A  corners [(Fraction(1, 4), Fraction(1, 4)), (Fraction(1, 4), Fraction(3, 4)), (Fraction(3, 4), Fraction(1, 4)), (Fraction(3, 4), Fraction(3, 4))]; w5 mod 4 = (3, 0) (= -1), w13 mod 4 = (1, 0) (= 1)
+A  corner arrays satisfy both step rules and the band on |m|,|n|<=3: fails so far 0
+C right-exit: admissible nonzero deviations = 0 (expected 0)
+C left-exit: admissible nonzero deviations = 0 (expected 0)
+D up-exit: admissible nonzero deviations = 0 (expected 0)
+D down-exit: admissible nonzero deviations = 0 (expected 0)
+   single-site admissible nonzero classes at corner (Fraction(1, 4), Fraction(1, 4)): 5-step 1, 13-step 3
+E  least squared length of a nonzero class of pi^-1 Z[i]/Z[i], pi=(Fraction(2, 1), Fraction(1, 1)): 1/5
+E  least squared length of a nonzero class of pi^-1 Z[i]/Z[i], pi=(Fraction(2, 1), Fraction(-1, 1)): 1/5
+E  least squared length of a nonzero class of pi^-1 Z[i]/Z[i], pi=(Fraction(3, 1), Fraction(2, 1)): 1/13
+E  least squared length of a nonzero class of pi^-1 Z[i]/Z[i], pi=(Fraction(3, 1), Fraction(-2, 1)): 1/13
+F  plant (i) wb13 -> 1 in the right exit: admissible exits 4 (must be > 0)
+F  plant (ii) wb5 -> -1 in the up exit: admissible exits 12 (must be > 0)
+F  plant (iii) band [1/20, 19/20] in the right exit: admissible exits 16 (must be > 0)
+RESULT: PASS (fails = 0)

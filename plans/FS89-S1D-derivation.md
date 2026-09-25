@@ -80,3 +80,158 @@ components are the images of one `q ∈ ℚ(i)` (modulo the global ambiguity of 
 **The action in the model.** `θ∘w_p` is the shifted array `m ↦ e_{m+ε_p}`; `θ∘i` is the array `m ↦ −i·e_m`
 (since `(θ∘i)(w^m y) = ⟨e_m, i y⟩ = ⟨−i e_m, y⟩`), which maps `Q_β` to itself mod `ℤ[i]` (a quarter turn about `P = (1+i)/2`). Minimal sets
 of `Θ_β(U_S)` are therefore minimal subshift-like sets of arrays under the `ℤ^S`-shift and the quarter turn.
+
+## §2 — D-1a: minimal sets. **`MS₄(S)` holds for every finite `S` with `|S| ≥ 2`.**
+
+*Route: Berend's Prop. 4.1, as the brief asked. Case 2 goes through with the archimedean plane in place of the strictly
+contracted subspace; case 1 goes through too. Case 1's contradiction at the band needs no Furstenberg Prop. IV.1 and no Berend
+1983 §4: one line about the parity character replaces it (D1-L4). KT-2 does not fire.*
+
+**Setting.** `G = R̂_S = (ℂ × ℚ_S)/Δ(R_S)`, with `ℚ_S = ∏_{v|S} ℚ_v` over the `2|S|` places above `S`. `u ∈ U_S` acts by
+`θ ↦ θ∘u`; in these coordinates that is `(v, b) ↦ (ū v, u b)`, since `Re(v̄ u x) = Re(conj(ū v) x)`. So `u` rotates the
+archimedean coordinate and multiplies each `b_v` by `u ∈ ℚ_v^×`. `|w_p|_v = p^{∓1}` at the two places above `p`, and `|w_p|_v = 1`
+at every other place.
+- **Chart.** For small `ε` and a small compact open subgroup `O ⊆ ℚ_S`, the map `D(ε) × O → G` is injective (`Δ(R_S)` is
+  discrete) and its image `N(ε, O)` is a neighbourhood of `0`. Each `z ∈ N(ε, O)` has a unique **`S`-adic part** `b(z) ∈ O`.
+- The image of `D(ε) × {0}` lies in `A`, and `A ∩ T = 0` (S0A-2).
+
+**The dichotomy** (Berend's). Let `M ⊆ G` be closed and `U_S`-invariant.
+- *Case 2:* for some `ε, O`, every `z ∈ (M − M) ∩ N(ε, O)` has `b(z) = 0`.
+- *Case 1:* otherwise. Then there are `z_k ∈ M − M` with `z_k → 0` and `b(z_k) ≠ 0`.
+
+**D1-L2 (case 2 ⟹ a point of `T + A`).** If `M ≠ ∅` is in case 2, then `M ∩ (T + A) ≠ ∅`. If `M` is minimal, then `M ⊆ T + A`,
+and `M` is a finite union of sets `τ + {λ_d : |d| = r}` (one `r`, possibly `0`). [hand]
+*Proof.*
+1. Take `x` in a `⟨w_p⟩`-minimal subset of `M` (Zorn), for some `p ∈ S`. It is recurrent, so `x∘w_pⁿ − x ∈ (M − M) ∩ N(ε, O)` for
+   some `n ≥ 1`. By case 2 this difference is `λ_v`, with `v ∈ D(ε)`.
+2. Put `c = w_pⁿ − 1 ∈ R_S`; `c ≠ 0` because `w_p` is not a root of unity. `λ_{v'}∘c = λ_{c̄v'}`, so `y := x − λ_{v/c̄}` satisfies
+   `y∘c = 0`. So `y` is a character of `R_S/cR_S`, which is finite (a nonzero ideal of the Dedekind domain `R_S`). Hence
+   `y ∈ T`, and `x ∈ T + A`.
+3. If `M` is minimal, then `M` is the orbit closure of `x = y + λ_d`: the finite orbit of `y`, each point carrying the closure of
+   `{λ_{ū d}}` over a coset of `y`'s stabiliser. That closure is the full circle of radius `|d|`, because a finite-index subgroup of
+   `⟨w_p⟩` is dense in `S¹`. ∎
+
+**D1-L3 (case 1 ⟹ `M − M = G`, when `|S| ≥ 2`).** If `M` is closed, invariant and in case 1, and `|S| ≥ 2`, then `M − M = G`.
+[hand] This is Furstenberg's non-lacunary step, done `p`-adically. The second prime turns the unit part.
+*Proof.*
+1. `D := M − M` is closed and invariant. Pass to a subsequence with `b(z_k)_v ≠ 0` at one fixed place `v`, above `p`. By
+   conjugation and `w ↦ w^{−1}` we may take `v = π̄_p`, where `|w_p|_v = p`. Pick `q ∈ S`, `q ≠ p`: `w_q` is a `v`-adic unit, and
+   not a root of unity.
+2. Write `b(z_k)_v = β_k π̄_p^{L_k}`, with `β_k` a unit and `L_k → ∞`. For `R ≥ 0` and `j ∈ ℤ`, `l ∈ ℤ/4`, put
+   `u = w_p^{L_k + R} w_q^j i^l`. The point `z_k∘u` is the image of a vector that is:
+   - `c_{k,j,l} := β_k π_p^{L_k+R} π̄_p^{−R} w_q^j i^l` at `v`;
+   - `ū·(small)` at `∞`;
+   - contracted at `π_p`;
+   - multiplied by `q^{±j}` at the places above `q` (fixed `j`), and unchanged elsewhere.
+
+   So for fixed `(j, l)`, `z_k∘u − image(c_{k,j,l} at v) → 0`.
+3. Pass to a subsequence with `β_k π_p^{L_k+R} → γ_R` (units are compact). `D` is closed, so
+   `D ⊇ image(γ_R π̄_p^{−R} w_q^j i^l)` for all `j, l`. Taking the closure,
+   `D ⊇ image(γ_R π̄_p^{−R} H₀)`, where `H₀ = closure⟨i, w_q⟩ ⊆ ℤ_v^×`.
+4. `H₀` is open. `w_q^{4} ∈ 1 + pℤ_v` and it is not `1`, so the closure of `⟨w_q^4⟩` is `1 + p^aℤ_v` for some `a`.
+   Hence `D ⊇ image(c_R) + K_{R−a}`, where `K_j := image(π̄_p^{−j}ℤ_v)`.
+5. The `K_j` are increasing compact subgroups of `G`. Their union is the image of `ℚ_v`, which is dense: `R_S` is dense in
+   `ℂ × ∏_{v' ≠ v}ℚ_{v'}` by strong approximation with `v` omitted. So `K_j` is `η`-dense for large `j`, and so is every coset
+   of it. Since `R` is arbitrary, `D` is `η`-dense for every `η`. `D` is closed, so `D = G`. ∎
+
+**D1-L4 (the parity line; band `[1/4, 3/4]` only).** Let `θ₂` be the parity character. If `M ⊆ Θ₄(R_S)` and `θ₂ ∈ M − M`, then
+`M` contains a **corner**: a character `x` with `2x = θ₂`, i.e. `x = ⟨e, ·⟩` with `e ∈ (1+i)/4 + ½ℤ[i]`. There are four
+corners; they form one `U_S`-orbit of order-4 torsion characters, of margin 0. [hand]
+*Proof.*
+- `θ₂(u) = ½` for every `u ∈ U_S`: `u` reduces to `1` or `i` in `ℤ[i]/(1+i)²`.
+- Take `x, x + θ₂ ∈ M`. Then `x(u) ∈ [¼, ¾] ∩ [−¼, ¼] = {¼, ¾}`, so `(2x − θ₂)(U_S) = 0`.
+- `ℤ[U_S] = R_S`, so `2x = θ₂`. ∎
+
+**D1-T1 (`MS₄(S)`).** For every finite set `S` of primes `≡ 1 (mod 4)` with `|S| ≥ 2`, every `U_S`-minimal closed subset of
+`Θ₄(R_S)` is either one finite orbit of torsion characters, or a finite union of leaf circles `τ + {λ_d : |d| = r}` with
+`0 < r ≤ r_τ`. In both cases it is contained in `T + A`. **Inhabitant** `S = {5, 13}`: `{θ₂}`, and the parity circle of radius ¼.
+[hand]
+*Proof.*
+- In case 2, D1-L2 applies.
+- In case 1, D1-L3 gives `θ₂ ∈ M − M`, and D1-L4 puts a corner in `M`. So `M` is the corner orbit, which is finite. Then `M − M`
+  is finite, which contradicts case 1. ∎
+
+**Remarks.**
+1. *Where the hypotheses enter.* `|S| ≥ 2` enters only in D1-L3, step 3: at rank one `H₀ = ⟨i⟩` is finite, so the step fails,
+   and S0B and Berend's Lemma 3.3 live there. The band enters only in D1-L4.
+2. *Other bands.* Without D1-L4, case 1 needs Furstenberg's Prop. IV.1 (`M − M ≠ G` for minimal `M ≠ G`) [external, not held].
+   With it, D1-L2 and D1-L3 give MT modulo `A` for **every** minimal subset of `R̂_S`, `|S| ≥ 2`: Berend's theorem modulo the
+   isometric direction.
+3. *Control* (§IQ item 5). With no isometric place (the non-real analogues), step 2 of D1-L2 gives `y` torsion with no `A`
+   part: Berend's MT verbatim.
+
+## §3 — D-1b: points. **`RS₄({5, 13})` holds: `Θ₄(R₆₅) ⊆ T + A`. No heteroclinic or switching character exists at `{5, 13}`.**
+
+*Mechanism in one line:* a band character outside `T + A` has an orbit closure in case 1. D1-L3 and D1-L4 then force that closure
+to reach a corner, and at `{5, 13}` the corners are isolated points of `Θ₄`: no band array comes near one without being one.
+
+**D1-L5 (near a corner the deviation rotates rigidly and dies).** In the model D0-T1 at `S = {5, 13}`, let `x` be a corner. Its
+array is `c_{m,n} = (−1)^m c₀`, with `c₀` a corner of `Q = [¼, ¾]²`, because `w₅ ≡ −1` and `w₁₃ ≡ 1 (mod 4)`. Suppose a band
+array has `|e_{m,n} − c_{m,n}| < 0.13` at `(m, n)` and at `(m+1, n)`. Then `e_{m,n} = c_{m,n}` and `e_{m+1,n} = c_{m+1,n}`. [hand + tools exact]
+*Proof.*
+1. A nonzero class of `π^{−1}ℤ[i]/ℤ[i]` has no representative shorter than `1/√5` (at 5) or `1/√13` (at 13) (`corner-check`
+   E). So two sites within `0.13 < 1/(2√13)` of the pattern are joined by the pattern's own digit.
+2. Hence the deviations `ζ = e − c` satisfy `ζ_{m+1,n} = w̄₅ζ_{m,n}` exactly.
+3. Near the corner `c₀`, membership in `Q` puts `ζ` in the closed quadrant pointing into `Q`; near `−c₀` it puts `ζ` in the
+   opposite quadrant.
+4. For `ζ = s + ti` in the closed first quadrant, `Re(w̄₅ζ) = (3s + 4t)/5 > 0` unless `ζ = 0`, so `w̄₅ζ` is not in the third
+   quadrant. The other corners follow by the quarter-turn symmetry. So `ζ = 0`. ∎
+
+**D1-L6 (corner exit lemma, `S = {5, 13}`).** Suppose a band array equals the corner pattern at `(m, n)` and `(m, n+1)`. Then it
+equals the pattern at `(m ± 1, n)` and `(m ± 1, n+1)`. Suppose it equals the pattern at `(m, n)`, `(m+1, n)` and `(m+2, n)`. Then
+it equals the pattern at `(m, n ± 1)`, `(m+1, n ± 1)` and `(m+2, n ± 1)`. [hand + tools exact]
+*Proof.*
+- **Right exit.** `e_{m+1,n} = −c₀' + δ` with `δ ∈ π₅^{−1}ℤ[i]/ℤ[i]`. By D0-L3 the completed site is
+  `e_{m+1,n+1} = −c₀' + w̄₁₃⋆δ`, and `w̄₁₃ ≡ 3 (mod π₅)`.
+  - Exactly one nonzero class keeps `−c₀' + δ` in `Q` (at `c₀ = (¼, ¼)` it is `−(1+2i)/5`).
+  - Multiplication by 3 moves it, so `δ = 0`.
+- **Left exit.** The same, with `π̄₅` and `w̄₁₃ ≡ 2 (mod π̄₅)`.
+- **Up exit.** The deviation `ε ∈ π₁₃^{−1}ℤ[i]/ℤ[i] ≅ 𝔽₁₃` is multiplied by `w̄₅ ≡ 7 (mod π₁₃)` at each step along the row, and the
+  admissible sets alternate: `{5, 6, 10}` at `c₀`, `{3, 7, 8}` at `−c₀`. Every nonzero orbit leaves them within three steps
+  (`6 → 3 → 8`, `7 → 10 → 5`).
+- **Down exit.** Symmetric.
+
+All four exits are checked exactly on all four corners by `tools/fs89_s1d_corner_check.py`
+(`data/fs89/s1d/corner-check.txt`: 0 admissible nonzero exits in each direction; D0-L3's uniqueness asserted on every completion).
+Three plants fire, each derived to fire:
+- `w̄₁₃ → 1` in the right exit (the rank-one freedom): 4 exits;
+- `w̄₅ → −1` in the up exit: 12 exits;
+- the band widened to `[1/20, 19/20]`: 16 exits.
+A first pair of plants could not fire and stayed silent; it was replaced (logged in the tool's docstring). ∎
+
+**D1-C1 (corners are isolated in `Θ₄(R₆₅)`).** A band array that equals a corner pattern on a `3 × 2` box is that corner.
+Hence every `θ ∈ Θ₄(R₆₅)` within `0.13` of a corner on the window `|m| ≤ 2, |n| ≤ 1` is that corner. [hand + tools exact]
+*Proof.*
+1. Two rows of the box extend to all `m` by D1-L6's first half, applied inductively.
+2. Each full corner row extends to the rows above and below by the second half.
+3. Induct on the rows. The array determines the character (D0-T1). The second sentence follows from D1-L5. ∎
+
+**D1-T2 (`RS₄({5, 13})`).** `Θ₄(ℤ[i][1/65]) ⊆ T + A`. [hand + tools exact] **Inhabitant:** `Θ₄(R₆₅) ∋ θ₂` (margin ¼).
+Every character of the plan's positive-control list (parity, `(x+y)/4`, `(3x+2y)/8`, the order-3 and order-7 characters) lies in
+`T + A`, so none is a counterexample.
+*Proof.*
+1. Let `θ ∈ Θ₄(R₆₅) \ (T + A)`, and let `M` be its orbit closure.
+2. *`M` is in case 1.* Otherwise, every minimal `L ⊆ M` is in case 2 (`L − L ⊆ M − M`), so `L ⊆ T + A` by D1-L2. Take `y ∈ L`.
+   `T + A` is invariant and `θ ∉ T + A`, so `y` is a limit of `θ∘u_k`. Then `θ∘u_k − y → 0` in `M − M`, and these differences lie
+   outside `A` (else `θ∘u_k ∈ T + A`). So their `S`-adic parts are nonzero, which is case 1.
+3. By D1-L3, `M − M = G ∋ θ₂`. By D1-L4, `M` contains a corner `x`, and `x ∉ Γθ`.
+4. So `θ∘u'_k → x`, and by D1-C1, `θ∘u'_k = x` for large `k`, so `θ ∈ T`. Contradiction. ∎
+
+**D1-C2 (the band set at `{5, 13}` is explicit and finite-type).** The torsion characters in `Θ₄(R₆₅)` are finitely many. So
+`Θ₄(R₆₅)` is a finite union of leaf discs `τ + D(r_τ)`. [hand + tools exact]
+*Proof.*
+1. Let `𝒯′` be the non-corner band torsion characters, and suppose it is infinite. It accumulates at some `y`, which lies in
+   `T + A` by D1-T2.
+2. `y = τ + λ_d`, and `τ_j − y ∈ A` only if `τ_j = τ`. So the closure `M` of `𝒯′` is in case 1.
+3. By D1-L3 and D1-L4, a corner lies in `M`, hence is a limit of non-corner band characters. That contradicts D1-C1. ∎
+
+The list itself is not computed here (the ban; see §5).
+
+**Scope, stated sharply.**
+- D1-T2 is about `R₆₅` exactly.
+- For finite `S ⊋ {5, 13}`, D1-L3 and D1-L4 hold verbatim, and D1-L5 holds (the cone argument uses a 5-edge).
+- What is missing is D1-L6 in each new direction `p′`. The exit from a full corner `(5, 13)`-plane into the next `p′`-plane requires
+  the whole coset `δ₀·⟨w̄₅, w̄₁₃⟩ (mod π_{p′})` to fit the alternating admissible sets: a finite check per prime, and not a theorem
+  for all `p′`.
+- Over `Q` the images of the other primes' units generate all of `𝔽_{p′}^×`, which is the lever for D-2 (§4).
+- `RS₄({5})` stays false (S0B-T3): D1-L3 fails at rank one.
