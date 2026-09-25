@@ -1,0 +1,212 @@
+{
+ "kind": "fs91-j08-sixf-points",
+ "vectors": 1916,
+ "rows": [
+  {
+   "k": "4",
+   "type": "2:ord[2]x1",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "4",
+   "type": "3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "4",
+   "type": "7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "4",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "4",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "4",
+   "type": "2:ord[8]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[2]x1",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[8]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[2]x1 + 11:ord[11]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[2]x1 + 7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "2:ord[2]x1 + 7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "5",
+   "type": "19:ord[19]x20",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[4]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[8]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 11:ord[11]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 7:ord[7]x8",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "19:ord[19]x20",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "11:ord[11]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "11:ord[11]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 3:ord[9]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x1 + 3:ord[9]x12",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[2]x2 + 3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  },
+  {
+   "k": "6",
+   "type": "2:ord[8]x8 + 3:ord[3]x4",
+   "holds_at_r_max": true,
+   "breaks_above": true
+  }
+ ],
+ "negative_control_fired": true,
+ "ok": true
+}

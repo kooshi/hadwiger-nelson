@@ -230,3 +230,105 @@ consistent; and given CLG_7 the statement `Θ₇ = ∅` is stronger than Fischer
 **Predictions scored.** P-167 (`χ_char ≥ 7`, 0.80): **won, given CLG**. P-167-8 (`= 8` exactly, 0.45): **won, given CLG**. C0-167 (8 at
 0.50): won. The field results are exactly as strong as CLG_7, CLG_16, CLG_21.
 
+## Stage 6 — SAVED (SIX-f: the band-1/6 torsion characters of `Q`, N₀'s analogue; band 1/5 as a by-product)
+
+`Q = ℤ[U_ℚ] = ℤ[i][1/p : p ≡ 1 (4)]`; its stable places are `2 = (1+i)²` (ramified) and the inert `q ≡ 3 (4)`. By J01-7 (verified),
+`Θ₆(Q) ⊆ T + A`: `θ = τ + α`, `τ = Σ_{v ∈ P} τ_v` (finite `P`), `α(x + iy) = ux + vy` with `r = √(u² + v²)`.
+
+### J08-9 — the reduction to a finite sumset question [hand; the dyadic step and weak approximation are Lemma N₀'s (FS89-S0A-3)]
+
+1. **Sumset form.** The circle `x² + y² = 1` is ℚ-rational, so `U_ℚ` is dense in `S¹ × ∏_{v∈P} T(ℤ_v)` (weak approximation, N₀); `α` is
+   continuous and each `τ_v` locally constant, so the closure of `θ(U_ℚ)` is **`[−r, r] + Σ_v C_v`**, `C_v = τ_v(T(ℤ_v))`, and `θ` is band 6
+   iff that set lies in `B₆ = [1/6, 5/6]`. Each `C_v` is symmetric (`−1 ∈ T`).
+2. **Levels.** Odd `q ≥ 7`: level 1 (J08-6's fibre, run inside the sum: the values fill a coset of step `1/q ≤ 1/7`, which has a point
+   within `1/14 < 1/6` of 0). `q = 3`: level ≤ 3 (at exact level `m ≥ 4`, the fibre `t₀·Cayley(3^j i s′/2)`, `j = ⌈m/2⌉`, fills a coset of
+   step `3^{−(m−j)} ≤ 1/9`, a point within `1/18`). `2`: order `| 8` (N₀'s step-1/4 coset, whose point within `1/8 < 1/6` of 0 is forbidden
+   at band 1/6 as at 1/4).
+3. **Places.** Let `q ≥ 7` with `τ_q ≠ 0` (level one: `C_q = V_c/q`, `≥ (q+1)/2` values) and pick any value `c′` of the rest (non-empty,
+   symmetric), `d = ‖c′‖`. Then `C_q ⊆ (B₆ − c′) ∩ (B₆ + c′)` = the arc about ½ of half-length `1/3 − d` ∪ the arc about 0 of half-length
+   `d − 1/6`. (a) `d ≤ 1/6`: `C_q ⊆ B₆`, so `λ_a` is band 6 on Γ_q: `q ∈ {7, 11, 19}` (J08-5). (b) `1/6 < d < 1/3`: `(q+1)/2` residues in two
+   arcs of total length `1/3`: `(q+1)/2 ≤ q/3 + 2`, `q ≤ 9`: `q = 7`. (c) `d ≥ 1/3`: `V_c ⊆ {‖t/q‖ ≤ 1/3}` (**anti-band**): by J08-4's
+   Fejér argument on the `≥ q/3 − 1` consecutive residues `q/3 < t < 2q/3` this is impossible for `q ≥ 107` (the exact inequality checked
+   for every `q ≡ 3 (4)` in `[107, 10⁶]`; beyond, `q²/6 ≫ 2q^{3/2}`), and exactly below 107 it occurs only at **`3 (c = 1, 2)`, `7 (c = 2, 3)`,
+   `11 (c = 6)`**. So **`P ⊆ {2, 3, 7, 11, 19}`, with `τ₂` on `ℤ[i]/8`, `τ₃` on `ℤ[i]/27`, `τ_q` on `ℤ[i]/q`**: a finite set, fixed by the
+   derivation. The same three cases at band 1/5 give `P ⊆ {2, 3, 7, 11, 19}` too (band mode `χ_char ≤ 5`: 3, 7, 19; anti-band at `3/10`
+   is inside the list above; the middle case gives `q ≤ 5`; level 1 at 3 since `1/6 < 1/5`).
+
+### J08-10 — the complete list at band 1/6 [hand (J08-9) + tools exact]; J08-11 — at band 1/5
+
+*Logged as the ban's edge:* an exhaustive product over the value-set classes of every character of `ℤ[i]/8` (11 classes), `ℤ[i]/27` (17),
+`ℤ[i]/7` (7), `ℤ[i]/11` (11), `ℤ[i]/19` (19) — 273,581 tuples, each sumset checked exactly (denominator 316,008), early exit —
+`tools/crunch_j08_sixf.py`, 2.6 s. `r_max = min ‖s‖ − 1/k` over the sumset. Representatives are `(ux + vy)/M`.
+
+| band 1/6: torsion type `τ` (places: order × number of characters) | example | `r_max` (`|α| ≤`) |
+|---|---|---|
+| parity `(x + y)/2` (2: order 2, ×1) | `(x+y)/2` | 1/3 |
+| 3: order 3, ×4 (`c` non-square) | `(x+y)/3` | 1/6 |
+| 7: order 7, ×8 | `(2x+3y)/7` | 5/42 |
+| 2: order 4, ×4 (two classes) and order 8, ×8 | `(x+y)/4`, `(x+2y)/4`, `(2x+3y)/8` | 1/12 each |
+| parity + 11: order 11, ×12 (anti-band `c = 6`) | `(x+y)/2 + (x+y)/11` | 2/33 |
+| parity + 7: order 7, ×8 (two classes, anti-band `c = 2, 3`) | `(x+y)/2 + (x+2y)/7`, `… + y/7` | 1/21 each |
+| 19: order 19, ×20 (`c = 15`) | `(4x+5y)/19` | 5/114 |
+| 11: order 11, ×12 (two classes, `c = 2, 10`) | `(2x+2y)/11`, `(2x+5y)/11` | 1/66 each |
+| parity + 3: order 3 (two classes, ×4 each) | `(x+y)/2 + (x+y)/3`, `… + y/3` | 0 |
+| **parity + 3: order 9, ×12 (two classes) — a 3-adic level-two type** | `(x+y)/2 + y/9`, `… + 2y/9` | 0 |
+| 2: order 2 (`x/2`, `y/2`) + 3: order 3, ×4 | `y/2 + (x+y)/3` | 0 |
+| 2: order 8, ×8 + 3: order 3, ×4 | `y/8 + (x+y)/3` | 0 |
+
+**18 class-tuples, 173 torsion characters; `Θ₆(Q) = ⋃ {τ + α : |α| ≤ r_max(τ)}` over this list, and `Θ₆(Q) ⊆ T_{105,336} + A(Q)`,
+`105,336 = 8·9·7·11·19`** — N₀'s analogue (`N = 168` at band 1/4). **Band 1/5 (J08-11):** 10 tuples, 77 characters — parity (`3/10`), order 3
+(`2/15`), order 7 (`3/35`), dyadic order 4 ×2 and 8 (`1/20`), parity + 11 (`3/110`), parity + 7 ×2 (`1/70`), 19 alone (`1/95`); `N₅ = 35,112 =
+8·3·7·11·19` — the order bound FS89-S0A-10 called "finite, not computed, at five".
+
+**Controls.** (1) **Band 1/4 reproduces Lemma N₀ exactly** (FS89-S0A-3, two blind derivations): parity, dyadic order 4 and 8, order 3 with
+`|α| ≤ 1/12`, order 7 with `|α| ≤ 1/28`, nothing mixed — the same machine, a known positive. Plant P2: the same predicate applied to the
+band-1/5 list refuses it. (2) `T(ℤ₂) mod 8` is computed from the solutions mod 64 (all lift) and equals N₀'s eight points; plant P1 (all 32
+congruence solutions mod 8) is refused. (3) **Measured half** (`tools/crunch_j08_sixf_points.py`): every listed type at bands 1/4, 1/5, 1/6,
+with `α` at `r_max` in eight directions, is band on all **1,916 rational unit vectors** from primitive triples with `c ≤ 1,500`; at
+`r_max + 1/200` every one fails somewhere (so each `r_max` is sharp on `U_ℚ` itself); the negative control `x/27` fails. (4) **Every passing
+tuple has a summand whose own value set is in the band** — the `n`-fold peeling lemma's conclusion (J03-1, J07's CLG-b), checked on all 34
+tuples at the three bands: a free consistency check of CLG for `F = ℚ`.
+
+**Read aloud:** *the characters `θ` of `ℤ[U_ℚ]` putting every rational unit vector in `[1/6, 5/6]` are exactly `τ + α` with `τ` one of the
+173 listed torsion characters and `α` real-linear of norm at most `r_max(τ)`.* Characters only; `χ(ℚ²) = 2`.
+
+**Would have searched here:** would have searched random characters of `ℤ[i]/N` for band-1/6 combinations; instead J08-9 fixed the places and
+levels and the product over value-set classes was exhausted.
+
+## Theorems this phase proved
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J08-1 | SIX-a: every band `k`-character of Γ_q is `λ_a`, with value set `V_{N(a)}` (multiplicities 2/1/0); band iff `min_{V_c}|t| ≥ q/k`; only non-square `c` can be band | hand; law = direct circle at every `a`, `q ≤ 67` | stage 2 |
+| J08-2 | `χ_char(Γ₂₃) = 8`, `κ = 3/23`; band 8 exactly at `c ∈ {11, 20, 21}`; no band 6 or 7 | tools exact (two halves) | stage 3 |
+| J08-3 | `χ_char(Γ₄₃) = 9`, `κ = 5/43`; band 9 exactly at `c = 33`; no band 6, 7, 8 | tools exact (two halves) | stage 3 |
+| J08-4 | band `k` on Γ_q ⟹ `⌈q/k⌉(q+1) ≤ 2√q(q − ⌈q/k⌉)` ⟹ `q < 4(k−1)²`; `χ_char(Γ_q) > 1 + √q/2` | hand, given Weil; consistent with all 218 exact values below 3,000 | stage 4 |
+| J08-5 | band 6 and band 7 characters exist exactly at `q ∈ {3, 7, 11, 19}` (lists of `c` in stage 4); `χ_char ≥ 8` for every prime `q ≡ 3 (4)` from 23 | hand (J08-4) + tools exact | stage 4 |
+| J08-6 | level collapse: at an odd stable place with `p > k/2`, every band `k`-character of any level factors through level one | hand, one mind | stage 5 |
+| J08-7 | pullback (CLG-a): a band `k`-character of a stable target composed with reduction lies in `Θ_k(R_F)` | hand | stage 5 |
+| J08-8 | `χ_char` = 8 (ℚ(√167)), 17 (K(√7)), 22 (de Grey's field) given CLG_7, CLG_16, CLG_21; `Θ₈`, `Θ₁₇`, `Θ₂₂ ≠ ∅` unconditionally | hand + tools exact; lower halves given CLG (J07, unverified) | stage 5 |
+| J08-9 | `Θ₆(Q)` reduces to a sumset over places `{2, 3, 7, 11, 19}`, levels `8, 27, q` | hand (N₀'s dyadic step and weak approximation cited) | stage 6 |
+| J08-10 | the complete band-1/6 list for `Q`: 18 types, 173 torsion characters, `Θ₆(Q) ⊆ T_{105336} + A` | hand + tools exact; control N₀ reproduced | stage 6 |
+| J08-11 | the band-1/5 list for `Q`: 10 types, 77 characters, `N₅ = 35,112` | hand + tools exact | stage 6 |
+| J08-R | `χ_char(Γ₂₇) = ∞` (no band character at any `k`) | hand + cert (row 70) | stage 4 remark |
+
+## Would-have-searched log (all stages)
+
+- Stage 3: would have run a local search for a band-6 character at 23 or 43; instead the complete list over `c` (22, 42 values).
+- Stage 4: would have sampled large `q` for band 6/7; instead J08-4's threshold and the complete list below it.
+- Stage 5: would have searched higher tower levels at 23, 43, 167 for band characters; instead J08-6's collapse.
+- Stage 6: would have searched random combinations of local characters; instead J08-9's finite place/level set, exhausted.
+- No search was run. Every enumeration is over a set a derivation fixed first (standing rule 3's edge), each logged at its stage.
+
+## Proposed edits (for the front-page lane; this job edits none of these files)
+
+- `LEDGER.md` § B: J08-1 … J08-11, J08-R (one line each; the derivation file is this record until the close moves it).
+- `CLAUDE.md` Frontier items 11/12/15 and G56/G59/G64: "a six-colouring of a window member, if one exists, is not a character colouring:
+  `χ_char(Γ₂₃) = 8`, `χ_char(Γ₄₃) = 9` (J08)"; "given CLG, character colourings of ℚ(√167)'s, K(√7)'s and de Grey's planes need exactly
+  8, 17, 22 colours" (item 25 / G76's Do line: aim no six-hunt at character colourings).
+- `plans/STUB-four-colours-167.md` (FS-59) and `plans/STUB-adelic-window-colouring.md` (FS-64): the one-character case is closed at six and
+  seven, given CLG_7; `χ_char(ℚ(√167)²) = 8`.
+- **Row 69's ceilings are line colourings, not character colourings**: at 43 the ceiling 8 is not a character colouring (`χ_char = 9`) —
+  any sentence reading row 69's ceilings as characters is wrong (the J08 brief's control did).
+- FS89-S0A-10's "finite, not computed, at five": `N₅ = 35,112`, computed (J08-11).
+
