@@ -465,6 +465,26 @@ papers' reference lists, and the homshift literature on non-standard generating 
 lift (Chandgotia's device for four-cycle-free targets). **Ours:** the arbitrary-generator criterion through the relation lattice, density
 and the dichotomy for every such graph.
 
+### 2.5 Is 8-periodicity of every four-colouring of the Moser ring human-provable? — answered on de Grey's lattice, and for every ring containing it closed under `η^{±1}`; open for the literal ring
+
+> **Mixon**, the sixth Polymath16 thread's opening post (29 May 2018, `[Polymath16threads]`, held): *"Is Tamas's result that every
+> 4-coloring of ℤ[ω₁,ω₃] is 8-periodic human-provable?"* — Tamas is Hubai (`[Hubai2018]`, by computer search). Gibbs (30 May 2018)
+> sketched stripes from "no monochromatic √3-triangle"; on 3 June 2018 he announced a mostly algebraic route from "no monochromatic
+> triangle" to period 16 on `R₂` and dropped it ("showing the lack of a monochromatic triangle by human proof is already the missing
+> part"); Tao's wiki Cor. 9 (`[Polymath16wikiR2]`) stops one step in; the wiki's *Algebraic formulation* page (`[Polymath16wiki]`)
+> reports Hubai's result and proves nothing. Nothing later through 2026 (`plans/FS85-input-audit.md` A3.1; 39 zbMATH queries, A3.2).
+
+**Our answer, at its exact scope** (`LEDGER.md` row 85; `plans/FS85-derivation.md` FS85-R3b, V2-T8; FS-85, two independent
+derivations): every proper four-colouring of de Grey's lattice `Cay(Λ, U)`, `Λ = (1/9)·O_E`, is `8Λ`-periodic — local at one prime above
+2, pair-linear, striped, 9,120 in all — **by hand and exact computation from Parts's no-monochromatic-√3-triple trees**
+(`[Parts2020hv]`, 2020, a computer-found case analysis that a human can check; walked here as a certificate, its root split proved
+by hand). Forcing is monotone upward, so it holds for **every point set `X` with `X + Λ = X` whose unit vectors include `U`** — in
+particular the ring closed under rotation by `η^{±1}`, as Hubai's computation uses it. That completes Gibbs's route with Parts's input.
+**Not answered:** the literal ring `ℤ[ζ₆, ω₃]`, which is not closed under conjugation (`ω̄₃ ∉` it; V2-T8), so neither contains nor is
+a union of `Λ`-cosets; nor Mixon's follow-up, that the ring has finitely many four-colourings (FS-88). **Not ours:** the question, the
+count 9,120 (Hubai), the input (Parts), the stripes-from-no-triangle sketch (Gibbs), the renormalisation (Tao). **Ours:** the derivation
+on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-V6). **Not kernel-checked** (FS-87).
+
 ## §3 — Adjacent and open
 
 *Questions others posed in writing that we have not answered but are unusually well placed to.*
@@ -489,6 +509,12 @@ and the dichotomy for every such graph.
   without √3 has no unit triangles (`CLAUDE.md` G57), so a certified `χ(ℚ(√47)²) = 5` — the local–global conjecture's prediction —
   would answer 55.1, and with it `[ExooIsmailescu2019]`'s smallest-subfield question above and Moorhouse's `ℚ(√47)` question (§1.7).
   FS-81 got four colours calibrated and ℚ(√47) screened, not five (`LEDGER.md` row 84); FS-84 carries it.
+  **FS-85 located it exactly** (`LEDGER.md` row 86, `plans/FS85-derivation.md` FS85-dB4, two derivations): a finite triangle-free
+  unit-distance graph with a four-colour forced pair exists **iff** 55.1 has an answer (a five-critical subgraph minus an edge; conversely
+  `m ≥ 4` copies chained at generic angles and closed by one edge), so any triangle-free four-colour rigidity in the plane — a lattice
+  in a real field without √3 with a non-zero four-colour forced group, e.g. H5's prediction over ℚ(√59), FS-86 — is at least as hard
+  as 55.1, and would answer it. In the abstract class rigidity without triangles is free (a distance graph with `F₄ = 4ℤ`, row 86).
+  **Still open.**
 - **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
   Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
   unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
