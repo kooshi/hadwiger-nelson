@@ -12,10 +12,8 @@ that survives is still **not a refusal** (G21). This stage can only colour: it c
 
 1. **S1c's formula characters**, if S1 produced any: check each exactly (Fractions) on the lattice's unit vectors; certify with FS-81's K1
    checker (`tools/fs81_colour_check.py`). Seconds.
-2. **The UNKNOWN residue targets** re-asked: `scripts/slot.py --mem 8 --cpus 16 -- python3 tools/fs81_d47.py recheck --budget 600`
-   (≤ 375 asks, ≈ 62 CPU-h worst case, 4 h wall on 16 cores). **Verify first** (T2): `command -v kissat`, the tool's `selftest` exit 0, and
-   that its OUT directory is the committed `data/fs81/phaseD/d47/` (write to a copy under `data/fs84/s4/` if it is not configurable — never
-   modify FS-81's committed records). The tool resumes from its own JSONL caches: resume = re-run the same command.
+2. **The UNKNOWN residue targets** re-asked: `scripts/slot.py --mem 8 --cpus 16 -- python3 tools/fs84_s4_d47.py recheck --budget 600`
+   (≤ 375 asks, ≈ 62 CPU-h worst case, 4 h wall on 16 cores). **Hazard, checked by the planner:** `tools/fs81_d47.py` hard-codes `OUT = data/fs81/phaseD/d47` (line 42) and `recheck` *removes* sweep records there for re-evaluation — it would rewrite FS-81's committed record. So copy it to `tools/fs84_s4_d47.py` with `OUT` under `data/fs84/s4/` (seeded by copying FS-81's JSONL files), never edit or run the original's `recheck`. **Verify first** (T2): `command -v kissat`, the copy's `selftest` exit 0, and `git status data/fs81` clean after a dry start. The copy resumes from its own JSONL caches: resume = re-run the same command.
 3. **Quotients at `N = 16–20`** on the minimal survivors (the admissible `N` only; G68), clique-pinned (one edge — `ω = 2`), precedence over
    unpinned colours only, Galois flip `√47 ↦ −√47` broken (G27). 4 h wall.
 4. **A four-colour finder on the antipodal quotient** (G58: `z ↦ −z` with a colour involution fixing a colour). 2 h wall.
