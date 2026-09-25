@@ -19,6 +19,8 @@ Working files: `data/m2/j14/`.*
 | `eighteen_not_colorable_three`: the 18-vertex, 33-edge list refuses three colours — gadget algebra, one `decide +kernel`, no solver | kernel (elaborated) | same |
 | `eighteen_colorable_four`: four colours suffice (the reference's colouring) | kernel (elaborated) | same |
 | `pullGadget`: a gadget carried between vertex sets of different sizes along an edge-preserving map | kernel (elaborated) | same |
+| `sum_eightUnits`: `w³ + w̄³ − 3w² − 3w̄² = 3/8` for `w = (−3 + i√7)/4`, from `w̄ = −3/2 − w` and `w² = −(3/2)w − 1` (the difference is `−(21/2)(w² + (3/2)w + 1)`) | kernel (elaborated) | `Proofs/HadwigerNelson/Instances/SevenConditional.lean` |
+| **`five_le_chromaticNumber_planeOver_seven_of_G4`**: `G4 → χ(ℚ(√3,√7,√11)²) ≥ 5` — the implication; `G4` itself is a measurement | kernel (elaborated), conditional | same |
 
 ## Stage 1 — SAVED
 
@@ -123,3 +125,27 @@ all seven ports one colour (`#guard_msgs`).
 
 The first timing run of this module and the first plant were run as bare `lake env lean`, not under `scripts/slot.py`, at a 3.7 GB peak —
 over standing rule 8's 2 GiB line. Every later run went through the slot. No harm; logged for the inventory.
+
+## Stage 4 — SAVED
+
+`Proofs/HadwigerNelson/Instances/SevenConditional.lean` (≈120 lines): `G4` over `planeOver (fieldOfRadicands {3, 11})` (§M domain 3),
+`w`, `eightUnits` (T9's eight, verbatim order), `sum_eightUnits`, membership in `planeOver ℚ(√3,√7,√11)` through `planeOverSubring`, the
+inclusion `planeOver ℚ(√3,√11) ⊆ planeOver ℚ(√3,√7,√11)`, and `five_le_chromaticNumber_planeOver_seven_of_G4`. Spec: T9's identity in
+its printed form, and a conjugate-swapped control (`w³ + w³ − 3w² − 3w̄² = (5/2)w + 9/4 ≠ 3/8`, its imaginary part `5√7/8`). Elaborates
+with no error and no warning (three iterations: a `<;>` lint; the control first attempted through a raw `.im` expansion, replaced by the
+reduction to `(5/2)w + 9/4` by `linear_combination (2w − 9)·(w² + (3/2)w + 1)`; a `linarith` made redundant by `simp`).
+
+**Plant, watched red for its reason, restored** (`data/m2/j14/plant3.lean`): flip the fifth multiplier `−w²` to `w²`. `sum_eightUnits`
+fails with "ring failed … `w ^ 2 * 2 = 0`" — the residual is exactly the flipped term twice, which is the reason the plant names. A second
+red fired too, `eightUnits_mem` (no membership arm covers `w²`): a scaffolding failure, recorded as such. Restored file: 0 errors.
+
+**Deviation from the brief, HELD FOR THE OWNER.** The brief asks for the docstring marker `VACUITY DECLARED:` on
+`five_le_chromaticNumber_planeOver_seven_of_G4`. The marker is withheld. *The choice:* the docstring says "Conditional, and not vacuous"
+and why, without the marker. *Alternative:* the marker, as briefed. *Why this won:* the gate reads `VACUITY DECLARED:` as a checked claim
+that a hypothesis's domain is **provably empty** (`scripts/Vacuity.lean` lines 450–460: a marker on a carrier the probe does not find empty
+is `STALE` and fails the gate unconditionally; `CLAUDE.md` § The gate: "`DECLARED` (deliberate emptiness …)"). `G4` is unproved, not
+empty — the brief's own reason ("the spare-colour lemma is why it is not trivially false") says so. Here `h : G4` has no `Coloring`
+carrier, so the marker would be inert rather than `STALE`, but it would still assert something false to a reader. *Confidence:* high; one
+docstring line if the owner rules otherwise. The docstring of `G4` states the two facts that make its `Forces` a genuine compulsion:
+Theorem B (every graph over `ℚ(√3,√11)` is four-colourable, row 57) and the spare-colour lemma (row 45: the forcer is not
+three-colourable).
