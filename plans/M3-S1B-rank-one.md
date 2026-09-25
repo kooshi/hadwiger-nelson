@@ -11,6 +11,15 @@ outcomes. First mind: J18, `plans/M3-S1A-rank-one.md`.*
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
+| J19-KC | in an all-rigid `X₄(D)`: strands of periodic points are `σ^N`-invariant; Kempe classes of periodic points are finite sets of periodic points; the Kempe class of a wall point consists of wall points whose tails lie in different labelled phases | hand | §2.3 |
+| J19-ENDS | the ends partition: each strand of a tail has exactly one end-component in a wall point; finite components meet the junction; a swap changes the tails by the strand swaps of its ends | hand; tools exact on the control | §2.4, `tools/crunch_j19_ends.py` |
+| J19-FRZ | a wall point with Kempe-frozen tails: every point of its Kempe class has relabellings of the same tails | hand | §2.5 |
+| J19-KEF | KE fails at every rigid–rigid wall whose one-sided components are all total, in particular between Kempe-frozen tails; so KE ⟹ KE♯ | hand | §2.5 |
+| J19-TW | every wall has a chiral end (FS79-T34's core, re-derived); a wall with an achiral end yields a twin wall `E → gẼ` | hand | §2.5 |
+| J19-BIN | for `D ⊇ {1,2}`, `X₄(D)` is a 24-to-1 extension of a binary return-time shift `Y(D)`; phases, rigidity, walls and mirroring transfer | hand | §2.7 |
+| J19-CTL | the control's 9 rigid–rigid walls run from {65,67,81} to the mirror family {55,23,49}; of their 62 one-sided components the 10 total ones keep the tail rigid and the 52 proper ones send it to 57, matching J18's data exactly | tools exact | §2.2, `data/m3/j19/` |
+| J19-AF✗ | in the all-rigid `X₄({2,6,11,13,14})` every one of the 94 rigid periodic points is non-frozen (a 6-strand couple of pairs); single-strand swaps stay rigid, connect all 94 phases, and join every chiral phase to its mirror | tools exact (one `D`, at the ban's edge) | §2.6, `data/m3/j19/frozen-2-6-11-13-14.txt` |
+| J19-KT | KE ⟹ KT ⟹ A-T1, and KT ⟹ KE♯; so A-T1 = FW ∧ A-T1ⁿᶠ, with FW invisible to Kempe moves | hand | §2.8 |
 
 ---
 
@@ -259,3 +268,79 @@ Not used further here; it is the concrete model in which the §2.8 step can be a
      points in its Kempe class allow the two tails to be moved into one Kempe orbit of labelled phases**; J19-KC turns that into A-T1.
      I could not prove it: a through component moves both tails at once, and I found no quantity that proper one-sided moves decrease.
 
+
+---
+
+## Stage 3 — SAVED (the claims, the reviewer's view, C0 scored, proposals)
+
+### 3.1 The claims (verdicts; grades per `CLAUDE.md` § Notation)
+
+| claim | verdict | grade | where |
+|---|---|---|---|
+| **A-T1 (R2)** | **GAP** at the step named in §2.8 item 3 ("the ends partitions of the Kempe class move the two tails into one Kempe orbit of labelled phases"); split exactly as FW ∧ A-T1ⁿᶠ | — | §2.8 |
+| **KE** (J18) | **FALSE on a named class** (every rigid–rigid wall whose one-sided components are all total, e.g. between Kempe-frozen tails); whether that class is non-empty is open (KE♯). KE's first half should read **KE1′** (proper one-sided components) | hand | §2.5, §2.8 |
+| KT ⟹ A-T1; KE ⟹ KT; KT ⟹ KE♯ | TRUE | hand | §2.8 |
+| J19-KC, J19-ENDS, J19-FRZ, J19-KEF, J19-TW, J19-BIN | TRUE | hand (ENDS also tools exact on the control) | §2.3–§2.7 |
+| J19-CTL | TRUE on the one control | tools exact | §2.2 |
+| conjecture AF ("all-rigid ⟹ periodic points frozen") | **FALSE** (94 of 94 non-frozen in `X₄({2,6,11,13,14})`) | tools exact | §2.6 |
+| `[EggletonErdosSkilton1985]` bears on R2 | FALSE (nothing on periodicity); the 1990 paper still needed | read | §2.1 |
+
+### 3.2 What someone who trusts none of this must check (in order of evidential value)
+
+1. **J19-KEF** (§2.5), two lines: a total one-sided component's swap is a colour relabelling of its tail, and a relabelling of a
+   periodic point of a single-cycle phase is a periodic point of a single-cycle phase. This is the whole of the finding about KE.
+2. **J19-KC (4)** (§2.3): the orbit-step cycle and F2. It is what makes KT imply A-T1.
+3. **J19-ENDS (1)** (§2.4): the one-endedness of a periodic strand's left tail (the translates `W + jP′` chain up). Everything about
+   "ends" rests on it; `tools/crunch_j19_ends.py` asserts it on every run.
+4. **J19-CTL's exact match** (§2.2): rerun `python3 tools/crunch_j19_ends.py 1,5,7,10 i j` for the nine walls and compare the total/proper
+   classes with `data/m3/j18/swaptail.txt` (62 rows: 10 rigid = the 10 total, 52 NONRIGID = the 52 proper). `--plant` fires.
+5. **J19-AF✗** (§2.6): `python3 tools/crunch_j19_frozen.py --control` (passes against two facts the tool does not compute), `--plant`
+   (fires on the swap fact only), then `python3 tools/crunch_j19_frozen.py 2,6,11,13,14` (2 s).
+6. **J19-BIN** (§2.7): run the automaton by hand on `N^∞` (returns every 4), `R^∞` (every 3) and `(RN)^∞` (returns at `0, 3, 5 mod 8`,
+   the colouring `03213012` repeated).
+7. J19-TW, J19-FRZ, J19-KC (1–3): short hand arguments.
+
+**Not load-bearing:** the mirror table (§2.2, first bullet) is description; the factoring through 57 is read off J18's wall list.
+
+### 3.3 C0 scored
+
+| id | prediction | prior | outcome |
+|---|---|---|---|
+| C0-1 | proves A-T1 | 0.08 | not met |
+| C0-2 | a counterexample to A-T1 | 0.05 | not met (no construction attempted beyond the class analysis; the one exact check was spent on AF) |
+| C0-3 | a sharper named obstruction, or A-T1 on a named subclass | 0.80 | **met** as an obstruction: KT (weaker than KE, still implies A-T1), and the split A-T1 = FW ∧ A-T1ⁿᶠ with FW out of reach of every Kempe argument; no subclass proved |
+| C0-4 | KE refuted by a derived argument or instance | 0.10 | **half met**: refuted on a derived class; no instance (the class's non-emptiness, KE♯, is open) |
+| C0-5 | the control's rigid–rigid walls are twin-family walls | 0.6 | **met** |
+| C0-6 | the 94 rigid points of `X₄({2,6,11,13,14})` are all frozen | 0.35 | **lost** (0 of 94) |
+
+### 3.4 Proposals for the front-page lane (not made here)
+
+- **`BIBLIOGRAPHY.md`:** a row `[EggletonErdosSkilton1985]` — Eggleton, Erdős, Skilton, "Colouring the real line", J. Combin. Theory Ser. B 39
+  (1985) 86–100; held at `~/source/library/pdf/EggletonErdosSkilton1985-colouring-the-real-line.pdf`; read: §§1, 2, 6, 7 (to Thm 16), 8 in
+  full, §§3–5 theorem statements only; bears on FS-76's rank one only as the origin of `G(ℤ, D)`; says nothing on periodic colourings.
+  The `[EggletonErdosSkilton1990]` row stays "not held" — **still needed** for its Theorem 2.
+- **J18's record (for its owner, not edited here):** KE's first half is better stated as KE1′ (proper one-sided components); total ones are
+  relabellings (J19-CTL explains J18 §3.3's last bullet).
+- **Stub to mint or fold into FS-76's rank-one stub — "FW: walls between Kempe-frozen periodic points"**: the part of A-T1 no Kempe
+  argument reaches (J19-FRZ). First question, by derivation: is there any `X₄(D)` (entropy allowed) with a rigid–rigid wall between
+  frozen points (KE♯)? A yes refutes KE outright; post-ban, a construction may be checked.
+- **Stub — "A-T1 on `D ⊇ {1,2}` in the binary return-time model"** (J19-BIN): a binary SFT question with an explicit forbidden-word
+  automaton, where zero entropy and walls can be read off letter patterns; the natural subclass on which to try KT or a direct proof.
+- **FS-76's provisional-bearings line:** J19-KC, J19-KEF, J19-AF✗ (all-rigid shifts are Kempe-rich, not frozen).
+
+### 3.5 The would-have-searched log (continued)
+
+| # | move I would have made by search | what I did instead |
+|---|---|---|
+| W2 | search `D` for a rigid–rigid wall between Kempe-frozen periodic points, to instantiate J19-KEF and refute KE outright | stated the class and KE♯ by derivation; left open |
+| W3 | sweep `D ⊇ {1,2}` through the binary model for all-rigid shifts with walls | derived the model (J19-BIN) only |
+| W4 | run the strand tool over all 377 all-rigid sets of the FS-79 scan to test AF broadly | one `D`, chosen by a stated rule before the run (§1.5), at the ban's edge |
+| W5 | search Kempe sequences from a control wall point toward the diagonal (to test KT beyond one move) | none needed on the control (KE's one move already exits the rigid phases 52 times); KT left as a lemma |
+
+### 3.6 Slips (mine)
+
+1. Read two passages the brief withheld (K0-loc's proof; §3.5's "Routes tried and dropped") through over-wide `sed` ranges (§1.1).
+2. A positive control that asserted a false claim ("every proper strand swap of a rigid point lands in 57"); caught because it failed on
+   the true tool; replaced by two facts the tool does not compute (§2.2, §2.6). Had it passed, its plant's firing would have proved
+   nothing.
+3. The §1.5 registration's commit lost a git-lock race; the run preceded its commit by seconds (order of tool calls attested only).
