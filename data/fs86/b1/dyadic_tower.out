@@ -1,0 +1,4 @@
+level m= 2 (O/2^1O, 16 vertices): |S|=6 (a)PASS lambda_min=-2.000000000 vs -d/3=-2.000000000 (b)PASS (c)PASS #minimisers=9 |H_min|=1
+level m= 4 (O/2^2O, 256 vertices): |S|=24 (a)PASS lambda_min=-8.000000000 vs -d/3=-8.000000000 (b)PASS (c)PASS #minimisers=45 |H_min|=1
+level m= 6 (O/2^3O, 4096 vertices): |S|=96 (a)PASS lambda_min=-32.000000000 vs -d/3=-32.000000000 (b)PASS (c)PASS #minimisers=45 |H_min|=16 H_min==4O/2^jO:PASS
+level m= 8 (O/2^4O, 65536 vertices): |S|=384 (a)PASS lambda_min=-128.000000000 vs -d/3=-128.000000000 (b)PASS (c)PASS #minimisers=45 |H_min|=256 H_min==4O/2^jO:PASS

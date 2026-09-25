@@ -153,7 +153,8 @@ independent set is the preimage of an independent set of one factor). Iterating 
 ratio `max < 1/4`. `H` is connected: each factor is (its connection set spans additively — the ℤ-span of `U` is `R`) and none is
 bipartite (`λ_min > −d`), so the only character with eigenvalue `d_H` on `H` is the trivial one.
   - *No dyadic factor* (`n` odd): the product has ratio `< 1/4`, so it has no four-colouring — no periodic colouring has odd period.
-  - *Dyadic factor `P_m`, `m = 2v₂(n) ≥ 2`* (ratio exactly `1/4`: four-colourable, Hoffman-tight, row 67): `P_m × H` is MIS-normal
+  - *Dyadic factor `P_m`, `m = 2v₂(n) ≥ 2`* (ratio exactly `1/4`: four-colourable, and Hoffman-tight by Lemma D below — **not**
+    by FS38-L1, whose tightness half has a wrong-direction step, see the log at the end of this section): `P_m × H` is MIS-normal
     with `α = |V|/4`, so the four classes of a four-colouring are four maximum independent sets, each the preimage of a set of one
     factor; a preimage from `H` has at most `|P_m|·α(H) < |V|/4` points, so each class is `I_j × V(H)`: **the colouring depends only
     on the dyadic coordinate** and is a proper colouring of `P_m` (lift any edge of `P_m` by any edge of `H`).
@@ -164,7 +165,19 @@ bipartite (`λ_min > −d`), so the only character with eigenvalue `d_H` on `H` 
 the surjection `R → O/𝔓⁴` (Lemma R (4) at 2) to a proper periodic colouring. So `P(R) = {δ : δ mod 𝔓⁴ is forced in P₄}`, and
 `P₄` is pairwise free at four colours (row 67, kernel `twoAdicFour_forces_iff`): **`P(R) = R ∩ 𝔓⁴O_𝔓`.** ∎
 
-*Inputs and grades.* Lemma R, Lemma P [hand, mine]; weak approximation for the norm-one torus (elementary, via the parametrisation);
+**Lemma D (the dyadic tower is Hoffman-tight at every level, without FS38-L1). [hand, re-derived from FS38-L2's non-strict half;
+tools: an independent build at even levels 2, 4, 6, 8, `data/fs86/b1/dyadic_tower.py`, `.out`]** Every eigenvalue of every `P_m` is
+`≥ −d_m/3`, and `−d_m/3` is attained: a character pulled back from level `j` keeps its ratio `λ/d`; at level 1, `P₁ = K₄`
+(`λ/d ∈ {1, −1/3}`); a character primitive at level `j ≥ 2` has `|λ| ≤ 2^{j−1} = d_j/3` — FS38-L2's pairing argument, which needs
+only that the kernel of `S_j → S_{j−1}` is `{1, 1 + π^{j−1}a₁}` (two elements: `|S_j| = 3·2^{j−1}`, Hensel on the smooth norm-one
+torus; the norm of `1 + π^{j−1}a` is `≡ 1 + π^{j−1}a + π̄^{j−1}ā (mod 𝔓^j)` as `2(j−1) ≥ j`) and that a nontrivial character of
+`(𝔽₄, +)` is `1` on exactly one element of `𝔽₄^×`, so the sum runs over one residue class of `S_{j−1}`, `2^{j−2}` terms, times 2. So
+`α(P_m) = |P_m|/4` at every level (Hoffman, plus four-colourability). The strict half of FS38-L2 (with L3) is needed only for
+D2-B's `H_min`, which I use in step (5) and which the independent build reproduces at levels 6 and 8 (45 minimisers, `H_min = 4O`).
+Plants: dropping one `±` pair fires (a)–(c); the automorphism `ζ ↦ ζ⁵` (the circle over `ℚ₂(i)`) is an **unreachable** plant — a
+second smooth unramified norm-one torus, tight with the same counts — kept and labelled so, not counted as a control.
+
+*Inputs and grades.* Lemma R, Lemma P, Lemma D [hand, mine]; weak approximation for the norm-one torus (elementary, via the parametrisation);
 FS38-D2-B [hand, FS-38] and row 67's kernel freedom of `P₄`; **FS-66's `B₁` certificate at 11 (and 19)** [cert]; `[Zhang2012]`
 Thm 1.8 [external, published; its proof not re-derived here]. **Nothing in V3 is "free" in the sense of a one-line spectral
 argument: at 11 it needs a certified semidefinite bound and a product theorem for independent sets.**
@@ -185,3 +198,16 @@ ramified 83-tower by Hoffman + Lemma P (0.1741, `2/86`). ℚ(√131): 19 by the 
 FS-66's certificate. **If FS-66's certificate at 11 were withdrawn, V3 would have a gap exactly at the 11-adic factor** (and at 19
 for 83, 131); `α(Γ₁₁) = 28` (known) covers level one only.
 
+
+### Log: the owner's message on FS38-L1 (received 2026-09-24, after V3 was committed at 5991dbae)
+
+The owner reported that FS38-L1's tightness half has a wrong-direction step ("`P_{m+1}` is 4-colourable, so Hoffman's bound gives
+`≥`" — colourability with Hoffman gives `λ_min ≤ −d/3`, the same direction as the pull-back bound) and that the general sentence
+"tightness propagates up any tower with constant fibres" (G54, row 67, FS38-D3) fails on a finite lattice. **Where my derivation
+touched it:** V3 step (4) needs `α(P_m) = |P_m|/4` at every level, and my committed text sourced it to "row 67". **Re-sourced** to
+Lemma D (FS38-L2's non-strict pairing bound, re-derived; the lower bound `λ ≥ −d/3` comes from the primitive characters, not from
+colourability) and checked by an independent build at levels 2–8. D2-B's `H_min` (step (5)) rests on its own induction through L2–L3
+and level 4's exact spectrum, not on L1; the independent build reproduces it at 6 and 8. I use nowhere the general propagation
+sentence. **V3's verdict is unchanged.** (I agree with the direction of the defect: Hoffman's bound `α ≤ n(−λ_min)/(d − λ_min)`
+together with `α ≥ n/4` gives `−λ_min/(d − λ_min) ≥ 1/4`, i.e. `λ_min ≤ −d/3` — an upper bound on `λ_min`, which cannot certify
+tightness.)
