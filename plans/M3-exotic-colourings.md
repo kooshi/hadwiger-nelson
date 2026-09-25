@@ -456,8 +456,13 @@ permutation; the claims below hold in either form, and a derivation says which i
 - **A-K0.** "If every phase of `X₄(D)` is rigid, then every periodic `c ∈ X₄(D)` has all four colours on the closed neighbourhood of
   every vertex, and every two-colour Kempe component of `c` is infinite."
 - **A-K1.** "If every phase of `X₄(D)` is rigid and `X₄(D) ≠ ∅`, then `χ(G(ℤ, D)) = 4`."
-- **A-K2.** "If `c ∈ X₄(D)` is periodic and `c′ ∈ X₄(D)` agrees with `c` on `{y : y < x}` and not at `x`, then the colours
-  `{c(x − d) : d ∈ D}` miss at least two colours."
+- **A-K2.** "If `c ∈ X₄(D)` and for every `x ∈ ℤ` the colours `{c(x − d) : d ∈ D} ∪ {c(x)}` are all four colours, then every
+  `c′ ∈ X₄(D)` that agrees with `c` on `{y : y < x₀}` for some `x₀` equals `c`; so a wall leaves a phase `C` only through a state at
+  which the next colour is not determined by the window."
+- **A-Kq.** "Every phase of the window-state graph of `X₄(D)` is rigid iff every phase of its quotient by colour permutations is rigid,
+  and a wall exists in one iff it exists in the other."
+- **A-K3 (the reversal lemma).** "If every phase of `X₄(D)` is rigid, then for every wall from a phase `C` to a phase `C′` there is a
+  wall from `C′` to `g·C` for some colour permutation `g`." (With FS79-T34's orbit step it gives A-T1.)
 - **A-C.** "There is a finite `D ⊂ ℤ_{>0}` (named) such that every phase of `X₄(D)` is rigid and a wall exists." (the alternative to
   A-T1; with T35 it gives `P₄(D) ≠ F₄(D)`)
 
@@ -474,15 +479,20 @@ the countable set `ι_S(F²) + t`.)
   with Lebesgue-measurable classes; for every finite `S` containing a real place, a measurable proper five-colouring of that graph pulls
   back to a measurable window five-colouring over `S`. Hence no measurable window five-colouring over any `S` containing a real place
   implies `χ_µ(ℝ²) ≥ 6`."
-- **D1.** "For every finite set `S` of places of ℚ(√167) containing no real place, no measurable window five-colouring over `S`
-  exists, provided every factor of `Γ_S` has measurable independence ratio `< 1/5`; this holds at every stable odd place other than 43
-  (23 by FS-66's all-levels certificate; `p ≥ 59` by Weil and the inert tower's constant `λ_min/d`; the ramified 167 by Lemma P), at
-  every odd split place (C14.2 (c)), and [to be settled] at 43 above level one and at the dyadic places."
+- **D1.** "For every finite set `S` of places of ℚ(√167) containing no real place, if every local graph `Γ_v`, `v ∈ S`, has
+  measurable independence ratio `< 1/5`, then no measurable window five-colouring over `S` exists."
+- **D1-fac.** "At ℚ(√167) the local graph has measurable independence ratio `< 1/5` at 23 (FS-66's all-levels certificate), at every
+  stable odd place `p ≥ 59` (the level-one Hoffman ratio, constant up the inert tower), at the ramified place 167 (Lemma P), and at every
+  odd split place (C14.2 (c))."
+- **D1-43.** "The 43-adic local graph of ℚ(√167) has measurable independence ratio `< 1/5`." (or: open, with the missing step named)
+- **D1-2.** "Each dyadic place of ℚ(√167) (split in `F(i)/F`) has local graph of measurable independence ratio `< 1/5`." (or: open,
+  named)
 - **D1-3.** "At ℚ(√167) the place above 3 is split in `F(i)/F`, so FS-64's configuration (ii) contributes a factor of measurable
   independence ratio 0."
-- **D2.** "Let `A` be the unit-distance graph of `ℝ²` (or of `ℝ² × ℝ²`) and `B` a product of the finite places' local graphs, every
-  factor of `B` of measurable independence ratio `< 1/5`. Then `A × B` has a measurable proper five-colouring iff `A` does." (or its
-  failure, at a named step)
+- **D2(a).** "Let `A` be the unit-distance graph of `ℝ²` and `B` a product of finitely many of ℚ(√167)'s finite places' local graphs,
+  every factor of `B` of measurable independence ratio `< 1/5`. Then `A × B` has a measurable proper five-colouring iff `A` does." (or
+  its failure, at a named step)
+- **D2(b).** The same with `A` the categorical product of the unit-distance graphs of `ℝ²` at the two real places.
 - **D3.** "`χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`" (or the named obstruction)
 - **D4.** "C9's colouring `⌊4θ⌋` over ℚ(√11) is a measurable window four-colouring over `{∞, 7}` that is not a pullback from one
   factor; and the hexagonal seven-colouring is a measurable window seven-colouring over `{∞₁}` of every real field." (the format's
@@ -509,3 +519,61 @@ the countable set `ι_S(F²) + t`.)
 
 **Scoring rule, fixed now (M44):** a prediction is scored on the committed claim list and the verifier's verdicts, never on a record's
 prose; a GAP verdict on the deciding step scores the claim as not landed.
+
+---
+
+## Stage 5 — SAVED (§M, §X; the briefs)
+
+### M. The modeling passes (fresh Skill invocations: `debruijn-domain-modeling`, then `debruijn-obligation-modeling`, applied to §S's statements; no Lean this milestone, so the passes act on the statements and the obligation trees)
+
+**Domain pass — what changed in §S.**
+1. *The quotient seam* (the placement cut): FS79-T35 reads phases modulo colour permutation, T36's tool computes in the quotient, and the
+   stub states R2 without saying which. Both forms are equivalent (a single cycle's preimage in the colour cover is a disjoint union of
+   cycles, since an edge's lift is determined by its source; a quotient path staying on a cycle lifts to one cycle) — minted as **A-Kq**,
+   a one-line obligation, so that no verifier finds a spurious gap between the two readings.
+2. *A-K2 was trivial as first written* (it said only that a branching position misses two colours, true of any `c`, periodic or not):
+   restated as the **rank-1 form of FS86-dB-H** — a colouring that is "left-gap-free" everywhere admits no continuation but itself — which
+   is the statement that names *where* a wall can leave a phase.
+3. *Unsampled members*: `X₄(D) = ∅` (A-T1, A-T1′, A-T2 hold vacuously; A-K1 carries `X₄(D) ≠ ∅`); `S = ∅` in Q2 (the empty product
+   has a loop at 0, no proper colouring, consistent); the inhabitants the claims ship are `{1,2,3}` (one rigid phase, no wall),
+   FS85-dB2 (24 colourings, rigid, no wall), FS73-T30's `{1,5,7,10}` (walls beside entropy: the negative control for any wall
+   detector), the hexagonal seven-window and C9 (D4).
+4. *Two statements in one*: D1 mixed a conditional theorem with an unsettled factor table, and D2 mixed one real place with two — each
+   split (D1, D1-fac, D1-43, D1-2; D2(a), D2(b)) so that a verifier's verdict attaches to one claim.
+5. *Adversarial member for D0*: a colouring proper only off a null set satisfies C14′'s format and says nothing on the countable set
+   `ι_S(F²) + t`; §S's definition requires properness on every edge of `Γ_S`, and every claim says which format it covers.
+
+**Obligation pass — the trees handed to J18 and J21.**
+- **A-T1 ⟸ A-K3 + FS79-T34's orbit step**: if every wall `C → C′` has a return wall `C′ → gC`, then `C → C′ → gC → gC′ → g²C → ⋯`
+  closes in the finite phase graph, a cycle through distinct phases, contradicting their being distinct strongly connected components.
+  So **A-K3 is the milestone's one hard obligation**, and T34 is its achiral case. The local obligations beneath it: A-K0 (entropy
+  lemmas: a fan gap or a finite Kempe component in a periodic colouring makes a detour, hence a second cycle), A-K1 (the spare-colour
+  entropy floor, row 45), A-K2 (where a wall can leave), A-Kq. Two candidate moves for A-K3's chiral case, named for J18 as routes and
+  not as claims: **(i) a Kempe swap on a one-sided component** (a Kempe component of the wall colouring bounded on one side, swapped,
+  moves one end of the wall to a colour-permuted phase), and **(ii) a reflection-invariant potential** (any function on phases, invariant
+  under reflection and colour permutations, that strictly decreases along walls contradicts a wall at once — so A-K3's failure would have
+  to be witnessed by a phase graph admitting no such function). *Validation:* at `k = 3` A-T1 is true (T24: no walls at all), so any
+  argument for A-K3 must not use `k = 4` where `k = 3` would refute it — J18 states at which step `k = 4` enters (P-A5).
+- **A-C's checklist** (a counterexample candidate must meet each before an exact check is priced): its phases chiral (T34), its periodic
+  points gap-free with infinite Kempe components (A-K0), `χ(G(ℤ, D)) = 4` (A-K1), a branching state (A-K2), no return wall (A-K3 false
+  for it). The construction tool is FS85-dB1's embedding lemma (row 86).
+- **D1** is C14.1 + C14.3 at `k = 5` (the count, free) plus the factor table **D1-fac**, one local obligation per factor; the two open
+  leaves are D1-43 (the fibre-share relaxation at 43 is priced out and banned; a hand bound from `⟨φ, A₁φ⟩ ≤ 2Σφ(1 − φ)` alone recovers
+  only Hoffman's ratio, which is ≥ 1/5 at 43 — the planner's one-line check, so a hand route needs a sharper inequality) and D1-2
+  (C14.2 (c) at `p = 2`).
+- **D2(a)'s obligation tree, with its likely failure named.** "⟸" is the pullback (free). "⟹" by induction on the colour count with the
+  factor `A` generalised to its measurable induced subgraphs `A′` (Gries's fresh variable): at `j ≤ 5` colours some class has relative
+  density `≥ 1/j > β` (B's ratio), and **if** an independent set of `A′ × B` of relative density `> β` is a.e. a cylinder `I × B`
+  (a measurable, stability form of `[Zhang2012]` Thm 1.8(i)), removing it leaves a `(j−1)`-colouring of `(A′ ∖ I) × B`, and the induction
+  closes. **The named hard step:** Zhang's theorem is for vertex-transitive factors, and `A′` leaves that class after the first step — so
+  the cylinder lemma for non-transitive `A′` is where D2(a) will stand or fall. J21 attacks it first.
+
+### X. The would-have-searched log (the planner's)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X1 | extend T36's rank-1 scan past `max D = 14`, `\|D\| ≤ 5`, hunting a zero-entropy shift with a wall | not run (the ban); R2 restated as "countable ⟹ finite" and decomposed into A-K0–A-K3 for derivation; FS85-dB2 cited as an out-of-range inhabitant |
+| X2 | compute window graphs of FS73-T30's four wall sets to classify their walls as `C → C^R` or not | not run; J18 may compute them once, as a check of a derived claim about chirality, logged at the ban's edge |
+| X3 | run FS-66's second-level relaxation at 43 to certify the all-levels ratio `< 1/5` | not run (a machine-long certificate, banned; 84 GPU-days); D1-43 left to hand derivation or named open |
+| X4 | search Polymath16's MCNP ≥ 6 criterion (a five-colouring of `V_A ⊕ V_A ⊕ V_A` with a forced {1,2}-vertex) | not run; quoted in §PA as the archimedean corner's state of the art |
+| X5 | read `LEDGER.md` § B in full | read by keyword scan (rank-1, entropy, measurable, window, Kempe, periodic, distance graph): budget; every § B entry the derivations cite is named in their briefs by id |
