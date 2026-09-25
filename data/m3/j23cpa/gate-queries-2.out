@@ -1,0 +1,23 @@
+QUERY 'au:"Marks, Andrew S." & ab:"product"': None hits
+
+QUERY 'au:"Bernshteyn, Anton" & ab:"product"': 2 hits
+  2019 | Bernshteyn, Anton | Multiplication of weak equivalence classes may be discontinuous |  | zbl 1427.22021
+  2017 | Bernshteyn, A. Yu.; Kostochka, A. V.; Pron, S. P. | On DP-coloring of graphs and multigraphs |  | zbl 1366.05038
+
+QUERY 'ab:"Borel" & ab:"categorical product"': None hits
+
+QUERY 'ab:"Borel chromatic" & ab:"Hedetniemi"': None hits
+
+QUERY 'ab:"measurable" & ab:"Hedetniemi"': None hits
+
+QUERY 'au:"Brakensiek, Joshua" & ab:"tensor"': 3 hits
+  2017 | Brakensiek, Joshua | Vertex isoperimetry and independent set stability for tensor powers of cliques |  | zbl 1470.05123
+  2024 | Brakensiek, Joshua; Davies, Sami | Robust factorizations and colorings of tensor graphs |  | zbl 1533.05210
+  2025 | Joshua Brakensiek; Yeyuan Chen; Manik Dhar | From Random to Explicit via Subspace Designs With Applications to Local Properties and Matroids |  | zbl arXiv:2510.13777
+
+QUERY 'ab:"uniquely" & ab:"colorable" & ab:"expander"': 1 hits
+  2013 | Pak, Igor; Vilenchik, Dan | Constructing uniquely realizable graphs |  | zbl 1280.05092
+
+QUERY 'ab:"direct product" & ab:"chromatic number" & ab:"expander"': 1 hits
+  2001 |  | 42nd IEEE symposium on foundations of computer science. Proceedings of the symposium, FOCS 2001, Las Vegas, NV |  | zbl 1017.68001
+

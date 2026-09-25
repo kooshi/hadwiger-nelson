@@ -1,0 +1,92 @@
+QUERY 'ab:"expander" & ab:"categorical product"': None hits
+
+QUERY 'ab:"expander" & ab:"tensor product" & ab:"coloring"': 2 hits
+  2024 | Brakensiek, Joshua; Davies, Sami | Robust factorizations and colorings of tensor graphs |  | zbl 1533.05210
+  1999 |  | Combinatorics, graph theory, and algorithms. Vol. I, II. Proceedings of the 8th quadrennial international conf |  | zbl 1024.00517
+
+QUERY 'ab:"uniquely colorable" & ab:"eigenvalue"': None hits
+
+QUERY 'ab:"direct product" & ab:"expander"': 14 hits
+  2010 | Impagliazzo, Russell; Kabanets, Valentine | Constructive proofs of concentration bounds |  | zbl 1305.68331
+  1999 | Impagliazzo, Russell; Wigderson, Avi | \(P= BPP\) if \(E\) requires exponential circuits: Derandomizing the XOR lemma |  | zbl 0962.68058
+  2008 | Guruswami, Venkatesan; Kabanets, Valentine | Hardness amplification via space-efficient direct products |  | zbl 1188.68152
+  2006 | Guruswami, Venkatesan; Kabanets, Valentine | Hardness amplification via space-efficient direct products |  | zbl 1145.68428
+  2020 | Goldenberg, Elazar; Karthik, C. S. | Toward a general direct product testing theorem |  | zbl 1499.68391
+  2016 | Huang, Ming-Deh A.; Liu, Lian | Character sums and generating sets |  | zbl 1391.11153
+  2001 |  | 42nd IEEE symposium on foundations of computer science. Proceedings of the symposium, FOCS 2001, Las Vegas, NV |  | zbl 1017.68001
+  2018 | Goldenberg, Elazar; C. S., Karthik | Towards a general direct product testing theorem |  | zbl 1528.68405
+  2013 |  | Automata, languages, and programming. 40th international colloquium, ICALP 2013, Riga, Latvia, July 8--12, 201 |  | zbl 1268.68018
+  2021 | Brzuska, Chris; Couteau, Geoffroy; Karanko, Pihla | On derandomizing Yao's weak-to-strong OWF construction |  | zbl 1511.94064
+  1999 |  | Proceedings of the 29th annual ACM symposium on theory of computing, STOC '97. El Paso, TX, USA, May 4--6, 199 |  | zbl 0955.00047
+  2024 | David Hume | Topological expanders, coarse geometry and thick embeddings of complexes |  | zbl arXiv:2411.13294
+  2024 |  | Proceedings of the 65th annual IEEE symposium on foundations of computer science, FOCS 2024, Chicago, IL, USA, |  | zbl 1568.68004
+  2004 |  | Proceedings of the 45th annual IEEE symposium on foundations of computer science, FOCS 2004, Rome, Italy, Octo |  | zbl 1568.68002
+
+QUERY 'ab:"pseudo-random" & ab:"Hedetniemi"': None hits
+
+QUERY 'ab:"exponential graph" & ab:"eigenvalue"': None hits
+
+QUERY 'ab:"multiplicative" & ab:"eigenvalue" & ab:"homomorphism"': 3 hits
+  2012 | Meinrenken, Eckhard | Lectures on group-valued moment maps and Verlinde formulas |  | zbl 1365.53080
+  2014 |  | Fuzzy information and engineering and operations research and management. Based on the presentations at the 6t |  | zbl 1279.00043
+  2023 |  | Bounded cohomology and simplicial volume |  | zbl 1547.57004
+
+QUERY 'ab:"Borel" & ab:"expansion" & ab:"chromatic"': 1 hits
+  2020 | Iserles, Arieh; Webb, Marcus | A family of orthogonal rational functions and other orthogonal systems with a skew-Hermitian differentiation m |  | zbl 1459.42006
+
+QUERY 'ab:"measurable" & ab:"spectral gap" & ab:"chromatic"': None hits
+
+QUERY 'ab:"compact group" & ab:"chromatic number"': None hits
+
+QUERY 'ab:"categorical product" & ab:"Fourier"': None hits
+
+QUERY 'ab:"weak product" & ab:"coloring"': None hits
+
+QUERY 'au:"Vilenchik, Dan"': 29 hits
+  2013 | Coja-Oghlan, Amin; Vilenchik, Dan | Chasing the \(k\)-colorability threshold |  | zbl None
+  2013 | Sinclair, Alistair; Vilenchik, Dan | Delaying satisfiability for random 2SAT |  | zbl 1272.05185
+  2015 | Krauthgamer, Robert; Nadler, Boaz; Vilenchik, Dan | Do semidefinite relaxations solve sparse PCA up to the information limit? |  | zbl 1320.62138
+  2018 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | zbl 1392.05076
+  2010 | Sinclair, Alistair; Vilenchik, Dan | Delaying satisfiability for random 2SAT |  | zbl 1305.68132
+  2013 | Feige, Uriel; Mossel, Elchanan; Vilenchik, Dan | Complete convergence of message passing algorithms for some satisfiability problems |  | zbl 1366.68261
+  2006 | Feige, Uriel; Mossel, Elchanan; Vilenchik, Dan | Complete convergence of message passing algorithms for some satisfiability problems |  | zbl 1155.68507
+  2006 | Krivelevich, Michael; Vilenchik, Dan | Solving random satisfiable 3CNF formulas in expected polynomial time |  | zbl 1192.68370
+  2013 | Braverman, Vladimir; Ostrovsky, Rafail; Vilenchik, Dan | How hard is counting triangles in the streaming model? |  | zbl 1336.68283
+  2009 | Coja-Oghlan, Amin; Mossel, Elchanan; Vilenchik, Dan | A spectral approach to analysing belief propagation for 3-colouring |  | zbl 1191.05084
+  2011 | Feige, Uriel; Flaxman, Abraham D.; Vilenchik, Dan | On the diameter of the set of satisfying assignments in random satisfiable \(k\)-CNF formulas |  | zbl 1235.68113
+  2016 | Coja-Oghlan, Amin; Vilenchik, Dan | The chromatic number of random graphs for most average degrees |  | zbl 1404.05189
+  2006 | Krivelevich, Michael; Vilenchik, Dan | Semirandom models as benchmarks for coloring algorithms |  | zbl 1423.05071
+  2013 | Pak, Igor; Vilenchik, Dan | Constructing uniquely realizable graphs |  | zbl 1280.05092
+  2009 | Minder, Lorenz; Vilenchik, Dan | Small clique detection and approximate Nash equilibria |  | zbl 1255.68084
+  2007 | Coja-Oghlan, Amin; Krivelevich, Michael; Vilenchik, Dan | Why almost all satisfiable k-CNF formulas are easy |  | zbl 1192.68949
+  2009 | Krivelevich, Michael; Sudakov, Benny; Vilenchik, Dan | On the random satisfiable process |  | zbl 1214.68359
+  2009 | Coja-Oghlan, Amin; Feige, Uriel; Frieze, Alan | On smoothed \(k\)-CNF formulas and the \texttt{Walksat} algorithm |  | zbl 1421.68059
+  2012 | Michael Langberg; Dan Vilenchik | Edge distribution in generalized graph products |  | zbl arXiv:1211.1467
+  2016 | Bapst, Victor; Coja-Oghlan, Amin; Hetterich, Samuel | The condensation phase transition in random graph coloring |  | zbl 1341.82027
+  2010 | Coja-Oghlan, Amin; Krivelevich, Michael; Vilenchik, Dan | Why almost all \(k\)-colorable graphs are easy to color |  | zbl 1216.05031
+  2012 | Lee, Choongbum; Sudakov, Benny; Vilenchik, Dan | Getting a directed Hamilton cycle two times faster |  | zbl 1247.05091
+  2007 | Coja-Oghlan, Amin; Krivelevich, Michael; Vilenchik, Dan | Why almost all \(k\)-colorable graphs are easy |  | zbl 1186.05050
+  2011 | Friedrich, Tobias; Sauerwald, Thomas; Vilenchik, Dan | Smoothed analysis of balancing networks |  | zbl 1223.68019
+  2007 | Vilenchik, Dan | It's all about the support: a new perspective on the satisfiability problem |  | zbl 1145.68531
+  2009 | Friedrich, Tobias; Sauerwald, Thomas; Vilenchik, Dan | Smoothed analysis of balancing networks |  | zbl 1248.68062
+  2014 | Bapst, Victor; Coja-Oghlan, Amin; Hetterich, Samuel | The condensation phase transition in random graph coloring |  | zbl 1359.05107
+  2008 | Böttcher, Julia; Vilenchik, Dan | On the tractability of coloring semirandom graphs |  | zbl 1191.68461
+  2007 | Ben-Shimon, Sonny; Vilenchik, Dan | Message passing for the coloring problem: Gallager meets Alon and Kahale |  | zbl 1192.68943
+
+QUERY 'ab:"uniquely vector"': 3 hits
+  2017 | Godsil, Chris; Roberson, David E.; Rooney, Brendan | Universal completability, least eigenvalue frameworks, and vector colorings |  | zbl 1371.05162
+  2013 | Pak, Igor; Vilenchik, Dan | Constructing uniquely realizable graphs |  | zbl 1280.05092
+  1971 | Konikowska, B. | Continuous machines, \(\tau\)-computations and \(\tau\)-computable sets |  | zbl 0226.02035
+
+QUERY 'ab:"expander mixing" & ab:"coloring"': 1 hits
+  2022 | Vladimir N. Potapov | On extremal properties of perfect 2-colorings |  | zbl arXiv:2204.03308
+
+QUERY 'ab:"dictator" & ab:"coloring" & ab:"product"': 1 hits
+  2009 |  | Proceedings of the 20th annual ACM-SIAM symposium on discrete algorithms, SODA 2009, New York, NY, USA, Januar |  | zbl 1258.68011
+
+QUERY 'ab:"Hedetniemi" & ab:"spectral"': 2 hits
+  2021 |  | Structures of domination in graphs |  | zbl 1470.05007
+  2021 |  | 2019--20 MATRIX annals |  | zbl 1459.37002
+
+QUERY 'ab:"tensor product" & ab:"uniquely" & ab:"colorable"': None hits
+

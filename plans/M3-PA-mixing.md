@@ -195,6 +195,67 @@ matrices) not read — they prove rigidity, not a colouring-selection statement.
 **Verdict for this paper:** (S) is **in print as a hypothesis in a product-colouring theorem** (Pak–Vilenchik Thm 3, `K_k ⊗ H`); the
 statement J21-MX makes with it — for every first factor, integral, Borel, measurable — is not.
 
+## Stage 5 — SAVED: the held three, the surveys, the gate (WORKFLOW 3.2 items 1–3, 8), and paper 5 `[BrakensiekDavies2024]`
+
+**Held papers re-read for this question.**
+- **`[KechrisMarks2020]` §4.6 "Hedetniemi's Conjecture" (pp. 31–33 of the 9 Oct 2020 version) read in full.** Problem 4.23, verbatim: "If
+  G, H are analytic graphs, is it true that `χB(G × H) = min{χB(G), χB(H)}`?", with `C_B(k)`: "For any analytic graphs G, H,
+  `χB(G), χB(H) ≥ k ⟹ χB(G × H) ≥ k`." Known: `C_B(2)`, `C_B(2^ℵ0)` (Cor. 4.24, [KST, 6.11]), `C_B(3)` (Prop. 4.25); "We do not know any
+  other results along these lines. Is `C_B(4)` true?" Nothing restricts one factor. **J21-MX gives `C_B(k+1)` for every pair `(X, H)` with
+  `H = Cay(K, T_K)` `k`-mixing** (its §3.2 remark, checked: `χ_B(H) > k` because a Borel independent set has measure `≤ θ < 1/k`), a
+  positive special case, not an answer. The survey's own statement of the finite problem is out of date ("C(k) for k ≥ 5 is unknown" in the
+  body; the Addendum records Shitov). KST 1999 (§6 (E), (F)) not held, not read — by KM's account it is about uncountable Borel chromatic
+  numbers (the `G₀`-dichotomy), not finite `k`.
+- **`[Zhang2012]` Thm 1.8** — not re-read; its bearing is fixed by `BIBLIOGRAPHY.md` line 279 and J21 §3.6: a statement about **maximum**
+  independent sets of products of vertex-transitive graphs, so it bears on the cylinder lemma, not on J21-MX's selection (whose classes need
+  not be maximum). No change.
+- **`[Zhu2021]`** — its Theorem 3 (R3.10 row, J23c's reading) is the input to J21-NG2 (the ratio alone cannot carry the descent); it says
+  nothing spectral. No change.
+- **`[Tardif2008]` §3 "Supporting Evidence" (pp. 48–49) and §6.1 read in full** (held, `tardif-2008-…GTN54.pdf`). The survey's class of
+  "one factor constrained, the other free" results — "In the preceeding three results, the factor G is heavily constrained (to find an
+  n-coloring of `K_n^G`), but the factor H is free" — is exactly J21-MX's form (`K_k^{Cay(K,T)} → K_k`). Its members: "Theorem 3.2 [14]: Let
+  G be a graph such that every vertex of G is in an n-clique. For every graph H, if `χ(G × H) = n`, then `min{χ(G), χ(H)} = n`", with [14] =
+  "S.A. Burr, P. Erdős, and L. Lovász; On graphs of Ramsey type, Ars Combinatoria, 1, 167–190 (1976)"; Thm 3.3 [15] (Turzík: every two
+  edges joined by a third); Thm 3.4 [16] (Hajós sums). **No spectral or measure-theoretic member.** Thm 3.8 [23]: "`χ(G × H) ≥ min{χf(G),
+  χf(H)}/2`". The survey cites ADFS ([48]) only for independent sets of products.
+- **`[Zhu2025]` §1 (held arXiv 2502.16078) re-checked for J21's attribution:** it says "The conjecture first appeared in a journal article of
+  Burr, P. Erdős and Lovász [4] in 1976" and does **not** state `χ(G × K_n) = min(χ(G), n)` in §1 (grep for "× Kn", "G × K", "complete graph":
+  no §1 hit). **The attribution J21 §3.2 gives ("Burr–Erdős–Lovász 1976, as cited in `[Zhu2025]` §1") is supported by `[Tardif2008]` Thm 3.2,
+  not by `[Zhu2025]` §1** — a correction owed (the statement and the credit stand; the secondary source changes). Its §2.2 (vector
+  chromatic number) records GRRSV's Result 1; nothing on a mixing factor.
+
+**The gate** (zbMATH Open API, abstracts; `data/m3/j23cpa/zb.py` is a copy of J23c's tool; outputs `data/m3/j23cpa/gate-queries.out`,
+`…/gate-queries-2.out`; every negative measures its words, G21). Items 1–3 (the object in the discipline's words — "tensor/direct/categorical
+product", "expander", "uniquely colorable", "exponential graph", "Borel/measurable" — and the question), 8 (author listings):
+
+| query | hits | on point |
+|---|---|---|
+| `expander & categorical product`; `categorical product & Fourier`; `weak product & coloring`; `exponential graph & eigenvalue`; `pseudo-random & Hedetniemi`; `Hedetniemi & spectral` (2, off-topic volumes); `uniquely colorable & eigenvalue`; `tensor product & uniquely & colorable` | 0 each (except as noted) | — |
+| `expander & tensor product & coloring` | 2 | **`[BrakensiekDavies2024]`** (below) |
+| `direct product & expander` (14); `direct product & chromatic number & expander` (1) | 15 | hardness-amplification "direct products" (a different product); none |
+| `multiplicative & eigenvalue & homomorphism`; `Borel & expansion & chromatic`; `measurable & spectral gap & chromatic`; `compact group & chromatic number` | 3, 1, 0, 0 | none |
+| `uniquely vector` | 3 | `[PakVilenchik2013]` (zbl 1280.05092), `[GodsilRobersonRooney2017]` — both already read/held |
+| `uniquely & colorable & expander` | 1 | `[PakVilenchik2013]` |
+| `expander mixing & coloring`; `dictator & coloring & product` | 1, 1 | Potapov 2022 (perfect 2-colourings), a SODA volume; none |
+| author listings: `au:"Vilenchik, Dan"` (29), `au:"Brakensiek, Joshua" & tensor` (3), `au:"Marks, Andrew S." & product` (0), `au:"Bernshteyn, Anton" & product` (2) | | Langberg–Vilenchik 2012 (arXiv 1211.1467; abstract read: an expander-mixing lemma for generalised products `G^k`, not a colouring descent); Brakensiek 2017 (vertex isoperimetry for tensor powers of cliques; title only); nothing on point |
+| `Borel & categorical product`; `Borel chromatic & Hedetniemi`; `measurable & Hedetniemi` | 0 each | — (with J21's and J23c's 9 + 14 earlier queries, 41 queries in all) |
+
+**Paper 5 — `[BrakensiekDavies2024]`.** J. Brakensiek, S. Davies, *Robust factorizations and colorings of tensor graphs*, SIAM J. Discrete Math.
+38(1) (2024) 883–916, doi 10.1137/23M1552474, zbl 1533.05210 (summary withheld); arXiv:2207.08913v2 (27 Nov 2023, 27 pp.) →
+`~/source/library/pdf/BrakensiekDavies2024-robust-factorizations-colorings-tensor-graphs.pdf`. **Read:** abstract, §1 to §1.1's theorem
+statements, §1.3.3 (hardness sketch), the conclusion's "Extending past `K3`" paragraph. Their object is `H` "ϵ-near `K3 × G`" (edges deleted,
+at most an `ϵ` fraction per vertex); "Theorem 1.2. Fix `ϵ < 1/40`. Let H be ϵ-near `K3 × G`, where graph G is a 3ϵ-edge-expander. Then, there
+is an algorithm running in time poly(n) that extracts a valid 3-coloring of H." **Bearing:** a second instance of "first factor a clique,
+second factor an expander" (combinatorial edge expansion, algorithmic, robust to deletions); **not J21-MX** — no arbitrary first factor, no
+colourability descent, no spectral threshold in `k`. It cites Greenwell–Lovász for the three colourings of `K3 × K3 × K3`, and not
+Pak–Vilenchik (grep).
+
+**(C), the compact mixing lemma.** Its finite form at `e(P, Q) = 0` is the expander mixing lemma with the `(1 − |P|/n)(1 − |Q|/n)`
+refinement (Krivelevich–Sudakov's survey, ADFS's [23]; equivalently Haemers's bound for two sets with no edges between them) —
+**[external, not re-read here]**: neither source is held; `[Haemers2021]` (held) states the one-set ratio bound only (read: its Theorems 1–2
+and the interlacing section, grep for a two-set form: none). The compact-group form is the same two lines with Parseval on `K`; its one-set
+case is the compact Hoffman bound of `[BachocDeCorteOliveiraVallentin2014]` (held, arXiv 1301.1054; not re-read).
+
 ## Would have searched here (the ban to 2026-10-01)
 
 *(Empty so far: a reading job runs no finite-witness search.)*
