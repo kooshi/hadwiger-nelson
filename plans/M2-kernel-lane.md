@@ -835,3 +835,375 @@ J17K 342k · J17K2 ≈ 200k (its own estimate). No child agents were reported by
 | J14 X2 | a three-colouring of the planted 32-edge list by a colourer | derived by hand from the reference four-colouring |
 | J17 stage 2 | a solver check that a drawing has an algebraic form; hunting a Q-const counterexample by trying curves | neither needed (C1 is a theorem); Q-const recorded as a question |
 | J15, J17K, J17K2, J23b | none | — |
+
+### Stage 4 — SAVED (the drafts: ledger rows, `CLAUDE.md`, `FRONTIER-STUBS.md`, stub re-aims, bibliography)
+
+*Drafts only. The front-page job (J24) applies them beside M1's and M3's, and assigns the ledger row numbers (written "next-a" … "next-e"
+here, in this order). The `CLAUDE.md` drafts are machine-checkable: `python3 data/m2/j23b/claude_md_drafts.py` parses the `draft` blocks
+below, checks that every anchor occurs exactly once in `CLAUDE.md`, applies them to a scratch copy and prints the net byte change
+(it never writes `CLAUDE.md`).*
+
+#### 4a. `LEDGER.md` § A — five rows (kernel grade; the conditional ones say so)
+
+| # | Result | Where | When |
+|---|---|---|---|
+| next-a | **The chain theorem in the kernel, with its first instances: a graph forcing two points at difference `δ` equal at `k` colours, chained along unit vectors summing to `1/δ`, refuses `k` colours (four forms, and a ring form: `1/δ ∈ ℤ[U_F]`); `χ(ℚ(√2,√3)²) ≥ 4` by six chained rhombi, with no Moser spindle in the field; the 18-vertex list refuses three colours and takes four; `G4 → χ(K(√7)²) ≥ 5` by eight chained copies** (M2, 2026-09-25, J14 and J16; `plans/M2-S1K-chain.md`, `plans/M2-S3K-unit-ring.md` §2; register `plans/M2-derivation.md` § I.1, I.2, I.4). **[kernel; the `K(√7)` bound conditional on `G4`, a measurement]** The chain lives on the graph induced on the chain's point set (shared points one vertex); the spindle is its `m = 2` case; the six-unit identity closes by factoring (`δ(1 + ω̄) = 3`, `1 + v + v̄ = 1/3`); the 18-vertex refusal is a second oracle by the gadget algebra (six pulled rhombus gadgets, one `decide +kernel`, 4.1 s), independent of the chain theorem's proof; `w³ + w̄³ − 3w² − 3w̄² = 3/8`. `G4` — a forcer over `ℚ(√3,√11)` at `8/3` — is a genuine compulsion if it holds (Theorem B) and is one CaDiCaL refusal with no proof log (row 47). **Not claimed:** G55's vertex bound `m(n − 1) + 1`; `χ(ℚ(√2,√3)²) ≤ 4`; `G4`. **Prior art:** GPT Astra's (`ASTRA-2026-09-14-T5`, `T6`, `T9`; G55); the kernel forms ours. | `Chain.lean`, `Instances/SqrtTwoThree.lean`, `Instances/SevenConditional.lean`, `UnitRing.lean` (ring form) | M2 (FS-45) |
+| next-b | **Transcendence is free, in the kernel: `χ(F(t)²) = χ(F²)` for every field `F` in which `−1` is not a square (so every formally real `F`), and over `ℝ` for a subfield `F` and `t` transcendental over it; inhabited by Liouville's constant** (M2, J15; `plans/M2-S2K-route-c.md`; register § I.3). **[kernel]** The place `t = 0` is built by hand (rational functions with no pole at `0`; evaluation there, a ring hom onto `F` killing the maximal ideal), and one lemma does the rest: a ring hom out of a valuation subring, killing its maximal ideal, into a ring with no `√−1`, pulls every colouring of that ring's plane back — Theorem A's finite places and route C's `t = 0` are its two instances. **Not claimed:** the common value (`χ(ℚ(L)²) = 2` needs `χ(ℚ²) = 2` in the kernel, row 63's missing instance); that the hand-built place is Mathlib's `X`-adic valuation subring. **Prior art:** `[Fischer1990]` Thm 6 (statement and proof); the lemma is `[Madore2015]` Prop. 3.2 at `d = 2` (found at M2's close); not new mathematics; the kernel form ours. | `Transcendental.lean` | M2 (FS-39 route C) |
+| next-c | **Prime inversion in valuation form, in the kernel: for a field with an involution `σ`, `1/n ∈ ℤ[U]` iff no `σ`-stable valuation subring has `n` in its maximal ideal; in the plane over `F ⊆ ℝ` the same for `F(i)` under conjugation, whose valuation subrings are Theorem A's; the chain theorem in ring form; over `K(√7)`, `1/2 = w + w̄ + 2` and `3/8` lie in `ℤ[U]` and no conjugation-stable valuation subring of `K(√7)(i)` has 2 in its maximal ideal — the 2-adic wall broken** (M2, J16; `plans/M2-S3K-unit-ring.md` §2; register § I.4). **[kernel]** Chevalley's domination (Mathlib's `Ideal.image_subset_nonunits_valuationSubring`) replaces lying-over; a valuation subring holds every norm-one element iff it is `σ`-stable (row 57's lemma, and a three-line converse). **Not claimed:** the number-field reading — the `σ`-stable valuation subrings with `p` in the maximal ideal are the conjugation-stable primes above `p` — which is row 57's gap (FS-37), and with it `ASTRA-2026-09-14-T7` beyond `K(√7)`; Lemma R. **Prior art:** GPT Astra's Theorem 1.2 (`ASTRA-2026-09-14-T2`); `[Fischer1990b]` Thms 1, 3–4 (special cases); the valuation form without number fields, and the kernel, ours. | `UnitRing.lean`, `Instances/SevenUnitRing.lean` | M2 (FS-47) |
+| next-d | **The stripe lemma in the kernel: every proper four-colouring of the triangular lattice with no monochromatic √3-triangle is striped — the colours split into two pairs whose index is affine `ℤ[ζ₆] → 𝔽₂`** (M2, J16; `plans/M2-S3K-unit-ring.md` §3; register § I.5). **[kernel; the wheel facts by a complete check of one wheel's `4⁷` colourings, a set the derivation fixes]** The triangle condition is used once, to make one line two-periodic; the line-to-line step needs properness alone. The class mod `2ℤ[ζ₆]` inhabits the hypotheses; `(a + 2b) mod 3` is proper and not striped, so the triangle condition cannot be dropped. **Not claimed:** its placement in de Grey's lattice (dB9's V1, FS-87). **Prior art:** `[Parts2020hv]` §3 (human-verified); `FS85-V2-T5`; the kernel form ours. | `Stripe.lean` | M2 (FS-87 target 1) |
+| next-e | **The bridge in the kernel, conditional on one named true hypothesis: `χ(ℝ²) = sup` over real number fields of `χ(F²)`, attained, and `χ(ℝ²) ≠ 6` iff every real number field with `χ = 6` lies in one with `χ = 7`, from `RealAlgebraicDescent` (a real solution of a finite rational polynomial system has a real algebraic one — Tarski; Artin–Lang); `ℝ`, and every relative algebraic closure in a real closed field, are real closed; Lemma NP over every field with `2 ≠ 0`, and `[Fischer1990]` Remark 1's first sentence refuted (C3, C3⁺)** (M2: J17 by hand, J17K and J17K2 in the kernel; `plans/M2-S1D-bridge.md`, `plans/M2-S4K-bridge.md`, `plans/M2-S5K-noparam.md`; register § I.6, I.7). **[kernel; C1, C2, C4 conditional on `RealAlgebraicDescent`, a proposition, not a vacuous domain]** Controls: the hypothesis in one variable proved, its rational twin false (`X² − 2`); NP's genus-0 twin `a² − 1` and NP in characteristic 2 false, and NP's kernel route run on the twin fails exactly at the Fermat–Catalan signature step `(2, 2, 1)` — "positive genus" is the signature inequality at `(4, 4, 2)`. C3 in containment form: for `F ⊆ ℝ` algebraic over `ℚ` and `t` transcendental over `F`, `2 + L` and `√((2 + L)³ − (2 + L))` are not both in `F(t)`; C3⁺: no ring hom from a real field holding them lands in a purely transcendental tower over such an `F`. **Not claimed:** `RealAlgebraicDescent` itself (FS-39 phase B2, months); C3⁺'s reading of `F′(t₁, …, t_m)` as a tower of simple adjunctions (hand); `χ(ℚ(π, √(π³ − π))²) = 2` (J17-T8, hand). **Prior art:** the bridge is `[Madore2015]` ¶5.4 with ¶1.3 (Tarski), noted by `[BendaPerles2000]` (unread), asserted in `[Soifer2024]` ch. 11 (Open Problem 11.1's comment), with a false step in `[Fischer1990]` Remark 1; C4 is `FS62-T2`; NP is classical (Mason–Stothers; Mathlib's `Polynomial.flt_catalan`); `ℝ_alg` real closed is Mathlib's TODO; nothing new mathematically; the kernel forms ours. | `Bridge.lean`, `RealClosed.lean`, `NoParam.lean` | M2 (FS-39 phases B0–B1, C) |
+
+#### 4b. `LEDGER.md` § B — twelve new lines and nine kernel-column changes
+
+New lines (each has its entry in `plans/M2-derivation.md` Part II; `tools/fs71_ledger_b_check.py --strict` then reads them in step):
+
+| id | milestone | the theorem, in one line | grade | proof | kernel |
+|---|---|---|---|---|---|
+| J04-H1 | M2 | a unit vector of a field `K` lies in every valuation subring `B` with `1 + x² ∉ B.nonunits` for all `x ∈ B` (`[Madore2015]` Prop. 3.2's first step at `d = 2`) | hand | `plans/M2-derivation.md` J04-H1 | kernel (`RouteC.mem_valuationSubring_of_sq_add_sq_eq_one`) |
+| J14-H1 | M2 | in the 18-vertex graph over `ℚ(√2,√3)`, diamonds 2–6 and the edge `3 — 1` already refuse three colours | hand | `plans/M2-derivation.md` J14-H1 | declined (one object; two kernel oracles already) |
+| J17-T1 | M2 | C1: every finite unit-distance drawing in `ℝ²` descends to a real number field (injective and induced forms too), by Tarski or by Artin–Lang | hand | `plans/M2-derivation.md` J17-T1 | kernel, conditional (`Bridge.exists_numberField_drawing_of_descent`); `(∃T)` stub (FS-39 B2) |
+| J17-T2 | M2 | the real algebraic numbers form a real closed field | hand | `plans/M2-derivation.md` J17-T2 | kernel, stronger (`algebraicClosure.isRealClosed`) |
+| J17-T3 | M2 | C2: `χ(ℝ²) = max` over real number fields of `χ(F²)`, attained (`[Madore2015]` ¶5.4) | hand | `plans/M2-derivation.md` J17-T3 | kernel, conditional (`Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent`) |
+| J17-T4 | M2 | Lemma NP: no nonconstant `a ∈ ℂ(t)` has `a³ − a` a square | hand | `plans/M2-derivation.md` J17-T4 | kernel, stronger (`NoParam.not_isSquare_cube_sub_self`, any field with `2 ≠ 0`) |
+| J17-T5 | M2 | C3: `ℚ(π, √(π³ − π))` is not purely transcendental over any number field | hand | `plans/M2-derivation.md` J17-T5 | kernel, one-variable containment form with `2 + L` (`NoParam.not_mem_adjoinTranscendental_liouville`) |
+| J17-T6 | M2 | C3⁺: that field embeds in no purely transcendental extension of any number field | hand | `plans/M2-derivation.md` J17-T6 | kernel up to the tower reading (`NoParam.not_forall_mem_isPureTower`) |
+| J17-T7 | M2 | `ℚ(π/2, √(3 − π²/4))` is not purely transcendental over any number field, but lies in `ℚ(√2)(s)` | hand | `plans/M2-derivation.md` J17-T7 | declined (no consumer) |
+| J17-T8 | M2 | C3′: `χ(ℚ(π, √(π³ − π))²) = 2` (a degree-one place; `[Madore2015]` Prop. 3.2) | hand | `plans/M2-derivation.md` J17-T8 | stub (FS-39: needs the curve's local ring and `χ(ℚ²) = 2`) |
+| J17-T9 | M2 | C4: `χ(ℝ²) ≠ 6` iff every real number field with `χ = 6` has a finite real extension with `χ = 7` (`FS62-T2` with attainment) | derived | `plans/M2-derivation.md` J17-T9 | kernel, conditional (`Bridge.chromaticNumber_plane_ne_six_iff_of_descent`) |
+| J17-T10 | M2 | Tarski's equational existential fragment and the Artin–Lang homomorphism theorem are interderivable in a few lines | hand | `plans/M2-derivation.md` J17-T10 | declined (it prices FS-39 B2 only) |
+
+Kernel-column changes to existing lines (and the same change to each home entry's *Kernel:* field, in
+`plans/ASTRA-2026-09-14-derivation.md`, `plans/FS39-derivation.md`, `plans/FS62-derivation.md`, `plans/FS85-derivation.md`):
+
+| id | kernel, now | kernel, drafted |
+|---|---|---|
+| `ASTRA-2026-09-14-T1` | stub (FS-47) | superseded in valuation form: `UnitRing.inv_mem_iff_forall_valuationSubring` (Chevalley's domination; M2) |
+| `ASTRA-2026-09-14-T2` | stub (FS-47) | kernel in valuation form (`UnitRing.inv_natCast_mem_unitRing_iff`, `inv_natCast_mem_unitRingOver_iff`; M2); the number-field reading stub (FS-47 with FS-37) |
+| `ASTRA-2026-09-14-T5` | stub (FS-45) | kernel (`Chain.not_colorable_chain` and its forms; ring form `UnitRing.add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver`; M2) |
+| `ASTRA-2026-09-14-T6` | stub (FS-45) | kernel: the plane's lower bound and the list's `χ = 4` (`SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three`, `eighteen_not_colorable_three`, `eighteen_colorable_four`; M2); the upper bound stub (FS-45) |
+| `ASTRA-2026-09-14-T7` | stub (FS-47) | kernel at `K(√7)` only (M2); in general stub (FS-47, row 57's gap) |
+| `ASTRA-2026-09-14-T9` | stub (FS-45) | kernel, the implication (`SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4`; M2); `G4` stub (FS-45, post-ban) |
+| `FS39-T1` | stub (FS-39 phase B′) | kernel (`RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq`, `chromaticNumber_unitQuadrance_ratFunc`; M2) |
+| `FS62-T2` | stub (FS-39 phase C) | kernel, conditional on `RealAlgebraicDescent` (`Bridge.chromaticNumber_plane_ne_six_iff_of_descent`; M2) |
+| `FS85-V2-T5` | stub (FS-87) | kernel (`Stripe.striped_of_proper_nt0`; M2) |
+
+#### 4c. `CLAUDE.md` — the drafts (checked by `data/m2/j23b/claude_md_drafts.py`; net size in 4g)
+
+*Not drafted here, for J24 to compose with M1's and M3's closes: the "Last updated" line (M2's clause is D-5 below), "Three are open" in §
+Paths forward (D-4 removes M2's clause and adds its closed clause), and `LEDGER.md`'s header ("Rows 1–94").*
+
+<!-- draft D-1 op=replace -->
+§ Trust ledger, the audit count (stage 0).
+```old
+current audit reads 1034 clean and 5 declared purchases, each listed
+```
+```new
+current audit reads 1130 clean, 11 axiom-free and 5 declared purchases (1,146 records at M2's close), each listed
+```
+
+<!-- draft D-2 op=replace -->
+§ The gate, the vacuity counts (stage 0). The same four numbers go into `scripts/vacuity-baseline.txt`'s header, which the gate also
+flags as stale.
+```old
+`declarations=6795 refutations-skipped=278
+  sites=275`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2`
+```
+```new
+`declarations=7051 refutations-skipped=304
+  sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2`
+```
+
+<!-- draft D-3 op=after -->
+§ Frontier, "What the kernel holds, beyond the interval".
+```after
+the forced and periodic-forced subgroups (row 78); 
+```
+```new
+**the kernel lane (M2)** — the chain theorem, with `χ(ℚ(√2,√3)²) ≥ 4` and `G4 → χ(K(√7)²) ≥ 5` (row next-a), `χ(F(t)²) = χ(F²)` (row next-b), prime inversion in valuation form and the `K(√7)` wall (row next-c), the stripe lemma (row next-d), and the bridge `χ(ℝ²) = max_F χ(F²)` conditional on one named true hypothesis, with `ℝ`, `ℝ_alg` real closed and Lemma NP (row next-e); 
+```
+
+<!-- draft D-4 op=replace -->
+§ Paths forward, "Open milestones, in order": M2's open clause out (J24 recounts "Three are open").
+```old
+**M2** = the kernel lane, FS-45, FS-39, and FS-87 or FS-47 (`plans/M2-kernel-lane.md`); 
+```
+```new
+
+```
+
+<!-- draft D-4b op=replace -->
+§ Paths forward, the closed clauses: M2's before FS-89's.
+```old
+**FS-89 — rational band rigidity — CLOSED 2026-09-25**
+```
+```new
+**M2 — the kernel lane — CLOSED 2026-09-25** (rows next-a–e; `plans/M2-kernel-lane.md` §R-close; the kernel register `plans/M2-derivation.md`). **FS-89 — rational band rigidity — CLOSED 2026-09-25**
+```
+
+<!-- draft D-5 op=after -->
+§ Frontier, the "Last updated" line (J24 composes it with M1's and M3's).
+```after
+*Last updated: 2026-09-25 — 
+```
+```new
+**M2 closed** (rows next-a–e; G35, G55, G63, G67, G72, G75 edited): the kernel lane — FS-45's chain theorem, FS-39's route C and conditional bridge, FS-47's prime inversion in valuation form, FS-87's stripe lemma; verdict **Paid (kernel)** (`plans/M2-kernel-lane.md` §R-close). 
+```
+
+<!-- draft D-6 op=replace -->
+§ Frontier, the prior-art position, "Not ours".
+```old
+the no-monochromatic-√3-triple trees (`[Parts2020hv]`)
+```
+```new
+the no-monochromatic-√3-triple trees and the stripe lemma (`[Parts2020hv]`, §3)
+```
+
+<!-- draft D-6b op=replace -->
+```old
+the chain theorem, prime inversion in its general form (every number field, every prime) and the two- and three-colour classifications (GPT Astra, G55)
+```
+```new
+the chain theorem, prime inversion in its general form (every number field, every prime) and the two- and three-colour classifications (GPT Astra, G55); transcendence is free (`[Fischer1990]` Thm 6) and its lemma, integrality at a place whose residue field has no `√−1` (`[Madore2015]` Prop. 3.2); the bridge `χ(ℝ²) = sup_F χ(F²)` (`[Madore2015]` ¶5.4, by Tarski; noted by `[BendaPerles2000]`)
+```
+
+<!-- draft D-6c op=replace -->
+§ Frontier, the prior-art position, "Ours".
+```old
+every kernel certificate. **Not ours:**
+```
+```new
+prime inversion in valuation form, with no number field (row next-c); every kernel certificate. **Not ours:**
+```
+
+<!-- draft D-7 op=replace -->
+G35, the wall as a ring statement.
+```old
+The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U] (GPT Astra's prime inversion, G55; for real quadratic fields `[Fischer1990b]` Thm 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8)).
+```
+```new
+The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U] (GPT Astra's prime inversion, G55; for real quadratic fields `[Fischer1990b]` Thm 4, 1/2 ∈ Σ₀ iff N ≡ 7 (mod 8)); in the kernel in valuation form, `UnitRing.inv_two_mem_unitRing_iff` (row next-c).
+```
+
+<!-- draft D-7b op=replace -->
+G35's gate.
+```old
+supplies the valuation subring with residue field of size N(𝔭); closing it promotes G35 and G43.
+```
+```new
+supplies the valuation subring with residue field of size N(𝔭); closing it promotes G35 and G43, and it is the one lemma prime inversion's number-field reading (FS-47) and G55's T7 beyond `K(√7)` still need (M2).
+```
+
+<!-- draft D-8 op=replace -->
+G55's grade bracket.
+```old
+every result below is a kernel target, FS-45–48 (Kooshi, 2026-09-14)]**
+```
+```new
+every result below is a kernel target, FS-45–48 (Kooshi, 2026-09-14); **in the kernel since M2:** the chain theorem and its ring form (`1/δ ∈ ℤ[U_F]`), prime inversion in valuation form, the ℚ(√2,√3) lower bound and the `K(√7)` implication (rows next-a, next-c)]**
+```
+
+<!-- draft D-9 op=replace -->
+G63's title and grade.
+```old
+* **G63 — The chromatic number of a field plane is arithmetic only: transcendence is free. [hand; prior art:
+  `[Fischer1990]` Thm 6, statement and proof]**
+```
+```new
+* **G63 — The chromatic number of a field plane is arithmetic only: pure transcendence is free. [kernel at `d = 2` (row next-b); prior art:
+  `[Fischer1990]` Thm 6, statement and proof; its lemma `[Madore2015]` Prop. 3.2]**
+```
+
+<!-- draft D-9b op=span -->
+G63's body from its route paragraph to the end of its prior-art paragraph: the wrong tools, the unpriced routes and the unfinished credit
+replaced by what M2 established.
+```start
+**Why it matters beyond the answer:**
+```
+```end
+the valuation reading and the named gap.*
+```
+```new
+**One lemma under two methods** (M2): the kernel's `unitQuadrance_colorable_of_valuationSubring` colours `K²` from any place whose
+  residue ring has no `√−1` — Theorem A's finite places (`q ≡ 3 (mod 4)`) and this entry's `t = 0` are its two instances, a smooth rational
+  point of a curve a third. **Fischer's Remark 1 and the bridge.** `[Fischer1990]` Remark 1 reduces a finitely generated `E ⊂ ℝ` to a
+  number field by calling `E` "a purely transcendental extension of some finite algebraic extension" of ℚ — false: `ℚ(π, √(π³ − π))` embeds
+  in no purely transcendental extension of any number field (genus 1: Lemma NP is Fermat–Catalan at signature `(4, 4, 2)`, and its genus-0
+  twin fails exactly at `(2, 2, 1)`; kernel with `2 + L` for `π`, row next-e), yet its plane is two-chromatic (a degree-one place, J17-T8).
+  The bridge `χ(ℝ²) = max` over real number fields is **`[Madore2015]` ¶5.4 with ¶1.3, by Tarski** (noted by `[BendaPerles2000]`, unread;
+  asserted in `[Soifer2024]` ch. 11); in the kernel it is conditional on one true proposition, `RealAlgebraicDescent` — Tarski's equational
+  existential fragment for `ℝ_alg ⊆ ℝ`, months of formalization, Artin–Lang being no cheaper (J17-T10). **Open (Q-const):** for finitely
+  generated `E ⊂ ℝ` with constant field `F`, is `χ(E²) = χ(F²)`? True when `E/F` has a degree-one place with formally real residue field.
+  Nothing here is ours but the kernel forms.
+```
+
+<!-- draft D-9c op=replace -->
+G63's *Do*: a theorem names what it forbids (G67).
+```old
+Killing
+  test: a unit vector of `F(t)²` with a pole at a place whose residue field is formally real.*
+```
+```new
+Nothing kills
+  it (kernel); it forbids a colour gained by adjoining a transcendental to a real field.*
+```
+
+<!-- draft D-10 op=replace -->
+G67, M2's instance of a bearing missed.
+```old
+not Do lines — expected, and not a count against the form.*
+```
+```new
+not Do lines — expected, and not a count against the form. M2's miss: G56 held the bridge's credit ("FS-39's bridge, which is
+  `[Madore2015]` ¶5.4 plus de Bruijn–Erdős") in its body, not its Do; walked by its title it read silent, and the plan announced the
+  credit as a finding.*
+```
+
+<!-- draft D-11 op=after -->
+G72, M2's count (J24 sets its ordinal beside M1's).
+```after
+**Sixth (FS-89):** §IQ posed Berend's MT/ID property modulo the isometric direction; row 95 is that property: **six of six**.
+```
+```new
+ **M2 (the kernel lane):** its one derivation, the bridge (J17), came through the structural question — a ring hom into `ℝ_alg` is Artin–Lang — with a classical answer; its kernel ports are outside the count.
+```
+
+<!-- draft D-12 op=after -->
+G75, where triangles enter the stripe lemma.
+```after
+Without triangles rigidity is free in the abstract class, Soifer-strength in the plane (row 86).
+```
+```new
+ On the triangular lattice the stripe lemma (kernel, row next-d) uses the triangle condition once, to make one line two-periodic; properness does the rest.
+```
+
+<!-- draft D-13 op=after -->
+§ What compute actually helps, the pricing rule.
+```after
+re-price a kernel phase from its first two leaves, never from the plan's table.
+```
+```new
+ **M2 measured it seven times more** (5× to ≥ 30× in time, never in tokens): each time the non-obvious input was already in Mathlib, so grep Mathlib by the statement's shape at the skeleton (`plans/M2-kernel-lane.md` §R-close 3e).
+```
+
+<!-- draft D-14 op=line -->
+§ Paths forward, FS-87's row.
+```line
+| 9 | **FS-87 de Grey's lattice in the kernel**
+```
+```new
+| 9 | **FS-87 de Grey's lattice in the kernel** — `plans/STUB-de-grey-chain-kernel.md` | row 85's chain in Lean: **the stripe lemma is in the kernel (M2, row next-d)**; next dB9's V1, a checker for Parts's nine trees (with V8's placement, (S″) kernel), then the theorem as a conditional one with (S″) named; dB2 as a small instance; **FS-86's candidates:** `ℤ[T] = O` (W1) and Theorem A by W's route (row 90), the K classification (row 89), Lemma R (with FS-47), C12.1 (row 93) | none; row 85 to the kernel's word, which a write-up of Mixon's question needs |
+```
+
+<!-- draft D-15 op=line -->
+§ Paths forward, FS-45's row.
+```line
+| 19 | FS-45 chain, don't spindle
+```
+```new
+| 19 | FS-45 chain, don't spindle — `plans/STUB-chain-theorem.md` | **D1–D3 in the kernel (M2, row next-a)**: the chain theorem (four forms and a ring form), `χ(ℚ(√2,√3)²) ≥ 4`, `G4 → χ(K(√7)²) ≥ 5`. Left: `G4`'s certificate, a fresh LRAT of the 588-core's refusal fed as its core (post-ban, after 2026-10-01); the upper bound `χ(ℚ(√2,√3)²) ≤ 4` by the dyadic residue colouring; G55's vertex bound | none on six directly; the first 6-open field's five-digit in the kernel, one certificate away |
+```
+
+<!-- draft D-16 op=line -->
+§ Paths forward, FS-39's row.
+```line
+| 20 | **FS-39 the bridge to the plane**
+```
+```new
+| 20 | **FS-39 the bridge to the plane** — `plans/STUB-plane-bridge.md` | **in the kernel (M2, rows next-b, next-e):** route C, and C1, C2 (attained) and C4 conditional on one named true hypothesis, `RealAlgebraicDescent`; `ℝ` and `ℝ_alg` real closed; Lemma NP, C3, C3⁺. The bridge is `[Madore2015]` ¶5.4's (Tarski). Left: B2, `(∃T)` in the kernel (months); reading `[BendaPerles2000]`; Q-const (G63) | none on finding a 6-forcer; every `χ(ℝ²)` sentence now cites a kernel theorem with one named hypothesis |
+```
+
+<!-- draft D-17 op=line -->
+§ Paths forward, FS-47's row.
+```line
+| 23 | FS-47 the unit-vector ring in the kernel
+```
+```new
+| 23 | FS-47 the unit-vector ring in the kernel — `plans/STUB-unit-vector-ring-kernel.md` | **prime inversion in valuation form and the `K(√7)` wall are in the kernel (M2, row next-c)**, with the chain theorem in ring form. Left: the number-field reading (σ-stable valuation subrings ↔ stable primes: row 57's gap, one lemma under Theorem A's field form, prime inversion and G55's T7; with FS-37), Lemma R at its corrected scope, D4 (the two-colour classification) | none; medium, mechanism |
+```
+
+#### 4d. `plans/FRONTIER-STUBS.md` — the four rows, the open-milestones line, and a re-rank proposal
+
+- **Line 27** ("The 2026-09-25 crunch holds three milestones open"): M2's clause out; add "**M2 — the kernel lane — closed 2026-09-25**
+  (`LEDGER.md` rows next-a–e; `plans/M2-kernel-lane.md` §R-close; `plans/M2-derivation.md`): FS-39, FS-45, FS-47 and FS-87 re-aimed, none
+  closed." (J24 recounts the open ones.)
+- **Row 9, FS-87**, the "what" cell: prefix "**Target 1, the stripe lemma, is in the kernel (M2; `Stripe.lean`, `striped_of_proper_nt0`;
+  row next-d) — 17 minutes, 447 lines with controls; the triangle condition enters once, properness does the rest.** Next: dB9's V1 (target 2),
+  then the checker for Parts's nine trees (target 3)." Price cell: "hours (targets 2–3, priced from target 1's rate); weeks (W)".
+- **Row 19, FS-45**, the "what" cell: prefix "**D1–D3 in the kernel (M2; row next-a):** the chain theorem over the graph induced on the
+  chain's point set, four forms and a ring form; `χ(ℚ(√2,√3)²) ≥ 4` with the 18-vertex refusal as a second oracle by the gadget algebra (no
+  LRAT); `G4 → χ(K(√7)²) ≥ 5`. **Left:** phase C's certificate, a fresh LRAT of the 588-core's refusal fed as its core — a solver run, so
+  **after 2026-10-01** — then the unconditional `K(√7)` bound; `χ(ℚ(√2,√3)²) ≤ 4` by the dyadic residue colouring; G55's vertex bound."
+  Price cell: "post-ban: a solver run plus a core replay (row 67's recipe); the upper bound about a day". Solver cell: "SAT after 2026-10-01".
+- **Row 20, FS-39**, the "what" cell: replace the route-C sentence ("… through `normOne_subset_valuationSubring` and
+  `colorable_unitDistance_induce_of_valuationSubring`, which both already exist …; price the two against each other. Phase B′ … Prior-art
+  gate owed") with "**In the kernel (M2):** B′ route C (row next-b; the lemma is `[Madore2015]` Prop. 3.2 at `d = 2`); B0 (`ℝ`, `ℝ_alg` real
+  closed), B1 and C (C1, C2 attained, C4) conditional on `RealAlgebraicDescent` (row next-e); NP, C3, C3⁺. The bridge is `[Madore2015]` ¶5.4's
+  (Tarski); the gate ran (J04, J17: nothing else in print; `[BendaPerles2000]` unread). **Left:** B2, `(∃T)` in the kernel — months; the
+  Benda–Perles read; Q-const (G63); `χ(ℚ²) = 2` in the kernel (row 63), on which `χ(ℚ(L)²) = 2` and J17-T8 wait." Price cell: "B2 months;
+  the rest done". Bearing cell: add "every `χ(ℝ²)` sentence now cites a kernel theorem with one named hypothesis".
+- **Row 23, FS-47**, the "what" cell: prefix "**D3 in valuation form and D5's `3/8` are in the kernel (M2; row next-c)** — Chevalley's
+  domination in place of lying-over, so no number field; the chain theorem in ring form. **Left:** the number-field reading (row 57's gap —
+  the one lemma under Theorem A's field form and ASTRA T7 beyond `K(√7)`; with FS-37), Lemma R at its corrected scope (FS-86's re-aim), D4,
+  D6." Price cell: "the number-field reading with FS-37; D4 about two days".
+- **Re-rank proposal** (J24's call with M1's and M3's changes): **FS-39 from 20 to below FS-68 (25)** — what is left is B2 (months, no bearing
+  beyond what the conditional theorem already gives) and a reading; **FS-45 keeps 19**, marked post-ban; FS-47 and FS-87 keep their ranks.
+  *Alternative weighed:* demote FS-45 too, its remainder being one certificate. *Why not:* that certificate is the first 6-open field's
+  five-digit in the kernel, cheap the day the ban lifts. *Confidence:* medium.
+
+#### 4e. The stub re-aims (banners for J24 to place under each stub's title)
+
+- **`plans/STUB-plane-bridge.md` (FS-39).** "**Re-aimed at M2's close (2026-09-25):** phases A, B′, B0, B1 and C are in the kernel — route C
+  (`LEDGER.md` row next-b), and the bridge's C1, C2 (attained) and C4 conditional on the one named hypothesis `RealAlgebraicDescent`, with `ℝ`
+  and `ℝ_alg` real closed, Lemma NP, C3 and C3⁺ (row next-e; `plans/M2-derivation.md` § I.3, I.6, I.7). The bridge is `[Madore2015]` ¶5.4's,
+  by Tarski — §3a's "the nearest thing we have … cited in prose only" undersold it — and the gate has run (`plans/M2-S1D-bridge.md` §1.3). §4's
+  phase-B price ("one to two days") was wrong both ways: B0 and B1 took under half an hour each; B2 is months. **Left:** B2, `(∃T)` for `ℝ_alg
+  ⊆ ℝ` in the kernel — a parametric one-variable elimination and a projection theorem; Artin–Lang is no cheaper (J17-T10) — a leaf, not a job;
+  reading `[BendaPerles2000]` (ILL; the one source that can still score P-J17a); Q-const (G63); `χ(ℚ²) = 2` in the kernel (row 63), on which
+  the value `χ(ℚ(L)²) = 2` and J17-T8 wait. §5's corollary uses that the supremum is attained, which holds because every value is at most 7."
+- **`plans/STUB-chain-theorem.md` (FS-45).** "**Re-aimed at M2's close (2026-09-25):** D1–D3 are in the kernel (`LEDGER.md` row next-a): the
+  chain theorem over the graph induced on the chain's point set — not a `copyUnion`-style `chainUnion` as §3 D1 proposed, since shared points
+  must be one vertex — in four forms and a ring form (FS-47's `1/δ ∈ ℤ[U_F]`); `χ(ℚ(√2,√3)²) ≥ 4`, with the 18-vertex list's refusal as a
+  second oracle by the gadget algebra (no LRAT); `G4 → χ(K(√7)²) ≥ 5`. **Left:** phase C's certificate — a fresh LRAT of the 588-core's
+  pinned refusal, fed to the kernel as its core (row 67's recipe) — a solver run, so **after the ban (2026-10-01)**, and then the unconditional
+  `K(√7)` bound; `χ(ℚ(√2,√3)²) ≤ 4` by the dyadic residue colouring; G55's vertex bound `m(n − 1) + 1`. The {1, 2}-host consumer stays FS-49's."
+- **`plans/STUB-unit-vector-ring-kernel.md` (FS-47).** "**Re-aimed at M2's close (2026-09-25):** D3, prime inversion, is in the kernel in
+  valuation form, with D5's `3/8 ∈ ℤ[U_{K(√7)}]` and the chain theorem in ring form (`LEDGER.md` row next-c): Chevalley's domination replaces
+  lying-over, so no number field is needed. **Left:** the number-field reading — the `σ`-stable valuation subrings of a number field with `p`
+  in the maximal ideal are exactly its conjugation-stable primes above `p` — which is row 57's gap and the one lemma also missing under Theorem
+  A's field form (G35, G43) and under ASTRA T7 beyond `K(√7)` (with FS-37); Lemma R at its corrected scope (the FS-86 re-aim above); D4; D6.
+  Phase B's second inhabitant (`ℚ` at `p = 3`, the 'only if') was not built."
+- **`plans/STUB-de-grey-chain-kernel.md` (FS-87).** "**Re-aimed at M2's close (2026-09-25):** target 1, the stripe lemma, is in the kernel in
+  full (`Stripe.striped_of_proper_nt0`; `LEDGER.md` row next-d), 447 lines with its controls, in 17 minutes against a 4–6 hour price; the
+  triangle condition is used once, to make one line two-periodic, and the line-to-line step needs properness alone. **Next:** target 2, dB9's
+  V1; then target 3, the checker for Parts's nine trees — price both from target 1's rate."
+- **`plans/STUB-field-level-criteria.md` (FS-37)**, a pointer line: "**From M2's close (2026-09-25):** row 57's gap is the one lemma under
+  three results — Theorem A's field-level form, prime inversion's number-field reading (in the kernel in valuation form,
+  `UnitRing.inv_natCast_mem_unitRingOver_iff`, row next-c), and ASTRA T7 beyond `K(√7)`; closing it closes all three."
+
+**New stubs:** none. The conjecture sweep (3f) minted none; Q-const goes into G63 as a question.
+
+#### 4f. `BIBLIOGRAPHY.md` drafts
+
+1. J17's proposals, as `plans/M2-S1D-bridge.md` §3.4 writes them (already queued as the index's B4 and B6): `[GoelPatilVerma2022]`,
+   `[Lang1953]`, `[BCR1998]`, `[Marker2002]`, `[Poizat2000]`, `[WangKosheleva1998]`, `[CohenMahboubi2012]`, `[Zapletal2022]`'s role, and the
+   updates to `[Madore2015]`, `[Soifer2024]`, `[BendaPerles2000]`.
+2. `[Madore2015]`, add: "Prop. 3.2 read (p. 6 of the held PDF, 2026-09-25, M2's close): route C's valuation lemma
+   (`RouteC.unitQuadrance_colorable_of_valuationSubring`) is its `d = 2` case, and its proof's first paragraph is J04-H1."
+3. New `[Snyder2000]`: N. Snyder, *An alternate proof of Mason's theorem*, Elem. Math. 55, no. 3 (2000) 93–94, Zbl 1031.11012 — the proof of
+   Mason–Stothers J17's Lemma NP reproduces; not held; the zbMATH record read (`data/m2/j23b/zbmath-snyder.json`).
+4. `[Parts2020hv]`, add: "§3's stripe lemma is kernel-checked (M2, `Proofs/HadwigerNelson/Stripe.lean`, `striped_of_proper_nt0`)."
+5. `CLOSED-QUESTIONS.md`: no row (J17 §3.4: Soifer's Open Problem 11.1's answer is Madore's and Soifer's own).
+
+#### 4g. Measured
+
+`python3 data/m2/j23b/claude_md_drafts.py` (output `data/m2/j23b/claude-md-drafts-measure.out`): **23 drafts, every anchor found exactly
+once; `CLAUDE.md` 275,608 → 278,521 bytes, net +2,913** (budget +4,000; the file's ceiling 300,000 — M1's and M3's drafts come on top, so
+J24 measures the sum). `--self-test` plants an absent anchor and a repeated one; both fire. The drafts are applied in order; D-9b (G63's body)
+is the largest, and it is a net saving against the text it replaces (the wrong tool names, the unpriced routes, the unfinished credit).
+
+**Would have searched here (stage 4):** none.
+
+**The close is complete at this stage:** every inventory row ticked (`plans/M2-close-inventory.md`, 67 rows, none declined); the kernel register
+and the derivation entries in `plans/M2-derivation.md`; §R-close stages 0–4. What J24 applies: 4a (five ledger rows), 4b (twelve § B lines,
+nine kernel-column changes, four home entries' *Kernel:* fields), 4c (23 `CLAUDE.md` drafts), 4d (`FRONTIER-STUBS.md`), 4e (five stub banners),
+4f (bibliography); and, outside every front-page file, `scripts/vacuity-baseline.txt`'s header (D-2's numbers).
