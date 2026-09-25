@@ -1,0 +1,9 @@
+control {3,6,9} (a,d,c,b) frozen: False (must be False)
+control {1,2,3} (a,b,c,d) frozen: True (must be True)
+{"D": [1, 5, 7, 10], "m": 10, "states": 10092, "phases": 187, "rigid": 186, "nonrigid": 1, "walls_total": 1368, "rr_walls": 1296, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 96, "rr_wall_end_types": [[[20, false, true, 20, false, true], 1296]]}
+{"D": [3, 5, 9, 10], "m": 10, "states": 9180, "phases": 262, "rigid": 258, "nonrigid": 4, "walls_total": 168, "rr_walls": 144, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 144, "rr_wall_end_types": [[[20, false, true, 20, false, true], 144]]}
+{"D": [3, 7, 9, 10], "m": 10, "states": 11340, "phases": 369, "rigid": 348, "nonrigid": 21, "walls_total": 48, "rr_walls": 48, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 168, "rr_wall_end_types": [[[20, false, true, 20, false, true], 48]]}
+{"D": [5, 7, 9, 10], "m": 10, "states": 29136, "phases": 163, "rigid": 162, "nonrigid": 1, "walls_total": 168, "rr_walls": 144, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 48, "rr_wall_end_types": [[[20, false, true, 20, false, true], 144]]}
+{"D": [2, 6, 11, 13, 14], "m": 14, "states": 49128, "phases": 2094, "rigid": 2094, "nonrigid": 0, "walls_total": 0, "rr_walls": 0, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 1080, "rr_wall_end_types": [], "rigid_orbits_mod_perm_and_shift": 94, "swap_graph_connected": true, "swap_to_nonrigid": false, "mirror_same_swap_component": true}
+{"D": [1, 5, 7, 10, 13, 27, 33], "m": 33, "states": 275256, "phases": 271, "rigid": 270, "nonrigid": 1, "walls_total": 168, "rr_walls": 144, "rr_walls_frozen_both": 0, "rr_walls_frozen_one": 0, "rigid_frozen": 0, "rigid_chiral": 144, "rr_wall_end_types": [[[20, false, true, 20, false, true], 144]]}
+controls PASS | plant None

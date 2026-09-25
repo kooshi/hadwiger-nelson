@@ -25,6 +25,16 @@ All in this record, §2 (stage 2) unless marked. "W" is the window-state graph o
 - **J20-KC** [hand + tools exact] — J19-KC's three clauses under stated readings: clause 1 **false** with `N` the point's least period
   (`D = {1,3,6,9}`), true with `N` a common period of all periodic points; clauses 2 and 3 true (§2.5; Q2).
 - **J20-FRZ** [hand] — J19-FRZ true, and it needs no rigidity (§2.5).
+- **J20-KEF** [hand] — with KE's statement (forwarded at B2): KE fails at every rigid–rigid wall whose one-sided components are all
+  total, frozen tails included; so KE ⟹ KE♯; likewise KE1′ ⟹ KE♯ and KT ⟹ KE♯ (§3.1).
+- **J20-TW** [hand] — every wall between two distinct phases of any `X₄(D)` has a chiral end, rigid or not (§3.2).
+- **J20-BIN** [hand] — for `{1,2} ⊆ D`, `c ↦ y`, `y(x) = [c(x+3) = c(x)]`, is exactly 24-to-1 and `S₄`-free; phases, rigidity,
+  walls and mirroring transfer (§3.2).
+- **J20-DC** [hand, under a stated reading of `D_c(M)`] — A-T1 fails iff some heteroclinic `c` has an all-rigid `X₄(D_c(M))` (§3.2).
+- **J20-NAMED** [tools exact; `tools/crunch_j20_walls.py`, `data/m3/j20/walls-run.txt`] — on T30's four sets, on `{2,6,11,13,14}` and on
+  `{1,5,7,10,13,27,33}` no rigid periodic point is Kempe-frozen; every rigid–rigid wall end has period 20 and is chiral; on
+  `{2,6,11,13,14}`: all rigid, no wall, 94 rigid phases up to colour permutation, single-strand swaps stay rigid and connect them
+  (J19-AF✗ confirmed) (§3.3).
 
 ## Stage 1 — SAVED
 
@@ -251,3 +261,91 @@ lie in one phase."* I found no such operation, and no counterexample either. The
   1 keeps finiteness and gives `gcd 1`), then checked that one named set exactly.
 - A-Kq: would have scanned `D` for sets where the two quotients disagree and a wall exists. Did instead: derived that a disagreement needs
   a phase vertex of at most two colours, which rigidity forbids, and exhibited `{1}`, `{1,2}` by hand; checked exactly.
+
+## Stage 3 — SAVED
+
+Phase B2. The owner forwarded (message of 2026-09-25, quoted from the fenced records, **not checked against them**): KE (J18 §3.5),
+KE1′ (J19 §3 item 2), KE♯ (J19 §2.5), KT (J19 §2.8), and J18's and J19's theorem tables (statements and grades only). Each is verified
+below from its statement, with my own tools. The quotations are those of the owner's message, verbatim.
+
+### 3.1 The Kempe statements
+
+- **KE** — "Let `D ⊂ ℤ_{>0}` be finite, and let `c ∈ X₄(D)` agree with a periodic point `p` of a rigid phase `C` on a left half-line and
+  with a periodic point `q` of a rigid phase `C′ ≠ C` on a right half-line. Then some two-colour Kempe component of `c` is bounded on
+  exactly one side, and swapping its two colours gives a point whose tail on the unbounded side lies in a phase that is not a single
+  cycle." **Verdict: OPEN (GAP)** — neither proved nor refuted. It implies A-T1 (J18-KE⟹, below). It is **false at every rigid–rigid
+  wall whose one-sided components are all total**: a one-sided component is infinite, so it contains a strand. If it holds every strand
+  of its tail for its pair, its swap applies the transposition to the whole tail. The new tail is `τ·p` in the phase `τ·C`, a single
+  cycle. Kempe-frozen tails have one strand per pair per side, so every one-sided component there is total. **Not refuted on any named set**:
+  no rigid periodic point is Kempe-frozen on any of the six sets of §3.3.
+- **KE1′** — "some two-colour component of `c` is bounded on exactly one side and its ends are a proper subset of that tail's strands."
+  **OPEN.** It is false at frozen rigid–rigid walls (a proper subset of one strand is empty), so KE1′ ⟹ KE♯. It does not by itself imply
+  A-T1: in an all-rigid `X`, the swap gives a tail `p^S` that is another rigid periodic point.
+- **KE♯** — "in no `X₄(D)` does a rigid–rigid wall join two Kempe-frozen periodic points". **OPEN.** Not refuted: the six named sets
+  have no frozen rigid periodic point at all.
+- **KT** — "Let `c ∈ X₄(D)` agree with a periodic point of a rigid phase `C` on a left half-line and with a periodic point of a rigid
+  phase `C′ ≠ C` on a right half-line. Then finitely many Kempe moves turn `c` into a point whose two tails lie in one labelled phase,
+  or into a point one of whose tails lies in a phase that is not a single cycle." **OPEN as a statement; its implications are TRUE:**
+  - KE ⟹ KT: KE's single move gives the second alternative.
+  - KT ⟹ A-T1: in an all-rigid `X`, the second alternative cannot occur, and the first contradicts J19-KC clause 3 (§2.5). So KT
+    restricted to all-rigid `X` is equivalent to A-T1 there.
+  - KT ⟹ KE♯: at frozen tails, J19-FRZ keeps every tail a relabelling of a rigid one. Equal labelled phases `gC = g′C′` would give a
+    wall `C → hC`, which is impossible.
+- **J19-KEF: TRUE** (now that KE is stated): the argument under KE above, plus "frozen ⟹ total".
+
+### 3.2 J18's and J19's tables
+
+| claim | verdict | note (my route) |
+|---|---|---|
+| J18-F3 | **TRUE** | = J20-E1, E2; zero entropy with every phase a cycle gives countably many points (finitely many phase visits and times) |
+| J18-K0loc | **TRUE** | = A-K0 with J20-CUT 1–2 (`≥ k − 1 = 3` colours per window; every cut crossed in every pair) |
+| J18-K0H | **TRUE** | the half-line form of FS86-dB-H with two-sided gap-freeness fails. §3.3 re-derives T30's rigid–rigid walls, and their left tails are gap-free (K0loc needs only that phase's rigidity) |
+| J18-AK2 | **TRUE** | = A-K2 ("left gap" read as a colour missing from the backward closed neighbourhood; "survives" as extends to a point) |
+| J18-EQ | **TRUE** in its first clause (= J20-EQ); **not verifiable** in its second ("route (ii)'s potential" is undefined here) |
+| J18-DC | **TRUE under my reading**: `D_c(M) = {d ≤ M : c(x) ≠ c(x+d) ∀x}` with `M ≥ max D`; heteroclinic = tails periodic in distinct phases. (⟸) `c ∈ X₄(D_c(M))`, non-periodic, all rigid, so a wall. (⟹) a wall point `c` of an all-rigid `X₄(D)` has `D ⊆ D_c(M)`, and `X₄(D_c(M)) ⊆ X₄(D)` has zero entropy, so it is all rigid (J20-E2). This is the construction route I had sketched for A-C (§3.4) |
+| J18-KE⟹ | **TRUE** | in an all-rigid `X`, KE's conclusion (a non-single-cycle phase) cannot occur |
+| J18-DPR | **PARTLY CONFIRMED** | `X₄({1,5,7,10,13,27,33})`: exactly one non-rigid labelled phase (so one up to colour permutation) and 270 rigid labelled phases. Rigid–rigid walls exist: 144 labelled reachable pairs, both ends period 20, non-frozen, chiral. "25 phases, 24 rigid" is consistent, but I did not count orbits. "**Satisfies KE**" is **not checked** (budget; needs the Kempe-component tool) |
+| J19-ENDS | **TRUE** (first and third clauses, = §2.5's strand argument). The second clause is TRUE if "meet the junction" means "lie within distance `m` of it": a finite component inside the region where `c` equals a tail is cut off only by recoloured junction neighbours. It is not established if "meet" means "contain a junction vertex" |
+| J19-TW | **TRUE, and more general**: C2's step 5 uses no rigidity, so **every wall between two distinct phases of any `X₄(D)` has a chiral end**. The twin: an achiral end `C₋^R = gC₋` gives `C₊^R → gC₋ → gC₊`, a wall `E → gẼ` with `E = C₊^R` |
+| J19-BIN | **TRUE**. With `1, 2 ∈ D`, `c(x+3) ∈ {c(x), the fourth colour}`. `y(x) = [c(x+3) = c(x)]` and `(c(0), c(1), c(2))` determine `c`, and all 24 lifts of `y` are relabellings. So the factor is exactly 24-to-1, `S₄`-free and shift-commuting. The fibre over a phase is a finite cover with unique path lifting both ways, so the fibre over a cycle is disjoint cycles, there are no walls inside a fibre, and walls correspond. The mirror is `y(−x−3)` |
+| J19-KT | **TRUE** as implications (§3.1). "A-T1 = FW ∧ A-T1ⁿᶠ": FW and A-T1ⁿᶠ are undefined here. Read as "no all-rigid wall between frozen tails" ∧ "none with a non-frozen tail", it is a tautological split, and "FW invisible to Kempe moves" is J19-FRZ |
+| J19-AF✗ | **TRUE**, independently computed (§3.3) |
+
+### 3.3 The named sets, exactly (`tools/crunch_j20_walls.py`; output `data/m3/j20/walls-run.txt`)
+
+Frozenness is decided exactly: a two-colour subgraph of an `N`-periodic colouring is connected iff its quotient mod `N` is connected
+and the closed-walk voltages have gcd 1. Controls: `{3,6,9}`'s `(a,d,c,b)`-point reads not frozen and `{1,2,3}`'s `(a,b,c,d)` reads
+frozen. The plant (drop the gcd) makes the first control read frozen, and the run exits 1. Counts are of labelled phases (not quotiented).
+
+| `D` | labelled phases | rigid | rigid–rigid reachable pairs | ends of those walls | frozen rigid points |
+|---|---|---|---|---|---|
+| `{1,5,7,10}` | 187 | 186 | 1,296 | all period 20, non-frozen, chiral | 0 |
+| `{3,5,9,10}` | 262 | 258 | 144 | same | 0 |
+| `{3,7,9,10}` | 369 | 348 | 48 | same | 0 |
+| `{5,7,9,10}` | 163 | 162 | 144 | same | 0 |
+| `{2,6,11,13,14}` | 2,094 | 2,094 (no wall) | 0 | — | 0; **94** rigid phases up to colour permutation; single-strand swaps stay rigid and connect them all |
+| `{1,5,7,10,13,27,33}` | 271 | 270 | 144 | same as T30's | 0 |
+
+Consistent with FS79 §3a's quotient counts (for example `{1,5,7,10}`: 18 phases up to colour permutation, 17 rigid).
+
+### 3.4 Reassembly of A-T1 — not reassembled; GAP stands
+
+The implications proved are KE ⟹ KT ⟹ A-T1 and KE, KE1′, KT ⟹ KE♯. None of KE, KE1′, KE♯, KT is proved. In an all-rigid `X`, KT is
+A-T1 itself, so the chain does not reduce A-T1 to something smaller. My stall (§2.4: frozen chiral walls are invisible to every
+operation I have) is J19's FW, reached independently. There is also the other half: a wall with a non-frozen tail, where J19-KC
+clause 3 blocks every Kempe route to equal tails. **A-T1: GAP; the missing step is KT for all-rigid `X₄(D)`,** equivalently A-T1.
+The named sets hold no frozen rigid point at all, so FW has no test case in hand.
+
+**The construction route, stated as a reading (not a claim).** J18-DC turns A-C into one question: is there a heteroclinic `c` whose
+Δ-completion kills every non-rigid phase? A sub-SFT has zero entropy iff it keeps only finitely many periodic points of the parent
+(rigid phases carry finitely many). So adding large distances in the residue classes a named rigid–rigid wall admits, modulo its period
+20, keeps that wall and asks only whether finitely many periodic points of the parent survive. First step (exact, seconds, allowed): the
+admissible residue set of each T30 wall. It is **not run here**: it scaffolds a counterexample search, which is the owner's call under
+the ban.
+
+### 3.5 "Would have searched here" (B2)
+
+- Would have Δ-completed T30's walls with trial distances to hunt an all-rigid set with a wall (A-C). Did instead: stated the route and
+  its first exact step (§3.4); not run.
+- Would have scanned many `D` for a frozen rigid–rigid wall to refute KE and KE♯. Did instead: checked only the six sets the
+  statements name (T30's four, J19-AF✗'s, J18-DPR's), a complete enumeration of each one's phases.
