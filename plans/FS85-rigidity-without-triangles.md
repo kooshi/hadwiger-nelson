@@ -933,3 +933,114 @@ analysis is mathematics and existing certificates are in scope this week. It los
 derivation in this week, and Part 1 asks for `8Λ` "with no solver refusal". Confidence medium: it would change if Kooshi reads K1 as "is
 step 1's first half established on `Λ`" rather than "did the competition derive it".
 
+
+## §R-close. The close (WORKFLOW step 9; the close planner, de Bruijn, 2026-09-24)
+
+*Worked from `plans/FS85-close-inventory.md`; every number read from its source record. The theorems are filed one entry each in
+`plans/FS85-derivation.md` (39 entries, duplicates merged) and `LEDGER.md` § B; the rows are 85–87.*
+
+### R-close.1 What landed, by scope and grade
+
+| result | scope | grade | derivations |
+|---|---|---|---|
+| every four-colouring of `Cay(Λ, U)` is `8Λ`-periodic, local at one prime above 2, pair-linear, striped; `F = P = 8Λ`; 9,120 (row 85, FS85-R3b) | de Grey's lattice, and every `X ⊇ Λ` with `X + Λ = X` and unit vectors ⊇ `U`; not the literal ring | hand + tools exact, **given (S″)**, Parts's trees walked as a certificate here (IA1–IA4) | two: the agents' chain (Coxeter C7–C15, round 3 R3a–R3b), verifier 2 (blind) |
+| `F ⊇ 1680Λ`, `P = F` by stripe coupling (FS85-V7) | `Λ` | same | two: de Bruijn (dB9–dB11, repaired), verifier 1 (blind) |
+| `F ⊇ 120Λ`, `P = F` by the spectrum (FS85-C10) | `Λ` | same | one (Coxeter); subsumed by R3b |
+| a triangle-free `G(ℤ, D)` with `F₄ = P₄ = 4ℤ` (FS85-dB2) | the abstract class `𝒞^tf₄`, rank 1 | hand + tools exact | two: de Bruijn, Coxeter (first routes, before contact) |
+| triangle-free uniquely `k`-colourable circulants, every `k ≥ 3` (FS85-dB3) | circulants | hand; not seen in print, folklore-grade | three routes: de Bruijn, Coxeter, the auditor (product) |
+| 𝒮 ⟺ 𝒯: a triangle-free UDG with a four-colour forced pair exists iff Soifer 55.1 has an answer (FS85-dB4) | the plane | hand | two (genericity closed by Poros (round 2)'s lemma) |
+| no-gos: second moments cannot lift `120Λ` to `8Λ` (C14); family ±4 indispensable (C11); two striped families do not couple (C6); `Cay(Λ, U)` not Hoffman-tight (dB5); G54's middle case observed (L16) | `Λ` | hand + tools exact | C14 verified exactly by Poros (round 2) |
+| the written proof of `[Polymath16wikiR2]` Prop. 7 part 1 does not close; one-line repair on `Λ` (FS85-V6) | a published proof | hand + tools exact | one (verifier 1) |
+
+**Not landed:** anything at four colours in a field outside K; any member of `𝒰^tf` with `F₄ ≠ 0` (that is Soifer 55.1); five colours
+anywhere; a derivation of (S″) itself; the literal ring; a kernel proof.
+
+### R-close.2 The week's verdict, scored once
+
+**Paid (abstract)** by P-V's registration: a four-colour result about every colouring (dB2's `F₄ = 4ℤ`) at two independent derivations,
+for a graph in `𝒞^tf₄` and not realised in `𝒰^tf` (ruling 3). Part 1 alone scores **Draw (K)** (ruling 1): algebra matched and then
+replaced a search certificate inside K. Nothing reached a field outside K, so it is not **Paid**. Read with Kooshi's *"A proven theorem
+about why its impossible is also valid. All novel knowledge is a success"* (item 31) and *"no-gos count"* (item 36): the milestone's worth
+is rows 85–87, three rows at two derivations or better. Kooshi's remark (item 37) that the ban may have been too strict, read against the
+logs:
+- **Search logs, every agent** (items 3, 24, 53, 56): the planner 4, Poros (plan) 1, de Bruijn 8, Coxeter 10, Poros (round 1) 0, Poros
+  (round 2) none recorded, verifier 1 4, verifier 2 2, the round-3 agent 3, the auditor 5 — **37 lines**. **Breaches of the letter: 2**,
+  both de Bruijn's and both logged by him (item 6, a sweep over the 31 unions of generator classes, which found nothing; item 5, a
+  Nelder–Mead probe of orbit weightings, judged a breach by Poros (round 2)); nothing rests on either. **Borderline: 4** — the planner's
+  read of the committed rank-1 scan, de Bruijn's numerical torus minimum and his 243-case derived split, Coxeter's HiGHS float probe in
+  C14 (uncertified, nothing rests on it).
+- **Where the ban was a creative constraint:** the abstract yes (both competitors would have swept small `D`; FS85-A3 shows that range
+  holds nothing, and the construction found the answer at `max D ≈ 3.7·10¹⁹`); the patchwork (C15 in place of an enumeration); the 5-part
+  (R3a in place of colouring `Λ₅/40Λ₅`, 2,560,000 points); Lemma G in place of `4¹³` colourings; the census count derived (C9) in place of
+  re-pinning. **Where it was friction:** aiming probes no result rested on (de Bruijn's numerical minimum and weighting), and a float LP
+  that could only have been read back as an identity. So the ban bit hardest, and paid, where a search would have been the *finder*; it
+  cost only where a search would have been an *aiming instrument*.
+
+### R-close.3 Predictions, scored once
+
+| id | p | outcome |
+|---|---|---|
+| P-K (the killing test fires) | 0.35 | **lost** — passed by K4 at two derivations (Poros (round 1)'s adjudication, §8) |
+| P-S1a (K1 by derivation in round 1) | 0.40 | **lost** — K1 by prior art only (Parts's trees placed in `Λ`) |
+| P-S1b (`F ⊇ 8Λ` with no certificate, two derivations, by the close) | 0.25 | **won**, given (S″): R3b and verifier 2's W; row 78's certificate unused; (S″) is Parts's computer case analysis, checked here |
+| P-W3 (round 1 proves the stripes on `Λ`) | 0.35 | **lost as registered** (round 1 had them by prior art or given the certificate); derived given (S″) by the close |
+| P-task0 | 0.55 | lost in stage A |
+| P-wiki | 0.65 | **won on its letter** (every point and difference in `Λ`/`U`); its "runs step by step" measured membership, not logic — the written proof has a gap (V6) |
+| P-K1held | 0.35 | **lost** — the held wiki pieces reach only the residue class; the plan's reasoning was a non sequitur (item 34); K1's letter came from Parts's trees |
+| P-2adic | 0.70 | **won** — dB6/dB8 and R3a use the two primes above 2 and `𝔽₄ = O/𝔭` essentially |
+| P-arith | 0.30 | **undecided** — `𝒞^tf₄` answers yes; `𝒰^tf` is Soifer 55.1 (dB4), open |
+| P-S2 | partition | **(ii)**, a yes in `𝒞^tf₄` only (0.12) |
+| P-rank1 | 0.20 | **refuted** — a rank-1 yes (dB2) |
+| P-G71′ (a four-colour rigidity theorem over a class, with no arithmetic) | 0.15 | **won in the abstract class** — dB1 is arithmetic-free over every finite forcer; on `Λ` the proof uses the dyadic primes and the 5-part, so G71's reading survives on unit-distance lattices only |
+| P-W4 | 0.05 | **lost** |
+| P-W5 (a four-colour result about every colouring, outside K) | 0.55 | **won on its letter** by dB2 (abstract, two derivations); no field outside K |
+| P-V | — | **Paid (abstract)** (registered 0.25) |
+| P-log | 0.70 | **won** (planner 4; de Bruijn 4 and Coxeter 5 by round 1) |
+| verifier 1's C0 (V1 0.90, V2 0.85, V4 0.70, V5 proved 0.45 / gap 0.50 / refuted 0.05, V 0.45) | — | all "proved" outcomes won; V5's gap and refuted lost |
+| verifier 2's C0 (W1 0.95, W2 0.90, W3 as stated 0.55, W4 0.65, W5 0.75, W 0.70) | — | W3 **lost on scope** (the conditional form won, D1); the rest won |
+| R3's (proof 0.75, not blind) | — | **won**, with the "stronger form" overstated (D1) |
+| Poros (round 1)'s hunches | — | P-K1-by-citation confirmed; P-priming-diverges-weakly confirmed, stronger; P-soifer-equivalence confirmed (⟸ closed, `m ≥ 4`); P-K1-lands-coupling-does-not split (first half killed); P-converge-on-wiki killed (they converged on Part 2 instead); P-ring-proof-uses-eta-multiplication killed; P-prod superseded |
+| Poros (round 2)'s hunches | — | R2-C1 ("yes, 0.4", second moments force `8Λ`) killed by C14; R2-dB1 (gap B mixed or 2-adic) unanswered, moot after R3b |
+| Poros (plan)'s held items | — | H1 (the entropy route to a "no") killed — dB2 is a zero-entropy triangle-free yes; H6 derived and stands (→ FS-86); H5 open (→ FS-86), and its "does not touch Soifer 55.1" is corrected by dB4: a rigid lattice over ℚ(√59) would answer 55.1; H2 and H4 not tested |
+
+### R-close.4 §G re-read, §PA sweep, §IQ and G72
+
+- **Extractions that paid:** G54 (level 3 exactly tight — the door to dB6, dB8 and R3a's slices; and its middle case observed, so G54
+  is rewritten); G70 (the wiki's residue case is the √3-clean class, 1 of 12 — which is why the wiki alone could not give K1); G36 (the
+  residue colouring as the renormalisation base, used by dB9–dB11); G21 (the rank-1 record typed as a range — and it was only a range);
+  G60/G66 (the strengths `F ⊆ F_μ ⊆ P`: ruling 3 required a yes at `F`, and dB2 is at `F`); G62 (lattices as multilayers — the families
+  `η^k`); G73 (the open formats: row 85's certificate is structure-derived, and C14 narrows the averaged one on `Λ`).
+- **Should have borne and did not:** G69's own recognition that de Grey's unit vectors are the residue tori — the 5-part's mod-5 torus
+  (non-four-colourable, the five-chromatic target at 25) is that fact, surfaced only by Poros (round 2)'s product reading; and G48/G55's
+  calibration that a triangle-free forced pair is Soifer-strength, which the plan's P-S2(i) at 0.03 priced without saying (Poros (round 1)
+  and both competitors reached it in round 1).
+- **§PA's recognitions, promoted:** (i) the colouring space of `Cay(Λ, U)` is a *frozen* `K₄`-hom-shift, and NT_k is a local forbidden
+  pattern that the tetrahedral embedding makes an eigenvector equation — the spectral-graph-theory reading behind G75; (ii) the
+  Greenwell–Lovász product shape (`[KlotzSander2017]` Thm 4.2) is both the every-`k` circulants' two-line proof and the 5-part's
+  structure (R3a answers "must a colouring of the sparse product be pulled back from the tight factor?" yes here) → FS-67's four-colour
+  form; (iii) FS-85's chain completes Gibbs's abandoned 2018 route with Parts's 2020 input — the milestone's question was posed, and
+  nearly worked, eight years ago in held threads.
+- **§IQ re-read and G72's count:** row 85 is S1's answer (classify every four-colouring), reached by derivation; row 86 is S2's answer in
+  `𝒞^tf₄` (a construction, no search) and its relocation in `𝒰^tf`; row 87's no-gos came from the same structural questions. **Third count:
+  the result came through the structural question.** With Kooshi's ruling that no-gos count (item 36), FS-73, FS-79, FS-81 and FS-85 are
+  four of four.
+
+### R-close.5 Retractions, errata, honesty record
+
+- **Retractions:** stage A — the planner 2 (G60/G66 and G9 title-reading), Poros (plan) 1; competition — de Bruijn 1 (ℚ(√59) "the same
+  local plane as K²"), Coxeter 0 in both rounds (two internal slips before any claim), Poros 1 (round 2, on its predecessor's "no averaging
+  argument gives the period"); round 3 — 0. **"The disagreement never started; verification is where contest must begin"** (Poros (round
+  2)): the two blind verifiers found every divergence the milestone had (V6, D1–D4), and none of truth.
+- **Owner errors** (items 12, 18, 49, 59, 76, 78): the stub's killing test could not fire; a control (η/3) that could not fail; competitor
+  progress leaked into `plans/`, `data/fs85/briefs/` and commit subjects; the same leak reaching Coxeter (round 2) through the harness's
+  start-up snapshot of the last five commit subjects; the V2 brief inheriting R3a's overstated scope and the `P₋` typo; "not held" copied
+  from a record into the audit brief.
+- **Agent slips:** `[KlotzSander2017]` and `[Basic2026]` held since FS-38 and unconnected (item 15); step 1's held tools uncited by FS-74's
+  leads (item 16); Poros (plan)'s P-task0 read from row 78's false clause (item 29); the plan's non-sequitur (item 34, repeated by Poros
+  (plan)); Coxeter's "answers 3.6 at four colours" (item 44); dB11 step 1 resting on the wiki's written Prop. 7 — Task 0 checked membership,
+  not logic (item 66); R3a's scope and `P₋` notation (D1, D2); Coxeter's generic-line step (D4); R3's token under-report (item 73);
+  verifier 2's `git log -15` at start-up (item 76); verifier 1's "776" and "not held" (items 71, 77); Poros (round 1)'s first G481 pass
+  matched 463 of 481 vertices (its regex missed 18 orbit rows), caught by its own later full check.
+- **Corrections made at this close:** row 78 and FS73-T6's `η^{±3} ∉ Λ` (FS85-A1); the §S.4 non sequitur (annotated there); 776 → 783 and
+  "not held" in `plans/FS85-V-verification.md`; `[Parts2020hv]`'s bibliography row (the auditor, in place); the wiki's Prop. 7 defect noted
+  on `[Polymath16wikiR2]`; arXiv:2001.08801 logged.
