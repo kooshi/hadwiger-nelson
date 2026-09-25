@@ -212,3 +212,63 @@ A docstring correction after the gate run (names of the wheel and propagation de
 | `striped_of_comp_rot` and the rotation transfers | kernel | same |
 | **`striped_of_proper_nt0` — the stripe lemma (FS85-V2-T5)** | kernel | same |
 | `proper_modTwo`, `nt0_modTwo`; `proper_threeCol`, `not_striped_threeCol` — the model, and NT₀ cannot be dropped | kernel | same |
+
+## Stage 4 — SAVED
+
+*22:27–22:36 UTC. The final gate, the module map, the proposed edits, the report.*
+
+### 4.1 The final gate (after stage 3's docstring correction)
+
+| check | result |
+|---|---|
+| build | **OK** — 178 of 178 batches, 2 modules rebuilt (`Stripe`, `Proofs`), **0 modules with warnings** (`data/m2/j16/build-stage4.log`) |
+| `sorry` in the three new modules | none |
+| `./scripts/axioms.sh` | **OK — 1077 clean, 11 axiom-free, 5 declared purchases** (J15's state was 1056 / 10 / 5; +21 clean entries, +1 axiom-free) |
+| `./scripts/vacuity.sh` | **OK** — `declarations=6986 refutations-skipped=293`; `sites=279 vacuous=0 stale=0 declared=3 witnessed=17 generic=257 unknown=2` (J15's: 6908 / 286 / 278 / generic 256) |
+| `python3 tools/check_architecture.py` | **PASS** — rows `UnitRing`, `Instances/SevenUnitRing`, `Stripe` |
+| `lake lint` | **not run** — the kernel brief's gate line names build, `sorry`, axioms and vacuity; `lake lint` may build the lint driver through Lake, which the build rule forbids. Held for the owner |
+| certificate modules touched (P-lane) | none — `UnitRing` imports `Chain`, `ResidueColouring`; `SevenUnitRing` imports `UnitRing`, `SevenConditional`; `Stripe` imports Mathlib only |
+
+### 4.2 The module map
+
+`ARCHITECTURE.md` §3 gained three rows (`UnitRing`, `Instances/SevenUnitRing`, `Stripe`); `Proofs.lean` imports the three modules;
+`scripts/Axioms.lean` gained two CLEAN sections (FS-47, J16: 13 entries; FS-87 target 1, J16: 9 entries).
+
+### 4.3 Proposed edits (for the front-page lane; this job edits none of `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`)
+
+1. **`LEDGER.md`, a new row** — "Prime inversion, valuation form: for a field with an involution σ, `1/n ∈ ℤ[U]` iff no σ-stable valuation
+   subring has `n` in its maximal ideal; in the plane over `F ⊆ ℝ`, the same for `F(i)` under conjugation (the valuation subrings of
+   Theorem A); the chain theorem in ring form (a forcer at `δ` with `1/δ ∈ ℤ[U_F]` refuses its colour count); over `K(√7)`, `1/2, 3/8 ∈
+   ℤ[U]` and no conjugation-stable valuation subring of `K(√7)(i)` has 2 in its maximal ideal. Kernel. Not proved: that such valuation
+   subrings are the conjugation-stable primes of a number field (row 57's gap, FS-37). Prior art: GPT Astra's Theorem 1.2 (hand);
+   `[Fischer1990b]` Thms 1, 3–4 (special cases); Chevalley's domination (Stacks 00IA, Mathlib). `Proofs/HadwigerNelson/UnitRing.lean`,
+   `Instances/SevenUnitRing.lean`; FS-47 (J16)." And in § B: ASTRA T2 (prime inversion) → kernel in valuation form.
+2. **`LEDGER.md`, a new row** — "The stripe lemma: every proper four-colouring of the triangular lattice with no monochromatic
+   √3-triangle is striped (two colour pairs, pair index affine `ℤ[ζ₆] → 𝔽₂`). Kernel; the wheel facts by a complete check of one wheel's
+   `4⁷` colourings. NT₀ cannot be dropped (a proper three-colouring is not striped). Prior art `[Parts2020hv]` §3 (human-verified);
+   derived at FS85-V2-T5. `Proofs/HadwigerNelson/Stripe.lean`; FS-87 target 1 (J16)." And in § B: FS85-V2-T5 → kernel.
+3. **`CLAUDE.md` G35** — "The wall is broken iff 1/2 lies in the unit-vector ring ℤ[U]" can cite the kernel's valuation form
+   (`inv_two_mem_unitRing_iff`), still with the number-field reading as row 57's gap. **G55** — the chain theorem in ring form is
+   kernel (`add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver`), so "look for 1/δ as a sum of unit vectors" is "is
+   `1/δ ∈ ℤ[U]`", decided place by place in valuation form.
+4. **`plans/FRONTIER-STUBS.md`** — FS-47 (rank 23): D3 in valuation form and D5's `3/8` done; left: row 57's translation (FS-37) and
+   Lemma R at its corrected scope. FS-87 (rank 9): target 1 done; next, dB9's V1.
+5. **`plans/M2-kernel-lane.md` §3.2** (the planner's record, not mine to edit): K3-A's price "4–6 hours, 400–500 lines" measured at
+   17 minutes and 447 lines including the controls; the S2-as-a-wheel-statement shape was the saving.
+
+### 4.4 Decisions this stage
+
+| choice | alternative weighed | why this won | confidence |
+|---|---|---|---|
+| no J16b | a J16b for the stripe remainder, as the brief's stop rule anticipated | nothing remains: the lemma is proved and gated | high |
+| `lake lint` not run, held | run it | the build rule forbids anything that may build through Lake, and the brief's gate line omits it | medium — if `lake lint` only reads existing `.olean`s, it is safe and should run |
+
+### 4.5 Would have searched here
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X4 | none | — |
+
+### 4.6 Theorems this phase proved
+
+None new at this stage (the gate re-checked stages 2 and 3).
