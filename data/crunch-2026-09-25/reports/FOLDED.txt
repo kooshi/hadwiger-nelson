@@ -6,3 +6,7 @@ J03.md
 J03a.md
 J06.md
 J17.md
+J07.md
+J08.md
+J10.md
+J14.md

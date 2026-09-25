@@ -21,3 +21,14 @@
 | 15 | prior-art debt | [BendaPerles2000] unread (the one source that can still falsify P-J17a; zbMATH review withheld); bibliography entries proposed: GoelPatilVerma2022, Lang1953, BCR1998, Marker2002, Poizat2000, WangKosheleva1998, CohenMahboubi2012, and updates to Madore/Soifer/BendaPerles/Zapletal rows | plans/M2-S1D-bridge.md §3.4 | open |
 | 16 | owner ruling | J17V declined (J17's recommendation); J17K queued after J16 (B0 + B1 + Lemma NP via Polynomial.abc), J17K's brief being written | owner, 2026-09-25 | open |
 | 17 | agent token count | J17 harness 366k (own 150k) | task notification | open |
+| 18 | result | chain theorem in four forms + spindle_of_chain, all [propext, Classical.choice, Quot.sound] | Proofs/HadwigerNelson/Chain.lean | open |
+| 19 | result | four_le_chromaticNumber_planeOver_two_three (six-unit identity by factoring, 14 lines); eighteen_not_colorable_three / _colorable_four | Instances/SqrtTwoThree.lean | open |
+| 20 | result | five_le_chromaticNumber_planeOver_seven_of_G4 + sum_eightUnits (T9's 3/8) | Instances/SevenConditional.lean | open |
+| 21 | prediction scored | P-J14a/b/c all met | plans/M2-S1K-chain.md stage 5 | open |
+| 22 | correction owed | CLAUDE.md trust count 1034→1045; gate counts decl 6875, refutations 280, sites 278, generic 256 (also vacuity-baseline header); LEDGER § B T5/T6/T9 stub→kernel | plans/M2-S1K-chain.md stage 5 | open |
+| 23 | correction owed | M2-kernel-lane §2.1: Gadget.transport is same-Fin-n; the 18-vertex pull is SqrtTwoThree.pullGadget | plans/M2-S1K-chain.md stage 1/3 | open |
+| 24 | slip | one timing run and one plant ran as bare `lake env lean` (3.7 GB), not under slot.py | plans/M2-S1K-chain.md stage 3 | open |
+| 25 | owner ruling | J14 was right to withhold `VACUITY DECLARED:` on the G4-conditional theorem (the marker means a provably empty domain; G4 is merely unproved) | owner, 2026-09-25 | open |
+| 26 | owner error | the owner's request for J17K said "one DECLARED hypothesis"; J17 implemented it correctly as a named hypothesis (`RealAlgebraicDescent`) without the marker, and corrected its own record §3.2 | owner, 2026-09-25 | open |
+| 27 | owner check | the owner read `not_colorable_chain`'s statement (Proofs/HadwigerNelson/Chain.lean:101) against G55's chain theorem: it matches; its axioms are the standard three | owner, 2026-09-25 | open |
+| 28 | agent token counts | J14 harness 339k; J17 harness 414k after writing J17K's brief | task notifications | open |
