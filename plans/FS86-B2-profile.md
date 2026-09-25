@@ -11,6 +11,7 @@ labelled float. The finite-witness-free week applies: no colouring search of any
 - §2–§6 done: embedding and `m* = 5`; `Q_m` at every level 1–14 plus a slack certificate at 24; the pull-back derivation for levels
   ≤ 14; the lattice L3 analogue. Next: B3 (§7). Resume: every script in `data/fs86/b2/` reruns in seconds (`qhigh.py 13 14` and `lattice.py`
   under `scripts/slot.py --mem 14`); nothing long-running.
+- §7 B3 done (`data/fs86/b3/`). §8 scores the predictions. The stage is complete.
 
 ## C0. My predictions, written before any computation
 
@@ -159,6 +160,58 @@ does not reach them. P-undec **met** at levels ≥ 24.
 [exact]. So the lattice's unit vectors already generate the full tower's `M` at 2, and the depth 4 of row 67 is seen by `Λ₅₁₀`'s 108 unit
 vectors `≡ 1 (mod 𝔓)`. My P-B2-L3 (weaker) is **not met**.
 
+## §7. B3: exact certificates for §S.1 (R4) at `B = 59` on `Λ₅₁₀`
+
+**Instrument** (`data/fs86/b3/b3.py` → `b3.out`, PARI scripts and outputs in `gp/`). For each prime `𝔭` of ℚ(√59) above `p` where `Λ₅₁₀` is
+integral, the level-one image target `G_𝔭 = Cay(k², V)` (`V` = image of `U`), its circle membership checked point by point, and **Hoffman's
+refusal decided exactly**: an eigenvalue is `λ_ξ = Σ_r n_r(ξ) cos 2πr/p` in the real cyclotomic field; the Galois group moves `ξ ↦ jξ`, so one
+`ξ` per projective class covers every character; PARI computes `f = charpoly(2(3λ + d))` over `ℚ(ζ_p)` and counts its real roots in `(−∞, 0]`
+by Sturm (`polsturm`). Zero for every class ⟺ `λ_min > −d/3` ⟺ Hoffman's ratio `< 1/4` ⟺ `α < n/4`, so no four-colouring.
+**Controls:** the full planes `Γ₃`, `Γ₇` (three- and four-colourable, so Hoffman *cannot* refuse four colours on them) and `Γ₁₁` all read "does
+not refuse", as they must (asserted in the script). **Two-sided plant at the thinnest margin** (`b3_plant.py`, `p = 31`, where `λ_min + d/3 =
+1.57·10⁻⁴`): shifting the threshold by `1/1000` (above the margin in `3λ + d`) flips the verdict; by `1/10000` (below it) does not.
+
+| p | place | image / circle | full | Hoffman ratio (float) | Hoffman, exact | four colours refused by |
+|---|---|---|---|---|---|---|
+| 7 | inert (`q = 49`) | 48 / 48 | yes | 0.195344 | **refuses** | **Hoffman** (theorem) |
+| 11 | split ×2 | 12 / 12 | yes | 0.285534 | does not refuse (6 classes ≤ −d/3) | **χ(Γ₁₁) = 5**, kernel (`chromaticNumber_finitePlane11`) — the image is the whole circle, so the target *is* `Γ₁₁` |
+| 13 | inert (`q = 169`) | 144 / 168 | no | 0.168393 | **refuses** | Hoffman |
+| 19 | inert (`q = 361`) | 180 / 360 | no | 0.155185 | **refuses** | Hoffman |
+| 23 | split ×2 | 24 / 24 | yes | 0.249077 (`λ_min + d/3 = 0.039`) | **refuses** | Hoffman (agrees with FS81-T25's "Γ₂₃ at four, by 0.039") |
+| 29 | split ×2 | 28 / 28 | yes | 0.253339 | **does not refuse** (14 classes ≤ −d/3) | **not by theorem**: `χ(UD(𝔽₂₉, 2)) ≥ 5` is a measurement only (`data/fs62/dim2.jsonl`: "k<5 refuted" by a solver in 90 s, no certificate on disk; `data/fs62/README.md` marks 29 "not claimed", prior art unchecked) |
+| 31 | split ×2 | 32 / 32 | yes | 0.249997 (`λ_min + d/3 = 1.57·10⁻⁴`) | **refuses** | Hoffman (the thin margin, resolved exactly; plant above) |
+| 41 | split ×2 | 40 / 40 | yes | 0.220600 | **refuses** | Hoffman |
+| 43 | split ×2 | 44 / 44 | yes | 0.213755 | **refuses** | Hoffman |
+| 47 | split ×2 | 48 / 48 | yes | 0.211130 | **refuses** | Hoffman |
+| 53 | split ×2 | 52 / 52 | yes | 0.215784 | **refuses** | Hoffman |
+| 59 | ramified | 60 / 60 | yes | 0.199120 | **refuses** | Hoffman |
+
+**FS86-B3-T1.** At every prime of ℚ(√59) of norm ≤ 59 where `Λ₅₁₀` is integral, and at 13 and 19, the level-one image target has no
+four-colouring by theorem — Hoffman's ratio `< 1/4`, exact, or `χ(Γ₁₁) = 5` at 11 — **except at the two primes above 29**, where Hoffman does not
+refuse and the four-colour refusal of `Γ₂₉` is a solver measurement without a certificate. [exact; `b3.py`]
+
+**Consequence for the plan's definition.** §S.1's (R4) asks for "no four-colouring **by theorem**" at every integral prime of norm ≤ `B`.
+**`Λ₅₁₀` meets it at `B = 59` everywhere but at 29**; as written, `Λ₅₁₀` is rich only with `B < 29`, or if (R4) accepts a measured χ. The float
+numbers the planner used for aiming all agree with the exact verdicts (their "REFUSES-4" and "open" labels are right at every prime, including
+23 and 31). **What would certify 29:** an LRAT refusal of `UD(𝔽₂₉, 2)` at four colours checked by an existing checker (a solver run: out this
+week); Hoffman and ϑ cannot (the graph is arc-transitive, so `ϑ` equals the ratio bound, `0.2533·n > n/4`); the one derivation-shaped route left is
+a Delsarte / Schrijver-`ϑ′` LP over the 31-class rotation scheme of `𝔽₂₉²`, whose value is unknown and which I did not price. Whether it matters:
+(R4) serves the lattice-level question `P(Λ₅₁₀)`; the field-level frame (plan §0.3) does not use it.
+
+## §8. The predictions, scored
+
+| id | prediction | my p | outcome |
+|---|---|---|---|
+| P-sat | `m* ≥ 5` | 0.65 (plan 0.55) | **met**: `m* = 5` exactly |
+| P-slack | some `Q_m` slack by the injective level (11) | 0.85 (plan 0.80) | **met**: slack at 6–10 |
+| P-undec | at least one slack level stays "slack, undecided" | 0.75 (plan 0.70) | **split**: levels 6–10 **decided** (§4, pulled back from `P₄` through the tight `Q₁₄`); levels ≥ 24 **undecided** (§5). Met, but not where I expected it: I expected the first slack level to stay open |
+| P-B2-inj | injective by `m ≤ 12` | 0.6 | **met** (11) |
+| P-B2-L3 | the lattice L3 analogue weaker than the full tower's | 0.5 | **not met**: identical (§6) |
+| P-B3 | 29 certified by theorem | 0.5 | **not met**: measured only (§7) |
+
+What I did not predict at all: that the quotients turn tight again above the slack levels (11–14) and slack again later (≤ 24). The
+non-monotone profile — tight, slack, tight, slack — is what decided levels 6–10.
+
 ## "Would have searched here" log
 
 (one line per move I would have made by search, and what I did instead)
@@ -171,6 +224,8 @@ vectors `≡ 1 (mod 𝔓)`. My P-B2-L3 (weaker) is **not met**.
    per level — a spectrum, not a colouring, and its shape was fixed by the gradient.
 3. **Would have asked a solver for a four-colouring of `Q₂₄` that is not pulled back from `P₄`.** Instead left level 24 and above as
    "slack, undecided" (§5).
+4. **Would have asked a SAT solver for an LRAT refusal of `UD(𝔽₂₉, 2)` at four colours**, to certify (R4) at 29. Instead recorded 29 as
+   measured only, and named the routes that could certify it (§7).
 
 ## Theorems this phase proved
 
@@ -182,5 +237,8 @@ vectors `≡ 1 (mod 𝔓)`. My P-B2-L3 (weaker) is **not met**.
   for every `m ≥ 24`; the first slack level above 14 lies in [15, 24]. [exact gradients; slack certificate float with margin 2.76; §5,
   `descent.py`]
 - **FS86-B2-T3.** `M_Λ ⊗ ℤ₂ = M` (FS38-L3's): elementary divisors 1, 2, 4, 4; `𝔓⁴ ⊆`, `𝔓³ ⊄`. [exact, two code paths; §6, `l3.py`]
+- **FS86-B3-T1.** Exact Hoffman refusals of four colours at the image targets of `Λ₅₁₀` at 7, 13, 19, 23, 31, 41, 43, 47, 53 and the ramified
+  59; `Γ₁₁` refuses by its kernel χ = 5; at 29 no theorem refuses (Hoffman exactly does not; χ ≥ 5 only measured). [exact, PARI Sturm counts;
+  §7, `data/fs86/b3/`]
 - The spectral table of §3 (levels 1–14): tight at 1–5 and 11–14, slack at 6–10. [exact minima; tightness at 11–14 float with margin; two code
   paths]
