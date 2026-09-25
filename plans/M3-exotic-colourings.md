@@ -651,3 +651,25 @@ No quotation in the brief is wrong. One precision (row 7) is logged as an owner 
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | — | none at this stage | — |
+
+### Stage 2 — SAVED (the derivation file)
+
+*Theorems this phase proved (J23c):* none — the close files the jobs' theorems; it proves nothing of its own.
+
+- **`plans/M3-derivation.md` written:** 46 entries in ten sections — Q1's one-dimensional facts and equivalences (§1: F2, F3, T35W, EQ,
+  DC), its local lemmas (§2: K0loc, K0H, AK1, AK2, AKq, CUT), its Kempe structure (§3: KE⟹, KC, ENDS, FRZ, KEF, KT, TW, BIN), its tools
+  entries (§4: J18-CTL, J18-DPR, J19-CTL, J19-AF✗, J20-NAMED); Q2's corner, count and factor table (§5: D0, D1, D1fac, D1-3, D1-2, D1-43p,
+  J22-T10, J22-T1, J22-T2), its products and obstructions (§6: SL, D3, MX, UNIF, TH, J22-T8, RED, D2p, NG1, NG2, NG3, D4); the FS-66
+  re-run (§7, pending at this save); the planner's statements mapped (§8); what stays open (§9); the kernel decisions (§10).
+- **Every "Theorems this phase proved" line of every M3 record has an entry or an explicit merge:** J18's 11 lines (F3, K0loc, K0H, AK1,
+  AK2, AKq, EQ, DC, CTL, DPR, KE⟹), J19's 9 (KC, ENDS, FRZ, KEF, TW, BIN, CTL, AF✗, KT), J20's 18 (W, E1, E2, T35W, EQ, RET, K0, K1, K2,
+  Q, CUT, KC, FRZ, KEF, TW, BIN, DC, NAMED — merged into J18's and J19's entries except T35W, CUT and NAMED, which are their own), J21's
+  16 (D0, D1, D1fac, D1-3, D1-2, D1-43p, SL, D3, MX, TH, RED, D2p, NG1, D4, NG2, and NG3 from §3.6's body), J22's 13 (T1–T13: T3 → D1-2,
+  T4 → NG3, T5 → D3, T6 → MX, T7 and T9 → D2p, T11 → SL, T12 → NG1, T13 → NG2; T1, T2, T8, T10 their own). J21-UNIF is filed from J21 §2.6
+  (b) and §3.3 and J22 §2.2, where it is stated but not in a theorems table. The plan's J06 statements are §8's map (no theorems table:
+  inventory row 28).
+- **Where the records differ, both are filed** with their addresses: J19-KC's `N` (J20's reading), J21's five headline scopes (J22 §4.2),
+  59's grade (float → exact), J18-DPR's KE clause (unverified by J20), J19-ENDS clause 2 (the reading that makes it true is J19's own).
+- **Independence recorded per entry.** Two derivations (or two tools) for 38 of the 46; one mind for J20-CUT, J22-T10, J22-T8 (a classical
+  bound re-derived) and J18-EQ's second clause; single tools runs for J18-CTL, J18-DPR (each partly confirmed by J20), J19-CTL and
+  J20-NAMED; M3-CHK23 pending.
