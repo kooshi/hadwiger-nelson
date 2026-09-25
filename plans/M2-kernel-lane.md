@@ -504,3 +504,21 @@ so §G.4 item 8 holds — the milestone's value here is the record, not novelty.
    `scripts/Axioms.lean`'s CLEAN section.
 4. *Docstrings read aloud:* each headline theorem says what the kernel proves and what it does not (no upper bound for ℚ(√2,√3); `G4` is a
    measurement; the number-field reading of `inv_natCast_mem_unitRing_iff` is row 57's gap). No `@[simp]` on any new lemma.
+
+### 4.5 Theorems this phase proved
+
+*Kernel-elaborated in scratch modules under `data/m2/j04/` with `lake env lean` (not yet in the library or the gated build; the kernel jobs move
+them into `Proofs/` and the build checks them again).*
+
+| theorem | grade | address |
+|---|---|---|
+| `junction_succ`, `junction_last`, `chainDrawing_b`: consecutive chain copies share their junction; the last junction is `δ·Σu` | kernel (scratch) | `data/m2/j04/K1Chain.lean` |
+| `copyHom`: each placed copy of a unit-distance drawing is a graph hom into the unit-distance graph induced on the chain's points | kernel (scratch) | `data/m2/j04/K1Chain.lean` |
+| `planeOverIso`: the plane over `L ⊆ ℝ` is isomorphic to `unitQuadrance L` | kernel (scratch) | `data/m2/j04/K2Transcendental.lean` |
+| `unitQuadrance_colorable_of_subring`: colourability pulls back through any subring holding every unit vector's coordinates, along any ring hom out of it | kernel (scratch) | `data/m2/j04/K2Transcendental.lean` |
+| `normOne_subset_iff_stable`: a valuation subring holds every norm-one element iff it is σ-stable (the ⟹ direction new, three lines) | kernel (scratch) | `data/m2/j04/K3PrimeInversion.lean` |
+| `inv_mem_iff_forall_valuationSubring`: `x ∈ R` nonzero is invertible in `R` iff `x⁻¹` lies in every valuation subring above `R` (Mathlib's Chevalley domination) | kernel (scratch) | `data/m2/j04/K3PrimeInversion.lean` |
+| `wheel_all`: under properness and NT₀ at its centre, every wheel of the triangular lattice is type O or type P (all `4⁷` colourings; a plant goes red) | kernel (scratch; a complete enumeration of a derivation-fixed set) | `data/m2/j04/K3Stripe.lean` |
+| a unit vector `a² + b² = 1` lies in every valuation subring `B` with `1 + x² ∉ B.nonunits` for all `x ∈ B` (route C's integrality, general form) | hand (§4.4 obligation item 3; J15 ports it) | this plan §4.4 |
+
+**Prior-art finding (not a theorem):** `χ(ℝ²) = sup_F χ(F²)` is `[Madore2015]` ¶5.4 with ¶1.3 (Tarski), 2015 — the FS-39 stub undersold it (§2.3).
