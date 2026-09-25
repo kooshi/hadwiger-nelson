@@ -1,0 +1,5 @@
+p=23 |T|=24 B=6  check (S): PASS; distinct eigenvalue classes: 22
+  lambda_min ~ -7.9606871865669720445628829547992552664   lambda_max ~ 7.8980046318958802508582343804756298218   lambda* ~ 0.33169529944029050185678678978330230277
+  polsturm: distinct-root counts summed over classes: <= -B: 33;  >= +B: 44
+  DECISION p=23: lambda* >= 1/4 (NOT 5-thick at level one)
+0

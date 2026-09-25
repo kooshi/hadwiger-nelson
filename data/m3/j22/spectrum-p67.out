@@ -1,0 +1,11 @@
+p=67  kind=stable (p = 3 mod 4)  |T|=68 (true circle size 68)  threshold B=|T|/4=17.0
+check (S) structure: PASS (lambda constant on every circle-group orbit of characters)
+check (T) trace: PASS (-68);  check (P) Parseval: PASS (300628)
+check (I) integrality: PASS (68 Galois orbits; degrees [33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33, 33])
+check (W) Weil: PASS (no root beyond +-17 >= 2 sqrt p = 16.3707)
+lambda_min in [-15.0567033497862, -15.0567033497861]   (exact rational isolating interval)
+lambda_max in [15.0943776186727, 15.0943776186728]   (largest nontrivial eigenvalue)
+lambda* = max|lambda|/|T| in [0.2219761414511, 0.2219761414511];  1/4 - lambda* in [2.802e-02, 2.802e-02]
+Hoffman ratio -lambda_min/(|T| - lambda_min) in [0.181282217359, 0.181282217359]  (1/5 = 0.2)
+Sturm: roots <= -B: 0;  roots >= +B: 0
+DECISION p=67: lambda* < 1/4 (5-thick at level one)

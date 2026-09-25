@@ -1,0 +1,11 @@
+p=29  kind=split standard piece (p = 1 mod 4)  |T|=28 (true circle size 28)  threshold B=|T|/4=7.0
+check (S) structure: PASS (lambda constant on every circle-group orbit of characters)
+check (T) trace: PASS (-28);  check (P) Parseval: PASS (22764)
+check (I) integrality: PASS (30 Galois orbits; degrees [14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 1, 14, 14, 14, 14, 1, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14])
+check (W) Weil: PASS (no root beyond +-11 >= 2 sqrt p = 10.7703)
+lambda_min in [-9.5002808612810, -9.5002808612809]   (exact rational isolating interval)
+lambda_max in [9.0682422524182, 9.0682422524182]   (largest nontrivial eigenvalue)
+lambda* = max|lambda|/|T| in [0.3392957450457, 0.3392957450457];  1/4 - lambda* in [-8.930e-02, -8.930e-02]
+Hoffman ratio -lambda_min/(|T| - lambda_min) in [0.253338925552, 0.253338925552]  (1/5 = 0.2)
+Sturm: roots <= -B: 42;  roots >= +B: 42
+DECISION p=29: lambda* >= 1/4 (NOT 5-thick at level one)

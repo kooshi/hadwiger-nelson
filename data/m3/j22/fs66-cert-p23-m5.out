@@ -1,0 +1,9 @@
+certificate sha256 28cf189c83d20abfe1bbd678b1332ffe23dd0a95701e712e526431fe97c69c6f  (data/fs66/b1/cert-p23.json)
+checker     sha256 735b926798ffac14998f0e3eb77c726001200f4c91230463b7c7ae55f1f5337e  (this file)
+format fs66-b1-cert-v2, p = 23 (prime, = 3 mod 4), n = p^2 = 529 points
+scale = 100000000000000000000000000000000, U_num = 9798463752088652446789757724702574
+note: "spec" and "producer" are provenance, not checked
+step 1/7: parsed 45 weight vectors of 530 integers, 46 blocks, 138706 rows; every number a JSON integer
+step 2/7: signs: scale > 0; all 138706 row multipliers >= 0
+step 3/7: rebuilt from p alone: 529 points, unit circle S of 24 points, 48 linear maps, each a bijection with h(x+s) - h(x) in S on all 609408 (point, unit vector) pairs
+step 4/7: rows: every point index in [0, 529); largest box-product degree 4 (<= 4)

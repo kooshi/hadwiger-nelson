@@ -1,0 +1,11 @@
+p=61  kind=split standard piece (p = 1 mod 4)  |T|=60 (true circle size 60)  threshold B=|T|/4=15.0
+check (S) structure: PASS (lambda constant on every circle-group orbit of characters)
+check (T) trace: PASS (-60);  check (P) Parseval: PASS (219660)
+check (I) integrality: PASS (62 Galois orbits; degrees [30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 1, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 1, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30])
+check (W) Weil: PASS (no root beyond +-16 >= 2 sqrt p = 15.6205)
+lambda_min in [-15.3417528101751, -15.3417528101751]   (exact rational isolating interval)
+lambda_max in [14.7519407026589, 14.7519407026590]   (largest nontrivial eigenvalue)
+lambda* = max|lambda|/|T| in [0.2556958801696, 0.2556958801696];  1/4 - lambda* in [-5.696e-03, -5.696e-03]
+Hoffman ratio -lambda_min/(|T| - lambda_min) in [0.203628827814, 0.203628827814]  (1/5 = 0.2)
+Sturm: roots <= -B: 30;  roots >= +B: 0
+DECISION p=61: lambda* >= 1/4 (NOT 5-thick at level one)

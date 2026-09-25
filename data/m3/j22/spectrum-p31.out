@@ -1,0 +1,11 @@
+p=31  kind=stable (p = 3 mod 4)  |T|=32 (true circle size 32)  threshold B=|T|/4=8.0
+check (S) structure: PASS (lambda constant on every circle-group orbit of characters)
+check (T) trace: PASS (-32);  check (P) Parseval: PASS (29728)
+check (I) integrality: PASS (32 Galois orbits; degrees [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15])
+check (W) Weil: PASS (no root beyond +-12 >= 2 sqrt p = 11.1355)
+lambda_min in [-10.6665104938001, -10.6665104938001]   (exact rational isolating interval)
+lambda_max in [9.3717657771064, 9.3717657771065]   (largest nontrivial eigenvalue)
+lambda* = max|lambda|/|T| in [0.3333284529313, 0.3333284529313];  1/4 - lambda* in [-8.333e-02, -8.333e-02]
+Hoffman ratio -lambda_min/(|T| - lambda_min) in [0.249997254764, 0.249997254764]  (1/5 = 0.2)
+Sturm: roots <= -B: 32;  roots >= +B: 32
+DECISION p=31: lambda* >= 1/4 (NOT 5-thick at level one)

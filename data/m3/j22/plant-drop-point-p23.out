@@ -1,0 +1,2 @@
+p=23  kind=stable (p = 3 mod 4)  |T|=23 (true circle size 24)  threshold B=|T|/4=5.75
+CHECK (S) FAILED: lambda not constant on the circle-group orbit of (0, 1) (13 values)

@@ -1,0 +1,3 @@
+p=23  kind=stable (p = 3 mod 4)  |T|=24 (true circle size 24)  threshold B=|T|/4=6.0
+check (S) structure: PASS (lambda constant on every circle-group orbit of characters)
+CHECK (T) FAILED: sum of nontrivial eigenvalues = 0, expected -24
