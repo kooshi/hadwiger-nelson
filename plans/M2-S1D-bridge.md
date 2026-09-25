@@ -339,7 +339,9 @@ Mathlib-dependent") is wrong by an order of magnitude**; the M2 plan's "weeks" (
 1. **B0 — (RC)**, `IsRealClosed ℝ` and `IsRealClosed (algebraicClosure ℚ ℝ)`: ~1 day, upstreamable, needed by every route.
 2. **B1 — the bridge as a conditional theorem**: `chromaticNumber_plane_eq_iSup_numberField_of_descent (h : RealAlgebraicDescent) : …` with
    `RealAlgebraicDescent` the statement of C1 (or of (∃T) for `R_alg ⊆ ℝ`) as a `Prop`, the hypothesis `VACUITY DECLARED` with the reason
-   "true by Tarski; Mathlib lacks Tarski", plus C4 (FS62-T2) on top; ~1 day. It gives every "`χ(ℝ²) = …`" sentence a kernel statement with
+   "true by Tarski; Mathlib lacks Tarski", plus C4 (FS62-T2) on top; ~1 day. *Corrected when writing J17K's brief: **not** `VACUITY DECLARED` — that marker asserts a provably empty domain (`CLAUDE.md` § The gate;
+   J14's deviation in `plans/M2-S1K-chain.md`), and this hypothesis is true; the docstring says "Conditional, and not vacuous", as
+   `five_le_chromaticNumber_planeOver_seven_of_G4` does. The brief is `data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md`.* It gives every "`χ(ℝ²) = …`" sentence a kernel statement with
    exactly one named hypothesis, which is FS-39 stub D3's intent without a `sorry`.
 3. **B2 — (∃T) in the kernel**: months; defer, do not stub a date.
 
