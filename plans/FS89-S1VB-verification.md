@@ -98,3 +98,91 @@ a real additive lift, so `θ ∈ T_N + A`. ∎
 **What this does to the seven claims.** At `S = {5, 13}` the whole list reduces to one statement, `RS₄({5, 13})` (and `RS₅({5, 13})` at
 five colours): D1-T1 at `{5, 13}` is equivalent to it (VB2), D1-C2 follows from it (VB3), and D2-T1 follows from it (VB4). So
 **everything rests on D1-T2 (resp. D5-T1)**. My route to that statement follows.
+
+### B1.2 My route to `RS_k(S)`, `|S| ≥ 2`, and where it stalls
+
+Let `M ⊆ Θ_k(R_S)` be minimal. By VB2 it is enough to show `M ⊆ T + A`. Two cases, exhaustive: **(A)** some neighbourhood `N` of 0 has
+`x, y ∈ M, y − x ∈ N ⟹ y − x ∈ A`; **(B)** there are `x_n, y_n ∈ M` with `y_n − x_n → 0` and `y_n − x_n ∉ A`.
+
+**Theorem VB5 (case A).** In case (A), `M ⊆ T + A`. [hand] *Proof.* Cover `M` by finitely many balls about `z_1, …, z_m ∈ M` of
+radius small against `N`: then `M ⊆ ⋃_j (z_j + A)`. `U_S` maps cosets of `A` to cosets of `A` (`u·λ_e = λ_{ūe}`), so it permutes the
+finitely many cosets meeting `M`, and a finite-index `U′` fixes each: `z∘u − z ∈ A` for `u ∈ U′`. Take `u ∈ U′` of infinite order. In
+data, `z∘u − z` has `v`-components `(u − 1)b_v`, so `z∘u − z ∈ A` means `(u − 1)b_v = r` in every `K_v` for one `r ∈ R_S`; so every
+`b_v` is the image of the one rational `q = r/(u − 1)`, and `z = (e; q, …, q) ∈ T + A` (split `q` into a part in `R_S` and a part
+integral at `S`). So `M ⊆ ⋃_j (z_j + A) ⊆ T + A`. ∎
+
+**Case (B).** Lemma E (with `Y = M`, `U₀ = U_S`) gives `x₀ ∈ M`, `v | p`, `c₀ ∈ K_v^×` with `x₀ + c̄₀ ∈ M`. Let `V_v := {u ∈ U_S :
+|u|_v = 1} = ⟨i, w_{p′} : p′ ∈ S ∖ {p}⟩`, which rotates the `v`-coordinate by units and is the only part of `U_S` that does not
+rescale it. Put `F(x) := {c ∈ K_v : x + c̄ ∈ M}`: its graph is closed, `F(ux) = u_v F(x)`, and the set of `x` whose `F(x)` meets a
+fixed sphere of `K_v` is closed and `V_v`-invariant. So `x₀` may be replaced by a point `x₁` of a `V_v`-minimal set `M′ ⊆ M`, with
+`c₁ ∈ F(x₁)`, `|c₁| = |c₀|`. Let `Ŵ` be the closure of `V_v` in `O_v^×`, `Z` the orbit closure of `(x₁, 1)` in `M′ × Ŵ` under the
+diagonal action, and `H′ := {s ∈ Ŵ : Zs = Z}`. `Z` is minimal (`x₁` is uniformly recurrent and `Ŵ`-rotation is distal), and its fibre
+over `x₁` is exactly `H′`.
+
+**Theorem VB6 (case B with an infinite fibre group is impossible).** If `H′` is infinite, contradiction. [hand] *Proof.* For `t ∈ H′`,
+a net `g_α ∈ V_v` has `g_α x₁ → x₁` and `g_{α,v} → t`, so `g_α(x₁ + c̄₁) → x₁ + (tc₁)‾ ∈ M`: `F(x₁) ⊇ c₁H′`. An infinite closed
+subgroup of `ℤ_p^×` is open, so `F(x₁)` contains a ball about `c₁`: Lemma SW. ∎
+
+**The stall (the step I cannot make): case (B) with a finite fibre group.** If `H′` is finite, `x ↦ Z_x` is a continuous equivariant
+map of `M′` onto the infinite profinite rotation `(Ŵ/H′, V_v)`: the `V_v`-minimal set `M′` has a `p`-adic odometer as an
+equicontinuous factor (every `p`-power root of unity an eigenvalue of `w_{p′}`, with a continuous eigenfunction). **Nothing in my
+route excludes this.** Three attempts, each failing:
+- *More expansion.* `w_p` commutes with `V_v`, so `w_p^j M′` is another `V_v`-minimal set with the same factor and rescaled pairs:
+  no new information.
+- *Restriction.* `x ↦ x|_{R_{S∖p}}` maps `M′` onto a `V_v`-minimal subset of `Θ_k(R_{S∖p})`, at `S = {5, 13}` a rank-one system at 13.
+  Rank one carries switching freedom (S0B-T5 at 5, and the lens is prime-independent, plan U3), and a switching schedule with a
+  `5`-adic Toeplitz structure would be such a factor there. I know no reason it cannot exist in rank one.
+- *The fill.* In rank two a point is its two axes plus the forced CRT fill (V5), and the band on the fill is the only constraint
+  across directions. That is where a proof would have to use `p′`'s rotation of the `v`-digits against `p`'s expansion; I have no
+  argument that the band on the fill forbids an odometer factor.
+
+**So my route proves:** `RS_k(S)` (and `MS_k(S)`) for `|S| ≥ 2` **unless** some `V_v`-minimal subset of `Θ_k(R_S)` carries a pure
+`v`-adic pair (`x, x + c̄`, `c ≠ 0`) and a `p`-adic odometer factor with finite fibre group. At three colours or with a pure
+archimedean obstacle nothing changes; the stall is band-independent.
+
+### B1.3 The verdicts (each claim quoted verbatim from the brief)
+
+**Claim 1, D1-T1 (`MS₄(S)`).** "For every finite set `S` of primes `≡ 1 (mod 4)` with `|S| ≥ 2`, every `U_S`-minimal closed subset of
+`Θ₄(R_S)` is either one finite orbit of torsion characters, or a finite union of leaf circles `τ + {λ_d : |d| = r}` with `0 < r ≤ r_τ`.
+In both cases it is contained in `T + A`. **Inhabitant** `S = {5, 13}`: `{θ₂}`, and the parity circle of radius ¼."
+- **Verdict: GAP** at case (B) with a finite fibre group (B1.2). Everything else is derived: the two kinds are exactly the minimal
+  subsets of `Θ₄ ∩ (T + A)` (Lemma L); case (A) lands in `T + A` (VB5); an infinite fibre group is impossible (VB6). And for each
+  `S` with `|S| ≥ 2` the claim is **equivalent** to `RS₄(S)` (VB2).
+- Inhabitant checked: `θ₂∘u = θ₂` (every `u ≡ 1` mod `1 + i`), and `θ₂ + λ_d ∈ Θ₄` iff `|d| ≤ 1/4`; the circle `|d| = 1/4` is
+  minimal (Lemma L). TRUE.
+- **Hardest step:** excluding a minimal set with a `p`-adic odometer factor for the rotating prime.
+
+**Claim 2, D1-T2 (`RS₄({5, 13})`).** "`Θ₄(ℤ[i][1/65]) ⊆ T + A`." with "**Inhabitant:** `Θ₄(R₆₅) ∋ θ₂` (margin ¼)."
+- **Verdict: GAP**, at the same step with `S = {5, 13}` (equivalent to claim 1 there, VB2). What is derived: every point of
+  `Θ₄(R₆₅)` whose orbit closure meets `T + A` is in `T + A` (VB1); every minimal set in case (A) or with an infinite fibre group is in
+  `T + A`. Inhabitant TRUE.
+- **Hardest step:** the same.
+
+**Claim 3, D1-C2.** "The torsion characters in `Θ₄(R₆₅)` are finitely many. So `Θ₄(R₆₅)` is a finite union of leaf discs `τ + D(r_τ)`."
+- **Verdict: TRUE conditional on D1-T2** (VB3, a non-effective expansion argument; the "So" also uses D1-T2). **Standalone: GAP.** I
+  have no route to the finiteness that avoids D1-T2. A direct one would be a Furstenberg-type density statement in finite quotients
+  (the multiplicative group `⟨i, w₅, w₁₃⟩` modulo large `N` meeting every arc of length 1/2 after dilation), which is of
+  Bourgain–Lindenstrauss–Michel–Venkatesh type; I have nothing in hand for `ℤ[i]`-elements.
+- **Hardest step:** none beyond D1-T2; VB3 is short.
+
+**Claim 4, D2-T1 (RQ₄).** "`Θ₄(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`."
+- **The implication "D1-T2 and D1-C2, hence D2-T1": TRUE** (VB4, S0A's G1 with base `R₆₅`). D1-C2 is not needed as a separate input,
+  since D1-T2 implies it (VB3); and D1-T2 gives more: `RS₄(S′)` for every `S′ ⊇ {5, 13}`.
+- **D2-T1 itself: GAP**, resting on D1-T2.
+
+**Claim 5, D5-T1 (`RS₅({5, 13})`).** "`Θ₅(ℤ[i][1/65]) ⊆ T + A`." (band `[1/5, 4/5]`)
+- **Verdict: GAP**, same step: B1.1–B1.2 hold verbatim at `k = 5` (Lemma SW: a coset of step `≤ 1/5` meets the open arc
+  `(−1/5, 1/5)` of length `2/5`). The stall is band-independent, so the five-colour claim is no easier and carries larger leaf discs.
+
+**Claim 6, D5-C2.** "`Θ₅(R₆₅) ∩ T` is finite."
+- **Verdict: TRUE conditional on D5-T1** (VB3 at `k = 5`); **standalone GAP**, as claim 3.
+
+**Claim 7, D5-T2 (RQ₅).** "`Θ₅(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`." with "**Inhabitant:** `θ₂`."
+- **The implication "D5-T1 and D5-C2, hence D5-T2": TRUE** (VB4 at `k = 5`; D5-C2 redundant). **D5-T2 itself: GAP**, resting on D5-T1.
+  Inhabitant TRUE (`1/2 ∈ [1/5, 4/5]`, margin `3/10`).
+
+**Scope.** The seven headline statements are about characters only, and none is stated wider than that. Nothing here touches
+non-character colourings or `χ(ℚ(√47)²)`.
+
+**C0 against B1 (not yet scored; the owner scores after B3):** the implications came out TRUE as predicted. The three substantive
+claims came out GAP at one step, which is what C0 expected of my route, not a verdict on their truth.
