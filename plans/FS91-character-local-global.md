@@ -676,3 +676,282 @@ says DONE), and J23p's further verdicts (the owner forwards them).
 *Addendum to stage 2 (after its commit): J23p's seven close-gate verdicts (inventory item 131, the owner's forward) are folded into
 `plans/FS91-derivation.md`'s prior-art paragraph and the entries they bear on (FS91-J01-7, J07-2, J07-3, J07-4, J07-7, J02-T2, J08-1, §6's
 header). Their use in the prior-art positions and the drafts is stage 3's and stage 4's.*
+
+### Stage 3 — SAVED (the re-reads, the predictions, the verdict, the tallies)
+
+*Written by J23a's successor (J23a2, de Bruijn, Opus 5.5), resuming from stage 2 under the same brief. Stages 1–2 were not redone.*
+
+#### 3.0 What landed after stage 2, and where it went
+
+| what | source | where it is filed |
+|---|---|---|
+| **J13 DONE** — the blind check of J12: every J12 claim (X1–X3) and every one of J12's 26 lemma statements TRUE; `MS₄({5})` false by a second, independent route (branching + entropy compression) | `plans/FS91-S1V-one-prime.md`; report `data/crunch-2026-09-25/reports/J13.md` | `plans/FS91-derivation.md` §6: every "J13 pending" replaced (commit 575346d0); new entries FS91-J13-T5 (a second family, exponential orders at 5) and FS91-J13-T6/L1 (J13's route) |
+| **Owner ruling on J13's held item** — "the ledger carries J12's constructive route at every `p` as primary, and J13's independent existence route at 5 as the second derivation; J12-MSp's 'every `p`' is re-checked on J13's own frame" | owner, 2026-09-25 (brief of this resumption) | §6's header; FS91-J12-MS, J12-MSp |
+| **J09v DONE** — J4, J4-C, J4-A re-derived blind by a second route; J4-A TRUE with `L(F)` over all stable valuation rings, FALSE (bipartite case only) under J09 §2.6's stated reading | `plans/FS91-S1V-no-mixing.md`; report `…/J09v.md` | FS91-J09-J4 (two derivations; J09v-2 merged), J02-T2 (third derivation), J02-C1 (third), J09-J4-A (two, corrected; J09v-7 merged), J07-9 (J09v-3 at `k = 3`), new entry FS91-J09v-8 (no mixed types, any real number field) |
+| **The owner's scope note on CLG** — "CLG_k (J07-7) is an existence statement … It does NOT say that every character colouring of the plane is itself pulled back from one stable place. At k = 3 that stronger classification does hold — J09's J4 … — but not by CLG" | owner to J23a2, 2026-09-25 | `plans/FS91-derivation.md` §4's heading rewritten and a scope paragraph added; inventory item 163 (owner slip); every draft in stage 4 holds CLG at this scope |
+| **J26** (the Ambrus et al. certificate audit) | `plans/PA-ambrus2023-audit.md`; clerk items 145–149, 153–154 | touches no M1 text (M1 cites no `[AmbrusEtAl2023]`): **listed for the front-page job** in stage 4, not drafted with M1's corrections |
+| **Clerk 5's fold** (items 132–155) | commit 491161bb | dispositions in 3.11 |
+| **The derivation file after the fold** | `plans/FS91-derivation.md` | 73 entries covering 141 theorem ids (the control `data/fs91/j23a/coverage.py`, extended with J13's and J09v's 19 ids, finds every one; its plant is reported missing and exits 1) |
+
+#### 3.1 J01's stage 4, folded here (inventory item 19)
+
+J01 left its stage 4 — the divergence table against the files fenced from it, and its C1 priors scored — to the close (`plans/FS91-S0V-band-to-nine.md`
+stage 3b, "Left for a successor"). Done here, reading the fenced files now.
+
+| # | point | FS-89's text (fenced from J01) | J01 (blind) | kind |
+|---|---|---|---|---|
+| 1 | PA-B2's route | `plans/FS89-derivation.md:349`, FS89-PA-B2: "case 2 by D1-L2; case 1 gives `M − M = R̂_S` by D1-L3, hence `M = R̂_S` by `[Berend1984]` Thm I.2 with Prop. II.6" | the same chain, with Berend's hypotheses (1)–(3) checked for this action (J01-1, stage 2 §2.3) | **agree**; J01's is the checked form |
+| 2 | the truncated quotation (C0 Q2) | `plans/FS89-PA-berend1984.md:270`: "So `MS_k(S)` holds at every band `k` and every `|S| ≥ 2`, and D1-L4 and D5-L1 are not needed for it."; `plans/FS89-derivation.md:349`: "… at every band `k`, and D1-L4 and D5-L1 are not needed for it." | verified the words as quoted | **the continuation narrows nothing**: `|S| ≥ 2` is already PA-B2's hypothesis. Item 4's truncation is harmless |
+| 3 | where PA-B3's band enters | `plans/FS89-derivation.md:364`, the close planner's reading: "its band restriction sits only in Lemma SW … and in the parity line (`x, x + ½ ∈ B_k` ⟹ `2x ∈ B_{k/2}`, i.e. `Θ₃` at `k = 6`, `Θ₄` at `k = 8`, both rigid)" | the only `k`-reading line is Lemma SW's arc line (J01 §3.6, stage-3 summary); the parity line is not in the chain once PA-B2 is band-free — J01 uses doubling only in its own second route (J01-3) | **route**: FS-89's reading over-counted the band steps by one; no divergence of truth (that reading was "unchecked") |
+| 4 | PA-B3's range | `plans/FS89-PA-berend1984.md:374`: "`RS_k(S)` for `k < 2·min S` … `RQ_k` for `k ≤ 9`" | J01-4: SW as written holds exactly for `k < 2p`, sharp at `k = 10`, `p = 5`; J01-5 (SW-m) removes the limit | **agree, sharpened** |
+| 5 | the stub's independence caveat | `plans/STUB-band-rigidity-six.md` Q1: "The same observation twice, not independent evidence, and unverified" | J01 verified it blind; J03a gave a second blind reading of the all-band step | **caveat discharged** (FS91-J01-5, J01-7: two blind readings) |
+| 6 | the question itself | `plans/FRONTIER-STUBS.md` row 2: "Does row 95's route reach band 1/6 and 1/8?" | yes at every band, on characters (J01-7) | **answered**; the stub's re-aim is stage 4's |
+
+**J01's C1, scored** (`plans/FS91-S0V-band-to-nine.md` §C1; priors registered before stage 2):
+
+| claim | prior TRUE | outcome |
+|---|---|---|
+| PA-B2 (minimal sets, band-free, `|S| ≥ 2`) | 0.55 | TRUE (J01 stage 2; case 1 a second time by J03a-4) |
+| "So `MS_k(S)` at every band `k`" | 0.55 | TRUE |
+| `RS_k({5, 13})` / `RQ_k` at `k = 6, 7, 8, 9` | 0.45, 0.40, 0.38, 0.35 | TRUE at each (J01-6) |
+| layering and gluing (VB3, VB4, D2-L1) `k`-free | 0.75 | TRUE (J01-8; J03a-2, with J03a's over-count corrected) |
+
+Every prior was under 0.8 and every outcome TRUE: J01 was underconfident, and the expected `k`-dependence (Berend's transfer, the parity
+line, the point step) located the band in the wrong places except Lemma SW.
+
+#### 3.2 The §G re-read (the bearings extracted at the opening, against what happened)
+
+**Which extractions paid** (the plan's §G.1 "bears" lines; inventory items 33–58):
+
+| entry | extracted as | what happened |
+|---|---|---|
+| G1 | wall-standing fields trivial at `k ≥ 4` | **paid**: J07's `θ₂` control on a wall-standing field (FS91-J07-15); CLG's dyadic case |
+| G7 | the type-M relation supplies `1/3` for FS-82 | **did not pay**: no three-colour route used `1/3` — S1's criterion is a stable prime above 3 of residue field `𝔽₃`; `1/3 ∉ R_F` only says some prime above 3 has odd residue degree (J09v §3.1) |
+| G21 | J08's list states its generator's image and runs row 69's known positive | **paid, and the control failed for a stated reason**: at 43 row 69's eight-colour ceiling is a line-periodic circulant colouring, not a character colouring (FS91-J08-3; J11 independently) |
+| G30 | derivation only; inhabitants; the discipline ladder | **paid**: two counterexamples filed as theorems (FS91-J03a-9, the J09v-7 field); the ladder's rungs did not include the third literature the close gate found (combinatorial geometry's pyjama problem) |
+| G35 | the dyadic trichotomy is CLG's dyadic case | **paid**: FS91-J07-9 (inert dyadic, `U_Q`), J07-15 (ramified, `θ₂`), J09v-2 ((H) ⟺ non-bipartite) |
+| G38 | `[Fischer1990]` Ex. 4 as J08's free control | **paid**: FS91-J08-8 ("no additive `k < 11` over ℚ(√167)" consistent with orders 23, 43, …) |
+| G41 | `[Fischer1994]` on K as the dyadic control | **paid**: reproduced at level 3 by the existing checker (J07-15); "not an independent confirmation" (J10) |
+| G43 | targets are the usable planes plus `U_Q`; no integrality gap for characters | **paid**: CLG's `χ_char(F²) = min` over targets (FS91-J07-7) |
+| G44 | the level-one question is a Weil-bounded character sum | **paid**: the Weil threshold, two derivations (FS91-J08-4) |
+| G46 | name the objects in their disciplines | **paid late**: the name of `χ_char` — `[BarajasSerra2008]`'s *regular chromatic number* — was found by the close gate, not the opening one |
+| G48 | CLG is the conjecture for character colourings | **paid at existence scope**: CLG-g (FS91-J07-11). The §G.1 line's gloss "(every character colouring local at one prime after peeling)" is the stronger, classification form CLG does not state (3.8, the owner's scope note) |
+| G49, G50 | the gate in the discipline's words; `[Zhu2011]` avoided; the Johnson debts | **paid**, with G49's pattern once more: the opening gate missed `[Manners2015]` (a third literature); the close gate reached it through the citers of a dynamics paper. The Johnson debts stand |
+| G51 | the seventh run's shape: one deriver, one blind verifier on a fixed list, the lemma-statement fallback | **paid**: every GAP and every corrected scope was found by a verifier (J10: (g3); J11: SIX-e's hypotheses and `≤ 7`; J09: J02 §2.10; J09v: J09 §2.6; J13: J12's overlap sentence); the fallback phase was used by J10, J11, J13 |
+| G54 | Hoffman certificates refuse band 6-characters at `q ≥ 59` for free | **not needed**: the Weil threshold (J08-4) and Lemma AV (J07-10) did the work; J10-L8 extended G54's all-levels ratio to every inert tower |
+| G55 | `R_F` is the ring integral at every stable prime; torsion factors locally | **paid and extended**: Lemma C/C′ remove FS86-B1-LR's Galois hypothesis, three derivations (FS91-J07-3, J07-4) |
+| G56 | a band six-character at 23 or 43 would six-colour a window member (P-W6) | **the event did not occur**: no band six- or seven-character on any window plane; `Γ₂₇` has none at all (FS91-J08-5, J08-R) |
+| G58 | every band-character colouring is antipodal; J08's controls are G58 instances | **unused**: no job record cites it |
+| G59 | the fractional wall bounds character colourings (`α ≥ q²/k`) | **paid**: Lemma AV (FS91-J07-10) |
+| G61 | FS-82 via S0, consumed as a hypothesis | **paid and superseded**: S1–S3 (FS91-J02-T2, T3, C1), three derivations each for S1 and S3 |
+| G63 | state for number fields; finitely generated `F` is FS-39's gap | **paid**: S1 extended to algebraic and purely transcendental `F` (FS91-J09-J4-A, two derivations, corrected); general `F` stays FS-39's gap |
+| G64 | "six hides only in a non-character colouring"; J08 decides characters at 167 | **paid**: `χ_char(ℚ(√167)²) = 8` given CLG_7 (FS91-J08-8) |
+| G66 | level collapse as a lemma (`p > k/2`); all-levels `L` | **paid**: four derivations of level collapse (FS91-J07-9), plus J09v-3 at `k = 3`; J10-L8 |
+| G67, G72 | close form of any new grokking; §IQ | **paid**: 3.4 below; stage 4's grokking drafts carry the Do/Killing form |
+| G71 | scope lines, characters only | **paid at the character/colouring cut, missed one level finer** (existence against classification; below) |
+| G74 | the layer gluing; J01 decided its reading at 1/6–1/9 | **paid**; its killing-test reading ("disc plus finitely many torsion points") fires at one prime for minimal sets too (FS91-J12-MS, two routes) |
+| G76 | primes counted first; one prime is not enough | **paid**: one prime fails for `RS`, `MS` and torsion orders, at every `p ≡ 1 (mod 4)` (§6) |
+
+**Entries that should have borne and were not used** (each drafted in G67's form in stage 4):
+1. **G21, applied to the control, not only the instrument.** The planner named row 69's eight-colour ceilings as J08's known positive without
+   asking what shape those colourings have; they are line-periodic, a wider class than characters, so the control could fail at 43 and did.
+   The rule is in `CLAUDE.md` § The gate ("A positive control proves an instrument finds things OF THE SHAPE ITS GENERATOR CAN REPRESENT");
+   it is not in G21's *Do* line, where a re-grokking reads.
+2. **G71's scope cut, one level finer: existence against classification.** §G.1 extracted G71 as "every M1 statement is about characters
+   only" and held that cut; but the plan's own §0 item 1 ("a character colouring of any real number field's plane comes from one residue
+   target") and §G.1's G48 line state CLG as a classification of every character colouring, which CLG_k's statement (§S, J07 §3.1) does not
+   give. The stronger form then travelled to the owner's reports and J29's brief (the owner's note) and to this close's own §4 heading of
+   the derivation file (J23a stage 2; fixed at stage 3). G72's two forms name the same cut — the structural form asks about every solution,
+   and §IQ's structural form was answered with "some", not "one".
+3. **G62 and FS-63's vocabulary (aperiodic order) bore on §6 and was marked silent.** J12's coding of the one-prime minimal set is an S-adic
+   subshift (J12-W, J12-Ω), which is aperiodic order's vocabulary; neither the planner nor the close gate searched it there (the close gate
+   searched the piecewise-rotation neighbourhood J12 named). A reading, not a demonstrated miss: nothing has been found there yet.
+4. **G7's and G61's `1/3` extraction** was the wrong invariant for number fields (above); J09v's refinement of G74 ("`1/3 ∉ R_F` asks for an
+   odd-degree prime above 3, and three colours ask for degree one") is the correction, drafted in stage 4.
+
+#### 3.3 The §PA sweep: what M1 learned about what its object is
+
+| # | the recognition | source | promoted to (drafted in stage 4) |
+|---|---|---|---|
+| R1 | **The band condition is the pyjama problem's condition.** Band rigidity at two primes is `[Manners2015]` Lemma 5.3's statement on the half ring `ℤ[i][1/P₅, 1/P₁₃]`; `[MalikiosisMatolcsiRuzsa2013]`'s "rational obstructions" are the torsion band characters; the solenoid form of `[Wang2012]` Thm 1.10 is stated unwritten by `[EinsiedlerLindenstrauss2022]`; `[KravitzLeng2025]` makes `N_k` effective on the half ring | J23p §1.3, §C.3 | a line in G76; row 95's and item 25's "Not ours"; the stub "does `R_S`'s rigidity follow from Manners on `A` and `Ā` by one gluing step?" (J23p §C.5) |
+| R2 | **`χ_char` has a name in print:** the *regular chromatic number* of `[BarajasSerra2008]` (circulant graphs), with `κ` the lonely-runner / view-obstruction parameter | J23p §2.3 | a line in the new grokking on character colourings (G77, drafted) and in G46's instances |
+| R3 | **A character colouring of a finite plane is a regular (interval) colouring of a circulant, strictly weaker than a colouring and than a line-periodic colouring**: `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`; `χ_char(Γ₄₃) = 9 >` the line-periodic ceiling 8; `χ_char(Γ_q) > 1 + √q/2` (Weil) | FS91-J11-W3, J08-3, J08-4 | G56/G59 lines (the window is closed to characters; characters grow like `√q`) |
+| R4 | **The three-colour question over a number field is residue degree one at 3, not `1/3`**: every circular three-colouring of a non-bipartite real number field's plane is a residue colouring at a prime of norm 3 (J4, two derivations) | FS91-J09-J4; J09v §3.1 | G74 and G61 edits |
+| R5 | **The unit-vector ring is the ring integral at the stable primes, with no Galois hypothesis** (the rational points of the norm-one torus generate the stable semi-local order, except possibly at a ramified stable dyadic place) | FS91-J07-3, J07-4 | G55 edit; FS-47's statement |
+| R6 | **The one-prime band set is a piecewise isometry — a rotation of `Q₀` about nine centres, or a correspondence with two choices per block — whose minimal sets carry S-adic, aperiodic codings**; `T + A` is exactly the periodic codings | FS91-J12-B1, B2, W, Ω; J13-T1, T3, T6 | G76 edit; the stub of inventory item 123 (minimal sets of `Θ₄(R_p)`) |
+| R7 | **CLG is existential**: the peel proves "some summand is band", never "one"; a classification of every character colouring holds at `k = 3` (J4) and at HD1's three fields (Lemma D), not in general | J07 §5.1 (iv); the owner's note | G48 and G71 edits; the new grokking G77 |
+
+#### 3.4 The §IQ re-read, and G72's count
+
+- **The structural form** ("classify every character `χ = Σ_v χ_v` with `Σ_v χ_v(S_v) ⊆ B`: must some single `χ_v(S_v)` lie in `B`, and what may
+  the others contribute?") **was answered**: some summand is band (the peeling lemma, FS91-J07-2, three derivations), never "one"; the
+  archimedean summands vanish at complex places and are intervals about 0 at real ones (CLG-d, FS91-J07-6); at HD1's fields the others vanish
+  (FS91-J07-12, through Lemma AV and Lemma D).
+- **The invariant it forced** — the value-set profile — is exactly what CLG's proof peels; per target it is the trace set `V_c` (FS91-J08-1,
+  three derivations); at one prime the leaf itinerary became J12's centre sequence and J13's digit sequence, with `T + A` ⟺ periodic
+  (FS91-J12-B2 = J13-T3).
+- **The open instances it named, decided for characters:** the `L = 5` fields (ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), ℚ(√3,√5)) have no
+  character four-colouring — ℚ(√47) computed (C-47, FS91-J07-13), the others by CLG-g's (g1) ("no exception at `k ≤ 5`"), not computed per
+  field; ℚ(√167): `χ_char = 8` given CLG_7; `K(√7)`: 17, de Grey's field: 22, given CLG_16, CLG_21; ℚ(α,√7) at `k = 3`: `χ = 4`. The controls
+  fell out (FS91-J07-15; HD1 from CLG's proof with Lemma D, not its statement).
+- **G72's count: seven of seven** (FS-73, FS-79, FS-81, FS-85, FS-86, FS-89, FS-91): the class theorem came through the structural question —
+  J07's route and J10's blind route are both the peel on the value-set profile — and so did J4's classification at `k = 3`. **The split, as
+  FS-79's count made it:** band rigidity at every band came from verifying and extending a known tool (Lemma SW to SW-m); the instance results
+  (J08's `χ_char` values; J12's constructions) came from the existence form with derivation-fixed exact lists. Kooshi's rule stands: no-gos
+  count.
+
+#### 3.5 The predictions, scored once (the plan's §P and every job's C0)
+
+| registered by | id | statement | p | outcome |
+|---|---|---|---|---|
+| plan §P.1 | **O1** | CLG proved and blind-verified at every `k`, controls reproduced, `χ_char(ℚ(√167)²)` pinned | 0.30 | **occurred** (the highest rung); CLG at existence scope, given `H_k` (two blind readings); `χ_char = 8` given CLG_7; a GAP in the corollary (g3) at `k = 7` only |
+| plan §P.1 | O2–O5 | lower rungs; O5 a counterexample | 0.25, 0.22, 0.18, 0.05 | did not occur |
+| plan §P.2 | P-J03a | SW-m TRUE at every `k ≥ 3` | 0.80 | met (J03a-1, at every `k ≥ 2`) |
+| plan §P.2 | P-W6 | a band six-character at level one of Γ₂₃ or Γ₄₃ | 0.15 | did not occur |
+| plan §P.2 | P-167 | `χ_char(ℚ(√167)²) ≥ 7` given CLG | 0.80 | met |
+| plan §P.2 | P-167-8 | `= 8` exactly given CLG | 0.45 | met |
+| plan §P.2 | P-CM | CLG-d with complex places | 0.60 | met |
+| plan §P.2 | P-U3 | ONE-a at every `p` | 0.75 | met (J12; J13, same route) |
+| plan §P.2 | P-MS5 | ONE-b "no" | 0.60 | met (J12; J13 by an independent route) |
+| plan §P.2 | P-U5 | ONE-c "unbounded" by a derived family | 0.35 | met (two families: J12's, J13's) |
+| plan §P.2 | P-log | every M1 job's log non-empty and no search run | 0.85 | met for J01–J13 and J09v (3.9); J23p's log is empty, and J23p was not an M1 job at registration |
+| J01 C1 | — | seven priors, 0.35–0.75 | — | all TRUE (3.1) |
+| J02 C0 | S1, S2, S3 | TRUE | 0.85, 0.83, 0.83 | TRUE each; written after the route formed, calibration low (item 116) |
+| J03a C0 | C1, C2a, C2b, C2c | TRUE (C2c on the wide `A`) | 0.95, 0.85, 0.85, 0.75 | TRUE each; the narrow reading's failure predicted in words and confirmed by a counterexample |
+| J07 C0 | CLG_k (`k ≤ 9`, Lemma R scope; every `k`); CLG-c; CLG-d; CLG-e (odd / dyadic); CLG-g (exception empty at `k ≤ 5`); CL3–CL5 | — | 0.90, 0.75; 0.75; 0.85; 0.90 / 0.6; 0.80 (0.6); 0.85 each | TRUE each, CLG-c in its corrected form; (g3) at `k = 7` later a GAP (J10) |
+| J08 C0 | C0-a; C0-23; C0-43; C0-167 | SIX-a; a band six at 23; at 43; `χ_char` at 167 | 0.97; 0.10 (contaminated), heuristic 0.77; 0.12; `= 8` at 0.50 | held; did not occur; did not occur; 8 |
+| J09 C0 | S1 number fields; algebraic; every subfield GAP; S2; S3; a falsifier | — | 0.75; 0.65; 0.6; 0.75; 0.8; 0.1 | won each; no falsifier; **its route lost at exactly its named risk** (K1 false at `q = 27`) |
+| J10 C0 | V1, V2, V3, V4 | — | 0.85, 0.85, 0.75, 0.55 | V1–V3 TRUE; V4's HD1 a GAP as a consequence of V1's statement, TRUE from its proof with Lemma D — the risk J10's C0 named. J10 did not score its own C0; scored here |
+| J11 C0 | W1; W2; W3; W4 TRUE/GAP/FALSE; band six at 23 or 43; band seven; band eight at 23 / 43; `χ_char(Γ₂₃) = 8`; `χ_char(Γ₄₃) ∈ {8, 9}` | — | 0.97; 0.80; 0.75; 0.55/0.40/0.05; 0.04; 0.05; 0.88 / 0.50; 0.80; 0.70 | held; held; held; GAP fired as the brief quoted it (CLG_6, CLG_7), TRUE given CLG_16, CLG_21; did not occur; did not occur; held / none at 43; held; 9 |
+| J12 C0 | C0-a; C0-b; C0-b′; C0-b″; C0-c; C0-c′ | — | 0.93; 0.55; 0.25; 0.30; 0.80; 0.35 | met; met; decided; lost (the reduction did not survive); met; met in the primes, not the family |
+| J13 C0 | X1; X2 "no" / "yes" / GAP; X3 | — | 0.93; 0.35 / 0.15 / 0.50; 0.80 | met; "no" (against its own GAP-favouring prior; the planner's leaked P-MS5, 0.60, was nearer); met. Not blind to the planner's priors (J13's fence slip) |
+| J09v C0 | J4; J4-C; J4-A | TRUE as stated | 0.85; 0.85; 0.60 | TRUE; TRUE given FS81-T2; TRUE with `L` over all stable valuation rings, FALSE (bipartite only) under J09's stated reading |
+| FS-89's D | — | `MS₄({5})` false | 0.75 | met, by a different mechanism (a closing-lemma hierarchy; entropy compression), not Berend's Lemma 3.3 |
+
+**What the table says.** Every registered theorem-level prior at or above 0.55 was met; the three events priced low (P-W6, C0-43, J11's
+band six/seven) did not occur. The two recorded route-level losses — J09's C0 route (K1 false at 27) and J12's C0-b″ (the plan's §M.2
+reduction) — were each named as the risk in advance. Calibration is weak evidence here: four jobs (J02, J07, J09, J10) wrote C0 after a
+route had formed, and two (J08, J13) saw the planner's priors through a fence leak.
+
+#### 3.6 The verdict, in four parts
+
+- **The choice:** **Paid (theorem)** — outcome **O1**, registered at 0.30. The class theorem CLG holds at existence scope for every real number
+  field and every band, given band rigidity `H_k`, which itself now holds at every band (two blind readings); every character chromatic number
+  the milestone asked for is pinned at the exposed fields given CLG; three colours are closed over every real number field (with `χ`, not only
+  characters); one prime is shown insufficient three ways, each by two derivations.
+- **The alternative weighed:** **Paid in part (O2 or O3)** — on three grounds: CLG rests on `H_k`, whose finite-order bound `N_k` is not
+  effective and whose minimal-set step rests on `[Berend1984]`; corollary (g3) of CLG-g has a GAP at `k = 7`; and band rigidity is partly in
+  print (`[Manners2015]` Lemma 5.3).
+- **Why O1 won:** O1's definition names CLG, its blind verification at every `k`, the controls, and the pin — all met; (g3) is a corollary of
+  CLG-g at one band, not CLG; `H_k`'s dependence on Berend is a stated input, as FS-89's was; and a verdict label scores the experiment, not the
+  novelty (Kooshi: "All novel knowledge is a success") — the prior-art position is recorded separately (3.7) and moves no label.
+- **Confidence: high** on the label. **Medium** on the novelty of the headline results, which the close gate left undecided on named papers
+  (`[Johnson2000]`, `[Johnson2006]`, Muchnik 2005, Shimura 1964, Bosio–Vivaldi 2000, Vivaldi 2006); reading those is the one fact that would
+  change it.
+
+#### 3.7 The prior-art position of each headline result (J23p's verdicts, `plans/FS91-PA-close.md` §C.1; final at this close)
+
+| headline result | position | still undecided on |
+|---|---|---|
+| band rigidity at every band (FS91-J01-7) | **partly in print**: `[Manners2015]` Lemma 5.3 on `ℤ[i][1/P₅, 1/P₁₃]` (one Gaussian prime above each of 5, 13); the solenoid form of `[Wang2012]` Thm 1.10 stated unwritten (`[EinsiedlerLindenstrauss2022]` p. 3). **Not found:** `R_S` with both primes and the group `U_S`, other `S`, the field clause with the wide `A` | Muchnik 2005 |
+| CLG (FS91-J07-7, J07-11) | **not found**; the invariant is `[BarajasSerra2008]`'s regular chromatic number (cyclic groups) | `[Johnson2000]`, `[Johnson2006]` |
+| three colours over every real number field (FS91-J02-T2, T3, C1; J09-J4) | **not found**; the question is posed verbatim by `[Fischer1990]` §1 (a `CLOSED-QUESTIONS.md` candidate, answered in part); J4's classification in the literature's words is unsearched (inventory item 138) | `[Johnson2000]`, `[Johnson2006]` |
+| Lemma C / C′ (FS91-J07-3, J07-4) | **partly in print**: `[Fischer1990b]`'s quadratic and multiquadratic cases; the general form not found | Shimura 1964 |
+| the peeling lemma (FS91-J07-2) | **not found**; folklore-grade | the Borel product literature |
+| one prime (§6) | **not found as stated**; `[Manners2015]` §5.5 asserts the one-prime failure without proof; J13-L1's method is `[GrytczukKozikMicek2013]`'s, cited from memory | Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser 2001 |
+| `χ_char` of the finite planes (§5) | **not found** | — |
+
+"Not found" measures the queries' words (G21); nothing here is called new.
+
+#### 3.8 The honesty tally (every owner error and agent slip recorded for M1)
+
+**Owner slips** (the product owner's briefs, forwards and reports):
+
+| # | slip | address | effect |
+|---|---|---|---|
+| O1 | J01's brief: two address slips (PA-B2's parenthesis and PA-B3's row attributed to `plans/FS89-derivation.md`; both at `plans/FS89-PA-berend1984.md:373–374`) and one truncation | item 4; 3.1 row 2 | harmless (resolved in 3.1) |
+| O2 | J03's brief: two advisor quotations not verbatim | items 20, 27 | meaning kept |
+| O3 | J03a's brief: "FS-89 proved five colours for every `|S| ≥ 2`" (FS89-S1VB-14 has `S ∋ 5`) | item 64 | harmless once C2a holds |
+| O4 | J08's brief attributes row 68's sentence to row 53 | item 84 | none |
+| O5 | J10's brief: V4 dropped J02-T1 and turned "fall out" (of CLG-a–g) into "consequences of V1" | item 90 | J10 scored HD1 a GAP "as a consequence of V1" — the paraphrase's gap; TRUE from the proof |
+| O6 | J09v's brief omitted FS81-T2 from J4-C's inputs | item 150 | J09v named and used it |
+| O7 | the forward of J23p's first verdict abridged Manners §5.5 | items 140, 151 | meaning kept |
+| O8 | **CLG paraphrased in the stronger, classification form** ("every character colouring … pulled back from one stable place") in the owner's reports to Kooshi and in J29's brief (`plans/FS84-five-colours-47.md` §1.1 Q5) | item 163; the owner's note | the owner caught it; **its source is in the plan**: §0 item 1 and §G.1's G48 line (the planner, J03); it also reached this close's derivation-file heading (J23a, below) |
+
+**Planner slips** (J03): SIX-e under-named its hypotheses (CLG_6, CLG_7 for CLG_16, CLG_21; item 110); §M.2's ONE-b reduction — clause 2 a GAP,
+the obligation non-deciding (item 119); LEDGER § B read by structure only (item 28); §G.1 names registrations "P-CLG" (G48) and "P-G74" (G74)
+that §P does not carry (P-G74 withdrawn in §P's footnote, P-CLG folded into O1–O5) — found here; the stronger CLG paraphrase (O8's source).
+
+**Agent slips and errors in records** (each found, and by whom):
+
+| # | slip | found by | flatters the work? |
+|---|---|---|---|
+| A1 | J07-11's (g3) at `k = 7` "`e(𝔭|3) = 1`, exact level 3" | J10 (J10-T8) | yes |
+| A2 | J08-8's "`4 ≤ χ ≤ 8`" (`≤ 7` known) | J11 | no |
+| A3 | J02 §2.6 Remark 2 ("Mixed types are real"); §2.10 ("ramified or inert") | J09, J09v | no (both made the problem look harder) |
+| A4 | J09 §2.6's finite-residue reading of `L(F)` | J09v | yes (widened S1) |
+| A5 | J12's "no overlap with S0B-L4" sentence | J13 | no |
+| A6 | J03a's over-count of its own `k`-lines | J03a's own §5, from J01's record | no |
+| A7 | J23a (stage 2): `plans/FS91-derivation.md` §4's heading stated CLG in the classification form | the owner's note; fixed at stage 3 | yes |
+| A8 | J09v's own stage-3 wording ("whenever a field realising it exists") | J09v, at its stage 4 | yes |
+| A9 | J08-9's wrong first idea for the anti-band case | J08's tool, before recording (item 115) | — |
+| A10 | fence leaks: J08's grep printed the plan's J03-3 row; J13's grep printed the planner's priors (l. 423, 503–505, 560–561) | self-disclosed | the leaked content agreed with, or preceded, independent results |
+
+**Tool defects:** J11's two unreachable plants, kept and labelled (item 112); J13's phase-2 plant (`w̄` for `ω`) could not fire, replaced by the
+53° rotation, which fires (J13 stage 3); no defect in J02's tools (item 10).
+
+**G21's selection check.** Of the errors of truth or scope, the flattering ones (A1, A4, A7, A8, and O8 at four addresses) were each caught by
+someone other than the sentence's author, except A8; the unflattering ones (A2, A3, A5) were caught by blind verifiers too. The verifiers
+audited both directions at the same rate; no author caught a flattering error of their own except J09v.
+
+#### 3.9 The would-have-searched log across M1, and every note at the ban's edge
+
+| job | entries | at the ban's edge (complete exact enumerations of derivation-fixed sets, logged) |
+|---|---|---|
+| J03 (planner) | 3 (§X) | §P.basis: the four quadratic-residue conditions for the 11 non-squares at `q = 23`, by hand |
+| J01 | 3 | the sweep's arithmetic, cosets of `(1/5^m)ℤ/ℤ`, `m ≤ 3`, `k ≤ 60` (`tools/crunch_j01_sweep_check.py`) |
+| J02 | 3 | all 728 functionals of `𝔽₇₂₉` (and all 59,048 at `q = 243`), a control; the proof is Weil's |
+| J03a | 2 | none (the sweep is a formula) |
+| J07 | 5 | checks A, B, D: all characters of `ℤ[i]/3⁴`, `ℤ[i]/7³`, of `Γ_q` for the listed `q`; all symmetric subsets of `ℤ/12`, `ℤ/13`. Declined: the level-2 target at `q = 27` (`3¹²`) |
+| J08 | 4 | every `c ∈ 𝔽_q^×` at 23, 43 (22, 42 values); every prime below `Q_k`; the product over value-set classes at the places `{2, 3, 7, 11, 19}` (273,581 tuples, 2.6 s) |
+| J09 | 3 | `𝔽₇₂₉^* × μ₂₈` and the 242 norm classes at `q = 243` (it found K1 false) |
+| J10 | 9 | every character of `ℤ[i]/p²`, `p = 3, 7, 11`, `k ≤ 9`; sampled unit vectors ranked mod `p` at seven pairs fixed in advance; every character of four towers. Declined twice: the `729⁵` tower (a GAP recorded instead) |
+| J11 | 5 | every `c` at 23, 43; the enumeration to 199 (a check of the derived inequality); every character of `Γ_q`, `q ≤ 139`, a control; the range to 2000; 728 characters at 27 |
+| J12 | 7 | the complete boxes `2 ≤ a, b ≤ 12` (level 2), `2 ≤ a, b ≤ 6` (level 3), `1 ≤ a, b ≤ 10` (the family) |
+| J13 | 5 | Part C: `p ≤ 40` at 5, `p ≤ 20` at 13, 17; Part D: 200 random exact states in `Ω`, a sanity check of a derived inequality (sampled, not a witness search) |
+| J09v | 3 | every character of `∏ O_𝔓/N` at `N ≤ 36` |
+| J23p, J23a | 0, 0 | — |
+
+**52 entries across 12 jobs (the planner and 11 derivation and verification jobs); no search was run.** Every enumeration was over a set a derivation fixed first. The one
+sampled check (J13's Part D) tests a proved inequality, and its proof does not rest on it.
+
+#### 3.10 Agent token counts (items 22, 71, 94, 127, 152; the reports)
+
+| job | harness | own | own ÷ harness |
+|---|---|---|---|
+| J01 | 341k (item 22; its report says 335k) | — | — |
+| J02 | 395k | 230k | 0.58 |
+| J03 | 500k | 320k | 0.64 |
+| J03a | 324k | 135k | 0.42 |
+| J07 | 270k (its report; item 94 "TBD") | — | — |
+| J08 | 384k | 185k | 0.48 |
+| J09 | 417k | 255k | 0.61 |
+| J10 / J10b | 311k / 361k | — | — |
+| J11 | 319k | 120k | 0.38 |
+| J12 | not reported | 200k | — |
+| J13 | not reported | 130k | — |
+| J09v | 210k (its report) | — | — |
+| J23p | 395k (item 152) | — | — |
+| J23a (first agent) | 421k (item 152; stopped at stage 2) | 155k | 0.37 |
+
+Own counts ran at 37–64 % of the harness's. J03 (500k) reached the replace-not-reuse line; J23a's first agent stopped at 421k, one past its
+hand-back line, and was replaced, not reused.
+
+#### 3.11 The inventory at stage 3
+
+Every item routed to stage 3 is ticked "done (J23a stage 3)" with its address in this section; J13's six report lines, the owner's J13 ruling,
+the owner's CLG scope slip and J23a's heading slip are added as items 156–165; clerk 5's items 132–155 are dispositioned (M1 results filed;
+crunch-wide items declined for M1 with the lane named; items bearing on M1's drafts routed to stage 4). The map is
+`data/fs91/j23a/stage3-ticks.json`.
+
+**Would have searched here (stage 3):** none — reading and filing only.
