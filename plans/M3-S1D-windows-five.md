@@ -22,6 +22,25 @@
   `≤ 3/(2n+4)`. [hand; tools: FFT at `ℚ₂(i)`, `(2n+1)λ_min = −2` at `n = 1, 2, 3`, plant fires] §2.5
 - **J21-D1-43p** — partial: windows reading the 43-adic places at level one are excluded (`α(Γ₄₃)/1849 ≤ 0.1974`, row 69); the
   fibre-share inequality alone gives exactly Hoffman's `0.21376`, so it cannot close 43 at depth. [hand + cert] §2.6
+- **J21-SL (slicing)** — for a locally compact abelian `G`, `Γ = Cay(G, T)` and any measured graph `Y`, a measurable proper `k`-colouring of
+  `Γ × Γ × Y` restricts, along `(x, y) ↦ (x, x + s, y)`, to a measurable proper `k`-colouring of `Γ × Y` for almost every `s` (every `s`
+  if Borel); properness at every edge is kept for every `s`. [hand] §3.1
+- **J21-D3** — `χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`, and the same for `χ_B`. [hand; J21-SL] §3.1
+- **J21-MX (mixing selection)** — `K` compact abelian, `ν` a probability on `T_K ⊆ K`, `λ* = sup_{ξ≠0}|ν̂(ξ)| < 1/(k−1)`: for every Borel
+  graph `X`, a Borel proper `k`-colouring of `X × Cay(K, T_K)` yields the Borel proper `k`-colouring `φ(x) = min{j : μ(W(x,·)^{-1}(j)) >
+  λ*/(1+λ*)}` of `X`; for measurable `W` proper off a null vertex set, `φ` is measurable and proper off a null vertex set. [hand] §3.2
+- **J21-TH (the thick places of ℚ(√167))** — every finite place is 5-thick (a compact Cayley subgraph with `λ* < 1/4`) except the twelve
+  above 2, 3, 5, 7, 29, 61 (split) and 23, 43 (stable); for those twelve the standard compact subgraph has `λ* ≥ 1/4` and the uniform
+  measure is optimal. [tools + hand; Weil; Lemma P; Kloosterman sums at higher levels, classical] §3.3
+- **J21-RED (the reduction)** — for every finite `S`, a Borel window five-colouring of ℚ(√167)'s plane over `S` exists iff one exists over
+  `S_red`: `S` with every thick place removed and each conjugate pair (the two real places; the two places above a split prime) merged;
+  `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}`. Measurable, format E over `S` ⟹ format N′ (proper off a null vertex set) over `S_red`. [hand]
+  §3.4
+- **J21-D2p** — D2(a) and D2(b) hold when every factor of `B` is thick (Borel: iff; measurable: ⟸, and ⟹ into format N′). [hand] §3.5
+- **J21-NG1** — the planner's cylinder lemma is false already for `A′ = A = UD(ℝ²)`: an explicit independent set of `A × B` of density
+  `> β` that is not a.e. a cylinder, for every `B` of the D2 class. [hand] §3.6
+- **J21-NG2** — ratio alone cannot carry D2: a finite abelian Cayley graph `B` with `α(B)/|B| < 1/125` and a graph `A` with
+  `χ(A × B) ≤ 125 < χ(A)` exist (Shitov's construction, Zhu's Theorem 3.5 instance). [hand, from `[Zhu2025]` §3 (read)] §3.6
 
 ---
 
@@ -81,6 +100,9 @@ or computed before these numbers.
 | W1 | run FS-66's second-level moment relaxation at 43 (84 GPU-days) to certify the all-levels ratio `< 1/5` | not run (banned; machine-long); D1-43 named GAP with the level-one partial (§2.6) |
 | W2 | search `Γ₄₃`'s level-two graph for an independent set above `0.2·43⁴` (to refute D1-43) | not run; recorded as the killing test of the partial |
 | W3 | search weighted measures `ν` on the 43-adic circle for a better mixing constant | not run; replaced by the symmetrisation argument (§2.6): the uniform measure is optimal, so no `ν` exists |
+| W4 | search `Γ₂₃` for two edge-free sets of size `≥ 106` each (to show 23 is non-thick in the strong, combinatorial sense) | not run; 23 is reported "not thick by the spectral criterion", and whether such a pair exists is left open |
+| W5 | search for a measurable (e.g. periodic) five-colouring of `UD(ℝ²) × H(ℚ₉)` or `× Γ₂₃` that is no pullback (a D2 counterexample candidate) | not run; the obstruction is named at the step instead (§3.5) |
+| W6 | zbMATH, two queries' worth, for the mixing selection (§3.2) in the words "Hedetniemi eigenvalue / expander / Borel / measurable" | run (a prior-art gate, not a witness search): 9 queries, nothing on point (§3.7) |
 
 ---
 
@@ -205,3 +227,157 @@ set of `UD(ℤ/43², 2)` of size `> 0.2·43⁴ = 683,720.2` would show depth hel
 **Stage 2 in one line:** D0, D1, D1-fac, D1-3, D1-2 TRUE; D1-43 GAP at the all-levels ratio of the 43-adic plane (level-one windows
 excluded). So **over every `S` with no real place and no 43-adic place, no measurable window five-colouring of ℚ(√167)'s plane exists**
 (formats E, N, L).
+
+---
+
+## Stage 3 — SAVED (D3, the pullback theorem at partial scope, D2(a) and D2(b) with their obstructions)
+
+### 3.1 The slicing lemma and D3 — TRUE [hand]
+
+**Lemma J21-SL.** Let `G` be a locally compact abelian group with Haar measure `λ`, `Γ = Cay(G, T)`, and `Y` a graph on a σ-finite measure
+space `(Y, µ_Y)`. Let `W : G × G × Y → [k]` have classes measurable for the completion of `λ ⊗ λ ⊗ µ_Y` and be proper on
+`Γ × Γ × Y` (at every edge). Then for `λ`-almost every `s ∈ G`, `W_s(x, y) = W(x, x + s, y)` is a proper `k`-colouring of `Γ × Y` with
+classes measurable for the completion of `λ ⊗ µ_Y`; if `W` is Borel, every `s` works.
+
+*Proof.* The shear `M(x, s) = (x, x + s)` is a group automorphism of `G × G` preserving `λ ⊗ λ` (Tonelli and translation invariance in the
+second variable), so `M × id_Y` preserves the completed product measure and `C′_j = (M × id)^{-1}(W^{-1}(j))` is measurable. By Fubini for
+completed product measures, for `λ`-a.e. `s` every section `{(x, y) : (x, s, y) ∈ C′_j}` is measurable (`k` null exceptional sets). For
+every `s`, if `x′ − x ∈ T` and `y ∼ y′` then `(x, x+s, y)` and `(x′, x′+s, y′)` differ by `(x′ − x, x′ − x)` in the two `Γ` coordinates,
+an edge of `Γ × Γ × Y`, so `W_s` is proper at every edge. ∎
+
+**D3.** *Statement (verbatim):* "`χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`" (or the named obstruction). Both real places of ℚ(√167) have local
+graph `UD(ℝ²)`. "≤": pull back along the first projection (as D0 (ii)). "≥": J21-SL with `Y` a point. ∎ **TRUE**, for `χ_µ` (everywhere
+proper, KM's) and for `χ_B`. *The brief's question* ("say whether Falconer's argument does [transfer]"): no transfer is needed — the
+diagonal is null, but its translates foliate `ℝ⁴` and almost every translate carries a measurable slice; Falconer's `χ_µ ≥ 5` for the
+product then follows from the equality. *More generally:* two places with isomorphic local graphs (the two real places; the two places
+above a prime that splits in `F`) can be merged into one in every window question (J21-RED).
+
+### 3.2 The mixing selection — a pullback theorem for one mixing compact factor [hand]
+
+**Lemma (expander mixing, compact form).** `K` compact abelian, Haar probability `μ`, `ν` a probability measure on `K` with
+`λ* = sup_{ξ ∈ K̂∖0} |ν̂(ξ)|`. If `P, Q ⊆ K` are measurable and no `b ∈ P`, `t ∈ supp ν` has `b + t ∈ Q`, then
+`μ(P)μ(Q) ≤ λ* √(μ(P)(1−μ(P))μ(Q)(1−μ(Q)))`. *Proof.* `0 = ∫_P ∫ 1_Q(b + t) dν(t) dμ(b) = Σ_ξ ν̂(ξ)·1̂_Q(ξ)·conj(1̂_P(ξ))` (up to the sign
+convention of `ν̂`); the `ξ = 0` term is `μ(P)μ(Q)`, the rest is at most `λ*‖1_P − μ(P)‖₂‖1_Q − μ(Q)‖₂` by Cauchy–Schwarz and Parseval. ∎
+*Consequence:* two edge-free measurable sets cannot both have measure `> θ := λ*/(1 + λ*)` (for then `μ/(1 − μ) > λ*` for each).
+
+**Theorem J21-MX.** Let `k ≥ 2`, `K`, `ν` as above with `T_K ⊇ supp ν` and `λ* < 1/(k − 1)` (equivalently `θ < 1/k`). Let `X` be a graph on
+a standard Borel space and `W : X × K → [k]` Borel and proper on `X × Cay(K, T_K)` (`(x, b) ∼ (x′, b + t)` whenever `x ∼ x′`, `t ∈ T_K`).
+Then `φ(x) = min{j : μ(W(x, ·)^{-1}(j)) > θ}` is a Borel proper `k`-colouring of `X`.
+*Proof.* Each fibre partitions `K` into `k` Borel sets, one of measure `≥ 1/k > θ`, so `φ` is defined everywhere; it is Borel because
+`x ↦ μ(W(x,·)^{-1}(j))` is Borel for Borel `W`. If `x ∼ x′` and `φ(x) = φ(x′) = j`, then `P = W(x,·)^{-1}(j)` and `Q = W(x′,·)^{-1}(j)`
+are edge-free (an edge `b → b + t` would be an edge `(x, b) ∼ (x′, b + t)` of the product coloured `j` twice) and both of measure `> θ`,
+contradicting the lemma. ∎
+
+**Measurable form (format N′).** Say a colouring is *proper off a null vertex set* (N′) if some null `Z` has every edge with an endpoint
+outside `Z` properly coloured (format E is `Z = ∅`; N′ implies C14′'s N). If `(X, µ_X)` is σ-finite and `W` is measurable for the completed
+product and N′ with null set `N`, put `Z = {x : W(x,·) not μ-measurable, or N_x not μ-null}` (null, by Fubini–Tonelli) and
+`φ(x) = min{j : μ^*(W(x,·)^{-1}(j)) > θ}` (outer measure; `Σ_j μ^* ≥ 1`, so defined everywhere). Then `φ` is measurable (off `Z` by Tonelli,
+on `Z` because `Z` is null) and N′ with null set `Z`: for `x, x′ ∉ Z` the proof above applies to `P ∖ N_x`; for `x ∉ Z`, `x′ ∈ Z`, with
+`j = φ(x)` and `P′ ⊆ P ∖ N_x` σ-compact of full measure, every point of `W(x′,·)^{-1}(j)` avoids `P′ + T_K` (the edge has its endpoint
+`(x, b) ∉ N`), and `K ∖ (P′ + T_K)` has measure `< θ` by the lemma, so `μ^*(W(x′,·)^{-1}(j)) < θ` and `φ(x′) ≠ j`. **Edges with both ends
+in `Z` are not controlled** — outer-measure mixing fails in general (under CH an independent set of a mixing compact Cayley graph can have
+full outer measure, by a transfinite construction) — **this is the null-set step, named.**
+
+*Prior art and the classical case.* For `K = ℤ/n` with `T_K = K ∖ 0` (the complete graph), `λ* = 1/(n − 1)`, and J21-MX is the classical
+`χ(G × K_n) = min(χ(G), n)` (Burr–Erdős–Lovász 1976, as cited in `[Zhu2025]` §1) — the proof is the classical one with "a pair of equal
+colours" replaced by "a class of measure above the mixing threshold". A spectral (mixing) form, finite or measurable, was not found (§3.7).
+*In KM's terms* it answers Problem 4.23's `C_B(k+1)` for pairs `(G, Cay(K, T_K))` with the second factor `(k)`-mixing, every analytic `G`
+(χ_B of such a factor exceeds `k`, since its measurable independence ratio is at most `θ < 1/k` — the lemma with `P = Q`).
+
+### 3.3 Which places of ℚ(√167) are thick — J21-TH [tools + hand]
+
+A place `v` is **5-thick** if its local graph contains a compact open subgroup `K` with a probability `ν` on `T_v ∩ K` of `λ* < 1/4`; then
+any window factor at `v` can be removed by J21-MX with `X` = the product of the other factors (restrict `W` to `G_{S∖v} × K`: edges of
+`Cay(K, T_v ∩ K)` are edges of `Γ_v`; in the categorical product every factor moves, so the other factors stay inside `X`).
+
+| kind | compact subgraph | `λ*` (every non-trivial character) | thick? |
+|---|---|---|---|
+| stable, residue `𝔽_p` | `Cay(O_{L_v}, T_v)`, Haar | `max(level-one max\|λ\|/(p+1), 2/(p+1))` (Lemma P for the new characters) | 59: `0.24863` (margin `1.4·10⁻³`); `p ≥ 67`: Weil `2√p/(p+1) < 1/4`; 167: `0.15160` — **thick**. 23: `0.33170`; 43: `0.27187` — **not** |
+| split, residue `𝔽_q` | `Cay(O², {(ε, ε^{−1}) : ε ∈ O^×})` (hyperbola coordinates), Haar | level one `max_c \|K(c)\|/(q−1)`; one coordinate of valuation `−1`: `1/(q−1)`; levels `m ≥ 2`: `≤ 2q^{1−m/2}/(q−1) ≤ 2/(q−1)` (Kloosterman sums mod `π^m`, odd residue characteristic, modulus `≤ 2q^{m/2}`: classical stationary phase); unequal negative valuations: `0` (C14.2 (c) case (c)) | `q ≥ 67` by Weil (`8√q < q − 1`), and 89, 97, 121, 137, 157, 169, … by the tool — **thick**. `q = 2` (`λ* = 1`: `ε ≡ 1 mod π`), 9 (`0.625`), 25 (`0.411`), 29 (`0.339`), 49 (`0.277`), 61 (`0.2557`) — **not** |
+
+(`data/m3/j21/spectra.out`.) So **the non-thick places of ℚ(√167) are exactly twelve**: the dyadic place, the places above 3, 5, 7
+(inert in `F`, split in `F(i)/F`), the two above 29 and the two above 61 (split), and the two above 23 and the two above 43 (stable). Every
+other finite place is 5-thick. *Optimality for the twelve (for these compact subgraphs):* the norm-one torus acts on `T_v ∩ K` and on the
+characters; averaging any `ν` over it gives the Haar measure with `|ν̂_unif(ξ)| ≤ max_u |ν̂(uξ)|`, so no reweighting beats Haar (§2.6 (b)).
+Other compact subgroups were not examined; "not thick" below means "not removable by J21-MX as run".
+
+### 3.4 The reduction — J21-RED [hand]
+
+**Theorem.** Let `S` be a finite set of places of ℚ(√167) and `S_red` the set obtained by deleting every 5-thick place and keeping one place
+of each isomorphic pair (the two real places; the two places above 23, 29, 43, 61). Then `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}`, and:
+1. (Borel) a Borel window five-colouring over `S` exists iff one exists over `S_red`;
+2. (measurable) a window five-colouring over `S` in format E gives one over `S_red` in format N′; one over `S_red` in format E (resp. N′)
+   gives one over `S` in format E (resp. N′).
+
+*Proof.* "⟸": pullback (D0 (ii); `Z × G` stays null). "⟹": delete thick places one at a time by J21-MX (format N′ is preserved, §3.2), and
+merge isomorphic pairs by J21-SL (which preserves E and N′: the slice of a null set is null for a.e. `s`). ∎
+
+**Corollaries at ℚ(√167).** (a) With no real place: if `S_red ∌ 43` then no window five-colouring over `S` exists (D1 on `S_red`; the
+factors 2, 3, 5, 7, 29, 61 have ratio 0, 23 ratio `≤ 0.18523`). **Every finite-place window falsifier must read a place above 43**, and it
+exists iff the 43-adic plane together with non-thick places admits one. (b) With a real place and only thick finite places: a Borel window
+five-colouring over `S` exists iff `χ_B(ℝ²) ≤ 5`; a measurable one (E) forces a measurable five-colouring of `ℝ²` proper off a null vertex
+set, and `χ_µ(ℝ²) ≤ 5` gives one. (c) Everything else — `S_red` containing `∞` and one of 2, 3, 5, 7, 23, 29, 43, 61 — is open.
+
+### 3.5 D2(a) and D2(b) — TRUE at partial scope; GAP at two named steps
+
+*D2(a), verbatim:* "Let `A` be the unit-distance graph of `ℝ²` and `B` a product of finitely many of ℚ(√167)'s finite places' local graphs,
+every factor of `B` of measurable independence ratio `< 1/5`. Then `A × B` has a measurable proper five-colouring iff `A` does." (or its
+failure, at a named step)
+
+- **⟸**: TRUE (pullback, D0 (ii)).
+- **⟹, every factor of `B` thick**: TRUE in the Borel category (`χ_B(A × B) ≤ 5 ⟹ χ_B(A) ≤ 5`, J21-RED), and in the measurable category
+  **up to the null-set step**: a measurable proper five-colouring of `A × B` gives a measurable five-colouring of `ℝ²` proper off a null vertex
+  set (N′), not yet one proper at every edge (**GAP-1**, §3.2's last paragraph).
+- **⟹, some factor of `B` not thick** (the D2-eligible non-thick factors are 2, 3, 5, 7, 23, 23′, 29, 29′, 61, 61′; 43 fails D2's ratio
+  hypothesis as far as is known): **GAP-2**, at the step "choose a colour of the fibre `W(x, ·)` consistently across `x ∼ x′`". The mixing
+  selection needs `λ* < 1/4` and these factors have `λ* ∈ [0.2557, 1]`; the count needs every factor `< 1/5` and `A`'s `m₁ ≥ 0.22936` is
+  above it. No construction of a non-pullback measurable five-colouring was attempted (W5).
+
+*D2(b)* ("the same with `A` the categorical product of the unit-distance graphs of `ℝ²` at the two real places"): **equivalent to D2(a)**
+(J21-SL merges the two real factors in either direction), so the same verdict: TRUE for `B` all thick (Borel; measurable into N′), GAP-2
+otherwise, GAP-1 for the everywhere-proper measurable form.
+
+### 3.6 Obstructions to the planner's route and to any ratio-only route
+
+**J21-NG1 — the cylinder lemma is false, at the first step.** The planner's step: "an independent set of `A′ × B` of relative density
+`> β` is a.e. a cylinder `I × B`". Counterexample with `A′ = A = UD(ℝ²)` (vertex-transitive, so the failure is not the non-transitive step
+the plan named): let `D₀` be the union of open discs of radius `1/2` centred at the triangular lattice of spacing 2 (1-avoiding: points of one
+disc are `< 1` apart, of two discs `> 1` apart; density `π/(8√3) = 0.2267`); tile the plane by squares of side `L`, let `E` be the union of
+the even squares and `E′` the union of the odd squares shrunk by 2 on each side, so `E′` misses the 1-neighbourhood of `E`. Take `J ⊆ G_B`
+independent of positive Haar measure (at a stable place a pulled-back independent set of `Γ_p`; at a split place the ball `πO²`, since
+`(y₁ − x₁)(y₂ − x₂) ∈ π²O` is never 1). Then `S = ((D₀ ∩ E) × G_B) ∪ (E′ × J)` is independent in `A × B`, its fibre over each point of `E′`
+is `J` (neither null nor conull), and its density is `≈ ½(0.2267 + d(J)) > β` whenever `d(J) < 0.2267`, which holds for every D2-eligible
+`B` (`β ≤ 0.18523`). Zhang's Thm 1.8 (i) is about **maximum** independent sets; a five-colouring's classes need not be maximum because
+`5m₁ > 1`.
+
+**J21-NG2 — the ratio alone cannot carry D2 (a finite no-go of that format).** `[Zhu2025]` §3, Theorem 3.5 (verbatim): "Let F be a graph of
+odd girth at least 7, with p vertices. Then for q ≥ (p − 1)/2 and n = 3q + 2, χ(K_n^{F[K_q]}) > n", applied there with "the 83-vertex graph
+of odd girth 7 with χf(F) > 3.07 (hence p = 83), and let q = 41 and n = 3q + 2 = 125" (the circulant `Cay(ℤ₈₃, {±2, ±22, ±25, ±34}`, §3.2
+of the survey). Put `B = F[K₄₁]` and `A = K₁₂₅^B`. `B` is a Cayley graph of the abelian group `ℤ₈₃ × ℤ₄₁` (connection set
+`(S_F × ℤ₄₁) ∪ ({0} × ℤ₄₁∖0)`), so vertex-transitive, with `α(B)/|B| = 1/χ_f(B) = 1/(41·χ_f(F)) < 1/(41·3.07) < 1/125`; evaluation is a proper
+125-colouring of `A × B`; and `χ(A) > 125`. So **"`B` abelian Cayley with independence ratio `< 1/k` ⟹ (`χ(A × B) ≤ k ⟹ χ(A) ≤ k`)" is false
+at `k = 125`**; any proof of D2(a) must use more of `B` than its ratio (J21-MX uses mixing, which `F[K₄₁]` lacks: its blow-up blocks carry
+large eigenvalues). At `k = 5` the ratio-only statement is not decided here (the `n = 4, 5` counterexamples use `Ω`-graphs whose fractional
+chromatic numbers were not determined).
+
+**J21-NG3 — at a split place the whole local graph is not mixing; only compact subgraphs can be.** In hyperbola coordinates let `U₁, U′₁`
+(and `U₂, U′₂`) be the sets of `x ∈ F_v` of valuation `≤ −2` whose second `π`-adic digit is 0, resp. 1 (at `q > 2` use the leading digit and
+valuation `≤ −1`, with a split of `𝔽_q^×` into two halves). Then `P = U₁ × U₂` and `Q = U′₁ × U′₂` have window densities `→ 1/4` (`q = 2`) and
+no edge between them: for `p ∈ P`, `q′ ∈ Q` both coordinate differences have negative valuation, so their product is never 1. So J21-MX cannot
+be run on the full split graph, and its reach at a split place is exactly the compact subgraph's `λ*` (§3.3).
+
+### 3.7 Prior-art gate for J21-MX (time-boxed; W6)
+
+zbMATH API, abstracts: `"Hedetniemi" & "eigenvalue"` (1 hit, a Laplacian/domination paper), `"Hedetniemi" & "expander"` (0),
+`"categorical product" & "eigenvalue" & "chromatic"` (0), `"Borel chromatic" & "product"` (0), `"measurable chromatic" & "product"` (0),
+`"Hedetniemi" & "measurable"` (0), `"Hedetniemi" & "Borel"` (0), `"Hedetniemi" & "random"` (7, none on point), `"exponential graph" &
+"fractional chromatic"` (2: Tardif 2001, Shitov 2019). Nothing on point; the negatives measure these words (G21). **Prior-art debt:** the
+finite mixing form is plausibly folklore (it is the Burr–Erdős–Lovász argument with a spectral pigeonhole); a search in the words
+"pseudo-random factor / dense factor / Hedetniemi's conjecture holds when" and the Borel-combinatorics literature on products
+(Conley–Kechris, Bernshteyn) is owed before any novelty is claimed.
+
+**Stage 3 in one line:** D3 TRUE (slicing); D2(a), D2(b) TRUE when every finite factor is 5-thick (Borel; measurable into N′), GAP-1 (the
+null-set step) and GAP-2 (non-thick factors: 2, 3, 5, 7, 23, 29, 61 up to conjugation) otherwise; the planner's cylinder route is refuted
+(NG1) and ratio-only routes are refuted in general (NG2). **At the one-real-place slice this proves nothing new about `χ_µ(ℝ²)`**: it shows
+that adding thick finite places to `{∞}` neither helps nor hinders a five-colour window, so over such `S` the question is exactly the
+plane's (Borel) measurable chromatic number.
