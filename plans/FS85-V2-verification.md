@@ -237,6 +237,99 @@ statement the brief wrote as (S′) — on the five-family graph — is not supp
 **Tools and plants for §W4–§W5:** `data/fs85/v2/w45_facts.py` (G1–G4); plants: (1) family 4 inside `Λ₅` → G1 fires; (2) `β̃²` for `β̃³`
 → G2's split (42, 21, 9) fires.
 
+## §C2. Comparison, after every C1 verdict was written (R3 §1; Coxeter R2.1–R2.4, R2.9–R2.12; the first verifier's §C3b)
+
+**No divergence of truth on any statement; stall criterion 2 does not fire.** Divergences of scope, notation and route:
+
+| # | where | theirs | mine | disposition |
+|---|---|---|---|---|
+| D1 | W3's scope (R3 §1 theorem, "Input", R3a; its answer to Coxeter R2.12 item 3) | "By G481, NT holds in families `|k| ≤ 2`", then "every proper four-colouring of the **five-family graph**"; "the five-family graph alone kills the 5-part" | G481 gives NT_0 on the five-family graph and NT_{|k|≤2} only on the full graph (§S, exact, with a family-moving control) | **escalated (done, owner agreed): R3a is proved in its conditional form; the unconditional five-family claim and the answer to R2.12 item 3 are not established.** Nothing downstream changes: W uses (S″). Coxeter R2.4 and the first verifier state the input correctly (on `Cay(Λ, U)`) |
+| D2 | R3 notation vs R3 "Theorems"/"arithmetic" paragraphs; the brief | notation: `P₋ = (1/9)β′³O` (right); later bullets and the brief: `P_± = (1/9)β^{±3}O` | `(1/9)β^{−3}O ⊇ Λ` (G2's check), so the `−` ideal must be `(1/9)β̃³O`, `β̃ = (5−√33)/2` | resolved: a typo that recurs in R3's own summary; fix at the close |
+| D3 | chirality labels | Coxeter's `ε = +` is the prime where `η² ≡ ζ₆²` | there `η ≡ 3ζ₆`, i.e. my (and R3's) `P₋`, `β̃ = (5−√33)/2`; at `P₊` (`β = (5+√33)/2`) `η ≡ 3ζ₆ − 3`, `η² ≡ ζ₆⁻²` (G4) | resolved: labels only; the derivation file should fix one convention |
+| D4 | W1(c), Coxeter R2.1 item 4 | "restrict to a generic line: a bounded exponential polynomial has constant coefficients" | a line separating all characters need not exist (the three nonzero characters of `ℤ²/2ℤ²`: every direction merges two); the step closes by linear independence of `{x^α e(θx)}` across base points, or by my generalised-eigenspace proof | resolved: a presentation gap, statement true |
+| D5 | W3's non-residue case | R3 step 2 (properness, an edge) first, then step 3 (Fourier disjointness per residue) | step 3 alone suffices: the non-residue case needs no properness | agree; routes differ in order only |
+| D6 | W3's residue case, the collapse | R3 step 4: (a) linear parts constant by **plane complementarity within one prime** (`dim Π_i + Π_j = 4`), (b) translation parts by the two-line lemma + nonzero mean on `𝔽₅` | colour-position functions `h_{a,α} = (−1)^{α∘φ_a}` are already `±1`: two-line lemma + full nonzero support on `ℤ/5` + disjoint lines; **no plane complementarity needed** | agree; keep both. I re-checked R3's F5 claim independently: within each prime the three planes meet pairwise only in 0 (`|Π∩Π| = 1`, all six pairs); across primes 3 of 9 pairs meet in a line |
+| D7 | W3's residue case, one prime on every slice | R3 step 2: an edge (properness) | same (first route); second route by spectrum alone (`1_{Y₋} = k_α²`, the three planes of one side meet only in 0) | agree; keep both |
+| D8 | W4 (Coxeter C15) | identical route; "with properness on the family-k edges, this is NT_k" | same; NT_k in the brief's sense (no monochromatic alternate triple) needs no properness, only the equitable form does | agree |
+| D9 | W4 via `Λ₇` | `Θ_{−3..3} = Θ_all + Ann(Λ₇)` exactly (378) | reproduced (42 on `Λ₇` ⇔ 378 on `Λ`); plus a no-computation route (`sin 2πt ≠ ±√3/2` at eighths) | agree; keep both |
+| D10 | W5, stripes | Parts's human lemma (MASCOT-T10) cited | derived here (wheel types O/P, propagation along the diagonal line, then line to line) | agree |
+| D11 | W5, the count | striped colourings of `T₀/8T₀` by direction and type: `9·512 − 2·24 = 4560` per prime, needing "striped ⇒ proper on `3μ₆`" for ⊇ | pair-linear colourings of `Cay(ℤ[ζ₆]/8, μ₆ ∪ 3μ₆)` directly: `3·1536 − 3·24 + 24 = 4560` (the within-pair graph `δ{±1,±3}` is 8 copies of `K_{4,4}`) | agree: the same inclusion–exclusion, two parametrisations |
+| D12 | the first verifier (§C3b) | `η^k·G481 ⊂ Λ` for `|k| ≤ 2`; `η^{±3}·G481` has 150 points outside, `η^{±4}` 342 | the same on the 268 tree vertices | agree |
+
+## §C3. Scope
+
+- **The controls — where (S′) fails, so the theorem does not prove too much.** *`ℤ[ζ₆]` alone at four colours:* the proper
+  3-colouring `m + nζ₆ ↦ (m − n) mod 3` is a four-colouring whose every hexagon rim alternates two colours, so both alternate triples
+  are monochromatic at every point: NT_0 fails. (G481 uses all five families, §S.) *FS-73's loose lattices:* each is loose by a gapped
+  periodic colouring (`data/fs73/table/TABLE.md`, "first gap"); at a gapped vertex the closed neighbourhood misses a colour, so every
+  hexagon rim there uses at most two colours and alternates: both triples monochromatic, NT fails in every family. Lattices with no
+  `√−3` (e.g. `K|Q(√11,i)`, `Q35|Q(√15,i)`) have no hexagons, so NT and W1 are not even defined there. L3 (rank 6, loose without a gap)
+  is not decided by this remark; (S′) was never claimed there.
+- **Row 78's certificate is not needed.** W uses (S″) (Parts's trees in five orientations, prior art), derivations, and exact
+  computations on characters, lattices and the reductions of the 54 unit vectors. No solver output of ours enters.
+- **Does W answer the 2018 question as posed?** The question (sixth thread, 29 May 2018, Mixon, verbatim in the held text):
+  *"Is Tamas's result that every 4-coloring of `ℤ[ω₁,ω₃]` is 8-periodic human-provable?"* W is about `Cay(Λ, U)`. Forcing is monotone
+  upward, so W gives: **for any point set `X` with `X + Λ = X` whose unit-distance graph contains the vectors `U`, every four-colouring
+  of `X` is `8Λ`-periodic — in particular 8-periodic.** Any additive group containing all `ζ₆^aη^k` is such an `X` (it contains
+  `Λ = ⟨U⟩`). So W answers the question **for the ring closed under rotation by `η^{±1}`**, which is how Hubai's computation uses it
+  (rotation by `½ arccos(5/6)`; "rotations act as `C₆ × C₆`"), given Parts's trees; that is a human-checkable proof, as asked.
+  **It does not answer it for the literal ring `ℤ[ω₁, ω₃] = ℤ[ζ₆, η²]`:** `ω₃ = (2 + w)/3` has `(2 + w) = 𝔭²` for one prime `𝔭 | 3` of
+  `ℚ(√−11)`, so `ω₃ = 𝔭/𝔭̄` and every element of the ring is `𝔭`-integral; hence `ω̄₃ = ω₃⁻¹ ∉ ℤ[ω₁, ω₃]`, the literal ring is not
+  closed under conjugation, contains no odd family `η^{odd}` among its generators, and is not a union of `Λ`-cosets (`1/9` is not
+  `𝔭`-integral). W does not contain that graph's statement, and nothing here decides it. Also not answered: Mixon's follow-up that the
+  ring has *finitely many* four-colourings — W gives finitely many for `Λ` (9,120), but a ring with infinitely many `Λ`-cosets is
+  coupled across cosets by edges W does not analyse.
+
+## §C4. Derivation-file entries (format of `plans/FS79-derivation.md`)
+
+**V2-T1 — The input's scope: Parts's G481 gives NT_0 on the five-family graph and NT_{|k|≤2} on `Cay(Λ, U)`. [tools exact + hand; verifier 2]**
+Every ℤ-linear map `Λ₅ → Λ` carrying `U_{|k|≤2}` into itself is one of the 24 point-group maps, each fixing family 0 up to sign (control:
+into all of `U`, family-moving maps appear); `η^k·G481 ⊂ Λ` with edges in `U` for `|k| ≤ 2`. *Proof:* §S; `data/fs85/v2/s_prime.py`,
+`s_prime_hom.py`. *Proof verdict:* closes (for linear transports; a non-linear homomorphism is neither claimed nor excluded).
+*Rests on it:* the scope of FS85-R3a (conditional), W's input (S″). *Prior art:* the trees are `[Parts2020hv]`'s; the check is ours.
+*Kernel:* declined (a statement about an input taken as given).
+
+**V2-T2 — The spectral lemma with the finite-support lemma. [hand; verifier 2, independently of Coxeter's C7]**
+§W1. *Proof verdict:* closes. *Rests on it:* everything below. *Prior art:* Schwartz's point-support theorem; the hexagon count is
+elementary. *Kernel:* stub-worthy — (a) and the finite-quotient form of (c) are finite statements; the distributional step is not
+needed on a periodic colouring (declined until a kernel consumer is named).
+
+**V2-T3 — The 5-part lemma, conditional form. [hand + tools exact; verifier 2; route differs from R3a in the residue collapse]**
+§W3. *Proof verdict:* closes given NT_{|k|≤2}; with (S″) every colouring of `Cay(Λ, U)` is `24Λ`-periodic. *Rests on it:* W4's first
+application. *Prior art:* none found (the CRT slicing, the two-line lemma and the Fourier disjointness are this milestone's).
+*Kernel:* declined for now — the facts F1–F7 are small exact tables a checker could state; the Fourier steps need finite Fourier
+analysis on `Λ₅/40Λ₅`, a plausible stub if W is to reach the kernel.
+
+**V2-T4 — The alternate-triple lemma without properness. [hand + tools exact; verifier 2, same route as Coxeter's C15]**
+§W4, with the no-computation route to `Λ₇`. *Proof verdict:* closes. *Rests on it:* NT_{±3}, NT_{±4}. *Prior art:* Coxeter's C15.
+*Kernel:* declined (with V2-T3).
+
+**V2-T5 — The stripe lemma on the triangular lattice under NT_0. [hand; verifier 2]** §W5 item 3. *Proof verdict:* closes. *Rests on
+it:* pair-linearity; the count. *Prior art:* `[Parts2020hv]` §3's second part (the same lemma, human-verified there); MASCOT-T10.
+*Kernel:* a good small kernel target (a finite local lemma plus an induction on lines) — stub if the chain is formalised.
+
+**V2-T6 — The collapse: 8Λ-periodic, one prime for all of Λ, pair-linear, 9,120 = 2 × (3·1536 − 3·24 + 24), `F = P = 8Λ` with explicit
+separators. [hand + tools exact (G2, G4); verifier 2]** §W5. *Proof verdict:* closes given NT in all nine families. *Rests on it:* W.
+*Prior art:* the count is `[Hubai2018]`'s (computer, on the ring) and FS-73's census (computer); the derivation of the count is
+Coxeter's C12 and this, independently. *Kernel:* declined (with V2-T3).
+
+**V2-T7 — The theorem W, given (S″). [hand + tools exact; verifier 2, the second independent derivation]** §W. *Proof verdict:* closes
+given (S″). *Rests on it:* row 78 can cite a derivation in place of its 2,044-point certificate, at the grade "prior art (Parts's trees)
++ hand + tools exact". *Prior art:* the value and count are Hubai's (ring, computer) and FS-73's (lattice, certificate); the forced
+pair at 8/3 Harder's. *Kernel:* declined here; the owner's call with FS-75-style stubs.
+
+**V2-T8 — The literal ring `ℤ[ω₁, ω₃]` is not conjugation-closed: `ω̄₃ ∉ ℤ[ω₁, ω₃]`. [hand; verifier 2]** §C3. *Proof verdict:*
+closes. *Rests on it:* the scope of W's answer to the 2018 question. *Prior art:* Tao's 2018 query (whether `V ⊂ R₂`) is the same
+concern. *Kernel:* declined.
+
 ## Theorems this phase proved
 
-*(filled as verdicts land)*
+- **V2-T1** input scope (G481: NT_0 on the five-family graph; NT_{|k|≤2} on `Cay(Λ, U)`) — [tools exact + hand] §S.
+- **V2-T2** the spectral lemma with the finite-support lemma — [hand] §W1.
+- **V2-T3** the 5-part lemma, conditional form — [hand + tools exact] §W3.
+- **V2-T4** the alternate-triple lemma, without properness; NT_{±3}, NT_{±4} — [hand + tools exact] §W4.
+- **V2-T5** the stripe lemma under NT_0 — [hand] §W5.
+- **V2-T6** the collapse and the count 9,120 by derivation; `F = P = 8Λ` — [hand + tools exact] §W5.
+- **V2-T7** the theorem W, given (S″) — [hand + tools exact] §W.
+- **V2-T8** the literal ring `ℤ[ω₁, ω₃]` is not conjugation-closed — [hand] §C3.
+- **[tools exact]** W2 reproduced (42, 8Λ; 7290, 120Λ); F1–F7 (`w3_facts.py`), G1–G4 (`w45_facts.py`), each with planted faults.
