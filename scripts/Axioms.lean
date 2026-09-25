@@ -1623,6 +1623,23 @@ evaluation. -/
 #print axioms HadwigerNelson.SevenUnitRing.three_div_eight_mem_unitRingOver_seven
 #print axioms HadwigerNelson.SevenUnitRing.wall_broken_seven
 
+/-! ## FS-87 target 1 — the stripe lemma (J16)
+
+Every proper four-colouring of the triangular lattice with no monochromatic √3-triangle is striped (FS85-V2-T5,
+`[Parts2020hv]` §3): the wheel facts by a complete kernel check of one wheel's `4⁷` colourings, propagation along a line, line
+to line, and the rotation by `ζ₆`. The class-mod-2 colouring inhabits the hypotheses; a proper three-colouring shows NT₀ cannot
+be dropped. No solver, no native evaluation. -/
+
+#print axioms HadwigerNelson.Stripe.wheel_all
+#print axioms HadwigerNelson.Stripe.wheel
+#print axioms HadwigerNelson.Stripe.typeP_line
+#print axioms HadwigerNelson.Stripe.striped_of_line
+#print axioms HadwigerNelson.Stripe.striped_of_comp_rot
+#print axioms HadwigerNelson.Stripe.striped_of_proper_nt0
+#print axioms HadwigerNelson.Stripe.proper_modTwo
+#print axioms HadwigerNelson.Stripe.nt0_modTwo
+#print axioms HadwigerNelson.Stripe.not_striped_threeCol
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

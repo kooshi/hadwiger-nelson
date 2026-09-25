@@ -137,3 +137,78 @@ involution. (What it does not show: that the statement is *false* without an inv
 | `exists_sum_eq_of_mem_unitRingOver` — ring elements are finite sums of unit vectors | kernel | same |
 | `add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver` — the chain theorem in ring form | kernel | same |
 | `inv_two_mem_unitRingOver_seven`, `three_div_eight_mem_unitRingOver_seven`, `wall_broken_seven` — the wall broken over `K(√7)`, valuation form | kernel | `Proofs/HadwigerNelson/Instances/SevenUnitRing.lean` |
+
+## Stage 3 — SAVED
+
+*22:10–22:27 UTC. `Proofs/HadwigerNelson/Stripe.lean`, 447 lines: **the stripe lemma is proved in full**, no `sorry`, no solver, no native
+evaluation. So no J16b is needed.*
+
+### 3.1 The statement (read aloud against the stub)
+
+The stub (`plans/STUB-de-grey-chain-kernel.md` target 1, quoted in 1.1): "under NT₀ every proper four-colouring of the triangular lattice
+is striped". The kernel statement, `Stripe.striped_of_proper_nt0 (hc : Proper c) (hnt : NT0 c) : Striped c` for `c : ℤ × ℤ → Fin 4`:
+- `ℤ × ℤ` is `ℤ[ζ₆]` in the basis `1, ζ₆`; `rim` lists the six units `(1,0), (0,1), (−1,1), (−1,0), (0,−1), (1,−1)` = `1, ζ₆, ζ₆², …`
+  in cyclic order (spec: each has Eisenstein norm `a² + ab + b² = 1`);
+- `Proper c`: every point differs from its six neighbours — the triangular lattice's unit-distance graph;
+- `NT0 c`: no alternate triple of any wheel is monochromatic. **Faithfulness:** every √3-triangle of `ℤ[ζ₆]` has side `s = (1+ζ₆)u`
+  (`u` a unit, the only elements of norm 3), and its centroid `p + s(1+ζ₆)/3 = p + uζ₆` is a lattice point, so every √3-triangle is an
+  alternate triple of the wheel at its centroid (spec: `N(rim 2 − rim 0) = 3`). So `NT0` is exactly "no monochromatic √3-triangle";
+- `Striped c`: `∃ π : Fin 4 → ZMod 2` with both fibres of size two and an additive `β : ℤ × ℤ →+ ZMod 2` with
+  `π (c x) = π (c 0) + β x` — the colours split into two pairs whose index is affine. That is V2's "pair-linear".
+
+### 3.2 The proof as landed (and where it differs from V2 §W5 item 3)
+
+| step | declaration | how |
+|---|---|---|
+| wheel facts | `WheelFacts`, `wheel_all`, `wheelFacts`, `wheel` | one `Prop` per wheel (centre `a`, rim `r₀…r₅`): proper + no alternate triple ⟹ (type O or type P along `rim 0`, `rim 1`, `rim 2`) ∧ (`r₂ = r₄ → r₀ = r₃ ∧ r₁ = r₅`) ∧ (`r₁ = r₅ → r₀ = r₃ ∧ r₂ = r₄`); `decide` on it for all `4⁷ = 16,384` wheels, nested `List.all`, `decide +kernel` |
+| propagation | `typeP_zero_add`, `typeP_three_add`, `typeP_line` | type P along `rim 0` at `x` makes the wheel at `x ± rim 0` satisfy the hypothesis of the second or third wheel fact (the neighbours of `±v` at `x` are the neighbours of `∓v` at `x ± v`), so type P propagates; `Int.induction_on` |
+| line to line | `striped_of_line` | **properness alone**: if the line `x + ℤ(1,0)` is two-periodic with colours `{p, q}`, the point `(s, n+1)` is adjacent to `(s, n)` and `(s+1, n)` (`rim 1`, `rim 2`), which carry both colours of line `n`'s pair, so it lies in the other pair (`pairOf_step`, decided over `Fin 4`); the same downward; so the pair of `x + (s, n)` is `n mod 2` |
+| one direction | `rot`, `rotInv`, `proper_comp_rot`, `nt0_comp_rot`, `striped_of_comp_rot`, `typeP_comp_rot` | `ζ₆·(a, b) = (−b, a + b)` steps the rim (`rot_rim`); type P along `rim 1` or `rim 2` becomes type P along `rim 0` after one or two rotations |
+| assembly | `striped_of_typeP`, `striped_of_proper_nt0` | a type-P point gives a two-periodic line; with none, every point is type O (the first wheel fact) and the line through `0` is two-periodic |
+
+**Two simplifications against V2's text, both checked by the kernel:** (1) NT₀ is used only to produce one two-coloured line; the line-to-line
+induction needs properness alone (V2 phrases it with alternating pairs, which is more than needed). (2) The all-type-O case needs no
+separate `𝔽₄` factorisation: type O at every point makes every line two-periodic, and the same line-to-line step finishes.
+
+### 3.3 Controls
+
+| control | result |
+|---|---|
+| **plant, the wheel check** (`data/m2/j16/PlantWheel.lean`: the forward propagation fact's `r₁ = r₅` replaced by `r₁ = r₄`, false on type-P wheels) | **red for its reason**: `decide proved that the proposition … is false` at `wheel_all`, then the type mismatch in `typeP_zero_add`; the faithful module is the pair's passing half |
+| **the hypotheses are inhabited** | `modTwo` (the class mod `2ℤ[ζ₆]`, a bijection `𝔽₄ → Fin 4`): `proper_modTwo`, `nt0_modTwo` (each reduced to `(ZMod 2)²` and decided), and `example : Striped modTwo` through the theorem |
+| **NT₀ cannot be dropped** | `threeCol x = (a + 2b) mod 3`: `proper_threeCol` and `not_striped_threeCol` (a period-3 line forces `β(1,0) = 0`, so three colours share a pair — a fibre of size ≥ 3). The theorem is not true of proper colourings alone, so NT₀ is load-bearing, and the statement is not vacuous in either direction |
+
+### 3.4 The gate after this stage
+
+| check | result |
+|---|---|
+| build | **OK** — 178 of 178 batches, 2 modules rebuilt (`Stripe` 4.2 s, `Proofs` 1.4 s), **0 modules with warnings** |
+| `./scripts/axioms.sh` | **OK — 1077 clean** (+8), **11 axiom-free** (+1: `wheel_all` uses no axioms), **5 declared purchases** (unchanged) |
+| `./scripts/vacuity.sh` | **OK** — declarations 6936 → 6986, refutations-skipped 287 → 293 (`not_striped_threeCol` and its auxiliaries conclude `False`), sites 279, vacuous 0, stale 0, declared 3, witnessed 17, generic 257, unknown 2 (no new site: `Proper`, `NT0` are predicates, not structure binders) |
+| architecture | **PASS** (row `Stripe` added) |
+| elaboration cost | whole module 4.8 s wall, 2.9 GB peak with a minimal import (`ZMod.Basic`, `Fin.VecNotation`, `List.FinRange`, `Ring`, `LinearCombination`) — against J04's 18.4 s / 9.8 GB for S1 alone with a whole-`Mathlib` import; the per-wheel check on direct arguments beats J04's vector form (`![…]` indexing measured 15 s for one fact on the same `4⁷`) |
+
+A docstring correction after the gate run (names of the wheel and propagation declarations) is rebuilt in stage 4's gate.
+
+### 3.5 Predictions scored
+
+| id | prediction | outcome |
+|---|---|---|
+| P-J16b | "the stripe lemma lands in full inside J16" (planner 0.10; mine 0.10) | **met** — 17 minutes of elaboration work. §3.2's price (4–6 hours, 400–500 lines) was built from S1's rate and a ten-point S2; the S2-as-a-wheel-statement shape (§4.4 item 5) and the properness-only line step removed most of it |
+
+### 3.6 Would have searched here
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X3 | none — the one finite computation is the complete enumeration of one wheel's `4⁷` colourings, a set the wheel derivation fixes (the ban's "at the edge" case, as J04's S1), plus decisions over `Fin 4`, `(ZMod 2)²`, `ZMod 3` and the 16 maps `Fin 4 → ZMod 2`, each a finite fact a derivation named | — |
+
+### 3.7 Theorems this phase proved
+
+| theorem | grade | address |
+|---|---|---|
+| `wheel_all` / `wheelFacts` / `wheel` — the wheel classification (type O or P) and the two propagation facts, on all `4⁷` wheels | kernel | `Proofs/HadwigerNelson/Stripe.lean` |
+| `typeP_line` — type P along a direction propagates along its line | kernel | same |
+| `striped_of_line` — a two-periodic line stripes a proper four-colouring (properness alone) | kernel | same |
+| `striped_of_comp_rot` and the rotation transfers | kernel | same |
+| **`striped_of_proper_nt0` — the stripe lemma (FS85-V2-T5)** | kernel | same |
+| `proper_modTwo`, `nt0_modTwo`; `proper_threeCol`, `not_striped_threeCol` — the model, and NT₀ cannot be dropped | kernel | same |
