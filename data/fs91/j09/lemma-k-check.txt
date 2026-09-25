@@ -1,0 +1,10 @@
+q=3: checked 8 a; min count 0; failing norms [2] (-1 = 2); formula mismatches 0; S=-K mismatches 0
+q=3: zero counts of Tr(a t) on mu_4: min 0 (expected 0: the four order-3 characters); zero-formula mismatches 0
+q=27: checked 728 a; min count 0; failing norms [1]; formula mismatches 0; S=-K mismatches 0; K values [-10, -7, -4, -1, 2, 5, 8]; min bracket (q+1)-K(n)+2K(-n) = 0
+q=27: K1 FALSE exactly on N(a) = 1 (expected, the finding): True; zero counts: min 4 (> 0 needed); zero-formula mismatches 0
+q=243: checked 242 norm classes; min count 80; formula mismatches 0; K range [-31, 29] vs 2*sqrt(243) = 31.18; min bracket 180 vs Weil floor 244 - 6*sqrt(243) = 150.47
+q=243: zero counts min 62; zero-formula mismatches 0
+PLANT target-D at q=27 (count (1+i)mu_4 against the mu_4 formula): formula mismatches 728 -> FIRED
+PLANT sign flip +2K(-n) -> -2K(-n) at q=27: formula mismatches 728 -> FIRED
+PLANT target-D at q=3 (the failing class must move): failing norms [1] -> FIRED
+RESULT: PASS

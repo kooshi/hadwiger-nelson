@@ -1,0 +1,2 @@
+a=1: count in mu4 = 0; values tr9(t) = [0, g^4 + g^2 + g, 2*g^4 + 2*g^2 + 2*g, g^4 + g^2 + g + 1, 2*g^4 + 2*g^2 + 2*g + 2]
+number of a with count 0: 28; min zeros of Tr_{729/3}(a t) on mu28 over all a: 4
