@@ -337,7 +337,7 @@ at each place, over all levels:
 | 83, 131 | 19 (×2) | FS-66 certificate `U(19)` [cert] (Hoffman 0.2756 fails) | 0.21471 | 0.035 |
 | 59 / 83 / 131 | ramified `d` | Hoffman + Lemma P (V3-ram) | 0.19912 / 0.17411 / 0.13787 | ≥ 0.051 |
 | K | 11 (×2, ramified) | FS-66 certificate via Lemma P (ii) [cert] | 0.23309 | 0.0169 |
-| K | 83, 107, 131, … (×4) | Weil + Hoffman | ≤ 0.1741 | ≥ 0.076 |
+| K | 83, 107, 131, … (×4) | Weil + Hoffman (exact at 83: 0.1741) | `≤ 2√p/(p+1+2√p)` ≤ 0.178 | ≥ 0.072 |
 | all | primitive characters at any level | Lemma P | `2/(p+3)` ≤ 0.143 | — |
 
 *The margin at 31, confirmed explicitly (the owner's R.2 item 3):* `λ_min(Γ₃₁) = −10.66651049380006395962…` (= `−K(1, c/4)` at the
