@@ -151,3 +151,186 @@ whose failure would be a measurable Hedetniemi gap (a genuine finding either way
 
 **Counts, §G.1:** 76 grokkings walked (checked mechanically: every id G1–G76 present once). Q1: 14 bears, 62 silent, 0 falsifiable.
 Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
+
+---
+
+## Stage 2 — SAVED (§G.2 the rows, §G.3 the method rules, §G.4 what changed)
+
+### G.2 The ledger rows (`LEDGER.md` § A, rows 1–97 by mechanism, read in full from disk; § B read by keyword scan only — see §X)
+
+- **R1** — Q1 silent: two-circle theorem. | Q2 silent.
+- **R2** — Q1 silent: seam rotation. | Q2 silent.
+- **R3** — Q1 silent: coverage monotonicity. | Q2 silent.
+- **R4** — Q1 silent: fan ⟺ coverage (G13 carries the rank-1 use). | Q2 silent.
+- **R5** — Q1 silent. | Q2 silent.
+- **R6** — Q1 silent. | Q2 silent.
+- **R7** — Q1 silent: greedy bound. | Q2 silent.
+- **R8** — Q1 silent. | Q2 silent.
+- **R9** — Q1 silent. | Q2 silent.
+- **R10** — Q1 silent. | Q2 silent.
+- **R11** — Q1 silent: a strip's window automaton; method precedent only (T35 is the rank-1 form). | Q2 silent.
+- **R12** — Q1 silent. | Q2 silent.
+- **R13** — Q1 silent. | Q2 silent.
+- **R14** — Q1 silent. | Q2 silent.
+- **R15** — Q1 silent. | Q2 silent.
+- **R16** — Q1 silent. | Q2 silent.
+- **R17** — Q1 silent. | Q2 silent.
+- **R18** — Q1 silent. | Q2 silent.
+- **R19** — Q1 silent. | Q2 silent.
+- **R20** — Q1 silent. | Q2 silent.
+- **R21** — Q1 silent. | Q2 silent.
+- **R22** — Q1 silent. | Q2 silent.
+- **R23** — Q1 silent. | Q2 silent.
+- **R24** — Q1 silent. | Q2 silent.
+- **R25** — Q1 silent. | Q2 silent.
+- **R26** — Q1 silent. | Q2 silent.
+- **R27** — Q1 silent. | Q2 silent.
+- **R28** — Q1 silent. | Q2 silent.
+- **R29** — Q1 silent. | Q2 silent.
+- **R30** — Q1 silent. | Q2 silent.
+- **R31** — Q1 silent. | Q2 silent: vacuity lesson carried by G30 mode 5.
+- **R32** — Q1 silent. | Q2 silent: {1,√3,2} host.
+- **R33** — Q1 silent. | Q2 **bears**: the hexagonal 7-colouring is the format's inhabitant at seven (a window at `S = {∞}`, proper everywhere) → J21's no-go ships it (G30.5).
+- **R34** — Q1 silent. | Q2 silent: G22/G29 carry the coset/cell corner.
+- **R35** — Q1 silent. | Q2 silent: same.
+- **R36** — Q1 silent. | Q2 silent.
+- **R37** — Q1 silent. | Q2 silent.
+- **R38** — Q1 silent. | Q2 silent.
+- **R39** — Q1 silent. | Q2 silent.
+- **R40** — Q1 silent. | Q2 silent.
+- **R41** — Q1 silent. | Q2 silent: limit lemma for drawings.
+- **R42** — Q1 silent: arity floor. | Q2 silent.
+- **R43** — Q1 silent. | Q2 silent.
+- **R44** — Q1 silent. | Q2 silent.
+- **R45** — Q1 **bears**: the entropy floor (a 3-colourable graph has ≥ 2ⁿ four-colourings on 3n vertices) gives: all-rigid ⟹ `χ(G(ℤ,D)) = 4` exactly → J18 stage 2, lemma K1. | Q2 silent.
+- **R46** — Q1 silent. | Q2 silent.
+- **R47** — Q1 silent. | Q2 silent.
+- **R48** — Q1 silent. | Q2 silent.
+- **R49** — Q1 silent. | Q2 silent.
+- **R50** — Q1 silent. | Q2 **bears**: `[Fischer1990]` Ex. 4 — no additive `k`-colouring of ℚ(√167)'s plane for `k < 11`: the linear corner is closed → J21 stage 1 inputs.
+- **R51** — Q1 silent. | Q2 silent.
+- **R52** — Q1 silent. | Q2 **bears**: the finite factors' ceilings (23, 43 usable): a window at `{23}` alone is a residue colouring, ≤ 8 → J21 stage 2 corners.
+- **R53** — Q1 silent. | Q2 **bears**: the factor list for the count — every stable `p ≥ 59` refuses five spectrally → J21 stage 2.
+- **R54** — Q1 silent. | Q2 silent.
+- **R55** — Q1 silent. | Q2 silent.
+- **R56** — Q1 silent. | Q2 **bears**: `card_le_chromaticNumber_mul_indepNum` is the finite, kernel form of C14.1's count → J21 cites.
+- **R57** — Q1 silent. | Q2 silent: residue colourings are the one-factor pullbacks; R52 carries the value.
+- **R58** — Q1 silent. | Q2 silent.
+- **R59** — Q1 silent. | Q2 silent.
+- **R60** — Q1 silent. | Q2 silent.
+- **R61** — Q1 silent. | Q2 silent.
+- **R62** — Q1 silent. | Q2 silent.
+- **R63** — Q1 silent. | Q2 silent: two colours from inertia.
+- **R64** — Q1 silent. | Q2 silent.
+- **R65** — Q1 silent. | Q2 silent.
+- **R66** — Q1 **bears**: a gapped vertex is repaintable (one-vertex perturbation); in rank 1 that is a detour, so entropy → J18 lemma K0 (with G13). | Q2 silent.
+- **R67** — Q1 silent. | Q2 silent: G54 carries (no tight place at ℚ(√167)).
+- **R68** — Q1 silent. | Q2 silent.
+- **R69** — Q1 silent. | Q2 **bears**: five refused at 43 by `α ≤ 365 < 370` — level-one ratio 0.1974, a margin of 0.0026; the all-levels ratio is the open factor → J21 stage 2 gap.
+- **R70** — Q1 silent. | Q2 **bears**: FS54-T5's product rule (`[Zhang2012]`, `[Zhu2011]`) is the finite form of C14.3 → J21 stage 2.
+- **R71** — Q1 silent. | Q2 **bears**: the field blow-up and its cap (4.36) are the count's engine; no density argument reaches five → J21 stage 2 (the cap theorem).
+- **R72** — Q1 silent. | Q2 **bears**: FS-64's configuration (ii), the barrier prime 3, is inert in ℚ(√167) with `i ∈ 𝔽₉`, so a **split** place there (ratio → 0 by C14.2 (c)) — it cannot carry a five-colouring the count forbids → J21 stage 2 checks and states it.
+- **R73** — Q1 silent. | Q2 silent.
+- **R74** — Q1 silent. | Q2 silent.
+- **R75** — Q1 silent. | Q2 **bears**: 23's all-levels ratio `≤ 97.98/529 = 0.1852 < 1/5` (certificate); 43 "not claimed", its instrument priced at 84 GPU-days (banned) → J21 stage 2 names 43 at depth.
+- **R76** — Q1 silent. | Q2 silent.
+- **R77** — Q1 silent. | Q2 silent.
+- **R78** — Q1 **bears**: `InheritanceQuestion` (kernel `Prop`, `Kempe.lean`) is Q1's subgroup form; `forces_iff_exists_finite` (compactness) → J18 states R2 as its rank-1 instance. | Q2 silent.
+- **R79** — Q1 **bears**: at three colours `P = F` by density (T24) — the `k = 3` case of Q1 is a theorem; a proof of R2 must say why its argument fails at three or reduces to T24 there → J18 stage 2 control. | Q2 silent.
+- **R80** — Q1 **bears**: T3 (walls are one-way), T4 (rank-1 window LP exact), T34, T35, T36 are Q1's inputs → J18 stage 1. | Q2 silent.
+- **R81** — Q1 silent. | Q2 silent: four colours.
+- **R82** — Q1 silent. | Q2 silent: three colours.
+- **R83** — Q1 silent. | Q2 silent.
+- **R84** — Q1 silent. | Q2 silent.
+- **R85** — Q1 silent: the annihilator method is a rank ≥ 2 mechanism; rank-1 periodicity is SFT combinatorics. | Q2 silent.
+- **R86** — Q1 **bears**: FS85-dB2's `|D| = 70` distance graph has exactly 24 four-colourings (all rigid, no wall, far outside T36's range), and the embedding lemma (dB1) realises finite graphs in `G(ℤ, D)` — the construction route to a counterexample → J18 stage 3. | Q2 silent.
+- **R87** — Q1 silent. | Q2 silent.
+- **R88** — Q1 silent. | Q2 silent: type (B), four colours.
+- **R89** — Q1 silent. | Q2 silent.
+- **R90** — Q1 silent. | Q2 silent: dyadic local plane (ℚ(√167)'s dyadic places are split).
+- **R91** — Q1 **bears**: Theorem H (a colouring agreeing with a gap-free periodic one on a half-space equals it) has a rank-1 analogue — one-sided gap-freeness forbids walls out of a phase; R2 is H's rank-1 form for all-rigid shifts → J18 stage 2, lemma K2. | Q2 silent.
+- **R92** — Q1 silent. | Q2 **bears**: C14/CL1 are the four-colour theorem Q2 extends; its inputs (C14.1–C14.3, the factor ratios, the `p = 2` caveat) → J21 stage 1.
+- **R93** — Q1 silent. | Q2 silent.
+- **R94** — Q1 silent. | Q2 **bears**: C9's `⌊4θ⌋` over ℚ(√11) is a non-pullback window colouring where the count permits — the format's positive control → J21 stage 2.
+- **R95** — Q1 silent. | Q2 **bears**: every four- and five-colour band character is `T + A` (to nine given J01) → J21 stage 1 inputs.
+- **R96** — Q1 silent. | Q2 **bears**: CL5, no character five-colouring of ℚ(√167) — the windowless case closed → J21 stage 1 inputs.
+- **R97** — Q1 **bears**: a one-prime heteroclinic character is a wall between two phases in a rank-one system, killed by a second direction — the analogy, and why rank 1 has no second direction → J18 stage 2 note. | Q2 silent: rows 95–96 carry.
+
+**Counts, §G.2:** 97 rows walked. Q1: 9 bears, 88 silent, 0 falsifiable. Q2: 18 bears, 79 silent, 0 falsifiable.
+
+### G.3 The method rules (the `[method]` grokkings G21, G30, G46, G49, G50, G67, G72 are in G.1; below, every other rule in § Whose work, § Delegation, § Standard of evidence, § What compute helps, § Trust ledger, § Toolchain, § Building, § The kernel's cost model, § Searching, § The gate, § Make the gate fail)
+
+- **M1 own the conclusions; "not landed" is complete** — both **bears**: J18/J21 report GAP as GAP → every brief.
+- **M2 ask for what the work needs** — both silent: nothing to provision.
+- **M3 delegation one level deep** — both **bears**: every brief says it, with the reason → §S briefs.
+- **M4 no native evaluation in a headline** — both silent: no Lean this milestone.
+- **M5 the artifact is certificate plus checker** — Q1 **bears**: a counterexample `D` ships its window graph and an exact checker → J18 stage 3. | Q2 silent: hand.
+- **M6 witness independently re-derivable** — Q1 **bears**: a counterexample is stated by construction, not coordinates → J18. | Q2 silent.
+- **M7 read the final statement aloud** — both **bears**: J20's and J22's lists end with the statement read against the informal claim.
+- **M8 report the hunt honestly** — both **bears**: every null typed with its range.
+- **M9 write the certificate for the reviewer early** — both **bears**: J18/J21 stage 4 asks "what must a reviewer check?"
+- **M10 order verification by evidential value** — both **bears**: the verifiers check the deciding step first (the chiral case; the pullback step).
+- **M11 a kernel leaf priced high** — both silent: no kernel.
+- **M12 a GPU is not a SAT accelerator** — both silent.
+- **M13 nothing in `tools/` trusted** — Q1 **bears**: T36's scan tool is evidence, not proof → J18 C0. | Q2 silent.
+- **M14 trust ledger; grep the right name** — both silent.
+- **M15 lean4checker a publication gate** — both silent.
+- **M16 the ban** — both **bears**: no scan (T36 not extended), no LP oracle, no relaxation at 43 → every brief.
+- **M17 the would-have-searched log** — both **bears** → every brief.
+- **M18 pysat interrupts** — both silent: no solver.
+- **M19 venvs outside `build/`** — both silent.
+- **M20 break symmetry before SAT** — both silent: no SAT.
+- **M21 Python 3.14 forkserver** — Q1 **bears** lightly: any exact check that pools uses `fork` or an initializer → J18 tools. | Q2 silent.
+- **M22 machines; physical cores; predicted beside measured** — both silent.
+- **M23 always `scripts/build.sh`** — both silent: no Lean.
+- **M24 `lake env lean` is not the gate** — both silent.
+- **M25 batch is the plan** — both silent.
+- **M26 unexplained crash: halt** — both **bears**: in every brief (standing rule 8).
+- **M27 RAM is the discriminator; `slot.py`** — Q1 **bears**: a window graph has up to `4^{max D}` states; price before running, slot above 2 GiB → J18 stage 3. | Q2 silent.
+- **M28 checkpoint and resume [PROTECTED]** — both silent: no run over 15 minutes is planned; any that appears must answer "what does a relaunch redo?" first.
+- **M29 a blocking run is presumed killable [PROTECTED]** — both silent: no long runs.
+- **M30 kill by pid/pgid, verify by effect** — both silent.
+- **M31 a pipe can kill the producer** — both silent.
+- **M32 never edit a running script** — both silent.
+- **M33 generated modules and invalidation** — both silent.
+- **M34 the kernel's cost model** — both silent.
+- **M35 searching (ugrep, `rg -uu`, `exact?`)** — both **bears** lightly: grep counts over records use `rg`/`grep -oF` → verifiers' reading.
+- **M36 `vacuity.sh`** — both silent: no Lean.
+- **M37 gates keep what they computed** — both silent.
+- **M38 every structural hypothesis ships an inhabitant** — both **bears**: R2's inhabitants (`{1,2,3}`; FS85-dB2) and the window format's (the hexagonal 7-window; C9 at four over ℚ(√11)) → J18, J21.
+- **M39 an `#eval`/example per definition** — both silent: no definitions in Lean.
+- **M40 make the gate fail** — both **bears**: every `tools/crunch_j*` check plants a fault and watches it fire → J18, J21.
+- **M41 a positive signal for what did not happen** — Q1 **bears**: an exact wall check reports "walls: 0" only beside a control that has walls (`{1,5,7,10}`) → J18. | Q2 silent.
+- **M42 waiters** — both silent.
+- **M43 the uninformative outcome reachable** — both **bears** → §P checks each prediction's outcomes reachable.
+- **M44 pre-decide the response to your own gate** — both **bears**: §P's scoring rules written now.
+- **M45 a sharp instrument loses coverage** — both silent.
+- **M46 carry what a number measures** — Q2 **bears**: Croft's 0.22936 is a construction's density (a lower bound on `m₁`), `[AmbrusEtAl2023]`'s 0.2470 an external computer-assisted upper bound, C14.2 (c) a limit — J21 carries each with its kind. | Q1 silent.
+- **M47 one thing differs; both outcomes reachable** — both **bears** → §P.
+- **M48 measured versus derived halves** — both silent.
+- **M49 a check reads the value the code ships** — both silent.
+- **M50 the failure path's formatting** — both silent.
+- **M51 bound a plant on both sides** — both silent.
+- **M52 replay policies** — both silent.
+- **M53 a failing run's cost understates** — both silent.
+- **M54 a caveat written then stepped over** — both **bears**: CL1's "split places odd" and "one mind" must survive into every summary → J21, J22.
+- **M55 count the generator's free parameters** — Q1 **bears**: T36's generator (`|D| ≤ 5`) cannot represent FS85-dB2's `|D| = 70` → J18 C0, §P. | Q2 silent.
+- **M56 a true explanation stops the look; check every gate** — Q1 **bears**: a counterexample candidate is checked against all of T35's conditions → J18. | Q2 silent.
+- **M57 mutation harness restores; mutate the constant** — both silent.
+- **M58 archiving a checker** — both silent.
+- **M59 enumerate the parameter first** — both silent.
+- **M60 a positive control proves its generator's shapes only** — Q1 **bears**: T36's 377/377 says nothing outside its shape → §P. | Q2 silent.
+- **M61 a one-sided filter's inapplicability is not a pass** — Q2 **bears**: the count is one-sided; its failure at the real place is not a "yes" → J21. | Q1 silent.
+- **M62 scars, not foresight: plant faults routinely** — both **bears** (standing rule 7).
+
+**Counts, §G.3:** 62 rules walked. Q1: 27 bears, 35 silent. Q2: 22 bears, 40 silent. 0 falsifiable.
+
+### G.4 What the re-grokking changed in the plan
+
+1. **Q1 is restated in symbolic dynamics' words** (G46, R80): R2 ⟺ *a countable (zero-entropy) four-colouring shift of a distance graph is finite*. J18's statement carries both forms, and §PA searches the second.
+2. **Q1 gets three free lemmas before the hard step** (G13, G42, R45, R66, R91): K0 — in an all-rigid shift every periodic colouring is fan-gap-free with every Kempe component infinite; K1 — all-rigid ⟹ `χ(G(ℤ,D)) = 4`; K2 — R2 is Theorem H's rank-1 form: a wall leaves a phase only where the phase is not one-sidedly gap-free (a branching state). They localise the open case to **chiral** rigid phases with a branching state (T34).
+3. **Q1 gains a construction route** (R86): the embedding lemma realises finite graphs in `G(ℤ, D)`; a counterexample, if it exists, is likely far outside T36's `|D| ≤ 5` (M55, M60), and J18 is told to try building one before believing R2.
+4. **Q2 is re-scoped** (G22, G24, G43, R33, R71): its simplest slice, `S = {∞}`, *is* the measurable chromatic number of the plane at five. So "no five-colour window over any `S`" implies `χ_m(ℝ²) ≥ 6` (open, §PA to confirm), and J21 is not asked to prove it. J21's targets: **(Q2-fin)** the count over sets of places with no real place, its two gaps (43 above level one; the split dyadic ratio) closed or named; **(Q2-∞)** a pullback theorem reducing every window using real places to the archimedean factors, or the named obstruction to one.
+5. **Q2 loses FS-64's configuration (ii)** (R72): at ℚ(√167) the barrier prime 3 is a split place, so it contributes ratio → 0 and cannot carry a five-colouring; J21 checks this in its first stage.
+6. **Q2's positive controls are named** (R33, R94): the hexagonal 7-window, and C9's non-pullback four-window over ℚ(√11).
+7. **Predictions registered before any job runs** (§P), with both outcomes of each confirmed reachable (M43, M47).
