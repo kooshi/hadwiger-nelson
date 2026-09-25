@@ -827,3 +827,81 @@ Kooshi's ruling (inventory item 17).
 >
 > **Reports** by SendMessage to `"main"` at each verdict and at hand-back; your turn's final text stays content-free: "V idle; report
 > sent to the owner by SendMessage". Thank you.
+
+## §P. Registered predictions and verdicts (before any Stage-1 run)
+
+*Probabilities are the planner's priors, written after Stage 0 and the gate, before any Stage-1 derivation. Verdict labels score only the
+experiment (Kooshi: no-gos count). FS-86's close asked the next verdict table to name both sides' formats in the no-go row; done below.*
+
+### P.1 The milestone's outcomes (exclusive: the highest rung reached; they sum to 1)
+
+| id | outcome | p | verdict | what it gives, at its scope |
+|---|---|---|---|---|
+| O1 | RQ₄ proved, D's derivation and V's blind one agreeing | 0.10 | **Paid (theorem)** | C-HD1 (HD1 for ℚ(√59), ℚ(√83), ℚ(√131)) at dB-Theta's grade; C-47 (no character four-colouring of ℚ(√47)'s plane). **Not** `χ(ℚ(√47)²) = 5` |
+| O2 | `RS₄(S)` proved for every `|S| ≥ 2` (or at `{5, 13}`), RQ₄ not reached | 0.12 | **Paid (rank theorem)** | rank two restores rigidity modulo the isometric direction; RQ₄ reduced to U1 or to the all-primes step |
+| O3 | `RS₄({5, 13})` refuted by an explicit band character of `R_{65}` outside `T + A`, its extension to `Q` open | 0.15 | **Paid (no-go of the rank-two statement)** | rank two is not enough; the counterexample's mechanism named (G76's reading tested) |
+| O4 | RQ₄ refuted: an explicit band character of `Q` outside `T + A` (necessarily of infinite type) | 0.04 | **Paid (counterexample)** | the obstruction made concrete; a **seed**, not a falsifier, at ℚ(√47) |
+| O5 | partial: MS at rank ≥ 2 proved, or U1 proved, or a named failing step of Berend's route with its reason, or a general no-heteroclinic theorem — without deciding RS or RQ | 0.39 | **Draw (frame, or no-go of a route)**. The no-go row's formats, both sides: *proof side* — "Berend's case 1 (or 2) fails at the band because …"; *counterexample side* — "no band character of `R_S` of format X (rational heteroclinic, finite switching, finitely many split places) exists" | the structure of the problem, stated for a successor |
+| O6 | nothing beyond Stage 0's restatement | 0.20 | **Null (uninformative)** | reachable: D stalls on D-1a and D-1b without a named step. Recorded as such, never rescoped |
+
+**Reachability, checked:** O1 and O2 need proofs (reachable in principle; no statement is known false); O3 and O4 are checkable by exact
+arithmetic on windows plus a persistence derivation, exactly as S0B-T3–T5 were at rank one within a day; O5 is forced by the stop rules
+(a named step is an allowed stop); O6 is reachable if both D-1 questions end at the budget without a named step.
+
+### P.2 Side predictions
+
+| id | statement | p | scored by |
+|---|---|---|---|
+| P-U1 | V finds U1 true | 0.75 | V-A1 |
+| P-N0 | V re-derives N₀ blind | 0.90 | V-A2 |
+| P-U2 | V confirms U2's list and margins | 0.85 | V-A2 |
+| P-T6 | V confirms S0B-T6 | 0.80 | V-A3 |
+| P-A4 | V's rank-two orbit model agrees with D's D-0 model | 0.85 | V-A4 vs D-0 |
+| P-MS | MS₄({5, 13}) is true (not "proved this week") | 0.70 | any proof or counterexample, whenever |
+| P-MS-wk | MS₄({5, 13}) proved this week | 0.35 | D-1a + V-B |
+| P-RS2 | `RS₄({5, 13})` is true | 0.50 | D-1b, or later |
+| P-RQ4 | RQ₄ is true | 0.60 | the milestone, or later |
+| P-U3 | `RS₄({p})` fails at every single prime | 0.85 | not a Stage-1 question; registered |
+| P-G76 | any counterexample found uses the archimedean discs' overlap (the lens) as its mechanism | 0.80 | the counterexample's proof |
+| P-win | if the §S.4 window runs: its non-leaf pieces grow strictly slower than the 1-D count at the same depth | 0.55 | the window; the uninformative outcome (both dominated by finite-level pieces) is reachable and is registered as uninformative |
+| P-KT1 | KT-1 fires by 2026-09-29 | 0.15 | §S.5 |
+| P-KT2 | KT-2 fires by 2026-09-27 | 0.40 | §S.5 |
+| P-G75 | RQ₄ true, read as a triangle-free spectral rigidity modulo the archimedean part (G75's side reading; not a test of R2.6) | 0.60 | = P-RQ4 |
+| P-log | each agent logs at least one "would have searched here" line | 0.80 | the records |
+
+## §M. The modeling passes (WORKFLOW 6)
+
+- **Domain (always): folded here, light.** Stage 1 writes no Lean; its "types" are the statements' objects — `Θ_k` as a closed invariant
+  subset of a solenoid, `T + A` and its leaves, the ring family `R_S` — and §0.1–§0.2 fixes them, with the ring, band and scope of every
+  statement. A separate pass would re-derive §0; the owner may order one. *Alternative weighed:* a fresh `debruijn-domain-modeling`
+  invocation and commit before launch. *Why folded:* the pass's subject (representations that elaborate) is absent; the brief permits
+  folding. *Confidence:* medium; what would change it: FS-89 adding a kernel phase (FS-87-style), which then needs the full pass.
+- **Obligation: applies, to D's derivations.** The planner's light decomposition is §S.2 (MS first, then connections between leaves,
+  then all primes, with U1 as the join); D invokes `debruijn-obligation-modeling` fresh at D-0 on D-1a and D-1b, and again whenever a
+  proof resists three attempts (DEBRUIJN's error reflexes).
+- **Experience: does not apply** (no consumer surface: no lemma API, no tool output others consume beyond the §S.4 window's result files,
+  whose format D states in its record).
+
+## §X. The planner's "would have searched here" log
+
+- Would have run the rank-two window at `K = 1, 2` now, to see whether 13 kills the switching family; instead priced and gated it behind
+  two derivations of its shape (§S.4).
+- Would have enumerated the band torsion characters of `Q/168Q` by machine to confirm U2's margins; instead stated U2 as unverified and
+  gave it to V (a hand list from N₀'s types; the planner checked the five margins by hand on the residue circles: 1/4, 0, 0, 1/12, 1/28).
+- Would have filtered Furstenberg 1967's 1,011 citing works by keyword; instead walked Berend's citers (42 and 17) by title, where the
+  closed-set line runs.
+- Would have extended S0B's torsion list past `N = 130` to test U5; did not (inventory item 17 is Kooshi's).
+- Not searched (budget, not a search ban): authors' personal pages for Berend 1983/1984; Semantic Scholar's citation lists.
+
+## Phase records
+
+### The planner — Theorems this phase proved
+
+| id | statement | grade | address |
+|---|---|---|---|
+| P-R1 | `Θ₃(R_{65}) ⊆ T₆ + A`: FS81-T3 on each layer `w₁₃ⁿ·ℤ[i][1/5]` glued through 5-divisibility as in S0A-2 (the three-colour control of §S.4) | derived, one mind (the planner), unverified; D re-derives it before using it as a control | §S.4 (i) |
+| — | Everything else in this plan is a statement, a reading or a recognition: U1–U5 (§0.3) are unverified; the identification of Berend's Lemma 3.1 circles with the archimedean leaves is a reading (§PA.3) | — | — |
+
+### Stage 1a–1c
+
+*The records are `plans/FS89-S1D-derivation.md` and `plans/FS89-S1V-verification.md`, each with its own "Theorems this phase proved".*
