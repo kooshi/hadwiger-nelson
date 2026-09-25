@@ -1,0 +1,230 @@
+slot: admitted env: mem 60 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20260925T210651Z-4073543.log
+==> up-to-date check: exit 3 after 2s (3 means something needs building) — walking the batches
+==> 177 batches of at most 10 modules, capped at 60G
+==> [1/177] 10 modules  16:06:53
+==> [2/177] 2 modules  16:06:54
+==> [3/177] 6 modules  16:06:55
+==> [4/177] 10 modules  16:06:55
+==> [5/177] 10 modules  16:06:56
+==> [6/177] 10 modules  16:06:57
+==> [7/177] 10 modules  16:06:57
+==> [8/177] 10 modules  16:06:58
+==> [9/177] 10 modules  16:06:59
+==> [10/177] 10 modules  16:07:00
+==> [11/177] 10 modules  16:07:00
+==> [12/177] 10 modules  16:07:01
+==> [13/177] 10 modules  16:07:02
+==> [14/177] 10 modules  16:07:03
+==> [15/177] 10 modules  16:07:04
+==> [16/177] 5 modules  16:07:04
+==> [17/177] 10 modules  16:07:05
+==> [18/177] 10 modules  16:07:06
+==> [19/177] 3 modules  16:07:07
+==> [20/177] 10 modules  16:07:08
+==> [21/177] 10 modules  16:07:09
+==> [22/177] 10 modules  16:07:10
+==> [23/177] 10 modules  16:07:11
+==> [24/177] 10 modules  16:07:12
+==> [25/177] 10 modules  16:07:13
+==> [26/177] 10 modules  16:07:14
+==> [27/177] 10 modules  16:07:15
+==> [28/177] 10 modules  16:07:16
+==> [29/177] 10 modules  16:07:17
+==> [30/177] 10 modules  16:07:17
+==> [31/177] 10 modules  16:07:18
+==> [32/177] 10 modules  16:07:19
+==> [33/177] 10 modules  16:07:20
+==> [34/177] 10 modules  16:07:21
+==> [35/177] 10 modules  16:07:22
+==> [36/177] 10 modules  16:07:23
+==> [37/177] 10 modules  16:07:24
+==> [38/177] 10 modules  16:07:25
+==> [39/177] 10 modules  16:07:25
+==> [40/177] 10 modules  16:07:26
+==> [41/177] 1 modules  16:07:27
+==> [42/177] 10 modules  16:07:28
+==> [43/177] 10 modules  16:07:29
+==> [44/177] 10 modules  16:07:30
+==> [45/177] 10 modules  16:07:31
+==> [46/177] 10 modules  16:07:33
+==> [47/177] 10 modules  16:07:34
+==> [48/177] 10 modules  16:07:35
+==> [49/177] 10 modules  16:07:36
+==> [50/177] 10 modules  16:07:37
+==> [51/177] 10 modules  16:07:39
+==> [52/177] 10 modules  16:07:40
+==> [53/177] 10 modules  16:07:41
+==> [54/177] 10 modules  16:07:42
+==> [55/177] 10 modules  16:07:44
+==> [56/177] 10 modules  16:07:45
+==> [57/177] 10 modules  16:07:46
+==> [58/177] 10 modules  16:07:47
+==> [59/177] 10 modules  16:07:49
+==> [60/177] 10 modules  16:07:50
+==> [61/177] 10 modules  16:07:51
+==> [62/177] 10 modules  16:07:52
+==> [63/177] 10 modules  16:07:53
+==> [64/177] 10 modules  16:07:54
+==> [65/177] 10 modules  16:07:56
+==> [66/177] 10 modules  16:07:57
+==> [67/177] 10 modules  16:07:58
+==> [68/177] 10 modules  16:07:59
+==> [69/177] 10 modules  16:08:01
+==> [70/177] 10 modules  16:08:02
+==> [71/177] 10 modules  16:08:03
+==> [72/177] 10 modules  16:08:04
+==> [73/177] 10 modules  16:08:06
+==> [74/177] 10 modules  16:08:07
+==> [75/177] 10 modules  16:08:08
+==> [76/177] 10 modules  16:08:09
+==> [77/177] 10 modules  16:08:10
+==> [78/177] 10 modules  16:08:12
+==> [79/177] 10 modules  16:08:13
+==> [80/177] 10 modules  16:08:14
+==> [81/177] 10 modules  16:08:15
+==> [82/177] 10 modules  16:08:17
+==> [83/177] 10 modules  16:08:18
+==> [84/177] 10 modules  16:08:19
+==> [85/177] 10 modules  16:08:20
+==> [86/177] 10 modules  16:08:21
+==> [87/177] 10 modules  16:08:23
+==> [88/177] 10 modules  16:08:24
+==> [89/177] 10 modules  16:08:25
+==> [90/177] 10 modules  16:08:26
+==> [91/177] 10 modules  16:08:28
+==> [92/177] 10 modules  16:08:29
+==> [93/177] 10 modules  16:08:30
+==> [94/177] 10 modules  16:08:31
+==> [95/177] 10 modules  16:08:32
+==> [96/177] 10 modules  16:08:34
+==> [97/177] 10 modules  16:08:35
+==> [98/177] 10 modules  16:08:36
+==> [99/177] 10 modules  16:08:37
+==> [100/177] 10 modules  16:08:39
+==> [101/177] 10 modules  16:08:40
+==> [102/177] 10 modules  16:08:41
+==> [103/177] 10 modules  16:08:42
+==> [104/177] 10 modules  16:08:44
+==> [105/177] 10 modules  16:08:45
+==> [106/177] 10 modules  16:08:46
+==> [107/177] 10 modules  16:08:47
+==> [108/177] 10 modules  16:08:49
+==> [109/177] 10 modules  16:08:50
+==> [110/177] 10 modules  16:08:51
+==> [111/177] 10 modules  16:08:52
+==> [112/177] 10 modules  16:08:53
+==> [113/177] 10 modules  16:08:55
+==> [114/177] 10 modules  16:08:56
+==> [115/177] 10 modules  16:08:57
+==> [116/177] 10 modules  16:08:58
+==> [117/177] 10 modules  16:09:00
+==> [118/177] 10 modules  16:09:01
+==> [119/177] 10 modules  16:09:02
+==> [120/177] 10 modules  16:09:03
+==> [121/177] 10 modules  16:09:05
+==> [122/177] 10 modules  16:09:06
+==> [123/177] 10 modules  16:09:07
+==> [124/177] 10 modules  16:09:08
+==> [125/177] 10 modules  16:09:09
+==> [126/177] 10 modules  16:09:10
+==> [127/177] 10 modules  16:09:12
+==> [128/177] 10 modules  16:09:13
+==> [129/177] 10 modules  16:09:14
+==> [130/177] 10 modules  16:09:15
+==> [131/177] 10 modules  16:09:17
+==> [132/177] 10 modules  16:09:18
+==> [133/177] 10 modules  16:09:19
+==> [134/177] 10 modules  16:09:20
+==> [135/177] 10 modules  16:09:21
+==> [136/177] 10 modules  16:09:23
+==> [137/177] 10 modules  16:09:24
+==> [138/177] 10 modules  16:09:25
+==> [139/177] 10 modules  16:09:26
+==> [140/177] 10 modules  16:09:28
+==> [141/177] 10 modules  16:09:29
+==> [142/177] 10 modules  16:09:30
+==> [143/177] 10 modules  16:09:31
+==> [144/177] 10 modules  16:09:33
+==> [145/177] 10 modules  16:09:34
+==> [146/177] 10 modules  16:09:35
+==> [147/177] 10 modules  16:09:36
+==> [148/177] 10 modules  16:09:37
+==> [149/177] 10 modules  16:09:39
+==> [150/177] 10 modules  16:09:40
+==> [151/177] 10 modules  16:09:41
+==> [152/177] 10 modules  16:09:42
+==> [153/177] 10 modules  16:09:44
+==> [154/177] 10 modules  16:09:45
+==> [155/177] 10 modules  16:09:46
+==> [156/177] 10 modules  16:09:47
+==> [157/177] 10 modules  16:09:49
+==> [158/177] 10 modules  16:09:50
+==> [159/177] 10 modules  16:09:51
+==> [160/177] 10 modules  16:09:52
+==> [161/177] 10 modules  16:09:54
+==> [162/177] 10 modules  16:09:55
+==> [163/177] 10 modules  16:09:56
+==> [164/177] 10 modules  16:09:57
+==> [165/177] 10 modules  16:09:58
+==> [166/177] 10 modules  16:09:59
+==> [167/177] 5 modules  16:10:00
+==> [168/177] 10 modules  16:10:01
+==> [169/177] 8 modules  16:10:03
+==> [170/177] 7 modules  16:10:04
+==> [171/177] 10 modules  16:10:05
+==> [172/177] 8 modules  16:10:07
+==> [173/177] 9 modules  16:10:08
+==> [174/177] 9 modules  16:10:10
+==> [175/177] 4 modules  16:10:11
+    rebuilt: Chain (2.0s)
+==> [176/177] 2 modules  16:10:14
+    !! batch failed with status 1. What it printed, before the retry:
+    ✖ [3007/3007] Building Proofs.HadwigerNelson.Instances.SqrtTwoThree (3.7s)
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:65:4: ring failed, ring expressions not equal
+    ⊢ -3 / 2 + √3 ^ 2 * (1 / 2) = 0
+    warning: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:70:33: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+    
+    Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:79:41: Unknown identifier `fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:82:14: Unknown identifier `sqrt_mem_fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:85:14: Unknown identifier `sqrt_mem_fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:90:10: Invalid `⟨...⟩` notation: The expected type `F23.toSubsemigroup.1 (√3 / 2)` is not an inductive type
+    
+    Note: This notation can only be used when the expected type is an inductive type with a single constructor
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:116:45: Unknown identifier `fieldOfRadicands`
+    
+    Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Instances.SqrtTwoThree
+    error: build failed
+    !! retrying ONCE. If this line is common, the machine is unwell and the build is not the
+       thing to fix.
+    ✖ [3007/3007] Building Proofs.HadwigerNelson.Instances.SqrtTwoThree (3.6s)
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:65:4: ring failed, ring expressions not equal
+    ⊢ -3 / 2 + √3 ^ 2 * (1 / 2) = 0
+    warning: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:70:33: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+    
+    Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:79:41: Unknown identifier `fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:82:14: Unknown identifier `sqrt_mem_fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:85:14: Unknown identifier `sqrt_mem_fieldOfRadicands`
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:90:10: Invalid `⟨...⟩` notation: The expected type `F23.toSubsemigroup.1 (√3 / 2)` is not an inductive type
+    
+    Note: This notation can only be used when the expected type is an inductive type with a single constructor
+    error: Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean:116:45: Unknown identifier `fieldOfRadicands`
+    
+    Note: It is not possible to treat `fieldOfRadicands` as an implicitly bound variable here because the `autoImplicit` option is set to `false`.
+    error: Lean exited with code 1
+    Some required targets logged failures:
+    - Proofs.HadwigerNelson.Instances.SqrtTwoThree
+    error: build failed
+    BATCH FAILED. Once it is fixed, rerun ./scripts/build.sh — modules that already built are
+    skipped. Never a bare or named lake build (CLAUDE.md § Building).
+==> build: FAIL — 176 of 177 batches, 1 module(s) rebuilt, 0 module(s) with warnings, 3m30s
+    full output: build/gate/build/20260925T210651Z-4073543.log
+
+real	3m32.876s
+user	3m14.425s
+sys	1m32.695s

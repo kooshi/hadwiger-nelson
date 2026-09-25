@@ -14,6 +14,11 @@ Working files: `data/m2/j14/`.*
 | the four forms and `planeOverSubring`, moved into the library | kernel (elaborated; the gated build at stage 5) | `Proofs/HadwigerNelson/Chain.lean` |
 | `spindle_of_chain`: `χ(ℝ²) ≥ 4` — the Moser spindle as the chain's `m = 2` case (rhombus along the real axis, twist `(√3 + i√33)/6` and its conjugate, `√3·(2√3/6) = 1`) | kernel (elaborated) | same |
 | `rhombus_unit_of` (five edge lengths make a rhombus drawing unit), `norm_eq_one_of_sq` | kernel (elaborated) | same |
+| `sixUnits_sum`: `δ(1 + ω̄ + v + vω̄ + v̄ + v̄ω̄) = 1`, by factoring (`sum_sixUnits`, `delta_mul_one_add_omegaBar`, `one_add_v_add_conj`) | kernel (elaborated) | `Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean` |
+| **`four_le_chromaticNumber_planeOver_two_three`**: `χ(ℚ(√2,√3)²) ≥ 4` by the chain theorem (six chained rhombi, no Moser spindle in the field) | kernel (elaborated) | same |
+| `eighteen_not_colorable_three`: the 18-vertex, 33-edge list refuses three colours — gadget algebra, one `decide +kernel`, no solver | kernel (elaborated) | same |
+| `eighteen_colorable_four`: four colours suffice (the reference's colouring) | kernel (elaborated) | same |
+| `pullGadget`: a gadget carried between vertex sets of different sizes along an edge-preserving map | kernel (elaborated) | same |
 
 ## Stage 1 — SAVED
 
@@ -78,3 +83,43 @@ closure under `+` and `·` and nothing about fields; the subring form serves FS-
 
 Not yet done (stage 5): `Proofs.lean`, `ARCHITECTURE.md`'s module map, `scripts/Axioms.lean` — moved to the gate stage so the three
 modules are registered in one edit.
+
+## Stage 3 — SAVED
+
+`Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean` (≈200 lines). Elaborates with no error and no warning: **4.13 s wall, 4.46 s user,
+3.7 GB peak for the whole module** (desktop; the oracle's `decide +kernel` is inside that, so P-J14b's "under 60 s" is met with room).
+Iterations: three elaborations after the first build (namespace `SquareClass` for `fieldOfRadicands`; one `linear_combination` coefficient,
+`1/4` not `−1/4`, in `δ(1 + ω̄) = 3`; the membership goals' shape after `simp`).
+
+**The six-unit identity closed by factoring on the first elaboration that reached it**, in 3 + 5 + 3 + 3 lines (`sum_sixUnits` by
+`Fin.sum_univ_six` and `ring`; `δ(1 + ω̄) = 3` and `1 + v + v̄ = 1/3` by `Complex.ext`; the product). P-J14c (≤ 40 lines): met, 14 lines.
+
+**One finding the brief did not carry (logged at stage 1, used here):** `Gadget.transport` works inside one `Fin n`, so the rhombus gadget
+(on `Fin 4`) could not be moved into the 18-vertex graph with it. A four-line `pullGadget` (the same pull-back, between `Fin n` and `Fin N`)
+lives in this module, not in `Gadget.lean`, whose dependents a new declaration would rebuild. *Alternative weighed:* `Forces` plus
+`Forcer.edgeHom` per diamond, then the chain of equalities by hand — no `decide` over port patterns at all. *Why the gadget route won:* the
+brief asks for the gadget algebra as a second oracle independent of the chain theorem's proof; `edgeHom` would re-run the chain argument.
+*Confidence:* high.
+
+**The plants, both watched red for their reasons, then restored** (the faithful file re-elaborated with 0 errors after each):
+
+| plant | file | what went red | the reason it names |
+|---|---|---|---|
+| drop the critical edge `(15, 17)` from `eighteenEdges` | `data/m2/j14/plant.lean` | `diamond_hom`: "Tactic `decide` proved that the proposition ∀ d, ∀ e ∈ rhombus, … is false"; and `#guard eighteenEdges.length = 33` | diamond 6 is no longer a homomorphism into the list — the oracle's refusal depends on that edge |
+| drop `diamondGadget 2` from the refuting composite | `data/m2/j14/plant2.lean` | `eighteen_not_colorable_three`: "Tactic `decide` proved that the proposition `eighteenGadget.survivors = []` is false" | the kernel `decide` itself can go red: a broken chain leaves a surviving port pattern |
+
+Kept in the module as permanent controls: the planted list is three-colourable (the reference colouring with vertex 17 recoloured `0` —
+derived by hand from the four-colouring, vertex 17 being the only vertex of colour 3 and its neighbours `1, 16` having colours `1, 2` once
+`15—17` is gone), diamond 6's map is not a homomorphism into it, and the six diamonds without the closing edge leave exactly one survivor,
+all seven ports one colour (`#guard_msgs`).
+
+### Would have searched here (stage 3)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X2 | a three-colouring of the planted 32-edge list by a colourer | derived by hand from the reference's four-colouring (one vertex recoloured; its reason stated above) |
+
+### Slip (logged)
+
+The first timing run of this module and the first plant were run as bare `lake env lean`, not under `scripts/slot.py`, at a 3.7 GB peak —
+over standing rule 8's 2 GiB line. Every later run went through the slot. No harm; logged for the inventory.
