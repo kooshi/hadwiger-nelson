@@ -1,0 +1,31 @@
+band [1/4, 3/4]  plant=none  cells per period: 29  total area 79/168 (= 0.470238 of 25; fraction 0.018810)
+  by vertex count: {1: 16, 4: 8, 6: 4, 12: 1}
+   1-vertex  centre-avg (1/4, 3/4)  area 0
+   1-vertex  centre-avg (1/4, 17/4)  area 0
+   4-vertex  centre-avg (107/160, 331/240)  area 1/48
+   4-vertex  centre-avg (107/160, 869/240)  area 1/48
+   1-vertex  centre-avg (3/4, 1/4)  area 0
+   1-vertex  centre-avg (3/4, 19/4)  area 0
+   4-vertex  centre-avg (331/240, 107/160)  area 1/48
+   1-vertex  centre-avg (5/4, 5/4)  area 0
+   1-vertex  centre-avg (5/4, 5/2)  area 0
+   1-vertex  centre-avg (5/4, 15/4)  area 0
+   4-vertex  centre-avg (331/240, 693/160)  area 1/48
+   6-vertex  centre-avg (3347/2016, 3347/2016)  area 17/672
+   6-vertex  centre-avg (3347/2016, 6733/2016)  area 17/672
+  12-vertex  centre-avg (5/2, 5/2)  area 17/84
+   1-vertex  centre-avg (5/2, 5/4)  area 0
+   1-vertex  centre-avg (5/2, 15/4)  area 0
+   6-vertex  centre-avg (6733/2016, 3347/2016)  area 17/672
+   6-vertex  centre-avg (6733/2016, 6733/2016)  area 17/672
+   4-vertex  centre-avg (869/240, 107/160)  area 1/48
+   4-vertex  centre-avg (869/240, 693/160)  area 1/48
+   1-vertex  centre-avg (15/4, 5/4)  area 0
+   1-vertex  centre-avg (15/4, 5/2)  area 0
+   1-vertex  centre-avg (15/4, 15/4)  area 0
+   1-vertex  centre-avg (17/4, 1/4)  area 0
+   4-vertex  centre-avg (693/160, 331/240)  area 1/48
+   4-vertex  centre-avg (693/160, 869/240)  area 1/48
+   1-vertex  centre-avg (17/4, 19/4)  area 0
+   1-vertex  centre-avg (19/4, 3/4)  area 0
+   1-vertex  centre-avg (19/4, 17/4)  area 0

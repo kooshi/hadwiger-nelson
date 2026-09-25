@@ -1,0 +1,10 @@
+K=0  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=1  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=2  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=3  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=4  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=5  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=6  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=7  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=8  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+CONTROL: DIFFERENT from FS81-T3

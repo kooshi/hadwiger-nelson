@@ -1,0 +1,65 @@
+{
+ "band": [
+  "1/4",
+  "3/4"
+ ],
+ "plant": "none",
+ "rows": [
+  {
+   "K": 0,
+   "pieces": 1,
+   "points": 0,
+   "segments": 0,
+   "polygons": 1,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 1,
+   "pieces": 29,
+   "points": 16,
+   "segments": 0,
+   "polygons": 13,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 2,
+   "pieces": 157,
+   "points": 88,
+   "segments": 0,
+   "polygons": 69,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 3,
+   "pieces": 593,
+   "points": 324,
+   "segments": 0,
+   "polygons": 269,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 4,
+   "pieces": 2017,
+   "points": 1032,
+   "segments": 0,
+   "polygons": 985,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 5,
+   "pieces": 6349,
+   "points": 3104,
+   "segments": 0,
+   "polygons": 3245,
+   "polygons_containing_centre": 1
+  },
+  {
+   "K": 6,
+   "pieces": 19113,
+   "points": 8924,
+   "segments": 0,
+   "polygons": 10189,
+   "polygons_containing_centre": 1
+  }
+ ]
+}

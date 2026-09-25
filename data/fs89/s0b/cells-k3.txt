@@ -1,0 +1,8 @@
+band [1/3, 2/3]  plant=none  cells per period: 5  total area 17/189 (= 0.089947 of 25; fraction 0.003598)
+  by vertex count: {1: 4, 12: 1}
+   1-vertex  centre-avg (5/3, 5/3)  area 0
+   1-vertex  centre-avg (5/3, 10/3)  area 0
+  12-vertex  centre-avg (5/2, 5/2)  area 17/189
+   1-vertex  centre-avg (10/3, 5/3)  area 0
+   1-vertex  centre-avg (10/3, 10/3)  area 0
+CONTROL: FS73-T40 reproduced (D0 + four points)

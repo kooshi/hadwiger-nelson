@@ -1,0 +1,11 @@
+n=  1  |W_n|=      29  states=      29  point-sets=     16  t=0.0s
+n=  2  |W_n|=      69  states=      57  point-sets=     36  t=0.0s
+n=  3  |W_n|=     157  states=     117  point-sets=     88  t=0.1s
+n=  4  |W_n|=     309  states=     209  point-sets=    172  t=0.3s
+n=  5  |W_n|=     593  states=     377  point-sets=    324  t=0.6s
+n=  6  |W_n|=    1105  states=     677  point-sets=    584  t=1.2s
+n=  7  |W_n|=    2017  states=    1209  point-sets=   1032  t=2.5s
+n=  8  |W_n|=    3613  states=    2121  point-sets=   1804  t=4.8s
+n=  9  |W_n|=    6349  states=    3609  point-sets=   3104  t=9.1s
+n= 10  |W_n|=   11077  states=    6137  point-sets=   5300  t=16.7s
+n= 11  |W_n|=   19113  states=   10313  point-sets=   8924  t=30.3s
