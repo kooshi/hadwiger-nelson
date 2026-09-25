@@ -66,3 +66,13 @@ still unheld) is still needed. Done in §2.1 below, before the derivation.
 | # | move I would have made by search | what I did instead |
 |---|---|---|
 | W1 | enumerate candidate distance sets `D` (or candidate heteroclinic colourings `c`) and test each for all-rigid-with-wall | nothing; the counterexample side is attempted only by derivation (§2), with at most the one exact check the brief allows |
+
+### 1.5 Registered before the one exact check (added during stage 2, committed before the run)
+
+**The check (at the ban's edge, logged):** `tools/crunch_j19_frozen.py 2,6,11,13,14` — the complete window-state graph of
+`X₄({2,6,11,13,14})` and the strand counts of its rigid periodic points. **Why this `D`:** it is the all-rigid set with the most phases
+(94) in the existing FS-79 scan (`data/fs79/comp-debruijn/runs/rank1_scan.jsonl`), chosen by that rule before the run; one `D`, no
+sweep. **The claim it checks (conjecture AF, formed in §2):** "in an all-rigid `X₄(D)`, every periodic point is Kempe-frozen (one strand
+per colour pair)". **Prediction C0-6:** all 94 rigid periodic points frozen, prior **0.35** (the control's rigid points are all
+non-frozen, and nothing I have proved forces freezing). Both outcomes reachable: the tool reports non-frozen points on the control
+(positive control passes, plant fires).
