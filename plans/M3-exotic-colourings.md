@@ -334,3 +334,58 @@ Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
 5. **Q2 loses FS-64's configuration (ii)** (R72): at ℚ(√167) the barrier prime 3 is a split place, so it contributes ratio → 0 and cannot carry a five-colouring; J21 checks this in its first stage.
 6. **Q2's positive controls are named** (R33, R94): the hexagonal 7-window, and C9's non-pullback four-window over ℚ(√11).
 7. **Predictions registered before any job runs** (§P), with both outcomes of each confirmed reachable (M43, M47).
+
+---
+
+## Stage 3 — SAVED (§PA, the prior-art gate; about 40 minutes, time-boxed)
+
+*Run in the recognition's words (WORKFLOW 3.2), with the zbMATH API for discovery (item 8), the held Polymath16 threads grepped
+(G49), and two web searches. Every negative below measures its query's words (G21).*
+
+### PA.1 Question 2 — measurable colourings, products, windows
+
+| # | query or source | found | verdict |
+|---|---|---|---|
+| 1 | zbMATH `ab:"measurable chromatic number"` (17 hits: Falconer's line, Székely–Wormald on ℝ, Bachoc–Nebe–Oliveira–Vallentin 2009, Oliveira–Vallentin 2010, Bachoc–Passuello–Thiery 2015, Bogolubsky–Raigorodskii 2015, Miller 2008, Conley–Miller 2016, Bernshteyn 2019, Weilacher 2022, Malen 2015, Payne 2009) | no paper proving `χ_m(ℝ²) ≥ 6` | negative |
+| 2 | zbMATH `ab:"measurable" & ab:"chromatic number of the plane" & py:2000-2026`; `…& ab:"six"`; `ab:"measurable chromatic number" & ab:"product"` | 3, 0, 0 hits; none on six or on products | negative |
+| 3 | **`[KechrisMarks2020]`** — A. S. Kechris, A. S. Marks, *Descriptive graph combinatorics* (survey, 2020 version; fetched to `~/source/library/pdf/KechrisMarks-descriptive-graph-combinatorics-2020.pdf`; read: §4.6, §4.7) | §4.7, verbatim: "the unit distance graph on R², … is known to have 5 ≤ χ(U) ≤ χ_µ(U) ≤ χ_B(U) ≤ 7, … but the exact values of χ(U), χ_µ(U), χ_B(U) are unknown." §4.6, **Problem 4.23**, verbatim: "If G, H are analytic graphs, is it true that χ_B(G × H) = min{χ_B(G), χ_B(H)}?"; "C_B(k) … We do not know any other results along these lines. Is C_B(4) true?" | **confirms the recognition**: `χ_µ(ℝ²) ∈ {5, 6, 7}` is open in print, so Q2's `S = {∞₁}` slice is an open problem; and Q2-∞'s pullback question is a **measurable instance of Kechris–Marks's Problem 4.23** (their Borel Hedetniemi problem), open at `k ≥ 4` in general |
+| 4 | the held Polymath16 threads (`~/source/library/notes/polymath16-threads-1-18-text.txt`), grep "measurable" | **fourth thread** (Mixon, 5 May 2018), verbatim: "Question. Consider all proper 5-colorings of Tamás's $V_A\oplus V_A\oplus V_A$ in which the neighborhood of the origin avoids colors 1 and 2. Is there any vertex (other than the origin) that is colored either 1 or 2 in all such colorings? If such a vertex exists (and the vertex's distance $r$ from the origin has the property that $\arcsin(\frac{1}{2r})$ is an irrational multiple of $\pi$ ), then the measurable chromatic number of the plane is at least 6 ." First thread (Mixon, 18 April 2018): "Hans Parshall and I went through Falconer's proof … It appears as though a proof that MCNP ≥ 6 might be within reach by somehow replacing the diamond graph with (a subgraph of) de Grey's"; Tao (fourth thread): "Falconer's argument for CNP ≥ 5 in the measurable case basically proceeds by noting that one can without loss of generality fix one point, say the origin, to be an 'edge' vertex in that it takes two colors" | **MCNP ≥ 6 is a posed question with a known reduction** (Falconer's "edge vertex" plus a forced {1,2}-vertex at an irrational angle) — a finite-witness route, banned this week; J21 reads it as the archimedean corner's state of the art and as a template for the product (a Falconer-type argument on `Γ_S`) |
+| 5 | web: "measurable chromatic number of the plane at least 6" | map-type colourings (Jordan-curve regions) need ≥ 6 (Woodall 1973, Townsend 2005; restated in arXiv:2502.01958); polygonal need 7 (`[SokolovVoronov2025]`); measurable `≥ 6` not found | **regular windows at `∞`** with Jordan-region classes need six — so the live five-colour windows at a real place are non-regular measurable ones (sharpens G22) |
+| 6 | `[AmbrusEtAl2024]` (bibliography row, second-hand) | "Croft 1967's 0.22936 > 1/5 restated — the density route can never certify measurable χ ≥ 6" | consistent: the count cannot decide Q2-∞ (G24) |
+| 7 | zbMATH `ab:"model set" & ab:"chromatic"`; `ab:"cut and project" & ab:"coloring"` | 0, 0 | negative (FS-64 §4's question "has anyone coloured a model set to avoid a distance?": not in zbMATH's reviews in these words) |
+| 8 | zbMATH `ab:"Croft" & ab:"unit distance"` | Falconer 1981 (no review text), Tolmachev 2025 (*lower bounds of the density of planar periodic sets without unit distances*) | Croft 1967 itself not indexed under these words; `m₁ ≥ 0.22936` stays second-hand (a debt, J21 cites it as such) |
+
+**What PA.1 teaches about the object (the §PA sweep, WORKFLOW 9):** Q2 is the adelic (several-place) generalisation of the measurable
+chromatic number of the plane. Its archimedean slice is open in the descriptive-combinatorics literature (Kechris–Marks) and posed with a
+reduction on Polymath16; its product structure is an instance of Borel/measurable Hedetniemi (Kechris–Marks Problem 4.23). So the
+honest targets are **(a) the finite-place count, (b) a pullback theorem (measurable Hedetniemi for one compact-circle Cayley factor
+against finite-ratio factors)**, and **(c) a Falconer-type argument on the product** — the last being the one route by which the finite
+places could make five impossible over `S ∋ ∞` without first settling MCNP ≥ 6 (it would need the finite places to supply what de Grey's
+graph could not in Mixon's question). A "no" over every `S ∋ ∞` would prove MCNP ≥ 6 and answer Polymath16's question.
+
+### PA.2 Question 1 — rank-one colouring shifts
+
+| # | query or source | found | verdict |
+|---|---|---|---|
+| 1 | `[Ellenberg2018]` (read in full at FS-79's gate; bibliography row) | the question is **existence** (a periodic `k`-colouring); in rank 1 it is answered yes by pigeonhole on windows (Lehner; `[EggletonErdosSkilton1990]` Thm 2) | **scope correction to the brief's gloss**: Q1 (`P = F`, inheritance) is *not* Ellenberg's question at `k = 4` on ℤ; it is the forcing form, C3-inherit (row 78's `InheritanceQuestion`), in rank 1 |
+| 2 | `[CGHO2025bg]` §6.2.1 (read at FS-79's gate) | decidability of emptiness for ℤ^d with arbitrary generators "not understood"; nothing on rank-1 inheritance | silent on Q1 |
+| 3 | zbMATH `ab:"distance graph" & ab:"periodic" & ab:"coloring"` (4 hits) | Zhu 1998 (*Pattern periodic coloring of distance graphs*, JCTB; review read: periods of colourings), Liu–Zhu 2002, Cervantes–Krebs 2025 (colouring periods), Chappell 1998 | the distance-graph literature studies **periods of optimal colourings**, not the forced group; negative on R2 |
+| 4 | zbMATH `ab:"uniquely colorable" & ab:"distance graph"` | 0 | negative |
+| 5 | zbMATH `ab:"hom-shift" \| ab:"homshift"` | CGHO 2026; Gangloff–Hellouin de Menibus–Oprocha 2026 (block gluing in hom shifts) | hom-shift literature is ℤ², nearest-neighbour; negative on rank-1 arbitrary-generator inheritance |
+| 6 | zbMATH `ab:"countable" & ab:"shift of finite type" & ab:"entropy"` | 6 hits, none on colourings | negative; the fact used (a one-dimensional SFT is countable iff it has zero entropy iff every irreducible component is a single cycle) is textbook (Lind–Marcus, recalled, not re-read) |
+| 7 | `[EggletonErdosSkilton1990]` review (zbMATH 0698.05033, read): "3) There are finite sets D for which there exists aperiodic proper colourings using only χ(D) colours." | aperiodic optimal colourings exist for some prime `D` | **a prior-art debt that bears directly**: if any of their aperiodic examples sits in a zero-entropy four-colouring shift, it refutes R2. The paper is not held; the twin-prime family `{2, 3, p, p+2}` (χ = 4) lies inside T36's range only for `p ≤ 11`. J18's stage 1 reads their construction (fetch route: `rd.springer.com`, memory note "paper fetch routes") or records it unread |
+| 8 | web: colouring shifts of distance graphs, zero entropy, countable | nothing on point | negative |
+
+**What PA.2 teaches:** R2 is not in print in either discipline's words. It is a statement about which one-dimensional SFTs arise as
+colouring shifts: countable ⟹ finite. The nearest printed facts are EES's aperiodic colourings (unread) and Lind–Marcus's structure of
+one-dimensional SFTs. The distance-graph literature's live questions are *periods*, and a proof of R2 would also say: an all-rigid shift's
+periods are finitely many cycles, so `P` has finite index.
+
+### PA.3 Bibliography rows proposed (the front-page lane writes them)
+
+- **`[KechrisMarks2020]`** — held (`~/source/library/pdf/KechrisMarks-descriptive-graph-combinatorics-2020.pdf`); read §4.6–§4.7; role: Q2's
+  archimedean corner open in print, and Problem 4.23 (Borel Hedetniemi).
+- **`[Polymath16threads]` fourth thread (5 May 2018)** — the MCNP ≥ 6 criterion quoted above; add to the existing row's contents.
+- **`[Zhu1998]`** — X. Zhu, *Pattern periodic coloring of distance graphs*, JCTB 73 (1998); review read only.
+- **`[Woodall1973]` / `[Townsend2005]`** — map-type colourings need six; listing only (second-hand, arXiv:2502.01958).
+- **`[EggletonErdosSkilton1990]`** — its read status stays "review read"; the aperiodic construction is a debt (J18 stage 1).
