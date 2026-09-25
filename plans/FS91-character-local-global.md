@@ -598,3 +598,39 @@ J13-M1-one-prime-blind-verifier.md. Each verifier's fixed list quotes §S verbat
 - the jobs' records: `plans/FS91-S0V-band-to-nine.md` (J01), `plans/FS91-S0F-three-colours.md` (J02), `plans/FS91-S0V2-SWm-second-reading.md` (J03a), `plans/FS91-S1D-character.md` (J07), `plans/FS91-S1D-six.md` (J08), `plans/FS91-S0FV-three-colours-blind.md` (J09), `plans/FS91-S1V-character.md` (J10), `plans/FS91-S1V-six.md` (J11); `plans/FS91-S1D-one-prime.md` (J12, in progress) and `plans/FS91-S1V-one-prime.md` (J13, queued)
 - tools `tools/crunch_j01_*`, `tools/crunch_j02_*`, `tools/crunch_j03a_*`, `tools/crunch_j07_*`, `tools/crunch_j08_*`, `tools/crunch_j09_*`, `tools/crunch_j10_*`, `tools/crunch_j11_*`; data `data/fs91/j01/` to `data/fs91/j11/`
 - reports `data/crunch-2026-09-25/reports/J01.md` … `J11.md`; close inventory `plans/FS91-close-inventory.md`
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; crunch job J23a, M1's close planner)
+
+*Written by crunch job J23a (de Bruijn, Opus 5.5) under `data/crunch-2026-09-25/briefs/J23a-M1-close-math.md` and `STANDING-RULES.md`,
+worked item by item from `plans/FS91-close-inventory.md` (items 1–130; item 130 is the owner's forward of J23p's first verdict, logged by
+this job). Kooshi's words for the close, verbatim at `plans/FS89-rational-band-rigidity.md:923`: "close out with the findings"; "I don't
+want to lose anything from before"; "All novel knowledge is a success." Results are filed in `plans/FS91-derivation.md`; every draft for
+`LEDGER.md`, `CLAUDE.md`, `plans/FRONTIER-STUBS.md` and the stub banners is written here and nowhere else — a front-page job applies them.
+Nothing in this section judges a verdict a record reached; where two records differ, both are filed with addresses.*
+
+### Stage 1 — SAVED (the quotation check; the inventory walk)
+
+**Quotation check (standing rule 5).**
+
+| # | quoted in the brief or the owner's messages | source | result |
+|---|---|---|---|
+| Q1 | "close out with the findings"; "I don't want to lose anything from before"; "All novel knowledge is a success." | `plans/FS89-rational-band-rigidity.md:923` (Kooshi's words for FS-89's close) | **verbatim** |
+| Q2 | the owner's forward of J23p: Manners §5.5, "the appropriate results are false for {θ₅^r}" | `plans/FS91-PA-close.md:97`: "are false for the smaller set `{θ₅^r : r ≥ 0}`" | **abridged, meaning kept** ("the appropriate results" precedes the line break; "the smaller set" and "`: r ≥ 0`" dropped) |
+| Q3 | the forward's `[EinsiedlerLindenstrauss2022]` p. 3: "certainly works also for solenoids though this does not seem to have been written" | `plans/FS91-PA-close.md:116` | **verbatim** |
+| Q4 | the brief's inventory items (FS89-CL2's "archimedean", row 95's wording, G74's and G76's killing tests, item 25, "every real number field") | items 8, 61, 69, 70, 78 | agree in substance; the items are paraphrases by their own authors, cited at their addresses |
+
+**The inventory walk.** Every item 1–130 now carries a disposition in its status cell (`data/fs91/j23a/tick.py`, the map
+`data/fs91/j23a/stage1-ticks.json`):
+
+| disposition | items | count |
+|---|---|---|
+| ticked now, needing no drafting | 5 (declined: a blind verifier's reading-depth note), 10 (nothing owed), 18 and 21 (superseded by 67, 68), 27 (merged into 20), 91 and 93 (operational, acted on), 112 (nothing owed), 124, 125, 128, 129 (declined for M1: crunch-wide) | 12 |
+| → stage 2, the derivation file (results; rulings applied as grading rules; held items that set an entry's verification line; corrections that change a filed statement) | 1, 2, 7, 12–14, 23–26, 59, 60, 62, 65, 67, 68, 72–76, 81, 86–89, 92, 95–110 (except 111), 113–115, 118, 126 | 48 |
+| → stage 3, §R-close (slips, predictions, token counts, J01's folded stage 4, the §G bears items, the prior-art debts) | 4, 9, 16, 17, 19, 20, 22, 28–31, 33–58, 63, 64, 66, 71, 77, 80, 82, 84, 90, 94, 111, 116, 120, 122, 127, 130 | 53 |
+| → stage 4, the drafts (corrections, held wording, stubs) | 3, 6, 8, 11, 15, 32, 61, 69, 70, 78, 79, 83, 85, 117, 119, 121, 123 (and 89, 105, 109, 110, 113, 130 a second time) | 17 (+6) |
+
+**State of the blind checks at this stage.** J13 (the blind check of J12's one-prime results) is running; its record
+`plans/FS91-S1V-one-prime.md` and report `data/crunch-2026-09-25/reports/J13.md` do not exist yet. So stage 2 files J12's theorems at
+"one derivation (J12); blind check J13 pending", and stage 3 waits for J13's verdicts (the brief's rule).
+
+**Would have searched here (stage 1):** none — bookkeeping only.
