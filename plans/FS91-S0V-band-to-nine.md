@@ -199,6 +199,20 @@ Same route as §3.6.1; only the `k`-lines differ. `B₈ = [1/8, 7/8]`.
   (tool B2).
 - **Verdict:** `RS₈(S)` for every `|S| ≥ 2` **TRUE**; `RQ₈` **TRUE** [hand; sweep arithmetic tools exact]. Layering/gluing: no `k`.
 
+## Stage 3, `k = 9` — SAVED
+
+`B₉ = [1/9, 8/9]`. **This is the edge of the claim's range** (`k < 2·5`), so the sweep line is checked with care.
+- **R1 step 2, Lemma SW's arc line:** needs `1/p < 2/9`. At `p = 5`: `1/5 = 9/45 < 10/45 = 2/9`, margin `1/45` — holds, narrowly. Tool A2
+  row `k=9`: the worst one-digit coset (the one whose nearest point to 0 is `1/10`) meets the open arc `(−1/9, 1/9)` since `1/10 < 1/9`. At
+  `k = 10` it fails (A2 sharpness: offset `1/10`, all five values in `[1/10, 9/10]`). So **the one-digit lemma reaches exactly `k ≤ 9` when
+  `5 ∈ S`**, which is where the claim's `k < 2·min S` comes from; with two digits (`25 > 9/2`) the line holds with room (A3).
+- **R1 steps 1, 3, 4:** no use of `k`.
+- **R2, the parity line:** `2y(u) ∈ [2/9, 7/9]`; the doubling chain `1/9 → 2/9 → 4/9` ends above `1/4` (tool B2), so a case-1 minimal set in
+  `Θ_{2/9}` is refused by the antipodal line and `RS_{2/9}(S)` holds (VB1, one digit `1/5 < 4/9`); hence `2y ∈ T + A`, `y ∈ T + A`, case 1
+  refused. This route does not need `5 ∈ S` (the alternative, `[2/9, 7/9] ⊆ [1/5, 4/5]` with `RS₅(S)` from S1VB-14, needs `5 ∈ S` for
+  D5-L1's narrow-band rigidity).
+- **Verdict:** `RS₉(S)` for every `|S| ≥ 2` **TRUE**; `RQ₉` **TRUE** [hand; sweep arithmetic tools exact]. Layering/gluing: no `k`.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
