@@ -163,6 +163,7 @@ In both cases it is contained in `T + A`. **Inhabitant** `S = {5, 13}`: `{θ₂}
   have no route to the finiteness that avoids D1-T2. A direct one would be a Furstenberg-type density statement in finite quotients
   (the multiplicative group `⟨i, w₅, w₁₃⟩` modulo large `N` meeting every arc of length 1/2 after dilation), which is of
   Bourgain–Lindenstrauss–Michel–Venkatesh type; I have nothing in hand for `ℤ[i]`-elements.
+  *[Note at the close, 2026-09-25 (`plans/FS89-PA-furstenberg1967.md` §2, row 24): `[Furstenberg1967]` has no density statement in finite quotients; its one finite-quotient device (`Σ mod q^n` in Prop. IV.1's proof, pp. 45–46) is used for periodic points, not density. The same holds for C0 row 3's "×a×b in finite quotients" above.]*
 - **Hardest step:** none beyond D1-T2; VB3 is short.
 
 **Claim 4, D2-T1 (RQ₄).** "`Θ₄(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`."

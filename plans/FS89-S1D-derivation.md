@@ -157,6 +157,7 @@ corners; they form one `U_S`-orbit of order-4 torsion characters, of margin 0. [
 2. *Other bands.* Without D1-L4, case 1 needs Furstenberg's Prop. IV.1 (`M − M ≠ G` for minimal `M ≠ G`) [external, not held].
    With it, D1-L2 and D1-L3 give MT modulo `A` for **every** minimal subset of `R̂_S`, `|S| ≥ 2`: Berend's theorem modulo the
    isometric direction.
+   *[Correction at the close, 2026-09-25, from the Furstenberg reading (`plans/FS89-PA-furstenberg1967.md` §2, rows 19–20): Furstenberg's Prop. IV.1 is stated and proved for commutative semigroups on a **torus** (its printed conclusion "M = K^r" is a misprint for "B = K^r"); for `G = R̂_S` the held statement is `[Berend1984]` Thm I.2 with Prop. II.6 (FS89-PA-B2). "Not held" is stale: `[Furstenberg1967]`, `[Berend1983]` and `[Berend1984]` are held and read.]*
 3. *Control* (§IQ item 5). With no isometric place (the non-real analogues), step 2 of D1-L2 gives `y` torsion with no `A`
    part: Berend's MT verbatim.
 
@@ -394,6 +395,7 @@ point over `X₃`. Whether those leaves are isolated at 1/6 (the exit lemma with
 - *Scope.* RQ₄ and RQ₅ are about character colourings only (plan §0.2).
 - *Prior-art debt left.* Furstenberg Prop. IV.1 is not needed at bands 1/4 and 1/5; it is still not held. Berend 1983 §4 is not
   needed either.
+  *[Correction at the close, 2026-09-25: both debts are closed — `[Furstenberg1967]` and `[Berend1983]` were saved by Kooshi and read (`plans/FS89-PA-furstenberg1967.md` §2; `plans/FS89-PA-berend1984.md` §6).]*
 - *New question (stub candidate).* The band-1/6 exit lemma, and `MS₄({5})` at rank one.
 
 ## Theorems this phase proved

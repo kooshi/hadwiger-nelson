@@ -43,6 +43,7 @@ Sections: **1. Disjointness** (pp. 506–508); **2. Group flows** (pp. 508–509
 - **What Theorem I.2 is for us.** Take `B = −M`, which is closed and invariant because every element acts by an endomorphism: *in a
   group ℱ-flow, a minimal `M` with `M − M = G` is `G`.* This is the multi-parameter form of Furstenberg's Prop. IV.1, the input the
   derivation agent's D1-T1 Remark 2 marked "[external, not held]". Berend uses it exactly so in Prop. II.7 (below).
+  *[Note at the close, 2026-09-25 (`plans/FS89-PA-furstenberg1967.md` §2, rows 27–29): Furstenberg's Prop. IV.1 is already multi-parameter (commutative toral semigroups); Berend's Thm I.2 is its **group-flow** form, which Furstenberg only announces (p. 45). The original is now held and read, so the "available held, as …" notes further down are superseded.]*
 
 ### Chapter II. Invariant sets on multi-solenoids of finite type (pp. 509–524) — read in full
 

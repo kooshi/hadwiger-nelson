@@ -243,6 +243,7 @@ to every depth. Deeper levels were not computed: the derivation makes them unnec
       like the 1-D one, or an explicit 2-D switching array.
   - This is the Furstenberg–Berend shape the advisor named: the second prime's unit acts at 5 as an isometry with dense orbits
     and breaks the one-parameter freedom that the single rotation `w̄` leaves.
+    *[Note at the close, 2026-09-25 (`plans/FS89-PA-furstenberg1967.md` §2, row 25): half of this is Furstenberg's — a second independent generator breaks one-parameter freedom (lacunary against non-lacunary). "Acts as an isometry with dense orbits" is not: his second generator expands, and works through `log Σ` being non-discrete (Lemma IV.1); the isometric lever is Berend's `p`-adic form (`plans/FS89-PA-berend1984.md` §4, D1-L3).]*
 
 ## §7 — C0 scored
 
