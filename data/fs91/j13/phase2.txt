@@ -1,0 +1,23 @@
+E1 admissible centres at p=5 (omega = (-4/5+3/5i)): [('-1/3', '0'), ('-1/6', '-1/6'), ('-1/6', '1/6'), ('0', '-1/3'), ('0', '0'), ('0', '1/3'), ('1/6', '-1/6'), ('1/6', '1/6'), ('1/3', '0')]
+E1 equals J12's C9: True
+== E2: J12-C3 instances, 1 <= a, b <= 10 ==
+pairs found: [(1, 5), (1, 10), (2, 5), (2, 10), (3, 5), (4, 5), (4, 10), (6, 5), (6, 10), (7, 5), (7, 10), (9, 5), (9, 10), (10, 5)]
+equal to J12's list: True
+(a,b)=(1,5): N=234 J12 says 234 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 12); N^2 > a+b: True
+(a,b)=(1,10): N=9111 J12 says 9111 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 44); N^2 > a+b: True
+(a,b)=(2,5): N=498 J12 says 498 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 28); N^2 > a+b: True
+(a,b)=(2,10): N=20592 J12 says 20592 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 12); N^2 > a+b: True
+(a,b)=(3,5): N=224 J12 says 224 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 8); N^2 > a+b: True
+(a,b)=(4,5): N=3834 J12 says 3834 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 36); N^2 > a+b: True
+(a,b)=(4,10): N=152886 J12 says 152886 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 28); N^2 > a+b: True
+(a,b)=(6,5): N=6074 J12 says 6074 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 44); N^2 > a+b: True
+(a,b)=(6,10): N=236096 J12 says 236096 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 16); N^2 > a+b: True
+(a,b)=(7,5): N=20592 J12 says 20592 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 12); N^2 > a+b: True
+(a,b)=(7,10): N=848643 J12 says 848643 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 68); N^2 > a+b: True
+(a,b)=(9,5): N=50962 J12 says 50962 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 28); N^2 > a+b: True
+(a,b)=(9,10): N=2029123 J12 says 2029123 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 76); N^2 > a+b: True
+(a,b)=(10,5): N=56142 J12 says 56142 =; N | 2Nm(D_L): True; band on U mod N: True (tau-period 60); N^2 > a+b: True
+E2 orders equal: True; all band: True; C4 divisibility: True
+PLANT E1' (rotation (3+4i)/5, angle 53 deg in place of omega's 143 deg): centres [('-2/3', '0'), ('-1/2', '-1/2'), ('-1/2', '-1/6'), ('-1/2', '1/6'), ('-1/2', '1/2'), ('-1/3', '-1/3'), ('-1/3', '0'), ('-1/3', '1/3'), ('-1/6', '-1/2'), ('-1/6', '-1/6'), ('-1/6', '1/6'), ('-1/6', '1/2'), ('0', '-2/3'), ('0', '-1/3'), ('0', '0'), ('0', '1/3'), ('0', '2/3'), ('1/6', '-1/2'), ('1/6', '-1/6'), ('1/6', '1/6'), ('1/6', '1/2'), ('1/3', '-1/3'), ('1/3', '0'), ('1/3', '1/3'), ('1/2', '-1/2'), ('1/2', '-1/6'), ('1/2', '1/6'), ('1/2', '1/2'), ('2/3', '0')]; differs from C9: True
+PLANT E2' (radius 1/13): pairs [(1, 5), (1, 10), (2, 5), (2, 10), (3, 5), (4, 5), (4, 10), (6, 5), (6, 10), (7, 5), (7, 10), (9, 5), (9, 10)]; a proper subset of J12's: True
+OVERALL: PASS

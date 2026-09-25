@@ -152,3 +152,57 @@ prior (0.50); the planner's leaked prior (P-MS5 "no", 0.60) was nearer.
 - J13-T6 — branching at 5 (`Ω`, two choices in `[1, 200]`) [hand + tools (60-digit inequality on 400 pieces; exact samples); §2.5]
 - J13-L1 — entropy compression with prefix-determined lists of size 2, `K = 9` [hand; method prior art, cited from memory; §2.5]
 - J13-T7 — X2: `MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists [hand, from T1, T3, T6, L1; §2.5]
+
+## Stage 3 — SAVED (phase 2: J12's lemma statements, `data/fs91/j12/lemma-statements.md`)
+
+*Opened after J12's stage 5 (`3453b552`) and after my phase-1 verdicts were committed (`07836b24`). Statements only; J12's record still
+unopened. Exact checks: `tools/crunch_j13_phase2.py` → `data/fs91/j13/phase2.txt` ("OVERALL: PASS").*
+
+**A frame note (mine, no verdict changes).** My tools take `π = 1 + 2i` (the first `a² + b² = 5` found), an associate of J12's and S0B's
+`π̄ = 2 − i`; so the tools' `β̄ = (−4+3i)/5` is the conjugate of the hand value `(−4−3i)/5` in §2.1, and the tools' `o = −(1+2i)/5`.
+The two frames are exchanged by complex conjugation followed by `z ↦ −iz` (which fixes `Q₀`, the parity centre and the set of order-3
+centres, and commutes with the rotations), so memberships, orders and the branching inequality are frame-independent; E2 below matches
+J12's list exactly across the two frames, which is the cross-check.
+
+| J12 id | verdict | how (one line) |
+|---|---|---|
+| A1 | TRUE | UFD: `ℤ[i][1/π̄] ∩ ℤ[i][1/π] = ℤ[i]`; `1 = απ^k + βπ̄^k` gives `S₊ + S₋ = R`; `w^m = π^mπ̄^{−m}` (§2.2) |
+| A2 | TRUE | pushout `R = (S₊ ⊕ S₋)/ℤ[i]` (§2.2) |
+| A3 | TRUE | units are `1, i` mod `(1+i)²`; `U mod 3 ⊆ {±1, ±i}` (§2.2) |
+| ONEa | TRUE | = J13-T2 with `e = C` (my `q`) |
+| HL | TRUE | band on each half from the given `τ_j + λ_{d_j} ∈ Θ₄`; not `T + A` by S0B-T4 at `p` |
+| B1 | TRUE | = J13-T1 at 5 (`z_m = u_m`: `lift(ī^m e_m) − P = ī^m(e_m − P)` since `ī^mP ≡ P`); centres ↔ digits by `c = h/(1 − ω)`, `1 − ω = 3(1+i)/π`, so the centre lattice is `((1−i)/6)ℤ[i]`, and **E1** finds exactly `C₉` admissible in the only range that can meet `Q₀` (`|1 − ω||z − c| ≤ √2/2`); `θ∘(iw) = (θ∘i)∘w ↦ −i·(i u_{m+1}) `, the pure shift |
+| B2 | TRUE | = J13-T3 (centres and digits determine each other) |
+| B3 | TRUE | same centres by linearity; sup-norm displacement `≤ |δ| ≤ r` |
+| B4 | TRUE | the orbit closure of `τ + λ_d` is `⋃_σ {σ + λ_{d′} : |d′| = |d|}` over the finite orbit of `τ` (on each coset of the period lattice `w̄^m d` is dense on the circle), and it is minimal |
+| B5 | TRUE | points of a minimal set are uniformly recurrent (compact space; Gottschalk); a uniformly recurrent point's orbit closure is minimal; then B2 |
+| B6 | TRUE | `F_A, F_B` isometries mapping compact `K` into itself are onto; `F_A^{|B|}F_B^{−|A|}` is a translation fixing `K`, so `0`; then J13-T4 gives `A^{|B|} = B^{|A|}` as words; Lyndon–Schützenberger. Second half = J13-T4 (periodic orbits through one point at one time coincide) |
+| CL | TRUE | B3 twice (from `Q″` along `W^a`, from `R^a(Q″)` along `W′^b`); the fixed-point formula recomputed |
+| CL′ | TRUE | for non-real `z` in the open lens, `(x, y) = (z̄/z, (z − D)/(z̄ − D)) ∈ T²` is the unique pair with `Q″ = z`, and it gives `|xz − D| = |z − D| < r′` for free; the inverse is continuous and `{(ω^{a|W|}, ω^{b|W′|}) : a, b ≥ 2}` is dense in `T²` (`arg ω/2π` irrational, the two exponents independent). Necessity: `D ≤ |R^a(Q″) − Q| + |R^a(Q″) − Q′| ≤ r + r′`, and equality forces `x = 1` |
+| H | TRUE | induction by CL′: `Q_{n+1} = Q″ ∈ B(Q_n, r_n)` strictly and `r_{n+1} > 0`, so the next open lens `B(Q_{n+1}, r_{n+1}) ∩ B(Q_n, r_n)` contains `Q_{n+1}`; base: `|c₀ − 0| = √2/6 < 1/4 + 1/12` |
+| W | TRUE | lengths: `a_n ≥ 2`; `W_nW_n` a factor since `a_n ≥ 2`; primitive: `W_n`, `W_{n−1}` primitive of different lengths do not commute, and `X^aY^b = V^k` with `a, b, k ≥ 2` forces `X, Y` to commute (Lyndon–Schützenberger) |
+| Ω | TRUE | every `W_m`, `m ≥ n`, is a concatenation of `W_n`, `W_{n−1}` blocks, each containing `W_{n−1}`: every factor recurs with bounded gaps in every point (minimal); a period `q < |W_n|` of the factor `W_nW_n` would make `W_n` non-primitive (Fine–Wilf) |
+| MS | TRUE, by J12's route too | the `τ_n` have a limit point in the closed `Θ₄(R₅)`; its centre sequence (continuous in `θ`) has every window inside some `W_nW_n ⊆ W_{n+1}`, so lies in `Ω`; its orbit closure's centre sequences lie in `Ω`, which has no periodic point, so it misses `T + A` (B2), and its minimal subsets answer "no". Same verdict as J13-T7 by a different construction (hierarchy of periodic orbits against branching + entropy compression). The added sentence "switching … with bounded runs in both directions": runs are bounded in `Ω` (`0`-runs have length `b₁`, `c₀`-runs are bounded likewise) — TRUE as a property of `Ω` |
+| MSp | TRUE | the chain H, W, Ω, MS uses only the two centres `0`, `v₀` (J13-T1 at every `l`: both digits lie in `π⁻¹ℤ[i]`, margins `1/4`, `1/12`, `|v₀| < 1/3`) and `arg β̄_l/2π ∉ ℚ`; nothing else is `p`-dependent. (My own route, J13-T6, is proved at 5 only; J12's route is the better one here) |
+| C1 | TRUE | `τ_e∘w^m` has parameter `conj(w̃)^m e = (tπ̄²)^m e` since `w ≡ π²t (mod N)`; negative `m` by periodicity |
+| C2 | TRUE | `|c* − z₀| = |z_L − z₀|/|1 − ω^L| ≤ r`, then B3 (Euclidean distance to `∂Q₀` equals the sup-norm margin inside a square) |
+| C3 | TRUE | CL, then torsion (periodic); the `a + b` shifts `τ∘(iw)^j` are distinct characters of order `N` (primitive word), so `N² > a + b`; infinitely many pairs by CL′. **E2** recomputes the 14 instance pairs and all 14 orders exactly, and checks each character's band on `U₅ mod N` independently |
+| C4 | TRUE | `Q″ = π^L t/D_L` with `π^L t ∈ ℤ[i]`, so `Nm(D_L)Q″ ∈ ℤ[i]`; with `P`, `N | 2Nm(D_L)`; E2 checks the 14 instances |
+| C3p | TRUE | = J13-T5 at every `l` (and J12's C3 route via CL′ is also `p`-free) |
+| Instances | TRUE | E2: the pairs and orders equal J12's list exactly; the plant (radius `1/13`) drops `(10, 5)` |
+
+**Assembly.** ONE-a: A1–A3 ⟹ ONEa — sound. ONE-b: B1, B2, H, W, Ω ⟹ MS, with B4–B6 as supporting facts (B6 explains why a two-word
+"common centre" construction cannot work, so the hierarchy is forced) — sound; CL′'s density is the step everything rests on, and it holds.
+ONE-c: CL (with `W = (c₀)`, `W′ = (0)`) and CL′ ⟹ C3 — sound. Compared with phase 1: **the verdicts agree on all three claims**; J12's
+X3 family (`c₀^a 0^b` under two disc conditions) and mine (`b a^p` under one, `|c_p| ≤ 1/4`) overlap at `a = 1`: J12's `(1, 5)`, `(1, 10)`
+are my `p = 5, 10` (orders 234, 9111), while my `p = 3` (order 48, S0B's list) fails J12's first condition and is still a band character —
+J12's condition is sufficient, mine is weaker, both are correct. For ONE-b the routes differ (§ Stage 4).
+
+**Plants (phase 2).** E1′: the rotation `(3+4i)/5` (53°) in place of `ω` admits 29 centres, not `C₉`. The first plant tried there — `w̄` in
+place of `ω` — returned `C₉` too and **could not fire**; it was replaced and is recorded (G21). E2′: radius `1/13` drops `(10, 5)` only.
+
+### Theorems this phase proved (phase 2)
+
+- J13-T8 — J12-CL′'s density, with the explicit inverse `(x, y) = (z̄/z, (z − D)/(z̄ − D))` [hand; this record, Stage 3]
+- J13-T9 — J12-MSp at every `l ≡ 1 (mod 4)`, by J12's hierarchy on the frame J13-T1 [hand; Stage 3]
+- J13-C9 — the admissible centres at `p = 5` are exactly `C₉` [tools exact, E1]
