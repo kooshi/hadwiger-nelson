@@ -634,3 +634,41 @@ Nothing in this section judges a verdict a record reached; where two records dif
 "one derivation (J12); blind check J13 pending", and stage 3 waits for J13's verdicts (the brief's rule).
 
 **Would have searched here (stage 1):** none — bookkeeping only.
+
+### Stage 2 — SAVED (the derivation file)
+
+`plans/FS91-derivation.md` files every theorem M1 proved outside the kernel: **70 entries** covering **122 theorem ids** from the ten
+"Theorems this phase proved" tables (the planner's, J01, J03a, J02, J09, J07, J10/J10b, J08, J11, J12) plus J11's `Γ₁₁` remark; duplicates are
+merged, one entry per theorem, each title naming every other id (the control `data/fs91/j23a/coverage.py` finds every id; its plant, a fake
+id, is reported missing and the run exits 1). Sections: §1 band rigidity at every band; §2 the unit-vector ring with no Galois hypothesis;
+§3 three colours (statements about `χ`); §4 the class theorem CLG; §5 the character chromatic numbers at the exposed fields; §6 one prime
+(J12; **J13 pending** on every entry); §7 the conjecture sweep (ten open items, each routed to a stub or a decline in stage 4).
+
+**Verification status at filing** (each entry states its own; the records' words):
+- **Three or more derivations:** Lemma C′ (J09's J2, J07, J10-T6); the peeling lemma (J03, J07, J10); CLG-d (J03, J07, J10); weak approximation
+  (J07, J09, J10); the pullback (J07, J08, J10, J11); level collapse (J07, J08, J10, J11); SIX-a (J03, J08, J11); `χ_char(Γ₂₃) = 8` (J03,
+  J08, J11); `χ_char(Γ₁₁) = 6` (J08, J10, J11).
+- **Two independent derivations or two blind readings:** SW-m and band rigidity at every band (J01, J03a); PA-B2 (J01, J03a's second route);
+  S1, S2, S3 and J02-L1–L4, T1, C2 (J02, J09); CLG_k and its `κ` form, CLG-g (bar (g3) at `k = 7`), HD1, C-47, C-167, CL3–CL5 under the wide
+  `A` (J07, J10); Lemma C, LB/LB′ (J07, J10); `χ_char(Γ₄₃) = 9`, the Weil threshold, the band-6/7 list, `Γ₂₇`, the three fields (J08, J11).
+- **One mind:** J01-1 (with FS-89's reader), J01-3, J01-4 (sharpness reproduced by J03a's plant), J03a-5, J03a-6, J03a-9; J09's J1, J-K, J4,
+  J4-A, J4-T6; J10-L1, L7, L8, T9; J08-9, J08-10, J08-11; J11-T9 (compared in J11-T13); every J12 entry (J13 pending).
+- **A GAP, filed as corrected:** J07-11's (g3) at `k = 7` (J10-T8): "exact level `2e(𝔭|3) + 1`", not "`e(𝔭|3) = 1`, exact level 3".
+- **Records that differ on a grade** (index §2.3), filed both ways with addresses: J01-7 (record "one mind", two blind readings since); J02's
+  S1–S3 (record "composition", two derivations since); J07-3/J07-4 (record "one mind", re-derived by J10 and, for C′, by J09); J08-6 (record
+  "one mind", three other derivations); J08-8's `≤ 8` (corrected to `≤ 7`); J08-4's constants (100, 144 against 97, 141 — the same lists);
+  J09's J2 (owner ruling "one mind"; its completed form reached independently by J07 and J10).
+
+**Kernel decisions:** 11 stubs (FS-47 for Lemma C, C′, J02-L2, J10-L1; FS-75, re-aimed, for the three-colour chain J02-L1, L3, T1, T2, T3,
+C1, C2 and J09's J4), every other entry declined with its reason (an external theorem — Berend, Weil — or no consumer). M1 added no Lean.
+
+**Prior art at filing:** §1 carries J23p's first verdict (partly in print, `[Manners2015]` Lemma 5.3); every other entry reads "pending the
+close gate" or names the held input it uses (Berend, Furstenberg, Weil, GPT Astra, Fischer 1990/1994, `[MMST1998]`).
+
+**Inventory:** 48 items ticked "done (J23a stage 2)" with the entry each landed in (`data/fs91/j23a/stage2-ticks.json`); five of them (89,
+105, 109, 110, 113) stay routed to stage 4 for their drafts.
+
+**What stage 3 waits for.** J13's verdicts on J12 (the brief's rule: stage 3 does not start until `data/crunch-2026-09-25/reports/J13.md`
+says DONE), and J23p's further verdicts (the owner forwards them).
+
+**Would have searched here (stage 2):** none — filing only; the coverage control is a string check over a fixed list of ids.
