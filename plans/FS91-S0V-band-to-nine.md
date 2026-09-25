@@ -123,6 +123,69 @@ for our action; nothing in it uses expansiveness, so the isometric archimedean d
 
 **Where the value of `k` is used in stage 2: nowhere.** The band is not an input to 2.1–2.3.
 
+## Stage 3, `k = 6` — SAVED
+
+**The claim at `k = 6`** (from PA-B3, verbatim `plans/FS89-PA-berend1984.md:374`: "(candidate) `RS_k(S)` for `k < 2·min S`, `|S| ≥ 2`;
+`RQ_k` for `k ≤ 9` (PA-B2 with VB1–VB4)"): `RS₆(S)` for every `|S| ≥ 2` with `min S ≥ 5` (always true: `S` holds primes `≡ 1 mod 4`),
+and `RQ₆`. The objects: `B₆ = [1/6, 5/6]`, `Θ₆(R_S) = {θ : θ(U_S) ⊆ B₆}`.
+
+### 3.6.1 The route the claim names (R1: PA-B2, then VB1, VB3, VB4), re-derived at `k = 6`
+
+1. **Minimal sets.** Every minimal subset of `Θ₆(R_S)` lies in `T + A`: stage 2 (PA-B2), band-free. *Uses `k`: no.*
+2. **The point step (VB1, `plans/FS89-S1VB-verification.md` §B1.1).** Let `y ∈ Θ₆(R_S)`; its orbit closure `Ō(y)` contains a minimal set,
+   hence (step 1) a point `x = τ₀ + λ_d`. With `U₀ = Stab(τ₀)` (finite index) and `g_n y → x`: if some `g_n y − x ∈ A`, then
+   `y ∈ T + A`. Otherwise Lemma E (expansion at a place `v | p`, `p ∈ S`) gives `x′ + c̄ ∈ Ō(y)` with `x′ = τ₀ + λ_{d′}`, `c ∈ K_v^×`;
+   the second prime `p′ ∈ S ∖ {p}` and Lemma JC (the joint closure of `(w̄_{p′}^{bn}, w_{p′}^{bn}|_v)` is `S¹ × W₀`, `W₀ ⊇ 1 + p^jℤ_p`)
+   give `x′ + c̄′ ∈ Ō(y) ⊆ Θ₆` for every `c′` in the ball `c + c p^j O_v`. I re-derived Lemma E, JC and this step; none uses `k`
+   (they use only that `Θ₆` is closed and invariant).
+   **The line that uses `k`:** Lemma SW, verbatim (`plans/FS89-S1VB-verification.md:55–58`): "Let `k ∈ {4, 5}` … the values fill a coset
+   of `(1/p)ℤ/ℤ`, step `≤ 1/5`, which meets the open arc `(−1/k, 1/k)` of length `2/k ≥ 2/5`." **What it needs of `k`:** a full coset of
+   step `1/p` meets every open arc of length `2/k` iff `1/p < 2/k`, i.e. `k < 2p` (the written clause "`2/k ≥ 2/5`", i.e. `k ≤ 5`, is
+   stronger than the proof needs). At `k = 6`: `1/5 < 1/3` and `1/13 < 1/3`, so the lemma's one-digit sweep works at every prime of
+   `S = {5, 13}`, and at every `p ≥ 5`. ✓
+   **And the condition is removable** [hand + tools exact]: choosing `u = w_p^{±t}` with `π_v^s u O_v = π_v^{−m}O_v` instead of
+   `π_v^{−1}O_v`, the values fill a full coset of `(1/p^m)ℤ/ℤ` (`ψ_v` has conductor `O_v`, so it is injective on `π_v^{−m}O_v/O_v`), which
+   meets the open arc once `p^m > k/2`. `tools/crunch_j01_sweep_check.py` (output `data/fs91/j01/sweep-check.txt`) realises the sweep in
+   `R_{5,13}`'s chart at `v = (2 − i)`: the coset is full for `m = 1, 2, 3` (A1); with one digit the worst coset meets the arc iff
+   `k < 10`, and at `k = 10` an explicit offset keeps all five values in `[1/10, 9/10]` (A2: the lemma as written is sharp at `k = 2p`);
+   with `m(k)` digits every coset meets it for `k = 3..60` (A3). Plants fire for their stated reasons: the conjugate place (`w₅` contracts,
+   the sweep collapses) and a closed arc (the `k = 10` sharpness disappears).
+3. **Finiteness (VB3).** `RS₆(S)` ⟹ `Θ₆(R_S) ∩ T` finite: distinct band torsion characters accumulate at `φ = τ₀ + λ_d ∈ Θ₆`; since
+   `T ∩ A = 0` (R_S is `p`-divisible), Lemma E yields `τ₀ + λ_{d′} + c̄ ∈ Θ₆` with `c ≠ 0`, a point outside `T + A` (its local data are
+   not the image of one rational). Re-derived. *Uses `k`: no* (only that `Θ₆` is closed, invariant, and inside `T + A`).
+4. **Layering (VB4 = S0A's G1 with base `R_S`; D's D2-L1).** For `θ ∈ Θ₆(R_{S′})`, `S′ ⊇ S` (or `Q`), and `u ∈ U_{S′}`, `y ↦ θ(uy)` is a band
+   character of `R_S` at the **same** band (`uU_S ⊆ U_{S′}`), so it is `τ_u + λ_{e_u}` with `τ_u ∈ Θ₆ ∩ T` (the leaf formula: the torsion part
+   of a band `T + A` point is band, since each `τ`-fibre of `U_S` is dense on the circle), hence `Nτ_u = 0` for the lcm `N` of step 3's
+   finite list. G1's steps 2–6 (one real lift by `p`-divisibility; `c_x` independent of the decomposition; `Φ` additive, lifts `Nθ`) then
+   give `θ ∈ T_N + A`. I re-read G1 (`plans/FS89-S0A-gluing-verification.md` §C1) and D2-L1: **neither uses the band** beyond carrying the
+   same `k` from hypothesis to conclusion (S0A says so in words, and the proof bears it out). *Uses `k`: no.*
+   **So `RQ₆` follows from `RS₆({5, 13})`**, and `RS₆(S′)` for every `S′ ⊇ S`.
+
+### 3.6.2 A second, elementary route to step 1 inside the band (R2: the parity line), independent of Berend
+
+Let `M ⊆ Θ₆(R_S)` be minimal and in case 1. D1-L3 gives `θ₂ ∈ M − M = R̂_S`: `y, y + θ₂ ∈ M`. Since `θ₂(u) = 1/2` on `U_S`,
+`y(u) ∈ [1/6, 1/3] ∪ [2/3, 5/6]`, so `2y(u) ∈ [1/3, 2/3]`: **`2y ∈ Θ₃(R_S)`** (checked exactly, B1). **The line that uses `k`:** "`y(u)` and
+`y(u) + 1/2` both in `B_k` ⟹ `2y(u) ∈ [2/k, 1 − 2/k]`"; at `k = 6` it lands in the band `[1/3, 2/3]`.
+- `MS₃(S)`: a minimal `N ⊆ Θ₃` in case 1 would give `z, z + θ₂ ∈ Θ₃`, i.e. two antipodal values in an arc of length `1/3 < 1/2`: impossible. So
+  `N` is in case 2 and lies in `T + A` (2.1). With VB1 at `k = 3` (one-digit sweep: `1/5 < 2/3`), `RS₃(S)`: `Θ₃(R_S) ⊆ T + A`. (FS81-T3
+  layered gives the explicit set, but is not needed.)
+- So `2y = τ + λ_e`, hence `2(y − λ_{e/2}) = τ` and `y ∈ T + A`; `M = Ō(y)` is then a finite union of leaf circles, whose small differences
+  are archimedean (distinct torsion parts differ by a non-zero element of a finite set, bounded away from `A`). That is case 2, a
+  contradiction. So `MS₆(S)` holds by a route with no input from Berend — only D1-L3, VB5 and VB1.
+
+### 3.6.3 Verdict at `k = 6`
+
+| item | verdict | grade | the `k`-lines and what they need |
+|---|---|---|---|
+| `RS₆(S)`, `|S| ≥ 2` (the claim's `k < 2·min S` holds: `6 < 10`) | **TRUE** | hand; the sweep arithmetic tools exact (`tools/crunch_j01_sweep_check.py`) | Lemma SW's arc line: `1/p < 2/k`, i.e. `k < 2p` (as written), or `p^m > k/2` for some `m` (always); R2's parity line: `[2/k, 1 − 2/k] = [1/3, 2/3]` |
+| `RQ₆` | **TRUE** | hand | none beyond `RS₆({5, 13})`; VB3, VB4, G1, D2-L1 are band-free |
+| do VB3, VB4, D2-L1 use `k`? | **no** | — | they carry one band from hypothesis to conclusion |
+
+**What the next job may consume:** `Θ₆(Q) ⊆ T + A` (and `Θ₆(R_F) ⊆ T + A` for every `F ⊆ ℝ`, by S0A-2's band-free gluing), with
+`Θ₆(R₆₅) ∩ T` finite. **Not established here:** the explicit list of band-1/6 torsion types of `Q` (the analogue of N₀/U2 at 1/6 — S0A's
+middle-half count and the level collapse were done at bands 1/4, 1/5 and are **not** re-derived at 1/6), and any bound on its torsion
+order beyond "finite". Any consequence at ℚ(√167) needs that list.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
