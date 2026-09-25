@@ -162,6 +162,39 @@ more general in this regard." The mechanism GRRSV give: "`−λn = |λn| ≤ λ(
 `K_m`, for vector colourings (Pak–Vilenchik 2013; GRRSV Cor. 4.4 generalises it). The integral statement for an arbitrary first factor
 (F), and the Borel/measurable forms, are not here.
 
+## Stage 4 — SAVED: paper 4, `[PakVilenchik2013]` (found at stage 3)
+
+**Copy.** I. Pak, D. Vilenchik, *Constructing uniquely realizable graphs*, Discrete Comput. Geom. 50(4) (2013) 1051–1071,
+doi 10.1007/s00454-013-9545-6. Not on arXiv (API: nothing for the author pair). The authors' PDF `https://www.math.ucla.edu/~pak/papers/GRP4.pdf`
+fails TLS verification at the host ("unable to get local issuer certificate"), so it was fetched through the Wayback Machine
+(`https://web.archive.org/web/2024id_/…/GRP4.pdf`, HTTP 200; TeX output dated 2013-06-15, 34 pp., the accepted-version layout; not compared
+with the journal) → `~/source/library/pdf/PakVilenchik2013-constructing-uniquely-realizable-graphs.pdf`.
+
+**Reading log.** Abstract; §1.2 "Uniquely k-colorable and vector k-colorable graphs" (pp. 4–5) in full; §2's statements of Theorems 1–3 and
+the Ramanujan construction after Theorem 3; §5.1 heading ("Proof of Theorem 3" — it reduces unique `k`-colourability to universal rigidity
+of the simplex framework, Theorem 1); §8 "Conclusions and open problems" in full. §3–§7 and the appendices (universal rigidity, SDP, stress
+matrices) not read — they prove rigidity, not a colouring-selection statement.
+
+**Statements, verbatim.**
+- "Theorem 3. Let H be an r-regular graph with `λ < r/(k − 1)`. Then `G = Kk ⊗ H` is uniquely k-colorable and uniquely vector k-colorable.
+  Furthermore, the k-colorability problem for G can be solved in polynomial time." Here `λ` is "`λ(H)` (the second largest eigenvalue in
+  absolute value)" (§8.1), and `⊗` is the tensor (categorical) product.
+- §1.2: "We could not find any mention in the literature about uniquely vector k-colorable graphs, nor the relation to unique k-colorability."
+- §8.1 poses: "take a universally rigid framework R and an r-regular graph H. Find a condition on `λ(H)` … so that `R ⊗ H` is universally rigid."
+
+**Bearing on J21-MX.**
+- **(S): in print here first (2013), in the same normalisation** — `λ(H)/r < 1/(k−1)` for a regular factor `H` of a categorical product.
+  J21-MX's `λ* = sup_{ξ≠0}|ν̂(ξ)|` with `ν` uniform on a finite connection set is exactly `λ(H)/r` for `H = Cay(K, T)`; J21-MX allows a
+  weighted `ν` and a compact group.
+- **(F): not here.** The first factor is `K_k`, and the conclusion (unique `k`-colourability) is for that one product; as GRRSV note, its
+  ordinary-colouring half is already Greenwell–Lovász's without any spectral hypothesis. J21-MX's first factor is arbitrary and its
+  conclusion is that the first factor is `k`-colourable — a Hedetniemi-type descent, not a uniqueness statement. The proof routes differ
+  too (rigidity and stress matrices here; a two-set mixing inequality and a plurality selection in J21-MX).
+- **(B)/(M), (C): not here.**
+
+**Verdict for this paper:** (S) is **in print as a hypothesis in a product-colouring theorem** (Pak–Vilenchik Thm 3, `K_k ⊗ H`); the
+statement J21-MX makes with it — for every first factor, integral, Borel, measurable — is not.
+
 ## Would have searched here (the ban to 2026-10-01)
 
 *(Empty so far: a reading job runs no finite-witness search.)*
