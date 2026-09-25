@@ -63,3 +63,31 @@
 - **The index of every crunch result:** `plans/CRUNCH-2026-09-25-INDEX.md` (job J30, the bookkeeper Kooshi asked for; blind verifiers never open it). Stubs and plans the work bears on carry an address-only block, "Where the 2026-09-25 work on this lives".
 - **Rescued scratch:** `data/rescued-2026-09-25/` (manifest `SWEEP.tsv`); large files, renders and paper texts in `~/source/lean-dir-rescue/`; the owner's scratch (holds agent ids, never in the repo) in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`.
 - **Close inventories:** `plans/FS91-close-inventory.md` (M1), `plans/M2-close-inventory.md`, `plans/M3-close-inventory.md`.
+
+## 5. State at 18:05 (for a resume after compaction)
+
+**Crunch launched 15:26.** Kooshi: "You are clear to launch." (defaults hold: at most three milestones open). Ids: owner scratch
+`…/scratchpad/owner-crunch/live-agents.md` (a snapshot also in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`).
+
+**Done (reports in `data/crunch-2026-09-25/reports/`):** J01, J03a (band rigidity every k, two blind readings); J02, J09 (three colours,
+two derivations); J03, J04, J06 (reframes); J07, J10/J10b (CLG, blind-checked); J08, J11 (six at exposed fields, blind-checked); J12
+(one prime); J14, J15, J16, J17K (kernel: chain theorem, transcendence, prime inversion + stripe lemma, bridge conditional); J17 (bridge
+write-up); J18, J19, J20 (rank one: A-T1 open at a named step, blind-checked); J21, J22 B1 (windows over ℚ(√167)); J23p (M1 close
+prior-art gate: band rigidity PARTLY IN PRINT, [Manners2015] Lemma 5.3); J24a (front-page pointers); J30 (Kooshi's wiring audit: index
+`plans/CRUNCH-2026-09-25-INDEX.md`); clerk runs 1–4.
+
+**Running at 18:05:** J09v (blind reading of J09's J4), J13 (blind check of J12), J17K2 (Lemma NP in the kernel), J22b (J22 at B2),
+J26 (Ambrus 2023 certificate audit).
+
+**Next, in order:** when J13 lands → a FRESH **J23a2** on `data/crunch-2026-09-25/briefs/J23a-M1-close-math.md` (J23a stopped at
+STAGE 2 SAVED, harness 421k); when J17K2 lands → **J23b** (M2 close-math; `lake lint` once under slot.py after a green build; brief to
+write from queue §4.5, as J23a's); when J22b lands → **J23c** (M3 close-math); then **J24** (front page: apply all closes' drafts) and
+**J25** (the crunch's close). Clerk run 5 when no close job is writing an inventory. Fillers: J29 (FS-84 post-ban plan), J05 (optional);
+J27 (FS-67) waits for a milestone to close.
+
+**Rulings this session (owner):** J01-7 and CLG consumed as verified; A(R_F) = Hom_ℚ(F(i), ℝ) mod 1 (FS89-CL2 false as worded; CL3–CL5
+survive, two derivations); J17V skipped; J16 FS-47 first; `lake lint` once at M2's close; J19 aimed at A-T1; J18-DC's residue step waits
+for the ban to lift; VACUITY DECLARED never on a merely unproved hypothesis; J26 reconsiders FS-86 item 70.
+
+**Open with Kooshi:** papers by browser — Muchnik 2005, Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser 2001, Barajas–Serra 2009,
+Shimura 1964, Eggleton–Erdős–Skilton 1990 (Graphs Combin. 6), Johnson 2000/2006 (`plans/FS91-PA-close.md` §C.2).
