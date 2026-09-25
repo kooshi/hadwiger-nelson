@@ -955,7 +955,7 @@ blind verifiers included**, so every line proposed for it is address-only.
 | L1 | the header paragraph, after "…the story goes to git.*" | `*Work of the 2026-09-25 crunch not yet folded into rows is indexed in `plans/CRUNCH-2026-09-25-INDEX.md`, with its items in `plans/FS91-close-inventory.md`, `plans/M2-close-inventory.md` and `plans/M3-close-inventory.md`.*` | pointer |
 | L2 | row 95, at its end | `Corrections owed: `plans/FS91-close-inventory.md` rows 3, 61, 69, 70, 78.` | pointer |
 | L3 | row 92, at its end | `Correction owed: `plans/M3-close-inventory.md` row 18.` | pointer |
-| L4 | rows 96 and 82 | `Re-derivations and extensions since: `plans/FS91-close-inventory.md` rows 7, 72–75, 87, 92.` (row 96); `Extended to every real number field: `plans/FS91-close-inventory.md` rows 7, 8.` (row 82) | pointer |
+| L4 | rows 96 and 82 | `Re-derivations and extensions since: `plans/FS91-close-inventory.md` rows 75, 87, 92.` (row 96); `Extended to every real number field: `plans/FS91-close-inventory.md` rows 7, 8.` (row 82) | pointer |
 
 **`plans/FRONTIER-STUBS.md`**
 
