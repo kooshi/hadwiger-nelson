@@ -16,11 +16,12 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 275,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 300,000 bytes** (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
 200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
-on 2026-09-17 with the file at 199,785 bytes, and from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
-no-loss compression pass measured its floor at about 228,000 — a ceiling reached is a ceiling that starts costing content,
+on 2026-09-17 with the file at 199,785 bytes, from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
+no-loss compression pass measured its floor at about 228,000, and from 275,000 to 300,000 on 2026-09-25 with the file at 274,995
+(*"It probably still won't be enough, but hopefully it'll buy time"*) — a ceiling reached is a ceiling that starts costing content,
 and the current-state-only rule, not the byte count, is what keeps this file honest). The budget is
 a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
 comes out whether or not there is room for it. **One home per fact** (2026-09-21): numbers, certificates, names and
