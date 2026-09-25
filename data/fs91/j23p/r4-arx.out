@@ -1,0 +1,6 @@
+Q: abs:"elements of norm one" AND abs:"generate" AND abs:"ring"
+  hits: 0
+Q: abs:"norm one" AND abs:"subring" AND abs:"quadratic extension"
+  hits: 0
+Q: abs:"unit circle" AND abs:"rational points" AND abs:"ring generated"
+  hits: 0

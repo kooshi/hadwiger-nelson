@@ -1,0 +1,3 @@
+abs:"elements of norm one" AND abs:"generate" AND abs:"ring"
+abs:"norm one" AND abs:"subring" AND abs:"quadratic extension"
+abs:"unit circle" AND abs:"rational points" AND abs:"ring generated"

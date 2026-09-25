@@ -1,0 +1,5 @@
+ab:"regular chromatic number"
+ti:"regular chromatic number"
+ab:"regular coloring" & ab:"distance graph"
+ab:"regular colouring" & ab:"circulant"
+au:"Serra, Oriol" & ab:"chromatic"

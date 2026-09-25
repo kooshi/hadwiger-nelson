@@ -1,0 +1,9 @@
+Hedetniemi conjecture eigenvalue
+Hedetniemi pseudorandom
+Hedetniemi Cayley graph multiplicative
+Borel chromatic number categorical product
+measurable chromatic number product graph Hedetniemi
+multiplicative graph Hedetniemi circular clique
+regular chromatic number lonely runner
+circular chromatic number Cayley graph abelian group character
+unit distance graph number field chromatic number

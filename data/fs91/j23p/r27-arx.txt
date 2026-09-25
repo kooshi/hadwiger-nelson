@@ -1,0 +1,6 @@
+abs:"regular chromatic number"
+abs:"lonely runner" AND abs:"Cayley graph"
+abs:"lonely runner" AND abs:"circular chromatic"
+abs:"circular chromatic number" AND abs:"abelian" AND abs:"Cayley"
+abs:"chromatic number" AND abs:"unit circle" AND abs:"finite field"
+abs:"unit distance" AND abs:"number field" AND abs:"chromatic"

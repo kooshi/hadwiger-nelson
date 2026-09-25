@@ -217,3 +217,48 @@ Raw output: `data/fs91/j23p/r6-zb.out`, `r6-rev.out`, `r6-arx.out`.
 prime; the discretised-rotation literature (Bosio–Vivaldi 2000; Akiyama–Pethő 2013) holds analogues, unread beyond summaries."
 **`CLOSED-QUESTIONS.md` candidate:** none as a posed question — Manners's sentence is an assertion, not a question; but if J13 confirms ONE-a,
 the record can say it supplies a proof of the one-prime failure Manners asserts (in the band form on `R_p`).
+
+## Stage 2 — SAVED (result 2: the class theorem CLG, and the opening gate's unanswered queries)
+
+**Statement searched** (J07-7, verbatim at `plans/FS91-S1D-character.md` line 179): "Let `k ≥ 3` satisfy `H_k`, and let `F` be a real number
+field. Then `Θ_k(R_F) ≠ ∅` if and only if some stable place `𝔓` of `F(i)` and some level `m ≥ 1` have a band `k`-character of `T_{𝔓,m}`.
+Hence `χ_char(F²) = min_{𝔓,m} χ_char(T_{𝔓,m})` …"; with its inputs CLG-a (pullback), CLG-b/b_n (the peeling lemma), CLG-c (weak
+approximation on the norm-one torus), CLG-d.
+
+**Named in the disciplines' words:** `χ_char` is the **regular chromatic number** of the graph — the name `[BarajasSerra2008]` gives, for
+circulant and distance graphs, to "`min{k : ∃λ ∈ ℤ_N such that |λd|_N ≥ N/k for each d ∈ D}`" (verbatim, arXiv 0710.4495 §1): the least `k`
+admitting a colouring by a character, i.e. our band characters in rank 1 and on cyclic groups. CLG is a **local–global principle for the
+regular (character) chromatic number of the unit-distance Cayley graph of a number field**, whose local objects are the norm-one circles
+`T(F_𝔭)` and whose gluing is weak approximation on the norm-one torus plus a sumset lemma on the circle group.
+
+### 2.1 Queries (zbMATH unless marked; raw `data/fs91/j23p/r27-*.out`, `r5-oa.out`)
+
+| query | hits | what bears |
+|---|---|---|
+| the opening gate's eight unanswered queries, re-run: `ab:"circular chromatic number" & ab:"Cayley graph"`; `… & ab:"abelian group"`; `ab:"finite Euclidean" & ab:"chromatic number"`; `ab:"quadratic residue" & ab:"polynomial" & ab:"interval"`; `ab:"view obstruction" & ab:"chromatic"`; `ab:"multiplicative subgroup" & ab:"interval" & ab:"finite field" & ab:"avoid"`; `ab:"lonely runner" & ab:"chromatic number" & ab:"Cayley"`; `ab:"unit distance graph" & ab:"field" & ab:"chromatic number" & py:2000-2026` | 0; 0; 1; 3; 0; 0; 1; 1 | all answered this time (no 502). Krebs 2023 (held `[Krebs2022]`); Watson 1962, Mazur 1969 (residues of polynomials); the EuroComb'07 volume (Barajas–Serra); `[BardestaniMallahiKarai2017]` (held). **The eight debts are discharged** |
+| word-form re-asks: `ab:circular & ab:chromatic & ab:Cayley & ab:abelian`; `ti:circular & ti:chromatic & ti:circulant`; `ab:circular & ab:chromatic & ab:"distance graphs" & ab:"lonely runner"`; `ti:"chromatic number of circulant graphs"` | 2; 1; 3; 2 | García-Marco–Knauer–Menara 2026 (semiminimal Cayley graphs, `χ_c ≤ 4`); Liu–Zhu 2003, 2005; **Barajas–Serra 2007, 2008, 2009** |
+| `ab:"regular chromatic number"`; `ti:"regular chromatic number"`; `ab:"regular coloring" & ab:"distance graph"`; `au:"Serra, Oriol" & ab:"chromatic"` | 4; 1; 1; 13 | **the vocabulary: Barajas–Serra's "regular chromatic number"** (EuroComb'07; EJC 2008; Discrete Math. 2009, text withheld); Zhu 1998 JCTB *Pattern periodic coloring of distance graphs* (review); Montejano–Serra (rainbow-free 3-colourings of abelian groups; off) |
+| `ab:"Hasse principle" & ab:"graph" & ab:"coloring"`; `ab:"local-global" & ab:"coloring" & ab:"Cayley"`; `ab:"chromatic number" & ab:"number field" & ab:"plane"`; `ab:"lonely runner" & ab:"Cayley graph"`; `ab:"circular chromatic number" & ab:"distance graph" & ab:"character"`; `ab:"homomorphism" & ab:"circle" & ab:"Cayley graph" & ab:"abelian" & ab:"chromatic"`; `ab:"unit-distance" & ab:"rational points" & ab:"circular"`; `ti:circular & ti:chromatic & ti:Cayley`; `ab:circular & ab:colouring & ab:"unit distance"` | 0 each | — |
+| `ab:"weak approximation" & ab:"norm one torus"` | 6 | Koymans–Rome 2024 (Compositio, *Weak approximation on the norm one torus*, review); Colliot-Thélène–Harari–Skorobogatov 2003; Frei–Loughran–Newton 2018: CLG-c's input is standard (for a quadratic `L/F` the norm-one torus is rational, so weak approximation holds) |
+| arXiv: `abs:"regular chromatic number"`; `abs:"lonely runner" AND abs:"Cayley graph"`; `abs:"lonely runner" AND abs:"circular chromatic"`; `abs:"circular chromatic number" AND abs:"abelian" AND abs:"Cayley"`; `abs:"chromatic number" AND abs:"unit circle" AND abs:"finite field"`; `abs:"unit distance" AND abs:"number field" AND abs:"chromatic"` | 1; 0; 0; 1; 0; 0 | 0710.4495 (Barajas–Serra); 2607.26942 (García-Marco et al.) |
+| OpenAlex t&a: `regular chromatic number lonely runner`; `circular chromatic number Cayley graph abelian group character`; `unit distance graph number field chromatic number` | 4; 0; 8 | Barajas's thesis *Coloring problems in Cayley graphs* (UPC 2007; abstract read: cyclic groups, the "Prime Filtering Lemma"); `[Fischer1990]`, `[BardestaniMallahiKarai2017]`, `[Krebs2022]`; the rest off (two 2026 "resolutions" of Hadwiger–Nelson via octonions, not opened) |
+
+### 2.2 Read
+
+- **`[BarajasSerra2008]`** J. Barajas, O. Serra, *The lonely runner with seven runners*, Electron. J. Combin. 15 (2008) R48, Zbl 1206.11030;
+  arXiv 0710.4495, held `~/source/library/pdf/BarajasSerra2008-lonely-runner-seven-runners.pdf`. **Read: abstract and §1 (the definition of
+  the regular chromatic number and its motivation)**; the rest not read.
+- Barajas 2007 thesis: abstract only (OpenAlex). Barajas–Serra 2009 (circulant graphs): text withheld; not held.
+
+### 2.3 The verdict for result 2 — **not found by these searches**
+
+No work found states a local–global principle for character (regular) colourings of a field's plane, or of any Cayley graph of a
+non-finitely-generated abelian group, or computes `χ_char` of a number-field plane. **The concept is in print in rank 1**: Barajas–Serra's
+regular chromatic number is `χ_char` of a circulant or distance graph, and the lonely-runner literature (Wills, Cusick, Chen; Liu's 2008
+survey, `[Liu2008]`) is its `κ`; Kang–Maharaj 2010 (the opening gate) is the one-place colouring of distance graphs. CLG-c's weak approximation
+is standard (Koymans–Rome 2024 for the general norm-one torus). **The peeling lemma CLG-b** (a sumset of symmetric sets inside a band has a
+summand inside the band) was not found as stated; it is two lines, and folklore-grade is the honest grade. **Undecided:** `[Johnson2000]`
+and `[Johnson2006]` (the status report and compendium of the question's lineage), unread.
+
+**Wording to use:** "CLG not found in print; the character chromatic number is Barajas–Serra's regular chromatic number, extended from cyclic
+groups to the unit-distance graph of a number field."

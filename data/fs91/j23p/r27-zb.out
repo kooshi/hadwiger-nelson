@@ -1,0 +1,65 @@
+Q: ab:"circular chromatic number" & ab:"Cayley graph"
+  hits: 0
+Q: ab:"circular chromatic number" & ab:"abelian group"
+  hits: 0
+Q: ab:"finite Euclidean" & ab:"chromatic number"
+  hits: 1
+  1520.05039 | 2023 | Krebs, Mike | Clique numbers of finite unit-quadrance graphs | Journal of Algebraic Combinatorics | summary
+Q: ab:"quadratic residue" & ab:"polynomial" & ab:"interval"
+  hits: 3
+  0105.26801 | 1962 | Watson, G. L. | On the gaps between the values of a rational quadratic polynomial | Journal of the London Mathematical  | none
+  1143.94001 | 2008 | Katz, Jonathan; Lindell, Yehuda | Introduction to modern cryptography. | Chapman \& Hall/CRC Cryptography an | review
+  0247.10033 | 1969 | Mazur, L. E. | Über Folgen von Resten und Nichtresten von Polynomen | Mathematical Notes | none
+Q: ab:"view obstruction" & ab:"chromatic"
+  hits: 0
+Q: ab:"multiplicative subgroup" & ab:"interval" & ab:"finite field" & ab:"avoid"
+  hits: 0
+Q: ab:"lonely runner" & ab:"chromatic number" & ab:"Cayley"
+  hits: 1
+  1137.05002 | 2007 |  | Proceedings of the 4th European conference on combinatorics, graph theory and applications, EuroComb'07, Seville, Spain, | Electronic Notes in Discrete Mathem | review
+Q: ab:"unit distance graph" & ab:"field" & ab:"chromatic number" & py:2000-2026
+  hits: 1
+  1360.05050 | 2017 | Bardestani, Mohammad; Mallahi-Karai, Keivan | On a generalization of the Hadwiger-Nelson problem | Israel Journal of Mathematics | summary
+Q: ti:"circular chromatic number of Cayley graphs"
+  hits: 0
+Q: ab:"circular coloring" & ab:"Cayley graph" & ab:"abelian"
+  hits: 0
+Q: ab:"Euclidean graph" & ab:"finite field" & ab:"chromatic"
+  hits: 0
+Q: ab:"finite Euclidean graph"
+  hits: 0
+Q: ab:"unit circle" & ab:"finite field" & ab:"Cayley graph"
+  hits: 0
+Q: ab:"Kloosterman" & ab:"chromatic"
+  hits: 2
+  0721.11015 | 1990 | Sarnak, Peter | Some applications of modular forms | Cambridge Tracts in Mathematics | review
+  1394.05030 | 2018 | Bardestani, Mohammad; Mallahi-Karai, Keivan | On the chromatic number of structured Cayley graphs | Journal of Combinatorial Theory. Se | summary
+Q: ab:"Hasse principle" & ab:"graph" & ab:"coloring"
+  hits: 0
+Q: ab:"local-global" & ab:"coloring" & ab:"Cayley"
+  hits: 0
+Q: ab:"chromatic number" & ab:"number field" & ab:"plane"
+  hits: 0
+Q: ab:"lonely runner" & ab:"Cayley graph"
+  hits: 0
+Q: ab:"circular chromatic number" & ab:"distance graph" & ab:"character"
+  hits: 0
+Q: ab:"homomorphism" & ab:"circle" & ab:"Cayley graph" & ab:"abelian" & ab:"chromatic"
+  hits: 0
+Q: ab:"Hedetniemi" & ab:"eigenvalue" & ab:"product"
+  hits: 0
+Q: ab:"categorical product" & ab:"pseudorandom"
+  hits: 0
+Q: ab:"Burr" & ab:"Erdos" & ab:"Lovasz" & ab:"product"
+  hits: 1
+  1229.05108 | 2011 | Zhu, Xuding | The fractional version of Hedetniemi's conjecture is true | European Journal of Combinatorics | summary
+Q: ab:"chromatic number" & ab:"product" & ab:"complete graph" & ab:"measurable"
+  hits: 0
+Q: ab:"Borel chromatic number" & ab:"product"
+  hits: 0
+Q: ab:"unit-distance" & ab:"rational points" & ab:"circular"
+  hits: 0
+Q: ab:"trace" & ab:"norm one" & ab:"finite field" & ab:"values"
+  hits: 0
+Q: ab:"circular chromatic number" & ab:"Paley"
+  hits: 0

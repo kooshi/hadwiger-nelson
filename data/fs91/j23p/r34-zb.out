@@ -1,0 +1,49 @@
+Q: ab:"three colors" & ab:"unit distance" & ab:"field"
+  hits: 0
+Q: ab:"3-colorable" & ab:"distance one" & ab:"extension"
+  hits: 0
+Q: ab:"chromatic number" & ab:"algebraic extension" & ab:"distance one"
+  hits: 0
+Q: ab:"chromatic number" & ab:"rational points" & ab:"algebraic number field"
+  hits: 0
+Q: au:"Zaks, Joseph" & ab:"chromatic"
+  hits: 2
+  0705.05033 | 1989 | Zaks, Joseph | On four-colourings of the rational four-space | Aequationes Mathematicae | review
+  0940.05025 | 1999 | Zaks, Joseph | On odd integral distances rational graph in four-dimensions | Geombinatorics | editorial
+Q: au:"Chilakamarri, Kiran B."
+  hits: 26
+  0642.05047 | 1988 | Chilakamarri, Kiran B. | Unit-distance graphs in rational n-spaces | Discrete Mathematics | editorial
+  0803.05021 | 1993 | Chilakamarri, Kiran B. | The unit-distance graph problem: A brief survey and some new results | Bulletin of the Institute of Combin | review
+  0716.05022 | 1991 | Chilakamarri, Kiran B. | Unit-Distance Graphs in Minkowski metric spaces | Geometriae Dedicata | editorial
+  1251.05149 | 2012 | Chilakamarri, Kiran B.; Dean, Nathaniel; Kang, Cong X. | Iteration index of a zero forcing set in a graph | Bulletin of the Institute of Combin | summary
+  0794.05111 | 1993 | Chilakamarri, Kiran B. | A characterization in \(\mathbb{Z}^ n\) of finite unit-distance graphs in \(\mathbb{R}^ n\) | Journal of Combinatorial Theory. Se | review
+  0705.05034 | 1990 | Chilakamarri, Kiran B. | On the chromatic number of rational five-space | Aequationes Mathematicae | review
+  0851.52010 | 1995 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E. | Venn diagrams: Announcement of some new results | Geombinatorics | review
+  0661.05039 | 1988 | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. | American Mathematical Monthly | review
+  0863.05030 | 1996 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E. | Venn diagrams and planar graphs | Geometriae Dedicata | editorial
+  0848.05028 | 1995 | Chilakamarri, Kiran B. | Some problems arising from unit-distance graphs | Geombinatorics | review
+  0848.05027 | 1995 | Chilakamarri, Kiran B. | A \(4\)-chromatic unit-distance graph with no triangles | Geombinatorics | review
+  0831.05023 | 1995 | Chilakamarri, Kiran B.; Dean, Nathaniel | The Ulam number of infinite graphs | Graphs and Combinatorics | review
+  1302.92143 | 2009 | Balaban, Alexandru T.; Chilakamarri, Kiran B.; Klein, Douglas J. | Protochirons and protohelices | Journal of Mathematical Chemistry | summary
+  0782.05035 | 1993 | Chilakamarri, Kiran B.; Hamburger, Peter | On a class of kernel-perfect and kernel-perfect-critical graphs | Discrete Mathematics | review
+  0856.05028 | 1996 | Chilakamarri, Kiran B.; Hamburger, Peter; Pippert, Raymond E. | Hamilton cycles in planar graphs and Venn diagrams | Journal of Combinatorial Theory. Se | review
+Q: ab:"elements of norm one" & ab:"generate" & ab:"ring"
+  hits: 0
+Q: ab:"norm one" & ab:"subring generated"
+  hits: 0
+Q: ab:"norm-one torus" & ab:"rational points" & ab:"order"
+  hits: 0
+Q: ab:"Pythagorean" & ab:"ring generated"
+  hits: 0
+Q: ab:"unit circle" & ab:"number field" & ab:"ring generated"
+  hits: 0
+Q: ab:"norm one elements" & ab:"quadratic extension" & ab:"additive group generated"
+  hits: 0
+Q: ab:"weak approximation" & ab:"norm one torus"
+  hits: 6
+  1087.14016 | 2003 | Colliot-Thélène, J.-L.; Harari, D.; Skorobogatov, A. N. | Values of a polynomial of one variable represented by a norm |  | review
+  1546.11143 | 2024 | Koymans, P.; Rome, N. | Weak approximation on the norm one torus | Compositio Mathematica | review
+  1426.11127 | 2018 | Frei, Christopher; Loughran, Daniel; Newton, Rachel | The Hasse norm principle for abelian extensions | American Journal of Mathematics | review
+  arXiv:2110.03782 | 2021 | Felipe Rivera-Mesas | Hasse norm principle for Galois dihedral extensions |  | summary
+  1515.11028 | 2022 | Hoshi, Akinari; Kanai, Kazuki; Yamasaki, Aiichi | Norm one tori and Hasse norm principle | Mathematics of Computation | summary
+  1512.14013 | 2022 | Macedo, André; Newton, Rachel | Explicit methods for the Hasse norm principle and applications to \(A_n\) and \(S_n\) extensions | Mathematical Proceedings of the Cam | review

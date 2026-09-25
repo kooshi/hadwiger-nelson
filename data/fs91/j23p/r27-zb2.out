@@ -1,0 +1,20 @@
+Q: ab:circular & ab:chromatic & ab:Cayley & ab:abelian
+  hits: 2
+  arXiv:2607.26942 | 2026 | Ignacio García-Marco; Kolja Knauer; Giuliamaria Menara | Coloring semiminimal Cayley Graphs |  | summary
+  1137.05002 | 2007 |  | Proceedings of the 4th European conference on combinatorics, graph theory and applications, EuroComb'07, Seville, Spain, | Electronic Notes in Discrete Mathem | review
+Q: ti:circular & ti:chromatic & ti:Cayley
+  hits: 0
+Q: ti:circular & ti:chromatic & ti:circulant
+  hits: 1
+  1072.05570 | 2003 | Liu, Daphne Der-Fen; Zhu, Xuding | Circulant distant two labeling and circular chromatic number | Ars Combinatoria | review
+Q: ab:circular & ab:chromatic & ab:"distance graphs" & ab:"lonely runner"
+  hits: 3
+  1055.05059 | 2005 | Liu, Daphne Der-Fen; Zhu, Xuding | Fractional chromatic number and circular chromatic number for distance graphs with large clique size | Journal of Graph Theory | summary
+  1206.11030 | 2008 | Barajas, J.; Serra, O. | The lonely runner with seven runners | The Electronic Journal of Combinato | summary
+  1215.05052 | 2007 | Barajas, J.; Serra, O. | Regular chromatic number and the lonely runner problem |  | summary
+Q: ti:"chromatic number of circulant graphs"
+  hits: 2
+  1213.05064 | 2009 | Barajas, Javier; Serra, Oriol | On the chromatic number of circulant graphs | Discrete Mathematics | summary
+  None | 2026 | Jin, Xiaoyu; Yan, Guiying; Yang, Weihua | The equitable chromatic number of circulant graphs with maximum degree at most 4 | Applied Mathematics and Computation | none
+Q: ab:circular & ab:colouring & ab:"unit distance"
+  hits: 0

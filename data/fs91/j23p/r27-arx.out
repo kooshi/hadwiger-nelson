@@ -1,0 +1,14 @@
+Q: abs:"regular chromatic number"
+  hits: 1
+  0710.4495v1 | 2007 | The lonely runner with seven runners
+Q: abs:"lonely runner" AND abs:"Cayley graph"
+  hits: 0
+Q: abs:"lonely runner" AND abs:"circular chromatic"
+  hits: 0
+Q: abs:"circular chromatic number" AND abs:"abelian" AND abs:"Cayley"
+  hits: 1
+  2607.26942v1 | 2026 | Coloring semiminimal Cayley Graphs
+Q: abs:"chromatic number" AND abs:"unit circle" AND abs:"finite field"
+  hits: 0
+Q: abs:"unit distance" AND abs:"number field" AND abs:"chromatic"
+  hits: 0

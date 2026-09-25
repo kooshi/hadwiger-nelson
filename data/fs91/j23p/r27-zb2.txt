@@ -1,0 +1,6 @@
+ab:circular & ab:chromatic & ab:Cayley & ab:abelian
+ti:circular & ti:chromatic & ti:Cayley
+ti:circular & ti:chromatic & ti:circulant
+ab:circular & ab:chromatic & ab:"distance graphs" & ab:"lonely runner"
+ti:"chromatic number of circulant graphs"
+ab:circular & ab:colouring & ab:"unit distance"
