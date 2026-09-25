@@ -1,0 +1,16 @@
+  1009.65077 | 2000 | Bosio, D.; Vivaldi, F. | Round-off errors and \(p\)-adic numbers | Nonlinearity | summary
+   [summary] Summary: We explore some connections between round-off errors in linear planar rotations and algebraic number theory. We discretize a map on a lattice in such a way as to retain invertibility, restricting the system parameter (the trace) to rational values with power-prime denominator \(p^n\). We show that this system can be embedded into a smooth expansive dynamical system over the \(p\)-adic integers, consisting of multiplication by a unit composed with a Bernoulli shift. In this representation, the original round-off system corresponds to restriction to a dense subset of the \(p\)-adic integers. These constructs are based on symbolic dynamics and on the representation of the discrete phase space as a ring of integers in a quadratic number field.
+
+  1152.37329 | 2006 | Vivaldi, Franco | The arithmetic of discretized rotations |  | review
+   [review] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+
+  1351.37281 | 2013 | Akiyama, Shigeki; Pethő, Attila | Discretized rotation has infinitely many periodic orbits | Nonlinearity | summary
+   [summary] Summary: For a fixed \(\lambda \in (-2, 2)\), we study a family of discretized rotation on \(\mathbb Z^2\) defined by 
+\[
+ (x,y)\mapsto (y,-\lfloor x+\lambda y\rfloor).
+\]
+ We prove that this reversible dynamics has infinitely many periodic orbits.
+
+  1055.37048 | 2001 | Adler, Roy; Kitchens, Bruce; Tresser, Charles | Dynamics of non-ergodic piecewise affine maps of the torus. | Ergodic Theory and Dynamical System | summary
+   [summary] Summary: We discuss the dynamics of a class of non-ergodic piecewise affine maps of the torus. These maps exhibit highly complex and little understood behavior. We present computer graphics of some examples and analyses of some with a decreasing degree of completeness. For the best understood example, we show that the torus splits into three invariant sets on which the dynamics are quite different. These are: the orbit of the discontinuity set, the complement of this set in its closure, and the complement of the closure. There are still some unsolved problems concerning the orbit of the discontinuity set. However we do know that there are intervals of periodic orbits and at least one infinite orbit. The map on the second invariant set is minimal and uniquely ergodic. The third invariant set is one of full Lebesgue measure and consists of a countable number of open octagons whose points are periodic. Their orbits can be described in terms of a symbolism obtained from an equal length substitution rule or the triadic odometer.
+

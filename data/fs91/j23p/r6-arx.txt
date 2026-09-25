@@ -1,0 +1,5 @@
+au:Vivaldi AND ti:rotations
+au:Vivaldi AND abs:"p-adic" AND abs:rotation
+abs:"discretized rotation" AND abs:"periodic orbits"
+abs:"Pythagorean" AND abs:"rotation" AND abs:"p-adic"
+abs:"rational rotation" AND abs:"lattice" AND abs:"minimal" AND abs:"odometer"

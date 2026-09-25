@@ -1,0 +1,15 @@
+Q: au:Vivaldi AND ti:rotations
+  hits: 4
+  1709.08904v1 | 2017 | Nonlinear Rotations on a Lattice
+  1208.1132v2 | 2012 | Near-integrable behaviour in a family of discretised rotations
+  0909.3458v1 | 2009 | Approach to a rational rotation number in a piecewise isometric system
+  2303.17955v1 | 2023 | Critical curves of rotations
+Q: au:Vivaldi AND abs:"p-adic" AND abs:rotation
+  hits: 0
+Q: abs:"discretized rotation" AND abs:"periodic orbits"
+  hits: 1
+  1206.3868v3 | 2012 | Discretized rotation has infinitely many periodic orbits
+Q: abs:"Pythagorean" AND abs:"rotation" AND abs:"p-adic"
+  hits: 0
+Q: abs:"rational rotation" AND abs:"lattice" AND abs:"minimal" AND abs:"odometer"
+  hits: 0
