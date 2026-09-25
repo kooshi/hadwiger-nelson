@@ -253,10 +253,10 @@ of residue characteristic `p ≤ k/2` above level one."* Proved in the sharper f
   2–3.
 
 **What CLG-g does not say:** anything about non-character colourings; that the exception is ever realised (open: a band six-character of
-`UD(ℤ/729-analogue)` at `q = 27` level 2, or of the 64-tower at level `≥ 2`); anything for `k ≤ 2` beyond `Θ₂ ⊆ T₂` (J03a-5).
+the level-2 target `O_𝔓/𝔓²` at `q = 27`, `3¹²` vertices, or of the 64-tower at level `≥ 2`); anything for `k ≤ 2` beyond `Θ₂ ⊆ T₂` (J03a-5).
 
 ### Would-have-searched-here log (stage 3)
 
 - Would have enumerated band six-characters of the level-2 target at `q = 27` to see whether (E1) is realised; not done — it is a finite
-  question a derivation fixes (`|O/𝔓²| = 3⁶·… `), but it bears only on fields of degree ≥ 3 and is J08's territory (SIX-d); logged as a
+  question a derivation fixes (`|O_𝔓/𝔓²| = 3¹²` at `q = 27`), but it bears only on fields of degree ≥ 3 and is J08's territory (SIX-d); logged as a
   SPAWN candidate instead.
