@@ -111,3 +111,10 @@ hunch: queue-starves-on-plans
 ## §3. Advice to the planner — log
 
 *(Each send: time order, the item, the planner's response.)*
+- **Send 1** (after 67d4e9b0): F1–F6 and the minute-zero four, by SendMessage to the planner. Response: pending.
+- **Send 2**: F1 sharpened after reading `plans/FS89-derivation.md` CL2 (stated for every `F ⊆ ℝ`) and S0A-3 (order-3 part with
+  `|α| ≤ 1/12`). The joint-surjectivity step is elementary: the unit vectors are the norm-one torus of `F(i)/F`, rational by the Cayley
+  parametrisation, so weak approximation makes `U_F` jointly dense in the local circles and the archimedean one. Hunch `fs82-falls-out`
+  raised to 0.75 in my message (the ledger entry keeps its registered 0.6; the raise is a reading, not evidence). Three checks named
+  for the derivation agent: the band collapse at a ramified prime above 3; C1(5)'s type bound through CL2's gluing; the parity step
+  when `1/2 ∉ R_F`. Response: pending.
