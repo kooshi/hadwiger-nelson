@@ -542,3 +542,125 @@ not pulled (the 1967 paper located directly).
 closed-set literature that relaxes hyperbolicity found here is about density of orbits under expanding archimedean coordinates
 (Haynes–Munday) or constructs counterexamples when a one-parameter factor is present (Maucourant). No two-line argument is known to the
 planner. The milestone is not re-aimed.
+
+## §S. The subplan (WORKFLOW 4)
+
+### S.1 Staffing and the verifier's shape (Kooshi's ruling: one derivation agent plus a blind verifier)
+
+- **D**, the derivation agent (de Bruijn, Opus 5.5): owns the questions D-0 to D-3 below; record `plans/FS89-S1D-derivation.md`.
+- **V**, the blind verifier (Opus 5.5; the owner names the persona): owns V-A (fixed now) and V-B (D's saved claims, as statements);
+  record `plans/FS89-S1V-verification.md`.
+- **The decision: V starts at launch on a fixed list of hinge statements (V-A), then verifies D's saved claims blind (V-B).**
+  - *Alternative weighed:* (a) V idle until D saves a first claim, then checks claims only (FS-86's W, X, C, D); (b) V derives the
+    target RQ₄ blind in parallel with D.
+  - *Why this one:* (a) wastes V's first day, while four inputs every route stands on are one mind each (N₀, S0B-T6, U1, the rank-two
+    orbit model); V-A doubles them before D leans on them. (b) is a competition under another name, which Kooshi did not choose, and it
+    would leave D's claims unchecked.
+  - *Confidence:* medium-high. What would change it: V-A finishing within hours, in which case V's idle time before D's first claim is
+    the cost of (a) anyway.
+- **Blindness, mechanically.** V never opens `plans/FS89-S1D-*`, `data/fs89/s1d/`, `tools/fs89_s1d_*`, or D's scratch; V never runs
+  `git log -p` or `git show` on D's commits. D's claims reach V only as statements, copied verbatim by the owner. **Both agents use
+  neutral commit subjects** ("FS-89 S1D: record, section n"; "FS-89 S1V: record, section n") because the harness shows every agent the last
+  five commit subjects at start-up (G51's covert channel). V may read D's record only after V's verdict on that claim is committed, to
+  write a divergence table (S0A's C2 pattern).
+
+### S.2 The stages and their questions
+
+**Stage 1a (launch → 2026-09-27).**
+
+| id | owner | question (quoted into the briefs verbatim) | output |
+|---|---|---|---|
+| D-0 | D | Read `[Berend1984min]` in full (held), Haynes–Munday §1, S0B's record and `tools/fs89_s0b_orbits.py`; write the rank-two orbit model (arrays `e_m`, `m ∈ ℤ²`, one step rule per prime, the gluing across both directions). ≤ 40k tokens. | record §1 |
+| **D-1a** | D | "Is every `U_S`-minimal closed subset of `Θ₄(R_S)` contained in `T + A`, for every finite `S` with `|S| ≥ 2` (first `S = {5, 13}`)? Prove it — the route to test first is Berend's Prop. 4.1 with the archimedean plane in place of the strictly contracted subspace — or name the step that fails and why." | a saved claim (proved, or refuted by a minimal set outside `T + A`), or a named failing step |
+| **D-1b** | D | "At `S = {5, 13}`: is there a band character of `R_S` whose orbit closure meets two different leaves (a heteroclinic or switching character)? Either exclude every such character, or exhibit one with exact band checks on a window and a proof that it persists (S0B-T3–T5's standard)." | a saved claim: `RS₄({5, 13})` proved (with D-1a), refuted, or reduced to a named lemma |
+| V-A1 | V | U1 (§0.3), quoted: derive or refute. | verdict + derivation |
+| V-A2 | V | N₀ (S0A-3) re-derived blind, and U2: "`Θ₄(Q) ∩ (T + A)` is exactly the finite union of leaf discs over the band torsion characters of `Q/168Q`, with margins 1/4, 1/12, 1/28 and 0 as listed"; list the torsion characters up to the symmetries (`U`-action, conjugation, negation), each with its margin. | verdict + the explicit list |
+| V-A3 | V | S0B-T6, quoted: re-derive blind. | verdict |
+| V-A4 | V | "Derive the rank-`r` orbit model: `Θ_β(U_S)` for `|S| = r` as arrays `(e_m)_{m ∈ ℤ^r}` in `Q_β` with one step rule per prime; state the gluing condition across directions, and the criterion for `T + A` (the rank-`r` form of S0B-T2)." | verdict + model (fixes §S.4's shape) |
+
+**Stage 1b (→ 2026-09-29).** D's next question depends on Stage 1a (D decides, with the reason logged; the owner may redirect):
+- *If `RS₄({5, 13})` is proved:* **D-2**, RQ₄: through U1 if V proved it, or directly (weak approximation, S0A-4's mechanism); then how
+  far the argument reaches toward RQ₅.
+- *If `RS₄({5, 13})` is refuted:* **D-C**, the extension question: "does the rank-two counterexample extend to a band character of `Q`
+  (adding split primes one at a time, with compactness), or does some prime kill it as 13 killed the rational heteroclinics?" A
+  counterexample to RQ₄ must read infinitely many split places (FT).
+- *If D-1 ends in a named obstruction:* **D-2** anyway: weak approximation is a lever rank two lacks, and RQ₄ may be the easier statement.
+- **V-B:** each claim D saves, verified blind from its statement.
+
+**Stage 1c (→ 2026-09-30).** Final records; each "Theorems this phase proved" table; V's divergence table on every claim whose verdict is
+committed. The close (the owner's close planner) follows on 2026-10-01.
+
+**Optional side question D-3** (only if D-1 lands early, or as D's own break; it does not bear on RQ, since N₀ bounds the order over `Q`):
+U5 at one prime — "are there band torsion characters of `R₅` of unbounded order?" (a prime `𝔭` where `⟨i, w₅⟩ mod 𝔭` is small and some
+dilate avoids `(−1/4, 1/4)`; tools: Shparlinski 2016, Bugeaud–Corvaja–Zannier 2003). No enumeration beyond S0B-L4's `N ≤ 130` without
+Kooshi's ruling (inventory item 17).
+
+### S.3 Every phase's budget, stop rule, checkpoint, kill cost and acceptance
+
+| phase | budget | stop rule | checkpoint / resume | a kill redoes | acceptance |
+|---|---|---|---|---|---|
+| D-0 | ≤ 40k tokens | model written and its 1-D slice checked against S0B-T1 | record §1 saved; resume: a fresh D reads the brief and the record, continues at the first unsaved section | the unsaved section | model stated; its `S = {5}` slice equals S0B-T1 |
+| D-1a | ≤ 150k tokens | a claim at exact scope, proved or refuted; or a named failing step with its reason | record, saved per section | the unsaved section | statement quoted; proof or counterexample; inhabitant named (`S = {5, 13}`); grade |
+| D-1b | ≤ 120k tokens | as D-1a; a counterexample carries exact window checks and a persistence proof | as D-1a | as D-1a | as D-1a, plus planted out-of-lens controls failing where predicted |
+| D-2 / D-C | ≤ 150k tokens | as D-1a | as D-1a | as D-1a | as D-1a |
+| D total | ≤ 420k tokens | hand back at the budget with the record saved | — | — | "Theorems this phase proved" table complete |
+| V-A1–A4 | ≤ 150k tokens | a verdict per statement (TRUE / FALSE / GAP, with the derivation) | V's record, saved per statement; resume as above | the unsaved statement | every statement quoted verbatim, verdict, derivation, grade |
+| V-B | ≤ 200k tokens | a verdict per claim received | as above | as above | as above; divergence table after each verdict is committed |
+| §S.4 window | ≤ 3 h CPU at `K = 2`; `K ≥ 3` not without Kooshi | the pre-registered reading decided, or the time cap | per-`K` result files in `data/fs89/s1d/`; resume: rerun at the next `K` | the running `K` | controls pass (below); the reading's two outcomes both stated before the run |
+
+### S.4 The one exact computation: the rank-two window (priced; optional; gated)
+
+- **What it is.** S0B's orbit model at `S = {5, 13}`: arrays `e_{m,n}` in `Q_{1/4}` on the window `|m|, |n| ≤ K`, with both step rules;
+  equivalently the characters of `5^{−K}13^{−K}ℤ[i]` with the band on the window's unit vectors. It counts connected pieces, point
+  pieces, and pieces meeting no leaf disc's finite-level shadow.
+- **Its shape is fixed by derivation first**: V-A4's model and D's D-0 model must agree before it runs (G21: the instrument's image must
+  be derived, not assumed).
+- **Why it is in scope:** the same kind as S0B's allowed computation (inventory item 2): an exact enumeration of one fixed set per `K`,
+  no witness sought, bounded in hours. It is S0B §6's named killing test for U4.
+- **Price.** `K = 1`: minutes (the window's group has index `65²` over `ℤ[i]`, 36 unit vectors). `K = 2`: unknown; priced from `K = 1`'s
+  piece count and time before launch, capped at 3 hours under `scripts/slot.py --mem 16 --cpus 8`. `K ≥ 3`: not without Kooshi.
+- **Controls, all at the same `K`:** (i) three colours: the count must equal the value D derives before the run from `RS₃({5})`
+  (FS81-T3 glued through the 13-layers gives `Θ₃(R_{65}) ⊆ T₆ + A`; the window may still carry finite-level pieces that die deeper,
+  so the predicted count is derived, not assumed to be 5 — at rank one it was 5 at every depth);
+  (ii) the `n = 0` slice reproduces S0B's 1-D counts (29 at depth 1); (iii) a planted fault (the 13-step lattice `π̄₁₃⁻¹ℤ[i]` in place
+  of `π₁₃⁻¹ℤ[i]`) must go red; (iv) the generator must be able to represent a rank-one switching array (S0B's prefixes embed in the
+  `n = 0` slice).
+- **The reading, pre-registered by D before the run**, with both outcomes stated and checked reachable: the number of pieces meeting no
+  leaf shadow, as a function of `K`, against the 1-D count at the same depth. G21: a finite window measures its depth, so no count is
+  read against zero.
+- **Process rules:** `setsid`, pgid to a file, kill by pgid, verify by the result file's digest; output to `data/fs89/s1d/`, never `/tmp`;
+  a Python pool passes `mp_context=get_context("fork")`.
+
+### S.5 The killing tests (dated; each checked able to fire)
+
+- **KT-1 (the plan's reading: "rank two restores rigidity", U4 extended).** Fires if, by **2026-09-29**, D or V exhibits a band character
+  of `R_{65}` not in `T + A`: an explicit array or adelic formula, exact band checks on `|m|, |n| ≤ 25`, and a hand proof that it persists
+  (S0B-T3–T5's standard). **Can fire:** the checking pattern exists (`tools/fs89_s0b_heteroclinic.py` checks S0B-T3 exactly), and S0B
+  fired the rank-one analogue within a day; the §S.4 window can also exhibit surviving non-leaf pieces.
+- **KT-2 (the route's reading: "Berend's Prop. 4.1 goes through modulo the isometric direction").** Fires if D names, by **2026-09-27**,
+  a step of Prop. 4.1 (case 1 or case 2) that fails at the band with an explicit reason. **Can fire:** D-1a's stop rule requires either a
+  proof or a named step.
+- **What changes on 2026-10-01**, when the ban ends unless Kooshi extends it: HD1-cert's `Θ` tree on `Λ₅₁₀` (FS-90 (a)), the window at
+  `K ≥ 3`, and finite-witness searches for a rank-two array become admissible with Kooshi's go; FS-90's T721 audit becomes runnable.
+  **Nothing in Stage 1 depends on the ban lifting.**
+
+### S.6 The fallback (sketched well enough to brief from)
+
+- **F1 — the all-primes route by weak approximation** (D-2 as a fallback, if rank two stalls). The norm-one torus is ℚ-rational, so
+  `U_ℚ` is dense in `S¹ × ∏_{v ∈ S′} T(ℚ_v)` for every finite `S′` (N₀'s tool). To make a band character leave the band, sweep one
+  split place `v` by `u = w_p^k x`, with `x` prescribing `u_v` modulo `p^j`; each such `u` has poles at auxiliary split places whose
+  contributions the adversary controls (S0A C3). **The question to hand D:** "is there a family of admissible sweeps whose auxiliary
+  contributions are small outside a set that cannot carry the whole band — an averaging over the auxiliary primes that the adversary
+  cannot defeat — or does the adversary's control of infinitely many places produce a counterexample by a diagonal construction?"
+- **F2 — if the milestone stalls entirely:** the record states exactly what a Berend-type proof needs at the band (the case-1 analogue),
+  the invariant a counterexample must carry (§IQ item 3), and which rung failed; FS-89's stub is re-aimed at that statement; the rest of
+  the week goes to FS-87's kernel leaves (the advisor's filler), and after 2026-10-01 to FS-90 (a), HD1-cert, with Kooshi's go.
+
+### S.7 Records every phase writes
+
+- D: `plans/FS89-S1D-derivation.md` (C0 predictions before any derivation; one section per question; "Theorems this phase proved";
+  the would-have-searched log). Working files stay in D's scratch until a claim is saved. Tools `tools/fs89_s1d_*.py`, data
+  `data/fs89/s1d/`.
+- V: `plans/FS89-S1V-verification.md` (C0 predictions; one section per statement or claim, each quoted verbatim; the divergence table
+  after each committed verdict; "Theorems this phase proved"; the log). Tools `tools/fs89_s1v_*.py`, data `data/fs89/s1v/`.
+- Every record: grades per `CLAUDE.md` § Notation; each result at its exact scope.
