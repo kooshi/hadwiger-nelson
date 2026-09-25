@@ -75,4 +75,7 @@ row 87), G75 (triangles pin the spectrum; its killing test is this stub's yes), 
 and FS79-T2 (never chainable in `F`), G57 (triangle-free iff √3 ∉ F), G61/G74 (four colours, row 82), G71/G73 (no height at four colours;
 the open certificate formats), G21 (a triangle-free null so far measured only the fields enumerated); rows 66, 67, 78, 82, 85, 86, 87.
 
+**Reading owed at the opening** (FS-85 close inventory items 6 and 25, carried): Soifer ch. 55's posing citation "[Soi46]" and
+its citation graph; `[deGrey2026]` (ℝ³, triangle-free, five-chromatic) and `[Haugstrup2026]`, both read by the author's summary only.
+
 **Solver:** none for routes 1–3; route 4 needs a solver (after the week). **Cost:** route 1 hours; route 3 days.
