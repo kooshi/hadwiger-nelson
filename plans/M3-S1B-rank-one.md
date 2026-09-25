@@ -76,3 +76,186 @@ sweep. **The claim it checks (conjecture AF, formed in §2):** "in an all-rigid 
 per colour pair)". **Prediction C0-6:** all 94 rigid periodic points frozen, prior **0.35** (the control's rigid points are all
 non-frozen, and nothing I have proved forces freezing). Both outcomes reachable: the tool reports non-frozen points on the control
 (positive control passes, plant fires).
+
+**Order-of-events note (a slip, logged):** the registration above was written to disk before the run, but its commit failed on a git
+lock held by another job, and the run went ahead; the commit (`956ce452`) landed seconds after the run. So the registration's precedence
+is attested by the order of my tool calls, not by the commit order.
+
+---
+
+## Stage 2 — SAVED (the step: no proof and no counterexample of A-T1; four theorems, a refutation of KE on a named class, one prediction lost, a sharper named obstruction)
+
+### 2.1 `[EggletonErdosSkilton1985]` — read for the owner, per section
+
+R. B. Eggleton, P. Erdős, D. K. Skilton, "Colouring the Real Line", J. Combin. Theory Ser. B 39 (1985) 86–100
+(`~/source/library/pdf/EggletonErdosSkilton1985-colouring-the-real-line.pdf`, a scan with an OCR layer; read through `pdftotext`).
+
+| section | read | what it holds for this job |
+|---|---|---|
+| 1 Introduction, 2 Definitions | in full | `G(ℝ, D)`, "distance set"; chromatic number only |
+| 3–5 (closed interval, open interval, infinitely many intervals of distances) | theorem statements only (Thms 1–8) | real-line intervals; nothing on `ℤ` colouring spaces |
+| 6 Finite set of distances | in full | `G(ℤ, D)` defined; Thm 9 (`χ(1,…,m) = m+1`), Thm 10 (`χ(r,s) = 3` for coprime opposite parity), Thms 11–14 (`{1,…,m}∖{k}`); every colouring given is explicit and periodic |
+| 7 Prime distances | in full to Thm 16 (Thm 17's statement truncated in the OCR) | Lemma 6 (`χ(ℤ, primes) = 4`, `χ(2,3,5) = 4`), Thm 15 (classes of `D ⊆` primes), Thm 16 (`{2,3,p}` in class 3); a hand forcing chain for `{2,3,11,13}` |
+| 8 Concluding remarks | in full | asks about colourings with at least `k` colours in every open interval; promises a sequel on distance sets not bounded away from 0 |
+
+**Verdict for the owner:** the 1985 paper says **nothing about periodic versus non-periodic colourings or the structure of the
+colouring space** (the OCR text contains no "periodic"; every colouring in it is an explicit periodic formula). It does not bear on
+R2/A-T1. **The 1990 paper (`[EggletonErdosSkilton1990]`, "Colouring prime distance graphs", Graphs Combin. 6) is still needed**: its
+Theorem 2 (periodic `χ(D)`-colourings exist; aperiodic ones may coexist, per the zbMATH review and the MathOverflow note) is the only
+prior statement of the rank-one periodic/aperiodic question we know of. Bibliography row proposed in §3.4.
+
+### 2.2 The control's rigid–rigid walls are twin-family walls, and the one-sided swaps split exactly into "total" and "proper"
+
+On `{1,5,7,10}` (the one given control; J18's frozen tool; `tools/crunch_j19_mirror.py`, `data/m3/j19/mirror.txt`):
+- **Mirror pairs among the rigid phases:** 23↔67, 49↔81, 55↔65, 63↔110; the other ten are achiral. **The nine rigid–rigid walls run from
+  the family {65, 67, 81} to its mirror family {55, 23, 49}**: three are *twin walls* (a phase to its own mirror: 65→55, 67→23, 81→49)
+  and six cross the families. **C0-5 is met.** Every one of the nine also factors through the non-rigid phase 57 (the walls 65/67/81→57
+  and 57→23/49/55 are in the wall list).
+- **The ends partitions** (`tools/crunch_j19_ends.py`, `data/m3/j19/ends-*.txt`; theorem J19-ENDS below says what they are): in every
+  rigid phase of the control each colour pair has 1 strand or 5 strands (one complementary couple of pairs has 5, the other two couples
+  have 1). Call a one-sided component **total** if its ends are *all* the strands of its tail for that pair, **proper** otherwise.
+  Across the nine walls there are **62** one-sided components (of the size J18's swap tool reads): **10 total, 52 proper.**
+- **Against J18's swap data (`data/m3/j18/swaptail.txt`, 62 control rows), exactly:** the 10 swaps that kept the tail rigid are the 10
+  total components (65→23 pair {2,3}; 67→23, 67→49, 67→55 pair {0,3}; 81→23 pair {0,1}; each once on each side), and all **52**
+  proper components sent the tail to the non-rigid phase 57. A total swap is a colour relabelling of the tail (`(ef)∘p`), so it can
+  never leave the rigid phases. So J18's "some other one-sided swaps keep the tail in its own phase" is explained: those are exactly the
+  relabellings.
+- **But proper strand swaps of rigid periodic points do not in general leave the rigid phases:** over all 17 rigid phases of the
+  control, the 170 single-strand swaps land 120 times in a rigid phase and 50 times in 57 (`tools/crunch_j19_frozen.py`). The 52 wall
+  instances are special. (My first positive control asserted "all proper swaps → 57"; it failed on the true tool, which is how this was
+  found; the control was replaced by two facts not computed by the tool — §2.6, and the slip is logged in §3.)
+
+### 2.3 Theorem J19-KC — Kempe closure in an all-rigid shift [hand]
+
+Let `D` be finite and `X = X₄(D)` all-rigid. A **Kempe move** on `c ∈ X` swaps the two colours on one whole component of one two-colour
+subgraph `H_c^{ef}`; it gives a point of `X`, and it does not change the components of `H^{ef}`. The **Kempe class** of `c` is the set of
+points reached by finitely many Kempe moves.
+
+1. `Per(X)` is finite; every two-colour component (*strand*) of a periodic point is two-sided infinite and invariant under `σ^N`, where
+   `N` is the least common multiple of the least periods in `Per(X)`.
+2. The Kempe class of a periodic point consists of periodic points; so it is finite.
+3. The Kempe class of a non-periodic point consists of non-periodic points.
+4. Every non-periodic point of `X` is a wall point whose two tails lie in **different labelled phases**; so this holds for every point
+   in the Kempe class of a wall point.
+
+*Proof.* (1) Finitely many phases, each one orbit (F3 c); strands are two-sided and cross every cut (K0-loc b, c). A strand `S` crosses
+the cut at 0, so it meets `[−m, 0)`: at most `m` strands per pair, permuted by `σ^P` (`P` the period), so `S` is `σ^{Pr}`-invariant for
+some `r ≥ 1`, and the swapped point `p_S` is `Pr`-periodic, hence in `Per(X)`, hence `N`-periodic. If `σ^N S ≠ S`, then for `y ∈ S`,
+`y + N ∈ σ^N S`, a different strand, so `p_S(y + N) = p(y + N) = p(y) ≠ p_S(y)`: not `N`-periodic. So `σ^N S = S`. (2) By (1) a Kempe
+move on a periodic point gives a periodic point; induct. (3) If a move on `c` gave a periodic `c′`, then `c` is a move on `c′` (same
+components), periodic by (2). Induct. (4) A non-periodic point's path meets two SCCs (F3 c); its tails are periodic points `p′` of
+rigid phases `C₁ ≠ C₂`. If `C₂ = gC₁` for a colour permutation `g`, the wall `C₁ → gC₁` and its images under `g, g², …` give a closed
+path `C₁ → gC₁ → ⋯ → g^{ord g}C₁ = C₁` (reachability is transitive), so `C₁` and `gC₁` are one SCC, and the point has both tails in
+one rigid SCC and is periodic (F2): a contradiction. ∎
+
+**What it gives.** In an all-rigid shift, the tail pairs `([left], [right])` of the Kempe class of a wall point avoid the diagonal of
+the (finite) set of labelled phases. **So A-T1 follows from any lemma that reaches the diagonal by Kempe moves** — the weakened form of
+KE named in §2.8.
+
+### 2.4 Theorem J19-ENDS — the ends partition of a wall point [hand; tools exact on the control]
+
+Let `c ∈ X₄(D)` agree with `p` on `(−∞, a)` and with `q` on `(b, ∞)`, where `p` and `q` are periodic points all of whose two-colour
+components are two-sided infinite (for instance points of rigid phases, by K0-loc). Fix a pair `{e, f}`. Then:
+1. **(one-endedness)** for each `{e,f}`-strand `S` of `p` there is exactly one component of `H_c^{ef}` that contains `S ∩ (−∞, t)` for
+   some `t` (its *left end*); the left-unbounded components are exactly the components holding a left end, and they partition the
+   strands of `p`. Likewise on the right.
+2. every finite component of `H_c^{ef}` meets `[a − m, b + m]`;
+3. swapping a component whose left ends are the strand set `A` and right ends `B` gives a point that agrees with `p_A` on a left
+   half-line and with `q_B` on a right half-line (`p_A`: `p` with the strands in `A` swapped).
+
+*Proof.* (1) `S` is connected and `σ^{P′}`-invariant (`P′` a multiple of `p`'s period). Pick `v₀ ∈ S` and a finite connected `W ⊆ S`
+containing `v₀`, `v₀ + P′`, and a path in `S` from `v₀` to each vertex of `S ∩ [v₀, v₀ + P′)`; let `w = max W − v₀`. Consecutive
+translates `W + jP′`, `W + (j+1)P′` share `v₀ + (j+1)P′`, so `U_J = ⋃_{j ≤ −J} (W + jP′)` is connected, contains `S ∩ (−∞, v₀ − JP′)`,
+and lies in `(−∞, v₀ − JP′ + w]`. For `J` with `v₀ − JP′ + w < a − m`, `c = p` on `U_J` and on all its neighbours, so `U_J` is a
+connected subgraph of `H_c^{ef}`. Any left-unbounded component contains vertices left of every strand's threshold, each in some
+strand's `U_J`. (2) A component missing `[a − m, b + m]` lies on one side of it (edges are shorter than the interval), where `c` equals
+`p` (or `q`) on the component and its neighbours; so it is a component of `H_p` (or `H_q`), infinite. (3) Immediate from (1). ∎
+
+On the control the partitions are computed exactly (`data/m3/j19/ends-*.txt`); the tool asserts (1) at every run (a strand splitting
+among components of `c` in the far-left region aborts it).
+
+### 2.5 Theorems J19-FRZ, J19-KEF, J19-TW [hand]
+
+Call a periodic point **Kempe-frozen** if each of its six two-colour subgraphs is connected (one strand per pair).
+
+**J19-FRZ.** If `c` is a wall point whose tails `p`, `q` are Kempe-frozen, then every point in the Kempe class of `c` has tails that are
+colour relabellings of `p` and of `q`. *Proof.* By J19-ENDS each pair has one left end and one right end, so an infinite component is
+through (both ends: swapping relabels both tails by `(ef)`) or one-sided and total (relabels one tail); finite components do not touch
+the tails. A relabelling of a frozen point is frozen; induct along the Kempe sequence. ∎
+
+**J19-KEF (KE is false on a named class).** KE fails at every rigid–rigid wall point `c` all of whose one-sided components are total —
+in particular at every rigid–rigid wall point whose two tails are Kempe-frozen. *Proof.* Swapping a total one-sided component turns
+its tail `p` into `(ef)∘p`, a periodic point of the rigid phase `(ef)·C`, which is a single cycle; so no one-sided swap satisfies KE2. ∎
+So **KE implies KE♯: "in no `X₄(D)` does a rigid–rigid wall join two Kempe-frozen periodic points"** — entropy elsewhere allowed. KE♯ is
+a statement J18's route needs and does not mention. It is **not** refuted here: I know no rigid–rigid wall between frozen points (the
+control's walls all have a five-strand pair on each side), and I did not search for one (would-have-searched W2).
+
+**J19-TW (chirality and twin walls).** For a phase `C`, its mirror `C̃` is the SCC of the mirrored windows (mirroring reverses edges, so
+it maps SCCs to SCCs); `C` is achiral if `C̃ = gC` for some colour permutation `g`. In every `X₄(D)`: (a) a wall `C → C′` has a chiral
+end (FS79-T34's rank-one core, re-derived: two achiral ends give `C′ →* hC` and the orbit cycle); (b) if one end is achiral, a **twin
+wall** exists — a wall from a chiral phase `E` to `gẼ` (if `C` is achiral, `C̃′ → gC → gC′` with `E = C̃′`; if `C′` is achiral,
+`C → C′ → g′⁻¹C̃`). *Proof:* mirror the wall point; compose walls through the middle phase (reachability is transitive). ∎
+With (b), every all-rigid counterexample to A-T1 either contains a twin wall or has all its walls between two chiral phases that are
+not mirror images of each other's relabellings — the two shapes the control shows side by side (§2.2).
+
+### 2.6 The one exact check: `X₄({2,6,11,13,14})` — C0-6 lost, conjecture AF false
+
+`tools/crunch_j19_frozen.py 2,6,11,13,14` (`data/m3/j19/frozen-2-6-11-13-14.txt`; 2.0 s CPU; registration §1.5). Positive control on
+`{1,5,7,10}` against two facts the tool does not compute (the period-4 phase's strand counts `{0,2}: 5, {1,3}: 5`, others 1, derived by
+hand: the only distance `≡ 2 (mod 4)` is 10, so the even positions split into the five classes mod 10; and J18's datum that a
+`{0,3}`-swap of phase 65 lands in 57): passes. Plant (the swap skipped): fires, on (b) only, as it should.
+
+**Result.** All 94 phases rigid, no wall (FS-79's numbers reproduced). **Every one of the 94 rigid periodic points is non-frozen**: each
+has one complementary couple of pairs with **6 strands** each (periods 4, 8, 12, 24; 46 of the 94 phases chiral). **Every single-strand
+swap lands in a rigid phase** (0 of the swaps leave the rigid phases — J19-KC (1–2) seen to hold on an independent computation), no swap
+returns to its own labelled phase, **the single-strand swap graph on the 94 phases is connected**, and **every chiral phase is
+Kempe-connected to its mirror.**
+- **C0-6 (all frozen, 0.35): lost.** Conjecture AF ("all-rigid ⟹ every periodic point frozen") is **false**.
+- **What it says about the step.** The richest all-rigid shift we hold has none of the frozen structure that makes Kempe moves inert, a
+  connected Kempe family of rigid phases, chiral phases with their mirrors in the same Kempe family — and no wall. So wherever the
+  evidence for A-T1 lives, it is not in the frozen class; and a Kempe-transport argument (§2.8) has, on this example, all the room it
+  could want on the periodic side. What it lacks is a handle on the wall point itself: which Kempe moves a wall's ends partitions permit.
+
+### 2.7 Theorem J19-BIN — for `D ⊇ {1, 2}`, the colouring shift is a binary return-time shift [hand]
+
+If `1, 2 ∈ D`, every three consecutive colours are distinct, so each `c(y)` is either `c(y − 3)` (letter **R**) or the colour missing
+from `c(y−3), c(y−2), c(y−1)` (letter **N**). The word `w(y − 1) ∈ {R, N}` is a sliding block code of `c`, and `c` is recovered from `w`
+and one rainbow triple: `X₄(D)` is a 24-to-1 extension of a binary shift `Y(D)`.
+- **The constraint.** Read `w` leftwards from `y − 1` with the automaton on `{1,2,3,4}` started at 3: `3 —R→ 1`, `3 —N→ 4`, `4 —R→ 4`,
+  `4 —N→ 1`, `1 → 2 → 3` on either letter. It is at 3 after `t` letters iff `c(y − t) = c(y)`. So **`Y(D)` is the set of binary words in
+  which, from no position, the leftward automaton returns to 3 at a time in `D`**; the same-colour gaps are 3 (an R) or `4 + k` (a block
+  `N R^k N` read leftwards). Small distances in the language of words: `3 ∈ D` ⟺ no R (then `Y = {N^∞}`, the `K₄` chain); `4 ∈ D` ⟺ no
+  `NN`; `5 ∈ D` ⟺ no `NRN`; `6 ∈ D` ⟺ no `R??R` and no `NRRN`; `7 ∈ D` ⟺ no `NN??R`, `R??NN`, `NRRRN`.
+- **What transfers.** Colour permutations fix `w`; mirroring `c` reverses `w` (`w̃(x) = w(1 − x)`); the labelled quotient of `X₄(D)`
+  is the window graph of `Y(D)` (an `m`-word up to relabelling is its letter word of length `m − 3`), so by A-Kq (labelled) phases,
+  rigidity and walls of `X₄(D)` are those of `Y(D)`. **A-T1 on this class is: "a binary return-time shift `Y(D)` whose periodic points
+  are all isolated in their SCCs has no heteroclinic point."** A-K1 on this class: some `d ∈ D` is a multiple of 3 (else `R^∞`, the
+  three-colouring `x mod 3`, lies in `Y(D)` with a free fourth colour).
+- *Proof.* `c(y+1) ∉ {c(y−1), c(y)}` leaves `c(y−2)` or the missing colour; the automaton tracks, reading leftwards, where the colour
+  `c(y)` sits in the moving window `(c(x−2), c(x−1), c(x), missing)`: an R rotates the first three slots, an N all four. ∎
+Not used further here; it is the concrete model in which the §2.8 step can be attacked on a subclass (stub proposed, §3.4).
+
+### 2.8 The step: where it stands, and the sharper named obstruction
+
+**No proof of A-T1, no counterexample** (C0-1, C0-2 not met). What this job adds to J18's KE:
+
+1. **KE is false on a named class** (J19-KEF): at every rigid–rigid wall whose one-sided components are all total — in particular one
+   between Kempe-frozen tails. KE therefore needs KE♯, which nobody has proved. C0-4 (KE refuted by a derived *instance*) is not met;
+   what is met is a derived *class* on which KE fails, whose non-emptiness is open.
+2. **KE's first half must be KE1′, not KE1.** A total one-sided component (all strands of its tail) only relabels the tail, so KE1 is
+   satisfiable uselessly; the content is **KE1′: "some two-colour component of `c` is bounded on exactly one side and its ends are a
+   proper subset of that tail's strands."** On the control, every one of the 52 proper one-sided swaps sends its tail out of the rigid
+   phases, and every one of the 10 total ones keeps it (§2.2).
+3. **The sharper obstruction — KT, the Kempe transport lemma:** *"Let `c ∈ X₄(D)` agree with a periodic point of a rigid phase `C` on a
+   left half-line and with a periodic point of a rigid phase `C′ ≠ C` on a right half-line. Then finitely many Kempe moves turn `c` into
+   a point whose two tails lie in one labelled phase, or into a point one of whose tails lies in a phase that is not a single cycle."*
+   - **KE ⟹ KT** (one move, the second alternative), and **KT ⟹ A-T1** (J19-KC (4): in an all-rigid shift both alternatives are
+     impossible). KT is strictly weaker than KE as a statement: it allows many moves and a second exit.
+   - **KT still fails at frozen-tailed walls** (J19-FRZ: Kempe moves only relabel their tails), so **KT ⟹ KE♯**. Hence **A-T1 splits as
+     FW ∧ A-T1ⁿᶠ**: FW, "no all-rigid `X₄(D)` has a wall between Kempe-frozen periodic points", is the part of A-T1 that *no* argument
+     by Kempe moves can reach and needs a different invariant; A-T1ⁿᶠ, the rest, is where KT acts, and §2.6 shows the periodic side of
+     an all-rigid shift can give KT a connected Kempe family to move in.
+   - **The missing step, named:** for a rigid–rigid wall with a non-frozen tail, **show that the ends partitions (J19-ENDS) of the
+     points in its Kempe class allow the two tails to be moved into one Kempe orbit of labelled phases**; J19-KC turns that into A-T1.
+     I could not prove it: a through component moves both tails at once, and I found no quantity that proper one-sided moves decrease.
+

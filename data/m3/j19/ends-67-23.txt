@@ -1,0 +1,20 @@
+D [1, 5, 7, 10] wall 67 -> 23
+ pair (0, 1) p-strands 1 q-strands 5 finite comps 0
+    right-only L () R (1,) size 145 span (21, 1461)
+    right-only L () R (3,) size 146 span (15, 1465)
+    right-only L () R (4,) size 145 span (27, 1467)
+    through L (0,) R (0, 2) size 1022 span (-1450, 1463)
+ pair (0, 2) p-strands 5 q-strands 1 finite comps 0
+    left-only L (0,) R () size 145 span (-1450, -10)
+    left-only L (1,) R () size 146 span (-1448, 2)
+    left-only L (3,) R () size 145 span (-1444, -4)
+    through L (2, 4) R (0,) size 1022 span (-1446, 1467)
+ pair (0, 3) p-strands 1 q-strands 1 finite comps 2
+    left-only L (0,) R () size 724 span (-1450, 4)
+    right-only L () R (0,) size 724 span (13, 1467)
+ pair (1, 2) p-strands 1 q-strands 1 finite comps 0
+    through L (0,) R (0,) size 1458 span (-1449, 1466)
+ pair (1, 3) p-strands 5 q-strands 1 finite comps 0
+    through L (0, 1, 2, 3, 4) R (0,) size 1460 span (-1449, 1465)
+ pair (2, 3) p-strands 1 q-strands 5 finite comps 0
+    through L (0,) R (0, 1, 2, 3, 4) size 1460 span (-1448, 1466)
