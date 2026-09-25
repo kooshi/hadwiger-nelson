@@ -1,0 +1,36 @@
+order 2: 1 band points
+    mu = (5/2, 5/2)  -> [(12, 'interior')]
+order 3: 4 band points
+    mu = (5/3, 5/3)  -> [(6, 'interior')]
+    mu = (5/3, 10/3)  -> [(6, 'interior')]
+    mu = (10/3, 5/3)  -> [(6, 'interior')]
+    mu = (10/3, 10/3)  -> [(6, 'interior')]
+order 4: 8 band points
+    mu = (5/4, 5/4)  -> [(1, 'vertex')]
+    mu = (5/4, 5/2)  -> [(1, 'vertex')]
+    mu = (5/4, 15/4)  -> [(1, 'vertex')]
+    mu = (5/2, 5/4)  -> [(1, 'vertex')]
+    mu = (5/2, 15/4)  -> [(1, 'vertex')]
+    mu = (15/4, 5/4)  -> [(1, 'vertex')]
+    mu = (15/4, 5/2)  -> [(1, 'vertex')]
+    mu = (15/4, 15/4)  -> [(1, 'vertex')]
+order 7: 8 band points
+    mu = (5/7, 10/7)  -> [(4, 'interior')]
+    mu = (5/7, 25/7)  -> [(4, 'interior')]
+    mu = (10/7, 5/7)  -> [(4, 'interior')]
+    mu = (10/7, 30/7)  -> [(4, 'interior')]
+    mu = (25/7, 5/7)  -> [(4, 'interior')]
+    mu = (25/7, 30/7)  -> [(4, 'interior')]
+    mu = (30/7, 10/7)  -> [(4, 'interior')]
+    mu = (30/7, 25/7)  -> [(4, 'interior')]
+order 8: 8 band points
+    mu = (5/8, 5/4)  -> [(4, 'vertex')]
+    mu = (5/8, 15/4)  -> [(4, 'vertex')]
+    mu = (5/4, 5/8)  -> [(4, 'vertex')]
+    mu = (5/4, 35/8)  -> [(4, 'vertex')]
+    mu = (15/4, 5/8)  -> [(4, 'vertex')]
+    mu = (15/4, 35/8)  -> [(4, 'vertex')]
+    mu = (35/8, 5/4)  -> [(4, 'vertex')]
+    mu = (35/8, 15/4)  -> [(4, 'vertex')]
+point cells: 16; carrying an order-4 character: 8; the rest: 8, restricting to Z[i] as e in [('1/4', '1/4'), ('1/4', '3/4'), ('3/4', '1/4'), ('3/4', '3/4')]
+RESULT: PASS

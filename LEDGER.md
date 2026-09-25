@@ -605,3 +605,65 @@ the theorem audit (FS-71, row 77) the same day — 254 entries in 53 files, `too
 | FS86-CL1 | FS-86 | over ℚ(√47), ℚ(√167): no measurable window four-colouring over finitely many places (odd split places); nothing at five colours | hand, one mind + external | `plans/FS86-derivation.md` FS86-CL1 | declined |
 | FS86-CL2 | FS-86 | Lemma R fails at a stable dyadic place ramified in `L/F` (ℚ(√5), ℚ(√17)); FS-86's fields unaffected | hand, one mind | `plans/FS86-derivation.md` FS86-CL2 | declined |
 | FS86-CL3 | FS-86 | given Heule's T721 (external) and C13, ℚ(√2,√3)'s plane is four-colour rigid and every `√3`-pair is a four-colour virtual edge | hand, one mind + external | `plans/FS86-derivation.md` FS86-CL3 | declined |
+| FS89-S0A-1 | FS-89 | `ℤ[U_ℚ] = ℤ[i][1/p : p ≡ 1 (4)]`; the layers `bℤ[U_ℚ]` cover `U_F` and a band character restricts to one on every layer (G0) | hand | `plans/FS89-derivation.md` FS89-S0A-1 | stub (FS-47) |
+| FS89-S0A-2 | FS-89 | the gluing: `Θ_k(ℤ[U_ℚ]) ⊆ T_N + A` ⟹ `Θ_k(R_F) ⊆ T_N + A` for every subfield `F ⊆ ℝ`, every band (G1) | hand | `plans/FS89-derivation.md` FS89-S0A-2 | stub |
+| FS89-S0A-3 | FS-89 | Lemma N₀: the band torsion characters of `Q` in `T + A` have 2-part of order ∣ 8, or order 3, or order 7; `N = 168` (= S1V-4) | hand, two derivations (blind) | `plans/FS89-derivation.md` FS89-S0A-3 | declined |
+| FS89-S0A-4 | FS-89 | level collapse: a band character in `T + A` has level ≤ 1 at dense odd stable places, 2-level ≤ 3 at ℚ(i)'s ramified 2 | hand | `plans/FS89-derivation.md` FS89-S0A-4 | declined |
+| FS89-S0A-5 | FS-89 | no band character has layer restrictions in `T + A` of unbounded order; ℚ(√2)'s split 3-adic character is not band | hand | `plans/FS89-derivation.md` FS89-S0A-5 | declined |
+| FS89-S0A-6 | FS-89 | C-HD1 conditional: RQ₄ implies HD1 for ℚ(√59), ℚ(√83), ℚ(√131), at FS86-dB-Theta's grade | hand | `plans/FS89-derivation.md` FS89-S0A-6 | declined |
+| FS89-S0A-7 | FS-89 | archimedean averaging: the torsion part of a band character in `T + A` over a real number field is itself band | hand | `plans/FS89-derivation.md` FS89-S0A-7 | declined |
+| FS89-S0A-8 | FS-89 | G2: every stable place odd with `q ≥ 11` ⟹ `Θ₄(R_F) ∩ (T + A) = ∅` (middle half against Weil); given RQ₄, ℚ(√47) | hand, given Lemma R and Weil | `plans/FS89-derivation.md` FS89-S0A-8 | declined |
+| FS89-S0A-9 | FS-89 | G3: given RQ₅, `Θ₅(R_{ℚ(√167)}) = ∅` (23, 43 by certificate, 59 by spectrum, the rest by Weil) | hand + cert + tools exact | `plans/FS89-derivation.md` FS89-S0A-9 | declined |
+| FS89-S0A-10 | FS-89 | the equivalence: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ` | hand | `plans/FS89-derivation.md` FS89-S0A-10 | declined |
+| FS89-S0A-11 | FS-89 | finite-type band characters of `Q` are in `T + A` at bands 1/4, 1/5 (= FS86-dB-Sv at ℚ) | hand | `plans/FS89-derivation.md` FS89-S0A-11 | declined |
+| FS89-S0A-12 | FS-89 | a `T + A` statement about `ℤ[U₅]` cannot bound the torsion order; one-prime gluing needs a fixed `N` | hand | `plans/FS89-derivation.md` FS89-S0A-12 | declined |
+| FS89-S0A-13 | FS-89 | Weil check: the middle-half coefficient beats `2√q` for `11 ≤ q ≤ 83`; Hoffman at 59 is 0.19912 | tools (float) | `plans/FS89-derivation.md` FS89-S0A-13 | declined |
+| FS89-S0B-T1 | FS-89 | the rank-one orbit model of `Θ_β(U₅)`: sequences in `Q_β` with `e_{m+1} − w̄e_m ∈ π⁻¹ℤ[i]` | hand + tools exact | `plans/FS89-derivation.md` FS89-S0B-T1 | declined |
+| FS89-S0B-T2 | FS-89 | leaves `τ + λ_d` iff `\|d\| ≤` margin; `T + A` is one Gaussian rational at both 5-adic places; meeting discs give non-`T + A` points | hand | `plans/FS89-derivation.md` FS89-S0B-T2 | declined |
+| FS89-S0B-T3 | FS-89 | the heteroclinic `θ*` (order 3 forward, parity backward, glued at `(1+i)/3`) is a four-colour band character of `ℤ[U₅]` | hand + tools exact | `plans/FS89-derivation.md` FS89-S0B-T3 | declined |
+| FS89-S0B-T4 | FS-89 | forward and backward leaves differing ⟹ not `T + A`; so `RS₄({5})` is false | hand | `plans/FS89-derivation.md` FS89-S0B-T4 | declined |
+| FS89-S0B-T5 | FS-89 | continuum many non-`T + A` points in `Θ₄(U₅)`, a Cantor fibre of irrational 5-adic parts | hand | `plans/FS89-derivation.md` FS89-S0B-T5 | declined |
+| FS89-S0B-T6 | FS-89 | any second split prime kills every rational heteroclinic of `Θ₄(R₅)` (= S1V-8, V4; S0B's slip and gap repaired) | hand + exact arithmetic | `plans/FS89-derivation.md` FS89-S0B-T6 | declined |
+| FS89-S0B-C1 | FS-89 | FS81-T3/T8 reproduced on two exact models; the two agree at four colours to depth 6 (29, 157, …, 19113) | tools exact | `plans/FS89-derivation.md` FS89-S0B-C1 | declined |
+| FS89-S0B-L4 | FS-89 | the primitive four-colour band torsion characters of `ℤ[i]/N`, `5 ∤ N ≤ 130`: 145 of 12 orders | tools exact | `plans/FS89-derivation.md` FS89-S0B-L4 | declined |
+| FS89-P-R1 | FS-89 | `Θ₃(R₆₅) ⊆ T₆ + A` (FS81-T3 layered; an instance of D2-L1) | derived, one mind | `plans/FS89-derivation.md` FS89-P-R1 | declined |
+| FS89-D0-T1 | FS-89 | the rank-`r` orbit model: arrays in `Q_β`, one step rule per prime, unique square fill by CRT (= S1V-9, V5) | hand + tools exact, two derivations | `plans/FS89-derivation.md` FS89-D0-T1 | declined |
+| FS89-S1V-10 | FS-89 | V6: `T + A` at rank `r` ⟺ one Gaussian rational at all `2r` places ⟺ one leaf on the axes ⟺ one leaf everywhere | hand | `plans/FS89-derivation.md` FS89-S1V-10 | declined |
+| FS89-S1V-1 | FS-89 | V1: a character of `Q` in `T + A` on every `R_S` of a directed exhausting family is in `T + A` | hand | `plans/FS89-derivation.md` FS89-S1V-1 | declined |
+| FS89-S1V-2 | FS-89 | U1: `RS₄(S)` for all finite `S ⊇ S₀` ⟹ RQ₄; RQ₄ ⟺ `Θ₄(Q)` restricts into `T + A` on every `R_S` | hand | `plans/FS89-derivation.md` FS89-S1V-2 | declined |
+| FS89-S1V-3 | FS-89 | the leaf formula at `Q`: `τ + λ_d` is band iff `τ(G_N) ⊆ [1/4 + \|d\|, 3/4 − \|d\|]` | hand | `plans/FS89-derivation.md` FS89-S1V-3 | declined |
+| FS89-S1V-5 | FS-89 | U2: `Θ₄(Q) ∩ (T + A)` is 13 discs and 16 points, 29 torsion characters of six types, all killed by 168 | hand + tools exact | `plans/FS89-derivation.md` FS89-S1V-5 | stub |
+| FS89-S1V-6 | FS-89 | the rows over a rational heteroclinic are rational heteroclinics rotated by `w̄_p^b` | hand | `plans/FS89-derivation.md` FS89-S1V-6 | declined |
+| FS89-S1V-7 | FS-89 | the sweep bound: `π_p`-level ≤ `v_{π_p}(w₅^o − 1)` for a band torsion character with no `π̄_p`-part | hand | `plans/FS89-derivation.md` FS89-S1V-7 | declined |
+| FS89-D1-L2 | FS-89 | Berend's case 2: zero `S`-adic small differences ⟹ `M` meets `T + A` (= S1VB-8, VB5) | hand, two derivations | `plans/FS89-derivation.md` FS89-D1-L2 | declined |
+| FS89-D1-L3 | FS-89 | Berend's case 1 at `\|S\| ≥ 2`: `M − M = R̂_S` (= S1VB-10) | hand, two derivations (the second from the statement) | `plans/FS89-derivation.md` FS89-D1-L3 | declined |
+| FS89-D1-L4 | FS-89 | the parity line: `θ₂ ∈ M − M` ⟹ `M` holds a corner `2x = θ₂` (= S1VB-11) | hand | `plans/FS89-derivation.md` FS89-D1-L4 | declined |
+| FS89-D1-T1 | FS-89 | `MS₄(S)` for every `\|S\| ≥ 2`: minimal sets are torsion orbits or unions of leaf circles | hand | `plans/FS89-derivation.md` FS89-D1-T1 | declined |
+| FS89-S1VB-1 | FS-89 | Lemma E: small differences with a local part expand to a pure local difference | hand | `plans/FS89-derivation.md` FS89-S1VB-1 | declined |
+| FS89-S1VB-2 | FS-89 | Lemma SW: no ball of pure local translates lies in `Θ_k(R_S)`, `k ∈ {4, 5}` | hand | `plans/FS89-derivation.md` FS89-S1VB-2 | declined |
+| FS89-S1VB-3 | FS-89 | Lemma JC: the second prime's unit is jointly dense in `S¹ × W₀` | hand | `plans/FS89-derivation.md` FS89-S1VB-3 | declined |
+| FS89-S1VB-4 | FS-89 | VB1: at `\|S\| ≥ 2` an orbit closure meeting `T + A` puts the point in `T + A` (bands 1/4, 1/5) | hand | `plans/FS89-derivation.md` FS89-S1VB-4 | declined |
+| FS89-S1VB-5 | FS-89 | VB2: at `\|S\| ≥ 2`, `MS_k ⟺ RS_k` ⟺ every minimal set meets `T + A` | hand | `plans/FS89-derivation.md` FS89-S1VB-5 | declined |
+| FS89-S1VB-6 | FS-89 | VB3: `RS_k(S)` ⟹ finitely many torsion band characters (non-effective) | hand | `plans/FS89-derivation.md` FS89-S1VB-6 | declined |
+| FS89-S1VB-7 | FS-89 | VB4: `RS_k(S)` ⟹ `RS_k(S′)` for every `S′ ⊇ S`, finite or not; so RQ_k | hand | `plans/FS89-derivation.md` FS89-S1VB-7 | declined |
+| FS89-S1VB-9 | FS-89 | VB6: no minimal set with a pure local pair and an infinite fibre group | hand | `plans/FS89-derivation.md` FS89-S1VB-9 | declined |
+| FS89-D1-L5 | FS-89 | at `{5, 13}` a band array within 0.13 of a corner pattern on an `m`-edge equals it | hand + tools exact | `plans/FS89-derivation.md` FS89-D1-L5 | declined |
+| FS89-D1-L6 | FS-89 | the corner exit lemma at `{5, 13}`, band 1/4 (two independent exact tools) | hand + tools exact | `plans/FS89-derivation.md` FS89-D1-L6 | stub |
+| FS89-D1-C1 | FS-89 | corners are isolated in `Θ₄(R₆₅)`; one vertical domino suffices (= S1VB-13) | hand + tools exact | `plans/FS89-derivation.md` FS89-D1-C1 | stub |
+| FS89-D1-T2 | FS-89 | `RS₄({5, 13})`: `Θ₄(R₆₅) ⊆ T + A` (D's §3 scope understated; corrected) | hand + tools exact | `plans/FS89-derivation.md` FS89-D1-T2 | declined |
+| FS89-D1-C2 | FS-89 | `Θ₄(R₆₅) ∩ T` finite (not independent: VB3 gives it from D1-T2) | hand + tools exact | `plans/FS89-derivation.md` FS89-D1-C2 | declined |
+| FS89-S1VB-14 | FS-89 | `RS₄(S)`, `MS₄(S)` for every `\|S\| ≥ 2`; `RS₅(S)`, `MS₅(S)` for every `S ∋ 5`, `\|S\| ≥ 2`; no finite computation | hand | `plans/FS89-derivation.md` FS89-S1VB-14 | declined |
+| FS89-D2-L1 | FS-89 | bounded-order layering: `Θ_β(R) ⊆ T_N + A` ⟹ `Θ_β(R′) ⊆ T_N + A` for `R ⊆ R′ ⊆ Q` | hand | `plans/FS89-derivation.md` FS89-D2-L1 | declined |
+| FS89-D2-T1 | FS-89 | **RQ₄**: every four-colour band character of `ℤ[i][1/p : p ≡ 1 (4)]` is torsion plus archimedean | hand + tools exact, one derivation, every lemma blind-verified | `plans/FS89-derivation.md` FS89-D2-T1 | declined |
+| FS89-D5-L1 | FS-89 | band 1/5, `5 ∈ S`: `θ₂ ∈ M − M` ⟹ `M` meets a corner leaf disc | hand, two routes | `plans/FS89-derivation.md` FS89-D5-L1 | declined |
+| FS89-S1VB-12 | FS-89 | narrow-band rigidity: `φ(U_S) ⊆ [−1/10, 1/10]`, `5 ∈ S` ⟹ `φ = λ_e`, `\|e\| ≤ 1/10` | hand | `plans/FS89-derivation.md` FS89-S1VB-12 | declined |
+| FS89-D5-L2 | FS-89 | near a corner leaf a band array is on the leaf | hand | `plans/FS89-derivation.md` FS89-D5-L2 | declined |
+| FS89-D5-L3 | FS-89 | the corner-leaf exit lemma at `{5, 13}`, band 1/5, displacement ≤ 0.06 | hand + tools exact | `plans/FS89-derivation.md` FS89-D5-L3 | stub |
+| FS89-D5-T1 | FS-89 | `RS₅({5, 13})`: `Θ₅(R₆₅) ⊆ T + A` | hand + tools exact | `plans/FS89-derivation.md` FS89-D5-T1 | declined |
+| FS89-D5-C2 | FS-89 | `Θ₅(R₆₅) ∩ T` finite | hand + tools exact | `plans/FS89-derivation.md` FS89-D5-C2 | declined |
+| FS89-D5-T2 | FS-89 | **RQ₅**: every five-colour band character of `Q` is torsion plus archimedean | hand + tools exact, one derivation, every lemma blind-verified | `plans/FS89-derivation.md` FS89-D5-T2 | declined |
+| FS89-CL1 | FS-89 | S0B's 29 cells and V's 29 torsion characters: equal counts, different lists; the eight extra point cells are D1-L4's corners | tools exact, one mind | `plans/FS89-derivation.md` FS89-CL1 | declined |
+| FS89-CL2 | FS-89 | every real field: `Θ₄(R_F) ⊆ T₁₆₈ + A`, `Θ₅(R_F) ⊆ T + A` (a composition) | hand | `plans/FS89-derivation.md` FS89-CL2 | declined |
+| FS89-CL3 | FS-89 | HD1 for ℚ(√59), ℚ(√83), ℚ(√131), at FS86-dB-Theta's grade; `F(R)` still undecided | hand | `plans/FS89-derivation.md` FS89-CL3 | declined |
+| FS89-CL4 | FS-89 | no character four-colouring of ℚ(√47)'s plane (`Θ₄ = ∅`); `χ` not claimed | hand | `plans/FS89-derivation.md` FS89-CL4 | declined |
+| FS89-CL5 | FS-89 | no character five-colouring of ℚ(√167)'s plane (`Θ₅ = ∅`); `χ` not claimed | hand + cert | `plans/FS89-derivation.md` FS89-CL5 | declined |
