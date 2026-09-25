@@ -1666,13 +1666,14 @@ instances are Mathlib's TODO, upstream candidates. -/
 
 NP over every field with `2 ≠ 0`, through Mathlib's Fermat–Catalan theorem at signature `(4, 4, 2)`; its two controls (the
 genus-0 twin `a² − 1` is false, NP is false in characteristic 2); C3: `2 + L` and `√((2 + L)³ − (2 + L))` never both lie in
-`F(t)` for `F` algebraic over `ℚ`. -/
+`F(t)` for `F` algebraic over `ℚ`; C3⁺: that field embeds in no purely transcendental tower over such an `F`. -/
 
 #print axioms HadwigerNelson.NoParam.exists_eq_C_mul_sq_of_mul_eq_sq
 #print axioms HadwigerNelson.NoParam.natDegree_eq_zero_of_mul_mul_sub_eq_sq
 #print axioms HadwigerNelson.NoParam.exists_algebraMap_eq_of_sq_eq
 #print axioms HadwigerNelson.NoParam.not_isSquare_cube_sub_self
 #print axioms HadwigerNelson.NoParam.not_isSquare_cube_sub_self_of_charZero
+#print axioms HadwigerNelson.NoParam.mem_range_C_of_sq_eq_cube_sub_self
 #print axioms HadwigerNelson.NoParam.twin_not_mem_range_C
 #print axioms HadwigerNelson.NoParam.isSquare_twin_sq_sub_one
 #print axioms HadwigerNelson.NoParam.X_sq_not_mem_range_C
@@ -1681,6 +1682,10 @@ genus-0 twin `a² − 1` is false, NP is false in characteristic 2); C3: `2 + L`
 #print axioms HadwigerNelson.NoParam.transcendental_two_add_liouvilleNumber
 #print axioms HadwigerNelson.NoParam.not_mem_adjoinTranscendental_liouville
 #print axioms HadwigerNelson.NoParam.sqrt_not_mem_adjoinTranscendental_bot_liouville
+#print axioms HadwigerNelson.NoParam.mem_of_isPureTower
+#print axioms HadwigerNelson.NoParam.not_forall_mem_isPureTower
+#print axioms HadwigerNelson.NoParam.isPureTower_bot_liouville
+#print axioms HadwigerNelson.NoParam.not_forall_mem_adjoinTranscendental_bot_liouville
 
 #eval IO.println "=== PURCHASED ==="
 
