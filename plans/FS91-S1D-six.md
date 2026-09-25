@@ -36,3 +36,36 @@ brief says J11 is fenced from my record, data, tools and brief; whether J11 may 
 | C0-43 | a band six-character exists at level one of Γ₄₃ | 0.12 | band 6 needs `t = 1..7` (seven flips), 21 values: `1 − (127/128)^21 ≈ 0.15`, shaded for the same untrusted circulant refusal at 43 |
 | C0-167 | `χ_char(ℚ(√167)²)` given CLG_6, CLG_7 | 6: 0.10; 7: 0.30; 8: 0.50; ≥ 9: 0.10 | 23 and 43 dominate; 59, 67, … refuse six by certificate (rows 68–69) |
 
+## Stage 2 — SAVED (SIX-a re-derived; its law checked against the circle)
+
+### SIX-a, derived (J08-1)
+
+*Setting.* `q` prime, `q ≡ 3 (mod 4)`, `𝔽_{q²} = 𝔽_q(i)`, `w̄ = w^q` (so `ī = −i`), `N(w) = w w̄`, `Tr(w) = w + w̄`. `μ_{q+1} = ker N` is the
+unit circle `x² + y² = 1`, and `Γ_q = Cay(𝔽_{q²}, μ_{q+1})`.
+
+1. **Every character is `λ_a`.** `𝔽_{q²}` is elementary abelian of exponent `q`, so every homomorphism to `ℝ/ℤ` lands in `(1/q)ℤ/ℤ ≅ 𝔽_q`
+   and is `𝔽_q`-linear; the trace form is non-degenerate, so every linear functional is `x ↦ Tr(ax)` for a unique `a`. `λ_0 = 0` is band
+   for no `k`, so every band character is `λ_a` with `a ≠ 0`.
+2. **The band condition.** `λ_a(z) ∈ B_k = [1/k, 1 − 1/k]` iff the centred representative `t ∈ (−q/2, q/2)` of `Tr(az)` has `|t| ≥ q/k`.
+   So `λ_a` is band `k` iff no value of `Tr(a·)` on `μ_{q+1}` has `|t| < q/k`.
+3. **The value set.** As `z` runs over `μ_{q+1}`, `w = az` runs over the norm-`c` circle `{N(w) = c}`, `c = N(a) ∈ 𝔽_q^×`. Every such `w`
+   is a root of `X² − Tr(w)X + c` (`w² − (w + w̄)w + w w̄ = 0`). Fix `t`. (i) `t² − 4c` a non-square: the polynomial is irreducible, its two
+   roots `w, w̄` have trace `t` and norm `c` — **two** points. (ii) `t² − 4c = 0`: the only candidate is `w = t/2 ∈ 𝔽_q`, and it qualifies
+   (`N(t/2) = t²/4 = c`, `Tr(t/2) = t`) — **one** point. (iii) `t² − 4c` a non-zero square: the candidates are the two roots in `𝔽_q`, where
+   `N(w) = w²` and `Tr(w) = 2w`, forcing `t² = 4c`, false — **no** point. Hence `{Tr(az)} = V_{N(a)}`, with multiplicities 2 / 1 / 0
+   (total `q + 1`, a check). ∎ **Verdict: SIX-a TRUE** (C0-a scored: held at 0.97).
+4. **Two consequences used below.** (a) `0 ∈ V_c` iff `−4c` is a non-square iff `c` is a **square** (`−1` is a non-square): so only the
+   `(q − 1)/2` non-square `c` can be band, and for them `t² − 4c ≠ 0` always, `|V_c| = (q + 1)/2`, each value twice. (b) **Scaling:** for
+   `s ∈ 𝔽_q^×`, `V_{s²c} = s·V_c`; with `−4c = r²` (non-square `c`), `V_c = r·W₀`, `W₀ = {u : u² + 1` a non-square`}`. So **a band
+   `k`-character exists iff some dilate `r·W₀` misses the interval `|t| < q/k`** — one set `W₀` per `q`, all its non-zero dilates.
+
+### The measured half (the law is derived, so its refusals are the suspect verdict — `CLAUDE.md` § The gate)
+
+`tools/crunch_j08_sixa.py` (2.3 s, 14 MB): at `q ∈ {3, 7, 11, 19, 23, 31, 43, 47, 59, 67}`, **every** `a ≠ 0` (15,020 in all): the direct
+multiset `{2(a₁x − a₂y) : x² + y² = 1}` equals the law's `m_c` exactly; the direct band test equals the law's band test at every
+`k = 3..12` (150,200 comparisons, **both outcomes reached** — 2,128 band-true; at 67 none up to 12); `a ↦ (2a₁, −2a₂)` is a bijection onto
+`Hom(𝔽_q², ℤ/q)`. **Plants**, each paired with a faithful twin that passes: P1 (the law with `t² + 4c`) fires at the value-set comparison,
+`q = 7, a = (0,1), t = 0` (direct 2, law 0); P3 (the direct side with the wrong trace `a₁x + a₂y`) fires at `q = 7, a = (0,1), t = 1`.
+Weil sanity (float): `max_{a≠0} |Σ_z e(Tr(az)/q)| ≤ 2√q` at all ten `q`, smallest margin 0.44 at 59. Output (written on every run, null
+or not): `data/fs91/j08/sixa-check.json`.
+
