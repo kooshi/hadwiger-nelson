@@ -603,10 +603,7 @@ against its source:
 | Q6 | Kooshi's close rules: "close out with the findings"; "I don't want to lose anything from before"; "All novel knowledge is a success." (J23a's template) | `plans/FS89-rational-band-rigidity.md:923` | **verbatim** |
 
 **1b. The inventory walk.** `plans/M2-close-inventory.md` (rows 1–57 at the clerk's last fold `491161bb`; J17K2's report folded here as rows
-58–63; stage 0's findings rows 64–65; one settled decision row 66). Every row now carries a status: **done** with its hash or stage (20
-rows: 2, 5 (library half), 6, 9, 10, 14, 16, 23, 25, 27, 32 (plan half), 37, 38, 50 (record half), 54, 55, 56, 63, 64, 66), or the stage that
-closes it — **stage 2** the kernel register (19 rows), **stage 3** the re-reads, predictions and tallies (19), **stage 4** the drafts (19;
-some rows are split across two stages). No row was declined. One prior-art debt closed here: **the Snyder citation** (row 63) — zbMATH
+58–63; stage 0's findings rows 64–65; one settled decision row 66). Every row now carries a status (counted from the file after the walk): **done** with its hash or stage, in whole or in part (21 rows: 2, 5, 6, 9, 10, 14, 16, 23, 25, 27, 32, 37, 38, 50, 54, 55, 56, 61, 63, 64, 66), or the stage that closes it — **stage 2** the kernel register (16 rows), **stage 3** the re-reads, predictions and tallies (18), **stage 4** the drafts (17); rows 5, 12, 14, 32, 50 and 61 are split across two. *Corrected at stage 2: the stage-1 text first gave 20 / 19 / 19 / 19, counted by eye.* No row was declined. One prior-art debt closed here: **the Snyder citation** (row 63) — zbMATH
 `Zbl 1031.11012`, N. Snyder, "An alternate proof of Mason's theorem", *Elem. Math.* 55, No. 3, 93–94 (2000), one query
 (`au:"Snyder, Noah" & ti:"Mason"`, `data/m2/j23b/zbmath-snyder.json`); J17's from-memory citation was right.
 
@@ -631,3 +628,19 @@ corrected here, not edited):
 | C-13 | J17K's brief, `data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md` line 130 (frozen) | "(Dropping `CharZero k` is *not* a good plant: NP stays true in odd characteristic; only the proof's derivative step breaks.)" | in odd characteristic **no step breaks** — Mathlib's `Polynomial.flt_catalan` descends in characteristic `p`; the boundary is characteristic 2, where NP is false | `plans/M2-S5K-noparam.md` §1.1; inventory 62 |
 
 **Would have searched here (stage 1):** none — one zbMATH lookup of a known paper (row 63) is a citation check, not a finite-witness search.
+
+### Stage 2 — SAVED (the kernel register)
+
+`plans/M2-derivation.md`, in two parts. **Part I, the kernel register**: M2's ten Lean files, 226 declarations, every one on axioms within the
+standard three (195 on all three, 21 on `[propext]`, 7 on `[propext, Quot.sound]`, 3 on none; stage 0's run), of which the register lists
+the ones a result rests on — about 110, each with file, line, axioms, whether the gate's audit prints it, its statement in plain words and the
+hand result it promotes — in seven product tables (the chain theorem; its two instances; route C; prime inversion and the `K(√7)` wall; the
+stripe lemma; the conditional bridge and the real-closed instances; Lemma NP and C3), then **what the kernel does not prove** per product
+(§ I.8) and **the nine hand results it promotes** (§ I.9: `ASTRA-2026-09-14-T1, T2, T5, T6, T7, T9`, `FS39-T1`, `FS62-T2`, `FS85-V2-T5`, and
+six of J17's). **Part II, the derivation file**: the twelve theorems M2 proved outside the kernel — `J04-H1` (route C's integrality, since
+kernel), `J14-H1` (one redundant diamond), `J17-T1` to `T10` — one entry each in `tools/fs71_ledger_b_check.py`'s form; `--strict` reports
+all twelve with every field and only the expected "no `LEDGER.md` § B row" (their § B lines are stage 4's drafts). Verification status per
+entry: J17's ten are one mind each (J17V declined), six of them since kernel-checked by J17K or J17K2 (T2, T3, T9 conditional or stronger;
+T4, T5, T6 by another route), and T4's hand proof read as sound by J17K2.
+
+**Would have searched here (stage 2):** none.
