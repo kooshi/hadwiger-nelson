@@ -261,6 +261,62 @@ this field the parity half is free because the 2-adic wall is broken.
   literature's words ("every circular 3-colouring of the unit-distance graph over a real number field is a residue colouring at a prime of
   norm 3") should be searched before any claim of novelty.
 
+## Stage 4 — SAVED
+
+Read after stage 3's commit (011e1551): `data/fs91/j02/lemma-statements.md` (J02's claim list, statements only). J02's record, data and
+tools were not opened for this stage.
+
+### 4.1 Each J02 statement against this record
+
+| J02 statement (quoted from `data/fs91/j02/lemma-statements.md`) | status here | how |
+|---|---|---|
+| **L1** "if `θ ∈ Θ₃(R_F)`, then `τ(x) := lim_k θ(25^{−k}x)` is a character of `R_F` with `6τ = 0` and `τ(U_F) ⊆ {1/3, 1/2, 2/3}`, so `τ ∈ Θ₃(R_F)`" | **TRUE; already established** | FS81-T4, as used in J1 (§2.1) |
+| **L2 (a)** "`A_p = R/pR` is a finite `𝔽_p`-algebra with `dim A_p ≤ n`, and `c` induces a ring involution on it" — for **every** prime `p` | **TRUE; J2 covers only `p` with no ramified stable prime; the general case derived now** (4.2) | `R/pR ≅ Ā_p/pĀ_p`, `Ā_p` the closure of `R` in `∏_{S_p} O_𝔓` |
+| **L2 (b)** "Every maximal ideal `𝔪 ∋ p` of `R` equals `R ∩ 𝔓` for a stable prime `𝔓 | p` of `L`, and `c(𝔪) = 𝔪`" | **TRUE; derived now** (4.2) | lying-over in the integral extension `Ā_p ⊆ ∏O_𝔓`; `c(R) = R` |
+| **L2 (c)** unramified stable `𝔓`: "`k_𝔪 = κ_𝔓 = 𝔽_{q²}`, `c` acts as its non-trivial involution …, and `𝒩(k_𝔪) = μ_{q+1}`" | **TRUE; established** | J2 (c)'s density; `c` generates the decomposition group of an inert prime |
+| **L2 (d)** ramified `𝔓`: "`c` acts trivially on `k_𝔪` and `𝒩(k_𝔪) = {1}`" | **TRUE; derived now** | `c` lies in the inertia group; `s² = 1` in characteristic 2 forces `s = 1` |
+| **L3** the Teichmüller section `T_p = {a^{p^M}}` "is a `c`-stable subring … `T_p ≅ ∏_{𝔪 ∋ p} k_𝔪`"; "**Every `s ∈ 𝒩(T)` is the image of a unit vector `u ∈ U`.** In particular the image of `U` in `R/6R` contains the product set `𝒩(T₃) × 𝒩(T₂)`" | **TRUE; the second half is J3 in other words; the first derived now** (4.2) | `a ↦ a^{p^M}` is a ring endomorphism commuting with `c`, killing the nilradical and bijective on each `k_𝔪`; Teichmüller lifts `[ξ]` of `ξ ∈ μ_{q+1}` lie in `T(F_𝔭)`, and weak approximation (J3) |
+| **L4 (a)** "For `q = 3^f`, `f` odd, an additive `λ : 𝔽_{q²} → (1/3)ℤ/ℤ` with `λ(t) ≠ 0` for every `t ∈ μ_{q+1}` exists iff `q = 3`" | **TRUE; established** | J4 step 7 (zero count `(q+1−2K)/3`, Weil; exact at 27 and 243) |
+| **L4 (b)** "For `Q = 2^f`, no additive `λ : 𝔽_{Q²} → (1/2)ℤ/ℤ` equals 1/2 on all of `μ_{Q+1}`" | **TRUE; derived now, elementary** | `Σ_{t∈μ_{Q+1}} λ(t) = λ(Σt) = λ(0) = 0`, but `(Q+1)·(1/2) = 1/2` since `Q+1` is odd |
+| **T1** "A character `τ` of `R_F` with `6τ = 0` and `τ(U_F) ⊆ [1/3, 2/3]` exists iff `F` has a stable prime above 3 whose residue field is `𝔽₃`, or a stable prime above 2 ramified in `F(i)/F`" | **TRUE**; ⟹ is J4 applied to `τ` when no stable dyadic prime ramifies (and trivially true when one does); ⟸ is J4 step 8 and the dyadic residue character | — |
+| **T2 (= S1)** the five-way equivalence | **TRUE**; = §2.6's corollary with (3) added | (1)⟹(2) FS81-T2; (2)⟹(3) L1; (3)⟹(4) T1; (4)⟹(5) definition; (5)⟹(1) row 52, G56 |
+| **C2** additive 3-colourings ⟺ a stable 3-prime of residue `𝔽₃`; additive 2-colourings ⟺ a ramified stable dyadic prime | **TRUE**; the first is J4's by-product (§2.5 (a)) with J2 at 3; the second derived now from L3 and L4 (b) (4.2) | — |
+| **T3 (= S2)** | **TRUE**; = §3.2 | — |
+| **C1 (= S3)** and its arithmetic | **TRUE**; arithmetic identical to `data/fs91/j09/field-arithmetic.out`, line for line | §3.3 |
+| "Also stated": bipartite ⟹ a ramified stable dyadic prime, via the walk-parity character | **TRUE** (derived now: the walk-parity map is an additive `R → ℤ/2` with `U ↦ 1`, then C2's second half) | — |
+
+**Nothing is refuted.** Every J02 statement is TRUE by a derivation independent of J02's proofs (which I have not read).
+
+### 4.2 The derivations made now
+
+- **L2 (a), (b) for every `p`.** Let `Ā` be the closure of `R` in `∏_{𝔓∈S_p} O_𝔓` (compact). By J2 (b) `p^aO′_(p) ⊆ R_(p)`, so `Ā ⊇
+  p^a∏O_𝔓` and `Ā` is a `ℤ_p`-order of full rank. **Claim `R/pR ≅ Ā/pĀ`.** Onto: `R` is dense and `pĀ` is open. Kernel: if `x ∈ R ∩ pĀ`,
+  `y = x/p` is integral at every stable prime (at `S_p` because `y ∈ Ā ⊆ ∏O_𝔓`), so `y ∈ O′_(p)`; choose `r ∈ R` with `r ≡ y` modulo
+  `p^a∏O_𝔓` (density; `p^a∏O_𝔓 ⊆ Ā` is open); then `(y − r)/p^a ∈ O′_(p)`, so `y − r ∈ p^aO′_(p) ⊆ R_(p)`, `y ∈ R_(p)`, `mx ∈ pR` with
+  `p ∤ m`, and `x ∈ pR`. Hence `dim A_p = Σ_{𝔓∈S_p}[L_𝔓 : ℚ_p] ≤ n`. Maximal ideals of `Ā/pĀ` lie under maximal ideals of `∏O_𝔓`
+  (integrality, lying-over), so each is `R ∩ 𝔓`; `c(R ∩ 𝔓) = R ∩ c(𝔓) = R ∩ 𝔓`. This extends J2 to ramified stable primes: `R/pR` is
+  always the reduction of the closure, which is `∏ O_𝔓/p` exactly when no stable prime above `p` ramifies (FS86-CL2's `𝔽₂`-diagonal shows
+  the difference).
+- **L2 (d).** At a ramified stable `𝔓`, `c` generates the inertia group of `𝔓` in `L/F`, so acts trivially on `κ_𝔓 ⊇ k_𝔪`; then
+  `s·c(s) = s² = 1` gives `s = 1`.
+- **L3, first half.** In a finite commutative `𝔽_p`-algebra, `φ = Frob^M` is a ring endomorphism commuting with `c`; it kills the
+  nilradical once `p^M` exceeds its index, and is bijective on each residue field `k_𝔪` once `[k_𝔪 : 𝔽_p] | M`; its image is a subring
+  mapping isomorphically onto `∏ k_𝔪`.
+- **L4 (b).** Above.
+- **C2, second half, ⟹.** A homomorphism `λ : R → ℤ/2` with `λ(U) = 1`: if `S₂ = ∅`, `1/2 ∈ R` (J2 (ii)) and `λ = 0`. If every `𝔓 ∈ S₂` is
+  unramified, `λ` on `𝒩(T₂) = ∏ μ_{Q_𝔓+1}` (L3) is `Σ λ_𝔓` and is `1` on the whole product; varying one coordinate makes each `λ_𝔓` constant
+  on `μ_{Q_𝔓+1}`, and L4 (b)'s sum makes that constant 0 — so the total is 0, not 1. Hence some stable dyadic prime ramifies.
+
+### 4.3 Do J02's statements, as stated, imply S1–S3?
+
+**Yes.** S1 is T2's (1) ⟹ (5), given the inputs J02 names (FS81-T2, T3, T4, row 52, Astra's Thm 2.1, Weil); S2 follows from T2 with the
+residue upper bound (T3); S3 from T2's (2) ⟺ (4) with C1's arithmetic (no stable prime above 3 of residue `𝔽₃`, no ramified stable dyadic
+prime). The chain T1 ⟸ L1, L3, L4 is complete as stated: T1's ⟹ needs only the **band values on the Teichmüller unit vectors of
+`𝒩(T₃) × 𝒩(T₂)`**, and the independence of the two factors is exactly L3's product set. **One remark on economy, not a gap:** J02's route
+needs no level collapse (it evaluates `τ` only on Teichmüller elements, which L3 realises by unit vectors), where this record's J4 step 6
+proves the level collapse; and J02's T1 is stated for `τ` only, while this record's J4 classifies all of `Θ₃(R_F)` (`4N₃` points) — J02's
+statements imply S1–S3 but not that classification.
+
 ## Would-have-searched-here log
 
 | # | the move I would have made by search | what I did instead |
@@ -283,4 +339,8 @@ this field the parity half is free because the 2-adic wall is broken.
   one quadruple per prime above 3 of residue field `𝔽₃`. [hand, one mind; Weil external] — §2.5.
 - **J4-C** — S1 for every real number field; `χ(F²) = 3 ⟺` non-bipartite and a prime above 3 of residue field `𝔽₃`. [hand, one mind] — §2.6.
 - **J4-A** — S1 for every algebraic subfield of ℝ and every purely transcendental extension of one (places; König; G63). [hand, one mind] — §2.6.
+- **J2′** — for every real number field and every prime `p`: `ℤ[U_F]/p ≅ Ā_p/pĀ_p`, `Ā_p` the closure in `∏_{S_p} O_𝔓`; finite of
+  dimension `Σ_{S_p}[L_𝔓 : ℚ_p] ≤ [L : ℚ]`; maximal ideals `R ∩ 𝔓`, `𝔓` stable (= J02-L2 (a), (b), derived independently). [hand, one mind] — §4.2.
+- **J-L4b** — for `Q = 2^f` no additive `λ : 𝔽_{Q²} → (1/2)ℤ/ℤ` is `1/2` on all of `μ_{Q+1}` (= J02-L4 (b)); hence an additive 2-colouring of
+  a real number field's plane exists iff a stable dyadic prime ramifies (= J02-C2's second half). [hand, elementary] — §4.2.
 - **J4-T6** — FS81-T6's open item settled: the additive 3-colourings of `ℚ(√d)`, `d ≡ 3, 7 (mod 12)`, are Fischer's up to symmetry. [hand, one mind, from J2, J4] — §2.5.
