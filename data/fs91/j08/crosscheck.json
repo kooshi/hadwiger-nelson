@@ -1,0 +1,38 @@
+{
+ "kind": "fs91-j08-crosscheck",
+ "rows": [
+  {
+   "q": 59,
+   "agree": true,
+   "kappa_direct": "6/59",
+   "chi_char_direct": 10
+  },
+  {
+   "q": 83,
+   "agree": true,
+   "kappa_direct": "5/83",
+   "chi_char_direct": 17
+  },
+  {
+   "q": 131,
+   "agree": true,
+   "kappa_direct": "6/131",
+   "chi_char_direct": 22
+  },
+  {
+   "q": 167,
+   "agree": true,
+   "kappa_direct": "7/167",
+   "chi_char_direct": 24
+  }
+ ],
+ "plant": {
+  "fired": true,
+  "first_c": [
+   1,
+   2,
+   3
+  ]
+ },
+ "ok": true
+}

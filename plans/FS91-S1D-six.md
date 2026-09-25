@@ -159,3 +159,74 @@ character `λ` is non-zero on the circle and `pλ` is a proper `p`-colouring of 
 **Would have searched here:** would have run a local search for a band-six character "near" the best `c` at 43, or over random `a`; instead
 the complete `c`-list, fixed by SIX-a, and J08-4 for every larger `q`.
 
+## Stage 5 — SAVED (SIX-d: level collapse and the ramified place; SIX-e: the three fields)
+
+### J08-6 — level collapse at every odd stable place, `p > k/2` [hand, one mind; the band form of row 75's fibre step, FS89-S0A-4's at every `k`]
+
+*Statement.* Let `𝔓` be a stable place of `L = F(i)` of odd residue characteristic `p`, `O` its local ring, `T_m = Cay(O/𝔓^m, S_m)`
+(`S_m` the image of the local norm-one group `N¹ = {u : u·c(u) = 1}`). **If `p > k/2`, every band `k`-character of `T_m` factors through
+`T_1`.** Hence `χ_char(T_m) = χ_char(T_1)` whenever `χ_char(T_1) < 2p`, and no level carries a band `k`-character, `k < 2p`, unless level
+one does. No assumption on ramification in `F/ℚ`.
+
+*Proof.* `L/F` is unramified above odd primes, so a uniformiser `π` of `F_𝔭` is one of `L_𝔓` and `c(π) = π`; `c(i) = −i`. Let `m ≥ 2`, `λ`
+band `k` on `S_m`, and `ρ = λ|_{𝔓^{m−1}/𝔓^m}`; suppose `ρ ≠ 0`. (i) For `y` with `c(y) = −y`, the Cayley transform `(1 + y)/(1 − y)` has
+norm one; with `y = π^{m−1}ia/2`, `a ∈ ℤ`, it is `≡ 1 + π^{m−1}ia (mod 𝔓^{2m−2})`, and `2m − 2 ≥ m`; so for every `u ∈ N¹`,
+`u(1 + π^{m−1}ia) ∈ S_m`, and `λ(u(1 + π^{m−1}ia)) = λ(u) + a·j(u)`, `j(u) = ρ(π^{m−1}iu)` depending on `u mod 𝔓`. (ii) `ρ(π^{m−1}·)` is a
+non-zero `𝔽_p`-linear functional on the residue field `κ = 𝔽_{q²}`; the reduction of `N¹` contains `μ_{q+1}` (the Cayley transform again),
+whose `𝔽_p`-span is a subfield containing `μ_{q+1}`, hence all of `κ` (a proper subfield `𝔽_{p^e}`, `e | 2f`, `e ≤ f`, has
+`p^e − 1 < p^f + 1`); so `j(u) ≠ 0` for some `u`, and `j(u)` generates `(1/p)ℤ/ℤ`. (iii) Then `{λ(u) + a·j(u) : a ∈ ℤ}` is a whole coset of
+`(1/p)ℤ/ℤ`, which has a point within `1/(2p) < 1/k` of 0 — outside `B_k`. Contradiction; so `ρ = 0`, `λ` descends to level `m − 1`, where it
+is band on `S_{m−1}` (the image of `S_m`); induct. ∎
+
+**SIX-d answered.** *Higher levels at 23 and 43:* `23 > 7/2`, so band 6- and 7-characters of `UD(ℤ/23^m, 2)` would descend to Γ₂₃, which has
+none (J08-2); likewise at 43. In fact `χ_char` is constant up both towers: 8 at 23 (`8 < 46`), 9 at 43 (`9 < 86`). *The ramified place above
+167* in ℚ(√167): stable (residue field `𝔽_167`, `167 ≡ 3 (mod 4)`), level-one target `Γ_167`, where `χ_char(Γ_167) = 24` (`κ = 7/167`,
+J08-4's floor 8); by J08-6 (`e = 2` over `ℚ_167` is allowed) no level carries a band `k`-character for `k ≤ 23`. **No band 6- or
+7-character at any level of 23, 43 or 167** — by collapse, not by computation at higher levels.
+
+### J08-7 — the pullback (CLG-a), proved here [hand]
+
+At a stable `𝔓`, every `u ∈ U_F` is a `𝔓`-unit (`v_𝔓(c(u)) = v_{c𝔓}(u) = v_𝔓(u)` and `u·c(u) = 1`), so `R_F = ℤ[U_F] ⊆ O_𝔓`, reduction
+`R_F → O/𝔓^m` is a ring map, and it carries `U_F` into `S_m`. So a band `k`-character of `T_{𝔓,m}` composed with reduction lies in
+`Θ_k(R_F)`. ∎ (No density needed in this direction.)
+
+### J08-8 — the three fields [hand + tools exact; the upper halves unconditional, the lower halves **given CLG_k (J07, unverified)**]
+
+*Stable places* (`tools/crunch_j08_threshold.py` §(4), by the criteria: a place is stable iff its residue field in `F` is `𝔽_q` with
+`q ≡ 3 (mod 4)`; all three fields break the 2-adic wall — each has the odd square class 7 or 167 ≡ 7 (mod 8), G35 — so none has a stable
+dyadic place; for the multiquadratic fields every odd ramified prime (3, 5, 7, 11) has residue field `⊇ 𝔽_{p²}`, not stable):
+
+| field | stable level-one targets examined (all below the derived bound `4(m − 2)²`) | min `χ_char` | at | bound |
+|---|---|---|---|---|
+| ℚ(√167) | 23: 8; 43: 9; 59: 10; 67: 14; 71: 18; 79: 14; 83: 17; 103: 15; 131: 22; 139: 24; and the ramified 167: 24 | **8** | 23 (`c ∈ {11, 20, 21}`) | 144 |
+| K(√7) = ℚ(√3,√7,√11) | 83: 17; 131: 22; 167: 24; 227: 29; 479: 48; 503: 63; 563: 52; 887: 111 | **17** | 83 (`c = 43`, `κ = 5/83`) | 900 |
+| de Grey's `K(√5,√7)` = ℚ(√3,√5,√7,√11) | 131: 22; 479: 48; 1091: 110; 1151: 116; 1319: 147; 1559: 142 | **22** | 131 (`c = 30`, `κ = 6/131`) | 1600 |
+
+*Why the minimum is over all targets:* by J08-4 a target with `χ_char ≤ m − 1` has `q < 4(m − 2)²`, and every stable `q` below that bound
+was computed; by J08-6 no higher level does better (`m < 2p` at every stable place). *Measured cross-check:* `m(c)` read directly off the
+circle equals the law at every `c` for `q = 59, 83, 131, 167` (`tools/crunch_j08_crosscheck.py`, plant fires).
+
+**The statements, each read aloud against "characters only, never `χ`":**
+- **ℚ(√167).** *Unconditional (J08-7 + J08-3):* `Θ₈(R_{ℚ(√167)}) ≠ ∅` — a character eight-colouring of ℚ(√167)'s plane exists (the
+  pullback of `λ_a`, `N(a) = 11`, at either place above 23; `χ ≤ 8` itself was already row 69's via the residue map). *Given CLG_7 (J07,
+  unverified):* `Θ₇(R_{ℚ(√167)}) = ∅`, hence `Θ₆ = ∅` (`Θ_k` grows with `k`), so **`χ_char(ℚ(√167)²) = 8`** = min over its targets. SIX-e's
+  biconditional holds with both sides true: no target carries a band six-character (J08-5, J08-6), and given CLG_6, `Θ₆ = ∅`. **Not
+  claimed:** anything about `χ(ℚ(√167)²)` beyond `4 ≤ χ ≤ 8`; the conjecture's `≥ 6` there is untouched — a colouring with fewer than six
+  colours, if one exists, is not a character colouring (given CLG).
+- **K(√7).** *Unconditional:* `Θ₁₇ ≠ ∅`. *Given CLG_16:* **`χ_char(K(√7)²) = 17`**; in particular `Θ₆ = Θ₇ = ∅` given CLG_6, CLG_7.
+- **de Grey's field.** *Unconditional:* `Θ₂₂ ≠ ∅`. *Given CLG_21:* **`χ_char = 22`**; `Θ₆ = Θ₇ = ∅` given CLG_6, CLG_7.
+
+**What it means for six (a reading, one line each).** At the 6-open fields character colourings are **far above** `χ ≤ 7` (the plane's
+own bound): 17 and 22 colours. So, given CLG, the only colourings that could make any of these three planes six-chromatic — or even
+seven-chromatic below the plane's hexagonal bound — are **non-character** colourings; G64's "six hides only in the gap between `L(F)` and
+`χ(F²)`" sharpens to "six hides only in non-character colourings", and at these fields character colourings do not even reach seven.
+Killing test of this reading: none — it is a restatement of J08-8 plus the plane's 7-colouring.
+
+**Consistency with `[Fischer1990]` Ex. 4** (row 50: no additive `k`-colouring of ℚ(√167)'s plane with `k < 11`): a torsion band character
+of order `N` is an additive `N`-colouring; the band characters found have order 23 (and 43, 59, … at the other targets), all `≥ 11` —
+consistent; and given CLG_7 the statement `Θ₇ = ∅` is stronger than Fischer's for `k ≤ 7` in the band sense and says nothing for
+`8 ≤ k ≤ 10` beyond the order bound (an order-23 character is band 8 but is a 23-colouring as an additive map).
+
+**Predictions scored.** P-167 (`χ_char ≥ 7`, 0.80): **won, given CLG**. P-167-8 (`= 8` exactly, 0.45): **won, given CLG**. C0-167 (8 at
+0.50): won. The field results are exactly as strong as CLG_7, CLG_16, CLG_21.
+
