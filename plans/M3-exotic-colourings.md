@@ -344,7 +344,7 @@ Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
 
 ### PA.1 Question 2 — measurable colourings, products, windows
 
-> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1D-windows-five.md` §1.1 (Q7); carried in `plans/M3-close-inventory.md` row 19. Not applied here; the close rewrites this entry.
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1D-windows-five.md` §1.1 (Q7); carried in `plans/M3-close-inventory.md` row 19. Not applied here; the corrected text is §R-close R4.C.1.
 
 | # | query or source | found | verdict |
 |---|---|---|---|
@@ -435,7 +435,7 @@ periods are finitely many cycles, so `P` has finite index.
 
 ### S. The stages as jobs
 
-> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.4; carried in `plans/M3-close-inventory.md` row 9. Not applied here; the close rewrites this entry.
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.4; carried in `plans/M3-close-inventory.md` row 9. Not applied here; the corrected text is §R-close R4.C.2.
 
 | job | kind | question | record | stages (harness k) | stop rule |
 |---|---|---|---|---|---|
@@ -530,7 +530,7 @@ prose; a GAP verdict on the deciding step scores the claim as not landed.
 
 ### M. The modeling passes (fresh Skill invocations: `debruijn-domain-modeling`, then `debruijn-obligation-modeling`, applied to §S's statements; no Lean this milestone, so the passes act on the statements and the obligation trees)
 
-> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.1 and §2.4, and `plans/M3-S1D-windows-five.md` §3.6; carried in `plans/M3-close-inventory.md` rows 9, 10, 20. Not applied here; the close rewrites this entry.
+> **Correction owed (2026-09-25 crunch):** see `plans/M3-S1A-rank-one.md` §2.1 and §2.4, and `plans/M3-S1D-windows-five.md` §3.6; carried in `plans/M3-close-inventory.md` rows 9, 10, 20. Not applied here; the corrected text is §R-close R4.C.3–R4.C.5.
 
 **Domain pass — what changed in §S.**
 1. *The quotient seam* (the placement cut): FS79-T35 reads phases modulo colour permutation, T36's tool computes in the quotient, and the
@@ -851,8 +851,197 @@ Pending at this save (steps 1–4 of 7 passed at 18:29). Filed in the next stage
 
 | result | queries (this gate, beyond J06's §PA and J21's §3.7) | found | position |
 |---|---|---|---|
-| J21-MX (spectral Burr–Erdős–Lovász; Borel/measurable) | zbMATH: `Hedetniemi & eigenvalue` (1), `& Cayley` (5), `& holds` (14), `& circulant` (4), `& Kneser` (10), `multiplicative & Hedetniemi` (10), `direct product & chromatic number & eigenvalue` (0), `categorical product & chromatic & spectral` (0), `Borel chromatic number` (31), `Borel & Hedetniemi` (0), `measurable & categorical product` (0), `measurable chromatic number & product` (0); two web searches | nothing on point. **Nearest printed relatives, unread:** `[AlonDinurFriedgutSudakov2004]` (GAFA 14; zbMATH 1056.05104: maximum and near-maximum independent sets of weak products of spectral base graphs are induced by the base, with stability, by Fourier analysis — the discipline's form of the planner's cylinder lemma); Tardif–Wrochna 2019 (*Hedetniemi's conjecture and strongly multiplicative graphs*, zbl 1427.05090; review withheld); Godsil–Roberson–Rooney 2020 (*Vector coloring the categorical product of graphs*, zbl 1442.05056); Kechris–Solecki–Todorčević 1999 (definable Hedetniemi applications). `[KechrisMarks2020]` §4.6: "We do not know any other results along these lines." | **not found by these searches**; "new" waits on ADFS and Tardif–Wrochna being read (a prior-art debt, R4.B) |
+| J21-MX (spectral Burr–Erdős–Lovász; Borel/measurable) | zbMATH: `Hedetniemi & eigenvalue` (1), `& Cayley` (5), `& holds` (14), `& circulant` (4), `& Kneser` (10), `multiplicative & Hedetniemi` (10), `direct product & chromatic number & eigenvalue` (0), `categorical product & chromatic & spectral` (0), `Borel chromatic number` (31), `Borel & Hedetniemi` (0), `measurable & categorical product` (0), `measurable chromatic number & product` (0); three web searches | nothing on point. **Nearest printed relatives, unread:** `[AlonDinurFriedgutSudakov2004]` (GAFA 14; zbMATH 1056.05104: maximum and near-maximum independent sets of weak products of spectral base graphs are induced by the base, with stability, by Fourier analysis — the discipline's form of the planner's cylinder lemma); Tardif–Wrochna 2019 (*Hedetniemi's conjecture and strongly multiplicative graphs*, zbl 1427.05090; review withheld); Godsil–Roberson–Rooney 2020 (*Vector coloring the categorical product of graphs*, zbl 1442.05056); Kechris–Solecki–Todorčević 1999 (definable Hedetniemi applications). `[KechrisMarks2020]` §4.6: "We do not know any other results along these lines." | **not found by these searches**; "new" waits on ADFS and Tardif–Wrochna being read (a prior-art debt, R4.B) |
 | J21-TH, J21-RED (thick places; the reduction) | `p-adic & chromatic number & measurable` (0), `adelic & chromatic` (0, off-topic) | nothing | not found by these searches |
 | J22-T10 | not searched as new | the equality case of the Hoffman bound is classical (Hoffman; Haemers); T10 specialises it to FS-66's relaxation `B₁` | classical in substance |
 | J18-DC, J19-KC/KT/FRZ (rank-one colouring shifts, Kempe moves) | `Kempe & periodic` (1), `Kempe & frozen` (4, recolouring Hadwiger), `Kempe equivalence` (16), `Kempe & lattice` (18, off-topic), `shift of finite type & coloring` (4), `distance graph & entropy` (0), `distance graph & aperiodic` (1: EES 1990); one web search | nothing on point. Nearest: `[EggletonErdosSkilton1990]` (unread, unheld — the one printed statement on aperiodic `χ(D)`-colourings of `G(ℤ, D)`); `[MoharSalas2009]` (Kempe classes of colourings of periodic lattices; a listing row); `[AbrishamiEtAl2025]` (existence of periodic colourings; held) | not found by these searches |
 | J21-NG2's external input | fetched `[Zhu2021]` (X. Zhu, *Relatively small counterexamples to Hedetniemi's conjecture*, JCTB 146 (2021) 141–150, doi 10.1016/j.jctb.2020.09.005, arXiv:2004.09028, Zbl 1457.05095) to `~/source/library/pdf/arXiv-2004.09028-zhu-relatively-small-counterexamples-hedetniemi.pdf`; read: §3's Theorem 3 statement and construction, §4's remark on `p` | Theorem 3, verbatim: "`χ(G), χ(H) > c` and `χ(G × H) ≤ c`", with `G = F[K_q]`, `q ≥ (p − 1)/2`, `c = 3q + 2`, `F` of odd girth 7 and `χ_f(F) > 3 + 4/(p − 1)`; §4: "Geoffrey Exoo found an odd girth 7 graph G on 83 vertices and with independence number 27. This implies that `χ_f(G) > 3.074`. So `p ≤ 83`" and "For `p = 83`, we have `q = 41` and `c = 125`" | NG2's input confirmed in print first-hand: `H → K₁₂₅^{F[K₄₁]}`, so `χ(A) ≥ χ(H) > 125`. **Still external:** `α(F) = 27` (Exoo's search, cited as personal communication) and the identification of Exoo's graph with the circulant (from `[Zhu2025]`); Theorem 3's proof not read |
+
+### Stage 4 — SAVED (the drafts: ledger rows, § B lines, corrected text, `CLAUDE.md` lines, stub re-aims, new stubs, the re-rank)
+
+*Drafts only. A front-page job applies them; nothing below has been written into `LEDGER.md`, `CLAUDE.md`, `plans/FRONTIER-STUBS.md`,
+`BIBLIOGRAPHY.md` or any existing stub. Row numbers read "next": M1's close (`plans/FS91-character-local-global.md` §R-close) had not
+reached its stage 4 when this was written, so the front-page job numbers M3's rows after M1's.*
+
+#### R4.L `LEDGER.md` § A — three rows
+
+**Row next — rank one at four colours, reduced and not decided.**
+| next | **Rank-one four-colour inheritance, restated and reduced but not decided: for finite `D ⊂ ℤ_{>0}`, FS-76's rank-one reading R2 ("every phase of `X₄(D)` rigid ⟹ no wall") is equivalent to "a countable four-colouring shift of a distance graph on ℤ is finite", to `P₄(D) = F₄(D)`, to the reversal lemma A-K3, and to "no heteroclinic four-colouring of ℤ has an all-rigid Δ-completion `X₄(D_c(M))`"; in an all-rigid shift every periodic point is gap-free with two-sided Kempe strands and the Kempe class of a wall point keeps its tails in different labelled phases, so walls between Kempe-frozen tails are invisible to every Kempe argument; the richest all-rigid shift held (`{2,6,11,13,14}`, 94 phases, no wall) has no frozen point** (M3; `plans/M3-derivation.md` §1–§4). **[hand, two derivations for every lemma and equivalence (J18 or J19; J20 blind from the fixed list, or from the statement); tools exact on seven named sets, `{2,6,11,13,14}` by two tools]** R2 stalled at one named step, reached by three minds (J18 at KE, J19 at KT's transport step, J20 at its own, which it identifies with J19's FW plus the non-frozen half). Corrected on the way: A-Kq holds for FS-79's labelled quotient, and the plain quotient's rigidity clause is false (`D = {1}`, `{1,2}`); unique continuation needs **left** gap-freeness (FS73-T30's rigid–rigid walls leave two-sided gap-free points); J19-KC's `N` is the lcm of the least periods (`D = {1,3,6,9}`). KE ("a one-sided Kempe swap sends a tail into a non-single-cycle phase") is false at every wall whose one-sided components are total, so it needs KE♯; J20-TW: every wall between distinct phases of any `X₄(D)` has a chiral end. **Not claimed:** R2 either way; KE♯, KT, FW; the binary return-time model for `D ⊇ {1,2}` (J19-BIN) is a restatement. **Prior art:** the one-dimensional SFT facts are Lind–Marcus's; R2, the Δ-completion and the Kempe split not found (M3 §R-close R3.10); `[EggletonErdosSkilton1990]`, the one printed statement on aperiodic `χ(D)`-colourings, unheld and unread. | `plans/M3-S1A-rank-one.md`, `plans/M3-S1B-rank-one.md`, `plans/M3-S1V-rank-one.md`, `tools/crunch_j18_*`, `tools/crunch_j19_*`, `tools/crunch_j20_*`, `data/m3/j18–j20/` | M3 (crunch 2026-09-25) |
+
+**Row next+1 — the mixing selection.**
+| next+1 | **The mixing selection: if `K` is compact abelian and a probability `ν` on `T_K ⊆ K` has every non-trivial Fourier coefficient below `1/(k−1)` in absolute value (`λ* < 1/(k−1)`), then from every Borel proper `k`-colouring of `X × Cay(K, T_K)`, `X` any Borel graph, the fibre's colour of measure above `λ*/(1 + λ*)` is a Borel proper `k`-colouring of `X`; measurably, one proper off a null vertex set** (M3; `plans/M3-derivation.md` M3-J21-MX, NG1, NG2). **[hand, two derivations (J21; J22 from the statement, both forms of the null-vertex format)]** The engine is the compact expander-mixing lemma; the complete-graph case is Burr–Erdős–Lovász's `χ(G × K_n) = min(χ(G), n)`, and in `[KechrisMarks2020]`'s terms it is a positive special case of Problem 4.23 (Borel Hedetniemi) for pairs with one mixing compact abelian Cayley factor. **Ratio is not enough:** a finite abelian Cayley graph with independence ratio `< 1/125` does not carry the selection at 125 colours (`F[K₄₁]`, `F` Exoo's 83-vertex circulant, from `[Zhu2021]` Thm 3; `α(F) = 27` external), and "an independent set of density above the ratio is a cylinder" is false for every `B` (two constructions). **Not claimed:** anything at `λ* ≥ 1/(k−1)`; edges with both ends in the null set (the null-set step); ratio-only statements at five colours. **Prior art:** not found by 33 zbMATH queries and three web searches (J21 §3.7, M3 §R-close R3.10); unread neighbours: `[AlonDinurFriedgutSudakov2004]`, Tardif–Wrochna 2019, Godsil–Roberson–Rooney 2020. | `plans/M3-S1D-windows-five.md` §3.2, §3.6; `plans/M3-S1V-windows-five.md` §2.2, §3.4–§3.5; `tools/crunch_j22_b2_checks.py` | M3 (crunch 2026-09-25) |
+
+**Row next+2 — windows at five over ℚ(√167).**
+| next+2 | **Windows at five colours over ℚ(√167): no measurable window five-colouring reads a finite set of places with no real place and none above 43 (the dyadic place is split with ratio 0 — C14.2 (c) holds at `q = 2` —, the barrier prime's place is split, 59 has ratio `0.199119854095` exactly); every finite place except twelve (above 2, 3, 5, 7, 29, 61, split; above 23, 43, stable) is 5-thick, so a Borel window five-colouring over any `S` exists iff one exists over `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}`, and with a real place and only thick finite places the question is exactly `χ_B(ℝ²) ≤ 5`** (M3; `plans/M3-derivation.md` §5–§6). **[hand + tools exact + cert, two derivations (J21; J22 blind on the fixed list, from the statement on MX, TH, RED); 59 exact by two code bases; 23 by row 75's certificate]** So a window falsifier of the conjecture's "≥ 6" at ℚ(√167) must read a place above 43 (with no real place) or one of 2, 3, 5, 7, 23, 29, 43, 61 (with one) — or be a Borel (or null-set-tolerant) five-colouring of `ℝ²`. Two real places merge (`χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`, slicing, σ-compact groups); the pullback D2 holds for thick factors (Borel iff; measurable into the null-vertex format). **Not claimed:** anything about `χ_µ(ℝ²)`; 43 at depth (needs `B₁(43) < 369.8`; the fibre-share inequality with only the spectrum gives exactly Hoffman's `0.2138`, its true maximum is strictly below); D2 at the non-thick factors (GAP-2) and from measurable to everywhere-proper (GAP-1); any colouring no window gives. **Corrects row 92:** FS86-CL1's qualifier "split places odd" can be dropped at ℚ(√47) and ℚ(√167) (two minds). **Prior art:** not found (M3 §R-close R3.10). | `plans/M3-S1D-windows-five.md`, `plans/M3-S1V-windows-five.md`, `tools/crunch_j21_*`, `tools/crunch_j22_*`, `data/m3/j21/`, `data/m3/j22/` | M3 (crunch 2026-09-25) |
+
+**Row 92, correction in place** (inventory row 18): replace "for sets of places whose split places are odd (C14.2 at `p = 2`, where their
+dyadic places split, not checked)" with "for every finite set of places (C14.2 (c) holds at `q = 2`: M3, row next+2, two minds)".
+
+#### R4.B `LEDGER.md` § B — one line per entry of `plans/M3-derivation.md` (milestone column "M3")
+
+| id | milestone | the theorem, in one line | grade | proof | kernel |
+|---|---|---|---|---|---|
+| M3-J18-F2 | M3 | inside a rigid phase a path is deterministic; a point with both limit phases one rigid `C` is on `C`'s periodic orbit (= J20-RET) | hand, two derivations | `plans/M3-derivation.md` M3-J18-F2 | declined |
+| M3-J18-F3 | M3 | one-dimensional SFT facts for `X_k(D)`: a non-single-cycle phase gives `h > 0`; all single cycles give `h = 0`, countability, and wall ⟺ infinite (= J20-W, E1, E2) | hand (standard), two derivations | M3-J18-F3 | declined |
+| M3-J20-T35W | M3 | FS79-T35 on the unquotiented window-state graph, `X₄(D) = ∅` included | hand, two derivations of a held theorem | M3-J20-T35W | declined |
+| M3-J18-EQ | M3 | A-T1 ⟺ A-T1′ ⟺ A-T2 ⟺ A-K3 for every `D` (= J20-EQ); route (ii)'s potential exists iff A-T1 | hand; first clause two derivations, second one mind | M3-J18-EQ | declined |
+| M3-J18-DC | M3 | the Δ-completion theorem: A-T1 fails iff some heteroclinic four-colouring `c` has an all-rigid `X₄(D_c(M))` (= J20-DC) | hand, two derivations | M3-J18-DC | declined |
+| M3-J18-K0loc | M3 | a periodic point of one rigid phase is gap-free, its Kempe strands two-sided and crossing every cut, its `m`-windows `≥ k − 1` colours (= J20-K0, CUT 1–2) | hand, two derivations | M3-J18-K0loc | declined |
+| M3-J18-K0H | M3 | the two-sided rank-one form of FS86-dB-H is false (T30's rigid–rigid walls) | hand + FS-79 tools, two derivations | M3-J18-K0H | declined |
+| M3-J18-AK1 | M3 | all phases rigid and `X₄(D) ≠ ∅` ⟹ `χ(G(ℤ, D)) = 4` (= J20-K1) | hand, two derivations | M3-J18-AK1 | declined |
+| M3-J18-AK2 | M3 | a left-gap-free colouring is fixed by any left half-line; a wall leaves a phase only at a left gap (= J20-K2) | hand, two derivations | M3-J18-AK2 | declined |
+| M3-J18-AKq | M3 | A-Kq for the labelled quotient; the plain quotient's rigidity clause false at `D = {1}`, `{1,2}` (= J20-Q) | hand (+ tools exact), two derivations | M3-J18-AKq | declined |
+| M3-J20-CUT | M3 | at a wall's exit site the window is not coloured inside the two absent colours; a crossing-free cut for a pair `π` gives a wall to `τ_π·B` | hand, one mind | M3-J20-CUT | declined |
+| M3-J18-KE⟹ | M3 | KE ⟹ A-T1 | hand, two derivations | M3-J18-KE⟹ | declined |
+| M3-J19-KC | M3 | Kempe closure in an all-rigid shift: strands `σ^N`-invariant for `N` the lcm of least periods (false for a point's least period, `D = {1,3,6,9}`); Kempe classes of wall points stay wall points with tails in different labelled phases (= J20-KC) | hand (+ tools exact), two derivations | M3-J19-KC | declined |
+| M3-J19-ENDS | M3 | the ends partition of a wall point: each strand of a tail has one end-component; finite components meet `[a − m, b + m]`; swaps act on tails by strand swaps | hand (+ tools exact), two derivations | M3-J19-ENDS | declined |
+| M3-J19-FRZ | M3 | at Kempe-frozen tails every point of the Kempe class has relabelled tails; no rigidity needed (= J20-FRZ) | hand, two derivations | M3-J19-FRZ | declined |
+| M3-J19-KEF | M3 | KE fails at every rigid–rigid wall whose one-sided components are all total; so KE ⟹ KE♯ (= J20-KEF) | hand, two derivations | M3-J19-KEF | declined |
+| M3-J19-KT | M3 | KE ⟹ KT ⟹ A-T1 and KT ⟹ KE♯; A-T1 = FW ∧ A-T1ⁿᶠ with FW invisible to Kempe arguments | hand, two derivations of the implications | M3-J19-KT | declined |
+| M3-J19-TW | M3 | every wall between distinct phases of any `X₄(D)` has a chiral end; an achiral end yields a twin wall (= J20-TW) | hand, two derivations | M3-J19-TW | declined |
+| M3-J19-BIN | M3 | for `D ⊇ {1,2}`, `X₄(D)` is a 24-to-1 extension of a binary return-time shift; phases, rigidity, walls, mirroring transfer (= J20-BIN) | hand, two derivations | M3-J19-BIN | declined |
+| M3-J18-CTL | M3 | the control `{1,5,7,10}`: 18 phases, 17 rigid, 15 walls; 8 of 9 rigid–rigid wall points have trivial completion to `M = 100` | tools exact, one run (phase counts confirmed by J20) | M3-J18-CTL | declined |
+| M3-J18-DPR | M3 | `X₄({1,5,7,10,13,27,33})`: 25 phases, 24 rigid, one non-rigid; A-C not landed | tools exact, one run (partly confirmed by J20) | M3-J18-DPR | declined |
+| M3-J19-CTL | M3 | the control's 62 one-sided components: 10 total keep the tail rigid, 52 proper send it to the non-rigid phase, matching J18's data | tools exact, one run | M3-J19-CTL | declined |
+| M3-J19-AF✗ | M3 | all-rigid `X₄({2,6,11,13,14})`: 94 rigid points, none Kempe-frozen; single-strand swaps connect all 94 phases (conjecture AF false) | tools exact, two tools | M3-J19-AF✗ | declined |
+| M3-J20-NAMED | M3 | on T30's four sets, `{2,6,11,13,14}` and `{1,5,7,10,13,27,33}` no rigid periodic point is Kempe-frozen; rigid–rigid wall ends period 20, chiral | tools exact, one run | M3-J20-NAMED | declined |
+| M3-J21-D0 | M3 | a window five-colouring over one real place is a measurable five-colouring of `UD(ℝ²)`; a no over every `S` with a real place gives `χ_µ(ℝ²) ≥ 6` | hand, two derivations | M3-J21-D0 | declined |
+| M3-J21-D1 | M3 | no real place and every factor of ratio `< 1/5` ⟹ no window five-colouring (formats E, N, L) | hand, two derivations | M3-J21-D1 | declined |
+| M3-J21-D1fac | M3 | ℚ(√167)'s factor table: 23 `≤ 0.18523`, 59 `0.199119854095` exact, stable `p ≥ 67`, 167, odd split places 0; stable places below 59 are 23, 43 | hand + tools exact + cert, two derivations | M3-J21-D1fac | declined |
+| M3-J21-D1-3 | M3 | the place above 3 is split in `F(i)/F`: ratio 0 | hand, two derivations | M3-J21-D1-3 | declined |
+| M3-J21-D1-2 | M3 | C14.2 (c) holds at `q = 2`: the dyadic place has ratio 0 (= J22-T3) | hand (+ tools), two derivations | M3-J21-D1-2 | declined |
+| M3-J21-D1-43p | M3 | at 43: level-one windows excluded in D1's setting; the spectrum alone gives exactly Hoffman; depth GAP (`B₁(43) < 369.8` needed) | hand + cert, two derivations (corrected by J22) | M3-J21-D1-43p | declined |
+| M3-J22-T10 | M3 | the fibre-share inequality with only the spectrum gives exactly Hoffman; its true maximum `B₁(p)` is strictly below unless an independent set meets Hoffman; `B₁(43) < 395.2338` | hand + tools exact, one mind | M3-J22-T10 | declined |
+| M3-J22-T1 | M3 | `Γ₅₉`: `λ* = 0.2486262833630 < 1/4`, Hoffman `0.199119854095 < 1/5`, exactly | tools exact, two code bases | M3-J22-T1 | declined |
+| M3-J22-T2 | M3 | level-one `λ*` of the standard compact piece at `q = 9, 25, 49, 23, 29, 43, 61` all `≥ 1/4`; at 67, 121 `< 1/4`; at 2, `λ* = 1` | tools exact, two derivations | M3-J22-T2 | declined |
+| M3-J21-SL | M3 | slicing along shifted diagonals: σ-compact `G`, σ-finite `Y` (as J21 stated it for every LCA `G`, false at `ℝ × ℝ_d`) (= J22-T11) | hand, two derivations (corrected by J22) | M3-J21-SL | declined |
+| M3-J21-D3 | M3 | `χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`, and for `χ_B` (= J22-T5) | hand, two derivations | M3-J21-D3 | declined |
+| M3-J21-MX | M3 | the mixing selection: a compact factor with `λ* < 1/(k−1)` can be deleted from a Borel `k`-colouring of a product (measurably, into the null-vertex format) (= J22-T6) | hand, two derivations | M3-J21-MX | candidate (finite form) |
+| M3-J21-UNIF | M3 | the uniform measure on a compact piece's circle is optimal for Hoffman and for mixing | hand, two derivations | M3-J21-UNIF | declined |
+| M3-J21-TH | M3 | every finite place of ℚ(√167) is 5-thick except twelve (above 2, 3, 5, 7, 29, 61; 23, 43) | tools exact + hand, two derivations | M3-J21-TH | declined |
+| M3-J22-T8 | M3 | at a split place with odd `p`, level-`m ≥ 2` characters with equal negative valuations have `|ν̂| ≤ 2/(q − 1)`; Lemma P re-derived | hand, one mind (a classical bound) | M3-J22-T8 | declined |
+| M3-J21-RED | M3 | a Borel window five-colouring of ℚ(√167)'s plane over `S` exists iff one over `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}` | hand, two derivations | M3-J21-RED | declined |
+| M3-J21-D2p | M3 | D2(a), D2(b) hold when every factor of `B` is thick (Borel iff; measurable into N′) (= J22-T7, T9) | hand, two derivations | M3-J21-D2p | declined |
+| M3-J21-NG1 | M3 | the planner's cylinder lemma is false for every `B` of the D2 class, literally and in the containment reading (= J22-T12) | hand (+ tools exact), two constructions | M3-J21-NG1 | declined |
+| M3-J21-NG2 | M3 | ratio alone cannot carry D2 at 125 colours (`F[K₄₁]`, from `[Zhu2021]` Thm 3) (= J22-T13) | hand + external, two derivations | M3-J21-NG2 | declined |
+| M3-J21-NG3 | M3 | at a split place the whole local graph has clopen cross-independent sets of density bounded below; only compact pieces can mix (= J22-T4) | hand, two constructions | M3-J21-NG3 | declined |
+| M3-J21-D4 | M3 | C9's `⌊4θ̃⌋` is a Borel window four-colouring of ℚ(√11)'s plane over `{∞, 7}`, a pullback from neither factor; the hexagonal seven-colouring is a window over `{∞₁}` | hand, two derivations | M3-J21-D4 | seven-colour half kernel (row 33) |
+| M3-CHK23 | M3 | the frozen FS-66 checker re-run on `cert-p23.json --m 5` | an existing checker on an existing certificate | M3-CHK23 | — (FS-66's) |
+
+#### R4.C Corrected text for the plan's §PA.1, §S and §M (the entries keep their history; each banner now points here)
+
+- **R4.C.1 (§PA.1 row 3; inventory row 19).** The passage "the unit distance graph on R², … is known to have 5 ≤ χ(U) ≤ χ_µ(U) ≤ χ_B(U)
+  ≤ 7, … but the exact values of χ(U), χ_µ(U), χ_B(U) are unknown" is in `[KechrisMarks2020]` **§5.1, Example 5.1 (pp. 45–46)**, not §4.7
+  (§4.7 is "Extensions", p. 33); Problem 4.23 and "We do not know any other results along these lines. Is C_B(4) true?" are in §4.6 as
+  quoted.
+- **R4.C.2 (§S, the definitions' parenthesis, and the fixed list's A-Kq; inventory rows 9, 42).** Read the parenthesis as: "(FS79-T35 states
+  its criterion with phases taken modulo colour permutation in FS-79's **labelled** (transfer) quotient — each class's out-edges those of a
+  representative, one per admissible colour, with multiplicity; the claims below hold for that quotient and for the unquotiented graph. In
+  the plain (orbit) quotient the wall clause holds and the rigidity clause fails: `D = {1}`, `{1,2}`.)" A-Kq's verdict: TRUE for the
+  labelled quotient, its rigidity clause FALSE for the plain one (`plans/M3-derivation.md` M3-J18-AKq).
+- **R4.C.3 (§M, domain pass item 1; inventory row 9).** "An edge's lift is determined by its source" fails exactly at windows using at most
+  two colours (a non-trivial stabiliser); the two quotients agree on phases whenever every phase window uses at least three colours, which
+  every all-rigid shift satisfies (K0loc (d)).
+- **R4.C.4 (§M, domain pass item 2; inventory row 10).** A-K2 is the rank-one form of FS86-dB-H **with left-gap-freeness**; the two-sided
+  transcription is false in rank one (FS73-T30's rigid–rigid walls leave two-sided gap-free periodic points; M3-J18-K0H).
+- **R4.C.5 (§M, D2(a)'s obligation tree; inventory row 20).** The cylinder lemma ("an independent set of `A′ × B` of relative density
+  `> β` is a.e. a cylinder `I × B`") is false already for `A′ = A = UD(ℝ²)`, literally and in the containment reading, for every `B` of the
+  D2 class (M3-J21-NG1); `[Zhang2012]` Thm 1.8 (i) speaks of **maximum** independent sets. The route that works is fibre-local — the
+  mixing selection (M3-J21-MX) — and needs `λ* < 1/4`, not ratio `< 1/5`.
+
+#### R4.G `CLAUDE.md` — drafted lines (net ≤ 4,000 bytes; measured in R4.M)
+
+<!-- M3-CLAUDE-DRAFT-BEGIN -->
+*Frontier, "Where the problem stands", a new item after 25 (numbered by the front-page job):*
+**Rank one at four colours, and windows at five over ℚ(√167)** (rows next–next+2; M3 of the 2026-09-25 crunch, `plans/M3-derivation.md`).
+FS-76's rank-one question (every phase rigid ⟹ no wall) is *a countable four-colouring shift of a distance graph on ℤ is finite*, and a
+statement about single heteroclinic colourings; **not landed**, stalled at one step by three minds (G77). At five colours no window
+reads finitely many places of ℚ(√167) with no real place and none above 43; a factor leaves a product colouring when it **mixes**, not
+when its ratio is small, so the window question lives at nine places; nothing touches `χ_µ(ℝ²)`.
+
+*Prior-art position, "Ours:" add:* rows next–next+2. *"Not ours:" add:* the mixing selection's complete-graph case
+(Burr–Erdős–Lovász); the ratio-only counterexample (`[Zhu2021]` Thm 3); one-dimensional SFT facts (Lind–Marcus).
+
+*Grokkings — new entry:*
+* **G77 — Rank-one inheritance is "countable ⟹ finite", and Kempe moves cannot see a frozen wall. [hand, two derivations (row next);
+  tools exact on named sets; one reading]** The four-colourings of `G(ℤ, D)` form a one-dimensional SFT; all phases rigid is zero entropy,
+  and R2 says such a shift is finite — equivalently `P₄ = F₄`, equivalently no heteroclinic colouring has an all-rigid completion
+  `X₄(D_c(M))`. In an all-rigid shift periodic points are gap-free with two-sided strands and the Kempe class of a wall point keeps its
+  tails in different labelled phases; at frozen tails Kempe moves only relabel, so the frozen part of R2 needs an invariant no Kempe
+  argument supplies. *Reading:* all-rigid shifts are Kempe-rich (`{2,6,11,13,14}`: 94 phases, none frozen). *Do: when a rank-one
+  colouring question resists, restate it on single colourings and split it at frozen tails before choosing a Kempe route. Killing test of
+  the reading: an all-rigid `X₄(D)` with a frozen rigid point. Nothing kills the equivalences; they forbid a Kempe proof of the frozen case.*
+
+*Grokkings — edits in place:*
+- **G76**, before its *Do*: "**At five colours over ℚ(√167)** (row next+2) a factor leaves a product colouring when its compact pieces
+  mix (`λ* < 1/4`, a spectral Burr–Erdős–Lovász), not when its ratio is small (false at 125 colours); twelve places do not mix, so the
+  window question lives at nine places, and with a real place it is `χ_B(ℝ²)`'s."
+- **G50**, its instances: "**M3's:** `[Zhang2012]` Thm 1.8, read in full, was applied to sets of density above the ratio though it speaks
+  of maximum ones, and `[AlonDinurFriedgutSudakov2004]`, the discipline's form of that lemma, went unsearched."
+- **G72**, its count: "**M3:** both questions through the structural form; Q2's invariant found (the fibre's classes above the mixing
+  threshold), Q1's not (FW rules out every Kempe invariant)." (The running number: the front-page job orders M1's and M3's.)
+- **G30**, the ladder: "→ descriptive set theory (Borel and measurable combinatorics, entered at M3)".
+
+*Paths forward table (the front-page job places the rows by R4.F):*
+- FS-76's row, append: "**At M3's close:** rank one reduced to single colourings (row next), open at FW and KT; frozen walls → the new
+  rank-one-walls stub."
+- FS-64's row, append: "**At M3's close:** five-colour windows over ℚ(√167) excluded off 43 with no real place; the rest reduces to nine
+  places (row next+2) → the non-mixing-places stub."
+- FS-69's row, append: "also decides the finite-place windows at five over ℚ(√167) (`B₁(43) < 369.8`, M3)."
+- New rows: "**FS-(new) rank-one walls** — `plans/STUB-rank-one-walls.md` | frozen walls, `D ⊇ {1,2}`, the completion route | none"
+  and "**FS-(new) windows at the non-mixing places** — `plans/STUB-windows-five-nonmixing.md` | D2 at seven places, the null-set step |
+  speculative".
+<!-- M3-CLAUDE-DRAFT-END -->
+
+#### R4.F `plans/FRONTIER-STUBS.md` — re-aims and the re-rank (proposals; M1's close re-ranks the same table, so placements are relative)
+
+- **FS-76** (rank 8): append the FS-76 line of R4.G; its bearing unchanged. **Placement:** unchanged.
+- **FS-64** (rank 11): append the FS-64 line of R4.G, and in its bearing column: "the finite-place half at five over ℚ(√167) is now a
+  theorem off 43; the live part is the nine places". **Placement:** unchanged.
+- **FS-59** (rank 1): append "**At M3's close:** window five-colourings over finitely many places of ℚ(√167) reduced to nine places (row
+  next+2); a five-colouring of the plane no window gives is untouched." **Placement:** unchanged.
+- **FS-49** (rank 27): append "**At M3's close:** its measurable analogue is posed in print — Mixon's 2018 criterion (Polymath16 fourth
+  thread): a five-colour forced `{1,2}`-vertex at an irrational angle proves `χ_µ(ℝ²) ≥ 6`; windows over finitely many places of ℚ(√167)
+  cannot supply it from thick places (row next+2)." **Placement:** unchanged.
+- **FS-69** (rank 30): append the FS-69 line of R4.G; bearing: "also the last gap in M3's finite-place window count". **Placement:**
+  one step up, beside FS-57 and FS-65 (it now has two consumers), still "idle compute" — the relaxation is banned until 2026-10-01.
+- **New: FS-(new) rank-one walls** — just below FS-76. **New: FS-(new) windows at the non-mixing places** — just below FS-64.
+
+#### R4.S Stub banners (text for the front-page job to put at the top of each stub)
+
+- `plans/STUB-four-colour-inheritance.md` (FS-76): "> **At M3's close (2026-09-25):** rank one (R2) is equivalent to *a countable
+  four-colouring shift of a distance graph is finite* and to a statement about single heteroclinic colourings (J18-DC); open at one step
+  reached by three minds; frozen walls are invisible to Kempe arguments. `plans/M3-derivation.md` §1–§4; `LEDGER.md` row next; follow-on
+  `plans/STUB-rank-one-walls.md`."
+- `plans/STUB-adelic-window-colouring.md` (FS-64): "> **At M3's close (2026-09-25):** at five colours over ℚ(√167) no window reads a finite
+  set of places with no real place and none above 43; thick places are invisible, so every window question reduces to `S_red ⊆ {∞, 2, 3, 5,
+  7, 23, 29, 43, 61}`; with a real place and only thick finite places it is `χ_B(ℝ²) ≤ 5`. `plans/M3-derivation.md` §5–§6; `LEDGER.md` rows
+  next+1, next+2; follow-on `plans/STUB-windows-five-nonmixing.md`."
+- `plans/STUB-four-colours-167.md` (FS-59): "> **At M3's close (2026-09-25):** FS-64's window format at five is reduced to nine places
+  (row next+2); a window falsifier of '≥ 6' must read a place above 43 or one of 2, 3, 5, 7, 23, 29, 61 with a real place."
+- `plans/STUB-distance-two-gadget.md` (FS-49): the FS-49 line of R4.F.
+- `plans/STUB-certificate-at-43.md` (FS-69): "> **At M3's close (2026-09-25):** `B₁(43) < 369.8` would also close ℚ(√167)'s finite-place
+  window count at five (D1-43, `plans/M3-derivation.md` M3-J21-D1-43p, M3-J22-T10: Hoffman alone reads `0.2138`, the fibre-share maximum is
+  strictly below)."
+
+#### R4.Bib `BIBLIOGRAPHY.md` — rows proposed
+
+- **`[Zhu2021]`** — X. Zhu, *Relatively small counterexamples to Hedetniemi's conjecture*, J. Combin. Theory Ser. B 146 (2021) 141–150;
+  doi 10.1016/j.jctb.2020.09.005; arXiv:2004.09028; Zbl 1457.05095 | M3's J21-NG2 (the ratio-only counterexample at 125 colours) |
+  `pdf/arXiv-2004.09028-zhu-relatively-small-counterexamples-hedetniemi.pdf` (fetched 2026-09-25 by J23c) | read: §3 Theorem 3's statement
+  and construction, §4's remarks on `p` (Exoo's 83-vertex graph, `α = 27`, personal communication); the proof not read.
+- **`[AlonDinurFriedgutSudakov2004]`** — N. Alon, I. Dinur, E. Friedgut, B. Sudakov, *Graph products, Fourier analysis and spectral
+  techniques*, Geom. Funct. Anal. 14 (2004) 913–940; Zbl 1056.05104 | the discipline's form of M3's cylinder lemma (maximum and
+  near-maximum independent sets of weak products), a neighbour of the mixing selection | not held | **listing**: zbMATH review read only.
+- **Tardif–Wrochna 2019** (*Hedetniemi's conjecture and strongly multiplicative graphs*, Zbl 1427.05090) and **Godsil–Roberson–Rooney 2020**
+  (*Vector coloring the categorical product of graphs*, Zbl 1442.05056) | neighbours of the mixing selection | not held | listing (zbMATH
+  reviews withheld).
+- **`[Polymath16]`**: add to its contents the fourth thread's MCNP ≥ 6 criterion (Mixon, 5 May 2018; M3 plan §PA.1 row 4).
+- **`[AmbrusEtAl2023]` / `[AmbrusEtAl2024]`** (inventory row 56): the two keys name one paper (arXiv:2207.14179) with different read
+  statuses; merge them under one key and keep the fuller read status (`[AmbrusEtAl2023]`: held; §2, §5 read).
+
+#### R4.M The byte measure of R4.G, and the new stubs
+
+The `CLAUDE.md` draft is measured by `data/m3/j23c/measure_claude_draft.py` (the bytes between the two markers, less the markers and the
+italic placement notes): its output at the save: "block 3959 bytes; placement notes 221; net 3738; budget 4000; OK" (the plant `--plant` reports OVER, exit 1). The two new stub files are `plans/STUB-rank-one-walls.md` and
+`plans/STUB-windows-five-nonmixing.md`.
