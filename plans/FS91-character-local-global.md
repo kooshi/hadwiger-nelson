@@ -125,3 +125,192 @@ prime), J10/J11/J13 their blind verifiers; S0 = the stage-0 jobs J01 (PA-B2/B3),
 - G74 — bears: the layer method and its `5^{−k}` gluing; its reading tested again at bands 1/6–1/9 by J01 → S0; falsifiable: registered as P-G74
 - G75 — silent: triangles in four-colour rigidity
 - G76 — bears: the frame — closed-set rigidity with the real place rotated; count primes first; one prime is not enough → J07, J12
+
+## Stage 2 — SAVED (§G.2 the rows, §G.3 the method rules, §G.4 what changed)
+
+### G.2 The ledger rows (`LEDGER.md` § A, rows 1–97 by mechanism, fresh from disk)
+
+- R1 — silent: two-circle three-colourability
+- R2 — silent: seam identity
+- R3 — silent: coverage monotonicity
+- R4 — silent: fan ⟺ coverage
+- R5 — silent: class-only graphs
+- R6 — silent: 120° triangle identity
+- R7 — silent: greedy colouring
+- R8 — silent: de Grey balanced five-colouring
+- R9 — silent: 120° compulsion
+- R10 — silent: one-pivot cap
+- R11 — silent: strip automaton
+- R12 — silent: extension profile
+- R13 — silent: negative knowledge of M17–M19
+- R14 — silent: pair-gluing classification
+- R15 — silent: extension pressure
+- R16 — silent: coupled automaton
+- R17 — silent: circle intersections
+- R18 — silent: near-relation
+- R19 — silent: kill mechanism
+- R20 — silent: pivot-triangle layer
+- R21 — silent: registered statistics
+- R22 — silent: ladder pair four-chromatic
+- R23 — silent: four-ladder object
+- R24 — silent: hexagram
+- R25 — silent: field-wall identity
+- R26 — silent: de Grey anatomy
+- R27 — silent: quadrature law censuses
+- R28 — silent: 2-adic kill engine
+- R29 — silent: stacking law
+- R30 — silent: mechanism hunt
+- R31 — silent: Act One carriers
+- R32 — silent: six-programme hosts
+- R33 — silent: the plane's interval (ℝ², not number-field characters)
+- R34 — silent: coset chromatic number of the triangular lattice
+- R35 — silent: coarse cells
+- R36 — silent: scale non-monotone
+- R37 — silent: gap atlas
+- R38 — silent: gradient hunt
+- R39 — silent: gap atlas kernel side
+- R40 — silent: fine tail
+- R41 — silent: limit lemma
+- R42 — silent: arity floor
+- R43 — silent: six-target
+- R44 — silent: spindle theorem
+- R45 — silent: batch descent, spare colour
+- R46 — silent: copy unions
+- R47 — silent: M53's witnesses
+- R48 — silent: critical sets
+- R49 — silent: absorption
+- R50 — bears: `[Fischer1990]` Ex. 4 — no additive `k`-colouring with `k < 11` over ℚ(√167); every torsion band character is additive, so a free control → J08
+- R51 — silent: additive rigidity
+- R52 — bears: the finite-plane bound and its residue-degree condition define the targets the theorem may return → J07
+- R53 — bears: the sieve's instances — K(√7)'s usable primes 83 and ≥ 103, de Grey's field 131 and 479 → J08
+- R54 — silent: lifts
+- R55 — silent: residue obstruction, subsumed
+- R56 — bears: `addCayleyMap` and the periodic quotient — a torsion band character is a periodic colouring through a quotient; the kernel consumer if ever ported → J07
+- R57 — bears: Theorem A's colouring and its named gap (a number field's stable prime supplies the valuation subring, not proved) — the pullback direction sits at that grade → J07
+- R58 — silent: Moser recipe threshold
+- R59 — silent: 2-adic law of compulsions
+- R60 — silent: plane freedom
+- R61 — silent: statement generality
+- R62 — silent: overcompression
+- R63 — bears: a ramified dyadic place two-colours the plane; the theorem's dyadic case uses it → J07
+- R64 — silent: the ρ₆₃ arena
+- R65 — silent: dropping Parts's shape
+- R66 — silent: fan-gap transport; consequences of gapped character colourings not asked
+- R67 — bears: the dyadic tower `P_m`, tight at four colours; the dyadic level bound a band character obeys → J07
+- R68 — bears: six refused at 83 by certificate — K(√7)'s first target refuses every band six-character → J08
+- R69 — bears: ceilings 8, 7, 8, 8, 10 at 23, 27, 31, 43, 47 by verified periodic colourings — the known positives for J08's enumeration → J08
+- R70 — bears: `U_Q` four-colourable for `Q ≤ 32`, `U₆₄` floor six; the dyadic trichotomy → J07 (dyadic case)
+- R71 — bears: five refused at 23, so a six-character there pins χ(Γ₂₃) = 6 → J08
+- R72 — bears: the 3-adic barrier (FS-82's side) → S0
+- R73 — bears: ℚ(√47)'s bracket; row 96's C-47 must fall out of the class theorem → J07 (control)
+- R74 — silent: census of finite witnesses
+- R75 — bears: `α(Γ₂₃) ≤ 97` (ratio 0.183, no ratio refusal at six); Lemma W warns that level collapse is not a ratio fact → J07, J08
+- R76 — silent: FS-70's lattices
+- R77 — bears: file every theorem in the derivation file and § B → close
+- R78 — silent: de Grey's lattice `F = P`
+- R79 — bears: the three-colour criterion (at three colours characters are everything) and χ(ℚ(√167)²) ≥ 4 → S0, J07 (scope)
+- R80 — bears: from four colours up no height — every M1 statement is character-only → J07, J08 (scope lines)
+- R81 — bears: `L21cc6506` carries lattice band four-characters (a full-dimensional cell) while the field's `Θ₄` is empty — statements must be field-level → J07
+- R82 — bears: the field-level slope and FS81-T7's residual case → S0; the `k = 3` form of the theorem → J07
+- R83 — silent: census certificates
+- R84 — silent: ℚ(√47)'s survivors
+- R85 — silent: de Grey's lattice derived
+- R86 — silent: triangle-free rigidity
+- R87 — silent: second moments on `Λ`
+- R88 — bears: Lemma R (scope: fails at a ramified dyadic place, CL2) and Lemma P (ramified odd towers) — named hypotheses of J07's statement → J07
+- R89 — bears: K's four-colourings are local at one dyadic place per coset, `[Fischer1994]`'s at level 3 — the theorem must allow either place → J07 (control)
+- R90 — silent: the rigid local plane
+- R91 — bears: HD1-fin and dB-Sv — a band character's split part vanishes, so only stable places carry torsion → J07
+- R92 — bears: the window count fails at five colours at the real place (`m₁ ≥ 0.229`); characters escape by archimedean averaging — the sumset peeling is the character analogue → J07
+- R93 — silent: dyadic tower tightness
+- R94 — bears: C9 — ℚ(√11)'s non-periodic band four-character, Γ₇ plus an archimedean term; the theorem must return Γ₇ → J07 (control)
+- R95 — bears: the input — RQ₄, RQ₅, the gluing, `T₁₆₈` at four → J07
+- R96 — bears: the three per-field corollaries the class theorem must reproduce → J07 (control)
+- R97 — bears: one prime — U3, `MS₄({5})`, U5 → J12
+
+### G.3 The method rules (`CLAUDE.md` § Grokkings [method] entries are G.1's G21, G30, G46, G49, G50, G67, G72; below, every other rule)
+
+- M-deleg (§ Delegation) — bears: the no-children rule, with its reason, in every brief → J07, J08, J10–J13
+- M-evid-1 (standard of evidence: no native evaluation) — silent: no kernel purchase
+- M-evid-2 (certificate plus checker, never the search) — bears: J08's refusals ship as a derivation plus a tiny exact checker → J08
+- M-evid-3 (re-derivable witness) — bears: any band character found is given by a formula (`c`, `q`, `k`) → J08
+- M-evid-4 (read the statement aloud) — bears: every headline read against "characters only, never χ" → J07, J08
+- M-evid-5 (report the hunt) — bears: a null at 23 and 43 is a result → J08
+- M-evid-6 (write the reviewer's certificate early) — bears: ask what a distrustful reader must check (the reduction `c ↦ V_c`) while deriving → J08
+- M-evid-7 (order a verification by marginal value) — bears: verifiers take the load-bearing lemma first → J10, J11
+- M-compute (what compute helps; a GPU is not a SAT accelerator) — silent
+- M-price (kernel leaves priced after an obligation pass) — silent: no Lean this milestone
+- M-shape (the proof's shape: reduction plus two computations) — silent
+- M-tools (nothing in `tools/` is trusted) — bears: the enumeration tool checks a derived reduction; the derivation carries the claim → J08, J12
+- M-trust (trust ledger, `native_decide`) — silent
+- M-l4c (`lean4checker` a publication gate) — silent
+- M-tc (toolchain, dev env) — silent
+- M-sat (cadical, portfolio) — silent: banned
+- M-inst (installed tools: PARI, GAP, sympy) — bears: exact arithmetic of seconds is in → J08, J12
+- M-pysat (per-back-end interrupt) — silent
+- M-venv (venvs outside `build/`) — silent
+- M-sym (break symmetry before any SAT) — silent: no SAT
+- M-ban (no finite-witness search to 2026-10-01; the would-have-searched log) — bears: every job's log; J08's and J12's enumerations logged as "at the edge" → all
+- M-py (Python 3.14 forkserver) — silent: seconds-long tools
+- M-mach (two machines; CPU seconds, minimum of three) — silent
+- M-pred (predicted beside measured throughput) — silent
+- M-build (`scripts/build.sh` only) — silent: no Lean
+- M-lakeenv (`lake env lean` is not the gate) — silent
+- M-batch (the batch is the plan; halt on any unexplained crash) — bears: the halt rule → all (standing rule 8)
+- M-ram (RAM is the discriminator; `scripts/slot.py`) — bears: tools under 2 GiB and 2 minutes run without a slot → J08, J12
+- M-ckpt (PROTECTED: checkpoint and resume) — bears: stages saved and committed → all
+- M-kill (PROTECTED: a blocking run is presumed killable) — silent: no long runs
+- M-pid (kill by pid, verify by effect) — silent
+- M-pipe (a pipe can kill the producer; read a gate's exit status from the gate) — bears: tools' pass/fail read from their exit status → J08, J12
+- M-edit (never edit a running script) — silent
+- M-gen (generated modules and invalidation) — silent
+- M-kcost (the kernel's cost model) — silent
+- M-grep (ugrep alternation, `rg -uu`, a failed `exact?`) — silent: the planner's greps are single literals
+- M-vac (vacuity; every structure hypothesis ships an inhabitant) — bears: J07's theorem ships inhabitants (Fischer on K, C9 on ℚ(√11), `θ₂`) → J07
+- M-gatelog (gates keep what they computed) — silent
+- M-eval (an `#eval` per definition) — silent
+- M-neg (make the gate fail and watch it fail) — bears: every tool plants a fault → J08, J12
+- M-absent (a positive signal for the thing that did not happen) — bears: the enumeration writes its result file on a null too → J08, J12
+- M-waiter (a waiter's condition false at arming) — silent
+- M-reach (state the uninformative outcome and confirm it reachable) — bears: every §P prediction names both outcomes, each reachable → §P
+- M-predecide (settle the response to a red gate before it is yours) — bears: verifiers' fixed lists written now → J10, J11, J13
+- M-swap (a sharp instrument loses coverage) — silent
+- M-units (a number travels with what it measures) — bears: "no band six-character" is not "not six-colourable" → J08
+- M-onething (two numbers differ in one thing) — bears: compare 23 at bands 1/6, 1/7, 1/8 with only `k` varying → J08
+- M-both (both outcomes reachable; mis-specification evidence predates the result) — bears → §P
+- M-wrongred (a red control needs a named wrong-reason red; plant beside a faithful stub) — bears → J08, J12 tools
+- M-halves (a measured half and a derived half fail oppositely) — bears: J08's refusals come from a derived law (`V_c`), so check the law against a direct circle enumeration at one `q` → J08
+- M-shipped (a check reads the shipped value) — bears: the band endpoints read from one definition → J08
+- M-format (formatting is part of the check) — silent
+- M-twoside (two-sided plant bounds) — silent
+- M-replay (replay policies) — silent
+- M-failcost (cost from a failing run) — silent
+- M-caveat (a caveat written and stepped over) — bears: J07's summary re-read against its scope line → J07
+- M-params (count the generator's free parameters) — bears: characters of `𝔽_{q²}` are 2-parameter, rotation leaves one (`N(a)`); the count justifies `q − 1` classes → J08
+- M-second (a true explanation stops the search for a second) — bears: a target refusing six still needs its level collapse checked → J07, J08
+- M-restore (a mutation harness verifies its restore) — silent
+- M-const (mutate the constant) — bears: plant a mutated band constant → J08
+- M-archive (archived checkers binding by name) — silent
+- M-param1st (enumerate the parameter first) — bears: enumerate `c ∈ 𝔽_q^×`, never colourings met by chance → J08
+- M-shape1 (a positive control proves only shapes the generator represents) — bears: the eight-colour control at 23 lies in the generator's image → J08
+- M-onesided (a one-sided filter's inapplicability) — silent
+- M-scars (plant faults routinely) — bears: covered by M-neg → J08, J12
+
+### G.4 What the re-grokking changed in the plan
+
+1. **Route added (primary): the direct sumset — "peeling" — route to question 1**, from G43's integrality-gap sentence, R92's window count at
+   the real place and S0A-7's archimedean averaging read together: the archimedean circles are summands whose value sets contain 0, the
+   torsion part splits over stable places (G55, R88), and an interval centred at ½ has the property that a sum of symmetric sets inside it
+   keeps a summand inside it (§IQ). PA-T4 with `[Zhu2011]` (unread, G50) is kept as the alternative, not the route.
+2. **Controls added to J07**, each with a known answer: `[Fischer1994]` on K (dyadic, level 3; G41, R89), C9 on ℚ(√11) (Γ₇ plus an
+   archimedean term; R94), `θ₂` on a wall-standing field (G1, R63), and the reproduction of row 96's HD1, C-47, C-167 (R96).
+3. **J08 made a derivation plus a fixed finite list**: the free screens first (six refused at 59, 67, 79, 83 by certificate and from 71 by
+   spectrum at level one: G54, R68, R69), then the level-one reduction at 23 and 43 with `q − 1` classes, a known positive (the
+   eight-colour ceilings, R69) and a free control (R50). Band 1/7 added beside 1/6 (the same enumeration; M-onething), and the sharp
+   quantity named: the character chromatic number `χ_char` of each target and of ℚ(√167)'s plane.
+4. **Level collapse at band `1/k` stated as a sub-claim with its arithmetic** (a sweep of step `1/p` meets `(−1/k, 1/k)` iff `p > k/2`),
+   never assumed from a ratio (R75's Lemma W; G66); the theorem's conclusion is "a target at some level", level one where the collapse is
+   proved.
+5. **Lemma R's scope named as a hypothesis** (R88, CL2), with the ramified-dyadic case split off (L = 2; R63).
+6. **Nothing removed.** J12 stays as stubbed, its torsion-order list fixed by a derivation first (U5, R97). FS-83's `k ≥ 6` remainder is J08
+   plus J01.
