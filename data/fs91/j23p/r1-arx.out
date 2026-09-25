@@ -1,0 +1,22 @@
+Q: ti:"non-hyperbolic" AND ti:"toral automorphisms"
+  hits: 1
+  1101.0321v3 | 2011 | Rigidity of Commutative Non-hyperbolic Actions by Toral Automorphisms
+Q: abs:"non-hyperbolic" AND abs:"toral automorphisms" AND abs:Berend
+  hits: 0
+Q: abs:Furstenberg AND abs:solenoid AND abs:invariant
+  hits: 0
+Q: abs:"S-adic" AND abs:Furstenberg AND abs:"orbit closure"
+  hits: 0
+Q: abs:Berend AND abs:"invariant sets" AND abs:"compact abelian"
+  hits: 0
+Q: abs:"times 2 times 3" AND abs:"orbit closures"
+  hits: 1
+  2009.00441v2 | 2020 | Times two, three, five orbits on $\mathbb{T}^2$
+Q: abs:Furstenberg AND abs:"Gaussian integers" AND abs:"orbit"
+  hits: 0
+Q: abs:"multiplicatively independent" AND abs:"orbit closures" AND abs:"torus"
+  hits: 0
+Q: abs:"isometric" AND abs:"Furstenberg" AND abs:"toral"
+  hits: 0
+Q: abs:"ID property" AND abs:"tori"
+  hits: 0
