@@ -186,3 +186,154 @@ non-character colourings or `χ(ℚ(√47)²)`.
 
 **C0 against B1 (not yet scored; the owner scores after B3):** the implications came out TRUE as predicted. The three substantive
 claims came out GAP at one step, which is what C0 expected of my route, not a verdict on their truth.
+
+## B2 — the lemma statements (opened after commit de933eb4)
+
+`data/fs89/briefs/S1-VB-lemma-statements.md` read in full after the B1 verdicts were committed. Each lemma below is derived or refuted
+from its statement; proofs are mine. **One disclosure first:** D1-L3's statement is what closed my B1 stall. My B1 route based its
+differences at a point of `M`, whose returns under the rotating subgroup it could not control. Furstenberg's original lemma bases the
+difference set at `0`, which every automorphism fixes, and so needs no recurrence at all. I did not see this until I read the
+statement. The proof below is mine; the idea of looking at `M − M` is not.
+
+### D1-L2 (case 2 ⟹ a point of `T + A`) — **TRUE** [hand]
+Quoted: "If `M ≠ ∅` is in case 2, then `M ∩ (T + A) ≠ ∅`. If `M` is minimal, then `M ⊆ T + A`, and `M` is a finite union of sets
+`τ + {λ_d : |d| = r}` (one `r`, possibly `0`)."
+- The agent's case 2 (small differences have `S`-adic part 0) implies my case (A) (small differences lie in `A`).
+- A minimal `M₀ ⊆ M` inherits case 2 (`M₀ − M₀ ⊆ M − M`), so VB5 gives `M₀ ⊆ T + A`.
+- The minimal form is VB5 plus Lemma L.
+
+### D1-L3 (case 1 ⟹ `M − M = G`, when `|S| ≥ 2`) — **TRUE** [hand; the agent's named weakest link, derived with most care]
+Quoted: "If `M` is closed, invariant and in case 1, and `|S| ≥ 2`, then `M − M = G`."
+
+*Proof.* Put `D := M − M`. It is compact, contains 0, and is `U_S`-invariant, since `u(x − y) = ux − uy` for the automorphism `u`.
+1. **A pure local element.** Case 1 gives `z_k ∈ D`, `z_k → 0`, with chart representatives `(a_k; b_k) → 0` and `b_k ≠ 0`.
+   - Fix a place `v | p` with `b_{k,v} ≠ 0` along a subsequence.
+   - Apply Lemma E to `D`, with `x_k = 0` and `y_k = z_k`. This is legitimate because `h·0 = 0`. It gives `c̄ ∈ D`, with `c ∈ K_v^×`
+     pure `v`-adic.
+   - Continuity of `ℂ × ∏K_v → G` carries the limit through, whatever the charts.
+2. **Its orbit.** `u·c̄ = (u_v c)‾ ∈ D`, and `D` is closed, so `(tc)‾ ∈ D` for every `t` in the closure of the image of `U_S` in
+   `K_v^×`.
+   - Take `p′ ∈ S ∖ {p}`, which is where `|S| ≥ 2` is used. The closure of `⟨w_{p′}⟩` in `O_v^×` is an infinite closed subgroup, so
+     it contains some `1 + p^jℤ_p`.
+   - `w_p` has `|w_p|_v = p^{±1}`.
+   - So `D ⊇ (w_p^k c + w_p^k c p^j O_v)‾ = (w_p^k c)‾ + Γ_k` for every `k`, where `Γ_k` is the image of the ball
+     `B_k := w_p^k c p^j O_v`.
+   - No base point's recurrence is needed, because `c̄` has archimedean part 0.
+3. **`Γ_k` exhausts a dense subgroup.** As `k → ±∞` (the sign that grows `B_k`), `B_k ↑ K_v`.
+   - The image of `K_v` is dense in `G`. Its annihilator in `Ĝ = R_S` is `{r : ψ_v(K_v r) = 0} = {0}`.
+   - The `Γ_k` are increasing compact subgroups whose union is dense. By compactness each `Γ_k` is `ε_k`-dense, with `ε_k → 0`.
+4. **Conclusion.** So `D` contains an `ε`-dense translate for every `ε`. `D` is closed, so `D = G`. ∎
+- **Sanity:** with `|S| = 1` step 2 yields only the discrete multipliers `i^a w_p^k`, and the lemma fails, as it must (S0B: `Θ₄(R₅)`
+  has case-1 orbit closures).
+- **Stronger than stated:** the closure of the orbit of any non-zero pure local element is `G`.
+
+### D1-L4 (the parity line) — **TRUE** [hand, two lines]
+Quoted: "If `M ⊆ Θ₄(R_S)` and `θ₂ ∈ M − M`, then `M` contains a **corner**: a character `x` with `2x = θ₂`, i.e. `x = ⟨e, ·⟩` with
+`e ∈ (1+i)/4 + ½ℤ[i]`. There are four corners; they form one `U_S`-orbit of order-4 torsion characters, of margin 0."
+- Take `x − y = θ₂` with `x, y ∈ M ⊆ Θ₄`. Since `θ₂(u) = 1/2` for every `u ∈ U_S` (each `u ≡ 1 mod 1 + i`), `y(u)` and `y(u) + 1/2`
+  both lie in `[1/4, 3/4]`. So `y(u) ∈ {1/4, 3/4}`, hence `2y = θ₂` on `U_S`, and so on its additive span `R_S`.
+- `{y : 2y = θ₂}` is a coset of `G[2] ≅ Hom(ℤ[i]/2, ℤ/2)`, which has four elements: the `e` stated. They lie in `Θ₄` (values in
+  `{1/4, 3/4}`, margin 0). `i` alone cycles them (`(1+i)/4 → (3+i)/4 → (3+3i)/4 → (1+3i)/4`).
+
+### D1-L5 — **TRUE** [hand + tools exact]
+Quoted: "… Suppose a band array has `|e_{m,n} − c_{m,n}| < 0.13` at `(m, n)` and at `(m+1, n)`. Then `e_{m,n} = c_{m,n}` and
+`e_{m+1,n} = c_{m+1,n}`."
+- The corner array is `(−1)^m c₀`: `w₅ ≡ −1` and `w₁₃ ≡ 1 mod 4`, and a corner is read mod 4. Checked: it satisfies both step rules in
+  both directions.
+- Put `δ = e − c`. Then `δ′ − w̄₅δ ∈ π₅^{−1}ℤ[i]`, with norm `< 0.26`, and `0.26² < 1/5` (the least non-zero squared norm there), so
+  `δ′ = w̄₅δ`.
+- `δ` lies in the closed quadrant of `Q − c` at its corner, and `δ′` in the opposite quadrant (the corner flips). Rotation by `w̄₅`
+  (−53.13°) cannot carry a quadrant into its opposite, so `δ = 0`.
+- Exact check (`tools/fs89_s1vb_corner_check.py`): the norm bound, and the cone intersection for all 4 corners × both parities × both
+  directions. 0 meetings.
+
+### D1-L6 — **TRUE** [hand + tools exact]
+Quoted: "Suppose a band array equals the corner pattern at `(m, n)` and `(m, n+1)`. Then it equals the pattern at `(m ± 1, n)` and
+`(m ± 1, n+1)`. Suppose it equals the pattern at `(m, n)`, `(m+1, n)` and `(m+2, n)`. Then it equals the pattern at `(m, n ± 1)`,
+`(m+1, n ± 1)` and `(m+2, n ± 1)`."
+- **By hand (first half, one corner).** From an exact site, a neighbour's deviation lies in the step lattice.
+  - Near `(3/4, 3/4)` the 5-lattice offers `{0, (−1−2i)/5}`.
+  - The 13-step between the two rows multiplies the `π₅`-class by `w̄₁₃ ≡ 3 (mod π₅)`, so a non-zero class cannot repeat. The only
+    survivor is `δ = 0`.
+- **By hand (second half).** Near `(1/4, 1/4)` the 13-lattice offers the classes `{0, 2, 4, 5}` (the coordinate `x` of
+  `(x + yi)/13`, `y ≡ 8x`). Near `(3/4, 3/4)` it offers their negatives.
+  - Along the row, `w̄₅ ≡ 7 (mod π₁₃)`.
+  - `x₀ = 5` survives two sites (`7·5 ≡ 9 = −4`) and dies at the third (`10·5 ≡ 11`).
+  - So length 3 is needed and suffices.
+- **Exact check:** the survivors, over the finite lattice candidates, for all 4 corners, both parities and all 8 neighbour directions
+  (48 cases): 0 non-zero chains.
+- **Plant "short-row"** (a row segment of 2): exactly one survivor chain per case, the `x₀ = 5` chain predicted by hand.
+
+### D1-C1 — **TRUE** [hand + tools exact, from D1-L5 and D1-L6]
+Quoted: "A band array that equals a corner pattern on a `3 × 2` box is that corner. Hence every `θ ∈ Θ₄(R₆₅)` within `0.13` of a corner on
+the window `|m| ≤ 2, |n| ≤ 1` is that corner."
+- D1-L6's first move takes a vertical domino to whole rows, and its second takes rows to rows. A single vertical domino already
+  suffices, which is stronger than the `3 × 2` box stated. The exact check confirms that the moves close up a `7 × 7` box from one
+  domino. The array determines the character (V5), so the first sentence holds.
+- The second sentence: D1-L5 applies to every horizontal pair of the window, so the window is exact, and the first sentence applies.
+- (The window values are continuous in `θ`: `e_m = θ(w^m) + iθ(iw^m)`.)
+
+### D2-L1 (bounded-order layering) — **TRUE** [hand]
+Quoted: "Let `R ⊆ Q` be a subring with `U_R := U_ℚ ∩ R` and `ℤ[U_R] = R`. Suppose `R` is `p`-divisible for some prime `p` (so `λ_c`
+vanishes on a nonzero ideal of `R` only if `c = 0`). Suppose also that `Θ_β(R) ⊆ T_N + A` for some `N`. Then `Θ_β(Q) ⊆ T_N + A`."
+- This is VB4 / S0A's G1 with base `R`.
+- One check: the layers `u·R`, `u ∈ U_ℚ`, carry band characters of `R` because `uU_R ⊆ U_ℚ`.
+- `R₆₅` qualifies: `U_ℚ ∩ R₆₅ = U₆₅` by Hilbert 90.
+
+### D5-L1 — **TRUE** [hand]
+Quoted: "Let `M ⊆ Θ₅(R_S)` be closed, with `5 ∈ S`, and suppose `θ₂ ∈ M − M`. Then `M` meets `𝒞 := ⋃_{x₀ corner} (x₀ + {λ_d : |d| ≤
+1/20})`, the four **corner leaf discs**. At band 1/5 the corners have margin 1/20."
+- `y, y + θ₂ ∈ Θ₅` puts `y(U_S)` within `1/20` of `{1/4, 3/4}`, so `φ := 2y − θ₂` has `φ(U_S) ⊆ [−1/10, 1/10]`.
+- **Narrow-band rigidity** (mine, for `5 ∈ S`):
+  - In the array of `φ`, lifted into `[−1/10, 1/10]²`, a 5-step changes the value by a vector of norm `≤ 0.283 < 1/√5`, so it is exact:
+    `e_{m+ε₅} = w̄₅e_m`.
+  - For any other prime `p_j`, the 5-rows then force `w̄₅^m ℓ ∈ π_j^{−1}ℤ[i]` for all `m`, where `ℓ` is the `p_j`-step defect. So
+    `ℓ = 0` (a pole at `π₅` otherwise).
+  - So `φ = λ_{e₀}` with `|e₀| ≤ 1/10`, and `y = x₀ + λ_{e₀/2}` for a corner `x₀`, since `{y : 2y = θ₂ + λ_{e₀}}` is a coset of `G[2]`.
+- Margin: `1/4 − 1/5 = 1/20`.
+
+### D5-L2 — **TRUE** [hand]
+Quoted: "Let `y = x₀ + λ_d` with `|d| ≤ 1/20`. Suppose an array is within 0.13 of `y`'s array on a connected window. Then it equals the
+leaf array of `x₀ + λ_{d′}` there, for some `d′`."
+- Every step changes the deviation by a lattice vector of norm `< 0.26`, which is below both `1/√5` and `1/√13 = 0.277`. So the
+  deviation follows the leaf rule exactly, `δ_{next} = w̄_j δ`, along any path. `d′` is well defined on a connected window.
+- The hypothesis `|d| ≤ 1/20` is not used; the lemma holds for any leaf at any band.
+
+### D5-L3 — **TRUE** [hand + tools exact]
+Quoted: "Suppose an array equals a corner-leaf array `c_{m,n} + w̄^{(m,n)}d′`, with `|d′| ≤ 0.06`, on a column segment of height 3. Then
+it equals it on the two neighbouring columns at those rows. On a row segment of length 4 it equals it on the neighbouring rows."
+- The continuous parameter `d′` is handled soundly: candidate deviations at a neighbour site are the lattice points of `(Q₅ − c)`
+  enlarged by `0.06` in each coordinate. This is a superset, valid for every `|d′| ≤ 0.06`.
+- The consecutive sites along the segment satisfy the other prime's step rule on the deviation. Survivors over all 48 cases: 0.
+- **The lengths are tight for this over-approximation.** Plants "short-col" (height 2) and "short-row5" (length 3) give 32 and 16
+  survivor chains. Plant "wide-leaf" (`|d′| ≤ 0.2`) gives 320.
+
+**Plants.** "lattice" (the forward 5-step lattice replaced by `π̄₅^{−1}ℤ[i]`) fires first where it should: the corner array fails the step
+rule. "cone" (the next site's quadrant taken equal to this one's) makes D1-L5 report 16 meetings. Output: `data/fs89/s1vb/corner-check.txt`;
+0.1 s.
+
+### The assembly: do the lemmas, as stated, give the seven claims?
+
+| claim | derivation from the lemmas (as stated) | verdict |
+|---|---|---|
+| 1. D1-T1 | minimal `M`: case 2 ⟹ D1-L2 ⟹ `T + A`, one of the two kinds. Case 1 ⟹ D1-L3 ⟹ `θ₂ ∈ M − M = G` ⟹ D1-L4 ⟹ `M` holds a corner ⟹ `M` is its finite orbit ⟹ `0` isolated in `M − M`, contradicting case 1. Every `|S| ≥ 2`; no finite lemma needed | **TRUE** |
+| 2. D1-T2 | `M` = orbit closure of `θ`. Case 2: some `gθ` is near `x ∈ M ∩ (T + A)` (D1-L2) with difference of `S`-adic part 0, so `θ ∈ T + A` (one line the statements leave implicit). Case 1: `M` holds a corner (D1-L3, L4), so some `gθ` is within 0.13 on the window, so `gθ` is the corner (D1-C1). **Alternative, finite-lemma-free:** VB1 | **TRUE** |
+| 3. D1-C2 | not derivable from the listed lemma statements alone; VB3 gives it from D1-T2 (non-effective expansion). The derivation agent's own route is for B3 | **TRUE** |
+| 4. D2-T1 | D2-L1 with `R = R₆₅`, `N` = lcm of the finitely many orders (D1-T2 + D1-C2) | **TRUE** |
+| 5. D5-T1 | as claim 2 with D5-L1 (case 1 ⟹ `M` meets a corner leaf disc), then D5-L2 and D5-L3 to propagate the leaf over the whole array. Alternative: VB2's minimal-set form with D5-L1 (a minimal case-1 set would contain a `T + A` point, hence lie in `T + A`, hence be case 2), then VB1 | **TRUE** |
+| 6. D5-C2 | VB3 at `k = 5` | **TRUE** |
+| 7. D5-T2 | D2-L1 at band 1/5 | **TRUE** |
+
+**Consequence worth stating (derived here, not claimed by the agent's headlines):** the argument proves `MS₄(S)` and `RS₄(S)` for
+**every** `S` with `|S| ≥ 2`, and `RS₅(S)` for every `S ∋ 5` with `|S| ≥ 2`, with no finite computation at all:
+- D1-T1 comes from D1-L2, L3 and L4.
+- RS then comes from VB1, which needs no isolation lemma.
+
+The finite lemmas at `{5, 13}` (D1-L5, L6, C1; D5-L2, L3) are needed only for the agent's isolation route, which VB1 replaces.
+
+**B1 against B2.** B1 returned GAP on claims 1, 2, 5 (and on the standalone halves of 3, 6, and on 4′, 7′) at the step "a minimal
+set with a `p`-adic odometer factor". That step does not arise: D1-L3 shows a case-1 set has `M − M = G`, and at both bands `θ₂ ∈ M − M`
+forces a torsion (or `T + A`) point into `M`. **All seven claims: TRUE.** The B1 verdicts were my route's, not the claims'.
+
+**Hardest step, after B2:** D1-L3's step 2 to 3, the passage from one pure local element to density. It is short once the difference set
+is based at `0`, and the whole milestone rests on it.

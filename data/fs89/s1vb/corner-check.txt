@@ -1,0 +1,52 @@
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 0
+ALL CHECKS PASS (plant=None)
+=== plant lattice
+corner array FAILS the step rules: ('5+', (Fraction(1, 4), Fraction(1, 4)), -3)
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 0
+SOME CHECK FAILED (plant=lattice)
+=== plant cone
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 16 [((Fraction(1, 4), Fraction(1, 4)), 0, '5+'), ((Fraction(1, 4), Fraction(1, 4)), 0, '5-'), ((Fraction(1, 4), Fraction(1, 4)), 1, '5+'), ((Fractio
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 0
+SOME CHECK FAILED (plant=cone)
+=== plant short-row
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 16
+    [('L6b', (Fraction(1, 4), Fraction(1, 4)), 0, '13+', '5+', 1), ('L6b', (Fraction(1, 4), Fraction(1, 4)), 0, '13-', '5+', 1), ('L6b', (Fraction(1, 4), Fraction(1, 4)), 1, '13+', '5+', 1), ('L6b', (
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 0
+SOME CHECK FAILED (plant=short-row)
+=== plant short-col
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 32
+    [('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5+', '13+', 1), ('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5+', '13-', 1), ('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5-', '13+', 1
+SOME CHECK FAILED (plant=short-col)
+=== plant short-row5
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 16
+    [('D5L3row', (Fraction(1, 4), Fraction(1, 4)), 0, '13+', '5+', 1), ('D5L3row', (Fraction(1, 4), Fraction(1, 4)), 0, '13-', '5+', 1), ('D5L3row', (Fraction(1, 4), Fraction(1, 4)), 1, '13+', '5+', 1
+SOME CHECK FAILED (plant=short-row5)
+=== plant wide-leaf
+corner arrays satisfy both step rules, both directions, both bands: OK
+D1-L5: corner/direction cases where the cones meet: 0 
+D1-L6: 48 cases, non-zero survivor chains in total: 0
+D1-C1 (propagation from a vertical domino closes a 7x7 box): True
+D5-L3: 48 cases, non-zero survivor chains in total: 320
+    [('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5+', '13+', 4), ('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5+', '13-', 4), ('D5L3col', (Fraction(1, 4), Fraction(1, 4)), 0, '5-', '13+', 4
+SOME CHECK FAILED (plant=wide-leaf)
