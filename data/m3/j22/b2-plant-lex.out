@@ -1,0 +1,12 @@
+girth: connection set [2, 22, 25, 34, 49, 58, 61, 81]; zero-sum words by length {1: 0, 3: 0, 5: 0, 7: 6510}
+girth: PASS (odd girth exactly 7)
+lex: q = 41, |C| = 328, symmetric and loopless: True, mismatched ordered pairs: 136120
+lex: CHECK lex FAILED
+ratio: alpha(F[K_41])/|F[K_41]| = 27/3403; compare 27*125 = 3375 with 3403
+ratio: PASS (< 1/125)
+h43: Hoffman ratio >= 0.213755422119, 1849*Hoffman >= 395.2338; certified alpha <= 365
+h43: 365/1849 = 0.19740400; exceeds the displayed 0.1974: True
+h43: PASS (B_1(43) < Hoffman strictly; the display truncates)
+ng1: a = 101/50, r = 49/100; a - 2r = 26/25 (> 1: True); density >= 0.21345, after 7/121 removal >= 0.20110 (> 1/5: True); H-to-disc distance >= 1.9086 (> 1: True)
+ng1: PASS
+SOME CHECK FAILED (plant: lex)

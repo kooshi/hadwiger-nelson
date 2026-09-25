@@ -18,6 +18,10 @@ quoted from the fenced record's lines 29–37, to verify in B1 after the fixed l
 - **J22-T7** [hand] D2(a) ⟸; ⟹ in the Borel form when every factor of `B` is 5-thick — §2.1.
 - **J22-T8** [hand] at a split place with odd `p`, a level-`m ≥ 2` character with equal negative valuations has `|ν̂| ≤ 2/(q−1)` (stationary phase); Lemma P re-derived — §2.2.
 - **J22-T9** [hand] D2(b) ⟺ D2(a) for each `B`, given D3 — §2.3.
+- **J22-T10** [hand + tools exact] the fibre-share inequality `⟨φ, A₁φ⟩ ≤ 2Σφ(1−φ)` with only the spectrum (and `Σφ² ≤ Σφ`) gives exactly Hoffman's ratio whenever `|λ_min| ≥ 2`, and its true maximum `B₁(p)` is **strictly** below Hoffman unless `Γ_p` has an independent set meeting Hoffman's bound; at 43, `B₁(43) < 395.2338` — §3.1, `tools/crunch_j22_b2_checks.py` (h43).
+- **J22-T11** [hand] J21-SL for σ-compact `G` and σ-finite `Y`; a counterexample to its a.e. clause at the non-σ-compact `G = ℝ × ℝ_d` (local measurability) — §3.2.
+- **J22-T12** [hand + tools exact] the planner's cylinder lemma fails for every `B` of the D2 class in its literal reading and in the containment reading the induction needs (an independent set of density `> 1/5` not a.e. inside `I × G_B` for any independent `I`) — §3.4, `tools/crunch_j22_b2_checks.py` (ng1).
+- **J22-T13** [tools exact] Exoo's circulant `Cay(ℤ₈₃, {±2, ±22, ±25, ±34})` has odd girth exactly 7; `F[K₄₁] = Cay(ℤ₈₃ × ℤ₄₁, (S × ℤ₄₁) ∪ ({0} × ℤ₄₁∖0))`; `27/3403 < 1/125` — §3.5, `tools/crunch_j22_b2_checks.py` (girth, lex, ratio).
 
 ## Stage 1 — SAVED
 
@@ -77,6 +81,11 @@ I re-walked C14.1 and C14.3 and thought through D3's diagonal; so the priors for
 - D1-43: *would have run* a fibre-share relaxation `B₁` at 43 (FS-69; machine-long); *did instead:* recorded GAP with the step named.
 - 59 (the owner's number): nothing searched — an exact spectrum of a graph fixed by the statement, decided by Sturm counts (in, logged).
 - 23 (D1-fac): re-ran the frozen FS-66 checker on the existing certificate (an existing checker on an existing certificate: in).
+- NG2: *would have run* an exact maximum-independent-set refutation of 28 in Exoo's 83-vertex circulant (to check `α(F) = 27` first-hand);
+  *did instead:* the two-point (Delsarte) LP bound, a relaxation of fixed shape, seconds (in, logged): **35.61**, and Hoffman **37.10** — neither
+  reaches 27, so `α(F) = 27` stays external (Exoo, via `[Zhu2025]`).
+- D1-43p: *would have run* a fibre-share moment relaxation `B₁(43)` (FS-69, priced at 84 GPU-days; machine-long, out); *did instead:* proved
+  `B₁(43) < Hoffman` strictly by hand, and recorded `B₁(43) < 1849/5` as the open step.
 
 ## Stage 2 — SAVED (phase B1, blind)
 
@@ -229,3 +238,143 @@ The owner adds, for orientation, that J21 also reports D2(a) as GAP at the same 
 - NG2: `[Zhu2025]` is held (`~/source/library/pdf/arXiv-2502.16078-zhu-survey-hedetniemi.pdf`); read §3 and Theorem 3.5 before
   judging, and check the claimed "finite abelian Cayley graph" property of `B` against the construction (Shitov's `H` is an exponential
   graph, not obviously a Cayley graph).
+
+## Stage 3 — SAVED (phase B2, J21's lemma statements; resumed by J22b)
+
+*Resumed from stage 2 by a fresh agent (J22b) on the same brief. Inputs: the five J21 statements in the Handover (verbatim as the owner
+forwarded them), and the planner's cylinder lemma, forwarded by the owner verbatim from `plans/M3-exotic-colourings.md` §M (the plan
+stays fenced beyond it): "at `j ≤ 5` colours some class has relative density `≥ 1/j > β` (B's ratio), and **if** an independent set of
+`A′ × B` of relative density `> β` is a.e. a cylinder `I × B` (a measurable, stability form of `[Zhang2012]` Thm 1.8(i)), removing it
+leaves a `(j−1)`-colouring of `(A′ ∖ I) × B`, and the induction closes. **The named hard step:** Zhang's theorem is for
+vertex-transitive factors, and `A′` leaves that class after the first step — so the cylinder lemma for non-transitive `A′` is where D2(a)
+will stand or fall." — with `β` B's measurable independence ratio. No fenced file opened. Exact checks:
+`tools/crunch_j22_b2_checks.py` → `data/m3/j22/b2-checks.out` (exit 0, 0.9 s); five plants, each firing at its own check and for its
+own reason (`data/m3/j22/b2-plant-*.out`: a triangle `2 + 2 − 4` → girth; the clique part of the connection set dropped → lex, 136,120
+mismatched pairs `= 3403·40`; `α(F) = 28` → ratio; `α = 396 > 395.23` → h43; `d = 1/10` → ng1's density `0.113 < 1/5`).*
+
+### 3.1 J21-D1-43p — clause 1 TRUE in D1's setting (display truncated); clause 2 FALSE as stated; clause 3 GAP
+
+*Statement:* "partial: windows reading the 43-adic places at level one are excluded (`α(Γ₄₃)/1849 ≤ 0.1974`, row 69); the fibre-share
+inequality alone gives exactly Hoffman's `0.21376`, so it cannot close 43 at depth."
+
+- **Clause 1 — TRUE in D1's setting** (no real place in `S`, every other factor of ratio `< 1/5`; the statement does not say so, and
+  with a real place the count fails, `m₁ > 1/5`). 43 splits in ℚ(√167) (`(167/43) = (38/43) = (2/43)(19/43) = (−1)(−1) = 1`), both places
+  stable (`43 ≡ 3 mod 4`). A window invariant under `43·O_v²` at both places is a window colouring of the product with each 43-adic
+  factor replaced by `Cay(F_v²/43O_v², T̄_v)`, a disjoint union of copies of `Γ₄₃`, of ratio `α(Γ₄₃)/1849`; D1's count then closes.
+  **Wording:** row 69's certificate (`data/fs53/cert-q43-N365.json`, bound `365.9166…`, hence `α ≤ 365`) gives `365/1849 = 0.197404`,
+  which **exceeds** the displayed `0.1974`: the display truncates an upper bound (by `4.0·10⁻⁶`; harmless against `1/5`).
+- **Clause 2 — FALSE as stated; TRUE of the spectral relaxation** (J22-T10). With `s = Σφ`, `q = Σφ²` (`s²/n ≤ q ≤ s`), `d = 44`,
+  `|λ| = |λ_min| = 11.96223`: `⟨φ, A₁φ⟩ ≥ d s²/n − |λ|(q − s²/n)`, so the inequality gives `(d + |λ|)s²/n ≤ 2s + (|λ| − 2)q ≤ |λ|s`, i.e.
+  `s/n ≤ |λ|/(d + |λ|) = 0.213755422119` — exactly Hoffman, **for the relaxation that uses only the spectrum**. But "the fibre-share
+  inequality alone" is row 75's `B₁`, the inequality's own maximum, and that is **strictly** below Hoffman: equality in the chain needs
+  `q = s`, i.e. `φ ∈ {0,1}^n`, then `⟨φ, A₁φ⟩ ≤ 0` makes `φ` an independent set of `Γ₄₃`, of size `≤ 365 < 395.2338` (exact:
+  `data/m3/j22/b2-checks.out`, h43). By how much is unknown; at 23 the same inequality's moment relaxation reads `97.98` against
+  Hoffman's `131.8` (row 75).
+- **Clause 3 ("so it cannot close 43 at depth") — GAP.** It follows for the spectral relaxation only. For `B₁` it is open: `B₁(43)` lies
+  in `[α(Γ₄₃), 395.23)` with `258 ≤ α(Γ₄₃) ≤ 365` (row 69), and 43 closes at every level iff `B₁(43) < 1849/5 = 369.8`. A heuristic
+  that `B₁` sits near `α` (not a proof): fractional mass next to an independent set is taxed heavily — `φ = 1_I + c·1_{rest}` with
+  `|I| = 258` needs `22704c + 58652c² ≤ 3182c(1 − c)`, impossible for `c > 0`. **The missing object, named:** a certificate for
+  `B₁(43) < 369.8` (FS-69's instrument, priced at 84 GPU-days — out under the ban), or a fractional `φ` meeting the inequality with
+  `Σφ ≥ 369.8` (which would refute the route).
+
+### 3.2 J21-SL — TRUE for σ-compact `G` and σ-finite `Y` (every use); the a.e. clause FALSE as stated for a general LCA `G`
+
+*Statement:* "for a locally compact abelian `G`, `Γ = Cay(G, T)` and any measured graph `Y`, a measurable proper `k`-colouring of
+`Γ × Γ × Y` restricts, along `(x, y) ↦ (x, x + s, y)`, to a measurable proper `k`-colouring of `Γ × Y` for almost every `s` (every `s` if
+Borel); properness at every edge is kept for every `s`."
+
+- **Properness, every `s`: TRUE.** `ι_s(x, y) = (x, x + s, y)` is a homomorphism `Γ × Y → Γ × Γ × Y`: an edge `(x, y) ~ (x′, y′)` has
+  `x′ − x ∈ T` and `y ~ y′`, and both `G`-coordinates of the image differ by `x′ − x`. **Borel, every `s`:** `W ∘ ι_s` is Borel as `ι_s` is
+  continuous.
+- **Measurable, a.e. `s`: TRUE when Haar on `G` and the measure on `Y` are σ-finite** (G σ-compact): the shear `(x, s, y) ↦ (x, x + s, y)`
+  preserves `μ_G ⊗ μ_G ⊗ μ_Y`, hence its null sets and its completion; Fubini for the completed product gives a measurable section for
+  a.e. `s`. Every use in M3 (`F_v²`, `ℝ²` and finite products) is σ-compact.
+- **As stated for every LCA `G`: FALSE** (under the local-measurability convention of Haar measure on non-σ-compact groups).
+  *Counterexample:* `G = ℝ × ℝ_d` (`ℝ_d` discrete), `T = {±(1, 0)}`, `Y = K₂` with counting measure, `V ⊂ ℝ` not Lebesgue-measurable,
+  `E = {((t, a), (t + a, b)) : t ∈ V; a, b ∈ ℝ} ⊆ G × G`. Put `W(x, x′, j) = 2` on `E × {0}` and `W = j` elsewhere: proper (every edge
+  joins `j = 0` to `j = 1`, and the `j = 1` end has colour 1), and measurable because `E` is locally null (its slice at each pair of discrete
+  coordinates is a subset of a line in `ℝ²`, and a compact set meets finitely many slices). For **every** `s = (s₁, s₂)`, the restriction's
+  class 2 is `{(t, a) : t ∈ V, a = s₁} = V × {s₁}`, not measurable. Under an outer-regular convention `E` need not be measurable at all;
+  either way the Fubini proof needs σ-finiteness, and the statement is wider than the proof.
+
+### 3.3 J21-D2p — TRUE [hand]; coincides with J22-T7 and J22-T9
+
+*Statement:* "D2(a) and D2(b) hold when every factor of `B` is thick (Borel: iff; measurable: ⟸, and ⟹ into format N′)."
+
+Re-derived from the statement: ⟸ pulls back along `π_A` (either `A`). ⟹, Borel: remove the thick factors one at a time — restrict to
+`A × B′ × Cay(K_v, T_{K_v})` (a subgraph; `K_v` open, so the restriction of a measurable map stays measurable) and apply the mixing
+selection (J21-MX, §2.2) with `X = A × B′`; the threshold `τ = λ*/(1 + λ*) < 1/5` is exceeded by some class of every fibre, so the
+selection is defined everywhere and proper. ⟹, measurable: the first removal gives N′ (sections measurable only a.e.); the next removal
+takes N′ in and gives N′ out (off the null set where the null vertex set has a non-null section, the classes minus that section are still
+cross-independent with unchanged measures). D2(b) the same, with `A = UD(ℝ²) × UD(ℝ²)`; D3 is not needed for D2p. Non-vacuous: `Γ₅₉` is
+thick (J22-T1). **Agreement:** D2p's parenthetical claims no E-format ⟹, so it does not overclaim D2(a) as stated; the fixed list's D2(a)
+stays GAP (§2.1).
+
+### 3.4 J21-NG1 — TRUE [hand + tools exact], in the literal reading and in the containment reading the induction needs
+
+*Statement:* "the planner's cylinder lemma is false already for `A′ = A = UD(ℝ²)`: an explicit independent set of `A × B` of density
+`> β` that is not a.e. a cylinder, for every `B` of the D2 class."
+
+Let `P = ∏_v p_v O_v² ⊂ G_B`: it has positive (finite) Haar measure with a complement of positive measure, and `P − P = P` misses `T_B`
+(a unit vector with both coordinates in `p_v O_v` would give `1 ∈ p_v²O_v`), so `P` is independent and **cross-independent with itself**
+in `B`. Let `I ⊂ ℝ²` be the union of open discs of radius `r = 49/100` centred on the hexagonal lattice of spacing `a = 101/50`: independent
+(inside a disc distances are `< 1`; across discs `> a − 2r = 26/25`), of density `≥ 0.21345 > 1/5 > β` (exact: `data/m3/j22/b2-checks.out`,
+ng1). Densities are window densities along product Følner windows.
+
+- **Literal reading** ("is a.e. a cylinder `I′ × B`"): `J₁ = (I × G_B) ∖ (D × (G_B ∖ P))` with `D ⊂ I` bounded of positive measure is
+  independent, of density `dens(I) > β`, and `J₁ Δ (I′ × G_B)` has positive measure for every `I′` (over `D` the fibre is `P`, neither null
+  nor conull). Trivial: every proper subset of a cylinder is a counterexample. **So the literal lemma fails for a reason that does not
+  touch the induction**, which only needs a class to lie *inside* `I × B` with `I` independent.
+- **Containment reading** ("a.e. inside `I′ × G_B` for some independent `I′`"): remove from `I` the centre disc and its six neighbours of
+  one cluster (or one cluster per `11 × 11` supercell, keeping density `≥ 0.20110 > 1/5`; exact, ng1), and put `H₁ = B(c₀, 1/10)`,
+  `H₂ = B(c₀ + e₁, 1/10)` at the removed centre `c₀`. The remaining discs are at distance `≥ √3·a − r − 11/10 ≥ 1.9086 > 1` from
+  `H₁ ∪ H₂` (exact, ng1). `J₂ = (I″ × G_B) ∪ (H₁ × P) ∪ (H₂ × P)` is independent (the only unit pairs of positions are between `H₁` and
+  `H₂`, and `P` is cross-independent with itself), of density `> 1/5 > β`. If `J₂ ⊆ I′ × G_B` a.e. then `I′` contains a.e. point of
+  `H₁ ∪ H₂` (their fibres `P` are non-null), and for a.e. `x ∈ H₁` the unit circle about `x` meets `H₂ ∩ I′` in positive length
+  (Fubini on the circle bundle), so `I′` contains a unit pair: **not independent**. So the containment form fails too, for every `B` of
+  the D2 class, thick or not.
+- **What it says about the route:** "density `> β`" is a global count and controls no fibre; any correct cylinder lemma must be local —
+  "fibres of measure `> τ` over adjacent points cannot coexist" — which is J21-MX's threshold selection, and that needs `λ* < 1/4` (thick).
+  Consistent with B1's GAP at the non-thick factors.
+
+### 3.5 J21-NG2 — TRUE [external for two inputs + tools exact]; its lesson for D2 is shown at 125 colours, not five
+
+*Statement:* "ratio alone cannot carry D2: a finite abelian Cayley graph `B` with `α(B)/|B| < 1/125` and a graph `A` with
+`χ(A × B) ≤ 125 < χ(A)` exist (Shitov's construction, Zhu's Theorem 3.5 instance)."
+
+Read: `[Zhu2025]` §3, Definition 3.1 to Theorem 3.8 (`~/source/library/pdf/arXiv-2502.16078-zhu-survey-hedetniemi.pdf`). The instance: `F`
+= Exoo's circulant `Cay(ℤ₈₃, {±2, ±22, ±25, ±34})`, "odd girth 7 and … fractional chromatic number `χ_f(F) = 83/27 > 3.07`" (the survey,
+"a computer search done by Exoo"); `q = 41 ≥ (p − 1)/2`, `n = 3q + 2 = 125`; Theorem 3.5 (`[77]` = Zhu, JCTB 146 (2021)): `χ(K_n^{F[K_q]}) > n`.
+Take `B = F[K₄₁]`, `A = K₁₂₅^B`.
+
+- `B` **is a finite abelian Cayley graph**: `F[K₄₁] = Cay(ℤ₈₃ × ℤ₄₁, (S × ℤ₄₁) ∪ ({0} × ℤ₄₁∖0))`, checked pair by pair (lex). ✓
+- `α(B)/|B| < 1/125`: `α(F[K_q]) = α(F)` (one vertex per blown-up clique, projecting to an independent set), and `α(F) = 83/χ_f(F) = 27`
+  (vertex-transitive), so `27/3403 < 1/125` (`27·125 = 3375 < 3403`). ✓ given `α(F) = 27` — **external**: the two-point LP gives only
+  35.61 and Hoffman 37.10 (§1.4); and the margin is essential — any `F` with `α(F) ≥ 28` fails for every `q`, since the condition is
+  `α(F)(3q + 2) < 83q`.
+- `χ(A × B) ≤ 125`: evaluation `(f, x) ↦ f(x)` is a homomorphism `K₁₂₅^B × B → K₁₂₅` (Proposition 3.2). ✓
+- `χ(A) > 125`: Theorem 3.5 — **external**; the survey sketches the proof (the non-125-colourable subgraph of Figure 1) and omits the
+  definition of `µ_{i,t}`. Its hypothesis, odd girth `≥ 7`, **checked exactly**: no word of length 1, 3 or 5 over `S` sums to 0 mod 83,
+  and 6,510 of length 7 do (girth). ✓
+- **Scope of "ratio alone cannot carry D2":** the example lives at 125 colours. At D2's five, the same statement for an arbitrary `A` and
+  a vertex-transitive `B` is `[75]`'s weakened conjecture at `n = 5` ("if `χ_f(G) > n` and `χ(H) > n`, then `χ(G × H) > n`"), which
+  `[Zhu2025]` §3 records as refuted by Theorems 3.3, 3.5, 3.6 — none at `n = 5` (Theorems 3.7–3.8, which reach `n ≥ 4`, refute the
+  coindex version instead). So NG2 blocks a *general* ratio-only proof schema; at five colours it is an analogy, not a counterexample
+  (I did not search beyond the survey). "Shitov's construction" is Zhu's refinement of it; the naming is fair.
+
+### 3.6 Re-assembly
+
+| fixed-list claim | B1 | after B2 | what B2 changed |
+|---|---|---|---|
+| **D2(a)** | GAP at (1) non-thick factors, (2) E → N′ | **GAP, same two steps** | D2p = the thick case (Borel iff; N′ ⟹), as B1. NG1 closes the planner's cylinder route for every `B` in both readings; NG2 closes a ratio-only schema at 125 colours. The only selection known is fibre-local (MX) and needs thickness; a non-thick factor needs a new idea (B1's cross-independence ratio `κ < 1/5` on some compact piece smaller than `π⁻¹O²`, J22-T4). |
+| **D2(b)** | GAP (⟺ D2(a) given D3) | **GAP** | SL is the slicing that gives D3 and J22-T9, valid on σ-compact groups. |
+| **D3** | TRUE | **TRUE** | SL re-derived (the same shifted diagonal); its a.e. clause needs σ-finiteness, satisfied at `ℝ²`. |
+| **D1-43** | GAP (all-levels bound) | **GAP, sharpened** | Level-one 43-reading windows excluded in D1's setting; depth needs `B₁(43) < 369.8`, not excluded by Hoffman (`B₁(43) < 395.23` strictly); J21's "cannot close at depth" holds of the spectral relaxation only. |
+| D0, D1, D1-fac, D1-2, D1-3, D4 | TRUE | TRUE | not touched by B2. |
+
+J21's own D2(a) verdict, as the owner relays it (GAP at E → N′ and at the non-mixing factors {2, 3, 5, 7, 23, 29, 61}), agrees with B1
+on both steps; J21's list omits 43, consistent with 43 not being known to lie in the D2 class (D1-43). To be checked against the record in B3.
+
+### 3.7 Pending: the frozen FS-66 checker at 23
+
+*(filled when the run ends; see the next save)*
