@@ -75,9 +75,111 @@ exhausts `Q`; apply V1. ∎
 | the last step | "a Lemma-N₀-type weak-approximation argument should bound its order"; flagged unverified | the order is `ord(ψ|_{ℤ[i]})`, independent of `S`, by one line of arithmetic; no band, no approximation | **simplification**: the step is not hard, and the bound comes from `ℤ[i]`, not from the band |
 | usefulness | "if RS₄(S) for every finite S" | hypothesis likely false for every `S` (S0B at `{5}`; U3/U5 readings); the restriction-image form is an equivalence | **addition** |
 
+## V-A2 — verdicts: N₀ TRUE; U2 TRUE (29 band torsion characters, six types up to symmetry)
+
+**Statements (quoted).** N₀ = S0A-3: "Lemma N₀: `Θ₄(ℤ[U_ℚ]) ∩ (T + A) ⊆ T_{168} + A`; the torsion part is a 2-part of order ∣ 8, or an
+order-3 part (`|α| ≤ 1/12`), or an order-7 part (`|α| ≤ 1/28`), and each occurs". U2: "`Θ₄(Q) ∩ (T + A)` is exactly the finite union
+of leaf discs over the band torsion characters of `Q/168Q`, with margins `1/4` (parity), `1/12` (the order-3 types), `1/28` (the
+order-7 types) and `0` (the order-4 and order-8 types)." Derived blind: S0A's proof of Lemma N₀ and S0B §6 unopened.
+
+*Conventions.* `‖x‖` is the distance from `x ∈ ℝ/ℤ` to 0; `B = B₄ = {x : ‖x − 1/2‖ ≤ 1/4}`. A torsion character of `Q` has order `N`
+built from non-split primes only (`Q` is divisible by every split prime), and factors through `Q/NQ ≅ ℤ[i]/N`; write it
+`τ(x + yi) = (αx + βy)/N`, i.e. `τ = Re(ā ·)` on `ℤ[i]` with `a = (α + βi)/N`. For `v` non-split let `T(ℚ_v)` be the norm-one
+elements of `ℚ_v(i)` (all units, so `T(ℚ_v) = T(ℤ_v)`, compact), and `G_N` the image of `∏_{v|N} T(ℤ_v)` in `(ℤ[i]/N)^×`.
+
+**Step 0 — joint density (the leaf formula at `Q`).** The Cayley map `t ↦ (1 + it)/(1 − it)` is a homeomorphism `ℙ¹(k) → T(k)` for
+`k = ℝ` and for `k = ℚ_v`, `v` non-split (there `−1` is not a square, so `1 − it ≠ 0`; the inverse is `t = (u − 1)/(i(u + 1))`, and
+`t̄ = t`). `ℙ¹(ℚ)` is dense in `ℙ¹(ℝ) × ∏_{v∈F} ℙ¹(ℚ_v)` for finite `F` (weak approximation for ℚ). So `U_ℚ = T(ℚ)` is dense in
+`S¹ × ∏_{v|N} T(ℤ_v)`. Hence for `θ = τ + λ_d` (`τ` of order `N`) the values `θ(u) = τ(u mod N) + Re(d̄u)` are dense in
+`{τ(c) + s : c ∈ G_N, |s| ≤ |d|}`, and `B` is closed:
+
+> **(★)** `τ + λ_d ∈ Θ₄(Q)` ⟺ `τ(G_N) ⊆ [1/4 + |d|, 3/4 − |d|]`. So `τ + λ_d ∈ Θ₄(Q)` iff `τ(G_N) ⊆ B` and `|d| ≤ r_τ :=
+> min_{c∈G_N} dist(τ(c), {1/4, 3/4})`. [hand]
+
+Also `τ ≠ 0`: `λ_d` takes values within any `ε` of `0` on the dense `U_ℚ`.
+
+**Step 1 — the local pieces.** By CRT `ℤ[i]/N = ∏_{q^k ∥ N} ℤ[i]/q^k` and `G_N = ∏ G_{q^k}` (Step 0's density is joint), so
+`τ = Σ_q τ_q` and the value set is the sumset `V = Σ_q V_q`, `V_q := τ_q(G_{q^k})`. Each `V_q` is symmetric (`−1 ∈ G`). The condition
+is `V ⊆ B`.
+
+**Lemma V2a (odd level collapse).** If `q ≡ 3 (mod 4)` and `V ⊆ B`, then `τ_q` has level ≤ 1. *Proof.* `T` is smooth over `ℤ_q`
+(`q` odd), so `G_{q^k}` is all of `{x mod q^k : xx̄ ≡ 1}`, which for `k ≥ 2` contains `1 + q^{k−1}bi` for every `b ∈ ℤ/q`
+(`N(1 + q^{k−1}t) ≡ 1 + q^{k−1}(t + t̄)`). So `V_q ⊇ τ_q(c) + ⟨τ_q(q^{k−1}ic)⟩` for every `c ∈ G`. If `τ_q(q^{k−1}ic) ≠ 0` for some
+`c`, `V` contains a full coset of `(1/q)ℤ/ℤ` (plus any point of the other summands), and a coset of spacing `1/q ≤ 1/3 < 1/2` meets the
+open arc `(−1/4, 1/4)`: contradiction. So `τ_q(q^{k−1}y) = 0` for `y ∈ iG`, whose additive span mod `q` is `𝔽_{q²}` (`μ_{q+1} ⊄ 𝔽_q`
+contains 1); so `τ_q` has level `k − 1`. Induct. ∎
+
+**Lemma V2b (an odd piece is the middle half).** If `τ_q ≠ 0` (level one) and `V ⊆ B`, then `V_q = A_q/q` with
+`A_q = {(q+1)/4, …, (3q−1)/4}` (the `(q+1)/2` residues in the middle half), and every point of `Y := Σ_{q′≠q} V_{q′}` has
+`‖y‖ ≤ 1/(4q)`. *Proof.* With `τ_q = Tr(a′·)/q`, `V_q = {Tr η : N η = N a′}/q`; an `η` of norm `n` is a root of `X² − tX + n`, so the
+traces of norm-`n` elements are the `t` with `t² − 4n` a non-square or 0, and `|V_q| = (q+1)/2` if `n` is a non-square, `(q+3)/2` if a
+square. For any `y ∈ Y`, `V_q + y ⊆ B`, an arc of length `1/2`, which holds at most `(q+1)/2` points of `(1/q)ℤ`. So `n` is a
+non-square and `V_q` is exactly a run of `(q+1)/2` consecutive points; a run of even length (`q ≡ 3 mod 4`) that is symmetric under
+negation is unique, the run centred at `1/2`, i.e. `A_q/q`. Its extreme points are `1/2 ± (1/4 − 1/(4q))`, so `V_q + y ⊆ B` iff
+`‖y‖ ≤ 1/(4q)`. ∎
+
+**Lemma V2c (only 3 and 7).** `V_q = A_q/q` forces `q ∈ {3, 7}`. *Proof.* The complement `C = ℤ/q ∖ V(n)` is `{x + n/x : x ∈ 𝔽_q^×}`
+(the traces of split elements; each value twice), and must equal the interval `I = {−(q−3)/4, …, (q−3)/4}`. Compare Fourier coefficients
+at frequency 1: `|Σ_{t∈I} e(t/q)| = sin(π(q−1)/(2q))/sin(π/q) = 1/(2 sin(π/(2q))) ≥ q/π`, while `Σ_{t∈C} e(t/q) = ½ K(1, n)`, a
+Kloosterman sum, `|K(1, n)| ≤ 2√q` (Weil). So `q/π ≤ √q`, `q ≤ π² < 10`: `q ∈ {3, 7}`. Both occur: at 3, `n = −1`, the four
+characters with `N(a′) = 2`, values `{1/3, 2/3}`; at 7, `τ = (αx + βy)/7` with one of `α, β` in `{±2}` and the other in `{±3}`
+(eight; e.g. `(2x + 3y)/7`, values `{2, 3, 4, 5}/7`), found by hand from `μ₈ = {±1, ±i, ±2 ± 2i} ⊂ 𝔽₄₉`. ∎ [hand, given Weil's bound]
+
+**Lemma V2d (the 2-part).** Let `τ₂` have order `2^k`. (i) If `V ⊆ B` with `V = V₂` (no odd part), then `k ≤ 3`. (ii) If some odd
+`τ_q ≠ 0`, then `τ₂ = 0`. *Proof.* `T(ℤ₂) = {(±√(1 − b²), b), (b, ±√(1 − b²)) : b ∈ 4ℤ₂}` (`1 − b²` is a 2-adic square iff `4 | b`);
+`|G_{2^k}| = 2^k` for `k ≥ 2`. For `k ≥ 3` the kernel of `G_{2^k} → G_{2^{k−1}}` is `{1, 1 + 2^{k−1}i}` (from `b = 4c`,
+`a ≡ 1 − 8c²`), so `V₂ ∋ τ₂(g), τ₂(g) + τ₂(2^{k−1}ig)`, and `τ₂(2^{k−1}·)` is a non-zero character of `ℤ[i]/2` (else the order drops),
+equal on `ig` to `β/2` for `g = a′ + b′i` of type I (`a′` odd, `4 | b′`) and to `α/2` for type `iI`. (i) Say `β` odd. Then every
+type-I `g` has `τ₂(g), τ₂(g) + 1/2 ∈ B`, so `τ₂(g) ∈ {1/4, 3/4}`. At `g = 1`: `α = 2^{k−2}s`, `s` odd. At `g = √(1−16c²) + 4ci`:
+`τ₂(g) = s/4 + βc/2^{k−2}`, which must lie in `{1/4, 3/4}` for every `c ∈ ℤ₂`, so `2^{k−3} | β`, so `k ≤ 3`. `α` odd is symmetric (type
+`iI`). (ii) By V2b every value of `τ₂` on `G` is within `1/(4q) ≤ 1/12` of `0`. At `k = 1, 2` the values lie in `(1/4)ℤ`, so they
+are 0, and `G_{2^k}` spans `ℤ[i]/2^k`, so `τ₂ = 0`; at `k ≥ 3` the pair `τ₂(g), τ₂(g) + 1/2` cannot both be within `1/12` of 0. ∎
+
+**Lemma V2e (one odd prime at most).** Two odd pieces `τ_q, τ_{q′} ≠ 0` are impossible: by V2b applied to `q`, `V_{q′} + y″ ⊆
+D(0, 1/(4q))` for a point `y″`, but `V_{q′} = A_{q′}/q′` has two points `1/2 ± (1/4 − 1/(4q′))`, at distance `1/2 − 1/(2q′) ≥ 1/3 >
+1/(2q)` apart. ∎
+
+**Theorem V2 (N₀, re-derived).** Every `θ ∈ Θ₄(Q) ∩ (T + A)` is `τ + λ_d` with `τ` exactly one of: a character of order 2, 4 or 8
+(pure 2-adic); a character of order 3 (level one at 3) with `|d| ≤ 1/12`; a character of order 7 (level one at 7) with `|d| ≤ 1/28`;
+each occurs. In particular `τ ∈ T₁₆₈`. [hand; Weil's bound for Kloosterman sums is the one external input] *Proof.* Step 0, V2a–V2e, and
+the margins below. ∎ **Verdict on N₀: TRUE as quoted.**
+
+**Theorem V3 (U2).** `Θ₄(Q) ∩ (T + A) = ⋃_τ (τ + D(r_τ))` over exactly **29** band torsion characters, all in `T₁₆₈`; the discs are
+pairwise disjoint in `Q̂` (`T ∩ A = 0` on `Q`), though their layer-0 shadows overlap (S0B's lens). Up to the `U`-action, conjugation
+and negation there are **six types**:
+
+| type | representative `τ(x + yi)` | count | `U`-orbits (before conjugation, negation) | values on `G_N` | margin `r_τ` |
+|---|---|---|---|---|---|
+| parity | `(x + y)/2` | 1 | 1 | `{1/2}` | **1/4** |
+| order 3 | `(x + y)/3` (`a′` of norm 2 in `𝔽₉`) | 4 | 1 (one `μ₄`-orbit) | `{1/3, 2/3}` | **1/12** |
+| order 4, "half-parity" | `(x + y)/4` | 4 | 1 | `{1/4, 3/4}` | **0** |
+| order 4, mixed | `(x + 2y)/4` | 4 | 1 | `{1/4, 1/2, 3/4}` | **0** |
+| order 7 | `(2x + 3y)/7` | 8 | 1 (one `μ₈`-orbit) | `{2, 3, 4, 5}/7` | **1/28** |
+| order 8 | `(3x + 2y)/8` | 8 | 1 (`G₈` has 8 elements; `1 + 4i` joins the two `μ₄`-orbits) | `{1/4, 3/8, 5/8, 3/4}` | **0** |
+
+[hand, each row; tools exact, `tools/fs89_s1v_n0_check.py`: for every divisor `N` of 336 and for `N = 9, 11, 19, 23, 32, 49` it builds
+`G_N` from `T(ℤ_v)` and lists every band character of exact order `N` with its margin — exactly the rows above (1, 4, 8, 8, 8 at orders
+2, 3, 4, 7, 8; none at 6, 9, 11, 12, 14, 16, 19, 21, 23, 24, 28, 32, 42, 48, 49, 56, 84, 112, 168, 336); three planted faults fire:
+non-liftable residues at `2^k` change the order-4 and order-8 counts, a band shrunk by `1/(8N)` deletes exactly the margin-0 types, and
+dropping the level-collapse cosets at 49 admits four order-49 characters.] **Verdict on U2: TRUE as quoted**, with two precisions:
+the order-4 margin-0 set has two symmetry types, not one; and "RQ₄ is the statement `Θ₄(Q) = 𝓛₄(Q)`" holds, with `𝓛₄(Q)` the
+compact union of 13 discs (parity 1, order 3 four, order 7 eight) and 16 points (orders 4 and 8).
+
+**Comparison with S0B's table at `R₅`.** Orders 2, 3, 4, 7, 8 have the same counts and margins at `R₅` and at `Q` because `U₅` reduces
+onto the whole of `G_N` there (`|U₅ mod N| = |G_N|` = 2, 4, 4, 8, 8). S0B's other orders (22, 26, 31, 41, 48, 76, 79) involve a split
+prime (26, 41), are mixed (22, 48, 76), or sit at an inert prime where `U₅` is not dense (`|U₅ mod 31| = 16 < 32 = |G_{31}|`,
+`|U₅ mod 79| = 20 < 80`): at `Q` they disappear, which is Lemmas V2b–V2e at work (the band set of `Q` sees `G_N`, the full local circle).
+
+**Divergence table** — to be filled after S0A's proof of Lemma N₀ is opened (only after this verdict is committed).
+
 ## Would-have-searched-here log
 
 (one line per move I would have made by search, and what I did instead)
+
+- **V-A2, the torsion list.** I would have enumerated band characters of `ℤ[i]/N` for every `N` up to a few hundred to "see" that
+  nothing beyond order 8, 3, 7 appears. Instead the classification was derived (V2a–V2e, with the Kloosterman bound closing all
+  `q ≥ 11` at once), and the exact check was run only on a fixed list the derivation names (the divisors of 336, and 9, 11, 19, 23,
+  32, 49), with three planted faults; it is a check of a derived finite claim, labelled so, 0.5 s.
 
 ## Theorems this phase proved
 
@@ -85,3 +187,6 @@ exhausts `Q`; apply V1. ∎
 |---|---|---|---|
 | S1V-1 | a character of `Q` whose restriction to every `R_S` (a directed exhausting family of finite nonempty `S`) is in `T + A` is in `T + A`, with one archimedean part and torsion order `ord(ψ|_{ℤ[i]})` | hand | § V-A1, Theorem V1 |
 | S1V-2 | U1: `RS₄(S)` for all finite `S ⊇ S₀` ⟹ RQ₄; and RQ₄ ⟺ `Θ₄(Q)|_{R_S} ⊆ T + A` for every finite `S` | hand | § V-A1 |
+| S1V-3 | the leaf formula at `Q`: `τ + λ_d ∈ Θ₄(Q)` iff `τ(G_N) ⊆ [1/4 + |d|, 3/4 − |d|]`, `G_N` the image of the local norm-one groups (joint density by the Cayley map) | hand | § V-A2 (★) |
+| S1V-4 | band torsion characters of `Q`: odd levels collapse to 1; an odd piece is the middle half and exists only at 3 and 7 (Kloosterman/Weil); the 2-part has order ∣ 8 and dies beside an odd piece; at most one odd prime (N₀ re-derived) | hand (Weil's bound external) | § V-A2, V2a–V2e, Theorem V2 |
+| S1V-5 | U2: `Θ₄(Q) ∩ (T + A)` = 13 discs (parity 1/4; four order-3, 1/12; eight order-7, 1/28) and 16 points (orders 4, 8); six types up to symmetry | hand + tools exact (`tools/fs89_s1v_n0_check.py`) | § V-A2, Theorem V3 |
