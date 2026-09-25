@@ -464,3 +464,52 @@ says the ten were a one-prime artefact, not that ℚ(√47) is "closer to four".
 
 **§P amended:** P-1p 0.35 → **0.25** (the confound above); P-surv 0.45 → 0.50.
 
+### 5.2 §M.2 — obligation modeling (fresh `debruijn-obligation-modeling` invocation)
+
+**S1a — `ρ_per(ℚ(√47)) < 1/4`**, decomposed into local obligations (P = prove, A = assume as a named input, T = test):
+- a1 [A: Lemma C, J07, one mind — flag it] every finite-index `L` factors through `ρ_K : R → ∏_{𝔓∈S_N} O_𝔓/𝔓^K`, `ker ρ_K ⊆ L`.
+- a2 [A: CLG-c, the joint image] `ρ_K(U) = ∏ S_{𝔓,K}`, so `Cay(ρ_K(R), ρ_K(U))` **is** the categorical product of the local levels — without
+  this the source graph has fewer edges than the product and its ratio is not bounded by it (the step a proof would silently skip).
+- a3 [P, one line] `Cay(ρ_K(R), ρ_K(U)) → Cay(R/L, U+L)` is a homomorphism onto a vertex-transitive graph, so the No-Homomorphism lemma
+  gives `α(R/L)/[R:L] ≤` the product's ratio; `[Zhang2012]` Thm 1.8(i) makes that the factors' maximum.
+- a4 [P per prime + one analytic lemma] the stable odd places are exactly the `q ≡ 3 (mod 4)` with `(47/q) = 1`, plus the ramified 47 (the
+  inert `q` split in `F(i)/F`; `p ≡ 1 (4)` split in ℚ(i); 2 split, G35) — a finite table 11, 19, 23, 31, 43, 47 (cited certificates, Hoffman
+  in inert towers, Lemma P at 47) and, for `q ≥ 59`, Hoffman–Weil with the inert-tower ratio constant (G54). **The sup is attained** at 31
+  (`1/4 − 2.745·10⁻⁶`); strictness needs only the finite table plus Weil's decay.
+- T: the table's numbers re-read from their certificates' files, never from this plan (Ga14).
+
+**S1b — the invariant-measure equivalence**: b1 [P] ⟸ trivial; b2 [A: amenable actions on compact metrizable spaces carry invariant measures —
+Følner averaging, weak* limit; cite, not re-prove] ⟹ applied to the closed invariant set of proper colourings in `k^V`; b3 [P] symmetrise over
+`S_k` (it commutes with `G`) and read class 1 at `v₀`: `ι_G ≥ 1/k`; b4 [A: `[MatolcsiEtAl2025]`] `ι_G ≤ 1/χ_gf(H)` for every finite `H`.
+Inhabitant for the vacuity gate: ℚ(√11)'s plane (four-colourable, row 73 with `Γ₇`) under `R ⋊ U`.
+
+**S1c — a parsed rational band witness**: c1 [T, the checker] a basis of `Λ_M` from the tool's key and `θ ∈ ℚ⁴` on it; every `u ∈ U_M` has
+`θ(u) mod 1 ∈ [1/4, 3/4]` in Fractions — a faithful finite transcription, with a plant (one `u` moved out of band) that must fire; c2 [P] the
+construction of `θ` from the survivor's layer structure, or a named obstruction — its space is the finite set of torsion-type assignments per
+layer that row 95's six types and row 97's leaves allow, fixed by the derivation before any check (the ban's edge: a complete enumeration of
+a derived finite set, logged as such).
+
+### 5.3 The briefs written (post-ban, dated from 2026-10-01)
+
+- `data/crunch-2026-09-25/briefs/J29-S1-FS84-derivation.md` — S1 (S1a–S1e), one derivation agent.
+- `data/crunch-2026-09-25/briefs/J29-S1V-FS84-blind-verifier.md` — S1V, its fixed claim list written now.
+- `data/crunch-2026-09-25/briefs/J29-S4-FS84-colouring-side.md` — S4.
+- **Not written (left):** S2's brief waits on S1d's shape; S3's is declined by default (§S). Both are rows in §S with their budgets.
+
+## Theorems this phase proved
+
+- none — a reframe; the hand factorisation of the ten survivors' denominators (§G.4) and the one-prime confound (§M.1) are observations
+  about FS-81's records, graded [tools-grade reading of committed data], not theorems.
+
+## §X — would-have-searched-here log (stages 4–5)
+
+- Would have run FS-81's recheck on the UNKNOWN residue targets to see whether one-prime survivors colour; instead read Λ₁₅₆₀'s committed
+  verdict (a quotient colouring) and lowered P-1p.
+- Would have priced S2's LP by building one window instance; instead left its size to S1d's derivation (orbit count before any run).
+
+## Proposed edits (for the front-page lane; this job edits none of these files)
+
+- `plans/STUB-five-colours-47.md` and FS-84's row: "the survivors' `Θ₄` cell analysis can only colour a survivor (G71, row 96); a refusal
+  needs a finite graph or a four-class averaged certificate; `χ(ℚ(√47)²) = 5` answers Soifer 55.1 and Moorhouse's ℚ(√47) question."
+- Six bibliography proposals: §3.1 verdict 4.
+- FS-80's stub: add ℚ(√47) as a target beside ℚ(√167) (its fractional cap `121/28 > 4`).
