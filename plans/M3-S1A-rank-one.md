@@ -15,7 +15,11 @@ The owner reviews by artifact; J20 verifies blind (not read, not messaged). Stag
 | J18-AK1 | A-K1 | hand | §2.2 |
 | J18-AK2 | A-K2, and a wall leaves a phase only at a left gap whose second colour survives | hand | §2.3 |
 | J18-AKq | A-Kq for the labelled quotient; its rigidity clause false for the plain quotient (`D = {1}`) | hand | §2.4 |
-| J18-EQ | A-T1 ⟺ A-T1′ ⟺ A-T2 (T35 re-derived) ⟺ A-K3 | hand | §2.5 |
+| J18-EQ | A-T1 ⟺ A-T1′ ⟺ A-T2 (T35 re-derived) ⟺ A-K3; and route (ii)'s potential exists on all-rigid shifts iff A-T1 | hand | §2.5, §3.1 |
+| J18-DC | the Δ-completion theorem: A-T1 fails iff some heteroclinic four-colouring `c` has an all-rigid `X₄(D_c(M))` | hand | §3.2 |
+| J18-CTL | the control `{1,5,7,10}` reproduced (18/17/15); `χ = 3`; 8 of 9 BFS wall points have trivial completion to `M = 100`; all 9 satisfy KE | tools exact | §3.3, `data/m3/j18/` |
+| J18-DPR | `X₄({1,5,7,10,13,27,33})`: 25 phases, 24 rigid, one non-rigid; one rigid–rigid wall, which satisfies KE | tools exact | §3.4, `data/m3/j18/completion-81-49-M40.txt` |
+| J18-KE⟹ | KE ⟹ A-T1 | hand | §3.5 |
 
 ---
 
@@ -213,10 +217,98 @@ equivalences hold for every `k`. At `k = 3` walls are excluded by FS73-T24 (dens
 
 ---
 
-## Stage 3 — in progress (registration written before the one derived check)
+## Stage 3 — SAVED (the hard step: no proof, no counterexample; a stall at a named step, a reformulation, one derived killing test)
 
 **Registered 2026-09-25, before the run (P-J18-DC):** the derived set `D′ = {1, 5, 7, 10, 13, 27, 33}` — the Δ-completion at `M = 40`
 (twice the common period 20) of the BFS wall point from rigid phase 81 to rigid phase 49 of the control `X₄({1,5,7,10})` (§3.2) — has
 **every phase rigid with probability 0.20** (which would be A-C, with the wall `81 → 49` surviving by construction), and a non-rigid
 phase with probability 0.80. Both outcomes reachable: the wall and its two rigid ends survive by construction (§3.2), and nothing
 forces the control's entropic phase to survive `13, 27, 33`. Priced first: 20,023 canonical proper words of length 33.
+
+**Result of P-J18-DC (read after the run, `data/m3/j18/completion-81-49-M40.txt`):** 20,023 states; 25 phases, **24 rigid and one not**
+(10,817 states); 3 walls, one of them rigid–rigid (`3637 → 96`, both ends chiral). The non-rigid outcome (0.80) happened; **A-C is not
+landed**.
+
+### 3.1 What A-K3 is, and what the two planned routes are
+
+- **A-K3 ⟺ A-T1** (§2.5). So A-K3 is not a step below the theorem, and J19 should not be launched on it "as a step".
+- **Route (ii), a reflection-invariant potential that strictly decreases along walls, is also the theorem itself.** Given a wall
+  `C → C′`, reflection gives a wall `C′^R → C^R`, so such a potential gives `Φ(C) > Φ(C′) = Φ(C′^R) > Φ(C^R) = Φ(C)`. So its existence on
+  all-rigid shifts is equivalent to A-T1. It cannot be read off the phase graph alone, because the control has walls; it must use the
+  absence of entropy.
+- **Route (i), a Kempe swap on a one-sided component,** is where the data below points. It is the stall's route (§3.5).
+- **Where `k = 4` enters: nowhere yet.** Every lemma of stage 2 and the reformulation §3.2 hold for every `k`. At `k = 3`, walls are
+  excluded outright (FS73-T24, density), whatever the rigidity. So P-A5 ("the proof holds for every `k ≥ 4`") is not reached.
+
+### 3.2 The Δ-completion theorem: A-T1 as a statement about single colourings
+
+For a colouring `c : ℤ → [4]` and `M ≥ 1`, let `D_c(M) = {d ∈ [1, M] : c(x) ≠ c(x + d) for every x}`: the distances up to `M` at which
+`c` has no monochromatic pair. Then `c ∈ X₄(D_c(M))`, and `X₄(D_c(M))` is the smallest four-colouring shift of a distance graph with
+`max D ≤ M` that contains `c`.
+
+**Theorem J18-DC [hand].** A-T1 fails iff there are a four-colouring `c` of ℤ that is eventually periodic in both directions and not
+periodic, and an `M ≥ 1` with `D_c(M) ≠ ∅`, such that every phase of `X₄(D_c(M))` is a single cycle.
+*Proof.* (⟸) `c ∈ X := X₄(D_c(M))` is non-periodic, and every phase of `X` is rigid, so `c`'s path visits two phases (F3 c): a wall.
+(⟹) Let `D` be all-rigid with a wall. Take a wall point `c`: it is non-periodic (F3 c), and eventually periodic both ways (its path ends
+in single cycles). With `M = max D`, `D ⊆ D_c(M)`, so `X₄(D_c(M)) ⊆ X₄(D)`. A subshift of a zero-entropy shift has zero entropy, so every
+phase of `X₄(D_c(M))` is a single cycle (F3 a). ∎
+*What it does.* It removes `D`. A-T1 says: **every heteroclinic four-colouring of ℤ has a positive-entropy completion at every window**
+(the completions shrink as `M` grows). A counterexample is one heteroclinic colouring whose completion is all-rigid. This is the
+construction route for A-C, and it replaces "find `D`" by "find `c`".
+
+### 3.3 The control `{1,5,7,10}`: what its rigid–rigid walls are made of (`tools/crunch_j18_phases.py`, `data/m3/j18/`)
+
+- **Reproduced independently** (my code, not FS-79's): 583 states in the labelled quotient; 18 phases, 17 rigid, 15 walls
+  (`data/m3/j18/controls.txt`, matching FS79-C-deBruijn §3a). The 9 rigid–rigid walls run from phases 65, 67, 81 to 23, 49, 55; all six
+  end phases are **chiral** (period-20 words), as T34 requires.
+- **`χ({1,5,7,10}) = 3`:** `1, 5, 7, 10 ≢ 0 (mod 3)`, so `x ↦ x mod 3` is proper. So the control's entropy is A-K1's (a three-colouring
+  inside a four-colouring shift). **The wall junctions contain period-3 three-colour stretches** ("…0310310…", "…3213210…"): the walls
+  pass through patterns of the entropic phase without entering it.
+- **Completions (§3.2) of the 9 BFS wall points:** for 8 of them, `D_c(100) = {1,5,7,10}`, so their maximal shift at every `M ≤ 100` *is*
+  the control. These walls cannot be separated from the entropy by adding any distance. This explains, for them, FS-79's observation that
+  adding one distance killed every wall whenever it killed the entropy. The ninth (`81 → 49`) has `D_c(100) = {1,5,7,10} ∪ {n ≡ 7, 13 (mod 20) : 13 ≤ n ≤ 93}`.
+- **Kempe swaps (`tools/crunch_j18_swaptail.py`, `data/m3/j18/swaptail.txt`):** in each of the 9 wall points, some two-colour Kempe
+  component bounded on exactly one side (in the finite window; size ≥ 10) swaps to a tail in the **non-rigid** phase 57. Some other
+  one-sided swaps keep the tail in its own phase (e.g. the `{2,3}` swaps of `65 → 23`).
+
+### 3.4 The one derived check (registered above, before the run)
+
+`D′ = D_c(40)` for `c` the BFS wall point `81 → 49` of the control: `D′ = {1, 5, 7, 10, 13, 27, 33}`. The choice of `M` was fixed by the
+derivation: `M = 40` is twice the common period 20, the least window holding one representative of each new residue class mod 20
+(`27 ≡ 7`, `33 ≡ 13`). It kills the mod-3 colouring (`27, 33 ≡ 0 (mod 3)`). **The result:** one non-rigid phase survives, and the
+surviving rigid–rigid wall `3637 → 96` again has one-sided Kempe swaps landing in the non-rigid phase (2 of 2 pairs, 4 of 4 swaps). So:
+**10 of 10 rigid–rigid wall points examined, in two shifts, satisfy KE below.** This measures one BFS wall point per wall, in two shifts
+(G21).
+
+### 3.5 The stall — the smallest statement I could not prove that implies A-T1
+
+**KE (the Kempe–entropy lemma), verbatim:**
+"Let `D ⊂ ℤ_{>0}` be finite, and let `c ∈ X₄(D)` agree with a periodic point `p` of a rigid phase `C` on a left half-line and with a
+periodic point `q` of a rigid phase `C′ ≠ C` on a right half-line. Then some two-colour Kempe component of `c` is bounded on exactly one
+side, and swapping its two colours gives a point whose tail on the unbounded side lies in a phase that is not a single cycle."
+
+- **KE ⟹ A-T1 [hand]:** in an all-rigid shift no phase fails to be a single cycle, so no such `c` exists; every wall of an all-rigid
+  shift joins two rigid phases, so there is no wall.
+- **Its two halves.** **KE1:** "some two-colour Kempe component of `c` is bounded on exactly one side". **KE2:** "swapping it moves that
+  tail out of the rigid phases".
+- **Warnings for J19.** KE is *stronger* than A-T1: it constrains shifts that have entropy. It can be false while A-T1 is true. It is
+  falsifiable on the controls without any search: a rigid–rigid wall point all of whose one-sided swaps keep both tails in rigid phases
+  kills it. Swapping a one-sided component `K` turns the tail `q` into `q_I` (`q` with the `{e,f}`-strands `I` that `K` contains swapped). This is a
+  periodic point, and in an all-rigid shift K0-loc makes it gap-free with two-sided strands. **So KE2 is a statement about which partial
+  strand-swaps of a rigid periodic point stay rigid.** That is where the mechanism, if any, lives.
+- **Routes tried and dropped (so J19 need not re-sample them).** (a) Push the departure right by swapping the `{p(0), c(0)}`-component of
+  the departure vertex (vertex 0 has no left neighbour in that subgraph, in `p` or `c`). It works while the component is finite, and gives
+  nothing when the component is infinite and reaches the left through the right. (b) A strand count across the junction per colour pair.
+  No conservation law was found (T29: the only loop invariant at four colours is a relation's length parity, the same for every colouring).
+  (c) Route (ii) (§3.1).
+- **The counterexample-side step, for completeness:** "find a heteroclinic `c` with an all-rigid completion `X₄(D_c(M))`" (§3.2). The one
+  derived attempt failed (§3.4). The control's other walls have trivial completions.
+
+### 3.6 The would-have-searched log (continued)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| W2 | rerun the completion of `81 → 49` at `M = 60, 100` (the completion shrinks as `M` grows) | not run: one derived `D` only, with `M` fixed by the derivation before the run |
+| W3 | test KE on FS73-T30's other three wall sets and the triangle-chain family | not run: only the named control and the one derived `D` were computed |
+| W4 | enumerate non-BFS wall points of the control, to hunt one whose swaps all stay rigid (a KE falsifier) | not run; named in §3.5 as KE's killing test |
+| W5 | scan sets near the control for an all-rigid completion (an A-C hunt) | not run; §3.2 turns A-C into a question about single colourings, for derivation |

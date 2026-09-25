@@ -1,0 +1,38 @@
+{'D': [1, 5, 7, 10, 13, 27, 33], 'states': 20023, 'cyclic': 25, 'rigid': 24, 'walls': 3}
+phase 96 {'size': 10, 'rigid': True, 'word': '31023231320231010201', 'chiral': True}
+phase 3373 {'size': 10817, 'rigid': False}
+phase 3637 {'size': 10, 'rigid': True, 'word': '21032301030321012321', 'chiral': True}
+phase 3659 {'size': 10, 'rigid': True, 'word': '21032301230321012301', 'chiral': False}
+phase 3720 {'size': 10, 'rigid': True, 'word': '01012303232323012101', 'chiral': True}
+phase 3853 {'size': 10, 'rigid': True, 'word': '01323231323201010201', 'chiral': True}
+phase 3897 {'size': 10, 'rigid': True, 'word': '03212303032103012121', 'chiral': True}
+phase 4058 {'size': 10, 'rigid': True, 'word': '03012301232123012301', 'chiral': False}
+phase 4121 {'size': 10, 'rigid': True, 'word': '01232323232301010101', 'chiral': False}
+phase 4211 {'size': 10, 'rigid': True, 'word': '23032303230121012101', 'chiral': False}
+phase 4353 {'size': 10, 'rigid': True, 'word': '02313231313102010202', 'chiral': True}
+phase 4593 {'size': 10, 'rigid': True, 'word': '32313232310102010102', 'chiral': True}
+phase 4631 {'size': 10, 'rigid': True, 'word': '21012301030323012321', 'chiral': False}
+phase 4686 {'size': 10, 'rigid': True, 'word': '31023232310231010102', 'chiral': False}
+phase 4773 {'size': 10, 'rigid': True, 'word': '31323231020201010231', 'chiral': False}
+phase 4881 {'size': 10, 'rigid': True, 'word': '23232303010101012123', 'chiral': False}
+phase 5083 {'size': 10, 'rigid': True, 'word': '23212323030103010121', 'chiral': False}
+phase 5133 {'size': 10, 'rigid': True, 'word': '01032301232321012301', 'chiral': True}
+phase 5421 {'size': 10, 'rigid': True, 'word': '31313231020202010231', 'chiral': True}
+phase 5464 {'size': 5, 'rigid': True, 'word': '01032303212321012103', 'chiral': False}
+phase 5782 {'size': 10, 'rigid': True, 'word': '01023231313231010202', 'chiral': True}
+phase 5801 {'size': 5, 'rigid': True, 'word': '23232303030101012121', 'chiral': False}
+phase 5849 {'size': 10, 'rigid': True, 'word': '21232301030301012321', 'chiral': True}
+phase 6614 {'size': 10, 'rigid': True, 'word': '23032301010121012323', 'chiral': True}
+phase 7861 {'size': 1, 'rigid': True, 'word': '2301', 'chiral': False}
+walls [(3373, 96), (3637, 96), (3637, 3373)]
+rigid-rigid walls [(3637, 96)]
+WALL 3637 -> 96 junction at 1473 length 2953
+  around junction: 3212323012103010123032123230121030101230231231201230301032301212321012303010323012123210123030103230
+   {'pair': (0, 1), 'kind': 'finite', 'span': (11, 11), 'size': 1, 'left_phase': 3637, 'right_phase': 96}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1469, -9), 'size': 147, 'left_phase': 3373, 'right_phase': 96}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (15, 1475), 'size': 147, 'left_phase': 3637, 'right_phase': 3373}
+   {'pair': (0, 3), 'kind': 'finite', 'span': (-5, -5), 'size': 1, 'left_phase': 3637, 'right_phase': 96}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (1477, 1477), 'size': 1, 'left_phase': 3637, 'right_phase': 96}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1470, -10), 'size': 147, 'left_phase': 3373, 'right_phase': 96}
+   {'pair': (1, 3), 'kind': 'right-only', 'span': (16, 1476), 'size': 147, 'left_phase': 3637, 'right_phase': 3373}
+   {'pair': (2, 3), 'kind': 'left-only', 'span': (-1471, -1471), 'size': 1, 'left_phase': 3637, 'right_phase': 96}
