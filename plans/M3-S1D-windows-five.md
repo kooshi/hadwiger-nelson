@@ -39,6 +39,9 @@
 - **J21-D2p** — D2(a) and D2(b) hold when every factor of `B` is thick (Borel: iff; measurable: ⟸, and ⟹ into format N′). [hand] §3.5
 - **J21-NG1** — the planner's cylinder lemma is false already for `A′ = A = UD(ℝ²)`: an explicit independent set of `A × B` of density
   `> β` that is not a.e. a cylinder, for every `B` of the D2 class. [hand] §3.6
+- **J21-D4** — both inhabitants: C9's `⌊4θ̃⌋` is a Borel window four-colouring over `{∞, 7}` of ℚ(√11), proper at every edge, a.e. a
+  pullback from neither factor; a periodic seven-colouring with Borel classes (the hexagonal one, or the repository's kernel-checked
+  `sevenBrick`) is a window seven-colouring over `{∞₁}` of every real field. [hand; C9's residue table re-checked] §4.1
 - **J21-NG2** — ratio alone cannot carry D2: a finite abelian Cayley graph `B` with `α(B)/|B| < 1/125` and a graph `A` with
   `χ(A × B) ≤ 125 < χ(A)` exist (Shitov's construction, Zhu's Theorem 3.5 instance). [hand, from `[Zhu2025]` §3 (read)] §3.6
 
@@ -382,3 +385,91 @@ null-set step) and GAP-2 (non-thick factors: 2, 3, 5, 7, 23, 29, 61 up to conjug
 (NG1) and ratio-only routes are refuted in general (NG2). **At the one-real-place slice this proves nothing new about `χ_µ(ℝ²)`**: it shows
 that adding thick finite places to `{∞}` neither helps nor hinders a five-colour window, so over such `S` the question is exactly the
 plane's (Borel) measurable chromatic number.
+
+---
+
+## Stage 4 — SAVED (D4, the claim list, the reviewer's view, C0 and the plan's predictions scored)
+
+### 4.1 D4 — TRUE [hand]
+
+*Statement (verbatim):* "C9's colouring `⌊4θ⌋` over ℚ(√11) is a measurable window four-colouring over `{∞, 7}` that is not a pullback from
+one factor; and the hexagonal seven-colouring is a measurable window seven-colouring over `{∞₁}` of every real field."
+
+(a) 7 splits in ℚ(√11) (`11 ≡ 2² mod 7`) and `7 ≡ 3 (4)`: pick one place above 7, `F_v = ℚ₇`, stable, `T_v ⊂ ℤ₇²`. Put
+`θ₇(x, y) = {(2x + 3y)/7}₇` (the 7-adic fractional part: a continuous character `ℚ₇² → ℝ/ℤ`), `ℓ(u) = c·u` on `ℝ²` with `0 < |c| ≤ 1/28`,
+`θ̃ = θ₇(g₇) + ℓ(g_∞) mod 1`, `W = ⌊4θ̃⌋`. The eight points of `x² + y² = 1` over `𝔽₇` — `(±1, 0), (0, ±1), (±2, ±2)` — give
+`2x + 3y ≡ 2, 5, 3, 4, 3, 5, 2, 4`, so `θ₇(τ₇) ∈ {2, 3, 4, 5}/7` for every `τ₇ ∈ T_v` (re-checked by hand; = C9). Hence for every edge
+`θ̃(g + τ) − θ̃(g) ∈ [2/7 − 1/28, 5/7 + 1/28] = [1/4, 3/4]` mod 1, and two points at circular distance `≥ 1/4` lie in different half-open
+quarter-arcs: **proper at every edge** (format E). Classes are preimages of half-open arcs under a continuous map: **Borel**. Not a pullback:
+for each `g_∞`, `θ₇` takes all seven values on positive-measure subsets of `ℤ₇²`, spaced `1/7 < 1/4`, so `W(g_∞, ·)` is non-constant on
+positive measure; for each `g₇`, `ℓ ≠ 0` sweeps `θ̃` across arc boundaries on positive measure. (Consistent with J21-MX at `k = 4`: `Γ₇`'s
+Hoffman ratio `2/7` forces `λ* ≥ 2/5 > 1/3`, so `Γ₇` is not 4-mixing — as it must not be, `UD(ℝ²)` being 5-chromatic.)
+(b) The hexagonal seven-colouring (hexagons of side `s`, `2s < 1 < s√7`, boundaries assigned so every class is a union of translates of one
+half-open hexagon of diameter `< 1`, same-coloured translates `> 1` apart) is periodic with Borel classes and proper at every edge, so it is a
+window seven-colouring over `{∞₁}` (`G_{∞₁} = ℝ²`), and `r ↦ W(σ₁(r) + t)` seven-colours `F²` for every real `F` and every `t`. The
+repository's kernel-checked instance of the same kind is the brick colouring `sevenBrick` (half-open `4/5 × 3/5` cells, row shear `2/5`,
+colour `(column + 3·row) mod 7`; `Proofs/HadwigerNelson/Instances/Seven.lean`, `plane_colorable_seven`, row 33): classes
+`{z : (⌊·⌋ + 3⌊·⌋) mod 7 = c}` are Borel, so it inhabits the format with a kernel certificate of properness. ∎
+
+### 4.2 The claim list (for J22's fixed list; one verdict each)
+
+| claim | verdict | grade | format covered | address |
+|---|---|---|---|---|
+| D0 | **TRUE** | hand | E (and Borel) | §2.1 |
+| D1 | **TRUE** | hand (C14.3 at 5, re-walked) | E, N, L | §2.2 |
+| D1-fac | **TRUE** | hand + tools (59: float spectrum, error `< 10⁻¹¹`, margin `8.8·10⁻⁴`) + cert (23: row 75) | — | §2.3 |
+| D1-43 | **GAP** at "the all-levels ratio of the 43-adic plane `< 1/5`"; partial TRUE at level one (format L) | hand + cert | L only | §2.6 |
+| D1-2 | **TRUE** | hand + tools (FFT at `ℚ₂(i)`) | — | §2.5 |
+| D1-3 | **TRUE** | hand | — | §2.4 |
+| D2(a) | **GAP** at two steps: GAP-1 the null-set step (everywhere-proper from measurable), GAP-2 non-thick factors (2, 3, 5, 7, 23, 29, 61 up to conjugation); **TRUE** when every factor of `B` is 5-thick (Borel: iff; measurable: into format N′) | hand + tools | Borel; E → N′ | §3.5 |
+| D2(b) | **equivalent to D2(a)** (slicing); same verdict | hand | as D2(a) | §3.5 |
+| D3 | **TRUE** | hand | E (and Borel) | §3.1 |
+| D4 | **TRUE** | hand | E, Borel | §4.1 |
+| J21-MX, J21-TH, J21-RED | TRUE | hand + tools (TH's spectra; classical Weil and higher-level Kloosterman bounds as inputs) | Borel; E → N′ | §3.2–§3.4 |
+| J21-NG1 (cylinder lemma false) | TRUE (counterexample) | hand | E | §3.6 |
+| J21-NG2 (ratio-only D2 false at `k = 125`) | TRUE | hand, from `[Zhu2025]` Thm 3.5 (external; its proof not re-checked) | finite graphs | §3.6 |
+
+### 4.3 The reviewer's view — what someone who trusts none of this must check
+
+1. **J21-MX** (the load-bearing new step): the compact expander-mixing lemma (two lines of Parseval) and the pigeonhole `1/k > θ ⟺ λ* < 1/(k−1)`;
+   the Borel measurability of `x ↦ μ(W(x,·)^{-1}(j))`. Nothing else.
+2. **J21-TH**: that each listed place is what the table says (congruences; `tools/crunch_j21_spectra.py`), the level-one numbers (the
+   tool, plant watched), and two classical inputs — Weil for Kloosterman sums over `𝔽_q`, and `|K(a,b;π^m)| ≤ 2q^{m/2}` for `m ≥ 2` in odd
+   residue characteristic — plus Lemma P for the new characters at stable places. **59 is thick by `1.4·10⁻³`** — the one close margin.
+3. **D1-fac at 23**: row 75's certificate (outside this job; its checker is frozen and was not re-run here).
+4. **D1-2**: that C14.2 (c)'s four cases use `q` only through `1/(q−1) ≤ 1` (§2.5 lists each); the tool is a sanity check, not the proof.
+5. **J21-NG2**: `[Zhu2025]` Theorem 3.5 as quoted, and the arithmetic `41 · 3.07 > 125`.
+*Evidence that is not load-bearing:* the dyadic FFT (the proof is the case analysis), the 23/43 values (they only say "not thick").
+
+### 4.4 C0 scored, and the plan's registered predictions
+
+| claim | prior | outcome | note |
+|---|---|---|---|
+| D0 / D1 / D1-3 | 0.97 / 0.90 / 0.97 | TRUE / TRUE / TRUE | as expected |
+| D1-fac | 0.80 | TRUE | |
+| D1-43 | GAP 0.93 | GAP | as expected |
+| D1-2 | 0.80 | TRUE | |
+| D2(a) | partial TRUE 0.60; obstruction 0.80; cylinder false 0.90 | partial TRUE, obstructions named, cylinder false | **not foreseen:** the partial scope is "every factor mixing", and it reduces ℚ(√167)'s whole window question to twelve places |
+| D2(b) | reduces 0.85 | reduces (equivalent) | |
+| D3 | 0.85 | TRUE | |
+| D4 | 0.90 | TRUE | |
+
+The plan's §P (my reading; the close scores): **P-D-d** (0.55; "D0 and D1 with gaps named; D2 not proved, its obstruction named") —
+**landed**, with more than it states (a partial pullback theorem; one named gap closed). **P-D-2** (0.60, the dyadic ratio shown) — landed.
+**P-D-3** (0.95) — landed. **P-D-c** (0.20; needs "D2 proved") — not landed (D2 GAP on its deciding steps). **P-D-43** (0.10), **P-D-a**
+(0.02), **P-D-b** (0.03) — not landed.
+
+### 4.5 What this touches at the one-real-place slice, and what it does not
+
+It does **not** touch `χ_µ(ℝ²) ≤ 5` or `≥ 6`. It shows that at ℚ(√167) every finite place except twelve is **invisible** to the five-colour
+window question: removable without loss (Borel), so over `S = {∞} ∪ (thick places)` the question *is* the plane's Borel measurable
+chromatic number, and a window falsifier of the conjecture's "≥ 6" must read a place above 43 or one of 2, 3, 5, 7, 23, 29, 61 — or else be
+a (Borel, or null-set-tolerant measurable) five-colouring of the whole plane.
+
+### 4.6 Proposed edits for the front-page lane (not made here)
+
+- `plans/FS86-derivation.md` FS86-CL1 and `LEDGER.md` row 92: "C14.2 at `p = 2` … not checked" — now checked (§2.5, one mind): CL1's
+  qualifier "whose split places are odd" can be dropped at ℚ(√47) and ℚ(√167).
+- `plans/M3-exotic-colourings.md` §PA.1 row 3: `[KechrisMarks2020]` "§4.7" → §5.1, Example 5.1 (pp. 45–46).
+- `CLOSED-QUESTIONS.md` candidate (after the prior-art debt in §3.7 is paid): a positive special case of `[KechrisMarks2020]` Problem 4.23 —
+  `C_B(k+1)` holds for every pair `(G, Cay(K, T_K))` with `K` compact abelian and `λ* < 1/(k−1)`.
