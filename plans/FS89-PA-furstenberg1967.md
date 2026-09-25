@@ -359,12 +359,12 @@ layer.
 |---|---|---|---|
 | 1 | R. L. Adler, A. G. Konheim, M. H. McAndrew, *Topological entropy*, Trans. Amer. Math. Soc. 114 (1965) 309–319 | pp. 36, 38 | no (entropy, for Prop. III.1 and §3) |
 | 2 | R. Ellis, *Distal transformation groups*, Pacific J. Math. 8 (1958) 401–405 | pp. 25, 29 | no |
-| 3 | H. Furstenberg, *Stationary Processes and Prediction Theory*, Princeton Univ. Press, 1960 | p. 19 (Part I §10) | no |
+| 3 | H. Furstenberg, *Stationary Processes and Prediction Theory*, Princeton Univ. Press, 1960 | p. 21 (Part I §10) | no |
 | 4 | H. Furstenberg, *Strict ergodicity and transformations of the torus*, Amer. J. Math. 83 (1961) 573–601 | p. 10 (Part I, group extensions of a rotation) | no (skew products on tori; unique ergodicity) |
 | 5 | H. Furstenberg, *The structure of distal flows*, Amer. J. Math. 85 (1963) 477–515 | pp. 25, 29–30 (Prop. II.9) | no |
 | 6 | W. H. Gottschalk, G. A. Hedlund, *Topological Dynamics*, Amer. Math. Soc. Colloq. Publ., "Vol. 83, 1961" as printed (the book is Vol. 36, 1955; not checked further) | pp. 25, 28 | no (textbook) |
 | 7 | W. H. Gottschalk, *An irreversible minimal set*, in *Ergodic Theory*, Academic Press, 1963 | p. 38 | no |
-| 8 | P. R. Halmos, *On automorphisms of compact groups*, Bull. Amer. Math. Soc. 49 (1943) 619–624 | pp. 27, 46 | **marginal**: the ergodicity input of Prop. IV.1's proof (an endomorphism with no root-of-unity eigenvalue is ergodic for Haar measure; for a general compact abelian group, the adjoint has no finite orbit). Berend 1984 uses the same criterion (his Thm I.3). Nothing of ours rests on it |
+| 8 | P. R. Halmos, *On automorphisms of compact groups*, Bull. Amer. Math. Soc. 49 (1943) 619–624 | pp. 27, 46 | **marginal**: the ergodicity input of Prop. IV.1's proof (p. 46: an endomorphism with no root-of-unity eigenvalue acts ergodically on Lebesgue measure) and of p. 27 (weak mixing for Haar measure iff the adjoint has no finite orbit). Berend 1984 Thm I.3 states the ergodicity criterion in the dual form (source not checked). Nothing of ours rests on it |
 | 9 | P. R. Halmos, *Lectures on Ergodic Theory*, Math. Soc. Japan, 1956 | no marker found | no |
 | 10 | P. R. Halmos, *Entropy in Ergodic Theory*, Univ. Chicago Press, 1959 | pp. 10, 12 | no |
 | 11 | I. Niven, H. S. Zuckerman, *On the definition of normal number*, Pacific J. Math. 1 (1951) 103–109 | p. 23 | no |
