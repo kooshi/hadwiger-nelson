@@ -1,3 +1,5 @@
+> **SUPERSEDED 2026-09-25 by `plans/SESSION-HANDOFF-2026-09-25-crunch.md`** (FS-89 closed; the crunch planned).
+
 # Session handoff: FS-89 at Stage 0 (2026-09-25)
 
 *Written by the product owner for a reader with no conversation memory. It supersedes `plans/SESSION-HANDOFF-2026-09-25-fs86-open.md`.
