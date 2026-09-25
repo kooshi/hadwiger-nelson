@@ -232,3 +232,204 @@ of interest to construct such a measure directly." Measure-theoretic; not our qu
 - **No invariant-measure question is posed in this paper.** Part IV's only measure is Lebesgue measure, in Proposition IV.1's proof. So
   the "×2×3 measure problem" (the close inventory's item 1: "the open ×2×3-type problem") is not stated here, and its attribution to
   Furstenberg needs another source.
+
+## 2. Our records' quotations of Furstenberg, checked against the source (question 2)
+
+**The two second-hand quotations the brief names.**
+
+1. **"Prop. IV.1: for a minimal set `M`, `M − M` is proper."**
+   - **Holds, as a corollary and at the torus's scope.** The printed proposition is `M + B = K^r ⟹ B = K^r` for a Σ-minimal `M` and a
+     closed Σ-invariant `B`, with the conclusion misprinted as `M = K^r` (§1.4). "`M − M` is proper" is its instance `B = −M`, which
+     Furstenberg uses in Proposition IV.2's proof (p. 48) and never states.
+   - **Its scope:** a commutative semigroup of endomorphisms of a finite-dimensional **torus**, under (i) (no finite `Σ*`-invariant set in
+     `Z^r − {0}`) and (ii) (a prime `q` prime to every `det σ`).
+   - **It does not reach a solenoid such as `R̂_S`.** The group form is announced in words on p. 45, and neither stated nor proved. The
+     held proof for our action is Berend 1984 Theorem I.2 with Proposition II.6 (`plans/FS89-PA-berend1984.md` §5(a)).
+   - **Berend's p. 530 wording is his, not Furstenberg's:** "B = T^r" in the conclusion, and "some ergodic endomorphism" for (i).
+2. **The equivalence Berend lists** (`[Berend1984min]` §1, pp. 499–500, citing "[3, prop. III.1, th. III.2, prop. IV.2, th. IV.1]").
+   - **The citation is accurate; the description in our records is not quite.**
+   - Berend's words are "some of Furstenberg's results … can be combined to yield the following". The theorem has **five** equivalent
+     conditions, (1)–(5), assembled from **four** results. Furstenberg states no such equivalence.
+   - What each cited result supplies:
+     - **Proposition IV.2 and Theorem IV.1:** non-lacunary ⟹ minimal sets finite and rational, and irrational orbits dense (Berend's
+       (5) ⟹ (1)–(3)).
+     - **Proposition III.1 and Theorem III.2:** Hausdorff dimension = topological entropy / log a, and minimal sets of positive entropy
+       exist (for a > 4 in the proof, p. 39). Together they give the lacunary side: one generator has minimal sets of positive dimension
+       (Berend's (4) ⟹ (5)).
+   - Berend makes the same use on p. 502. His Lemma 3.3 builds its minimal set "As in the proof of theorem III.2 in [3]" and gets
+     `dim > 0` "in view of [3, prop. III.1]".
+
+**Every place in `plans/FS89-*.md`, `CLAUDE.md` and the neighbouring shared files that names Furstenberg** (read from disk at commit
+710e826e plus the uncommitted `plans/FS89-PA-berend1984.md`). A verdict of "holds" means the words are true of this paper at the scope
+written. Every "fix" names what should change. **I edit none of these files.**
+
+| # | where | what it says | verdict |
+|---|---|---|---|
+| 1 | `BIBLIOGRAPHY.md` main row `[Furstenberg1967]` (l. 305) | "the ×2×3 closed-set theorem (an orbit of a non-lacunary semigroup on the circle is finite or dense; Prop. III.1, Th. III.2, Prop. IV.1–IV.2, Th. IV.1, as combined in `[Berend1984min]` §1)" | **content holds** (Theorem IV.1, p. 48; rational orbits are trivially finite). **Labels need a fix:** the finite-or-dense theorem is Th. IV.1, proved from Lemmas IV.1–IV.2 and Props. IV.1–IV.2. Prop. III.1 and Th. III.2 are the lacunary (one-generator) side, not the ×2×3 theorem. Berend's list has Prop. IV.2, not IV.1 |
+| 2 | same row | "Prop. IV.1 (`M − M` proper for a minimal `M`) is the input to Berend's Prop. 4.1 case 1" | **holds**: Berend ETDS p. 504 applies "Proposition IV.1 of [3]" to conclude "M − M is a proper subset of T^r" (a torus, so in scope). Add: corollary of the printed statement (with its misprint), toral |
+| 3 | same row, copy and read columns | "not held … **not read**; its statements used here are as quoted in `[Berend1984min]` §1" | **stale**: held (`pdf/Furstenberg1967-…pdf`, Kooshi's save, close inventory item 45); read per §1 |
+| 4 | `BIBLIOGRAPHY.md` acquisition row 13 (l. 70) | "not requested (nothing rests on it beyond Berend's quotation)" | **stale**: acquired |
+| 5 | `CLAUDE.md` Frontier item 25 | "Two primes restore Furstenberg–Berend rigidity modulo the rotated direction" | **holds as a name.** Furstenberg's part is the circle under a non-lacunary semigroup. "Two primes" is the analogue of his "non-lacunary", in Berend's word "multi-parameter" |
+| 6 | `CLAUDE.md` G76 | "the exclusion is **closed-set** (Furstenberg–Berend) rigidity on `R̂` with the archimedean directions rotated" | **holds as a name.** Nothing with a rotated direction is in this paper (§4) |
+| 7 | `CLAUDE.md` prior-art position, "Not ours" | "closed-set rigidity for hyperbolic multi-parameter actions and the isometric direction's minimal circles (`[Furstenberg1967]`, `[Berend1984min]`)" | **holds only jointly; split it.** This paper holds the circle case (Th. IV.1, Prop. IV.2) and the disjointness input (Th. III.1; Prop. IV.1 for tori). "Hyperbolic multi-parameter" and "the isometric direction's minimal circles" are Berend's (ETDS Thm 2.1 and Lemma 3.1). **Suggested:** "closed-set rigidity on the circle under non-lacunary semigroups and the disjointness input (`[Furstenberg1967]` Th. IV.1, Props. IV.1–IV.2); for hyperbolic multi-parameter toral actions, and the isometric direction's minimal circles (`[Berend1984min]`, `[Berend1983]`)" |
+| 8 | `LEDGER.md` row 95, prior art | "`[Berend1984min]` … and `[Furstenberg1967]` supply the frame and the method" | **holds.** This paper supplies the `M − M` architecture, the density lemma on the circle and the disjointness input (§3) |
+| 9 | `plans/FS89-close-inventory.md` item 1 | "re-pose … from invariant measures (the open ×2×3-type problem) to invariant closed sets (Furstenberg–Berend rigidity, proved in print)" | **closed-set half holds.** This paper does not pose the measure problem (§1.4, last bullet) |
+| 10 | `plans/FS89-rational-band-rigidity.md` §0.1 (l. 30) | "**Furstenberg's shape**: an orbit avoiding a fixed open set" | **holds**: Theorem IV.1's contrapositive at `r = 1` (an orbit missing an open set is rational) |
+| 11 | same, §0.4 item 1 (l. 74) | "Furstenberg's closed-set theorem (×2×3) and Berend's generalisations … require every eigen-direction to be expanded by some element" | **fix: the expansion requirement is Berend's, not Furstenberg's.** At `r = 1` it is automatic; Furstenberg's hypothesis is non-lacunarity. His Prop. IV.1 asks no expansion at all, only (i) and (ii) |
+| 12 | same, §0.4 item 3 (l. 86) and §G.6 (l. 383) | "Furstenberg's multi-parameter condition" | **wording fix:** his term is "non-lacunary" (Def. IV.1, p. 47). "Multi-parameter" is Berend's. Furstenberg writes "one-parameter" (p. 45) for a single map. Substance holds |
+| 13 | same, §PA.1 (ll. 396–398) | "Furstenberg's ×2×3 theorem is the case of the circle with the semigroup ⟨2, 3⟩: an orbit that avoids an open set is finite (torsion)" | **holds** (Th. IV.1 with Prop. IV.2; his example is `{2^n3^m; n,m ≥ 1}`) |
+| 14 | same, §PA.3 (l. 456) and §C.1 (l. 715) | "contradicting Furstenberg's Prop. IV.1: `M − M` is proper" | **holds** at the torus's scope (Berend's use, ETDS p. 504) |
+| 15 | same, §PA.3 (ll. 470–472) | "not held … Berend's minimal-sets paper states the four-way equivalence it proves for the circle (Prop. III.1, Th. III.2, Prop. IV.2, Th. IV.1)" | **fix:** five conditions, from four results, combined by Berend (item 2 above). Now held |
+| 16 | same, G.1 row FS-73 (l. 371) | "T38 … the Furstenberg correspondence" | **not this paper.** The correspondence principle is not in the 1967 text |
+| 17 | `plans/FS89-S1D-derivation.md` §2 opening (l. 87) | "Case 1's contradiction at the band needs no Furstenberg Prop. IV.1" | **holds** |
+| 18 | same, D1-L3 (l. 115) | "This is Furstenberg's non-lacunary step, done `p`-adically" | **holds at method scope**, with the difference named in §3 row D1-L3 |
+| 19 | same, D1-T1 Remark 2 (l. 157) | "Without D1-L4, case 1 needs Furstenberg's Prop. IV.1 (`M − M ≠ G` for minimal `M ≠ G`) [external, not held]" | **fix twice.** (a) Prop. IV.1 is stated for tori; for `G = R̂_S` the held statement is Berend 1984 Thm I.2 + Prop. II.6 (Furstenberg announces it in words only, p. 45). (b) "not held" is stale. ("`M ≠ G`" is automatic: `G` is never minimal, since `{0}` is invariant) |
+| 20 | same, §6 (l. 395) | "Furstenberg Prop. IV.1 … is still not held" | **stale** |
+| 21 | `plans/FS89-derivation.md` FS89-D1-L3 (l. 192) | "`[Berend1984min]` Prop. 4.1, case 1, which in print needs Furstenberg Prop. IV.1 and Berend 1983 §4 (not held)" | **attribution holds; "not held" stale** for both |
+| 22 | same, FS89-D1-L4 (l. 197) | "Prior art: none (the band replaces Furstenberg's "`M − M` is proper")" | **holds** (§3: D1-L4 not found; the slot it fills is Prop. IV.1's in Prop. IV.2's proof) |
+| 23 | `plans/FS89-S1VB-verification.md` §B2 (l. 194) | "Furstenberg's original lemma bases the difference set at `0`, which every automorphism fixes, and so needs no recurrence at all" | **holds**: Prop. IV.2's proof applies Lemma IV.2 to `M − M` with `0` non-isolated (p. 48); no recurrence is used |
+| 24 | same, ll. 24 and 163 | "a Furstenberg-type (×a×b in finite quotients) statement"; "a Furstenberg-type density statement in finite quotients" | **no such statement in this paper.** Its one finite-quotient device is `Σ mod q^n` in Prop. IV.1's proof (pp. 45–46), used for periodic points, not density |
+| 25 | `plans/FS89-S0B-band-set.md` (l. 244) | "the Furstenberg–Berend shape … the second prime's unit acts at 5 as an isometry with dense orbits and breaks the one-parameter freedom" | **half holds.** "A second independent generator breaks one-parameter freedom" is Furstenberg's (lacunary against non-lacunary). "Acts … as an isometry with dense orbits" is not: his second generator expands, and works through `log Σ` being non-discrete (Lemma IV.1) |
+| 26 | `plans/FS89-PA-berend1984.md` l. 18 | "Furstenberg's theorem ([5, p. 48]: a non-lacunary semigroup of integers moves an irrational densely mod 1)" | **holds** (Th. IV.1, p. 48) |
+| 27 | same, l. 44 | "the multi-parameter form of Furstenberg's Prop. IV.1" | **wording fix:** Prop. IV.1 is already multi-parameter (commutative semigroups). Berend's Thm I.2 is its **group-flow** form (ℱ-flows on any compact group), which Furstenberg announced on p. 45 |
+| 28 | same, l. 289 | "Proposition [1, p. 45]" quoted from Berend 1983 p. 530 as "Furstenberg's Prop. IV.1 in the form D's Remark 2 wanted" | **holds as a quotation of Berend.** It differs from the print in (i)'s wording and in the conclusion's letter (the print's misprint, §1.4) |
+| 29 | same, ll. 309, 352 | "its Prop. IV.1 is now available held, as 1984 Thm I.2 + Prop. II.6 and 1983 p. 530"; the note owed to the row | **superseded**: the original is held and read (§1.4) |
+
+## 3. Verdicts on FS-89's statements (question 3)
+
+**The verdicts take three values:**
+- **in print:** the statement is in this paper;
+- **method in print, statement not:** the argument's shape is here and the statement is not;
+- **not found in this paper.**
+
+This paper's whole setting is:
+- a single endomorphism of a compact abelian group (Part III);
+- a commutative semigroup of endomorphisms of a torus (Prop. IV.1);
+- the circle under a semigroup of integers (Part IV §2).
+
+It has no solenoid, no `p`-adic place, no number ring other than `ℤ`, no characters of a ring and no band.
+
+| statement | verdict | result and page | note |
+|---|---|---|---|
+| **D1-L3** (case 1 at `\|S\| ≥ 2` ⟹ `M − M = R̂_S`) | **method in print, statement not** | Lemma IV.2 (p. 47): a closed Σ-invariant `A ⊆ K` with `0` non-isolated is `K`; Lemma IV.1 (p. 47): the dichotomy "contained in a discrete subgroup, or more and more dense"; Prop. IV.2's proof (p. 48): applied to `M − M` | **Same architecture:** a density lemma applied to the difference set based at `0`. **Different density mechanism.** Furstenberg's comes from two *expanding* generators whose logarithms do not lie in a discrete subgroup, so ratios tend to 1. D1-L3's works at `v`, whose value group is discrete; density comes from the unit part, where the second prime's `w_q` is a `v`-adic unit (an isometry at `v`) generating an open subgroup; then strong approximation goes from the `v`-line to `R̂_S`. None of the `p`-adic unit mechanism, strong approximation or the solenoid is here. "Furstenberg's non-lacunary step, done `p`-adically" is accurate if read as "Lemma IV.1's dichotomy transposed to `ℚ_v^×`". The `p`-adic branch itself is Berend 1984 §II.3 (the Berend reader) |
+| **D1-L4** (the parity line: `θ₂ ∈ M − M` ⟹ a corner in `M`) | **not found** | — | The slot it fills is Prop. IV.1's in Prop. IV.2's proof (p. 48), where Furstenberg contradicts `M − M = K` by disjointness. No value constraint, band or distinguished character appears anywhere in the paper |
+| **D1-T1** (`MS₄(S)`: minimal sets in `T + A`) | **method in print, statement not** | Prop. IV.2 (p. 48), with Prop. IV.1 (p. 45) and Lemma IV.2 (p. 47): for non-lacunary Σ the minimal sets in `K` are finite sets of rationals | The `r = 1` analogue with no isometric direction, so the conclusion is "torsion", not "torsion plus archimedean". Furstenberg's proof has only D1-T1's **case 1**: on the circle every small difference lies in the expanded direction. The contradiction comes from Prop. IV.1, not from a band. **Case 2 (D1-L2) is absent**; it is Berend's |
+| **RQ₄** (`Θ₄(Q) ⊆ T + A`) | **not found** | — | Nothing on `ℤ[i][1/p]`, characters or bands |
+| **the one-prime failure** (row 97: over `ℤ[U₅]` the band set is not `T + A`) | **method in print, statement not** — what is printed is the phenomenon at `r = 1` | Definition IV.1 (lacunary, p. 47); the example `α = Σ a^{−k²}`, whose `×a`-orbit closure has "only the limit points 0, a^{−1}, a^{−2}, ···" (p. 48); Theorem III.2 with Prop. III.1 (pp. 36, 38): `×a` has minimal sets of positive Hausdorff dimension; Summary (p. 1): "Uncountably many such minimal sets exist in K" for `z ↦ z²` | "Lacunary" is his word for one generator on the circle. Our `⟨i, w₅⟩` on a two-dimensional solenoid, with one infinite generator, is its analogue, not an instance. **The mechanisms differ.** His examples are homoclinic to `0`: sparse digits, or recurrent sequences on arithmetic progressions. S0B's is heteroclinic between two torsion leaves inside a band set (the Berend reader's same remark for Berend) |
+| *not asked:* D1-L2 (case 2 ⟹ a point of `T + A`) | **not found** | — | No contracted or isometric direction exists at `r = 1`, and the torus proposition never splits `M − M` |
+| *not asked:* "`M` minimal and `M − M = R̂_S` ⟹ `M = R̂_S`" (PA-B2's input) | **announced, not stated or proved here** | p. 45 remark: "a generalization of Theorem III.1 to abelian groups on which an abelian semigroup of endomorphisms acts"; stated and proved for tori only (Prop. IV.1) | The held proof for `R̂_S` is Berend 1984 Thm I.2 + Prop. II.6. Its toral form holds with isometric directions present (§4) |
+| *not asked:* RS₄(S), RQ₅, N₀, EQ, FT, C-HD1, C-47, C-167 | **not found** | — | Outside the paper's setting |
+
+## 4. Isometric or rotating components (question 4)
+
+**Short answer.** Furstenberg never considers a closed invariant set under an action with a rotating direction inside the same group,
+and proves no finite-or-dense or torsion conclusion there. Two things in the paper touch the question.
+
+1. **A rotation as a separate factor: disjointness.** The flow `(K, ×2)` is an 𝓕-flow (Part II §3(D), p. 27) and weakly mixing (p. 27).
+   An irrational rotation `(K, x ↦ x + α)` is a Kronecker flow (§3(H), p. 31), minimal and distal.
+   - Theorem II.2 (𝓕 ⊥ 𝓜, p. 32), read through Lemma II.1 (p. 24), then says: under the single map `(x, y) ↦ (2x, y + α)` on `K × K`, the
+     only closed invariant set projecting onto both circles is `K × K`. Theorem II.3 (𝓦 ⊥ 𝓓 ∩ 𝓜, p. 33) gives the same.
+   - **This is the one statement in the paper about "×2 alongside an irrational rotation"**, and it is in product form.
+   - A rotation and `×2` on the *same* circle do not commute (`2(x + α) ≠ 2x + α`), so that pair is outside his abelian-semigroup
+     framework. He does not consider it.
+2. **A rotation inside a torus, as a linear isometry.** Prop. IV.1 (p. 45) assumes only (i) and (ii). Its proof uses Halmos's ergodicity
+   for an element with no root-of-unity eigenvalues and the density of `q`-power torsion points. **Nothing requires expansion.**
+   - So its conclusion — a minimal `M` with `M + B = K^r` forces `B = K^r` — holds for commutative semigroups with eigenvalues of modulus
+     1 that are not roots of unity. An ergodic quasi-hyperbolic toral automorphism is an example.
+   - **Furstenberg does not remark on this.** For such actions he states nothing about what minimal sets look like. The finite-or-dense
+     theorem is proved only at `r = 1`, where no isometric direction exists.
+
+**What this means for "modulo the archimedean leaf".**
+- It is **not in this paper**.
+- What the paper does show, at the torus's scope, is that the **disjointness half** of the argument, "`M − M` is proper", **does not need
+  hyperbolicity**. That is the toral counterpart of what the Berend reader found held for our solenoid (Berend 1984 Thm I.2 + Prop. II.6;
+  `plans/FS89-PA-berend1984.md` §5(a)).
+- So the obstruction our derivation met at the archimedean place is confined to the **other half**, the finite-or-torsion conclusion.
+  That half is Berend's hyperbolicity condition (his ETDS Lemma 3.1), and in Furstenberg it is only the `r = 1` Prop. IV.2.
+
+This reading of the division of labour is mine, one mind, **[reading]**. Its killing test: a toral commutative semigroup satisfying (i)
+and (ii) with a minimal `M` such that `M − M = K^r`. That would refute the (corrected) Prop. IV.1, and I expect none.
+
+## 5. The reference list, mined (question 5)
+
+Fourteen entries (p. 49, image-checked). Pages are where the OCR layer shows the marker; `[9]` and `[14]` have no marker in the OCR
+layer.
+
+| # | entry, as printed | cited at | bears on FS-89? |
+|---|---|---|---|
+| 1 | R. L. Adler, A. G. Konheim, M. H. McAndrew, *Topological entropy*, Trans. Amer. Math. Soc. 114 (1965) 309–319 | pp. 36, 38 | no (entropy, for Prop. III.1 and §3) |
+| 2 | R. Ellis, *Distal transformation groups*, Pacific J. Math. 8 (1958) 401–405 | pp. 25, 29 | no |
+| 3 | H. Furstenberg, *Stationary Processes and Prediction Theory*, Princeton Univ. Press, 1960 | p. 19 (Part I §10) | no |
+| 4 | H. Furstenberg, *Strict ergodicity and transformations of the torus*, Amer. J. Math. 83 (1961) 573–601 | p. 10 (Part I, group extensions of a rotation) | no (skew products on tori; unique ergodicity) |
+| 5 | H. Furstenberg, *The structure of distal flows*, Amer. J. Math. 85 (1963) 477–515 | pp. 25, 29–30 (Prop. II.9) | no |
+| 6 | W. H. Gottschalk, G. A. Hedlund, *Topological Dynamics*, Amer. Math. Soc. Colloq. Publ., "Vol. 83, 1961" as printed (the book is Vol. 36, 1955; not checked further) | pp. 25, 28 | no (textbook) |
+| 7 | W. H. Gottschalk, *An irreversible minimal set*, in *Ergodic Theory*, Academic Press, 1963 | p. 38 | no |
+| 8 | P. R. Halmos, *On automorphisms of compact groups*, Bull. Amer. Math. Soc. 49 (1943) 619–624 | pp. 27, 46 | **marginal**: the ergodicity input of Prop. IV.1's proof (an endomorphism with no root-of-unity eigenvalue is ergodic for Haar measure; for a general compact abelian group, the adjoint has no finite orbit). Berend 1984 uses the same criterion (his Thm I.3). Nothing of ours rests on it |
+| 9 | P. R. Halmos, *Lectures on Ergodic Theory*, Math. Soc. Japan, 1956 | no marker found | no |
+| 10 | P. R. Halmos, *Entropy in Ergodic Theory*, Univ. Chicago Press, 1959 | pp. 10, 12 | no |
+| 11 | I. Niven, H. S. Zuckerman, *On the definition of normal number*, Pacific J. Math. 1 (1951) 103–109 | p. 23 | no |
+| 12 | H. E. Robbins, *On a class of recurrent sequences*, Bull. Amer. Math. Soc. 43 (1937) 413–417 | p. 38 | no |
+| 13 | V. A. Rokhlin, *New progress in the theory of transformations with invariant measure*, Russian Math. Surveys 15 (1960) 1–22 | pp. 8–9, 14–15 | no |
+| 14 | T. S. Wu, *On homomorphisms in topological dynamics*, (to appear) | no marker found | no |
+
+**No entry is a source for closed sets under a group with a rotating direction.** As the Berend reader found for Berend's lists, the
+references are textbooks plus the author's own work.
+
+## 6. Proposed bibliography rows (for the close planner; not written into `BIBLIOGRAPHY.md`)
+
+**Main table:**
+
+> | **[Furstenberg1967]** | H. Furstenberg, *Disjointness in ergodic theory, minimal sets, and a problem in Diophantine approximation*,
+> Math. Systems Theory 1 (1967) 1–49, doi 10.1007/BF01692494; zbMATH 0146.28502 (reviewer's review) | **FS-89's home theorem.**
+> - The ×2×3 closed-set theorem: Th. IV.1 (p. 48): "If Σ is a non-lacunary semigroup of integers and α is an irrational, then Σα is dense
+>   in K". Also Prop. IV.2 (p. 48): its minimal sets are finite sets of rationals.
+> - The density lemma: Lemma IV.2 (p. 47), a closed invariant set with `0` non-isolated is `K`, applied to `M − M` (p. 48). FS89-D1-L3
+>   is its method transposed to `ℚ_v`.
+> - The disjointness input: Th. III.1 (p. 35), one map; Prop. IV.1 (p. 45), commutative toral semigroups under (i) and (ii). Its printed
+>   conclusion "implies M = K^r" is a misprint for "B = K^r" (lead-in p. 45; proof p. 46). Its corollary "`M − M ≠ K^r` for minimal `M`"
+>   is Berend's input to `[Berend1984min]` Prop. 4.1, case 1, and FS89-D1-L4 replaces it at the band.
+> - The lacunary side: Th. III.2 with Prop. III.1 (pp. 36, 38); the example `Σ a^{−k²}` (p. 48).
+> - The group-flow form of Prop. IV.1 is only announced (p. 45); for `R̂_S` it is `[Berend1984]` Thm I.2 + Prop. II.6.
+> - No isometric or rotating direction is treated, and no invariant-measure question is posed.
+>
+> | held: `pdf/Furstenberg1967-disjointness-ergodic-theory-minimal-sets.pdf` (Kooshi's save, 2026-09-25; a Google scan, 49 pp.) |
+> **read:** Parts II–IV in full, with pp. 45, 47, 48, 49 checked against the page image. Part I at headings and statements only. By
+> FS-89's prior-art reader, 2026-09-25, `plans/FS89-PA-furstenberg1967.md` |
+
+**Acquisition table row 13:** status "not requested" → "held (Kooshi's save, 2026-09-25); read, see the main row".
+
+## 7. Items for the close inventory (sent to the owner; the owner logs them)
+
+1. **Reading done:** Furstenberg 1967, Parts II–IV in full; the key pages image-checked. The record is this file.
+2. **Verdicts** (§3):
+   - D1-L3 and D1-T1: **method in print, statement not**.
+   - D1-L4 and RQ₄: **not found**.
+   - The one-prime failure: **method in print** (the lacunary phenomenon at `r = 1`), **statement not**, with a different mechanism
+     (homoclinic here, heteroclinic in S0B).
+   - **None of FS-89's statements is in this paper.**
+3. **A misprint to carry into every quotation:** Prop. IV.1 prints "implies M = K^r". The lead-in and the proof give `B = K^r`. Berend
+   1983 p. 530 silently corrects it, and rewords (i).
+4. **Corrections owed to shared files** (§2 table): rows 1, 3, 4 (`BIBLIOGRAPHY.md`); row 7 (`CLAUDE.md` prior-art position: split the
+   joint attribution); rows 11, 12, 15, 16 (the plan, if it is edited at all); rows 19–21 (the "not held" notes in S1D and the derivation
+   file, and Remark 2's torus-only scope); rows 24, 25, 27 (wording in S1VB, S0B and the Berend record).
+5. **A scope fact that supports PA-B2** (the Berend reader's band-free `MS_k`). Furstenberg's toral Prop. IV.1 needs no hyperbolicity, so
+   "`M − M` proper" survives isometric directions. The archimedean obstruction sits only in the finite-or-torsion half. §4, **[reading,
+   one mind]**.
+6. **Prior-art debt closed:** "Furstenberg 1967 not held / not read" in `BIBLIOGRAPHY.md`, the plan's §PA.3, S1D Remark 2 and §6, and
+   FS89-D1-L3's entry.
+7. **Not this paper** (for whoever attributes them):
+   - the invariant-measure ×2×3 problem (inventory item 1's "open ×2×3-type problem");
+   - the "Furstenberg correspondence" cited at FS73-T38.
+
+## 8. "Would have searched here" log
+
+- Would have searched for the source of the ×2×3 measure problem, to attribute inventory item 1's phrase. Instead: recorded only that
+  this paper does not pose it, since a search for its first statement is outside this brief.
+- Would have looked up Gottschalk–Hedlund's volume number. Instead: recorded the entry as printed, with the discrepancy flagged.
+- No search for a finite witness was needed or made.
+
+## Theorems this phase proved
+
+None. This is a reading. The one inference of my own is the §4 division-of-labour remark and the note that the printed Prop. IV.1 is
+false as literally stated (a one-line counterexample, `B = K^r`). Both are graded **[reading]** and **[hand, one line]** where they
+stand.
