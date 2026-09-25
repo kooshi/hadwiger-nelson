@@ -169,3 +169,94 @@ With 2.1 this is CLG_k's equivalence; Stage 3 assembles it and adds the level.
 
 - Would have computed `ℤ[U_F]/pℤ[U_F]` for a non-Galois cubic with a mixed prime by sampling unit vectors and row-reducing, to test
   whether it splits over places; instead derived Lemma C/C′, which decide it for every field.
+
+## Stage 3 — SAVED (CLG_k assembled; CLG-e and the level bound; CLG-g)
+
+### 3.1 CLG_k — TRUE for every real number field and every `k ≥ 2`, given `H_k` [hand; inputs named]
+
+*"Let `k ≥ 3` satisfy `H_k`, and let `F` be a real number field. Then `Θ_k(R_F) ≠ ∅` if and only if some stable place `𝔓` of `F(i)` and some
+level `m ≥ 1` have a band `k`-character of `T_{𝔓,m}`. Hence `χ_char(F²) = min_{𝔓,m} χ_char(T_{𝔓,m})`, and a character `k`-colouring of
+`F²` exists only if some residue target of `F` is `k`-colourable."*
+
+⟸ is CLG-a (2.1); ⟹ is 2.7. "Hence": `Θ_k ⊆ Θ_{k+1}`, so `χ_char(F²) = min{k : Θ_k ≠ ∅}` and the equivalence at every `k` gives the
+equality. Last clause: a band `k`-character `λ` of `T_{𝔓,m}` makes `x ↦ ⌊kλ(x)⌋` a proper `k`-colouring of `T_{𝔓,m}` (adjacent values differ
+by `λ(s) ∈ [1/k, 1 − 1/k]`). ∎ **Inputs, by name:** `H_k` (J03a-8, verified at every `k` by the owner's ruling; J01 at `k ≤ 9`); Lemma C
+(this record, one mind); weak approximation for the rational torus (standard); CLG-b_n (this record; the planner's J03-1, one mind before
+it). **Not used:** Lemma R (FS86-B1-LR), its Galois scope, `[Zhang2012]`, `[Zhu2011]`/PA-T4, any certificate, J02 or J09.
+
+**The converged form** (§M.1) — TRUE: *`κ(R_F, U_F) = max over stable 𝔓 of κ_loc(𝔓)`*, with `κ(R, U) = max{β : Θ_β(R) ≠ ∅}` and
+`κ_loc(𝔓) = sup{β : some T_{𝔓,m} has a band-β character}`. `≥` is CLG-a at band `β`; `≤` is 2.7 applied to a `θ` attaining `κ(R_F)`
+(`Θ_β` is compact and decreasing in `β`, so the maximum is attained), under `H_β` (which follows from `H_k` at every `k`, Stage 2
+notation). The maximum over places is attained at that `θ`'s survivor. `χ_char = ⌈1/κ⌉`.
+
+**Scope.** Every real number field, including fields with complex places and non-Galois `F(i)/ℚ` (ℚ(α, √7), J02's instance). Not for
+infinite-degree `F ⊆ ℝ` (Lemma C uses a class number and a lattice; FS-39's gap). **Characters only**: nothing about `χ(F²)`.
+
+### 3.2 The level bound, and CLG-e — TRUE at odd `p` (every `k`), and at inert dyadic places for `k = 3` [hand]
+
+**Lemma LB.** *Let `𝔓` be a stable place over an odd prime `p`, `e = e(𝔭|p)`, `κ_𝔭 = 𝔽_q`, and let `λ` be a band-`β` character of
+`T_{𝔓,m}` of exact level `L ≥ 2` (it kills `𝔓^L/𝔓^m`, not `𝔓^{L−1}/𝔓^m`). Then `2β·p^a ≤ 1` with `a = ⌊(⌊L/2⌋ − 1)/e⌋ + 1`.*
+
+*Proof.* Put `j′ = ⌈L/2⌉`. `L/F` is unramified at `𝔓`, so a uniformizer `π ∈ F_𝔭` is one of `L_𝔓`.
+1. *Tangent line.* For `s ∈ 𝔭^{j′}`, `t_s = (1+is)/(1−is) ∈ T(F_𝔭)` and `t_s − 1 = 2is/(1−is) ≡ 2is (mod 𝔓^L)` (as `2j′ ≥ L`); and
+   `t ↦ t − 1 mod 𝔓^L` is a homomorphism on `T(F_𝔭) ∩ (1 + 𝔓^{j′})` (`(t−1)(t′−1) ∈ 𝔓^{2j′}`).
+2. *Sweep.* For `σ ∈ T(F_𝔭)`: `λ(σt_s) = λ(σ) + ψ_σ(s)` with `ψ_σ(s) := λ(2iσs)`, a character of `𝔭^{j′}/𝔭^L ≅ O_𝔭/𝔭^{⌊L/2⌋}` whose
+   image is a cyclic group `p^{−a′}ℤ/ℤ`. All of `λ(σ) + p^{−a′}ℤ/ℤ` lies in `λ(S_{𝔓,m}) ⊆ B_β`; a coset of step `p^{−a′}` meets every open
+   arc of length `2β > p^{−a′}`, and `(−β, β)` is one. So `2β·p^{a′} ≤ 1` for every `σ`.
+3. *Some `σ` has large `a′`.* `λ ≠ 0` on `𝔓^{L−1}/𝔓^L = π^{L−1}κ_𝔓`; the `𝔽_q`-lines `σ̄·i·𝔽_q` (`σ̄ ∈ μ_{q+1}`, `(q+1)/2 ≥ 2` distinct ones)
+   span `κ_𝔓`, so some `σ` has `ψ_σ ≠ 0` on the socle `𝔭^{L−1}/𝔭^L`, at some `y₀`. Write `y₀ = p^b y₁`, `y₁ ∈ 𝔭^{j′}`, possible for
+   `b = ⌊(⌊L/2⌋ − 1)/e⌋` (`𝔭^{L−1} ⊆ 𝔭^{eb + j′}`); then `ψ_σ(y₁)` has order `≥ p^{b+1}`, so `a′ ≥ a`. ∎
+
+**CLG-e** — *"At a stable place of residue characteristic `p > k/2`, every band `k`-character of `T_{𝔓,m}` factors through `T_{𝔓,1}`."*
+- *Odd `p`:* `L ≥ 2` would give `a ≥ 1` and `2p ≤ 2p^a ≤ k`. So `L = 1`. **TRUE** (FS89-S0A-4 is its `k = 4, 5` case).
+- *Inert dyadic, `k = 3`:* the same with step ½ — the tangent set at depth `j ≥ 1` contains `π^j·𝔽_Q` (the fixed point of 2.4), the
+  lines `σ̄𝔽_Q` (`σ̄ ∈ μ_{Q+1}`, distinct since `μ_{Q+1} ∩ 𝔽_Q^× = 1`) span `𝔽_{Q²}`, and a coset `{c, c + ½}` never fits in `[1/3, 2/3]`.
+  **TRUE.** (At level one `U_Q` has no band character at all: its values lie in `{0, ½}` and `Σ_{μ_{Q+1}} t = 0` with `Q + 1` odd — J02-L4(b).)
+- *Ramified dyadic, `k = 3`:* **not decided here** (values in `(1/8)ℤ ∩ [1/3, 2/3] = {3/8, ½, 5/8}` are not excluded by one sweep).
+  Harmless: such a field has `L(F) = 2` (G56), so CLG-g never needs it.
+
+**The level bound in numbers** (`e = 1`): band-`k` characters at an odd stable place have level 1 if `k < 2p`, level `≤ 3` if
+`2p ≤ k < 2p²`, level `≤ 2r + 1` if `2p^r ≤ k < 2p^{r+1}`. At `p = 3`: level `≤ 3` for `6 ≤ k ≤ 17`. So **every stable odd place contributes
+one finite target**, `T_{𝔓, M_k(p,e)}`. Sharpness of the level-2/3 allowance at `2p ≤ k` is checked in Stage 4 (tool).
+
+### 3.3 CLG-g (the conjecture for characters), with the exception explicit — TRUE [hand + tools-grade inputs named]
+
+*"Under `H_k`, for every real number field `F`: a character `k`-colouring of `F²` exists only if `L(F) ≤ k`, except possibly through a place
+of residue characteristic `p ≤ k/2` above level one."* Proved in the sharper form:
+
+**Theorem CLG-g.** *Let `k ≥ 3`, `F` a real number field, `Θ_k(R_F) ≠ ∅`. Then `L(F) ≤ k`, unless every stable place carrying a band
+`k`-character carries it only above level one and is of one of two kinds:*
+- ***(E1)*** *odd, with residue field `𝔽_q`, `q = p^f`, **`f ≥ 3`**, `2p ≤ k < χ(Γ_q)` (level `≤ M_k(p, e)`);*
+- ***(E2)*** *inert dyadic of norm **`Q ≥ 64`**, `k < χ(U_Q)`, and `k` at least `U_Q`'s Hoffman floor (6 at `Q = 64`, 8 at `Q = 128`).*
+
+*Proof.* `L(F) = min_𝔓 χ(T_{𝔓,1})` over stable `𝔓` (the notation's definition: `Γ_q` at odd places, `U_Q` at inert dyadic ones, and
+`χ = 2` at ramified dyadic ones, G56). Let `𝔓` be a survivor (CLG_k).
+1. Ramified dyadic: `L(F) = 2`.
+2. Odd with `2p > k`, or inert dyadic with `k = 3`: CLG-e gives level one, `χ(T_{𝔓,1}) ≤ k`.
+3. Odd with `2p ≤ k` and `f = 1`: `χ(Γ_p) ≤ p + 1 ≤ k` (Brooks; `Γ_p` is connected of degree `p + 1`, neither complete nor a cycle).
+4. Inert dyadic, `k ≥ 4`: `Q ≤ 32` gives `χ(U_Q) ≤ 4 ≤ k` (G56: four-colourings found by CaDiCaL, FS-54 [tools]). `Q ≥ 64`: a band
+   `k`-character at level `m` forces `α(T_{𝔓,m})/|T_{𝔓,m}| ≥ 1/k` (**Lemma AV**: for a band-`β` character of a finite Cayley graph, the
+   arc sets `λ⁻¹[y, y + β)` are independent and average `β|G|` over `y`, so `α ≥ β|G|`), and the inert tower keeps its Hoffman ratio at every
+   level (G54, GPT Astra, recomputed at 2 by `tools/fs54_wall_feedback_verify.py`); so `k` is at least the floor. What is left is (E2).
+5. Odd with `2p ≤ k`, `f ≥ 3`: `χ(Γ_q) ≤ k` gives `L ≤ k`; otherwise (E1). ∎
+
+**Corollaries** [hand]:
+- **(g1) No exception at `k ≤ 5`**: (E1) needs an odd `p ≤ 5/2`; (E2) needs `k ≥ 6`. So *for every real number field, a character four- or
+  five-colouring exists only if `L(F) ≤ 4`, resp. `≤ 5`.* (C0 predicted 0.6 for an empty exception at `k ≤ 5`.)
+- **(g2) No exception in degree ≤ 2, at any `k`**: (E1) needs residue degree `f ≥ 3`, so `[F : ℚ] ≥ 3`; (E2) needs `f(𝔭|2) ≥ 6`, so
+  `[F : ℚ] ≥ 6`. *For every real quadratic field and every `k ≥ 3`: a character `k`-colouring exists only if `L(F) ≤ k`.* This is SIX-e's
+  hypothesis at ℚ(√167) with no exception: every stable place is odd with prime `q ≥ 23 > 7/2`, so a character six- or seven-colouring of
+  ℚ(√167)'s plane exists iff some level-one `Γ_q`, `q` stable, has a band six- (seven-) character.
+- **(g3) At `k ∈ {6, 7}`**, the exception is at most `q = 27` (levels 2–3; `χ(Γ₂₇) ≥ 6`, G56) and `Q = 64` (`6 ≤ χ(U₆₄) ≤ 8`), *given* the
+  odd-tower Hoffman ratio at `q = p^f` for every level (FS86-LP is stated at prime `q`; its fibre argument reads one `𝔽_q`-line per
+  fibre and should give `max(h(Γ_q), 2/(q+3))` — sketched, one mind, not relied on). Without it, add every `q = 3^f`, `f ≥ 5`, at levels
+  2–3.
+
+**What CLG-g does not say:** anything about non-character colourings; that the exception is ever realised (open: a band six-character of
+`UD(ℤ/729-analogue)` at `q = 27` level 2, or of the 64-tower at level `≥ 2`); anything for `k ≤ 2` beyond `Θ₂ ⊆ T₂` (J03a-5).
+
+### Would-have-searched-here log (stage 3)
+
+- Would have enumerated band six-characters of the level-2 target at `q = 27` to see whether (E1) is realised; not done — it is a finite
+  question a derivation fixes (`|O/𝔓²| = 3⁶·… `), but it bears only on fields of degree ≥ 3 and is J08's territory (SIX-d); logged as a
+  SPAWN candidate instead.
