@@ -198,9 +198,38 @@ whole `F ⊇ 8Λ` chain (V2-T1–T8). Briefs as sent, agent ids removed: `data/f
 - **Incidents.** (1) **The output-token limit:** one competitor lost three consecutive responses to the output limit after long thinking; the lost replies are unrecoverable and blocked message delivery; Kooshi stopped, questioned and resumed it. **Rule: every brief requires working in stages from the first turn — short responses, the working file saved after every step** (item 39). (2) **Paraphrase slips:** two verifier briefs paraphrased a statement and dropped a qualifier ("unit-distance"; "the closure is `ℚ₂(√3)`"), producing one spurious gap and one widened statement. **Rule: quote statements verbatim in a verifier's brief; never paraphrase** (items 46, 67).
 - **Findings about the design.** The sides never met and still **converged without contact twice**: HD1 for characters of finite type (de Bruijn's HD1-fin, Coxeter's C10) and the one obstruction every live line reached — measure rigidity with isometric archimedean directions (de Bruijn §7.5, Coxeter's C15 reading; G76). Retractions de Bruijn 2, Coxeter 1, Poros 0 (both advisors), all free; contest ran inside each side and in the quiet verifiers, which found no divergence of truth in the competitors' theorems as stated and proved, and two real scope errors (a false side sentence about K; Theorem C's broad clause, refuted by an explicit quartic). The killing test passed on K1 with a necessary condition that *holds* (Theorem A), under a standard announced before any proof; the advisor recorded its weakness (it separates nothing) with the pass. **Lesson for the verdict table:** name both sides' formats in the no-go row (§R-close.5).
 
-**The next use** (G51's *Do*): FS-89's missing theorem (two minds reached it separately), FS-80's window-frequency
-certificate, or FS-76's rank-1 proof — routes two minds could take apart. Run it with §1 as it now stands, rules 1 and 11 included; a
-milestone whose plan arrives with a one-mind proof takes the fourth run's shape: a blind verifier with a stall criterion.
+**The seventh run: FS-89, rational band rigidity (2026-09-25) — one derivation agent plus blind verifiers, no competition.** Records: the
+plan `plans/FS89-rational-band-rigidity.md` (§S, §C, §R-close), `plans/FS89-close-inventory.md` (items 9, 11, 18, 22, 33, 38, 44, 45), the
+records `plans/FS89-S0A-gluing-verification.md`, `plans/FS89-S0B-band-set.md`, `plans/FS89-S1D-derivation.md`,
+`plans/FS89-S1V-verification.md`, `plans/FS89-S1VB-verification.md`, the briefs under `data/fs89/briefs/`.
+- **Shape, and who chose it.** Stage 0: two agents in parallel, a blind verifier of the advisor's gluing sketch (G) and an exact computation
+  of the one-prime band set (S0B). Then one planner with no plan-phase advisor (the owner's decision: Kooshi's shape was lean and the
+  next-step advisor's record supplied the advisory input). Stage 1 in **Kooshi's shape** — "Let's go ahead and try one agent plus verifier
+  this time" — replacing the owner's lean towards a competition: one derivation agent (D) and a blind verifier (H) on a fixed list (V-A)
+  written before D's claims existed. **H was replaced near its ceiling** (≈393k harness) by a fresh verifier (I) for the headline, not reused.
+- **Blind first, then the lemma statements** (the owner's design for I, a 0.10-prior headline): phase B1 blind on the seven claims; phase B2
+  given D's lemma statements without proofs; B3 the divergence table. **B1 stalled** at one named step (the rotated direction), exactly as
+  its C0 predicted; **B2 closed it** — every lemma re-derived from its statement, and a second assembly (VB1) found that needs no finite
+  computation and widens the result to every `|S| ≥ 2`. The idea B1 lacked — the difference set based at `0` — came from D. Grade: one
+  derivation, every lemma re-derived by a blind verifier from its statement; not two independent derivations.
+- **Fences.** Owner commit subjects neutral from Stage 1's launch; the close inventory and D's brief fenced from the verifiers; claims
+  forwarded verbatim, never paraphrased (V's brief restored S0A-3's `|α|` bounds, which a paraphrase had dropped — caught before launch);
+  the owner's advisor-consequence overclaim in S0B's brief (item 15) was the run's one brief error, caught by G, the other blind agent.
+- **Budget anchors, from the harness** (the agents' own counts beside them): planner 448k (280k own); D 413k (250k); H 393k (225k for V-A);
+  I 437k (300k); verifier G ≈395k, S0B ≈416k; the first close planner 395,537 (≈390k own); the prior-art readers ≈384k (Berend), ≈340k
+  (Furstenberg). **The method lesson (items 38, 44):** agents' own counts ran at **55–70 % of the harness for long derivations and ≈100 % for
+  the close planner**; every budget line and the replace-at-~500k rule are read against the harness's count, never the agent's own.
+- **Findings about the design.** One agent plus a blind verifier reached the milestone's 0.10-prior outcome in a day with no retraction that
+  cost anything (H 1, D 1, the owner 1, all free). The verifier's value was in the fixed list (V-A) and in re-derivation, not in finding the
+  route; a blind verifier cannot supply a missing idea (the fourth run's lesson, met again), and the lemma-statement phase is the cheap
+  fallback that turns a stall into a verification. The four paper readers at the close each wrote only their own record, and the close
+  planner applied their verdicts: three primary sources read in a day changed the novelty wording, one grokking's reason (G55) and one
+  bibliography row's statement, and moved no theorem.
+
+**The next use** (G51's *Do*): FS-91's first question — a blind verifier given FS89-PA-B2's and PA-B3's statements (two minds reached the
+same widening from one lemma, so it is not yet evidence) — then FS-80's window-frequency certificate, or FS-76's rank-1 proof, routes two
+minds could take apart. Run a competition with §1 as it now stands, rules 1 and 11 included; a milestone whose plan arrives with a one-mind
+proof takes the fourth run's shape; a derivation milestone whose route is known in outline takes the seventh's.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 
