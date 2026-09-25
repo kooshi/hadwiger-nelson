@@ -377,7 +377,7 @@ on both steps; J21's list omits 43, consistent with 43 not being known to lie in
 
 ### 3.7 Pending: the frozen FS-66 checker at 23
 
-*(filled when the run ends; see the next save)*
+**Running at hand-back: pid 99396, log `data/m3/j22/fs66-cert-p23-m5.out`, verdict to be read by M3's close** (the owner's instruction; the process is left running, not killed). State at hand-back: steps 1–5 of 7 passed (step 5: every leading principal minor of the 46 blocks positive), step 6 at representative 176 of 266 after 580 s. The committed copy of the log is partial (written while live); D1-fac's 23 clause rests on row 75's recorded CERTIFIED meanwhile.
 
 ## Stage 4 — SAVED (phase B3: J21's record read; the divergence table; the statements read aloud)
 
@@ -436,4 +436,4 @@ five-colour its plane? … a proof that none exists removes one more kind of fal
 
 ### 4.4 The frozen FS-66 checker at 23
 
-*(recorded below when the run ends)*
+**Running at hand-back: pid 99396, log `data/m3/j22/fs66-cert-p23-m5.out`, verdict to be read by M3's close** (the owner's instruction; the process is left running, not killed). State at hand-back: steps 1–5 of 7 passed (step 5: every leading principal minor of the 46 blocks positive), step 6 at representative 176 of 266 after 580 s. The committed copy of the log is partial (written while live); D1-fac's 23 clause rests on row 75's recorded CERTIFIED meanwhile.
