@@ -598,3 +598,56 @@ log. **The planner's check behind D1-43** (float character sums, seconds): level
 - the jobs' records: `plans/M3-S1A-rank-one.md` (J18), `plans/M3-S1D-windows-five.md` (J21), `plans/M3-S1B-rank-one.md` (J19, in progress); the verifiers' records `plans/M3-S1V-rank-one.md` (J20) and `plans/M3-S1V-windows-five.md` (J22) when they run
 - tools `tools/crunch_j18_*`, `tools/crunch_j21_*`; data `data/m3/j18/`, `data/m3/j21/`
 - reports `data/crunch-2026-09-25/reports/J06.md`, `J18.md`, `J21.md`; close inventory `plans/M3-close-inventory.md`
+
+---
+
+## §R-close — M3's close (crunch job J23c, de Bruijn, Opus 5.5, 2026-09-25)
+
+*Brief: `data/crunch-2026-09-25/briefs/J23c-M3-close-math.md`, with J23a's brief as its template and `STANDING-RULES.md`. Worked from
+`plans/M3-close-inventory.md` (this job is its only writer while it runs), the five job records (`plans/M3-S1A-rank-one.md` J18,
+`plans/M3-S1B-rank-one.md` J19, `plans/M3-S1V-rank-one.md` J20, `plans/M3-S1D-windows-five.md` J21, `plans/M3-S1V-windows-five.md` J22 and
+J22b), the reports in `data/crunch-2026-09-25/reports/`, and `plans/CRUNCH-2026-09-25-INDEX.md` §3. Every number below is read from its
+source record, never from the inventory. Drafts for `LEDGER.md`, `CLAUDE.md`, `plans/FRONTIER-STUBS.md` and stub banners live in this
+section only; a front-page job applies them. Nothing here judges a verdict a record reached: each is filed at its grade and status.*
+
+### Stage 1 — SAVED (the quotation check; the inventory walk)
+
+#### R1.1 The quotation check (standing rule 5): every quotation or attributed statement in the J23c brief and the owner's launch message
+
+| # | quotation or statement (brief / launch message) | source | result |
+|---|---|---|---|
+| 1 | Q1 "is every countable four-colouring shift of a distance graph on ℤ finite (R2, A-T1)?" | this plan §IQ.1 item 2 ("is every countable `k`-colouring shift of a distance graph finite"); §S A-T1′ | faithful (the brief fixes `k = 4`, as A-T1′ does) |
+| 2 | "A-T1 is open at a named step, reached three times" | J18 §3.5 (GAP at KE); J19 §2.8 item 3 (GAP at KT's transport step; A-T1 = FW ∧ A-T1ⁿᶠ); J20 §2.4 (GAP, "the missing step, verbatim") and §3.4 | faithful: three stalls, reached by three agents; the three named steps differ in wording, and J20 §3.4 identifies its own with J19's FW plus the non-frozen half |
+| 3 | Q2 "the verdicts agree, with gaps at D1-43 and D2(a)/(b)" | J22 §4.2 row 1: "**no divergence of truth on the fixed list**"; J21 §4.2 | faithful |
+| 4 | "J22's first run was killed by its own 8 GiB slot cap (exit 137 at step 6/7, peak 8.38 GB …)" | J22 §4.4 ("exit 137 at 44:34 wall, peak RSS 8,383,092 kB — the slot's own 8 GiB cap killed it in step 6/7 (representative 220 of 266)"); `data/m3/j22/fs66-cert-p23-m5.time` ("Maximum resident set size (kbytes): 8383092") | faithful (8,383,092 kB is 8.38 GB decimal, 7.99 GiB) |
+| 5 | "D1-fac's clause at 23 rests on row 75's recorded certified verdict either way" | J22 §4.4 last sentence | verbatim in substance |
+| 6 | "J19's enumeration of 94 rigid points of `X₄({2,6,11,13,14})`" | J19 §2.6, §1.5 ("at the ban's edge, logged") | faithful |
+| 7 | "J20's declined residue step mod 20, which the owner ruled waits for 2026-10-01" | J20 §3.4 ("It is **not run here**: it scaffolds a counterexample search, which is the owner's call under the ban"); the ruling itself has no other written source than this brief | the declined step: faithful. **The ruling is logged here as an owner ruling (inventory row 60), source: the J23c brief** |
+| 8 | "J21-MX (a spectral form of Burr–Erdős–Lovász; Hedetniemi for special factors; Kechris–Marks Problem 4.23)" | J21 §3.2 "Prior art and the classical case" | faithful |
+| 9 | "`[EggletonErdosSkilton1990]` is unheld (Kooshi asked)" | inventory row 38; `~/source/library/pdf/` listing (2026-09-25 18:16: the 1985 paper held, the 1990 paper absent) | faithful |
+| 10 | "`[Zhu2021]`-type items the records list" | J22 §3.5 and report ("`[77]` (Zhu, JCTB 2021, Thm 3.5) not held"); `tools/bib_audit.py` lists `[Zhu2021]` undefined, first seen in this brief | faithful; a bibliography row is owed (inventory row 51) |
+| 11 | launch message: "its last line reads `exit=<code>` when done, about 45–50 minutes from 18:25" | `data/m3/j22/fs66-cert-p23-m5-rerun.out` (at 18:16 by `date`: steps 1–4 passed); `scripts/slot.py --status`: a 16 GiB `python3` slot, age 130 s | consistent (the machine clock read 18:16 when the rerun was 2 minutes old; the estimate stands) |
+
+No quotation in the brief is wrong. One precision (row 7) is logged as an owner ruling.
+
+#### R1.2 The inventory walk
+
+- **Added (rows 41–66):** the J20 and J22/J22b reports' inventory lines and held items, which no clerk had folded; the owner's rulings
+  carried by the J23c brief; the FS-66 re-run; the bibliography-audit finding for `[Zhu2021]`.
+- **Ticked at this stage:** the rows fully disposed of by being recorded (owner rulings, the held items the owner has already ruled on, the
+  59 margin now settled exactly). **Routed:** every other row names the stage that disposes of it (2 = the derivation file; 3 = the
+  re-reads, predictions, tallies, the ban measurement and the prior-art gate; 4 = the drafts).
+- **A limit of this job, stated once:** three "Correction owed" banners in this plan (§PA.1, §S, §M) say "the close rewrites this entry".
+  This job may touch only §R-close, so the corrected text is given in §R-close (stage 4, R4.C) and the banners stand, pointing through the
+  inventory to it. Held for the owner.
+
+#### R1.3 The FS-66 checker re-run at 23 (pending at this stage)
+
+`scripts/slot.py --mem 16 --cpus 1 -- python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 5`, log
+`data/m3/j22/fs66-cert-p23-m5-rerun.out`; at this save it had passed steps 1–4 of 7. Its verdict is read and filed at a later stage (R2.x).
+
+#### R1.4 Would have searched here (this job)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| — | none at this stage | — |
