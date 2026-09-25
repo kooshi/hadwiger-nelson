@@ -15,6 +15,7 @@ at most four because 59 ≡ 3 (mod 8) makes the prime above 2 inert in ℚ(√59
 **only** four-colour residue target: 7 is not usable (59 ≡ 3 (mod 7) is a non-residue), and every other usable target (11, 19, 23, …) is
 at least five-chromatic, so it has no four-colouring to offer a gap. `K₄` is Hoffman-tight at four colours (`λ_min = −1 = −3/(4−1)`), and
 tightness propagates up an inert tower (G54).
+*[Correction, FS-86 (FS86-A2, owner-verified): ℚ(√59)'s stable odd places are 11, 23, 31, 43, 47, … and the ramified 59 — 19 is inert in ℚ(√59); for ℚ(√83): 19, 43, 47, …, ramified 83 (11 not stable); for ℚ(√131): 19, 23, 31, 47, …, ramified 131. For 83 and 131 the place 19 needs FS-66's certificate, not Hoffman (B1's D4).]*
 
 **So: does some rich lattice over ℚ(√59) carry a non-zero four-colour forced group, `F₄ ≠ 0`?** Weaker, and first: does every periodic
 four-colouring identify a pair, `P₄ ≠ 0`? Same questions over ℚ(√83) (83 ≡ 6 (mod 7)) and ℚ(√131) — the fields `d ≡ 11 (mod 24)` with 7

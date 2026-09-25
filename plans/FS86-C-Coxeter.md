@@ -386,7 +386,7 @@ Adding: `d_n(S) ≤ r₁ + η₁ + η₂`. ∎
 
 **Corollary C14.4.** `X = Cay(G_X, T_X)` for `S ∖ {𝔓}` (all factors of C14.2) has ratio `r_X = max(m₁, max_v r_v) < 1/4` with an error
 `η_X(n) → 0` (induction on the number of factors, C14.3; the order of the factors is by ratio). Over ℚ(√59) the largest `r_v` is at 31,
-`≈ 1/4 − 10⁻⁵` by Hoffman (addendum 1, item 1), so `r_X` may exceed `m₁`; only `r_X < 1/4` is used.
+`≈ 1/4 − 10⁻⁵` by Hoffman (addendum 1, item 1), so `r_X` may exceed `m₁`; only `r_X < 1/4` is used. *[Correction, FS-86's close (verifier C): the exact value is `1/4 − 2.745·10⁻⁶` (B1's table); the conclusion is unchanged.]*
 
 **The main count (the tight factor on Zhang's larger side) [hand].** Let `W` be a measurable window colouring, `P = P_m`, `|P| = n_P`,
 `α(P) = n_P/4`. For each colour `j`, replace the class `S^j` by a σ-compact subset of full measure (inner regularity); call the null

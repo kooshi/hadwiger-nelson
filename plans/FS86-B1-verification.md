@@ -48,6 +48,8 @@ residue extension `𝔽_{Q²}/𝔽_Q`.
 
 ### Lemma R (the ring). `ℤ[U_F] = O'`: the ring the unit vectors generate is exactly the ring of elements integral at every conjugation-stable prime. **[hand; mine]**
 
+*[Scope correction, FS-86's close (FS86-CL2, from verifier D's retraction note): step (4)'s Teichmüller idempotent does not exist at a stable dyadic place ramified in `L/F`, where every unit vector is `≡ 1` modulo the prime; there the closure of `R` is a proper suborder (`d ≡ 5 mod 8`, or two such places at `d ≡ 1 mod 8`), so Lemma R holds for real `F` with `L/ℚ` Galois **and no stable prime ramified in `L/F`** — which covers 59, 83, 131, K, ℚ(√11) and every use in this milestone.]*
+
 *Proof.* (1) `R ⊆ O'`: each `u ∈ U` is a unit at every stable 𝔔 (above).
 (2) **Prime inversion, the half used: `p ∈ T ⟹ 1/p ∈ R`.** Let `𝔔 | p` be non-stable. By CRT pick `z ∈ O_L` with `v_𝔔(z) = 0`,
 `v_{c𝔔}(z) = 1`; then `u := z/z̄ ∈ U` and `v_𝔔(u) = v_𝔔(z) − v_{c𝔔}(z) = −1`. So `R ⊄ O_𝔔` for every 𝔔 above `p`. If `1/p ∉ R`,
@@ -236,6 +238,8 @@ so `V₀ ⊆ Λ` for a finitely generated `Λ` spanned by unit vectors; forcing 
 *Adversarial attempt (the converse, which V1 does not claim):* `Λ = ℤu` for one unit vector: `Cay(Λ, ±u)` is a path, `P(Λ) = 0`, while
 `P(R) ∩ Λ = 4ℤu` (V3) — the inclusion is strict, so the statement is sharp in the direction written. Likewise on de Grey's lattice
 (VK below) `F(Λ) = 8Λ ⊊ 4Λ = F(R_K) ∩ Λ`.
+
+*[Wording, FS-86's close: "independence ratio" in the heading below means Hoffman's ratio bound — reading (a), D10; with the true independence ratio the middle inequality is FS-68's open question from level 3, while "< 1/5 at every level" holds either way.]*
 
 ### V3-ram — the ramified 59-tower has independence ratio `≤ max(ratio at level 1, 2/62) < 1/5` at every level — **PROVED with "ratio at level 1" read as Hoffman's ratio bound; under the other reading, the middle inequality is open above level 2 but its conclusion `< 1/5` holds** [hand + tools exact]
 

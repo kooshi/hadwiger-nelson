@@ -40,6 +40,7 @@ hunch: H5-the-dyadic-tight-target-in-a-triangle-free-field
       - d ≡ 11 (mod 24), so the field needs four colours (row 82).
       - d a non-residue mod 7, so 7 is not usable and Γ₇, which is slack at four colours with gaps, is not a target.
       - Every remaining usable target (11, 19, 23, …) is ≥ 5-chromatic, so it has no four-colourings at all to supply a gap.
+        *[Correction, FS-86's close (FS86-A2): ℚ(√59)'s stable odd places are 11, 23, 31, 43, 47, … and the ramified 59; 19 is inert in ℚ(√59). The conclusion (no four-colourable odd target) stands, for the ramified 59 by FS86-V3ram.]*
     - **The smallest such field is ℚ(√59).** 59 ≡ 3 (mod 8), 59 ≡ 11 (mod 24), and 59 ≡ 3 (mod 7), a non-residue. Then ℚ(√83), where
       83 ≡ 6 (mod 7).
     - **ℚ(√11) is excluded.** 11 ≡ 4 (mod 7) is a square, so 7 is usable, Γ₇ has a gapped four-colouring, and row 66 frees every pair

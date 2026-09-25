@@ -99,7 +99,7 @@ ab:"abelian group"` (2 hits, both irrelevant — link-diagram and HNN-extension 
 Let `P_m := twoAdicPlane m`, the record's ring-free `addCayley` representation of `Cay(O/𝔓^m, S_m)` (`O = ℤ₂[ω][√3]`,
 `𝔓² = (2)`; **that `twoAdicPlane m` IS `Cay(O/𝔓^m, S_m)` is [hand], three independent constructions agreeing** — the
 record's own, an independent ring-axiom build (`build/fs38-d/tower.py`, §0), and T's closed-form circle lists,
-matching at levels 4 and 5). `P_m` is 4-tight at every level `m ≥ 1` (FS38-L1 + `P₁ = K₄`), with exactly 45 minimising
+matching at levels 4 and 5). `P_m` is 4-tight at every level `m ≥ 1` (**re-sourced at FS-86's close:** FS38-L1's tightness half is defective, see its entry; levels 1–8 by the exact table, reproduced independently by FS-86's B2, and every level by FS38-L2's non-strict half, `plans/FS86-derivation.md` FS86-B1-LD), with exactly 45 minimising
 characters at level 4 whose common kernel is trivial (a finite `decide`: sums of 24 fourth roots of unity). For every
 `m ≥ 5`: a character of `O/𝔓^m` is either primitive with `|λ| < 2^{m−1}` (FS38-L2–L3) or a pullback of a level-`(m−1)`
 character with eigenvalue `2λ' ≥ −2^{m−1}`, equality iff the level-`(m−1)` character minimises; hence `λ_min(P_m) =
@@ -138,6 +138,8 @@ eigenvalue `2λ_χ`, and `d_{m+1} = 2d_m`. So if `P_m` is 4-tight, `λ_min(P_{m+
 `P₁ = K₄` 4-tight (`λ_min = −1 = −3/3`), **every level `m ≥ 1` is 4-tight, balanced, gap-free, with no solver.** The
 same one-line computation shows `λ_min/d` is non-increasing under pullback, so **slackness propagates up too**: a
 tower whose level one is slack is slack at every level.
+
+**Correction (FS-86's close, 2026-09-25; found by FS-86's B2, confirmed by the owner): the tightness half does not follow.** Four-colourability with Hoffman's bound gives `n/4 ≤ α ≤ n·(−λ)/(d − λ)`, i.e. `λ_min ≤ −d/3` — the same direction as the pull-back bound, so nothing bounds `λ_min(P_{m+1})` from below. **The slack half stands.** The 2-adic tower's tightness at every level survives on other grounds (the exact table at levels 1–8; FS38-L2's non-strict half at every level, `plans/FS86-derivation.md` FS86-B1-LD; D2-B's induction on L2–L3); the general sentence "tightness propagates up a tower with onto, constant-size fibres" is **false**: FS-86's `Λ₅₁₀` has 2-power quotients with constant fibres from level 11, tight at 14 and slack at 24 (FS86-B2-T2). In the unramified quadratic dyadic class the correct statement is FS86-Cx-C12p1.
 
 *Proof:* `plans/FS38-derivation.md` §D-2(c) Lemma 1. *Proof verdict:* closes.
 
@@ -211,7 +213,7 @@ separately stubbed.
 
 For a tower `Cay(G_m, S_m)` whose level maps `S_{m+1} → S_m` are onto with constant fibre size: k-tightness of level
 one propagates to every level (FS38-L1's argument in general form), carrying with it gap-freedom and
-`H_min`-periodicity of every k-colouring (FS38-D2-A); slackness propagates too. The sign of `λ_min + d/(k−1)` at level
+`H_min`-periodicity of every k-colouring (FS38-D2-A); slackness propagates too. **[Correction, FS-86's close: the tightness half of this propagation rests on FS38-L1's defective half and is false for general towers (FS86-B2-T2); the slack half stands; where tightness at every level is needed, cite FS38-L2's non-strict half (FS86-B1-LD) or FS86-Cx-C12p1.]** The sign of `λ_min + d/(k−1)` at level
 one classifies the tower — zero is tight, negative is slack — and **this is the correct one-line form of `CLAUDE.md`
 G54**: a residue plane seals a field's pair compulsions at k colours when it is slack (gap ⇒ free, kernel, row 66) and
 forces them when it is tight (FS38-D2-A); "no gap at level one" is not the hypothesis that propagates ("gap-freedom

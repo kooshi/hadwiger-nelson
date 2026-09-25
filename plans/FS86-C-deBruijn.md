@@ -271,6 +271,8 @@ constraints stay open.
 
 ### 4.2 Theorem C — averaged rigidity for non-real analogues [hand; two standard equidistribution lemmas sketched] [a non-real class]
 
+*[Correction, FS-86's close (verifier D, FS86-VD-7): the parenthesis "more generally a number field with no real place" is false — a totally complex quartic with a second, ramified dyadic place is two-colourable. The theorem holds, on spectral measures carried by `T + A + Fin`, under D's H* (every other stable place, dyadic included, has `λ/d > −1/3` at every level), which is this hypothesis for every imaginary quadratic `E`; FS86-dB-C.]*
+
 **Hypotheses.** `E` an imaginary quadratic field (more generally a number field with no real place) embedded in `ℚ₂(√3)` with
 `E_𝔭 = ℚ₂(√3)` at its dyadic place (so `E(i)_𝔓 = ℚ₂(ζ₁₂)`, row 67's tower, tight at every level), and every odd conjugation-stable
 place has least normalised circle mean `> −1/3` at every tower level (true for residue fields `𝔽_q`, `q = 23, 31` and `q ≥ 43`, by the

@@ -69,6 +69,8 @@ planner's spec checks are in `data/fs86/stageA/` (exact unless marked float; eac
    **V**, a blind verifier for any claimed yes or no. **E**, the close by 2026-10-01. Route 4 (composite quotients) is **moot at the field
    level** by item 3(iii) and becomes a lattice-level item after the week (§S.2).
 
+**Corrections at the close (2026-09-25; B1's comparison, `plans/FS86-B1-verification.md` C2; `plans/FS86-derivation.md` §1).** Items 3–4 are true as stated for 59, 83, 131 and K, with four steps the sketch left implicit: **D2** (item 3 (iii): the finite quotient is a product of local planes on the vertex set, not only the connection set — needs `R` dense in the product of stable completions and `O′/R` finite; B1's Lemma R); **D4** (for 83 and 131 the stable place 19 has Hoffman ratio 0.2756 > 1/4, so it rests on FS-66's certificate `U(19)`, not "G54's constant ratio"); **D6** (item 4's odd part at K is K's two *ramified* 11-adic places, Hoffman 0.2855: FS-66's certificate carried to a ramified tower by B1's Lemma P); **D3** (the dyadic factor's ratio 1/4 at every level rests on FS38-L2's non-strict half, not FS38-L1). **D8, a false side claim:** item 4's "Negative" sentence — MIS-normality says nothing when a factor's ratio exceeds 1/4 (`Γ₇`: 2/7), ℚ(√11)'s plane has periodic four-colourings pulled back from its dyadic `K₄`, and `F = P = 0` there holds by row 66's gap transport (FS86-B1-D8). Item 3's "G54's constant ratio" for split places and item 1's "FS38-L1" are re-sourced likewise; Lemma R's scope is corrected in FS86-CL2.
+
 ## §G. The re-grokking (WORKFLOW 3.1)
 
 *Walked with `CLAUDE.md` (from disk at `b5e458bb`), `LEDGER.md`, `plans/FS85-derivation.md`, `plans/FS38-derivation.md`,
