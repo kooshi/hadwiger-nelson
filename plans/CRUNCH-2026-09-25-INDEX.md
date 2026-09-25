@@ -326,3 +326,357 @@ independently, "blind-verified" that a fenced verifier derived it from the state
 
 The J10 final report (`3ae70beb`: J10-L8, J10-T6, the (g3) correction, the level-one table) and the J11 report (`fc205982`) were not
 yet folded into the inventory at this stage's reading; stage 4 appends their lines.
+
+## Stage 3 — SAVED (the index, M2, M3 and FS-89's close)
+
+### M2 — the kernel lane
+
+Plan `plans/M2-kernel-lane.md` (J04); close inventory `plans/M2-close-inventory.md` (rows 1–28 at this stage's reading; J15's report not
+yet folded).
+
+#### 3.1 Jobs
+
+| job | role | brief | record | tools | data | report | commits (2026-09-25) |
+|---|---|---|---|---|---|---|---|
+| J04 | reframe (kernel; §IQ for FS-39's hand step); writes the J14–J17 briefs | `J04-M2-kernel-reframe.md` | `plans/M2-kernel-lane.md` | — | `data/m2/j04/` (scratch skeletons `K1Chain.lean`, `K2Transcendental.lean`, `K3PrimeInversion.lean`, `K3Stripe.lean`) | `J04.md` | 54043f0a 00cf5ebc 17dcef05 39442fd0 78e9bcae 278c9969 eb03ed3c |
+| J14 | kernel: FS-45's chain theorem and its instances | `J14-M2-chain-kernel.md` | `plans/M2-S1K-chain.md` | — | `data/m2/j14/` | `J14.md` | e34fe2de e9d3551f 96e9fb22 1abef1f7 35c84d85 |
+| J15 | kernel: FS-39 route C (transcendence is free) | `J15-M2-route-c-kernel.md` | `plans/M2-S2K-route-c.md` | `tools/j15_plants.py` (outside the `crunch_<job>_` naming) | `data/m2/j15/` (route pricing scratch, gate logs) | `J15.md` | 581d6335 c03b1df1 894ceeca 1b5595aa 6cb89847 |
+| J16 | kernel: FS-47 prime inversion (valuation form), then the stripe lemma — **running** | `J16-M2-prime-inversion-kernel.md` | `plans/M2-S3K-unit-ring.md` | — | `data/m2/j16/` | — | 227087e0 (stage 1); `Proofs/HadwigerNelson/UnitRing.lean`, `Instances/SevenUnitRing.lean` and its `scripts/Axioms.lean` lines are uncommitted, in flight |
+| J17 | derivation: FS-39's hand step (the bridge) | `J17-M2-bridge-derivation.md` | `plans/M2-S1D-bridge.md` | — | `data/m2/j17/` (26 files: excerpts, zbMATH records) | `J17.md` | ee04599d 9d223e2d c2b87aed 914a81aa 1517fb75 2c79436b |
+| J17V | blind verifier of J17 — **declined** by the owner (inventory 16) | `J17V-M2-bridge-blind.md` | `plans/M2-S1V-bridge.md` (never created) | — | — | — | — |
+| J17K | kernel: the bridge's B0 and B1 — **queued** | `J17K-M2-bridge-kernel.md` | `plans/M2-S4K-bridge…` (per the queue; not yet created) | — | — | — | — |
+
+#### 3.2 Results
+
+Kernel results were checked by the gate each job ran (J14: build green, axioms 1045 clean / 5 purchases, vacuity and architecture pass,
+`35c84d85`; J15: axioms 1056 clean / 5 purchases, `1b5595aa`). J04's are kernel-elaborated in scratch modules only.
+
+| id or declaration | statement | grade | verification | address |
+|---|---|---|---|---|
+| J04: `junction_succ`, `junction_last`, `chainDrawing_b`, `copyHom` | chain copies share their junctions; each copy is a hom into the induced unit-distance graph | kernel (scratch) | superseded by J14's library forms | `data/m2/j04/K1Chain.lean` |
+| J04: `planeOverIso`, `unitQuadrance_colorable_of_subring` | the plane over `L ⊆ ℝ` is `unitQuadrance L`; colourability pulls back through a subring holding every unit vector | kernel (scratch) | moved into the library by J15 | `data/m2/j04/K2Transcendental.lean` |
+| J04: `normOne_subset_iff_stable`, `inv_mem_iff_forall_valuationSubring` | a valuation subring holds every norm-one element iff σ-stable; invertibility via every valuation subring above | kernel (scratch) | J16 is moving them in (in flight; its `scripts/Axioms.lean` lines are uncommitted) | `data/m2/j04/K3PrimeInversion.lean` |
+| J04: `wheel_all` | under properness and NT₀ at its centre, every wheel of the triangular lattice is type O or P | kernel (scratch; a complete enumeration of a derivation-fixed set) | one run; J16's second half | `data/m2/j04/K3Stripe.lean` |
+| J04: route C's integrality | a unit vector lies in every valuation subring whose residue ring has no √−1 | hand | ported to the kernel by J15 (`mem_valuationSubring_of_sq_add_sq_eq_one`) | `plans/M2-kernel-lane.md` §4.4 |
+| J14: `not_colorable_chain` and the three `add_one_le_chromaticNumber_*_of_chain` forms | the chain theorem: a forcer at `k` colours chained along unit vectors summing to `1/δ` refuses `k` colours | kernel | gate green; the owner read the statement against G55 (M2 inventory 27) | `Proofs/HadwigerNelson/Chain.lean` |
+| J14: `spindle_of_chain` | `χ(ℝ²) ≥ 4`, the Moser spindle as the chain's `m = 2` case | kernel | gate green | same |
+| J14: `four_le_chromaticNumber_planeOver_two_three` | `χ(ℚ(√2,√3)²) ≥ 4` by six chained rhombi | kernel | gate green | `Proofs/HadwigerNelson/Instances/SqrtTwoThree.lean` |
+| J14: `eighteen_not_colorable_three`, `eighteen_colorable_four` | the 18-vertex, 33-edge graph refuses three colours and takes four | kernel | gate green (two oracles in the brief's sense: gadget algebra and a colouring) | same |
+| J14: `sum_eightUnits`, `five_le_chromaticNumber_planeOver_seven_of_G4` | `w³ + w̄³ − 3w² − 3w̄² = 3/8`; `G4 → χ(ℚ(√3,√7,√11)²) ≥ 5` | kernel; the second conditional on G4 (a measurement) | gate green; not marked `VACUITY DECLARED` (inventory 25) | `Proofs/HadwigerNelson/Instances/SevenConditional.lean` |
+| J15: `chromaticNumber_unitQuadrance_ratFunc` (and `…_of_one_add_sq_ne_zero`, `…_rat`) | `χ(F(t)²) = χ(F²)` for every formally real `F` (every `F` with `−1` not a square) | kernel | gate green; `[Fischer1990]` Thm 6 at `d = 2` — not new mathematics (J15 report) | `Proofs/HadwigerNelson/Transcendental.lean` |
+| J15: `chromaticNumber_planeOver_adjoin_transcendental_eq` | for `F : Subfield ℝ` and `t` transcendental over `F`, `χ(F(t)²) = χ(F²)` | kernel | gate green; inhabited by Liouville's constant | same |
+| J15: `unitQuadrance_colorable_of_valuationSubring`, `mem_valuationSubring_of_sq_add_sq_eq_one`, `evalZero_eq_zero_of_mem_maximalIdeal` | the valuation lemma; the residue hom at `t = 0` kills the maximal ideal | kernel | gate green | same |
+| J17-T1 | C1: every finite unit-distance drawing in `ℝ²` descends to a real number field | hand (Tarski, or Artin–Lang) | one mind; J17V declined; kernel candidate for J17K | `plans/M2-S1D-bridge.md` §2.1 |
+| J17-T2 | the real algebraic numbers form a real closed field | hand, classical | one mind; kernel candidate (J17K's B0) | §2.0 |
+| J17-T3 | C2: `χ(ℝ²) = max` over real number fields of `χ(F²)` (attained) | hand; `[Madore2015]` ¶5.4's | one mind; J17K's B1 as a conditional theorem | §2.2 |
+| J17-T4 | Lemma NP: no nonconstant `a ∈ ℂ(t)` has `a³ − a` a square | hand (Mason–Stothers) | one mind; J17K may kernel-check it by `Polynomial.abc` | §2.3 |
+| J17-T5, T6, T7 | C3: `ℚ(π, √(π³ − π))` is not purely transcendental over any number field, nor embeds in one; a pointless-conic field besides | hand | one mind | §2.3 |
+| J17-T8 | C3′: `χ(ℚ(π, √(π³ − π))²) = 2` | hand | one mind | §2.3 |
+| J17-T9 | C4: `χ(ℝ²) ≠ 6` iff every real number field with `χ = 6` has a finite real extension with `χ = 7` | derived | one mind | §2.4 |
+| J17-T10 | the equational existential fragment of Tarski and Artin–Lang are interderivable | hand, classical | one mind | §2.1 |
+
+**J16** is running: nothing indexed until its record's stages are saved.
+
+#### 3.3 The new Lean declarations (committed at `HEAD`) and the axiom audit
+
+Every declaration in the four library files M2 added, with its line at `HEAD` and whether `scripts/Axioms.lean` (at `HEAD`) prints its
+axioms. The audit covers each file's headline theorems (22 lines); helper lemmas and definitions are not printed, which is the audit's
+practice ("one `#print axioms` line per public theorem on the milestone's surface"). **Theorems a record names in its theorems table that
+the audit does not print:** `rhombus_unit_of`, `norm_eq_one_of_sq` (`Chain.lean`); `sum_sixUnits`, `delta_mul_one_add_omegaBar`,
+`one_add_v_add_conj` (`Instances/SqrtTwoThree.lean`); `one_add_sq_ne_zero`, `inv_mem_zeroIntegral_of_not_mem`,
+`chromaticNumber_eq_of_iso`, `chromaticNumber_planeOver_eq`, `chromaticNumber_unitQuadrance_eq_of_ringEquiv`,
+`one_add_sq_ne_zero_of_subfield`, `le_adjoinTranscendental`, `mem_adjoinTranscendental_self` (`Transcendental.lean`). Each is used by an
+audited theorem, so its axioms appear in that theorem's line; listed for the owner, not as a defect. J16's files are in flight and not
+listed.
+
+| file | line | kind | declaration (namespace `HadwigerNelson.` omitted) | audited by `scripts/Axioms.lean` |
+|---|---|---|---|---|
+| `Chain.lean` | 30 | def | `Chain.junction` | — |
+| `Chain.lean` | 34 | def | `Chain.chainDrawing` | — |
+| `Chain.lean` | 40 | def | `Chain.chainPoints` | — |
+| `Chain.lean` | 43 | theorem | `Chain.junction_zero` | no |
+| `Chain.lean` | 47 | theorem | `Chain.junction_succ` | no |
+| `Chain.lean` | 65 | theorem | `Chain.junction_last` | no |
+| `Chain.lean` | 71 | theorem | `Chain.chainDrawing_a` | no |
+| `Chain.lean` | 76 | theorem | `Chain.chainDrawing_b` | no |
+| `Chain.lean` | 82 | def | `Chain.copyHom` | — |
+| `Chain.lean` | 101 | theorem | `Chain.not_colorable_chain` | **yes** |
+| `Chain.lean` | 138 | theorem | `Chain.chainPoints_subset` | no |
+| `Chain.lean` | 147 | theorem | `Chain.add_one_le_chromaticNumber_induce_of_chain` | **yes** |
+| `Chain.lean` | 157 | theorem | `Chain.add_one_le_chromaticNumber_unitDistance_of_chain` | **yes** |
+| `Chain.lean` | 167 | theorem | `Chain.norm_eq_one_of_sq` | no |
+| `Chain.lean` | 172 | theorem | `Chain.rhombus_unit_of` | no |
+| `Chain.lean` | 182 | def | `Chain.planeOverSubring` | — |
+| `Chain.lean` | 191 | theorem | `Chain.coe_planeOverSubring` | no |
+| `Chain.lean` | 195 | theorem | `Chain.add_one_le_chromaticNumber_planeOver_of_chain` | **yes** |
+| `Chain.lean` | 222 | def | `Chain.spindleRhombus` | — |
+| `Chain.lean` | 226 | def | `Chain.moserTwist` | — |
+| `Chain.lean` | 231 | theorem | `Chain.spindle_of_chain` | **yes** |
+| `Instances/SqrtTwoThree.lean` | 29 | def | `SqrtTwoThree.rhombusX` | — |
+| `Instances/SqrtTwoThree.lean` | 33 | def | `SqrtTwoThree.omegaBar` | — |
+| `Instances/SqrtTwoThree.lean` | 36 | def | `SqrtTwoThree.v` | — |
+| `Instances/SqrtTwoThree.lean` | 39 | def | `SqrtTwoThree.sixUnits` | — |
+| `Instances/SqrtTwoThree.lean` | 42 | theorem | `SqrtTwoThree.sqrt3_sq` | no |
+| `Instances/SqrtTwoThree.lean` | 43 | theorem | `SqrtTwoThree.sqrt2_sq` | no |
+| `Instances/SqrtTwoThree.lean` | 45 | theorem | `SqrtTwoThree.rhombusX_unit` | no |
+| `Instances/SqrtTwoThree.lean` | 49 | theorem | `SqrtTwoThree.norm_omegaBar` | no |
+| `Instances/SqrtTwoThree.lean` | 52 | theorem | `SqrtTwoThree.norm_v` | no |
+| `Instances/SqrtTwoThree.lean` | 55 | theorem | `SqrtTwoThree.sixUnits_norm` | no |
+| `Instances/SqrtTwoThree.lean` | 59 | theorem | `SqrtTwoThree.sum_sixUnits` | no |
+| `Instances/SqrtTwoThree.lean` | 63 | theorem | `SqrtTwoThree.delta_mul_one_add_omegaBar` | no |
+| `Instances/SqrtTwoThree.lean` | 69 | theorem | `SqrtTwoThree.one_add_v_add_conj` | no |
+| `Instances/SqrtTwoThree.lean` | 74 | theorem | `SqrtTwoThree.sixUnits_sum` | **yes** |
+| `Instances/SqrtTwoThree.lean` | 80 | abbrev | `SqrtTwoThree.F23` | — |
+| `Instances/SqrtTwoThree.lean` | 82 | theorem | `SqrtTwoThree.sqrt2_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 85 | theorem | `SqrtTwoThree.sqrt3_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 88 | theorem | `SqrtTwoThree.rhombusX_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 95 | theorem | `SqrtTwoThree.omegaBar_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 98 | theorem | `SqrtTwoThree.v_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 102 | theorem | `SqrtTwoThree.conj_v_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 105 | theorem | `SqrtTwoThree.sixUnits_mem` | no |
+| `Instances/SqrtTwoThree.lean` | 117 | theorem | `SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three` | **yes** |
+| `Instances/SqrtTwoThree.lean` | 125 | def | `SqrtTwoThree.eighteenEdges` | — |
+| `Instances/SqrtTwoThree.lean` | 135 | def | `SqrtTwoThree.pullGadget` | — |
+| `Instances/SqrtTwoThree.lean` | 145 | def | `SqrtTwoThree.diamond` | — |
+| `Instances/SqrtTwoThree.lean` | 149 | def | `SqrtTwoThree.ports` | — |
+| `Instances/SqrtTwoThree.lean` | 151 | theorem | `SqrtTwoThree.diamond_hom` | no |
+| `Instances/SqrtTwoThree.lean` | 155 | def | `SqrtTwoThree.diamondGadget` | — |
+| `Instances/SqrtTwoThree.lean` | 160 | def | `SqrtTwoThree.closingGadget` | — |
+| `Instances/SqrtTwoThree.lean` | 164 | def | `SqrtTwoThree.eighteenGadget` | — |
+| `Instances/SqrtTwoThree.lean` | 178 | theorem | `SqrtTwoThree.eighteen_not_colorable_three` | **yes** |
+| `Instances/SqrtTwoThree.lean` | 182 | theorem | `SqrtTwoThree.eighteen_colorable_four` | **yes** |
+| `Instances/SqrtTwoThree.lean` | 194 | def | `SqrtTwoThree.plantedEdges` | — |
+| `Instances/SevenConditional.lean` | 29 | def | `SevenConditional.G4` | — |
+| `Instances/SevenConditional.lean` | 35 | def | `SevenConditional.w` | — |
+| `Instances/SevenConditional.lean` | 38 | def | `SevenConditional.eightUnits` | — |
+| `Instances/SevenConditional.lean` | 42 | theorem | `SevenConditional.sqrt7_sq` | no |
+| `Instances/SevenConditional.lean` | 44 | theorem | `SevenConditional.norm_w` | no |
+| `Instances/SevenConditional.lean` | 47 | theorem | `SevenConditional.eightUnits_norm` | no |
+| `Instances/SevenConditional.lean` | 51 | theorem | `SevenConditional.conj_w` | no |
+| `Instances/SevenConditional.lean` | 56 | theorem | `SevenConditional.w_sq` | no |
+| `Instances/SevenConditional.lean` | 63 | theorem | `SevenConditional.sum_eightUnits` | **yes** |
+| `Instances/SevenConditional.lean` | 70 | abbrev | `SevenConditional.F7` | — |
+| `Instances/SevenConditional.lean` | 72 | theorem | `SevenConditional.w_mem` | no |
+| `Instances/SevenConditional.lean` | 76 | theorem | `SevenConditional.conj_w_mem` | no |
+| `Instances/SevenConditional.lean` | 79 | theorem | `SevenConditional.eightUnits_mem` | no |
+| `Instances/SevenConditional.lean` | 89 | theorem | `SevenConditional.planeOver_seam_subset` | no |
+| `Instances/SevenConditional.lean` | 99 | theorem | `SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4` | **yes** |
+| `Transcendental.lean` | 61 | def | `RouteC.planeOverEquiv` | — |
+| `Transcendental.lean` | 68 | theorem | `RouteC.dist_eq_one_iff_quadrance` | no |
+| `Transcendental.lean` | 75 | def | `RouteC.planeOverIso` | **yes** |
+| `Transcendental.lean` | 91 | theorem | `RouteC.chromaticNumber_eq_of_iso` | no |
+| `Transcendental.lean` | 97 | theorem | `RouteC.chromaticNumber_planeOver_eq` | no |
+| `Transcendental.lean` | 107 | theorem | `RouteC.unitQuadrance_colorable_of_subring` | **yes** |
+| `Transcendental.lean` | 141 | theorem | `RouteC.mem_valuationSubring_of_sq_add_sq_eq_one` | **yes** |
+| `Transcendental.lean` | 169 | theorem | `RouteC.one_add_sq_ne_zero` | no |
+| `Transcendental.lean` | 177 | theorem | `RouteC.unitQuadrance_colorable_of_valuationSubring` | **yes** |
+| `Transcendental.lean` | 200 | theorem | `RouteC.eval_zero_ne_zero_of_dvd` | no |
+| `Transcendental.lean` | 205 | def | `RouteC.zeroIntegral` | — |
+| `Transcendental.lean` | 222 | theorem | `RouteC.mem_zeroIntegral` | no |
+| `Transcendental.lean` | 225 | theorem | `RouteC.algebraMap_mem_zeroIntegral` | no |
+| `Transcendental.lean` | 229 | theorem | `RouteC.inv_algebraMap_mem_zeroIntegral` | no |
+| `Transcendental.lean` | 237 | theorem | `RouteC.inv_mem_zeroIntegral_of_not_mem` | no |
+| `Transcendental.lean` | 260 | def | `RouteC.zeroPlace` | — |
+| `Transcendental.lean` | 266 | theorem | `RouteC.mem_zeroPlace` | no |
+| `Transcendental.lean` | 270 | def | `RouteC.evalZero` | — |
+| `Transcendental.lean` | 278 | theorem | `RouteC.evalZero_apply` | no |
+| `Transcendental.lean` | 282 | theorem | `RouteC.evalZero_eq_zero_of_mem_maximalIdeal` | **yes** |
+| `Transcendental.lean` | 301 | theorem | `RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero` | **yes** |
+| `Transcendental.lean` | 314 | theorem | `RouteC.chromaticNumber_unitQuadrance_ratFunc` | **yes** |
+| `Transcendental.lean` | 320 | theorem | `RouteC.chromaticNumber_unitQuadrance_ratFunc_rat` | **yes** |
+| `Transcendental.lean` | 328 | theorem | `RouteC.chromaticNumber_unitQuadrance_eq_of_ringEquiv` | no |
+| `Transcendental.lean` | 336 | theorem | `RouteC.one_add_sq_ne_zero_of_subfield` | no |
+| `Transcendental.lean` | 342 | def | `RouteC.adjoinTranscendental` | — |
+| `Transcendental.lean` | 346 | theorem | `RouteC.le_adjoinTranscendental` | no |
+| `Transcendental.lean` | 350 | theorem | `RouteC.mem_adjoinTranscendental_self` | no |
+| `Transcendental.lean` | 355 | def | `RouteC.adjoinTranscendentalEquiv` | — |
+| `Transcendental.lean` | 362 | theorem | `RouteC.chromaticNumber_planeOver_adjoin_transcendental_eq` | **yes** |
+| `Transcendental.lean` | 371 | theorem | `RouteC.transcendental_liouvilleNumber_bot` | **yes** |
+| `Transcendental.lean` | 385 | theorem | `RouteC.chromaticNumber_planeOver_liouville` | **yes** |
+
+#### 3.4 Corrections owed and held items, M2
+
+| # | kind | item (short) | address | in `plans/M2-close-inventory.md`? |
+|---|---|---|---|---|
+| 1 | correction | the brief's route-C tool colours by a finite residue ring; route C uses `cosetResidue` + `unitQuadrance_colorable_of_ringHom` | `plans/M2-kernel-lane.md` §2.1, §2.4 | yes, row 2 |
+| 2 | correction | a comap union cannot carry the chain; the induced graph on the image set | `plans/M2-kernel-lane.md` §2.1 | yes, row 5 |
+| 3 | correction | `CLAUDE.md` trust count 1034 → 1045 and the vacuity counts; LEDGER § B T5, T6, T9 stub → kernel | `plans/M2-S1K-chain.md` stage 5 | yes, row 22 |
+| 4 | correction | `Gadget.transport` is same-`Fin n`; the 18-vertex pull is `SqrtTwoThree.pullGadget` | `plans/M2-S1K-chain.md` stages 1, 3 | yes, row 23 |
+| 5 | correction | `RatFunc.algEquivOfTranscendental` exists (M2 plan §2.2); G63 names the wrong kernel tool and its grade can move to kernel | `plans/M2-S2K-route-c.md` §1.1, §4.3 | **no** — added in stage 4 |
+| 6 | correction | the gate counts are stale since J14: `CLAUDE.md` § The gate and `scripts/vacuity-baseline.txt` header (6795 → 6908, 278 → 286, 275 → 278, 253 → 256) | `plans/M2-S2K-route-c.md` §4.1 | **no** — added in stage 4 (row 22 has J14's numbers only) |
+| 7 | correction | FS-39's phase B is months, not 1–2 days (split B0, B1, B2); G63's "pure transcendence", examples, Madore's credit, Q-const | `plans/M2-S1D-bridge.md` §3.2, §3.4 | yes, row 13 |
+| 8 | correction | Madore ¶5.4 was already in the bibliography (a re-finding); its lineage omits Benda–Perles; Soifer OP 11.1 asserts the bridge without proof | `plans/M2-S1D-bridge.md` §1.1 Q5–Q7 | yes, row 14 |
+| 9 | held | J17V optional; J16's choice of FS-47 before the stripe lemma | J04 report | yes, rows 9, 10 |
+| 10 | held | `VACUITY DECLARED:` withheld on the G4-conditional theorem | J14 report | yes, row 25 |
+| 11 | held | queue J17K (B0 + B1) after J15; J17V skip | J17 report | yes, row 16 |
+| 12 | stub | FS-39 (`plans/STUB-plane-bridge.md`): route C landed; left the finitely generated case and the sup statement | J15 report; `plans/M2-S2K-route-c.md` §4.3 | **no** — added in stage 4 |
+| 13 | stub | FS-45: left are G4's certificate after the ban and a kernel upper bound `χ(ℚ(√2,√3)²) ≤ 4` | J14 report (SPAWN line) | **no** — added in stage 4 |
+
+### M3 — colourings no character gives
+
+Plan `plans/M3-exotic-colourings.md` (J06); close inventory `plans/M3-close-inventory.md` (rows 1–7 at this stage's reading: J06's report
+only; J18's and J21's reports not yet folded).
+
+#### 3.5 Jobs
+
+| job | role | brief | record | tools | data | report | commits (2026-09-25) |
+|---|---|---|---|---|---|---|---|
+| J06 | reframe; writes the J18–J22 briefs | `J06-M3-reframe.md` | `plans/M3-exotic-colourings.md` | — | — | `J06.md` | 22bd1d12 92c86537 d57f4c5a 70cb13f6 98acb9cb 5b350f30 8badebd4 1a2e9808 |
+| J18 | derivation: FS-76 in rank one ("every phase rigid ⟹ no wall") | `J18-M3-rank-one-derivation.md` | `plans/M3-S1A-rank-one.md` | `tools/crunch_j18_phases.py`, `tools/crunch_j18_swaptail.py` | `data/m3/j18/` | `J18.md` | c9c71393 af02c867 79cc4f2e 19d4aec8 048d487a d5e4c96b b85ec7c6 5a81e440 |
+| J19 | derivation, the second mind on J18's stall (KE) — **running** | `J19-M3-rank-one-second-mind.md` (skeleton `…-SKELETON.md`) | `plans/M3-S1B-rank-one.md` | — | — | — | d70009d1 (stage 1) |
+| J20 | blind verifier of J18 or J19 — **queued** | `J20-M3-rank-one-verifier.md` | `plans/M3-S1V-rank-one.md` (not yet created) | — | — | — | — |
+| J21 | derivation: FS-64 at five colours over ℚ(√167) (measurable windows) | `J21-M3-windows-five-derivation.md` | `plans/M3-S1D-windows-five.md` | `tools/crunch_j21_spectra.py`, `tools/crunch_j21_dyadic_hyperbola.py` | `data/m3/j21/` | `J21.md` | 942f3f10 7c8f446c 534316c1 bd9fcf7b 765c1603 7cd27284 |
+| J22 | blind verifier of J21 — **queued** | `J22-M3-windows-five-verifier.md` | `plans/M3-S1V-windows-five.md` (not yet created) | — | — | — | — |
+
+**`plans/M3-exotic-colourings.md` has no "Theorems this phase proved" heading.** J06's one result is in its report and in the M3
+inventory (row 2); listed below from the report.
+
+#### 3.6 Results
+
+No M3 result has a verifier yet (J20 and J22 are queued); every line below is one mind.
+
+| id | statement | grade | verification | address |
+|---|---|---|---|---|
+| J06 (report) | R2 ⟺ "a countable four-colouring shift of a distance graph is finite"; A-T1 ⟸ A-K3 + T34's orbit step; FS-64 at five over any `S ∋ ∞` contains `χ_µ(ℝ²) ≤ 5`; at ℚ(√167) the place above 3 is split; Hoffman at 43 is 0.21376 > 1/5 | hand, planner, one mind | one mind | plan "The milestone in the theory's terms", §M |
+| J18-F3 | one-dimensional SFT facts: some phase not a single cycle ⟹ `h > 0`; all single cycles ⟹ `h = 0`, `X` countable, wall ⟺ `X` infinite | hand (standard) | one mind | `plans/M3-S1A-rank-one.md` §2.0 |
+| J18-K0loc | a periodic point of a rigid phase is gap-free, its Kempe components cross every cut; its `m`-windows carry `≥ k − 1` colours | hand | one mind | §2.1 |
+| J18-K0H | the rank-one form of FS86-dB-H with two-sided gap-freeness is false (T30's rigid–rigid walls) | hand + FS-79 tools | one mind | §2.1 |
+| J18-AK1 | A-K1 | hand | one mind | §2.2 |
+| J18-AK2 | A-K2; a wall leaves a phase only at a left gap whose second colour survives | hand | one mind | §2.3 |
+| J18-AKq | A-Kq for the labelled quotient; its rigidity clause false for the plain quotient (`D = {1}`) | hand | one mind | §2.4 |
+| J18-EQ | A-T1 ⟺ A-T1′ ⟺ A-T2 ⟺ A-K3 | hand | one mind | §2.5, §3.1 |
+| J18-DC | the Δ-completion theorem: A-T1 fails iff some heteroclinic four-colouring has an all-rigid `X₄(D_c(M))` | hand | one mind | §3.2 |
+| J18-CTL | the control `{1,5,7,10}` reproduced; 8 of 9 BFS wall points have trivial completion to `M = 100`; all 9 satisfy KE | tools exact | one run | §3.3, `data/m3/j18/` |
+| J18-DPR | `X₄({1,5,7,10,13,27,33})`: 25 phases, 24 rigid, one non-rigid; one rigid–rigid wall, satisfying KE | tools exact | one run | §3.4, `data/m3/j18/completion-81-49-M40.txt` |
+| J18-KE⟹ | KE ⟹ A-T1 | hand | one mind; KE itself is J19's question | §3.5 |
+| J21-D0 | a window five-colouring over `{∞₁}` is a measurable proper five-colouring of `UD(ℝ²)`; a "no" over every `S` with a real place implies `χ_µ(ℝ²) ≥ 6` | hand | one mind | `plans/M3-S1D-windows-five.md` §2.1 |
+| J21-D1 | for finite `S` with no real place, every factor of ratio `< 1/5` ⟹ no window five-colouring (three formats) | hand; = C14.3 at `k = 5` | one mind | §2.2 |
+| J21-D1fac | ℚ(√167)'s factor table: 23 ≤ 0.18523, 59 ≤ 0.19912, stable `p ≥ 67`, the ramified 167, odd split places 0; stable places below 59 are 23 and 43 | cert, tools (float with stated error), Weil | one mind; 59's margin is the report's held number | §2.3 |
+| J21-D1-3 | the place above 3 is split in `F(i)/F`, ratio 0 | hand | one mind | §2.4 |
+| J21-D1-2 | C14.2 (c) holds verbatim at `q = 2`: the dyadic place has ratio 0 | hand; tools (FFT at `ℚ₂(i)`, plant fires) | one mind | §2.5 |
+| J21-D1-43p | windows reading the 43-adic places at level one are excluded; the fibre-share inequality alone gives exactly Hoffman's 0.21376 | hand + cert | one mind; D1-43 at depth is a GAP (report) | §2.6 |
+| J21-SL | slicing: a measurable proper `k`-colouring of `Γ × Γ × Y` restricts to one of `Γ × Y` for a.e. `s` | hand | one mind | §3.1 |
+| J21-D3 | `χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`, and for `χ_B` | hand | one mind | §3.1 |
+| J21-MX | mixing selection: a compact factor with `λ* < 1/(k−1)` can be deleted from a Borel `k`-colouring of a product | hand | one mind; prior-art searches owed (report) | §3.2 |
+| J21-TH | every finite place of ℚ(√167) is 5-thick except twelve above 2, 3, 5, 7, 29, 61 (split) and 23, 43 (stable) | tools + hand; Weil | one mind | §3.3 |
+| J21-RED | a Borel window five-colouring over `S` exists iff one over `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}` | hand | one mind | §3.4 |
+| J21-D2p | D2(a), D2(b) hold when every factor of `B` is thick | hand | one mind; D2(a) GAP at two steps otherwise (report) | §3.5 |
+| J21-NG1 | the planner's cylinder lemma is false already for `A′ = A = UD(ℝ²)` | hand | one mind | §3.6 |
+| J21-D4 | both inhabitants: C9's `⌊4θ̃⌋` is a Borel window four-colouring over `{∞, 7}` of ℚ(√11), a pullback from neither factor; a periodic seven-colouring is a window colouring over `{∞₁}` | hand | one mind | §4.1 |
+| J21-NG2 | ratio alone cannot carry D2: a counterexample at `k = 125` (Shitov, Zhu Thm 3.5) | hand, from `[Zhu2025]` §3 | one mind | §3.6 |
+
+#### 3.7 Corrections owed and held items, M3
+
+| # | kind | item (short) | address | in `plans/M3-close-inventory.md`? |
+|---|---|---|---|---|
+| 1 | slip | the J06 brief's "FS79 T30" is FS73-T30; "Ellenberg2018's question at k = 4 on ℤ" is inheritance, not existence | plan §Q row 2, §PA.2 row 1 | yes, row 1 |
+| 2 | held | LEDGER § B read by keyword scan; J20/J22 carry verified-input lists | J06 report | second half yes, row 6; the § B scan **no** — added in stage 4 |
+| 3 | correction | M3 plan §M item 1 and §S's "hold in either form": A-Kq's rigidity clause fails for the plain quotient | `plans/M3-S1A-rank-one.md` §2.4 | **no** — added in stage 4 |
+| 4 | correction | "A-K2 is FS86-dB-H's rank-one form" holds only with left gap-freeness | `plans/M3-S1A-rank-one.md` §2.1 K0-H | **no** — added in stage 4 |
+| 5 | held | KE is stronger than A-T1: the owner's call whether J19 takes KE or the counterexample side; J20's list carries A-K3, equivalent to A-T1 | J18 report | **no** — added in stage 4 |
+| 6 | correction | FS86-CL1 and LEDGER row 92: "C14.2 at p = 2 not checked" is now checked (one mind) | `plans/M3-S1D-windows-five.md` §2.5, §4.6 | **no** — added in stage 4 |
+| 7 | correction | `[KechrisMarks2020]` "§4.7" is §5.1 Example 5.1 (pp. 45–46), in the J21 brief and the M3 plan §PA.1 row 3 | `plans/M3-S1D-windows-five.md` §1.1 Q7 | **no** — added in stage 4 |
+| 8 | slip | the planner's cylinder lemma is false (NG1) | `plans/M3-S1D-windows-five.md` §3.6 | **no** — added in stage 4 |
+| 9 | held | J21's harness count passed 420k; 59 is 5-mixing by a margin of 1.4·10⁻³ (float spectrum) — the one close number J21-TH rests on | J21 report | **no** — added in stage 4 |
+| 10 | slip | `plans/M3-exotic-colourings.md` has no "Theorems this phase proved" heading (standing rule 7) | this index §3.5 | **no** — added in stage 4 |
+
+### FS-89's close (2026-09-25, before the crunch)
+
+Plan `plans/FS89-rational-band-rigidity.md` (its §R-close first); derivation file `plans/FS89-derivation.md`; close inventory
+`plans/FS89-close-inventory.md` (rows 1–54); ledger rows 95–97 (`LEDGER.md` lines 118–120). Records: `plans/FS89-S0A-gluing-verification.md`
+(verifier G), `plans/FS89-S0B-band-set.md` (S0B), `plans/FS89-S1D-derivation.md` (D), `plans/FS89-S1V-verification.md` (verifier H),
+`plans/FS89-S1VB-verification.md` (verifier I), `plans/FS89-PA-berend1984.md`, `plans/FS89-PA-furstenberg1967.md`, `plans/PA-tardif2023.md`,
+`plans/PA-products-GL1974-LT2002.md`.
+
+#### 3.8 Rows
+
+| row | headline (shortened from `LEDGER.md`) |
+|---|---|
+| 95 | rational band rigidity: RQ₄ and RQ₅ — every four- and five-colour band character of `Q = ℤ[i][1/p : p ≡ 1 (4)]` is torsion plus archimedean |
+| 96 | what it settles at the exposed fields: HD1 at ℚ(√59), ℚ(√83), ℚ(√131); no character four-colouring of ℚ(√47)'s plane; no character five-colouring of ℚ(√167)'s |
+| 97 | one prime is not enough: over `ℤ[U₅]` the four-colour band set is not torsion plus archimedean |
+
+#### 3.9 The derivation file's entries
+
+Every entry of `plans/FS89-derivation.md`, with the verification its own bracket states (the file already merges duplicate ids; "line" is
+the entry's line in that file). Today's crunch work that bears on an entry is in stage 4's reverse index.
+
+| id | statement (the entry's title, shortened) | grade and verification (the entry's bracket, shortened) | line |
+|---|---|---|---|
+| FS89-S0A-1 | G0: `ℤ[U_ℚ] = ℤ[i][1/p : p ≡ 1 (4)]` ∋ 1/5; the layers `bℤ[U_ℚ]` (`b ∈ U_F`) lie in `R_F` and cover `U_F`; a band character of `R_F` restricts to … | hand; verifier G blind; the planner's §0.1 restates it | 40 |
+| FS89-S0A-2 | G1, the gluing: `Θ_k(ℤ[U_ℚ]) ⊆ T_N + A` ⟹ `Θ_k(R_F) ⊆ T_N + A` for every subfield `F ⊆ ℝ`, at every band; the lift `lim 5^k·(small rep of …` | hand; verifier G blind; the route is the advisor's sketch, closed | 45 |
+| FS89-S0A-3 | Lemma N₀: `Θ₄(Q) ∩ (T + A) ⊆ T₁₆₈ + A`; the torsion part is one of a 2-part of order dividing 8, an order-3 part (with `\|α\| ≤ 1/12`) or an … | hand; two derivations, both blind: verifier G, and verifier H before it opened S0A's record (its divergence table was written … | 51 |
+| FS89-S0A-4 | Level collapse: a band character in `T + A` has level ≤ 1 at every odd stable place where the unit vectors are dense at every level, and 2-level ≤ … | hand; verifier G | 59 |
+| FS89-S0A-5 | No band character of any `R_F` has layer restrictions in `T + A` of unbounded order; the 3-adic character at the split prime above 3 of ℚ(√2) is … | hand; verifier G (its adversarial attempt, which failed for a stated reason) | 63 |
+| FS89-S0A-6 | C-HD1, conditional form: the four-band rational statement (RQ₄) implies HD1 (`Θ₄(R_F) ⊆ T`, dyadic torsion) for ℚ(√59), ℚ(√83), ℚ(√131) | hand, given FS86-dB-Theta's inputs; verifier G | 67 |
+| FS89-S0A-7 | Archimedean averaging: over a real number field, the torsion part of a band character in `T + A` is itself a band character, non-zero, with margin `r` | hand; verifier G | 71 |
+| FS89-S0A-8 | G2, general form: for `F` in Lemma R's scope with every stable place odd of prime residue field `q ≥ 11`, `Θ₄(R_F) ∩ (T + A) = ∅`; given RQ₄, … | hand, given Lemma R (FS86-B1-LR, its corrected scope) and Weil; verifier G; the owner's one-step check | 76 |
+| FS89-S0A-9 | G3: under the five-band rational statement (RQ₅), `Θ₅(R_{ℚ(√167)}) = ∅`; needed at each stable place, a level-one ratio `< 1/5`: 23 (`α ≤ 97`, … | hand + cert + tools exact; verifier G | 82 |
+| FS89-S0A-10 | The equivalence: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ`, every band; the rational statement is the uniform … | hand; verifier G | 87 |
+| FS89-S0A-11 | Finite-type band characters of `Q` are in `T + A` at bands 1/4 and 1/5: a counterexample to RQ must read infinitely many split places (= … | hand; verifier G blind; de Bruijn at FS-86 | 91 |
+| FS89-S0A-12 | A `T + A` statement about `ℤ[U₅]` cannot exclude split components at primes `p ≠ 5`: a continuous character at `p` restricts to every … | hand; verifier G; the owner's one-step check | 95 |
+| FS89-S0A-13 | Weil check: `max\|λ\| ≤ 2√q`, and the middle-half coefficient `1/sin(π/2q) > 2√q` for every `q ≡ 3 (4)`, `11 ≤ q ≤ 83`; Hoffman ratios at 23 and … | tools (float, margins printed); verifier G | 99 |
+| FS89-S0B-T1 | The rank-one orbit model: `Θ_β(U₅)` ≅ bi-infinite sequences `e_m ∈ Q_β = [β, 1−β]²` with `e_{m+1} − w̄e_m ∈ π⁻¹ℤ[i]` (layers `wᵐℤ[i]`); a … | hand + tools exact; S0B (two models agreeing to depth 6, and the adelic formula value for value at `\|m\| ≤ 25`); the owner … | 105 |
+| FS89-S0B-T2 | Leaves: `τ + λ_d ∈ Θ_β` iff `\|d\| ≤ r_τ`; in adelic form `T + A` is exactly "the two 5-adic components are images of one Gaussian rational"; … | hand; S0B | 110 |
+| FS89-S0B-T3 | The heteroclinic `θ*` (the order-3 character on forward layers, `θ₂ + λ` on backward ones, glued at `e₀ = (1+i)/3`) lies in `Θ₄(U₅)` | hand + tools exact; S0B; the owner by independent code (inventory item 16) | 115 |
+| FS89-S0B-T4 | A band character reading `τ₁ + λ` forward and `τ₂ + λ` backward, `τ₁ ≠ τ₂`, is not in `T + A`; hence `Θ₄(U₅) ⊄ T + A` and `RS₄({5})` is false | hand; S0B; the owner (density, inventory item 16) | 119 |
+| FS89-S0B-T5 | From `e₀ = q` the forward orbits form a perfect tree: continuum many non-`T + A` points, with a Cantor fibre of irrational 5-adic parts | hand, exact prefixes; S0B | 125 |
+| FS89-S0B-T6 | Any second split prime `p ≠ 5` kills every rational heteroclinic of `Θ₄(R₅)`: no band character of `ℤ[i][1/5p]` restricts to one, whatever its … | hand + exact arithmetic; S0B (derived, one mind, for torsion difference prime to 13); verifier H blind (general), with the … | 129 |
+| FS89-S0B-C1 | The positive control: FS81-T3/T8 reproduced on two exact code paths (the `L`-layer and orbit models) at depth ≤ 8, three colours, 5 pieces at … | tools exact; S0B; the owner reran it (inventory item 13) | 137 |
+| FS89-S0B-L4 | The primitive band torsion characters of `ℤ[i]/N` at four colours with `5 ∤ N`, `N ≤ 130`: 145 characters of 12 orders (2, 3, 4, 7, 8, 22, 26, 31, … | tools exact, a finite list; S0B | 141 |
+| FS89-P-R1 | `Θ₃(R₆₅) ⊆ T₆ + A`: FS81-T3 on each layer `w₁₃ⁿ·ℤ[i][1/5]`, glued through 5-divisibility as in S0A-2 (the three-colour control of the plan's §S.4) | derived, one mind (the planner); unverified — D's D2-L1 and verifier I's VB4 each imply it (RS₃({5}) is FS81-T3) | 148 |
+| FS89-D0-T1 | The rank-`r` orbit model: `Θ_β(U_S)` ≅ arrays `(e_m)_{m∈ℤ^S}` in `Q_β` with `e_{m+ε_p} − w̄_p e_m ∈ π_p^{−1}ℤ[i]` for every `p ∈ S`; adjacent … | hand + tools exact; two derivations, independent (D; verifier H blind to D); the owner's CRT check at 200 random triples | 154 |
+| FS89-S1V-10 | Theorem V6, `T + A` at rank `r`, five equivalent forms: one Gaussian rational at all `2r` local components ⟺ one leaf on the coordinate axes ⟺ one … | hand; verifier H | 159 |
+| FS89-S1V-1 | Theorem V1: a character of `Q` whose restriction to every `R_S` (a directed exhausting family of finite nonempty `S`) is in `T + A` is in `T + A`, … | hand, elementary; verifier H blind; the owner's one-step check (inventory item 24) | 165 |
+| FS89-S1V-2 | U1 and its sharp form: `RS₄(S)` for every finite `S ⊇ S₀` implies RQ₄; and RQ₄ ⟺ `Θ₄(Q)\|_{R_S} ⊆ T + A` for every finite `S` | hand; verifier H | 169 |
+| FS89-S1V-3 | The leaf formula at `Q`: `τ + λ_d ∈ Θ₄(Q)` iff `τ(G_N) ⊆ [1/4 + \|d\|, 3/4 − \|d\|]`, `G_N` the image of the local norm-one groups (joint density … | hand; verifier H | 173 |
+| FS89-S1V-5 | U2, the explicit list: `Θ₄(Q) ∩ (T + A)` is 13 discs (parity, margin 1/4; four of order 3, margin 1/12; eight of order 7, margin 1/28) and 16 … | hand + tools exact; verifier H blind; the owner reran the tool (inventory item 25) | 176 |
+| FS89-S1V-6 | The rows of a band character of `R_{5,p}` over a rational heteroclinic of `R₅` are rational heteroclinics whose archimedean parts are rotated by … | hand; verifier H | 181 |
+| FS89-S1V-7 | The sweep bound: a band torsion character with no `π̄_p`-part has `π_p`-level at most `v_{π_p}(w₅^o − 1)`, `o` fixed by its prime-to-`p` order | hand; verifier H (its own place slip, `π_p` against `π̄_p`, corrected before any other file was opened; the numbers are identical) | 184 |
+| FS89-D1-L2 | Berend's case 2: if small differences in a closed `U_S`-invariant `M` have zero `S`-adic part, then `M` meets `T + A`; a minimal such `M` lies in … | hand; two derivations, independent (D, via `x∘(w_pⁿ − 1) = λ_v` on a recurrent point; verifier I blind, via finitely many … | 189 |
+| FS89-D1-L3 | Case 1 at `\|S\| ≥ 2`: if small differences in `M` have non-zero `S`-adic parts, then `M − M = R̂_S`; the orbit closure of any non-zero pure local … | hand; two derivations, the second from the statement (D: expand at `v` by `w_p`, rotate by `⟨i, w_q⟩`, an open subgroup of … | 196 |
+| FS89-D1-L4 | The parity line: `M ⊆ Θ₄` with `θ₂ ∈ M − M` contains a corner (`2x = θ₂`); `θ₂(u) = 1/2` on every rational unit vector, so `x(u), x(u) + ½ ∈ [1/4, …` | hand, two lines; D; verifier I from the statement; the owner | 203 |
+| FS89-D1-T1 | `MS₄(S)` for every finite `S` with `\|S\| ≥ 2`: every `U_S`-minimal closed subset of `Θ₄(R_S)` is a finite torsion orbit or a finite union of leaf … | hand; D; verifier I (B2: TRUE from D1-L2 to L4, no finite lemma); B1's blind verdict GAP was its own route's | 208 |
+| FS89-S1VB-1 | Lemma E (expansion): small differences with a non-zero local part in a closed invariant set expand to a pure local difference | hand; verifier I blind | 215 |
+| FS89-S1VB-2 | Lemma SW: no ball of pure local translates lies in `Θ_k(R_S)`, `k ∈ {4, 5}` (a pure local sweep moves `θ(u)` through a coset of step `1/p ≤ 1/5`, … | hand; verifier I blind | 218 |
+| FS89-S1VB-3 | Lemma JC: `⟨(w̄_{p′}, w_{p′}\|_v)⟩` is dense in `S¹ × W₀`, `W₀` open in `ℤ_p^×` | hand; verifier I blind | 221 |
+| FS89-S1VB-4 | VB1: for `\|S\| ≥ 2`, a band point whose orbit closure meets `T + A` is in `T + A` (bands 1/4, 1/5) | hand; verifier I blind | 225 |
+| FS89-S1VB-5 | VB2: for `\|S\| ≥ 2`, `MS_k(S)` ⟺ `RS_k(S)` ⟺ every minimal subset of `Θ_k(R_S)` meets `T + A` (bands 1/4, 1/5) | hand; verifier I blind | 229 |
+| FS89-S1VB-6 | VB3: `RS_k(S)` ⟹ `Θ_k(R_S) ∩ T` is finite, for any nonempty `S` (non-effective: no order bound) | hand; verifier I blind | 233 |
+| FS89-S1VB-7 | VB4: `RS_k(S)` ⟹ `RS_k(S′)` for every `S′ ⊇ S`, finite or not; in particular RQ_k | hand; verifier I blind; S0A-2's gluing with base `R_S`, the order bound from VB3 | 237 |
+| FS89-S1VB-9 | VB6: a minimal set with a pure local pair and an infinite fibre group is impossible | hand; verifier I blind | 240 |
+| FS89-D1-L5 | At `S = {5, 13}`: a band array within 0.13 of a corner pattern at two `m`-adjacent sites equals it there (the deviation rotates rigidly by `w̄₅` … | hand + tools exact; D; checked independently by S1VB-13 | 244 |
+| FS89-D1-L6 | The corner exit lemma at `{5, 13}`, band 1/4 (`w̄₁₃ ≡ 3 (mod π₅)`, `w̄₅ ≡ 7 (mod π₁₃)`): no band array leaves a full corner plane; segment length … | hand + tools exact; two independent exact tools (D's, with three plants firing after two unreachable ones were replaced; … | 248 |
+| FS89-D1-C1 | Corners are isolated in `Θ₄(R₆₅)`; a single vertical domino already isolates a corner (verifier I's strengthening of D's `3 × 2` box) (= S1VB-13, … | hand + tools exact; D; verifier I's own tool, six plants firing | 253 |
+| FS89-D1-T2 | `RS₄({5, 13})`: `Θ₄(R₆₅) ⊆ T + A`; no heteroclinic or switching character at `{5, 13}` (U4, promoted from S0B's reading to a theorem) | hand + tools exact; D (case 1 forces a corner into the orbit closure; D1-C1 finishes); verifier I (B2, from the statements; … | 257 |
+| FS89-D1-C2 | `Θ₄(R₆₅) ∩ T` is finite, so `Θ₄(R₆₅)` is a finite union of leaf discs | hand + tools exact; D (by corner isolation); verifier I's VB3 derives it from D1-T2 by expansion, so it is not an independent … | 263 |
+| FS89-S1VB-14 | `RS₄(S)` and `MS₄(S)` for every finite `S` with `\|S\| ≥ 2`; `RS₅(S)` and `MS₅(S)` for every `S ∋ 5` with `\|S\| ≥ 2`; with VB4, RQ₄ and RQ₅; no … | hand; verifier I's assembly of D's D1-L2 to L4 and D5-L1 with its own VB1 and VB4 (the lemmas each derived twice, as their … | 267 |
+| FS89-D2-L1 | Bounded-order layering: `Θ_β(R) ⊆ T_N + A` for a `p`-divisible `R = ℤ[U_R] ⊆ Q` implies `Θ_β(R′) ⊆ T_N + A` for every `R ⊆ R′ ⊆ Q` | hand; D (the archimedean parts aligned on the ideals `R ∩ uR`); verifier I from the statement (S0A-2's 5-adic real lift with … | 275 |
+| FS89-D2-T1 | RQ₄: `Θ₄(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`; with S1V-5, `Θ₄(Q)` is exactly the 13 discs and 16 points of U2, an explicit compact set | hand + tools exact; D (D2-L1 with `R = R₆₅`, `N` from D1-C2); verifier I (every lemma re-derived, from the statements; a … | 279 |
+| FS89-D5-L1 | At band 1/5 with `5 ∈ S`: `θ₂ ∈ M − M` implies `M` meets a corner leaf disc of radius 1/20 (`x(u) ∈ [1/5, 3/10] ∪ [7/10, 4/5]`, so `2x ∈ …` | hand; two routes: D (FS81-T3 lifted through D2-L1); verifier I from the statement, by S1VB-12 with no FS-81 input | 287 |
+| FS89-S1VB-12 | Narrow-band rigidity: for `5 ∈ S`, a character of `R_S` with `φ(U_S) ⊆ [−1/10, 1/10]` is `λ_e` with `\|e\| ≤ 1/10` (5-steps are exact since `0.283 …` | hand; verifier I | 291 |
+| FS89-D5-L2 | Near a corner leaf a band array is on the leaf (digit spacing); its hypothesis `\|d\| ≤ 1/20` is not needed (verifier I) | hand; D; verifier I from the statement | 295 |
+| FS89-D5-L3 | The corner-leaf exit lemma at `{5, 13}`, band 1/5, displacement ≤ 0.06, on all 128 exit lines; segment length 4 tight (checked independently by … | hand + tools exact; D's tool (plants: displacement 3/10 leaves 64 survivors, `w̄₁₃ → 1` leaves 8); verifier I's tool, a sound … | 298 |
+| FS89-D5-T1 | `RS₅({5, 13})`: `Θ₅(R₆₅) ⊆ T + A` | hand + tools exact; D; verifier I (B2 from the statements; and by VB2 with D5-L1) | 302 |
+| FS89-D5-C2 | `Θ₅(R₆₅) ∩ T` is finite | hand + tools exact; D; verifier I's VB3 at `k = 5` (not an independent input) | 305 |
+| FS89-D5-T2 | RQ₅: `Θ₅(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`; it implies RQ₄ (`Θ₄ ⊆ Θ₅`), by a route sharing D1-L2 and D1-L3 (not independent) | hand + tools exact; D; verifier I (every lemma re-derived from the statements; a second assembly via VB1, VB4) | 308 |
+| FS89-CL1 | S0B's 29 depth-one cells and verifier H's 29 torsion characters are different lists with equal counts: parity sits in the 12-gon, order 3 in the … | tools exact; the close planner, one mind | 313 |
+| FS89-CL2 | For every subfield `F ⊆ ℝ`: `Θ₄(R_F) ⊆ T₁₆₈ + A` and `Θ₅(R_F) ⊆ T + A`; every four- or five-colour character colouring of any real field's plane … | hand; a composition: S0A-10 and S0A-3 (verifier G; N₀ twice) with D2-T1 and D5-T2 — no new step | 320 |
+| FS89-CL3 | HD1 for ℚ(√59), ℚ(√83), ℚ(√131): every four-colour band character of the plane is a dyadic torsion (pullback) character; so no character colouring … | hand; a composition: S0A-6 with D2-T1, at FS86-dB-Theta's grade (two derivations, given V3: FS-66's certificates at 11, and at … | 324 |
+| FS89-CL4 | C-47 unconditional: `Θ₄(R_{ℚ(√47)}) = ∅`; no character four-colouring `x ↦ ⌊4θ(x)⌋` of ℚ(√47)'s plane exists. `χ(ℚ(√47)²) = 5` is not claimed | hand; a composition: S0A-8 (given Lemma R and Weil) with D2-T1 | 329 |
+| FS89-CL5 | C-167 unconditional: `Θ₅(R_{ℚ(√167)}) = ∅`; no character five-colouring of ℚ(√167)'s plane exists. `χ(ℚ(√167)²) ≥ 6` is not claimed | hand + cert; a composition: S0A-9 (FS-53's and FS-66's certificates) with D5-T2 | 333 |
+| FS89-PA-B1 | `(R̂_S, U_S)` in Berend's coordinates: `R̂_S = Ω_a²` (`a = ∏_{p∈S} p`) and `Q̂ = Ω_P²` (his Ch. IV); the action meets his irreducibility condition … | hand, a hypothesis check; the reader, one mind | 339 |
+| FS89-PA-B2 | Band-free minimal sets: for every finite `S` with `\|S\| ≥ 2`, every `U_S`-minimal closed `M ⊊ R̂_S` lies in `T + A` (case 2 by D1-L2; case 1 … | hand; the reader, one mind, unverified; resting on D1-L2 and D1-L3, each derived twice | 343 |
+
+#### 3.10 FS-89's inventory items still open
+
+| # | kind | item (short) | status in the inventory |
+|---|---|---|---|
+| 5 | decision owed (Kooshi) | "de Grey's lattice" is this project's coinage, not de Grey's | carried (Kooshi's call) |
+| 6 | carried | FS-90's two sanctioned hours | carried (Kooshi's call) |
+| 7 | carried | the audit of C14's external input (`[AmbrusEtAl2023]`); reading debts (Soifer 2019, de Grey 2026, Haugstrup 2026, …) | carried; not worked |
+| 17 | ruling owed (Kooshi) | the torsion list of item 16(b) was a finite exact enumeration (the ban's edge) | carried (recorded in S0B-L4's entry) |
+| 54 | decision owed (owner) | M50's `S₅` consequence may be re-graded (the products reader) | carried (owner's call) |
+
+Corrections owed **to** FS-89's closed record by today's crunch (the Notation's `A`, FS89-CL2's wording, FS86-B1-LR's Galois scope) are
+carried in `plans/FS91-close-inventory.md` (rows 61, 69, 78) and bannered in stage 4.
