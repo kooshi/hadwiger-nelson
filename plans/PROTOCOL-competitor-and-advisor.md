@@ -32,6 +32,14 @@ disagreement before anything is paid for, and count the retractions — zero mea
    reached de Bruijn, who disclosed it at once and fenced off what it had seen. Every hand-back is exactly "<name> idle; no content in
    this hand-back; my reports go to the owner by SendMessage", every report to the owner goes by SendMessage to "main", every card to a
    competitor by SendMessage to that competitor, and a background watcher's completion is treated the same way.
+   **The fence reaches the owner's own writes and the commit log** (FS-85, 2026-09-24). The owner wrote round-1 progress of both sides
+   into the close inventory, a successor preamble into `data/fs85/briefs/` and descriptive commit subjects — all readable by every agent;
+   and the harness's session-start snapshot prints **the last five commit subjects** to every newly launched agent, which is how a
+   round-1 result reached the round-2 Coxeter (disclosed unprompted, and his overlapping result scored as not independent). So: **commit
+   subjects are neutral from the first competitive commit on**; a running agent's progress lives in the owner's scratch until the fence
+   lifts; a successor's preamble lives in its own scratch directory; and **every brief forbids `git log`, the close inventory and the
+   owner's check scripts until hand-back** — five neutral commits cleared the start-up snapshot, but verifier 2's own
+   `git log --oneline -15` printed two route-bearing subjects anyway. History is never rewritten to repair a leak (never force-push).
 2. **Brief both with identical information**, in full context (the mathematics they stand on with addresses, the challenge, the hard constraint,
    what is theirs to decide, the two standing obligations — the prior-art gate and honest reporting), and invite each to attack
    the framing: "if the challenge as posed is subtly the wrong challenge, say so — that is a finding, not a refusal." **Optionally
@@ -53,7 +61,11 @@ disagreement before anything is paid for, and count the retractions — zero mea
    5.1 was; the 2026-09-19 "no standing Poros" rule was a cost rule under the old models). Every agent is one level deep — no child
    spawns children. **Budget anchors per role:** FS-73 — competitors 360–410k tokens, the advisor about 480k; FS-79 — de Bruijn about
    552k (over its 400k budget, stood down), Coxeter about 360k, the competition advisor about 315k, the plan-phase advisor about 220k;
-   brief competitors at 400k with the replace-don't-reuse line at 500k.
+   FS-85 — the planner about 330k working, the plan-phase advisor about 320k working, the competitors about 310–520k,
+   the competition advisors about 475k and 441k (one per round), verifier 1 about 345k, verifier 2 about 330k, the round-3 derivation
+   agent about 370k, the input auditor about 220k working (640k by the harness counter), the first close planner near 450k after three
+   of the close's sections; brief competitors at 400k with the replace-don't-reuse line at 500k, and replace a competitor or an advisor
+   at a round boundary rather than mid-round (FS-85 replaced one of each, from preambles in their own scratch directories).
 10. **Concurrent jobs: RAM is the discriminator** (Kooshi, 2026-09-24; it supersedes the owner's FS-79 ruling R8, which proposed
    exactly this direction). Threads are not rationed — every thread can and should be used, jobs pinned to disjoint cores — and RAM is,
    against a global maximum of about 100 GB, enforced by `scripts/slot.py` (a shared reservation ledger, a hard `MemoryMax` cap per job,
@@ -61,6 +73,13 @@ disagreement before anything is paid for, and count the retractions — zero mea
    disk. Every brief states the rule and the command in place of the old single `flock` lock. The failure the old lock caused — a job
    queued under `flock -w` whose wait expires **exits without running**, a silent non-run (Coxeter's census nearly did) — is why the
    wrapper's refusal is loud and carries its own exit status.
+11. **Verification is where contest begins** (FS-85; the round-2 advisor: *"the disagreement never started"* — retractions in both
+   rounds, de Bruijn 1, Coxeter 0, Poros 1). **Launch a blind verifier on a finished result while the competition still runs**, fenced
+   like a competitor: its brief, record and code stay in its own scratch until the competition ends, it never opens the other side's
+   files or messages a competitor or the advisor, and it reads the finished side's proof only after its own verdicts are committed.
+   **When a result rests on a computer-found input from the literature, audit the input as a fixed certificate before the ledger row**
+   (FS-85's auditor walked Parts's nine trees from a by-eye transcription and proved his root case split by hand). The two blind
+   verifiers found every divergence the milestone had — a published proof's gap, an overstated scope, a notation slip — none of truth.
 
 ## 2. What the advisor actually did — the review (2026-09-22)
 
@@ -152,9 +171,30 @@ P0-implementer, D-implementer, CL-close-planner); the advisor's record `plans/PO
 
   Nothing was delegated below any agent.
 
-**The next use** (G51's *Do*): FS-80's window-frequency certificate, or FS-76's rank-1 proof — two routes that two minds could take
-apart. Run it the same way, with the rules of §1 as they now stand. A milestone whose plan arrives with a one-mind proof takes the
-fourth run's shape instead: a blind verifier with a stall criterion.
+**The fifth run: FS-85, can four-colour rigidity exist without triangles? (2026-09-24).** The shape, stage by stage, never more than
+three agents at once: a planner and a plan-phase advisor (stage A); a competition, two competitors (FS-79's personas reused — wooden boats,
+tango — as a second data point on priming) and a competition advisor holding the plan-phase advisor's held file (stage C, two rounds, a
+fresh Coxeter and a fresh advisor for round 2); a blind verifier on de Bruijn's finished chain while Coxeter's round 2 ran (V1–V8); a
+round 3 of one derivation agent (the 5-part lemma) beside an input auditor (Parts's trees; prior art); a second blind verifier on the
+whole `F ⊇ 8Λ` chain (V2-T1–T8). Briefs as sent, agent ids removed: `data/fs85/briefs/`; records `plans/FS85-C-deBruijn.md`,
+`plans/FS85-C-Coxeter.md`, `plans/POROS-2026-09-24-fs85-plan.md`, `plans/POROS-2026-09-24-fs85-competition.md`, `plans/FS85-R3-five-part.md`,
+`plans/FS85-V-verification.md`, `plans/FS85-V2-verification.md`, `plans/FS85-input-audit.md`; the held file `data/fs85/held/HELD-plan-advisor.md`.
+- **Outcome:** `LEDGER.md` rows 85–87 — de Grey's `F = P = 8Λ` derived from Parts's trees at two independent derivations, the
+  triangle-free abstract yes at two, the no-gos; G75.
+- **Convergence, again, and stronger:** both first routes were identical in kind and order — the same abstract yes by the same
+  construction (base 8 and base 7), written before any contact — so the priming prediction won only as "weakly", more strongly than
+  stated; round 2's divergence followed different round-1 endpoints, two replacements and a fence event, not priming.
+- **The held items and cards:** the plan-phase advisor's file went to the competition advisor by file (hash-checked), and its items went
+  to both competitors at once after both first routes (16:29); the advisor's checks of each side's route went to that side alone and
+  were logged (§3's asymmetric-card rule).
+- **Two covert channels and the fence rule** (rule 1): the owner's writes, and the start-up snapshot of commit subjects.
+- **Verification during the competition** (rule 11): verifier 1 ran fenced beside Coxeter's round 2 and found the published input's gap
+  (the wiki's Prop. 7) that both competitors' transfers had checked by membership only; verifier 2 found R3a's overstated scope and a
+  notation slip. **Retractions:** stage A planner 2, advisor 1; competition de Bruijn 1, Coxeter 0, Poros 1; round 3 0.
+
+**The next use** (G51's *Do*): FS-86's structural question (what pins the spectrum without triangles), FS-80's window-frequency
+certificate, or FS-76's rank-1 proof — routes two minds could take apart. Run it with §1 as it now stands, rules 1 and 11 included; a
+milestone whose plan arrives with a one-mind proof takes the fourth run's shape: a blind verifier with a stall criterion.
 
 ## 4. The competitor brief, verbatim (Coxeter, 2026-09-09 04:21)
 
