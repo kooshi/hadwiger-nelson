@@ -437,3 +437,8 @@ five-colour its plane? … a proof that none exists removes one more kind of fal
 ### 4.4 The frozen FS-66 checker at 23
 
 **Running at hand-back: pid 99396, log `data/m3/j22/fs66-cert-p23-m5.out`, verdict to be read by M3's close** (the owner's instruction; the process is left running, not killed). State at hand-back: steps 1–5 of 7 passed (step 5: every leading principal minor of the 46 blocks positive), step 6 at representative 176 of 266 after 580 s. The committed copy of the log is partial (written while live); D1-fac's 23 clause rests on row 75's recorded CERTIFIED meanwhile.
+
+**Pending run — outcome (after the handover).** The checker re-run did **not** finish: exit 137 at 44:34 wall, peak RSS 8,383,092 kB — the
+slot's own 8 GiB cap killed it in step 6/7 (representative 220 of 266). Explained, not a crash: my `--mem 8` was under-declared. **To
+finish it:** `scripts/slot.py --mem 16 --cpus 1 -- python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 5`
+(about 45–50 minutes). No verdict from this run; D1-fac's 23 clause rests on row 75's recorded CERTIFIED.

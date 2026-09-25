@@ -1,0 +1,26 @@
+slot: admitted python3: mem 8 GiB (hard cap), cpus 16
+slot: python3 exited 137 -- killed, most likely by its 8 GiB cap (MemoryMax); raise --mem honestly or shrink the job
+Command exited with non-zero status 137
+	Command being timed: "scripts/slot.py --mem 8 --cpus 1 -- python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json --m 5"
+	User time (seconds): 2661.14
+	System time (seconds): 4.28
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 44:34.07
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 8383092
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2343216
+	Voluntary context switches: 142
+	Involuntary context switches: 25066
+	Swaps: 0
+	File system inputs: 88
+	File system outputs: 64
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 137

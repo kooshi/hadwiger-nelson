@@ -7,3 +7,10 @@ step 1/7: parsed 45 weight vectors of 530 integers, 46 blocks, 138706 rows; ever
 step 2/7: signs: scale > 0; all 138706 row multipliers >= 0
 step 3/7: rebuilt from p alone: 529 points, unit circle S of 24 points, 48 linear maps, each a bijection with h(x+s) - h(x) in S on all 609408 (point, unit vector) pairs
 step 4/7: rows: every point index in [0, 529); largest box-product degree 4 (<= 4)
+step 5/7: positive definiteness of 46 blocks (sizes 2..267) by fraction-free (Bareiss) elimination: every leading principal minor positive
+  products a * tau_t(a'): 266 x 266 representative pairs x 529 shifts = 37429924 canonical forms
+    representative 44/266 ... [356.6 s]
+    representative 88/266 ... [510.3 s]
+    representative 132/266 ... [554.7 s]
+    representative 176/266 ... [579.5 s]
+    representative 220/266 ... [603.7 s]
