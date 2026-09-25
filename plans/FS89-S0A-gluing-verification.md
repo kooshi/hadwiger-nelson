@@ -121,7 +121,87 @@ three type-(B) fields**, at the grade of dB-Theta [hand, given V3 (FS-66's certi
 **The condition is the whole content**: see C3 — the rational statement is itself the case `F = ℚ` of "`Θ₄(R_F) ⊆ T + A`", and it carries
 the same infinitely-many-split-places difficulty at which both FS-86 competitors stopped.
 
+### G0 (setup) — verdict: TRUE, all three parts [hand, elementary]
+
+- *`Q = ℤ[i][1/p : p ≡ 1 (4)]`, so `1/5 ∈ Q`.* ⊇: `i ∈ U_ℚ`; for `p = ππ̄`, `π = a + bi`, `w = π/π̄ ∈ U_ℚ` and
+  `w + w̄ = 2(a² − b²)/p` with `p ∤ 2(a² − b²)` (else `p | a², b²`, so `p² | p`); Bezout on `2(a² − b²)` and `p` gives
+  `1/p = x(w + w̄) + y ∈ Q`. ⊆: every `u ∈ U_ℚ` is `z/z̄` (Hilbert 90) with `z ∈ ℤ[i]` divisible by no rational prime; then
+  `u = z²/N(z)`, an inert `q | N(z)` would divide `z`, and a factor `(1+i)` of `z` contributes `(1+i)/(1−i) = i`; so the denominators of
+  `u` are products of split primes. (For `5`: `w₅ = (3 + 4i)/5`, `w₅ + w̄₅ = 6/5`, `1/5 = w₅ + w̄₅ − 1`.)
+- *Layers.* `bQ ⊆ R` because `R` is a ring containing `b` and `U_ℚ ⊆ U_F` (a rational unit vector is a unit vector of `F²`); `b ∈ bQ`,
+  so the layers cover `U_F`, and `R = Σ_b bQ` (R is the additive span of `U_F`). Two layers are equal (`b′/b ∈ U_ℚ`) or meet in 0
+  (distinct ℚ(i)-lines of the ℚ(i)-space `L`); the *relations* among layers are what the gluing has to control (G1, "where the gluing
+  lives").
+- *Restriction.* `θ_b` is additive and, since the unit vectors of `Q ⊆ ℚ(i)` are exactly `U_ℚ` and `bU_ℚ ⊆ U_F`, `θ_b(U_ℚ) ⊆ [1/4, 3/4]`.
+  The same holds at every band.
+
+### G2 (ℚ(√47): `Θ₄(R) = ∅` under the four-band rational statement) — verdict: TRUE (conditional), by a route that needs fewer inputs than FS86-CL1
+
+**Theorem G2.** Let `F ⊆ ℝ` be a real field in Lemma R's scope (FS86-B1-LR: `L/ℚ` Galois, no stable prime ramified in `L/F`) whose stable
+places are all odd with **prime** residue field `𝔽_q`, `q ≥ 11`. Then `Θ₄(R_F) ∩ (T + A) = ∅`. With G1 (under the four-band rational
+statement), `Θ₄(R_F) = ∅`. ℚ(√47) qualifies: 47 ≡ 7 (mod 8), so both primes above 2 split in `L/F` (the wall is broken); 3 and 7 are
+inert in `F` with residue fields 𝔽₉ and 𝔽₄₉, which contain `i`, so they split in `L/F`; the stable places are the two primes above each
+`q ≡ 3 (4)` with `(47/q) = 1` (11, 19, 23, 31, 43, …) and the ramified 47 (residue field 𝔽₄₇). [hand, given Lemma R (hand, B1) and the
+Weil bound for `Γ_q` (G44), checked numerically at `q ≤ 83` in `data/fs89/s0a/circle_spectra.py`]
+
+*Proof.* Let `θ = τ + α ∈ Θ₄(R) ∩ (T + A)`, `Nτ = 0`.
+1. *Local form.* By Lemma R, `R` is the ring of elements of `L` integral at every stable prime, so `R/NR ≅ ∏_{stable 𝔓 | N} O_𝔓/N` (CRT)
+   and `τ(u) = Σ_𝔓 τ_𝔓(u_𝔓)` with `τ_𝔓` continuous on `T(F_𝔓)`.
+2. *Independence.* The norm-one torus of `L/F` is `F`-rational (Cayley, `u = (1 + is)²/(1 + s²)`, `s ∈ F`), so `U` is dense in
+   `T(ℝ)² × ∏_{𝔓 | N} T(F_𝔓)` (weak approximation for `F`, pushed through the Cayley map, a homeomorphism onto the complement of `−1` at
+   every place where `i ∉ F_v`). The closed band therefore holds for independent coordinates.
+3. *Level 1.* If `τ_𝔓` has level `k ≥ 2`, the fibre `{s + π^{k−1}sa : Tr a = 0}` (FS86-LP, unramified or ramified) with every other
+   coordinate fixed gives a full coset of step `1/q` in the values of `θ`, which meets `(−1/4, 1/4)`. So every `τ_𝔓` has level 1:
+   `τ_𝔓(t) = Tr(a_𝔓 t̄)/q`, `t̄ ∈ μ_{q+1}`.
+4. *Middle half.* `τ ≠ 0`: otherwise `θ = α` takes values near 0 on the dense set `U`. Pick `𝔓` with `τ_𝔓 ≠ 0`. As in Lemma N₀, its value
+   set is exactly the middle half `{m+1, …, 3m+2}/q` (`q = 4m + 3`), each value taken twice, because every value of the rest must be within
+   `1/(4q)` of 0. The Fourier coefficient of that multiset at frequency 1 has modulus `1/sin(π/2q)`, and it equals an eigenvalue of
+   `Γ_q`, whose modulus is at most `2√q` (Weil, via G44's Kloosterman form). `1/sin(π/2q) > 2√q` for every `q ≥ 11` (7.03 > 6.63 at 11;
+   the gap widens). Contradiction. ∎
+
+**Compared with FS86-CL1** (which already excludes measurable window colourings over finitely many places at ℚ(√47), T + A characters
+included): this route uses no archimedean independence count (`[AmbrusEtAl2023]`), no all-levels certificate (FS-66 at 11 and 19), and no
+`[Zhang2012]` — the band collapses every tower to level 1 and the middle-half count replaces the product theorem. It needs Lemma R (for the
+local form) and Weil. Grades unchanged in kind (hand).
+
+### G3 (ℚ(√167): `Θ₅(R) = ∅` under the five-band rational statement) — verdict: TRUE (conditional); what is needed at each stable place is listed
+
+**Theorem G3.** Assume `Θ₅(Q) ⊆ T + A` (at the band `[1/5, 4/5]`). Then `Θ₅(R_F) = ∅` for `F = ℚ(√167)`. [hand + cert]
+
+*Proof.*
+1. *Fixed `N`, five-band.* Lemma N₀'s argument at `[1/5, 4/5]`: odd levels collapse to 1 (a coset of step `1/q ≤ 1/3` meets the open arc
+   `(−1/5, 1/5)` of length `2/5`); the 2-level is at most 3 (a coset of step `1/4` meets it); and only finitely many `q` occur (the value
+   multiset of `Tr(a·)/q` on `μ_{q+1}` is Weil-equidistributed, so for large `q` every translate meets an arc of length `2/5`). So the
+   hypothesis upgrades to `⊆ T_N + A` for a finite `N` (not computed).
+2. *Gluing.* G1's proof never uses the band: `Θ₅(R_F) ⊆ T_N + A`.
+3. *The archimedean part is harmless.* For `θ = τ + α`, `τ` is constant on the cosets of the finite-index `U_N = ker(U → (R/NR)^×)`, each
+   coset is dense in `T(ℝ)²` (it contains a translate of `U^M`, and `z ↦ z^M` is open), and `α(T(ℝ)²) = [−r, r]`. So every torsion value
+   `c` satisfies `c + [−r, r] ⊆ [1/5, 4/5]`: `τ` is itself a five-band character and `τ ≠ 0`. (So **Croft's `m₁ ≥ 0.229 > 1/5`, which stops
+   FS86-CL1 at five colours for measurable windows, does not enter for characters**: a linear archimedean part averages away.)
+4. *Level 1 and the product.* By Lemma R (in scope: 167 ≡ 7 mod 8, no stable dyadic place) and step 3 of G2, `τ = Σ_𝔓 τ_𝔓` with every
+   `τ_𝔓` at level 1, and `U` maps onto `∏_𝔓 μ_{q_𝔓+1}`. So `x ↦ ⌊5τ(x)⌋` properly five-colours the categorical product `∏_𝔓 Γ_{q_𝔓}` over
+   the stable places with `τ_𝔓 ≠ 0`. A vertex-transitive graph with a proper five-colouring has independence ratio `≥ 1/5`; by
+   `[Zhang2012]` the ratio of a categorical product of vertex-transitive graphs is the largest factor's; so some `Γ_q` has ratio `≥ 1/5`.
+5. *Each stable place refuses* (what is needed, place by place — **level one only**, `χ_f(Γ_q) > 5`):
+
+| stable place of ℚ(√167) | residue target | needed | source | grade |
+|---|---|---|---|---|
+| the two primes above 23 | `Γ₂₃` | `α < 105.8` | `α ≤ 105` (FS-56, level 3) and `α ≤ 97` (FS-66); Hoffman 0.24908 does **not** suffice | cert |
+| the two primes above 43 | `Γ₄₃` | `α < 369.8` | `α ≤ 365` (FS-53, row 69); Hoffman 0.21376 does **not** suffice | cert |
+| the two primes above 59 | `Γ₅₉` | ratio `< 1/5` | Hoffman 0.19912 (exact spectrum; recomputed here in float, margin 9·10⁻⁴) | tools exact |
+| the primes above every usable `q ≥ 67` (67, 71, 79, 83, …) | `Γ_q` | ratio `< 1/5` | Weil: `2√q/(q + 1 + 2√q) < 1/5` once `8√q < q + 1`, i.e. `q ≥ 63` | derived |
+| the ramified 167 | `Γ₁₆₇` (level 1 of the ramified tower) | ratio `< 1/5` | Weil, as above; the fibre structure for step 3 is FS86-LP's ramified case | derived |
+
+   The stable places are exactly these: the dyadic places split (167 ≡ 7 mod 8), and 3, 7, 11, 19, 31, 47 are inert in `F` (`(167/q) = −1`),
+   so their residue fields contain `i` and they split in `L/F`. ∎
+
+**Not needed at any place:** an all-levels certificate (the band collapses every tower to level 1, given the density of `U`), any archimedean
+count, or anything at a split place. **Needed beyond the places:** the five-band rational statement itself, which is *stronger* than the
+four-band one (`Θ₄ ⊆ Θ₅`), and Lemma R and `[Zhang2012]`.
+
 ## Would-have-searched-here log
 
+- G2/G3: I would have searched for band characters of `Γ₂₃`, `Γ₄₃` and their products by solver. Instead: the product theorem plus the held
+  certificates (FS-53, FS-56, FS-66), and one exact spectrum evaluation (`circle_spectra.py`: every character evaluated, nothing selected).
 - G1 / Lemma N₀: I would have enumerated the band characters of `Γ₇` and of `ℤ[i]/8` by machine to confirm the order-7 and order-8 cases.
   Instead: hand evaluation on the 8 points of the 𝔽₇ circle and the 8 unit-vector classes mod 8 (a formula, checked, not searched).
