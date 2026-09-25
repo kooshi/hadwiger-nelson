@@ -1,5 +1,7 @@
 # FS-89 — the missing theorem: measure rigidity for the unit-vector action with isometric archimedean directions (stub)
 
+**Chosen 2026-09-25 as the next milestone, re-posed** (Kooshi: "I agree with the advisor's choice of next milestone"). The next-step advisor (`plans/POROS-2026-09-25-fs86-next.md` §3–§5) found that this stub files the missing theorem under the wrong kind of mathematics. de Bruijn's obstruction note (`plans/FS86-C-deBruijn.md` §7.5) asks for invariant **closed sets**, which is Furstenberg–Berend topological rigidity, proved in print. The stub instead asks for invariant **measures**, which is the open ×2×3-type problem. The re-posed route is G74's `5^{−k}` gluing: HD1 for every type-(B) field follows from one statement about the rational unit circle, that every four-colour band character of `ℤ[U_ℚ]` is torsion plus archimedean. The same step would give `Θ₄(ℚ(√47)) = ∅`. It is one mind's sketch and unverified. **Stage 0** is a blind check of the gluing, plus the exact band set of `ℤ[U₅]` at `[1/4, 3/4]`, which Kooshi ruled allowed under the ban. Close inventory: `plans/FS89-close-inventory.md`. The text below is the stub as minted.
+
 *Minted 2026-09-25 at FS-86's close (Kooshi: "then we'll spawn an advisor to decide what to do next: the missing theorem, 2 hours of
 sanctioned search time, or something else"). Rank 2 in `plans/FRONTIER-STUBS.md`. Written for a session with zero conversation memory.
 Solver-free: it can run inside the finite-witness-free week (to 2026-10-01, `CLAUDE.md` § Toolchain).*
