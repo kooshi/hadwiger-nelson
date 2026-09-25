@@ -1,0 +1,94 @@
+"""J23a stage 4: the draft LEDGER.md § B lines for FS-91 (M1), one per entry of plans/FS91-derivation.md.
+Run: python3 data/fs91/j23a/ledger_b_lines.py [--plant] > data/fs91/j23a/ledger-b-draft.md
+Checks every entry heading id of the derivation file has exactly one line, and no line names a missing entry (exit 1 otherwise).
+The plant drops one line, which must be reported."""
+import re, sys
+S = "stub"; D = "declined"
+L = [
+("FS91-J01-1","`(R̂_S, U_S)` is a group ℱ-flow in `[Berend1984]`'s sense for every nonempty finite `S`; every minimal set is restricted","hand (one mind)",D),
+("FS91-J01-2","PA-B2 blind-verified: at `\\|S\\| ≥ 2` every `U_S`-minimal closed `M ⊊ R̂_S` lies in `T + A`; `MS_k(S)` at every `k` (case 1 twice: Berend; a joining, J03a-4)","hand (two derivations)",D),
+("FS91-J01-3","the parity (doubling) lemma: `MS_β(S)` for every `β > 0`, `\\|S\\| ≥ 2`, without Berend","hand + tools exact (one reader)",D),
+("FS91-J01-4","Lemma SW as written holds exactly for `k < 2p` (sharp at `k = 10`, `p = 5`)","hand + tools exact",D),
+("FS91-J01-5","Lemma SW-m, the multi-digit sweep, at every `k ≥ 2` (= J03a-1)","hand + tools exact (two blind readings)",D),
+("FS91-J01-6","PA-B3 at `k = 6, 7, 8, 9`: `RS_k(S)` for `\\|S\\| ≥ 2`, and `RQ_k`","hand + tools exact (blind-verified)",D),
+("FS91-J01-7","band rigidity at every band: `RS_k(S)` (`\\|S\\| ≥ 2`), `RQ_k`, `Θ_k(R_F) ⊆ T_{N_k} + A(R_F)` for every `F ⊆ ℝ`, `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`; `N_k` non-effective (= J03a-3, -7, -8)","hand (two blind readings)","declined for now (Berend's Thm I.2 not in Mathlib)"),
+("FS91-J01-8","VB1 at every band reads `k` only through SW-m; VB3, VB4, D2-L1, S0A's G1 are `k`-free (= J03a-2)","hand (two blind readings)",D),
+("FS91-J03a-5","`Θ_2(R) ⊆ T_2` for every `R = ℤ[U]`","hand (one mind)",D),
+("FS91-J03a-6","VB3 at every band; `ord(τ) = ord(τ\\|_{ℤ[i]})`, so `Θ_k(Q) ∩ T` is finite with orders dividing `N_k`","hand (one mind)",D),
+("FS91-J03a-9","with `A` read as one embedding's `λ_e` the field clause is false (ℚ(√3), `k = 4`)","hand (one mind)",D),
+("FS91-J07-3","Lemma C: `R ⊗ ℤ_p = R̄_p × V_n`, `R/NR ≅ ∏_{p\\|N} R̄_p/NR̄_p`, torsion characters factor through finitely many stable places; no Galois hypothesis (= J10-T6, J10-L3)","hand (two derivations)","stub (FS-47)"),
+("FS91-J07-4","Lemma C′: `R̄_p = ∏ Ô_𝔓` except possibly at a ramified stable dyadic place; `R_F = O′` then (= J09's J2, J10-T6)","hand (three derivations)","stub (FS-47)"),
+("FS91-J02-L2","`R/pR` finite, `c`-stable, maximal ideals `R ∩ 𝔓` at stable primes, residue fields full at unramified ones, every `p` (= J09's J2′)","hand (two derivations)","stub (FS-47; FS-75)"),
+("FS91-J10-L1","`R_F` = ℤ-span of `U_F`, `ℚR_F = L`, `R_F ⊆ O′`, `O_L[U_F] = O′`, `cO′ ⊆ R_F`","hand (one mind)","stub (FS-47)"),
+("FS91-J02-L3","the Teichmüller section of `R/pR` and the joint Hilbert-90 lift: `𝒩(T₃) × 𝒩(T₂)` ⊆ the image of `U` in `R/6R`","hand (two derivations)","stub (FS-75)"),
+("FS91-J07-5","CLG-c corrected: the image of `U` in `R/NR` is that of `∏ T(F_𝔭)`, `∏ S_{𝔓,v(N)}` off ramified dyadic places; fibres dense in the archimedean tori","hand (verified from the statement, J10)",D),
+("FS91-J10-L2","weak approximation: `U_F` dense in `∏_{v∈Σ} T(F_v)`, archimedean included (= J07's (W), J09's J3)","hand, standard (three derivations)",D),
+("FS91-J02-L1","torsion extraction: `Θ₃(R_F) ≠ ∅ ⟹ Θ₃(R_F) ∩ T₆ ≠ ∅`, every `F ⊆ ℝ`","hand (two derivations)","stub (FS-75)"),
+("FS91-J02-L4","norm-one functionals: a three-colouring of `Γ_{3^f}` by an additive map iff `f = 1`; none to `(1/2)ℤ/ℤ` at `2^f` (= J09's J-L4b)","hand + Weil + tools exact (two derivations)","declined (rests on Weil)"),
+("FS91-J09-J1","the typing on `τ₂`, `τ₃`: `τ₃(u) = 0 ⟺ τ₂(u) = 1/2`","derived (one mind)",D),
+("FS91-J09-J-K","Lemma K1 false at `q = 27` exactly for `N(a) = 1`; true at 243","tools exact (two representations)",D),
+("FS91-J02-T1","three colours, torsion: a character `τ`, `6τ = 0`, `τ(U_F) ⊆ [1/3, 2/3]` exists iff a stable prime above 3 with residue field `𝔽₃` or a stable dyadic prime ramified in `F(i)/F`","hand (two derivations)","stub (FS-75)"),
+("FS91-J09-J4","no mixing: with no ramified stable dyadic prime (⟺ `F²` not bipartite), `Θ₃(R_F)` is exactly the `4N₃` residue characters at the primes of residue field `𝔽₃` (= J09v-1, J09v-2)","hand + Weil + tools exact (two independent derivations)","stub (FS-75)"),
+("FS91-J09v-8","no point of `Θ₃(R_F)` has mixed parity/order-3 types, at any real number field (J02 §2.6 Remark 2 refuted)","hand (one mind)",D),
+("FS91-J02-T2","S1: `χ(F²) ≤ 3 ⟺ Θ₃ ≠ ∅ ⟺ L(F) ≤ 3`, every real number field (= J09's J4-C, J09v-4); via FS81-T2","hand (three derivations)","stub (FS-75)"),
+("FS91-J09-J4-A","S1 on every algebraic `F ⊆ ℝ` and purely transcendental extensions, with `L(F)` over all stable valuation rings; false under the finite-residue reading (`ℚ(ζ_m + ζ_m^{−1} : m odd)`, J09v-7); general `F`: FS-39's gap","hand (two derivations, corrected)",D),
+("FS91-J02-T3","S2: `χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field","hand (two derivations)","stub (FS-75)"),
+("FS91-J02-C1","S3: `χ(ℚ(α,√7)²) = L = 4`, `α³ = α + 1` (= J09v-5)","hand + tools exact (three derivations)","stub (FS-75)"),
+("FS91-J02-C2","additive 3-colourings iff a stable `𝔽₃` prime; additive 2-colourings iff a stable ramified dyadic prime (generalises `[Fischer1990]` Thm 9)","hand (two derivations)","stub (FS-75)"),
+("FS91-J02-A2.1′","a second derivation of GPT Astra's Thm 2.1 ⟹ via L3","hand (the index reads one mind; J09 §4.2 re-derives it)",D),
+("FS91-J09-J4-T6","FS81-T6's open item settled: the additive 3-colourings of ℚ(√d), `d ≡ 3, 7 (mod 12)`, are Fischer's up to symmetry","hand (one mind)",D),
+("FS91-J07-1","CLG-a, the pullback: a band character of any `T_{𝔓,m}` composed with reduction lies in `Θ_β(R_F)` (= J08-7, J11-T8)","hand (four derivations)","declined (row 56's `addCayleyMap` would port it)"),
+("FS91-J07-2","CLG-b/b_n, the peeling lemma: a sum of symmetric sets inside `B_β` keeps some summand inside `B_β` (= J03-1, J10-L5)","hand + tools exact (three derivations)","declined for now (a short kernel candidate)"),
+("FS91-J07-6","CLG-d: a band character's archimedean part vanishes at complex places and is an interval about 0 at real ones; its torsion part is band (= J03-4, J10-L4)","hand (three derivations)",D),
+("FS91-J07-7","CLG_k, existence scope: given `H` at every band, `Θ_k(R_F) ≠ ∅` iff some stable place and level carry a band `k`-character; `χ_char(F²) = min` over targets; the `κ` form (= J10-T1, T2). Not a classification of every character colouring","hand (two independent derivations; blind-verified)","declined for now (rests on `H_k`)"),
+("FS91-J11-T12","monotonicity `Θ_k ⊆ Θ_{k+1}`; `χ_char(F²) = m` from the pullback and CLG_{m−1}","hand, elementary",D),
+("FS91-J07-8","Lemma LB, LB′: the level bound at odd stable places (= J10-T7)","hand + tools exact (two derivations)",D),
+("FS91-J07-9","CLG-e, level collapse: band `k` at odd `p` factors through level one when `k ≤ 2p`; inert dyadic at `k = 3` (= J08-6, J10-L6, J11-T7; J09v-3 at `k = 3`)","hand + tools exact (four derivations)",D),
+("FS91-J07-10","Lemma AV: a band-`β` character of `Cay(G, S)` forces `α ≥ β\\|G\\|`","hand (two derivations)",D),
+("FS91-J10-L7","a band 4-character of a Cayley graph with `α ≤ \\|G\\|/4` takes `±1/4`","hand (one mind)",D),
+("FS91-J10-L8","every inert residue tower scales `λ_min` exactly by `Q^{j−1}`: Hoffman floors survive every level (G54 beyond Galois rings)","hand + tools exact (one mind)",D),
+("FS91-J07-11","CLG-g: given `H_k`, `Θ_k(R_F) ≠ ∅` ⟹ `L(F) ≤ k` except (E1)/(E2) explicit; none at `k ≤ 5` or in degree ≤ 2; (g3) at `k = 7` corrected to exact level `2e(𝔭\\|3) + 1` (a GAP, J10-T8) (= J10-T3)","hand (two derivations; GAP in (g3))",D),
+("FS91-J07-12","HD1 at ℚ(√59), ℚ(√83), ℚ(√131) from CLG's proof with Lemma D; no FS-66 certificate, no `[Zhang2012]`, no Lemma R (= J10-T4)","hand (two independent derivations)",D),
+("FS91-J07-13","C-47 and C-167 through CLG: `Θ₄(R_{ℚ(√47)}) = Θ₅(R_{ℚ(√167)}) = ∅`, no certificate (= J10-T5)","hand + tools exact (two derivations)",D),
+("FS91-J07-14","FS89-CL3, CL4, CL5 TRUE under the corrected `A(R_F)`; the narrow reading only in CL2's wording","hand (two derivations)",D),
+("FS91-J07-15","controls reproduced: `θ₂`, `[Fischer1994]` at one dyadic place (level 3), C9 at `Γ₇`, J02-T1; `κ` monotone under extension","hand + an existing checker",D),
+("FS91-J08-1","SIX-a: every band `k`-character of `Γ_q` is `λ_a`, value set `V_{N(a)}/q`; band iff `min_{V_c}\\|t\\| ≥ q/k` (= J03-2, J11-T1)","hand, checked on the circle (three derivations)",D),
+("FS91-J11-T2","band characters need `N(a)` a non-square; `χ_char(Γ_q) = ⌈q/max_c d(c)⌉`","hand",D),
+("FS91-J08-2","`χ_char(Γ₂₃) = 8` (band 8 at `c ∈ {11, 20, 21}`), `χ_char(Γ₄₃) = 9` (at `c = 33`); no band six or seven at either (= J08-3, J03-3, J11-T4)","tools exact (two to three computations)",D),
+("FS91-J08-4","the Weil threshold: band `k` on `Γ_q` ⟹ `q < 4(k−1)²`; `χ_char(Γ_q) > 1 + √q/2` (= J11-T3)","hand, given Weil (two routes)","declined (rests on Weil)"),
+("FS91-J08-5","band 6 and 7 characters of prime `Γ_q` exist exactly at `q ∈ {3, 7, 11, 19}`; `χ_char ≥ 8` from 23 (= J11-T5)","hand + tools exact (two derivations)",D),
+("FS91-J11-W3","`χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`","tools exact (three computations)",D),
+("FS91-J08-R","`χ_char(Γ₂₇) = ∞`: no band character at any `k` (= J11-T6)","hand + cert; tools exact (two routes)",D),
+("FS91-J10-T9","level one: no band-4 character of prime `Γ_q`, `11 ≤ q ≤ 59`; band 5 only at 19 among 11, 19, 23, 43, 59; `λ_min(U₆₄, U₁₂₈, U₂₅₆) = −15, −19, −31`","tools exact (one computation)",D),
+("FS91-J11-T9","the stable places of ℚ(√167), `K(√7)`, `K(√5,√7)`; none dyadic","tools exact + PARI",D),
+("FS91-J08-8","`χ_char` = 8, 17, 22 at ℚ(√167), `K(√7)`, `K(√5,√7)` given CLG_7, CLG_16, CLG_21; `Θ₈, Θ₁₇, Θ₂₂ ≠ ∅` unconditionally; `χ(ℚ(√167)²) ≤ 7` (= J11-T10, T11)","hand + tools exact (two derivations)",D),
+("FS91-J08-9","`Θ₆(Q)` reduces to a sumset over the places `{2, 3, 7, 11, 19}`","hand (one mind)",D),
+("FS91-J08-10","the band-1/6 list for `Q`: 173 torsion characters, `Θ₆(Q) ⊆ T_{105,336} + A`; band 1/5: 77, `N₅ = 35,112` (= J08-11)","hand + tools exact (one mind)",D),
+("FS91-J11-T13","J08's and J11's values agree at 146 points, 0 divergences","tools exact (a comparison)",D),
+("FS91-J12-A1","the half-rings `ℤ[i][1/π̄]`, `ℤ[i][1/π]` and the `p`-free margins 1/4, 1/12 (= J12-A2, A3)","hand + tools exact (two derivations, J12, J13)",D),
+("FS91-J12-ONEa","ONE-a: `Θ₄(R_{{p}}) ⊄ T + A` at every `p ≡ 1 (mod 4)`, by a heteroclinic (= J12-HL, J13-T2)","hand + tools exact (two derivations, the same route)",D),
+("FS91-J12-B1","the nine-rotation model of `Θ₄(U₅)`; `T + A` ⟺ periodic centre sequence (= B2–B4, J13-T1, T3, C9)","hand + tools exact (two derivations)",D),
+("FS91-J12-B5","`MS₄({5})` fails iff a band character is uniformly recurrent with a non-periodic centre sequence","hand (two derivations)",D),
+("FS91-J12-B6","freely concatenable blocks are powers of one word; distinct band torsion characters share no layer-0 point (= J13-T4)","hand (two derivations)",D),
+("FS91-J12-CL","the two-leaf closing lemma and the density of closed-up points in the lens (= CL′, J13-T8)","hand + tools exact (two derivations)",D),
+("FS91-J12-H","an infinite hierarchy of band torsion characters; primitive words; a minimal aperiodic S-adic subshift (= W, Ω)","hand + tools exact (two derivations)",D),
+("FS91-J12-MS","`MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` (= J13-T7)","hand (two independent routes)",D),
+("FS91-J13-T6","J13's route: a two-choice branching region at 5 and entropy compression (= J13-L1)","hand + tools (one mind)","declined (a 60-digit inequality)"),
+("FS91-J12-MSp","`MS₄({p})` false at every `p ≡ 1 (mod 4)` (= J13-T9)","hand (two derivations)",D),
+("FS91-J12-C1","torsion by closing: band iff the `w̄`-orbit stays in `Q`; the one-segment closing lemma (= C2)","hand (two derivations)",D),
+("FS91-J12-C3","ONE-c: band torsion orders unbounded at one prime, the family `c₀^a0^b`, `N \\| 2·Nm(π^L − (−i)^Lπ̄^L)` (= C4, C3p)","hand + tools exact (two derivations)",D),
+("FS91-J13-T5","a second family `b a^p` (one condition), infinite at every `p ≡ 1 (4)`, orders `≥ 2·5^{p/2}` at 5; holds S0B-L4's orders 3, 48","hand + tools exact (one mind)",D),
+]
+if "--plant" in sys.argv:
+    L = L[1:]
+s = open("plans/FS91-derivation.md", encoding="utf-8").read()
+heads = [m.group(1) for m in re.finditer(r"\n\*\*(FS91-[^\s—,]+)", s)]
+ids = [x[0] for x in L]
+missing = [h for h in heads if h not in ids]; extra = [i for i in ids if i not in heads]
+dup = sorted({i for i in ids if ids.count(i) > 1})
+if missing or extra or dup:
+    sys.exit(f"missing {missing}; extra {extra}; duplicate {dup}")
+print("| id | milestone | statement | grade | proof | kernel |\n|---|---|---|---|---|---|")
+for i, st, g, k in L:
+    print(f"| {i} | FS-91 | {st} | {g} | `plans/FS91-derivation.md` {i} | {k} |")
+print(f"<!-- {len(L)} lines, one per entry -->", file=sys.stderr)

@@ -779,7 +779,7 @@ line, the point step) located the band in the wrong places except Lemma SW.
 | R4 | **The three-colour question over a number field is residue degree one at 3, not `1/3`**: every circular three-colouring of a non-bipartite real number field's plane is a residue colouring at a prime of norm 3 (J4, two derivations) | FS91-J09-J4; J09v §3.1 | G74 and G61 edits |
 | R5 | **The unit-vector ring is the ring integral at the stable primes, with no Galois hypothesis** (the rational points of the norm-one torus generate the stable semi-local order, except possibly at a ramified stable dyadic place) | FS91-J07-3, J07-4 | G55 edit; FS-47's statement |
 | R6 | **The one-prime band set is a piecewise isometry — a rotation of `Q₀` about nine centres, or a correspondence with two choices per block — whose minimal sets carry S-adic, aperiodic codings**; `T + A` is exactly the periodic codings | FS91-J12-B1, B2, W, Ω; J13-T1, T3, T6 | G76 edit; the stub of inventory item 123 (minimal sets of `Θ₄(R_p)`) |
-| R7 | **CLG is existential**: the peel proves "some summand is band", never "one"; a classification of every character colouring holds at `k = 3` (J4) and at HD1's three fields (Lemma D), not in general | J07 §5.1 (iv); the owner's note | G48 and G71 edits; the new grokking G77 |
+| R7 | **CLG is existential**: the peel proves "some summand is band", never "one"; a classification of every character colouring is proved at `k = 3` (J4) and at HD1's three fields (Lemma D), and open elsewhere | J07 §5.1 (iv); the owner's note | G48 and G71 edits; the new grokking G77 |
 
 #### 3.4 The §IQ re-read, and G72's count
 
@@ -955,3 +955,378 @@ crunch-wide items declined for M1 with the lane named; items bearing on M1's dra
 `data/fs91/j23a/stage3-ticks.json`.
 
 **Would have searched here (stage 3):** none — reading and filing only.
+
+### Stage 4 — SAVED (the drafts: ledger rows, § B lines, `CLAUDE.md` edits, stub banners and re-aims, the re-rank, new stubs)
+
+*Every draft below is for the front-page job (J24), which applies them; this job edits none of `LEDGER.md`, `CLAUDE.md`,
+`plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md` or any existing stub. **Row numbers N1–N5 and stub numbers FS-M1a–c are
+placeholders**: J24 assigns them across M1–M3 (the next free row after 97; the next free FS numbers after FS-91). Every statement of the class
+theorem below is at its exact, existence scope (the owner's note, inventory item 163); "every three-colour character is local at one prime"
+appears only with no mixing (FS91-J09-J4) as its source.*
+
+#### 4.1 `LEDGER.md` § A — five new rows (draft)
+
+| # | the result | address | milestone |
+|---|---|---|---|
+| N1 | **Band rigidity at every band: for every finite set `S` of primes `≡ 1 (mod 4)` with `\|S\| ≥ 2` and every `k ≥ 2`, every band-`k` character of `R_S = ℤ[i][1/p : p ∈ S]` is a torsion character plus an archimedean one (`RS_k(S)`); so `RQ_k` for `Q = ℤ[i][1/p : p ≡ 1 (4)]`, and `Θ_k(R_F) ⊆ T_{N_k}(R_F) + A(R_F)` for every `F ⊆ ℝ`, with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1` the archimedean characters of every place of `F(i)`** (FS-91, crunch milestone M1; `plans/FS91-derivation.md` FS91-J01-1 to J01-8, J03a-5, J03a-6, J03a-9). **[hand + tools exact; two blind readings (J01, J03a), agreeing — "Differences of truth: none"]** The minimal-set step is band-free: FS89-PA-B2, now blind-verified (`[Berend1984]` Thm I.2 with Prop. II.6, its hypotheses checked for this action; case 1 a second time by a joining and Furstenberg's disjointness). The band enters the chain once, in the point step, through the multi-digit sweep SW-m (take `m` least with `p^m > k/2`: a coset of `(1/p^m)ℤ/ℤ` meets `(−1/k, 1/k)`); the one-digit Lemma SW holds exactly for `k < 2p` (sharp at `k = 10`, `p = 5`); VB3, VB4, D2-L1 and the gluing do not read `k`. `N_k` is finite and not effective. With one embedding's `λ_e` in place of `A(R_F)` the field clause is false (ℚ(√3), `k = 4`: an additive three-colouring plus the other real place's term). **Not claimed:** density of the orbit (`[Manners2015]` Remark 5.4(i)'s `Y = Â`); an effective `N_k` (explicit lists at `k = 5, 6` only, row N4); anything about `χ` or about colourings no character gives; one prime (rows 97, N5); anything kernel-checked. **Prior art:** partly in print — `[Manners2015]` Lemma 5.3 is band rigidity on the half ring `ℤ[i][1/P₅, 1/P₁₃]` (one Gaussian prime above each of 5 and 13): the band condition is his *pyjama* condition, and `[MalikiosisMatolcsiRuzsa2013]`'s rational obstructions are our torsion band characters; `[Wang2012]` Prop. 4.3 and Lemma 4.2 are PA-B2's architecture on tori, and `[EinsiedlerLindenstrauss2022]` p. 3 calls the solenoid form unwritten; `[KravitzLeng2025]` makes Manners effective on his ring. **Not found in print** (the close gate, `plans/FS91-PA-close.md` §1.3): `R_S` with both primes above each `p` and the group `U_S`, every `S`, the field clause; undecided until Muchnik 2005 is read (FS-M1b). | `plans/FS91-S0V-band-to-nine.md`, `plans/FS91-S0V2-SWm-second-reading.md`, `plans/FS91-derivation.md` §1, `tools/crunch_j01_sweep_check.py`, `tools/crunch_j03a_sweep.py`, `plans/FS91-PA-close.md` §1 | FS-91 |
+| N2 | **Three colours obey the local–global conjecture over every real number field: `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`, and `χ(F²) = L(F)` whenever `L(F) ≤ 4`; a non-bipartite real number field's plane is three-chromatic iff some prime of `F` above 3 has residue field `𝔽₃`; and every three-colour band character of such a field is a residue character at one such prime ("no mixing"); `χ(ℚ(α,√7)²) = 4`, `α³ = α + 1`** (FS-91; FS91-J02-L1 to J02-C2, J02-A2.1′, J09-J1, J09-J-K, J09-J4, J09-J4-A, J09-J4-T6, J09v-8). **[hand (+ Weil, tools exact); S1 three derivations (J02, J09, J09v), S2 and the torsion theorem two, S3 three, no mixing two independent (J09; J09v blind, a different route)]** The chain: FS81-T2 lifts a three-colouring to `θ ∈ Θ₃(R_F)` (every route passes through it, and through FS73-T22's ⟹, hand); torsion extraction (FS81-T3, T4) gives `τ` with `6τ = 0`; `R/6R` is a finite ring whose image of the unit vectors contains the product of the stable residue circles (a Teichmüller section and a joint Hilbert-90 lift, extending GPT Astra's Lemma 1.1); an additive map `𝔽_{q²} → (1/3)ℤ/ℤ` non-zero on `μ_{q+1}` exists only at `q = 3` (Weil above 243, exact below), and none to `(1/2)ℤ/ℤ` at `2^f`. No Galois condition, no √3, no condition at 2. **Consequences:** a field whose primes above 3 all have residue degree ≥ 3 is never three-chromatic (FS81-T7's residual case; FS-82's field ℚ(α,√7) first, whose dyadic prime splits in `F(i)`, so it has no dyadic target at all); additive three-colourings exist iff a stable `𝔽₃` prime does (generalising `[Fischer1990]` Thm 9), additive two-colourings iff a stable dyadic prime ramified in `F(i)/F`; FS81-T6's open item settled (Fischer's colourings, up to symmetry); no point of `Θ₃(R_F)` has mixed parity and order-3 types, at any real number field. S1 extends to every algebraic `F ⊆ ℝ` and every purely transcendental extension of one **with `L(F)` read over all `c`-stable valuation rings of `F(i)`**; under the reading "places with finite residue field" it fails at the bipartite `ℚ(ζ_m + ζ_m^{−1} : m odd)`. **Not claimed:** anything at four colours beyond `L = 4`'s lower bound; S1 for a general transcendental `F` (FS-39's gap); a kernel proof (FS-75); that it is new. **Prior art:** the question is `[Fischer1990]` §1's, verbatim ("whether some algebraic criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q"), and Johnson's 2000 status report's (problem (1)); answered here at `χ ≤ 3` and at `L ≤ 4` — a `CLOSED-QUESTIONS.md` candidate (4.8); the close gate found no answer in print, undecided on `[Johnson2000]`, `[Johnson2006]` (unread); no mixing in the literature's words is unsearched; row 82 and G55 held the real quadratic and `√3 ∈ F` cases. | `plans/FS91-S0F-three-colours.md`, `plans/FS91-S0FV-three-colours-blind.md`, `plans/FS91-S1V-no-mixing.md`, `plans/FS91-derivation.md` §3, `data/fs91/j02/lemma-statements.md`, `tools/crunch_j02_{additive_check,field}.py`, `tools/crunch_j09_lemma_k.py`, `tools/crunch_j09v_check.py` | FS-91 |
+| N3 | **The class theorem for character colourings (CLG), at existence scope: for every real number field `F` and `k ≥ 2`, given band rigidity (row N1), the plane has a band `k`-character — equivalently a character `k`-colouring `x ↦ ⌊kθ(x)⌋` — iff some stable place of `F(i)` carries one at some level of its residue tower; so `χ_char(F²) = min` over the residue targets, and at `k ≤ 5`, and at every `k` over fields of degree ≤ 2, a character `k`-colouring exists only if `L(F) ≤ k`** (FS-91; FS91-J07-1 to J07-15, J10-L1, J10-L2, J10-L7, J10-L8, J11-T12). **[hand (+ tools exact); two independent derivations (J07; J10 blind in phase 1, then from J07's 25 lemma statements: 24 TRUE, one GAP)]** The peel: by row N1, `θ = τ + α`; the archimedean part vanishes at every complex place and is an interval about 0 at each real one, so `τ` is band; `τ` factors through finitely many stable places (Lemma C: `R ⊗ ℤ_p = R̄_p × V_n`; Lemma C′: `R_F = O′`, the ring integral at the stable primes, with **no Galois hypothesis**, except possibly at a ramified stable dyadic place — three derivations; the exception occurs at ℚ(√5), ℚ(√17), ℚ(α)); weak approximation makes the image of `U` a product of local images; and a sum of symmetric subsets of the circle inside the band keeps **some** summand inside it (the peeling lemma, three derivations). CLG-g makes the exception explicit — a stable place carrying a band `k`-character only above level one, odd with residue field `𝔽_{p^f}`, `f ≥ 3`, `2p < k < χ(Γ_{p^f})`, or inert dyadic of norm `Q ≥ 64` — using level collapse for `k ≤ 2p` (four derivations) and every inert tower's `λ_min` scaling by `Q^{j−1}`; its corollary (g3) at `k = 7` holds only as "exact level `2e(𝔭\|3) + 1`" (a GAP in the lemmas, found by the verifier). **CLG is not a classification:** it does not say that every character colouring is pulled back from one place; that is proved at `k = 3` (row N2's no mixing) and at `k = 4` over ℚ(√59), ℚ(√83), ℚ(√131) (HD1, from CLG's *proof* with Lemma D — with no FS-66 certificate, no `[Zhang2012]`, no Lemma R), and open elsewhere (FS-M1a). Controls reproduced: `θ₂` at a ramified dyadic place; `[Fischer1994]`'s ℤ/4 colouring of K at one dyadic place, level 3 (one existing checker); C9 on ℚ(√11) at `Γ₇`; row 96's C-47 and C-167, C-167 with no certificate. With `A(R_F)` wide, FS89-CL3–CL5 are TRUE and FS89-CL2 false only as worded. **Not claimed:** anything about `χ` from four colours up (`Θ_k = ∅` is one-sided, G71); the classification at `k ≥ 4` beyond HD1's fields; whether CLG-g's exception is ever realised; a kernel proof. **Prior art:** the close gate found no statement of it; `χ_char` is `[BarajasSerra2008]`'s *regular chromatic number* (circulant graphs), `κ` the lonely-runner / view-obstruction parameter; Lemma C/C′ partly `[Fischer1990b]`'s (quadratic and multiquadratic cases), the general form not found, Shimura 1964 undecided; the peeling lemma not found (folklore-grade); undecided on `[Johnson2000]`, `[Johnson2006]`. | `plans/FS91-S1D-character.md`, `plans/FS91-S1V-character.md`, `data/fs91/j07/lemma-statements.md`, `plans/FS91-derivation.md` §2, §4, `tools/crunch_j07_checks.py`, `tools/crunch_j10_{checks,phase2}.py` | FS-91 |
+| N4 | **The character chromatic numbers of the window's planes and of the exposed fields: every band `k`-character of `Γ_q` (`q ≡ 3 (mod 4)` prime) is `x ↦ Tr(ax)/q` with value set `V_{N(a)}/q` (`V_c` the traces `t` with `t² − 4c` a non-square or 0); `χ_char(Γ₂₃) = 8`, `χ_char(Γ₄₃) = 9`, `χ_char(Γ₂₇) = ∞`; band six and seven characters exist only at `q ∈ {3, 7, 11, 19}`; `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`; and, given CLG (row N3), character colourings of ℚ(√167)'s, `K(√7)`'s and de Grey's planes need exactly 8, 17 and 22 colours** (FS-91; FS91-J08-1 to J08-10, J08-R, J10-T9, J11-T2, J11-T9, J11-T13, J11-W3). **[hand + tools exact; two derivations (J08; J11 blind: 146 values compared, 0 divergences); the field values given CLG_7, CLG_16, CLG_21, and `Θ₈, Θ₁₇, Θ₂₂ ≠ ∅` unconditionally]** Weil bounds a band-`k` prime plane by `q < 4(k−1)²` (so `χ_char(Γ_q) > 1 + √q/2`), so every list is complete below an explicit threshold; the minima sit at 23 (ℚ(√167), `c ∈ {11, 20, 21}`), 83 (`K(√7)`) and 131 (de Grey's field). The band-1/6 torsion list of `Q` is 173 characters of 18 types, `Θ₆(Q) ⊆ T_{105,336} + A` (band 1/5: 77, `N₅ = 35,112`). **So the window is closed to characters:** no usable window plane carries a band six-character, and a six-colouring of a window member, if one exists, is no character colouring; at the 6-open fields a character colouring needs far more than seven colours. Row 69's eight-colour ceiling at 43 is a line-periodic circulant colouring, not a character colouring. **Not claimed:** `χ(Γ₂₃)`, `χ(Γ₄₃)`, `χ(ℚ(√167)²)` (`4 ≤ χ ≤ 7`) — every statement here is about characters; the band-1/6 list's second derivation (one mind). **Prior art:** not found by the close gate; `χ_char` is `[BarajasSerra2008]`'s regular chromatic number. | `plans/FS91-S1D-six.md`, `plans/FS91-S1V-six.md`, `plans/FS91-derivation.md` §5, `tools/crunch_j08_*.py`, `tools/crunch_j11_*.py`, `data/fs91/j08/`, `data/fs91/j11/` | FS-91 |
+| N5 | **One prime fails three ways, at every split prime: `Θ₄(R_{{p}}) ⊄ T + A` for every `p ≡ 1 (mod 4)`; `MS₄({p})` is false — a `U_p`-minimal closed subset of `Θ₄(R_{{p}})` misses `T + A`; and the orders of band torsion characters of `R_{{p}}` are unbounded** (FS-91; FS91-J12-A1 to J12-C3, J13-T5, J13-T6). **[hand + tools exact; two derivations each (J12; J13 blind on the three claims, then from J12's 26 lemma statements, every one TRUE); `MS₄({5})` by two independent routes]** In a rotating frame `Θ₄(U₅)` is the set of bi-infinite orbits in `[−1/4, 1/4]²` of one rotation `ω = (−4−3i)/5` about one of nine centres per step, and a character lies in `T + A` iff its centre (digit) sequence is periodic. ONE-a glues the order-3 character on `ℤ[i][1/π̄]` to the parity character on `ℤ[i][1/π]` through the `p`-free lens (`√2/6 < 1/4 + 1/12`). `MS₄`: J12 builds a hierarchy of periodic orbits by a two-leaf closing lemma, whose limit is coded by a minimal aperiodic S-adic subshift (constructive, every `p` — the ledger's primary route, by the owner's ruling); J13 finds a region with two admissible blocks from every state and proves by entropy compression a bi-infinite admissible sequence with no ninth power (existence, at 5). Orders: J12's family `c₀^a0^b`, `N \| 2·Nm(π^L − (−i)^Lπ̄^L)`, and J13's `b a^p`, infinite at every `p`, orders `≥ 2·5^{p/2}` at 5, which holds S0B-L4's orders 3 and 48. **Answers row 97's three "Not claimed" items.** **Not claimed:** the dimension of the minimal sets; that every minimal set off `T + A` is of this S-adic kind; the band-1/5 analogue (FS-M1c); anything about `χ`. **Prior art:** not found as stated; `[Manners2015]` §5.5 asserts, without proof in §1–§5, that "the appropriate results are false for the smaller set `{θ₅^r : r ≥ 0}`"; J13's method is `[GrytczukKozikMicek2013]`'s (cited from memory, unchecked); the discretized-rotation literature (Bosio–Vivaldi 2000, Vivaldi 2006, Adler–Kitchens–Tresser 2001, Akiyama–Pethő 2013) undecided. | `plans/FS91-S1D-one-prime.md`, `plans/FS91-S1V-one-prime.md`, `plans/FS91-derivation.md` §6, `data/fs91/j12/lemma-statements.md`, `tools/crunch_j12_*.py`, `tools/crunch_j13_*.py` | FS-91 |
+
+#### 4.2 `LEDGER.md` § A — corrections to rows 82, 95, 96, 97 (draft; exact old text → new text)
+
+| row | replace (verbatim, from `LEDGER.md` on disk at this stage) | with |
+|---|---|---|
+| 95 | "(`Θ₄(R_F) ⊆ T₁₆₈ + A`, `Θ₅(R_F) ⊆ T + A` for every `F ⊆ ℝ`)" | "(`Θ₄(R_F) ⊆ T₁₆₈ + A`, `Θ₅(R_F) ⊆ T + A` for every `F ⊆ ℝ`, with `A = Hom_ℚ(F(i), ℝ) mod 1`, the archimedean characters of every place of `F(i)`; with one embedding's `λ_e` the clause is false, row N1)" |
+| 95 | "bands narrower than 1/5 (the route's band steps are Lemma SW and the parity line; six is unchecked, `plans/STUB-band-rigidity-six.md`)" | "bands narrower than 1/5 (answered at every band, on characters, at FS-91: row N1)" |
+| 95 | "\"new\" still needs the later citers the gate could not open (Starkov 1999, Muchnik 2005: no text reachable)" | "\"new\" still needs the later citers the gate could not open (Starkov 1999, Muchnik 2005: no text reachable); **FS-91's close gate found the statement on the half ring `ℤ[i][1/P₅, 1/P₁₃]` in print — `[Manners2015]` Lemma 5.3, the pyjama problem** (row N1)" |
+| 96 | "**Prior art:** none found (the plan's gate and the close's)." | "**Re-proved through the class theorem** (row N3): HD1 with no FS-66 certificate, no `[Zhang2012]` and no Lemma R; C-167 with no certificate. **Prior art:** none found (the plan's gate and the close's)." |
+| 97 | "**Not claimed:** that `RS₄({p})` fails at every single prime (open beyond 5); that one-prime torsion orders are unbounded (a reading of two minds; 12 orders below 130 measured); the rank-one minimal sets (`MS₄({5})`, open)." | "**Not claimed here; answered at FS-91 (row N5):** `RS₄({p})` fails at every single prime; one-prime torsion orders are unbounded; `MS₄({5})` is false." |
+| 82 | "(T6: Fischer's Thm 9 colourings are such; that they are all of them up to symmetry needs `ℤ[U]/3ℤ[U]` and is not settled)" | "(T6: Fischer's Thm 9 colourings are such, and all of them up to symmetry — settled at FS-91, row N2)" |
+| 82 | "the residual case (every such prime of degree ≥ 3, first `ℚ(α, √7)`, `α³ = α + 1`) open." | "the residual case (every such prime of degree ≥ 3, first `ℚ(α, √7)`, `α³ = α + 1`) closed at FS-91: never three-chromatic; `χ(ℚ(α,√7)²) = 4` (row N2)." |
+
+(Row 92's correction owed by J26 — "not re-checked here" → "re-checked here" — is FS-86's text, not M1's: listed in 4.8.)
+
+#### 4.3 `LEDGER.md` § B — one line per entry of `plans/FS91-derivation.md` (draft; 73 lines)
+
+Generated and checked by `data/fs91/j23a/ledger_b_lines.py` (every entry heading id has exactly one line, none extra; its plant drops a line
+and exits 1). J24 appends these under § B and runs `tools/fs71_ledger_b_check.py --strict`.
+
+| id | milestone | statement | grade | proof | kernel |
+|---|---|---|---|---|---|
+| FS91-J01-1 | FS-91 | `(R̂_S, U_S)` is a group ℱ-flow in `[Berend1984]`'s sense for every nonempty finite `S`; every minimal set is restricted | hand (one mind) | `plans/FS91-derivation.md` FS91-J01-1 | declined |
+| FS91-J01-2 | FS-91 | PA-B2 blind-verified: at `\|S\| ≥ 2` every `U_S`-minimal closed `M ⊊ R̂_S` lies in `T + A`; `MS_k(S)` at every `k` (case 1 twice: Berend; a joining, J03a-4) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J01-2 | declined |
+| FS91-J01-3 | FS-91 | the parity (doubling) lemma: `MS_β(S)` for every `β > 0`, `\|S\| ≥ 2`, without Berend | hand + tools exact (one reader) | `plans/FS91-derivation.md` FS91-J01-3 | declined |
+| FS91-J01-4 | FS-91 | Lemma SW as written holds exactly for `k < 2p` (sharp at `k = 10`, `p = 5`) | hand + tools exact | `plans/FS91-derivation.md` FS91-J01-4 | declined |
+| FS91-J01-5 | FS-91 | Lemma SW-m, the multi-digit sweep, at every `k ≥ 2` (= J03a-1) | hand + tools exact (two blind readings) | `plans/FS91-derivation.md` FS91-J01-5 | declined |
+| FS91-J01-6 | FS-91 | PA-B3 at `k = 6, 7, 8, 9`: `RS_k(S)` for `\|S\| ≥ 2`, and `RQ_k` | hand + tools exact (blind-verified) | `plans/FS91-derivation.md` FS91-J01-6 | declined |
+| FS91-J01-7 | FS-91 | band rigidity at every band: `RS_k(S)` (`\|S\| ≥ 2`), `RQ_k`, `Θ_k(R_F) ⊆ T_{N_k} + A(R_F)` for every `F ⊆ ℝ`, `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`; `N_k` non-effective (= J03a-3, -7, -8) | hand (two blind readings) | `plans/FS91-derivation.md` FS91-J01-7 | declined for now (Berend's Thm I.2 not in Mathlib) |
+| FS91-J01-8 | FS-91 | VB1 at every band reads `k` only through SW-m; VB3, VB4, D2-L1, S0A's G1 are `k`-free (= J03a-2) | hand (two blind readings) | `plans/FS91-derivation.md` FS91-J01-8 | declined |
+| FS91-J03a-5 | FS-91 | `Θ_2(R) ⊆ T_2` for every `R = ℤ[U]` | hand (one mind) | `plans/FS91-derivation.md` FS91-J03a-5 | declined |
+| FS91-J03a-6 | FS-91 | VB3 at every band; `ord(τ) = ord(τ\|_{ℤ[i]})`, so `Θ_k(Q) ∩ T` is finite with orders dividing `N_k` | hand (one mind) | `plans/FS91-derivation.md` FS91-J03a-6 | declined |
+| FS91-J03a-9 | FS-91 | with `A` read as one embedding's `λ_e` the field clause is false (ℚ(√3), `k = 4`) | hand (one mind) | `plans/FS91-derivation.md` FS91-J03a-9 | declined |
+| FS91-J07-3 | FS-91 | Lemma C: `R ⊗ ℤ_p = R̄_p × V_n`, `R/NR ≅ ∏_{p\|N} R̄_p/NR̄_p`, torsion characters factor through finitely many stable places; no Galois hypothesis (= J10-T6, J10-L3) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J07-3 | stub (FS-47) |
+| FS91-J07-4 | FS-91 | Lemma C′: `R̄_p = ∏ Ô_𝔓` except possibly at a ramified stable dyadic place; `R_F = O′` then (= J09's J2, J10-T6) | hand (three derivations) | `plans/FS91-derivation.md` FS91-J07-4 | stub (FS-47) |
+| FS91-J02-L2 | FS-91 | `R/pR` finite, `c`-stable, maximal ideals `R ∩ 𝔓` at stable primes, residue fields full at unramified ones, every `p` (= J09's J2′) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-L2 | stub (FS-47; FS-75) |
+| FS91-J10-L1 | FS-91 | `R_F` = ℤ-span of `U_F`, `ℚR_F = L`, `R_F ⊆ O′`, `O_L[U_F] = O′`, `cO′ ⊆ R_F` | hand (one mind) | `plans/FS91-derivation.md` FS91-J10-L1 | stub (FS-47) |
+| FS91-J02-L3 | FS-91 | the Teichmüller section of `R/pR` and the joint Hilbert-90 lift: `𝒩(T₃) × 𝒩(T₂)` ⊆ the image of `U` in `R/6R` | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-L3 | stub (FS-75) |
+| FS91-J07-5 | FS-91 | CLG-c corrected: the image of `U` in `R/NR` is that of `∏ T(F_𝔭)`, `∏ S_{𝔓,v(N)}` off ramified dyadic places; fibres dense in the archimedean tori | hand (verified from the statement, J10) | `plans/FS91-derivation.md` FS91-J07-5 | declined |
+| FS91-J10-L2 | FS-91 | weak approximation: `U_F` dense in `∏_{v∈Σ} T(F_v)`, archimedean included (= J07's (W), J09's J3) | hand, standard (three derivations) | `plans/FS91-derivation.md` FS91-J10-L2 | declined |
+| FS91-J02-L1 | FS-91 | torsion extraction: `Θ₃(R_F) ≠ ∅ ⟹ Θ₃(R_F) ∩ T₆ ≠ ∅`, every `F ⊆ ℝ` | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-L1 | stub (FS-75) |
+| FS91-J02-L4 | FS-91 | norm-one functionals: a three-colouring of `Γ_{3^f}` by an additive map iff `f = 1`; none to `(1/2)ℤ/ℤ` at `2^f` (= J09's J-L4b) | hand + Weil + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J02-L4 | declined (rests on Weil) |
+| FS91-J09-J1 | FS-91 | the typing on `τ₂`, `τ₃`: `τ₃(u) = 0 ⟺ τ₂(u) = 1/2` | derived (one mind) | `plans/FS91-derivation.md` FS91-J09-J1 | declined |
+| FS91-J09-J-K | FS-91 | Lemma K1 false at `q = 27` exactly for `N(a) = 1`; true at 243 | tools exact (two representations) | `plans/FS91-derivation.md` FS91-J09-J-K | declined |
+| FS91-J02-T1 | FS-91 | three colours, torsion: a character `τ`, `6τ = 0`, `τ(U_F) ⊆ [1/3, 2/3]` exists iff a stable prime above 3 with residue field `𝔽₃` or a stable dyadic prime ramified in `F(i)/F` | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-T1 | stub (FS-75) |
+| FS91-J09-J4 | FS-91 | no mixing: with no ramified stable dyadic prime (⟺ `F²` not bipartite), `Θ₃(R_F)` is exactly the `4N₃` residue characters at the primes of residue field `𝔽₃` (= J09v-1, J09v-2) | hand + Weil + tools exact (two independent derivations) | `plans/FS91-derivation.md` FS91-J09-J4 | stub (FS-75) |
+| FS91-J09v-8 | FS-91 | no point of `Θ₃(R_F)` has mixed parity/order-3 types, at any real number field (J02 §2.6 Remark 2 refuted) | hand (one mind) | `plans/FS91-derivation.md` FS91-J09v-8 | declined |
+| FS91-J02-T2 | FS-91 | S1: `χ(F²) ≤ 3 ⟺ Θ₃ ≠ ∅ ⟺ L(F) ≤ 3`, every real number field (= J09's J4-C, J09v-4); via FS81-T2 | hand (three derivations) | `plans/FS91-derivation.md` FS91-J02-T2 | stub (FS-75) |
+| FS91-J09-J4-A | FS-91 | S1 on every algebraic `F ⊆ ℝ` and purely transcendental extensions, with `L(F)` over all stable valuation rings; false under the finite-residue reading (`ℚ(ζ_m + ζ_m^{−1} : m odd)`, J09v-7); general `F`: FS-39's gap | hand (two derivations, corrected) | `plans/FS91-derivation.md` FS91-J09-J4-A | declined |
+| FS91-J02-T3 | FS-91 | S2: `χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-T3 | stub (FS-75) |
+| FS91-J02-C1 | FS-91 | S3: `χ(ℚ(α,√7)²) = L = 4`, `α³ = α + 1` (= J09v-5) | hand + tools exact (three derivations) | `plans/FS91-derivation.md` FS91-J02-C1 | stub (FS-75) |
+| FS91-J02-C2 | FS-91 | additive 3-colourings iff a stable `𝔽₃` prime; additive 2-colourings iff a stable ramified dyadic prime (generalises `[Fischer1990]` Thm 9) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J02-C2 | stub (FS-75) |
+| FS91-J02-A2.1′ | FS-91 | a second derivation of GPT Astra's Thm 2.1 ⟹ via L3 | hand (the index reads one mind; J09 §4.2 re-derives it) | `plans/FS91-derivation.md` FS91-J02-A2.1′ | declined |
+| FS91-J09-J4-T6 | FS-91 | FS81-T6's open item settled: the additive 3-colourings of ℚ(√d), `d ≡ 3, 7 (mod 12)`, are Fischer's up to symmetry | hand (one mind) | `plans/FS91-derivation.md` FS91-J09-J4-T6 | declined |
+| FS91-J07-1 | FS-91 | CLG-a, the pullback: a band character of any `T_{𝔓,m}` composed with reduction lies in `Θ_β(R_F)` (= J08-7, J11-T8) | hand (four derivations) | `plans/FS91-derivation.md` FS91-J07-1 | declined (row 56's `addCayleyMap` would port it) |
+| FS91-J07-2 | FS-91 | CLG-b/b_n, the peeling lemma: a sum of symmetric sets inside `B_β` keeps some summand inside `B_β` (= J03-1, J10-L5) | hand + tools exact (three derivations) | `plans/FS91-derivation.md` FS91-J07-2 | declined for now (a short kernel candidate) |
+| FS91-J07-6 | FS-91 | CLG-d: a band character's archimedean part vanishes at complex places and is an interval about 0 at real ones; its torsion part is band (= J03-4, J10-L4) | hand (three derivations) | `plans/FS91-derivation.md` FS91-J07-6 | declined |
+| FS91-J07-7 | FS-91 | CLG_k, existence scope: given `H` at every band, `Θ_k(R_F) ≠ ∅` iff some stable place and level carry a band `k`-character; `χ_char(F²) = min` over targets; the `κ` form (= J10-T1, T2). Not a classification of every character colouring | hand (two independent derivations; blind-verified) | `plans/FS91-derivation.md` FS91-J07-7 | declined for now (rests on `H_k`) |
+| FS91-J11-T12 | FS-91 | monotonicity `Θ_k ⊆ Θ_{k+1}`; `χ_char(F²) = m` from the pullback and CLG_{m−1} | hand, elementary | `plans/FS91-derivation.md` FS91-J11-T12 | declined |
+| FS91-J07-8 | FS-91 | Lemma LB, LB′: the level bound at odd stable places (= J10-T7) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J07-8 | declined |
+| FS91-J07-9 | FS-91 | CLG-e, level collapse: band `k` at odd `p` factors through level one when `k ≤ 2p`; inert dyadic at `k = 3` (= J08-6, J10-L6, J11-T7; J09v-3 at `k = 3`) | hand + tools exact (four derivations) | `plans/FS91-derivation.md` FS91-J07-9 | declined |
+| FS91-J07-10 | FS-91 | Lemma AV: a band-`β` character of `Cay(G, S)` forces `α ≥ β\|G\|` | hand (two derivations) | `plans/FS91-derivation.md` FS91-J07-10 | declined |
+| FS91-J10-L7 | FS-91 | a band 4-character of a Cayley graph with `α ≤ \|G\|/4` takes `±1/4` | hand (one mind) | `plans/FS91-derivation.md` FS91-J10-L7 | declined |
+| FS91-J10-L8 | FS-91 | every inert residue tower scales `λ_min` exactly by `Q^{j−1}`: Hoffman floors survive every level (G54 beyond Galois rings) | hand + tools exact (one mind) | `plans/FS91-derivation.md` FS91-J10-L8 | declined |
+| FS91-J07-11 | FS-91 | CLG-g: given `H_k`, `Θ_k(R_F) ≠ ∅` ⟹ `L(F) ≤ k` except (E1)/(E2) explicit; none at `k ≤ 5` or in degree ≤ 2; (g3) at `k = 7` corrected to exact level `2e(𝔭\|3) + 1` (a GAP, J10-T8) (= J10-T3) | hand (two derivations; GAP in (g3)) | `plans/FS91-derivation.md` FS91-J07-11 | declined |
+| FS91-J07-12 | FS-91 | HD1 at ℚ(√59), ℚ(√83), ℚ(√131) from CLG's proof with Lemma D; no FS-66 certificate, no `[Zhang2012]`, no Lemma R (= J10-T4) | hand (two independent derivations) | `plans/FS91-derivation.md` FS91-J07-12 | declined |
+| FS91-J07-13 | FS-91 | C-47 and C-167 through CLG: `Θ₄(R_{ℚ(√47)}) = Θ₅(R_{ℚ(√167)}) = ∅`, no certificate (= J10-T5) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J07-13 | declined |
+| FS91-J07-14 | FS-91 | FS89-CL3, CL4, CL5 TRUE under the corrected `A(R_F)`; the narrow reading only in CL2's wording | hand (two derivations) | `plans/FS91-derivation.md` FS91-J07-14 | declined |
+| FS91-J07-15 | FS-91 | controls reproduced: `θ₂`, `[Fischer1994]` at one dyadic place (level 3), C9 at `Γ₇`, J02-T1; `κ` monotone under extension | hand + an existing checker | `plans/FS91-derivation.md` FS91-J07-15 | declined |
+| FS91-J08-1 | FS-91 | SIX-a: every band `k`-character of `Γ_q` is `λ_a`, value set `V_{N(a)}/q`; band iff `min_{V_c}\|t\| ≥ q/k` (= J03-2, J11-T1) | hand, checked on the circle (three derivations) | `plans/FS91-derivation.md` FS91-J08-1 | declined |
+| FS91-J11-T2 | FS-91 | band characters need `N(a)` a non-square; `χ_char(Γ_q) = ⌈q/max_c d(c)⌉` | hand | `plans/FS91-derivation.md` FS91-J11-T2 | declined |
+| FS91-J08-2 | FS-91 | `χ_char(Γ₂₃) = 8` (band 8 at `c ∈ {11, 20, 21}`), `χ_char(Γ₄₃) = 9` (at `c = 33`); no band six or seven at either (= J08-3, J03-3, J11-T4) | tools exact (two to three computations) | `plans/FS91-derivation.md` FS91-J08-2 | declined |
+| FS91-J08-4 | FS-91 | the Weil threshold: band `k` on `Γ_q` ⟹ `q < 4(k−1)²`; `χ_char(Γ_q) > 1 + √q/2` (= J11-T3) | hand, given Weil (two routes) | `plans/FS91-derivation.md` FS91-J08-4 | declined (rests on Weil) |
+| FS91-J08-5 | FS-91 | band 6 and 7 characters of prime `Γ_q` exist exactly at `q ∈ {3, 7, 11, 19}`; `χ_char ≥ 8` from 23 (= J11-T5) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J08-5 | declined |
+| FS91-J11-W3 | FS-91 | `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5` | tools exact (three computations) | `plans/FS91-derivation.md` FS91-J11-W3 | declined |
+| FS91-J08-R | FS-91 | `χ_char(Γ₂₇) = ∞`: no band character at any `k` (= J11-T6) | hand + cert; tools exact (two routes) | `plans/FS91-derivation.md` FS91-J08-R | declined |
+| FS91-J10-T9 | FS-91 | level one: no band-4 character of prime `Γ_q`, `11 ≤ q ≤ 59`; band 5 only at 19 among 11, 19, 23, 43, 59; `λ_min(U₆₄, U₁₂₈, U₂₅₆) = −15, −19, −31` | tools exact (one computation) | `plans/FS91-derivation.md` FS91-J10-T9 | declined |
+| FS91-J11-T9 | FS-91 | the stable places of ℚ(√167), `K(√7)`, `K(√5,√7)`; none dyadic | tools exact + PARI | `plans/FS91-derivation.md` FS91-J11-T9 | declined |
+| FS91-J08-8 | FS-91 | `χ_char` = 8, 17, 22 at ℚ(√167), `K(√7)`, `K(√5,√7)` given CLG_7, CLG_16, CLG_21; `Θ₈, Θ₁₇, Θ₂₂ ≠ ∅` unconditionally; `χ(ℚ(√167)²) ≤ 7` (= J11-T10, T11) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J08-8 | declined |
+| FS91-J08-9 | FS-91 | `Θ₆(Q)` reduces to a sumset over the places `{2, 3, 7, 11, 19}` | hand (one mind) | `plans/FS91-derivation.md` FS91-J08-9 | declined |
+| FS91-J08-10 | FS-91 | the band-1/6 list for `Q`: 173 torsion characters, `Θ₆(Q) ⊆ T_{105,336} + A`; band 1/5: 77, `N₅ = 35,112` (= J08-11) | hand + tools exact (one mind) | `plans/FS91-derivation.md` FS91-J08-10 | declined |
+| FS91-J11-T13 | FS-91 | J08's and J11's values agree at 146 points, 0 divergences | tools exact (a comparison) | `plans/FS91-derivation.md` FS91-J11-T13 | declined |
+| FS91-J12-A1 | FS-91 | the half-rings `ℤ[i][1/π̄]`, `ℤ[i][1/π]` and the `p`-free margins 1/4, 1/12 (= J12-A2, A3) | hand + tools exact (two derivations, J12, J13) | `plans/FS91-derivation.md` FS91-J12-A1 | declined |
+| FS91-J12-ONEa | FS-91 | ONE-a: `Θ₄(R_{{p}}) ⊄ T + A` at every `p ≡ 1 (mod 4)`, by a heteroclinic (= J12-HL, J13-T2) | hand + tools exact (two derivations, the same route) | `plans/FS91-derivation.md` FS91-J12-ONEa | declined |
+| FS91-J12-B1 | FS-91 | the nine-rotation model of `Θ₄(U₅)`; `T + A` ⟺ periodic centre sequence (= B2–B4, J13-T1, T3, C9) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J12-B1 | declined |
+| FS91-J12-B5 | FS-91 | `MS₄({5})` fails iff a band character is uniformly recurrent with a non-periodic centre sequence | hand (two derivations) | `plans/FS91-derivation.md` FS91-J12-B5 | declined |
+| FS91-J12-B6 | FS-91 | freely concatenable blocks are powers of one word; distinct band torsion characters share no layer-0 point (= J13-T4) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J12-B6 | declined |
+| FS91-J12-CL | FS-91 | the two-leaf closing lemma and the density of closed-up points in the lens (= CL′, J13-T8) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J12-CL | declined |
+| FS91-J12-H | FS-91 | an infinite hierarchy of band torsion characters; primitive words; a minimal aperiodic S-adic subshift (= W, Ω) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J12-H | declined |
+| FS91-J12-MS | FS-91 | `MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` (= J13-T7) | hand (two independent routes) | `plans/FS91-derivation.md` FS91-J12-MS | declined |
+| FS91-J13-T6 | FS-91 | J13's route: a two-choice branching region at 5 and entropy compression (= J13-L1) | hand + tools (one mind) | `plans/FS91-derivation.md` FS91-J13-T6 | declined (a 60-digit inequality) |
+| FS91-J12-MSp | FS-91 | `MS₄({p})` false at every `p ≡ 1 (mod 4)` (= J13-T9) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J12-MSp | declined |
+| FS91-J12-C1 | FS-91 | torsion by closing: band iff the `w̄`-orbit stays in `Q`; the one-segment closing lemma (= C2) | hand (two derivations) | `plans/FS91-derivation.md` FS91-J12-C1 | declined |
+| FS91-J12-C3 | FS-91 | ONE-c: band torsion orders unbounded at one prime, the family `c₀^a0^b`, `N \| 2·Nm(π^L − (−i)^Lπ̄^L)` (= C4, C3p) | hand + tools exact (two derivations) | `plans/FS91-derivation.md` FS91-J12-C3 | declined |
+| FS91-J13-T5 | FS-91 | a second family `b a^p` (one condition), infinite at every `p ≡ 1 (4)`, orders `≥ 2·5^{p/2}` at 5; holds S0B-L4's orders 3, 48 | hand + tools exact (one mind) | `plans/FS91-derivation.md` FS91-J13-T5 | declined |
+
+#### 4.4 `CLAUDE.md` — the Frontier, the paths forward and the grokkings (draft; **net +2,860 bytes**, cap 4,000)
+
+**33 exact replacements**, machine-applicable: `data/fs91/j23a/claude_md_drafts.py` applies them to an in-memory copy of `CLAUDE.md` (never to
+the file), checks that every anchor occurs exactly once, and prints the net size (275,608 → 278,468 bytes, under the 300,000 budget); its plant
+corrupts one anchor and exits 1. (The first run of the plant printed exit 0 through a `| cut` pipe — the pipe's status, not the tool's; re-run
+without the pipe it exits 1. A small instance of `CLAUDE.md` § The gate's pipeline rule, mine.) If M2's or M3's close edits the same lines
+first, J24 re-anchors. What they do, in one line each: **C1** the close line; **C2–C5** the target's (2): the proved range becomes `L ≤ 4` over
+every real number field, ℚ(α,√7) leaves the exposed predictions (met), ℚ(√167)'s character count; **C6** item 10; **C7** item 14's last
+sentence (three colours ask for a residue field `𝔽₃`, not for `1/3`); **C8** item 25 at every band, and a new item 26 (character colourings
+local in the existence sense; the window closed to characters); **C9–C10** the prior-art position's "Ours" and "Not ours"; **C11** the re-rank
+preamble; **C12–C20** the paths-forward table (FS-91, FS-83, FS-82 rows removed; FS-59, FS-75, FS-64, FS-48, FS-47 re-aimed; FS-M1a, b, c
+added; J24 renumbers the rank column); **C21** "G1–G77"; **C22** G21 (FS-91's two method lessons); **C23–C24** G48 (the proved range; the
+falsifier list drops ℚ(α,√7)); **C25–C26** G55 (`R = O′` with no Galois hypothesis; the three-colour half without √3); **C27** G61's *Do*; **C28**
+G71's *Do*; **C29–C30** G74 (the residual case closed; the killing test at every band and at one prime); **C31** G76 (every band; the pyjama
+lemma; one prime fails three ways); **C32** G64 (characters shut out of the gap at the exposed fields); **C33** **G77, new** — "A character
+colouring of a field plane is local in the existence sense only: the value-set profile peels", with its *Do* and killing test in G67's form.
+Every CLG sentence is at existence scope. The rendered text of every replacement (anchor abridged, new text in full):
+
+**C1.** replace «*Last updated: 2026-09-25 — **FS-89 closed** (rows 95–97; G76 rewritten; G74, G30 corrected): rational band rigidity (row 95) and its consequences at the expose…» with:
+
+> *Last updated: 2026-09-25 — **FS-91 closed** (crunch milestone M1; rows N1–N5; G77 minted; G48, G55, G61, G71, G74, G76 corrected): band rigidity at every band, the class theorem for character colourings at existence scope, the character chromatic numbers at the exposed fields, one prime failing three ways, and three colours over every real number field; verdict **Paid (theorem)**, O1 at a prior of 0.30 (`plans/FS91-character-local-global.md` §R-close).
+
+**C2.** replace «The conjecture is proved only for L ≤ 3 generally, L ≤ 4 given √3, and L ≤ 5 for multiquadratic F ⊇ K (G55); since FS-81 also L ≤ 4 for every real quadratic fie…» with:
+
+> The conjecture is proved for L ≤ 4 over every real number field (row N2) and L ≤ 5 for multiquadratic F ⊇ K (G55). Its remaining *testable* range is L = 5 outside that class (FS-84, FS-48), then
+
+**C3.** replace «; four at ℚ(α,√7), α³ = α + 1, outside the proved range (FS-82); and at least six at **ℚ(√167)**, proven 4 (rows 79, 82), the widest gap, at discriminant 668 (n…» with:
+
+> ; and at least six at **ℚ(√167)**, proven 4 (rows 79, 82), the widest gap, at discriminant 668 (characters need eight there, given CLG, row N4).
+
+**C4.** replace «Four at the census's 25 open fields, and at every squarefree d ≡ 11 (mod 12), is met (rows 82–83).» with:
+
+> Four at the census's 25 open fields, at every squarefree d ≡ 11 (mod 12) and at ℚ(α,√7), α³ = α + 1, is met (rows 82–83, N2).
+
+**C5.** replace «(its one-character case is closed, row 96)» with:
+
+> (its one-character case is closed, rows 96, N4)
+
+**C6.** replace «χ(F²) = L(F) for every real number field with L ≤ 3, for every field containing √3 with L ≤ 4, **for every real quadratic field with L ≤ 4** (row 82, [hand, two…» with:
+
+> χ(F²) = L(F) for every real number field with **L ≤ 4** (row N2, [hand, three derivations]; G74), and
+
+**C7.** replace «A three-colour question over any real field is a question about 1/3 (G74).» with:
+
+> Over a number field three colours ask for a prime above 3 of residue field 𝔽₃, not for 1/3 (row N2, G74).
+
+**C8.** replace «25. **Two primes restore Furstenberg–Berend rigidity modulo the rotated direction** (rows 95–97, G76): every four- and five-colour band character of `ℤ[i][1/p :…» with:
+
+> 25. **Two primes restore Furstenberg–Berend rigidity modulo the rotated direction, at every band** (rows 95–97, N1, N5; G76): every band character of `ℤ[i][1/p : p ≡ 1 (4)]`, hence of every real field's unit-vector ring, is torsion plus archimedean at the places of `F(i)`; at one prime it fails for points, minimal sets and torsion orders. The band condition is the pyjama problem's (`[Manners2015]`, row N1). 26. **Character colourings are local in the existence sense** (rows N3–N4, G77): a real number field's plane has a character `k`-colouring iff some residue target does, so a falsifier of the conjecture is no character at `k ≤ 5` (FS-83 answered) or over a quadratic field; given CLG, characters need 8 colours at ℚ(√167), 17 at K(√7), 22 at de Grey's field, 8 on Γ₂₃ and 9 on Γ₄₃ — the window is closed to characters. That every character colouring is local is proved only at three colours (row N2) and at HD1's fields.
+
+**C9.** replace «rational band rigidity at two or more primes and its field consequences (rows 95–97);» with:
+
+> rational band rigidity at two or more primes, at every band, and its field consequences (rows 95–97, N1); the class theorem for character colourings, the character chromatic numbers, three colours over every real number field and one prime's three failures (rows N2–N5);
+
+**C10.** replace «**Not ours:** closed-set rigidity on the circle» with:
+
+> **Not ours:** band rigidity on `ℤ[i][1/P₅, 1/P₁₃]` (`[Manners2015]` Lemma 5.3), the regular chromatic number (`[BarajasSerra2008]`); closed-set rigidity on the circle
+
+**C11.** replace «(re-ranked 2026-09-25 at FS-89's close, one rank per row: FS-89 closed; FS-91 minted at rank 2; FS-83 answered and moved below FS-84; FS-59, FS-84, FS-64, FS-90…» with:
+
+> (re-ranked 2026-09-25 at FS-91's close, one rank per row: FS-91 and FS-82 closed, FS-83 answered; three stubs minted; FS-59, FS-64, FS-75, FS-47, FS-48 re-aimed; G77 forwarded.
+
+**C12.** replace «| 2 | **FS-91 band rigidity at six colours, and at one prime** — `plans/STUB-band-rigidity-six.md` (minted at FS-89's close) | does row 95's route reach band 1/…» with:
+
+> (delete the row)
+
+**C13.** replace «| 5 | **FS-83 the layer method at four and five colours** — `plans/STUB-layer-method-five-colours.md` (minted at FS-81's close) | can one character of `ℤ[U_F]` …» with:
+
+> (delete the row)
+
+**C14.** replace «| 12 | **FS-82 three colours at residue degree three** — `plans/STUB-three-colours-residue-degree-three.md` | the one class of real number fields row 82 leaves …» with:
+
+> (delete the row)
+
+**C15.** replace «FS-89: no character five-colouring (row 96) |» with:
+
+> FS-89, FS-91: characters need eight, given CLG (rows 96, N4) |
+
+**C16.** replace «**re-aimed at FS-81's close: T4 for the whole family in the kernel** — T22's ⟹, then FS81-T1–T5; fallback, a kernel checker for FS-81's structural certificates …» with:
+
+> **re-aimed at FS-91's close: S1 and no mixing in the kernel** (row N2) — finite algebra and one character-sum bound, with FS81-T2 and T22's ⟹ as the named hand inputs; fallback, FS-81's census certificates (row 83) …
+
+**C17.** replace «and the one-character case (FS-83) is closed at both exposed fields (row 96); a five-colour window over ℚ(√167) is untouched |» with:
+
+> and the one-character case is closed at both exposed fields, at six and seven too given CLG (rows 96, N4); a five-colour window over ℚ(√167) is untouched | | — | **FS-M1a character colourings: classification and CLG-g's exception** — `plans/STUB-character-classification.md` (minted at FS-91's close) | is every band `k`-character, `k ≥ 4`, one place's pullback plus an archimedean part (true at `k = 3` and at HD1's fields; CLG is existential)? is CLG-g's exception ever realised; does (g3) hold at `e ≥ 2`? solver-free | none directly; the shape a character falsifier would need |
+
+**C18.** replace «**re-aimed at FS-81's close: multiquadratic fields without √3** — three colours decided there (row 82)» with:
+
+> **re-aimed at FS-91's close:** three colours decided for every multiquadratic field (row N2)
+
+**C19.** replace «| prime inversion (1/p ∈ R iff no stable prime above p, by lying-over — M56 L7's conjecture …» with:
+
+> | Lemma C/C′ (row N3): `ℤ[U_F] = O′` with no Galois hypothesis off a ramified stable dyadic place; prime inversion a corollary (M56 L7's conjecture …
+
+**C20.** replace «| none directly; free classification theorems if they exist, the negative if they do not, and the paper's second-discipline vocabulary (FS-20) |» with:
+
+> | none directly; free classification theorems if they exist, the negative if they do not, and the paper's second-discipline vocabulary (FS-20) | | — | FS-M1b band rigidity from the pyjama theorem — `plans/STUB-pyjama-gluing.md` | does row N1 follow from `[Manners2015]` on `A` and `Ā` by one gluing step; an effective `N_k`; density | none; attribution and effectivity | | — | FS-M1c one-prime minimal sets — `plans/STUB-one-prime-minimal-sets.md` | dimension; are all of them S-adic; band 1/5 | none; mechanism |
+
+**C21.** replace «G1–G76 are stable» with:
+
+> G1–G77 are stable
+
+**C22.** replace «a verdict names whose route failed.» with:
+
+> a verdict names whose route failed. **FS-91's two:** a positive control of the wrong shape (row 69's line-periodic ceiling at 43 named as a character positive; `χ_char(Γ₄₃) = 9`) — ask a control which shapes its generator represents; and an existence theorem paraphrased as a classification at four addresses (G77).
+
+**C23.** replace «**Proved range:** G55; L(F) is the sharp form» with:
+
+> **Proved range:** L ≤ 4 over every real number field (row N2), L ≤ 5 over multiquadratic F ⊇ K (G55); L(F) is the sharp form
+
+**C24.** replace «the L = 4 field ℚ(α,√7) (FS-82), and ℚ(√167) at L ≥ 6 (FS-59) — each falsified only by a whole-plane colouring,» with:
+
+> and ℚ(√167) at L ≥ 6 (FS-59) — each falsified only by a whole-plane colouring, and at `k ≤ 5` by no character (G77),
+
+**C25.** replace «lies above p (by lying-over) — M56 L7's conjecture, proved in general;» with:
+
+> lies above p (by lying-over) — M56 L7's conjecture, proved in general; and R = O′, integral at the stable primes, with no Galois hypothesis off a ramified stable dyadic place (row N3);
+
+**C26.** replace «**without √3 the half it lacked is row 82** (G74): `1/3 ∈ ℤ[U_F]` and an odd cycle make `F²` need four in any `F ⊆ ℝ`, so a three-chromatic real number field ha…» with:
+
+> **without √3 too** (row N2): a three-colouring's torsion part is a residue character at a stable prime of residue field 𝔽₃, so χ(F²) = L(F) at L ≤ 4 for every real number field (row 82 had the real quadratic case by `1/3`);
+
+**C27.** replace «decide three colours at the field level first — is `1/3 ∈ ℤ[U_F]` (no conjugation-stable prime above 3) and is the plane non-bipartite — and build nothing when …» with:
+
+> decide three colours at the field level first — over a number field, three iff an odd cycle and a prime above 3 of residue field 𝔽₃ (row N2); over any real field, `1/3 ∈ ℤ[U_F]` and an odd cycle force four — and build nothing;
+
+**C28.** replace «over a whole real quadratic field it is decided already (row 82, G74: four exactly at d ≡ 11 mod 12)» with:
+
+> over a whole real number field it is decided already (row N2)
+
+**C29.** replace «and the residual three-colour case, primes above 3 of odd residue degree ≥ 3, has no `1/3` to glue with (FS-82).» with:
+
+> and the residual three-colour case, primes above 3 of odd residue degree ≥ 3, closes without `1/3`: four, by no mixing (row N2).
+
+**C30.** replace «— **fired at one prime** (row 97: two leaves glue); over every split prime at once the reading holds (row 95).*» with:
+
+> — **fired at one prime** (rows 97, N5: two leaves glue, and minimal sets escape too); over two or more primes it holds at every band (rows 95, N1).*
+
+**C31.** replace «and it holds at two or more primes: an orbit closure has archimedean small differences, and meets `T + A`, or every difference, and the band forces a corner (ro…» with:
+
+> and it holds at two or more primes at every band: minimal sets are band-free (Berend's Thm I.2) and the band enters once, in a multi-digit sweep (rows 95, N1; on the half ring it is `[Manners2015]`'s pyjama lemma); so HD1 holds (row 96); at one prime points, minimal sets and torsion orders all fail (rows 97, N5).
+
+**C32.** replace «FS-64 is the one proposal for an instrument that is not.» with:
+
+> FS-64 is the one proposal for an instrument that is not. Characters are shut out of that gap at the exposed fields: given CLG they need 8, 17, 22 colours at ℚ(√167), K(√7), de Grey's field (row N4).
+
+**C33.** replace «* **G51 — A competitor and an advisor beat one mind.» with:
+
+> * **G77 — A character colouring of a field plane is local in the existence sense only: the value-set profile peels. [hand, two independent derivations (rows N1, N3), given band rigidity at every band]** A band character of `R_F` is torsion plus archimedean; the archimedean part vanishes at complex places and is an interval about 0 at real ones; the torsion part factors over the stable places (`R_F = O′`); and a sum of symmetric subsets of the circle inside the band keeps **some** summand inside it. So a band `k`-character exists iff a residue target at some level has one, and `χ_char(F²)` — `[BarajasSerra2008]`'s regular chromatic number — is a minimum over targets. **Existence, not classification:** CLG does not say a given character colouring comes from one place; that is proved at three colours (no mixing, row N2) and at HD1's fields (Lemma D), and open elsewhere (FS-M1a). On a finite plane a character colouring is a regular colouring of a circulant, weaker than a colouring (`χ_char(Γ₁₁) = 6 > 5`) and than a line-periodic one (`χ_char(Γ₄₃) = 9 > 8`). *Do: when a question is about character colourings of a field plane, compute each residue target's `χ_char` by its trace sets below Weil's threshold and take the minimum — no lattice, no solver; state the result as existence, and name the extra input (no mixing, Lemma D) before saying every character colouring is local. Nothing kills the theorem but a defect in its chain; it forbids a character colouring with fewer than `L(F)` colours at `k ≤ 5` and over quadratic fields. Killing test of the reading that CLG-g's exception is never realised: a band 6- or 7-character above level one of a `U₆₄` tower, or at level `2e + 1` above 3 at `q = 27`.* * **G51 — A competitor and an advisor beat one mind.
+
+
+#### 4.5 Stub banners and re-aims (draft; J24 prepends each to the stub file named)
+
+| stub | banner (verbatim, for the top of the file) |
+|---|---|
+| FS-91 `plans/STUB-band-rigidity-six.md` | > **CLOSED 2026-09-25 (FS-91, crunch milestone M1).** Question 1 is answered at every band, on characters (row N1: the multi-digit sweep SW-m, two blind readings); U3, `MS₄({5})` and U5 are answered at every split prime (row N5: one prime fails for points, minimal sets and torsion orders); FS-83's `k ≥ 6` remainder is answered by the class theorem at existence scope (row N3), CLG-g's exception left to FS-M1a. Record: `plans/FS91-character-local-global.md` (its §R-close first) and `plans/FS91-derivation.md`. Successors: FS-M1a (`plans/STUB-character-classification.md`), FS-M1b (`plans/STUB-pyjama-gluing.md`), FS-M1c (`plans/STUB-one-prime-minimal-sets.md`). |
+| FS-82 `plans/STUB-three-colours-residue-degree-three.md` | > **CLOSED 2026-09-25 (FS-91).** For every real number field, `χ(F²) = 3` iff the plane is non-bipartite and some prime above 3 has residue field `𝔽₃` (row N2; S1 by three derivations, no mixing by two); so a field whose primes above 3 all have residue degree ≥ 3 is never three-chromatic, and `χ(ℚ(α,√7)²) = 4` (three derivations). **Correction:** this stub's "dyadic targets have `χ ≥ 4`" does not apply to ℚ(α,√7): its dyadic prime splits in `F(i)`, so it has no dyadic target. |
+| FS-83 `plans/STUB-layer-method-five-colours.md` | > **ANSWERED 2026-09-25 (FS-91), for falsifiers.** By the class theorem at existence scope (row N3, CLG-g), a character `k`-colouring of a real number field's plane exists only if `L(F) ≤ k`, at every `k ≤ 5` and at every `k` over fields of degree ≤ 2: no character colouring with fewer than `L(F)` colours exists there. Left: CLG-g's exception at `k ≥ 6` over fields of degree ≥ 3, and whether every character colouring is local at one place — both FS-M1a. |
+| FS-59 `plans/STUB-four-colours-167.md` | > **Re-aimed at FS-91's close.** Given CLG_7, `χ_char(ℚ(√167)²) = 8` (row N4; unconditionally `6 ≤ χ_char ≤ 8`): no character colouring with five, six or seven colours exists, so any colouring of this plane with fewer than eight colours — and any falsifier of the prediction "≥ 6" — is one no character gives. The known bracket is `4 ≤ χ(ℚ(√167)²) ≤ 7`. |
+| FS-64 `plans/STUB-adelic-window-colouring.md` | > **Re-aimed at FS-91's close.** A single character needs eight colours over ℚ(√167) given CLG_7 (row N4), so the one-place, windowless case is closed at five, six and seven; the mixed window — several places, non-linear readings — is the whole remaining question. |
+| FS-84 `plans/STUB-five-colours-47.md` | > **At FS-91's close.** No character four-colouring of ℚ(√47)'s plane, now through the class theorem with no certificate (C-47, row N3), and at every `L = 5` field by CLG-g's (g1): a four-colouring falsifying the five-clause is no character colouring. |
+| FS-75 `plans/STUB-three-colour-criterion-kernel.md` | > **Re-aimed at FS-91's close.** The kernel target is S1 over every real number field (J02-T2's chain: J02-L1, L2, L3, L4(a) and a finite sumset) and no mixing (FS91-J09-J4, J09's proposal); every leaf is finite algebra plus one character-sum bound (Weil above 243, exact below), with FS81-T2 and FS73-T22's ⟹ as the named hand inputs. Fallback: a checker for ℚ(α,√7)'s prime data (FS91-J02-C1) and FS-81's census certificates. |
+| FS-47 `plans/STUB-unit-vector-ring-kernel.md` | > **Re-aimed at FS-91's close.** The statement is Lemma C/C′ with no Galois hypothesis (row N3; FS91-J07-3, J07-4, J02-L2, J10-L1): `ℤ[U_F] = O′`, the ring integral at the stable primes, except possibly at a ramified stable dyadic place (which occurs at ℚ(√5), ℚ(√17), ℚ(α)); prime inversion is its corollary. |
+| FS-48 `plans/STUB-biquadratic-table.md` | > **Re-aimed at FS-91's close.** Three colours are decided for every multiquadratic (indeed every real number) field: `χ = 3` iff non-bipartite and some prime above 3 has residue field `𝔽₃` (row N2). What remains is the four- and five-colour table. |
+| FS-46 `plans/STUB-three-colour-classification.md` | > **At FS-91's close.** Superseded in scope by FS-75's re-aim: S1 now holds over every real number field, with or without √3 (row N2); Theorem 3.1's rhombus route remains a cheaper kernel instance for `√3 ∈ F`. |
+| FS-39 `plans/STUB-plane-bridge.md` | > **At FS-91's close.** S1 holds for every algebraic `F ⊆ ℝ` and every purely transcendental extension of one, with `L(F)` read over all `c`-stable valuation rings (row N2); a general transcendental `F` hits this stub's gap (finite generation not purely transcendental over an algebraic field). |
+
+#### 4.6 `plans/FRONTIER-STUBS.md` — the re-rank (draft)
+
+**Closed, absorbed and demoted** gains three lines: FS-91 (CLOSED 2026-09-25, rows N1, N3–N5), FS-82 (CLOSED 2026-09-25, row N2), FS-83
+(ANSWERED for falsifiers 2026-09-25, row N3; remainder to FS-M1a). **The ranked table, one rank per row** (changes only; every other row keeps
+its relative order):
+
+| new rank | stub | change |
+|---|---|---|
+| 1 | FS-59 ℚ(√167): five colours | re-aimed (banner 4.5): characters need eight given CLG; `4 ≤ χ ≤ 7` |
+| 2 | FS-90 two hours of sanctioned search | moves up one (FS-91 closed) |
+| 3 | FS-84 ℚ(√47): five colours | note (banner 4.5): no character four-colouring through CLG |
+| 4 | FS-75 the three-colour criterion in the kernel | re-aimed: S1 and no mixing (banner 4.5); up two (FS-83 removed) |
+| 5–8 | FS-80, FS-76, FS-87, FS-67 | unchanged, each up two |
+| 9 | FS-64 the adelic window colouring | re-aimed (banner 4.5) |
+| 10 | **FS-M1a character colourings: classification and CLG-g's exception** — `plans/STUB-character-classification.md` | **new**; solver-free; none directly on χ ≥ 6 (the shape a character falsifier would need) |
+| 11 | FS-48 the table | re-aimed (banner 4.5) |
+| 12–19 | FS-78, FS-77, FS-88, FS-72, FS-55, FS-45, FS-39 (banner note), FS-63 | unchanged in order |
+| 20 | **FS-M1b band rigidity from the pyjama theorem** — `plans/STUB-pyjama-gluing.md` | **new**; attribution and an effective `N_k`; none on χ ≥ 6 |
+| 21 | **FS-M1c one-prime minimal sets** — `plans/STUB-one-prime-minimal-sets.md` | **new**; mechanism; none on χ ≥ 6 |
+| 22 | FS-60 | unchanged |
+| 23 | FS-47 the unit-vector ring in the kernel | re-aimed (banner 4.5): Lemma C/C′ |
+| 24 | FS-46 | note (banner 4.5): superseded in scope by FS-75's re-aim |
+| 25 onward | FS-68 … FS-5 | unchanged in order |
+
+The paths-forward table in `CLAUDE.md` mirrors this (4.4, C12–C20). The solver column: FS-M1a, b, c are solver-free.
+
+#### 4.7 New stubs minted (files written by this job)
+
+- `plans/STUB-character-classification.md` — **FS-M1a**: is every band `k`-character, `k ≥ 4`, one place's pullback plus an archimedean part
+  (the classification CLG does not state; proved at `k = 3` and at HD1's fields)? Is CLG-g's exception ever realised? Does (g3) hold at `e ≥ 2`?
+  (Inventory items 79, 105, 163; §7 rows 1–2.)
+- `plans/STUB-pyjama-gluing.md` — **FS-M1b**: does band rigidity on `R_S` follow from `[Manners2015]` on the half rings by one gluing step; an
+  effective `N_k` (`[KravitzLeng2025]`); density (Manners Remark 5.4(i)); read Muchnik 2005. (J23p §C.5; inventory items 6, 131; §7 rows 4, 8.)
+- `plans/STUB-one-prime-minimal-sets.md` — **FS-M1c**: the dimension of J12's minimal set; whether all minimal sets off `T + A` are S-adic;
+  band 1/5 at one prime; the discretized-rotation literature. (Inventory items 123, 161; §7 row 3.)
+
+#### 4.8 Lists for the front-page job (not M1's drafts, but owed to files M1 may not touch)
+
+- **`BIBLIOGRAPHY.md`:** J23p's eight proposals verbatim at `plans/FS91-PA-close.md` §C.3 (`[Manners2015]`, `[Wang2012]`,
+  `[EinsiedlerLindenstrauss2022]`, `[KravitzLeng2025]`, `[MalikiosisMatolcsiRuzsa2013]`, `[BarajasSerra2008]`, `[Muchnik2005]`, and the
+  discretized-rotation group `[BosioVivaldi2000]`, `[Vivaldi2006]`, `[AdlerKitchensTresser2001]`, `[AkiyamaPetho2013]`); plus
+  `[GrytczukKozikMicek2013]` (J. Grytczuk, J. Kozik, P. Micek, "New approach to nonrepetitive sequences", cited from memory by J13 — not held,
+  not checked; inventory item 161) and Shimura 1964 (*Arithmetic of unitary groups*, Ann. of Math. 79; to fetch, J23p §C.2 item 6). J23p's fetch
+  list (§C.2) carries the exact references.
+- **`CLOSED-QUESTIONS.md`:** J23p §C.4 item 1 — `[Fischer1990]` §1's question, answered in part (`χ ≤ 3` and `L ≤ 4` over every real number field,
+  row N2; for character colourings at every `k`, at existence scope and given band rigidity, row N3), **gated on reading `[Johnson2000]`,
+  `[Johnson2006]`**; items 2–3 recorded as not answered (density; Manners §5.5's assertion, which row N5 proves in band form on `R_{{p}}`).
+- **J26's crunch-wide corrections** (inventory 146–149, 154; `plans/PA-ambrus2023-audit.md` §4.4): row 92, FS86-Cx-C14 and CL1, and their § B
+  line — "not re-checked here" → "re-checked here"; the `[AmbrusEtAl2023]` bibliography merge and venue; G27 is `[MatolcsiEtAl2025]`'s (J26's
+  brief); the paper's eq. (23) typo. None touches M1's text.
+- **Record corrections owed** (each a record or plan outside this job's pen; for the owner to route):
+  1. `plans/FS89-derivation.md` "Notation, fixed once": `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1` over `R_F` (J03a §3.7's text); FS89-CL2's wording
+     ("archimedean at every place of `F(i)`"); §10's U3 row (open → proved at every `p`) and U5 row (reading → theorem) (J12 stage 5 table).
+  2. `plans/FS86-derivation.md` FS86-B1-LR: drop "`L/ℚ` Galois" from its scope (three derivations: FS91-J07-4, J09's J2, J10-T6).
+  3. `plans/FS81-derivation.md`: T6's open item settled (FS91-J09-J4-T6); T7's residual case closed (row N2).
+  4. `plans/FS91-S0F-three-colours.md` §2.6 Remark 2 (false: FS91-J09v-8), §2.8 (decided: FS91-J07-9), §2.10 ("ramified or inert" → ramified).
+  5. `plans/FS91-S0FV-three-colours-blind.md` §2.6: read `L(F)` over all stable valuation rings (FS91-J09-J4-A).
+  6. `data/fs91/j07/lemma-statements.md`: `L(F)` beyond number fields needs the extended definition (J09v §4.3).
+  7. `plans/FS91-S1D-one-prime.md`: the "no overlap with S0B-L4" sentence (J13 stage 4); `plans/FS89-S0B-band-set.md` §4's reading
+     promoted and §6's "is it infinite" answered (J12 stage 5).
+  8. **This plan outside §R-close** (the planner's text; my pen is §R-close only): §S SIX-e should read "Given CLG_7, CLG_16 and CLG_21 (J07,
+     blind-verified by J10)" (its in-place "Correction owed" block, inventory item 110); §M.2's ONE-b sentence should point to FS91-J12-B5
+     (item 119); §0 item 1 ("a character colouring of any real number field's plane comes from one residue target") and §G.1's G48 line
+     ("every character colouring local at one prime after peeling") state CLG in the classification form — each should read "a real number
+     field's plane has a character `k`-colouring iff some residue target has one" (inventory item 163).
+  9. `plans/FS84-five-colours-47.md` §1.1 Q5 (J29's brief quotes the stronger CLG paraphrase; the owner's slip, item 163) — J29's record, M-other.
+  10. The advisor's three-colour sketch (J02's source, quoted at `plans/FS91-S0F-three-colours.md` §1.1 Q4): "order 3 with `|α| ≤ 1/12`" is
+      S0A-3's bound at band `[1/4, 3/4]`; at band `[1/3, 2/3]` it is `α = 0` (C1(5), `plans/FS81-derivation.md` T3) — inventory item 8.
+
+#### 4.9 The conjecture sweep's dispositions (`plans/FS91-derivation.md` §7)
+
+| §7 row | disposition |
+|---|---|
+| (g3) at `k = 7`, `e ≥ 2` | stub FS-M1a (question 3) |
+| CLG-g's exception realised? | stub FS-M1a (question 2) |
+| minimal sets of `Θ₄(R_p)`; band-1/5 one-prime analogue | stub FS-M1c |
+| the explicit band-`k` torsion list at `k ≥ 7`; an effective `N_k` | stub FS-M1b (question 2) |
+| S1 on every subfield of ℝ | FS-39's banner note (4.5); the extended `L(F)` definition owed wherever S1 is stated beyond number fields (4.8 item 6) |
+| `MS₄({p})` at `p ≠ 5` by J13's route | declined: J12's route covers every `p` (owner's ruling) |
+| CLG-e at a ramified dyadic place at `k = 3` | declined: no consumer (`L = 2` there) |
+| J01's parity route as a second proof of `MS_β` | declined: no consumer; stays a named hypothesis at one reader |
+| band rigidity in print in full? | stub FS-M1b (question 4: Muchnik 2005) |
+| `χ(ℚ(√167)²)`, `χ(Γ₂₃)`, `χ(Γ₄₃)` | unchanged: FS-59, FS-17, FS-57 (characters only were decided) |
+| J08's reading "six hides only in non-character colourings" | drafted into G64 (4.4, C32), at existence scope |
+| **added at this stage:** the classification at `k ≥ 4` (the owner's scope note) | stub FS-M1a (question 1) |
+| **added:** J02's proposed *Do* ("at three colours … decide three colours by … the primes above 2 and 3") | drafted into G61's and G71's *Do* lines (4.4, C27–C28) |
+
+#### 4.10 The inventory at stage 4
+
+Every item routed to stage 4 is ticked "done (J23a stage 4)" with the draft that carries it (`data/fs91/j23a/stage4-ticks.json`): items 3, 6,
+8, 11, 15, 32, 61, 69, 70, 78, 79, 83, 85, 89, 105, 109, 110, 113, 117, 119, 121, 123, 130, 131, 136, 137, 144, 158, 161, 163. No item is open.
+
+**Would have searched here (stage 4):** none — drafting only; the three checking scripts (`ledger_b_lines.py`, `claude_md_drafts.py`,
+`coverage.py`) are string checks over fixed lists, each with a plant that fires.
