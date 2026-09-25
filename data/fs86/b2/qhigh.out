@@ -1,0 +1,12 @@
+m=11 N=64 d=324 -d/3=-108.0000 float lambda_min=-108.000000 #grid points (half-spectrum, u ~ -u) with lambda <= -d/3 + 1e-6: 37
+   exact: 37 at exactly -d/3, 0 below, 0 near but not equal; conductor levels {'EQ': {1, 2, 3, 4}}
+   least float value above -d/3 + 1e-6: -97.941125 (gap 10.058875)
+m=12 N=64 d=324 -d/3=-108.0000 float lambda_min=-108.000000 #grid points (half-spectrum, u ~ -u) with lambda <= -d/3 + 1e-6: 37
+   exact: 37 at exactly -d/3, 0 below, 0 near but not equal; conductor levels {'EQ': {1, 2, 3, 4}}
+   least float value above -d/3 + 1e-6: -97.941125 (gap 10.058875)
+m=13 N=128 d=324 -d/3=-108.0000 float lambda_min=-108.000000 #grid points (half-spectrum, u ~ -u) with lambda <= -d/3 + 1e-6: 37
+   exact: 37 at exactly -d/3, 0 below, 0 near but not equal; conductor levels {'EQ': {1, 2, 3, 4}}
+   least float value above -d/3 + 1e-6: -105.386666 (gap 2.613334)
+m=14 N=128 d=324 -d/3=-108.0000 float lambda_min=-108.000000 #grid points (half-spectrum, u ~ -u) with lambda <= -d/3 + 1e-6: 37
+   exact: 37 at exactly -d/3, 0 below, 0 near but not equal; conductor levels {'EQ': {1, 2, 3, 4}}
+   least float value above -d/3 + 1e-6: -105.386666 (gap 2.613334)

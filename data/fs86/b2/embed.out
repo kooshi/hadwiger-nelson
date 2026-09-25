@@ -1,0 +1,18 @@
+embedding: s = sqrt(59/3) mod 2^24 = 7475693; i^2 = -1, sqrt59^2 = 59, conj(i) = -i, conj(sqrt59) = sqrt59 mod 2^22: OK
+|U_510| = 324
+every embedded unit vector has z*zbar = 1 mod P^44: OK
+(R3) rank of U mod 2 over F2 = 4  ->  Z2-span of U = O: True
+m | |S_m| | |T_m| = |U mod P^m| | T_m subset S_m | T_m = S_m | fibre sizes of U -> T_m (min..max)
+1 | 3 | 3 | True | True | 108..108
+2 | 6 | 6 | True | True | 54..54
+3 | 12 | 12 | True | True | 27..27
+4 | 24 | 24 | True | True | 12..15
+5 | 48 | 48 | True | True | 3..12
+6 | 96 | 92 | True | False | 1..10
+7 | 192 | 160 | True | False | 1..5
+8 | 384 | 200 | True | False | 1..3
+9 | 768 | 260 | True | False | 1..2
+10 | 1536 | 308 | True | False | 1..2
+11 | 3072 | 324 | True | False | 1..1
+12 | 6144 | 324 | True | False | 1..1
+saturation depth m* = 5; injective from level 11

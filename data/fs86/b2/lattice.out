@@ -1,0 +1,9 @@
+basis of Lambda_510 (rows, in (a,b,c,e)/510 coordinates): [[2, 0, 0, 0], [0, 2, 0, 0], [0, 1, 1, 0], [1, 0, 0, 1]]
+|U| = 324  coordinates in [ -510 , 510 ]
+level m=2 (Lambda/2Lambda): d=6 -d/3=-2.0000 lambda_min=-2.000000 #minimisers=9 #below -d/3=0 -> TIGHT
+level m=4 (Lambda/4Lambda): d=24 -d/3=-8.0000 lambda_min=-8.000000 #minimisers=45 #below -d/3=0 -> TIGHT
+level m=6 (Lambda/8Lambda): d=92 -d/3=-30.6667 lambda_min=-36.000000 #minimisers=1 #below -d/3=21 -> SLACK
+level m=8 (Lambda/16Lambda): d=200 -d/3=-66.6667 lambda_min=-78.000000 #minimisers=8 #below -d/3=21 -> SLACK
+level m=10 (Lambda/32Lambda): d=308 -d/3=-102.6667 lambda_min=-108.000000 #minimisers=1 #below -d/3=21 -> SLACK
+level m=12 (Lambda/64Lambda): d=324 -d/3=-108.0000 lambda_min=-108.000000 #minimisers=45 #below -d/3=0 -> TIGHT
+level m=14 (Lambda/128Lambda): d=324 -d/3=-108.0000 lambda_min=-108.000000 #minimisers=45 #below -d/3=0 -> TIGHT

@@ -1,0 +1,13 @@
+|U| = 324; t = 1 (mod P): 108 unit vectors
+(a) rank 4; invariant factors [1, 2, 4, 4]; 2-adic elementary divisors [1, 2, 4, 4]
+    so 2^k Lambda = Lambda cap P^(2k) lies in M_Lambda (x) Z2 exactly for k >= 2 (i.e. P^4 contained); the full tower's FS38-L3 has 1, 2, 4, 4
+(b) index of the span (with 2^12 O) in O: 2^5 / 2^0  (det 32)
+    P^0 = pi^0 O inside span: False   (per basis direction 1, w, sqrt3, w sqrt3: [False, False, False, False])
+    P^1 = pi^1 O inside span: False   (per basis direction 1, w, sqrt3, w sqrt3: [False, False, False, False])
+    P^2 = pi^2 O inside span: False   (per basis direction 1, w, sqrt3, w sqrt3: [True, False, True, False])
+    P^3 = pi^3 O inside span: False   (per basis direction 1, w, sqrt3, w sqrt3: [True, False, True, False])
+    P^4 = pi^4 O inside span: True   (per basis direction 1, w, sqrt3, w sqrt3: [True, True, True, True])
+    P^5 = pi^5 O inside span: True   (per basis direction 1, w, sqrt3, w sqrt3: [True, True, True, True])
+    P^6 = pi^6 O inside span: True   (per basis direction 1, w, sqrt3, w sqrt3: [True, True, True, True])
+    P^7 = pi^7 O inside span: True   (per basis direction 1, w, sqrt3, w sqrt3: [True, True, True, True])
+    P^8 = pi^8 O inside span: True   (per basis direction 1, w, sqrt3, w sqrt3: [True, True, True, True])

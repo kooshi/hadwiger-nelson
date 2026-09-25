@@ -1,0 +1,11 @@
+m= 1 d=   3 -d/3=   -1.0000 lambda_min=   -1.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=3 #minimisers=3 conductor levels of minimisers=[1] -> TIGHT
+m= 2 d=   6 -d/3=   -2.0000 lambda_min=   -2.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=9 #minimisers=9 conductor levels of minimisers=[1, 2] -> TIGHT
+m= 3 d=  12 -d/3=   -4.0000 lambda_min=   -4.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=21 #minimisers=21 conductor levels of minimisers=[1, 2, 3] -> TIGHT
+m= 4 d=  24 -d/3=   -8.0000 lambda_min=   -8.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=45 #minimisers=45 conductor levels of minimisers=[1, 2, 3, 4] -> TIGHT
+m= 5 d=  48 -d/3=  -16.0000 lambda_min=  -16.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=45 #minimisers=45 conductor levels of minimisers=[1, 2, 3, 4] -> TIGHT
+m= 6 d=  92 -d/3=  -30.6667 lambda_min=  -36.000000 ratio lambda_min/d=-0.391304 #chars below -d/3=21 #at -d/3 (float)=0 #minimisers=1 conductor levels of minimisers=[1] -> SLACK
+m= 7 d= 160 -d/3=  -53.3333 lambda_min=  -58.000000 ratio lambda_min/d=-0.362500 #chars below -d/3=24 #at -d/3 (float)=0 #minimisers=8 conductor levels of minimisers=[4] -> SLACK
+m= 8 d= 200 -d/3=  -66.6667 lambda_min=  -78.000000 ratio lambda_min/d=-0.390000 #chars below -d/3=21 #at -d/3 (float)=0 #minimisers=8 conductor levels of minimisers=[4] -> SLACK
+m= 9 d= 260 -d/3=  -86.6667 lambda_min=  -92.000000 ratio lambda_min/d=-0.353846 #chars below -d/3=21 #at -d/3 (float)=0 #minimisers=1 conductor levels of minimisers=[1] -> SLACK
+m=10 d= 308 -d/3= -102.6667 lambda_min= -108.000000 ratio lambda_min/d=-0.350649 #chars below -d/3=21 #at -d/3 (float)=0 #minimisers=1 conductor levels of minimisers=[1] -> SLACK
+m=11 d= 324 -d/3= -108.0000 lambda_min= -108.000000 ratio lambda_min/d=-0.333333 #chars below -d/3=0 #at -d/3 (float)=45 #minimisers=45 conductor levels of minimisers=[1, 2, 3, 4] -> TIGHT
