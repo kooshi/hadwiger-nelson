@@ -186,6 +186,19 @@ Let `M ⊆ Θ₆(R_S)` be minimal and in case 1. D1-L3 gives `θ₂ ∈ M − M 
 middle-half count and the level collapse were done at bands 1/4, 1/5 and are **not** re-derived at 1/6), and any bound on its torsion
 order beyond "finite". Any consequence at ℚ(√167) needs that list.
 
+## Stage 3, `k = 8` — SAVED
+
+Same route as §3.6.1; only the `k`-lines differ. `B₈ = [1/8, 7/8]`.
+- **R1 step 1** (minimal sets): stage 2, band-free.
+- **R1 step 2, Lemma SW's arc line:** needs `1/p < 2/8 = 1/4`: at `p = 5` (`1/5 < 1/4`, margin `1/20`) and `p = 13`. ✓ One digit suffices
+  (`8 < 2·5`); tool A2 row `k=8`: the worst one-digit coset meets the open arc.
+- **R1 steps 3–4** (VB3, VB4 / G1 / D2-L1): no use of `k` (§3.6.1).
+- **R2, the parity line:** `2y(u) ∈ [2/8, 6/8] = [1/4, 3/4]`, so `2y ∈ Θ₄(R_S)`. A minimal `N ⊆ Θ₄` in case 1 gives, by the parity line again,
+  `2z ∈ Θ_{1/2} = {φ : φ(U_S) = {1/2}} = {θ₂}` (its values are `1/2` on `U_S`, hence `φ = θ₂` on `ℤ[U_S] = R_S`): `z` is a corner, torsion
+  (this is D1-L4). So `MS₄`, then `RS₄` by VB1 (one digit: `1/5 < 1/2`), so `2y ∈ T + A`, `y ∈ T + A`, and case 1 is refused. Two doublings
+  (tool B2).
+- **Verdict:** `RS₈(S)` for every `|S| ≥ 2` **TRUE**; `RQ₈` **TRUE** [hand; sweep arithmetic tools exact]. Layering/gluing: no `k`.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
