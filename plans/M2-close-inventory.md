@@ -43,3 +43,21 @@
 | 37 | correction owed | 13 record-named M2 helper theorems are not printed by `scripts/Axioms.lean` (each used by an audited theorem) | plans/CRUNCH-2026-09-25-INDEX.md §3.3; J30 report | open |
 | 38 | owner check | the owner read `chromaticNumber_unitQuadrance_ratFunc`'s statement (Proofs/HadwigerNelson/Transcendental.lean:314): matches FS-39 route C; axioms the standard three | owner, 2026-09-25 | open |
 | 39 | agent token count | J15 harness 368k (own 150k) | task notification | open |
+| 40 | result | J16: prime inversion in valuation form, its plane form over F(i) with Theorem A's `conjOn`, sums of unit vectors, the chain theorem in ring form, kernel | Proofs/HadwigerNelson/UnitRing.lean; plans/M2-S3K-unit-ring.md §2 | open |
+| 41 | result | J16: 1/2 = w + w̄ + 2 and 3/8 in ℤ[U_{K(√7)}]; no conjugation-stable valuation subring of K(√7)(i) has 2 in its maximal ideal, kernel | Proofs/HadwigerNelson/Instances/SevenUnitRing.lean; plans/M2-S3K-unit-ring.md §2 | open |
+| 42 | result | J16: the stripe lemma (FS85-V2-T5) in full, kernel; NT₀ shown load-bearing (`not_striped_threeCol`); the line-to-line step needs properness alone | Proofs/HadwigerNelson/Stripe.lean; plans/M2-S3K-unit-ring.md §3 | open |
+| 43 | prediction scored | J16: P-J16a met (13 min); P-J16b met at p = 0.10 (17 min against a 4–6 h price) | plans/M2-S3K-unit-ring.md §2.5, §3.5 | open |
+| 44 | stub to mint or re-aim | J16: FS-87 target 1 done, next dB9's V1 | plans/STUB-de-grey-chain-kernel.md; plans/M2-S3K-unit-ring.md §4.3 item 4 | open |
+| 45 | stub to mint or re-aim | J16: FS-47 D3 (valuation form) and D5 (3/8) done; left row 57's translation (FS-37) and Lemma R at its corrected scope | plans/STUB-unit-vector-ring-kernel.md; plans/M2-S3K-unit-ring.md §4.3 item 4 | open |
+| 46 | correction owed | J16: two LEDGER rows, § B lines, G35/G55 citations, FRONTIER-STUBS status lines proposed | plans/M2-S3K-unit-ring.md §4.3 | open |
+| 47 | slip | J16: first draft re-defined `conjOn` under ResidueColouring's name; caught by the clash and replaced by reuse (so prime inversion quantifies over Theorem A's valuation subrings) | plans/M2-S3K-unit-ring.md §2.4 | open |
+| 48 | result | J17K: the bridge χ(ℝ²) = sup_F χ(F²), attained, and FS62-T2 (C4), [kernel] conditional on one named true hypothesis; controls: one-variable case proved, rational twin refuted | Proofs/HadwigerNelson/Bridge.lean | open |
+| 49 | result | J17K: ℝ real closed; the relative algebraic closure of any field in a real closed field is real closed (Mathlib's TODO, upstream candidates) | Proofs/HadwigerNelson/RealClosed.lean | open |
+| 50 | correction owed | J17K: M2-S1D-bridge §3.2 priced B0 and B1 at ~1 day each; each took under half an hour; FS-39 stub status and CLAUDE.md gate/trust counts stale | plans/M2-S4K-bridge.md §5.3 | open |
+| 51 | prediction scored | J17K: P-J17Ka HELD, P-J17Kb HELD (stronger form), P-J17Kc not scorable (not attempted) | plans/M2-S4K-bridge.md §5.2 | open |
+| 52 | slip | J17K: C0 written after the first leaves had already closed, so no priors for B1/B0 | plans/M2-S4K-bridge.md §1.2 | open |
+| 53 | stub to mint or re-aim | J17K: FS-39: B0, B1, C (C1, C2, C4) landed conditional; left B2 ((∃T), months, a leaf not a job) and NP/C3 (J17K2) | plans/M2-S4K-bridge.md §4 | open |
+| 54 | owner ruling | `lake lint` is not run per kernel job; it runs once at M2's close under slot.py after a green build (the lakefile's driver is batteries/runLinter) | owner, 2026-09-25 | open |
+| 55 | owner check | the owner read `UnitRing.inv_natCast_mem_unitRing_iff` (Proofs/HadwigerNelson/UnitRing.lean:100) and `RealAlgebraicDescent` (Proofs/HadwigerNelson/Bridge.lean:51): both state what the records say | owner, 2026-09-25 | open |
+| 56 | leftovers | `data/m2/j16/WheelProbe.lean`, `WheelProbe2.lean` untracked (J16's); J23b commits or deletes them | owner, 2026-09-25 | open |
+| 57 | agent token counts | J16 harness 405k; J17K harness 342k | task notifications | open |
