@@ -40,3 +40,6 @@
 | 34 | stub to mint or re-aim | FS-39 (`plans/STUB-plane-bridge.md`): route C (phase B′) landed; left: the finitely generated case (J17) and the sup statement | plans/M2-S2K-route-c.md §4.3 item 3; added by J30's cross-check, 2026-09-25 | open |
 | 35 | stub to re-aim | FS-45: left are G4's certificate after the ban and a kernel upper bound χ(ℚ(√2,√3)²) ≤ 4 by the dyadic residue colouring | J14 report (SPAWN line); added by J30's cross-check, 2026-09-25 | open |
 | 36 | result | J17-T1 to T10 (theorems table): C1 by two routes; the real algebraic numbers are real closed; C2 with the sup attained; Lemma NP; C3, C3⁺ and a pointless-conic field; C3′; C4; the ∃-fragment of Tarski and Artin–Lang interderivable [hand, one mind; none new mathematics] | plans/M2-S1D-bridge.md "Theorems this phase proved"; added by J30's cross-check, 2026-09-25 | open |
+| 37 | correction owed | 13 record-named M2 helper theorems are not printed by `scripts/Axioms.lean` (each used by an audited theorem) | plans/CRUNCH-2026-09-25-INDEX.md §3.3; J30 report | open |
+| 38 | owner check | the owner read `chromaticNumber_unitQuadrance_ratFunc`'s statement (Proofs/HadwigerNelson/Transcendental.lean:314): matches FS-39 route C; axioms the standard three | owner, 2026-09-25 | open |
+| 39 | agent token count | J15 harness 368k (own 150k) | task notification | open |

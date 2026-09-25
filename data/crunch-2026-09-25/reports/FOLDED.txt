@@ -10,3 +10,10 @@ J07.md
 J08.md
 J10.md
 J14.md
+J11.md
+J12.md
+J15.md
+J18.md
+J19.md
+J21.md
+J30.md
