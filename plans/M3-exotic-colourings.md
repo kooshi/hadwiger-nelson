@@ -389,3 +389,123 @@ periods are finitely many cycles, so `P` has finite index.
 - **`[Zhu1998]`** — X. Zhu, *Pattern periodic coloring of distance graphs*, JCTB 73 (1998); review read only.
 - **`[Woodall1973]` / `[Townsend2005]`** — map-type colourings need six; listing only (second-hand, arXiv:2502.01958).
 - **`[EggletonErdosSkilton1990]`** — its read status stays "review read"; the aperiodic construction is a debt (J18 stage 1).
+
+---
+
+## Stage 4 — SAVED (§IQ, §S, §P)
+
+### IQ.1 Question 1 (FS-76 in rank one) — WORKFLOW 3.3
+
+1. **Existence form.** Is there a finite `D ⊂ ℤ_{>0}` and a proper four-colouring of `G(ℤ, D)` that separates a pair every periodic
+   four-colouring identifies (`P₄(D) ≠ F₄(D)`)?
+2. **Structural form.** *What can the space of all proper `k`-colourings of a Cayley graph of ℤ be, as a one-dimensional shift of finite
+   type?* Posed for every finite `D` and every `k` (at `k = 3` the height answers it, T24; at `k = 4` it is open), with no arithmetic:
+   **is every countable `k`-colouring shift of a distance graph finite** — equivalently, does every wall between phases come with
+   entropy?
+3. **The invariant it forces.** Every colouring carries its **pair of limit phases** (α- and ω-limit cyclic components) and, through
+   them, a place in the **phase graph** (cyclic components ordered by walls), which is acyclic by definition, reversed by the reflection,
+   and permuted by the colour group. What is missing is an invariant that **orders phases so that reflection and colour permutations
+   cannot both respect it** — none known; finding it (or a Kempe move that reverses a wall, K3) is the milestone. At three colours the
+   height's slope is that invariant.
+4. **Route.** Derivation only (J18). An exact check may verify a derived claim: a constructed `D`'s window graph, computed once.
+5. **Open instances it would decide.** The chiral rigid–rigid walls of FS73-T30's sets (which exist beside entropy: the controls); every
+   `D` beyond T36's range, FS85-dB2's `|D| = 70` graph among them (all rigid, no wall: a positive control); `[EggletonErdosSkilton1990]`'s
+   aperiodic `χ(D)`-colourings (unread); and, through T6/T7's product constructions, every rank-`r` graph periodic in `r − 1` directions
+   (T34's class).
+
+### IQ.2 Question 2 (FS-64 at five colours over ℚ(√167)) — WORKFLOW 3.3
+
+1. **Existence form.** Is there a finite set `S` of places of `F = ℚ(√167)` and a proper five-colouring of `Γ_S` with measurable
+   classes (so that `r ↦ W(ι_S(r) + t)` five-colours `F²` for every `t`)?
+2. **Structural form.** *For a product `Γ_S = ∏ Cay(G_v, T_v)` of Cayley graphs of locally compact abelian groups with compact
+   connection sets, what is every measurable proper `k`-colouring?* In the most general class, arithmetic stripped: **is every measurable
+   proper `k`-colouring of `A × B` almost everywhere a pullback from `A` when `B`'s measurable independence ratio is below `1/k` and
+   `A`'s is not?** — the measurable form of Hedetniemi's question (`[KechrisMarks2020]` Problem 4.23) in the Cayley class, with the
+   count (Zhang's product rule) as its known half.
+3. **The invariant it forces.** Known half: the colour-class densities and each factor's measurable independence ratio (the count).
+   The other half: the **fibre map** `b ↦ W(·, b)`, a measurable family of colourings of `A` indexed by `B`, and at the archimedean
+   factor Falconer's **edge vertex** (a Lebesgue-density point shared by two classes). An invariant forcing the fibre map to be
+   constant (a pullback) at five colours is not known; finding one, or the obstruction, is the milestone.
+4. **Route.** Derivation only (J21). No LP, no relaxation (the 43-adic all-levels certificate is a machine-long run: banned).
+5. **Open instances it would decide.** `χ_µ(ℝ²) ≥ 6` (open, `[KechrisMarks2020]` §4.7; Polymath16's fourth thread) — only as its
+   `S = {∞₁}` slice, never as J21's target; five at ℚ(√167) over finite-place `S` (43 at depth, the dyadic places); `χ_µ` of `ℝ² × ℝ²`
+   against `ℝ²` (the two real places); the same questions at ℚ(√47) at four colours are already closed (FS86-CL1).
+
+### S. The stages as jobs
+
+| job | kind | question | record | stages (harness k) | stop rule |
+|---|---|---|---|---|---|
+| **J18** | derivation | Q1 | `plans/M3-S1A-rank-one.md` | 1 quotation check + C0 + inputs (60); 2 A-K0–A-K2 and A-T1′ (80); 3 the chiral case: A-T1 or A-C (100); 4 claims, reviewer's view, report (40) | the gate at ~2.5 h: a proof, a counterexample, or a stall at a named step, saved |
+| **J19** | derivation, conditional | the step J18 names | `plans/M3-S1B-rank-one.md` | skeleton only (brief file) | launched only on a named stall |
+| **J20** | blind verifier | J18's or J19's claims, fixed list below | `plans/M3-S1V-rank-one.md` | B1 blind (150); B2 lemma statements, only if B1 stalls (100); B3 divergence table (50) | a verdict per claim |
+| **J21** | derivation | Q2 | `plans/M3-S1D-windows-five.md` | 1 quotation check + C0 + inputs (60); 2 D0, D1 (80); 3 D2, D3 (100); 4 D4, claims, report (40) | the same |
+| **J22** | blind verifier | J21's claims, fixed list below | `plans/M3-S1V-windows-five.md` | B1, B2, B3 as J20 | a verdict per claim |
+
+**Definitions for Q1 (J18's and J20's briefs quote these):** for finite `D ⊂ ℤ_{>0}`, `G(ℤ, D)` has vertex set ℤ and `x ~ y` iff
+`|x − y| ∈ D`; `X_k(D) ⊆ [k]^ℤ` is the set of proper `k`-colourings; with `m = max D`, the **window-state graph** has as vertices the
+words of length `m` occurring in some point of `X_k(D)`, and an edge `w → w′` when `w′` is `w` shifted by one position inside an
+`(m+1)`-word occurring in some point; a **phase** is a strongly connected component containing a cycle, **rigid** if it is a single
+cycle; a **wall** is a path from one phase to a different phase; `F_k(D)` is the set of `δ ∈ ℤ` with `c(x) = c(x + δ)` for every
+`c ∈ X_k(D)` and `x`, and `P_k(D)` the same over the periodic `c`. (FS79-T35 states its criterion with phases taken modulo colour
+permutation; the claims below hold in either form, and a derivation says which it uses.)
+
+**Q1's target statements (J20's fixed list; verbatim).**
+- **A-T1 (R2).** "For every finite `D ⊂ ℤ_{>0}`, if every phase of the window-state graph of `X₄(D)` is rigid, then no wall exists."
+- **A-T1′.** "For every finite `D ⊂ ℤ_{>0}`, `X₄(D)` is finite or has positive topological entropy."
+- **A-T2.** "For every finite `D ⊂ ℤ_{>0}`, `P₄(D) = F₄(D)`."
+- **A-K0.** "If every phase of `X₄(D)` is rigid, then every periodic `c ∈ X₄(D)` has all four colours on the closed neighbourhood of
+  every vertex, and every two-colour Kempe component of `c` is infinite."
+- **A-K1.** "If every phase of `X₄(D)` is rigid and `X₄(D) ≠ ∅`, then `χ(G(ℤ, D)) = 4`."
+- **A-K2.** "If `c ∈ X₄(D)` is periodic and `c′ ∈ X₄(D)` agrees with `c` on `{y : y < x}` and not at `x`, then the colours
+  `{c(x − d) : d ∈ D}` miss at least two colours."
+- **A-C.** "There is a finite `D ⊂ ℤ_{>0}` (named) such that every phase of `X₄(D)` is rigid and a wall exists." (the alternative to
+  A-T1; with T35 it gives `P₄(D) ≠ F₄(D)`)
+
+**Definitions for Q2 (J21's and J22's briefs quote these, and FS86-Cx-C14 and FS86-CL1 verbatim):** `F = ℚ(√167)`; `S` a finite set
+of places of `F`; for `v ∈ S`, `G_v = F_v²` and `T_v = {(x, y) ∈ F_v² : x² + y² = 1}`; `G_S = ∏_{v ∈ S} G_v`, `T_S = ∏_{v ∈ S} T_v`,
+`Γ_S = Cay(G_S, T_S)`; `ι_S : F² → G_S` the diagonal embedding. A **measurable window `k`-colouring over `S`** is a map
+`W : G_S → [k]` whose classes are Haar-measurable and which is proper on every edge of `Γ_S` (`W(g) ≠ W(g + t)` for all `g ∈ G_S`,
+`t ∈ T_S`); each `r ↦ W(ι_S(r) + t)` is then a proper `k`-colouring of `F²`. (C14's own format also allows finite levels at finite
+places and C14′'s "proper off a null set"; a derivation says which format each claim covers — a.e.-properness does not give properness on
+the countable set `ι_S(F²) + t`.)
+
+**Q2's target statements (J22's fixed list; verbatim).**
+- **D0.** "A measurable window five-colouring over `S = {∞₁}` is exactly a proper five-colouring of the unit-distance graph of `ℝ²`
+  with Lebesgue-measurable classes; for every finite `S` containing a real place, a measurable proper five-colouring of that graph pulls
+  back to a measurable window five-colouring over `S`. Hence no measurable window five-colouring over any `S` containing a real place
+  implies `χ_µ(ℝ²) ≥ 6`."
+- **D1.** "For every finite set `S` of places of ℚ(√167) containing no real place, no measurable window five-colouring over `S`
+  exists, provided every factor of `Γ_S` has measurable independence ratio `< 1/5`; this holds at every stable odd place other than 43
+  (23 by FS-66's all-levels certificate; `p ≥ 59` by Weil and the inert tower's constant `λ_min/d`; the ramified 167 by Lemma P), at
+  every odd split place (C14.2 (c)), and [to be settled] at 43 above level one and at the dyadic places."
+- **D1-3.** "At ℚ(√167) the place above 3 is split in `F(i)/F`, so FS-64's configuration (ii) contributes a factor of measurable
+  independence ratio 0."
+- **D2.** "Let `A` be the unit-distance graph of `ℝ²` (or of `ℝ² × ℝ²`) and `B` a product of the finite places' local graphs, every
+  factor of `B` of measurable independence ratio `< 1/5`. Then `A × B` has a measurable proper five-colouring iff `A` does." (or its
+  failure, at a named step)
+- **D3.** "`χ_µ(Γ_{∞₁} × Γ_{∞₂}) = χ_µ(Γ_{∞₁})`" (or the named obstruction)
+- **D4.** "C9's colouring `⌊4θ⌋` over ℚ(√11) is a measurable window four-colouring over `{∞, 7}` that is not a pullback from one
+  factor; and the hexagonal seven-colouring is a measurable window seven-colouring over `{∞₁}` of every real field." (the format's
+  inhabitants)
+
+### P. Registered predictions (before J18 or J21 runs; scored by the close; both outcomes of each confirmed reachable)
+
+| id | prediction | prior | reachable both ways? |
+|---|---|---|---|
+| P-A1 | J18 proves A-T1 (so A-T1′, A-T2) | 0.25 | yes: a proof, or its failure |
+| P-A2 | J18 proves A-C (a counterexample, constructed and exactly checked) | 0.10 | yes: construction is in scope |
+| P-A3 | J18 stalls at a named step with A-K0, A-K1, A-K2 proved | 0.55 | yes |
+| P-A4 | less than P-A3 | 0.10 | yes |
+| P-A5 | given P-A1, the proof holds for every `k ≥ 4` | 0.50 | yes |
+| P-A6 | `[EggletonErdosSkilton1990]`'s aperiodic colourings, if read, all sit in positive-entropy shifts | 0.85 | yes (reading decides) |
+| P-D-a | a measurable window five-colouring of ℚ(√167)'s plane is constructed (**falsifies the conjecture's ≥ 6**; over `{∞₁}` alone it would prove `χ(ℝ²) ≤ 5`) | 0.02 | yes, by construction |
+| P-D-b | a full no over every finite `S` (would prove `χ_µ(ℝ²) ≥ 6`) | 0.03 | yes |
+| P-D-c | D0 and D1 with at least one named gap closed, and D2 proved | 0.20 | yes |
+| P-D-d | D0 and D1 with gaps named; D2 not proved, its obstruction named | 0.55 | yes |
+| P-D-e | less than P-D-d | 0.20 | yes |
+| P-D-3 | D1-3 holds (3 is split at ℚ(√167)) | 0.95 | yes (a one-line check) |
+| P-D-2 | the dyadic split places' ratio is shown `< 1/5` (C14.2 (c) at `p = 2`) | 0.60 | yes |
+| P-D-43 | 43's all-levels ratio shown `< 1/5` by hand this crunch | 0.10 | yes |
+
+**Scoring rule, fixed now (M44):** a prediction is scored on the committed claim list and the verifier's verdicts, never on a record's
+prose; a GAP verdict on the deciding step scores the claim as not landed.
