@@ -673,3 +673,186 @@ No quotation in the brief is wrong. One precision (row 7) is logged as an owner 
 - **Independence recorded per entry.** Two derivations (or two tools) for 38 of the 46; one mind for J20-CUT, J22-T10, J22-T8 (a classical
   bound re-derived) and J18-EQ's second clause; single tools runs for J18-CTL, J18-DPR (each partly confirmed by J20), J19-CTL and
   J20-NAMED; M3-CHK23 pending.
+
+### Stage 3 — SAVED (the re-reads, G72's count, the predictions, the verdict, the tallies, the ban measurement, the close's prior-art gate)
+
+#### R3.1 §G re-read — which extractions paid, which entry should have borne
+
+**Paid (Q1).** G46 (name it: one-dimensional SFT) gave the whole frame — F3's "countable ⟺ zero entropy ⟺ all phases single cycles" and
+J18-DC's move from `D` to single colourings. G13/G42 gave K0, proved in a stronger local form (K0loc: one rigid phase suffices). G27
+(use every automorphism) is where TW sits: reflection and `S₄` close the achiral case (FS79-T34), and the chiral case stayed exactly the open
+case. G21 was honoured three times: J18's C0 note that T36's 377/377 may measure achirality; J19-AF✗ run on one `D` chosen by a stated rule;
+J20's "the scan's null measures its range". G30 mode 5 (inhabitants: `{1,2,3}`, FS85-dB2, `{1,5,7,10}`) was used by every Q1 job. G51: J19
+launched only on J18's named stall, and **three minds met one wall** (J18 at KE, J19 at KT, J20 at its own step, identified by J20 with J19's
+FW) — G51's licence for a negative is used exactly as far as it reaches: a proved no-go of a *format* (FW is invisible to every Kempe
+argument, J19-FRZ), never a claim that A-T1 is false.
+
+**Paid (Q2).** G54 ("no tight place at five; the count is the only engine") was right about the count and wrong about "only": J21-MX is a
+third engine, **mixing** (`λ*`, both signs of the spectrum), which the plan did not foresee (J21 C0 note (b); §4.4 "not foreseen"). G56/G66
+predicted D1-43's GAP exactly (43's all-levels ratio uncertified, the relaxation banned). G1/G35 aimed D1-2 (the dyadic place split),
+closed by two minds. G24/G43 (integrality gap at the real factor) predicted that no density argument decides Q2-∞ — confirmed by D2's
+GAP-2 and NG2. G22/G29 bounded the scope (polygonal real windows need seven). G48's falsifiable line (P-D-a) did not fire.
+
+**Should have borne and did not (instances for WORKFLOW 3.1).**
+1. **G44/G54's *Do* — "compute the spectrum first" — bore on D2's hypothesis and was read only for tightness.** The plan wrote D2 with a
+   counting hypothesis ("every factor of `B` of measurable independence ratio `< 1/5`"); J21 and J22 each found independently that a
+   selection needs a spectral one (`λ* < 1/4`, the largest non-trivial `|eigenvalue|`, not `λ_min` alone), and NG2 shows ratio alone
+   fails at 125 colours. The spectrum was on the table (G44's Kloosterman eigenvalues) for the sign of `λ_min`; its absolute value was the
+   quantity the pullback needed.
+2. **`[Zhang2012]` Thm 1.8, held and read in full, was applied past its statement** (G50's "held paper" instance in reverse): its
+   MIS-normality is about **maximum** independent sets; the plan's cylinder lemma asked it of any set of density `> β`, and a five-colouring's
+   classes are not maximum (`5m₁ > 1`; J21 §3.6). NG1 and J22-T12 refute the lemma in both readings.
+3. **The prior-art neighbour of the cylinder lemma was not searched:** `[AlonDinurFriedgutSudakov2004]` (maximum and near-maximum
+   independent sets of weak products are cylinders, with stability, by Fourier analysis — found by this close's gate, R3.10) is the
+   discipline's own form of the lemma the plan invented; its stability is near the maximum, which is exactly why a density-`> β` form fails.
+4. **LEDGER § B was read by keyword scan** (plan §X X5, inventory row 27); no § B entry was missed that a record later needed (checked
+   against the records' input lists: FS86-dB-H, FS86-LP, FS86-Cx-C9, C14, FS66-T8, FS79-T6/T34/T35/T36, FS73-T24/T30, FS85-dB1/dB2 — every
+   one was named in the briefs by id).
+
+#### R3.2 §PA sweep — what M3 learned about what its objects ARE
+
+- **Q1.** A four-colouring shift of `G(ℤ, D)` whose phases are all rigid is **Kempe-rich, not frozen** (J19-AF✗, J20-NAMED: no frozen
+  rigid point on any of six named sets); R2 is a statement about **single heteroclinic colourings** (J18-DC), and the Kempe method splits it
+  exactly into **FW** (walls between frozen points: invisible to every Kempe argument) and the rest (KT). → a grokking draft (R4.G, G77).
+- **Q2.** At ℚ(√167) the five-colour window question is **local at twelve places plus ∞**: every other place is invisible (removable
+  without loss, Borel), because what a place contributes to a product colouring is governed by its compact pieces' **mixing constant**, not
+  its independence ratio (MX, TH, RED, NG2). The barrier prime's place is a split place — the count's best factor and a non-mixing one.
+  → folded into G76's draft (R4.G) and FS-64's re-aim.
+- **In the discipline's words:** J21-MX is a spectral (expander-mixing) form of Burr–Erdős–Lovász's `χ(G × K_n) = min(χ(G), n)`, in
+  Borel/measurable form — a positive special case of `[KechrisMarks2020]` Problem 4.23 (their Borel Hedetniemi problem) for pairs with one
+  mixing compact abelian Cayley factor. Its prior-art position is R3.10; a `CLOSED-QUESTIONS.md` entry stays a candidate (a positive special
+  case of an open problem is not an answer to it).
+
+#### R3.3 §IQ re-read and G72's count
+
+- **Q1's structural form** ("what can the space of all proper `k`-colourings of a Cayley graph of ℤ be, as a one-dimensional SFT —
+  countable ⟹ finite?") produced every Q1 result: the equivalences, DC, KC, FRZ/KEF, KT and the FW split are statements about every
+  colouring of the shift, by derivation, with no search. **The invariant it asked for was not found** — none orders phases so that
+  reflection and colour permutations cannot both respect it — and FW is a proof that no Kempe-move invariant can be it. *Came through the
+  structural question: yes; invariant: none known.*
+- **Q2's structural form** ("is every measurable proper `k`-colouring of `A × B` a.e. a pullback from `A` when `B`'s measurable independence
+  ratio is below `1/k`?") was answered **no as posed** (NG1 refutes the cylinder route; NG2 refutes ratio-only schemas at 125 colours) and
+  **yes with mixing in place of ratio** (MX, Borel exactly, measurable into N′). **The invariant it forced is named:** the fibre map's
+  classes above the mixing threshold `λ*/(1 + λ*)` — a spectral invariant of the factor, local in the fibre. *Came through the structural
+  question: yes; invariant: found.*
+- **G72's count:** M3 adds two data points, both through the structural question (Q2's with its invariant). The running number is
+  assigned by the front-page job, which orders M1's (FS-91) and M3's counts; nothing came from a search or a tool extension.
+
+#### R3.4 The predictions, scored once (scoring rule: plan §P — the committed claim list and the verifiers' verdicts; a GAP on the deciding step is "not landed")
+
+| id | prediction | prior | outcome |
+|---|---|---|---|
+| P-A1 | J18 proves A-T1 | 0.25 | not landed |
+| P-A2 | J18 proves A-C | 0.10 | not landed (the one derived candidate keeps a non-rigid phase) |
+| P-A3 | J18 stalls at a named step with A-K0, A-K1, A-K2 proved | 0.55 | **landed** (J18 §3.5; the three lemmas TRUE by J20 blind) |
+| P-A4 | less than P-A3 | 0.10 | not landed |
+| P-A5 | given P-A1, the proof holds for every `k ≥ 4` | 0.50 | not reached (P-A1 not landed); J18 records that no lemma uses `k = 4` |
+| P-A6 | EES's aperiodic colourings sit in positive-entropy shifts | 0.85 | **unscorable** (`[EggletonErdosSkilton1990]` unheld) |
+| P-D-a | a window five-colouring constructed | 0.02 | not landed |
+| P-D-b | a full no over every finite `S` | 0.03 | not landed |
+| P-D-c | D0, D1 with a gap closed, and D2 proved | 0.20 | not landed (D2 GAP on its deciding steps; one gap, D1-2, closed) |
+| P-D-d | D0, D1 with gaps named; D2 not proved, its obstruction named | 0.55 | **landed** (and more: D2p at partial scope, the reduction to twelve places) |
+| P-D-e | less than P-D-d | 0.20 | not landed |
+| P-D-3 | D1-3 holds | 0.95 | **landed** (two minds) |
+| P-D-2 | the dyadic ratio shown `< 1/5` | 0.60 | **landed** (two minds) |
+| P-D-43 | 43's all-levels ratio `< 1/5` by hand | 0.10 | not landed |
+
+**The jobs' C0s** (each scored in its record; summarised): **J18** (§4.3) — A-K0/K1/K2 0.97/0.97/0.98 proved; A-Kq labelled/plain 0.90/0.05
+proved/refuted; A-T1 0.45 open; the stall 0.80 happened; P-J18-DC (non-rigid phase survives, 0.80) met. **J19** (§3.3) — C0-3 (a sharper
+obstruction, 0.80) met; C0-4 (KE refuted, 0.10) half met (a class, no instance); C0-5 (twin-family walls, 0.6) met; **C0-6 (all 94 frozen,
+0.35) lost**; C0-1, C0-2 not met. **J20** (§1.3) — every lemma TRUE as its high prior said; A-Kq (0.55) split as its stated doubt foresaw;
+A-T1 (0.50) GAP; J19-KEF (0.50) TRUE once KE was stated. **J21** (§4.4) — every claim's outcome the expected one; "not foreseen": the partial
+scope is mixing, and it reduces ℚ(√167)'s window question to twelve places. **J22** (§1.3) — every fixed-list verdict the modal one; J21-TH
+(0.55 TRUE, 0.30 FALSE) TRUE.
+
+**Calibration note (G21).** The plan's modal registrations (P-A3, P-D-d) landed; no prediction that landed was scored on prose. The one
+flattering direction to audit: P-D-d is scored "landed" although its companion P-D-c failed only on D2 — checked against J22's verdict
+table (D2(a), D2(b) GAP after B2): the scoring stands.
+
+#### R3.5 The verdict, in four parts
+
+- **The choice.** **Q1 (FS-76 in rank one): not landed** — A-T1 (R2) is open at a named step, reached by three minds; what landed is a
+  verified reformulation (J18-DC: A-T1 is a statement about single heteroclinic colourings), a corrected and verified lemma set (K0loc, AK1,
+  AK2, AKq for the labelled quotient; the plain quotient's rigidity clause false), the Kempe closure theory (KC, ENDS, FRZ, KEF, TW, BIN) and a
+  no-go of a format (FW is invisible to every Kempe argument). **Q2 (FS-64 at five colours over ℚ(√167)): landed in part** — the finite-place
+  count holds everywhere except at 43 (D1 with D1-fac, D1-2, D1-3; two minds), a pullback theorem holds for mixing factors (MX, D2p), and
+  every window question there reduces to at most nine places (RED); D2(a)/(b) stay GAP at two named steps and nothing touches `χ_µ(ℝ²)`.
+  Both headline questions — R2, and a five-colour window no-go over every `S` — are **not landed**. Under Kooshi's rule, every item above is
+  a success of knowledge; the labels score the experiment only.
+- **The alternative weighed.** Label Q2 "not landed", because its deciding claim (D2(a)) is GAP. It would have been the more austere
+  reading.
+- **Why this one.** The plan registered the partial outcome (P-D-d, 0.55) as modal *before* any job ran, and scored claims, not labels;
+  what landed beyond it (D2p, MX, RED) is verified by a second mind. Saying "landed in part" with the unlanded parts named keeps both facts
+  visible; "not landed" would hide verified theorems, "landed" would hide D2's GAP.
+- **Confidence: high** on every grade and status (two derivations on 38 of 46 entries, `plans/M3-derivation.md`). **Medium** on "in part"
+  as the right size: if the prior-art gate's unread neighbours (`[AlonDinurFriedgutSudakov2004]`, Tardif–Wrochna 2019, Godsil–Roberson–Rooney
+  2020) hold MX's finite form, Q2's own content shrinks to the place count and the reduction.
+
+#### R3.6 The honesty tally (every owner error and agent slip in the inventory, and the owner's rulings)
+
+| who | slip or error | inventory row |
+|---|---|---|
+| owner | the J06 brief's "FS79 T30" for FS73-T30, and "Ellenberg2018's question" for the inheritance question | 1 |
+| owner | gave Kooshi the 1985 title for the 1990 DOI | 39 |
+| J06 (planner) | A-Kq's one-line proof (fails at windows of ≤ 2 colours); "A-K2 is FS86-dB-H's rank-one form" (only left-gap-free); the cylinder lemma (false); `[KechrisMarks2020]` "§4.7" for §5.1 Ex. 5.1; the J22 brief's truncated CL1 grade; no "Theorems this phase proved" heading | 9, 10, 20, 19, 57, 28 |
+| J19 | read two withheld passages through over-wide `sed` ranges (logged by itself); a positive control asserting a false claim (caught because it failed); a registration commit that lost a git-lock race to its run | 34 |
+| J20 | a strand-swap lift sign error, caught by the properness requirement before any verdict used it | 46 |
+| J21 | five headline scopes wider than their bodies (SL's σ-compactness, D1-43p's two clauses, NG1's intermediate bound, NG2's scope and grade) and one display truncating an upper bound; each body right; corrected by J22 | 49 |
+| J22 | `--mem 8` under-declared (exit 137 at step 6/7, explained); a plant that first fired for the wrong reason, re-planted | 55, 58 |
+
+**Owner rulings logged:** J20/J22 keep their verified-input lists (row 6); J19 aimed at A-T1 itself, KE a route (row 35); J20 and J22 given
+J19's and J21's statements verbatim as extra blind claims, and the exact check at 59 (row 36); J22 stopped at ≈ 406k and resumed as J22b
+(row 54); J20's residue step waits for 2026-10-01 (row 60). **Tool defects:** none shipped (J20's sign error never reached a verdict).
+**What the verifiers caught that the derivers had not:** the `N` of J19-KC; J21's five headline scopes; 59's grade; A-Kq's `D = {1,2}`
+companion. **What no one caught until the close:** nothing that changes a verdict.
+
+#### R3.7 The budget tally (harness counts where reported)
+
+| job | harness | own | source |
+|---|---|---|---|
+| J06 | ≈ 484k | — | inventory row 7 |
+| J18 | 402k (task notification) / ≈ 230k (its report) | ≈ 120k | row 40; `reports/J18.md` — the two sources disagree; both filed |
+| J19 | 386k (task notification) / ≈ 230k (its report) | ≈ 215k | row 40; `reports/J19.md` — likewise |
+| J20 | ≈ 400k | ≈ 215k | `reports/J20.md` |
+| J21 | ≈ 460–468k (past the 420k line) | — | `reports/J21.md`; row 40 |
+| J22 / J22b | ≈ 406k at the owner's stop / not reported | — / ≈ 190k | the record's Handover; `reports/J22.md` |
+
+#### R3.8 The ban measurement
+
+**Would-have-searched lines across M3: 32** — J06 5 (X1–X5), J18 5 (W1–W5), J19 5 (W1–W5), J20 5 (three in B1, two in B2), J21 6
+(W1–W6), J22 6. **Run as searches: none.** J21's W6 was run as a prior-art query, not a witness search.
+
+**At the ban's edge (in, logged by their authors):**
+1. J19's complete enumeration of the window-state graph of `X₄({2,6,11,13,14})` (94 phases, 2.0 s), one `D` chosen by a stated rule before
+   the run (J19 §1.5, §2.6) — the brief's "94 rigid points".
+2. J18's one derived check `D′ = D_c(40) = {1,5,7,10,13,27,33}`, `M` fixed by the derivation and the outcome registered first (J18 §3.4);
+   the plan's X2 had anticipated it.
+3. The complete recomputations of named sets: J18-CTL and J19-CTL on `{1,5,7,10}`; J20-NAMED on six named sets; J20's `{1,3,6,9}`, a set
+   derived by hand before its one check.
+4. J22's two-point (Delsarte) LP bound on `α(F)` for Exoo's circulant — "a relaxation of fixed shape, seconds (in, logged)" (J22 §1.4).
+5. Exact spectra and FFTs of graphs fixed by the statements (J21's tools, J22-T1/T2), and the FS-66 checker re-run (an existing checker on
+   an existing certificate).
+
+**Declined at the edge:** J20's first exact step toward A-C (the admissible residues mod 20 of T30's rigid–rigid walls; J20 §3.4) —
+**the owner ruled it waits for 2026-10-01** (inventory row 60).
+
+**What the ban cost, named:** D1-43 (FS-66's relaxation at 43, 84 GPU-days, would settle `B₁(43) < 369.8` or not); an instance for KE♯/FW
+(a search for a frozen rigid–rigid wall); A-C's construction route (the residue step, then completions); `κ < 1/5` at the non-thick places
+(finite questions). **What it did not cost:** no stall was one a search would have closed with certainty; R2's truth is not a finite
+question at any known size.
+
+#### R3.9 The FS-66 checker re-run at 23
+
+Pending at this save (steps 1–4 of 7 passed at 18:29). Filed in the next stage's section when the log reads `exit=<code>`.
+
+#### R3.10 The close's prior-art gate (WORKFLOW 3.2, zbMATH API for discovery; queries and hits in `data/m3/j23c/`)
+
+*Time-boxed; every negative measures its query's words (G21).*
+
+| result | queries (this gate, beyond J06's §PA and J21's §3.7) | found | position |
+|---|---|---|---|
+| J21-MX (spectral Burr–Erdős–Lovász; Borel/measurable) | zbMATH: `Hedetniemi & eigenvalue` (1), `& Cayley` (5), `& holds` (14), `& circulant` (4), `& Kneser` (10), `multiplicative & Hedetniemi` (10), `direct product & chromatic number & eigenvalue` (0), `categorical product & chromatic & spectral` (0), `Borel chromatic number` (31), `Borel & Hedetniemi` (0), `measurable & categorical product` (0), `measurable chromatic number & product` (0); two web searches | nothing on point. **Nearest printed relatives, unread:** `[AlonDinurFriedgutSudakov2004]` (GAFA 14; zbMATH 1056.05104: maximum and near-maximum independent sets of weak products of spectral base graphs are induced by the base, with stability, by Fourier analysis — the discipline's form of the planner's cylinder lemma); Tardif–Wrochna 2019 (*Hedetniemi's conjecture and strongly multiplicative graphs*, zbl 1427.05090; review withheld); Godsil–Roberson–Rooney 2020 (*Vector coloring the categorical product of graphs*, zbl 1442.05056); Kechris–Solecki–Todorčević 1999 (definable Hedetniemi applications). `[KechrisMarks2020]` §4.6: "We do not know any other results along these lines." | **not found by these searches**; "new" waits on ADFS and Tardif–Wrochna being read (a prior-art debt, R4.B) |
+| J21-TH, J21-RED (thick places; the reduction) | `p-adic & chromatic number & measurable` (0), `adelic & chromatic` (0, off-topic) | nothing | not found by these searches |
+| J22-T10 | not searched as new | the equality case of the Hoffman bound is classical (Hoffman; Haemers); T10 specialises it to FS-66's relaxation `B₁` | classical in substance |
+| J18-DC, J19-KC/KT/FRZ (rank-one colouring shifts, Kempe moves) | `Kempe & periodic` (1), `Kempe & frozen` (4, recolouring Hadwiger), `Kempe equivalence` (16), `Kempe & lattice` (18, off-topic), `shift of finite type & coloring` (4), `distance graph & entropy` (0), `distance graph & aperiodic` (1: EES 1990); one web search | nothing on point. Nearest: `[EggletonErdosSkilton1990]` (unread, unheld — the one printed statement on aperiodic `χ(D)`-colourings of `G(ℤ, D)`); `[MoharSalas2009]` (Kempe classes of colourings of periodic lattices; a listing row); `[AbrishamiEtAl2025]` (existence of periodic colourings; held) | not found by these searches |
+| J21-NG2's external input | fetched `[Zhu2021]` (X. Zhu, *Relatively small counterexamples to Hedetniemi's conjecture*, JCTB 146 (2021) 141–150, doi 10.1016/j.jctb.2020.09.005, arXiv:2004.09028, Zbl 1457.05095) to `~/source/library/pdf/arXiv-2004.09028-zhu-relatively-small-counterexamples-hedetniemi.pdf`; read: §3's Theorem 3 statement and construction, §4's remark on `p` | Theorem 3, verbatim: "`χ(G), χ(H) > c` and `χ(G × H) ≤ c`", with `G = F[K_q]`, `q ≥ (p − 1)/2`, `c = 3q + 2`, `F` of odd girth 7 and `χ_f(F) > 3 + 4/(p − 1)`; §4: "Geoffrey Exoo found an odd girth 7 graph G on 83 vertices and with independence number 27. This implies that `χ_f(G) > 3.074`. So `p ≤ 83`" and "For `p = 83`, we have `q = 41` and `c = 125`" | NG2's input confirmed in print first-hand: `H → K₁₂₅^{F[K₄₁]}`, so `χ(A) ≥ χ(H) > 125`. **Still external:** `α(F) = 27` (Exoo's search, cited as personal communication) and the identification of Exoo's graph with the circulant (from `[Zhu2025]`); Theorem 3's proof not read |

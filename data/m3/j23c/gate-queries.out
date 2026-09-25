@@ -1,0 +1,174 @@
+QUERY 'ab:"Hedetniemi" & ab:"eigenvalue"': 1 hits
+  2020 | Wang, Long; Yan, Chunyu; Fang, Xianwen | Vertex-connectivity, chromatic number, domination number, maximum degree and Laplacian eigenvalue distribution |  | zbl 1458.05159
+
+QUERY 'ab:"Hedetniemi" & ab:"Cayley"': 5 hits
+  1997 | Hahn, Geňa; Tardif, Claude | Graph homomorphisms: Structure and symmetry |  | zbl 0880.05079
+  1979 | Cockayne, E. J. | Disjoint cliques in coset graphs |  | zbl 0425.05030
+  2022 | Tardif, Claude | Counterexamples to Hedetniemi's conjecture with large fractional chromatic numbers |  | zbl 1498.05107
+  1995 |  | Graph theory, combinatorics, algorithms and applications. Vol. 1. Proceedings of the seventh quadrennial inter |  | zbl 0834.00037
+  1989 |  | Graph theory and its applications: East and West. Proceedings of the first China-USA international conference, |  | zbl 0788.00046
+
+QUERY 'ab:"direct product" & ab:"chromatic number" & ab:"eigenvalue"': None hits
+
+QUERY 'ab:"tensor product" & ab:"chromatic number" & ab:"expander"': 1 hits
+  1999 |  | Combinatorics, graph theory, and algorithms. Vol. I, II. Proceedings of the 8th quadrennial international conf |  | zbl 1024.00517
+
+QUERY 'ab:"categorical product" & ab:"chromatic" & ab:"spectral"': None hits
+
+QUERY 'ab:"Hedetniemi" & ab:"holds"': 14 hits
+  1985 | Duffus, D.; Sands, B.; Woodrow, R. E. | On the chromatic number of the product of graphs |  | zbl 0664.05019
+  1998 | Zhu, Xuding | A survey on Hedetniemi's conjecture |  | zbl 0906.05024
+  1985 | El-Zahar, M.; Sauer, N. W. | The chromatic number of the product of two 4-chromatic graphs is 4 |  | zbl 0575.05028
+  2019 | Shitov, Yaroslav | Counterexamples to Hedetniemi's conjecture |  | zbl 1451.05087
+  2020 | Godsil, Chris; Roberson, David E.; Rooney, Brendan | Vector coloring the categorical product of graphs |  | zbl 1442.05056
+  2010 | Simonyi, Gábor; Zsbán, Ambrus | On topological relaxations of chromatic conjectures |  | zbl 1221.05098
+  2021 | Simonyi, Gábor | Shannon capacity and the categorical product |  | zbl 1459.05092
+  2008 | Sameena, K.; Sunitha, M. S. | A characterization of \(g\)-selfcentered fuzzy graphs |  | zbl 1185.05049
+  2011 | Špacapan, Simon | The \(k\)-independence number of direct products of graphs and Hedetniemi's conjecture |  | zbl 1284.05204
+  2010 | Kimura, Kenji; Koyama, Masayuki; Saito, Akira | Small alliances in a weighted graph |  | zbl 1215.05125
+  2022 | Samadi, Babak; Soltankhah, Nasrin; Mojdeh, Doost Ali | Revisiting \(k\)-tuple dominating sets with emphasis on small values of \(k\) |  | zbl 1497.05211
+  2026 | Matsumoto, Naoki; Ohno, Yumiko | The achromatic number and the pseudoachromatic number of caterpillars |  | zbl None
+  2026 | Barik, Sasmita; Jena, Pragati Asutosh | Classification of unicyclic graphs by Laplacian eigenvalue distribution and domination number |  | zbl 1586.05059
+  2019 | Severín, Daniel E. | Formalization of the domination chain with weighted parameters (short paper) |  | zbl None
+
+QUERY 'ab:"Hedetniemi" & ab:"circulant"': 4 hits
+  2002 | Zhu, Xuding | The fractional chromatic number of the direct product of graphs |  | zbl 0995.05052
+  2009 | Xueliang, Fu; Yuansheng, Yang; Baoqi, Jiang | Roman domination in regular graphs |  | zbl 1183.05063
+  1995 |  | Graph theory, combinatorics, algorithms and applications. Vol. 1. Proceedings of the seventh quadrennial inter |  | zbl 0834.00037
+  1991 |  | Graph theory, combinatorics, and applications, Vol. 1. Proceedings of the sixth quadrennial international conf |  | zbl 0831.05002
+
+QUERY 'ab:"Hedetniemi" & ab:"Kneser"': 10 hits
+  1997 | Hahn, Geňa; Tardif, Claude | Graph homomorphisms: Structure and symmetry |  | zbl 0880.05079
+  2016 | Hajiabolhassan, Hossein; Meunier, Frédéric | Hedetniemi's conjecture for Kneser hypergraphs |  | zbl 1342.05094
+  2000 | Larose, Benoit; Tardif, Claude | Hedetniemi's conjecture and the retracts of a product of graphs |  | zbl 0996.05065
+  2010 | Simonyi, Gábor; Zsbán, Ambrus | On topological relaxations of chromatic conjectures |  | zbl 1221.05098
+  2002 | Tardif, Claude; Zhu, Xuding | The level of nonmultiplicativity of graphs |  | zbl 0995.05062
+  2018 | Alishahi, Meysam; Hajiabolhassan, Hossein | Chromatic number of random Kneser hypergraphs |  | zbl 1373.05057
+  2023 | Daneshpajouh, Hamid Reza; Karasev, Roman; Volovikov, Alexey | Hedetniemi's conjecture from the topological viewpoint |  | zbl 1505.05054
+  2002 | Zhu, Xuding | The fractional chromatic number of the direct product of graphs |  | zbl 0995.05052
+  2022 | Shukla, Samir | Neighborhood complexes, homotopy test graphs and an application to coloring of product graphs |  | zbl 1490.05085
+  2018 | Sani, Roya Abyazi; Alishahi, Meysam; Taherkhani, Ali | Coloring properties of categorical product of general Kneser hypergraphs |  | zbl 1497.05097
+
+QUERY 'ab:"multiplicative" & ab:"Hedetniemi"': 10 hits
+  1996 | Duffus, Dwight; Sauer, Norbert | Lattices arising in categorial investigations of Hedetniemi's conjecture |  | zbl 0853.06006
+  1988 | Häggkvist, R.; Hell, P.; Miller, D. J. | On multiplicative graphs and the product conjecture |  | zbl 0657.05028
+  2022 | Tardif, Claude | The chromatic number of the product of 14-chromatic graphs can be 13 |  | zbl 1513.05162
+  1996 | Nowakowski, Richard J.; Rall, Douglas F. | Associative graph products and their independence, domination and coloring numbers |  | zbl 0865.05071
+  2002 | Tardif, Claude; Zhu, Xuding | The level of nonmultiplicativity of graphs |  | zbl 0995.05062
+  2019 | Tardif, Claude; Wrochna, Marcin | Hedetniemi's conjecture and strongly multiplicative graphs |  | zbl 1427.05090
+  2017 | Wrochna, Marcin | Square-free graphs are multiplicative |  | zbl 1350.05074
+  2021 | Simonyi, Gábor | Shannon capacity and the categorical product |  | zbl 1459.05092
+  2021 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | zbl 1473.05097
+  2021 |  | 2019--20 MATRIX annals |  | zbl 1459.37002
+
+QUERY 'ab:"Borel chromatic number"': 31 hits
+  2021 | Todorčević, Stevo; Vidnyánszky, Zoltán | A complexity problem for Borel graphs |  | zbl 1547.03314
+  2026 | Ruijun Wang | Borel Kernels in Borel Directed Graphs |  | zbl arXiv:2509.01948
+  1999 | Kechris, A. S.; Solecki, S.; Todorcevic, S. | Borel chromatic numbers |  | zbl 0918.05052
+  2015 | Di Prisco, Carlos A.; Todorčević, Stevo | Basis problems for Borel graphs |  | zbl 1451.05078
+  2023 | Márk Poór; Saharon Shelah | On the weak Borel chromatic number and cardinal invariants of the continuum |  | zbl arXiv:2302.10141
+  2018 | Simon, Robert Samuel; Tomkowicz, Grzegorz | A Bayesian game without \(\epsilon\)-equilibria |  | zbl 1417.91027
+  2007 | Boaz Tsaban | SPM Bulletin 22 |  | zbl arXiv:0709.0420
+  2011 | Geschke, Stefan | Weak Borel chromatic numbers |  | zbl 1209.03041
+  2021 | Carroy, Raphaël; Miller, Benjamin D.; Schrittesser, David | Minimal definable graphs of definable chromatic number at least three |  | zbl 1498.03103
+  2022 | Raiean Banerjee; Michel Gaspar | Borel chromatic numbers of locally countable $F_\sigma$ graphs and forcing with superperfect trees |  | zbl arXiv:2208.07764
+  2021 | Pikhurko, Oleg | Borel combinatorics of locally finite graphs |  | zbl 1504.03027
+  2011 | Miller, B. D. | Dichotomy theorems for countably infinite dimensional analytic hypergraphs |  | zbl 1260.03091
+  2016 | Seward, Brandon; Tucker-Drob, Robin D. | Borel structurability on the 2-shift of a countable group |  | zbl 1403.03090
+  2014 | Conley, Clinton T.; Miller, Benjamin D. | An antibasis result for graphs of infinite Borel chromatic number |  | zbl 1351.03037
+  2026 | José de Jesús Pelayo Gómez | The measure half of the $2n+1$ problem |  | zbl arXiv:2609.19038
+  2006 | Di Prisco, C. A.; Todorcevic, S. | Canonical forms of shift-invariant maps on \([\mathbb N]^{\infty}\) |  | zbl 1116.05086
+  2022 | Michel Gaspar; Stefan Geschke | Borel chromatic numbers of closed graphs and forcing with uniform trees |  | zbl arXiv:2208.06914
+  2008 | Miller, Benjamin D. | Measurable chromatic numbers |  | zbl 1157.03025
+  2026 | Tonatiuh Matos-Wiederhold | A Concise Proof of the $L_0$ Dichotomy |  | zbl arXiv:2604.02589
+  2024 | Su Gao; Steve Jackson; Edward Krohne | Borel Combinatorics of Abelian Group Actions |  | zbl arXiv:2401.13866
+  2008 | Lecomte, Dominique; Miller, Benjamin D. | Basis theorems for non-potentially closed sets and graphs of uncountable Borel chromatic number |  | zbl 1191.03035
+  2025 | Grebík, Jan; Vidnyánszky, Zoltán | Ramsey, expanders, and Borel chromatic numbers |  | zbl None
+  2020 | Conley, Clinton T.; Jackson, Steve; Marks, Andrew S. | Hyperfiniteness and Borel combinatorics |  | zbl 1468.03057
+  2016 | Lecomte, Dominique; Zelený, Miroslav | Borel chromatic number of closed graphs |  | zbl 1367.03083
+  2024 | Brandt, Sebastian; Chang, Yi-Jun; Grebík, Jan | On homomorphism graphs |  | zbl None
+  2018 | Dominique Lecomte; Miroslav Zeleny | Analytic digraphs of uncountable Borel chromatic number under injective definable homomorphism |  | zbl arXiv:1811.04738
+  2026 | Tonatiuh Matos-Wiederhold | No Countable Basis for Borel Directed Graphs of Dichromatic Number at Least Three |  | zbl arXiv:2604.05228
+  2017 | Bardestani, Mohammad; Mallahi-Karai, Keivan | On a generalization of the Hadwiger-Nelson problem |  | zbl 1360.05050
+  2022 | Barbosa, Keegan Dasilva | Borel colouring bad rays |  | zbl 1552.03083
+  2020 | Bardestani, Mohammad; Mallahi-Karai, Keivan | Polynomial configurations in sets of positive upper density over local fields |  | zbl 1459.05071
+  2021 | Meehan, Connor; Palamourdas, Konstantinos | Borel chromatic numbers of graphs of commuting functions |  | zbl 1529.03239
+
+QUERY 'ab:"measurable chromatic number" & ab:"product"': None hits
+
+QUERY 'ab:"Borel" & ab:"Hedetniemi"': None hits
+
+QUERY 'ab:"measurable" & ab:"categorical product"': None hits
+
+QUERY 'ti:"Graph products, Fourier analysis and spectral techniques"': 1 hits
+  2004 | Alon, N.; Dinur, I.; Friedgut, E. | Graph products, Fourier analysis and spectral techniques |  | zbl 1056.05104
+
+QUERY 'ab:"Kempe" & ab:"periodic"': 1 hits
+  2005 |  | Algorithms -- ESA 2005. 13th annual European symposium, Palma de Mallorca, Spain, October 3--6, 2005. Proceedi |  | zbl 1086.68003
+
+QUERY 'ab:"Kempe" & ab:"frozen"': 4 hits
+  2024 | Bonamy, Marthe; Heinrich, Marc; Legrand-Duchesne, Clément | On a recolouring version of Hadwiger's conjecture |  | zbl 1531.05064
+  2023 | Bonamy, Marthe; Heinrich, Marc; Legrand-Duchesne, Clément | On a recolouring version of Hadwiger's conjecture (extended abstract) |  | zbl 1562.05086
+  2025 | Lucas De Meyer; Clément Legrand-Duchesne; Jared León | A Recolouring Version of a Conjecture of Reed |  | zbl arXiv:2502.10147
+  2013 |  | Proceedings of the 24th annual ACM-SIAM symposium on discrete algorithms, SODA 2013, New Orleans, LA, USA, Jan |  | zbl 1287.68007
+
+QUERY 'ab:"Kempe equivalence"': 16 hits
+  2022 | Goedgebeur, Jan; Östergård, Patric R. J. | Switching 3-edge-colorings of cubic graphs |  | zbl 1491.05078
+  2014 | Belcastro, Sarah-Marie; Haas, Ruth | Counting edge-Kempe-equivalence classes for 3-edge-colored cubic graphs |  | zbl 1288.05081
+  2000 | Mohar, Bojan | Some topological methods in graph coloring theory |  | zbl 1412.05072
+  2009 | Mohar, Bojan; Salas, Jesús | A new Kempe invariant and the (non)-ergodicity of the Wang-Swendsen-Kotecký algorithm |  | zbl 1179.37016
+  2012 | Mcdonald, Jessica; Mohar, Bojan; Scheide, Diego | Kempe equivalence of edge-colorings in subcubic and subquartic graphs |  | zbl 1242.05099
+  2026 | Ohsugi, Hidefumi; Tsuchiya, Akiyoshi | Examining Kempe equivalence via commutative algebra |  | zbl 1582.05106
+  2022 | Khovanov, Mikhail; Robert, Louis-Hadrien | Conical \(\mathrm{SL}(3)\) foams |  | zbl 1492.05034
+  1991 | Parthasarathy, K. R. | Geometric colourings |  | zbl 0785.05041
+  2026 | Ohsugi, Hidefumi; Tsuchiya, Akiyoshi | Kempe equivalence and quadratic toric rings |  | zbl None
+  2023 | Higashitani, Akihiro; Matsumoto, Naoki | Kempe equivalence of almost bipartite graphs |  | zbl 1524.05106
+  2021 | Jin Xu | 55- and 56-configurations are reducible |  | zbl arXiv:2107.05454
+  2024 | Cranston, Daniel W.; Feghali, Carl | Kempe classes and almost bipartite graphs |  | zbl 1547.05091
+  2022 | Van Cleemput, Nico; Zamfirescu, Carol T. | Hamiltonian cycles and 1-factors in 5-regular graphs |  | zbl 1483.05090
+  2013 | Louis-Hadrien Robert | On edge-colorings of bicubic planar graphs |  | zbl arXiv:1312.0361
+  2015 |  | Extended abstracts of the eight European conference on combinatorics, graph theory and applications, EuroComb  |  | zbl 1329.05004
+  2007 |  | Graph theory in Paris. Proceedings of a conference, GT04, in memory of Claude Berge, Paris, France, July 2004 |  | zbl 1098.05001
+
+QUERY 'ab:"Kempe" & ab:"lattice"': 18 hits
+  2008 | Oliveira, Roberto; Terhal, Barbara M. | The complexity of quantum spin systems on a two-dimensional square lattice |  | zbl 1161.81007
+  2010 | Abal, G.; DonAngelo, R.; Marquezino, F. L. | Spatial search on a honeycomb network |  | zbl 1217.68102
+  2008 | Konno, Norio | Quantum walks |  | zbl 1329.82011
+  2001 | Casti, John L. | Mathematical mountaintops. The five most famous problems of all time |  | zbl 0983.00001
+  2002 |  | Implementation and application of automata. 6th international conference, CIAA 2001, Pretoria, South Africa, J |  | zbl 1007.00059
+  2001 |  | Proceedings of the thirty-third annual ACM symposium on theory of computing, STOC 2001. Hersonissos, Crete, Gr |  | zbl 1074.68500
+  2005 |  | Proceedings of the sixteenth annual ACM-SIAM symposium on discrete algorithms, SODA 2005, Vancouver, BC, Canad |  | zbl 1073.68886
+  2019 |  | Computing and combinatorics. 25th international conference, COCOON 2019, Xi'an, China, July 29--31, 2019. Proc |  | zbl 1416.68009
+  2004 |  | Proceedings of the 36th annual ACM symposium on theory of computing, STOC 2004. Chicago, IL, USA, June 13--15, |  | zbl 1074.68504
+  2008 |  | Proceedings of the 40th annual ACM symposium on theory of computing, STOC 2008. Victoria, Canada, May 17--20,  |  | zbl 1147.68001
+  2010 |  | Proceedings of the 42nd annual ACM symposium on theory of computing, STOC '10. Cambridge, MA, USA, June 5--8,  |  | zbl 1257.68016
+  2013 |  | Proceedings of the 24th annual ACM-SIAM symposium on discrete algorithms, SODA 2013, New Orleans, LA, USA, Jan |  | zbl 1287.68007
+  2006 |  | Proceedings of the 38th annual ACM symposium on theory of computing, STOC 2006. Seattle, WA, USA, May 21--23,  |  | zbl 1122.68300
+  2008 |  | Proceedings of the nineteenth annual ACM-SIAM symposium on discrete algorithms, SODA 2008, San Francisco, CA,  |  | zbl 1190.68002
+  2003 |  | Proceedings of the 44th annual IEEE symposium on foundations of computer science, FOCS 2003, Cambridge, MA, US |  | zbl 1568.68003
+  2004 |  | Proceedings of the 45th annual IEEE symposium on foundations of computer science, FOCS 2004, Rome, Italy, Octo |  | zbl 1568.68002
+  2007 |  | Complex effects in large eddy simulations. Papers of a symposium, Lemesos (Limassol), Cyprus, September 21--24 |  | zbl 1104.76028
+  2002 |  | Proceedings of the 43rd annual IEEE symposium on foundations of computer science, FOCS 2002, Vancouver, Canada |  | zbl 1568.68006
+
+QUERY 'ab:"shift of finite type" & ab:"coloring"': 4 hits
+  2016 | Holroyd, Alexander E.; Liggett, Thomas M. | Finitely dependent coloring |  | zbl 1361.60025
+  1994 | Jonoska, Nataša; Marcus, Brian | Minimal presentations for irreducible sofic shifts |  | zbl 0841.58020
+  2019 | Ban, Jung-Chao; Chang, Chih-Hung | Complexity of neural networks on Fibonacci-Cayley tree |  | zbl 1427.37012
+  2017 | Jung-Chao Ban; Chih-Hung Chang | Coloring Fibonacci-Cayley tree: An application to neural networks |  | zbl arXiv:1707.02227
+
+QUERY 'ab:"distance graph" & ab:"entropy"': None hits
+
+QUERY 'ab:"distance graph" & ab:"aperiodic"': 1 hits
+  1990 | Eggleton, R. B.; Erdős, Paul; Skilton, D. K. | Colouring prime distance graphs |  | zbl 0698.05033
+
+QUERY 'ab:"p-adic" & ab:"chromatic number" & ab:"measurable"': None hits
+
+QUERY 'ab:"adelic" & ab:"chromatic"': 3 hits
+  2022 | Balchin, Scott; Greenlees, John; Pol, Luca | Torsion models for tensor-triangulated categories: the one-step case |  | zbl 1511.55013
+  2025 | Scott Balchin; J. P. C. Greenlees; Luca Pol | Torsion models for tensor-triangulated categories |  | zbl arXiv:2501.05180
+  2024 | Ayala, David; Mazel-Gee, Aaron; Rozenblyum, Nick | Stratified noncommutative geometry |  | zbl 1566.14001
+
+QUERY 'au:"Zhu, Xuding" & py:2021 & ab:"Hedetniemi"': 2 hits
+  2021 | Zhu, Xuding | Relatively small counterexamples to Hedetniemi's conjecture |  | zbl 1457.05095
+  2021 | Zhu, Xuding | Note on Hedetniemi's conjecture and the Poljak-Rödl function |  | zbl 1484.05079
+
