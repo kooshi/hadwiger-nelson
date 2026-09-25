@@ -509,3 +509,61 @@ Stop at 350k harness (hand back by 420k), or at a verdict per claim saved.
 at `k = 6` and `k = 7` the excluded traces are `|t| ≤ 3`, and no `c` makes `−4c, 1 − 4c, 4 − 4c, 9 − 4c` all non-zero squares mod 23 (`c`
 must be a non-square since `−1` is; the 11 non-squares each fail); at `k = 8` (`|t| ≤ 2`) exactly `c ∈ {11, 20, 21}` pass — matching row
 69's verified eight-colour ceiling at 23. Hence P-W6's weight sits on 43 (a heuristic `21/2⁷` expected passing classes at `k = 6`).
+
+## Stage 5 — SAVED (§M the modeling passes, §X the log; the briefs are separate files)
+
+### §M.1 `debruijn-domain-modeling` (invoked fresh with the Skill tool; applied to §S's statements)
+
+- **The band's `k` is incidental; the intrinsic parameter is the arc.** The peeling lemma holds for every closed symmetric arc
+  `B_β = [β, 1 − β]`, `0 < β ≤ ½` (its complement is an arc about 0; the argument reads only `‖·‖`). So the statements take `β`, and the
+  sharp invariant is the **lonely-runner parameter** `κ(G, S) = max{β : some character λ has λ(S) ⊆ B_β}` (compactness makes it a
+  maximum); `χ_char = ⌈1/κ⌉`. **CLG in its converged form: `κ(R_F, U_F) = max over stable places 𝔓 of κ(O_𝔓, S_𝔓)`, under `H_β` for the
+  `β` in question.** SIX-b and SIX-c become computations of one number per target, `κ(Γ_q) = max_c min_{t ∈ V_c} |t|/q`, not yes/no lists
+  per `k` (J08's brief states both).
+- **The level index `m` is incidental to CLG.** Characters of the completed local ring `O_𝔓` that are continuous have finite level, so
+  "the local target at `𝔓`" is the pair `(O_𝔓, S_𝔓)` with continuous characters and the index disappears from the theorem; level collapse
+  (CLG-e) becomes a separate lemma computing local `κ` from level one when `p > 1/(2β)`.
+- **The archimedean factor is a place like the others.** Real places `(ℂ, S¹)` and complex places (`F_w(i) ≅ ℂ²`, norm-one group `≅ ℂ^×`)
+  both have local `κ = 0`: every real-linear character takes values near 0 on the local norm-one group (an interval about 0 at a real
+  place; all of ℝ or 0 at a complex one). So CLG-d dissolves into CLG-c (joint density at the archimedean places too) plus "archimedean
+  `κ = 0`" — which answers J02's warning (§2.8) by a different route than compactness, and is P-CM's content.
+- **Unsampled members:** `F = ℚ` (the only stable place is the ramified `(1 + i)`, local `κ = ½`, `θ₂`); a field with no stable dyadic
+  place and every usable `q` large (ℚ(√167), K(√7)); a real field with complex places (ℚ(α, √7)). **Adversarial member of the peeling
+  lemma:** two factors both outside `B_β` — excluded by the lemma itself (peel either one and the other must lie inside), so the survivor
+  exists but need not be unique; the statement says "some", never "exactly one".
+- **The next lemma, predicted:** `κ(F′) ≤ κ(F)` for `F ⊆ F′` (restriction) — in the model it reads as "a larger field's stable places lie
+  over the smaller field's with smaller or equal local `κ`", and J07 should check that CLG reproduces it.
+
+### §M.2 `debruijn-obligation-modeling` (invoked fresh; the proof trees the briefs hand on)
+
+**CLG (⟹), the statement from which it derives: the `n`-fold peeling lemma** — "if `X_1 + ⋯ + X_n ⊆ B_β` with each `X_j` symmetric and
+non-empty, then some `X_j ⊆ B_β`", by induction on `n` (peel `X_1` if it leaves `B_β`, else stop; the rest's sum stays in `B_β`; CLG-b is
+the step, needing only the peeled set symmetric). The tree:
+1. **Input** — `H_β` gives `θ = τ + ψ`, `τ` of finite order `N`, `ψ` a real functional (row 95 and the gluing).
+2. **The finite quotient** — `A = R_F/NR_F` is a finite ring, `A = ∏_𝔪 A_𝔪` over its maximal ideals (CRT), so `τ = Σ_𝔪 τ_𝔪`. **The
+   obligation that carries arithmetic:** which `𝔪` occur (stable primes of `L` above `N`, under Lemma R's scope; in general, what J02-L2
+   says) and what `A_𝔪` is.
+3. **Joint image** — the image of `U_F` in `A` contains a product `∏_𝔪 N_𝔪` of local norm-one images (J02-L3's Hilbert-90 lift does the
+   reduced level; the nilpotent levels are the new step), and every fibre of `U_F → A` is dense in `∏_{w | ∞} T(F_w)` (weak approximation
+   for the rational torus; a finite-index subgroup of a dense subgroup of a connected group is dense).
+4. **The sumset** — so the closure of `θ(U_F)` contains `Σ_𝔪 τ_𝔪(N_𝔪) + Σ_w ψ_w(T(F_w))`; each set symmetric (`−1 ∈ U_F`), each
+   archimedean one containing 0.
+5. **Peel** — by the `n`-fold lemma some `τ_𝔪(N_𝔪) ⊆ B_β`; it is not archimedean. So `τ_𝔪` is a band character of the local target.
+6. **Controls** — `θ₂`, `[Fischer1994]`, C9, row 96, J02-T1.
+**Level collapse (CLG-e)**, by induction down the radical filtration of `A_𝔪`: if `τ_𝔪` is non-zero on the last non-zero power `J^r`, the
+norm-one elements `1 + x`, `x` in the anti-invariant line of `J^r/J^{r+1}`, rotated by some circle element `s` with `τ(s·line) ≠ 0`, sweep
+`τ(s)` through a full coset of `(1/p)ℤ/ℤ`, which meets `(−β, β)` when `p > 1/(2β)`; so `τ_𝔪` kills `J^r`, and down to the residue field.
+At `p = 2` the step is ½ and the collapse stops (Fischer's level 3 at `k = 4`); at `p = 3` and `β ≤ 1/6` likewise.
+**SIX-a** is two lines (a line `Tr(ax) = t` meets the circle iff `X² − tX + c` has roots of norm `c`, i.e. a non-square or zero
+discriminant); SIX-b and SIX-c are complete lists over sets the reduction and an explicit Weil threshold fix. **ONE-a** is a construction
+(S0B-T3's heteroclinic at a general `p`; the lens `√2/6 < 1/4` is `p`-free, the step rule is not). **ONE-b** reduces to one construction
+and one lemma: a minimal set meeting `T + A` is a leaf circle, so a counterexample is a switching character with bounded run lengths in
+both directions that is uniformly recurrent; the obligation is whether S0B-T5's tree admits switches at bounded gaps.
+
+### §X. The planner's "would have searched here" log
+
+- **§P.basis:** would have run a script over `c` at `q = 23` for bands 1/6–1/8; instead evaluated the four quadratic-residue conditions by
+  hand for the 11 non-squares (a derivation-fixed set of 11, done by hand, logged as the ban's edge; its tool form is J08's).
+- **Question 1:** would have sampled random band characters of small rings to look for a two-place counterexample to the peeling; instead
+  derived the peeling lemma (§M.2), for which none can exist.
+- **§PA:** zbMATH discovery queries only (the gate's instrument, not a witness search).
