@@ -664,3 +664,166 @@ Kooshi's ruling (inventory item 17).
 - V: `plans/FS89-S1V-verification.md` (C0 predictions; one section per statement or claim, each quoted verbatim; the divergence table
   after each committed verdict; "Theorems this phase proved"; the log). Tools `tools/fs89_s1v_*.py`, data `data/fs89/s1v/`.
 - Every record: grades per `CLAUDE.md` § Notation; each result at its exact scope.
+
+## §C. The two briefs' text (ready to paste; the owner adds the persona line, the scratch path and the date)
+
+### C.1 The derivation agent's brief (D)
+
+> Hello. You are this project's derivation agent for milestone FS-89, Stage 1, in the Lean 4 Hadwiger–Nelson workspace
+> `/home/kooshi/source/lean-dir`. Your identity and standard are `DEBRUIJN.md`; the house rules are `CLAUDE.md` and `WORKFLOW.md`. Read
+> all three from disk: any copy in your context is a snapshot. I'm the product owner; I coordinate and review by artifact. The plan is
+> `plans/FS89-rational-band-rigidity.md`; read §0, §PA and §IQ first, then §S. One blind verifier works beside you on the same statements;
+> there is no competition and no advisor.
+>
+> **The question.** Let `Q = ℤ[i][1/p : p ≡ 1 (mod 4)]`, the ring the rational unit vectors generate, and for a finite set `S` of such
+> primes let `R_S = ℤ[i][1/p : p ∈ S]` with unit vectors `U_S = ⟨i⟩ × ⟨w_p : p ∈ S⟩`, `w_p = π_p/π̄_p`. A **band character** at four
+> colours is a character `θ` with `θ(u) ∈ [1/4, 3/4]` for every unit vector `u`. The target, quoted from the plan's §0.2:
+> "**RQ₄**: `Θ₄(Q) ⊆ T + A`" (torsion characters plus archimedean ones `x ↦ Re(ē x) mod 1`). It is equivalent to the same statement over
+> every subfield of ℝ (S0A-10), and it would give HD1 for ℚ(√59), ℚ(√83), ℚ(√131) and exclude every character four-colouring of
+> ℚ(√47)'s plane (S0A-6, S0A-8). At one prime it is false: `Θ₄(ℤ[i][1/5])` contains heteroclinic and switching characters that are
+> not `T + A` (S0B-T3–T5).
+>
+> **Your questions, in order** (quoted from §S.2; you may re-order with a logged reason, and I may redirect after Stage 1a):
+> - **D-0.** "Read `[Berend1984min]` in full (held), Haynes–Munday §1, S0B's record and `tools/fs89_s0b_orbits.py`; write the rank-two
+>   orbit model (arrays `e_m`, `m ∈ ℤ²`, one step rule per prime, the gluing across both directions)."
+> - **D-1a.** "Is every `U_S`-minimal closed subset of `Θ₄(R_S)` contained in `T + A`, for every finite `S` with `|S| ≥ 2` (first
+>   `S = {5, 13}`)? Prove it — the route to test first is Berend's Prop. 4.1 with the archimedean plane in place of the strictly
+>   contracted subspace — or name the step that fails and why."
+> - **D-1b.** "At `S = {5, 13}`: is there a band character of `R_S` whose orbit closure meets two different leaves (a heteroclinic or
+>   switching character)? Either exclude every such character, or exhibit one with exact band checks on a window and a proof that it
+>   persists (S0B-T3–T5's standard)."
+> - **Then (Stage 1b)**, depending on the outcome: **D-2** (RQ₄ over all primes, using weak approximation of the rational circle — the
+>   lever rank two lacks — and U1 only if the verifier has proved it), or **D-C** ("does the rank-two counterexample extend to a band
+>   character of `Q`, adding split primes one at a time with compactness, or does some prime kill it as 13 killed the rational
+>   heteroclinics?"). A counterexample to RQ₄ must read infinitely many split places (S0A-11).
+> - **Optional D-3**, only if D-1 lands early: are there band torsion characters of `ℤ[i][1/5]` of unbounded order? No enumeration beyond
+>   S0B's `N ≤ 130`.
+>
+> **The mathematics you stand on, with addresses.**
+> - Stage 0: `plans/FS89-S0A-gluing-verification.md` (the gluing S0A-2; Lemma N₀ S0A-3, `N = 168` automatic over `Q`; level collapse
+>   S0A-4; finite type S0A-11; one prime cannot bound `N` S0A-12; C3's "natural attack" by weak approximation) and
+>   `plans/FS89-S0B-band-set.md` (the orbit model S0B-T1; leaves and margins S0B-T2; `θ*` S0B-T3; "not `T + A`" S0B-T4; the switching
+>   family S0B-T5; 13 kills rational heteroclinics S0B-T6, one mind; the reading U4 and its killing test in §6).
+> - FS-86: `plans/FS86-derivation.md` §4 (dB-Theta, dB-HDfin = Cx-C10, dB-Sv, dB-HDint, dB-HDcert, Cx-C15) and §9 (C14, CL1).
+> - The three-colour precedent: `plans/FS81-derivation.md` T3 (= C1(5)), T4, T5, T8; `CLAUDE.md` G74.
+> - **The literature the gate found (plan §PA.3), which is the key idea, handed to you in full:** Berend, *Minimal sets on tori* (ETDS 1984;
+>   `~/source/library/pdf/Berend1984-minimal-sets-on-tori.pdf`). Thm 2.1: all minimal sets are torsion iff the semigroup is hyperbolic
+>   and multi-parameter. **Lemma 3.1**: an isometric common eigen-direction carries non-torsion minimal circles (our archimedean leaves),
+>   so the statement to aim at is "modulo the isometric direction", which is why the target says `T + A` and not `T`. **Lemma 3.3**: rank
+>   one has positive-dimensional minimal sets (the phenomenon S0B met). **Prop. 4.1**: for a non-torsion minimal `M`, `M − M` is closed,
+>   invariant, `0` non-isolated; case 1 (small differences with expanding components) forces `M − M` to be everything, contradicting
+>   Furstenberg's Prop. IV.1; case 2 (small differences in the weakly contracting subspace) uses an element contracting it strictly to
+>   produce a periodic point. With the archimedean plane in that subspace, case 2 plausibly gives "periodic modulo the archimedean leaf";
+>   **case 1 at the band, not the whole group, is untested, and its source (Berend 1983 §4) is not held** (AMS blocks scripted fetches;
+>   the owner has asked). Haynes–Munday (arXiv 1303.1661, held): Berend's adelic hypothesis is expansion in every completion,
+>   archimedean included — the one our norm-one action fails. Maucourant (Annals 2010, review only): non-homogeneous orbit closures
+>   arise when a factor behaves like one parameter — the shape a rank-two counterexample would take. Vocabulary: algebraic `ℤ^d`-action,
+>   non-expansive, heteroclinic point (Lind–Schmidt).
+> - The symmetries of `Θ₄`: the `U`-action, complex conjugation (`b₊ ↔ b₋`), negation. The known band points (positive controls for any
+>   classification): parity (margin 1/4), `(x+y)/4` and `(3x+2y)/8` (margin 0), the order-3 characters (1/12), the order-7 character
+>   `(2x+3y)/7` (1/28).
+> - **Not verified, do not lean on them until the verifier has** (plan §0.3): U1 (the layering lemma), U2 (the explicit leaf list), U3,
+>   U4, U5. S0A-3 and S0B-T6 are one mind each; the verifier is re-deriving them.
+>
+> **Scope, quoted from §0.2:** "RQ is about **character** colourings only. A proof of RQ₄ excludes every colouring of the form
+> `x ↦ ⌊4θ(x)⌋` as a falsifier of the conjecture at ℚ(√47) (C-47); it says nothing about `χ(ℚ(√47)²)` itself … A counterexample to RQ₄
+> is a band character of `Q`; it is a **seed** of a falsifier at ℚ(√47), not a falsifier."
+>
+> **Every outcome counts.** Kooshi: *"A proven theorem about why its impossible is also valid. All novel knowledge is a success."* A
+> proof, a counterexample, a sharp statement of which rank suffices, and a named failing step are all results. **Do not lean toward a
+> yes**: this project's recorded failure mode is that defects which flatter the work survive and defects which displease are found
+> within the hour (G21). Audit a proof you like at the rate you would audit a counterexample you dislike.
+>
+> **Stop rules** (§S.3). Stop a question at a saved claim at exact scope (proved or refuted), or at a named failing step with its reason.
+> Budgets: D-0 ≤ 40k tokens, D-1a ≤ 150k, D-1b ≤ 120k, D-2/D-C ≤ 150k, total ≤ 420k; at the total, hand back with the record saved.
+> KT-2: if Berend's route breaks, name the step by 2026-09-27.
+>
+> **The one computation you may run** (§S.4): the rank-two window at `S = {5, 13}`, only after the verifier's V-A4 model and your D-0
+> model agree, with its reading pre-registered (both outcomes stated and checked reachable), its four controls, `K = 1` then `K = 2`
+> capped at 3 hours under `scripts/slot.py --mem 16 --cpus 8 -- …`, output to `data/fs89/s1d/`, never `/tmp`. `K ≥ 3` is Kooshi's.
+>
+> **The finite-witness-free week** runs to 2026-10-01 (`CLAUDE.md` § Toolchain): no SAT, MILP, finders, `Θ` relation trees, quotient
+> searches or sweeps. Exact arithmetic that checks a derived claim is fine (S0B's heteroclinic checks are the model). Keep a **"would
+> have searched here" log** in your record: one line per move you would have made by search, and what you did instead.
+>
+> **Records.** `plans/FS89-S1D-derivation.md`: C0 predictions before any derivation (a probability for each question's answer), one
+> section per question, the log, and a heading **"Theorems this phase proved"** (one line per theorem, grade, address). Working files stay
+> in your scratch directory until a claim is saved. Tools `tools/fs89_s1d_*.py` (you may import `tools/fs89_s0b_*.py`; never edit them or
+> any frozen tool: `tools/fs58_*`, `tools/fs61_*`, `tools/fs66_*`, `tools/fs73_cert_check.py`, `tools/fs73_census_check.py`,
+> `tools/fs73_theta_check.py`, `tools/fs73_theta_struct_check.py`, `tools/fs73v2_check.py`, `data/fs73/coxeter-c3/certcheck.py`).
+>
+> **Blindness.** The verifier must not see your routes. Commit subjects stay neutral ("FS-89 S1D: record, section n"): the harness shows
+> every agent the last five commit subjects. Send each saved claim to me as a statement; I forward it verbatim. Don't open the verifier's
+> record (`plans/FS89-S1V-verification.md`) until I tell you its verdict on your claim is committed.
+>
+> **Work in stages**: keep each response short and save your record after every section. At FS-86 an agent lost three responses to the
+> output-token limit, and a lost response is unrecoverable.
+>
+> **No subagents.** Do not use the Agent tool, a fork, a workflow or anything that starts another agent. Staffing is Kooshi's budget
+> decision (three agents at most, and two are running), and I can only review work I know about. If the work outgrows your context,
+> stop at a clean boundary, save, and tell me what is left — that is a good report.
+>
+> **Resources and commits.** Any job over about 2 GiB or 2 minutes runs under `scripts/slot.py`; /tmp is RAM. Never run `lake build`.
+> Commit by explicit path after `git diff -- <path>`; never amend; don't push; report each commit's hash. End commit messages with the
+> attribution lines your harness supplies.
+>
+> **Reports** go to me by SendMessage (`to: "main"`) at each saved claim and at hand-back (claims at exact scope and grade, commit hashes,
+> tokens used, anything for the close inventory). Keep your turn's final text content-free: "D idle; report sent to the owner by
+> SendMessage". Thank you.
+
+### C.2 The blind verifier's brief (V)
+
+> Hello. You are the blind verifier for milestone FS-89, Stage 1, in the Lean 4 Hadwiger–Nelson workspace
+> `/home/kooshi/source/lean-dir`. Your standard is `DEBRUIJN.md`; the house rules are `CLAUDE.md` and `WORKFLOW.md`, all read from disk.
+> I'm the product owner. One derivation agent works on the milestone's questions; you check statements **blind**: you derive or refute
+> each from its statement alone, never from anyone's route.
+>
+> **What you may read:** the plan `plans/FS89-rational-band-rigidity.md` §0, §PA.1–PA.2 and §IQ (not §S.2's route notes or §C.1);
+> Stage 0's records `plans/FS89-S0A-gluing-verification.md` and `plans/FS89-S0B-band-set.md`; `plans/FS86-derivation.md`;
+> `plans/FS81-derivation.md`; `CLAUDE.md`, `LEDGER.md`, `BIBLIOGRAPHY.md`; any held paper. **What you must not read:**
+> `plans/FS89-S1D-*`, `data/fs89/s1d/`, `tools/fs89_s1d_*`, the derivation agent's scratch, and `git log -p` / `git show` of its commits,
+> until I tell you your verdict on the claim in question is committed; then you may read its route to write a divergence table.
+>
+> **The objects** (quoted from the plan's §0.1): "`Q := R_{all} = ℤ[U_ℚ] = ℤ[i][1/p : p ≡ 1 (mod 4)]`"; "`R_S := ℤ[i][1/p : p ∈ S]`";
+> "`U_S := ⟨i⟩ × ⟨w_p : p ∈ S⟩`"; "`Θ_k(R_S) := {θ ∈ Hom(R_S, ℝ/ℤ) : θ(U_S) ⊆ B_k}`", `B_k = [1/k, 1 − 1/k]`; `T` torsion characters, `A`
+> archimedean characters `x ↦ Re(ē x) mod 1`; leaves `τ + D(r_τ)` with margin `r_τ`.
+>
+> **Your fixed list (V-A), from launch** — each quoted verbatim from the plan (§0.3, §S.2):
+> - **V-A1** (U1): "if `RS₄(S)` holds for every finite `S ⊇ S₀` (some fixed `S₀`), then RQ₄ holds." Derive or refute; if the last step
+>   (a character of `Q` torsion on every `R_S` is torsion, or at least in `T + A`, given the band) fails, say exactly how.
+> - **V-A2** (N₀ and U2): re-derive S0A-3 ("`Θ₄(ℤ[U_ℚ]) ∩ (T + A) ⊆ T_{168} + A`; the torsion part is a 2-part of order ∣ 8, or an order-3
+>   part, or an order-7 part, and each occurs") blind, then decide U2: "`Θ₄(Q) ∩ (T + A)` is exactly the finite union of leaf discs over
+>   the band torsion characters of `Q/168Q`, with margins `1/4` (parity), `1/12` (the order-3 types), `1/28` (the order-7 types) and `0`
+>   (the order-4 and order-8 types)." List the band torsion characters up to the symmetries (the `U`-action, conjugation, negation), each
+>   with its margin.
+> - **V-A3** (S0B-T6): "a second prime (13) kills every rational heteroclinic whose torsion difference is prime to 13" — in S0B §6's full
+>   form. Re-derive blind.
+> - **V-A4:** "Derive the rank-`r` orbit model: `Θ_β(U_S)` for `|S| = r` as arrays `(e_m)_{m ∈ ℤ^r}` in `Q_β` with one step rule per
+>   prime; state the gluing condition across directions, and the criterion for `T + A` (the rank-`r` form of S0B-T2)."
+>
+> **Then (V-B):** each claim the derivation agent saves reaches you from me as a statement, verbatim. Give it a verdict — TRUE, FALSE, or
+> GAP (true as far as you can derive, with the missing step named) — with your own derivation and its grade. A consequence of the form
+> "X, hence Y" is two claims; check both.
+>
+> **Every verdict counts, and none is preferred.** Kooshi: *"A proven theorem about why its impossible is also valid. All novel knowledge
+> is a success."* Do not lean toward a yes: a verifier that confirms what it is handed is this project's recorded failure mode (G21), and
+> FS-86's blind verifiers found every divergence the milestone had. Check a proof you like as hard as a counterexample you dislike.
+>
+> **Stop rules and budget:** one verdict per statement or claim; V-A within about 150k tokens, V-B within about 200k; hand back with the
+> record saved if you reach 400k.
+>
+> **Records.** `plans/FS89-S1V-verification.md`: C0 predictions (a probability per statement, before any derivation), one section per
+> statement quoted verbatim, the divergence table after each committed verdict, a **"would have searched here" log**, and a heading
+> **"Theorems this phase proved"**. Tools `tools/fs89_s1v_*.py`, data `data/fs89/s1v/`. Exact arithmetic that checks a derived claim is
+> fine; no search for a finite witness runs before 2026-10-01 (no SAT, MILP, finders, `Θ` trees, quotient searches, sweeps).
+>
+> **Neutral commit subjects** ("FS-89 S1V: record, section n"): the harness shows every agent the last five subjects. **Work in stages**:
+> short responses, the record saved after every section (at FS-86 an agent lost three responses to the output-token limit). **No
+> subagents**: staffing is Kooshi's budget decision and I can only review work I know about; if the work outgrows your context, stop at a
+> clean boundary and tell me what is left. Jobs over about 2 GiB or 2 minutes run under `scripts/slot.py`; /tmp is RAM; never `lake
+> build`. Commit by explicit path after `git diff -- <path>`; never amend; don't push; report each hash. Frozen tools are never edited:
+> `tools/fs58_*`, `tools/fs61_*`, `tools/fs66_*`, `tools/fs73_cert_check.py`, `tools/fs73_census_check.py`, `tools/fs73_theta_check.py`,
+> `tools/fs73_theta_struct_check.py`, `tools/fs73v2_check.py`, `data/fs73/coxeter-c3/certcheck.py`; `tools/fs89_s0b_*.py` may be imported.
+>
+> **Reports** by SendMessage to `"main"` at each verdict and at hand-back; your turn's final text stays content-free: "V idle; report
+> sent to the owner by SendMessage". Thank you.
