@@ -5,7 +5,7 @@ That file's §1 rules table still applies, with the additions in §1 below.*
 
 ## 0. First acts
 
-1. **FS-89 Stage 1 is live (items 19–22): D, the derivation agent, and V (verifier H), the blind verifier.** The plan is `plans/FS89-rational-band-rigidity.md` (accepted). Forward each claim D saves to V verbatim; V must never see D's routes. **Keep owner commit subjects neutral** during Stage 1. Stage dates: 1a to 09-27, 1b to 09-29, 1c to 09-30; the close on 10-01.
+1. **FS-89 Stage 1: the derivation agent and verifier H have finished; verifier I is live (items 23–33).** Verifier I checks the derivation agent's claims blind (brief `data/fs89/briefs/S1-VB-verifier-brief.md`; record `plans/FS89-S1VB-verification.md`). Nothing about those claims is stated here, because the verifier may read this file. **Keep owner commit subjects neutral** until the verifier's B1 verdicts are committed. The close is on 10-01.
    `…/scratchpad/owner-fs89/live-agents.md`; never quote them to Kooshi.
    - **Verifier G** is blind-checking the next-step advisor's gluing sketch.
      - Brief: `data/fs89/briefs/S0A-gluing-verifier-brief.md`. Record: `plans/FS89-S0A-gluing-verification.md`.
@@ -13,7 +13,7 @@ That file's §1 rules table still applies, with the additions in §1 below.*
    - **S0B** is computing the exact four-colour band set `Θ₄(U₅)` of the rational unit circle at the prime 5. Kooshi ruled this computation allowed under the ban.
      - Brief: `data/fs89/briefs/S0B-band-set-brief.md`. Record: `plans/FS89-S0B-band-set.md`.
      - **Finished** (items 13, 16, 17): `Θ₄(U₅) ⊄ T + A` (the order-3 points lie inside the parity disc at four colours), so one prime is not enough. Torsion orders are unbounded at one prime (a reading), and the prime 13 kills the one-switch escapes (derived). The rational statement is not refuted.
-2. **Verify every agent commit hash against `git log`, push, and log each result in `plans/FS89-close-inventory.md`** (items 1–22 so far). You are its only writer. Check one step of every key claim yourself.
+2. **Verify every agent commit hash against `git log`, push, and log each result in `plans/FS89-close-inventory.md`** (items 1–33 so far). You are its only writer. Check one step of every key claim yourself.
 3. **Read, in this order:**
    - `plans/FS89-close-inventory.md`;
    - `plans/POROS-2026-09-25-fs86-next.md` (the advisor's recommendation Kooshi accepted);
