@@ -256,7 +256,7 @@ Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
 - **R96** — Q1 silent. | Q2 **bears**: CL5, no character five-colouring of ℚ(√167) — the windowless case closed → J21 stage 1 inputs.
 - **R97** — Q1 **bears**: a one-prime heteroclinic character is a wall between two phases in a rank-one system, killed by a second direction — the analogy, and why rank 1 has no second direction → J18 stage 2 note. | Q2 silent: rows 95–96 carry.
 
-**Counts, §G.2:** 97 rows walked. Q1: 9 bears, 88 silent, 0 falsifiable. Q2: 18 bears, 79 silent, 0 falsifiable.
+**Counts, §G.2:** 97 rows walked (every id R1–R97 present once, checked mechanically). Q1: 8 bears, 89 silent, 0 falsifiable. Q2: 14 bears, 83 silent, 0 falsifiable.
 
 ### G.3 The method rules (the `[method]` grokkings G21, G30, G46, G49, G50, G67, G72 are in G.1; below, every other rule in § Whose work, § Delegation, § Standard of evidence, § What compute helps, § Trust ledger, § Toolchain, § Building, § The kernel's cost model, § Searching, § The gate, § Make the gate fail)
 
@@ -323,7 +323,7 @@ Q2: 27 bears, 48 silent, 1 falsifiable (G48, registered as P-Q2-yes in §P).
 - **M61 a one-sided filter's inapplicability is not a pass** — Q2 **bears**: the count is one-sided; its failure at the real place is not a "yes" → J21. | Q1 silent.
 - **M62 scars, not foresight: plant faults routinely** — both **bears** (standing rule 7).
 
-**Counts, §G.3:** 62 rules walked. Q1: 27 bears, 35 silent. Q2: 22 bears, 40 silent. 0 falsifiable.
+**Counts, §G.3:** 62 rules walked (M1–M62, checked mechanically). Q1: 26 bears, 36 silent. Q2: 19 bears, 43 silent. 0 falsifiable.
 
 ### G.4 What the re-grokking changed in the plan
 
