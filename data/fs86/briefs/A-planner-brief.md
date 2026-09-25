@@ -102,7 +102,7 @@ Write every *bears* into the phase design. The test of the re-grokking is that i
 - **Define "rich" precisely**, so that route 1's statement is sharp. That means an exact lattice or family, its unit-vector set, and its integrality at every prime. Enumerating a lattice's unit vectors is exact arithmetic and in scope; screening lattices for survivors is not.
 - **§C, text ready to paste into both competitor briefs**, with the protocol §4 template's slots filled:
   - the mathematics they stand on, with addresses;
-  - the challenge stated precisely, with its known positive (de Grey's lattice over K, row 85) and its known negatives. Among the negatives are FS-73's inert-dyadic row `K|Q(sqrt11,i)|D36`, loose by a gap at `N = 5`, and the type-A lattices;
+  - the challenge stated precisely, with its known positive (de Grey's lattice over K, row 85) and its known negatives. Among the negatives are FS-73's inert-dyadic row `K|Q(sqrt11,i)|D36`, loose by a gap at `N = 5` (triangle-free but not rich), and ℚ(√167)'s `L21cc6506`, loose at four colours (row 81; type A);
   - what each registered outcome would look like;
   - what §PA found;
   - the ban and the search log.
