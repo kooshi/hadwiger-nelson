@@ -1,0 +1,29 @@
+(A) descent at level two
+  A p= 3 k=3: band characters     4, all from level one (2p > k)  OK
+  A p= 3 k=4: band characters     4, all from level one (2p > k)  OK
+  A p= 3 k=5: band characters     4, all from level one (2p > k)  OK
+  A p= 3 k=6: band characters     4, not from level one    0 (2p <= k: exception clause, info)
+  A p= 3 k=7: band characters     4, not from level one    0 (2p <= k: exception clause, info)
+  A p= 3 k=8: band characters     4, not from level one    0 (2p <= k: exception clause, info)
+  A p= 3 k=9: band characters    40, not from level one   36 (2p <= k: exception clause, info)
+  A p= 7 k=3: band characters     0, all from level one (2p > k)  OK
+  A p= 7 k=4: band characters     8, all from level one (2p > k)  OK
+  A p= 7 k=5: band characters     8, all from level one (2p > k)  OK
+  A p= 7 k=6: band characters     8, all from level one (2p > k)  OK
+  A p= 7 k=7: band characters    24, all from level one (2p > k)  OK
+  A p= 7 k=8: band characters    24, all from level one (2p > k)  OK
+  A p= 7 k=9: band characters    24, all from level one (2p > k)  OK
+  A p=11 k=3: band characters     0, all from level one (2p > k)  OK
+  A p=11 k=4: band characters     0, all from level one (2p > k)  OK
+  A p=11 k=5: band characters     0, all from level one (2p > k)  OK
+  A p=11 k=6: band characters    24, all from level one (2p > k)  OK
+  A p=11 k=7: band characters    24, all from level one (2p > k)  OK
+  A p=11 k=8: band characters    24, all from level one (2p > k)  OK
+  A p=11 k=9: band characters    24, all from level one (2p > k)  OK
+  PLANT A (fibres deleted): fired = True
+(B) C9's value set
+  B values of (2x+3y)/7 on the F_7 circle: ['2/7', '3/7', '4/7', '5/7']; inside [1/4, 3/4]: True
+  PLANT B ((x+y)/7): fired = True
+(C) residue arithmetic
+  C usable primes q < 60, q = 3 (mod 4), split in Q(sqrt d): {47: [11, 19, 23, 31, 43], 59: [11, 23, 31, 43, 47], 83: [19, 43, 47], 131: [19, 23, 31, 47], 167: [23, 43, 59]}
+ALL CHECKS PASS; both plants fired
