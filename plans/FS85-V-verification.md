@@ -261,7 +261,10 @@ citation search this session.
 - **The nearest claims.**
   - Gibbs (3 June 2018): *"I think I know how to get from the lack of the monochromatic triangle to a periodicity of 16 using mostly
     algebraic methods."* It is on R₂, it was never written in the threads, and he said he would put it on the wiki if it worked. We do not
-    hold the wiki's "Algebraic formulation" page; that page is a debt to read before any novelty claim.
+    hold the wiki's "Algebraic formulation" page; that page is a debt to read before any novelty claim. *[Corrected at the close: the
+    page has been held since 2026-09-09 (`[Polymath16wiki]`); the auditor read it (`plans/FS85-input-audit.md` A3.1): it claims
+    8-periodicity as Hubai's computer result and proves nothing. The slip was copied into the audit brief by the owner (close-inventory
+    item 78).]*
   - Gibbs (31 May 2018) studies exactly the `T0 + η^a T0`-type sublattices ("R₁ × R₁") that Lemma X uses.
   - Tao's wiki page proves only the spreading step (Cor. 9) on R₁ + η²R₁, and its written proof has the gap found here.
   - `[Parts2020hv]` proves stripes on one hexagonal lattice, given non-monochromatic √3-triples, and goes straight to χ ≥ 5 by a √5
@@ -308,7 +311,7 @@ citation search this session.
    - I walked **tree S** (11 nodes, read by eye from `t4-002.png`; `treeS.py`). Every node is a vertex of the rebuilt G481; every listed
      port neighbour is earlier, has that colour and is at unit distance; the three stems have exactly three blocked colours, and the end
      node has all four. **S walks.** A planted coordinate is refused (three port failures).
-   - **Not walked: L1–L8 (776 non-root nodes).** That needs a by-eye or OCR transcription of 776 raster cells, or Parts's data files
+   - **Not walked: L1–L8 (783 non-root nodes; this record first said 776, subtracting S's eleven cells instead of its four non-root ones — corrected at the close from the auditor's count, `plans/FS85-input-audit.md` A1).** That needs a by-eye or OCR transcription of 783 raster cells, or Parts's data files
      (Polymath16 "Code and data/dropbox/JP/Pink", `[Parts2020hv]` ref. [3], not held). Also unchecked here: the completeness of the root
      case split (Table 1: 36 extended root colourings of the 2-Golomb graph, mapped onto S and L1–L8, including the 19 excluded through
      Fig. 11's mono-pair). That is a hand claim in the paper.

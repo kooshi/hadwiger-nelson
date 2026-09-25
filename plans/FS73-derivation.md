@@ -69,8 +69,8 @@ planted moved vertex was refused. *Proof verdict:* closes. *Rests on it:* T7. *P
 (Polymath16, 2018); **`8/9` is Parts's** — a four-colour mono-pair at `(0,0)–(8/9,0)` in his graph 4H4, and two of them joined by an
 edge as a five-chromatic graph in ℚ(√3,√7,√11) (`[Polymath16threads]`, seventeenth thread, February 2021), found at the close in the
 archived threads; his twelfth-thread graph (April 2019), `V₄₃ ⊕ V₄₃ ⊕ V₄₃`, forces every vertex at radius `8/√27 = |v|` to the origin's colour —
-**checked at the close: `v`'s orbit is not among them**; the six there are `(8/9)√−3·ζ₆^m` (`η³ − η̄³` exactly), in `8Λ` but reached
-through `η^{±3} ∉ Λ` (`data/fs73/prior-art/parts_v.py`, floats proposing, sympy confirming). The pair `(0, v)` on the lattice, its certificate and the orbit argument are ours. *Kernel:* **declined** (Kooshi, 2026-09-23: "an attempt at an algebraic explanation in a separate milestone rather than
+**checked at the close: `v`'s orbit is not among them**; the six there are `(8/9)√−3·ζ₆^m` (`η³ − η̄³` exactly), in `8Λ`; `η^{±3}`
+themselves lie in `Λ` (FS85-A1 corrects this entry's earlier `η^{±3} ∉ Λ`) (`data/fs73/prior-art/parts_v.py`, floats proposing, sympy confirming). The pair `(0, v)` on the lattice, its certificate and the orbit argument are ours. *Kernel:* **declined** (Kooshi, 2026-09-23: "an attempt at an algebraic explanation in a separate milestone rather than
 formalizing a big graph"); the certificate and its checker stand, in `forces_of_not_colorable_append_single`'s form if ever wanted.
 
 **T7 — `F = P = 8Λ` on de Grey's lattice at four colours; every four-colouring is `8Λ`-periodic. [cert + tools + derived; A2, V, D]**
@@ -89,7 +89,7 @@ closed under rotation by `η = ω₃^{1/2}`, which `Λ` is not — has exactly 9
 8-periodic, with a stripe-and-chirality structure; on the ring 8-periodicity follows from Harder's `8/3` by transport. The lattice form
 is ours: on `Λ` the `8/3` pair transports only to rank 2 (P-C4), so the lattice needed `v`; and the lattice statement implies the ring's 8-periodicity (each coset of `Λ` in
 `R₂` carries a four-colouring of `Λ`'s graph), so it is the stronger; the equal counts suggest, and do not prove, that the lattice has no
-colouring beyond the ring's restrictions. *Kernel:* declined with T6.
+colouring beyond the ring's restrictions. **Derived at FS-85 with no certificate** (`plans/FS85-derivation.md` FS85-R3b, from Parts's trees; row 85). *Kernel:* declined with T6.
 
 **T8 — G70 holds on de Grey's lattice: the √3-clean four-colourings are Theorem B's two residue colourings, one orbit. [tools exact; A2]** Of the 380 pinned colourings of `Λ/8Λ`, exactly two have no monochromatic pair at any of Λ's 66 vectors of length √3, and they
 are the residue colourings at the two primes above 2 (period group `2Λ`, `Λ/Per ≅ (ℤ/2)²`). *Proof:* phase-P1.md, Task 3;

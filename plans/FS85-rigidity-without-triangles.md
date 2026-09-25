@@ -590,6 +590,11 @@ has one of these, each checked by the advisor:
 
 It can fire: at FS-79 neither competitor proved K1-type structure on `Λ` in a day, and its no-gos would not have passed K2 (they
 exclude formats, not graphs). It can pass: the held wiki tools make K1 reachable in a day if the transfer check succeeds.
+*[Corrected at the close (close-inventory item 34, the competition advisor's catch): this does not follow. The wiki's Prop. 7 and
+Cor. 8–9 treat only a coset on which the renormalised colouring is constant (the residue case, one of `Λ`'s 12 classes) and Prop. 6 a
+three-valued one; nothing in the page treats the four-valued colourings the stripes need on the eleven √3-dirty classes. So P-wiki could
+win on its letter while "K1 reachable in a day" did not follow; the plan-phase advisor's note repeated it. K1's load-bearing step was
+Parts's no-monochromatic-√3-triple (S), and it was not met by derivation in round 1 (§R-close).]*
 
 ### S.5 The fallback, FS-83 (sketch, enough to brief from)
 
