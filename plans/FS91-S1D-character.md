@@ -323,3 +323,59 @@ through CLG (J07): HD1 with no FS-66 certificate and no `[Zhang2012]`, C-167 wit
   level-2 target at `q = 27` (to test (E1) at `k = 7`); not run (J08's SIX-d territory, `3¹²` vertices).
 - Would have computed `χ_char(Γ₂₃)` and `χ_char(Γ₄₃)` exactly (a byproduct of check B at `k ≥ 6`); **deliberately not done**: it is J08's
   SIX-b, fenced by its own verifier's list, and nothing here needs it.
+
+## Stage 5 — SAVED (lemma statements for the verifier; C0 scored; the close's material)
+
+**Lemma statements** (statements only, for J10's second phase): `data/fs91/j07/lemma-statements.md`, 25 items.
+
+### 5.1 C0 scored
+
+| statement | C0 | outcome |
+|---|---|---|
+| CLG_k, `k ≤ 9`, totally real, Lemma R's scope | 0.90 | TRUE, and far beyond that scope |
+| CLG_k, every `k`, every real number field (given `H_k`) | 0.75 | TRUE |
+| CLG-c without Lemma R | 0.75 | TRUE in the corrected form; the literal form TRUE except at ramified stable dyadic places, where it is ill-posed |
+| CLG-d with complex places (the plan's P-CM, 0.60) | 0.85 | TRUE |
+| CLG-e, odd `p` / dyadic | 0.90 / 0.6 | TRUE, and at `k = 2p` too / TRUE at inert dyadic (`k = 3`); ramified dyadic undecided (harmless) |
+| CLG-g with the exception explicit; empty at `k ≤ 5` | 0.80; 0.6 | TRUE; TRUE (and empty in degree ≤ 2 at every `k`) |
+| CL3, CL4, CL5 under the corrected `A` | 0.85 each | TRUE, each re-proved through CLG with fewer inputs |
+
+**Audit of the liked result** (standing rule 4). Where could CLG be wrong? (i) `H_k` — an input, verified by two readers (J01, J03a); the
+theorem is exactly as strong as it. (ii) Lemma C's step 2 (`M ⊇ L_𝔔`) — the one new algebra; it uses only a principal power of `𝔔`, a
+characteristic polynomial and a lattice, and its conclusion is checked independently by its corollaries (prime inversion; J02-L2(a)'s
+dimension bound) and agrees with FS86-CL2's failure mode in C′. (iii) The archimedean step — complex places handled by unboundedness; a
+real place's `ℓ_w(S¹)` is an interval about 0, never avoiding 0, which is what makes the archimedean summand unpeelable. (iv) The peel
+proves "some", never "one": HD1 needed a second argument (tightness plus Lemma AV) to kill the other summands, and I did not claim
+uniqueness anywhere else. (v) The level bound was checked on complete character lists (A) and was **not** sharp as first stated —
+the discreteness refinement (LB′) came from reading the check, which is the order G30 asks for.
+
+## Theorems this phase proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| J07-1 | CLG-a: pullbacks of band characters of any `T_{𝔓,m}` lie in `Θ_β(R_F)` | hand | §2.1 |
+| J07-2 | CLG-b and CLG-b_n (the peeling lemma, every band `β`) | hand + tools exact | §2.2; check D |
+| J07-3 | Lemma C: `R ⊗ ℤ_p = R̄_p × V_n`, `R̄_p` an order in `∏_{stable}Ô_𝔓`, `R/NR ≅ ∏ R̄_p/NR̄_p`, `R → R/NR` continuous for the stable places; no Galois hypothesis | hand, one mind | §2.3 |
+| J07-4 | Lemma C′: `R̄_p = ∏_{stable 𝔓|p}Ô_𝔓` except possibly at `p = 2` with a ramified stable dyadic place — Lemma R's conclusion without its Galois scope (the completed form of J09's J2, derived independently) | hand, one mind | §2.4 |
+| J07-5 | CLG-c in its corrected form: the joint image of `U` in `R/NR` × the archimedean tori | hand (weak approximation standard) | §2.5 |
+| J07-6 | CLG-d for every real number field: the archimedean part vanishes at complex places and is an interval about 0 at real ones; the torsion part is band with margin | hand | §2.6 |
+| J07-7 | CLG_k for every real number field and every `k ≥ 2`, given `H_k`; `χ_char(F²) = min χ_char(T_{𝔓,m})`; the converged `κ` form | hand | §2.7, §3.1 |
+| J07-8 | Lemma LB and LB′ (the level bound at odd stable places; sharp for level 2) | hand + tools exact | §3.2, §4.2; check A |
+| J07-9 | CLG-e at odd `p` for `k ≤ 2p`, and at inert dyadic places for `k = 3`; `U_Q` has no band character | hand + tools exact | §3.2, §4.2 |
+| J07-10 | Lemma AV: a band-`β` character forces `α ≥ β|G|` | hand | §3.3 |
+| J07-11 | CLG-g with (E1), (E2) explicit; no exception at `k ≤ 5`, none in degree ≤ 2, only `Q = 64` at `k = 6` | hand (tools-grade inputs: G56's `U_Q` colourings, G54's tower ratio) | §3.3, §4.2 |
+| J07-12 | HD1 (ℚ(√59), ℚ(√83), ℚ(√131)) re-proved through CLG without FS-66's certificates, `[Zhang2012]` or Lemma R | hand (given FS86-B1-LD) | §4.4 |
+| J07-13 | C-47 and C-167 re-proved through CLG; C-167 with no certificate (complete character lists at 23, 43, 59) | hand + tools exact | §4.4; checks B, C |
+| J07-14 | FS89-CL3, CL4, CL5 TRUE under `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1`; the one-embedding reading enters only CL2's wording | hand | §4.4 |
+| J07-15 | Controls reproduced: `θ₂`; `[Fischer1994]` at one dyadic place, level 3; C9 at `Γ₇`; J02-T1 for every `θ ∈ Θ₃`; `κ(F′) ≤ κ(F)` place by place | hand + tools (existing checker) | §4.3 |
+
+## Proposed edits (for the front-page lane; this job edits none of these files)
+
+- `LEDGER.md`: a new row for CLG (J07-7 with J07-3, J07-11) once J10 reports; row 95's and FS89-CL2's field clause to say "archimedean at
+  every place of `F(i)`" (with J03a); row 96: "re-proved through CLG: HD1 without FS-66 or `[Zhang2012]`, C-167 without certificates".
+- `CLAUDE.md` Frontier item 25 / G76: "a falsifier of the conjecture at any real number field is no character, at every `k ≤ 5`, and at every
+  `k` over a quadratic field" (given J10); G64's sentence: "six, or any falsifier, hides only in a non-character colouring — over quadratic
+  fields unconditionally in the character sense; over fields of degree ≥ 6 a character six-colouring could still live at level ≥ 2 of a
+  dyadic `U₆₄` tower".
+- `plans/FS86-derivation.md` FS86-B1-LR: the scope line can drop "`L/ℚ` Galois" (J07-4, one mind until verified).
+- `plans/FRONTIER-STUBS.md`: FS-47 (the unit-vector ring in the kernel) gains Lemma C/C′ as its statement; FS-91's stub records CLG.
