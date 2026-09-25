@@ -1,0 +1,633 @@
+{
+ "bound": 2000,
+ "failures": [],
+ "fields": {
+  "K(sqrt7)": {
+   "argmin": 83,
+   "band6_targets": [],
+   "band7_targets": [],
+   "dyadic_all_split": true,
+   "min_chi_char": 17,
+   "pari_checked_below": 300,
+   "pari_mismatches": [],
+   "radicands": [
+    3,
+    7,
+    11
+   ],
+   "targets": [
+    {
+     "chi_char": 17,
+     "p": 83,
+     "ramified": false,
+     "weil_floor": 6
+    },
+    {
+     "chi_char": 22,
+     "p": 131,
+     "ramified": false,
+     "weil_floor": 7
+    },
+    {
+     "chi_char": 24,
+     "p": 167,
+     "ramified": false,
+     "weil_floor": 8
+    },
+    {
+     "chi_char": 29,
+     "p": 227,
+     "ramified": false,
+     "weil_floor": 9
+    },
+    {
+     "chi_char": 48,
+     "p": 479,
+     "ramified": false,
+     "weil_floor": 12
+    },
+    {
+     "chi_char": 63,
+     "p": 503,
+     "ramified": false,
+     "weil_floor": 13
+    },
+    {
+     "chi_char": 52,
+     "p": 563,
+     "ramified": false,
+     "weil_floor": 13
+    },
+    {
+     "chi_char": 111,
+     "p": 887,
+     "ramified": false,
+     "weil_floor": 16
+    },
+    {
+     "chi_char_ge_weil": 18,
+     "p": 1091,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 18,
+     "p": 1151,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 19,
+     "p": 1223,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1319,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1427,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1487,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1559,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1811,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1823,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1847,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1931,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 24,
+     "p": 1979,
+     "ramified": false
+    }
+   ]
+  },
+  "Q(sqrt167)": {
+   "argmin": 23,
+   "band6_targets": [],
+   "band7_targets": [],
+   "dyadic_all_split": true,
+   "min_chi_char": 8,
+   "pari_checked_below": 300,
+   "pari_mismatches": [],
+   "radicands": [
+    167
+   ],
+   "targets": [
+    {
+     "chi_char": 8,
+     "p": 23,
+     "ramified": false,
+     "weil_floor": 4
+    },
+    {
+     "chi_char": 9,
+     "p": 43,
+     "ramified": false,
+     "weil_floor": 5
+    },
+    {
+     "chi_char": 10,
+     "p": 59,
+     "ramified": false,
+     "weil_floor": 5
+    },
+    {
+     "chi_char": 14,
+     "p": 67,
+     "ramified": false,
+     "weil_floor": 6
+    },
+    {
+     "chi_char": 18,
+     "p": 71,
+     "ramified": false,
+     "weil_floor": 6
+    },
+    {
+     "chi_char": 14,
+     "p": 79,
+     "ramified": false,
+     "weil_floor": 6
+    },
+    {
+     "chi_char": 17,
+     "p": 83,
+     "ramified": false,
+     "weil_floor": 6
+    },
+    {
+     "chi_char": 15,
+     "p": 103,
+     "ramified": false,
+     "weil_floor": 7
+    },
+    {
+     "chi_char": 22,
+     "p": 131,
+     "ramified": false,
+     "weil_floor": 7
+    },
+    {
+     "chi_char": 24,
+     "p": 139,
+     "ramified": false,
+     "weil_floor": 7
+    },
+    {
+     "chi_char": 19,
+     "p": 151,
+     "ramified": false,
+     "weil_floor": 8
+    },
+    {
+     "chi_char": 33,
+     "p": 163,
+     "ramified": false,
+     "weil_floor": 8
+    },
+    {
+     "chi_char": 24,
+     "p": 167,
+     "ramified": true,
+     "weil_floor": 8
+    },
+    {
+     "chi_char_ge_weil": 9,
+     "p": 227,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 10,
+     "p": 271,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 10,
+     "p": 307,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 11,
+     "p": 331,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 11,
+     "p": 347,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 11,
+     "p": 379,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 12,
+     "p": 439,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 12,
+     "p": 443,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 12,
+     "p": 463,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 12,
+     "p": 479,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 13,
+     "p": 487,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 13,
+     "p": 499,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 13,
+     "p": 547,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 13,
+     "p": 571,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 587,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 607,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 619,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 643,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 647,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 14,
+     "p": 659,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 683,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 691,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 719,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 727,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 739,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 15,
+     "p": 751,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 16,
+     "p": 787,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 16,
+     "p": 811,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 16,
+     "p": 823,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 16,
+     "p": 827,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 16,
+     "p": 887,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 17,
+     "p": 971,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 17,
+     "p": 983,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 17,
+     "p": 991,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 17,
+     "p": 1019,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 18,
+     "p": 1039,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 18,
+     "p": 1103,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 18,
+     "p": 1151,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 19,
+     "p": 1163,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 19,
+     "p": 1259,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 19,
+     "p": 1279,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1303,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1307,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1327,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1427,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 20,
+     "p": 1439,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1447,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1459,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1471,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1487,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1499,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1523,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1543,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1571,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 21,
+     "p": 1583,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 22,
+     "p": 1607,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 22,
+     "p": 1663,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 22,
+     "p": 1667,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 22,
+     "p": 1723,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1783,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1787,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1823,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1831,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1847,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1867,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1871,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1907,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 24,
+     "p": 1979,
+     "ramified": false
+    }
+   ]
+  },
+  "deGrey K(sqrt5,sqrt7)": {
+   "argmin": 131,
+   "band6_targets": [],
+   "band7_targets": [],
+   "dyadic_all_split": true,
+   "min_chi_char": 22,
+   "pari_checked_below": 300,
+   "pari_mismatches": [],
+   "radicands": [
+    3,
+    5,
+    7,
+    11
+   ],
+   "targets": [
+    {
+     "chi_char": 22,
+     "p": 131,
+     "ramified": false,
+     "weil_floor": 7
+    },
+    {
+     "chi_char": 48,
+     "p": 479,
+     "ramified": false,
+     "weil_floor": 12
+    },
+    {
+     "chi_char": 110,
+     "p": 1091,
+     "ramified": false,
+     "weil_floor": 18
+    },
+    {
+     "chi_char": 116,
+     "p": 1151,
+     "ramified": false,
+     "weil_floor": 18
+    },
+    {
+     "chi_char": 147,
+     "p": 1319,
+     "ramified": false,
+     "weil_floor": 20
+    },
+    {
+     "chi_char": 142,
+     "p": 1559,
+     "ramified": false,
+     "weil_floor": 21
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1811,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 23,
+     "p": 1931,
+     "ramified": false
+    },
+    {
+     "chi_char_ge_weil": 24,
+     "p": 1979,
+     "ramified": false
+    }
+   ]
+  }
+ },
+ "kind": "j11-targets-v1",
+ "pari_bound": 300,
+ "plant": "none"
+}
