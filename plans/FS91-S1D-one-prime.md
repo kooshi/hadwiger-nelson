@@ -102,6 +102,152 @@ Hence `Θ₄(R_{{p}}) ⊄ T + A` for every prime `p ≡ 1 (mod 4)`.
 
 **C0-a scored:** predicted 0.93; met. The one risk named (the `X₃` margin at some `p`) is removed by A3's inertness argument.
 
+## Stage 3 — SAVED (ONE-b: `MS₄({5})` is FALSE — a minimal set outside `T + A` exists)
+
+**Verdict: ONE-b is answered "no". There is a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A`. [hand, one mind; tools
+exact for the model and the first two levels of the construction]** §M.2's reduction is corrected on the way (3.2): its first clause
+holds, its second presupposes a classification nobody proved, and its obligation is answered "yes" by periodic orbits, which are `T + A`,
+so it could not decide the question.
+
+### 3.1 The model: nine rotations by one angle
+
+*Notation (`p = 5`, the plan's normalization).* `π = 2 + i`, `w = π/π̄ = (3+4i)/5`, `u := iw` (so `U₅ = ⟨i⟩ × ⟨u⟩`), `ω := ū = −iw̄ = (−4−3i)/5`,
+`P = (1+i)/2`, `Q₀ := [−1/4, 1/4]²`. `R_c(z) := c + ω(z − c)`, the rotation by `ω` about `c`.
+
+**J12-B1 (the nine-centre model).** `Θ₄(U₅)` is homeomorphic to
+`X := {(z_m)_{m∈ℤ} ∈ Q₀^ℤ : z_{m+1} = R_{c_m}(z_m) for some c_m ∈ C₉}`, `C₉ := {0, (±1 ± i)/6, ±1/3, ±i/3}`,
+by `z_m := lift_Q(ī^m e_m) − P`, where `(e_m)` is S0B-T1's layer sequence; the shift of `X` is `θ ↦ θ∘u`, and `θ ↦ θ∘i` is `z ↦ −iz`.
+*Proof.*
+1. *Frame.* `e′_m := ī^m e_m` satisfies `e′_{m+1} − ωe′_m = ī^{m+1}(e_{m+1} − w̄e_m) ∈ π^{−1}ℤ[i]` (the lattice is `i`-stable), and `e_m ∈ Q ⟺
+   e′_m ∈ Q` (`Q = [1/4, 3/4]²` is `i`-stable mod `ℤ[i]`). Conversely `e_m := i^m e′_m` recovers S0B-T1's sequence. Layer data of `θ∘u` is the
+   shifted sequence (`(θ∘u)(u^m y) = θ(u^{m+1}y)`).
+2. *Centre.* `(1 − ω)P = 3(1+2i)/5 = 3i/π ∈ π^{−1}ℤ[i]`, so `g_m := z_{m+1} − ωz_m ∈ π^{−1}ℤ[i]`.
+3. *Alphabet.* `|g_m| ≤ |z_{m+1}| + |z_m| ≤ √2/2`; `g = a/π` with `|a|² = 5|g|² ≤ 5/2`, so `a ∈ {0, ±1, ±i, ±1 ± i}` (9 elements). The
+   rotation `z ↦ ωz + g` has centre `c = g/(1 − ω) = a/(π(1−ω)) = a/(3(1+i)) = a(1−i)/6`, which runs over `C₉`.
+4. The identification is a continuous bijection of compact Hausdorff spaces. ∎
+
+*Reading.* Every band character of `R₅` at four colours is a bi-infinite orbit of **one irrational rotation `ω`, applied about one of nine
+centres at each step** (a 3 × 3 block of the lattice `((1+i)/6)ℤ[i]`), staying in a square of side 1/2. Parity is the centre 0; the four
+`X₃` leaves are the four diagonal centres (`c₀ := −(1+i)/6` is the leaf through `C = (1+i)/3`); the four edge centres `±1/3, ±i/3` lie outside
+`Q₀` and belong to no leaf of period one. A centre word is admissible from `z` if every point stays in `Q₀`.
+
+**J12-B2 (`T + A` is periodicity).** `θ ∈ T + A` iff its centre sequence `(c_m)` is periodic.
+*Proof.* (⟸) Period `L`: the composite over one period is `z ↦ ω^L z + t`, with fixed point `q := t/(1 − ω^L)`. The sequence from `q` with the
+same centres is `L`-periodic; by V5 (band-free) it is a character `σ`, and `σ∘u^L = σ` (periodic layer data), so `σ` kills the finite-index ideal
+`(u^L − 1)R₅` and is torsion. Since each step is an isometry `z ↦ ωz + g_m` with the same `g_m`, `z_m − q_m = ω^m(z₀ − q)`, which is the layer
+data of `λ_d` with `d = z₀ − q` (`λ_d`'s rotating-frame data is `ω^m d`). So `θ = σ + λ_d`. (⟹) If `θ = σ + λ_d`, `σ` of order `N`, then `σ∘u^L = σ`
+for `L` the order of `u` in `(R₅/NR₅)^×`; by S0B-T2 `σ` is band with margin `≥ |d|`, so `z_m = q̃_m + ω^m d` with `q̃_m` `σ`'s lifted points,
+and `c_m = (q̃_{m+1} − ωq̃_m)/(1 − ω)` is `L`-periodic. ∎
+
+**J12-B3 (margins; displaced orbits).** If `(q_m)` is an admissible orbit with centre word `W` and `r := min_m (1/4 − ‖q_m‖_∞)`, then the orbit
+from `q₀ + δ` with the same centres is `q_m + ω^m δ`, and it is admissible whenever `|δ| ≤ r` (a disc of radius `r` about `q_m` lies in `Q₀`).
+For a periodic orbit, `r` is S0B-T2's margin.
+
+**J12-B4 (minimal sets meeting `T + A`).** A `U₅`-minimal `M ⊆ Θ₄(R₅)` that meets `T + A` is a finite union of leaf circles
+`{σ′ + λ_{d′} : |d′| = ρ}` over a finite `U₅`-orbit of torsion `σ′`, or a finite torsion orbit (`ρ = 0`). *Proof.* The orbit closure of `σ + λ_d`:
+`(σ + λ_d)∘v = σ∘v + λ_{v̄d}`; on each coset of the (finite-index) stabilizer of `σ`, `v̄d` is dense in the circle of radius `|d|` (the
+stabilizer contains a power of `w`, not a root of unity). ∎
+
+**J12-B5 (the reduction, corrected).** `MS₄({5})` fails iff some `θ ∈ Θ₄(R₅)` is uniformly recurrent and has a non-periodic centre sequence.
+*Proof.* (⟸) Its orbit closure is minimal; if it met `T + A` it would lie in it (B4), making `θ ∈ T + A`, whose centre sequence is periodic
+(B2). (⟹) Points of a minimal set are uniformly recurrent; if `M ⊄ T + A` then `M ∩ (T + A) = ∅` (B4), and B2 makes every centre sequence in
+`M` non-periodic. ∎
+
+**J12-B6 (no free concatenation).** If blocks `A`, `B` (centre words) are both admissible from every point of a nonempty compact `K ⊆ Q₀` and
+map `K` into itself, then `A` and `B` are powers of one word. *Proof.* Isometric self-maps of a compact metric space are onto, so the group
+`⟨f_A, f_B⟩` preserves `K` and fixes its Chebyshev centre `q`. The periodic sequences from `q` with words `A^∞`, `B^∞` are torsion characters
+(B2's (⟸), band-free) with the same layer-0 point `P + q`; torsion characters of order prime to 5 are determined on `ℤ[i]` (`R₅ = ℤ[i] + NR₅`), so
+they are equal, their centre sequences agree, and `A^∞ = B^∞` makes `A`, `B` powers of a common word. ∎ *So a non-`T + A` minimal set cannot be
+built as a full shift of blocks over a compact fibre: it must be window-coded.* (Also: two distinct band torsion characters never share a
+layer-0 point.)
+
+### 3.2 §M.2's reduction checked (quoted in 1.1 as Q4)
+
+| clause | verdict | reason |
+|---|---|---|
+| "a minimal set meeting `T + A` is a leaf circle" | **TRUE**, precisely "a finite union of leaf circles, or a finite torsion orbit" | B4 |
+| "so a counterexample is a switching character" | **GAP** (unsupported) | nothing proves every non-`T + A` point of `Θ₄(R₅)` switches between the parity and `X₃` leaves: the alphabet has nine centres (B1), the four edge centres belong to no period-one leaf, and there are infinitely many other leaves (3.3, Stage 4) whose periodic words mix letters. The correct reduction is B5 |
+| "with bounded run lengths in both directions" | **incomplete** | in a non-`T + A` minimal set *every* periodic pattern has bounded runs (otherwise the closure holds a periodic centre sequence, `T + A` by B2); bounded runs of the parity and `X₃` letters alone does not exclude `T + A` — the leaves `c^a 0^b` of 3.3 have bounded runs of both and are torsion |
+| "the obligation is whether S0B-T5's tree admits switches at bounded gaps" | **answered "yes", and it does not decide ONE-b** | periodic switching orbits exist (3.3, level 2), and they are `T + A`. The obligation that decides is B5: uniform recurrence **and** aperiodicity |
+
+### 3.3 The construction: a hierarchy of leaves, closed by a two-leaf closing lemma
+
+**J12-CL (closing lemma, two leaves).** Let `τ′, τ` be band torsion characters (admissible periodic orbits) with primitive centre words
+`W′, W`, phase-0 points `Q′, Q`, certified margins `r′, r > 0`, and `D := |Q − Q′| > 0`. Let `Ω_W := ω^{|W|}`, so the block `W` acts as the
+rotation `R(z) = Q + Ω_W(z − Q)` and `W′` as `R′(z) = Q′ + Ω_{W′}(z − Q′)`. For `a, b ≥ 1` put `x := Ω_W^a`, `y := Ω_{W′}^b`, and let `Q″` be the
+fixed point of `R′^b ∘ R^a`. In coordinates with `Q = 0`, `Q′ = D > 0`: `Q″ = D(1 − y)/(1 − xy)`. If
+`|Q″ − Q| ≤ r` and `|R^a(Q″) − Q′| ≤ r′`, then the periodic orbit with word `W^a W′^b` from `Q″` is admissible, with margin at least
+`depth(Q″) := min(r − |Q″ − Q|, r′ − |R^a Q″ − Q′|)`.
+*Proof.* The `W^a` part is `τ`'s orbit displaced by `Q″ − Q` (B3, `|·| ≤ r`), ending at `R^a(Q″)`; the `W′^b` part is `τ′`'s orbit displaced by
+`R^a Q″ − Q′` (`|·| ≤ r′`), ending at `R′^b R^a(Q″) = Q″`. Each point is within the displacement of a point at distance `≥ r` (resp. `r′`) from
+`∂Q₀`. ∎
+
+**J12-CL′ (the reachable points: a dense subset of the lens).** Let `𝓛 := B(Q, r) ∩ B(Q′, r′)` (open), assumed nonempty. The map
+`(x, y) ↦ D(1 − y)/(1 − xy)` sends the open set of `(x, y) ∈ S¹ × S¹` satisfying the two strict inequalities onto `𝓛` minus the axis `ℝ`; its
+inverse is `Q″ ↦ (x, y) = (Q̄″/Q″, (Q″ − D)/(Q̄″ − D))` (check: `D(1−y)/(1−xy) = Q″`, and `R^a Q″ = xQ″ = Q̄″`, with `|Q̄″ − D| = |Q″ − D|`).
+Since `Ω_W`, `Ω_{W′}` are not roots of unity, `{(Ω_W^a, Ω_{W′}^b) : a, b ≥ 2}` is dense in `S¹ × S¹`. **So the closed-up points `Q″` for
+`a, b ≥ 2` are dense in `𝓛`,** and `Q″` can be taken off the axis at depth as close to `max_𝓛 depth` as wished. A necessary condition, by
+`|sin(α+β)| ≤ |sin α| + |sin β|`: `r + r′ > D` (the discs overlap).
+
+**J12-H (the hierarchy).** There are admissible periodic orbits `τ₀, τ₁, τ₂, …` with centre words `W₀ = 0`, `W₁ = c₀`,
+`W_{n+1} = W_n^{a_n} W_{n−1}^{b_n}` (`a_n, b_n ≥ 2`), phase-0 points `Q_n`, and certified margins `r_n > 0`.
+*Proof, by induction.* Base: `Q₀ = 0`, `r₀ = 1/4`; `Q₁ = c₀`, `r₁ = 1/12`; `r₀ + r₁ = 1/3 > √2/6 = D`. Step: given `τ_{n−1}, τ_n` with
+`r_{n−1} + r_n > |Q_n − Q_{n−1}| > 0`, CL′ gives `a_n, b_n ≥ 2` with `Q_{n+1} ∈ 𝓛_n` off the axis and `depth(Q_{n+1}) > 0`; CL makes `τ_{n+1}`
+admissible with `r_{n+1} := depth(Q_{n+1}) > 0`. Then `|Q_{n+1} − Q_n| ≤ r_n − r_{n+1} < r_n + r_{n+1}`, and `Q_{n+1} ≠ Q_n` (off the axis), so the
+next pair satisfies the hypothesis. ∎ *(No uniform lower bound on `r_n` is needed; compactness does the rest.)*
+
+**J12-W (the words).** Every `W_n` is primitive, `|W_n|` is strictly increasing, and `W_nW_n` is a factor of `W_{n+1}`.
+*Proof.* Lyndon–Schützenberger: `x^a y^b = z^k` with `a, b, k ≥ 2` forces `x, y, z` to be powers of one word. If `W_{n+1}` were a proper power,
+`W_n, W_{n−1}` would be powers of one word `ρ`; then `W_{n−2}^{b_{n−1}}` is a power of `ρ`, so `W_{n−1}, W_{n−2}` commute, and descending,
+`W₁ = c₀` and `W₀ = 0` would be powers of one word — two distinct letters. `a_n ≥ 2` gives `W_nW_n`. ∎
+
+**J12-Ω (the subshift).** Let `𝓛` be the set of factors of the `W_n`, and `Ω := {s ∈ C₉^ℤ : every factor of s is in 𝓛}`. Then `Ω` is a
+minimal subshift with no periodic point.
+*Proof.* By induction every `W_m`, `m ≥ n + 1`, is a concatenation of `W_n`- and `W_{n−1}`-blocks in which the `W_{n−1}`-runs have length `b_n`
+and are separated by non-empty `W_n`-runs (both `W_{n+1}` and `W_{n+2}` begin with `W_n^{a_n}`, and junctions never merge two `W_{n−1}`-runs).
+So every word of `𝓛` of length `≥ (b_n + 1)|W_{n−1}| + 2|W_n|` contains `W_n`, hence every factor of `W_n`: the language is uniformly recurrent
+and `Ω` is minimal. A periodic `s = V^∞ ∈ Ω` would contain `W_nW_n` for `|W_n| > |V|`; by Fine–Wilf `W_n` would have period `gcd(|W_n|, |V|)
+< |W_n|`, contradicting primitivity. ∎
+
+**Theorem J12-MS (`MS₄({5})` is false).** There is a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A`.
+*Proof.*
+1. Let `θ_n ∈ Θ₄(R₅)` be `τ_n` placed with a `W_n` beginning at time 0; its centre sequence is `W_n^∞`. By compactness a subsequence converges,
+   to `θ_∞ ∈ Θ₄(R₅)` (closed).
+2. The centre map `c : X → C₉^ℤ`, `c_m = (z_{m+1} − ωz_m)/(1 − ω)`, is continuous into a discrete alphabet. Every window of `c(θ_∞)` is a window
+   of `W_{n}^∞` for large `n`, i.e. a factor of `W_nW_n`, hence of `W_{n+1}`: `c(θ_∞) ∈ Ω`.
+3. Let `Y` be the `⟨u⟩`-orbit closure of `θ_∞` and `M ⊆ Y` a `⟨u⟩`-minimal subset. `c(M)` is a nonempty closed shift-invariant subset of the
+   minimal `Ω`, so `c(M) = Ω`, and no point of `M` has a periodic centre sequence. By B2, `M ∩ (T + A) = ∅`.
+4. `M′ := M ∪ iM ∪ i²M ∪ i³M` is `U₅`-minimal (`i` commutes with `u`; a closed `U₅`-invariant `N ⊆ M′` meets some `iᵏM` in a closed
+   `u`-invariant set, hence contains it, hence contains all four), and `T + A` is `i`-stable. ∎
+
+*Remarks.*
+- **What kind of set it is.** `M` lies in the closure of the band torsion characters but meets no leaf: the torsion points of `Θ₄(R₅)` are
+  infinite (Stage 4) and accumulate off `T + A`. Its coding `Ω` is an S-adic subshift of the continued-fraction kind (`W_{n+1} = W_n^a W_{n−1}^b`),
+  not Berend's positive-entropy subshift; whether `M` has positive dimension is not decided here. **Berend's Lemma 3.3 is not used** (Q7):
+  its minimal sets live in the whole torus; the content here is that one lives inside the band set.
+- **Where one prime is used:** B1 (a single rotation `ω`) and CL′ (density of `(Ω^a, Ω′^b)` for two powers of the same `ω`). With two primes
+  the same construction runs into row 95.
+- **At every `p ≡ 1 (mod 4)`.** The construction uses only the parity and `X₃` leaves, whose margins are `p`-free (J12-A3), the rotating frame
+  with `ε_p := w̄_p mod 3 ∈ μ₄` in place of `i` (so the `X₃` centre is fixed), and that `ω_p := ε̄_p w̄_p` is not a root of unity. *Stated for
+  every `p` as a corollary, one mind, the model B1 re-derived only at `p = 5`*: `MS₄({p})` is false for every prime `p ≡ 1 (mod 4)`.
+- **D's prediction** (`MS₄({5})` false, 0.75, "a uniformly recurrent switching family, Berend's Lemma 3.3 shape") is met in its verdict; the
+  mechanism is a closing-lemma hierarchy, not Berend's construction.
+
+**Exact checks** — `tools/crunch_j12_oneb.py` → `data/fs91/j12/oneb-check.txt` (0.2 s, Fractions):
+- B1: the complete set of nine kicks maps onto exactly `C₉`; `(1 − ω)P ∈ π^{−1}ℤ[i]`; `π(1 − ω) = 3(1+i)`; ONE-a's heteroclinic at `p = 5`,
+  converted to the rotating frame, has centre `−(1+i)/6` at every `m ∈ [0, 30)` and `0` at every `m ∈ [−30, 0)`.
+- Level 2 (`W₂ = c₀^a 0^b`, the complete box `2 ≤ a, b ≤ 12`, a finite set the derivation fixes): CL's sufficient condition admits 16 pairs,
+  **all 16 verified directly** (orbit iterated exactly, every point in `Q₀`, exact return); e.g. `(a, b) = (2, 5)`: `|W| = 7`,
+  `Q = (−38 − 41i)/249`, exact margin `29/996`.
+- Level 3 (`W₃ = W₂^a W₁^b` from the level-2 member `(2, 10)`, margin `773/20592`; the box `2 ≤ a, b ≤ 6`): 17 admitted, **all 17 verified**;
+  e.g. `(2, 2)`: `|W₃| = 26`, margin `31082011/1419263044`.
+- Plants: **P1** (the non-rotating frame) makes the forward centre sequence non-constant and leaves the backward one constant — fires on the
+  forward side only, its reason; **P2** (the `X₃` margin taken as 1/6) admits 39 pairs of which 23 fail the direct check, and none of the 16
+  pairs admitted under the true margin fails — fires for its reason.
+
+**C0 scored.** C0-b ("no", 0.55): met. C0-b′ (decided, 0.25): decided. C0-b″ (reduction unchanged, 0.30): not unchanged (one clause GAP, one
+incomplete, the obligation non-deciding). The owner's registered P-MS5 ("no", 0.60): met.
+
 ## Theorems this phase proved
 
 | id | statement (one line) | grade | where |
@@ -111,8 +257,26 @@ Hence `Θ₄(R_{{p}}) ⊄ T + A` for every prime `p ≡ 1 (mod 4)`.
 | J12-A3 | at every `p ≡ 1 (4)`: `θ₂ = 1/2` and `τ_{(1+i)/3} ∈ {1/3, 2/3}` on `U_p` (margins 1/4, 1/12, `p`-free) | hand; tools exact at 5, 13, 17, 29 | Stage 2 |
 | J12-ONEa | **ONE-a (U3): `Θ₄(R_{{p}}) ⊄ T + A` for every prime `p ≡ 1 (mod 4)`**, by the heteroclinic `τ` on `S₊`, `θ₂ + λ_{C−P}` on `S₋` | hand; tools exact (4 primes, `\|m\| ≤ 40`, three plants) | Stage 2; `tools/crunch_j12_onea.py` |
 | J12-HL | the heteroclinic lemma at `p`: two band torsion leaves whose discs meet on layer 0 give a band character outside `T + A` | hand | Stage 2 |
+| J12-B1 | `Θ₄(U₅)` ≅ bi-infinite orbits in `Q₀ = [−1/4,1/4]²` of the rotation `ω = (−4−3i)/5` about one of nine centres per step | hand; tools exact (alphabet, heteroclinic) | Stage 3 |
+| J12-B2 | `θ ∈ T + A` iff its centre sequence is periodic | hand | Stage 3 |
+| J12-B3 | displaced orbits: same centres from `q₀ + δ` give `q_m + ω^mδ`, admissible when `\|δ\| ≤` margin | hand | Stage 3 |
+| J12-B4 | a minimal set meeting `T + A` is a finite union of leaf circles or a finite torsion orbit | hand | Stage 3 |
+| J12-B5 | `MS₄({5})` fails iff some band character is uniformly recurrent with a non-periodic centre sequence (§M.2 corrected) | hand | Stage 3 |
+| J12-B6 | two blocks freely concatenable over a compact set are powers of one word; distinct band torsion characters never share a layer-0 point | hand | Stage 3 |
+| J12-CL | the two-leaf closing lemma (fixed point `D(1−y)/(1−xy)`, admissible with margin `≥ depth`) | hand; tools exact (levels 2, 3) | Stage 3 |
+| J12-CL′ | the closed-up points for `a, b ≥ 2` are dense in the lens of two leaf discs | hand | Stage 3 |
+| J12-H | an infinite hierarchy of band torsion characters with words `W_{n+1} = W_n^{a}W_{n−1}^{b}` | hand; tools exact (levels 2, 3) | Stage 3 |
+| J12-W, J12-Ω | the words are primitive; their S-adic subshift is minimal and aperiodic | hand | Stage 3 |
+| **J12-MS** | **`MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists** | hand, one mind | Stage 3; `tools/crunch_j12_oneb.py` |
+| J12-MSp | the same at every `p ≡ 1 (mod 4)` (corollary; B1 re-derived at 5 only) | hand, one mind | Stage 3 remarks |
 
 ## Would-have-searched-here log
 
 - **Stage 2.** I would have scanned primes `p ≡ 1 (mod 4)` up to some bound for a heteroclinic; instead A3 proves the two margins
   `p`-free, and the tool checks four primes fixed in the brief (a check of a derived claim, not a scan).
+- **Stage 3.** (i) I would have searched for a uniformly recurrent aperiodic switching orbit by running long switching policies (as S0B's
+  prefixes did) and looking at their itineraries; instead the hierarchy J12-H is derived and its limit handled by compactness and minimality
+  of the S-adic subshift. (ii) The level-2 and level-3 checks enumerate **complete boxes** (`2 ≤ a, b ≤ 12`; `2 ≤ a, b ≤ 6`) of the
+  two-parameter set CL′ fixes, and each admitted pair is verified exactly — logged as the ban's edge (a complete enumeration of a set a
+  derivation fixed); no member is load-bearing for J12-MS, whose proof is existential. (iii) I would have searched the level-2 box for the pair
+  of largest margin to seed level 3; the tool takes the largest margin *within the complete box* instead, and the proof needs no choice.

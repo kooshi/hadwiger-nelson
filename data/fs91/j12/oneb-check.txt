@@ -1,0 +1,24 @@
+B1(i) kicks |a|^2<=2 -> centres == C9: True (9 centres)
+B1(ii) (1-omega)P in pi^-1 Z[i]: True;  pi(1-omega) = 3(1+i): True
+B1(iii) heteroclinic centres: forward all -(1+i)/6: True; backward all 0: True
+P1 frame plant (non-rotating frame): forward constant: False; backward constant: True -> FIRES (forward only, its reason)
+level 2 (W2 = c^a 0^b, 2<=a,b<=12): admitted 16, direct-verified 16, failed 0
+   a=2 b=5 |W|=7 Q=(-38/249+-41/249i) margin=29/996
+   a=2 b=10 |W|=12 Q=(-2879/20592+-3353/20592i) margin=773/20592
+   a=3 b=5 |W|=8 Q=(-19/112+-41/224i) margin=1/224
+   a=4 b=5 |W|=9 Q=(-304/1917+-328/1917i) margin=157/7668
+   a=4 b=10 |W|=14 Q=(-11516/76443+-13412/76443i) margin=6443/305772
+   a=6 b=5 |W|=11 Q=(-494/3037+-533/3037i) margin=177/12148
+   a=6 b=10 |W|=16 Q=(-37427/236096+-6227/33728i) margin=307/33728
+   a=7 b=5 |W|=12 Q=(-1577/10296+-3403/20592i) margin=53/1872
+level-2 member used for level 3: a=2 b=10 |W2|=12 margin=773/20592
+level 3 (W3 = W2^a W1^b, 2<=a,b<=6): admitted 17, direct-verified 17, failed 0
+   a=2 b=2 |W3|=26 margin=31082011/1419263044
+   a=2 b=3 |W3|=27 margin=543833237/11428410204
+   a=2 b=5 |W3|=29 margin=939588911/25621040644
+   a=3 b=3 |W3|=39 margin=1002027838409/26802569368636
+   a=3 b=5 |W3|=41 margin=35483352122773/977991614446092
+   a=3 b=6 |W3|=42 margin=17000042179577/516100544100804
+P2 margin plant (X3 margin 1/6): admitted 39, direct failures 23, of which admitted under the true margin 0 -> FIRES (its reason)
+time 0.1s
+ALL PASS
