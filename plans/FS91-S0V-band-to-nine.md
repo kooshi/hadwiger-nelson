@@ -45,6 +45,84 @@ the parity/corner line), possibly the point step if it isolates leaves by margin
 | `k = 9` | 0.35 | 0.43 | 0.22 | `k < 2·5` is exactly the edge of a sweep of step `1/5` against an excluded arc of width `2/k`; an edge case is where an off-by-one lives. |
 | layering/gluing (VB3, VB4, D2-L1) `k`-free | 0.75 | — | 0.25 (uses `k`) | the gluing reads torsion orders and weak approximation; a margin could enter through the order bound. |
 
+## Stage 2 — SAVED (PA-B2, derived from its statement)
+
+**Read for this stage** (brief §"Read first"): `LEDGER.md` rows 95–97; plan §0.1–§0.3; `plans/FS89-S1VB-verification.md` in full;
+`plans/FS89-S1D-derivation.md` in full; `plans/FS89-S0A-gluing-verification.md` §C1 (G1, N₀, G0) and its theorem table;
+`plans/FS89-S1V-verification.md` and `plans/FS89-S0B-band-set.md` **theorem tables only** (budget; neither holds a step of the
+routes below — logged as a reading debt, not as read). `[Berend1984]` Chapter I (pp. 506–509: Defs I.1–I.5, Lemmas I.1–I.2,
+Thms I.1–I.3) and pp. 522–523 (Lemma II.16's density argument, Prop. II.6, Prop. II.7's proof), read in the held PDF's text layer.
+Conventions: verifier I's (`R̂_S = (ℂ × ∏_{v|S} K_v)/Δ(R_S)`, point `(e; b)`, `c̄` the pure `v`-adic element, `u` acts by
+`e ↦ ūe, b_v ↦ u b_v`). Cases are defined on the small chart representative: **case 1** — there are `z_n ∈ M − M`, `z_n → 0`, whose
+small representatives have a non-zero local part; **case 2** — otherwise (a neighbourhood `N` of 0 with `(M − M) ∩ N ⊆ A`).
+
+**The claim** (verbatim, `plans/FS89-PA-berend1984.md:373`): "for every finite `S` with `|S| ≥ 2`, every `U_S`-minimal closed
+`M ⊊ R̂_S` lies in `T + A` (D1-L2, D1-L3, Berend Thm I.2 + Prop. II.6)".
+
+### 2.1 Case 2 ⟹ `M ⊆ T + A` (any closed invariant `M`, any nonempty `S`; band-free) — re-derived
+
+Cover `M` by finitely many small balls about `z₁ … z_m ∈ M`; then `M ⊆ ⋃_j (z_j + A)`, and the cosets of `A` meeting `M` are among
+these finitely many. `u(z + A) = uz + A` and `u(M) = M`, so `U_S` permutes them and a finite-index `U′` fixes each. For `u ∈ U′` of
+infinite order, `z∘u − z ∈ A` reads `(u − 1)b_v = r` at every `v | S` for one `r ∈ R_S`, so every `b_v` is the image of the one
+`q = r/(u − 1) ∈ ℚ(i)`. Split `q = q₁ + q₂` (partial fractions: `q₁ ∈ R_S`, `q₂` integral at every `v | S`, denominator `m` prime to
+`S`); `(e; q, …, q) ≡ (e − q₁; q₂, …, q₂)`, and `m` times the second summand is `x ↦ −Σ_{v|S} ψ_v(m q₂ x)`, which on `R_S` equals the
+archimedean term of the product formula, so it lies in `A`; hence the summand is in `T + A`. So `M ⊆ T + A`. (This is verifier I's
+VB5; D's D1-L2 is a shorter route with a stronger case hypothesis.) **Minimal form:** a minimal `M` meeting `T + A` is the orbit
+closure of `τ + λ_d`, a finite union of circles `τ′ + {λ_{d′} : |d′| = |d|}` (the stabiliser of `τ` has finite index and contains a
+power of `w_p`, dense on `S¹`).
+
+### 2.2 Case 1 and `|S| ≥ 2` ⟹ `M − M = R̂_S` (D1-L3; band-free) — re-derived
+
+`D := M − M` is compact, `U_S`-invariant, contains 0.
+1. *A pure local element in `D`.* Take `z_n ∈ D`, `z_n → 0`, small representatives `(a_n; b_n) → 0`, `b_{n,v} ≠ 0` at one fixed `v | p`
+   along a subsequence; say `|w_p|_v = p` (else use `w_p^{−1}`). Let `h_n = w_p^{k_n}` with `k_n` least such that `|h_n b_{n,v}|_v ≥ p^{−1}`.
+   Then `h_n z_n` has representative (archimedean part `ū a_n → 0`; `v`-part in the annulus `[p^{−1}, 1]`; the conjugate place
+   contracted; the other primes' places unchanged, `→ 0`). A subsequence converges to `c̄`, `c ∈ K_v^×`; `c̄ ∈ D` because `D` is
+   closed and `h_n·z_n ∈ D` (`h·0 = 0`, so no base point is needed).
+2. *Rotation.* `u·c̄ = (u_v c)‾ ∈ D`. Take `p′ ∈ S ∖ {p}` (**the only use of `|S| ≥ 2`**): `w_{p′}` is a `v`-unit of infinite order, so the
+   closure of `⟨w_{p′}⟩` in `ℤ_p^× ≅ μ_{p−1} × ℤ_p` is an infinite closed subgroup, hence contains `1 + p^jℤ_p` for some `j`. So
+   `D ⊇ {(w_p^n t c)‾ : t ∈ 1 + p^jℤ_p} = (w_p^n c)‾ + Γ_n`, `Γ_n` the image of the additive ball `w_p^n c p^j O_v`.
+3. *Density.* As `n` runs in the direction that grows `|w_p^n|_v`, the balls increase to `K_v`, so the compact subgroups `Γ_n` increase to
+   the image of `K_v`, which is dense in `R̂_S` (its annihilator in `R_S` is `{r : ψ_v(K_v r) = 0} = 0`). Increasing compact subgroups
+   with dense union are eventually `ε`-dense for every `ε`, and so is every coset. `D` is closed, so `D = R̂_S`. ∎
+
+### 2.3 Berend's Theorem I.2 applies to `(R̂_S, U_S)`, and it kills case 1 for minimal sets — hypotheses checked by me
+
+`[Berend1984]` Thm I.2 (p. 509, verbatim from the text layer): "If (G, Σ) is a group ℱ-flow, then every minimal set is restricted",
+where (Def. I.5) `A` is *restricted* if "the only closed Σ-invariant set B ⊆ G for which A + B = G is B = G". Def. I.4 (ℱ-flow): a
+chain `Σ = Σ^{(1)} ⊇ Σ^{(2)} ⊇ …` with (1) each `(Ω, Σ^{(k)})` ergodic (Def. I.2: every closed invariant proper subset nowhere dense),
+(2) `Σ/Σ^{(k)}` a finite group of cosets, (3) the fixed points of the `Σ^{(k)}` dense in the union. Prop. II.6 derives these on `Ω_a`
+from one ergodic element plus a prime `q` at which every element is a unit, with `Σ^{(k)}` = the elements `≡ I (mod q^k)`. I redo it
+for our action; nothing in it uses expansiveness, so the isometric archimedean direction does not obstruct it:
+- **Choice.** `q` any rational prime not in `S` (e.g. 3). `Σ^{(1)} := U_S`, `Σ^{(k+1)} := {u ∈ U_S : u ≡ 1 (mod q^k R_S)}`. Every `u ∈ U_S`
+  is a unit of `R_S` (`π_p, π̄_p` are invertible for `p ∈ S`), so multiplication by `u` is invertible mod `q^k`.
+- **(2)** `U_S/Σ^{(k)}` embeds in `(R_S/q^{k−1}R_S)^×`, finite; `U_S` is abelian, so the cosets form a finite group. ✓
+- **(3)** A character killed by `q^{k−1}` is fixed by `Σ^{(k)}` (`θ∘u − θ = θ∘(u − 1)` and `(u − 1)R_S ⊆ q^{k−1}R_S`). `⋃_k R̂_S[q^k]` is
+  dense iff `⋂_k q^k R_S = 0` (Berend's Lemma II.16 argument, p. 522: `A(G, G[q^n]) = q^nĜ`), and `⋂_k q^kR_S = 0` since `q ∉ S`. ✓
+- **(1)** `Σ^{(k)}` contains `w_p^l` for some `l ≥ 1` (finite quotient). The dual of `θ ↦ θ∘w_p^l` is `r ↦ w_p^l r` on `R_S`, whose every
+  non-zero orbit is infinite (`w_p` is no root of unity); by Thm I.3 (Halmos) it is Haar-ergodic. A closed `A` with `w_p^l A ⊆ A` has
+  `A ⊆ w_p^{−l}A` of equal measure, so `A` is invariant mod 0 and `μ(A) ∈ {0, 1}`; `μ(A) = 1` and `A` closed force `A = R̂_S` (Haar has
+  full support). So a proper closed `Σ^{(k)}`-invariant set is null, hence nowhere dense. ✓
+- **Thm I.1's proof re-walked in our group case** (it is what Thm I.2 uses, via Lemma I.2): the sets `A_{k,i}` are `u_iA_{k,1}`, one
+  has interior (Baire), ergodicity makes it everything, so every `ξ` pairs with a point of `Ω_Y^{(k)}`, then of `Ω_Y^{(∞)}`; a
+  `Σ^{(k)}`-fixed `ξ` then pairs with all of the `Σ^{(k)}`-minimal `Ω_Y^{(k)}`; density (3) and closedness give `Ω_X × Ω_Y^{(∞)} ⊆ A`,
+  and minimality of `Y` finishes. Every step uses only (1)–(3), surjectivity of each `u`, and commutativity. ✓
+- **Application.** Let `M` be minimal and in case 1. By 2.2, `M + (−M) = R̂_S`, and `−M` is closed and invariant (`u(−m) = −um`). Thm I.2:
+  `−M = R̂_S`, so `M = R̂_S`. But `R̂_S` is not minimal: `{0}` is a closed invariant proper subset. Contradiction. So **every minimal
+  set is in case 2**, and 2.1 puts it in `T + A`. ∎
+
+(The `⊊` in the statement is automatic, since `R̂_S` is never minimal. Berend's half needs only `S ≠ ∅`; `|S| ≥ 2` enters only through
+2.2, and at `|S| = 1` 2.2 fails, as it must: row 97.)
+
+### 2.4 Verdicts
+
+| claim (verbatim) | verdict | grade | inputs |
+|---|---|---|---|
+| PA-B2: "for every finite `S` with `|S| ≥ 2`, every `U_S`-minimal closed `M ⊊ R̂_S` lies in `T + A`" | **TRUE** | hand | 2.1 (VB5), 2.2 (D1-L3), 2.3 (`[Berend1984]` Thm I.1–I.3 with Prop. II.6's construction, hypotheses checked here) |
+| "So `MS_k(S)` holds at every band `k`" (truncated in the brief, C0 row Q2) | **TRUE** as quoted, at every `k ≥ 2` | hand | a minimal subset of `Θ_k(R_S)` is a `U_S`-minimal closed subset of `R̂_S` (minimality is intrinsic; `Θ_k` closed and invariant); no band enters |
+
+**Where the value of `k` is used in stage 2: nowhere.** The band is not an input to 2.1–2.3.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
