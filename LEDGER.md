@@ -10,6 +10,9 @@ addresses HERE and mechanism and readings in the grokkings, each pointing at the
 `CLAUDE.md` and this file as one corpus. Current state only, like `CLAUDE.md`: a corrected row is rewritten in place and the story
 goes to git.*
 
+*Work of the 2026-09-25 crunch not yet folded into rows is indexed in `plans/CRUNCH-2026-09-25-INDEX.md`, with its items in
+`plans/FS91-close-inventory.md`, `plans/M2-close-inventory.md` and `plans/M3-close-inventory.md`.*
+
 ## A. The novel-results ledger
 
 ### The novel-results ledger

@@ -54,3 +54,17 @@ Each proposal read in the index (`plans/CRUNCH-2026-09-25-INDEX.md` §5.1) and c
 **Gates after the `CLAUDE.md` edit:** `python3 tools/claude_md_fact_audit.py --base f1226b8a` exit 0, "AUDIT PASSED (0 failure(s))";
 `--dupes` exit 0, "11 repeated runs". `CLAUDE.md` 275,129 → 275,608 bytes (+479). `plans/FRONTIER-STUBS.md`: 53 ranked rows, no FS number
 twice.
+
+## Stage 3 — SAVED (`LEDGER.md`: L1–L4)
+
+| # | decision | reason |
+|---|---|---|
+| **L1** | **applied verbatim** — a header line after "…the story goes to git.*": "*Work of the 2026-09-25 crunch not yet folded into rows is indexed in `plans/CRUNCH-2026-09-25-INDEX.md`, with its items in `plans/FS91-close-inventory.md`, `plans/M2-close-inventory.md` and `plans/M3-close-inventory.md`.*" | address only; no result |
+| **L2** | **declined, for FS-91's close** | "Corrections owed: … rows 3, 61, 69, 70, 78" at row 95's end asserts that FS-89's row 95 is wrong somewhere — a crunch finding, in a file blind verifiers may read |
+| **L3** | **declined, for M3's close** | "Correction owed: … row 18" at row 92's end asserts the same of row 92 |
+| **L4** | **declined, for FS-91's close** | "Re-derivations and extensions since" (row 96) and "Extended to every real number field" (row 82) state results; the second names the result itself |
+
+L1 alone therefore reaches the ledger; the declined pointers stay in the index's §5.1 for the closes (J24's first batch).
+
+**Gates after the `LEDGER.md` edit:** fact audit `--base f1226b8a` exit 0, "AUDIT PASSED (0 failure(s))"; `--dupes` exit 0, "11 repeated
+runs"; `python3 tools/fs71_ledger_b_check.py --strict` exit 0, "RESULT: PASS" (544 theorems, 544 § B rows; the same before the edit).
