@@ -88,6 +88,38 @@ pagination unchecked.
 **Verdict for this paper:** does not contain J21-MX or any of (F), (S), (B), (M); shares its Fourier method and is the printed home of the
 refuted cylinder lemma's correct (near-maximum) form.
 
+## Stage 2 — SAVED: paper 2, Tardif–Wrochna 2019
+
+**Copy.** C. Tardif, M. Wrochna, *Hedetniemi's conjecture and strongly multiplicative graphs*, SIAM J. Discrete Math. 33(4) (2019) (journal
+pagination and doi unchecked here), zbl 1427.05090 (review withheld); **arXiv:1808.04778v1** (14 Aug 2018, 32 pp.) →
+`~/source/library/pdf/TardifWrochna2019-hedetniemi-strongly-multiplicative.pdf`. The arXiv v1 is what was read.
+
+**Reading log.**
+- **Abstract, table of contents, §1 (§1.1 "Multiplicativity and strong multiplicativity", §1.2 "Exponential graphs") read in full; §2.1–§2.2
+  (walks, reduced walks, universal covers) read; theorem list of §3–§6 and Appendices A–B read by statement (grep of every
+  `Theorem/Lemma/Corollary` line); proofs of §3–§6 not read** — they are covering-space arguments about the **target** and cannot bear on
+  a spectral hypothesis on a factor.
+- The paper's subject is the **target**: "A graph K is multiplicative if a homomorphism from any product G × H to K implies a homomorphism
+  from G or from H. Hedetniemi's conjecture states that all cliques are multiplicative." (abstract). "Strongly multiplicative": "for any
+  connected graphs G, H with odd cycles C, C′, a homomorphism from (G × C′) ∪ (C × H) ⊆ G × H to K implies a homomorphism from G or H." The
+  results: odd cycles (Thm 1, credited to El-Zahar–Sauer and Häggkvist–Hell–Miller–Neumann-Lara), square-free graphs (Thm 8, [Wro17b]),
+  "Theorem 2. Let K be a graph such that every edge is contained in at most one square. Then K is strongly multiplicative", and "the third
+  power of any graph of girth > 12" (Cor. 21). "Though more graphs are amenable to our methods, they still make no progress for the case of
+  cliques."
+- §1.2, verbatim: "a graph K is multiplicative if and only if `K^G` admits a homomorphism to K, for all G that do not."
+
+**Bearing on J21-MX.** None on (F), (S), (B), (M), (C). J21-MX fixes the target `K_k` and puts a hypothesis on **one factor**
+(`Cay(K, T)` with `λ* < 1/(k−1)`), for **every** other factor: in §1.2's language its finite case is `K_k^{Cay(K,T)} → K_k`, a statement
+about one exponential graph, not about multiplicativity of `K_k` (Hedetniemi, false for `k ≥ 5` by Shitov). Tardif–Wrochna prove
+multiplicativity of targets other than cliques by topology (universal covers, the ♦-fundamental group); nothing spectral, measurable or
+Borel appears (grep: "spectr", "eigen", "measur", "Borel" — no hits).
+
+**A side find for the project (not for J21-MX):** "An interesting small example is the 4-chromatic graph known as the Moser spindle" (§1.1,
+after Theorem 2) — **the Moser spindle is strongly multiplicative, hence multiplicative**: if `G × H` maps homomorphically to the Moser
+spindle, then `G` or `H` does. Proposed as a bibliography note (§ proposals), with no consumer here yet.
+
+**Verdict for this paper:** does not contain J21-MX or any of its parts; it is a neighbour by title only.
+
 ## Would have searched here (the ban to 2026-10-01)
 
 *(Empty so far: a reading job runs no finite-witness search.)*
