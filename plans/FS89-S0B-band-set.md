@@ -233,6 +233,7 @@ to every depth. Deeper levels were not computed: the derivation makes them unnec
     `1 + π₁₃^{v'}ℤ[i]/π₁₃^k` on the kernel of the prime-to-13 part. So the 13-part sweeps every multiple of `13^{−(k−v')}`,
     which leaves the band once `k > v'`. Here `w₅ ≡ 2 (mod π₁₃)`, of order 12.
   - So `|n| ≤ v'`, a contradiction for large `n`. ∎ The order-26 band characters of §4 are consistent: `k = 1` is allowed.
+  - *[Correction at the close, 2026-09-25, from verifier H (`plans/FS89-S1V-verification.md` § V-A3, divergence table): "minus its 13-principal part", read literally, deletes the part used next — the difference is exactly `λ_{w̄ⁿD}` on `ℤ[i]`, nothing subtracted, of `π₁₃`-level `n − v(D)`; and the sweep assumes the 13-part sits at one place above 13, which V's step V3b supplies for `|n| ≥ b₀`. Verifier H also drops the hypothesis "prime to 13" (Theorem V4). Filed as `plans/FS89-derivation.md` FS89-S0B-T6.]*
   - *Reading, not derived:* 13 also kills the infinitely-switching (irrational) family. Sketch:
     - along a long parity stretch of row 0, row `n = Θ∘w₁₃ⁿ|_{R₅}` equals `θ₂ + λ_{w̄₁₃ⁿc}` up to a 13-torsion character of
       bounded order (long stretches force it);

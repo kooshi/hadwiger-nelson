@@ -235,6 +235,7 @@ The list itself is not computed here (the ban; see §5).
   for all `p′`.
 - Over `Q` the images of the other primes' units generate all of `𝔽_{p′}^×`, which is the lever for D-2 (§4).
 - `RS₄({5})` stays false (S0B-T3): D1-L3 fails at rank one.
+- *[Correction at the close, 2026-09-25, from verifier I's B3 (`plans/FS89-S1VB-verification.md` §B3, row "scope of RS"): this paragraph understates what is proved. D2-L1 in its general form (`R ⊆ R′ ⊆ Q`) already gives `RS₄(S′)` for every `S′ ⊇ {5, 13}`, and verifier I's S1VB-14 gives `RS₄(S)` for every `|S| ≥ 2` with no exit lemma at all. Filed so in `plans/FS89-derivation.md` FS89-D1-T2.]*
 
 ## §4 — D-2: **RQ₄ holds: `Θ₄(Q) ⊆ T + A`.**
 
