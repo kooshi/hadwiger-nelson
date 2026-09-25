@@ -138,7 +138,8 @@ Conversely each of these `4·N₃` characters (`N₃` = number of primes of `F` 
    impossible (G55: `χ(F²) = 2 ⟺ L(F) = 2`, and `L = 2` comes only from such a prime, G56) — so this case is the bipartite one.
 4. `0 ∉ V₃`: every unit is O-type, so (J1) `α = 0` on every layer, hence on `R = Σ_b bR₅`; `τ₂ = 0` on `U`, hence on `R`; `θ = τ₃`.
 5. *One place.* Write `τ₃ = Σ_{𝔓∈S₃} g_𝔓` (J2 (i)) with `V_𝔓 = g_𝔓(T(O_𝔓))` symmetric in `𝔽₃`; `0 ∉ ΣV_𝔓` (J3). A non-zero symmetric
-   `V_𝔓` contains `±1`, and two such sum to a set containing 0; so exactly one `g_𝔓 ≠ 0` on `T(O_𝔓)`, and it avoids 0 there.
+   `V_𝔓` contains `±1`; `m ≥ 2` such sets sum to a set containing 0 (`1 − 1` in pairs, plus `1 + 1 + 1` if `m` is odd); so exactly one
+   `g_𝔓 ≠ 0` on `T(O_𝔓)`, and it avoids 0 there.
 6. *Level 1.* If `g = g_𝔓` has exact level `k ≥ 2` (`g(𝔓^k) = 0 ≠ g(𝔓^{k−1})`, possible only if 3 ramifies at `𝔭`), then `λ = g|_{𝔓^{k−1}/𝔓^k}`
    is a non-zero `𝔽₃`-functional on `𝔓^{k−1}/𝔓^k ≅ 𝔽_{q²}`; the lines `it₀ϖ^{k−1}𝔽_q`, `t₀ ∈ μ_{q+1}`, span it (the span of `μ_{q+1}` is an
    `𝔽_{q²}`-subspace), so `λ ≠ 0` on one of them, and `w_s = (1+is)/(1−is) ≡ 1 + 2is (mod 𝔓^k)` for `s ∈ 𝔭^{k−1}` gives
@@ -183,6 +184,82 @@ colours; the residue bound at `𝔽₃` for the converse.
   have in the needed sense (a definition must be chosen: places with finite residue field, of any rank); (2) J2's finiteness (the proof's
   one use of `[F : ℚ] < ∞`) has no replacement for a finitely generated `F` that is not purely transcendental over an algebraic field —
   FS-39's gap (G63) in another costume.
+
+## Stage 3 — SAVED
+
+### 3.1 Verdicts
+
+| statement | verdict | hypotheses the proof actually uses |
+|---|---|---|
+| **S1** — for every real number field `F`: `χ(F²) ≤ 3 ⟹ L(F) ≤ 3` | **TRUE** (§2.6), with the sharper form `χ(F²) = 3 ⟺ F²` non-bipartite and `F` has a prime above 3 **of residue field `𝔽₃`**; and `Θ₃(R_F)` is exactly `4N₃` additive characters when no stable dyadic prime ramifies (J4) | `[F : ℚ] < ∞` (only in J2); FS81-T2 (so FS73-T22 ⟹); FS81-T3, T4; Weil for `q = 3^f ≥ 27`; G56 (a ramified stable dyadic prime gives `L = 2`) |
+| S1 on every **algebraic** `F ⊆ ℝ` | **TRUE**, `L` read through places (König's lemma over the number subfields) | as S1, plus row 57's valuation-subring colouring |
+| S1 on `E(t₁,…,t_d)`, `E` algebraic | **TRUE** under the place reading (`[Fischer1990]` Thm 6 = G63, composite places) | as above |
+| S1 on **every** subfield of ℝ | **GAP** at two named steps: (1) `L(F)` is defined by § Notation through primes, which a general transcendental `F` lacks — a place reading must be chosen; (2) J2's one use of finite degree has no replacement for finitely generated fields that are not purely transcendental over an algebraic field (FS-39's gap, G63) | — |
+| **S2** — `χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field | **TRUE** (§3.2) | S1/J4; G55 (`χ = 2 ⟺ L = 2`); row 52 and G56 for `χ ≤ L` (the residue bound at `𝔽₃`, at `𝔽₇` — `χ(Γ₇) = 4`, `[Moorhouse2010]` — and at the inert dyadic targets `U_Q`, `Q ≤ 32`, four-colourable at [tools] grade, FS-54); FS81-T2 |
+| **S3** — `Θ₃(ℤ[U_F]) = ∅` for `F = ℚ(α, √7)`, `α³ = α + 1`, so `χ(F²) = 4` | **TRUE** (§3.3), two routes | J1, J2 at 3 (route B also J2 at 2), J3, Weil or the exact count at `q = 27`; PARI's prime decompositions (exact); FS81-T2; the residue bound at 7 |
+
+**The falsifier did not appear, and cannot:** J4 leaves no room for a point of `Θ₃` in any real number field without an `𝔽₃`-prime
+(or a ramified stable dyadic prime), so the conjecture's `L = 4` clause has no three-colour character counterexample anywhere.
+
+### 3.2 S2
+
+Let `F` be a real number field with `L(F) ≤ 4`; `χ(F²) ≤ L(F)` always (row 52 for odd targets, G56 for dyadic ones, Theorem A).
+- `L = 2`: `χ ≥ 2` (the plane has edges), so `χ = 2`.
+- `L = 3`: `χ ≠ 2` (G55: `χ = 2 ⟺ L = 2`), so `χ = 3`.
+- `L = 4`: no target is three-colourable, so no stable dyadic prime ramifies (that target is 2-colourable) and no prime above 3 has residue
+  field `𝔽₃` (`Γ₃`); by J4 `N₃ = 0` gives `Θ₃(R_F) = ∅`, so `χ ≥ 4` (FS81-T2's contrapositive). Hence `χ = 4`. ∎
+
+So the conjecture's `L ≤ 4` clause, proved before for real quadratic fields and for fields containing √3 (G55, row 82), holds for every
+real number field, and (under the place reading) for every algebraic subfield of ℝ.
+
+### 3.3 S3 — `ℚ(α, √7)`, re-derived arithmetic and two routes
+
+**Arithmetic** (PARI, exact; `data/fs91/j09/field-arithmetic.gp` and `.out`): `F` has degree 6, signature `[2, 2]`, discriminant
+`2⁶·7³·23²`. Above 2: one prime of `F`, `e = 2, f = 3`, which **splits** in `L` (two primes) — so there is no stable dyadic prime
+(`F_𝔭 ⊇ ℚ₂(√7) = ℚ₂(i)`, as `−7 ≡ 1 (mod 8)`). Above 3: two primes, `e = 1, f = 3`, each **inert** in `L` (`f = 6`): stable, residue field
+`𝔽₇₂₉`, `q = 27`. Above 7: `(e, f) = (2, 1)`, inert in `L` (stable, residue `𝔽₄₉`, `q = 7`: usable), and `(2, 2)`, split in `L`. So
+`L(F) = χ(Γ₇) = 4` (the only targets are `Γ₇`, `Γ₂₇` with `χ ≥ 6`, and planes at larger usable primes, all `≥ 4`; no `𝔽₃`-prime; no
+dyadic target). The stub's arithmetic is confirmed except its phrase "the dyadic targets have `χ ≥ 4`": there is no dyadic target.
+
+**Route A (J4).** No ramified stable dyadic prime and `N₃ = 0`, so `Θ₃(R_F) = ∅`.
+
+**Route B (shorter at 2).** `S₂ = ∅` gives `1/2 ∈ R_F` (J2 (ii); prime inversion, G55), so `τ₂ = 0`; by J1 every unit is O-type
+(`τ₂(u) = 0 ≠ 1/2`), so `θ = τ₃` is an additive colouring non-zero on `U` (J1: `α = 0`); by J2 at 3 and J4 steps 5–6 it is
+`Tr_{𝔽₇₂₉/𝔽₃}(a·)` at one of the two primes above 3, non-zero on `μ₂₈`; but every such functional vanishes somewhere on `μ₂₈` (at least 4
+zeros for every `a`, exact: `data/fs91/j09/lemma-k-check.txt` and `k1-pari.out`; also Weil, `28 > 4√27 = 20.8`). So `Θ₃(R_F) = ∅`.
+
+**Hence** `χ(F²) ≥ 4` (FS81-T2), and `χ(F²) ≤ χ(Γ₇) = 4`: **`χ(ℚ(α, √7)²) = 4`**, the conjecture's prediction met, at `L = 4` in a field
+with neither √3 nor a four-chromatic quadratic subfield (its quadratic subfield ℚ(√7) is three-chromatic).
+
+**What C0's own route says about this field**, recorded because it is the instructive part: J1's rotation invariance alone does not
+refute it — `g = Tr_{𝔽₇₂₉/𝔽₃}` at one place above 3 has an `i`-invariant zero set (§2.4). The refutation needs the parity half of J1, and at
+this field the parity half is free because the 2-adic wall is broken.
+
+### 3.4 C0 scored
+
+| C0 line | outcome |
+|---|---|
+| S1 for number fields TRUE, 0.75 | **won** |
+| S1 for algebraic fields TRUE, 0.65 | **won** |
+| S1 for every subfield: a named GAP, 0.6 | **won** (two named steps) |
+| S2 TRUE, 0.75 | **won** |
+| S3 TRUE, 0.8 | **won** |
+| a falsifier exists, 0.1 | did not occur; J4 excludes it for every real number field |
+| the **route** C0 expected (rotation invariance + a character count), with risk (b) "the count at `q = 27`, where Weil's bound may be too weak" | **lost, at exactly the named risk**: the bracket is 0 at `q = 27`, and K1 is false there. The repair (J4's no-mixing) was not in C0. |
+
+### 3.5 Proposed edits for the front-page lane (not made here; standing rule 7)
+
+- `LEDGER.md`: a row for J2 + J4 + S1–S3 at [hand, one mind] until a second derivation is compared (J02's, stage 5); § B lines for J1–J4,
+  J-K, J4-C, J4-A, J4-T6.
+- `CLAUDE.md` Frontier items 10 and 14, Mission (2): the conjecture's L ≤ 4 clause for every real number field; G74's "residual three-colour
+  case ... (FS-82)" and G61/G38's three-colour sentences; T7's "odd residue degree" becomes "residue field `𝔽₃`".
+- `plans/FS81-derivation.md` T6: its open item settled (J4-T6). FS86-B1-LR's scope line: "`L/ℚ` Galois" is not needed (J2).
+- The FS-82 stub: closed by J4 (its §Shape item 4 "the other side" answered: no point exists); its "dyadic targets have `χ ≥ 4`" corrected.
+- FS-48's three-colour half (multiquadratic fields without √3) is decided by J4: `χ = 3` iff a prime above 3 of residue field `𝔽₃`.
+- FS-75 (the kernel): J4 is a better kernel target than the per-field route — its inputs are FS81-T3/T4, J2 and one character-sum bound.
+- **Prior-art debt:** no gate was run for J2 or J4 (a blind job); `[Johnson2000]`, `[Johnson2006]` stay unread; J4's statement in the
+  literature's words ("every circular 3-colouring of the unit-distance graph over a real number field is a residue colouring at a prime of
+  norm 3") should be searched before any claim of novelty.
 
 ## Would-have-searched-here log
 
