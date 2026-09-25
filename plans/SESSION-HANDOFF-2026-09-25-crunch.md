@@ -57,3 +57,9 @@
   `plans/POROS-2026-09-25-crunch-plan.md` (the advisor).
 - **The next fact-audit base** is FS-89's closing commit. Find it with `git log --oneline -- plans/FS89-close-inventory.md`, the latest
   entry; a new milestone's inventory records its own base when it opens.
+
+## 4. Where the crunch's work is (added mid-crunch)
+
+- **The index of every crunch result:** `plans/CRUNCH-2026-09-25-INDEX.md` (job J30, the bookkeeper Kooshi asked for; blind verifiers never open it). Stubs and plans the work bears on carry an address-only block, "Where the 2026-09-25 work on this lives".
+- **Rescued scratch:** `data/rescued-2026-09-25/` (manifest `SWEEP.tsv`); large files, renders and paper texts in `~/source/lean-dir-rescue/`; the owner's scratch (holds agent ids, never in the repo) in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/`.
+- **Close inventories:** `plans/FS91-close-inventory.md` (M1), `plans/M2-close-inventory.md`, `plans/M3-close-inventory.md`.
