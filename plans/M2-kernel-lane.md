@@ -272,3 +272,92 @@ Every quoted statement in the brief, checked against its source on disk:
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | X1 | none at stage 1 | — |
+| X2 | an LRAT refutation of the 18-vertex graph (CaDiCaL) as its second oracle | the gadget algebra by `decide +kernel` over the seven chain ports (§2.1) |
+| X3 | a fresh LRAT of the 588-core to make the K(√7) theorem unconditional | the theorem is stated conditionally on `G₄`, declared for vacuity; the LRAT is post-ban |
+
+## Stage 2 — SAVED
+
+### 2.1 §PA — the repository's own modules, read at their source (G46: "read the construction's own data layout")
+
+| name | where | what it gives the lane | target |
+|---|---|---|---|
+| `Forces G k p q := ∀ C : G.Coloring (Fin k), C p = C q` | `Forcer.lean:41` | the chain's hypothesis; `Forces.comap` pulls it along any hom | K1 |
+| `copyUnion q c ρ := (unitDistance ℂ).comap (copyDrawing q c ρ)` | `Copy.lean:158` | **cannot** be generalised as is: a `comap` union keeps coincident points as distinct vertices, so the chain's shared points `(j, b)` and `(j+1, a)` would not be identified and the forced equalities would not chain. The chain union must be the **induced subgraph on the image set**, `(unitDistance ℂ).induce (Set.range drawing)` | K1 |
+| `isometry_affine`, `Forces.transport`, `transport_pair_of_isometry` | `Homogeneous.lean:108, 241, 199` | per-copy transport (or skip it: a copy's placement `z ↦ s + u(z − q a)` composed with the induce inclusion is a graph hom `G →g induce S` directly, and `Forces.comap` finishes) | K1 |
+| `not_colorable_of_forced_equal`, `add_one_le_chromaticNumber_unitDistance_of_forces` | `OneDefect.lean:80, 127` | the spindle (`m = 2`) — the consistency corollary | K1 |
+| `rhombus`, `rhombusGadget` (by `Gadget.ofExhaustion`, 81 colourings, `decide +kernel`) | `Gadget.lean:425–430` | the forced pair `(0, 3)` at three colours, kernel, no solver | K1 |
+| `rhombusDraw`, `exists_forces_of_unit_drawing_three` | `Mascot.lean:256, 282` | a drawing of the rhombus; J14 draws it again in the JSON's orientation (`0, 1, (1+i√3)/2, (3+i√3)/2`, `δ = 1 + ω`) so the six multipliers are the reference's | K1 |
+| `Gadget.transport`, `Gadget.inter`, `Gadget.edge`, `not_colorable_of_gadget` | `Gadget.lean:117–320` | **the second oracle for the 18-vertex graph**: six transported rhombus gadgets and the edge `0—1`, over the seven chain ports, refuted by `decide` — no solver, no LRAT (a CaDiCaL certificate would be a solver run, banned) | K1 |
+| `planeOver F := {z | z.re ∈ F ∧ z.im ∈ F}`, `fieldOfRadicands`, `sqrt_mem_fieldOfRadicands` | `SquareClass.lean:63, 306, 311` | only membership lemmas exist: **no closure under `+`, `·`**, which the chain's placements need — a small `planeOverSubring F : Subring ℂ` leaf | K1, K2 |
+| `four_le_chromaticNumber_planeOver_of_sqrt_eleven_mem` | `Instances/SqrtEleven.lean:227` | the `planeOver` lower-bound statement shape to copy | K1 |
+| `UDCert`, `Q4 = Adjoin 11 (Adjoin 7 (Adjoin 5 (Adjoin 3 ℤ)))` | `SeamCert.lean`, `SqrtEleven.lean` | **no `√2`**: the stub's P4 hunch holds — the ℚ(√2,√3) instance is drawn with `Real.sqrt 2`, `Real.sqrt 3` and the chain theorem, not through `UDCert`. The K(√7) instance's field (√3, √7, √11) IS in `Q4`, so a post-ban `G₄` certificate can use `UDCert` unchanged | K1 |
+| `unitQuadrance R`, `unitQuadrance.map`, `unitQuadrance_colorable_of_ringHom` | `UnitQuadrance.lean:51, 82`; `ResidueTower.lean:64` | colourability pulls back along a ring hom — route C's last step (`A →+* F`, evaluation at `t = 0`) | K2 |
+| `cosetResidue ψ`, `cosetResidue_sub`, `cosetResidue_apply_of_mem` | `ResidueColouring.lean:193–220` | **route C's coset step**: extend a hom from the subgroup `A × A` (the `t`-integral pairs) to the whole plane coset by coset; within a coset it is a conditional `map_sub`, so unit edges map to unit edges | K2 |
+| `normOne_subset_valuationSubring` | `ResidueColouring.lean:481` | every norm-one element lies in a σ-stable valuation subring — **route C's integrality in its complex form** (the `t`-adic valuation subring of `F(i)(t)` is conjugation-stable), and FS-47's "only if" | K2, K3-B |
+| `colorable_unitDistance_induce_of_valuationSubring` | `ResidueColouring.lean:599` | **does not fit route C as named in the brief**: it colours with `|G|` colours for a **finite** residue ring `G`, while route C's residue field is `F(i)`, infinite. Route C uses its mechanism (`cosetResidue`) with a colouring of `F²` in place of `|G|` distinct residues. Reported in §G.4 | K2 |
+| `forces_iff_exists_finite` (via `Finset.rado_selection`) | `Kempe.lean` | de Bruijn–Erdős already used in the repository | K2 (J17) |
+
+### 2.2 §PA — Mathlib and core, per statement (queried at the pinned Mathlib, `.lake/packages/mathlib`, with `grep -rn`)
+
+| need | found | not found (query) |
+|---|---|---|
+| K1: sums over `Fin m` of unit vectors | `Finset.sum`, `Fin.sum_univ_succ`, `Finset.sum_range_succ` (standard) | — |
+| K1: a chromatic bound from a hom into an induced subgraph | `SimpleGraph.chromaticNumber_mono_of_hom`, `Colorable.of_hom`, `SimpleGraph.induce` | — |
+| K2: formally real fields | `IsFormallyReal` (`Algebra/Ring/IsFormallyReal.lean:104`), instance for strict ordered rings; `IsSemireal` | — |
+| K2: `F(t)` as rational functions | `RatFunc.liftRingHom`, `RatFunc.liftAlgHom` and their `_injective` lemmas (`FieldTheory/RatFunc/Basic.lean:435, 468, 643, 653`); `transcendental_iff_injective`; `Polynomial.algEquivOfTranscendental` | an `IntermediateField.adjoin F {t} ≃ RatFunc F` equivalence (queried `RatFunc` in `FieldTheory/IntermediateField`, `Adjoin*`: none) — J15 defines `F⟮t⟯` as the `fieldRange` of the lift instead |
+| K2: the place `t ↦ 0` | `polynomialValuationX : Valuation K⟮X⟯ ℤᵐ⁰` (`RingTheory/LaurentSeries.lean:462`), `Valuation.valuationSubring`, the coercion `K⟮X⟯ → K⸨X⸩` (`coe_coe`, `coe_X`), `HahnSeries.coeff_mul_order_add_order` (`RingTheory/HahnSeries/Multiplication.lean:518`), `PowerSeries.constantCoeff`; `RatFunc.inftyValuation` (the place at ∞, explicit) | a residue ring hom from the `X`-adic valuation subring of `K⟮X⟯` onto `K` (queried `residue`, `valuationSubring` in `FieldTheory/RatFunc/`, `RingTheory/LaurentSeries.lean`: none) — **this is route C's one real gap**, the leaf J15 prices |
+| K2: a transcendental real number for the inhabitant | `Liouville.transcendental : Transcendental ℤ x` (`NumberTheory/Transcendental/Liouville/Basic.lean:179`), `transcendental_liouvilleNumber` (`…/LiouvilleNumber.lean:191`), `Transcendental.restrictScalars` | **π's transcendence** (queried `transcendental_pi`, `Transcendental ℚ π`, `Transcendental ℤ π`: none) — the inhabitant is Liouville's number, and "`χ(ℚ(π)²) = 2`" stays a hand corollary |
+| K2: `χ(ℚ²) = 2` | nothing in the repository (row 63: no real-field instance of the two-colour form) | — so the inhabitant is the equality `χ(ℚ(L)²) = χ(ℚ²)`, and the value 2 is a separate, unpriced item (a `cosetResidue` colouring by `x + y mod 2` on 2-integral pairs, about a day) |
+| K2 (J17): real closed fields, Tarski, Artin–Lang | `IsRealClosed` (definition and elementary lemmas only, `FieldTheory/IsRealClosed/Basic.lean`; its TODO lists "real algebraic numbers form a real closed field" as undone) | Tarski–Seidenberg, quantifier elimination for RCF, Artin–Lang, real places (queried `Tarski`, `ArtinLang`, `realClosure`: none) — the bridge's kernel form is weeks; the brief's "not priced this crunch" stands |
+| K2 (J17): de Bruijn–Erdős | `Finset.rado_selection` (`Combinatorics/Compactness.lean:64`), `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom` (`Combinatorics/SimpleGraph/Finsubgraph.lean:154`) | — |
+| K3-B: prime inversion's "if" (lying-over) | **`Ideal.image_subset_nonunits_valuationSubring`** (`RingTheory/Valuation/LocalSubring.lean`, after `LocalSubring.exists_le_valuationSubring`, Stacks 00IA): for a subring `A` of a field `K` and a proper ideal `I`, a valuation subring `B ⊇ A` with `I ⊆ nonunits B`. Also `Ideal.exists_ideal_over_maximal_of_isIntegral` (`GoingUp.lean:344`), `ValuationSubring.primeSpectrumOrderEquiv` | — |
+| K3-A: the stripe lemma | nothing needed beyond `ℤ × ℤ`, `Fin 4`, `ZMod 2`, `Int.induction_on` | — |
+
+**The finding that re-shapes K3.** With `Ideal.image_subset_nonunits_valuationSubring`, prime inversion has a **valuation form** that needs no number-field
+plumbing at all: for any field `L` with an involution `σ` and `R` the subring generated by the norm-one elements,
+
+- *"`(p)⁻¹ ∈ R` iff `p` is a unit of every valuation subring of `L` that contains every norm-one element"* — ⟸ is Mathlib's lemma applied to the
+  ideal `pR` (proper iff `p⁻¹ ∉ R`); ⟹ is immediate (`R ⊆ B`);
+- and *"a valuation subring contains every norm-one element iff it is σ-stable"* — ⟸ is `normOne_subset_valuationSubring`; ⟹ in three lines:
+  for `z ≠ 0`, `σz/z` has norm one, so `σz = (σz/z)·z ∈ B`.
+
+So "no σ-stable valuation subring in which `p` is a non-unit" is the hypothesis, and the translation "σ-stable valuation subrings of a number field
+`E` with `p` in the maximal ideal ↔ conjugation-stable primes of `𝓞_E` above `p`" is exactly row 57's gap (Theorem A's), deferred to FS-37 as the
+stub's own D2 fallback says ("a cheaper first form takes the valuation subring `𝒪` and its maximal ideal as data"). This form is one Mathlib lemma
+plus a page; the stripe lemma is a combinatorial induction. Stage 3 prices both from their leaves.
+
+### 2.3 §PA — the prior-art gate on the bridge (J17), time-boxed
+
+- **The bridge is in print with a correct proof: `[Madore2015]` ¶5.4 with ¶1.3** (held, `~/source/library/pdf/arXiv-1509.07023-…pdf`; ¶5.4 read
+  first-hand at this stage). ¶5.4, verbatim: "the finite graphs G for which there exists a graph homomorphism G → Γ(E^d) with E real closed do not
+  depend on E … This time, the proof invokes Tarski's theorem on the decidability of the first-order theory of real closed fields … One consequence is
+  that χ(R^d) = χ((Q^{r−alg})^d) where Q^{r−alg} stands for the real closure of Q". With ¶1.3's de Bruijn–Erdős, every finite subgraph of
+  `(ℚ^{r−alg})²` lies in `F²` for a real number field `F`, so **`χ(ℝ²) = sup_F χ(F²)` is Madore's, 2015, by Tarski** — the one-line gap between
+  his "real closure" and our "sup over real number fields" is de Bruijn–Erdős, which he states. `CLAUDE.md` G56 already reads the bridge as
+  "`[Madore2015]` ¶5.4 plus de Bruijn–Erdős"; `plans/STUB-plane-bridge.md` §3a calls ¶5.4 "the nearest thing we have … cited in prose only", which
+  undersells it: **it is the proof.**
+- **`[Fischer1990]` Remark 1**, read first-hand (held, `library/papers/1-s2.0-0012365X9090324B-main.pdf`, p. 188–189), verbatim: "Given a finitely
+  generated extension E ⊂ R over Q, it may be realized as a purely transcendental extension of some finite algebraic extension F over Q." False in
+  general (G63, the stub). His Theorem 6's proof colours only `C₀(F(α)^d)` — the subgroup the unit vectors generate — by evaluation at 0, which is
+  the `cosetResidue` mechanism J15 ports.
+- **So J17's product is a write-up, not new mathematics**: the bridge credited to Madore (Tarski), Fischer's step named as the false one, and a second
+  proof by the Artin–Lang homomorphism theorem (the route that extends route C), each with its Mathlib gap priced. Its value is the record's
+  honesty (every "χ(ℝ²) = …" sentence cites a proof) and the price comparison FS-39's stub asks for; its novelty claim is none.
+- **Discovery searches:** zbMATH API, one query answered before the service failed — `ab:"chromatic number" & ab:"plane" & ab:"algebraic" &
+  ab:"de Bruijn"`: 2 hits, both books (`1250.05004` *Discrete mathematics*, 2010; `0612.05001` *Classic papers in combinatorics*, 1987); the
+  next seven (`ab:"unit distance" & ab:"real closed"`, `ab:"chromatic number of the plane" & ab:"number field"`, `ab:"unit distance graph" &
+  ab:"algebraic numbers"`, `ab:"chromatic number" & ab:"real algebraic" & ab:"plane"`, `ab:"chromatic number" & ab:"subfield" & ab:"plane"`,
+  `ab:"specialization" & ab:"unit distance"`, `ab:"real place" & ab:"chromatic"`) returned **HTTP 502** from `api.zbmath.org` (2026-09-25,
+  measured by a probe: 502 in 6.6 s). arXiv export API, `abs:"chromatic number of the plane" AND abs:algebraic`: 0 entries. **The gate is
+  partial**: J17 re-runs the seven zbMATH queries first and records them.
+
+### 2.4 §G.4, completed — what the re-grokking and §PA changed
+
+5. **Route C's named tool is the wrong one**: `colorable_unitDistance_induce_of_valuationSubring` needs a finite residue ring; the port uses
+   `cosetResidue` + `unitQuadrance_colorable_of_ringHom` (or `normOne_subset_valuationSubring` in the complex form). J15's brief says so.
+6. **The chain union is an induced subgraph on the image set**, not a `comap` like `copyUnion`: the chain's shared points must be one vertex.
+7. **K3 gains a cheap, honest option**: prime inversion in valuation form from one Mathlib lemma (`Ideal.image_subset_nonunits_valuationSubring`),
+   the number-field translation left as row 57's named gap.
+8. **J17 shrinks to a write-up**: the bridge is `[Madore2015]` ¶5.4's; the novelty is nil, the value is citation and pricing. Its blind check
+   J17V is offered as optional (HELD FOR THE OWNER).
+9. **No solver anywhere in the lane**: the 18-vertex refusal's second oracle is the gadget algebra by `decide`, not a CaDiCaL certificate.
