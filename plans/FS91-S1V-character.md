@@ -341,3 +341,40 @@ non-Galois-ring dyadic tower `ℚ₂(√3)`; plant L8 (`c = 1`) is violated on `
 | 6 | hunt band characters at high levels to see where CLG-e fails | derived LB/LB′ first, then **complete exact enumeration** of every character of four derivation-fixed towers (at the edge of the ban, as in stage 2; seconds) |
 | 7 | search `f = 3`, `e = 2` towers for a band-7 character at level 5 (to refute or confirm (g3)'s `e = 1`) | not run (`729⁵` characters); recorded as a GAP in the lemmas instead |
 | 8 | enumerate characters of `Γ₂₃`, `Γ₄₃` | replaced by the exact value-multiplicity formula (one count per norm class), brute-forced only as its own check |
+
+## Stage 4 — SAVED (divergence table: J07's record `plans/FS91-S1D-character.md` against my phases 1–2)
+
+*Opened after stage 3's commit (16272ed0). Sections read: 2.3–2.7, 3.1–3.3, 4.1–4.4. `plans/CRUNCH-2026-09-25-INDEX.md` not opened (fenced).*
+
+| # | item | J07 | J10 (mine) | kind | resolution |
+|---|---|---|---|---|---|
+| 1 | Lemma C, `V_n ⊆ R ⊗ ℤ_p` | a Cayley–Hamilton projector `P(u)`, `u = c(a)/a`, `(a) = 𝔔^h`, kills every other place; `π_𝔔(M)` a ring with `u_𝔔^m` | from `cO′ ⊆ R` (J10-L1(e)) and `O′ ⊗ ℤ_p = ∏Ô × V_n` (`O′ = O_L[1/a]`) | route | both close; independent; same (d) |
+| 2 | Lemma C′ | Teichmüller idempotent `(t − 1)^{(q²−1)p^r} → e_𝔓` + an element of valuation 1 (a contraction fixed point at inert dyadic) | graded pieces of the smooth torus span each `𝔓^m/𝔓^{m+1}`; the difference module is everything (`Σ_{μ_{q+1}}(z − 1) = 1` in char 2) | route | both close; **scope data added by me:** the ramified exception is realised at ℚ(√5), ℚ(√17), ℚ(α) (residue 𝔽₈) and **not** at ℚ(√2) — "except possibly" is exact; both conclude `R_F = O′` with no Galois hypothesis |
+| 3 | (J) fibre density at `∞` | a coset of `U^M` and the open power map `z ↦ z^M` on `S¹`, `ℂ^×` | (W) with the finite places included: a fibre is `U` ∩ an open set | route | both close |
+| 4 | CLG-d | unboundedness of `Re(az) + Re(b/z)` on `ℂ^×` | the same (J10-L4(iv)) | none | convergent, independent (J07 notes it repairs FS89-S0A-7 at complex places) |
+| 5 | CLG_k ⟹ | extend `τ` from its image to `∏ O_𝔓/𝔓^K`, (W), peel | the same (J10-L3–L5) | none | convergent, independent; neither uses Lemma R or C′ |
+| 6 | CLG_k "Hence" (`χ_char = min`) | from "the equivalence at every `k`", `H` cited as verified at every `k` | under `H_k` alone only when `χ_char(F²) ≤ k` | scope (wording) | moot given J01-7; statement 13 should read "given `H` at every band" (or at `χ_char(F²)`) |
+| 7 | LB step 3 | the socle `𝔭^{L−1}/𝔭^L` and a `p^b` rescaling | trace duality: some `s` has `v(Im(ws)) = v(w)` | route | both give `a = ⌈⌊L/2⌋/e⌉` |
+| 8 | CLG-e at `k = 2p` | TRUE (LB′: values in `p^{−E}ℤ`, `p` odd) | phase 1's J10-L6 had only `2p > k`; phase 2 re-derived J07's sharper form | scope (mine weaker, both true) | adopt `k ≤ 2p`; V3's verdict unaffected |
+| 9 | CLG-g (E2)'s Hoffman floor at level `m` | G54's all-levels ratio (stated for Galois rings; recomputed at 2) applied at `Q ≥ 64`, where `F_𝔭` may be ramified over ℚ₂; the odd `q = p^f` analogue "sketched, one mind, not relied on" | **J10-L8 proves it for every inert tower, odd or dyadic, `F_𝔭` ramified or not** (new character: `|λ| ≤ cQ^{j−1}`) | input scope | J07's CLG-g stands with J10-L8 as the named input |
+| 10 | (g3) at `k = 7`, (E1) | "`q = 3^f`, `f ≥ 3`, `e(𝔭|3) = 1`, exact level 3 only" (4.2: "for `e ≥ 2` level 2 is impossible") | LB′ leaves exact level **`2e + 1` open at every `e`** (tool (G)); at `f = 1` the true best margins at `(e, L′) = (1, 3)` and `(2, 5)` are both `1/27`, so nothing separates `e ≥ 2` | **truth (GAP in J07)** | correct to "exact level `2e(𝔭|3) + 1`" unless a further lemma kills `e ≥ 2`; J07 checked level 2 at `e ≥ 2`, not level `2e + 1` |
+| 11 | (g3), (E2) at `k = 7` | `Q = 64` only (G56's floor 8 at 128) | same; Weil alone gives floor 6.7 at 128, the exact `λ_min(U₁₂₈) = −19` (floor 7.79) is needed — recomputed | none | convergent |
+| 12 | level-one inputs (20) | complete lists of `q²` characters at the named `q` | one count per norm class by `1 − η(t² − 4N)` (brute-forced as its own check) | route | convergent; my by-products: `Γ₁₉` has a band-5 character, `Γ₁₁` none |
+| 13 | HD1 via CLG | inputs 13, 17, 20, 12, Lemma D | J10-T4 (phase 1): `H₄`, S0A-8, Lemma D, J10-L7 | none | **two independent derivations**; both drop FS-66's certificates, `[Zhang2012]`, Lemma R |
+| 14 | HD1 as a consequence of CLG_k's *statement* | stated "via CLG" with the route's inputs | phase 1: GAP from the statement, closed from the route | none (wording already right in J07) | the plan's CLG-f "fall out" should say "from CLG's proof with Lemma D" |
+| 15 | C-47, C-167 | via CLG, no certificate | the same (J10-T5), band-5 at 23, 43 by the multiplicity count | none | convergent |
+| 16 | Fischer control | existing checker, level 3 at `𝔓₁` | the same checker | none | one checker, **not** an independent confirmation |
+| 17 | `θ₂` control "at level 1" | the survivor is the ramified dyadic place at level 1 | a level-1 band-2 character exists there; the route's extension returns *some* level-`K` character | scope (wording) | harmless |
+| 18 | CL3–CL5 under the wide `A` | every proof step checked: S0A-8 step 2, S0A-9 step 3, dB-Theta's density read both real places | conclusions re-derived; proof text checked at S0A G3 step 3 only | coverage | J07's check is the fuller one; convergent |
+| 19 | ramified dyadic at `k = 3` | not decided; harmless (`L = 2`) | not claimed; V3 treats ramified dyadic as `L ≤ 2` | none | convergent |
+
+**Summary of the divergences.** One difference of **truth**: (g3)'s "`e(𝔭|3) = 1`" (row 10) is not supported by J07's lemmas — GAP, with the
+supported form "exact level `2e(𝔭|3) + 1`". One **input-scope** difference closed by a new lemma: CLG-g (E2)'s all-levels ratio (row 9, J10-L8).
+Two **wording/scope** notes (rows 6, 17). Everything else is **convergent**, mostly by different routes (rows 1–3, 7, 12): Lemma C, C′, CLG-d,
+CLG_k, LB, LB′, CLG-e, CLG-g, HD1, C-47, C-167 and the controls now each have two blind derivations; the Fischer control has one checker.
+
+### 4.1 The would-have-searched-here log (stage 4)
+
+| # | the move I would have made by search | what I did instead |
+|---|---|---|
+| 9 | search a `q = 3^f`, `e = 2` tower for a band-7 character at level 5 to settle row 10 | not run (out of the ban and out of reach: `729⁵` characters); row 10 recorded as a GAP in the lemmas |
