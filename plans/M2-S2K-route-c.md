@@ -8,7 +8,16 @@
 
 | theorem | grade | address |
 |---|---|---|
-| `zeroIntegral` is a subring of `RatFunc F` (rational functions whose reduced denominator does not vanish at `0`) and `evalZero` is a ring hom from it onto `F` (evaluation at `t = 0`) | kernel (scratch, `lake env lean`) | `data/m2/j15/PriceRouteII.lean` |
+| `zeroIntegral` is a subring of `RatFunc F` (rational functions whose reduced denominator does not vanish at `0`) and `evalZero` is a ring hom from it onto `F` (evaluation at `t = 0`) | kernel (scratch at stage 1; in the module at stage 2) | `data/m2/j15/PriceRouteII.lean`; `Proofs/HadwigerNelson/Transcendental.lean` |
+| `planeOverIso` (moved in): the plane over `L ⊆ ℝ` is `unitQuadrance L` as graphs; `chromaticNumber_eq_of_iso`, `chromaticNumber_planeOver_eq` | kernel (`lake env lean`; the gated build at stage 4) | `Proofs/HadwigerNelson/Transcendental.lean` |
+| `unitQuadrance_colorable_of_subring` (moved in): colourability pulls back through any subring holding every unit vector's coordinates, along any ring hom out of it | kernel (as above) | same |
+| `mem_valuationSubring_of_sq_add_sq_eq_one` — **the valuation lemma**: if `1 + x²` is a unit of the valuation subring `B` for every `x ∈ B`, then `a² + b² = 1` forces `a, b ∈ B` | kernel (as above) | same |
+| `one_add_sq_ne_zero`: in a nontrivial formally real ring, `1 + s² ≠ 0` | kernel (as above) | same |
+| `unitQuadrance_colorable_of_valuationSubring`: a ring hom out of a valuation subring of `K`, killing its maximal ideal, into a ring with no square root of `−1`, pulls every colouring of `S²` back to `K²` | kernel (as above) | same |
+| `inv_mem_zeroIntegral_of_not_mem` — **the inverse lemma**: a rational function with a pole at `0` has an inverse with no pole at `0`, vanishing there | kernel (as above) | same |
+| `zeroPlace` (a `ValuationSubring (RatFunc F)`), `evalZero : zeroPlace F →+* F`, `evalZero_eq_zero_of_mem_maximalIdeal` — **the residue hom, closed**: evaluation at `t = 0` kills the maximal ideal | kernel (as above) | same |
+| `chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero` — the engine: `χ(F(t)²) = χ(F²)` for every field `F` in which `−1` is not a square | kernel (as above) | same |
+| **`chromaticNumber_unitQuadrance_ratFunc`** — `χ(unitQuadrance (RatFunc F)) = χ(unitQuadrance F)` for every formally real field `F` (`[Fischer1990]` Thm 6's statement at `d = 2`, in the kernel); inhabitant `chromaticNumber_unitQuadrance_ratFunc_rat` (`F = ℚ`) | kernel (as above; axioms `[propext, Classical.choice, Quot.sound]` from a scratch copy) | same |
 
 ## Stage 1 — SAVED
 
@@ -75,3 +84,43 @@ About 120 lines; stage 2 as briefed.
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | X1 | none — the stage is statement reading, two pricing elaborations and `grep` over Mathlib's source | — |
+
+## Stage 2 — SAVED
+
+### 2.1 The module
+
+`Proofs/HadwigerNelson/Transcendental.lean` (new; not yet in `Proofs.lean`, which stage 4 does with the gate). Elaborated with
+`scripts/slot.py --mem 8 --cpus 4 -- lake env lean -Dlinter.missingDocs=true -DautoImplicit=false -DrelaxedAutoImplicit=false` (the lakefile's
+options passed by hand, since `lake env lean` does not apply them): **no error, no warning**, 2.58 s wall, 3.39 GB peak (desktop, one run).
+`#print axioms` on the core theorem, its `ℚ` instance and the valuation-subring colouring lemma, from a scratch copy: the standard three.
+
+| leaf | lines | elaborations | note |
+|---|---|---|---|
+| the two J04 leaves, moved in | 60 | 1 | unchanged |
+| `chromaticNumber_eq_of_iso`, `chromaticNumber_planeOver_eq` | 10 | 1 | the corollary's plumbing, minted now |
+| the valuation lemma | 25 | 2 | first try's only issues were `zero_le'` deprecation (→ `zero_le`) |
+| `one_add_sq_ne_zero` | 4 | 3 | an import (`Mathlib.Algebra.Ring.IsFormallyReal`) and a `simpa` lint |
+| the colouring form of the valuation lemma | 20 | 2 | `ValuationSubring.add_mem` takes its elements explicitly; the generic `add_mem` does not |
+| the place `t = 0`: subring, inverse lemma, `ValuationSubring`, `evalZero`, maximal ideal killed | 95 | 2 | `isUnit_of_mul_eq_one` is now `IsUnit.of_mul_eq_one` |
+| the engine and the core theorem, the `ℚ` inhabitant | 25 | 1 | — |
+| spec examples: `X ∈ zeroPlace ℚ`, `X⁻¹ ∉ zeroPlace ℚ` (through `evalZero` itself: `evalZero(X·X⁻¹) = 0 ≠ 1`), `evalZero 3 = 3`, `evalZero X = 0` | 20 | 2 | the first `X⁻¹` proof through `denom_div` and `gcd` did not close; replaced |
+
+**The residue hom closed in about 15 minutes of work from stage 2's start, with no hypothesis left.** The stop rule (2 hours) did not fire.
+
+### 2.2 Decisions this stage, in four parts
+
+1. **The engine is stated for any field in which `−1` is not a square; the named theorem keeps `[IsFormallyReal F]`.** *Alternative:* only the
+   formally real form, as the plan's §4.4 item 4 has it. *Why:* the proof uses formal reality at one step (`1 + s² ≠ 0`), and the sharper
+   statement costs one declaration and covers residue fields `𝔽_q`, `q ≡ 3 (mod 4)`. *Confidence:* high.
+2. **The `𝔽₃` inhabitant of the engine was dropped.** *Alternative:* `chromaticNumber_unitQuadrance_ratFunc_zmod_three`, tried. *Why dropped:*
+   `RatFunc (ZMod 3)`'s field instance timed out at `whnf` in the module (200,000 heartbeats) and failed to synthesise in a probe (`IsDomain (ZMod
+   3)` not found under a minimal import); chasing it is gold-plating, and the engine's hypothesis is a `Prop`, inhabited by `ℚ` through the named
+   theorem. *Confidence:* high that nothing is lost; the instance failure is a Mathlib-instance question, not recorded as a defect.
+3. **`zeroPlace F` is hand-built, not Mathlib's `(polynomialValuationX F).valuationSubring`** (stage 1's pricing). The two are the same valuation
+   subring; the kernel does not say so, and nothing here claims it.
+
+### 2.3 Would-have-searched log (stage 2)
+
+| # | the move a search would have made | what was done instead |
+|---|---|---|
+| X2 | none — derivation and elaboration only; the one `decide` (over the three elements of `ZMod 3`) was removed with its theorem | — |
