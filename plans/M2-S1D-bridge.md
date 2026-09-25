@@ -7,7 +7,24 @@ credit right).*
 
 ## Theorems this phase proved
 
-*(filled at stage 3; grades from `CLAUDE.md` § Notation)*
+*Grades from `CLAUDE.md` § Notation. **None is new mathematics** (standing rule 4): T1–T3 are the bridge, credited to `[Madore2015]`
+¶5.4 with ¶1.3 and the classical theorems named; T4–T8 are explicit instances of classical facts, filed so that the record's claim "Fischer's
+step is false" carries a proof. Kernel decisions are §3.3's.*
+
+| id | statement (one line) | grade | where | kernel decision |
+|---|---|---|---|---|
+| J17-T1 | **C1**: every finite unit-distance drawing in `ℝ²` descends to a real number field; injective and induced forms too | [hand], resting on Tarski's quantifier elimination for real closed fields (route T) **or** on the Artin–Lang homomorphism theorem (route AL) | §2.1 | stub (FS-39 phase B2; months) |
+| J17-T2 | the real algebraic numbers form a real closed field | [hand], classical | §2.0 (RC) | **kernel candidate** (~1 day; Mathlib's own TODO) |
+| J17-T3 | **C2**: `χ(ℝ²) = max` over real number fields of `χ(F²)` (the sup is attained) | [hand] from T1 and de Bruijn–Erdős; `[Madore2015]` ¶5.4's | §2.2 | kernel as a conditional theorem, C1 a named hypothesis (~1 day) |
+| J17-T4 | Lemma NP: no nonconstant `a ∈ ℂ(t)` has `a³ − a` a square | [hand]; Mason–Stothers (proof included; Mathlib `Polynomial.abc`) | §2.3 | declined (value low); optional ~½ day |
+| J17-T5 | **C3**: `ℚ(π, √(π³ − π))` is not purely transcendental over any number field | [hand] from T4 and Lindemann | §2.3 | declined |
+| J17-T6 | C3⁺: that field embeds in no purely transcendental extension of any number field | [hand] from T4 | §2.3 | declined |
+| J17-T7 | `ℚ(π/2, √(3 − π²/4))` (a pointless conic) is not purely transcendental over any number field, but lies in `ℚ(√2)(s)` | [hand], elementary | §2.3 | declined |
+| J17-T8 | C3′: `χ(ℚ(π, √(π³ − π))²) = 2` | [hand]; an instance of `[Madore2015]` Prop. 3.2 at a degree-one place | §2.3 | declined |
+| J17-T9 | **C4**: `χ(ℝ²) ≠ 6` iff every real number field with `χ = 6` has a finite real extension with `χ = 7` | [derived] from T3 and `χ(ℝ²) ≤ 7` (row 33) | §2.4 | kernel as a conditional theorem with T3 (~hours on top) |
+| J17-T10 | the equational existential fragment of Tarski (∃T) and Artin–Lang are interderivable in a few lines | [hand], classical | §2.1 | — |
+
+**Verdicts on the fixed claim list:** C1 TRUE · C2 TRUE (and attained) · C3 TRUE (explicit field, genus 1; a genus-0 one besides) · C4 TRUE.
 
 ## Stage 1 — SAVED
 
@@ -286,3 +303,110 @@ agreed).
 - A solver check that a specific finite graph (e.g. a rotated Moser spindle with a transcendental rotation) has an algebraic drawing — not
   needed: C1 is a theorem, and no instance was asked. Instead: nothing.
 - Hunting a counterexample to Q-const by trying curves — **out** (try-cases-until-one-works); recorded as a question instead.
+
+## Stage 3 — SAVED
+
+### 3.1 What Mathlib holds, by file (the pinned Mathlib, `.lake/packages/mathlib`, read with `grep`; no build)
+
+| need | held (file) | missing (query) |
+|---|---|---|
+| real closed fields | `class IsRealClosed` and elementary lemmas (`FieldTheory/IsRealClosed/Basic.lean`, 127 lines); its TODO: "real numbers, real algebraic numbers, hyperreals form a real closed field" | **no instance at all, not even `IsRealClosed ℝ`** (`grep -rl IsRealClosed`: that one file) |
+| the real algebraic numbers | `algebraicClosure F E : IntermediateField F E` (`FieldTheory/AlgebraicClosure.lean:40`); IVT (`intermediate_value_Icc`) and polynomial sign at the ends (`Analysis/Polynomial/Order.lean`) | the (RC) instance |
+| orderings | `RingPreordering`, `RingOrdering`, supports (`Algebra/Order/Ring/Ordering/Defs.lean`, `Basic.lean`, after Lam 1984); `IsSemireal`, `IsFormallyReal` | **existence of an ordering on a formally real field** (Artin–Schreier; no Zorn extension of preorderings) |
+| real closure | — | `grep -rl "realClosure\|RealClosure"`: 0 |
+| Tarski | ModelTheory: syntax, semantics, `ElementarySubstructure`, `Theory.IsComplete`, the ring language, `ACF_isComplete` and Lefschetz (`ModelTheory/Algebra/Field/IsAlgClosed.lean`, **by categoricity**, a method that cannot transfer: no theory of real closed fields is categorical in any infinite cardinality); `IsQF` (`ModelTheory/Complexity.lean`) | a theory `RCF`, quantifier elimination, any QE test; Sturm sequences (only Descartes's rule, `Algebra/Polynomial/RuleOfSigns.lean`) |
+| Artin–Lang, real places | valuation subrings, Chevalley's extension (`RingTheory/Valuation/LocalSubring.lean:118`, `LocalSubring.exists_le_valuationSubring`) | Artin–Lang; real places; Baer–Krull |
+| de Bruijn–Erdős | `Finset.rado_selection` (`Combinatorics/Compactness.lean:64`), `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom` (`Combinatorics/SimpleGraph/Finsubgraph.lean:154`) | — |
+| C3's inputs | `Polynomial.abc` = Mason–Stothers (`NumberTheory/FLT/MasonStothers.lean:55`); `Liouville.transcendental`; `Algebra.trdeg`, transcendence-basis cardinality (`RingTheory/AlgebraicIndependent/`) | π's transcendence (M2 plan §2.2) — use `2 + L` |
+
+### 3.2 The price of each route
+
+| piece | route T | route AL | price |
+|---|---|---|---|
+| (RC): `IsRealClosed` for `algebraicClosure ℚ ℝ` (and for `ℝ`) | ✓ | ✓ | **~1 day**; a Mathlib TODO, upstreamable |
+| (∃T) for `R_alg ⊆ ℝ`: an equation system over `R_alg` solvable in `ℝ` is solvable in `R_alg` | ✓ (the whole content) | ✓ (inside AL's textbook proof) | **months**: needs a parametric one-variable elimination (Sturm, Thom or Cohen–Hörmander) and either full QE in ModelTheory or a direct projection theorem. Reference point: Cohen–Mahboubi's Coq formalisation of QE for real closed fields (*Logical Methods in Computer Science*, 2012) — from memory, not read |
+| Artin–Schreier: a formally real field has an ordering | — | ✓ | ~2 days (Zorn over the held `RingPreordering`) |
+| real closure of an ordered field (existence) | — (not needed if (∃T) is proved directly) | ✓ (the textbook proof embeds `Frac A` in one) | weeks |
+| Artin–Lang itself | — | ✓ | = (∃T) + the two rows above + glue (J17-T10); Lang's place-theoretic proof instead needs real places and Baer–Krull, absent — no cheaper |
+| de Bruijn–Erdős assembly; C2, C4 from C1 | ✓ | ✓ | ~1 day |
+
+**Ranking: route T is the cheaper, and neither is cheap.** Artin–Lang is not an independent foundation: every proof known to me passes through
+a Sturm-type root count or through Tarski, and its textbook proof is (∃T) plus orderings and real closures. Route AL's advantage is not price
+but vocabulary: it is a ring homomorphism, the same move as route C and Theorem A. **The FS-39 stub's price for phase B ("one to two days,
+Mathlib-dependent") is wrong by an order of magnitude**; the M2 plan's "weeks" (§2.2) is still low.
+
+**What the kernel can have now, honestly:**
+1. **B0 — (RC)**, `IsRealClosed ℝ` and `IsRealClosed (algebraicClosure ℚ ℝ)`: ~1 day, upstreamable, needed by every route.
+2. **B1 — the bridge as a conditional theorem**: `chromaticNumber_plane_eq_iSup_numberField_of_descent (h : RealAlgebraicDescent) : …` with
+   `RealAlgebraicDescent` the statement of C1 (or of (∃T) for `R_alg ⊆ ℝ`) as a `Prop`, the hypothesis `VACUITY DECLARED` with the reason
+   "true by Tarski; Mathlib lacks Tarski", plus C4 (FS62-T2) on top; ~1 day. It gives every "`χ(ℝ²) = …`" sentence a kernel statement with
+   exactly one named hypothesis, which is FS-39 stub D3's intent without a `sorry`.
+3. **B2 — (∃T) in the kernel**: months; defer, do not stub a date.
+
+### 3.3 The registered predictions, scored
+
+| id | prediction | p | outcome |
+|---|---|---|---|
+| P-J17a | "no printed proof of the bridge is found besides `[Madore2015]` ¶5.4 (and Fischer's flawed Remark 1)" | 0.70 | **held on everything readable** — Soifer asserts without proof (Open Problem 11.1's comment); Zapletal's two papers use the mechanism for other statements; the zbMATH gate found nothing. **Not scorable at one source:** `[BendaPerles2000]`, which Fischer credits with noting the reduction and whose zbMATH review is withheld. Scored *held, conditional* |
+| P-J17b | "the Artin–Lang route's kernel price is judged lower than the Tarski route's" | 0.50 | **FALSE** (judged): AL's textbook proof contains (∃T); §3.2. Confidence medium — it would change if a proof of Artin–Lang from valuation theory alone (Chevalley extension, which Mathlib holds) were found; none is known to me |
+| C0 (§1.2) | C1 0.97, C2 0.95, C3 0.97, C4 0.90 | — | all four TRUE; the one risk that bit was none — C4's attainment, which FS62-T2 left implicit, is supplied by C2's boundedness |
+
+### 3.4 Proposed edits (standing rule 7: the front-page lane writes them; proposed here only)
+
+**`CLAUDE.md` G63.**
+- Title: "The chromatic number of a field plane is arithmetic only: transcendence is free" → "…: **pure** transcendence is free".
+- The sentence "The remaining gap is a different one: descending an arbitrary finitely generated `F ⊆ ℝ` needs a place whose residue field stays
+  formally real (real places, Artin–Lang), where the model-theoretic route needs Tarski–Seidenberg, which Mathlib does not hold. Price both
+  before committing." → "**Priced (J17, `plans/M2-S1D-bridge.md` §3):** both routes need the existential fragment of Tarski — Artin–Lang's
+  textbook proof is that fragment plus orderings and real closures — so the model-theoretic route is the cheaper, and both are months; the
+  kernel can have the bridge now only as a conditional theorem with the descent as its one named hypothesis."
+- In the prior-art paragraph, "which is false in general (a function field of positive genus), and then invokes de Bruijn–Erdős. So the
+  statement χ(ℝ²) = sup over number fields has been in print since 1990 with a flawed step; what is left to us is the repair (real places, or
+  Tarski–Seidenberg) and the kernel form." → "which is false in general — `ℚ(π, √(π³ − π))` (genus 1, inside no purely transcendental extension
+  of any number field) and `ℚ(π/2, √(3 − π²/4))` (a conic with no rational point) are counterexamples (J17-T5–T7) — and then invokes de
+  Bruijn–Erdős. **The bridge is proved correctly in `[Madore2015]` ¶5.4 with ¶1.3, by Tarski**; it was first noted by `[BendaPerles2000]`
+  (credited in Fischer's introduction; unread) and asserted without proof in `[Soifer2024]` ch. 11 (Open Problem 11.1's comment); written in
+  full, by Tarski and by Artin–Lang, in `plans/M2-S1D-bridge.md` §2. Nothing of it is ours but the write-up."
+- Add, before the *Do*: "**Open (J17 §2.5, Q-const):** for a finitely generated `E ⊂ ℝ` with constant field `F`, is `χ(E²) = χ(F²)`? True
+  when `E/F` has a place of degree one with formally real residue field (pure transcendence; a curve with a smooth `F`-point, J17-T8); open
+  otherwise."
+- G56's "FS-39's bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős" is correct as it stands.
+
+**`plans/STUB-plane-bridge.md` (FS-39).**
+- §3 D4's prior-art paragraph: "So (ii) has been *stated* in print since 1990 and never correctly *proved* there; this stub's product is the
+  repair — real places, or Tarski–Seidenberg — and the kernel form." → "(ii) was noted by Benda–Perles (1976 manuscript), stated with a false
+  step by Fischer (1990), asserted by Soifer (2009, Open Problem 11.1's comment) and **proved correctly by Madore (2015, ¶5.4 with ¶1.3, by
+  Tarski)**; the repair is written in full in `plans/M2-S1D-bridge.md`. This stub's remaining product is the kernel form."
+- §3a: "owed, never run" → "run: J04 (one zbMATH query) and J17 (fifteen; `plans/M2-S1D-bridge.md` §1.3): nothing beyond `[Madore2015]`,
+  `[Fischer1990]`, `[Soifer2024]` ch. 11 and the unread `[BendaPerles2000]`."
+- §4: phase B "one to two days, Mathlib-dependent" → split into **B0** (RC instances, ~1 day), **B1** (the conditional bridge and C4, ~1
+  day), **B2** ((∃T) in the kernel, months, deferred); phase C becomes B1's corollaries.
+- §5: add after the displayed corollary "(both directions use that the supremum is attained, which holds because every value is at most 7)".
+
+**`plans/M2-kernel-lane.md` §2.3** (the lane's own record; J04's or the owner's to edit): the lineage omits `[BendaPerles2000]`, whom Fischer's
+introduction credits; and "the bridge is `[Madore2015]` ¶5.4" was already in `BIBLIOGRAPHY.md` (FS-53, 2026-09-15) — a re-finding.
+
+**`BIBLIOGRAPHY.md`.**
+- New: `[GoelPatilVerma2022]` K. Goel, D. P. Patil, J. Verma, *Nullstellensätze and Applications*, arXiv:1809.02818v2 (2022) — Thm 3.11
+  (Artin–Lang) and Cor. 3.12 read; route AL's citation. `[Lang1953]` S. Lang, *The theory of real places*, Ann. of Math. 57 (1953) 378–391 —
+  not held, cited through GPV. `[BCR1998]` Bochnak–Coste–Roy, *Real Algebraic Geometry* — not held; table of contents read (§4.1 "The
+  Artin-Lang Homomorphism Theorem and the Real Nullstellensatz"; the number 4.1.2 unverified). `[Marker2002]` and `[Poizat2000]` — not held;
+  cited through Zapletal and Madore for Tarski. `[WangKosheleva1998]` *Chromatic-number-type theorems are logically non-trivial*,
+  Geombinatorics (Zbl 0915.03011) — review read; adjacent (undecidability of second-order colour statements; no conflict with the bridge).
+  `[CohenMahboubi2012]` — the Coq QE-for-RCF pricing reference, not read.
+- `[Madore2015]`: add "¶5.4 re-read 2026-09-25 (J17): the step from `ℚ^{r−alg}` to number fields is not written (one line); 'decidability'
+  stands for completeness; footnote 5 cites Soifer's Problem 11.1 and Benda–Perles."
+- `[Soifer2024]`: add ch. 11's Open Problem 11.1 verbatim and its comment "The set of all algebraic numbers would work" (asserted, not proved).
+- `[BendaPerles2000]`: add that `[Fischer1990]`'s introduction credits them with noting that finite algebraic extensions suffice for `χ(ℝ²)`,
+  and that zbMATH's review is withheld ("contents unavailable due to conflicting licenses").
+- `[Zapletal2022]` (arXiv:2201.00275, held): add "Fact 4.2 and Cor. 4.3 (a real closed subfield of `ℝ` is an elementary submodel) are route T's
+  citation for Tarski in `plans/M2-S1D-bridge.md`".
+
+**`CLOSED-QUESTIONS.md`: no row.** Soifer's Open Problem 11.1 is posed in print, but its answer (the algebraic numbers; and, by attainment, a
+single unnamed number field) is Madore's and Soifer's own, not ours.
+
+**`plans/FS62-derivation.md` FS62-T2:** add "the proof uses that the supremum is attained (all values ≤ 7)" — `J17-T9` supplies it.
+
+### 3.5 Would-have-searched log (stage 3)
+
+- None. Pricing was by reading Mathlib's files with `grep`; no build, no solver.
