@@ -184,6 +184,62 @@ prime (26, 41), are mixed (22, 48, 76), or sit at an inert prime where `U₅` is
 | types that occur | parity, `(x + y)/4`, `(3x + 2y)/8`, order 3, `(2x + 3y)/7` | the same, plus a second order-4 type `(x + 2y)/4` (values `{1/4, 1/2, 3/4}`), with counts 1, 4, 4 + 4, 8, 8 and an exact check | **addition** (a precision; N₀'s "each occurs" does not claim a complete list) |
 | U2 | (not in S0A) | the union is 13 discs and 16 points; the discs are disjoint in `Q̂` though their layer-0 shadows overlap | **addition** |
 
+## V-A3 — verdict: TRUE, and the hypothesis "prime to 13" is not needed: any second split prime kills every rational heteroclinic
+
+**Statement (quoted, S0B-T6's one-line form; §6 unopened):** "a second prime (13) kills every rational heteroclinic whose torsion
+difference is prime to 13". I read "kills" as: no band character of `R_{5,13}` restricts on `R₅` to such a heteroclinic. S0B §6's full
+form is outside my fence until this verdict is committed; the divergence table below is written after.
+
+*Conventions.* `S₊ := ℤ[i][1/π̄₅]` (the group spanned by the forward layers `w₅^mℤ[i]`, `m ≥ 0`), `S₋ := ℤ[i][1/π₅]`;
+`S₊ ∩ S₋ = ℤ[i]`, `S₊ + S₋ = R₅`. On `S₊`, `T ∩ A = 0` (it is `π̄₅`-divisible; S0B-T4's argument). A **rational heteroclinic** is
+`θ ∈ Θ₄(R₅)` with `θ|_{S₊} = τ₁ + λ_{d₁}`, `θ|_{S₋} = τ₂ + λ_{d₂}` (`τ_j` torsion) and `θ ∉ T + A`. This is S0B's `(e; q₁, q₂)` with
+`q₁ ≠ q₂` rational. On `ℤ[i]` both decompositions hold, so `δ := τ₁ − τ₂ = λ_D` there, with `D := d₂ − d₁`. Hence
+`D ∈ (1/M)ℤ[i]` exactly as a complex number (`M` = the order of `δ|_{ℤ[i]}`), `|D| ≤ r(τ₁) + r(τ₂) ≤ 1/2`, and `θ ∉ T + A` iff `D ≠ 0`.
+(If `D = 0`, then `θ − λ_{d₁}` is torsion on `S₊` and on `S₋`, hence on `S₊ + S₋ = R₅`.) For a split `p ≠ 5`, `w := w_p = π_p/π̄_p`.
+
+**Lemma V3a (the rows).** Let `θ ∈ Θ₄(R_{5,p})` restrict on `R₅` to a rational heteroclinic. For `b ∈ ℤ` put `θ^{(b)}(x) := θ(w^b x)`,
+`x ∈ R₅`. Then `θ^{(b)} ∈ Θ₄(R₅)` is a rational heteroclinic with archimedean parts `w̄^b d₁` (forward) and `w̄^b d₂` (backward). So its
+torsion difference on `ℤ[i]` is `λ_{w̄^b D}`. *Proof.* Band: `w^bU₅ ⊆ U_{5,p}`. Take `b ≥ 0` (`b < 0` is symmetric) and `x ∈ S₊`. Since
+`p^b w^b = π_p^{2b} ∈ ℤ[i]`, we get `p^b θ(w^b x) = θ(π_p^{2b}x) = τ₁(π_p^{2b}x) + λ_{d₁}(π_p^{2b}x)`, and `p^b λ_{w̄^b d₁}(x) = Re(d̄₁ w^b
+p^b x) = λ_{d₁}(π_p^{2b}x)`. So `p^b(θ^{(b)} − λ_{w̄^b d₁})` is killed by `ord τ₁` on `S₊`, and `θ^{(b)}|_{S₊} − λ_{w̄^b d₁}` is torsion.
+The decomposition is unique (`T ∩ A = 0` on `S₊`). The backward half is the same. ∎
+
+**Lemma V3b (the step rule on the torsion parts).** Let `τ_j^{(b)}` be the torsion parts of the rows and `c_j^{(b)} ∈ ℚ(i)/ℤ[i]` their
+parameters on `ℤ[i]` (`τ = Re(c̄ ·)`). Then `c_j^{(b+1)} ≡ w̄ c_j^{(b)} (mod π_p^{−1}ℤ[i])`, so their prime-to-`p` parts are `w̄^b` times
+those at `b = 0` (same order for all `b`), and their `π̄_p`-parts vanish for `b ≥ b₀`. *Proof.* For `x ∈ π̄_pS₊`, `wx ∈ S₊`, so
+`θ^{(b+1)}(x) = θ^{(b)}(wx)`. The archimedean parts match (`λ_{w̄^b d}(wx) = λ_{w̄^{b+1}d}(x)`), so `τ^{(b+1)} = τ^{(b)}∘w` on
+`π̄_pℤ[i]`. Its annihilator in parameters is `π_p^{−1}ℤ[i]`. Multiplication by `w̄ = π̄_p/π_p` lowers the `π̄_p`-level by one and adds
+nothing there. ∎
+
+**Lemma V3c (the sweep bound).** Let `τ` be a torsion character of `S₊` with values in `B` on the forward unit vectors. Suppose it has no
+`π̄_p`-part, its prime-to-`p` part has order `M′`, and its `π_p`-part has level `k`. Then `k ≤ J(M′) := v_{π_p}(w₅^o − 1)`, where
+`o = lcm(ord_{M″}(w₅), ord_{π_p}(w₅))` and `M″` is `M′` with its `π₅`-part removed. *Proof.* Put `g := w₅^o`; then `g ≡ 1` mod `M″` and
+mod `π_p`, and `g ≠ 1`. Put `j := v_{π_p}(g − 1)`, finite. Since `π_p` is unramified over the odd `p`, the image of `⟨g⟩` in
+`(ℤ[i]/π_p^k)^× ≅ (ℤ/p^k)^×` is the whole subgroup `1 + p^jℤ/p^k`. Take `u₀ = w₅^m`, with `m` at least the `π₅`-level, so that the
+`π₅`-part vanishes along the sweep. Then `τ(u₀g^t) = τ(u₀) + s·ũ₀(g̃^t − 1)/p^k`, with `s·ũ₀` a unit. So the values fill the coset
+`τ(u₀) + (1/p^{k−j})ℤ/ℤ` if `k > j`. That coset has step `≤ 1/p < 1/2`, so it meets `(−1/4, 1/4)`: contradiction. ∎
+
+**Theorem V4 (the kill).** For every split prime `p ≠ 5`, no `θ ∈ Θ₄(R_{5,p})` restricts on `R₅` to a rational heteroclinic, whatever
+its torsion difference. The same holds with the roles of the two primes exchanged, and with `R_{5,p}` replaced by any `R_S ∋ 5, p`
+(restriction). [hand] *Proof.* Take `b ≥ b₀` (V3b). Both `τ_j^{(b)}` are band torsion characters on the forward unit vectors (S0B-T2 ⟹,
+on the forward half: each value class of the forward semigroup is still dense in the circle). They have no `π̄_p`-part, and their
+prime-to-`p` orders `M′_j` are fixed. By V3c their `π_p`-levels are `≤ J := max_j J(M′_j)`, so the `π_p`-level of their difference on
+`ℤ[i]` is `≤ J`. By V3a that difference is `λ_{w̄^bD}`, whose `π_p`-level is `b − v_{π_p}(D)`. Since `D ≠ 0`, this exceeds `J` for large
+`b`. ∎
+
+**The instance (S0B-T3's `θ*`: forward order 3, backward parity, `D = ±conj((1+i)/6)`, `|D| = √2/6`).** Here `M″ ∈ {3, 2}`, and
+`ord_3(w₅) = 4` (`w₅ ≡ −i mod 3`), `ord_{π₁₃}(w₅) = 12` (`w₅ ↦ 2` in `𝔽₁₃`, `i ↦ 5`), so `o = 12`. Also `Im((2+i)^{12}) = −10296 =
+−2³·3²·11·13`, so `J = v_{π₁₃}(w₅^{12} − 1) = 1` (exact, checked). The row-2 difference `w̄₁₃²D` has `π₁₃`-level 2 > 1. So `θ*` has no
+extension to the three rows `b = 0, 1, 2` of `R_{5,13}`. [hand + exact arithmetic]
+
+**Verdict: TRUE** as quoted, with a **strengthening**: "whose torsion difference is prime to 13" can be dropped. A difference
+divisible by 13 only moves `v_{π₁₃}(D)` by a constant, and every second split prime does the same job. **What V4 does not reach:** the
+irrational heteroclinics (S0B-T5, `b₊ ∉ ℚ(i)`) and the switching family. The proof needs `T + A` on each half-line (V3a's `p^b`
+trick), so U4's "13 kills the infinitely-switching family" is not addressed here. **Bearing:** V4 says the rational-heteroclinic part of
+`Θ₄(R₅)` is outside the restriction image `Θ₄(R_{5,p})|_{R₅}`. That is the image V-A1 shows RQ₄ is about.
+
+**Divergence table** — to be filled after S0B §6 is opened (only after this verdict is committed).
+
 ## Would-have-searched-here log
 
 (one line per move I would have made by search, and what I did instead)
@@ -202,3 +258,6 @@ prime (26, 41), are mixed (22, 48, 76), or sit at an inert prime where `U₅` is
 | S1V-3 | the leaf formula at `Q`: `τ + λ_d ∈ Θ₄(Q)` iff `τ(G_N) ⊆ [1/4 + |d|, 3/4 − |d|]`, `G_N` the image of the local norm-one groups (joint density by the Cayley map) | hand | § V-A2 (★) |
 | S1V-4 | band torsion characters of `Q`: odd levels collapse to 1; an odd piece is the middle half and exists only at 3 and 7 (Kloosterman/Weil); the 2-part has order ∣ 8 and dies beside an odd piece; at most one odd prime (N₀ re-derived) | hand (Weil's bound external) | § V-A2, V2a–V2e, Theorem V2 |
 | S1V-5 | U2: `Θ₄(Q) ∩ (T + A)` = 13 discs (parity 1/4; four order-3, 1/12; eight order-7, 1/28) and 16 points (orders 4, 8); six types up to symmetry | hand + tools exact (`tools/fs89_s1v_n0_check.py`) | § V-A2, Theorem V3 |
+| S1V-6 | rows of a band character of `R_{5,p}` over a rational heteroclinic of `R₅` are rational heteroclinics with archimedean parts rotated by `w̄_p^b` (the `p^b w_p^b = π_p^{2b}` trick) | hand | § V-A3, V3a |
+| S1V-7 | the sweep bound: a band torsion character of `S₊` with no `π̄_p`-part has `π_p`-level `≤ v_{π_p}(w₅^o − 1)`, `o` fixed by its prime-to-`p` order | hand | § V-A3, V3c |
+| S1V-8 | any second split prime `p ≠ 5` kills every rational heteroclinic of `Θ₄(R₅)` (no torsion-difference hypothesis); `θ*` dies by row 2 of `R_{5,13}` | hand + exact arithmetic | § V-A3, Theorem V4 |
