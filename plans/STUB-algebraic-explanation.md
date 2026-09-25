@@ -1,5 +1,12 @@
 # FS-74 — the algebraic explanation: why is every four-colouring of de Grey's lattice `8Λ`-periodic? (stub)
 
+> **CLOSED 2026-09-24 by FS-85's step 1** (`LEDGER.md` row 85; `plans/FS85-derivation.md` FS85-R3b). Every four-colouring of de Grey's
+> lattice is `8Λ`-periodic because Parts's no-monochromatic-√3-triple theorem, placed in `Λ`, is a linear identity per family on the
+> tetrahedral embedding (`A_k g = −2g`, symbol `(1+X)(1+Y)(X+Y)/XY`), whose zero sets meet in 42 characters, exactly the dual of `8Λ`;
+> the 5-part left by the inner families is killed pointwise at the tight dyadic quotient (R3a), and an odd-index coset argument carries the
+> identity to families ±3, ±4 (C15). Hubai's chirality is the choice of prime above 2 (dB7). Row 78's certificate is no longer needed for
+> `F ⊇ 8Λ`. The mechanism is G75.
+
 > **Absorbed into FS-85 (2026-09-24).** Kooshi chose FS-85, *can four-colour rigidity exist without triangles?*
 > (`plans/STUB-four-colour-rigidity-without-triangles.md`), and this stub's question, why every four-colouring of de Grey's lattice
 > is `8Λ`-periodic, is its step 1, with the triangles' role recorded. Everything below stands as FS-85's reading for that step.

@@ -1,5 +1,11 @@
 # FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)
 
+> **Re-aimed at FS-85's close (2026-09-24).** On de Grey's lattice a **radius-1** averaged certificate cannot lift `120Λ` to `8Λ`: the 54
+> pair-correlation equalities admit a weight supported entirely off the 42 characters (FS85-C14, verified exactly; row 87). Radius ≥ 2
+> and joint four-class averaged certificates are untested (a float probe agrees; uncertified). Row 85's proof is **structure-derived and
+> pointwise** (a linear identity per family, then a splitting at the tight dyadic quotient; G75) — G73's third format, not the averaged
+> one. So at ℚ(√167) price radius ≥ 2 from the start, and read the residue-label test (G73's reading) beside it.
+
 *Minted 2026-09-24 at FS-79's close, from the one obstruction route its competition left open (`LEDGER.md` row 80, G73; the
 competition advisor's product-axis reading, close-inventory item 88; `plans/FS79-derivation.md` §6 R3–R4). Rank 3: speculative, and
 the only solver-free route to five colours over ℚ(√167) left standing. Written for a session with zero conversation memory.*

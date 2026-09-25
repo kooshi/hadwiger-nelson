@@ -1,5 +1,12 @@
 # FS-76 — four colours: inheritance, certificates and decidability (stub)
 
+> **Re-aimed at FS-85's close (2026-09-24).** **`P = F` now holds on de Grey's lattice by derivation, by three mechanisms** (row 85: the
+> spectrum, stripe coupling, and FS-73's certificate), `F = P = 8Λ` — a derived positive instance of inheritance at four colours, rank 4.
+> And in rank 1, FS85-dB2's triangle-free `G(ℤ, D)`, `|D| = 70`, has `F₄ = P₄ = 4ℤ` (row 86): rigidity and inheritance there need no
+> triangle. What is left of this stub: the class statements (plain density false in rank 1, row 80; the rank-1 criterion; C3-aper), the
+> decidability question, and the local instances FS-72 and KR6 (FS-77). The one new obstruction: `Cay(Λ/16Λ, U)` is slack yet forces
+> (row 87), so a slack period quotient is no evidence of looseness.
+
 *Minted 2026-09-23 at FS-73's close, from `plans/FS73-derivation.md` T29, T30 and §8, and Kooshi's question whether a certificate like
 the three-colour `Θ` exists at four colours. Rank 4: mechanism; the next use of the competitor-and-advisor design
 (`plans/PROTOCOL-competitor-and-advisor.md` §3).*

@@ -1,5 +1,13 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+> **Re-aimed at FS-85's close (2026-09-24).** ℚ(√167)'s plane is triangle-free (√3 ∉ F), so two FS-85 results bear. **FS85-dB4
+> (row 86):** a four-colour forced pair in any triangle-free unit-distance graph gives a triangle-free five-chromatic one by a generic
+> chain — Soifer's Open Problem 55.1 — so the chain route's input here (a four-colour forced pair on a lattice over ℚ(√167), chainable in
+> the field since the wall is broken) is at least Soifer-strength; price it so. **Coxeter's R2.6 reading** (`plans/FS85-derivation.md`
+> §7): in a triangle-free lattice the analogues of the hexagon circles are generically non-torsion, so the spectral mechanism that makes
+> de Grey's lattice rigid (row 85, G75) predicts no rigidity here. ℚ(√167) is H6's type (A) — wall-broken with no small gapped plane;
+> type (B) is FS-86. Five over ℚ(√167) by a route that needs no forced pair (FS-83, FS-80, a finite refusal after 2026-10-01) is unaffected.
+
 ## 00. After FS-81 (2026-09-24): four is a theorem of the family; a ball-and-solver refusal of five is priced out
 
 - **The premise at four is now field-level** (`LEDGER.md` row 82): `χ(ℚ(√167)²) ≥ 4` follows from FS-81's theorem (167 ≡ 11 mod 12),

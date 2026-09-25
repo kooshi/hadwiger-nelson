@@ -1,5 +1,14 @@
 # FS-85: can four-colour rigidity exist without triangles? (stub)
 
+> **CLOSED 2026-09-24.** Record `plans/FS85-rigidity-without-triangles.md` (its §R-close first); theorems `plans/FS85-derivation.md`
+> (39 entries); `LEDGER.md` rows 85–87; G75 minted, G54 rewritten (its middle case observed). **Step 1 answered:** every four-colouring of
+> de Grey's lattice is `8Λ`-periodic, local at one prime above 2 and striped, `F = P = 8Λ`, 9,120 — derived from Parts's no-monochromatic-
+> √3-triple trees, walked here as a certificate, at two independent derivations, with no solver refusal (row 85); the triangles enter as a
+> linear identity that pins the spectrum (G75). **Step 2:** yes in the abstract class — a triangle-free `G(ℤ, D)`, `|D| = 70`, with
+> `F₄ = 4ℤ`, at two derivations — and in the plane exactly Soifer's Open Problem 55.1 (FS85-dB4; row 86); no triangle-free unit-distance
+> lattice with `F₄ ≠ 0` is known. The week's verdict **Paid (abstract)**; Part 1 alone Draw (K). Minted from it: FS-86, FS-87, FS-88;
+> re-aimed: FS-59, FS-67, FS-76, FS-80; FS-74 closed by it.
+
 *Minted 2026-09-24, just after FS-81's close, as the next milestone. Kooshi chose it from the algebra-week advisor's ranking
 (`plans/POROS-2026-09-24-algebra-week.md` §6.3, rank 1), with FS-83 (character colourings at four and five colours) as its fallback.
 Kooshi: "I agree with the advisor's rank 1 recommendation, with rank 2 as a fallback … Rank 1 as the next milestone." It **absorbs

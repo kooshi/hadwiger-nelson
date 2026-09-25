@@ -1,5 +1,12 @@
 # FS-67 — 3-colourings of a tight graph times a non-3-colourable one: do they all come from the tight factor?
 
+> **Re-aimed at FS-85's close (2026-09-24): the four-colour form.** `G` Hoffman-tight at four colours (every four-colouring gap-free), `H`
+> with `χ(H) > 4`: is every four-colouring of a (sparse) product of `G` and `H` pulled back from `G`? **Answered yes once** (FS85-R3a,
+> row 85): on each component of de Grey's five-family graph, the colouring of the product of the tight dyadic quotient with the
+> non-four-colourable mod-5 torus is local at one prime above 2 — Poros (round 2)'s product reading, confirmed in shape — by a pointwise
+> tetrahedron splitting slice by slice, not by second moments (C14 rules those out there). Bears on FS-86, where a product of the tight
+> dyadic `K₄` with the stable targets is exactly the shape a rigid lattice would need.
+
 *Minted 2026-09-20 at FS-61's close; its own plan predicted the minting (`plans/FS61-quadratic-census.md` §M2: "proposed to the
 owner as a stub at the close"), and both of its sweeps recommended it (`data/fs61/CLOSE-proposals.md` F.4). Written for a reader
 with no conversation memory. Read beside: `CLAUDE.md` G54 (tight or slack), G61 (2), row 67 (the towers), row 72 (the 3-adic
