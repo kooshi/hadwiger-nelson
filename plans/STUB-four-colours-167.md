@@ -1,5 +1,7 @@
 # FS-59 — ℚ(√167): four colours proven; the next question is five (re-aimed at FS-79's close)
 
+**Re-aimed at FS-86's close (2026-09-25):** at four colours no measurable window colouring over finitely many places exists here (row 92, FS86-CL1, one mind); at five colours the window count fails at the real place (Croft's `m₁ ≥ 0.22936 > 1/5`), so the five-colour question is untouched.
+
 > **Re-aimed at FS-85's close (2026-09-24).** ℚ(√167)'s plane is triangle-free (√3 ∉ F), so two FS-85 results bear. **FS85-dB4
 > (row 86):** a four-colour forced pair in any triangle-free unit-distance graph gives a triangle-free five-chromatic one by a generic
 > chain — Soifer's Open Problem 55.1 — so the chain route's input here (a four-colour forced pair on a lattice over ℚ(√167), chainable in

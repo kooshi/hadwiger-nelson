@@ -1,5 +1,7 @@
 # FS-87 — de Grey's lattice in the kernel: the stripe lemma, Parts's trees, and `F = P = 8Λ` as a conditional theorem (stub)
 
+**Re-aimed at FS-86's close (2026-09-25):** FS-86's kernel candidates join: `ℤ[T] = O` (FS86-W1, one paragraph over `ℤ₂[ζ₁₂]`), Theorem A by W's route (row 90: W1, row 78's certificate, D2-B's level-6 table), the K classification (row 89), C12.1 (row 93).
+
 *Minted 2026-09-24 at FS-85's close, from the kernel decisions filed in `plans/FS85-derivation.md` (FS85-V2-T5 "a good small kernel
 target", dB2, dB9's V1, dB10, dB11, V7, IA1, R3b) and verifier 2's recommendation (`plans/FS85-V2-verification.md` §C4). Rank 8.
 Written for a session with zero conversation memory.*

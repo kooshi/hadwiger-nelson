@@ -1,5 +1,7 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+**Re-aimed at FS-86's close (2026-09-25):** with any finite set of places and measurable windows it cannot four-colour a type-(B) plane non-periodically (row 92, C14), and over type (A) no such four-colouring exists (FS86-CL1); the five-colour aim at ℚ(√167) is untouched.
+
 > **Routed here at FS-81's close (2026-09-24; close inventory items 12, 18): the plan-phase advisor's one-character question.** Can one
 > character of the unit-vector ring `ℤ[U_F]` put every unit vector of a whole field in `[1/k, 1 − 1/k]`? That is a colouring of the whole
 > plane local at no prime when its archimedean part is nonzero — this stub's target in its simplest form (one place, no window). At

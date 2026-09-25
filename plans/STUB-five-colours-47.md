@@ -1,5 +1,7 @@
 # FS-84 — ℚ(√47): five colours, the conjecture's cheapest exposed prediction (stub; FS-59's sibling)
 
+**Re-aimed at FS-86's close (2026-09-25):** a four-colouring falsifying the conjecture's five-clause here cannot be a measurable window colouring over finitely many places with odd split places (row 92, FS86-CL1, one mind).
+
 *Minted 2026-09-24 at FS-81's close (close inventory item 86: the owner's ruling carries stage D1's deep pass here, not run in FS-81).
 Record behind it: `data/fs81/records/phase-D.md`, `data/fs81/phaseD/d47/survivors.md`; `LEDGER.md` row 84. Solver needs: **SAT for the
 residue re-asks, the quotients and any refusal ask; none for the `Θ₄` cell analysis (HiGHS proposes, Fractions decide) or the chain

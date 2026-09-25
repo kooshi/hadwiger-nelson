@@ -1,5 +1,7 @@
 # FS-67 — 3-colourings of a tight graph times a non-3-colourable one: do they all come from the tight factor?
 
+**Re-aimed at FS-86's close (2026-09-25):** `[Zhang2012]` Thm 1.8(i) answers the main case for vertex-transitive factors with a strict ratio inequality and `H` connected (row 88); what is left is the equal-ratio case (tightness decides it at K, row 89) and the integrality gap `χ_f(H) ≤ k < χ(H)`.
+
 > **Re-aimed at FS-85's close (2026-09-24): the four-colour form.** `G` Hoffman-tight at four colours (every four-colouring gap-free), `H`
 > with `χ(H) > 4`: is every four-colouring of a (sparse) product of `G` and `H` pulled back from `G`? **Answered yes once** (FS85-R3a,
 > row 85): on each component of de Grey's five-family graph, the colouring of the product of the tight dyadic quotient with the

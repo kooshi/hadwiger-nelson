@@ -1,5 +1,7 @@
 # FS-86 — four-colour rigidity over ℚ(√59) and ℚ(√83): does the tight dyadic `K₄` force pairs in a triangle-free field? (stub)
 
+> **CLOSED 2026-09-25 (FS-86).** Record `plans/FS86-dyadic-rigidity.md` (§R-close first); theorems `plans/FS86-derivation.md`; `LEDGER.md` rows 88–94; G76. The field-level question is one pair, `(0, 4)`, and it is **undecided**; the plane over `ℚ₂(√3)` is rigid; every natural construction of a non-periodic four-colouring is impossible; ℚ(√2,√3), the class's member with triangles, is rigid given Heule's T721. The stub's "yes, `P₄ ≠ 0`" was free at the field level. What is left: FS-89 (the missing theorem) and FS-90 (sanctioned search). Carried here from the close's sweep: the colouring-level Hasse principle at L = 4 (de Bruijn §3: in S2 with `4 ∈ F_tf`, `F(R) ≠ 0`; killing test a non-periodic four-colouring of ℚ(√59)'s plane) and the local question "is `4 ∈ F_tf`?".
+
 **Chosen 2026-09-25 as the next milestone** (Kooshi: "I agree with FS-86"). Close inventory: `plans/FS86-close-inventory.md`, opened at the choice and kept by the coordinator (WORKFLOW step 5). It opens in the finite-witness-free week (to 2026-10-01; `CLAUDE.md` § Toolchain): routes 1–3 are in scope, route 4 waits for the week's end.
 
 *Minted 2026-09-24 at FS-85's close, from the plan-phase advisor's held item H5 and its frame item H6 (public since the competition's

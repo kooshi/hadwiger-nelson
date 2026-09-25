@@ -1,5 +1,7 @@
 # FS-47 — The unit-vector ring in the kernel: prime inversion, the two-colour classification, and the five-level for every wall-broken field (STUB, 2026-09-14; Kooshi: kernel-check every single thing GPT Astra proved)
 
+**Re-aimed at FS-86's close (2026-09-25):** B1's Lemma R (`ℤ[U_F]` = elements integral at every stable prime) is the natural target, **at its corrected scope**: no stable prime ramified in `F(i)/F` (FS86-CL2; it fails at ℚ(√5), ℚ(√17)).
+
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` §§1, 2, 6 (Lemma 1.1,
 Theorems 1.2, 2.1, 6.1, Corollary 6.2) and `VERIFICATION.md` rows 1–3, 7; `plans/STUB-chain-theorem.md` (FS-45, the chain lemma
 and its instances, which this stub's Theorem 6.1 consumes); `plans/STUB-field-level-criteria.md` (FS-37, whose residue-degree

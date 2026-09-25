@@ -234,7 +234,7 @@ the cell family (rows 34–41). Also χ(Heule-510) = χ(Heule-553) = 5 and χ(de
    (rows 88–94, G76): the plane is rigid iff `(0, 4)` is forced (row 88) — **undecided**; the plane over `ℚ₂(√3)` is rigid (row 90), so the
    question is realising a local forcer without triangles; patchworks, half-space defects, walls, stripes, Kempe swaps, finite-type characters
    and measurable windows are excluded (rows 91–92), and what is left needs a measure-rigidity theorem not in print (FS-89) or HD1-cert's
-   certificate (FS-90). ℚ(√2,√3) is the class's member with triangles (row 93). Toward six only through Soifer 55.1 (row 86).
+   certificate (FS-90). ℚ(√2,√3), its member with triangles, is rigid given Heule's T721 (row 93). Toward six only through Soifer 55.1 (row 86).
 
 **The prior-art position.** The reduction from a field plane to a finite residue plane has been derived
 independently in seven lineages that barely cite one another — Woodall → Benda–Perles → Johnson → Chow;

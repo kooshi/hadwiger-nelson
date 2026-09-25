@@ -1,5 +1,7 @@
 # FS-83 — the layer method at four and five colours: can one character colour a whole field's plane? (stub)
 
+**Re-aimed at FS-86's close (2026-09-25):** at `k = 4` dead on type-(B) planes (finite-type characters, row 91; every measurable window, row 92) and for measurable windows over ℚ(√47) (FS86-CL1); live at `k = 5` over ℚ(√167) and for band characters of infinite type (FS-89). FS-86's §S.5 fallback (this stub at `k = 4`) was dead before it ran.
+
 *Minted 2026-09-24 at FS-81's close, from FS-81's §IQ item 5, the plan-phase advisor's open question (close inventory items 12 and 18),
 and `plans/FS81-derivation.md` §5 R7. Solver needs: **none** (exact cell computations and derivation).*
 

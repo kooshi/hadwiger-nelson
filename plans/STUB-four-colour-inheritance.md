@@ -1,5 +1,7 @@
 # FS-76 — four colours: inheritance, certificates and decidability (stub)
 
+**Re-aimed at FS-86's close (2026-09-25):** over type-(B) fields Kempe swaps (HD4), patchworks (D, D′) and half-space defects (H) cannot break inheritance (row 91); `P(R) ≠ F(R)` there would be a four-colour inheritance failure on a non-finitely-generated abelian Cayley graph.
+
 > **Re-aimed at FS-85's close (2026-09-24).** **`P = F` now holds on de Grey's lattice by derivation, by three mechanisms** (row 85: the
 > spectrum, stripe coupling, and FS-73's certificate), `F = P = 8Λ` — a derived positive instance of inheritance at four colours, rank 4.
 > And in rank 1, FS85-dB2's triangle-free `G(ℤ, D)`, `|D| = 70`, has `F₄ = P₄ = 4ℤ` (row 86): rigidity and inheritance there need no

@@ -430,6 +430,13 @@ restriction costs nothing above two colours. *Proof:* this entry; D C1 (1) and i
 mind). *Rests on it:* Lemma R's scope line. *Prior art:* `[Fischer1990b]` Thm 5 gives the ring in closed form for real quadratic fields (to
 compare when FS-47 opens). *Kernel:* declined (FS-47's stub carries the corrected scope).
 
+**FS86-CL3 — Given Heule's T721 and C13, the plane over ℚ(√2, √3) is four-colour rigid: `F(R) ≠ 0`, every four-colouring of each `R`-coset is a pullback from `P₄` at its dyadic place, and every `√3`-pair is a four-colour virtual edge. [hand, one mind (the close planner); given T721 (external: Heule's 721-vertex graph in ℚ(√2,√3)², a distance-2 pair monochromatic in every four-colouring, read through Soifer 2024 ch. 54; the graph not held) and C13 (hand, conditional on the frame's transfer to ℚ(√2,√3))]**
+T721 is a finite unit-distance graph over ℚ(√2, √3) forcing a pair at difference `2u`, `u` a unit vector; forcing is monotone upward and
+`F(R)` is a `U`-stable ideal (V2), so `2 = ū·2u ∈ F(R)`; C13 (ii) turns this into `F(R) ≠ 0` and (i) into the virtual edges. No record of the
+competition connected T721 (plan §PA.3 item 5) to C13; found at the close. *Proof:* this entry. *Proof verdict:* closes given its two inputs.
+*Rests on it:* S2 has a rigid member with triangles (the positive control of "is rigidity decided by triangles?"), row 93; FS-90's candidate
+(b) becomes an audit of T721. *Prior art:* `[Soifer2024]` ch. 54 (T721). *Kernel:* declined (the input is external; its audit is FS-90's).
+
 ## §11. Conjectures and readings this milestone stated and did not prove (the close's sweep)
 
 - **HD1** (Poros (plan)): `Θ₄(R) ⊆ T` on type-(B) planes. Open; the finite-type case is proved (HD1-fin); the rest needs an `S`-adic
