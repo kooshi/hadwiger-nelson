@@ -326,3 +326,56 @@ compute actually helps (C), § Toolchain (T), § Building and the kernel cost mo
 5. **A derivation stage, S1**, collects what the corpus holds only in pieces: the type-(A) theorem for ℚ(√47) with its periodic case free of
    `[AmbrusEtAl2023]`, the invariant-measure equivalence, and the one-prime reading.
 6. **Predictions registered in §P:** P-G15, P-int, P-G75 (from §G.1), P-surv, P-1p (from rows 81, 97).
+
+## Stage 3 — SAVED
+
+### 3.1 §PA — the prior-art gate (time-boxed; about 15k tokens spent of the 60k allowed)
+
+**The recognition's words, two disciplines.** (a) *Unit-distance graphs / Euclidean distance graphs on rational or algebraic points*
+(discrete geometry); (b) *fractional and measurable colourings of infinite graphs, invariant measures on colouring shifts of abelian Cayley
+graphs* (graph theory / symbolic dynamics). The questions: is a triangle-free five-chromatic planar unit-distance graph known; is
+`χ(ℚ(√47)²)` known; is `χ_f` of the plane (or of a field plane) known above 4.
+
+| # | query (zbMATH Open API, discovery) | hits | what it found |
+|---|---|---|---|
+| PA1 | `ab:"unit distance" & ab:"triangle-free" & py:2010-2026` | 3 | Exoo–Ismailescu 2016 (small triangle-free **four**-chromatic); **Silva Filho 2026** (arXiv 2607.19995: exact coordinate fields of the triangle-free Exoo–Ismailescu graphs EI17, EI19 — solvable/non-solvable, degree-20; not ℚ(√47)); EuroComb 2013 abstracts |
+| PA2 | `ab:"unit distance graph" & ab:"girth" & py:2000-2026` | 2 | `[deGrey2026]` (five-chromatic triangle-free, **ℝ³**, 61 vertices); Raigorodskii 2014 |
+| PA3 | `ti:"fractional chromatic number" & ab:"plane" & py:2015-2026` | 2 | `[MatolcsiEtAl2025]` ("at least 4", 2023 listing); Cranston–Rabern 2017 — **nothing above 4** |
+| PA4 | `ab:"unit distance" & (ab:"number field" \| ab:"quadratic field" \| ab:"rational points") & py:1985-2026` | 3 | nothing on a field plane's chromatic number (Füredi–Kang 2004, Bhattacharya–Goenka 2026, Singhal 2017 — off-topic) |
+| PA5 | `au:"Johnson, Peter D." & ab:"chromatic"` (item 8: the poser's full listing) | 33 | **Johnson 1996** (*About two definitions of the fractional chromatic number*, Zbl 0856.05036: the LP and set-colouring definitions agree when finite; open problems on infinite graphs); **Johnson 2000** (*Infinite graphs and the fractional chromatic number: some recent surprises*, Zbl 0945.05021: the full graph's `χ_f` against its finite subgraphs'); **Johnson–Rodger 2005** (*Coloring the vertices of a graph with measurable sets in a probability space*, Zbl 1059.05050); **Johnson 2011** (*Euclidean distance graphs on the rational points*, Zbl 1243.05082, a survey of `χ(ℚⁿ, {d})`); 2021 *On single-distance graphs on the rational points in Euclidean spaces* (Zbl 1461.05078). `[Johnson2000]` (status report) and `[Johnson2006]` (rational points compendium) are the bibliography's unread entries |
+
+**The held Polymath16 threads** (`~/source/library/notes/polymath16-threads-1-18-text.txt`, grepped for "triangle-free" and for √47):
+- thread 11 (29–30 December 2018, ag24ag24 and Parts): *"it makes sense that a triangle-free graph would typically have a FCN less than 3
+  regardless of its CN"* — the fractional chromatic number of triangle-free unit-distance graphs measured low. **This bears on S2** (P-int).
+- the Algebraic-formulation discussion: *"Without triangles, of course, it must be computationally very hard"* (to decide a field plane).
+- December 2025 – February 2026 (Haugstrup, de Grey): Soifer's question restated as open in the plane; five-chromatic triangle-free in ℝ³
+  (61 vertices), six-chromatic triangle-free in ℝ⁴ by pseudo-edges; Joe–Noble 2023 (arXiv 2303.09513) on triangle-free `ℚ³` distance graphs.
+- No mention of √47 or ℚ(√47).
+
+**Verdicts.**
+1. **The question is open in print, and posed three times:** Moorhouse (ℚ(√47), `CLOSED-QUESTIONS.md` §1.7), Soifer 55.1 (2019, in
+   `[Soifer2024]`), and the conjecture here. No triangle-free five-chromatic planar unit-distance graph was found in zbMATH or the threads to
+   May 2026. A negative from four queries measures their words (G21); the arXiv after May 2026 was not searched.
+2. **`χ_f(ℝ²) > 4` is not in print** (PA3): S2's single-class route would beat the published record through a triangle-free field — a price,
+   and a reason for the low prior at P-int.
+3. **The infinite-graph fractional literature is Johnson's** (PA5), and its "surprises" are exactly about `χ_f` of an infinite graph against
+   its finite subgraphs — the step S1's invariant-measure lemma takes by amenability. **Owed before S1 relies on it:** Johnson 1996, 2000
+   (surprises) and Johnson–Rodger 2005 read (a debt, G50); Scheinerman–Ullman's *Fractional graph theory* ch. 3 is the textbook form.
+4. **Bibliography proposals** (for the front-page lane; this job edits no bibliography): `[Johnson1996fcn]` (Zbl 0856.05036),
+   `[Johnson2000surprises]` (Zbl 0945.05021), `[JohnsonRodger2005]` (Zbl 1059.05050), `[Johnson2011rational]` (Zbl 1243.05082),
+   `[SilvaFilho2026]` (arXiv 2607.19995), `[JoeNoble2023]` (arXiv 2303.09513). Titles from zbMATH listings only — none read.
+
+### 3.2 What §PA taught about the object (WORKFLOW 9's sweep, done early)
+
+The Polymath16 measurement that triangle-free unit-distance graphs typically have fractional chromatic number below 3 says the
+single-class averaged invariant is weak exactly where FS-84 lives: triangle-freeness removes the dense cliques that make `χ_f` large. It is a
+reading, not a theorem (finite graphs; the geometric blow-up can be larger), and it moves weight in §P from S2's single-class form to its
+four-class (window-frequency) form, which row 80 shows can refute where `χ_f < 4`.
+
+### Would-have-searched-here log (stages 1–3)
+
+- Would have run P3b's exact `Θ₄` finder on the ten minimal survivors to test the one-prime reading; instead derived that each survivor's
+  denominator has exactly one prime ≡ 1 (mod 4) (hand factorisation) and registered P-1p for S4.
+- Would have asked the ten survivors' UNKNOWN residue targets at 600 s; instead recorded (G68, type (A)) that such an answer can only colour a
+  finite lattice, and demoted the ask to S4.
+- Would have sampled a four-colour ball at `d_ball ≈ 18` on Λ₂₄₀ to price S3; instead priced it from row 84's recorded numbers (§S).
