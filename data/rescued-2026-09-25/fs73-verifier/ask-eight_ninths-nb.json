@@ -1,0 +1,64 @@
+{
+ "pair": "eight_ninths",
+ "facts": {
+  "p_int36": [
+   -16,
+   0,
+   0,
+   0
+  ],
+  "q_int36": [
+   16,
+   0,
+   0,
+   0
+  ],
+  "delta_int36": [
+   32,
+   0,
+   0,
+   0
+  ],
+  "p_in_Lambda": true,
+  "q_in_Lambda": true,
+  "p_in_ball": true,
+  "q_in_ball": true,
+  "delta_is_unit": false,
+  "deg_p": 54,
+  "deg_q": 54
+ },
+ "n_common_neighbours": 0,
+ "cnf": {
+  "nvars": 159316,
+  "nclauses": 1745446,
+  "sha256": "c645e66d8179fb9a97a920ddd06f895c7262b578af52abbc37025fd6f304b18b",
+  "perm_seed": 20260923,
+  "brk": {
+   "mode": "nb",
+   "w": [
+    -52,
+    0,
+    0,
+    0
+   ]
+  }
+ },
+ "cnf_path": "/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/fs73-verifier/cnf-eight_ninths-nb-s20260923.cnf",
+ "solver": "glucose (audemard/glucose 674dbba7, simp/glucose_release)",
+ "budget_s": 3600.0,
+ "cmd": "/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/fs73-verifier/glucose/simp/glucose_release -certified -vbyte -certified-output=build/fs73v/proof-eight_ninths-nb.drat -model -cpu-lim=3600 /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/fs73-verifier/cnf-eight_ninths-nb-s20260923.cnf",
+ "wall_s": 130.75,
+ "cpu_s_solver": 130.19,
+ "maxrss_kb_children": 381096,
+ "exit": 20,
+ "status_line": "s UNSATISFIABLE",
+ "solver_tail": [
+  "c restarts              : 699 (1954 conflicts in avg)",
+  "c conflicts             : 1365913        (10517 /sec)",
+  "c decisions             : 1637091        (0.00 % random) (12605 /sec)",
+  "c CPU time              : 129.877 s"
+ ],
+ "verdict": "UNSAT",
+ "proof_path": "build/fs73v/proof-eight_ninths-nb.drat",
+ "proof_bytes": 229033560
+}

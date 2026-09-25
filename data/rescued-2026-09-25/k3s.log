@@ -1,0 +1,3 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3
+data/m2/j04/K3Stripe.lean:59:8: warning: declaration uses `sorry`
+wall 18.37 s, user 16.96 s, maxrss 9758312 KB

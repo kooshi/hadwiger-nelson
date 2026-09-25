@@ -1,0 +1,249 @@
+{
+ "basis_in_U_int36": [
+  [
+   36,
+   0,
+   0,
+   0
+  ],
+  [
+   18,
+   18,
+   0,
+   0
+  ],
+  [
+   30,
+   0,
+   6,
+   0
+  ],
+  [
+   15,
+   15,
+   3,
+   -3
+  ]
+ ],
+ "point_group_order": 24,
+ "stage1_rows": 6,
+ "coord_den": 9,
+ "named_in_G": {
+  "mult_zeta6": true,
+  "conj": true,
+  "sigma3": true,
+  "sigma11": true,
+  "mult_rho": false
+ },
+ "field_generated_subgroup_order": 24,
+ "field_subgroup_equals_G": true,
+ "orbit_sizes_G": [
+  6,
+  12
+ ],
+ "span_89_G": {
+  "label": "orbit(8/9)",
+  "rank": 2,
+  "hnf": [
+   [
+    16,
+    16,
+    0,
+    0
+   ],
+   [
+    0,
+    32,
+    0,
+    0
+   ]
+  ],
+  "index_in_Lambda": null,
+  "equals_8Lambda": false,
+  "contained_in_8Lambda": true
+ },
+ "span_v_G": {
+  "label": "orbit(v)",
+  "rank": 4,
+  "hnf": [
+   [
+    8,
+    8,
+    8,
+    24
+   ],
+   [
+    0,
+    16,
+    0,
+    16
+   ],
+   [
+    0,
+    0,
+    16,
+    16
+   ],
+   [
+    0,
+    0,
+    0,
+    32
+   ]
+  ],
+  "index_in_Lambda": 4096,
+  "equals_8Lambda": true,
+  "contained_in_8Lambda": true
+ },
+ "span_both_G": {
+  "label": "orbit(8/9) + orbit(v)",
+  "rank": 4,
+  "hnf": [
+   [
+    8,
+    8,
+    8,
+    24
+   ],
+   [
+    0,
+    16,
+    0,
+    16
+   ],
+   [
+    0,
+    0,
+    16,
+    16
+   ],
+   [
+    0,
+    0,
+    0,
+    32
+   ]
+  ],
+  "index_in_Lambda": 4096,
+  "equals_8Lambda": true,
+  "contained_in_8Lambda": true
+ },
+ "orbit_sizes_field_subgroup": [
+  6,
+  12
+ ],
+ "span_89_field_subgroup": {
+  "label": "orbit(8/9)",
+  "rank": 2,
+  "hnf": [
+   [
+    16,
+    16,
+    0,
+    0
+   ],
+   [
+    0,
+    32,
+    0,
+    0
+   ]
+  ],
+  "index_in_Lambda": null,
+  "equals_8Lambda": false,
+  "contained_in_8Lambda": true
+ },
+ "span_v_field_subgroup": {
+  "label": "orbit(v)",
+  "rank": 4,
+  "hnf": [
+   [
+    8,
+    8,
+    8,
+    24
+   ],
+   [
+    0,
+    16,
+    0,
+    16
+   ],
+   [
+    0,
+    0,
+    16,
+    16
+   ],
+   [
+    0,
+    0,
+    0,
+    32
+   ]
+  ],
+  "index_in_Lambda": 4096,
+  "equals_8Lambda": true,
+  "contained_in_8Lambda": true
+ },
+ "span_both_field_subgroup": {
+  "label": "orbit(8/9) + orbit(v)",
+  "rank": 4,
+  "hnf": [
+   [
+    8,
+    8,
+    8,
+    24
+   ],
+   [
+    0,
+    16,
+    0,
+    16
+   ],
+   [
+    0,
+    0,
+    16,
+    16
+   ],
+   [
+    0,
+    0,
+    0,
+    32
+   ]
+  ],
+  "index_in_Lambda": 4096,
+  "equals_8Lambda": true,
+  "contained_in_8Lambda": true
+ },
+ "hnf_8Lambda": [
+  [
+   8,
+   8,
+   8,
+   24
+  ],
+  [
+   0,
+   16,
+   0,
+   16
+  ],
+  [
+   0,
+   0,
+   16,
+   16
+  ],
+  [
+   0,
+   0,
+   0,
+   32
+  ]
+ ],
+ "Lambda_mod_8Lambda": "(Z/8)^4 (8Lambda = 8 * Lambda, Lambda free of rank 4)"
+}

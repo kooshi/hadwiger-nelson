@@ -1,0 +1,22 @@
+slot: admitted axioms.sh: mem 30 GiB (hard cap), cpus 0,1,2,3,4,5,6,7
+==> axioms: this run's full output: build/gate/axioms/20260925T133032Z-3573778.log
+    audited: 1049 records — 1034 clean on the standard axioms, 10 axiom-free, 5 declared purchase(s)
+    clean records, by axiom set:
+        944  [propext, Classical.choice, Quot.sound]
+         49  [propext]
+         40  [propext, Quot.sound]
+          1  [Quot.sound]
+         10  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    recorded count (CLAUDE.md § Trust ledger): match
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20260925T004714Z-2781958.log
+    no record appeared, disappeared or changed its axioms
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
+==> axioms: OK — 1034 clean, 10 axiom-free, 5 declared purchase(s)
+    full output: build/gate/axioms/20260925T133032Z-3573778.log

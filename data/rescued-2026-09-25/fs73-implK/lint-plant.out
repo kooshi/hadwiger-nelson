@@ -1,0 +1,9 @@
+Running linter on specified modules: [Proofs]
+-- Found 1 error in 5894 declarations (plus 5571 automatically generated ones) in Proofs with 14 linters
+
+/- The `unusedArguments` linter reports:
+UNUSED ARGUMENTS.
+This linter can be disabled with `@[nolint unusedArguments]`. -/
+-- Proofs.HadwigerNelson.Kempe
+/home/kooshi/source/lean-dir/Proofs/HadwigerNelson/Kempe.lean:655:1: error: fs73LintPlant 1 unused argument:
+  argument 2: (m : ℕ)

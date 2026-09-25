@@ -1,0 +1,18 @@
+fs73_q167 cover: M in [1, 420]
+M 96: 20 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 71596001, N18 7422718951
+M 108: 12 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 None, N18 None
+M 144: 28 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 34181708, N18 166249782
+M 192: 20 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 71596001, N18 7422718951
+M 216: 20 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 458731805, N18 47559042030
+M 231: 12 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 None, N18 None
+M 261: 28 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 368897594, N18 1794209481
+M 264: 36 units, rank 4, 23: [('23/11', 16, 'UNSAT'), ('23/12', 16, 'UNSAT')], 43 both refuse True, N14 138097822, N18 386153077
+M 288: 36 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 195587490, N18 546907330
+M 312: 36 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 67348745, N18 188322485
+M 324: 20 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 9289319058, N18 963070601110
+M 348: 44 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 226571758, N18 498703335
+M 363: 12 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 None, N18 None
+M 384: 28 units, rank 4, 23: [('23/11', 12, 'UNSAT'), ('23/12', 12, 'UNSAT')], 43 both refuse True, N14 432124310, N18 2101725648
+M 396: 28 units, rank 4, 23: [('23/11', 16, 'UNSAT'), ('23/12', 16, 'UNSAT')], 43 both refuse True, N14 1954899957, N18 9508058862
+M 420: 60 units, rank 4, 23: [('23/11', 20, 'UNSAT'), ('23/12', 20, 'UNSAT')], 43 both refuse True, N14 234002732, N18 411992668
+DONE cover: 420 denominators; rank 4, with a 3-pole, refusing at both primes above 23 and above 43: [96, 108, 144, 192, 216, 231, 261, 264, 288, 312, 324, 348, 363, 384, 396, 420]

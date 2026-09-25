@@ -1,0 +1,3 @@
+slot: admitted fs81-xcheck23: mem 3 GiB (hard cap), cpus 19
+{"config": "B", "K": 2, "open": false, "d_mod_24": 23, "tag": "d23-B-K2", "d": 23, "D": 1800, "N": 50, "verdict": "UNDECIDED", "stats": {"nodes": 458007, "leaves": 305333, "lp": 763355, "bad_farkas": 0, "wall_s": 1822.8}, "finder": null, "cap_s": 1800.0}
+exit 0

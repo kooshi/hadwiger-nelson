@@ -1,0 +1,4 @@
+L3e1c94c6 N = 23: 279841 classes, SAT (3.86 s; break-free cadical None)
+L3e1c94c6 N = 24: 331776 classes, UNSAT (7.02 s; break-free cadical UNSAT)
+L3e1c94c6 N = 25: 390625 classes, UNSAT (5.67 s; break-free cadical UNSAT)
+L3e1c94c6 N = 26: 456976 classes, UNSAT (3.12 s; break-free cadical UNSAT)

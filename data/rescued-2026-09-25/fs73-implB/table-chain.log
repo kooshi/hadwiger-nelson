@@ -1,0 +1,34 @@
+== Q11 2026-09-23T17:26:58+00:00
+Q11|3int|D10                             k=3 rank 4 |U|  36  m/d -0.5961 (slack)  colourable [3, 6, 9, 12] refused [2, 4, 7, 8, 10, 11]  P_found rank 4 {'free': 0, 'torsion': [3, 3, 3, 3]}  F_known rank 0  -- exact at every colourable N  [166 s]
+Q11|3int|D50                             k=3 rank 4 |U| 100  m/d -0.4488 (Hoffman-refuses)  colourable [3, 6, 9, 12] refused [2, 4, 7, 8, 10, 11]  P_found rank 4 {'free': 0, 'torsion': [3, 3, 3, 3]}  F_known rank 0  -- exact at every colourable N  [173 s]
+Q11|D30                                  k=3 rank 4 |U| 108  m/d -0.5712 (slack)  colourable [] refused [2, 4, 6, 7, 8, 9, 10, 11, 12]  P_found rank 4 {'free': 0, 'torsion': []}  F_known rank 0  -- REFUSING: no periodic colouring at any N searched (C3-aper; P_found = Lambda, vacuous)  [240 s]
+EXIT-Q11 0
+== Q35 2026-09-23T17:36:36+00:00
+Q35|Q(sqrt3,i)|D24                       k=4 rank 4 |U|  12  m/d -0.5000 (slack)  colourable [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [21 s]
+Q35|Q(sqrt3,sqrt-5)|D24                  k=4 rank 4 |U|  46  m/d -0.6081 (slack)  colourable [5, 10] refused [7, 8, 9, 11]  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 5 (FS70-T6): P_found = 0, so F = P = 0  [58 s]
+Q35|Q(sqrt5,i)|D24                       k=4 rank 4 |U|  12  m/d -1.0000 (slack)  colourable [2, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 2 (FS70-T6): P_found = 0, so F = P = 0  [98 s]
+Q35|Q(sqrt5,sqrt-3)|D24                  k=4 rank 4 |U|  22  m/d -0.5622 (slack)  colourable [3, 5, 6, 8, 9, 10, 11, 12] refused [7]  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [66 s]
+Q35|Q(sqrt15,i)|D24                      k=4 rank 4 |U|  20  m/d -0.8340 (slack)  colourable [3, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [8 s]
+Q35|Q(sqrt15,sqrt-3)|D24                 k=4 rank 4 |U|  18  m/d -0.4792 (slack)  colourable [2, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 5 (FS70-T6): P_found = 0, so F = P = 0  [6 s]
+EXIT-Q35 0
+== Q3_23 2026-09-23T17:40:54+00:00
+Q3_23|Q(sqrt3,i)|D24                     k=4 rank 4 |U|  12  m/d -0.5000 (slack)  colourable [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [25 s]
+Q3_23|Q(sqrt3,sqrt-23)|D24               k=4 rank 4 |U|  18  m/d -0.9589 (slack)  colourable [5, 7, 8, 10, 11] refused [9]  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 5 (FS70-T6): P_found = 0, so F = P = 0  [10 s]
+Q3_23|Q(sqrt23,i)|D24                    k=4 rank 4 |U|  36  m/d -0.8510 (slack)  colourable [7] refused [5, 8, 9, 10, 11]  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 7 (FS70-T6): P_found = 0, so F = P = 0  [182 s]
+Q3_23|Q(sqrt23,sqrt-3)|D24               k=4 rank 2 |U|   6  m/d -0.5000 (slack)  colourable [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 2, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [0 s]
+Q3_23|Q(sqrt69,i)|D24                    k=4 rank 2 |U|   4  m/d -1.0000 (slack)  colourable [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 2, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 2 (FS70-T6): P_found = 0, so F = P = 0  [0 s]
+Q3_23|Q(sqrt69,sqrt-3)|D24               k=4 rank 4 |U|  38  m/d -0.5585 (slack)  colourable [5, 10] refused [7, 8, 9, 11]  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 5 (FS70-T6): P_found = 0, so F = P = 0  [231 s]
+EXIT-Q3_23 0
+== Q3_47 2026-09-23T17:48:23+00:00
+Q3_47|Q(sqrt3,i)|D24                     k=4 rank 4 |U|  12  m/d -0.5000 (slack)  colourable [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 3 (FS70-T6): P_found = 0, so F = P = 0  [24 s]
+Q3_47|Q(sqrt3,sqrt-47)|D24               k=4 rank 4 |U|  10  m/d -0.9988 (slack)  colourable [5, 7, 8, 9, 10, 11] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 5 (FS70-T6): P_found = 0, so F = P = 0  [19 s]
+EXIT-Q3_47 143
+== Q167 2026-09-23T17:55:27+00:00
+Q167|fs61:L21cc6506                      k=3 rank 4 |U|  60  m/d -0.6571 (slack)  colourable [] refused [4, 8, 9, 11, 12]  P_found rank 4 {'free': 0, 'torsion': []}  F_known rank 0  -- REFUSING: no periodic colouring at any N searched (C3-aper; P_found = Lambda, vacuous)  [10 s]
+Q167|fs61:Ld14c588b                      k=3 rank 4 |U|  44  m/d -0.6937 (slack)  colourable [] refused [4, 5, 7, 8, 9, 10, 11, 12]  P_found rank 4 {'free': 0, 'torsion': []}  F_known rank 0  -- REFUSING: no periodic colouring at any N searched (C3-aper; P_found = Lambda, vacuous)  [10 s]
+Q167|fs61:L3e1c94c6                      k=3 rank 4 |U|  36  m/d -0.8360 (slack)  colourable [] refused [4, 7, 8, 9, 11, 12]  P_found rank 4 {'free': 0, 'torsion': []}  F_known rank 0  -- REFUSING: no periodic colouring at any N searched (C3-aper; P_found = Lambda, vacuous)  [8 s]
+EXIT-Q167 0
+== PILOT 2026-09-23T17:55:55+00:00
+PILOT|Q(sqrt3,sqrt-77)|D144              k=5 rank 4 |U|  26  m/d -0.9595 (slack)  colourable [7, 11] refused []  P_found rank 0 {'free': 4, 'torsion': []}  F_known rank 0  -- gapped periodic colouring at N = 7 (FS70-T6): P_found = 0, so F = P = 0  [749 s]
+EXIT-PILOT 0
+CHAIN-DONE

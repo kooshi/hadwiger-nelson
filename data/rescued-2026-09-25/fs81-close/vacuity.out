@@ -1,0 +1,38 @@
+slot: admitted fs81-close-vacuity: mem 40 GiB (hard cap), cpus 0,1,2,3
+==> vacuity: this run's full output: build/gate/vacuity/20260924T202035Z-2486389.log
+    scanned: declarations=6795  refutations-skipped=278
+    sites:   sites=275  vacuous=0  stale=0  declared=3  witnessed=17  generic=253  unknown=2
+    evidence: 3 emptiness proof(s), 38 witness(es)
+    recorded counts (scripts/vacuity-baseline.txt's header, CLAUDE.md § The gate): match
+    --- witnessed (17), with the evidence behind each ---
+    WITNESSED HadwigerNelson.AritySpec.p5_compels_rainbow :: HadwigerNelson.Compels HadwigerNelson.AritySpec.P5 3 ![1, 3, 4] id [by HadwigerNelson.AritySpec.p5_compels_rainbow]
+    WITNESSED HadwigerNelson.core122_pigeonhole :: (HadwigerNelson.edgeGraph 122 HadwigerNelson.core122Edges).Coloring (Fin 4) [by HadwigerNelson.core122_colorable_four]
+    WITNESSED HadwigerNelson.core9_pigeonhole :: (HadwigerNelson.edgeGraph 9 HadwigerNelson.core9Edges).Coloring (Fin 4) [by HadwigerNelson.core9_colorable_four]
+    WITNESSED HadwigerNelson.finitePlane11Colouring.toColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane11DoubleGapColoring :: (HadwigerNelson.finitePlane 11).Coloring (Fin 5) [by HadwigerNelson.finitePlane11_colorable_five]
+    WITNESSED HadwigerNelson.finitePlane19QuotColoring :: (HadwigerNelson.finitePlane 19).Coloring (Fin 5) [by HadwigerNelson.finitePlane19QuotColoring]
+    WITNESSED HadwigerNelson.finitePlane3Colouring.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.finitePlane3ColouringDiff.toColoring :: (HadwigerNelson.finitePlane 3).Coloring (Fin 3) [by HadwigerNelson.finitePlane3ColouringDiff.toColoring]
+    WITNESSED HadwigerNelson.hexColoring :: (SimpleGraph.cycleGraph 6).Coloring (Fin 3) [by HadwigerNelson.hexColoring]
+    WITNESSED HadwigerNelson.pathColoring3 :: (SimpleGraph.pathGraph 3).Coloring (Fin 3) [by HadwigerNelson.pathColoring3]
+    WITNESSED HadwigerNelson.pathGraph_additivelyRigid :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.pathGraph_three_coloring_two :: (SimpleGraph.pathGraph 3).Coloring (Fin 2) [by HadwigerNelson.pathGraph_three_colorable_two]
+    WITNESSED HadwigerNelson.rhombus_forces :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.rhombus_forces_of_gadget :: (HadwigerNelson.edgeGraph 4 HadwigerNelson.rhombus).Coloring (Fin 3) [by HadwigerNelson.rhombus_colorable_three]
+    WITNESSED HadwigerNelson.twoAdicFiveColouring :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_delta :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    WITNESSED HadwigerNelson.twoAdicFive_forces_of_ker :: (HadwigerNelson.twoAdicPlane 5).Coloring (Fin 4) [by HadwigerNelson.twoAdicFiveColouring]
+    --- changes since the previous complete run ---
+    previous: build/gate/vacuity/20260924T104959Z-1905027.log
+    counts: unchanged
+    rows: none changed
+    every site and piece of evidence: rg '^(SITE|EVIDENCE) ' build/gate/vacuity/20260924T202035Z-2486389.log
+    --- declared empty, by design (3) ---
+    DECLARED HadwigerNelson.core122_plane :: known vacuous and retained under this project's never-delete rule — same reason as `core9_plane`, same correction in ledger row 31, same instruction not to consume it. The 122-point carrier `core122_pigeonhole` above is the real content.
+    DECLARED HadwigerNelson.core9_plane :: known vacuous and retained under this project's never-delete rule. Rung B makes `(unitDistance ℂ).Coloring (Fin 4)` empty (`Interval.lean`, `isEmpty_coloring_plane_four`), so this says nothing; it is kept because the record cites it by name, and ledger row 31 carries the correction. DO NOT CONSUME IT — the non-vacuous replacement over `K` is stubbed in `plans/STUB-four-colour-valuation-law.md`. The 1-minimal CARRIER above, `core9_pigeonhole`, is the real content and is not vacuous.
+    DECLARED HadwigerNelson.vacuous_of_plane_four_coloring :: emptiness is the entire content here — this theorem exists to SAY that a statement over plane four-colourings is empty, so a gate flagging it would be flagging the detector. `scripts/Vacuity.lean`'s `vacuous_of_isEmpty` is its general form.
+    --- unknown, held by the baseline (2) ---
+    UNKNOWN HadwigerNelson.hexShell_plane5
+    UNKNOWN HadwigerNelson.hexShell_plane6
+==> vacuity: OK
+    full output: build/gate/vacuity/20260924T202035Z-2486389.log

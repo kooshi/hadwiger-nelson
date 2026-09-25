@@ -1,0 +1,1 @@
+scripts/slot.py --mem 3 --cpus 1 --name fs81-xcheck23 -- python3 tools/fs81_p0.py configs --stage p03-tree-xcheck --no-saturate --cap-s 1800 --names B --K 2 --fields 23

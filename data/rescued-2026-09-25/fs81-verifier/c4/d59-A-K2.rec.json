@@ -1,0 +1,1 @@
+{"d": 59, "config": "A", "K": 2, "pairs": 30, "D": 750, "predicted": "NONEMPTY", "verdict": "NONEMPTY", "agree": true, "finder": "small-order screen, order 6", "nodes": 0, "wall_s": 0.0, "check": "PASS: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 30 listed pairs, so Cay(span U, +-U"}

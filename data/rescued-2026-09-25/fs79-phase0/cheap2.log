@@ -1,0 +1,1033 @@
+== 540: M 540, 36 unit vectors, rank 4, H [(1, 0, 0, 7), (0, 7, 1, 0), (0, 0, 2, 0), (0, 0, 0, 14)]
+  additive: Z/4 16, V4 0
+  Theta_4: FOUND after 357 nodes, 1.1 s; order 23052
+VERDICT 540: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 264: M 264, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 135 nodes, 0.4 s; order 2282031024
+VERDICT 264: FOUR-COLOURABLE by ['linear']; gapped False
+== L21cc6506: M 420, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 17702 nodes, 46.7 s; order 4200
+VERDICT L21cc6506: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1335: M 1335, 60 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 20, 0, 0), (0, 0, 1, 0), (0, 0, 0, 20)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 5685 nodes, 15.2 s; order 475260
+VERDICT 1335: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 600: M 600, 60 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 40, V4 0
+  Theta_4: FOUND after 3654 nodes, 9.6 s; order 912
+VERDICT 600: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1140: M 1140, 36 unit vectors, rank 4, H [(1, 0, 0, 17), (0, 17, 1, 0), (0, 0, 2, 0), (0, 0, 0, 34)]
+  additive: Z/4 16, V4 0
+  Theta_4: FOUND after 182 nodes, 0.5 s; order 456
+VERDICT 1140: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 915: M 915, 60 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 8, 0, 0), (0, 0, 1, 0), (0, 0, 0, 8)]
+  additive: Z/4 49, V4 40
+  Theta_4: CAPPED after 23180 nodes, 60.0 s; order None
+VERDICT 915: FOUR-COLOURABLE by ['additive']; gapped False
+== 480: M 480, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 308 nodes, 0.8 s; order 131610
+VERDICT 480: FOUR-COLOURABLE by ['linear']; gapped False
+== 720: M 720, 84 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22604 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 720: FOUR-COLOURABLE by ['residue']; gapped True
+== 840: M 840, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22231 nodes, 60.0 s; order None
+  residue 23/11: image 20/24 plain UNSAT gap None
+  residue 23/12: image 20/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 840: FOUR-COLOURABLE by ['residue']; gapped True
+== 1155: M 1155, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 16, 0, 0), (0, 0, 1, 0), (0, 0, 0, 16)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 36 nodes, 0.1 s; order 2060
+VERDICT 1155: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 672: M 672, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 1050 nodes, 2.7 s; order 909496028697870
+VERDICT 672: FOUR-COLOURABLE by ['linear']; gapped False
+== 1815: M 1815, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 28, 0, 0), (0, 0, 1, 0), (0, 0, 0, 28)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 67 nodes, 0.2 s; order 12100
+VERDICT 1815: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1080: M 1080, 60 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22949 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 1080: FOUR-COLOURABLE by ['residue']; gapped True
+== 732: M 732, 36 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 52, V4 30
+  Theta_4: FOUND after 3 nodes, 0.0 s; order 147000
+VERDICT 732: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1560: M 1560, 108 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 40, V4 0
+  Theta_4: CAPPED after 23371 nodes, 60.0 s; order None
+VERDICT 1560: FOUR-COLOURABLE by ['additive']; gapped False
+== 2115: M 2115, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 32, 0, 0), (0, 0, 1, 0), (0, 0, 0, 32)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 12 nodes, 0.0 s; order 1780
+VERDICT 2115: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 792: M 792, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 3528 nodes, 9.3 s; order 202208412
+VERDICT 792: FOUR-COLOURABLE by ['linear']; gapped False
+== 1008: M 1008, 76 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22693 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 1008: FOUR-COLOURABLE by ['residue']; gapped True
+== 588: M 588, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 104 nodes, 0.3 s; order 13881418166
+VERDICT 588: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 855: M 855, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 4, 0, 0), (0, 0, 1, 0), (0, 0, 0, 4)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 43 nodes, 0.1 s; order 3420
+VERDICT 855: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1320: M 1320, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22621 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 1320: FOUR-COLOURABLE by ['residue']; gapped True
+== 1056: M 1056, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22595 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 1056: FOUR-COLOURABLE by ['residue']; gapped True
+== 1440: M 1440, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22748 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 1440: FOUR-COLOURABLE by ['residue']; gapped True
+== 2040: M 2040, 108 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 40, V4 0
+  Theta_4: CAPPED after 22744 nodes, 60.0 s; order None
+VERDICT 2040: FOUR-COLOURABLE by ['additive']; gapped False
+== 1305: M 1305, 84 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 49, V4 40
+  Theta_4: CAPPED after 22930 nodes, 60.0 s; order None
+VERDICT 1305: FOUR-COLOURABLE by ['additive']; gapped False
+== 1092: M 1092, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 23125 nodes, 60.0 s; order None
+VERDICT 1092: FOUR-COLOURABLE by ['additive']; gapped False
+== 1920: M 1920, 84 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22039 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 1920: FOUR-COLOURABLE by ['residue']; gapped True
+== 1464: M 1464, 100 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23533 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 36/60 plain UNSAT gap None
+  residue 59/52: image 36/60 plain UNSAT gap None
+  residue 67/10: image 44/68 plain UNKNOWN gap None
+  residue 67/57: image 44/68 plain UNKNOWN gap None
+  residue 71/5: image 32/72 plain UNKNOWN gap None
+  residue 71/66: image 32/72 plain UNKNOWN gap None
+  residue 79/3: image 72/80 plain UNSAT gap None
+  residue 79/76: image 72/80 plain UNSAT gap None
+  residue 83/1: image 68/84 plain UNSAT gap None
+  residue 83/82: image 68/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 1464: SURVIVOR by []; gapped False
+== 924: M 924, 44 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 3198 nodes, 8.3 s; order 14620058810874
+VERDICT 924: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1068: M 1068, 36 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 52, V4 30
+  Theta_4: FOUND after 87 nodes, 0.2 s; order 1920
+VERDICT 1068: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 756: M 756, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 218 nodes, 0.6 s; order 12720147000
+VERDICT 756: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2379: M 2379, 60 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 8, 0, 0), (0, 0, 1, 0), (0, 0, 0, 8)]
+  additive: Z/4 49, V4 40
+  Theta_4: CAPPED after 23480 nodes, 60.0 s; order None
+VERDICT 2379: FOUR-COLOURABLE by ['additive']; gapped False
+== 1740: M 1740, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21996 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 56/168 plain UNKNOWN gap None
+  residue 59/7: image 52/60 plain UNSAT gap None
+  residue 59/52: image 52/60 plain UNSAT gap None
+  residue 67/10: image 60/68 plain UNSAT gap None
+  residue 67/57: image 60/68 plain UNSAT gap None
+  residue 71/5: image 36/72 plain UNKNOWN gap None
+  residue 71/66: image 36/72 plain UNKNOWN gap None
+  residue 79/3: image 52/80 plain UNKNOWN gap None
+  residue 79/76: image 52/80 plain UNKNOWN gap None
+  residue 83/1: image 76/84 plain UNSAT gap None
+  residue 83/82: image 76/84 plain UNSAT gap None
+VERDICT 1740: SURVIVOR by []; gapped False
+== 1368: M 1368, 44 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 253 nodes, 0.6 s; order 145272223096
+VERDICT 1368: FOUR-COLOURABLE by ['linear']; gapped False
+== 1344: M 1344, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 9646 nodes, 25.8 s; order 32747093015
+VERDICT 1344: FOUR-COLOURABLE by ['linear']; gapped False
+== 1176: M 1176, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 169 nodes, 0.4 s; order 11633645819272
+VERDICT 1176: FOUR-COLOURABLE by ['linear']; gapped False
+== 2280: M 2280, 84 unit vectors, rank 4, H [(1, 1, 1, 3), (0, 2, 0, 2), (0, 0, 2, 2), (0, 0, 0, 4)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22277 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 2280: FOUR-COLOURABLE by ['residue']; gapped True
+== 1512: M 1512, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 2021 nodes, 5.4 s; order 1062518093649233
+VERDICT 1512: FOUR-COLOURABLE by ['linear']; gapped False
+== 1428: M 1428, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22893 nodes, 60.0 s; order None
+VERDICT 1428: FOUR-COLOURABLE by ['additive']; gapped False
+== 1584: M 1584, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 1155 nodes, 3.0 s; order 960
+VERDICT 1584: FOUR-COLOURABLE by ['linear']; gapped False
+== 1848: M 1848, 92 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23110 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 1848: FOUR-COLOURABLE by ['residue']; gapped True
+== 1188: M 1188, 44 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 432 nodes, 1.1 s; order 53037422460
+VERDICT 1188: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2016: M 2016, 100 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23189 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 2016: FOUR-COLOURABLE by ['residue']; gapped True
+== 684: M 684, 28 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 9 nodes, 0.0 s; order 82478
+VERDICT 684: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1620: M 1620, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 3315 nodes, 8.8 s; order 4014360
+VERDICT 1620: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2160: M 2160, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22846 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 2160: FOUR-COLOURABLE by ['residue']; gapped True
+== 2100: M 2100, 100 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22911 nodes, 60.0 s; order None
+VERDICT 2100: FOUR-COLOURABLE by ['additive']; gapped False
+== 1632: M 1632, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23017 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain UNKNOWN gap None
+  residue 59/7: image 52/60 plain UNSAT gap None
+  residue 59/52: image 52/60 plain UNSAT gap None
+  residue 67/10: image 36/68 plain UNKNOWN gap None
+  residue 67/57: image 36/68 plain UNKNOWN gap None
+  residue 71/5: image 28/72 plain UNKNOWN gap None
+  residue 71/66: image 28/72 plain UNKNOWN gap None
+  residue 79/3: image 40/80 plain UNKNOWN gap None
+  residue 79/76: image 40/80 plain UNKNOWN gap None
+  residue 83/1: image 52/84 plain UNSAT gap None
+  residue 83/82: image 52/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 1632: SURVIVOR by []; gapped False
+== 2184: M 2184, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21997 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 2184: FOUR-COLOURABLE by ['residue']; gapped True
+== 2436: M 2436, 148 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22028 nodes, 60.2 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 52/60 plain UNSAT gap None
+  residue 59/52: image 52/60 plain UNSAT gap None
+  residue 67/10: image 60/68 plain UNSAT gap None
+  residue 67/57: image 60/68 plain UNSAT gap None
+  residue 71/5: image 64/72 plain UNSAT gap None
+  residue 71/66: image 64/72 plain UNSAT gap None
+  residue 79/3: image 48/80 plain UNKNOWN gap None
+  residue 79/76: image 48/80 plain UNKNOWN gap None
+  residue 83/1: image 60/84 plain UNSAT gap None
+  residue 83/82: image 60/84 plain UNSAT gap None
+VERDICT 2436: SURVIVOR by []; gapped False
+== 1980: M 1980, 84 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22365 nodes, 60.0 s; order None
+VERDICT 1980: FOUR-COLOURABLE by ['additive']; gapped False
+== 2136: M 2136, 100 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22998 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 60/68 plain UNSAT gap None
+  residue 67/57: image 60/68 plain UNSAT gap None
+  residue 71/5: image 64/72 plain UNSAT gap None
+  residue 71/66: image 64/72 plain UNSAT gap None
+  residue 79/3: image 52/80 plain UNKNOWN gap None
+  residue 79/76: image 52/80 plain UNKNOWN gap None
+  residue 83/1: image 68/84 plain UNSAT gap None
+  residue 83/82: image 68/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 2136: SURVIVOR by []; gapped False
+== 2520: M 2520, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22120 nodes, 60.0 s; order None
+  residue 23/11: image 20/24 plain UNSAT gap None
+  residue 23/12: image 20/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 2520: FOUR-COLOURABLE by ['residue']; gapped True
+== 1644: M 1644, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 2124 nodes, 5.8 s; order 655699423111104
+VERDICT 1644: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2400: M 2400, 100 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22865 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 28/68 plain UNKNOWN gap None
+  residue 67/57: image 28/68 plain UNKNOWN gap None
+  residue 71/5: image 36/72 plain UNKNOWN gap None
+  residue 71/66: image 36/72 plain UNKNOWN gap None
+  residue 79/3: image 60/80 plain UNKNOWN gap None
+  residue 79/76: image 60/80 plain UNKNOWN gap None
+  residue 83/1: image 76/84 plain UNSAT gap None
+  residue 83/82: image 76/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 2400: SURVIVOR by []; gapped False
+== 1860: M 1860, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 23173 nodes, 60.0 s; order None
+VERDICT 1860: FOUR-COLOURABLE by ['additive']; gapped False
+== 2328: M 2328, 92 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22391 nodes, 60.0 s; order None
+  residue 23/11: image 16/24 plain UNSAT gap None
+  residue 23/12: image 16/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 52/60 plain UNSAT gap None
+  residue 59/52: image 52/60 plain UNSAT gap None
+  residue 67/10: image 52/68 plain UNKNOWN gap None
+  residue 67/57: image 52/68 plain UNKNOWN gap None
+  residue 71/5: image 64/72 plain UNSAT gap None
+  residue 71/66: image 64/72 plain UNSAT gap None
+  residue 79/3: image 64/80 plain UNKNOWN gap None
+  residue 79/76: image 64/80 plain UNKNOWN gap None
+  residue 83/1: image 44/84 plain UNKNOWN gap None
+  residue 83/82: image 44/84 plain UNKNOWN gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 2328: SURVIVOR by []; gapped False
+== 2196: M 2196, 76 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22043 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 28/168 plain UNKNOWN gap None
+  residue 59/7: image 28/60 plain UNKNOWN gap None
+  residue 59/52: image 28/60 plain UNKNOWN gap None
+  residue 67/10: image 60/68 plain UNSAT gap None
+  residue 67/57: image 60/68 plain UNSAT gap None
+  residue 71/5: image 40/72 plain UNKNOWN gap None
+  residue 71/66: image 40/72 plain UNKNOWN gap None
+  residue 79/3: image 52/80 plain UNKNOWN gap None
+  residue 79/76: image 52/80 plain UNKNOWN gap None
+  residue 83/1: image 60/84 plain UNSAT gap None
+  residue 83/82: image 60/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 2196: SURVIVOR by []; gapped False
+== 2112: M 2112, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22789 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 2112: FOUR-COLOURABLE by ['residue']; gapped True
+== 1281: M 1281, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 355 nodes, 0.9 s; order 9819684230
+VERDICT 1281: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1827: M 1827, 52 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 25, V4 40
+  Theta_4: FOUND after 1723 nodes, 4.7 s; order 581662831192730
+VERDICT 1827: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1596: M 1596, 44 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 263 nodes, 0.7 s; order 85087318030
+VERDICT 1596: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2448: M 2448, 84 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22327 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain UNKNOWN gap None
+  residue 59/7: image 52/60 plain UNSAT gap None
+  residue 59/52: image 52/60 plain UNSAT gap None
+  residue 67/10: image 60/68 plain UNSAT gap None
+  residue 67/57: image 60/68 plain UNSAT gap None
+  residue 71/5: image 44/72 plain UNKNOWN gap None
+  residue 71/66: image 44/72 plain UNKNOWN gap None
+  residue 79/3: image 68/80 plain UNKNOWN gap None
+  residue 79/76: image 68/80 plain UNKNOWN gap None
+  residue 83/1: image 52/84 plain UNSAT gap None
+  residue 83/82: image 52/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 2448: SURVIVOR by []; gapped False
+== 1869: M 1869, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 4, 0, 0), (0, 0, 1, 0), (0, 0, 0, 4)]
+  additive: Z/4 25, V4 40
+  Theta_4: FOUND after 4 nodes, 0.0 s; order 8
+VERDICT 1869: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2352: M 2352, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 1125 nodes, 3.0 s; order 300200282868410
+VERDICT 2352: FOUR-COLOURABLE by ['linear']; gapped False
+== 2376: M 2376, 68 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22675 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 167/0: image 8/168 plain SAT gap SAT
+VERDICT 2376: FOUR-COLOURABLE by ['residue']; gapped True
+== 2940: M 2940, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22527 nodes, 60.0 s; order None
+VERDICT 2940: FOUR-COLOURABLE by ['additive']; gapped False
+== 2013: M 2013, 52 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 699 nodes, 1.8 s; order 444
+VERDICT 2013: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 3360: M 3360, 156 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21448 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 3360: FOUR-COLOURABLE by ['residue']; gapped True
+== 2037: M 2037, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 4, 0, 0), (0, 0, 1, 0), (0, 0, 0, 4)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 13 nodes, 0.0 s; order 362498625987
+VERDICT 2037: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2268: M 2268, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 2006 nodes, 5.3 s; order 2339255734963411
+VERDICT 2268: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2076: M 2076, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 680 nodes, 1.8 s; order 14416182495
+VERDICT 2076: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 2223: M 2223, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 4, 0, 0), (0, 0, 1, 0), (0, 0, 0, 4)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 112 nodes, 0.3 s; order 23631333660
+VERDICT 2223: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1629: M 1629, 36 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 25, V4 40
+  Theta_4: FOUND after 112 nodes, 0.3 s; order 4
+VERDICT 1629: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 4200: M 4200, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22438 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 60/84 plain UNSAT gap None
+  residue 83/82: image 60/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 4200: SURVIVOR by []; gapped False
+== 2508: M 2508, 52 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 894 nodes, 2.3 s; order 867307178940
+VERDICT 2508: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 3780: M 3780, 108 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22214 nodes, 60.0 s; order None
+VERDICT 3780: FOUR-COLOURABLE by ['additive']; gapped False
+== 5040: M 5040, 228 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23219 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 5040: FOUR-COLOURABLE by ['residue']; gapped True
+== 2052: M 2052, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 42 nodes, 0.1 s; order 393485103655728
+VERDICT 2052: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 1383: M 1383, 28 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 6050 nodes, 15.8 s; order 2124614692336062
+VERDICT 1383: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 4620: M 4620, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22361 nodes, 60.0 s; order None
+VERDICT 4620: FOUR-COLOURABLE by ['additive']; gapped False
+== 2172: M 2172, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 16, V4 0
+  Theta_4: FOUND after 61 nodes, 0.2 s; order 1186148112104158
+VERDICT 2172: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 5460: M 5460, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22124 nodes, 60.0 s; order None
+VERDICT 5460: FOUR-COLOURABLE by ['additive']; gapped False
+== 5880: M 5880, 156 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22820 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 5880: FOUR-COLOURABLE by ['residue']; gapped True
+== 6720: M 6720, 204 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22436 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 6720: FOUR-COLOURABLE by ['residue']; gapped True
+== 7140: M 7140, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22899 nodes, 60.0 s; order None
+VERDICT 7140: FOUR-COLOURABLE by ['additive']; gapped False
+== 7560: M 7560, 204 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22547 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 7560: FOUR-COLOURABLE by ['residue']; gapped True
+== 2199: M 2199, 28 unit vectors, rank 4, H [(1, 0, 0, 0), (0, 2, 0, 0), (0, 0, 1, 0), (0, 0, 0, 2)]
+  additive: Z/4 49, V4 40
+  Theta_4: FOUND after 3 nodes, 0.0 s; order 4398
+VERDICT 2199: FOUR-COLOURABLE by ['additive', 'linear']; gapped False
+== 9240: M 9240, 276 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21797 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 9240: FOUR-COLOURABLE by ['residue']; gapped True
+== 7980: M 7980, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22665 nodes, 60.0 s; order None
+VERDICT 7980: FOUR-COLOURABLE by ['additive']; gapped False
+== 10080: M 10080, 300 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23045 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 10080: FOUR-COLOURABLE by ['residue']; gapped True
+== 10920: M 10920, 324 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23222 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 72/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 10920: SURVIVOR by []; gapped False
+== 12180: M 12180, 444 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21647 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 72/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 72/80 plain UNKNOWN gap None
+  residue 79/76: image 72/80 plain UNKNOWN gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+VERDICT 12180: SURVIVOR by []; gapped False
+== 10500: M 10500, 140 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22604 nodes, 60.0 s; order None
+VERDICT 10500: FOUR-COLOURABLE by ['additive']; gapped False
+== 11340: M 11340, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 21883 nodes, 60.0 s; order None
+VERDICT 11340: FOUR-COLOURABLE by ['additive']; gapped False
+== 11760: M 11760, 204 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22877 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 11760: FOUR-COLOURABLE by ['residue']; gapped True
+== 12600: M 12600, 220 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22273 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 68/84 plain UNSAT gap None
+  residue 83/82: image 68/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 12600: SURVIVOR by []; gapped False
+== 13440: M 13440, 252 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22380 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 13440: FOUR-COLOURABLE by ['residue']; gapped True
+== 14280: M 14280, 324 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23198 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 72/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 60/84 plain UNSAT gap None
+  residue 83/82: image 60/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 14280: SURVIVOR by []; gapped False
+== 13860: M 13860, 252 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 21594 nodes, 60.0 s; order None
+VERDICT 13860: FOUR-COLOURABLE by ['additive']; gapped False
+== 13020: M 13020, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22870 nodes, 60.0 s; order None
+VERDICT 13020: FOUR-COLOURABLE by ['additive']; gapped False
+== 15120: M 15120, 300 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22876 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 15120: FOUR-COLOURABLE by ['residue']; gapped True
+== 15960: M 15960, 276 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22170 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 15960: FOUR-COLOURABLE by ['residue']; gapped True
+== 14700: M 14700, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22360 nodes, 60.0 s; order None
+VERDICT 14700: FOUR-COLOURABLE by ['additive']; gapped False
+== 16800: M 16800, 260 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22328 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 76/84 plain UNSAT gap None
+  residue 83/82: image 76/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 16800: SURVIVOR by []; gapped False
+== 15540: M 15540, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22555 nodes, 60.0 s; order None
+VERDICT 15540: FOUR-COLOURABLE by ['additive']; gapped False
+== 18480: M 18480, 372 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22993 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 18480: FOUR-COLOURABLE by ['residue']; gapped True
+== 17640: M 17640, 228 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23356 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 17640: FOUR-COLOURABLE by ['residue']; gapped True
+== 17220: M 17220, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22056 nodes, 60.0 s; order None
+VERDICT 17220: FOUR-COLOURABLE by ['additive']; gapped False
+== 20160: M 20160, 348 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22250 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 20160: FOUR-COLOURABLE by ['residue']; gapped True
+== 24360: M 24360, 852 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22716 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 72/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+VERDICT 24360: SURVIVOR by []; gapped False
+== 18900: M 18900, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 21834 nodes, 60.0 s; order None
+VERDICT 18900: FOUR-COLOURABLE by ['additive']; gapped False
+== 21000: M 21000, 252 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23175 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 56/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 21000: SURVIVOR by []; gapped False
+== 22680: M 22680, 276 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22703 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 22680: FOUR-COLOURABLE by ['residue']; gapped True
+== 25620: M 25620, 420 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 21742 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 120/168 plain UNSAT gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 25620: SURVIVOR by []; gapped False
+== 25200: M 25200, 380 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22724 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 84/84 plain UNSAT gap None
+  residue 83/82: image 84/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 25200: SURVIVOR by []; gapped False
+== 19740: M 19740, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22500 nodes, 60.0 s; order None
+VERDICT 19740: FOUR-COLOURABLE by ['additive']; gapped False
+== 23940: M 23940, 276 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22532 nodes, 60.0 s; order None
+VERDICT 23940: FOUR-COLOURABLE by ['additive']; gapped False
+== 23520: M 23520, 252 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22832 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 23520: FOUR-COLOURABLE by ['residue']; gapped True
+== 23100: M 23100, 220 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 21913 nodes, 60.0 s; order None
+VERDICT 23100: FOUR-COLOURABLE by ['additive']; gapped False
+== 22260: M 22260, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22002 nodes, 60.0 s; order None
+VERDICT 22260: FOUR-COLOURABLE by ['additive']; gapped False
+== 20580: M 20580, 132 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22966 nodes, 60.0 s; order None
+VERDICT 20580: FOUR-COLOURABLE by ['additive']; gapped False
+== 27720: M 27720, 444 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22547 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 27720: FOUR-COLOURABLE by ['residue']; gapped True
+== 26040: M 26040, 276 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23261 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 26040: FOUR-COLOURABLE by ['residue']; gapped True
+== 26880: M 26880, 300 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22396 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 26880: FOUR-COLOURABLE by ['residue']; gapped True
+== 27300: M 27300, 300 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22051 nodes, 60.0 s; order None
+VERDICT 27300: FOUR-COLOURABLE by ['additive']; gapped False
+== 30240: M 30240, 396 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 22922 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 24/168 plain SAT gap SAT
+VERDICT 30240: FOUR-COLOURABLE by ['residue']; gapped True
+== 26460: M 26460, 180 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: CAPPED after 22184 nodes, 60.0 s; order None
+VERDICT 26460: FOUR-COLOURABLE by ['additive']; gapped False
+== 29400: M 29400, 260 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: CAPPED after 23387 nodes, 60.0 s; order None
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 44/44 plain UNSAT gap None
+  residue 43/34: image 44/44 plain UNSAT gap None
+  residue 167/0: image 40/168 plain UNKNOWN gap None
+  residue 59/7: image 60/60 plain UNSAT gap None
+  residue 59/52: image 60/60 plain UNSAT gap None
+  residue 67/10: image 68/68 plain UNSAT gap None
+  residue 67/57: image 68/68 plain UNSAT gap None
+  residue 71/5: image 72/72 plain UNSAT gap None
+  residue 71/66: image 72/72 plain UNSAT gap None
+  residue 79/3: image 80/80 plain UNSAT gap None
+  residue 79/76: image 80/80 plain UNSAT gap None
+  residue 83/1: image 60/84 plain UNSAT gap None
+  residue 83/82: image 60/84 plain UNSAT gap None
+  residue 29/14: image 28/28 plain UNSAT gap None
+  residue 29/15: image 28/28 plain UNSAT gap None
+VERDICT 29400: SURVIVOR by []; gapped False
+DONE screen

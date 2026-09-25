@@ -1,0 +1,206 @@
+==> build: this run's full output: build/gate/build/20260923T062152Z-144678.log
+==> up-to-date check: exit 3 after 2s (3 means something needs building) — walking the batches
+==> 177 batches of at most 10 modules, capped at 100G
+==> [1/177] 10 modules  01:21:54
+==> [2/177] 2 modules  01:21:55
+==> [3/177] 6 modules  01:21:55
+==> [4/177] 10 modules  01:21:56
+==> [5/177] 10 modules  01:21:57
+==> [6/177] 10 modules  01:21:58
+==> [7/177] 10 modules  01:21:58
+==> [8/177] 10 modules  01:21:59
+==> [9/177] 10 modules  01:22:00
+==> [10/177] 10 modules  01:22:01
+==> [11/177] 10 modules  01:22:01
+==> [12/177] 10 modules  01:22:02
+==> [13/177] 10 modules  01:22:03
+==> [14/177] 10 modules  01:22:04
+==> [15/177] 10 modules  01:22:05
+==> [16/177] 5 modules  01:22:06
+==> [17/177] 10 modules  01:22:06
+==> [18/177] 10 modules  01:22:07
+==> [19/177] 3 modules  01:22:08
+==> [20/177] 10 modules  01:22:09
+==> [21/177] 10 modules  01:22:10
+==> [22/177] 10 modules  01:22:11
+==> [23/177] 10 modules  01:22:12
+==> [24/177] 10 modules  01:22:13
+==> [25/177] 10 modules  01:22:14
+==> [26/177] 10 modules  01:22:15
+==> [27/177] 10 modules  01:22:16
+==> [28/177] 10 modules  01:22:17
+==> [29/177] 10 modules  01:22:18
+==> [30/177] 10 modules  01:22:19
+==> [31/177] 10 modules  01:22:20
+==> [32/177] 10 modules  01:22:20
+==> [33/177] 10 modules  01:22:21
+==> [34/177] 10 modules  01:22:22
+==> [35/177] 10 modules  01:22:23
+==> [36/177] 10 modules  01:22:24
+==> [37/177] 10 modules  01:22:25
+==> [38/177] 10 modules  01:22:26
+==> [39/177] 10 modules  01:22:27
+==> [40/177] 10 modules  01:22:28
+==> [41/177] 1 modules  01:22:29
+==> [42/177] 10 modules  01:22:29
+==> [43/177] 10 modules  01:22:30
+==> [44/177] 10 modules  01:22:32
+==> [45/177] 10 modules  01:22:33
+==> [46/177] 10 modules  01:22:34
+==> [47/177] 10 modules  01:22:35
+==> [48/177] 10 modules  01:22:37
+==> [49/177] 10 modules  01:22:38
+==> [50/177] 10 modules  01:22:39
+==> [51/177] 10 modules  01:22:40
+==> [52/177] 10 modules  01:22:41
+==> [53/177] 10 modules  01:22:43
+==> [54/177] 10 modules  01:22:44
+==> [55/177] 10 modules  01:22:45
+==> [56/177] 10 modules  01:22:46
+==> [57/177] 10 modules  01:22:48
+==> [58/177] 10 modules  01:22:49
+==> [59/177] 10 modules  01:22:50
+==> [60/177] 10 modules  01:22:51
+==> [61/177] 10 modules  01:22:53
+==> [62/177] 10 modules  01:22:54
+==> [63/177] 10 modules  01:22:55
+==> [64/177] 10 modules  01:22:56
+==> [65/177] 10 modules  01:22:57
+==> [66/177] 10 modules  01:22:59
+==> [67/177] 10 modules  01:23:00
+==> [68/177] 10 modules  01:23:01
+==> [69/177] 10 modules  01:23:02
+==> [70/177] 10 modules  01:23:04
+==> [71/177] 10 modules  01:23:05
+==> [72/177] 10 modules  01:23:06
+==> [73/177] 10 modules  01:23:07
+==> [74/177] 10 modules  01:23:09
+==> [75/177] 10 modules  01:23:10
+==> [76/177] 10 modules  01:23:11
+==> [77/177] 10 modules  01:23:12
+==> [78/177] 10 modules  01:23:14
+==> [79/177] 10 modules  01:23:15
+==> [80/177] 10 modules  01:23:16
+==> [81/177] 10 modules  01:23:17
+==> [82/177] 10 modules  01:23:18
+==> [83/177] 10 modules  01:23:20
+==> [84/177] 10 modules  01:23:21
+==> [85/177] 10 modules  01:23:22
+==> [86/177] 10 modules  01:23:23
+==> [87/177] 10 modules  01:23:25
+==> [88/177] 10 modules  01:23:26
+==> [89/177] 10 modules  01:23:27
+==> [90/177] 10 modules  01:23:28
+==> [91/177] 10 modules  01:23:30
+==> [92/177] 10 modules  01:23:31
+==> [93/177] 10 modules  01:23:32
+==> [94/177] 10 modules  01:23:33
+==> [95/177] 10 modules  01:23:34
+==> [96/177] 10 modules  01:23:36
+==> [97/177] 10 modules  01:23:37
+==> [98/177] 10 modules  01:23:38
+==> [99/177] 10 modules  01:23:39
+==> [100/177] 10 modules  01:23:41
+==> [101/177] 10 modules  01:23:42
+==> [102/177] 10 modules  01:23:43
+==> [103/177] 10 modules  01:23:44
+==> [104/177] 10 modules  01:23:46
+==> [105/177] 10 modules  01:23:47
+==> [106/177] 10 modules  01:23:48
+==> [107/177] 10 modules  01:23:49
+==> [108/177] 10 modules  01:23:51
+==> [109/177] 10 modules  01:23:52
+==> [110/177] 10 modules  01:23:53
+==> [111/177] 10 modules  01:23:54
+==> [112/177] 10 modules  01:23:55
+==> [113/177] 10 modules  01:23:57
+==> [114/177] 10 modules  01:23:58
+==> [115/177] 10 modules  01:23:59
+==> [116/177] 10 modules  01:24:00
+==> [117/177] 10 modules  01:24:02
+==> [118/177] 10 modules  01:24:03
+==> [119/177] 10 modules  01:24:04
+==> [120/177] 10 modules  01:24:05
+==> [121/177] 10 modules  01:24:07
+==> [122/177] 10 modules  01:24:08
+==> [123/177] 10 modules  01:24:09
+==> [124/177] 10 modules  01:24:10
+==> [125/177] 10 modules  01:24:11
+==> [126/177] 10 modules  01:24:13
+==> [127/177] 10 modules  01:24:14
+==> [128/177] 10 modules  01:24:15
+==> [129/177] 10 modules  01:24:16
+==> [130/177] 10 modules  01:24:18
+==> [131/177] 10 modules  01:24:19
+==> [132/177] 10 modules  01:24:20
+==> [133/177] 10 modules  01:24:21
+==> [134/177] 10 modules  01:24:23
+==> [135/177] 10 modules  01:24:24
+==> [136/177] 10 modules  01:24:25
+==> [137/177] 10 modules  01:24:26
+==> [138/177] 10 modules  01:24:28
+==> [139/177] 10 modules  01:24:29
+==> [140/177] 10 modules  01:24:30
+==> [141/177] 10 modules  01:24:31
+==> [142/177] 10 modules  01:24:32
+==> [143/177] 10 modules  01:24:34
+==> [144/177] 10 modules  01:24:35
+==> [145/177] 10 modules  01:24:36
+==> [146/177] 10 modules  01:24:37
+==> [147/177] 10 modules  01:24:39
+==> [148/177] 10 modules  01:24:40
+==> [149/177] 10 modules  01:24:41
+==> [150/177] 10 modules  01:24:42
+==> [151/177] 10 modules  01:24:44
+==> [152/177] 10 modules  01:24:45
+==> [153/177] 10 modules  01:24:46
+==> [154/177] 10 modules  01:24:47
+==> [155/177] 10 modules  01:24:48
+==> [156/177] 10 modules  01:24:50
+==> [157/177] 10 modules  01:24:51
+==> [158/177] 10 modules  01:24:52
+==> [159/177] 10 modules  01:24:53
+==> [160/177] 10 modules  01:24:55
+==> [161/177] 10 modules  01:24:56
+==> [162/177] 10 modules  01:24:57
+==> [163/177] 10 modules  01:24:58
+==> [164/177] 10 modules  01:25:00
+==> [165/177] 10 modules  01:25:01
+==> [166/177] 10 modules  01:25:02
+==> [167/177] 5 modules  01:25:03
+==> [168/177] 10 modules  01:25:04
+==> [169/177] 8 modules  01:25:05
+==> [170/177] 7 modules  01:25:07
+==> [171/177] 10 modules  01:25:08
+==> [172/177] 8 modules  01:25:09
+==> [173/177] 9 modules  01:25:11
+    ⚠ [4378/4378] Built Proofs.HadwigerNelson.Kempe (1.0s)
+    warning: Proofs/HadwigerNelson/Kempe.lean:66:18: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:71:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:75:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:81:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:88:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:104:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:113:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:173:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:187:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:194:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:221:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:265:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:270:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:276:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:282:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:294:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:305:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:324:8: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:351:4: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:370:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:378:0: declaration uses `sorry`
+    warning: Proofs/HadwigerNelson/Kempe.lean:383:0: declaration uses `sorry`
+    rebuilt: Kempe (1.0s)
+==> [174/177] 9 modules  01:25:15
+==> [175/177] 3 modules  01:25:16
+==> [176/177] 1 modules  01:25:17
+==> [177/177] 1 modules  01:25:18
+==> build: OK — 177 of 177 batches, 1 module(s) rebuilt, 1 module(s) with warnings, 3m26s
+    full output: build/gate/build/20260923T062152Z-144678.log

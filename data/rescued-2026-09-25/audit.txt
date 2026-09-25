@@ -1,0 +1,102 @@
+bytes: 448,634 -> 452,014  (+3,380)
+token PROXY (see token_proxy; not a tokenizer): 146,320 -> 147,456  (+1,136)
+[date] 24 distinct before, 24 after, LOST 0
+[bib] 81 distinct before, 81 after, LOST 0
+[code] 1271 distinct before, 1285 after, LOST 0
+[id] 378 distinct before, 379 after, LOST 0
+[row] 45 distinct before, 45 after, LOST 0
+[ref] 196 distinct before, 196 after, LOST 0
+[num] 667 distinct before, 667 after, LOST 0
+[tag] 65 distinct before, 66 after, LOST 0
+[chunk] 2399 distinct before, 2410 after, LOST 0
+[name] 363 distinct before, 366 after, LOST 0
+pointers: 45 distinct row references, 73 grokkings; dangling: none
+PROTECTED regions: 2 before (2567, 2899 bytes), 2 after
+gate sentence: current audit reads 1034 clean and 5 declared purchases
+
+bytes per section (before -> after):
+         0 ->        0        +0  (preamble)
+        37 ->       37        +0  # Engineering standard
+        25 ->       25        +0  # Workflow
+     2,390 ->    2,390        +0  # This workspace — lean-dir
+     2,702 ->    2,702        +0  ## Notation
+     7,746 ->    8,010      +264  ## The mission
+     3,025 ->    3,025        +0  ## Frontier
+    19,872 ->   20,057      +185  ### Where the problem stands
+       509 ->  100,477   +99,968  ### The novel-results ledger
+    20,874 ->   22,033    +1,159  ### Paths forward, ranked
+       733 ->      733        +0  ### The open structural question
+   142,175 ->  142,348      +173  ## Grokkings — the working theory of the 5th colour
+       904 ->      904        +0  ## Whose work this is
+     2,125 ->    2,125        +0  ## Delegation — one level deep
+     2,464 ->    2,464        +0  ## The standard of evidence above rung B
+     1,296 ->    1,296        +0  ## What compute actually helps
+     1,191 ->    1,191        +0  ## The shape of the proof
+     1,489 ->    1,489        +0  ## Trust ledger
+     7,869 ->    7,869        +0  ## Toolchain
+    13,615 ->   15,214    +1,599  ### Building
+     3,062 ->    3,062        +0  ### The kernel's cost model
+     1,310 ->    1,310        +0  ### Searching
+       563 ->      563        +0  ## The package
+     3,188 ->    3,188        +0  ## The gate
+    19,800 ->   19,800        +0  ### Make the gate fail, and watch it fail
+     1,121 ->    1,121        +0  # LEDGER.md — the novel-results ledger of the Hadwiger–Nelson workspace
+        32 ->       32        +0  ## A. The novel-results ledger
+   100,477 -> None            ### The novel-results ledger
+    88,041 ->   88,041        +0  ## B. Theorems proved outside the kernel, by milestone
+
+normalisations in force:
+  '(?<=\\d),(?=\\d{3}(?!\\d))' -> '': thousands separators: 1,581 and 1581 are one number
+  'ℚ\\(√3,√11\\)' -> 'K': legend macro K := ℚ(√3,√11) (§ Notation)
+  'ℚ\\(√3,√5,√7,√11\\)' -> 'K(√5,√7)': K(√d) adjoins √d (§ Notation): de Grey's field
+  'ℚ\\(√3,(√[57]),√11\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'ℚ\\(√3,√11,(√\\d+)\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'UD\\(𝔽(_[qp]|[₀-₉]+), ?2\\)' -> 'Γ\\1': legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)
+allowances in force: 45
+  'ℚ(√p,√q)²': row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'
+  'SUSPENDED': § Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his
+  'UD(ℤ/p²,2)': the FS-66 stub row; § Notation now writes the tower as UD(ℤ/p^k, 2)
+  'UD(ℤ/529,2)': the FS-66 stub row; item 17 and row 75 write UD(ℤ/529, 2)
+  'χ(level': the FS-66 stub row's 'χ(level two) ≤ χ(level one)'; § Notation says χ(G_k) is non-increasing in k
+  'Pilot': the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'
+  '3a': WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2
+  '3g': WORKFLOW 2.0: the re-grokking is step 3.1; the grokkings intro now says 3.1
+  'G1–G54': the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)
+  'G1–G67': the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)
+  'G1–G68': the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)
+  'G1–G71': the stable-identifier range, extended to G1–G72 when G72 (the invariant question, a method) was minted (2026-09-23)
+  'G1–G69': the stable-identifier range, extended to G1–G70 when G70 (√3-clean is residue, Coxeter's theorem) was minted at FS-71's close (2026-09-22)
+  '[kernel for ρ₁₅; measured for ρ₆₃]': G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance
+  'G12:[kernel for ρ₁₅; measured for ρ₆₃]': FS-71 batch 1: G12 re-graded [hand, confirmed at 26 exact censuses; kernel for the ρ₁₅ instance] (M31-T1)
+  'G20:[kernel + measured]': FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation
+  'G52:[measured + reading, one instance with a positive control]': FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so
+  'G54:[kernel one way; derived the other; the table computed]': FS-71 batch 5b: the tight-forcing direction is a hand theorem (FS38-D2-A/B), graded so in row 67 and its entry
+  '[GarciaMarcoKnauer]': G58's yearless key, corrected to [GarciaMarcoKnauer2024] by FS-71 batch 6a
+  'arXiv:2303.06262': G58 cited the wrong arXiv id (it is Cervantes–Krebs); the García-Marco–Knauer paper is arXiv:2405.19543 (FS-71 batch 6a)
+  '6723': the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)
+  'declarations=6723': the same count, as the gate report prints it
+  'FS38-D2-A/B': the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending
+  'FS66-W/E/T': the same placeholder row's FS-66 half; the whole row is one line, so batch 5b's removal (on filing FS-38, per the brief) drops it too — batch 6 adds FS-66's own § B rows fresh, with no placeholder to clean up
+  '6728': the vacuity gate's declaration count, 6728 -> 6795 at FS-73's close (the Kempe layer and FS-72's lattices joined the library)
+  'declarations=6728': the same count, as the gate report prints it
+  '270': vacuity's refutations-skipped count, 270 -> 278 at FS-73's close
+  'refutations-skipped=270': the same count, as the gate report prints it
+  '262': vacuity's sites count, 262 -> 275 at FS-73's close
+  'sites=262': the same count, as the gate report prints it
+  '240': vacuity's generic count, 240 -> 253 at FS-73's close
+  'generic=240': the same count, as the gate report prints it
+  '1–75': the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close
+  'G1–G72': the stable-identifier range, extended to G1–G73 when G73 (four colours cell by cell) was minted at FS-79's close (2026-09-24)
+  '1–79': the ledger's row range, extended to 1–81 at FS-79's close (2026-09-24)
+  'R1–R9': the FS-59 row's 'the stub's three-colour routes R1–R9 are answered'; the row was rewritten at FS-79's close around the survivors and the four-colour question, and the routes with their answered status stay in plans/STUB-four-colours-167.md
+  'R9': the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a
+  "R9's": the same, possessive
+  'R5–R8': the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there
+  'c(3w)': R9's pinned ask c(0) != c(3w); plans/STUB-four-colours-167.md §3a
+  'w′': R9's identity 1/6 = 1 + 1 - w - w-bar - w' - w-bar'; plans/STUB-four-colours-167.md §3a
+  'w̄′': the same identity
+  'G68/G69': the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered
+  "MASCOT-T6's": the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source
+  'T39–T44': row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close
+
+AUDIT PASSED (0 failure(s))

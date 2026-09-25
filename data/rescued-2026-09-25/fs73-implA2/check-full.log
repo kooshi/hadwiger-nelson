@@ -1,0 +1,5 @@
+CERTIFIED: 2044 points, 10703 unit edges (re-derived exactly; 10703 float proposals), plus the pair; CNF 44863 clauses (sha256 65d3897d32698809, equal to the file's: True); LRAT 520365 additions, 79426 deletions, empty clause derived (sha256 8148dd60998b36d2).
+  => the pair at difference delta = [0, 0, -8, 0]/9 is forced at four colours.
+  transport: the orbit of delta under <zeta6, conj> has 12 elements; its Z-span has HNF [[8, 0, 0, 0], [0, 8, 0, 0], [0, 0, 8, 0], [0, 0, 0, 8]] = 8 Z^4: every difference in (8/9) O_E = 8 Lambda is forced, so every proper 4-colouring of de Grey's lattice graph is 8 Lambda-periodic.
+checker 20.79 user 0.04 sys 87968 KB 20.93 wall
+EXIT 0

@@ -1,0 +1,21 @@
+L3 at N = 2: 64 classes; 2304 pinned colourings; FS-70's colouring is #1
+control: FS-70's colouring itself: Per {'free': 0, 'torsion': [2, 2, 2, 2]} -> LOCAL AT 2 (must be LOCAL AT 2)
+plant (swap on K_0 + 2L3 instead of K_0 + W'): raised on target 2: the swapped colouring does not separate the pair
+  FS-70 colouring, target 2, b = 1: rigid (delta in K_0)
+  FS-70 colouring, target 2, b = 2: rigid (delta in K_0)
+  FS-70 colouring, target 2, b = 3: component 8 classes, V rank 4, 2L3/V {'free': 2, 'torsion': []}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 4]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 4]} -> LOCAL AT 2; prime-power W': {'prime-power 2': 'LOCAL AT 2', 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 2/3, b = 1: rigid (delta in K_0)
+  FS-70 colouring, target 2/3, b = 2: component 16 classes, V rank 6, 2L3/V {'free': 0, 'torsion': [9, 9]}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 18]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 2, 18]} -> NEITHER; prime-power W': {'prime-power 2': None, 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 2/3, b = 3: component 8 classes, V rank 4, 2L3/V {'free': 2, 'torsion': []}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 4]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 4]} -> LOCAL AT 2; prime-power W': {'prime-power 2': 'LOCAL AT 2', 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 4/3, b = 1: rigid (delta in K_0)
+  FS-70 colouring, target 4/3, b = 2: component 16 classes, V rank 6, 2L3/V {'free': 0, 'torsion': [9, 9]}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 18]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 2, 18]} -> NEITHER; prime-power W': {'prime-power 2': None, 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 4/3, b = 3: component 8 classes, V rank 4, 2L3/V {'free': 2, 'torsion': []}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 8]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 8]} -> LOCAL AT 2; prime-power W': {'prime-power 2': 'LOCAL AT 2', 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 8/3, b = 1: rigid (delta in K_0)
+  FS-70 colouring, target 8/3, b = 2: component 16 classes, V rank 6, 2L3/V {'free': 0, 'torsion': [9, 9]}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 18]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 2, 18]} -> NEITHER; prime-power W': {'prime-power 2': None, 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 8/3, b = 3: component 8 classes, V rank 4, 2L3/V {'free': 2, 'torsion': []}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 10]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 10]} -> NEITHER; prime-power W': {'prime-power 2': 'LOCAL AT 2', 'prime-power 3': 'NEITHER'}
+  FS-70 colouring, target 4, b = 1: rigid (delta in K_0)
+  FS-70 colouring, target 4, b = 2: rigid (delta in K_0)
+  FS-70 colouring, target 4, b = 3: component 8 classes, V rank 4, 2L3/V {'free': 2, 'torsion': []}, W' {'free': 0, 'torsion': [2, 2, 2, 2, 2, 8]}, Per(c') {'free': 0, 'torsion': [2, 2, 2, 8]} -> LOCAL AT 2; prime-power W': {'prime-power 2': 'LOCAL AT 2', 'prime-power 3': 'NEITHER'}
+all 2304 colourings x 6 targets, escapes by locality (least-ell rule): {'LOCAL AT 2': 4096, 'NEITHER': 2272}
+per target, over all colourings: {'2': {'LOCAL AT 2 achievable': 995, 'rigid': 1309}, '2/3': {'LOCAL AT 2 achievable': 995, 'rigid': 1008, 'only NEITHER': 301}, '4/3': {'LOCAL AT 2 achievable': 995, 'rigid': 1008, 'only NEITHER': 301}, '8/3': {'LOCAL AT 2 achievable': 995, 'rigid': 1008, 'only NEITHER': 301}, '4': {'LOCAL AT 2 achievable': 995, 'rigid': 1309}, 'i sqrt3': {'LOCAL AT 2 achievable': 2304}}
+wrote /home/kooshi/source/lean-dir/data/fs73/census/P1g-L3-card.json

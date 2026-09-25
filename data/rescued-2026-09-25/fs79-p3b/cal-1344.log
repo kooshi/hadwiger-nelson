@@ -1,0 +1,1 @@
+{"lattice": "1344", "units": 68, "verdict": "FOUR-COLOURABLE AND LOOSE", "exact_cell_margin": "141/668", "point_margin": "141/668", "point_order": 167} {"status": 0, "message": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "seconds": 106.8, "nodes": 426030, "dual_bound_margin": 0.21107784431144846, "float_margin": 0.21107784431144846}

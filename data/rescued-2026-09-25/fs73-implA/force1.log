@@ -1,0 +1,13 @@
+8/3 R=1.5: ball 39829 -> 4-core 39829 points, degree 18.41; control SAT; forces UNSAT (122.15 s CPU); refused (forced in this graph); critical set empty: N(0) n N(delta) is empty (G39)
+8/9 R=1.5: ball 39829 -> 4-core 39829 points, degree 18.41; control SAT; forces UNSAT (1406.91 s CPU); refused (forced in this graph); critical set empty: N(0) n N(delta) is empty (G39)
+c:0 R=1.5: the pair is not in the ball
+c:0 R=2.0: the pair is not in the ball
+c:0 R=2.5: the pair is not in the ball
+0 R=1.5: ball 39829 -> 4-core 39829 points, degree 18.41; control SAT; forces UNSAT (0.36 s CPU); refused (forced in this graph); critical set empty
+16 R=1.5: the pair is not in the ball
+16 R=2.0: the pair is not in the ball
+16 R=2.5: the pair is not in the ball
+-8 R=1.5: the pair is not in the ball
+-8 R=2.0: the pair is not in the ball
+-8 R=2.5: the pair is not in the ball
+EXIT 0

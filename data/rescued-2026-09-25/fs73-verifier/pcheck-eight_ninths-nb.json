@@ -1,0 +1,48 @@
+{
+ "pair": "eight_ninths",
+ "brk": "nb",
+ "cnf_sha256": "c645e66d8179fb9a97a920ddd06f895c7262b578af52abbc37025fd6f304b18b",
+ "proof": "build/fs73v/proof-eight_ninths-nb.drat",
+ "proof_bytes": 229033560,
+ "proof_sha256": "c3745c983dae4c6869c387d5361bf4ef157897d2cfa584ec332faae9869b5c76",
+ "planted_Fprime_model_exhibited": {
+  "relabelling": [
+   0,
+   1,
+   2,
+   3
+  ]
+ },
+ "faithful": {
+  "exit": 0,
+  "s_lines": [
+   "s VERIFIED"
+  ],
+  "tail": [
+   "c 69803 of 1745446 clauses in core                            ",
+   "c 1112343 of 2126815 lemmas in core using 73261829 resolution steps",
+   "c 0 RAT lemmas in core; 1511742 redundant literals in core lemmas",
+   "c verification time: 186.276 seconds"
+  ],
+  "cpu_s": 185.54,
+  "wall_s": 186.31,
+  "maxrss_kb_children": 603752
+ },
+ "planted": {
+  "exit": 1,
+  "s_lines": [
+   "s NOT VERIFIED"
+  ],
+  "tail": [
+   "c WARNING: RAT check on proof pivot failed : [3491223] -92315 0",
+   "c RAT check failed on all possible pivots",
+   "c failed at proof line 828 (modulo deletion errors)",
+   "c verification time: 162.102 seconds"
+  ],
+  "cpu_s": 161.44,
+  "wall_s": 162.13,
+  "maxrss_kb_children": 603752
+ },
+ "faithful_ok": true,
+ "planted_refused": true
+}

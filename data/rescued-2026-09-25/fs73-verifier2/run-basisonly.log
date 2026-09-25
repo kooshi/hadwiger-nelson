@@ -1,0 +1,4 @@
+N = 30 pairs; basis 26; short relations (len ≤ 0) 0; pool 26; 0.2s
+  nodes 20000 leaves 13328 lp 33341 depth 13 35s
+  nodes 40000 leaves 26662 lp 66673 depth 11 71s
+EMPTY; stats {'nodes': 51597, 'leaves': 34398, 'lp': 85995, 'bad_farkas': 0, 'wall_s': 90.8}

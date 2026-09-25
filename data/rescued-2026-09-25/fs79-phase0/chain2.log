@@ -1,0 +1,479 @@
+chain2 start 2026-09-24T02:09:27+00:00
+fs79_p0 recheck: 7 undecided residue sets, budget 300.0 s
+  q 43 [0, 1, 2, 4, 5, 8, 9, 11, 12, 13, 15, 16, 19, 20]: UNKNOWN (kissat, pins [(0, 0), (1, 1)], precedence True, budget 300.0)
+fs79_p0 sweep: 2520 denominators (1..2520); 2520 already recorded
+DONE sweep: 2520 denominators recorded; candidates [264, 420, 480, 540, 588, 672, 720, 732, 756, 792, 840, 855, 915, 1008, 1056, 1080, 1092, 1155, 1176, 1305, 1320, 1335, 1344, 1368, 1428, 1440, 1464, 1512, 1560, 1584, 1596, 1620, 1629, 1632, 1740, 1815, 1848, 1920, 1980, 2013]... (63); 0.0 s
+fs79_p0 sweep: 72 denominators (420..30240); 2520 already recorded
+M 2940: units 108 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 313166790454 drop []
+M 3360: units 156 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 327895624857 drop []
+M 3780: units 108 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 855763145427 drop []
+M 4200: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 682780825338 drop []
+M 4620: units 132 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (18, 'UNSAT'), '43/34': (18, 'UNSAT')} N18 1440249547959 drop []
+M 5040: units 228 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 1121313044702 drop []
+M 5460: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 1950090315249 drop []
+M 5880: units 156 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 3075302325320 drop []
+M 6300: units 100 rank 4 candidate False {} N18 None drop ['same lattice as M = 2100: every unit vector over 6300 already has denominator dividing 2100']
+M 6720: units 204 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 3938220422896 drop []
+M 7140: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 5702653731310 drop []
+M 7560: units 204 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 6308267625640 drop []
+M 7980: units 132 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 12819804749648 drop []
+M 8400: units 180 rank 4 candidate False {} N18 None drop ['same lattice as M = 4200: every unit vector over 8400 already has denominator dividing 4200']
+M 8820: units 108 rank 4 candidate False {} N18 None drop ['same lattice as M = 2940: every unit vector over 8820 already has denominator dividing 2940']
+M 9240: units 276 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 10733058168282 drop []
+M 9660: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 9660 already has denominator dividing 420']
+M 10080: units 300 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 14218906589710 drop []
+M 10500: units 140 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 35639134788600 drop []
+M 10920: units 324 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 18463488436017 drop []
+M 11340: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 36285772459878 drop []
+M 11760: units 204 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 36936200138178 drop []
+M 12180: units 444 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 22996586034816 drop []
+M 12600: units 220 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 45275745467997 drop []
+M 13020: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 63056243059755 drop []
+M 13440: units 252 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 51868227116732 drop []
+M 13860: units 252 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 58662051935674 drop []
+M 14280: units 324 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 53992822998655 drop []
+M 14700: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 102459797602378 drop []
+M 15120: units 300 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 71983214610407 drop []
+M 15540: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 127964119439747 drop []
+M 15960: units 276 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 95536020322975 drop []
+M 16380: units 180 rank 4 candidate False {} N18 None drop ['same lattice as M = 5460: every unit vector over 16380 already has denominator dividing 5460']
+M 16800: units 260 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 123286265270691 drop []
+M 17220: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 192937542778971 drop []
+M 17640: units 228 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 168267038770667 drop []
+M 18060: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 18060 already has denominator dividing 420']
+M 18480: units 372 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 137057119811058 drop []
+M 18900: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 279982812190422 drop []
+M 19320: units 108 rank 4 candidate False {} N18 None drop ['same lattice as M = 840: every unit vector over 19320 already has denominator dividing 840']
+M 19740: units 132 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 480019011982474 drop []
+M 20160: units 348 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 203501404692904 drop []
+M 20580: units 132 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 567089135600376 drop []
+M 21000: units 252 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 309158725242210 drop []
+M 21420: units 180 rank 4 candidate False {} N18 None drop ['same lattice as M = 7140: every unit vector over 21420 already has denominator dividing 7140']
+M 21840: units 324 rank 4 candidate False {} N18 None drop ['same lattice as M = 10920: every unit vector over 21840 already has denominator dividing 10920']
+M 22260: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 538746912949879 drop []
+M 22680: units 276 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 389589998361450 drop []
+M 23100: units 220 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 511483170830976 drop []
+M 23520: units 252 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 486467239481539 drop []
+M 23940: units 276 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 483651102885064 drop []
+M 24360: units 852 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 258650557027302 drop []
+M 24780: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 24780 already has denominator dividing 420']
+M 25200: units 380 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 466987139074358 drop []
+M 25620: units 420 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 466559356015168 drop []
+M 26040: units 276 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 677016912275802 drop []
+M 26460: units 180 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 1075581971310728 drop []
+M 26880: units 300 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 719020264092010 drop []
+M 27300: units 300 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 765023297173228 drop []
+M 27720: units 444 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 616945950636223 drop []
+M 28140: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 28140 already has denominator dividing 420']
+M 28560: units 324 rank 4 candidate False {} N18 None drop ['same lattice as M = 14280: every unit vector over 28560 already has denominator dividing 14280']
+M 28980: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 28980 already has denominator dividing 420']
+M 29400: units 260 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 1156290323886444 drop []
+M 29820: units 60 rank 4 candidate False {} N18 None drop ['same lattice as M = 420: every unit vector over 29820 already has denominator dividing 420']
+M 30240: units 396 rank 4 candidate True {'23/11': (12, 'UNSAT'), '23/12': (12, 'UNSAT'), '43/9': (22, 'UNSAT'), '43/34': (22, 'UNSAT')} N18 941556370805262 drop []
+DONE sweep: 2586 denominators recorded; candidates [264, 420, 480, 540, 588, 672, 720, 732, 756, 792, 840, 855, 915, 1008, 1056, 1080, 1092, 1155, 1176, 1305, 1320, 1335, 1344, 1368, 1428, 1440, 1464, 1512, 1560, 1584, 1596, 1620, 1629, 1632, 1740, 1815, 1848, 1920, 1980, 2013]... (115); 94.3 s
+fs79_p0 additive: 370 distinct rank-4 lattices up to M = 30240
+M 24: units 12 additive Z/4 40 V4 0 candidate False
+M 28: units 12 additive Z/4 52 V4 30 candidate False
+M 84: units 20 additive Z/4 8 V4 0 candidate False
+M 88: units 12 additive Z/4 0 V4 0 candidate False
+M 96: units 20 additive Z/4 0 V4 0 candidate False
+M 108: units 12 additive Z/4 16 V4 0 candidate False
+M 116: units 20 additive Z/4 52 V4 30 candidate False
+M 120: units 36 additive Z/4 40 V4 0 candidate False
+M 124: units 12 additive Z/4 16 V4 0 candidate False
+M 128: units 12 additive Z/4 0 V4 0 candidate False
+M 132: units 12 additive Z/4 52 V4 30 candidate False
+M 140: units 36 additive Z/4 52 V4 30 candidate False
+M 144: units 28 additive Z/4 0 V4 0 candidate False
+M 168: units 36 additive Z/4 0 V4 0 candidate False
+M 171: units 12 additive Z/4 49 V4 40 candidate False
+M 183: units 20 additive Z/4 49 V4 40 candidate False
+M 196: units 20 additive Z/4 8 V4 0 candidate False
+M 203: units 20 additive Z/4 49 V4 40 candidate False
+M 216: units 20 additive Z/4 0 V4 0 candidate False
+M 228: units 12 additive Z/4 16 V4 0 candidate False
+M 231: units 12 additive Z/4 49 V4 40 candidate False
+M 261: units 28 additive Z/4 49 V4 40 candidate False
+M 264: units 36 additive Z/4 0 V4 0 candidate True
+M 267: units 20 additive Z/4 49 V4 40 candidate False
+M 288: units 36 additive Z/4 0 V4 0 candidate False
+M 304: units 20 additive Z/4 0 V4 0 candidate False
+M 311: units 12 additive Z/4 49 V4 40 candidate False
+M 312: units 36 additive Z/4 40 V4 0 candidate False
+M 324: units 20 additive Z/4 8 V4 0 candidate False
+M 348: units 44 additive Z/4 0 V4 0 candidate False
+M 352: units 20 additive Z/4 0 V4 0 candidate False
+M 363: units 12 additive Z/4 49 V4 40 candidate False
+M 364: units 36 additive Z/4 52 V4 30 candidate False
+M 372: units 20 additive Z/4 8 V4 0 candidate False
+M 384: units 28 additive Z/4 0 V4 0 candidate False
+M 388: units 28 additive Z/4 16 V4 0 candidate False
+M 396: units 28 additive Z/4 8 V4 0 candidate False
+M 408: units 36 additive Z/4 40 V4 0 candidate False
+M 420: units 60 additive Z/4 8 V4 0 candidate True
+M 423: units 12 additive Z/4 49 V4 40 candidate False
+M 428: units 12 additive Z/4 52 V4 30 candidate False
+M 432: units 36 additive Z/4 0 V4 0 candidate False
+M 440: units 36 additive Z/4 0 V4 0 candidate False
+M 448: units 20 additive Z/4 0 V4 0 candidate False
+M 456: units 28 additive Z/4 0 V4 0 candidate False
+M 464: units 52 additive Z/4 0 V4 0 candidate False
+M 476: units 36 additive Z/4 52 V4 30 candidate False
+M 480: units 60 additive Z/4 0 V4 0 candidate True
+M 488: units 36 additive Z/4 0 V4 0 candidate False
+M 491: units 12 additive Z/4 49 V4 40 candidate False
+M 504: units 44 additive Z/4 0 V4 0 candidate False
+M 540: units 36 additive Z/4 16 V4 0 candidate True
+M 543: units 28 additive Z/4 49 V4 40 candidate False
+M 548: units 28 additive Z/4 16 V4 0 candidate False
+M 551: units 28 additive Z/4 49 V4 40 candidate False
+M 564: units 12 additive Z/4 16 V4 0 candidate False
+M 567: units 12 additive Z/4 49 V4 40 candidate False
+M 580: units 60 additive Z/4 52 V4 30 candidate False
+M 588: units 36 additive Z/4 8 V4 0 candidate True
+M 600: units 60 additive Z/4 40 V4 0 candidate False
+M 616: units 28 additive Z/4 0 V4 0 candidate False
+M 620: units 36 additive Z/4 16 V4 0 candidate False
+M 628: units 36 additive Z/4 8 V4 0 candidate False
+M 640: units 36 additive Z/4 0 V4 0 candidate False
+M 648: units 28 additive Z/4 0 V4 0 candidate False
+M 651: units 12 additive Z/4 49 V4 40 candidate False
+M 660: units 36 additive Z/4 52 V4 30 candidate False
+M 669: units 12 additive Z/4 49 V4 40 candidate False
+M 671: units 28 additive Z/4 49 V4 40 candidate False
+M 672: units 52 additive Z/4 0 V4 0 candidate True
+M 677: units 36 additive Z/4 25 V4 40 candidate False
+M 684: units 28 additive Z/4 8 V4 0 candidate False
+M 692: units 28 additive Z/4 16 V4 0 candidate False
+M 693: units 20 additive Z/4 49 V4 40 candidate False
+M 696: units 92 additive Z/4 0 V4 0 candidate False
+M 700: units 60 additive Z/4 52 V4 30 candidate False
+M 712: units 36 additive Z/4 0 V4 0 candidate False
+M 717: units 12 additive Z/4 49 V4 40 candidate False
+M 720: units 84 additive Z/4 0 V4 0 candidate True
+M 732: units 36 additive Z/4 52 V4 30 candidate True
+M 743: units 12 additive Z/4 49 V4 40 candidate False
+M 744: units 28 additive Z/4 0 V4 0 candidate False
+M 749: units 12 additive Z/4 49 V4 40 candidate False
+M 752: units 20 additive Z/4 0 V4 0 candidate False
+M 756: units 36 additive Z/4 8 V4 0 candidate True
+M 764: units 12 additive Z/4 16 V4 0 candidate False
+M 768: units 36 additive Z/4 0 V4 0 candidate False
+M 776: units 36 additive Z/4 0 V4 0 candidate False
+M 789: units 12 additive Z/4 49 V4 40 candidate False
+M 792: units 52 additive Z/4 0 V4 0 candidate True
+M 812: units 60 additive Z/4 8 V4 0 candidate False
+M 836: units 20 additive Z/4 8 V4 0 candidate False
+M 837: units 12 additive Z/4 49 V4 40 candidate False
+M 840: units 108 additive Z/4 0 V4 0 candidate True
+M 843: units 20 additive Z/4 49 V4 40 candidate False
+M 844: units 12 additive Z/4 16 V4 0 candidate False
+M 855: units 36 additive Z/4 49 V4 40 candidate True
+M 864: units 44 additive Z/4 0 V4 0 candidate False
+M 868: units 28 additive Z/4 8 V4 0 candidate False
+M 888: units 36 additive Z/4 40 V4 0 candidate False
+M 893: units 12 additive Z/4 49 V4 40 candidate False
+M 896: units 36 additive Z/4 0 V4 0 candidate False
+M 912: units 44 additive Z/4 0 V4 0 candidate False
+M 915: units 60 additive Z/4 49 V4 40 candidate True
+M 916: units 20 additive Z/4 52 V4 30 candidate False
+M 924: units 44 additive Z/4 8 V4 0 candidate False
+M 932: units 36 additive Z/4 8 V4 0 candidate False
+M 951: units 20 additive Z/4 49 V4 40 candidate False
+M 957: units 20 additive Z/4 49 V4 40 candidate False
+M 968: units 20 additive Z/4 0 V4 0 candidate False
+M 979: units 28 additive Z/4 49 V4 40 candidate False
+M 980: units 60 additive Z/4 8 V4 0 candidate False
+M 984: units 36 additive Z/4 40 V4 0 candidate False
+M 1004: units 12 additive Z/4 52 V4 30 candidate False
+M 1008: units 76 additive Z/4 0 V4 0 candidate True
+M 1011: units 28 additive Z/4 49 V4 40 candidate False
+M 1015: units 60 additive Z/4 49 V4 40 candidate False
+M 1016: units 12 additive Z/4 0 V4 0 candidate False
+M 1029: units 12 additive Z/4 49 V4 40 candidate False
+M 1036: units 36 additive Z/4 52 V4 30 candidate False
+M 1044: units 76 additive Z/4 0 V4 0 candidate False
+M 1056: units 60 additive Z/4 0 V4 0 candidate True
+M 1064: units 20 additive Z/4 0 V4 0 candidate False
+M 1067: units 20 additive Z/4 49 V4 40 candidate False
+M 1068: units 36 additive Z/4 52 V4 30 candidate False
+M 1080: units 60 additive Z/4 0 V4 0 candidate True
+M 1092: units 60 additive Z/4 8 V4 0 candidate True
+M 1096: units 36 additive Z/4 0 V4 0 candidate False
+M 1099: units 28 additive Z/4 49 V4 40 candidate False
+M 1109: units 36 additive Z/4 25 V4 40 candidate False
+M 1128: units 28 additive Z/4 0 V4 0 candidate False
+M 1140: units 36 additive Z/4 16 V4 0 candidate False
+M 1144: units 36 additive Z/4 0 V4 0 candidate False
+M 1148: units 36 additive Z/4 52 V4 30 candidate False
+M 1152: units 44 additive Z/4 0 V4 0 candidate False
+M 1155: units 36 additive Z/4 49 V4 40 candidate True
+M 1164: units 52 additive Z/4 8 V4 0 candidate False
+M 1172: units 36 additive Z/4 8 V4 0 candidate False
+M 1176: units 52 additive Z/4 0 V4 0 candidate True
+M 1188: units 44 additive Z/4 8 V4 0 candidate False
+M 1191: units 20 additive Z/4 49 V4 40 candidate False
+M 1197: units 20 additive Z/4 49 V4 40 candidate False
+M 1232: units 44 additive Z/4 0 V4 0 candidate False
+M 1248: units 60 additive Z/4 0 V4 0 candidate False
+M 1272: units 36 additive Z/4 40 V4 0 candidate False
+M 1276: units 52 additive Z/4 8 V4 0 candidate False
+M 1281: units 36 additive Z/4 49 V4 40 candidate False
+M 1284: units 20 additive Z/4 8 V4 0 candidate False
+M 1293: units 12 additive Z/4 49 V4 40 candidate False
+M 1296: units 44 additive Z/4 0 V4 0 candidate False
+M 1299: units 28 additive Z/4 49 V4 40 candidate False
+M 1305: units 84 additive Z/4 49 V4 40 candidate True
+M 1320: units 108 additive Z/4 0 V4 0 candidate True
+M 1323: units 12 additive Z/4 49 V4 40 candidate False
+M 1335: units 60 additive Z/4 49 V4 40 candidate True
+M 1344: units 68 additive Z/4 0 V4 0 candidate True
+M 1347: units 28 additive Z/4 49 V4 40 candidate False
+M 1363: units 28 additive Z/4 49 V4 40 candidate False
+M 1364: units 20 additive Z/4 16 V4 0 candidate False
+M 1368: units 44 additive Z/4 0 V4 0 candidate True
+M 1383: units 28 additive Z/4 49 V4 40 candidate False
+M 1384: units 36 additive Z/4 0 V4 0 candidate False
+M 1392: units 124 additive Z/4 0 V4 0 candidate False
+M 1397: units 12 additive Z/4 49 V4 40 candidate False
+M 1404: units 36 additive Z/4 16 V4 0 candidate False
+M 1408: units 28 additive Z/4 0 V4 0 candidate False
+M 1412: units 20 additive Z/4 52 V4 30 candidate False
+M 1428: units 60 additive Z/4 8 V4 0 candidate True
+M 1436: units 12 additive Z/4 16 V4 0 candidate False
+M 1440: units 108 additive Z/4 0 V4 0 candidate True
+M 1444: units 12 additive Z/4 52 V4 30 candidate False
+M 1448: units 28 additive Z/4 40 V4 0 candidate False
+M 1452: units 20 additive Z/4 52 V4 30 candidate False
+M 1463: units 12 additive Z/4 49 V4 40 candidate False
+M 1464: units 100 additive Z/4 0 V4 0 candidate True
+M 1484: units 36 additive Z/4 52 V4 30 candidate False
+M 1488: units 44 additive Z/4 0 V4 0 candidate False
+M 1496: units 36 additive Z/4 0 V4 0 candidate False
+M 1507: units 20 additive Z/4 49 V4 40 candidate False
+M 1508: units 60 additive Z/4 52 V4 30 candidate False
+M 1509: units 12 additive Z/4 49 V4 40 candidate False
+M 1512: units 68 additive Z/4 0 V4 0 candidate True
+M 1519: units 12 additive Z/4 49 V4 40 candidate False
+M 1520: units 60 additive Z/4 0 V4 0 candidate False
+M 1524: units 12 additive Z/4 52 V4 30 candidate False
+M 1532: units 12 additive Z/4 52 V4 30 candidate False
+M 1555: units 36 additive Z/4 49 V4 40 candidate False
+M 1560: units 108 additive Z/4 40 V4 0 candidate True
+M 1567: units 12 additive Z/4 49 V4 40 candidate False
+M 1584: units 68 additive Z/4 0 V4 0 candidate True
+M 1592: units 12 additive Z/4 0 V4 0 candidate False
+M 1596: units 44 additive Z/4 8 V4 0 candidate True
+M 1603: units 20 additive Z/4 49 V4 40 candidate False
+M 1611: units 12 additive Z/4 49 V4 40 candidate False
+M 1612: units 36 additive Z/4 16 V4 0 candidate False
+M 1620: units 60 additive Z/4 8 V4 0 candidate True
+M 1624: units 76 additive Z/4 0 V4 0 candidate False
+M 1629: units 36 additive Z/4 25 V4 40 candidate True
+M 1631: units 28 additive Z/4 49 V4 40 candidate False
+M 1632: units 60 additive Z/4 0 V4 0 candidate True
+M 1636: units 28 additive Z/4 16 V4 0 candidate False
+M 1644: units 52 additive Z/4 8 V4 0 candidate False
+M 1664: units 36 additive Z/4 0 V4 0 candidate False
+M 1672: units 28 additive Z/4 0 V4 0 candidate False
+M 1676: units 12 additive Z/4 16 V4 0 candidate False
+M 1684: units 20 additive Z/4 52 V4 30 candidate False
+M 1692: units 28 additive Z/4 8 V4 0 candidate False
+M 1699: units 12 additive Z/4 49 V4 40 candidate False
+M 1708: units 44 additive Z/4 8 V4 0 candidate False
+M 1716: units 36 additive Z/4 52 V4 30 candidate False
+M 1728: units 52 additive Z/4 0 V4 0 candidate False
+M 1736: units 36 additive Z/4 0 V4 0 candidate False
+M 1740: units 132 additive Z/4 0 V4 0 candidate True
+M 1752: units 36 additive Z/4 40 V4 0 candidate False
+M 1757: units 12 additive Z/4 49 V4 40 candidate False
+M 1759: units 12 additive Z/4 49 V4 40 candidate False
+M 1760: units 60 additive Z/4 0 V4 0 candidate False
+M 1767: units 12 additive Z/4 49 V4 40 candidate False
+M 1784: units 12 additive Z/4 40 V4 0 candidate False
+M 1815: units 36 additive Z/4 49 V4 40 candidate True
+M 1820: units 108 additive Z/4 52 V4 30 candidate False
+M 1824: units 60 additive Z/4 0 V4 0 candidate False
+M 1827: units 52 additive Z/4 25 V4 40 candidate False
+M 1836: units 36 additive Z/4 16 V4 0 candidate False
+M 1848: units 92 additive Z/4 0 V4 0 candidate True
+M 1856: units 60 additive Z/4 0 V4 0 candidate False
+M 1860: units 60 additive Z/4 8 V4 0 candidate False
+M 1868: units 12 additive Z/4 52 V4 30 candidate False
+M 1869: units 36 additive Z/4 25 V4 40 candidate False
+M 1872: units 84 additive Z/4 0 V4 0 candidate False
+M 1884: units 60 additive Z/4 0 V4 0 candidate False
+M 1893: units 12 additive Z/4 49 V4 40 candidate False
+M 1903: units 20 additive Z/4 49 V4 40 candidate False
+M 1912: units 12 additive Z/4 40 V4 0 candidate False
+M 1920: units 84 additive Z/4 0 V4 0 candidate True
+M 1931: units 12 additive Z/4 49 V4 40 candidate False
+M 1940: units 84 additive Z/4 16 V4 0 candidate False
+M 1944: units 36 additive Z/4 0 V4 0 candidate False
+M 1952: units 60 additive Z/4 0 V4 0 candidate False
+M 1972: units 60 additive Z/4 52 V4 30 candidate False
+M 1980: units 84 additive Z/4 8 V4 0 candidate True
+M 1984: units 20 additive Z/4 0 V4 0 candidate False
+M 1987: units 12 additive Z/4 49 V4 40 candidate False
+M 2013: units 52 additive Z/4 49 V4 40 candidate True
+M 2016: units 100 additive Z/4 0 V4 0 candidate True
+M 2036: units 28 additive Z/4 16 V4 0 candidate False
+M 2037: units 36 additive Z/4 49 V4 40 candidate True
+M 2040: units 108 additive Z/4 40 V4 0 candidate True
+M 2044: units 36 additive Z/4 52 V4 30 candidate False
+M 2051: units 28 additive Z/4 49 V4 40 candidate False
+M 2052: units 36 additive Z/4 8 V4 0 candidate True
+M 2061: units 28 additive Z/4 49 V4 40 candidate False
+M 2068: units 20 additive Z/4 8 V4 0 candidate False
+M 2076: units 52 additive Z/4 8 V4 0 candidate True
+M 2088: units 132 additive Z/4 0 V4 0 candidate False
+M 2092: units 12 additive Z/4 16 V4 0 candidate False
+M 2100: units 100 additive Z/4 8 V4 0 candidate True
+M 2103: units 20 additive Z/4 49 V4 40 candidate False
+M 2104: units 12 additive Z/4 40 V4 0 candidate False
+M 2108: units 36 additive Z/4 16 V4 0 candidate False
+M 2112: units 68 additive Z/4 0 V4 0 candidate True
+M 2115: units 36 additive Z/4 49 V4 40 candidate False
+M 2128: units 52 additive Z/4 0 V4 0 candidate False
+M 2136: units 100 additive Z/4 0 V4 0 candidate True
+M 2140: units 36 additive Z/4 52 V4 30 candidate False
+M 2148: units 12 additive Z/4 16 V4 0 candidate False
+M 2156: units 28 additive Z/4 8 V4 0 candidate False
+M 2160: units 108 additive Z/4 0 V4 0 candidate True
+M 2172: units 36 additive Z/4 16 V4 0 candidate True
+M 2176: units 36 additive Z/4 0 V4 0 candidate False
+M 2179: units 12 additive Z/4 49 V4 40 candidate False
+M 2184: units 108 additive Z/4 0 V4 0 candidate True
+M 2189: units 12 additive Z/4 49 V4 40 candidate False
+M 2196: units 76 additive Z/4 0 V4 0 candidate True
+M 2199: units 28 additive Z/4 49 V4 40 candidate False
+M 2200: units 60 additive Z/4 0 V4 0 candidate False
+M 2204: units 52 additive Z/4 8 V4 30 candidate False
+M 2223: units 36 additive Z/4 49 V4 40 candidate False
+M 2228: units 28 additive Z/4 16 V4 0 candidate False
+M 2232: units 44 additive Z/4 0 V4 0 candidate False
+M 2233: units 36 additive Z/4 25 V4 40 candidate False
+M 2240: units 60 additive Z/4 0 V4 0 candidate False
+M 2244: units 36 additive Z/4 52 V4 30 candidate False
+M 2248: units 36 additive Z/4 0 V4 0 candidate False
+M 2256: units 44 additive Z/4 0 V4 0 candidate False
+M 2264: units 12 additive Z/4 0 V4 0 candidate False
+M 2268: units 60 additive Z/4 8 V4 0 candidate True
+M 2280: units 84 additive Z/4 0 V4 0 candidate True
+M 2283: units 20 additive Z/4 49 V4 40 candidate False
+M 2287: units 12 additive Z/4 49 V4 40 candidate False
+M 2292: units 20 additive Z/4 8 V4 0 candidate False
+M 2304: units 52 additive Z/4 0 V4 0 candidate False
+M 2308: units 36 additive Z/4 8 V4 0 candidate False
+M 2320: units 156 additive Z/4 0 V4 0 candidate False
+M 2328: units 92 additive Z/4 0 V4 0 candidate True
+M 2349: units 36 additive Z/4 25 V4 40 candidate False
+M 2352: units 68 additive Z/4 0 V4 0 candidate True
+M 2376: units 68 additive Z/4 0 V4 0 candidate True
+M 2379: units 60 additive Z/4 49 V4 40 candidate True
+M 2380: units 108 additive Z/4 52 V4 30 candidate False
+M 2388: units 12 additive Z/4 52 V4 30 candidate False
+M 2396: units 12 additive Z/4 52 V4 30 candidate False
+M 2400: units 100 additive Z/4 0 V4 0 candidate True
+M 2404: units 20 additive Z/4 52 V4 30 candidate False
+M 2424: units 36 additive Z/4 40 V4 0 candidate False
+M 2432: units 28 additive Z/4 0 V4 0 candidate False
+M 2436: units 148 additive Z/4 0 V4 0 candidate True
+M 2440: units 108 additive Z/4 0 V4 0 candidate False
+M 2448: units 84 additive Z/4 0 V4 0 candidate True
+M 2452: units 36 additive Z/4 8 V4 0 candidate False
+M 2455: units 36 additive Z/4 49 V4 40 candidate False
+M 2464: units 60 additive Z/4 0 V4 0 candidate False
+M 2468: units 20 additive Z/4 52 V4 30 candidate False
+M 2471: units 20 additive Z/4 49 V4 40 candidate False
+M 2492: units 44 additive Z/4 8 V4 0 candidate False
+M 2508: units 52 additive Z/4 8 V4 0 candidate True
+M 2517: units 12 additive Z/4 49 V4 40 candidate False
+M 2520: units 132 additive Z/4 0 V4 0 candidate True
+M 2940: units 108 additive Z/4 8 V4 0 candidate True
+M 3360: units 156 additive Z/4 0 V4 0 candidate True
+M 3780: units 108 additive Z/4 8 V4 0 candidate True
+M 4200: units 180 additive Z/4 0 V4 0 candidate True
+M 4620: units 132 additive Z/4 8 V4 0 candidate True
+M 5040: units 228 additive Z/4 0 V4 0 candidate True
+M 5460: units 180 additive Z/4 8 V4 0 candidate True
+M 5880: units 156 additive Z/4 0 V4 0 candidate True
+M 6720: units 204 additive Z/4 0 V4 0 candidate True
+M 7140: units 180 additive Z/4 8 V4 0 candidate True
+M 7560: units 204 additive Z/4 0 V4 0 candidate True
+M 7980: units 132 additive Z/4 8 V4 0 candidate True
+M 9240: units 276 additive Z/4 0 V4 0 candidate True
+M 10080: units 300 additive Z/4 0 V4 0 candidate True
+M 10500: units 140 additive Z/4 8 V4 0 candidate True
+M 10920: units 324 additive Z/4 0 V4 0 candidate True
+M 11340: units 180 additive Z/4 8 V4 0 candidate True
+M 11760: units 204 additive Z/4 0 V4 0 candidate True
+M 12180: units 444 additive Z/4 0 V4 0 candidate True
+M 12600: units 220 additive Z/4 0 V4 0 candidate True
+M 13020: units 180 additive Z/4 8 V4 0 candidate True
+M 13440: units 252 additive Z/4 0 V4 0 candidate True
+M 13860: units 252 additive Z/4 8 V4 0 candidate True
+M 14280: units 324 additive Z/4 0 V4 0 candidate True
+M 14700: units 180 additive Z/4 8 V4 0 candidate True
+M 15120: units 300 additive Z/4 0 V4 0 candidate True
+M 15540: units 180 additive Z/4 8 V4 0 candidate True
+M 15960: units 276 additive Z/4 0 V4 0 candidate True
+M 16800: units 260 additive Z/4 0 V4 0 candidate True
+M 17220: units 180 additive Z/4 8 V4 0 candidate True
+M 17640: units 228 additive Z/4 0 V4 0 candidate True
+M 18480: units 372 additive Z/4 0 V4 0 candidate True
+M 18900: units 180 additive Z/4 8 V4 0 candidate True
+M 19740: units 132 additive Z/4 8 V4 0 candidate True
+M 20160: units 348 additive Z/4 0 V4 0 candidate True
+M 20580: units 132 additive Z/4 8 V4 0 candidate True
+M 21000: units 252 additive Z/4 0 V4 0 candidate True
+M 22260: units 180 additive Z/4 8 V4 0 candidate True
+M 22680: units 276 additive Z/4 0 V4 0 candidate True
+M 23100: units 220 additive Z/4 8 V4 0 candidate True
+M 23520: units 252 additive Z/4 0 V4 0 candidate True
+M 23940: units 276 additive Z/4 8 V4 0 candidate True
+M 24360: units 852 additive Z/4 0 V4 0 candidate True
+M 25200: units 380 additive Z/4 0 V4 0 candidate True
+M 25620: units 420 additive Z/4 0 V4 0 candidate True
+M 26040: units 276 additive Z/4 0 V4 0 candidate True
+M 26460: units 180 additive Z/4 8 V4 0 candidate True
+M 26880: units 300 additive Z/4 0 V4 0 candidate True
+M 27300: units 300 additive Z/4 8 V4 0 candidate True
+M 27720: units 444 additive Z/4 0 V4 0 candidate True
+M 29400: units 260 additive Z/4 0 V4 0 candidate True
+M 30240: units 396 additive Z/4 0 V4 0 candidate True
+DONE additive: 370 lattices; no additive four-colouring at M = [88, 96, 128, 144, 168, 216, 264, 288, 304, 348, 352, 384, 432, 440, 448, 456, 464, 480, 488, 504, 616, 640, 648, 672, 696, 712, 720, 744, 752, 768]
+STAGE cheap-screen 2026-09-24T02:22:35+00:00
+== 540: M 540, 36 unit vectors, rank 4, H [(1, 0, 0, 7), (0, 7, 1, 0), (0, 0, 2, 0), (0, 0, 0, 14)]
+  additive: Z/4 16, V4 0
+  Theta_4: FOUND after 357 nodes, 1.1 s; order 23052
+  residue 23/11: image 24/24 plain UNSAT gap None
+  residue 23/12: image 24/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNKNOWN gap None
+  residue 43/34: image 36/44 plain UNKNOWN gap None
+  residue 59/7: image 12/60 plain SAT gap SAT
+  residue 59/52: image 12/60 plain SAT gap SAT
+VERDICT 540: FOUR-COLOURABLE by ['additive', 'linear', 'residue', 'residue']; gapped True
+== 264: M 264, 36 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 0, V4 0
+  Theta_4: FOUND after 135 nodes, 0.4 s; order 2282031024
+  residue 23/11: image 16/24 plain UNSAT gap None
+  residue 23/12: image 16/24 plain UNSAT gap None
+  residue 43/9: image 20/44 plain UNKNOWN gap None
+  residue 43/34: image 20/44 plain UNKNOWN gap None
+  residue 59/7: image 28/60 plain UNKNOWN gap None
+  residue 59/52: image 28/60 plain UNKNOWN gap None
+  residue 67/10: image 28/68 plain UNKNOWN gap None
+  residue 67/57: image 28/68 plain UNKNOWN gap None
+  residue 71/5: image 20/72 plain SAT gap SAT
+  residue 71/66: image 20/72 plain SAT gap SAT
+VERDICT 264: FOUR-COLOURABLE by ['linear', 'residue', 'residue']; gapped True
+== L21cc6506: M 420, 60 unit vectors, rank 4, H [(1, 0, 0, 1), (0, 1, 1, 0), (0, 0, 2, 0), (0, 0, 0, 2)]
+  additive: Z/4 8, V4 0
+  Theta_4: FOUND after 17702 nodes, 46.7 s; order 4200
+  residue 23/11: image 20/24 plain UNSAT gap None
+  residue 23/12: image 20/24 plain UNSAT gap None
+  residue 43/9: image 36/44 plain UNSAT gap None
+  residue 43/34: image 36/44 plain UNSAT gap None
+  residue 59/7: image 28/60 plain UNKNOWN gap None
+  residue 59/52: image 28/60 plain UNKNOWN gap None

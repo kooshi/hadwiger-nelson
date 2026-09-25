@@ -1,0 +1,18 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3
+data/m2/j04/K2Transcendental.lean:29:11: warning: Variable name `z` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/m2/j04/K2Transcendental.lean:30:12: warning: Variable name `p` is not explicitly referenced.
+
+The binding can be removed (if unused) or named `_` (if used implicitly).
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+data/m2/j04/K2Transcendental.lean:91:18: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:94:8: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:98:18: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:102:18: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:107:8: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:112:8: warning: declaration uses `sorry`
+data/m2/j04/K2Transcendental.lean:117:8: warning: declaration uses `sorry`

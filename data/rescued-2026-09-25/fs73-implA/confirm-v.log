@@ -1,0 +1,2 @@
+force:-16,8,8,0:R1.5: cadical -> UNSAT (112.26 s CPU); CNF identical to the recorded one: True
+EXIT 0

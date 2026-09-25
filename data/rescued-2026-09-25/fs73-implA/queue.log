@@ -1,0 +1,13 @@
+== 1 periods 20, 21, 22, 24 past the plateau rule
+start: P_found from 37 analysed colourings: Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]}; P_found/F_known = {'free': 2, 'torsion': [3, 3]}
+N = 20: P_N exact, Lambda/P_N = {'free': 0, 'torsion': [4, 4, 4, 4]}; 6 colourings; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]} (rank 4); P_found/F_known = {'free': 2, 'torsion': [3, 3]}; changed False; 8/9 in P_found True; 493 s solver CPU
+N = 21: plain ask UNSAT (58.0 s CPU) -- no step
+N = 22: P_N exact, Lambda/P_N = {'free': 0, 'torsion': [2, 2, 2, 2]}; 2 colourings; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]} (rank 4); P_found/F_known = {'free': 2, 'torsion': [3, 3]}; changed False; 8/9 in P_found True; 387 s solver CPU
+N = 24: P_N exact, Lambda/P_N = {'free': 0, 'torsion': [8, 8, 8, 8]}; 4 colourings; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]} (rank 4); P_found/F_known = {'free': 2, 'torsion': [3, 3]}; changed False; 8/9 in P_found True; 421 s solver CPU
+the plan's stop rule would declare OUTCOME (b) here; continuing past it (PO ruling: a plateau over periods whose 2-part is at most 4 measures the enumeration)
+== 2 off-plane vector (-16,8,8,0)
+c:-16,8,8,0 R=1.5: ball 39829 -> 4-core 39829 points, degree 18.41; control SAT; forces UNSAT (36.61 s CPU); refused (forced in this graph); critical set empty
+== 3 cadical on the identical 8/9 CNF
+force:32,-16,-16,-8:R1.5: cadical -> UNSAT (435.63 s CPU); CNF identical to the recorded one: True
+== 4 smaller balls for 8/9
+8/9 R=1.0: ball 7879 -> 4-core 7879 points, degree 8.3; control UNKNOWN; forces UNKNOWN (1494.04 s CPU); UNKNOWN; critical set None

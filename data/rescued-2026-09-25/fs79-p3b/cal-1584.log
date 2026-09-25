@@ -1,0 +1,1 @@
+{"lattice": "1584", "units": 68, "verdict": "FOUR-COLOURABLE AND LOOSE", "exact_cell_margin": "173/11844", "point_margin": "173/11844", "point_order": 6253632} {"status": 1, "message": "Time limit reached. (HiGHS Status 13: Time limit reached)", "seconds": 150.0, "nodes": 693311, "dual_bound_margin": 0.25, "float_margin": 0.014606551840870452}

@@ -1,0 +1,21 @@
+== 1-v-z
+EMPTY; stats {'nodes': 1575, 'leaves': 1050, 'lp': 2625, 'bad_farkas': 0, 'wall_s': 2.6}
+== 1-v-zb
+NONEMPTY: θ = ['15/68', '524/153', '61/153', '1229/204']; exact check True; nodes 44
+== 1-v-vb
+NONEMPTY: θ = ['34/249', '4/3', '1121/83', '-20']; exact check True; nodes 43
+== v-z
+NONEMPTY: θ = ['5/196', '-1259/1764', '-1/1764', '127/588']; exact check True; nodes 14
+== 1-z
+NONEMPTY: θ = ['-2/63', '-197/252', '1/252', '-9/14']; exact check True; nodes 14
+== 1-v
+NONEMPTY: θ = ['-2/63', '167/252', '1/252', '-2/63']; exact check True; nodes 13
+== z-zb
+NONEMPTY: θ = ['1/90', '-13/18', '0', '0']; exact check True; nodes 15
+== 1-z-zb
+NONEMPTY: θ = ['1/9', '7/9', '1/9', '-4/3']; exact check True; nodes 21
+== v-vb-z
+NONEMPTY: θ = ['11/51', '53221/306', '-275/306', '-3694/51']; exact check True; nodes 44
+== 1-vb-z
+NONEMPTY: θ = ['49/68', '-7849/612', '827/612', '2341/204']; exact check True; nodes 44
+ALLDONE

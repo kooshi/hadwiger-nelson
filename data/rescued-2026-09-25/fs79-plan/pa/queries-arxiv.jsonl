@@ -1,0 +1,39 @@
+{"q": "abs:\"domino problem\" AND abs:homshift", "hits": 0}
+{"q": "abs:\"domino problem\" AND abs:\"hom-shift\"", "hits": 0}
+{"q": "abs:\"domino problem\" AND abs:coloring", "hits": 1}
+{"q": "abs:\"domino problem\" AND abs:\"Cayley graph\"", "hits": 1}
+{"q": "abs:homshifts", "hits": 2}
+{"q": "abs:\"hom shifts\"", "hits": 3}
+{"q": "abs:homshifts", "hits": 2}
+{"q": "ti:\"Simulations and the Lamplighter\"", "hits": 1}
+{"q": "abs:\"periodic coloring\" AND abs:\"Cayley graph\"", "hits": 2}
+{"q": "abs:\"periodic colouring\" AND abs:\"Cayley\"", "hits": 0}
+{"q": "abs:\"chromatic number\" AND abs:\"abelian Cayley graph\" AND abs:infinite", "hits": 0}
+{"q": "abs:\"periodic\" AND abs:\"proper coloring\" AND abs:\"Z^d\" AND abs:\"subshift\"", "hits": 0}
+{"q": "abs:\"strongly aperiodic\" AND abs:coloring", "hits": 3}
+{"q": "abs:\"Ellenberg\" AND abs:coloring", "hits": 2}
+{"q": "ti:\"The chromatic number of 4-dimensional lattices\"", "hits": 1}
+{"q": "abs:\"Cayley graph\" AND abs:\"Z^d\" AND abs:\"coloring\" AND abs:\"periodic\"", "hits": 0}
+{"q": "abs:\"arbitrary generating set\" AND abs:\"coloring\"", "hits": 0}
+{"q": "abs:\"homomorphism\" AND abs:\"Cayley graph\" AND abs:\"periodic\" AND abs:\"Z^2\" AND abs:\"undecidable\"", "hits": 0}
+{"q": "au:Bitar AND abs:domino", "hits": 3}
+{"q": "abs:\"H-coloring\" AND abs:\"domino\"", "hits": 0}
+{"q": "abs:\"graph homomorphism\" AND abs:\"domino problem\"", "hits": 0}
+{"q": "abs:\"coloring problem\" AND abs:\"domino\"", "hits": 0}
+{"q": "abs:\"k-coloring\" AND abs:\"Cayley graph\" AND abs:\"decidable\"", "hits": 0}
+{"q": "abs:\"vertex coloring\" AND abs:\"domino problem\"", "hits": 0}
+{"q": "ti:\"Contributions to the Domino Problem\"", "hits": 1}
+{"q": "abs:\"k-SAT\" AND abs:\"groups\" AND abs:\"undecidab\"", "hits": 0}
+{"q": "abs:\"3-colorability\" AND abs:\"periodic\" AND abs:\"undecidable\"", "hits": 0}
+{"q": "abs:\"Wang tiles\" AND abs:\"graph coloring\"", "hits": 0}
+{"q": "abs:\"proper colorings\" AND abs:\"aperiodic\"", "hits": 2}
+{"q": "abs:\"box complex\" AND abs:\"infinite\"", "hits": 1}
+{"q": "abs:\"Hom complex\" AND abs:\"Cayley\"", "hits": 1}
+{"q": "abs:\"topological lower bound\" AND abs:\"chromatic\" AND abs:\"Cayley\"", "hits": 0}
+{"q": "abs:\"Z_2-index\" AND abs:\"Cayley graph\"", "hits": 0}
+{"q": "ti:\"Height representation, critical exponents\"", "hits": 1}
+{"q": "id:1803.03872", "hits": 1}
+{"q": "id:1611.02925", "hits": 1}
+{"q": "ti:\"Topological interpretation of color exchange invariants\"", "hits": 1}
+{"q": "ti:\"Tiling groups for Wang tiles\"", "hits": 0}
+{"q": "ti:\"forbidding a single pattern\"", "hits": 1}

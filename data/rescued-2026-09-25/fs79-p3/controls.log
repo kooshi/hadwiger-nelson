@@ -1,0 +1,41 @@
+L21cc6506-linear.json {'order': 4200, 'dim': 0, 'n_const': 60, 'const_is_rational_layer': False, 'n_edge_at_barycentre': 14}
+L21cc6506-linear-probe.json {'order': 5880, 'dim': 2, 'n_const': 12, 'const_is_rational_layer': True, 'n_edge_at_barycentre': 8}
+2 subtrees, 0 done, 2 to go
+2/2 subtrees; +11347 nodes, +0 leaves, +0 exact; 18.7 s
+DONE tree
+2 subtrees, 0 done, 2 to go
+2/2 subtrees; +159617 nodes, +63 leaves, +0 exact; 177.2 s
+DONE tree
+63 leaves, 57 translation classes, 0 done, 57 to go
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ~~~~^^^^^^^^^^^^^^^
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 515, in _cell_job
+    rec = cell_analysis(C, js, k, [Fr(t) for t in p0])
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 490, in cell_analysis
+    const = [i for i in range(30) if all(dot(C30[i], v) == 0 for v in V)]
+                                     ^^^
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 490, in <genexpr>
+    const = [i for i in range(30) if all(dot(C30[i], v) == 0 for v in V)]
+                                             ~~~^^^
+IndexError: list index out of range
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 709, in <module>
+    main()
+    ~~~~^^
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 705, in main
+    {'tree': cmd_tree, 'cells': cmd_cells, 'report': cmd_report}[a.cmd](a)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/home/kooshi/source/lean-dir/tools/fs79_p3_theta4.py", line 550, in cmd_cells
+    for n_, rec in enumerate(pool.imap_unordered(_cell_job, args), 1):
+                   ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/multiprocessing/pool.py", line 873, in next
+    raise value
+IndexError: list index out of range

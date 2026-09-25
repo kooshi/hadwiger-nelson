@@ -1,0 +1,9 @@
+== EMPTY plants, enumeration ON
+faithful: PASS EMPTY: 5404 leaves refuted; 32 relations verified; units 23 pairs, NOT the complete unit set of the key lattice (48 vectors)
+plant unit-off-circle: FAIL as expected ((2, 0, 90, 0) is not a unit vector of Q(sqrt 59)^2 with denominator 90)
+plant relation-perturbed: FAIL as expected (not a relation: [1, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0])
+plant multipliers-zeroed: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+plant multipliers-negated: FAIL as expected (negative multiplier on an inequality)
+plant child-dropped: FAIL as expected (branch has 4 children, the range 0..2 needs 5)
+plant range-shifted: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+PLANT range-shifted-high: the checker PASSED a faulty certificate: PASS EMPTY: 4954 leaves refuted; 32 relations verified; units 23 pairs, NOT the complete unit set of the key lattice (48 vectors)

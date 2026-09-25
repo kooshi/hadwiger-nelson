@@ -1,0 +1,7 @@
+au:"Fischer, Kurt" & ab:"chromatic"
+au:"Moorhouse, G. Eric"
+ab:"unit distance graph" & ab:"field" & py:2020-2026
+ab:"chromatic number" & ab:"Q(\sqrt" & ab:"plane"
+ab:"rational plane" & ab:"chromatic number"
+ab:"forced" & ab:"unit distance" & ab:"coloring" & py:2018-2026
+ab:"distance graph" & ab:"integer lattice" & ab:"3-chromatic"

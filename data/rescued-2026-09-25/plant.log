@@ -1,0 +1,11 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3
+data/m2/j04/_plant_tmp.lean:51:2: error: Tactic `decide` proved that the proposition
+  ((List.finRange 4).all fun a =>
+      (List.finRange 4).all fun b =>
+        (List.finRange 4).all fun c =>
+          (List.finRange 4).all fun d =>
+            (List.finRange 4).all fun e =>
+              (List.finRange 4).all fun f => (List.finRange 4).all fun g => wheelOK ![a, b, c, d, e, f, g]) =
+    true
+is false
+data/m2/j04/_plant_tmp.lean:59:8: warning: declaration uses `sorry`

@@ -1,0 +1,4 @@
+au:"Soifer, Alexander" & py:2019
+ti:"chromatic problems"
+ab:"triangle-free" & ab:"chromatic number of the plane"
+ab:"triangle-free" & ab:"unit-distance graph"

@@ -1,0 +1,48 @@
+{
+ "pair": "harder_eight_thirds",
+ "brk": "nb",
+ "cnf_sha256": "f173d288a7ddc93a8c6e2bd2db264d5d25e3028b5d0da5a4b72f07052deaaff6",
+ "proof": "build/fs73v/proof-harder_eight_thirds-nb.drat",
+ "proof_bytes": 42773619,
+ "proof_sha256": "d3f2750f4cd2950589bab4e392c8ccb35b015ccff7ec528398120a658abad1e4",
+ "planted_Fprime_model_exhibited": {
+  "relabelling": [
+   0,
+   1,
+   2,
+   3
+  ]
+ },
+ "faithful": {
+  "exit": 0,
+  "s_lines": [
+   "s VERIFIED"
+  ],
+  "tail": [
+   "c 23307 of 1745446 clauses in core                            ",
+   "c 148899 of 907731 lemmas in core using 8477402 resolution steps",
+   "c 0 RAT lemmas in core; 170774 redundant literals in core lemmas",
+   "c verification time: 12.797 seconds"
+  ],
+  "cpu_s": 12.78,
+  "wall_s": 12.83,
+  "maxrss_kb_children": 421432
+ },
+ "planted": {
+  "exit": 1,
+  "s_lines": [
+   "s NOT VERIFIED"
+  ],
+  "tail": [
+   "c WARNING: RAT check on proof pivot failed : [3490967] -58923 0",
+   "c RAT check failed on all possible pivots",
+   "c failed at proof line 167 (modulo deletion errors)",
+   "c verification time: 13.004 seconds"
+  ],
+  "cpu_s": 12.98,
+  "wall_s": 13.04,
+  "maxrss_kb_children": 421432
+ },
+ "faithful_ok": true,
+ "planted_refused": true
+}

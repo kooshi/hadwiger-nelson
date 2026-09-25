@@ -1,0 +1,99 @@
+twounits:14: rank 8, |S| = 212 generators (generator graph), M = 16380
+  N2: 256 classes, 24 generator classes, admissible True, 13,824 clauses (~0.0 GB)
+  N4: 65,536 classes, 72 generator classes, admissible True, 9,830,400 clauses (~0.65 GB)
+  N6: 1,679,616 classes, 64 generator classes, admissible True, 225,068,544 clauses (~14.85 GB)
+  11a: 121 classes, 12 generator classes, admissible True, 3,630 clauses (~0.0 GB)
+  2x11a: 30,976 classes, 152 generator classes, admissible True, 9,602,560 clauses (~0.63 GB)
+  2x11b: 30,976 classes, 152 generator classes, admissible True, 9,602,560 clauses (~0.63 GB)
+  2x11c: 30,976 classes, 152 generator classes, admissible True, 9,602,560 clauses (~0.63 GB)
+  2x11d: 30,976 classes, 152 generator classes, admissible True, 9,602,560 clauses (~0.63 GB)
+  11a11b: 14,641 classes, 104 generator classes, admissible True, 3,133,174 clauses (~0.21 GB)
+  11a11c: 14,641 classes, 96 generator classes, admissible True, 2,898,918 clauses (~0.19 GB)
+  11a11d: 14,641 classes, 112 generator classes, admissible True, 3,367,430 clauses (~0.22 GB)
+  N2 gap-aimed: UNSAT (0.0 s CPU)
+  N2: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  N4 gap-aimed: UNSAT (1.45 s CPU)
+  N4: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 4, 4, 4, 4, 4, 4]}; cold re-run reproduces: True
+  11a gap-aimed: UNSAT (0.01 s CPU)
+  11a: plain ask UNSAT
+  2x11a gap-aimed: UNSAT (1.32 s CPU)
+  2x11a: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11b gap-aimed: UNSAT (1.41 s CPU)
+  2x11b: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11c gap-aimed: UNSAT (1.4 s CPU)
+  2x11c: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11d gap-aimed: UNSAT (1.37 s CPU)
+  2x11d: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  11a11b gap-aimed: UNSAT (7.92 s CPU)
+  11a11b: plain ask UNSAT
+  11a11c gap-aimed: UNSAT (7.19 s CPU)
+  11a11c: plain ask UNSAT
+  11a11d gap-aimed: UNSAT (7.51 s CPU)
+  11a11d: plain ask UNSAT
+  SANDWICH (generator graph): F_known rank 0; P_found rank 8, Lambda/P_found = {'free': 0, 'torsion': [10, 10, 20, 20, 5460, 5460, 5460, 5460]}; P_found/F_known = {'free': 8, 'torsion': []}; targets in P_found {'2': False, '2/3': False, '4/3': True, '8/3': True, '4': True, '4/7': True, '4/sqrt3': True, 'isqrt3': False}
+twounits:30: rank 8, |S| = 660 generators (generator graph), M = 52933853700
+  N2: 256 classes, 24 generator classes, admissible True, 13,824 clauses (~0.0 GB)
+  N4: 65,536 classes, 128 generator classes, admissible True, 17,170,432 clauses (~1.13 GB)
+  N6: 1,679,616 classes, 56 generator classes, admissible True, 198,194,688 clauses (~13.08 GB)
+  11a: 121 classes, 12 generator classes, admissible True, 3,630 clauses (~0.0 GB)
+  2x11a: 30,976 classes, 224 generator classes, admissible True, 14,063,104 clauses (~0.93 GB)
+  2x11b: 30,976 classes, 224 generator classes, admissible True, 14,063,104 clauses (~0.93 GB)
+  2x11c: 30,976 classes, 224 generator classes, admissible True, 14,063,104 clauses (~0.93 GB)
+  2x11d: 30,976 classes, 224 generator classes, admissible True, 14,063,104 clauses (~0.93 GB)
+  11a11b: 14,641 classes, 128 generator classes, admissible True, 3,835,942 clauses (~0.25 GB)
+  11a11c: 14,641 classes, 136 generator classes, admissible True, 4,070,198 clauses (~0.27 GB)
+  11a11d: 14,641 classes, 144 generator classes, admissible True, 4,304,454 clauses (~0.28 GB)
+  N2 gap-aimed: UNSAT (0.0 s CPU)
+  N2: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  N4 gap-aimed: UNSAT (3.27 s CPU)
+  N4: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 4, 4, 4, 4]}; cold re-run reproduces: True
+  11a gap-aimed: UNSAT (0.01 s CPU)
+  11a: plain ask UNSAT
+  2x11a gap-aimed: UNSAT (1.92 s CPU)
+  2x11a: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11b gap-aimed: UNSAT (1.86 s CPU)
+  2x11b: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11c gap-aimed: UNSAT (2.02 s CPU)
+  2x11c: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11d gap-aimed: UNSAT (1.98 s CPU)
+  2x11d: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  11a11b gap-aimed: UNSAT (9.91 s CPU)
+  11a11b: plain ask UNSAT
+  11a11c gap-aimed: UNSAT (9.55 s CPU)
+  11a11c: plain ask UNSAT
+  11a11d gap-aimed: UNSAT (7.07 s CPU)
+  11a11d: plain ask UNSAT
+  SANDWICH (generator graph): F_known rank 0; P_found rank 8, Lambda/P_found = {'free': 0, 'torsion': [9690, 9690, 222870, 222870, 193896900, 193896900, 193896900, 193896900]}; P_found/F_known = {'free': 8, 'torsion': []}; targets in P_found {'2': False, '2/3': False, '4/3': True, '8/3': True, '4': True, '4/7': True, '4/sqrt3': True, 'isqrt3': False}
+twounits:42: rank 8, |S| = 1220 generators (generator graph), M = 2489320337949900
+  N2: 256 classes, 24 generator classes, admissible True, 13,824 clauses (~0.0 GB)
+  N4: 65,536 classes, 152 generator classes, admissible True, 20,316,160 clauses (~1.34 GB)
+  N6: 1,679,616 classes, 72 generator classes, admissible True, 251,942,400 clauses (~16.63 GB)
+  11a: 121 classes, 12 generator classes, admissible True, 3,630 clauses (~0.0 GB)
+  2x11a: 30,976 classes, 240 generator classes, admissible True, 15,054,336 clauses (~0.99 GB)
+  2x11b: 30,976 classes, 240 generator classes, admissible True, 15,054,336 clauses (~0.99 GB)
+  2x11c: 30,976 classes, 240 generator classes, admissible True, 15,054,336 clauses (~0.99 GB)
+  2x11d: 30,976 classes, 240 generator classes, admissible True, 15,054,336 clauses (~0.99 GB)
+  11a11b: 14,641 classes, 144 generator classes, admissible True, 4,304,454 clauses (~0.28 GB)
+  11a11c: 14,641 classes, 144 generator classes, admissible True, 4,304,454 clauses (~0.28 GB)
+  11a11d: 14,641 classes, 144 generator classes, admissible True, 4,304,454 clauses (~0.28 GB)
+  N2 gap-aimed: UNSAT (0.0 s CPU)
+  N2: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  N4 gap-aimed: UNSAT (2.24 s CPU)
+  N4: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 4, 4, 4, 4]}; cold re-run reproduces: True
+  11a gap-aimed: UNSAT (0.01 s CPU)
+  11a: plain ask UNSAT
+  2x11a gap-aimed: UNSAT (1.75 s CPU)
+  2x11a: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11b gap-aimed: UNSAT (1.78 s CPU)
+  2x11b: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11c gap-aimed: UNSAT (1.77 s CPU)
+  2x11c: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  2x11d gap-aimed: UNSAT (1.79 s CPU)
+  2x11d: P_W exact; Lambda/P_W = {'free': 0, 'torsion': [2, 2, 2, 2, 2, 2, 2, 2]}; cold re-run reproduces: True
+  11a11b gap-aimed: UNSAT (7.55 s CPU)
+  11a11b: plain ask UNSAT
+  11a11c gap-aimed: UNSAT (7.95 s CPU)
+  11a11c: plain ask UNSAT
+  11a11d gap-aimed: UNSAT (7.68 s CPU)
+  11a11d: plain ask UNSAT
+  SANDWICH (generator graph): F_known rank 0; P_found rank 8, Lambda/P_found = {'free': 0, 'torsion': [310, 310, 7130, 7130, 122331335100, 122331335100, 122331335100, 122331335100]}; P_found/F_known = {'free': 8, 'torsion': []}; targets in P_found {'2': False, '2/3': False, '4/3': True, '8/3': True, '4': True, '4/7': True, '4/sqrt3': True, 'isqrt3': False}

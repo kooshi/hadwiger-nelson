@@ -1,0 +1,5 @@
+au:"Roberson, David E." & ab:"vector coloring"
+ab:"uniquely vector colorable"
+ab:"vector coloring" & ab:"categorical product"
+ab:"least eigenvalue framework"
+ab:"strict vector coloring" & ab:"Cayley"

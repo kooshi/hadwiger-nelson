@@ -1,0 +1,322 @@
+[00] periodic colourings, unit distance: 3 hit(s)   ab:"unit distance" & ab:"periodic" & ab:"color*"
+   1991  Klee, Victor; Wagon, Stan  |  Old and new unsolved problems in plane geometry and number theory  |  The Dolciani Mathematical Expositions. 11. Washington, DC: M  [review]  https://zbmath.org/51916
+   1997  Coulson, D.  |  An 18-colouring of 3-space omitting distance one  |  Discrete Math. 170, No. 1-3, 241-247 (1997).  [review]  https://zbmath.org/1047061
+   2020    |  LPAR-23. 23rd international conference on logic for programming, artificial intelligence and reasoning, Alican  |  EPiC Series in Computing 73. Manchester: EasyChair. 516~p.,   [editorial]  https://zbmath.org/7906206
+[01] periodic colourings, chromatic number of the plane: 1 hit(s)   ab:"chromatic number of the plane" & ab:"periodic"
+   2022  Dunajski, Maciej  |  Geometry. A very short introduction  |  Very Short Introductions 695. Oxford: Oxford University Pres  [review]  https://zbmath.org/7479477
+[02] periodic, 4-colourings: 2 hit(s)   ab:"periodic" & ab:"4-coloring*"
+   2025  Alkauskas, Giedrius  |  Coloring monohedral tilings: defects and grain boundaries  |  Math. Intell. 47, No. 4, 294-306 (2025)  [review]  https://zbmath.org/8209403
+   1998  Glenn G. Chappell  |  Coloring Distance Graphs on the Integers  |  Preprint, arXiv:math/9805084 [math.CO] (1998)  [summary]  https://zbmath.org/900034333
+[03] colourings of a lattice, all periodic: 3 hit(s)   ab:"colorings" & ab:"lattice" & ab:"periodic" & cc:05C15
+   2007  Antonelli, Fernando; Dias, Ana Paula S.; Golubitsky, Martin; Wang, Yun  |  Synchrony in lattice differential equations  |  Jeltsch, Rolf (ed.) et al., Some topics in industrial and ap  [review]  https://zbmath.org/5567959
+   2004  Borgs, Christian; Chayes, Jennifer T.; Dyer, Martin; Tetali, Prasad  |  On the sampling problem for \(H\)-colorings on the hypercube lattice  |  Nešetřil, J. (ed.) et al., Graphs, morphisms and statistical  [review]  https://zbmath.org/2151247
+   2025  Vallentin, Frank; Weißbach, Stephen; Zimmermann, Marc Christian  |  The chromatic number of 4-dimensional lattices  |  Indag. Math., New Ser. 36, No. 4, 988-1004 (2025).  [summary]  https://zbmath.org/8058280
+[04] frozen colourings: 15 hit(s)   ab:"frozen" & ab:"coloring*"
+   2001  Culberson, J.; Gent, I.  |  Frozen development in graph coloring  |  Theor. Comput. Sci. 265, No. 1-2, 227-264 (2001).  [summary]  https://zbmath.org/1715854
+   2019  Ayre, Peter; Greenhill, Catherine  |  Rigid colorings of hypergraphs and contiguity  |  SIAM J. Discrete Math. 33, No. 3, 1575-1606 (2019).  [summary]  https://zbmath.org/7101960
+   2015  Hayes, Thomas P.; Vera, Juan C.; Vigoda, Eric  |  Randomly coloring planar graphs with fewer colors than the maximum degree  |  Random Struct. Algorithms 47, No. 4, 731-759 (2015).  [summary]  https://zbmath.org/6527514
+   2009  Achlioptas, Dimitris; Ricci-Tersenghi, Federico  |  Random formulas have frozen variables  |  SIAM J. Comput. 39, No. 1, 260-280 (2009).  [summary]  https://zbmath.org/5682432
+   2020  Brewster, Richard C.; Lee, Jae-baek; Moore, Benjamin; Noel, Jonathan A  |  Graph homomorphism reconfiguration and frozen \(H\)-colorings  |  J. Graph Theory 94, No. 3, 398-420 (2020).  [summary]  https://zbmath.org/7500665
+   2008  Achlioptas, D.  |  Solution clustering in random satisfiability  |  Eur. Phys. J. B, Condens. Matter Complex Syst. 64, No. 3-4,   [summary]  https://zbmath.org/5726218
+   2008  Kratica, Jozef; Kovačević-Vujčić, Vera; Čangalović, Mirjana  |  Computing strong metric dimension of some special classes of graphs by genetic algorithms  |  Yugosl. J. Oper. Res. 18, No. 2, 143-151 (2008).  [review]  https://zbmath.org/5642639
+   2017  Sly, Allan; Zhang, Yumeng  |  The Glauber dynamics of colorings on trees is rapidly mixing throughout the nonreconstruction regime  |  Ann. Appl. Probab. 27, No. 5, 2646-2674 (2017).  [summary]  https://zbmath.org/6822202
+   2014  Allan Sly; Yumeng Zhang  |  Glauber Dynamics of colorings on trees  |  Preprint, arXiv:1412.3156 [math.PR] (2014)  [summary]  https://zbmath.org/900190747
+   2007  Tlusty, Tsvi  |  A model for the emergence of the genetic code as a transition in a noisy information channel  |  J. Theor. Biol. 249, No. 2, 331-342 (2007).  [summary]  https://zbmath.org/7286121
+   2013    |  Proceedings of the 24th annual ACM-SIAM symposium on discrete algorithms, SODA 2013, New Orleans, LA, USA, Jan  |  Philadelphia, PA: Society for Industrial and Applied Mathema  [editorial]  https://zbmath.org/6294974
+   2021    |  Proceedings of the 53rd annual ACM SIGACT symposium on theory of computing, STOC '21, virtual, Italy, June 21-  |  New York, NY: Association for Computing Machinery (ACM) (ISB  [editorial]  https://zbmath.org/7375482
+   2022  Silva, Eduardo  |  Subshifts and colorings on ascending HNN-extensions of finitely generated abelian groups  |  Ergodic Theory Dyn. Syst. 42, No. 12, 3792-3817 (2022).  [summary]  https://zbmath.org/7624490
+   2012  Fijuljanin, Jasmina  |  Two genetic algorithms for the bandwidth multicoloring problem  |  Yugosl. J. Oper. Res. 22, No. 2, 225-246 (2012).  [review]  https://zbmath.org/6217231
+   2018    |  Discrete mathematics days 2018. Extended abstracts of the 11th ``Jornadas de matemática discreta y algorítmica  |  Electronic Notes in Discrete Mathematics 68. Amsterdam: Else  [editorial]  https://zbmath.org/6911221
+[05] frozen, Z^d, homomorphisms: 10 hit(s)   ab:"frozen" & ab:"Z^d"
+   2021  Alon, Noga; Briceño, Raimundo; Chandgotia, Nishant; Magazinov, Alexand  |  Mixing properties of colourings of the \(\mathbb{Z}^d\) lattice  |  Comb. Probab. Comput. 30, No. 3, 360-373 (2021).  [summary]  https://zbmath.org/7359187
+   2015  Damron, M.; Eckner, S. M.; Kogan, H.; Newman, C. M.; Sidoravicius, V.  |  Coarsening dynamics on \(\mathbb{Z}^d\) with frozen vertices  |  J. Stat. Phys. 160, No. 1, 60-72 (2015).  [summary]  https://zbmath.org/6471813
+   2021  Papageorgiou, Nikolaos S.; Rădulescu, Vicenţiu D.; Repovš, Dušan D.  |  Anisotropic \((p,q)\)-equations with gradient dependent reaction  |  Nonlinearity 34, No. 8, 5319-5343 (2021).  [review]  https://zbmath.org/7368122
+   2000  Albeverio, S.; Bogachev, L. V.; Molchanov, S. A.; Yarovaya, E. B.  |  Annealed moment Lyapunov exponents for a branching random walk in a homogeneous random branching environment  |  Markov Process. Relat. Fields 6, No. 4, 473-516 (2000).  [editorial]  https://zbmath.org/1588277
+   2000  Borgs, C.; Chayes, J. T.; King, C.; Madras, N.  |  Sharp phase boundaries for a lattice flux line model  |  J. Stat. Phys. 98, No. 5-6, 1075-1113 (2000).  [review]  https://zbmath.org/1486436
+   2001  Volkov, S.  |  Branching random walk in random environment: Fully quenched case  |  Markov Process. Relat. Fields 7, No. 2, 349-353 (2001).  [editorial]  https://zbmath.org/1679864
+   2024  Asselah, Amine; Forien, Nicolas; Gaudillière, Alexandre  |  The critical density for activated random walks is always less than 1  |  Ann. Probab. 52, No. 5, 1607-1649 (2024).  [summary]  https://zbmath.org/7926183
+   2025  Marêché, Laure  |  Fixation for \(\mathcal{U}\)-Ising and \(\mathcal{U}\)-voter dynamics with frozen vertices  |  ALEA, Lat. Am. J. Probab. Math. Stat. 22, No. 1, 149-167 (20  [summary]  https://zbmath.org/8005212
+   2005  Li, Shengping  |  Robust adaptive tracking control of uncertain discrete time systems  |  Int. J. Adapt. Control Signal Process. 19, No. 9, 723-739 (2  [review]  https://zbmath.org/2229376
+   2021    |  Proceedings of the 53rd annual ACM SIGACT symposium on theory of computing, STOC '21, virtual, Italy, June 21-  |  New York, NY: Association for Computing Machinery (ACM) (ISB  [editorial]  https://zbmath.org/7375482
+[06] proper colourings of Z^d: 7 hit(s)   ab:"proper colorings" & ab:"Z^d"
+   2005  Goldberg, Leslie Ann; Martin, Russell; Paterson, Mike  |  Strong spatial mixing with fewer colors for lattice graphs  |  SIAM J. Comput. 35, No. 2, 486-517 (2005).  [review]  https://zbmath.org/5029536
+   2020  Spinka, Yinon  |  Finitary coding for the sub-critical Ising model with finite expected coding volume  |  Electron. J. Probab. 25, Paper No. 8, 27 p. (2020).  [summary]  https://zbmath.org/7206401
+   2020  Spinka, Yinon  |  Finitary codings for spatial mixing Markov random fields  |  Ann. Probab. 48, No. 3, 1557-1591 (2020).  [review]  https://zbmath.org/7226370
+   2015  Abért, Miklós; Hubai, Tamás  |  Benjamini-Schramm convergence and the distribution of chromatic roots for sparse graphs  |  Combinatorica 35, No. 2, 127-151 (2015).  [review]  https://zbmath.org/6626069
+   2026  Timár, Ádám  |  Finitely dependent random colorings of bounded degree graphs  |  Ann. Inst. Henri Poincaré, Probab. Stat. 62, No. 1, 747-750   [summary]  https://zbmath.org/8172793
+   2010  Pfeifle, Julian  |  Gale duality bounds for roots of polynomials with nonnegative coefficients  |  J. Comb. Theory, Ser. A 117, No. 3, 248-271 (2010).  [review]  https://zbmath.org/5696956
+   2020  Ron Peled; Yinon Spinka  |  Three lectures on random proper colorings of $\mathbb{Z}^d$  |  Preprint, arXiv:2001.11566 [math.PR] (2020)  [summary]  https://zbmath.org/900503809
+[07] colourings of Z^d, periodic: 4 hit(s)   ab:"colorings" & ab:"Z^d" & ab:"periodic"
+   1998  Zhu, Xuding  |  Pattern periodic coloring of distance graphs  |  J. Comb. Theory, Ser. B 73, No. 2, 195-206 (1998).  [review]  https://zbmath.org/1186398
+   2002  Liu, Daphne D.-F.; Zhu, Xuding  |  Asymptotic clique covering ratios of distance graphs  |  Eur. J. Comb. 23, No. 3, 315-327 (2002).  [review]  https://zbmath.org/1795950
+   2004  Borgs, Christian; Chayes, Jennifer T.; Dyer, Martin; Tetali, Prasad  |  On the sampling problem for \(H\)-colorings on the hypercube lattice  |  Nešetřil, J. (ed.) et al., Graphs, morphisms and statistical  [review]  https://zbmath.org/2151247
+   2026  Hu Tan; Ying Zhang  |  Periodic Tilings of Cardinality Twice a Prime or Nine in Arbitrary Dimension  |  Preprint, arXiv:2609.26576 [math.CO] (2026)  [summary]  https://zbmath.org/903178759
+[08] hom-shift, periodic points: 2 hit(s)   ab:"hom-shift*"
+   2018  Chandgotia, Nishant; Marcus, Brian  |  Mixing properties for hom-shifts and the distance between walks on associated graphs  |  Pac. J. Math. 294, No. 1, 41-69 (2018).  [summary]  https://zbmath.org/6823308
+   2026  Gangloff, Silvère; de Menibus, Benjamin Hellouin; Oprocha, Piotr  |  Short-range and long-range order: a transition in block-gluing behavior in Hom shifts  |  J. Anal. Math. 158, No. 1, 21-64 (2026)  [summary]  https://zbmath.org/8212760
+[09] Hubai: 10 hit(s)   au:"Hubai, Tamas"
+   2015  Abért, Miklós; Hubai, Tamás  |  Benjamini-Schramm convergence and the distribution of chromatic roots for sparse graphs  |  Combinatorica 35, No. 2, 127-151 (2015).  [review]  https://zbmath.org/6626069
+   2023  Csóka, Endre; Hubai, Tamás; Lovász, László  |  Locally common graphs  |  J. Graph Theory 102, No. 3, 472-483 (2023).  [summary]  https://zbmath.org/7746579
+   2016  Hubai, Tamás; Kunszenti-Kovács, Dávid; Lovász, László  |  Positive graphs  |  de Mier, Anna (ed.) et al., Discrete mathematical days. Exte  [summary]  https://zbmath.org/6683982
+   2016  Antolín Camarena, Omar; Csóka, Endre; Hubai, Tamás; Lippner, Gábor; Lo  |  Positive graphs  |  Eur. J. Comb. 52, Part B, 290-301 (2016).  [summary]  https://zbmath.org/6520165
+   2015  Abért, Miklós; Csikvári, Péter; Hubai, Tamás  |  Matching measure, Benjamini-Schramm convergence and the monomer-dimer free energy  |  J. Stat. Phys. 161, No. 1, 16-34 (2015).  [summary]  https://zbmath.org/6504956
+   2017  Csikvári, Péter; E. Frenkel, Péter; Hladký, Jan; Hubai, Tamás  |  Chromatic roots and limits of dense graphs  |  Discrete Math. 340, No. 5, 1129-1135 (2017).  [summary]  https://zbmath.org/6689501
+   2023  Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör  |  Almost-monochromatic sets and the chromatic number of the plane  |  Discrete Comput. Geom. 70, No. 3, 753-772 (2023).  [summary]  https://zbmath.org/7748808
+   2020  Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör  |  Almost-monochromatic sets and the chromatic number of the plane  |  Cabello, Sergio (ed.) et al., 36th international symposium o  [summary]  https://zbmath.org/7760176
+   2019  Hubai, T.; Kráľ, D.; Parczyk, O.; Person, Y.  |  More non-bipartite forcing pairs  |  Acta Math. Univ. Comen., New Ser. 88, No. 3, 819-825 (2019).  [summary]  https://zbmath.org/7928536
+   2016  Roman Glebov; Andrzej Grzesik; Ping Hu; Tamas Hubai; Daniel Kral; Jan   |  Densities of 3-vertex graphs  |  Preprint, arXiv:1610.02446 [math.CO] (2016)  [summary]  https://zbmath.org/900294958
+[10] Hubai (accent): 10 hit(s)   au:"Hubai, Tamás"
+   2015  Abért, Miklós; Hubai, Tamás  |  Benjamini-Schramm convergence and the distribution of chromatic roots for sparse graphs  |  Combinatorica 35, No. 2, 127-151 (2015).  [review]  https://zbmath.org/6626069
+   2023  Csóka, Endre; Hubai, Tamás; Lovász, László  |  Locally common graphs  |  J. Graph Theory 102, No. 3, 472-483 (2023).  [summary]  https://zbmath.org/7746579
+   2016  Hubai, Tamás; Kunszenti-Kovács, Dávid; Lovász, László  |  Positive graphs  |  de Mier, Anna (ed.) et al., Discrete mathematical days. Exte  [summary]  https://zbmath.org/6683982
+   2016  Antolín Camarena, Omar; Csóka, Endre; Hubai, Tamás; Lippner, Gábor; Lo  |  Positive graphs  |  Eur. J. Comb. 52, Part B, 290-301 (2016).  [summary]  https://zbmath.org/6520165
+   2015  Abért, Miklós; Csikvári, Péter; Hubai, Tamás  |  Matching measure, Benjamini-Schramm convergence and the monomer-dimer free energy  |  J. Stat. Phys. 161, No. 1, 16-34 (2015).  [summary]  https://zbmath.org/6504956
+   2017  Csikvári, Péter; E. Frenkel, Péter; Hladký, Jan; Hubai, Tamás  |  Chromatic roots and limits of dense graphs  |  Discrete Math. 340, No. 5, 1129-1135 (2017).  [summary]  https://zbmath.org/6689501
+   2023  Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör  |  Almost-monochromatic sets and the chromatic number of the plane  |  Discrete Comput. Geom. 70, No. 3, 753-772 (2023).  [summary]  https://zbmath.org/7748808
+   2020  Frankl, Nóra; Hubai, Tamás; Pálvölgyi, Dömötör  |  Almost-monochromatic sets and the chromatic number of the plane  |  Cabello, Sergio (ed.) et al., 36th international symposium o  [summary]  https://zbmath.org/7760176
+   2019  Hubai, T.; Kráľ, D.; Parczyk, O.; Person, Y.  |  More non-bipartite forcing pairs  |  Acta Math. Univ. Comen., New Ser. 88, No. 3, 819-825 (2019).  [summary]  https://zbmath.org/7928536
+   2016  Roman Glebov; Andrzej Grzesik; Ping Hu; Tamas Hubai; Daniel Kral; Jan   |  Densities of 3-vertex graphs  |  Preprint, arXiv:1610.02446 [math.CO] (2016)  [summary]  https://zbmath.org/900294958
+[11] Parts: 12 hit(s)   au:"Parts, Jaan"
+   2022  Parts, Jaan  |  A 6-chromatic odd-distance graph in the plane  |  Geombinatorics 31, No. 3, 124-137 (2022).  [summary]  https://zbmath.org/7583740
+   2023  Parts, Jaan  |  More certainty in coloring the plane with a forbidden distance interval  |  Geombinatorics 32, No. 4, 159-185 (2023).  [summary]  https://zbmath.org/8009504
+   2020  Parts, Jaan  |  Graph minimization, focusing on the example of 5-chromatic unit-distance graphs in the plane  |  Geombinatorics 29, No. 4, 137-166 (2020).  [summary]  https://zbmath.org/7274128
+   2022  Parts, Jaan  |  On the plane and its coloring  |  Geombinatorics 31, No. 4, 189-195 (2022).  [summary]  https://zbmath.org/7539877
+   2020  Parts, Jaan  |  The chromatic number of the plane is at least 5 -- a human-veriviable proof  |  Geombinatorics 30, No. 2, 77-102 (2020).  [summary]  https://zbmath.org/7293433
+   2020  Parts, Jaan  |  A small 6-chromatic two-distance graph in the plane  |  Geombinatorics 29, No. 3, 111-115 (2020).  [review]  https://zbmath.org/7273893
+   2021  Parts, Jaan  |  On upper bounds for the multi-fold chromatic numbers of the plane  |  Geombinatorics 30, No. 4, 177-189 (2021).  [summary]  https://zbmath.org/7362695
+   2020  Parts, Jaan  |  What percent of the plane can be properly 5- and 6-colored?  |  Geombinatorics 30, No. 1, 25-39 (2020).  [summary]  https://zbmath.org/7274126
+   2026  Jaan Parts  |  The chromatic number of $\mathbb{R}^8$ is at least 25  |  Preprint, arXiv:2603.14581 [math.CO] (2026)  [summary]  https://zbmath.org/902984014
+   2022  de Grey, Aubrey D. N. J.; Parts, Jaan  |  Tiling the plane with hexagons: improved separations for \(k\)-colourings  |  Geombinatorics 32, No. 2, 57-71 (2022).  [review]  https://zbmath.org/7618196
+   2022  de Grey, Aubrey D. N. J.; Parts, Jaan  |  On lower bounds of the order of \(k\)-chromatic unit distance graphs  |  Geombinatorics 32, No. 2, 72-74 (2022).  [summary]  https://zbmath.org/7618197
+   2022  Conway, John H.; de Grey, Aubrey D. N. J.; Parts, Jaan; Soifer, Alexan  |  Is there a better visualization of Coulson's ``15-colouring of 3-space omitting [monochromatic] distance one''  |  Geombinatorics 31, No. 4, 156 (2022).  [none]  https://zbmath.org/7539872
+[12] Mixon, all: 100 hit(s)   au:"Mixon, Dustin G."
+   2012  Alexeev, Boris; Cahill, Jameson; Mixon, Dustin G.  |  Full spark frames  |  J. Fourier Anal. Appl. 18, No. 6, 1167-1194 (2012).  [summary]  https://zbmath.org/6132228
+   2012  Fickus, Matthew; Mixon, Dustin G.  |  Numerically erasure-robust frames  |  Linear Algebra Appl. 437, No. 6, 1394-1407 (2012).  [summary]  https://zbmath.org/6063140
+   2012  Fickus, Matthew; Mixon, Dustin G.; Tremain, Janet C.  |  Steiner equiangular tight frames  |  Linear Algebra Appl. 436, No. 5, 1014-1027 (2012).  [review]  https://zbmath.org/6012740
+   2015  Mixon, Dustin G.  |  Explicit matrices with the restricted isometry property: breaking the square-root bottleneck  |  Boche, Holger (ed.) et al., Compressed sensing and its appli  [summary]  https://zbmath.org/6527811
+   2017  Mixon, Dustin G.; Villar, Soledad; Ward, Rachel  |  Clustering subgaussian mixtures by semidefinite programming  |  Inf. Inference 6, No. 4, 389-415 (2017).  [summary]  https://zbmath.org/6840300
+   2015  Mixon, Dustin G.  |  Phase transitions in phase retrieval  |  Balan, Radu (ed.) et al., Excursions in harmonic analysis, V  [summary]  https://zbmath.org/6778307
+   2017  Cahill, Jameson; Mixon, Dustin G.; Strawn, Nate  |  Connectivity and irreducibility of algebraic varieties of finite unit norm tight frames  |  SIAM J. Appl. Algebra Geom. 1, No. 1, 38-72 (2017).  [review]  https://zbmath.org/6722611
+   2016  Fickus, Matthew; Mixon, Dustin G.; Jasper, John  |  Equiangular tight frames from hyperovals  |  IEEE Trans. Inf. Theory 62, No. 9, 5225-5236 (2016).  [editorial]  https://zbmath.org/6709415
+   2018  zbMATH Open Web Interface contents unavailable due to conflicting lice  |  zbMATH Open Web Interface contents unavailable due to conflicting licenses.  |  zbMATH Open Web Interface contents unavailable due to confli  [summary]  https://zbmath.org/6988454
+   2014  Bandeira, Afonso S.; Cahill, Jameson; Mixon, Dustin G.; Nelson, Aaron   |  Saving phase: injectivity and stability for phase retrieval  |  Appl. Comput. Harmon. Anal. 37, No. 1, 106-125 (2014).  [summary]  https://zbmath.org/6318209
+   2014  Fickus, Matthew; Mixon, Dustin G.; Nelson, Aaron A.; Wang, Yang  |  Phase retrieval from very few measurements  |  Linear Algebra Appl. 449, 475-499 (2014).  [summary]  https://zbmath.org/6290220
+   2012  Bajwa, Waheed U.; Calderbank, Robert; Mixon, Dustin G.  |  Two are better than one: fundamental parameters of frame coherence  |  Appl. Comput. Harmon. Anal. 33, No. 1, 58-78 (2012).  [review]  https://zbmath.org/6045875
+   2014  Jasper, John; Mixon, Dustin G.; Fickus, Matthew  |  Kirkman equiangular tight frames and codes  |  IEEE Trans. Inf. Theory 60, No. 1, 170-181 (2014).  [editorial]  https://zbmath.org/6727367
+   2012  Casazza, Peter G.; Fickus, Matthew; Mixon, Dustin G.  |  Auto-tuning unit norm frames  |  Appl. Comput. Harmon. Anal. 32, No. 1, 1-15 (2012).  [summary]  https://zbmath.org/5992471
+   2014  Alexeev, Boris; Bandeira, Afonso S.; Fickus, Matthew; Mixon, Dustin G.  |  Phase retrieval with polarization  |  SIAM J. Imaging Sci. 7, No. 1, 35-66 (2014).  [summary]  https://zbmath.org/6332822
+   2021  Haikin, Marina; Gavish, Matan; Mixon, Dustin G.; Zamir, Ram  |  Asymptotic frame theory for analog coding  |  Found. Trends Commun. Inf. Theory 18, No. 4, 1-127 (2021).  [summary]  https://zbmath.org/7470495
+   2016  Mixon, Dustin G.  |  Unit norm tight frames in finite-dimensional spaces  |  Okoudjou, Kasso A. (ed.), Finite frame theory. A complete in  [review]  https://zbmath.org/6665258
+   2018  Fickus, Matthew; Jasper, John; Mixon, Dustin G.  |  Packings in real projective spaces  |  SIAM J. Appl. Algebra Geom. 2, No. 3, 377-409 (2018).  [summary]  https://zbmath.org/6952340
+   2014  Bandeira, Afonso S.; Chen, Yutong; Mixon, Dustin G.  |  Phase retrieval from power spectra of masked signals  |  Inf. Inference 3, No. 2, 83-102 (2014).  [summary]  https://zbmath.org/6412761
+   2013  Bandeira, Afonso S.; Fickus, Matthew; Mixon, Dustin G.; Wong, Percy  |  The road to deterministic matrices with the restricted isometry property  |  J. Fourier Anal. Appl. 19, No. 6, 1123-1149 (2013).  [summary]  https://zbmath.org/6384949
+   2011  Chebira, Amina; Fickus, Matthew; Mixon, Dustin G.  |  Filter bank fusion frames  |  IEEE Trans. Signal Process. 59, No. 3, 953-963 (2011).  [editorial]  https://zbmath.org/6905694
+   2009  Fickus, Matthew; Mixon, Dustin G.  |  Isotropic moments over integer lattices  |  Appl. Comput. Harmon. Anal. 26, No. 1, 77-96 (2009).  [summary]  https://zbmath.org/5488042
+   2011  Dustin G. Mixon; Waheed U. Bajwa; Robert Calderbank  |  Frame Coherence and Sparse Signal Processing  |  Preprint, arXiv:1105.4279 [math.FA] (2011)  [summary]  https://zbmath.org/900203926
+   2024  Iverson, Joseph W.; Mixon, Dustin G.  |  Doubly transitive lines. II: Almost simple symmetries  |  Algebr. Comb. 7, No. 1, 37-76 (2024).  [review]  https://zbmath.org/7810293
+   2021  Cahill, Jameson; Mixon, Dustin G.  |  Robust width: a characterization of uniformly stable and robust compressed sensing  |  Hirn, Matthew (ed.) et al., Excursions in harmonic analysis,  [summary]  https://zbmath.org/7451978
+   2013  Bandeira, Afonso S.; Dobriban, Edgar; Mixon, Dustin G.; Sawin, William  |  Certifying the restricted isometry property is hard  |  IEEE Trans. Inf. Theory 59, No. 6, 3448-3450 (2013).  [editorial]  https://zbmath.org/6727693
+   2018  Fickus, Matthew; Jasper, John; Mixon, Dustin G.; Peterson, Jesse  |  Tremain equiangular tight frames  |  J. Comb. Theory, Ser. A 153, 54-66 (2018).  [summary]  https://zbmath.org/6773754
+   2025  Alexeev, Boris; Mixon, Dustin G.  |  The nerd snipers problem  |  J. Phys. A, Math. Theor. 58, No. 22, Article ID 22LT01, 16 p  [summary]  https://zbmath.org/8064604
+   2022  Iverson, Joseph W.; Mixon, Dustin G.  |  Doubly transitive lines. I: Higman pairs and roux  |  J. Comb. Theory, Ser. A 185, Article ID 105540, 47 p. (2022)  [summary]  https://zbmath.org/7415999
+   2013  Cahill, Jameson; Fickus, Matthew; Mixon, Dustin G.; Poteet, Miriam J.;  |  Constructing finite frames of a given spectrum and set of lengths  |  Appl. Comput. Harmon. Anal. 35, No. 1, 52-73 (2013).  [summary]  https://zbmath.org/6317511
+   2013  Mixon, Dustin G.; Quinn, Christopher J.; Kiyavash, Negar; Fickus, Matt  |  Fingerprinting with equiangular tight frames  |  IEEE Trans. Inf. Theory 59, No. 3, 1855-1865 (2013).  [editorial]  https://zbmath.org/6727856
+   2011  Casazza, Peter G.; Fickus, Matthew; Mixon, Dustin G.; Wang, Yang; Zhou  |  Constructing tight fusion frames  |  Appl. Comput. Harmon. Anal. 30, No. 2, 175-187 (2011).  [review]  https://zbmath.org/5862776
+   2020  Iverson, Joseph W.; Jasper, John; Mixon, Dustin G.  |  Optimal line packings from finite group actions  |  Forum Math. Sigma 8, Paper No. e6, 40 p. (2020).  [review]  https://zbmath.org/7154391
+   2006  Kharoufeh, Jeffrey P.; Finkelstein, Daniel E.; Mixon, Dustin G.  |  Availability of periodically inspected systems with Markovian wear and shocks  |  J. Appl. Probab. 43, No. 2, 303-317 (2006).  [review]  https://zbmath.org/5073535
+   2018  Alexeev, Boris; Mixon, Dustin G.  |  Partisan gerrymandering with geographically compact districts  |  J. Appl. Probab. 55, No. 4, 1046-1059 (2018).  [summary]  https://zbmath.org/7002993
+   2023  Mixon, Dustin G.; Packer, Daniel  |  Max filtering with reflection groups  |  Adv. Comput. Math. 49, No. 6, Paper No. 82, 21 p. (2023).  [summary]  https://zbmath.org/7785128
+   2017  Iguchi, Takayuki; Mixon, Dustin G.; Peterson, Jesse; Villar, Soledad  |  Probably certifiably correct \(k\)-means clustering  |  Math. Program. 165, No. 2 (A), 605-642 (2017).  [review]  https://zbmath.org/6798841
+   2013  Casazza, Peter G.; Fickus, Matthew; Mixon, Dustin G.; Peterson, Jesse;  |  Every Hilbert space frame has a Naimark complement  |  J. Math. Anal. Appl. 406, No. 1, 111-119 (2013).  [summary]  https://zbmath.org/6408084
+   2012  zbMATH Open Web Interface contents unavailable due to conflicting lice  |  zbMATH Open Web Interface contents unavailable due to conflicting licenses.  |  zbMATH Open Web Interface contents unavailable due to confli  [summary]  https://zbmath.org/6097969
+   2011  Casazza, Pete; Fickus, Matthew; Mixon, Dustin G.; Tremain, Janet C.  |  The Bourgain-Tzafriri conjecture and concrete constructions of non-pavable projections  |  Oper. Matrices 5, No. 2, 351-363 (2011).  [review]  https://zbmath.org/5914339
+   2018  Fickus, Matthew; Jasper, John; King, Emily J.; Mixon, Dustin G.  |  Equiangular tight frames that contain regular simplices  |  Linear Algebra Appl. 555, 98-138 (2018).  [review]  https://zbmath.org/6914719
+   2009  Kharoufeh, Jeffrey P.; Mixon, Dustin G.  |  On a Markov-modulated shock and wear process  |  Nav. Res. Logist. 56, No. 6, 563-576 (2009).  [summary]  https://zbmath.org/5679207
+   2026  Mixon, Dustin G.; Qaddura, Yousef  |  Injectivity, stability, and positive definiteness of max filtering  |  Constr. Approx. 63, No. 1, 67-104 (2026).  [summary]  https://zbmath.org/8156107
+   2026  zbMATH Open Web Interface contents unavailable due to conflicting lice  |  zbMATH Open Web Interface contents unavailable due to conflicting licenses.  |  zbMATH Open Web Interface contents unavailable due to confli  [summary]  https://zbmath.org/8175008
+   2026  Boris Alexeev; Dustin G. Mixon  |  Forbidden Sidon subsets of perfect difference sets, featuring a human-assisted proof  |  Preprint, arXiv:2510.19804 [math.CO] (2026)  [summary]  https://zbmath.org/902865413
+   2021  Mixon, Dustin G.; Parshall, Hans  |  Globally optimizing small codes in real projective spaces  |  SIAM J. Discrete Math. 35, No. 1, 234-249 (2021).  [summary]  https://zbmath.org/7323995
+   2017  Bandeira, Afonso S.; Mixon, Dustin G.; Moreira, Joel  |  A conditional construction of restricted isometries  |  Int. Math. Res. Not. 2017, No. 2, 372-381 (2017).  [summary]  https://zbmath.org/7004294
+   2024  Bandeira, Afonso S.; Mixon, Dustin G.; Steinerberger, Stefan  |  A lower bound for the Balan-Jiang matrix problem  |  Appl. Comput. Harmon. Anal. 73, Article ID 101696, 6 p. (202  [summary]  https://zbmath.org/7962256
+   2022  zbMATH Open Web Interface contents unavailable due to conflicting lice  |  zbMATH Open Web Interface contents unavailable due to conflicting licenses.  |  zbMATH Open Web Interface contents unavailable due to confli  [summary]  https://zbmath.org/7566896
+   2013  Fickus, Matthew; Mixon, Dustin G.; Poteet, Miriam J.; Strawn, Nate  |  Constructing all self-adjoint matrices with prescribed spectrum and diagonal  |  Adv. Comput. Math. 39, No. 3-4, 585-609 (2013).  [summary]  https://zbmath.org/6227295
+   2012  Dustin G. Mixon  |  Sparse Signal Processing with Frame Theory  |  Preprint, arXiv:1204.5958 [math.FA] (2012)  [summary]  https://zbmath.org/900139745
+   2024  Boris Alexeev; Dustin G. Mixon  |  Compact majority-minority districts almost never exist  |  Preprint, arXiv:2408.05832 [math.CO] (2024)  [summary]  https://zbmath.org/902539744
+   2026  Mixon, Dustin G.; Vose, Brantley  |  Recovering a group from few orbits  |  Appl. Comput. Harmon. Anal. 82, Article ID 101836, 11 p. (20  [review]  https://zbmath.org/8159768
+   2026  King, Emily J.; Mixon, Dustin G.; Waldron, Shayne  |  Testing isomorphism between tuples of subspaces  |  Linear Algebra Appl. 734, 50-72 (2026)  [summary]  https://zbmath.org/8152849
+   2021  Mixon, Dustin G.; Xie, Kaiying  |  Sketching semidefinite programs for faster clustering  |  IEEE Trans. Inf. Theory 67, No. 10, 6832-6840 (2021).  [editorial]  https://zbmath.org/7475492
+   2024  Cahill, Jameson; Iverson, Joseph W.; Mixon, Dustin G.  |  Towards a bilipschitz invariant theory  |  Appl. Comput. Harmon. Anal. 72, Article ID 101669, 27 p. (20  [summary]  https://zbmath.org/7876380
+   2016  Bandeira, Afonso S.; Fickus, Matthew; Mixon, Dustin G.; Moreira, Joel  |  Derandomizing restricted isometries via the Legendre symbol  |  Constr. Approx. 43, No. 3, 409-424 (2016).  [summary]  https://zbmath.org/6593032
+   2024  Bandeira, Afonso S.; Kunisky, Dmitriy; Mixon, Dustin G.; Zeng, Xinmeng  |  On the concentration of Gaussian Cayley matrices  |  Appl. Comput. Harmon. Anal. 73, Article ID 101694, 8 p. (202  [summary]  https://zbmath.org/7962254
+   2022  Greaves, Gary R. W.; Iverson, Joseph W.; Jasper, John; Mixon, Dustin G  |  Frames over finite fields: basic theory and equiangular lines in unitary geometry  |  Finite Fields Appl. 77, Article ID 101954, 41 p. (2022).  [summary]  https://zbmath.org/7432416
+   2020  Iverson, Joseph W.; Jasper, John; Mixon, Dustin G.  |  Optimal line packings from nonabelian groups  |  Discrete Comput. Geom. 63, No. 3, 731-763 (2020).  [summary]  https://zbmath.org/7187346
+   2018  zbMATH Open Web Interface contents unavailable due to conflicting lice  |  zbMATH Open Web Interface contents unavailable due to conflicting licenses.  |  zbMATH Open Web Interface contents unavailable due to confli  [summary]  https://zbmath.org/6921046
+   2020  McWhirter, Culver; Mixon, Dustin G.; Villar, Soledad  |  SqueezeFit: label-aware dimensionality reduction by semidefinite programming  |  IEEE Trans. Inf. Theory 66, No. 6, 3878-3892 (2020).  [editorial]  https://zbmath.org/7253312
+   2018  Fickus, Matthew; Jasper, John; Mixon, Dustin G.; Peterson, Jesse D.; W  |  Equiangular tight frames with centroidal symmetry  |  Appl. Comput. Harmon. Anal. 44, No. 2, 476-496 (2018).  [review]  https://zbmath.org/6825642
+   2013  Afonso S. Bandeira; Dustin G. Mixon  |  Near-optimal phase retrieval of sparse vectors  |  Preprint, arXiv:1308.0143 [cs.IT] (2013)  [summary]  https://zbmath.org/900217385
+   2018  Bandeira, Afonso S.; Lewis, Megan E.; Mixon, Dustin G.  |  Discrete uncertainty principles and sparse signal processing  |  J. Fourier Anal. Appl. 24, No. 4, 935-956 (2018).  [review]  https://zbmath.org/7031365
+   2026  John Jasper; Dustin G. Mixon  |  HRT counterexamples with exponential tails  |  Preprint, arXiv:2608.13539 [math.FA] (2026)  [summary]  https://zbmath.org/903134547
+   2021  Fickus, Matthew; Jasper, John; Mixon, Dustin G.; Peterson, Jesse D.  |  Hadamard equiangular tight frames  |  Appl. Comput. Harmon. Anal. 50, 281-302 (2021).  [review]  https://zbmath.org/7328399
+   2025  John Jasper; Dustin G. Mixon  |  Nearly tight weighted 2-designs in complex projective spaces of every dimension  |  Preprint, arXiv:2501.14938 [math.FA] (2025)  [summary]  https://zbmath.org/902652282
+   2019  Kueng, Richard; Mixon, Dustin G.; Villar, Soledad  |  Fair redistricting is hard  |  Theor. Comput. Sci. 791, 28-35 (2019).  [review]  https://zbmath.org/7102948
+   2015  Matthew Fickus; Dustin G. Mixon  |  Tables of the existence of equiangular tight frames  |  Preprint, arXiv:1504.00253 [math.FA] (2015)  [summary]  https://zbmath.org/900243995
+   2022  Clum, Charles; Mixon, Dustin G.  |  Derandomized compressed sensing with nonuniform guarantees for \(\ell_1\) recovery  |  J. Fourier Anal. Appl. 28, No. 2, Paper No. 35, 26 p. (2022)  [summary]  https://zbmath.org/7506348
+   2015  Fickus, Matthew; Jasper, John; Mixon, Dustin G.; Peterson, Jesse  |  Group-theoretic constructions of erasure-robust frames  |  Linear Algebra Appl. 479, 131-154 (2015).  [review]  https://zbmath.org/6444656
+   2013  Fickus, Matthew; Massar, Melody L.; Mixon, Dustin G.  |  Finite frames and filter banks  |  Casazza, Peter G. (ed.) et al., Finite frames. Theory and ap  [summary]  https://zbmath.org/6149148
+   2023  Cahill, Jameson; Mixon, Dustin G.; Parshall, Hans  |  Lie PCA: density estimation for symmetric manifolds  |  Appl. Comput. Harmon. Anal. 65, 279-295 (2023)  [summary]  https://zbmath.org/7681448
+   2023  Fickus, Matthew; Iverson, Joseph W.; Jasper, John; Mixon, Dustin G.  |  Harmonic Grassmannian codes  |  Appl. Comput. Harmon. Anal. 65, 1-39 (2023).  [summary]  https://zbmath.org/7681439
+   2013  Fickus, Matthew; Mixon, Dustin G.; Poteet, Miriam J.  |  Constructing finite frames with a given spectrum  |  Casazza, Peter G. (ed.) et al., Finite frames. Theory and ap  [summary]  https://zbmath.org/6149140
+   2026  Matthew Fickus; John Jasper; Dustin G. Mixon  |  The Singer-Zauner gap for equiangular tight frames  |  Preprint, arXiv:2605.28738 [math.FA] (2026)  [summary]  https://zbmath.org/903056414
+   2022  Mixon, Dustin G.; Parshall, Hans; Pi, Jianzong  |  Neural collapse with unconstrained features  |  Sampl. Theory Signal Process. Data Anal. 20, No. 2, Paper No  [summary]  https://zbmath.org/7571901
+   2027  Jasper, John; Mankovich, Nathan; Mixon, Dustin G.  |  Optimal codes in the Stiefel manifold  |  Adv. Math. Commun. 26, 78-89 (2027)  [summary]  https://zbmath.org/8243701
+   2022  Greaves, Gary R. W.; Iverson, Joseph W.; Jasper, John; Mixon, Dustin G  |  Frames over finite fields: equiangular lines in orthogonal geometry  |  Linear Algebra Appl. 639, 50-80 (2022).  [review]  https://zbmath.org/7472504
+   2026  Boris Alexeev; John Jasper; Dustin G. Mixon  |  Asymptotically optimal approximate Hadamard matrices  |  Preprint, arXiv:2511.14653 [math.CO] (2026)  [summary]  https://zbmath.org/902887954
+   2023  Mixon, Dustin G.; Needham, Tom; Shonkwiler, Clayton; Villar, Soledad  |  Three proofs of the Benedetto-Fickus theorem  |  Casey, Stephen D. (ed.) et al., Sampling, approximation, and  [summary]  https://zbmath.org/7916541
+   2025  Cahill, Jameson; Iverson, Joseph W.; Mixon, Dustin G.; Packer, Daniel  |  Group-invariant max filtering  |  Found. Comput. Math. 25, No. 3, 1047-1084 (2025).  [review]  https://zbmath.org/8048753
+   2026  Emily J. King; Dustin G. Mixon  |  Short spherical $t$-design curves  |  Preprint, arXiv:2607.15386 [math.CO] (2026)  [summary]  https://zbmath.org/903106707
+   2024  Fickus, Matthew; Iverson, Joseph W.; Jasper, John; Mixon, Dustin G.  |  Equi-isoclinic subspaces, covers of the complete graph, and complex conference matrices  |  Linear Algebra Appl. 702, 240-249 (2024).  [summary]  https://zbmath.org/7926170
+   2018  Peter Jung; Richard Kueng; Dustin G. Mixon  |  Derandomizing compressed sensing with combinatorial design  |  Preprint, arXiv:1812.08130 [cs.IT] (2018)  [summary]  https://zbmath.org/900367325
+   2010  Peter G. Casazza; Matt Fickus; Dustin Mixon; Janet C. Tremain  |  Concrete constructions of non-pavable projections  |  Preprint, arXiv:1005.2164 [math.FA] (2010)  [summary]  https://zbmath.org/900090885
+   2025  Joseph W. Iverson; Dustin G. Mixon  |  Asymmetric SICs over finite fields  |  Preprint, arXiv:2506.20778 [math.MG] (2025)  [summary]  https://zbmath.org/902769992
+   2018  Dustin G. Mixon; Soledad Villar  |  Utility Ghost: Gamified redistricting with partisan symmetry  |  Preprint, arXiv:1812.07377 [math.CO] (2018)  [summary]  https://zbmath.org/900367174
+   2014  McCann, Michael T.; Mixon, Dustin G.; Fickus, Matthew C.; Castro, Carl  |  Images as occlusions of textures: a framework for segmentation  |  IEEE Trans. Image Process. 23, No. 5, 2033-2046 (2014).  [editorial]  https://zbmath.org/6809288
+   2019  Fickus, Matthew; Jasper, John; Mixon, Dustin G.; Peterson, Jesse D.; W  |  Polyphase equiangular tight frames and abelian generalized quadrangles  |  Appl. Comput. Harmon. Anal. 47, No. 3, 628-661 (2019).  [summary]  https://zbmath.org/7121497
+   2021  Iverson, Joseph W.; King, Emily J.; Mixon, Dustin G.  |  A note on tight projective 2-designs  |  J. Comb. Des. 29, No. 12, 809-832 (2021).  [summary]  https://zbmath.org/7840152
+   2025  Boris Alexeev; Dustin G. Mixon; Will Sawin  |  The independence and clique cover numbers of the squarefree graph  |  Preprint, arXiv:2507.01928 [math.CO] (2025)  [summary]  https://zbmath.org/902775599
+   2024  Boris Alexeev; Dustin G. Mixon; Hans Parshall  |  The Erdős unit distance problem for small point sets  |  Preprint, arXiv:2412.11914 [math.CO] (2024)  [summary]  https://zbmath.org/902628050
+   2020  Clum, Charles; Mixon, Dustin G.; Scarnati, Theresa  |  Matching component analysis for transfer learning  |  SIAM J. Math. Data Sci. 2, No. 2, 309-334 (2020).  [summary]  https://zbmath.org/7468913
+   2021  Magsino, Mark; Mixon, Dustin G.; Parshall, Hans  |  Kesten-McKay law for random subensembles of Paley equiangular tight frames  |  Constr. Approx. 53, No. 2, 381-402 (2021).  [review]  https://zbmath.org/7333932
+   2019  Dustin G. Mixon; Hans Parshall  |  Exact Line Packings from Numerical Solutions  |  Preprint, arXiv:1902.00552 [math.MG] (2019)  [summary]  https://zbmath.org/900370659
+   2026  Matthew Fickus; Joseph W. Iverson; John Jasper; Dustin G. Mixon  |  Totally symmetric Grassmannian codes  |  Preprint, arXiv:2406.19542 [math.CO] (2026)  [summary]  https://zbmath.org/902511547
+   2020  Charles Clum; Dustin G. Mixon  |  Parameter estimation in the SIR model from early infections  |  Preprint, arXiv:2008.04286 [cs.IT] (2020)  [summary]  https://zbmath.org/900437170
+   2026  King, Emily J.; Mixon, Dustin G.; Parshall, Hans; Wells, Chris  |  Uniquely optimal codes of low complexity are symmetric  |  J. Exp. Math. 2, No. 1, 81-113 (2026)  [summary]  https://zbmath.org/8190794
+[13] Gibbs, Philip, chromatic: 0 hit(s)   au:"Gibbs, Philip*" & ab:"chromatic"
+[14] Polymath, Hadwiger-Nelson: 1 hit(s)   au:"Polymath" & ab:"chromatic"
+   2021  Polymath, D. H. J.  |  On the chromatic number of circular disks and infinite strips in the plane  |  Geombinatorics 30, No. 4, 190-201 (2021).  [summary]  https://zbmath.org/7362696
+[15] Moser spindle ring / ring colourings: 1 hit(s)   ab:"unit distance" & ab:"ring" & ab:"coloring*"
+   2026  Ákos Dúcz  |  A note on geometric colorings of the Moser lattice  |  Preprint, arXiv:2606.12325 [math.CO] (2026)  [summary]  https://zbmath.org/903071605
+[16] uniquely colorable circulant: 2 hit(s)   ab:"uniquely" & ab:"colorable" & ab:"circulant*"
+   2026  Milan Bašić  |  On uniquely colorable Cayley graphs  |  Preprint, arXiv:2609.03184 [math.CO] (2026)  [summary]  https://zbmath.org/903155365
+   1992    |  Proceedings of the Asian mathematical conference 1990, Hong Kong, August 14--18, 1990  |  Singapore: World Scientific. xvi, 580 p. (1992).  [review]  https://zbmath.org/1448800
+[17] uniquely colorable Cayley graph: 4 hit(s)   ab:"uniquely" & ab:"colorable" & ab:"Cayley"
+   2017  Klotz, Walter; Sander, Torsten  |  Uniquely colorable Cayley graphs  |  Ars Math. Contemp. 12, No. 1, 155-165 (2017).  [summary]  https://zbmath.org/6774871
+   2013  Pak, Igor; Vilenchik, Dan  |  Constructing uniquely realizable graphs  |  Discrete Comput. Geom. 50, No. 4, 1051-1071 (2013).  [summary]  https://zbmath.org/6249849
+   2017  Godsil, Chris; Roberson, David E.; Rooney, Brendan; Šámal, Robert; Var  |  Universal completability, least eigenvalue frameworks, and vector colorings  |  Discrete Comput. Geom. 58, No. 2, 265-292 (2017).  [summary]  https://zbmath.org/6788882
+   2026  Milan Bašić  |  On uniquely colorable Cayley graphs  |  Preprint, arXiv:2609.03184 [math.CO] (2026)  [summary]  https://zbmath.org/903155365
+[18] uniquely colorable triangle-free: 7 hit(s)   ab:"uniquely" & ab:"colorable" & ab:"triangle-free"
+   1999  Zhu, Xuding  |  Construction of uniquely \(H\)-colorable graphs  |  J. Graph Theory 30, No. 1, 1-6 (1999).  [review]  https://zbmath.org/1309148
+   1973  Nešetřil, Jaroslav  |  On uniquely colorable graphs without short cycles  |  Čas. Pěst. Mat. 98, 122-125 (1973).  [none]  https://zbmath.org/3405977
+   1993  Steinberg, Richard  |  The state of the three color problem  |  Gimbel, John (ed.) et al., Quo vadis, graph theory? A source  [review]  https://zbmath.org/434910
+   2002  Eslahchi, Ch.; Ghebleh, M.; Hajiabolhassan, H.  |  Some concepts in list coloring.  |  J. Comb. Math. Comb. Comput. 41, 151-160 (2002).  [review]  https://zbmath.org/1802818
+   1998  Chao, Chong-Yun; Chen, Zhibo  |  On uniquely \(3\)-colorable graphs. II  |  Discrete Math. 189, No. 1-3, 259-265 (1998).  [summary]  https://zbmath.org/1524953
+   2015  Belcastro, Sarah-Marie; Haas, Ruth  |  Triangle-free uniquely 3-edge colorable cubic graphs  |  Contrib. Discrete Math. 10, No. 2, 39-44 (2015).  [summary]  https://zbmath.org/6606171
+   1999    |  6th Twente workshop on graphs and combinatorial optimization. Univ. of Twente, Enschede, Netherlands, May 26--  |  Electronic Notes in Discrete Mathematics. 3. Amsterdam: Else  [review]  https://zbmath.org/1641352
+[19] uniquely colorable, girth / short cycles: 7 hit(s)   ab:"uniquely" & ab:"colorable" & (ab:"girth" | ab:"short cycles")
+   1996  Zhu, Xuding  |  Uniquely \(H\)-colorable graphs with large girth  |  J. Graph Theory 23, No. 1, 33-41 (1996).  [review]  https://zbmath.org/927067
+   1980  Entringer, R. C.; Swart, Henda  |  Spanning cycles of nearly cubic graphs  |  J. Comb. Theory, Ser. B 29, 303-309 (1980).  [none]  https://zbmath.org/3601610
+   2004  Nešetřil, Jaroslav; Zhu, Xuding  |  On sparse graphs with given colorings and homomorphisms.  |  J. Comb. Theory, Ser. B 90, No. 1, 161-172 (2004).  [summary]  https://zbmath.org/2057690
+   2001  Nešetřil, Jaroslav; Zhu, Xuding  |  Construction of sparse graphs with prescribed circular colorings  |  Discrete Math. 233, No. 1-3, 277-291 (2001).  [review]  https://zbmath.org/1612897
+   2019  Matsumoto, Naoki  |  Triangles in uniquely 3-colorable graphs on surfaces  |  Australas. J. Comb. 75, Part 1, 17-31 (2019).  [summary]  https://zbmath.org/7145382
+   2025  Lin, Yuquan; Lin, Wensong  |  Semistrong edge colorings of planar graphs  |  J. Comb. Optim. 50, No. 2, Paper No. 16, 30 p. (2025).  [summary]  https://zbmath.org/8109529
+   2017  Severino, Michael  |  A construction of uniquely \(n\)-colorable digraphs with arbitrarily large digirth  |  Electron. J. Comb. 24, No. 2, Paper No. P2.1, 19 p. (2017).  [summary]  https://zbmath.org/6719971
+[20] uniquely colourable (British): 15 hit(s)   ab:"uniquely colourable"
+   2004  Farrell, E. J.  |  On relationships between clique polynomials, adjoint polynomials and uniquely colourable graphs  |  Bull. Inst. Comb. Appl. 41, 77-88 (2004).  [summary]  https://zbmath.org/2114475
+   1984  Truszczyński, M.  |  Some results on uniquely colourable graphs  |  Finite and infinite sets, 6th Hung. Combin. Colloq., Eger/Hu  [review]  https://zbmath.org/3924805
+   1986  Neumann-Lara, V.; Santoro, N.; Urrutia, J.  |  Uniquely colourable m-dichromatic oriented graphs  |  Discrete Math. 62, 65-70 (1986).  [review]  https://zbmath.org/3991529
+   1987  Read, Ronald C.  |  On the chromatic properties of graphs up to 10 vertices  |  Combinatorics, graph theory and computing, Proc. 18th Southe  [review]  https://zbmath.org/4057533
+   2000  Niculitsa, Angela; Voss, Heinz-Juergen  |  A characterization of uniquely colorable mixed hypergraphs of order \(n\) with upper chromatic numbers \(n-1\)  |  Australas. J. Comb. 21, 167-177 (2000).  [review]  https://zbmath.org/1471072
+   2006  Bollobás, Béla; Thomason, Andrew  |  Set colourings of graphs. (Reprint)  |  Discrete Math. 306, No. 10-11, 948-952 (2006).  [review]  https://zbmath.org/5044122
+   2002  Dmitriev, I. G.; Ivanova, A. O.  |  Locally uniquely colourable graphs  |  Mat. Zamet. YAGU 9, No. 1, 11-23 (2002).  [review]  https://zbmath.org/2097236
+   2026  Andrea C. Burgess; David A. Pike; Shahriyar Pourakbar-Saffar  |  Uniquely 2-colourable 4-cycle decompositions  |  Preprint, arXiv:2605.14804 [math.CO] (2026)  [summary]  https://zbmath.org/903042480
+   2002  Bacsó, Gábor  |  Elementary bipartite graphs and unique colourability  |  Eur. J. Comb. 23, No. 3, 253-256 (2002).  [editorial]  https://zbmath.org/1795945
+   1996  Benadé, Gerhard; Broere, Izak; Jonck, Betsie; Frick, Marietjie  |  Uniquely \((m,k)^ \tau\)-colourable graphs and \(k-\tau\)-saturated graphs  |  Discrete Math. 162, No. 1-3, 13-22 (1996).  [summary]  https://zbmath.org/1019017
+   2010  Raj, L. Benedict Michael; Ayyaswamy, S. K.; Hamid, I. Sahul  |  Chromatic transversal domatic number of graphs  |  Int. Math. Forum 5, No. 13-16, 639-648 (2010).  [summary]  https://zbmath.org/5759459
+   1990  Baumann, Ulrike; Lesch, Manfred; Schmeichel, Irmgard  |  Automorphisms of finite graphs with admissible edge colourings  |  Contemporary methods in graph theory. In honour of Prof. Dr.  [review]  https://zbmath.org/4189760
+   1985  Lesch, Manfred  |  A note on resistent edge-colourings  |  Graphs, hypergraphs and applications, Proc. Conf. Graph Theo  [review]  https://zbmath.org/4012645
+   2005  Voll, Ulrich  |  A novel giant-subgraph phase-transition in sparse random \(k\)-partite graphs  |  Discrete Appl. Math. 153, No. 1-3, 153-181 (2005).  [summary]  https://zbmath.org/2244806
+   1991    |  Proceedings of the symposium on graph theory and combinatorics, held on 17-19 May, 1991 at Kochi, Kerala, Indi  |  Publication. Centre for Mathematical Sciences, Trivandrum 21  [review]  https://zbmath.org/270314
+[21] Nesetril, uniquely colorable: 10 hit(s)   au:"Nesetril, Jaroslav" & ab:"uniquely"
+   2008  Foniok, Jan; Nešetřil, Jaroslav; Tardif, Claude  |  Generalised dualities and maximal finite antichains in the homomorphism order of relational structures  |  Eur. J. Comb. 29, No. 4, 881-899 (2008).  [review]  https://zbmath.org/5274163
+   1973  Nešetřil, Jaroslav  |  On uniquely colorable graphs without short cycles  |  Čas. Pěst. Mat. 98, 122-125 (1973).  [none]  https://zbmath.org/3405977
+   2004  Nešetřil, Jaroslav; Zhu, Xuding  |  On sparse graphs with given colorings and homomorphisms.  |  J. Comb. Theory, Ser. B 90, No. 1, 161-172 (2004).  [summary]  https://zbmath.org/2057690
+   2001  Nešetřil, Jaroslav; Zhu, Xuding  |  Construction of sparse graphs with prescribed circular colorings  |  Discrete Math. 233, No. 1-3, 277-291 (2001).  [review]  https://zbmath.org/1612897
+   1972  Nešetřil, Jaroslav  |  On critical uniquely colorable graphs  |  Arch. Math. 23, 210-213 (1972).  [none]  https://zbmath.org/3375517
+   1985  Burosch, G.; Gronau, H.-D. O. F.; Nešetřil, Jaroslav  |  Minimal test sets for unique colourablity  |  Graphen in Forschung und Unterricht, Festschr. K. Wagner, 48  [review]  https://zbmath.org/3898934
+   1990  Burosch, Gustav; Gronau, Hans-Dietrich O. F.; Nešetřil, Jaroslav  |  Minimal uniquely colourable hypergraphs  |  Contemporary methods in graph theory. In honour of Prof. Dr.  [review]  https://zbmath.org/15864
+   1997    |  The mathematics of Paul Erdős. Vol. I  |  Algorithms and Combinatorics. 13. Berlin: Springer. xiv, 399  [review]  https://zbmath.org/972709
+   1984  Nešetřil, Jaroslav; Poljak, Svatopluk; Turzík, Daniel  |  Some remarks on Ramsey matroids  |  Suppl. Rend. Circ. Mat. Palermo, II. Ser. 3, 185-189 (1984).  [review]  https://zbmath.org/3863218
+   1999    |  Contemporary trends in discrete mathematics. From DIMACS and DIMATIA to the future. Proceedings of the DIMATIA  |  DIMACS. Series in Discrete Mathematics and Theoretical Compu  [review]  https://zbmath.org/1319353
+[22] uniquely k-colorable, cycles: 45 hit(s)   ti:"uniquely colorable" | ti:"uniquely colourable" | ti:"uniquely k-colorable"
+   1969  Harary, Frank; Hedetniemi, S. T.; Robinson, R. W.  |  Uniquely colorable graphs  |  J. Comb. Theory 6, 264-270 (1969).  [none]  https://zbmath.org/3280721
+   1978  Bollobás, Béla  |  Uniquely colorable graphs  |  J. Comb. Theory, Ser. B 25, 54-61 (1978).  [none]  https://zbmath.org/3604924
+   1983  Tucker, Alan  |  Uniquely colorable perfect graphs  |  Discrete Math. 44, 187-194 (1983).  [none]  https://zbmath.org/3801570
+   1976  Bollobas, Bela; Sauer, Norbert  |  Uniquely colourable graphs with large girth  |  Can. J. Math. 28, 1340-1344 (1976).  [none]  https://zbmath.org/3536119
+   1969  Chartrand, G.; Geller, D. P.  |  On uniquely colorable planar graphs  |  J. Comb. Theory 6, 271-278 (1969).  [none]  https://zbmath.org/3280722
+   2002  Tuza, Zsolt; Voloshin, Vitaly; Zhou, Huishan  |  Uniquely colorable mixed hypergraphs  |  Discrete Math. 248, No. 1-3, 221-236 (2002).  [review]  https://zbmath.org/1746261
+   2017  Klotz, Walter; Sander, Torsten  |  Uniquely colorable Cayley graphs  |  Ars Math. Contemp. 12, No. 1, 155-165 (2017).  [summary]  https://zbmath.org/6774871
+   1990  Burosch, Gustav; Gronau, Hans-Dietrich O. F.; Nešetřil, Jaroslav  |  Minimal uniquely colourable hypergraphs  |  Contemporary methods in graph theory. In honour of Prof. Dr.  [review]  https://zbmath.org/15864
+   2007  Bujtás, Csilla; Tuza, Zsolt  |  Orderings of uniquely colorable hypergraphs  |  Discrete Appl. Math. 155, No. 11, 1395-1407 (2007).  [review]  https://zbmath.org/5173155
+   1976  Geller, Dennis P.  |  r-tuple colorings of uniquely colorable graphs  |  Discrete Math. 16, 9-12 (1976).  [none]  https://zbmath.org/3528258
+   1984  Truszczyński, M.  |  Some results on uniquely colourable graphs  |  Finite and infinite sets, 6th Hung. Combin. Colloq., Eger/Hu  [review]  https://zbmath.org/3924805
+   1998  Emden-Weinert, Thomas; Hougardy, Stefan; Kreuter, Bernd  |  Uniquely colourable graphs and hardness of colouring graphs of large girth  |  Comb. Probab. Comput. 7, No. 4, 375-386 (1998).  [summary]  https://zbmath.org/1275750
+   1973  Nešetřil, Jaroslav  |  On uniquely colorable graphs without short cycles  |  Čas. Pěst. Mat. 98, 122-125 (1973).  [none]  https://zbmath.org/3405977
+   1972  Nešetřil, Jaroslav  |  On critical uniquely colorable graphs  |  Arch. Math. 23, 210-213 (1972).  [none]  https://zbmath.org/3375517
+   1975  Müller, Vladimir  |  On colorable critical and uniquely colorable critical graphs  |  Recent Adv. Graph Theory, Proc. Symp. Prague 1974, 385-386 (  [none]  https://zbmath.org/3515489
+   2004  Farrell, E. J.  |  On relationships between clique polynomials, adjoint polynomials and uniquely colourable graphs  |  Bull. Inst. Comb. Appl. 41, 77-88 (2004).  [summary]  https://zbmath.org/2114475
+   2000  Niculitsa, Angela; Voloshin, Vitaly  |  About uniquely colorable mixed hypertrees  |  Discuss. Math., Graph Theory 20, No. 1, 81-91 (2000).  [editorial]  https://zbmath.org/1547041
+   1990  Xu, Shaoji  |  The size of uniquely colorable graphs  |  J. Comb. Theory, Ser. B 50, No. 2, 319-320 (1990).  [review]  https://zbmath.org/4189756
+   2001  Niculitsa, Angela; Voloshin, Vitaly; Voss, Heinz-Jürgen  |  Circular and uniquely colorable mixed hypergraphs  |  Broersma, Hajo (ed.) et al., Proceedings of the 1st Cologne   [summary]  https://zbmath.org/6600235
+   1999  Niculitsa, Angela; Voloshin, Vitaly; Voss, Heinz-Juergen  |  Circular and uniquely colorable mixed hypergraphs  |  An. Ştiinţ. Fac. Mat. Inform., Univ. Stat Mold. 1, 125-130 (  [review]  https://zbmath.org/1625828
+   1986  Neumann-Lara, V.; Santoro, N.; Urrutia, J.  |  Uniquely colourable m-dichromatic oriented graphs  |  Discrete Math. 62, 65-70 (1986).  [review]  https://zbmath.org/3991529
+   1974  Nieminen, Juhani  |  A note on uniquely colorable graphs  |  Glas. Mat., III. Ser. 9(29), 193-195 (1974).  [none]  https://zbmath.org/3458657
+   2021  Dhanalakshmi, K.; Germina, K. A.; Jerline, J. Amalorpava; Raj, L. Bene  |  Results on uniquely colorable digraphs  |  Discrete Math. Algorithms Appl. 13, No. 6, Article ID 215007  [summary]  https://zbmath.org/7467920
+   1999  Niculitsa, Angela; Voloshin, Vitaly; Voss, Heinz-Jürgen  |  Circular and uniquely colorable mixed hypergraphs  |  Broersma, H. J. (ed.) et al., 6th Twente workshop on graphs   [editorial]  https://zbmath.org/1642770
+   1999  Niculitsa, Angela; Voss, Heinz-Juergen  |  About uniquely colorable mixed hypergraphs  |  Congr. Numerantium 136, 33-42 (1999).  [summary]  https://zbmath.org/1439490
+   1973  Wang, Chung C.; Artzy, Ehud  |  Note on the uniquely colorable graphs  |  J. Comb. Theory, Ser. B 15, 204-206 (1973).  [none]  https://zbmath.org/3392481
+   1987  Borowiecki, Mieczysław  |  Two extremal problems in the class of uniquely colourable graphs  |  Graphs, hypergraphs and matroids II, Proc. 6th Reg. Sci. Ses  [review]  https://zbmath.org/4047752
+   1971  Greenwell, D. L.  |  Semi-uniquely colorable graphs  |  Proc. 2nd Louisiana Conf. Combin., Graph Theory, Computing;   [none]  https://zbmath.org/3460303
+   1991  Patil, H. P.  |  A relationship between \(n\)-degenerate graphs, uniquely colourable graphs and \(k\)-trees  |  Mathai, A. M. (ed.), Proceedings of the symposium on graph t  [summary]  https://zbmath.org/437482
+   2002  Dmitriev, I. G.; Ivanova, A. O.  |  Locally uniquely colourable graphs  |  Mat. Zamet. YAGU 9, No. 1, 11-23 (2002).  [review]  https://zbmath.org/2097236
+   2000  Niculitsa, Angela; Voss, Heinz-Juergen  |  A characterization of uniquely colorable mixed hypergraphs of order \(n\) with upper chromatic numbers \(n-1\)  |  Australas. J. Comb. 21, 167-177 (2000).  [review]  https://zbmath.org/1471072
+   2023  Brešar, Boštjan; Dravec, Tanja; Kleszcz, Elżbieta  |  Uniquely colorable graphs up to automorphisms  |  Appl. Math. Comput. 450, Article ID 128007, 10 p. (2023).  [summary]  https://zbmath.org/7701082
+   2024  Xizhi Liu; Jie Ma; Tianhen Wang; Tianming Zhu  |  Uniquely colorable hypergraphs  |  Preprint, arXiv:2409.01654 [math.CO] (2024)  [summary]  https://zbmath.org/902553021
+   1996  Chia, G. L.  |  On graphs uniquely colorable under the action of their automorphism groups  |  Discrete Math. 162, No. 1-3, 281-284 (1996).  [summary]  https://zbmath.org/1019037
+   2003  Zhao, Haixing; Liu, Ruying  |  A note on adjoint polynomials and uniquely colorable graphs  |  J. Comb. Math. Comb. Comput. 45, 123-128 (2003).  [summary]  https://zbmath.org/2065942
+   2026  Milan Bašić  |  On uniquely colorable Cayley graphs  |  Preprint, arXiv:2609.03184 [math.CO] (2026)  [summary]  https://zbmath.org/903155365
+   1997  Bacsó, Gábor  |  On a conjecture about uniquely colorable perfect graphs  |  Discrete Math. 176, No. 1-3, 1-19 (1997).  [review]  https://zbmath.org/1109954
+   2019  Li, Zepeng  |  A survey on uniquely colorable graphs  |  J. Guangzhou Univ., Nat. Sci. 18, No. 4, 60-68 (2019).  [summary]  https://zbmath.org/7234800
+   2022  Matsumoto, Naoki  |  Uniquely colorable graphs with equal chromatic and game chromatic numbers  |  Discrete Math. Algorithms Appl. 14, No. 3, Article ID 215011  [summary]  https://zbmath.org/7539620
+   2014  Matsumoto, Naoki; Noguchi, Kenta  |  Uniquely colorable graphs on surfaces.  |  Ars Comb. 114, 177-183 (2014).  [review]  https://zbmath.org/6433827
+   2019  Gein, Pavel A.  |  On Garlands in \(\chi\)-uniquely colorable graphs  |  Sib. Èlektron. Mat. Izv. 16, 1703-1715 (2019).  [summary]  https://zbmath.org/7143077
+   2010  Liu, Hongping; Zhao, Ping; Xu, Juan  |  The construction of a special type of weak uniquely colorable B-hypergraphs and the minimum vertex number  |  J. Shandong Univ., Nat. Sci. 45, No. 2, 5-9 (2010).  [summary]  https://zbmath.org/5846941
+   2021  Mohr, Samuel  |  A construction of uniquely colourable graphs with equal colour class sizes  |  Discrete Appl. Math. 303, 122-126 (2021).  [summary]  https://zbmath.org/7395733
+   2000  Niculitsa, Angela  |  About some classes of mixed hypergraphs uniquely colorable with two colors  |  An. Ştiinţ. Fac. Mat. Inform., Univ. Stat Mold. 2, No. 1, 3-  [summary]  https://zbmath.org/1663575
+   1994  Growney, Wallace J.  |  A near characterization of uniquely colorable maps  |  Congr. Numerantium 100, 251-254 (1994).  [summary]  https://zbmath.org/841583
+[23] distance graph on integers, chromatic number, unique: 2 hit(s)   ab:"distance graph*" & ab:"integers" & ab:"unique*"
+   2005    |  2005 European conference on combinatorics, graph theory and applications (EuroComb '05). Extended abstracts fr  |  Discrete Mathematics and Theoretical Computer Science. Proce  [editorial]  https://zbmath.org/5028971
+   2011    |  Proceedings of the 14th international conference on Fibonacci numbers and their applications, Morelia, Mexico,  |  Aportaciones Matemáticas. Investigación 20. México: Sociedad  [editorial]  https://zbmath.org/6237651
+[24] distance graph, triangle-free, chromatic 4: 7 hit(s)   ab:"distance graph*" & ab:"triangle-free"
+   2016  Exoo, Geoffrey; Ismailescu, Dan  |  Small order triangle-free 4-chromatic unit distance graphs  |  Geombinatorics 26, No. 2, 49-64 (2016).  [review]  https://zbmath.org/6667214
+   2026  Haroldo Costa Silva Filho  |  Exact certification of the coordinate fields of the triangle-free Exoo-Ismailescu unit-distance graphs EI17 an  |  Preprint, arXiv:2607.19995 [math.CO] (2026)  [summary]  https://zbmath.org/903111316
+   1999  Lih, Ko-Wei; Liu, Daphne D.-F.; Zhu, Xuding  |  Star-extremal circulant graphs  |  Calude, C. S. (ed.) et al., Combinatorics, computation \& lo  [summary]  https://zbmath.org/1507243
+   2016  Noble, Matt  |  On 4-chromatic subgraphs of \(G(\mathbb Q^3,d)\)  |  Australas. J. Comb. 65, Part 1, 59-70 (2016).  [summary]  https://zbmath.org/6627382
+   2013    |  Thirty essays on geometric graph theory  |  Berlin: Springer (ISBN 978-1-4614-0109-4/hbk; 978-1-4614-011  [editorial]  https://zbmath.org/6062328
+   2026  Padmini Mukkamala; Ananthakrishnan Ravi  |  Triangle-free subsets of the $r$-distance graph of the hypercube  |  Preprint, arXiv:2506.18782 [math.CO] (2026)  [summary]  https://zbmath.org/902767996
+   2013    |  The seventh European conference on combinatorics, graph theory and applications. Extended abstracts of EuroCom  |  Centro di Ricerca Matematica Ennio De Giorgi (CRM) Series 16  [editorial]  https://zbmath.org/6196430
+[25] distance graph, periodic colouring: 5 hit(s)   ab:"distance graph*" & ab:"periodic" & ab:"color*"
+   1998  Zhu, Xuding  |  Pattern periodic coloring of distance graphs  |  J. Comb. Theory, Ser. B 73, No. 2, 195-206 (1998).  [review]  https://zbmath.org/1186398
+   2026  Enkai Zhang  |  Density regions, integer certificates and packing colorings of distance graphs  |  Preprint, arXiv:2609.09018 [math.CO] (2026)  [summary]  https://zbmath.org/903161158
+   2025  Cervantes, Jonathan; Krebs, Mike  |  Improved upper bounds for six-valent integer distance graph coloring periods  |  Discrete Math. 348, No. 8, Article ID 114496, 7 p. (2025).  [summary]  https://zbmath.org/8045416
+   2002  Liu, Daphne D.-F.; Zhu, Xuding  |  Asymptotic clique covering ratios of distance graphs  |  Eur. J. Comb. 23, No. 3, 315-327 (2002).  [review]  https://zbmath.org/1795950
+   1998  Glenn G. Chappell  |  Coloring Distance Graphs on the Integers  |  Preprint, arXiv:math/9805084 [math.CO] (1998)  [summary]  https://zbmath.org/900034333
+[26] circulant, uniquely, chromatic: 2 hit(s)   ab:"circulant" & ab:"chromatic" & ab:"unique*"
+   2005    |  7th international colloquium on graph theory, Hyeres, France, September 12--16, 2005  |  Electronic Notes in Discrete Mathematics 22. Amsterdam: Else  [editorial]  https://zbmath.org/5146508
+   2000    |  Proceedings of the 6th international conference on graph theory, Marseille-Luminy, France, August 28 -- Septem  |  Electronic Notes in Discrete Mathematics. 5. Amsterdam: Else  [review]  https://zbmath.org/1640611
+[27] Sidon set, distance graph: 0 hit(s)   ab:"distance graph*" & ab:"Sidon"
+[28] Mycielski, distance graph / circulant: 6 hit(s)   ab:"Mycielski*" & (ab:"distance graph*" | ab:"circulant*" | ab:"Cayley")
+   2015  Beaudou, Laurent; Naserasr, Reza; Tardif, Claude  |  Homomorphisms of binary Cayley graphs  |  Discrete Math. 338, No. 12, 2539-2544 (2015).  [summary]  https://zbmath.org/6470591
+   2025  Zawad Chowdhury; Stefan Steinerberger; Rekha R. Thomas  |  Graphical Designs find Combinatorial Structures  |  Preprint, arXiv:2507.13327 [math.CO] (2025)  [summary]  https://zbmath.org/902786671
+   2006  Zuo, Lian-Cui; Wu, Jian-Liang; Liu, Jia-Zhuang  |  The fractional vertex linear arboricity of graphs.  |  Ars Comb. 81, 175-191 (2006).  [summary]  https://zbmath.org/5194450
+   2017    |  Theoretical computer science and discrete mathematics. First international conference, ICTCSDM 2016, Krishnank  |  Lecture Notes in Computer Science 10398. Cham: Springer (ISB  [editorial]  https://zbmath.org/6762957
+   2016    |  Proceedings of the international conference on graph theory and its applications (ICGTA-15), Coimbatore, India  |  Electronic Notes in Discrete Mathematics 53. Amsterdam: Else  [editorial]  https://zbmath.org/6631774
+   2017    |  International conference on current trends in graph theory and computation, CTGTC-2016, New Delhi, India, Sept  |  Electronic Notes in Discrete Mathematics 63. Amsterdam: Else  [editorial]  https://zbmath.org/6856542

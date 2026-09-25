@@ -1,0 +1,4 @@
+start: P_found from 30 analysed colourings: Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]}; P_found/F_known = {'free': 2, 'torsion': [3, 3]}
+N = 16: (resumed) SAT; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]}
+N = 14: P_N exact, Lambda/P_N = {'free': 0, 'torsion': [2, 2, 2, 2]}; 2 colourings; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]} (rank 4); P_found/F_known = {'free': 2, 'torsion': [3, 3]}; changed False; 8/9 in P_found True; 28 s solver CPU
+N = 15: plain ask UNSAT (1.9 s CPU) -- no step

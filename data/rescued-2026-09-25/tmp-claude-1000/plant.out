@@ -1,0 +1,16 @@
+F1 |Theta_all| = 42 ; order|8 characters in Z_k for |k|<=2: 42 ; equal sets: True
+F2 [Lambda:P+] = 64  [Lambda:P-] = 64  [Lambda : P+ + P-] = 1
+F3 |C+| = 21  |C-| = 21  disjoint: True  union = Theta_all: True
+F4 order-2 in C+: [(0, 1, 1, 1), (1, 0, 0, 1), (1, 1, 1, 0)]  in C-: [(0, 1, 1, 0), (1, 0, 1, 1), (1, 1, 0, 1)]
+F5 C+ lines: {(0, 1, 1, 1): [(1, 0, 3, 1), (1, 1, 3, 4)], (1, 0, 0, 1): [(0, 1, 4, 3), (1, 1, 2, 3)], (1, 1, 1, 0): [(0, 1, 4, 2), (1, 0, 4, 1)]}
+    six lines pairwise distinct: True ; dim(Pi_i + Pi_j): {(0, 1): 4, (0, 2): 4, (1, 2): 4} ; dim of all six: 4
+F5 C- lines: {(0, 1, 1, 0): [(1, 0, 3, 4), (1, 1, 3, 2)], (1, 0, 1, 1): [(0, 1, 1, 3), (1, 1, 4, 3)], (1, 1, 0, 1): [(0, 1, 1, 4), (1, 0, 2, 4)]}
+    six lines pairwise distinct: True ; dim(Pi_i + Pi_j): {(0, 1): 4, (0, 2): 4, (1, 2): 4} ; dim of all six: 4
+ALL CHECKS PASS
+F0 Smith invariants of Lambda/Lambda5: [3, 3, 3, 3]
+F6 orders of the order|40 characters of Theta_{-2..2}: {2: 9, 4: 24, 8: 48, 10: 168}  2-parts of the 5-part: [(0, 0, 0, 1), (0, 0, 1, 0), (0, 0, 1, 1), (0, 1, 1, 0), (0, 1, 1, 1), (1, 0, 0, 1), (1, 0, 1, 1), (1, 1, 0, 1), (1, 1, 1, 0)]
+Traceback (most recent call last):
+  File "/home/kooshi/source/lean-dir/data/fs85/r3/split.py", line 142, in <module>
+    assert sum(cnt.values()) == 90 and cnt[10] == 48 and sorted(twoparts) == sorted(ADM)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

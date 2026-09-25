@@ -1,0 +1,3 @@
+K=0  pieces=      1  points=     0  segments=    0  polygons=     1  polygons containing the centre: 1   t=0.0s
+K=1  pieces=   1808  points=     0  segments=    0  polygons=  1808  polygons containing the centre: 36   t=0.3s
+K=2  pieces= 531203  points= 94382  segments=    0  polygons=436821  polygons containing the centre: 1406   t=90.0s

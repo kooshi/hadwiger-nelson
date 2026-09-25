@@ -1,0 +1,9 @@
+N = 13: 28561 classes, plain UNSAT (0.1 s; break-free cadical UNSAT)
+N = 14: 38416 classes, plain UNSAT (0.34 s; break-free cadical UNSAT)
+N = 15: inadmissible (a unit vector lies in N Lambda)
+N = 16: 65536 classes, plain UNSAT (1.59 s; break-free cadical UNSAT)
+N = 17: 83521 classes, plain UNSAT (0.84 s; break-free cadical UNSAT)
+N = 18: 104976 classes, plain UNSAT (0.91 s; break-free cadical UNSAT)
+N = 19: 130321 classes, plain UNSAT (1.53 s; break-free cadical UNSAT)
+N = 20: 160000 classes, plain UNSAT (2.26 s; break-free cadical UNSAT)
+EXIT 0

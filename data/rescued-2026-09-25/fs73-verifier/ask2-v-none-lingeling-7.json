@@ -1,0 +1,52 @@
+{
+ "pair": "v",
+ "facts": {
+  "p_int36": [
+   8,
+   0,
+   8,
+   0
+  ],
+  "q_int36": [
+   -8,
+   0,
+   -8,
+   0
+  ],
+  "delta_int36": [
+   -16,
+   0,
+   -16,
+   0
+  ],
+  "p_in_Lambda": true,
+  "q_in_Lambda": true,
+  "p_in_ball": true,
+  "q_in_ball": true,
+  "delta_is_unit": false,
+  "deg_p": 23,
+  "deg_q": 23
+ },
+ "n_common_neighbours": 2,
+ "cnf": {
+  "nvars": 159316,
+  "nclauses": 1745445,
+  "sha256": "08dcaeff5d9b19ce896f1773ece5f25a6f37c2f52c795b8c64f677e3b40d26b7",
+  "perm_seed": 7,
+  "brk": {
+   "mode": "none"
+  }
+ },
+ "cnf_path": "/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/fs73-verifier/cnf-v-none-s7.cnf",
+ "solver": "lingeling",
+ "budget_s": 3600.0,
+ "wall_s": 681.5,
+ "cpu_s_process": 678.74,
+ "verdict": "UNSAT",
+ "stats": {
+  "restarts": 4555,
+  "conflicts": 2550009,
+  "decisions": 3690959,
+  "propagations": 1499048578
+ }
+}

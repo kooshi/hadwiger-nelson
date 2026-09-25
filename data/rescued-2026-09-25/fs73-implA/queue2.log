@@ -1,0 +1,5 @@
+== 6 cadical on the identical off-plane CNF
+force:-16,8,8,0:R1.5: cadical -> UNSAT (91.35 s CPU); CNF identical to the recorded one: False
+== 7 off-plane at R = 1.0
+c:-16,8,8,0 R=1.0: ball 7879 -> 4-core 7879 points, degree 8.3; control SAT; forces UNKNOWN (1493.94 s CPU); UNKNOWN; critical set None
+QUEUE2 DONE

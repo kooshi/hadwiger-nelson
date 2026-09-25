@@ -1,0 +1,13 @@
+==> vacuity-self-test: this run's full output: build/gate/vacuity-self-test/20260925T004821Z-2783327.log
+    control run: === SCANNED === declarations=6802 refutations-skipped=280
+    control run: === TOTALS === sites=280 vacuous=3 stale=1 declared=3 witnessed=17 generic=253 unknown=3 untelescoped=0
+==> vacuity self-test: seven planted defects, each watched to fire
+    ok    VACUOUS planted_vacuous_coloring — the core9_plane shape: a colouring type the library proves empty
+    ok    VACUOUS planted_vacuous_prop — a tracked Prop hypothesis the library refutes
+    ok    VACUOUS planted_vacuous_forces — a Forces hypothesis refuted by a theorem in the same run
+    ok    UNKNOWN planted_unknown_prop — THE LOAD-BEARING ONE: same family, an instantiation nothing refutes
+    ok    STALE planted_stale — a VACUITY DECLARED: annotation whose claim is false
+    ok    (no row) planted_refutation — a refutation's binders are meant to be empty
+    ok    (no row) planted_not_forces — the evidence itself is never audited against the emptiness it proves
+==> vacuity self-test: OK — every control fired, and the two silent ones stayed silent.
+    full output: build/gate/vacuity-self-test/20260925T004821Z-2783327.log

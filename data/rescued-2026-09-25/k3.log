@@ -1,0 +1,3 @@
+slot: admitted lake: mem 16 GiB (hard cap), cpus 0,1,2,3
+data/m2/j04/K3PrimeInversion.lean:62:8: warning: declaration uses `sorry`
+data/m2/j04/K3PrimeInversion.lean:67:8: warning: declaration uses `sorry`

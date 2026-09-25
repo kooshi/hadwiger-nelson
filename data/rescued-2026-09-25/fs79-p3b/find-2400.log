@@ -1,0 +1,1 @@
+{"lattice": "2400", "units": 100, "verdict": "UNDECIDED at the cap", "exact_cell_margin": null, "point_margin": null, "point_order": null} {"status": 1, "message": "Time limit reached. (HiGHS Status 13: model_status is Time limit reached; primal_status is None)", "seconds": 1100.3, "nodes": -1, "dual_bound_margin": null}

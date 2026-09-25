@@ -1,0 +1,107 @@
+de Grey's K-lattice: rank 4, |U| 54, M 36; targets (lattice coordinates) {'8/3': (96, -48, -48, -24), '2': (72, -36, -36, -18), '4': (144, -72, -72, -36)}
+N =  2: P_N exact; 2 colourings; Lambda/P_N = {'free': 0, 'torsion': [2, 2, 2, 2]}; 8/3 in P_N: True, 2: True, 4: True
+N =  4: P_N exact; 4 colourings; Lambda/P_N = {'free': 0, 'torsion': [4, 4, 4, 4]}; 8/3 in P_N: True, 2: False, 4: True
+N =  6: P_N exact; 2 colourings; Lambda/P_N = {'free': 0, 'torsion': [2, 2, 2, 2]}; 8/3 in P_N: True, 2: True, 4: True
+N =  8: P_N exact; 4 colourings; Lambda/P_N = {'free': 0, 'torsion': [8, 8, 8, 8]}; 8/3 in P_N: True, 2: False, 4: False
+N = 10: P_N exact; 2 colourings; Lambda/P_N = {'free': 0, 'torsion': [2, 2, 2, 2]}; 8/3 in P_N: True, 2: True, 4: True
+N = 12: P_N exact; 5 colourings; Lambda/P_N = {'free': 0, 'torsion': [4, 4, 4, 4]}; 8/3 in P_N: True, 2: False, 4: True
+  cold re-run at N = 2: reproduces P_N (1 colourings, exact)
+  cold re-run at N = 4: reproduces P_N (1 colourings, exact)
+  cold re-run at N = 6: DIFFERS FROM P_N (1 colourings, exact)
+  cold re-run at N = 8: reproduces P_N (1 colourings, exact)
+  cold re-run at N = 10: DIFFERS FROM P_N (1 colourings, exact)
+  cold re-run at N = 12: DIFFERS FROM P_N (1 colourings, exact)
+{
+ "F_known": {
+  "rank": 2,
+  "generators": [
+   [
+    48,
+    -24,
+    0,
+    -24
+   ],
+   [
+    0,
+    0,
+    48,
+    -24
+   ]
+  ],
+  "Lambda_mod": {
+   "free": 2,
+   "torsion": [
+    24,
+    24
+   ]
+  },
+  "index": null
+ },
+ "P_found": {
+  "rank": 4,
+  "generators": [
+   [
+    8,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    8,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    8,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    8
+   ]
+  ],
+  "Lambda_mod": {
+   "free": 0,
+   "torsion": [
+    8,
+    8,
+    8,
+    8
+   ]
+  },
+  "index": 4096
+ },
+ "P_found_mod_F_known": {
+  "free": 2,
+  "torsion": [
+   3,
+   3
+  ]
+ },
+ "negative_controls": {
+  "2": {
+   "in_P_found": false,
+   "separator": [
+    2,
+    "degrey-N2",
+    "4dcc74d0b3b87b16",
+    "KPer"
+   ]
+  },
+  "4": {
+   "in_P_found": false,
+   "separator": [
+    2,
+    "degrey-N2",
+    "4dcc74d0b3b87b16",
+    "KPer"
+   ]
+  }
+ }
+}
+EXIT 0

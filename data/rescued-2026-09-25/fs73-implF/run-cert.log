@@ -1,0 +1,53 @@
+{"key": "L3|N2|certificate", "lattice": "L3", "N": 2, "intersection_rank": 0, "machine": "desktop (16 physical cores / 32 threads, 128 GB)"} [0]
+{
+ "key": "L3|N2|mechanism",
+ "lattice": "L3",
+ "N": 2,
+ "colourings": 2304,
+ "components_by_(V_rank, V vs D, |R(Q)|)": {
+  "[4, \"equal\", 1]": 11880,
+  "[6, \"V/D {'free': 0, 'torsion': [2, 2]}\", 6]": 3888,
+  "[6, \"V/D {'free': 0, 'torsion': [2]}\", 4]": 1296,
+  "[6, \"V/D {'free': 0, 'torsion': [2]}\", 5]": 3888,
+  "[6, \"equal\", 7]": 2592
+ },
+ "machine": "desktop (16 physical cores / 32 threads, 128 GB)"
+}
+{
+ "key": "L3|N4|mechanism",
+ "lattice": "L3",
+ "N": 4,
+ "colourings": 3,
+ "components_by_(V_rank, V vs D, |R(Q)|)": {
+  "[4, \"equal\", 1]": 64,
+  "[6, \"rank 4 < 6\", 16]": 8,
+  "[6, \"rank 5 < 6\", 13]": 4,
+  "[6, \"rank 5 < 6\", 7]": 8
+ },
+ "machine": "desktop (16 physical cores / 32 threads, 128 GB)"
+}
+ "lattice": "L3",
+ "N": 6,
+ "colourings": 4,
+ "components_by_(V_rank, V vs D, |R(Q)|)": {
+  "[2, \"equal\", 1]": 108,
+  "[3, \"rank 2 < 3\", 5]": 24,
+  "[4, \"V/D {'free': 0, 'torsion': [3, 3]}\", 10]": 12,
+  "[4, \"V/D {'free': 0, 'torsion': [3, 3]}\", 22]": 4,
+  "[4, \"rank 2 < 4\", 17]": 6,
+  "[4, \"rank 2 < 4\", 9]": 24,
+  "[6, \"V/D {'free': 0, 'torsion': [2]}\", 13]": 4,
+  "[6, \"V/D {'free': 0, 'torsion': [2]}\", 5]": 36,
+  "[6, \"V/D {'free': 0, 'torsion': [3, 3]}\", 15]": 4,
+  "[6, \"equal\", 15]": 4,
+  "[6, \"rank 2 < 6\", 17]": 6,
+  "[6, \"rank 4 < 6\", 22]": 6,
+  "[6, \"rank 4 < 6\", 23]": 4
+ },
+ "machine": "desktop (16 physical cores / 32 threads, 128 GB)"
+}
+L3 {"rank": 6, "M": 72, "U": 42, "point_group": 24, "periods": {"2": "2304 colourings", "3": "inadmissible", "4": "3 colourings", "5": "0 colourings", "6": "4 colourings"}, "P_found": {"free": 6, "torsion": []}, "P_found_point_group_closed": {"free": 6, "torsion": []}, "P_found_point_group_closed_rows": [], "targets_in_P_found_pg": {"2": false, "2/3": false, "4/3": false, "8/3": false, "4": false, "8/9": false, "16/3": false, "i sqrt3": false}}
+L2 {"rank": 6, "M": 72, "U": 42, "point_group": 48, "periods": {"2": "inadmissible", "3": "inadmissible", "4": "2 colourings", "5": "3 colourings", "6": "inadmissible"}, "P_found": {"free": 6, "torsion": []}, "P_found_point_group_closed": {"free": 6, "torsion": []}, "P_found_point_group_closed_rows": [], "targets_in_P_found_pg": {"2": false, "2/3": false, "4/3": false, "8/3": false, "4": false, "8/9": false, "16/3": false, "i sqrt3": false}}
+L6 {"rank": 6, "M": 144, "U": 54, "point_group": 48, "periods": {"2": "inadmissible", "3": "inadmissible", "4": "inadmissible", "5": "4 colourings", "6": "inadmissible"}, "P_found": {"free": 6, "torsion": []}, "P_found_point_group_closed": {"free": 6, "torsion": []}, "P_found_point_group_closed_rows": [], "targets_in_P_found_pg": {"2": false, "2/3": false, "4/3": false, "8/3": false, "4": false, "8/9": false, "16/3": false, "i sqrt3": false}}
+KR6 {"rank": 6, "M": 144, "U": 78, "point_group": 48, "periods": {"2": "inadmissible", "3": "inadmissible", "4": "inadmissible", "5": "0 colourings", "6": "inadmissible"}, "P_found": null, "P_found_point_group_closed": null, "P_found_point_group_closed_rows": null, "targets_in_P_found_pg": null}
+CERT-DONE

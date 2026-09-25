@@ -1,0 +1,5 @@
+emit c:-16,8,8,0 R=1.5: 2044 points, 10703 unit edges + the pair edge; pins 3 (from core-round-35); CNF sha 65d3897d32698809
+  cadical --lrat: {'verdict': 'UNSAT', 'wall_s': 31.14, 'cpu_s': 30.99}
+  kissat, identical CNF: {'verdict': 'UNSAT', 'wall_s': 24.96, 'cpu_s': 24.86}
+  kissat, pin-free CNF: {'verdict': 'UNSAT', 'wall_s': 32.47, 'cpu_s': 32.33}
+  wrote /home/kooshi/source/lean-dir/data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json, witness.cnf.gz, witness.lrat.gz (251610474 bytes LRAT)

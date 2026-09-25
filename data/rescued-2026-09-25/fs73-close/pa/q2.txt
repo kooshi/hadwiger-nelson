@@ -1,0 +1,15 @@
+ab:"real quadratic" & ab:"chromatic number"
+ab:"chromatic number" & ab:"number field" & ab:"unit distance"
+ab:"Hadwiger-Nelson" & py:2024-2026
+au:"Fischer, Kurt G."
+ab:"Moser lattice"
+ab:"Moser spindle" & ab:"forced" & py:2018-2026
+au:"Parts, Jaan"
+ab:"hom-shift"
+ab:"periodic points" & ab:"graph homomorphism" & ab:"Z^d"
+ab:"3-colorings" & ab:"Z^d"
+ab:"circular coloring" & ab:"Cayley graph" & ab:"abelian"
+ab:"chromatic number" & ab:"undecidable" & ab:"periodic"
+ab:"Cayley graphs of Z^n" & ab:"chromatic"
+ab:"distance graph" & ab:"Z^n" & ab:"chromatic number"
+ti:"Kirszbraun"

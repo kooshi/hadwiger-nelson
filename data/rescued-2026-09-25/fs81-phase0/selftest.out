@@ -1,0 +1,40 @@
+== EMPTY plants, enumeration ON
+faithful: PASS EMPTY: 5404 leaves refuted; 32 relations verified; units 23 pairs, NOT the complete unit set of the key lattice (48 vectors)
+plant unit-off-circle: FAIL as expected ((2, 0, 90, 0) is not a unit vector of Q(sqrt 59)^2 with denominator 90)
+plant relation-perturbed: FAIL as expected (not a relation: [1, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0])
+plant multipliers-zeroed: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+plant multipliers-negated: FAIL as expected (negative multiplier on an inequality)
+plant child-dropped: FAIL as expected (branch has 4 children, the range 0..2 needs 5)
+plant range-shifted: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+plant range-shifted-high: FAIL as expected (leaf not refuted: min over the box -2 <= -2)
+plant negative-inequality-multiplier: FAIL as expected (negative multiplier on an inequality)
+plant boundary: FAIL as expected (leaf not refuted: min over the box -1 <= -1)
+plant unknown-relation: FAIL as expected (branch on an unknown relation)
+SELF-TEST OK: faithful certificate passes; 10 planted faults each fail for their own reason: ['unit-off-circle', 'relation-perturbed', 'multipliers-zeroed', 'multipliers-negated', 'child-dropped', 'range-shifted', 'range-shifted-high', 'negative-inequality-multiplier', 'boundary', 'unknown-relation']
+== EMPTY plants, enumeration OFF (--no-enumerate)
+faithful: PASS EMPTY: 5404 leaves refuted; 32 relations verified; units 23 pairs (completeness in the key lattice not checked: --no-enumerate)
+plant unit-off-circle: FAIL as expected ((2, 0, 90, 0) is not a unit vector of Q(sqrt 59)^2 with denominator 90)
+plant relation-perturbed: FAIL as expected (not a relation: [1, 0, 0, 0, 0, 0, 0, 1, -1, 0, 0, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0])
+plant multipliers-zeroed: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+plant multipliers-negated: FAIL as expected (negative multiplier on an inequality)
+plant child-dropped: FAIL as expected (branch has 4 children, the range 0..2 needs 5)
+plant range-shifted: FAIL as expected (leaf not refuted: min over the box 0 <= 0)
+plant range-shifted-high: FAIL as expected (leaf not refuted: min over the box -2 <= -2)
+plant negative-inequality-multiplier: FAIL as expected (negative multiplier on an inequality)
+plant boundary: FAIL as expected (leaf not refuted: min over the box -1 <= -1)
+plant unknown-relation: FAIL as expected (branch on an unknown relation)
+SELF-TEST OK: faithful certificate passes; 10 planted faults each fail for their own reason: ['unit-off-circle', 'relation-perturbed', 'multipliers-zeroed', 'multipliers-negated', 'child-dropped', 'range-shifted', 'range-shifted-high', 'negative-inequality-multiplier', 'boundary', 'unknown-relation']
+== NONEMPTY plants
+faithful (--no-enumerate): PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 22 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lattice's other unit vectors were NOT checked
+faithful (enumeration ON): PASS NONEMPTY: theta is a point of Theta for all 44 unit vectors of the key lattice
+plant theta-zero: FAIL as expected (theta((0, 0, 348, 0)) = 0 is not in [1/3, 2/3] mod 1)
+plant theta-nudged-out-of-band: FAIL as expected (theta((0, 0, 348, 0)) = 55314999999997/3000000000 is not in [1/3, 2/3] mod 1)
+plant unit-off-circle: FAIL as expected ((0, 1, 348, 0) is not a unit vector of Q(sqrt 167)^2 with denominator 348)
+plant key-row-tripled: FAIL as expected ((2, -25, -5, -10) is not in the key lattice)
+plant theta-three-coordinates: FAIL as expected (theta must have four coordinates)
+plant no-units: FAIL as expected (no listed units)
+plant unknown-verdict: FAIL as expected (unknown verdict)
+plant wrong-field: FAIL as expected ((0, 23, -181, 0) is not a unit vector of Q(sqrt 171)^2 with denominator 348)
+wide certificate, --no-enumerate: PASS NONEMPTY (listed units only, no enumeration): theta is a point of Theta for the 18 listed pairs, so Cay(span U, +-U) is 3-colourable; the key lattice's other unit vectors were NOT checked
+wide certificate, enumeration ON: FAIL as expected (theta((225, 15, -225, 15)) = -709390/83 is not in [1/3, 2/3] mod 1)
+SELF-TEST OK (NONEMPTY): faithful passes in both modes; 9 plants each fail for their own reason: ['theta-zero', 'theta-nudged-out-of-band', 'unit-off-circle', 'key-row-tripled', 'theta-three-coordinates', 'no-units', 'unknown-verdict', 'wrong-field', 'modes-differ']

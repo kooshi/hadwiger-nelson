@@ -1,0 +1,3 @@
+start: P_found from 26 analysed colourings: Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]}; P_found/F_known = {'free': 2, 'torsion': [3, 3]}
+N = 16: P_N exact, Lambda/P_N = {'free': 0, 'torsion': [8, 8, 8, 8]}; 4 colourings; Lambda/P_found = {'free': 0, 'torsion': [8, 8, 8, 8]} (rank 4); P_found/F_known = {'free': 2, 'torsion': [3, 3]}; changed False; 8/9 in P_found True; 32 s solver CPU
+EXIT 0

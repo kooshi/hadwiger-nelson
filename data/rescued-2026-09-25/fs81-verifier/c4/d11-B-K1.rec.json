@@ -1,0 +1,1 @@
+{"d": 11, "config": "B", "K": 1, "pairs": 30, "D": 90, "predicted": "EMPTY", "verdict": "EMPTY", "agree": true, "finder": "relation tree", "nodes": 9186, "wall_s": 17.7, "check": "PASS: PASS EMPTY: 6124 leaves refuted; 49 relations verified; units 30 pairs (completeness in the key lattice not checked: --n"}

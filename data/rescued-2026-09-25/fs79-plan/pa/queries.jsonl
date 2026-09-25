@@ -1,0 +1,42 @@
+{"q": "ab:\"domino problem\" & ab:\"Cayley graph\"", "hits": 4}
+{"q": "ab:\"domino problem\" & ab:\"coloring\"", "hits": 5}
+{"q": "ab:\"domino problem\" & ab:\"colouring\"", "hits": 4}
+{"q": "ab:\"hom-shift\"", "hits": 1}
+{"q": "ab:\"hom shift\"", "hits": 1}
+{"q": "ab:\"homshift\"", "hits": 1}
+{"q": "ab:\"domino problem\" & ab:\"homomorphism\"", "hits": 2}
+{"q": "ab:\"domino problem\" & ab:\"graph\"", "hits": 12}
+{"q": "ab:\"colorability\" & ab:\"undecidable\" & ab:\"periodic\"", "hits": 1}
+{"q": "ab:\"coloring\" & ab:\"undecidable\" & ab:\"Z^2\"", "hits": 4}
+{"q": "ab:\"colorability\" & ab:\"undecidable\" & ab:\"periodic\"", "hits": 1}
+{"q": "ab:\"coloring\" & ab:\"undecidable\" & ab:\"Z^2\"", "hits": 4}
+{"q": "ab:\"box complex\" & ab:\"Cayley graph\"", "hits": 0}
+{"q": "ab:\"Hom complex\" & ab:\"Cayley graph\"", "hits": 0}
+{"q": "ab:\"neighborhood complex\" & ab:\"infinite graph\"", "hits": 0}
+{"q": "ab:\"topological lower bound\" & ab:\"chromatic number\" & ab:\"Cayley graph\"", "hits": 0}
+{"q": "ab:\"Potts antiferromagnet\" & ab:\"height\"", "hits": 2}
+{"q": "ab:\"four-state Potts\" & ab:\"triangular lattice\"", "hits": 1}
+{"q": "ab:\"4-state Potts\" & ab:\"antiferromagnet\"", "hits": 2}
+{"q": "ab:\"twelve tiles\"", "hits": 0}
+{"q": "ab:\"continuous chromatic number\"", "hits": 3}
+{"q": "ab:\"distance graph\" & ab:\"integer lattice\" & ab:\"chromatic\"", "hits": 1}
+{"q": "ab:\"Cayley graph\" & ab:\"Z^n\" & ab:\"chromatic number\"", "hits": 0}
+{"q": "ab:\"chromatic number\" & ab:\"lattice\" & ab:\"periodic coloring\"", "hits": 0}
+{"q": "ab:\"continuous chromatic number\"", "hits": 3}
+{"q": "ab:\"Potts antiferromagnet\" & ab:\"height\"", "hits": 2}
+{"q": "ab:\"distance graph\" & ab:\"undecidab\"", "hits": 0}
+{"q": "ab:\"chromatic number\" & ab:\"computable\" & ab:\"periodic\"", "hits": 0}
+{"q": "ab:\"Cayley graph\" & ab:\"free abelian group\" & ab:\"coloring\"", "hits": 0}
+{"q": "ab:\"periodic graph\" & ab:\"chromatic number\"", "hits": 0}
+{"q": "ab:\"doubly periodic\" & ab:\"coloring\"", "hits": 3}
+{"q": "ti:\"chromatic number\" & ab:\"Z^d\"", "hits": 8}
+{"q": "ab:\"shift of finite type\" & ab:\"proper colorings\"", "hits": 0}
+{"q": "ab:\"subshift\" & ab:\"proper coloring\"", "hits": 0}
+{"q": "ab:\"Kempe\" & ab:\"height function\"", "hits": 0}
+{"q": "au:\"Krebs, Mike\" & ab:\"chromatic\"", "hits": 12}
+{"q": "au:\"Krebs, Mike\" & ab:\"chromatic\"", "hits": 12}
+{"q": "au:\"Hellouin de Menibus, Benjamin\"", "hits": 22}
+{"q": "au:\"Ellenberg, Jordan S.\" & ab:\"color\"", "hits": 0}
+{"q": "au:\"Chandgotia, Nishant\" & py:2024-2026", "hits": 6}
+{"q": "au:\"Salo, Ville\" & ab:\"coloring\"", "hits": 1}
+{"q": "ab:\"chromatic number\" & ab:\"Cayley graph\" & ab:\"periodic\" & py:2018-2026", "hits": 1}

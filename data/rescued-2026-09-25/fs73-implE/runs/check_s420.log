@@ -1,0 +1,53 @@
+== certcheck.py (committed, Coxeter)
+lattice check OK: 60 unit vectors, all in S up to sign; S spans the basis lattice
+CERTIFICATE OK: nodes checked 605203 leaves 0 => Theta EMPTY
+	Command being timed: "python3 /home/kooshi/source/lean-dir/data/fs73/coxeter-c3/certcheck.py runs/s420.json"
+	User time (seconds): 209.39
+	System time (seconds): 0.69
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:30.96
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1884764
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 466875
+	Voluntary context switches: 6
+	Involuntary context switches: 1828
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+== fs73_theta_check.py (mine)
+lattice OK: 60 unit vectors, S has 30 (one per ± pair: True)
+CERTIFICATE OK: 605203 nodes walked, 0 leaves => Theta EMPTY (not 3-colourable, by H-i)
+	Command being timed: "python3 /home/kooshi/source/lean-dir/tools/fs73_theta_check.py cert runs/s420.json"
+	User time (seconds): 182.01
+	System time (seconds): 0.75
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:03.50
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1885084
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 466423
+	Voluntary context switches: 4
+	Involuntary context switches: 1395
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+CHECKS-DONE

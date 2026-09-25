@@ -1,0 +1,5 @@
+slot: admitted env: mem 60 GiB (hard cap), cpus 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+==> build: this run's full output: build/gate/build/20260925T004704Z-2781688.log
+    All targets up-to-date (4984 jobs).
+==> build: OK — all 1698 modules already up to date, nothing built, 0 module(s) with warnings, 2s
+    full output: build/gate/build/20260925T004704Z-2781688.log

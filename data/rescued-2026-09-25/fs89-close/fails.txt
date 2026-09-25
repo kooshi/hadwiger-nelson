@@ -1,0 +1,11 @@
+FAIL: lost code token 'plans/POROS-2026-09-25-fs86-next.md'
+FAIL: lost code token 'plans/STUB-dyadic-rigidity-triangle-free.md'
+FAIL: lost ref token '§ R.4'
+FAIL: lost num token '1050'
+FAIL: lost chunk token "60's"
+FAIL: lost chunk token 'C₅'
+FAIL: lost chunk token 'R.4'
+FAIL: lost chunk token 'T34–T35'
+FAIL: lost chunk token 'plans/POROS-2026-09-25-fs86-next.md'
+FAIL: lost chunk token 'ℚ(i)'
+AUDIT FAILED (10 failure(s))

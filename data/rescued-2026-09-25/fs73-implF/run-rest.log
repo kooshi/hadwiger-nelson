@@ -1,0 +1,38 @@
+L2 2 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L2 3 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L2 4 {"admissible": true, "classes": 4096, "Lambda/P_found_N": {"free": 0, "torsion": [4, 4, 4, 12, 24, 24]}, "seconds": 2.6} {"colourings": 2, "additive": 0, "chiral_strict": 2, "chiral": 2, "chiral_non_additive": 2, "gapped": 0, "Lambda/Per": {"{\"free\": 0, \"torsion\": [4, 4, 4]}": 2}, "Lambda/KPer": {"{\"free\": 0, \"torsion\": [4, 12, 24]} rank 6": 1, "{\"free\": 0, \"torsion\": [12, 12, 24]} rank 6": 1}, "components_by_V": {"{\"NLambda/V\": {\"free\": 0, \"torsion\": [3, 6]}, \"V_rank\": 6}": 8, "{\"NLambda/V\": {\"free\": 0, \"torsion\": []}, \"V_rank\": 6}": 8, "{\"NLambda/V\": {\"free\": 0, \"torsion\": [3, 3, 6]}, \"V_rank\": 6}": 8}, "targets": {"2": {"in_KPer": 2}, "2/3": {"in_KPer": 2}, "4/3": {"in_KPer
+L2 5 {"admissible": true, "classes": 15625, "Lambda/P_found_N": {"free": 6, "torsion": []}, "seconds": 17.9} {"colourings": 3, "additive": 0, "chiral_strict": 3, "chiral": 3, "chiral_non_additive": 3, "gapped": 3, "Lambda/Per": {"{\"free\": 0, \"torsion\": [5, 5, 5, 5, 5, 5]}": 3}, "Lambda/KPer": {"{\"free\": 6, \"torsion\": []} rank 0": 3}, "components_by_V": {"{\"NLambda/V\": {\"free\": 6, \"torsion\": []}, \"V_rank\": 0}": 4220, "{\"NLambda/V\": {\"free\": 0, \"torsion\": []}, \"V_rank\": 6}": 18, "{\"NLambda/V\": {\"free\": 3, \"torsion\": []}, \"V_rank\": 3}": 28}, "targets": {"2": {"not_in_KPer": 3}, "2/3": {"not_in_KPer": 3}, "4/3": {"not_in_KPer": 3}, "8/3": {"not_in_KPer": 3}, "4": {"not_in_
+L2 6 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L6 2 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L6 3 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L6 4 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+L6 5 {"admissible": true, "classes": 15625, "Lambda/P_found_N": {"free": 6, "torsion": []}, "seconds": 22.0} {"colourings": 4, "additive": 0, "chiral_strict": 4, "chiral": 4, "chiral_non_additive": 4, "gapped": 4, "Lambda/Per": {"{\"free\": 0, \"torsion\": [5, 5]}": 1, "{\"free\": 0, \"torsion\": [5, 5, 5, 5, 5, 5]}": 3}, "Lambda/KPer": {"{\"free\": 6, \"torsion\": []} rank 0": 4}, "components_by_V": {"{\"NLambda/V\": {\"free\": 0, \"torsion\": []}, \"V_rank\": 6}": 26, "{\"NLambda/V\": {\"free\": 6, \"torsion\": []}, \"V_rank\": 0}": 3752, "{\"NLambda/V\": {\"free\": 3, \"torsion\": []}, \"V_rank\": 3}": 76}, "targets": {"2": {"not_in_KPer": 4}, "2/3": {"not_in_KPer": 4}, "4/3": {"not_in_KPer": 4}, 
+L6 6 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+KR6 2 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+KR6 3 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+KR6 4 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+KR6 5 {"admissible": true, "classes": 15625, "Lambda/P_found_N": null, "seconds": 1.4} {"colourings": 0, "additive": 0, "chiral_strict": 0, "chiral": 0, "chiral_non_additive": 0, "gapped": 0, "Lambda/Per": {}, "Lambda/KPer": {}, "components_by_V": {}, "targets": {"2": {}, "2/3": {}, "4/3": {}, "8/3": {}, "4": {}, "8/9": {}, "16/3": {}, "i sqrt3": {}, "v": {}}}
+KR6 6 {"admissible": false, "classes": null, "Lambda/P_found_N": null, "seconds": null} {}
+	Command being timed: "python3 tools/fs73_rank6.py all --only L2,L6,KR6"
+	User time (seconds): 41.75
+	System time (seconds): 1.93
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:44.08
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 168028
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1071474
+	Voluntary context switches: 2456
+	Involuntary context switches: 494
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 592
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
