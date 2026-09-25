@@ -749,3 +749,51 @@ held items (if any beyond FS-85's file) are in its record, for the competition a
   three-chromatic), so loose at four (FS79-T1). [hand, the planner, from row 72 and G64's `χ(Γ₅) = 3`.]
 
 Stated, not proved here: §0.3 (Poros's, stage B1); §0.4 (the planner's corollary, stage B1).
+
+## §R-review. The owner's scoring and rulings (2026-09-25, at stage A's hand-back)
+
+*Written by the product owner, not the planner. The plan above is the planner's; this section records how it was scored and what the owner
+decided before stage B. Close inventory items 14–20 carry the same.*
+
+**Commit verified:** 632c24de is on `main` (the plan, `data/fs86/stageA/`, bibliography rows). Planner about 335k working (506k harness);
+delegated nothing; retractions planner 0, advisor 0 (G51's warning shape, which the plan names itself).
+
+### R.1 The acceptance, item by item
+
+| item | verdict | note |
+|---|---|---|
+| §G: every grokking, row and method rule with a verdict and reason | **pass, one defect logged** | G1–G75 one line each, every *bears* landed in a phase. **Defect:** §G.2 walks the rows in blocks (`1–6`, `9–11`, `14–21`, …), each block one shared reason and all silent; WORKFLOW 3.1 item 1 says one line each, no batching. Accepted as written (no entry skipped, every block's reason stated), logged for the close's §G re-read. |
+| §G: the nearest derivations individually | pass | §G.4, all of FS85-derivation's entries, FS38-D2-A/B, FS79-T2 |
+| §PA: eight questions, queries with hit counts, review vs summary | pass | 22 queries; the vector-colouring find (GRR 2017, GRRŠV 2020) is the gate's teaching and is carried into §IQ item 3 and §C item 8 |
+| §PA: the four reading debts | pass, with debts recorded | `[Soi46]` identified (Soifer 2019, Geombinatorics XXVIII(4)), not held and not indexed: obtaining it is Kooshi's call. `[deGrey2026]`, `[Haugstrup2026]` summary only, not held. T721 read through `[Soifer2024]` ch. 54 |
+| §IQ: five items, structural form about every four-colouring, class containing ℚ(√59) | pass | S1 on the field plane, S2 the class keeping the rotation structure (dB2 answers the stripped class); invariant "none known" with the planner's hypothesis kept out of §C's challenge |
+| "rich" defined exactly | pass | §S.1 (R1–R4), `Λ₅₁₀` named, `Λ₂₇₃₀` the non-example |
+| where routes 1–2 sit, with reason | pass, **amended by ruling R2 below** | |
+| §C ready to paste; the advisor's slots | pass | |
+| the killing test able to fire, and the fallback | pass | K1–K4 against T; fires on restatements; reachable by the round-1 reports. Fallback FS-83 at `k = 4` |
+| every reachable outcome assigned | pass, **amended by ruling R3** (an overlap, not a gap) | |
+| search-log instruction in every brief; sequencing under the cap; 2026-10-01 | pass | |
+
+### R.2 The owner's one-step checks
+
+1. **FS86-A1** (the dyadic local field): PARI, before the plan — one prime above 2 in ℚ(√59, i), `e = f = 2`; `177 ≡ 1 (mod 8)`; the same
+   local field as each of K(i)'s two dyadic primes. Confirmed (inventory item 11).
+2. **FS86-A2** (the stable odd primes of ℚ(√59) below 60), by hand: an odd `p ∤ 59` gives a stable prime iff `p` splits in ℚ(√59) and
+   `p ≡ 3 (mod 4)` (an inert `p` has residue `𝔽_{p²} ∋ i`). Among `3, 7, 11, 19, 23, 31, 43, 47`: `(59/p) = 1` exactly at 11 (59 ≡ 4), 23
+   (≡ 13 = 6²), 31 (≡ 28 = 11²), 43 (≡ 16), 47 (≡ 12 = 23²); not at 3 (≡ 2), 7 (≡ 3), 19 (≡ 2). The ramified 59 has residue `𝔽₅₉`, `59 ≡ 3
+   (mod 4)`: stable. **Confirmed; the stub's and H5's "19" is wrong.**
+3. **The thinnest margin in §0.3 (iii), noted for B1's divergence step (not in its blind statements):** MIS-normality needs `α/n < 1/4`
+   strictly at every odd stable place and every level. At 31, Hoffman misses four-tightness by `4.4·10⁻⁵` (G54); the Hoffman floor there is
+   5 (G56), so the ratio is below `1/4`, strictly but barely, and G54's constant ratio carries it up the inert tower. The owner asks B1 to
+   confirm this explicitly after its blind derivation.
+
+### R.3 Rulings
+
+| # | the choice | the alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| R1 | **The plan is accepted**, with R2–R4 | send back for §G.2's batching | the batching skipped nothing and every block's reason is sound; the planner is past 500k harness and would be replaced, not reused; the defect is logged for the close | high |
+| R2 | **Stage B runs as two concurrent agents:** **B1**, a fresh blind verifier (V2 pattern) on the §0.3–§0.4 statements; **B2+B3**, a fresh de Bruijn on `Λ₅₁₀`'s dyadic profile and the exact (R4) certificates | the plan's one agent doing all three | FS-85's blind verifiers used 490–550k each (handoff §3), so B1 alone fills a 300k budget and a shared agent would cross the replace line; the cap allows two now that stage A has stood down; a dedicated B1 is easier to keep blind (B2 needs §S.1 and §B, B1 must not read §0); and it saves a day before the competition | medium-high — if B2 turns out to need B1's result (it should not: B2 is lattice-level, B1 field-level), they are serialised |
+| R3 | **The verdict table is a partition:** B1's confirmation of §0.4's K classification scores inside **Draw (frame)**; **Draw (K)** applies only to results about K that go beyond §0.4 and come from stage C. Separately, and whatever the verdict, a K classification confirmed by two derivations is a **candidate ledger row** (item 13; all novel knowledge counts) | leave the overlap for the close to resolve | FS-85's lesson (its inventory item 22) is that an unassigned or doubly assigned outcome gets ruled on after the fact, which is exactly when a ruling is least trustworthy | high |
+| R4 | **B1's fence.** B1 receives the statements only (an owner-held file, `data/fs86/briefs/B1-statements.md`); it does not read this plan's §0, §G.6, §IQ, §C, §P, §Y or §R-review, the close inventory, the plan-phase advisor's record, `data/fs86/briefs/A-*`, or commit bodies, until its derivations are committed. Prior art (the library, `BIBLIOGRAPHY.md`, `CLAUDE.md`, `LEDGER.md`, the derivation files) is open | give B1 the plan and ask it to derive first | the V2 pattern worked at FS-85 only where the sketch was physically out of reach; this plan's §0.3 contains the sketch in full | high |
+| R5 | **Stage C launches after B1's verdict on §0.3 (ii)–(iii)**, not on a fixed date. If B1 finds a defect, §C items 3–4 and S1 are rewritten before launch. B2/B3 results reach both competitors as one dated addendum, identically, whenever they land | launch C on 09-26 regardless | §C item 3 states the frame as "what is free"; launching on a frame that a blind derivation then breaks would hand both competitors a false premise | high |
+| R6 | **From the first competitive commit on**, commit subjects are neutral and competitor progress stays out of `plans/` and `data/` (the protocol, rule 1); before launching any agent mid-competition, the owner checks `git log -5` for content | — (standing rule) | FS-85's two channels | high |
