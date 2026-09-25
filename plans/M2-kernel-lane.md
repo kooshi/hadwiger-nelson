@@ -395,3 +395,112 @@ K3-A's (S2's pattern count is an estimate from S1's rate).
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | X4 | none — the wheel check is a complete exact enumeration of a set a derivation fixed (`4⁷` wheels), run in the kernel, logged here as the ban's "at the edge" case | — |
+
+## Stage 4 — SAVED
+
+### 4.1 §IQ — the invariant question, for FS-39's hand step only (J17)
+
+1. **Existence form.** Is every finite unit-distance graph drawn in `ℝ²` also drawn (as a homomorphic image) in `F²` for some real number field
+   `F`? Equivalently, `χ(ℝ²) = sup_F χ(F²)` over real number fields.
+2. **Structural form.** For **every** finitely generated `ℚ`-subalgebra `A ⊆ ℝ` — every drawing's coordinate ring at once, with the metric
+   and the graph stripped (any finite polynomial system over `ℚ` with a real solution) — is there a ring homomorphism `A → ℝ` whose image is
+   algebraic over `ℚ`?
+3. **The invariant it forces.** An **ordering** of `Frac(A)` extending to a real place with residue field real algebraic over `ℚ` — the
+   real-spectrum point every solution carries. In the other discipline's words: `ℚ^{r-alg} ≺ ℝ` (Tarski), which is `[Madore2015]` ¶5.4's route.
+4. **Its route.** Derivation only: the Artin–Lang homomorphism theorem (Bochnak–Coste–Roy, *Real Algebraic Geometry*, Thm 4.1.2, to be read
+   and cited by section) applied to `ℚ^{r-alg}[A]`, then restriction to `A`; beside it, Madore's Tarski route. No search can answer it.
+5. **The open instances it decides.** FS62-T2's exact form of "`χ(ℝ²) ≠ 6`" (G64); every "`χ(ℝ²) = …`" sentence of the conjecture's bold
+   form (G48); FS-39 phase C's corollary `chromaticNumber_plane_eq_iSup_numberField` (its statement; the kernel form waits for real closed field
+   theory, which Mathlib lacks, §2.2); the repair of `[Fischer1990]` Remark 1.
+
+*Scored with §G: the structural form removes the graph entirely, so it is not the existence form reworded; its answer is a classical theorem,
+so §G.4 item 8 holds — the milestone's value here is the record, not novelty.*
+
+### 4.2 §S — the jobs
+
+| job | kind | product | skeleton | price (from §3.2) | gate | stop rule |
+|---|---|---|---|---|---|---|
+| **J14** | kernel | `Proofs/HadwigerNelson/Chain.lean` (the theorem, three forms), `Instances/SqrtTwoThree.lean` (ℚ(√2,√3): chain route + gadget oracle + four-colouring), `Instances/SevenConditional.lean` (`G4` and the eight-copy conditional) | `data/m2/j04/K1Chain.lean` | ~3 h, 300–350 lines | the build green, zero `sorry`, `axioms.sh` and `vacuity.sh` counts reported, `five_le…_of_G4` DECLARED | at 3 h or 350k: land what is green; if the six-unit identity has not closed at 45 min, land the chain theorem and the gadget-oracle half, and name the identity as the leaf left |
+| **J15** | kernel | `Proofs/HadwigerNelson/Transcendental.lean`: `planeOverIso`, `unitQuadrance_colorable_of_subring`, the valuation lemma, `chromaticNumber_unitQuadrance_ratFunc` (core, `[IsFormallyReal F]`), `chromaticNumber_planeOver_adjoin_transcendental_eq`, the Liouville inhabitant | `data/m2/j04/K2Transcendental.lean` | 2.5–3 h, medium risk at one leaf | as J14; the core theorem's inhabitant `F = ℚ` | at 2 h without the residue iso: land the theorem with the iso as an explicit hypothesis (a `structure` or `Prop` argument, DECLARED if uninhabited), report GAP at that leaf |
+| **J16** | kernel | `Proofs/HadwigerNelson/UnitRing.lean`: `unitRing`, leaves 1–2, `inv_natCast_mem_unitRing_iff`, `inv_two_mem_unitRing_iff` (the wall), `inv_two_mem_unitRing_sevenField` and `three_div_eight_mem…` (explicit, over K(√7)), the spec `1/5` over `ℂ`; then `Proofs/HadwigerNelson/Stripe.lean`'s S1–S2 | `data/m2/j04/K3PrimeInversion.lean`, `K3Stripe.lean` | K3-B ~1 h; the stripe start with the remainder | as J14 | K3-B first and committed alone; the stripe work is saved per leaf; at 3 h stop and propose J16b |
+| **J17** | derivation | `plans/M2-S1D-bridge.md`: the bridge by hand (Madore's Tarski route written in full; the Artin–Lang route; Fischer's false step named); the seven zbMATH queries re-run; the kernel price of each route | — | ~1.5 h, 200k | the record's "Theorems this phase proved" with grades | a verdict per claim C1–C4, or GAP at a named step |
+| **J17V** | blind verifier (optional, P3) | `plans/M2-S1V-bridge.md` | — | ~1 h, 150k | verdicts on the fixed list | one stage; HELD FOR THE OWNER whether to run it (the argument cites one classical theorem) |
+
+**Fixed claim list for J17 (and J17V's list, verbatim):**
+- **C1** — "For every finite graph `H` and every map `f : V(H) → ℝ²` with `‖f(x) − f(y)‖ = 1` on every edge, there is a real number field `F`
+  and a map `g : V(H) → F²` with `‖g(x) − g(y)‖ = 1` on every edge." (Non-injective `g` allowed.)
+- **C2** — "`χ(ℝ²) = sup { χ(F²) : F ⊂ ℝ a number field }`, the chromatic number of `F²` meaning that of the unit-distance graph on `F × F`."
+- **C3** — "`[Fischer1990]` Remark 1's first sentence is false: there is a finitely generated field `E ⊂ ℝ` over `ℚ` that is not a purely
+  transcendental extension of any finite algebraic extension of `ℚ`." (With an explicit `E`.)
+- **C4** — "`χ(ℝ²) ≠ 6` if and only if every real number field `F` with `χ(F²) = 6` has a finite extension `F′ ⊂ ℝ` with `χ(F′²) = 7`"
+  (`plans/STUB-plane-bridge.md` §5, FS62-T2), given C2.
+
+**Kernel lane order and the lines every kernel brief carries:** J14 → J15 → J16, one Lean build at a time; J17 beside the lane.
+
+### 4.3 §P — registered predictions (before any M2 job runs; both outcomes reachable for each)
+
+| id | prediction | p |
+|---|---|---|
+| P-J14a | J14 lands all three K1 products with the gate green inside its 3 hours | 0.65 |
+| P-J14b | the gadget oracle's `decide +kernel` on the 18-vertex list finishes under 60 s | 0.60 |
+| P-J14c | the six-unit identity closes by factoring — `δ(1 + ω̄) = 3` and `1 + v + v̄ = 1/3`, the sum being their product — in ≤ 40 lines | 0.75 |
+| P-J15a | J15 closes the integrality leaf with no hypothesis left (else lands the residue iso as a named hypothesis, 0.35; else neither, 0.10) | 0.55 |
+| P-J15b | Mathlib already holds an identification of the residue field of the `X`-adic valuation subring of `RatFunc K` with `K` (through `powerSeriesRingEquiv` or directly) | 0.30 |
+| P-J16a | prime inversion in valuation form lands inside 1.5 hours | 0.85 |
+| P-J16b | the stripe lemma lands in full inside J16 | 0.10 |
+| P-J17a | no printed proof of the bridge is found besides `[Madore2015]` ¶5.4 (and Fischer's flawed Remark 1) | 0.70 |
+| P-J17b | the Artin–Lang route's kernel price is judged lower than the Tarski route's | 0.50 |
+| P-lane | no lane job touches a module a certificate imports (no certificate rebuild) | 0.90 |
+
+### 4.4 §M — the modeling passes (fresh `Skill` invocations, this stage)
+
+**Domain (`debruijn-domain-modeling`).**
+1. *K1, the union is an image set.* `chainPoints := Set.range (chainDrawing …)` and the graph induced on it — coincident points are one vertex,
+   which is the chain's whole mechanism (a `comap` union is the adversarial member: it four-colours the 18-vertex object's 19 indices).
+2. *K1, the field form at its proof's level.* State it for any `S : Subring ℂ` holding the drawing and the multipliers
+   (`add_one_le_chromaticNumber_induce_of_chain`); `planeOver F` enters through `planeOverSubring F`. Intrinsic structure: closure under `+`
+   and `·`, not "a field of radicands".
+3. *K1, `G4` in one vocabulary.* `planeOver (fieldOfRadicands {3, 11})`, not `FieldWall4.seamField` (J14 proves the inclusion it needs, or uses
+   `seamField` if a bridge lemma exists); `q b − q a = 8/3` exactly — any drawing reaches it by a rotation through a unit of `K(i)`, which the
+   docstring says.
+4. *K2, the core statement is about rational functions, not about `ℝ`.* `chromaticNumber_unitQuadrance_ratFunc {F} [Field F] [IsFormallyReal F]
+   : (unitQuadrance (RatFunc F)).chromaticNumber = (unitQuadrance F).chromaticNumber`; the `Subfield ℝ` form is its corollary through
+   `planeOverIso` and the lift `RatFunc F ≃+* F⟮t⟯`. Formal reality is the true hypothesis (G63); the core's inhabitant `F = ℚ` is free, with no
+   transcendence proof.
+5. *K2, no proof in a definition.* The adjunction is `Subfield.closure (insert t F)` (or the lift's `fieldRange`, proved equal) with the
+   transcendence proof used only in theorems — `adjoinTranscendental F t ht` depending on `ht` was the ugliness.
+6. *K3-B, leaf 2 is the intrinsic statement*: "an element of a subring is invertible there iff in every valuation subring above it" is
+   general; prime inversion is its instance at `x = n`, `R = unitRing σ`.
+7. *K3-A, `NT0` by wheels* — every √3-triangle of `ℤ[ζ₆]` has a lattice centroid (`d(1 + ω)/3 = ω·unit` for `d` of norm 3), so "no
+   monochromatic √3-triangle" and "no wheel with a monochromatic alternate triple" are one predicate; a spec example checks one triangle.
+
+**Obligation (`debruijn-obligation-modeling`).** The statements from which the proofs derive:
+1. *K1:* pull the colouring back to `c' : ℂ → Fin k` (`c' z := if h : z ∈ S then C ⟨z, h⟩ else 0`) and prove
+   `∀ n ≤ m, c' (junction δ u n) = c' 0` by `Nat.le_induction`; the step is `Forces.comap (copyHom j)` plus `chainDrawing_b` — two lines. Then
+   `junction 0 = 0`, `junction m = 1` (`hsum`), both in `S`, adjacent. `m ≠ 0` falls out of `hsum`.
+2. *K1 instance:* factor, never expand: `∑ sixUnits = (1 + ω̄)(1 + v + v̄)` by `Fin.sum_univ_six` and `ring`; `δ(1 + ω̄) = 3` and
+   `1 + v + v̄ = 1/3` are two-line identities by `Complex.ext_iff`, `Real.sq_sqrt` and `linear_combination`.
+3. *K2, the valuation lemma (general, 15 lines):* for `B : ValuationSubring K` with `∀ x ∈ B, 1 + x² ∉ B.nonunits`,
+   `a² + b² = 1 → a ∈ B ∧ b ∈ B` — if `a ∉ B`, then `a⁻¹ ∈ 𝔪`; if `b/a ∈ B`, `1 + (b/a)² = (a⁻¹)² ∈ 𝔪`, a contradiction; otherwise `a/b ∈ 𝔪`
+   and the symmetric case. The `X`-adic instance then needs one thing: **a residue ring hom `B →+* F` whose kernel is `B.nonunits`** (from it,
+   `1 + x²` has residue `1 + x̄² ≠ 0` by `IsFormallyReal`, and the coset reduction takes `φ :=` it). That hom is the one named leaf.
+4. *K3-B:* `unitRing σ ≤ B.toSubring ↔ normOne σ ⊆ B` (`Subring.closure_le`), leaf 1, leaf 2, `Subring.natCast_mem`, `Nat.cast_ne_zero` —
+   a three-line composition.
+5. *K3-A:* S2 is a wheel statement, not a ten-point one: "the wheel at `y = x + v` with `r(−v) = a`, `r(−u) = r(−w) = b`, centre `c`, all
+   distinct, has `r(+u) = r(+w) = d` and `r(+v) = a`" — `4⁷` patterns, S1's cost. The line step is `Int.induction_on` with S2 forward and
+   backward (type P along `v` is type P along `−v`); the line-to-line step: a point of line `ℓ + 1` is adjacent to two consecutive points of
+   line `ℓ`, so its colour avoids their pair, and properness along the line alternates it.
+
+**Experience (`debruijn-experience-modeling`).** The published surface and its consumers:
+1. *Names the consumers will search:* keep the stubs' names — `not_colorable_chain` (finite), `add_one_le_chromaticNumber_unitDistance_of_chain`
+   (the plane; FS-49's host), `add_one_le_chromaticNumber_planeOver_of_chain` (FS-47's five-level), `four_le_chromaticNumber_planeOver_two_three`,
+   `five_le_chromaticNumber_planeOver_seven_of_G4`; `chromaticNumber_planeOver_adjoin_transcendental_eq` (the FS-39 stub's name) beside the core
+   `chromaticNumber_unitQuadrance_ratFunc`; `unitRing`, `inv_natCast_mem_unitRing_iff` (Mathlib's normal form is `n⁻¹`, not the stub's `1/p`).
+2. *Binders:* the drawing `q` and multipliers `u` explicit; the marked pair `{a b}` implicit (the `Forces` argument determines them); unit-ness as
+   `‖u j‖ = 1` (the graph's metric vocabulary; `mem_normOne_conj_iff` bridges from FS-47's side).
+3. *Modules, new only* (a declaration added to `SquareClass.lean` or `ResidueColouring.lean` rebuilds their dependents): `Chain.lean`,
+   `Instances/SqrtTwoThree.lean`, `Instances/SevenConditional.lean`, `Transcendental.lean`, `UnitRing.lean`, `Stripe.lean` — each added to
+   `Proofs.lean`, to `ARCHITECTURE.md`'s module map (checked by `python3 tools/check_architecture.py`), and its public theorems to
+   `scripts/Axioms.lean`'s CLEAN section.
+4. *Docstrings read aloud:* each headline theorem says what the kernel proves and what it does not (no upper bound for ℚ(√2,√3); `G4` is a
+   measurement; the number-field reading of `inv_natCast_mem_unitRing_iff` is row 57's gap). No `@[simp]` on any new lemma.
