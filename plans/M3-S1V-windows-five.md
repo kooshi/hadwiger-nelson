@@ -378,3 +378,62 @@ on both steps; J21's list omits 43, consistent with 43 not being known to lie in
 ### 3.7 Pending: the frozen FS-66 checker at 23
 
 *(filled when the run ends; see the next save)*
+
+## Stage 4 — SAVED (phase B3: J21's record read; the divergence table; the statements read aloud)
+
+*Opened after stage 3's commit (`47ae40fe`): `plans/M3-S1D-windows-five.md` (J21's record, stages 1–4, read in full), and of
+`plans/M3-exotic-colourings.md` only §S's target statements and §M's D2(a) paragraph (for the quotation checks). J21's tools, data, brief,
+report and commits not opened (not needed); no other crunch record opened.*
+
+### 4.1 The quotation checks the fence had blocked
+
+| # | quotation | source | result |
+|---|---|---|---|
+| Q5 | the brief's fixed list D0–D4 and the Q2 definitions paragraph | `plans/M3-exotic-colourings.md` §S, "Q2's target statements (J22's fixed list; verbatim)" | **verbatim**, all ten claims and the definitions (whitespace-normalised string match) |
+| Q13 | the owner's cylinder-lemma quotation (stage 3's header) | same, §M, "D2(a)'s obligation tree" | **verbatim** |
+| Q14 | the five J21 statements forwarded for B2 (the Handover) | J21's record, "Theorems this phase proved", lines 23–46 | **verbatim**, all five |
+
+### 4.2 The divergence table (J22 against J21; one line each)
+
+| # | item | kind | J21 | J22 | what follows |
+|---|---|---|---|---|---|
+| 1 | fixed list, all ten claims | truth | D0, D1, D1-fac, D1-2, D1-3, D3, D4 TRUE; D1-43 GAP; D2(a), D2(b) GAP at the same two steps, TRUE for all-thick `B` | the same, reached independently (B1) | **no divergence of truth on the fixed list** |
+| 2 | J21-D1-43p, "the fibre-share inequality alone gives exactly Hoffman's `0.21376`" | truth (headline) | headline as quoted; its body (§2.6) says "equality possible only when `ρ = s`" and that coupling to level one's integrality is "what the second-level moment relaxation does" | FALSE of `B₁(43)` (strictly below Hoffman, J22-T10); TRUE of the spectral relaxation | J21's body and J22 agree; the headline should read "with only the spectrum". |
+| 3 | J21-D1-43p, "so it cannot close 43 at depth" | truth (headline) | headline as quoted; body: the moment relaxation could, priced at 84 GPU-days | GAP: `B₁(43) < 369.8` is open | headline overclaims; the body is right |
+| 4 | J21-D1-43p, `α(Γ₄₃)/1849 ≤ 0.1974` (and `≤ 0.19740` in §2.3, §2.6) | wording | truncated display | `365/1849 = 0.197404` exceeds both displays | upper bounds should round up (`≤ 0.19741`); harmless against `1/5` |
+| 5 | J21-D1-43p's level-one exclusion | scope (headline) | the setting (no real place) is in §2.6 (a), not in the headline | TRUE in D1's setting | headline should name D1's setting |
+| 6 | J21-SL, "for a locally compact abelian `G`" | truth at the scope edge | TRUE for every LCA `G`, proof by Fubini | FALSE as stated at non-σ-compact `G` (counterexample `ℝ × ℝ_d`, §3.2); TRUE for σ-compact `G` | add "σ-compact"; every use (`F_v²`, `ℝ²`, products) is unaffected |
+| 7 | J21-SL, "any measured graph `Y`" | wording | the headline drops §3.1's "σ-finite measure space" | σ-finiteness needed | restore it in the headline |
+| 8 | "proper off a null vertex set" (format N′) | scope (J22 under-read) | J21 §3.2: every edge **with an endpoint** outside `Z` is proper; MX's measurable clause proves this stronger form by an outer-measure step | B1 re-derived MX with the weaker reading (edges with **both** endpoints outside) | J21's stronger form re-derived now (its outer-measure step: `W(x′,·)^{-1}(j) ⊆ K ∖ (P′ + T_K)`, of measure `< θ` by the mixing lemma): **TRUE**; B1's MX verdict extends to it |
+| 9 | J21-NG1 | route | checkerboard: `((D₀ ∩ E) × G_B) ∪ (E′ × J)`, `J` near-optimal in `B`, density `≈ ½(0.2267 + d(J))` | cylinder plus a hole: `(I″ × G_B) ∪ (H₁ × P) ∪ (H₂ × P)`, `P = ∏ p_vO_v²`, density `> 1/5` | both refute the literal **and** the containment reading (J21's support contains the squares `E′`, which carry unit pairs); J21 does not distinguish the readings |
+| 10 | J21-NG1, "possible for every D2-eligible `B`, since `β ≤ 0.18523`" | wording (a wrong intermediate bound) | `β ≤ 0.18523` (23's bound) | D2-eligible `B` may have a factor at 59 with all-levels ratio only known `≤ 0.19912`; the right reason is `β < 1/5 < 0.2267` | conclusion unaffected (near-optimal `J` works whenever `β < 0.2267`) |
+| 11 | J21-NG2's grade | grade | Theorems line "[hand, from `[Zhu2025]` §3 (read)]"; §4.2's table "external; its proof not re-checked" | external for `χ(A) > 125` (`[77]`'s Theorem 3.5, sketched in the survey) and for `χ_f(F) = 83/27` (Exoo's search); odd girth, the Cayley structure and the arithmetic exact here | grade the Theorems line "[hand + external]" |
+| 12 | J21-NG2, "ratio alone cannot carry D2" | scope (headline) | body: "At `k = 5` the ratio-only statement is not decided here" | the same: shown at 125 colours; at five it is `[75]`'s weakened conjecture at `n = 5` | headline should say "at 125 colours" |
+| 13 | D1-fac at 59 | grade | float spectrum, error `< 10⁻¹¹`, margin `8.8·10⁻⁴` | exact (Sturm counts on the 60 orbit polynomials; PARI independently), `0.199119854095` (J22-T1) | upgrade to exact |
+| 14 | D1-fac at 23 | grade | row 75's certificate cited, checker not re-run | the frozen checker re-run on the certificate (§4.4) | first-hand confirmation |
+| 15 | split places: the full local graph is not mixing | route | J21-NG3: two digit-classes of negative valuation, densities `→ 1/4`, no edge between | J22-T4: `C = {d₀(u) ∈ A₁, d₋₁(w) ∈ B₁}` and its complement-pair, densities `≥ 2/9` | same finding, two constructions |
+| 16 | the thick/non-thick table | agreement | twelve non-thick places; `λ*` 0.24863 (59), 0.33170 (23), 0.27187 (43), 0.625, 0.411, 0.339, 0.277, 0.2557, `1` (2) | the same values (J22-T1, T2); 167 sharper in J21 (`0.15160` exact against my Weil + Lemma P `≤ 0.154`) | none |
+| 17 | D1-2, CL1's qualifier | agreement | C14.2 (c) verbatim at `q = 2`; CL1's "split places odd" can be dropped at ℚ(√47), ℚ(√167) | the same (J22-T3) | two minds now, for the front-page lane |
+
+### 4.3 The statements read aloud against the informal claim
+
+The informal claim (the brief): "can a colouring read off finitely many local coordinates of the field through measurable windows
+five-colour its plane? … a proof that none exists removes one more kind of falsifier."
+
+- **What is proved, read aloud:** "Over ℚ(√167), for a finite set `S` of places with no real place and no place above 43, no map from the
+  product of the local planes to five colours with measurable classes is proper on every local unit step (D1 with D1-fac, D1-2, D1-3; also
+  proper only off a null set, or read at finite levels). If `S` has a real place and otherwise only 5-thick places, a Borel such map exists
+  iff the real plane has a Borel proper five-colouring (J21-RED, D2p)." **Against the claim:** it removes the window falsifiers that read no
+  real place and no place above 43 — and no others. It does **not** remove falsifiers that read a real place: there the question contains the
+  plane's measurable (or Borel) chromatic number (D0), open between 5 and 7. The claim's "a proof that none exists" is not landed; its
+  finite-place half is, minus 43.
+- **D2(a) read aloud** says "iff" for every `B` whose factors have ratio `< 1/5`, measurably and everywhere-proper. **What is proved is
+  weaker in two ways:** only for thick factors, and measurable-to-measurable only off a null vertex set (Borel-to-Borel exactly). A reader
+  who took D2(a) as landed would be wrong on both counts.
+- **The one-sidedness:** a window colouring gives a colouring of `F²` (`r ↦ W(ι_S(r) + t)`); the converse is not claimed anywhere. So a "no"
+  over some `S` removes only that format of falsifier, never a colouring of `F²` that no window gives — which is how every claim above is
+  worded, and how the report must word it.
+
+### 4.4 The frozen FS-66 checker at 23
+
+*(recorded below when the run ends)*
