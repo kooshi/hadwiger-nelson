@@ -156,3 +156,64 @@ is the pyjama condition — a band character of `R_S` is a point of the dual not
 problem's answer (Manners) is the statement that over rational rotations the only uncovered points are near torsion**. MMR 2013's "rational
 obstructions" are our torsion band characters; Manners's "irrational trick" (adding three rotations `ζ₁, ζ₂, ζ₃` with `n(ζ₁ + ζ₂) = ζ₃`) is a
 chain-theorem-shaped closing move (G55). The one-prime failure (result 6) is Manners's asserted "lacunary" case.
+
+## Stage 6 — SAVED (result 6: one prime; done second, because it leans on stage 1's Manners reading)
+
+**Statements searched** (J12's record, grade per the owner: one derivation, blind check J13 pending): J12-ONEa "`Θ₄(R_{{p}}) ⊄ T + A`
+for every prime `p ≡ 1 (mod 4)`"; J12-MS "`MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists"
+(J12-MSp at every `p ≡ 1 (4)`); J12-C3 "the orders of band torsion characters of `R₅` are unbounded"; J12-B1 "`Θ₄(U₅)` ≅ bi-infinite orbits
+in `Q₀ = [−1/4,1/4]²` of the rotation `ω = (−4−3i)/5` about one of nine centres per step" (`plans/FS91-S1D-one-prime.md` lines 339–365).
+
+**Named in the discipline's words:** the one-parameter ("lacunary") case of Furstenberg–Berend on an `S`-adic solenoid with an isometric
+archimedean direction; in piecewise-isometry language, a **rotation by a Pythagorean angle (`cos = −4/5`) with a finite set of re-centrings
+("round-off")**, whose admissible codings are the band characters (J12-B1, B2: torsion ⟺ periodic coding); the minimal set's coding is a
+primitive aperiodic **`S`-adic subshift** (J12-W, J12-Ω). Periodic codings of unbounded period are "infinitely many periodic orbits".
+
+### 6.1 Queries
+
+| database | query | hits | what bears |
+|---|---|---|---|
+| zbMATH | `ti:"round-off errors and p-adic numbers"` | 1 | **Bosio–Vivaldi, Nonlinearity 13 (2000), Zbl 1009.65077 (author summary, a claim):** a lattice discretisation of a planar rotation with rational trace of prime-power denominator `p^n` embeds in "a smooth expansive dynamical system over the `p`-adic integers, consisting of multiplication by a unit composed with a Bernoulli shift" |
+| zbMATH | `au:"Vivaldi, Franco"` (listing) and its titles with rotation / lattice / round-off / `p`-adic | 66; 11 | Vivaldi 2006 *The arithmetic of discretized rotations* (review withheld); Kouptsov–Lowenstein–Vivaldi 2002 *Quadratic rational rotations of the torus and dual lattice maps*; Lowenstein–Vivaldi 1998, 2000, 2010; Vivaldi–Vladimirov 2003 |
+| zbMATH | `ti:"discretized rotation"`; `ab:"discretized rotation"` | 2; 5 | **Akiyama–Pethő, *Discretized rotation has infinitely many periodic orbits*, Nonlinearity 2013** (summary: `(x, y) ↦ (y, −⌊x + λy⌋)` has infinitely many periodic orbits for every `λ ∈ (−2, 2)`); Akiyama–Mance 2026; Nouvel–Rémila 2004, 2005; Berthé–Nouvel 2007 (discrete rotations and symbolic dynamics) |
+| zbMATH | `ti:"non-ergodic piecewise affine maps of the torus"` | 1 | **Adler–Kitchens–Tresser, ETDS 2001** (summary: a minimal uniquely ergodic invariant set; periodic octagons coded by "an equal length substitution rule or the triadic odometer") |
+| zbMATH | `ab:"piecewise rotation" & ab:"rational"`; `au:"Goetz, Arek"` | 2; 18 | Goetz–Poggiaspalla 2004 (rotations by `π/7`); Goetz 1998–2006 (piecewise isometries); off the arithmetic question |
+| zbMATH | `ab:"S-adic" & ab:"minimal" & ab:"primitive" & ab:"substitution"` | 3 | Bédaride–Hilion–Lustig 2021; Arbulú–Durand–Espinoza 2024; Durand–Perrin 2022 (the `S`-adic subshift vocabulary; general) |
+| zbMATH | `ab:"piecewise isometry" & ab:"periodic" & ab:"aperiodic"` | 1 | Akiyama–Harriss 2013 (pentagonal domain exchange) |
+| zbMATH | `ab:"rotation" & ab:"round-off" & ab:"p-adic"` | 1 | Vivaldi–Vladimirov 2003 |
+| zbMATH, 0 hits | `ab:"Pythagorean" & ab:"rotation" & ab:"lattice"` (2 conference volumes only); `ab:"pyjama" & ab:"lacunary"`; `ab:"Furstenberg" & ab:"lacunary" & ab:"counterexample"`; `ab:"heteroclinic" & ab:"solenoid"`; `ab:"one-parameter" & ab:"minimal set" & ab:"torus" & ab:"positive dimension"` | 0 | — |
+| arXiv | `au:Vivaldi AND ti:rotations` | 4 | 1709.08904 (nonlinear rotations on a lattice), 1208.1132 (discretised rotations), 0909.3458, 2303.17955 |
+| arXiv | `abs:"discretized rotation" AND abs:"periodic orbits"` | 1 | 1206.3868 (Akiyama–Pethő) |
+| arXiv, 0 hits | `au:Vivaldi AND abs:"p-adic" AND abs:rotation`; `abs:"Pythagorean" AND abs:"rotation" AND abs:"p-adic"`; `abs:"rational rotation" AND abs:"lattice" AND abs:"minimal" AND abs:"odometer"` | 0 | — |
+
+Raw output: `data/fs91/j23p/r6-zb.out`, `r6-rev.out`, `r6-arx.out`.
+
+### 6.2 Read
+
+- `[Manners2015]` §5.5 (read in stage 1), verbatim: "we could not have used a much smaller semigroup. Indeed, the appropriate results are
+  false for the smaller set `{θ₅^r : r ≥ 0}`; by analogy with Theorem 4.1, we might say this set is 'lacunary' in some sense." **No proof or
+  example is given in §1–§5** (§6–§7 and the appendix, unread, were not searched for one; `grep` of the full text for "lacunary" finds only
+  §4 and §5.5).
+- `[Berend1984min]` Lemma 3.3 (FS-89's reading): a one-parameter semigroup has minimal sets of positive Hausdorff dimension — without any
+  band condition.
+- Bosio–Vivaldi 2000, Akiyama–Pethő 2013, Adler–Kitchens–Tresser 2001: **author summaries only** (not readings; G50). Bosio–Vivaldi and
+  Adler–Kitchens–Tresser are not on arXiv (on Kooshi's list); Akiyama–Pethő is (1206.3868), not opened (budget).
+
+### 6.3 The verdict for result 6 — **not found as stated; the negative half-statement is asserted in print without proof**
+
+- **ONE-a / J12-MS (a band-1/4 minimal set outside `T + A` at one prime):** not found. **The nearest printed statement is `[Manners2015]`
+  §5.5's assertion** that the analogue of his Lemma 5.3 is false for the single-prime semigroup `{θ₅^r}` — asserted, no proof in the part
+  read, and about his half ring `ℤ[i][1/P₅]` and a semigroup, not `R_p` and the group `U_p` with the band `1/4`. J12's ONE-a, if J13
+  confirms it, is a proof of a form of that assertion. `[Berend1984min]` Lemma 3.3 is the band-free fact.
+- **J12-C3 (unbounded torsion orders):** not found for band characters. Analogue in print: Akiyama–Pethő 2013 (infinitely many periodic
+  orbits of an integer-rounded rotation) — a different, deterministic system; J12-B2 makes torsion band characters the periodic codings of a
+  multi-valued re-centred rotation, so "unbounded orders" is "periodic codings of unbounded period" there.
+- **J12-B1/H/W/Ω (the coding and its `S`-adic hierarchy):** the discipline exists — Pythagorean-trace discretised rotations with a `p`-adic
+  embedding (Bosio–Vivaldi 2000, Vivaldi 2006) and substitution/odometer codings of piecewise affine torus maps (Adler–Kitchens–Tresser
+  2001) — **undecided until Bosio–Vivaldi 2000 and Vivaldi 2006 are read**: they are the likeliest place for a coding of rational-cosine
+  rotations by `p`-adic dynamics of the J12-B1 kind.
+
+**Wording to use:** "not found in print as stated; `[Manners2015]` §5.5 asserts without proof that the two-prime rigidity fails for one
+prime; the discretised-rotation literature (Bosio–Vivaldi 2000; Akiyama–Pethő 2013) holds analogues, unread beyond summaries."
+**`CLOSED-QUESTIONS.md` candidate:** none as a posed question — Manners's sentence is an assertion, not a question; but if J13 confirms ONE-a,
+the record can say it supplies a proof of the one-prime failure Manners asserts (in the band form on `R_p`).
