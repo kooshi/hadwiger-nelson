@@ -1,0 +1,11 @@
+f(1) = 2, f(i) = 2
+#primes above 2: 2 (e,f) = [[2, 2], [2, 2]]
+P_1^2: min 2-adic valuation of f on a Z-basis = 1  -> not killed
+P_1^3: min 2-adic valuation of f on a Z-basis = 2  -> KILLED (maps into 4Z_(2))
+P_1^4: min 2-adic valuation of f on a Z-basis = 2  -> KILLED (maps into 4Z_(2))
+P_2^2: min 2-adic valuation of f on a Z-basis = 0  -> not killed
+P_2^3: min 2-adic valuation of f on a Z-basis = 0  -> not killed
+P_2^4: min 2-adic valuation of f on a Z-basis = 0  -> not killed
+PLANT f' on P_1^4: min val = -1
+PLANT f' on P_2^4: min val = -1
+f(u) = -5/3   f'(u) = -5/3

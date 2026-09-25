@@ -296,3 +296,143 @@ mixing attempt fails at step (5): a class indicator of a four-colouring of `P_m 
 *What VK leans on:* FS-66's certificate at 11 (both ramified 11-towers), Zhang's Thm 1.8, D2-B (not L1), row 67's kernel freedom of
 `P₄`, and **one** forced pair (row 78 [cert] or row 85 [given (S″)]). Harder's `8/3` (measured, G55) would also do, at a lower grade.
 
+
+## C2 — comparison with the plan (§0.3–§0.4, §Y, §R-review) and the plan-phase advisor's record (§3 C4, §4)
+
+Opened only after every C1 verdict was committed (5d6e7971). **No divergence of truth on any of V0–V4, V3-ram, VK.** Four steps the
+sketches leave implicit are load-bearing (D2, D4, D6, D3), and one side claim in §0.4 is false (D8).
+
+| # | where | kind | the divergence | resolution |
+|---|---|---|---|---|
+| D1 | §0.3 (ii), V2 | route | The sketch gets finite index as "the ideal holds a nonzero integer `c`, and `R/cR` is finite (`1/p ∈ R` off the stable primes, `R` `p`-integral of rank ≤ 4 at them)". Mine: `cO' ⊆ R` (Lemma R (3)). The sketch leaves unsaid why a nonzero ideal holds an integer: `R` is `Gal(L/ℚ)`-stable (each automorphism maps `U_F` to `U_F`), so `N_{L/ℚ}(α) ∈ αR`. | both valid; keep both |
+| D2 | §0.3 (iii), V3 | completeness (true, step missing) | "A periodic colouring factors through a finite quotient of `R`, which is a product of stable local planes": weak approximation for the torus gives the **connection set** as a product, not the **vertex set**. `R/nR ≅ ∏ O_𝔔/nO_𝔔` needs `R` dense in `∏_{𝔔|p} O_𝔔` (the ℤ_p-algebra that the local norm-one groups generate is the whole local ring: idempotents, Teichmüller units, a uniformizer) plus `O'/R` finite. Without it, `Cay(R/nR, U)` could be a proper cover of the product. | closed by Lemma R (4)–(5) |
+| D3 | §0.1, §0.3 (iii), V3 | source | The dyadic factor's ratio exactly `1/4` at every level is sourced to "FS38-L1, D2-A". The owner reports L1's tightness half defective. | re-sourced to Lemma D (FS38-L2's non-strict half) and D2-B; independent build at levels 2–8 |
+| D4 | §0.3 (iii), V3 for 83 and 131 | scope | "11 and 23 by row 75; the split stable primes by G54's constant ratio". **For 83 and 131, 19 is a split stable prime and Hoffman's bound there is 0.2756 > 1/4**, so G54's constant (Hoffman) ratio does not give `α/n < 1/4`; row 75's certificate `U(19) = 77.51 < 361/4` does. P-83's "by the same argument" holds only with 19 added to the certificate list. (At 59, 23 goes either way: Hoffman 0.24908, or the certificate 0.1852.) | V3 true for 83 and 131, with 19 sourced to FS-66 |
+| D5 | §0.3 (iii) | completeness | Zhang's (i) needs `H` connected; unstated in §0.3 (§PA l. 359 states the hypothesis). True: each factor's connection set spans additively (the ℤ-span of `U` is `R`) and none is bipartite. | closed in V3 step (4) |
+| D6 | §0.4, VK | **completeness (true, step missing; the most substantive)** | "The odd part at K (11, then nothing below 83; G44) has `α/n < 1/4`", unsourced. **K's 11-adic places are ramified** (two primes, `e = f = 2`), Hoffman's bound there is 0.2855 at every level, and row 75's certificate is stated for the unramified `UD(ℤ/11^k, 2)`. It is needed for the ramified tower. | closed by Lemma P (ii): FS-66's L1–L2 need only the coset structure and Hensel's count, both valid at a ramified place (FFT at levels 2 and 3: the primitive bound attained exactly); levels 1–2 also by FS-66's Theorem E |
+| D7 | §0.4, VK | route | `F(R_K) ≠ 0` from row 85 (`8Λ`, given Parts's trees). Mine also offers row 78's 2,044-point certificate (frozen checker), a source independent of Parts's trees. | keep both; the VK row can cite either |
+| D8 | §0.4 "Negative" and the advisor's M5 (3a) | **truth, in a side claim** | "ℚ(√11) … has a usable 7 whose `Γ₇` has `α/n > 1/4`, so MIS-normality pulls back from `Γ₇` instead." **False as stated.** (1) Zhang's MIS-normality says nothing about four-colourings when the largest ratio exceeds `1/4` (`2/7` at 7): colour classes need not be maximum independent sets. (2) ℚ(√11)'s plane has periodic four-colourings pulled back from its dyadic `K₄` (`11 ≡ 3 mod 8`, the same `P_m` tower; `[Fischer1990]` Thm 10(i)), and these do not factor through `Γ₇`. | the conclusion `F(R_{ℚ(√11)}) = 0` stands by row 66 (pull back a gapped four-colouring of `Γ₇`, G54: gaps found at 7; `slack_addCayley_of_fanGap`, `Slack.forces_iff`); "recovered by the same theorem" should read "by row 66's gap transport". Not one of the V statements |
+| D9 | advisor's C4 | wording | "`c⁻¹𝔽₅₉^×` meets `μ₆₀` in at most `±1`": the intersection is at most a coset `{±s₀}`, two points, not necessarily `{±1}`. The bound `2·59^{k−1}` is unaffected. | wording |
+| D10 | V3-ram's statement | scope | "ratio at level 1": the advisor's C4 means Hoffman's ratio bound ("keeps its Hoffman ratio at every level"), my reading (a). Under the true-independence-ratio reading the middle inequality is FS-68-open from level 3. | agreed on reading (a) |
+| D11 | §R-review R.2 item 3 | number | "At 31, Hoffman misses four-tightness by `4.4·10⁻⁵` (G54)". Not reproduced as `λ_min + d/3` (**1.5617·10⁻⁴**), as the ratio gap `1/4 − h` (2.745·10⁻⁶), or as `λ/d + 1/3` (4.880·10⁻⁶). It matches `9(λ_min + d/3)/d = 4.39·10⁻⁵` numerically, a normalisation G54 should state. **The sign, which is all V3 uses, is certain:** two code paths agree to 45 digits at 60-digit precision. | for G54's close: state what the `4.4·10⁻⁵` measures |
+| D12 | V0, V1 | none | the same argument (V0: `issquare(3d)` and PARI; V1: compactness and monotonicity). Mine adds the strictness example `Λ = ℤu`. | — |
+| D13 | V4 | not in the sketches I may read | V4 is the advisor's post-plan corollary; my proof stands alone. | — |
+
+*Where I took a different route, both are kept:* D1 (finite index), D7 (the forced-pair source), and my V3 proof's first attempt,
+Hoffman's equality case on the product. That route **fails at 11 and 19** (0.2855, 0.2756), which is why V3 and VK both need Zhang's
+MIS-normal half plus FS-66's certificate there: the plan's route (Zhang), not mine, is the one that works. The advisor's C4 and my
+Lemma P are the same argument, found independently.
+
+## C3 — scope and margins
+
+**Strictness at every odd stable place and every level** (independence ratio `< 1/4`, the hypothesis of Zhang's (i)). The worst case
+at each place, over all levels:
+
+| field | place | source | ratio bound (every level) | margin to 1/4 |
+|---|---|---|---|---|
+| 59 | 11 (×2, split) | FS-66 certificate `U(11)` [cert] | 0.23309 | 0.0169 |
+| 59, 131 | 23 (×2) | Hoffman (level 1) + Lemma P; also FS-66 `U(23)` = 0.1852 | 0.249077 | `9.2·10⁻⁴` (λ: 0.0393) |
+| 59, 131 | **31 (×2)** | Hoffman + Lemma P | **0.2499972548** | **`2.745·10⁻⁶` (λ: `1.5617·10⁻⁴`) — the thinnest; strict, certified** |
+| 59, 83, 131 | 43, 47, … (`p ≥ 37`) | Weil + Hoffman + Lemma P | `≤ 2√p/(p+1+2√p)` ≤ 0.2296 | ≥ 0.020 |
+| 83, 131 | 19 (×2) | FS-66 certificate `U(19)` [cert] (Hoffman 0.2756 fails) | 0.21471 | 0.035 |
+| 59 / 83 / 131 | ramified `d` | Hoffman + Lemma P (V3-ram) | 0.19912 / 0.17411 / 0.13787 | ≥ 0.051 |
+| K | 11 (×2, ramified) | FS-66 certificate via Lemma P (ii) [cert] | 0.23309 | 0.0169 |
+| K | 83, 107, 131, … (×4) | Weil + Hoffman | ≤ 0.1741 | ≥ 0.076 |
+| all | primitive characters at any level | Lemma P | `2/(p+3)` ≤ 0.143 | — |
+
+*The margin at 31, confirmed explicitly (the owner's R.2 item 3):* `λ_min(Γ₃₁) = −10.66651049380006395962…` (= `−K(1, c/4)` at the
+minimising `c`; direct circle sum and Kloosterman sum agree to 45 digits), so `λ_min + 32/3 = +1.5617·10⁻⁴ > 0`, Hoffman's ratio is
+`1/4 − 2.745·10⁻⁶`, and by Lemma P (i) it is the same at every level (`|λ_min| > 2`). **Strict.** A finite product of odd factors has
+ratio equal to its largest factor's (Zhang's equality, iterated), `< 1/4`.
+*V3 for 83 and 131, place by place:* done in V3 and the table: **true, with 19 by FS-66's certificate** (D4).
+*The dyadic factor* has ratio exactly `1/4` at every level (Lemma D). Zhang needs only that the odd side is strictly smaller.
+
+**VK's prior-art check** (searched 2026-09-24; nothing classifying the four-colourings of `K²` or of `ℤ[U_K]` was found):
+- *The held Polymath16 threads* (`~/source/library/notes/polymath16-threads-1-18-text.txt`, regex with ±220-character windows: "every
+  4-colo(u)ring", "all 4-colorings", "4R", "periodic", "ring generated by", "2-adic", "number field", the field in four spellings,
+  "Fischer", "dyadic", "pulled back", "local at"). **Nearest:**
+  - **David Speyer, 25 April 2018** (second thread): for the Moser ring `R = ℤ[ω₁, ω₃] "= O_K[3^{-1}]"` (his `K = ℚ(√−3, √−11)`),
+    `R/2R ≅ 𝔽₄ × 𝔽₄`, and the two projections are four-colourings. He asks: *"Can we show that, in any 4-coloring of R, the elements 0
+    and 2 get the same color? If so, it follows that the only 4-colorings are the ones I found"*, and *"are there 4-colorings … which
+    are not periodic modulo 2 A₂(ω₃)?"* De Grey answers *"there are many such colourings"*. This is VK's level-one picture, posed on the
+    smaller ring. (His identification of `ℤ[ω₁, ω₃]` with `O_E[1/3]` conflicts with FS85-V2-T8; not examined here.)
+  - **Gibbs** (earlier thread, relayed by Speyer) asks whether there are four-colourings of the Moser ring not periodic mod `4R`.
+    **Speyer, 3 May 2018:** *"there are many 8R-periodic 4-colorings which are not 4-periodic"*, via one projection to `ℤ[ω]/8`. On the
+    Moser ring the answer is `8R` (row 78/85, Hubai). **VK's `4R_K` is consistent:** the Moser ring's graph is a subgraph of `Cay(R_K, U_K)`
+    (`R_E = O_E[1/3] ⊆ O'_K`, `U_E ⊆ U_K`), `4R_K ∩ R_E = 4R_E`, and its `8R`-periodic colourings do not extend to `K²`'s coset — the same
+    mechanism as `F(Λ) = 8Λ ⊊ 4Λ`. The extra unit vectors `ζ₁₂` (the rotation by 30°), `i`, … are what force period 4.
+- *The wiki's Algebraic formulation page* (`polymath16-algebraic-formulation-2018.txt`): the table covers `ℤ`, `R₁ = ℤ[ω]`, `R₂ = ℤ[ω, ω₃]`
+  ("L+P 8", "all 4-colorings are periodic with period 8", computer-assisted), `R₃`, `R_H`, `R₄`, and one more. None of them contains `i` or
+  `ζ₁₂` (no `ℤ[i]`, no `ζ₁₂`, no `π/6`): **the unit-vector ring of the plane over K is not in the table.**
+- *`[Fischer1994]`* (text layer of the held scan; its row in `BIBLIOGRAPHY.md`): one additive ℤ/4-colouring of the plane over his family
+  (which contains K), no classification. **Used here as a positive control on VK, by formula** (`data/fs86/b1/fischer_vk_control.gp` →
+  `.out`, PARI, exact): his map `v = f mod 4`, `f(x) = 2(x₁ + x_i + x_{√33} + x_{i√33})`, kills `R_K ∩ 𝔓₁³` (hence `𝔓₁⁴`) and kills
+  **no** power `𝔓₂^k`, `k ≤ 4`. **It reads exactly one dyadic prime, at level 3**, as VK predicts, and it does not kill `𝔓₁²`, as it must,
+  since it separates `(0, 2P)`. Both outcomes were reachable. G41's reading ("the ℤ/4 colouring is local at 2 at a finite tower level") is
+  thereby confirmed exactly.
+- *Verdict:* **no prior statement of VK found.** The question was posed in 2018 at the ring level (Speyer; Gibbs) and answered there by
+  computer (Hubai; 8-periodic). The field-level classification over K, with period `4R_K` and locality at one dyadic prime, was not found
+  in the threads, the wiki page or Fischer. Not searched: zbMATH (the three sources above are where such a statement would be), and
+  `[Johnson2000]`/`[Johnson2006]` (unread, not held; FS-81's standing debt).
+
+## Theorems this phase proved
+
+*(In the format of `plans/FS79-derivation.md`; these are candidate entries for `plans/FS86-derivation.md`, which the close owns.)*
+
+**B1-LR — Lemma R: `ℤ[U_F] = {x ∈ F(i) : x integral at every conjugation-stable prime}` for every real field `F` with `F(i)/ℚ` Galois
+(so every real quadratic field and K). [hand; verifier B1]** Prime inversion's `⟸` by Chevalley's extension theorem; `cO' ⊆ R`;
+density of `R` in the product of the stable completions (weak approximation through the parametrisation `(1+it)/(1−it)`, idempotents,
+Teichmüller units, a uniformizer); `O'/R` finite with no torsion. *Proof:* this record, Lemma R. *Proof verdict:* closes. *Rests on it:*
+V2, V3, VK. *Prior art:* `[Fischer1990b]` Thm 5 (the ring in closed form for real quadratic fields) and Thms 1, 3 (prime inversion);
+ASTRA's prime inversion (G55); the characterisation "integral at every stable prime" in this form not found. *Kernel:* **stub** —
+FS-47 (the unit-vector ring in the kernel) is its natural home.
+
+**B1-LP — Lemma P: the primitive-character bound `|λ| ≤ 2p^{m−1}` on every odd stable residue tower, unramified or ramified; hence
+Hoffman's ratio is `max(h(Γ_p), 2/(p+3))` at every level, and FS-66's fibre-density inequality and every `B₁` certificate bound
+every level of a ramified tower too. [hand + tools exact (FFT at five towers, bound attained on the ramified ones); verifier B1]**
+*Proof:* this record, Lemma P. *Proof verdict:* closes. *Rests on it:* V3 (the ramified place), V3-ram, VK (K's ramified 11-towers).
+*Prior art:* FS-66's L1 (`data/fs66/b1/SOUNDNESS.md` §1, unramified), the advisor's C4 (ramified 59, Hoffman only), `[MMST1998]`
+(unramified spectra). The extension of the certificate to ramified towers is new here. *Kernel:* declined (finite character sums;
+FS-41's stub would host it).
+
+**B1-LD — Lemma D: the dyadic tower `P_m` is Hoffman-tight at four colours at every level, from FS38-L2's non-strict half (not
+FS38-L1). [hand + tools exact (independent build, levels 2–8); verifier B1]** *Proof:* this record, Lemma D. *Proof verdict:* closes.
+*Rests on it:* V3 step (4), VK step (4). *Prior art:* FS38-L2 (the pairing bound). *Kernel:* with FS-41's stub.
+
+**B1-V2 — `F(R)` is an ideal of `R`, every non-zero ideal has finite index, so `F(R) ∈ {0, P(R)}` (field plane, per `R`-coset). [hand; verifier B1, blind; = the plan's §0.3 (ii), route D1]**
+*Proof:* this record, V2. *Proof verdict:* closes. *Rests on it:* V4, VK, the competition's frame. *Prior art:* G55's transport; the
+dichotomy's form not found. *Kernel:* **stub** — the ideal half is a short Lean lemma on `forcedSubgroup` (row 78's `Kempe.lean`), and
+the finite-index half needs Lemma R.
+
+**B1-V3 — for `F = ℚ(√d)`, `d ∈ {59, 83, 131}`: `P(R) = R ∩ 𝔓⁴`, and every periodic four-colouring of `Cay(R, U_F)` is pulled back from
+`P₄`. [hand + cert (FS-66 at 11 and 19) + `[Zhang2012]` Thm 1.8; verifier B1, blind; = the plan's §0.3 (iii), with D2–D5]** *Proof:*
+this record, V3. *Proof verdict:* closes, given FS-66's certificates and Zhang's theorem. *Rests on it:* V4, the competition's "the weak
+yes is free". *Prior art:* Zhang (the product step); the field-level statement not found. *Kernel:* declined for now (Zhang's theorem and
+FS-66's certificate are each a kernel project).
+
+**B1-V3ram — the ramified 59-tower has Hoffman ratio `max(0.199120, 2/62) < 1/5` at every level (likewise 83: 0.1741; 131: 0.1379).
+[hand + tools exact; verifier B1, blind; = the advisor's C4]** *Kernel:* declined (with B1-LP).
+
+**B1-V4 — given B1-V2, B1-V3: `F(R) ≠ 0 ⟺ (0, 4)` forced `⟺` some finite unit-distance graph over `F` forces a distance-4 pair. [hand; verifier B1]**
+*Kernel:* declined (a corollary).
+
+**B1-VK — over `K = ℚ(√3, √11)`: `F(R_K) = P(R_K) = 4R_K`, and every proper four-colouring of each `R_K`-coset of `K²` is the pullback of
+a four-colouring of `P₄` at exactly one of K's two dyadic primes. [hand + cert (FS-66 at 11, through B1-LP) + `[Zhang2012]`, given one
+forced pair (row 78 [cert] or row 85); verifier B1, blind; = the plan's §0.4, with D6, D7; positive control: `[Fischer1994]`'s colouring
+reads one prime, at level 3]** *Proof:* this record, VK. *Proof verdict:* closes under those inputs. *Rests on it:* a candidate ledger
+row (the owner's inventory item 13); FS-87 (de Grey's lattice in the kernel) gains a field-level target. *Prior art:* Speyer 2018 posed
+the ring-level question at level one; Hubai (8-periodic, ring, computer) and row 78/85 (lattice) answer it on smaller graphs; the
+field-level classification not found (C3). *Kernel:* **stub** (with FS-87; the kernel form needs Lemma R, Zhang and FS-66).
+
+**B1-D8 — ℚ(√11)'s plane has periodic four-colourings pulled back from its dyadic `K₄` (not through `Γ₇`), and `F = P = 0` there by row
+66's gap transport, not by MIS-normality. [hand; verifier B1]** *Kernel:* declined (row 66 is kernel).
+
+## "Would have searched here" log
+
+1. Would have asked a solver for a four-colouring of `P₅ × Γ₁₁` not pulled back from `P₅`. Did instead: V3's proof (Zhang + FS-66).
+2. Would have found maximum independent sets of `Γ₁₁` to see whether Hoffman's 0.2855 is loose there. Did instead: read row 75's
+   certified `U(11)` and derived that it bounds every level (Lemma P (ii)).
+3. Would have enumerated the four-colourings of `K₄ × K₄`, or of `P₂ × P₂`, to check the one-prime claim. Did instead: the `a(x) + b(y)`
+   lemma, and Fischer's colouring by formula.
+4. Would have searched the circle over the ramified 11-adic level 3 for independent sets. Did instead: exact FFT spectra (Lemma P), no
+   colouring or independent set computed anywhere in this phase.
