@@ -1,5 +1,7 @@
 # Session handoff: FS-86 about to open (2026-09-25)
 
+*Superseded 2026-09-25 by `plans/SESSION-HANDOFF-2026-09-25-fs89-stage0.md` (FS-86 closed; FS-89 at Stage 0).*
+
 *Written by the product owner for a reader with no conversation memory. It supersedes
 `plans/SESSION-HANDOFF-2026-09-24-fs85-open.md`. That file's §1 rules table and §3 lessons still apply, except where this file updates
 them.*
