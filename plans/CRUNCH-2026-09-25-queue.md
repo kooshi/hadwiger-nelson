@@ -201,3 +201,76 @@ J05, J28.
   it.
 - **The `[Johnson2000]` and `[Johnson2006]` reading**: not held. Obtaining them is Kooshi's call (§7 item 3); they block the novelty claim
   on row 82 and on J02's result alike.
+
+---
+
+## §3. The briefs written by this plan (ready to paste: a launch is "Your brief is on disk: read `<path>` in full first.")
+
+| job | brief | notes |
+|---|---|---|
+| all | `data/crunch-2026-09-25/briefs/STANDING-RULES.md` | part of every brief. It carries: the no-children rule and its reason, work in stages and its reason, the resume paragraph, the ban and Kooshi's intent, the would-have-searched log, "all novel knowledge is a success" and don't lean to a yes, verbatim quotation, commits by path, the report form |
+| J00 | `…/briefs/J00-clerk.md` | Sonnet; recurring; the launch line also names the jobs started since the last fold |
+| J01 | `…/briefs/J01-band-to-nine-verifier.md` | blind; fenced from the PA-B3 argument; reports after `k = 6` too |
+| J02 | `…/briefs/J02-three-colours-stage0.md` | carries Poros's sketch verbatim, including the sharpened message, which exists nowhere else on disk |
+| J09 | `…/briefs/J09-three-colours-blind.md` | blind to the sketch and to J02; waits for J02's lemma statements at stage 4 |
+| J03 | `…/briefs/J03-M1-reframe.md` | the reframe template; writes J07, J08, J10–J13 |
+| J04 | `…/briefs/J04-M2-kernel-reframe.md` | writes J14–J17 (and J17V); the kernel lines every kernel brief carries verbatim |
+| J06 | `…/briefs/J06-M3-reframe.md` | writes J18, J20–J22 and J19's skeleton |
+
+## §4. Skeletons for every other brief (for the job that writes it)
+
+### 4.1 Derivation, blind verifier, kernel (written by the milestone's reframe job)
+```
+*Brief for crunch job **J<nn>**, milestone <M> (<stub>), <kind>. Opus 5.5, <date>. Written by <writer job> (<plan path> §S).*
+Hello. You are de Bruijn (DEBRUIJN.md), <role>, in /home/kooshi/source/lean-dir. Read CLAUDE.md, WORKFLOW.md, DEBRUIJN.md from disk.
+STANDING-RULES.md is part of this brief; read it in full.
+## The question, and why now            — plain words; what either answer would buy; "every outcome counts" (rule 4) in one line
+## The statements (verbatim)            — each in quotation marks with its source address; the definitions' addresses
+## Read first, from disk                — the verified inputs, by path and theorem id
+## Fenced until <stage> is committed    — records, briefs, inventories, commits that carry a route (verifiers: the derivation's
+                                          record, data, tools, brief, the close inventory, the plan's route sections)
+## Stages                               — each with a token size; stage 1 = the quotation check + C0 (a probability per claim);
+                                          for a verifier: blind phase, then the lemma-statement phase, then the divergence table;
+                                          for a kernel job: the skeleton's first two leaves priced before anything else
+## Record and paths                     — record path; data/<m>/<job>/; tools/crunch_<job>_*.py; budget (harness) and hand-back line;
+                                          the report after which stages
+```
+Kernel briefs add J04's five verbatim lines (the build line, the slot refusal, the gate, `--` comments, "you are the only kernel job").
+
+### 4.2 Reframe (J29, J27's reframe, and any milestone a job proposes): copy J03's brief and change
+the milestone block (its questions, verbatim from its stub), the verdict columns, the §PA disciplines, the briefs it must write, and the
+paths. **J29 (FS-84, post-ban)**: add "the plan's stages after the reframe run from 2026-10-01; write their briefs, and price each solver
+run against row 84's band (the degree law's four-colour aim is about 18.4), rows 92 and 96 (windows and characters are excluded), and the
+advisor's point that if M1's stage 0 lands, `L = 5` is the only testable range below the problem itself."
+
+### 4.3 Reader or audit (J26 and prior-art readers)
+Copy `data/fs89/briefs/PA-tardif2023-reader-brief.md`'s form, with the questions to answer, the verdict vocabulary ("not in X; the
+method is X's", never "new"), the rule that bibliography rows are proposed in the record and never written, and G50's "an abstract is
+not a reading". **J26 specifically:**
+- find `[AmbrusEtAl2023]`'s verification code and certificate (arXiv 2207.14179, its ancillary files, the authors' pages);
+- if found, run it unmodified under `scripts/slot.py`, and only if its documented runtime is under about an hour;
+- otherwise price it and stop.
+
+A run of hours is a machine-long certificate (§1.7).
+
+### 4.4 Front-page (J24, J25) and compression (J05)
+Copy `data/fs89/briefs/CL-close-planner-brief.md`'s front-page sections, and add:
+- the single-writer rule (§1.5);
+- the byte cap: at most 4,000 bytes net per milestone, and the file under 300,000;
+- the fact audit `python3 tools/claude_md_fact_audit.py --base <the previous front-page commit>`, with `--dupes`, run before each commit
+  and its verdict quoted in the record;
+- "never touch a `[PROTECTED …]` paragraph, a grokking's status tag, a *Do* line or a killing test";
+- the forward propagation of every new grokking to the stubs it bears on (WORKFLOW 9).
+
+J05 is the same with no milestone, and a target of freeing at least 15,000 bytes.
+
+### 4.5 Close-math (J23a–c)
+Copy `data/fs89/briefs/CL2-close-planner-brief.md`'s form, with these outputs:
+- `plans/<M>-derivation.md`, the theorems filed per WORKFLOW 9;
+- the plan's §R-close: the §G re-read, the §PA sweep, the §IQ re-read and G72's count, the predictions scored once, the verdict ruled in
+  four parts, the would-have-searched log counted;
+- **drafts** of the `LEDGER.md` rows, the `CLAUDE.md` Frontier lines (at most 4,000 bytes net), the stub banners and the FRONTIER-STUBS
+  re-rank, all written in the plan, never in those files;
+- every inventory item ticked or declined.
+
+Then SPAWN the front-page job if none is queued.

@@ -15,6 +15,10 @@ record. It is careful clerical work: copy, don't judge.
 
 Never read a job's record, plan or brief. Never write an agent id (a string like `a1b2c3…`) into any file.
 
+## First: the launches
+
+The owner's launch message names the jobs launched since the last fold ("running: J07, J10"). Set each one's status cell to `run`.
+
 ## What you do, for each unfolded report, in file-name order
 
 1. **Status.** In the queue file's §2 table, set that job's `status` cell from the report's first line: `DONE`, `STAGE n SAVED`, `HALTED@n`
