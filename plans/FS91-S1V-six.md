@@ -225,3 +225,51 @@ unconditional pullback J11-T8, `χ_char(F²) = m`. **So J08-8, with the hypothes
 | id | statement | grade | address |
 |---|---|---|---|
 | J11-T12 | `Θ_k(R_F) ⊆ Θ_{k+1}(R_F)`; hence `χ_char(F²) = m` follows from the pullback and CLG_{m−1} alone, `m` the minimum over targets, whenever every stable place has `p > (m − 1)/2` | hand | stage 3 |
+
+## Stage 4 — SAVED (divergence table: J08's record and data against mine)
+
+*Opened now: J08's record `plans/FS91-S1D-six.md` (stages 2–5 and its theorem table) and `data/fs91/j08/threshold.json`,
+`kappa-23-43.json` — read as data; no J08 tool was run. Comparison: `tools/crunch_j11_compare.py` → `data/fs91/j11/compare-j08.json`;
+plant `--plant` (J11's `χ_char(Γ₃₁)` set to 9) is reported as the one divergence, `(31, 'chi_char', 9, 8)`, and nothing else.*
+
+**Values: 146 agreements, 0 divergences.** `κ`, `χ_char` and the maximising `c` at every prime `q ≡ 3 (4)` to 199; `m(c)` at all 64
+non-square `c` at 23 and 43; the band-6/7/8 lists at 23 and 43; W3's band-6 and band-7 lists; each field's minimum and the `χ_char` of
+every target J08 examined; J08's target lists complete below its own bounds (no stable place of mine below `4(m − 2)²` is missing from
+J08's); and seven spot checks of J08's table above 199 by my reduction (227, 499, 887, 1091, 1559, 1999, 2999).
+
+| item | J08 | J11 | verdict |
+|---|---|---|---|
+| W1 / J08-1 | derived; direct law at every `a`, `q ≤ 67` | derived; direct sets and minima at every character, `q ≤ 139` | agree — **TRUE** |
+| W2 / J08-2, J08-3 | 23: band 8 at `{11, 20, 21}`, `κ = 3/23`, `χ_char = 8`; 43: none to 8, band 9 at `{33}`, `κ = 5/43`, `χ_char = 9` | the same, value by value (and 23 by hand in full) | agree — **TRUE** |
+| W3's `Q_k` | `Q₆ = 100`, `Q₇ = 144` (`q < 4(k − 1)²`), after stating `q + 1 ≤ 2(k − 1)√q` | `Q₆ = 97`, `Q₇ = 141` (`(q + 1)² ≤ 4(k − 1)²q` read exactly) | **both valid**; mine is the same inequality read without the last rounding; the prime lists coincide (no prime `≡ 3 (4)` in `(97, 100)` or `(141, 144)`) |
+| W3's lists / J08-5 | band 6 and 7 exactly at 3, 7, 11, 19 (same `c`) | the same | agree — **TRUE** |
+| W3's route | Fejér function against `max|λ|` | Hoffman on the colour class against `λ_min` (Fejér noted) | two routes, one inequality |
+| level collapse / J08-6 | Cayley transform `(1 + y)/(1 − y)`, `c(y) = −y`, shows `u(1 + π^{m−1}ia)` lies in `S_m` | I asserted it from `N(1 + π^{m−1}ir) ≡ 1 (mod 𝔓^m)` | **J08 supplies a step my T7 left implicit** (that a norm-≡-1 residue is the image of a genuine norm-one element); T7 stands with J08's Cayley line inserted |
+| W4 / J08-8 | `χ_char` = 8, 17, 22 given **CLG_7, CLG_16, CLG_21**; `Θ₈, Θ₁₇, Θ₂₂ ≠ ∅` unconditionally | the same values; stage 2 marked the quoted W4 ("given CLG_6 and CLG_7") GAP at the two multiquadratic fields; stage 3 closed it by monotonicity to CLG_16, CLG_21 | **J08's own statement is TRUE and names the right hypothesis; the brief's quotation (the planner's SIX-e) under-names it** |
+| Γ₂₇ / J08-R | `χ_char(Γ₂₇) = ∞`, hand + row 70's certificate | the same, by an exact count needing no certificate (every character vanishes at ≥ 4 circle points; `λ_min = −8` reproduced) | agree, independent routes |
+| positive control at 43 | failed, "the brief's premise is the defect" (line colourings are not of multiplier form) | failed, same explanation (no class of the file's colouring is an interval under any multiplier) | agree, found independently |
+| J08's "Not claimed: anything about `χ(ℚ(√167)²)` beyond `4 ≤ χ ≤ 8`" | — | the known bracket is `4 ≤ χ(ℚ(√167)²) ≤ 7` (row 79; `χ(ℝ²) ≤ 7`, row 33) | **wording slip** in J08-8's bullet (true, not sharp); a correction owed where it is quoted |
+| SIX-d, SIX-f (J08-9 to J08-11) | stated | not in my fixed list | **not verified here** |
+
+**The owner's question (monotonicity), answered.** Yes: `B_k = [1/k, 1 − 1/k] ⊆ B_{k+1}` for every `k ≥ 2`, so `Θ_k(R_F) ⊆ Θ_{k+1}(R_F)`, and
+CLG at the single value `k = m − 1` (with every target empty there, and the level collapse at `p > (m − 1)/2`, which holds: 83 > 8, 131 >
+10.5) gives `Θ_k = ∅` for every `k ≤ m − 1`. No level or place subtlety survives: there is no stable dyadic place, and every stable odd place
+has `p` far above `k/2`. **So the gap closes to exactly CLG_16 (K(√7)) and CLG_21 (de Grey's field)**, which J08-8 names. With the owner's
+news — J07 reports CLG_k at every `k ≥ 2` given `H_k` (one derivation, blind check running) — **W4 reads TRUE for all three fields,
+given CLG (J07, one derivation)**: `χ_char` = 8, 17, 22.
+
+**Final verdicts.** W1 TRUE. W2 TRUE (lists identical). W3 TRUE (lists identical; `Q_k` differ by rounding, both valid). W4: TRUE for
+ℚ(√167) given CLG_6, CLG_7; for K(√7) and de Grey's field the first clause TRUE given CLG_6, the second a GAP as the brief quotes it
+(CLG_6, CLG_7 give `8 ≤ χ_char ≤ 17`, `≤ 22`), closed by CLG_16, CLG_21 — J08's own statement — and so TRUE given J07's CLG at every `k`.
+
+**C0 scored (stage 4).** W2 agreement (0.80): held. W3 agreement (0.75): held, with a rounding difference in `Q_k` only.
+
+| id | statement | grade | address |
+|---|---|---|---|
+| J11-T13 | J08's κ, `χ_char`, `m(c)`, band lists, targets and minima agree with J11's at 146 values, 0 divergences | tools exact (comparison, planted divergence caught) | `data/fs91/j11/compare-j08.json` |
+
+**Proposed edits (for the front-page lane; I edit none of these files).** (1) A ledger row for M1's six-at-the-exposed-fields result
+should carry `χ_char(Γ₂₃) = 8`, `χ_char(Γ₄₃) = 9`, "band six and seven only at 3, 7, 11, 19", `χ_char(Γ₁₁) = 6 > χ(Γ₁₁)`, `Γ₂₇` none, and
+the field values 8, 17, 22 with their CLG instances named (CLG_7, CLG_16, CLG_21), verified twice (J08, J11). (2) Wherever J08-8's
+"`4 ≤ χ ≤ 8`" is quoted, write `4 ≤ χ(ℚ(√167)²) ≤ 7`. (3) The planner's SIX-e wording ("given CLG_6 and CLG_7") under-names the
+hypothesis for K(√7) and de Grey's field; any stub or ledger line quoting it should name CLG_16 and CLG_21, or "CLG at every `k`".
