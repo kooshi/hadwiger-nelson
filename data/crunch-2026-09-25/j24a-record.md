@@ -68,3 +68,28 @@ L1 alone therefore reaches the ledger; the declined pointers stay in the index's
 
 **Gates after the `LEDGER.md` edit:** fact audit `--base f1226b8a` exit 0, "AUDIT PASSED (0 failure(s))"; `--dupes` exit 0, "11 repeated
 runs"; `python3 tools/fs71_ledger_b_check.py --strict` exit 0, "RESULT: PASS" (544 theorems, 544 § B rows; the same before the edit).
+
+## Stage 4 — SAVED (`BIBLIOGRAPHY.md`: B1–B8 and the two Eggleton–Erdős–Skilton papers)
+
+Every reference was checked against the held file's title page (`pdftotext`) or the zbMATH Open API (`api.zbmath.org`, 2026-09-25);
+every read status is the reading record's own, never upgraded.
+
+| # | applied | source of the reference · of the read status |
+|---|---|---|
+| **B1** | `[deGrey2018]`: copy column "not held (arXiv)" → the library path (arXiv:1804.02385v3, 30 May 2018 — the PDF's own stamp); § B row | the PDF's first page · the row's "read (earlier sessions)" kept |
+| **B2** | the three § C rows `[JanssenMacKeigan2020]`, `[Hujdurovic2020]`, `[ErskineGriggsSiran2022]` gain "**Held:**" with the path; three § B rows | the index §1.5 · the rows' own statuses (passage; reference list; closing paragraph) |
+| **B3** | `[Polymath16wiki]` copy column gains the 2021 and 2022 asone.ai captures; one § B row for the pair | `grep` of both files: `wgRevisionId` 10839, "last modified on 4 June 2018, at 20:40" (the revision the row reads); not re-read, as J30 says |
+| **B4** | new `[GoelPatilVerma2022]` (§ A, § B) | the PDF's first page (arXiv:1809.02818v2, 23 Feb 2022) · `plans/M2-S1D-bridge.md` §1.1 Q11, §2.1, §3.4: Thm 3.11, Cor. 3.12, the real-domain definition |
+| **B5** | new `[KechrisMarks2020]` (§ A, § B), with J21's section correction (the unit-distance passage is §5.1 Example 5.1, not §4.7) | the PDF's first page ("Preliminary version; October 9, 2020"; no zbMATH record) · `plans/M3-exotic-colourings.md` §PA.3 (§4.6–§4.7) and `plans/M3-S1D-windows-five.md` §1.1 Q7–Q8 (§3 p. 16, §5.1 Example 5.1) |
+| **B6** | new `[BCR1998]`, `[CohenMahboubi2012]`, `[Lang1953]`, `[Marker2002]`, `[Poizat2000]`, `[WangKosheleva1998]`, `[Zapletal2022]` (§ A); the two Zapletal § B rows gain the key | zbMATH 0912.14023, 1241.68096, 0052.03301, 1003.03034, 0951.03002, 0915.03011; Marker's and Poizat's also from the reference lists of the held Zapletal and Madore papers; Zapletal from the PDFs · J17's §3.4 (TOC only; not read ×4; review read; Fact 4.2 and Cor. 4.3 read, beside FS-18's "scanned — negative") |
+| **B7** | new `[Zhu1998]` (§ A) | zbMATH 0904.05028 (JCTB 73(2) 195–206, doi 10.1006/jctb.1998.1831) · J06's §PA.3: "review read only" |
+| **B8** | **J30's premise corrected:** `[EggletonErdosSkilton1985]` is not a misdated `[EggletonErdosSkilton1990]` but a different paper. New § A row `[EggletonErdosSkilton1985]` (JCTB 39 (1985) 86–100, doi 10.1016/0095-8956(85)90039-5, zbMATH 0549.05029, with its errata note) and § B row; the 1990 row gains its DOI, the J18 abstract read, and a line keeping the two apart; § R.4 gains item 15 for the 1990 paper (closed access; M3 inventory row 13) | zbMATH 0549.05029 and the scan's title page · `plans/M3-S1B-rank-one.md` §2.1 (J19's per-section read), `plans/M3-S1A-rank-one.md` §1.3 (J18) |
+| — | rule 0e's partial-read list gains the four new partial reads (`[EggletonErdosSkilton1985]`, `[GoelPatilVerma2022]`, `[KechrisMarks2020]`, `[Zapletal2022]`) | rule 0b: § A, § B and the rule lists agree |
+
+**Conflation check.** No row or citation in the four front-page files cites the 1985 paper's content under the 1990 key or the reverse
+(`LEDGER.md` row 80 cites the 1990 key for rank-1 periodic existence, the 1990 review's content). The one conflation found is in files
+this job may not edit: the index's §5.1 row B8 ("the defined key is `[EggletonErdosSkilton1990]` … J19 or the close reconciles the
+year") and J30's report's inventory line say the same — held for the owner.
+
+**Gates:** `python3 tools/bib_audit.py` exit 0, "arXiv ids cited but NOT in the bibliography: 0", "bracketed keys cited but neither defined
+nor aliased: 0" (326 keyed rows, from 315); `--self-test` exit 0, "3 controls, ALL FIRED".
