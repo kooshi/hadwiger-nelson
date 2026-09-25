@@ -211,3 +211,88 @@ and level 4's exact spectrum, not on L1; the independent build reproduces it at 
 sentence. **V3's verdict is unchanged.** (I agree with the direction of the defect: Hoffman's bound `α ≤ n(−λ_min)/(d − λ_min)`
 together with `α ≥ n/4` gives `−λ_min/(d − λ_min) ≥ 1/4`, i.e. `λ_min ≤ −d/3` — an upper bound on `λ_min`, which cannot certify
 tightness.)
+
+### V0 — the dyadic local field is `ℚ₂(ζ₁₂)` with row 67's conjugation, for `d ≡ 3 (mod 8)` and at both of K's dyadic primes — **PROVED** [hand; PARI for the splitting]
+
+`d ≡ 3 (mod 4)`, so 2 ramifies in `F`; `3d ≡ 9 ≡ 1 (mod 8)`, so `d/3 ∈ ℚ₂^{×2}` and `F ⊗ ℚ₂ = ℚ₂(√d) = ℚ₂(√3)`. Then
+`L_𝔓 = ℚ₂(√3, i) ∋ i√3 = √−3`, so it holds `ζ₃, i`, hence `ζ₁₂`; `[ℚ₂(ζ₁₂) : ℚ₂] = 4` (`ℚ₂(ζ₃)` unramified, `ℚ₂(i)` ramified) `= [L : ℚ]`:
+one prime above 2, `e = f = 2` (PARI: `[2, 1, 2, 2]` for 59, 83, 131). Conjugation fixes `F`, so `√3`, and sends `i ↦ −i`:
+`ζ₁₂ = (√3 + i)/2 ↦ ζ₁₂^{−1}`, `ω = ζ₁₂⁴ ↦ ω̄`, `√3 ↦ √3` — row 67's conjugation on `O = ℤ₂[ω][√3] = ℤ₂[ζ₁₂]` (`i = (2ω+1)√3/3`,
+`ζ₁₂ = √3(2+ω)/3`, 3 a 2-adic unit). The stable place is inert in `L/F` (`k_F = 𝔽₂`, `k_L = 𝔽₄`), the norm-one torus is smooth, and
+by Lemma R (4) the unit vectors are dense in `T(O_𝔓)`, so the dyadic local plane at level `m` is exactly `P_m = Cay(O/𝔓^m, S_m)`.
+**For K:** `11 ≡ 3 (mod 8)` too, so `11 = 3·(11/3)` is a square in `ℚ₂(√3)` and `K ⊗ ℚ₂ = ℚ₂(√3) × ℚ₂(√3)`: two places, each with
+`K(i)`-completion `ℚ₂(ζ₁₂)` and the same conjugation (PARI: `[2, 2, 2, 2]`). An independent build of `P_m` from this description
+(`dyadic_tower.py`) reproduces row 67's counts (`|S₄| = 24`, 45 minimisers, `H_min(P₆) = H_min(P₈) = 4O`).
+
+### V1 — `F(R) = ⋃ F(Λ)` over finitely generated `Λ ⊆ R` spanned by unit vectors, and `P(Λ) ⊆ P(R) ∩ Λ` — **PROVED** [hand, with the kernel's `forces_iff_exists_finite`; scope: any subgroup `R` of `F(i)` and its unit vectors]
+
+*`⊇`:* `Cay(Λ, U ∩ Λ)` is the subgraph of `Cay(R, U)` induced on `Λ`, and each coset `x + Λ` induces a translate of it; restricting a
+proper colouring `c` of `Cay(R, U)` to `x + Λ` gives `c(x) = c(x + δ)` for `δ ∈ F(Λ)`. *`⊆`:* for `δ ∈ F(R)`, compactness (row 78's
+kernel `forces_iff_exists_finite`: forced iff forced on a finite induced subgraph — de Bruijn–Erdős by Rado selection) gives a finite
+`V₀ ∋ 0, δ` on which `(0, δ)` is forced; each element of `V₀` is a ℤ-combination of finitely many unit vectors (the ℤ-span of `U` is `R`),
+so `V₀ ⊆ Λ` for a finitely generated `Λ` spanned by unit vectors; forcing passes up to `Cay(Λ, U ∩ Λ)` (colourings restrict) and to every
+`x ∈ Λ` by translation. *`P(Λ) ⊆ P(R) ∩ Λ`:* a colouring of `Cay(R, U)` constant on the cosets of `H` (finite index) restricts on every
+`x + Λ` to a proper colouring of `Cay(Λ, U ∩ Λ)` constant on the cosets of `H ∩ Λ` (finite index in `Λ`). ∎
+*Adversarial attempt (the converse, which V1 does not claim):* `Λ = ℤu` for one unit vector: `Cay(Λ, ±u)` is a path, `P(Λ) = 0`, while
+`P(R) ∩ Λ = 4ℤu` (V3) — the inclusion is strict, so the statement is sharp in the direction written. Likewise on de Grey's lattice
+(VK below) `F(Λ) = 8Λ ⊊ 4Λ = F(R_K) ∩ Λ`.
+
+### V3-ram — the ramified 59-tower has independence ratio `≤ max(ratio at level 1, 2/62) < 1/5` at every level — **PROVED with "ratio at level 1" read as Hoffman's ratio bound; under the other reading, the middle inequality is open above level 2 but its conclusion `< 1/5` holds** [hand + tools exact]
+
+The tower is `G_m = UD(A_m, 2)`, `A_m = ℤ₅₉[√59]/(√59)^m`, `G₁ = Γ₅₉` (𝔮 inert in `L/F`: `L_𝔮 = ℚ₅₉(√59, i)`, `i` unramified).
+By Lemma P, Hoffman's ratio bound at level `m` is `max(h(Γ₅₉), 2/62)` with `h(Γ₅₉) = 0.199119854…` (`λ_min(Γ₅₉) = −14.9176 > −15`, the
+exact condition for `h < 1/5`, margin 0.0824) and `2/62 = 0.0323` (the primitive bound `2·59^{m−1}` against degree `60·59^{m−1}`; FFT
+at level 2 hit it exactly: 118). So `α(G_m)/59^{2m} ≤ 0.19912 < 1/5` at every level. *If* "ratio at level 1" means the true
+`α(Γ₅₉)/59²`, the inequality `α(G_m)/|G_m| ≤ max(α(Γ₅₉)/59², 2/62)` holds at levels 1–2 (FS-66's Theorem E: `A₂ ⊇ 𝔽₅₉` so levels 1–2
+are homomorphically equivalent) and is **unproved from level 3 on** (it is FS-68's "tower never rises" at a ramified place); V3 needs
+only `< 1/4`, which holds under either reading. *Adversarial attempt:* a level-`m` independent set with ratio `> 0.19912` would need an
+eigenvalue of `G_m` below `−14.9176·59^{m−1}`; pulled-back characters sit at `59^{m−1}λ(Γ₅₉)` and primitive ones within `±2·59^{m−1}`
+(Lemma P), so none exists.
+
+### V4 — given V2 and V3: `F(R) ≠ 0 ⟺ (0, 4)` is forced on `Cay(R, U_F)` `⟺` some finite unit-distance graph over ℚ(√59) forces a distance-4 pair — **PROVED given V2, V3** [hand]
+
+`4 ∈ R` and `v_𝔓(4) = 4` (`𝔓² = (2)`), so `4 ∈ R ∩ 𝔓⁴ = P(R)`. If `F(R) ≠ 0`, V2 gives `F(R) = P(R) ∋ 4`; if `4 ∈ F(R)`, `F(R) ≠ 0`.
+Finite form: `(⟹)` compactness gives a finite induced subgraph of `Cay(R, U)` forcing `(0, 4)`, a finite unit-distance graph over `F`.
+`(⟸)` a finite graph with vertices in `F²` and unit-distance edges forcing `(x, y)`, `|y − x| = 4`: every four-colouring of `F²`
+restricts to it, so `(x, y)` is forced in the plane; `y − x ∈ F(i)` has norm 16, so `y − x = 4u`, `u ∈ U`, lies in `R`, is in `F(R)`, and
+`ū·4u = 4 ∈ F(R)` (ideal). ∎ *Adversarial attempt:* `F(R) ≠ 0` with `(0, 4)` free would need `F(R) ⊊ P(R)` or `4 ∉ P(R)`; V2 and V3
+exclude both. The K control: `4 ∈ 4R_K = F(R_K)` (VK), consistent with G9's measured 791-point forcer.
+
+### VK — over `K = ℚ(√3, √11)`: `F(R_K) = R_K ∩ 𝔓₁⁴ ∩ 𝔓₂⁴ = 4R_K`, and every proper four-colouring of every `R_K`-coset is the pullback of a four-colouring of `P₄` at ONE of K's two dyadic primes — **PROVED, given one non-zero forced difference** (row 78's certificate [cert], or row 85's derivation [hand + tools exact, given Parts's trees]) [hand + cert + a published theorem; scope: each coset `y + R_K` of `K²` separately — different cosets may choose different primes]
+
+*Places* (PARI): stable primes of `K(i)`: 2 (two primes `𝔓₁, 𝔓₂`, `e = f = 2`), 11 (two primes, `e = f = 2`: ramified in `K`, inert in
+`K(i)/K`), then 83, 107, 131, 167, … (four primes each, `e = 1, f = 2`); 3 is not stable, so `1/3 ∈ R_K` (Lemma R (2)).
+*Proof.* **(1)** Lemma R holds for `K` (`L = K(i)` is multiquadratic, Galois; eight ℚ-independent elements of `R_K`: `1, i, ω = u(√3),
+u(√11)` and products; local generation at 2 by `ζ₁₂`, at 11 by `u(√11) − 1`, elsewhere by Teichmüller units), so `R_K = O'_K` and
+`R_K ∩ 𝔓₁⁴ ∩ 𝔓₂⁴ = 4R_K`. **(2)** A periodic four-colouring factors through `R_K/nR_K` = the categorical product of the dyadic
+`P_m(𝔓₁) × P_m(𝔓₂)` (same `m = 2v₂(n)`), the two ramified 11-towers at level `2v₁₁(n)` and the unramified towers at `p ≥ 83`.
+**(3)** Odd factors have ratio `< 1/4` at every level: the ramified 11-towers by FS-66's certificate `U(11) = 28.2043`, which bounds
+them by Lemma P (ii) (FS-66's L1–L2 need only the coset structure and Hensel's count, both valid at a ramified place; FFT-checked at
+levels 2 and 3) — ratio `≤ 0.2331`; `p ≥ 83` by Weil. **(4)** `[Zhang2012]` Thm 1.8 with `G = P_m(𝔓₁) × P_m(𝔓₂)` (vertex-transitive;
+ratio exactly `1/4`: four-colourable, and Hoffman-tight since the least eigenvalue ratio of a product of two graphs with ratios in
+`[−1/3, 1]` is `−1/3`) and `H` the odd product (connected, ratio `< 1/4`): every four-colouring factors through `G`. **(5)** `G` is
+Hoffman-tight at four colours with minimising characters exactly `(χ, 1)` and `(1, χ')` (`χ, χ'` minimisers at `𝔓₁, 𝔓₂`: `xy = −1/3`
+with `x, y ∈ [−1/3, 1]` forces one factor `= 1`, and eigenvalue `d` only at the trivial character, `P_m` being connected and not
+bipartite). Hoffman's equality case (re-derived: `1_C = |C|/n + z`, `0 = 1_CᵀA1_C ≥ |C|²d/n + λ_min‖z‖²` with equality at `|C| = n/4`)
+puts every class indicator in `span(1, E_min)`: `1_C(x, y) = a(x) + b(y)`. **A `{0,1}`-valued `a(x) + b(y)` has `a` or `b`
+constant** (if `a₁ ≠ a₂` and `b₁ ≠ b₂`, the four sums lie in `{0,1}`, forcing `b₁ − b₂ = ±1` and then `a₁ = a₂`). The union of the
+classes that depend on `x` is a function of `x`, its complement a function of `y`, so one of the two unions is empty: **the whole
+colouring reads one dyadic prime**, and it is a proper colouring of `P_m` there, pulled back from `P₄` (D2-B, or the level map for
+`m ≤ 4`). **(6)** Both primes occur, each surjectively, and `P₄` is pairwise free: `P(R_K) = (R_K ∩ 𝔓₁⁴) ∩ (R_K ∩ 𝔓₂⁴) = 4R_K`.
+**(7)** `F(R_K) ≠ 0`: row 78's 2,044-point graph forces `(0, v)` in `Λ ⊆ R_K` (`Λ = (1/9)O_E ⊆ O'_K`, its 54 unit vectors in `U_K`), so
+`v ∈ F(R_K)`; or row 85: `F(Λ) = 8Λ`, and V1 gives `8Λ ⊆ F(R_K)`. Then V2: `F(R_K) = P(R_K) = 4R_K`, every colouring is periodic, and
+(2)–(5) classify it. ∎
+*The controls.* `1/3 ∈ R_K` ✓ (3 unstable). `4, 8/3, 8/9, 16/3 ∈ 4R_K` (divided by 4 they are integral at every stable prime: 2, 11,
+`p ≥ 83` do not divide `3`, `9`) ✓. `v = −(4/9)(1 + √−11)`: `v/4 = −(1 + i√11)/9` is integral at 2 and at 11 ✓. `2P ∉ 4R_K`: `P` is a
+unit vector (`|P|² = (86 − 10√33 + 58 + 10√33)/144 = 1`), so `v_𝔓(2P/4) = v_𝔓(P) − 2 = −2 < 0` ✓ — consistent with `[Fischer1994]`'s
+ℤ/4 colouring separating `(0, 2P)`. *Row 85 against VK, exactly:* `Λ = (1/9)O_E`, `E = ℚ(√−3, √−11)`; 2 is unramified in `E` (two primes,
+`f = 2`) and `e(L_𝔓/E_𝔭) = 2`, so for `x ∈ Λ`: `x ∈ 4R_K ⟺ v_𝔓(x) ≥ 4` at both `𝔓 ⟺ v_𝔭(x) ≥ 2` at both `𝔭 ⟺ x ∈ 4Λ`. So
+`F(R_K) ∩ Λ = 4Λ ⊋ 8Λ = F(Λ)`: **both hold because `F(Λ)` is the forced group of the smaller graph `Cay(Λ, U ∩ Λ)`**, whose four-colourings
+include `8Λ`-periodic ones that do not extend to `K²`'s coset (V1 gives only `F(Λ) ⊆ F(R_K) ∩ Λ`). The extra differences `4Λ ∖ 8Λ` are
+forced only by unit vectors of `K` outside `Λ`.
+*Adversarial attempt, mixing the two dyadic places by formula:* `c(x) = γ(x mod 𝔓₁) + γ(x mod 𝔓₂)` in `𝔽₄` (`γ` the level-1 residue
+colouring) — on `K₄ × K₄` this is `(a, b) ↦ a + b`, and the edge `(0,0) ~ (1,1)` is monochromatic (`1 + 1 = 0`): improper. Every
+mixing attempt fails at step (5): a class indicator of a four-colouring of `P_m × P_m` is `a(x) + b(y)` and `{0,1}`-valued.
+*What VK leans on:* FS-66's certificate at 11 (both ramified 11-towers), Zhang's Thm 1.8, D2-B (not L1), row 67's kernel freedom of
+`P₄`, and **one** forced pair (row 78 [cert] or row 85 [given (S″)]). Harder's `8/3` (measured, G55) would also do, at a lower grade.
+
