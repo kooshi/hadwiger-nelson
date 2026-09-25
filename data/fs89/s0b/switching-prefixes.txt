@@ -1,0 +1,6 @@
+policy j=1: 29 switches in 60 steps at times [0, 2, 3, 5, 7, 10, 12, 14, 17, 19, 21, 24] ...; every step exact-checked (in Q, digit in pi^-1 Z[i])
+policy j=2: 16 switches in 60 steps at times [1, 6, 8, 13, 17, 22, 24, 29, 31, 36, 40, 45] ...; every step exact-checked (in Q, digit in pi^-1 Z[i])
+policy j=3: 10 switches in 60 steps at times [2, 9, 14, 22, 27, 32, 37, 44, 49, 56]; every step exact-checked (in Q, digit in pi^-1 Z[i])
+orbits j=1 and j=2 first differ at time 1
+orbits j=1 and j=3 first differ at time 1
+orbits j=2 and j=3 first differ at time 2

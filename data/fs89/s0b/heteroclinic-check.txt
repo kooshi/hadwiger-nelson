@@ -1,0 +1,11 @@
+theta* = (e; beta1 = (1+i)/3 [pi-adic], beta2 = (1+i)/2 [pibar-adic])
+e = (23/60, 23/60):  band on |m|<=25: True  (least margin 18495323/1464843750 at m=11, k=0);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: True;  formula A = orbit B: True
+e = (1/3, 1/3):  band on |m|<=25: True  (least margin 8384389/585937500 at m=-11, k=1);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: True;  formula A = orbit B: True
+e = (2/5, 7/20):  band on |m|<=25: True  (least margin 17437046481551427/1192092895507812500 at m=24, k=0);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: True;  formula A = orbit B: True
+e = (3/8, 1/3):  band on |m|<=25: True  (least margin 79551201155721/1907348632812500 at m=-21, k=1);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: True;  formula A = orbit B: True
+controls (must NOT all pass):
+e = (13/48, 13/48):  band on |m|<=25: False  (least margin -173612423/2343750000 at m=-11, k=1);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: False;  formula A = orbit B: True
+e = (3/10, 3/10):  band on |m|<=25: False  (least margin -32059347/976562500 at m=-11, k=1);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: False;  formula A = orbit B: True
+e = (9/20, 9/20):  band on |m|<=25: False  (least margin -39868221/488281250 at m=11, k=0);  = chi+lambda forward: True;  = theta2+lambda backward: True;  orbit valid: False;  formula A = orbit B: True
+controls fired: True
+VERDICT: heteroclinic characters verified in Theta_4(U5)

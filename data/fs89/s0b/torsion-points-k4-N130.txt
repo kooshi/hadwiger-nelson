@@ -1,0 +1,13 @@
+N=  2  |U5 mod N|=   2  characters in band:   1  margins ['1/4']  e.g. (1, 1)
+N=  3  |U5 mod N|=   4  characters in band:   4  margins ['1/12']  e.g. (1, 1)
+N=  4  |U5 mod N|=   4  characters in band:   8  margins ['0']  e.g. (1, 1)
+N=  7  |U5 mod N|=   8  characters in band:   8  margins ['1/28']  e.g. (2, 3)
+N=  8  |U5 mod N|=   8  characters in band:   8  margins ['0']  e.g. (2, 3)
+N= 22  |U5 mod N|=  12  characters in band:  12  margins ['1/44']  e.g. (6, 11)
+N= 26  |U5 mod N|=  24  characters in band:  12  margins ['1/52']  e.g. (7, 7)
+N= 31  |U5 mod N|=  16  characters in band:  16  margins ['1/124']  e.g. (8, 13)
+N= 41  |U5 mod N|=  20  characters in band:  20  margins ['7/164']  e.g. (12, 12)
+N= 48  |U5 mod N|=  16  characters in band:  16  margins ['1/48']  e.g. (13, 22)
+N= 76  |U5 mod N|=  20  characters in band:  20  margins ['3/76']  e.g. (22, 27)
+N= 79  |U5 mod N|=  20  characters in band:  20  margins ['9/316']  e.g. (22, 37)
+total primitive torsion characters found up to N = 130 : 145
