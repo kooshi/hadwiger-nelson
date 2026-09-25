@@ -33,7 +33,7 @@ found that rigidity holds at every set of two or more primes with no finite comp
 
 ## Your checklist already exists
 
-It is `plans/FS89-close-inventory.md`, items 1–39.
+It is `plans/FS89-close-inventory.md`, items 1–40.
 - **From now on you are its only writer.** Tick each item "done at <hash>" or "declined, with the reason".
 - **Read every number from its source record, never from the inventory.** That is the one-home-per-fact rule, and it catches owner
   slips. The owner errors and slips are items 15 and 22.
