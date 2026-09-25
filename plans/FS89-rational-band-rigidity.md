@@ -916,3 +916,163 @@ arithmetic on windows plus a persistence derivation, exactly as S0B-T3–T5 were
 ### Stage 1a–1c
 
 *The records are `plans/FS89-S1D-derivation.md` and `plans/FS89-S1V-verification.md`, each with its own "Theorems this phase proved".*
+
+## §R-close. The close (2026-09-25; two close planners, de Bruijn, Opus 5.5)
+
+*Worked from `plans/FS89-close-inventory.md` (items 1–50). Results: `plans/FS89-derivation.md` and `LEDGER.md` rows 95–97. Kooshi's words
+for the close: "close out with the findings"; "I don't want to lose anything from before"; "All novel knowledge is a success." The first
+close planner filed the derivation file, rows 95–97, `CLAUDE.md` and the stub banner; the second worked the prior-art readings in and wrote
+this section.*
+
+### R-close.1 The §G re-read
+
+**Extractions that paid.**
+- G30's ladder (Furstenberg's condition first, so rank two before all primes; §G.6 "Ordered") — the proof lives exactly at rank two: D1-L3's
+  hypothesis `|S| ≥ 2` *is* Berend's condition (3) (FS89-PA-B1), and at rank one it fails, as S0B showed.
+- G21 and G51 (§G.6 "Added": V's fixed list before D's claims) — V-A paid four times: U1 true with an equivalence (V1), N₀ and U2 re-derived
+  blind with U2's order-4 precision, S0B-T6 strengthened to V4 (and S0B §6's slip and gap found), P-A4 met.
+- G46 (MS as a separate statement) — D1-T1 then VB1 is exactly the split between minimal sets and points; S0B's heteroclinic lived between
+  them, as §0.4 item 2 said.
+- §PA's identification of Berend's Lemma 3.1 circles with the archimedean leaves — the frame every record then used.
+- G74's reading registered as fired (demotion owed; done at the close).
+- G21's constraints on the §S.4 window — the window never ran; D's proof superseded its purpose (item 30).
+
+**Entries that should have borne and did not, or bore wrongly.** None of the corpus held a closed-set rigidity argument (§G.6's last bullet),
+so the one idea that closed the milestone — the difference set based at `0`, which needs no recurrence (verifier I's B2 disclosure) — came
+from the method, not the corpus; it is Furstenberg's Lemma IV.2 architecture (`plans/FS89-PA-furstenberg1967.md` §3). **Wrongly:** §0.4 item
+1, §0.4 item 3, §G.6 and §PA.3 attribute the expansion requirement and the word "multi-parameter" to Furstenberg, and §PA.3 calls Berend's
+five-condition assembly a "four-way equivalence" (R-close.10). **Forward propagation:** G76 (rewritten) → FS-91, FS-90, FS-59, FS-83, FS-84,
+FS-64, FS-76 (their rows and stubs re-aimed at this close); G55's corrected reason → FS-46; PA-T6 → FS-67.
+
+### R-close.2 The §PA sweep: what the gate taught about the object
+
+- **Our action is a Berend multi-solenoid action with exactly one non-hyperbolic place** (FS89-PA-B1): `R̂_S = Ω_a²`, `Q̂ = Ω_P²`,
+  irreducible at every `S`, multi-parameter iff `|S| ≥ 2`, hyperbolic everywhere but `∞`, an ℱ-flow at every finite `S`. Promoted into row
+  95's prior-art line and `BIBLIOGRAPHY.md` `[Berend1984]`; G76 already names the frame, so no new grokking.
+- **The leaves are in print, in 1982**: `[Berend1983]` Example 4.3 (p. 525) meets `w₅ = (3+4i)/5` as the ratio of two expanding elements and
+  names the circles of radii `5^k`. Recorded in row 95 and the bibliography; no grokking (it changes attribution, not method).
+- **The disjointness half needs no expansion** (`[Berend1984]` Thm I.2 + Prop. II.6, held; Furstenberg's toral Prop. IV.1 asks only (i)
+  and (ii), the Furstenberg reader's §4 [reading]): so the isometric direction obstructs only the finite-or-torsion half, and `MS_k(S)` holds
+  at every band (FS89-PA-B2). Forwarded to FS-91, whose first question it reshapes.
+- **For residue targets the product step survives at four colours** (the Tardif reading §5.2, PA-T4, given `[Zhang2012]`): G55's and FS-46's
+  obstruction is the descent. G55 rewritten in place; FS-46's stub corrected.
+- **Maucourant's non-homogeneous orbit closures with a rank-one factor** (§0.4 item 5) are the counterexample-side analogue of row 97; no
+  change.
+
+### R-close.3 The §IQ re-read, and G72's count
+
+The structural form (classify every closed `U_S`-invariant subset of `R̂_S` avoiding an open set, modulo the isometric direction) was
+answered at rank ≥ 2 on both rungs, by derivation: IQ-a is D1-T1 (and band-free, PA-B2), IQ-b at bands 1/4 and 1/5 is D1-T2, S1VB-14 and
+RQ₄, RQ₅. **The invariant that forced it was §IQ item 3's second one**, "`M − M` near 0" (which directions small differences occupy), not
+the leaf itinerary's wall set, which the proof never needed. §IQ item 5's control held: with no isometric place, step 2 of D1-L2 gives
+Berend's MT verbatim (S1D Remark 3). **G72's count: through the structural question; six of six** (recorded in `CLAUDE.md` G72).
+
+### R-close.4 The predictions, scored once
+
+| id | p | outcome |
+|---|---|---|
+| O1 | 0.10 | **reached** (R-close.5 on its letter) |
+| O2–O6 | 0.12, 0.15, 0.04, 0.39, 0.20 | not reached |
+| P-U1 | 0.75 | met (V-A1; with the equivalence V1) |
+| P-N0 | 0.90 | met (blind, agreeing with S0A at every step) |
+| P-U2 | 0.85 | met, with a precision (two order-4 types) |
+| P-T6 | 0.80 | met, stronger (V4: no hypothesis on the torsion difference) |
+| P-A4 | 0.85 | met (the owner's comparison, item 31) |
+| P-MS | 0.70 | met (true) |
+| P-MS-wk | 0.35 | met (proved this week) |
+| P-RS2 | 0.50 | met |
+| P-RQ4 | 0.60 | met; P-G75 (= P-RQ4) met |
+| P-U3 | 0.85 | open (proved at `p = 5` only) — FS-91 |
+| P-G76 | 0.80 | not scorable (no counterexample) |
+| P-win | 0.55 | not scorable (the window never ran) |
+| P-KT1 | 0.15 | did not fire (the 0.85 side) |
+| P-KT2 | 0.40 | did not fire (the 0.60 side): Prop. IV.1 and Berend 1983 §4 were not needed |
+| P-log | 0.80 | met for the planner and every Stage-0/1 agent (R-close.8) |
+
+**The agents' C0s.** Verifier G: G0 0.97, G1 0.85 and 0.6, "hence HD1" 0.7, G2 0.7, G3 0.55 — all true (conditional where stated); the four-band
+rational statement 0.5 "same difficulty" — shown equivalent to the uniform statement, then proved. S0B: `Θ₄(U₅) ⊆ T + A` 0.40 — **lost** (the
+0.60 side won); 10–40 cells met (29); "finitely many torsion points" lost. D: `MS₄({5,13})` 0.65 true; D-1a a proof 0.40 — met; `RS₄({5,13})`
+0.45 true; D-1b an exclusion proof 0.15 — met (D: "my prior was too low"); `MS₄({5})` false 0.75 — undecided. Verifier H: 0.90, 0.80, 0.60,
+0.55, 0.85 — all true (V-A3 stronger). Verifier I: implications 0.85–0.92 true; the substantive claims 0.28–0.45, all true. **The next-step
+advisor's card 1:** gluing sound ~0.75 — met; single prime enough ~0.2 — not (row 97); HD1 by 10-01 ~0.2–0.25 — met, for characters (row 96);
+a clean field-free re-posing with its obstruction named ~0.7 — met and exceeded. **Calibration:** every mind under-predicted the headline
+(0.10 to 0.45); the surprise was one idea, the difference set based at `0`, which D found and verifier I's blind route did not.
+
+### R-close.5 The verdict, ruled
+
+**The outcome:** RQ₄ and RQ₅ proved (row 95), with rigidity at every `|S| ≥ 2`, their field consequences for characters (row 96), and one
+prime shown insufficient (row 97).
+- **The ruling: Paid (theorem), outcome O1.**
+- **The letter, read strictly:** O1 says "D's derivation and V's blind one agreeing". Verifier I's blind route (B1) stalled at one named step;
+  in B2, given D's lemma statements without proofs, it re-derived every lemma and found a second assembly (VB1) with no finite computation.
+  So the agreement is "one derivation, every lemma re-derived by a blind verifier from its statement", which is the grade rows 95–96 carry —
+  not "two independent derivations".
+- **Alternative weighed:** O2 (Paid, rank theorem), if the passage to all primes were discounted. **Why O1:** D2-L1 (layering) was re-derived
+  by verifier I from its statement and independently assembled via VB4; nothing in the step to `Q` rests on one mind.
+- **Confidence:** high on the mathematics' standing at its grade; medium on the letter (if Kooshi reads O1 as requiring a completed blind
+  derivation, the verdict is "O1 at the verified-lemma grade", and nothing else in this close changes).
+
+### R-close.6 The close's prior-art gate (G49 on the theorems filed; item 39)
+
+**Read in full at the close:** `[Berend1983]`, `[Berend1984]` (`plans/FS89-PA-berend1984.md`) and `[Furstenberg1967]` Parts II–IV
+(`plans/FS89-PA-furstenberg1967.md`). **Verdicts:** none of FS-89's statements is in any of them or in `[Berend1984min]`; D1-L2, D1-L3 and
+D1-T1 are **method in print, statement not** (Berend 1984 §II.3 and Prop. II.7; Furstenberg's Lemma IV.2 architecture); RS₄ at every `|S| ≥ 2`,
+RQ₄, RQ₅ and D1-L4 **not found**; the one-prime failure **not found as stated** (their sets are homoclinic, S0B's heteroclinic between two
+torsion leaves). **The close's own queries** (`data/fs89/close/prior-art-close-gate.txt`, the discipline's words): 26 zbMATH searches — closed
+invariant sets and solenoids, the ID property, non-expansive, isometric and compact-factor exemptions, `S`-adic solenoids, minimal sets,
+orbit closures, "Furstenberg" with rotation, Gaussian, unit circle, non-hyperbolic; "Berend" with invariant and hyperbolicity; Pythagorean;
+topological rigidity — 13 with no hits, the rest reviews or summaries off the question (the nearest: Starkov 1999 and Muchnik 2005, texts
+withheld by licence; Lindenstrauss–Wang 2012 and Wang 2011, hyperbolic toral actions; Han Yu's ×2×3×5 orbit closures, real hyperbolic;
+MacVicar 2023, one Gaussian base, dimension theory); 3 records opened by Zbl number and 2 author listings (Urban: equidistribution, measures;
+MacVicar); and OpenAlex's 42 citers of `[Berend1984]` with abstracts where held. **Not reached:** Starkov 1999 and Muchnik 2005 (no text
+reachable by API), Miles 2008 (no abstract). **Wording, everywhere:** "not in Berend 1983, 1984 or ETDS 1984; the method is Berend's" — never
+"new".
+
+### R-close.7 Retractions, errata and the honesty record
+
+**Retractions (all free):** verifier H 1 (V3c read at the wrong one of `π_p`, `π̄_p`; numbers identical, verdict unchanged); D 1 (two plants
+that could not fire, replaced; item 29); the owner 1 (a first check script that modelled the order-3 orbit over ℚ, failed at once, fixed by the
+reduction mod 3; item 16). **Owner errors and slips:** the S0B brief carried the advisor's §5 overclaim as settled (item 15, G21's instance);
+V's brief paraphrase dropped S0A-3's `|α|` bounds (caught before launch, item 22); "de Grey's field" said of `K` twice in chat (item 5); the
+Tardif reader's brief said G43 cites `[Tardif2023]`, which it does not (item 48). **Agent slips:** D's §3 understated its own scope (item 37);
+S0B §6's wording slip and gap (item 26); verifier I's B1 GAP measured its route, not the claims, and said so (G21's instance); the first close
+planner filed S0B-T4 as resting on row 96 for row 97 (fixed at c290bfac); the planner's §0.4/§PA.3 misattributions to Furstenberg (R-close.10);
+the Berend reader's "multi-parameter form" of Prop. IV.1 (noted in its record). **Record errors found by the readings:** `[Tardif2023]`'s row
+attributed our `m₁, m₂` form to the publisher's abstract (since 2026-09-16); `[Furstenberg1967]`'s row mislabelled the ×2×3 theorem's
+propositions; Furstenberg's printed Prop. IV.1 carries a misprint ("M = K^r" for "B = K^r"), now carried into the row.
+
+### R-close.8 The "would have searched here" log, counted
+
+20 lines across the planner and the five Stage-0/1 records, **0 searches run**: the planner 5 (§X), verifier G 2, S0B 3, D 4, verifier H 3,
+verifier I 3; the readers add 3 (Furstenberg) and 0 (Berend, "none needed"). **Borderline, all finite exact computations with no witness
+sought:** S0B's torsion list to `N = 130` (item 17, Kooshi's), D's and verifier I's exit-lemma checks over fixed digit classes, verifier H's
+N₀ list. **Read with Kooshi's question:** creative, again — six lines record a derivation that replaced the search and became the theorem
+(D1-T2 for the window; D1-C2 and VB3 for torsion enumerations; V2 for the torsion list; V4 for a rank-two window; VB1 for the stall).
+
+### R-close.9 The ban question, measured (item 3)
+
+Kooshi: the algebra-only framing "has produced more theorems already than the prior week did... and that's probably measurable from our
+ledgers". **The measurement** (`LEDGER.md` § B, by its milestone column; the windows from the first plan file to the close commit):
+
+| window | milestones | § B theorems | ledger rows | Lean files changed | hours (first plan file → close) |
+|---|---|---|---|---|---|
+| before the ban (2026-09-23 00:45 → 09-24 15:23) | FS-73, FS-79, FS-81 | 45 + 49 + 25 = **119** | 78–84: **7** | 2 | ≈ 38.6 |
+| inside it (2026-09-24 15:30 → 09-25, this close) | FS-85, FS-86, FS-89 | 39 + 68 + 64 = **171** | 85–97: **13** | 0 | ≈ 23 |
+
+So about **1.4× the theorems and 1.9× the rows in about 0.6× the hours** — per hour roughly 2.4× and 3×. **Caveats, each able to explain part
+of it:** (1) granularity — FS-86 and FS-89 filed every verifier's lemma, and FS-89's count includes the two prior-art-reader theorems PA-B1,
+PA-B2; FS-81's 25 counts a census as one row; (2) staffing — the cap rose to three agents on 09-23 and four on 09-25, with blind verifiers
+from FS-85 on; (3) method — G72's invariant question was minted on 09-23, and every milestone in both windows but FS-73 ran under it;
+(4) selection — the milestones inside the ban were chosen for being derivations; (5) grade — the pre-ban window holds kernel work (Lean
+changed) and the ban window none, so the ban window's theorems are all hand or tools grade; (6) FS-73's plan file dates from 00:45 on 09-23 but
+its milestone opened at FS-70's close on 09-22, which would lengthen the first window; (7) two samples of three, no control. **Reading:** the
+data are consistent with Kooshi's observation and cannot separate the ban from the method and staffing changes that came with it.
+
+### R-close.10 Corrections to this plan's text (from the Furstenberg reading, `plans/FS89-PA-furstenberg1967.md` §2 rows 11, 12, 15, 16)
+
+Left in place, corrected here: §0.4 item 1 — the expansion requirement is **Berend's**, not Furstenberg's (at `r = 1` it is automatic;
+Furstenberg's hypothesis is non-lacunarity, and his Prop. IV.1 asks no expansion); §0.4 item 3 and §G.6 — "Furstenberg's multi-parameter
+condition" is Berend's word, Furstenberg's is "non-lacunary"; §PA.3 — `[Berend1984min]` §1's equivalence has **five** conditions assembled by
+Berend from **four** of Furstenberg's results (Prop. III.1 and Th. III.2 are the lacunary side), and Furstenberg 1967 is now held and read;
+§G.1's FS-73 row — the correspondence principle cited at FS73-T38 is Furstenberg's later work, not `[Furstenberg1967]`, which also poses no
+invariant-measure question (so inventory item 1's "open ×2×3-type problem" is folklore, not this paper).
