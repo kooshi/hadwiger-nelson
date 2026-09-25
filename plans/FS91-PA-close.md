@@ -404,7 +404,7 @@ character chromatic number. **The Weil threshold J08-4** is Weil's bound applied
 
 1. R. Muchnik, *Semigroup actions on `T^n`*, Geom. Dedicata 110 (2005), doi 10.1007/s10711-004-4321-7, Zbl 1071.37008 — decides result 1's
    residue (Manners names it among "generalizations that allow an isometric direction").
-2. D. Bosio, F. Vivaldi, *Round-off errors and p-adic numbers*, Nonlinearity 13 (2000) 309–?, doi 10.1088/0951-7715/13/1/315, Zbl 1009.65077 —
+2. D. Bosio, F. Vivaldi, *Round-off errors and p-adic numbers*, Nonlinearity 13 (2000), first page 315 by its DOI, doi 10.1088/0951-7715/13/1/315, Zbl 1009.65077 —
    result 6's coding (J12-B1).
 3. F. Vivaldi, *The arithmetic of discretized rotations*, in *p-adic Mathematical Physics*, AIP Conf. Proc. 826 (2006), doi
    10.1063/1.2193120, Zbl 1152.37329 — result 6, survey.
