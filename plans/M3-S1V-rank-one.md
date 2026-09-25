@@ -8,7 +8,23 @@ commits' contents. No fenced file has been opened.*
 
 ## Theorems this phase proved
 
-(Filled stage by stage; one line each, grade and address.)
+All in this record, §2 (stage 2) unless marked. "W" is the window-state graph of the brief, not quotiented.
+- **J20-W** [hand; Lind–Marcus §2.2–2.3] — `W` is essential; its bi-infinite paths are exactly the points of `X₄(D)` (§2.1).
+- **J20-E1** [hand] — `X₄(D)` is finite iff every phase is rigid and no wall exists (§2.1).
+- **J20-E2** [hand; Lind–Marcus Thm 4.3.1 and §4.4 (Perron–Frobenius)] — `h(X₄(D)) > 0` iff some phase is not rigid (§2.1).
+- **J20-T35W** [hand] — FS79-T35 re-derived on the unquotiented `W`, `X₄(D) = ∅` included (§2.1).
+- **J20-EQ** [hand] — for each `D`: A-T1 ⟺ A-T1′ ⟺ A-T2 ⟺ A-K3; and A-C ⟺ `∃D ¬A-T1(D)` (§2.1).
+- **J20-RET** [hand] — a point whose two tails lie in one rigid phase is the periodic point of that phase, up to shift (§2.2).
+- **J20-K0, J20-K1, J20-K2** [hand] — A-K0, A-K1, A-K2 as stated (§2.2).
+- **J20-Q** [hand + tools exact] — A-Kq: `W` all rigid ⟹ the quotient all rigid, for every quotient; the converse holds for FS-79's
+  transfer quotient and **fails for the orbit quotient at `D = {1}` and `D = {1,2}`**; the wall clause holds for every quotient (§2.3;
+  `tools/crunch_j20_checks.py` Q1).
+- **J20-CUT** [hand] — in a rigid phase, every `m`-window uses at least three colours, and every cut of the periodic point is crossed by
+  an edge of every colour pair; at a wall's exit site the window is not two-coloured by the two colours absent from the backward
+  neighbourhood; a crossing-free cut for the pair `π` in a wall point from `A` to `B` gives a wall from `A` to `τ_π·B` (§2.4).
+- **J20-KC** [hand + tools exact] — J19-KC's three clauses under stated readings: clause 1 **false** with `N` the point's least period
+  (`D = {1,3,6,9}`), true with `N` a common period of all periodic points; clauses 2 and 3 true (§2.5; Q2).
+- **J20-FRZ** [hand] — J19-FRZ true, and it needs no rigidity (§2.5).
 
 ## Stage 1 — SAVED
 
@@ -67,3 +83,171 @@ equivalent (the finite/zero-entropy dichotomy, T35, and C2's orbit argument); (i
 ### 1.4 "Would have searched here" log
 
 - (none yet)
+
+## Stage 2 — SAVED
+
+Phase B1, blind. Every verdict below is a derivation from the statement alone (and from the verified inputs the brief names). Order: the
+claims the owner said J18 reports TRUE first, then the deciding claim, then J19's three.
+
+### 2.1 Groundwork, and the equivalences
+
+Throughout, `D ≠ ∅` finite (for `D = ∅`, `m = max D` is undefined; the full shift would be one non-rigid phase anyway), `X = X₄(D)`,
+`m = max D`, `W` the window-state graph of the brief: vertices the `m`-words occurring in some point, an edge `w → w′` for each
+`(m+1)`-word occurring in some point.
+
+- **J20-W.** Every constraint `c(x) ≠ c(x + d)` spans at most `m + 1` positions, so a bi-infinite sequence all of whose `(m+1)`-windows
+  occur in points is proper, hence a point; conversely every point gives a bi-infinite path. An edge `w → w′` is determined by the
+  `(m+1)`-word, so `W` has no parallel edges. Every vertex and edge lies on a bi-infinite path (it occurs in a point). So the α- and
+  ω-limit SCCs of any path are phases, and every vertex is reachable from a phase and reaches a phase.
+- **J20-E1.** (⟸) A bi-infinite path whose α- and ω-limit phases coincide lies in that SCC (each vertex is reachable from it and reaches
+  it); in a single cycle it is periodic, and there are finitely many. If the limit phases differ, the segment between them is a wall.
+  (⟹) Finite `X` ⟹ every point periodic. A non-rigid phase carries periodic points of unbounded period (below), and a wall `C → C′`
+  extends (prepend `C`'s cycle, append `C′`'s) to a non-periodic point, whose shifts are pairwise distinct.
+- **J20-E2.** `X` is conjugate to the vertex shift of `W`, whose entropy is `log` of the spectral radius, the maximum over SCCs; an
+  irreducible non-negative integer matrix has spectral radius 1 iff it is a cyclic permutation matrix, and radius > 1 otherwise.
+  So `h > 0` iff some phase is not a single cycle. (A non-rigid phase `C` has `tr(A_C^L)` unbounded, so infinitely many periodic points.)
+- **J20-T35W** (T35 without the quotient). `F ⊆ P` always. If some phase is not rigid, `X ≠ ∅` has infinitely many periodic points; a
+  `δ ≠ 0` in `P` would make every periodic point `|δ|`-periodic, hence determined by `|δ|` symbols — finitely many. So `P = {0} = F`.
+  If all phases are rigid and there is no wall, `X` is finite and all points periodic, so `P = F`. If all are rigid and a wall exists,
+  `L = lcm` of the cycle lengths lies in `P`, and a wall point is not `L`-periodic, so `L ∉ F`. If `X = ∅`, `P = F = ℤ` and there is no
+  phase. Hence **`P ≠ F` iff every phase is rigid and a wall exists** — on `W` itself.
+- **J20-EQ.** By E1 and E2, A-T1′(`D`) ("finite or positive entropy") ⟺ (all rigid ∧ no wall) ∨ ¬(all rigid) ⟺ A-T1(`D`). By T35W,
+  A-T2(`D`) ⟺ ¬(all rigid ∧ wall) ⟺ A-T1(`D`). A-T1(`D`) ⟹ A-K3(`D`) vacuously. A-K3(`D`) ⟹ A-T1(`D`): a colour permutation `g` is an
+  automorphism of `W` (it preserves `X`), so from walls `C → C′` and `C′ → gC` we get `gC → gC′ → g²C → ⋯ → gⁿC = C` (`n` the order of
+  `g`), a path from `C′` back to `C`; then `C, C′` share an SCC, contradicting `C ≠ C′`. (This is C2's step 5 with one end.) So
+  **A-T1, A-T1′, A-T2 and A-K3 have the same truth value for every `D`**, and A-C holds iff A-T1 fails for some `D` and that `D` is named.
+  (This agrees with what the owner relayed of J18: A-K3 ⟺ A-T1.)
+
+### 2.2 A-K0, A-K1, A-K2 — TRUE
+
+- **J20-RET (the return lemma).** Let `C` be a rigid phase and `c′ ∈ X` a point whose α- and ω-limit SCC are both `C`. Its path runs
+  from `C` to `C`, so every vertex lies in `C`; inside a single cycle each vertex has one out-edge, so the path is the cycle: `c′` is
+  periodic and, if it agrees with the periodic `p ∈ C` on one window, `c′ = p`. Only the rigidity of `C` is used.
+- **A-K0: TRUE.** Let `c` be periodic; its phase `C` is rigid. A gap at `x` (a colour `b` missing from `c(N[x])`, necessarily `b ≠ c(x)`)
+  gives `c′ = c` off `x`, `c′(x) = b`: proper, agreeing with `c` outside `{x}`, different from `c` — contradicting RET. A finite
+  two-colour Kempe component `K`: swapping it gives a proper `c′ ≠ c` agreeing with `c` outside the finite `K` — contradicting RET. So all
+  four colours meet every closed neighbourhood and every Kempe component is infinite. (With the finite-quotient voltage argument —
+  components of the lift of a finite connected graph with ℤ-voltages are finite copies if every closed-walk voltage is 0, and are
+  infinite and invariant under a nonzero translation otherwise — each Kempe component of `c` is two-sided and periodic.)
+- **A-K1: TRUE.** `X ≠ ∅` gives `χ ≤ 4`. If `χ ≤ 3`, `X₃(D)` is a non-empty SFT, so it has a periodic point `q` (a finite graph with a
+  bi-infinite path has a cycle); `q ∈ X` misses colour 4 on every closed neighbourhood, contradicting A-K0.
+- **A-K2: TRUE (both clauses).** If `{c(x − d)} ∪ {c(x)} = [4]` then, `c` being proper, `{c(x − d) : d ∈ D} = [4] ∖ {c(x)}`. If `c′ = c`
+  on `(−∞, x)` then `c′(x) ∉ {c(x − d)}`, so `c′(x) = c(x)`; induction upward from `x₀` gives `c′ = c`. The second clause: the last vertex
+  of `C` on a wall has an out-edge inside `C` (a phase is strongly connected with a cycle) and one leaving it, so two next colours occur
+  in points; a fortiori the local rule does not force the colour there. It holds in both readings of "determined by the window" (by the
+  language, or by the backward neighbourhood), and the first clause's proof applied at the exit site gives the second.
+
+### 2.3 A-Kq — TRUE for FS-79's quotient, FALSE for the orbit quotient
+
+Let `G = S₄` act on `W`. **Groundwork (every quotient):** the image map has path lifting (an edge `[u] → [v]` lifts from every `u′ ∈ [u]`);
+lifting a cycle of the quotient from `u` gives `u → gu`, and iterating, a cycle through `u`; so SCCs of the quotient are the images of
+`G`-orbits of SCCs of `W`, phases correspond to phases, and there is no edge between two distinct translates `gC ≠ hC` of one SCC (it
+would give `gC → kgC → k²gC → ⋯ → gC`, `k = hg⁻¹`).
+
+- **Walls: TRUE in every quotient.** A wall `C → C′` in `W` has `C′ ∉ G·C` (a path `C → gC` forces `gC = C`), so it projects to a wall;
+  a wall of the quotient lifts to a path between phases with different images.
+- **`W` all rigid ⟹ quotient all rigid: TRUE in every quotient.** A vertex `v` of a rigid phase `C` uses at least three colours: if its
+  colours lie in `{p, q}`, let `τ = (r s)` and `c′ = c` before the window's end, `τ∘c` after — proper, since every crossing constraint
+  touches the window, which `τ` fixes; `τv = v` puts `c′`'s tails both in `C`; `c′ ≠ c` because `c` uses all four colours (A-K0). That
+  contradicts RET. So vertex stabilisers are trivial on `C`, `Stab(C)` acts on the cycle by free rotations, and the image is the cycle
+  `C/Stab(C)` — whether edges are orbits of `(m+1)`-words or bare image pairs.
+- **Quotient all rigid ⟹ `W` all rigid: FALSE for the orbit quotient, TRUE for the transfer quotient.**
+  - *Counterexample.* `D = {1}`: `W` is the complete loopless digraph on the four colours (one phase, entropy `log 3`); every `1`-word is
+    one orbit and every `2`-word one orbit, so the orbit quotient is one vertex with one loop — a single cycle. `D = {1, 2}`: `W` has
+    entropy `log 2` (two free choices at each step); the orbit quotient is again one vertex with one loop. Checked exactly:
+    `tools/crunch_j20_checks.py` Q1 (`data/m3/j20/checks-run.txt`).
+  - *Mechanism.* A collapse needs a phase vertex `u` whose `(m+1)`-extensions `u·a`, `u·b` lie in one orbit, i.e. some `g ≠ 1` fixes `u`
+    and sends `a ↦ b`: `u` uses at most two colours. So the two quotients can disagree only where a phase contains an `m`-word of at most
+    two colours — never when `W` is all rigid (above).
+  - *The transfer quotient* (FS-79's `data/fs79/comp-debruijn/tools/rank1_phases.py`, read at stage 1: a class's out-edges are its
+    canonical representative's, one per admissible colour): the out-edges of `u = g·ū` inside `C` are `g` of `ū`'s out-edges landing over
+    the image `Q`, and edges from `C` over `Q` can only land in `C`; so each vertex's out-degree inside `C` equals its class's multiplicity
+    out-degree inside `Q`, and `C` is a single cycle iff `Q` is.
+  - **Bearing:** T35, T36 and the scan used the transfer quotient, so they are unaffected. The fixed list's A-Kq and the brief's
+    parenthesis ("the claims below hold in either form") are true for the transfer quotient and false, in the rigidity clause, for the
+    ordinary quotient of a graph by a group. A correction owed to the wording, not to any result.
+
+### 2.4 A-T1 (the deciding claim) — GAP, my own stall; with A-T1′, A-T2, A-K3 GAP by J20-EQ and A-C GAP
+
+**What I proved toward it (J20-CUT):**
+1. Every `m`-window of a point in a rigid phase uses at least three colours (§2.3).
+2. **Every cut of a rigid-phase periodic point `p` is crossed by an edge of every colour pair `π`.** If no `π`-edge crossed `t`, the future
+   swap `p′ = p` on `(−∞, t)`, `τ_π∘p` on `[t, ∞)` would be proper, with tails in `A` and `τ_π A`; a path `A → τ_π A` forces `τ_π A = A`,
+   and then RET gives `p′ = p`, false since `p` uses the colours of `π` after `t`. (Equivalently: its Kempe components are two-sided.)
+3. **At a wall's exit site.** Let `c = p` on `(−∞, 0)`, `c(0) = β ≠ α = p(0)`. Then `α, β ∉ B(0) = {p(−d) : d ∈ D}`, so `|B(0)| ≤ 2`;
+   the window `p[−m, 0)` is not coloured inside `[4] ∖ {α, β}` (else `(α β)` fixes it and `(α β)∘p` would give its vertex two out-edges
+   inside `A`); and `β` occurs among `p`'s forward neighbours of 0 (gap-freeness).
+4. **Walls are closed under future swaps.** If a wall point `c` from `A` to `B` has a cut with no `π`-edge across it, the future swap is
+   a wall point from `A` to `τ_π B`. Kempe swaps also keep a wall point a wall point (J19-KC clause 3, verified in §2.5). Reflection
+   `x ↦ −x` turns a wall `A → B` into `B^R → A^R`; splicing two points at a shared window needs their phases to coincide.
+
+**The stall, named.** A-T1 is equivalent (J20-E1, EQ) to: *in an all-rigid `X₄(D)`, no point agrees with a rigid-phase periodic point on
+a left half-line and differs from it.* To close it one needs an operation that turns such a point into a non-periodic point with both tails
+in one phase, or into a wall `B → g·A`. The operations derivable from the statements alone do not reach it:
+- colour permutations, Kempe swaps and future swaps preserve the wall's direction (left tail in the orbit of `A`'s Kempe relatives,
+  right tail in `B`'s), and by KC clause 3 never produce a same-phase pair of tails;
+- reflection plus splicing closes it exactly when both ends are achiral (FS79-T34, C2), and says nothing at a chiral end;
+- at Kempe-frozen tails (each colour pair's subgraph connected) the Kempe class is only relabelled tails (J19-FRZ), so no Kempe
+  argument has anything to work with there.
+**The missing step, verbatim:** *"At a wall of an all-rigid `X₄(D)` with a chiral end and Kempe-frozen tails, some operation beyond
+colour permutation, reflection, splicing at a shared window, Kempe swaps and future swaps produces a non-periodic point whose two tails
+lie in one phase."* I found no such operation, and no counterexample either. The scan's null (FS79-T36: 377 all-rigid sets, `max D ≤ 14`,
+`|D| ≤ 5`) measures its range (G21; FS85-dB2 shows the relevant structures can first appear at `|D| = 70`).
+
+- **A-T1: GAP** (the missing step above). **A-T1′, A-T2, A-K3: GAP**, each equivalent to A-T1 for every `D` (J20-EQ; the equivalence
+  itself is TRUE). **A-C: GAP** — true iff A-T1 fails somewhere; no `D` named.
+
+### 2.5 J19's three claims (readings stated; my brief defines none of their terms)
+
+- **J19-KC — clause 1 FALSE or TRUE by the reading of `N`; clauses 2 and 3 TRUE.**
+  - *Clause 1, `N` = the periodic point's least period: FALSE.* `D = {1, 3, 6, 9}`: `X₄(D) ⊆ X₄({3,6,9})`, and `X₄({3,6,9})` is three
+    interleaved copies of `X₄({1,2,3})` (24 points each), so finite: every phase rigid, no wall. The colouring `x ↦ h(x mod 4)`,
+    `h = (a, d, c, b)`, is proper (no element of `D` is `≡ 0 mod 4`) with least period 4. Its `{a, c}`-vertices are `2ℤ` and the only
+    element of `±D` that is `≡ 2 mod 4` is `±6`, so its `{a,c}`-strands are the three cosets `6ℤ, 6ℤ+2, 6ℤ+4` — none invariant under
+    translation by 4 (4 carries `6ℤ` to `6ℤ+4`). Checked exactly (Q2: 840 essential states, 74 phases, all rigid, no wall; three
+    components with residues `{0,6}, {2,8}, {4,10}` mod 12; plant `D ∪ {2}` merges them and the check fails as it must).
+  - *Clause 1, `N` = a common period of all periodic points (e.g. the lcm of the cycle lengths): TRUE.* A strand `K` of periodic `p` is
+    infinite (A-K0) and periodic (voltage argument); swapping it gives a periodic `p′`, and both `p, p′` are `N`-periodic, so
+    `K = {x : p′(x) ≠ p(x)}` is `N`-invariant.
+  - *Clause 2: TRUE.* Every swap of a strand of a periodic point in an all-rigid `X` gives a periodic point (above); a periodic point has
+    finitely many strands (one per coset of a nonzero voltage group per component of a finite quotient), so any union of strands is a
+    finite union; `X` has finitely many periodic points. Hence the Kempe class is a finite set of periodic points.
+  - *Clause 3: TRUE* ("labelled phase" read as a phase of `W`; it is also true of quotient phases). Kempe swaps are involutions with the
+    same two-colour subgraph, so Kempe equivalence is symmetric; a periodic member would make the wall point periodic by clause 2. A
+    non-periodic point in an all-rigid `X` has distinct limit phases (RET). A wall point has finitely many Kempe components: far from the
+    junction each strand of the tail's periodic point contributes exactly one infinite piece to a half-line, all of whose far vertices
+    lie in it (translate a bounded connecting path), so only a bounded middle holds anything else.
+- **J19-FRZ — TRUE** (reading: a periodic point is Kempe-frozen when every two-colour subgraph is connected, the usual sense). A
+  relabelled frozen point is frozen. If the current point has frozen tails `g·p_A`, `g′·p_B`, the far-left `{a,b}`-vertices lie in the
+  one infinite left piece, so a Kempe component contains all of them or none; a swap relabels each tail by `(a b)` or leaves it.
+  Induction over single swaps. No rigidity is used.
+- **J19-KEF — not verifiable from my brief.** KE, KE♯, "one-sided component" and "total" are not defined in it. What I can verify under
+  the natural readings (a one-sided component meets exactly one tail; it is *total* when it contains every strand of its tail for its
+  pair): **the "in particular" clause is TRUE** — frozen tails have one strand per pair per side, so a one-sided component meeting a tail
+  contains all of that tail's strands. The first clause ("KE fails at every rigid–rigid wall whose one-sided components are all total")
+  and the consequence ("so KE ⟹ KE♯") need KE's and KE♯'s statements: **asked for at B2**.
+
+### 2.6 B1 verdicts (as sent to the owner)
+
+| claim | verdict | one line |
+|---|---|---|
+| A-K0 | **TRUE** | a gap or a finite Kempe component repaints `c` on a bounded set, contradicting the return lemma |
+| A-K1 | **TRUE** | a periodic three-colouring would be a gapped periodic point |
+| A-K2 | **TRUE** | full backward neighbourhoods force the colour; an exit vertex has out-degree ≥ 2 |
+| A-Kq | **FALSE** for the orbit quotient (`D = {1}`, `{1,2}`: `W` non-rigid, quotient one loop); **TRUE** for FS-79's transfer quotient; wall clause TRUE for both |
+| A-T1 | **GAP** | missing step §2.4 (chiral end, Kempe-frozen tails) |
+| A-T1′, A-T2, A-K3 | **GAP** | each ⟺ A-T1 for every `D` (proved) |
+| A-C | **GAP** | ⟺ ¬A-T1 somewhere; no `D` named |
+| J19-KC | clause 1 **FALSE** with `N` the least period (`D = {1,3,6,9}`), **TRUE** with `N` a common period; clauses 2, 3 **TRUE** |
+| J19-FRZ | **TRUE** | needs no rigidity |
+| J19-KEF | **not verifiable** (KE undefined); its "in particular" clause TRUE |
+
+### 2.7 "Would have searched here" log
+
+- A-C / A-T1: would have enumerated `D` beyond FS79-T36's range hunting an all-rigid set with a wall. Did instead: the stall analysis of
+  §2.4; A-C left GAP.
+- J19-KC clause 1: would have searched small `D` for an all-rigid set with a strand not invariant under its point's least period. Did
+  instead: derived `{3,6,9}` (a product of three `{1,2,3}` systems, where `6` is the only `≡ 2 mod 4` difference) and `{1,3,6,9}` (adding
+  1 keeps finiteness and gives `gcd 1`), then checked that one named set exactly.
+- A-Kq: would have scanned `D` for sets where the two quotients disagree and a wall exists. Did instead: derived that a disagreement needs
+  a phase vertex of at most two colours, which rigidity forbids, and exhibited `{1}`, `{1,2}` by hand; checked exactly.
