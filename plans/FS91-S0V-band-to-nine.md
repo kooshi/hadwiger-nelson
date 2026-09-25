@@ -213,6 +213,30 @@ Same route as §3.6.1; only the `k`-lines differ. `B₈ = [1/8, 7/8]`.
   D5-L1's narrow-band rigidity).
 - **Verdict:** `RS₉(S)` for every `|S| ≥ 2` **TRUE**; `RQ₉` **TRUE** [hand; sweep arithmetic tools exact]. Layering/gluing: no `k`.
 
+## Stage 3, `k = 7` — SAVED
+
+`B₇ = [1/7, 6/7]`.
+- **R1 step 2, Lemma SW's arc line:** needs `1/p < 2/7`: `1/5 < 2/7` ✓ (tool A2 row `k=7`).
+- **R1 steps 1, 3, 4:** no use of `k`.
+- **R2, the parity line:** `2y(u) ∈ [2/7, 5/7]`; `2/7 > 1/4`, so one doubling reaches a band where case 1 is refused outright (antipodal
+  values cannot both lie in an arc of length `3/7 < 1/2`); `RS_{2/7}(S)` by VB1; hence case 1 refused at `1/7`. `[2/7, 5/7] ⊆ [1/4, 3/4]`
+  also lets `RS₄` (S1VB-14) do the same job.
+- **Verdict:** `RS₇(S)` for every `|S| ≥ 2` **TRUE**; `RQ₇` **TRUE** [hand; sweep arithmetic tools exact]. Layering/gluing: no `k`.
+
+### Stage 3 summary
+
+| `k` | `RS_k(S)`, `|S| ≥ 2` | `RQ_k` | Lemma SW's arc line (one digit) | parity line lands in | layering/gluing use `k`? |
+|---|---|---|---|---|---|
+| 6 | TRUE | TRUE | `1/5 < 1/3` | `[1/3, 2/3]` (antipodal refusal next) | no |
+| 7 | TRUE | TRUE | `1/5 < 2/7` | `[2/7, 5/7]` (antipodal refusal next) | no |
+| 8 | TRUE | TRUE | `1/5 < 1/4` | `[1/4, 3/4]` (then `{θ₂}`) | no |
+| 9 | TRUE | TRUE | `1/5 < 2/9` (margin `1/45`; fails at 10) | `[2/9, 7/9]` (then `[4/9, 5/9]`, refused) | no |
+
+**Beyond the claim (flagged for audit in stage 4, not yet a verdict of this job's brief):** the arc line holds at every `k` with an
+`m`-digit sweep, and R2's doubling chain terminates at every `k`; so the same derivation gives `RS_k(S)` for every `k` and `|S| ≥ 2`, and
+`RQ_k` for every `k`. In one sentence: *for `|S| ≥ 2`, a character of `R_S` outside `T + A` takes values arbitrarily close to 0 on
+`U_S`* — the Furstenberg-type form, with no band left in it.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
