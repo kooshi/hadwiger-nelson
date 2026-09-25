@@ -110,3 +110,52 @@ if one exists, is not a character colouring, and at 43 not even a best-possible 
 (contaminated) and against the uncontaminated heuristic 0.77 (the heuristic's `P(no c) ≈ (7/8)^11 = 0.23` happened). **Agreement noted,
 not used:** the planner's J03-3 (read by the logged leak) claims band 8 at 23 exactly at `c ∈ {11, 20, 21}`; the tool's list is the same.
 
+## Stage 4 — SAVED (SIX-c: the Weil threshold and the complete lists below it)
+
+### J08-4 — the threshold, derived [hand, given Weil]
+
+*Statement.* **If `Γ_q` (`q` prime, `q ≡ 3 (mod 4)`) has a band `k`-character, then with `L = ⌈q/k⌉`,
+`L(q + 1) ≤ 2√q·(q − L)`; hence `q + 1 ≤ 2(k − 1)√q`, and `q < Q_k := 4(k − 1)²`.** So `Q₆ = 100`, `Q₇ = 144`; and in general
+`χ_char(Γ_q) > 1 + √q/2`.
+
+*Proof.* Let `λ_a` be band `k` and `M(t) = #{z ∈ μ_{q+1} : Tr(az) = t}`; `Σ_t M(t) = q + 1`. For `h ≠ 0`,
+`M̂(h) = Σ_t M(t)e(ht/q) = Σ_z e(Tr(haz)/q)` is the eigenvalue of `Γ_q` at the non-trivial character `λ_{ha}`; it is real (`z ↦ −z`), and
+by stage 2's multiplicities `M̂(h) = −Σ_t χ(t² − 4c)e(ht/q)`, a mixed sum with a squarefree quadratic, so **`|M̂(h)| ≤ 2√q` (Weil)**.
+Take `A = {0, …, L − 1}` and the Fejér function `g = 1_A ∗ 1_{−A}`, `g(t) = #{(x, y) ∈ A² : x − y = t}`: `g ≥ 0`, supported on
+`|t| ≤ L − 1 < q/k`, `g(t) = q⁻¹Σ_h |Â(h)|² e(ht/q)`, `Σ_h |Â(h)|² = qL`. The band condition puts `M = 0` on `|t| < q/k`, so
+`0 = Σ_t M(t)g(t) = q⁻¹[L²(q + 1) + Σ_{h≠0} |Â(h)|² M̂(h)] ≥ q⁻¹[L²(q + 1) − 2√q(qL − L²)]`, i.e. `L(q + 1) ≤ 2√q(q − L)`. With
+`q/k ≤ L`: `(q + 1)/k ≤ 2√q(1 − 1/k)`, i.e. `√q + 1/√q ≤ 2(k − 1)`. ∎ (The band-1/4 analogue is FS89-S0A-8, sharper there because the
+value set is forced to be exactly the middle half.)
+
+*Checked against every exact value* (`tools/crunch_j08_threshold.py`, 0.36 s): at all **218 primes `q ≡ 3 (mod 4)` below 3,000**,
+`χ_char(Γ_q)` computed exactly (complete enumeration of `c` per `q`) passes the exact integer form `L²(q+1)² ≤ 4q(q − L)²`; the least
+slack is 0 (at 3 and 7, where the bound is attained); **no band 6-character at any `q ≥ 100` and no band 7-character at any
+`q ≥ 144` below 3,000**, as the theorem says. **Plant:** the Weil constant 1 in place of 2 is violated by the exact values at
+`q = 3, 7, 19` (fires at the consistency check); the faithful twin has no violation. The Weil input itself was checked numerically at
+`q ≤ 67` in stage 2 (margins ≥ 0.44).
+
+### J08-5 — the complete lists below `Q_k` [hand + tools exact, given Weil above `Q_k`]
+
+*Logged as the ban's edge:* all `q ≡ 3 (mod 4)` prime below `Q_k`, and for each all `c ∈ 𝔽_q^×` — a set fixed by J08-4 and SIX-a.
+
+| `k` | `Q_k` | `(q : c)` with a band `k`-character, complete | every other usable prime |
+|---|---|---|---|
+| 6 | 100 | `3: {2}`; `7: {5}`; `11: {2, 10}`; `19: {15}` | none (below 100 by enumeration; from 100 by J08-4) |
+| 7 | 144 | `3: {2}`; `7: {3, 5, 6}`; `11: {2, 10}`; `19: {13, 15}` | none |
+
+**So the primes `q ≡ 3 (mod 4)` whose plane carries a band six- or seven-character are exactly 3, 7, 11, 19** — every window member (23,
+31, 43, 47) and every prime from 23 up has `χ_char(Γ_q) ≥ 8`. `χ_char` below 200 (with J08-4's floor in brackets): 3: 3 [3]; 7: 4 [4];
+11: 6 [4]; 19: 5 [4]; 23: 8; 31: 8; 43: 9; 47: 10; 59: 10; 67: 14; 71: 18; 79: 14; 83: 17; 103: 15; 107: 16; 127: 22; 131: 22; 139: 24;
+151: 19; 163: 33; 167: 24; 179: 26; 191: 24; 199: 25 (`κ` exact beside each in `data/fs91/j08/threshold.json`).
+
+**The second route at `k = 6` agrees.** Six colours are refused outright on Γ_q at 59, 67, 79, 83 by certificate and at 71 and from 103 by
+spectrum (rows 68–69, G44, G56) — for every colouring, so for characters; the character enumeration refuses six (indeed up to
+`χ_char − 1 ≥ 9`) at the same `q` independently. On the window members 23–47 only the character route speaks (six is undecided for `χ`).
+
+**Prime powers (remark, outside SIX-a's scope).** At `q = p^f`, `f ≥ 2`, every character of `𝔽_{q²}` takes values in `(1/p)ℤ/ℤ`, so a band
+character `λ` is non-zero on the circle and `pλ` is a proper `p`-colouring of `Γ_q`. At 27 that would give `χ(Γ₂₇) ≤ 3`, against
+`χ(Γ₂₇) ≥ 6` (row 70, cert): **`χ_char(Γ₂₇) = ∞`, no band character at any `k`** [hand + cert]. Not needed below (no field here has 27).
+
+**Would have searched here:** would have run a local search for a band-six character "near" the best `c` at 43, or over random `a`; instead
+the complete `c`-list, fixed by SIX-a, and J08-4 for every larger `q`.
+
