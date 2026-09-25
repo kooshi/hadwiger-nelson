@@ -238,7 +238,7 @@ product", "expander", "uniquely colorable", "exponential graph", "Borel/measurab
 | `uniquely & colorable & expander` | 1 | `[PakVilenchik2013]` |
 | `expander mixing & coloring`; `dictator & coloring & product` | 1, 1 | Potapov 2022 (perfect 2-colourings), a SODA volume; none |
 | author listings: `au:"Vilenchik, Dan"` (29), `au:"Brakensiek, Joshua" & tensor` (3), `au:"Marks, Andrew S." & product` (0), `au:"Bernshteyn, Anton" & product` (2) | | Langberg–Vilenchik 2012 (arXiv 1211.1467; abstract read: an expander-mixing lemma for generalised products `G^k`, not a colouring descent); Brakensiek 2017 (vertex isoperimetry for tensor powers of cliques; title only); nothing on point |
-| `Borel & categorical product`; `Borel chromatic & Hedetniemi`; `measurable & Hedetniemi` | 0 each | — (with J21's and J23c's 9 + 14 earlier queries, 41 queries in all) |
+| `Borel & categorical product`; `Borel chromatic & Hedetniemi`; `measurable & Hedetniemi` | 0 each | — (with J21's and J23c's 9 + 14 earlier queries, 53 in all, stage 6 included) |
 
 **Paper 5 — `[BrakensiekDavies2024]`.** J. Brakensiek, S. Davies, *Robust factorizations and colorings of tensor graphs*, SIAM J. Discrete Math.
 38(1) (2024) 883–916, doi 10.1137/23M1552474, zbl 1533.05210 (summary withheld); arXiv:2207.08913v2 (27 Nov 2023, 27 pp.) →
@@ -254,7 +254,7 @@ Pak–Vilenchik (grep).
 refinement (Krivelevich–Sudakov's survey, ADFS's [23]; equivalently Haemers's bound for two sets with no edges between them) —
 **[external, not re-read here]**: neither source is held; `[Haemers2021]` (held) states the one-set ratio bound only (read: its Theorems 1–2
 and the interlacing section, grep for a two-set form: none). The compact-group form is the same two lines with Parseval on `K`; its one-set
-case is the compact Hoffman bound of `[BachocDeCorteOliveiraVallentin2014]` (held, arXiv 1301.1054; not re-read).
+case is the compact Hoffman bound of `[BachocEtAl2014]` (held, arXiv 1301.1054; not re-read).
 
 ## Stage 6 — SAVED: the verdict, proposals, and the list for Kooshi
 
@@ -262,7 +262,7 @@ case is the compact Hoffman bound of `[BachocDeCorteOliveiraVallentin2014]` (hel
 
 | part | position | where, exactly |
 |---|---|---|
-| **J21-MX as stated** (compact abelian `K`, weighted `ν`, every Borel `X`; Borel and measurable (N′) forms) | **not found by these searches** | 41 zbMATH queries (J21 §3.7: 9; J23c R3.10: 14; here: 18 + 4 in `data/m3/j23cpa/gate-queries-3.out`), 3 + 3 web searches, six papers read at the sections that bear (stages 1–5) |
+| **J21-MX as stated** (compact abelian `K`, weighted `ν`, every Borel `X`; Borel and measurable (N′) forms) | **not found by these searches** | 53 zbMATH queries (J21 §3.7: 9; J23c R3.10: 14; here: 30 in `data/m3/j23cpa/gate-queries{,-2,-3}.out`), 3 + 3 web searches, six papers read at the sections that bear (stages 1–5) |
 | **(S) the threshold `λ(H)/r < 1/(k−1)` on a regular factor of a categorical product** | **in print** (2013) | `[PakVilenchik2013]` Thm 3: "Let H be an r-regular graph with `λ < r/(k − 1)`. Then `G = Kk ⊗ H` is uniquely k-colorable and uniquely vector k-colorable" — first factor `K_k` only; generalised to vector colourings by `[GodsilEtAl2020]` Cor. 4.4 (§4.1) |
 | **(F) the finite case, arbitrary first factor, integral conclusion** (`K_k^{Cay(K,T)} → K_k`) | **not found**; **partly in print** at `K = ℤ/n`, `T = K ∖ 0`: the classical `χ(G × K_n) = min(χ(G), n)` | `[Tardif2008]` Thm 3.2, credited to Burr–Erdős–Lovász 1976 (every vertex in an `n`-clique; `K_n` is the case J21-MX recovers). The genre — "the factor G is heavily constrained … but the factor H is free" — is `[Tardif2008]` §3's; none of its members is spectral |
 | the vector analogue of (F) | **in print**, weaker | `[GodsilEtAl2020]` Thm 2.12: `χv(G × H) = min{χv(G), χv(H)}`; with `χv(H) > k` it gives `χv(X) ≤ k`, not `χ(X) ≤ k` |
