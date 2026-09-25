@@ -338,6 +338,20 @@ carry: the gluing across directions is a uniquely solvable CRT square, so the mo
 difficulty is the band on the fill.** No divergence table: V-A4 is a derivation task, not a claim of another agent's. The comparable
 Stage-0 text (S0B §1, rank 1) agrees.
 
+## C0 scored (V-A)
+
+| statement | predicted | outcome |
+|---|---|---|
+| V-A1 | TRUE 0.90 (a posterior of a mental pass) | TRUE; the last step is elementary (V1) |
+| N₀ | TRUE 0.80 | TRUE (V2), by a route that agrees with S0A's at every step |
+| U2 | TRUE 0.60 | TRUE (V3). The feared failures did not occur: every order-8 type has margin 0, and order 16 is excluded. Precision: the order-4 set has two symmetry types |
+| V-A3 | TRUE 0.55 | TRUE and stronger (V4): the prime-to-13 hypothesis can be dropped. S0B §6 has a wording slip and a small gap, both harmless |
+| V-A4 | derivable 0.85 | derived (V5, V6), plus the sharpening that the square is a forced CRT fill |
+
+One self-correction, inside V-A3 and before any other file was opened: V3c's place (`π_p` against `π̄_p`). No verdict moved. Budget: V-A
+took about 225k tokens of context and output in all, above the brief's 150k guide. The overrun is mostly the V-A3 derivation and the
+two exact checks.
+
 ## Would-have-searched-here log
 
 (one line per move I would have made by search, and what I did instead)
