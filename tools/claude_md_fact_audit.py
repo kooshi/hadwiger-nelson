@@ -59,6 +59,17 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # FS-89 close (2026-09-25).
+    "plans/POROS-2026-09-25-fs86-next.md": "the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses",
+    "plans/STUB-dyadic-rigidity-triangle-free.md": "the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses",
+    "ℚ(i)": "the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses",
+    "§ R.4": "a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub",
+    "R.4": "a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub",
+    "C₅": "a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub",
+    "T34–T35": "a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub",
+    "1050": "the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields",
+    "Asymmetric": "the FS-65 row's bearing, compressed at FS-89's close; plans/FRONTIER-STUBS.md keeps it",
+    "60's": "the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields",
     "ℚ(√p,√q)²": "row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'",
     "SUSPENDED": "§ Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his",
     # The FS-66 stub row's phrasings (FS-66 closed 2026-09-21; the row left the ranked table and its facts moved to row 75,
