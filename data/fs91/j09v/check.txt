@@ -1,0 +1,57 @@
+J09v exact checks of J4 (plans/FS91-S1V-no-mixing.md stage 2)
+
+A. field arithmetic (gp): N_3 = #primes of F above 3 with residue field F_3; primes above 2 in L = F(i)/F
+  Q                N_3 = 1   primes over 3: (e=1,f=1)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^1);   ramified stable dyadic (contrast)
+  Q(sqrt3)         N_3 = 1   primes over 3: (e=2,f=1)              primes over 2 in L/F: inert(eF=2,Q=2^1);   
+  Q(sqrt5)         N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^2);   ramified stable dyadic (contrast)
+  Q(sqrt7)         N_3 = 2   primes over 3: (e=1,f=1)(e=1,f=1)     primes over 2 in L/F: split;   two F_3 places
+  Q(sqrt11)        N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: inert(eF=2,Q=2^1);   
+  Q(sqrt2,sqrt3)   N_3 = 0   primes over 3: (e=2,f=2)              primes over 2 in L/F: inert(eF=4,Q=2^1);   
+  Q(sqrt3,sqrt7)   N_3 = 2   primes over 3: (e=2,f=1)(e=2,f=1)     primes over 2 in L/F: split;   two F_3 places, ramified over Q
+
+B. level one: band-3 characters of Cay(F_{q^2}, mu_{q+1}) and of U_Q
+  q =  3: 4
+  q =  7: 0
+  q = 11: 0
+  q = 19: 0
+  q = 23: 0
+  q = 27: 0
+  U_Q, Q = 2: 0
+  U_Q, Q = 4: 0
+  U_Q, Q = 8: 0
+
+C. higher levels, one stable place: (|S| at level p^k, #band-3 characters, #of those factoring through level one, orders)
+  Z3[i] (F_p = Q_3; e=1, q=3)                             mod 3^1: |S| =    4  band-3 =   4  level-one =   4  orders = [3]
+  Z3[i] (F_p = Q_3; e=1, q=3)                             mod 3^2: |S| =   12  band-3 =   4  level-one =   4  orders = [3]
+  Z3[i] (F_p = Q_3; e=1, q=3)                             mod 3^3: |S| =   36  band-3 =   4  level-one =   4  orders = [3]
+  Z3[sqrt3][i] (F_p = Q_3(sqrt3); e=2, q=3)               mod 3^1: |S| =   12  band-3 =   4  level-one =   4  orders = [3]
+  Z3[sqrt3][i] (F_p = Q_3(sqrt3); e=2, q=3)               mod 3^2: |S| =  108  band-3 =   4  level-one =   4  orders = [3]
+  Z2[sqrt3][omega] (F_p = Q_2(sqrt3); inert in L/F, Q=2)  mod 2^1: |S| =    6  band-3 =   0  level-one =   0  orders = []
+  Z2[sqrt3][omega] (F_p = Q_2(sqrt3); inert in L/F, Q=2)  mod 2^2: |S| =   24  band-3 =   0  level-one =   0  orders = []
+  Z2[sqrt3][omega] (F_p = Q_2(sqrt3); inert in L/F, Q=2)  mod 2^3: |S| =   96  band-3 =   0  level-one =   0  orders = []
+  Z2[i] (F_p = Q_2; RAMIFIED in L/F)                      mod 2^1: |S| =    2  band-3 =   1  level-one =   1  orders = [2]
+  Z2[i] (F_p = Q_2; RAMIFIED in L/F)                      mod 2^2: |S| =    4  band-3 =   1  level-one =   1  orders = [2]
+  Z2[i] (F_p = Q_2; RAMIFIED in L/F)                      mod 2^3: |S| =    8  band-3 =   1  level-one =   1  orders = [2]
+  Z2[zeta3][i] (F_p = Q_2(sqrt5)=Q_2(zeta3); RAMIFIED in L/F) mod 2^1: |S| =    2  band-3 =   4  level-one =   2  orders = [2]
+  Z2[zeta3][i] (F_p = Q_2(sqrt5)=Q_2(zeta3); RAMIFIED in L/F) mod 2^2: |S| =    8  band-3 =   4  level-one =   2  orders = [2]
+  Z2[zeta3][i] (F_p = Q_2(sqrt5)=Q_2(zeta3); RAMIFIED in L/F) mod 2^3: |S| =   32  band-3 =   4  level-one =   2  orders = [2]
+
+D. no mixing: band-3 characters of prod_P O_P/N on the product circle, against 4 N_3
+  Q(sqrt7)         N =   3 places ['Z3[i]', 'Z3[i]']: 8   4 N_3 = 8
+  Q(sqrt7)         N =   9 places ['Z3[i]', 'Z3[i]']: 8   4 N_3 = 8
+  Q(sqrt3,sqrt7)   N =   3 places ['Z3[sqrt3][i]', 'Z3[sqrt3][i]']: 8   4 N_3 = 8
+  Q(sqrt3,sqrt7)   N =   9 places ['Z3[sqrt3][i]', 'Z3[sqrt3][i]']: 8   4 N_3 = 8
+  Q(sqrt3)         N =  18 places ['Z3[sqrt3][i]', 'Z2[sqrt3][omega]']: 4   4 N_3 = 4
+  Q(sqrt3)         N =  36 places ['Z3[sqrt3][i]', 'Z2[sqrt3][omega]']: 4   4 N_3 = 4
+  Q(sqrt3)         N =  24 places ['Z3[sqrt3][i]', 'Z2[sqrt3][omega]']: 4   4 N_3 = 4
+  Q(sqrt11)        N =   8 places ['Z2[sqrt3][omega]']: 0   4 N_3 = 0
+  Q                N =   6 places ['Z3[i]', 'Z2[i]']: 5   4 N_3 = 4  (hypothesis fails: expected to exceed 4 N_3)
+  Q                N =  24 places ['Z3[i]', 'Z2[i]']: 5   4 N_3 = 4  (hypothesis fails: expected to exceed 4 N_3)
+  Q(sqrt5)         N =   8 places ['Z2[zeta3][i]']: 4   4 N_3 = 0  (hypothesis fails: expected to exceed 4 N_3)
+
+Plants (each must move its count; the faithful partner is the run above)
+  P1 diagonal joint image at Q(sqrt7), N = 3: 36 (faithful 8)
+  P2 conjugation := identity, Z3[i] mod 3: 6 (faithful 4)
+  P3 i dropped from mu_4 at q = 3: 6 (faithful 4)
+
+VERDICT: ALL CHECKS PASS
