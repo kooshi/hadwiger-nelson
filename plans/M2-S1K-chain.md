@@ -11,6 +11,9 @@ Working files: `data/m2/j14/`.*
 | `not_colorable_chain`: a forcer at `k` colours chained along unit vectors `u` with `(q b − q a)·Σu = 1` — the unit-distance graph induced on the chain's points is not `k`-colourable | kernel (scratch, stage 1; library at stage 2) | `data/m2/j14/Chain.lean` |
 | `add_one_le_chromaticNumber_induce_of_chain` (any `S : Subring ℂ` holding drawing and multipliers), `add_one_le_chromaticNumber_unitDistance_of_chain` (the plane), `add_one_le_chromaticNumber_planeOver_of_chain` (`F²`) | kernel (scratch, stage 1) | same |
 | `planeOverSubring F : Subring ℂ` — `F²` is closed under complex `+` and `·` | kernel (scratch, stage 1) | same |
+| the four forms and `planeOverSubring`, moved into the library | kernel (elaborated; the gated build at stage 5) | `Proofs/HadwigerNelson/Chain.lean` |
+| `spindle_of_chain`: `χ(ℝ²) ≥ 4` — the Moser spindle as the chain's `m = 2` case (rhombus along the real axis, twist `(√3 + i√33)/6` and its conjugate, `√3·(2√3/6) = 1`) | kernel (elaborated) | same |
+| `rhombus_unit_of` (five edge lengths make a rhombus drawing unit), `norm_eq_one_of_sq` | kernel (elaborated) | same |
 
 ## Stage 1 — SAVED
 
@@ -57,3 +60,21 @@ Elaboration of the whole module: 1.95 s wall, 3.4 GB peak (desktop, `scripts/slo
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | X1 | — none at stage 1 | — |
+
+## Stage 2 — SAVED
+
+`Proofs/HadwigerNelson/Chain.lean` (249 lines): the chain drawing (`junction`, `chainDrawing`, `chainPoints`, `copyHom`), the four forms
+of the theorem (`not_colorable_chain`; `add_one_le_chromaticNumber_induce_of_chain` for any `S : Subring ℂ`;
+`add_one_le_chromaticNumber_unitDistance_of_chain`; `add_one_le_chromaticNumber_planeOver_of_chain` through `planeOverSubring`), two
+helpers the instances share (`norm_eq_one_of_sq`, `rhombus_unit_of`), and the spec: a `#`-free example per definition (`junction` on
+`δ = 2`, multipliers `1, 3` at `n = 1, 2`; `chainDrawing` on a segment turned by `i`; `planeOverSubring ⊥` holding `(1 + i)²`) and
+**`spindle_of_chain`**, the Moser spindle as the `m = 2` case — the model of every hypothesis of the plane form. Elaborates with no error
+and no warning (four iterations: two `simp` argument lints, one `rw` motive error on a `Fin` numeral replaced by `simp` through
+`Finset.sum_filter`, one `linear_combination` coefficient that differs by edge — the edge `1—2` has no `√3`).
+
+**Modeling note (the one decision here).** The theorem is proved at the subring level and `planeOver` enters only through
+`planeOverSubring` (§M domain 2). *Alternative:* prove it for `planeOver F` directly, as the skeleton did. *Why this won:* the proof uses
+closure under `+` and `·` and nothing about fields; the subring form serves FS-47's `ℤ[U]` statements unchanged. *Confidence:* high.
+
+Not yet done (stage 5): `Proofs.lean`, `ARCHITECTURE.md`'s module map, `scripts/Axioms.lean` — moved to the gate stage so the three
+modules are registered in one edit.
