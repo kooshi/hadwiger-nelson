@@ -18,7 +18,8 @@ Part B -- the parity (doubling) line at k = 6..9.
 Planted faults (each must fire, beside the faithful run that must pass):
       P1  wrong place: iota = 3 (mod 5), where 2 - i is a unit, so w_5 contracts at v and the sweep collapses (A1 must fail);
       P2  closed arc [-1/k, 1/k] in place of the open one (A2's sharpness at k = 10 must fail);
-      P3  B1 with the half-turn 1/2 replaced by 1/3 (the doubled band must no longer be B'_k).
+      P3  B1 with the half-turn 1/2 replaced by 1/3 (the doubled band must no longer be B'_k);
+      P4  the multi-digit sweep run with one digit fewer than m(k) (A3 must fail, first at k = 10 with one digit).
 Run: python3 tools/crunch_j01_sweep_check.py   (exit 0 iff the faithful run passes and every plant fires)
 """
 from fractions import Fraction as Fr
@@ -73,7 +74,7 @@ def sweep_values(iota, s, m, offset):
     return [offset - Fr(0) - Fr(0) for _ in range(5 ** m)], False
 
 
-def check_part_A(iota, closed=False):
+def check_part_A(iota, closed=False, digit_shortfall=0):
     out = []
     ok = True
     # A1: fullness of the coset
@@ -105,6 +106,7 @@ def check_part_A(iota, closed=False):
         m = 1
         while 5 ** m <= Fr(k, 2):
             m += 1
+        m = max(1, m - digit_shortfall)
         vals, _ = sweep_values(iota, 2, m, Fr(0))
         worst_offset = Fr(1, 2 * 5 ** m) - vals[0]
         wvals, _ = sweep_values(iota, 2, m, worst_offset)
@@ -168,13 +170,16 @@ def main():
     p1_fires = (not okP1) and any("NOT full" in line and "expanding=False" in line for line in outP1)
     okP2, outP2 = check_part_A(iota, closed=True)
     p2_fires = (not okP2) and any(line.startswith("A2 k=10 sharpness") and line.endswith("False") for line in outP2)
+    okP4, outP4 = check_part_A(iota, digit_shortfall=1)
+    p4_fires = (not okP4) and any(line.startswith("A3 k=10 m=1: FAILS") for line in outP4)
     okP3, outP3 = check_part_B(half=Fr(1, 3))
     p3_fires = (not okP3)
     report += ["== plants",
                f"P1 wrong place (iota = 3 mod 5, w_5 contracts): fires={p1_fires}",
                f"P2 closed arc: fires={p2_fires}",
-               f"P3 half-turn replaced by 1/3: fires={p3_fires}"]
-    allgood = faithful and p1_fires and p2_fires and p3_fires
+               f"P3 half-turn replaced by 1/3: fires={p3_fires}",
+               f"P4 multi-digit sweep one digit short (m(k) - 1): fires={p4_fires} (first failure at k = 10 with m = 1)"]
+    allgood = faithful and p1_fires and p2_fires and p3_fires and p4_fires
     report.append(f"OVERALL: {'PASS' if allgood else 'FAIL'}")
     print("\n".join(report))
     return 0 if allgood else 1

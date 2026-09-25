@@ -27,4 +27,5 @@ FAITHFUL: PASS
 P1 wrong place (iota = 3 mod 5, w_5 contracts): fires=True
 P2 closed arc: fires=True
 P3 half-turn replaced by 1/3: fires=True
+P4 multi-digit sweep one digit short (m(k) - 1): fires=True (first failure at k = 10 with m = 1)
 OVERALL: PASS

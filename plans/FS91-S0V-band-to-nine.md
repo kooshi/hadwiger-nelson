@@ -237,12 +237,76 @@ Same route as §3.6.1; only the `k`-lines differ. `B₈ = [1/8, 7/8]`.
 `RQ_k` for every `k`. In one sentence: *for `|S| ≥ 2`, a character of `R_S` outside `T + A` takes values arbitrarily close to 0 on
 `U_S`* — the Furstenberg-type form, with no band left in it.
 
+## Stage 3b — SAVED (the all-`k` candidate, audited as a result I would dislike; at the owner's direction, in place of stage 4)
+
+**Lemma SW-m (the multi-digit sweep), stated verbatim as proved here.** "Let `S` be a finite set of primes `≡ 1 (mod 4)`, `k ≥ 3`,
+`v | p ∈ S`, `x ∈ R̂_S`, `c₀ ∈ K_v`, `s ∈ ℤ`. Then not every `x + c̄` with `c ∈ c₀ + π_v^s O_v` lies in `Θ_k(R_S)`." [hand + tools exact]
+*Proof.* Let `m ≥ 1` be least with `p^m > k/2`, and `u = w_p^{±t} ∈ U_S` (the sign that expands at `v`) with `π_v^s u O_v = π_v^{−m}O_v`,
+i.e. `t = s + m` in the expanding direction. For `c = c₀ + b`, `b ∈ π_v^s O_v`: `(x + c̄)(u) = x(u) − ψ_v(c₀u) − ψ_v(bu)`, and `bu` runs over
+`π_v^{−m}O_v`, on which `ψ_v` (conductor `O_v`) is injective modulo `O_v`, so the values run over a full coset of `(1/p^m)ℤ/ℤ`. Some point
+of that coset is within `1/(2p^m) < 1/k` of 0, i.e. in the open arc `(−1/k, 1/k)`, outside `B_k`. ∎
+
+**The audit, step by step** (every place the digit count or the band could interact with something):
+1. *Digit count against the band width.* `m` depends on `k` and `p` only; `t = s + m` is always available (`U_S ∋ w_p^t` for every `t`).
+   The ball's radius `s` is whatever VB1 hands over; nothing couples `m` to `s`. **No interaction.** Tool A1 (fullness at `m = 1, 2, 3` in
+   `R_{5,13}`'s chart at `v = (2 − i)`) and A3 (`k = 3..60`) confirm the arithmetic; plant P4 (one digit short) fires first at `k = 10`, as
+   derived.
+2. *Normalisation of `ψ_v`.* If the chart's local character had conductor `π_v^{d}` instead of `O_v`, the image of `π_v^{−m}O_v` would be
+   the coset of step `1/p^{m+d}`: a larger `m` absorbs it. The lemma needs only that `ψ_v` is a non-trivial continuous character of
+   `K_v ≅ ℚ_p` (its images of the balls `p^{−M}ℤ_p` are the subgroups `(1/p^{M′})ℤ/ℤ` with `M′ → ∞`). **Robust.**
+3. *The exit lemmas (D1-L6, D5-L3, D1-C1, D5-L2).* They serve only D's isolation route at `{5, 13}`. The route here (PA-B2 + VB1 + VB3 + VB4)
+   never uses them, so their band limits (D's §5: "the plant at `r = 3/10` shows the exit lemma fails once displacements are large") **do
+   not bear.** This is the one place where "six is unchecked" (row 95's Not-claimed) was true of D's route and is not of this one.
+4. *VB1's other lines, VB3, VB4, G1, D2-L1, the leaf formula:* re-derived at a general band in §3.6.1; none reads `k` except as the same band
+   on both sides. *PA-B2:* band-free (stage 2). *The parity route R2:* terminates at every `k` (the band edge doubles past `1/4` in
+   `⌈log₂(k/4)⌉` steps, or hits `1/4` and then the singleton `{θ₂}`), so it gives the minimal-set step at every `k` independently of Berend.
+5. *Adversarial attempts by formula* (the shapes a counterexample would take): a pure local `c̄` — its orbit under the contracting power of
+   `w_p` returns to `A`, and `A`'s points take values near 0 (`U_S` is dense on the circle), so it is not band at any `k`; an archimedean
+   `λ_e` — never band (S0A's "`τ = 0` is impossible"); a rank-one heteroclinic (row 97) — killed at `|S| ≥ 2` by the case-1 dichotomy
+   at every band (D1-L3 is band-free). None survives, and the proof says why none can.
+6. *The classical analogue, as a sanity check:* Furstenberg (×2×3): a point whose orbit avoids a neighbourhood of 0 is rational. The
+   statement here is its image modulo the isometric direction ("outside `T + A` ⟹ values accumulate at 0"). The band disappears from the
+   statement exactly as it does there.
+
+**Verdict on the all-`k` candidate: TRUE** [hand; one mind — mine — plus the exact arithmetic of the sweep]:
+- **`RS_k(S)` for every `k ≥ 2` and every finite `S` with `|S| ≥ 2`; `RQ_k` for every `k`; and, by S0A-2's band-free gluing,
+  `Θ_k(R_F) ⊆ T + A` for every `F ⊆ ℝ` at every `k`.** Equivalently: *for `|S| ≥ 2`, every character of `R_S` outside `T + A` takes values
+  arbitrarily close to 0 on `U_S`*.
+- **What it does not give:** the explicit band torsion list at `k ≥ 6` (N₀/U2's analogue; S0A's level collapse and middle-half count were
+  done at bands 1/4, 1/5 only), any bound on the torsion order at `Q` beyond "finite at `R₆₅`, hence bounded", and anything about `χ` of any
+  plane or about non-character colourings.
+- **Grade caveat, stated plainly:** the multi-digit step is new in this record and has had one reader. PA-B3's own range (`k ≤ 9`) needs
+  only the one-digit lemma already verified at FS-89, so the claim the brief asked about does **not** rest on the new step; the extension
+  to every `k` does. A second blind reading of Lemma SW-m before the extension is consumed is the cheap safeguard.
+
+**Left for a successor on this brief:** stage 4, the divergence table against the fenced files (`plans/FS89-PA-berend1984.md` §5 and §9,
+`plans/FS89-derivation.md` §10 and the PA-B2/PA-B3 proof lines, `plans/STUB-band-rigidity-six.md`, `plans/FRONTIER-STUBS.md` row 2), and
+C1's priors scored there. Not opened by this job.
+
+### Proposed edits (for the front-page lane; this job edits none of these files)
+- `LEDGER.md` row 95's "Not claimed: … bands narrower than 1/5 (… six is unchecked …)": replace with the band-free statement above, graded
+  [hand, one blind verifier], once a second reading of Lemma SW-m lands; the one-digit range `k ≤ 9` at `{5, 13}` can be stated now.
+- `CLAUDE.md` FS-91's row ("does row 95's route reach band 1/6 … and 1/8"): answered yes at every band on the characters; the stub's
+  remaining questions are `MS₄({5})`, U3 and the explicit band-`k` torsion lists.
+
 ## Would-have-searched-here log
 
 | stage | move a search would have made | what I did instead |
 |---|---|---|
 | 1 | — | — |
+| 2 | Run the rank-two window at `{5, 13}` and band 1/6 to "see" whether a minimal set outside `T + A` exists | derived PA-B2 from Berend's Thm I.2 with its hypotheses checked for our action |
+| 3 | Enumerate band torsion characters of `ℤ[i]/N` at bands 1/6–1/9 to see the leaf discs | not needed for the verdicts (VB3's finiteness is non-effective); the explicit lists are named as not established |
+| 3 | Hunt for a band-`k` array outside `T + A` near a corner leaf at `k = 6` (D's exit-lemma route) | the route here needs no exit lemma; the sweep's arithmetic is a fixed finite check (`tools/crunch_j01_sweep_check.py`, cosets of `(1/5^m)ℤ/ℤ`, `m ≤ 3`, `k ≤ 60`), no witness sought |
 
 ## Theorems this phase proved
 
-*(filled as stages land)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J01-1 | `(R̂_S, U_S)` is a group ℱ-flow in `[Berend1984]`'s sense for every nonempty finite `S` (Σ^{(k)} = congruence subgroups mod `q^{k−1}`, `q ∉ S`), so every minimal set is restricted (Thm I.2) | hand | Stage 2 §2.3 |
+| J01-2 | PA-B2: for `|S| ≥ 2` every `U_S`-minimal closed set lies in `T + A` (band-free); hence `MS_k(S)` at every `k` | hand | Stage 2 §2.4 |
+| J01-3 | the parity (doubling) lemma: a case-1 minimal set in `Θ_β` yields `2y ∈ Θ_{2β}`; with the antipodal refusal above band 1/4, `MS_β(S)` for every `β > 0`, `|S| ≥ 2`, without Berend | hand + tools exact (B1, B2) | §3.6.2, stage-3 sections |
+| J01-4 | Lemma SW as written holds exactly for `k < 2p` (sharp: an explicit offset at `k = 10`, `p = 5`) | hand + tools exact (A2) | §3.6.1 step 2 |
+| J01-5 | Lemma SW-m: the multi-digit sweep holds at every `k ≥ 3` | hand + tools exact (A1, A3; plant P4) | Stage 3b |
+| J01-6 | PA-B3 at `k = 6, 7, 8, 9`: `RS_k(S)` for every `|S| ≥ 2` and `RQ_k` (the claim's range; one-digit lemma suffices) | hand + tools exact | Stage 3 sections |
+| J01-7 | `RS_k(S)` for every `k` and `|S| ≥ 2`, `RQ_k` for every `k`, and `Θ_k(R_F) ⊆ T + A` for every `F ⊆ ℝ` (with S0A-2) | hand, one mind | Stage 3b |
+| J01-8 | VB3, VB4, D2-L1 and S0A's G1 use the band only as the same band on both sides | hand | §3.6.1 steps 3–4 |
