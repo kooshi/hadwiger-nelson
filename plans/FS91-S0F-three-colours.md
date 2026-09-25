@@ -360,6 +360,115 @@ The FS-82 stub's question is closed, and so is the "`L ≤ 4` for real quadratic
    stub's route 3 (a finite `Θ₃`-empty configuration) was not run (logged below). It would give a finite witness of `χ ≥ 4`, which
    compactness guarantees exists and nothing here exhibits.
 
+## Stage 4 — SAVED: the claim list, prior-art debts, C0 scored
+
+### 4.1 The fixed claim list
+
+`data/fs91/j02/lemma-statements.md` holds every lemma this record proves, stated verbatim with no proof, for J09's second phase: J02-L1,
+L2, L3, L4, T1, T2 (= S1), C2, T3 (= S2), C1 (= S3), and the second derivation of Astra's Thm 2.1 ⟹.
+
+**J02-C2 (additive colourings) [hand; a corollary of J02-T1].** For every real number field `F`:
+- `F²` has an additive 3-colouring in `[Fischer1990]`'s sense (a homomorphism `R_F → ℤ/3` non-zero on `U_F`) iff `F` has a stable prime
+  above 3 with residue field `𝔽₃`;
+- `F²` has an additive 2-colouring iff `F` has a stable prime above 2 ramified in `F(i)/F`.
+
+*Proof.*
+- **Three colours, ⟹.** Put `τ = v/3`. Then `τ₂ = 3τ = 0` on all of `R`, so T1's case (ii) is impossible and case (i) gives the `𝔽₃`
+  prime.
+- **Two colours, ⟹.** Put `τ = v/2`. Then `τ₃ = −2τ = 0`, so T1's case (i) is impossible and case (ii) gives the ramified dyadic prime.
+- **Both ⟸.** T1's ⟸ constructions are homomorphisms to `ℤ/3` and to `ℤ/2`. ∎
+
+This generalises `[Fischer1990]` Thm 9, which covers quadratic fields at `N ≢ 2 (mod 3)`, to every real number field. It also gives
+Fischer's Thm 1(iii) (2-colourable iff a ring homomorphism `C₀ → ℤ/2`) the local form Astra's Thm 2.1 gave it.
+
+### 4.2 Prior-art debts
+
+- **`[Fischer1990]`** (held, `~/source/library/papers/1-s2.0-0012365X9090324B-main.pdf`). Its numbered statements (Thms 1, 3, 4, 7, 8, 9,
+  10) and §1 were read this stage, in the text layer.
+  - It has **no general criterion for additive three-colourability** of `F²` over a number field. Thm 9 is the quadratic case, and
+    Thm 10 is the quadratic case at `N ≡ 3 (mod 8)` and `N ≡ −1 (mod 24)`.
+  - Its §1 poses the general question verbatim: *"This still begs the general question, however, whether some algebraic criterion can be
+    found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* J02-T2 and T3 answer it at
+    `χ ≤ 3` and at `L ≤ 4`: **a candidate for `CLOSED-QUESTIONS.md`**, for the front-page lane to judge.
+  - The proofs of Thms 1–10 were not re-read.
+- **`[Johnson2000]`, `[Johnson2006]`**: not held, not read. Row 82's standing debt carries over. **Nothing here is claimed new or first**
+  while they are unread.
+- **Not run:**
+  - a zbMATH gate for the general statement (queries in the discipline's words — "additive coloring", "unit distance graph", "number
+    field", "chromatic number three");
+  - the citing works of `[Fischer1990]`.
+
+  Both are owed before any claim of novelty.
+- **Credit.** J02-L2 and L3 are GPT Astra's Lemma 1.1 and §3.1–3.3, extended from `p = 3` and `√3 ∈ F` to every prime and to `R/6R`.
+  The Teichmüller subring and the Hilbert-90 lift are his. **The composition with FS-81's torsion character, and the joint 2-and-3 lift
+  that couples the parity type to the order-3 type, are this record's.**
+
+### 4.3 C0 scored
+
+| item | C0 | outcome |
+|---|---|---|
+| S1 | 0.85 | **TRUE** (J02-T2) |
+| S2 | 0.83 | **TRUE** (J02-T3) |
+| S3 | 0.83 | **TRUE** (J02-C1) |
+| step 2 (a mixture covered by the sketch: 0.3) | — | not covered; repaired |
+| step 3 (provable as stated from held inputs: 0.4) | — | not proved as stated; bypassed, not needed |
+| step 4 ("the archimedean circle" a wording slip: 0.9) | — | confirmed: `ℚ(α, √7)` has two complex places |
+| step 5 (as stated: 0.6) | — | GAP outside the global-type world; repaired |
+| registered outcome "S1 TRUE by a route repairing steps 2–5" (0.85) | — | **occurred** |
+
+The C0 was written after the route had formed (§1.2's honesty note), so its calibration value is low.
+
+### 4.4 Audit of the result (standing rule 4: a liked result audited as hard as a disliked one)
+
+**The load-bearing inputs, weakest first.**
+1. **FS81-T3's cell list** (C1(5), hand + tools exact; FS73-T40's list reproduced on a second code path). A missing cell at band 1/3
+   would break J02-L1. Its two-derivation grade stands.
+2. **FS81-T4's limit** (hand, two derivations). Re-read here step by step (§2.2).
+3. **Astra's Lemma 1.1** (hand, one mind before this record). Re-derived here line by line (§2.3 (b)).
+4. **Weil**, external. Checked exactly at the two smallest cases, 27 and 243.
+
+**Where a defect would hide.**
+- The only step without a precedent is T1's step 2: the product set `𝒩(T₃) × 𝒩(T₂)` inside the image of `U`. It rests on L3's lift,
+  whose one non-trivial line is `[u] = b/c(b)`, from `u·c(a) = a` reduced mod `6R`. `b` and `c(b)` are units of `T`, hence of `R/6R`
+  (same 1).
+- **What a wrong-reason pass would look like:** a factor `k_𝔪` of `T₂` with trivial involution but no ramified prime behind it. L2(d)'s
+  contrapositive (c) excludes it: an unramified stable `𝔓` gives a non-trivial involution on all of `κ_𝔓 = k_𝔪`.
+
+**Grade.** One mind (J02) until J09's blind derivation lands. Stated as **[hand]**; row 82's grade ("two independent derivations")
+needs J09.
+
+### 4.5 Proposed edits (for the front-page lane; not made here)
+
+- **`LEDGER.md`, a new row:** "Three colours obey the local–global conjecture over every real number field" — J02-T1, T2, T3, C1, C2;
+  grade [hand], one mind until J09. Include "Not claimed: new (Johnson unread); a finite witness at `ℚ(α, √7)`; anything at four colours."
+- **`CLAUDE.md` § Frontier:**
+  - "The target" (2): the proved range becomes "L ≤ 4 for every real number field".
+  - Items 10 and 14 are updated; `ℚ(α, √7)` leaves the exposed predictions (met).
+- **`CLAUDE.md` grokkings:**
+  - G55's "without √3 the half it lacked is row 82 …" sentence gains the general form.
+  - G74's "the residual three-colour case … (FS-82)" is closed.
+  - G48's falsifier list drops `ℚ(α, √7)`.
+  - A possible new *Do* for G74 or G55: **at three colours, the torsion part of a slope is a slope, so decide three colours by
+    additive colourings, i.e. by the primes above 2 and 3.**
+- **Stubs:**
+  - FS-82's stub gets a CLOSED banner (J02-C1).
+  - FS-75 (the three-colour criterion in the kernel) may be re-aimed: J02-T2's chain is L1 (T4), L2 (Lemma 1.1), L3 and a finite sumset,
+    and every leaf is finite algebra except FS81-T2's compactness and T22.
+  - FS-91/M1 (F2, the character local–global theorem at `k = 4, 5`): J02-L3's Teichmüller lift couples the **reduced** parts of `R/NR`
+    at any squarefree `N`. At four colours the dyadic part has order up to 8 (S0A-3), so the non-reduced level at 2 is where it would
+    need more.
+
 ### Theorems this phase proved
 
-*(filled at stages 2–4)*
+| id | statement (short; verbatim forms in `data/fs91/j02/lemma-statements.md`) | grade | address |
+|---|---|---|---|
+| J02-L1 | torsion extraction: `Θ₃(R_F) ≠ ∅ ⟹ Θ₃(R_F) ∩ T₆ ≠ ∅`, every `F ⊆ ℝ` | hand (composition of FS81-T3, T4) | §2.2 |
+| J02-L2 | `R/pR` finite, its maximal ideals stable, full residue fields at unramified stable primes, every `p` | hand (Astra Lemma 1.1, §3.1–3.2, extended) | §2.3 |
+| J02-L3 | Teichmüller section of `R/6R` and the joint Hilbert-90 lift: `𝒩(T₃) × 𝒩(T₂) ⊆ image of U` | hand (Astra §3.3, extended) | §2.4 |
+| J02-L4 | norm-one functionals: (a) three-colouring at `3^f` iff `f = 1`; (b) none at `2^f` | hand + external (Weil) + tools exact (27, 243, `Q ≤ 32`) | §2.5; `tools/crunch_j02_additive_check.py` |
+| J02-T1 | torsion three-colour band characters exist iff a stable `𝔽₃` prime or a stable ramified dyadic prime | hand | §2.6 |
+| J02-T2 | **S1**: `χ(F²) ≤ 3 ⟺ Θ₃ ≠ ∅ ⟺ Θ₃ ∩ T₆ ≠ ∅ ⟺` (the two prime types) `⟺ L(F) ≤ 3`, every real number field | hand (composition) | §2.7 |
+| J02-T3 | **S2**: `χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field | hand (composition) | §3.1 |
+| J02-C1 | **S3**: `ℚ(α, √7)`: `Θ₃ = ∅`, `χ = L = 4` | hand + tools exact (PARI) | §3.2; `tools/crunch_j02_field.py` |
+| J02-C2 | additive 3-colourings iff a stable `𝔽₃` prime; additive 2-colourings iff a stable ramified dyadic prime | hand (corollary of T1) | §4.1 |
+| J02-A2.1′ | second derivation of Astra Thm 2.1 ⟹ via L3 | hand | §3.1 |
