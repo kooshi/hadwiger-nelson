@@ -738,7 +738,7 @@ Times are wall clock from the job's start (the previous lane job's report, or th
 | K1, the chain theorem and both instances (J14) | "one job, about 3 hours; 300–350 lines" (§3.2) | ≤ 26 min (15:56 → 16:22); ≈ 570 lines with specs and controls | ≥ 7× in time; lines under-priced |
 | K2, route C (J15) | "2.5–3 hours, medium risk at one named leaf" (§3.2) | ≤ 30 min (16:22 → 16:52); the named leaf about 15 min | ≥ 5× |
 | K3-B, prime inversion (J16) | "about one hour" (§3.2) | 13 min (16:55 → 17:08) | ≈ 5× |
-| K3-A, the stripe lemma (J16) | "4–6 hours, 400–500 lines — more than one job" (§3.2) | 18 min (17:08 → 17:26), 447 lines | ≈ 13–20× |
+| K3-A, the stripe lemma (J16) | "4–6 hours, 400–500 lines — more than one job" (§3.2) | 17 min (17:10–17:27, the record's times), 447 lines | ≈ 14–21× |
 | B0 and B1, the real-closed instances and the conditional bridge (J17K) | "~1 day" each (`plans/M2-S1D-bridge.md` §3.2) | both in ≈ 16 min (17:30 → 17:46) | ≥ 30× |
 | Lemma NP (J17K2) | "optional ~½ day" (J17 §3.3); "≤ 200 lines" at p 0.50 (P-J17Kc) | NP, C3 and C3⁺ together ≤ 34 min (17:48 → 18:22); NP 99 lines | ≥ 7× |
 | J17, the bridge by hand | "~1.5 h, 200k" (§4.2) | ≤ 23 min (15:56 → 16:19), but **366k tokens** | fast in time, **1.8× over in tokens** |
