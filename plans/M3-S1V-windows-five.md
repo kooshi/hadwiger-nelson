@@ -190,3 +190,42 @@ step 2). *Edge case:* if every place of `S` is thick, `S_red = ∅` and `Γ_∅`
 - `tools/crunch_j22_spectrum_check.gp` (PARI, independent): `minpoly` + `polsturm` at 59, 61, 23 (agree to all printed digits), and the
   split residue fields `q = 9, 25, 49, 121, 29` in hyperbola coordinates (`q = 29` agrees with the circle form: the identification's
   control). **Plant** `j22check(59, 1)` (a point dropped) prints CHECK (S) FAILED, exit value 2. Outputs `data/m3/j22/gp-*.out`.
+
+## Handover — B1 complete, B2 not started (the owner's stop order, harness ≈ 406k)
+
+**State for a successor on this brief.** Stages 1 and 2 are SAVED (B1 verdicts in §2.1–§2.3; commits `adc55e39`, `98e972ee`). The B1
+verdicts were sent to the owner. **Resume at B2**, then B3 (read J21's record, the divergence table, the statements read aloud).
+
+**Pending run.** The frozen FS-66 checker on the existing certificate, `python3 tools/fs66_b1_cert_check.py data/fs66/b1/cert-p23.json
+--m 5`, launched under `scripts/slot.py --mem 8 --cpus 1` (wrapper pid 99395, checker pid 99396), log `data/m3/j22/fs66-cert-p23-m5.out`
+(GNU time in `data/m3/j22/fs66-cert-p23-m5.time`); checker sha256 prefix `735b926798ffac14`, matching row 75's. At the stop it had passed
+steps 1–4 of 7 (about 14 minutes). If the log's last line is a verdict, record it here; if not and the pid is gone, re-run the same
+command (about 15–20 minutes, one core). A CERTIFIED verdict confirms D1-fac's 23 clause first-hand; row 75's recorded CERTIFIED stands
+either way. The committed copy of the log from stage 2 is partial (it was written while the run was live).
+
+**B2 input — the owner's forwarded J21 statements, verbatim** (from the "Theorems this phase proved" list of the fenced
+`plans/M3-S1D-windows-five.md`, as the owner quoted them; not checkable against their source while it is fenced):
+
+> - **J21-D1-43p** — partial: windows reading the 43-adic places at level one are excluded (`α(Γ₄₃)/1849 ≤ 0.1974`, row 69); the fibre-share inequality alone gives exactly Hoffman's `0.21376`, so it cannot close 43 at depth. [hand + cert] §2.6
+> - **J21-SL (slicing)** — for a locally compact abelian `G`, `Γ = Cay(G, T)` and any measured graph `Y`, a measurable proper `k`-colouring of `Γ × Γ × Y` restricts, along `(x, y) ↦ (x, x + s, y)`, to a measurable proper `k`-colouring of `Γ × Y` for almost every `s` (every `s` if Borel); properness at every edge is kept for every `s`. [hand] §3.1
+> - **J21-D2p** — D2(a) and D2(b) hold when every factor of `B` is thick (Borel: iff; measurable: ⟸, and ⟹ into format N′). [hand] §3.5
+> - **J21-NG1** — the planner's cylinder lemma is false already for `A′ = A = UD(ℝ²)`: an explicit independent set of `A × B` of density `> β` that is not a.e. a cylinder, for every `B` of the D2 class. [hand] §3.6
+> - **J21-NG2** — ratio alone cannot carry D2: a finite abelian Cayley graph `B` with `α(B)/|B| < 1/125` and a graph `A` with `χ(A × B) ≤ 125 < χ(A)` exist (Shitov's construction, Zhu's Theorem 3.5 instance). [hand, from `[Zhu2025]` §3 (read)] §3.6
+
+The owner adds, for orientation, that J21 also reports D2(a) as GAP at the same two places B1 names (E → N′, and the non-mixing factors
+{2, 3, 5, 7, 23, 29, 61}).
+
+**Leads noted before the stop order — not verdicts, not derivations; a successor re-derives each from its statement.**
+- D2p coincides with J22-T7 and J22-T9 as stated.
+- SL coincides with the shifted-diagonal step in J22-T5 and J21-RED's merge; check that the statement needs `G` σ-compact (Haar σ-finite)
+  and `Y` σ-finite for Fubini — "any locally compact abelian `G`" may be wider than the proof.
+- D1-43p's second clause: B1's spectral relaxation of the fibre-share inequality (constraint plus `Σφ² ≤ Σφ` plus the spectrum) gives
+  exactly Hoffman; but FS-66's certificates at 11, 19, 23 (the fibre-share inequality with a moment/SDP lift) went well below Hoffman
+  (row 75), so "cannot close 43 at depth" should be checked for scope: it may be true only of the spectral relaxation. Its first clause
+  needs the other factors' ratios `< 1/5` and no real place (D1's setting) — check what "excluded" is claimed under.
+- NG1 depends on the planner's cylinder lemma and on `β`, neither of which B1 has seen (the M3 plan is fenced). Note that window density
+  does not see bounded modifications, so a cylinder altered on a bounded positive-measure region keeps its density and is not a.e. a
+  cylinder; and no independent set of `A × B` has density `> m₁(ℝ²)` (C14.3). Ask the owner for the lemma's statement and `β` in B2.
+- NG2: `[Zhu2025]` is held (`~/source/library/pdf/arXiv-2502.16078-zhu-survey-hedetniemi.pdf`); read §3 and Theorem 3.5 before
+  judging, and check the claimed "finite abelian Cayley graph" property of `B` against the construction (Shitov's `H` is an exponential
+  graph, not obviously a Cayley graph).
