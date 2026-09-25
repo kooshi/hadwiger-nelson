@@ -1,0 +1,73 @@
+0848.05031 | 1994 | The choice number of the plane
+0848.05029 | 1991 | Product colorings
+1139.05021 | 2007 | Extending Hall's theorem into list colorings: a partial history
+1243.05082 | 2011 | Euclidean distance graphs on the rational points
+0848.05030 | 1992 | Forbidding prescribed distances for designated colors
+0951.05038 | 2000 | Introduction to ``Colorings of metric spaces'', by Benda and Perles
+1209.05086 | 2009 | The fractional chromatic number, the Hall ratio, and the lexicographic product
+0809.05045 | 1994 | The Hall-condition number of a graph
+1221.05001 | 2009 | The mathematical coloring book. Mathematics of coloring and the colorful life of its creators. Forewords by Branko Grünb
+0941.05024 | 1999 | More on the fractional chromatic number
+0856.05036 | 1996 | About two definitions of the fractional chromatic number
+1061.05033 | 2003 | Slice two-colorings that forbid monochromatic translates of many doubletons.
+1008.05054 | 2002 | Hall's condition for list-coloring, and the Hall parameters: Recent developments
+0945.05021 | 2000 | Infinite graphs and the fractional chromatic number: Some recent surprises
+0974.05029 | 2000 | Problems posed in or arising from ``Colorings of metric spaces'': Status report
+1416.05108 | 2017 | Edge colorings of complete multipartite graphs forbidding rainbow cycles
+1416.05109 | 2017 | Edge colorings of $K(m,n)$ with $m+n-1$ colors which forbid rainbow cycles
+1476.05054 | 2021 | On the Babai and upper chromatic numbers of graphs of diameter 2
+1551.05001 | 2024 | The new mathematical coloring book. Mathematics of coloring and the colorful life of its creators. With forewords by Pet
+1310.05082 | 2013 | Constructively coloring the line
+0937.05046 | 1999 | Greedy colorings and the Grundy chromatic number of the \(n\)-cube
+0693.05034 | 1990 | A variation of Ryser's theorem and a necessary condition for the list- colouring problem
+1416.05110 | 2015 | Scheduling $N$ burgers for a $k$-burger grill: chromatic numbers with restrictions
+1469.05055 | 2021 | Rainbow connectivity and proper rainbow connectivity of \(\theta(1,s,t)\)
+1113.05033 | 2007 | List multicolorings of graphs with measurable sets
+0731.05017 | 1990 | Extending Hall's theorem
+None | 2026 | Forbidding monochromatic odd cycles and rainbow cycles in complete graphs
+0934.05001 | 1999 | The Hall number, the Hall index, and the total Hall number of a graph
+0631.05024 | 1987 | Graphs which are vertex-critical with respect to the edge-chromatic number
+0725.05041 | 1989 | Graphs which are vertex-critical with respect to the edge-chromatic class
+1164.05346 | 2005 | Problems on Hall \(t\)-chromaticity.
+1431.05068 | 2019 | On rainbow-cycle-forbidding edge colorings of finite graphs
+1411.05079 | 2017 | Theta graphs are Hall \(t\)-chromatic for all \(t = 0, 1, 2, \ldots\)
+1277.05162 | 2011 | Szlam's lemma: mutant offspring of a Euclidean Ramsey problem from 1973, with numerous applications
+1451.05077 | 2021 | A mixed Ramsey problem revisited
+1349.05098 | 2015 | Estimates of the choice numbers and the Ohba numbers of some complete multipartite graphs.
+1346.05057 | 2016 | On a 3-uniform hypergraph coloring problem in the integers
+0979.05051 | 2001 | Yet another species of forbidden-distances chromatic number
+1059.05050 | 2005 | Coloring the vertices of a graph with measurable sets in a probability space
+0643.05031 | 1988 | Reverse class critical multigraphs
+1347.05069 | 2016 | Coloring Euclidean spaces so that all translates of a given set are rainbow
+0991.05047 | 2001 | Relations among the fractional chromatic, choice, Hall, and Hall-condition numbers of simple graphs
+1205.05086 | 2010 | List multicoloring problems involving the \(k\)-fold Hall numbers
+1073.05568 | 2002 | Which graphs have Hall number two?
+0996.05059 | 2001 | Two problems concerning Hall's condition
+1171.05015 | 2008 | The choice number of \(K(4,2,\dots,2)\) -- a dispute resolved
+1075.05529 | 2002 | Coloring the vertices of a graph with measurable sets in a probability space
+0801.05027 | 1993 | On the choice number of \(K_{m,n}\)
+0897.05040 | 1996 | The Hall number of a simple graph
+0959.05025 | 1998 | Covering numbers and list-colorings of \(K_{m,n}\)
+0961.05024 | 2000 | Progress on the Hall-number-two problem
+1037.05020 | 2003 | An easier analogue of a difficult old Euclidean coloring problem
+0904.05032 | 1997 | Hall's condition for multicolorings
+1431.05062 | 2020 | Hall 3-chromaticity of the Petersen graph and the weak Hall \(t\)-chromatic spectra of odd wheels
+1050.05045 | 2003 | Hall \(t\)-chromatic graphs
+0991.05045 | 2001 | A new connection between two kinds of Euclidean coloring problems
+1440.05084 | 2018 | Edge Grundy numbers of the regular Turán graphs
+1248.05065 | 2010 | Edge-colorings of \(K_n\) which forbid rainbow cycles
+1338.05071 | 2015 | On the choosability of some graphs
+1513.05132 | 2023 | Distance graphs on normed function spaces
+1509.05069 | 2023 | Self-colorings of graphs
+1552.05067 | 2024 | Proper rainbow-cycle-forbidding edge colorings of graphs
+1278.05097 | 2012 | Note on Hall \(t\)-chromatic spectra
+1404.05100 | 2018 | Rainbow connectivity in some Cayley graphs
+0990.05048 | 2001 | The chromatic numbers of some Euclidean distance graphs
+0835.05026 | 1994 | Restricted choice numbers
+1187.05051 | 2008 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+0855.05057 | 1996 | Thwart numbers of some bipartite graphs
+0944.05040 | 2000 | Extending the disjoint-representatives theorems of Hall, Halmos, and Vaughan to list-multicolorings of graphs
+1411.05078 | 2019 | Refinements of Hall's condition
+1401.05104 | 2013 | On the chromatic numbers of some 3-uniform hypergraphs in the plane
+1397.05055 | 2017 | The edge Grundy numbers of some graphs
+1116.05026 | 2006 | Chromatic villainy in graphs

@@ -1,0 +1,10 @@
+au:"Johnson, Peter D."
+ab:"circular chromatic number" & ab:"Cayley graph"
+ab:"chromatic number" & ab:"p-adic"
+ab:"local-global" & ab:"chromatic number"
+ab:"finite Euclidean" & ab:"chromatic number"
+ab:"quadratic residue" & ab:"polynomial" & ab:"interval"
+ab:"character" & ab:"coloring" & ab:"unit distance"
+ab:"circular chromatic number" & ab:"categorical product"
+ab:"coloring" & ab:"rational points" & ab:"quadratic field"
+ab:"unit distance graph" & ab:"field" & ab:"chromatic number" & py:2000-2026

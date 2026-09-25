@@ -1,0 +1,45 @@
+Q: au:"Johnson, Peter D."
+  hits: 193
+  0701.05005 | 1990 | Johnson, Peter D. jun. | Two-colorings of a dense subgroup of \({\mathbb{Q}}^ n\) that forbid many distances | Discrete Mathematics
+  0684.26009 | 1989 | Boghossian, Artin; Johnson, Peter D. jun. | Pointwise conditions for analyticity and polynomiality of infinitely differentiable functions | Journal of Mathematical Analysis and App
+  0907.26003 | 1998 | Johnson, Peter D. jun. | Continuous functions which change sign without properly crossing the \(x\)-axis | 
+  0848.05031 | 1994 | Johnson, Peter D. jun. | The choice number of the plane | Geombinatorics
+  0615.05036 | 1987 | Edwards, Christopher S.; Johnson, Peter D.; Tuza, Zsolt | Another extremal property of some Turán graphs | European Journal of Combinatorics
+  0771.05046 | 1992 | Johnson, Peter D. jun. | Unordered love in infinite directed graphs | International Journal of Mathematics and
+  0786.05008 | 1992 | Johnson, Peter D. jun. | Maximal sets of translations forbiddable by two-colorings of abelian groups | 
+  0848.05029 | 1991 | Johnson, Peter D. jun. | Product colorings | Geombinatorics
+  1407.05234 | 2018 | Johnson, Peter | Two consequences of the recent discovery that \(\chi(\mathbb{R}^2,1)>4\) | Geombinatorics
+  1354.46007 | 2015 | Johnson, Peter D.; Polat, Faruk | On spaces derivable from a solid sequence space and a non-negative lower triangular matrix | Operators and Matrices
+  0764.05094 | 1991 | Johnson, P. D. jun. | A graph parameter of Shields and Harary | 
+  1139.05021 | 2007 | Hoffman, Dean G.; Johnson, Peter D. jun. | Extending Hall's theorem into list colorings: a partial history | International Journal of Mathematics and
+Q: ab:"circular chromatic number" & ab:"Cayley graph"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"chromatic number" & ab:"p-adic"
+  hits: 3
+  1213.05061 | 2010 | Kang, Jeong-Hyun; Maharaj, Hiren | Distance graphs from \(p\)-adic norms | Integers
+  1459.05071 | 2020 | Bardestani, Mohammad; Mallahi-Karai, Keivan | Polynomial configurations in sets of positive upper density over local fields | Journal d'Analyse Mathématique
+  1576.00028 | 2025 |  | Proceedings of the international conference of basic science 2024, Beijing, China, July 14--26, 2024. Volume 1 | 
+Q: ab:"local-global" & ab:"chromatic number"
+  hits: 3
+  1089.05025 | 2006 | Nešetřil, Jaroslav; Ossona de Mendez, Patrice | Tree-depth, subgraph coloring and homomorphism bounds | European Journal of Combinatorics
+  1246.68260 | 2011 | Benabbas, Siavosh; Chan, Siu On; Georgiou, Konstantinos | Tight gaps for vertex cover in the Sherali-Adams SDP hierarchy | 
+  arXiv:2602.05185 | 2026 | Cecelia Higgins; Pieter Spaas; Alexander Tenenbaum | Spectral Theory for Borel PMP Graphs | 
+Q: ab:"finite Euclidean" & ab:"chromatic number"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"quadratic residue" & ab:"polynomial" & ab:"interval"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"character" & ab:"coloring" & ab:"unit distance"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"circular chromatic number" & ab:"categorical product"
+  hits: 1
+  1179.05043 | 2009 | Ganapathy Raman, R.; Sattanathan, R. | Circular chromatic number of lexicographic products | Ultra Scientist of Physical Sciences
+Q: ab:"coloring" & ab:"rational points" & ab:"quadratic field"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"unit distance graph" & ab:"field" & ab:"chromatic number" & py:2000-2026
+  hits: ERROR The read operation timed out
+

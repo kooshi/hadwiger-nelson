@@ -1,0 +1,21 @@
+Q: ab:"lonely runner" & ab:"finite field"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"lonely runner" & ab:"chromatic number" & ab:"Cayley"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"view obstruction" & ab:"chromatic"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"multiplicative subgroup" & ab:"interval" & ab:"finite field" & ab:"avoid"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"circular chromatic number" & ab:"abelian group"
+  hits: ERROR HTTP Error 502: Proxy Error
+
+Q: ab:"unit distance graph" & ab:"rational" & ab:"circular"
+  hits: ERROR HTTP Error 404: Not Found
+
+Q: ab:"lonely runner" & ab:"distance graph" & ab:"circular chromatic"
+  hits: 1
+  1055.05059 | 2005 | Liu, Daphne Der-Fen; Zhu, Xuding | Fractional chromatic number and circular chromatic number for distance graphs with large clique size | Journal of Graph Theory
