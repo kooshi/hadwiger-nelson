@@ -68,3 +68,80 @@ read respectively (the number from the first, the blow-up and `G27` from the sec
 **Runtime needed:** the notebook is Mathematica (13.0, per the PDF's producer). **Nothing that runs a Mathematica notebook is installed
 on the desktop**: `wolframscript`, `math`, `MathKernel`, `WolframKernel`, `wolfram`, `mathics`, `mathics3` are all absent (`command -v`),
 and there is no `/usr/local/Wolfram`, `/opt/Wolfram` or `~/.Wolfram`. So "run it unmodified" needs an install first (priced in Stage 3).
+
+## Stage 2 — SAVED: what was read, and what the certificate proves
+
+### 2.1 Read, per section (held v3; the authors' notebook PDF)
+
+| part | read | notes |
+|---|---|---|
+| paper §1 (pp. 1–5) | in full | Theorem 1 verbatim: "Any Lebesgue measurable, 1-avoiding planar set has upper density at most 0.2470." `m₁(ℝ²)` is defined (eq. (1)) as the supremum of **upper** densities of measurable 1-avoiding sets. |
+| §2 Lemma 1 (pp. 5–6) | in full, with proof | the atoms `a_X(ε)`; (ieP), (ieI), (ieT), (ie1), (ie2); the reduction to periodic `A` is cited to [deOV10, KeMOR16] ("m1 (R2 ) may be approximated arbitrarily well by densities of 1-avoiding, measurable, periodic sets") |
+| §3 (pp. 7–8) | in full, with proofs | Definition 1, Lemma 2, Corollary 1 (`m₁ ≤ 1/χ_f(G)`) |
+| §4 (pp. 8–10) | in full | the O(2) averaging `å_X`, the congruence constraint (ieC), **Definition 2 — the geometric fractional chromatic number `χ_gf`**, Corollary 2 (`m₁(ℝ²) ⩽ 1/χgf (G)`), and a Remark announcing, "elaborated only in a follow-up publication", that `χ_f(ℝ²) = χ_gf(ℝ²)` and conjecturing `χ_f(R2 ) = χgf (R2 ) = 4` |
+| §5 (pp. 10–12) | in full | Fourier side: `f̊(x) = Σ_t κ(t) Ω₂(t|x|)`, `Ω₂ = J₀`, `κ(t) ≥ 0`, `δ(A) = Σ_t κ(t)` |
+| §6 (pp. 12–14) | in full, with Proposition 1's proof | (LP); **Proposition 1** (the dual certificate, quoted in §2.2); the Remark that only independent atoms need `V(ε) ≥ 0` |
+| §7 (pp. 14–16) | in full | the beam search (a week on 128 CPUs, 186,472 LPs) produced `X₂₃`; "the linear program defined by X23 has 13552 atom variables and 12000 Fourier variables … 23 (IE1) constraints, 206 (IE2) constraints … and 5868 (IEC) congruence constraints"; numerical LP value 0.24697 |
+| §8 Verification (pp. 16–19) | in full | quoted in §2.3 |
+| §9 Implementation (pp. 19–20) | in full | "The final estimate was verified by a piece of independently developed Mathematica code that we publish at [Web]"; the checklist (1)–(3) quoted in §2.3 |
+| Appendix (Tables 1–2) | not re-read line by line | Table 1's coordinates are compared with the notebook's in Stage 3 by the exact tool (the notebook's list is what the checker uses) |
+| `verification23.pdf` (the notebook as run, 11 pp.) | **in full, code and every output** | §2.4 |
+| arXiv v1, v2 source | the numbers only (grep) | v1: `ν = 10^{-10}`, `μ = 0.00005`, `w_T = 0.2469726133341685`, a 24-point figure `x24.pdf`; v2 and v3: `ν = 10^{-5}`, `μ = 0.00006`, `w_T = 0.24697262945998308` — **the web certificate is v2/v3's** (its `w_T` line: `0.24697262945998308,w_T`), not v1's |
+
+### 2.2 What the certificate is (Proposition 1, verbatim, p. 13–14)
+
+> "Proposition 1. Let X be a set of n points in the plane. Suppose that the real numbers w0 , wT , {w1 (i) : i ∈ [n]}, {w2 (i, j) :
+> {i, j} ∈ (n 2)}, {wc (I, J) : {I, J} ∈ C(X)} are such that the function defined by (19) W (t) = w0 Ω2 (t) + Σ_{i∈[n]} w1 (i) +
+> Σ_{{i,j}} w2 (i, j)Ω2 (t|xi − xj |) satisfies W (t) ⩾ 1 for every t ⩾ 0, and the quantity defined by (20) V (ε) = wT −
+> Σ_{i∈[n]: εi =1} w1 (i) − Σ_{{i,j}: εi =εj =1} w2 (i, j) + Σ_{{I,J}∈C(X):ε∈σ(n;I)} wc (I, J) − Σ_{{I,J}∈C(X):ε∈σ(n;J)} wc (I, J)
+> satisfies V (ε) ⩾ 0 for every ε ∈ σ(n). Then (21) m1 (R2 ) ⩽ wT ."
+
+*(Sums transcribed from the two-line display; `C(X)` is the set of pairs of congruent index sets.)* The certificate is `(X₂₃, w)`: 23
+exact points in the Moser ring and 2,350 non-zero decimal coefficients (`g23.csv`). The hypotheses a checker must establish, and why each
+is load-bearing:
+
+| # | obligation | kind | load-bearing because |
+|---|---|---|---|
+| H1 | the 23 coordinates, and which pairs are at distance exactly 1 | exact algebra (ℚ(√3, √11, i)) | a missed unit edge adds atoms (conservative); a false unit edge removes an atom whose `V(ε)` is then never checked |
+| H2 | each listed pair `{I, J}` with `w_C ≠ 0` is a **congruent** pair of point sets | exact algebra | a non-congruent pair is a false constraint (ieC); the dual bound then proves nothing |
+| H3 | `V(ε) ≥ −ν` on every independent atom (13,552 of `2²³`) | finite, arithmetic on the decimal coefficients | the atom side of the dual |
+| H4 | `W(t) ≥ 1 − μ` on `[0, 10000]` | **continuous**: infinitely many `t`, Bessel functions | the Fourier side of the dual |
+| H5 | `W(t) ≥ 1` on `(10000, ∞)` | analytic (Bessel asymptotics) | the tail |
+| H6 | `(w_T + ν)/(1 − μ) < 0.2470` | arithmetic | the headline |
+
+Not load-bearing on the certificate but on Theorem 1: the reduction to periodic sets ([deOV10, KeMOR16], §2), the O(2) averaging and
+Proposition 1's proof — all hand, all read and found sound (Proposition 1's proof is LP weak duality written out; it uses (C0), (IE1),
+(IE2), (IEC), `κ ≥ 0`, `å ≥ 0` and `å = 0` on non-independent atoms, which is why H3 is needed only on independent atoms).
+
+### 2.3 What the paper says the code checks (§8–§9, verbatim)
+
+- §8, H3: "This is a finite set of inequalities, and high precision calculation ensures that V (ε) ⩾ −ν holds true for each ε ∈ σ(n) with
+  ν = 10−5 ."
+- §8, H5: "Set T = 10000. Then T · dmin ⩾ 1000. Hence, by taking the largest zero of J1 not exceeding 1000, which is s0 = 999.81148 . . .,
+  (23) and (24) imply that for t > T , ϕ(t) > w1 (1) − 2|J0 (s0 )| = 1.00892 . . . > 1." — where (23) as printed reads "ϕ(t) ⩾ w1 (4) −
+  (|w0 | + Σ |w2 (i, j)|) |J0 (s)|", a **typo: `w1 (4)` for `w1 (1)`** (the same paragraph: "w1 (i) = 0 except for i = 1").
+- §8, H4: "This can be lower bounded by using interval arithmetic (note that |J0′ (t)| = |J1 (t)| < 1), which shows that ϕ(t) > 1 − µ with
+  µ = 0.00006 for t ∈ [0, T ] (the global minimum of ϕ(t) is attained at t = 3.77488 . . . with ϕ(t) = 0.99995003 . . .)."
+- §8, H6: "m1 (R2 ) ⩽ w̃T/(1−µ) = (wT + ν)/(1−µ) = 0.24699 . . . < 0.2470."
+- §9: "(1) we verify that the supposed unit distances are symbolically equal to one. (2) we verify that all congruence constraints (ieC) are
+  valid. (3) we estimate the errors resulting from discrete approximation of the continuous (LP), in particular, ensure that the function
+  W (t) of (19) is at least 1 for all non-negative arguments."
+
+### 2.4 What the notebook actually does (read line by line), against H1–H6
+
+| # | the notebook's step | its recorded output | reading |
+|---|---|---|---|
+| H1 | `DX = Table[Simplify[Abs[X〚i〛 - X〚j〛]], …]`; unit pairs where `DX〚i〛〚j〛 == 1` | 27 distinct distances; distance 1 occurs 47 times | **symbolic and sound** (a `Simplify` that failed to reduce would drop an edge — the conservative direction) |
+| H2 | translate each set so its first point is 0, then `X1R = # / X1T〚2〛 & /@ X1T` (divide by the second point), and test `X1R − X2R == 0` or `X1R − Conjugate[X2R] == 0`; one-element sets dropped | `True` on 2,321 | **checks similarity, not congruence.** Dividing by the complex number `X1T〚2〛` normalises scale as well as rotation. For a two-point set both normalised sets are `{0, 1}`, so **every listed two-point "congruence" passes whatever its two distances are**, and for larger sets a scaled copy passes. The notebook never compares `|X1T〚2〛|` with `|X2T〚2〛|`. **A checker gap**: H2 is not established by the notebook; whether the certificate is nonetheless valid is a question about the data (Stage 3 checks it exactly). |
+| H3 | loop over the 13,552 independent atoms (found by a loop over all `2²³` sign vectors), `Meps` = `V(ε)` in machine floats (`Import[path, "Data"]` reads the decimals as doubles) | "The value of maximal error: 6.71224 × 10⁻⁸"; "nu = 0.000001 works" | sound up to double rounding (~10⁻¹³ against a margin of ~9·10⁻⁷); **the notebook uses ν = 10⁻⁶, the paper ν = 10⁻⁵** (both valid; the paper's is looser) |
+| H5 | `FindMaximum[BesselJ[0, t], {t, 1000}]` → `s0 = 999.811`; `w1 − 2 BesselJ[0, s0]` | 1.00892; `Abs[w0] + Total[Abs /@ w2]` = 1.93062 | sound given Watson §15.31 (decreasing extrema of `|J₀|`) and `d_min ≥ 0.1` over the pairs with `w2 ≠ 0` (asserted by the search's restriction, **not checked in the notebook**; Stage 3 checks it) |
+| H4, `[1000, 10000]` | `Min[Table[fi[1000 + k], {k, 1, 9000}]]` (grid step 1), with "Derivative is less than 0.03" from `NMaximize[Abs[BesselJ[1, t]], t > 1000]` = 0.0252 | 1.03829 | |
+| H4, `[100, 1000]` | grid step 0.1; "Derivative less than 0.1" from `max |J₁(t)|, t > 100` = 0.0771 | 1.01102 | |
+| H4, `[0, 100]` | `FindMinimum` from 999 starts (it warns "lstol" and suppresses further warnings), then a grid of step 0.001 selects the 2,629 points with `fi < 0.99995 + 0.001`, and a grid of step 10⁻⁵ on the 2·0.001-wide interval around each; "Maximal total error" = `1 − Mmin + eps` | smallest minimum 0.99995 at 3.77488; **maximal total error 0.000059969 against μ = 0.00006** — a margin of **3.1·10⁻⁸** | |
+| H4, the argument | the derivative bound used everywhere is **`|J₁| < 1`, the derivative of `J₀` alone**; but `W′(t) = −w0 J₁(t) − Σ w2(i,j) d_ij J₁(t d_ij)`, so a Lipschitz constant for `W` is `sup|J₁| · (|w0| + Σ|w2(i,j)| d_ij)`, not `sup|J₁|` | — | **a checker gap**: the step "min on a grid of spacing h, plus L·h" uses a Lipschitz constant that omits the chain-rule factors `d_ij` and the weights. And the evaluations are machine-precision `BesselJ` values, not interval enclosures, so "interval arithmetic" in the paper and notebook means *grid sampling plus a derivative bound*, not interval arithmetic. Whether the H4 conclusion survives with the correct constant is a question about the numbers (Stage 3 derives the constant exactly enough to decide it). |
+| H6 | `(wT + nu) / (1 - mu)` | 0.246988 | with the paper's ν = 10⁻⁵ it is 0.2469974…; both < 0.2470 |
+
+**So the certificate, if H1–H6 hold, proves exactly Theorem 1's statement, `m₁(ℝ²) ≤ 0.2470` (upper densities, measurable sets, via
+periodic approximation), and nothing about non-measurable sets or `χ_f(ℝ²)`.** What a reader must trust even after the notebook runs:
+Mathematica's `Simplify` for H1/H2 (exact, sound), its machine-precision `BesselJ` for H4/H5 (no enclosures), `FindMinimum`/`NMaximize`
+for the derivative sups and `s0` (numerical), and — by the two gaps — **an argument the notebook does not contain for H2 and H4**.
