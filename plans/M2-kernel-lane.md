@@ -633,7 +633,8 @@ corrected here, not edited):
 
 `plans/M2-derivation.md`, in two parts. **Part I, the kernel register**: M2's ten Lean files, 226 declarations, every one on axioms within the
 standard three (195 on all three, 21 on `[propext]`, 7 on `[propext, Quot.sound]`, 3 on none; stage 0's run), of which the register lists
-the ones a result rests on — about 110, each with file, line, axioms, whether the gate's audit prints it, its statement in plain words and the
+the ones a result rests on — 125 by name, plus the `junction_*` and `chainDrawing_*` families (*corrected at stage 3: the
+stage-2 text said "about 110", unmeasured*), each with file, line, axioms, whether the gate's audit prints it, its statement in plain words and the
 hand result it promotes — in seven product tables (the chain theorem; its two instances; route C; prime inversion and the `K(√7)` wall; the
 stripe lemma; the conditional bridge and the real-closed instances; Lemma NP and C3), then **what the kernel does not prove** per product
 (§ I.8) and **the nine hand results it promotes** (§ I.9: `ASTRA-2026-09-14-T1, T2, T5, T6, T7, T9`, `FS39-T1`, `FS62-T2`, `FS85-V2-T5`, and
@@ -644,3 +645,193 @@ entry: J17's ten are one mind each (J17V declined), six of them since kernel-che
 T4, T5, T6 by another route), and T4's hand proof read as sound by J17K2.
 
 **Would have searched here (stage 2):** none.
+
+### Stage 3 — SAVED (the re-reads, the predictions, prices against actuals, the verdict, the tallies)
+
+#### 3a. §G re-read — which extractions paid, and which entry should have borne
+
+| §G line (stage 1) | what happened | paid? |
+|---|---|---|
+| G30 (5)–(6), § The gate "proved twice" (K1): the 18-vertex instance by the chain theorem **and** by `decide` | J14 landed both oracles (the chain route for the plane; the gadget algebra, 4.13 s, for the list) | **paid** |
+| G30 (7) and §1.4 item 2 (K1): `VACUITY DECLARED` on the `G4` theorem | wrong: the marker asserts a provably empty domain; J14 withheld it, the owner ruled J14 right (correction C-6) | **misapplied** — the rule that should have borne is § The gate's own definition of `DECLARED` |
+| G38, row 63 (K2): `χ(ℚ(π)²) = 2` is not free | J15 inhabited by the equality `χ(ℚ(L)²) = χ(ℚ²)`, as foreseen; no time lost | **paid** |
+| G46 (K2): route C is valuation theory; (K3) prime inversion is lying-over | route C built as a hand-made place at `t = 0`; prime inversion by Chevalley's domination, found by the §PA grep (§2.2) | **paid** — the §PA find reshaped K3 |
+| G21 (K2, K3): inhabitants whose value is known; inhabit both directions of FS-47 | NT₀ inhabited by the class mod 2 (G16, G70); prime inversion's spec at `1/5` over `ℂ` and `1/2` over `K(√7)`; the "only if" direction (`ℚ` at 3) was **not** inhabited | half paid |
+| G18 (K1, K3): certify the component, compose in the kernel | the chain theorem takes `Forces` on one copy; the stripe lemma is a `4⁷` wheel table composed with two inductions | **paid** |
+| G35 (K1, K3): `3/8` as data; the valuation form sidesteps the gate | J14 took the eight multipliers as data; J16 proved the wall in valuation form and left the gate named | **paid** |
+| G70, G75 (K3): NT₀ combinatorial; the residue colouring inhabits it | as planned (`NT0` by alternate triples; `modTwo`) | **paid** |
+| G71, G73 (K3): a height route to "striped" | not used — the wheel-and-line route V2 wrote was cheaper | silent in effect |
+| G49, G50 (all): the Mathlib and zbMATH §PA | found `Ideal.image_subset_nonunits_valuationSubring` (K3's shape); **missed** `RatFunc.algEquivOfTranscendental` (wrong directory, C-2) and `Polynomial.flt_catalan` (J17K2 found it at the skeleton) | paid, with two misses |
+| G51 (K2): a blind check of J17 | J17V declined; the kernel served as the second mind for six of J17's ten theorems (J17K, J17K2) | paid differently |
+| § What compute helps, "re-price from the first two leaves" (all) | every job did, and every re-priced remainder still came in far under (3e) | **paid, and confirmed seven of seven** |
+| § Kernel cost model: nested `List.all` under `decide +kernel` | the wheel table (`maxRecDepth` with a flat `List.range`, met again at J04) | **paid** |
+
+**The entry that should have borne and was marked silent: G56.** §G.1 reads "G56 — silent ×3: the window for six; odd-degree bipartiteness
+is not ported here", but G56 also says "FS-39's bridge, which is `[Madore2015]` ¶5.4 plus de Bruijn–Erdős". So §2.3 announced as a finding
+what G56 and `BIBLIOGRAPHY.md` already held (C-3), and J17's stage 1 spent a quotation check undoing it. **The instance for WORKFLOW 3.1:**
+an entry whose bearing sits in a subordinate clause, not in its title, gets the verdict its title earns. The *Do* line of G56 does not mention
+the bridge, which is G67's point: the bearing lived in the body, not in the form that is scanned. The drafts (stage 4) move the bridge's credit
+into G63, whose subject it is.
+
+#### 3b. §PA sweep — what M2 learned about what its objects are
+
+1. **Theorem A's residue colouring and route C are one lemma.** `RouteC.unitQuadrance_colorable_of_valuationSubring` colours `K²` from any
+   place of `K` whose residue ring has no `√−1`; Theorem A's finite places (`q ≡ 3 (mod 4)`) and route C's place `t = 0` are two instances,
+   and J17's C3′ (a degree-one point of an elliptic curve) a third. It is `[Madore2015]` Prop. 3.2 at `d = 2` (found at this close,
+   inventory 67). → G63 draft.
+2. **Row 57's gap is one missing lemma under three results.** "The `σ`-stable valuation subrings of a number field with `p` in the maximal
+   ideal are its conjugation-stable primes above `p`" is what Theorem A's field-level form (G35's and G43's gate), prime inversion's
+   number-field reading (FS-47), and `ASTRA-2026-09-14-T7` in general each still need. → G35 draft; FS-47 and FS-37 re-aims.
+3. **"Positive genus" in Fischer's Remark 1 is the Fermat–Catalan signature inequality.** NP is `Polynomial.flt_catalan` at `(4, 4, 2)`,
+   `1/4 + 1/4 + 1/2 = 1` (genus 1, the boundary the lemma admits); the genus-0 twin reads `(2, 2, 1)`, `1/2 + 1/2 + 1 > 1`, and the kernel
+   route fails there and only there (J17K2 §2.2). → G63 draft (one clause).
+4. **The bridge's kernel content is one proposition.** Everything in FS-39 but `RealAlgebraicDescent` — the equational existential
+   fragment of Tarski for `ℝ_alg ⊆ ℝ` — is in the kernel; Artin–Lang is not a cheaper foundation (J17-T10). → G63 draft (replaces "price both
+   before committing").
+5. **Triangles enter the stripe lemma once.** NT₀ is used only to make one line two-periodic; every further step is properness alone (J16 §3.2,
+   both simplifications kernel-checked). → G75 draft (one sentence): on the triangular lattice the forbidden-triangle hypothesis enters
+   four-colour striping at a single line.
+
+#### 3c. §IQ re-read and G72's count
+
+§IQ ran for M2's one derivation (J17, the bridge). Its structural form — every finitely generated `ℚ`-subalgebra of `ℝ` has a ring hom into
+`ℝ_alg` — is answered by the Artin–Lang homomorphism theorem, and the invariant it named (an ordering, a real place) is the one J17's route AL
+uses. **So the result came through the structural question**, and the answer was a classical theorem: novelty none, as §G.4 item 8 predicted.
+The kernel lane's other products are ports, outside G72's count. **For G72:** M2's count — "through the structural question, a classical
+answer; the kernel ports are not counted" — the count's ordinal is the front-page job's to assign beside M1's.
+
+#### 3d. The predictions, scored once
+
+| id | prediction | p | outcome | source |
+|---|---|---|---|---|
+| P-J14a | J14 lands all three K1 products, gate green, inside 3 h | 0.65 | **met** (≤ 26 min) | `plans/M2-S1K-chain.md` stage 5 |
+| P-J14b | the gadget oracle's `decide +kernel` under 60 s | 0.60 | **met** (the whole module, 4.13 s) | same |
+| P-J14c | the six-unit identity by factoring in ≤ 40 lines | 0.75 | **met** (14 lines) | same |
+| P-J15a | the integrality leaf closes with no hypothesis left | 0.55 | **TRUE** (about 15 min of stage 2) | `plans/M2-S2K-route-c.md` §4.2 |
+| P-J15b | Mathlib identifies the `X`-adic residue field of `RatFunc K` with `K` | 0.30 | **FALSE** | same §1.2 |
+| P-J16a | prime inversion, valuation form, inside 1.5 h | 0.85 | **met** (13 min) | `plans/M2-S3K-unit-ring.md` §2.5 |
+| P-J16b | the stripe lemma in full inside J16 | 0.10 | **met** (17 min) | same §3.5 |
+| P-J17a | no printed proof of the bridge besides Madore ¶5.4 (and Fischer's Remark 1) | 0.70 | **held, conditional**: unscorable at `[BendaPerles2000]`, unread | `plans/M2-S1D-bridge.md` §3.3 |
+| P-J17b | the Artin–Lang route's kernel price judged lower than Tarski's | 0.50 | **FALSE** (AL's proof contains `(∃T)`) | same |
+| P-lane | no lane job touches a module a certificate imports | 0.90 | **TRUE** for all six kernel jobs (each build rebuilt only its new modules and `Proofs`) | each record's gate |
+| J14 C0 | six products (0.97, 0.75, 0.80, 0.90, 0.80, 0.70) | — | all met | `plans/M2-S1K-chain.md` §1.1 |
+| J16 C0 | P-J16a/b at 0.90 / 0.10 | — | both met | `plans/M2-S3K-unit-ring.md` §1.2 |
+| J17 C0 | C1 0.97, C2 0.95, C3 0.97, C4 0.90 | — | all TRUE | `plans/M2-S1D-bridge.md` §3.3 |
+| P-J17Ka | B1 and C4 green, conditional, inside 2 h | 0.60 | **HELD** (about 8 min) | `plans/M2-S4K-bridge.md` §5.2 |
+| P-J17Kb | both B0 instances land | 0.60 | **HELD**, stronger | same |
+| P-J17Kc | NP via `Polynomial.abc` in ≤ 200 lines | 0.50 | **HELD** in J17K2 (99 lines, via `flt_catalan`) | `plans/M2-S5K-noparam.md` §2.3 |
+| J17K C0 | the build accepts both modules unchanged or lint-only (0.85); NP in J17K's budget (0.35); C3 (0.25); C3⁺ (0.05) | — | HELD; the other three **did not land in J17K** (budget stop) — all three landed in J17K2 | `plans/M2-S4K-bridge.md` §1.2, stage 4 (scored here; the record left them) |
+| J17K2 C0 | NP in full (0.80); ≤ 200 lines (0.70); twin in the kernel (0.90); the twin fails only at the signature (0.65); C3 (0.75); C3⁺ (0.15) | — | all **HELD** | `plans/M2-S5K-noparam.md` §2.3, §3.3 |
+
+**Reading.** Of the plan's ten, seven came true, two were false, one is unscorable. Every "lands inside its budget" prediction came true,
+including those at 0.10 (the stripe lemma) and 0.15 (C3⁺): the priors were pessimistic about kernel effort in one direction only, which is
+3e's finding. Both FALSE ones were about the world (what Mathlib holds; how Artin–Lang is proved), not about effort. Two C0 tables (J17K,
+J17K2) reached disk after their first leaves had closed; they are scored only on the products not yet attempted when written.
+
+#### 3e. Prices against actuals (every M2 leaf was priced high in time; not in tokens)
+
+Times are wall clock from the job's start (the previous lane job's report, or the recorded start) to its report, read from commit times
+(`git log`; desktop); a "day" is read as one working day.
+
+| product | priced (where) | actual | ratio |
+|---|---|---|---|
+| K1, the chain theorem and both instances (J14) | "one job, about 3 hours; 300–350 lines" (§3.2) | ≤ 26 min (15:56 → 16:22); ≈ 570 lines with specs and controls | ≥ 7× in time; lines under-priced |
+| K2, route C (J15) | "2.5–3 hours, medium risk at one named leaf" (§3.2) | ≤ 30 min (16:22 → 16:52); the named leaf about 15 min | ≥ 5× |
+| K3-B, prime inversion (J16) | "about one hour" (§3.2) | 13 min (16:55 → 17:08) | ≈ 5× |
+| K3-A, the stripe lemma (J16) | "4–6 hours, 400–500 lines — more than one job" (§3.2) | 18 min (17:08 → 17:26), 447 lines | ≈ 13–20× |
+| B0 and B1, the real-closed instances and the conditional bridge (J17K) | "~1 day" each (`plans/M2-S1D-bridge.md` §3.2) | both in ≈ 16 min (17:30 → 17:46) | ≥ 30× |
+| Lemma NP (J17K2) | "optional ~½ day" (J17 §3.3); "≤ 200 lines" at p 0.50 (P-J17Kc) | NP, C3 and C3⁺ together ≤ 34 min (17:48 → 18:22); NP 99 lines | ≥ 7× |
+| J17, the bridge by hand | "~1.5 h, 200k" (§4.2) | ≤ 23 min (15:56 → 16:19), but **366k tokens** | fast in time, **1.8× over in tokens** |
+| token budgets of the kernel jobs | J14 350k, J15 300k, J16 350k, J17K2 300k (§4.2; the queue) | 339k, 368k, 405k, ≈ 200k (estimate); J17K 342k | about right; J15 and J16 over |
+
+**Why every time price was high** (the records' own reasons): Mathlib at this pin already held the non-obvious input — the eventual-sign lemmas
+(`IsRealClosed ℝ`), `algebraicClosure_eq_bot`'s tower integrality, `Polynomial.flt_catalan`, `RatFunc.algEquivOfTranscendental`,
+Chevalley's domination — and the plan's own obligation pass had already shaped the proofs (S2 as a wheel statement; factoring the six-unit
+sum). **`CLAUDE.md` § What compute actually helps already says "a kernel leaf priced after a fine obligation pass is priced high"**; M2 is
+seven more instances. The lesson for pricing: **grep Mathlib by the statement's shape at the skeleton** — it found two of the five inputs at
+§PA and would have found the other three; the prices, not the leaves, were the error.
+
+#### 3f. The conjecture sweep (WORKFLOW 9: "conjecture", "not claimed", "surfaced" in the plan and the six records)
+
+| item | source | decision |
+|---|---|---|
+| **Q-const**: for finitely generated `E ⊂ ℝ` with constant field `F`, is `χ(E²) = χ(F²)`? (True when `E/F` has a degree-one place with formally real residue field) | `plans/M2-S1D-bridge.md` §2.5 | **recorded as an open question in G63 (draft); no stub** — as J17 recommended: bearing on χ ≥ 6 none (by the bridge, `χ(ℝ²)` is read off number fields alone) |
+| does `χ(F(t)²) = χ(F²)` fail when `−1` is a square in `F`? | `plans/M2-S2K-route-c.md` §4.4 | **declined** — every field this project colours is real |
+| an `𝔽₃` instance of route C's engine | same | **declined** — a Mathlib instance question (`RatFunc (ZMod 3)` timed out), no consumer |
+| G55's vertex bound `m(n − 1) + 1` in the kernel | `plans/M2-S1K-chain.md` stage 5 | **a line in FS-45's re-aim** (a small leaf), no stub |
+| `ASTRA-2026-09-14-T7` in general (every wall-broken real `F ⊇ K` has `χ ≥ 5`, given `G4`) | § I.9 of the register | **a line in FS-47's re-aim**: it needs row 57's number-field reading |
+| the involution hypothesis in `normOne_subset_iff_stable`: false without it? (no counter-model built) | `plans/M2-S3K-unit-ring.md` §2.3 | **declined** — the plant showed both directions consume it; a counter-model has no consumer |
+| upstreaming `RealClosed.lean` to Mathlib (its TODO) | `plans/M2-S4K-bridge.md` stage 3 | **held for publication** — Mathlib contributions are deferred (Kooshi, 2026-08-04; `CLAUDE.md` § Publication) |
+
+#### 3g. The verdict, in four parts
+
+- **The choice: M2 closes Paid (kernel).** Every target landed — FS-45's D1–D3 (the chain theorem in four forms and the ring form;
+  `χ(ℚ(√2,√3)²) ≥ 4`; `G4 → χ(K(√7)²) ≥ 5`), FS-39 route C (`χ(F(t)²) = χ(F²)`), FS-47's prime inversion in valuation form with the `K(√7)`
+  wall, and FS-87's target 1 in full (the plan offered one of the last two) — and two jobs spawned mid-milestone put the bridge in the kernel
+  conditional on one named true hypothesis, with `ℝ` and `ℝ_alg` real closed, Lemma NP over every field with `2 ≠ 0`, and C3 and C3⁺.
+  226 declarations, all on the standard three axioms or fewer, no solver, no native evaluation; the gate green (stage 0).
+- **The alternative weighed: Paid (partial).** Three things M2 names are not in the kernel: `G4` (a measurement, post-ban), `RealAlgebraicDescent`
+  (Tarski, months), and prime inversion's number-field reading (row 57's gap). *Why Paid won:* each was named as conditional or out of scope in
+  the plan before any job ran (§1.4 item 2, §4.1 item 5, §2.2's closing paragraph), so none is a target that failed; and the milestone was grade
+  debt, which it paid.
+- **What it is, in novelty:** none of the mathematics is new — the chain theorem is GPT Astra's (G55), route C `[Fischer1990]` Thm 6, its
+  general lemma `[Madore2015]` Prop. 3.2, prime inversion Astra's (and `[Fischer1990b]` for special cases), the stripe lemma `[Parts2020hv]` §3,
+  the bridge `[Madore2015]` ¶5.4, NP classical. Ours: the kernel forms; the ring form of the chain theorem; prime inversion in valuation form
+  (no number field needed, Chevalley's domination); the relative-algebraic-closure instance (a Mathlib TODO, stronger than asked); NP over every
+  field with `2 ≠ 0` with its two sharp controls; C3⁺ by tower induction. **All novel knowledge is a success** (Kooshi): the kernel's word on
+  results the project had held by hand is the product.
+- **Confidence: high.** The gate is green and every result is on the standard three; what would change it is a defect found in a statement
+  read aloud — the owner read three (inventory 27, 38, 55) and each job read its headlines against the informal claims.
+
+#### 3h. The prior-art position of each headline result (from the records; no separate close-time gate ran for M2)
+
+| result | position |
+|---|---|
+| the chain theorem (four forms, ring form) | GPT Astra's Theorem 4.1 (hand, 2026-09-14; G55); **the kernel form is ours**; the spindle as `m = 2` classical |
+| `χ(ℚ(√2,√3)²) ≥ 4`; the 18-vertex graph | Astra's T6 (tools grade until now); **kernel ours**; Moser-free four-chromatic plane graphs are known in general (G11) |
+| route C, `χ(F(t)²) = χ(F²)` | **`[Fischer1990]` Thm 6** (statement and proof); its lemma **`[Madore2015]` Prop. 3.2 at `d = 2`** (found at this close, inventory 67 — J15's report had called the lemma ours); kernel ours |
+| prime inversion, valuation form; the `K(√7)` wall | Astra's Theorem 1.2 (hand); `[Fischer1990b]` Thms 1, 3–4 for multiquadratic fields at odd unramified primes and real quadratic fields; the lifting is Chevalley's (Stacks 00IA, Mathlib). **The valuation form without number fields, and the kernel, ours** |
+| the stripe lemma | **`[Parts2020hv]` §3** (human-verified); FS85-V2-T5 our re-derivation; kernel ours |
+| the bridge, C1–C4 | **`[Madore2015]` ¶5.4 with ¶1.3** (Tarski); noted by `[BendaPerles2000]` (unread, the one open debt); asserted in `[Soifer2024]` ch. 11; with a false step in `[Fischer1990]` Remark 1. C4 is FS62-T2 (ours, a restatement). Kernel (conditional) ours |
+| `ℝ` and `ℝ_alg` real closed | classical; **Mathlib's own TODO**; the relative-closure instance in this generality not found in Mathlib (not searched beyond it) |
+| Lemma NP, C3, C3⁺ | classical (genus 1; Mason–Stothers, Snyder 2000); the refutation of Remark 1's first sentence is ours as a write-up only; kernel ours |
+
+#### 3i. The honesty tally (every owner error and agent slip in the inventory, and this close's own)
+
+| who | slip | inventory | caught by |
+|---|---|---|---|
+| the owner (J04's brief) | two advisor quotations not verbatim on disk | 7 | J04's quotation check |
+| the owner (J04's brief) and `CLAUDE.md` G63 | route C's tool named as `colorable_unitDistance_induce_of_valuationSubring`, which needs a finite residue ring | 2, 32 | J04 at §PA |
+| the owner | J17K's request for "one DECLARED hypothesis" | 26 | J17, then J17K (implemented as a named hypothesis, no marker) |
+| J04 (planner) | `VACUITY DECLARED` planned for the `G4` theorem | 25; C-6 | J14 |
+| J04 | the Mathlib query for `F(t) ≃ RatFunc F` looked in the wrong directory | 32; C-2 | J15 |
+| J04 | Madore ¶5.4 announced as a finding (a re-finding; G56 marked silent) | 14; C-3 | J17 |
+| J04 | harness 534k, above the 500k replace line (its briefs' quotations were checked by each receiving job) | 11 | the owner |
+| J14 | one timing run and one plant as bare `lake env lean` at 3.7 GB, outside the slot | 24 | J14 itself |
+| J16 | a duplicate `conjOn` under ResidueColouring's name | 47 | the name clash |
+| J17 | `VACUITY DECLARED` in B1's first wording | — (J17 §3.2, corrected in its own record) | J17 |
+| J17K | C0 written after the first leaves had closed | 52 | J17K itself |
+| J17K2 | the same, repeated | 62 | J17K2 itself |
+| J17K (its brief for J17K2) | "only the proof's derivative step breaks" in odd characteristic | 62; C-13 | J17K2 |
+| J15 (report) | the general valuation lemma called "ours"; it is Madore's Prop. 3.2 at `d = 2` | 67 | this close |
+| J23b (this close) | stage 0's text claimed a "first `lake lint` at a close since it was wired" — unverified; removed at stage 1. Stage 1's inventory tally counted by eye (20 / 19 / 19 / 19; the file says 21 / 16 / 18 / 17), corrected at stage 2; stage 2's "about 110" declarations (125), corrected at stage 3 | — | this close, on re-reading |
+
+**Pattern.** The owner's and the planner's errors were each caught by the next job's quotation check or first leaf, before any cost; the
+agents' slips are process slips (C0 timing, the slot), none in a statement. G21's selection rule: this close audited the flattering claims
+too — J15's "ours" was the one that fell.
+
+#### 3j. Staffing (harness counts from the task notifications)
+
+J04 534k (own 330k) — above the replace line, not reused · J14 339k · J15 368k · J16 405k · J17 366k, then 414k after writing J17K's brief ·
+J17K 342k · J17K2 ≈ 200k (its own estimate). No child agents were reported by any job. J17V was never run (declined).
+
+#### 3k. The would-have-searched log, across M2
+
+| job | move a search would have made | instead |
+|---|---|---|
+| J04 X2 | an LRAT refutation of the 18-vertex graph | the gadget algebra by `decide +kernel` over the chain's seven ports — **at the ban's edge** (a complete enumeration of port partitions the gadget algebra fixes) |
+| J04 X3 | a fresh LRAT of the 588-core, to make the `K(√7)` theorem unconditional | the conditional theorem; the LRAT is post-ban |
+| J04 X4, J16 X3 | — | the wheel check: all `4⁷` colourings of one wheel, a set the derivation fixed — **at the ban's edge**, logged as such (with J16's decisions over `Fin 4`, `(ℤ/2)²`, `ℤ/3` and the 16 maps `Fin 4 → ℤ/2`) |
+| J14 X2 | a three-colouring of the planted 32-edge list by a colourer | derived by hand from the reference four-colouring |
+| J17 stage 2 | a solver check that a drawing has an algebraic form; hunting a Q-const counterexample by trying curves | neither needed (C1 is a theorem); Q-const recorded as a question |
+| J15, J17K, J17K2, J23b | none | — |

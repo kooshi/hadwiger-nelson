@@ -62,7 +62,7 @@ result, `LEDGER.md` row or § B id the declaration promotes; "—" means the dec
 | `unitQuadrance_colorable_of_subring` | 107 | std | yes | if a subring `A` of `R` holds both coordinates of every unit vector, a ring hom `A → S` pulls every `k`-colouring of `S²` back to `R²` (coset by coset, `cosetResidue`) | J04's scratch leaf B; `[Fischer1990]` Thm 6's colouring of `C₀`; `[Madore2015]` Prop. 3.2 |
 | **`mem_valuationSubring_of_sq_add_sq_eq_one`** | 141 | std | yes | **the valuation lemma**: if `1 + x²` is a unit of the valuation subring `B` for every `x ∈ B`, then `a² + b² = 1` forces `a, b ∈ B` | `J04-H1` (Part II) |
 | `one_add_sq_ne_zero` | 169 | std | yes | in a nontrivial formally real ring, `1 + s² ≠ 0` | — |
-| **`unitQuadrance_colorable_of_valuationSubring`** | 177 | std | yes | a ring hom out of a valuation subring of `K`, killing its maximal ideal, into a ring with no square root of `−1`, pulls every colouring of that ring's plane back to `K²` — any place whose residue ring has no `√−1` | new (general form); covers J17's C3′ integrality step and Theorem A's residue fields `𝔽_q`, `q ≡ 3 (mod 4)` |
+| **`unitQuadrance_colorable_of_valuationSubring`** | 177 | std | yes | a ring hom out of a valuation subring of `K`, killing its maximal ideal, into a ring with no square root of `−1`, pulls every colouring of that ring's plane back to `K²` — any place whose residue ring has no `√−1` | **`[Madore2015]` Prop. 3.2 at `d = 2`** (any valuation ring whose residue field makes `z₁² + z₂²` anisotropic; read at the close, p. 6 of the held PDF) — the kernel form is ours, and J15's phrasing (any ring hom to a ring with no `√−1`, killing the maximal ideal) is a hair more general; covers J17's C3′ integrality step and Theorem A's residue fields `𝔽_q`, `q ≡ 3 (mod 4)` |
 | `zeroIntegral`, `zeroPlace`, `evalZero` (defs) | 205, 260, 270 | std | — | the rational functions with no pole at `t = 0`, as a subring and a `ValuationSubring (RatFunc F)`; evaluation at `0`, a ring hom onto `F` | — (hand-built; not claimed equal to Mathlib's `X`-adic valuation subring) |
 | `inv_mem_zeroIntegral_of_not_mem` | 237 | std | yes | a rational function with a pole at `0` has an inverse with no pole there, vanishing there | — |
 | `evalZero_eq_zero_of_mem_maximalIdeal` | 282 | std | yes | evaluation at `0` kills the maximal ideal of `zeroPlace F` | — (the one leaf the plan named as route C's gap, §2.2) |
@@ -207,8 +207,9 @@ and J17K2 read J17's Lemma NP proof step by step as a second reader ("sound as w
 *Proof:* `plans/M2-kernel-lane.md` §4.4 obligation item 3: if `a ∉ B` then `a⁻¹ ∈ 𝔪`; if `b/a ∈ B`, `1 + (b/a)² = (a⁻¹)² ∈ 𝔪`, a
 contradiction; otherwise `a/b ∈ 𝔪` and the symmetric case. *Proof verdict:* closes; J15 ported it on the second elaboration (25 lines).
 *Rests on it:* route C (`chromaticNumber_unitQuadrance_ratFunc`); J17's C3′ integrality step (J17-T8) is this lemma at a degree-one place.
-*Prior art:* the argument of `[Fischer1990]` Thm 6's proof and `[Madore2015]` Prop. 3.2 (a unit vector with a pole needs `−1` a square in
-the residue field), stated here for an arbitrary valuation subring. *Kernel:* kernel — `RouteC.mem_valuationSubring_of_sq_add_sq_eq_one`
+*Prior art:* **`[Madore2015]` Prop. 3.2's proof, first paragraph** ("if `x₁² + ⋯ + x_d² = 1` with `xᵢ ∈ K`, then in fact `xᵢ ∈ A`",
+for any valuation ring `A` whose residue field makes the sum of `d` squares anisotropic; read at the close, p. 6) — J04-H1 is its `d = 2`
+case with the residue condition phrased as `1 + x² ∉ 𝔪`; the same argument is `[Fischer1990]` Thm 6's at the place `t = 0`. Not ours. *Kernel:* kernel — `RouteC.mem_valuationSubring_of_sq_add_sq_eq_one`
 (`Transcendental.lean:141`), with its colouring form `unitQuadrance_colorable_of_valuationSubring` (line 177).
 
 **J14-H1 — in the 18-vertex, 33-edge graph over `ℚ(√2,√3)`, diamond 1 is redundant: diamonds 2–6 and the edge `3 — 1` already refuse three colours. [hand; J14, one mind; not kernel-checked]**
