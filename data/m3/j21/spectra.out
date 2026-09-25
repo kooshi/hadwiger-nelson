@@ -1,0 +1,76 @@
+places of Q(sqrt 167) with residue size q <= 200 (p, in F, q, type in F(i)/F):
+   (2, 'ramified', 2, 'split')
+   (3, 'inert', 9, 'split')
+   (5, 'inert', 25, 'split')
+   (7, 'inert', 49, 'split')
+   (11, 'inert', 121, 'split')
+   (13, 'inert', 169, 'split')
+   (23, 'split', 23, 'stable')
+   (23, 'split', 23, 'stable')
+   (29, 'split', 29, 'split')
+   (29, 'split', 29, 'split')
+   (43, 'split', 43, 'stable')
+   (43, 'split', 43, 'stable')
+   (59, 'split', 59, 'stable')
+   (59, 'split', 59, 'stable')
+   (61, 'split', 61, 'split')
+   (61, 'split', 61, 'split')
+   (67, 'split', 67, 'stable')
+   (67, 'split', 67, 'stable')
+   (71, 'split', 71, 'stable')
+   (71, 'split', 71, 'stable')
+   (79, 'split', 79, 'stable')
+   (79, 'split', 79, 'stable')
+   (83, 'split', 83, 'stable')
+   (83, 'split', 83, 'stable')
+   (89, 'split', 89, 'split')
+   (89, 'split', 89, 'split')
+   (97, 'split', 97, 'split')
+   (97, 'split', 97, 'split')
+   (103, 'split', 103, 'stable')
+   (103, 'split', 103, 'stable')
+   (131, 'split', 131, 'stable')
+   (131, 'split', 131, 'stable')
+   (137, 'split', 137, 'split')
+   (137, 'split', 137, 'split')
+   (139, 'split', 139, 'stable')
+   (139, 'split', 139, 'stable')
+   (151, 'split', 151, 'stable')
+   (151, 'split', 151, 'stable')
+   (157, 'split', 157, 'split')
+   (157, 'split', 157, 'split')
+   (163, 'split', 163, 'stable')
+   (163, 'split', 163, 'stable')
+   (167, 'ramified', 167, 'stable')
+   (173, 'split', 173, 'split')
+   (173, 'split', 173, 'split')
+   (181, 'split', 181, 'split')
+   (181, 'split', 181, 'split')
+stable residue characteristics: [23, 43, 59, 67, 71, 79, 83, 103, 131, 139, 151, 163, 167]
+
+stable places: level-one spectrum of Gamma_p (d = p + 1)
+  p= 23 d= 24 lmin=-7.960687 lmax=+7.898005 Hoffman=0.24908 (<1/5: False, margin 4.91e-02)  lam*=0.33170 (<1/4: False, margin 8.17e-02)  Weil lam*<=0.39965
+  p= 43 d= 44 lmin=-11.962230 lmax=+11.445203 Hoffman=0.21376 (<1/5: False, margin 1.38e-02)  lam*=0.27187 (<1/4: False, margin 2.19e-02)  Weil lam*<=0.29807
+  p= 59 d= 60 lmin=-14.917577 lmax=+14.510936 Hoffman=0.19912 (<1/5: True, margin 8.80e-04)  lam*=0.24863 (<1/4: True, margin 1.37e-03)  Weil lam*<=0.25604
+  p= 67 d= 68 lmin=-15.056703 lmax=+15.094378 Hoffman=0.18128 (<1/5: True, margin 1.87e-02)  lam*=0.22198 (<1/4: True, margin 2.80e-02)  Weil lam*<=0.24075
+  p= 71 d= 72 lmin=-14.172834 lmax=+15.869944 Hoffman=0.16447 (<1/5: True, margin 3.55e-02)  lam*=0.22042 (<1/4: True, margin 2.96e-02)  Weil lam*<=0.23406
+  p=167 d=168 lmin=-24.251997 lmax=+25.468282 Hoffman=0.12615 (<1/5: True, margin 7.39e-02)  lam*=0.15160 (<1/4: True, margin 9.84e-02)  Weil lam*<=0.15384
+Weil gives lam* < 1/4 for p >= 62 (8 sqrt p < p + 1); Hoffman < 1/5 needs |lmin| < (p+1)/4, same threshold
+
+split places: compact subgraph Cay(O^2, {(e, 1/e)}), level-one |K|/(q-1)
+  q=  2: e = 1 mod pi for every unit, so (1/pi)(x1 + x2) is trivial on the subgraph: lam* = 1 (not thick)
+  q=   9 (p=3, inert in F): max|K|=5.000000  lam*=0.62500 (<1/4: False, margin 3.75e-01)  Weil<=0.75000
+  q=  25 (p=5, inert in F): max|K|=9.854102  lam*=0.41059 (<1/4: False, margin 1.61e-01)  Weil<=0.41667
+  q=  49 (p=7, inert in F): max|K|=13.305586  lam*=0.27720 (<1/4: False, margin 2.72e-02)  Weil<=0.29167
+  q= 121 (p=11, inert in F): max|K|=21.968914  lam*=0.18307 (<1/4: True, margin 6.69e-02)  Weil<=0.18333
+  q= 169 (p=13, inert in F): max|K|=25.942574  lam*=0.15442 (<1/4: True, margin 9.56e-02)  Weil<=0.15476
+  q=  29 (p=29, split in F): max|K|=9.500281  lam*=0.33930 (<1/4: False, margin 8.93e-02)  Weil<=0.38465
+  q=  61 (p=61, split in F): max|K|=15.341753  lam*=0.25570 (<1/4: False, margin 5.70e-03)  Weil<=0.26034
+  q=  89 (p=89, split in F): max|K|=18.134797  lam*=0.20608 (<1/4: True, margin 4.39e-02)  Weil<=0.21441
+  q=  97 (p=97, split in F): max|K|=18.610820  lam*=0.19386 (<1/4: True, margin 5.61e-02)  Weil<=0.20518
+  q= 137 (p=137, split in F): max|K|=23.062776  lam*=0.16958 (<1/4: True, margin 8.04e-02)  Weil<=0.17213
+  q= 157 (p=157, split in F): max|K|=24.623085  lam*=0.15784 (<1/4: True, margin 9.22e-02)  Weil<=0.16064
+  q= 173 (p=173, split in F): max|K|=24.988298  lam*=0.14528 (<1/4: True, margin 1.05e-01)  Weil<=0.15294
+  q= 181 (p=181, split in F): max|K|=25.959171  lam*=0.14422 (<1/4: True, margin 1.06e-01)  Weil<=0.14948
+
+RESULT: OK

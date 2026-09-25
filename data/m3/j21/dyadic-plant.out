@@ -1,0 +1,4 @@
+n=1 j=5: lambda_min=-1.000000  (2n+1)*lambda_min=-3.000000 (floor -3)  Hoffman=0.500000 (bound 3/(2n+4)=0.500000)  OK
+n=2 j=5: lambda_min=-1.000000  (2n+1)*lambda_min=-5.000000 (floor -3)  Hoffman=0.500000 (bound 3/(2n+4)=0.375000)  FAIL
+n=3 j=5: lambda_min=-1.000000  (2n+1)*lambda_min=-7.000000 (floor -3)  Hoffman=0.500000 (bound 3/(2n+4)=0.300000)  FAIL
+RESULT: FAIL
