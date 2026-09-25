@@ -111,7 +111,7 @@ negative measures these queries' words (G21); it cannot reach Benda–Perles's t
 
 ## Stage 2 — SAVED
 
-### 2.0 Conventions and the three tools every proof below uses
+### 2.0 Conventions and the tools every proof below uses
 
 - For a commutative ring `R`, **`Γ(R²)`** has vertex set `R²` and an edge `p ~ q` iff `(p₁ − q₁)² + (p₂ − q₂)² = 1` (Madore Def. 2.1;
   this repository's `unitQuadrance R`). For a subfield `F ⊆ ℝ` it is exactly the unit-distance graph on `F × F`, and `χ(F²) := χ(Γ(F²))`.
@@ -349,7 +349,7 @@ Mathlib-dependent") is wrong by an order of magnitude**; the M2 plan's "weeks" (
 |---|---|---|---|
 | P-J17a | "no printed proof of the bridge is found besides `[Madore2015]` ¶5.4 (and Fischer's flawed Remark 1)" | 0.70 | **held on everything readable** — Soifer asserts without proof (Open Problem 11.1's comment); Zapletal's two papers use the mechanism for other statements; the zbMATH gate found nothing. **Not scorable at one source:** `[BendaPerles2000]`, which Fischer credits with noting the reduction and whose zbMATH review is withheld. Scored *held, conditional* |
 | P-J17b | "the Artin–Lang route's kernel price is judged lower than the Tarski route's" | 0.50 | **FALSE** (judged): AL's textbook proof contains (∃T); §3.2. Confidence medium — it would change if a proof of Artin–Lang from valuation theory alone (Chevalley extension, which Mathlib holds) were found; none is known to me |
-| C0 (§1.2) | C1 0.97, C2 0.95, C3 0.97, C4 0.90 | — | all four TRUE; the one risk that bit was none — C4's attainment, which FS62-T2 left implicit, is supplied by C2's boundedness |
+| C0 (§1.2) | C1 0.97, C2 0.95, C3 0.97, C4 0.90 | — | all four TRUE; no listed risk materialised — C4's attainment, which FS62-T2 left implicit, is supplied by C2's boundedness |
 
 ### 3.4 Proposed edits (standing rule 7: the front-page lane writes them; proposed here only)
 
