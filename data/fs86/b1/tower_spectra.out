@@ -1,0 +1,7 @@
+p= 11 unram level=2 |V|=    14641 deg=   132 (a)PASS pulled-back min=  -52.753303 (b)PASS max|primitive|=   21.9926 vs 2p^(l-1)=22 (c)PASS hoffman=0.285533746 predicted=0.285533746 (d)PASS
+p= 19 unram level=2 |V|=   130321 deg=   380 (a)PASS pulled-back min= -144.584844 (b)PASS max|primitive|=   37.9986 vs 2p^(l-1)=38 (c)PASS hoffman=0.275617654 predicted=0.275617654 (d)PASS
+p= 11 ram   level=2 |V|=    14641 deg=   132 (a)PASS pulled-back min=  -52.753303 (b)PASS max|primitive|=   22.0000 vs 2p^(l-1)=22 (c)PASS hoffman=0.285533746 predicted=0.285533746 (d)PASS
+p= 11 ram   level=3 |V|=  1771561 deg=  1452 (a)PASS pulled-back min= -580.286328 (b)PASS max|primitive|=  242.0000 vs 2p^(l-1)=242 (c)PASS hoffman=0.285533746 predicted=0.285533746 (d)PASS
+p= 23 ram   level=2 |V|=   279841 deg=   552 (a)PASS pulled-back min= -183.095805 (b)PASS max|primitive|=   46.0000 vs 2p^(l-1)=46 (c)PASS hoffman=0.249077473 predicted=0.249077473 (d)PASS
+p= 59 ram   level=2 |V|= 12117361 deg=  3540 (a)PASS pulled-back min= -880.137043 (b)PASS max|primitive|=  118.0000 vs 2p^(l-1)=118 (c)PASS hoffman=0.199119854 predicted=0.199119854 (d)PASS
+p=  7 unram level=3 |V|=   117649 deg=   392 (a)PASS pulled-back min= -220.204001 (b)PASS max|primitive|=   97.7986 vs 2p^(l-1)=98 (c)PASS hoffman=0.359690562 predicted=0.359690562 (d)PASS
