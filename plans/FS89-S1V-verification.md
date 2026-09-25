@@ -83,3 +83,5 @@ exhausts `Q`; apply V1. ∎
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
+| S1V-1 | a character of `Q` whose restriction to every `R_S` (a directed exhausting family of finite nonempty `S`) is in `T + A` is in `T + A`, with one archimedean part and torsion order `ord(ψ|_{ℤ[i]})` | hand | § V-A1, Theorem V1 |
+| S1V-2 | U1: `RS₄(S)` for all finite `S ⊇ S₀` ⟹ RQ₄; and RQ₄ ⟺ `Θ₄(Q)|_{R_S} ⊆ T + A` for every finite `S` | hand | § V-A1 |
