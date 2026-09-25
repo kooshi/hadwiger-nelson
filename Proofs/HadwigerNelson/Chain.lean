@@ -1,6 +1,5 @@
 import Proofs.HadwigerNelson.Forcer
 import Proofs.HadwigerNelson.SquareClass
-import Proofs.HadwigerNelson.OneDefect
 
 /-!
 # The chain theorem: a forced pair, chained along unit vectors, refuses its colour count

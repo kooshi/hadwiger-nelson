@@ -149,3 +149,50 @@ carrier, so the marker would be inert rather than `STALE`, but it would still as
 docstring line if the owner rules otherwise. The docstring of `G4` states the two facts that make its `Forces` a genuine compulsion:
 Theorem B (every graph over `ℚ(√3,√11)` is four-colourable, row 57) and the spare-colour lemma (row 45: the forcer is not
 three-colourable).
+
+## Stage 5 — SAVED
+
+### The gate (desktop, every run under `scripts/slot.py`)
+
+| check | result | log |
+|---|---|---|
+| `./scripts/build.sh` (`--mem 60 --cpus 16`, `MEMMAX=60G`) | **OK** — 177 of 177 batches, 4 modules rebuilt (`Chain`, `Instances/SqrtTwoThree`, `Instances/SevenConditional`, `Proofs`), **0 modules with warnings**, 3 m 29 s | `data/m2/j14/build2.log` |
+| `sorry` scan of the three modules | none | — |
+| `./scripts/axioms.sh` | **OK — 1045 clean, 10 axiom-free, 5 declared purchases** (was 1034 clean); all 11 new entries `[propext, Classical.choice, Quot.sound]`; purchase ledgers agree | `data/m2/j14/axioms.log` |
+| `./scripts/vacuity.sh` | **OK** — `declarations 6795 → 6875, refutations-skipped 278 → 280, sites 275 → 278, generic 253 → 256`; `vacuous=0 stale=0 declared=3 witnessed=17 generic=256 unknown=2` (the two baseline entries); new: 3 GENERIC sites (the `Forces` hypotheses of the three wrapper forms — the caller's obligation, discharged in-library by `spindle_of_chain`, `four_le_chromaticNumber_planeOver_two_three` and the conditional theorem) and 1 new evidence row (`eighteen_colorable_four`) | `data/m2/j14/vacuity.log` |
+| `./scripts/vacuity.sh --self-test` | **OK** — every control fired, the two silent ones stayed silent | `data/m2/j14/vacuity-selftest.log` |
+| `python3 tools/check_architecture.py` | **PASS** (164 module rows; before the rows were added it failed on exactly the three new modules — the check's own red) | — |
+
+Registered: `Proofs.lean` (three imports), `ARCHITECTURE.md` § 3.6 (`Chain`) and § 3.8 (the two instances) with the prose counts
+(1,698 files, 82 theory modules, 79 instance modules, 139 imports), `scripts/Axioms.lean` CLEAN (11 lines, an FS-45 block). The unused
+`OneDefect` import was dropped from `Chain` before the build (its declared imports are now `Forcer`, `SquareClass`).
+
+### The headline statements, read aloud against their informal claims
+
+| theorem | read aloud | against the claim |
+|---|---|---|
+| `not_colorable_chain` | "for any graph drawn in `ℂ` with unit edges, forcing `a, b` equal at `k` colours, and any `m` unit complex numbers whose sum times `q b − q a` is `1`: the unit-distance graph induced on the chain's points is not `k`-colourable" | G55's "m chained copies plus one closing edge": ✓ — the closing edge is there because `0` and `1` are both chain points of the *induced* graph. **Not proved:** G55's vertex bound `m(n − 1) + 1` (the point set is the image of `Fin m × ι`, at most `m·n`; the sharper count is not stated). |
+| `four_le_chromaticNumber_planeOver_two_three` | "four is at most the chromatic number of the unit-distance graph on the points of `ℂ` with both coordinates in `ℚ(√2,√3)`" | T6's lower half ✓. **Not proved:** the upper bound `≤ 4`; and "no Moser spindle in the field" (`√11 ∉ ℚ(√2,√3)`) is a remark in the docstring, not a theorem. |
+| `eighteen_not_colorable_three` | "the graph on 18 vertices with these 33 listed edges has no proper 3-colouring" | ✓ combinatorially; its geometry (unit edges over `ℚ(√2,√3)`) is not checked in Lean. |
+| `five_le_chromaticNumber_planeOver_seven_of_G4` | "if `G4` holds, five is at most the chromatic number of the plane over `ℚ(√3,√7,√11)`" | T9, conditional ✓; `K(√7) = ℚ(√3,√7,√11)`. |
+
+### Predictions scored
+
+| id | prediction | outcome |
+|---|---|---|
+| P-J14a (0.65) | all three K1 products, gate green, inside 3 h | **met** — stage 1 committed 16:02, the gate green by 16:21 (the whole job well under one hour) |
+| P-J14b (0.60) | the gadget oracle's `decide +kernel` under 60 s | **met** — the whole module elaborates in 4.13 s |
+| P-J14c (0.75) | the six-unit identity by factoring in ≤ 40 lines | **met** — 14 lines, first elaboration that reached it |
+| my C0 (0.97 / 0.75 / 0.80 / 0.90 / 0.80 / 0.70) | per product | all met; the one surprise was structural (`Gadget.transport` is same-size), not arithmetic |
+
+### Corrections owed (proposed; this job does not edit these files)
+
+1. `CLAUDE.md` § Trust ledger: "1034 clean" → **1045 clean** (5 purchases unchanged).
+2. `CLAUDE.md` § The gate and `scripts/vacuity-baseline.txt`'s header: `declarations=6875 refutations-skipped=280 sites=278`,
+   `generic=256` (others unchanged).
+3. `LEDGER.md` § B: ASTRA T5, T6 (lower half) and T9 (the implication) move from "stub" to **kernel**, addresses above; a row for FS-45 D1–D3
+   is the front-page lane's call.
+4. `plans/M2-kernel-lane.md` §2.1 names `Gadget.transport` as the move that carries the rhombus gadget into the 18-vertex graph; it works
+   only inside one `Fin n` — the carrier is `SqrtTwoThree.pullGadget`.
+5. `plans/STUB-chain-theorem.md` / `FRONTIER-STUBS.md` FS-45 row: D1, D2's lower bound and D3's implication are in the kernel; left, G4's
+   certificate (post-ban, FS-45 phase C) and the kernel upper bound `χ(ℚ(√2,√3)²) ≤ 4`.

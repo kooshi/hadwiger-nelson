@@ -1567,6 +1567,24 @@ the form R3 consumes (through a character into `ℚ/ℤ`); and R3's escape direc
 #print axioms inheritanceQuestion_iff
 #print axioms voltageEscapeZ
 
+/-! ## FS-45 — the chain theorem (J14)
+
+A forced pair chained along unit vectors summing to `1/δ` refuses its colour count; its first instance, `χ(ℚ(√2,√3)²) ≥ 4`
+with no Moser spindle; the 18-vertex object by the gadget algebra; and `χ(K(√7)²) ≥ 5` conditional on `G4`. No solver,
+no native evaluation. -/
+
+#print axioms HadwigerNelson.Chain.not_colorable_chain
+#print axioms HadwigerNelson.Chain.add_one_le_chromaticNumber_induce_of_chain
+#print axioms HadwigerNelson.Chain.add_one_le_chromaticNumber_unitDistance_of_chain
+#print axioms HadwigerNelson.Chain.add_one_le_chromaticNumber_planeOver_of_chain
+#print axioms HadwigerNelson.Chain.spindle_of_chain
+#print axioms HadwigerNelson.SqrtTwoThree.sixUnits_sum
+#print axioms HadwigerNelson.SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three
+#print axioms HadwigerNelson.SqrtTwoThree.eighteen_not_colorable_three
+#print axioms HadwigerNelson.SqrtTwoThree.eighteen_colorable_four
+#print axioms HadwigerNelson.SevenConditional.sum_eightUnits
+#print axioms HadwigerNelson.SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

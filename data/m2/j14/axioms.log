@@ -1,0 +1,32 @@
+slot: admitted axioms.sh: mem 40 GiB (hard cap), cpus 0,1,2,3
+==> axioms: this run's full output: build/gate/axioms/20260925T211912Z-4114846.log
+    audited: 1060 records — 1045 clean on the standard axioms, 10 axiom-free, 5 declared purchase(s)
+    clean records, by axiom set:
+        955  [propext, Classical.choice, Quot.sound]
+         49  [propext]
+         40  [propext, Quot.sound]
+          1  [Quot.sound]
+         10  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    RECORDED COUNT IS STALE — update CLAUDE.md § Trust ledger: 1034 clean → 1045
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20260925T191202Z-3928258.log
+    + HadwigerNelson.Chain.add_one_le_chromaticNumber_induce_of_chain  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Chain.add_one_le_chromaticNumber_planeOver_of_chain  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Chain.add_one_le_chromaticNumber_unitDistance_of_chain  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Chain.not_colorable_chain  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.Chain.spindle_of_chain  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SevenConditional.five_le_chromaticNumber_planeOver_seven_of_G4  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SevenConditional.sum_eightUnits  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SqrtTwoThree.eighteen_colorable_four  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SqrtTwoThree.eighteen_not_colorable_three  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SqrtTwoThree.four_le_chromaticNumber_planeOver_two_three  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.SqrtTwoThree.sixUnits_sum  CLEAN [propext, Classical.choice, Quot.sound]
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
+==> axioms: OK — 1045 clean, 10 axiom-free, 5 declared purchase(s)
+    full output: build/gate/axioms/20260925T211912Z-4114846.log

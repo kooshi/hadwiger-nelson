@@ -131,6 +131,9 @@ import Proofs.HadwigerNelson.ThreeAdicBarrier
 import Proofs.HadwigerNelson.SquareClass
 import Proofs.HadwigerNelson.Instances.CompositumFive
 import Proofs.HadwigerNelson.Instances.SqrtEleven
+import Proofs.HadwigerNelson.Chain
+import Proofs.HadwigerNelson.Instances.SqrtTwoThree
+import Proofs.HadwigerNelson.Instances.SevenConditional
 import Proofs.HadwigerNelson.Instances.ThreeFive
 import Proofs.HadwigerNelson.Instances.ZMod121Four
 import Proofs.HadwigerNelson.Instances.IndependenceThreshold
