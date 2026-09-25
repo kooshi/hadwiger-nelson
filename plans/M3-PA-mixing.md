@@ -120,6 +120,48 @@ spindle, then `G` or `H` does. Proposed as a bibliography note (§ proposals), w
 
 **Verdict for this paper:** does not contain J21-MX or any of its parts; it is a neighbour by title only.
 
+## Stage 3 — SAVED: paper 3, `[GodsilEtAl2020]` (Godsil–Roberson–Rooney–Šámal–Varvitsiotis)
+
+**Copy.** C. Godsil, D. E. Roberson, B. Rooney, R. Šámal, A. Varvitsiotis, *Vector coloring the categorical product of graphs*, Math.
+Program. 182 (2020) 275–314, zbl 1442.05056; held as arXiv:1801.08243v1 (24 Jan 2018, 38 pp.), twice under two names (`cmp`: byte-identical):
+`~/source/library/pdf/arXiv-1801.08243.pdf` and `…/arXiv-1801.08243-godsil-roberson-rooney-samal-varvitsiotis-vector-coloring-categorical-product.pdf`.
+**Five authors; R3.10's "Godsil–Roberson–Rooney 2020" and "unread neighbour" are wrong** (held since FS-86, key `[GodsilEtAl2020]`).
+
+**Reading log (this reading; the bibliography's earlier status was "abstract, Def. 1.1, (A′)/(B′), Cor. 4.4 statement").**
+- **Abstract, §1.1 "Summary of results", §1.2 "Applications", §1.3 "Motivations from graph coloring" (pp. 1–7): read in full.**
+- **§2.3 "Vector Hedetniemi" (Thm 2.12 with proof, Remark 2.13): read in full.** "Theorem 2.12. For any graphs G and H we have
+  `χv(G × H) = min{χv(G), χv(H)}`." The proof tensors two dual matrices of `(D′)`.
+- **§4.1 "Factors with different vector chromatic numbers": read from Corollary 4.4 to Lemma 4.5 in full** (the Pak–Vilenchik passage).
+- §2.1–2.2, §3, §4.2–4.4, §5: not read (rank/strict-complementarity machinery for describing all optimal vector colourings; nothing about
+  integral colourings of a product with an arbitrary factor, by the §1 summary).
+- **Reference mined:** "[11] Igor Pak and Dan Vilenchik. Constructing uniquely realizable [graphs]" — Discrete Comput. Geom. 50 (2013)
+  (read at stage 4).
+
+**The find: the spectral threshold (S) is in print, for vector colourings of `K_m × H`.** §4.1, verbatim: "Corollary 4.4 above generalizes a
+result of Pak and Vilenchik [11]. They show that if an r-regular graph H with eigenvalues `λ1 ≥ λ2 ≥ … ≥ λn` satisfies `λ(H) < r/(m − 1)`,
+where `λ(H) = max_{i≥2} |λi|`, then the product `Km × H` is uniquely vector m-colorable." — the **same two-sided normalised threshold** as
+J21-MX's `λ* < 1/(k − 1)` (with `ν` uniform on the neighbourhood, `λ* = λ(H)/r`). And, verbatim: "Pak and Vilenchik also note that their
+result implies that `Km × H` is uniquely m-colorable as well. However, it is known [8] that if H is connected and `χ(H) > m`, then `Km × H` is
+uniquely m-colorable. Since their hypotheses imply that `χv(H) > m`, they also imply that `χ(H) > m`, and so the classical result is already
+more general in this regard." The mechanism GRRSV give: "`−λn = |λn| ≤ λ(H) < r/(m−1)` ⟹ `1 − r/λn > m`", and `1 − r/λn` is a lower bound on
+`χv(H)` (Hoffman's bound in vector form).
+
+**Bearing on J21-MX, part by part.**
+- **(S), the threshold as a hypothesis on a product factor: in print** — Pak–Vilenchik (as reported by GRRSV §4.1), first factor `K_m`,
+  conclusion about **vector** colourings (and, via Greenwell–Lovász, unique ordinary `m`-colourability, which needs no spectral hypothesis).
+- **(F), arbitrary first factor, integral conclusion: not in this paper.** Theorem 2.12 with `χv(H) > k` gives, from `χ(X × H) ≤ k`, only
+  `χv(X) ≤ k` — vector, not integral, colourability of `X`. J21-MX's conclusion `χ(X) ≤ k` is stronger, and its hypothesis is stronger too
+  (two-sided `λ*` against GRRSV's one-sided route through `λ_n`): with only `χv(H) > k` the integral statement is Hedetniemi for `(X, H)` at
+  `k`, false in general for `k ≥ 4` (Tardif 2023) — so the two-sidedness is what the plurality selection spends.
+- **Result 4 / Corollary 4.2** (every optimal vector colouring of `G × H` induced by `G` when `χv(G) < χv(H)`, `H` connected, `G` with a
+  strictly complementary dual of positive diagonal) is the vector analogue of "every colouring of the product descends"; J21-MX's `φ` is an
+  integral selection with no uniqueness claim. Not the same statement.
+- **(B)/(M), (C): not in this paper.**
+
+**Verdict for this paper:** (S) is **partly in print** — the threshold `λ(H) < r/(m − 1)` on a regular factor, against the complete graph
+`K_m`, for vector colourings (Pak–Vilenchik 2013; GRRSV Cor. 4.4 generalises it). The integral statement for an arbitrary first factor
+(F), and the Borel/measurable forms, are not here.
+
 ## Would have searched here (the ban to 2026-10-01)
 
 *(Empty so far: a reading job runs no finite-witness search.)*
