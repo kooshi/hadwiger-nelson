@@ -316,6 +316,26 @@ family** (C4). The owner's P-U5 (0.35): met. S0B §4's reading ("unbounded, at t
 theorem; its heuristic mechanism ("a band character exists at a prime `p` when roughly `p·2^{−2k} ≳ 1`") is not the proof's mechanism, which is
 the isometric closing lemma.
 
+## Stage 5 — SAVED (lemma statements; the close of the job)
+
+- **Lemma statements for the verifier:** `data/fs91/j12/lemma-statements.md` — statements only, self-contained notation, 26 items plus the
+  exact instance list.
+- **Addendum to Stage 3 (the brief's own terms).** The minimal set of J12-MS is exactly what the brief asked to construct: its centre
+  sequences use two letters only (`0`, the parity leaf, and `c₀`, the `X₃` leaf through `C`), so its points are **switching characters**; they
+  are uniformly recurrent (minimality) and have **bounded runs in both directions** (a run of either letter of unbounded length would put the
+  constant sequence in the minimal aperiodic `Ω`). So the construction branch of the brief's Stage 3 is met; the other branch ("every switching
+  character has unbounded runs") is false.
+
+### Proposed edits for the front-page lane (not made here: the standing rules reserve those files)
+
+| file | where | proposed |
+|---|---|---|
+| `LEDGER.md` | a new row after 97 | "One prime, three answers (FS-91 J12): at every split `p`, `Θ₄(R_{{p}}) ⊄ T + A` (the parity/`X₃` heteroclinic, glued on `ℤ[i][1/π̄] ∪ ℤ[i][1/π]`); `MS₄({p})` is false (a minimal set of switching characters, coded by an S-adic subshift, built by a two-leaf closing lemma in the nine-rotation model); the band torsion orders are unbounded (the family `c₀^a0^b`, orders dividing `2·Nm(π^L − (−i)^Lπ̄^L)`). [hand, one mind; tools exact] — `plans/FS91-S1D-one-prime.md`" |
+| `CLAUDE.md` | Frontier item 25 and G76 | after "at one prime two leaves glue (row 97)": "and the failure is total — no prime `p` alone gives `RS₄` or `MS₄`, and its band torsion orders are unbounded (J12)"; G76's *Do* line "count the primes first (one is not enough)" gains "one prime fails for minimal sets too" |
+| `plans/FS89-derivation.md` | §10, the U3 and U5 rows | U3: open → proved at every `p` (J12-ONEa); U5: reading → theorem (J12-C3, C3p) |
+| `plans/FS91-character-local-global.md` | §M.2, the ONE-b sentence | a pointer to Stage 3.2's verdicts: the obligation "switches at bounded gaps" is answered yes by periodic (`T + A`) orbits and does not decide ONE-b; the deciding form is J12-B5 |
+| `plans/FS89-S0B-band-set.md` | §4 reading, §6 dimension reading | §4's reading promoted (J12-C3); §6's "leaf graph is infinite if the torsion orders are unbounded": it is |
+
 ## Theorems this phase proved
 
 | id | statement (one line) | grade | where |
@@ -357,3 +377,4 @@ the isometric closing lemma.
   infinite family. (ii) The complete box `1 ≤ a, b ≤ 10` of that family is enumerated and every admitted member checked by three exact code
   paths — a complete enumeration of a finite set the derivation fixed, logged as the ban's edge; no order was scanned. (iii) S0B's
   `torsion_points.py` was not run past its own `N ≤ 130`; its test was re-implemented for the fourteen fixed characters only.
+- **Stage 5.** None: statements only.
