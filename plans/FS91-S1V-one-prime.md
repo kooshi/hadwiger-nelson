@@ -36,3 +36,119 @@ clean prior): both facts disclosed.
 |    | "yes" (every minimal set is in `T + A`), with proof | 0.15 |
 |    | GAP (neither proved in this budget) | 0.50 |
 | X3 | TRUE: unbounded, by a derived infinite family of periodic band orbits (a periodic orbit of the orbit model is a torsion character, and periods are unbounded) | 0.80; FALSE (bounded, with proof) 0.03; GAP 0.17 |
+
+## Stage 2 — SAVED (phase 1, blind: verdicts on X1–X3)
+
+**Verdicts.** **X1 TRUE at every prime `p ≡ 1 (mod 4)`, no exceptions.** **X2: "no"** — a `U₅`-minimal closed subset of `Θ₄(R₅)`
+disjoint from `T + A` exists. **X3 TRUE** — unbounded, by a derived infinite family (at `p = 5`, and by the same proof at every
+`p ≡ 1 (mod 4)`). Exact checks: `tools/crunch_j13_check.py` → `data/fs91/j13/check.txt` ("OVERALL: PASS", six plants firing for their
+reasons, one faithful partner passing). Notation: FS-89's (§0.1 as quoted in `plans/FS89-derivation.md`); `l` a prime `≡ 1 (mod 4)`,
+`π = π_l`, `w = π/π̄`, `P = (1+i)/2`, `q = (1+i)/3`, `v₀ = q − P = −(1+i)/6`, `R = |v₀| = √2/6`, `Q₀ = [−1/4, 1/4]²`.
+
+### 2.1 The frame used throughout (J13-T1)
+
+Let `ζ ∈ {±1, ±i}` with `w ≡ ζ (mod 3R_l)` (it exists: `w` has norm one, and the norm-one subgroup of `𝔽₉^×` is `{±1, ±i}`), and
+`β̄ := ζw̄`. **J13-T1.** Writing S0B-T1's layer values as `e_t = P + ζ̄^t u_t`,
+`Θ₄(R_l) ≅ {(u_t)_{t∈ℤ} : u_t ∈ Q₀, u_{t+1} − β̄u_t ∈ π⁻¹ℤ[i]}` — a time-homogeneous model. *Proof.* `e_{t+1} − w̄e_t =
+(1 − w̄)P + ζ̄^{t+1}(u_{t+1} − β̄u_t)`; `(1 − w̄)P ∈ π⁻¹ℤ[i]` because the parity character's layer values are `P` at every `t` (its
+orbit obeys the rule); `ζ̄^{t+1}` is a unit; `Q − P = Q₀` is `i`-invariant, so the band is `u_t ∈ Q₀`. ∎ In this frame the **parity leaf**
+is `u_t = β̄^t d` (`|d| ≤ 1/4`, digit `a = 0`), the **order-3 leaf** is `u_t = v₀ + β̄^t d` (`|d| ≤ 1/12`, digit `b = (1 − β̄)v₀`), and
+`f_b(u) = β̄(u − o)` with `o := (1 − β)v₀`. At `l = 5`: `ζ = −i`, `β̄ = (−4−3i)/5`, `b = −i/π`, `o = −(2+i)/5`, `|o| = 1/√5`.
+Checked exactly at `l ∈ {5, 13, 17, 29, 37, 41, 53, 61}` (Part B: `ζ`, both digits in `π⁻¹ℤ[i]`, the order-3 leaf is the constant `v₀`,
+the parity leaf the constant 0, computed from the characters themselves).
+
+### 2.2 X1 — TRUE at every `l ≡ 1 (mod 4)` (J13-T2)
+
+`S₊ := ℤ[i][1/π̄]` (holds `w^m`, `m ≥ 0`), `S₋ := ℤ[i][1/π]`; `S₊ ∩ S₋ = ℤ[i]`, `S₊ + S₋ = R_l`. The order-3 character `χ` (parameter
+`q`) is a band character of `R_l` with margin `1/12` at every `l` (`U_l mod 3 ⊆ {±1, ±i}`, where `χ` takes `1/3, 2/3`); the parity
+character `θ₂` takes `1/2` on every unit vector. For `e` in the lens `|e − q| ≤ 1/12`, `|e − P| ≤ 1/4` (nonempty: `e = q`, `|q − P| =
+√2/6 < 1/4`), define `θ* := χ + λ_{e−q}` on `S₊` and `θ₂ + λ_{e−P}` on `S₋`. Both are `λ_e` on `ℤ[i]`, so they glue to a character of
+`R_l`; `|λ_d(u)| ≤ |d|` puts every `i^k w^m` in the band (forward half for `m ≥ 0`, backward for `m ≤ 0`). **Not in `T + A`:** S0B-T4's
+proof, verbatim at `l` (`⋂_K π^Kℤ[i] = 0`; torsion characters of `R_l` have order prime to `l` and are determined on `ℤ[i]`), since
+`χ ≠ θ₂`. The step rule is never used, so no `p`-dependence enters. ∎ *Exact check (Part A):* at the 8 primes, `e ∈ {q, q + (1+i)/30,
+q + (1−i)/20}`, band on `i^k w^m`, `|m| ≤ 30`, from the characters' own values; gluing on `ℤ[i]`. Plants: `e = (14 + 14i)/51` (inside the
+order-3 disc, outside the parity disc) fails backward only; a mismatched backward archimedean part fails the gluing.
+
+### 2.3 Two lemmas used for X2 and X3
+
+**J13-T3 (digit criterion).** For `θ ∈ Θ₄(R_l)` with digits `h_t := u_{t+1} − β̄u_t`: `θ ∈ T + A` iff `(h_t)` is periodic.
+*Proof.* ⟹: `θ = τ + λ_d` with `|d| ≤ r_τ` (S0B-T2); the margin puts `c_τ(t) + w̄^t d` inside `Q`, so it is the lift, and
+`u_t = ζ^t(c_τ(t) − P) + β̄^t d`; `d` cancels in `h_t`, which is periodic with `c_τ`. ⟸: if `h` has period `L`, take `4L`; then
+`Δ_t := u_{t+4L} − u_t` obeys `Δ_{t+1} = β̄Δ_t`, which is the orbit of `λ_{Δ₀}`, so `(w^{4L} − 1)θ ∈ A`; `(w^{4L} − 1)` maps `A` onto `A`
+with finite kernel on the solenoid, so `θ ∈ T + A`. ∎
+
+**J13-T4 (no bubbles).** Two band orbits that agree at times `s < t` agree on `[s, t]` (the difference is a character vanishing on the
+layers `A_s` and `A_t`, hence on `A_s + A_t ⊇ A_m`, `s ≤ m ≤ t` — S0B §1.3's interval family — and lifts in `Q` are unique). Hence two
+distinct periodic band orbits never meet, and two isometries `F_W`, `F_{W′}` of admissible words with a common fixed point on an admissible
+circle force `W^{|W′|} = W′^{|W|}`. (Used to rule out the "common centre" constructions; recorded because it fixes the shape any
+construction must have.)
+
+### 2.4 X3 — TRUE: the family `b a^p` (J13-T5)
+
+For `p ≥ 0` let `c_p := v₀β̄^p(1 − β̄)/(1 − β̄^{p+1})`, the fixed point of `F_p := f_a^p ∘ f_b` (rotation by `(p+1)·arg β̄`).
+**J13-T5.** If `|c_p| ≤ 1/4` the orbit `c_p → f_b(c_p) → β̄f_b(c_p) → ⋯ → β̄^p f_b(c_p) = c_p` is a periodic band orbit (every point has
+modulus `|c_p|`, since `|f_b(c_p)| = |c_p − o|` and `β̄^p f_b(c_p) = c_p`), hence (a periodic orbit is killed by `w^n − 1`, which has finite
+cokernel) a **band torsion character `τ_p` with layer-0 parameter `P + c_p`**. `|c_p| = R|sin(ψ/2)|/|sin((p+1)ψ/2)|`, `ψ = arg β̄`, so
+**membership ⟺ `|sin((p+1)ψ/2)| ≥ 4R|sin(ψ/2)|`** (`4R = 2√2/3 < 1`; at `l = 5` ⟺ `sin² ≥ 4/5` ⟺ `N(D_p) ≥ 16·5^p`, an integer test, with
+`D_p = π^{p+1} − (−i)^{p+1}π̄^{p+1}` and `c_p = (−i)^{p+1}π̄^p/D_p`). **Infinite:** `β̄` is not a root of unity (not an algebraic integer),
+so `(p+1)ψ/2π` is equidistributed and the members have density `1 − (2/π)arcsin(4R|sin(ψ/2)|) > 0` (0.295 at 5). **Orders unbounded:**
+the digit word `b a^p` is primitive, so the digit period is `p+1` and `τ_p`'s `w`-period is `≥ (p+1)/4`; at `l = 5` directly,
+`ord τ_p ≥ |D_p|/2 ≥ 2·5^{p/2}`. ∎ *Exact checks (Part C; complete enumeration of `p ≤ 40` at 5 and `p ≤ 20` at 13, 17 — a finite range
+the derivation fixed, logged):* every member's orbit (step rule, `Q₀`, closure) and, **independently of the orbit model**, the band on all
+of `U_l mod N` for the torsion character of parameter `P + c_p`. At 5 the members are `p = 0, 3, 5, 8, 10, 13, 15, 18, 23, 28, 33, 38`
+(12 of 41) with orders `3, 48, 234, 1917, 9111, 152886, 708288, 6087369, 484035552, 19215780483, 1523482216314, 60305781079431` — `3` and
+`48` are in S0B-L4's list, the rest lie above its `N = 130`. Plant: the non-member `p = 1` (order 6) fails the independent band check at
+its first value `1/6`; a wrong step lattice `π̄⁻¹ℤ[i]` fails the step check.
+
+### 2.5 X2 — "no": a minimal set outside `T + A` exists at `l = 5` (J13-T6, J13-T7)
+
+*Blocks.* A block of length `n ≥ 1` from a pre-`b` point `L` is `b a^{n−1}`: `L → β̄(L − o) → ⋯ → L′ := β̄^n(L − o)`; its points after `L`
+have modulus `|L − o|`, so it is admissible when `|L| ≤ 1/4` and `|L − o| ≤ 1/4`.
+**J13-T6 (branching at 5).** Let `ρ₁ = 43/200` and `Ω := {L : |L| ≤ 1/4, ρ₁ ≤ |L − o| ≤ 1/4}`. For every `L ∈ Ω` at least two `n ∈ [1, 200]`
+give `L′ ∈ Ω`. *Proof.* `ρ := |L − o| ∈ [ρ₁, 1/4]` and `|L′| = ρ`; `L′ ∈ Ω` iff its angle `δ` from `o` has `cos δ ∈ [C_hi(ρ), C_lo(ρ)]`,
+`C_hi = (ρ² + 1/5 − 1/16)√5/(2ρ)`, `C_lo = (ρ² + 1/5 − ρ₁²)√5/(2ρ)`; both are decreasing in `ρ` on `[ρ₁, 1/4]`, so on a piece `[ρ_a, ρ_b]` the
+arc `[δ_lo(ρ_b), δ_hi(ρ_a)]` is always allowed. The angles `δ(n)` are a translate of `{n·arg β̄}`, `n ≤ 200`, whose largest circular gap is
+`4.148°` (`= ‖78α‖`, `α = arg β̄/2π = 0.3975836…`; three-gap theorem), so an arc of length `≥ 8.296°` holds two of them. On 400 pieces of
+`[ρ₁, 1/4]` the arc exceeds this by at least `3.54°` (60-digit arithmetic, Part D). ∎ Exact sanity: 200 exact rational states in `Ω`
+(four on its boundary) each have `≥ 11` such `n`. Plants: `ρ₁ = 0.1975` (the lens tip) and `N₀ = 60` each break the inequality.
+
+**J13-L1 (entropy compression with state-dependent lists).** States `Ω`, alphabet `[1, 200]`, at each state the two smallest admissible
+letters. For `K = 9` and every length, every `L₀ ∈ Ω` starts an admissible block word with no factor `V^K`. *Proof.* The Grytczuk–Kozik–Micek
+algorithm (append by a random bit; on a `K`-power suffix `V^K` delete `(K−1)|V|` letters) is invertible from its log and final word because
+the lists are a function of the prefix; logs number `≤ 2^{N(H(1/8)+1/8)} = 2^{0.669N}`, final words `≤ 200^L`, so for `N > 24L` some bit string
+reaches length `L`. ∎ (Method cited from memory: `[GrytczukKozikMicek2013]`, "New approach to nonrepetitive sequences" — **not checked
+against the paper here**, a prior-art debt; the argument above is self-contained.)
+
+**J13-T7 (X2 = no).** By J13-L1 and compactness (diagonal limit of centred words of length `2L`; `Ω` closed, alphabet finite) there is a
+bi-infinite admissible block sequence with states in `Ω` and no factor `V^9`; its `u`-orbit lies in `Q₀`, so it is a band character `θ` (J13-T1)
+whose `{a, b}`-digit sequence `s` has `a`-runs `≤ 199` and no factor `V^{10}` with `V ∋ b` (such a factor contains a 9th power of blocks).
+So the orbit closure of `s` has no periodic point, and by J13-T3 the orbit closure `Y` of `θ` meets `T + A` nowhere (digits are continuous and
+equivariant); nor does `Y′ := ⋃_{k<4} i^k Y` (`i` acts by `u ↦ −iu`, digits `h ↦ −ih`). **Every `U₅`-minimal closed subset of `Y′` is a
+`U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A`** (the same for the semigroup `⟨i, w⟩`). ∎ Its digit subshift is an infinite
+minimal subshift. *What J13-T6 is:* an inequality at `l = 5` only; the same route at another `l` needs its own `Ω` (the lens
+`D(0,1/4) ∩ D(o_l,1/4)` is nonempty at every `l`, since `|o_l| ≤ 2R < 1/2`) — **not claimed** beyond 5.
+
+### Would-have-searched-here log
+
+1. X2: would have iterated the piecewise-rotation system numerically to find a recurrent aperiodic orbit (a float finder) — derived the
+   branching lemma and the entropy-compression existence instead; no orbit was exhibited.
+2. X2: would have run the entropy-compression algorithm to print a long admissible 9-power-free word — not run; existence is by counting.
+3. X3: would have extended S0B-L4's torsion list past `N = 130` — derived the family `b a^p` and checked only its members.
+4. Part C's range `p ≤ 40` (5), `p ≤ 20` (13, 17) is a complete enumeration of a range fixed by the derivation (members by an integer test).
+5. Part D's 200 random exact states test a derived claim at sampled points; they are a sanity check, not a witness search.
+
+### C0 scored (phase 1)
+
+X1 TRUE at every `p` (0.93) — met. X3 TRUE by a derived family (0.80) — met. X2 "no" with proof (0.35) — met against my own GAP-favouring
+prior (0.50); the planner's leaked prior (P-MS5 "no", 0.60) was nearer.
+
+## Theorems this phase proved
+
+- J13-T1 — the time-homogeneous `u`-model of `Θ₄(R_l)` at every `l ≡ 1 (mod 4)` [hand + tools exact at 8 primes; this record §2.1]
+- J13-T2 — X1: the heteroclinic `θ* ∉ T + A` in `Θ₄(R_l)` at every `l ≡ 1 (mod 4)` [hand + tools exact at 8 primes; §2.2]
+- J13-T3 — `θ ∈ Θ₄ ∩ (T + A)` ⟺ periodic digits [hand; §2.3]
+- J13-T4 — no bubbles; distinct periodic band orbits never meet [hand; §2.3]
+- J13-T5 — X3: the family `b a^p`, infinite at every `l`, orders `≥ 2·5^{p/2}` at 5 [hand + tools exact (members `p ≤ 40` at 5, `≤ 20` at 13, 17); §2.4]
+- J13-T6 — branching at 5 (`Ω`, two choices in `[1, 200]`) [hand + tools (60-digit inequality on 400 pieces; exact samples); §2.5]
+- J13-L1 — entropy compression with prefix-determined lists of size 2, `K = 9` [hand; method prior art, cited from memory; §2.5]
+- J13-T7 — X2: `MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists [hand, from T1, T3, T6, L1; §2.5]

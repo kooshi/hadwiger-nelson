@@ -1,0 +1,91 @@
+== Part B: premises of the u-model ==
+l=5: {'zeta': (0-1i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=13: {'zeta': (1+0i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=17: {'zeta': (0+1i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=29: {'zeta': (0+1i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=37: {'zeta': (1+0i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=41: {'zeta': (0-1i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=53: {'zeta': (0-1i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+l=61: {'zeta': (1+0i), 'digit_b_in_lattice': True, 'parity_step_in_lattice': True, 'order3_leaf_is_v0_in_u_frame': True, 'parity_leaf_is_0_in_u_frame': True}
+Part B all ok: True
+== Part A: X1 (heteroclinic at every listed prime), e in the lens ==
+l=5 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=5 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=5 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=13 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=13 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=13 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=17 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=17 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=17 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=29 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=29 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=29 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=37 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=37 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=37 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=41 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=41 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=41 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=53 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=53 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=53 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+l=61 e=(1/3+1/3i): gluing on Z[i] True; first band failure None
+l=61 e=(11/30+11/30i): gluing on Z[i] True; first band failure None
+l=61 e=(23/60+17/60i): gluing on Z[i] True; first band failure None
+Part A all ok: True
+== Part C: X3, the family b a^p (complete range p <= PMAX) ==
+l=5 p=0: member; orbit_in_Q0 True steps True closes True N=3 (bits 2) tau_period=4 band_on_U_mod_N=True margin=1/12 U_seen=4 OK
+l=5 p=3: member; orbit_in_Q0 True steps True closes True N=48 (bits 6) tau_period=4 band_on_U_mod_N=True margin=1/48 U_seen=16 OK
+l=5 p=5: member; orbit_in_Q0 True steps True closes True N=234 (bits 8) tau_period=12 band_on_U_mod_N=True margin=7/468 U_seen=24 OK
+l=5 p=8: member; orbit_in_Q0 True steps True closes True N=1917 (bits 11) tau_period=36 band_on_U_mod_N=True margin=167/7668 U_seen=36 OK
+l=5 p=10: member; orbit_in_Q0 True steps True closes True N=9111 (bits 14) tau_period=44 band_on_U_mod_N=True margin=361/36444 U_seen=44 OK
+l=5 p=13: member; orbit_in_Q0 True steps True closes True N=152886 (bits 18) tau_period=28 band_on_U_mod_N=True margin=6943/305772 U_seen=56 OK
+l=5 p=15: member; orbit_in_Q0 True steps True closes True N=708288 (bits 20) tau_period=16 band_on_U_mod_N=True margin=1661/354144 U_seen=64 OK
+l=5 p=18: member; orbit_in_Q0 True steps True closes True N=6087369 (bits 23) tau_period=76 band_on_U_mod_N=True margin=575119/24349476 U_seen=76 OK
+l=5 p=23: member; orbit_in_Q0 True steps True closes True N=484035552 (bits 29) tau_period=24 band_on_U_mod_N=True margin=11868763/484035552 U_seen=96 OK
+l=5 p=28: member; orbit_in_Q0 True steps True closes True N=19215780483 (bits 35) tau_period=116 band_on_U_mod_N=True margin=1953282233/76863121932 U_seen=116 OK
+l=5 p=33: member; orbit_in_Q0 True steps True closes True N=1523482216314 (bits 41) tau_period=68 band_on_U_mod_N=True margin=79615326907/3046964432628 U_seen=136 OK
+l=5 p=38: member; orbit_in_Q0 True steps True closes True N=60305781079431 (bits 46) tau_period=156 band_on_U_mod_N=True margin=6360474048181/241223124317724 U_seen=156 OK
+l=5: members p <= 40: [0, 3, 5, 8, 10, 13, 15, 18, 23, 28, 33, 38] (12/41)
+l=13 p=0: member; orbit_in_Q0 True steps True closes True N=3 (bits 2) tau_period=1 band_on_U_mod_N=True margin=1/12 U_seen=4 OK
+l=13 p=1: member; orbit_in_Q0 True steps True closes True N=24 (bits 5) tau_period=2 band_on_U_mod_N=True margin=1/24 U_seen=8 OK
+l=13 p=4: member; orbit_in_Q0 True steps True closes True N=597 (bits 10) tau_period=5 band_on_U_mod_N=True margin=119/2388 U_seen=20 OK
+l=13 p=7: member; orbit_in_Q0 True steps True closes True N=57120 (bits 16) tau_period=8 band_on_U_mod_N=True margin=3277/57120 U_seen=32 OK
+l=13 p=10: member; orbit_in_Q0 True steps True closes True N=1315911 (bits 21) tau_period=11 band_on_U_mod_N=True margin=265745/5263644 U_seen=44 OK
+l=13 p=13: member; orbit_in_Q0 True steps True closes True N=116634984 (bits 27) tau_period=14 band_on_U_mod_N=True margin=4985155/116634984 U_seen=56 OK
+l=13 p=14: member; orbit_in_Q0 True steps True closes True N=186118929 (bits 28) tau_period=15 band_on_U_mod_N=True margin=8640875/744475716 U_seen=60 OK
+l=13 p=16: member; orbit_in_Q0 True steps True closes True N=2474152797 (bits 32) tau_period=17 band_on_U_mod_N=True margin=166938095/9896611188 U_seen=68 OK
+l=13 p=17: member; orbit_in_Q0 True steps True closes True N=19438278696 (bits 35) tau_period=18 band_on_U_mod_N=True margin=767835599/19438278696 U_seen=72 OK
+l=13 p=20: member; orbit_in_Q0 True steps True closes True N=485257533003 (bits 39) tau_period=21 band_on_U_mod_N=True margin=95338248365/1941030132012 U_seen=84 OK
+l=13: members p <= 20: [0, 1, 4, 7, 10, 13, 14, 16, 17, 20] (10/21)
+l=17 p=0: member; orbit_in_Q0 True steps True closes True N=3 (bits 2) tau_period=4 band_on_U_mod_N=True margin=1/12 U_seen=4 OK
+l=17 p=1: member; orbit_in_Q0 True steps True closes True N=30 (bits 5) tau_period=4 band_on_U_mod_N=True margin=7/60 U_seen=8 OK
+l=17 p=2: member; orbit_in_Q0 True steps True closes True N=99 (bits 7) tau_period=12 band_on_U_mod_N=True margin=53/396 U_seen=12 OK
+l=17 p=3: member; orbit_in_Q0 True steps True closes True N=480 (bits 9) tau_period=4 band_on_U_mod_N=True margin=13/120 U_seen=16 OK
+l=17 p=6: member; orbit_in_Q0 True steps True closes True N=17139 (bits 15) tau_period=28 band_on_U_mod_N=True margin=3505/68556 U_seen=28 OK
+l=17 p=7: member; orbit_in_Q0 True steps True closes True N=154560 (bits 18) tau_period=8 band_on_U_mod_N=True margin=18593/154560 U_seen=32 OK
+l=17 p=8: member; orbit_in_Q0 True steps True closes True N=481437 (bits 19) tau_period=36 band_on_U_mod_N=True margin=249659/1925748 U_seen=36 OK
+l=17 p=9: member; orbit_in_Q0 True steps True closes True N=2186850 (bits 22) tau_period=20 band_on_U_mod_N=True margin=411827/4373700 U_seen=40 OK
+l=17 p=12: member; orbit_in_Q0 True steps True closes True N=95138157 (bits 27) tau_period=52 band_on_U_mod_N=True margin=27165595/380552628 U_seen=52 OK
+l=17 p=13: member; orbit_in_Q0 True steps True closes True N=786851490 (bits 30) tau_period=28 band_on_U_mod_N=True margin=194567353/1573702980 U_seen=56 OK
+l=17 p=14: member; orbit_in_Q0 True steps True closes True N=2316908781 (bits 32) tau_period=60 band_on_U_mod_N=True margin=1161375227/9267635124 U_seen=60 OK
+l=17 p=15: member; orbit_in_Q0 True steps True closes True N=9792612480 (bits 34) tau_period=16 band_on_U_mod_N=True margin=189464197/2448153120 U_seen=64 OK
+l=17 p=18: member; orbit_in_Q0 True steps True closes True N=516376827741 (bits 39) tau_period=76 band_on_U_mod_N=True margin=180968677375/2065507310964 U_seen=76 OK
+l=17 p=19: member; orbit_in_Q0 True steps True closes True N=3961557501600 (bits 42) tau_period=20 band_on_U_mod_N=True margin=125473433863/990389375400 U_seen=80 OK
+l=17 p=20: member; orbit_in_Q0 True steps True closes True N=11029381436403 (bits 44) tau_period=84 band_on_U_mod_N=True margin=5327442880181/44117525745612 U_seen=84 OK
+l=17: members p <= 20: [0, 1, 2, 3, 6, 7, 8, 9, 12, 13, 14, 15, 18, 19, 20] (15/21)
+Part C all ok: True
+== Part D: X2 branching lemma at l = 5 ==
+numeric (rho1=43/200, N0=200): {'alpha': mpf('0.397583617650433274175401076224740525951134523886917894599922342'), 'gmax_deg': mpf('4.14798362416633884526222039071396870785743074465448036582012503'), 'ok': True, 'worst_piece': (0.2499125, 0.25, 3.541267422692433)}
+exact samples: {'n_samples': 200, 'min_choices': 11}
+Part D all ok: True
+== Plants ==
+P1 (e outside parity disc): glue True, first failure ('backward', -40, 1, Fraction(86345461599222680869789442654, 463842297904193401336669921875))
+P2 (backward archimedean part e-q instead of e-P): gluing False
+P3 (p=1, non-member): member False, N=6, band False, first bad (0, Fraction(1, 6))
+P4 (step lattice pibar^-1 Z[i]): steps_ok False
+P5 (rho1 = 0.1975): {'alpha': mpf('0.397583617650433274175401076224740525951134523886917894599922342'), 'gmax_deg': mpf('4.14798362416633884526222039071396870785743074465448036582012503'), 'ok': False, 'worst_piece': (0.1975, 0.19763125, -5.989425014747601)}
+P6 (N0 = 60): {'alpha': mpf('0.397583617650433274175401076224740525951134523886917894599922342'), 'gmax_deg': mpf('25.8954247702668712666525343680492351476467157623934289665186367'), 'ok': False, 'worst_piece': (0.2499125, 0.25, -39.953614869508634)}
+plants fired for their reasons: {'P1_parity_disc': True, 'P2_gluing': True, 'P3_nonmember': True, 'P4_lattice': True, 'P5_rho1_tip': True, 'P6_N0_small': True, 'P3_partner_member_passes': True}
+OVERALL: PASS
