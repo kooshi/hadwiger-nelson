@@ -3,11 +3,12 @@
 *Written by the product owner for a reader with no conversation memory. It supersedes
 `plans/SESSION-HANDOFF-2026-09-24-fs81-open.md`, whose §1 rules table and §3 lessons still apply except where this file updates them.*
 
-**Current state (updated 2026-09-24 night; read before §0):** stages A and C and the first blind verification are done; every
-record is in the repository (`plans/FS85-C-*.md`, `plans/FS85-V-verification.md`, `plans/POROS-2026-09-24-fs85-*.md`, `data/fs85/`).
-Round 3 is running: the 5-part lemma (proved, `plans/FS85-R3-five-part.md`) now under a second blind verifier
-(`data/fs85/briefs/V2-verifier-brief.md`, record `plans/FS85-V2-verification.md`), and an input audit (`plans/FS85-input-audit.md`).
-The close inventory, `plans/FS85-close-inventory.md`, is the full state. The close is due by 2026-10-01.
+**Current state (updated 2026-09-25; read before §0): FS-85 is CLOSED.** Rows 85–87, G75 minted, G54 rewritten with a demotion
+record; `plans/FS85-derivation.md` (39 entries); the plan's §R-close (the week's verdict Paid (abstract)); the close inventory ticked
+(items 1–86). Headline: `F = P = 8Λ` on de Grey's lattice derived from Parts's trees, checked here in full, at two independent
+derivations (row 85). **No milestone is open; the next is Kooshi's choice** (`plans/FRONTIER-STUBS.md`: FS-59, FS-86, FS-83 at the
+top; the default if nobody chooses is rank 1). The finite-witness-free week runs to 2026-10-01; the solver column marks what it can run.
+The next close's fact-audit base is the FS-85 close's last commit. §0–§4 below describe FS-85's opening and are kept for their rules.
 
 ## 0. First acts
 
