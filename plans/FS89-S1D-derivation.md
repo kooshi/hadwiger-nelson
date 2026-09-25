@@ -235,3 +235,62 @@ The list itself is not computed here (the ban; see §5).
   for all `p′`.
 - Over `Q` the images of the other primes' units generate all of `𝔽_{p′}^×`, which is the lever for D-2 (§4).
 - `RS₄({5})` stays false (S0B-T3): D1-L3 fails at rank one.
+
+## §4 — D-2: **RQ₄ holds: `Θ₄(Q) ⊆ T + A`.**
+
+*Stage-1b choice, logged:* D-1 ended in a proof at `{5, 13}` (§3), so the brief's branch is D-2. D-2 turned out to need no weak
+approximation: D1-C2's bounded torsion order at `{5, 13}` carries the layering, with `R₆₅` in place of every `R_S`.
+
+**D2-L1 (bounded-order layering).** Let `R ⊆ Q` be a subring with `U_R := U_ℚ ∩ R` and `ℤ[U_R] = R`. Suppose `R` is
+`p`-divisible for some prime `p` (so `λ_c` vanishes on a nonzero ideal of `R` only if `c = 0`). Suppose also that
+`Θ_β(R) ⊆ T_N + A` for some `N`. Then `Θ_β(Q) ⊆ T_N + A`. [hand]
+*Proof.*
+1. Let `θ ∈ Θ_β(Q)` and `u ∈ U_ℚ`. Then `(θ∘u)|_R ∈ Θ_β(R)`, because `uU_R ⊆ U_ℚ`.
+2. So `θ|_{uR} = t_u + λ_{a_u}`, with `N t_u = 0`.
+3. On `I_u = R ∩ uR`, a nonzero ideal of `R`, we get `t_1 − t_u = λ_{a_u − a_1}`. Multiplying by `N`, `λ_{N(a_u − a_1)}`
+   vanishes on `I_u`, so `a_u = a_1 =: a`.
+4. So `ψ := θ − λ_a` has `Nψ = 0` on every `uR`, hence on `Σ_u uR ⊇ ℤ[U_ℚ] = Q` (S0A-1). ∎
+
+(This is U1, as V proved it, with the order bound made uniform.)
+
+**D2-T1 (RQ₄).** `Θ₄(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`. [hand + tools exact, resting on §2–§3]
+*Proof.*
+- D1-T2 and D1-C2 give `Θ₄(R₆₅) ⊆ T_N + A` with `N` the lcm of the finitely many band torsion orders there. (`τ + λ_d ∈ Θ₄`
+  forces `τ ∈ Θ₄`, by S0B-T2's density.)
+- `R₆₅` is 5-divisible, and `ℤ[U₆₅] = R₆₅`. Apply D2-L1. ∎
+
+With verified U2 (V-A2), `Θ₄(Q)` is then exactly the explicit compact set of 13 leaf discs and 16 margin-0 points. **Inhabitant:**
+`θ₂ ∈ Θ₄(Q)`.
+
+**Consequences, at their own grades (not re-derived here):**
+- **C-HD1** (S0A-6, hand at FS86-dB-Theta's grade): HD1 (`Θ₄(R_F) ⊆ T`) for ℚ(√59), ℚ(√83), ℚ(√131).
+- **C-47** (S0A-8, hand, given Lemma R and Weil): `Θ₄(R_{ℚ(√47)}) = ∅`. Every character four-colouring `x ↦ ⌊4θ(x)⌋` of ℚ(√47)'s
+  plane is excluded.
+- **Scope (plan §0.2).** These are statements about character colourings only. Nothing here bears on `χ(ℚ(√47)²)` itself, or on
+  non-character colourings.
+
+**Audit, at the rate I would audit a counterexample I disliked.** The load-bearing steps and how each could fail:
+- (a) **D1-L3's density**, which is new here. It fails if `H₀` is not open (it is open: `w_q^4 = 1 + p^a·unit`), or if the
+  `v`-line is not dense (strong approximation), or if the other coordinates are not kept small (they are: `j` is fixed before
+  `k → ∞`).
+- (b) **D1-L4.** One line; `θ₂(U_S) = {½}` is checked in the proof.
+- (c) **D1-L5 and D1-L6.** Hand, checked exactly with firing plants. The right exit is the one that uses the second prime, and
+  plant (i) shows it fails without it.
+- (d) **D1-C2's compactness step.**
+- (e) **D2-L1's `a_u = a_1`.** It needs `N` uniform, which is D1-C2.
+
+The weakest link, by my own reading, is (a), because nothing in Stage 0 exercised it. It is the step I most want V to re-derive.
+
+**Toward RQ₅ (not proved; the next step, sketched with its failure points).** At `[1/5, 4/5]`, D1-L4 becomes:
+- `θ₂ ∈ M − M` ⟹ `2x ∈ Θ_{2/5}(R_S)` for some `x ∈ M`.
+- FS81-T3 layered by D2-L1 (with `R₅`, `N = 6`) gives `2x = θ₂ + λ_d` with `|d| ≤ 1/10`.
+- So `M` meets a corner **leaf disc** (radius 1/20), not a corner point.
+
+D1-L5 then says that near that leaf the array is exactly on the leaf on windows. What is left is the exit lemma with a rotating
+displacement. A two-minute hand check of the right exit finds:
+- one class admissible for every displacement;
+- a second class, `(2−i)/5`, admissible only at the extreme displacement `(1/20, 0)`;
+- `w̄₁₃ ≡ 3` sending the first to the second and the second to a never-admissible class, so three rows kill the exit.
+
+The other three exits and the finite-torsion step at 1/5 are unchecked. If they hold, the chain gives RQ₅, and with S0A-9, C-167:
+no character five-colouring of ℚ(√167)'s plane.
