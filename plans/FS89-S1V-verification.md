@@ -213,9 +213,11 @@ nothing there. ∎
 
 **Lemma V3c (the sweep bound).** Let `τ` be a torsion character of `S₊` with values in `B` on the forward unit vectors. Suppose it has no
 `π̄_p`-part, its prime-to-`p` part has order `M′`, and its `π_p`-part has level `k`. Then `k ≤ J(M′) := v_{π_p}(w₅^o − 1)`, where
-`o = lcm(ord_{M″}(w₅), ord_{π_p}(w₅))` and `M″` is `M′` with its `π₅`-part removed. *Proof.* Put `g := w₅^o`; then `g ≡ 1` mod `M″` and
-mod `π_p`, and `g ≠ 1`. Put `j := v_{π_p}(g − 1)`, finite. Since `π_p` is unramified over the odd `p`, the image of `⟨g⟩` in
-`(ℤ[i]/π_p^k)^× ≅ (ℤ/p^k)^×` is the whole subgroup `1 + p^jℤ/p^k`. Take `u₀ = w₅^m`, with `m` at least the `π₅`-level, so that the
+`o = lcm(ord_{M″}(w₅), ord_{π_p}(w₅))` and `M″` is `M′` with its `π₅`-part removed. (Levels are read on the parameter `c`: a
+`π_p`-denominator `π_p^{−k}` in `c` means `τ = Re(c̄·)` reads `x` modulo `π̄_p^k`. Since `w̄₅ = w₅^{−1}`, the orders and valuations of
+`w₅` at `π_p` and at `π̄_p` coincide, so `o` and `J` do not depend on which of the two places is meant.) *Proof.* Put `g := w₅^o`;
+then `g ≡ 1` mod `M″` and mod `π̄_p`, and `g ≠ 1`. Put `j := v_{π̄_p}(g − 1) = v_{π_p}(g − 1)`, finite. Since `π̄_p` is unramified
+over the odd `p`, the image of `⟨g⟩` in `(ℤ[i]/π̄_p^k)^× ≅ (ℤ/p^k)^×` is the whole subgroup `1 + p^jℤ/p^k`. Take `u₀ = w₅^m`, with `m` at least the `π₅`-level, so that the
 `π₅`-part vanishes along the sweep. Then `τ(u₀g^t) = τ(u₀) + s·ũ₀(g̃^t − 1)/p^k`, with `s·ũ₀` a unit. So the values fill the coset
 `τ(u₀) + (1/p^{k−j})ℤ/ℤ` if `k > j`. That coset has step `≤ 1/p < 1/2`, so it meets `(−1/4, 1/4)`: contradiction. ∎
 
@@ -238,7 +240,22 @@ irrational heteroclinics (S0B-T5, `b₊ ∉ ℚ(i)`) and the switching family. T
 trick), so U4's "13 kills the infinitely-switching family" is not addressed here. **Bearing:** V4 says the rational-heteroclinic part of
 `Θ₄(R₅)` is outside the restriction image `Θ₄(R_{5,p})|_{R₅}`. That is the image V-A1 shows RQ₄ is about.
 
-**Divergence table** — to be filled after S0B §6 is opened (only after this verdict is committed).
+*Correction made after the commit of this verdict (d3f88806), before any other file was opened: V3c's first text read the sweep at
+`π_p` where the character reads `x` at `π̄_p`. The numbers are the same at both places (`w̄₅ = w₅^{−1}`), so the verdict is unchanged. It
+was found by re-deriving the adelic form of V3b while writing the table below.*
+
+**Divergence table** (S0B §6, opened after commit d3f88806).
+
+| step | S0B §6 | V | kind |
+|---|---|---|---|
+| rows | `Θ∘w₁₃ⁿ|_{R₅}` is heteroclinic between `T₁⁽ⁿ⁾`, `T₂⁽ⁿ⁾` | V3a, with the `p^b w^b = π_p^{2b}` proof that each half stays `T + A` and the archimedean parts rotate | agree; V supplies the proof |
+| the difference | "the character of `w̄₁₃ⁿ(q₁ − q₂)` minus its 13-principal part. Its 13-part has exact order `13^{|n|}`" | exactly `λ_{w̄ⁿD}` on `ℤ[i]`, `D = d₂ − d₁`, with nothing subtracted. Its `π₁₃`-level is `n − v_{π₁₃}(D)` | **wording slip in S0B**: taken literally, the subtraction deletes the 13-part that the next sentence uses. The intended content agrees |
+| "prime to 13" | a hypothesis | not needed: a 13 in the difference shifts `v(D)` by a constant | **strengthening** |
+| bounded prime-to-13 part | asserted | V3b: the prime-to-`p` part of each row is `w̄ⁿ` times row 0's, so it has the same order | agree; V supplies the proof |
+| the sweep | "the image of `⟨w₅⟩` contains `1 + π₁₃^{v′}ℤ[i]/π₁₃^k` on the kernel of the prime-to-13 part" | V3c needs the 13-part to sit at **one** of the two places above 13. With parts at both, `w₅ ↦ (α, α^{−1})` does not sweep a full coset. V3b gives this for `|n| ≥ b₀`: the part at the other place loses a level per row and gains none | **gap in S0B, filled**: a missing step, not a wrong one |
+| `w₅ mod π₁₃` | `≡ 2`, order 12 | the same; and `J = 1` exactly (`Im((2+i)^{12}) = −2³·3²·11·13`) | agree; V adds `J` |
+| order-26 characters | consistent (`k = 1` allowed) | consistent (`J = 1`) | agree |
+| the switching family | a reading, with a sketch and a killing test | not reached by V4 | no divergence (not claimed) |
 
 ## Would-have-searched-here log
 
