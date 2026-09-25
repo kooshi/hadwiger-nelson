@@ -251,6 +251,38 @@ C0 scored: all four as predicted; C2c's scope point was predicted at stage 1 and
 - `LEDGER.md` rows 95–97 and `CLAUDE.md` Frontier item 25 / G76: "torsion plus archimedean" is right in that reading; if row 95 is widened to
   every `k`, say "archimedean at every place of `F(i)`" once.
 
+## Stage 4 — skipped
+
+No blind stage ended GAP, so the fallback (J01's Stage 3b audit list) was not needed; stage 5 reads J01's whole record instead.
+
+## Stage 5 — SAVED (the divergence table; J01's record `plans/FS91-S0V-band-to-nine.md` opened after commit 965b68e3)
+
+Opened: J01's record in full (§2.3, §3.6.1–§3.6.3, the stage-3 summary, Stage 3b, its theorem table). Not opened: `data/fs91/j01/`,
+`tools/crunch_j01_*`, J01's report and commits (the brief unfences only the record).
+
+| # | item | J01 | J03a (this record) | kind of difference |
+|---|---|---|---|---|
+| 1 | SW-m | TRUE at `k ≥ 3`; `m` least with `p^m > k/2`; the expanding power `w_p^{±(s+m)}` | TRUE at `k ≥ 2`; the same `m` (`2p^m > k`) and the same power | **scope**: `k = 2` also holds (trivially); no difference of truth or route |
+| 2 | normalisation of `ψ_v` | robust to any conductor (a larger `m` absorbs it) | used the standard character, "up to a sign" | J01 is more general; no conflict |
+| 3 | one-digit SW's edge | sharp at `k = 2p` by an explicit offset (A2) | sharp at `k = 2p`, worst shift `1/(2p)` (plant P1) | agreement, independent tools |
+| 4 | PA-B2, case 1 for a minimal `M` | `[Berend1984]` Thm I.2 (every minimal set of a group ℱ-flow is *restricted*), applied to `M + (−M) = R̂_S`; the ℱ-flow chain built from congruence subgroups mod `q^k`, `q ∉ S`, hypotheses (1)–(3) checked | the joining `J = {(g, x) : x + g ∈ M}` with Furstenberg's F-flow disjointness, the hypotheses (dense periodic points, total transitivity) checked in one line each | **route**: the same theorem in two forms (restrictedness is disjointness's corollary); **J01's check of the hypotheses is the more careful one** — mine names them at sketch level |
+| 5 | `M ≠ R̂_S` | automatic: `R̂_S` is never minimal (`{0}` is a closed invariant proper subset) | argued from `0 ∉ Θ_k` and listed as a second line reading `k` | **J01 is sharper; my §3.2 and §3.5 over-count**: that line needs no `k`, so **the band enters the whole chain exactly once, at SW-m's `m`**. Corrected here, not in the saved blind stage |
+| 6 | a Berend-free route to `MS_k` | R2, the parity (doubling) line: case 1 gives `y, y + θ₂ ∈ M`, so `2y` lies in the band `[2/k, 1 − 2/k]`, and the chain terminates at every `k` | none; I used PA-B2 only | **route**: J01 has a second, independent route to the minimal-set step; I did not verify it (outside my brief) |
+| 7 | VB1's lines at a general band | re-derived at `k = 6`; only the SW call reads `k` | re-derived at every `k`; only the SW-m call reads `k` | agreement |
+| 8 | VB3, VB4, D2-L1, G1 | band-free, "the same band on both sides" | band-free; VB4's averaging uses only closedness of `B_k` | agreement |
+| 9 | the order bound `N` | "finite at `R₆₅`, hence bounded"; VB4 with base `R_S` carries `N` straight to `Θ_k(Q) ⊆ T_N + A` | the same `N_k`; plus the transfer `ord(τ) = ord(τ\|_{ℤ[i]})`, so `Θ_k(Q) ∩ T` is itself finite with the same orders | **route**: my transfer is an alternative, not needed once VB4's conclusion is read as `T_N + A`; no conflict |
+| 10 | the field clause's `A` | "`Θ_k(R_F) ⊆ T + A` for every `F ⊆ ℝ` (by S0A-2)", `A` not re-specified | TRUE with `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1` (S0A's convention), **FALSE with one embedding's `λ_e`**: ℚ(√3), `k = 4`, `τ + Re(ē σ₂(·))` | **scope**: J01's statement is right in its source's convention; the notation paragraph it and the brief inherit gives only `λ_e`, under which it is false. A correction to the notation is owed (§3.7) |
+| 11 | the restatement ("values arbitrarily close to 0") | stated as equivalent | proved equivalent (§3.2) | agreement |
+| 12 | what is not given | no explicit band-`k` torsion list; no bound beyond finite; nothing about `χ` or non-character colourings | the same (`N_k` non-effective) | agreement |
+| 13 | tools | `R_{5,13}`'s chart at `v = (2 − i)`, `m ≤ 3`, `k ≤ 60`; plants: conjugate place, closed arc | five primes, both places, balls with `s < 0` and `c₀ ∉ ℤ_p`, `k ≤ 200`, JC's radius; plants: one digit at `2p`, a unit at `v`, JC with `p′ = p` | independent code, agreeing |
+
+**Differences of truth: none.** Every claim J01 made that my brief put to me is TRUE on my blind reading, with one scope qualification
+(row 10) J01 did not state and one over-count of my own (row 5) that J01's record corrects. The multi-digit step J01 flagged as "new in this
+record and has had one reader" has now had two, and it is two lines.
+
+**C0 scored** (stage 1's table): C1 0.95 → TRUE; C2a 0.85 → TRUE; C2b 0.85 → TRUE; C2c 0.75 (wide reading) → TRUE, and the narrow reading's
+failure, predicted in words at stage 1, confirmed by a counterexample.
+
 ## Theorems this phase proved
 
 | id | statement | grade | address |
@@ -266,6 +298,8 @@ C0 scored: all four as predicted; C2c's scope point was predicted at stage 1 and
 | J03a-9 | With `A` read as one embedding's `λ_e`, the field clause is false: over ℚ(√3), `τ + Re(ē σ₂(·))` (`τ` the additive three-colouring, `0 < \|e\| ≤ 1/12`) is in `Θ_4` and not torsion plus `λ_f` | hand | §3.4 |
 
 ## Would-have-searched-here log
+
+- Stage 5: none.
 
 - Stage 3: I would have enumerated the torsion band characters of `ℤ[i]/M` at `k = 10..20` to watch `N_k` grow; instead `N_k` is left non-effective, which is all the gluing needs. I would have run a float orbit of a random character of `R_{5,13}` to watch its values approach 0; instead the equivalence and the theorem are derived.
 
