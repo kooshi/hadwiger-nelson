@@ -349,3 +349,71 @@ and a torsion point on a corner leaf is that corner. ∎
 **Where it stops.** At band 1/6 the parity line gives `2x ∈ Θ₃`, so `x` lies on a corner leaf (radius 1/12) or on an order-6 torsion
 point over `X₃`. Whether those leaves are isolated at 1/6 (the exit lemma with larger displacements) is unchecked; the plant at
 `r = 3/10` shows the exit lemma fails once displacements are large. Six is not this milestone's target.
+
+## §6 — C0 scored, the log, and what V should hit hardest
+
+**C0 scored** (predictions made at the top of this record, before any derivation):
+
+| question | predicted | outcome |
+|---|---|---|
+| `MS₄({5, 13})` true | 0.65 | **true** (D1-T1, for every `|S| ≥ 2`) |
+| D-1a landed as a proof | 0.40 | **proof** |
+| `RS₄({5, 13})` true | 0.45 | **true** (D1-T2) |
+| D-1b landed as an exclusion proof | 0.15 | **proof**. My prior was too low: I did not foresee that case 1 forces a visit to a corner, where the band has no room |
+| `MS₄({5})` false | 0.75 | not decided here. D1-L3 fails at rank one, so the question is open |
+
+**What the milestone's reading U4 and KT-1 / KT-2 become.**
+- U4 ("13 kills the switching family") is confirmed as a theorem, D1-T2.
+- KT-1 cannot fire: there is no counterexample at `R₆₅`.
+- KT-2 did not fire: Berend's route went through. Its case 1 at the band was replaced by D1-L4 / D5-L1.
+- The §S.4 rank-two window was not run. Its purpose (U4's killing test) is superseded by a proof, so it would measure nothing the
+  derivation leaves open.
+
+**For V, ordered by how much rests on each step and how new it is:**
+1. **D1-L3.** Case 1 ⟹ `M − M = G`: the `p`-adic non-lacunary step and strong approximation.
+2. **D1-L6 / D5-L3.** The exit lemmas: hand, plus the two tools.
+3. **D1-C2 / D5-C2.** Finite torsion at `{5, 13}`, by compactness.
+4. **D2-L1.** Layering, with the order bound made uniform.
+5. **D1-L2.** Case 2.
+6. **D5-L1.** The band-1/5 parity line, via FS81-T3 layered.
+
+**Would have searched here** (one line per move made by derivation instead):
+- The §S.4 window at `K = 1, 2`, to "see" whether rank two kills the switching family. Instead: D1-T2, which covers every depth.
+- Enumerating band torsion characters of `R₆₅` to bound their order. Instead: D1-C2, finiteness by compactness plus corner isolation.
+  The list itself is not computed.
+- Hunting for a rank-two switching array near the S0B lens. Instead: the case-1 dichotomy, which says any non-`T + A` point must
+  reach a corner, so the lens is irrelevant at rank two.
+- The exit lemmas were checked by finite exact computation over the 5 and 13 digit classes (a fixed set per lemma, no witness
+  sought), with firing plants. They are logged here because they loop over classes.
+
+**Close-inventory items (sent to the owner):**
+- *Tool defect, mine, caught.* The first version of `tools/fs89_s1d_corner_check.py` planted two controls that could not fire
+  (`w₁₃ → 1` in the up exit, whose multiplier is `w̄₅`; a band widening of 1/20, which keeps one admissible class). Both stayed
+  silent, and I replaced them with plants derived to fire. G21's "a control whose failure mode is unreachable" happened again.
+- *Scope.* RQ₄ and RQ₅ are about character colourings only (plan §0.2).
+- *Prior-art debt left.* Furstenberg Prop. IV.1 is not needed at bands 1/4 and 1/5; it is still not held. Berend 1983 §4 is not
+  needed either.
+- *New question (stub candidate).* The band-1/6 exit lemma, and `MS₄({5})` at rank one.
+
+## Theorems this phase proved
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| D0-T1 | rank-`r` orbit model: `Θ_β(U_S)` ≅ arrays `e_m ∈ Q_β` on `ℤ^S` with one step rule per prime; squares complete uniquely; rows at `S = {5,13}` are S0B-T1 orbits | hand | §1 |
+| D1-L2 | case 2 of Berend's dichotomy ⟹ the set meets `T + A`; minimal ⟹ inside `T + A` | hand | §2 |
+| D1-L3 | case 1 and `|S| ≥ 2` ⟹ `M − M = R̂_S` | hand | §2 |
+| D1-L4 | `M ⊆ Θ₄`, `θ₂ ∈ M − M` ⟹ `M` contains a corner (`2x = θ₂`) | hand | §2 |
+| D1-T1 | `MS₄(S)` for every finite `S`, `|S| ≥ 2` | hand | §2 |
+| D1-L5 | near a corner pattern on an `m`-edge a band array equals it (`S = {5,13}`) | hand + tools exact | §3 |
+| D1-L6 | corner exit lemma at `{5,13}`, band 1/4 | hand + tools exact | §3 |
+| D1-C1 | corners are isolated in `Θ₄(R₆₅)` | hand + tools exact | §3 |
+| D1-T2 | `RS₄({5,13})`: `Θ₄(R₆₅) ⊆ T + A` | hand + tools exact | §3 |
+| D1-C2 | `Θ₄(R₆₅) ∩ T` finite; `Θ₄(R₆₅)` a finite union of leaf discs | hand + tools exact | §3 |
+| D2-L1 | bounded-order layering: `Θ_β(R) ⊆ T_N + A` ⟹ `Θ_β(R′) ⊆ T_N + A` for `R ⊆ R′ ⊆ Q` | hand | §4 |
+| D2-T1 | **RQ₄**: `Θ₄(Q) ⊆ T + A` | hand + tools exact | §4 |
+| D5-L1 | band 1/5: `θ₂ ∈ M − M` ⟹ `M` meets the corner leaf discs | hand (uses FS81-T3) | §5 |
+| D5-L2 | near a corner leaf a band array is on the leaf | hand | §5 |
+| D5-L3 | corner-leaf exit lemma at `{5,13}`, band 1/5, displacement ≤ 0.06 | hand + tools exact | §5 |
+| D5-T1 | `RS₅({5,13})`: `Θ₅(R₆₅) ⊆ T + A` | hand + tools exact | §5 |
+| D5-C2 | `Θ₅(R₆₅) ∩ T` finite | hand + tools exact | §5 |
+| D5-T2 | **RQ₅**: `Θ₅(Q) ⊆ T + A` | hand + tools exact | §5 |
