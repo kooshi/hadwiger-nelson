@@ -2,7 +2,8 @@
 
 Brief: `data/fs89/briefs/S0A-gluing-verifier-brief.md` (commit 0a346e98). Verifier G, Opus 5.5, 2026-09-25.
 Closed until every C1 verdict is saved: the advisor's record, the FS-89 stub's banner, the close inventory, the S0B record and
-`data/fs89/s0b/`, `git log` from 052707ac on. None opened.
+`data/fs89/s0b/`, `git log` from 052707ac on. None opened before the C1 verdicts were committed (8f06f686, 5d60ba90); then only the
+advisor's record, for C2. The S0B record, `data/fs89/s0b/`, the stub's banner and the close inventory were never opened.
 
 ## C0 — predictions (written before any file other than the brief was read and before any derivation was written)
 
@@ -198,6 +199,89 @@ local form) and Weil. Grades unchanged in kind (hand).
 **Not needed at any place:** an all-levels certificate (the band collapses every tower to level 1, given the density of `U`), any archimedean
 count, or anything at a split place. **Needed beyond the places:** the five-band rational statement itself, which is *stronger* than the
 four-band one (`Θ₄ ⊆ Θ₅`), and Lemma R and `[Zhang2012]`.
+
+## C2 — comparison with the advisor's sketch (`plans/POROS-2026-09-25-fs86-next.md` §3 "The gluing, stated so a derivation agent can check it", §3 card 1, §4 row A′, §5, §7)
+
+Opened only after the four C1 verdicts were committed (8f06f686, 5d60ba90). Line by line:
+
+| # | advisor's line | mine | divergence |
+|---|---|---|---|
+| D1 | Setup: `ℤ[U_ℚ] = ℤ[i][1/p]`, `1/5`, layers in `R`, cover, restriction band | G0, same three facts, proved | none |
+| D2 | Hypothesis: `T_N + A` with a **fixed** `N` | same, and Lemma N₀: the fixed `N` is automatic, `N = 168` | **addition**: "⊆ T + A" and "⊆ T_{168} + A" are the same hypothesis on `ℤ[U_ℚ]`; the sketch assumed what it could have derived |
+| D3 | The step: `ψ = Nθ` is `L_b` mod 1 per layer; two decompositions differ by `D` with `5^{−k}D ∈ ℤ` ∀k, so `D = 0`; one ℚ-linear functional; uniqueness since `T ∩ A = 0` | same argument (steps 2–6); I define the lift intrinsically as a limit and state "the lift equals ψ mod 1" as its own step | **none of truth**; route identical. The sketch leaves additivity and "lift ≡ ψ mod 1" unsaid (each is one line: sums of decompositions are decompositions; `ψ(u) = ℓ_u(1)` mod 1 by the layer statement at `y = 1`) |
+| D4 | (not in the sketch) | the gluing reads only `ℤ[1/5]` in each layer, never the band, and works for every subfield `F ⊆ ℝ` | **addition** (scope widened) |
+| D5 | Conclusion via FS86-dB-Theta | same; G1's output is dB-Theta's hypothesis exactly (a torsion character of `R` is torsion at the stable places) | none |
+| D6 | ℚ(√47): "every factor's ratio below 1/4, CL1's input … a circular colouring of ratio 4 of a product with `χ_f > 4` (Zhu)" | G2: density removes the archimedean part (the torsion part alone is band), the band collapses every odd tower to level 1, and a middle-half count plus Weil replaces the product theorem | **different route, same conclusion.** The sketch's route is valid if "the product" means the stable factors only, or if it includes the real places with `[AmbrusEtAl2023]`'s `m₁ ≤ 0.247` (then `χ_f(ℝ²) > 4`). Mine needs neither `[AmbrusEtAl2023]`, nor FS-66's all-levels certificates, nor Zhu/Zhang |
+| D7 | ℚ(√167) at 1/5: "five refused at 23 at every level, `α(Γ₂₃) ≤ 97`, ratio 0.183; the same argument would need the rational statement at [1/5, 4/5]" | G3: per-place table | **two omissions in the sketch.** (a) **43 is stable for ℚ(√167) and Hoffman does not refuse five there** (0.21376 > 1/5); G3 needs FS-53's certificate `α(Γ₄₃) ≤ 365 < 369.8`. (b) **"The same argument" fails at 1/5 if its product includes the real places**: the plane's `χ_f ≤ 4.36 < 5` (Croft's `m₁ ≥ 0.229 > 1/5`, which is exactly why FS86-CL1 says "nothing at five colours"), so Zhu gives no contradiction. It closes only through the density step (G3 step 3: a linear archimedean part averages away), which the sketch does not state. Both omissions are filled in G3; neither is a failure of the conclusion |
+| D8 | §5: "If instead the single-prime band set comes out torsion-plus-archimedean, confidence goes to high: HD1 lands." §7 hunch falsifier: "the exact band set of `ℤ[U₅]` at [1/4, 3/4] is torsion-plus-archimedean only". §4: "single prime already enough ~0.2" | a single-prime statement feeds the gluing only if it is `Θ₄(ℤ[U₅]) ⊆ T_N + A` with a **fixed** `N` | **substantive divergence — the sketch's implication overclaims.** A split component of a band character at any prime `p ≠ 5` (a `p`-adic component, `p ≡ 1 mod 4`) restricts to every `ℤ[U₅]`-layer as a **torsion** character (`ℤ[U₅] ⊂ ℤ_p[i]`), of order growing with the layer's pole at `p`. So "`Θ₄(ℤ[U₅]) ⊆ T + A`" cannot see it, and the gluing with base `ℤ[U₅]` needs the torsion order bounded. At three colours C1(5) happened to deliver `N = 6` (parity and the order-3 types only), which is exactly why G74 worked with one prime. On `ℤ[U_ℚ]` the bound comes free (Lemma N₀), but only because `U_ℚ` is dense in every non-split local circle. `U₅` is rank one and is not dense there. **The right falsifier for "one prime is enough" is "the exact band set of `ℤ[U₅]` has only finitely many torsion types" (plus no 5-adic points), not "is T + A".** Reading, with its killing test: at four colours it probably has infinitely many torsion types, at primes `𝔭 ∣ Φ_k(w₅)` where `U₅` has an orbit of size `4k`; the count is `N(𝔭)·2^{−2k}` with `N(𝔭)` up to about `25^{φ(k)}`. The smallest case, `k = 5` at `𝔭 ∣ 41`, fails by hand (`c·H` for `H` the index-2 subgroup is never the middle half mod 41). Killed if S0B's exact set shows finitely many torsion types |
+| D9 | §3 hunch "one prime is not enough": its mechanism is 5-adic non-torsion points (a digit count `5·(1/2)² = 1.25`) | D8's mechanism is torsion at other primes, of unbounded order | **a second, independent reason** the single prime may fail; both point to the all-primes statement |
+| D10 | "FS-89 becomes a field-free problem over ℚ(i)" | C3: it is the case `F = ℚ` of the uniform statement, and HD1's stuck case (infinitely many split places) for the field ℚ | agreement, sharpened: **field-free, but not easier in kind**. The advisor's §8 frame-risk sentence ("de Bruijn's obstruction … may simply reappear in the rational setting") is correct, and C3 says where |
+
+The registered hunch `gluing-reduces-hd1-to-the-rational-circle`: **confirmed**, both halves (HD1 via dB-Theta; ℚ(√47) by G2). Its
+falsifier (a band character with every layer restriction in `T + A` but not globally) is **impossible**, by Lemma N₀.
+
+## C3 — what the rational statement must be, and whether it is false for trivial reasons
+
+**What it must be.**
+- **Ring:** `ℤ[U_ℚ]` with **every** split prime inverted. The gluing itself needs only one (any `p ≡ 1 mod 4`, for divisibility). But the
+  fixed `N` needs `U_ℚ` dense in every non-split local circle (Lemma N₀), and a ring `ℤ[U_S]` with `S` finite has a finitely generated
+  unit group that is not dense there. Split components at primes outside `S` also restrict to `ℤ[U_S]` as torsion (D8). A smaller ring
+  works only if its band set has bounded torsion order.
+- **Band:** `[1/4, 3/4]` for HD1 (G1) and ℚ(√47) (G2); `[1/5, 4/5]` for ℚ(√167) (G3). The five-band statement is the stronger one:
+  `Θ₄ ⊆ Θ₅`, so it implies the four-band statement.
+- **Exact form:** `Θ_k(ℤ[U_ℚ]) ⊆ T + A`; the order bound is then automatic (`N = 168` at four colours; finite, not computed, at five).
+- **Equivalence** [hand]: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for **every** subfield `F ⊆ ℝ`. ⟸ is the instance `F = ℚ`
+  (`R_ℚ = ℤ[U_ℚ]`); ⟹ is G1. So the rational statement is not a lemma on the way to the uniform statement: **it is the uniform
+  statement**, located at its hardest-looking instance. ℚ has no tight place, so its conclusion is `T + A`, not torsion.
+
+**Is it false for trivial reasons? No** [hand]:
+- *Every known four-colour band character of `ℤ[U_ℚ]` is in `T + A`.* ℚ(i)'s plane read over ℚ is the rational plane `ℚ²`, which is
+  two-colourable (Woodall); its parity colouring is the order-2 character. Lemma N₀'s list covers the rest: `(x + y)/4`,
+  `(3x + 2y)/8`, the order-3 and order-7 characters, and archimedean perturbations of size at most 1/12 or 1/28. (ℚ(i) is not a subfield
+  of ℝ, so "the plane over ℚ(i)" in any other sense is outside the frame; its `L/F` splits, and `U` is no circle.)
+- *Every band character of finite type is in `T + A`, at both bands.* Finite type means finitely many split components, in some
+  representative. Hold the other finitely many coordinates by weak approximation and give `u` a deep pole at one split place `v` over
+  `p`. The partner place `v̄` sees `u^{−1}`, which then has a deep zero, so its component vanishes. Then `v`'s component sweeps a coset of
+  step `1/p ≤ 1/5`, which meets both `(−1/4, 1/4)` and `(−1/5, 1/5)`. (This is FS86-dB-Sv at `F = ℚ`, reproved blind.)
+- So **a counterexample must read infinitely many split places**. That is exactly where both FS-86 competitors stopped, now for the
+  field ℚ. By FS86-dB-HDint such a character need not even have a representative of finite type.
+
+**The natural attack, and where it can fail** (a pointer, not a claim): sweep one split place `v` by a unit vector `u = w_p^k·x`, where
+`x ∈ U_ℚ` has its `v`-coordinate prescribed modulo `p^j`. By Chebotarev a single `x = w_q` (one pole, at one place above one prime `q`)
+does it. The auxiliary place above `q` then contributes `{a_q w_q}_q`, and the adversary controls those contributions across infinitely
+many `q`. This is the advisor's "every `ρ_q` has one pole" lever and de Bruijn's obstruction in one line. Whether some averaging over
+the many admissible `q` defeats the adversary is the milestone's question.
+
+## C4 — Theorems this phase proved
+
+| # | statement (one line) | grade | address |
+|---|---|---|---|
+| S0A-1 | G0: `ℤ[U_ℚ] = ℤ[i][1/p : p ≡ 1 (4)]` ∋ 1/5; the layers `bℤ[U_ℚ]` lie in `R` and cover `U_F`; restrictions of band characters are band characters | hand | §C1 G0 |
+| S0A-2 | G1: `Θ_k(ℤ[U_ℚ]) ⊆ T_N + A` ⟹ `Θ_k(R_F) ⊆ T_N + A` for every subfield `F ⊆ ℝ`, at every band (the gluing reads only `ℤ[1/5]` per layer) | hand | §C1 G1 |
+| S0A-3 | Lemma N₀: `Θ₄(ℤ[U_ℚ]) ∩ (T + A) ⊆ T_{168} + A`; the torsion part is a 2-part of order ∣ 8, or an order-3 part (`|α| ≤ 1/12`), or an order-7 part (`|α| ≤ 1/28`), and each occurs | hand | §C1 G1 |
+| S0A-4 | Level collapse: a band character in `T + A` has level ≤ 1 at every odd non-split (stable) place where the unit vectors are dense at every level, and 2-level ≤ 3 at ℚ(i)'s ramified 2 (bands 1/4 and 1/5) | hand | §C1 G1 (Lemma N₀), G2 step 3 |
+| S0A-5 | No band character of any `R_F` has layer restrictions in `T + A` of unbounded order; the 3-adic character at the split prime above 3 of ℚ(√2) is layer-wise torsion, not in `T + A`, and not band | hand | §C1 G1, adversarial attempt |
+| S0A-6 | G1 + FS86-dB-Theta: HD1 for ℚ(√59), ℚ(√83), ℚ(√131), conditional on the four-band rational statement | hand, given dB-Theta's inputs | §C1 G1 |
+| S0A-7 | Archimedean averaging: over a real number field, the torsion part of a band character in `T + A` is itself a band character, non-zero, with margin `r` | hand | §C1 G3 step 3 |
+| S0A-8 | G2, general form: `F` in Lemma R's scope with every stable place odd of prime residue field `q ≥ 11` ⟹ `Θ₄(R_F) ∩ (T + A) = ∅`; with the rational statement `Θ₄(R_F) = ∅`; instance ℚ(√47) | hand, given Lemma R and Weil | §C1 G2 |
+| S0A-9 | G3: under the five-band rational statement, `Θ₅(R_{ℚ(√167)}) = ∅`; needed at each stable place: level-one ratio `< 1/5` (23, 43 by certificate, 59 by exact spectrum, `q ≥ 67` and the ramified 167 by Weil) | hand + cert + tools exact | §C1 G3 |
+| S0A-10 | Equivalence: `Θ_k(ℤ[U_ℚ]) ⊆ T + A` ⟺ `Θ_k(R_F) ⊆ T + A` for every subfield `F ⊆ ℝ` | hand | §C3 |
+| S0A-11 | Finite-type band characters of `ℤ[U_ℚ]` are in `T + A` at bands 1/4 and 1/5 (FS86-dB-Sv at `F = ℚ`, reproved blind) | hand | §C3 |
+| S0A-12 | A `T + A` statement about `ℤ[U₅]` cannot exclude split components at primes `p ≠ 5`; G74-style one-prime gluing needs `Θ_k(ℤ[U₅]) ⊆ T_N + A` with `N` fixed | hand | §C2 D8 |
+| S0A-13 | Weil check: `max|λ| ≤ 2√q` and the middle-half coefficient `1/sin(π/2q) > 2√q` for every `q ≡ 3 (4)`, `11 ≤ q ≤ 83`; Hoffman ratios at 23, 43 exceed 1/5, at 59 it is 0.19912 | tools (float, margins printed) | `data/fs89/s0a/circle_spectra.py` |
+| reading | The four-colour band set of `ℤ[U₅]` has infinitely many torsion types (at `𝔭 ∣ Φ_k(w₅)`), so one prime is not enough even with no 5-adic points | reading; killing test: S0B's exact set has finitely many torsion types | §C2 D8 |
+
+## C0 scored
+
+| statement | predicted | outcome |
+|---|---|---|
+| G0 | true 0.97 | true |
+| G1 with fixed `N` | true 0.85 | true |
+| G1 without fixed `N` | true 0.6 | true (Lemma N₀) |
+| "hence HD1" via dB-Theta | true 0.7 | true (conditional, at dB-Theta's grade) |
+| G2 | true, conditional, 0.7 | true, conditional; the per-place argument needed less than I expected (Weil, not Zhang) |
+| G3 | true, conditional, 0.55 | true, conditional; the per-place facts were real (43 needs a certificate; the archimedean step needed stating) |
+| the four-band rational statement | 0.5, "same difficulty as HD1" | undecided; shown **equivalent** to the uniform statement over every field, and its counterexamples must read infinitely many split places |
 
 ## Would-have-searched-here log
 
