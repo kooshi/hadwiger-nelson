@@ -513,8 +513,12 @@ on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-
   unit-distance graph with a four-colour forced pair exists **iff** 55.1 has an answer (a five-critical subgraph minus an edge; conversely
   `m ≥ 4` copies chained at generic angles and closed by one edge), so any triangle-free four-colour rigidity in the plane — a lattice
   in a real field without √3 with a non-zero four-colour forced group, e.g. H5's prediction over ℚ(√59), FS-86 — is at least as hard
-  as 55.1, and would answer it. In the abstract class rigidity without triangles is free (a distance graph with `F₄ = 4ℤ`, row 86).
-  **Still open.**
+  as 55.1, and would answer it. In the abstract class rigidity without triangles is free (a distance graph with `F₄ = 4ℤ`, row 86). **FS-86 asked it over ℚ(√59), ℚ(√83), ℚ(√131)
+  and left it undecided** (`LEDGER.md` rows 88–94): there a yes is exactly a finite unit-distance graph over the field forcing a distance-4 pair
+  (row 88), and the plane over `ℚ₂(√3)` is rigid, so a yes means realising a local forcer without triangles ("is `4 ∈ F_tf`?", row 90). **What FS-86
+  excludes, at exact scope:** nothing on the yes side — no triangle-free pinning identity was found or ruled out; on the no side (which would not
+  answer 55.1) every non-periodic four-colouring reading finitely much structure over those fields (rows 91–92). ℚ(√2,√3), which has triangles,
+  is rigid given Heule's T721 (row 93), and bears on 55.1 only as the control. **Still open.**
 - **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
   Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
   unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
