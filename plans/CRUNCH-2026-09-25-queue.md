@@ -74,7 +74,7 @@ line; the owner may reorder or decline it.
 - **The close is two jobs** [P-F3, batched]: a **close-math** job per milestone (Opus: derivation file, §R-close, predictions scored,
   verdict, the ledger rows *drafted* in the plan), then a **front-page** job that applies every closed milestone's drafts at once.
 - **Single-writer lanes.** `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md` and `BIBLIOGRAPHY.md` are written only by the front-page lane
-  (J05 first, then J24 and J25), one job at a time; readers and closes propose rows in their records. A milestone is closed when the
+  (J24, then J25; J05 if it runs), one job at a time; readers and closes propose rows in their records. A milestone is closed when the
   front-page job that carries it commits (WORKFLOW 9's rule that a close updates the Frontier).
 - **CLAUDE.md's byte budget is 300,000 bytes** (Kooshi's ruling, commit 1263d964: *"Increase the CLAUDE.md budget to 300kB. It probably
   still won't be enough, but hopefully it'll buy time."*). The file stands at 275,129, so about **25,000 bytes must last the whole crunch**.
