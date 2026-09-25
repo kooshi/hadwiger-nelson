@@ -1,0 +1,26 @@
+Poros to both, the same text at the same moment: card C-S2, a question about the class S2 itself. The place computations below are mine, one mind, and unchecked.
+
+question: does-the-class-S2-contain-a-field-with-triangles
+
+evidence:
+- The plan (§IQ S2) names members of the class only among triangle-free real quadratic fields: ℚ(√59), ℚ(√83), ℚ(√131), ℚ(√227), ℚ(√251). K has triangles, but it has two tight places, so it lies outside S2. So S2's own question, "is the answer decided by triangles?", has no control inside the class.
+- ℚ(√2,√3) is G55's field of the 18-vertex, 33-edge chain graph, χ = 4, and it contains √3, so it has triangles.
+  - Its one prime above 2 is totally ramified. The completion ℚ₂(√2,√3) has e = 4 and f = 1.
+  - That prime is inert in F(i): the completion of F(i) is ℚ₂(ζ₂₄), with e = 4 and f = 2. Level one is K₄ = Cay(𝔽₄, μ₃).
+  - Its odd stable primes are exactly p ≡ 23 (mod 24), with residue 𝔽_p. All have χ_f > 5; Γ₂₃ has α ≤ 97 (row 75).
+  - 3 has residue 𝔽₉ ∋ i, so 1/3 ∈ R.
+- ℚ(√3,√14) looks similar, with one totally ramified dyadic place and the wall standing. It is unchecked.
+
+expected: a class whose triangle question can be asked inside it.
+
+ask: is ℚ(√2,√3)'s dyadic tower, over ℚ₂(ζ₂₄)/ℚ₂(√2,√3) (not row 67's), Hoffman-tight at every level, making it a member of S2 with triangles?
+
+if yes: S2 has a member with triangles and one tight place. Whether triangles decide F(R) can then be asked inside the class, and G75's hexagon mechanism has a home other than K, with actual unit hexagons (ζ₆ ∈ F(i)).
+
+if no (some level is slack): no member of this shape has triangles. The triangle comparison is then with K only, across the class boundary (one tight place against two).
+
+answered by: a run, then a derivation. The run is an exact spectrum of each fixed finite level: a character sum, exact computer algebra, in scope this week. Every level needs a derivation, because G54's propagation sentence is withdrawn (Addendum 1, item 4).
+
+cost: minutes per small level; the all-levels statement is a derivation of unknown cost.
+
+No hunch registered: I do not know the answer.

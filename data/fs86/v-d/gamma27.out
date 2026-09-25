@@ -1,0 +1,5 @@
+q=  7 degree=  8 lmin=-4.493959207  lmin+(q+1)/3=-1.827292541  Hoffman ratio=0.359690562  <1/4: False
+q= 11 degree= 12 lmin=-4.795754778  lmin+(q+1)/3=-0.795754778  Hoffman ratio=0.285533746  <1/4: False
+q= 23 degree= 24 lmin=-7.960687187  lmin+(q+1)/3=+0.039312813  Hoffman ratio=0.249077473  <1/4: True
+q= 31 degree= 32 lmin=-10.666510494  lmin+(q+1)/3=+0.000156173  Hoffman ratio=0.249997255  <1/4: True
+q= 27 degree= 28 lmin=-8.000000000  lmin+(q+1)/3=+1.333333333  Hoffman ratio=0.222222222  <1/4: True
