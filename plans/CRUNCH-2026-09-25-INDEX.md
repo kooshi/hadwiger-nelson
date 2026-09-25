@@ -930,3 +930,54 @@ the curated subset.
 | `FS86-LP` | `FS91-S1D-character`:255; `FS91-S1V-character`:308; `M3-S1D-windows-five`:63 |
 | `FS86-dB-H` | `reports/J06`:11; `reports/J18`:7; `M3-S1A-rank-one`:14,43,142,335,368; `M3-S1B-rank-one`:34; `M3-exotic-colourings`:541 |
 | `FS86-derivation` | `FS91-S1D-character`:384; `M3-S1D-windows-five`:60,471; `M3-exotic-colourings`:22 |
+
+## Stage 5 — SAVED (proposed pointers for the front-page job; the report)
+
+### 5.1 Proposed pointers for the front-page job
+
+This job edits none of `CLAUDE.md`, `LEDGER.md`, `plans/FRONTIER-STUBS.md`, `BIBLIOGRAPHY.md`. Each line below is proposed verbatim;
+where it is a state change rather than a pointer, it says so, and the front-page lane decides. **`CLAUDE.md` is loaded by every agent,
+blind verifiers included**, so every line proposed for it is address-only.
+
+**`CLAUDE.md`**
+
+| # | where | proposed text | kind |
+|---|---|---|---|
+| C1 | § Frontier, after the `*Last updated: 2026-09-25 …*` paragraph (line 137) | `*The 2026-09-25 crunch runs three milestones — M1 (FS-91, `plans/FS91-character-local-global.md`), M2 (the kernel lane, `plans/M2-kernel-lane.md`), M3 (colourings no character gives, `plans/M3-exotic-colourings.md`) — and its work is indexed in `plans/CRUNCH-2026-09-25-INDEX.md` (results; blind verifiers do not open it); none of it is in this file until each milestone closes.*` | pointer |
+| C2 | § Paths forward, "**Open milestones, in order.** **None is open.**" (line 270) | replace "**None is open.**" with "**Three are open, as the 2026-09-25 crunch** (queue `plans/CRUNCH-2026-09-25-queue.md`, index `plans/CRUNCH-2026-09-25-INDEX.md`): M1 = FS-91, M2 = the kernel lane (FS-45, FS-39, FS-47, FS-87), M3 = FS-76 in rank one and FS-64 at five colours." | state change |
+| C3 | § Trust ledger, "the current audit reads 1034 clean and 5 declared purchases" | update at M2's close from the last kernel job's `axioms.log` (J15's reads 1056 clean / 5 purchases, `data/m2/j15/axioms.log`; J16 is still adding); M2 inventory rows 22, 33 | correction owed (pointer) |
+| C4 | § The gate, the vacuity counts line | the same, from `data/m2/j15/vacuity.log` (M2 inventory row 33) | correction owed (pointer) |
+
+**`LEDGER.md`**
+
+| # | where | proposed text | kind |
+|---|---|---|---|
+| L1 | the header paragraph, after "…the story goes to git.*" | `*Work of the 2026-09-25 crunch not yet folded into rows is indexed in `plans/CRUNCH-2026-09-25-INDEX.md`, with its items in `plans/FS91-close-inventory.md`, `plans/M2-close-inventory.md` and `plans/M3-close-inventory.md`.*` | pointer |
+| L2 | row 95, at its end | `Corrections owed: `plans/FS91-close-inventory.md` rows 3, 61, 69, 70, 78.` | pointer |
+| L3 | row 92, at its end | `Correction owed: `plans/M3-close-inventory.md` row 18.` | pointer |
+| L4 | rows 96 and 82 | `Re-derivations and extensions since: `plans/FS91-close-inventory.md` rows 7, 72–75, 87, 92.` (row 96); `Extended to every real number field: `plans/FS91-close-inventory.md` rows 7, 8.` (row 82) | pointer |
+
+**`plans/FRONTIER-STUBS.md`**
+
+| # | where | proposed text | kind |
+|---|---|---|---|
+| F1 | § Open milestones, after "**No FS milestone is open. …**" (line 27) | `**The 2026-09-25 crunch** holds three milestones open: M1 = FS-91 (rank 2 below; `plans/FS91-character-local-global.md`), M2 = the kernel lane (FS-45, FS-39, FS-47, FS-87; `plans/M2-kernel-lane.md`), M3 = FS-76 in rank one and FS-64 at five colours (`plans/M3-exotic-colourings.md`); index `plans/CRUNCH-2026-09-25-INDEX.md`.` | pointer (and a state change to "No FS milestone is open") |
+| F2 | § Ranked stubs, under the re-ranking line (line 37) | `*Stubs with unfolded 2026-09-25 crunch work carry a closing section "Where the 2026-09-25 work on this lives": FS-39, FS-45, FS-47, FS-48, FS-59, FS-64, FS-67, FS-75, FS-76, FS-82, FS-83, FS-84, FS-86, FS-87, FS-89, FS-91.*` | pointer |
+| F3 | the FS-82 row (rank 12) | `A CLOSED banner and a correction to the stub's text are owed (`plans/FS91-close-inventory.md` rows 8, 15, 117).` | pointer to a state change |
+
+**`BIBLIOGRAPHY.md`** (the rescued papers of stage 1.5, and the keys `tools/bib_audit.py` reports as cited but undefined)
+
+| # | where | proposed text |
+|---|---|---|
+| B1 | `[deGrey2018]` row (line 84), copy column "not held (arXiv)" | `library/pdf/deGrey2018-chromatic-number-plane-at-least-5.pdf` (arXiv:1804.02385v3; saved 2026-09-25 from a scratch copy) — and a § B row for the file |
+| B2 | `[JanssenMacKeigan2020]`, `[Hujdurovic2020]`, `[ErskineGriggsSiran2022]` rows (lines 663–665) | add "**Held:** `library/pdf/JanssenMacKeigan2020-orthogonal-colourings-cayley-graphs.pdf`" (resp. `Hujdurovic2020-strong-cliques-vertex-transitive-graphs.pdf`, `ErskineGriggsSiran2022-clique-partitioned-graphs.pdf`), saved 2026-09-25 from FS-85's scratch; § B rows for the three files |
+| B3 | `[Polymath16wiki]` row (line 181) | add "Snapshots of 2021 and 2022 held: `library/notes/polymath16-algebraic-formulation-2021-snapshot.html`, `library/notes/polymath16-algebraic-formulation-2022-snapshot.html` (saved at FS-85's audit; not re-read)" |
+| B4 | new row `[GoelPatilVerma2022]` | K. Goel, D. P. Patil, J. Verma, *Nullstellensätze and Applications*, arXiv:1809.02818 (v2, 23 Feb 2022) \| J17's route AL to the bridge (its Thm 3.11, after Lang 1953) \| `library/pdf/GoelPatilVerma2022-nullstellensatze-and-applications.pdf` \| read status as J17's record states it (`plans/M2-S1D-bridge.md` §2.1, §3.4) |
+| B5 | new row `[KechrisMarks2020]` | A. S. Kechris, A. S. Marks, *Descriptive graph combinatorics* (preliminary version, 9 October 2020) \| M3's question 2 (`χ_µ(ℝ²)`; Problem 4.23) \| `library/pdf/KechrisMarks-descriptive-graph-combinatorics-2020.pdf` (already held) \| read: §4.6–§4.7 (J06), §5.1 Example 5.1 (J21, which corrects the "§4.7" citation) — `plans/M3-exotic-colourings.md` §PA.3, `plans/M3-S1D-windows-five.md` §1.1 |
+| B6 | new rows `[BCR1998]`, `[CohenMahboubi2012]`, `[Lang1953]`, `[Marker2002]`, `[Poizat2000]`, `[WangKosheleva1998]`, `[Zapletal2022]` | as proposed in `plans/M2-S1D-bridge.md` §3.4 (J17) |
+| B7 | new row `[Zhu1998]` | as proposed in `plans/M3-exotic-colourings.md` §PA.3 (J06) |
+| B8 | `[EggletonErdosSkilton1985]`, cited in `plans/M3-S1B-rank-one.md` (J19, in flight) | the defined key is `[EggletonErdosSkilton1990]` (line 298); J19 or the close reconciles the year |
+
+### 5.2 Would-have-searched-here log
+
+Empty: no stage of this job called for a finite-witness search.
