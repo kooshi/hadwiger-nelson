@@ -69,3 +69,44 @@ multiset `{2(a₁x − a₂y) : x² + y² = 1}` equals the law's `m_c` exactly; 
 Weil sanity (float): `max_{a≠0} |Σ_z e(Tr(az)/q)| ≤ 2√q` at all ten `q`, smallest margin 0.44 at 59. Output (written on every run, null
 or not): `data/fs91/j08/sixa-check.json`.
 
+## Stage 3 — SAVED (SIX-b: the complete lists at 23 and 43)
+
+**Logged as the ban's edge:** a complete exact enumeration of `c ∈ 𝔽_q^×` (22 and 42 values), the set fixed by SIX-a; nothing sampled,
+nothing searched. `tools/crunch_j08_kappa.py` (0.04 s): `m(c) = min_{t ∈ V_c} |t|`, `κ = max_c m(c)/q`, band `k` at `c` iff `k·m(c) ≥ q`.
+
+| `q` | `m(c)` over the non-square `c` (squares: `m = 0`, by stage 2's 4(a)) | band 6 | band 7 | band 8 | band 9 | **`κ(Γ_q)`** | **`χ_char(Γ_q)`** |
+|---|---|---|---|---|---|---|---|
+| 23 | `c = 5,7,10,11,14,15,17,19,20,21,22` → `2,1,1,3,1,1,2,1,3,3,1` | ∅ | ∅ | **`{11, 20, 21}`** | same | **3/23** | **8** |
+| 43 | `c = 2,3,5,7,8,12,18,19,20,22,26,27,28,29,30,32,33,34,37,39,42` → `2,1,2,2,1,1,2,3,1,1,1,1,1,3,3,1,5,1,2,2,1` | ∅ | ∅ | **∅** | **`{33}`** | **5/43** | **9** |
+
+(J08-2, J08-3.) At 23, `V₁₁ = V₂₀·s = V₂₁·s′` (one scaling class; argmax values and `V_c` in `data/fs91/j08/kappa-23-43.json`).
+
+**Controls.**
+1. **Measured cross-check:** every `m(c)` at 23 and 43 recomputed from the circle directly (`a` with `N(a) = c`, min over `x² + y² = 1`
+   of `|2(a₁x − a₂y)|`) — **agrees at all 64 values of `c`**; and stage 2's direct band test counts `72` band-8 `a`'s at 23 (`= 3 × 24`)
+   and `0` at 43, `44` band-9 `a`'s at 43 (`= 1 × 44`) — the same answer by the other half.
+2. **Plant:** the law with `t² + 4c` fires at the cross-check at 23 (`c = 1, 2, 3` first); its faithful twin passes.
+3. **Row 69's periodic colourings** (`data/fplane/periodic-below-71.json`): at every `p ≡ 3 (mod 4)` in the file the one-direction
+   circulant's `D` is **exactly `V_c` for one non-square `c`** (3:2, 7:3, 11:6, 19:10, 23:7, 31:12, 43:22, 47:13, 59:30, 67:34, 71:22) —
+   SIX-a's law checked against committed data from another milestone. Since `V_{s²c} = s·V_c`, **every band `k`-character is a circular
+   `k`-colouring `t ↦ ⌊k·(st mod q)/q⌋` of that same circulant `C_q`**, so `χ(C_q) ≤ χ_char(Γ_q)`; the file's (untrusted) solver
+   refusals `chi_circ_lo` are consistent with every `χ_char` computed (below).
+4. **The brief's control failed at 43, for a stated reason, and the brief's premise is the defect.** The brief: "the tool must find a class
+   at `k = 8` at both (row 69's ceilings)". At 23 it does. **At 43 no band 8-character exists**, by both halves; row 69's ceiling 8 at 43 is
+   the file's **line colouring** of `C₄₃` (checked proper here, 8 colours), which is **not of multiplier form**: `χ(C₄₃) ≤ 8 < 9 = χ_char(Γ₄₃)`.
+   So row 69's ceilings are periodic (one-direction) colourings, a strictly larger class than character colourings; the premise conflated
+   them. Logged as a brief slip, not a tool defect.
+
+`χ_char` beside the file's circulant bracket (`[chi_circ_lo (untrusted), chi_circ (verified)]`): 3: 3 [3,3]; 7: 4 [4,4]; 11: **6** [6,6]
+(`χ(Γ₁₁) = 5`, kernel, by a non-line colouring); 19: 5 [5,5]; 23: 8 [8,8]; 31: 8 [8,8]; 43: **9** [8,8]; 47: 10 [9,10]; 59: 10 [9,10];
+67: **14** [9,12]; 71: **18** [9,12].
+
+**Read aloud, against "characters only":** *no character of Γ₂₃ or Γ₄₃ is a band six- or seven-character, and none of Γ₄₃ a band
+eight-character; so no colouring of the form `x ↦ ⌊kλ(x)⌋`, `λ` a character, colours Γ₂₃ with fewer than 8 colours or Γ₄₃ with fewer
+than 9.* **It says nothing about `χ(Γ₂₃)` or `χ(Γ₄₃)`**: the window question (G56 — is either six-chromatic?) is untouched; a six-colouring,
+if one exists, is not a character colouring, and at 43 not even a best-possible line colouring is one.
+
+**Predictions scored.** C0-43 (0.12) and the planner's P-W6 (0.15): **lost** — no band six-character at 23 or 43. C0-23: lost at 0.10
+(contaminated) and against the uncontaminated heuristic 0.77 (the heuristic's `P(no c) ≈ (7/8)^11 = 0.23` happened). **Agreement noted,
+not used:** the planner's J03-3 (read by the logged leak) claims band 8 at 23 exactly at `c ∈ {11, 20, 21}`; the tool's list is the same.
+

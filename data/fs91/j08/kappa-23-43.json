@@ -1,0 +1,283 @@
+{
+ "kind": "fs91-j08-kappa-23-43",
+ "targets": [
+  {
+   "q": 23,
+   "kappa": "3/23",
+   "kappa_float": 0.13043478260869565,
+   "chi_char": 8,
+   "argmax_c": [
+    11,
+    20,
+    21
+   ],
+   "m_by_nonsquare_c": {
+    "5": 2,
+    "7": 1,
+    "10": 1,
+    "11": 3,
+    "14": 1,
+    "15": 1,
+    "17": 2,
+    "19": 1,
+    "20": 3,
+    "21": 3,
+    "22": 1
+   },
+   "band_lists": {
+    "6": [],
+    "7": [],
+    "8": [
+     11,
+     20,
+     21
+    ]
+   },
+   "measured_cross_check": true,
+   "squares_have_m0": true,
+   "V_argmax": {
+    "11": [
+     -10,
+     -9,
+     -8,
+     -7,
+     -6,
+     -3,
+     3,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "20": [
+     -10,
+     -8,
+     -7,
+     -5,
+     -4,
+     -3,
+     3,
+     4,
+     5,
+     7,
+     8,
+     10
+    ],
+    "21": [
+     -11,
+     -9,
+     -7,
+     -6,
+     -5,
+     -3,
+     3,
+     5,
+     6,
+     7,
+     9,
+     11
+    ]
+   }
+  },
+  {
+   "q": 43,
+   "kappa": "5/43",
+   "kappa_float": 0.11627906976744186,
+   "chi_char": 9,
+   "argmax_c": [
+    33
+   ],
+   "m_by_nonsquare_c": {
+    "2": 2,
+    "3": 1,
+    "5": 2,
+    "7": 2,
+    "8": 1,
+    "12": 1,
+    "18": 2,
+    "19": 3,
+    "20": 1,
+    "22": 1,
+    "26": 1,
+    "27": 1,
+    "28": 1,
+    "29": 3,
+    "30": 3,
+    "32": 1,
+    "33": 5,
+    "34": 1,
+    "37": 2,
+    "39": 2,
+    "42": 1
+   },
+   "band_lists": {
+    "6": [],
+    "7": [],
+    "8": []
+   },
+   "measured_cross_check": true,
+   "squares_have_m0": true,
+   "V_argmax": {
+    "33": [
+     -21,
+     -18,
+     -17,
+     -15,
+     -13,
+     -12,
+     -11,
+     -8,
+     -7,
+     -6,
+     -5,
+     5,
+     6,
+     7,
+     8,
+     11,
+     12,
+     13,
+     15,
+     17,
+     18,
+     21
+    ]
+   }
+  }
+ ],
+ "periodic_file": [
+  {
+   "p": 3,
+   "D_equals_V_c_for_c": [
+    2
+   ],
+   "chi_circ_lo_untrusted": 3,
+   "chi_circ_verified": 3,
+   "chi_char": 3,
+   "kappa": "1/3",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 7,
+   "D_equals_V_c_for_c": [
+    3
+   ],
+   "chi_circ_lo_untrusted": 4,
+   "chi_circ_verified": 4,
+   "chi_char": 4,
+   "kappa": "2/7",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 11,
+   "D_equals_V_c_for_c": [
+    6
+   ],
+   "chi_circ_lo_untrusted": 6,
+   "chi_circ_verified": 6,
+   "chi_char": 6,
+   "kappa": "2/11",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 19,
+   "D_equals_V_c_for_c": [
+    10
+   ],
+   "chi_circ_lo_untrusted": 5,
+   "chi_circ_verified": 5,
+   "chi_char": 5,
+   "kappa": "4/19",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 23,
+   "D_equals_V_c_for_c": [
+    7
+   ],
+   "chi_circ_lo_untrusted": 8,
+   "chi_circ_verified": 8,
+   "chi_char": 8,
+   "kappa": "3/23",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 31,
+   "D_equals_V_c_for_c": [
+    12
+   ],
+   "chi_circ_lo_untrusted": 8,
+   "chi_circ_verified": 8,
+   "chi_char": 8,
+   "kappa": "4/31",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 43,
+   "D_equals_V_c_for_c": [
+    22
+   ],
+   "chi_circ_lo_untrusted": 8,
+   "chi_circ_verified": 8,
+   "chi_char": 9,
+   "kappa": "5/43",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 47,
+   "D_equals_V_c_for_c": [
+    13
+   ],
+   "chi_circ_lo_untrusted": 9,
+   "chi_circ_verified": 10,
+   "chi_char": 10,
+   "kappa": "5/47",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 59,
+   "D_equals_V_c_for_c": [
+    30
+   ],
+   "chi_circ_lo_untrusted": 9,
+   "chi_circ_verified": 10,
+   "chi_char": 10,
+   "kappa": "6/59",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 67,
+   "D_equals_V_c_for_c": [
+    34
+   ],
+   "chi_circ_lo_untrusted": 9,
+   "chi_circ_verified": 12,
+   "chi_char": 14,
+   "kappa": "5/67",
+   "chi_char_ge_chi_circ_lo": true
+  },
+  {
+   "p": 71,
+   "D_equals_V_c_for_c": [
+    22
+   ],
+   "chi_circ_lo_untrusted": 9,
+   "chi_circ_verified": 12,
+   "chi_char": 18,
+   "kappa": "4/71",
+   "chi_char_ge_chi_circ_lo": true
+  }
+ ],
+ "plant": {
+  "name": "law with t^2+4c at q=23",
+  "fired": true,
+  "first_c": [
+   1,
+   2,
+   3
+  ],
+  "twin_passed": true
+ },
+ "ok": true
+}
