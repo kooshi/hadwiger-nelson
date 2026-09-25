@@ -1640,6 +1640,28 @@ be dropped. No solver, no native evaluation. -/
 #print axioms HadwigerNelson.Stripe.nt0_modTwo
 #print axioms HadwigerNelson.Stripe.not_striped_threeCol
 
+/-! ## FS-39 phases B0–B1 and C — the bridge, conditional on real algebraic descent; `ℝ` and the real algebraic numbers
+real closed (J17K)
+
+`RealAlgebraicDescent` (Tarski; Artin–Lang) is a named hypothesis, true and unproved here; every theorem assuming it is
+suffixed `_of_descent`. Its two controls: the one-variable case proved, the rational twin refuted. The two `IsRealClosed`
+instances are Mathlib's TODO, upstream candidates. -/
+
+#print axioms HadwigerNelson.Bridge.realAlgebraicDescent_one
+#print axioms HadwigerNelson.Bridge.not_rationalDescent
+#print axioms HadwigerNelson.Bridge.RealAlgebraicDescent.of_finite
+#print axioms HadwigerNelson.Bridge.numberField_adjoinReal
+#print axioms HadwigerNelson.Bridge.exists_numberField_drawing_of_descent
+#print axioms HadwigerNelson.Bridge.iSup_numberField_le_chromaticNumber_plane
+#print axioms HadwigerNelson.Bridge.chromaticNumber_plane_eq_iSup_numberField_of_descent
+#print axioms HadwigerNelson.Bridge.exists_numberField_chromaticNumber_eq_plane_of_descent
+#print axioms HadwigerNelson.Bridge.numberField_sup
+#print axioms HadwigerNelson.Bridge.chromaticNumber_plane_ne_six_iff_of_descent
+#print axioms Polynomial.exists_isRoot_of_odd_natDegree_real
+#print axioms Real.isRealClosed
+#print axioms algebraicClosure.isRealClosed
+#print axioms isRealClosed_algebraicClosure_rat_real
+
 #eval IO.println "=== PURCHASED ==="
 
 /-! ## M03 — the certificate routes

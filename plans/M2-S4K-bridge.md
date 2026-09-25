@@ -135,3 +135,49 @@ Mathlib gains them).
   ring hom into a semireal ring is semireal — no injectivity needed; the draft asked for it and the unused-variable linter caught it).
 - Spec: `2` is a square and `−1` is not among the real algebraic numbers; `2` has a real algebraic cube root; `X² + 1` has no real
   root (the odd-degree hypothesis is not idle).
+
+## Stage 4 — SAVED (not attempted: the budget stop rule)
+
+Lemma NP, the genus-0 plant, C3 one-variable and C3⁺ were **not attempted**. The obstruction is budget, not mathematics: at the end of
+stage 3 this job stood at about 325k of the harness's count against the brief's 350k stop rule and 420k hand-back, and NP is the one
+leaf of this brief with real proof effort (a polynomial core, the Fermat-quartic step against `Polynomial.abc`, the `RatFunc`
+wrapper). Priority order followed as briefed (B1 → C4 → B0 → NP → C3 → C3⁺). The remainder is proposed as **J17K2**, with its brief
+at `data/crunch-2026-09-25/briefs/J17K2-M2-lemma-NP-kernel.md` (every statement quoted from its source; a suggested decomposition
+marked untested; the genus-0 plant carried over). **Leaves left:** NP (budget), C3 one-variable (needs NP), C3⁺ (needs NP and the
+restriction to a line), and B2 — `(∃T)` in the kernel, months, named as a leaf only, not a job.
+
+## Stage 5 — SAVED
+
+### 5.1 The gate (at the stage-3 commit `0b5dcc96`)
+- **Build:** `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` — OK, 178 of 178 batches, 3 modules rebuilt
+  (`RealClosed`, `Bridge`, `Proofs`), **0 modules with warnings**, 3 m 36 s (`build/gate/build/20260925T224250Z-122689.log`).
+- **`sorry`:** 0 in both new modules.
+- **Axioms:** OK — **1091 clean, 11 axiom-free, 5 declared purchases** (was 1077 / 11 / 5; +14, the 14 new `#print axioms` lines,
+  every one exactly the standard three) (`build/gate/axioms/20260925T224649Z-141964.log`).
+- **Vacuity:** OK — `declarations=7019 refutations-skipped=294 sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257
+  unknown=2` (was declarations 6986, refutations 293; sites and generic unchanged). **No theorem of this job is a site**: a `Prop`
+  hypothesis (`hD : RealAlgebraicDescent`) is not a `Coloring` binder, as the brief expected; `not_rationalDescent` is the one new
+  skipped refutation; `nonempty_numberField` registers as new evidence (a witness of `Nonempty {F // NumberField F}`)
+  (`build/gate/vacuity/20260925T224656Z-142309.log`).
+- **Architecture:** `python3 tools/check_architecture.py` — PASS, with rows for `RealClosed` and `Bridge` in the module map.
+- `lake lint`: not run (owner ruling: once, at M2's close).
+
+### 5.2 The registered predictions, scored
+| id | prediction | p | outcome |
+|---|---|---|---|
+| P-J17Ka | B1 and C4 land green, conditional on `RealAlgebraicDescent`, inside 2 hours | 0.60 | **HELD** — elaborated at 17:38 (about 8 minutes in), real build green at 17:46 |
+| P-J17Kb | both B0 instances land | 0.60 | **HELD**, and in a stronger form (any relative algebraic closure in a real closed field) |
+| P-J17Kc | Lemma NP lands via `Polynomial.abc` in at most 200 lines | 0.50 | **not scorable** — not attempted (budget); passed to J17K2 unscored |
+| C0 (mine) | the real build accepts both modules unchanged or with lint-only edits | 0.85 | HELD (unchanged, 0 warnings) |
+
+### 5.3 Proposed edits (standing rule 7; the front-page lane writes them)
+- `CLAUDE.md` § The gate, the recorded counts: `declarations=7019 refutations-skipped=294 sites=279`, `vacuous=0 stale=0 declared=3
+  witnessed=17 generic=257 unknown=2` (the recorded line reads 6795 / 278 / 275 / 253 — stale before this job).
+- `CLAUDE.md` § Trust ledger: "the current audit reads 1034 clean" → 1091 clean, 11 axiom-free, 5 declared purchases.
+- `plans/STUB-plane-bridge.md` (FS-39): phases B0–B1 and C's C1, C2 (attained) and C4 are in the kernel, conditional on the one named
+  hypothesis `RealAlgebraicDescent`; left, B2 (months) and C3/NP (J17K2).
+- `plans/M2-S1D-bridge.md` §3.2: B0's and B1's "~1 day" were each under half an hour at this Mathlib pin.
+- `LEDGER.md`: a row for the conditional bridge (C2 with attainment, C4) and the two real-closed instances, `[kernel]`, addresses above.
+
+### 5.4 Would-have-searched log (stages 3–5)
+- None.
