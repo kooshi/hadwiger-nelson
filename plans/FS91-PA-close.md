@@ -262,3 +262,39 @@ and `[Johnson2006]` (the status report and compendium of the question's lineage)
 
 **Wording to use:** "CLG not found in print; the character chromatic number is Barajas–Serra's regular chromatic number, extended from cyclic
 groups to the unit-distance graph of a number field."
+
+## Stage 3 — SAVED (result 3: three colours over every real number field)
+
+**Statement searched** (J02-T2, J02-T3): "**S1**: `χ(F²) ≤ 3 ⟺ Θ₃ ≠ ∅ ⟺ Θ₃ ∩ T₆ ≠ ∅ ⟺` (the two prime types) `⟺ L(F) ≤ 3`, every real number
+field"; "**S2**: `χ(F²) = L(F)` whenever `L(F) ≤ 4`, every real number field" (`plans/FS91-S0F-three-colours.md` §Theorems).
+
+**Named:** three-colourability of the unit-distance graph of `F²`, `F` a real number field; in `[Fischer1990]`'s words, "`k`-colourable
+extensions of the rational plane"; the posed question is Fischer's §1 and Benda–Perles's (Johnson 2000's problem (1), Soifer's Open Problem
+11.6).
+
+### 3.1 Queries (raw `data/fs91/j23p/r34-zb.out`, `r3-fischer-citers.out`)
+
+| database | query | hits | what bears |
+|---|---|---|---|
+| zbMATH | `ab:"three colors" & ab:"unit distance" & ab:"field"`; `ab:"3-colorable" & ab:"distance one" & ab:"extension"`; `ab:"chromatic number" & ab:"algebraic extension" & ab:"distance one"`; `ab:"chromatic number" & ab:"rational points" & ab:"algebraic number field"` | 0 each | — |
+| zbMATH | `au:"Zaks, Joseph" & ab:"chromatic"`; `au:"Chilakamarri, Kiran B."` (listing) | 2; 26 | rational four- and five-space (Zaks 1989, Chilakamarri 1990), Chilakamarri's 1993 survey; nothing on number fields beyond ℚ |
+| OpenAlex | works citing `[Fischer1990]` (W2078264746) | 13 | every title opened to its record: Axenovich et al. 2012–14, Payne 2009, Currie–Eggleton 2015 (abstract read: `H(ε)` tiling-type colourings; off), `[Krebs2022]`, Soifer's essay 2010 and *Rational Coloring* (= `[Soifer2024]` ch. 11, read), Reid 1996, the two *Chromatic numbers of rational spaces* papers (2017, 2018), `[Johnson2010]` (read), `[Fischer1990b]`-lineage fractional-plane paper 2016, **Carrillo–Cervantes–Krebs, *A graph theorist plants a tree*, Coll. Math. J. 2024** (abstract read: Cayley graphs of `ℤⁿ` modulo a cyclic subgroup; off) |
+| Semantic Scholar | works citing `[Fischer1990]` (DOI 10.1016/0012-365X(90)90324-B) | 11 | the same set (a subset); the two databases agree, as identifiers show |
+
+The citation walk of the paper that posed the question (WORKFLOW 3.2 item 5), which J02's record listed as "not run", is done: **no citing
+work treats three-colourability over number fields beyond Fischer's own quadratic theorems.**
+
+### 3.2 The verdict for result 3 — **not found by these searches; undecided on two named papers**
+
+- The **question is in print, posed**: `[Fischer1990]` §1, verbatim (J02's record): *"This still begs the general question, however, whether
+  some algebraic criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* S1
+  and S2 answer it at `χ ≤ 3` and at `L ≤ 4`.
+- **The partial answers in print** are the known ones: `[Fischer1990]` Thms 8–10 (quadratic fields, additive colourings); Astra Thm 3.1
+  (fields containing `√3`, G55); row 82 (real quadratic fields, this project). Nothing found for every real number field.
+- **Undecided until read:** `[Johnson2000]` (the 2000 status report on exactly this problem) and `[Johnson2006]` (the compendium). Both are
+  the standing debt (Kooshi's ruling of 2026-09-24: "carry on with them as a known debt"); **S1 is claimed neither new nor first until both
+  are read.**
+
+**`CLOSED-QUESTIONS.md` candidate:** `[Fischer1990]` §1's question (quoted above) — answered for the values `χ ≤ 3` and `L(F) ≤ 4` over every
+real number field, and for character colourings at every `k` (CLG, given `H_k`); a §2 entry ("answered in part, with the caveat that must
+travel"), gated on the two Johnson papers.
