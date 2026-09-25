@@ -1,0 +1,22 @@
+== M 510 {2: 1, 3: 1, 5: 1, 17: 1} |U| 324 denominator primes [2, 3, 5, 17]
+  p 7 inert in F (q = p^2): not profiled
+  p 11 stable s 2 image 12 / 12 Hoffman 0.2855 open
+  p 11 stable s 9 image 12 / 12 Hoffman 0.2855 open
+  p 13 inert in F (q = p^2): not profiled
+  p 19 inert in F (q = p^2): not profiled
+  p 23 stable s 6 image 24 / 24 Hoffman 0.2491 REFUSES-4
+  p 23 stable s 17 image 24 / 24 Hoffman 0.2491 REFUSES-4
+  p 29 nonstable s 1 image 28 / 28 Hoffman 0.2533 open
+  p 29 nonstable s 28 image 28 / 28 Hoffman 0.2533 open
+  p 31 stable s 11 image 32 / 32 Hoffman 0.2500 REFUSES-4
+  p 31 stable s 20 image 32 / 32 Hoffman 0.2500 REFUSES-4
+  p 37 inert in F (q = p^2): not profiled
+  p 41 nonstable s 10 image 40 / 40 Hoffman 0.2206 REFUSES-4
+  p 41 nonstable s 31 image 40 / 40 Hoffman 0.2206 REFUSES-4
+  p 43 stable s 4 image 44 / 44 Hoffman 0.2138 REFUSES-4
+  p 43 stable s 39 image 44 / 44 Hoffman 0.2138 REFUSES-4
+  p 47 stable s 23 image 48 / 48 Hoffman 0.2111 REFUSES-4
+  p 47 stable s 24 image 48 / 48 Hoffman 0.2111 REFUSES-4
+  p 53 nonstable s 18 image 52 / 52 Hoffman 0.2158 REFUSES-4
+  p 53 nonstable s 35 image 52 / 52 Hoffman 0.2158 REFUSES-4
+  p 59 stable s 0 image 60 / 60 Hoffman 0.1991 REFUSES-4
