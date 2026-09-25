@@ -13,11 +13,31 @@ to appear in Mathematical Programming".
 
 ## Theorems this phase proved
 
-*(filled at the close of the audit; none expected — this is a reading and a run-or-price.)*
+- **J26-T1 — the certificate satisfies Proposition 1.** `(X₂₃, g23.csv)` meets Proposition 1's hypotheses with ν = 10⁻⁶, μ = 6·10⁻⁵, so
+  `m₁(ℝ²) ≤ (w_T + ν)/(1 − μ) = 0.246988… < 0.2470` for measurable periodic 1-avoiding sets, hence (the paper's §2 approximation) for all
+  measurable ones. **[tools]** — exact for H1–H3, H6 and `d_min`; H4 in double precision (two independent Bessel implementations agree;
+  not interval-certified; worst margin 2.3·10⁻⁶); Watson §13.74, §15.31 cited. Address: `tools/j26_ambrus_check.py`,
+  `data/pa-ambrus2023/j26-check.out`; §3.2.
+- **J26-T2 — the corrected Lipschitz constants.** `W′(t) = −w0 J₁(t) − Σ w2(i,j) d_ij J₁(t d_ij)`, so `|W′| ≤ 1.5365` on `[0, 100]`,
+  `≤ 0.1773` on `[100, 1000]` and `≤ 0.0561` on `[1000, 10000]`, and with these the notebook's own evaluation points cover `[0, 10000]`
+  at `W ≥ 0.999942 ≥ 1 − μ`. **[hand + tools]** (the bound is two lines of calculus plus Watson §13.74; the numbers are the tool's). §3.2 H4b–H4c.
+- **J26-T3 — the notebook's two checker gaps, and that neither bites here.** Its congruence test normalises by `X1T〚2〛` and so proves
+  similarity (every two-point pair passes); its `W(t)` step uses `sup|J₁|` as the Lipschitz constant of `W`. For this certificate every
+  listed pair is congruent (0 of 2,321 fail an exact pairwise-distance check) and the corrected constants still close. **[hand (the
+  reading, §2.4) + tools (the data, §3.2)]**
 
 ## "Would have searched here" log
 
 *(one line per move that would have been a search, and what was done instead)*
+
+- Would have re-solved the LP with Mosek/Gurobi to see how tight the dual is — not done (optimisation; out under the ban, and not needed:
+  the dual certificate is checked as given).
+- Would have searched the correspondence permutations for a congruence failing under the listed order — not needed (none failed); had one
+  failed, it would have been reported as a failure, not repaired.
+- At the edge, logged: the complete enumeration of the 13,552 independent sets of the 23-vertex unit graph — the LP's variable set, whose
+  extent the paper fixes (its §7 count); a finite exact enumeration, not a search for a witness. Seconds.
+- Would have evaluated `W(t)` in ball arithmetic (arb) at the ~640k grid points — not done: `python-flint` is not installed (an install
+  request, not made) and the float result already has a 2.3·10⁻⁶ margin; listed as the one step still on numerical trust.
 
 ## Stage 1 — SAVED: the ruling, the quotations, and where everything is
 
@@ -189,3 +209,72 @@ satisfies Proposition 1's hypotheses with ν = 10⁻⁶ and μ = 6·10⁻⁵, so
 H4 (a Lipschitz constant with the chain rule). The one step still taken on numerical trust is the value of `J₀` at about 640,000 points in
 double precision, with a margin of 2.3·10⁻⁶ at the worst; a certified version would evaluate the same points with ball arithmetic (arb,
 via `python-flint`, not installed — an install request, not made).
+
+## Stage 4 — SAVED: verdict, our two uses, the bibliography proposal
+
+### 4.1 Verdict
+
+**Priced out for the authors' checker; the certificate re-checked independently.**
+
+- **The authors' checker** (`verification23.nb`, Mathematica): not run, because nothing here can run it. Running it needs a Wolfram Engine
+  install, which needs a Wolfram ID, online activation and a licence decision (Kooshi's), plus an estimated 15 min to 2 h (§3.1). **It is
+  not worth installing for this purpose**: a clean run would reproduce outputs already reproduced here and would leave both of its own gaps
+  open.
+- **The certificate** (`g23.csv` with the notebook's `X₂₃`): **re-checked** by `tools/j26_ambrus_check.py` (J26-T1). The finite
+  obligations are checked exactly: unit pairs, all 2,321 congruences, the 13,552 atoms and `min V(ε) = −6.712244·10⁻⁸`, `d_min`, and the
+  final ratio. The continuous obligation is checked in double precision, with Lipschitz constants derived here (J26-T2). **Establishes:**
+  `m₁(ℝ²) ≤ 0.246989 < 0.2470`, given Proposition 1 and the paper's §2–§6, which were read and found sound. **Still on trust:** double-precision
+  `J₀` at about 640,000 points (worst margin 2.3·10⁻⁶), and Watson §13.74 and §15.31.
+- **Two gaps in the authors' checker, harmless for this certificate** (J26-T3):
+  - its congruence test proves only similarity;
+  - its "interval arithmetic" is grid sampling, and it bounds `W′` by `sup|J₁|` instead of `sup|J₁|·(|w0| + Σ|w2| d)`.
+  
+  Neither is visible from the paper, which says "we verify that all congruence constraints (ieC) are valid" and "interval arithmetic".
+- **A typo in the paper** (every version): eq. (23)'s `w1 (4)` should be `w1 (1)`.
+- **ν differs between paper and notebook:** the notebook uses `ν = 10⁻⁶`, the paper `ν = 10⁻⁵`. Both are valid, since `min V` is `−6.7·10⁻⁸`.
+
+### 4.2 What this changes about FS-86's ruling (inventory item 70)
+
+- **Premise 1 of the ruling:** "no certificate file or checker is held". **Now false:** both are held at `data/pa-ambrus2023/`, and the
+  Springer supplement is byte-identical to the authors' notebook PDF.
+- **Premise 2 of the ruling:** "a job of unknown size". **Now priced.** The unmodified run needs a Mathematica install, and the independent
+  re-check took 2.7 s.
+- **The decision itself** (no auditor during the close) stands as the record of what was known then.
+- **The grade line** that item 70 wrote "so it can be upgraded in place" can now be upgraded. The proposal is in §4.4 and is for the
+  front-page lane to apply.
+
+### 4.3 Do our two uses read the paper at its exact scope?
+
+| use | what it reads | scope | verdict |
+|---|---|---|---|
+| **C14** (`plans/FS86-derivation.md` FS86-Cx-C14; C14.2(a) in `plans/FS86-C-Coxeter.md`; LEDGER rows 92, and FS86-CL1) | C14.2(a) verbatim: "tile `A ∩ Q_n` with period lattice `(n + 1)ℤ²`; copies are more than distance 1 apart, so the tiling is a measurable 1-avoiding set of density `d_n(A)·n²/(n + 1)² ≤ m₁` (`[AmbrusEtAl2023]` Thm 1 bounds the upper density of every measurable 1-avoiding set)". Here `Q_n = [0, n)²`, half-open (§ Round 2, line 333), so copies are strictly more than 1 apart. | Theorem 1 is applied to a **periodic** measurable 1-avoiding set. Lemma 1 and Proposition 1 assume a periodic set, so this is the case the certificate proves directly, without the §2 approximation step. C14 also uses strictness only (`m₁ < 1/4`, "Strict `m₁ < 1/4` is used"), and 0.246989 gives that with room to spare. | **exact scope** |
+| **G60** (`χ_f(K²) = 4`; Frontier item 13) | Only **Definition 2**, the geometric fractional chromatic number `χ_gf`. The field-internal blow-up `χ(F²) ≥ ⌈χ_gf(H)⌉` and the witness `G27` come from `[MatolcsiEtAl2025]` (arXiv:2311.10069), not from this paper (§1.2 Q2). | a definition, no computation; this certificate does not enter G60 at all | **exact scope; independent of this audit** (G27 was re-verified by FS-56 phase B, per `BIBLIOGRAPHY.md` line 176) |
+
+### 4.4 Proposed edits (the front-page lane applies them; I edit none of these files)
+
+**`BIBLIOGRAPHY.md` — merge the duplicate.** Three keys name this one paper: row 188 (`[AmbrusEtAl2024]` / `[Ambrus2023]`, "not held", "not
+read — second-hand") and row 259 (`[AmbrusEtAl2023]`, held, "read — §2 (Lemma 1) and §5"). The proposal:
+
+- **Keep one row, keyed `[AmbrusEtAl2023]`.** It is cited in 27 tracked files, against 8 for `[AmbrusEtAl2024]` and 4 for `[Ambrus2023]`.
+  Its year is that of the final arXiv version (v3, 28 Jul 2023) and of first online publication (6 Oct 2023). Write the key column as
+  "**[AmbrusEtAl2023]** / **[AmbrusEtAl2024]** / **[Ambrus2023]**", so `tools/bib_audit.py` resolves the aliases.
+- **Correct the venue.** Replace "Math. Program. (2023) [venue from memory, unchecked]" with "Math. Program. **207** (2024), no. 1–2,
+  303–327, DOI 10.1007/s10107-023-02012-9 (first online 6 Oct 2023; checked against Crossref 2026-09-25)". Add: "arXiv v3's comment reads
+  'Final version, to appear in Mathematical Programming'; the published text is paywalled here, and its one supplementary file is
+  byte-identical to the authors' notebook PDF."
+- **Role column.** Merge row 259's text with row 188's. Correct row 188's "where the observation that the best-known constructions all lie
+  in the Moser lattice first appears" to the paper's actual claim: "X23 is a subset of the ring R2 spanned by the vertices of the Moser
+  spindle (see [PM22]) … a surprising observation considering that our search was not restricted to this ring" (§9). The claim is about
+  their own `X₂₃`, and about the ring `R₂`, not the lattice. Keep "introduced the **geometric** fractional chromatic number"; that is
+  Definition 2. Add "certificate and checker: `data/pa-ambrus2023/` (authors' page https://static.renyi.hu/ai-shared/daniel/unit-distances/,
+  via bit.ly/unit-distances; no licence stated); re-checked by J26, `plans/PA-ambrus2023-audit.md`".
+- **Read column.** "read — §1–§9 in full, with the proofs of Lemmas 1–2, Corollaries 1–2 and Proposition 1; Tables 1–2 not line by line
+  (J26, 2026-09-25); the authors' verification notebook read in full". Make the same change to the files list at line 461.
+- **Delete row 188** once its text has been merged.
+
+**`LEDGER.md` row 92, `plans/FS86-derivation.md` FS86-Cx-C14 and FS86-CL1, and `LEDGER.md` § B's FS86-Cx-C14 line: upgrade the grade line.**
+- Currently: "… `m₁(ℝ²) ≤ 0.2470` — external, computer-assisted, published, not re-checked here (its audit a named post-close item; this
+  grade to be upgraded in place)".
+- Proposed: "… `m₁(ℝ²) ≤ 0.2470` — external, computer-assisted, published; **its certificate re-checked here** (J26,
+  `plans/PA-ambrus2023-audit.md`: exact on the finite obligations, double precision on the Bessel obligation with Lipschitz constants
+  derived here; the authors' Mathematica notebook not run, and its similarity-for-congruence and Lipschitz gaps shown harmless)".
