@@ -203,3 +203,56 @@ Inhabitants: `isPureTower_bot_liouville` (`ℚ ⊆ ℚ(L)` inside `ℝ`, one ste
 
 ### Would-have-searched log (stage 3)
 - None.
+
+## Stage 4 — SAVED
+
+### 4.1 The gate (at the stage-4 tree: stage 3's commit plus two constructor docstrings)
+- **Build:** `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` — OK, 178 of 178 batches, 2 modules rebuilt
+  (`NoParam`, `Proofs`), **0 modules with warnings**, 3 m 34 s (`build/gate/build/20260925T231639Z-216434.log`; copy in
+  `data/m2/j17k2/build-stage4.log`). The run before it had one warning class — missing docstrings on `IsPureTower`'s two
+  constructors — fixed.
+- **`sorry`:** 0 in `NoParam.lean`.
+- **Axioms:** OK — **1109 clean, 11 axiom-free, 5 declared purchases** (was 1091 / 11 / 5; +18, the 18 new `#print axioms` lines, every
+  one exactly the standard three) (`build/gate/axioms/20260925T232020Z-234903.log`; `data/m2/j17k2/axioms.log`).
+- **Vacuity:** OK — `declarations=7051 refutations-skipped=304 sites=279`, `vacuous=0 stale=0 declared=3 witnessed=17 generic=257
+  unknown=2` (was 7019 / 294 / 279 / 257; rows: none changed). **No theorem of this job is a site** (no `Coloring` binder); the ten new
+  skipped refutations are the ten theorems concluding a negation (NP and its corollary, the two non-constancy lemmas, C3's core and
+  form and inhabitant, the transcendence of `2 + L`, C3⁺ and its inhabitant) (`build/gate/vacuity/20260925T232027Z-235231.log`;
+  `data/m2/j17k2/vacuity.log`).
+- **Inhabitants:** every hypothesis that is a structure or a non-trivial `Prop` is inhabited in the file: C3's (`F = ℚ`, `t = L`),
+  `IsPureTower`'s step (`isPureTower_bot_liouville`), C3⁺'s (`not_forall_mem_adjoinTranscendental_bot_liouville`); NP's `a ∉ range C`
+  at `a = X²` (the `ℚ` spec example). **Spec examples:** `twin` (clears to `X² + 1` against `2X`), `IsPureTower` (its inhabitant), NP at
+  `X²` over `ℚ` beside its failure over `𝔽₂`, and a constant for which `a³ − a` is a square (`C 2` over `ℝ`).
+- **Architecture:** `python3 tools/check_architecture.py` — PASS, with a `NoParam` row in the module map.
+- `lake lint`: not run (owner ruling: once, at M2's close).
+
+### 4.2 As a blind verifier of J17's fresh algebra
+- **Lemma NP (J17-T4): TRUE** — kernel-checked, in a stronger form (every field with `2 ≠ 0`, not only `ℂ`), by a different route
+  through the same two inputs (coprime factors of a square are unit times squares; Mason–Stothers). I also read §2.3's hand proof step by
+  step: `e² = λq³` gives even valuations of `q` ✓; `deg γ + deg δ = (deg(p − q) + deg(p + q))/2 ≤ 2D` ✓ (both `p`, `q` have degree
+  `≤ 2D`); `n₀(α⁴β⁴γ²δ²) ≤ deg α + deg β + deg γ + deg δ ≤ 4D` against the maximal degree `4D` ✓ — sound as written [hand-read].
+  Its "(characteristic 0)" for the coprimality of `p ± q` is characteristic ≠ 2, and its algebraically closed base is not needed.
+- **C3 (J17-T5): TRUE** — kernel in its one-variable containment form; with C3⁺ the transcendence-degree step is no longer needed.
+- **C3⁺ (J17-T6): TRUE** — kernel, up to the definitional hand step that `F′(t₁, …, t_m)` is a tower of simple transcendental
+  adjunctions (3.2). §2.3's route (restriction to a line) was not used.
+- **Snyder's proof** (§2.3: "reference from memory, not re-read"): Mathlib's `NumberTheory/FLT/MasonStothers.lean` module doc names
+  "Noah Snyder's paper 'An Alternative Proof of Mason's Theorem'" (via Lemmermeyer's note), which matches §2.3's title; the journal and
+  year stay unchecked.
+
+### 4.3 Proposed edits (standing rule 7; the front-page lane writes them)
+- `CLAUDE.md` § The gate, the recorded counts: `declarations=7051 refutations-skipped=304 sites=279`, `vacuous=0 stale=0 declared=3
+  witnessed=17 generic=257 unknown=2`. § Trust ledger: 1109 clean, 11 axiom-free, 5 declared purchases.
+- `LEDGER.md`: a row (or an extension of J17K's bridge row) — "Lemma NP over every field with `2 ≠ 0`; the genus-0 twin and
+  characteristic 2 false; C3 in one variable and C3⁺ (no embedding of `ℚ(2 + L, √((2 + L)³ − (2 + L)))` into a purely transcendental
+  tower over a field algebraic over `ℚ`): `[Fischer1990]` Remark 1's first sentence refuted in the kernel", `[kernel]`,
+  `Proofs/HadwigerNelson/NoParam.lean`, FS-39 (J17K2). § B: J17-T4, J17-T5, J17-T6 graded `[hand]` → `[kernel]` (T6 up to the tower
+  reading of "purely transcendental").
+- `plans/M2-S1D-bridge.md` §1 table: J17-T4/T5/T6 kernel decisions "declined" → "kernel (J17K2, `NoParam.lean`)"; §2.3 "(characteristic
+  0)" → "(characteristic ≠ 2)".
+- `plans/STUB-plane-bridge.md` (FS-39): phase C's C3 and NP are in the kernel.
+- J17K's brief (`data/crunch-2026-09-25/briefs/J17K-M2-bridge-kernel.md` line 130), for the record only: in odd characteristic no step
+  of the kernel proof breaks (Mathlib's `flt_catalan` descends in characteristic `p`); the exact boundary is characteristic 2, where
+  NP is false.
+
+### Would-have-searched log (stage 4)
+- None, for the whole job: no move was a search.

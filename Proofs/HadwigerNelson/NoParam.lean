@@ -281,7 +281,9 @@ theorem sqrt_not_mem_adjoinTranscendental_bot_liouville :
 `F′(t₁, …, t_m)` is such a tower over `F′` (algebraic independence is successive transcendence). Inhabited below at
 `ℚ ⊆ ℚ(L)` (`isPureTower_bot_liouville`). -/
 inductive IsPureTower {Ω : Type*} [Field Ω] (K : Subfield Ω) : Subfield Ω → Prop
+  /-- The empty tower. -/
   | refl : IsPureTower K K
+  /-- One more simple adjunction `L ⊆ L(t)`, `t` transcendental over `L`. -/
   | adjoin {L : Subfield Ω} (t : Ω) : IsPureTower K L → Transcendental L t →
       IsPureTower K (IntermediateField.adjoin L {t}).toSubfield
 

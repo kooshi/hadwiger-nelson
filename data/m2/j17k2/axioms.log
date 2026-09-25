@@ -1,0 +1,39 @@
+slot: admitted axioms.sh: mem 20 GiB (hard cap), cpus 0,1,2,3
+==> axioms: this run's full output: build/gate/axioms/20260925T232020Z-234903.log
+    audited: 1125 records — 1109 clean on the standard axioms, 11 axiom-free, 5 declared purchase(s)
+    clean records, by axiom set:
+       1019  [propext, Classical.choice, Quot.sound]
+         49  [propext]
+         40  [propext, Quot.sound]
+          1  [Quot.sound]
+         11  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    RECORDED COUNT IS STALE — update CLAUDE.md § Trust ledger: 1034 clean → 1109
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20260925T224649Z-141964.log
+    + HadwigerNelson.NoParam.X_sq_not_mem_range_C  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.exists_algebraMap_eq_of_sq_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.exists_eq_C_mul_sq_of_mul_eq_sq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.isPureTower_bot_liouville  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.isSquare_cube_sub_self_X_sq_zmod_two  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.isSquare_twin_sq_sub_one  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.mem_of_isPureTower  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.mem_range_C_of_sq_eq_cube_sub_self  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.natDegree_eq_zero_of_mul_mul_sub_eq_sq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_forall_mem_adjoinTranscendental_bot_liouville  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_forall_mem_isPureTower  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_isSquare_cube_sub_self  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_isSquare_cube_sub_self_of_charZero  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_mem_adjoinTranscendental_liouville  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.not_mem_adjoinTranscendental_of_sq_eq  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.sqrt_not_mem_adjoinTranscendental_bot_liouville  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.transcendental_two_add_liouvilleNumber  CLEAN [propext, Classical.choice, Quot.sound]
+    + HadwigerNelson.NoParam.twin_not_mem_range_C  CLEAN [propext, Classical.choice, Quot.sound]
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
+==> axioms: OK — 1109 clean, 11 axiom-free, 5 declared purchase(s)
+    full output: build/gate/axioms/20260925T232020Z-234903.log
