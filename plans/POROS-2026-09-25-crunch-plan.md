@@ -118,3 +118,20 @@ hunch: queue-starves-on-plans
   raised to 0.75 in my message (the ledger entry keeps its registered 0.6; the raise is a reading, not evidence). Three checks named
   for the derivation agent: the band collapse at a ramified prime above 3; C1(5)'s type bound through CL2's gluing; the parity step
   when `1/2 ∉ R_F`. Response: pending.
+- **Draft 1 received** (planner, protocol at 7e35da20). Adopted: F1 as Stage 0 job J02 with blind verifier J09 after; F2 as M1 (FS-91
+  re-posed as the character local–global theorem, absorbing FS-82 and FS-83's remainder); F3 as "at most three milestones open, no job
+  consumes another open milestone's unverified claim except as a named hypothesis", put to Kooshi; F4, F6 verbatim; F5 as the opening
+  paragraph. **Declined:** the planner carrying §G for the first milestones (its 300k cannot hold `LEDGER.md` plus a walk; WORKFLOW 3.1.4) —
+  replaced by one walk with a verdict column per milestone. Recorded, not contested.
+- **Send 3** (review of draft 1):
+  - (c) **Ban:** FS-45's `K(√7)` instance needs a fresh LRAT of the 588-core (`plans/STUB-chain-theorem.md` line 76: "no proof log on
+    disk"), i.e. a SAT run — out until 10-01. K1 scoped to the chain theorem, the 18-vertex ℚ(√2,√3) instance by `decide +kernel`, and the
+    `K(√7)` bound conditional on `G₄`. D-six's character enumeration at 23, 43 and D-one-prime's torsion lists: in by §1.7, briefed as
+    complete enumerations fixed by a derivation, and logged.
+  - (a) Kernel order: FS-45 (scoped), FS-39 route C only (existing machinery per G63; the Artin–Lang half hand-only), FS-87's stripe
+    lemma; FS-47 before FS-87 if time is short.
+  - (b) FS-76 rank 1: one mind plus a blind verifier, stage-gated at about 2.5 h, with a second mind launched only on a named stall.
+  - Change 1: J05 (CLAUDE.md compression) off minute zero; ask Kooshi "raise to 300k, or compress?"; default J05 at T+6 h.
+  - Change 2: J09 blind in parallel with J02 from minute zero, for the grade "two independent derivations".
+  - Frame: if F1 lands, the conjecture's testable range is L = 5 alone, so FS-84's post-ban plan tops the P3 list.
+  Response: pending.
