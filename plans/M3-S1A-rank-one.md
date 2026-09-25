@@ -312,3 +312,61 @@ side, and swapping its two colours gives a point whose tail on the unbounded sid
 | W3 | test KE on FS73-T30's other three wall sets and the triangle-chain family | not run: only the named control and the one derived `D` were computed |
 | W4 | enumerate non-BFS wall points of the control, to hunt one whose swaps all stay rigid (a KE falsifier) | not run; named in §3.5 as KE's killing test |
 | W5 | scan sets near the control for an all-rigid completion (an A-C hunt) | not run; §3.2 turns A-C into a question about single colourings, for derivation |
+
+---
+
+## Stage 4 — SAVED (the claims, the reviewer's view, C0 scored)
+
+### 4.1 The claim list (J20's fixed list, verdicts; grades per `CLAUDE.md` § Notation)
+
+| claim | verdict | grade | address |
+|---|---|---|---|
+| A-T1 (R2) | **GAP at KE** (neither proved nor refuted) | — | §3.5 |
+| A-T1′ | GAP (equivalent to A-T1; the equivalence proved) | hand | §2.5 |
+| A-T2 | GAP (equivalent to A-T1 through T35, re-derived) | hand | §2.5 |
+| A-K0 | **TRUE**, in the stronger local form K0-loc (one rigid phase suffices) | hand | §2.1 |
+| A-K1 | **TRUE** | hand | §2.2 |
+| A-K2 | **TRUE** | hand | §2.3 |
+| A-Kq | **TRUE for the labelled quotient** (FS-79's tool's); the rigidity clause **FALSE for the plain quotient** (`D = {1}`); the wall clause true for both | hand | §2.4 |
+| A-K3 | GAP: **logically equivalent to A-T1**, so not a smaller step | hand (the equivalence) | §2.5, §3.1 |
+| A-C | **not landed**: one derived candidate, `{1,5,7,10,13,27,33}`, keeps a non-rigid phase | tools exact | §3.4 |
+| J18-DC (new) | A-T1 fails iff some heteroclinic four-colouring has an all-rigid Δ-completion | hand | §3.2 |
+| J18-KE⟹ (new) | KE ⟹ A-T1 | hand | §3.5 |
+| J18-K0H (new) | the rank-one form of FS86-dB-H with two-sided gap-freeness is false | hand + FS-79 tools | §2.1 |
+
+### 4.2 What someone who trusts none of this must check (in order of evidential value)
+
+1. **F2** (§2.0): inside a single cycle a path is deterministic, so a point with both limit phases one rigid `C` is on `C`'s orbit.
+   K0-loc, A-K1 and the Kempe half of everything rest on it.
+2. **A-Kq (ii)–(iii)** (§2.4): the orbit step `v → gv ⟹ gv ∈ SCC(v)` and the SCC correspondence. The plain-quotient counterexample
+   `D = {1}` checks by hand in a minute.
+3. **J18-DC** (§3.2): the one non-trivial step is "a subshift of a zero-entropy SFT has only single-cycle phases", which is F3 (a) applied
+   to the smaller shift's own window graph.
+4. **The tools-grade rows** (J18-CTL, J18-DPR): `python3 tools/crunch_j18_phases.py --controls` reproduces FS-79's independent numbers
+   for the control; `--plant` must print two FIRED lines. `python3 tools/crunch_j18_phases.py 1,5,7,10,13,27,33` gives the derived check
+   in seconds. **Not load-bearing for any theorem:** the Kempe classification in `tools/crunch_j18_swaptail.py` reads "bounded on one
+   side" off a finite window (about 1,450 positions on each side of the junction, periodic outside it). It is evidence for the stall only.
+5. **Not claimed:** anything about `k ≠ 4` beyond the lemmas' stated generality; EES's examples (unread).
+
+### 4.3 C0 scored
+
+| C0 entry | registered | outcome |
+|---|---|---|
+| A-K0, A-K1, A-K2 | 0.97, 0.97, 0.98 | proved |
+| A-Kq labelled / plain | 0.90 / 0.05 | proved / refuted (`D = {1}`) |
+| the equivalences | 0.97 | proved |
+| A-T1, A-K3, A-C | 0.45, 0.45, 0.55 | open |
+| J18 proves A-T1 / constructs A-C / stalls with A-K0–A-K2 proved | 0.10 / 0.10 / 0.80 | the stall happened |
+| P-J18-DC (non-rigid phase survives in `D′`) | 0.80 | happened |
+| the planner's P-A1 / P-A2 / P-A3 / P-A4 | 0.25 / 0.10 / 0.55 / 0.10 | P-A3 happened |
+| the planner's P-A5, P-A6 | 0.50 / 0.85 | not reached / not scorable (EES unread) |
+
+### 4.4 Edits proposed for the front-page lane (not made here)
+
+- `plans/M3-exotic-colourings.md` §M item 1 and §S's parenthesis "the claims below hold in either form": correct to "the labelled
+  quotient; the plain quotient's rigidity clause fails (`D = {1}`)" (§2.4).
+- The brief's "A-K2 is its rank-one form" (of FS86-dB-H): add "with *left*-gap-freeness; the two-sided form is false in rank one" (K0-H).
+- FS-76's stub, rank-1 item: A-K3 is equivalent to R2; R2 is reformulated by J18-DC (a statement about single heteroclinic colourings)
+  and reduced to KE; 8 of 9 BFS wall points of the control have trivial completions, which explains FS-79's "11 of 11".
+- `BIBLIOGRAPHY.md` `[EggletonErdosSkilton1990]`: DOI 10.1007/BF01787476, closed access; abstract read from the publisher's page; paper
+  still unread (ask Kooshi for a browser save).
