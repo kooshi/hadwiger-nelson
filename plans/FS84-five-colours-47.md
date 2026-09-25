@@ -379,3 +379,57 @@ four-class (window-frequency) form, which row 80 shows can refute where `χ_f < 
 - Would have asked the ten survivors' UNKNOWN residue targets at 600 s; instead recorded (G68, type (A)) that such an answer can only colour a
   finite lattice, and demoted the ask to S4.
 - Would have sampled a four-colour ball at `d_ball ≈ 18` on Λ₂₄₀ to price S3; instead priced it from row 84's recorded numbers (§S).
+
+## Stage 4 — SAVED
+
+### 4.1 §IQ — the invariant question (WORKFLOW 3.3)
+
+1. **Existence form.** Is there a finite unit-distance graph with vertices in ℚ(√47)² that is not four-colourable?
+2. **Structural form.** *Let `R` be a countable abelian group, `U = −U ⊂ R` generating, and `k ≥ 2`. When does `Cay(R, U)` carry a probability
+   measure on its proper `k`-colourings invariant under translation (and under any amenable group of automorphisms preserving `U`)?* Posed
+   with the arithmetic stripped, it is equivalent to `k`-colourability for every such graph (orbit closure plus Følner averaging), and it asks
+   about **every** colouring at once, through the measure its orbit carries. For ℚ(√47), `R = ℤ[U_F]` and the symmetry is `R ⋊ U_F` (solvable,
+   hence amenable), so the measure may be taken rotation-invariant too.
+3. **The invariant it forces.** The invariant random colouring's **joint window frequencies** — the probabilities of the colour patterns on a
+   finite window, consistent under the group — in symbolic dynamics, the invariant measure of the colouring subshift. Its single-class
+   shadow is the colour-class density (each `1/k` after symmetrising colours), whose upper bound is the plane's invariant independence density
+   `ι(F)`; its second-moment shadow is the pair-correlation (Delsarte) LP. **Both shadows are known too weak here:** the pair LP's bound is
+   the least local character mean's `0.2871 > 1/4` (row 92 names Hoffman's 0.2871; row 91's C0: pair correlations admit a purely archimedean
+   spectrum), and triangle-free graphs typically have `χ_f < 3` (§PA). So the invariant that could decide is the joint **four-class**
+   window measure at radius ≥ 2 (row 87 closes radius 1 on de Grey's lattice) — named, not yet shaped.
+4. **Its route.** Derivation fixes the window, the symmetry quotient and the relaxation level, and writes the dual as an identity (S1d);
+   an exact LP then checks that derived shape (S2), never escalating. A search never answers the structural form.
+5. **The open instances it would decide.** ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) (four against five at `L = 5`, rows 74, 84); ℚ(√3,√5)'s rank-8
+   lattice (FS-72); ℚ(√167) at five colours (FS-59); de Grey's field at six (FS-49's aim); in its single-class form, `χ_f(ℝ²) > 4`.
+
+### 4.2 §S — the stages (every one from 2026-10-01; S1 alone is solver-free and could start earlier if the owner rules so)
+
+| stage | what | kind | budget | stop rule | checkpoint / resume |
+|---|---|---|---|---|---|
+| **S1** | derivation: S1a the type-(A) theorem at ℚ(√47) (periodic case without `[AmbrusEtAl2023]`); S1b the invariant-measure equivalence and its single-class corollary, with Johnson's infinite-graph `χ_f` papers read first; S1c the one-prime reading of the ten minimal survivors, each ending in a **formula** character or a named obstruction; S1d the shape and price of S2's LP; S1e P-G75's linear-identity question | hand + exact checks of seconds | one agent, ~3 h, 350k | a stage whose derivation stalls twice is written as GAP with the missing step named | the record's `Stage n — SAVED` sections; resume at the first unsaved |
+| **S1V** | blind verifier of S1a–S1c against a fixed claim list | hand | one agent, ~2 h, 300k | per claim TRUE / FALSE / GAP; a blind phase that stalls moves to the lemma statements (FS-89's fallback) | its record's stages |
+| **S4** | the colouring side: (i) S1c's formula characters checked exactly on each survivor's unit vectors; (ii) the UNKNOWN residue targets re-asked (`tools/fs81_d47.py recheck --budget 600`); (iii) quotients at `N = 16–20`; (iv) a four-colour finder on the antipodal quotient (G58) | exact check, then SAT and finders | (i) seconds; (ii) ≤ 375 asks × 600 s ≈ 62 CPU-h worst case (15 survivors carry UNKNOWN targets, ≤ 25 each; `survivors.md`), 4 h wall on 16 cores; (iii)–(iv) 4 h wall | a lattice leaves the list at its first certified colouring (K1 checker); the stage ends at its wall | per-ask JSONL appended by the tool; resume by re-running with `--skip-done` (verify the flag exists before launch, T2) |
+| **S2** | the four-class window LP of S1d's shape on the smallest lattice S4 leaves | exact LP | set by S1d; declined if S1d prices it above one machine-day | infeasible → a Farkas dual, read back as an identity and checked exactly; feasible → a typed null at that shape | LP instances written to `data/fs84/s2/` before solving; one instance per process under 15 min, else split |
+| **S3** | the finite refusal: forced-pair asks at chainable distances (`d² ∈ {1/2, 5/2, 12, …}`, where `4d² − 1` is a square in ℚ(√47) and the spindle closes in-field, row 44; or `1/δ ∈ ℤ[U]`, G55) by counterexample-guided growth (G33) from the 169-point witness (row 73) | SAT (kissat, CaDiCaL LRAT), K2 checker | **runs only if S1–S4 hand it a candidate** (a lattice with `N(d*) ≤ 5·10⁶`, or a derived forcing gadget); default declined: row 84 prices a matched ball at ≥ 5.1·10⁷ points | the first UNKNOWN at the matched radius ends it (FS-70's six-attempt precedent, row 76) | per-wave halo files under `data/fs84/s3/`; resume from the last wave |
+
+**Order:** S1 → S1V and S4(i) together → S4(ii)–(iv) → S2 → S3. **Pricing, from records only** (no sampling run): row 84 (`t_A` = 55.41 s at
+`d*` = 18.41 on 39,829 points, quiet; `R = 1.4` at 462.7 s; the undecided band `d_ball` 8.3–14.7); `survivors.md` (`N(d*)` from 5.1·10⁷ at
+Λ₂₄₀ to 2.5·10¹¹ at Λ₂₄₂₄); row 76 (a 1.9 M-point control undecided after 14,800 s); Ga12's caveat: the control is ω = 3, the survivors ω = 2.
+
+### 4.3 §P — registered predictions (before any post-ban stage runs)
+
+| id | statement | probability | the uninformative outcome, and is it reachable |
+|---|---|---|---|
+| P-FS84 | the milestone certifies `χ(ℚ(√47)²) = 5` | 0.03 | a typed null (0.965) — reachable and likeliest; a four-colouring of the plane, 0.005 |
+| P-1p | S1c/S4(i) four-colour at least one minimal survivor by a character built on its one split prime | 0.35 | none coloured — reachable |
+| P-surv | all ten minimal survivors still survive S4 | 0.45 | reachable; complements P-1p only in part (other routes may colour) |
+| P-int | `ι(ℚ(√47)) < 1/4` (the single-class averaged route proves five, and `χ_f(ℝ²) > 4`) | 0.03 | S1d finds the single-class LP feasible at every shape priced — reachable |
+| P-S2 | S2's four-class window LP refutes four-colourability of some ℚ(√47) lattice | 0.07 | feasible at the priced shape — reachable |
+| P-S3 | a four-colour forced pair at a chainable distance is certified over ℚ(√47) | 0.03 | S3 declined or UNKNOWN — reachable |
+| P-S1a | S1a's no-periodic theorem stands on two derivations without `[AmbrusEtAl2023]` | 0.85 | a GAP at the ramified 47-place (Lemma P's scope) — reachable |
+| P-G75 | no local linear identity pins a ℚ(√47) lattice's spectrum to torsion (G75's reading) | 0.85 | a named identity found — reachable, and it would be the finding |
+| P-G15 | a refusal, if one lands, factors as pigeonhole × kill | 0.70 | unscored unless P-S2 or P-S3 lands |
+| P-int′ | the ℚ(√47) plane is five-chromatic with `χ_f ≤ 4` (G24's integrality at five) | unscored | reachable only if P-FS84 lands |
+
+**Pre-decided responses (Ga10):** if S4 colours every minimal survivor, the next survivors are the two-split-prime lattices, and the report
+says the ten were a one-prime artefact, not that ℚ(√47) is "closer to four". If S2's LP is feasible, the report names the shape, not the field.
