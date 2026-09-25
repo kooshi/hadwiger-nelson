@@ -5,7 +5,17 @@ The owner reviews by artifact; J20 verifies blind (not read, not messaged). Stag
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, grade, address)*
+*(one line per theorem, grade, address; filled at each stage)*
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| J18-F3 | one-dimensional SFT facts: some phase not a single cycle ⟹ `h > 0`; all single cycles ⟹ `h = 0`, `X` countable, and (wall ⟺ `X` infinite) | hand (standard) | §2.0 |
+| J18-K0loc | a periodic point of a rigid phase is gap-free, its Kempe components are two-sided infinite and cross every cut, its `m`-windows carry `≥ k − 1` colours (⟹ A-K0) | hand | §2.1 |
+| J18-K0H | the rank-one form of FS86-dB-H with two-sided gap-freeness is false (T30's rigid–rigid walls) | hand + FS-79 tools | §2.1 |
+| J18-AK1 | A-K1 | hand | §2.2 |
+| J18-AK2 | A-K2, and a wall leaves a phase only at a left gap whose second colour survives | hand | §2.3 |
+| J18-AKq | A-Kq for the labelled quotient; its rigidity clause false for the plain quotient (`D = {1}`) | hand | §2.4 |
+| J18-EQ | A-T1 ⟺ A-T1′ ⟺ A-T2 (T35 re-derived) ⟺ A-K3 | hand | §2.5 |
 
 ---
 
@@ -74,3 +84,129 @@ proofs are the first written derivations.
 | # | the move a search would have made | what was done instead |
 |---|---|---|
 | W1 | recompute the phases of T36's 377 all-rigid sets and classify them by chirality, to see whether the null ever sampled a chiral rigid phase | not run (a scan over many `D`); the question is kept as a reading in stage 3: T34 makes an all-achiral shift wall-free for free, so the null may measure achirality, not R2 |
+
+---
+
+## Stage 2 — SAVED (the local lemmas)
+
+### 2.0 Setting and the one-dimensional facts used
+
+`k ≥ 2` colours (the claims are at `k = 4`; every lemma below is stated for general `k` where it costs nothing), `D ⊂ ℤ_{>0}` finite,
+`m = max D`, `X = X_k(D)`. `X` is a shift of finite type with window `m + 1`: a sequence `c ∈ [k]^ℤ` lies in `X` iff each of its
+`(m+1)`-words is proper on its own positions, since every edge `{x, x + d}` (`d ≤ m`) lies in some window of length `m + 1`. `G̃` is the
+window-state graph of the brief (vertices `L_m(X)`, edges `L_{m+1}(X)`, the edge `u` running from `u[0, m)` to `u[1, m + 1)`). Every
+vertex of `G̃` has in- and out-degree ≥ 1, and `c ↦ (c[x, x + m))_{x ∈ ℤ}` is a bijection from `X` onto the bi-infinite paths of `G̃`
+(the window property). A **phase** is a cyclic strongly connected component (SCC); **rigid** means a single cycle, equivalently (for a
+cyclic SCC) every vertex has exactly one out-edge inside the SCC.
+
+- **F1 [hand, standard].** A finite path whose first and last vertices lie in one SCC `C` lies in `C`.
+- **F2 [hand].** Let `C` be rigid. If the path of `c ∈ X` is in `C` at times `s < t`, it follows `C`'s cycle between them (F1, and one
+  out-edge per vertex inside `C`). Hence a point whose path lies in `C` for all `x ≤ 0` and returns to `C` at some later time agrees on
+  `ℤ` with the periodic point `p` of `C` that it follows for `x ≤ 0`; in particular a point with both limit phases equal to a rigid `C`
+  is a point of `C`'s periodic orbit.
+- **F3 [hand; standard, Lind–Marcus §4.3–4.4, recalled, not re-read].** (a) If some phase is not a single cycle, `h(X) > 0`: a vertex
+  `v` with two in-SCC out-edges carries two closed walks `γ₁, γ₂` at `v` with different first edges, of lengths `a, b`; the words in
+  `{γ₁, γ₂}` decode uniquely (the first edge after each return to `v` names the block), so `|L_n(X)| ≥ 2^{⌊(n − m)/max(a,b)⌋}`.
+  (b) If every phase is a single cycle, a path of length `n` is fixed by the sequence of SCCs it visits (a path in the condensation,
+  which is acyclic: at most `2^s` choices, `s` the number of SCCs), its entry and exit times (at most `(n + 1)^{2s}`), and its entry
+  vertices (at most `|G̃|^{s}`), because inside a single cycle it is deterministic and a non-cyclic SCC is one vertex visited once: so
+  `|L_n(X)|` is polynomial, `h(X) = 0`, and `X` is countable. (c) If every phase is a single cycle: a point confined to one phase is
+  periodic (one orbit per phase, finitely many), and a point visiting two phases crosses a wall; conversely a wall `C → C′` extends to
+  bi-infinite paths (backwards round `C`, forwards round `C′`), one for each position of the crossing, pairwise distinct. So **given
+  every phase rigid: a wall exists ⟺ `X` is infinite ⟺ `X` has a non-periodic point.**
+
+### 2.1 A-K0, in a local form
+
+**Lemma K0-loc [hand].** Let `p` be a periodic point of a **rigid phase** `C` (no hypothesis on the other phases). Then:
+- (b) every two-colour Kempe component of `p` is infinite;
+- (a) every closed neighbourhood `N[x] = {x} ∪ (x ± D)` carries all `k` colours;
+- (c) every Kempe component of `p` is unbounded in both directions, so it has an edge crossing every cut `(t − 1 | t)`;
+- (d) every `m`-window `p[t − m, t)` carries at least `k − 1` colours; at `k = 4`, at least three.
+
+*Proof.* (b) Let `K` be a finite non-empty `{e, f}`-component. Swapping `e ↔ f` on `K` is proper (a Kempe swap) and changes every vertex
+of `K`, so `p′ ≠ p`, and `p′ = p` outside a bounded interval. The path of `p′` is then in `C` for `x ≪ 0` and again for `x ≫ 0`, so F2
+gives `p′ = p`: a contradiction. (a) If `N[x]` misses `e`, then `{x}` is a whole `{p(x), e}`-component (the neighbours of `x` avoid `p(x)`
+by properness and `e` by hypothesis), finite, contradicting (b). (c) Let `L` be a period of `p`. The `{e,f}`-subgraph `H` is
+`σ^L`-invariant, so `σ^L` permutes its components, and at most `L` components meet `[0, L)`. `K` is infinite by (b), so unbounded on one
+side, say the right; then `σ^{−jL}K` meets `[0, L)` for infinitely many `j`, two coincide, and `K` is invariant under a non-zero shift,
+hence unbounded on both sides. A connected graph with vertices on both sides of a cut has an edge crossing it. (d) By (a) `p` uses
+all `k` colours. If `p[t − m, t)` missed two colours `e, f`, no `{e,f}`-edge would cross the cut at `t` (its left end lies in
+`[t − m, t)`, since edges have length `≤ m`), contradicting (c). ∎
+
+**A-K0 [hand]** follows (its hypothesis "every phase rigid" is stronger than K0-loc's).
+
+**Corollary K0-H (a correction of the brief's gloss on Theorem H) [hand + FS-79 tools].** The rank-one transcription of FS86-dB-H with
+two-sided gap-freeness is **false**: FS73-T30's sets carry walls between two rigid phases (FS79-C-deBruijn §3a: `{1,5,7,10}`,
+`{3,5,9,10}`, `{3,7,9,10}`, `{5,7,9,10}`), the periodic point of the wall's left end is gap-free by K0-loc (a), and the wall point
+agrees with it on a left half-line and differs from it. So in rank one, two-sided gap-freeness does not give unique continuation; only
+the one-sided form (A-K2) does. **And rigid–rigid walls exist in four-colouring shifts:** R2 excludes them only through the *global*
+hypothesis that no phase anywhere has entropy.
+
+### 2.2 A-K1
+
+**A-K1 [hand].** If every phase of `X₄(D)` is rigid and `X₄(D) ≠ ∅`, then `χ(G(ℤ, D)) = 4`.
+*Proof.* `X₄ ≠ ∅` gives `χ ≤ 4`. If `χ ≤ 3`, then `X₃(D) ≠ ∅`, and its (finite, non-empty, essential) window graph has a cycle, so `X₃`
+has a periodic point `p₃`. Read as a four-colouring, `p₃ ∈ X₄` is periodic, so its path is a closed walk, which lies in one phase of
+`X₄`, rigid by hypothesis. But `p₃` never uses the fourth colour, so every `N[x]` misses it, against K0-loc (a). ∎ (A second route is
+row 45's entropy floor: a periodic three-colouring's class of density `≥ 1/3` can be recoloured freely into the fourth colour, `h ≥ (log 2)/3`.)
+
+### 2.3 A-K2
+
+**A-K2 [hand].** Let `c ∈ X_k(D)` be **left-gap-free**: for every `x`, `{c(x − d) : d ∈ D} ∪ {c(x)}` is all `k` colours. If `c′ ∈ X_k(D)`
+agrees with `c` on `{y < x₀}`, then `c′ = c`.
+*Proof.* By properness `c(x) ∉ {c(x − d)}`, so `{c(x − d) : d ∈ D}` has exactly `k − 1` colours and `c(x)` is the one left. Induct on
+`x ≥ x₀`: `c′(x) ∉ {c′(x − d)} = {c(x − d)}`, so `c′(x) = c(x)`. ∎
+**Where a wall leaves [hand].** If a path of `G̃` leaves a phase `C`, its last vertex `w` in `C` has two out-edges (one along `C`, one
+out), so two letters extend `w`; both avoid the letters at positions `m − d`, `d ∈ D`, so those positions carry at most `k − 2` colours:
+the next colour is not determined by the window. Equivalently (F2): a wall leaves `C` iff some `c ∈ X` agrees with the periodic `p` of
+`C` on a left half-line `(−∞, t)` and differs at `t`; then `p` has a left gap at `t`, and `c(t)` is a colour missing from `p`'s left
+neighbourhood of `t` other than `p(t)`.
+
+### 2.4 A-Kq — true for the labelled quotient, false for the plain one
+
+Two readings of "its quotient by colour permutations": the **plain quotient** `G_pl` (vertices `L_m/S_k`, edges the `S_k`-orbits of
+`(m+1)`-words) and the **labelled quotient** `G_lab` (vertices `L_m/S_k`; out of `[w]`, one edge for each letter `a` with `w·a ∈ L_{m+1}`,
+`w` a fixed representative, to `[w[1,m)·a]`). `G_lab` is what FS-79's tool computes (`data/fs79/comp-debruijn/tools/rank1_phases.py`,
+`build`: one edge per extending colour of the canonical word), so T35 and T36 are statements about `G_lab`.
+
+**A-Kq (labelled) [hand].** Every phase of `G̃` is rigid iff every phase of `G_lab` is; a wall exists in `G̃` iff one exists in `G_lab`.
+*Proof.* (i) *Lifting.* For `v = g·w`, the edge `a` of `[w]` lifts to the unique edge `v → v[1,m)·(g a)`; so the out-edges of `v` in `G̃`
+are in bijection with those of `[v]` in `G_lab`, and every path of `G_lab` lifts from every lift of its start. (ii) *The orbit step.* A
+path `v → g·v` in `G̃` gives `v → gv → g²v → ⋯ → g^{ord g}v = v`, so `gv` lies in the SCC of `v`. (iii) *SCCs.* `[v]`, `[w]` share an SCC of
+`G_lab` iff `v` shares an SCC of `G̃` with some `g·w`: lift a path `[v] → [w]` from `v` (ending at some `gw`) and a path `[w] → [v]` from
+`gw` (ending at some `hv`), then (ii). Cyclicity transfers the same way (lift a closed walk at `[v]` to `v → gv` and apply (ii)). (iv)
+*Rigidity.* An edge `v → v′` of `G̃` stays in `SCC(v)` iff its image stays in `SCC([v])`: ⟹ by projection; ⟸ since `[v′] ∈ SCC([v])`
+gives `v′ ~ gv` by (iii), so `v → v′ → ⋯ → gv` and (ii) puts `v′` in `SCC(v)`. With (i) the in-SCC out-degrees of `v` and `[v]` agree,
+and a cyclic SCC is a single cycle iff every in-SCC out-degree is 1. (v) *Walls.* A wall `C → C′` in `G̃` cannot have `C′ = gC` (by
+(ii) that would put them in one SCC), so by (iii) it projects to a wall `[C] → [C′]`; conversely a wall of `G_lab` lifts by (i) to a
+path from `C` to some `gC′ ≠ C` (else `[C] = [C′]`), a wall. ∎
+
+**A-Kq (plain) is false [hand].** `D = {1}`: `L_1 = {a, b, c, d}`, one orbit; `L_2` = the twelve words `xy`, `x ≠ y`, one orbit. `G_pl`
+is one vertex with one loop: its only phase is a single cycle. `G̃` is the complete digraph on four vertices (out-degree 3), one phase,
+not a single cycle (`h = log 3`). The **wall** clause does hold for `G_pl` (it depends only on vertices and adjacency, which `G_pl` and
+`G_lab` share), and **`G_lab` rigid ⟺ `G_pl` rigid and every vertex of every phase carries at least `k − 1` colours** (a vertex with
+trivial stabiliser has no two letters identified; conversely K0-loc (d) applies to the lifts, which are periodic-point windows).
+*Where the planner's one-line proof (§M item 1) breaks:* "an edge's lift is determined by its source" fails exactly at vertices with
+non-trivial stabiliser, i.e. windows with at most `k − 2` colours. **Correction owed** to `plans/M3-exotic-colourings.md` §M item 1 and to
+the parenthesis "the claims below hold in either form": they hold for `G_lab`, and A-Kq's rigidity clause fails for `G_pl`.
+
+### 2.5 A-T1′ ⟺ A-T1, and the others' logical places
+
+- **A-T1 ⟺ A-T1′ [hand; F3].** Given A-T1: if `h(X) = 0` then every phase is a single cycle (F3 a), so no wall (A-T1), so `X` is finite
+  (F3 c). Given A-T1′: if every phase is rigid then `h = 0` (F3 b), so `X` is finite, so no wall (F3 c). ∎
+- **A-T2 ⟺ A-T1 [hand; T35, re-derived here].** T35 re-derived: if every phase is rigid and a wall exists, the finitely many periodic
+  points have a common period `N`, so `Nℤ ⊆ P`, while a wall point is non-periodic, so `F = 0 ≠ P`; if some phase is not a single cycle,
+  its periodic points `(γ₁^a γ₂)^∞` have unbounded least periods, so `P = 0 = F`; if every phase is rigid and there is no wall, every
+  point is periodic and `P = F`. So `P ≠ F` iff every phase is rigid and a wall exists, and A-T2 is A-T1 for every `D`.
+- **A-K3 ⟺ A-T1 [hand].** A-K3 ⟹ A-T1 by the orbit argument (the plan's §M, T34's step 5): walls `C → C′ → gC → gC′ → ⋯` close up since
+  `S_k` is finite, putting `C` and `C′` in one SCC. A-T1 ⟹ A-K3 vacuously (no wall under the hypothesis). **So A-K3 is not a smaller
+  obligation: it is the theorem in "reversal" form.** Its only value is as a route: a proof of A-K3 must construct, from a wall, a
+  return wall (or reach a contradiction), and T30's rigid–rigid walls (K0-H) show that the construction must pass through a phase with
+  entropy whenever one exists.
+
+### 2.6 What the local lemmas give the hard step (forward to stage 3)
+
+In an all-rigid shift: every periodic point is gap-free with all Kempe components two-sided and crossing every cut (K0-loc), every
+window carries at least three colours (so `G̃ → G_lab` is a free quotient on phases), and a wall leaves `C` only at a left gap of its
+periodic point where a second colour survives (A-K2). **Nothing so far uses `k = 4`**: K0-loc, A-K1 (with `k`), A-K2, A-Kq and the
+equivalences hold for every `k`. At `k = 3` walls are excluded by FS73-T24 (density), a height argument with no analogue at four.
