@@ -300,7 +300,8 @@ ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-
 `ℚ(√47)` is a `p ≡ 3 (mod 4)` with 47 a square — 11, 19, 23, 31, 43, … (not 3, not 7; the dyadic place gives nothing, `47 ≡ 7 (mod 8)`) —
 and **no level of any of those towers `UD(ℤ/p^k, 2)` is four-colourable**: at 11 and 19 by the exact all-levels certificates, and at
 every `p ≥ 23` by the ratio bound, whose chromatic floor exceeds 4 there (4.0148 at 23, 4.000044 at 31, 4.68 at 43, 4.74 at 47, and Weil's bound from there up)
-and is the same at every level of the tower. So if `χ(ℚ(√47)²) = 4`, it is by a colouring local at no prime at any depth; the
+and is the same at every level of the tower. So if `χ(ℚ(√47)²) = 4`, it is by a colouring local at no prime at any depth — **and, since
+FS-89, by no character colouring either** (`LEDGER.md` row 96: `Θ₄(R_{ℚ(√47)}) = ∅`, hand; the value five is not claimed); the
 local–global conjecture, read with every level allowed, predicts 5. His general question — *how much
 can the chromatic number grow for quadratic extensions* — is answered as far as finite witnesses reach: **at least four for fourteen
 fields, and no real quadratic field is known to need five.** The census's candidate class theorem (*every squarefree `d ≡ 11 (mod 12)`
@@ -518,7 +519,8 @@ on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-
   (row 88), and the plane over `ℚ₂(√3)` is rigid, so a yes means realising a local forcer without triangles ("is `4 ∈ F_tf`?", row 90). **What FS-86
   excludes, at exact scope:** nothing on the yes side — no triangle-free pinning identity was found or ruled out; on the no side (which would not
   answer 55.1) every non-periodic four-colouring reading finitely much structure over those fields (rows 91–92). ℚ(√2,√3), which has triangles,
-  is rigid given Heule's T721 (row 93), and bears on 55.1 only as the control. **Still open.**
+  is rigid given Heule's T721 (row 93), and bears on 55.1 only as the control. **FS-89 adds only to the no side** (`LEDGER.md` rows 95–96): no
+character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, and none four-colours ℚ(√47)'s plane; the yes side is untouched. **Still open.**
 - **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
   Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
   unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
@@ -535,6 +537,13 @@ on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-
 - **`χ(𝔽₁₇²) ∈ {5, 6, 7}`** — `[Moorhouse2010]` Table 6.1; open, and never touched here (289 vertices, against
   the 529 of the plane at 23). A 6 would answer the first digit (`CLAUDE.md` G48: is any finite plane exactly
   6-chromatic?), though `17 ≡ 1 (mod 4)` is never a usable prime, so it bears on no field's sieve.
+- *Checked, and not listed (no poser found):* **FS-89's rational band rigidity** (`LEDGER.md` row 95: every four- and five-colour band
+  character of `ℤ[i][1/p : p ≡ 1 (4)]` is torsion plus archimedean; closed-set rigidity modulo an isometric direction at two or more
+  primes). The plan's gate (26 zbMATH queries and Berend's citers), the close's (26 more, `data/fs89/close/prior-art-close-gate.txt`) and a
+  full reading of `[Berend1983]`, `[Berend1984]` and `[Berend1984min]` found no one who asked it: Berend states the hyperbolic theorem and
+  proves hyperbolicity necessary; the reading found no theorem, remark or question of his about an isometric direction (its §3). The nearest posed question, §2.4's periodicity at
+  four colours, is not answered by it: FS-89 is about character colourings of infinitely generated field planes, and §2.4 about every
+  colouring of a finitely generated group.
 - *Closed by others, listed so it is not re-closed:* **`d(6) = 1`** — `[deGreyParts2022]` §4 asks whether a
   more general polygonal tiling could reach it; `[SokolovVoronov2025]` answers no.
 
