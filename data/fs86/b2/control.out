@@ -1,0 +1,28 @@
+circle checks: |S_m| = 3*2^(m-1), norm one, S = -S, S_m onto S_{m-1}: OK (m = 1..8)
+FULL m=1 n=4 d=3 lmin=-1.000000 tight(exact)=True below=0 near=0 #min=3 |H_min|=1 H_min=P4/P^m:True second=3.000000  MATCH
+FULL m=2 n=16 d=6 lmin=-2.000000 tight(exact)=True below=0 near=0 #min=9 |H_min|=1 H_min=P4/P^m:True second=2.000000  MATCH
+FULL m=3 n=64 d=12 lmin=-4.000000 tight(exact)=True below=0 near=0 #min=21 |H_min|=1 H_min=P4/P^m:True second=0.000000  MATCH
+FULL m=4 n=256 d=24 lmin=-8.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=1 H_min=P4/P^m:True second=0.000000  MATCH
+FULL m=5 n=1024 d=48 lmin=-16.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=4 H_min=P4/P^m:True second=-8.000000  MATCH
+FULL m=6 n=4096 d=96 lmin=-32.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=16 H_min=P4/P^m:True second=-16.000000  MATCH
+FULL m=7 n=16384 d=192 lmin=-64.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=64 H_min=P4/P^m:True second=-32.000000  MATCH
+FULL m=8 n=65536 d=384 lmin=-128.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=256 H_min=P4/P^m:True second=-64.000000  MATCH
+POSITIVE CONTROL: PASS (row 67's table reproduced exactly at levels 1-8)
+PLANT-GEN m=1 n=4 d=3 lmin=-1.000000 tight(exact)=True below=0 near=0 #min=3 |H_min|=1 H_min=P4/P^m:True second=3.000000  MATCH
+PLANT-GEN m=2 n=16 d=7 lmin=-5.000000 tight(exact)=False below=4 near=0 #min=1 |H_min|=8 H_min=P4/P^m:False second=-3.000000  MISMATCH
+PLANT-GEN m=3 n=64 d=12 lmin=-4.000000 tight(exact)=True below=0 near=0 #min=21 |H_min|=1 H_min=P4/P^m:True second=0.000000  MATCH
+PLANT-GEN m=4 n=256 d=24 lmin=-12.000000 tight(exact)=False below=2 near=0 #min=2 |H_min|=64 H_min=P4/P^m:False second=-8.000000  MISMATCH
+PLANT-GEN m=5 n=1024 d=48 lmin=-16.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=4 H_min=P4/P^m:True second=-10.828427  MISMATCH
+PLANT-GEN m=6 n=4096 d=96 lmin=-32.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=16 H_min=P4/P^m:True second=-20.000000  MISMATCH
+PLANT-GEN m=7 n=16384 d=192 lmin=-64.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=64 H_min=P4/P^m:True second=-32.000000  MATCH
+PLANT-GEN m=8 n=65536 d=384 lmin=-128.000000 tight(exact)=True below=0 near=0 #min=45 |H_min|=256 H_min=P4/P^m:True second=-68.000000  MISMATCH
+PLANT 1 (a wrong generator pair at every level >= 2): WENT RED as it must
+PLANT-CONJ m=1 n=4 d=1 lmin=-1.000000 tight(exact)=False below=2 near=0 #min=2 |H_min|=1 H_min=P4/P^m:True second=1.000000  MISMATCH
+PLANT-CONJ m=2 n=16 d=4 lmin=-4.000000 tight(exact)=False below=2 near=0 #min=2 |H_min|=4 H_min=P4/P^m:False second=0.000000  MISMATCH
+PLANT-CONJ m=3 n=64 d=8 lmin=-8.000000 tight(exact)=False below=4 near=0 #min=4 |H_min|=8 H_min=P4/P^m:False second=0.000000  MISMATCH
+PLANT-CONJ m=4 n=256 d=32 lmin=-32.000000 tight(exact)=False below=4 near=0 #min=4 |H_min|=32 H_min=P4/P^m:False second=0.000000  MISMATCH
+PLANT-CONJ m=5 n=1024 d=32 lmin=-32.000000 tight(exact)=False below=52 near=0 #min=4 |H_min|=128 H_min=P4/P^m:False second=-16.000000  MISMATCH
+PLANT-CONJ m=6 n=4096 d=128 lmin=-128.000000 tight(exact)=False below=52 near=0 #min=4 |H_min|=512 H_min=P4/P^m:False second=-64.000000  MISMATCH
+PLANT-CONJ m=7 n=16384 d=128 lmin=-128.000000 tight(exact)=False below=308 near=0 #min=4 |H_min|=2048 H_min=P4/P^m:False second=-64.000000  MISMATCH
+PLANT-CONJ m=8 n=65536 d=512 lmin=-512.000000 tight(exact)=False below=308 near=0 #min=4 |H_min|=8192 H_min=P4/P^m:False second=-256.000000  MISMATCH
+PLANT 2 (the wrong conjugation): WENT RED as it must
