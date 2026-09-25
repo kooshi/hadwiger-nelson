@@ -919,7 +919,7 @@ arithmetic on windows plus a persistence derivation, exactly as S0B-T3–T5 were
 
 ## §R-close. The close (2026-09-25; two close planners, de Bruijn, Opus 5.5)
 
-*Worked from `plans/FS89-close-inventory.md` (items 1–50). Results: `plans/FS89-derivation.md` and `LEDGER.md` rows 95–97. Kooshi's words
+*Worked from `plans/FS89-close-inventory.md` (items 1–51). Results: `plans/FS89-derivation.md` and `LEDGER.md` rows 95–97. Kooshi's words
 for the close: "close out with the findings"; "I don't want to lose anything from before"; "All novel knowledge is a success." The first
 close planner filed the derivation file, rows 95–97, `CLAUDE.md` and the stub banner; the second worked the prior-art readings in and wrote
 this section.*
