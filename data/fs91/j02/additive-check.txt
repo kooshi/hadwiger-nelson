@@ -1,0 +1,18 @@
+q=3: trace lands in F_3: True
+q=3: mu_(q+1) is a subgroup of order q+1: True; -1 in mu: True
+q=3: functionals checked=8; min zero count on mu = 0; S real=True, integral=True; Z=(q+1+2S)/3 for all a: True; |S|<=2sqrt(q) for all a: True; S range [-2, 1]
+q=3 control: an additive 3-colouring of Gamma_3 exists (min Z = 0): True; witness a-code=3
+q=27: trace lands in F_3: True
+q=27: mu_(q+1) is a subgroup of order q+1: True; -1 in mu: True
+q=27: functionals checked=728; min zero count on mu = 4; S real=True, integral=True; Z=(q+1+2S)/3 for all a: True; |S|<=2sqrt(q) for all a: True; S range [-8, 10]
+q=27: NO additive 3-colouring of Gamma_q (every functional vanishes somewhere on mu): True
+q=243: trace lands in F_3: True
+q=243: mu_(q+1) is a subgroup of order q+1: True; -1 in mu: True
+q=243: functionals checked=59048; min zero count on mu = 62; S real=True, integral=True; Z=(q+1+2S)/3 for all a: True; |S|<=2sqrt(q) for all a: True; S range [-29, 31]
+q=243: NO additive 3-colouring of Gamma_q (every functional vanishes somewhere on mu): True
+Q=2: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+Q=4: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+Q=8: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+Q=16: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+Q=32: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+RESULT: PASS

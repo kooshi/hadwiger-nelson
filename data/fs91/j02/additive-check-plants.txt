@@ -1,0 +1,24 @@
+## plant notsubgroup (must FAIL: the subgroup check)
+q=3: trace lands in F_3: True
+q=3: mu_(q+1) is a subgroup of order q+1: False; -1 in mu: False
+q=27: trace lands in F_3: True
+q=27: mu_(q+1) is a subgroup of order q+1: False; -1 in mu: False
+q=243: trace lands in F_3: True
+q=243: mu_(q+1) is a subgroup of order q+1: False; -1 in mu: False
+Q=2: sum of mu_(Q+1) = 0: True; functionals equal to 1 on all of mu: 0
+Q=4: mu_(Q+1) is a subgroup of order Q+1: False
+Q=8: mu_(Q+1) is a subgroup of order Q+1: False
+Q=16: mu_(Q+1) is a subgroup of order Q+1: False
+Q=32: mu_(Q+1) is a subgroup of order Q+1: False
+RESULT: FAIL
+
+## plant badtrace (must FAIL: trace not in F_p)
+q=3: trace lands in F_3: False
+q=27: trace lands in F_3: False
+q=243: trace lands in F_3: False
+Q=2: trace lands in F_2: False
+Q=4: trace lands in F_2: False
+Q=8: trace lands in F_2: False
+Q=16: trace lands in F_2: False
+Q=32: trace lands in F_2: False
+RESULT: FAIL
