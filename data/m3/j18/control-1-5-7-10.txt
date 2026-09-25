@@ -1,0 +1,121 @@
+{'D': [1, 5, 7, 10], 'states': 583, 'cyclic': 18, 'rigid': 17, 'walls': 15}
+phase 23 {'size': 10, 'rigid': True, 'word': '01230101032301232321', 'chiral': True}
+phase 49 {'size': 10, 'rigid': True, 'word': '01020131023231320231', 'chiral': True}
+phase 55 {'size': 10, 'rigid': True, 'word': '01210101232303232301', 'chiral': True}
+phase 57 {'size': 270, 'rigid': False}
+phase 63 {'size': 10, 'rigid': True, 'word': '01212123032303030121', 'chiral': True}
+phase 65 {'size': 10, 'rigid': True, 'word': '01010201013232313232', 'chiral': True}
+phase 67 {'size': 10, 'rigid': True, 'word': '01023232013231010132', 'chiral': True}
+phase 75 {'size': 10, 'rigid': True, 'word': '01210121232303230301', 'chiral': False}
+phase 81 {'size': 10, 'rigid': True, 'word': '01210103212303232103', 'chiral': True}
+phase 86 {'size': 10, 'rigid': True, 'word': '01230121032301230321', 'chiral': False}
+phase 96 {'size': 10, 'rigid': True, 'word': '01212321032303010321', 'chiral': False}
+phase 104 {'size': 5, 'rigid': True, 'word': '01012121232323030301', 'chiral': False}
+phase 109 {'size': 1, 'rigid': True, 'word': '0123', 'chiral': False}
+phase 110 {'size': 10, 'rigid': True, 'word': '01020102323231323101', 'chiral': True}
+phase 111 {'size': 5, 'rigid': True, 'word': '01020131013231320232', 'chiral': False}
+phase 114 {'size': 10, 'rigid': True, 'word': '01230101012301232323', 'chiral': False}
+phase 125 {'size': 10, 'rigid': True, 'word': '01230121012301230323', 'chiral': False}
+phase 132 {'size': 10, 'rigid': True, 'word': '01210121032303230321', 'chiral': False}
+walls [(57, 23), (57, 49), (57, 55), (65, 23), (65, 49), (65, 55), (65, 57), (67, 23), (67, 49), (67, 55), (67, 57), (81, 23), (81, 49), (81, 55), (81, 57)]
+rigid-rigid walls [(65, 23), (65, 49), (65, 55), (67, 23), (67, 49), (67, 55), (81, 23), (81, 49), (81, 55)]
+WALL 65 -> 23 junction at 1450 length 2913
+  around junction: 3231010131010232320232310101310102323202103103102123132103030121032121230321030301210321212303210303
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (1458, 1458), 'size': 1, 'left_phase': 65, 'right_phase': 23}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (10, 1460), 'size': 146, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (22, 1462), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1443, -3), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 65, 'right_phase': 23}
+   {'pair': (2, 3), 'kind': 'left-only', 'span': (-1447, 22), 'size': 732, 'left_phase': 65, 'right_phase': 23}
+   {'pair': (2, 3), 'kind': 'right-only', 'span': (8, 1462), 'size': 724, 'left_phase': 65, 'right_phase': 23}
+WALL 65 -> 49 junction at 1450 length 2908
+  around junction: 3231010131010232320232310101310102323202103103102103232123032101030121032321230321010301210323212303
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (10, 1450), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1443, -3), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (1, 2), 'kind': 'finite', 'span': (12, 12), 'size': 1, 'left_phase': 65, 'right_phase': 49}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 65, 'right_phase': 49}
+   {'pair': (1, 3), 'kind': 'right-only', 'span': (17, 1457), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+WALL 65 -> 55 junction at 1450 length 2908
+  around junction: 3231010131010232320232310101310102323202103103102123232101030101032321232321010301010323212323210103
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (10, 1450), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (0, 3), 'kind': 'right-only', 'span': (1453, 1453), 'size': 1, 'left_phase': 65, 'right_phase': 55}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1443, -3), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 65, 'right_phase': 55}
+   {'pair': (1, 3), 'kind': 'right-only', 'span': (17, 1457), 'size': 145, 'left_phase': 65, 'right_phase': 57}
+WALL 67 -> 23 junction at 1450 length 2918
+  around junction: 2301010321012323210323010103210123232103130102132132102032302131312021302020313021313120213020203130
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (15, 1465), 'size': 146, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (21, 1461), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (27, 1467), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1448, 2), 'size': 146, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1444, -4), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, 4), 'size': 724, 'left_phase': 67, 'right_phase': 23}
+   {'pair': (0, 3), 'kind': 'finite', 'span': (-10, 7), 'size': 5, 'left_phase': 67, 'right_phase': 23}
+   {'pair': (0, 3), 'kind': 'finite', 'span': (10, 27), 'size': 5, 'left_phase': 67, 'right_phase': 23}
+   {'pair': (0, 3), 'kind': 'right-only', 'span': (13, 1467), 'size': 724, 'left_phase': 67, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 67, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (1463, 1463), 'size': 1, 'left_phase': 67, 'right_phase': 23}
+WALL 67 -> 49 junction at 1450 length 2913
+  around junction: 2301010321012323210323010103210123232103130102132132102130302031302121312021303020313021213120213030
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (15, 1455), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (21, 1461), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1448, 2), 'size': 146, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1444, -4), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (0, 2), 'kind': 'finite', 'span': (17, 17), 'size': 1, 'left_phase': 67, 'right_phase': 49}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, 4), 'size': 724, 'left_phase': 67, 'right_phase': 49}
+   {'pair': (0, 3), 'kind': 'right-only', 'span': (-10, 1462), 'size': 733, 'left_phase': 67, 'right_phase': 49}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 67, 'right_phase': 49}
+   {'pair': (2, 3), 'kind': 'right-only', 'span': (22, 1462), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+WALL 67 -> 55 junction at 1450 length 2913
+  around junction: 2301010321012323210323010103210123232103130102132132102030302121312121303020303021213121213030203030
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (15, 1455), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (21, 1461), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1448, 2), 'size': 146, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1444, -4), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (0, 3), 'kind': 'left-only', 'span': (-1450, 4), 'size': 724, 'left_phase': 67, 'right_phase': 55}
+   {'pair': (0, 3), 'kind': 'right-only', 'span': (-10, 1459), 'size': 732, 'left_phase': 67, 'right_phase': 55}
+   {'pair': (1, 2), 'kind': 'left-only', 'span': (-1446, -1446), 'size': 1, 'left_phase': 67, 'right_phase': 55}
+   {'pair': (1, 3), 'kind': 'right-only', 'span': (1458, 1458), 'size': 1, 'left_phase': 67, 'right_phase': 55}
+   {'pair': (2, 3), 'kind': 'right-only', 'span': (22, 1462), 'size': 145, 'left_phase': 67, 'right_phase': 57}
+WALL 81 -> 23 junction at 1450 length 2913
+  around junction: 2303232103012101032123032321030121010321320320321310301320202313201313102013202023132013131020132020
+   {'pair': (0, 1), 'kind': 'left-only', 'span': (-1450, 22), 'size': 733, 'left_phase': 81, 'right_phase': 23}
+   {'pair': (0, 1), 'kind': 'right-only', 'span': (8, 1462), 'size': 724, 'left_phase': 81, 'right_phase': 23}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'finite', 'span': (-5, -5), 'size': 1, 'left_phase': 81, 'right_phase': 23}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (10, 1460), 'size': 146, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (22, 1462), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1443, -3), 'size': 145, 'left_phase': 57, 'right_phase': 23}
+   {'pair': (2, 3), 'kind': 'right-only', 'span': (1458, 1458), 'size': 1, 'left_phase': 81, 'right_phase': 23}
+WALL 81 -> 49 junction at 1450 length 2907
+  around junction: 2303232103012101032123032321030121010321320320310321210123210303230103212101232103032301032121012321
+   {'pair': (0, 1), 'kind': 'finite', 'span': (11, 11), 'size': 1, 'left_phase': 81, 'right_phase': 49}
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 2), 'kind': 'finite', 'span': (-5, -5), 'size': 1, 'left_phase': 81, 'right_phase': 49}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 49}
+   {'pair': (1, 3), 'kind': 'right-only', 'span': (15, 1455), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+WALL 81 -> 55 junction at 1450 length 2908
+  around junction: 2303232103012101032123032321030121010321320320321310101323202323201013101013232023232010131010132320
+   {'pair': (0, 2), 'kind': 'left-only', 'span': (-1450, -10), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (0, 2), 'kind': 'right-only', 'span': (1453, 1453), 'size': 1, 'left_phase': 81, 'right_phase': 55}
+   {'pair': (0, 3), 'kind': 'right-only', 'span': (17, 1457), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 2), 'kind': 'finite', 'span': (-5, -5), 'size': 1, 'left_phase': 81, 'right_phase': 55}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (10, 1450), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 2), 'kind': 'right-only', 'span': (16, 1456), 'size': 145, 'left_phase': 81, 'right_phase': 57}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1449, -9), 'size': 145, 'left_phase': 57, 'right_phase': 55}
+   {'pair': (1, 3), 'kind': 'left-only', 'span': (-1443, -3), 'size': 145, 'left_phase': 57, 'right_phase': 55}
