@@ -248,6 +248,74 @@ and `Ω` is minimal. A periodic `s = V^∞ ∈ Ω` would contain `W_nW_n` for `|
 **C0 scored.** C0-b ("no", 0.55): met. C0-b′ (decided, 0.25): decided. C0-b″ (reduction unchanged, 0.30): not unchanged (one clause GAP, one
 incomplete, the obligation non-deciding). The owner's registered P-MS5 ("no", 0.60): met.
 
+## Stage 4 — SAVED (ONE-c: the orders are unbounded)
+
+**Verdict: ONE-c is answered "unbounded". The band torsion characters of `R₅` at four colours have unbounded orders, by an explicit
+two-parameter family that the closing lemma derives; every member named here is checked by three exact code paths. [hand; tools exact]**
+The primes of the orders are the advisor's (primes at which the rotation has order dividing the word length), but the family is a closing
+family, not a list of `Φ_k` quotients.
+
+**J12-C1 (the criterion).** Let `e ∈ N^{−1}ℤ[i]/ℤ[i]` have order `N`, `5 ∤ N`, and `τ_e := ⟨e, ·⟩` on `ℤ[i]`, extended to `R₅`. Then `τ_e` is band on
+`U₅` iff every point of the orbit `{w̄^m e}` lies in `Q = [1/4, 3/4]²` mod `ℤ[i]`, where `w̄` acts on `N^{−1}ℤ[i]/ℤ[i] ≅ ℤ[i]/N` as multiplication by
+`t π̄²`, `t ≡ 5^{−1} (mod N)`. In the rotating frame: iff the periodic orbit of B1 through `e − P` stays in `Q₀`.
+*Proof.* `τ_e` factors through `R₅/NR₅ ≅ ℤ[i]/N`; `τ_e(wy) = τ_e(π² t y) = ⟨π̄² t e, y⟩`, so the parameter of `τ_e∘w^m` is `(tπ̄²)^m e = c_τ(m)`
+(S0B-T2), and S0B-T1's band condition is `c_τ(m) ∈ Q` for all `m` (`Q` is `i`-stable, which covers the `iᵏ` factors). ∎
+
+**J12-C2 (the closing lemma, one segment).** If an admissible segment `z₀, …, z_L` with centre word `V` has margin `r` (every point at distance
+`≥ r` from `∂Q₀`) and `|z_L − z₀| ≤ r|1 − ω^L|`, then the periodic orbit `V^∞` through `q := (fixed point of V's composite)` is admissible, so `V^∞`
+is a band torsion character (B2). *Proof.* `q − z₀ = (z_L − z₀)/(1 − ω^L)` (from `F(z) = ω^L z + t`, `q = t/(1 − ω^L)`, `z_L = F(z₀)`), so
+`|q − z₀| ≤ r`, and B3. ∎ *(The two-leaf form J12-CL is the case the construction uses.)*
+
+**J12-C3 (the family).** For every `a, b ≥ 1` such that `(x, y) = (ω^a, ω^b)` satisfies CL's two conditions with the `X₃` leaf (`Q = c₀`, `r = 1/12`)
+and the parity leaf (`Q′ = 0`, `r′ = 1/4`), the word `c₀^a 0^b` closes to a band torsion character `τ_{a,b}`. The set of such `(a, b)` is infinite
+(CL′: the conditions define a nonempty open subset of `S¹ × S¹`, and `{(ω^a, ω^b)}` is dense). **The orders are unbounded:** the word
+`c₀^a 0^b` is primitive, so the centre sequence of `τ_{a,b}` has least period `L := a + b`; the layer sequence of an order-`N` character is periodic
+with period dividing the order of `u` in `(ℤ[i]/N)^×`, which is `< N²`; hence `N_{a,b} > √(a + b)`, and `a + b` is unbounded on the family. ∎
+
+**J12-C4 (where the orders live).** `N_{a,b}` divides `2·Nm(β_L)`, `β_L := π^L − (−i)^L π̄^L = π^L(1 − ω^L) = ∏_{k∣L} Φ_k^{hom}(π, −iπ̄)`.
+*Proof.* The composite of the word is `z ↦ ω^L z + t` with `t = Σ_j ω^{L−1−j}(1 − ω)c_j`, `(1 − ω)c_j ∈ π^{−1}ℤ[i]`, `ω^j ∈ π^{−j}ℤ[i]`; so
+`t ∈ π^{−L}ℤ[i]`, `q = tπ^L/β_L ∈ β_L^{−1}ℤ[i]`, and `e₀ = P + q ∈ (2β_L)^{−1}ℤ[i]`; multiply by `β̄_L`. ∎ So every odd prime of an order in the family
+is a prime at which `ω = ū` (`u = iw`) has order dividing `a + b`: the advisor's pointer ("primes dividing `Φ_k(w₅)`"), read in the rotating
+frame, where `ω ≡ 1 (mod 3)` makes 3 divide every `β_L`.
+
+**At every `p ≡ 1 (mod 4)`** (corollary, one mind; the family re-derived only at 5): the same argument runs with `ω_p = ε̄_p w̄_p`, `ε_p = w̄_p mod 3`
+(J12-A3 makes both leaves `p`-free and fixes the `X₃` centre in that frame), and `ω_p` is not a root of unity; so the orders of band torsion
+characters of `R_{{p}}` at four colours are unbounded at every split prime.
+
+**Exact checks** — `tools/crunch_j12_onec.py` → `data/fs91/j12/onec-check.txt` (0.1 s). The **complete** box `1 ≤ a, b ≤ 10` (a finite set CL
+fixes; logged as the ban's edge): CL's exact sufficient condition admits **14 pairs**; for each, all of the following pass:
+- the rotating-frame orbit verified directly (every point in `Q₀`, exact return);
+- `5 ∤ N`; `N ∣ 2·Nm(β_L)` (C4); `N > √L`;
+- **C1 in the original frame** (modular arithmetic in `ℤ[i]/N`, the full `w̄`-orbit to its return; period `4L` or a divisor);
+- **a third code path in S0B-L4's convention** (`τ(x + yi) = (Ax + By)/N` tested on the whole group `⟨i, w⟩ mod N` built by breadth-first closure),
+  re-implemented for the one character — S0B's own tool was **not** run past its `N ≤ 130`, since that would extend a list.
+
+| `(a, b)` | `L` | order `N` | factors | `\|U₅ mod N\|` |
+|---|---|---|---|---|
+| (3, 5) | 8 | 224 | 2⁵·7 | 32 |
+| (1, 5) | 6 | 234 | 2·3²·13 | 24 |
+| (2, 5) | 7 | 498 | 2·3·83 | 56 |
+| (4, 5) | 9 | 3834 | 2·3³·71 | 72 |
+| (6, 5) | 11 | 6074 | 2·3037 | 88 |
+| (1, 10) | 11 | 9111 | 3·3037 | 44 |
+| (2, 10), (7, 5) | 12 | 20592 | 2⁴·3²·11·13 | 48 |
+| (9, 5) | 14 | 50962 | 2·83·307 | 56 |
+| (10, 5) | 15 | 56142 | 2·3²·3119 | 120 |
+| (4, 10) | 14 | 152886 | 2·3·83·307 | 56 |
+| (6, 10) | 16 | 236096 | 2⁶·7·17·31 | 64 |
+| (7, 10) | 17 | 848643 | 3·282881 | 68 |
+| (9, 10) | 19 | **2029123** (prime) | 2029123 | 76 |
+
+Thirteen distinct orders; none is `≤ 130`, so the list does not overlap S0B-L4's (no conflict; S0B's 12 orders are not this family's).
+Controls and plants: **K3** (three colours) — CL admits no pair (the lens is empty) and the original-frame checker at `[1/3, 2/3]` rejects all 14
+members (FS81-T3's side: no order dividing 6 is among them); **P1** (the division by 5 forgotten in the multiplier) — rejected; **P2** (each
+parameter shifted by `1/N`) — all 14 rejected by C1 and by the third path. All as named.
+
+**C0 scored.** C0-c ("unbounded" by a derived family, 0.80): met. C0-c′ (the family is the advisor's, 0.35): **met in the primes, not in the
+family** (C4). The owner's P-U5 (0.35): met. S0B §4's reading ("unbounded, at the primes dividing the norms of `Φ_k(w)`") is promoted to a
+theorem; its heuristic mechanism ("a band character exists at a prime `p` when roughly `p·2^{−2k} ≳ 1`") is not the proof's mechanism, which is
+the isometric closing lemma.
+
 ## Theorems this phase proved
 
 | id | statement (one line) | grade | where |
@@ -269,6 +337,11 @@ incomplete, the obligation non-deciding). The owner's registered P-MS5 ("no", 0.
 | J12-W, J12-Ω | the words are primitive; their S-adic subshift is minimal and aperiodic | hand | Stage 3 |
 | **J12-MS** | **`MS₄({5})` is false: a `U₅`-minimal closed subset of `Θ₄(R₅)` disjoint from `T + A` exists** | hand, one mind | Stage 3; `tools/crunch_j12_oneb.py` |
 | J12-MSp | the same at every `p ≡ 1 (mod 4)` (corollary; B1 re-derived at 5 only) | hand, one mind | Stage 3 remarks |
+| J12-C1 | a torsion `τ_e` of order `N` is band iff the `w̄`-orbit of `e` in `N^{−1}ℤ[i]/ℤ[i]` stays in `Q` (`w̄ ↦ tπ̄²`, `t ≡ 5^{−1}`) | hand | Stage 4 |
+| J12-C2 | one-segment closing lemma: margin `r`, return `\|z_L − z₀\| ≤ r\|1 − ω^L\|` ⟹ a band torsion character | hand | Stage 4 |
+| **J12-C3** | **ONE-c (U5): the orders of band torsion characters of `R₅` are unbounded** — the family `c₀^a 0^b`, `N_{a,b} > √(a+b)` | hand; tools exact (complete box `a, b ≤ 10`: 14 members, three code paths) | Stage 4; `tools/crunch_j12_onec.py` |
+| J12-C4 | `N_{a,b} ∣ 2·Nm(π^L − (−i)^Lπ̄^L)`, `L = a+b`: the orders' primes are those of `Φ_k^{hom}(π, −iπ̄)`, `k ∣ L` | hand; tools exact (14 members) | Stage 4 |
+| J12-C3p | the same at every `p ≡ 1 (mod 4)` (corollary; family re-derived at 5 only) | hand, one mind | Stage 4 |
 
 ## Would-have-searched-here log
 
@@ -280,3 +353,7 @@ incomplete, the obligation non-deciding). The owner's registered P-MS5 ("no", 0.
   two-parameter set CL′ fixes, and each admitted pair is verified exactly — logged as the ban's edge (a complete enumeration of a set a
   derivation fixed); no member is load-bearing for J12-MS, whose proof is existential. (iii) I would have searched the level-2 box for the pair
   of largest margin to seed level 3; the tool takes the largest margin *within the complete box* instead, and the proof needs no choice.
+- **Stage 4.** (i) I would have extended S0B-L4's list of orders past 130 to "see" whether they stop; instead the closing lemma derives an
+  infinite family. (ii) The complete box `1 ≤ a, b ≤ 10` of that family is enumerated and every admitted member checked by three exact code
+  paths — a complete enumeration of a finite set the derivation fixed, logged as the ban's edge; no order was scanned. (iii) S0B's
+  `torsion_points.py` was not run past its own `N ≤ 130`; its test was re-implemented for the fourteen fixed characters only.

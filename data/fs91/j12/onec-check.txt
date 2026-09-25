@@ -1,0 +1,21 @@
+box 1<=a,b<=10: admitted by the closing condition: 14; direct-verified: 14
+  a= 1 b= 5 L= 6 N=234 (5!|N True) N|2Nm(beta_L) True C1-band True period 12 S0B-style True |U5 mod N|=24 sqrt(L)<=N True factors {2: 1, 3: 2, 13: 1}
+  a= 1 b=10 L=11 N=9111 (5!|N True) N|2Nm(beta_L) True C1-band True period 44 S0B-style True |U5 mod N|=44 sqrt(L)<=N True factors {3: 1, 3037: 1}
+  a= 2 b= 5 L= 7 N=498 (5!|N True) N|2Nm(beta_L) True C1-band True period 28 S0B-style True |U5 mod N|=56 sqrt(L)<=N True factors {2: 1, 3: 1, 83: 1}
+  a= 2 b=10 L=12 N=20592 (5!|N True) N|2Nm(beta_L) True C1-band True period 12 S0B-style True |U5 mod N|=48 sqrt(L)<=N True factors {2: 4, 3: 2, 11: 1, 13: 1}
+  a= 3 b= 5 L= 8 N=224 (5!|N True) N|2Nm(beta_L) True C1-band True period 8 S0B-style True |U5 mod N|=32 sqrt(L)<=N True factors {2: 5, 7: 1}
+  a= 4 b= 5 L= 9 N=3834 (5!|N True) N|2Nm(beta_L) True C1-band True period 36 S0B-style True |U5 mod N|=72 sqrt(L)<=N True factors {2: 1, 3: 3, 71: 1}
+  a= 4 b=10 L=14 N=152886 (5!|N True) N|2Nm(beta_L) True C1-band True period 28 S0B-style True |U5 mod N|=56 sqrt(L)<=N True factors {2: 1, 3: 1, 83: 1, 307: 1}
+  a= 6 b= 5 L=11 N=6074 (5!|N True) N|2Nm(beta_L) True C1-band True period 44 S0B-style True |U5 mod N|=88 sqrt(L)<=N True factors {2: 1, 3037: 1}
+  a= 6 b=10 L=16 N=236096 (5!|N True) N|2Nm(beta_L) True C1-band True period 16 S0B-style True |U5 mod N|=64 sqrt(L)<=N True factors {2: 6, 7: 1, 17: 1, 31: 1}
+  a= 7 b= 5 L=12 N=20592 (5!|N True) N|2Nm(beta_L) True C1-band True period 12 S0B-style True |U5 mod N|=48 sqrt(L)<=N True factors {2: 4, 3: 2, 11: 1, 13: 1}
+  a= 7 b=10 L=17 N=848643 (5!|N True) N|2Nm(beta_L) True C1-band True period 68 S0B-style True |U5 mod N|=68 sqrt(L)<=N True factors {3: 1, 282881: 1}
+  a= 9 b= 5 L=14 N=50962 (5!|N True) N|2Nm(beta_L) True C1-band True period 28 S0B-style True |U5 mod N|=56 sqrt(L)<=N True factors {2: 1, 83: 1, 307: 1}
+  a= 9 b=10 L=19 N=2029123 (5!|N True) N|2Nm(beta_L) True C1-band True period 76 S0B-style True |U5 mod N|=76 sqrt(L)<=N True factors {2029123: 1}
+  a=10 b= 5 L=15 N=56142 (5!|N True) N|2Nm(beta_L) True C1-band True period 60 S0B-style True |U5 mod N|=120 sqrt(L)<=N True factors {2: 1, 3: 2, 3119: 1}
+distinct orders: 13; max order 2029123
+K3 three colours: closing condition admits 0 (expect 0); original-frame checker at [1/3,2/3] rejects every four-colour member: True -> AS NAMED
+P1 multiplier plant (no division by 5): some member rejected: True -> FIRES
+P2 shifted parameter: rejected by C1 14, by the S0B-style path 14, of 14 -> FIRES (both paths)
+time 0.1s
+ALL PASS
