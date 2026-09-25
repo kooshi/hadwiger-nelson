@@ -349,3 +349,45 @@ the ban.
   its first exact step (§3.4); not run.
 - Would have scanned many `D` for a frozen rigid–rigid wall to refute KE and KE♯. Did instead: checked only the six sets the
   statements name (T30's four, J19-AF✗'s, J18-DPR's), a complete enumeration of each one's phases.
+
+## Stage 4 — SAVED
+
+Phase B3. The fence was lifted by committing B2. I read only the theorem tables of `plans/M3-S1A-rank-one.md` (J18) and
+`plans/M3-S1B-rank-one.md` (J19), J19's line 144 (its definition of `N`), and J18's line 245 (its definition of `D_c(M)`). Their proofs
+were not read.
+
+### 4.1 Divergence table (truth, scope, route, wording)
+
+| item | J18 / J19 | J20 | kind |
+|---|---|---|---|
+| J19-KC clause 1, "`σ^N`" | the table line leaves `N` undefined; J19 line 144: "`N` is the least common multiple of the least periods in `Per(X)`" | TRUE with that `N`; FALSE with `N` a point's least period (`D = {1,3,6,9}`) | **wording**: the table line must read "`N` a common period of all periodic points (the lcm of their least periods)" |
+| A-Kq | J18-AKq: true for the labelled quotient; the rigidity clause is false for the plain quotient (`D = {1}`) | the same, plus `D = {1,2}`, the mechanism (a phase vertex of at most two colours), and "W all rigid ⟹ every quotient all rigid" | agreement; the fixed list's wording and the brief's parenthesis owe the correction |
+| A-T1, A-T1′, A-T2, A-K3, A-C | GAP. A-T1 = FW ∧ A-T1ⁿᶠ (J19); the missing step is KT (or KE) | GAP; my named stall (§2.4) is J19's FW, reached independently, plus the non-frozen half | agreement on truth. Route: mine names the operations that fail; J19's names the Kempe statements that would suffice |
+| J19-TW | "every wall has a chiral end" | the same statement, with the observation that C2's step 5 needs no rigidity | agreement (I add the scope note) |
+| J18-DC's `D_c(M)` | line 245: `{d ∈ [1, M] : c(x) ≠ c(x+d) ∀x}` | my reading was identical | agreement |
+| J18-DPR "satisfies KE" | tools exact | not checked; its structure (one non-rigid phase; rigid–rigid walls with period-20, non-frozen, chiral ends) confirmed | scope of my check |
+| J19-ENDS "finite components meet the junction" | stated | TRUE for "within distance `m` of the junction"; open for "contain a junction vertex" | wording (junction not read) |
+| J19-AF✗ | tools exact | confirmed with my own tool | agreement |
+| KE, KE1′, KE♯, KT | open (targets) | open; not refuted on any named set, since no frozen rigid point exists there | agreement |
+
+### 4.2 The final statements read aloud against the informal claim
+
+- *A-T1*: "if every phase is rigid, no wall". By J20-E1 and E2 this is exactly "`X₄(D)` is never countably infinite", and by T35W
+  exactly "`P₄(D) = F₄(D)`", i.e. rank-one inheritance at four colours. The statement is the right one; it is unproved.
+- *A-Kq*: "quotient by colour permutations" is ambiguous. The informal intent ("the criterion does not depend on quotienting") is true
+  only for the quotient FS-79's tool computes. Read aloud, the fixed list's sentence claims more than is true.
+- *J19-KC*: read aloud without line 144, "strands of periodic points are `σ^N`-invariant" suggests the point's own period, which is
+  false. With line 144 it is true.
+
+### 4.3 Slips (mine)
+
+- `tools/crunch_j20_walls.py`'s first strand-swap labelled lift vertices `φ(r) + k` instead of `k − φ(r)`. An improper swapped word read
+  as "swap to non-rigid" on `{2,6,11,13,14}`. I caught it because a proper colouring must lie in `W`, and fixed it before any verdict used
+  it. A properness assert now guards the swap. Nothing in stage 3's table rests on the pre-fix output.
+
+### 4.4 Proposed edits (for the front-page lane; I edit none of these files)
+
+- The fixed list's A-Kq (`plans/M3-exotic-colourings.md` §S): name the quotient as "each class's out-edges those of a representative,
+  with multiplicity (FS-79's `rank1_phases.py`)".
+- J19's table line J19-KC: add "(`N` the lcm of the least periods in `Per(X)`)".
+- J19-TW: note that it needs no rigidity (every wall of any `X₄(D)`).
