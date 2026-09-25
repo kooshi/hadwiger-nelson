@@ -722,6 +722,14 @@ Kooshi's ruling (inventory item 17).
 > - The symmetries of `Θ₄`: the `U`-action, complex conjugation (`b₊ ↔ b₋`), negation. The known band points (positive controls for any
 >   classification): parity (margin 1/4), `(x+y)/4` and `(3x+2y)/8` (margin 0), the order-3 characters (1/12), the order-7 character
 >   `(2x+3y)/7` (1/28).
+> - **What the plan's re-grokking hands you** (§G, each entry's *Do*): the objects are closed sets and minimal sets, not invariant
+>   measures (G60); at an inert place use Weil's equidistribution of `Tr(at)/q` on `μ_{q+1}` (G44), and in any level-by-level argument
+>   there say where the carry enters (G66, FS66-E: arguments blind to the carry prove too much); the algebraic case — a `U`-invariant
+>   coset of a closed subgroup inside `Θ₄` — is FS86-Cx-C15's, so your question is the non-algebraic closed sets; split components are
+>   defined only modulo global elements (FS86-dB-HDint), so state any counterexample intrinsically; a would-be counterexample usually dies
+>   by a coset sweep leaving the band (S0A-5, S0A-11); the consumer fields' unit vectors are layers `b·U_ℚ` rotated by the type-M `v_n`
+>   (G7, G62); a finite window measures its depth, so no window count is read against zero (G21, FS81-T8); state every theorem for every
+>   `S` it covers, with `{5, 13}` as its inhabitant (G30).
 > - **Not verified, do not lean on them until the verifier has** (plan §0.3): U1 (the layering lemma), U2 (the explicit leaf list), U3,
 >   U4, U5. S0A-3 and S0B-T6 are one mind each; the verifier is re-deriving them.
 >
