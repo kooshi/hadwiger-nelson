@@ -218,3 +218,126 @@ checker.
 - correction owed — V4's HD1 item cannot follow from V1's *statement* (existential); the plan's CLG-f should say "from CLG's proof with Lemma D" — §2.3.
 - correction owed — CLG_k's "Hence" clause needs `H` at `χ_char(F²)`, which `H_k` supplies only when `χ_char(F²) ≤ k` (moot given J01-7) — §2.3.
 - slip — the brief's V4 dropped J02-T1 from the quoted CLG-f and paraphrased "fall out" as "follow" (as consequences of V1) — §1.1.
+
+## Stage 3 — SAVED (phase 2: J07's lemma statements, derived or refuted; the assembly)
+
+*Opened after J07's stage 5 (95cd3af1) and final report (2aaa6d82) and after my phase-1 verdicts (2b692934): `data/fs91/j07/lemma-statements.md`
+only — statements, no proofs; J07's record and tools unopened in this stage. Exact checks: `tools/crunch_j10_phase2.py` (mine; J07's tools
+never run), output `data/fs91/j10/phase2.out` (121 checks, 0 failures; four plants fire, each for its own reason — see the tool's docstring).
+Numbering is the statements file's (items 1–25).*
+
+### 3.1 Verdict per statement
+
+| # | J07's statement (short name) | verdict | how (mine) |
+|---|---|---|---|
+| 1 | U1 (`U ⊆ O_𝔓^×`, `R ⊆ O_𝔓`) | **TRUE** | = J10-L1(c) |
+| 2 | U2 (`R ⊗ ℚ = L`) | **TRUE** | = J10-L1(b) |
+| 3 | U3 (`−1, i ∈ U`; symmetric images) | **TRUE** | `u_0 = 1`, `u_1 = i`, `u_∞ = −1`; images of a group containing −1 |
+| 4 | CLG-a | **TRUE** | = V1 ⟸ (phase 1) |
+| 5 | CLG-b (`‖y‖ ≥ β + ‖x‖`) | **TRUE** | with `a = ‖x‖ < β` and `y ∈ [0, ½]` (Y's condition is invariant under `y ↦ −y`): `‖y − a‖ = |y − a| ≥ β` forces `y ≥ a + β` (if `y < a`, `|y − a| ≤ a < β`); if `a + β > ½`, `Y = ∅` and the claim is vacuous |
+| 6 | CLG-b_n | **TRUE** | contrapositive of J10-L5 (the empty-`X_j` case is trivially covered; `n ≥ 1`) |
+| 7 | **Lemma C** | **TRUE** (hand, mine) | below, §3.2 |
+| 8 | **Lemma C′** | **TRUE** (hand, mine; tools exact at 7 field–prime pairs incl. complex embeddings; the exception is real at ℚ(√5), ℚ(√17), ℚ(α) and vacuous at ℚ(√2)) | below, §3.2 |
+| 9 | (W) | **TRUE** | = J10-L2 |
+| 10 | (J), CLG-c corrected | **TRUE** | from 7 and 9, §3.2; the correction is right: at a ramified stable dyadic place the image is *not* `∏ S` in general |
+| 11 | CLG-d | **TRUE** | = J10-L4(iii)–(v): complex places vanish (L4(iv)); at a real place `ℓ_w = Re(ē_w ·)` has image `[−|e_w|, |e_w|]` on `S¹`; fibres dense (item 10) and `B_β` closed |
+| 12 | Lemma AV | **TRUE** | J10-L7's averaging: `I_t = λ^{−1}[t, t + β)` is independent, mean size `β|G|` |
+| 13 | CLG_k | **TRUE given `H_k`**, with my phase-1 scope note on its middle clause (the equality `χ_char = min` needs `H` at `χ_char(F²)`, supplied by `H_k` when `χ_char(F²) ≤ k`; moot given J01-7) | assembly §3.3 |
+| 14 | CLG, converged form | **TRUE** given `H_κ` (`H_β` at every band is more than needed); `χ_char = ⌈1/κ⌉` since `Θ_{1/k} ≠ ∅ ⟺ 1/k ≤ κ` | = V2 (phase 1) |
+| 15 | Lemma LB | **TRUE** (hand, mine; tools exact) | §3.2 |
+| 16 | Lemma LB′ | **TRUE** (hand, mine; tools exact); its two numerical consequences and "level 2 never at `e ≥ 2`" follow; LB′ is **sharp** at (`e = 1`, level 2) and (`e = 2`, level 3) on `f = 1` towers, **not** at (`e = 1`, level 3) or (`e = 2`, level 5), where the true best margin is `1/27` | §3.2; `phase2.out` (E) |
+| 17 | CLG-e | **TRUE** (hand; tools exact) — sharper than my J10-L6 at `k = 2p` (values lie in `p^{−E}ℤ`, `p` odd, so the coset `1/(2p) + p^{−1}ℤ` is unavailable) | §3.2 |
+| 18 | CLG-g (E1)/(E2) form | **TRUE**, given G56's four-colourings of `U_Q` (`Q ≤ 32`), Brooks, and the all-levels Hoffman ratio of the inert dyadic tower — which G54 states for Galois rings only; **J10-L8 (§3.2) proves it for every inert tower, `F_𝔭` ramified over `ℚ₂` included**, so no scope gap remains | §3.2 |
+| 19 | CLG-g corollaries | (g1) **TRUE** (U₆₄'s exact `λ_min = −15`, floor 5.33; Weil from 128); (g2) **TRUE**; (g3) at `k = 6` **TRUE**; at `k = 7`, (E2) at `Q = 64` only **TRUE** (needs U₁₂₈'s exact spectrum: `λ_min = −19`, floor 7.79 — Weil alone gives 6.7); **(E1) "`e(𝔭|3) = 1`, exact level 3": GAP** — LB and LB′ leave exact level **`2e + 1` at every `e`** open at `k = 7` (tool (G): `(1,3), (2,5), (3,7), (4,9)`); the stated lemmas give "exact level `2e(𝔭|3) + 1`", not "`e = 1`". The `f = 1` towers show the same best margin `1/27` at `(e, L′) = (1, 3)` and `(2, 5)`, so nothing in the data separates `e ≥ 2` | §3.2 |
+| 20 | level-one inputs | **TRUE** (tools exact, mine: by the value multiplicity `1 − η(t² − 4N(a))`, brute-forced at 7, 11, 19, 23; no band-4 at every prime `q ≡ 3 (4)`, `11 ≤ q ≤ 59`; no band-5 at 23, 43, 59; Hoffman–Weil from 67 is arithmetic). By-products: `Γ₁₉` carries a band-5 character (norm class 15); `Γ₁₁` does not, though `χ(Γ₁₁) = 5` | `phase2.out` (F) |
+| 21 | HD1 via CLG | **TRUE** | = J10-T4 (phase 1), same inputs |
+| 22 | C-47 via CLG | **TRUE** | = J10-T5 |
+| 23 | C-167 via CLG, "no certificate" | **TRUE**, and the "no certificate" is right: item 20's exact band-5 check at 23 and 43 replaces FS-53's and FS-66's certificates | J10-T5 + item 20 |
+| 24 | Controls | **TRUE** (θ₂: a band-2 character is `½` on `S`, impossible at odd places (values in `p^{−E}ℤ`) and at inert dyadic ones (item 17), so it is ramified dyadic — "at level 1" means one exists there, which the route's extension need not return; Fischer at level 3 and C9: phase 1; `Θ₃`: CLG-e puts an odd band factor at level one and `Γ_q`, `q ≥ 7`, has no band-3 character (`χ(Γ₇) = 4`, `χ(Γ₁₁) = 5`, Hoffman–Weil from 14), inert dyadic has none; `κ_loc` monotone: pull a band character of `T_{𝔓′,m}` back along `O_𝔓/𝔓^{⌈m/e⌉} → O_{𝔓′}/𝔓′^m`, which maps `S` into `S′`) | §3.1 |
+| 25 | CL3–CL5 under the wide `A` | **TRUE for the conclusions** (my phase-1 route reaches all three with the wide `A`); "each FS-89 step already reads every real place" checked only at S0A's G3 step 3 (`T(ℝ)²`, both real places of ℚ(√167)) | `plans/FS89-S0A-gluing-verification.md` G3 |
+
+### 3.2 The derivations behind the new verdicts (mine, from the statements)
+
+**Lemma C.** By J10-L1(e), `cO′ ⊆ R ⊆ O′`. `ℤ_p` is flat, so `c(O′ ⊗ ℤ_p) ⊆ R ⊗ ℤ_p ⊆ O′ ⊗ ℤ_p` inside `L ⊗ ℚ_p`. `O′` is the ring
+of `S`-integers for `S` = the non-stable primes, `O′ = O_L[1/a]` for an `a` supported on `S` (a power of each `𝔔 ∈ S` is principal), so
+`O′ ⊗ ℤ_p = ⋃_n a^{−n}∏_{𝔓|p} Ô_𝔓 = ∏_{stable 𝔓|p} Ô_𝔓 × V_n`. So `R ⊗ ℤ_p ⊇ 0 × V_n` (`V_n` is divisible), hence `R ⊗ ℤ_p = R̄_p × V_n` with
+`R̄_p` its projection — a closed subring containing `c∏Ô_𝔓`, so open of finite index, and the closure of `R` (the image of `R` is dense in it:
+modulo the open `c∏Ô` the ℤ- and ℤ_p-spans agree). Then `R/p^jR = (R ⊗ ℤ_p)/p^j = R̄_p/p^jR̄_p` (`V_n` divisible); CRT gives `R/NR`;
+`R̄_p` is ℤ_p-free of rank `Σ [L_𝔓 : ℚ_p]`; and if `x ∈ R` has `v_𝔓(x) ≥ K` at every stable `𝔓 | N` with `K ≥ e_𝔓(v_p(N) + v_p(c))`, its image
+lies in `p^{v_p(N) + v_p(c)}∏Ô ⊆ p^{v_p(N)}R̄_p` for each `p | N`, so `x ∈ NR`. No Galois hypothesis, no scope restriction. (Sharper than my
+J10-L3, which used the primes dividing `cN`; the primes dividing `c` alone are not needed.)
+
+**Lemma C′.** Let `𝔓 | p` be stable with `E = L_𝔓` unramified over `K = F_𝔭` (every odd stable place; the inert dyadic ones), residue fields
+`𝔽_{q²}/𝔽_q`, `π ∈ K` a uniformizer. The norm-one torus is smooth over `O_K`, so the congruence filtration of `T(K)` has graded pieces
+`μ_{q+1}` (level 0) and `1 + π^m·Lie`, `Lie = ker(Tr: 𝔽_{q²} → 𝔽_q)` (level `m ≥ 1`; `= i𝔽_q` for odd `p`, `= 𝔽_q` for `p = 2`).
+(a) *The closed ℤ_p-span `Z` of `T(K)` is `O_E`:* the 𝔽_p-span of `μ_{q+1}` is `𝔽_{q²}` (a proper subfield `𝔽_{p^g}` would need
+`q + 1 | p^g − 1`, whence `2f | g`); at level `m`, `z(1 + π^m h) − z ≡ z̄hπ^m` and the 𝔽_p-span of `μ_{q+1}·Lie` is `𝔽_{q²}`; a closed
+submodule surjecting onto every graded piece of `O_E` is `O_E`. (b) *The closed span `D` of the differences `t − t′` is `O_E` as well:* at odd
+`p` because `t − (−t) = 2t`; at `p = 2` because `Σ_{z∈μ_{q+1}}(z − 1) = −(q + 1) = 1` in characteristic 2 (`q + 1` odd), and the level-`m ≥ 1`
+pieces are differences already. (c) *Splitting off:* by (W), `R̄_p ⊇ ∏_{stable 𝔓|p} T(F_𝔭)`, so it contains `(t − t′, 0, …, 0)` for `t, t′` in one
+factor, hence `D_𝔓 × 0 = Ô_𝔓 × 0` for every unramified-type factor. So `R̄_p = ∏ Ô_𝔓` whenever no stable place above `p` is ramified in `L/F`,
+and inert dyadic places split off regardless. At a ramified stable dyadic place `D ⊆ 𝔓` (every norm-one element is `≡ 1`, G56), and the
+closure is a proper suborder exactly when the rest of the structure cannot make up the residue field — tools: ranks `2 < 4` at ℚ(√5), `2 < 4`
+at ℚ(√17), `2 < 6` at ℚ(α) (residue 𝔽₈), but **full rank 4 at ℚ(√2)** (residue 𝔽₂, one place): "except possibly" is the right wording.
+**Consequence (Lemma R's conclusion without its Galois hypothesis):** since `O′/R` has exponent dividing `c`, it is the sum of its `p`-parts
+`(O′/R) ⊗ ℤ_p = ∏Ô/R̄_p`; so **`R_F = O′` (and `R_F` is dense in every finite product of stable completions) for every real number field with no
+ramified stable dyadic place** — FS86-B1-LR's "`L/ℚ` Galois" is not needed. [hand; tools exact: full rank at ℚ(√3) (p = 3, 2), ℚ(√7) (3),
+ℚ(√11) (7), ℚ(√3,√17) (2, two inert dyadic places), ℚ(α), α³ = α + 1 (3 — residue 𝔽₂₇ — and 23; complex embeddings); plant D (only `a ∈ 2O_F`)
+drops the rank to 1.]
+
+**(J).** Under Lemma C's isomorphism `R/NR ≅ ∏_{p|N} R̄_p/NR̄_p`, the closure of `U` in `∏_{stable 𝔓|N} Ô_𝔓` is `∏ T(F_𝔭)` (W), and each fibre of
+`R̄ → R̄/NR̄` is open; so the image of `U` is the image of `∏ T(F_𝔭)`, which is `∏ S_{𝔓, v_𝔓(N)}` when C′ holds at every `p | N`; a fibre
+`{u ≡ u₀}` is `U` intersected with an open set of `∏ T(F_𝔭)`, so it is dense in `∏_{w|∞} T(F_w)` by (W) with the archimedean places added.
+
+**LB.** For `λ` of exact level `L ≥ 2`, put `j = ⌈L/2⌉`; `T_j/T_L` is the additive group `X = {π^j·iy}` (`y ∈ 𝔭^0/𝔭^{L−j}`, `2j ≥ L`), and on
+`s·T_j` the values are `λ(s) + ψ_s(X)` with `ψ_s(x) = λ(sx)`. Writing `λ(z) = ψ₀(Tr(wz))`, `v(w) = −L − δ` (`δ` the different of `K`),
+`ψ_s(iy) = ψ₀(Tr_{K/ℚ_p}(y·(−2 Im(ws))))`; some `s̄ ∈ μ_{q+1}` has `w̄₀s̄ ∉ 𝔽_q` (else `μ_{q+1} ⊆ 𝔽_q^×·const`, impossible), so `v(Im(ws)) = v(w)`
+and `ψ_s` has order `p^{⌈(L−j)/e⌉} = p^a` (`⌈x/e⌉ = ⌊(x−1)/e⌋ + 1`). A coset of `p^{−a}ℤ/ℤ` has a point with `‖·‖ ≤ 1/(2p^a)`. **LB′:** the values
+lie in `p^{−E}ℤ/ℤ` (`E = ⌈L/e⌉`, the exponent of `O_E/𝔓^L`), so that point is at distance `≤ ((p^{E−a} − 1)/2)/p^E`. **CLG-e (odd):** hence a band
+character above level one has `k > 2p^a ≥ 2p`. **CLG-e (inert dyadic):** the same fibre gives a coset of `2^{−t}ℤ`, `t ≥ 1`, which has a point
+with `‖·‖ ≤ 1/4 < 1/3`; and at level one a band character would be `½` on all of `μ_{Q+1}`, but `Σ_{z∈μ_{Q+1}} z = 0` while `Q + 1` is odd.
+[tools exact: every character of every exact level of `ℤ₃[i]/3⁴`, `ℤ₇[i]/7³`, `ℚ₃(√3)(i)/𝔓⁵` (`e = 2`) and `ℚ₂(√3)(ω)/𝔓⁶` (dyadic, `e = 2`); no
+band-7 character at any level ≥ 2 on any of them; at the dyadic tower band 4 first appears at exact level 3, margin exactly `1/4`.]
+
+**J10-L8 (the all-levels ratio in every inert tower).** For `E/K` unramified with smooth norm-one torus (every odd stable place, every inert
+stable dyadic place, `K` possibly ramified over `ℚ_p`), residue `𝔽_Q`: a character `λ` new at level `j ≥ 2` has eigenvalue
+`μ(λ) = Q·Σ_{s ∈ S_{j−1}, w̄₀s̄ ∈ 𝔽_Q} e(λ(s̃))` (the inner sum over the kernel `1 + π^{j−1}Lie` of `S_j → S_{j−1}` vanishes unless the residue
+pairing kills `Lie`, i.e. unless `w̄₀s̄ ∈ Lie^⊥ = 𝔽_Q`), and `w̄₀^{−1}𝔽_Q^× ∩ μ_{Q+1}` has at most `|𝔽_Q^× ∩ μ_{Q+1}| = gcd(Q−1, Q+1)` points; so
+`|μ(λ)| ≤ c·Q^{j−1}`, `c = 2` (odd) or `1` (dyadic). Pulled back to level `m`, every eigenvalue is `≥ −cQ^{m−1} ≥ Q^{m−1}λ_min(level 1)`
+(`λ_min ≤ −2` on `Γ_q`, `≤ −1` on `U_Q`), so **`λ_min(level m) = Q^{m−1}λ_min(level 1)` and every Hoffman floor survives every level** — G54's
+all-levels ratio beyond Galois rings, and FS86-LP's odd-tower bound re-derived. [hand; tools: exact at all four towers above, including the
+non-Galois-ring dyadic tower `ℚ₂(√3)`; plant L8 (`c = 1`) is violated on `ℚ₃(√3)(i)`, so `c = 2` is needed and attained there.]
+
+### 3.3 The assembly — do the lemmas, as stated, imply V1–V4?
+
+- **V1 (CLG_k) from 1–3, 6, 7, 9, 11 and `H_k`: yes.** ⟸ is 4 (from 1). ⟹: `θ = τ + α` (`H_k`); `τ ∈ Θ_k` (11); by 7's last clause `τ` factors
+  through the image of `R` in `G = ∏_{stable 𝔓|N} O_𝔓/𝔓^K`; extend to `G` (ℝ/ℤ divisible) and split `τ′ = Σ τ′_𝔓`; by 9 the image of `U` in `G`
+  is `∏ S_{𝔓,K}`, so `τ(U) = Σ τ′_𝔓(S_{𝔓,K}) ⊆ B_k`; 3 makes each summand symmetric and 6 gives one `τ′_𝔓` band on `S_{𝔓,K}`. **C′ (8) is not
+  needed and is correctly absent from 13's inputs** — the extension step replaces it at ramified dyadic places.
+- **V2 from 14: yes** (V2's hypothesis is weaker than 14's; either suffices).
+- **V3 from 18: yes, strictly sharper.** 18's exceptions have `p < k/2` (E1, by 17) or `p = 2` with `k ≥ 6` (E2), both "above level one", so they
+  lie inside V3's "`p ≤ k/2` above level one"; and V3's ramified dyadic case is 18's matching.
+- **V4 from 21–24: yes** for Fischer (with the existing checker, as in phase 1), C9, HD1, C-47, C-167, and the three-colour control (J02-T1's
+  generalisation, now visible to me as item 24's statement: TRUE given `H₃`). HD1 needs the *route* (21's inputs 13, 17, 20, 12 and Lemma D), not
+  13's statement — the correction I proposed in phase 1 is already J07's wording.
+- **Hypotheses:** `H_k` with the wide `A` (J01-7); no Lemma R, no Galois hypothesis, no certificate; complex embeddings covered (8 is checked
+  at ℚ(α), where the place above 3 has residue 𝔽₂₇ — the (E1) region).
+
+### 3.4 Theorems this phase proved
+
+| id | statement (one line) | grade | address |
+|---|---|---|---|
+| J10-L8 | in every inert residue tower (odd stable place, or inert stable dyadic place; `F_𝔭` possibly ramified over `ℚ_p`) a character new at level `j` has `|λ| ≤ c·Q^{j−1}` (`c` = 2 odd, 1 dyadic), so `λ_min` scales exactly by `Q^{j−1}` and every Hoffman floor survives every level | [hand + tools exact at four towers] | §3.2; `tools/crunch_j10_phase2.py` (E) |
+| J10-T6 | Lemma C and Lemma C′ as stated (re-derived blind); hence **`R_F = O′` and `R_F` dense in every finite product of stable completions, for every real number field with no ramified stable dyadic place — no Galois hypothesis**; the ramified exception holds at ℚ(√5), ℚ(√17), ℚ(α) and fails to occur at ℚ(√2) | [hand; tools exact at seven pairs and four controls] | §3.2; tool (D) |
+| J10-T7 | LB, LB′, CLG-e re-derived; LB′ sharp at (`e`=1, level 2) and (`e`=2, level 3) on `f = 1` towers, not at (1, 3) or (2, 5) (true margin `1/27`) | [hand + tools exact] | §3.2; tool (E) |
+| J10-T8 | (g3) at `k = 7`: LB/LB′ leave exact level `2e(𝔭|3) + 1` open at **every** `e`, so "`e(𝔭|3) = 1`" does not follow from J07's lemmas (GAP) | [hand; arithmetic tool (G)] | §3.1 item 19 |
+| J10-T9 | the level-one table: no band-4 character of `Γ_q`, prime `q ≡ 3 (4)`, `11 ≤ q ≤ 59`; none of band 5 at 23, 43, 59 (none at 11 either; one at 19); `λ_min(U₆₄, U₁₂₈, U₂₅₆) = −15, −19, −31` | [tools exact, via a brute-forced multiplicity formula] | tool (F) |
+
+### 3.5 The would-have-searched-here log (stage 3)
+
+| # | the move I would have made by search | what I did instead |
+|---|---|---|
+| 5 | search for a real field whose unit-vector ring misses part of a stable local order at an odd place | derived C′ (graded pieces + difference trick), then ranked sampled unit vectors mod `p` in PARI at seven pairs fixed in advance — exact linear algebra on a derivation-fixed list, a full rank being a proof |
+| 6 | hunt band characters at high levels to see where CLG-e fails | derived LB/LB′ first, then **complete exact enumeration** of every character of four derivation-fixed towers (at the edge of the ban, as in stage 2; seconds) |
+| 7 | search `f = 3`, `e = 2` towers for a band-7 character at level 5 (to refute or confirm (g3)'s `e = 1`) | not run (`729⁵` characters); recorded as a GAP in the lemmas instead |
+| 8 | enumerate characters of `Γ₂₃`, `Γ₄₃` | replaced by the exact value-multiplicity formula (one count per norm class), brute-forced only as its own check |

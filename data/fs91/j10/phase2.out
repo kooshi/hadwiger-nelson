@@ -1,0 +1,158 @@
+(D) Lemma C' by PARI: [deg L, #stable, #non-stable, [e,f] above p, p-denominators, rank(sample), rank(closed ring)]
+  ok   gp returned 12 result lines for 12 tests; stderr:   ***   Warning: new stack size = 400000000 (381.470 Mbytes).
+
+    Q(sqrt3), p=3 (ramified in F, e=2, one stable place): [4, 1, 0, [[2, 2]], 0, 4, 4]
+  ok   C' full rank 4 = [L:Q] = 4 (Q(sqrt3), p=3 (ramified in F, e=2, one stable place))
+    Q(sqrt7), p=3 (split in F: two stable places): [4, 2, 0, [[1, 2], [1, 2]], 0, 4, 4]
+  ok   C' full rank 4 = [L:Q] = 4 (Q(sqrt7), p=3 (split in F: two stable places))
+    Q(sqrt11), p=7 (split: two stable places): [4, 2, 0, [[1, 2], [1, 2]], 0, 4, 4]
+  ok   C' full rank 4 = [L:Q] = 4 (Q(sqrt11), p=7 (split: two stable places))
+    Q(sqrt3), p=2 (one inert stable dyadic place): [4, 1, 0, [[2, 2]], 0, 4, 4]
+  ok   C' full rank 4 = [L:Q] = 4 (Q(sqrt3), p=2 (one inert stable dyadic place))
+    Q(sqrt3,sqrt17), p=2 (two inert stable dyadic places): [8, 2, 0, [[2, 2], [2, 2]], 0, 7, 8]
+  ok   C' full rank 8 = [L:Q] = 8 (Q(sqrt3,sqrt17), p=2 (two inert stable dyadic places))
+    Q(alpha), alpha^3=alpha+1, p=3 (complex embeddings; residue F_27): [6, 1, 0, [[1, 6]], 0, 6, 6]
+  ok   C' full rank 6 = [L:Q] = 6 (Q(alpha), alpha^3=alpha+1, p=3 (complex embeddings; residue F_27))
+    Q(alpha), alpha^3=alpha+1, p=23 (complex embeddings; ramified): [6, 2, 0, [[1, 2], [2, 2]], 0, 6, 6]
+  ok   C' full rank 6 = [L:Q] = 6 (Q(alpha), alpha^3=alpha+1, p=23 (complex embeddings; ramified))
+    Q(sqrt5), p=2 (ramified stable dyadic; FS86-CL2): [4, 1, 0, [[2, 2]], 0, 2, 2]
+  ok   ramified-dyadic control: rank 2 < 4 (Q(sqrt5), p=2 (ramified stable dyadic; FS86-CL2))
+    Q(sqrt17), p=2 (two ramified stable dyadic; FS86-CL2): [4, 2, 0, [[2, 1], [2, 1]], 0, 2, 2]
+  ok   ramified-dyadic control: rank 2 < 4 (Q(sqrt17), p=2 (two ramified stable dyadic; FS86-CL2))
+    Q(sqrt2), p=2 (ramified stable dyadic, residue F_2): [4, 1, 0, [[4, 1]], 0, 4, 4]
+    (report only) rank 4 of 4
+    Q(alpha), p=2 (ramified stable dyadic, residue F_8): [6, 1, 0, [[2, 3]], 0, 2, 2]
+    (report only) rank 2 of 6
+    PLANT D: Q(sqrt3), p=2, a in 2*O_F only: [4, 1, 0, [[2, 2]], 0, 1, 1]
+  ok   PLANT D fires: rank 1 < 4 with every u_a = 1 mod 2 (PLANT D: Q(sqrt3), p=2, a in 2*O_F only)
+(E) local towers: per exact level L': best band margin beta*, LB / LB' / CLG-e, band-7, J10-L8
+  ok   Z_3[i] L=1: |S_L| = 4 = (Q+1)Q^(L-1)
+  ok   Z_3[i] L=1: lambda_min = -2.000000 = Q^(L-1) * lambda_min(1) = -2.000000 (J10-L8)
+  ok   Z_3[i] L=2: |S_L| = 12 = (Q+1)Q^(L-1)
+  ok   Z_3[i] L=2: lambda_min = -6.000000 = Q^(L-1) * lambda_min(1) = -6.000000 (J10-L8)
+  ok   Z_3[i] L=2: new characters |eig| <= 6 (max 5.6382) (J10-L8)
+  ok   Z_3[i] L=3: |S_L| = 36 = (Q+1)Q^(L-1)
+  ok   Z_3[i] L=3: lambda_min = -18.000000 = Q^(L-1) * lambda_min(1) = -18.000000 (J10-L8)
+  ok   Z_3[i] L=3: new characters |eig| <= 18 (max 10.3747) (J10-L8)
+  ok   Z_3[i] L=4: |S_L| = 108 = (Q+1)Q^(L-1)
+  ok   Z_3[i] L=4: lambda_min = -54.000000 = Q^(L-1) * lambda_min(1) = -54.000000 (J10-L8)
+  ok   Z_3[i] L=4: new characters |eig| <= 54 (max 17.9865) (J10-L8)
+  info Z_3[i]: exact level 1: beta* = 1/3 (least band k = 3)
+  ok   Z_3[i]: exact level 2: beta* = 1/9 (least band k = 9); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=2): 2 <= 2
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 2: 0
+  ok   Z_3[i]: exact level 3: beta* = 1/27 (least band k = 27); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=3): 2 <= 8
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 3: 0
+  ok   Z_3[i]: exact level 4: beta* = 1/81 (least band k = 81); LB 2*beta*p^a <= 1 (a=2)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=4): 2 <= 8
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 4: 0
+  ok   Z_7[i] L=1: |S_L| = 8 = (Q+1)Q^(L-1)
+  ok   Z_7[i] L=1: lambda_min = -4.493959 = Q^(L-1) * lambda_min(1) = -4.493959 (J10-L8)
+  ok   Z_7[i] L=2: |S_L| = 56 = (Q+1)Q^(L-1)
+  ok   Z_7[i] L=2: lambda_min = -31.457714 = Q^(L-1) * lambda_min(1) = -31.457714 (J10-L8)
+  ok   Z_7[i] L=2: new characters |eig| <= 14 (max 13.9712) (J10-L8)
+  ok   Z_7[i] L=3: |S_L| = 392 = (Q+1)Q^(L-1)
+  ok   Z_7[i] L=3: lambda_min = -220.204001 = Q^(L-1) * lambda_min(1) = -220.204001 (J10-L8)
+  ok   Z_7[i] L=3: new characters |eig| <= 98 (max 37.0401) (J10-L8)
+  info Z_7[i]: exact level 1: beta* = 2/7 (least band k = 4)
+  ok   Z_7[i]: exact level 2: beta* = 2/49 (least band k = 25); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=2): 4 <= 6
+  ok       CLG-e: no band-k above level one for k <= 2p = 14
+  ok   Z_7[i]: exact level 3: beta* = 2/343 (least band k = 172); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=3): 4 <= 48
+  ok       CLG-e: no band-k above level one for k <= 2p = 14
+  ok   Q_3(sqrt3)(i) L=1: |S_L| = 4 = (Q+1)Q^(L-1)
+  ok   Q_3(sqrt3)(i) L=1: lambda_min = -2.000000 = Q^(L-1) * lambda_min(1) = -2.000000 (J10-L8)
+  ok   Q_3(sqrt3)(i) L=2: |S_L| = 12 = (Q+1)Q^(L-1)
+  ok   Q_3(sqrt3)(i) L=2: lambda_min = -6.000000 = Q^(L-1) * lambda_min(1) = -6.000000 (J10-L8)
+  ok   Q_3(sqrt3)(i) L=2: new characters |eig| <= 6 (max 6.0000) (J10-L8)
+  ok   Q_3(sqrt3)(i) L=3: |S_L| = 36 = (Q+1)Q^(L-1)
+  ok   Q_3(sqrt3)(i) L=3: lambda_min = -18.000000 = Q^(L-1) * lambda_min(1) = -18.000000 (J10-L8)
+  ok   Q_3(sqrt3)(i) L=3: new characters |eig| <= 18 (max 10.2344) (J10-L8)
+  ok   Q_3(sqrt3)(i) L=4: |S_L| = 108 = (Q+1)Q^(L-1)
+  ok   Q_3(sqrt3)(i) L=4: lambda_min = -54.000000 = Q^(L-1) * lambda_min(1) = -54.000000 (J10-L8)
+  ok   Q_3(sqrt3)(i) L=4: new characters |eig| <= 54 (max 18.0000) (J10-L8)
+  ok   Q_3(sqrt3)(i) L=5: |S_L| = 324 = (Q+1)Q^(L-1)
+  ok   Q_3(sqrt3)(i) L=5: lambda_min = -162.000000 = Q^(L-1) * lambda_min(1) = -162.000000 (J10-L8)
+  ok   Q_3(sqrt3)(i) L=5: new characters |eig| <= 162 (max 31.1242) (J10-L8)
+  info Q_3(sqrt3)(i): exact level 1: beta* = 1/3 (least band k = 3)
+  ok   Q_3(sqrt3)(i): exact level 2: beta* = 0 (least band k = None); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=1): 0 <= 0
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 2: 0
+  ok   Q_3(sqrt3)(i): exact level 3: beta* = 1/9 (least band k = 9); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=2): 2 <= 2
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 3: 0
+  ok   Q_3(sqrt3)(i): exact level 4: beta* = 0 (least band k = None); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=2): 0 <= 2
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 4: 0
+  ok   Q_3(sqrt3)(i): exact level 5: beta* = 1/27 (least band k = 27); LB 2*beta*p^a <= 1 (a=1)
+  ok       LB' 2*beta*p^E <= p^(E-a) - 1 (E=3): 2 <= 8
+  ok       CLG-e: no band-k above level one for k <= 2p = 6
+    band-7 characters of exact level 5: 0
+  ok   Q_2(sqrt3)(w) L=1: |S_L| = 3 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=1: lambda_min = -1.000000 = Q^(L-1) * lambda_min(1) = -1.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=2: |S_L| = 6 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=2: lambda_min = -2.000000 = Q^(L-1) * lambda_min(1) = -2.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=2: new characters |eig| <= 2 (max 2.0000) (J10-L8)
+  ok   Q_2(sqrt3)(w) L=3: |S_L| = 12 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=3: lambda_min = -4.000000 = Q^(L-1) * lambda_min(1) = -4.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=3: new characters |eig| <= 4 (max 4.0000) (J10-L8)
+  ok   Q_2(sqrt3)(w) L=4: |S_L| = 24 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=4: lambda_min = -8.000000 = Q^(L-1) * lambda_min(1) = -8.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=4: new characters |eig| <= 8 (max 8.0000) (J10-L8)
+  ok   Q_2(sqrt3)(w) L=5: |S_L| = 48 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=5: lambda_min = -16.000000 = Q^(L-1) * lambda_min(1) = -16.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=5: new characters |eig| <= 16 (max 8.0000) (J10-L8)
+  ok   Q_2(sqrt3)(w) L=6: |S_L| = 96 = (Q+1)Q^(L-1)
+  ok   Q_2(sqrt3)(w) L=6: lambda_min = -32.000000 = Q^(L-1) * lambda_min(1) = -32.000000 (J10-L8)
+  ok   Q_2(sqrt3)(w) L=6: new characters |eig| <= 32 (max 16.0000) (J10-L8)
+  ok   Q_2(sqrt3)(w): exact level 1: beta* = 0 (least band k = None); CLG-e dyadic: no band-3 character
+  ok       CLG-e dyadic: U_Q has no band character at all (beta* = 0 at level one)
+  ok   Q_2(sqrt3)(w): exact level 2: beta* = 0 (least band k = None); CLG-e dyadic: no band-3 character
+  ok   Q_2(sqrt3)(w): exact level 3: beta* = 1/4 (least band k = 4); CLG-e dyadic: no band-3 character
+  ok   Q_2(sqrt3)(w): exact level 4: beta* = 0 (least band k = None); CLG-e dyadic: no band-3 character
+  ok   Q_2(sqrt3)(w): exact level 5: beta* = 1/8 (least band k = 8); CLG-e dyadic: no band-3 character
+  ok   Q_2(sqrt3)(w): exact level 6: beta* = 0 (least band k = None); CLG-e dyadic: no band-3 character
+  ok   PLANT E fires: with the fibres deleted a level-2 character reaches beta = 4/9 >= 1/6 (LB violated)
+  ok   PLANT L8 fires: the new-character bound with c = 1 is violated on Q_3(sqrt3)(i) (so c = 2 is needed and attained)
+(F) level one
+  ok   multiplicity formula 1 - eta(t^2 - 4N) = brute force at q = 7
+  ok   multiplicity formula 1 - eta(t^2 - 4N) = brute force at q = 11
+  ok   multiplicity formula 1 - eta(t^2 - 4N) = brute force at q = 19
+  ok   multiplicity formula 1 - eta(t^2 - 4N) = brute force at q = 23
+  ok   PLANT F fires: the sign-flipped formula disagrees with the brute force at q = 7
+  ok   control: Gamma_7 carries band-4 characters (norm classes [5]; C9)
+  ok   no band-4 character of Gamma_11
+  ok   no band-4 character of Gamma_19
+  ok   no band-4 character of Gamma_23
+  ok   no band-4 character of Gamma_31
+  ok   no band-4 character of Gamma_43
+  ok   no band-4 character of Gamma_47
+  ok   no band-4 character of Gamma_59
+  ok   no band-5 character of Gamma_23
+  ok   no band-5 character of Gamma_43
+  ok   no band-5 character of Gamma_59
+  info band-5 norm classes at q = 11: []
+  info band-5 norm classes at q = 19: [15]
+  ok   Hoffman-Weil: q - 8 sqrt q + 1 > 0 from q = 67 (ratio < 1/5), not yet at 59
+  U_64: lambda_min = -15, Hoffman floor 1 - (Q+1)/lambda_min = 5.3333, Weil bound 2 sqrt Q = 16.00
+  ok   U_64: |lambda_min| <= 2 sqrt Q
+  ok   U_64: lambda_min = -15, floor 5.33 (so k >= 6)
+  U_128: lambda_min = -19, Hoffman floor 1 - (Q+1)/lambda_min = 7.7895, Weil bound 2 sqrt Q = 22.63
+  ok   U_128: |lambda_min| <= 2 sqrt Q
+  ok   U_128: Hoffman floor > 7 (so no (E2) at k <= 7)
+  U_256: lambda_min = -31, Hoffman floor 1 - (Q+1)/lambda_min = 9.2903, Weil bound 2 sqrt Q = 32.00
+  ok   U_256: |lambda_min| <= 2 sqrt Q
+  ok   U_256: Hoffman floor > 7 (so no (E2) at k <= 7)
+(G) LB' at p = 3: pairs (e, exact level L') that LB' leaves open at k = 7 (beta = 1/7)
+  open: [(1, 3), (2, 5), (3, 7), (4, 9)]
+  ok   LB' leaves exactly (e, 2e + 1) open at k = 7, for every e
+
+0 failure(s)
