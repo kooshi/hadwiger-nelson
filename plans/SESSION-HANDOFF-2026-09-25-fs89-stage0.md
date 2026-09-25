@@ -5,7 +5,7 @@ That file's §1 rules table still applies, with the additions in §1 below.*
 
 ## 0. First acts
 
-1. **FS-89 Stage 1 is complete: RQ₄ and RQ₅ are proved, at hand grade, with every lemma re-derived blind (items 27, 28, 36, 37). The close planner is live** (item 40; brief `data/fs89/briefs/CL-close-planner-brief.md`). The close planner is the inventory's writer until it hands back. Then: review the close by artifact (hashes, the fact audit, the gates), push, and ask Kooshi about a next-step advisor.
+1. **FS-89 is CLOSED** (inventory items 1–54 ticked, except the carried items 5, 6, 7, 17 and 54, which are Kooshi's calls). **Kooshi's 16-hour crunch is being planned:** a Poros advisor (record `plans/POROS-2026-09-25-crunch-plan.md`) and a planner (queue `plans/CRUNCH-2026-09-25-queue.md`); briefs in `data/crunch-2026-09-25/briefs/`. Read the memory note `crunch-mode-2026-09-25.md` first. When the plan lands: review it, report to Kooshi, and he compacts; then run the queue with 4–5 agents. `CLAUDE.md` is at 274,995 of 275,000 bytes.
    `…/scratchpad/owner-fs89/live-agents.md`; never quote them to Kooshi.
    - **Verifier G** is blind-checking the next-step advisor's gluing sketch.
      - Brief: `data/fs89/briefs/S0A-gluing-verifier-brief.md`. Record: `plans/FS89-S0A-gluing-verification.md`.
