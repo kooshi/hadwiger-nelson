@@ -44,11 +44,18 @@ from four colours up the emptiness of `Θ_k` is one-sided (G71), and a colouring
 three colours every colouring of a real field's plane carries a character (FS73-T22, FS81-T2), so §3's statements are about `χ`.
 "Not found in print" is not "new".
 
-**Prior art, at this filing.** M1's close-time gate (J23p, `plans/FS91-PA-close.md`) is running. Its first verdict (owner's forward,
-inventory item 130): **band rigidity at every band (§1) is PARTLY IN PRINT** — `[Manners2015]` Lemma 5.3 proves the `RS_k` shape for
-`ℤ[i][1/P₅, 1/P₁₃]` (one Gaussian prime above each of 5 and 13) under `⟨θ₅, θ₁₃⟩`; the full `R_S` (both primes above each `p`), other `S`
-and the field clause are not there; `[Wang2012]` Prop. 4.3 and Lemma 4.2 are J01-2's architecture. Every other entry reads "pending the
-close gate" until J23p's verdicts land; named held inputs (Berend, Furstenberg, Weil, Astra, Fischer) are cited per entry.
+**Prior art — M1's close-time gate (J23p, `plans/FS91-PA-close.md` §C.1; DONE, commits 51459af1 … 9032661b).** Seven verdicts, each at the
+exact scope J23p gives it: (1) band rigidity at every band (§1) — **partly in print**: `[Manners2015]` Lemma 5.3 on `ℤ[i][1/P₅, 1/P₁₃]`
+(one Gaussian prime above each of 5 and 13, under `⟨θ₅, θ₁₃⟩`); the solenoid form of `[Wang2012]` Thm 1.10 stated unwritten by
+`[EinsiedlerLindenstrauss2022]` p. 3; `R_S` with both primes and the group `U_S`, other `S`, and the field clause not found; undecided until
+Muchnik 2005 is read. (2) CLG (§4) — **not found**; `χ_char` is `[BarajasSerra2008]`'s *regular chromatic number*, in print for cyclic groups;
+undecided until `[Johnson2000]`, `[Johnson2006]` are read. (3) three colours over every real number field (§3) — **not found**; posed by
+`[Fischer1990]` §1; undecided on the two Johnson papers. (4) Lemma C/C′ (§2) — **partly in print** (`[Fischer1990b]`'s quadratic and
+multiquadratic cases); the general form not found; Shimura 1964 undecided. (5) the peeling lemma — **not found**, folklore-grade; the Borel
+product literature undecided. (6) one prime (§6) — **not found as stated**; `[Manners2015]` §5.5 asserts the one-prime failure without proof
+in §1–§5; Bosio–Vivaldi 2000 and Vivaldi 2006 undecided. (7) `χ_char` of the finite planes (§5) — **not found**. "Not found" measures the
+queries' words (G21) and is never "new". Named held inputs (Berend, Furstenberg, Weil, GPT Astra, Fischer 1990/1994, `[MMST1998]`) are cited
+per entry.
 
 ## §1. Band rigidity at every band (J01 blind; J03a the second blind reading)
 
@@ -90,7 +97,8 @@ The chain: PA-B2 (FS91-J01-2), VB1 with SW-m (FS91-J01-5, J01-8), VB3/VB4 and th
 it is false (FS91-J03a-9). *Proof:* J01 stage 3b; J03a §3.2–§3.4. *Proof verdict:* closes, twice. *Rests on it:* `H_k` for every `k` —
 the input of CLG (FS91-J07-7) at every band; FS91-J08-9–J08-11; row 95's "Not claimed … six is unchecked" (answered, on characters).
 *Does not give:* the explicit band-`k` torsion list at `k ≥ 7` (J08 gives `k = 5, 6`), any bound on `N_k` beyond finiteness, anything
-about `χ` or non-character colourings. *Prior art:* **partly in print** (J23p, item 130): `[Manners2015]` Lemma 5.3 is the one-ring,
+about `χ` or non-character colourings; nor density of the orbit (`[Manners2015]` Remark 5.4(i)'s "`Y = Â`" is not answered: M1 proves values near 0,
+not density), nor an effective `N_k` (`[KravitzLeng2025]` gives one for Manners's half ring). *Prior art:* **partly in print** (J23p result 1, items 130–131; undecided until Muchnik 2005 is read): `[Manners2015]` Lemma 5.3 is the one-ring,
 two-prime special case (`ℤ[i][1/P₅, 1/P₁₃]`, one Gaussian prime above each); the full `R_S`, other `S` and the field clause are not there,
 and the passage from Manners's ring to `R_S` is a gluing, not formal (at one prime the gluing fails, §6); `[EinsiedlerLindenstrauss2022]`
 p. 3 calls the solenoid form of `[Wang2012]` Thm 1.10 unwritten. The classical analogue is Furstenberg's ×2×3 (J01 audit point 6).
@@ -117,8 +125,8 @@ and FS89-CL2 (inventory items 61, 69, 78). *Prior art:* none needed (a counterex
 **FS91-J07-3 — Lemma C: "For every real number field `F` and prime `p`: inside `L ⊗ ℚ_p = V_s × V_n` (stable and non-stable primes above `p`), `R ⊗ ℤ_p = R̄_p × V_n`, where `R̄_p`, the closure of `R` in `∏_{stable 𝔓|p} Ô_𝔓`, is an open subring of finite index; hence `R/p^jR ≅ R̄_p/p^jR̄_p` for all `j`, `R/NR ≅ ∏_{p|N} R̄_p/NR̄_p`, `dim_{𝔽_p} R/pR = Σ_{stable 𝔓|p} [L_𝔓 : ℚ_p]`, and for every `N` there is `K` with `R ∩ ∏_{stable 𝔓|N} 𝔓^K ⊆ NR`. No Galois hypothesis." (= J10-T6's first half; its last clause = J10-L3: a torsion character of order dividing `N` factors through `∏_{𝔓 | cN} O_𝔓/𝔓^M`.) [hand; J07's record: one mind; J10 re-derived it from the statement by an independent route (J10 §3.2, divergence row 1: "both close; independent"); J10-L3 blind in phase 1]**
 J07's route: a Cayley–Hamilton projector `P(u)`, `u = c(a)/a`, `(a) = 𝔔^h`, kills every other place. J10's: `cO′ ⊆ R` (FS91-J10-L1) and
 `O′ ⊗ ℤ_p = ∏Ô × V_n`. *Proof:* `plans/FS91-S1D-character.md` §2.3; `plans/FS91-S1V-character.md` §2.2 (L3), §3.2. *Proof verdict:*
-closes, twice. *Rests on it:* CLG_k's ⟹ (FS91-J07-7, through the factorisation); FS91-J07-4, J07-5. *Prior art:* pending the close gate
-(J07 flagged "orders generated by a norm-one torus's rational points … likely classical in parts", inventory item 80). *Kernel:* stub
+closes, twice. *Rests on it:* CLG_k's ⟹ (FS91-J07-7, through the factorisation); FS91-J07-4, J07-5. *Prior art:* **partly in print**
+(J23p result 4): `[Fischer1990b]`'s quadratic and multiquadratic cases; the general form not found; Shimura 1964 undecided. *Kernel:* stub
 (FS-47, the unit-vector ring in the kernel, gains Lemma C/C′ as its statement — inventory item 79).
 
 **FS91-J07-4 — Lemma C′: "`R̄_p = ∏_{stable 𝔓|p} Ô_𝔓` (equivalently `R/NR ≅ ∏_{stable 𝔓|N} O_𝔓/NO_𝔓` for `N` a power of `p`) for every `p`, except possibly `p = 2` when some stable dyadic place is ramified in `L/F`; inert stable dyadic places always split off as full factors. No Galois hypothesis." (= J10-T6: "`R_F = O′` and `R_F` dense in every finite product of stable completions, for every real number field with no ramified stable dyadic place — no Galois hypothesis; the ramified exception holds at ℚ(√5), ℚ(√17), ℚ(α) and fails to occur at ℚ(√2)"; J09's J2 is the same statement at every `p` with no ramified stable prime above it: "`ℤ[U_F]_(p) = O′_(p)` …; `R/pR ≅ ∏_{S_p} O_𝔓/p`; `1/p ∈ R` if `S_p = ∅`; `R = O′` if no stable prime ramifies (FS86-B1-LR without "L/ℚ Galois")".) [hand; three derivations — J09's J2 blind (stage 2 §2.2); J07-4 (one mind by its record; J07 read J2's heading, not its proof, after deriving C′ — held item, inventory 114, on which C′'s independence rests); J10-T6 from the statement, with tools exact at seven field–prime pairs and four controls. The owner's ruling (item 68) reads J2 as one mind; J07-4 and J10-T6 reach its completed form independently (index §2.3)]**
@@ -127,7 +135,7 @@ graded pieces of the smooth torus (`Σ_{μ_{q+1}}(z − 1) = 1` in characteristi
 *Proof:* J09 §2.2; J07 §2.4; J10 §3.2 and `tools/crunch_j10_phase2.py` (D). *Proof verdict:* closes, three times. *Rests on it:* the
 correction owed to FS86-B1-LR's scope line (drop "`L/ℚ` Galois"; inventory items 13, 78); FS91-J07-5's product form; FS91-J09-J4 (J2 at 3
 and 2). *Prior art:* FS86-B1-LR (with the Galois hypothesis); G55's prime inversion (`[Fischer1990b]` for quadratic and multiquadratic
-fields); pending the close gate for the general form. *Kernel:* stub (FS-47).
+fields); the general form **not found** by the close gate (J23p result 4; Shimura 1964 undecided). *Kernel:* stub (FS-47).
 
 **FS91-J02-L2 — "`A_p = R/pR` is a finite `𝔽_p`-algebra with `dim A_p ≤ n`, and `c` induces a ring involution on it"; every maximal ideal `𝔪 ∋ p` of `R` equals `R ∩ 𝔓` for a stable prime `𝔓 | p` of `L`, and `c(𝔪) = 𝔪`; full residue fields `𝔽_{q²}` with `𝒩(k_𝔪) = μ_{q+1}` at unramified stable primes, `𝒩(k_𝔪) = {1}` at ramified ones; every `p`. (= J09's J2′: `ℤ[U_F]/p ≅ Ā_p/pĀ_p`, `Ā_p` the closure in `∏_{S_p} O_𝔓`, of dimension `Σ_{S_p}[L_𝔓 : ℚ_p] ≤ [L : ℚ]`.) [hand (GPT Astra's Lemma 1.1 and §3.1–3.2, extended from `p = 3` to every prime); two derivations: J02 §2.3 and J09 §4.2 (from the statement; J09 stage 4 row L2: "TRUE; … the general case derived now")]**
 *Proof:* `plans/FS91-S0F-three-colours.md` §2.3; `plans/FS91-S0FV-three-colours-blind.md` §4.2. *Proof verdict:* closes, twice. *Rests on
@@ -189,7 +197,8 @@ condition at 2. *Proof:* J02 §2.7; J09 §2.6. *Proof verdict:* closes, twice. *
 conjecture ("L ≤ 3 for every real number field"). *Prior art:* `[Fischer1990]` §1 poses the general question verbatim ("whether some
 algebraic criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q"); Johnson's
 2000 status report, problem (1), poses it for `χ`; S1 answers it at `χ ≤ 3` — a `CLOSED-QUESTIONS.md` candidate (inventory item 9);
-`[Johnson2000]`, `[Johnson2006]` unread; pending the close gate. *Kernel:* stub (FS-75, re-aimed).
+`[Johnson2000]`, `[Johnson2006]` unread; the close gate: **not found**, undecided on the two Johnson papers (J23p result 3; its citation
+walk of `[Fischer1990]`: OpenAlex 13 citers, Semantic Scholar 11). *Kernel:* stub (FS-75, re-aimed).
 
 **FS91-J09-J4-A — S1 on every algebraic subfield of ℝ (L read through places; König's lemma over the number subfields) and on every purely transcendental extension `E(t₁,…,t_d)` of one (G63, composite places); GAP for a general transcendental `F` at two named steps: (1) `L(F)` is defined through primes, which a general `F` lacks; (2) J2's one use of finite degree has no replacement for finitely generated fields not purely transcendental over an algebraic field (FS-39's gap). [hand, one mind (J09)]**
 *Correction applied (J09 stage 5 row 1, inventory item 113):* J02 §2.10 withheld the algebraic case because "a stable ramified dyadic prime
@@ -234,7 +243,7 @@ form; `[Moorhouse2010]`. *Kernel:* declined (row 56's `addCayleyMap` is the kern
 
 **FS91-J07-2 — CLG-b and CLG-b_n, the peeling lemma: "For `0 < β ≤ ½`, `X, Y ⊆ ℝ/ℤ`, `X = −X`, `X + Y ⊆ B_β`: if some `x ∈ X` has `‖x‖ < β`, then every `y ∈ Y` has `‖y‖ ≥ β + ‖x‖`"; "If `X_1 + ⋯ + X_n ⊆ B_β` with every `X_j` non-empty and symmetric, some `X_j ⊆ B_β`." (= J03-1, the planner's, one mind; its contrapositive = J10-L5: "a Minkowski sum of symmetric subsets of ℝ/ℤ each meeting `{‖x‖ < β}` meets it".) [hand + tools exact (J07 check D: all symmetric subsets of `ℤ/12`, `ℤ/13`); three derivations (J03 §S/§M.2; J07 §2.2; J10-L5 blind, and J10 items 5–6 from the statements)]**
 *Proof:* J07 §2.2. *Proof verdict:* closes. *Rests on it:* FS91-J07-7's peel. It proves "some", never "one" (J07 §5.1 (iv)). *Prior art:*
-elementary; pending the close gate ("folklore-grade until a gate on it is answered", plan §PA.3 item 4; inventory item 80). *Kernel:*
+elementary; **not found** by the close gate, folklore-grade (J23p result 5; the Borel product literature undecided). *Kernel:*
 declined for now (a short, self-contained kernel candidate if CLG is ever ported).
 
 **FS91-J07-6 — CLG-d, the archimedean factor: "If `θ = τ + (ℓ mod 1) ∈ Θ_β(R_F)`, `τ` torsion, `ℓ ∈ Hom_ℚ(L, ℝ)`, then `ℓ` vanishes on `L ⊗_F F_w` at every complex place `w`, and `τ(U) + [−r, r] ⊆ B_β` with `r = Σ_{w real} |e_w|` (`ℓ_w(z) = Re(ē_w z)`); in particular `τ ∈ Θ_β(R_F)`. Every real number field." (= J03-4's complex half, the planner's "archimedean places have local `κ = 0`"; = J10-L4: "the archimedean part vanishes at every complex place of `F`; the torsion part alone is band on `U_F`".) [hand; three derivations (J03 §M.1; J07 §2.6, two routes; J10-L4 blind — divergence row 4: "convergent, independent")]**
@@ -251,7 +260,8 @@ at `χ_char(F²)`, which `H_k` gives only when `χ_char(F²) ≤ k` — moot giv
 `H` at every band"; (ii) HD1 (the plan's CLG-f) does not follow from CLG_k's *statement*, which is existential — it follows from CLG's
 *proof* with Lemma D (FS91-J07-12). *Proof:* J07 §2.7, §3.1; J10 §2.2–§2.3, §3.3. *Proof verdict:* closes, twice. *Rests on it:* FS91-J07-11
 to J07-15; FS91-J08-8 and J11-T10/T11 (the lower halves, now given a blind-verified CLG); the sharpened G64 ("six, or any falsifier, hides
-only in a non-character colouring"). *Prior art:* pending the close gate; the question is posed for `χ` by `[Fischer1990]` §1 and Johnson's
+only in a non-character colouring"). *Prior art:* **not found** by the close gate (J23p result 2); `χ_char` is `[BarajasSerra2008]`'s regular chromatic number, in print for
+cyclic groups; undecided until `[Johnson2000]`, `[Johnson2006]` are read; the question is posed for `χ` by `[Fischer1990]` §1 and Johnson's
 2000 status report (problem (1)); the discipline is circular colouring / the lonely-runner parameter (plan §PA.1); the nearest printed
 relative found at the opening gate is Kang–Maharaj 2010 (one-place colourings of distance graphs, rank 1). *Kernel:* declined for now
 (rests on `H_k`, hence on `[Berend1984]`); its local half is FS-47's.
@@ -319,7 +329,7 @@ A line `Tr(ax) = t` meets the norm-`c` circle iff `X² − tX + c` has roots of 
 derived, so its refusals are the suspect verdict (`CLAUDE.md` § The gate): both jobs checked it against a direct circle enumeration, and
 row 69's periodic colourings' `D` is exactly `V_c` for one non-square `c` at every `p ≡ 3 (mod 4)` in `data/fplane/periodic-below-71.json`
 (J08 stage 3 control 3). *Proof:* J08 stage 2; J11 §W1. *Proof verdict:* closes, three times. *Rests on it:* §5's every list. *Prior art:*
-Kloosterman/Weil control of `Γ_q`'s spectrum (G44); runs of quadratic residues of a polynomial (plan §PA.1); pending the close gate.
+Kloosterman/Weil control of `Γ_q`'s spectrum (G44); runs of quadratic residues of a polynomial (plan §PA.1); the close gate: **not found** (J23p result 7).
 *Kernel:* declined (a finite `decide` per `q` would port it if a consumer appears).
 
 **FS91-J11-T2 — every band character has `N(a)` a non-square; `χ_char(Γ_q) = ⌈q/max_c d(c)⌉`. [hand; J11 §W1 (one mind in its table); J08's stage-3 definitions give the same formula (`κ = max_c m(c)/q`, band `k` at `c` iff `k·m(c) ≥ q`)]**
@@ -405,7 +415,8 @@ above. *Prior art:* none (a comparison). *Kernel:* declined.
 *Every entry below is one derivation (J12, `plans/FS91-S1D-one-prime.md`); J13's verdicts, when they land, are added to each entry's
 verification line. Statements are J12's theorems table, verbatim; `data/fs91/j12/lemma-statements.md` holds the self-contained forms
 (26 items). **Prior art, for every §6 entry that names none:** pending the close gate; the piecewise-rotation and S-adic literatures
-(inventory item 122) are unsearched. `R₅ = R_{{5}}`, `S₊ = ℤ[i][1/π̄_p]`, `S₋ = ℤ[i][1/π_p]`, `ω = (−4−3i)/5`, `Q₀ = [−1/4, 1/4]²`, `C₉` the nine centres.*
+(inventory item 122) are unsearched. The close gate's verdict on §6 (J23p result 6): **not found as stated**; `[Manners2015]` §5.5
+asserts the one-prime failure without proof in §1–§5; Bosio–Vivaldi 2000 and Vivaldi 2006 undecided. `R₅ = R_{{5}}`, `S₊ = ℤ[i][1/π̄_p]`, `S₋ = ℤ[i][1/π_p]`, `ω = (−4−3i)/5`, `Q₀ = [−1/4, 1/4]²`, `C₉` the nine centres.*
 
 **FS91-J12-A1, J12-A2, J12-A3 — the half-rings and the `p`-free margins:** "`S₊ ∩ S₋ = ℤ[i]`, `S₊ + S₋ = R_{{p}}`, `U_p ⊆ S₊ ∪ S₋`"; "characters of `S₊`, `S₋` agreeing on `ℤ[i]` glue uniquely to `R_{{p}}`"; "at every `p ≡ 1 (4)`: `θ₂ = 1/2` and `τ_{(1+i)/3} ∈ {1/3, 2/3}` on `U_p` (margins 1/4, 1/12, `p`-free)". **[hand (A3: tools exact at 5, 13, 17, 29); one derivation (J12 stage 2); J13 pending]**
 A1 is the only place one prime is used in ONE-a: with two primes `w₅w₁₃` lies in no half-ring (J12's remark). *Proof:* J12 stage 2.

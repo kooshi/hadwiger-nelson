@@ -672,3 +672,7 @@ close gate" or names the held input it uses (Berend, Furstenberg, Weil, GPT Astr
 says DONE), and J23p's further verdicts (the owner forwards them).
 
 **Would have searched here (stage 2):** none — filing only; the coverage control is a string check over a fixed list of ids.
+
+*Addendum to stage 2 (after its commit): J23p's seven close-gate verdicts (inventory item 131, the owner's forward) are folded into
+`plans/FS91-derivation.md`'s prior-art paragraph and the entries they bear on (FS91-J01-7, J07-2, J07-3, J07-4, J07-7, J02-T2, J08-1, §6's
+header). Their use in the prior-art positions and the drafts is stage 3's and stage 4's.*
