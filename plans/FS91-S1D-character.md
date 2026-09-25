@@ -247,7 +247,7 @@ of residue characteristic `p ≤ k/2` above level one."* Proved in the sharper f
   `[F : ℚ] ≥ 6`. *For every real quadratic field and every `k ≥ 3`: a character `k`-colouring exists only if `L(F) ≤ k`.* This is SIX-e's
   hypothesis at ℚ(√167) with no exception: every stable place is odd with prime `q ≥ 23 > 7/2`, so a character six- or seven-colouring of
   ℚ(√167)'s plane exists iff some level-one `Γ_q`, `q` stable, has a band six- (seven-) character.
-- **(g3) At `k ∈ {6, 7}`**, the exception is at most `q = 27` (levels 2–3; `χ(Γ₂₇) ≥ 6`, G56) and `Q = 64` (`6 ≤ χ(U₆₄) ≤ 8`), *given* the
+- **(g3) At `k ∈ {6, 7}`** *(sharpened in 4.2: at `k = 6` no `q = 3^f` exception at all)*, the exception is at most `q = 27` (levels 2–3; `χ(Γ₂₇) ≥ 6`, G56) and `Q = 64` (`6 ≤ χ(U₆₄) ≤ 8`), *given* the
   odd-tower Hoffman ratio at `q = p^f` for every level (FS86-LP is stated at prime `q`; its fibre argument reads one `𝔽_q`-line per
   fibre and should give `max(h(Γ_q), 2/(q+3))` — sketched, one mind, not relied on). Without it, add every `q = 3^f`, `f ≥ 5`, at levels
   2–3.
@@ -260,3 +260,66 @@ the level-2 target `O_𝔓/𝔓²` at `q = 27`, `3¹²` vertices, or of the 64-t
 - Would have enumerated band six-characters of the level-2 target at `q = 27` to see whether (E1) is realised; not done — it is a finite
   question a derivation fixes (`|O_𝔓/𝔓²| = 3¹²` at `q = 27`), but it bears only on fields of degree ≥ 3 and is J08's territory (SIX-d); logged as a
   SPAWN candidate instead.
+
+## Stage 4 — SAVED (controls and corollaries; the exact checks)
+
+### 4.1 The exact checks — `tools/crunch_j07_checks.py` → `data/fs91/j07/checks.txt` (58 ok, 2 s)
+
+Complete enumerations of finite sets a derivation fixed first (standing rule 3's edge), each checking a derived claim; logged in the
+would-have-searched log. Three plants, each red for its own reason (`data/fs91/j07/plant-*.txt`):
+`subS` (the band tested only on the part of `S_m` with `y ≡ 0 mod p^{m−1}`, i.e. without the tangent directions the sweep uses) → band
+characters of exact level 4 appear at `k = 3, 4` at `p = 3`; `dropS` (the circle's points `(0, ±1)` dropped) → a spurious band-4 character
+of `Γ₁₁`; `asym` (non-symmetric `X` allowed in the peeling lemma) → 240+ violations.
+
+| check | result |
+|---|---|
+| A. level bound on `ℤ[i]/3⁴` (`k = 3..20`) and `ℤ[i]/7³` (`k = 4, 13, 14, 20`), every character | every band character within the bound; **level one at every `k ≤ 2p`** (including `k = 2p`); first level-2 band character at `p = 3` exactly at `k = 9`, none of level 3 or 4 up to `k = 20`; at `p = 7` level one throughout |
+| B. no band-4 character of `Γ_q`, `q ∈ {11, 19, 23, 31, 43, 47, 59}`; no band-5 character at `q ∈ {23, 43, 59}`; C9's `(2x+3y)/7` band-4 at 7; `(x+y)/3` band-3 at 3 | all as derived |
+| C. stable odd places and dyadic type of ℚ(√d), `d ∈ {47, 167, 59, 83, 131, 11}` | least stable `q`: 11, 23, 11, 19, 19, 7; dyadic split for 47, 167 and inert stable for 59, 83, 131, 11; ℚ(√167)'s list begins 23, 43, 59, 67, 71 (S0A-9's table) |
+| D. CLG-b on `ℤ/12`, `ℤ/13`, bands 1/3–1/5, every symmetric `X` | no violation |
+| existing checker `data/fs86/b1/fischer_vk_control.gp` (FS-86 B1's, run unchanged) → `data/fs91/j07/fischer-control.txt` | Fischer's functional kills `𝔓₁³` and not `𝔓₁²`, and kills no power `≤ 4` of `𝔓₂` |
+
+### 4.2 Lemma LB′ — the level bound sharpened by discreteness, and CLG-e at `k = 2p` [hand; checked by A]
+
+In Lemma LB's step 2 the coset `λ(σ) + p^{−a′}ℤ/ℤ` lies in `p^{−E}ℤ/ℤ`, `p^E` the exponent of `O_𝔓/𝔓^L` (`E = ⌈L/e⌉`), so its point
+nearest 0 is within `(p^{E−a′} − 1)/(2p^E)` of 0 (`p` odd). Band `β` then needs **`2β·p^E ≤ p^{E−a} − 1`**, `a = ⌊(⌊L/2⌋ − 1)/e⌋ + 1`.
+Consequences (`e = 1`): level 2 needs `k ≥ 2p²/(p − 1)` (9 at `p = 3`: **sharp**, check A); level 3 needs `k ≥ 2p³/(p² − 1)` (7 at `p = 3`;
+not realised on `ℤ[i]` to `k = 20`); for `e ≥ 2` level 2 is impossible at every `k` (`E = 1`). So:
+- **CLG-e holds at `k ≤ 2p`**, not only `k < 2p`, at every odd stable place: `2p^E/(p^{E−a} − 1) > 2p` whenever `a ≥ 1`.
+- **CLG-g (E1) sharpened:** it needs `2p < k`. At **`k = 6` (E1) is empty** — the only possible exception at six colours is the dyadic
+  `Q = 64` (E2). At `k = 7`, (E1) is `q = 3^f`, `f ≥ 3`, `e(𝔭|3) = 1`, exact level 3 only, with `χ(Γ_q) > 7`.
+
+### 4.3 Controls (CLG-f) — every one reproduced
+
+| control | known answer | what CLG returns | verdict |
+|---|---|---|---|
+| `θ₂` on a wall-standing field (G1, row 63) | the parity character, local at a ramified dyadic place, `L = 2` | `τ = θ₂`, `ℓ = 0`, one summand `{½}`: the survivor is the ramified dyadic place at level 1 (`Cay(κ, {1})`, band ½) | reproduced |
+| `[Fischer1994]` on K (row 89) | local at one dyadic place, level 3 | order-4 `τ`, `ℓ = 0`; by the checker it factors through `O/𝔓₁³` and not `O/𝔓₁²`, and reads nothing at `𝔓₂` (`λ₂ = 0`): survivor `𝔓₁`, level 3. Level 3 > 1 is permitted: `p = 2 ≤ 4/2` (CLG-e's excluded case), and `L(K) = 4` via `U₄`'s non-character four-colouring (CLG-g step 4) | reproduced |
+| C9 on ℚ(√11) (row 94) | `Γ₇` plus an archimedean term `< 1/28` | the stable place above 7 (check C: 7 is stable for ℚ(√11)) carries `X = {2/7, …, 5/7} ⊆ B₄` (check B), `E = [−r, r]`, `r < 1/28`; survivor at 7, level 1 (`2·7 > 4`); `L(ℚ(√11)) ≤ 4` | reproduced; and C9 is a band character **outside** HD1's class, as it must be (ℚ(√11) has a slack stable place at 7) |
+| J02-T1 at `k = 3` | a band-3 torsion character exists iff a stable `𝔽₃` prime or a ramified stable dyadic prime | CLG_3 + CLG-e (every `p` has `2p > 3`; inert dyadic by 3.2): the survivor is at level 1; `Γ_q` has a band-3 character only at `q = 3` (Lemma AV + Hoffman: `α(Γ_q)/q² < 1/3` for `q ≥ 7`; `q = 27, 243, …` by J02-L4(a)); `U_Q` has none (J02-L4(b)); so an `𝔽₃` place or a ramified dyadic one | reproduced, for every `θ ∈ Θ₃` (J02-T1 is its torsion case) |
+| §M.1's `κ(F′) ≤ κ(F)`, `F ⊆ F′` | restriction | trivially (restrict `θ` to `R_F ⊆ R_{F′}`); locally, a stable `𝔓′` of `F′(i)` lies over a stable `𝔓 = 𝔓′ ∩ L` (`c(𝔓′ ∩ L) = 𝔓′ ∩ L`), and `O_𝔓/𝔓^{⌈m/e⌉} → O_{𝔓′}/𝔓′^m` carries `T(F_𝔭)` into `T(F′_{𝔭′})`, so `κ_loc(𝔓′) ≤ κ_loc(𝔓)` and CLG reproduces the inequality place by place | reproduced |
+
+### 4.4 FS89-CL3, CL4, CL5 under the corrected `A(R_F)` (the owner's named deliverable)
+
+**Where the narrow reading could have entered.** CL3–CL5's conclusions do not mention `A`; their proofs pass through FS89-S0A-6/8/9 and
+FS86-dB-Theta. Each of those reads **both** real places (S0A: "`U` is dense in `T(ℝ)² × ∏ T(F_𝔓)`", step 2 of G2 and step 3 of G3;
+dB-Theta: "`(u mod 𝔓^m ⊕ …, σ₁u, σ₂u)` dense in … `× S¹ × S¹`", `ρ = |α₁| + |α₂|`). So the one-embedding misreading (J03a-9) sits only in
+FS89-CL2's wording, not in any step of CL3–CL5.
+
+| claim | verdict under `A(R_F) = Hom_ℚ(F(i), ℝ) mod 1` | the deciding step | CLG's re-proof |
+|---|---|---|---|
+| **CL3** (HD1: ℚ(√59), ℚ(√83), ℚ(√131)) | **TRUE** | FS-89's route: dB-Theta's density over both real places with `χ_f(Q) = 4` (V3, needing FS-66's certificates and `[Zhang2012]`) — wide-`A` already | **Yes, with fewer inputs.** Peel: the survivor is not odd (every stable odd `q` is prime `≥ 11`, check C; level one, `2q > 4`; no band-4 character of `Γ_q`, S0A-8's middle half against Weil, exact at 11–59, check B), so it is the unique stable dyadic place `D`. `D`'s tower is Hoffman-tight at four colours at every level (FS86-B1-LD), so by Lemma AV every band-4 character of it takes the value `±¼`. Then the rest `Y = Σ_odd X_𝔓 + E` satisfies `±¼ + Y ⊆ B₄`, i.e. `Y ⊆ {0, ½}`: the interval `E` is a point (`ℓ = 0` at both real places, so `α = 0`), and the odd summands, of odd order, are `{0}`, so each `λ_𝔓` kills `ρ_𝔓(R)`. Hence `θ = λ_D∘ρ_D`, a dyadic pullback. **Not used:** V3, FS-66, `[Zhang2012]`, Lemma R |
+| **CL4** (`Θ₄(R_{ℚ(√47)}) = ∅`) | **TRUE** | S0A-8's step 2 (density over `T(ℝ)²`) and step 4 (middle half vs Weil) | **Yes**: no stable dyadic place (47 ≡ 7 mod 8); every stable odd place has prime `q ≥ 11` (check C); level one; no band-4 character of `Γ_q`. **Not used:** Lemma R |
+| **CL5** (`Θ₅(R_{ℚ(√167)}) = ∅`) | **TRUE** | S0A-9's step 3 (the archimedean part averages away over `T(ℝ)²`) and step 5 (the level-one ratios, by FS-53's and FS-66's certificates at 43 and 23) | **Yes, with no certificate**: stable places odd, prime `q ∈ {23, 43, 59, 67, …}` and the ramified 167 (check C); level one (`2q > 5`); no band-5 character at 23, 43, 59 (check B: the complete lists of 529, 1849, 3481 characters); for `q ≥ 67`, Lemma AV against Hoffman–Weil (`α/q² < 1/5` once `8√q < q + 1`). **Not used:** FS-53's or FS-66's certificates, `[Zhang2012]`, Lemma R |
+
+**FS89-CL2** is TRUE with the wide `A(R_F)` and FALSE as worded with `λ_e` (J03a-9; I add nothing). **Proposed edit** (for the front-page
+lane): CL2's and row 95's field clause read "`A(R_F)`, the archimedean characters of every place of `F(i)`"; and row 96 may add "re-proved
+through CLG (J07): HD1 with no FS-66 certificate and no `[Zhang2012]`, C-167 with no certificate at all".
+
+### Would-have-searched-here log (stage 4)
+
+- Checks A, B, D are complete enumerations over sets a derivation fixed (all characters of `ℤ[i]/3⁴`, `ℤ[i]/7³`, of `Γ_q` for the listed
+  `q`; all symmetric subsets of `ℤ/12`, `ℤ/13`) — the ban's edge, as logged. Would have searched for a band six-character of the
+  level-2 target at `q = 27` (to test (E1) at `k = 7`); not run (J08's SIX-d territory, `3¹²` vertices).
+- Would have computed `χ_char(Γ₂₃)` and `χ_char(Γ₄₃)` exactly (a byproduct of check B at `k ≥ 6`); **deliberately not done**: it is J08's
+  SIX-b, fenced by its own verifier's list, and nothing here needs it.

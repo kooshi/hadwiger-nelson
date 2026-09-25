@@ -1,0 +1,57 @@
+== A. level bound (Lemma LB, CLG-e) ==
+ok   A p=3 m=4: |S_m| = p^(m-1)(p+1) = 108
+FAIL A p=3 m=4 k=3: 756 band characters, largest exact level 4 <= allowed 1
+FAIL A p=3 m=4 k=3 <= 2p: level one (CLG-e at the boundary k = 2p included)
+FAIL A p=3 m=4 k=4: 1080 band characters, largest exact level 4 <= allowed 1
+FAIL A p=3 m=4 k=4 <= 2p: level one (CLG-e at the boundary k = 2p included)
+FAIL A p=3 m=4 k=5: 1296 band characters, largest exact level 4 <= allowed 1
+FAIL A p=3 m=4 k=5 <= 2p: level one (CLG-e at the boundary k = 2p included)
+FAIL A p=3 m=4 k=6: 1458 band characters, largest exact level 4 <= allowed 1
+FAIL A p=3 m=4 k=6 <= 2p: level one (CLG-e at the boundary k = 2p included)
+FAIL A p=3 m=4 k=7: 2214 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=8: 2592 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=9: 3348 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=10: 3348 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=11: 3726 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=12: 4104 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=13: 4104 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=14: 4482 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=15: 4482 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=16: 4482 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=17: 4860 band characters, largest exact level 4 <= allowed 3
+FAIL A p=3 m=4 k=18: 4860 band characters, largest exact level 4 <= allowed 3
+ok   A p=3 m=4 k=19: 4860 band characters, largest exact level 4 <= allowed 5
+ok   A p=3 m=4 k=20: 4860 band characters, largest exact level 4 <= allowed 5
+   sharpness at p = 3: {3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4, 10: 4, 11: 4, 12: 4, 13: 4, 14: 4, 15: 4, 16: 4, 17: 4, 18: 4, 19: 4, 20: 4}
+== B. level-one inputs ==
+ok   B q=7 k=4: C9's (2x+3y)/7 is a band-4 character (8 in all)
+ok   B q=3 k=3: (x+y)/3 is a band-3 character
+ok   B q=11 k=4: no band-4 character (found 0)
+ok   B q=19 k=4: no band-4 character (found 0)
+ok   B q=23 k=4: no band-4 character (found 0)
+ok   B q=31 k=4: no band-4 character (found 0)
+ok   B q=43 k=4: no band-4 character (found 0)
+ok   B q=47 k=4: no band-4 character (found 0)
+ok   B q=59 k=4: no band-4 character (found 0)
+ok   B q=23 k=5: no band-5 character (found 0)
+ok   B q=43 k=5: no band-5 character (found 0)
+ok   B q=59 k=5: no band-5 character (found 0)
+ok   B middle-half 1/sin(pi/2q) > 2 sqrt(q), 11 <= q < 2000 (float; margin grows)
+ok   B Weil-Hoffman ratio 2sqrt(q)/(q+1+2sqrt(q)) < 1/5 for q >= 67 (8 sqrt q < q + 1)
+== C. stable places ==
+ok   C Q(sqrt 47): least stable odd q = 11 (expect 11); dyadic split; stable q < 200: [11, 19, 23, 31, 43, 47, 67, 107]...
+ok   C Q(sqrt 167): least stable odd q = 23 (expect 23); dyadic split; stable q < 200: [23, 43, 59, 67, 71, 79, 83, 103]...
+ok   C Q(sqrt 59): least stable odd q = 11 (expect 11); dyadic inert; stable q < 200: [11, 23, 31, 43, 47, 59, 67, 83]...
+ok   C Q(sqrt 83): least stable odd q = 19 (expect 19); dyadic inert; stable q < 200: [19, 43, 47, 67, 71, 79, 83, 103]...
+ok   C Q(sqrt 131): least stable odd q = 19 (expect 19); dyadic inert; stable q < 200: [19, 23, 31, 47, 67, 71, 79, 83]...
+ok   C Q(sqrt 11): least stable odd q = 7 (expect 7); dyadic inert; stable q < 200: [7, 11, 19, 43, 79, 83, 107, 127]...
+ok   C Q(sqrt 167): stable q begin [23, 43, 59, 67, 71, 79] (S0A-9's table: 23, 43, 59, 67, 71, ...)
+== D. peeling lemma (CLG-b) ==
+ok   D N=12 k=3: 15 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+ok   D N=12 k=4: 38 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+ok   D N=12 k=5: 38 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+ok   D N=13 k=3: 8 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+ok   D N=13 k=4: 22 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+ok   D N=13 k=5: 52 (X, y) pairs with X + y in B_k and X leaving B_k; violations 0
+
+RED: 20 check(s) failed under plant subS
