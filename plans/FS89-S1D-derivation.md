@@ -294,3 +294,58 @@ displacement. A two-minute hand check of the right exit finds:
 
 The other three exits and the finite-torsion step at 1/5 are unchecked. If they hold, the chain gives RQ₅, and with S0A-9, C-167:
 no character five-colouring of ℚ(√167)'s plane.
+
+## §5 — D-2 continued: **RQ₅ holds: `Θ₅(Q) ⊆ T + A`** (the §4 sketch, closed)
+
+*Stage-1b continuation, logged:* RQ₄ landed with budget left, and the plan's D-2 asks "how far the argument reaches toward RQ₅".
+Every step below is the band-1/5 version of a §2–§4 step. The one new ingredient is FS81-T3 (C1(5)): `Θ₃(U₅)` is the parity disc
+of radius 1/6 together with `X₃` [hand + tools exact, FS-81, two derivations].
+
+**D5-L1 (band-1/5 replacement for D1-L4).** Let `M ⊆ Θ₅(R_S)` be closed, with `5 ∈ S`, and suppose `θ₂ ∈ M − M`. Then `M` meets
+`𝒞 := ⋃_{x₀ corner} (x₀ + {λ_d : |d| ≤ 1/20})`, the four **corner leaf discs**. At band 1/5 the corners have margin 1/20. [hand]
+*Proof.*
+1. From `x, x + θ₂ ∈ M`: `x(u) ∈ [⅕, ⅘] ∩ ([⅕, ⅘] − ½) = [⅕, 3/10] ∪ [7/10, ⅘]`, so `2x(u) ∈ [⅖, ⅗]` for all `u`.
+2. By FS81-T3, `Θ_{2/5}(R₅) = θ₂ + D(1/10)`: the `X₃` values ⅓, ⅔ lie outside `[⅖, ⅗]`.
+3. D2-L1, in its general form (from `R = R₅` to any `R′ ⊇ R` with `ℤ[U_{R′}] = R′`; the same proof), gives
+   `Θ_{2/5}(R_S) ⊆ T₂ + A`. The only element of `T₂` with values in `[⅖, ⅗]` is `θ₂`. So `2x = θ₂ + λ_d` with `|d| ≤ 1/10`.
+4. Hence `x₀ := x − λ_{d/2}` has `2x₀ = θ₂`, so it is a corner. ∎
+
+**D5-L2 (rigidity near a corner leaf).** Let `y = x₀ + λ_d` with `|d| ≤ 1/20`. Suppose an array is within 0.13 of `y`'s array on a
+connected window. Then it equals the leaf array of `x₀ + λ_{d′}` there, for some `d′`. [hand]
+*Proof.* The digit spacing argument of D1-L5 says the digits agree, so the deviation rotates exactly: `ζ_{m,n} = w̄^{(m,n)}ζ₀`. No
+cone argument is needed: the array is on the leaf. ∎
+
+**D5-L3 (corner-leaf exit lemma, `S = {5, 13}`, band 1/5).** Suppose an array equals a corner-leaf array `c_{m,n} + w̄^{(m,n)}d′`,
+with `|d′| ≤ 0.06`, on a column segment of height 3. Then it equals it on the two neighbouring columns at those rows. On a row
+segment of length 4 it equals it on the neighbouring rows. [hand + tools exact]
+*Proof.*
+- An exit changes one digit by a class `δ`. Along the exit line `δ` is multiplied by the other prime's unit (D0-L3), and the leaf
+  part cancels. So `δ` must stay admissible for some displacement of size `≤ 0.06`.
+- `tools/fs89_s1d_band5_check.py` (`data/fs89/s1d/band5-check.txt`) computes, exactly, the admissible sets. There are 2 nonzero
+  5-classes and 5 nonzero 13-classes per corner. Every one of the 128 exit lines, on all four corners and in all four directions,
+  leaves them by step 2 (columns) or step 3 (rows).
+- Plants fire: a displacement of 3/10 lets 64 exits survive; `w̄₁₃ → 1` lets 8 survive.
+- Consistency: at band 1/4 with `r = 0` the check reproduces D1-L6. ∎
+
+**D5-T1 (`RS₅({5, 13})`).** `Θ₅(ℤ[i][1/65]) ⊆ T + A`. [hand + tools exact]
+*Proof.* Let `θ ∉ T + A` have orbit closure `M`.
+1. As in D1-T2, `M` is in case 1.
+2. D1-L3 gives `M − M = G`, and D5-L1 then puts a point `y ∈ 𝒞` in `M`. `y` is not in `Γθ`, because `𝒞 ⊆ T + A`.
+3. So `θ∘u_k → y`. For large `k` the window `|m| ≤ 3, |n| ≤ 2` is within 0.13 of `y`'s array, and D5-L2 puts `θ∘u_k` on a corner
+   leaf there, with `d′_k → d`.
+4. Take `k` large enough that `|d′_k| ≤ 0.06`. D5-L3 then extends the leaf, first along rows and then to every row.
+5. So `θ∘u_k ∈ x₀ + A` and `θ ∈ T + A`, a contradiction. ∎
+
+**D5-C2.** `Θ₅(R₆₅) ∩ T` is finite. [hand + tools exact] *Proof.* As D1-C2, with `𝒞` for the corners. `𝒞 ∩ T` is the four corners,
+and a torsion point on a corner leaf is that corner. ∎
+
+**D5-T2 (RQ₅).** `Θ₅(ℤ[i][1/p : p ≡ 1 (4)]) ⊆ T + A`. [hand + tools exact] *Proof.* D2-L1 with `R = R₆₅`, and `N` from D5-C2. ∎
+**Inhabitant:** `θ₂`.
+- RQ₅ implies RQ₄. So §4's result has a second route, but not an independent one: it shares D1-L2 and D1-L3.
+- **Consequence, at S0A's grade (not re-derived):** C-167 (S0A-9, hand + cert). `Θ₅(R_{ℚ(√167)}) = ∅`: no character
+  five-colouring `x ↦ ⌊5θ(x)⌋` of ℚ(√167)'s plane exists. **Scope:** character colourings only. `χ(ℚ(√167)²)` itself is untouched
+  (plan §0.2). This answers FS-83's `k = 5` question at ℚ(√167) for characters of the rational layer: none.
+
+**Where it stops.** At band 1/6 the parity line gives `2x ∈ Θ₃`, so `x` lies on a corner leaf (radius 1/12) or on an order-6 torsion
+point over `X₃`. Whether those leaves are isolated at 1/6 (the exit lemma with larger displacements) is unchecked; the plant at
+`r = 3/10` shows the exit lemma fails once displacements are large. Six is not this milestone's target.

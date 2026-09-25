@@ -1,0 +1,11 @@
+band [1/5, 4/5], displacement bound r = 3/50 (corner margin 1/20 plus slack 1/100)
+admissible nonzero classes at corner (Fraction(1, 4), Fraction(1, 4)): 5-step (next corner -c0) 2, 13-step 5
+right exit: 16 (corner, class) pairs; surviving 0 (expected 0); latest first failure at step 2
+left  exit: 16 (corner, class) pairs; surviving 0 (expected 0); latest first failure at step 2
+up    exit: 48 (corner, class) pairs; surviving 0 (expected 0); latest first failure at step 3
+down  exit: 48 (corner, class) pairs; surviving 0 (expected 0); latest first failure at step 3
+=> a leaf block needs columns of height >= 3 and rows of length >= 4 for every exit to die
+consistency: band 1/4, r = 0: surviving exits 0 (expected 0)
+plant r = 3/10: surviving exits 64 (must be > 0)
+plant wb13 -> 1 in the right exit: surviving exits 8 (must be > 0)
+RESULT: PASS (fails = 0)
