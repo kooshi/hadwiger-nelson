@@ -58,7 +58,7 @@ opened before the stage-3 verdicts were committed. Data `data/fs91/j09v/`; tools
 "ramified" (over ℚ rather than in `F(i)/F`) the hypothesis is stronger and the statement stays true. The hypothesis is exactly "`F²` is
 not bipartite" (J4.0), and it is necessary: without it `Θ₃` contains the parity character `θ₂`, and with it the whole family
 `θ₂ + λ_e`, `|e| ≤ 1/6` — never finitely many (ℚ, ℚ(√5), ℚ(√2)). Grade of my derivation: **[hand, second mind (blind); Weil external for
-`q ≥ 29`; tools exact at `q ≤ 27`]**. Inputs used: `H₃` (J01-7), Lemma C and C′ (items 7–8), (W) (item 9), U3 (item 3); CLG-b, CLG-b_n,
+`q ≥ 31`; tools exact at `q ≤ 27`]**. Inputs used: `H₃` (J01-7), Lemma C and C′ (items 7–8), (W) (item 9), U3 (item 3); CLG-b, CLG-b_n,
 CLG-d, CLG-e (items 5, 6, 11, 17) and Lemma AV (item 12) are **re-derived** below at `k = 3` rather than taken as statements.
 
 ### 2.2 The derivation
@@ -116,8 +116,10 @@ CLG-d, CLG-e (items 5, 6, 11, 17) and Lemma AV (item 12) are **re-derived** belo
 
 **What it adds to FS81-T6** (read from its statement): T6 classifies `Θ₃(ℚ(√d))` at `d ≡ 3, 7 (mod 12)` as the additive characters and
 leaves open "whether every additive 3-colouring is Fischer's up to symmetry"; J4 gives every real number field under (H), and the count:
-**four per `𝔽₃`-place**, which answers T6's open line for every real quadratic `d ≡ 3 (mod 4)`: `N₃ = 1` at `d ≡ 3 (mod 12)` (3 ramified;
-Fischer's colourings, 4 of them), `N₃ = 2` at `d ≡ 7 (mod 12)` (3 split; two places, 8 characters), `N₃ = 0` at `d ≡ 11 (mod 12)`.
+**four per `𝔽₃`-place**. For real quadratic `d ≡ 3 (mod 4)` it says every additive 3-colouring is a residue character at an `𝔽₃`-place:
+`N₃ = 1` at `d ≡ 3 (mod 12)` (3 ramified; 4 characters), `N₃ = 2` at `d ≡ 7 (mod 12)` (3 split; 8 characters, the two places swapped by
+`√d ↦ −√d`), `N₃ = 0` at `d ≡ 11 (mod 12)`. Whether that is T6's "Fischer's up to symmetry" depends only on Fischer's colourings being
+residue characters, which T6's own negative control reports ("local at one prime above 3"); I have not re-read his construction for it.
 
 ### 2.3 Exact checks (`tools/crunch_j09v_check.py`, 2.2 s; output `data/fs91/j09v/check.txt`: ALL CHECKS PASS)
 
@@ -140,3 +142,92 @@ with J4.6–J4.7, which are uniform in `e`.
 
 - The claim's "additive" is unambiguous after all (J4.9): both readings name one set.
 - (H) could be stated as "`F²` not bipartite" (J4.0); the claim's form is the one Lemma C′ needs, and they are equivalent.
+
+## Stage 3 — SAVED — J4-C and J4-A
+
+*Reading of "S1" (its source, M1's plan, is fenced): the brief's "for every real number field, `χ(F²) ≤ 3 ⟺ L(F) ≤ 3`", with `L(F)` the
+least chromatic number of the level-one residue targets of the conjugation-stable places of `F(i)` (a matching at a ramified dyadic
+place). For a field that is not a number field I read "place" as a valuation ring of `F(i)` stable under `c`, and its target as
+`Cay(k_𝔓, image of U)` (a matching when `c` acts trivially on a characteristic-2 residue field). Two facts are used throughout:*
+
+- **(RB) the residue bound, any field `F ⊆ ℝ`, any stable place.** A `c`-stable valuation ring has `v∘c = v` (an order-preserving
+  involution of a totally ordered group is the identity), so `v(u) = −v(u) = 0` for `u ∈ U`: `U ⊆ O_𝔓^×` and reduction is a ring map
+  `R → k_𝔓` carrying `U` into the target's connection set. Colouring `R` through it and `F² = L` coset by coset gives **`χ(F²) ≤ χ(target)`**,
+  so `χ(F²) ≤ L(F)`. (`[Madore2015]` Prop. 3.2 and `[Moorhouse2010]` §8.2 in valuation-ring form; the ramified dyadic case is the parity map.)
+- **(T2) the lift**, `plans/FS81-derivation.md` T2 (hand, two derivations, resting on FS73-T22 ⟹): for every `F ⊆ ℝ`, `χ(F²) ≤ 3 ⟹
+  Θ₃(R_F) ≠ ∅`. **Not among the brief's listed inputs** (it lists T3, T4, T8 of that file); J4-C cannot be had without it or an equivalent,
+  so I name it as an added input.
+
+### 3.1 J4-C, verbatim (`plans/FS91-S0FV-three-colours-blind.md` line 366)
+
+> "**J4-C** — S1 for every real number field; `χ(F²) = 3 ⟺` non-bipartite and a prime above 3 of residue field `𝔽₃`. [hand, one mind] — §2.6."
+
+**Verdict: TRUE** (given T2 and J4; grade of my derivation [hand, second mind, blind]).
+
+- *`χ = 3` ⟸.* Non-bipartite gives `χ ≥ 3`; the `𝔽₃`-place's target is `Γ₃ = Cay(𝔽₉, μ₄)`, three-coloured by any of its four characters, so
+  `χ ≤ 3` by (RB).
+- *`χ = 3` ⟹.* Non-bipartite is part of `χ = 3`; it is (H) (J4.0). `χ ≤ 3` gives `Θ₃(R_F) ≠ ∅` (T2), and J4 says `Θ₃(R_F)` has `4N₃`
+  elements, so `N₃ ≥ 1`.
+- *S1.* `χ ≤ 3 ⟹ L ≤ 3`: bipartite gives a ramified stable dyadic place (J4.0), target a matching, `L = 2`; otherwise the `χ = 3` case
+  gives an `𝔽₃`-place, `L ≤ χ(Γ₃) = 3`. `L ≤ 3 ⟹ χ ≤ 3` is (RB). **No chromatic number of any other target is needed** — in particular not
+  `χ(U_Q) ≥ 4` at even `f`, which I did not establish; the route through (RB) makes it a corollary instead: every stable place other than the
+  two good kinds has a target that is not three-colourable, whenever a field realising it exists (else (RB) would give `χ ≤ 3` against J4).
+- *Consequence, checked (tool part A):* **ℚ(α, √7), `α³ = α + 1` — `plans/STUB-three-colours-residue-degree-three.md`'s first field (FS-82)
+  — has both primes above 3 of residue degree 3 (`N₃ = 0`) and its one dyadic prime split in `L` (so (H) holds), hence `χ ≥ 4` by J4-C, and
+  a prime above 7 of residue field `𝔽₇`, hence `χ ≤ χ(Γ₇) = 4`: `χ(ℚ(α, √7)²) = 4`.** J4-C closes FS81-T7's residual case (every prime above 3
+  of odd residue degree has degree `≥ 3`): such a field is never three-chromatic. This refines G74's "a three-colour question over any real
+  field is a question about 1/3" at number fields: `1/3 ∉ R_F` asks for an odd-degree prime above 3, and three colours ask for degree one.
+
+### 3.2 J4-A, verbatim (`plans/FS91-S0FV-three-colours-blind.md` line 367)
+
+> "**J4-A** — S1 for every algebraic subfield of ℝ and every purely transcendental extension of one (places; König; G63). [hand, one mind] — §2.6."
+
+**Verdict: TRUE under the reading of "place" above** (valuation rings of `F(i)`, targets with possibly infinite residue fields); it needs
+`L(F)` extended beyond `data/fs91/j07/lemma-statements.md`'s definition, which lists only the finite targets `Γ_q`, `U_Q` and the matching.
+**The bipartite case is handled**, by the same König argument on the ramified dyadic primes, with one descent step that needs saying (below).
+Grade [hand, second mind, blind].
+
+**The place argument for an algebraic `F ⊆ ℝ`.** `F` is countable, so `F = ∪ F_n` for a chain of number fields. Compactness (de Bruijn–Erdős;
+every finite unit-distance graph over `F` lies over some `F_n`) gives `χ(F²) ≤ 3 ⟺ χ(F_n²) ≤ 3` for all `n`, and bipartiteness of `F²` ⟺ of
+every `F_n²`.
+- *Non-bipartite:* for `n ≥ n₀` every `F_n` is non-bipartite with `χ ≤ 3`, so by J4-C the set `P_n` of primes of `F_n` above 3 with residue
+  field `𝔽₃` is finite and non-empty; restriction `P_{n+1} → P_n` is defined (a residue field inside `𝔽₃` of characteristic 3 is `𝔽₃`). König's
+  lemma gives a compatible sequence `(𝔭_n)`; `O = ∪ O_{𝔭_n}` is a valuation ring of `F` with residue field `𝔽₃`, extending uniquely to a stable
+  place of `F(i)` with residue field `𝔽₉` and target `Γ₃`. So `L(F) ≤ 3`.
+- *Bipartite:* each `F_n` has a non-empty finite set `D_n` of stable dyadic primes of `F_n(i)` ramified over `F_n` (J4.0). **Descent:** for `𝔔′`
+  in `D_{n+1}`, `𝔔 = 𝔔′ ∩ F_n(i)` is stable, and `c` acts trivially on `k(𝔔′)` (it lies in the inertia group), hence on `k(𝔔) ⊆ k(𝔔′)`; a stable
+  prime on whose residue field `c` is trivial is not inert, and not split, so it is ramified: `𝔔 ∈ D_n`. König again gives a stable dyadic place
+  of `F(i)` with `c` trivial on its residue field, where every unit vector reduces to 1 (`x² = 1` in characteristic 2): a matching, `L(F) = 2`.
+- *Converse:* `L(F) ≤ 3 ⟹ χ(F²) ≤ 3` is (RB), valid for any valuation ring.
+
+**For a purely transcendental `F(T) ⊆ ℝ`** (`T` algebraically independent over an algebraic `F`, any cardinality): `χ(F(T)²) = χ(F²)` by G63
+(`[Fischer1990]` Thm 6: the place `t ↦ 0` has formally real residue field `F`, so every unit vector is integral) for finite `T`, and compactness
+for infinite `T`. Then `χ(F(T)²) ≤ 3 ⟹ χ(F²) ≤ 3 ⟹` a good place `𝔭` of `F` (above) `⟹` a good place of `F(T)`: compose the `t ↦ 0` places
+(residue field `F`) with `𝔭` — a valuation ring of `F(T)` with the residue field of `𝔭` (`𝔽₃`, or the dyadic one with trivial `c`) and the same
+target. (If "place" must be rank one: pull `𝔭`'s completion back along an embedding `F(T) ↪ F_𝔭` sending `T` to elements algebraically
+independent over `F`, which exist since `F_𝔭` is uncountable; the residue field is again `𝔽₃`, resp. the dyadic one.) So `L(F(T)) ≤ 3`; the
+converse is (RB). Both cases, bipartite and not, go through the same composition.
+
+**What J4-A does not say**, and a reading to avoid: it is S1 (three colours), not J4 — `Θ₃` of an infinite algebraic field can be infinite
+(infinitely many `𝔽₃`-places), and nothing here counts it; and "`L(F)`" beyond number fields is this verification's extension, not a definition
+on disk that I could check.
+
+### 3.3 Inputs, as used
+
+| input | where used | status here |
+|---|---|---|
+| `H₃` (J01-7) | J4.1 | verified input (brief); used as `data/fs91/j07/lemma-statements.md`'s `H_k` line |
+| Lemma C, C′ (items 7–8) | J4.0, J4.2, J4.9 | verified input |
+| (W) (item 9) | J4.3 | verified input |
+| CLG-a/b/b_n/d/e, Lemma AV (items 4–6, 11, 12, 17) | J4.4–J4.7 | **re-derived** at `k = 3` (J4.4–J4.7), not taken as statements |
+| Weil's bound | J4.7(ii), `q ≥ 31` | external; tools exact at `q ≤ 27` |
+| FS81-T2 (the lift) | J4-C, J4-A | **added input**, not in the brief's list |
+| G63 / `[Fischer1990]` Thm 6; de Bruijn–Erdős; König | J4-A | standard / prior art |
+
+### 3.4 "Would have searched here" log (stages 2–3)
+
+| # | move by search I would have made | what I did instead |
+|---|---|---|
+| 1 | a `Θ₃` relation tree or float finder on lattices over ℚ(√7) to look for a mixed character | derived J4.8, then enumerated every character of `∏ O_𝔓/N` at `N ≤ 36` (a finite set the derivation fixed; at the edge, logged) |
+| 2 | a SAT three-colouring of `U₄` to settle `χ(U₄)` for S1 | routed S1 through (RB), which needs no target's chromatic number |
+| 3 | a colouring search over ℚ(α, √7) | read `N₃` and the dyadic splitting from gp and applied J4-C |

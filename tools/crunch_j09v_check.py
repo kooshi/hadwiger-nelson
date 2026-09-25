@@ -44,6 +44,7 @@ FIELDS = {
     "Q(sqrt11)": ("y^2-11", ""),
     "Q(sqrt2,sqrt3)": ("polcompositum(y^2-2,y^2-3)[1]", ""),
     "Q(sqrt3,sqrt7)": ("polcompositum(y^2-3,y^2-7)[1]", "two F_3 places, ramified over Q"),
+    "Q(alpha,sqrt7)": ("polcompositum(y^3-y-1,y^2-7)[1]", "FS-82's field, alpha^3 = alpha + 1 (consequence of J4-C)"),
 }
 
 GP_TEMPLATE = r"""
@@ -53,7 +54,8 @@ s3=""; for(k=1,#P3, s3=Str(s3, "(e=",P3[k].e,",f=",P3[k].f,")"));
 P2=idealprimedec(nf,2); s2="";
 for(k=1,#P2, Q=rnfidealprimedec(rnf,P2[k]); if(#Q==2, s2=Str(s2,"split;"), \
   re=Q[1].e/P2[k].e; rf=Q[1].f/P2[k].f; s2=Str(s2, if(re==2,"RAMIFIED","inert"), "(eF=",P2[k].e,",Q=2^",P2[k].f,");")));
-print(n3, "|", s3, "|", s2);
+P7=idealprimedec(nf,7); s7=""; for(k=1,#P7, s7=Str(s7, "(e=",P7[k].e,",f=",P7[k].f,")"));
+print(n3, "|", s3, "|", s2, "|", s7);
 """
 
 
@@ -63,8 +65,8 @@ def field_table() -> dict[str, tuple[int, str, str]]:
         res = subprocess.run(["gp", "-q", "--default", "parisize=64000000"], input=GP_TEMPLATE % pol,
                              capture_output=True, text=True, check=True)
         line = res.stdout.strip().splitlines()[-1]
-        n3, s3, s2 = (t.strip() for t in line.split("|"))
-        out[name] = (int(n3), s3, s2)
+        n3, s3, s2, s7 = (t.strip() for t in line.split("|"))
+        out[name] = (int(n3), s3, s2, s7)
     return out
 
 
@@ -410,12 +412,14 @@ def main() -> int:
     say()
     say("A. field arithmetic (gp): N_3 = #primes of F above 3 with residue field F_3; primes above 2 in L = F(i)/F")
     ft = field_table()
-    for name, (n3, s3, s2) in ft.items():
-        say(f"  {name:16s} N_3 = {n3}   primes over 3: {s3:22s} primes over 2 in L/F: {s2}   {FIELDS[name][1]}")
+    for name, (n3, s3, s2, s7) in ft.items():
+        say(f"  {name:16s} N_3 = {n3}   primes over 3: {s3:22s} primes over 2 in L/F: {s2}   over 7: {s7}   {FIELDS[name][1]}")
     expect(ft["Q(sqrt3)"][0] == 1 and ft["Q(sqrt7)"][0] == 2 and ft["Q(sqrt11)"][0] == 0, "N_3 at Q(sqrt3), Q(sqrt7), Q(sqrt11)")
     expect(ft["Q(sqrt2,sqrt3)"][0] == 0 and ft["Q(sqrt3,sqrt7)"][0] == 2, "N_3 at the biquadratics")
     expect("RAMIFIED" in ft["Q"][2] and "RAMIFIED" in ft["Q(sqrt5)"][2], "contrast fields have a ramified stable dyadic prime")
-    for nm in ("Q(sqrt3)", "Q(sqrt7)", "Q(sqrt11)", "Q(sqrt2,sqrt3)", "Q(sqrt3,sqrt7)"):
+    expect(ft["Q(alpha,sqrt7)"][0] == 0 and "(e=2,f=1)" in ft["Q(alpha,sqrt7)"][3],
+           "Q(alpha,sqrt7): no F_3 place, a usable plane at 7 (residue field F_7)")
+    for nm in ("Q(sqrt3)", "Q(sqrt7)", "Q(sqrt11)", "Q(sqrt2,sqrt3)", "Q(sqrt3,sqrt7)", "Q(alpha,sqrt7)"):
         expect("RAMIFIED" not in ft[nm][2], f"{nm} satisfies the hypothesis")
 
     say()

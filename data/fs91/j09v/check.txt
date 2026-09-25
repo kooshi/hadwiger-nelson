@@ -1,13 +1,14 @@
 J09v exact checks of J4 (plans/FS91-S1V-no-mixing.md stage 2)
 
 A. field arithmetic (gp): N_3 = #primes of F above 3 with residue field F_3; primes above 2 in L = F(i)/F
-  Q                N_3 = 1   primes over 3: (e=1,f=1)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^1);   ramified stable dyadic (contrast)
-  Q(sqrt3)         N_3 = 1   primes over 3: (e=2,f=1)              primes over 2 in L/F: inert(eF=2,Q=2^1);   
-  Q(sqrt5)         N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^2);   ramified stable dyadic (contrast)
-  Q(sqrt7)         N_3 = 2   primes over 3: (e=1,f=1)(e=1,f=1)     primes over 2 in L/F: split;   two F_3 places
-  Q(sqrt11)        N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: inert(eF=2,Q=2^1);   
-  Q(sqrt2,sqrt3)   N_3 = 0   primes over 3: (e=2,f=2)              primes over 2 in L/F: inert(eF=4,Q=2^1);   
-  Q(sqrt3,sqrt7)   N_3 = 2   primes over 3: (e=2,f=1)(e=2,f=1)     primes over 2 in L/F: split;   two F_3 places, ramified over Q
+  Q                N_3 = 1   primes over 3: (e=1,f=1)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^1);   over 7: (e=1,f=1)   ramified stable dyadic (contrast)
+  Q(sqrt3)         N_3 = 1   primes over 3: (e=2,f=1)              primes over 2 in L/F: inert(eF=2,Q=2^1);   over 7: (e=1,f=2)   
+  Q(sqrt5)         N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: RAMIFIED(eF=1,Q=2^2);   over 7: (e=1,f=2)   ramified stable dyadic (contrast)
+  Q(sqrt7)         N_3 = 2   primes over 3: (e=1,f=1)(e=1,f=1)     primes over 2 in L/F: split;   over 7: (e=2,f=1)   two F_3 places
+  Q(sqrt11)        N_3 = 0   primes over 3: (e=1,f=2)              primes over 2 in L/F: inert(eF=2,Q=2^1);   over 7: (e=1,f=1)(e=1,f=1)   
+  Q(sqrt2,sqrt3)   N_3 = 0   primes over 3: (e=2,f=2)              primes over 2 in L/F: inert(eF=4,Q=2^1);   over 7: (e=1,f=2)(e=1,f=2)   
+  Q(sqrt3,sqrt7)   N_3 = 2   primes over 3: (e=2,f=1)(e=2,f=1)     primes over 2 in L/F: split;   over 7: (e=2,f=2)   two F_3 places, ramified over Q
+  Q(alpha,sqrt7)   N_3 = 0   primes over 3: (e=1,f=3)(e=1,f=3)     primes over 2 in L/F: split;   over 7: (e=2,f=1)(e=2,f=2)   FS-82's field, alpha^3 = alpha + 1 (consequence of J4-C)
 
 B. level one: band-3 characters of Cay(F_{q^2}, mu_{q+1}) and of U_Q
   q =  3: 4
