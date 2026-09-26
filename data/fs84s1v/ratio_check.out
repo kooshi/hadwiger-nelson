@@ -1,0 +1,25 @@
+B  stable primes of Q(sqrt47)(i) below 200: [11, 19, 23, 31, 43, 47, 67, 107, 127, 139, 151, 163, 167, 179, 199]
+A  p= 11  lambda_min in [-4.79575477823158, -4.79575477823158]  lambda_min+(p+1)/3 >= -0.795754778231584  Hoffman ratio <= 0.285533745970571  1/4 - ratio >= -0.0355337  Weil max|lambda| 5.7169527 <= 2sqrt(p): True
+A  p= 19  lambda_min in [-7.60972863205186, -7.60972863205186]  lambda_min+(p+1)/3 >= -0.943061965385198  Hoffman ratio <= 0.275617653960489  1/4 - ratio >= -0.0256177  Weil max|lambda| 7.6097286 <= 2sqrt(p): True
+A  p= 23  lambda_min in [-7.96068718656697, -7.96068718656697]  lambda_min+(p+1)/3 >= 0.039312813433028  Hoffman ratio <= 0.249077472586786  1/4 - ratio >= 0.000922527  Weil max|lambda| 7.9606872 <= 2sqrt(p): True
+A  p= 31  lambda_min in [-10.6665104938001, -10.6665104938001]  lambda_min+(p+1)/3 >= 0.000156172866602707  Hoffman ratio <= 0.249997254763781  1/4 - ratio >= 2.74524e-6  Weil max|lambda| 10.66651 <= 2sqrt(p): True
+A  p= 43  lambda_min in [-11.9622301225972, -11.9622301225972]  lambda_min+(p+1)/3 >= 2.70443654406951  Hoffman ratio <= 0.213755422119371  1/4 - ratio >= 0.0362446  Weil max|lambda| 11.96223 <= 2sqrt(p): True
+A  p= 47  lambda_min in [-12.8465277218434, -12.8465277218434]  lambda_min+(p+1)/3 >= 3.15347227815661  Hoffman ratio <= 0.211130005323732  1/4 - ratio >= 0.03887  Weil max|lambda| 13.246764 <= 2sqrt(p): True
+A  p= 67  lambda_min in [-15.0567033497862, -15.0567033497862]  lambda_min+(p+1)/3 >= 7.60996331688052  Hoffman ratio <= 0.181282217359099  1/4 - ratio >= 0.0687178  Weil max|lambda| 15.094378 <= 2sqrt(p): True
+A  p=  7  lambda_min in [-4.49395920743493, -4.49395920743493]  lambda_min+(p+1)/3 >= -1.82729254076827  Hoffman ratio <= 0.359690561880549  1/4 - ratio >= -0.109691  Weil max|lambda| 4.4939592 <= 2sqrt(p): True
+A' p=31: exact integer polynomial degree 30, real roots in [-(p+1), -(p+1)/3]: 0
+A' p=43: exact integer polynomial degree 42, real roots in [-(p+1), -(p+1)/3]: 0
+A' p=47: exact integer polynomial degree 46, real roots in [-(p+1), -(p+1)/3]: 0
+W  6 sqrt(p) < p+1  iff  p > 17 + 12 sqrt2 = 33.97056275
+W  Weil-Hoffman ratio bounds: 43: 0.22962278, 47: 0.22218471, 67: 0.19403305
+C  unramified p=7 k=2: lam_min/d level k -0.561744900929, level 1 -0.561744900929; max|new| 13.971235 <= 2p^ceil(k/2) = 14: True
+C  unramified p=7 k=3: lam_min/d level k -0.561744900929, level 1 -0.561744900929; max|new| 37.040130 <= 2p^ceil(k/2) = 98: True
+C  unramified p=31 k=2: lam_min/d level k -0.333328452931, level 1 -0.333328452931; max|new| 61.999669 <= 2p^ceil(k/2) = 62: True
+C  ramified Z_7[sqrt7] k=2: lam_min/d -0.561744900929 vs level one -0.561744900929; max|new| 14.000000 <= 2*7^ceil(k/2) = 14: True
+C  ramified Z_7[sqrt7] k=3: lam_min/d -0.561744900929 vs level one -0.561744900929; max|new| 37.021488 <= 2*7^ceil(k/2) = 98: True
+RESULT: all checks pass
+P1 threshold +1e-3 at 31 must fail: FIRED
+P2 Hoffman at 11 must be >= 1/4: FIRED
+P3 dropped circle point must assert: FIRED
+P4 negated Legendre classifier must disagree: FIRED
+PLANTS: all fired
