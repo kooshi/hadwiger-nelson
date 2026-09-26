@@ -26,9 +26,7 @@ and `STANDING-RULES.md`. A blind verifier (X02V) works on the same claims; no co
 MR(F), for reference: "**MR(F)** is 'every `U`-invariant finite positive measure on `R̂` with `τ(E) = 0` is a multiple of Haar measure'" —
 J38 §3.5, T-J38-2 (iii), quoted in `plans/STUB-measure-rigidity-three-fields.md` §1 (checked there, line 58).
 
-## Theorems this phase proved
-
-*(filled stage by stage; grades per `CLAUDE.md` § Notation)*
+*Theorems this phase proved: the table at the end of this record (grades per `CLAUDE.md` § Notation).*
 
 ## Stage 1 — SAVED
 
@@ -65,7 +63,7 @@ J38 §3.5, T-J38-2 (iii), quoted in `plans/STUB-measure-rigidity-three-fields.md
 
 ### 1.3 C0 (probabilities before writing any derivation)
 
-**Honesty note:** these were written at 05:53, after reading and after an *unwritten* mental sketch of all four claims (and after reading
+**Honesty note:** these were written at about 05:51, after reading and after an *unwritten* mental sketch of all four claims (and after reading
 Addendum 1, which names PE-1's failure mode); they are not a clean prior.
 
 | claim | C0 | the step where a failure is most likely |
