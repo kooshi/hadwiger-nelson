@@ -208,3 +208,53 @@ proofs. For the two stalled claims its statements are **the same partial results
 steps I named. The statements supply no lemma my routes lacked, so a second attempt from them has nothing new to run: **V-DB-1 stays GAP at
 "3-colour the non-zero-winding improper components", V-DD-2 stays GAP at "a regular Hoffman-fat Hedetniemi factor".** Two independent routes
 stalling at one step is evidence the step is the real content, not a proof that it is hard.
+
+## Stage 4 — SAVED (the divergence table; V-DC-3's spot checks; the quotation check completed)
+
+Read in full after stage 3: `plans/FS67-J27D-derivation.md` (all five stages) and the plan's claim bullets (`plans/FS67-tight-products.md`
+§4.1, §4.3, §5.1).
+
+### 4.1 The quotation check, completed
+
+Checked mechanically (whitespace and backticks normalised): the §4.1 definitions and V-DA-1′ … V-DC-2 are **verbatim**. V-DD-1 and V-DD-2
+differ only by a terminal period the brief adds inside the quotation marks. The plan's DD-1 bullet also asks, outside its quotation,
+"whether it reaches `[Zhang2012]`'s IS-imprimitive exception". That ask is not in the brief and I did not verify it; J27D records it as GAP.
+
+### 4.2 The divergence table
+
+| claim | J27V (blind, §2) | J27D | divergence and resolution |
+|---|---|---|---|
+| V-DA-1′ | TRUE | TRUE | none; the same construction |
+| V-DA-2′ | TRUE | TRUE, plus the characterisation "FS67 ⟺ gap-free ∧ `χ(E_k(G)) ≤ k`" | none. I checked J27D's characterisation: non-`k`-colourable `G` has no loops, and a gapped colourable `G` fails by DA-1′ |
+| V-DA-3 | TRUE (GL Cor. 1 as input) | TRUE (GL re-derived as FS67(K_k, k)) | none; J27D's route is stronger (no input) |
+| V-DA-4 | TRUE | TRUE | none; both read Tardif's finiteness in its §2 |
+| V-DB-1 | GAP: "3-colour the improper maps in components with every `w₂^c ≠ 0`" | GAP at the same step (J27D: "`D_C ≠ 0` for every odd `C`") | **the same step, reached independently**; the invariants agree (`D_C = −6w₂^c`). **Addition (mine):** at `G = C₅` the non-zero-winding part of `E₃(C₅)` is, in each class, a 2-regular graph on the 15 type-A maps with 15 pendant type-B maps, so it is 3-colourable [hand, §2.5 item 5]. The counts agree with J27D's `db.out` (60 maps, 60 edges). So **J27D's post-ban PB-1 cannot refuse at `C₅`**, and `C₅` is no counterexample to the first clause. The zero class at `C₅` still rests on TW §3 [external]. Owner: the FS-67 re-aim |
+| V-DB-2 | TRUE [hand + exact tool] | TRUE [hand + tools] | none. The colourings differ (mine `Tr((1−i)u + iv)`, J27D's `x₀ + y₀ + x₁`); both are linear and both are checked. The tower model is the same (`ℤ₃[i]/3^j`, row 72's `O`), and so is the Frattini/Nakayama step. Neither of us planted a fault in the tightness check (J27D says so; my plant targets the colouring) |
+| V-DC-1 | TRUE | TRUE | none; the same input read two ways (my Thm 4.16(1) against J27D's Result 4 + §1.2) |
+| V-DC-2 | TRUE at `τ_k = 1/(k−1)` | TRUE at `τ_k = 1/(k−1)` | none on the verdict; the bootstrap is the same map `F`. **Addition (mine):** the claim itself is sharp. `H = K_k` has `λ* = 1/(k−1)` exactly and a non-pullback colouring `(x, a) ↦ a`, so no `τ_k > 1/(k−1)` holds. J27D shows only that its *method* stops at the threshold. J27D adds prior art: `[PakVilenchik2013]` Thm 3 at `G = K_k` |
+| V-DD-1 | TRUE | TRUE (and Zhang's exception GAP) | none on the claim. J27D's proof is shorter: it uses one edge of `H` and gets `a < 1 ⟹ β(x, ·)` proper on `H`. Mine sums bounds from an edge of each factor. I checked J27D's step `N̄_{hh′} ≤ −(1−a)/(k−1)` |
+| V-DD-2 | GAP: a regular `X` with Hoffman ratio `≥ k` and a Hedetniemi partner | GAP at the same ingredient | none; the reductions are identical. J27D's two negations for named classes follow from DC-1 and DC-2, and I agree with both |
+| V-DC-3 | — | table computed [tools] | **three rows spot-checked, all match** (below) |
+
+### 4.3 V-DC-3's spot checks
+
+`tools/crunch_j27v_dc3.py` computes every eigenvalue of `Γ_p` from all `p²` characters, at 60 digits, with no norm-class shortcut. Output is
+in `data/fs67/j27v/dc3.out`. At `p = 7, 11, 31` the values `λ_min/d`, `λ₂/d`, `λ*` and the six DC-1/DC-2 flags match J27D's table to every
+printed digit: 7 `nn nn nn`; 11 `YY nn nn`; 31 `YY YY nn`. The two margins at 31 also match: `1/3 − λ* = 4.8804·10⁻⁶` (at `k = 4`) and
+`λ_min + d/3 = 1.5617·10⁻⁴` (G54's number). **Plant:** dropping the antipodal pair `(±1, 0)` from `S` mismatches at all three rows, so it
+fires (`dc3-plant.out`). **Slip (mine, G21):** the first plant I wrote used the circle `x² + y² = 2`, and it could not fire. Every circle is a
+similarity image of the unit circle (the norm map `𝔽_{p²} → 𝔽_p` is onto), so that plant produced an isomorphic graph. It was caught when
+the plant passed, and replaced.
+
+### 4.4 What this verification says, in one place
+
+- Eight claims are TRUE on independent routes.
+- V-DC-2 is TRUE with a sharp constant.
+- V-DB-1 and V-DD-2 are GAP. Two blind routes stall at the same named step for each.
+- For V-DB-1 that step is the live content of FS-67 at three colours: a 3-colouring of the non-zero-winding improper components of `E₃(G)`.
+  Its smallest instance, `C₅`, is 3-colourable by hand.
+- "The gap-free form fails from four colours up" (V-DA-4) holds as J27D states it. It needs only `[Tardif2023]` Thm 1 and GL Cor. 1.
+
+**Proposed edits (for the front-page lane; not made here):**
+- In `plans/FS67-J27D-derivation.md`'s derivation filing, add V-DC-2's claim-level sharpness (`H = K_k`).
+- Add the `C₅` hand structure to DB-1's GAP note. It retires PB-1's `C₅` case.
