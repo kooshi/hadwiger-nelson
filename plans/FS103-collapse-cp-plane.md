@@ -265,3 +265,64 @@ control at `k = 4` with an independently known answer (X3); (5) Kooshi's "only 4
 named (§1.2); (6) the format distinctions made a claim of their own (X6).
 
 ## Stage 2 — SAVED
+
+## Stage 3 — SAVED: §PA.0, the gate's queries (for job FS103-G, which runs them; its record becomes §PA)
+
+*The object named in the words of the disciplines where it lives, never ours. Coined words that appear in no paper and must not be searched:
+"CP colouring", "`χ_CP`", "thick place", "non-thick", "collapse", "stable place", "`N_k(F)`", "`Y_{F,k}`", "MR", "SP witness", "the wall".
+Record every query with its database, its hit count and the hits opened (G49; WORKFLOW 3.2 items 1–8).*
+
+### PA.0.1 The object, in each discipline's words
+
+| discipline | the object, as that discipline would name it | query strings (zbMATH `ab:`/`ti:` and all-field; arXiv; Google Scholar) |
+|---|---|---|
+| **measurable / descriptive graph combinatorics** | the measurable (Lebesgue) chromatic number `χ_m(ℝ²)` of the unit-distance graph; Borel `χ_B(ℝ²)`; measurable colourings proper almost everywhere vs everywhere; "null-set tolerant" colourings | `"measurable chromatic number" & plane`; `"Borel chromatic number" & ("unit distance" \| "Euclidean")`; `"measurable coloring" & "distance one"`; `ti:"measurable" & ti:"chromatic" & py:1975-2026`; `"chromatic number of the plane" & measurable`; Kechris–Marks survey §§ on `ℝⁿ` distance graphs (Example 5.1 is read, M3) |
+| **probability / ergodic theory** | a translation-invariant (stationary) random colouring of `ℝ²`, continuous in probability, proper at each fixed unit pair almost surely; an invariant probability measure on the space of colourings (a colouring shift of `ℝ²`); factor of IID colourings | `"invariant random coloring"`; `"stationary coloring" & "unit distance"`; `"translation-invariant" & "random coloring" & plane`; `"factor of i.i.d." & coloring & ("Euclidean" \| "ℝ^d" \| "R^n")`; `"continuous in probability" & coloring`; `"measurable modification" & "stationary process" & coloring`; `"invariant measure" & "space of colorings"` |
+| **harmonic analysis of distance-avoiding sets** | sets avoiding distance 1 (`m₁(ℝ²)`), their `j`-fold unions / `j`-colourable parts (`m_j`), the measurable chromatic number via spectral/SDP bounds; correlation functions of stationary colourings | `"distance avoiding" & "chromatic"`; `"sets avoiding distance one"`; `"measurable chromatic number" & ("Fourier" \| "linear programming" \| "semidefinite")`; authors below |
+| **number theory / fields** (the question's second face) | the chromatic number of `F²` for a real number field `F` (`ℚ(√3,√5,√7,√11)`; `ℚ(√d)` for large prime `d ≡ 7 (mod 8)`); "is `χ(ℝ²)` attained by the plane over one countable field?" | `"rational points" & "chromatic number" & plane`; `"number field" & "unit distance graph" & chromatic`; `"chromatic number" & ("Q^2" \| "rational plane") & "measurable"`; the Benda–Perles and Johnson lineage (`[BendaPerles2000]` Open Problem 11.6, `[Johnson2006]`) |
+| **Borel / measurable Hedetniemi** (the product side, for S) | Borel or measurable colourings of products of Borel graphs; a positive special case of Kechris–Marks Problem 4.23 | `"Borel" & "Hedetniemi"`; `"measurable" & "categorical product" & coloring` |
+| **set theory and choice** | `χ(ℝ²)` vs `χ_m(ℝ²)`: dependence on the axiom of choice (Shelah–Soifer) | `au:"Shelah, Saharon" & ti:"chromatic"`; `"axiom of choice" & "chromatic number of the plane"`; `"Shelah" & "Soifer" & "chromatic"` |
+
+**Not this question's home** (recorded so it is not searched as one): aperiodic order / model sets (FS-63) — with `N_k = ∅` there is no
+`p`-adic factor (the advisor's R2 correction, `plans/RERANK-2026-09-26.md` §3.1 point 2).
+
+### PA.0.2 The question itself, in its posers' words (WORKFLOW 3.2 item 3)
+
+1. *Is it known that the chromatic number of the plane equals its measurable chromatic number* — `χ(ℝ²) = χ_m(ℝ²)` — or that equality
+   holds for stationary random colourings? Where is it stated **open** (`[Soifer2024]`'s chapter on measurability — the book is held at
+   `~/source/library/` as the 2024 PDF; Shelah–Soifer 2003/2004; `[KechrisMarks2020]` Example 5.1; `[Falconer1981]`'s closing remarks)?
+2. *Is `χ(ℝ²)` attained by the plane over a single countable (or finitely generated) subfield?* — the bridge's attained form (`[Madore2015]`
+   ¶5.4 gives `sup`; does anyone give a named field?).
+3. *Is the least `k` admitting a translation-invariant random `k`-colouring of the plane, continuous in probability and proper at each unit
+   pair almost surely, known to equal `χ_m(ℝ²)`, `χ_B(ℝ²)` or `χ(ℝ²)`?* — including the "measurable version proper everywhere" question
+   (Doob's measurable modification gives a measurable colouring proper for almost every pair).
+4. *Consequences recorded in print of `χ = χ_m`* that would become consequences of the collapse (e.g. statements about six-chromatic
+   measurable colourings, Falconer's `χ_m ≥ 5` as a lower bound on `χ`).
+
+### PA.0.3 Posers and workers whose complete author listings are pulled (zbMATH Open API, `au:"Last, First"`, then their own vocabulary against `ab:`)
+
+Falconer, Kenneth J.; Soifer, Alexander; Shelah, Saharon; Kechris, Alexander S.; Marks, Andrew S.; Oliveira Filho, Fernando Mário de;
+Vallentin, Frank; Bachoc, Christine; DeCorte, Evan; Bukh, Boris; Matolcsi, Máté; Ambrus, Gergely; Croft, Hallard T.; Szekely, László A.
+(measurable/Borel chromatic questions in the plane); Townsend, Stephen P. (`χ(ℚ²)`-type lineage, if listed); Johnson, Peter D. Jr.
+(the rational-plane compendium); Madore, David A.; Moorhouse, G. Eric; Benda, Miro; Perles, Micha A.; Conley, Clinton T. and Tamuz,
+Omer and Lyons, Russell (factor of IID colourings; invariant random colourings); Bowen, Lewis; Gaboriau, Damien. **Also** grep the held
+Polymath16 threads and wiki (`CLAUDE.md` G49 item) for "measurable", "stationary", "random colouring", "Falconer", "Borel".
+
+### PA.0.4 Fetches owed first
+
+- **`[Falconer1981]`** (JCTA 31 (1981) 184–189; `BIBLIOGRAPHY.md` line 168: "not held", "second-hand") — fetch and read in full; record
+  exactly what it proves, for which format (measurable classes; proper everywhere or almost everywhere), and by what mechanism.
+- Shelah–Soifer (2003, JCTA; 2004) — the choice-dependence of `χ(ℝ²)`; what it says about `χ` vs `χ_m`.
+- `[BachocEtAl2009]` (held? `BIBLIOGRAPHY.md` line 273), `[OliveiraVallentin2010]`, `[DeCorteOliveiraVallentin2022]` (held, statements read)
+  — whether any defines a colouring number between `χ` and `χ_m`.
+- The factor-of-IID / invariant random colouring literature for `ℝ^d` or its distance graphs — a listing first, then open anything in the
+  neighbourhood (WORKFLOW 3.2 item 6: never an abstract).
+
+### PA.0.5 What a hit would change
+
+- **F1 or `χ(ℝ²) = χ_m(ℝ²)` (or `= χ_CP`) found in print** → the milestone becomes an attribution; the verifiers still run (the chain's
+  inputs are this project's), and FS-102's headline changes. The gate reports it to the owner **at once** (its brief).
+- **`χ_m = χ` stated open, recently** → the collapse (if verified) reduces HN, given MR, to a problem posed in print: the write-up Kooshi named.
+- **A named colouring number between `χ` and `χ_m`** → claim C-FMT's comparison is with it, and Phase 3's question is re-stated in its words.
+
+## Stage 3 — SAVED
