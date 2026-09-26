@@ -1,6 +1,6 @@
-# READY — launchable jobs, in priority order (planner's initial list, 05:46; the clerk rewrites it from reports)
+# READY — launchable jobs, in priority order (rewritten by the clerk, fold at ~06:1x)
 
-X02V — Opus — blind verifier — FS-100 s5 — brief data/crunch-2026-09-26-x2x3/briefs/X02V-pe-lim-verifier.md
-X05V — Opus — blind verifier — FS-100 s5 — brief data/crunch-2026-09-26-x2x3/briefs/X05V-sp-cor-flip-verifier.md
-X09C — Opus — close-math — FS-100 s5 — brief data/crunch-2026-09-26-x2x3/briefs/X09C-close-math.md (at 06:55)
-X10F — Opus — front-page — FS-100 s5 — brief data/crunch-2026-09-26-x2x3/briefs/X10F-front-page.md (at 07:10, after X09C)
+No row in §4 currently carries status `wait` or `ready`. X01D, X02D, X02V, X03D and X05V are `DONE`; X01V, X11K, X12B and
+X13R are `run`; J00 is `recurring`. X09C (06:55) and X10F (07:10) are scheduled by the owner, not clerk-launched.
+
+CHECK: none.
