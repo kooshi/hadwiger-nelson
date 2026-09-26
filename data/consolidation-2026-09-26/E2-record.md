@@ -116,3 +116,22 @@ be duplicates.
 | § Building: Ninth instance (`flock` wrapper) | only example | borderline: its mechanism is `$!`'s (killing a parent leaves the child), but "verify … the lock free" is a condition stated nowhere else — keep |
 | "Make the gate fail": every paragraph | each a distinct rule with its only example | agree, walked paragraph by paragraph; two carry more than one example ("carry what it MEASURES", three rulings; "exactly ONE thing may differ", two) — kept, since each list is the evidence its head sentence counts |
 | § What compute actually helps: M2's and FS-75's re-pricings | a condition | agree — M2's adds "grep Mathlib by the statement's shape", FS-75's that even the two-leaf re-price ran high |
+
+## Stage 3 — SAVED: the restoration (one batch)
+
+M1 and M2 are back in G21 at their original place, word for word from `230ea964`, and E1's glue g1 ("P3b (FS-79) typed") is reverted
+to the original "P3b typed" with them. Checked exactly: G21 now equals its `230ea964` text with only M3 replaced by E1's pointer
+(`True`). Their two blocks (with their "*M1, from G21, …*" / "*M2, …*" labels) are removed from `plans/GROKKING-INSTANCES.md` §G21,
+which now holds M3 alone.
+
+| file | before | after |
+|---|---:|---:|
+| `CLAUDE.md` | 282,481 | **283,274** (+793: 801 bytes restored, 8 bytes of glue reverted) |
+| `plans/GROKKING-INSTANCES.md` | 10,542 | 9,599 (−943: the two passages and their labels) |
+
+Gates at this commit (exit statuses read directly): `claude_md_fact_audit.py --base 230ea964` PASS (0 failures); `--dupes` 10 (628 B,
+unchanged); `fs71_ledger_b_check.py --strict` PASS; `bib_audit.py` PASS; `check_architecture.py` PASS; `e2_moved_check.py` PASS (M1 and
+M2 now read "in CLAUDE.md (restored)").
+
+Not edited, reported: the header's budget parenthesis still says "E1's pass took the file from 299,491 to 282,481 bytes", which is
+true of E1's pass; the file is now 283,274 (E2's touch list is restorations only).

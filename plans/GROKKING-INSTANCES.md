@@ -9,17 +9,6 @@ and this file as one corpus. Later instances of these rules belong here, under t
 
 ## G21 — A negative measures its enumeration
 
-*M1, from G21, after “…derivations four times for every over-grade.”:*
-
-**And a periodic search measures its period cap** (FS-73, twice in one
-  milestone, row 79): ℚ(√167)'s `L3e1c94c6` read as having no periodic three-colouring because the search stopped at `N = 20` —
-  its least period is 23 — and the survivor `Ld14c588b` colours linearly with period index 1,080, past `N ≤ 30` and circular
-  `N ≤ 120`.
-
-*M2, from G21, after “…named the period 23 at once.”:*
-
-**And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point.
-
 *M3, from G21, after “…enters a decision is re-asked alone”:*
 
 ; and **a finite configuration measures its depth** — five layers over ℚ(√d) empty at level K exactly when `d < 21·5^{K−1}` (FS81-T8), so a NONEMPTY at K = 1 says nothing about the field. **FS-85's two** (rows 85–86): the rank-1 scan's 377 all-rigid sets, none triangle-free, measured its range (`|D| ≤ 5`, `max D ≤ 14`) — the first triangle-free rigid set has `|D| = 70`, `max D ≈ 3.7·10¹⁹`; and a published proof transferred "step by step" by checking its points measured membership, not logic (the wiki's Prop. 7, V6). **FS-86's four:** a verifier's plant fired first for the wrong reason (a division by zero before the circle-size check it was written for, at `Γ₂₇`); B1's first PARI stability checker compared prime-ideal objects and silently found no stable primes (caught because 2 must be stable); B1's `ζ ↦ ζ⁵` plant was unreachable (another tight torus), kept and labelled; and two owner-brief paraphrases dropped a qualifier, making one spurious gap and widening one statement — **quote a statement verbatim in a brief**. **FS-89's three:** plants that could not fire, in D's tool; a brief carrying an advisor's consequence as settled; a verifier's blind GAP that measured its route, not the claims — a verdict names whose route failed. **FS-91's two:** a positive control of the wrong shape (row 69's line-periodic ceiling at 43 named as a character positive; `χ_char(Γ₄₃) = 9`) — ask a control which shapes its generator represents; and an existence theorem paraphrased as a classification at four addresses (G77). **FS-67's two:** plants that could not fire — a tightness plant that left `λ_min` where it was, and a circle `x² + y² = 2` that built an isomorphic graph (every circle is a similarity image of the unit circle). **FS-100's two:** a rank-two control added under the rule that a control proves only its generator's shapes, whose window still read one coordinate, so neither control could fail (row 116); and two plants that could not fire. **Wave 3b's, the owner's:** the X27 briefs posed the flip without X22V's "affine, `U`-invariant", a paraphrase that emptied the claim (row 126).
