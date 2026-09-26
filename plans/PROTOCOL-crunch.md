@@ -240,6 +240,166 @@ There's just too much new knowledge to carry in every session."; "Implement b on
 revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals." Steps
 4–7 run only when the budget binds; steps 1–3, 8 and 9 run after every crunch.
 
+## 5. Standing rules — the version that worked, as a template
+
+*Merged from `data/crunch-2026-09-25/briefs/STANDING-RULES.md`, `data/crunch-2026-09-26-x2x3/briefs/STANDING-RULES.md` and
+`data/consolidation-2026-09-26/briefs/STANDING-RULES.md`, with the lessons of §7 folded in (marked ⁺). Copy it into
+`data/crunch-<date>/briefs/STANDING-RULES.md`, fill the `<…>`, and delete a rule only when its reason no longer holds. Every brief says
+"STANDING-RULES.md is part of this brief; read it in full."*
+
+```
+# Standing rules for every job of the <date> crunch (<clock>) — part of every brief
+
+1. No children. Do not use the Agent tool, a fork, a workflow or anything else that starts another agent. Delegation here is one level
+   deep (CLAUDE.md § "Delegation — one level deep"). The reason: staffing is Kooshi's budget decision, and the owner can only review
+   work it knows about. If the work outgrows your context, stop at a saved stage and say what is left. That is a good report, never a
+   failure.
+
+2. Work in stages, and keep each response short. Save your record after every stage: add the stage's section, headed
+   "Stage n — SAVED", then commit it before the next stage starts. The reasons: at FS-86 an agent lost three responses to the
+   output-token limit, and nothing can recover a lost response; a 5-hour usage window can halt you mid-job, and a halt then costs one
+   stage, not the job.
+   - Resuming: if your record already exists when you start, you are resuming. Read it and your brief, check the last SAVED stage
+     against `git log -- <record>`, and continue at the first stage that is not SAVED. Redo nothing that is saved.
+   - Working files a successor would need go under the data/… path your brief names, committed with the stage, never only in /tmp.
+     /tmp is RAM and dies with the session.
+
+3. <If the ban is in force:> The ban on finite-witness search runs to <date>.
+   - Out: SAT, MaxSAT, #SAT, MILP/CP, local-search colourers, Θ relation trees and float Θ finders, quotient-colouring searches, lattice
+     sweeps hunting survivors, and machine-long certificates such as multi-hour relaxations.
+   - Kooshi's intent, in his words: "The intent of the ban is to eliminate the crutch of feeling like we're accomplishing something by
+     asking uncomputable problems for days at a time."
+   - In: hand derivation; exact arithmetic of seconds that checks a derived claim; existing checkers on existing certificates; the Lean
+     kernel. At the edge: a complete exact enumeration of a finite set whose extent a derivation fixed first is in, and is logged as such.
+     "Try cases until one works" is out.
+   - Keep a "would have searched here" log in your record: one line per move you would have made by search, and what you did instead.
+
+4. All novel knowledge is a success. Kooshi: "A proven theorem about why its impossible is also valid. All novel knowledge is a success."
+   - Do not lean toward a yes. This project's recorded failure mode is selection (CLAUDE.md G21): defects that flatter the work survive,
+     and defects that displease are found within the hour. Audit a result you like as hard as one you dislike.
+   - FALSE with a counterexample, or GAP with the missing step named, is as valuable as TRUE.
+   - State every result at its grade, with its count of minds; "not found in print", never "first". Never raise a grade, a scope or a
+     verdict you are copying.⁺
+
+5. Quote statements verbatim, never paraphrase. Every statement you hand on goes in quotation marks with its source address. Paraphrases
+   in briefs have invented a gap, widened a statement and emptied a claim (the flip lost "affine, U-invariant"; NA₀ lost "positive").⁺
+   Your first stage checks every quotation in your brief against its source and logs the result.
+
+6. Commits by explicit path. The tree is shared by <n> agents.
+   - git add <new file>, then git commit <paths> -m …; never a bare git commit, never git add -A, never amend.
+   - Push after each commit (git push origin main); on a ref-lock race, sleep 4 and retry. Never force-push.
+   - Subjects are neutral, naming the job and the stage ("X01D: stage 2"): the harness shows every newly launched agent the last five
+     subjects, and blind jobs are running.⁺
+   - End each message with your harness's attribution lines.
+
+7. Records, tools and fences.
+   - Your record is the path your brief names. Give it a heading "Theorems this phase proved": one line per theorem, with its grade and
+     its address.
+   - Your exact checks go in tools/<job-prefix>_*.py. Plant a fault in each and watch it fire; a plant that cannot fire tests nothing,
+     and a control proves only the shapes its generator can represent (G21).
+   - Never edit a frozen tool (tools/fs58_*, tools/fs61_*, tools/fs66_*, tools/fs73_*check*.py, tools/fs73v2_check.py,
+     data/fs73/coxeter-c3/certcheck.py) or any other job's tools.
+   - Never edit CLAUDE.md, LEDGER.md, plans/FRONTIER-STUBS.md or BIBLIOGRAPHY.md unless your brief makes you the front-page lane; propose
+     edits in your record.
+   - If your brief fences files and a search prints fenced text, stop reading it, and log the touch (time, file, what it carried) in your
+     record and your report at once.⁺
+   - Never copy an agent id (a string like a1b2c3…) into any file. Never read credential files (auth.json, .env, keyrings).
+
+8. Machine.
+   - Any job over about 2 GiB or 2 minutes runs under scripts/slot.py --mem <GiB> --cpus <N> -- <cmd>, with an honest --mem (a checker
+     under-declared at 8 GiB was killed by its own cap).⁺
+   - On exit 75 (not admitted after 1,800 s), wait ten minutes and retry. Never raise a cap. After three refusals, report BLOCKED.
+   - Never run lake build, bare or named. Kernel jobs follow their brief's build line; there is one kernel job at a time.
+   - Read every exit status directly, never through a pipe, and never chain a commit after a gate with ";".⁺
+   - On any unexplained crash of any process, halt and report. Do not diagnose or retry.
+
+9. The report. When you finish, and at any halt you can foresee, write this and commit it to data/crunch-<date>/reports/<job id>.md. Then
+   send the same text to "main" by SendMessage:
+     JOB <id> — <DONE | STAGE n SAVED | BLOCKED: reason>   harness≈<k> (own≈<k>)
+     RESULT: <one line; per claim TRUE / FALSE / GAP-at-step, or the theorem's name and grade>
+     RECORD: <path>   COMMITS: <hashes>
+     INVENTORY: <n lines follow, each "kind — one line — source address">
+     SPAWN: <n lines follow in the queue's format, or "none">
+     HELD FOR THE OWNER: <a decision or a slip, one line each; or "none">
+   - INVENTORY kinds: result, correction owed, prediction scored, slip, tool defect, prior-art debt, stub to mint or re-aim, fence touch.⁺
+   - SPAWN lines use the queue's columns, and each comes with its brief written as a file under data/crunch-<date>/briefs/.
+   - The final text of your turn: "<job id> idle; report sent to the owner by SendMessage".
+
+10. Budget and clock. Your brief names the budget in the harness's count; hand back with your record saved before <line>. The loaded
+    context at launch is itself about 165k by the counter, and agents' own counts have run at 29–70 % of the harness's, so leave a
+    margin.⁺ The crunch ends at about <time>; the close reads reports from <time>: check `date` at every stage, and at <time − 5 min>
+    finish the current claim, save, and report, whatever is left.
+
+11. Reading is in; cite what you read. Grep BIBLIOGRAPHY.md (by arXiv id and Zbl number) and ~/source/library/ before calling a paper
+    unheld or fetching it; papers held under a journal-year key have been re-fetched twice (G50).⁺ Record a reading status per section;
+    an abstract is not a reading. Never commit a paper's PDF into the repository; name it for the library.⁺ Propose BIBLIOGRAPHY.md rows
+    in your record; the front-page job writes them.
+```
+
+## 7. Rules the runs taught — each with its incident
+
+*One line each. "Owner" is the coordinating session. Addresses: the owner's job logs (off-repo, ids) are
+`~/source/lean-dir-rescue/owner-scratch-2026-09-25/owner-crunch/live-agents.md` and `…/owner-scratch-2026-09-26-x2x3/live-agents.md`; run 1's
+list of owner slips is `plans/CRUNCH-2026-09-25-queue.md` §8.5; run 2's inventories are `plans/FS100-x2x3-close-inventory.md` and
+`plans/FS100-x2x3-wave3-close-inventory.md`.*
+
+**Minds, grades and announcements**
+
+| # | rule | the incident |
+|---|---|---|
+| 1 | A checking reading that follows a withdrawn blind GAP is not a second mind; launch a blind second derivation instead. | X01V found a GAP, then read X01D's proof and withdrew it; the owner announced the headline at 06:08 on that reading; X09C ruled it short of the rule's letter (`plans/FS100-three-field-lemma.md` §R-close (stage 5) 1.4); X12B, blind, landed it at 06:15. The outcome stood; the announcement was early. |
+| 2 | The advisor's check of a route that grew from its own sketch is not an independent mind. | Poros, resumed on X01V's GAP, found it "does not stand" by its own route; the owner logged it "NOT independent (its own sketch)"; X01V's stage 4 was decisive (06:01–06:02). |
+| 3 | Pre-register the headline rule in the close inventory before any job reports, and announce only when the close-math would grade it met. | Run 2's item 8 [P-5], written at 05:47; met at 06:15, not 06:08 (rule 1). |
+| 4 | Broadcast news only to jobs whose blind stage is committed. | Run 2's 06:06 broadcast skipped X12B; it was told after its blind stage. |
+| 5 | Fix the claim lists verbatim before any derivation; revise a list only before any of its jobs launches. | Run 2 §2 (05:45) and §7 (06:25); the X23 list revised 06:27, before either X23 job launched. |
+| 6 | Tell the planner its derivations with a blind verifier behind them land more often than it thinks. | Run 1: all seven missed expectations were events priced below even odds that happened (E2b, E3, E4, E5, E8c, E10b, E10c; §8.2 there); run 2's headline was a 0.05 outcome. |
+
+**Statements and briefs**
+
+| # | rule | the incident |
+|---|---|---|
+| 7 | Quote statements verbatim in every brief; a paraphrase can empty a claim, not only widen it. | The owner's X27 briefs posed the flip without X22V's "affine, `U`-invariant", which made it vacuous; X31C's brief dropped "positive" from NA₀ and called COL-E "the same step" (X31C quoted the sources instead). Run 1's list: CLG paraphrased as a classification when it is an existence statement (J29's brief, and to Kooshi); R96's "finitely generated" as "saturated" (S1V's brief, written by J29); T-C's blind scope overstated (J41's); a control line that widened F2 (J46's). |
+| 8 | A brief's attribution and path are claims too; check them. | J26's brief credited G27 to `[AmbrusEtAl2023]` (it is `[MatolcsiEtAl2025]`'s); four run-2 briefs named an EL2021 path that did not exist (corrected at 8e941a76). |
+| 9 | Write a standing conditional instruction of Kooshi's to memory at once, with its trigger defined in the plan's terms; keep the conditional job's brief in the owner's scratch until launch. | "If 47 lands at 5, tell all running agents the news, and launch one to start formalizing the dependencies in Lean" (05:55) — recorded with "lands" = item 8; X11K's brief was committed only at its launch, 06:06. |
+
+**Fences**
+
+| # | rule | the incident |
+|---|---|---|
+| 10 | Fence a blind job from the derivation's record, data, tools, brief and report, the close inventory, the index, the advisor's record and the commit bodies of the fenced jobs; name every path. | J51V's and X12B's fence lists (§6). |
+| 11 | A fence touch is logged by the job at once; the owner rules on it by commit order and by what the touched text carried. | X21V touched a fence at 06:35, after its blind A-3 was committed at 06:34: counted blind. X23V blind "by commit order" (44 s). X25B saw a route outline only: graded "blind to the proofs, not the outline". X05V saw one line naming itself and the headline cap: harmless. J51V's grep of `plans/*.md` reached K0's membership: that verdict not counted blind. |
+| 12 | Commit subjects stay neutral while any blind job runs. | Owner commit 3648d3a5 named a counterexample while J51D could read `git log`; J51D's prior (0.80 FALSE) predated it, and its FALSE verdicts were graded with that noted. |
+
+**Files and writers**
+
+| # | rule | the incident |
+|---|---|---|
+| 13 | Two jobs that write the same file run in sequence; the clerk is a writer too. | The clerk swept J42's uncommitted inventory ticks (nothing lost); no clerk ran while J30 appended inventory lines; X30F waited for X10F, X31C for X30F, C3b for C1, E2 for E1, F1 for E2, and this protocol's `CLAUDE.md` line waits for F1. |
+| 14 | The front page may make mechanical fixes to close-math's derivation entries so the strict ledger check passes: field labels where the content exists, addresses where it is absent, no new mathematics, no grade change. | Asked twice in run 2 (X10F at 06:27, X30F at 07:10) and granted each time; in run 1 the same failure went to a Sonnet format job (J33) after J24. Now in the front-page template (§6). |
+| 15 | Limit what the clerk reads, never what it folds. | Clerk run 1 cost 252k reading the whole queue; its later briefs read the table, the unfolded reports and `READY.md` only; Kooshi: "I'd rather it be thorough than miss something." |
+| 16 | When Kooshi fears lost or orphaned work mid-run, a bookkeeper job goes to the head of the queue, and blind jobs are fenced from its index. | "Inject an Opus bookkeeper into the queue to verify the current documentation…" (run 1, 16:50) → J30. |
+| 17 | Papers go to the library, never into the repository. | Run 2's advisor committed two PDFs (d20b17d4); the close moved them. |
+
+**Budgets, slots and the machine**
+
+| # | rule | the incident |
+|---|---|---|
+| 18 | Read the harness's count from the task notification; an agent's own count is 29–70 % of it; price briefs with the ~165k loaded at launch included. | Own/harness: J24a 95k/324k, J18 120k/402k, J15 150k/368k, J03a 135k/324k, J09 255k/417k. |
+| 19 | An agent past its hand-back line has its last stage checked by the next job; past about 500k it is replaced, never reused. | Over the line: run 2's planner 341k against 280k, its advisor about 333k against 150k; J28D 460k against 420k; J52 437k against 350k. Past 500k: J04 534k, J23a2 536k, J23b 574k, J24 550k — the owner told J24 to check every draft those closers wrote past 500k against its source. |
+| 20 | A slot cut applies to launches, never to running jobs; re-order the queue for the new cap. | Run 1: 5 → 4 (~20:30), → 2 (~22:15; the front page was swapped ahead of the posters); run 2: 6 → 7 (06:32), → 4 (07:01, "Existing jobs may continue"). |
+| 21 | One kernel job at a time; re-price a kernel job from its first two leaves. | J16's stripe lemma closed in 17 minutes against a 4–6 h price; J52K in 45 minutes against 4.5 h. |
+| 22 | Keep the job log structured enough to count agents at work. | Run 1's E9 ("≥ 3.5 agents on derivation, verification or kernel work, first 8 h") went unscored: no utilisation log was kept. |
+| 23 | Honest `--mem`, every time. | An FS-66 checker was killed by its own 8 GiB cap (exit 137) and relaunched at 16 GiB; X26B (3.2 GB, 519 s) and J31 (9 minutes) ran outside `scripts/slot.py` — slips. |
+| 24 | Message only live jobs, and tell the advisor of every stand-down. | A stood-down J22 was woken by an owner message (+266 tokens). |
+| 25 | Never chain a commit after its gate with ";". | The budget commit 25bff6a0 went in before its audit passed; fixed within minutes. |
+
+**The owner's own checks**
+
+| # | rule | the incident |
+|---|---|---|
+| 26 | For a key claim, check one step yourself (a short script, a statement read against its source), never the record. | The owner re-derived J51V's counterexample and re-ran its tool; read `not_colorable_chain`'s and `inv_natCast_mem_unitRing_iff`'s statements against G55 and the plan; re-ran the gate after every kernel job. |
+| 27 | A crunch finds errors in earlier milestones; route them as "correction owed" lines, never as silent edits. | J03a found FS89-CL2 false as written (the archimedean characters must be `Hom_ℚ(F(i), ℝ) mod 1`), and the fix went to J07 as a deliverable. |
+
 ## §R. Record (job P1)
 
 ### Stage 1 — SAVED (§0–§4: design, when to use it, roles, the run, the consolidation)
@@ -248,3 +408,9 @@ Written from the sources the brief names, read at the addresses cited above. §4
 ("tell it to include the consolidation phase after the crunch too please"); F1's report was not on disk at this writing, so F1 is marked
 running (its stage 1 is committed, 8db071bc). Harness count at this save: about 390k by the counter (the loaded system prompt was about 165k
 of it) — already past the brief's 350k hand-back line; a slip, reported. Would have searched here: nothing.
+
+### Stage 2 — SAVED (§5 the standing rules as a template; §7 the rules the runs taught)
+
+§5 merges the three STANDING-RULES files and marks each lesson folded in with ⁺. §7 holds 27 rules in five groups, each with its incident
+and address. §6 (templates) is stage 4 and will sit between them. Harness count at this save: about 405k by the counter. Would have
+searched here: nothing.
