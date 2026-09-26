@@ -19,6 +19,7 @@ Plants (--plant NAME) must each make the run exit nonzero:
   dyadic-rule  : the hand rule is replaced by 'd = 3 mod 8 is split'
   class        : 71 replaces 47 in the expected class
   circle       : Gamma_p's circle loses one point
+  count        : C7 forgets the prime 19
 Exit 0 all checks pass, 1 a check failed.
 """
 import math
@@ -150,6 +151,17 @@ for p, target in [(23, 0.331695), (43, 0.271869), (59, 0.248626)]:
           f"C5 p={p}: degree {deg}, max|lambda|/d = {ls:.7f}, -lambda_min/d = {lm:.7f} (J39 table {target}); 2/(p+1) = {2/(p+1):.4f}")
 deg, ls, lm = lam_star(23)
 check(ls < 1 / 3 and abs((1 / 3 - ls) - 1.6e-3) < 1e-4, f"C5 23 is 4-thick: 1/3 - {ls:.7f} = {1/3 - ls:.6f} (J48-N4 margin 1.6e-3)")
+
+# ---------- C6, C7 (stage 4: re-computing two of X21D's numbers from their statements) ----------
+print("== C6: lambda* at 11 and 19 (X21D-A4: not 4-thick)")
+for p_, target in [(11, 0.476413), (19, 0.380486)]:
+    deg, ls, lm = lam_star(p_)
+    check(abs(ls - target) < 5e-7 and ls > 1 / 3, f"C6 p={p_}: max|lambda|/d = {ls:.7f} (X21D {target}) > 1/3")
+print("== C7: family fields d <= 3000 and those with 11 or 19 stable (X21D-A2: 44 of 52)")
+fam = [d for d in range(2, 3001) if squarefree(d) and d % 168 in (47, 143, 167)]
+st = lambda d, q: q % 4 == 3 and (d % q == 0 or legendre(d, q) == 1)
+hit = [d for d in fam if st(d, 11) or (PLANT != "count" and st(d, 19))]
+check((len(fam), len(hit)) == (52, 44), f"C7 family size {len(fam)}, with 11 or 19 stable {len(hit)} (X21D: 52, 44)")
 
 print("RESULT:", "ALL PASS" if not FAIL else f"{len(FAIL)} FAIL")
 sys.exit(1 if FAIL else 0)

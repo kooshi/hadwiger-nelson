@@ -325,3 +325,34 @@ class form (one mind); the control (§2.2) shows the chain cannot pass without i
 ### 3.5 Would-have-searched-here log (stage 3)
 
 - (none)
+
+## Stage 4 — SAVED (fallback, after stage 3: X21D's lemma statements, and FS100-K0's entry, compared)
+
+Read after `ba4a08fa` (stage 3): `plans/FS100-X21D-derivation.md` "Theorems this phase proved" (statements only, lines 6–27) and
+`plans/FS100-derivation.md` FS100-K0 (lines 127–135).
+
+| X21D statement | mine | agreement |
+|---|---|---|
+| X21D-Q0 (dyadic place splits; outside the exception; `R = O′`) | Q-0, §2.0–2.1 | agree |
+| X21D-A1 (composition; weakest input R88-TCA's class form) | A-1, §2.4 (same weakest link named) | agree |
+| X21D-A2 (`χ = 5` where `L = 5`; the four named; **44 of the 52** family fields `d ≤ 3000` have 11 or 19 stable) | A-2, §2.5 | agree; **44/52 re-computed** (C7, plant "count" fires at 29) |
+| X21D-A4 (no FS100-T1, T-C(A) or SP-Cor; **J48-N4cor reaches no `L = 5` member**: `λ*(Γ₁₁) = 0.476413`, `λ*(Γ₁₉) = 0.380486 > 1/3`) | A-4, §2.6 | agree; **both constants re-computed** (C6: 0.4764127, 0.3804864); the extra is right and worth keeping — the two routes to five cover different fields: J48-N4cor needs every stable place 4-thick, which 11 or 19 stable forbids |
+| X21D-B1 (⟸ needs no MR) | B-1, §2.7 (and B-2 (i) with no field input) | agree |
+| X21D-PL (`PL_∃` ⟸ [`χ_CP ≥ 6 ⟹ χ ≥ 6`] unconditionally, ⟹ given MR) | B-2 (ii), §2.8 | agree; checked from the statement: (⟸) by T-J39-3's unconditional converse |
+| X21D-Y (`Y` has no CP5 ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; density refusals of `Y` are refusals of `ℝ²`; `j = 1` dead by Croft) | B-3, §2.9 (projection lemma; my "(a)") | agree; X21D's biconditional is the sharp form of my item 2 (a) — (⟹) is my Lemma B3a, the `PL_∃` half vacuous |
+| X21D-G23 (no measurable edge-null five-colouring at full-depth 23; "a CP-format transcription of row 75's `χ_Bor(ℚ₂₃²) ≥ 6`, not new") | §2.9 item 3 | agree; **I adopt X21D's attribution**: my `χ_CP(G₂₃) ≥ 6` is not new either |
+| X21D-K0 (for every real number field; A⁺ at `S ≠ ∅` needs T-C(A) at `S`) | A-3, §2.3, blind | agree, both notes |
+
+**FS100-K0's recorded statement** already reads "A⁺ at `S = ∅` … over every real number field where T-C(A) holds at `S = ∅` … A⁺ at a finite
+`S ≠ ∅` needs T-C(A) at that `S`" — exactly my two notes. So **§3.2 item 1 is a note about the queue's quotation** (taken from J51V's brief,
+the older wording), **not a correction owed to `plans/FS100-derivation.md`**. Its proof walks the same lines I walked (R ⋊ U, `U`-invariance,
+R-U, A⁺@∅ via SI-4 and N2), and adds each class field's T-C(A)-count inputs; blind and not, the two derivations meet.
+
+**Differences of truth with X21D: none.** Differences of content: X21D's two extras (44/52; J48-N4cor misses every `L = 5` member) are
+confirmed; my two extras (B-2 (i) needs no field input; Lemma X21V-M explains T-J39-1's merge and the single `UD(ℝ²)` factor) are not in its
+statement list.
+
+### Would-have-searched-here log (stage 4)
+
+- C7 is a complete enumeration of the 52 family fields `d ≤ 3000`, the extent fixed by X21D's statement; it checks a stated count, it hunts
+  nothing.

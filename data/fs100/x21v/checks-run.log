@@ -28,4 +28,9 @@ PASS C5 p=23: degree 24, max|lambda|/d = 0.3316953, -lambda_min/d = 0.3316953 (J
 PASS C5 p=43: degree 44, max|lambda|/d = 0.2718689, -lambda_min/d = 0.2718689 (J39 table 0.271869); 2/(p+1) = 0.0455
 PASS C5 p=59: degree 60, max|lambda|/d = 0.2486263, -lambda_min/d = 0.2486263 (J39 table 0.248626); 2/(p+1) = 0.0333
 PASS C5 23 is 4-thick: 1/3 - 0.3316953 = 0.001638 (J48-N4 margin 1.6e-3)
+== C6: lambda* at 11 and 19 (X21D-A4: not 4-thick)
+PASS C6 p=11: max|lambda|/d = 0.4764127 (X21D 0.476413) > 1/3
+PASS C6 p=19: max|lambda|/d = 0.3804864 (X21D 0.380486) > 1/3
+== C7: family fields d <= 3000 and those with 11 or 19 stable (X21D-A2: 44 of 52)
+PASS C7 family size 52, with 11 or 19 stable 44 (X21D: 52, 44)
 RESULT: ALL PASS
