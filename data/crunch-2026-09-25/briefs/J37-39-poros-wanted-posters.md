@@ -74,7 +74,15 @@ summary, including this brief, is never a source.
    measures or tilings? Give the search queries a prior-art job should run. Do not run the literature sweep yourself.
 5. **The killing test:** the cheapest check that would show the poster is weaker than it reads (a scope slip, a shared input, a grade
    inflated on the way).
-6. **Recommend,** ranked, with a default ("if Kooshi does nothing, X happens"): a derivation (its statement verbatim, ready for a brief), a
+6. **Flip the poster: find the example invariant** (Kooshi, 2026-09-25: *"walls often show up as 'the (impossible?) counter-example
+   invariant' and we have had a successful breakthrough when looking for the 'example invariant'."*). The poster lists invariants of a
+   counterexample that may not exist — theorems about a class that may be empty. Every breakthrough here came instead from an invariant
+   that **every actual solution** carries: the slope of every three-colouring (G71, G72, G74), the eigen-equation of every four-colouring
+   of de Grey's lattice (G75), locality at the tight place (G76), band rigidity (row 95). For your target, name the property that every
+   colouring we can prove exists carries and that, held by **all** colourings, would empty the poster's class; say which constraint on
+   the poster is its shadow, whether the milestone's structural question (§IQ, G72) already names it, and whether looking for it beats
+   closing the poster's gap directly.
+7. **Recommend,** ranked, with a default ("if Kooshi does nothing, X happens"): a derivation (its statement verbatim, ready for a brief), a
    construction problem, a reading debt, or a stub. Give your confidence and the one fact that would change it.
 
 ## Mechanics
