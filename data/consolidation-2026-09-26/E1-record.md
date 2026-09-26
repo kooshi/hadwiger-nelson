@@ -125,3 +125,19 @@ audit reads that file and finds each (24 `HOMED` lines); the other **6 are the g
   refused rather than believed. The second attempt searched every class.
 
 Gates: `--base 230ea964` PASS; `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.
+
+## Stage 4 — SAVED: the header, and the report
+
+The header's budget parenthesis records the pass with Kooshi's two sentences and the bytes (299,491 → 282,481); the one-home sentence
+names `plans/GROKKING-INSTANCES.md` beside `LEDGER.md` and says the audit runs "across the three files".
+
+**Final:** `CLAUDE.md` 299,491 → **282,481** bytes (−17,010; token proxy 91,952 → 86,452); `plans/GROKKING-INSTANCES.md` **10,542**;
+`LEDGER.md` 404,826 → 409,581. The proposal's estimate for (b) was ≈ 267–270k; the difference is what stage 1's test kept — the sub-rules
+inside the instance lists that are the only statement of their rule, and the § Building / "Make the gate fail" stories that are each their
+rule's only example (the brief's stop rule: never cut an intrinsic to reach the number).
+
+Gates at the last commit: `claude_md_fact_audit.py --base 230ea964` PASS (0 lost; 24 tokens homed in `plans/FRONTIER-STUBS.md`, each found;
+6 grouped rank labels allowed); `--self-test --base 230ea964` PASS (15 plants); `--dupes` 10 (628 B, unchanged from the base);
+`fs71_ledger_b_check.py --strict` PASS; `bib_audit.py` PASS; `check_architecture.py` PASS.
+
+Would-have-searched log: none.

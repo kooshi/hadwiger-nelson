@@ -16,7 +16,7 @@ replaced by the corrected claim (with its attribution, if it turned out to be pr
 correction belongs in the commit message and the milestone's plan. **History is in git:**
 `git log -p -- CLAUDE.md`. The last version carrying the full narrative — every milestone's story, every
 amendment and correction trail, every superseded ranking and reading — is commit `fd658af` (2026-09-10).
-**Size budget: keep this file under 300,000 bytes** (Kooshi, 2026-09-26, at the ×2×3 crunch's end, after it ran unbounded: *"the 300kB limit returns, and we'll likely need to find a way to extract what's not necessary, treat the grokkings there as a cache for a dedicated grokking file, or merge things to reduce it from here on out. There's just too much new knowledge to carry in every session."*; at the 2026-09-25 crunch's end: back to 300,000 after a temporary 325,000 during it; the no-loss pass that followed took the file to 283,826 and found almost nothing more that touches no reasoning) (Kooshi, 2026-09-11: the budget is on *this file
+**Size budget: keep this file under 300,000 bytes** (Kooshi, 2026-09-26, at the ×2×3 crunch's end, after it ran unbounded: *"the 300kB limit returns, and we'll likely need to find a way to extract what's not necessary, treat the grokkings there as a cache for a dedicated grokking file, or merge things to reduce it from here on out. There's just too much new knowledge to carry in every session."*; the same day he chose design (b) of `plans/PROPOSAL-claude-md-knowledge-cache.md` — *"Implement b on the file. Remove incidentals, keep intrinsics."* — and E1's pass took the file from 299,491 to 282,481 bytes: the second and later instances of rules to `plans/GROKKING-INSTANCES.md`, the "Not ours" list to `LEDGER.md`, the paths-forward rows ranked ≥ 30 to `plans/FRONTIER-STUBS.md` alone; *"We'll revisit a cache implementation next time we hit the cap at a point where we're too dense to compress or remove further incidentals."*; at the 2026-09-25 crunch's end: back to 300,000 after a temporary 325,000 during it; the no-loss pass that followed took the file to 283,826 and found almost nothing more that touches no reasoning) (Kooshi, 2026-09-11: the budget is on *this file
 itself*, not on the file plus the two imports above — there is a lot here worth remembering; raised from 150,000 to
 200,000 on 2026-09-15 after a rule's reasoning was trimmed to fit and its loss cost hours, from 200,000 to 250,000
 on 2026-09-17 with the file at 199,785 bytes, from 250,000 to 275,000 on 2026-09-21 with the file at 249,994 after a
@@ -26,8 +26,9 @@ and the current-state-only rule, not the byte count, is what keeps this file hon
 a ceiling and never a licence: the current-state-only rule above does the real work, and superseded text
 comes out whether or not there is room for it. **One home per fact** (2026-09-21): numbers, certificates, names and
 addresses live in a row of `LEDGER.md` (the novel-results ledger, extracted from this file on 2026-09-22 — read by address, never
-loaded), mechanism and readings in a grokking, and every other mention points; at every close run
-`tools/claude_md_fact_audit.py` with `--base <the previous close>` (nothing lost, across both files) and `--dupes` (nothing retold). **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
+loaded), mechanism and readings in a grokking, a rule's second and later instances in `plans/GROKKING-INSTANCES.md` (extracted
+2026-09-26, read the same way), and every other mention points; at every close run
+`tools/claude_md_fact_audit.py` with `--base <the previous close>` (nothing lost, across the three files) and `--dupes` (nothing retold). **A paragraph tagged `[PROTECTED — never compress …]` is exempt from every trim
 (Kooshi, 2026-09-15): the tag marks reasoning whose loss has already cost hours; trim elsewhere.**
 
 ## Notation
