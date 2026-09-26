@@ -1973,4 +1973,4 @@ extensions preserve `L`). **The grade of the complex-place step (1c) stands eith
 FS100-CX and on MR's complex-place case wherever it applies. **X11K2 landed** (the every-real headline stated through Mathlib's number-field API,
 its composition proved over named inputs; `χ(ℚ(√47)²) ≤ 5` sorry-free), and X11K3 was gating it: both are in FS-101's stub.
 
-**Inventory:** `plans/FS100-x2x3-wave3-close-inventory.md` items 1–47 ticked (stage 4.8's mapping); none left open.
+**Inventory:** `plans/FS100-x2x3-wave3-close-inventory.md` items 1–121 ticked (1–47 by stage 4.8's mapping; 48–121, folded by the clerk after stage 4, in the file); none left open.
