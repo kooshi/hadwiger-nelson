@@ -14,6 +14,17 @@ goes to git.*
 (M3), then row 88's question (rows 111–113) and FS-67 (rows 114–115), closed later the same day; its index is `plans/CRUNCH-2026-09-25-INDEX.md` and its items `plans/FS91-close-inventory.md`, `plans/M2-close-inventory.md` and
 `plans/M3-close-inventory.md`.*
 
+## The claim list — what is ours beyond Theorems A and B (moved from `CLAUDE.md` § The prior-art position, 2026-09-26)
+
+*`CLAUDE.md` keeps the position's lineage sentence, Theorems A and B with `[Fischer1994]`'s value, every kernel certificate, and the whole
+**Not ours** list, which stays in context against misclaims; this is the rest of its **Ours** list, verbatim, beside the rows it names.*
+
+**Ours:** the sieve; the lift theory; the compulsion transfer and distance law; the tightness mechanism;
+the fan-gap transport and its compulsion consumers (row 66); the tight/slack classifier of a residue plane's
+compulsions and its propagation up a tower (row 67, G54); plane freedom at every prime p ≡ 3 (mod 4); the field-internal reading of
+the fractional blow-up and `χ_f(K²) = 4` (row 71); the 3-adic barrier and the four-colour lower bounds for real quadratic
+fields (rows 72–73); the fibre-share inequality and the all-levels certificates, with the answer to the `p`-adic Hadwiger–Nelson question (row 75); the forced group of de Grey's lattice (the lattice form of Hubai's 2018 ring computation) and its census; the three-colour criterion, density and dichotomy for abelian Cayley graphs and the `Θ` certificate (rows 78–79); the classification of four-colour edge-local heights over every generating set, the four no-gos by format and the rank-1 one-way walls and criterion, and `L21cc6506`'s looseness at four colours (rows 80–81); the passage from additive to all three-colourings at the field level and the census's structural certificates (rows 82–83; as far as the gate reached, `[Johnson2000]` and `[Johnson2006]` unread); `F = P = 8Λ` on de Grey's lattice by derivation and the audit of its input, the triangle-free abstract rigidity and its Soifer calibration, and the no-gos on `Λ` (rows 85–87); the type-(B) frame, the classification of `K²`'s four-colourings, the rigid local plane and the no-go family on type-(B) planes (rows 88–94); rational band rigidity at two or more primes, at every band, and its field consequences (rows 95–97, 98); the class theorem for character colourings, the character chromatic numbers, three colours over every real number field and one prime's three failures (rows 99–102); rank one at four colours reduced to single colourings, the mixing selection and the windows at five over ℚ(√167) (rows 108–110); the product criterion `χ(E_k(G)) ≤ k` for gap-free `G`, its `K_k × X` form and the sharp mixing pullback for every gap-free `G` (rows 114–115; as far as the gate reached, Duffus–Sands–Woodrow 1985 unread); prime inversion in valuation form, with no number field (row 105); four-colour rigidity split into invariant measures and transience, Theorem C over the real S2 fields and its ℚ(√47) form (rows 111–113);
+
 ## A. The novel-results ledger
 
 ### The novel-results ledger

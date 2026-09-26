@@ -120,3 +120,18 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0.
   ALLOW lines: none.
 - Bytes: 287,833 → **286,556** (−1,277; total −9,857).
+
+## Stage 2, batch 6 — SAVED (the prior-art position's Ours list moved to `LEDGER.md`; two retold clauses)
+
+- **Moved, verbatim:** the prior-art position's **Ours** list after Theorems A and B (2,407 bytes: the sieve … Theorem C over the real S2
+  fields and its ℚ(√47) form, rows 66–115, with its two unread-prior-art caveats) to a new `LEDGER.md` section before § A, "The claim list —
+  what is ours beyond Theorems A and B (moved from `CLAUDE.md` § The prior-art position, 2026-09-26)". `CLAUDE.md` keeps the lineage
+  sentence, Theorem A's form, Theorem B's kernel proof with `[Fischer1994]`'s value and the five questions, every kernel certificate, a
+  pointer, and the whole **Not ours** list (kept in context against misclaims). *Reason for the home:* `LEDGER.md`'s own header puts
+  "numbers, certificates, names and addresses HERE"; the list names results by row. *Held for the owner:* the brief's touch list says
+  `LEDGER.md` receives "moved mechanism text"; this is a claim list, not mechanism — one commit to revert if the owner wants it back.
+- § Publication's parenthetical retold G49's account of why `[Fischer1994]` hid (G49 holds it); now "G49's mechanism once more".
+  FS-69's row: "FS-66's instrument is priced at 84 GPU-days there" is G66's (which holds the 84 GPU-days); now "a smaller relaxation than FS-66's".
+- Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **8**, exit 0; `bib_audit.py` exit 0;
+  `fs71_ledger_b_check.py --strict` **RESULT: PASS**, exit 0. ALLOW lines: none.
+- Bytes: `CLAUDE.md` 286,556 → **284,055** (−2,501; total −12,358); `LEDGER.md` 357,110 → 359,928.
