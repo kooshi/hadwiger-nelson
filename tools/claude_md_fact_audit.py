@@ -59,6 +59,10 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # The owner, 2026-09-26: the crunch's temporary size budget, superseded at its end (current-state-only; history in git).
+    "294994": "the file's byte count when the temporary 325,000 budget was granted; removed with that budget at the crunch's end",
+    "325": "the crunch's temporary size budget (325,000), superseded by 300,000 at its end (Kooshi, 2026-09-26)",
+    "325k": "Kooshi's words granting the temporary 325,000 budget; superseded at the crunch's end",
     # J47, the milestone-stub writer (2026-09-25): FS-100 ranked in at 3, every paths-forward rank from 3 on moved down one.
     "37–41": "the paths-forward table's group rank, renumbered 38–42 when FS-100 was ranked in at 3 (J47)",
     "42–44": "the same re-rank: now 43–45",
