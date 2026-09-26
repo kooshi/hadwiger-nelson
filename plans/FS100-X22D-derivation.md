@@ -14,6 +14,7 @@ One mind. A blind verifier, X22V, works on the same claims; no contact.*
 | X22D-QR | given MR, every `R ⋊ U`-invariant random four-colouring over ℚ(√59), ℚ(√83), ℚ(√131) is a.s. a pullback (`F_{μ,rot} = R ∩ 𝔓⁴`); no T-B1 | [hand, one mind; two routes: J38's step (3b) alone, and a selection through FL-K, Theorem C at `S = ∅`, gap-freeness] | Stage 2, §2.2 |
 | X22D-RT | given MR, every translation-invariant random four-colouring is rotationally transient (non-Pull rotated windows have upper Banach density 0 in `U`); so Q-μ ⟺ TR-ROT, and T-B1 ⟹ TR-ROT | [hand, one mind] | Stage 2, §2.3 |
 | X22D-EF | for every number field and finite `S`, `H_{E_S}` and `H_E` are `L²` of rotation-invariant factors (`E_S` = the `τ_S`-continuous characters) | [hand, one mind; textbook ingredients] | Stage 2, §2.2 step 1 |
+| X22D-TRM | given MR, every four-colouring of a type-(B) plane outside Pull is rigid-motion-transient (non-Pull windows have upper Banach density 0 in `R ⋊ U`); so row 88 ⟺ "no rigid-motion-transient colouring" | [hand, one mind] | Stage 3, §3.1 |
 
 ## Stage 1 — SAVED (the quoted inputs, the quotation check, C0 per claim)
 
@@ -207,4 +208,77 @@ tower. C-0 (Stage 1) puts the three fields inside MR's proved scope. Outside typ
 
 - None. Nothing in C-1 is a finite object; the one tempting move (sample `U`-averages of a candidate patchwork colouring numerically, to see
   whether mass moves onto Pull) would be a search for a counterexample shape and was not made; §2.4's reading is stated as a reading.
+
+## Stage 3 — SAVED (C-2, C-3, C-4)
+
+### 3.1 C-2 — GAP at TR-ROT (one direction TRUE; TRUE with rigid-motion transience)
+
+C-2: "Given MR, at those fields: `F(R) ≠ 0` (row 88) iff Q-tr (no four-colouring is transient)."
+- **⟹ TRUE, needs no MR.** `F(R) ≠ 0` gives `X₄ = Pull` (row 88's frame; R88-TA (iv)), and a transient colouring is by definition outside Pull.
+- **⟸ GAP at TR-ROT.** R88-TA (iv) needs Q-μ beside Q-tr. Given MR, Q-μ ⟺ TR-ROT (X22D-RT), so ⟸ holds given TR-ROT and not otherwise
+  by any argument I have: a colouring `c ∈ X′` that is not transient carries a translation-invariant `μ` with `μ(Pull) = 0` on its orbit
+  closure, and MR constrains that `μ` only through its `U`-average, which may sit on Pull (§2.4).
+- **With transience taken over rigid motions, TRUE** (X22D-TRM below): given MR, `F(R) ≠ 0` iff no four-colouring outside Pull has all the
+  `R ⋊ U`-invariant measures on its `R ⋊ U`-orbit closure carried by Pull. *Proof:* ⟹ as above. ⟸: for `c ∈ X′`, the `R ⋊ U`-orbit closure
+  is compact and invariant under the amenable group `R ⋊ U`, and every invariant measure on it is carried by Pull (X22D-QR); so `c` is
+  rigid-motion-transient, which the hypothesis forbids; so `X′ = ∅`. ∎ This is close to a tautology once X22D-QR is known; its content is
+  X22D-QR, read as a constraint on counterexamples:
+
+> **X22D-TRM** [hand, one mind]. Given MR, **every four-colouring of a type-(B) plane outside Pull is rigid-motion-transient**: for every
+> finite window `B ⊂ R`, the rigid motions `g ∈ R ⋊ U` with `(g·c)|_B ∉ Pull|_B` have upper Banach density 0 in `R ⋊ U`.
+
+*Proof.* X22D-QR, and the clopen correspondence (R88-CL) for the countable amenable group `R ⋊ U` — its "≤" direction (Følner empirical
+measures along a sequence attaining the upper Banach density converge to an invariant measure giving the clopen set at least that mass) uses
+only amenability. ∎ (R88-CL is stated for countable abelian groups; `[BergelsonMoragues2021]` is recorded in the ledger as "the amenable form";
+I used only the ≤ half, which I re-derived as stated.) **For the poster** (J38 §3.1): a new row, conditional on MR — the counterexample is
+rigid-motion-transient; branch (M) of P8 (an invariant measure off Pull) survives only for translation-invariant, non-rotation-invariant
+measures, and there only in the rotationally transient form of X22D-RT.
+
+### 3.2 C-3 — GAP at TR-ROT (two of its three links TRUE)
+
+C-3: "Given MR, at those fields: T-B1 ⟺ row 88 ⟺ Q-tr."
+
+| link | verdict | why |
+|---|---|---|
+| T-B1 ⟹ row 88 | TRUE given MR | T-J38-2 (iii); also X22D-RT's last clause (T-B1 ⟹ TR-ROT) with Q-tr from R88-TA (vi) |
+| row 88 ⟹ T-B1 | TRUE, no MR | `X₄ = Pull` finite |
+| row 88 ⟹ Q-tr | TRUE, no MR | as C-2 ⟹ |
+| Q-tr ⟹ row 88 (or ⟹ T-B1) | **GAP at TR-ROT** | as C-2 ⟸ |
+
+So C-3 as stated is GAP; "T-B1 ⟺ row 88" was already T-J38-2 (iii). With Q-tr read over rigid motions, C-3 is TRUE (X22D-TRM). Unconditionally,
+T-B1 ⟹ Q-tr ⟹ T-B2 (R88-TA1) is unchanged.
+
+**The advisor's F3, scored.** "Only the conditional moves: 'row 88 ⟺ T-B1' becomes unconditional" — the equivalence becomes unconditional at
+MR's grade, TRUE. "Transience is outside the reach of the invariant-measure tools" — TRUE for R-transience (C-4 below). What F3 did not say:
+the rotation-invariant half of Q-μ also moves (X22D-QR), which turns every counterexample into a rigid-motion-transient colouring
+(X22D-TRM), and leaves Q-μ as TR-ROT, a transience statement about measures.
+
+### 3.3 C-4 — GAP (capped at 20 minutes; 06:50–07:05)
+
+C-4: "Over ℚ(√59), no four-colouring of the plane is transient."
+
+**Verdict: GAP**, at one step, **C4-S**: *"a transient colouring supplies a finite measure on `R̂` (or on `X₄`) that is invariant under the
+multipliers and charges something off Pull's spectrum."* It does not, by definition, and each of the three named methods needs one:
+
+| method (X12B §2.1–§2.2, X01D's EF_F⁺) | what it consumes | what a transient `c` supplies |
+|---|---|---|
+| Lemma Z (X12B-Z, "wandering shells") | a **finite** `U`-invariant measure: the push-forward of `ν` along the equivariant `ord_w` is a finite measure on `ℤ ∪ {∞}` invariant under `k ↦ k + h`, hence null on `ℤ` | nothing off Pull: every invariant measure on the orbit closure is carried by Pull (R88-TA (v)), whose spectrum is the finite torsion set dual to `R/(R ∩ 𝔓⁴)` |
+| EF's pigeonhole against the rational multipliers `U_ℚ(X)` (X12B-EF step 3) | `μ(qB) = μ(B)` for Bowen balls `B` of measure `≥ e^{−nβ}`, i.e. an invariant measure with zero entropy and positive mass on small balls | the same: the only invariant measures are Pull's |
+| Lemma 3.1′ (zero dimension at `P⁺`, Shannon–McMillan–Breiman) | entropy of an invariant measure | the same |
+
+The defect set of a transient colouring against the pullbacks has upper Banach density 0 (R88-TA (v)), so any averaging procedure along
+translations or rigid motions (X22D-TRM, under MR) returns Pull; conditioning on the defects gives measures that are invariant under nothing
+(the defect set has no Følner structure), so the multiplier pigeonhole has no measure to act on. A transfer would need a **closed-set**
+analogue of EF's step — a statement about the orbit closure of `c` as a set, not about its invariant measures — in the way rows 95 and 98 are
+closed-set rigidity for characters. None of the three methods is of that kind, and the orbit closure of a transient `c` is not a subset of
+`R̂`, so Berend-type closed-set rigidity (rows 95, 98) does not apply to it either. This confirms R88-B2-3 ("invisible to every invariant
+measure, and no measure argument … can reach it") for the three new measure tools, and F3's second clause.
+
+*No FALSE:* a counterexample to C-4 is a transient colouring, which answers row 88 "no" (R88-TA2) — not available.
+
+### 3.4 Would have searched here (Stage 3)
+
+- C-4: I would have built finite patches of three-phase pullback patchworks along split-place regions and checked properness by machine, to
+  see whether a transient colouring's window statistics can be realised. Not done (a search for a counterexample shape); the step is named
+  instead.
 
