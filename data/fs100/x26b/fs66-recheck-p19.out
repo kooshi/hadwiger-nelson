@@ -1,0 +1,61 @@
+certificate sha256 055f031d1e69b31835c2483d1eb2eab5b67172ff5dd7efd40bda70856d05beef  (data/fs66/b1/cert-p19.json)
+checker     sha256 735b926798ffac14998f0e3eb77c726001200f4c91230463b7c7ae55f1f5337e  (this file)
+format fs66-b1-cert-v2, p = 19 (prime, = 3 mod 4), n = p^2 = 361 points
+scale = 100000000000000000000000000000000, U_num = 7751174208860938222570365201256712
+note: "spec" and "producer" are provenance, not checked
+step 1/7: parsed 37 weight vectors of 362 integers, 38 blocks, 53545 rows; every number a JSON integer
+step 2/7: signs: scale > 0; all 53545 row multipliers >= 0
+step 3/7: rebuilt from p alone: 361 points, unit circle S of 20 points, 40 linear maps, each a bijection with h(x+s) - h(x) in S on all 288800 (point, unit vector) pairs
+step 4/7: rows: every point index in [0, 361); largest box-product degree 4 (<= 4)
+step 5/7: positive definiteness of 38 blocks (sizes 2..183) by fraction-free (Bareiss) elimination: every leading principal minor positive
+  products a * tau_t(a'): 182 x 182 representative pairs x 361 shifts = 11957764 canonical forms
+    representative 30/182 ... [89.8 s]
+    representative 60/182 ... [129.4 s]
+    representative 90/182 ... [142.1 s]
+    representative 120/182 ... [148.9 s]
+    representative 150/182 ... [155.8 s]
+    representative 180/182 ... [163.1 s]
+  products table built: 52368 canonical monomials so far [163.5 s]
+  block 1/38: times 1, 1 weight vector(s), 183 x 183; 52370 new canonical monomials [1.4 s]
+  block 2/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 3/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.4 s]
+  block 4/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 5/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 6/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 7/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 8/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 9/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 10/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 11/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 12/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 13/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 14/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 15/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 16/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 17/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 18/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 19/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 20/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 21/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 22/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 23/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 24/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 25/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 26/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 27/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 28/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 29/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 30/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.1 s]
+  block 31/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 32/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 33/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 34/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 35/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 36/38: times 1, 2 weight vector(s), 183 x 183; 0 new canonical monomials [3.2 s]
+  block 37/38: times q, 2 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+  block 38/38: times q, 1 weight vector(s), 2 x 2; 0 new canonical monomials [0.1 s]
+step 6/7: identity (*) holds on 52370 canonical monomials (38 blocks, 53545 rows), coefficient by coefficient in exact integers
+step 7/7: no --m given, so no colour count is asked of the bound
+CERTIFIED: every phi in [0,1]^361 with q(phi) >= 0 has sum(phi) <= U = 77.511742… (exactly U_num/scale of the file, sha256 055f031d1e69…). Standard-library checker, NOT the Lean kernel.
+519.13 s 3176216 KB
+p=19 exit=0

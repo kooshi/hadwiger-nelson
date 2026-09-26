@@ -110,7 +110,7 @@ places" and the X23V-named case "dyadic inert over a ramified base" (nothing in 
 | `Γ₃` | 4 | −2 | −1/2 | 1/3 | 3 | `≥ 1/3` | `L ≤ 3`, class fails ✓ |
 | `Γ₇` | 8 | −4.4940 | −0.56174 | 0.35969 | 4 | `≥ 2/7` | `L ≤ 4`, class fails ✓ |
 | `Γ₁₁` | 12 | −4.7958 | −0.39965 | 0.28553 | 5 | `≤ 28.204320/121 = 0.23309` (FS-66 cert, **re-run CERTIFIED here**) | `< 1/4` ✓ |
-| `Γ₁₉` | 20 | −7.6097 | −0.38049 | 0.27562 | 5 | `≤ 77.511742/361 = 0.21471` (FS-66 cert) | `< 1/4` ✓ |
+| `Γ₁₉` | 20 | −7.6097 | −0.38049 | 0.27562 | 5 | `≤ 77.511742/361 = 0.21471` (FS-66 cert, **re-run CERTIFIED here**) | `< 1/4` ✓ |
 | `Γ₂₃` | 24 | −7.9607 | −0.33170 | 0.249077 | ≥ 6 | `≤ h` | `< 1/4` (margin `9.2·10⁻⁴`) ✓ |
 | **`Γ₂₇`** | 28 | **−8 exactly** | −2/7 | **2/9** | ≥ 6 | `≤ 2/9` | `< 1/4` ✓ — **the named risk `q = 27` closes by Hoffman; no certificate needed** |
 | `Γ₃₁` | 32 | −10.66651 | −0.3333285 | 0.2499973 | ≥ 5 | `≤ h` | `< 1/4` (margin `2.745·10⁻⁶`) ✓ |
@@ -225,7 +225,7 @@ MR give `χ ≥ 5`; so `χ(F²) ≥ min(L(F), 5)` given MR, and with X26B-EXC th
 
 ### 3.7 Slips
 
-- The FS-66 checker re-run at 19 (`~1 GB`, about ten minutes) was launched without `scripts/slot.py` (standing rule 8 asks for it above two
-  minutes); caught at 06:58 by `ps`, left to finish (single thread, small memory).
+- The FS-66 checker re-run at 19 (peak 3.2 GB, 519 s; it finished CERTIFIED, `U = 77.511742…`) was launched without `scripts/slot.py`
+  (standing rule 8 asks for it above 2 GiB or two minutes); caught at 06:58 by `ps`, left to finish (one thread; the machine had room).
 - `tools/x26b_uq_colour.py`'s first plant (a multiplicative translate `g·μ`) could not fire — the count over all `a` is invariant under
   `a ↦ ag` (G21); replaced by an added connection element, which fires (11 → 6 at `Q = 32`).
