@@ -254,3 +254,31 @@ classical); J55 (front page for both closes) running.** Owner rulings: LEDGER ro
 rows are the precedent); a claim-list line for the winding form with the gate's caveat; `scripts/vacuity.sh` not seeing `Winding`-typed
 binders is logged for a later tools job. **Held for Kooshi (defaults hold):** FS-75's next milestone, the family theorem (row 82) — default
 nothing opens; the consumer on the two other V2-format certificates — default nothing runs.
+
+## 8. State at ~01:45, 2026-09-26 — READ THIS FIRST (supersedes §7)
+
+**Both overnight milestones are closed; nothing is running.** `CLAUDE.md` 287,087 bytes (budget 300,000); every gate green, re-run by the
+owner: fact audit `--base fd285b33` PASS, `--dupes` 7, fs71 `--strict` PASS (736 § B rows), bib PASS, architecture PASS, vacuity OK (counts
+match in the baseline header and `CLAUDE.md`, after 2071cfdf fixed the baseline comment), axioms OK (1193 clean, 11 axiom-free, 5 purchases).
+
+**FS-100's in-ban round** (plan `plans/FS100-three-field-lemma.md`, §R-close first; `plans/FS100-derivation.md`; LEDGER rows 116–118):
+MR not landed (never expected in-ban) — Einsiedler–Lindenstrauss's positive-entropy theorem is in print but its irreducibility hypothesis
+fails for every finitely generated subgroup of U, so MR is its zero-entropy half plus one owed lemma (PE-lim). Kronecker selection **refuted
+as stated** by two minds (a counterexample over ℚ); its corrected form (selection onto E) open at a named density step; rank one true; SP-Cor
+transfers to ℚ(√143), ℚ(√311), ℚ(√335) (one mind + a one-step check); T-C(A)'s class for real quadratic fields is exactly the `L ≥ 5`
+family. Stage 4 re-aimed in the stub (the E-form at ℚ(√47) leads; stage 6 the fallback).
+
+**FS-75's minimal instance** (plan `plans/FS75-kernel-167.md` §R-close; `plans/FS75-derivation.md`; LEDGER row 119): `χ(ℚ(√167)²) ≥ 4` in
+the kernel with no finite graph (`four_le_chromaticNumber_planeOver_sqrt167`), a reusable three-colour criterion in winding form and a
+certificate consumer; "Paid (kernel)", not new mathematics; 45 minutes against 4.5 hours planned.
+
+**Held for Kooshi (defaults hold if he says nothing):**
+1. What runs next — candidates: FS-100's next slot (the E-form at ℚ(√47), with its reading: Lindenstrauss–Wang 2012, EL2021 §§2–9,
+   Bekka–Francini 2022); FS-75's family theorem (row 82) in the kernel; the post-ban queue from 2026-10-01 (queue §8). Default: nothing opens.
+2. The kernel consumer on the two other V2-format certificates (ℚ(√11); the 60-vector control). Default: nothing runs.
+3. Tag ℚ(√143), ℚ(√311), ℚ(√335) with row 117 on the Local–Global Map. Default: waits for his first look at the map.
+4. Owed, small, no decision: `scripts/vacuity.sh` does not recognise `Winding`-typed binders (a tools job); FS-46's stub could note that
+   ThreeColour's vocabulary is in the kernel; the clerk fold of reports J48, J49, J25, J43, J50, J05 into the crunch inventories.
+
+**Owner slips tonight** (each logged in its inventory): the budget commit before its audit passed (fixed in minutes); a commit subject that
+named a counterexample while the derivation job could read `git log` (its prior, 0.80 FALSE, predates it; graded accordingly).
