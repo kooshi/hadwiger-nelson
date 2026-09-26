@@ -1,0 +1,5 @@
+C1 |S| = 8, F_3-span dimension 4: PASS
+C2 spectrum {-4: 16, -1: 32, 2: 24, 5: 8, 8: 1}; lambda_min = -4: PASS
+C3 colouring nonzero on S (edges proper): FAIL, zero at [((0, 0), (1, 0)), ((0, 0), (2, 0)), ((0, 1), (0, 1)), ((0, 1), (0, 2)), ((0, 2), (0, 1)), ((0, 2), (0, 2))]
+C4 gap-free: PASS
+SOME CHECK FAILED
