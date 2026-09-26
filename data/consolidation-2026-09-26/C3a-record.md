@@ -133,3 +133,18 @@ half from §3 to §2) were not made: other files cite "§3" for both.
 
 Gates after stage 4: fact audit `--base 9b3ec6ab` PASS (no ALLOW added this stage); `--dupes` 10; ledger-§B strict PASS; bib PASS;
 architecture PASS. Bytes: `CLAUDE.md` 298,719, `LEDGER.md` 404,741, `CLOSED-QUESTIONS.md` 57,564.
+
+**Correction to stage 4's byte count:** `LEDGER.md` was 404,681 at the stage-4 commit, not 404,741.
+
+## Stage 4b — SAVED
+
+Two late items.
+
+| file | location | old | new | justified by |
+|---|---|---|---|---|
+| `CLAUDE.md` | § Grokkings, "The theory in one paragraph", last sentence | ends "…or the first digit at 83 (FS-40)." — the paragraph did not carry the main clause through five | adds "Through five the residue reading is exact: χ(F²) = L(F) whenever L(F) ≤ 5, over every real number field (row 123, [hand], through MR) — the lower half by measure rigidity for the unit-vector group (G80), with no forcer." | rows 120, 123; G80 |
+| `LEDGER.md` | rows 92, 125 | Croft's `m₁` bound cited without a key; row 125 "Croft's bound (no `BIBLIOGRAPHY.md` row yet)" | `[Croft1967]` added at both (row 125: "Croft's bound (`[Croft1967]`)") | the owner's message relaying C2's audit; C2's `BIBLIOGRAPHY.md` rows |
+| `LEDGER.md` | row 120, prior art | "Sataev 1975 first, unread"; "Johnson's nonlacunary theorem (1992, review only)" | "Sataev 1975 first, `[Sataev1975]`, unread"; "Johnson's nonlacunary theorem (1992, `[JohnsonA1992]`, review only)" (the year kept: the fact audit guards it) | the same |
+
+Gates after stage 4b: fact audit `--base 9b3ec6ab` PASS; `--dupes` 10; ledger-§B strict PASS; bib PASS; architecture PASS. Bytes:
+`CLAUDE.md` 298,945 (1,055 under the budget), `LEDGER.md` 404,730, `CLOSED-QUESTIONS.md` 57,564.

@@ -362,7 +362,9 @@ forced pairs are single vertices, virtual edges unit edges — and a residue pla
 Hoffman-tight or pulls back from a tight quotient (row 87), which at five colours no sealing plane does (G54; at 2 with four colours the plane is tight and the
 tower forces from level 5, row 67). So a 6-forcer's every compulsion lives in a 6-open field (G48), where the
 residue method is silent; what it can still name is a 5-colourable, 5-tight
-quotient of such a plane (FS-42), or the first digit at 83 (FS-40).
+quotient of such a plane (FS-42), or the first digit at 83 (FS-40). Through five the residue reading is exact: χ(F²) = L(F)
+whenever L(F) ≤ 5, over every real number field (row 123, [hand], through MR) — the lower half by measure rigidity for the
+unit-vector group (G80), with no forcer.
 
 * **G1 — The field wall. [kernel]** The Moser twist is a seam-group word (ρσ² = −1), the seam group's
   countable closures are exactly 4-chromatic, and all of K² is 4-chromatic (Theorem B). A 5-forcer's
