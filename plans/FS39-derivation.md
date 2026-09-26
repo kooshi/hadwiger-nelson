@@ -31,9 +31,10 @@ audit; it is already correct). **Ours:** the valuation-theoretic proof route (`n
 `colorable_unitDistance_induce_of_valuationSubring`, a different technique from Fischer's polynomial-clearing argument),
 the naming of the consequence (`χ(ℚ(π)²) = 2` etc.), and the identification of the gap in his Remark 1 (below). zbMATH:
 not re-queried here — the attribution was already found and verified at FS-61's own gate (2026-09-19), and re-running the
-same search would duplicate that work rather than add to it. *Kernel:* **stub** (FS-39 phase B′,
-`chromaticNumber_planeOver_adjoin_transcendental_eq` — priced at half a day, the two valuation lemmas already exist; not
-yet built).
+same search would duplicate that work rather than add to it. *Kernel:* kernel (M2, 2026-09-25; `plans/M2-derivation.md` §I.9, §I.3):
+`HadwigerNelson.RouteC.chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero`, `chromaticNumber_unitQuadrance_ratFunc`,
+`chromaticNumber_planeOver_adjoin_transcendental_eq` (`Proofs/HadwigerNelson/Transcendental.lean`) — in full at `d = 2`, stronger than
+this theorem's own statement (any `F` with `−1` a non-square, not only formally real `F ⊆ ℝ`).
 
 ## Readings and measurements that were called theorems
 
