@@ -81,3 +81,146 @@ Rudolph 1990 not read (cited by EF; not needed below). **Bibliography:** no `BIB
 ### 1.5 Would-have-searched-here log
 
 - (none at stage 1)
+
+## Stage 2 — SAVED (the derivations, controls first)
+
+Conventions. `F ⊆ ℝ` of degree `d`, `L = F(i)` of degree `2d`, conjugation `x ↦ x̄` of `L/F`. For `u ∈ U`: `u ū = 1`, so `u⁻¹ = ū ∈ U ⊂ R`
+and `U ⊂ R^×`. At a conjugation-stable prime `𝔓 = 𝔓̄`, `v_𝔓(u) = v_𝔓(ū) = −v_𝔓(u)`, so `u` is a unit there; at a split pair `𝔓 ≠ 𝔓̄`,
+`|u|_{𝔓̄} = |u|_𝔓⁻¹`. At an archimedean place `w` of `L` over a **real** place of `F`, conjugation is complex conjugation, so `|u|_w = 1`; over a
+**complex** place `v` of `F` there are two places `w, w′` of `L`, swapped by conjugation, and `|u|_{w′} = |u|_w⁻¹` (normalised values).
+Structure of `R̂` (used below only through these facts): with `S` any finite set of split places containing `supp(u)`, the ring `R_S` of
+elements integral outside `S` is `u`-stable, `R = ⋃_S R_S`, so `R̂ = lim← R̂_S` with `u`-equivariant factor maps; `R̂_S` is the `S`-adic
+solenoid `(L_∞ × ∏_{w∈S} L_w)/R_S` (trace-form duality).
+
+### 2.1 Control EF-X — TRUE [hand]
+
+**Construction.** `F = ℚ`, `L = ℚ(i)`, `L_∞ = ℂ`. For `a ∈ ℂ` let `χ_a(x) = exp(2πi Re(a x))` on `R`; then `(u·χ_a)(x) = χ_a(ux) = χ_{au}(x)`.
+Fix `r > 0`, let `λ_r` be normalised arc length on `C_r = {|a| = r}` and `μ = (a ↦ χ_a)_* λ_r`.
+1. *Injective.* `χ_a = χ_b` ⟹ `Re((a − b)x) ∈ ℤ` for all `x ∈ R`. Now `1/5 ∈ R` (`(3+4i)/5 + (3−4i)/5 − 1 = 1/5`, both fractions in `U`),
+   so `5^{−n}, i·5^{−n} ∈ R` for all `n`, giving `Re(a − b), Im(a − b) ∈ ⋂_n 5^n ℤ = {0}`. So `a ↦ χ_a` is a continuous injection of the
+   compact `C_r`, a homeomorphism onto its image, and `(R̂, μ, U) ≅ (C_r, λ_r, rotations by u ∈ U ⊂ S¹)`.
+2. *Invariant, ergodic.* Rotations preserve `λ_r`; `u₀ = (3+4i)/5 ∈ U` is not a root of unity (the roots of unity of `ℚ(i)` are `±1, ±i`), so
+   rotation by `u₀` is ergodic for `λ_r`, a fortiori `U` is.
+3. *Entropy.* Every `u` acts as an isometry of `C_r`: `h_μ(u) = 0` for every `u ∈ U`.
+4. *Not finitely supported:* `λ_r` is atomless and the map is injective. *Carried by `A`* (the characters `x ↦ exp(2πi λ(x))`, `λ` ℚ-linear
+   `L → ℝ`), so `μ(E) = 1`: consistent with EF_F, and the conclusion cannot be finite support. ∎
+
+**What a wrong-reason pass would look like (G21).** (i) `r = 0`: `δ_0`, finitely supported — the claim fails there, so `r > 0` is load-bearing.
+(ii) Not checking injectivity: over a ring where `a ↦ χ_a` had a large kernel the image could be finite. (iii) A field where `U` acted on
+the circle through a finite group (no such real field: `U` is always infinite). (iv) Using a character off `A`: its orbit closure is not a
+circle and the "measure" is not defined. None applies. **Every real `F`** has the same example (a circle of archimedean characters at one
+complex place of `L` over a real place of `F`: `SP-if`'s `λ` in `plans/FS84-SI-D-derivation.md` §4.2 is this measure).
+
+### 2.2 Control EF-G — (a) FALSE as stated (TRUE for totally real `F`); (b) TRUE for totally real `F`, degenerate otherwise
+
+**(a), the formula.** `h_m(u) = Σ_{w ∈ supp(u) ∪ ∞} log max(1, |u|_w)` over places of `L` (normalised). Proof: `h_m(u) = sup_S h(R̂_S, u)`
+(entropy of Haar measure on an inverse limit of equivariant factors whose σ-algebras increase to the full one), and
+`h(R̂_S, u) = Σ_{w ∈ S ∪ ∞} log max(1, |u|_w)` (Lind–Ward's formula for `S`-adic solenoids: the log-modulus of the expanding part at each place;
+the archimedean places always contribute, as on the torus `ℤⁿ`); the terms for `w ∈ S ∖ supp(u)` vanish. [hand; the two inputs are standard:
+Lind–Ward 1988 (ETDS 8), and the inverse-limit continuity of entropy]
+- **Totally real `F`:** every archimedean `|u|_w = 1`, and `u` is a unit at every stable prime, so `h_m(u) = Σ_{w finite} log max(1,|u|_w) = log H(u)`.
+  **TRUE.**
+- **`F` with a complex place: FALSE.** Counterexample: `F = ℚ(∛2)`, `u = (1 + ∛2·i)/(1 − ∛2·i)`. Exact (`tools/x01v_entropy_check.py`,
+  output `data/fs100/x01v/entropy-check.out`): `u ū = 1`; minimal polynomial `5x⁶ + 18x⁵ + 75x⁴ + 60x³ + 75x² + 18x + 5`, so `u` has degree
+  6 = `[L:ℚ]`, `log H(u) = log 5`; the trace polynomial `5t³ + 18t² + 60t + 24` has exactly **1** real root in `[−2, 2]` (Sturm, exact), so
+  two conjugates of `u` are off the unit circle (moduli 3.431099 and 0.291452, 60-digit numerics), and
+  `h_m(u) = log 5 + 2.465761… > log H(u)`. (The two roots of modulus 1 are the complex place over `F`'s real place, as predicted.)
+  Control: `F = ℚ(√2)`, `u = (1+√2 i)/(1−√2 i)`, minimal polynomial `3x² + 2x + 3`, trace polynomial `3t + 2`, root in `[−2, 2]`: on the circle,
+  `h_m(u) = log H(u) = log 3`. Plants: P1 (a `u` of norm ≠ 1) fired the membership assertion; P2 (the two expectations swapped) fired both
+  on-circle assertions. **Tool defect found by its own run:** the first version tested non-reciprocity as the certificate of a root off the
+  circle; `u⁻¹ = ū` is a conjugate of `u`, so the minimal polynomial is always reciprocal and the test could never fire; the counterexample
+  run went red for that reason, and the test was replaced by the trace-polynomial Sturm count before any verdict was drawn.
+- **What a wrong-reason pass looks like:** checking (a) only over ℚ or ℚ(√47) (both totally real) and passing it "for every real number field".
+
+**(b).** *Totally real `F`:* `U ∩ O_L^×` is torsion (every archimedean `|u|_w = 1`, Kronecker), so `u` is determined up to finite torsion by its
+divisor `Σ n_𝔭(𝔓 − 𝔓̄)` and `U_N` is finite. For a prime `𝔓` of `L` above a rational prime `p` that splits completely in the Galois closure `M`
+of `L/ℚ`, `𝔓 ≠ 𝔓̄` and, with `h = h_L`, `𝔓^h = (z)`, `u_𝔓 = z/z̄ ∈ U` has `H(u_𝔓) = N𝔓^h = p^h`. Distinct `𝔓` give distinct `u_𝔓`, so
+`#U_N ≥ #{p ≤ N^{1/h} : p splits completely in M} ≫ N^{1/h}/log N` (Chebotarev), and `liminf log #U_N / log N ≥ 1/h_L > 0`. **TRUE** [hand].
+*`F` with a complex place:* the relative units `U ∩ O_L^×` have rank `r₂(F) ≥ 1` (Dirichlet: `r₁ + 2r₂ − 1` for `L` against `r₁ + r₂ − 1` for `F`)
+and `H = 1` on them, so `#U_N = ∞` for every `N ≥ 1`: (b) holds only in the extended reals. The same units expand archimedean places: `H` is
+the wrong height there, and the right one is `exp h_m(u) = ∏_{all w} max(1, |u|_w)`.
+
+**Bearing on route (A):** ℚ(√47), the type-(B) fields and ℚ(√167) are totally real, so (a)'s failure does not touch the three fields; it
+does make "for every real number field" wrong in (a), and it flags that any EF-style argument over a non-totally-real `F` must count by the
+full height.
+
+### 2.3 EF_F — GAP (at EF's Lemma 3.2, the multiplier step; with Lemma 3.1's analogue weaker than the paper's)
+
+EF's proof, lemma by lemma, with the two changes the brief names: **(Δ1)** each `u ∈ U` expands only its own split places
+(`{w : |u|_w > 1}`, one place of each split pair in `supp(u)`), contracts their conjugates, and is an isometry at every other finite place;
+**(Δ2)** for totally real `F` every `u ∈ U` is an isometry at every archimedean place (for `F` with complex places, relative units expand
+archimedean places, and `u = z/z̄` can too).
+
+- **Theorem 2.1 (Shannon–McMillan–Breiman).** Holds verbatim for `(R̂, μ, u)`: `R̂` is compact metrisable (`R` countable), so the Borel
+  σ-algebra is countably generated. *No change.*
+- **Theorem 2.2 (Johnson), the positive-entropy half.** Not used by EF_F's zero-entropy argument; its role is PE-2's (list X02) and, in finite
+  rank, EL2021 Thm 1.2: "Let α be a totally irreducible, not virtually-cyclic Zd action by automorphisms of a solenoid X. Let µ be an
+  α-invariant and ergodic probability measure. Then either µ = mX is the Haar measure of X, or the entropy hµ(αn) = 0 vanishes for all n ∈ Zd."
+  (`~/source/library/pdf/EinsiedlerLindenstrauss2022-rigidity-commuting-automorphisms-tori-solenoids.pdf`, p. 2; read: §1's theorem
+  statements only.) *See the entropy-transfer remark below: EF_F contains this half.*
+- **Lemma 3.1 (zero entropy ⟹ zero dimension).** In EF the refined partition `⋁_{i<n} T_p^{−i} ξ` consists of intervals of length `p^{−n}`,
+  because `T_p` expands the only direction. Here, by (Δ1)–(Δ2), the atoms of `⋁_{i<n} u^{−i} ξ` (even two-sided, using `h_μ(u⁻¹) = 0`) shrink
+  only in the directions `L_w`, `w ∈ supp(u)`; in the archimedean directions and at every other split place they keep the partition's fixed
+  scale `ε`. So SMB yields only: for `β, ε > 0` there are `δ₀` and `X′`, `μ(X′) > 1 − ε`, with `μ(N_{ε,δ}(x)) > δ^β` for `δ ≤ δ₀`, where
+  `N_{ε,δ}(x)` is **`δ`-thin at the places of `supp(u)` and `ε`-fat everywhere else** — leafwise dimension zero along `u`'s unstable
+  subgroup (Einsiedler–Lindenstrauss's leafwise measures), not `μ(B_δ(x)) > δ^β` for a ball. *Changes: the conclusion, fundamentally.*
+- **Lemma 3.2 (zero dimension + many multipliers ⟹ finite support).** Its steps, verbatim where quoted:
+  1. "every image interval Aq = qBδ(x) has µ-measure at least δβ" — survives (`μ(u′N) = μ(N)`, `u′` an automorphism).
+  2. The images are small: "|q1 (i1 − x) − q2 (i2 − x)| ≤ 2δM". **Fails.** For `u′ ∈ U_M`, `u′N_{ε,δ}(x)` stays thin at `supp(u)` (expanded by
+     at most `M`), but at each place `w ∈ supp(u′) ∖ supp(u)` with `|u′|_w > 1` the neighbourhood was fat and `u′` expands it by `|u′|_w`;
+     at the archimedean places it stays `ε`-fat. The multipliers that keep `N_{ε,δ}` thin wherever it is thin and do not expand where it is
+     fat are those with `supp(u′) ⊆ supp(u)`: the group `U_{supp(u)}`, of rank `k` = number of split pairs in `supp(u)`, with
+     `#{u′ ∈ U_{supp(u)} : H(u′) ≤ M} ≍ (log M)^k` — **lacunary**; (1.1) fails for it, whatever EF-G (b) says about `U`.
+  3. The pigeonhole "M^{α/2} δ^β = M^{α/4} > 1" therefore has only `(log M)^k · M^{−5β} → 0`: **no overlap is forced. This is the gap.**
+  4. The Diophantine step, even granted an overlap: `(u₁ − u₂)x ≈ r ∈ R` must be divided by `u₁ − u₂`, and (i) `|u₁ − u₂|_∞` can be tiny
+     (`U` is dense in the archimedean circles, so among `#U_M ≥ M^{α}` points some pair is `≪ M^{−α/d}` apart), which amplifies the
+     archimedean error, where EF has `|q₁ − q₂| ≥ 1`; (ii) at finite places outside `supp(u)` where `u₁ − u₂` has positive valuation the
+     division amplifies too. So the step needs an adelic replacement (the product formula with heights), with archimedean slack — which is
+     why the natural conclusion is `E` (torsion modulo archimedean and finitely many places), not finite support.
+  5. "X′ has only finitely many points … By ergodicity, we get that µ has a finite support" — would become "`μ(E) = 1`" by ergodicity (`E` is
+     `U`-invariant, and a countable union of the `U`-invariant `E_S`), were steps 2–4 available.
+- **Strengthening the hypothesis does not close it.** With `h_μ(u) = 0` for **every** `u` (which PE-2 reduces to), each place is thin for its
+  own `u_𝔓`, but step 2 needs one neighbourhood thin at every place some `u′ ∈ U_M` expands — all split places of norm `≤ M`, `≍ M/log M`
+  of them — with `μ > δ^β` uniformly in `M`. The only SMB source is a single element `u_M = ∏ u_𝔓` over those places, and Lemma 3.1's
+  `δ₀`, `X′` depend on the element: EF fixes `p` once and lets `M → ∞` with `δ = M^{−5} ≤ δ₀(p)`; here `δ₀(u_M)` moves with `M`. **Named
+  missing lemma (UZ):** *a uniform-in-`M` lower bound `μ(N_M(x)) > δ^β` on a set of `x` of measure `≥ 1/2`, where `N_M(x)` is `δ = M^{−5}`-thin at
+  every split place of norm `≤ M` and fat elsewhere, for `U`-ergodic `μ` with all entropies zero.* Neither EF nor SMB supplies it.
+- **Entropy transfer, and why EF_F is stronger than route (A) needs [hand].** Every `U`-ergodic `μ` with `μ(E) = 1` has `h_μ(u) = 0` for every
+  `u`: each `E_S` is `U`-invariant, so `μ(E_S) = 1` for some finite `S`; `E_S` is a countable union of cosets `t + V`, `V` the injective image
+  of `L_∞ × L_S`, which `U` permutes, so `μ` sits on finitely many cosets, a finite-index `U′ ⊆ U` fixing each; on `t + V` each `u ∈ U′` acts
+  affinely, and an invariant probability under an affine map expanding `L_w` (some `u_𝔓^j ∈ U′` does, for each `w ∈ S`) has a point
+  marginal at `w` (dilation: the annuli about the fixed point have equal mass); so `μ` lives on finitely many translates of `A`'s isometric
+  part, where every `u` is an isometry: zero entropy. Hence **EF_F ⟹ "`h_μ(u₀) = 0` for one non-torsion `u₀` ⟹ `h_μ(u) = 0` for all `u`"**, a
+  positive-entropy rigidity statement (EL2021 Thm 1.2's dichotomy, for the infinite-rank action) that EF's Lemma 3.2 gets on 𝕋 only because
+  every `T_q` expands the one direction. EF-MR needs only the zero-entropy half, **EF_F⁰:** "every `U`-invariant, `U`-ergodic probability
+  measure `μ` on `R̂` with `h_μ(u) = 0` for every `u ∈ U` satisfies `μ(E) = 1`"; and PE-2 ∧ EF_F⁰ ⟹ EF_F (an ergodic `μ` is `m` or `τ′`, and
+  `h_m(u₀) > 0` for non-torsion `u₀`: some place has `|u₀|_w > 1`, else Kronecker makes `u₀` torsion).
+- **No counterexample.** A counterexample to EF_F, given PE-2, is a `U`-ergodic zero-entropy measure off `E` — the zero-entropy
+  Furstenberg-type question for this action, which nothing here decides; without PE-2 it is a measure with `h(u₀) = 0 < h(u₁)`, i.e. a failure
+  of PE-2 itself. Measures along cosets of `A` are no counterexample: a `U`-invariant coset `t + A` has `(u − 1)t ∈ A` for every `u`, which
+  forces `t`'s finite adelic part into `L`, so `t + A ⊆ T + A ⊆ E`.
+
+**Verdict: GAP**, at EF Lemma 3.2's multiplier step (item 2–3): the multipliers that preserve the thin neighbourhood Lemma 3.1's analogue
+produces form a group of polynomial-in-`log M` growth, so EF's growth hypothesis (EF-G (b), true for `U`) is the wrong one; closing it needs
+UZ, and the statement as posed also contains a positive-entropy entropy-transfer statement that EF's route cannot supply (use EF_F⁰).
+
+### 2.4 EF-MR — TRUE, as a conditional (with one input to name for "= 5")
+
+**Part 1: PE-2 ∧ EF_F ⟹ MR(F)** [hand]. Let `τ` be `U`-invariant, finite, positive, `τ(E) = 0`. PE-2: `τ = a·m + τ′`, `h_{τ′}(u) = 0` for every
+`u`. Suppose `τ′ ≠ 0`; normalise. `U` is countable and `R̂` compact metrisable, so `τ′ = ∫ μ_ξ dP(ξ)` into `U`-ergodic probabilities. Entropy
+is affine over any decomposition into `u`-invariant measures (decompose each `μ_ξ` into `u`-ergodic parts; by uniqueness this is `τ′`'s
+`u`-ergodic decomposition, and Jacobs' formula applies), so `h_{μ_ξ}(u) = 0` for `P`-a.e. `ξ`, for all `u` at once (`U` countable). `U` has a
+non-torsion element (its torsion is the finite group of roots of unity of `L` of norm one; `U` is infinite). EF_F (indeed EF_F⁰) gives
+`μ_ξ(E) = 1` a.e., so `τ′(E) = τ′(R̂) > 0`; `E` is Borel (a countable union over finite `S` and over the countable `T` of σ-compact images of
+`L_∞ × L_S`). Then `τ(E) ≥ τ′(E) > 0`, a contradiction. So `τ = a·m`. ∎
+**Part 2, over ℚ(√47).** SP-Cor (`plans/FS84-SI-D-derivation.md` §4.2, verbatim in 1.2) has MR(ℚ(√47)) word for word as its hypothesis and
+concludes `χ(ℚ(√47)²) ≥ 5`, given T-C(A) at `S = ∅`. **`= 5` needs one more input the claim does not name:** `χ(ℚ(√47)²) ≤ 5`, the plane at
+11 (Theorem A; `LEDGER.md` row 84's "proven `4 ≤ χ ≤ 5`"). With it, TRUE. ∎
+**Wrong-reason pass to watch for:** reading PE-2's `τ′` as ergodic (it is not), or using EF_F on `τ′` directly; both avoided above.
+
+### 2.5 Would-have-searched-here log
+
+- EF-G (a): would have searched fields for a `u` with `h_m(u) ≠ log H(u)`; instead derived where the archimedean term lives (complex places of
+  `F`) and wrote down one element by hand, then checked it exactly (one field, one element, seconds).
+- EF_F: would have searched for a zero-entropy non-`E` measure (e.g. random invariant measures on finite quotients); instead derived the
+  entropy-transfer content and the coset argument, and left the question as the named gap.

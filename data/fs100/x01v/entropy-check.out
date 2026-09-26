@@ -1,0 +1,16 @@
+  trace polynomial Q(t) = 3*t + 2; real roots in [-2,2] (Sturm, exact): 1 of 1
+[control Q(sqrt2)] c = sqrt(2); u*ubar = 1; u in U: True
+[control Q(sqrt2)] minimal polynomial (primitive, degree 2): 3*x**2 + 2*x + 3
+[control Q(sqrt2)] a0 = 3; per-conjugate finite part log a0 = 1.09861228867
+[control Q(sqrt2)] root moduli: [1.0, 1.0]
+[control Q(sqrt2)] reciprocal: True; all roots on the unit circle (exact): True
+[control Q(sqrt2)] archimedean part sum log max(1,|alpha|) = 0.0
+  trace polynomial Q(t) = 5*t**3 + 18*t**2 + 60*t + 24; real roots in [-2,2] (Sturm, exact): 1 of 3
+[counterexample Q(cbrt2)] c = 2**(1/3); u*ubar = 1; u in U: True
+[counterexample Q(cbrt2)] minimal polynomial (primitive, degree 6): 5*x**6 + 18*x**5 + 75*x**4 + 60*x**3 + 75*x**2 + 18*x + 5
+[counterexample Q(cbrt2)] a0 = 5; per-conjugate finite part log a0 = 1.60943791243
+[counterexample Q(cbrt2)] root moduli: [0.291451817672, 0.291451817672, 1.0, 1.0, 3.431098862201, 3.431098862201]
+[counterexample Q(cbrt2)] reciprocal: True; all roots on the unit circle (exact): False
+[counterexample Q(cbrt2)] archimedean part sum log max(1,|alpha|) = 2.46576115571904
+counterexample: largest root modulus exceeds 1 by 2.431099; h_m(u) - log H(u) = e * 2.46576115572 > 0, e = [L:Q(u)]
+GREEN
