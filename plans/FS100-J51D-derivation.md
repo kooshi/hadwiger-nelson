@@ -160,3 +160,91 @@ plant.
   check in stage 2 is an exact identity over a fixed finite set.)
 
 ## Stage 1 — SAVED
+
+*Fence received from the owner mid-stage 2 (J51V's files, the close inventory, the session handoff, `git show` of J51V commits): honoured;
+none was opened before or after.*
+
+## Stage 2 — KS-2, the controls KS-4 and KS-5, and the adversarial member (KS-1, KS-3 refuted)
+
+*Notation.* `L = F(i)`; `R = ℤ[U] = O′` (row 105, Lemma C′); `R̂ = (L_∞ × 𝔸′_split)/R*` (FS89-S1VB §B1.0 conventions, every split place);
+`T`, `A = Hom_ℚ(L, ℝ) mod 1`, `Fin_S`, `E_S = T + A + Fin_S`, `E = ⋃_S E_S` as in the stub §2. For a split place `v` of `F` with `v = w w̄`
+in `L`, identify `L_w ≅ F_v ≅ L_w̄`; `ψ_v` the standard character of `F_v` (trivial on `O_v`); `ψ_w(r) := ψ_v(ι_w(r))`, a character of `R`.
+
+### 2.1 KS-2 — TRUE, in an arithmetic-free form (J51D-T1)
+
+**J51D-T1.** *Let `K` be a compact metrizable abelian group, `C ⊆ K` closed, `H ≤ K` a closed subgroup with `C + H = C`, `q : K → K/H`. If
+`W : K → {0,1,2,3}` is measurable and, for every `s ∈ C`, `W(t) ≠ W(t + s)` for Haar-a.e. `t`, then `S(t) := {j : m_H{h : W(t + h) = j} > 0}`
+depends only on `q(t)`, is non-empty, and for every `s ∈ C`, `S(t) ∩ S(t + s) = ∅` for a.e. `t`; so any measurable `W′` with
+`W′(q(t)) ∈ S(t)` satisfies `W′(y) ≠ W′(y + s′)` for a.e. `y ∈ K/H` and every `s′ ∈ q(C)`.*
+
+*Proof.* `S` is constant on `H`-cosets (invariance of `m_H`), non-empty (the four sets cover `H`), and measurable in `t` (Fubini on
+`(t, h) ↦ W(t + h)`). Fix `s ∈ C`. For each `h ∈ H`, `s + h ∈ C`, so `{t : W(t) = W(t + s + h)}` is null; by Fubini the set
+`N = {(t, h) : W(t) = W(t + s + h)}` is `m_K × m_H`-null. The map `(t, h₁, h₂) ↦ (t + h₁, h₂ − h₁)` preserves `m_K × m_H × m_H`, so
+`{(t, h₁, h₂) : W(t + h₁) = W(t + s + h₂)}` is null; hence for a.e. `t`, `W(t + h₁) ≠ W(t + s + h₂)` for a.e. `(h₁, h₂)`. A colour in
+`S(t) ∩ S(t + s)` would give a positive-measure product set of pairs with equal colours; so `S(t) ∩ S(t + s) = ∅` a.e. Then
+`W′(q(t)) ∈ S(t)`, `W′(q(t) + q(s)) = W′(q(t + s)) ∈ S(t + s)`, and the push-forward of `m_K` is `m_{K/H}`. ∎
+
+KS-2 is the instance `K = cl Θ(R)`, `H = K₀`, `C = cl Θ(U)` (and `cl π(Θ(U)) ⊆ π(C)`, compact). **Verdict: TRUE** [hand, one mind]. J51-T3's
+sketch is confirmed; the step it left unwritten is the change of variables that turns "null for each `h`" into "the two colour sets on the
+fibres are disjoint". Nothing of `F`, `R`, `T + A` is used; the selection iterates along a chain of saturating subgroups. **Mutation:**
+drop `C + H = C` and the conclusion fails (2.4's `C`, with `H = K`).
+
+### 2.2 The conjugate-pair dichotomy (J51D-T2)
+
+**J51D-T2.** *For every real number field `F` and every split place `v = w w̄`: (a) for every `u ∈ U`, `ψ_w(u) = 0` or `ψ_w̄(u) = 0`;
+(b) no non-zero `m₁ψ_w + m₂ψ_w̄` lies in `T + A`; in particular `ψ_w, ψ_w̄` are independent.*
+
+*Proof.* (a) `u ū = 1` and conjugation exchanges `w` and `w̄`, so `ι_w̄(u) = ι_w(u)⁻¹`; if `ι_w(u) ∈ O_v` then `ψ_w(u) = 0`, otherwise
+`ι_w̄(u) ∈ 𝔭_v` and `ψ_w̄(u) = 0`. (b) Suppose `m₁ψ_w + m₂ψ_w̄ = σ + λ`, `σ` of order `N`, `λ ∈ A`, `m₁ ≠ 0`. Choose a second split place
+`w₀ ∉ {w, w̄}` (infinitely many exist). By strong approximation for `L` with `w₀` omitted there is `y ∈ L`, integral at every finite place
+but `w₀, w, w̄` (so `y ∈ R`), with `ι_w̄(y)` deep in `𝔭_v`, `y_∞` as small as wished, and `ι_w(y)` in a prescribed class with
+`ψ_v(N m₁ ι_w(y))` at distance `≥ 1/3` from 0. Then `(σ + λ)(Ny) = Nλ(y)` is small while `(m₁ψ_w + m₂ψ_w̄)(Ny)` is not. Symmetric for `m₂`. ∎
+[hand, one mind; (a) checked exactly at `F = ℚ`, `v = (2+i)(2−i)`, on all 25,492 rational unit vectors of height `≤ 20,000`
+(`tools/j51d_or_check.py`, D1; 4,256 of them non-zero in each coordinate, none in both; plant P1, the place above 13 in place of `w̄`, fires
+with 48 joint non-zeros).]
+
+### 2.3 KS-3 — FALSE
+
+**Counterexample (any real field, any split place).** `Θ = (ψ_w, ψ_w̄)`: by J51D-T2 (b) `Γ ≅ ℤ²`, `Γ ∩ (T + A) = 0`, so `K = T²` and
+`K₀ = K`; by (a), `C = cl Θ(U) ⊆ (T × {0}) ∪ ({0} × T)`, and `0 ∈ C` (`u = 1`), so `0 + K₀ = T² ⊄ C`. Over ℚ(√11) and ℚ(√47) take `v` above 5
+(split in `L/F` in both: `F_v ∋ i`). **Non-vacuous form over ℚ(√11):** `Θ = (θ_{C9}, ψ_w, ψ_w̄)` has `W = ⌊4t₁⌋` proper, `K₀ = {0} × T²`, and
+KS-sat fails on every fibre — while KS-1's conclusion holds there (`W′ = ⌊4t₁⌋`). So **KS-sat is not necessary for KS-1**; it fails
+already inside `E_{{v}}`, where it is the wrong hypothesis. [hand + tools exact, as J51D-T2]
+
+### 2.4 KS-1 — FALSE as stated (the adversarial member, J51D-T3)
+
+**J51D-T3.** *Over `F = ℚ` (`R = ℤ[i][1/p : p ≡ 1 (4)]`), with `τ` the parity character `τ(x) = (x mod (1+i))/2` (`τ(U) = {1/2}`, D1-L4) and
+`w, w̄` the places above 5: `Θ = (τ + ψ_w, τ + ψ_w̄)` and `W(t₁, t₂) = 2·[t₁ ≥ 1/2] + [t₂ ≥ 1/2]` satisfy KS-1's hypothesis, and its
+conclusion fails.* By J51D-T2, every `Θ(u)` has one coordinate exactly `1/2`, so `C ⊆ (T × {1/2}) ∪ ({1/2} × T)` and `W(t) ≠ W(t + s)` for
+**every** `t` and `s ∈ C` (a bit flips). `m₁Θ₁ + m₂Θ₂ = (m₁ + m₂)τ + m₁ψ_w + m₂ψ_w̄ ∈ T + A` iff `m = 0` (T2 (b)); so `K̂′ = 0`, `K′ = {0}`,
+`cl π(Θ(U)) = {0}`, and the conclusion asks `W′(0) ≠ W′(0)`. ∎ [hand + tools exact: `tools/j51d_or_check.py` D2–D4 — `τ(u) = 1/2` and a
+coordinate equal to `1/2` on all 25,492 unit vectors, and 4,000 sampled edges `{x, x + u}` (x a sum of ≤ 4 unit vectors, `t` random
+rational) all proper; plants P2 (wrong parity) and P1 fire; output `data/fs100/j51d/or_check.out`.]
+
+**What it is, and what it is not.** `x ↦ W(Θ(x) + t)` is a proper four-colouring of ℚ's plane for every `t`, reading the parity place and
+one split place: its spectrum lies in `Γ ⊆ E_{{5}}`, so it has a finite-place proper factor (itself). **It is not in the gap and not over
+ℚ(√11): it is not "the first control the gap has ever had"** (B5). What it refutes is the choice of `T + A` as the selection target: a
+Kronecker colouring can live on `Fin_S` coordinates. The same construction works over every real field with a character `τ`, `τ(U) = {1/2}`
+(a stable place with residue field `𝔽₂`, i.e. `χ(F²) = 2`, G56). **Over ℚ(√11) KS-1 is not decided here**; the one-place construction
+cannot reach it [reading, sketch: its fibres are an "OR" of two coordinates, which needs two coordinates each of fractional chromatic number
+2, and every `T + A` coordinate of ℚ(√11) has more (the plane has odd cycles)].
+
+### 2.5 KS-4 and KS-5 — TRUE, and uninformative
+
+- **KS-4.** `θ_{C9}` has values in `[2/7, 5/7] + (−1/28, 1/28) ⊆ [1/4, 3/4]` on `U` (the 8 points of the circle over `𝔽₇` give
+  `2x + 3y ∈ {2,3,4,5}`, `tools/j51d_or_check.py`; plant P3 fires), so `W = ⌊4t₁⌋` is proper for every `s ∈ C` and every `t` (a shift in
+  `[1/4, 3/4]` changes `⌊4t⌋` mod 4). `θ₁ ∉ E ⊇ T + A` gives `K̂′ = ℤ × 0`, `K₀ = {0} × T`, `K′ = T`, `π = ` first coordinate, `π(C) = cl θ_{C9}(U)`,
+  and `W′ = ⌊4·⌋` is proper. **TRUE** [hand + tools exact].
+- **KS-5.** `Γ = ⟨θ_{C9}, θ_{C9} + θ₁⟩` is free of rank 2; `m₁θ_{C9} + m₂(θ_{C9} + θ₁) ∈ T + A` iff `m₂θ₁ ∈ T + A` iff `m₂ = 0` (`T + A` is pure);
+  so `K̂′ = ℤ × 0`, `K₀ = {0} × T`, `π(t₁, t₂) = t₁`, `π ∘ Θ = θ_{C9}`, and `K′ = cl θ_{C9}(R)` (`= T` when the archimedean term is non-zero).
+  `W = ⌊4t₁⌋` proper as in KS-4, `W′ = ⌊4·⌋`. **TRUE** [hand].
+- **G21 (a control of the wrong shape).** Both controls pass whatever `θ₁` is — even `θ₁ ∈ E ∖ (T + A)` — because `W` already reads only the
+  `T + A` coordinate; "`θ₁ ∉ E`" is never used. Their failure outcome is unreachable, so passing tests nothing. The discriminating control is
+  one whose `W` reads the non-`T + A` coordinates: J51D-T3 is one, and it fails KS-1.
+
+### Would have searched here (stage 2)
+
+- "Search for a proper `W` on `T²` or `T³` with small fibres" — replaced by the derived dichotomy J51D-T2 and a hand-built `W`; the tool only
+  checks a derived identity on a complete finite set fixed in advance (heights `≤ 20,000`, seconds).
+
+## Stage 2 — SAVED

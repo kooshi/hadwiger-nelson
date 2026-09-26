@@ -1,0 +1,7 @@
+H=20000: {'n_units': 25492, 'psi_pi_nonzero': 4256, 'psi_2_nonzero': 4256, 'both_nonzero': 0, 'val_mismatch': 0, 'bad_parity': 0, 'bad_flip': 0, 'bad_edges': 0}
+D1-D4 (unplanted): PASS
+C9 over F_7: 8 circle points, values of 2x+3y mod 7 = [2, 3, 4, 5]: PASS
+plant P1 (13 in place of pibar): {'n_units': 3820, 'psi_pi_nonzero': 632, 'psi_2_nonzero': 276, 'both_nonzero': 48, 'val_mismatch': 0, 'bad_parity': 0, 'bad_flip': 48, 'bad_edges': 26} -> FIRED
+plant P2 (wrong parity): {'n_units': 3820, 'psi_pi_nonzero': 632, 'psi_2_nonzero': 632, 'both_nonzero': 0, 'val_mismatch': 0, 'bad_parity': 1910, 'bad_flip': 1910, 'bad_edges': 1680} -> FIRED
+plant P3 (C9 as 2x+2y): FIRED
+OVERALL: PASS
