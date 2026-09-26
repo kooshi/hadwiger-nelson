@@ -1,0 +1,31 @@
+== C1: the dyadic place (Q-0)
+PASS C1 hand rule == PARI on squarefree d < 400; no d = 7 mod 8 has a stable dyadic place
+PASS C1 control d=5: dyadic place of F in L/F is ramified (expect ramified)
+PASS C1 control d=17: dyadic place of F in L/F is ramified (expect ramified)
+PASS C1 control d=59: dyadic place of F in L/F is unramified (expect unramified)
+PASS C1 control d=47: dyadic place of F in L/F is split (expect split)
+PASS C1 control d=167: dyadic place of F in L/F is split (expect split)
+PASS C1 control d=143: dyadic place of F in L/F is split (expect split)
+== C2: the class mod 168
+PASS C2 residues = [47, 143, 167] (expect [47, 143, 167])
+== C3: stable odd places (hand rule vs PARI)
+PASS C3 d=47: stable odd p < 70 = [11, 19, 23, 31, 43, 47, 67] (PARI [11, 19, 23, 31, 43, 47, 67])
+PASS C3 d=143: stable odd p < 70 = [11, 31, 43, 47, 59, 67] (PARI [11, 31, 43, 47, 59, 67])
+PASS C3 d=167: stable odd p < 70 = [23, 43, 59, 67] (PARI [23, 43, 59, 67])
+PASS C3 d=311: stable odd p < 70 = [11, 19, 23, 31, 43, 59] (PARI [11, 19, 23, 31, 43, 59])
+PASS C3 d=335: stable odd p < 70 = [11, 23, 31, 47, 67] (PARI [11, 23, 31, 47, 67])
+PASS C3 d=23: stable odd p < 70 = [7, 11, 19, 23, 43, 67] (PARI [7, 11, 19, 23, 43, 67])
+PASS C3 d=31: stable odd p < 70 = [3, 11, 23, 31, 43] (PARI [3, 11, 23, 31, 43])
+PASS C3 d=59: stable odd p < 70 = [11, 23, 31, 43, 47, 59, 67] (PARI [11, 23, 31, 43, 47, 59, 67])
+== C4: 11 stable with residue F_11 (A-2's upper bound)
+PASS C4 d=47: F-primes above 11 stable=True, residue degree f=1
+PASS C4 d=143: F-primes above 11 stable=True, residue degree f=1
+PASS C4 d=311: F-primes above 11 stable=True, residue degree f=1
+PASS C4 d=335: F-primes above 11 stable=True, residue degree f=1
+PASS C4 control d=167: 11 is NOT stable (so L(Q(sqrt 167)) >= 6 is not contradicted)
+== C5: level-one mixing constants
+PASS C5 p=23: degree 24, max|lambda|/d = 0.3316953, -lambda_min/d = 0.3316953 (J39 table 0.331695); 2/(p+1) = 0.0833
+PASS C5 p=43: degree 44, max|lambda|/d = 0.2718689, -lambda_min/d = 0.2718689 (J39 table 0.271869); 2/(p+1) = 0.0455
+PASS C5 p=59: degree 60, max|lambda|/d = 0.2486263, -lambda_min/d = 0.2486263 (J39 table 0.248626); 2/(p+1) = 0.0333
+PASS C5 23 is 4-thick: 1/3 - 0.3316953 = 0.001638 (J48-N4 margin 1.6e-3)
+RESULT: ALL PASS
