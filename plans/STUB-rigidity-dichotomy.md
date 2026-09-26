@@ -45,3 +45,9 @@ theorems FS-71 filed that this stub consumes: MASCOT-T6–T8, FS70-T9/T10, FS38-
 
 None directly; high on the programme — it is the statement of *where a forcer can live* in a field, which every six-forcer
 question over a window field will need in the same words.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 119 (`plans/FS75-derivation.md` FS75-C, FS75-H).

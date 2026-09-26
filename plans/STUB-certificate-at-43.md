@@ -71,3 +71,9 @@ with the values read, and 43 stays "priced, not run". *Jackpot:* `U < 308.17` at
 for six loses a member, and `L(ℚ(√4703)) ≥ 7`. *Registered expectation (owner, 2026-09-21):* a first-level relaxation with the
 fibre-share inequality reads below 105.8 at 23 and below 369.8 at 43 (confidence medium — the 11 % gap at 23 says the second level is
 doing real work there); six at 43 is out of reach of any relaxation in this family (confidence high).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 125 (`plans/FS100-derivation.md` FS100-B12, FS100-B3).

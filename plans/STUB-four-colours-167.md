@@ -329,3 +329,9 @@ screen and design rule), T26–T28, T39–T45.
 - `plans/M3-S1D-windows-five.md` — job J21's record: measurable windows over ℚ(√167) at five colours
 - `data/crunch-2026-09-25/reports/J08.md`, `J11.md`, `J21.md` — the job reports
 - `plans/FS91-close-inventory.md` rows 81–85, 106–110 and `plans/M3-close-inventory.md` rows 16–26 — items for this stub (row 85 of the first: its re-aim)
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-T1, FS100-K0); row 119 (`plans/FS75-derivation.md` FS75-H); row 123 (`plans/FS100-derivation.md` FS100-167, FS100-FAM); row 125 (`plans/FS100-derivation.md` FS100-B12, FS100-B3).

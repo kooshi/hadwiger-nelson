@@ -197,3 +197,9 @@ right relationship between an instrument and a belief, and the reason both are w
 - `plans/FS91-S1D-six.md` "Proposed edits" — job J08's re-aim of this stub
 - `data/crunch-2026-09-25/reports/J06.md`, `J08.md`, `J21.md` — the job reports
 - `plans/M3-close-inventory.md` rows 5, 16–26 and `plans/FS91-close-inventory.md` row 85 — items for this stub (row 23 of the first: a stub to mint)
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 125 (`plans/FS100-derivation.md` FS100-B12, FS100-B3).

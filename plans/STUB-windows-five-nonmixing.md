@@ -66,3 +66,9 @@ close.
 G76 (with M3's addendum: mixing, not ratio, decides removal), G54 (the spectrum first — here its absolute value), G24/G43 (the real
 factor's integrality gap), G60 (the density cap), G66 (43's tower), G48 (the conjecture's falsifier format), G50 (a held paper applied past
 its statement: `[Zhang2012]`'s maximum sets), G72.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 125 (`plans/FS100-derivation.md` FS100-B12, FS100-B3).

@@ -397,3 +397,9 @@ at hand-back. Nothing is left open in this job; the one open mathematical item i
 **Proposed edits for the front-page lane (not made here):** (1) the claim list's SI: replace the vacuous support clause by the list form
 (J46-3) or by "the `E_S`-conditional supports are disjoint along every edge"; (2) SP: say "positive" (or `|τ|(E) = 0`) on the right side;
 (3) the brief's control line: name `Z̄ = {θ = 0}` — all gapped points is not a colouring for C9 (§3.1).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-K0); row 121 (`plans/FS100-derivation.md` FS100-Q47); row 123 (`plans/FS100-derivation.md` FS100-K0b, FS100-SPC).

@@ -398,3 +398,9 @@ mental pass measures the pass as much as the claims (G21).
 ### 5.5 Would-have-searched-here log (stage 5)
 
 - None.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-K0); row 121 (`plans/FS100-derivation.md` FS100-Q47); row 123 (`plans/FS100-derivation.md` FS100-K0b, FS100-SPC).

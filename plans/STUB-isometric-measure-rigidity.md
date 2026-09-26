@@ -66,3 +66,9 @@ licenses a negative only if proved).
 - `plans/FS91-S0V2-SWm-second-reading.md` — job J03a's record
 - `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` — jobs J07 and J10 on FS89-CL2 to CL5
 - `plans/FS91-close-inventory.md` rows 1–6, 18, 59–70, 75, 78, 92 — the related items, including corrections owed to `plans/FS89-derivation.md` (rows 61, 69, 78)
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR, FS100-PE2, FS100-EFP, FS100-HX1).

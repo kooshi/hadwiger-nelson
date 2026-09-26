@@ -1589,3 +1589,9 @@ settled).
 | Mohar–Salas 2009 | — | **declined**: P4 did not use Kempe classes on tori |
 | row 79's headline in the held threads (G49's new rule, applied at once) | grep for "3-colourable", "three-colour", "3-colouring" beside lattice, periodic, ring, distance graph or height; "height function" | nothing on the criterion: `A₂`'s unique 3-colouring by cosets, strips, the Moser spindle's minimality |
 | new in the neighbourhood | `ab:"Moser lattice"` 4 | `[Ruhland2024]` (rank-4 lattice families with unbounded unit-vector counts; `L₃` the Moser lattice), abstract read, added |
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 119 (`plans/FS75-derivation.md` FS75-C, FS75-H).

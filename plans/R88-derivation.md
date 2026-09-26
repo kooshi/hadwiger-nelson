@@ -245,3 +245,9 @@ of invariant measures would still leave Q-tr. *Prior art:* via R88-CL (in print)
 Nothing here is kernel-checked. One entry is routed to a kernel stub: **R88-J28V-7 → FS-47** (the finite-index lemma, by the rank argument). Every
 other entry is declined: T-A's (v) and all of §2 rest on measure theory on countable amenable groups and LCA groups (Følner sequences, Bochner,
 Doob, Lebesgue differentiation) that the kernel's surface does not hold, and §3's partials have no consumer until T-B2 is proved.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-T1); row 121 (`plans/FS100-derivation.md` FS100-Q47); row 124 (`plans/FS100-derivation.md` FS100-X22).

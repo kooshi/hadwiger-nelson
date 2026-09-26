@@ -73,3 +73,9 @@ A derivation record with, per question, TRUE / FALSE / GAP at a named step; the 
 
 G76 (the frame and its narrowed reading), G72 (move 3: invariant measures), G74 (gluing across infinitely many layers), G48 (the colouring-level
 Hasse principle), G60 (`F ⊆ F_μ ⊆ P`), G54 (spectra cannot pin on a slack plane; row 112 goes through `m₁`), G50 (the unheld measure-rigidity papers).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR, FS100-PE2, FS100-EFP, FS100-HX1); row 121 (`plans/FS100-derivation.md` FS100-Q47); row 122 (`plans/FS100-derivation.md` FS100-FLK, FS100-SPEC, FS100-FLH, FS100-ED1, FS100-ED2); row 126 (`plans/FS100-derivation.md` §5); FS-100's stub, `plans/STUB-measure-rigidity-three-fields.md`.

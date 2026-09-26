@@ -69,3 +69,9 @@ Boyle–Lind 1997 and Einsiedler–Lind–Miles 2001 (free online; J35 §6.4 ite
 G76 (a "no" must disagree with every pullback in every archimedean direction), G13 (gap-freeness drives propagation), G71 (no height at four
 colours), G73 (cell-local formats closed), G78 (Kempe moves cannot see a frozen wall — the rank-one analogue of a frozen pullback), row 80 (T35's
 transient walls), row 97 (one-prime heteroclinics).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR, FS100-PE2, FS100-EFP, FS100-HX1).

@@ -1086,3 +1086,9 @@ invariant-measure question (so inventory item 1's "open ×2×3-type problem" is 
 - `plans/FS91-S1D-character.md` §4.4 and `plans/FS91-S1V-character.md` — jobs J07 and J10 on FS89-CL2 to CL5
 - `plans/FS91-S1D-six.md` stage 6 — job J08's record: the band-1/6 and band-1/5 lists for `Q`
 - `plans/FS91-close-inventory.md` rows 1–6, 18, 59–70, 75, 78, 85, 92 — the related items, including corrections owed to `plans/FS89-derivation.md`
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR, FS100-PE2, FS100-EFP, FS100-HX1).

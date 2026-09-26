@@ -93,3 +93,9 @@ its citation graph; `[deGrey2026]` (ℝ³, triangle-free, five-chromatic) and `[
 - `plans/FS91-S0FV-three-colours-blind.md` §2.2, `plans/FS91-S1D-character.md` §2.4, `plans/FS91-S1V-character.md` §3.2 — on FS86-B1-LR's scope
 - `plans/M3-S1D-windows-five.md` §2.5, §4.6 — job J21's record, on FS86-CL1
 - `plans/FS91-close-inventory.md` rows 13, 75, 78, 87, 92 and `plans/M3-close-inventory.md` row 18 — the related items
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 124 (`plans/FS100-derivation.md` FS100-X22); row 126 (`plans/FS100-derivation.md` §5).

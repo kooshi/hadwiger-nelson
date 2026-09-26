@@ -532,3 +532,9 @@ the WO-21 engineer (prime-power fields in the Rust tools, D97).
 | KaMIS smoke (setup agent) | 5 min | none needed | rerun |
 | D2 ladder, D5 colour search | hours | `plane-colour`/`plane-independent` rewrite their `--out` every tick and resume with `--start` (WO-19/20) | written into `data/fs54/runs/RESUME.md` **before** launch |
 | D4 solve (if priced and approved) | hours | SCS chunked driver, `--scs-ckpt` **on a path that exists** | written before launch |
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 123 (`plans/FS100-derivation.md` FS100-G27).

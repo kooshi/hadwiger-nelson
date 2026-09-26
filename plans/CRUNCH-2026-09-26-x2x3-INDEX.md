@@ -179,3 +179,62 @@ the job (`data/consolidation-2026-09-26/c1/entry-jobs.txt`, prefix `FS100-` drop
 
 They are indexed in the 2026-09-25 index, which lacked them: `plans/CRUNCH-2026-09-25-INDEX.md`, "Addendum — the jobs after the crunch's close
 (C1, 2026-09-26; addresses only)".
+
+## Stage 3 — SAVED (wiring: the reverse index)
+
+**Method.** For every older file the 2026-09-26 work bears on — the stubs of the fields, questions and lemmas `LEDGER.md` rows 116–127 and
+`plans/FS100-derivation.md` §1–§5 name or feed, the milestone plans and derivation registers whose results they use or extend — the rows it
+already names were read by a parser (`named_rows` in `data/consolidation-2026-09-26/c1/wire.py`, which expands "rows 116–119" and "rows 120, 121").
+Where a bearing row was not named, an **address-only pointer block** headed `## Where the 2026-09-26 work on this lives` was appended: each
+missing row with the derivation entries or files it lives in, and this index. No result, verdict or grade is written into any of them. The
+table, machine-readable: `data/consolidation-2026-09-26/c1/wire.tsv`. The derivation-register gate (`tools/fs71_ledger_b_check.py --strict`)
+reads the same before and after the blocks (PASS, 784 § B rows), since a block has no `**<id> — …**` entry line.
+
+| older file | why the work bears on it | rows borne | already named | block adds |
+|---|---|---|---|---|
+| `plans/STUB-measure-rigidity-three-fields.md` (FS-100) | the milestone itself | 116–118, 120–127 | all but 127 | 127 (and the three §R-close sections) |
+| `plans/STUB-four-colours-167.md` (FS-59) | its field, ℚ(√167), at four, five and six | 117, 119, 123, 125 | none | all four |
+| `plans/STUB-five-colours-47.md` (FS-84) | its field, ℚ(√47) | 121, 122, 127 | 121 (and 116, 117, 120, 123) | 122, 127 |
+| `plans/STUB-ultrametric-continuation.md` (FS-98) | T-B1 over the type-(B) fields, given MR | 120, 124, 126 | 124, 126 | 120 |
+| `plans/STUB-adelic-window-colouring.md` (FS-64) | windows over ℚ(√167); cut-and-project five-colourings | 117, 125 | 117 (and 116, 118) | 125 |
+| `plans/STUB-windows-five-nonmixing.md` (FS-96) | `PL(23, 43)` | 125 | none | 125 |
+| `plans/STUB-infinite-place-spectra.md` (FS-97, absorbed into FS-100) | its measure half is FS-100's MR | 120, 121, 122, 126 | none | all four, and FS-100's stub |
+| `plans/STUB-biquadratic-table.md` (FS-48) | ℚ(√3,√5), ℚ(√2,√3) in the class table | 123 | none | 123 (FS100-Q35, CTL, CLS) |
+| `plans/STUB-last-lattice.md` (FS-72) | five over ℚ(√3,√5) | 123 | none | 123 (FS100-Q35) |
+| `plans/STUB-six-is-not-a-value.md` (FS-62) | the main clause through five; six at ℚ(√167) | 123, 125 | none | both |
+| `plans/STUB-certificate-at-43.md` (FS-69) | `PL(23, 43)`; the plane at 43 | 125 | none | 125 |
+| `plans/STUB-residue-tower-drop.md` (FS-66, closed) | all-levels ratios; its lemma at `e ≥ 3` derived (FS100-DLP) | 117, 123 | none | both |
+| `plans/STUB-rigidity-dichotomy.md` (FS-73, closed) | its certificate T41 in the kernel | 119 | none | 119 |
+| `plans/STUB-unit-vector-ring-kernel.md` (FS-47) | MR's hypothesis `R = O′`; row 100's exception (FS100-EXC) | 120, 123 | none | both |
+| `plans/STUB-twenty-seven.md` (FS-54) | `λ_min(Γ₂₇)` and G56's floor at 27 (FS100-G27) | 123 | none | 123 |
+| `plans/STUB-isometric-measure-rigidity.md` (FS-89's stub) | measure rigidity | 120 | none | 120 |
+| `plans/STUB-dyadic-rigidity-triangle-free.md` (FS-86) | the type-(B) fields | 124, 126 | none | both |
+| `plans/STUB-three-colour-criterion-kernel.md` (FS-75) | its minimal instance | 119 | 119 | — (wired) |
+| `plans/STUB-quadratic-witnesses-kernel.md` (FS-60) | row 119's consumer | 119 | 119 | — (wired) |
+| `plans/STUB-main-clause-five-kernel.md` (FS-101) | minted by the crunch | 123, 127 | 123, 127 | — (wired) |
+| `plans/FS84-five-colours-47.md` (FS-84's plan) | its question answered at hand grade | 121, 122, 127 | none | all three, and §R-close (stage 5) |
+| `plans/FS84-SI-D-derivation.md`, `plans/FS84-SI-V-verification.md` (J45, J46) | SP-Cor, used for row 121, re-derived blind (X05V) and carried to every field (FS100-K0, K0b, SPC) | 117, 121, 123 | none | all three |
+| `plans/FS86-row88-rigidity.md` (row 88's plan) | row 88 given MR | 120, 124, 126 | none | all three, and two §R-close sections |
+| `plans/FS86-dyadic-rigidity.md` (FS-86's plan) | the type-(B) fields | 124, 126 | none | both |
+| `plans/FS89-rational-band-rigidity.md` (FS-89's plan) | measure rigidity | 120 | none | 120 |
+| `plans/M3-exotic-colourings.md` (M3's plan) | windows at five over ℚ(√167) | 125 | none | 125 |
+| `plans/FS91-character-local-global.md` (FS-91's plan) | one character carries the selection, given row 98 | 116, 118 | none | both |
+| `plans/FS73-rigidity-dichotomy.md` (FS-73's plan) | T41 in the kernel | 119 | none | 119 |
+| `plans/FS66-residue-tower-drop.md` (FS-66's plan) | FS100-DLP | 123 | none | 123 |
+| `plans/FS54-twenty-seven.md` (FS-54's plan) | FS100-G27 | 123 | none | 123 |
+| `plans/R88-derivation.md` (row 88's register) | R88-TCA's class form; row 88 given MR | 117, 121, 123, 124, 126 | 123, 126 | 117, 121, 124 |
+
+**Orphans found and where they now hang** (a file on disk and committed that no older file's reader would reach):
+
+| file | reachable before | now |
+|---|---|---|
+| `plans/FS100-X26B-derivation.md`, `tools/x26b_spectra.py`, `tools/x26b_uq_colour.py` (X26B, a blind derivation feeding row 123) | its own report; one mention in FS-100's plan; the derivation entries name "X26B" but give no path; row 123's address cell names neither | this index (2.1); proposed for row 123's address cell (below) |
+| `tools/x02d_circle_measure.py` (X02D) | X02D's record, `plans/FS100-derivation.md`, the inventory; not row 120's address cell | this index (2.1) |
+| the rescued scratch scripts of X10F, X30F, J55 and the scratch module of J52K | nowhere (they were only in `/tmp`) | 1.2's table; `data/consolidation-2026-09-26/c1/manifest.tsv` |
+
+**Proposed for the front-page lane (C3a, C3b, C2 — this job edits none of those files):**
+- `LEDGER.md` row 123's address cell: add `plans/FS100-X26B-derivation.md` Stage 2 (§2.1–§2.4) and `tools/x26b_spectra.py`, `tools/x26b_uq_colour.py` (X26B is one of
+  FS100-CLS's three derivations and FS100-DLP's two, per their grades).
+- `BIBLIOGRAPHY.md` / the library (C2): Lindenstrauss 2004 (arXiv math/0402165) has no PDF in `~/source/library`; its text and
+  `[AmbrusEtAl2023]`'s arXiv source and supplementary notebook are at `~/source/lean-dir-rescue/consolidation-2026-09-26/papers/` (1.2).
+- Nothing else: every ledger row 116–127 names its records, and each stub the rows feed now points back (the table above).

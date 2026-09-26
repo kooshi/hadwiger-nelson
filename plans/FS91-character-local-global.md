@@ -1330,3 +1330,9 @@ Every item routed to stage 4 is ticked "done (J23a stage 4)" with the draft that
 
 **Would have searched here (stage 4):** none — drafting only; the three checking scripts (`ledger_b_lines.py`, `claude_md_drafts.py`,
 `coverage.py`) are string checks over fixed lists, each with a plant that fires.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 116 (`plans/FS100-derivation.md` §1); row 118 (`plans/FS100-derivation.md` FS100-N1, FS100-T4).

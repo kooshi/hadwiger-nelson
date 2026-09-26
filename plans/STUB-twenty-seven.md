@@ -193,3 +193,9 @@ members' smallest fields are quadratic (`ℚ(√167)`, `ℚ(√1055)`, `ℚ(√4
 `data/fplane/map.md` (the fields table) · `data/fs53/README.md` (per-file record log) ·
 `data/fs53/g58/` (the antipodal conjecture and the killing test that failed) · `data/fs53/runs/` (run logs
 and resume notes) · `data/fs53/controls/` (the cube tool's controls) · `CLAUDE.md` § Grokkings G56, G57, G58.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 123 (`plans/FS100-derivation.md` FS100-G27).

@@ -44,3 +44,9 @@ None directly. On the conjecture: this is its last cheap prediction's last objec
 with no periodic colouring, which would be the first such object anywhere and the falsifier G48 names.
 
 **Provisional bearings, added 2026-09-23 (FS-73's close):** **G71** — at four colours there is no height, no slope and no `Θ`-type certificate: a refusal here is still a finite graph, and a four-colouring with no periodic colouring would also be the first instance of C3-aper failing (FS-76, `[AbrishamiEtAl2025]` Problem 4.6 at `k = 4`), which is open. **G68's addition** — a gap is sufficient for looseness, not necessary (FS-73's L3, loose at every period with no gap): where every colouring found is gap-free, compute the Kempe period groups before calling the lattice rigid. FS-73's implementer D found the rich 2-unit lattices over ℚ(√3,√5) (`twounits:14/30/42`, generator graphs) rigid-found with `P_found` of rank 8 and finite index, forcing undecided (row 78; `tools/fs73_census_check.py`, frozen) — the nearest objects to this one in the record.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 123 (`plans/FS100-derivation.md` FS100-Q35).

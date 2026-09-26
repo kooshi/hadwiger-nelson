@@ -1074,3 +1074,9 @@ found by M3's prior-art reader, `plans/M3-PA-mixing.md` Stage 2)."
 #### R5.2 The FS-66 checker re-run at 23 (M3-CHK23)
 
 **CERTIFIED, exit 0** (log `data/m3/j22/fs66-cert-p23-m5-rerun.out`, 69 lines, last written 19:03:39; launched about 18:14 under a 16 GiB slot, so about 49 minutes wall, one core). The frozen checker (sha256 `735b926798ffac14…`, matching row 75's) re-verified the certificate `data/fs66/b1/cert-p23.json` (sha256 `28cf189c83d2…`) through all seven steps — step 6: "identity (*) holds on 134447 canonical monomials (46 blocks, 138706 rows), coefficient by coefficient in exact integers"; step 7: "5 * U_num = 48992318760443262233948788623512870 < 529 * scale" — and printed: "CERTIFIED: every phi in [0,1]^529 with q(phi) >= 0 has sum(phi) <= U = 97.984637… … so BY THE HAND-PROVED LINKS L1, L2, L6 (data/fs66/b1/SOUNDNESS.md) no UD(Z/23^k, 2), k >= 1, is 5-colourable. Standard-library checker, NOT the Lean kernel." **So D1-fac's clause at 23 is now confirmed first-hand** (grade: cert, an existing checker on an existing certificate), beside row 75's recorded verdict. Peak memory was not logged (no GNU time on this run); it stayed under the 16 GiB cap.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 125 (`plans/FS100-derivation.md` FS100-B12, FS100-B3).

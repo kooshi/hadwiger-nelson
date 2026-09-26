@@ -143,3 +143,9 @@ the conjecture. It closes, from the ring side, the one hand step every field-lev
 - `plans/FS91-S0FV-three-colours-blind.md` §2.2 — job J09's record: its localisation lemma J2
 - `plans/FS91-S1V-character.md` §3.2 — job J10's record: the blind re-derivation
 - `plans/FS91-close-inventory.md` rows 13, 73, 79 — items for this stub, including its re-aim (row 79)
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR (its hypothesis `R = O′`)); row 123 (`plans/FS100-derivation.md` FS100-EXC).

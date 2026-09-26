@@ -512,3 +512,9 @@ not advance it. On the programme: MR is one lemma under three exposed prediction
 
 **Cost.** Stage 1, one verifier (about one crunch slot); Stage 2, minutes; Stage 3, a day of reading; Stage 4, one derivation and one verifier;
 Stage 5, unpriced — "a Furstenberg-type wall (J36 F5), so weeks at the least; a prior-art reading first" (J39 §4.4); P1, unpriced.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 127 (`plans/FS100-K-kernel-47.md`; `Proofs/HadwigerNelson/SpectralChain.lean`, `Proofs/HadwigerNelson/Instances/SqrtFortySeven.lean`); `plans/FS100-three-field-lemma.md` §R-close (J53, J53b), §R-close (stage 5), (stage 5, wave 3), (stage 5, wave 3b).

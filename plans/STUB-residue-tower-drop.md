@@ -114,3 +114,9 @@ where it is cheapest), a cheaper exposed case than ℚ(√167) is worth running 
 * R1 finds a 4-colouring at 11: **no prior** (§2). * R2 finds a ratio above `28/121`: medium — sparsity makes *some* rise plausible
 even if four colours stay out of reach. * If R2 finds no rise at all after a budget comparable to the one that attains `α = 28` at
 level one in seconds: read as weak evidence for constancy (a null at a budget, G21).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 117 (`plans/FS100-derivation.md` FS100-T1); row 123 (`plans/FS100-derivation.md` FS100-DLP, FS100-CLS).

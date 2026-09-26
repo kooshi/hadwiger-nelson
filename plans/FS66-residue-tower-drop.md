@@ -1124,3 +1124,9 @@ one column of it. The check that caught it was three lines of arithmetic over nu
 7. **`lake lint` is not green in this repository and was not green before this phase**: one error,
    `HadwigerNelson.CayleyCert.cert23_8` contains an underscore (`CayleyCertificate.lean`, FS-53), in a file
    Phase 1b did not touch. Nothing in the new modules is reported.
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 123 (`plans/FS100-derivation.md` FS100-DLP).

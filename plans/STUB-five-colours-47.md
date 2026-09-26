@@ -80,3 +80,9 @@ conjecture's five-clause where it is cheapest.
 - `plans/FS91-S1D-character.md` §4.4 — job J07's record: C-47 through the character local–global route
 - `plans/FS91-S1V-character.md` §2.3 (V4) — job J10's record: the blind re-derivation
 - `plans/FS91-close-inventory.md` rows 75, 92 — the related items
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 122 (`plans/FS100-derivation.md` FS100-FLK, FS100-SPEC, FS100-FLH, FS100-ED1, FS100-ED2); row 127 (`plans/FS100-K-kernel-47.md`; `Proofs/HadwigerNelson/SpectralChain.lean`, `Proofs/HadwigerNelson/Instances/SqrtFortySeven.lean`).

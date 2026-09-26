@@ -135,3 +135,9 @@ and both verifiers), `Proofs/HadwigerNelson/Copy.lean`/`Homogeneous.lean` (via F
 - `plans/FS91-S0FV-three-colours-blind.md` §2.5, §3.5 — job J09's record: the blind derivation beside it
 - `data/crunch-2026-09-25/reports/J02.md`, `J09.md` — the job reports
 - `plans/FS91-close-inventory.md` rows 7, 12, 117 — items for this stub (row 117: its re-aim)
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 123 (`plans/FS100-derivation.md` FS100-Q35, FS100-CTL, FS100-CLS).

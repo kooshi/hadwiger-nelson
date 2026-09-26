@@ -881,3 +881,9 @@ owed:** `[HervaKari2025]`, `[MacVicar2023]`, `[SilvaFilho2026]`, and the Yip cli
 **Theorems this phase proved:** none — a close files the milestone's theorems (19 entries, `plans/R88-derivation.md`); it proves none.
 **Would have searched here (J41, all stages):** none. **Tools** (each with a plant watched to fire): `data/fs86r88/j41/tick.py` (a status for a
 missing row, exit 1), `check_b_draft.py` (one § B line dropped, exit 1), `claude_drafts.py` (an absent `old`, exit 1).
+
+## Where the 2026-09-26 work on this lives
+
+*Pointer block (consolidation job C1, 2026-09-26): addresses only — each result lives in its ledger row and derivation entry; the per-job index is `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`.*
+
+See: `LEDGER.md` row 120 (`plans/FS100-derivation.md` FS100-MR, FS100-PE2, FS100-EFP, FS100-HX1); row 124 (`plans/FS100-derivation.md` FS100-X22); row 126 (`plans/FS100-derivation.md` §5); `plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3), (stage 5, wave 3b).
