@@ -6,3 +6,8 @@ X03D.md
 X05V.md
 X12B.md
 X13R.md
+X09C.md
+X10F.md
+X11K.md
+X21D.md
+X21V.md

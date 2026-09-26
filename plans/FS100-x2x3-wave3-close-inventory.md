@@ -1,0 +1,52 @@
+# FS-100 s5 (w3) close inventory (opened by the crunch clerk from job reports; the owner's pen, WORKFLOW 5)
+
+*Opened by the clerk (J00) at 06:44, from the INVENTORY lines of X21D, X21V, X10F and X11K (in that order), plus the owner's launch-message
+lines. Waves 1–2's inventory (`plans/FS100-x2x3-close-inventory.md`) is ticked and closed and is not appended to; this file is wave 3's.
+Read every number from the item's source, never from this file.*
+
+| # | kind | item | source | status |
+|---|---|---|---|---|
+| 1 | result | X21D-Q0: d ≡ 7 (mod 8) ⟹ ℚ₂(√d) = ℚ₂(i), the one dyadic place splits in L, so no stable dyadic place and R = O′ (row 100 outside its exception) [hand + tools exact] | plans/FS100-X21D-derivation.md §2.1; tools/x21d_family.py (plants --plant-dyadic, --plant-legendre, --plant-halve fire) | open |
+| 2 | result | X21D-A1/A2: given MR, χ(ℚ(√d)²) ≥ 5 for every squarefree d ≡ 47, 143, 167 (mod 168), and = 5 wherever L = 5 (11 or 19 stable, or χ(Γ₃₁) = 5 conditionally); 52 family fields ≤ 3000, 44 with L = 5 [hand + tools exact] | §2.2, §2.3; data/fs100/x21d/family.out | open |
+| 3 | result | X21D-A4: J48-N4cor gives χ(ℚ(√167)²) ≥ 5 given MR without FS100-T1, T-C(A) or SP-Cor, over R-U and SP common to K0's route; it reaches no L = 5 member (λ*(Γ₁₁) = 0.476413, λ*(Γ₁₉) = 0.380486 > 1/3) [hand + tools] | §2.4 | open |
+| 4 | result | X21D-K0: MR(F) ∧ T-C(A)@∅(F) ⟹ χ(F²) ≥ 5 for every real number field; T-C(A)@∅ is SP-Cor's only field-dependent input; identical to FS100-K0's statement [hand; second mind, not blind to K0's summary] | §3.1 | open |
+| 5 | result | X21D-B1: given MR, χ(ℚ(√167)²) ≤ 5 ⟺ Y = UD(ℝ²) × G₂₃ × G₄₃ has a CP five-colouring; merging is the diagonal/projection both ways [hand] | §4.1 | open |
+| 6 | result | X21D-PL: PL_∃(23, 43) ⟸ [χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6] unconditionally, ⟹ given MR: PL is exactly the missing direction, no stronger [hand] | §4.2 | open |
+| 7 | result | X21D-Y: Y has no CP five-colouring ⟺ χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43); every density-shaped refusal of Y is one of ℝ² at no less strength, and j = 1 is dead (Croft m₁ ≥ 0.2293 > 1/5) [hand] | §4.3 | open |
+| 8 | result | X21D-G23: the full-depth 23-adic plane has no measurable edge-null five-colouring (row 75's fibre-share inequality holds verbatim for measurable edge-null sets; classes ≤ 0.18523); a CP transcription of row 75's χ_Bor(ℚ₂₃²) ≥ 6, not new; a necessary condition only [hand, one mind] | §4.3 | open |
+| 9 | correction owed | the queue's B-3 cites "row 71 (five refused at 43 at level one)"; that fact is row 69's ("Five refused at 43 (α ≤ 365 against the 370 five needs)") | §4.5 item 1 | open |
+| 10 | correction owed | stub: name PL_∃ (existential, what T-J39-5 (ii) uses) apart from PL_str (fibres a.s. constant, X-PL23's reading); PL_str ⟹ PL_∃ | §4.5 item 2 | open |
+| 11 | correction owed | row 117 can extend to "χ = 5 given MR at every squarefree d ≡ 47, 143, 167 (mod 168) with L = 5", at R88-TCA's class-form grade; the brief's K0 quote lacks FS100-K0's A⁺ scope note (FS100-K0 itself correct and wider) | §4.5 items 3–4 | open |
+| 12 | prediction scored | C0 all TRUE-leaning claims TRUE; A-3's A⁺ scope GAP and B-3's density no-go unforeseen | §4.6 | open |
+| 13 | prior-art debt | Croft's m₁ ≥ 0.2293 has no BIBLIOGRAPHY.md row (grep "Croft": none); [Falconer1981] not held; the literature on m_j(ℝ²) (densities of CP-j-colourable sets), j ≥ 2, unread | §4.3, §4.7 | open |
+| 14 | slip | stage headings stamped ahead of the clock (06:33/06:37/06:40 written; actual 06:29/06:31/06:34), corrected; C0 informed by a mental check of Q-0 before writing (logged §1.2) | §1.2, headings | open |
+| 15 | result | Q-0: no stable dyadic place ⟺ d ≡ 7 (mod 8) among real quadratic fields; C1 reproduces row 100's exception fields ℚ(√5), ℚ(√17) as ramified stable dyadic [hand + tools exact] | record §2.0–2.1, tools/x21v_checks.py C1 | open |
+| 16 | result | A-1's control: at ℚ(√23), ℚ(√31), ℚ(√59) (MR in scope, χ ≤ 4 known) the chain must and does stop at T-C(A)@∅ (a periodic residue colouring has spectrum in T); A-1 uses the class there and only there | record §2.2, §2.4 | open |
+| 17 | result | A-3 = K0 blind: T-C(A) at S ⟹ A⁺ at S, T-C(A)@∅ ⟹ SP-Cor, over every real number field; J45's proofs use ℚ(√47) only through T-C(A) [hand, second mind] | record §2.3 | open |
+| 18 | result | A-2: L = 5 at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335) via a degree-one stable place above 11 (C4); upper bound by the valuation subring O_{F,𝔭} (row 57's gap does not bite for quadratic fields) | record §2.5 | open |
+| 19 | result | B-2 (i) needs no field input: χ(F²) ≤ χ_CP(ℝ²) for every countable F ⊆ ℝ (restrict a CP colouring) [hand] | record §2.8 | open |
+| 20 | result | Lemma X21V-M: G × G has a CP k-colouring iff G does (projection; diagonal) — T-J39-1's merge, and why Y has one UD(ℝ²) factor for two real places [hand] | record §2.7 | open |
+| 21 | result | B-3: "Y has no CP five-colouring" ⟹ χ_CP(ℝ²) ≥ 6 (projection); no one-point density bound can refuse five on Y (Croft m₁ ≥ 0.2293 > 1/5, cylinders); row 75 gives the 23 part (not new: row 75's χ_Bor), 43 at depth is FS-69; agrees with X21D-Y's biconditional [hand] | record §2.9, §4 | open |
+| 22 | prediction scored | C0: every TRUE landed at priors 0.75–0.95; B-3's GAP at 0.05 | record §3.4 | open |
+| 23 | correction owed | the queue's B-3 cites "row 71 (five refused at 43 at level one)"; that is row 69 (row 71 is five refused at 23) | record §1.2 | open |
+| 24 | correction owed | none to plans/FS100-derivation.md: FS100-K0's recorded statement already says "A⁺ at S = ∅" and "every real number field"; only the queue's quotation (J51V's older wording) lacks it | record §3.2 item 1, §4 | open |
+| 25 | slip | fence touched after stage 2 was committed: a grep for "Lemma P" printed two lines inside FS100-K0's proof (06:35); the blind A-3 derivation was committed at 06:34 (3dbd51fc) and not changed; also commit c178ee5c lacks attribution lines (not amended) | record §3.3 | open |
+| 26 | result | rows 120–122 are in LEDGER.md; row 120's and row 121's prior-art notes now carry "prior-art gate … pending, X24R" (launch note 2) | LEDGER.md; record stage 3 | open |
+| 27 | correction owed | done under the owner's authorization: plans/FS100-derivation.md §3 got mechanical field fixes in 14 entries (Q47, HX1, MR, PE1, EFZ, EFG, EFX, CE1, FR1, ED1, ED2, FLK, SPEC, FLH). Q47's grade bracket no longer holds [Moorhouse2010] and [Madore2015]; no grade or verdict changed | record stage 2 | open |
+| 28 | correction owed | a table-cell defect, caught before it landed: row 120 and § B FS100-EFG had an unescaped `\|` inside a code span (log⁺\|u\|_v). Escaped before insertion | record stage 3 | open |
+| 29 | slip | to pass the fact audit I edited a file outside my brief's touch list, tools/claude_md_fact_audit.py: two ALLOW lines in the J44/J55 precedent's form | record stage 5 | open |
+| 30 | stub to mint or re-aim | FS-84 is answered and re-aimed (launch note 4) in CLAUDE.md and FRONTIER-STUBS. Its stub file plans/STUB-five-colours-47.md has no banner yet: there is no draft text, and the file is outside my touch list | record stage 6 | open |
+| 31 | correction owed | CLAUDE.md G48 still reads "next the L = 5 fields where four is proven, ℚ(√47) first (FS-84; FS-81 priced it)". That has been stale since row 121, and no draft covered it | record stage 5 | open |
+| 32 | prior-art debt | no line in LEDGER.md § The claim list, and no entries in CLOSED-QUESTIONS.md §1.7 or §3, for χ(ℚ(√47)²) = 5. No draft exists. Under launch note 2, any such line reads "prior-art gate pending, X24R" | records stages 3 and 6 | open |
+| 33 | tool defect | bib_audit fails at the final HEAD on X24R's 6 arXiv ids (1006.4491, 1411.2776, 1804.01369, 1909.06866, 2303.01089, 2608.24503); they are for X30F to log | bib_audit output | open |
+| 34 | result | Lean skeleton of the ℚ(√47) chain; headline chromaticNumber_planeOver_sqrt47_eq_five proved over named Props; M and L0 sorry-free on the standard three axioms | plans/FS100-K-kernel-47.md §Stage 3–4 | open |
+| 35 | result | [hand] at ℚ(√47) Lemma W's Chebotarev input is Dirichlet (p ≡ 1 mod 188 splits completely in ℚ(√47,i); Mathlib Nat.infinite_setOf_prime_and_eq_mod) | record §1.3 M1c | open |
+| 36 | result | χ(ℚ(√47)²) ≤ 5 is NOT in the kernel today (Theorem A's field-level step is row 57's gap); one leaf (exists_residue11, an elementary 11-adic descent) makes it unconditional | record §1.3 U, §Stage 5 | open |
+| 37 | slip | Interface.PE2 first dropped "τ′ U-invariant" from the source's statement; caught by node M's proof before any use | record §Stage 4 | open |
+| 38 | prior-art debt | github.com/marcmorningstar/lean4-ergodic-theory claims Kolmogorov–Sinai entropy in Lean 4 (search listing only, unread); Rudin 1.3.6/1.4.3 cited by statement for X-BH | record §PA, §Stage 5 | open |
+| 39 | stub to mint or re-aim | the kernel lane's next slot: gate M/L0 into Proofs/; close the 3 leaves (U first, ~60k); then decide whether to build entropy/N1 or keep the interface | record §Stage 5 | open |
+| 40 | owner ruling | X21V's fence touch (06:35, two lines of FS100-K0's proof) came after its blind A-3 derivation was committed (06:34, 3dbd51fc): A-3 counts as blind, by commit order (the KS-1 precedent). | owner, 06:39 | open |
+| 41 | owner ruling | X10F's two ALLOW lines in tools/claude_md_fact_audit.py ("G1–G79", "1–119"; commit 6e6e6081) were reviewed by the owner and accepted: identifier-range extensions in the J55 precedent's form. The edit was outside X10F's touch list; logged as its slip. | owner review, 06:45 | open |
+| 42 | owner note | Owed to X30F from X10F's report: CLAUDE.md G48's stale "next the L = 5 fields where four is proven, ℚ(√47) first"; the FS-84 stub file's banner; LEDGER § The claim list and CLOSED-QUESTIONS.md §1.7/§3 lines for χ(ℚ(√47)²) = 5, pending X24R; bib_audit on X24R's six arXiv ids; the Bekka–Francini and two Huang PDFs still in the repository (move to ~/source/library/pdf/). | report X10F | open |
+| 43 | owner note | X21D suggested a blind second derivation of R88-TCA's class form; launched as X25B at 06:39. | owner | open |
+| 44 | held for Kooshi | The 300,000-byte CLAUDE.md ceiling's return after the crunch (now 291,645 bytes); whether the publication rule fires for χ(ℚ(√47)²) = 5 after X24R; FS-84 re-aimed rather than closed (Kooshi may close it). | report X10F | open |
