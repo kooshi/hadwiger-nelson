@@ -77,3 +77,41 @@ where `hs j` supplies `a ≠ a + s j`.
 ### Would have searched here (stage 2)
 
 - None.
+
+## Stage 3 — SAVED
+
+**`Proofs/HadwigerNelson/ThetaCert.lean`, sorry-free: leaf 2 in the kernel.** `Cert.isEmpty_winding` (statement verbatim) and
+`Cert.not_properAlong`; the control `tinyK4` passes by `decide +kernel` and its three plants each return `false` by `decide +kernel`; a
+named corollary `tinyK4_isEmpty_winding`; one spec example per definition. Two elaborations to green: the first had six small errors
+(`simp` normalises `getD` to `getElem?` before a supplied lemma can fire, so the list lemmas close by `exact`; a missing
+`BigOperators.Pi` import; `Winding.eval` needs `Classical` decidability of kernel membership and is `noncomputable`; `Fin` numerals over
+`tinyK4.units.length`), the second one (the default of a `getD` left undetermined).
+
+- **The walk is mutual structural recursion on the nested `Tree`** (`checkTree_sound` on the tree, `checkKids_sound` on the list of
+  children), now pinned with `termination_by structural`; no `Tree.rec` fallback. `checkKids_sound` carries "some constraint in the
+  remaining list holds", as §M said.
+- **Departures from §S.3, each a simplification:**
+  1. *Defaults instead of range guards.* A leaf's cited constraint is `cite path i = path.getD i ⟨[], 0, true⟩`, and the default — the
+     equation `W 0 = 0` — holds for every winding (`holds_dflt`); a relation index past the list names `[]`, the zero relation, in the
+     lattice with length 0. So one lemma, `getD_induction` ("a property of every entry and of the default holds of every `getD`"),
+     replaces every membership-by-index argument. **The checker's guards `pm.1 < path.length`, `ri < rels.length` and `lo − 1 ≤ hi`
+     are well-formedness only; the proof uses none of them.** Coverage (`exists_holds_childCons`) holds for every `lo, hi`. The guards
+     stay in the checker (the emitter mirrors them; they make a malformed certificate fail loudly), and the module docstring says so.
+  2. *`leafOk` restated through named pieces* `cite`, `leafQ`, `leafP` (same `Bool`, same semantics as the skeleton's `let`s), so the
+     leaf's tupled induction (`leaf_bound`: `Q` in the lattice ∧ `Q.length ≤ m` ∧ `W Q ≤ P`) is stated about definitions, not `let`s.
+     `tinyK4` and its plants re-pass unchanged.
+  3. *The relation check needs no length hypothesis for membership*: `relMap c.gen (vecOf r) k = (lincomb r c.units).getD k 0` holds
+     for every `r` (`sum_getD_lincomb`, induction on the unit list), because `lincomb` and `vecOf` both drop entries past the units.
+     The length check `r.length ≤ c.units.length` is used once, for `minRiseL Q = minRise (vecOf Q)` at a leaf.
+  4. *The walk is generic over the group*: `Soundness.checkTree_sound` is stated for any `s : Fin m → A` and any relation list whose
+     entries lie in the lattice; the certificate's units enter only in `Cert.isEmpty_winding`.
+- **The total extension** is `ThreeColour.Winding.eval` (named so, not `ext`, which reads as an extensionality lemma), with
+  `eval_zero`, `eval_add`, `eval_smul`, `minRise_le_eval`.
+- **The build**: exit 0, "178 of 178 batches, 2 module(s) rebuilt, 0 module(s) with warnings, 3m28s"
+  (`build/gate/build/20260926T050322Z-776316.log`); the first build of the module flagged two constructors without docstrings, fixed.
+- **Price**: about 15 minutes of wall clock, three elaborations and two builds; §S.0 had 90 minutes and named it the one real risk.
+- **P-tree scored: met** (structural, no fallback).
+
+### Would have searched here (stage 3)
+
+- None.

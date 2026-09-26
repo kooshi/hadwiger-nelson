@@ -147,6 +147,7 @@ import Proofs.HadwigerNelson.Instances.IndependenceThreshold
 import Proofs.HadwigerNelson.Instances.SixthColour
 import Proofs.HadwigerNelson.Kempe
 import Proofs.HadwigerNelson.ThreeColour
+import Proofs.HadwigerNelson.ThetaCert
 
 /-!
 # Proofs
