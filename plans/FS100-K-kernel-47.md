@@ -7,7 +7,19 @@ all running agents the news, and launch one to start formalizing the dependencie
 
 ## Theorems this phase proved
 
-*(filled per stage; grade and address on each line)*
+All in `data/fs100/x11k/skeleton/Sqrt47.lean`, checked by Lean's kernel under `lake env lean` (a skeleton, not the gated build);
+axioms read by `#print axioms` (stage 4):
+- `Interface.mr_of_pe2_efPlus` — node M: PE-2 and EF_F⁺ (interface form) give MR (Fourier form) [Lean, standard three axioms, sorry-free].
+- `x4_nonempty_of_colorable` — node L0: a proper four-colouring of `F²` restricts to `X₄(F)` [Lean, standard three, sorry-free].
+- `measurable_eval`, `measurable_rot` — evaluation and rotation are measurable on `R̂` [Lean, standard three, sorry-free].
+- `rotInv_of_isTraceSpectral` — node L3: the trace spectral measure is rotation-invariant, given Herglotz–Bochner with uniqueness [Lean;
+  sorry-dependent only through the leaf `posDef_corr`].
+- `Interface.x4_eq_empty` — node L6, SP-Cor's composition: X-BH, R-U, A⁺ at `S = ∅`, MR ⟹ `X₄(F) = ∅` [Lean; sorry-dependent only
+  through the leaves `exists_invariantColouring`, `posDef_corr`].
+- `Interface.five_le_chromaticNumber`, `chromaticNumber_planeOver_sqrt47_eq_five`, `chromaticNumber_planeOver_sqrt47_le_five` — the
+  compositions L, H, U [Lean; sorry-dependent through the three leaves].
+- [hand, this record §1.3 M1c] At ℚ(√47), Lemma W's Chebotarev input is Dirichlet's theorem: every prime `p ≡ 1 (mod 188)` splits
+  completely in `ℚ(√47, i)` (`p ≡ 1 (mod 4)`; `(47/p) = (p/47) = 1` by reciprocity, `p ≡ 1 (mod 47)`).
 
 ## Would-have-searched-here log
 
@@ -216,3 +228,37 @@ project's [hand] lemmas." **Where they differ, stated so nobody reads more into 
 4. The upper half is unconditional once `exists_residue11` closes.
 
 **Spec examples:** `tetra 0 0 = 1`, `tetra 0 1 = -1/3`, `(Interface.trivial F47).E = ∅` (in the file).
+
+## Stage 4 — SAVED (leaves burned, cheapest first)
+
+**Closed:** node M (`Interface.mr_of_pe2_efPlus`, one elaboration), node L0 (`x4_nonempty_of_colorable`, two), node L6
+(`Interface.x4_eq_empty`, SP-Cor's composition, six), node L3 (`rotInv_of_isTraceSpectral`, two), with the measurability lemmas
+`measurable_eval`, `measurable_rot`. One statement was corrected on the way: `Interface.PE2` first omitted "`τ′` a `U`-invariant"
+from its existential, which the source states and M's proof needs (caught by the proof, fixed before any use).
+**Left in the skeleton: three leaves** — `exists_residue11` (U4–U6), `exists_invariantColouring` (L1), `posDef_corr` (L2's input).
+Log: `data/fs100/x11k/sqrt47.log` (exit 0, three `sorry` warnings).
+
+**Re-price from the leaves closed** (§ What compute helps): the stage-1 prices for composition leaves ran **2–3× high** (M priced ~10k,
+closed in ~2k; L0 ~5k → ~3k; L6 ~20k → ~15k; L3 ~15k → ~8k), the M2/FS-75 pattern. Revised: `posDef_corr` ~10–15k (shift invariance and a
+Gram identity for the tetrahedron); `exists_residue11` ~40–60k (U4's normal form for `fieldOfRadicands {47}` is the bulk; U6's descent is
+cleanest in `ℚ_[11]` with `PadicInt.toZMod`, or over `ℚ` with 11-integral rationals); L1 ~100–200k (Markov–Kakutani is not in Mathlib).
+
+**Not moved to `Proofs/`:** the sorry-free declarations (M, L0, the measurability lemmas, the interface) could move as one module now; the
+gate (build, `axioms.sh`, `vacuity.sh` counts, `ARCHITECTURE.md`, `scripts/Axioms.lean`) was not run on this job's budget. Price: one
+build plus ~20k.
+
+## Stage 5 — the report (the price of the rest)
+
+| layer | nodes | status |
+|---|---|---|
+| in the kernel (reused) | U1 `chromaticNumber_finitePlane11`, U2 `unitQuadrance_colorable_of_subring`, U3 `chromaticNumber_planeOver_eq`, `sq_add_sq_eq_zero_iff` | kernel |
+| proved in the skeleton (Lean, sorry-free) | M, L0, measurability | move to `Proofs/` with the gate, ~20k + a build |
+| proved in the skeleton over leaves | U, L3, L6, L, H | follow the leaves |
+| skeleton leaves, formalizable now | `posDef_corr` ~10–15k; `exists_residue11` ~40–60k; L1 ~100–200k | **U is unconditional after ~60k** |
+| named hypotheses: the project's lemmas in interface form | R-U, A⁺ at `S = ∅`, PE-2, EF_F⁺ | to be discharged for the true `E`, `T + A`, `h`: needs N1's adelic dual (months), N2/SI (after X-ST), R88-TCA (row 112's inputs, months), entropy theory |
+| named hypothesis, external classical | X-BH (Herglotz–Bochner) | weeks: Riesz–Markov–Kakutani is in Mathlib, compactness of the dual and Stone–Weierstrass on it are not |
+| external, not yet statable here | X-EL (EL2021 Thm 1.2), X-SMB, X-ED, X-JAC, X-ST, X-AMB, X-WEIL, X-APP | Kolmogorov–Sinai entropy absent from Mathlib (a community project claims it: unread, §PA); each a formalization project |
+
+**Proposed for the front page** (the front-page lane decides): a `LEDGER.md` § B line for the [hand] Dirichlet sharpening of Lemma W at
+ℚ(√47); a stub for the kernel lane's next slot (the three leaves, then the gate for U, then the entropy decision); a `BIBLIOGRAPHY.md`
+candidate row for Rudin, *Fourier Analysis on Groups* (1.3.6, 1.4.3; not held here, cited by statement for X-BH).

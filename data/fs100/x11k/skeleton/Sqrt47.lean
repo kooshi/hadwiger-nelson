@@ -2,6 +2,9 @@ import Proofs.HadwigerNelson.Transcendental
 import Proofs.HadwigerNelson.Instances.FinitePlane11
 import Proofs.HadwigerNelson.Chain
 import Mathlib.MeasureTheory.Integral.Bochner.Basic
+import Mathlib.MeasureTheory.Integral.Bochner.Set
+import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
+import Mathlib.MeasureTheory.Integral.IntegrableOn
 import Mathlib.MeasureTheory.Constructions.Pi
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
@@ -161,7 +164,7 @@ and `h_{τ′}(u) = 0` for every `u ∈ U`." The Haar part `a·m` is recorded by
 Fourier coefficients vanish off `0`. -/
 def Interface.PE2 (I : Interface F) : Prop :=
   ∀ τ : Measure (Dual F), IsFiniteMeasure τ → RotInv F τ →
-    ∃ τH τ' : Measure (Dual F), τ = τH + τ' ∧ τH I.E = 0 ∧
+    ∃ τH τ' : Measure (Dual F), τ = τH + τ' ∧ RotInv F τ' ∧ τH I.E = 0 ∧
       (∀ r : unitRing F, r ≠ 0 → ∫ χ, (χ r : ℂ) ∂τH = 0) ∧ ∀ u, I.h τ' u = 0
 
 /-- **EF_F⁺**, weakened to the form the chain uses (zero entropy at every `u`, where EF_F⁺ needs one non-torsion `u*`):
@@ -177,11 +180,29 @@ def Interface.MR (I : Interface F) : Prop :=
 
 /-- **Node M** (`plans/FS100-X01D-derivation.md` §4.1): PE-2 and EF_F⁺ give MR. -/
 theorem Interface.mr_of_pe2_efPlus (I : Interface F) (hPE : I.PE2) (hEF : I.EFPlus) : I.MR := by
-  sorry
+  intro τ hfin hrot hE r hr
+  obtain ⟨τH, τ', rfl, hrot', hHE, hHF, hh⟩ := hPE τ hfin hrot
+  have hfin' : IsFiniteMeasure τ' := isFiniteMeasure_of_le (τH + τ') (Measure.le_add_left le_rfl)
+  have hTAc : τ' I.TAᶜ = 0 := hEF τ' hfin' hrot' hh
+  have hE' : τ' I.E = 0 := by
+    rw [Measure.add_apply] at hE
+    exact (add_eq_zero.mp hE).2
+  have hTA : τ' I.TA = 0 := measure_mono_null I.TA_subset_E hE'
+  have hzero : τ' = 0 := by
+    rw [← Measure.measure_univ_eq_zero, ← Set.union_compl_self I.TA]
+    exact measure_union_null hTA hTAc
+  rw [hzero, add_zero]
+  exact hHF r hr
 
 /-- **Node L0**: a proper four-colouring of the plane restricts to `X₄(F)`. -/
 theorem x4_nonempty_of_colorable (h : ((unitDistance ℂ).induce (planeOver F)).Colorable 4) : (X4 F).Nonempty := by
-  sorry
+  obtain ⟨C⟩ := h
+  have hsub : ∀ x : unitRing F, (x : ℂ) ∈ planeOver F := fun x =>
+    (Subring.closure_le (t := Chain.planeOverSubring F)).mpr (fun _ hu => hu.1) x.2
+  refine ⟨fun x => C ⟨x, hsub x⟩, fun x y hxy => C.valid ?_⟩
+  show dist (x : ℂ) (y : ℂ) = 1
+  rw [dist_comm, Complex.dist_eq]
+  exact hxy.2
 
 /-- **Node L1** (formalizable; Markov–Kakutani twice): `X₄(F) ≠ ∅` gives an invariant random colouring. -/
 theorem exists_invariantColouring (h : (X4 F).Nonempty) : Nonempty (InvariantColouring F) := by
@@ -191,16 +212,94 @@ theorem exists_invariantColouring (h : (X4 F).Nonempty) : Nonempty (InvariantCol
 theorem posDef_corr (μ : InvariantColouring F) : PosDef (fun y => (corr F μ.μ y : ℂ)) := by
   sorry
 
+/-- Evaluation at `y` is measurable on `R̂`. -/
+theorem measurable_eval (y : unitRing F) : Measurable (fun χ : Dual F => (χ y : ℂ)) :=
+  (measurable_pi_apply y).comp (comap_measurable (fun χ : Dual F => fun g : unitRing F => (χ g : ℂ)))
+
+/-- Rotation is measurable on `R̂`. -/
+theorem measurable_rot (u : unitVectors F) : Measurable (rot u) := by
+  intro s ⟨t, ht, hts⟩
+  have hΦ : Measurable (fun f : unitRing F → ℂ => fun r : unitRing F => f (uvRing u * r)) :=
+    measurable_pi_lambda _ fun r => measurable_pi_apply _
+  refine ⟨_, hΦ ht, ?_⟩
+  rw [← hts]
+  rfl
+
 /-- **Node L3**: the trace spectral measure is rotation-invariant (`C(uy) = C(y)`, and uniqueness). -/
 theorem rotInv_of_isTraceSpectral (hBH : BochnerHerglotz (unitRing F)) (μ : InvariantColouring F) {σ : Measure (Dual F)}
     (hσ : IsTraceSpectral F μ.μ σ) : RotInv F σ := by
-  sorry
+  intro u
+  obtain ⟨σ₀, -, -, huniq⟩ := hBH _ (posDef_corr μ)
+  have hρ : Measurable (fun (c : unitRing F → Fin 4) (x : unitRing F) => c (uvRing u * x)) :=
+    measurable_pi_lambda _ fun x => measurable_pi_apply _
+  have hcorr : ∀ y, corr F μ.μ (uvRing u * y) = corr F μ.μ y := by
+    intro y
+    have hm : Measurable (fun c : unitRing F → Fin 4 => tetra (c 0) (c y)) :=
+      (measurable_of_countable (fun p : Fin 4 × Fin 4 => tetra p.1 p.2)).comp
+        (f := fun c : unitRing F → Fin 4 => (c 0, c y)) ((measurable_pi_apply 0).prodMk (measurable_pi_apply y))
+    calc corr F μ.μ (uvRing u * y)
+        = ∫ c, (fun c' : unitRing F → Fin 4 => tetra (c' 0) (c' y)) (fun x => c (uvRing u * x)) ∂μ.μ := by
+          unfold corr; congr 1; funext c; simp only [mul_zero]
+      _ = ∫ c', tetra (c' 0) (c' y) ∂(μ.μ.map (fun c x => c (uvRing u * x))) :=
+          (integral_map hρ.aemeasurable hm.aestronglyMeasurable).symm
+      _ = corr F μ.μ y := by rw [μ.rot_inv u]; rfl
+  have hmap : ∀ y, ∫ χ, (χ y : ℂ) ∂(σ.map (rot u)) = (corr F μ.μ y : ℂ) := by
+    intro y
+    rw [integral_map (measurable_rot u).aemeasurable (measurable_eval y).aestronglyMeasurable]
+    show ∫ χ, (χ (uvRing u * y) : ℂ) ∂σ = _
+    rw [hσ.2, hcorr]
+  haveI := hσ.1
+  rw [huniq _ inferInstance hmap, huniq σ hσ.1 hσ.2]
 
 /-- **Node L6, SP-Cor** (`plans/FS84-SI-D-derivation.md` §4.2): given Herglotz–Bochner, R-U, A⁺ at `S = ∅` and MR, the
 plane over `F` has no proper four-colouring of `Cay(R, U)`. -/
 theorem Interface.x4_eq_empty (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) (hRU : I.RU) (hA : I.APlus0)
     (hMR : I.MR) : X4 F = ∅ := by
-  sorry
+  by_contra hne
+  obtain ⟨μ⟩ := exists_invariantColouring (Set.nonempty_iff_ne_empty.mpr hne)
+  obtain ⟨σ, hσfin, hσ, -⟩ := hBH _ (posDef_corr μ)
+  have hTS : IsTraceSpectral F μ.μ σ := ⟨hσfin, hσ⟩
+  have hrot := rotInv_of_isTraceSpectral hBH μ hTS
+  -- the evaluation `χ ↦ χ 1` is measurable, and bounded by `1`
+  have hev := measurable_eval (F := F) 1
+  have hint : ∀ ν : Measure (Dual F), IsFiniteMeasure ν → Integrable (fun χ : Dual F => (χ 1 : ℂ)) ν := by
+    intro ν _
+    refine Integrable.of_bound hev.aestronglyMeasurable 1 (Filter.Eventually.of_forall fun χ => ?_)
+    simp
+  -- `τ := σ|_{Eᶜ}`: rotation-invariant, finite, `E`-null
+  have hmrot := measurable_rot (F := F)
+  have hτrot : RotInv F (σ.restrict I.Eᶜ) := by
+    intro u
+    have hpre : rot u ⁻¹' I.Eᶜ = I.Eᶜ := by rw [Set.preimage_compl, I.rot_preimage_E u]
+    conv_lhs => rw [← hpre]
+    rw [← Measure.restrict_map (hmrot u) I.measurableSet_E.compl, hrot u]
+  have hτE : (σ.restrict I.Eᶜ) I.E = 0 := by
+    rw [Measure.restrict_apply I.measurableSet_E, Set.inter_compl_self, measure_empty]
+  have hMRτ := hMR _ inferInstance hτrot hτE 1 one_ne_zero
+  -- A⁺ and R-U: `∫_{TAᶜ} = ∫_{Eᶜ} + ∫_{E∖TA}`, the second over a null set
+  have hAμ := hA μ σ hTS
+  have hnull : σ (I.E \ I.TA) = 0 := hRU σ hσfin hrot
+  have hsplit : I.TAᶜ = I.Eᶜ ∪ (I.E \ I.TA) := by
+    ext χ
+    simp only [Set.mem_compl_iff, Set.mem_union, Set.mem_sdiff]
+    constructor
+    · intro h
+      by_cases h1 : χ ∈ I.E
+      · exact Or.inr ⟨h1, h⟩
+      · exact Or.inl h1
+    · rintro (h | ⟨-, h⟩)
+      · exact fun h' => h (I.TA_subset_E h')
+      · exact h
+  have hre : ∫ χ in I.Eᶜ, (χ 1 : ℂ).re ∂σ = 0 := by
+    have h := integral_re (𝕜 := ℂ) (hint (σ.restrict I.Eᶜ) inferInstance)
+    simp only [RCLike.re_to_complex] at h
+    rw [h, hMRτ, Complex.zero_re]
+  have hint' : Integrable (fun χ : Dual F => (χ 1 : ℂ).re) σ := by
+    simpa only [RCLike.re_to_complex] using (hint σ hσfin).re
+  rw [hsplit, setIntegral_union (disjoint_compl_left.mono_right Set.sdiff_subset)
+    (I.measurableSet_E.diff I.measurableSet_TA) hint'.integrableOn hint'.integrableOn,
+    hre, setIntegral_measure_zero _ hnull, add_zero] at hAμ
+  exact lt_irrefl 0 hAμ
 
 /-- **The lower half**: `χ(F²) ≥ 5` from the chain. -/
 theorem Interface.five_le_chromaticNumber (I : Interface F) (hBH : BochnerHerglotz (unitRing F)) (hRU : I.RU)
