@@ -42,7 +42,7 @@ full.*
 
 6. **Commits by explicit path.** The tree is shared by five agents.
    - `git add <new file>`, then `git commit <paths> -m …`; never a bare `git commit`, and never `git add -A`.
-   - Never amend, and never push.
+   - Never amend. **Push after each commit** (`git push origin main`); if a push fails because another agent was pushing at the same moment, retry once after a few seconds. **Never force-push.** (Corrected 19:55 by the owner: an earlier text said "never push"; Kooshi's rule is push freely, never force-push, and a brief that says push is right.)
    - Subjects are neutral, naming the job and the stage ("J07: stage 2"), because the harness shows every agent the last five subjects.
    - End the message with your harness's attribution lines.
 
