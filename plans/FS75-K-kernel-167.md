@@ -240,3 +240,40 @@ one-line instance of `four_le_chromaticNumber_of_cert` once `tools/j52_intcert.p
 
 - None. No certificate was produced; the one move declined was running the two other V2-format certificates, which is checking, not
   searching, and was out of scope.
+
+## Theorems this phase proved
+
+- **`ThreeColour.nonempty_winding`** — a colouring `A → ZMod 3` of an abelian group, proper along `s`, carries a winding (an additive
+  functional on `ker relMap s` with `Σ_j min(r_j, 2r_j) ≤ 3W(r)`); no torsion-freeness, generation, averaging or compactness. [kernel] —
+  `Proofs/HadwigerNelson/ThreeColour.lean`. It is FS73-T42's forward lift (steps 1–3) without its averaging; no novelty claimed for the
+  lift, the winding form of the ⟹ direction is the plan's (§1.3).
+- **`ThreeColour.nonempty_winding_of_colorable`** — the same from a proper 3-colouring of `addCayley (Set.range s)`, `s j ≠ 0`. [kernel] —
+  same file. **Its hypothesis `s j ≠ 0` is necessary**: false at `s = ![0]` on `ℤ`. [hand] — stage 5.1.
+- **`ThetaCert.Cert.isEmpty_winding`**, **`Cert.not_properAlong`** — a passing V2 relation-branching certificate (integer multipliers)
+  leaves no winding, hence no colouring proper along its units. [kernel] — `Proofs/HadwigerNelson/ThetaCert.lean`. With the generic walk
+  `Soundness.checkTree_sound` (any group, any relation list in the lattice).
+- **The checker's sign guard is necessary** — without it `signPlant` passes while its units carry a winding. [kernel: `signPlant.check =
+  false` and `Nonempty (Winding signPlant.gen)` in the module; the guard-free acceptance in a scratch copy] — stage 5.1.
+- **`tinyK4_isEmpty_winding`** — `{1, 2, 3} ⊂ ℤ` carries no winding. [kernel] — `ThetaCert.lean`.
+- **`ThetaPlane.four_le_chromaticNumber_of_cert`** — a passing certificate whose units satisfy `a² + d·b² + c² + d·e² = D²`, `ab + ce = 0`
+  proves `χ(F²) ≥ 4` for every real field `F ∋ √d`. [kernel] — `Proofs/HadwigerNelson/ThetaPlane.lean`.
+- **`four_le_chromaticNumber_planeOver_sqrt167`**: `χ(ℚ(√167)²) ≥ 4`, and **`four_le_chromaticNumber_planeOver_of_sqrt167_mem`** over every real
+  field holding `√167` — row 79 in the kernel, with no finite graph; standard three axioms, no native purchase. [kernel] —
+  `Proofs/HadwigerNelson/Instances/SqrtOneSixSeven.lean`, from `Sqrt167.cert_units`, `Sqrt167.cert_check` (`decide +kernel`, 12.2 CPU s).
+
+## Edits proposed for the front-page lane (not made here)
+
+- `LEDGER.md` row 79: add "kernel: `four_le_chromaticNumber_planeOver_sqrt167` (FS-75's minimal instance, J52K), from T41's 1,050-leaf
+  certificate against the integer winding, no finite graph, no native purchase; `Proofs/HadwigerNelson/Instances/SqrtOneSixSeven.lean`".
+  `LEDGER.md` § B: the two hand/kernel facts of stage 5.1 (the necessity of `hs` and of the sign guard), address this record.
+- `CLAUDE.md` § Where the problem stands, "What the kernel holds": add `χ(ℚ(√167)²) ≥ 4` (row 79) — the first field-level lower bound at an
+  exposed field of the conjecture in the kernel — and "the three-colour criterion's ⟹ in winding form, and a checker for relation-branching
+  `Θ₃` certificates" (FS-75).
+- `plans/STUB-three-colour-criterion-kernel.md` and `plans/FRONTIER-STUBS.md` row FS-75: the minimal instance **landed** (J52K); the kernel
+  needs only the winding form for any relation-branching certificate, and averages and compactness only for the full criterion (FS81-T2's
+  route); next: the family theorem (row 82) with `ThreeColour.nonempty_winding` as its first input; the consumer is ready for every V2-format
+  certificate once `tools/j52_intcert.py` takes `d, D` (`Ld65c8ee8` over `d = 11`, the 60-vector control, P-60). ℚ(√47)'s T26 tree is a
+  `θ`-space tree and needs a second checker.
+- `plans/STUB-quadratic-witnesses-kernel.md` (FS-60): relation-branching certificates are now one-line instances.
+- `CLAUDE.md` § What compute actually helps ("a kernel leaf priced after a fine obligation pass is priced high"): one more instance — J52's
+  estimate of 4.5 h (plan rates) closed in about 45 minutes of wall clock, leaf 2 (priced as "the one real risk", 90 minutes) in about 15.
