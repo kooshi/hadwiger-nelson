@@ -98,3 +98,84 @@ hexadecimal tokens in the reports were checked as commits too. **Nothing named i
 ### 1.5 Would-have-searched-here log
 
 Empty: nothing in this job calls for a finite-witness search.
+
+## Stage 2 — SAVED (the index)
+
+### 2.0 The crunch's map (addresses only)
+
+| what | where |
+|---|---|
+| the queue (claim lists §2, reframe §3, jobs §4 and §7, expectations §5, advice §6) | `plans/CRUNCH-2026-09-26-x2x3-queue.md` |
+| the milestone it ran | FS-100, stage 5: plan `plans/FS100-three-field-lemma.md`; stub `plans/STUB-measure-rigidity-three-fields.md` |
+| the three closes (mathematics half) | `plans/FS100-three-field-lemma.md` §R-close (stage 5) [X09C], §R-close (stage 5, wave 3) [X29C], §R-close (stage 5, wave 3b) [X31C] |
+| the derivation register | `plans/FS100-derivation.md` §3 (stage 5), §4 (wave 3), §5 (wave 3b), §G, §K |
+| the close inventories | `plans/FS100-x2x3-close-inventory.md` (waves 1–2); `plans/FS100-x2x3-wave3-close-inventory.md` (wave 3) |
+| the front-page records | `data/fs100/x10f-record.md` (rows 120–122), `data/fs100/x30f-record.md` (rows 123–125), `data/fs100/x31c-record.md` (rows 126–127) |
+| the ledger rows | `LEDGER.md` rows 120–127 (and the corrections to rows 113, 117, 118, 120, 121 the records list) |
+| new in `CLAUDE.md` | § Frontier item 29; grokking G80 (X10F, `data/fs100/x10f-record.md`) |
+| the stub minted | FS-101, `plans/STUB-main-clause-five-kernel.md` (X29C; the kernel port of row 123) |
+| briefs, reports, the clerk's list | `data/crunch-2026-09-26-x2x3/briefs/`, `…/reports/` (one per job; `FOLDED.txt` the clerk's), `…/READY.md` |
+| the advisor | `plans/POROS-2026-09-26-x2x3-crunch.md`; its reading copies moved to the library (1.3) |
+
+### 2.1 Per job
+
+Brief = `data/crunch-2026-09-26-x2x3/briefs/<name>.md`; report = `data/crunch-2026-09-26-x2x3/reports/<job>.md`. "Rows" are the `LEDGER.md` rows
+whose address cell names the job's record or tool, or which the job applied; "entries" are the `plans/FS100-derivation.md` entries whose text names
+the job (`data/consolidation-2026-09-26/c1/entry-jobs.txt`, prefix `FS100-` dropped). Commits: each report's COMMITS line, and
+`data/consolidation-2026-09-26/c1/jobfiles.py <job>`.
+
+| job | brief | record | tools | data | rows | entries |
+|---|---|---|---|---|---|---|
+| planner | `PLN-x2x3-planner` | `plans/CRUNCH-2026-09-26-x2x3-queue.md` (commits "X23 planner") | — | `data/crunch-2026-09-26-x2x3/READY.md` | — | — |
+| advisor (Poros) | `ADV-x2x3-poros` | `plans/POROS-2026-09-26-x2x3-crunch.md` (commits "X23 advisor") | — | `data/crunch-2026-09-26-x2x3/poros/` | — | — |
+| J00, clerk | `J00-clerk`, `K0-clerk-budget-line` | the inventories and §4 statuses (commits "Crunch clerk") | — | `reports/FOLDED.txt` | — | — |
+| X01D | `X01D-einsiedler-fish-derivation` | `plans/FS100-X01D-derivation.md` | `tools/x01d_unit_check.py` | `data/fs100/x01d/` | 120 | EFP, EFZ, MR, Q47, EFG, EFX |
+| X01V | `X01V-einsiedler-fish-verifier` | `plans/FS100-X01V-verification.md` | `tools/x01v_entropy_check.py` | `data/fs100/x01v/` | 120 | EFP, HX1, MR, Q47, EFG, EFX |
+| X02D | `X02D-pe-lim-derivation` | `plans/FS100-X02D-derivation.md` | `tools/x02d_pe1_counterexample.py`, `tools/x02d_circle_measure.py` | `data/fs100/x02d/` | 120 | PE1, HX1, PE2, CE1 |
+| X02V | `X02V-pe-lim-verifier` | `plans/FS100-X02V-verification.md` | `tools/x02v_checks.py` | `data/fs100/x02v/` | 120 | PE1, HX1, PE2, MR, EFG, CE1, FR1, ED1 |
+| X03D | `X03D-fourier-flip-derivation` | `plans/FS100-X03D-derivation.md` | `tools/x03d_factor_minima.py`, `tools/x03d_weyl.py` | `data/fs100/x03d/` | 122 | FR1, ED1, ED2, FLK, SPEC, FLH, X22 |
+| X05V | `X05V-sp-cor-flip-verifier` | `plans/FS100-X05V-verification.md` | `tools/x05v_checks.py` | `data/fs100/x05v/` | 121, 122 | Q47, FLK, SPEC, FLH |
+| X11K | `X11K-lean-47-dependencies` | `plans/FS100-K-kernel-47.md` | — | `data/fs100/x11k/` (the skeleton in history, 1.3) | 127 | EFP, MR, Q47 |
+| X12B | `X12B-ef-plus-blind-derivation` | `plans/FS100-X12B-derivation.md` | `tools/x12b_multiplier_count.py` | — | 120 | EFP, EFZ, MR, EFG |
+| X13R | `X13R-ed2-z-reading-check` | `plans/FS100-X13R-check.md` | `tools/x13r_check.py` | rescued plant outputs (1.2) | 122 | ED2 |
+| X09C, close | `X09C-close-math` | `plans/FS100-three-field-lemma.md` §R-close (stage 5) | — | `data/fs100/x09c/` (empty) | drafted 120–122 | wrote §3 |
+| X10F, front page | `X10F-front-page` | `data/fs100/x10f-record.md` | (`tools/claude_md_fact_audit.py` ALLOW lines) | scripts rescued (1.2) | applied 120–122; corrected 118 | — |
+| X11K2 | `X11K2-lean-47-gate-and-upper-bound` | `plans/FS100-K-kernel-47.md` §X11K2 | — | `data/fs100/x11k/` | 127 | CLS, SPC, COR, Q35 |
+| X11K3 | `X11K3-lean-gate-general` | `plans/FS100-K-kernel-47.md` §X11K3 | — | `data/fs100/x11k/` (build, axiom, vacuity logs) | 127 | — |
+| X21D | `X21D-167-and-family-derivation` | `plans/FS100-X21D-derivation.md` | `tools/x21d_family.py` | `data/fs100/x21d/` | 123, 125 | Q0, FAM, K0b, 167, B12, B3 |
+| X21V | `X21V-167-and-family-verifier` | `plans/FS100-X21V-verification.md` | `tools/x21v_checks.py` | `data/fs100/x21v/` | 123, 125 | Q0, FAM, K0b, 167, B12, B3 |
+| X22D | `X22D-type-B-derivation` | `plans/FS100-X22D-derivation.md` | `tools/x22d_checks.py` | `data/fs100/x22d/` | 124 | X22, X27D-EQ, X27D-E |
+| X22V | `X22V-type-B-verifier` | `plans/FS100-X22V-verification.md` | `tools/x22v_c0.py`, `tools/x22v_simplex.py` | `data/fs100/x22v/` | 124 | X22, X27D-E, X27D-FL |
+| X23D | `X23D-spcor-every-field-derivation` | `plans/FS100-X23D-derivation.md` | `tools/x23d_class.py`, `tools/x23d_norm_one_spectrum.py` | `data/fs100/x23d/` | 123 | FAM, CLS, DLP, G27, TCA, CX, SPC, EXC, COR, Q35, D1, CTL |
+| X23V | `X23V-spcor-every-field-verifier` | `plans/FS100-X23V-verification.md` | `tools/x23v_places.py`, `tools/x23v_hoffman.py` | `data/fs100/x23v/` | 123 | the same, and GF |
+| X24R | `X24R-prior-art-gate` | `plans/FS100-X24R-prior-art.md` | (`data/fs100/x24r/arx.py`) | `data/fs100/x24r/` | the gate sentence of 121, 123 (`data/fs100/x30f-record.md`) | EFX, CE1, FR1, FLK, SPEC, FLH, FAM, 167, CLS, COR |
+| X25B | `X25B-tca-class-blind-derivation` | `plans/FS100-X25B-derivation.md` | `tools/x25b_t1_check.py` | `data/fs100/x25b/` | 123 | FAM, TCA, CX |
+| X26B | `X26B-cls-every-field-blind-derivation` | `plans/FS100-X26B-derivation.md` | `tools/x26b_spectra.py`, `tools/x26b_uq_colour.py` | `data/fs100/x26b/` | 123 (through §4's entries; its address cell does not name X26B) | CLS, DLP, G27, CX, EXC, COR |
+| X27D | `X27D-tr-rot-derivation` | `plans/FS100-X27D-derivation.md` | `tools/x27d_ramanujan.py` | — (`data/fs100/x27d/` empty) | 126 | X22, X27D-EQ, -E, -ATT, -FL, -SIERP |
+| X27V | `X27V-tr-rot-verifier` | `plans/FS100-X27V-verification.md` | — | — (`data/fs100/x27v/` empty) | 126 | the same, and X27V-PM |
+| X28D | `X28D-complex-place-scope` | `plans/FS100-X28D-derivation.md` | `tools/x28d_check.py` | `data/fs100/x28d/` | 123 | COR, X22, X28D-P, -S, -CP1, -CP2, -CP3, -ODD, -CUBE |
+| X29C, close | `X29C-close-math-wave3` | `plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3); FS-101's stub | — | — | drafted 123–125 | wrote §4 |
+| X30F, front page | `X30F-front-page-wave3` | `data/fs100/x30f-record.md` | (`tools/claude_md_fact_audit.py` ALLOW lines) | scripts rescued (1.2) | applied 123–125; corrected 113, 117, 120, 121 | — |
+| X31C, fold and front page | `X31C-tr-rot-fold` | `plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3b); `data/fs100/x31c-record.md` | (`tools/claude_md_fact_audit.py`; `scripts/vacuity-baseline.txt` comment) | — | applied 126, 127 | wrote §5 |
+
+### 2.2 The ledger rows, read back to their jobs
+
+| row | subject (the row's own opening words, truncated) | jobs | close |
+|---|---|---|---|
+| 116 | "Kronecker selection is false as stated, and at ℚ(√47) its corrected form is the question." | J51D, J51V | J53, J53b; front page J55 |
+| 117 | "T-C(A)'s class among real quadratic fields is the conjecture's `L ≥ 5` family, and SP-Cor holds over it." | J51, J51V | J53, J53b; J55 |
+| 118 | "Rank one of Kronecker selection, and why Einsiedler–Lindenstrauss's classification does not apply." | J51, J51D, J51V | J53, J53b; J55 |
+| 119 | "`χ(ℚ(√167)²) ≥ 4` in the kernel, with no finite graph" | J52, J52K | J54; J55 |
+| 120 | "Measure rigidity for the unit-vector group" | X01D, X01V, X02D, X02V, X12B | X09C; X10F |
+| 121 | "`χ(ℚ(√47)²) = 5`: the local–global conjecture's cheapest exposed five-clause is met." | X05V (with J45, J46 and R88-TCA); X24R's gate | X09C; X10F |
+| 122 | "Where the other routes to MR stop" | X03D, X05V, X13R | X09C; X10F |
+| 123 | "The local–global conjecture's main clause through five" | X21D, X21V, X23D, X23V, X25B, X26B, X28D; X24R's gate | X29C; X30F |
+| 124 | "The type-(B) fields given MR" | X22D, X22V | X29C; X30F |
+| 125 | "Six at ℚ(√167) contains a question about the real plane alone." | X21D, X21V | X29C; X30F |
+| 126 | "TR-ROT is Q-μ, and its spectral side is closed on `E`." | X27D, X27V | X31C |
+| 127 | "The main clause through five in the kernel, conditional on named hypotheses" | X11K, X11K2, X11K3 | X31C |
+
+### 2.3 The post-crunch jobs of the night before (J50–J55)
+
+They are indexed in the 2026-09-25 index, which lacked them: `plans/CRUNCH-2026-09-25-INDEX.md`, "Addendum — the jobs after the crunch's close
+(C1, 2026-09-26; addresses only)".

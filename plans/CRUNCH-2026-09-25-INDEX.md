@@ -1006,3 +1006,21 @@ Empty: no stage of this job called for a finite-witness search.
 | **J48** — FS-100 stage 1, the bundled blind check | `plans/FS100-BC-verification.md` | `tools/crunch_j48_places.py`, `tools/crunch_j48_controls.py`; `data/fs100/j48/` | J48 | FS-100 (status block, §2.3) |
 | **J49** — FS-100 stage 2, KT-1 | `plans/FS100-KT1-ambrus-ball.md` | `tools/fs100_kt1_ball.py`, `tools/fs100_kt1_grid.py`; `data/fs100/kt1/` | J49 | `LEDGER.md` rows 92, 112 (grades); `BIBLIOGRAPHY.md` `[AmbrusEtAl2023]`; `plans/PA-ambrus2023-audit.md` |
 | **FS-100** — minted, stages 1–2 done, FS-97 absorbed; open, not run | `plans/STUB-measure-rigidity-three-fields.md` | — | J47, J48, J49 | `plans/FRONTIER-STUBS.md` rank 3; `CLAUDE.md` § Paths forward (a pointer) |
+
+## Addendum — the jobs after the crunch's close (C1, 2026-09-26; addresses only)
+
+*Added by consolidation job C1 (`plans/CRUNCH-2026-09-26-x2x3-INDEX.md`), which indexes the ×2×3 crunch that followed. Briefs are in
+`data/crunch-2026-09-25/briefs/`, reports in `data/crunch-2026-09-25/reports/<job>.md`. J53b is J53's successor on the same brief.*
+
+| job | brief | record | tools and data | lands |
+|---|---|---|---|---|
+| **J50** — Poros: the next two milestones | `J50-poros-next-two-milestones.md` | `plans/POROS-2026-09-26-next-two-milestones.md` | — | the choice of FS-100's in-ban round and FS-75's minimal instance |
+| **J51** — FS-100's planner (stages 1–4: §G, §PA, §IQ, the briefs) | `J51-FS100-three-field-lemma-planner.md` | `plans/FS100-three-field-lemma.md` stages 1–4 | `tools/j51_tca_class.py`; `data/fs100/j51/` | `LEDGER.md` rows 117, 118; `plans/FS100-derivation.md` FS100-T1, T2 |
+| **J51D** — Kronecker selection, derived | `J51D-FS100-kronecker-derivation.md` | `plans/FS100-J51D-derivation.md` | `tools/j51d_or_check.py`; `data/fs100/j51d/` | rows 116, 118; `plans/FS100-derivation.md` §1 (L0, KS2, CP, X1, KS3, T4, T5, R, EQ, C45) |
+| **J51V** — the same, blind | `J51V-FS100-kronecker-verifier.md` | `plans/FS100-J51V-verification.md` | `tools/j51v_class.py`, `tools/j51v_cross.py`; `data/fs100/j51v/` | rows 116, 117; §1–§2 (L0, KS2, CP, X1, X2B, KS3, N1, EQ, C45, T1, K0) |
+| **J52** — FS-75's planner | `J52-FS75-kernel-167-planner.md` | `plans/FS75-kernel-167.md` | `tools/j52_intcert.py`; `data/fs75/j52/` | row 119 |
+| **J52K** — FS-75's kernel port | `J52K-FS75-kernel-167.md` | `plans/FS75-K-kernel-167.md` | `tools/j52k_plant.py`; `Proofs/HadwigerNelson/ThreeColour.lean`, `ThetaCert.lean`, `ThetaPlane.lean`, `Instances/SqrtOneSixSeven.lean` (+ `/Cert.lean`); scratch gate logs and the scratch data module rescued to `data/consolidation-2026-09-26/rescued/scratch/` | row 119; `plans/FS75-derivation.md` (FS75-W, C, T, H, K4, N1, N2) |
+| **J53** — FS-100's close, stages 1–3 | `J53-FS100-close-math.md` | `plans/FS100-three-field-lemma.md` §R-close (J53), stages 1–3 | `data/fs100/j53/` | `plans/FS100-derivation.md` §1–§2; `plans/FS100-close-inventory.md` |
+| **J53b** — the same close, stages 4–5 | (J53's) | `plans/FS100-three-field-lemma.md` §R-close, stages 4–5 | `data/fs100/j53/` | the stub re-aims (`plans/STUB-measure-rigidity-three-fields.md`, `plans/STUB-adelic-window-colouring.md`); the drafts for rows 116–118 |
+| **J54** — FS-75's close | `J54-FS75-close.md` | `plans/FS75-kernel-167.md` §R-close | `data/fs75/j54/` | `plans/FS75-derivation.md`; `plans/FS75-close-inventory.md`; the stub re-aims (`plans/STUB-three-colour-criterion-kernel.md`, `plans/STUB-quadratic-witnesses-kernel.md`) |
+| **J55** — the front page for both | `J55-front-page-FS100.md` | `data/fs100/j55-record.md` | the application script, rescued: `data/consolidation-2026-09-26/rescued/scratch/apply.py` | `LEDGER.md` rows 116–119; `CLAUDE.md`; `plans/FRONTIER-STUBS.md`; `BIBLIOGRAPHY.md` |
