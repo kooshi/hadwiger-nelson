@@ -267,8 +267,8 @@ quotient is dB8's `G₃` (Poros (round 2) confirmed by counting). *Proof:* `plan
 **FS85-V2-T5 — The stripe lemma: under NT₀, every proper four-colouring of the triangular lattice is striped (type O/P wheels; propagation along a diagonal line, then line to line). [hand; verifier 2]**
 *Proof:* `plans/FS85-V2-verification.md` §W5 item 3. *Proof verdict:* closes. *Rests on it:* verifier 2's pair-linearity and count (C9's
 second derivation); in the agents' chain Parts's human lemma is cited instead. *Prior art:* `[Parts2020hv]` §3's second part (the same
-lemma, human-verified there); Gibbs's sketch of 30 May 2018; MASCOT-T10. *Kernel:* **stub — a good small kernel target** (a finite
-local lemma plus an induction on lines; FS-87).
+lemma, human-verified there); Gibbs's sketch of 30 May 2018; MASCOT-T10. *Kernel:* kernel (M2, 2026-09-25; `plans/M2-derivation.md`
+§I.9, §I.5): `HadwigerNelson.Stripe.striped_of_proper_nt0` (`Proofs/HadwigerNelson/Stripe.lean`) — in full.
 
 **FS85-C10 — Corollary U: from G481 placed in `Λ` (NT for `|k| ≤ 2` on `Cay(Λ, U)`), every four-colouring of de Grey's lattice is `120Λ`-periodic; `F ⊇ 120Λ`, `P = F`, with no solver refusal. [hand + tools exact, given (S″); Coxeter]**
 The gap to `8Λ` located: a 3-part (the 81 components of the five-family graph, joined only by families ±3, ±4) and a 5-part (48 order-10
