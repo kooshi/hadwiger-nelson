@@ -1,0 +1,6 @@
+A  DA-1' on C5 x K4: proper=True not-pulled-back=True
+B  K4, k=4: 24 proper colourings; tested 24; each has only itself as neighbour: True
+B  C5, k=3: 30 proper colourings; tested 1; each has only itself as neighbour: False
+C  E_3(K_3): 21 vertices, 30 edges, monochromatic arcs under gamma: 0
+C  E_4(K_4): 232 vertices, 1314 edges, monochromatic arcs under gamma: 0
+ALL OK
