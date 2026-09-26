@@ -66,3 +66,25 @@ and R.8d's additions; `bib_audit.py` must pass (the 5 arXiv ids and 23 keys abov
 **`plans/CRUNCH-2026-09-25-post-close-inventory.md`** — ticks for front-page rows (3, 4, 7–11, 17, 25, 27, 28 examined; see stage 5).
 
 **Not touched:** `CLOSED-QUESTIONS.md` (neither close drafted an entry; the owner ruled the `B(n)`/`A(n)` composition out).
+
+## Stage 2 — SAVED (`LEDGER.md`)
+
+Applied by `data/crunch-2026-09-25/j44/apply_ledger.py`, which extracts every row and § B line verbatim from its source and asserts each
+anchor once (plant — demand a row 116 no plan holds — fired first, exit 1, nothing written; a re-run refuses, rows already present).
+- Rows **111–113** (`plans/FS86-row88-rigidity.md` §R-close 4.1) and **114–115** (`plans/FS67-tight-products.md` §R-close R.8a), after row 110.
+- § B: **19 `R88-*`** lines (`data/fs86r88/j41/ledger-b-draft.md`) and **20 `FS67-*`** lines (R.8b), FS67-CL's grade per the owner's
+  ruling ("hand, one mind (J40) + a one-step check (J42)").
+- **Corrections in place:** row 88's V2 clause now says the finite-index step holds for every real number field with no Lemma R
+  (`[LevitzMott1972]` Thm 2.3, row 111), and row 111's "Corrects row 88" sentence points there instead of retelling it (it tripped
+  `--dupes`); row 110's *Prior art* now records C14.2 (c) at `q = 2` as partly in print (`[BardestaniMallahiKarai2017]` §3.2, row 113).
+- The header's crunch paragraph names rows 111–115.
+
+**Gates:** `tools/fs71_ledger_b_check.py --strict` exit 0, **PASS** (714 entries, 714 § B rows). Fact audit `--base fb5c224e` exit 0,
+PASSED. `--dupes` exit 0, **13** (was 11): the two new runs are the shared conclusion and grade of three distinct § B lines, FS67-DC1,
+FS67-DC2 and FS67-DD1 ("⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations; GRRSV external)") — a table's formula over
+three theorems with one conclusion, not a retelling.
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| leave the FS67 § B dupes at 13 and report them | reword DC-1's or DD-1's drafted line so the count returns to 11 | three different hypotheses with one conclusion are three theorems; rewording a close's draft to satisfy a tripwire hides nothing and changes the close's words | high |
+| correct row 88 in place and point row 111 at it | leave row 88 as it was and let row 111 carry the correction | current-state rule: row 88 is read on its own; a reader of row 88 should not need row 111 to know V2's scope | high |
