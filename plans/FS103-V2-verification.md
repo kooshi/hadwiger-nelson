@@ -167,3 +167,61 @@ anticorrelation off `E`), reproduced by a route that uses `λ* < 1/3` instead of
 **Wrong-reason lines, avoided:** (i) the measurable version is proved (L2), not assumed; (ii) the threshold is `λ* < 1/(k−1)`, used through
 the mixing inequality, never a ratio; (iii) the product edge set is weak approximation (L-WA); (iv) `sup_v λ*_v < 1/(k−1)` is shown
 (Step 0); (v) the extension is on `T + A` only — `E ∖ (T + A)` is removed by R-U before the selection, so no split place enters.
+
+## Stage 2b — SAVED (the other claims) [all hand, one mind — mine — unless marked]
+
+- **C-CPUP: TRUE.** A CP `k`-colouring of `UD(ℝ²)` restricted to a countable `F²` is a.s. proper on all its (countably many) edges, so some
+  proper colouring exists: `χ(F²) ≤ χ_CP(ℝ²)`. A finite subgraph of `UD(ℝ²)` lies in `F²` for its (countable) coordinate field, so DBE gives
+  `χ(ℝ²) ≤ χ_CP(ℝ²)`. `χ(F²) ≤ χ(ℝ²)`: subgraph. No Tarski, no MR.
+- **C-635-THK: TRUE** (Haar choice). Every stable place has `q = p ≥ 103` (§2.1) or is the ramified 635087. Level one: 0.192617 at 103
+  (exact, §2.1), `≤ 2√q/(q+1) ≤ 0.19155` for `q ≥ 107` (I-WEIL; decreasing in `q`); new levels `≤ 2/104` (V2-NL). So
+  `sup_v λ*_v = 0.192617 < 1/5`, `N₄ = N₅ = N₆ = ∅`. The stub's 0.1952 is Weil's bound; the exact value is lower. [tools + hand, given
+  I-WEIL's level-one bound above 103]
+- **C-635-F1: TRUE given MR(ℚ(√635087))** (the field is outside row 100's exception, §2.1). Let `k = χ(F²) ≤ 7`. C-CPUP:
+  `k ≤ χ(ℝ²) ≤ χ_CP(ℝ²) ≤ 7` (I-CP57). If `k ≤ 6`: `N_k = ∅`, C-LB gives (A) or (B); (B) is a non-Haar `U`-invariant `E`-null measure
+  (`∫ χ(1) d(Haar) = 0`), excluded by MR; so `χ_CP(ℝ²) ≤ k`. If `k = 7`: `χ_CP ≤ 7 = k`. Either way all three are equal.
+- **C-635-TF: TRUE given C-635-F1 and `χ(ℝ²) ≥ 6`.** Three mutual unit distances in `F²` force `√3 ∈ F` (G57, `[Krebs2022]` L. 5.1), and
+  `635087 ≠ 3·(square)`, so `F²`'s graph is triangle-free; `χ(F²) = χ(ℝ²) ≥ 6` and DBE give a finite triangle-free subgraph with `χ ≥ 6`.
+- **C-dG-THK: TRUE** (Haar choice). `F_dG/ℚ` has group `(ℤ/2)⁴`, so residue degrees are 1 or 2; stable needs `f` odd, so `f = 1`, `q = p`;
+  stable places lie over 131, 479, … (§2.1; ramified 3, 5, 7, 11 and 2 not stable). `sup λ* = 0.168047` (exact at 131; Weil below it
+  beyond; V2-NL deeper) `< 1/5`. [tools + hand, given I-WEIL]
+- **C-dG-F1: TRUE given MR(`F_dG`)**, by C-635-F1's argument (`F_dG` totally real, outside the exception, `N₆ = ∅`). Needs MR at degree 16;
+  C-635-F1 gives the same conclusion with MR at degree 2 only.
+- **C-MR16: NOT REACHED** (budget). Goes to FS-105.
+- **C-F1-GEN.** *Stub text: MISSTATED* — (i) "real field" must be "real number field" (stable places and MR are number-field notions);
+  (ii) "no non-thick stable place" must name `k`: the sandwich uses C-LB at `k = χ(F²) ∈ {5, 6}`, so `N₆(F) = ∅` is needed; with only
+  `N₅ = ∅`, a field with `χ(F²) = 6` gives nothing. *Corrected:* "given MR(F), for every real number field `F` with `N₆(F) = ∅` (D-THK (c)),
+  `χ(ℝ²) = χ_CP(ℝ²) = χ(F²)`" — **TRUE** (C-LB widened, §2.3). *Proposed scope (totally real, outside the exception, `N₆ = ∅`, MR(F)):* **TRUE**;
+  "totally real" and "outside the exception" are not needed (the first by L4, the second implied by `N₆ = ∅`). "Given T-J39-3" is not
+  needed as an input: C-LB supplies the forward direction used.
+- **C-S.** (a) For D-S the first sentence is trivial (ℝ is a subfield; G64) and its parenthesis is not needed; for S_nf it is **TRUE given
+  C-dG-F1** — and given C-635-F1, with MR at degree 2 only. (b) **TRUE** for S_nf over every real number field (not only totally real),
+  given MR(F) at every `F` with `N₆(F) = ∅` and at ℚ(√635087): ⟸ — `χ_CP = 5` makes every countable `F` at most 5 (C-CPUP, no MR); `χ_CP = 7`
+  and the conjunct: a field with `N₆ = ∅` and `χ = 6` would give `χ_CP ≤ 6` (C-LB, MR); ⟹ — S_nf and C-635-F1 exclude `χ_CP = 6`, and the
+  conjunct is S_nf itself restricted. The conjunct is S_nf on the non-6-thick fields, so the content of (b) is "every 6-thick field is
+  decided by `χ_CP`". (c) **GAP (as exact).** Finitely many residue sizes can be non-6-thick: odd `q ≤ 97` (Weil), by my table exactly the
+  primes 3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83 (all `λ* ≥ 1/5` at level one) and possibly 27 (not computed); dyadic inert `Q ≤ 64`
+  (`U₆₄`: `15/65`, G56) and ramified dyadic. Those at 3, 7, 11, 19, dyadic `Q ≤ 32` and ramified dyadic have 5-colourable targets, so their
+  fields have `χ ≤ L ≤ 5` and drop out. But each remaining residue size is realised by infinitely many local fields `F_v` (unbounded
+  ramification `e`; `O_w/𝔓²` is `(ℤ/p²)^{2f}` at `e = 1` and `𝔽_p^{4f}` at `e ≥ 2` — the carry of G66), and a field can have unboundedly many
+  such places; so the family of products `UD(ℝ²) × ∏ G_v` is infinite on the page. "Finite" needs a lemma not on record (level collapse of
+  CP-colourability to finitely many types, plus merging of multiplicities — I-MERGE covers only identical factors). (d) For all subfields of
+  ℝ: S reduces to finitely generated subfields (a 6-chromatic `F` has a finite 6-chromatic graph whose coordinate field `E` has
+  `χ(E²) = 6`); number fields, including those with complex places, are (b); transcendence degree `≥ 1` is **missing**: a formally real place
+  of `E` gives `χ(E²) ≤ χ(F′²)` for its residue number field, the wrong direction — the step needed is Q-const (G63, open), `χ(E²) = χ(F₀²)`
+  for the constant field `F₀`.
+- **C-FMT.** (a) **TRUE** (L2; classical: measurable modification of a process continuous in probability). (b) **TRUE**: for the jointly
+  measurable version `c̄`, `P(c̄(x) = c̄(x + w)) = 0` for every `(x, w)`, so by Fubini on `Ω × ℝ² × S¹`, for a.e. `ω` the section is a
+  Lebesgue-measurable colouring proper at a.e. edge. (c) **GAP at continuity in probability.** The natural construction — a weak limit of
+  `f(ρ_Θ x + V_N)`, `V_N` uniform on growing boxes, `Θ` an independent uniform rotation — is stationary and proper at every fixed edge (the
+  rotation turns "a.e. `(x, w)`" into "every `w`"), but continuity in probability is not inherited: a hexagonal 7-colouring (tiles of
+  diameter `< 1`, same-colour gaps `> 1`, slack on both) whose tile boundaries wiggle at scales tending to 0 far from the origin gives a limit
+  with `P(c(0) ≠ c(h)) ↛ 0`. That kills the construction, not the inequality. (d) **GAP** — the null-set step (row 110's GAP-1); not derived.
+  `χ_m⁰ ≤ χ_m` is trivial. (e) `χ ≤ χ_m ≤ χ_B ≤ 7` (a Borel colouring is measurable; the hexagonal colouring is Borel); `5 ≤ χ_m⁰` (I-CP57's
+  measurable Hoffman bound on edge-null sets); `χ_B` against `χ_CP` is (c)'s GAP.
+- **C-CPM: GAP with no MR** — it is (c) for everywhere-proper colourings, and the same construction fails at the same step; it does not follow
+  from C-FMT (a)–(b), which give the other direction (`χ_m⁰ ≤ χ_CP`). **TRUE given C-635-F1** (so given MR at degree 2): `χ_CP = χ ≤ χ_m`.
+
+### Would-have-searched-here log (stage 2)
+- Would have run a SAT/finder at 27 for `λ*`: not needed — 27 is only named as "possibly non-6-thick"; the spectrum at 27 (exact, seconds)
+  is left to the close.
