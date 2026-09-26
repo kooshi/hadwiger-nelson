@@ -110,7 +110,7 @@ print; clerk briefs ask for thoroughness (Kooshi).
 2001, Barajas–Serra 2009, Shimura 1964, Špacapan 2011 (EJC 32(8), doi 10.1016/j.ejc.2011.07.002), Eggleton–Erdős–Skilton 1990 (Graphs Combin.
 6), Johnson 2000/2006 (`plans/FS91-PA-close.md` §C.2); telling Ambrus et al. of their checker's two gaps (default: no).
 
-## 6. State at ~01:30, 2026-09-26 — READ THIS FIRST (supersedes §5)
+## 6. State at ~01:30, 2026-09-26 (superseded by §7)
 
 **Cap: 2 concurrent agents until Kooshi says otherwise** (cut 4–5 → 4 at ~20:30, → 2 at ~22:15; the 5-hour usage window). Ids in the
 owner scratch `owner-crunch/live-agents.md` (copy in `~/source/lean-dir-rescue/owner-scratch-2026-09-25/owner-crunch/`). `CLAUDE.md` budget
@@ -137,3 +137,29 @@ after J25). Kronecker selection = FS-100 stage 4, after the crunch (Kooshi "yes 
 
 **Open with Kooshi:** papers by browser (Zaks 1989; Johnson 2000 Geombinatorics 9(3); Sally–Taibleson 1966; Bergelson 1985; DSW 1985;
 El-Zahar–Sauer 1985; Sauer 2001; Zhu 1998; Tardif 2006; Johnson–Rodger 2005; and §2's list); post-ban Y1/Y2 (FS-90, FS-64).
+
+## 7. State at ~03:00, 2026-09-26 — READ THIS FIRST (supersedes §6)
+
+**The crunch's queue is CLOSED** (J25: `plans/CRUNCH-2026-09-25-queue.md` §8 — jobs, §5 scored 21/7, what goes to 2026-10-01). Front page
+current and gated (fs71 --strict, bib, fact audit PASS; `CLAUDE.md` 296,569 B, under the 300,000 default; ceiling 325,000 until the crunch
+ends). **Cap: 2 agents.** Since §6: J48 (FS-100 stage 1 blind check, all 8 TRUE) and J49 (KT-1: `[AmbrusEtAl2023]` H4 certified in ball
+arithmetic; m₁ ≤ 0.246989 is [cert + hand]) done; T-J39-4 re-graded onto the de Grey route; FS-97 absorbed into FS-100.
+
+**Kooshi, ~03:00:** *"I'm going to compact, then we have time and space for probably 2 more full milestones. Start a Poros agent to decide
+what those should be."*
+
+**Running (2):**
+- **J43** — the bookend visualization (brief `data/crunch-2026-09-25/briefs/J43-unified-map-visualization.md`); reports an artifact URL +
+  three example questions. On its report: verify commits, relay the URL and questions to Kooshi.
+- **J50** — Poros, the next two full milestones (brief `data/crunch-2026-09-25/briefs/J50-poros-next-two-milestones.md`; record
+  `plans/POROS-2026-09-26-next-two-milestones.md`); it writes the two planners' briefs `J51-*-planner.md`, `J52-*-planner.md`.
+
+**Next:** on J50's report, put the two recommendations to Kooshi in WORKFLOW's four-part form with the default; on his word (or the default),
+launch J51 and J52 at cap 2 (after J43 frees a slot if needed). Each milestone then runs: planner → derivation + blind verifier →
+close-math → front page (the crunch's pattern; briefs written by the planners and by me).
+
+**Unfolded reports** (clerk stopped at J47): J48, J49, J25, J43, J50 — fold at the next clerk run. Post-close inventory rows still open
+(not front-page): 1, 2, 5, 6, 14–16, 18–24, 26, 29–31, 36, 40.
+
+**Standing:** never quote agent ids to Kooshi; commit by explicit path; push, never force-push; no child spawns children (say so in every
+brief); the ban to 2026-10-01; replace any agent above ~500k harness.
