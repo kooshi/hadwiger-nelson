@@ -420,3 +420,43 @@ plane over `F` restricts to a proper four-colouring of `Cay(ℤ[U], U)`. Match.
 
 **Correction owed (proposed, not made — CLAUDE.md is the front-page lane's):** § Trust ledger's "1193 clean … 1,209 records" and
 § The gate's `declarations=7279 refutations-skipped=309` are stale; today's counts are above.
+
+## X11K3 Stage 2 — SAVED (`posDef_corr` proved; a false leaf found)
+
+**Closed:** `posDef_corr` in the skeleton (`data/fs100/x11k/skeleton/Sqrt47.lean`, namespace `HadwigerNelson.SpectralChain`), with
+`tetW` (the `±1` tetrahedron), `tetra_eq` (the Gram identity `tetra i j = (1/3) Σ_k w_k(i) w_k(j)`, 16 cases), `tetra_comm`,
+`abs_tetra_le`, `corr_sub` (shift invariance: `C(x − y) = E_μ⟨g(x), g(y)⟩`). The proof: pointwise
+`Σ_x Σ_y z_x z̄_y ⟨e_{c x}, e_{c y}⟩ = (1/3) Σ_k |Σ_x z_x w_k(c x)|²`, then the finite sums through the integral.
+`#print axioms`: `posDef_corr` and with it `rotInv_of_isTraceSpectral` (node L3) are `[propext, Classical.choice, Quot.sound]`;
+`Interface.x4_eq_empty` still carries `sorryAx`, through L1 only. **Plant:** the vertex `(1,−1,−1,1) ↦ (1,−1,1,1)` is refused at
+`tetra_eq` (scratch copy; unsolved goals). **Price:** ~12k, inside X11K's 10–15k.
+
+**The skeleton is restructured** onto the gated modules: it imports `SpectralChain` and `Instances/SqrtFortySeven`, holds only L1,
+`posDef_corr` and the compositions over them, in the final namespace. `data/fs100/x11k/skeleton/SqrtFortySeven.lean` is removed:
+its one home is `Proofs/HadwigerNelson/Instances/SqrtFortySeven.lean` (git has the copy).
+
+**FINDING — leaf L1, as X11K stated it, is FALSE for some real fields, and the compositions over it with it** [hand; checked twice
+below]. `exists_invariantColouring : (X4 F).Nonempty → Nonempty (InvariantColouring F)` for every `F : Subfield ℝ`.
+- *Why it fails:* `InvariantColouring` asks `μ (X4 F)ᶜ = 0` for a probability `μ` on the **product** σ-algebra of `(Fin 4)^R`. When
+  `R = ℤ[U]` is uncountable, every product-measurable set depends on countably many coordinates `J`; if `B ⊇ X₄ᶜ` is measurable and
+  `c ∈ X₄`, pick `x ∉ J` and recolour `c` at `x` only with `c(x + 1)`: the result is improper, so it lies in `B`, and it agrees with
+  `c` on `J`, so `c ∈ B`. Hence `B` is everything and the outer measure of `X₄ᶜ` is 1: **`InvariantColouring F` is empty whenever
+  `ℤ[U]` is uncountable.**
+- *A field where the leaf is false:* `F = ℚ(T)`, `T` an uncountable algebraically independent set of reals. `ℤ[U]` is uncountable
+  (the unit vectors `((1 − t²)/(1 + t²), 2t/(1 + t²))`, `t ∈ F`, are distinct), and `X₄(F) ≠ ∅` because `χ(F²) = 2` (every finite
+  unit-distance graph over `F` lives over `ℚ(t₁, …, t_n)`, which is 2-chromatic by G63 applied `n` times; de Bruijn–Erdős).
+- *The composition is false there too, not only unproved:* with `E = TA = univ`, `h = 0`, the interface satisfies R-U
+  (`τ(∅) = 0`), PE-2 (`τH = 0`), EF_F⁺ (`τ(∅) = 0`), and A⁺ holds vacuously (no invariant colouring). Herglotz–Bochner holds for every
+  discrete abelian group, with uniqueness on the cylinder σ-algebra (finite-dimensional marginals are fixed by Fourier coefficients).
+  So `Interface.five_le_chromaticNumber` at `ℚ(T)` would say `5 ≤ 2`. It was "proved" in the skeleton only through the `sorry`.
+- *What is unaffected:* every number field (then `ℤ[U] ⊆ F(i)` is countable, `X₄` is a countable intersection of cylinders, and L1 is
+  true by amenability of `ℤ[U] ⋊ U`), and every declaration in `Proofs/` — no gated theorem uses L1. **One gated docstring is wrong**
+  (`SpectralChain`'s header says L1 inhabits `InvariantColouring F` "whenever `X₄(F) ≠ ∅`"); stage 3 corrects it.
+- *The repair (stage 3):* L1 enters as the classical theorem in its own terms, true for **every** `F`: a nonempty closed measurable set
+  of colourings, stable under the shifts and rotations, carries an invariant probability measure (amenability of the solvable group
+  `ℤ[U] ⋊ U`; Markov–Kakutani twice). Countability then enters where it belongs, as a proved step: `X₄(F)` is measurable when `ℤ[U]`
+  is countable, and `ℤ[U]` is countable over a number field.
+- *Grading:* [hand, one mind]; the measurability step is the textbook fact that product-σ-algebra sets are countably determined. It is
+  the owner's to have checked. **G30 item 5 in a new costume:** a skeleton leaf is a claim, and a `sorry` at a false leaf proves the
+  wrong theorem for free. X11K's §Stage 3 read the headline aloud for `F = ℚ(√47)`, where it is right; the general `F` of the
+  composition lemmas was never read aloud.

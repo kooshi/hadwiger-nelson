@@ -1,4 +1,2 @@
-slot: admitted lake: mem 12 GiB (hard cap), cpus 0,1,2,3
-data/fs100/x11k/skeleton/Sqrt47.lean:42:8: warning: declaration uses `sorry`
-data/fs100/x11k/skeleton/Sqrt47.lean:211:8: warning: declaration uses `sorry`
-data/fs100/x11k/skeleton/Sqrt47.lean:215:8: warning: declaration uses `sorry`
+slot: admitted bash: mem 12 GiB (hard cap), cpus 0,1,2,3
+data/fs100/x11k/skeleton/Sqrt47.lean:20:8: warning: declaration uses `sorry`
