@@ -123,3 +123,128 @@ with its falsifier named; ahead of it, J36-D's SI lemma, because the poster's sh
   post-ban construction problem (Stage 4, R3).
 - Would have enumerated small lattices for a four-colourable `Λ` with `Θ₄(Λ) = ∅` (S1V's GAP). Instead: left it on EI-1's line, unchanged
   from J36.
+
+## Stage 3 — SAVED: the poster, and its composition
+
+*Notation (J36 and the row-88 records): `R = ℤ[U]` for `F = ℚ(√47)`; `X₄(F)` the proper four-colourings of `Cay(R, U)` (one per
+`R`-coset of `F²`, so colouring `F²` is colouring `Cay(R, U)`); `σ_μ` the trace spectral measure of the tetrahedral embedding;
+`E_S = T + A + Fin_S` (torsion, archimedean, continuous at the finite set `S` of split places); `E = ⋃_S E_S`.*
+
+### 3.1 The poster — theorems (one row per constraint on a four-colouring `c` of ℚ(√47)²)
+
+| # | the constraint, verbatim | scope | grade | address | instrument |
+|---|---|---|---|---|---|
+| P1 | "no level at 11 or 19 is four-colourable" (row 75); "the four-colour sign at ℚ(√47)'s usable primes refuses at 23, 31, 43" (row 84, T25); "the tower's Hoffman ratio is `L/(p+1+L)` … at every level" (S1a-P); the dyadic place "is split" (J28D §3.3) | every stable place of ℚ(√47, i), every tower level; so `c` is a residue colouring at no place and no depth | [cert + hand] at 11, 19; [tools exact] at 23, 31, 43; [hand, two derivations] for every level | `LEDGER.md` rows 75, 84; `plans/FS84-S1-derivation.md` §1.3 step 7 | residue maps; Hoffman; FS-66's all-levels certificates |
+| P2 | "No proper four-colouring of `Cay(R, U)` is invariant under a finite-index subgroup `L ≤ R`." | every finite-index period | [hand + cert + tools exact; two derivations (S1, S1V blind)]; **no `[AmbrusEtAl2023]`** | S1 §4.3 claim 2; S1V-4 | Zhang's product rule over the stable places; Hoffman; weak approximation |
+| P3 | "ℚ(√47)'s plane has no character four-colouring (`Θ₄ = ∅`)" | every `θ ∈ R̂`, colouring `x ↦ ⌊4θ(x)⌋` | [hand; two derivations (FS89-CL4; re-proved through CLG, J07-13 and J10-T5)]; **no `[AmbrusEtAl2023]`** | rows 96, 100 | Berend-type closed-set rigidity (rows 95, 98), then a Weil count |
+| P4 | "no measurable window four-colouring exists at all" (over ℚ(√47)), with the dyadic split place allowed (row 110's correction) | windows reading finitely many places measurably, proper off a null set (C14′) | [hand, two derivations]; rests on `[AmbrusEtAl2023]` | rows 92, 110 | FS86-CL1's count: a measurable Zhang product rule |
+| P5 | **T-J37-1** (this record, §3.4): no four-colouring `x ↦ W(θ(x) + t)`, `θ ∈ R̂` arbitrary, `W : ℝ/ℤ → [4]` measurable, proper for almost every `t` | one character of any type, any measurable circle window | [hand, one mind; a composition of Steinhaus, row 98 and T-C(A) at `S = ∅`]; rests on `[AmbrusEtAl2023]` when `θ` has an archimedean part | §3.4 | band rigidity at every band (row 98) |
+| P6 | "If `G` is amenable: `Γ` is `k`-colourable ⟺ `Col_k(Γ)` carries a `G`-invariant Borel probability measure", with `G` the group of translations, rotations, reflections and the Galois flip | the existence of `c` is equivalent to that of an invariant random colouring | [hand; two derivations (S1b-i; S1V-5, which also shows amenability is load-bearing)] | S1 §2.2, §2.3 item 1 | Følner averaging (Markov–Kakutani) |
+| P7 | **T-C(A):** "no translation-invariant Borel probability on `X₄(F)` has spectral measure carried by `T + A + Fin_S` for a finite set `S` of split places, dyadic ones included; so a four-colouring of ℚ(√47)'s plane, if one exists, has an invariant measure on its orbit closure whose spectrum is carried by no `T + A + Fin_S`" | translation-invariant measures; each finite `S` separately | [hand; two derivations at ℚ(√47), J28D and J28V blind]; rests on `[AmbrusEtAl2023]`, FS-66 at 11 and 19, Lemma P, C14.1–C14.3, C14.2 (c) at `q = 2` (J28V and M3) | R88-TCA in `plans/R88-derivation.md` | the stationary Zhang count on the completion `G_S` |
+| P8 | **T-C(A)⁺:** "for every translation-invariant `μ` on `X₄(F)` and every finite `S`, some `u ∈ U` has `∫_{R̂∖E_S} Re χ(u) dσ_μ(χ) < 0`" | as P7 | [hand, one mind, sketch] | J36 F3 (Lemma SI) | the tetrahedral inner product, spectral projections |
+| P9 | **Rotation-averaged:** "a four-colouring of ℚ(√47)'s plane, if one exists, has an `R ⋊ U`-invariant measure … whose `U`-invariant spectral measure satisfies `∫_{R̂∖E} Re χ(1) dσ < 0`"; uses T-C(A) only at `S = ∅` | `R ⋊ U`-invariant measures | [hand, one mind, sketch] | J36 F4 (Lemma R-U) | a wandering action at split places |
+| P10 | "`ι_G = inf_H α(Γ[H])/|H|`" with `ι_G ≥ 1/k` for `k`-colourable `Γ`: **every finite unit-distance graph `H ⊂ ℚ(√47)²` has `α(H) ≥ |H|/4`** | the field, not the colouring | [hand; S1b-ii two derivations, S1b-iii one] | S1 §2.2; S1V-5 | Følner blow-up (`[MatolcsiEtAl2025]`'s mechanism) |
+
+*Context, not constraints:* `χ(ℚ(√47)²) ≥ 4` (row 82), so `c` uses exactly four colours; the plane has no triangles (G57) and is
+`K_{2,3}`-free (S1d-K).
+
+### 3.2 Kept apart — measured nulls and readings (these constrain nothing)
+
+| # | item | kind | address |
+|---|---|---|---|
+| N1 | 25 of 127 candidate lattices survive capped screens, 10 minimal; "none called rigid, none with an additive four-colouring" | measured null (capped screens) | row 84 |
+| N2 | no band character of order dividing 168, or of stable prime order ≤ 47, on the ten minimal survivors | tools exact, but a statement about ten lattices; at the field level row 96 already says more | S1c |
+| N3 | the ratio route's "price": P-int 0.03, "as hard as refuting a published conjecture" | **stale** (Q5; J36 R4) | S1 §2.3 item 3 |
+| Rd1 | "for all colourings the obstruction is the real place" | [reading] | G76 |
+| Rd2 | the finite-place product principle | [reading] | J36 F6 |
+
+### 3.3 Composition
+
+**(a) Do the theorem rows add up to one statement?** They add up to this, and no further:
+
+> *If ℚ(√47)² is four-colourable, then it carries an `R ⋊ U`-invariant random four-colouring (P6), and every translation-invariant
+> random four-colouring of it has spectrum carried by no `T + A + Fin_S` (P7); and no four-colouring is a residue, periodic, character,
+> one-character measurable-window or finite-place measurable-window colouring (P1–P5).*
+
+Grade: [hand, two derivations] except P5 (one mind). It rests on `[AmbrusEtAl2023]` for P4, P5 and P7. It does **not** decide
+`χ(ℚ(√47)²)`: every row names a class the colouring avoids, and none says the classes exhaust the colourings.
+
+**(b) The gap, named.** The class that evades every row is **the translation-invariant random four-colourings of `Cay(R, U)` with no proper
+factor colouring continuous at finitely many places** — EI-2's failure. By J36's Lemma SI (one mind), this is the same as saying that for
+every `S`, the part of `σ_μ` off `E_S` is anticorrelated at some unit vector. As deterministic colourings: colourings of the plane that are
+not measurable functions of any locally compact completion of `R`. The gap has two layers, told apart by the method that could reach each:
+- **The pure-point layer** (colourings `x ↦ W(Θ(x) + t)` for a homomorphism `Θ : R → K` into a compact group, `W` measurable): FS-64's
+  adelic windows over infinitely many places are here. **Rank one is closed** (P5). **Rank `n ≥ 2` is open.** Its natural statement, "`Θ(U)`
+  avoids a neighbourhood of 0 in `T^n` ⟹ `Θ ∈ (T + A)^n`", is **false**: take `Θ = (θ₁, θ₂)` with `θ₁` arbitrary and `θ₂` a band character.
+  The right statement is a selection — `W` can be replaced by a proper window reading only the `(T + A)`-coordinates. That is the pure-point
+  case of EI-2 (§3.3 (d), J1). The method is closed-set (Berend), not measure rigidity.
+- **The continuous layer.** After rotation averaging (P9), an atom of the `U`-invariant `σ` has a finite `U`-orbit. Its stabiliser `u ≠ 1`
+  makes the character vanish on `(u − 1)R`, an ideal of finite index (Levitz–Mott, row 88's J28V-7), so the atom is torsion. So off `E` the
+  averaged spectrum is **atomless**. This is J36 F5's Furstenberg-type measure question, with `T` in the role of the finitely supported
+  measures. Averaging turns a pure-point colouring's spectrum continuous, so this layer is not disjoint from the first: the first is the
+  part a closed-set method can reach **before** averaging.
+
+**(c) Is the gap known to be non-empty for a related field or graph (a control)?** **No, nowhere.** This is the poster's most important
+line.
+- **C1. Every four-colouring any record exhibits has a finite-place proper factor:** residue pullbacks and `[Fischer1994]`'s ℤ/4 colouring
+  over K (row 89); pullbacks over the type-(B) fields; C9 over ℚ(√11) (spectrum in `T + A`, row 94); J36 F2's noisy colourings (the
+  finite-place colouring survives as a factor); the random shift of a two-colouring over row 94's quartic.
+- **C2. The one-prime objects of rows 97 and 102** (band characters off `T + A`, a minimal aperiodic S-adic set) are continuous at their one
+  place (`ℤ[i][1/p]` is cocompact in `ℂ × ℚ_p²`), so they lie in `Fin_{{p}}`, not in the gap. They show that one split place can be read
+  essentially; they do not show that infinitely many can.
+- **C3. The finite pieces** (an exact tally of seconds on the existing certificate log `data/fs81/phaseD/d47/K1-checker-run.txt`):
+  - Row 84's 177 certified four-colourings of 102 finitely generated lattices over ℚ(√47) are of these kinds: 73 additive into ℤ/4; 11
+    periodic mod `4Λ` or `8Λ`; 36 residue at the ramified 47 and 4 at 67, each through an image of the circle smaller than the full residue
+    circle; 22 residue at the split primes 17, 37, 53 and 61; 31 linear forms (characters of the lattice, orders 4 to about `6·10¹⁰`).
+  - **Every kind dies in the whole ring by a theorem on the poster, or by the ring's arithmetic.** The dyadic kinds die because
+    `1/2 ∈ R` (G35), the split-prime residues because `R` inverts those primes, the stable residues by P1 once the image fills the circle,
+    and the linear forms by P3.
+  - So the pieces are four-colourable only through places or images that the limit removes. This is the finite shadow of P7 and row 95
+    [reading; the tally is exact]. It is also a control of a kind: a counterexample would have to be a limit of piece-colourings of none
+    of these kinds, or a limit that no fixed place survives.
+
+**(d) Redundancy, and where constraints almost meet.**
+- **Logically** P1 ⊂ P2 ⊂ P4 ⊂ P7: a residue colouring is periodic, a periodic colouring is a finite-place window, and a window's
+  random placement has spectrum in some `E_S`. P3's `T + A` half and P5 reduce to P7 once `θ` is known to lie in `T + A`.
+- **Evidentially they are not redundant.**
+  - P2 and P3 avoid `[AmbrusEtAl2023]`; P4, P5 and P7 rest on it.
+  - P3's other half, row 95, is the **only** theorem that enters the evasive class: it removes the character colourings whose `θ` reads
+    infinitely many split places, which P7 cannot see.
+  - If the shared input failed, the poster would keep "not residue, not periodic, not a character colouring" and lose every window and
+    stationary line.
+- **J1 (P5 and P7 almost meet on the pure-point layer).** The joining lemma, **Kronecker selection**:
+  - *Statement:* "Let `Θ : R → T^n` and `W : T^n → [4]` measurable with `W(t) ≠ W(t + s)` for a.e. `t` and every `s ∈ cl Θ(U)`. Then there is a
+    measurable proper window `W′` on the closure of the image of `Θ`'s `(T + A)`-coordinates."
+  - At `n = 1` it is P5's step (row 98).
+  - Its tool is row 109's mixing selection: delete the coordinates whose characters have Fourier coefficients below `1/3` on a measure
+    on `cl Θ(U)`. The missing input is an equidistribution statement for the `U`-values of an infinite-type character — stronger than band
+    rigidity, which only says they are not confined to a band.
+- **J2 (P10 and P7 almost meet on single classes).**
+  - P7 bounds the stationary ratio of each locally compact completion. P10 says the invariant ratio of the whole ring is
+    `inf α(H)/|H|`.
+  - The join is a **fractional local–global principle**: `ι(F²) = max(m₁(ℝ²), max_stable r_v)` — J36 F6's killing test, read the other
+    way. At ℚ(√47) it would give `ι < 1/4`, hence five, with no colouring structure at all.
+  - It is not small. For `F = ℝ` it would say `α₁(ℝ²) = m₁(ℝ²)`, which no record claims. But `[DuczVarga2026]` moves its price: the plane's
+    ratio is already below 1/4.
+- **J3 (P3 and four-colourability of pieces).** This is S1V's GAP / J36's EI-1, unchanged.
+
+### 3.4 T-J37-1, with its proof [hand, one mind; a composition]
+
+> **T-J37-1.** Over ℚ(√47) there is no proper four-colouring of the form `c_t(x) = W(θ(x) + t)` with `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}`
+> Lebesgue measurable, and `c_t` proper for almost every `t ∈ ℝ/ℤ`.
+
+*Proof.*
+1. Put `A_j = W⁻¹(j)`. For `u ∈ U`, properness of `c_t` on the edge `{0, u}` for a.e. `t` gives `|A_j ∩ (A_j − θ(u))| = 0` for every `j`.
+   By continuity of translation in `L¹`, `f_j(s) = |A_j ∩ (A_j + s)|` is continuous and vanishes on `cl θ(U)`.
+2. Some `A_j` has `|A_j| ≥ 1/4`, so `f_j(0) > 0` and `f_j > 0` on some `(−δ, δ)` (Steinhaus). Hence `θ(U) ⊆ [δ, 1 − δ] + ℤ`.
+3. With `k ≥ 1/δ`, `θ ∈ Θ_k(R_F)`, so by row 98 `θ ∈ T_{N_k}(R_F) + A(R_F) = E_∅`.
+4. The random placement (`t` Haar) is a probability on `X₄(F)`. It is supported there because countably many edges are each proper for a.e.
+   `t`. It is translation-invariant, because translating by `y` moves `t` to `t + θ(y)`. Its spectral measure is carried by `ℤθ ⊆ E_∅`,
+   since `x ↦ g(c_t(x))` is a function of one circle rotation.
+5. T-C(A) at `S = ∅` excludes it. ∎
+
+*Inputs:* row 98 (two blind readings); T-C(A) (two derivations; `[AmbrusEtAl2023]` when `θ`'s archimedean part is non-zero, otherwise S1a
+suffices). *Scope:* four colours, ℚ(√47), one character, any measurable window. *Consequence:* FS-64's windowed one-character case is
+closed at ℚ(√47). Row 96 closed the windowless case.
+*Not claimed:* rank ≥ 2 (J1); five colours (the count fails at the real place).
+*Control:* over ℚ(√11) the theorem must fail, and does: C9 is `⌊4θ⌋` with `θ ∈ T + A`, and step 5 fails there (the stable 7 has ratio `2/7`).
