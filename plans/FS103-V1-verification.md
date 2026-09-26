@@ -325,3 +325,77 @@ finite family" → "finitely many residue fields; infinitely many local planes".
 (one line) — if a held proof works harder, the row can say so. (4) My stage-1 control misread row 110's "59 has ratio 0.199119854095" as
 `λ*`; it is the Hoffman ratio `λ*/(1+λ*)` (`λ*(Γ₅₉) = 0.248626`, so **59 is not 6-thick**) — a reading slip of mine, fixed in the tool before
 any verdict used it.
+
+## Stage 4 — SAVED (the sealed half scored; the fenced proofs read)
+
+*Opened after stage 3's commit `d1864bd8`: `data/fs103/claims-sealed.md` (with the owner's CTL-FRAC), the wanted-poster §3 notation and §3.2,
+`plans/FS100-BC-verification.md` §2.1–§2.2. Nothing else fenced was opened.*
+
+### 4.1 The sealed sub-claims
+
+| sub-claim | score |
+|---|---|
+| I-MX (Borel/measurable, one factor) | not used; V1-L6 is its CP form over a countable product, with fractional input |
+| **C-THKDEL** | **agree** — V1-L6 (+ V1-L7 for `λ*(⊗ν_v) = sup_v λ*(ν_v)`, with its line). Mine is stronger in one respect: the input may be a `Δ_k`-valued disjoint-support process, not only a colouring |
+| **C-EXTk** | **agree**, by a different object: I extend the conditional-law process `p` (V1-L5), never a colouring; with I-SEL or with `c′ = min supp p` the claim's form follows the same way |
+| **C-APX** (a), (b) | **agree**; (a) by Hilbert 90 for the norm-one torus of the quadratic `L/F` (the list's wrong-reason line — "weak approximation for tori in general" — avoided by naming it), (b) V1-L2 (a) + V1-L4 |
+| **C-MERGE-n** | **agree** — V1-L8's diagonal, converse by projection |
+
+### 4.2 The wrong-reason lines (sealed §B) against my derivation
+
+C-LB (i) no T-J39 cited, nothing fenced read before stage 3 — avoided; (ii) deletion by `λ* < 1/(k−1)`, never by independence ratio —
+avoided; (iii) two-sided `sup|ν̂|` — avoided, and the tool shows where it matters (71: `λ_min/d = −0.1968`, `λ* = 0.2204`); (iv) one global
+`θ` from V1-L7's maximum — avoided; (v) jointly measurable modification of `p̃` produced (V1-L5) — avoided; (vi) properness at each **fixed**
+edge from the a.s. edge inequality at that edge — avoided; (vii) CTL-ABS: my chain stops there (below) — avoided; (viii) the fibre masses'
+law fixed from finite-dimensional laws by `L²` limits of i.i.d. Haar averages, written in V1-L6 — avoided. C-F1-GEN: never applied at `k = 7`
+(if `χ(F²) = 7` nothing is needed); needs MR and thickness; complex places excluded — avoided. C-635-PL: "2 ramified in `F`, split in `L/F`" as
+the list says — avoided. C-635-THK, C-dG-PL: ramified and dyadic places included; residue degrees read in `F_dG` itself — avoided. C-S: S
+beyond number fields names Q-const; types not counted by residue field — avoided; (c)'s registered expectation ("not finite at full depth;
+finite at most up to level-one type") — **agree**, and my stage-3 verdict says the same.
+
+### 4.3 The controls
+
+CTL-167-4 **agree** (my K1). CTL-dG4 **agree** (`q ≥ 131`, `λ* ≤ 0.1734 < 1/3`; gives `≥ 5`, matching I-DG5). CTL-K-4 **agree** (my K2 is the same
+boundary on ℚ(√11): the dyadic `K₄`, `λ* = 1/3` exactly). CTL-K7-6 **agree** (`λ*(Γ₈₃) = 0.2108 ≥ 1/5`, stops at `k = 6`; at `k = 5` goes
+through). CTL-K5-5 **agree** (`λ*(Γ₁₁) = 0.4764`). CTL-167-5 **agree** (`N₅` = the places above 23 (`0.3317`) and 43 (`0.2719`); 59 is
+`0.2486 < 1/4`, just). CTL-Q2 **agree** (the exception; `λ* = 1`, as stage 2b's C-F1-GEN (3) found). **CTL-ABS** — both values checked:
+`χ = 2` (parity of `a + b` on `ℤ + ℤ√2`, extended by cosets); `χ_CP = 3` (upper: `⌊x⌋ mod 3` randomly translated — `⌊x + √2⌋ − ⌊x⌋ ∈ {1, 2}`;
+lower: a CP 2-colouring is a.s. invariant under `2ℤ + 2√2ℤ`, dense, so by continuity in probability constant in law along every
+translation, contradicting properness at 1). My chain stops at V1-L7: the closure of the finite edge set in the profinite factor is finite,
+`ν` uniform on four points, and the character `(−1)^{a+b}` has `|ν̂| = 1`.
+
+**CTL-FRAC (the owner's addition).** My derivation runs **one colour class at a time through V1-L3 and V1-L5** — for one invariant random
+independent set of density `δ`, the `E`-null part pairs to `−E[p₀p_u] ≤ 0`, so either an SP witness or a `[0,1]`-valued conditional density
+`p` with `p_x p_{x+u} = 0` on edges, which extends. **The second class enters at V1-L6's covering step**: "some colour has fibre mass
+`≥ 1/k > θ`" holds because the `k` fibre masses sum to 1. With one class the selection returns only `{x : m_x > θ}`, independent, of density
+`≥ (δ − θ)/(1 − θ)` by Markov — not `δ`. So the chain does **not** transfer `α₁(F_dG²) ≤ m₁(ℝ²)`, does not refute the conjectures of
+`[AmbrusEtAl2023]` §4 and `[MatolcsiEtAl2025]`, and integrality (the partition into `k` classes) carries F1 at exactly that step.
+
+### 4.4 The fenced proofs of T-J39-3, against mine — divergences
+
+| | wanted-poster §3.2 (J39) | BC §2.1–2.2 (J48) | mine (V1) |
+|---|---|---|---|
+| dichotomy | SI at `k`, `S = ∅`, R-U | L1–L2, R-U | V1-L3 — **same** |
+| object carried to the completion | honest `c′ = min supp` of the conditional law | `c′`, as J39 | the conditional-law **process** `p` itself (fractional) |
+| extension | Mackey's point realisation | limits in probability (N2 gives `c′` continuity in probability) | `L²` limits of `p` + Doob–Cohn modification |
+| completion's compact part | "`R̂_prof = ∏_{stable w} O_{L_w}`", stated for every totally real `F` | Lemma C, C′: `Ĝ` open of finite index in `Ĝ⁺`, independent copies on its cosets — covers row 100's exception | `R = O′` assumed (the claim's scope); via `R/nR ≅ ∏ O_w/n` |
+| selection | random threshold, "fibrewise" | L5: random threshold, Doob–Cohn version | V1-L6: random threshold, fractional input, **and** the `L²`-averaging step fixing the fibre masses' law |
+| thickness | max over thick places | L6 (Weil + two-point bound) | V1-L7 (I-WEIL by statement) |
+| merge | J21-SL, random form | L4 diagonal | V1-L8 diagonal |
+
+**Divergences of route:** (1) I never select at the factor level; the fractional process goes through extension and selection intact, so no
+point realisation and no continuity-in-probability lemma for `c′` is needed. (2) Both held proofs assert the stationarity of the fibre masses
+"because `c` is" — the sealed list's (viii); mine writes the step. It is routine and true; recorded as a completeness note, not a gap in
+truth. (3) The poster's `R̂_prof = ∏_{stable} O_{L_w}` is true only for `R = O′`; its "every totally real `F`" therefore has a small gap at
+row 100's exception, which BC's Lemma C′ closes (and exception fields have `χ ≤ 2`, so nothing downstream moves). My stage-2a remark that
+the exception is *needed* is over-cautious: BC shows it is not for C-LB; it is needed for MR (row 120). **Divergences of truth: none** — all
+three derivations make C-LB TRUE at every `k ≥ 2`, with no MR.
+
+**Count of minds for C-LB:** three (J39; J48 blind; V1 blind, a different carried object). For the assemblies C-635-F1 and C-dG-F1: mine,
+one mind here (the other verifier's may make two).
+
+### 4.5 Proposed `BIBLIOGRAPHY.md` rows
+
+The measurable-modification theorem I cite (Doob 1953; D. L. Cohn, "Measurable choice of limit points and the existence of separable and
+measurable processes", Z. Wahrsch. verw. Gebiete 22 (1972)) — BC cites "Doob–Cohn" too; `grep -i cohn BIBLIOGRAPHY.md` finds no entry: the close
+should add one row, marked "cited by statement, unread".
