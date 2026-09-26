@@ -480,3 +480,34 @@ entries; DD-2 via `K_k × X`.
 
 `data/crunch-2026-09-25/briefs/J27D-FS67-derivation.md` (derivation) and `data/crunch-2026-09-25/briefs/J27V-FS67-verifier.md` (blind verifier,
 its fixed claim list written now, before any claim exists).
+
+## §R-close — FS-67's close (crunch job J42)
+
+*De Bruijn (Opus 5.5), 2026-09-25, FS-67's close planner. Brief: `data/crunch-2026-09-25/briefs/J42-FS67-close-math.md` (template
+`J23a-M1-close-math.md`, with `STANDING-RULES.md`). Sources: this plan; `plans/FS67-J27D-derivation.md` (J27D); `plans/FS67-J27V-verification.md`
+(J27V); the reports `data/crunch-2026-09-25/reports/J27*.md`; `plans/FS67-close-inventory.md`; the close-time prior-art gate
+`plans/FS67-PA-close.md` (J40, running beside this close; its verdicts are copied in at the last stage). Working files `data/fs67/j42/`.
+**Nothing below is new mathematics**: this section files, scores and drafts. The drafts for `LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md` are
+applied later by a front-page job; the files themselves are untouched here.*
+
+### Stage 1 — SAVED (the quotation check; the derivation file)
+
+**Quotation check (standing rule 5).** `data/fs67/j42/quotes.sh` (fixed-string `grep -F` of each quoted or near-quoted fragment of the brief
+against its source) → `quotes.out`: **10 of 10 found** — `D_C = −6w₂^c` (J27V §4.2); the DC-3 spot checks "match J27D's table to every printed
+digit" (J27V §4.3; the brief's "match to every digit" drops "printed", faithful); "the gap-free form fails at every `k ≥ 4`" (J27D §Stage 2); J27V
+did not verify Zhang's exception (J27V §4.1); "B(3) in DSW's words, generalised to gap-free" (J27D §Stage 5); "a regular Hoffman-fat Hedetniemi
+factor" (J27V §3; the brief's "a regular, spectrally fat Hedetniemi pair" is a faithful paraphrase); PB-1 retired at `C₅` (J27V §4.2); "No verdict
+diverges" (J27V's report); the structural question "for which `G` does FS67(G, k) hold" (§4.1; the brief's "which `G` has `χ(E_k(G)) ≤ k`?" is
+its DA-2′ form, faithful); "All novel knowledge is a success" (`CLAUDE.md`). The plant (`PLANT=1`, `D_C = +6w₂^c`) exits 1 — fires
+(`quotes-plant.out`). The brief's unquoted pointer list (DA-1′ … DD-2, the side results) was compared by eye with J27D's claim table and J27V's
+§4.2: every verdict and scope matches. One first-run miss was the check's own (a fragment wrapped across a line in J27V), fixed by a shorter
+fragment; logged.
+
+**The derivation file** `plans/FS67-derivation.md`: **19 entries** (FS67-DA1, L1, DA2, GL, DA3, DA4; DC1, DC2, DC2S, DC3; DB1R, W, DB1Z, C5, T, DB2;
+DD1, DD2R, DD2N), every one with its statement (verbatim from §4.3/§5.1 where it is a claim), grade and verification status, proof address,
+*Rests on it*, *Prior art* (pending J40) and *Kernel*. Merges, explicit: J27D `#7` (GRR2017 Thm 4.9, external) is DC-1's input; J27D `#9` ((M), (P)) is
+M3-J21-MX's engine and selection, filed under DC-2; the two GAPs and DD-1's Zhang question are its §5, not entries. **Independence:** 14 entries are
+two derivations (13 blind; L1 and DA-2′ with J27V's fence-log exposure to PA-T6's one sentence), 5 are one mind (FS67-GL, DC2S, C5, T, and DD2N's
+abelian-Cayley half). `python3 tools/fs71_ledger_b_check.py --strict`: all 19 parse with all five fields; the only FS67 failures are "no
+`LEDGER.md` § B row", expected until the front-page job applies the § B lines drafted below (the checker's other failures on this date are the
+row-88 close's `R88-*` entries, not this close's).
