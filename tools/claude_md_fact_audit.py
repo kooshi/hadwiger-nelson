@@ -59,6 +59,18 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # J44, the front page of row 88's and FS-67's closes (2026-09-25): ranges extended, the stub table re-ranked, FS-67's row
+    # replaced by its close's draft (R.8c), G76's grade widened by row 88's close's draft (J41 pair 4).
+    "1–110": "the ledger's row range, extended to 1–115 at row 88's and FS-67's closes (2026-09-25)",
+    "G1–G78": "the stable-identifier range, extended to G1–G79 when G79 (Kooshi's example invariant) was minted at J44's front page",
+    "34–38": "the paths-forward table's group rank, renumbered 37–41 when FS-98, FS-97 and FS-99 were ranked in (J44)",
+    "39–41": "the same re-rank: now 42–44",
+    "42–45": "the same re-rank: now 45–48",
+    "51–52": "the same re-rank: now 54–55",
+    "53–55": "the same re-rank: now 56–58",
+    "G = K_k^s": "FS-67's old paths-forward row ('Yes for `G = K_k^s` (Greenwell–Lovász)'), replaced by its close's draft (FS67 R.8c); the fact is row 114's (`K_k^s` by iteration) and the stub's",
+    "χ_f(H)": "FS-67's old paths-forward row ('leaving the gap `χ_f(H) ≤ k < χ(H)`'), replaced by its close's draft; row 115 states the gap regime as `χv(H) ≤ k < χ(H)`, and the stub keeps Zhang's form",
+    "G76:[hand, two derivations for the frame, the local theorem and the no-gos (rows 88–92); the obstruction a reading, reached twice independently]": "G76's grade widened by row 88's close's draft (J41, data/fs86r88/j41/claude_drafts.py pair 4) to name the measure half (rows 111–113)",
     # J24, the front page of the M1-M3 closes (2026-09-25): stale clauses the closes' corrections replaced.
     "p = 2": "row 92's 'C14.2 at `p = 2` … not checked' replaced by M3's correction (C14.2 (c) holds at `q = 2`, row 110); the check is done",
     "B′": "FS39-T1's § B kernel cell 'stub (FS-39 phase B′)' replaced by M2's kernel names (row 104); FS-39's stub banner keeps phase B′",

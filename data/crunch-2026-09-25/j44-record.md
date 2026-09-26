@@ -88,3 +88,33 @@ three theorems with one conclusion, not a retelling.
 |---|---|---|---|
 | leave the FS67 § B dupes at 13 and report them | reword DC-1's or DD-1's drafted line so the count returns to 11 | three different hypotheses with one conclusion are three theorems; rewording a close's draft to satisfy a tripwire hides nothing and changes the close's words | high |
 | correct row 88 in place and point row 111 at it | leave row 88 as it was and let row 111 carry the correction | current-state rule: row 88 is read on its own; a reader of row 88 should not need row 111 to know V2's scope | high |
+
+## Stage 3 — SAVED (`CLAUDE.md`)
+
+Applied in three passes, each asserting every anchor exactly once before writing (plants fired first, exit 1, nothing written):
+1. **Row 88's 13 pairs** through J41's own `data/fs86r88/j41/claude_drafts.py --out` (PASS, +2,246 B) → 288,695 B.
+2. **FS-67's 9 edits** through `data/crunch-2026-09-25/j44/apply_fs67_claude.py`, which reads J42's list from
+   `data/fs67/j42/claude_md_drafts.py` and anchors the eleventh G72 count after the tenth ("**ten of ten**.") as R.8c orders (+2,406 B) → 291,101 B.
+3. **The front page's own lines** through `data/crunch-2026-09-25/j44/apply_claude_frontpage.py`: "Last updated" (row 88's question and
+   FS-67 closed; the crunch's M1–M3 line kept after them); "Rows 1–115"; "Open milestones" (FS-84 open with S1/S1V done and later stages
+   from 2026-10-01; row 88's question CLOSED; FS-67 CLOSED as a milestone); the re-rank note; FS-84's, FS-90's and FS-64's cells re-aimed per
+   their stubs; **FS-64's bearing cell restored** — J24's re-rank had left FS-64's row with three cells and FS-92's with five, FS-64's bearing
+   appended to FS-92's (a table defect found here; both rows now four cells); FS-98 (rank 7), FS-97 (12), FS-99 (31) inserted, every rank
+   below shifted, the ranks checked to run 1–58 without a gap; "G1–G79"; **G79 minted** before G51 (`data/crunch-2026-09-25/j44/g79.txt`,
+   1,239 B) and G72 given "*Its dual is G79.*" outside its status tag. Two follow-up fixes (G72's pointer first put inside the tag, which the
+   audit flagged; the FS-97 row first retold row 112's wording, which `--dupes` flagged) are folded into the script.
+
+**Size:** 286,449 → **294,994 bytes** (ceiling 300,000); no `[PROTECTED]` paragraph touched (the audit checks them byte for byte).
+
+**Gates:** fact audit `--base fb5c224e` exit 0, **AUDIT PASSED**, with **ten reviewed ALLOW lines** added to `tools/claude_md_fact_audit.py`
+(J24's convention; each printed every run): `1–110` and `G1–G78` (ranges extended); `34–38`, `39–41`, `42–45`, `51–52`, `53–55` (group
+ranks renumbered by the three insertions); `G = K_k^s` and `χ_f(H)` (FS-67's old paths-forward row, replaced by its close's draft — the facts
+are in rows 114–115 and the stub); G76's old status tag (widened by row 88's drafted pair 4). `--dupes` exit 0, **13**, unchanged from stage 2
+(the FS67 § B formula).
+
+| choice | alternative | why | confidence |
+|---|---|---|---|
+| G79 as a new entry | fold Kooshi's observation into G72 (inventory row 25 allowed either) | the brief names G79, and a *Do* and killing test of its own let a later close score it apart from G72's count | high |
+| G79's instances by address only (rows 96, 113; G22; G48, G31; G57 / G71, G74; G75; G76; row 95) | one clause per instance | the brief's instruction and the one-home rule; each instance is told in its own entry | high |
+| keep J24's M1–M3 line in "Last updated", after the new closes | replace it | the crunch's three closes are still the file's newest state for those rows; the line is a pointer | medium — if the owner wants one close per line, the M1–M3 sentence moves to `plans/FRONTIER-STUBS.md`'s closed list |
+| move FS-64's bearing back from FS-92's row | leave the defect | a mirrored table with a row missing its bearing misleads the ranking's readers | high |
