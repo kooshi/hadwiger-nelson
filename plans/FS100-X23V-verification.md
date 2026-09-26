@@ -17,6 +17,8 @@ record `plans/POROS-2026-09-26-x2x3-crunch.md`, bodies of commits "X23D"/"X23 ad
 | X23V-SPC | SPC as graded in §3 | [hand] | §2.3 |
 | X23V-Q35 | ℚ(√3,√5): dyadic place split in `L`; stable places exactly above `p ≡ 11, 59 (mod 60)`, all of residue degree one; class condition holds; `χ = 5` given MR and SPC | [hand + tools exact] | §2.5 |
 | X23V-D1 | `N₄(F) = ∅` ⟹ the class condition; so D-1 is SPC's special case | [hand] | §2.6 |
+| X23V-H | level-one least eigenvalues: `Γ₂₃ −7.96069` (`|λ|/d = 0.331695`), `Γ₂₇ −8` (Hoffman `2/9`), `Γ₃₁ −10.66651`, `Γ₄₃ −11.96223`, `Γ₄₇ −12.84653`, `U₃₂ −11` (tight), `U₆₄ −15`, `U₁₂₈ −19`: every Hoffman ratio `< 1/4` except `U₃₂` (`= 1/4`) | [tools, float with integer-exact controls (`U₂`, `Γ₃`, `U₆₄`); plant fires] | §4.2, `tools/x23v_hoffman.py` |
+| X23V-DLP | the dyadic Lemma P (X23D's statement), re-derived from its statement: on an inert dyadic tower, at any base ramification `e`, a character new at level `m ≥ 2` has `|λ| ≤ Q^{m−1}` (normalised `1/(Q+1)`) | [hand; a second mind on X23D's statement, not blind to it] | §4.1 |
 
 ## Stage 1 — SAVED (quotation check; the claims verbatim; C0)
 
@@ -285,3 +287,49 @@ TRUE; D-1 0.85 → TRUE. I leaned toward GAP on COR and CLS before deriving; bot
 ### 3.4 Would-have-searched-here log (stage 3)
 
 - None.
+
+## Stage 4 — SAVED (fallback: X23D's lemma statements, read after stage 3's commit `3249a87c`)
+
+*Opened only `plans/FS100-X23D-derivation.md`'s verdict paragraph and its lemma statements (stage 2 there: CTL, CLS; its SPC, COR, Q35, D-1
+were not yet written at 06:39). Its §2.3 lemma lines carry one-line proof sketches inline; I read the dyadic one because it bears on my GAP.*
+
+### 4.1 Agreement and disagreement
+
+| claim | X23D (stage 2) | X23V (stage 3) | reconciliation |
+|---|---|---|---|
+| CTL | TRUE, every control for the stated reason | TRUE, no wrong-reason pass | agree; two tools, independent (`tools/x23d_class.py`, `tools/x23v_places.py`) |
+| CLS | TRUE for every real number field (dyadic `Q ≥ 64` closed by "the dyadic Lemma P [hand, new]") | GAP at an inert dyadic stable place over a ramified base, `Q ≥ 64` (realised at ℚ(√3)·M₇) | **X23D's dyadic Lemma P is exactly my missing lemma.** Re-derived from its statement (below): TRUE, and it does not use the base's ramification. **CLS: TRUE**, two derivations (X23D's; mine plus X23D's lemma, re-derived) |
+| `q = 27` | "not a risk": `λ_min(Γ₂₇) = −8`, Hoffman `2/9`, an H*-place | covered, but I attributed "floor 6" to Hoffman | X23V-H confirms `−8` independently; **my R-b's attribution at 27, 43, 47 was wrong** (Hoffman floors there are 5: ratios `0.2222, 0.2138, 0.2111`; G56's floor 6 is by certificate) — the conclusion `< 1/4` stands |
+| Q35's list | X23D's quotation check (its Q6) flags the advisor's list as a paraphrase, agreeing in substance | my Q-b flags the queue's own wording as self-contradictory | two different defects, same substance; both are corrections owed |
+
+**The dyadic Lemma P, re-derived from X23D's statement [hand].** Let `L_𝔓/F_v` be unramified quadratic with residue fields `𝔽_{Q²}/𝔽_Q`,
+`Q = 2^f`, and `π` a uniformiser of `F_v` (hence of `L_𝔓`), `e(F_v/ℚ₂)` arbitrary. For `m ≥ 2`, `N(1 + π^{m−1}x) = 1 + π^{m−1}Tr(x) +
+π^{2m−2}N(x) ≡ 1 + π^{m−1}Tr(x) (mod π^m)`, so the fibre of `S_m → S_{m−1}` over `s̄` is `{s + π^{m−1}s·t : t ∈ 𝔽_Q}` (the trace-zero line of
+`𝔽_{Q²}/𝔽_Q` is `𝔽_Q` in characteristic 2): `Q` points. A character `ψ` new at level `m` is `ψ(π^{m−1}y) = ψ₀(βy)`, `β ≠ 0`; on a fibre it sums
+to `Q·ψ(s)` if `Tr_{𝔽_{Q²}/𝔽_Q}(βs₀) = 0`, i.e. `βs₀ ∈ 𝔽_Q`, and to 0 otherwise (`s₀` the residue of `s`). Two admissible `s₀ ∈ μ_{Q+1}` differ by
+an element of `𝔽_Q^× ∩ μ_{Q+1} = {1}` (`gcd(Q − 1, Q + 1) = 1`), so at most one residue class, `Q^{m−2}` points of `S_{m−1}`, contributes:
+`|λ_ψ| ≤ Q^{m−1}`, against degree `Q^{m−1}(Q + 1)`. Nothing uses `e`. So at ℚ(√3)·M₇ (`Q = 128`, `e = 2`) every level has `|λ|/d ≤ max(19/129,
+1/129) < 1/3` and ratio `< 1/4`. ✓ — **my stage-3 GAP on CLS closes, and with it the CLS-gap clause of COR.**
+
+### 4.2 The Hoffman table, checked independently (X23V-H)
+
+`tools/x23v_hoffman.py` → `data/fs100/x23v/hoffman.out` (0.6 s; the circle `μ_{q+1}` in `𝔽_{q²}`, the absolute trace): the values in the
+theorems table; controls `U₂ = −1`, `Γ₃ = −2`, `U₆₄ = −15` exact, `Γ₇`'s Hoffman `0.3597 ≥ 1/4`; plant `wrong-circle` (`μ_{q−1}`) breaks three
+controls (`hoffman-plant.out`, exit 1). `Γ₂₃`'s `0.331695` matches J48-N4's figure; `Γ₃₁`'s `0.333328` matches G54's `1/3 − 4.9·10⁻⁶`.
+
+### 4.3 Verdicts after stage 4 (these supersede §3.1 where they differ)
+
+| claim | verdict |
+|---|---|
+| CTL | **TRUE** |
+| CLS | **TRUE** (my GAP closed by X23D's dyadic Lemma P, re-derived here) |
+| SPC | **TRUE** for totally real `F`; for `F` with complex places TRUE given Lemma X23V-CX (mine, one mind) — X23D's SPC not yet written, so no comparison |
+| COR | **GAP as written** (needs row 99 for `L ≤ 4`, and "given MR"); with both, TRUE (and X23V-CX for non-totally-real `F`) |
+| Q35 | **TRUE** (intended reading; wording owed) |
+| D-1 | **TRUE** |
+
+Correction owed 4 of §3.2 (the dyadic scope clause) is withdrawn; ℚ(√3)·M₇ stays useful as the first field where the dyadic Lemma P is used.
+
+### 4.4 Would-have-searched-here log (stage 4)
+
+- None; the Hoffman table is a complete computation over sets the derivation fixed (the named `q`, `Q`).

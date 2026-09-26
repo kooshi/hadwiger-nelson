@@ -1,0 +1,13 @@
+q=   2  d=   1  lambda_min=  -1.00000  |l|/d=1.000000  Hoffman=0.500000  U_2 control
+q=   3  d=   2  lambda_min=  -1.00000  |l|/d=0.500000  Hoffman=0.333333  Gamma_3 control
+q=   7  d=   6  lambda_min=  -1.00000  |l|/d=0.166667  Hoffman=0.142857  Gamma_7 control
+q=  23  d=  22  lambda_min=  -1.00000  |l|/d=0.045455  Hoffman=0.043478  
+q=  27  d=  26  lambda_min=  -1.00000  |l|/d=0.038462  Hoffman=0.037037  
+q=  31  d=  30  lambda_min=  -1.00000  |l|/d=0.033333  Hoffman=0.032258  
+q=  43  d=  42  lambda_min=  -1.00000  |l|/d=0.023810  Hoffman=0.023256  
+q=  47  d=  46  lambda_min=  -1.00000  |l|/d=0.021739  Hoffman=0.021277  
+q=  32  d=  31  lambda_min=  -1.00000  |l|/d=0.032258  Hoffman=0.031250  U_32
+q=  64  d=  63  lambda_min=  -1.00000  |l|/d=0.015873  Hoffman=0.015625  U_64
+q= 128  d= 127  lambda_min=  -1.00000  |l|/d=0.007874  Hoffman=0.007812  U_128
+FAIL: ['Gamma_3 control', 'Gamma_7 control', 'U_64 = -15 control']
+plant exit=1

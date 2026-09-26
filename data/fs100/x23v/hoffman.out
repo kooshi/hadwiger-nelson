@@ -1,0 +1,12 @@
+q=   2  d=   3  lambda_min=  -1.00000  |l|/d=0.333333  Hoffman=0.250000  U_2 control
+q=   3  d=   4  lambda_min=  -2.00000  |l|/d=0.500000  Hoffman=0.333333  Gamma_3 control
+q=   7  d=   8  lambda_min=  -4.49396  |l|/d=0.561745  Hoffman=0.359691  Gamma_7 control
+q=  23  d=  24  lambda_min=  -7.96069  |l|/d=0.331695  Hoffman=0.249077  
+q=  27  d=  28  lambda_min=  -8.00000  |l|/d=0.285714  Hoffman=0.222222  
+q=  31  d=  32  lambda_min= -10.66651  |l|/d=0.333328  Hoffman=0.249997  
+q=  43  d=  44  lambda_min= -11.96223  |l|/d=0.271869  Hoffman=0.213755  
+q=  47  d=  48  lambda_min= -12.84653  |l|/d=0.267636  Hoffman=0.211130  
+q=  32  d=  33  lambda_min= -11.00000  |l|/d=0.333333  Hoffman=0.250000  U_32
+q=  64  d=  65  lambda_min= -15.00000  |l|/d=0.230769  Hoffman=0.187500  U_64
+q= 128  d= 129  lambda_min= -19.00000  |l|/d=0.147287  Hoffman=0.128378  U_128
+ALL CHECKS PASS
