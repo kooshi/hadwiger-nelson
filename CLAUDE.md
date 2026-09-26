@@ -499,7 +499,7 @@ unit-vector group (G80), with no forcer.
   objects" but "is my acceptance test the exact condition, or a sufficient one?" — because a conservative test converts a
   *finding* into a *measurement of my own instrument*, silently and with the registered-prediction discipline fully satisfied.
   At registration, say whether the acceptance test is also necessary — and if it is only sufficient, what a refusal therefore
-  cannot mean. Falsifier: none needed — this is a methodological invariant, and it fails only by being ignored. Point every new instrument at a known positive before believing its zero;
+  cannot mean. Point every new instrument at a known positive before believing its zero;
   assert on the written artifact, never on the list that produced it; a control the instrument cannot see is
   not a control. **And where a phase's output is eliminations, its defects all point one way**: four in one phase
   (M63 phase G, 2026-09-11) — an edge law that drops an edge, an over-merged equivalence key, a float sign test inside
@@ -516,7 +516,12 @@ unit-vector group (G80), with no forcer.
   milestone, row 79): ℚ(√167)'s `L3e1c94c6` read as having no periodic three-colouring because the search stopped at `N = 20` —
   its least period is 23 — and the survivor `Ld14c588b` colours linearly with period index 1,080, past `N ≤ 30` and circular
   `N ≤ 120`. **Read a solver's colouring before searching its periods:** one Fourier transform of FS-61's 1.47 M-point colouring
-  showed a single character of amplitude 0.74 that named the period 23 at once. **And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question. **FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; the second and third, and the rest: `plans/GROKKING-INSTANCES.md` §G21.
+  showed a single character of amplitude 0.74 that named the period 23 at once. **And a one-period census measures its period** (FS-79, row 81): 4,490 orbits of `L21cc6506`'s 4Λ-periodic colourings, every one Kempe-rigid, and two known `Θ₄` cells (a point, a 2-cell) read as a candidate rigid lattice; a three-minute look at the cells themselves found full-dimensional ones and `P = F = 0`: a finite set of periodic colourings can only ever pin a full-rank group, and a finder that stops at its first point measures that point. P3b typed its survivors' nulls only after three known positives at their coefficient size came back loose: a control at the scale of the question. **FS-81's three** (rows 83–84): **a relation tree is a weak finder of isolated points** — it left Λ₂₆ over ℚ(√3) undecided at 171,657 nodes and 312 s where a small-order screen found the point in 3 ms, so the screen runs first and a high-order isolated point reads UNDECIDED, never NONEMPTY; the second and third, and the rest: `plans/GROKKING-INSTANCES.md` §G21. *Do: when a search, sweep or census returns a zero — or a count, a speedup, an elimination — ask first whether the acceptance test is the exact
+  condition or only a sufficient one, and put the answer and the enumeration's bounds (its period cap, radius or generator image) into the
+  headline sentence; before believing a new instrument's zero, point it at a known positive at the scale of the question; check the
+  written artifact, not the in-memory list behind it; and audit a result you like at the rate you audit one you do not. Killing test:
+  a zero reported with its enumeration in the headline that readers still took for a fact about the objects (the rule is not enough), or
+  a run of milestones in which no headline scope ever changed a decision (the rule is ceremony).*
 * **G22 — Where a six-colouring cannot live. [kernel + prior art]** No colouring constant on a triangular
   lattice's cells uses six colours (rows 34–35), and no polygonal colouring does (`[SokolovVoronov2025]`). A
   six-colouring, if one exists, has non-polygonal classes finer than half the unit distance. Coset colourings
@@ -618,6 +623,13 @@ unit-vector group (G80), with no forcer.
   methodological invariant and it fails only by being ignored — but the tally is falsifiable: by a measurement-first reading
   that survives with neither a registered test nor a derivation behind it, or by derivation-first claims dying at the
   measurement-first rate.*
+  *Do: when a measurement suggests a law — a pattern, a zero, a count that looks general — record it as a candidate, never a
+  conclusion, and buy the conclusion separately: derive it, or register a replication on fresh objects before running it; before
+  spending days of compute on it, write it for an outside reader in its native vocabulary, and if it resists derivation, find the
+  discipline where its statement lives and seek the theorem in it; prefer a dial to a search for a positive, and ask a calibrated bed
+  first; write every escape clause to the prediction's standard, and check that a grokking's quantifier matches the measurement before
+  applying it. Killing test: the one above — a reading bought by neither a test nor a derivation that survives, or derivations dying
+  as often as readings (the sort: `plans/GROKKING-INSTANCES.md` §G30).*
 * **G31 — No unit-distance object we hold, built or found, carries a pair compulsion at its top rung. [kernel on the
   sealed objects (row 66) and for the 1581's arity bracket; measured, complete at arity 2, on the 6-open ones]** **On
   sealed objects the arity-2 emptiness is a theorem**: Heule-510's `Forces ↔ =` and `Separated ↔ Adj` at five colours
@@ -790,8 +802,12 @@ unit-vector group (G80), with no forcer.
   **And read the construction's own data layout, not only the plan's vocabulary for it** (2026-09-12): the result that
   closed M63's rotation screen came from four lines of `Arena.__init__` — the rotated half carries the same index set and
   internal edge list as the original — a mathematical fact the plan's vocabulary had no word for. When a plan and an
-  implementation describe the same object, the implementation is the one that cannot round off. *Falsifier for the rule: a frontier milestone whose object search delivers
-  what no recognition predicted — then the corollary's ranking is wrong for that genre.* More instances: `plans/GROKKING-INSTANCES.md` §G46.
+  implementation describe the same object, the implementation is the one that cannot round off. More instances: `plans/GROKKING-INSTANCES.md` §G46. *Do: when a new object or question appears — at a milestone's opening, or with a new prime, ring or construction — name it in the
+  words of the theory it already belongs to and let that theory say possible, impossible or where before any search runs; use that
+  recognition sentence as the prior-art query (G49); read the implementation's data layout as well as the plan's words for it; rank a
+  stub that reduces to an exact finite computation and a named theorem above one that hunts for an object, and hold a stub
+  with no recognition as a reading room; read a failed search as news about the search's genre. Killing test: a frontier milestone
+  whose object search delivers what no recognition predicted — then the ranking is wrong for that genre.*
 * **G47 — The compulsion face of sealing, at level one. [kernel; subsumed by row 66]** Compulsions map forward along
   homomorphisms; on a Cayley graph a forced pair needs a period of every colouring. The distance law this entry
   carried (row 55) is the level-one shadow of the fan-gap theorem (row 66), which frees every pair at every distance over
