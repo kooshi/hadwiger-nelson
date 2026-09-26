@@ -6,7 +6,24 @@ I have not contacted it.*
 
 ## Theorems this phase proved
 
-*(Filled at stage 5; one line each, grade and address.)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J45-N1 | `E_S = T + A + Fin_S` is exactly the group of characters continuous for `R → R̂_prof × (L⊗ℝ) × ∏_{v∈S} L_v`; `R` is dense there; `E_S` is a proper dense σ-compact subgroup, Haar-null, `U`-invariant, Borel-isomorphic to the dual group | [hand] | §2.1 |
+| J45-N2 | the vectors of `L²(μ)` with spectral measure on `E_S` are `L²(𝒜_S)` for a translation-invariant σ-algebra, and `Π(E_S) = E[·|𝒜_S]` | [hand] | §2.1 |
+| J45-SI-1 | `−1/3 = E⟨h(0), h(u)⟩ + ∫_{R̂∖E_S} χ(u) dσ_μ` for every `u ∈ U` | [hand] | §2.2 |
+| J45-SI-2 | `c(x) ∈ supp P(c(x) = · \| 𝒜_S)` a.s., for every `μ` (so the claim's clause is automatic) | [hand] | §2.2 |
+| J45-SI-3 | `∫_{R̂∖E_S} Re χ(u) dσ_μ = −(4/3) P(c¹(0) = c²(u))` (relatively independent self-joining over `𝒜_S`); `≤ 0`, `= 0` iff the supports are disjoint on every `u`-edge | [hand] | §2.2 |
+| J45-SI-4 | equality at every `u` ⟹ every selection from the supports is an `𝒜_S`-measurable equivariant proper four-colouring | [hand] | §2.2 |
+| J45-SI-5 | under (G2), "`𝒜_S` carries a proper colouring ⟹ equality" holds for every `μ` over `F` iff every `μ` over `F` has equality at `S` | [hand] | §2.2 |
+| J45-SI-J | the `E_S`-factor of an independent product of a finite translation system, a Bernoulli process and `c₂` is `σ(Φ) ∨ 𝒜_S(c₂)` | [hand] | §2.2 |
+| J45-G2 | ℚ(√11) satisfies (G2) at 7: C9's `⌊4θ⌋` on `Γ₇` has 14 gapped vertices (`7θ ∈ {0, 5}`), all missing colour 3, spanning 28 directed edges | [tools exact; plants fire] | §2.2, `tools/crunch_j45_gap7.py` |
+| J45-SI-C | F2's noisy colourings over ℚ(√11) satisfy SI with equality at every `u` and `S`, with `σ_μ(R̂ ∖ E) > 0` | [hand + tools exact] | §2.3 |
+| J45-A⁺ | over ℚ(√47), given T-C(A): every `μ`, every finite `S`, some `u` has strict inequality (constant in `u` if `μ` is rotation-invariant) | [hand] | §Stage 3 |
+| J45-B⁺ | over a type-(B) field, given T-C and FS38-D2-A: equality at every `u` ⟹ carried by Pull; so equality ⟺ Pull ⟺ spectrum on `E_S` | [hand] | §Stage 3 |
+| J45-RU | every finite `U`-invariant measure on `R̂` gives `E_S ∖ (T + A)`, hence `E ∖ (T + A)`, measure 0; every real number field | [hand] | §4.1 |
+| J45-SP-oi | SP's "only if" | [hand] | §4.2 |
+| J45-SP-if | SP's "if" (positive measures; complex with `\|ν\|(E) = 0`) | [hand] | §4.2 |
+| J45-SP-Cor | over ℚ(√47), given T-C(A) at `S = ∅`: if every `U`-invariant finite positive `E`-null measure on `R̂` is a Haar multiple, `χ(ℚ(√47)²) ≥ 5` | [hand] | §4.2 |
 
 ## Stage 1 — SAVED (quotation check, notation, C0)
 
@@ -314,3 +331,70 @@ zero-entropy Furstenberg-type question the Poros record's F5 names; nothing here
 
 - Would have searched for a non-Haar `U`-invariant measure on `R̂` off `E` (e.g. from a character orbit reading infinitely many split places).
   Instead: none; SP is a derived equivalence and needs no instance.
+
+## Stage 5 — SAVED (the hand-off)
+
+### 5.1 Verdicts, per claim (the fixed list, Poros record §4.4)
+
+| claim | verdict | grade | in one line |
+|---|---|---|---|
+| SI, the inequality | **TRUE** | [hand] | exactly `−(4/3)` times the collision probability of the relatively independent self-joining over `𝒜_S` (SI-3) |
+| SI, "equality for every `u` ⟹ carries `c′`, `c(x) ∈ supp`" | **TRUE** | [hand] | any selection from the supports (SI-4); the `supp` clause holds for every `μ` (SI-2) |
+| SI, "carries ⟹ equality" | **GAP** | — | at the step "an `𝒜_S`-measurable proper colouring forces adjacent supports apart"; over a (G2) field, ℚ(√11) among them, equivalent to "every four-colouring has equality at `S`" (SI-5), an open statement; vacuous at ℚ(√47) given T-C(A) |
+| A⁺ | **TRUE** given T-C(A) | [hand] | SI-4 and T-C(A) |
+| B⁺ | **TRUE** given T-C and FS38-D2-A | [hand] | one selection is a pullback; a second support colour would be a gap of the tight `P₄` |
+| R-U | **TRUE** | [hand] | wandering at each split place of `S`, through a Borel copy of `Ĝ′_S` (N1) |
+| SP, "only if" | **TRUE** | [hand] | Haar has mean 0 at `1` |
+| SP, "if" | **TRUE** | [hand] | push-forward by `r₀` stays off `E`; a `J₀`-negative archimedean circle fixes the sign; positive measures (the standard reading) |
+| Control | **TRUE** | [hand + tools exact] | F2's supports are disjoint on every edge of `Γ₇`; its spectrum still charges `R̂ ∖ E` |
+
+**Inputs, by name.** Bochner (discrete `R`, and LCA `G′_S`); Fourier–Stieltjes uniqueness on `R̂`; Steinhaus–Weil; the open-mapping theorem for
+σ-compact LCA groups; Lusin–Souslin; weak approximation for the norm-one torus of `L/F` (a rational curve); the pointwise ergodic theorem along
+tempered Følner sequences (SI-5 (c) only); J28V-7 (`[LevitzMott1972]`); Lebesgue spectrum of Bernoulli shifts; `J₀(j₁,₁) < 0`. Given, per claim:
+T-C(A) (A⁺, SP-Cor at `S = ∅`), T-C and FS38-D2-A with row 67's tightness of `P₄` (B⁺), C9's colouring (SI-5 at ℚ(√11), the control).
+**Not used:** Lemma R, Lemma C, strong approximation, `[AmbrusEtAl2023]`, FS-66, C14.
+
+### 5.2 Corrections owed (proposed; the front-page lane decides)
+
+1. **Poros record §4.1 (a)**, "The shadow relation is exact. By Lemma SI (F3), EI-2 holds for a colouring iff the part of its spectrum that no
+   finite set of places reads is not anticorrelated at unit distance": one direction only (SI-4). The converse per colouring is SI's "⟸", a GAP,
+   and over ℚ(√11) it fails as soon as one anticorrelated colouring exists there (SI-5). Also, with `E` in place of `E_S`, equality gives a factor
+   colouring measurable for `⋁_S 𝒜_S`, not continuous at finitely many places (J28D's R1).
+2. **Poros record §F3**, "T-C⁺ is strictly wider than T-C: it admits mass off `E_S`, provided that mass is not anticorrelated": given T-C, no `μ`
+   with mass off `E_S` meets T-C⁺'s hypothesis (B⁺'s remark (ii)); state the dichotomy instead — Pull, or strictly anticorrelated off `E_S`.
+3. **The claim list's SI**: the clause "`c(x) ∈ supp P(c(x) = · | E_S-factor)`" is automatic (SI-2). The true iff is SI-3's: equality at `u`
+   ⟺ supports disjoint on `u`-edges.
+4. **Scope, in the Poros record's F4 and F5**: the Lusin–Souslin step and "`r₀R` is `τ_S`-open" rest on density of `R` in `G_S` and on
+   stable-continuity of torsion characters (Lemma R (a), Lemma C (d)). With `G′_S` (profinite in place of the stable places) neither is needed, and
+   R-U, SP hold for every real number field.
+
+### 5.3 C0 scored
+
+Every modal outcome was met: SI inequality TRUE (0.95); SI "⟹" TRUE (0.90); SI "⟸" GAP (0.70); A⁺ TRUE (0.90); B⁺ TRUE (0.85); R-U TRUE (0.80);
+SP "only if" TRUE (0.97); SP "if" TRUE (0.75); control TRUE (0.90). C0 was written after one mental pass, which had already seen SI-2's reading
+issue; its SI "⟸" row is therefore not an independent prediction. Mean probability on the realised outcome 0.86; no surprises, which after a
+mental pass measures the pass as much as the claims (G21).
+
+### 5.4 Lemma statements for J46
+
+*One line each, no proofs. Notation as §1.2 (`G′_S`, `τ′_S`, `𝒜_S`, `p`, `M`, (G2)).*
+
+- N1: `T + A + Fin_S` equals the group of `τ′_S`-continuous characters of `R`; `R` is dense in `G′_S`; `E_S` is a proper, dense, Haar-null Borel subgroup of `R̂`.
+- N2: for `f ∈ L²(μ)`, `σ_f(R̂ ∖ E_S) = 0` iff `y ↦ V_y f` is `τ′_S`-continuous, and these `f` are exactly `L²(𝒜_S)` for a translation-invariant σ-algebra `𝒜_S`.
+- SI-1: for every `u ∈ U`, `−1/3 = E⟨h(0), h(u)⟩ + ∫_{R̂∖E_S} χ(u) dσ_μ(χ)`, with `h = E[g | 𝒜_S]`.
+- SI-2: for every `μ` and `x`, `c(x) ∈ supp P(c(x) = · | 𝒜_S)` almost surely.
+- SI-3: `∫_{R̂∖E_S} Re χ(u) dσ_μ = −(4/3) Σ_j E[P(c(0) = j | 𝒜_S) P(c(u) = j | 𝒜_S)]`; it is `0` iff the supports at `x` and `x + u` are a.s. disjoint for every `x`.
+- SI-4: if equality holds for every `u ∈ U`, then `x ↦ min supp P(c(x) = · | 𝒜_S)` is an `𝒜_S`-measurable, translation-equivariant proper four-colouring.
+- SI-5: if `F` satisfies (G2) and some `μ₂` has strict inequality at some `u₀`, then some `μ` has strict inequality at some `u` while `𝒜_S(μ)` carries an equivariant proper four-colouring `c′` with `c′(x) ∈ supp P(c(x) = · | 𝒜_S)`.
+- SI-J: for independent `Φ` (a uniform translate of a periodic colouring), `c₂` (stationary) and `ε` (Bernoulli), the `E_S`-factor of `(Φ, c₂, ε)` is `σ(Φ) ∨ 𝒜_S(c₂)`.
+- G2-11: C9's colouring `⌊4(2x + 3y)/7⌋` of `Γ₇` is proper, its gapped vertices are the 14 with `2x + 3y ∈ {0, 5} mod 7`, all missing colour 3, and some two of them are adjacent.
+- SI-C: F2's colourings over ℚ(√11) (C9's `γ`, `Z̄ = {θ = 0}`, missing colour 3, fair bits) satisfy SI with equality at every `u` and every `S`.
+- A⁺: over ℚ(√47), given T-C(A), every `μ` and every finite `S` have some `u` with strict inequality.
+- B⁺: over a type-(B) field, given T-C, equality at every `u` implies `μ` is carried by Pull.
+- R-U: every finite `U`-invariant measure on `R̂` gives `E_S ∖ (T + A)` measure 0, for every finite `S`.
+- SP-if: a non-Haar finite positive `U`-invariant `E`-null measure yields a finite positive `U`-invariant `E`-null `τ` with `∫ Re χ(1) dτ < 0`.
+- SP-Cor: over ℚ(√47), given T-C(A) at `S = ∅`, if every finite positive `U`-invariant `E`-null measure on `R̂` is a multiple of Haar, then `χ(ℚ(√47)²) ≥ 5`.
+
+### 5.5 Would-have-searched-here log (stage 5)
+
+- None.
