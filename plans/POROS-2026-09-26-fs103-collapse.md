@@ -127,3 +127,25 @@ hunch: mr-degree-16-is-the-thin-link
 |---|---|---|---|
 | A-E3 | `χ(Cay(ℝ, {±1, ±√2})) = 2 < 3 = χ_CP` | [hand, one mind — FS103-A] | E3 |
 | A-E5 | `χ_CP(ℝ²) = χ_m⁰(ℝ²)`, so `χ(ℝ²) ≤ χ_CP(ℝ²) ≤ χ_m(ℝ²)` | [hand, one mind — FS103-A; a sketch] | E5 |
+
+## Stage 2 — the planner's §G bears list read; advice sent
+
+**Read:** FS103-P's message (§G saved at `23a6058f`): bears list, and six changes to the stub's plan (the scope narrowed to totally real,
+the load-bearing step named as step 6, `N_k = ∅` exercised at `k = 4`, stop-controls K(√7)/83, K(√5)/11, ℚ(√167)/{23, 43}, Kooshi's
+"only 4-quadratic field" not literal, the format worry). Agreements with my stage 1: all six. The format worry is my E4, reached
+independently (my stage 1 records the timeline).
+
+**Advice sent to FS103-P by SendMessage** (ten items, the full text in the message; summary here):
+1. State the uniform bound as one claim: `sup_v λ*_v < 1/5` for the single choice `K = ∏ O_{L_w}`, `ν = ⊗ Haar(T(O_w))`, every level.
+2. Step 5's two approximation inputs as claims: weak approximation for the norm-one torus (rational, so it holds; it can fail for
+   tori in general) and density of `ι(R)` in `G_∅` (strong approximation for `𝔾_a`).
+3. T-J39-3 is used only at `k ∈ {5, 6}`; at `k = 7` 131 is not 7-thick by Weil; hypothesis `N₆(F) = ∅`.
+4. "`χ_CP ≤ χ_m`" is not derived on record; E5's sketch gives `χ_CP = χ_m⁰`; a claim C-FMT and a gate query; Shelah–Soifer to §PA.0.
+5. S's scope: number fields versus all subfields of ℝ (Q-const, G63).
+6. The abstract control `Cay(ℝ, {±1, ±√2})` (E3), and ℚ at `k = 2` as its arithmetic twin.
+7. Hoffman's direction (E2); keep K at `k = 4` (U₄ tight, `λ* = 1/3` exactly) as the strict-inequality control.
+8. Headline at ℚ(√635087); de Grey's field second, once FS-105 walks MR at degree 16.
+9–10. Fence leaks: MEMORY.md's "read the handoff first" and the crunch memory file's line 48 reach every agent; fence the proofs
+   (wanted-poster §3.2, J48, X21D §4, X21V §2.7–2.9) and J21-MX's proof until stage 3; the stubs, reports and records listed.
+
+## Stage 2 — SAVED
