@@ -39,3 +39,34 @@ add §4 entries FS100-X28D-* that copy each table row's statement and grade verb
 verdict changes. Commit it as its own stage, list every entry touched, and report the strict gate's exit status as read directly."
 
 **Would have searched here (stage 1):** none.
+
+## Stage 2 — SAVED (`plans/FS100-derivation.md` §4: the owner's mechanical ruling)
+
+Applied by script (the scratchpad's `fixderiv4.py`; every old string asserted to occur once; X28D's statements and grades read from its table,
+never retyped). `P` below = "the plan's §R-close (stage 5, wave 3)".
+- **Headers (title and bracket only):** FS100-CX — the nested "[hand, one mind, blind]" inside the grade bracket → "(hand, one mind, blind)";
+  FS100-X22 — the grade bracket "[hand; the claims two blind, TR-ROT's form and X22V-T4 one mind]" added after the title, copied from X29C's
+  drafted § B line. Both now parse.
+- **Fields added (labels or addresses; nothing else):** Q0 (verdict P 1.1 row Q-0; prior art none recorded), FAM (verdict 1.1 rows A-1, A-2),
+  K0b (verdict 1.1 row A-3; prior art none recorded), 167 (verdict 1.1 row A-4; prior art "X24R: not found in print", X24R §2.1 — X24R's
+  question 1 covered five for a real field without √3), B12 (verdict 1.1 rows B-1, B-2, 1.6; prior art none recorded), B3 (verdict 1.1 row
+  B-3, 1.6; rests on it FS-59's stub line, P 4.6), CLS (verdict 1.1 row CLS, 1d), COR (proof X23D §3.3, X23V §2.4, P 1.3; verdict 1.1 row COR,
+  1.3, 1d), CTL (proof X23D §2.2, X23V §2.1; verdict 1.1 row CTL; rests on it and prior art none recorded), D1 (proof X23D §4.2, X23V §2.6;
+  verdict 1.1 row D-1; rests on it and prior art none recorded), DLP (verdict 1.1 row CLS, 1d; rests on it FS100-CLS's dyadic level bound; prior
+  art none recorded), EXC (proof X23D stage 5 item 1, X23V §2.3, X26B §2.4; verdict P 1.3, 1d; prior art none recorded), G27 (proof X23D §2.1,
+  X23V §4.2; verdict P 1d; rests on it FS100-CLS's Hoffman table; prior art none recorded), GF (proof X23V §2.2; verdict 1.1 row CLS; rests on
+  it FS100-DLP's scope note; prior art none recorded), Q35 (proof X23D §4.1, X23V §2.5; verdict 1.1 row Q35; prior art none recorded), SPC
+  (verdict 1.1 row SPC, 1c, 1d; prior art none recorded), TCA (verdict 1.1 row A-1, 1c; prior art none recorded), CX (proof X23D §3.2 step 3′,
+  X23V §2.3, X26B §3.2; verdict P 1c, 1d; prior art none recorded), X22 (verdict P 1b; rests on it FS-98's stub line; prior art row 124's
+  drafted clause on `[BergelsonMoragues2021]`, otherwise none recorded).
+- **Seven new entries** after FS100-X22, before §G: FS100-X28D-P, -S, -CP1, -CP2, -CP3, -ODD, -CUBE — each statement and grade verbatim from
+  `plans/FS100-X28D-derivation.md`'s table, *Proof:* its address there, *Proof verdict:* "one mind (X28D); not reconciled at the close — X28D
+  reported after X29C", *Rests on it:* none recorded (CP2: FS100-COR's scope note, X28D §3.3 item 1), *Prior art:* "standard local algebraic
+  number theory; no gate run" (S, CUBE; the owner's ruling) or none recorded, *Kernel:* no decision recorded (the owner's).
+- **Launch note 3's one sentence, FS100-COR:** "*Scope (X28D):* the complex-place case is inhabited and not reducible to totally real fields
+  by monotonicity — ℚ(√23, ∛2) has `L = 5` while its totally real subfields have `L ≤ 4` (FS100-X28D-CP2) — so FS100-CX is load-bearing there."
+
+No grade, verdict or statement changed. **Gate:** `fs71_ledger_b_check.py --strict` exit 1, FAIL (26): exactly the 26 "has no § B row" lines
+(X29C's 19 and X28D's 7), which stage 3's § B lines fix.
+
+**Would have searched here (stage 2):** none.
