@@ -252,3 +252,63 @@ tail); T-B1, T-B2 (mine GAP — compare any route J28D finds against B1-a–c an
 ### What the comparison changes in my verdicts
 Nothing so far: T-A TRUE is confirmed by an independent derivation with the same steps and one different route (V3). My slip (V7) is in
 the priors only.
+
+## Stage 5 — SAVED (the four pending divergence rows; J28D's record at 3a4fc0fd, read in full)
+
+J28D's record now holds §3 (T-C in class form over S2, T-C(A)), Stage 4 (T-B1, T-B2) and §5.2 (lemma statements). My verdicts were
+committed blind at e1a29f37, before any of it was opened.
+
+| # | claim | kind | J28D | mine (blind) | verdict |
+|---|---|---|---|---|---|
+| V10 | T-C | truth | TRUE, one mind | TRUE, one mind | agree |
+| V11 | T-C, scope | scope | class form: every real field with one row-67 tight place and every other stable place of all-levels ratio `< 1/4` (all of S2) | stated for type (B); the route never used more than that class (C4 splits off the finitely many Hoffman-failing places the same way) | J28D's statement is the wider one, and my route reaches it unchanged |
+| V12 | T-C, extension | route | C1–C2: the hypothesis **is** `τ_S`-continuity in probability of `y ↦ P(c(0) ≠ c(y))` (an iff, via Bochner on `G_S`); extend by uniform continuity | C2: spectral representation; the unitary group extends from `R` to `G_S` by multiplication by extended characters | the same extension, proved two ways; J28D's also gives the converse. Its C3 (`P(c̃(x) = c̃(x+w)) = (1 + 3C̃(w))/4 = 0`) is a one-line form of my C2 (e) |
+| V13 | T-C, regularisation | route | edge-null sets handled directly (social/lonely points, essential neighbourhoods `N_e`); density points used only inside the doubling factor `X` (TC-reg, C14.1-e); C14′ judged inapplicable because a null set of bad edges can touch every vertex | C3: density points on **all** of `G_S` along a nested one-parameter family `C_n × V_n` (non-doubling, but `m(E_n − E_n + E_n) ≤ 3^{2[F:ℚ]}m(E_n)` suffices for Vitali), which yields a conull `Ω` with properness on every pair inside it — C14′'s format | both valid; J28D's objection applies to the unregularised path, which my C3 regularises. Different routes |
+| V14 | T-C, the other stable places | route | **absorbed into the tight factor**: `Y′ = O_𝔓 × ∏_{H*} O_v` is Hoffman-tight with least eigenspace the `𝔓`-minimisers (Lemma Y′) | **kept in the non-tight side** as one compact tail factor of Hoffman ratio `< 1/4`, joined to `X` by C14.3 | different routes, each valid (Lemma Y′ re-derived from its statement below). Both split off the same finite set `B` (11 or 19) |
+| V15 | T-C, the count | route | stationary from the start: expectations `ℓ_j ≤ r_X β_j`, `p_j ≤ ¼(1 − β_j) + r_X β_j`, summed | samplewise C14 count on the regularised path, then stationarity only to turn "window average of `f` → 0" into `f = 0` a.e. | the same Zhang counting idea (through C14.1, C14.3, observations (i)–(ii)), executed two ways |
+| V16 | T-C, back to `R` | route | `C(δ) = 1` for `δ ∈ R ∩ 𝔓⁴` by stationarity and Fubini, so `c` is `R ∩ 𝔓⁴`-periodic | `h ↦ P(G(h) = γ(π₄h))` continuous and a.e. 1, hence 1 on `R` | two routes, both valid |
+| V17 | T-C(A) | truth; route; one input | TRUE; `Y′ = ∏_H O_v` with no tight factor, count `1 ≤ 4 max(α(Y′), r_X)`; the dyadic split case from J21-D1-2, re-read, "a second reading, not a second derivation" | TRUE; tail joined to `X` by C14.3, then `1 ≤ 4(r + η(n))`; the dyadic split case re-derived by hand (J28V-6) | agree on truth. **C14.2 (c) at `q = 2` now has an independent derivation of mine** beside M3's |
+| V18 | T-B1 | truth; the named step | GAP; re-centring closes when the nearest defect is archimedean-dominated (H applies) and stops when it is split-dominated (an ultrametric sphere, no ultrametric H); a pinned bootstrap stops at the discreteness of `T(O_S)` | GAP: isolation is conditional finite forcing, and H needs a half-space that a finite `B` does not supply | **the same step**: unique continuation from a region that is no archimedean half-space. J28D's statement of it is sharper (it closes the archimedean-dominated case and isolates the split-dominated one) |
+| V19 | T-B2 | truth; the named step; a partial | GAP at "B2-growth"; B2-2: `d*(z + kU) = 0` for every `k`; B2-3: a sparse defect is transient, so no invariant-measure argument can reach T-B2 | GAP at the passage from propagation to positive density; finite unions of circles have density 0 (B2-e); defects lie in no finite union of cosets of a finitely generated subgroup (B2-d) | **the same step.** J28D's B2-2 is stronger than my B2-e (it covers every archimedean-bounded set); its B2-3 is a point I did not make |
+
+### Are the two T-C routes independent?
+- **Neither uses the other's new steps.** My C2, C3 and C5 were committed at e1a29f37 before I opened J28D's record, and J28D's header says J28V
+  was not read. J28D's route has no counterpart of my C3's conull `Ω`, my tail factor, or my samplewise count; mine has no counterpart of its
+  Lemma Y′, its social/lonely decomposition, or its `C(δ) = 1` ending.
+- **What they share:** the architecture (extend to `G_S`, regularise by density points, a Zhang count against a tight compact factor, Hoffman
+  equality, propagation). They also share every transplanted and external input: C14.1–C14.3 and C14.2 (a)–(c), themselves two derivations;
+  `[AmbrusEtAl2023]`; FS-66's certificates at 11 and 19; Lemmas D and P; FS38-D2-A/B; VC-C2; weak and strong approximation.
+- **So: two derivations of T-C, and two of T-C(A),** each one mind, blind to each other, with common inputs. That meets the standard a
+  ledger row needs ("two derivations"), with the inputs listed once.
+- **One asymmetry for T-C(A):** a split dyadic place in `S` rests on C14.2 (c) at `q = 2`. For that step, J28D's re-reading is not a
+  derivation; mine is.
+
+### §5.2's lemma statements, each re-derived here from its statement (the proofs checked only where they differ from mine)
+- **L-A, L-A1, L-A2, L-CL:** TRUE. These are my §2.3 and B2-a, B1-b, B2-b.
+- **L-C1:** TRUE.
+  - ⟹ is my C1–C2.
+  - ⟸: a `τ_S`-continuous positive-definite function on the dense `R` extends to one on `G_S`. Bochner gives a measure on `Ĝ_S`, and it
+    restricts to `σ` by uniqueness on `R̂`.
+- **L-C2, L-C3:** TRUE. These are my C2 (a)–(e) and C3's first sentence.
+- **L-C4 (Y′ tight):** TRUE. The non-trivial characters have product values in `[−1/3, 1]`, each `H`-factor lies in `(−1/3, 1)` (VC-C2
+  excludes the value 1), and equality forces a `𝔓`-minimiser with every other factor trivial. This is the same computation as my C4, used
+  on the tight side.
+- **L-C4b:** TRUE. It is my C3's density-point argument; mine also covers the non-doubling infinite product by using the nested family.
+- **L-C5, L-C6:** TRUE. My C5 proves them with `Y′ = O_𝔓`, and the count runs unchanged for any compact factor that is Hoffman-tight at
+  `1/4` with those minimisers.
+- **L-C(A):** TRUE. This is my §2.2.
+- **L-tab:** TRUE. It agrees with `tools/crunch_j28v_facts.py`: the sets are `{11}`, `{19}`, `{19}`, `{11, 19}`, and the margins are
+  `1.6·10⁻³` and `4.88·10⁻⁶`.
+- **L-B2-2:** TRUE, re-derived.
+  - Let `B` be a bounded archimedean ball. If a fraction `δ` of a Følner set `F` lay in `B`, pick `m` translates `x_i` with the `B + x_i`
+    pairwise disjoint. Then `|F ∩ (B + x_i)| ≥ (δ − ε)|F|` for each `i`, so `δ ≤ 1/m + ε`.
+  - So every archimedean-bounded subset of `R` has upper Banach density 0.
+
+### What stage 5 changes in my verdicts
+Nothing. Every verdict stands: T-A, T-C and T-C(A) TRUE; T-B1 and T-B2 GAP at the step J28D also names. Two items are added to the
+theorems list below.
+
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J28V-10 | every archimedean-bounded subset of `R` has upper Banach density 0 (J28D's L-B2-2, re-derived; it contains my B2-e) | [hand; re-derivation] | §Stage 5 |
+| J28V-11 | J28D's §5.2 statements L-C1, L-C4, L-C4b, L-C5 re-derived from their statements | [hand; re-derivation] | §Stage 5 |
