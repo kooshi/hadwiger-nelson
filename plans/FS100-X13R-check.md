@@ -165,3 +165,8 @@ reason**, for whoever checks ED1′.
 ### Would-have-searched-here log (stage 3)
 
 - None: a reading check of a hand proof.
+
+## Stage 4 — SAVED (hand-off)
+
+Verdicts: **X03D-ED2 VALID; X03D-Z VALID.** Corrections owed and tool defects: the report, `data/crunch-2026-09-26-x2x3/reports/X13R.md`
+(7 inventory lines). No bibliography rows proposed (no paper read beyond the project's records). Finished 11:14 UTC, well inside the 06:50 stop.
