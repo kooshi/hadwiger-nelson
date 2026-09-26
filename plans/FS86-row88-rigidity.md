@@ -875,3 +875,9 @@ owed:** `[HervaKari2025]`, `[MacVicar2023]`, `[SilvaFilho2026]`, and the Yip cli
 | the ℚ⁴ control minted as FS-99 | decline it as "a lead, not pursued" (J28's §PA.3) | the stub rule: every candidate a milestone surfaces becomes a stub; it costs one file | high |
 
 **Would have searched here (stage 4):** none.
+
+### J41's own record lines
+
+**Theorems this phase proved:** none — a close files the milestone's theorems (19 entries, `plans/R88-derivation.md`); it proves none.
+**Would have searched here (J41, all stages):** none. **Tools** (each with a plant watched to fire): `data/fs86r88/j41/tick.py` (a status for a
+missing row, exit 1), `check_b_draft.py` (one § B line dropped, exit 1), `claude_drafts.py` (an absent `old`, exit 1).
