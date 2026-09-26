@@ -301,7 +301,7 @@ ball selection, two of them smaller objects than FS-58's). Records: `plans/FS58-
 and **no level of any of those towers `UD(ℤ/p^k, 2)` is four-colourable**: at 11 and 19 by the exact all-levels certificates, and at
 every `p ≥ 23` by the ratio bound, whose chromatic floor exceeds 4 there (4.0148 at 23, 4.000044 at 31, 4.68 at 43, 4.74 at 47, and Weil's bound from there up)
 and is the same at every level of the tower. So a four-colouring would have been local at no prime at any depth — **and, since
-FS-89, no character colouring** (`LEDGER.md` row 96: `Θ₄(R_{ℚ(√47)}) = ∅`, hand); given MR there is none (row 121), and the
+FS-89, no character colouring** (`LEDGER.md` row 96: `Θ₄(R_{ℚ(√47)}) = ∅`, hand); through MR there is none (row 121, [hand]), and the
 local–global conjecture's prediction of 5, read with every level allowed, is met. His general question — *how much
 can the chromatic number grow for quadratic extensions* — is answered through five: **four for every squarefree `d ≡ 11 (mod 12)`** (the census's
 candidate class theorem, proved by hand with two derivations, row 82; all forty below 500 certified, row 83) **and exactly five at every real
@@ -490,7 +490,7 @@ a union of `Λ`-cosets; nor Mixon's follow-up, that the ring has finitely many f
 count 9,120 (Hubai), the input (Parts), the stripes-from-no-triangle sketch (Gibbs), the renormalisation (Tao). **Ours:** the derivation
 on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-V6). **Not kernel-checked** (FS-87).
 
-### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate, not fired**: answered at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` given MR (row 123), and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
+### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate; the rule half fires** (Kooshi, 2026-09-26, `CLAUDE.md` § Publication): answered at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` at [hand], through MR (rows 120, 123), and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
 
 > **Fischer** (`[Fischer1990]` §1, 1990, held and read): *"This still begs the general question, however, whether some algebraic
 > criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* The close gate of
@@ -506,7 +506,7 @@ iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **
 answer through five; not found in print (X24R). **Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five) — the conjecture's
 open range; that every character colouring is local at one place (proved at three colours and at HD1's fields only; FS-92); the general
 subfield of ℝ (S1 extends to every algebraic `F` and every purely transcendental extension of one, with `L(F)` read over all stable
-valuation rings, row 99). **Why a candidate, not fired:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
+valuation rings, row 99). **Why still a candidate:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
 `[Johnson2006]` — a status report and a compendium on exactly this question, both unread and waiting on Kooshi's fetch (`BIBLIOGRAPHY.md`
 § R.4); no zbMATH gate on "no mixing" in the literature's words was run. **Not ours:** the question (Fischer; Benda–Perles); the real
 quadratic and `√3 ∈ F` cases (row 82; G55, GPT Astra); the additive case (`[Fischer1990]` Thm 9, which row 99 generalises). **Not
@@ -520,14 +520,14 @@ here in band form on `R_{{p}}` (row 102).
 
 ## §3 — Adjacent and open
 
-*Questions others posed in writing that we have not answered but are unusually well placed to.*
+*Questions others posed in writing that we have not answered — or have answered only at [hand], or in part, as each entry marks — but are unusually well placed to.*
 
 - **The minimum order of a 5-chromatic unit-distance graph.** `[ExooIsmailescu2019]`, concluding section:
   *"What is the minimum order of a 5-chromatic unit distance graph in the plane?"* The record is
   `[Parts2020a]`'s 509 vertices. M62 is the search to beat it (paused for M63); M63 has reproduced Parts's
   reduction stage on every attested number, and M64 explained his overcompression obstruction (ledger
   row 62). Best object here: 559 vertices, census-certified.
-- **The smallest field whose plane needs five colours.** `[ExooIsmailescu2019]`, right after the question of
+- **The smallest field whose plane needs five colours** — **answered at [hand], through MR** (rows 121, 123), and held here by §1.7's rule until `[Johnson2000]` and `[Johnson2006]` are read. `[ExooIsmailescu2019]`, right after the question of
   §1.1 row 5: *"More generally, what is the smallest subfield of E2 that requires 5 colors?"* `ℚ(√3,√11)` does
   not (Theorem B). The fields known here to need exactly five are `ℚ(√3,√5,√11)`, `ℚ(√3,√11,√247)`,
   `ℚ(√3,√11,√23)` (ledger rows 47, 52–53; degree 8), and since FS-100 stage 5 ℚ(√3,√5) (degree 4) and every real quadratic field with
@@ -587,7 +587,9 @@ character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, an
 Everything here except §1.1 and §1.2, which are FS-20's manuscript, is **deferred**. The standing policy
 (`CLAUDE.md` § The mission) defers write-ups and upstreaming; the bar clears on χ(ℝ²) ≥ 6 or its refutation,
 on Kooshi's call for a certified 5-chromatic object of our own, and on a result answering a question the
-literature has independently and repeatedly posed — which has fired once, for §1.1.
+literature has independently and repeatedly posed — which half fires for `LEDGER.md` rows 121–123 (Kooshi, 2026-09-26: worthy of a
+write-up, which is the fallback while the project pushes on toward six; `CLAUDE.md` § Publication), and appeared to fire once before, for
+§1.1, whose value `[Fischer1994]` had in print.
 
 **A row entering §1 is not authorisation to write it up.** It is Kooshi's call, every time.
 

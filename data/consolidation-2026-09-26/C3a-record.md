@@ -93,3 +93,43 @@ clause, G76's measure half and demotion, G79's instances, G80.
 Gates after stage 3: fact audit PASS (one ALLOW, above); `--self-test` PASS; `--dupes` 10; ledger-§B strict PASS; bib PASS; architecture
 PASS. `CLAUDE.md` 298,719 bytes — 1,281 under the budget; the remaining room is too small for further additions, so later stages
 rewrite in place or point.
+
+## Stage 4 — SAVED
+
+The sweep of `LEDGER.md` rows 1–127 and `CLOSED-QUESTIONS.md`. Method: every row's text grepped for MR, `given MR`, `4 ≤ χ`, the three exposed
+fields' values, FS-59/FS-84, 55.1, "exposed", "predicted", "not landed", "open"; the brief's named rows (92, 96, 101, 110, 113, 116, 117, 118)
+read in their hits; `CLOSED-QUESTIONS.md` grepped the same way and §2.6, §3, §4 read in full. Rows keep their own result and scope; where a
+row's status clause is now stale, a pointer to the row that changed it is added at that row's grade.
+
+| file | location | old claim (quoted) | new claim | row |
+|---|---|---|---|---|
+| `LEDGER.md` | claim list, end | "…(rows 123–125) — … unread;" (rows 126–127 missing) | adds "TR-ROT's equivalence with Q-μ and its spectral closure on `E` (row 126; prior art not searched); the kernel form of the main clause through five over named hypotheses, with `χ(ℚ(√47)²) ≤ 5` unconditional (row 127; the upper half is row 52's colouring)." | 126, 127 |
+| `LEDGER.md` | row 74 | "`4 ≤ χ ≤ 5` at **`d = 143, 311, 335`** —" | "…(five at all three since row 123, [hand], through MR) —" | 123 |
+| `LEDGER.md` | row 76, title | "**Five colours over ℚ(√3,√5): not landed — and where a forcer cannot live, by theorem**" | "**Five colours over ℚ(√3,√5): not landed by a forcer (the value landed at row 123, [hand], through MR) — and …**" | 123 |
+| `LEDGER.md` | row 79, Not claimed | "`χ(ℚ(√167)²) ≥ 5`;" | "`χ(ℚ(√167)²) ≥ 5` (row 123's);" | 123 |
+| `LEDGER.md` | row 82, consequences | "and `4 ≤ χ ≤ 5` where L = 5;" | "…where L = 5 (five there since row 123, [hand], through MR);" | 123 |
+| `LEDGER.md` | row 86, Not claimed | "any member of `𝒰^tf` with `F₄ ≠ 0` (that is Soifer 55.1, open);" | "…(at least Soifer 55.1, whose existence half row 121 answers, [hand]);" (row 86's own "at least 55.1") | 121 |
+| `LEDGER.md` | row 92, Not claimed | "so FS-59's and FS-64's five-colour questions at ℚ(√167) are untouched;" | "…are untouched here (five there is row 123's);" | 123 |
+| `LEDGER.md` | row 96, Not claimed | "`χ(ℚ(√47)²) = 5` or `χ(ℚ(√167)²) ≥ 6`;" | "`χ(ℚ(√47)²) = 5` (row 121's, by another route) or `χ(ℚ(√167)²) ≥ 6`;" | 121 |
+| `LEDGER.md` | row 99, Fischer's question | "answered here at `χ ≤ 3` and at `L ≤ 4` —" | "…and at `L ≤ 4` (at `L = 5` through MR, row 123) —" | 123 |
+| `LEDGER.md` | row 101, Not claimed | "`χ(ℚ(√167)²)` (`4 ≤ χ ≤ 7`)" | "`χ(ℚ(√167)²)` (`5 ≤ χ ≤ 7` since row 123, [hand])" | 123 |
+| `LEDGER.md` | row 113 | "**It does not decide `χ(ℚ(√47)²)`** (`4 ≤ χ ≤ 5` stands; FS-84)." | "**It does not decide `χ(ℚ(√47)²)`**; row 121 does (`= 5`, [hand], through MR)." | 121 |
+| `LEDGER.md` | row 116, Not claimed | "anything at ℚ(√47) beyond the equivalence;" | "…beyond the equivalence (moot since row 121: no four-colouring exists there);" | 121 |
+| `LEDGER.md` | row 119 | "The conjecture's widest gap now has its lower end in the kernel (four proven, at least six predicted; G59)." | "The conjecture's widest gap has its kernel lower end here (four; five at [hand], row 123; at least six predicted; G59)." | 123 |
+| `LEDGER.md` | row 121, grade | "The consequences: row 123's grade; not kernel — X11K's lane has begun" | "…row 123's grade; in the kernel only over named hypotheses, row 127" | 127 |
+| `LEDGER.md` | row 123, Not claimed | "a kernel proof (X11K2's lane, FS-101)." | "a kernel proof (row 127 holds the composition over named hypotheses; FS-101)." | 127 |
+| `CLOSED-QUESTIONS.md` | §2.6 heading | "— **a candidate, not fired**: … and at `L(F) = 5` given MR (row 123), …" | "— **a candidate; the rule half fires** (Kooshi, 2026-09-26, `CLAUDE.md` § Publication): … and at `L(F) = 5` at [hand], through MR (rows 120, 123), …" | 120, 123; Kooshi's ruling |
+| `CLOSED-QUESTIONS.md` | §2.6 body | "**Why a candidate, not fired:**" | "**Why still a candidate:**" | Kooshi's ruling |
+| `CLOSED-QUESTIONS.md` | §1.7 body | "given MR there is none (row 121)" | "through MR there is none (row 121, [hand])" | 121 |
+| `CLOSED-QUESTIONS.md` | §3 intro | "*Questions others posed in writing that we have not answered but are unusually well placed to.*" | "*…that we have not answered — or have answered only at [hand], or in part, as each entry marks — but …*" | 121, 123 |
+| `CLOSED-QUESTIONS.md` | §3, smallest field | "- **The smallest field whose plane needs five colours.**" (body already said "answered by degree and then by `d`") | "…five colours** — **answered at [hand], through MR** (rows 121, 123), and held here by §1.7's rule until `[Johnson2000]` and `[Johnson2006]` are read." | 121, 123 |
+| `CLOSED-QUESTIONS.md` | §4 | "— which has fired once, for §1.1." | "— which half fires for `LEDGER.md` rows 121–123 (Kooshi, 2026-09-26: … the fallback while the project pushes on toward six; `CLAUDE.md` § Publication), and appeared to fire once before, for §1.1, whose value `[Fischer1994]` had in print." | Kooshi's ruling; `CLAUDE.md` § Publication |
+
+Left as they are, on purpose: § B lines FS58-T8 and FS61-T1 (`4 ≤ χ ≤ 5` at 47, 143, 311, 335) — theorem statements of what those tools
+certified, true as stated; § B's `given MR` lines (FS100-X22, X27D-EQ/E/FL) — conditional theorem statements, MR's home being row 120;
+row 117's "MR(F) ⟹ `χ(F²) ≥ 5`" — an implication, and its Not-claimed already points at rows 120 and 123; rows 71 and 73's "not landed …
+(FS-59)" — the scope of those rows' own attempts. Section moves in `CLOSED-QUESTIONS.md` (the smallest-field entry and 55.1's existence
+half from §3 to §2) were not made: other files cite "§3" for both.
+
+Gates after stage 4: fact audit `--base 9b3ec6ab` PASS (no ALLOW added this stage); `--dupes` 10; ledger-§B strict PASS; bib PASS;
+architecture PASS. Bytes: `CLAUDE.md` 298,719, `LEDGER.md` 404,741, `CLOSED-QUESTIONS.md` 57,564.
