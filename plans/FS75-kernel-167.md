@@ -692,3 +692,24 @@ list already carries "every kernel certificate"). No `BIBLIOGRAPHY.md` row is pr
 Chandgotia 2017 is proposed in stage 5's drafts, since the "Not ours" list credits it without a key.
 
 **Would have searched here (stage 2):** none — fourteen reviews-database queries are a literature search, not a finite-witness search.
+
+### Stage 3 — SAVED (the kernel register and the derivation file)
+
+`plans/FS75-derivation.md`, in M2's two-part form. **Part I, the kernel register**: the four modules' declarations a result rests on, by
+file, line, axioms (the owner's gate log, `build/gate/axioms/20260926T053431Z-866750.log`: 1,209 records, 1,193 clean, 11 axiom-free, 5
+declared purchases; the 63 new theorems all printed, all within the standard three), what each states in plain words, and its ancestor;
+§ I.5 what the kernel does not prove; § I.6 the four § B ids and row 79 it promotes. **Part II**: seven entries in
+`tools/fs71_ledger_b_check.py`'s form — FS75-W (the winding form), FS75-C (the certificate's soundness), FS75-T (the plane transfer),
+FS75-H (the headline) and FS75-K4 (the control), graded [kernel] with their Lean addresses; FS75-N1 (the necessity of `s j ≠ 0`) [hand],
+re-derived here; FS75-N2 (the sign guard's necessity) [kernel for its two facts, scratch for the guard-free acceptance].
+
+**The check.** `python3 tools/fs71_ledger_b_check.py --strict`: exit 1, "RESULT: FAIL (22)" — the 15 FS100 ids of the launch plus the seven
+FS75 ids, each "has no `LEDGER.md` § B row" and nothing else (no missing field) (`data/fs75/j54/check-b-full.out`). With the seven drafted
+§ B lines (`data/fs75/j54/ledger-b-draft.md`) appended in memory, the FS75-only check passes: `python3 data/fs75/j54/check_b_draft.py`, exit 0,
+"FS75 entries: 7 …; drafted lines: 7; failures: 0" (`check-b.out`); its plant, dropping the first line, fails for its own reason: exit 1,
+"FAIL: entry FS75-W has no LEDGER.md § B row" (`check-b-plant.out`).
+
+**Correction to stage 2.** Stage 2 said a `BIBLIOGRAPHY.md` row for Chandgotia 2017 "is proposed in stage 5's drafts". It is already keyed,
+`[Chandgotia2017]` (`BIBLIOGRAPHY.md` line 721); no row is proposed, and the derivation file cites the key.
+
+**Would have searched here (stage 3):** none.

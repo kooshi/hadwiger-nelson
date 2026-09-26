@@ -1,0 +1,3 @@
+FAIL: entry FS75-W has no LEDGER.md § B row
+FS75 entries: 7 (FS75-C, FS75-H, FS75-K4, FS75-N1, FS75-N2, FS75-T, FS75-W); drafted lines: 6; failures: 1
+RESULT: FAIL
