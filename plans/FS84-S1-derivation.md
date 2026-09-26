@@ -12,6 +12,11 @@ during the crunch, under the finite-witness ban (to 2026-10-01); anything needin
 | S1a | `ρ_per(ℚ(√47)) ≤ h*(31) = 0.2499972548… < 1/4`; binding place 31, margin `2.745·10⁻⁶`; so no periodic four-colouring of any `R`-coset of ℚ(√47)² | hand + cert + tools exact; one derivation here (inputs named in §1.4) | §1.3–§1.5 |
 | S1a-P | Lemma P at every odd stable tower (re-derived): a character new at level `m ≥ 2` has `\|λ\| ≤ 2p^{m−1}`; so the tower's Hoffman ratio is `L/(p+1+L)`, `L = max(\|λ_min(Γ_p)\|, 2)`, at every level | hand (second derivation after FS86-LP) + tools (FFT at 47-ramified and 31-inert, level 2) | §1.3 step 7 |
 | S1a-J | the joint image: `ρ_N(U) = ∏_{𝔓 ∈ S_N} S_{𝔓,K_𝔓}` for ℚ(√47) (weak approximation for the rational torus) | hand (same route as J07's CLG-c (W), (J)) | §1.3 step 3 |
+| S1b | invariant-measure equivalence (i), the `1/k` density (ii), the window form (W), and the identities `ι_G = 1/χ_{f,0} = 1/ρ = 1/χ_{gf,G,0}` (iii) | hand; one derivation | §2.2 |
+| S1b-47 | `ρ_per(ℚ(√47)) = max_𝔓 r_𝔓 ∈ [28/121, h*(31)]`; `ι(ℚ(√47)) < 1/4` iff a finite `H` has `α(H) < |H|/4` (would refute `[MatolcsiEtAl2025]`'s `α₁(ℝ²) = 1/4`) | hand | §2.3 |
+| S1c | no band character of order dividing 168 or of stable prime order ≤ 47 on any of the ten minimal survivors | tools exact (complete enumeration of a derived set) | §3.2 |
+| S1d-K | the window graph is `K_{2,3}`-free: `e(W) ≤ w(1 + √(8w−7))/4`; radius-1 windows are stars | hand | §4.1 |
+| S1e | linear tetrahedral identities are class-balance statements; none exists on a lattice with one gapped four-colouring; G75's mechanism is vacuous without `√3` | hand; one derivation | §4.2 |
 
 ## Stage 1 — SAVED
 
@@ -248,3 +253,127 @@ congruence between subsets of a finite `H ⊆ R` lies in `G_full` (`t = y′ −
 - FS-66's `cert-p19.json` re-check at `--m 4`: see §3's first line (it was still running at this save).
 - **Would have searched here:** would have sampled a large random ball of `Cay(R, U)` and computed its independence ratio to estimate `ι`;
   instead derived `ι = inf α(H)/|H|` and priced the route against `[MatolcsiEtAl2025]`'s conjecture.
+
+## Stage 3 — SAVED
+
+*First line owed from Stage 2:* FS-66's `cert-p19.json` at `--m 4`: **CERTIFIED** (`4U = 310.047 < 361`), 8 min 59 s single-threaded
+(`data/fs84/s1/fs66-check-p19-m4.out`). **Slip:** it ran without `scripts/slot.py` although it exceeded 2 minutes (memory under 1 GiB,
+one thread); logged for the owner.
+
+### 3.1 S1c — the candidate set, fixed by derivation before any check
+
+A rational band character of `Λ_M` is a periodic four-colouring; whether `Θ₄(Λ_M) ≠ ∅` at all is a finder's question (out). On a single
+rank-4 lattice "torsion plus archimedean" restricts nothing (every character of `Λ_M` is archimedean: `Λ_M ⊗ ℝ = E ⊗ ℝ`); the structure
+of rows 95–97 bites only through the layers. So the candidate set is defined by what a *field-level* band character looks like on each
+layer, with its archimedean part set to zero:
+- **Family A (the `T₁₆₈` family).** Row 95/FS89-CL2: every band character of a real field's ring is `τ + ψ` with `τ` of order dividing
+  168 on each rational layer (six types, 29 characters: parity, order 3, two order-4 types, order 7, order 8). `Λ_M` is spanned by its
+  layers `b·U_ℚ`, so every `θ` whose layer restrictions are `T₁₆₈`-types with `ψ = 0` has order dividing 168. **Candidate set:
+  `Hom(Λ_M, (1/168)ℤ/ℤ)`, all `168⁴ = 7.97·10⁸` elements** — a superset of the derived family, enumerated completely.
+- **Family B (the local family).** CLG's existence form: a field-level band character comes from one stable place at some level, and
+  FS-89 collapses the tower to level one. **Candidate set: `Hom(Λ_M, (1/q)ℤ/ℤ)` for the stable `q ∈ {11, 19, 23, 31, 43, 47}`** (it
+  contains the single-place characters and their sums over the two places above `q`).
+- **Not in the set, by name:** row 97's heteroclinic characters (irrational in general; the rational ones at one prime have orders the
+  families do not fix), the eight order-20 depth-one point cells of FS89-CL1, every character with a non-zero archimedean part, and every
+  level-≥2 local character. The enumeration is the ban's edge: a complete exact enumeration of finite sets a derivation fixed first.
+
+### 3.2 S1c — the result (`tools/fs84_s1_band_candidates.py`; `data/fs84/s1/band_candidates.{out,json}`; 342 s under `slot.py`)
+
+| `M` | 240 | 360 | 408 | 840 | 1272 | 1464 | 2136 | 2184 | 2328 | 2424 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `\|U_M\|` | 108 | 108 | 196 | 204 | 188 | 188 | 188 | 204 | 188 | 196 |
+| family A hits | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| family B hits (each `q`) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+**No survivor carries a band character of order dividing 168, nor of order 11, 19, 23, 31, 43 or 47.** Per lattice: **GAP** — no
+rational witness in the derived families, and no obstruction to `Θ₄(Λ_M) ≠ ∅`: the missing step is the part of `Θ₄(Λ_M)` outside the
+families (non-zero archimedean parts, heteroclinics, other orders), which only a `Θ₄` decision procedure settles (post-ban, S4(i)).
+*Controls:* (pos) on the rank-2 rational pattern over 5 the same enumerator finds 557 band characters of order dividing 168, among them
+all six of row 95's type representatives, transported to `(1/5)ℤ[i]`; (neg) `θ = 0` refused, parity and the order-4 point accepted by the
+Fractions checker; (plant `band`, `band_candidates-plant-band2.out`) the checker's band narrowed by `1/168` refuses the order-4 point
+(values on `1/4`, `3/4`) and keeps parity (values `1/2`) — it fired for its reason. *A first plant could not fire* (it narrowed the band
+where only parity was tested; `band_candidates-plant-band.out`, exit 4 expected) — replaced, recorded. *FS-81 consistency:* the null is
+implied at `N = 7, 11` wherever FS-81's quotient screen was UNSAT, and is new at every order it never asked (8, 12, 21, 24, 28, 42, 56,
+84, 168, 19, 23, 31, 43, 47). The main run's output predates the controls' last edit (the enumeration code is unchanged).
+
+**P-1p** (0.25): unscored — S1c colours nothing; S4(i) is where a one-prime character would be found. **The confound** (Q7): among
+`M ≤ 2,520` with `24 | M`, two primes `≡ 1 (mod 4)` need `M ≥ 24·5·13 = 1560`; the multiples of 24 up to 2,520 with two such primes are
+1560 and 2040 (`24·65`, `24·85`), and `24·5·17 = 2040`, `24·5·29 > 2520` — confirmed by hand.
+
+### 3.3 Would have searched here (Stage 3)
+
+- Would have run a float `Θ₄` finder or a relation tree on each survivor; instead enumerated the two derived finite families exactly.
+- Would have asked the survivors' quotient graphs at `N = 16–20` by SAT; instead covered the linear (character) part of every order
+  dividing 168 exactly, and left the non-linear part to S4.
+
+## Stage 4 — SAVED
+
+### 4.1 S1d — the four-class window LP, its shape (no LP runs here)
+
+- **Object** (S1b-W): a probability vector `p` on `Col₄(Γ[W])`, `Γ = Cay(Λ_M, U_M)`, consistent on every overlap `W ∩ (W + g)`,
+  `g ∈ (W − W) ∖ 0`, and invariant under the point group. Infeasible at one `W` ⟹ `χ(ℚ(√47)²) ≥ 5`.
+- **Symmetry quotient:** `P = ⟨z ↦ iz, z ↦ z̄, √47 ↦ −√47⟩` preserves every `U_M` (in coordinates `(a,b,c,e) ↦ (−c,−e,a,b)`,
+  `(a,b,−c,−e)`, `(a,−b,c,−e)`), order 16; with colour permutations `S₄` the reduction group has order `16·24 = 384`. Multiplication by
+  other unit vectors does not preserve `Λ_M` and is not available.
+- **The window must reach radius 2 and close odd cycles:** `Γ` is triangle-free (`ζ₆ ∉ E`), so the radius-1 window `{0} ∪ U_M` induces a
+  star, `|Col₄| = 4·3^{|U_M|}`, and carries nothing beyond pair statistics (row 87's radius-1 no-go in this field's form).
+- **Density cap (derived):** two unit circles meet in at most two points, so `Γ[W]` is `K_{2,3}`-free and
+  `e(W) ≤ w(1 + √(8w − 7))/4` for `|W| = w` (`Σ_v C(d_v, 2) ≤ 2·C(w, 2)` and convexity). Windows are therefore sparse: `w = 16` allows at
+  most 48 edges (average degree 6).
+- **Counts:** variables `= |Col₄(Γ[W])/(P_W × S₄)| ≥ |Col₄(Γ[W])|/384`; constraints `= Σ_{g ∈ (W−W)∖0 / P_W}` (patterns on
+  `W ∩ (W + g)` up to symmetry) `+ 1`. With `e ≤ 48` at `w = 16`, a sparse window keeps most of `4^w ≈ 4.3·10⁹` colourings; the LP is a
+  machine-scale object from `w ≈ 14` on.
+- **The dual as an identity (Farkas):** potentials `y_g` on overlap patterns with `Σ_g [y_g(σ|_{W∩(W−g)}) − y_g((σ∘τ_g)|_{W∩(W−g)})]
+  ≥ 1` for every `σ ∈ Col₄(Γ[W])` — a discharging identity whose every term has mean 0 under an invariant measure. A refutation is read
+  back as that inequality, checked on every window colouring exactly.
+- **Price: GAP.** The window is not fixed: fixing it needs the lattice's short odd cycles through 0 (the odd girth of `Cay(Λ₂₄₀, U₂₄₀)`
+  and its cycle orbits), an exact computation not run here for budget. The next step is that computation, then `W` = the union of the
+  shortest odd cycles' `P`-orbit, then its count.
+
+### 4.2 S1e — linear identities on the tetrahedral embedding
+
+> **S1e.** Let `g = Σ_j 1[c = j]·t_j` be a four-colouring read on the regular tetrahedron (`Σ t_j = 0`). (i) A linear identity
+> `Σ_{x∈P} a_x g(x) = κ` valid for every proper four-colouring `c` of a lattice graph `Γ` has `κ = 0` and says exactly that **every colour
+> class has the same `a`-weight on `P`** in every colouring. (ii) If some proper four-colouring of `Γ` has a gap (a vertex whose closed
+> neighbourhood misses a colour), then **no non-trivial such identity exists on `Γ`**. (iii) Over ℚ(√47) (and every field without `√3`)
+> `Γ` has no triangles of any side, so G75's `√3`-triple mechanism is vacuous.
+
+*Proof.* (i) Colour permutations preserve properness; averaging the identity over `S₄` gives `κ = 0`; then `Σ_j A_j t_j = 0` with
+`A_j = Σ_{c(x)=j} a_x`, and the only linear relation among the `t_j` is `Σ t_j = 0`, so all `A_j` are equal. (ii) Translate the gapped
+colouring so that the gap sits at a vertex `x` with `a_x ≠ 0` (translates of proper colourings are proper); recolouring `x` alone with its
+missing colour gives a proper colouring in which two class weights move by `∓a_x`, breaking (i). (iii) A third vertex of an equilateral
+triangle is `x + ζ₆(y − x)`, and `ζ₆ ∉ ℚ(√47, i)`. ∎ [hand; one derivation]
+
+**What it does to P-G75** (0.85, "no local linear identity pins a ℚ(√47) lattice's spectrum to torsion"): an identity needs a lattice
+that is four-colourable **and** frozen at every vertex of its support in every colouring — rigidity with no gap anywhere, the G68 question.
+On a lattice that is not four-colourable an identity is vacuous (G30.5). So P-G75 is reduced, not scored: it holds on every four-colourable
+ℚ(√47) lattice that has one gapped colouring. On de Grey's lattice every colouring is gap-free (`F = P = 8Λ`), consistent with NT existing.
+
+### 4.3 The claim list for the verifier (S1V), verbatim
+
+1. "`ρ_per(ℚ(√47)) ≤ sup_𝔓 r_𝔓 ≤ h*(31) = 0.2499972548… < 1/4`, where `h*(p) = L_p/(p + 1 + L_p)`, `L_p = max(|λ_min(Γ_p)|, 2)`, and
+   `|λ_min(Γ₃₁)| = 10.666510494…`." (§1.3)
+2. "No proper four-colouring of `Cay(R, U)` is invariant under a finite-index subgroup `L ≤ R`." (§1.3, Corollary S1a′)
+3. "The stable places of ℚ(√47, i) lie over 47 and the primes `p ≡ 3 (mod 4)` with `(47/p) = 1`; 59 is not among them." (§1.3 step 7)
+4. "At every stable place, a character `ψ` of `(A_m, +)`, `m ≥ 2`, non-trivial on `π^{m−1}A_m` has `|λ_ψ| ≤ 2p^{m−1}`." (§1.3 step 7)
+5. "`ρ_N(U) = ∏_{𝔓∈S_N} S_{𝔓,K_𝔓}`." (§1.3 step 3)
+6. "`ρ_per(ℚ(√47)) = max_𝔓 r_𝔓` exactly, and `ρ_per ∈ [28/121, h*(31)]`." (§2.3 item 4)
+7. S1b-i, S1b-ii, S1b-W, S1b-iii as stated in §2.2.
+8. "`ι(ℚ(√47)) < 1/4` iff some finite `H ⊆ ℚ(√47)²` has `α(H) < |H|/4`, which would give `α₁(ℝ²) < 1/4`." (§2.3 item 3)
+9. "No survivor carries a band character of order dividing 168, nor of order 11, 19, 23, 31, 43 or 47." (§3.2; tools exact)
+10. S1e (i)–(iii) as stated in §4.2.
+
+### 4.4 Would have searched here (Stage 4)
+
+- Would have computed the odd girth of `Cay(Λ₂₄₀, U₂₄₀)` by a meet-in-the-middle sum search to fix `W`; not run (budget), named as S1d's
+  next step.
+- Would have run a small window LP to price S2; instead derived the density cap and the dual's form.
+
+### 4.5 Proposed edits and hand-offs (this job edits none of the front-page files)
+
+- `plans/FS84-five-colours-47.md` §1.2: "59, …" → "67, …" (Q13).
+- Bibliography: Johnson 1996 and 2000 — zbMATH reviews read; Johnson–Rodger 2005 not read (a browser save wanted,
+  `JohnsonRodger2005-measurable-set-colourings.pdf`, doi 10.1016/j.ejc.2004.01.004).
+- FS-84's §P: P-S1a — one AmbrusEtAl-free derivation (S1V would make two); P-int's price named (`[MatolcsiEtAl2025]`'s `α₁(ℝ²) = 1/4`);
+  P-1p and P-G75 unscored (reduced as above).
+- S4(i) should start from §3's null: its finder's calibration must include a positive at a non-zero archimedean part (Ga26).

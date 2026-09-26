@@ -1,0 +1,14 @@
+(pos) rank-2 rational pattern over 5: 557 characters of order | 168 in the band; row 95 types present: {'(x+y)/2': True, '(x+y)/3': True, '(x+y)/4': True, '(x+2y)/4': True, '(2x+3y)/7': True, '(3x+2y)/8': True}
+M=  240: |U_M| = 108, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M=  360: |U_M| = 108, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M=  408: |U_M| = 196, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M=  840: |U_M| = 204, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 1272: |U_M| = 188, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 1464: |U_M| = 188, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 2136: |U_M| = 188, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 2184: |U_M| = 204, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 2328: |U_M| = 188, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+M= 2424: |U_M| = 196, rank 4; family A (order | 168): 0 band characters (orders []); family B (order q stable): {11: 0, 19: 0, 23: 0, 31: 0, 43: 0, 47: 0}
+DONE: every hit re-checked exactly; controls pass.
+342.41 s wall, 378128 KB
+exit=0
