@@ -130,3 +130,41 @@ remainder at the exposed field, where FS-92 is a classification question beside 
 | # | move I would have made by search | what I did instead |
 |---|---|---|
 | — | none: this job edits files; no stage calls for a finite-witness search | — |
+
+## Stage 2 — SAVED (`LEDGER.md`: rows 98–110, the corrections, § B)
+
+**Owner's rulings on stage 1's two questions (received during this stage):** (1) apply the five *Do*/killing-test drafts (M1 C24, C27, C28,
+C30; M2 D-9c) as drafted — each entry must still end with a *Do* and a killing test or forbids-line in G67's form, nothing lost but the
+stale clause, the fact audit passing (the launch message's "never touch" logged as an owner slip); (2) add every § B line; the derivation
+files' format is J33's (a bookkeeping job the owner launched), which also takes M2's four *Kernel:* fields and FS86-derivation's C14/CL1
+grade. **Consequence for stage 5:** J33 respells three ids (`FS91-J02-A2.1′`, `M3-J18-KE⟹`, `M3-J19-AF✗`) and splits grouped headers
+(`FS91-J12-A1, J12-A2, J12-A3` …); § B's ids must then follow J33's spellings — stage 5 re-runs the check and adjusts § B to them.
+
+**Applied by `data/crunch-2026-09-25/j24/ledger_apply.py`** (reads every draft from its close's plan file, never retyped; every anchor must
+occur exactly once; `--dry` and `--plant` — the plant corrupts row 95's first anchor and exits 1, seen to fire):
+- § A: rows 98–102 (M1 4.1), 103–107 (M2 4a), 108–110 (M3 R4.L), inserted after row 97; placeholders renumbered in every row and correction
+  (`N1–N5` → 98–102 with a guard that leaves `N₅`, `N_k` alone; `next-a–e` → 103–107; "row next / next+1 / next+2" → 108–110; `FS-M1a–c` →
+  FS-92–94). Leftover-placeholder grep (`row next`, `FS-M1`, ` N[1-5]`, `G77`, `G78`) over `LEDGER.md`: none.
+- Corrections in place: row 95 ×3, row 96, row 97, row 82 ×2 (M1 4.2, exact old → new); row 92 ×2 (M3 R4.L's "split places odd" → every finite
+  set of places, row 110; J26 §4.4's "not re-checked here (its audit a named post-close item; …)" → "its certificate re-checked here (J26 …)").
+- The header's crunch pointer (J24a's L1, "not yet folded") → current state: the three milestones are folded in rows 98–110.
+- § B: 131 lines appended (FS-91 73, M2 12, M3 46); M2's nine kernel-column changes, each checked against its "now" cell before replacing;
+  the FS86-Cx-C14 line's grade gains "its certificate re-checked by J26". **One normalisation, not in a draft:** M3's § B proof cells read
+  a bare id ("M3-J18-F3") for 45 of 46 lines; each now reads "`plans/M3-derivation.md` M3-…", the form of every other § B line and of M3's
+  own first line (an address a reader can open; no content changed).
+- **Four § B lines reworded against literal retelling** (`--dupes` rose from 11 to 15; each new run was a row and its § B line retelling
+  one clause word for word): FS91-J01-4 ("true iff `k < 2p`, sharp at `p = 5`, `k = 10`"), J17-T9 ("of chromatic number 6 … of chromatic
+  number 7"), M3-J19-TW ("a wall between two distinct phases … always has a chiral end"), M3-J21-RED ("its reduced set `S_red` (at most `∞`
+  and the places above …)"). Content unchanged; `--dupes` back to 11.
+
+**Three reviewed allowances** added to `tools/claude_md_fact_audit.py`'s ALLOW table (the established close practice, FS-89's entries
+above them), each a stale clause a close's correction replaced: `p = 2` (row 92's unchecked C14.2 at `p = 2`, now checked, row 110), `B′`
+(FS39-T1's kernel cell "stub (FS-39 phase B′)", now kernel names; the FS-39 stub keeps "phase B′"), `ℤ[U]/3ℤ[U]` (row 82's "needs
+`ℤ[U]/3ℤ[U]` and is not settled", now settled, row 99). `--self-test` exit 0, "SELF-TEST PASSED".
+
+**Gates after the edit** (exit statuses read from the tools): fact audit `--base 543b51d5` exit 0, "AUDIT PASSED (0 failure(s))";
+`--dupes` exit 0, "11 repeated runs of >= 10 words"; `tools/check_architecture.py` exit 0, "RESULT: PASS";
+`tools/fs71_ledger_b_check.py` (non-strict) exit 1, "RESULT: FAIL (13)" — exactly the 13 ids stage 1 named, "§ B row … has no derivation
+entry" (J33's). `LEDGER.md` 277,393 → 335,0xx bytes (no budget on this file).
+
+**Would have searched here (stage 2):** none.
