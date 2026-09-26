@@ -1662,3 +1662,95 @@ clique bound gives `< 1/4` for free"). X23D (step 3′) and X23V (Lemma X23V-CX)
 step: "with a complex place, by restriction to the compact real form (FS100-CX)". Drafted for X30F in stage 4.
 
 **Would have searched here (stage 1c):** none.
+
+### Stage 3 — SAVED (§G re-read; §PA sweep; §IQ, G72, G79; predictions scored; the verdict; the search log counted)
+
+**3.1 §G re-read** (queue §7 has no §G of its own; the crunch's §G, queue §3, and the entries wave 3 actually used).
+
+| entry | extraction | paid? |
+|---|---|---|
+| G48 | state the target as a value of `L(F)`, and say whether `F` is inside the proved range | **paid**: the wave's headline *is* G48's proved range, extended from `L ≤ 4` (every field) and `L ≤ 5` (multiquadratic `⊇ K`) to `L ≤ 5` for every real number field |
+| G54 | compute the sign of `λ_min + d/(k−1)` first | **paid**: CLS's table is G54's sign at `k = 4` place by place; `λ_min(Γ₂₇) = −8` dissolved the advisor's `q = 27` risk in seconds |
+| G60 | the real place's `J₀` minimum `−0.40276` | **paid, and it retired a named risk**: first moments fail at `n = 1` already (Hoffman `0.2871`), so the advisor's "`n > 2` real places" risk was never live — the count uses `m₁`, and a product's ratio is its largest factor's (X23V-AR, X25B-PZ). J28D §3.4's mutation audit had said so; the registration (the advisor's 45 %) did not read it |
+| G56 | the trichotomy at the primes above 2; ramified ⟹ `χ ≤ 2` | **bore and missed at planning**: queue §7 scoped every claim by row 100's exception, while G56 already says an exception field (a stable dyadic place ramified in `L/F`) has `χ ≤ 2`, so it lies outside the class — FS100-EXC, found by both X23 minds, was free before the wave. Also: G56's "floor 6" at 27 has its source in **row 70** (FS-54's certificate `α(Γ₂₇) ≤ 141 < 146`), which G56 cites only as "rows 69–71"; X23D logged it as an uncited debt and X23V mis-attributed it to Hoffman — a citation-precision fix, not a prior-art debt |
+| G64 | "`χ(F²) ≤ L(F)` is a theorem (row 52; the field-level step is row 57's gap)" | **bore, and read too strongly by one mind**: X21V took row 57's gap for a mathematical one and restricted the upper half to quadratic fields; it is a kernel gap (1.3 (a)). G64 wants "row 57's gap is the kernel's, not the mathematics'" |
+| G66 | `L` read at every tower level | **paid**: CLS holds in either reading of `L` |
+| G57 | a field without √3 has no unit triangles | **paid**: ℚ(√3,√5) *has* triangles, so its five does not touch Soifer 55.1; the quadratic family members do |
+| G76, row 111 | row 88 as measure half plus transience | **paid**: X22's split — the rotation-invariant half moves given MR (two blind), the translation-invariant half is TR-ROT, transience is untouched (X22V-T4) — is G76's frame made exact. The advisor's F3 ("only the conditional moves") under-read it |
+| G79 | flip a wall's counterexample invariant into an example invariant | **paid as a record, in flight as a route**: CLS and SPC came from an example invariant (the independence-ratio profile every colouring class obeys); the X22 no-gos are counterexample invariants; X27's TR-ROT-flip is the flip, in flight |
+| G21 | audit what pleases | **paid**: X23D's stage 5 audited its own liked results and found the exception clause redundant; X25B's audit found G1 |
+| G51 | two minds per claim | **paid twice**: X25B's blind run found the complex-place need both X23 minds had filled; the X21 and X23 pairs disagreed in no truth |
+| G49, G50 | the gate before "ours"; grep the bibliography first | **paid**: X24R ran in the discipline's words (operator algebras' "extremal traces", "generalized Furstenberg conjecture") and found Laca–Warren 2018, the name a reviewer would use |
+
+**Forward propagation:** G56's Do line wants "an exception field (stable dyadic place ramified in `L/F`) has `L = 2` — never scope a claim at
+`L ≥ 3` by row 100's exception"; G64 wants the kernel/mathematics distinction; G48's proved range; G76's frame (drafted in stage 4).
+
+**3.2 §PA sweep — what the wave taught about the object.**
+1. **At four colours the residue targets have no integrality gap** (X23V-Rb): a stable place's target is four-colourable iff its all-levels
+   ratio is `≥ 1/4`, and the only such places are `𝔽₃`, `𝔽₇`, dyadic inert `Q ≤ 32` and dyadic ramified. So "slack at every stable place"
+   and "no residue target four-colours" are one condition. **Promote** (a line in G54, drafted).
+2. **A complex place contributes only its compact real form.** The norm-one torus at a complex place is a hyperbola; the plane over `F`
+   sees the circle inside it, and removing the non-compact edges only helps an upper bound. Degree and signature cost nothing.
+3. **The archimedean part at `n` places is one place**: a categorical product's independence ratio is its largest factor's (Zhang, in
+   stationary form, X25B-PZ), so `UD(ℝ²)^{×n}` has ratio `m₁` for every `n`; first moments never were the route.
+4. **Row 100's exception is invisible above two colours** (FS100-EXC).
+5. **At type (B) rotation invariance is what MR sees** — translation-only invariant measures can converge onto the pullbacks under
+   rotation averaging (`μ ↦ μ(Pull)` only upper semicontinuous), which is TR-ROT; single transient colourings are invisible to every measure
+   method (X22V-T4).
+6. **Six at ℚ(√167) contains `χ_CP(ℝ²) ≥ 6`** (B-3): the field question is now at least as hard as a question about the real plane alone.
+7. **MR's name in operator algebras**: extremal traces of `C*(J ⋊ O*)` — Laca–Warren's "generalized Furstenberg conjecture" is MR's finitely
+   generated case and is open; MR is the infinitely generated case, which `U`'s polynomial growth makes provable (G80).
+
+**3.3 §IQ, G72's count, G79's record.** Wave 3 posed no structural question of its own (queue §7 is transfer claims, fixed before derivation);
+its results came by **extending held tools field by field** (J45, J28D's count, C14, FS-66, Lemma P). G72's count is unchanged by it —
+FS-100 stage 5 stays the thirteenth, "from elsewhere", and wave 3 adds to that entry "the transfer by extension of held tools". **G79's record:**
+the positive results (CLS, SPC, COR, Q35, the family) came from an **example invariant** — the independence-ratio profile that every colour
+class of every actual colouring obeys, place by place; the no-gos (B-3's density no-go, C-4's X22V-T4, TR-ROT) are counterexample invariants
+("a counterexample would have to …"). The G79 flip on TR-ROT is X27's, in flight.
+
+**3.4 Predictions, scored once each.**
+
+| # | registered (who, when) | P | outcome | scored |
+|---|---|---|---|---|
+| 1 | main-clause-through-five: `χ(F²) ≥ min(L(F), 5)` for every real field (advisor, stage 9) | 0.45 (degree 2: 0.80) | met (FS100-COR, two minds; graded by field class) | the 0.45 outcome |
+| 2 | six-at-167-does-not-move (advisor) | 0.99 | met: B-3 GAP; SEL-5 a reduction | as predicted |
+| 3 | q-mu-from-mr, C-1 TRUE (advisor, stage 10) | 0.55 | **not met as posed**: GAP at TR-ROT; its rotation-invariant form TRUE, two blind | the risk the advisor named (the archimedean product bound) was not the one that bit |
+| 4 | c4-transience-gap (advisor) | 0.85 | met (GAP, two blind; X22V-T4) | as predicted |
+| 5 | queue §7 (planner): "X22's real content is C-1; its C-4 is expected to be a GAP" | — | C-4 GAP met; C-1's content is the rotation-invariant half | half met |
+| 6 | the jobs' C0s: X21D (TRUE-leaning all TRUE), X21V (0.75–0.95; B-3 GAP at 0.05 for TRUE), X23D (modal except COR's wording), X23V (CTL 0.9, CLS 0.65, SPC 0.6, COR 0.5 GAP, Q35 0.75, D-1 0.85), X22D (C-1 0.35 TRUE → GAP; C-4 GAP 0.9; SEL-k 0.75), X22V (C-1–C-3 0.20 each → GAP; C-4 0.05 → GAP; SEL-k 0.70), X25B (TCA-cls 0.80; T1 0.85; its expected GAP at the archimedean product did not occur, G1 did) | — | every modal outcome met but COR's wording (both X23) and X25B's GAP location | well calibrated; the one surprise, G1, was a scope gap in the cited inputs |
+| 7 | P-X23D-1 (given MR, some finite unit-distance graph over ℚ(√3,√5) is five-chromatic), P-X23D-2 (no field with `L ≥ 5` has a four-colourable plane) | — | untestable during the ban; P-X23D-1 now follows from FS100-Q35 by de Bruijn–Erdős (a theorem at its grade, not a prediction); P-X23D-2 is COR's contrapositive (likewise) | **both are consequences, not predictions**: re-registered as FS-72's post-ban target (an explicit graph) and COR's falsifier |
+
+**3.5 The verdict, in four parts.**
+
+**Kooshi's question — "Do these findings transfer to the other wanted posters?" — answered per poster:**
+- **The `L ≥ 5` family: yes, in full.** `χ(ℚ(√d)²) ≥ 5` for every squarefree `d ≡ 47, 143, 167 (mod 168)`, and `= 5` wherever `L = 5`:
+  ℚ(√143), ℚ(√311), ℚ(√335) and 44 of the 52 members with `d ≤ 3000` [hand; two blind minds; R88-TCA's class form now two derivations].
+- **Beyond degree two: yes.** `χ(F²) ≥ min(L(F), 5)` for every real number field, so `χ(F²) = L(F)` whenever `L(F) ≤ 5` — the local–global
+  conjecture's main clause through five. **χ(ℚ(√3,√5)²) = 5**, which lands FS-70's "not landed". Graded by field class (1.5); every named
+  field is in the best-held class.
+- **ℚ(√167): the lower bound transfers, six does not.** `χ(ℚ(√167)²) ≥ 5` by two routes (two minds each), so `5 ≤ χ ≤ 7`. Six reduces to
+  `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`, which nothing held gives (B-3 GAP) — reductions only.
+- **The type-(B) fields: half.** Given MR, every rotation- and translation-invariant random four-colouring is a pullback from the tight place
+  (two blind), so row 88 ⟺ "no rigid-motion-transient four-colouring"; the translation-invariant half of Q-μ is exactly TR-ROT (**under
+  attack by X27D/X27V**); transience itself is out of every measure method's reach (C-4 GAP, X22V-T4). Never "given MR, row 88 ⟺ Q-tr".
+
+- **The choice.** Wave 3 is **Paid (theorem)**: FS100-COR, FS100-FAM, FS100-Q35 and FS100-167 claimed at the grades of stage 1 (1.4, 1.5,
+  1c), with MR (row 120) discharging "given MR"; FS100-X22's rotation-invariant half and SEL-k claimed; B-1–B-3 and TR-ROT recorded as
+  reductions and a named GAP. The prior-art gate is negative on all four questions (1.2): novelty "not found", never "first".
+- **The alternative weighed.** "Paid (theorem), restricted": claim only the named fields and the real quadratic family, and hold the
+  every-real-field statement until X26B's blind CLS and SPC-cx report (07:50). It would have bought a statement with no one-paragraph step in
+  it.
+- **Why this one won.** The every-field statement is derived by two minds blind to each other at stage 3, its only disputed step (G1) is
+  answered by a one-line monotonicity the close checked, and its thin inputs are named with the fields they touch; restricting would drop a
+  true theorem to protect against a step that is not in dispute on its merits. X26B can only demote named classes, and a follow-on fold can
+  record that.
+- **Confidence.** High on the named fields and the quadratic family (every link two derivations or more, bar EL2021 Thm 1.2, external). High
+  on totally real fields of class (i); medium on classes (ii)–(iv). What would change it: X26B or a later check finding a defect in CLS's
+  table, the dyadic Lemma P or the restriction; a defect in EL2021's use through (★) would take every value with it.
+
+**3.6 "Would have searched here", counted.** Across the seven wave-3 records: **fifteen lines, fourteen search moves and one deferred reading**
+— X21D 4 (the ratio-table sweep; two B-3 moves, a quotient colouring and a machine-long relaxation; the `m_j` reading deferred), X21V 2, X22D 2,
+X22V 4, X23D 2, X23V 1, X24R 0 — each replaced by a derivation, a cited threshold or an exact check of seconds. **Four logged at the ban's edge**
+as complete exact enumerations of derivation-fixed sets: X21V's C7 (the 52 family fields), X23D's `Γ₂₇` spectrum (728 characters), X23V's
+stable-place tables and Hoffman table. X25B: none (its FS-66 re-run is an existing checker on an existing certificate). The ban cost the wave
+nothing a record names.
