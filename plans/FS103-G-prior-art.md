@@ -230,3 +230,89 @@ chromatic number of geometric graphs*; Johnson–Rodger 2002/2005 *Coloring the 
 space* (fractional set colourings, not random colourings of `ℝⁿ`); Johnson 2000 *Infinite graphs and the fractional chromatic number: some
 recent surprises* (review read: fractional chromatic number of infinite graphs against their finite subgraphs); Johnson 2011 *Euclidean
 distance graphs on the rational points* (survey of `χ(ℚⁿ, {d})`). None states the question.
+
+## Stage 3 — SAVED
+
+### 3.1 Question 2 — `[Falconer1981]`: what it proves, how, and for which format
+
+**Primary not held; the fetch is blocked (§1.2; Kooshi's browser save requested).** The reading below is **second-hand**, from three held
+sources, each read for this: `[Soifer2024]` ch. 9 (pp. 71–76, **read in full**), which prints **Falconer's own 2005 exposition**, not the
+1981 text ("I found his 1981 publication [Fal1] to be too concise and not self-contained … In February 2005, I received Kenneth's manuscript
+[Fal2], handwritten especially for this book"); `[Payne2009]` §2.1 (**read**), which reuses "the following two lemmas of Falconer without
+modification" and "Falconer's fourth lemma"; the Polymath16 threads (Tao, Mixon, domotorp; §2.3 item 4).
+
+- **Statement.** Soifer's Theorem 9.1: "Let E² = ∪ᵢ₌₁⁴ Aᵢ be a covering of the plane by four disjoint measurable sets. Then at least one of
+  the sets Aᵢ realizes distance 1." Payne: "In 1981 Falconer showed that χm(Rⁿ) ≥ n + 3." (The general-`n` form is Payne's report of the
+  1981 paper; Soifer prints only `n = 2`.)
+- **Format.** Classes measurable and **proper everywhere** ("none of which realizes distance 1": no two points of one class at distance
+  exactly 1). Shelah–Soifer §2: "DC is sufficient for Falconer's result."
+- **Method** (Soifer's Tools 9.4–9.9): Lebesgue density; the density boundary `∂A` is null and non-empty; a point `x` on the boundaries of
+  two classes, chosen (Croft's lemma, Tool 9.6 / Payne Lemma 2) so that the circles of radius 1 and `√3` about `x` meet the boundary set in
+  length zero; the unit **diamond** (two unit triangles, `|xw| = √3`) placed at `x` in almost every orientation and **translated by a
+  positive-measure set of small vectors `v`** to find one placement with every vertex in a class, whence (Tool 9.7) almost all of the circle
+  `C(x, √3)` lies in the density points of the two boundary classes; then (Tool 9.8) the rotation by `φ = 2 sin⁻¹(1/(2√3))` is irrational
+  (Tool 9.9: `(1 − i√11)^{2m} ≠ (−12)^m`, unique factorisation in `ℤ[(1+√−11)/2]`), so one of two measurable sets on that circle carries a
+  unit chord. Falconer's gloss (Soifer p. 73): "if we place the 'double equilateral triangle' … of side 1 in almost all orientations with a
+  vertex at x, the point x essentially has 'two colours' in any colouring of the plane, and other points just one colour."
+- **What it uses of properness**: only at placements drawn from a positive-measure family, and on density points of one circle —
+  so, **as a reading** (§2.2), it survives for classes proper off a null set of pairs; the Moser twist's `√11` enters through Tool 9.9.
+- **Bearing on F1** (for the planner, not a result): Falconer's "bichromatic point" is a density-boundary point, a notion a CP colouring
+  (no joint measurability) does not have until C-FMT (a) supplies a measurable version. Tao on Polymath16: "The Falconer argument is not as
+  compatible with the probabilistic approach as I had first hoped, because of the special role played by the origin." The advisor's route (b)
+  in `plans/STUB-cp-plane-six.md` should start from that sentence.
+
+### 3.2 The planner's §PA.0 queries not run in stage 2
+
+| # | query | hits | verdict |
+|---|---|---|---|
+| q29 | `ab:"measurable coloring" & ab:"distance one"` | 0 | negative |
+| q30 | `ti:measurable & ti:chromatic & py:1975-2026` | 8 | Székely 1984; Székely–Wormald 1989; Miller 2008 (Zbl 1157.03025); BNOV 2009; Conley–Kechris 2013; Kupavskii-type 2015; Conley–Marks 2016 (locally finite Borel graphs); DeCorte–Golubev 2019 (hyperbolic) — listings; none on the question |
+| q31 | `ab:"invariant measure" & ab:"space of colorings"` | 0 | negative |
+| q32 | `ab:"measurable modification" & ab:"stationary"` | 0 | negative |
+| q33 | `ab:"rational points" & ab:"chromatic number" & ab:plane` | 1 | the 2011 Soifer-edited volume (holds Johnson's rational-points survey) |
+| q34 | `ab:"number field" & ab:"unit distance" & ab:chromatic` | 0 | negative |
+| q35 | `ab:"chromatic number" & ab:"rational plane" & ab:measurable` | 0 | negative |
+| q36 | `ab:Borel & ab:Hedetniemi` | 0 | negative; web: Brandt–Chang–Grebík–Grunau–Rozhoň–Vidnyánszky, *On homomorphism graphs* (arXiv:2111.03683, abstract read) — Borel Brooks-type failures, not products |
+| q37 | `ab:measurable & ab:"categorical product" & (ab:coloring \| ab:colouring)` | 0 | negative |
+| q38 | `ab:"distance avoiding" & ab:chromatic` | 0 | negative |
+| q39 | `ab:"measurable chromatic number" & (ab:Fourier \| ab:"linear programming" \| ab:semidefinite)` | 2 | BNOV 2009, OV 2010 (held) |
+
+### 3.3 Proposals (the close writes them; I edit none of these files)
+
+**Controls for the verifiers** (to the planner's claim list, `data/fs103/claims.md` §3):
+- **CTL-FRAC** (§2.3 item 2): *does the chain's direction "k-colouring of `F²` ⟹ CP k-colouring of `ℝ²`" run on one colour class — one
+  translation-invariant random independent set of density `δ`, with thickness `λ* < δ/(1−δ)`?* If yes, at `F_dG` it gives
+  `α₁(ℝ²) ≤ m₁(ℝ²) ≤ 0.2470`, refuting `[AmbrusEtAl2023]` §4's and `[MatolcsiEtAl2025]` Conjecture 1's "χf,0(R²) = 4" — a second result or a
+  defect; if no, name the step where the other classes enter. Both outcomes reachable; the answer is decided by reading the proof of the
+  thick deletion (J21-MX in random form), not by any search.
+- **CTL-Q2 and CTL-K-4 have in-print twins**: `[Payne2009]` §3 (`χ(TQ²) = 2`, `χm(TQ²) ≥ 5`; `TQ[√3]²`: "χ = 3 and χm ≥ 5").
+
+**`BIBLIOGRAPHY.md`** (rows to add or update):
+
+| key | row |
+|---|---|
+| `[Falconer1981]` (update) | read status → **second-hand, through `[Soifer2024]` ch. 9 (Falconer's 2005 manuscript, read in full) and `[Payne2009]` §2.1**; zbMATH 0469.05021 (no review); DOI 10.1016/0097-3165(81)90014-5 (Elsevier open archive; scripted fetch blocked, browser save requested → `library/papers/falconer-1981-realization-distances-measurable-subsets-covering-Rn-jcta-31-184-189.pdf`); role: FS-103 §PA — what "measurable" means in `χ_m`, and Falconer's mechanism for FS-104 |
+| `[ShelahSoifer2003]` (new) | S. Shelah, A. Soifer, *Axiom of choice and chromatic number of the plane*, JCTA 103 (2003) 387–391; Zbl 1030.03035; doi 10.1016/S0097-3165(03)00102-X; Shelah archive E33 · held `data/fs103/fs103-g/shelah-soifer-2003-axiom-of-choice-chromatic-number-plane-jcta-103-387-391.pdf` (proposed for `library/pdf/`) · **read in full** (2026-09-26, FS103-G) · role: the Conditional Theorem; the axiom-dependence question; FS-103 §PA |
+| `[SoiferShelah2004]` (new) | JCTA 105 (2004) 359–364, Zbl 1057.03036 — review (Komjáth) read; not held |
+| `[ShelahSoifer2003b]` (new) | *Chromatic numbers of the plane. III: Its future*, Geombinatorics 13(1) (2003) 41–46, Zbl 1049.05038 — review (Weese) read; not held |
+| `[Soifer2005]`, `[Soifer2007]` (new) | *Axiom of choice and chromatic number of Rⁿ*, JCTA 110 (2005) 169–173, Zbl 1063.03035 (review read); *Chromatic number of the plane theorem in Solovay's set theory*, Geombinatorics 17(2) (2007) 85–87, Zbl 1506.03106 (listing only) |
+| `[Szekely1984]` (promote from § C) | Combinatorica 4 (1984) 213–218, Zbl 0558.05020 — review read; content second-hand via `[Payne2009]` §1 |
+| `[CroftFalconer1981]` (new, § C) | Math. Proc. Camb. Philos. Soc. 89 (1981) 79–88, Zbl 0494.52008 — listing (found by Falconer's author listing) |
+| `[Payne2009]` (update role) | FS-103's "ambiguous chromatic number" recognition; Prop. 1, Prop. 2, Lemma 1, §3 read again 2026-09-26 |
+| `[MatolcsiEtAl2025]` (update read status) | §2 display (14), §3 opening and Thm 1, the discussion after Thm 2, Conjecture 1 — read 2026-09-26 (FS103-G); bears on FS-103 (CTL-FRAC) |
+| `[AmbrusEtAl2023]` (update role) | §4 Remark's conjecture (`χf = χgf = 4`, `α₁ ≠ m₁`) bears on FS-103 (CTL-FRAC) |
+| `[BachocEtAl2014]` (update read status) | §2.4, §2.6 (the operator chromatic number; "χ(A) ≤ χm(G)") and §3.1 read 2026-09-26 |
+| `[Madore2015]` (update read status) | ¶1.3, ¶5.4, §7.1–7.2 read 2026-09-26 |
+| `[Marks2023ICM]` (new, § C) | A. S. Marks, *Measurable graph combinatorics*, ICM 2022 Proc. vol. 3 (2023) 1488–1502, Zbl 1566.03232 — fetched (`data/fs103/fs103-g/marks-2023-…pdf`), keyword-scanned only: no unit-distance passage |
+| `[DidinVoronov2026]` (new, § C) | arXiv:2607.19946, *The chromatic number of Euclidean space with dense color classes* — abstract read |
+| § C listings | Zapletal 2025 *Triangles and Vitali sets* (Combinatorica 45, review read); Johnson–Rodger 2005 (Eur. J. Comb. 26, listing); Johnson 2000 *Infinite graphs and the fractional chromatic number* (Geombinatorics 9(3), review read); Brandt et al., *On homomorphism graphs* (arXiv:2111.03683, abstract read); Doob 1953 *Stochastic Processes* (named, not read) |
+
+**`CLOSED-QUESTIONS.md` §3 (adjacent and open)** — two rows, both conditional on F1 surviving its verifiers:
+- **Is `χ(ℝ²)` absolute — the same in ZFC and in ZF + DC + LM?** Shelah–Soifer 2003, Epilogue (verbatim above); `[Soifer2024]` Open AC
+  Problem 62.14; `[Payne2009]`. F1 alone does not answer it (`χ_CP` is not `χ_m`); F1 plus C-FMT (c) and (d) would answer it at `n = 2`,
+  given MR. Prior art constraining the claim: the three above, and Madore §7.1 (`χ_fin(ℝ²)` is arithmetical).
+- **Is the finitary fractional chromatic number of the plane 4?** `[AmbrusEtAl2023]` §4 Remark and `[MatolcsiEtAl2025]` Conjecture 1
+  (verbatim above). CTL-FRAC decides whether FS-103's mechanism bears on it.
+
+## Stage 3 — report
+Written to `data/fs103/reports/FS103-G.md` and sent to "main" (standing rule 9).

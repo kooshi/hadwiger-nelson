@@ -1,0 +1,4 @@
+# query: ab:"measurable chromatic number" & (ab:Fourier | ab:"linear programming" | ab:semidefinite)
+# total reported: 2; fetched: 2
+1214.05022	2009	j	summary	Lower bounds for measurable chromatic numbers	Geom. Funct. Anal. 19, No. 3, 645-661 (2009).
+1205.90196	2010	j	summary	Fourier analysis, linear programming, and densities of distance avoiding sets in \(\mathbb R^n\)	J. Eur. Math. Soc. (JEMS) 12, No. 6, 1417-1428 (2010).
