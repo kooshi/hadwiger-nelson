@@ -58,3 +58,22 @@ None — bookkeeping and editing only.
 - **Stage 4 — the inventory and the index (A.4, A.5).**
 - **Stage 5 — the crunch's close (Part B):** the queue's banner, §2 statuses, §8.
 - **Stage 6 — gates, report.**
+
+## Stage 2 — SAVED (the `[AmbrusEtAl2023]` grade upgrade, brief A.1)
+
+Applied by `data/crunch-2026-09-25/j25/apply_ambrus.py`, every anchor asserted at its expected count before anything is written (plant — an
+anchor no file holds — fired first, exit 1, nothing written; a re-run refuses, exit 1). The new grade reads as J49 §3.3 proposes, with the
+brief's number: "cert + hand: `m₁(ℝ²) ≤ 0.246989 < 0.2470` — exact on H1–H3 and H6 (J26), ball arithmetic on H4 and H5 (J49); Watson §13.74 and
+§15.31 cited".
+- `LEDGER.md`: row 92's grade bracket; row 112's input list; § B's FS86-Cx-C14 grade cell.
+- `plans/FS86-derivation.md`: FS86-Cx-C14's and FS86-CL1's grade brackets (the same sentence, twice). Their *Prior art:* fields name the
+  paper as "the input" and carry no grade; unchanged.
+- `plans/R88-derivation.md`: the inputs paragraph (lines 88–89).
+- `BIBLIOGRAPHY.md`: `[AmbrusEtAl2023]`'s role column gains "H4 and H5 re-checked in ball arithmetic by J49 (`tools/fs100_kt1_ball.py`)".
+- `plans/PA-ambrus2023-audit.md`: "about 640,000 points" → "493,471 distinct points (about 646,000 evaluations …)", both places; a superseding
+  note at J26-T1 (J49-T1/T2 [cert]; J49-T3 added to J26-T3's reading, in the same note, so J26-T3's own text is untouched).
+- **Not touched, with the reason:** the poster rows P4, P5, P7–P9 and T-J38-1/2/3, T-J39-4 live in Poros records (never touched); their
+  grades move in the FS-100 stub (stage 3). `CLAUDE.md` names no grade for the Ambrus input. § B's FS86-CL1 line ("hand, one mind +
+  external") names no Ambrus grade; left. Row 113 cites "row 112's inputs" and so inherits the grade without an edit.
+
+**Gates after the stage:** fact audit `--base 82dd14f8` exit 0, PASSED; `--strict` exit 0, PASS; bib audit exit 0, PASS.

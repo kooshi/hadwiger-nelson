@@ -17,7 +17,10 @@ to appear in Mathematical Programming".
   `m₁(ℝ²) ≤ (w_T + ν)/(1 − μ) = 0.246988… < 0.2470` for measurable periodic 1-avoiding sets, hence (the paper's §2 approximation) for all
   measurable ones. **[tools]** — exact for H1–H3, H6 and `d_min`; H4 in double precision (two independent Bessel implementations agree;
   not interval-certified; worst margin 2.3·10⁻⁶); Watson §13.74, §15.31 cited. Address: `tools/j26_ambrus_check.py`,
-  `data/pa-ambrus2023/j26-check.out`; §3.2.
+  `data/pa-ambrus2023/j26-check.out`; §3.2. *Superseded 2026-09-26 (front-page job J25, from J49): H4 and H5 are certified in ball
+  arithmetic — J49-T1, J49-T2 [cert], `plans/FS100-KT1-ambrus-ball.md` — so `m₁(ℝ²) ≤ 0.246989 < 0.2470` is [cert + hand]; every
+  "not interval-certified" and "on trust" below is J26's state before J49. J49-T3 adds to J26-T3: on `[1000, 10⁴]` the notebook's
+  constant 0.03 is not only unjustified but false (harmless here).*
 - **J26-T2 — the corrected Lipschitz constants.** `W′(t) = −w0 J₁(t) − Σ w2(i,j) d_ij J₁(t d_ij)`, so `|W′| ≤ 1.5365` on `[0, 100]`,
   `≤ 0.1773` on `[100, 1000]` and `≤ 0.0561` on `[1000, 10000]`, and with these the notebook's own evaluation points cover `[0, 10000]`
   at `W ≥ 0.999942 ≥ 1 − μ`. **[hand + tools]** (the bound is two lines of calculus plus Watson §13.74; the numbers are the tool's). §3.2 H4b–H4c.
@@ -206,7 +209,7 @@ alone; `wT` (`w_T` lowered by 10⁻⁶) → H3, with the two-sided bound `0 < mi
 implementations agree, not interval-certified; H5 and H4b rest on Watson §13.74 and §15.31, cited]: **the certificate `(X₂₃, g23.csv)`
 satisfies Proposition 1's hypotheses with ν = 10⁻⁶ and μ = 6·10⁻⁵, so `m₁(ℝ²) ≤ 0.246989 < 0.2470`**, given Proposition 1 and the paper's
 §2–§6 (hand; read and found sound) — and it does so **with arguments the authors' notebook lacks** for H2 (congruence, not similarity) and
-H4 (a Lipschitz constant with the chain rule). The one step still taken on numerical trust is the value of `J₀` at about 640,000 points in
+H4 (a Lipschitz constant with the chain rule). The one step still taken on numerical trust is the value of `J₀` at 493,471 distinct points (about 646,000 evaluations with the refined grids' overlaps; count corrected by J49) in
 double precision, with a margin of 2.3·10⁻⁶ at the worst; a certified version would evaluate the same points with ball arithmetic (arb,
 via `python-flint`, not installed — an install request, not made).
 
@@ -224,7 +227,7 @@ via `python-flint`, not installed — an install request, not made).
   obligations are checked exactly: unit pairs, all 2,321 congruences, the 13,552 atoms and `min V(ε) = −6.712244·10⁻⁸`, `d_min`, and the
   final ratio. The continuous obligation is checked in double precision, with Lipschitz constants derived here (J26-T2). **Establishes:**
   `m₁(ℝ²) ≤ 0.246989 < 0.2470`, given Proposition 1 and the paper's §2–§6, which were read and found sound. **Still on trust:** double-precision
-  `J₀` at about 640,000 points (worst margin 2.3·10⁻⁶), and Watson §13.74 and §15.31.
+  `J₀` at 493,471 distinct points (about 646,000 evaluations with the refined grids' overlaps; count corrected by J49) (worst margin 2.3·10⁻⁶), and Watson §13.74 and §15.31.
 - **Two gaps in the authors' checker, harmless for this certificate** (J26-T3):
   - its congruence test proves only similarity;
   - its "interval arithmetic" is grid sampling, and it bounds `W′` by `sup|J₁|` instead of `sup|J₁|·(|w0| + Σ|w2| d)`.

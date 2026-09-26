@@ -86,7 +86,8 @@ every minimiser killing `𝔓⁴`); every other stable place of all-levels ratio
 TC-class). J28V proves it over the three type-(B) fields (J28V-4) and records at its stage 5, row V11: "J28D's statement is the wider one, and my
 route reaches it unchanged" — a verifier's reading from J28D's statement, not a blind derivation of the class form. **Inputs** (the grade line both
 records give): C14.1–C14.3 and C14.2 (a)–(c) (window lemmas, two derivations at FS-86); `[AmbrusEtAl2023]` Thm 1 (`m₁(ℝ²) ≤ 0.2470`; external,
-computer-assisted; its certificate re-checked by J26, `plans/PA-ambrus2023-audit.md`); FS-66's certificates at 11 (ℚ(√59)) and 19 (ℚ(√83), ℚ(√131));
+computer-assisted; its certificate re-checked, cert + hand, `m₁(ℝ²) ≤ 0.246989`: exact on H1–H3 and H6 by J26,
+`plans/PA-ambrus2023-audit.md`, ball arithmetic on H4 and H5 by J49, `plans/FS100-KT1-ambrus-ball.md`); FS-66's certificates at 11 (ℚ(√59)) and 19 (ℚ(√83), ℚ(√131));
 Lemmas D and P; FS38-D2-A/B; V3ram; VC-C2; weak and strong approximation; and, in J28D, Lemma R (b) (or J07's Lemma C), Bochner, Doob–Cohn and
 Lebesgue differentiation on doubling spaces. **Not used:** J21-MX, J21-RED, V3, C14's main count or C14′ as black boxes (J28D §3.1: C14 reads
 `𝔓` at finite level only and C14′'s conull-`Ω` format is not the edge-a.e. format a random extension produces; J21-MX selects a colouring of the
