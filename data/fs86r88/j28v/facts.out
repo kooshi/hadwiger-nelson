@@ -1,0 +1,14 @@
+(1) d=59: stable odd places p<60: [11, 23, 31, 43, 47, 59]
+(1) d=83: stable odd places p<60: [19, 43, 47]
+(1) d=131: stable odd places p<60: [19, 23, 31, 47]
+(1) d=47: stable odd places p<60: [11, 19, 23, 31, 43, 47]
+(2) a_31 = 0.333328453  (1/3 - a_31 = 4.880e-06)
+(2) primes 37 <= p < 1e5 failing Weil's a < 1/3: []
+(2) integers p < 40 where Weil does not give a < 1/3: 2..33
+(3) q=2, v(b)=-0: mean over units = +1.000000000000-0.000000000001i  expected +1.0  ok
+(3) q=2, v(b)=-1: mean over units = -1.000000000000+0.000000000000i  expected -1.0  ok
+(3) q=2, v(b)=-2: mean over units = +0.000000000000+0.000000000000i  expected +0.0  ok
+(3) q=2, v(b)=-3: mean over units = -0.000000000000+0.000000000000i  expected +0.0  ok
+(3) q=2, v(b)=-4: mean over units = +0.000000000000+0.000000000000i  expected +0.0  ok
+(3) q=2, v(b)=-5: mean over units = -0.000000000000+0.000000000000i  expected +0.0  ok
+RESULT: PASS (0 failures)

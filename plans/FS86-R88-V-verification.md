@@ -8,11 +8,29 @@ derivation record, data, tools, brief and report; the crunch index; J28D commits
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, grade, address)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J28V-1 | Extension lemma: a stationary random four-colouring of `Cay(R, U)` with spectral measure on `T + A + Fin_S` extends to a `G_S`-stationary process, continuous in probability, `{e_j}`-valued, proper at every pair of `G_S × T_S` | [hand; mine] | §2.1 C2 |
+| J28V-2 | Regularisation: such a path, proper off an `(m × ν_T)`-null set of pairs, is a.e. equal to one proper on every pair inside a conull Borel set | [hand; mine] | §2.1 C3 |
+| J28V-3 | The tail of odd stable places of a type-(B) field or ℚ(√47), minus 11 / 19, is one compact factor with measurable Hoffman ratio `< 1/4` | [hand + tools exact; mine] | §2.1 C4; `tools/crunch_j28v_facts.py` |
+| J28V-4 | T-C, over ℚ(√59), ℚ(√83), ℚ(√131) | [hand; mine; given C14.1–C14.3, `[AmbrusEtAl2023]`, FS-66 at 11/19, Lemmas D, P, D2-A/B] | §2.1 |
+| J28V-5 | T-C(A), over ℚ(√47), any finite set `S` of split places, dyadic included | [hand; mine; same inputs] | §2.2 |
+| J28V-6 | C14.2 (c) holds at `q = 2` (the split-place integrals are `1, −1, 0, 0, …`) | [hand + tools float with exact target values; mine] | §2.2; facts (3) |
+| J28V-7 | T-A (i)–(vi); every non-zero ideal of `ℤ[U_F]` has finite index, for every real `F` (no Lemma R) | [hand; mine] | §2.3 |
+| J28V-8 | T-B2's reductions: Q-tr ⟹ T-B2; a counterexample gives `F(R) = 0`; a defect set lies in no finite union of cosets of a finitely generated subgroup; every finite union of unit circles has upper Banach density 0 in `R` | [hand; mine] | §2.4 |
+| J28V-9 | T-B1's reductions: `F(R) ≠ 0` ⟹ T-B1; T-B1 ∧ Q-μ ⟹ `F(R) ≠ 0` | [hand; mine] | §2.5 |
 
 ## Would-have-searched-here log
 
-*(one line per move I would have made by search, and what I did instead)*
+- T-C: would have built a finite quotient and searched for a random non-pullback colouring with spectral support on `T + A + Fin_S` (a
+  falsifier). Instead derived the extension lemma, which turns any such object into a window colouring C14's count forbids.
+- T-C(A): would have run an exact window-frequency LP on a quotient to confirm no measure exists. Not needed: the count is derived.
+- T-B1: would have run a SAT search on a ball of `Λ₅₁₀` for a colouring agreeing with a pullback on an inner ball and differing outside (a
+  converging family of non-pullbacks). Not run (ban); recorded as GAP with the reductions B1-a–c.
+- T-B2: would have searched a lattice quotient for a sparse defect set against a pullback. Not run; derived B2-a–e instead.
+- C4's tail: would have computed normalised least eigenvalues at every stable place below some bound numerically. Instead used the recorded
+  exact table (23, 31), Weil's inequality proved exactly for `p ≥ 34`, and Lemma P; the stability list is an exact Legendre check of
+  seconds (`tools/crunch_j28v_facts.py`, plants fire).
 
 ## Stage 1 — SAVED (quotation check; C0 predictions)
 
@@ -39,3 +57,165 @@ verified against exactly this definition.
 | T-B2 | 0.20 | 0.65 | 0.15 | a defect at `z` against a gap-free pullback forces defects on an infinite subset of the circle `z + U`, but a circle has upper Banach density 0 in `R`; Q-tr would imply T-B2, not conversely |
 
 Registered consequence: if T-B1 comes out TRUE by derivation, I would be surprised (0.10) and would audit it first (G21).
+
+## Stage 2 — SAVED (the blind phase: my derivations and verdicts)
+
+**Verdicts (blind, before any J28D text was opened):**
+
+| claim | verdict | in one line |
+|---|---|---|
+| T-C | **TRUE** [hand; mine; inputs below] | spectral support on `T + A + Fin_S` extends the colouring to a stationary measurable window colouring of `Cay(G_S, T_S)`, all stable places included; C14's count, run with a compact tight factor and one Hoffman-controlled compact tail factor, then gives a pullback |
+| T-C(A) | **TRUE** [hand; mine; same inputs, no tight place] | the same extension; every factor has ratio `< 1/4`, so four classes cannot cover |
+| T-A (i)–(vi) | **TRUE** [hand; mine] | bookkeeping on the frame; (v) is the correspondence principle for clopen sets; two scope notes (§2.3) |
+| T-B2 | **GAP** | the step from "each defect forces an infinite set of defects on its unit circle" to positive density; circles have Banach density 0, and nothing on the record supplies the missing expansion |
+| T-B1 | **GAP** | isolation is a finite-patch forcing statement; H needs a half-space, and no route from a finite patch was found |
+
+**Setting.** `F` type (B) (`d ∈ {59, 83, 131}`), `L = F(i)`, `U`, `R = ℤ[U]`, the tight place `𝔓` (completion `ℚ₂(√3)`, `O = O_𝔓`,
+`𝔓⁴ = 4O`), `π₄ : R → O/𝔓⁴` onto with kernel `R ∩ 𝔓⁴` (FS86-VD-1). A translation-invariant Borel probability `μ` on `X₄(F)` is a
+stationary random proper colouring `c`; `g(x) = e_{c(x)}` its tetrahedral embedding; `M` the matrix spectral measure of `g`, `μ_sp = tr M`
+the spectral measure of §S.0. `G_S := ∏_{v stable} O_v × (L ⊗ ℝ) × ∏_{v ∈ S} L_v` (all stable places, `𝔓` included, at full depth), and
+`T_S := ∏_{stable} T_v × (S¹)^{[F:ℚ]} × ∏_{v∈S} T(F_v)` (product of the local circles, a closed subset of `G_S` and a locally compact
+multiplicative group with Haar measure `ν_T`).
+
+### 2.1 T-C — TRUE
+
+**C0. Why the two-point route cannot work (a remark, not a step).** VD-C (FS86-VD-8) needs weights `w` on `U` with `λ_w ≥ −1/3`, equality
+only at dyadic minimisers. Over a real field that is impossible: FS86-dB-C0 (W's repair) gives a positive-definite `C` on `L ⊗ ℝ`, depending
+on one real place, with `C(0) = 1`, `C(u) = −1/3` on every unit vector, spectral measure `w·δ₀ + (1 − w)·circle(j₁,₁)`; for any
+probability `w` on `U`, `∫ λ_w dμ₁ = Σ w(u) C(u) = −1/3` while the atom at 0 contributes `+4w/3` to `∫(λ_w + 1/3)dμ₁`, so `λ_w < −1/3`
+somewhere on the circle. So any proof of T-C must use more of the colouring than its pair correlations — here, `m₁(ℝ²) ≤ 0.2470` and
+Zhang's product counting.
+
+**C1. `R` is dense in `G_S`, and `T + A + Fin_S` is the image of `Ĝ_S`.** Strong approximation for `𝔾_a` away from one split place
+`w ∉ S` (infinitely many exist) gives `x ∈ L` close to a target at finitely many places and integral at every other place `≠ w`; such `x` is
+integral at every stable place, so `x ∈ R` (Lemma R). Hence `Ĝ_S → R̂` is a continuous injection; its image is exactly the characters
+`χ_a`, `a` supported on stable (finite-level, i.e. torsion) × archimedean × `S` components: `T + A + Fin_S`. `Ĝ_S = (⊕_{stable} Ô_v) × ℝ^{2[F:ℚ]}
+× ∏_S L̂_v` is σ-compact, so the image is Borel and "carried by" makes sense.
+
+**C2. Extension lemma [hand; mine].** *If `μ_sp` is carried by `T + A + Fin_S`, there is a process `(G(h))_{h ∈ G_S}` on the same
+probability space with (a) `G(x) = g(x)` for `x ∈ R`; (b) `h ↦ G(h)` continuous in `L²`; (c) `G(h) ∈ {e₀, …, e₃}` a.s. for every `h`;
+(d) the law of `(G(h_i + k))_i` does not depend on `k ∈ G_S`; (e) `P(G(h) = G(h + t)) = 0` for every `h ∈ G_S` and every `t ∈ T_S`.*
+*Proof.* `M ≪ μ_sp`, so `M` is carried by `Ĝ_S`. The closed span `H ⊂ L²(Ω)` of the coordinates of `g(x)`, `x ∈ R`, is `L²(Ĝ_S, M)` with `U_x`
+(the Koopman operator of the shift by `x`) acting as multiplication by `χ(x)`. Multiplication by the extension `χ̃(h)`, `h ∈ G_S`, is a
+strongly continuous unitary group `Ũ_h` extending `U_x` (dominated convergence); put `G(h) := Ũ_h g(0)` coordinatewise. (a), (b) are
+immediate. (c): for `x_n → h` in `R`, `g(x_n) → G(h)` in `L²`, and a limit in probability of `{e_j}`-valued variables is `{e_j}`-valued.
+(d): `Ũ_h` commutes with `U_x`, and `U_x` is composition with the measure-preserving shift, so `G(h + x) = G(h) ∘ T_x`: the laws are
+`R`-invariant, hence `G_S`-invariant by (b). (e): `U` is dense in `T_S` (weak approximation for the rational torus at finitely many places;
+product topology); for `x_n → h`, `u_n → t` in `U`, `P(G(h) = G(h+t)) ≤ P(G(h) ≠ g(x_n)) + P(G(h+t) ≠ g(x_n + u_n)) + P(c(x_n) = c(x_n + u_n)) → 0`,
+the last term being 0 because `c` is proper surely. ∎
+
+**C3. A measurable version, regularised to be proper on a conull set [hand; mine].** A process continuous in probability on a second
+countable LC group has a jointly measurable version `Φ(ω, h)`. By (e) and Fubini, for a.e. `ω` the path `W = Φ(ω, ·)` satisfies
+`W(h) ≠ W(h + t)` for `(m × ν_T)`-a.e. `(h, t)`. Regularise: with `C_n` the centred cube of side `2^{−n}` in `L ⊗ ℝ` and `V_n` a decreasing
+sequence of compact open subgroups of the non-archimedean part with `⋂ V_n = 0`, the families `E_n = C_n × V_n` and `E′_n = 1.5C_n × V_n`
+are nested with `m(E_n − E_n + E_n) ≤ 3^{2[F:ℚ]} m(E_n)`, so the Vitali lemma and Lebesgue differentiation hold along each. Let `Ω` be the
+points that are density points of their own colour class along both families. If `h, h + t ∈ Ω` (`t ∈ T_S`) had one colour `j`, then for
+every `t′ ∈ T_S` with `t′ − t ∈ ½C_n × V_n` (a relatively open, hence `ν_T`-positive, set) `h + E_n + t′ ⊆ h + t + E′_n`, so
+`m{h′ ∈ h + E_n : W(h′) = W(h′ + t′) = j} ≥ m(E_n)(1 − ε_n − 1.5^{2[F:ℚ]} ε′_n) > 0` for large `n`: a positive measure of bad pairs. So
+**`W` is proper on every pair inside the conull Borel set `Ω`** (C14′'s hypothesis), and the construction is translation-equivariant.
+
+**C4. The non-tight part has ratio `< 1/4` [hand; transplant of C14.2–C14.4].** Split `G_S = G_X × O_𝔓`, `T_S = T_X × T_𝔓`, the
+categorical product. `X` is the finite product of: the hard stable factor (`11` for `d = 59`; `19` for `83`, `131` — `tools/crunch_j28v_facts.py`
+(1); `3`, `7` are never stable here), ratio `≤ U(p)/p²` at every level by FS-66's certificate (C14.2 (b)); **the tail** `K_tail = ∏` of all
+other odd stable places, one compact factor; the `[F:ℚ] = 2` real places, ratio `m₁ ≤ 0.2470` each (C14.2 (a), `[AmbrusEtAl2023]`);
+the split places of `S` (all odd here), ratio 0 (C14.2 (c)). **The tail by Hoffman, measurably and all at once:** with `ν = ⊗ Haar(T_v)`,
+`ν̂(χ) = ∏_v ν̂_v(χ_v)` over the finitely many non-trivial components, each `ν̂_v ∈ [−a_v, 1]` real (`−1 ∈ T_v`), so
+`ν̂(χ) ≥ −sup_v a_v`, `a_v` the least normalised eigenvalue at every level: 23 (0.3317) and 31 (`1/3 − 4.9·10⁻⁶`) from B1's exact table,
+`p ≥ 37` by Weil (`2√p/(p+1) < 1/3` exactly when `36p < (p+1)²`, true for `p ≥ 34`; facts (2)), levels `≥ 2` by Lemma P (`≤ 2/(p+1)`),
+the ramified `d` by V3ram (`< 1/5`). So `sup a_v < 1/3` and the measurable Hoffman bound `α ≤ a/(1+a)` gives `r_tail < 1/4`; `K_tail`
+is compact, so it "has ratio `r_tail` with error 0" in C14's sense ((R2) with `D = K_tail`). C14.3's induction over these finitely many
+factors gives **`X` ratio `r_X < 1/4` with error `η_X(n) → 0`**, and `⟨T_X⟩` is dense in `G_X` (VC-C2 at every odd stable place, `ℂ` at the
+real places, `F_v²` at split places).
+
+**C5. The main count with a compact tight factor, in stationary form [hand; mine, transplanting C14's count].** For a.e. `ω` run C14's
+count on the regularised path with `P = Cay(O_𝔓, T_𝔓)` in place of `P_m`: sums over `b ∈ P` become Haar integrals, and Zhang's Prop. 1.7 in
+`P` becomes C14.1 in `P` with `r = 1/4`, error 0 ((R1): the measurable Hoffman bound, `P` tight at every level, Lemma D; (R2): a pullback
+class, `D = O`). Observations (i), (ii) hold verbatim (they use only properness on `Ω`). Summing the four classes gives, for every `n`,
+`avg_{x ∈ Φ_n} f_ω(x) ≤ η_X(n)/(r_X κ)`, `κ = 1/(4r_X) − 1`, where `f_ω(x) = Σ_j m_P{b : x ∈ X^{j*}_b}`. **The finite-`P` step "some point
+has no bad `b`" does not transplant** (a compact `P` allows `f` small and positive everywhere); stationarity replaces it: `f_ω(x)` is a
+translation-equivariant function of the path's a.e.-class, whose law is `G_S`-invariant (C2 (d)), so `E f(x) = E f(0)` and
+`E f(0) = E avg_{Φ_n} f ≤ η_X(n)/(r_X κ) → 0`. Hence a.s. `f(x) = 0` for a.e. `x`: at such `x`, a.e. `b` lies in `A^{W(x,b)}_x`, so the fibre's
+four classes are a.e. inside the four independent sets `A^j_x ⊂ O`, each of measure `≤ 1/4`; so each has measure exactly `1/4`, and the
+equality case of Hoffman (`Σ_{χ≠1}|Â|²(ν̂_𝔓(χ) + 1/3) = 0`) puts `Â` on the trivial character and the minimisers, which kill `𝔓⁴` at every
+level (Lemma D, FS38-D2-B, as in VD-C). **So a.e. fibre `W(x, ·)` is `γ_x ∘ π₄` a.e., `γ_x` a proper four-colouring of `P₄`.**
+
+**C6. Propagation [hand; C14's, a.e. form].** For a.e. `x` and `ν`-a.e. `t ∈ T_X`, with `y = x + t`: for a.e. `b` and a.e. `s ∈ T_𝔓`,
+`(x, b − s), (y, b) ∈ Ω` and `W(y, b) ≠ γ_x(π₄(b − s))`; every residue of `T_𝔓` mod `𝔓⁴` has positive measure and `γ_x` is gap-free (D2-A),
+so `W(y, b) = γ_x(π₄ b)` for a.e. `b`: `γ_y = γ_x`. The a.e.-periods of `x ↦ γ_x` form a closed subgroup containing a dense subset of
+`T_X`, hence `⟨T_X⟩`'s closure `= G_X`. **So `W = γ_ω ∘ π₄` a.e. on `G_S`.**
+
+**C7. Back to `R` [hand; mine].** `h ↦ P(G(h) = γ(π₄ h))` is continuous (`π₄` locally constant, `G` continuous in probability) and equals 1
+for a.e. `h` (Fubini), so it is 1 everywhere, in particular on the countable `R`: a.s. `c = γ ∘ π₄` on `R`, and `γ` is a proper colouring
+of `P₄` because `U ↠ T mod 𝔓⁴`. So `μ` is carried by Pull. ∎
+
+**Inputs, and what is mine.** Mine: C0–C3, C5's stationary replacement of the finite-`P` step and the compact tight factor, C7, and the
+tail-by-Hoffman factor in C4. Transplanted, re-walked here, not re-derived from scratch: C14.1, C14.3 (Coxeter; verifier C blind — two
+derivations), C14.2 (a)–(c), C14's observations (i)–(ii) and propagation, C14′'s regularity idea (one mind; here replaced by my C3 and C5).
+External or certified: `[AmbrusEtAl2023]` Thm 1 (audited by J26); FS-66's certificates at 11 and 19; B1's exact spectra at 23, 31; Lemma P,
+Lemma D, FS38-D2-A/B, V3ram, VC-C2, Weil. **The real place enters only through `m₁ < 1/4`**: the proof is sharp at ℚ(√11), whose stable 7
+(ratio 2/7) breaks C4 and where C9's colouring has spectral measure on `T + A` and is no pullback (P-controls: consistent).
+
+### 2.2 T-C(A) — TRUE
+
+Over ℚ(√47) the stable places are 11, 19, 23, 31, 43, 47, … (facts (1)); 3 and 7 are split; 2 is split (the wall is broken), so no
+place is tight. Run C1–C3 unchanged (they never used the tight place). In C4 **every** factor of `G_S` has ratio `< 1/4`: 11 and 19 by
+FS-66 (0.2331, 0.2147), the tail by Hoffman as above (23, 31 exact; Weil from 37), the ramified 47 by Lemma P, real places `m₁`, split
+places 0 — **including dyadic ones, which C14.2 (c)'s computation covers**: its integrals `∫_{O^×} ψ(bε)dε` are `1, −1 = −1/(q−1), 0, 0, …`
+at `v(b) = 0, −1, −2, …` for `q = 2` (facts (3); the non-stationary substitution `ε ↦ ε(1 + π^{−b}x)` needs only `−b ≥ 1`), so CL1's
+restriction to odd split places is not needed. So `G_S` has ratio `r < 1/4` with error `η(n) → 0` (C14.3), and on a.e. regularised path the four
+classes (independent on `Ω`, covering a.e.) give `1 = Σ_j d_n(S^j) ≤ 4(r + η(n))`, false for large `n`. So no such `μ` exists. **The
+"hence":** a four-colouring's translation-orbit closure is a compact invariant subset of `X₄(F)` (per `R`-coset), so it carries a
+translation-invariant probability (`R` is amenable), whose spectral measure by the first sentence is carried by no `T + A + Fin_S`. ∎
+Relation to the record: this is FS86-CL1's count moved from measurable windows to invariant measures with that spectral type, now with every
+stable place at once and dyadic split places allowed; it is one derivation (mine), a second to CL1's (one mind).
+
+### 2.3 T-A — TRUE (all six parts)
+
+(i) `π₄` is onto, so Pull is in bijection with the proper four-colourings of `P₄`: finite, hence closed. Translation by `t` sends
+`γ∘π₄` to `γ(· − π₄t)∘π₄`; rotation by `u` to `γ(ū ·)∘π₄` (multiplication by a unit of `T mod 𝔓⁴` is an automorphism of `P₄`);
+conjugation and every automorphism `σ` of `F(i)` preserving `R` fix `𝔓` (the stable primes are exactly the primes of `L` at which `R` is
+integral, a set `σ` preserves, and `𝔓` is the only one with a tight four-colour plane) and induce automorphisms of `P₄`. ✓
+(ii) By translation invariance, `δ ∈ F_μ` iff every invariant `μ` is carried by the `δ`-periodic colourings. A subgroup, and `U`-stable
+(push `μ` forward by `m_u`, which normalises the translations), so an `R`-submodule: an ideal. **Every non-zero ideal has finite index, for
+every `F`:** `δ ≠ 0` has a minimal polynomial with `a₀ ≠ 0`; clearing denominators puts a non-zero integer `m` in `δR`, and `|R/mR| ≤ m⁴`
+(torsion-free of rank 4). `F ⊆ F_μ`: a forced pair is identified by every colouring. `F_μ ⊆ P`: a periodic colouring has a finite
+translation orbit, whose uniform measure is invariant. If `F_μ ≠ 0` it has finite index, so every `μ` is carried by periodic colourings,
+which (frame) are pullbacks, which are `(R ∩ 𝔓⁴)`-periodic: `P(R) ⊆ F_μ`. So `F_μ ∈ {0, P(R)}`. ✓
+(iii) ⟸: Pull is `P(R)`-periodic and `P(R) ≠ 0`. ⟹: `F_μ = P(R)`, and a `P(R)`-periodic proper colouring is a proper colouring of
+`R/(R ∩ 𝔓⁴) = O/𝔓⁴` with connection set `U mod 𝔓⁴ = T mod 𝔓⁴`, i.e. a pullback (no frame needed here). ✓
+(iv) ⟹: `F = P(R)` makes every colouring a pullback, so `X₄ = Pull` and both halves hold vacuously. ⟸: a `c ∉ Pull` has an orbit closure
+carrying invariant measures (amenability), all on Pull by Q-μ, so `c` is transient, against Q-tr; so `X₄ = Pull` and `F ⊇ R ∩ 𝔓⁴ ≠ 0`. ✓
+(v) `U_B := {y : y|_B ∉ Pull|_B}` is clopen and `X₄ ∖ Pull = ⋃_B U_B` (increasing; Pull is finite). For a countable amenable group and
+clopen `V`, `d*({t : t·c ∈ V}) = max{ν(V) : ν invariant on the orbit closure of c}` (≤: Følner empirical measures; ≥: pick `y` with
+`K`-average `≥ ν(V) − ε`, then a translate of `c` agrees with `y` on `K + B`). So `c` is transient iff every such `ν` has `ν(U_B) = 0` for
+every `B` iff every return-time set has upper Banach density 0. ✓
+(vi) If `c` is transient its orbit closure `Y` meets Pull (it carries an invariant measure, which lives on Pull); an isolated `p ∈ Y ∩ Pull` has
+a neighbourhood `{p}`, so some translate of `c` is `p` and `c ∈ Pull`: contradiction. So Q-tr, and by (iii)–(iv) `F ≠ 0 ⟺ F_μ ≠ 0`; both lie in
+`{0, P(R)}`, so they are equal. ✓
+**Scope notes (not defects of truth).** (a) For S2 fields other than type (B), "row 67's `P₄`" must be read as the tight place's own
+stabilised level (for ℚ(√2,√3), C12.1's `P_c`), and `Aff_F` needs `σ(U) = U`, which "preserving `R`" gives when `F/ℚ` is Galois (then complex
+conjugation is central in `Gal(L/ℚ)`), not obviously otherwise. (b) (ii)'s finite-index step needs no Lemma R (the rank argument above).
+
+### 2.4 T-B2 — GAP
+
+What I can prove: **(B2-a)** Q-tr ⟹ T-B2 (a defect set of upper Banach density 0 makes `c` transient: `c ∉ Pull`, since two distinct
+pullbacks differ on a union of `(R ∩ 𝔓⁴)`-cosets, and every return-time set of (v) lies in finitely many translates of `D`). **(B2-b)** A
+counterexample to T-B2 is a non-pullback, so it would give `F(R) = 0` (row 88 answered no): T-B2 FALSE is as hard as row 88. **(B2-c)
+Propagation:** if `c(z) = a ≠ p(z)`, every `z + u` with `p(z + u) = a` is a defect; these `u` form 8 of the 24 residue classes of `U` mod
+`𝔓⁴` (gap-freeness), an infinite set dense in `(S¹)²`. **(B2-d)** So `D` is contained in no finite union of cosets of a finitely generated
+subgroup `Λ` (each residue class of `U` is infinite and bounded in `L ⊗ ℝ`, while a finite union of cosets of the discrete `Λ` has finite
+bounded part). **(B2-e) But a circle has upper Banach density 0 in `R`:** two distinct circles meet in at most two points, so if `x + U` had
+density `δ` in a Følner set almost invariant under `k` distinct translations, `k(δ − ε)|F| − 2k² ≤ |F|`, i.e. `δ ≤ 1/k + ε + o(1)`; the same for
+any finite union of circles. **The gap:** from (B2-c), iterated, to `d*(D) > 0`. Iterating keeps `D` a countable union of circle-pieces, dense
+archimedeanly in open sets after two steps, but density in `L ⊗ ℝ` is not Banach density in `R` (Følner sets of `R` are fine grids over
+ever more primes), and neither H (half-spaces), D/D′ (patchworks) nor T-C (measures) gives an expansion bound for the defect graph. No
+counterexample either: none is constructible without answering row 88.
+
+### 2.5 T-B1 — GAP
+
+What I can prove: **(B1-a)** `F(R) ≠ 0` ⟹ T-B1 (then `X₄ = Pull` is finite). **(B1-b)** A counterexample (non-pullbacks `c_n → p`) gives
+`F(R) = 0`. **(B1-c)** T-B1 ∧ Q-μ ⟹ `F(R) ≠ 0` (T-A (vi), (iii), (iv)); so, given T-C, T-B1 reduces row 88 to Q-μ outside `T + A + Fin`.
+**The gap:** isolation says a finite patch `p|_B` has the unique extension `p`, a conditional finite-forcing statement. Theorem H gets
+unique continuation only from an additive half-space (its descent on `inf h` uses the unit vectors with `h(u) < 0` arbitrarily small, which a
+finite `B` does not supply); the local plane's rigidity (row 90) comes through local forcers built on `√3`, absent from `F`; and by
+compactness isolation of `p` is not implied by `⋂_B {c : c|_B = p|_B} = {p}`, which holds trivially. No route found.
