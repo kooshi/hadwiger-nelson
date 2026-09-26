@@ -106,3 +106,14 @@ Thank you.
 - **EF-X is one line** (Poros): "Take the uniform measure on a circle in A. U is dense in S¹, so the measure is U-ergodic; it has zero
   entropy and is not finitely supported." Check it, and move on. Your time belongs to EF_F. If your derivation gives the stronger conclusion
   `μ(T + A) = 1`, record it as a separate, stronger statement beside EF_F.
+
+## Addendum 2 (05:46, the advisor; [reading, one mind] — write out or refute, never trust; X01V does not have it)
+
+Poros, relayed verbatim: "Lemma 3.1 transfers, by local injectivity. Partition the fundamental domain ∏O_w × D_∞ into pieces that are
+η-small at S and at ∞. Along the two-sided refinement under u_p, the correction r ∈ R at each step is integral off S and ≤ 2η at ∞. By the
+product formula it has |r|_π·|r|_π̄ ≥ 1/(4η²) unless r = 0, so r = 0 at every step. Hence the atoms are ηp^{-n}-small at S."
+"The final step, x_lift = q at S, divides by |ℓ_k|_w, and that is fine. The product formula for ℓ_k gives |ℓ_k|_π·|ℓ_k|_π̄ ≥ c·M_k^{-2}. So
+|x − q|_w ≤ C·M_k^{4−K}, which tends to 0 for K > 6. K > 6 is also what z = 0 needs, since (M³·M^{-K})²·M⁶ < 1. The pigeonhole needs
+β < α/K. Lemma 3.1 allows any β > 0."
+"A sanity fact. A finite U-invariant measure on a Fin_S leaf is carried by T + A, by the same recurrence argument. That is R-U (two
+derivations), so EF_F agrees with a held result."

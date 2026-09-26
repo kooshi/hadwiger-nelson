@@ -74,3 +74,18 @@ Thank you.
   written), and then prove the corrected form: `Γ` chosen so that no non-torsion element has a power in a proper subfield of `L`. Say also
   whether every non-torsion `u ∈ U` still lies in some such `Γ` (PE-2 needs it, or needs a separate argument for `u` with a power in a
   proper subfield).
+
+## Addendum 2 (05:46, the advisor; [reading, one mind] — write out or refute, never trust; the verifiers do not have it)
+
+Poros, relayed verbatim: "PE-2: the snag. M is only a ℤ[Γ]-module, so U does not act on M̂. 'Components permuted by U' therefore cannot be
+said on M̂. The fix: decompose on R̂, not on M̂. (1) Take the Γ-ergodic decomposition of µ on R̂ itself. A factor of an ergodic system is
+ergodic, so each component µ_c pushes to a Γ-ergodic measure on every M̂. (2) If h_{µ_c}(u) > 0, then by the sup over M there is an M with
+h((µ_c)_M) > 0. For every M′ ⊇ M the same holds, so Thm 1.2 gives (µ_c)_{M′} = Haar_{M′} on a cofinal family, and hence µ_c = m. Otherwise
+µ_c has zero entropy for all of Γ. (3) U commutes with Γ. So U permutes the components, fixes m and preserves entropy (the systems are
+conjugate). The split µ = a·m + ν is therefore U-invariant. (4) If µ is U-ergodic, then a ∈ {0, 1}. Every non-torsion u lies in some
+admissible Γ. Conclusion (the ergodic PE-2): µ = m, or h_µ(u) = 0 for every u. Then: ergodic MR = ergodic PE-2 + EF_F. The general MR follows
+by U-ergodic decomposition, since E is a U-invariant Borel set. CE-1 becomes moot."
+
+What the planner would check in it (questions): in (2), is "zero entropy for all of Γ" what EL's dichotomy gives for each component, or
+only "zero entropy for the elements of Γ" (the same thing, if Γ is the acting group); in (4), is "every non-torsion `u` lies in some
+admissible `Γ`" true, given Addendum 1's subfield caveat. CE-1 stays on your list: if PE-2 lands, CE-1 is TRUE for that reason, so say so.
