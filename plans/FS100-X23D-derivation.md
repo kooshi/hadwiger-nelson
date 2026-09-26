@@ -362,3 +362,33 @@ anything at `L ≥ 6` beyond five."
 
 - Would have searched for a five-chromatic finite graph over ℚ(√3,√5), or a four-colouring of its rank-8 lattice (FS-72). Instead: the
   conditional derivation (4.1) and a registered prediction (P-X23D-1).
+
+## Stage 5 — SAVED (self-audit of the results I like, and one sharpening)
+
+*G21: audit the results that please at the rate of those that do not. Each item: the attack, and what it found.*
+
+1. **The exception clause is implied by the class.** Row 100's exception is a stable dyadic place **ramified in `L/F`** (its instances ℚ(√5),
+   ℚ(√17) are ramified in `L/F`, not over ℚ₂). Such a place has level-one ratio `1/2 ≥ 1/4` (CLS-2), so no field in the class has one:
+   **SPC's scope clause is redundant, and COR holds for every real number field** — at the exception's fields `L = 2` and `χ ≥ 2` is trivial
+   (row 99 covers all `L ≤ 4` with no exception). *Sharpening, [hand].* (K's dyadic places, ramified over ℚ₂ but inert in `L/F`, are not the
+   exception; they fail the class through `U₂`.)
+2. **Could C14.3 fail for the tensor power `Cay(ℂ^n, (S¹)^n)`?** Its proof (Zhang's two observations, measurable) uses only that edges of
+   `X₁ × X₂` need an edge in each coordinate and C14.1 in each factor; the connection set is the full product because `U` is dense in
+   `∏_{v|∞} 𝕋(F_v)` (weak approximation for the rational curve `𝕋`). No `n`-dependence. Found nothing.
+3. **Is the infinite product `Y′` really Hoffman below 1/4?** `Λ_Y` is a maximum over finitely many values (`Λ_v ≤ 2√q/(q + 1)` and finitely
+   many places above each `p`), each `< 1/3` (31's the thinnest, `+4.9·10⁻⁶`); a product of numbers in `[−Λ_Y, 1]` is `≥ −Λ_Y`. Found nothing.
+4. **Is the list of usable `q ≤ 33` complete?** Prime powers `p^f`, `p ≡ 3 (mod 4)`, `f` odd, `≤ 33`: 3, 7, 11, 19, 23, 31, 27; `7³ = 343`,
+   `3⁵ = 243`. Complete. `11³`, `19³` exceed the Weil threshold, so FS-66 is needed only at `f = 1`.
+5. **Weil for `Γ_q` at prime powers.** The eigenvalues are Kloosterman-type sums over `𝔽_q` with `|λ| ≤ 2√q`; at 27 the exact maximum `|λ|` is
+   10 `≤ 2√27 = 10.39`, consistent. Found nothing.
+6. **SPC-cx's direction.** Restricting to `T″ ⊆ T` removes edges, so any contradiction derived for `Cay(G″, T″)` applies to `c̃`; and
+   stationarity, continuity in probability and the "for every `x`, `t`" properness restrict. The one thing that could go wrong — `G″` not
+   carrying the Følner/doubling structure the count needs — does not: `G″ ≅ ℂ^{r₁+r₂} × (compact)`. Still one mind, new.
+7. **What I did not check:** Lemma P (ii) at ramification `e ≥ 3` above 11 or 19 (cited: "FS-66's L1–L2 need only the coset structure and
+   Hensel's count"); G56's four-colourability of `U_Q`, `Q ≤ 32` (a held solver result); MR itself (an input); J21-TH (J48's thick-place
+   reduction, only for D-1's second route).
+
+C0 scored: CTL TRUE (0.90); CLS TRUE (0.70; the `q = 27` risk dissolved at level one, `2/9`); SPC totally real TRUE (0.80); SPC with complex
+places TRUE given a new step (0.50 on TRUE — the step was found, not inherited); COR TRUE only once row 99 and MR are named (as worded it is
+short one input — I had given GAP 0.30); Q35 TRUE (0.80); D-1 TRUE (0.85). No modal surprise except that COR's defect was wording, and that the
+exception clause turned out to be redundant.
