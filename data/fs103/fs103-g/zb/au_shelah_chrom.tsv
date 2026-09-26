@@ -1,0 +1,30 @@
+# query: ai:shelah.saharon & (ti:chromatic | ab:chromatic | ti:coloring | ti:colouring)
+# total reported: 28; fetched: 28
+0246.05002	1972	j	review	Separability properties of almost-disjoint families of sets	Isr. J. Math. 12, 207-214 (1972).
+0299.02083	1974	a	review	On some general properties of chromatic numbers	Topics in Topol., Colloqu. Keszthely 1972, Colloquia Math. Soc. Janos Bolyai 8, 243-255 (1974).
+0311.05112	1975	j	-	Colouring without triangles and partition relation	Isr. J. Math. 20, 1-12 (1975).
+0382.03040	1978	j	-	The consistency with CH of some consequences of Martin's axiom plus \(2^{\aleph_0}>\aleph_1\)	Isr. J. Math. 31, 19-33 (1978).
+0657.03029	1988	j	review	Forcing constructions for uncountably chromatic graphs	J. Symb. Log. 53, No. 3, 696-707 (1988).
+0727.05025	1990	a	review	Incompactness for chromatic numbers of graphs	A tribute to Paul Erdős, 361-371 (1990).
+0844.05043	1996	j	review	On Taylor's problem	Acta Math. Hung. 70, No. 3, 217-225 (1996).
+0869.20039	1996	a	review	New nonfree Whitehead groups by coloring	Arnold, David M. (ed.) et al., Abelian groups and modules. Proceedings of the international conference at Colorado Springs, CO, USA, August 7--12, 1995. New York, NY: Marcel Dekker. Lect. Notes Pure Appl. Math. 182, 15-22 (1996).
+0865.03041	1996	j	review	Coloring finite subsets of uncountable sets	Proc. Am. Math. Soc. 124, No. 11, 3501-3505 (1996).
+0871.03036	1997	j	review	Colouring and non-productivity of \(\aleph_ 2\)-c.c	Ann. Pure Appl. Logic 84, No. 2, 153-174 (1997).
+1049.05038	2003	j	review	Chromatic numbers of the plane. III: Its future	Geombinatorics 13, No. 1, 41-46 (2003).
+1030.03035	2003	j	review	Axiom of choice and chromatic number of the plane	J. Comb. Theory, Ser. A 103, No. 2, 387-391 (2003).
+1066.05067	2004	j	review	How the axiom of choice can affect the chromatic number of distance graphs: three examples on the plane	Congr. Numerantium 166, 5-9 (2004).
+1057.03036	2004	j	review	Axiom of choice and chromatic number: Examples on the plane	J. Comb. Theory, Ser. A 105, No. 2, 359-364 (2004).
+1057.03037	2004	j	review	Examples on the plane and \(R^n\)	Geombinatorics 13, No. 4, 186-192 (2004).
+1064.05058	2005	j	review	Finite subgraphs of uncountably chromatic graphs	J. Graph Theory 49, No. 1, 28-38 (2005).
+1085.03035	2005	j	review	Successors of singular cardinals and coloring theorems. I	Arch. Math. Logic 44, No. 5, 597-618 (2005).
+1200.05059	2009	j	summary	The odd-distance plane graph	Discrete Comput. Geom. 42, No. 2, 132-141 (2009).
+1181.03047	2009	j	summary	Successors of singular cardinals and coloring theorems. II	J. Symb. Log. 74, No. 4, 1287-1309 (2009).
+arXiv:1302.3431	2013		summary	More on Compactness of Chromatic Numbers	Preprint, arXiv:1302.3431 [math.LO] (2013)
+1299.03052	2013	j	review	On incompactness for chromatic number of graphs	Acta Math. Hung. 139, No. 4, 363-371 (2013).
+1528.03194	2016	j	summary	Lower bounds on coloring numbers from hardness hypotheses in pcf theory	Proc. Am. Math. Soc. 144, No. 12, 5371-5383 (2016).
+1449.03014	2019	j	review	The colouring existence theorem revisited	Acta Math. Hung. 159, No. 1, 1-26 (2019).
+1499.03036	2021	j	review	Colouring of successor of regular, again	Acta Math. Hung. 165, No. 1, 192-202 (2021).
+1552.03064	2022	j	summary	Infinite stable graphs with large chromatic number	Trans. Am. Math. Soc. 375, No. 3, 1767-1799 (2022).
+arXiv:2302.10141	2023		summary	On the weak Borel chromatic number and cardinal invariants of the continuum	Preprint, arXiv:2302.10141 [math.LO] (2023)
+7927740	2024	j	summary	Infinite stable graphs with large chromatic number. II	J. Eur. Math. Soc. (JEMS) 26, No. 12, 4585-4614 (2024)
+8151282	2025	j	summary	Infinite cliques in simple and stable graphs	Model Theory 4, No. 3, 231-249 (2025)
