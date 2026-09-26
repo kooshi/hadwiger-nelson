@@ -1,0 +1,6 @@
+sample: 3920 unit vectors (z = m + ni, |m|,|n| <= 40, primitive)
+C1/C2 checked on 3920 unit vectors (1272 with a pole above 5); failures so far: 3920
+C3 properness checked on 4000 edges; failures so far: 7180
+C4 orders checked for k = 1..8; failures so far: 7180
+C5: 8 circle points over F_7, values of 7*theta_C9: [2, 3, 4, 5]
+FAIL: 7180 failures; first: ('C2', Fraction(79, 3121), Fraction(3120, 3121), Fraction(0, 1), Fraction(0, 1))

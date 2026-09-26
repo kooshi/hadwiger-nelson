@@ -58,3 +58,158 @@ numbers at the time of writing are informed by a candidate counterexample not ye
 ### 1.4 Would-have-searched-here log (running)
 
 - (none yet)
+
+## Stage 2 — SAVED (blind derivation, claim by claim; controls first)
+
+**Conventions.** Characters additive, `R̂ = Hom(R, ℝ/ℤ)`. `‖z‖` is the distance to 0 in `ℝ/ℤ`. "Proper" for `W` on `K` is read as
+"for every `s ∈ cl Θ(U)`, `W(t) ≠ W(t + s)` for Haar-a.e. `t`" (the order that the colouring's properness produces, J51V-L2); every example
+below satisfies the stronger "for every `t`", so no verdict turns on the order.
+
+### 2.0 Three lemmas used throughout [hand]
+
+- **J51V-L0 (purity).** `T + A` is pure in `R̂`: if `kθ = τ + α` (`k ≥ 1`, `τ ∈ T`, `α = f mod 1`, `f ∈ Hom_ℚ(L, ℝ)`) then `α/k := (f/k) mod 1 ∈ A`
+  and `k(θ − α/k) = τ` is torsion, so `θ − α/k ∈ T` and `θ ∈ T + A`. Hence `K̂′` is saturated in `ℤⁿ`, a direct summand, and a unimodular change
+  of basis (an automorphism of `Tⁿ`, carrying `K`, `K₀`, `cl Θ(U)` and `W`) puts `Θ = (Φ, B)` with `K̂′ = ℤ^r × 0`, `Φ ∈ (T + A)^r`, and
+  `m·B ∉ T + A` for `m ≠ 0`. Then `K₀ = K ∩ (0 × T^{n−r})` and `π` is the projection `K → cl Φ(R)`, an isomorphism `K/K₀ ≅ cl Φ(R)` (a
+  continuous bijective homomorphism of compact groups).
+- **J51V-L1.** `cl π(Θ(U)) = π(cl Θ(U))` (`π` continuous, `K` compact).
+- **J51V-L2.** For measurable `W` on compact `K`, `s ↦ m{t : W(t) = W(t + s)} = Σ_c ⟨1_{W=c}, 1_{W=c}(· + s)⟩` is continuous, so properness at every
+  `s ∈ Θ(U)` gives it at every `s ∈ cl Θ(U)`; and `x ↦ W(Θ(x) + t)` is proper for a.e. `t ∈ K` iff `W(t) ≠ W(t + Θ(u))` for a.e. `t`, every `u`
+  (countably many pairs; `t ↦ Θ(x) + t` preserves Haar). If `t` is read in `Tⁿ` instead of `K`, Fubini over `Tⁿ/K` gives a coset `c + K` on which
+  `W_c = W(c + ·)` is proper on `K`: the two readings of "the colouring is proper for almost every `t`" feed KS-1 the same hypothesis.
+
+### 2.1 Control KS-4 — TRUE [hand + tools exact (C5)]
+
+`θ_{C9} = τ₇ + α`: `τ₇ = (2x + 3y)/7` read at a stable prime above 7 (torsion, order 7), `α ∈ A` with `a := sup_U ‖α‖ < 1/28` (my reading of
+"an archimedean term below `1/28`"). On the 8 points of `x² + y² = 1` over `𝔽₇`, `2x + 3y ∈ {2, 3, 4, 5}` (C5, exact), so
+`θ_{C9}(U) ⊆ [2/7 − a, 5/7 + a] ⊆ [1/4, 3/4]`, and so is its closure. `K̂′ = {m : m₁θ_{C9} + m₂θ₁ ∈ T + A} = {m : m₂θ₁ ∈ T + A} = ℤ × 0` (L0:
+`m₂ ≠ 0` would put `θ₁ ∈ T + A ⊆ E`). So `K₀ = K ∩ (0 × T)`, `π = p₁`, `K′ ≅ cl θ_{C9}(R)`, and `W = ⌊4t₁⌋ = W′ ∘ p₁` with `W′ = ⌊4·⌋`. Every
+`s ∈ cl Θ(U)` has `p₁(s) ∈ [1/4, 3/4]`, and two points of one half-open quarter `[j/4, (j + 1)/4)` are at distance `< 1/4`: `W(t) ≠ W(t + s)` for
+**every** `t`. `W′` is proper on `K′` for `cl π(Θ(U)) = p₁(cl Θ(U)) = cl θ_{C9}(U)` by the same line. ∎
+**What a wrong-reason pass looks like.** `W` factors through `π`, so the control passes for **every** definition of `K̂′` that keeps
+`(1, 0)` — `E` in place of `T + A`, or J37's per-component "`(T + A)`-part" — and whatever `cl Θ(U)` is: it never exercises KS-sat or a
+selection. Its failure is reachable only through a `K̂′` that drops `A` (with `T` alone, `α ≠ 0` gives `K̂′ = 0`, `K′ = {0}`, and no `W′` exists).
+So a pass certifies that `A` is in `K̂′`'s definition, and nothing about KS-1 for a `W` that reads a non-`(T + A)` coordinate.
+
+### 2.2 Control KS-5 — TRUE, with one wording repair [hand]
+
+`Θ = (θ_{C9}, θ_{C9} + θ₁)`: `m·Θ = (m₁ + m₂)θ_{C9} + m₂θ₁ ∈ T + A` iff `m₂ = 0` (L0). So `K̂′ = ℤ × 0`, `K₀ = K ∩ (0 × T)`, `π = p₁`,
+`W = ⌊4t₁⌋ = W′ ∘ p₁`, proper for every `t` as in KS-4; `W′ = ⌊4·⌋` ✓. **"`K′` is the image of `θ_{C9}`"** holds as "`K′ ≅ cl θ_{C9}(R)` via `p₁`":
+`θ_{C9}(R)` itself is countable, and dense (not closed) whenever `α` is not torsion, so "image" must be read "closure of the image" and "is" as
+"is identified with, by the first coordinate". A wording repair, not a mathematical one.
+**Wrong-reason pass.** As KS-4, and in addition the identification passes under J37's per-component reading too (there `K′` is the closure of the
+diagonal `(θ_{C9}, θ_{C9})(R)`, isomorphic to the same group), so the control does not tell the two formalizations apart; and it passes whether or
+not `cl Θ(U)` is `K₀`-saturated (that depends on `θ₁`, which `W` never reads).
+**The control neither has.** A `W` that reads a non-`(T + A)` coordinate. §2.4's example is one; it fails KS-1.
+
+### 2.3 KS-2 — TRUE [hand]
+
+Assume KS-1's hypotheses and KS-sat. Let `m₀` be Haar on `K₀` and `P_c(t) = m₀{k : W(t + k) = c}` — Borel on `K` (Tonelli; replace `W` by a Borel
+version off a null set), `K₀`-invariant, so `P_c = Q_c ∘ π` with `Q_c = P_c ∘ σ` for a Borel section `σ` of `π` (compact metrizable groups).
+Fix `s′ ∈ cl π(Θ(U)) = π(cl Θ(U))` (L1) and `s ∈ cl Θ(U)` with `π(s) = s′`. By KS-sat every `s + k`, `k ∈ K₀`, lies in `cl Θ(U)`, so
+`∫_K 1[W(t) = W(t + s + k)] dt = 0`; integrating over `k` and swapping (Tonelli), `∫_K P_{W(t)}(t + s) dt = 0`. By Weil's formula
+`∫_K f = ∫_{K′} ∫_{K₀} f(σ(t′) + k) dk dt′`, this is `∫_{K′} Σ_c Q_c(t′) Q_c(t′ + s′) dt′ = 0`. So for a.e. `t′` the essential colour sets
+`M(t′) = {c : Q_c(t′) > 0}` (never empty: `Σ_c Q_c = 1`) and `M(t′ + s′)` are disjoint, and any measurable selection `W′(t′) ∈ M(t′)` — which is
+the claim's "any measurable selection from the colours `W` takes on a positive-measure part of `t + K₀`" — has `W′(t′) ≠ W′(t′ + s′)` for a.e.
+`t′`. ∎ No step reads the field.
+
+### 2.4 KS-1 — FALSE, with a counterexample over ℚ [hand + tools exact]; TRUE at `n = 1` [hand]
+
+**Counterexample (J51V-X1).** `F = ℚ`, `L = ℚ(i)`, `R = ℤ[i][1/q : q ≡ 1 (mod 4)]`, `U = {z/z̄ : z ∈ ℤ[i] ∖ 0}` (Hilbert 90). Take `p = 5 = ππ̄`,
+`π = 2 + i`, `ι : ℚ(i) → ℚ₅` with `ι(i) ≡ 3 (mod 5)` (so `v(ι(π)) = 1`, `ι(π̄)` a unit), `ψ₅ : ℚ₅ → ℚ₅/ℤ₅ ⊂ ℝ/ℤ` the fractional part, and
+- `ψ_w(x) = ψ₅(ι(x))`, `ψ_w̄(x) = ψ₅(ι(x̄))` — characters of `R` continuous at the split place 5 (they read the two primes above it);
+- `θ(x) = ½·(x mod (1 + i))` — the dyadic parity character (`R/(1 + i)R = 𝔽₂`; `(1 + i)` is stable and ramified in `L/ℚ`); `θ(u) = ½` for every
+  `u ∈ U` (`uū = 1` makes `u ≢ 0`, so `u ≡ 1`).
+
+Let `n = 2`, `Θ = (θ + ψ_w, θ + ψ_w̄)`, `W(t₁, t₂) = 2⌊2t₁⌋ + ⌊2t₂⌋`.
+1. *The cross.* For `u ∈ U`, `ι(ū) = ι(u)⁻¹`; of `y = ι(u) ∈ ℚ₅^×` and `y⁻¹` one lies in `ℤ₅`, so one of `ψ_w(u)`, `ψ_w̄(u)` is 0 and
+   `Θ(u) ∈ ({½} × T) ∪ (T × {½})`, a closed set; so `cl Θ(U)` lies in it.
+2. *`W` is proper* — for every `t` and every `s` in that set: adding `½` to a coordinate flips `⌊2·⌋` in it.
+3. *`K̂′ = 0`.* `m·Θ = (m₁ + m₂)θ + m₁ψ_w + m₂ψ_w̄`, so `m ∈ K̂′` iff `χ := m₁ψ_w + m₂ψ_w̄ ∈ T + A`. Say `χ = τ + α`, `Nτ = 0`, `α = f mod 1`. `χ`
+   vanishes on `R₀ = {x ∈ R : x integral at π, π̄}`, so `Nf(R₀) ⊆ ℤ`; `R₀ ∋ 13^{−k}, i·13^{−k}` gives `f(1) = f(i) = 0`, so `f = 0` and `χ` is
+   torsion. But `χ(π^{−k}) = m₁ψ₅(ι(π)^{−k})` (`ι(π̄)^{−k}` is a unit) has order `5^k / gcd(5^k, m₁)`, unbounded unless `m₁ = 0`; and `π̄^{−k}` gives
+   `m₂ = 0`. (`π^{−1} = π̄/5 ∈ R`.)
+4. So `K = T²` (its annihilator lies in `K̂′ = 0`), `K₀ = ann_K(0) = K`, `K′ = {0}`, `cl π(Θ(U)) = {0}`, and KS-1's conclusion asks for
+   `W′(0) ≠ W′(0)`: **false**, while its hypothesis holds (steps 1–2). ∎
+
+*The colouring it describes* is `x ↦ W(Θ(x) + t)`, a proper four-colouring of ℚ² for every `t`: the parity two-colouring written twice, each copy
+hidden inside a character that is not in `T + A`. The quotient `K/K₀` keeps only the combinations lying in `T + A`, and here there are none: the
+`T + A` information lives only *inside* components that are not themselves in `T + A`, and the combination-based `K̂′` discards it. Checked
+exactly by `tools/j51v_cross.py` (C1–C4 on a complete enumeration fixed in advance: 3,920 unit vectors `z/z̄`, `|m|, |n| ≤ 40`, 1,272 with a
+pole above 5; properness on 4,000 edges `(x, x + u)` with rational `t`; the orders in step 3 for `k ≤ 8`); plants `same-prime` (both coordinates read
+`w`: 865 failures) and `no-parity` (7,180 failures) fire, exit 1 (`data/fs100/j51v/cross-*.out`).
+
+**How far it reaches (J51V-X2) [hand].** (a) The same construction works over every real number field with a stable dyadic place ramified in
+`L/F` (every unit vector is `≡ 1` there — G56's ramified case — so a functional `λ` of the residue field with `λ(1) = 1` gives `θ(U) = {½}`) and
+any place split in `L/F` (normalise `ψ_w` to kill exactly `O_v`); ℚ(√5) and ℚ(√2) are examples. (b) With any band character `θ` (`I = cl θ(U) ∌ 0`)
+and a `k`-colouring `g` of `(T, I)` in place of parity, `Θ = (θ + ψ_w, θ + ψ_w̄)` has `cl Θ(U) ⊆ (I × T) ∪ (T × I)`, `K̂′ = 0`, and
+`(g(t₁), g(t₂))` is a proper `k²`-colouring: the `k²`-colour analogue of KS-1 fails over **every** real number field (take `k = χ_char(F²)`, finite
+by CLG). (c) **Vector band rigidity is false:** `0 ∉ cl Θ(U)` does not force any non-zero `m·Θ` into `T + A` (so row 98 has no naive vector form).
+(d) At four colours the mechanism needs `k = 2`, a two-colour `T + A` character, i.e. a bipartite plane; over ℚ(√47) it is unavailable, and any
+four-colour counterexample there would be a four-colouring of the plane (see KS-C).
+
+**KS-1 at `n = 1` is TRUE over every real number field, given row 98 (J51V-N1) [hand].** If `θ ∈ T + A`, `K̂′ = ℤ` (mod the annihilator),
+`K₀ = 0`, `K′ = K`, `W′ = W`. If `θ ∉ T + A` and a proper `W` exists, then `0 ∉ cl θ(U)` (else `s = 0` violates properness), so
+`‖θ(u)‖ ≥ ε > 0` on `U`, `θ ∈ Θ_k` for `k ≥ 1/ε`, and row 98 puts `θ ∈ T + A` — a contradiction; so the hypothesis never holds. ∎ (This is the
+rank-one statement T-J37-1 at the level of the selection.)
+
+### 2.5 KS-3 — FALSE [hand + tools exact]
+
+The example of §2.4: `K₀ = K = T²` and `cl Θ(U) ⊆ ({½} × T) ∪ (T × {½}) ≠ T²`, so `s + K₀ ⊄ cl Θ(U)` for every `s ∈ cl Θ(U)`. Even without
+parity, `Θ = (ψ_w, ψ_w̄)` has `cl Θ(U) ⊆ (T × 0) ∪ (0 × T)` with `K = K₀ = T²`. **The mechanism:** at a place `v` split in `L/F` the norm-one torus
+is `F_v^×` embedded as `y ↦ (y, y⁻¹)` in `L_w × L_w̄`, and characters reading the two primes see only a cross — one coordinate is always
+integral. KS-sat fails at every real number field (every field has split places). **Not decided:** KS-sat at `n = 1` (there it says `θ(U)` is
+dense in `cl θ(R)` for `θ ∉ T + A`); not needed for any verdict.
+
+### 2.6 KS-C — TRUE as an implication; the route is circular at ℚ(√47) [hand]
+
+*The derivation.* Let `x ↦ W(Θ(x) + t)` be proper for a.e. `t`. By L2, `W` (on `K`, after choosing a coset if `t` was read in `Tⁿ`) satisfies
+KS-1's hypothesis. KS-1 gives `W′` on `K′`, and `c′_{t′}(x) = W′(π(Θ(x)) + t′)`, `t′` Haar on `K′`, is proper almost surely (countably many pairs,
+L2), translation-invariant (`c′_{t′}(x + y) = c′_{t′ + πΘ(y)}(x)`), and its trace spectral measure is
+`Σ_{χ ∈ K̂′} (Σ_j |f̂_j(χ)|²) δ_{χ∘π∘Θ}`, `f_j` the coordinates of `e_{W′}` — carried by `{m·Θ : m ∈ K̂′} ⊆ T + A = T + A + Fin_∅`. T-C(A) at
+`S = ∅` forbids it. So "KS-1 over ℚ(√47) ∧ T-C(A) at `S = ∅` ⟹ X", X the claim's conclusion. ∎
+*What it is worth.* (i) KS-1 as stated is FALSE (§2.4), so read as a material conditional with KS-1's universal statement as antecedent the claim
+is vacuously true. (ii) Read with KS-1 restricted to ℚ(√47), the step is valid but **the input is equivalent to the output** (J51V-EQ, below).
+(iii) What is proved of X without KS-1: **X for `Θ ∈ Eⁿ`** — every component in `E` puts every `m·Θ` in one `E_S`, `S` the union of the
+components' sets, and T-C(A) at that `S` (two derivations at ℚ(√47), the split dyadic place included) forbids the spectrum; **X at `n = 1`** — J51V-N1
+plus T-C(A) at `S = ∅` (T-J37-1's content). **Open:** `n ≥ 2` with some `m·Θ ∉ E` — the pure-point layer of FS-100's gap, unchanged.
+
+**J51V-EQ [hand].** Over any real number field where T-C(A) holds at `S = ∅`: KS-1 at `F` ⟺ X at `F`. (⟸: if X holds no proper `W` exists,
+by L2, so KS-1 holds vacuously; ⟹: the derivation above.) So the Kronecker selection cannot be an *independent* input to X at ℚ(√47): a proof of
+KS-1 there must use the field's arithmetic (the uniform statement is false), and whatever it uses would already prove X.
+
+### 2.7 K0 — TRUE, with a scope note on A⁺ [hand; the class membership tools exact, **not blind** (§1.2)]
+
+*The same proofs.* J45's A⁺ (Stage 3) uses SI-4, N2 and T-C(A) at the `S` in question; SP-Cor (§4.2) uses the existence of an `R ⋊ U`-invariant
+measure on `X₄(F)` (compact, `R ⋊ U` amenable; `v ∈ U` is a unit of `R` with `vU = U`, so `x ↦ vx + y` is an automorphism of `Cay(R, U)`),
+R-U (proved by J45 "for every real number field"), A⁺ at `S = ∅` with its remark (ii) (`σ_μ` and `E_S` are `U`-invariant) — and nothing else.
+N1's density step is weak approximation for the norm-one torus, valid over every real number field; SI-1 to SI-4 and N2 are field-free. No step
+reads ℚ(√47) except through T-C(A). So over every real number field `F` (quadratic or not) where T-C(A) holds at `S = ∅`: **SP-Cor holds**
+("if every finite positive `U`-invariant `E`-null measure on `R̂` is a Haar multiple, `χ(F²) ≥ 5`"), and **A⁺ holds at `S = ∅`**; **A⁺ at a
+given finite `S` needs T-C(A) at that `S`**. *Scope note:* "A⁺ … given T-C(A) there at `S = ∅`" delivers J45's A⁺ (every finite `S`) only if
+"in T-C(A)'s class" is read as supplying T-C(A) at every `S` — which J28D's class form does (one mind outside ℚ(√47)); from `S = ∅` alone the
+proof yields A⁺ at `S = ∅`, which is all SP-Cor uses.
+*The parenthetical.* By `tools/j51v_class.py` (Legendre symbols, exact; controls ℚ(√47) in, ℚ(√59), ℚ(√11), ℚ(√23), ℚ(√31) out; plant
+`forget-seven` fires on ℚ(√23)): ℚ(√143), ℚ(√311), ℚ(√335) have `d ≡ 7 (mod 8)` (dyadic place split in `L/F`) and neither 3 nor 7 stable; their
+stable odd places below 100 are {11 ram, 31, 43, 47, 59, 67, 71, 79}, {11, 19, 23, 31, 43, 59, 71}, {11, 23, 31, 47, 67 ram, 79, 83}. With FS-66's
+certificates at 11 and 19 (the ramified 11 of ℚ(√143) through Lemma P (ii), `plans/FS86-B1-verification.md`), Hoffman + Lemma P at 23, 31, 43, 47
+(`plans/FS84-S1-derivation.md` §1.3 step 8) and Weil + Hoffman + Lemma P from 37, every stable place has all-levels ratio `< 1/4`: all three are in
+the class. (That the ramified 11 is covered through Lemma P (ii) I learned from a fenced line before checking it in the open source; the
+Legendre work was done before the breach.)
+
+### 2.8 Would-have-searched-here log (stage 2)
+
+- Would have searched for a four-colour counterexample to KS-1 over ℚ(√47) with non-`E` characters (random character vectors, a finder for `W`
+  on a discretised torus). Instead: derived the split-place cross; showed any four-colour counterexample at ℚ(√47) is a four-colouring of the
+  plane (J51V-EQ), so there is nothing to search for short of the conjecture's falsifier.
+- Would have sampled `cl Θ(U)` in floating point to test KS-sat. Instead: derived `ψ_w(u)ψ_w̄(u) = 0`-type identity from `u_w u_w̄ = 1` and
+  checked it exactly on an enumeration fixed in advance (3,920 unit vectors) — at the ban's edge, logged as such.
+- Enumerated the 49 linear forms mod 7 on the `𝔽₇` circle, only to diagnose an unreachable plant (8 forms land in `{2..5}/7`): a complete
+  enumeration of a set the question fixes — at the edge, logged.
+
+### 2.9 Instrument slips (G21), recorded
+
+- Two plants that could not fire: `c9-shift` as first written ((2x + 4y)/7 is one of the 8 forms that work — the circle's symmetry orbit of
+  (2, 3)), and `forget-seven` aimed at ℚ(√11) (already out through its stable dyadic place). Both replaced by plants that fire; both kept in the
+  tools' docstrings.
+- The fence breach of §1.2.

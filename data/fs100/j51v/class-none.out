@@ -1,0 +1,9 @@
+Q(sqrt 47): in class = True   (dyadic split in L; stable odd p < 100: [(11, 'split-in-F'), (19, 'split-in-F'), (23, 'split-in-F'), (31, 'split-in-F'), (43, 'split-in-F'), (47, 'ramified'), (67, 'split-in-F')]; bad stable: [])
+Q(sqrt 143): in class = True   (dyadic split in L; stable odd p < 100: [(11, 'ramified'), (31, 'split-in-F'), (43, 'split-in-F'), (47, 'split-in-F'), (59, 'split-in-F'), (67, 'split-in-F'), (71, 'split-in-F'), (79, 'split-in-F')]; bad stable: [])
+Q(sqrt 311): in class = True   (dyadic split in L; stable odd p < 100: [(11, 'split-in-F'), (19, 'split-in-F'), (23, 'split-in-F'), (31, 'split-in-F'), (43, 'split-in-F'), (59, 'split-in-F'), (71, 'split-in-F')]; bad stable: [])
+Q(sqrt 335): in class = True   (dyadic split in L; stable odd p < 100: [(11, 'split-in-F'), (23, 'split-in-F'), (31, 'split-in-F'), (47, 'split-in-F'), (67, 'ramified'), (79, 'split-in-F'), (83, 'split-in-F')]; bad stable: [])
+Q(sqrt 59): in class = False   (dyadic STABLE; stable odd p < 100: [(11, 'split-in-F'), (23, 'split-in-F'), (31, 'split-in-F'), (43, 'split-in-F'), (47, 'split-in-F'), (59, 'ramified'), (67, 'split-in-F'), (83, 'split-in-F')]; bad stable: [])
+Q(sqrt 11): in class = False   (dyadic STABLE; stable odd p < 100: [(7, 'split-in-F'), (11, 'ramified'), (19, 'split-in-F'), (43, 'split-in-F'), (79, 'split-in-F'), (83, 'split-in-F')]; bad stable: [7])
+Q(sqrt 23): in class = False   (dyadic split in L; stable odd p < 100: [(7, 'split-in-F'), (11, 'split-in-F'), (19, 'split-in-F'), (23, 'ramified'), (43, 'split-in-F'), (67, 'split-in-F'), (79, 'split-in-F'), (83, 'split-in-F')]; bad stable: [7])
+Q(sqrt 31): in class = False   (dyadic split in L; stable odd p < 100: [(3, 'split-in-F'), (11, 'split-in-F'), (23, 'split-in-F'), (31, 'ramified'), (43, 'split-in-F'), (79, 'split-in-F'), (83, 'split-in-F')]; bad stable: [3])
+ALL CHECKS PASS
