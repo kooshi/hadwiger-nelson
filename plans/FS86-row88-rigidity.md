@@ -535,3 +535,42 @@ statements only.
   a derivation first.
 - Would have scanned sample random colourings for C0-type spectra. Instead: T-C's continuity-in-probability route, which kills them by
   derivation if it closes.
+
+## §R-close — the close (WORKFLOW step 9, the mathematics half; crunch job J41, the close planner)
+
+*Written by crunch job J41 (de Bruijn, Opus 5.5) under `data/crunch-2026-09-25/briefs/J41-row88-close-math.md` (template: J23a's brief) and
+`STANDING-RULES.md`, worked item by item from `plans/FS86-row88-close-inventory.md` (rows 1–80; rows 51–80 added by J41). Results are filed in
+`plans/R88-derivation.md`; every draft for `LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md` and `plans/FRONTIER-STUBS.md` is written here and nowhere
+else — a front-page job applies them. Nothing here judges a verdict a record reached; where two records differ, both are filed with
+addresses. **The main question — is `(0, 4)` forced over ℚ(√59), ℚ(√83), ℚ(√131)? — stays undecided.** Working files: `data/fs86r88/j41/`.*
+
+### Stage 1 — SAVED (the quotation check; the inventory walk)
+
+**Quotation check (standing rule 5).** The brief's quoted and summarised statements against their sources:
+
+| # | in the brief | source | result |
+|---|---|---|---|
+| Q1 | T-A "TRUE. Both minds agree. There is one scope repair: `τ` commutes with conjugation." | J28D §Stage 2 (i): "read `Aff_F`'s `τ` as ranging over automorphisms of `F(i)` commuting with complex conjugation"; J28V §4 row V2 | **agrees**; J28V adds a second scope note (outside type (B), read "row 67's `P₄`" as the tight place's own stabilised level), carried at inventory row 66 |
+| Q2 | "T-C (Theorem C, over the whole class S2 in J28D's statement): TRUE, by two derivations blind to each other with independent routes over common inputs." | J28D §3: "TRUE [hand, one mind], at the stated scope and on all of S2"; J28V-4: T-C "over ℚ(√59), ℚ(√83), ℚ(√131)"; J28V V11: "J28D's statement is the wider one, and my route reaches it unchanged"; J28V §Stage 5: "two derivations of T-C, and two of T-C(A), each one mind, blind to each other, with common inputs" | **slightly wider than the records at the class level.** Two blind derivations exist **over type (B)**; over the rest of S2 there is J28D's derivation and J28V's stage-5 reading that its route "reaches it unchanged" (read from J28D's statement, not derived blind). Filed at that scope in `plans/R88-derivation.md` |
+| Q3 | "T-C(A) (over ℚ(√47)): TRUE on the same footing. Note the asymmetry J28V records at a split dyadic place." | J28V §Stage 5: "a split dyadic place in `S` rests on C14.2 (c) at `q = 2`. For that step, J28D's re-reading is not a derivation; mine is." | **agrees**; J28D's class form ("every real field with no stable place of all-levels ratio `≥ 1/4`", §3.3) is one mind |
+| Q4 | "T-B1, T-B2: GAP in both records, at the same named steps. The partial results are proved." | J28V V18 ("the same step"), V19 ("the same step"); partials J28D B2-1–B2-3, T-A1, T-A2; J28V-8, J28V-9, J28V-10 | **agrees** |
+| Q5 | "The common inputs are C14.1–C14.3, `[AmbrusEtAl2023]` …, FS-66's certificates, Lemmas D and P, FS38-D2-A/B, V3ram and VC-C2." | J28V §Stage 5: "C14.1–C14.3 and C14.2 (a)–(c), themselves two derivations; `[AmbrusEtAl2023]`; FS-66's certificates at 11 and 19; Lemmas D and P; FS38-D2-A/B; VC-C2; weak and strong approximation"; J28D §3 adds Lemma R (b) (or J07's Lemma C), Bochner, Doob–Cohn, Lebesgue differentiation | **an omission, not a change**: weak and strong approximation, and J28D's named analysis inputs, are added to the grade lines |
+| Q6 | "J28V-7 is in print: Levitz–Mott 1972 Thm 2.3." | `plans/FS86-row88-PA-close.md` §6.1: "**Verdict — in print.** With `A = ℤ` and `L = F(i)`, Levitz–Mott Thm 2.3 says every subring of a number field … has every non-zero ideal of finite index" | **verbatim in substance**; J35's scope note (every real *number* field; not an `F ⊆ ℝ` of infinite degree) is carried |
+| Q7 | "The engine of T-A (v) is Bergelson–Moragues 2021 Thm 2.3 + Prop 2.7." | J35 §Stage 2: "its engine L-CL … is the combination Bergelson–Moragues 2021 Thm 2.3's construction (≤) + Prop. 2.7 (≥)" | **agrees** |
+| Q8 | "'Transient' is 'the measure centre lies in Pull' (Chen–Dai 2017 L1.2)." | J35 §Stage 2: "'the measure centre of the orbit closure of `c` lies in Pull' (Chen–Dai Lemma 1.2 is its Følner-relative characterisation …)" | **agrees, with J35's qualifier**: Chen–Dai's lemma is the Følner-relative form (`d̄_F`), T-A (v) uses `d*` |
+| Q9 | "C14.2 (c) is `[BardestaniMallahiKarai2017]` §3.2 in window form." | J35 §Stage 3: "**is Bardestani–Mallahi-Karai 2017 §3.2** (Thm 3.7, Lemmas 3.8–3.11) in window form" | **verbatim** |
+| Q10 | "J28's report promised 45 lines and held 41" | `data/crunch-2026-09-25/reports/J28.md`: "INVENTORY: 45 lines follow", then 7 + 34 lines | **confirmed: 41.** Which four were dropped cannot be read from the report; rows 51–55 add the plan and report items that had no row |
+
+**The inventory walk.** Rows 1–50 were the clerk's (J28's 41 lines, J28D's 8, one owner ruling); **J28V's 11 lines and J35's 6 had not been logged,
+nor any HELD line** — J41 added them as rows 56–80, and rows 51–55 for items of the plan and J28's report with no row. Dispositions
+(`data/fs86r88/j41/tick.py`, `stage1.json`; the tool's plant — a status for a row that does not exist — fires, exit 1, nothing written):
+
+| disposition | rows | count |
+|---|---|---|
+| done now, no drafting (fixed or answered by a job; nothing owed) | 65, 67, 76, 77 | 4 |
+| resolved by J28V's stage 5, applied in stage 2 | 50, 68 | 2 |
+| → stage 2, the derivation file | 1, 42–44, 56–62, 66, 71, 72 | 14 |
+| → stage 3, §R-close (re-reads, predictions, tallies, the ban measurement, §PA sweep) | 4–41, 45–47, 49, 51, 54, 55, 63, 64, 73, 79 | 48 |
+| → stage 4, the drafts and stub files | 2, 3, 48, 52, 53, 59 (its FS86-V2 correction), 66 (row draft), 69, 70, 74, 75, 78, 80 | 13 (+2) |
+
+**Would have searched here (stage 1):** none — bookkeeping only.
