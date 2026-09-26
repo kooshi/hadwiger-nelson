@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/spI8nK1esdzsBQVmYWwa0VnVcZs</id>
+  <title>arXiv Query: search_query=&amp;id_list=2208.07347,1801.07802,2101.11120,math/0402165,0804.3586,1606.06078,1908.02611,2002.07497&amp;start=0&amp;max_results=20</title>
+  <updated>2026-09-26T13:13:41Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=20&amp;id_list=2208.07347,1801.07802,2101.11120,math/0402165,0804.3586,1606.06078,1908.02611,2002.07497" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+  <opensearch:totalResults>8</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1606.06078v2</id>
+    <title>Fourier coefficients of $\times p$-invariant measures</title>
+    <updated>2017-09-30T08:58:08Z</updated>
+    <link href="https://arxiv.org/abs/1606.06078v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1606.06078v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider densities $D_Σ(A)$, $\overline{D}_Σ(A)$ and $\underline{D}_Σ(A)$ for a subset $A$ of $\mathbb{N}$ with respect to a sequence $Σ$ of finite subsets of $\mathbb{N}$ and study Fourier coefficients of ergodic, weakly mixing and strongly mixing $\times p$-invariant measures on the unit circle $\mathbb{T}$. Combining these, we prove the following measure rigidity results: on $\mathbb{T}$, the Lebesgue measure is the only non-atomic $\times p$-invariant measure satisfying one of the following: (1) $μ$ is ergodic and there exist a Følner sequence $Σ$ in $\mathbb{N}$ and a nonzero integer $l$ such that $μ$ is $\times (p^j+l)$-invariant for all $j$ in a subset $A$ of $\mathbb{N}$ with $D_Σ(A)=1$; (2) $μ$ is weakly mixing and there exist a Følner sequence $Σ$ in $\mathbb{N}$ and a nonzero integer $l$ such that $μ$ is $\times (p^j+l)$-invariant for all $j$ in a subset $A$ of $\mathbb{N}$ with $\overline{D}_Σ(A)&gt;0$; (3) $μ$ is strongly mixing and there exists a nonzero integer $l$ such that $μ$ is $\times (p^j+l)$-invariant for infinitely many $j$. Moreover, a $\times p$-invariant measure satisfying (2) or (3) is either a Dirac measure or the Lebesgue measure.
+  As an application we prove that for every increasing function $τ$ defined on positive integers with $\lim_{n\to\infty}τ(n)=\infty$, there exists a multiplicative semigroup $S_τ$ of $\mathbb{Z}^+$ containing $p$ such that $|S_τ\cap[1,n]|\leq (\log_p n)^{τ(n)}$ and the Lebesgue measure is the only non-atomic ergodic $\times p$-invariant measure which is $\times q$-invariant for all $q$ in $S_τ$.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-06-20T12:09:49Z</published>
+    <arxiv:comment>Thanks to help of the anonymous referee and Anatole Katok, mistakes are corrected and Theorem 5.3 is improved to a better version. The proof of Theorem 4.1 is simplified. Accepted for publication by Journal of Modern Dynamics</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Huichi Huang</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/0804.3586v2</id>
+    <title>Rigidity of measures invariant under the action of a multiplicative semigroup of polynomial growth on $\T$</title>
+    <updated>2008-09-04T00:38:00Z</updated>
+    <link href="https://arxiv.org/abs/0804.3586v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/0804.3586v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We prove that if a Borel probability measure (μ) on (\T) is invariant under the action of a "large" multiplicative semigroup (lower logarithmic density is positive) and the action of the whole semigroup is ergodic then (μ) is either Lebesgue or has finite support.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2008-04-22T19:21:21Z</published>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Manfred Einsiedler</name>
+      <arxiv:affiliation>The Ohio State University</arxiv:affiliation>
+    </author>
+    <author>
+      <name>Alexander Fish</name>
+      <arxiv:affiliation>The Ohio State University</arxiv:affiliation>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2101.11120v1</id>
+    <title>Rigidity properties for commuting automorphisms on tori and solenoids</title>
+    <updated>2021-01-26T22:29:10Z</updated>
+    <link href="https://arxiv.org/abs/2101.11120v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2101.11120v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Assuming positive entropy we prove a measure rigidity theorem for higher rank actions on tori and solenoids by commuting automorphisms. We also apply this result to obtain a complete classification of disjointness and measurable factors for these actions.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-01-26T22:29:10Z</published>
+    <arxiv:comment>In memory of Anatole Katok, 43 pages</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Manfred Einsiedler</name>
+    </author>
+    <author>
+      <name>Elon Lindenstrauss</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/math/0402165v1</id>
+    <title>Rigidity of multiparameter actions</title>
+    <updated>2004-02-10T22:49:12Z</updated>
+    <link href="https://arxiv.org/abs/math/0402165v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/math/0402165v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>  We survey some recent developments and applications of the study of the rigidity properties of natural algebraic actions of multidimensional abelian groups.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2004-02-10T22:49:12Z</published>
+    <arxiv:comment>26 pages, 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Elon Lindenstrauss</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2002.07497v1</id>
+    <title>Characters of algebraic groups over number fields</title>
+    <updated>2020-02-18T11:30:51Z</updated>
+    <link href="https://arxiv.org/abs/2002.07497v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2002.07497v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Let $k$ be a number field, $\mathbf{G}$ an algebraic group defined over $k$, and $\mathbf{G}(k)$ the group of $k$-rational points in $\mathbf{G}.$ We determine the set of functions on $\mathbf{G}(k)$ which are of positive type and conjugation invariant, under the assumption that $\mathbf{G}(k)$ is generated by its unipotent elements. An essential step in the proof is the classification of the $\mathbf{G}(k)$-invariant ergodic probability measures on an adelic solenoid naturally associated to $\mathbf{G}(k);$ this last result is deduced from Ratner's measure rigidity theorem for homogeneous spaces of $S$-adic Lie groups.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.RT" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-02-18T11:30:51Z</published>
+    <arxiv:comment>49 pages</arxiv:comment>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Bachir Bekka</name>
+    </author>
+    <author>
+      <name>Camille Francini</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1908.02611v2</id>
+    <title>Strongly Independent Matrices and Rigidity of $\times A$-Invariant Measures on $n$-Torus</title>
+    <updated>2021-02-18T14:07:25Z</updated>
+    <link href="https://arxiv.org/abs/1908.02611v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1908.02611v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We introduce the concept of strongly independent matrices over any field, and prove the existence of such matrices for certain fields and the non-existence for algebraically closed fields. Then we apply strongly independent matrices over rational numbers to obtain a measure rigidity result for endomorphisms on $n$-torus.</summary>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2019-08-06T05:21:32Z</published>
+    <arxiv:comment>The paper is rewritten. New theorems are added. 15 pages. Comments welcome</arxiv:comment>
+    <arxiv:primary_category term="math.DS"/>
+    <author>
+      <name>Huichi Huang</name>
+    </author>
+    <author>
+      <name>Hanfeng Li</name>
+    </author>
+    <author>
+      <name>Enhui Shi</name>
+    </author>
+    <author>
+      <name>Hui Xu</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2208.07347v1</id>
+    <title>Charmenability and Stiffness of Arithmetic Groups</title>
+    <updated>2022-08-15T17:28:21Z</updated>
+    <link href="https://arxiv.org/abs/2208.07347v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.07347v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We characterize charmenability among arithmetic groups and deduce dichotomy statements pertaining normal subgroups, characters, dynamics, representations and associated operator algebras. We do this by studying the stationary dynamics on the space of characters of the amenable radical, and in particular we establish stiffness: any stationary probability measure is invariant. This generalizes a classical result of Furstenberg for dynamics on the torus. Under a higher rank assumption, we show that any action on the space of characters of a finitely generated virtually nilpotent group is stiff.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-15T17:28:21Z</published>
+    <arxiv:comment>37 pages. 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Uri Bader</name>
+    </author>
+    <author>
+      <name>Itamar Vigdorovich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1801.07802v1</id>
+    <title>Phase transitions on C*-algebras arising from number fields and the generalized Furstenberg conjecture</title>
+    <updated>2018-01-23T22:56:03Z</updated>
+    <link href="https://arxiv.org/abs/1801.07802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.07802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent work, Cuntz, Deninger and Laca have studied the Toeplitz type C*-algebra associated to the affine monoid of algebraic integers in a number field, under a time evolution determined by the absolute norm. The KMS equilibrium states of their system are parametrized by traces on the C*-algebras of the semidirect products $J \rtimes O^*$ resulting from the multiplicative action of the units $O^*$ on integral ideals $J$ representing each ideal class. At each fixed inverse temperature $β&gt; 2$, the extremal equilibrium states correspond to extremal traces of $C^*(J\rtimes O^*)$. Here we undertake the study of these traces using the transposed action of $O^*$ on the duals $\hat J$ of the ideals and the recent characterization of traces on transformation group C*-algebras due to Neshveyev. We show that the extremal traces of $C^*(J\rtimes O^*)$ are parametrized by pairs consisting of an ergodic invariant measure for the action of $O^*$ on $\hat{J}$ together with a character of the isotropy subgroup associated to the support of this measure. For every ideal the dual group $\hat {J}$ is a d-torus on which $O^*$ acts by linear toral automorphisms. Hence, the problem of classifying all extremal traces is a generalized version of Furstenberg's celebrated $\times 2$ $\times 3$ conjecture. We classify the results for various number fields in terms of ideal class group, degree, and unit rank, and we point along the way the trivial, the intractable, and the conjecturally classifiable cases. At the topological level, it is possible to characterize the number fields for which infinite $O^*$-invariant sets are dense in $\hat{J} $, thanks to a theorem of Berend; as an application we give a description of the primitive ideal space of $C^*(J\rtimes O^*)$ for those number fields.</summary>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-23T22:56:03Z</published>
+    <arxiv:comment>17 pages</arxiv:comment>
+    <arxiv:primary_category term="math.OA"/>
+    <author>
+      <name>Marcelo Laca</name>
+    </author>
+    <author>
+      <name>Jacqueline M. Warren</name>
+    </author>
+  </entry>
+</feed>
