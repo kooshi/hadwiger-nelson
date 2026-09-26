@@ -89,4 +89,77 @@ The claims:
 
 ### 1.3 Would-have-searched-here log (running)
 
-- (none yet)
+- Stage 2: "sweep the family for a member where some stable place's ratio reaches 1/4" — instead: the ratio table's maximum is a
+  finite list fixed by derivation (11, 19 by FS-66; 23, 31 by Hoffman; `p ≥ 37` by Weil; ramified by Lemma P / V3ram), read, not searched.
+  The exact tool `tools/x21d_family.py` enumerates squarefree `d ≤ 3000` only to check congruences a derivation fixed (standing rule 3's edge
+  case: a complete enumeration of a finite set whose extent the derivation fixed; logged as such).
+
+## Stage 2 — SAVED (Q-0, A-1, A-2, A-4), 06:33
+
+**Verdicts.** Q-0 **TRUE** [hand + tools exact]. A-1 **TRUE** as a composition, at the grades of its inputs (the weakest: R88-TCA's class form,
+one mind outside ℚ(√47); K0, re-derived at stage 3). A-2 **TRUE** (A-1 plus the residue upper bound at 11 or 19). A-4 **TRUE**, with one
+qualification on the word "independently" (§2.4).
+
+### 2.1 Q-0 — TRUE
+
+Let `d ≡ 7 (mod 8)` (the squarefree part of `d` has the same residue mod 8, since an odd square is `≡ 1 (mod 8)`), `F = ℚ(√d)`, `L = F(i)`.
+Then `d ≡ 3 (mod 4)`, so 2 ramifies in `F`: one dyadic place `𝔭`, `F_𝔭 = ℚ₂(√d)`. Since `−d ≡ 1 (mod 8)`, `−d` is a square in `ℚ₂`, so
+`√d = √−1·√−d ∈ ℚ₂(i)` and `F_𝔭 = ℚ₂(√d) = ℚ₂(i)`. Hence `i ∈ F_𝔭`, `L ⊗_F F_𝔭 = F_𝔭 × F_𝔭`: **`𝔭` splits in `L/F`, so it is not stable**
+(stable = does not split in `L/F`, the definition FS100-T1's proof uses). There is no other dyadic place. Row 100's exception is "possibly at
+a ramified stable dyadic place" (J48's form: "a stable dyadic place ... ramified in `L/F` with `R̄₂` proper"), so with no stable dyadic place
+the field is outside it and Lemma C′ gives `R_F = O′`, which is FS100-MR's hypothesis. ∎ The hypothesis is not idle: for odd `d ≢ 7 (mod 8)`,
+`−d` is not a 2-adic square (the tool's converse check), and then the dyadic place is stable (ramified in `L/F` when `d ≡ 1, 3, 5 (mod 8)`
+are read case by case; not needed here). *Check:* `tools/x21d_family.py` (a) — brute-force solvability of `x² ≡ −d (mod 2^k)`, `k ≤ 12`, both
+directions, every odd squarefree `d ≤ 3000`; plant `--plant-dyadic` (the test `d ≡ 3 (mod 8)`) fires at `d = 3`
+(`data/fs100/x21d/family.out`, `familyplant-dyadic.out`).
+
+### 2.2 A-1 — TRUE (a composition; inputs and grades)
+
+For squarefree `d > 1`, `d ≡ 47, 143, 167 (mod 168)`, `F = ℚ(√d)`. The chain, each link with its source and grade:
+
+| # | link | source | grade |
+|---|---|---|---|
+| 1 | `d ≡ 7 (mod 8)` (all three classes: `47 = 5·8+7`, `143 = 17·8+7`, `167 = 20·8+7`), so no stable dyadic place and `R = O′` | Q-0 (§2.1); row 100 Lemma C′ | [hand + tools exact]; Lemma C′ three derivations |
+| 2 | MR(F) | §7 ¶1 (FS100-MR: "for every real number field `F` with `R = O′`") | given (the brief's "given MR") |
+| 3 | `F` is in T-C(A)'s class: every stable place of `L` has all-levels four-colour ratio `< 1/4` | FS100-T1 (⟸ direction): 3, 7 inert (`d ≡ 2 (mod 3)`, `d mod 7 ∈ {3,5,6}`), dyadic split; the remaining stable places are `p ≡ 3 (mod 4)`, `p ≥ 11`, split or ramified in `F` (`p` inert in `F` gives `𝔽_{p²} ∋ √−1`, split in `L/F`; `p ≡ 1 (mod 4)` splits) | [hand + tools exact, one mind + two checks]; re-checked here by `x21d_family.py` (b) |
+| 4 | T-C(A) at `S = ∅` over `F` | R88-TCA's class form (J28D) | [hand, **one mind** outside ℚ(√47)] |
+| 5 | SP-Cor over `F`: `X₄(F) ≠ ∅` ⟹ a finite positive `U`-invariant `E`-null non-Haar `τ` | K0 / J45 SP-Cor + A⁺ (my stage-3 re-derivation, A-3) | [hand; K0 one mind + one-step check; A-3 below] |
+| 6 | 2 + 5 ⟹ `X₄(F) = ∅`, i.e. `χ(F²) ≥ 5` | composition | — |
+
+**Uniformity over the family, checked link by link.** (i) Link 1 is a congruence. (ii) Link 3's thresholds are a finite table independent of
+`d`: at a stable 11 or 19 (split or, when `11 | d`, `19 | d`, ramified) FS-66's certificates at every level with Lemma P (ii) at ramified levels;
+23 and 31 by Hoffman (31's `1/4 − 2.745·10⁻⁶` the maximum; R88-J28V-3); `p ≥ 37` by Weil (`36p < (p+1)²`); new levels Lemma P; ramified `p | d`
+by V3ram/Lemma P; real places `m₁ ≤ 0.2470` (two real places merge — the diagonal copy of `UD(ℝ²)` sits in the product). The count R88-TCA runs
+needs `max < 1/4` over the factors; the maximum over the whole family is the same finite list, so it is uniform in `d`. (iii) 3 and 7 never
+divide `d` in the family (`d ≢ 0 (mod 3)`, `d ≢ 0 (mod 7)`), so no ramified 3- or 7-place can appear. (iv) Link 5 uses nothing about ℚ(√47)
+(A-3). **Where it could still fail:** link 4 is one mind outside ℚ(√47), and the family is exactly its scope; a defect in J28D's class form
+is the one step no second mind has walked (J48's "a second route" for ℚ(√167) cites the same class form).
+
+### 2.3 A-2 — TRUE
+
+Given A-1's `χ(F²) ≥ 5`: if `L(F) = 5`, some residue target of a stable place is five-colourable; in this family the dyadic place is split and
+every target from a stable `q ≥ 23` has `χ ≥ 6` or is `q = 31` (floor 5, undecided), so `L = 5` means a usable plane at 11 or 19 (`χ(Γ₁₁) =
+χ(Γ₁₉) = 5`) or, conditionally, `χ(Γ₃₁) = 5`. In every case the target `Γ_q` is a usable plane of residue field `𝔽_q`, `q ≡ 3 (mod 4)`, and
+row 52's reduction gives `χ(F²) ≤ χ(Γ_q) = 5` — a split or ramified place both give a valuation subring with residue field `𝔽_q` in which
+`−1` is a non-square, so every unit vector is integral and reduction is a homomorphism on each coset (G63's one lemma). Field level: row 57's
+gap is a *kernel* gap; at hand grade this is `[Moorhouse2010]`/`[Madore2015]`'s bound (FS100-Q47 cites it the same way). So `χ(F²) = 5`.
+**The four fields:** `47, 143 = 11·13, 311, 335 = 5·67` are squarefree and in the family (`311 ≡ 143`, `335 ≡ 167 (mod 168)`); 11 is stable at
+each — split at 47, 311, 335 (`(47/11) = (3/11) = 1`, `(311/11) = (3/11) = 1`, `(335/11) = (5/11) = 1`) and ramified at 143 — so `L = 5` there
+(`L ≥ 5` by the class, `≤ 5` by 11). *Check:* `x21d_family.py` (c); plant `--plant-legendre` (flip `(·/11)`) fires. **Family census** (`d ≤ 3000`,
+`data/fs100/x21d/family.out`): 52 fields, 44 with 11 or 19 stable (`L = 5`, hence `χ = 5` given MR); the other 8, ℚ(√167) first, have `L ≥ 6`
+unless `χ(Γ₃₁) = 5`.
+
+### 2.4 A-4 — TRUE (one qualification)
+
+J48-N4cor's two lines at `F = ℚ(√167)`: T-J39-3 at `k = 4` with `N₄(F) = ∅` (J48-N4: 23's `λ* = 0.331695… < 1/3`, rigorous interval
+arithmetic; 43, 59, … a fortiori; 167 ramified by J21-TH; higher levels `≤ 2/(p+1) ≤ 1/12`) makes `Y_{F,4} = UD(ℝ²)` (the two real places
+merged by the diagonal homomorphism). Given MR(F) (in scope: `167 ≡ 7 (mod 8)`, Q-0), branch (B) is excluded, so a four-colouring of `F²`
+gives a CP four-colouring of `UD(ℝ²)`; restricted to de Grey's 1581 points it is a.s. proper on the finitely many edges at once, against
+rung B's kernel theorem. So `χ(F²) ≥ 5`. Inputs: MR [given]; T-J39-3 (BC-1 TRUE, J48, with Lemmas C, C′ — C′ in scope by Q-0); J48-N4
+[tools, rigorous]; rung B [kernel]. **"Independently of row 117 and K0": TRUE of the statements** — the route uses neither FS100-T1's class
+computation nor T-C(A) (R88-TCA) nor SP-Cor/A⁺ — **but not of every lemma:** T-J39-3's skeleton ("the Følner step (P4); SI at `k` colours;
+R-U; MR, or its failure, SP", J39 §4.7) shares J45's R-U, the SP-only-if step and the SI identity family with K0's route. So it is a second
+route over partly common inputs; a defect in R-U or SP would take both routes down (J48 §3 already called its confirmation "route-dependent").
+Its gain: it removes the one-mind link 4 of §2.2 (R88-TCA's class form) from ℚ(√167)'s `≥ 5`, replacing it with the 23 margin (`1.6·10⁻³`).
+**Does it reach the rest of the family?** Only where `N₄(F) = ∅`; at every `L = 5` member 11 or 19 is stable and not 4-thick
+(normalised `|λ|` there exceeds 1/3; e.g. Weil-scale `2√11/12 ≈ 0.55`), so J48-N4cor does not cover A-2's fields — A-1 there rests on link 4.
