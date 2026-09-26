@@ -238,3 +238,7 @@ reads the same before and after the blocks (PASS, 784 § B rows), since a block 
 - `BIBLIOGRAPHY.md` / the library (C2): Lindenstrauss 2004 (arXiv math/0402165) has no PDF in `~/source/library`; its text and
   `[AmbrusEtAl2023]`'s arXiv source and supplementary notebook are at `~/source/lean-dir-rescue/consolidation-2026-09-26/papers/` (1.2).
 - Nothing else: every ledger row 116–127 names its records, and each stub the rows feed now points back (the table above).
+
+## Stage 4 — SAVED (the report)
+
+The report is `data/consolidation-2026-09-26/reports/C1.md`. Would-have-searched-here log for the whole job: empty.
