@@ -219,3 +219,11 @@ What I can prove: **(B1-a)** `F(R) ≠ 0` ⟹ T-B1 (then `X₄ = Pull` is finite
 unique continuation only from an additive half-space (its descent on `inf h` uses the unit vectors with `h(u) < 0` arbitrarily small, which a
 finite `B` does not supply); the local plane's rigidity (row 90) comes through local forcers built on `√3`, absent from `F`; and by
 compactness isolation of `p` is not implied by `⋂_B {c : c|_B = p|_B} = {p}`, which holds trivially. No route found.
+
+## Stage 3 — SAVED (the lemma-statement phase: not available)
+
+T-B1 and T-B2 stalled at GAP, so stage 3 applied. At 2026-09-25, after stage 2's commit, `plans/FS86-R88-D-derivation.md` was checked
+**by its headings only**: it held "Theorems this phase proved", Stage 1 (quotation check, C0, log) and Stage 2 (T-A) — **no section
+"Lemma statements for J28V"**. So there were no statements to re-derive, and nothing was re-derived here. The GAP verdicts on T-B1 and
+T-B2 stand as the blind phase left them. If J28D later posts lemma statements for T-B1 or T-B2, this stage can be re-opened on the owner's
+word (the statements only).
