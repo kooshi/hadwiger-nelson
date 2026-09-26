@@ -253,7 +253,7 @@ MR's grade, TRUE. "Transience is outside the reach of the invariant-measure tool
 the rotation-invariant half of Q-μ also moves (X22D-QR), which turns every counterexample into a rigid-motion-transient colouring
 (X22D-TRM), and leaves Q-μ as TR-ROT, a transience statement about measures.
 
-### 3.3 C-4 — GAP (capped at 20 minutes; 06:50–07:05)
+### 3.3 C-4 — GAP (capped at 20 minutes; spent about 5, 11:45–11:50 UTC — a correction of the saved heading, which gave a planned window)
 
 C-4: "Over ℚ(√59), no four-colouring of the plane is transient."
 
@@ -281,4 +281,81 @@ measure, and no measure argument … can reach it") for the three new measure to
 - C-4: I would have built finite patches of three-phase pullback patchworks along split-place regions and checked properness by machine, to
   see whether a transient colouring's window statistics can be realised. Not done (a search for a counterexample shape); the step is named
   instead.
+
+## Stage 4 — SAVED (SEL-k, and X03D's FL-K as a second mind)
+
+### 4.1 X03D-FL-K — TRUE, and wider than stated [hand, second mind]
+
+Re-derived in §2.2 route (b) step 2 from its inputs, not from X03D's proof text: with `h = P_E g = E[g | 𝒜_E]`,
+`ν̂(u) = −(4/3)P(c¹(0) = c²(u))` and `ν(R̂) = 1 − E|h(0)|² = (4/3)(1 − P(c¹(0) = c²(0)))` (`|h|² = (4/3)Σ_j p_j² − 1/3`). **Agrees with
+X03D.** Two sharpenings, both from X22D-EF: (i) the identity needs no rotation-invariance if the joining is taken over `𝒜_E` (the factor of
+§2.2 step 1); rotation-invariance with R-U only identifies `𝒜_E` with `𝒜_∅`, as X03D uses. (ii) at `k` colours (simplex embedding,
+`⟨e_j, e_l⟩ = (k/(k−1))δ_{jl} − 1/(k−1)`): `ν̂(u) = −(k/(k−1))P(c¹(0) = c²(u))`, `ν(R̂) = (k/(k−1))P(c¹(0) ≠ c²(0))`, the same ratio. The
+one input X03D did not write out, that the `E`-part is the `L²` of a factor so that the joining exists, is X22D-EF.
+
+### 4.2 SEL-k — TRUE [hand, one mind], wider in scope than stated
+
+SEL-k: "For every real number field `F` outside row 100's exception and every `k ≥ 2`, given MR: `F²` is `k`-colourable iff it has a
+translation- and rotation-invariant random `k`-colouring whose spectral measure is carried by `E`."
+
+*Proof.*
+- **⟸** A random proper `k`-colouring of `Cay(R, U)` has a proper sample; the unit-distance graph of `F² ≅ L` is the disjoint union of the
+  cosets `x + R` (every unit vector lies in `R`), each coloured by a translate of the sample. No MR used.
+- **⟹** A `k`-colouring of `F²` restricts to `Cay(R, U)`; its `R ⋊ U`-orbit closure in the compact `X_k(F)` carries an `R ⋊ U`-invariant `μ`
+  (`R ⋊ U` is amenable). Run §2.2 route (b) steps 1–4 at `k` colours: X22D-EF gives `𝒜_E`; FL-K at `k` (4.1 (ii)); `σ_μ` and `E` are
+  `U`-invariant, so MR gives `σ|_{R̂∖E} = a·m`, `m̂(u) = 0` on `U`, so `P(c¹(0) = c²(u)) = 0` and the supports are disjoint on every edge
+  (J45-SI-3's equality case); `c′ = min S` is a proper `k`-colouring, `𝒜_E`-measurable, with `R ⋊ U`-invariant law (J45-SI-4), so its
+  spectral measure is carried by `E`. ∎
+
+**Scope.** No step uses `R = O′` (Lemma C′) or any ring structure beyond `R = ℤ[U]` and the topology `τ_S`: **given MR(F), SEL-k holds over
+every real number field**, row 100's exception included. The exception limits where MR is proved (X09C's audit), not SEL-k. **Sharper
+conclusion:** the selected colouring's spectral measure is `U`-invariant, so by R-U ("every finite `U`-invariant measure on `R̂` gives
+`E ∖ (T + A)` measure 0; every real number field") it is carried by **`T + A`**, and by the extension lemma (R88-TC-ext; its proof, Bochner and
+Doob, does not use the colour count — I did not re-check that line by line) it extends to a stationary, continuous-in-probability,
+a.e.-proper `k`-colouring of `Cay(G_∅, T_∅)`, `G_∅` the completion at the archimedean and stable places.
+
+**The named risk, discharged.** FL-K was the risk ("one mind"); it is now two minds (4.1), and the factor it needs is X22D-EF. The
+load-bearing input of SEL-k is **MR itself**, used once, at "`ν = a·m` ⟹ `ν̂ = 0` on `U`".
+
+**Cross-checks against held results** (none contradicts SEL-k):
+- *ℚ(√47), `k = 4`:* SEL-4 with R-U gives an invariant four-colouring with spectrum on `T + A = E_∅`, which T-C(A) at `S = ∅` forbids: so
+  MR ⟹ `χ(ℚ(√47)²) ≥ 5`, **a second route to J45's SP-Cor**, by selection instead of A⁺'s strict inequality.
+- *Type (B), `k = 4`:* SEL-4 with Theorem C and gap-freeness is X22D-QR (route (b)).
+- *Row 116* (Kronecker selection onto `T + A` false over ℚ): its counterexample is a single window colouring whose spectrum lies in `E`
+  (split-place characters) but whose `E`-factor has no `T + A` selection; SEL-k selects from the `R ⋊ U`-average, not from the given
+  colouring, and needs MR for cross-properness. Over ℚ SEL-4's conclusion is met trivially (the dyadic residue two-colouring, torsion).
+  No conflict.
+- *ℚ(√167), `k = 5`:* SEL-5 + R-U + TC-ext gives: given MR, `χ(ℚ(√167)²) ≤ 5` iff `Cay(G_∅, T_∅)` has a stationary a.e.-proper five-colouring
+  with `R ⋊ U`-invariant law. Removing the 5-thick places (J39's step) gives `Y = UD(ℝ²) × G₂₃ × G₄₃` (T-J39-1) — **SEL-5 re-derives T-J39-3's
+  "given MR" iff by a different route (selection, not J39's).** So "six at ℚ(√167)" becomes row 110's window question at `{∞, 23, 43}` (and
+  the plane's measurable five-colour question inside it) — **a reduction, never a bound**; it proves nothing about six.
+
+### 4.3 Proposed edits (for the front-page and close lanes; I edit none of these files)
+
+- **Stub `plans/STUB-measure-rigidity-three-fields.md` §2.3, J38 block:** add after T-J38-2: "*X22D (2026-09-26):* T-J38-2 uses T-B1 only in
+  step 3a (manufacturing an `R ⋊ U`-invariant measure off Pull from a colouring). Given MR, every `R ⋊ U`-invariant random four-colouring is a
+  pullback (X22D-QR), every counterexample is rigid-motion-transient (X22D-TRM), and Q-μ for translation-invariant measures is equivalent to
+  TR-ROT (X22D-RT) — so C-1 as stated is GAP at TR-ROT." Also the poster's table (J38 §3.1): a row "P11 (given MR): rigid-motion-transient".
+- **`LEDGER.md` row 111 or a new row** (front-page lane's call): "Given MR, the rotation-invariant half of Q-μ holds at type (B) (X22D-QR); what
+  remains of Q-μ is TR-ROT, a rotational transience of translation-invariant measures (X22D-RT); every counterexample to row 88 is
+  rigid-motion-transient (X22D-TRM). [hand, one mind; X22V blind]."
+- **SEL-k's scope line:** "over every real number field given MR(F)"; its conclusion "carried by `T + A`" (R-U).
+- **`R88-derivation.md` §G, T-C′'s last sentence** ("even a full classification of `U`-invariant measures would leave Q-μ open without
+  T-B1-type isolation"): confirmed and sharpened to TR-ROT.
+
+### 4.4 Would have searched here (Stage 4)
+
+- None. SEL-k is a derivation; its cross-checks are held results.
+
+### Verdicts, per claim
+
+| claim | verdict | where |
+|---|---|---|
+| C-0 | **TRUE** [hand + tools exact] | §1.4 |
+| C-1 | **GAP at TR-ROT** as stated; **TRUE** for `R ⋊ U`-invariant measures (X22D-QR) | §2 |
+| C-2 | ⟹ TRUE; ⟸ **GAP at TR-ROT**; TRUE with rigid-motion transience (X22D-TRM) | §3.1 |
+| C-3 | **GAP at TR-ROT** (T-B1 ⟺ row 88 and row 88 ⟹ Q-tr TRUE) | §3.2 |
+| C-4 | **GAP at C4-S** (a transient colouring supplies no measure off Pull for Lemma Z, EF's pigeonhole or Lemma 3.1′) | §3.3 |
+| SEL-k | **TRUE**, over every real number field given MR; conclusion sharpens to `T + A` | §4.2 |
+| X03D-FL-K | **TRUE** (second mind); holds for translation-invariant `μ` over `𝒜_E`, and at every `k` | §4.1 |
 
