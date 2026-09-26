@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/cULGvf6K1PIhf3eq+/uYIxhY4Lg</id>
+  <title>arXiv Query: search_query=abs:characters AND abs:Furstenberg AND abs:invariant AND abs:measures&amp;id_list=&amp;start=0&amp;max_results=30</title>
+  <updated>2026-09-26T11:39:34Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=abs:characters+AND+(abs:Furstenberg+AND+(abs:invariant+AND+abs:measures))&amp;start=0&amp;max_results=30&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>30</opensearch:itemsPerPage>
+  <opensearch:totalResults>3</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2208.07347v1</id>
+    <title>Charmenability and Stiffness of Arithmetic Groups</title>
+    <updated>2022-08-15T17:28:21Z</updated>
+    <link href="https://arxiv.org/abs/2208.07347v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2208.07347v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We characterize charmenability among arithmetic groups and deduce dichotomy statements pertaining normal subgroups, characters, dynamics, representations and associated operator algebras. We do this by studying the stationary dynamics on the space of characters of the amenable radical, and in particular we establish stiffness: any stationary probability measure is invariant. This generalizes a classical result of Furstenberg for dynamics on the torus. Under a higher rank assumption, we show that any action on the space of characters of a finitely generated virtually nilpotent group is stiff.</summary>
+    <category term="math.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-08-15T17:28:21Z</published>
+    <arxiv:comment>37 pages. 1 figure</arxiv:comment>
+    <arxiv:primary_category term="math.GR"/>
+    <author>
+      <name>Uri Bader</name>
+    </author>
+    <author>
+      <name>Itamar Vigdorovich</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2304.03121v4</id>
+    <title>Furstenberg systems of pretentious and MRT multiplicative functions</title>
+    <updated>2024-12-11T11:46:46Z</updated>
+    <link href="https://arxiv.org/abs/2304.03121v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2304.03121v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove structural results for measure preserving systems, called Furstenberg systems, naturally associated with bounded multiplicative functions. We show that for all pretentious multiplicative functions these systems always have rational discrete spectrum and, as a consequence, zero entropy. We obtain several other refined structural and spectral results, one consequence of which is that the Archimedean characters are the only pretentious multiplicative functions that have Furstenberg systems with trivial rational spectrum, another is that a pretentious multiplicative function has ergodic Furstenberg systems if and only if it pretends to be a Dirichlet character, and a last one is that for any fixed pretentious multiplicative function all its Furstenberg systems are isomorphic. We also study structural properties of Furstenberg systems of a class of multiplicative functions, introduced by Matomäki, Radziwill, and Tao, which lie in the intermediate zone between pretentiousness and strong aperiodicity. In a work of the last two authors and Gomilko, several examples of this class with exotic ergodic behavior were identified, and here we complement this study and discover some new unexpected phenomena. Lastly, we prove that Furstenberg systems of general bounded multiplicative functions have divisible spectrum. When these systems are obtained using logarithmic averages, we show that trivial rational spectrum implies a strong dilation invariance property, called strong stationarity, but, quite surprisingly, this property fails when the systems are obtained using Cesàro averages.</summary>
+    <category term="math.NT" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-04-06T14:50:44Z</published>
+    <arxiv:comment>66 pages. Referee's comments incorporated. To appear in ETDS</arxiv:comment>
+    <arxiv:primary_category term="math.NT"/>
+    <arxiv:journal_ref>Ergod. Th. Dynam. Sys. 45 (2025) 2765-2844</arxiv:journal_ref>
+    <author>
+      <name>Nikos Frantzikinakis</name>
+    </author>
+    <author>
+      <name>Mariusz Lemańczyk</name>
+    </author>
+    <author>
+      <name>Thierry de la Rue</name>
+    </author>
+    <arxiv:doi>10.1017/etds.2024.140</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1017/etds.2024.140" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1801.07802v1</id>
+    <title>Phase transitions on C*-algebras arising from number fields and the generalized Furstenberg conjecture</title>
+    <updated>2018-01-23T22:56:03Z</updated>
+    <link href="https://arxiv.org/abs/1801.07802v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1801.07802v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent work, Cuntz, Deninger and Laca have studied the Toeplitz type C*-algebra associated to the affine monoid of algebraic integers in a number field, under a time evolution determined by the absolute norm. The KMS equilibrium states of their system are parametrized by traces on the C*-algebras of the semidirect products $J \rtimes O^*$ resulting from the multiplicative action of the units $O^*$ on integral ideals $J$ representing each ideal class. At each fixed inverse temperature $β&gt; 2$, the extremal equilibrium states correspond to extremal traces of $C^*(J\rtimes O^*)$. Here we undertake the study of these traces using the transposed action of $O^*$ on the duals $\hat J$ of the ideals and the recent characterization of traces on transformation group C*-algebras due to Neshveyev. We show that the extremal traces of $C^*(J\rtimes O^*)$ are parametrized by pairs consisting of an ergodic invariant measure for the action of $O^*$ on $\hat{J}$ together with a character of the isotropy subgroup associated to the support of this measure. For every ideal the dual group $\hat {J}$ is a d-torus on which $O^*$ acts by linear toral automorphisms. Hence, the problem of classifying all extremal traces is a generalized version of Furstenberg's celebrated $\times 2$ $\times 3$ conjecture. We classify the results for various number fields in terms of ideal class group, degree, and unit rank, and we point along the way the trivial, the intractable, and the conjecturally classifiable cases. At the topological level, it is possible to characterize the number fields for which infinite $O^*$-invariant sets are dense in $\hat{J} $, thanks to a theorem of Berend; as an application we give a description of the primitive ideal space of $C^*(J\rtimes O^*)$ for those number fields.</summary>
+    <category term="math.OA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-01-23T22:56:03Z</published>
+    <arxiv:comment>17 pages</arxiv:comment>
+    <arxiv:primary_category term="math.OA"/>
+    <author>
+      <name>Marcelo Laca</name>
+    </author>
+    <author>
+      <name>Jacqueline M. Warren</name>
+    </author>
+  </entry>
+</feed>

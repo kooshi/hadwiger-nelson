@@ -1,0 +1,13 @@
+## q4_2: 'ab:"positive definite" & ab:"number field" & ab:"invariant"'  total=12 fetched=12
+1133.17017 | 2004 | Miyamoto, Masahiko | A new construction of the moonshine vertex operator algebra over the real number field |  | summary 
+1393.11044 | 2016 | Drinfeld, Vladimir; Wang, Jonathan | On a strange invariant bilinear form on the space of automorphic forms |  | review 
+0668.10033 | 1988 | Terras, Audrey | Harmonic analysis on symmetric spaces and applications. II |  | review 
+0392.10021 | 1978 | Brumer, Armand | Remarks on pairs of quadratic forms |  | review 
+0348.10017 | 1977 | Eichler, Martin | On theta functions of real algebraic number fields |  |  
+1112.11024 | 2006 | Matsumoto, Keiji | Algebraic relations among some theta functions on the bounded symmetric domain of type \(I_{r,r}\) |  | review 
+0118.11405 | 1960 | Tamagawa, T. | On Selberg's trace formula |  |  
+1085.11033 | 2005 | Bavard, Christophe | Voronoï's geometric theory. Finiteness properties for families of lattices and similar objects |  | review 
+0936.11034 | 1998 | Murase, Atsushi; Sugano, Takashi | On standard \(L\)-functions attached to automorphic forms on definite orthogonal groups |  | review 
+0182.10601 | 1967 | Nakai, Mitsuru; Sario, Leo | Classification and deformation of Riemannian spaces |  |  
+1302.11045 | 2014 | Watanabe, Takao | Ryshkov domains of reductive algebraic groups |  | review 
+0559.10027 | 1983 | Tong, Y. L.; Wang, S. P. | Correspondence of Hermitian modular forms to cycles associated to \(\mathrm{SU}(p,2)\) |  | review 

@@ -1,0 +1,7 @@
+## q4_3: 'ab:"radial" & ab:"positive definite" & ab:"rational"'  total=6 fetched=6
+1479.57031 | 2021 | Garoufalidis, Stavros; Zagier, Don | Asymptotics of Nahm sums at roots of unity |  | review 
+0827.00050 | 1995 |  | Mathematical methods for curves and surfaces. Papers from an international conference held June 16-21, 1994 in Ulvik, No |  | review 
+1489.65027 | 2021 | Farazandeh, Elham; Mirzaei, Davoud | A rational RBF interpolation with conditionally positive definite kernels |  | review 
+1056.65002 | 2004 |  | ICNAAM 2004. International conference on numerical analysis and applied mathematics 2004, Chalkis, Greece, September 10- |  | review 
+0928.00035 | 1995 |  | Approximation theory VIII. Vol. 1. Approximation and interpolation. Proceedings of the 8th Texas international conferenc |  | review 
+1531.47001 | 2023 |  | Multivariable operator theory. The Jörg Eschmeier memorial volume |  | editorial 

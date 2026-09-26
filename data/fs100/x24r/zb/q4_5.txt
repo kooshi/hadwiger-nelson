@@ -1,0 +1,2 @@
+## q4_5: 'ab:"characters" & ab:"Furstenberg" & ab:"conjecture"'  total=1 fetched=1
+1250.00009 | 2013 |  | From Fourier analysis and number theory to Radon transforms and geometry. In Memory of Leon Ehrenpreis |  | editorial 
