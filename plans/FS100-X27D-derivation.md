@@ -10,6 +10,15 @@ One mind. A blind verifier, X27V, works on the same claims; no contact.*
 
 | id | statement (one line) | grade | address |
 |---|---|---|---|
+| X27D-EQ | given MR, TR-ROT ⟺ Q-μ ⟺ `M′ = ∅` at type (B): the "one step" is the whole measure half | [hand, one mind; from X22D-RT] | Stage 2, §2.1 |
+| X27D-L0 | `μ ∈ M_T` is carried by Pull iff `σ_μ(T₄) = 1` (`T₄ = (R ∩ 𝔓⁴)^⊥`) | [hand] | §2.2 |
+| X27D-PC | given MR, the `U`-averages of `σ_μ` restricted to any `U`-invariant Borel set converge onto `T₄`, along every Følner sequence | [hand, one mind] | §2.3 |
+| X27D-TA | given MR, `σ_μ((T + A) ∖ T₄) = 0` for every `μ ∈ M_T` (isometric places never approach `T₄`) | [hand, one mind] | §2.4 |
+| X27D-SPL | for every finite measure on characters of `E_S` with a non-zero component at a split `v ∈ S`, some Følner sequence of `U` carries its `U`-averages to a multiple of Haar (hyperbolic shift at `v` + Ramanujan vanishing on `O_v^×`) | [hand, one mind; the local vanishing checked exactly in a finite model, `tools/x27d_ramanujan.py`, plant watched] | §2.5 |
+| X27D-E | **given MR, over a type-(B) field every translation-invariant random four-colouring has `σ_μ|_E = σ_μ|_{T₄}`**; corollary: Theorem C's conclusion for spectra carried by all of `E` | [hand, one mind] | §2.5 |
+| X27D-ATT | given MR, a counterexample to Q-μ has an `E`-null, Haar-singular, `T₄`-attracted spectral remainder, an `I`-periodic conditional colour law, and a defect profile on `R ∩ 𝔓⁴` that is subadditive, not zero, and Banach-negligible on every rotation circle | [hand, one mind] | §2.6, §3.1 |
+| X27D-FL | given MR, every concave (in particular affine), `U`-invariant, upper-semicontinuous `Q ≥ 0` on `M_T` vanishing on the Pull-measures vanishes on all of `M_T`; so such a `Q` witnesses the flip iff `M′ = ∅`, and without MR its existence proves TR-ROT | [hand] | §3.2 |
+| X27D-FLit | TR-ROT-flip as worded is TRUE with a trivial witness (an affine, weak-* continuous window-defect series), which is not rotation-invariant and proves nothing | [hand] | §3.2 |
 
 ## Stage 1 — SAVED (quotation check; C0 per claim, sealed before any derivation)
 
@@ -197,3 +206,89 @@ home discipline (algebraic actions, mean-homoclinic / asymptotic-in-density poin
 - I would have built a candidate `T₄`-attracted `E`-null character as an infinite product of one-sided split-place characters and computed its
   rotation averages numerically on a finite set of `y`, to see whether attraction fails. Not done (a search for a counterexample shape); NA₀ is
   named instead and the single-generator homoclinic analogy stated as the reason it is not obviously true.
+
+## Stage 3 — SAVED (TR-ROT-flip; one more constraint on the shape; C0 scored; the write-up)
+
+### 3.1 (S5) The remainder is singular to Haar [hand, one mind]
+
+Given MR, `U` acts ergodically on `(R̂, m)`: a `U`-invariant `A` with `0 < m(A) < 1` would make `m|_A` a `U`-invariant, finite, positive,
+`E`-null measure (`m(E) = 0`: each `E_S` is Haar-null, J45-N1, and `E` is a countable union; X22V-F1) that is no multiple of `m`, against MR.
+Split `ρ₀ = ρ_ac + ρ_s` (Lebesgue, with respect to `m`); `ρ_s` is carried by a `U`-invariant `m`-null set (saturate one carrier by the countable
+`U`; each `w` preserves `m`), so `ρ_ac = σ_μ|_B` for a `U`-invariant Borel `B` and PC applies to it. With `ρ_ac = h·m`,
+`w_*ρ_ac = (h ∘ w⁻¹)·m`, and the mean ergodic theorem along Følner sequences of `U` sends the averages to `(∫h dm)·m`, which gives the finite `T₄`
+mass 0. So `ρ_ac = 0`: **the counterexample's remainder `ρ₀` is `E`-null and singular to Haar.** NA₀ therefore only has to be proved for
+singular `E`-null measures (for invariant ones this is where PE-2's zero-entropy part lives, row 120; `ρ₀` is not invariant, so PE-2 does not
+apply to it).
+
+### 3.2 TR-ROT-flip
+
+**The literal flip: TRUE, trivially, and uninformative** (X27D-FLit). Fix finite windows `B₁ ⊂ B₂ ⊂ …` exhausting `R` and put
+`Q₁(μ) := Σ_k 2^{−k} μ{c : c|_{B_k} ∉ Pull|_{B_k}}`. Each term is the mass of a clopen cylinder, so `Q₁` is affine and weak-* continuous on
+`M_T`; it is 0 on the Pull-measures; and if `μ(Pull) = 0` then, since the cylinders `{c|_{B_k} ∈ Pull|_{B_k}}` decrease to Pull, some term is
+positive. "Invariant under translation" is automatic on `M_T`. (A weak-* distance to the closed face `M_T(Pull)` is a second witness.) Neither
+is rotation-invariant: `Q₁(w_*μ) ≠ Q₁(μ)` in general, and along `U`-averages of a counterexample `Q₁` tends to 0 (X22D-RT). **As worded the flip
+is empty**: it drops the qualifier ("`U`-invariant") that makes a quantity survive the rotation average, which is the whole of TR-ROT.
+
+**The flip in the form that would prove TR-ROT — X22V §2.2's "continuous, affine, `U`-invariant functional" — is exactly as hard as TR-ROT,
+and given MR it can only be witnessed vacuously** (X27D-FL):
+
+> **X27D-FL [hand].** (a) If some concave, `U`-invariant (`Q(w_*μ) = Q(μ)`), upper-semicontinuous `Q : M_T → [0, ∞)` vanishes on `M_T(Pull)`
+> and is positive on `M′`, then TR-ROT holds (no MR used). (b) Given MR, every concave, `U`-invariant, upper-semicontinuous `Q ≥ 0` vanishing on
+> `M_T(Pull)` vanishes on **all** of `M_T`. So, given MR, such a `Q` witnesses the flip iff `M′ = ∅` (Q-μ), and never by being positive on a
+> counterexample.
+
+*Proof.* For `μ ∈ M_T` and a Følner sequence `Φ_n`, concavity and invariance give `Q(avg_n w_*μ) ≥ Q(μ)`, and upper semicontinuity gives
+`Q(ν) ≥ limsup_n Q(avg_n) ≥ Q(μ)` for any limit point `ν`. (a) If every limit were carried by Pull, `0 = Q(ν) ≥ Q(μ) > 0` for `μ ∈ M′`. (b) Given
+MR every limit is carried by Pull (X22D-RT), so `Q(μ) ≤ 0`. ∎
+
+**The natural candidates, and the one property each lacks** (a table of what a counterexample defeats, in G79's terms):
+
+| quantity | affine | `U`-invariant | semicontinuity | zero exactly on Pull? | fails because |
+|---|---|---|---|---|---|
+| `μ(X₄ ∖ Pull)` | yes | yes | lower only | yes | Pull is closed, not open; continuous iff Pull is clopen iff T-B1 |
+| `δ_μ = 1 − σ_μ(T₄)` (X27D-L0) | yes | yes (`T₄` is `U`-invariant) | lower only (`T₄` closed) | yes | along `U`-averages of a counterexample `δ` stays `δ_μ > 0` while the limit has `δ = 0`: the `T₄`-attracted `ρ₀` of (S2) is exactly this jump |
+| `σ_μ(E ∖ T₄)` | yes | yes | — | — | identically 0 given MR (X27D-E) |
+| `∫ φ dσ_μ`, `φ ∈ C(R̂)` pointwise `U`-invariant | yes | yes | continuous | — | given MR `φ` is constant (Haar is `U`-ergodic, §3.1, with full support, so some orbit is dense), so `Q` is constant |
+| `∫ φ dσ_μ`, `φ ≥ 0` bounded u.s.c. pointwise `U`-invariant, `φ = 0` on `T₄` | yes | yes | upper | — | X27D-FL (b): identically 0 on `M_T` given MR |
+| `Q₁` (window defects), X22V's `P_μ(c(0) ≠ c(4))` | yes | **no** | continuous | yes / Pull-zero | its `U`-average is the question |
+
+**So the quantity TR-ROT needs is `δ_μ` with its lower semicontinuity repaired along rotation averages** — equivalently NA₀: the
+`E`-null remainder of the spectrum cannot all be carried onto the finite torsion set `T₄` by rotating. **Verdict on the flip:** literal form
+TRUE (vacuous); useful form **GAP at NA₀**, and **no quantity of the stated spectral kinds can exist** except vacuously (X27D-FL (b), the table's
+last three spectral rows).
+
+### 3.3 C0 scored
+
+| claim | sealed C0 | outcome | score |
+|---|---|---|---|
+| TR-ROT | GAP 0.87 | GAP at NA₀ | met; the named step is where I expected ("stopped by the `E`-null part"), and the `E` part fell as expected |
+| flip, literal | TRUE 0.90 | TRUE, vacuous | met |
+| flip, X22V's form | GAP 0.85; "no functional of a stated spectral kind" expected provable | GAP at NA₀; the spectral no-go proved (FL (b)) | met |
+
+### 3.4 G79 and G72 records (for the close)
+
+- **G79 (example vs counterexample invariant):** X27D-E came from an **example invariant** — what every translation-invariant random
+  four-colouring carries (its rotation-averaged spectrum lies on `T₄`, given MR) — pushed through the places one kind at a time. The flip's
+  wanted poster ("a counterexample must carry `Q > 0`") produced only the equivalence FL. One more data point on G79's side.
+- **G72 (§IQ-type structural form):** the structural question "what does every translation-invariant `μ`'s spectrum look like after rotation
+  averaging" is what produced E; the existence question ("is there a rotationally transient `μ`") produced nothing directly.
+
+### 3.5 Proposed edits (for the front-page and close lanes; I edit none of these files)
+
+- **`LEDGER.md`, a new row or an addendum to row 111's X22D line:** "Given MR, over ℚ(√59), ℚ(√83), ℚ(√131) every translation-invariant
+  random four-colouring's spectral measure gives `E ∖ T₄` mass 0 (`T₄` the characters trivial on `R ∩ 𝔓⁴`); so TR-ROT, which given MR is all of
+  Q-μ, reduces to NA₀ — no nonzero `E`-null (necessarily Haar-singular) measure on `R̂` has all its `U`-Følner averages converging onto `T₄`, a
+  statement about the algebraic action `U ↷ R̂` alone. [hand, one mind; X27V blind]" (X27D-EQ, E, ATT, FL).
+- **Stub `plans/STUB-measure-rigidity-three-fields.md`, J38 block, after X22D's line:** "X27D: TR-ROT = Q-μ given MR; closed on `E` (X27D-E);
+  left: NA₀ for singular `E`-null measures (mean-homoclinic points of `U ↷ R̂` modulo `T₄`)."
+- **FS-98 stub (`plans/STUB-ultrametric-continuation.md`):** the measure half now has its own named step NA₀ beside T-B1; T-B1 ⟹ TR-ROT stays
+  (X22D-RT's last clause).
+- **`BIBLIOGRAPHY.md`, `[LindSchmidt1999]`:** add to "what rests on it": "the home discipline of X27D's NA₀ (homoclinic / asymptotic points of
+  algebraic actions); not read by X27D". Prior-art debt: the homoclinic-group theory of algebraic actions of infinitely generated abelian
+  groups, and any "mean-asymptotic" (density) version of homoclinicity; unsearched here (no time; not needed for the verdict).
+- **G21 instance (a paraphrase that emptied a claim):** the owner's flip dropped X22V's "affine, `U`-invariant", and a claim that drops its
+  load-bearing qualifier is satisfied trivially (FLit). Quote the named step's qualifiers verbatim when flipping it.
+
+### 3.6 Would have searched here (Stage 3)
+
+- None. Every statement in 3.1–3.2 is a derivation; no candidate functional was evaluated on constructed colourings.
