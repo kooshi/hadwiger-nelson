@@ -81,3 +81,17 @@ avoided it, and how. Definitions and inputs are those of `data/fs103/claims.md`.
 - **CTL-ABS (arithmetic-free; the advisor's):** `G = Cay(ℝ, {±1, ±√2})` has `χ = 2` and `χ_CP = 3`: an argument for "χ ≤ k ⟹ χ_CP ≤ k" that
   would run on `G` is a wrong-reason pass. Check both values.
 - **CTL-Q2:** ℚ at `k = 2`: the dyadic place is stable and ramified in `L/F` (`λ* = 1`), `χ(ℚ²) = 2`, `χ_CP(ℝ²) ≥ 5` — the chain must stop there.
+
+## Owner's addition (2026-09-26, after the verifiers' launch) — CTL-FRAC, from the prior-art reader
+
+*Added by the product owner from `plans/FS103-G-prior-art.md` §2.3 item 2 (the reader's words, one mind, a reading). Score it at stage 4 like
+the other controls.*
+
+- **CTL-FRAC.** Two published texts conjecture that the finitary fractional chromatic number of the plane is 4 while its measurable density is
+  below 1/4: `[AmbrusEtAl2023]` §4 Remark ("we venture to conjecture that χf(R²) = χgf(R²) = 4. This would imply that α₁(R²) = 1/4 and m₁(R²)
+  ≤ 0.247 hold simultaneously"), and `[MatolcsiEtAl2025]` ("Conjecture 1. χf,0(R²) = 4, and for all finite unit distance graphs G ⊆ R² we have
+  χf(G) < 4"). The reader's words: "**if the chain's direction "a colouring of `F²` gives a CP colouring of `ℝ²`" runs on one colour class at a
+  time** — one random independent set of density `δ`, with thickness at `λ* < δ/(1−δ)` — then at `F_dG` … it proves `α₁(ℝ²) ≤ m₁(ℝ²) < 1/4`,
+  i.e. a finite unit-distance graph with `χ_f > 4.04`, refuting the published conjecture … If it does not, the step where the other classes
+  enter … is where integrality carries F1." **Say which, for your own derivation of C-LB: does it run on one colour class at a time? If
+  not, name the step where a second class enters.**
