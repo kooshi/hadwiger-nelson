@@ -50,3 +50,29 @@ not built — no `visualizations/` directory for it exists at `8a78875e`.
 ### 1.3 Would-have-searched-here log
 
 - None so far: this job writes a stub.
+
+## Stage 2 — SAVED: the stub written
+
+`plans/STUB-measure-rigidity-three-fields.md` (FS-100). **Named for the shared lemma**, as the owner allowed; the brief's path
+`plans/STUB-portrait-four-colours-47.md` is not used. Title in plain words: "One missing lemma for three fields: the portrait of a
+four-colouring of ℚ(√47)'s plane, and the rule about rotation-invariant measures that would rule it out".
+
+**The recommendation (its §1.1, four parts):** one milestone built around MR(F) and T-J39-3, the three fields as instances, ℚ(√47) the lead;
+each field's last step stays in its existing home (T-B1 in FS-98; PL(23, 43) and 43 at depth in FS-96, FS-67, FS-69; `χ_CP(ℝ²) ≥ 6` no
+milestone's target). Alternatives weighed: three targets in one milestone; ℚ(√47) alone with MR homed in FS-97. Confidence medium; it changes
+on "MR is field-by-field" or on a FALSE at T-J39-3's steps 5–6.
+
+**Decisions taken in writing it** (each a row the report can carry):
+- P9 kept at J37's verbatim statement; its grade rewritten as a composition of two-derivation lemmas (P6, R-U, A⁺), the composition J45's
+  and re-derived by J46-13 from its statement; SP-Cor added as P9′ at the inventory's grade ("one mind + re-derived from statement").
+- The rows resting on H4, by J45's grades: P4, P5, P7, P8, P9 (Stage 1, B7).
+- No FS-84 stage moves; J37's R4 is minted here as post-ban P1 and supersedes FS-84's P-int price (inventory row 23).
+- FS-97's absorption into FS-100 proposed, not made (its stub is outside my touch list).
+- Stage 1's claim list: BC-1 to BC-7 are the owner's list; BC-8 (T-J37-3) added as the owner's call, because §3's layer-2 statement rests on it.
+- EI-2's registered falsifier (J36) falsifies EI-2 only through SI's "⟸", a GAP (J45 §5.2 item 1); the stub says so beside the prior.
+- X-MR is unregistered in every record; the stub leaves it to the opening.
+
+### Would-have-searched-here log (stage 2)
+
+- Would have checked whether ℚ(√143), ℚ(√311), ℚ(√335) sit in T-C(A)'s class (a sweep of their stable places' ratios). Instead: §5 item 5
+  says "not checked here".
