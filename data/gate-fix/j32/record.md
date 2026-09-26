@@ -135,3 +135,22 @@ Edits made on copies and moved into place after `fuser` showed neither script he
 showed no `vacuity.sh`/`axioms.sh` process. `gate_report.py header` on the fixture scan prints exactly the hand-written
 header's two lines (`#   declarations=7051  refutations-skipped=304  sites=279`, `#   vacuous=0 stale=0 declared=3
 witnessed=17 generic=257 unknown=2`), exit 0.
+
+## Stage 6 — SAVED
+
+**Controls for the ruling** (`data/gate-fix/j32/controls_wrappers.py`; output `controls_wrappers.out`; exit 0, "10 of 10
+behaved"). Each runs the real shell scripts end to end in a temporary copy of the gate files, with a stub `lake` first on
+PATH that prints the saved fixture output (so nothing elaborates; had the real `lake` run in the copy, the scan would
+have failed to elaborate and W1 could not have read "vacuity: OK"). Every red is bounded on both sides: the plant's line
+present, the other failure's line absent.
+
+| control | what it runs | verdict |
+|---|---|---|
+| W1 (now) | `vacuity.sh --baseline`, then plain `vacuity.sh` against what it wrote | regenerated header holds one counts line; plain run "recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)", CLAUDE.md match, "==> vacuity: OK" |
+| W2 (before, `9f5eb1bb`) | the same | **red for its own reason**: "could not read the counts in scripts/vacuity-baseline.txt's header: no declarations" (the old writer's count-less header), exit 1 |
+| W3 (now / before) | `CLAUDE.md` copy without `unknown=` | now: "==> vacuity: FAIL — a recorded count could not be read …" with this run's counts lines, no "no digest could be built"; before: **red**, it printed "no digest could be built from this run's output" |
+| W6 (now / before) | `axioms.sh`, Trust-ledger sentence reworded | now: "==> axioms: FAIL — the recorded count in CLAUDE.md § Trust ledger could not be read …"; before: **red**, "no digest could be built" |
+| W4 (now) | a scan without its TOTALS line (exit 2) | still "no digest could be built", never the recorded-count message |
+| W5 (now) | `axioms.sh`, faithful `CLAUDE.md` | digest step "recorded count in CLAUDE.md § Trust ledger: match", then stops at the source-ledger comparison, which needs `git ls-files` the copy lacks (stated in the file; the control asserts it got there) |
+
+`controls.py` rerun after the refactor: 17 of 17. The digest on the real inputs: exit 0. `CLAUDE.md` untouched.

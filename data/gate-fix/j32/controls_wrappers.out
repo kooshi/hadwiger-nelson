@@ -1,0 +1,11 @@
+ok    W1-now-regenerate
+ok    W1-now-header-then-plain-run
+ok    W3-now-exit3-message
+ok    W6-now-exit3-message
+ok    W1-before-regenerate
+ok    W2-before-header-then-plain-run: RED on the pre-ruling version, for its own reason — exit 1, expected 0; it printed "could not read the counts in scripts/vacuity-baseline.txt's header: no declarations"
+ok    W3-before-exit3-message: RED on the pre-ruling version, for its own reason — missing: '==> vacuity: FAIL — a recorded count could not be read'; it printed "no digest could be built from this run's output"
+ok    W6-before-exit3-message: RED on the pre-ruling version, for its own reason — missing: '==> axioms: FAIL — the recorded count in CLAUDE.md § Trust ledger could not be read'; it printed "no digest could be built from this run's output"
+ok    W4-now-exit2-message
+ok    W5-now-faithful-digest-step
+==> J32 wrapper controls: 10 of 10 behaved
