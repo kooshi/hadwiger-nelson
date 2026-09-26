@@ -229,3 +229,11 @@ one-step check inside the close-math, not a new job (alternative: a short blind 
 FS67-CL); FS-100's round closes now and stage 4 is re-aimed in the stub (alternative: a second derivation round on the E-form tonight; why
 not: it is a GAP at a named step with its literature unread — the next slot's reading room). Brief `data/crunch-2026-09-25/briefs/J53-FS100-close-math.md`.
 **Running (2):** J52K, J53. Next: FS-75's close (J54) when J52K reports; then one front-page job for both milestones (J55).
+
+**Update ~00:45 — J53 saved stages 1–3 and handed back at its line; J53b (stages 4–5) launched.** Reconciliation done (KS-1 FALSE by two
+derivations; the rank-one "divergence" is two different statements; K0 TRUE, one mind + a one-step check); the close-time gate found none of
+the new theorems in print; `plans/FS100-derivation.md` holds 15 entries. **Known red:** `tools/fs71_ledger_b_check.py --strict` fails
+repo-wide on exactly those 15 ids until the front-page job applies their § B lines — expected, as at every close. **Owner rulings sent with
+J53b:** KS-1 refuted as stated, the E-form the corrected open statement; stage 6 does not take FS-100's next derivation slot — the re-aimed
+stage 4 (the E-form at ℚ(√47)) leads, stage 6 the fallback; J53's finding that EL2021 and Z. Wang 2012 had been held since J23p is a G50
+instance. **Running (2):** J52K, J53b.
