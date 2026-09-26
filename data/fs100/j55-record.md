@@ -75,3 +75,51 @@ drafts altered to keep them. Stages 2 and 3 (which the audit gates) wait for the
 ### 1.4 Would have searched here (stage 1)
 
 None.
+
+## Owner's answer (by message, after stage 1), verbatim in substance
+
+"yes — add all seven ALLOW lines, each with its reason and source as you listed them … Apply the drafts exactly otherwise." And on `--dupes`:
+"(a) CLAUDE.md item 27's draft must not retell row 116's mechanism — the header's one-home-per-fact rule outranks 'apply exactly' here: make
+item 27 orient and point (`row 116`), in as few words as carry its bearing. (b) For each ledger row / § B line pair that shares a sentence
+verbatim (rows 116, 118, 119 against FS100-X1, EQ, R, T2 and FS75-W), keep the full sentence in one place and shorten the other to what it must
+carry, choosing whichever side keeps `tools/fs71_ledger_b_check.py --strict` passing … Target: --dupes at 8 or fewer."
+
+## Stage 2 — SAVED (`LEDGER.md`, `BIBLIOGRAPHY.md`, the fact audit's tables)
+
+**`LEDGER.md`** (by the application script, `--inplace --files LEDGER.md`; byte-identical to the stage-1 simulation after the rulings):
+- FS-100 (J53b's `data/fs100/j53/front_page_drafts.py` `LEDGER`, exactly): rows 116–118 after row 115; row 98's "Not claimed" gains the vector
+  form; the claim list gains rows 116–118's line.
+- FS-75 (J54's `data/fs75/j54/front_page_drafts.py` `LEDGER`): row 119 after row 118 — **a new row** (owner note 2; row 79 gets J54's pointer,
+  "the kernel form, which is row 119 (FS-75)"); § B's FS73-T22, T39, T41, T42 kernel cells; the claim-list line **with the owner's caveat**,
+  "(row 119; as far as the gate reached; its ingredients are in print)".
+- § B: J53b's 15 lines (`data/fs100/j53/ledger-b-draft.md`) and J54's 7 (`data/fs75/j54/ledger-b-draft.md`) appended at the section's end, with
+  **the owner's ruling (b)** — the § B side shortened, the ledger row keeping the full sentence, because a § B line is an index line and
+  `tools/fs71_ledger_b_check.py` reads only its first two cells:
+  - FS100-X1: "over ℚ, `Θ = (τ + ψ_w, τ + ψ_w̄)` at 5 with `W = 2⌊2t₁⌋ + ⌊2t₂⌋`" → "parity times the cross at the two primes above 5, over ℚ (row
+    116's `Θ` and `W`)";
+  - FS100-EQ: "X proved for `Θ ∈ Eⁿ` and `n = 1`, open for `n ≥ 2` off `E`" → "X proved in rank one and inside `Eⁿ`; open off `E` from rank two";
+  - FS100-R: "density of `Φ(N)` for off-`E` families on neighbourhoods of 1 in `U`" → "row 116's density statement for off-`E` families";
+  - FS100-T2: → "`R/ℤ[Γ]` is infinite for every finitely generated `Γ ⊂ U_F`, so none acts irreducibly on `R̂` and EL's Thm 1.2 never applies";
+  - FS75-W: "an additive `W` on the relation lattice with `Σ_j min(r_j, 2r_j) ≤ 3W(r)`" → "a winding (row 119's additive `W` and its inequality)".
+- Brief item 3: 22 pipes escaped as `\|` inside code spans on the eight lines (rows 75, 76, 78, 80, 85, 86; § B FS66-L1, M3-J22-T8). `ROW_RE`
+  reads the id and milestone from the first two cells; both § B lines' pipes are in the third, so both parse (the check's § B count rose by
+  exactly the 22 new lines, 714 → 736). A scan after the edit finds no unescaped pipe inside a code span on any table line.
+
+**`BIBLIOGRAPHY.md`** (§R-close 5.3, each draft applied as written): `[EinsiedlerLindenstrauss2022]`'s role and read columns; `[Wang2012]`'s role
+column and read parenthesis; the Einsiedler–Lindenstrauss listing row's FS-100 sentence; the Rudolph/Johnson/Host row "**Listings only** (J28
+§PA.4)" → "**zbMATH reviews only** (J51, 2026-09-26: Zbl 0709.28013, 0790.28012, 0839.11030): …", its tail "what FS-97's (R2) would cite" kept;
+three new § C rows after it — `[EinsiedlerLindenstrauss2003]` (author's summary only), `[LindenstraussWang2012]` (zbMATH review read in full),
+`[BekkaFrancini2022]` (title and the review's first lines). The library-index row for EL2022 is unchanged, as drafted.
+
+**`tools/claude_md_fact_audit.py`** — the eleven ALLOW lines (every one listed; reasons in the file):
+`7051`, `declarations=7051`, `304`, `refutations-skipped=304` (owner note 3; `build/gate/vacuity/20260926T053434Z-866933.log`); `1130`, `1146`
+(`build/gate/axioms/20260926T053431Z-866750.log`; the `1034` precedent); `1–115` (the `1–110` precedent); `J48`, `KT-1` (the FS-100 stub keeps
+both); `T39's`; `ν̂` (the escape's tokenizer artefact). And one `GATE_CHANGES` entry, `('1130', '5') -> ('1193', '5')`, with the axioms log.
+The audit's `--self-test` passes after the edit (exit 0, "SELF-TEST PASSED").
+
+**Gates on this stage's tree** (`CLAUDE.md` not yet edited), each exit status read directly: `tools/fs71_ledger_b_check.py --strict` exit 0,
+"RESULT: PASS" (736 § B rows); `tools/claude_md_fact_audit.py --base fd285b33` exit 0, "AUDIT PASSED (0 failure(s))"; `--dupes` **7** (unchanged
+from the base); `tools/bib_audit.py` exit 0 (the three new keys resolve); `tools/check_architecture.py` exit 0.
+**Simulation of the whole pass after the rulings:** `--dupes` 7; the fact audit PASS; `CLAUDE.md` 287,087 bytes.
+
+**Would have searched here (stage 2):** none.

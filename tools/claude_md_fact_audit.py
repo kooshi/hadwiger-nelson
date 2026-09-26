@@ -59,6 +59,18 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # J55, the front page of FS-100's in-ban round and FS-75's minimal instance (2026-09-26; the owner's rulings, J55's record).
+    "7051": "the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)",
+    "declarations=7051": "the same count, as the gate report prints it",
+    "304": "vacuity's refutations-skipped count, 304 -> 309 at FS-75's close (the same log)",
+    "refutations-skipped=304": "the same count, as the gate report prints it",
+    "1130": "the axiom audit's clean count, 1130 -> 1193 at FS-75's close (build/gate/axioms/20260926T053431Z-866750.log; the 1034 precedent)",
+    "1146": "the axiom audit's record count, 1,146 at M2's close -> 1,209 at FS-75's close (the same log)",
+    "1–115": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–119 at FS-100's and FS-75's closes (the 1–110 precedent)",
+    "J48": "FS-100's paths-forward row's stage label ('stages 1 (blind check, J48) and 2 (KT-1, J49) done'), superseded by the row's re-aim at its in-ban close; plans/STUB-measure-rigidity-three-fields.md keeps it",
+    "KT-1": "the same stage label; the FS-100 stub keeps it",
+    "T39's": "a possessive of T39 ('with T39's stub') in LEDGER.md § B's FS73-T41 and T42 lines, replaced by FS-75's kernel cells; T39 itself stays",
+    "ν̂": "a tokenizer artefact of the `\\|` escape in M3-J22-T8's code span (`|ν̂|` -> `\\|ν̂\\|`): the chunker strips `|` but not the backslash; no fact changes",
     # The owner, 2026-09-26: the crunch's temporary size budget, superseded at its end (current-state-only; history in git).
     "294994": "the file's byte count when the temporary 325,000 budget was granted; removed with that budget at the crunch's end",
     "325": "the crunch's temporary size budget (325,000), superseded by 300,000 at its end (Kooshi, 2026-09-26)",
@@ -268,6 +280,7 @@ ALLOW: dict[str, str] = {
 # Reviewed transitions of the gate-report sentence's (clean, purchases) counts, each with its gate log; printed on every run.
 GATE_CHANGES: dict[tuple, str] = {
     (("1034", "5"), ("1130", "5")): "M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases",
+    (("1130", "5"), ("1193", "5")): "FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases",
 }
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
