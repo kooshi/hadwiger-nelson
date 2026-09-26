@@ -9,6 +9,10 @@ claims; no contact. Working files: `data/fs100/x01d/`. Exact checks: `tools/x01d
 *(one line each, grade per `CLAUDE.md` § Notation; filled in as stages land)*
 
 - (stage 1: none — reading and priors only)
+- **EF-G (a) is false for non-totally-real F**: over ℚ(∛2) a non-torsion norm-one unit `u₀` has `H(u₀) = 1 < exp h_m(u₀)` — [hand + tools: `tools/x01d_unit_check.py`], §2.1
+- **Haar entropy of `u ∈ U`**: `h_m(u) = Σ_v log⁺|u|_v` over all places of `L`; `= log H(u)` iff `u` is isometric at every archimedean place (always, when `F` is totally real) — [hand, cites the finite-S formula (Chothi–Everest–Ward)], §2.1
+- **EF-G (b)**: `#U_N(F) ≥ c·N^{1/[F:ℚ]}` via `U_ℚ ⊆ U_F` — [hand], §2.1
+- **EF-X**: the uniform measure on an archimedean circle is `U`-ergodic, zero-entropy for every `u`, non-atomic — [hand], §2.2
 
 ---
 
@@ -95,3 +99,79 @@ not blind priors.*
 ### 1.6 Would-have-searched-here log
 
 - (stage 1) none: nothing here invites a search; the prior-art sweep was reading and one zbMATH query set.
+
+---
+
+## Stage 2 — SAVED
+
+### 2.0 Conventions used from here on (stated once)
+
+- `L = F(i)`, `σ` the generator of `Gal(L/F)` (complex conjugation on `L ⊂ ℂ`, since `F ⊆ ℝ`); `U = {u ∈ L^× : uσ(u) = 1}`.
+- `R = ℤ[U] = O′`, the ring of elements integral at every **stable** prime (row 100); so `R = O_L[1/𝔓 : 𝔓 ≠ σ𝔓]`, the split primes inverted.
+- Normalised absolute values `|·|_v` on `L` (at a complex place `|x|_v = |x|²`); product formula `∏_v |x|_v = 1` for `x ∈ L^×`.
+- `W = L_∞ × ∏′_{w split} L_w` (restricted product w.r.t. `O_w`). **Duality** (Tate; for S-integer rings Chothi–Everest–Ward 1997, and
+  Lind–Ward 1988 for solenoids): `a ↦ (r ↦ ψ(ar))` induces `W / R^∨ ≅ R̂`, `R^∨ = {y ∈ L : ψ(yR) = 1}` a fractional `R`-ideal
+  (`= 𝔡^{-1}R` up to the choice of `ψ`), discrete and cocompact in `W`, with `u·χ` ↔ multiplication by `u`. Stable places do **not** appear
+  in `W` (they are integral in `R`, so their characters are killed). Under this identification `T = L/R^∨`, `A = image of L_∞`,
+  `Fin_S = image of ∏_{w ∈ S} L_w`.
+
+### 2.1 EF-G
+
+**(a) FALSE as stated** — counterexample `F = ℚ(∛2)`. `L = ℚ(∛2, i)` is totally complex of degree 6 (unit rank 2); `F` has signature (1,1)
+(unit rank 1). `N_{L/F} : O_L^× → O_F^×` has image containing `N(O_F^×) = (O_F^×)²` (rank 1), so its kernel `U ∩ O_L^×` has rank ≥ 1: there is
+a **non-torsion** `u₀ ∈ U` that is a unit of `O_L`. Then `H(u₀) = 1` (unit at every finite place), while `h_m(u₀) > 0`: the inclusion
+`O_L ⊂ R` gives a `u₀`-equivariant surjection `R̂ → Ô_L = L_∞/O_L^∨` (a 6-torus) carrying Haar to Haar, so `h_m(u₀) ≥ h_{Haar}(u₀ on the torus)
+= Σ_{v|∞} log⁺|u₀|_v` (the toral-automorphism formula), which is `> 0` because a non-torsion algebraic integer unit has a conjugate of modulus
+`> 1` (Kronecker). So `h_m(u₀) > 0 = log H(u₀)`. **Exact check:** `tools/x01d_unit_check.py` (PARI) finds `u = ε/σ(ε)` for both fundamental
+units `ε` of `O_L`, verifies `uσ(u) = 1` exactly and that `u` is a unit (integral monic characteristic polynomial, constant term ±1), and reads
+a conjugate of modulus 5.5724 (float, far from 1); **control**: over the totally real `ℚ(√2)` (where `L` is CM) the same pipeline finds no
+non-torsion element (Kronecker); **plant**: `σ = id` makes every `u = 1` and the check reports the claim false — **caught** (run 2026-09-26,
+exit 0 with `--plant`). *Also refutes the advisor's relayed "U ∩ O_L^× is torsion by Kronecker's theorem, because |u|_v = 1 at every
+archimedean place of L": true exactly when `F` is totally real.*
+
+**(a′) TRUE for totally real `F`** [hand; cites the finite-`S` entropy formula]. `L` is CM, so `|u|_v = 1` at every archimedean `v`. For `u ∈ U`
+let `P₀` be the finitely many primes of `F` below the places where `|u|_w ≠ 1` (all split: `|u|_w² = |uσu|_w = 1` at a stable `w`). With
+`R₀ = O_L[1/P₀] ⊆ R_n ↑ R` (adjoining the other split primes one at a time), `R̂ = lim← R̂_n`; each kernel of `R̂_n → R̂₀` is the dual of the
+torsion group `R_n/R₀`, a compact totally disconnected group on which `u` is an isometry, so the fibre entropy is 0 and (Yuzvinskii's addition
+formula, then the inverse limit) `h_m(u) = h(u on R̂₀) = Σ_{v ∈ ∞ ∪ P₀-places} log⁺|u|_v` (Chothi–Everest–Ward's `S`-integer formula) `= log H(u)`.
+In general (any real `F`) the same argument gives **`h_m(u) = Σ_{all places v of L} log⁺|u|_v = log H(u) + Σ_{v|∞} log⁺|u|_v`**, the corrected
+statement. **Consequence kept for EF_F:** every non-torsion `u ∈ U` has `h_m(u) > 0` (Kronecker plus the product formula) — the advisor's
+first sentence stands, his reason does not outside the totally real case.
+
+**(b) TRUE** [hand; the advisor's two-line proof, checked]. `ℚ ⊂ F`, so `U_ℚ = {u ∈ ℚ(i) : uū = 1} ⊆ U_F`. Since `F ⊆ ℝ`, `i ∉ F` and
+`[L : ℚ(i)] = [F : ℚ] =: n`; for `x ∈ ℚ(i)` and a place `w₀` of `ℚ(i)`, `∏_{w|w₀} max(1,|x|_w) = max(1,|x|_{w₀})^n` (normalised absolute values,
+`Σ_{w|w₀}[L_w : ℚ(i)_{w₀}] = n`), so `H_L(u) = H_{ℚ(i)}(u)^n`. Over `ℚ(i)`: `u = z/z̄` with `z = a + bi`, `gcd(a,b) = 1`, `a + b` odd; `z, z̄` are
+coprime and `H(u) = ∏ p_j^{e_j} = a² + b²` (at `π̄_j` the valuation of `u` is `−e_j`). Distinct primitive triples give distinct `u`, and the
+number of primitive Pythagorean triples with hypotenuse `≤ N` is `~ N/(2π)` (D. N. Lehmer, 1900). Hence `#U_N(F) ≥ #U_{N^{1/n}}(ℚ) ≥ c·N^{1/n}`
+and `liminf log #U_N / log N ≥ 1/[F:ℚ] > 0`. *Caveat:* for `F` not totally real `U_1 ⊇ ⟨u₀⟩` is infinite, so `#U_N = ∞` for every `N ≥ 1`
+and (b) holds only with `log ∞ = ∞` — the height `H` does not see archimedean expansion, which is (a)'s defect again. **For EF_F the multipliers
+are taken from `U_ℚ`**, which are isometries at every archimedean place of `L` for every `F`, and whose count is (b)'s lower bound.
+
+**Verdict EF-G: FALSE (at (a), counterexample ℚ(∛2)); (a) TRUE for totally real `F`; (b) TRUE (degenerate — infinite — when `F` is not
+totally real).**
+
+### 2.2 EF-X
+
+**TRUE** [hand]. `F = ℚ`, `L = ℚ(i)`, `R = ℤ[i][1/p : p ≡ 1 (4)]`. For `a ∈ ℂ` put `ι(a) = (r ↦ e^{2πi·Tr_{ℂ/ℝ}(ar)}) ∈ R̂`. `ι` is a continuous
+homomorphism, **injective** (if `r ↦ Tr(ar) mod 1` is trivial on `R`, which is dense in `ℂ` since `ℤ[1/5][i] ⊆ R`, it is trivial on `ℂ`, so
+`a = 0`), and **equivariant**: `u·ι(a) = ι(ua)`. Its image is `A`. Let `λ_ρ = ι_*`(uniform probability on the circle `|a| = ρ`), `ρ > 0`.
+- *Invariant:* every `u ∈ U` has `|u| = 1` in `ℂ`, so acts on the circle by a rotation.
+- *Ergodic:* `u₁ = (3+4i)/5 ∈ U` is not a root of unity (the roots of unity of `ℚ(i)` are `±1, ±i`), so its rotation angle is an irrational
+  multiple of `π`; the uniform measure is the unique `u₁`-invariant probability on the circle, hence `U`-ergodic.
+- *Zero entropy for every `u`:* `ι` restricted to the compact circle is a homeomorphism onto its image, so `(R̂, λ_ρ, u)` is isomorphic to a
+  circle rotation: `h = 0`.
+- *Not finitely supported:* non-atomic.
+And `λ_ρ(T + A) = 1`, so it is consistent with EF_F's conclusion and shows that conclusion cannot be "finite support". Over any real `F` the
+same measure on a circle in the real place's copy of `ℂ` works.
+
+**What a wrong-reason pass would look like** (the control's failure modes, named so the verifier can check they are absent): (i) `ρ = 0` —
+a Dirac at the trivial character, finitely supported (the example must be non-atomic); (ii) a circle whose image in `R̂` collapses (`ι` not
+injective), which would make the "non-atomic" claim false — excluded by density of `R` in `ℂ`; (iii) ergodicity claimed from a finite-index
+subgroup or from density of `U` in `S¹` without a single irrational rotation (density suffices too, but the one-element argument is the checkable
+one); (iv) zero entropy argued from "small support" rather than from an isomorphism with an isometry (small support alone proves nothing).
+Also recorded: **the control does not test EF_F's direction** — it only shows the conclusion's shape must allow `A`.
+
+### 2.3 Would-have-searched-here log
+
+- EF-G (a): would have run a solver-free but exhaustive PARI hunt over many non-totally-real fields for norm-one units; instead derived the
+  rank count and checked one field (ℚ(∛2)) with a control and a plant — seconds.
