@@ -246,6 +246,11 @@ advancement (Kooshi, 2026-09-22).
      claimed: 1/p ∈ Σ₀(F²) iff no conjugation-fixed prime of F(i) lies above p" inside a lemma paragraph on 2026-09-06, no
      stub was ever minted, and an outside advisor proved it eight days later — the stub rule fires on candidates a milestone
      *surfaces*, and a conjecture buried under a heading about something else is not surfaced.
+   - **File new instances out of `CLAUDE.md`** (Kooshi, 2026-09-26): when the close adds a further instance of a rule or grokking
+     already stated — a second example, an incident story, one more count — it goes to `plans/GROKKING-INSTANCES.md` under that
+     entry, verbatim with its source address, and the entry keeps its pointer. `CLAUDE.md` holds each rule's statement, its reasoning
+     and one example; a new *rule* still goes into `CLAUDE.md`. This is what keeps the file under its budget without cutting
+     intrinsics (the 2026-09-26 extraction, design (b) of `plans/PROPOSAL-claude-md-knowledge-cache.md`).
 
 10. **Report what landed** — in the house format of **§ "How to report to the user"**: the milestone's name and purpose,
     the shape that actually shipped, every decision implementation forced or overturned (in its four parts, with the
