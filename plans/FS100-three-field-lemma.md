@@ -1754,3 +1754,210 @@ X22V 4, X23D 2, X23V 1, X24R 0 — each replaced by a derivation, a cited thresh
 as complete exact enumerations of derivation-fixed sets: X21V's C7 (the 52 family fields), X23D's `Γ₂₇` spectrum (728 characters), X23V's
 stable-place tables and Hoffman table. X25B: none (its FS-66 re-run is an existing checker on an existing certificate). The ban cost the wave
 nothing a record names.
+
+### Stage 4 — SAVED (drafts for the front-page lane X30F; the stubs as files; the inventory ticked)
+
+*Drafts only for `LEDGER.md`, `CLAUDE.md`, `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md` and `plans/FRONTIER-STUBS.md` (X30F's). One home per fact:
+the numbers live in rows 123–125; `CLAUDE.md` points. **X26B (blind CLS and SPC-cx) and X27D/X27V (TR-ROT and its G79 flip) were still running
+at this stage** (stop 07:50): every line below that they bear on says so, and a follow-on fold adds their results.*
+
+**4.1 `LEDGER.md` rows (numbered from 123; row 122 is the last one X09C drafted).**
+
+| 123 | **The local–global conjecture's main clause through five: for every real number field `F`, `χ(F²) ≥ min(L(F), 5)`, so `χ(F²) = L(F)` whenever `L(F) ≤ 5`. For every real number field, every stable place of `F(i)` has all-levels four-colour ratio `< 1/4` ⟺ no stable residue target is four-colourable ⟺ `L(F) ≥ 5` (CLS: the only places of ratio `≥ 1/4` are those with residue field `𝔽₃` or `𝔽₇`, dyadic inert of norm `≤ 32`, and dyadic ramified in `F(i)/F`); on that class J45's A⁺ and SP-Cor hold with J45's proofs in every degree (SPC) — the archimedean part at `n` places is one place, a product's independence ratio being its largest factor's (`m₁ < 1/4` per place, never first moments), and a complex place enters only through its compact real form, the circle inside the norm-one hyperbola. With MR (row 120) that gives five; below five it is row 99; the upper half is the residue map at the place realising `L(F)` (row 52). Row 100's exception lies outside the class (its dyadic target is bipartite) and has `L = 2`. Instances: `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335) and every squarefree `d ≡ 47, 143, 167 (mod 168)` with `L = 5` (44 of the 52 with `d ≤ 3000`); `χ(ℚ(√3,√5)²) = 5`; `χ(ℚ(√167)²) ≥ 5` by two routes (the class; every stable place 4-thick)** (FS-100 stage 5, wave 3; FS100-COR, CLS, SPC, TCA, CX, EXC, DLP, G27, FAM, K0b, 167, Q35, Q0, D1, CTL, GF; `plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3) 1.3–1.5, 1c). **[hand + tools exact; MR row 120's grade (EL2021 Thm 1.2 external); CLS two derivations blind to each other (X23D; X23V) except the dyadic Lemma P (X23D, re-derived from its statement by X23V); J45's A⁺ and SP-Cor field-free (J45; X05V blind; K0 now two, X21V blind); R88-TCA's class form two derivations over totally real fields (J28D; X25B, blind to the proofs, not the outline), re-walked in every degree by X23D and X23V; the complex-place step two derivations (X23D; X23V, blind by commit order), checked by the close, its need found blind by X25B; the family and ℚ(√3,√5) two blind each (X21D, X21V; X23D, X23V); graded by field class — every named field in the best-held class, the thin inputs (the dyadic Lemma P at a ramified-base dyadic inert place of norm `≥ 64`; FS-66's ramified-tower lemma at `e ≥ 3` above 11 or 19, cited; the complex-place step and MR's never-exercised complex-place case) touching only fields of degree ≥ 3; X26B's blind CLS and complex-place step pending at the close]** **Not claimed:** anything at `L ≥ 6` beyond `≥ 5` (ℚ(√167), K(√7), de Grey's field, the window fields); an explicit five-chromatic graph over any of these fields; a kernel proof (X11K2's lane, FS-101). **Prior art:** the conjecture is this project's (G48); its `L ≤ 4` range row 99; the question is `[Fischer1990]` §1's ("whether some algebraic criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q", `CLOSED-QUESTIONS.md` §2.6); the value `χ(ℚ(√47)²) = 5`, any five for a real field without √3, and MR not found in print (X24R: zbMATH listings of twelve posers, fifteen abstract queries, arXiv with a positive control, the Polymath16 threads to 2026-09-24, `[Soifer2024]` chs. 11 and 55); `[Johnson2000]`, `[Johnson2006]` unread, so "not found", never "first". | `plans/FS100-derivation.md` §4; `plans/FS100-X23D-derivation.md` §2–§5; `plans/FS100-X23V-verification.md` §2–§4; `plans/FS100-X25B-derivation.md` §2–§3; `plans/FS100-X21D-derivation.md` §2–§3; `plans/FS100-X21V-verification.md` §2; `tools/x23d_class.py`, `tools/x23d_norm_one_spectrum.py`, `tools/x23v_places.py`, `tools/x23v_hoffman.py`, `tools/x21d_family.py`, `tools/x21v_checks.py`, `tools/x25b_t1_check.py` | FS-100 stage 5, wave 3 (crunch 2026-09-26) |
+
+| 124 | **The type-(B) fields given MR: over ℚ(√59), ℚ(√83), ℚ(√131) every rotation- and translation-invariant random four-colouring is almost surely a pullback from the tight place, with no T-B1; so row 88 ⟺ no rigid-motion-transient four-colouring (one whose non-pullback windows have upper Banach density 0 in `R ⋊ U`). The translation-invariant half of Q-μ is exactly one step, TR-ROT (a non-pullback colouring measure whose rotation averages converge onto the pullbacks), which T-B1 implies; and a transient colouring is invisible to every measure method (its Følner spectral measures are carried by the finite `(R ∩ 𝔓⁴)^⊥`). SEL-k, for every real number field and `k ≥ 2` given MR: `F²` is `k`-colourable iff it has a rotation- and translation-invariant random `k`-colouring with spectrum on `T + A`** (FS-100 stage 5, wave 3; FS100-X22; `plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3) 1b). **[hand; C-0 (the three fields outside row 100's exception), the rotation-invariant pullback (X22D-QR; X22V-F2), rigid-motion transience (X22D-TRM; X22V-R) and SEL-k two derivations blind to each other (X22D; X22V, blind verdicts committed 06:49); TR-ROT's equivalence with Q-μ and the transience no-go one mind each (X22D-RT; X22V-T4); FL-K two minds (X03D; X22D)]** **Never write "given MR, row 88 ⟺ Q-tr"**: what holds is row 88 ⟺ T-B1 ⟹ Q-tr, and row 88 ⟺ no rigid-motion-transient colouring, with TR-ROT between. **Not claimed:** row 88; Q-μ for translation-invariant measures; C-4 (no transient colouring over ℚ(√59)) — a GAP; TR-ROT (under attack at the close by X27D, X27V). SEL-5 over ℚ(√167) is a reduction, never a bound. **Prior art:** the clopen correspondence for the non-abelian `R ⋊ U` needs its citation checked at that generality (`[BergelsonMoragues2021]`); otherwise not found (X24R did not search it). | `plans/FS100-derivation.md` FS100-X22; `plans/FS100-X22D-derivation.md` §2–§4; `plans/FS100-X22V-verification.md` §1.3, §2–§3; `tools/x22d_checks.py`, `tools/x22v_c0.py`, `tools/x22v_simplex.py` | FS-100 stage 5, wave 3 (crunch 2026-09-26) |
+
+| 125 | **Six at ℚ(√167) contains a question about the real plane alone. Given MR: `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a cut-and-project five-colouring (the ⟸ half needs no MR; two real places merge to one `UD(ℝ²)` factor because `G × G` is CP-`k`-colourable iff `G` is); `Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; and `PL_∃(23, 43)` is exactly the direction missing from `χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6`. No held result gives either conjunct, and no one-point density bound can (Croft's `m₁ ≥ 0.2293 > 1/5`). `χ(F²) ≤ χ_CP(ℝ²)` for every countable `F ⊆ ℝ`** (FS-100 stage 5, wave 3; FS100-B12, B3). **[hand; reductions, not bounds; B-1, B-2, the projection lemma and the density no-go two blind (X21D; X21V); the biconditional's ⟸ half and the 23-adic transcription one mind (X21D)]** The 23-adic factor alone refuses five measurably (row 75's fibre-share inequality verbatim, classes `≤ 0.18523`; a transcription of row 75's `χ_Bor(ℚ₂₃²) ≥ 6`, not new); 43 at depth is FS-69. **Not claimed:** anything about six. **Prior art:** Croft's bound (no `BIBLIOGRAPHY.md` row yet); the densities `m_j(ℝ²)`, `j ≥ 2`, unread. | `plans/FS100-derivation.md` FS100-B12, FS100-B3; `plans/FS100-X21D-derivation.md` §4; `plans/FS100-X21V-verification.md` §2.7–§2.9 | FS-100 stage 5, wave 3 (crunch 2026-09-26) |
+
+**Corrections to existing rows (in place, current state only):**
+- **Row 117:** "[hand + tools exact, one mind (J51), re-derived by J51V (not blind) and J53 (Legendre symbols); K0 hand, one mind (J51V) + a
+  one-step check (J53); both on R88-TCA's class form, one mind outside ℚ(√47)]" → "[hand + tools exact; two derivations (J51; X25B, blind), re-derived
+  by J51V (not blind) and J53 (Legendre symbols); K0 two (J51V; X21V, blind); both on R88-TCA's class form, now two derivations over totally real
+  fields (J28D; X25B)]"; "**Not claimed:** MR anywhere; the class among fields of higher degree" → "**Not claimed:** — (MR is row 120; the class in
+  every degree is row 123)".
+- **Row 113:** after "the class form — every real field whose stable places all have all-levels ratio `< 1/4` — J28D's" add "; a second derivation
+  over totally real fields by X25B (blind to the proofs), and with a complex place the step by restriction to the compact real form (FS100-CX,
+  row 123)". Same sentence in `plans/R88-derivation.md` R88-TCA's grade (X25B's correction; the file is the front-page lane's or the owner's).
+- **Row 120:** "**EL2021 §2 ("Actions on adelic solenoids") unread and may hold PE-2's inverse-limit step — no novelty claimed for PE-2 until it is
+  read**; … prior-art gate on MR pending, X24R" → "EL2021 §2 and §4.1–4.3 read (X24R): set-up for `ℤ^d` only, holding neither PE-2 nor EF_F⁺
+  (its Lemma 4.2 is a factor lift for a fixed `ℤ^d`); EF_F⁺ not in print (EF 2010's eleven citers in two databases, circle and tori only; Sataev
+  1975 is the circle theorem, unheld); MR not found under its discipline's names — its nearest, `[LacaWarren2018]`'s \"generalized Furstenberg
+  conjecture\" (extremal traces of `C*(J ⋊ O*)`), is the finitely generated case and open".
+- **Row 121:** "At their grades: `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335) (K0), `χ(ℚ(√167)²) ≥ 5`" → "and `χ = 5` at ℚ(√143), ℚ(√311), ℚ(√335),
+  `χ(ℚ(√167)²) ≥ 5` (row 123)"; its grade's "The consequences: K0 one mind + a check (row 117), R88-TCA's class form one mind outside ℚ(√47)" →
+  "The consequences: row 123's grade"; "**Prior art:** the value's own gate not yet run … prior-art gate pending, X24R." → "**Prior art:** not found
+  in print (X24R, 2026-09-26: zbMATH listings of twelve posers and fifteen abstract queries, arXiv with a positive control, the Polymath16
+  threads held and live to 2026-09-24, `[Soifer2024]` chs. 11 and 55; the only triangle-free five-chromatic unit-distance graph in print is in
+  ℝ³, de Grey 2026, Zbl 1581.05080); `[Johnson2000]`, `[Johnson2006]` unread, so novelty is \"not found\", never \"first\"". Keep "the existence
+  half of … 55.1, non-constructively (55.1 asks to construct; 55.2 open)".
+
+**§ B lines** (one per theorem; address `plans/FS100-derivation.md` §4; kernel as the entry says):
+
+| id | row | statement | grade | address | kernel |
+|---|---|---|---|---|---|
+| FS100-Q0 | row 123 | `d ≡ 7 (mod 8)` ⟹ no stable dyadic place; converse among real quadratic fields | hand + tools exact, two blind | FS100-Q0 | declined |
+| FS100-FAM | row 123 | `χ(ℚ(√d)²) ≥ 5` on the family; `= 5` where `L = 5` (ℚ(√143), ℚ(√311), ℚ(√335)) | hand + tools exact, two blind | FS100-FAM | FS-101 (with COR) |
+| FS100-K0b | row 123 | K0 blind: T-C(A) at `S` ⟹ A⁺ at `S`; T-C(A)@∅ ⟹ SP-Cor, every real field | hand, two (one blind) | FS100-K0b | FS-101 |
+| FS100-167 | row 123 | `χ(ℚ(√167)²) ≥ 5` by two routes | hand + tools, two blind | FS100-167 | FS-101 |
+| FS100-CLS | row 123 | the class ⟺ no four-colourable stable target ⟺ `L(F) ≥ 5`, every real field | hand + tools exact, two blind but the dyadic Lemma P | FS100-CLS | FS-101 (finite parts) |
+| FS100-DLP | row 123 | the dyadic Lemma P; Lemma P over `𝔽_q` | hand, one + a from-statement re-derivation | FS100-DLP | declined |
+| FS100-G27 | row 123 | `λ_min(Γ₂₇) = −8`; the level-one Hoffman table | tools exact / float with controls, two blind | FS100-G27 | declined |
+| FS100-TCA | row 123 | R88-TCA@∅ in every degree; `UD(ℝ²)^{×n}` ratio `m₁`; `r(G × H) ≤ max` | hand, two derivations (J28D, X25B) + two re-walks | FS100-TCA | FS-101 |
+| FS100-CX | row 123 | a complex place: restriction to the compact real form, ratio `m₁` | hand, two derivations, checked by the close | FS100-CX | FS-101 |
+| FS100-SPC | row 123 | A⁺@∅ and SP-Cor on the class, every degree | hand, two blind | FS100-SPC | FS-101 |
+| FS100-EXC | row 123 | row 100's exception lies outside the class | hand, two blind | FS100-EXC | declined |
+| FS100-COR | row 123 | `χ(F²) ≥ min(L(F), 5)`; `= L(F)` for `L ≤ 5`, every real field | hand, two blind; graded by field class | FS100-COR | **FS-101 (X11K2's headline)** |
+| FS100-Q35 | row 123 | `χ(ℚ(√3,√5)²) = 5` | hand + tools exact, two blind | FS100-Q35 | FS-101 (a corollary) |
+| FS100-D1 | row 123 | `N₄(F) = ∅` ⟹ the class | hand, two blind | FS100-D1 | declined |
+| FS100-CTL | row 123 | the class fails at K, ℚ(√2,√3), ℚ(√11), ℚ(√23); holds at ℚ(√47), ℚ(√3,√5), K(√5), K(√7) | hand + tools exact, two blind | FS100-CTL | declined |
+| FS100-GF | row 123 | ℚ(√3)·M₇: a dyadic inert place over a ramified base, `Q = 128`, `L ≥ 5` | hand + tools exact, one mind | FS100-GF | declined |
+| FS100-X22 | row 124 | type (B) given MR: rotation-invariant ⟹ pullback; row 88 ⟺ no rigid-motion-transient colouring; TR-ROT; SEL-k | hand; the claims two blind, TR-ROT's form and X22V-T4 one mind | FS100-X22 | declined |
+| FS100-B12 | row 125 | ℚ(√167) at five and six as CP reductions | hand, two blind | FS100-B12 | declined |
+| FS100-B3 | row 125 | `Y` has no CP five-colouring ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; density no-go | hand, ⟹ two blind, ⟸ one mind | FS100-B3 | declined |
+
+**4.2 `CLAUDE.md` lines** (X30F applies; rows 123–125 are the one home of every number).
+- **Last updated:** lead with "**FS-100 stage 5, wave 3** (the ×2×3 crunch): **Paid (theorem)** — the local–global conjecture's main clause
+  through five, `χ(F²) = L(F)` for `L(F) ≤ 5` over every real number field (row 123), with `χ(ℚ(√3,√5)²) = 5`, five across the `L ≥ 5`
+  quadratic family and `χ(ℚ(√167)²) ≥ 5`; the type-(B) fields' rotation-invariant half (row 124); six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6`
+  (row 125); prior-art gate negative (novelty "not found") (`plans/FS100-three-field-lemma.md` §R-close (stage 5, wave 3))". In the waves-1–2
+  sentence, "[hand], prior-art gate pending (X24R)" → "[hand]; prior-art gate negative (X24R)".
+- **§ The mission, (2):** "Its proved range is item 10's; its remaining *testable* range is L = 5 outside it (ℚ(√3,√5) and FS-48's table), then"
+  → "Its proved range is item 10's — every `L ≤ 5` (row 123); its remaining *testable* range is"; "exactly five at ℚ(√47) — **met** (row 121) —
+  and at ℚ(√143), ℚ(√311), ℚ(√335) (met at K0's grade, row 121) and ℚ(√3,√5) (open, four proven: rows 73–74, G55)" → "exactly five at ℚ(√47),
+  ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) — **all met** (rows 121, 123)"; "proven 4 in the kernel (row 119) and ≥ 5 at K0's grade (row 121)" →
+  "proven 4 in the kernel (row 119) and ≥ 5 (row 123)".
+- **Item 10** → "**The conjecture's proved range** (G55; GPT Astra; rows 99, 123): χ(F²) = L(F) for every real number field with **L ≤ 5** — L ≤ 4
+  by row 99 [hand, three derivations], L = 5 given MR (row 120) by the class theorem and SP-Cor in every degree (row 123) [hand, two blind,
+  graded by field class]. Its exposed predictions are the target's (§ The mission): four for ℚ(√11) and ℚ(√23) (row 73), and five at ℚ(√47)
+  (row 121), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) (row 123) are met. With every residue level allowed, `L` is unchanged at 7, 11, 19, 23
+  (row 75, G66)." (The 8/3-forcer clause over multiquadratic F ⊇ K is subsumed; keep it only if the front page wants the kernel-adjacent
+  route named — it is the one route independent of MR.)
+- **Item 18:** "**Not landed: five over ℚ(√3,√5).**" → "**Five over ℚ(√3,√5) lands, non-constructively** (row 123, given MR): the plane needs five,
+  so some finite unit-distance graph over it is five-chromatic — no lattice of rank ≤ 6 carries it, and the rank-8 one is FS-72's object."
+- **Item 22:** "Five over ℚ(√167) is FS-59's question." → "Five over ℚ(√167) holds by two routes (row 123); six contains `χ_CP(ℝ²) ≥ 6` (row 125)."
+- **Item 24:** "with MR held (row 120), row 88 ⟺ T-B1 (FS-98)" → "with MR held (row 120), row 88 ⟺ T-B1 ⟺ no rigid-motion-transient four-colouring,
+  and every rotation-invariant random four-colouring is a pullback (row 124); the translation-invariant half is one step, TR-ROT (under attack at
+  the close: X27)". Never "row 88 ⟺ Q-tr".
+- **Item 29:** append "Wave 3 (rows 123–125): the class is `L ≥ 5` in every degree and SP-Cor holds on it, so χ(F²) = L(F) for `L ≤ 5`
+  everywhere; ℚ(√3,√5) five; the type-(B) fields' rotation-invariant half; six at ℚ(√167) reduced to `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`."
+- **The prior-art position, "Not ours":** add "the extremal-trace name for MR's finitely generated case, the generalized Furstenberg conjecture
+  (`[LacaWarren2018]`, open)"; add "Croft's `m₁(ℝ²) ≥ 0.2293`" once its bibliography row exists.
+- **Paths forward, Open milestones:** keep FS-84's sentence; after "FS-100 stage 5, the ×2×3 crunch (rows 120–122, …)" add "and its wave 3 (rows
+  123–125; `plans/FS100-derivation.md` §4)". Add **FS-101** (4.6) to the ranked table.
+- **G48:** "**Proved range:** L ≤ 4 over every real number field (row 99), L ≤ 5 over multiquadratic F ⊇ K (G55), and at ℚ(√47) (row 121; the K0
+  fields at their grade)" → "**Proved range:** L ≤ 5 over every real number field (rows 99, 123; `L = 5` given MR, row 120)"; and **the stale
+  falsifier line** "next the L = 5 fields where four is proven, ℚ(√47) first (FS-84; FS-81 priced it), and ℚ(√167) at L ≥ 6 (FS-59)" → "the
+  `L = 5` fields are met (rows 121, 123), so the next is ℚ(√167) at L ≥ 6 (FS-59)" (X10F's owed item).
+- **G54:** add after the table sentence: "**At four colours no stable place has an integrality gap** (row 123): a stable place's target is
+  four-colourable iff its all-levels ratio is `≥ 1/4` — only `𝔽₃`, `𝔽₇`, dyadic inert `Q ≤ 32` and dyadic ramified — so slack everywhere and
+  `L ≥ 5` are one condition."
+- **G56's Do line:** add "an exception field of row 100 (a stable dyadic place ramified in `F(i)/F`) has `L = 2`: never scope a claim at `L ≥ 3` by
+  that exception (row 123)". Optional precision: "(five refused by certificate everywhere but 31: rows 69–71)" → "(… rows 69–71; at 27 row 70's
+  `α(Γ₂₇) ≤ 141 < 146`)" — X23D's "uncited 6 at 27" is **not** a debt: the source is row 70.
+- **G64:** "(row 52; the field-level step is row 57's gap, FS-47)" → "(row 52; row 57's gap is the kernel's, not the mathematics': the
+  localisation at a prime is a DVR in every number field)".
+- **G76:** in "For colourings rigidity splits into invariant measures and transience …" add "; given MR, over the type-(B) fields every
+  rotation-invariant random four-colouring is a pullback and row 88 ⟺ no rigid-motion-transient colouring (row 124); the translation-invariant
+  half is TR-ROT; a transient colouring is invisible to every measure method". Its Do line gains "never write 'row 88 ⟺ Q-tr'".
+- **G79's test record:** append "FS-100 wave 3: the class theorem and SP-Cor in every degree from an example invariant (the independence-ratio
+  profile every colour class obeys, place by place); the no-gos (B-3, C-4, TR-ROT) from counterexample invariants; X27 flips TR-ROT".
+- **G72's count:** the thirteenth's clause gains "; its wave 3 transferred by extending held tools field by field (row 123)". The count stays
+  twelve of thirteen.
+- **G80:** its killing test "(only row 100's exception fields are uncovered)" → "(row 100's exception fields are uncovered for MR; they have
+  `L = 2`, so no colouring consequence is lost, row 123)".
+
+**4.3 `BIBLIOGRAPHY.md`** (X24R §3.3, verbatim in substance; reading status per section):
+- **`[LacaWarren2018]`** (new) M. Laca, J. M. Warren, *Phase transitions on C\*-algebras arising from number fields and the generalized Furstenberg
+  conjecture*, arXiv:1801.07802 (journal not checked) — names MR's character form (extremal traces of `C*(J ⋊ O*)` ↔ ergodic invariant measure
+  plus isotropy character, via Neshveyev) and the finitely generated case as the open "generalized Furstenberg conjecture" (row 120) — held
+  `data/fs100/x24r/LacaWarren2018-1801.07802.pdf`, **to move to `~/source/library/pdf/`** — abstract; pp. 7–9, 13–14 read (X24R).
+- **`[BauJohnsonNoble2021]`** (new) S. Bau, P. D. Johnson Jr., M. Noble, *On single-distance graphs on the rational points in Euclidean spaces*,
+  Canad. Math. Bull. 64 (2021) 13–24, doi 10.4153/S0008439520000181, Zbl 1461.05078 — `χ(ℚⁿ, d)`; checked for a quadratic-field value, none — not
+  held — abstract only.
+- **`[Soifer2025open]`** (new) A. Soifer, *New results and new open problems and conjectures related to the chromatic number of the plane problem*,
+  Geombinatorics (2025), Zbl 1569.05108; and *New open problems and conjectures in the new mathematical coloring book* (2024), Zbl 1559.05062 —
+  checked for 55.1's status — not held — zbMATH review (2025) / title only (2024).
+- **`[EinsiedlerLindenstrauss2022]`** (amend read column): §1, §2 (pp. 5–9), §4.1–§4.3 (pp. 14–17) read (X24R, 2026-09-26); §§3, 5–9 unread; §2 is
+  set-up only, PE-2 and EF_F⁺ not in it; Lemma 4.2 a lift for fixed `ℤ^d`.
+- **`[BekkaFrancini2022]`** (amend): add Thm 5.8's statement and §1 pp. 1–6 read (X24R); the torus case excluded by hypothesis; **PDF
+  `data/fs100/x03d/bekka-francini-2002.07497.pdf` to move to the library**.
+- **`[Sataev1975]`** (amend): not in zbMATH (author listing checked); one Math-Net.ru fetch and one Russian web search failed; by Huang's
+  description a circle theorem — not held, not read.
+- **`[EinsiedlerFish2010]`** (add one line): its citers — OpenAlex splits the ETDS and arXiv records (5 + 3), Semantic Scholar merges them (11); none is
+  `S`-adic or number-field; Semantic-Scholar-only arXiv citers **arXiv:2608.24503** (Zhao 2026), **arXiv:2303.01089** (Badea–Grivaux), **arXiv:1909.06866**
+  (Gilat, Discrete Anal. 2019); also **arXiv:1411.2776** (JFA 2015, *On C\*-algebras of irreversible algebraic dynamical systems*), **arXiv:1804.01369**
+  (Badea–Grivaux, CMH 2020), **arXiv:1006.4491** (optimal transport) — abstracts read (X24R). *These six ids are the ones `tools/bib_audit.py` fails
+  on at HEAD (inventory 33): listing them here clears it.*
+- **`[Huang2017]`, `[HuangLiShiXu2023]`**: PDFs `data/fs100/x01d/huang2017-1606.06078.pdf`, `data/fs100/x01d/hlsx2023-1908.02611.pdf` **to move to the
+  library** (inventory 42).
+- **Croft** (a debt, X21D): H. T. Croft, the tortoise construction giving `m₁(ℝ²) ≥ 0.2293` (usually cited as *Incidence incidents*, Eureka 30
+  (1967) 22–26 — **the citation is from memory and must be checked before the row is written**; `[AmbrusEtAl2023]` is the held source that quotes
+  it) — not held, unread.
+
+**4.4 `CLOSED-QUESTIONS.md`** (X24R §3.4 plus wave 3; the front-page lane decides placement):
+- **§1.7 (Moorhouse's `ℚ(√47)`):** add X24R's sentence verbatim: *"Prior-art gate for the value (X24R, 2026-09-26, `plans/FS100-X24R-prior-art.md`
+  §2.1): no printed value of `χ(ℚ(√47)²)` and no printed five-colour lower bound for any real field without √3 were found in zbMATH (author
+  listings of Moorhouse, Soifer, Exoo, Ismailescu, Fischer, Johnson, Madore, Manturov, Zaks, Chilakamarri, Chow, Jungreis–Reid; abstract
+  searches), arXiv, the Polymath16 threads (held text and the live eighteenth thread to 2026-09-24) or `[Soifer2024]` chs. 11 and 55;
+  `[Johnson2000]` and `[Johnson2006]` remain unread."* Then: "Our value: `χ(ℚ(√47)²) = 5` (row 121), and `= 5` at ℚ(√143), ℚ(√311), ℚ(√335), every
+  real quadratic `ℚ(√d)` with `L = 5` (row 123); `≥ 5` at ℚ(√167). By `[Moorhouse2010slides]`'s own criterion (*"If `d ≢ 47, 59 or 83 mod 84`,
+  then `χ(K²) ≤ 4`"*) these are the fields his slides left open, less the type-(B) ones (row 124)." The section's rule stands: nothing recorded as
+  closed until the two Johnson papers are read.
+- **§3 (Soifer's Open Problem 55.1):** X24R's text verbatim: *"if the value lands, the answer is to 55.1's **existence** question only — 55.1 reads
+  "Construct a triangle-free 5-chromatic unit-distance graph", and a field-level value gives a finite graph by de Bruijn–Erdős, not a
+  construction. Nothing in print (to 2026-09-24) has a planar triangle-free five-chromatic unit-distance graph; the only five-chromatic
+  triangle-free one is in ℝ³ (de Grey, Geombinatorics 2026, Zbl 1581.05080)."* Add: "ℚ(√143), ℚ(√311), ℚ(√335) give further triangle-free
+  instances (no √3); ℚ(√3,√5)'s does not (it has √3)."
+- **§3 (Exoo–Ismailescu's smallest subfield):** X24R's text verbatim (the degree answer; ℚ(√47) the first real quadratic).
+- **§2.6 (`[Fischer1990]` §1's algebraic criterion):** the heading's "answered at `χ ≤ 3` and at `L(F) ≤ 4` over every real number field" → "answered
+  at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` given MR (row 123)"; "**Not answered:** `χ(F²)` from `L(F) = 5` up"
+  → "**Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five)". Still "a candidate, not fired", gated on the two Johnson papers.
+
+**4.5 `LEDGER.md` § The claim list** (append to the **Ours** list): "the entropy split of measure rigidity for the unit-vector group and its
+Einsiedler–Fish transfer, and `χ(ℚ(√47)²) = 5` (rows 120–122); the class theorem and SP-Cor in every degree, so the local–global conjecture's main
+clause through five over every real number field, `χ(ℚ(√3,√5)²) = 5`, the type-(B) fields' rotation-invariant half and the reduction of six at
+ℚ(√167) to `χ_CP(ℝ²) ≥ 6` (rows 123–125) — as far as the gate reached (X24R: not found in print), `[Johnson2000]` and `[Johnson2006]` unread".
+
+**4.6 `plans/FRONTIER-STUBS.md` rows (drafts).**
+- **FS-100** (rank 3): "**MR proved (row 120); `χ(ℚ(√47)²) = 5` (row 121); wave 3: `χ(F²) = L(F)` for `L ≤ 5` over every real number field
+  (row 123), the type-(B) rotation-invariant half (row 124), six at ℚ(√167) reduced (row 125)** — [hand]; prior-art gate negative (X24R). **Left:**
+  TR-ROT (X27, in flight at the close); C-4 (transience); MR at row 100's exception fields (no colouring consequence: they have `L = 2`); X26B's
+  blind check of CLS and the complex-place step; the kernel port (FS-101)". Bearing: none.
+- **FS-101 (new; rank: Kooshi's; default just below FS-100)** — "**the main clause through five in the kernel** — `plans/STUB-main-clause-five-kernel.md`
+  | Kooshi's target (06:5x): *"The target for the Lean implementation should move to the more general 'every real' claim."* X11K2's skeleton
+  `X11K.min_localBound_five_le_chromaticNumber` states `min(L(F), 5) ≤ χ(F²)` for every real number field over named inputs; `χ(ℚ(√47)²) ≤ 5`
+  is sorry-free. Next: gate into `Proofs/`, `posDef_corr`, the upper half from row 52 and the stable-prime valuation subring (row 57's gap), then
+  which inputs to build and which to keep as interfaces | none; the conjecture's proved range to the kernel's word". (QTCA's "FS-101?" candidate,
+  unminted, takes the next free number if Kooshi mints it.)
+- **FS-59** (rank 1): "≥ 5 at K0's grade (row 121); six waits on J39's T-J39-5 and its two lemmas" → "**≥ 5 by two routes (row 123)**; six contains
+  `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (row 125) — both conjuncts open, no density bound can give the first".
+- **FS-72** (rank 20): add "**five over ℚ(√3,√5) holds (row 123, given MR)**, so some finite graph over it is five-chromatic: the lattice's
+  question is now whether that graph lives on `group:u3:2+w4` (post-ban), P-X23D-1's explicit form".
+- **FS-48** (rank 16): add "with MR, every entry with `L ≥ 5` has `χ ≥ 5`, and `= 5` at `L = 5` (row 123); the table is now `L(F)` alone up to five".
+- **FS-98** (rank 8): add "**TR-ROT** beside T-B1 — 'no translation-invariant non-pullback colouring measure has every `U`-Følner average converge
+  onto the pullbacks' (row 124; X22V §3.3) — T-B1 ⟹ TR-ROT; X27D/X27V attacked it at the close".
+- **FS-84** (rank 4): unchanged by wave 3 beyond "answered (row 121)"; the stub file's banner is drafted in 4.7.
+
+**4.7 Stubs.**
+- **Written as files in this stage:** `plans/STUB-measure-rigidity-three-fields.md` — a wave-3 status block above X09C's; and the new
+  `plans/STUB-main-clause-five-kernel.md` (FS-101), the kernel lane's stub with the "every real" target (the owner's instruction).
+- **Drafted for X30F (outside this job's touch list): the FS-84 banner** for `plans/STUB-five-colours-47.md`, at the top: "***Answered —
+  FS-100 stage 5 (the ×2×3 crunch, 2026-09-26).** `χ(ℚ(√47)²) = 5` (`LEDGER.md` row 121, [hand]; the lower bound by measure rigidity for the unit-
+  vector group, row 120, and SP-Cor; the upper bound the plane at 11, row 52), and the whole `L = 5` range with it (row 123). The prior-art gate
+  found the value nowhere in print (X24R; `[Johnson2000]`, `[Johnson2006]` unread). What remains is Soifer's Open Problem 55.1 **as posed** — an
+  explicit triangle-free five-chromatic unit-distance graph over ℚ(√47) (the owner's re-aim; S2 onward from 2026-10-01) — or closing the stub,
+  Kooshi's call. The body below is the pre-answer record, kept.***"
+- **FS-98's stub** (`plans/STUB-ultrametric-continuation.md`): a line naming TR-ROT beside T-B1 (the 4.6 text) — X30F's or the owner's.
+
+**4.8 Inventory ticks** (`plans/FS100-x2x3-wave3-close-inventory.md`): items 1–8, 15–22 (results) — **done**, filed as FS100-Q0, FAM, 167, K0b,
+B12, B3 (derivation file §4) and rows 123, 125; items 9, 23 (row 71 → row 69) — **done**, used in FS100-B3/row 125 (the queue's text is the owner's to
+correct); item 10 (PL_∃ vs PL_str) — **done** (row 125 uses `PL_∃`; the stub line is FS-59's re-aim, 4.6); item 11 — **done** (row 117 correction,
+4.1); items 12, 22 — **done** (stage 3.4); item 13 — **done** (Croft drafted, 4.3); items 14, 25 — **done** (logged; 25 ruled by the owner, item 40);
+item 24 — **declined**: no correction owed (X21V's own finding); items 26–29 — **done** (X10F's own; nothing left); item 30 — **done** (FS-84 banner
+drafted, 4.7); item 31 — **done** (G48 line, 4.2); item 32 — **done** (4.4, 4.5); item 33 — **done** (the six ids listed under
+`[EinsiedlerFish2010]`, 4.3); items 34–39 (X11K) — **done**, routed to FS-101's stub; items 40–41 — **done** (owner rulings, recorded); item 42 —
+**done** (drafted: G48, FS-84 banner, claim list, CLOSED-QUESTIONS, bib_audit ids, PDF moves); item 43 — **done** (X25B folded, stage 1c); item 44 —
+**declined** (Kooshi's); items 45–47 (carried from X09C) — 45 **done** (row 120/121 corrections, 4.1), 46 **declined** (QTCA stays drafted, held for
+Kooshi), 47 **done** (FS100-CE1 in `plans/FS100-derivation.md` §3 records the withdrawal; X02V's record is frozen history).
+
+**Would have searched here (stage 4):** none.
