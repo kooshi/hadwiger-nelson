@@ -120,3 +120,150 @@ characters of that tower must already live (card in §4.4).
 
 - Would have searched finitely generated lattices in `R_{ℚ(√59)}` for one with `Θ₄ = ∅`. Instead: a derivation-fixed exact enumeration of
   the local dyadic characters (§2.2), which decides every such lattice at once (restriction), in 0.2 s.
+
+## Stage 3 — SAVED: the poster, its composition, and the shared identity with ℚ(√47)
+
+*Notation (row-88 records, J45): `F` of type (B) (ℚ(√59), ℚ(√83), ℚ(√131)); `R = ℤ[U]`; `X₄(F)` the proper four-colourings of `Cay(R, U)`
+(one `R`-coset); **Pull** the 1,179,936 pullbacks `γ ∘ π₄` from row 67's `P₄`; `E_S = T + A + Fin_S`, `E = ⋃_S E_S`; `σ_μ` the trace spectral
+measure of the tetrahedral embedding; `X′ := X₄(F) ∖ Pull`, the counterexamples.*
+
+### 3.1 The poster — theorems (one row per constraint on a counterexample `c ∈ X′`)
+
+| # | the constraint, verbatim | scope | grade | address | instrument |
+|---|---|---|---|---|---|
+| P1 | "every periodic one is local at the dyadic place (`P(R) = R ∩ 𝔓⁴`)" | every finite-index period | [hand, two derivations]; V3 given FS-66's certificates at 11 (19 for 83, 131) and `[Zhang2012]` Thm 1.8(i) | row 88 | Zhang's MIS-normality over the stable towers |
+| P2 | "HD1 holds for ℚ(√59), ℚ(√83), ℚ(√131) (every four-colour band character is a dyadic pullback, so no character colouring of those planes is non-periodic)"; `Θ₄(R)` is the 12 order-4 characters of `O/𝔓⁴` | every `θ ∈ R̂`, `x ↦ ⌊4θ(x)⌋` | [hand, compositions of row 95; re-proved through CLG with no FS-66, no Zhang, no Lemma R]; the count [tools exact] | rows 96, 100; §2.2 | Berend-type closed-set rigidity (rows 95, 98) |
+| P3 | "a four-colouring read off finitely many local coordinates through measurable windows is one pullback at the tight place, hence periodic" | measurable windows over finitely many places; proper off a null set gives this for a.e. placement (C14′) | [hand, two derivations]; rests on `[AmbrusEtAl2023]` | row 92 | a measurable Zhang product rule |
+| P4 | **T-J38-1** (§3.4): no one-character measurable window `x ↦ W(θ(x) + t)`, proper for a.e. `t`, is outside Pull for a positive measure of `t` | one character of any type, any measurable circle window | [hand, one mind; composition of Steinhaus, row 98, Theorem C at `S = ∅`] | §3.4 | band rigidity at every band |
+| P5 | row 91's list, verbatim in part: "two-pullback patchworks, one pullback with any residue alternative, defects confined to a half-space, threshold walls, stripes, 2-adically continuous colourings, Kempe swaps, gapped targets of any extension, character colourings of finite type"; H: "a colouring agreeing with a gap-free periodic one on an additive half-space equals it … a non-periodic four-colouring disagrees with every pullback in every archimedean direction" | the named constructions; H for every number field, any number of colours | [hand; two derivations where marked, each with a blind verifier] | row 91 | FS-86's no-go family |
+| P6 | "`F(R) ≠ 0` iff every four-colouring of the field plane extends to the local plane, per coset"; the local plane over `ℚ₂(√3)` "is four-colour rigid"; "`4 ∈ F_tf` iff some number field inside `ℚ₂(√3)` carries a finite triangle-free forcer of `(0, 4)`" | the counterexample does not extend to the local plane; ℚ(√59)² carries no finite forcer of `(0, 4)` | [hand + certificate, or given Parts's trees; two derivations] | row 90 | local rigidity (row 78's forced `v`, D2-B) |
+| P7 | "no colouring differs from a pullback on a finite non-empty set"; "a defect set against a pullback lies in no finite union of cosets of any finitely generated subgroup of `R`" | against every `p ∈ Pull` | [hand, two derivations]; the second [one mind] | R88-B2-1, R88-J28V-8d | propagation along the 8 of 24 residue classes |
+| P8 | "`c ∉ Pull` is transient iff, for every finite `B ⊂ R`, `{t : (t·c)\|_B ∉ Pull\|_B}` has upper Banach density 0"; "a sparse defect is transient"; so `c` is **either transient or its orbit closure carries a translation-invariant `μ` with `μ(Pull) = 0`** | every `c ∈ X′` | [hand, two derivations]; the correspondence in print (`[BergelsonMoragues2021]`) | R88-TA (v), R88-B2-3, R88-CL | the clopen correspondence |
+| P9 | **Theorem C:** "every translation-invariant Borel probability measure on `X₄(F)` whose spectral measure is carried by `T + A + Fin_S`, for a finite set `S` of split places, is carried by Pull" | invariant measures, each finite `S` | [hand, two derivations over the three type-(B) fields]; `[AmbrusEtAl2023]`, FS-66 at 11 and 19, C14, Lemmas D and P | row 112, R88-TC | the stationary Zhang count |
+| P10 | **B⁺'s dichotomy:** "every `μ` over a type-(B) field is carried by Pull or strictly anticorrelated off every `E_S` at some unit vector" | invariant measures | [hand, one derivation (J45); blind check J46 pending]; given T-C and FS38-D2-A | J45 Stage 3, remark (ii) | SI-3's relatively independent self-joining; gap-freeness of `P₄` |
+
+*Context, not constraints:* `χ(F²) = 4` (Pull ≠ ∅; four needed since `d ≡ 11 (mod 12)`, row 82); the plane is triangle-free (`√3 ∉ F`, G57).
+
+### 3.2 Kept apart — nulls, readings, and a method no-go (these constrain nothing about `c`)
+
+| # | item | kind | address |
+|---|---|---|---|
+| N1 | no finite triangle-free forcer of `(0, 4)` is known — never searched (FS-90 (c), dated from 2026-10-01) | an absence, not a null | row 90; `plans/FRONTIER-STUBS.md` rank 2 |
+| N2 | HD1's finite certificate exists on some lattice; `Λ₅₁₀` not known to carry it | existence only | row 96 |
+| Rd1 | "for all colourings the obstruction is the real place (non-real analogues are pinned on `T + A + Fin`)"; killing test "a non-periodic four-colouring of ℚ(√−709)'s plane" | [reading] | G76, row 94 |
+| Rd2 | expansiveness at Pull (Boyle–Lind; Einsiedler–Lind–Miles's amoebas) as T-B1's frame | [reading] | R88 §G (J35) |
+| Rd3 | "no mechanism forcing positive entropy for the `U`-action on `R̂`" | [reading] | R88 §G (J28D) |
+| M1 | "unit-distance pair correlations on any real field admit a purely archimedean spectrum" (C0): any proof must use more than second moments | a no-go about proofs | row 91 |
+
+### 3.3 Composition
+
+**(a) What the theorem rows add up to.**
+
+> *A counterexample `c ∈ X′` is not periodic, not a character colouring, not a finite-place or one-character measurable window (for
+> almost every placement), none of row 91's constructions, does not extend to the rigid local plane, and differs from every pullback on
+> an infinite set in no finite union of cosets of a finitely generated subgroup. And either (T) `c` is **transient**, or (M) its orbit
+> closure carries an invariant `μ` with `μ(Pull) = 0`, and every such `μ` has spectrum on no `T + A + Fin_S` and is strictly
+> anticorrelated off every `E_S` at some unit vector.*
+
+Grade: [hand, two derivations] except P4 (one mind) and P10 (one derivation, blind check pending). It does not decide row 88.
+
+**(b) The gap, named — three pieces, two of them type-(B)-only.**
+- **G-tr, the transient colourings** (branch (T)). Invisible to every invariant measure (R88-B2-3). Stopped at T-B1 (isolation) and T-B2
+  (defect growth), each at one named step in both records. **Empty at ℚ(√47)**, where Pull = ∅ and every `c` has a non-Pull measure.
+- **G-f, defect processes over a pullback** (branch (M), with a factor). Measures `μ` with `μ(Pull) = 0` that carry a proper factor
+  colouring continuous in probability at finitely many places. Theorem C makes that factor a pullback, so `μ` is a pullback plus a
+  stationary defect set of positive density, closed under R88-B2-1's propagation. The lemma that empties it:
+  > **DP.** "Over a type-(B) field, a translation-invariant random four-colouring that carries a proper factor colouring continuous in
+  > probability at finitely many places is carried by Pull."
+
+  By B⁺ (equality ⟺ Pull), **DP is SI's GAP "carries ⟹ equality" at type (B)**. J45's SI-5 does not reach it: SI-5 needs (G2), a gapped
+  vertex, and `P₄` is gap-free. The control is on the other side of that line: J36 F2's noise over ℚ(√11) is a G-f measure that uses the
+  gaps of `Γ₇` (J45-SI-C). **Empty at ℚ(√47)** by T-C(A) (no finite-place factor colouring exists there at all).
+- **G-n, no finite-place factor** (branch (M), without one). **Exactly J37's class**, by the same definition. It keeps J37's two layers:
+  the pure-point layer (Kronecker selection, J37's J1) and the continuous layer (Furstenberg). One difference in the pure-point layer:
+  at ℚ(√47) selection's output — a proper window on the `T + A` coordinates — is already a contradiction, while at type (B) it is only a
+  factor colouring, a pullback. So at type (B) selection lands the measure in G-f, and needs DP to finish (or a stronger "Kronecker
+  rigidity": the window itself reads only the `T + A` coordinates).
+
+**(c) Controls — is each piece known to be non-empty somewhere?**
+- G-tr: only in the abstract class. Rank-one distance graphs have transient walls between rigid phases (row 80's T35, cited by §IQ). No
+  field.
+- G-f: yes, at a slack field. ℚ(√11)'s noisy colourings (J36 F2; J45-SI-C) are non-pullback measures with a finite-place factor. Their
+  mechanism, recolouring gapped vertices, is exactly what gap-freeness forbids pointwise; DP asks whether it is forbidden stationarily.
+  None at a tight place.
+- G-n: none anywhere (J37 §3.3 (c), unchanged).
+- Lattice control for EI-1 (owner item 3): not in a type-(B) ring (§2.2).
+
+**(d) Redundancy, and where constraints almost meet.**
+- Logically P1 ⊂ P3 ⊂ P9 (a periodic colouring is a finite-place window, and a window's random placement has spectrum in some `E_S`), and
+  P2 ⊂ P4 ⊂ P9 once row 98 puts `θ` in `T + A`. P6's first clause is the goal restated locally (the local plane is rigid, so extending
+  and being a pullback are one thing); its content is the triangle-free forcer framing.
+- Evidentially: P1 rests on FS-66 and Zhang; P2 through CLG rests on neither; P5 (H and the constructions) and P7, P8 rest on no external
+  input. P3, P4, P9, P10 rest on `[AmbrusEtAl2023]` (and P9, P10 also on FS-66 at 11 and 19). If that input failed, the poster keeps P1,
+  P2, P5–P8 and loses every spectral line.
+- **J1 (P5's H and T-B1).** H is isolation from an archimedean half-space; T-B1 is isolation from a finite window. The step between them
+  is the records' named step: "unique continuation from a region that is no archimedean half-space".
+- **J2 (P8 and P10 meet at T-B1).** Branch (T) is closed by T-B1 (R88-TA (vi)). §3.5 shows that T-B1 also turns branch (M) into
+  ℚ(√47)'s remainder.
+
+### 3.4 T-J38-1, with its proof [hand, one mind; a composition]
+
+> **T-J38-1.** Over ℚ(√59), ℚ(√83), ℚ(√131), if `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}` is Lebesgue measurable and `c_t(x) = W(θ(x) + t)` is
+> proper for almost every `t ∈ ℝ/ℤ`, then `c_t ∈ Pull` for almost every `t`.
+
+*Proof.* Steps 1–3 are T-J37-1's (`plans/POROS-2026-09-25-wanted-poster-47.md` §3.4). Steinhaus on a colour class of measure `≥ 1/4` gives
+`θ(U) ⊆ [δ, 1 − δ] + ℤ`, so `θ ∈ Θ_k(R_F)` for `k ≥ 1/δ` and, by row 98, `θ ∈ T + A = E_∅`. The Haar placement of `t` is a
+translation-invariant probability on `X₄(F)` with spectral measure on `ℤθ ⊆ E_∅`. Theorem C at `S = ∅` (row 112) carries it by Pull. ∎
+
+*Inputs:* row 98 (two blind readings); Theorem C (two derivations; `[AmbrusEtAl2023]` when `θ` has an archimedean part — when `θ` is
+torsion, `c_t` is periodic and P1 suffices). *Consequence:* row 96's HD1 (windowless characters) extends to measurable one-character
+windows, so FS-64's one-character windowed case at four colours cannot give `F(R) = 0`. *Not claimed:* rank ≥ 2.
+
+### 3.5 T-J38-2 — given isolation, the type-(B) question is the type-(A) question on `X′` [hand, one mind; a composition]
+
+> **T-J38-2.** Let `F` be of type (B), and assume **T-B1** ("every point of Pull is isolated in `X₄(F)`", R88 §G). Then:
+> (i) `X′ = X₄(F) ∖ Pull` is closed and `Aff_F`-invariant, and **no translation-invariant Borel probability on `X′` has spectral measure
+> carried by `T + A + Fin_S`** for any finite `S` — T-C(A)'s statement, with `X′` in place of `X₄`;
+> (ii) if `X′ ≠ ∅`, there is a `U`-invariant finite positive measure `τ` on `R̂` with `τ(E) = 0` and `∫ Re χ(1) dτ(χ) < 0` — a witness
+> of J45's SP, hence a `U`-invariant `E`-null measure that is not a multiple of Haar measure;
+> (iii) so **MR(F) ∧ T-B1 ⟹ `F(R) ≠ 0`**, where **MR(F)** is "every `U`-invariant finite positive measure on `R̂` with `τ(E) = 0` is a
+> multiple of Haar measure" (J45: MR(F) ⟺ no SP witness). Since `F(R) ≠ 0` gives `X₄ = Pull`, finite, hence T-B1: **given MR(F), row 88 is
+> equivalent to T-B1.**
+
+*Proof.*
+1. T-B1 makes each `{p}`, `p ∈ Pull`, a cylinder set, so Pull (finite) is clopen and `X′` is closed. Pull is `Aff_F`-invariant (R88-TA (i)),
+   so `X′` is.
+2. (i): a translation-invariant `μ` on `X′` is one on `X₄` with `μ(Pull) = 0`. Theorem C would carry it by Pull if its spectrum lay on
+   some `E_S`.
+3. (ii): `X′` is a non-empty compact space with a continuous action of the amenable group `R ⋊ U`, so it carries an `R ⋊ U`-invariant
+   probability `ν` (Følner averaging; S1b-i's route). `ν(Pull) = 0`. By B⁺, for every finite `S` some `u ∈ U` has
+   `∫_{R̂∖E_S} Re χ(u) dσ_ν < 0`. Rotation about 0 fixes the origin's colour, so `σ_ν` is `U`-invariant; `E_S` is `U`-invariant (J45-N1); so
+   the integral does not depend on `u` (J45's A⁺ remark (ii)), and is negative at `u = 1`. Take `S = ∅`. By R-U,
+   `σ_ν(E ∖ (T + A)) = 0`, so `τ := σ_ν|_{R̂∖E}` has `∫ Re χ(1) dτ < 0`. `τ` is `U`-invariant, finite, positive and `E`-null. Haar measure's
+   coefficient at `1 ≠ 0` is 0, so `τ` is no multiple of it (J45's SP "only if", the trivial direction).
+4. (iii): MR(F) forbids `τ`, so `X′ = ∅`, `X₄ = Pull`, every colouring is `R ∩ 𝔓⁴`-periodic and `F(R) ⊇ R ∩ 𝔓⁴ ≠ 0`. Conversely `F(R) ≠ 0`
+   makes `X₄ = Pull` finite, so every point is isolated. ∎
+
+*Inputs:* T-B1 (**GAP**, both records); Theorem C (two derivations); B⁺, R-U, N1 (J45, one derivation, blind check pending); Følner/Markov–
+Kakutani. **Not used:** SP's non-trivial direction, Lemma R, C14.2 (c). *The point J28D already made* (R88 §G: "a full classification of
+`U`-invariant measures would leave Q-μ open without T-B1-type isolation"): T-J38-2 says isolation is the **only** thing missing between
+the two, and that it closes transience in the same stroke. *Scope:* type (B); it transfers verbatim to every field in Theorem C's class
+where B⁺ holds (J45: "every field in T-C's class, `P₄` being that class's tight level").
+
+### 3.6 Owner item 2 — the shared identities with ℚ(√47), stated
+
+| question | answer | where |
+|---|---|---|
+| **The same class?** | **It contains J37's class and two more.** G-n is J37's class by definition. G-tr and G-f are type-(B)-only: both are empty at ℚ(√47) (no Pull, so no transience; T-C(A) forbids every finite-place factor). | §3.3 (b) |
+| **The same missing lemma?** | **Yes, given one type-(B) lemma.** Given T-B1, the ℚ(√59) question is ℚ(√47)'s question on the subshift `X′`, with T-C(A)'s hypothesis supplied by Theorem C (T-J38-2 (i)). Both reduce to the same colouring-free statement, **MR(F)** — J45's SP-Cor at ℚ(√47), T-J38-2 (iii) here. The pure-point route (Kronecker selection) is shared, but at type (B) it needs DP as well. | §3.5; J45-SP-Cor |
+| **The same shared input?** | **Yes.** `[AmbrusEtAl2023]`'s `m₁ ≤ 0.2470` (T-C and T-C(A)), FS-66's certificates at 11 and 19 (both), Coxeter's C14 window lemmas (both), J45's SI machinery (both). | R88-TC, R88-TCA |
+| **Where it differs** | (1) **T-B1**, a topological finite-window statement with no type-(A) analogue; it closes transience and makes rotation averaging safe. (2) **DP**, needed only by MR-free routes. (3) "Not periodic" rests on FS-66 at type (B) (V3), not at ℚ(√47) (S1a). (4) **Averaging:** at ℚ(√47) Pull = ∅, so averaging over `U` costs nothing (J36 F4); at type (B) a weak-* limit can land on Pull unless Pull is clopen, which is T-B1. | §3.3, §3.5 |
+
+**The difference in kind.** ℚ(√47)'s remainder is MR alone, a measure-rigidity wall (J36 F5: zero entropy is open, as for ×2×3). ℚ(√59)'s
+remainder is MR plus T-B1. T-B1 is a **closed-set, finite-window** statement: the kind of statement rows 91 (H) and 95 (Berend) proved.
+Under MR, row 88 **is** T-B1.
+
+### 3.7 Would-have-searched-here log (Stage 3)
+
+- Would have hunted a stationary defect process over a pullback (a G-f witness) on a finite quotient. Instead: named DP and located it at
+  J45's GAP (§3.3 (b)).
