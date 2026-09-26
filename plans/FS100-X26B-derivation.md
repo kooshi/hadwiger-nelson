@@ -5,7 +5,15 @@ with `STANDING-RULES.md`. Stop 12:50 UTC. Working files `data/fs100/x26b/`, chec
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| X26B-L1 | at every stable finite place `w` of `F(i)` (odd, or dyadic inert; any ramification of `F_v/ℚ_p`), every character of exact level `k ≥ 2` has normalised eigenvalue of modulus `≤ 2/(q+1)` (odd) or `≤ 1/(q+1)` (dyadic), attained | [hand; exact control at three level-two towers] | §2.2 |
+| X26B-L2 | hence the all-levels Hoffman ratio of every stable tower is its level-one target's (when the target's `λ̃_min ≤ −c₀/(q+1)`), and FS-66's fibre-share inequality and `B₁` certificates at 11, 19 bound `ρ` at ramified towers too | [hand] | §2.2 |
+| X26B-T1 | the spectral table: `λ_min(Γ₂₇) = −8` (Hoffman `2/9`), `Γ₂₃` `0.249077`, `Γ₃₁` `0.2499973`, `U₆₄` `3/16`, `U₁₂₈` `0.1284`; `U_Q` 4-colourable by an `𝔽₂`-linear colouring at every `Q ≤ 32`, and by no `𝔽₄`-linear one at `Q = 4, 16` | [tools exact] | §2.3; `tools/x26b_spectra.py`, `tools/x26b_uq_colour.py` |
+| X26B-CLS | **CLS: for every real number field `F`, every stable place of `F(i)` has all-levels four-colour ratio `< 1/4` iff `L(F) ≥ 5`** — row 100's exception included (both sides false there) | [hand + tools exact + cert (FS-66 at 11, 19; p11 re-run here) + external (`m₁`)] | §2.4 |
+| X26B-EXC | at a ramified stable dyadic place every unit vector is `≡ 1 mod 𝔭_w`, so the ratio is `≥ 1/2` on any closed subgroup containing 1, and `L = 2`: row 100's exception never meets T-C(A)'s class | [hand] | §2.4 |
+| X26B-L3 | (C14.2 (d)) at a complex place of `F` — split in `F(i)`, local graph `Cay(ℂ², {(z, 1/z)})` — measurable independent sets have window density `≤ (1 + √2 n^{−1/2})⁴ · 3.2/log n → 0`: ratio 0 | [hand, one mind] | §3.2 |
+| X26B-ARCH | SPC's archimedean step: with `n` real places the archimedean factor is the tensor product of `n` copies of `UD(ℝ²)` (weak approximation by Hilbert 90), and C14.3–C14.4's induction gives it window ratio `m₁ < 1/4` for every `n`; complex places enter as ratio-0 factors by L3; so R88-TCA's class form, and with it A⁺ and SP-Cor with J45's proofs, hold for every real number field in the class | [hand; `n > 2` a re-reading of C14.4, the complex place one mind] | §3.3 |
 
 ## Fences (the blind)
 
@@ -142,3 +150,82 @@ the residue characteristic; it makes the dyadic-over-ramified case the same line
 - Would have asked a SAT solver whether `U₄`, `U₁₆` are four-colourable once the `𝔽₄`-hyperplane count came back 0; instead enumerated the
   codimension-2 `𝔽₂`-subspaces (a complete enumeration of a set fixed by the linear-colouring derivation; at the edge, logged).
 - Would have searched for a `B₁` certificate at 27; instead computed the exact spectrum (Hoffman suffices, `2/9`).
+
+## Stage 3 — SAVED (SPC's archimedean step; the write-up)
+
+### 3.1 Where the archimedean step lives
+
+J45's A⁺ (`plans/FS84-SI-D-derivation.md` Stage 3) is SI-3/SI-4 plus T-C(A) *as a theorem* (R88-TCA, verbatim there: "no translation-invariant
+Borel probability on `X₄(F)` has spectral measure carried by `T + A + Fin_S`"); SP-Cor (§4.2) is R-U, SP and A⁺ at `S = ∅`. None of SI, R-U, SP
+or SP-Cor sees the number of archimedean places: R-U uses split finite places; SP-if (3) uses **one** real place (`J₀(j₁,₁) ≈ −0.4028`), which
+every `F ⊆ ℝ` has; N1's density of `R` in `G′_S` is strong approximation omitting a split finite place, for every `F`. **The archimedean step is
+inside R88-TCA's class form** (J28D, one mind): the colouring extends to `G_∅ = (L ⊗ ℝ) × ∏_{stable} O_w` (R88-TC-ext), and the count
+`1 ≤ 4·r_X < 1` needs the factor `X` holding the archimedean places to have window ratio `< 1/4`. `X` is bounded by FS-86's C14.2–C14.4
+(`plans/FS86-C-Coxeter.md` lines 350–390; two derivations at FS-86): C14.2 (a) a real place `m₁` (tiling + `[AmbrusEtAl2023]`), (b) odd stable
+places their all-levels ratio, (c) split finite places ratio 0; C14.3 the measurable Zhang product rule; C14.4 "induction on the number of
+factors". FS-86 itself records the missing case: "a complex place looks split; C's sketch, not claimed".
+
+### 3.2 A complex place of `F` (the new step)
+
+**Lemma X26B-L3 (C14.2 (d)) [hand, one mind].** Let `v` be a complex place of `F`. Then `L ⊗_F F_v = L_{w₁} × L_{w₂} ≅ ℂ × ℂ` with `τ₂ = τ₁ ∘ c`,
+so `U` embeds as `u ↦ (z, z^{−1})`, `z = τ₁(u)`, dense in `H = {(z, z^{−1}) : z ∈ ℂ^*}` (weak approximation, below). The Cayley graph
+`X_v = Cay(ℂ², H)` has window ratio 0: every measurable (or edge-null) independent `A` has `|A ∩ Q_n|/n⁴ ≤ (1 + √2 n^{−1/2})⁴ · 3.2/log n`.
+*Proof.* Let `ν_R` be the image of the probability on `{R^{−1} ≤ |z| ≤ R}` with `log|z|` and `arg z` uniform; `supp ν_R ⊂ H`, `|h| ≤ √2 R`.
+Characters of `ℂ²` are `x ↦ e^{2πi Re(ξ₁x₁ + ξ₂x₂)}`; since `Re(ξ₂ e^{−iθ}/r) = Re(ξ̄₂ e^{iθ})/r`, the angular average is `J₀(2πg)`,
+`g(t) = |ξ₁e^t + ξ̄₂e^{−t}|`, so `ν̂_R(ξ) = (2 log R)^{−1} ∫_{−log R}^{log R} J₀(2πg(t)) dt`. `J₀ ≥ 0` on `[0, j₀,₁ = 2.4048]`, `J₀ ≥ −0.40276`,
+and `|J₀(x)| ≤ √(2/(πx))` (Watson §13.74: `x(J₀² + Y₀²)` increases to `2/π`; grid-checked). With `m = √(|ξ₁||ξ₂|)` and `s = t − ½ log(|ξ₂|/|ξ₁|)`,
+`2m|sinh s| ≤ g ≤ 2m cosh s`; on `{2πg ≥ 2.4048}` and `|s| > 1`, `y := m e^{|s|} ≥ 0.3371` and `g ≥ 0.8647 y`, so the negative part is at most
+`2(0.40276) + 2∫_{0.3371}^∞ (π√(0.8647 y))^{−1} dy/y = 3.164` in `t`-measure-weighted form (one-sided when `ξ₁` or `ξ₂` is 0: `≤ 1.03`).
+Hence `inf_{ξ≠0} ν̂_R(ξ) ≥ −1.6/log R`. Tile `A ∩ Q_n` with period `(n + √2R + 1)ℤ⁴`: the copies are further apart than any `h ∈ supp ν_R`, so
+the periodic set is `ν_R`-independent, and Hoffman on the torus (`d² + λ(d − d²) ≤ 0`) gives density `≤ 1.6/log R`; with `R = √n` the bound
+above. ∎ It is C14.2 (c)'s archimedean twin (a hyperbolic unit action, ratio 0), and it feeds C14.3 as the smaller-ratio factor `X₂`, where
+C14.1 is needed only as `d_n(X*) ≤ 0·d_n(N[X*]) + η₂`, which the bound is.
+
+**Weak approximation used above and in 3.3 [hand].** For any finite set `Σ` of places of `L` closed under `c`, `U` is dense in `∏_{w∈Σ} U_w`:
+`L^*` is dense in `∏_{w∈Σ} L_w^*`, `x ↦ x/c(x)` is continuous, and it is onto each local norm-one group (local Hilbert 90; at a split pair
+`(x₁, x₂) ↦ (x₁/x₂, x₂/x₁)`). So the closure of `U` in `L ⊗ ℝ` is `∏_{real v}S¹ × ∏_{complex v} H_v`, and `Cay(L ⊗ ℝ, closure)` is the tensor
+product of the local graphs.
+
+### 3.3 `n > 2` real places
+
+With `n` real places and `s` complex places, the archimedean part of `X` is `UD(ℝ²)^{⊗n} ⊗ X_v^{⊗s}` (3.2), and C14.3 applies factor by factor —
+it is a two-factor rule whose proof uses only C14.1 in each factor and Fubini on product windows, and C14.4 is already stated as an induction on
+the number of factors (ordered by ratio). So `r_X = max(m₁, r_{11}, r_{19}, 0) < 1/4` with error `Σ η → 0`, for every `n`. **No first-moment
+input enters**: the real place contributes `m₁ ≤ 0.2470` through C14.2 (a), and the products through Zhang's count; X03D's `Λ = 0.4028 > 1/3` (the
+real place's Hoffman ratio `0.2871`) is exactly why C14 never uses Hoffman there. J45's `n = 2` (ℚ(√47)) is the same induction with two real
+factors. The rest of the class-form count is uniform in `F` too: the tail of stable places has `sup |λ̃_min| = 0.3333285 < 1/3` (at 31; §2.3,
+L1), so its compact Hoffman factor has ratio `≤ 0.2499973`; the places at 11 and 19 enter `X` with `B₁/q²` (L2), ramified or not.
+
+**Verdict on SPC's archimedean step: TRUE** — at `n > 2` real places [hand; a re-reading of C14.3–C14.4 with the weak-approximation product
+decomposition], and with complex places [hand, one mind: X26B-L3]. The step X23-list names ("A⁺'s archimedean step when `F` has `n > 2` real
+places") is not where the difficulty was; the complex place, which FS-86 left "not claimed", was. **Scope, stated so it is not over-read:** this
+covers only the archimedean factor of R88-TCA's class-form count; the rest of J45's proofs and of R88-TCA are taken as given (the brief); MR is
+an input to SP-Cor's conclusion, not derived here. **COR** (not asked; one line): for `L ≤ 4` row 99 gives `χ = L`; for `L ≥ 5`, CLS + SPC +
+MR give `χ ≥ 5`; so `χ(F²) ≥ min(L(F), 5)` given MR, and with X26B-EXC the scope "outside row 100's exception" is not needed.
+
+### 3.4 C0 scored
+
+| claim | C0 (T/F/G) | outcome | note |
+|---|---|---|---|
+| CLS | 0.70 / 0.08 / 0.22 | **TRUE** | the risks closed faster than priced: 27 by an exact Hoffman `2/9`, the ramified cases by L1 |
+| SPC arch., `n > 2` | 0.45 / 0.10 / 0.45 | **TRUE** | C14.4 was already an induction over factors; I over-priced the product |
+| SPC arch., complex place | 0.65 / 0.05 / 0.30 | **TRUE** (one mind) | a new lemma was needed (FS-86 had it "not claimed"), priced as the lower risk — I under-priced where the work was |
+| exception excluded | 0.92 / 0.03 / 0.05 | **TRUE** | |
+
+### 3.5 Corrections and proposals (for the front-page lane; I edit nothing)
+
+- `CLAUDE.md` G56 "4-colourable at `Q = 2, 4, 8, 16, 32` (CaDiCaL, FS-54)": now also by formula (`𝔽₂`-linear, X26B-T1); at `Q = 4, 16` no
+  `𝔽₄`-linear colouring exists.
+- FS-86's C14 "a complex place looks split; C's sketch, not claimed": closed by X26B-L3 (one mind; a blind second derivation is owed).
+- Row 117's "Not claimed: … the class among fields of higher degree": CLS answers it (two minds once X23D/X23V's agree; I have not seen them).
+
+### 3.6 Would-have-searched-here log (stage 3)
+
+- None: the stage is a derivation and a re-reading. (The FS-66 re-run at 19 is an existing checker on an existing certificate.)
+
+### 3.7 Slips
+
+- The FS-66 checker re-run at 19 (`~1 GB`, about ten minutes) was launched without `scripts/slot.py` (standing rule 8 asks for it above two
+  minutes); caught at 06:58 by `ps`, left to finish (single thread, small memory).
+- `tools/x26b_uq_colour.py`'s first plant (a multiplicative translate `g·μ`) could not fire — the count over all `a` is invariant under
+  `a ↦ ag` (G21); replaced by an added connection element, which fires (11 → 6 at `Q = 32`).
