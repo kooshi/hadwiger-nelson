@@ -182,3 +182,95 @@ route of rows 121, 123, not re-derived here.) **Wrong-reason lines (stage 1) avo
 
 **Verdict C-LB: TRUE** at `k = 4, 5, 6` (indeed every `k ≥ 2`), as stated and with no MR. [hand; one mind (this derivation), blind to the
 two held proofs of T-J39-3; exact checks tools-grade].
+
+## Stage 2b — SAVED (the rest, blind)
+
+**C-CPUP.** *`χ(F²) ≤ χ_CP(ℝ²)` for countable `F`, re-derived in one line:* restrict a CP `k`-colouring of `UD(ℝ²)` to `F²`; each of the
+countably many edges is proper a.s., so a.s. all are, and one realisation is a proper colouring of `F²` (no measurability needed — D-CP (b)
+asks none). *Then:* every finite subgraph of `UD(ℝ²)` has coordinates in a countable (finitely generated) `F ⊆ ℝ`, so its chromatic number is
+`≤ χ_CP(ℝ²)`; de Bruijn–Erdős (I-DBE) gives `χ(ℝ²) ≤ χ_CP(ℝ²)`. `χ(F²) ≤ χ(ℝ²)`: induced subgraph. No Tarski, no MR. **TRUE** [hand, classical].
+
+**C-635-PL.** PARI (`data/fs103/fs103-v1/places.gp`, `dyadic.gp`) and pure Python (`tools/fs103_v1_checks.py`, three plants, each firing for
+its own reason: `--plant-d` at "= 7 mod 8", `--plant-sign` at the first-stable list and at ℚ(√167)'s control, `--plant-spec` at the spectrum
+controls): 635087 is prime, `≡ 7 (mod 8)`, `3d` not a square; every prime `≡ 3 (mod 4)` below 103 is inert; **stable places below 1000**:
+the two places above each of 103, 107, 127, 163, 191, 211, 239, 263, 271, 311, 359, 379, 383, 443, 467, 479, 487, 491, 499, 503, 523, 563,
+599, 607, 643, 647, 659, 719, 727, 739, 743, 751, 787, 859, 883, 887, 907, 911, 919, 967, 971, 983 (all `e = f = 1`), and the ramified
+place above 635087 (`e = 2, f = 1`, residue `𝔽_635087`, `635087 ≡ 3 (mod 4)`: stable). **Dyadic:** one place of `F` above 2 (`e = 2`), two of
+`L` above it — split in `L/F` (`ℚ₂(√635087) = ℚ₂(√7) = ℚ₂(i)`), so not stable; the wall is broken; no ramified stable dyadic place, so outside
+row 100's exception and `R = O′`. Control ℚ(√167): first stable 23, 43, 59; dyadic split. Non-split control: ℚ(√3), ℚ(√11) (one prime of `L`
+above 2, `f` doubled: stable inert). **TRUE** [tools exact, two code bases].
+
+**C-635-THK.** Stable places: residue fields `𝔽_q`, `q ≥ 103` (split `p ≡ 3 (mod 4)` from 103, and `q = 635087`); level one `Γ_q`,
+`λ* ≤ 2√q/(q+1) ≤ 2√103/104 = 0.19517` (exact at 103: `0.192617`; 107: `0.187135`; 127: `0.171642`); new levels `≤ 2/(q+1) ≤ 0.0193`
+(I-WEIL, "any base ramification", covering the ramified place's `e = 2` tower); no dyadic stable place. So `sup_v λ*_v ≤ 0.1952 < 1/5`,
+`N₄ = N₅ = N₆ = ∅`. **TRUE** [hand + tools exact; I-WEIL by statement].
+
+**C-635-F1.** Given MR(ℚ(√635087)) (held for this field by row 120: real, `R = O′`): by C-LB at `k = 4` (`N₄ = ∅`) with MR, `F²`
+4-colourable would give `χ_CP(ℝ²) ≤ 4`, contradicting I-CP57; so `χ(F²) ≥ 5`. Let `k := χ(F²) ∈ {5, 6, 7}` (`≤ 7`: C-CPUP and I-CP57's
+upper bound). `N_k = ∅`, so C-LB with MR gives `χ_CP(ℝ²) ≤ k`; C-CPUP gives `k ≤ χ(ℝ²) ≤ χ_CP(ℝ²)`. Hence
+**`χ(ℚ(√635087)²) = χ(ℝ²) = χ_CP(ℝ²)`**. **TRUE** given MR [hand; one mind for the assembly, on V1-LB].
+
+**C-635-TF.** A unit triangle `0, a, b` in `F² = L` forces `b/a ∈ {ζ₆, ζ₆⁻¹} ⊂ L`, so `√−3 ∈ L = F(i)`, so `(−3)(−1) = 3` is a square in `F`
+(`F` real): `√3 ∈ ℚ(√635087)` is false (`3·635087` not a square). With C-635-F1 and `χ(ℝ²) ≥ 6`: `χ(F²) ≥ 6`, and de Bruijn–Erdős gives a
+finite subgraph of `F²`'s unit-distance graph — triangle-free as a subgraph — with chromatic number `≥ 6`. **TRUE** (a consequence of
+C-635-F1) [hand].
+
+**C-dG-F1 (assembly), with C-dG-PL, C-131, C-dG-THK re-checked.** PARI, `F_dG` of degree 16, signature `[16, 0]`: stable places below 600
+are the 16 places above 131 and the 16 above 479 (all `f = 1`), nothing else (also by Legendre symbols: unramified `p ≡ 3 (mod 4)` stable
+iff 3, 5, 7, 11 are all squares mod `p`; the ramified 3, 7, 11 have residue field `𝔽_{p²}` — 5, 3, 7 respectively non-residues — and 5 is
+`≡ 1 (mod 4)`; the dyadic places are split because `√7 ∈ F_dG` and `−7` is a square in `ℚ₂`). **C-131:** level-one
+`max|λ|/(q+1) = 0.168047` at 131 (a positive eigenvalue; `λ_min/d = −0.159911`), beside Weil's `0.173417`, `< 1/5`. **C-dG-THK:** every
+stable place has `q ≥ 131` (residue degrees in a multiquadratic field are 1 or 2, so `q = p`), level one `≤ 0.1734`, new levels
+`≤ 2/132`: `N₆ = ∅` [hand + tools exact; bound 600]. **Assembly:** `χ(F_dG²) ≥ 5` (I-DG5, no MR); for `k = χ(F_dG²) ∈ {5, 6, 7}`, C-LB with
+MR(`F_dG`) and C-CPUP give `χ(ℝ²) = χ_CP(ℝ²) = χ(F_dG²)`; in R1's form, `χ(F_dG²) ≤ k ⟺ χ_CP(ℝ²) ≤ k` for `k = 5, 6`. **TRUE given
+MR(F_dG)** [hand; the assembly one mind]. **C-MR16: unreached** (budget; the brief makes it optional).
+
+**C-F1-GEN.** *The stub's text* ("a real field `F` with no non-thick stable place"): **MISSTATED**, three ways. (1) "Real field" admits
+complex places, where `T_∅` has a non-compact archimedean factor V1-LB does not treat. (2) "Thick" names no `k`: with 5-thick only (D-THK
+(a)), the chain stops at `χ(F²) = 6` — `χ(F²) ≥ 5` and `χ(F²) ≤ 5 ⟹ χ_CP ≤ 5` and `χ(F²) = 7 ⟹ χ_CP = 7` all go through, but
+`χ(F²) = 6` gives only `χ_CP ≥ 6`, so `χ_CP = 7 > χ(F²) = 6` is not excluded. The needed condition is `N₆(F) = ∅`. (3) Row 100's exception
+needs no clause in practice — its ramified stable dyadic place has level-one edge set `≡ 1 (mod 𝔭)`, so `ν̂(ξ) = ξ(1) = ±1` and `λ* = 1`: it is
+never thick — but the proof uses `R = O′`, which is where the exclusion lives. *The proposed scope* (totally real, outside the exception,
+`N₆(F) = ∅`, given MR(F)): **TRUE**, by C-635-F1's assembly verbatim (`N₆ = ∅ ⟹ N₄ = N₅ = ∅`). "Given T-J39-3" is not needed: V1-LB replaces
+it. Corollary worth recording: **given MR, every totally real `F` outside the exception with `N₆(F) = ∅` has the same `χ(F²)`, namely
+`χ_CP(ℝ²)`** (e.g. ℚ(√635087) and `F_dG` have equal chromatic numbers).
+
+**C-S.** (a) **TRUE.** For S as D-S states it (all subfields of ℝ) it is immediate: ℝ is a subfield. Its content is the number-field form:
+S_nf ⟹ `χ(ℝ²) ≠ 6` given MR at one `N₆ = ∅` field — `F_dG` by C-dG-F1 as R1 says, or more cheaply ℚ(√635087) (MR at degree 2). (b) **TRUE**
+for S_nf over totally real fields, given MR at each (row 120 covers all outside the exception; exception fields have `χ ≤ 2`), reading "drops
+to six" as `χ(F²) = 6` and "a non-6-thick place" as `N₆(F) ≠ ∅`: if `χ_CP = 6`, ℚ(√635087) is six; if `χ_CP = 5`, every `F` has `χ(F²) ≤ 5`
+(C-CPUP); if `χ_CP = 7`, every `N₆ = ∅` field is seven (C-F1-GEN's scope), so six can occur only with `N₆(F) ≠ ∅`. For such `F`, V1-LB's
+general form with MR and the restriction direction give `F²` `j`-colourable ⟺ `UD(ℝ²) × ∏_{N_j(F)} Cay(O_w, T_w)` CP-`j`-colourable (`j = 5,
+6`). (c) **MISSTATED as "a finite family".** Finite: the residue fields of non-6-thick stable places — odd `q ∈ {3, 7, 11, 19, 23, 27, 31, 43,
+47, 59, 67, 71, 79, 83}` (level-one `λ* ≥ 1/5`; exact here for the primes, `tools/fs103_v1_checks.py`; 27 and the dyadic `U_Q`, `Q ≤ 64`, by
+Hoffman from G56's floors, `k`-colourable ⟹ `λ* ≥ 1/(k−1)`; `U₁₂₈` not computed), with `q ≥ 99` 6-thick by Weil. **Not finite:** the local
+graphs `Cay(O_w, T_w)` — each `q` is the residue field of infinitely many local fields `F_v` (e.g. `ℚ_p(p^{1/e})`, `e ≥ 1`, all with
+`i ∉ F_v`), each realised as a completion of a totally real field, and different `[F_v : ℚ_p]` give non-isomorphic groups `O_w ≅ ℤ_p^{2[F_v:ℚ_p]}`;
+products of any finite subset occur. Finiteness would need an equivalence, for CP colourability, between towers with one residue field — the
+inclusion `ℤ_p[i] ⊂ O_w` gives a homomorphism one way only. (Note on the window: 71 is non-6-thick through its **positive** eigenvalue
+`0.2204` although its `λ_min/d = −0.1968` refuses six by Hoffman — mixing is two-sided, Hoffman one-sided.) (d) *Missing for all subfields of
+ℝ:* algebraic subfields of infinite degree follow from S_nf (a supremum of values `≠ 6` in `{1,…,7}` is `≠ 6`, by de Bruijn–Erdős); fields of
+positive transcendence degree need G63's Q-const (or an S for finitely generated fields: Tarski specialisation puts each finite subgraph into
+some number field's plane, which bounds `χ(E²)` by a maximum but does not exclude 6). *Complex places:* V1-LB's archimedean factor becomes the
+non-compact norm-one group at each complex place; neither the selection nor the merge covers it, and MR's complex-place case has no exercised
+instance (row 123).
+
+**C-FMT.** (a) **TRUE** [classical]: a process continuous in probability on a separable metric index set has a jointly measurable
+modification. (b) **TRUE** [hand]: with such a version, Fubini gives `E ∫∫ 1[c(x) = c(x + w)] dx dw = 0`, so a.s. a realisation is a
+Lebesgue-measurable colouring proper at almost every edge: `χ_m⁰ ≤ χ_CP`. (c) **GAP** at the Følner step: from a measurable a.e.-proper `f`,
+the random translates `f(· + Z_n)`, `Z_n` uniform on growing boxes, have limit laws that are translation-invariant and a.e.-proper, but
+`P(f(x+Z) ≠ f(y+Z)) = |{z ∈ B_n : f(z+x) ≠ f(z+y)}|/|B_n|` need not tend to 0 uniformly in `n` as `y → x` (the local `L¹` modulus of `f`
+may degrade at infinity), so the limit need not be continuous in probability; nothing here forces it. Not rescued by MR (it would need
+`χ(ℝ²) ≤ χ_m⁰`, itself open). (d) **GAP** at colouring a null set: replacing each class by its Lebesgue density points gives disjoint classes
+avoiding distance 1 **everywhere** (if `x, x + w` are density points of `A`, then `{(y, w′) : y, y + w′ ∈ A}` has positive measure in
+`ℝ² × S¹` — proved here), covering all but a null set `N`; colouring `N` properly against its neighbours' colours is a list-colouring
+problem nothing here solves. (e) `χ(ℝ²) ≤ χ_m ≤ χ_B ≤ 7` (half-open hexagons are Borel), `χ_m⁰ ≤ χ_m`, `χ_m⁰ ≥ 5` by the edge-null Hoffman
+bound (I-CP57's lower half applies to a.e.-proper colourings); `χ_B` against `χ_CP`: the same Følner GAP as (c).
+
+**C-CPM.** Without MR: **GAP** — the same Følner step as C-FMT (c); C-FMT's parts give `χ_m⁰ ≤ χ_CP`, the opposite direction, so it does
+**not** follow from them. Given MR(ℚ(√635087)) (held, row 120): **TRUE through C-635-F1 only**, `χ_CP = χ(ℝ²) ≤ χ_m`.
+
+### Would-have-searched-here log
+
+- None. Every computation was an exact spectrum or a PARI place list of seconds; no colouring, independent-set or quotient search was
+  contemplated (the claims are derivational).

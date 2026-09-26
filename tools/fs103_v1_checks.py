@@ -64,13 +64,15 @@ def lam_star(p):
         v = sum(math.cos(2 * math.pi * ((a * s + b * t) % p) / p) for s, t in circ)
         best = max(best, abs(v) / (p + 1))
     return best
-lam = {p: lam_star(p) for p in [3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127]}
+lam = {p: lam_star(p) for p in [3, 7, 11, 19, 23, 31, 43, 47, 59, 67, 71, 79, 83, 103, 107, 127, 131]}
 for p, v in lam.items(): print(f"   lambda*(Gamma_{p}) level one = {v:.9f}   Weil 2sqrt(p)/(p+1) = {2*math.sqrt(p)/(p+1):.6f}")
 check(abs(lam[11] - 0.476413) < 5e-6 and abs(lam[19] - 0.380486) < 5e-6, "controls: Gamma_11 0.476413, Gamma_19 0.380486")
 # row 110's "59 has ratio 0.199119854095" is the Hoffman ratio lambda*/(1+lambda*), not lambda* (stage-2 correction of my stage-1 reading)
 check(abs(lam[59] / (1 + lam[59]) - 0.199119854095) < 1e-9, "control: Gamma_59 Hoffman ratio 0.199119854095 (row 110)")
 check(max(lam[p] for p in (103, 107, 127)) < 0.2 and 2 * math.sqrt(103) / 104 < 0.2, "103, 107, 127 and Weil at q >= 103 below 1/5")
 
+check(lam[131] < 0.2 and abs(lam[131] - 0.168047) < 5e-6, f"C-131: lambda*(Gamma_131) = {lam[131]:.6f} (a positive eigenvalue) < 1/5; Weil 0.173417")
+check(all(lam[p] >= 0.2 for p in (59, 67, 71, 79, 83)), "non-6-thick at level one: 59, 67, 71, 79, 83 (71 by its positive eigenvalue 0.2204; its lambda_min/d = -0.1968)")
 # 3. F_dG stable primes (unramified p: stable iff f = 1 and p = 3 mod 4; f = 1 iff 3, 5, 7, 11 all squares mod p)
 dg = [p for p in range(13, 600) if isprime(p) and p % 4 == 3 and all(legendre(r, p) == 1 for r in (3, 5, 7, 11))]
 check(dg == [131, 479], f"F_dG stable primes below 600 (unramified): {dg}")

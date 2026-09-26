@@ -20,9 +20,12 @@ PASS control Q(sqrt167): first stable [23, 43, 59], dyadic split
    lambda*(Gamma_103) level one = 0.192617200   Weil 2sqrt(p)/(p+1) = 0.195171
    lambda*(Gamma_107) level one = 0.187135067   Weil 2sqrt(p)/(p+1) = 0.191557
    lambda*(Gamma_127) level one = 0.171641886   Weil 2sqrt(p)/(p+1) = 0.176085
+   lambda*(Gamma_131) level one = 0.168047173   Weil 2sqrt(p)/(p+1) = 0.173417
 PASS controls: Gamma_11 0.476413, Gamma_19 0.380486
 PASS control: Gamma_59 Hoffman ratio 0.199119854095 (row 110)
 PASS 103, 107, 127 and Weil at q >= 103 below 1/5
+PASS C-131: lambda*(Gamma_131) = 0.168047 (a positive eigenvalue) < 1/5; Weil 0.173417
+PASS non-6-thick at level one: 59, 67, 71, 79, 83 (71 by its positive eigenvalue 0.2204; its lambda_min/d = -0.1968)
 PASS F_dG stable primes below 600 (unramified): [131, 479]
 PASS ramified 3, 7, 11: residue field F_{p^2} (5 mod 3, 3 mod 7, 7 mod 11 non-residues)
 FAILURES: 0
