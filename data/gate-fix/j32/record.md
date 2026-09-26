@@ -90,3 +90,30 @@ and the exit status is exactly the expected one.
 the mode argument, so every run printed the usage text and exited 2 — and the two runs against the old version "went
 red" for that reason alone, while the fifteen others failed. The red-against-old check now also requires the old
 version to exit 0 and to print the false "match" line itself; with the argument restored all seventeen behave.
+
+## Stage 4 — SAVED
+
+**The real gate, once** (`scripts/slot.py --mem 30 --cpus 8 -- scripts/vacuity.sh`; output
+`data/gate-fix/j32/vacuity-real.out`, exit status `data/gate-fix/j32/vacuity-real.exit` = 0; full scan
+`build/gate/vacuity/20260926T001203Z-337565.log`). Its lines 6–7:
+
+    recorded counts in scripts/vacuity-baseline.txt's header: match (9 of 9 compared)
+    RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 6795 → 7051, refutations-skipped 278 → 304, sites 275 → 279, generic 253 → 257
+
+and its verdict "==> vacuity: OK" (drift is flagged, never failed — policy unchanged). `CLAUDE.md` was not edited;
+the front-page lane owns those counts. Counts unchanged against the previous complete run.
+
+**Proposed for the front-page lane (not made here):** `CLAUDE.md` § The gate's counts line to
+`declarations=7051 refutations-skipped=304 sites=279`, `… generic=257 …`; § Trust ledger "1034 clean" to "1130 clean"
+(as J23bd already filed). Both digests will then read "match" on every source.
+
+**Held for the owner:**
+1. `scripts/vacuity.sh --baseline` (lines 195–202) rewrites the baseline with a fixed header that holds **no counts**, so
+   the first plain run after a regeneration now fails with exit 3 ("could not read the counts in …'s header: no
+   declarations, …") until the counts are put back. Correct as a check (the comparison could not run), but the writer
+   should write the counts line itself. Not changed: outside this job's reach.
+2. Both wrappers (`scripts/vacuity.sh` line 141, `scripts/axioms.sh` line 70) print "no digest could be built from this
+   run's output" on any nonzero exit of the digest, which is wrong for exit 3; the digest's own FAIL line says what
+   happened. A one-line rewording in each would make the wrappers exact.
+3. `tools/claude_md_fact_audit.py` keeps its own copy of the Trust-ledger sentence regex, searched over the whole file; it
+   still matches, and nothing here depends on it.
