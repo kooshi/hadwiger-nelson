@@ -401,3 +401,5 @@ mine before opening either.
 - Mine alone writes the law of `m_j` (line (viii)); P omits the measurable version; B's is cited.
 - **Grade:** C-LB for totally real `F` with `N_k = ∅`: [hand, three derivations, one of them — mine — blind to the other two]. The
   complex-place widening: [hand, one mind].
+
+**Stage 4 — SAVED** (4.1 accf865d, 4.2 f0fb8887, 4.3 45407020). Would-have-searched-here: none in stage 4 (the control checks were one line of float arithmetic).
