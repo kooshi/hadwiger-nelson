@@ -1,0 +1,25 @@
+  ok [FS-100]  +5712 B  § A — rows 116–118 after row 115 (last number 118)
+  ok [FS-100]    +95 B  row 98 — Not claimed (J51V-X2 (c))
+  ok [FS-100]   +297 B  the claim list — Ours
+  ok [FS-75]  +1928 B  § A — row 119 after row 118 (FS-100's last)
+  ok [FS-75]    -27 B  row 79 — Not claimed: the kernel form is row 119
+  ok [FS-75]   +105 B  § B — FS73-T22's kernel column
+  ok [FS-75]    +49 B  § B — FS73-T39's kernel column
+  ok [FS-75]    +57 B  § B — FS73-T41's kernel column
+  ok [FS-75]    +68 B  § B — FS73-T42's kernel column
+  ok [FS-75]   +197 B  the claim list — Ours (the owner's call; stage 5's decision 5b)
+  ok [J55] escaped 2 pipe(s) in '| 75 | **The r'
+  ok [J55] escaped 2 pipe(s) in '| 76 | **Five '
+  ok [J55] escaped 2 pipe(s) in '| 78 | **Four '
+  ok [J55] escaped 2 pipe(s) in '| 80 | **Four '
+  ok [J55] escaped 6 pipe(s) in '| 85 | **Four '
+  ok [J55] escaped 6 pipe(s) in '| 86 | **Four-'
+  ok [J55] escaped 2 pipe(s) in '| FS66-L1 | FS'
+  ok [J55] escaped 2 pipe(s) in '| M3-J22-T8 | '
+  ok [owner (b)]     -1 B  § B FS100-X1 shortened
+  ok [owner (b)]     +0 B  § B FS100-EQ shortened
+  ok [owner (b)]    -21 B  § B FS100-R shortened
+  ok [owner (b)]     +4 B  § B FS100-T2 shortened
+  ok [owner (b)]    -23 B  § B FS75-W shortened
+  ok [FS-100+FS-75] appended 15 + 7 § B lines
+LEDGER.md: 359,928 -> 374,440 bytes (+14,512) -> /home/kooshi/source/lean-dir/LEDGER.md

@@ -1,0 +1,10 @@
+  ok   faithful copy: passed
+  ok   one number deleted (0.06): fired -- lost num token '0.06'
+  ok   one bibliography key deleted ([AbiadEtAl2025]): fired -- lost bib token '[AbiadEtAl2025]'
+  ok   one PROTECTED byte changed: fired -- a PROTECTED region is not byte-identical
+  ok   gate sentence broken: fired -- the gate-report sentence no longer matches scripts/gate_report.py's regex
+  ok   heading renamed: fired -- heading disappeared (other files cite sections by name): '### Where the problem stands'
+  ok   a pointer to a row that does not exist: fired -- dangling pointer: row 968 is cited and no such entry exists
+  ok   re-spelling WITHOUT a normalisation entry: fired -- lost chunk token 'ρ₆₃'
+  ok   the same re-spelling WITH its entry: passed
+SELF-TEST PASSED

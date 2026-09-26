@@ -1,0 +1,258 @@
+bytes: 676,443 -> 676,443  (+0)
+token PROXY (see token_proxy; not a tokenizer): 232,358 -> 232,358  (+0)
+[date] 27 distinct before, 27 after, LOST 0
+[bib] 116 distinct before, 116 after, LOST 0
+[code] 1762 distinct before, 1762 after, LOST 0
+[id] 663 distinct before, 663 after, LOST 0
+[row] 87 distinct before, 87 after, LOST 0
+[ref] 283 distinct before, 283 after, LOST 0
+[num] 797 distinct before, 797 after, LOST 0
+[tag] 94 distinct before, 94 after, LOST 0
+[chunk] 4114 distinct before, 4114 after, LOST 0
+[name] 568 distinct before, 568 after, LOST 0
+pointers: 87 distinct row references, 80 grokkings; dangling: none
+PROTECTED regions: 2 before (2567, 2899 bytes), 2 after
+gate sentence: current audit reads 1193 clean and 5 declared purchases
+
+bytes per section (before -> after):
+         0 ->        0        +0  (preamble)
+        37 ->       37        +0  # Engineering standard
+        25 ->       25        +0  # Workflow
+     2,885 ->    2,885        +0  # This workspace — lean-dir
+     2,702 ->    2,702        +0  ## Notation
+     8,328 ->    8,328        +0  ## The mission
+     2,209 ->    2,209        +0  ## Frontier
+    19,563 ->   19,563        +0  ### Where the problem stands
+       510 ->  202,958  +202,448  ### The novel-results ledger
+    18,870 ->   18,870        +0  ### Paths forward, ranked
+       733 ->      733        +0  ### The open structural question
+   172,993 ->  172,993        +0  ## Grokkings — the working theory of the 5th colour
+       904 ->      904        +0  ## Whose work this is
+     2,194 ->    2,194        +0  ## Delegation — one level deep
+     2,464 ->    2,464        +0  ## The standard of evidence above rung B
+     1,786 ->    1,786        +0  ## What compute actually helps
+     1,191 ->    1,191        +0  ## The shape of the proof
+     1,541 ->    1,541        +0  ## Trust ledger
+     9,575 ->    9,575        +0  ## Toolchain
+    15,214 ->   15,214        +0  ### Building
+     3,062 ->    3,062        +0  ### The kernel's cost model
+     1,310 ->    1,310        +0  ### Searching
+       563 ->      563        +0  ## The package
+     3,188 ->    3,188        +0  ## The gate
+    19,800 ->   19,800        +0  ### Make the gate fail, and watch it fail
+     1,514 ->    1,514        +0  # LEDGER.md — the novel-results ledger of the Hadwiger–Nelson workspace
+     3,312 ->    3,312        +0  ## The claim list — what is ours beyond Theorems A and B (moved from `CLAUDE.md` § The prior-art position, 2026-09-26)
+        32 ->       32        +0  ## A. The novel-results ledger
+   202,958 -> None            ### The novel-results ledger
+   176,981 ->  176,981        +0  ## B. Theorems proved outside the kernel, by milestone
+
+normalisations in force:
+  '(?<=\\d),(?=\\d{3}(?!\\d))' -> '': thousands separators: 1,581 and 1581 are one number
+  'ℚ\\(√3,√11\\)' -> 'K': legend macro K := ℚ(√3,√11) (§ Notation)
+  'ℚ\\(√3,√5,√7,√11\\)' -> 'K(√5,√7)': K(√d) adjoins √d (§ Notation): de Grey's field
+  'ℚ\\(√3,(√[57]),√11\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'ℚ\\(√3,√11,(√\\d+)\\)' -> 'K(\\1)': K(√d) adjoins √d (§ Notation)
+  'UD\\(𝔽(_[qp]|[₀-₉]+), ?2\\)' -> 'Γ\\1': legend macro Γ_q := UD(𝔽_q, 2) (§ Notation; rows 70-71 already used it)
+allowances in force: 197
+  'G1–G79': the stable-identifier range, extended to G1–G80 when G80 (infinite rank is the resource) was minted at FS-100 stage 5's front page
+  '1–119': the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)
+  '7051': the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)
+  'declarations=7051': the same count, as the gate report prints it
+  '304': vacuity's refutations-skipped count, 304 -> 309 at FS-75's close (the same log)
+  'refutations-skipped=304': the same count, as the gate report prints it
+  '1130': the axiom audit's clean count, 1130 -> 1193 at FS-75's close (build/gate/axioms/20260926T053431Z-866750.log; the 1034 precedent)
+  '1146': the axiom audit's record count, 1,146 at M2's close -> 1,209 at FS-75's close (the same log)
+  '1–115': the ledger's row range in § The novel-results ledger's pointer, extended to 1–119 at FS-100's and FS-75's closes (the 1–110 precedent)
+  'J48': FS-100's paths-forward row's stage label ('stages 1 (blind check, J48) and 2 (KT-1, J49) done'), superseded by the row's re-aim at its in-ban close; plans/STUB-measure-rigidity-three-fields.md keeps it
+  'KT-1': the same stage label; the FS-100 stub keeps it
+  "T39's": a possessive of T39 ('with T39's stub') in LEDGER.md § B's FS73-T41 and T42 lines, replaced by FS-75's kernel cells; T39 itself stays
+  'ν̂': a tokenizer artefact of the `\|` escape in M3-J22-T8's code span (`|ν̂|` -> `\|ν̂\|`): the chunker strips `|` but not the backslash; no fact changes
+  '294994': the file's byte count when the temporary 325,000 budget was granted; removed with that budget at the crunch's end
+  '325': the crunch's temporary size budget (325,000), superseded by 300,000 at its end (Kooshi, 2026-09-26)
+  '325k': Kooshi's words granting the temporary 325,000 budget; superseded at the crunch's end
+  '37–41': the paths-forward table's group rank, renumbered 38–42 when FS-100 was ranked in at 3 (J47)
+  '42–44': the same re-rank: now 43–45
+  '54–55': the same re-rank: now 55–56
+  '56–58': the same re-rank: now 57–59
+  '1–110': the ledger's row range, extended to 1–115 at row 88's and FS-67's closes (2026-09-25)
+  'G1–G78': the stable-identifier range, extended to G1–G79 when G79 (Kooshi's example invariant) was minted at J44's front page
+  '34–38': the paths-forward table's group rank, renumbered 37–41 when FS-98, FS-97 and FS-99 were ranked in (J44)
+  '39–41': the same re-rank: now 42–44
+  '42–45': the same re-rank: now 45–48
+  '51–52': the same re-rank: now 54–55
+  '53–55': the same re-rank: now 56–58
+  'G = K_k^s': FS-67's old paths-forward row ('Yes for `G = K_k^s` (Greenwell–Lovász)'), replaced by its close's draft (FS67 R.8c); the fact is row 114's (`K_k^s` by iteration) and the stub's
+  'χ_f(H)': FS-67's old paths-forward row ('leaving the gap `χ_f(H) ≤ k < χ(H)`'), replaced by its close's draft; row 115 states the gap regime as `χv(H) ≤ k < χ(H)`, and the stub keeps Zhang's form
+  'G76:[hand, two derivations for the frame, the local theorem and the no-gos (rows 88–92); the obstruction a reading, reached twice independently]': G76's grade widened by row 88's close's draft (J41, data/fs86r88/j41/claude_drafts.py pair 4) to name the measure half (rows 111–113)
+  'p = 2': row 92's 'C14.2 at `p = 2` … not checked' replaced by M3's correction (C14.2 (c) holds at `q = 2`, row 110); the check is done
+  'B′': FS39-T1's § B kernel cell 'stub (FS-39 phase B′)' replaced by M2's kernel names (row 104); FS-39's stub banner keeps phase B′
+  'ℤ[U]/3ℤ[U]': row 82's T6 parenthesis ('needs ℤ[U]/3ℤ[U] and is not settled') replaced by 'settled at FS-91, row 99' (FS91-J09-J4-T6)
+  'U3': FS-91's paths-forward row ('MS₄({5}) and U3 at one prime'), deleted when FS-91 closed; U3 is answered at every split prime (row 102), the stub keeps it
+  '1/8': FS-91's paths-forward row ('band 1/6 … and 1/8'), deleted when FS-91 closed; every band is answered on characters (row 98)
+  'FS81-T1–T5': FS-75's row, re-aimed at FS-91's close to S1 and no mixing (row 99); plans/STUB-three-colour-criterion-kernel.md keeps T4's leaves
+  '(K(√7))': FS-45's row's `five_le_chromaticNumber_planeOver (K(√7))`, replaced at M2's close by the kernel theorem's own name (row 103, SevenConditional)
+  'F(t)²': G63's old killing test ('a unit vector of `F(t)²` with a pole …'), replaced by the owner's ruling (J24 stage 2) with G67's forbids-form; G63's statement χ(F(t)²) = χ(F²) stays in row 104
+  '1034': the axiom audit's clean count, 1034 -> 1130 at M2's close (J23b stage 0, build/gate/axioms/20260925T232928Z-253944.log)
+  '6795': the vacuity gate's declaration count, 6795 -> 7051 at M2's close (J23b stage 0)
+  'declarations=6795': the same count, as the gate report prints it
+  '278': vacuity's refutations-skipped count, 278 -> 304 at M2's close
+  'refutations-skipped=278': the same count, as the gate report prints it
+  '275': vacuity's sites count, 275 -> 279 at M2's close
+  'sites=275': the same count, as the gate report prints it
+  '253': vacuity's generic count, 253 -> 257 at M2's close
+  'generic=253': the same count, as the gate report prints it
+  '1–94': the ledger's row range in § The novel-results ledger's pointer, extended to 1–110 at the M1-M3 closes
+  'G1–G76': the stable-identifier range, extended to G1–G78 when G77 (M1) and G78 (M3) were minted (2026-09-25)
+  '32–36': a grouped rank in the paths-forward table, renumbered at the M1-M3 re-rank (55 rows)
+  '37–39': a grouped rank, renumbered at the M1-M3 re-rank
+  '40–43': a grouped rank, renumbered at the M1-M3 re-rank
+  '44–45': a grouped rank, renumbered at the M1-M3 re-rank
+  '46–48': a grouped rank, renumbered at the M1-M3 re-rank
+  '49–50': a grouped rank, renumbered at the M1-M3 re-rank
+  '51–53': a grouped rank, renumbered at the M1-M3 re-rank
+  'G63:[hand; prior art: `[Fischer1990]': G63 re-graded at M2's close (owner's ruling, J24): kernel at d = 2 for every F ⊆ ℝ and t transcendental (row 104, Transcendental.lean); title 'pure transcendence'
+  'plans/POROS-2026-09-25-fs86-next.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'plans/STUB-dyadic-rigidity-triangle-free.md': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  'ℚ(i)': the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses
+  '§ R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'R.4': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'C₅': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'T34–T35': a paths-forward table row compressed to its first clauses at FS-89's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1050': the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'Asymmetric': the FS-65 row's bearing, compressed at FS-89's close; plans/FRONTIER-STUBS.md keeps it
+  "60's": the FS-75 row's minted target, compressed at FS-89's close; plans/STUB-three-colour-criterion-kernel.md keeps the 1,050-leaf certificate and FS-60's fields
+  'ℚ(√p,√q)²': row 57's spelling of Fischer's plane; its home, § Publication, says 'the plane over ℚ(√p,√q)'
+  'SUSPENDED': § Publication's trigger was SUSPENDED (2026-09-19) pending [Fischer1994]; read and verified 2026-09-22, it resolved to 'has not fired' — the value is his
+  'UD(ℤ/p²,2)': the FS-66 stub row; § Notation now writes the tower as UD(ℤ/p^k, 2)
+  'UD(ℤ/529,2)': the FS-66 stub row; item 17 and row 75 write UD(ℤ/529, 2)
+  'χ(level': the FS-66 stub row's 'χ(level two) ≤ χ(level one)'; § Notation says χ(G_k) is non-increasing in k
+  'Pilot': the FS-66 stub row's 'Pilot:'; row 75 and G66 say 'the pilot'
+  '3a': WORKFLOW 2.0: the prior-art gate is step 3.2; G49 and the grokkings intro now say 3.2
+  '3g': WORKFLOW 2.0: the re-grokking is step 3.1; the grokkings intro now says 3.1
+  'G1–G54': the stable-identifier range in the grokkings intro, extended to G1–G67 when G67 was minted (2026-09-22)
+  'G1–G67': the stable-identifier range, extended to G1–G68 when G68 (the quotient/fan-gap screen) was minted (2026-09-22)
+  'G1–G68': the stable-identifier range, extended to G1–G69 when G69 (rigidity prime by prime) was minted (2026-09-22)
+  'G1–G71': the stable-identifier range, extended to G1–G72 when G72 (the invariant question, a method) was minted (2026-09-23)
+  'G1–G69': the stable-identifier range, extended to G1–G70 when G70 (√3-clean is residue, Coxeter's theorem) was minted at FS-71's close (2026-09-22)
+  '[kernel for ρ₁₅; measured for ρ₆₃]': G12's old tag; FS-71 batch 1 (M31-T1) found the law a hand derivation confirmed at 26 censuses, kernel for the ρ₁₅ instance
+  'G12:[kernel for ρ₁₅; measured for ρ₆₃]': FS-71 batch 1: G12 re-graded [hand, confirmed at 26 exact censuses; kernel for the ρ₁₅ instance] (M31-T1)
+  'G20:[kernel + measured]': FS-71 batch 1: G20 re-graded [hand + kernel + measured] — the boundary-tightness argument is M36-T1, a hand derivation
+  'G52:[measured + reading, one instance with a positive control]': FS-71 batch 4b: G52's necessary half is a hand theorem (the σ-criterion, M63G-T4/T5); the tag now says so
+  'G54:[kernel one way; derived the other; the table computed]': FS-71 batch 5b: the tight-forcing direction is a hand theorem (FS38-D2-A/B), graded so in row 67 and its entry
+  '[GarciaMarcoKnauer]': G58's yearless key, corrected to [GarciaMarcoKnauer2024] by FS-71 batch 6a
+  'arXiv:2303.06262': G58 cited the wrong arXiv id (it is Cervantes–Krebs); the García-Marco–Knauer paper is arXiv:2405.19543 (FS-71 batch 6a)
+  '6723': the vacuity gate's declaration count, 6723 -> 6728 when Instances/ThreeFive (five declarations) joined Proofs.lean at FS-70's close (2026-09-22)
+  'declarations=6723': the same count, as the gate report prints it
+  'FS38-D2-A/B': the LEDGER.md § B placeholder row FS-71 was to backfill; batch 5b indexed FS-38's seven theorems under their own rows (§ S.2) and removed the placeholder row that named them as pending
+  'FS66-W/E/T': the same placeholder row's FS-66 half; the whole row is one line, so batch 5b's removal (on filing FS-38, per the brief) drops it too — batch 6 adds FS-66's own § B rows fresh, with no placeholder to clean up
+  '6728': the vacuity gate's declaration count, 6728 -> 6795 at FS-73's close (the Kempe layer and FS-72's lattices joined the library)
+  'declarations=6728': the same count, as the gate report prints it
+  '270': vacuity's refutations-skipped count, 270 -> 278 at FS-73's close
+  'refutations-skipped=270': the same count, as the gate report prints it
+  '262': vacuity's sites count, 262 -> 275 at FS-73's close
+  'sites=262': the same count, as the gate report prints it
+  '240': vacuity's generic count, 240 -> 253 at FS-73's close
+  'generic=240': the same count, as the gate report prints it
+  '1–75': the ledger's row range in § The novel-results ledger's pointer, extended to 1–79 at FS-73's close
+  'G1–G72': the stable-identifier range, extended to G1–G73 when G73 (four colours cell by cell) was minted at FS-79's close (2026-09-24)
+  '1–79': the ledger's row range, extended to 1–81 at FS-79's close (2026-09-24)
+  'R1–R9': the FS-59 row's 'the stub's three-colour routes R1–R9 are answered'; the row was rewritten at FS-79's close around the survivors and the four-colour question, and the routes with their answered status stay in plans/STUB-four-colours-167.md
+  'R9': the old FS-59 row's first experiment (the chain route on Kooshi's 7-cycle triangle); superseded at three colours by FS-73's Theta_3 (row 79); its text stays in plans/STUB-four-colours-167.md §3a
+  "R9's": the same, possessive
+  'R5–R8': the old FS-59 row's instruments (degree-aimed asks, core growth, the rigidity dial, the order parameter); kept in plans/STUB-four-colours-167.md §3a, carried to the five-colour question there
+  'c(3w)': R9's pinned ask c(0) != c(3w); plans/STUB-four-colours-167.md §3a
+  'w′': R9's identity 1/6 = 1 + 1 - w - w-bar - w' - w-bar'; plans/STUB-four-colours-167.md §3a
+  'w̄′': the same identity
+  'G68/G69': the old open-milestones sentence 'FS-59's R9 stays deferred, re-aimed by G68/G69'; FS-73 closed and R9 is answered
+  "MASCOT-T6's": the old open-milestones sentence naming FS-73's bearings; G70 names MASCOT-T6 as its source
+  'T39–T44': row 79's theorem range, extended to T39–T45 when T45 (v is G7's n = 42 rotation) was filed at FS-73's close
+  '1–81': the ledger's row range, extended to 1–84 at FS-81's close (2026-09-24)
+  'G1–G73': the stable-identifier range, extended to G1–G74 when G74 (the layer method) was minted at FS-81's close
+  'G61:[kernel + certified + measured; one reading]': G61's grade gained 'hand' at FS-81's close: T4 is proved at [hand, two independent derivations] (row 82); the old claim 'no proof and no route' is kept as a demotion record
+  '[kernel + certified + measured; one reading]': G61's old status tag, replaced by '[kernel + certified + hand + measured; one reading]' (the entry above)
+  '9–13': the paths-forward table's group rank, renumbered 29–33 when the stubs were re-ranked one rank per row at FS-81's close
+  '14–16': the same re-rank: now 34–36
+  '17–20': the same re-rank: now 37–40
+  '21–22': the same re-rank: now 41–42
+  '23–25': the same re-rank: now 43–45
+  '26–27': the same re-rank: now 46–47
+  '28–30': the same re-rank: now 48–50
+  "9's": the old ranked-stubs intro's 'FS-9's bearing rewritten' (FS-79's re-rank narrative); FS-9's row carries its bearing
+  'plans/STUB-five-over-sqrt3-sqrt5.md': the old open-milestones paragraph's banner pointer for FS-70; the stub and its banner are in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-invariant-question-four-colours.md': the same, for FS-79
+  'plans/STUB-rigidity-dichotomy.md': the same, for FS-73
+  'plans/STUB-theorem-audit.md': the same, for FS-71
+  '§ B.': the old open-milestones sentence 'every one indexed in `LEDGER.md` § B.'; item 19 keeps the pointer to LEDGER.md § B
+  '56th': old item 14's ℚ(√167) sentence (55 of 57 lattices periodic, a 56th linear, the 57th L21cc6506 refusing); row 79 holds the census of the 57
+  '57th': the same
+  '1–84': the ledger's row range, extended to 1–87 at FS-85's close (2026-09-24)
+  'G1–G74': the stable-identifier range, extended to G1–G75 when G75 (where triangles enter four-colour rigidity) was minted at FS-85's close
+  '29–33': the paths-forward table's group rank, renumbered 31–35 when FS-86, FS-87, FS-88 joined the table at FS-85's close
+  '34–36': the same re-rank: now 36–38
+  '37–40': the same re-rank: now 39–42
+  '41–42': the same re-rank: now 43–44
+  '43–45': the same re-rank: now 45–47
+  '46–47': the same re-rank: now 48–49
+  '48–50': the same re-rank: now 50–52
+  'k·arccos(5/6)': the FS-74 row's lead 1 (Hubai's rotation acting as ±k·120°); FS-74 closed by row 85, and the lead stays in plans/STUB-algebraic-explanation.md
+  '±k·120°': the same lead
+  "Baxter's": the FS-74 row's last lead (Baxter's height); kept in plans/STUB-algebraic-explanation.md
+  'Lead': the FS-74 row's 'Lead 1:'; the row left the table when FS-74 closed
+  'plans/STUB-four-colour-rigidity-without-triangles.md': FS-85's stub; the open-milestones sentence points at the record, and the stub path with its banner is in plans/FRONTIER-STUBS.md's closed list
+  'plans/STUB-quadratic-four-colour-classification.md': FS-81's stub; the old open-milestones sentence; its path and banner are in plans/FRONTIER-STUBS.md's closed list
+  'T1–T25': FS-81's derivation range, in the old open-milestones sentence; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T43': FS-79's derivation range, in the old 'earlier closes' list; plans/FRONTIER-STUBS.md's closed list carries it
+  'T1–T45': FS-73's derivation range, the same
+  'plans/<milestone>-derivation.md': the old 'earlier closes' list's FS-71 entry; item 19 keeps the pointer as plans/<home>-derivation.md
+  'M17–M36': FS-71's reading batches, in the old 'earlier closes' list; the batches are in plans/FS71-theorem-audit.md
+  'M37–M52': the same
+  'M53–M61': the same
+  '24–FS-38': the same ('FS-24–FS-38')
+  '50–FS-66': the same ('FS-50–FS-66')
+  'data/fs66/ckpt/b1-p23/README.md': the old 'earlier closes' list's FS-66 note (the GPU solve at 23 re-rounds from a later checkpoint); the commands are in plans/FS66-phase2-certificate.md and plans/FS66-residue-tower-drop.md
+  '559': item 9's 'best object 559, census-certified' had no source (plans/FRONTIER-STUBS.md's M62 row: 'an earlier 559 here had no source'); the census-certified best object is c582 (data/m62/c582/census.json), corrected at FS-85's close
+  '39.7': the FS-60 row's as-minted certificate sizes (59's LRAT 39.7 MB); the row now points at plans/STUB-quadratic-witnesses-kernel.md, which holds them
+  '131–2360': the same (the witnesses' 131–2,360 points)
+  "239's": the same (239's LRAT)
+  'LRATs': the FS-75 row's 'in place of LRATs', compressed to 'through Θ'
+  '1–87': the ledger's row range, extended to 1–94 at FS-86's close (2026-09-25)
+  'G1–G75': the stable-identifier range, extended to G1–G76 when G76 was minted at FS-86's close
+  '31–35': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '36–38': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '39–42': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '43–44': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '45–47': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '48–49': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  '50–52': the paths-forward table's group ranks, renumbered +1 at FS-86's close (FS-86 closed; FS-89 and FS-90 minted at ranks 2, 3)
+  'H5': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'H6': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H5's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "H6's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  "G75's": the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  '1–3': the FS-86 row, closed and removed at FS-86's close; plans/STUB-dyadic-rigidity-triangle-free.md keeps H5/H6, G75's killing test and routes 1–3, and G75 carries its killing test's status
+  'k = 78': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'n/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'q−1': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'μ_{q+1}': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '7/2': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'χ_f(ℚ(√11)²)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '37/47': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√1823)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'ℚ(√887)': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '1823': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '887': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "43's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "44's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'Thm 5': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "ℚ(√3,√5)'s": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  'H4': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  "29's": a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '[reading, Poros, 2026-09-24]': a paths-forward table row compressed to its first clauses at FS-86's close; the full text is in plans/FRONTIER-STUBS.md (authoritative) and the row's stub
+  '480': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'D1–D4': G51's run records, compressed at FS-86's close to a pointer and the standing rules; their home is plans/PROTOCOL-competitor-and-advisor.md §3 (and FS-85's records for D1–D4)
+  'Draw': item 23's 'Part 1 alone Draw (K)', FS-85's week verdict; its home is plans/FS85-rigidity-without-triangles.md §R-close.2
+gate-count transitions in force: 2
+  ('1034', '5') -> ('1130', '5'): M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases
+  ('1130', '5') -> ('1193', '5'): FS-75's close gate (the owner's re-run at J52K's end; build/gate/axioms/20260926T053431Z-866750.log): 1,209 records, 1,193 clean, 11 axiom-free, 5 purchases
+
+AUDIT PASSED (0 failure(s))

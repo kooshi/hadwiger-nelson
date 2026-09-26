@@ -1,0 +1,369 @@
+### Chain.lean:101
+theorem not_colorable_chain {ι : Type*} {G : SimpleGraph ι} {k m : ℕ} (q : ι → ℂ)
+    (hq : ∀ x y, G.Adj x y → dist (q x) (q y) = 1) {a b : ι} (hf : Forces G k a b)
+    (u : Fin m → ℂ) (hu : ∀ j, ‖u j‖ = 1) (hsum : (q b - q a) * ∑ j, u j = 1) :
+    ¬ ((unitDistance ℂ).induce (chainPoints q a (q b - q a) u)).Colorable k := by
+
+### Chain.lean:147
+theorem add_one_le_chromaticNumber_induce_of_chain {S : Subring ℂ} {ι : Type*} {G : SimpleGraph ι} {k m : ℕ}
+    (q : ι → ℂ) (hq : ∀ x y, G.Adj x y → dist (q x) (q y) = 1) (hqS : ∀ z, q z ∈ S) {a b : ι}
+    (hf : Forces G k a b) (u : Fin m → ℂ) (hu : ∀ j, ‖u j‖ = 1) (huS : ∀ j, u j ∈ S)
+    (hsum : (q b - q a) * ∑ j, u j = 1) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ ((unitDistance ℂ).induce (S : Set ℂ)).chromaticNumber :=
+
+### Chain.lean:157
+theorem add_one_le_chromaticNumber_unitDistance_of_chain {ι : Type*} {G : SimpleGraph ι} {k m : ℕ}
+    (q : ι → ℂ) (hq : ∀ x y, G.Adj x y → dist (q x) (q y) = 1) {a b : ι} (hf : Forces G k a b)
+    (u : Fin m → ℂ) (hu : ∀ j, ‖u j‖ = 1) (hsum : (q b - q a) * ∑ j, u j = 1) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ (unitDistance ℂ).chromaticNumber :=
+
+### Chain.lean:182
+def planeOverSubring (F : Subfield ℝ) : Subring ℂ where
+
+### Chain.lean:195
+theorem add_one_le_chromaticNumber_planeOver_of_chain {F : Subfield ℝ} {ι : Type*} {G : SimpleGraph ι}
+    {k m : ℕ} (q : ι → ℂ) (hq : ∀ x y, G.Adj x y → dist (q x) (q y) = 1) (hqF : ∀ z, q z ∈ planeOver F)
+    {a b : ι} (hf : Forces G k a b) (u : Fin m → ℂ) (hu : ∀ j, ‖u j‖ = 1) (huF : ∀ j, u j ∈ planeOver F)
+    (hsum : (q b - q a) * ∑ j, u j = 1) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
+
+### Chain.lean:231
+theorem spindle_of_chain : 4 ≤ (unitDistance ℂ).chromaticNumber := by
+
+### Instances/SqrtTwoThree.lean:74
+theorem sixUnits_sum : (rhombusX 3 - rhombusX 0) * ∑ j, sixUnits j = 1 := by
+
+### Instances/SqrtTwoThree.lean:117
+theorem four_le_chromaticNumber_planeOver_two_three :
+    4 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {2, 3}))).chromaticNumber := by
+
+### Instances/SqrtTwoThree.lean:178
+theorem eighteen_not_colorable_three : ¬ (edgeGraph 18 eighteenEdges).Colorable 3 :=
+
+### Instances/SqrtTwoThree.lean:182
+theorem eighteen_colorable_four : (edgeGraph 18 eighteenEdges).Colorable 4 :=
+
+### Instances/SevenConditional.lean:29
+def G4 : Prop :=
+
+### Instances/SevenConditional.lean:63
+theorem sum_eightUnits : ∑ j, eightUnits j = 3 / 8 := by
+
+### Instances/SevenConditional.lean:99
+theorem five_le_chromaticNumber_planeOver_seven_of_G4 (h : G4) :
+    5 ≤ ((unitDistance ℂ).induce (planeOver (fieldOfRadicands {3, 7, 11}))).chromaticNumber := by
+
+### Transcendental.lean:75
+noncomputable def planeOverIso (L : Subfield ℝ) :
+    (unitDistance ℂ).induce (planeOver L) ≃g unitQuadrance L where
+
+### Transcendental.lean:107
+theorem unitQuadrance_colorable_of_subring {R S : Type*} [CommRing R] [CommRing S] [Nontrivial S]
+    (A : Subring R) (hA : ∀ v : R × R, v.1 ^ 2 + v.2 ^ 2 = 1 → v.1 ∈ A ∧ v.2 ∈ A)
+    (φ : A →+* S) {k : ℕ} (h : (unitQuadrance S).Colorable k) : (unitQuadrance R).Colorable k := by
+
+### Transcendental.lean:141
+theorem mem_valuationSubring_of_sq_add_sq_eq_one {K : Type*} [Field K] (B : ValuationSubring K)
+    (hB : ∀ x ∈ B, 1 + x ^ 2 ∉ B.nonunits) {a b : K} (h : a ^ 2 + b ^ 2 = 1) : a ∈ B ∧ b ∈ B := by
+
+### Transcendental.lean:177
+theorem unitQuadrance_colorable_of_valuationSubring {K S : Type*} [Field K] [CommRing S] [Nontrivial S]
+    (B : ValuationSubring K) (φ : B →+* S) (hφ : ∀ x ∈ IsLocalRing.maximalIdeal B, φ x = 0)
+    (hS : ∀ s : S, 1 + s ^ 2 ≠ 0) {k : ℕ} (h : (unitQuadrance S).Colorable k) :
+    (unitQuadrance K).Colorable k := by
+
+### Transcendental.lean:205
+noncomputable def zeroIntegral : Subring (RatFunc F) where
+
+### Transcendental.lean:282
+theorem evalZero_eq_zero_of_mem_maximalIdeal (x : zeroPlace F) (hx : x ∈ IsLocalRing.maximalIdeal (zeroPlace F)) :
+    evalZero F x = 0 := by
+
+### Transcendental.lean:301
+theorem chromaticNumber_unitQuadrance_ratFunc_of_one_add_sq_ne_zero {F : Type*} [Field F]
+    (hF : ∀ s : F, 1 + s ^ 2 ≠ 0) :
+    (unitQuadrance (RatFunc F)).chromaticNumber = (unitQuadrance F).chromaticNumber :=
+
+### Transcendental.lean:314
+theorem chromaticNumber_unitQuadrance_ratFunc {F : Type*} [Field F] [IsFormallyReal F] :
+    (unitQuadrance (RatFunc F)).chromaticNumber = (unitQuadrance F).chromaticNumber :=
+
+### Transcendental.lean:320
+theorem chromaticNumber_unitQuadrance_ratFunc_rat :
+    (unitQuadrance (RatFunc ℚ)).chromaticNumber = (unitQuadrance ℚ).chromaticNumber :=
+
+### Transcendental.lean:342
+noncomputable def adjoinTranscendental (F : Subfield ℝ) (t : ℝ) : Subfield ℝ :=
+
+### Transcendental.lean:362
+theorem chromaticNumber_planeOver_adjoin_transcendental_eq (F : Subfield ℝ) {t : ℝ} (ht : Transcendental F t) :
+    ((unitDistance ℂ).induce (planeOver (adjoinTranscendental F t))).chromaticNumber =
+      ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+
+### Transcendental.lean:371
+theorem transcendental_liouvilleNumber_bot : Transcendental (⊥ : Subfield ℝ) (liouvilleNumber 10) := by
+
+### Transcendental.lean:385
+theorem chromaticNumber_planeOver_liouville :
+    ((unitDistance ℂ).induce (planeOver (adjoinTranscendental ⊥ (liouvilleNumber 10)))).chromaticNumber =
+      ((unitDistance ℂ).induce (planeOver ⊥)).chromaticNumber :=
+
+### UnitRing.lean:47
+def unitRing (σ : L →+* L) : Subring L := Subring.closure (normOne σ)
+
+### UnitRing.lean:56
+theorem normOne_subset_iff_stable (σ : L →+* L) (hσσ : ∀ z : L, σ (σ z) = z) (B : ValuationSubring L) :
+    normOne σ ⊆ (B : Set L) ↔ ∀ z ∈ B, σ z ∈ B := by
+
+### UnitRing.lean:77
+theorem inv_mem_iff_forall_valuationSubring (R : Subring L) {x : L} (hx : x ∈ R) (hx0 : x ≠ 0) :
+    x⁻¹ ∈ R ↔ ∀ B : ValuationSubring L, R ≤ B.toSubring → x⁻¹ ∈ B := by
+
+### UnitRing.lean:100
+theorem inv_natCast_mem_unitRing_iff [CharZero L] (σ : L →+* L) (hσσ : ∀ z : L, σ (σ z) = z) {n : ℕ} (hn : n ≠ 0) :
+    (n : L)⁻¹ ∈ unitRing σ ↔ ∀ B : ValuationSubring L, (∀ z ∈ B, σ z ∈ B) → (n : L)⁻¹ ∈ B := by
+
+### UnitRing.lean:107
+theorem inv_natCast_mem_unitRing_iff_not_mem_nonunits [CharZero L] (σ : L →+* L) (hσσ : ∀ z : L, σ (σ z) = z) {n : ℕ}
+    (hn : n ≠ 0) :
+    (n : L)⁻¹ ∈ unitRing σ ↔ ∀ B : ValuationSubring L, (∀ z ∈ B, σ z ∈ B) → (n : L) ∉ B.nonunits := by
+
+### UnitRing.lean:118
+theorem inv_two_mem_unitRing_iff [CharZero L] (σ : L →+* L) (hσσ : ∀ z : L, σ (σ z) = z) :
+    (2 : L)⁻¹ ∈ unitRing σ ↔ ∀ B : ValuationSubring L, (∀ z ∈ B, σ z ∈ B) → (2 : L) ∉ B.nonunits := by
+
+### UnitRing.lean:151
+def unitRingOver (F : Subfield ℝ) : Subring ℂ := Subring.closure {z | z ∈ planeOver F ∧ ‖z‖ = 1}
+
+### UnitRing.lean:172
+theorem coe_mem_unitRingOver_iff {F : Subfield ℝ} (x : planeOverSubfield F) :
+    (x : ℂ) ∈ unitRingOver F ↔ x ∈ unitRing (conjOn (conj_mem_planeOverSubfield F)) := by
+
+### UnitRing.lean:191
+theorem inv_natCast_mem_unitRingOver_iff (F : Subfield ℝ) {n : ℕ} (hn : n ≠ 0) :
+    (n : ℂ)⁻¹ ∈ unitRingOver F ↔
+      ∀ B : ValuationSubring (planeOverSubfield F), (∀ z ∈ B, conjOn (conj_mem_planeOverSubfield F) z ∈ B) →
+        (n : planeOverSubfield F) ∉ B.nonunits := by
+
+### UnitRing.lean:201
+theorem exists_sum_eq_of_mem_unitRingOver {F : Subfield ℝ} {x : ℂ} (hx : x ∈ unitRingOver F) :
+    ∃ (m : ℕ) (u : Fin m → ℂ), (∀ j, ‖u j‖ = 1) ∧ (∀ j, u j ∈ planeOver F) ∧ ∑ j, u j = x := by
+
+### UnitRing.lean:229
+theorem add_one_le_chromaticNumber_planeOver_of_inv_mem_unitRingOver {F : Subfield ℝ} {ι : Type*} {G : SimpleGraph ι}
+    {k : ℕ} (q : ι → ℂ) (hq : ∀ x y, G.Adj x y → dist (q x) (q y) = 1) (hqF : ∀ z, q z ∈ planeOver F) {a b : ι}
+    (hf : Forces G k a b) (hδ : q b ≠ q a) (hinv : (q b - q a)⁻¹ ∈ unitRingOver F) :
+    ((k + 1 : ℕ) : ℕ∞) ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+
+### UnitRing.lean:245
+theorem inv_five_mem_unitRing_conj : (5 : ℂ)⁻¹ ∈ unitRing (starRingEnd ℂ) := by
+
+### Instances/SevenUnitRing.lean:34
+theorem inv_two_mem_unitRingOver_seven : (2 : ℂ)⁻¹ ∈ unitRingOver F7 := by
+
+### Instances/SevenUnitRing.lean:39
+theorem three_div_eight_mem_unitRingOver_seven : (3 / 8 : ℂ) ∈ unitRingOver F7 := by
+
+### Instances/SevenUnitRing.lean:46
+theorem wall_broken_seven :
+    ∀ B : ValuationSubring (planeOverSubfield F7), (∀ z ∈ B, conjOn (conj_mem_planeOverSubfield F7) z ∈ B) →
+      (2 : planeOverSubfield F7) ∉ B.nonunits := by
+
+### Stripe.lean:52
+def Proper (c : ℤ × ℤ → Fin 4) : Prop := ∀ x (i : Fin 6), c x ≠ c (x + rim i)
+
+### Stripe.lean:56
+def NT0 (c : ℤ × ℤ → Fin 4) : Prop :=
+
+### Stripe.lean:61
+def Striped (c : ℤ × ℤ → Fin 4) : Prop :=
+
+### Stripe.lean:84
+theorem wheel_all :
+    (List.finRange 4).all (fun a => (List.finRange 4).all fun r0 => (List.finRange 4).all fun r1 =>
+      (List.finRange 4).all fun r2 => (List.finRange 4).all fun r3 => (List.finRange 4).all fun r4 =>
+      (List.finRange 4).all fun r5 => decide (WheelFacts a r0 r1 r2 r3 r4 r5)) = true := by
+
+### Stripe.lean:110
+theorem wheel (hc : Proper c) (hnt : NT0 c) (x : ℤ × ℤ) :
+    ((c (x + rim 0) = c (x + rim 3) ∧ c (x + rim 1) = c (x + rim 4) ∧ c (x + rim 2) = c (x + rim 5)) ∨
+        TypeP c x 0 ∨ TypeP c x 1 ∨ TypeP c x 2) ∧
+      (c (x + rim 2) = c (x + rim 4) → c (x + rim 0) = c (x + rim 3) ∧ c (x + rim 1) = c (x + rim 5)) ∧
+      (c (x + rim 1) = c (x + rim 5) → c (x + rim 0) = c (x + rim 3) ∧ c (x + rim 2) = c (x + rim 4)) := by
+
+### Stripe.lean:158
+theorem typeP_line (hc : Proper c) (hnt : NT0 c) {x : ℤ × ℤ} (h : TypeP c x 0) (s : ℤ) :
+    TypeP c (x + (s, 0)) 0 := by
+
+### Stripe.lean:204
+theorem striped_of_line (hc : Proper c) (x : ℤ × ℤ) (hx : ∀ s : ℤ, c (x + (s + 2, 0)) = c (x + (s, 0))) : Striped c := by
+
+### Stripe.lean:302
+theorem striped_of_comp_rot (h : Striped (c ∘ rot)) : Striped c := by
+
+### Stripe.lean:336
+theorem striped_of_proper_nt0 (hc : Proper c) (hnt : NT0 c) : Striped c := by
+
+### Stripe.lean:390
+theorem proper_modTwo : Proper modTwo := by
+
+### Stripe.lean:400
+theorem nt0_modTwo : NT0 modTwo := by
+
+### Stripe.lean:429
+theorem not_striped_threeCol : ¬ Striped threeCol := by
+
+### Bridge.lean:51
+def RealAlgebraicDescent : Prop :=
+
+### Bridge.lean:57
+theorem realAlgebraicDescent_one (S : Finset (MvPolynomial (Fin 1) ℚ))
+    (h : ∃ x : Fin 1 → ℝ, ∀ p ∈ S, MvPolynomial.aeval x p = 0) :
+    ∃ x : Fin 1 → ℝ, (∀ i, IsAlgebraic ℚ (x i)) ∧ ∀ p ∈ S, MvPolynomial.aeval x p = 0 := by
+
+### Bridge.lean:74
+def RationalDescent : Prop :=
+
+### Bridge.lean:80
+theorem not_rationalDescent : ¬ RationalDescent := by
+
+### Bridge.lean:96
+theorem RealAlgebraicDescent.of_finite (hD : RealAlgebraicDescent) {σ : Type*} [Finite σ]
+    (S : Finset (MvPolynomial σ ℚ)) (h : ∃ x : σ → ℝ, ∀ p ∈ S, MvPolynomial.aeval x p = 0) :
+    ∃ x : σ → ℝ, (∀ i, IsAlgebraic ℚ (x i)) ∧ ∀ p ∈ S, MvPolynomial.aeval x p = 0 := by
+
+### Bridge.lean:122
+theorem numberField_adjoinReal {S : Set ℝ} (hS : S.Finite) (halg : ∀ x ∈ S, IsAlgebraic ℚ x) :
+    NumberField (adjoinReal S) := by
+
+### Bridge.lean:158
+theorem exists_numberField_drawing_of_descent (hD : RealAlgebraicDescent) {ι : Type*} [Finite ι]
+    (G : SimpleGraph ι) (f : ι → ℂ) (hf : ∀ x y, G.Adj x y → dist (f x) (f y) = 1) :
+    ∃ F : Subfield ℝ, NumberField F ∧ ∃ g : ι → ℂ, (∀ i, g i ∈ planeOver F) ∧
+      ∀ x y, G.Adj x y → dist (g x) (g y) = 1 := by
+
+### Bridge.lean:199
+theorem iSup_numberField_le_chromaticNumber_plane :
+    ⨆ (F : Subfield ℝ) (_ : NumberField F), ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ≤
+      (unitDistance ℂ).chromaticNumber :=
+
+### Bridge.lean:236
+theorem chromaticNumber_plane_eq_iSup_numberField_of_descent (hD : RealAlgebraicDescent) :
+    (unitDistance ℂ).chromaticNumber =
+      ⨆ (F : Subfield ℝ) (_ : NumberField F), ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
+
+### Bridge.lean:249
+theorem exists_numberField_chromaticNumber_eq_plane_of_descent (hD : RealAlgebraicDescent) :
+    ∃ F : Subfield ℝ, NumberField F ∧
+      ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = (unitDistance ℂ).chromaticNumber := by
+
+### Bridge.lean:267
+theorem numberField_sup {F E : Subfield ℝ} (hF : NumberField F) (hE : NumberField E) : NumberField ↥(F ⊔ E) := by
+
+### Bridge.lean:283
+theorem chromaticNumber_plane_ne_six_iff_of_descent (hD : RealAlgebraicDescent) :
+    (unitDistance ℂ).chromaticNumber ≠ 6 ↔ ∀ F : Subfield ℝ, NumberField F →
+      ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = 6 →
+      ∃ F' : Subfield ℝ, F ≤ F' ∧ NumberField F' ∧ ((unitDistance ℂ).induce (planeOver F')).chromaticNumber = 7 := by
+
+### RealClosed.lean:52
+theorem Polynomial.exists_isRoot_of_odd_natDegree_real {f : ℝ[X]} (hf : Odd f.natDegree) : ∃ x, f.IsRoot x := by
+
+### RealClosed.lean:71
+instance Real.isRealClosed : IsRealClosed ℝ :=
+
+### RealClosed.lean:99
+instance algebraicClosure.isRealClosed {F E : Type*} [Field F] [Field E] [Algebra F E] [IsRealClosed E] :
+    IsRealClosed (algebraicClosure F E) where
+
+### RealClosed.lean:121
+theorem isRealClosed_algebraicClosure_rat_real : IsRealClosed (algebraicClosure ℚ ℝ) := inferInstance
+
+### NoParam.lean:52
+theorem exists_eq_C_mul_sq_of_mul_eq_sq {x y g : k[X]} (hxy : IsCoprime x y) (h : x * y = g ^ 2) :
+    ∃ (r : k) (α : k[X]), r ≠ 0 ∧ α ^ 2 * C r = x := by
+
+### NoParam.lean:60
+theorem natDegree_eq_zero_of_mul_mul_sub_eq_sq (h2 : (2 : k) ≠ 0) {p q g : k[X]} (hpq : IsCoprime p q)
+    (hg : p * q * (p ^ 2 - q ^ 2) = g ^ 2) : p.natDegree = 0 ∧ q.natDegree = 0 := by
+
+### NoParam.lean:108
+theorem exists_algebraMap_eq_of_sq_eq {B : RatFunc k} {P : k[X]} (h : B ^ 2 = algebraMap k[X] (RatFunc k) P) :
+    ∃ g : k[X], algebraMap k[X] (RatFunc k) g = B :=
+
+### NoParam.lean:114
+theorem not_isSquare_cube_sub_self (h2 : (2 : k) ≠ 0) {a : RatFunc k}
+    (ha : a ∉ Set.range (RatFunc.C (K := k))) : ¬ IsSquare (a ^ 3 - a) := by
+
+### NoParam.lean:138
+theorem mem_range_C_of_sq_eq_cube_sub_self (h2 : (2 : k) ≠ 0) {a b : RatFunc k} (h : b ^ 2 = a ^ 3 - a) :
+    a ∈ Set.range (RatFunc.C (K := k)) ∧ b ∈ Set.range (RatFunc.C (K := k)) := by
+
+### NoParam.lean:156
+theorem not_isSquare_cube_sub_self_of_charZero [CharZero k] {a : RatFunc k}
+    (ha : a ∉ Set.range (RatFunc.C (K := k))) : ¬ IsSquare (a ^ 3 - a) :=
+
+### NoParam.lean:172
+theorem twin_not_mem_range_C (h2 : (2 : k) ≠ 0) : twin k ∉ Set.range (RatFunc.C (K := k)) := by
+
+### NoParam.lean:185
+theorem isSquare_twin_sq_sub_one (h2 : (2 : k) ≠ 0) : IsSquare (twin k ^ 2 - 1) := by
+
+### NoParam.lean:195
+theorem X_sq_not_mem_range_C : (RatFunc.X : RatFunc k) ^ 2 ∉ Set.range (RatFunc.C (K := k)) := by
+
+### NoParam.lean:204
+theorem isSquare_cube_sub_self_X_sq_zmod_two :
+    IsSquare (((RatFunc.X : RatFunc (ZMod 2)) ^ 2) ^ 3 - RatFunc.X ^ 2) := by
+
+### NoParam.lean:218
+theorem not_mem_adjoinTranscendental_of_sq_eq (F : Subfield ℝ) {t : ℝ} (ht : Transcendental F t) {x y : ℝ}
+    (hx : x ∉ F) (hxy : y ^ 2 = x ^ 3 - x) :
+    ¬ (x ∈ adjoinTranscendental F t ∧ y ∈ adjoinTranscendental F t) := by
+
+### NoParam.lean:243
+theorem transcendental_two_add_liouvilleNumber : Transcendental ℚ (2 + liouvilleNumber 10) := by
+
+### NoParam.lean:255
+theorem not_mem_adjoinTranscendental_liouville (F : Subfield ℝ) (hF : ∀ z ∈ F, IsAlgebraic ℚ z) {t : ℝ}
+    (ht : Transcendental F t) :
+    ¬ (2 + liouvilleNumber 10 ∈ adjoinTranscendental F t ∧
+      Real.sqrt ((2 + liouvilleNumber 10) ^ 3 - (2 + liouvilleNumber 10)) ∈ adjoinTranscendental F t) := by
+
+### NoParam.lean:266
+theorem sqrt_not_mem_adjoinTranscendental_bot_liouville :
+    Real.sqrt ((2 + liouvilleNumber 10) ^ 3 - (2 + liouvilleNumber 10)) ∉
+      adjoinTranscendental ⊥ (liouvilleNumber 10) := by
+
+### NoParam.lean:283
+inductive IsPureTower {Ω : Type*} [Field Ω] (K : Subfield Ω) : Subfield Ω → Prop
+  /-- The empty tower. -/
+  | refl : IsPureTower K K
+  /-- One more simple adjunction `L ⊆ L(t)`, `t` transcendental over `L`. -/
+  | adjoin {L : Subfield Ω} (t : Ω) : IsPureTower K L → Transcendental L t →
+      IsPureTower K (IntermediateField.adjoin L {t}).toSubfield
+
+/-- **The curve has no new points in a pure tower**: if `L` is a purely transcendental tower over `K` inside `Ω` (`2 ≠ 0`),
+every point `(a, b)` of `y² = x³ − x` with coordinates in `L` has them in `K`. Induction on the tower, one step being
+`mem_range_C_of_sq_eq_cube_sub_self` through `K(t) ≅ K(X)`. -/
+theorem mem_of_isPureTower {Ω : Type*} [Field Ω] (h2 : (2 : Ω) ≠ 0) {K L : Subfield Ω}
+    (hKL : IsPureTower K L) {a b : Ω} (ha : a ∈ L) (hb : b ∈ L) (h : b ^ 2 = a ^ 3 - a) : a ∈ K ∧ b ∈ K := by
+
+### NoParam.lean:293
+theorem mem_of_isPureTower {Ω : Type*} [Field Ω] (h2 : (2 : Ω) ≠ 0) {K L : Subfield Ω}
+    (hKL : IsPureTower K L) {a b : Ω} (ha : a ∈ L) (hb : b ∈ L) (h : b ^ 2 = a ^ 3 - a) : a ∈ K ∧ b ∈ K := by
+
+### NoParam.lean:320
+theorem not_forall_mem_isPureTower (E : Subfield ℝ) (hxE : 2 + liouvilleNumber 10 ∈ E)
+    (hyE : Real.sqrt ((2 + liouvilleNumber 10) ^ 3 - (2 + liouvilleNumber 10)) ∈ E)
+    {Ω : Type*} [Field Ω] [CharZero Ω] {K L : Subfield Ω} (hKL : IsPureTower K L)
+    (hK : ∀ z ∈ K, IsAlgebraic ℚ z) (φ : E →+* Ω) : ¬ ∀ z, φ z ∈ L := by
+
+### NoParam.lean:339
+theorem isPureTower_bot_liouville :
+    IsPureTower (⊥ : Subfield ℝ) (adjoinTranscendental ⊥ (liouvilleNumber 10)) :=
+
+### NoParam.lean:344
+theorem not_forall_mem_adjoinTranscendental_bot_liouville :
+    ¬ ∀ z : (⊤ : Subfield ℝ), (⊤ : Subfield ℝ).subtype z ∈ adjoinTranscendental ⊥ (liouvilleNumber 10) :=
+

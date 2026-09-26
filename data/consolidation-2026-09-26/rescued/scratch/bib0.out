@@ -1,0 +1,17 @@
+bibliography: 394 keyed rows, 12 retired/alternate keys
+cited across the repository: 228 arXiv ids, 378 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 8
+   arXiv:1006.4491   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:1411.2776   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:1801.07802   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:1804.01369   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:1909.06866   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:2208.07347   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:2303.01089   first seen in plans/FS100-X24R-prior-art.md
+   arXiv:2608.24503   first seen in plans/FS100-X24R-prior-art.md
+
+bracketed keys cited but neither defined nor aliased: 1
+   [LacaWarren2018]   first seen in data/crunch-2026-09-26-x2x3/reports/X24R.md
+
+UNLOGGED PRIOR ART: 9

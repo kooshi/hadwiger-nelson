@@ -1,0 +1,42 @@
+| 15 | owner ruling | Item 1 (the milestone is FS-100 stage 5): ACCEPTED. Alternative: a new stub for ×2×3. Why: the crunch's claims are MR's two halves, which is FS-100's lemma; a new stub splits one question. Confidence high. | owner, 05:46 | open |
+| 16 | owner ruling | Future claim lists say "totally real" where they mean it (ℚ(√47) is totally real); raised by X01D and X01V (EF-G (a) fails at ℚ(∛2)). | owner, 06:00 | open |
+| 17 | owner ruling | X05V's fence touch (one §6 line naming X05V and the headline cap, no derivation content): does not lower X05V's blindness grade. | owner, 06:01 | open |
+| 18 | owner ruling | X01V's held two-line proof of HX-1 was NOT passed to X02V, to keep X02V blind; the close compares X01V's proof with X02V's verdict. | owner, 05:58 | open |
+| 19 | slip | The planner ran to about 341k harness tokens against a hand-back line of 280k; the advisor to about 333k against a budget of 150k. | owner job log | open |
+| 20 | tool defect | The advisor committed two PDFs into the repository (d20b17d4, data/crunch-2026-09-26-x2x3/poros/): the close moves Einsiedler–Fish 2010 into ~/source/library/pdf/, removes both copies with git rm, and adds a BIBLIOGRAPHY row [EinsiedlerFish2010]. | d20b17d4 | open |
+| 21 | prior-art debt | G50 again: the advisor re-fetched Einsiedler–Lindenstrauss 2021, held in ~/source/library/pdf/ under its journal year (2022); pairs with item 13. | owner job log | open |
+| 22 | owner note | The divergence on EF_F: X01D TRUE (as EF_F⁺, one mind) against X01V GAP at Einsiedler–Fish Lemma 3.2's multiplier step (lemma UZ). X01V's stage 4 (reading X01D §3) and the advisor's re-check adjudicate; the close grades EF_F from them. | reports X01D, X01V | open |
+| 23 | owner note | SP-Cor's pass is conditional on two one-mind inputs, R-U and N2 (J45). The close checks their grades before any "χ(ℚ(√47)²) = 5" headline. | report X05V | open |
+| 24 | result | EF_F TRUE via EF_F⁺: Lemma 3.1′ (SMB, local injectivity by the product formula) + pigeonhole with U_ℚ multipliers + two-scale z = ℓ₁e₂ − ℓ₂e₁ = 0 by the product formula + wandering shells; the planner's risk (multipliers expand other places) is absorbed polynomially by height | plans/FS100-X01D-derivation.md §3 | open |
+| 25 | result | Corollary MR⟺PE: for every real number field MR(F) ⟺ PE-2(F), given R-U | §4.3 | open |
+| 26 | result | EF-G (a) FALSE at ℚ(∛2); Haar entropy is Σ over ALL places of log⁺\|u\|_v; (a) TRUE for totally real F; (b) TRUE via U_ℚ ⊆ U_F (even b = 1 gives exponent 1/(2[F:ℚ])) | §2.1, tools/x01d_unit_check.py (control ℚ(√2) and plant σ = id both fire correctly) | open |
+| 27 | result | EF-X TRUE: archimedean circle measures are U-ergodic, zero-entropy, non-atomic | §2.2 | open |
+| 28 | result | EF-MR TRUE as a composition; unlisted input χ(ℚ(√47)²) ≤ 5 (held); route-(A) inputs to χ = 5: PE-2 (open), EF_F (one mind), SP-Cor, T-C(A) at S = ∅, R-U | §4.1 | open |
+| 29 | correction owed | the advisor's relayed "U ∩ O_L^× is torsion by Kronecker's theorem, because \|u\|_v = 1 at every archimedean place of L" holds only for totally real F | §2.1 | open |
+| 30 | correction owed | LEDGER row 118: "MR is its zero-entropy half plus an owed lemma PE-lim" → "MR ⟺ PE-lim, given EF_F⁺" | §4.5 | open |
+| 31 | correction owed | brief's EL2021 path (data/fs100/j51/el2021.pdf) did not exist; owner corrected at 8e941a76 | §1.2 Q7 | open |
+| 32 | prediction scored | C0: EF-G FALSE 0.80 won; EF_F TRUE 0.65 won; EF-MR TRUE 0.55 won (unlisted bound found); EF-X TRUE 0.95 won | §4.4 | open |
+| 33 | prior-art debt | Sataev 1975 (Uspekhi 30:2, 203–204; EF's Thm 1.2 first, per Huang 2017) not held, unread; Chothi–Everest–Ward 1997 and Lind–Ward 1988 cited from memory for EF-G (a′) only | §1.4, §4.5 | open |
+| 34 | prior-art debt | BIBLIOGRAPHY rows proposed: [EinsiedlerFish2010] (read in full), [Huang2017] (§1), [HuangLiShiXu2023] (§1), [Sataev1975] (unheld); zbMATH gate for an S-adic/number-field EF negative in the words listed | §1.4, §4.5 | open |
+| 35 | stub to re-aim | FS-100 stub and route (B): given EF_F⁺, MR ⟺ PE-2, so PE-lim is the whole remaining difficulty; route (A) is closed | §4.3 | open |
+| 36 | result | X01V-T1: h_m(u) = Σ_{w ∈ supp(u) ∪ ∞} log max(1,\|u\|_w); = log H(u) for totally real F [hand] | plans/FS100-X01V-verification.md §2.2 | open |
+| 37 | result | X01V-T2: EF-G (a) false over ℚ(∛2) with an explicit u [tools exact + hand] | §2.2, tools/x01v_entropy_check.py, data/fs100/x01v/entropy-check.out | open |
+| 38 | result | X01V-T5: every U-ergodic μ with μ(E) = 1 has zero entropy for every u (entropy transfer), so EF_F contains a positive-entropy statement; EF_F⁰ (zero entropy for every u) is what MR needs, and PE-2 ∧ EF_F⁰ ⟹ EF_F [hand] | §2.3, §2.4 | open |
+| 39 | result | X01V-T7 / EF_F GAP: EF's zero-entropy lemma does not transfer; missing lemma UZ (uniform-in-M local-dimension bound at every split place of norm ≤ M) [hand] | §2.3 | open |
+| 40 | correction owed | EF-G (a) should say "totally real F" (or use the full height exp h_m(u)) | §3.3 item 1 | open |
+| 41 | correction owed | EF-MR part 2 concludes "= 5" but SP-Cor gives "≥ 5"; name χ(ℚ(√47)²) ≤ 5 (Theorem A at 11) as an input | §3.3 item 2 | open |
+| 42 | tool defect | my own tool's first certificate (non-reciprocity ⟹ root off the circle) could never fire (u⁻¹ = ū makes the minimal polynomial reciprocal); caught by its own red run, replaced by an exact Sturm count on the trace polynomial before any verdict | §2.2 | open |
+| 43 | prior-art debt | BIBLIOGRAPHY.md row [EinsiedlerFish2010] proposed (ETDS 30 (2010) 151–157, Zbl 1189.37005, arXiv:0804.3586; read §§1–4 in full); Lind–Ward 1988 used by statement, unread | §3.3 item 5 | open |
+| 44 | stub to mint or re-aim | FS-100 stage 5: route (A) closed as "transfer EF" at a named step; what remains is UZ, which is MR's zero-entropy half restated, not reduced | §3.3 item 6 | open |
+| 45 | result | X05V-1: SP-Cor re-derived P0–P8 from lemma statements [hand; given N1, N2, R-U (J45, one mind) and R88-TCA at S=∅]; load-bearing one-mind inputs for the headline are R-U and N2 | plans/FS100-X05V-verification.md §2.1, §2.3 | open |
+| 46 | result | X05V-2: A⁺ at S=∅ re-derived from SI-1, SI-3, SI-4, N2 + R88-TCA [hand] | §2.1 | open |
+| 47 | result | X05V-3: KC TRUE; F2's noisy ℚ(√11) colouring has σ = σ_D + (2/21)·m, so the MR step runs with a = 2/21 > 0 [hand + tools exact, tools/x05v_checks.py check 5] | §2.2 | open |
+| 48 | result | X05V-4: the example invariant (G79), corrected FL-1: τ₀ = σ\|_{R̂∖E} is not a Haar multiple and τ̂₀ ≡ −(4/3)Σ_j E[p_j(0)p_j(u)] < 0 on U [hand] | §3.1 | open |
+| 49 | result | X05V-5/6: FL-1(iii) ⟺ A ≥ (1−B)/3 − a/4 ⟺ σ̂_E(1) ≥ −(σ_E(R̂)+a)/3; no spectral route (J₀(3.83) < −0.4027 < −1/3; 11, 19 fail H*); pointwise false [hand + tools exact, checks 2–4] | §3.1 | open |
+| 50 | result | X05V-7/8: the consumer needs MR, or H_κ together with QTCA_κ for one κ > 0; "H_κ for every κ > 0" ⟺ MR (via SP-if); MR ⟹ H_{1/3} [hand] | §3.2 | open |
+| 51 | correction owed | KC's "T + Fin_S plus Haar": row 94's non-periodic colourings have spectrum on T + A (row 112); F2's noisy ones T plus Haar | §3.4 item 1 | open |
+| 52 | correction owed | the X05V brief lists "SP-oi" in FS84-SI-D §5.4; it is only in that file's theorems table | §1.1, §3.4 item 2 | open |
+| 53 | correction owed | SP-Cor's write-up must say P1 takes a rotation-invariant μ (MR and R-U need σ U-invariant) | §3.4 item 3 | open |
+| 54 | prediction scored | queue §5 item 8 (FL-1 TRUE as written, P = 0.40): not met here (GAP); X05V's C0 scored in §3.3 | §3.3 | open |
+| 55 | stub to mint or re-aim | FS-100's stub: name QTCA_κ ("every rotation-invariant four-colouring over ℚ(√47) has Σ_j E[p_j(0)p_j(u)] ≥ κ(1 − Σ_j E[p_j(0)²])") as the step the one-sided flip needs | §3.1, §3.4 item 5 | open |
+| 56 | slip | fence touched at 05:53: a grep over the whole queue printed §6's line 228 ("P-5 (adopted): a blind check of SP-Cor (X05V) and the headline cap (inventory item 8); the known-positive control KC."); no derivation content | §1.4 | open |

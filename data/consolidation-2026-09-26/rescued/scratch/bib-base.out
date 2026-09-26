@@ -1,0 +1,11 @@
+bibliography: 384 keyed rows, 12 retired/alternate keys
+cited across the repository: 215 arXiv ids, 370 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 0
+
+bracketed keys cited but neither defined nor aliased: 3
+   [BekkaFrancini2022]   first seen in data/crunch-2026-09-25/reports/J53b.md
+   [EinsiedlerLindenstrauss2003]   first seen in data/crunch-2026-09-25/reports/J53b.md
+   [LindenstraussWang2012]   first seen in data/crunch-2026-09-25/reports/J53b.md
+
+UNLOGGED PRIOR ART: 3

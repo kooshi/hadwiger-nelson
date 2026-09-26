@@ -1,0 +1,10 @@
+9 repeated runs of >= 10 words, 642 bytes in second and later tellings:
+    122 B  > k` ⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations; GRRSV external) | `plans/FS67-derivation.md`
+    100 B  a 6-forcer's every compulsion lives in a 6-open field, where no residue plane is five-colourable and
+     80 B  under a period-`N` colouring is the lift of the quotient's two-colour component,
+     69 B  Every congruence between subsets of `F²` is an isometry of `F²`, so
+     63 B  no usable prime above 3 in the committed table is tight for any
+     59 B  ⟹ every `k`-colouring of `G × H` pulled back | hand (two
+     55 B  a real field whose compact places all read above −1/2
+     50 B  ends with what it makes you do and what would kill
+     44 B  a rung that does not land is reported as not

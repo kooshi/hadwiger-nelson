@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/VHfLkH9VyroCcc+7UrAKsk3pkHU</id>
+  <title>arXiv Query: search_query=au:Wrochna&amp;id_list=&amp;start=0&amp;max_results=20</title>
+  <updated>2026-09-25T23:36:54Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=au:Wrochna&amp;start=0&amp;max_results=20&amp;id_list=" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>20</opensearch:itemsPerPage>
+  <opensearch:totalResults>72</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2006.07050v4</id>
+    <title>Sallow: a heuristic algorithm for treedepth decompositions</title>
+    <updated>2020-09-30T11:25:05Z</updated>
+    <link href="https://arxiv.org/abs/2006.07050v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2006.07050v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We describe a heuristic algorithm for computing treedepth decompositions, submitted for the PACE 2020 challenge. It relies on a variety of greedy algorithms computing elimination orderings, as well as a Divide &amp; Conquer approach on balanced cuts obtained using a from-scratch reimplementation of the 2016 FlowCutter algorithm by Hamann &amp; Strasser [ACM JEA 2018].</summary>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-06-12T10:04:06Z</published>
+    <arxiv:comment>A shorter version will appear in proceedings of IPEC 2020</arxiv:comment>
+    <arxiv:primary_category term="cs.DS"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+    <arxiv:doi>10.5281/zenodo.3870565</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.5281/zenodo.3870565" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2205.14719v1</id>
+    <title>A note on hardness of promise hypergraph colouring</title>
+    <updated>2022-05-29T17:11:23Z</updated>
+    <link href="https://arxiv.org/abs/2205.14719v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2205.14719v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show a slightly simpler proof the following theorem by I. Dinur, O. Regev, and C. Smyth: for all $c \geq 2$, it is NP-hard to find a $c$-colouring of a 2-coloruable 3-uniform hypergraph. We recast this result in the algebraic framework for Promise CSPs, using only a weaker version of the PCP theorem.</summary>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-05-29T17:11:23Z</published>
+    <arxiv:primary_category term="cs.DM"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1808.03859v2</id>
+    <title>Wick rotation of the time variables for two-point functions on analytic backgrounds</title>
+    <updated>2019-10-13T18:02:40Z</updated>
+    <link href="https://arxiv.org/abs/1808.03859v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1808.03859v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We set up a general framework for Calderón projectors (and their generalization to non-compact manifolds), associated with complex Laplacians e.g. obtained by Wick rotation of a Lorentzian metric. In the analytic case, we use this to show that the Laplacian's Green's functions have analytic continuations whose boundary values are two-point functions of analytic Hadamard states. The result does not require the metric to be stationary. As an aside, we describe how thermal states are obtained as a special case of this construction if the coefficients are time-independent.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2018-08-11T20:40:26Z</published>
+    <arxiv:comment>v2: various corrections, presentation improved; to appear in JMP</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <arxiv:doi>10.1007/s11005-019-01230-7</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s11005-019-01230-7" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1004.5518v1</id>
+    <title>Weber-Schafheitlin integrals with arbitrary exponent</title>
+    <updated>2010-04-30T13:03:08Z</updated>
+    <link href="https://arxiv.org/abs/1004.5518v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1004.5518v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We present explicit formulae for Weber-Schafheitlin type integrals and give them an interpretation as the kernel of a physically relevant operator related to the hamiltonian of Aharanov and Bohm. In particular, we derive explicit formulae for Weber-Schafheitlin type integrals with exponent larger or equal 1, which are distributions on R_+. We discuss several special cases.</summary>
+    <category term="math.CA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2010-04-30T13:03:08Z</published>
+    <arxiv:comment>11 pages</arxiv:comment>
+    <arxiv:primary_category term="math.CA"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1408.2812v2</id>
+    <title>Homomorphism reconfiguration via homotopy</title>
+    <updated>2017-03-24T19:29:47Z</updated>
+    <link href="https://arxiv.org/abs/1408.2812v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1408.2812v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the following problem for a fixed graph H: given a graph G and two H-colorings of G, i.e. homomorphisms from G to H, can one be transformed (reconfigured) into the other by changing one color at a time, maintaining an H-coloring throughout. This is the same as finding a path in the Hom(G,H) complex. For H=K_k this is the problem of finding paths between k-colorings, which was shown to be in P for k&lt;=3 and PSPACE-complete otherwise by Cereceda et al. 2011. We generalize the positive side of this dichotomy by providing an algorithm that solves the problem in polynomial time for any H with no C_4 subgraph. This gives a large class of constraints for which finding solutions to the Constraint Satisfaction Problem is NP-complete, but finding paths in the solution space is P.
+  The algorithm uses a characterization of possible reconfiguration sequences (paths in Hom(G,H)), whose main part is a purely topological condition described in algebraic terms of the fundamental groupoid of H seen as a topological space.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-08-12T19:19:08Z</published>
+    <arxiv:comment>improved presentation, explicit running time</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1108.2982v2</id>
+    <title>Quantum field theory in static external potentials and Hadamard states</title>
+    <updated>2012-02-15T16:10:12Z</updated>
+    <link href="https://arxiv.org/abs/1108.2982v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1108.2982v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We prove that the ground state for the Dirac equation on Minkowski space in static, smooth external potentials satisfies the Hadamard condition. We show that it follows from a condition on the support of the Fourier transform of the corresponding positive frequency solution. Using a Krein space formalism, we establish an analogous result in the Klein-Gordon case for a wide class of smooth potentials. Finally, we investigate overcritical potentials, i.e. which admit no ground states. It turns out, that numerous Hadamard states can be constructed by mimicking the construction of ground states, but this leads to a naturally distinguished one only under more restrictive assumptions on the potentials.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2011-08-15T12:31:58Z</published>
+    <arxiv:comment>30 pages; v2 revised, accepted for publication in Annales Henri Poincare</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <arxiv:doi>10.1007/s00023-012-0173-0</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s00023-012-0173-0" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1612.01203v3</id>
+    <title>The holographic Hadamard condition on asymptotically Anti-de Sitter spacetimes</title>
+    <updated>2017-08-22T10:36:03Z</updated>
+    <link href="https://arxiv.org/abs/1612.01203v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1612.01203v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the setting of asymptotically Anti-de Sitter spacetimes, we consider Klein-Gordon fields subject to Dirichlet boundary conditions, with mass satisfying the Breitenlohner-Freedman bound. We introduce a condition on the b-wave front set of two-point functions of quantum fields, which locally in the bulk amounts to the usual Hadamard condition, and which moreover allows to estimate wave front sets for the holographically induced theory on the boundary. We prove the existence of two-point functions satisfying this condition, and show their uniqueness modulo terms that have smooth Schwartz kernel in the bulk and have smooth restriction to the boundary. Finally, using Vasy's propagation of singularities theorem, we prove an analogue of Duistermaat and Hörmander's theorem on distinguished parametrices.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-12-04T23:12:58Z</published>
+    <arxiv:comment>32 p., v3: some inaccuracies fixed; acc. in Lett. Math. Phys</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <arxiv:doi>10.1007/s11005-017-0988-1</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1007/s11005-017-0988-1" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1309.0164v3</id>
+    <title>Continuous and holomorphic functions with values in closed operators</title>
+    <updated>2014-07-14T08:32:24Z</updated>
+    <link href="https://arxiv.org/abs/1309.0164v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1309.0164v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We systematically derive general properties of continuous and holomorphic functions with values in closed operators, allowing in particular for operators with empty resolvent set. We provide criteria for a given operator-valued function to be continuous or holomorphic. This includes sufficient conditions for the sum and product of operator-valued holomorphic functions to be holomorphic.
+  Using graphs of operators, operator-valued functions are identified with functions with values in subspaces of a Banach space. A special role is thus played by projections onto closed subspaces of a Banach space, which depend holomorphically on a parameter.</summary>
+    <category term="math.FA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2013-08-31T22:45:15Z</published>
+    <arxiv:comment>final version, introduction reworked, 25 p</arxiv:comment>
+    <arxiv:primary_category term="math.FA"/>
+    <author>
+      <name>Jan Dereziński</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <arxiv:doi>10.1063/1.4891759</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1063/1.4891759" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1512.08052v4</id>
+    <title>Quantum fields from global propagators on asymptotically Minkowski and extended de Sitter spacetimes</title>
+    <updated>2018-01-22T20:45:46Z</updated>
+    <link href="https://arxiv.org/abs/1512.08052v4" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1512.08052v4" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the wave equation on asymptotically Minkowski spacetimes and the Klein-Gordon equation on even asymptotically de Sitter spaces. In both cases we show that the extreme difference of propagators (i.e. retarded propagator minus advanced, or Feynman minus anti-Feynman), defined as Fredholm inverses, induces a symplectic form on the space of solutions with wave front set confined to the radial sets. Furthermore, we construct isomorphisms between the solution spaces and symplectic spaces of asymptotic data. As an application of this result we obtain distinguished Hadamard two-point functions from asymptotic data. Ultimately, we prove that the corresponding Quantum Field Theory on asymptotically de Sitter spacetimes induces canonically a QFT beyond the future and past conformal boundary, i.e. on two even asymptotically hyperbolic spaces. Specifically, we show this to be true both at the level of symplectic spaces of solutions and at the level of Hadamard two-point functions.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-12-25T23:21:58Z</published>
+    <arxiv:comment>53 p., 4 figures; introduction and App. A.2 expanded, minor improvements; to appear in Ann. Henri Poincaré</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>András Vasy</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2508.00189v1</id>
+    <title>Long-time evolution of forced waves in the low viscosity regime</title>
+    <updated>2025-07-31T22:08:44Z</updated>
+    <link href="https://arxiv.org/abs/2508.00189v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2508.00189v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider a model for internal waves described by a zero order pseudo-differential Hamiltonian $P$ damped by a second order viscosity term $i νQ$. Under Morse-Smale or similar weaker global conditions on the classical dynamics, we describe qualitatively the long-time behavior of solutions of the corresponding evolution equation with smooth forcing in a small $ν$ regime. We show that dissipation effects arise no earlier than at the $t\sim ν^{-1/3-}$ time scale.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.SP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2025-07-31T22:08:44Z</published>
+    <arxiv:comment>v1, 20 p</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Nicolas Frantz</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2202.06408v1</id>
+    <title>Lorentzian spectral zeta functions on asymptotically Minkowski spacetimes</title>
+    <updated>2022-02-13T21:12:01Z</updated>
+    <link href="https://arxiv.org/abs/2202.06408v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2202.06408v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this note, we consider perturbations of Minkowski space as well as more general spacetimes on which the wave operator $\square_g$ is essentially self-adjoint. We review a recent result which gives the meromorphic continuation of the Lorentzian spectral zeta function density, i.e. of the trace density of complex powers $α\mapsto (\square_g-i \varepsilon)^{-α}$. In even dimension $n\geq 4$, the residue at $\frac{n}{2}-1$ is shown to be a multiple of the scalar curvature in the limit $\varepsilon\to 0^+$. This yields a spectral action for gravity in Lorentzian signature.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-02-13T21:12:01Z</published>
+    <arxiv:comment>12 pages, proceedings paper based on arXiv:2012.00712</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Nguyen Viet Dang</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1405.0847v1</id>
+    <title>Reconfiguration in bounded bandwidth and treedepth</title>
+    <updated>2014-05-05T10:28:04Z</updated>
+    <link href="https://arxiv.org/abs/1405.0847v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1405.0847v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We show that several reconfiguration problems known to be PSPACE-complete remain so even when limited to graphs of bounded bandwidth. The essential step is noticing the similarity to very limited string rewriting systems, whose ability to directly simulate Turing Machines is classically known. This resolves a question posed open in [Bonsma P., 2012]. On the other hand, we show that a large class of reconfiguration problems becomes tractable on graphs of bounded treedepth, and that this result is in some sense tight.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DM" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-05-05T10:28:04Z</published>
+    <arxiv:comment>14 pages</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1601.04551v2</id>
+    <title>Square-free graphs are multiplicative</title>
+    <updated>2016-08-23T13:01:58Z</updated>
+    <link href="https://arxiv.org/abs/1601.04551v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1601.04551v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>A graph K is square-free if it contains no four-cycle as a subgraph. A graph K is multiplicative if GxH -&gt; K implies G -&gt; K or H -&gt; K, for all graphs G,H. Here GxH is the tensor (or categorical) graph product and G -&gt; K denotes the existence of a graph homomorphism from G to K. Hedetniemi's conjecture states that all cliques K_n are multiplicative. However, the only non-trivial graphs known to be multiplicative are K_3, odd cycles, and still more generally, circular cliques $K_{p/q}$ with 2 &lt;= p/q &lt; 4. We make no progress for cliques, but show that all square-free graphs are multiplicative. In particular, this gives the first multiplicative graphs of chromatic number higher than 4. Generalizing, in terms of the box complex, the topological insight behind existing proofs for odd cycles, we also give a different proof for circular cliques.</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-01-18T14:57:11Z</published>
+    <arxiv:comment>22 pages, 5 figures. Only minor changes. Accepted for publication in JCTb</arxiv:comment>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+    <arxiv:doi>10.1016/j.jctb.2016.07.007</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1016/j.jctb.2016.07.007" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2204.08767v2</id>
+    <title>The wave resolvent for compactly supported perturbations of static spacetimes</title>
+    <updated>2022-08-25T13:58:37Z</updated>
+    <link href="https://arxiv.org/abs/2204.08767v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2204.08767v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In this note, we consider the wave operator $\square_g$ in the case of globally hyperbolic, compactly supported perturbations of static spacetimes. We give an elementary proof of the essential self-adjointness of $\square_g$ and of uniform microlocal estimates for the resolvent in this setting. This provides a model for studying Lorentzian spectral zeta functions which is particularly simple, yet sufficiently general for locally deriving Einstein equations from a spectral Lagrangian.</summary>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2022-04-19T09:23:59Z</published>
+    <arxiv:comment>15 pages; v2: typos fixed</arxiv:comment>
+    <arxiv:primary_category term="math.AP"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <author>
+      <name>Ruben Zeitoun</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2405.00866v3</id>
+    <title>IR-fixed Euclidean vacuum for linearized gravity on de Sitter space</title>
+    <updated>2026-03-14T19:33:54Z</updated>
+    <link href="https://arxiv.org/abs/2405.00866v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2405.00866v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Euclidean vacuum for linearized gravity on the global de Sitter space, obtained from the Euclidean Green's function on the 4-sphere. We use the notion of Calderón projectors to recover a quantum state for the Lorentzian theory on de Sitter space. We show that while the state is gauge invariant and Hadamard, it is not positive on the whole of the phase space. We show however that a suitable modification at low energies yields a well-defined Hadamard state on global de Sitter space.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="gr-qc" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2024-05-01T20:57:00Z</published>
+    <arxiv:comment>v3: minor edits, accepted in ATMP</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Christian Gérard</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2104.02816v3</id>
+    <title>An index theorem on asymptotically static spacetimes with compact Cauchy surface</title>
+    <updated>2022-03-24T17:27:14Z</updated>
+    <link href="https://arxiv.org/abs/2104.02816v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2104.02816v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Dirac operator on asymptotically static Lorentzian manifolds with an odd-dimensional compact Cauchy surface. We prove that if Atiyah-Patodi-Singer boundary conditions are imposed at infinite times then the Dirac operator is Fredholm. This generalizes a theorem due to Bär-Strohmaier in the case of finite times, and we also show that the corresponding index formula extends to the infinite setting. Furthermore, we demonstrate the existence of a Fredholm inverse which is at the same time a Feynman parametrix in the sense of Duistermaat-Hörmander. The proof combines methods from time-dependent scattering theory with a variant of Egorov's theorem for pseudo-differential hyperbolic systems.</summary>
+    <category term="math.DG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2021-04-06T22:21:19Z</published>
+    <arxiv:comment>41 pages; v3: minor fixes, references added, accepted in Pure Appl. Anal</arxiv:comment>
+    <arxiv:primary_category term="math.DG"/>
+    <arxiv:journal_ref>Pure Appl. Analysis 4 (2022) 727-766</arxiv:journal_ref>
+    <author>
+      <name>Dawei Shen</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+    <arxiv:doi>10.2140/paa.2022.4.727</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.2140/paa.2022.4.727" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1706.08942v1</id>
+    <title>Analytic Hadamard states, Calderón projectors and Wick rotation near analytic Cauchy surfaces</title>
+    <updated>2017-06-27T17:07:00Z</updated>
+    <link href="https://arxiv.org/abs/1706.08942v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1706.08942v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We consider the Klein-Gordon equation on analytic spacetimes with an analytic Cauchy surface. In this setting, we prove the existence of pure analytic Hadamard states. The proof is based on considering an elliptic operator obtained by Wick rotating the Klein-Gordon operator in a neighborhood of a Cauchy hypersurface. The Cauchy data of Hadamard two-point functions are constructed as Calderón projectors (suitably generalized if the hypersurface is non-compact) for the elliptic operator.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="math.AP" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-06-27T17:07:00Z</published>
+    <arxiv:comment>36 p</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Christian Gérard</name>
+    </author>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1509.05896v2</id>
+    <title>On space efficiency of algorithms working on structural decompositions of graphs</title>
+    <updated>2016-05-12T09:12:34Z</updated>
+    <link href="https://arxiv.org/abs/1509.05896v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1509.05896v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Dynamic programming on path and tree decompositions of graphs is a technique that is ubiquitous in the field of parameterized and exponential-time algorithms. However, one of its drawbacks is that the space usage is exponential in the decomposition's width. Following the work of Allender et al. [Theory of Computing, '14], we investigate whether this space complexity explosion is unavoidable. Using the idea of reparameterization of Cai and Juedes [J. Comput. Syst. Sci., '03], we prove that the question is closely related to a conjecture that the Longest Common Subsequence problem parameterized by the number of input strings does not admit an algorithm that simultaneously uses XP time and FPT space. Moreover, we complete the complexity landscape sketched for pathwidth and treewidth by Allender et al. by considering the parameter tree-depth. We prove that computations on tree-depth decompositions correspond to a model of non-deterministic machines that work in polynomial time and logarithmic space, with access to an auxiliary stack of maximum height equal to the decomposition's depth. Together with the results of Allender et al., this describes a hierarchy of complexity classes for polynomial-time non-deterministic machines with different restrictions on the access to working space, which mirrors the classic relations between treewidth, pathwidth, and tree-depth.</summary>
+    <category term="cs.CC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2015-09-19T14:20:05Z</published>
+    <arxiv:comment>An extended abstract appeared in the proceedings of STACS'16. The new version is augmented with a space-efficient algorithm for Dominating Set using the Chinese remainder theorem</arxiv:comment>
+    <arxiv:primary_category term="cs.CC"/>
+    <author>
+      <name>Michał Pilipczuk</name>
+    </author>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2012.13558v1</id>
+    <title>Smaller counterexamples to Hedetniemi's conjecture</title>
+    <updated>2020-12-25T11:02:47Z</updated>
+    <link href="https://arxiv.org/abs/2012.13558v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2012.13558v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Hedetniemi's conjecture~\cite{hedetniemi1966homomorphisms} for $c$-colorings states that the tensor product $G \times H$ is $c$-colorable if and only if $G$ or $H$ is $c$-colorable. El-Zahar and Sauer~\cite{El-ZaharS85} proved it for $c = 3$.	In a recent breakthrough, Shitov~\cite{Shitov19} showed counterexamples, for large $c$.	While Shitov's proof is already remarkably short, Zhu \cite{Zhu20} simplified the argument and gave a more explicit counterexample for $c=125$.	Tardif \cite{Tardif20} showed that a modification of the arguments allows to use ``wide colorings'' to obtain counterexamples for $c=14$, and $c=13$ with a more involved use of lexicographic products. This note presents two more small modifications, resulting in counterexamples for $c=5$ (with $G$ and $H$ having 4686 and 30 vertices, respectively).</summary>
+    <category term="math.CO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-12-25T11:02:47Z</published>
+    <arxiv:primary_category term="math.CO"/>
+    <author>
+      <name>Marcin Wrochna</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1711.04011v3</id>
+    <title>Conformal extension of the Bunch-Davies state across the de Sitter boundary</title>
+    <updated>2019-01-24T18:55:25Z</updated>
+    <link href="https://arxiv.org/abs/1711.04011v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1711.04011v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In the setting of the massive Klein-Gordon equation on de Sitter space, we discuss Vasy's asymptotic data at conformal infinity in terms of plane waves. In particular, we derive a short-hand formula for reconstructing solutions from their asymptotic data. Furthermore, we show that the natural Hadamard state induced from future (or past) conformal infinity coincides with the Bunch-Davies state.</summary>
+    <category term="math-ph" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="hep-th" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2017-11-10T21:11:01Z</published>
+    <arxiv:comment>v3: to appear in JMP</arxiv:comment>
+    <arxiv:primary_category term="math-ph"/>
+    <author>
+      <name>Michał Wrochna</name>
+    </author>
+  </entry>
+</feed>

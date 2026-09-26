@@ -1,0 +1,22 @@
+slot: admitted axioms.sh: mem 30 GiB (hard cap), cpus 0,1,2,3
+==> axioms: this run's full output: build/gate/axioms/20260926T052849Z-858627.log
+    audited: 1209 records — 1193 clean on the standard axioms, 11 axiom-free, 5 declared purchase(s)
+    clean records, by axiom set:
+       1092  [propext, Classical.choice, Quot.sound]
+         57  [propext]
+         43  [propext, Quot.sound]
+          1  [Quot.sound]
+         11  (no axioms): HadwigerNelson.Adjoin.approx, HadwigerNelson.PartialColoring.map, HadwigerNelson.Q4.approx, HadwigerNelson.Stripe.wheel_all, HadwigerNelson.edgeGraph_adj_mono, HadwigerNelson.edgeGraph_mono, HadwigerNelson.edgeHom, HadwigerNelson.fanEdges, HadwigerNelson.sepChain, HadwigerNelson.sepIvals, HadwigerNelson.valid_comp_of_injective
+    declared purchases:
+      HadwigerNelson.moserSpindle_cnf_unsat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_lrat  [1 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindleCubes_unsat  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.moserSpindle_not_colorable_three_cubes  [9 native, propext, Classical.choice, Quot.sound]
+      HadwigerNelson.four_le_chromaticNumber_plane_certified  [9 native, propext, Classical.choice, Quot.sound]
+    RECORDED COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1130 clean → 1193
+    --- changes since the previous complete run ---
+    previous: build/gate/axioms/20260926T052230Z-838180.log
+    + HadwigerNelson.ThreeColour.nonempty_winding_one_two  CLEAN [propext, Classical.choice, Quot.sound]
+    purchase ledgers agree — the docstrings warn of exactly the purchases the audit finds (5): four_le_chromaticNumber_plane_certified moserSpindle_cnf_unsat moserSpindleCubes_unsat moserSpindle_not_colorable_three_cubes moserSpindle_not_colorable_three_lrat
+==> axioms: OK — 1193 clean, 11 axiom-free, 5 declared purchase(s)
+    full output: build/gate/axioms/20260926T052849Z-858627.log

@@ -1,0 +1,14 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1,2,3
+/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/MutSign.lean:272:62: error: Type mismatch
+  (hs pm hpm).right
+has type
+  True
+but is expected to have type
+  (cite path pm.1).isEq = true ∨ 0 ≤ pm.2
+/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/MutSign.lean:270:76: warning: This simp argument is unused:
+  Bool.or_eq_true
+
+Hint: Omit it from the simp argument list.
+  simp only [leafOk, Bool.and_eq_true, List.all_eq_true, decide_eq_true_eq,̵ ̵B̵o̵o̵l̵.̵o̵r̵_̵e̵q̵_̵t̵r̵u̵e̵] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`

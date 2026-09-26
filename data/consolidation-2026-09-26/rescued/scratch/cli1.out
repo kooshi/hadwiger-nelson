@@ -1,0 +1,72 @@
+{
+ "verdict": "violated",
+ "exit": 2,
+ "reasons": [
+  "VIOLATED"
+ ],
+ "plant": "target_between",
+ "prec": 80,
+ "windows": [
+  [
+   3.7,
+   3.85
+  ]
+ ],
+ "target": "199989/200000",
+ "n_points": 20638,
+ "n_cells": {
+  "a": 20637,
+  "b": 0,
+  "c": 0
+ },
+ "margin_certified_lower": -2.6517167004541646e-06,
+ "margin_enclosure": [
+  -2.6517167004541646e-06,
+  -2.6517167004541634e-06
+ ],
+ "margin_certified_lower_exact": "-6349600029821273382090627617644368618700305379899813/2394524282602951341184917229922358099404279878411878400000",
+ "worst_cell": [
+  3.77488,
+  3.77489
+ ],
+ "worst_cell_region": "a",
+ "worst_cell_LB_enclosure": [
+  0.9999423482832995,
+  0.9999423482832995
+ ],
+ "min_point_W_lower": 0.9999500309634645,
+ "min_point_t": 3.77488,
+ "min_point_W_upper": 0.9999500309634645,
+ "points_certified_below_target": 0,
+ "first_point_below": [],
+ "max_ball_radius": 7.279189390466644e-22,
+ "L_derived_upper": {
+  "a": 1.536536086805986,
+  "b": 0.17725663050711946,
+  "c": 0.05605346827693847
+ },
+ "L_used": {
+  "a": 1.536536086805986,
+  "b": 0.17725663050711946,
+  "c": 0.05605346827693847
+ },
+ "L_invalid_regions": [],
+ "refuted_cells": 0,
+ "refuted_examples": [],
+ "cell_width_max": {
+  "a": 1.0000000000065512e-05,
+  "b": 0.0,
+  "c": 0.0
+ },
+ "constants_report": {
+  "d_min_lower": 0.21493672220363552,
+  "Lambda1": 0.5818652242911636,
+  "Lambda1_refined_cells": 37,
+  "C_upper": 0.7993657557866202,
+  "S1_upper": 2.640707886740982,
+  "Sh_upper": 2.2174658999832824
+ },
+ "grid_sha256": "2ec0c4f6ec5e10f8004c6036dd6ccf6d6f655c8cd210e9630b78b1bf5da3e2ff",
+ "seconds": 1.7,
+ "seconds_eval": 1.4
+}

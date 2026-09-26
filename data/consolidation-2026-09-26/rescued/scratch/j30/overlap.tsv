@@ -1,0 +1,1441 @@
+K3StripePlant.lean	3089	unmatched	36/37	data/m2/j04/K3Stripe.lean	36
+algebra-poros/soifer.txt	1933139	unmatched	17/23026	data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt	17
+algebra-poros/z.json	7873	unmatched	0/1		0
+arx.xml	784	unmatched	0/9		0
+audit.txt	8646	unmatched	0/96		0
+bib.out	280	unmatched	0/5		0
+blocks.py	5677	unmatched	0/1		0
+c-addendum.md	4463	unmatched	24/24	data/fs86/briefs/C-competitor-brief-coxeter.md	24
+c-mech.md	3928	unmatched	30/32	data/fs86/briefs/C-competitor-brief-coxeter.md	30
+c-text.md	10265	unmatched	78/78	plans/FS86-dyadic-rigidity.md	78
+coste.pdf	287	unmatched	binary/skip		
+ctl.py	1224	name-match	15/16	data/fs85/v2/s_prime_hom.py	15
+degrey2018.pdf	1106611	unmatched	binary/skip		
+degrey2018.txt	19914	unmatched	0/241		0
+delta.py	805	unmatched	3/11	tools/crunch_j18_swaptail.py	2
+delta2.py	483	unmatched	5/7	tools/crunch_j18_swaptail.py	4
+dupes.txt	1264	unmatched	0/16		0
+ees.pdf	240923	unmatched	binary/skip		
+f90.txt	37978	unmatched	82/472	data/m2/j17/excerpts/fischer1990-intro.txt	42
+fischer.txt	37978	unmatched	82/472	data/m2/j17/excerpts/fischer1990-intro.txt	42
+fischer1990.txt	37978	unmatched	82/472	data/m2/j17/excerpts/fischer1990-intro.txt	42
+fixed.py	3669	unmatched	0/1		0
+fold.py	9875	unmatched	1/79	tools/fs81_verify_c4.py	1
+fold_owner.py	2495	unmatched	0/25		0
+fs73-close/BRIEF-2.md	3360	unmatched	0/37		0
+fs73-close/BRIEF.md	5598	unmatched	6/62	data/fs85/briefs/CL-close-planner-brief.md	4
+fs73-close/R9-branches.md	1815	unmatched	0/19		0
+fs73-close/axioms.out	1876	unmatched	11/18	data/m2/j15/axioms.log	11
+fs73-close/axioms.time	875	unmatched	7/16	data/fs66/b1/scan-p23.log	7
+fs73-close/build.out	291	unmatched	0/4		0
+fs73-close/fscount.py	608	unmatched	0/11		0
+fs73-close/pa/__pycache__/zb.cpython-314.pyc	4345	unmatched	binary/skip		
+fs73-close/pa/parts_v.py	1730	name-match	0/22		0
+fs73-close/pa/q1.txt	719	unmatched	0/14		0
+fs73-close/pa/q2.txt	579	unmatched	0/10		0
+fs73-close/pa/q3.txt	333	unmatched	0/6		0
+fs73-close/pa/zb.py	1694	name-match	2/17	data/fs85/audit/zbmath_queries.py	1
+fs73-close/rows.py	11023	unmatched	0/7		0
+fs73-close/vac.out	4842	unmatched	26/34	data/m2/j14/vacuity.log	26
+fs73-close/vac.time	872	unmatched	7/16	data/fs66/b1/scan-p23.log	7
+fs73-comp-coxeter/BRIEF.md	18461	unmatched	99/101	data/fs73/briefs/P3-competitor-brief-Coxeter.md	99
+fs73-comp-coxeter/FS73-C3-Coxeter.md	35628	name-match	313/314	plans/FS73-C3-Coxeter.md	313
+fs73-comp-coxeter/REPORT-draft.md	50	unmatched	0/1		0
+fs73-comp-coxeter/work/S_335.json	635	unmatched	0/1		0
+fs73-comp-coxeter/work/__pycache__/exact_tree.cpython-314.pyc	4179	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/lllbb.cpython-314.pyc	6043	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/shapes.cpython-314.pyc	4223	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/theta.cpython-314.pyc	6234	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/theta2.cpython-314.pyc	11294	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/walls1d.cpython-314.pyc	8911	unmatched	binary/skip		
+fs73-comp-coxeter/work/__pycache__/walls2.cpython-314.pyc	7189	unmatched	binary/skip		
+fs73-comp-coxeter/work/cert_335.json	101669	unmatched	0/1		0
+fs73-comp-coxeter/work/plant1.json	653062	unmatched	0/1		0
+fs73-comp-coxeter/work/plant2.json	653048	unmatched	0/1		0
+fs73-comp-coxeter/work/plant3.json	653059	unmatched	0/1		0
+fs73-comp-coxeter/work/plant4.json	653018	unmatched	0/1		0
+fs73-comp-coxeter/work/price167.py	811	unmatched	6/10	data/fs73/coxeter-c3/find167.py	6
+fs73-comp-coxeter/work/price2.py	1245	unmatched	4/16	data/fs73/coxeter-c3/find167.py	3
+fs73-comp-coxeter/work/q11.py	810	unmatched	1/10	tools/rigidity_dial.py	1
+fs73-comp-coxeter/work/q11b.py	677	unmatched	3/8	data/fs73/coxeter-c3/q11d.py	2
+fs73-comp-coxeter/work/q11c.py	2453	unmatched	23/33	data/fs73/coxeter-c3/q11d.py	22
+fs73-comp-coxeter/work/q11d.pid	8	unmatched	nolines		
+fs73-comp-coxeter/work/run167.sh	293	unmatched	0/3		0
+fs73-comp-coxeter/work/scan12.log	7	unmatched	nolines		
+fs73-comp-coxeter/work/theta.py	3046	name-match	5/32	data/fs73/coxeter-c3/theta2.py	3
+fs73-comp-coxeter/work/theta167_348.json	1031	unmatched	0/1		0
+fs73-comp-coxeter/work/theta167_348_small.json	203	unmatched	0/1		0
+fs73-comp-coxeter/work/walls_stats.py	678	unmatched	7/12	data/fs73/coxeter-c3/walls1d.py	4
+fs73-comp-coxeter/work/zq.py	865	unmatched	0/12		0
+fs73-comp-debruijn/BRIEF.md	18522	unmatched	100/101	data/fs73/briefs/P3-competitor-brief-deBruijn.md	100
+fs73-comp-debruijn/work/__pycache__/theta.cpython-314.pyc	4326	unmatched	binary/skip		
+fs73-comp-debruijn/work/__pycache__/theta_exact.cpython-314.pyc	5044	unmatched	binary/skip		
+fs73-comp-debruijn/work/__pycache__/theta_x.cpython-314.pyc	4420	unmatched	binary/skip		
+fs73-comp-debruijn/work/__pycache__/xlp.cpython-314.pyc	5777	unmatched	binary/skip		
+fs73-comp-debruijn/work/dbg.py	544	unmatched	2/8	data/fs73/c3-debruijn/theta_x.py	1
+fs73-comp-debruijn/work/q11_theta.py	461	unmatched	0/10		0
+fs73-comp-debruijn/work/q11_theta_exact.py	576	unmatched	4/10	data/fs73/c3-debruijn/q11_theta_x.py	4
+fs73-comp-debruijn/work/q167_L21cc6506.json	2533	unmatched	0/1		0
+fs73-comp-debruijn/work/q167_L21cc6506.out	30	unmatched	nolines		
+fs73-comp-debruijn/work/q167_Ld14c588b.json	1705	unmatched	0/1		0
+fs73-comp-debruijn/work/q167_Ld14c588b.out	30	unmatched	nolines		
+fs73-comp-debruijn/work/theta.py	2063	name-match	3/27	tools/fplane.py	2
+fs73-comp-debruijn/work/theta_exact.py	2100	unmatched	11/25	data/fs73/c3-debruijn/theta_x.py	11
+fs73-debruijn-modeling/build-domain.log	7711	unmatched	1/198	data/m2/j15/build-stage4.log	1
+fs73-debruijn-modeling/build-experience.log	8266	unmatched	1/205	data/m2/j15/build-stage4.log	1
+fs73-debruijn-modeling/build-obligation.log	8257	unmatched	1/205	data/m2/j15/build-stage4.log	1
+fs73-debruijn-plan/__pycache__/klat.cpython-314.pyc	10729	unmatched	binary/skip		
+fs73-debruijn-plan/abcm.txt	45196	unmatched	0/511		0
+fs73-debruijn-plan/aeghkm.txt	88546	unmatched	0/958		0
+fs73-debruijn-plan/build1.log	10308	name-match	0/224		0
+fs73-debruijn-plan/build2.log	7397	name-match	1/194	data/m2/j15/build-stage4.log	1
+fs73-debruijn-plan/build2.pid	6	unmatched	nolines		
+fs73-debruijn-plan/p1e.txt	69106	unmatched	0/622		0
+fs73-debruijn-plan/zb/q-050fe9f13f.json	33216	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-074e020e1a.json	17477	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-0d0745499c.json	37010	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-0d9d63f269.json	8310	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-126aa4213f.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-1945abd652.json	29890	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-28ee6c9911.json	317	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-30c48c3c5a.json	17018	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-30d6d010f4.json	2895	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-3dfc4ff7f0.json	5479	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-3ef7123f7a.json	76299	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-4381800fdf.json	9926	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-4a41f9afa2.json	319	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-4b98c502cd.json	319	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-54fde43b8c.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-57973d6501.json	317	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-5dfbdb5288.json	16204	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-641d3f92bd.json	20641	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-6528b86272.json	79825	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-6e9d82badd.json	319	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-705a76bae3.json	16105	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-7309c40fa1.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-77d270d37d.json	5479	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-79ce9d8e08.json	5466	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-7dc88fbea1.json	319	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-7f5562e989.json	317	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-82d6c0d2c5.json	30808	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-93db58790e.json	3247	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-95700e3760.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-9794e6a360.json	8609	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-9a098d5cbd.json	20055	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-9d783fa6e2.json	12393	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-9df8d54dc6.json	17476	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-9f5d2d1504.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-a50da75c2c.json	7773	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-a914ce710b.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-b0a00d64a3.json	6144	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-b2f712f5cd.json	26536	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-b53f1a8c6d.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-be7e8df6b3.json	13895	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-d75d7e0a39.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-d9c29be73a.json	182730	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-eb1c66af4c.json	10239	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-efe5bd1506.json	320	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-f7c6f1de0a.json	3514	unmatched	0/1		0
+fs73-debruijn-plan/zb/q-fa7fac3a42.json	109706	unmatched	0/1		0
+fs73-debruijn-plan/zb/zq.py	1431	unmatched	0/15		0
+fs73-debruijn-plan/zb/zshow.py	740	unmatched	1/13	tools/descent2.py	1
+fs73-implA/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	unmatched	binary/skip		
+fs73-implA/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	unmatched	binary/skip		
+fs73-implA/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	unmatched	binary/skip		
+fs73-implA/censusK.log	2129	unmatched	0/13		0
+fs73-implA/censusK.pgid	7	unmatched	nolines		
+fs73-implA/confirm-502041-39829.cnf	27047914	unmatched	binary/skip		
+fs73-implA/confirm-v.log	102	unmatched	0/1		0
+fs73-implA/confirm89.pgid	7	unmatched	nolines		
+fs73-implA/ctl-553239-19183.cnf	9495084	unmatched	binary/skip		
+fs73-implA/force1.log	872	unmatched	0/12		0
+fs73-implA/force1.pgid	7	unmatched	nolines		
+fs73-implA/frc-733379-19183.cnf	8810046	unmatched	binary/skip		
+fs73-implA/fs70selftest.pgid	7	unmatched	nolines		
+fs73-implA/harder_timing.py	784	unmatched	2/11	scripts/regen-check.sh	1
+fs73-implA/periods.log	522	unmatched	0/4		0
+fs73-implA/periods.pgid	7	unmatched	nolines		
+fs73-implA/periods16.log	405	unmatched	0/2		0
+fs73-implA/queue-snapshot.sh	684	unmatched	1/6	data/fs54/environment.md	1
+fs73-implA/queue.log	1648	unmatched	0/13		0
+fs73-implA/queue.pgid	7	unmatched	nolines		
+fs73-implA/queue.sh	684	unmatched	1/6	data/fs54/environment.md	1
+fs73-implA/queue2-snapshot.sh	743	unmatched	1/7	data/fs54/environment.md	1
+fs73-implA/queue2.leader	7	unmatched	nolines		
+fs73-implA/queue2.log	313	unmatched	0/4		0
+fs73-implA/queue2.sh	743	unmatched	1/7	data/fs54/environment.md	1
+fs73-implA/queue3-snapshot.sh	330	unmatched	1/4	data/fs54/environment.md	1
+fs73-implA/queue3.log	179	unmatched	0/2		0
+fs73-implA/queue3.sh	330	unmatched	1/4	data/fs54/environment.md	1
+fs73-implA/queue4-snapshot.sh	649	unmatched	1/5	data/fs54/environment.md	1
+fs73-implA/queue4.sh	649	unmatched	1/5	data/fs54/environment.md	1
+fs73-implA/queue5-snapshot.sh	826	unmatched	1/7	data/fs54/environment.md	1
+fs73-implA/queue5.log	617	unmatched	0/6		0
+fs73-implA/queue5.sh	826	unmatched	1/7	data/fs54/environment.md	1
+fs73-implA/smallest.py	354	unmatched	0/5		0
+fs73-implA2/K-8Lambda-classes.json	1565620	name-match	9/389	data/fs73/census/K-8Lambda-classes.json	9
+fs73-implA2/P1g-L3-card.json	7052481	name-match	32806/32806	data/fs73/census/P1g-L3-card.json	32806
+fs73-implA2/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	unmatched	binary/skip		
+fs73-implA2/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	unmatched	binary/skip		
+fs73-implA2/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	unmatched	binary/skip		
+fs73-implA2/card.log	3570	unmatched	0/21		0
+fs73-implA2/check-full.log	678	unmatched	0/4		0
+fs73-implA2/emit-v.log	498	unmatched	0/5		0
+fs73-implA2/emit-v.pgid	7	unmatched	nolines		
+fs73-implA2/ident.py	1511	unmatched	3/20	tools/fs81_d47.py	2
+fs73-implA2/n32.log	484	unmatched	0/3		0
+fs73-implA2/n32.pgid	7	unmatched	nolines		
+fs73-implA2/rounds-v.log	2517	unmatched	0/37		0
+fs73-implA2/rounds-v.pgid	7	unmatched	nolines		
+fs73-implA2/stub-solver-unknown.sh	35	unmatched	nolines		
+fs73-implA2/stub-solver-unsat.sh	42	unmatched	0/1		0
+fs73-implA2/w.cnf	632582	unmatched	binary/skip		
+fs73-implA2/w.out	16	unmatched	nolines		
+fs73-implA2/w.time	47	unmatched	0/1		0
+fs73-implB/chain-run.sh	582	unmatched	1/9	data/fs54/environment.md	1
+fs73-implB/chain.pgid	7	unmatched	nolines		
+fs73-implB/chain.sh	582	unmatched	1/9	data/fs54/environment.md	1
+fs73-implB/pilot-screen.json	3997	unmatched	0/1		0
+fs73-implB/q167p.log	553	unmatched	0/8		0
+fs73-implB/selftest.log	1793	unmatched	17/20	data/fs73/records/phase-P2-selftest.log	17
+fs73-implB/tab-846671-4096-gap.cnf	4414485	unmatched	binary/skip		
+fs73-implB/tab-877892-6561-gap.cnf	4136605	unmatched	binary/skip		
+fs73-implB/tab-945900-279841-plain.cnf	274330942	unmatched	binary/skip		
+fs73-implB/tab-947812-279841-plain.cnf	274330942	unmatched	binary/skip		
+fs73-implB/table-K.log	1960	unmatched	0/7		0
+fs73-implB/table-K.pgid	7	unmatched	nolines		
+fs73-implB/table-K.pid	14	unmatched	nolines		
+fs73-implB/table-Q347.log	1653	unmatched	0/6		0
+fs73-implB/table-chain.log	6061	unmatched	0/27		0
+fs73-implC/agree2.py	1374	unmatched	5/24	tools/fs73_q167.py	3
+fs73-implC/ball14.npz	39502365	unmatched	binary/skip		
+fs73-implC/circ.log	298	unmatched	0/4		0
+fs73-implC/circ.pgid	7	unmatched	nolines		
+fs73-implC/circ1.py	1288	unmatched	2/19	tools/fs73_q167.py	2
+fs73-implC/classify-23-first.jsonl	855	unmatched	0/1		0
+fs73-implC/classify-23-second.jsonl	915	unmatched	0/1		0
+fs73-implC/classify-43-first.jsonl	33123	unmatched	0/1		0
+fs73-implC/classify-43-second.jsonl	7516	unmatched	0/1		0
+fs73-implC/cover.log	2252	unmatched	0/18		0
+fs73-implC/extend.log	1642	unmatched	0/9		0
+fs73-implC/extend.pgid	7	unmatched	nolines		
+fs73-implC/fft1.py	753	unmatched	0/15		0
+fs73-implC/probe1.py	1017	unmatched	5/17	tools/fs61_census.py	3
+fs73-implC/quot.log	297	unmatched	0/4		0
+fs73-implC/quot.pgid	7	unmatched	nolines		
+fs73-implC/quot2.log	2489	unmatched	0/36		0
+fs73-implC/quot2.pgid	7	unmatched	nolines		
+fs73-implD/check-degrey.log	7578	unmatched	0/57		0
+fs73-implD/check-degrey.pgid	7	unmatched	nolines		
+fs73-implD/cls.py	870	unmatched	1/11	data/fs79/comp-debruijn/tools/degrey_lang.py	1
+fs73-implD/colfiles.txt	5381	unmatched	0/83		0
+fs73-implD/est.py	491	unmatched	2/10	tools/fs81_d47.py	2
+fs73-implD/export_block.py	3054	unmatched	34/36	tools/fs73_screen.py	34
+fs73-implD/inadm.py	1504	unmatched	1/20	tools/rigidity_dial.py	1
+fs73-implD/price_balls.py	1245	unmatched	3/19	data/fs70/records/phase-1f/arm1f_control.py	1
+fs73-implD/rich-stage1.log	7736	unmatched	0/87		0
+fs73-implD/rich-stage1.pgid	7	unmatched	nolines		
+fs73-implD/rich-stage2.log	4421	unmatched	0/42		0
+fs73-implD/rich-stage2.pgid	7	unmatched	nolines		
+fs73-implD/rich_block.py	14932	unmatched	154/156	tools/fs73_screen.py	154
+fs73-implD/rows_block.py	2960	unmatched	28/28	tools/fs73_screen.py	28
+fs73-implD/selftest.log	2279	unmatched	18/19	data/fs73/records/phase-P1b-selftest.log	18
+fs73-implD/summ.py	1233	unmatched	0/13		0
+fs73-implD/work/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	unmatched	binary/skip		
+fs73-implD/work/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	unmatched	binary/skip		
+fs73-implD/work/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	unmatched	binary/skip		
+fs73-implD/work/stub-solver-unknown.sh	35	unmatched	nolines		
+fs73-implD/work/stub-solver-unsat.sh	42	unmatched	0/1		0
+fs73-implE/__pycache__/explore.cpython-314.pyc	3812	unmatched	binary/skip		
+fs73-implE/__pycache__/frame.cpython-314.pyc	9026	unmatched	binary/skip		
+fs73-implE/__pycache__/frames.cpython-314.pyc	3993	unmatched	binary/skip		
+fs73-implE/b5.py	1571	unmatched	1/21	tools/rigidity_dial.py	1
+fs73-implE/boxes.py	3088	unmatched	1/40	data/fs86/comp-debruijn/cs2_tower.py	1
+fs73-implE/check_s420.sh	564	unmatched	0/4		0
+fs73-implE/explore.py	1160	unmatched	4/11	data/fs73/coxeter-c3/certcheck.py	4
+fs73-implE/frame.py	2450	unmatched	5/30	data/fs73/coxeter-c3/lllbb.py	4
+fs73-implE/frames.py	1465	unmatched	4/20	data/fs73/coxeter-c3/theta2.py	3
+fs73-implE/mip.py	1344	unmatched	1/18	tools/fs66_conj_edgecrit.py	1
+fs73-implE/mip2.py	1736	unmatched	0/22		0
+fs73-implE/mip2_167_348.npy	336	unmatched	binary/skip		
+fs73-implE/mip2_59_30.npy	304	unmatched	binary/skip		
+fs73-implE/mip_59_30.npy	304	unmatched	binary/skip		
+fs73-implE/plant/plant.json	219541908	unmatched	binary/skip		
+fs73-implE/run_s420.sh	503	unmatched	0/4		0
+fs73-implE/runs/check_s420.log	1987	unmatched	16/38	data/fs66/b1/scan-p23.log	16
+fs73-implE/runs/coxeter348.json	112	unmatched	0/1		0
+fs73-implE/runs/d11-from-data.json	4940982	unmatched	0/1		0
+fs73-implE/runs/plant.json	401	unmatched	0/1		0
+fs73-implE/runs/q11.json	4940982	unmatched	0/1		0
+fs73-implE/runs/q11.meta.json	986	unmatched	0/1		0
+fs73-implE/runs/q11.nodes.jsonl	4919128	unmatched	0/20843		0
+fs73-implE/runs/q11.state.json	1015	unmatched	0/1		0
+fs73-implE/runs/q348.meta.json	549	unmatched	0/1		0
+fs73-implE/runs/q348.nodes.jsonl	5880043	unmatched	0/14130		0
+fs73-implE/runs/q348.state.json	2338	unmatched	0/1		0
+fs73-implE/runs/q59.meta.json	433	unmatched	0/1		0
+fs73-implE/runs/q59.nodes.jsonl	559585	unmatched	0/2342		0
+fs73-implE/runs/q59.state.json	923	unmatched	0/1		0
+fs73-implE/runs/s420.json	219541968	unmatched	binary/skip		
+fs73-implE/runs/s420.log	2164	unmatched	8/36	data/fs66/b1/scan-p23.log	8
+fs73-implE/runs/s420.meta.json	699	unmatched	0/1		0
+fs73-implE/runs/s420.nodes.jsonl	218936041	unmatched	binary/skip		
+fs73-implE/runs/s420.pgid	8	unmatched	nolines		
+fs73-implE/runs/s420.pid	8	unmatched	nolines		
+fs73-implE/runs/s420.state.json	728	unmatched	0/1		0
+fs73-implE/runs/struct-ctl.json	958261	unmatched	2/3	data/fs73/q167/L21cc6506-theta-struct.json	2
+fs73-implE/runs/struct420-z.json	5734912	unmatched	2/3	data/fs73/q167/L21cc6506-theta-struct.json	2
+fs73-implE/slack.py	751	unmatched	1/13	tools/rigidity_dial.py	1
+fs73-implE/thetaR.py	820	unmatched	1/13	tools/rigidity_dial.py	1
+fs73-implF/run-L3.log	3344	unmatched	8/21	data/fs66/b1/scan-p23.log	8
+fs73-implF/run-L3.pgid	8	unmatched	nolines		
+fs73-implF/run-cert.log	3276	unmatched	3/33	data/fs73/census/P1g-L3-card.json	3
+fs73-implF/run-rest.log	4279	unmatched	8/31	data/fs66/b1/scan-p23.log	8
+fs73-implK/Kempe.lean.good	37014	unmatched	438/440	Proofs/HadwigerNelson/Kempe.lean	438
+fs73-implK/axioms1.out	4542	unmatched	10/47	data/m2/j15/axioms.log	10
+fs73-implK/axioms2.out	1874	unmatched	11/18	data/m2/j15/axioms.log	11
+fs73-implK/axioms3.out	1874	unmatched	11/18	data/m2/j15/axioms.log	11
+fs73-implK/build-plant.out	6847	unmatched	0/186		0
+fs73-implK/build1.out	6511	unmatched	1/182	data/m2/j15/build-stage4.log	1
+fs73-implK/build2.out	6511	unmatched	1/182	data/m2/j15/build-stage4.log	1
+fs73-implK/build3.out	6511	unmatched	1/182	data/m2/j15/build-stage4.log	1
+fs73-implK/build4.out	6511	unmatched	1/182	data/m2/j15/build-stage4.log	1
+fs73-implK/compact.py	2059	unmatched	21/28	Proofs/HadwigerNelson/Kempe.lean	21
+fs73-implK/inh.py	2360	unmatched	12/27	Proofs/HadwigerNelson/Kempe.lean	12
+fs73-implK/kempe_sec.py	2902	unmatched	16/34	Proofs/HadwigerNelson/Kempe.lean	16
+fs73-implK/lint-plant.out	440	unmatched	0/6		0
+fs73-implK/lint1.out	119	unmatched	0/2		0
+fs73-implK/lint2.out	76	unmatched	0/2		0
+fs73-implK/lint3.out	76	unmatched	0/2		0
+fs73-implK/lint4.out	76	unmatched	0/2		0
+fs73-implK/mv.py	348	unmatched	0/5		0
+fs73-implK/probe.lean	1542	unmatched	18/21	Proofs/HadwigerNelson/Kempe.lean	18
+fs73-implK/t2.py	3257	unmatched	38/43	Proofs/HadwigerNelson/Kempe.lean	38
+fs73-implK/vac1.out	6014	unmatched	26/48	data/m2/j14/vacuity.log	26
+fs73-implK/vac2.out	4839	unmatched	26/34	data/m2/j14/vacuity.log	26
+fs73-implK/vac3.out	4839	unmatched	26/34	data/m2/j14/vacuity.log	26
+fs73-implK/vacself.out	1229	unmatched	9/13	data/m2/j14/vacuity-selftest.log	9
+fs73-implK/volt.py	1830	unmatched	13/24	Proofs/HadwigerNelson/Kempe.lean	13
+fs73-owner/P3-advisor-brief.md	8770	name-match	65/70	data/fs73/briefs/P3-advisor-brief.md	65
+fs73-owner/P3-comp-coxeter-template.md	18447	unmatched	99/101	data/fs73/briefs/P3-competitor-brief-Coxeter.md	99
+fs73-owner/P3-comp-debruijn-template.md	18440	unmatched	99/101	data/fs73/briefs/P3-competitor-brief-deBruijn.md	99
+fs73-owner/P3-competitor-brief.md	16166	unmatched	85/92	data/fs73/briefs/P3-competitor-brief-Coxeter.md	85
+fs73-owner/P3-poros-successor-prompt.md	2710	unmatched	0/14		0
+fs73-owner/a1.txt	8162	unmatched	0/93		0
+fs73-owner/a2.txt	1264	unmatched	0/16		0
+fs73-owner/arch.txt	5796	unmatched	0/26		0
+fs73-owner/audit-base.txt	8032	unmatched	0/92		0
+fs73-owner/audit-dupes.txt	1264	unmatched	0/16		0
+fs73-owner/bib.txt	280	unmatched	0/5		0
+fs73-owner/census-nosolver.txt	4499	unmatched	0/25		0
+fs73-owner/census-slot.md	1581	unmatched	7/7	data/fs73/briefs/P3-competitor-brief-Coxeter.md	7
+fs73-owner/cert-plant.txt	85	unmatched	0/1		0
+fs73-owner/cert-run.txt	637	unmatched	0/3		0
+fs73-owner/ledgerb.txt	522	unmatched	0/2		0
+fs73-owner/p1-relation.json.gz	164452	unmatched	binary/skip		
+fs73-owner/p2-range.json.gz	31729	unmatched	binary/skip		
+fs73-owner/p3-farkas.json.gz	164450	unmatched	binary/skip		
+fs73-owner/p4-unit-swap.json.gz	164452	unmatched	binary/skip		
+fs73-owner/p5-drop-value-subtree.json.gz	129799	unmatched	binary/skip		
+fs73-owner/plant-census/data/fs73/census/lattice-degrey.json	1966	name-match	0/1		0
+fs73-owner/plant-cert47-child.json	653060	unmatched	0/1		0
+fs73-owner/plant-cert47-d335.json	653065	unmatched	0/1		0
+fs73-owner/planted-witness.json	208689	unmatched	0/1		0
+fs73-owner/state.md	55111	unmatched	0/425		0
+fs73-owner/struct-check.txt	461	unmatched	0/5		0
+fs73-owner/struct-plant-drop-last.json	1331356	unmatched	0/1		0
+fs73-owner/v2-plant-base.json	4497338	unmatched	0/1		0
+fs73-poros-cert/cmpU.py	875	unmatched	3/15	data/fs70/records/phase-1f/arm1f_control.py	1
+fs73-poros-cert/olat.py	4350	unmatched	4/61	data/fs86/b2/lattice.py	2
+fs73-poros-plan/held-items.md	311	unmatched	0/3		0
+fs73-verifier/ask-89.log	102	unmatched	0/2		0
+fs73-verifier/ask-89.pgid	7	unmatched	nolines		
+fs73-verifier/ask-eight_ninths-nb.json	1708	unmatched	0/12		0
+fs73-verifier/ask-harder.log	109	unmatched	0/2		0
+fs73-verifier/ask-harder.pgid	7	unmatched	nolines		
+fs73-verifier/ask-harder_eight_thirds-nb.json	1741	unmatched	0/13		0
+fs73-verifier/ask-snap.sh	610	unmatched	1/7	data/fs54/environment.md	1
+fs73-verifier/ask-v-cn.json	1651	unmatched	0/12		0
+fs73-verifier/ask-v.log	91	unmatched	0/2		0
+fs73-verifier/ask-v.pgid	7	unmatched	nolines		
+fs73-verifier/ask.sh	610	unmatched	1/7	data/fs54/environment.md	1
+fs73-verifier/ask2-snap.sh	564	unmatched	1/6	data/fs54/environment.md	1
+fs73-verifier/ask2-snap2.sh	577	unmatched	1/6	data/fs54/environment.md	1
+fs73-verifier/ask2-v-none-lingeling-7.json	894	unmatched	0/4		0
+fs73-verifier/ask2-v.log	137	unmatched	0/3		0
+fs73-verifier/ask2-v.pgid	7	unmatched	nolines		
+fs73-verifier/ask2.sh	577	unmatched	1/6	data/fs54/environment.md	1
+fs73-verifier/asks.jsonl	9120	name-match	7/7	data/fs73/records/verify-P1d-asks.jsonl	7
+fs73-verifier/cnf-eight_ninths-nb-s20260923.cnf	29404644	unmatched	binary/skip		
+fs73-verifier/cnf-four_ninths-nb-s20260923.cnf	29404644	unmatched	binary/skip		
+fs73-verifier/cnf-harder_eight_thirds-nb-s20260923.cnf	29404644	unmatched	binary/skip		
+fs73-verifier/cnf-two-cn-s20260923.cnf	29404643	unmatched	binary/skip		
+fs73-verifier/cnf-two-nb-s20260923.cnf	29404644	unmatched	binary/skip		
+fs73-verifier/cnf-v-cn-s20260923.cnf	29404642	unmatched	binary/skip		
+fs73-verifier/cnf-v-none-s7.cnf	29407730	unmatched	binary/skip		
+fs73-verifier/colouring-four_ninths-nb-s20260923.json	797957	unmatched	0/1		0
+fs73-verifier/colouring-two-nb-s20260923.json	797957	unmatched	0/1		0
+fs73-verifier/controls.json	5508	name-match	2/12	data/fs73/records/verify-P1d-quotient.json	2
+fs73-verifier/drat-trim/.git/HEAD	23	unmatched	nolines		
+fs73-verifier/drat-trim/.git/config	279	unmatched	0/4		0
+fs73-verifier/drat-trim/.git/description	73	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/hooks/applypatch-msg.sample	478	unmatched	0/8		0
+fs73-verifier/drat-trim/.git/hooks/commit-msg.sample	1972	unmatched	0/28		0
+fs73-verifier/drat-trim/.git/hooks/fsmonitor-watchman.sample	4611	unmatched	0/78		0
+fs73-verifier/drat-trim/.git/hooks/post-update.sample	189	unmatched	0/3		0
+fs73-verifier/drat-trim/.git/hooks/pre-applypatch.sample	424	unmatched	0/7		0
+fs73-verifier/drat-trim/.git/hooks/pre-commit.sample	1649	unmatched	0/27		0
+fs73-verifier/drat-trim/.git/hooks/pre-merge-commit.sample	416	unmatched	0/7		0
+fs73-verifier/drat-trim/.git/hooks/pre-push.sample	1374	unmatched	0/21		0
+fs73-verifier/drat-trim/.git/hooks/pre-rebase.sample	4898	unmatched	0/85		0
+fs73-verifier/drat-trim/.git/hooks/pre-receive.sample	544	unmatched	0/8		0
+fs73-verifier/drat-trim/.git/hooks/prepare-commit-msg.sample	1492	unmatched	0/22		0
+fs73-verifier/drat-trim/.git/hooks/push-to-checkout.sample	2783	unmatched	0/44		0
+fs73-verifier/drat-trim/.git/hooks/sendemail-validate.sample	2308	unmatched	0/34		0
+fs73-verifier/drat-trim/.git/hooks/update.sample	3650	unmatched	0/50		0
+fs73-verifier/drat-trim/.git/index	4044	unmatched	nontext		
+fs73-verifier/drat-trim/.git/info/exclude	240	unmatched	0/4		0
+fs73-verifier/drat-trim/.git/logs/HEAD	205	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/logs/refs/heads/master	205	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/logs/refs/remotes/origin/HEAD	205	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.idx	2416	unmatched	binary/skip		
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.pack	7297909	unmatched	binary/skip		
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.rev	244	unmatched	binary/skip		
+fs73-verifier/drat-trim/.git/packed-refs	114	unmatched	0/2		0
+fs73-verifier/drat-trim/.git/refs/heads/master	41	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/refs/remotes/origin/HEAD	32	unmatched	0/1		0
+fs73-verifier/drat-trim/.git/shallow	41	unmatched	0/1		0
+fs73-verifier/drat-trim/LICENSE	1184	unmatched	0/14		0
+fs73-verifier/drat-trim/Makefile	493	unmatched	0/7		0
+fs73-verifier/drat-trim/README.md	12939	name-match	0/191		0
+fs73-verifier/drat-trim/compress.c	5146	unmatched	0/72		0
+fs73-verifier/drat-trim/decompress.c	3034	unmatched	0/34		0
+fs73-verifier/drat-trim/drat-trim	55776	unmatched	nontext		
+fs73-verifier/drat-trim/drat-trim.c	59546	unmatched	0/886		0
+fs73-verifier/drat-trim/examples/R_4_4_18.clrat.bz2	4388531	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/R_4_4_18.cnf	151575	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/R_4_4_18.drat.bz2	2779243	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-4-vars.cnf	106	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-4-vars.drat	78	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-4-vars.lrat	94	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-5-vars.cnf	103	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-5-vars.drat	117	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-5-vars.lrat	176	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-Schur.cnf	486	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-Schur.drat	32	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/example-Schur.drup	72	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-1.cnf	5272	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-1.drat	17019	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-1.lrat	45346	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-2.cnf	5304	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-2.drat	10959	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-2.lrat	27687	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-3.cnf	5292	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-3.drat	21562	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-3.lrat	55442	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-4.cnf	5241	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-4.drat	17577	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-4.lrat	43522	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-5.cnf	5279	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-5.drat	18171	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-100-5.lrat	46733	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-30-1.cnf	1480	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-30-1.drat	83	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-30-1.lrat	1352	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-2.cnf	2521	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-2.drat	2825	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-2.lrat	5014	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-3.cnf	2509	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-3.drat	2384	unmatched	binary/skip		
+fs73-verifier/drat-trim/examples/uuf-50-3.lrat	4382	unmatched	binary/skip		
+fs73-verifier/drat-trim/gapless.c	4260	unmatched	0/55		0
+fs73-verifier/drat-trim/lrat-check	22328	unmatched	nontext		
+fs73-verifier/drat-trim/lrat-check.c	17682	unmatched	0/259		0
+fs73-verifier/drat-trim/run-examples	666	unmatched	0/7		0
+fs73-verifier/glucose/.git/HEAD	21	unmatched	nolines		
+fs73-verifier/glucose/.git/config	266	unmatched	0/3		0
+fs73-verifier/glucose/.git/description	73	unmatched	0/1		0
+fs73-verifier/glucose/.git/hooks/applypatch-msg.sample	478	unmatched	0/8		0
+fs73-verifier/glucose/.git/hooks/commit-msg.sample	1972	unmatched	0/28		0
+fs73-verifier/glucose/.git/hooks/fsmonitor-watchman.sample	4611	unmatched	0/78		0
+fs73-verifier/glucose/.git/hooks/post-update.sample	189	unmatched	0/3		0
+fs73-verifier/glucose/.git/hooks/pre-applypatch.sample	424	unmatched	0/7		0
+fs73-verifier/glucose/.git/hooks/pre-commit.sample	1649	unmatched	0/27		0
+fs73-verifier/glucose/.git/hooks/pre-merge-commit.sample	416	unmatched	0/7		0
+fs73-verifier/glucose/.git/hooks/pre-push.sample	1374	unmatched	0/21		0
+fs73-verifier/glucose/.git/hooks/pre-rebase.sample	4898	unmatched	0/85		0
+fs73-verifier/glucose/.git/hooks/pre-receive.sample	544	unmatched	0/8		0
+fs73-verifier/glucose/.git/hooks/prepare-commit-msg.sample	1492	unmatched	0/22		0
+fs73-verifier/glucose/.git/hooks/push-to-checkout.sample	2783	unmatched	0/44		0
+fs73-verifier/glucose/.git/hooks/sendemail-validate.sample	2308	unmatched	0/34		0
+fs73-verifier/glucose/.git/hooks/update.sample	3650	unmatched	0/50		0
+fs73-verifier/glucose/.git/index	4441	unmatched	nontext		
+fs73-verifier/glucose/.git/info/exclude	240	unmatched	0/4		0
+fs73-verifier/glucose/.git/logs/HEAD	200	unmatched	0/1		0
+fs73-verifier/glucose/.git/logs/refs/heads/main	200	unmatched	0/1		0
+fs73-verifier/glucose/.git/logs/refs/remotes/origin/HEAD	200	unmatched	0/1		0
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.idx	2696	unmatched	binary/skip		
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.pack	118609	unmatched	binary/skip		
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.rev	284	unmatched	binary/skip		
+fs73-verifier/glucose/.git/packed-refs	112	unmatched	0/2		0
+fs73-verifier/glucose/.git/refs/heads/main	41	unmatched	0/1		0
+fs73-verifier/glucose/.git/refs/remotes/origin/HEAD	30	unmatched	0/1		0
+fs73-verifier/glucose/.git/shallow	41	unmatched	0/1		0
+fs73-verifier/glucose/.gitignore	285	name-match	0/2		0
+fs73-verifier/glucose/CHANGELOG	1030	unmatched	0/15		0
+fs73-verifier/glucose/CMakeLists.txt	1233	unmatched	0/19		0
+fs73-verifier/glucose/LICENSE	1072	unmatched	0/15		0
+fs73-verifier/glucose/README.md	6295	name-match	0/39		0
+fs73-verifier/glucose/build/CMakeCache.txt	3330	unmatched	0/56		0
+fs73-verifier/glucose/build/CMakeFiles/cmake.check_cache	85	unmatched	0/1		0
+fs73-verifier/glucose/build/cmake.log	451	unmatched	1/7	data/fs54/environment.md	1
+fs73-verifier/glucose/build/make.log	56	unmatched	0/1		0
+fs73-verifier/glucose/core/BoundedQueue.h	5767	unmatched	0/73		0
+fs73-verifier/glucose/core/Constants.h	3208	unmatched	0/43		0
+fs73-verifier/glucose/core/Dimacs.h	3295	unmatched	0/39		0
+fs73-verifier/glucose/core/Makefile	109	unmatched	0/1		0
+fs73-verifier/glucose/core/Solver.cc	68506	unmatched	0/874		0
+fs73-verifier/glucose/core/Solver.h	33874	unmatched	0/411		0
+fs73-verifier/glucose/core/Solver.or	911112	unmatched	binary/skip		
+fs73-verifier/glucose/core/SolverStats.h	4063	unmatched	0/47		0
+fs73-verifier/glucose/core/SolverTypes.h	20402	unmatched	0/268		0
+fs73-verifier/glucose/core/lcm.cc	17251	unmatched	0/165		0
+fs73-verifier/glucose/core/lcm.or	164672	unmatched	binary/skip		
+fs73-verifier/glucose/mtl/Alg.h	2818	unmatched	0/35		0
+fs73-verifier/glucose/mtl/Alloc.h	4776	unmatched	0/55		0
+fs73-verifier/glucose/mtl/Clone.h	166	unmatched	0/1		0
+fs73-verifier/glucose/mtl/Heap.h	4755	unmatched	0/56		0
+fs73-verifier/glucose/mtl/IntTypes.h	1825	unmatched	0/23		0
+fs73-verifier/glucose/mtl/Map.h	6957	unmatched	0/87		0
+fs73-verifier/glucose/mtl/Queue.h	3166	unmatched	0/33		0
+fs73-verifier/glucose/mtl/Sort.h	3280	unmatched	0/45		0
+fs73-verifier/glucose/mtl/Vec.h	5997	unmatched	0/74		0
+fs73-verifier/glucose/mtl/VecThreads.h	7670	unmatched	0/94		0
+fs73-verifier/glucose/mtl/XAlloc.h	1948	unmatched	0/23		0
+fs73-verifier/glucose/mtl/config.mk	204	unmatched	0/4		0
+fs73-verifier/glucose/mtl/template.mk	3239	unmatched	0/59		0
+fs73-verifier/glucose/parallel/ClausesBuffer.cc	9392	unmatched	0/128		0
+fs73-verifier/glucose/parallel/ClausesBuffer.h	5069	unmatched	0/67		0
+fs73-verifier/glucose/parallel/Main.cc	11658	unmatched	0/151		0
+fs73-verifier/glucose/parallel/Makefile	109	unmatched	0/3		0
+fs73-verifier/glucose/parallel/MultiSolvers.cc	24107	unmatched	0/342		0
+fs73-verifier/glucose/parallel/MultiSolvers.h	8640	unmatched	0/108		0
+fs73-verifier/glucose/parallel/ParallelSolver.cc	19948	unmatched	0/250		0
+fs73-verifier/glucose/parallel/ParallelSolver.h	6800	unmatched	0/91		0
+fs73-verifier/glucose/parallel/SharedCompanion.cc	6579	unmatched	0/88		0
+fs73-verifier/glucose/parallel/SharedCompanion.h	6123	unmatched	0/85		0
+fs73-verifier/glucose/parallel/SolverCompanion.cc	3932	unmatched	0/52		0
+fs73-verifier/glucose/parallel/SolverCompanion.h	3802	unmatched	0/49		0
+fs73-verifier/glucose/parallel/SolverConfiguration.cc	7237	unmatched	0/112		0
+fs73-verifier/glucose/parallel/SolverConfiguration.h	3471	unmatched	0/46		0
+fs73-verifier/glucose/simp/Main.cc	14955	unmatched	0/167		0
+fs73-verifier/glucose/simp/Main.or	171384	unmatched	binary/skip		
+fs73-verifier/glucose/simp/Makefile	94	unmatched	0/2		0
+fs73-verifier/glucose/simp/SimpSolver.cc	25948	unmatched	0/367		0
+fs73-verifier/glucose/simp/SimpSolver.h	11760	unmatched	0/142		0
+fs73-verifier/glucose/simp/SimpSolver.or	515968	unmatched	binary/skip		
+fs73-verifier/glucose/simp/depend.mk	6701	unmatched	0/42		0
+fs73-verifier/glucose/simp/glucose_release	1203072	unmatched	nontext		
+fs73-verifier/glucose/simp/make.log	353	unmatched	0/1		0
+fs73-verifier/glucose/utils/Makefile	74	unmatched	0/1		0
+fs73-verifier/glucose/utils/Options.cc	3810	unmatched	0/48		0
+fs73-verifier/glucose/utils/Options.h	12150	unmatched	0/139		0
+fs73-verifier/glucose/utils/Options.or	55920	unmatched	binary/skip		
+fs73-verifier/glucose/utils/ParseUtils.h	4943	unmatched	0/63		0
+fs73-verifier/glucose/utils/System.cc	3141	unmatched	0/47		0
+fs73-verifier/glucose/utils/System.h	2772	unmatched	0/34		0
+fs73-verifier/glucose/utils/System.or	13928	unmatched	binary/skip		
+fs73-verifier/orbits.json	2524	unmatched	0/15		0
+fs73-verifier/pcheck-89.log	90	unmatched	0/2		0
+fs73-verifier/pcheck-89.pgid	7	unmatched	nolines		
+fs73-verifier/pcheck-eight_ninths-nb.json	1212	unmatched	0/15		0
+fs73-verifier/pcheck-harder.log	97	unmatched	0/2		0
+fs73-verifier/pcheck-harder.pgid	7	unmatched	nolines		
+fs73-verifier/pcheck-harder_eight_thirds-nb.json	1215	unmatched	0/15		0
+fs73-verifier/pcheck-snap.sh	501	unmatched	1/6	data/fs54/environment.md	1
+fs73-verifier/pcheck-v-cn.json	1181	unmatched	0/14		0
+fs73-verifier/pcheck-v.log	79	unmatched	0/2		0
+fs73-verifier/pcheck-v.pgid	7	unmatched	nolines		
+fs73-verifier/pcheck.sh	501	unmatched	1/6	data/fs54/environment.md	1
+fs73-verifier/proofchecks.jsonl	3278	unmatched	3/3	data/fs73/records/verify-P1d-asks.jsonl	3
+fs73-verifier/q11/quot.cnf	14552	unmatched	binary/skip		
+fs73-verifier/q11/u1-ask.cnf	5864	unmatched	binary/skip		
+fs73-verifier/q11/u1-plain.cnf	5830	unmatched	binary/skip		
+fs73-verifier/q11/u1-planted.cnf	5828	unmatched	binary/skip		
+fs73-verifier/q11/u1-w.cnf	5839	unmatched	binary/skip		
+fs73-verifier/q11/u2-ask.cnf	7521	unmatched	binary/skip		
+fs73-verifier/q11/u2-plain.cnf	7480	unmatched	binary/skip		
+fs73-verifier/q11/u2-planted.cnf	7482	unmatched	binary/skip		
+fs73-verifier/q11/u2-w.cnf	7498	unmatched	binary/skip		
+fs73-verifier2/b5.py	1879	unmatched	26/26	tools/fs73v2_b5.py	26
+fs73-verifier2/ballcolour.py	971	unmatched	1/15	tools/embed.py	1
+fs73-verifier2/explore.py	1854	unmatched	7/27	tools/fs73v2_b5.py	2
+fs73-verifier2/explore2.py	1671	unmatched	5/25	tools/m56_export_791.py	2
+fs73-verifier2/greedy-final-cert.json	78417	unmatched	0/1		0
+fs73-verifier2/greedy-start-cert.json	78417	unmatched	0/1		0
+fs73-verifier2/greedy-trial-cert.json	714	unmatched	0/1		0
+fs73-verifier2/greedy-trial.json	338	unmatched	0/1		0
+fs73-verifier2/greedy.py	1242	unmatched	1/19	tools/fs73_table.py	1
+fs73-verifier2/kernel.py	723	unmatched	0/11		0
+fs73-verifier2/plant-Ld14c588b-fake-empty.json	1408608	unmatched	0/1		0
+fs73-verifier2/rels-L21cc6506.json	2507	unmatched	0/1		0
+fs73-verifier2/rels-Ld14c588b.json	1334	unmatched	0/1		0
+fs73-verifier2/rels-Ld65c8ee8.json	8395	unmatched	0/1		0
+fs73-verifier2/run-basisonly.log	260	unmatched	0/4		0
+fs73-verifier2/sub-1-v-vb.json	346	unmatched	0/1		0
+fs73-verifier2/sub-1-v-zb.json	361	unmatched	0/1		0
+fs73-verifier2/sub-1-v.json	231	unmatched	0/1		0
+fs73-verifier2/sub-1-vb-z.json	351	unmatched	0/1		0
+fs73-verifier2/sub-1-vb-zb.json	357	unmatched	0/1		0
+fs73-verifier2/sub-1-z-zb.json	366	unmatched	0/1		0
+fs73-verifier2/sub-1-z.json	236	unmatched	0/1		0
+fs73-verifier2/sub-v-vb-z.json	358	unmatched	0/1		0
+fs73-verifier2/sub-v-vb-zb.json	364	unmatched	0/1		0
+fs73-verifier2/sub-v-z-zb.json	373	unmatched	0/1		0
+fs73-verifier2/sub-v-z.json	243	unmatched	0/1		0
+fs73-verifier2/sub-vb-z-zb.json	369	unmatched	0/1		0
+fs73-verifier2/sub-z-zb.json	254	unmatched	0/1		0
+fs73-verifier2/subs-run.sh	526	unmatched	1/3	data/fs54/environment.md	1
+fs73-verifier2/subs.log	928	unmatched	0/10		0
+fs73-verifier2/subs.pid	8	unmatched	nolines		
+fs73-verifier2/subs.sh	526	unmatched	1/3	data/fs54/environment.md	1
+fs73-verifier2/units-L21cc6506.json	2097	unmatched	0/1		0
+fs73-verifier2/units-Ld14c588b.json	1562	unmatched	0/1		0
+fs73-verifier2/units-Ld65c8ee8.json	3030	unmatched	0/1		0
+fs73-verifier2/xbb-L21cc6506-basisonly.json	2756599	unmatched	0/1		0
+fs73-verifier2/xbb-L21cc6506.json	3414208	unmatched	0/1		0
+fs73-verifier2/xbb-Ld65c8ee8.json	716720	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-v-vb.json	731	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-v-z.json	78417	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-v-zb.json	748	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-v.json	557	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-vb-z.json	741	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-vb-zb.json	78202	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-z-zb.json	731	unmatched	0/1		0
+fs73-verifier2/xbb-sub-1-z.json	563	unmatched	0/1		0
+fs73-verifier2/xbb-sub-v-vb-z.json	754	unmatched	0/1		0
+fs73-verifier2/xbb-sub-v-vb-zb.json	769	unmatched	0/1		0
+fs73-verifier2/xbb-sub-v-z-zb.json	740	unmatched	0/1		0
+fs73-verifier2/xbb-sub-v-z.json	576	unmatched	0/1		0
+fs73-verifier2/xbb-sub-vb-z-zb.json	742	unmatched	0/1		0
+fs73-verifier2/xbb-sub-z-zb.json	574	unmatched	0/1		0
+fs79-close/audit1.txt	8304	unmatched	0/97		0
+fs79-close/axioms.out	1845	unmatched	11/18	data/m2/j15/axioms.log	11
+fs79-close/build.out	284	unmatched	0/4		0
+fs79-close/claude_edit.py	18394	unmatched	0/70		0
+fs79-close/g73.txt	2969	unmatched	19/22	CLAUDE.md	19
+fs79-close/row80.txt	5786	unmatched	1/1	LEDGER.md	1
+fs79-close/row81.txt	4333	unmatched	0/1		0
+fs79-close/rows.py	2480	unmatched	0/14		0
+fs79-close/vacuity.out	4727	unmatched	26/34	data/m2/j14/vacuity.log	26
+fs79-comp-coxeter/work/__pycache__/kper_additive.cpython-314.pyc	10303	unmatched	binary/skip		
+fs79-comp-coxeter/work/__pycache__/language.cpython-314.pyc	9509	unmatched	binary/skip		
+fs79-comp-coxeter/work/__pycache__/local_forms.cpython-314.pyc	6889	unmatched	binary/skip		
+fs79-comp-coxeter/work/__pycache__/missing_pairs.cpython-314.pyc	6129	unmatched	binary/skip		
+fs79-comp-debruijn/tools/__pycache__/degrey_lang.cpython-314.pyc	4181	unmatched	binary/skip		
+fs79-comp-debruijn/tools/__pycache__/heights_edge.cpython-314.pyc	13459	unmatched	binary/skip		
+fs79-comp-debruijn/tools/__pycache__/lang_heights.cpython-314.pyc	3381	unmatched	binary/skip		
+fs79-comp-debruijn/tools/__pycache__/rank1_phases.cpython-314.pyc	12216	unmatched	binary/skip		
+fs79-comp-debruijn/tools/__pycache__/split_types.cpython-314.pyc	4971	unmatched	binary/skip		
+fs79-modeling/c4.md	9811	unmatched	69/71	plans/FS79-invariant-question.md	69
+fs79-modeling/secC.md	32206	unmatched	242/252	plans/FS79-invariant-question.md	242
+fs79-owner/A-planner-brief.md	15574	name-match	75/75	data/fs79/briefs/A-planner-brief.md	75
+fs79-owner/A-planner-brief.sent.md	15583	unmatched	74/75	data/fs79/briefs/A-planner-brief.md	74
+fs79-owner/P0-implementer-brief.md	15016	name-match	51/51	data/fs79/briefs/P0-implementer-brief.md	51
+fs79-owner/P0-implementer-brief.sent.md	15023	unmatched	50/51	data/fs79/briefs/P0-implementer-brief.md	50
+fs79-owner/P1-modeling-brief.md	10789	name-match	49/49	data/fs79/briefs/P1-modeling-brief.md	49
+fs79-owner/assemble.py	2457	unmatched	0/27		0
+fs79-owner/audit.txt	8648	unmatched	0/96		0
+fs79-owner/frame-advisor-head.md	3458	unmatched	10/10	data/fs79/briefs/P2-advisor-brief.md	10
+fs79-owner/frame-advisor-tail.md	6157	unmatched	30/30	data/fs79/briefs/P2-advisor-brief.md	30
+fs79-owner/frame-competitor-head.md	1669	unmatched	4/6	data/fs79/briefs/P2-competitor-brief-deBruijn.md	4
+fs79-owner/frame-competitor-tail.md	5558	unmatched	24/30	data/fs79/briefs/P2-competitor-brief-Coxeter.md	24
+fs79-owner/p0-status.md	560	unmatched	3/5	data/fs79/briefs/P2-competitor-brief-deBruijn.md	3
+fs79-owner/p0-survivors.md	848	unmatched	0/1		0
+fs79-owner/plants/add-2phi.json	215	unmatched	0/1		0
+fs79-owner/plants/add-2phi.out	45	unmatched	0/1		0
+fs79-owner/plants/k3-1344.json	357	unmatched	0/1		0
+fs79-owner/plants/k3-2352.json	416	unmatched	0/1		0
+fs79-owner/plants/k3-plant-420.json	407	unmatched	0/1		0
+fs79-owner/plants/p3-genuine.out	204	unmatched	1/1	data/fs79/p3/smoke-k4-checker-run.txt	1
+fs79-owner/plants/p3-plant-droprow.jsonl	22618	unmatched	0/27		0
+fs79-owner/plants/p3-plant-droprow.out	50	unmatched	0/1		0
+fs79-owner/plants/p3-plant-nconst.jsonl	23363	unmatched	0/28		0
+fs79-owner/plants/p3-plant-nconst.out	204	unmatched	1/1	data/fs79/p3/smoke-k4-checker-run.txt	1
+fs79-owner/plants/res-count.json	28088	unmatched	0/1		0
+fs79-owner/plants/res-count.out	49	unmatched	0/1		0
+fs79-owner/plants/res-rot1.json	28088	unmatched	0/1		0
+fs79-owner/plants/res-rot1.out	37	unmatched	0/1		0
+fs79-owner/recheck167.log	1380	unmatched	0/17		0
+fs79-owner/recheck167.pgid	8	unmatched	nolines		
+fs79-owner/sec-c1.md	4518	unmatched	36/36	plans/FS79-invariant-question.md	36
+fs79-owner/sec-c2.md	15816	unmatched	124/124	plans/FS79-invariant-question.md	124
+fs79-owner/sec-c4.md	10073	unmatched	73/73	plans/FS79-invariant-question.md	73
+fs79-owner/st.txt	107419	unmatched	0/1156		0
+fs79-owner/state.md	7604	unmatched	0/47		0
+fs79-p3/controls.log	2123	unmatched	5/29	tools/fs79_p3_theta4.py	3
+fs79-p3/controls.pgid	8	unmatched	nolines		
+fs79-p3/controls.py	1068	name-match	4/19	tools/fs79_p3_theta4.py	3
+fs79-p3/controls.sh	1036	unmatched	1/6	data/fs54/environment.md	1
+fs79-p3/fulldim-witness.json	382	unmatched	0/1		0
+fs79-p3/pilot-current.txt	339	unmatched	0/2		0
+fs79-p3/pilot-rational,v,vb,z,zb.txt	344	unmatched	0/2		0
+fs79-p3/pilot-rational,z,zb,v,vb.txt	343	unmatched	0/2		0
+fs79-p3/pilot2-r,v2,vb,z,zb,v4.txt	339	unmatched	0/2		0
+fs79-p3/pilot2-r,v2,vb2,z2,zb2,rest.txt	349	unmatched	0/2		0
+fs79-p3/pilot_order.py	2302	unmatched	4/35	tools/fs79_p3_theta4.py	3
+fs79-p3/tree-k4.log	32	unmatched	0/1		0
+fs79-p3/tree-k4.pgid	8	unmatched	nolines		
+fs79-p3b/cal-1344.log	358	unmatched	0/1		0
+fs79-p3b/cal-1584.log	346	unmatched	0/1		0
+fs79-p3b/cal-2352.log	499	unmatched	0/3		0
+fs79-p3b/cal.pgid	8	unmatched	nolines		
+fs79-p3b/find-10920.log	324	unmatched	0/1		0
+fs79-p3b/find-14280.log	324	unmatched	0/1		0
+fs79-p3b/find-2328.log	322	unmatched	0/1		0
+fs79-p3b/find-2400.log	323	unmatched	0/1		0
+fs79-p3b/find-24360.log	324	unmatched	0/1		0
+fs79-p3b/find-2448.log	322	unmatched	0/1		0
+fs79-p3b/find-4200.log	323	unmatched	0/1		0
+fs79-p3b/find.pgid	8	unmatched	nolines		
+fs79-p3b/k3-1584.json	563	unmatched	1/1	data/fs79/p3b/witnesses/2352-theta3-cal.json	1
+fs79-p3b/plant-control.txt	319	unmatched	4/4	data/fs79/p3b/checker-run.txt	4
+fs79-p3b/plant-theta-plus-eighth-0.json	409	unmatched	0/1		0
+fs79-p3b/plant-theta-plus-eighth-1.json	407	unmatched	0/1		0
+fs79-p3b/plant-theta-plus-eighth-2.json	409	unmatched	0/1		0
+fs79-p3b/plant-theta-plus-eighth-3.json	409	unmatched	0/1		0
+fs79-p3b/quot.pgid	8	unmatched	nolines		
+fs79-p3b/run-cal.log	9	unmatched	nolines		
+fs79-p3b/run-cal.sh	294	unmatched	1/3	data/fs54/environment.md	1
+fs79-p3b/run-find.log	9	unmatched	nolines		
+fs79-p3b/run-find.sh	309	unmatched	1/3	data/fs54/environment.md	1
+fs79-p3b/run-quot.log	1199	unmatched	0/23		0
+fs79-p3b/run-quot.sh	309	unmatched	1/4	data/fs54/environment.md	1
+fs79-p3b/run-upper.sh	301	unmatched	1/3	data/fs54/environment.md	1
+fs79-p3b/upper.pgid	8	unmatched	nolines		
+fs79-phase0/ask-1380634-a.cnf	1109671	unmatched	binary/skip		
+fs79-phase0/ask-1406470-a.cnf	1514992	unmatched	binary/skip		
+fs79-phase0/ask-1416058-a.cnf	6093545	unmatched	binary/skip		
+fs79-phase0/c23k4.log	1255	unmatched	0/18		0
+fs79-phase0/c23k4.pgid	8	unmatched	nolines		
+fs79-phase0/c43.pgid	8	unmatched	nolines		
+fs79-phase0/chain-snapshot.sh	923	unmatched	2/11	data/fs79/checks/recheck167.sh	2
+fs79-phase0/chain.log	38	unmatched	0/1		0
+fs79-phase0/chain.pgid	8	unmatched	nolines		
+fs79-phase0/chain.sh	923	unmatched	2/11	data/fs79/checks/recheck167.sh	2
+fs79-phase0/chain2-snapshot.sh	1116	unmatched	2/15	data/fs79/checks/recheck167.sh	2
+fs79-phase0/chain2.log	33549	unmatched	0/476		0
+fs79-phase0/chain2.pgid	8	unmatched	nolines		
+fs79-phase0/chain2.sh	1116	unmatched	2/15	data/fs79/checks/recheck167.sh	2
+fs79-phase0/chain3-snapshot.sh	543	unmatched	2/10	data/fs79/checks/recheck167.sh	2
+fs79-phase0/chain3.log	25423	unmatched	9/413	data/fs81/phaseD/d47/screen-run-b4.log	2
+fs79-phase0/chain3.pgid	8	unmatched	nolines		
+fs79-phase0/chain3.sh	543	unmatched	2/10	data/fs79/checks/recheck167.sh	2
+fs79-phase0/cheap2.log	57020	unmatched	14/902	data/fs81/phaseD/d47/screen-run-b1.log	4
+fs79-phase0/cheap2.pgid	8	unmatched	nolines		
+fs79-phase0/checkall.pgid	8	unmatched	nolines		
+fs79-phase0/checkall.sh	652	unmatched	1/9	data/fs54/environment.md	1
+fs79-phase0/deep.log	2475	unmatched	3/44	data/fs81/phaseD/d47/screen-run-b4.log	2
+fs79-phase0/deep.pgid	8	unmatched	nolines		
+fs79-phase0/launch.sh	602	unmatched	1/6	data/fs54/environment.md	1
+fs79-phase0/qpass.log	9777	unmatched	18/178	data/fs81/phaseD/d47/screen-run-b5.log	11
+fs79-phase0/qpass.pgid	8	unmatched	nolines		
+fs79-phase0/qpass.sh	303	unmatched	1/4	data/fs54/environment.md	1
+fs79-phase0/qpass2.log	18985	unmatched	28/352	data/fs81/phaseD/d47/screen-run-b1.log	21
+fs79-phase0/summ.py	2633	unmatched	1/34	tools/m56_rr_defect.py	1
+fs79-phase0/sweep2520.log	14102	unmatched	0/87		0
+fs79-phase0/sweep2520.pgid	8	unmatched	nolines		
+fs79-phase0/tab-1574123-10000-gap.cnf	11369413	unmatched	binary/skip		
+fs79-plan/pa/ax.py	1319	unmatched	3/21	data/fs85/audit/zbmath_queries.py	2
+fs79-plan/pa/cgho-bg.txt	124129	unmatched	0/1416		0
+fs79-plan/pa/cgho-coh.txt	106219	unmatched	0/1156		0
+fs79-plan/pa/gho.txt	117113	unmatched	0/1284		0
+fs79-plan/pa/mn.txt	99414	unmatched	0/772		0
+fs79-plan/pa/mo-a.json	1492	unmatched	0/1		0
+fs79-plan/pa/mo-ac.json	615	unmatched	0/1		0
+fs79-plan/pa/mo-q.json	2500	unmatched	0/1		0
+fs79-plan/pa/mo-qc.json	4807	unmatched	0/1		0
+fs79-plan/pa/queries-arxiv.jsonl	2609	unmatched	0/39		0
+fs79-plan/pa/queries.jsonl	2744	unmatched	0/42		0
+fs79-plan/pa/zb.py	1917	name-match	4/26	data/fs91/j03/zbrev.py	2
+fs79-poros-comp/cgho-coh.txt	106219	unmatched	0/1156		0
+fs79-poros-plan/__pycache__/rank1_bench.cpython-314.pyc	3991	unmatched	binary/skip		
+fs79-poros-plan/__pycache__/rank1_density.cpython-314.pyc	8605	unmatched	binary/skip		
+fs79-poros-plan/rank1_bench_tf.py	577	unmatched	1/8	data/fs79/checks/rank1_bench.py	1
+fs81-close/axioms.out	1915	unmatched	11/19	data/m2/j15/axioms.log	11
+fs81-close/build.out	383	unmatched	0/5		0
+fs81-close/claude_edit1.py	6899	unmatched	0/57		0
+fs81-close/claude_edit2.py	8031	unmatched	0/50		0
+fs81-close/claude_edit3.py	7658	unmatched	29/45	CLAUDE.md	29
+fs81-close/claude_edit4.py	7960	unmatched	0/34		0
+fs81-close/helpers.py	677	unmatched	0/10		0
+fs81-close/rerank.py	7880	unmatched	0/58		0
+fs81-close/rows.md	11092	unmatched	3/3	LEDGER.md	3
+fs81-close/tick.py	10923	unmatched	0/104		0
+fs81-close/vacuity.out	4798	unmatched	26/35	data/m2/j14/vacuity.log	26
+fs81-owner/__pycache__/mut_check.cpython-314.pyc	35369	unmatched	binary/skip		
+fs81-owner/k1-plant-basis-shear-table-unchanged.json	586	unmatched	0/1		0
+fs81-owner/k1-plant-sublattice-basis.json	586	unmatched	0/1		0
+fs81-owner/k2-faithful.out	989	unmatched	0/2		0
+fs81-owner/k2-plant-drop-last-hint-q1.lrat.gz	39761082	unmatched	binary/skip		
+fs81-owner/k2-plant-drop-last-hint-q2.lrat.gz	39761080	unmatched	binary/skip		
+fs81-owner/k2-plant-drop-last-hint-q3.lrat.gz	39761076	unmatched	binary/skip		
+fs81-owner/mut_check.py	19549	unmatched	218/221	tools/fs81_theta_check.py	215
+fs81-owner/mut_selftest.txt	4245	unmatched	0/37		0
+fs81-owner/plant.py	1407	unmatched	1/19	tools/m56_rr_defect.py	1
+fs81-owner/plant_vs_mutant.py	1499	unmatched	1/19	tools/m56_rr_defect.py	1
+fs81-owner/slot_mutant_nocap.py	15742	unmatched	155/156	scripts/slot.py	155
+fs81-owner/slot_mutant_noledger.py	15722	unmatched	155/155	scripts/slot.py	155
+fs81-owner/soifer.txt	1933139	unmatched	17/23026	data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt	17
+fs81-owner/struct_mutant_narrow.py	15860	unmatched	166/167	tools/fs81_struct_check.py	166
+fs81-owner/struct_mutant_selftest.txt	985	unmatched	0/2		0
+fs81-phase0/a167-cert.json	786	unmatched	0/1		0
+fs81-phase0/a167-units.json	328	unmatched	0/1		0
+fs81-phase0/a167.json	456	unmatched	0/1		0
+fs81-phase0/c11-cert.json	716745	unmatched	0/1		0
+fs81-phase0/c167-cert.json	81220	unmatched	0/1		0
+fs81-phase0/c167-units.json	339	unmatched	0/1		0
+fs81-phase0/c167.json	474	unmatched	0/1		0
+fs81-phase0/cmds.txt	169	unmatched	0/1		0
+fs81-phase0/configs-g2.log	21570	unmatched	0/33		0
+fs81-phase0/configs-g3.log	18968	unmatched	0/28		0
+fs81-phase0/configs-g4.log	12860	unmatched	0/19		0
+fs81-phase0/configs-g5.log	56503	unmatched	5/99	tools/fs81_p0.py	3
+fs81-phase0/configs-g6.log	79036	unmatched	0/118		0
+fs81-phase0/configs.log	26687	unmatched	4/57	tools/fs81_p0.py	2
+fs81-phase0/configs.pgid	8	unmatched	nolines		
+fs81-phase0/controls.log	41979	unmatched	0/75		0
+fs81-phase0/controls.pgid	8	unmatched	nolines		
+fs81-phase0/frozen_mutant_high.out	1249	unmatched	0/11		0
+fs81-phase0/frozen_mutant_high.py	13267	unmatched	149/150	tools/fs73v2_check.py	149
+fs81-phase0/frozen_mutant_low.out	1430	unmatched	0/11		0
+fs81-phase0/frozen_mutant_low.py	13267	unmatched	149/150	tools/fs73v2_check.py	149
+fs81-phase0/m_high.py	20935	unmatched	235/236	tools/fs81_theta_check.py	235
+fs81-phase0/m_low.py	20935	unmatched	235/236	tools/fs81_theta_check.py	235
+fs81-phase0/mutant_high.out	953	unmatched	0/9		0
+fs81-phase0/mutant_high.py	20155	unmatched	225/228	tools/fs81_theta_check.py	223
+fs81-phase0/mutant_low.out	866	unmatched	0/8		0
+fs81-phase0/mutant_low.py	20155	unmatched	225/228	tools/fs81_theta_check.py	223
+fs81-phase0/p02-children.pids	48	unmatched	0/1		0
+fs81-phase0/p03-struct.log	5052	unmatched	0/77		0
+fs81-phase0/p03.log	517	unmatched	0/2		0
+fs81-phase0/p03.pgid	8	unmatched	nolines		
+fs81-phase0/selftest.out	4497	name-match	0/39		0
+fs81-phase0/selftest2.out	5066	unmatched	0/39		0
+fs81-phase0/show.py	309	unmatched	0/2		0
+fs81-phase0/summary.md	12923	unmatched	42/42	data/fs81/records/phase-P0.md	42
+fs81-phase0/u11.json	876	unmatched	0/1		0
+fs81-phase0/xcheck23.log	322	unmatched	0/2		0
+fs81-phaseD/d47/ask-2167511-a.cnf	6093545	unmatched	binary/skip		
+fs81-phaseD/d47/tab-2167510-38416-plain.cnf	82441140	unmatched	binary/skip		
+fs81-phaseD/d47/tab-2167512-38416-plain.cnf	82441140	unmatched	binary/skip		
+fs81-plan/BRIEF.md	18001	unmatched	117/118	data/fs81/briefs/A-planner-brief.md	117
+fs81-plan/devos.txt	13034	unmatched	0/138		0
+fs81-plan/fischer1990.txt	37978	unmatched	82/472	data/m2/j17/excerpts/fischer1990-intro.txt	42
+fs81-plan/soifer.txt	2139000	unmatched	18/24120	data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt	18
+fs81-plan/zb/an0974.json	3114	unmatched	0/1		0
+fs81-plan/zb/an1506.json	1506	unmatched	0/1		0
+fs81-plan/zb/ber1.json	320	unmatched	0/1		0
+fs81-plan/zb/ber2.json	35692	unmatched	0/1		0
+fs81-plan/zb/ber3.json	2586	unmatched	0/1		0
+fs81-plan/zb/bohr.json	1607	unmatched	0/1		0
+fs81-plan/zb/cc1.json	320	unmatched	0/1		0
+fs81-plan/zb/cc2.json	63943	unmatched	0/1		0
+fs81-plan/zb/chil.json	24124	unmatched	0/1		0
+fs81-plan/zb/circ1.json	2753	unmatched	0/1		0
+fs81-plan/zb/circ2.json	6886	unmatched	0/1		0
+fs81-plan/zb/dist1.json	320	unmatched	0/1		0
+fs81-plan/zb/fisch.json	85528	unmatched	0/1		0
+fs81-plan/zb/fur.json	319	unmatched	0/1		0
+fs81-plan/zb/jai.json	343692	unmatched	0/1		0
+fs81-plan/zb/jai2.json	241039	unmatched	0/1		0
+fs81-plan/zb/jau.json	73635	unmatched	0/1		0
+fs81-plan/zb/jau2.json	72411	unmatched	0/1		0
+fs81-plan/zb/lonely.json	31670	unmatched	0/1		0
+fs81-plan/zb/qf1.json	319	unmatched	0/1		0
+fs81-plan/zb/qf2.json	317	unmatched	0/1		0
+fs81-plan/zb/qf3.json	4324	unmatched	0/1		0
+fs81-plan/zb/qf4.json	3114	unmatched	0/1		0
+fs81-plan/zb/three.json	319	unmatched	0/1		0
+fs81-plan/zb/ud1.json	5204	unmatched	0/1		0
+fs81-plan/zb/ud2.json	21361	unmatched	0/1		0
+fs81-plan/zb/vo1.json	320	unmatched	0/1		0
+fs81-plan/zb/wood.json	317	unmatched	0/1		0
+fs81-plan/zb/zaks.json	22354	unmatched	0/1		0
+fs81-plan/zq.sh	942	name-match	1/11	data/fs85/comp-debruijn/zq.sh	1
+fs81-poros-plan/HELD.md	4119	unmatched	0/35		0
+fs81-verifier/c4/construct_cert.py	3382	unmatched	5/42	tools/fs81_p0.py	2
+fs81-verifier/c4/d107-B-K2-construct.json	1569	unmatched	0/1		0
+fs81-verifier/c4/d11-A-K1.json	575	unmatched	0/1		0
+fs81-verifier/c4/d11-A-K1.rec.json	324	unmatched	0/1		0
+fs81-verifier/c4/d11-A-K2.json	850	unmatched	0/1		0
+fs81-verifier/c4/d11-A-K2.rec.json	325	unmatched	0/1		0
+fs81-verifier/c4/d11-A-K3-construct.json	1152	unmatched	0/1		0
+fs81-verifier/c4/d11-B-K1.json	609297	name-match	0/1		0
+fs81-verifier/c4/d11-B-K1.rec.json	308	unmatched	0/1		0
+fs81-verifier/c4/d119-A-K2-construct.json	890	unmatched	0/1		0
+fs81-verifier/c4/d119-A-K2.rec.json	185	unmatched	0/1		0
+fs81-verifier/c4/d23-A-K1-construct.json	550	unmatched	0/1		0
+fs81-verifier/c4/d23-A-K1.json	782	unmatched	0/1		0
+fs81-verifier/c4/d23-A-K1.rec.json	312	unmatched	0/1		0
+fs81-verifier/c4/d23-A-K2.rec.json	180	unmatched	0/1		0
+fs81-verifier/c4/d35-A-K3-construct.json	1201	unmatched	0/1		0
+fs81-verifier/c4/d47-A-K1.json	779	unmatched	0/1		0
+fs81-verifier/c4/d47-A-K1.rec.json	312	unmatched	0/1		0
+fs81-verifier/c4/d491-B-K3-construct.json	2559	unmatched	0/1		0
+fs81-verifier/c4/d527-B-K3-construct.json	2562	unmatched	0/1		0
+fs81-verifier/c4/d59-A-K2.json	879	unmatched	0/1		0
+fs81-verifier/c4/d59-A-K2.rec.json	325	unmatched	0/1		0
+fs81-verifier/c4/k2.pgid	8	unmatched	nolines		
+fs81-verifier/c4/k2.pid	8	unmatched	nolines		
+fs81-verifier/c4/run_trees.py	2022	unmatched	5/28	data/fs70/records/phase-1f/arm1c.py	2
+fs81-verifier/fischer1990.txt	37978	unmatched	82/472	data/m2/j17/excerpts/fischer1990-intro.txt	42
+fs81-verifier/fischer9_check.py	1599	unmatched	0/15		0
+fs81-verifier/fischer9_plant.py	1552	unmatched	0/14		0
+fs81-verifier/out/thetaR-band-hi.json	938	unmatched	nolines		
+fs81-verifier/out/thetaR-band-lo.json	938	unmatched	nolines		
+fs81-verifier/out/thetaR-drop-dir.json	1616	unmatched	nolines		
+fs81-verifier/out/thetaR-none.json	1163	unmatched	nolines		
+fs85-C-text.md	14378	unmatched	114/114	plans/FS85-rigidity-without-triangles.md	114
+fs85-C2-text.md	1226	unmatched	12/12	plans/FS85-rigidity-without-triangles.md	12
+fs85-audit/af2021.html	47314	unmatched	0/184		0
+fs85-audit/af2022.html	47314	unmatched	0/184		0
+fs85-audit/basic.txt	41834	unmatched	0/342		0
+fs85-audit/cdx.json	3	unmatched	nolines		
+fs85-audit/cite/1808.09534.pdf	467810	unmatched	binary/skip		
+fs85-audit/cite/1808.09534.txt	62415	unmatched	0/616		0
+fs85-audit/cite/1809.00527.pdf	187252	unmatched	binary/skip		
+fs85-audit/cite/1809.00527.txt	46987	unmatched	0/521		0
+fs85-audit/cite/1910.14454.pdf	166519	unmatched	binary/skip		
+fs85-audit/cite/1910.14454.txt	44848	unmatched	0/452		0
+fs85-audit/cite/2401.12347.txt	16595	unmatched	0/177		0
+fs85-audit/crop.py	1175	unmatched	0/17		0
+fs85-audit/fig/fig11.png	500566	unmatched	binary/skip		
+fs85-audit/fig/fig12.png	368991	unmatched	binary/skip		
+fs85-audit/fig/fig56.png	320105	unmatched	binary/skip		
+fs85-audit/fig/p12-000.png	13290	unmatched	binary/skip		
+fs85-audit/fig/p12-001.png	340	unmatched	binary/skip		
+fs85-audit/fig/p12-002.png	17888	unmatched	binary/skip		
+fs85-audit/fig/p12-003.png	358	unmatched	binary/skip		
+fs85-audit/fig/p12-004.png	51412	unmatched	binary/skip		
+fs85-audit/fig/p12-005.png	505	unmatched	binary/skip		
+fs85-audit/fig/p12-006.png	13697	unmatched	binary/skip		
+fs85-audit/fig/p12-007.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-008.png	13322	unmatched	binary/skip		
+fs85-audit/fig/p12-009.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-010.png	13210	unmatched	binary/skip		
+fs85-audit/fig/p12-011.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-012.png	13547	unmatched	binary/skip		
+fs85-audit/fig/p12-013.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-014.png	12941	unmatched	binary/skip		
+fs85-audit/fig/p12-015.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-016.png	13300	unmatched	binary/skip		
+fs85-audit/fig/p12-017.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-018.png	12966	unmatched	binary/skip		
+fs85-audit/fig/p12-019.png	255	unmatched	binary/skip		
+fs85-audit/fig/p12-020.png	13119	unmatched	binary/skip		
+fs85-audit/fig/p12-021.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-000.png	7404	unmatched	binary/skip		
+fs85-audit/fig/p78-001.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-002.png	9876	unmatched	binary/skip		
+fs85-audit/fig/p78-003.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-004.png	11697	unmatched	binary/skip		
+fs85-audit/fig/p78-005.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-006.png	15088	unmatched	binary/skip		
+fs85-audit/fig/p78-007.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-008.png	10490	unmatched	binary/skip		
+fs85-audit/fig/p78-009.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-010.png	10555	unmatched	binary/skip		
+fs85-audit/fig/p78-011.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-012.png	10342	unmatched	binary/skip		
+fs85-audit/fig/p78-013.png	255	unmatched	binary/skip		
+fs85-audit/fig/p78-014.png	10425	unmatched	binary/skip		
+fs85-audit/fig/p78-015.png	255	unmatched	binary/skip		
+fs85-audit/img/t4-000.png	6023	unmatched	binary/skip		
+fs85-audit/img/t4-001.png	164	unmatched	binary/skip		
+fs85-audit/img/t4-002.png	16335	unmatched	binary/skip		
+fs85-audit/img/t4-003.png	32939	unmatched	binary/skip		
+fs85-audit/img/t4-004.png	682	unmatched	binary/skip		
+fs85-audit/img/t4-005.png	125321	unmatched	binary/skip		
+fs85-audit/img/t4-006.png	111028	unmatched	binary/skip		
+fs85-audit/img/t4-007.png	7746	unmatched	binary/skip		
+fs85-audit/img/t4-008.png	200	unmatched	binary/skip		
+fs85-audit/img/t4-009.png	65591	unmatched	binary/skip		
+fs85-audit/img/t4-010.png	32787	unmatched	binary/skip		
+fs85-audit/img/t4-011.png	633	unmatched	binary/skip		
+fs85-audit/img/t4-012.png	191804	unmatched	binary/skip		
+fs85-audit/img/t4-013.png	47325	unmatched	binary/skip		
+fs85-audit/img/t4-014.png	17318	unmatched	binary/skip		
+fs85-audit/img/t4-015.png	399	unmatched	binary/skip		
+fs85-audit/img/t4-016.png	125966	unmatched	binary/skip		
+fs85-audit/img/t4-017.png	11606	unmatched	binary/skip		
+fs85-audit/img/t4-018.png	282	unmatched	binary/skip		
+fs85-audit/img/t4-019.png	74291	unmatched	binary/skip		
+fs85-audit/img/t4-020.png	12914	unmatched	binary/skip		
+fs85-audit/img/t4-021.png	305	unmatched	binary/skip		
+fs85-audit/img/t4-022.png	105191	unmatched	binary/skip		
+fs85-audit/img/t4-023.png	22286	unmatched	binary/skip		
+fs85-audit/img/t4-024.png	465	unmatched	binary/skip		
+fs85-audit/img/t4-025.png	165712	unmatched	binary/skip		
+fs85-audit/img/t4-026.png	70094	unmatched	binary/skip		
+fs85-audit/img/t4-027.png	1087	unmatched	binary/skip		
+fs85-audit/img/t4-028.png	196994	unmatched	binary/skip		
+fs85-audit/img/t4-029.png	215112	unmatched	binary/skip		
+fs85-audit/ks.txt	31211	unmatched	0/354		0
+fs85-audit/kw.py	723	unmatched	0/11		0
+fs85-audit/nes.html	13161	unmatched	0/133		0
+fs85-audit/nes1973.txt	10419	unmatched	0/130		0
+fs85-audit/oa-ks-cites.json	60553	unmatched	0/1		0
+fs85-audit/oa-ks.json	10789	unmatched	0/1		0
+fs85-audit/p11-11.png	459173	unmatched	binary/skip		
+fs85-audit/parts.txt	34718	unmatched	0/477		0
+fs85-audit/s1.png	397936	unmatched	binary/skip		
+fs85-audit/s2.png	465364	unmatched	binary/skip		
+fs85-audit/s3.png	463452	unmatched	binary/skip		
+fs85-audit/s4.png	451472	unmatched	binary/skip		
+fs85-audit/s5.png	473282	unmatched	binary/skip		
+fs85-audit/s6.png	453193	unmatched	binary/skip		
+fs85-audit/s7.png	91381	unmatched	binary/skip		
+fs85-audit/zb-full.out	198371	unmatched	0/768		0
+fs85-audit/zb.out	61507	unmatched	0/322		0
+fs85-audit/zbmath-raw/q00.json	17583	unmatched	0/1		0
+fs85-audit/zbmath-raw/q01.json	11127	unmatched	0/1		0
+fs85-audit/zbmath-raw/q02.json	9139	unmatched	0/1		0
+fs85-audit/zbmath-raw/q03.json	17217	unmatched	0/1		0
+fs85-audit/zbmath-raw/q04.json	116133	unmatched	0/1		0
+fs85-audit/zbmath-raw/q05.json	92127	unmatched	0/1		0
+fs85-audit/zbmath-raw/q06.json	88660	unmatched	0/1		0
+fs85-audit/zbmath-raw/q07.json	35223	unmatched	0/1		0
+fs85-audit/zbmath-raw/q08.json	17394	unmatched	0/1		0
+fs85-audit/zbmath-raw/q09.json	75478	unmatched	0/1		0
+fs85-audit/zbmath-raw/q10.json	75482	unmatched	0/1		0
+fs85-audit/zbmath-raw/q11.json	24880	unmatched	0/1		0
+fs85-audit/zbmath-raw/q12.json	1165256	unmatched	0/1		0
+fs85-audit/zbmath-raw/q13.json	338	unmatched	0/1		0
+fs85-audit/zbmath-raw/q14.json	2454	unmatched	0/1		0
+fs85-audit/zbmath-raw/q15.json	1950	unmatched	0/1		0
+fs85-audit/zbmath-raw/q16.json	24684	unmatched	0/1		0
+fs85-audit/zbmath-raw/q17.json	32934	unmatched	0/1		0
+fs85-audit/zbmath-raw/q18.json	28137	unmatched	0/1		0
+fs85-audit/zbmath-raw/q19.json	59042	unmatched	0/1		0
+fs85-audit/zbmath-raw/q20.json	60266	unmatched	0/1		0
+fs85-audit/zbmath-raw/q21.json	45614	unmatched	0/1		0
+fs85-audit/zbmath-raw/q22.json	150394	unmatched	0/1		0
+fs85-audit/zbmath-raw/q23.json	4919	unmatched	0/1		0
+fs85-audit/zbmath-raw/q24.json	15273	unmatched	0/1		0
+fs85-audit/zbmath-raw/q25.json	38404	unmatched	0/1		0
+fs85-audit/zbmath-raw/q26.json	15132	unmatched	0/1		0
+fs85-audit/zbmath-raw/q27.json	338	unmatched	0/1		0
+fs85-audit/zbmath-raw/q28.json	18823	unmatched	0/1		0
+fs85-audit/zbmath-raw/q29.json	130621	unmatched	0/1		0
+fs85-audit/zbmath-raw/q30.json	59349	unmatched	0/1		0
+fs85-audit/zbmath-raw/q31.json	46376	unmatched	0/1		0
+fs85-audit/zbmath-raw/q32.json	25352	unmatched	0/1		0
+fs85-audit/zbmath-raw/q33.json	11001	unmatched	0/1		0
+fs85-audit/zbmath-raw/q34.json	3090	unmatched	0/1		0
+fs85-audit/zbmath-raw/q35.json	335	unmatched	0/1		0
+fs85-audit/zbmath-raw/q36.json	75299	unmatched	0/1		0
+fs85-audit/zbmath-raw/q37.json	20443	unmatched	0/1		0
+fs85-audit/zbmath-raw/q38.json	89212	unmatched	0/1		0
+fs85-close/axioms.log	1907	name-match	11/19	data/m2/j15/axioms.log	11
+fs85-close/bib.log	280	unmatched	0/5		0
+fs85-close/build.log	370	unmatched	1/5	data/m2/j15/build-stage4.log	1
+fs85-close/edit_compress1.py	6978	unmatched	8/55	CLAUDE.md	8
+fs85-close/edit_compress2.py	3713	unmatched	5/35	CLAUDE.md	5
+fs85-close/edit_compress3.py	2498	unmatched	7/21	CLAUDE.md	7
+fs85-close/edit_compress4.py	4514	unmatched	2/20	CLAUDE.md	2
+fs85-close/edit_compress5.py	3717	unmatched	0/21		0
+fs85-close/edit_compress6.py	3519	unmatched	0/21		0
+fs85-close/edit_frontier.py	10832	unmatched	0/86		0
+fs85-close/edit_grok.py	5598	unmatched	3/39	CLAUDE.md	3
+fs85-close/edit_grok2.py	4819	unmatched	7/27	CLAUDE.md	7
+fs85-close/tick.py	603	unmatched	0/9		0
+fs85-close/vac.log	4790	unmatched	26/35	data/m2/j14/vacuity.log	26
+fs85-close/vacst.log	1231	unmatched	9/13	data/m2/j14/vacuity-selftest.log	9
+fs85-comp-coxeter/basic.txt	41834	unmatched	0/342		0
+fs85-comp-coxeter/ks.txt	31211	unmatched	0/354		0
+fs85-comp-coxeter/parts.txt	32036	unmatched	0/411		0
+fs85-comp-coxeter/tools/__pycache__/census.cpython-314.pyc	4388	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/chir.cpython-314.pyc	1714	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/chir2.cpython-314.pyc	2251	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/efield.cpython-314.pyc	9177	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/fast.cpython-314.pyc	2476	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/lp6.cpython-314.pyc	7487	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/part2_rank1.cpython-314.pyc	5531	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/quot64.cpython-314.pyc	3954	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/spectral.cpython-314.pyc	5375	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/spectral5.cpython-314.pyc	3066	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/struct42.cpython-314.pyc	4945	unmatched	binary/skip		
+fs85-comp-coxeter/tools/__pycache__/zlin.cpython-314.pyc	4445	unmatched	binary/skip		
+fs85-comp-coxeter/tools/lp2.pkl	436361	unmatched	binary/skip		
+fs85-comp-coxeter/tools/lp7.pkl	316447	unmatched	binary/skip		
+fs85-comp-debruijn/basic.txt	41834	unmatched	0/342		0
+fs85-comp-debruijn/parts.txt	34718	unmatched	0/477		0
+fs85-comp-debruijn/tools/__pycache__/classes.cpython-314.pyc	6439	unmatched	binary/skip		
+fs85-comp-debruijn/tools/__pycache__/lam.cpython-314.pyc	7613	unmatched	binary/skip		
+fs85-comp-debruijn/tools/__pycache__/task0.cpython-314.pyc	9560	unmatched	binary/skip		
+fs85-comp-debruijn/tools/__pycache__/twoadic.cpython-314.pyc	4027	unmatched	binary/skip		
+fs85-plan/BRIEF.md	12901	unmatched	102/103	data/fs85/briefs/A-planner-brief.md	102
+fs85-plan/basic.txt	41834	unmatched	0/342		0
+fs85-plan/commit-msg.txt	1580	unmatched	0/3		0
+fs85-plan/commit-msg2.txt	1385	unmatched	0/3		0
+fs85-plan/haug.txt	17646	unmatched	0/146		0
+fs85-plan/zb/last.json	337	unmatched	0/1		0
+fs85-plan/zb/q.py	1041	unmatched	1/14	data/fs85/comp-debruijn/zq.sh	1
+fs85-poros-comp/BRIEF-draft.md	20351	unmatched	129/129	data/fs85/briefs/C-advisor-brief.md	129
+fs85-poros-comp/parts-hv.txt	34718	unmatched	0/477		0
+fs85-verifier/p15-15.png	130704	unmatched	binary/skip		
+fs85-verifier/parts.txt	34718	unmatched	0/477		0
+fs85-verifier/t4-000.png	6023	unmatched	binary/skip		
+fs85-verifier/t4-001.png	164	unmatched	binary/skip		
+fs85-verifier/t4-002.png	16335	unmatched	binary/skip		
+fs85-verifier/t4-003.png	32939	unmatched	binary/skip		
+fs85-verifier/t4-004.png	682	unmatched	binary/skip		
+fs85-verifier/t4-005.png	125321	unmatched	binary/skip		
+fs86-close/CLAUDE.pre-table.md	282164	unmatched	1878/1962	CLAUDE.md	1878
+fs86-close/__pycache__/wsr.cpython-314.pyc	1220	unmatched	binary/skip		
+fs86-close/axioms.log	1915	name-match	11/19	data/m2/j15/axioms.log	11
+fs86-close/build.log	370	unmatched	1/5	data/m2/j15/build-stage4.log	1
+fs86-close/cm1.py	2503	unmatched	0/17		0
+fs86-close/cm2.py	4600	unmatched	0/20		0
+fs86-close/cm3.py	3625	unmatched	0/22		0
+fs86-close/cm4.py	2883	unmatched	0/11		0
+fs86-close/cm5.py	5027	unmatched	0/31		0
+fs86-close/cm6.py	1797	unmatched	0/15		0
+fs86-close/fails.txt	1171	unmatched	0/34		0
+fs86-close/fs.py	6803	unmatched	0/33		0
+fs86-close/ledgerB.py	11219	unmatched	0/73		0
+fs86-close/rows.py	16963	unmatched	0/39		0
+fs86-close/soifer.txt	1933139	unmatched	17/23026	data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt	17
+fs86-close/tbl.py	1221	unmatched	0/17		0
+fs86-close/tick.py	5968	unmatched	0/42		0
+fs86-close/vac.log	4798	unmatched	26/35	data/m2/j14/vacuity.log	26
+fs86-close/wsr.py	331	unmatched	0/6		0
+fs86-comp-coxeter/bmk.txt	59305	unmatched	0/564		0
+fs86-comp-coxeter/cs2/__pycache__/exact.cpython-314.pyc	7896	unmatched	binary/skip		
+fs86-comp-coxeter/cs2/__pycache__/tower.cpython-314.pyc	9983	unmatched	binary/skip		
+fs86-comp-coxeter/madore.txt	55903	unmatched	152/592	data/m2/j17/excerpts/madore2015-p5.1-5.4.txt	108
+fs86-comp-coxeter/zhang.txt	28676	unmatched	0/306		0
+fs86-comp-debruijn/1605.05929.txt	105546	unmatched	0/1153		0
+fs86-comp-debruijn/2301.05232.txt	86935	unmatched	0/889		0
+fs86-plan/__pycache__/units.cpython-314.pyc	4614	unmatched	binary/skip		
+fs86-plan/__pycache__/units_fast.cpython-314.pyc	3916	unmatched	binary/skip		
+fs86-plan/bib.out	280	unmatched	0/5		0
+fs86-plan/grr2017.txt	76335	unmatched	0/930		0
+fs86-plan/grr2020.txt	126110	unmatched	0/1497		0
+fs86-plan/q1.txt	775	unmatched	0/17		0
+fs86-plan/q2.txt	694	unmatched	0/15		0
+fs86-plan/q3.txt	200	unmatched	0/5		0
+fs86-plan/q4.txt	159	unmatched	0/3		0
+fs86-plan/soifer.txt	2139000	unmatched	18/24120	data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt	18
+fs86-plan/zb.py	1053	name-match	0/12		0
+fs86-plan/zbfull.py	805	unmatched	0/9		0
+fs86-v-c/zhang.txt	28676	unmatched	0/306		0
+fs86-v-d/__pycache__/gamma27.cpython-314.pyc	6235	unmatched	binary/skip		
+fs86-v-d/k.txt	126169	unmatched	0/1462		0
+fs89-close/edit1.py	5250	unmatched	4/27	CLAUDE.md	4
+fs89-close/edit2.py	9276	unmatched	2/49	CLAUDE.md	2
+fs89-close/edit3.py	1641	unmatched	0/13		0
+fs89-close/edit4.py	1328	unmatched	0/11		0
+fs89-close/fails.txt	432	unmatched	0/11		0
+fs89-close/lost.txt	17	unmatched	nolines		
+fs89-close2/__pycache__/zq.cpython-314.pyc	3214	unmatched	binary/skip		
+fs89-close2/axioms.log	1915	name-match	11/19	data/m2/j15/axioms.log	11
+fs89-close2/build.log	370	unmatched	1/5	data/m2/j15/build-stage4.log	1
+fs89-close2/oa.py	1379	unmatched	1/16	data/fs91/j03/zbrev.py	1
+fs89-close2/vac.log	4798	unmatched	26/35	data/m2/j14/vacuity.log	26
+fs89-close2/vacst.log	1302	unmatched	9/14	data/m2/j14/vacuity-selftest.log	9
+fs89-close2/zq.py	1263	unmatched	4/17	data/fs91/j03/zb.py	3
+fs89-close2/zr.py	356	unmatched	0/6		0
+fs89-close3/__pycache__/rep.cpython-314.pyc	1086	unmatched	binary/skip		
+fs89-close3/audit.txt	20938	unmatched	0/187		0
+fs89-close3/bcheck.txt	567	unmatched	0/2		0
+fs89-close3/bib.py	10322	unmatched	0/87		0
+fs89-close3/dupes.txt	934	unmatched	0/12		0
+fs89-close3/fs.py	2679	unmatched	0/21		0
+fs89-close3/notes.py	6146	unmatched	0/58		0
+fs89-close3/rep.py	438	unmatched	0/5		0
+fs89-close3/stub.py	6665	unmatched	0/56		0
+fs89-pa-berend/b83.txt	71464	unmatched	0/898		0
+fs89-pa-berend/berend.txt	111860	unmatched	0/1154		0
+fs89-pa-berend/pg-01.png	221903	unmatched	binary/skip		
+fs89-pa-berend/pg-02.png	272633	unmatched	binary/skip		
+fs89-pa-berend/pg-03.png	227903	unmatched	binary/skip		
+fs89-pa-berend/pg-04.png	203636	unmatched	binary/skip		
+fs89-pa-berend/pg-05.png	258677	unmatched	binary/skip		
+fs89-pa-berend/pg-06.png	223778	unmatched	binary/skip		
+fs89-pa-berend/pg-07.png	256472	unmatched	binary/skip		
+fs89-pa-berend/pg-08.png	246607	unmatched	binary/skip		
+fs89-pa-berend/pg-09.png	231053	unmatched	binary/skip		
+fs89-pa-berend/pg-10.png	230138	unmatched	binary/skip		
+fs89-pa-berend/pg-11.png	196794	unmatched	binary/skip		
+fs89-pa-berend/pg-12.png	228479	unmatched	binary/skip		
+fs89-pa-berend/pg-13.png	262053	unmatched	binary/skip		
+fs89-pa-berend/pg-14.png	202101	unmatched	binary/skip		
+fs89-pa-berend/pg-15.png	194148	unmatched	binary/skip		
+fs89-pa-berend/pg-16.png	163653	unmatched	binary/skip		
+fs89-pa-berend/pg-17.png	269780	unmatched	binary/skip		
+fs89-pa-berend/pg-18.png	192404	unmatched	binary/skip		
+fs89-pa-berend/pg-19.png	262327	unmatched	binary/skip		
+fs89-pa-berend/pg-20.png	230809	unmatched	binary/skip		
+fs89-pa-berend/pg-21.png	235333	unmatched	binary/skip		
+fs89-pa-berend/pg-22.png	226452	unmatched	binary/skip		
+fs89-pa-berend/pg-23.png	218133	unmatched	binary/skip		
+fs89-pa-berend/pg-24.png	298925	unmatched	binary/skip		
+fs89-pa-berend/pg-25.png	257323	unmatched	binary/skip		
+fs89-pa-berend/pg-26.png	247337	unmatched	binary/skip		
+fs89-pa-berend/pg-27.png	289319	unmatched	binary/skip		
+fs89-pa-berend/pg-28.png	223031	unmatched	binary/skip		
+fs89-pa-berend/pg-29.png	274241	unmatched	binary/skip		
+fs89-pa-berend/pg-30.png	261969	unmatched	binary/skip		
+fs89-pa-berend/pg-31.png	240577	unmatched	binary/skip		
+fs89-pa-berend/q83-01.png	227643	unmatched	binary/skip		
+fs89-pa-berend/q83-02.png	289006	unmatched	binary/skip		
+fs89-pa-berend/q83-03.png	270397	unmatched	binary/skip		
+fs89-pa-berend/q83-04.png	240132	unmatched	binary/skip		
+fs89-pa-berend/q83-05.png	258528	unmatched	binary/skip		
+fs89-pa-berend/q83-06.png	221143	unmatched	binary/skip		
+fs89-pa-berend/q83-07.png	191542	unmatched	binary/skip		
+fs89-pa-berend/q83-08.png	224955	unmatched	binary/skip		
+fs89-pa-berend/q83-09.png	238199	unmatched	binary/skip		
+fs89-pa-berend/q83-10.png	214639	unmatched	binary/skip		
+fs89-pa-berend/q83-11.png	211100	unmatched	binary/skip		
+fs89-pa-berend/q83-12.png	235709	unmatched	binary/skip		
+fs89-pa-berend/q83-13.png	266273	unmatched	binary/skip		
+fs89-pa-berend/q83-14.png	233190	unmatched	binary/skip		
+fs89-pa-berend/q83-15.png	192952	unmatched	binary/skip		
+fs89-pa-berend/q83-16.png	232644	unmatched	binary/skip		
+fs89-pa-berend/q83-17.png	247340	unmatched	binary/skip		
+fs89-pa-berend/q83-18.png	164270	unmatched	binary/skip		
+fs89-pa-berend/q83-19.png	248702	unmatched	binary/skip		
+fs89-pa-berend/q83-20.png	235572	unmatched	binary/skip		
+fs89-pa-berend/q83-21.png	239701	unmatched	binary/skip		
+fs89-pa-berend/q83-22.png	279451	unmatched	binary/skip		
+fs89-pa-berend/q83-23.png	281167	unmatched	binary/skip		
+fs89-pa-berend/q83-24.png	257209	unmatched	binary/skip		
+fs89-pa-furst/berend-etds.txt	29935	unmatched	0/313		0
+fs89-pa-furst/furst.txt	152334	unmatched	0/1855		0
+fs89-pa-furst/p-45.png	146437	unmatched	binary/skip		
+fs89-pa-furst/p45-prop.png	62732	unmatched	binary/skip		
+fs89-pa-furst/p45-prop2.png	34768	unmatched	binary/skip		
+fs89-pa-furst/p49-bib.png	76085	unmatched	binary/skip		
+fs89-pa-furst/q-45.png	127288	unmatched	binary/skip		
+fs89-pa-furst/r-47.png	148949	unmatched	binary/skip		
+fs89-pa-furst/r-48.png	157848	unmatched	binary/skip		
+fs89-pa-furst/s-49.png	103108	unmatched	binary/skip		
+fs89-plan/ax.py	699	unmatched	0/10		0
+fs89-plan/berend-min.txt	29935	unmatched	0/313		0
+fs89-plan/hm.txt	33172	unmatched	0/382		0
+fs89-plan/t.pdf	5618	unmatched	binary/skip		
+fs89-plan/tran280.html	5416	unmatched	0/1		0
+fs89-plan/zb.py	1252	name-match	0/16		0
+g1	280	unmatched	0/5		0
+g2	558	unmatched	0/2		0
+g3	19127	unmatched	0/177		0
+g4	934	unmatched	0/12		0
+g5	5796	unmatched	0/26		0
+j01/addsec.py	4261	unmatched	36/42	plans/FS91-S0V-band-to-nine.md	36
+j01/b84.txt	111860	unmatched	0/1154		0
+k2.log	1092	unmatched	0/14		0
+k3.log	205	unmatched	0/3		0
+k3s.log	169	unmatched	0/3		0
+km.txt	259344	unmatched	0/3476		0
+lb.out	558	unmatched	0/2		0
+ledger82.txt	46824	unmatched	16/16	LEDGER.md	16
+libtxt/1-s2.0-0012365X88900490-main.txt	6135	unmatched	0/81		0
+libtxt/1-s2.0-0012365X9090033E-main.txt	10207	unmatched	0/139		0
+libtxt/1-s2.0-0012365X9090324B-main.txt	33555	unmatched	71/442	data/m2/j17/excerpts/fischer1990-intro.txt	39
+libtxt/1-s2.0-0012365X93904818-main.txt	15741	unmatched	0/205		0
+libtxt/Berend1983-multi-invariant-sets-on-tori.txt	65516	unmatched	0/802		0
+libtxt/Berend1984-minimal-sets-on-tori.txt	24072	unmatched	0/295		0
+libtxt/Berend1984-multi-invariant-sets-compact-abelian-groups.txt	85257	unmatched	0/1071		0
+libtxt/DeVosEtAl2007-circular-coloring-the-plane.txt	10373	unmatched	0/133		0
+libtxt/Furstenberg1967-disjointness-ergodic-theory-minimal-sets.txt	141100	unmatched	0/1634		0
+libtxt/GreenwellLovasz1974-applications-of-product-colouring.txt	6	unmatched	nolines		
+libtxt/HaynesMunday2013-arXiv-1303.1661.txt	23606	unmatched	0/318		0
+libtxt/KechrisMarks-descriptive-graph-combinatorics-2020.txt	236876	unmatched	0/3008		0
+libtxt/KlotzSander2017-uniquely-colorable-cayley.txt	27570	unmatched	0/336		0
+libtxt/LaroseTardif2002-projectivity-independent-sets-powers-of-graphs.txt	21294	unmatched	0/276		0
+libtxt/Nesetril1973-uniquely-colorable-graphs-without-short-cycles.txt	9740	unmatched	0/127		0
+libtxt/Tardif2023-product-5-chromatic-graphs-can-be-4.txt	15414	unmatched	0/174		0
+libtxt/arXiv-0707.1177.txt	15843	unmatched	0/193		0
+libtxt/arXiv-0711.3508-vinh-explicit-ramsey-finite-euclidean.txt	30962	unmatched	0/349		0
+libtxt/arXiv-0712.3079-gvozdenovic-laurent-vallentin-block-diagonal-hierarchies.txt	31339	unmatched	0/370		0
+libtxt/arXiv-0801.1059-bachoc-nebe-oliveira-vallentin-lower-bounds-measurable-chromatic.txt	42726	unmatched	0/499		0
+libtxt/arXiv-0804.3036-hart-iosevich-koh-senger-uriartetuero-distance-graphs-coloring.txt	46075	unmatched	0/506		0
+libtxt/arXiv-0807.2689-vinh-kaleidoscopic-finite-euclidean.txt	16365	unmatched	0/193		0
+libtxt/arXiv-0808.1822-oliveira-vallentin-fourier-lp-distance-avoiding.txt	28082	unmatched	0/332		0
+libtxt/arXiv-1003.2588.txt	85573	unmatched	0/936		0
+libtxt/arXiv-1005.0658-wei-sum-of-two-integral-squares.txt	34185	unmatched	0/391		0
+libtxt/arXiv-1005.4959-gijswijt-mittelmann-schrijver-quadruple-code-bounds.txt	34350	unmatched	0/375		0
+libtxt/arXiv-1007.0797-zhang-independent-sets-direct-products.txt	19945	unmatched	0/251		0
+libtxt/arXiv-1007.2905-bachoc-gijswijt-schrijver-vallentin-invariant-sdp.txt	121903	unmatched	0/1525		0
+libtxt/arXiv-1111.1015.txt	66656	unmatched	0/723		0
+libtxt/arXiv-1206.1934.txt	42285	unmatched	0/464		0
+libtxt/arXiv-1301.1054-bachoc-decorte-oliveira-vallentin-spectral-bounds-operator.txt	51627	unmatched	0/632		0
+libtxt/arXiv-1304.0194-kuhlmann-tame-valued-fields.txt	126169	unmatched	0/1462		0
+libtxt/arXiv-1306.6050-schneider-silva.txt	29723	unmatched	0/393		0
+libtxt/arXiv-1308.5173-harangi-virag-independence-ratio-random-eigenvectors.txt	67469	unmatched	0/807		0
+libtxt/arXiv-1501.00168-keleti-matolcsi-oliveira-ruzsa-planar-sets-avoiding-unit-distances.txt	44452	unmatched	0/498		0
+libtxt/arXiv-1501.01647.txt	54717	unmatched	0/648		0
+libtxt/arXiv-1507.05300-bardestani-mallahi-karai-generalization-hadwiger-nelson.txt	41753	unmatched	0/453		0
+libtxt/arXiv-1507.05300-generalization-hadwiger-nelson.txt	41753	unmatched	0/453		0
+libtxt/arXiv-1509.03667.txt	17159	unmatched	0/196		0
+libtxt/arXiv-1509.07023-madore-hadwiger-nelson-over-fields.txt	49162	unmatched	119/547	data/m2/j17/excerpts/madore2015-p5.1-5.4.txt	84
+libtxt/arXiv-1511.02427-bardestani-mallahi-karai-structured-cayley-graphs.txt	36744	unmatched	0/391		0
+libtxt/arXiv-1512.04972.txt	67579	unmatched	0/853		0
+libtxt/arXiv-1601.04551-wrochna-square-free-graphs-are-multiplicative.txt	86228	unmatched	0/921		0
+libtxt/arXiv-1602.02531-litjens-polak-schrijver-nonbinary-quadruples.txt	30519	unmatched	0/335		0
+libtxt/arXiv-1605.05929-kari-szabados-nivat-algebraic.txt	84291	unmatched	0/1038		0
+libtxt/arXiv-1701.06024-bardestani-mallahi-karai-polynomial-configurations-local-fields.txt	68196	unmatched	0/725		0
+libtxt/arXiv-1709.07317-baake-zeiner-geometric-enumeration.txt	226313	unmatched	0/2571		0
+libtxt/arXiv-1801.08243-godsil-roberson-rooney-samal-varvitsiotis-vector-coloring-categorical-product.txt	111486	unmatched	0/1378		0
+libtxt/arXiv-1801.08243.txt	111486	unmatched	0/1378		0
+libtxt/arXiv-1802.06460.txt	28468	unmatched	0/313		0
+libtxt/arXiv-1804.09099-decorte-oliveira-vallentin-complete-positivity.txt	166532	unmatched	0/2005		0
+libtxt/arXiv-1805.00157-exoo-ismailescu.txt	22554	unmatched	0/223		0
+libtxt/arXiv-1812.06045-delaat-machado-oliveira-vallentin-k-point-equiangular.txt	69212	unmatched	0/738		0
+libtxt/arXiv-1812.10725-chamizo-miatello-sums-of-squares.txt	52654	unmatched	0/590		0
+libtxt/arXiv-1903.11685-alon-briceno-chandgotia-magazinov-mixing.txt	38131	unmatched	0/468		0
+libtxt/arXiv-1907.00929-heule-529-trimming.txt	39601	unmatched	0/476		0
+libtxt/arXiv-1907.09751-dutour-madore-moustrou-vallentin-coloring-voronoi-lattices.txt	117855	unmatched	0/1428		0
+libtxt/arXiv-1908.03880.txt	49313	unmatched	0/537		0
+libtxt/arXiv-1909.02708-manta-triangle-colorings-seven.txt	28346	unmatched	0/334		0
+libtxt/arXiv-1909.13177-exoo-ismailescu-6chromatic-two-distance.txt	11610	unmatched	0/155		0
+libtxt/arXiv-2010.12661-parts-human-verifiable.txt	32036	unmatched	0/411		0
+libtxt/arXiv-2010.12665-parts-509-minimization.txt	56838	unmatched	0/691		0
+libtxt/arXiv-2012.13558-wrochna-smaller-counterexamples-hedetniemi.txt	25748	unmatched	0/286		0
+libtxt/arXiv-2102.05529-haemers-ratio-bound.txt	10830	unmatched	0/131		0
+libtxt/arXiv-2103.02757.txt	39839	unmatched	0/486		0
+libtxt/arXiv-2106.05333.txt	28772	unmatched	0/295		0
+libtxt/arXiv-2106.11824-voronov-5chromatic.txt	38548	unmatched	0/437		0
+libtxt/arXiv-2108.07713.txt	30644	unmatched	0/314		0
+libtxt/arXiv-2201.00275.txt	42692	unmatched	9/552	data/m2/j17/excerpts/zapletal2022-fact4.2.txt	9
+libtxt/arXiv-2201.04499.txt	63507	unmatched	0/826		0
+libtxt/arXiv-2205.12312.txt	43921	unmatched	0/518		0
+libtxt/arXiv-2206.12632.txt	25744	unmatched	0/373		0
+libtxt/arXiv-2206.12633.txt	13724	unmatched	0/181		0
+libtxt/arXiv-2206.12635.txt	26087	unmatched	0/254		0
+libtxt/arXiv-2207.14179-ambrus-csiszarik-matolcsi-varga-zsamboki-density-planar-sets.txt	57547	unmatched	0/637		0
+libtxt/arXiv-2209.15598.txt	27906	unmatched	0/275		0
+libtxt/arXiv-2211.04075-gangloff-hellouin-oprocha-block-gluing-hom-shifts.txt	90818	unmatched	0/1165		0
+libtxt/arXiv-2301.05232-herva-kari-perfect-colorings.txt	75495	unmatched	0/834		0
+libtxt/arXiv-2303.06262-cervantes-krebs.txt	50338	unmatched	0/455		0
+libtxt/arXiv-2303.06272-cervantes-krebs-2.txt	72515	unmatched	0/635		0
+libtxt/arXiv-2303.09513.txt	41968	unmatched	0/423		0
+libtxt/arXiv-2303.14714-degrey-parts-lower-bounds.txt	6675	unmatched	0/89		0
+libtxt/arXiv-2303.14722-more-certainty-interval.txt	48365	unmatched	0/599		0
+libtxt/arXiv-2304.10163-voronov.txt	46910	unmatched	0/552		0
+libtxt/arXiv-2305.07770.txt	42695	unmatched	0/397		0
+libtxt/arXiv-2306.07108-cliques-repr-quadratic-forms.txt	58696	unmatched	0/702		0
+libtxt/arXiv-2308.16885-chromatic-spacetime.txt	24710	unmatched	0/230		0
+libtxt/arXiv-2311.10069.txt	41343	unmatched	0/479		0
+libtxt/arXiv-2401.04814-brittenham-pakianathan-euclidean-association-scheme.txt	56054	unmatched	0/657		0
+libtxt/arXiv-2401.12347-oravcova-sotak-integer-distance-graphs.txt	14009	unmatched	0/174		0
+libtxt/arXiv-2409.14948-herva-kari-periodic-decompositions.txt	60215	unmatched	0/683		0
+libtxt/arXiv-2410.11028-krebs-sankar-abelian-groups-without-3-chromatic-cayley-graphs.txt	37526	unmatched	0/405		0
+libtxt/arXiv-2411.01951-abrishami-et-al-periodic-colorings.txt	79663	unmatched	0/893		0
+libtxt/arXiv-2411.14087-shi-li-helleseth-ozbudak-generalized-zetterberg-covering-radius.txt	55863	unmatched	0/634		0
+libtxt/arXiv-2502.01958-maptype.txt	54432	unmatched	0/710		0
+libtxt/arXiv-2502.16078-zhu-survey-hedetniemi.txt	85489	unmatched	0/1029		0
+libtxt/arXiv-2502.17678-equidistribution-rational-points-sphere.txt	70220	unmatched	0/857		0
+libtxt/arXiv-2503.01721-diameter-girth-repr.txt	60153	unmatched	0/773		0
+libtxt/arXiv-2507.10387-akhtari-vaaler-widmer-equidistribution-norm-one-CM.txt	43745	unmatched	0/523		0
+libtxt/arXiv-2507.21342-chandgotia-gangloff-hellouin-oprocha-undecidability-block-gluing-homshifts.txt	101267	unmatched	0/1234		0
+libtxt/arXiv-2508.18793-abiad-hoffman-colorability.txt	45879	unmatched	0/486		0
+libtxt/arXiv-2510.11969-chandgotia-gangloff-hellouin-oprocha-cohomology-homshifts.txt	80012	unmatched	0/1001		0
+libtxt/arXiv-2511.03028-cervantes-krebs-rank2.txt	31142	unmatched	0/383		0
+libtxt/arXiv-2511.10813-eng-harris-krebs-four-plane-unit-vectors-3-colorable.txt	39672	unmatched	0/477		0
+libtxt/arXiv-2601.07828-agoston-two-distance-range.txt	58266	unmatched	0/654		0
+libtxt/arXiv-2604.22705-planar-1-ended-periodic.txt	64589	unmatched	0/617		0
+libtxt/arXiv-2606.12325.txt	8171	unmatched	0/105		0
+libtxt/arXiv-2606.28157-ducz-varga-independence-ratio-below-quarter.txt	25793	unmatched	0/305		0
+libtxt/arXiv-2606.28157.txt	25793	unmatched	0/305		0
+libtxt/arXiv-2606.29415-rodis-rational-plane-unit-distance.txt	19529	unmatched	0/227		0
+libtxt/arXiv-2607.19995-costa-silva-filho-coordinate-fields-EI17-EI19.txt	83674	unmatched	0/962		0
+libtxt/arXiv-2608.04542v3-haugland-2131.txt	17646	unmatched	0/146		0
+libtxt/arXiv-2609.03184-basic-uniquely-colorable-cayley.txt	34708	unmatched	0/320		0
+libtxt/arXiv-cond-mat-9902295-moore-newman-four-state-triangular-potts-height.txt	64073	unmatched	0/898		0
+libtxt/arXiv-math-0203025-baake-grimm-note-on-shelling.txt	41723	unmatched	0/447		0
+libtxt/arXiv-math-0301021-baake-grimm-bravais-colourings.txt	37188	unmatched	0/397		0
+libtxt/arXiv-math-0511147-pleasants-baake-roth-planar-coincidences.txt	81368	unmatched	0/978		0
+libtxt/arXiv-math-ph-0212015-baake-grimm-combinatorial-quasicrystallography.txt	32765	unmatched	0/341		0
+libtxt/arXiv-math0407075-simonyi-tardos-local-chromatic-ky-fan.txt	94529	unmatched	0/1108		0
+libtxt/arXiv-math0510092-vinh-unit-quadrance.txt	8792	unmatched	0/105		0
+libtxt/arXiv-math0606482-vinh-colouring-unit-quadrance.txt	11692	unmatched	0/138		0
+libtxt/axenovich-2014-chromatic-number-subsets-euclidean-plane.txt	26448	unmatched	0/263		0
+libtxt/cilleruelo-lattice-points-on-circles.txt	9121	unmatched	0/102		0
+libtxt/cohen-2000-advanced-topics-computational-number-theory.txt	1376401	unmatched	0/18088		0
+libtxt/dcg-2005-exoo-epsilon-unit-distance-graphs.txt	11898	unmatched	0/137		0
+libtxt/evertse-1995-decomposable-form-equations.txt	95300	unmatched	0/1146		0
+libtxt/fieker-jurk-pohst-1997-relative-norm-equations.txt	25766	unmatched	0/293		0
+libtxt/fischer-1990-connected-components-Q-sqrtN1-sqrtNd-congr-numer-72-pp213-221.txt	20781	unmatched	0/291		0
+libtxt/fischer-1994-planar-geometric-graph-chromatic-number-four-congr-numer-104-pp73-79.txt	19529	unmatched	0/254		0
+libtxt/hopkins-2018-representation-theoretic-independence-cayley-thesis.txt	81406	unmatched	0/854		0
+libtxt/jams-2004-coulson-chromatic-number-plane-tilings.txt	10483	unmatched	0/132		0
+libtxt/jcam-1996-medrano-myers-stark-terras-finite-analogues-euclidean.txt	34680	unmatched	0/381		0
+libtxt/jcta-1973-woodall-distances-realized-covering-plane.txt	35988	unmatched	0/480		0
+libtxt/krebs-2022-clique-numbers-unit-quadrance.txt	54359	unmatched	0/659		0
+libtxt/medrano-myers-stark-terras-1998-finite-euclidean-graphs-over-rings.txt	21257	unmatched	0/258		0
+libtxt/moorhouse-2010-chromatic-numbers-of-planes.txt	43289	unmatched	0/501		0
+libtxt/moorhouse-2010-colouring-the-plane-ebertfest-slides.txt	15738	unmatched	0/216		0
+libtxt/nagell-1962-number-of-representations-of-an-A-number.txt	19885	unmatched	0/261		0
+libtxt/naw-2021-heule-easier-variants.txt	21204	unmatched	0/381		0
+libtxt/peyre-2003-points-hauteur-bornee-topologie-adelique-JTNB.txt	58781	unmatched	0/758		0
+libtxt/pjm-1982-hales-straus-projective-colorings.txt	32681	unmatched	0/461		0
+libtxt/raigorodskii-borsuk-survey-RU.txt	121371	unmatched	0/1069		0
+libtxt/ramsey-theory-yesterday-today-tomorrow-2010-soifer-ed.txt	473361	unmatched	0/5699		0
+libtxt/rudnick-2018-lattice-points-on-circles-notes.txt	16572	unmatched	0/203		0
+libtxt/schaal-1965-sum-of-two-squares-totally-real.txt	12461	unmatched	0/139		0
+libtxt/sokolov-2018-chromatic-numbers-rational-spaces-mzm103-RU.txt	33806	unmatched	0/255		0
+libtxt/tardif-2008-hedetniemi-conjecture-40-years-later-GTN54.txt	44849	unmatched	0/452		0
+libtxt/vinh-2009-finite-euclidean-graphs-z2r-non-ramanujan-ajc43.txt	19486	unmatched	0/225		0
+libtxt/volume-33-paper-23.txt	4	unmatched	nolines		
+libtxt/wormald-1979-4-chromatic-special-plane-drawing.txt	22036	unmatched	0/262		0
+libtxt/zanardo-zannier-1991-group-of-pythagorean-triples-number-fields-AMPA159.txt	15872	unmatched	0/191		0
+madore.txt	55903	unmatched	152/592	data/m2/j17/excerpts/madore2015-p5.1-5.4.txt	108
+moor.txt	20962	unmatched	0/284		0
+ns.pdf	559415	unmatched	binary/skip		
+ns.txt	162866	unmatched	25/1546	data/m2/j17/excerpts/goel-patil-verma-thm3.11.txt	25
+pa-products/c1.png	41412	unmatched	binary/skip		
+pa-products/c2a.png	118556	unmatched	binary/skip		
+pa-products/c2b.png	147144	unmatched	binary/skip		
+pa-products/c2c.png	164831	unmatched	binary/skip		
+pa-products/c3a.png	83561	unmatched	binary/skip		
+pa-products/c3b.png	128592	unmatched	binary/skip		
+pa-products/c3t.png	56709	unmatched	binary/skip		
+pa-products/c5t.png	18676	unmatched	binary/skip		
+pa-products/gl-1.png	867626	unmatched	binary/skip		
+pa-products/gl-2.png	976863	unmatched	binary/skip		
+pa-products/gl-3.png	1301810	unmatched	binary/skip		
+pa-products/gl-4.png	1082765	unmatched	binary/skip		
+pa-products/gl-5.png	1206979	unmatched	binary/skip		
+pa-products/gl-6.png	415558	unmatched	binary/skip		
+pa-products/larose.json	382924	unmatched	0/1		0
+pa-products/lt.txt	24491	unmatched	0/305		0
+pa-products/z0996.05065.json	2095	unmatched	0/1		0
+pa-products/z1009.05121.json	2810	unmatched	0/1		0
+pa-products/z1020.05029.json	3457	unmatched	0/1		0
+pa-products/z1029.05133.json	446	unmatched	0/6		0
+pa-products/zh.txt	28676	unmatched	0/306		0
+pa-tardif/cr.json	7629	unmatched	0/1		0
+pa-tardif/hoff.py	1680	unmatched	0/24		0
+pa-tardif/p1-1.png	32836	unmatched	binary/skip		
+pa-tardif/p2-2.png	4929	unmatched	binary/skip		
+pa-tardif/q1-1.png	21597	unmatched	binary/skip		
+pa-tardif/q2-2.png	13859	unmatched	binary/skip		
+pa-tardif/r1-1.png	14773	unmatched	binary/skip		
+pa-tardif/t.txt	20623	unmatched	0/229		0
+pa-tardif/zhu.txt	96569	unmatched	0/1080		0
+parts.txt	34718	unmatched	0/477		0
+plant.log	532	unmatched	0/9		0
+plant_badtrace.txt	266	unmatched	8/8	data/fs91/j02/additive-check-plants.txt	8
+plant_notsubgroup.txt	569	unmatched	11/11	data/fs91/j02/additive-check-plants.txt	11
+price.py	453	unmatched	0/6		0
+swaptail.py	2442	unmatched	27/27	tools/crunch_j18_swaptail.py	26
+t.gp	337	unmatched	0/4		0
+tardif.txt	20623	unmatched	0/229		0
+zb.py	832	name-match	0/8		0
+zhang.txt	28676	unmatched	0/306		0
+zhu.txt	96569	unmatched	0/1080		0
+zhu2025.txt	85489	unmatched	0/1029		0

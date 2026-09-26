@@ -1,0 +1,1 @@
+foreach([7,31,127],m, pol=polsubcyclo(m,(m-1)/2); if(type(pol)=="t_VEC",pol=pol[1]); pol=subst(pol,x,y); nf=nfinit(pol); rnf=rnfinit(nf,x^2+1); P=idealprimedec(nf,2); s=""; for(k=1,#P, Q=rnfidealprimedec(rnf,P[k]); s=Str(s,"(f=",P[k].f,",#L=",#Q,",rel e=",Q[1].e/P[k].e,")")); print(m," deg ",poldegree(pol)," sign ",nf.sign," ",s));

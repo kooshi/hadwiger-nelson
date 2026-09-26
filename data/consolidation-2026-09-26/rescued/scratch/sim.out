@@ -1,0 +1,55 @@
+  ok [FS-100]   +201 B  item 10 — T-C(A)'s class among real quadratic fields (row 117)
+  ok [FS-100]   +196 B  item 27 — Kronecker windows at four colours (row 116)
+  ok [FS-100]   +357 B  G76 — the split-place cross (body)
+  ok [FS-100]    +95 B  G76 — the split-place cross (Do)
+  ok [FS-100]   +226 B  G21 — FS-100's instances
+  ok [FS-100]   +336 B  G50 — FS-100's instance and the Do (owner ruling 3)
+  ok [FS-100]     +0 B  G72 — the count's total
+  ok [FS-100]   +246 B  G72 — the twelfth close
+  ok [FS-100]    +98 B  G79 — its first record
+  ok [FS-100]   +150 B  Paths forward — FS-100's row (rank 3; no rank moves)
+  ok [FS-100]    +87 B  Paths forward — FS-64's row
+  ok [FS-100]   +130 B  Last updated — FS-100's in-ban round
+  ok [FS-75]   +222 B  What the kernel holds — FS-75 (row 119)
+  ok [FS-75]    +83 B  Open milestones — FS-75's minimal instance closed
+  ok [FS-75]   +101 B  Last updated — FS-75's close (after FS-100's clause)
+  ok [FS-75]    +49 B  Paths forward — FS-75's row (rank 5; no rank moves)
+  ok [FS-75]    +85 B  Paths forward — FS-60's row
+  ok [FS-75]    +81 B  G79 — FS-75's record (after FS-100's)
+  ok [FS-75]   +255 B  What compute actually helps — the price instance
+  ok [FS-75]     +3 B  Trust ledger — the audit's count (inventory 33; the fact audit needs the reviewed transition ('1130','5') → ('1193','5'))
+  ok [FS-75]     +0 B  The gate — the vacuity counts (inventory 47)
+  ok [J55]   +182 B  Open milestones — FS-100's in-ban round closed (brief item 4)
+  ok [J55]     +0 B  The ledger pointer — rows 1–119
+CLAUDE.md: 283,904 -> 287,087 bytes (+3,183) -> /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/sim/CLAUDE.md
+  ok [FS-100]  +5712 B  § A — rows 116–118 after row 115 (last number 118)
+  ok [FS-100]    +95 B  row 98 — Not claimed (J51V-X2 (c))
+  ok [FS-100]   +297 B  the claim list — Ours
+  ok [FS-75]  +1928 B  § A — row 119 after row 118 (FS-100's last)
+  ok [FS-75]    -27 B  row 79 — Not claimed: the kernel form is row 119
+  ok [FS-75]   +105 B  § B — FS73-T22's kernel column
+  ok [FS-75]    +49 B  § B — FS73-T39's kernel column
+  ok [FS-75]    +57 B  § B — FS73-T41's kernel column
+  ok [FS-75]    +68 B  § B — FS73-T42's kernel column
+  ok [FS-75]   +197 B  the claim list — Ours (the owner's call; stage 5's decision 5b)
+  ok [J55] escaped 2 pipe(s) in '| 75 | **The r'
+  ok [J55] escaped 2 pipe(s) in '| 76 | **Five '
+  ok [J55] escaped 2 pipe(s) in '| 78 | **Four '
+  ok [J55] escaped 2 pipe(s) in '| 80 | **Four '
+  ok [J55] escaped 6 pipe(s) in '| 85 | **Four '
+  ok [J55] escaped 6 pipe(s) in '| 86 | **Four-'
+  ok [J55] escaped 2 pipe(s) in '| FS66-L1 | FS'
+  ok [J55] escaped 2 pipe(s) in '| M3-J22-T8 | '
+  ok [owner (b)]     -1 B  § B FS100-X1 shortened
+  ok [owner (b)]     +0 B  § B FS100-EQ shortened
+  ok [owner (b)]    -21 B  § B FS100-R shortened
+  ok [owner (b)]     +4 B  § B FS100-T2 shortened
+  ok [owner (b)]    -23 B  § B FS75-W shortened
+  ok [FS-100+FS-75] appended 15 + 7 § B lines
+LEDGER.md: 359,928 -> 374,440 bytes (+14,512) -> /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/sim/LEDGER.md
+  ok [FS-75]   +380 B  FS-75's row — the question cell (landed; next)
+  ok [FS-75]    +50 B  FS-75's row — the cost cell
+  ok [FS-75]    +49 B  FS-75's row — the status cell
+  ok [FS-75]   +225 B  FS-60's row — the question cell
+  ok [FS-75]    +27 B  FS-60's row — the status cell
+plans/FRONTIER-STUBS.md: 102,935 -> 103,666 bytes (+731) -> /tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/sim/FRONTIER-STUBS.md

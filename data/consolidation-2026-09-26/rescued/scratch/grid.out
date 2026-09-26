@@ -1,0 +1,7 @@
+ok   len(sel) == 2629 (J26 and the notebook)
+ok   first point 0, last 10000
+ok   J26 worst lb 0.999942348 reproduced (|diff| < 5e-10)
+ok   J26 worst cell [3.77488, 3.77489] reproduced
+ok   26 w2 pairs
+n_points = 493471, sha256 = 2ec0c4f6ec5e10f8004c6036dd6ccf6d6f655c8cd210e9630b78b1bf5da3e2ff; J26 float: L_a = 1.53653608678, L_b = 0.177256630507, L_c = 0.0560534682769, worst lb = 0.999942348283 on [np.float64(3.77488), np.float64(3.77489)]; wrote /home/kooshi/source/lean-dir/data/fs100/kt1/j26-grid.json
+1.00 s wall, 1.02 user, 330788 KB

@@ -1,0 +1,80 @@
+warn: FS91-derivation.md: header starts like an entry but did not parse (wrapped title, or `]` in the grade?): **FS91-J07-8 — Lemma LB and LB′, the level bound: "At a stable `𝔓` over odd `p`,
+warn: FS91-derivation.md: header starts like an entry but did not parse (wrapped title, or `]` in the grade?): **FS91-J11-W3 — `χ_char(Γ₁₁) = 6 > χ(Γ₁₁) = 5`: at 11 no optimal colouring is a 
+warn: M3-derivation.md: header starts like an entry but did not parse (wrapped title, or `]` in the grade?): **M3-J19-ENDS — the ends partition of a wall point `c` (agreeing with `p` on `(−
+warn: M3-derivation.md: header starts like an entry but did not parse (wrapped title, or `]` in the grade?): **M3-J21-NG2 — ratio alone cannot carry D2, at 125 colours: `B = F[K₄₁] = Cay(ℤ₈
+FAIL: LEDGER.md § B row FS91-J02-A2.1′ has no derivation entry
+FAIL: LEDGER.md § B row FS91-J07-8 has no derivation entry
+FAIL: LEDGER.md § B row FS91-J11-W3 has no derivation entry
+FAIL: LEDGER.md § B row FS91-J12-A1 has no derivation entry
+FAIL: LEDGER.md § B row FS91-J12-B1 has no derivation entry
+FAIL: LEDGER.md § B row FS91-J12-C1 has no derivation entry
+FAIL: LEDGER.md § B row FS91-J12-CL has no derivation entry
+FAIL: LEDGER.md § B row FS91-J12-H has no derivation entry
+FAIL: LEDGER.md § B row FS91-J13-T6 has no derivation entry
+FAIL: LEDGER.md § B row M3-J18-KE⟹ has no derivation entry
+FAIL: LEDGER.md § B row M3-J19-AF✗ has no derivation entry
+FAIL: LEDGER.md § B row M3-J19-ENDS has no derivation entry
+FAIL: LEDGER.md § B row M3-J21-NG2 has no derivation entry
+warn: entry FS91-J01-8 lacks *Proof verdict:*
+warn: entry FS91-J02-L2 lacks *Rests on it:*
+warn: entry FS91-J03a-5 lacks *Proof verdict:*
+warn: entry FS91-J03a-6 lacks *Proof verdict:*
+warn: entry FS91-J03a-9 lacks *Proof verdict:*
+warn: entry FS91-J07-10 lacks *Proof verdict:*
+warn: entry FS91-J07-15 lacks *Proof verdict:*
+warn: entry FS91-J08-9 lacks *Proof verdict:*
+warn: entry FS91-J09-J1 lacks *Proof verdict:*
+warn: entry FS91-J09-J4-A lacks *Prior art:*
+warn: entry FS91-J09v-8 lacks *Proof verdict:*
+warn: entry FS91-J10-L7 lacks *Proof verdict:*
+warn: entry FS91-J11-T13 lacks *Proof verdict:*
+warn: entry FS91-J11-T2 lacks *Proof verdict:*
+warn: entry FS91-J11-T9 lacks *Proof verdict:*
+warn: entry FS91-J12-B5 lacks *Proof verdict:*, *Prior art:*
+warn: entry FS91-J12-B6 lacks *Proof verdict:*, *Prior art:*
+warn: entry FS91-J12-MSp lacks *Proof verdict:*, *Prior art:*
+warn: entry FS91-J12-ONEa lacks *Proof verdict:*
+warn: entry FS91-J13-T5 lacks *Proof verdict:*
+warn: entry M3-CHK23 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*, *Kernel:*
+warn: entry M3-J18-AK1 lacks *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-AK2 lacks *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-AKq lacks *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-CTL lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-DC lacks *Proof:*, *Proof verdict:*
+warn: entry M3-J18-DPR lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-EQ lacks *Prior art:*
+warn: entry M3-J18-K0H lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J18-K0loc lacks *Proof:*, *Proof verdict:*
+warn: entry M3-J19-BIN lacks *Proof:*, *Proof verdict:*, *Prior art:*
+warn: entry M3-J19-CTL lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J19-FRZ lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J19-KC lacks *Proof:*, *Proof verdict:*, *Prior art:*
+warn: entry M3-J19-KEF lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J19-KT lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J19-TW lacks *Proof:*, *Proof verdict:*, *Rests on it:*
+warn: entry M3-J20-CUT lacks *Proof:*, *Proof verdict:*, *Prior art:*
+warn: entry M3-J20-NAMED lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J20-T35W lacks *Proof:*, *Proof verdict:*
+warn: entry M3-J21-D0 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D1 lacks *Proof:*, *Proof verdict:*, *Prior art:*
+warn: entry M3-J21-D1-2 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D1-3 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D1-43p lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D1fac lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D2p lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D3 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-D4 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-MX lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-NG1 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-NG3 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-RED lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-SL lacks *Proof:*, *Proof verdict:*, *Prior art:*
+warn: entry M3-J21-TH lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J21-UNIF lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J22-T1 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J22-T10 lacks *Proof:*, *Proof verdict:*
+warn: entry M3-J22-T2 lacks *Proof:*, *Proof verdict:*, *Rests on it:*, *Prior art:*
+warn: entry M3-J22-T8 lacks *Proof:*, *Proof verdict:*, *Rests on it:*
+census: 662 theorems in 62 derivation files: ASTRA-2026-09-14=10, FS25=4, FS32=2, FS36=2, FS38=7, FS39=1, FS50=6, FS53=4, FS54=11, FS56=7, FS58=9, FS61=5, FS62=6, FS66=18, FS70=11, FS73=45, FS79=49, FS81=25, FS85=39, FS86=68, FS89=64, FS91=64, M18=1, M2=12, M3=42, M31=1, M32=1, M35=1, M36=1, M39=1, M40=5, M41=1, M43=2, M45=1, M48=1, M49=3, M50=2, M51=1, M52=2, M53=14, M54=4, M55=7, M56=7, M57=9, M58=3, M59=6, M60=3, M61=5, M62=4, M63=3, M63C=3, M63D=7, M63G=5, M63H2=11, M63H3=9, M63H4=4, M64=3, MASCOT=11, Q8=2, R52=4, R57=1, R59=2
+LEDGER § B rows: 675 | placeholders: 0
+RESULT: FAIL (13)

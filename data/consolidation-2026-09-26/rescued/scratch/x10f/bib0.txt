@@ -1,0 +1,17 @@
+bibliography: 387 keyed rows, 12 retired/alternate keys
+cited across the repository: 219 arXiv ids, 375 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 4
+   arXiv:0804.3586   first seen in data/crunch-2026-09-26-x2x3/reports/X01V.md
+   arXiv:1606.06078   first seen in plans/FS100-X01D-derivation.md
+   arXiv:1908.02611   first seen in plans/FS100-X01D-derivation.md
+   arXiv:math/0402165   first seen in data/crunch-2026-09-26-x2x3/reports/X02D.md
+
+bracketed keys cited but neither defined nor aliased: 5
+   [EinsiedlerFish2010]   first seen in data/crunch-2026-09-26-x2x3/reports/X12B.md
+   [Huang2017]   first seen in data/crunch-2026-09-26-x2x3/reports/X01D.md
+   [HuangLiShiXu2023]   first seen in data/crunch-2026-09-26-x2x3/reports/X01D.md
+   [Lindenstrauss2004]   first seen in data/crunch-2026-09-26-x2x3/reports/X02D.md
+   [Sataev1975]   first seen in data/crunch-2026-09-26-x2x3/reports/X01D.md
+
+UNLOGGED PRIOR ART: 9

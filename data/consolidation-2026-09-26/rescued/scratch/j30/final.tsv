@@ -1,0 +1,1928 @@
+K3StripePlant.lean	3089	a	successor (36/37 lines) in data/m2/j04/K3Stripe.lean
+algebra-poros/BRIEF.md	7228	a	A-head: data/algebra-week/poros-brief.md
+algebra-poros/POROS-algebra-direction.md	38968	a	A-head: plans/POROS-2026-09-24-algebra-week.md
+algebra-poros/soifer.txt	1933139	c-text	text extraction of a paper
+algebra-poros/z.json	7873	b-repo	overlap 0/1 best
+arx.xml	784	b-repo	overlap 0/9 best
+audit.txt	8646	b-repo	overlap 0/96 best
+bib.out	280	b-repo	overlap 0/5 best
+blocks.py	5677	b-repo	overlap 0/1 best
+c-addendum.md	4463	a	successor (24/24 lines) in data/fs86/briefs/C-competitor-brief-coxeter.md
+c-mech.md	3928	a	successor (30/32 lines) in data/fs86/briefs/C-competitor-brief-coxeter.md
+c-text.md	10265	a	successor (78/78 lines) in plans/FS86-dyadic-rigidity.md
+coste.pdf	287	d	an HTML error page saved as .pdf
+ctl.py	1224	a	successor (15/16 lines) in data/fs85/v2/s_prime_hom.py
+degrey2018.pdf	1106611	c-pdf	paper PDF not byte-identical to a library file
+degrey2018.txt	19914	c-text	text extraction of a paper
+delta.py	805	inflight	J18
+delta2.py	483	inflight	J18
+dupes.txt	1264	b-repo	overlap 0/16 best
+ees.pdf	240923	d	an HTML error page saved as .pdf
+f.gp	337	a	A-head: data/fs91/j09/field-arithmetic.gp
+f90.txt	37978	c-text	text extraction of a paper
+fischer.txt	37978	c-text	text extraction of a paper
+fischer1990.txt	37978	c-text	text extraction of a paper
+fixed.py	3669	b-repo	overlap 0/1 best
+fold.py	9875	b-repo	overlap 1/79 best tools/fs81_verify_c4.py
+fold_owner.py	2495	b-repo	overlap 0/25 best
+fs73-close/BRIEF-2.md	3360	b-repo	overlap 0/37 best
+fs73-close/BRIEF.md	5598	b-repo	overlap 6/62 best data/fs85/briefs/CL-close-planner-brief.md
+fs73-close/R9-branches.md	1815	b-repo	overlap 0/19 best
+fs73-close/axioms.out	1876	b-repo	overlap 11/18 best data/m2/j15/axioms.log
+fs73-close/axioms.time	875	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-close/build.out	291	b-repo	overlap 0/4 best
+fs73-close/fscount.py	608	b-repo	overlap 0/11 best
+fs73-close/pa/__pycache__/zb.cpython-314.pyc	4345	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-close/pa/parts_v.py	1730	b-repo	overlap 0/22 best
+fs73-close/pa/q1.txt	719	b-repo	overlap 0/14 best
+fs73-close/pa/q2.txt	579	b-repo	overlap 0/10 best
+fs73-close/pa/q3.txt	333	b-repo	overlap 0/6 best
+fs73-close/pa/zb.py	1694	b-repo	overlap 2/17 best data/fs85/audit/zbmath_queries.py
+fs73-close/rows.py	11023	b-repo	overlap 0/7 best
+fs73-close/vac.out	4842	b-repo	overlap 26/34 best data/m2/j14/vacuity.log
+fs73-close/vac.time	872	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/BRIEF.md	18461	a	successor (99/101 lines) in data/fs73/briefs/P3-competitor-brief-Coxeter.md
+fs73-comp-coxeter/FS73-C3-Coxeter.md	35628	a	successor (313/314 lines) in plans/FS73-C3-Coxeter.md
+fs73-comp-coxeter/REPORT-draft.md	50	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/README.md	1660	a	A-head: data/fs73/coxeter-c3/README.md
+fs73-comp-coxeter/work/S_335.json	635	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/S_47.json	838	a	A-head: data/fs73/coxeter-c3/S_47.json
+fs73-comp-coxeter/work/__pycache__/exact_tree.cpython-314.pyc	4179	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/lllbb.cpython-314.pyc	6043	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/shapes.cpython-314.pyc	4223	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/theta.cpython-314.pyc	6234	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/theta2.cpython-314.pyc	11294	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/walls1d.cpython-314.pyc	8911	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/__pycache__/walls2.cpython-314.pyc	7189	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/cert_335.json	101669	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/cert_47.json	653064	a	A-head: data/fs73/coxeter-c3/cert_47.json
+fs73-comp-coxeter/work/certcheck.py	4706	a	A-head: data/fs73/coxeter-c3/certcheck.py
+fs73-comp-coxeter/work/certtree.py	3980	a	A-head: data/fs73/coxeter-c3/certtree.py
+fs73-comp-coxeter/work/coxeter-Ld14c588b-linear-3colouring.json	3098	a	A-head: data/fs73/q167/coxeter-Ld14c588b-linear-3colouring.json
+fs73-comp-coxeter/work/ctl.py	717	a	A-head: data/fs73/coxeter-c3/ctl.py
+fs73-comp-coxeter/work/dist3.py	2523	a	A-head: data/fs73/coxeter-c3/dist3.py
+fs73-comp-coxeter/work/exact_tree.py	1805	a	A-head: data/fs73/coxeter-c3/exact_tree.py
+fs73-comp-coxeter/work/f420.out	56	a	A-head: data/fs73/coxeter-c3/f420.out
+fs73-comp-coxeter/work/find167.py	2644	a	A-head: data/fs73/coxeter-c3/find167.py
+fs73-comp-coxeter/work/find167b.py	2696	a	A-head: data/fs73/coxeter-c3/find167b.py
+fs73-comp-coxeter/work/lllbb.py	2239	a	A-head: data/fs73/coxeter-c3/lllbb.py
+fs73-comp-coxeter/work/pf.py	379	a	A-head: data/fs73/coxeter-c3/pf.py
+fs73-comp-coxeter/work/plant1.json	653062	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/plant2.json	653048	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/plant3.json	653059	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/plant4.json	653018	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/price167.py	811	b-repo	overlap 6/10 best data/fs73/coxeter-c3/find167.py
+fs73-comp-coxeter/work/price2.py	1245	b-repo	overlap 4/16 best data/fs73/coxeter-c3/find167.py
+fs73-comp-coxeter/work/q11.py	810	b-repo	overlap 1/10 best tools/rigidity_dial.py
+fs73-comp-coxeter/work/q11_exact.json	1026	a	A-head: data/fs73/coxeter-c3/q11_exact.json
+fs73-comp-coxeter/work/q11b.py	677	b-repo	overlap 3/8 best data/fs73/coxeter-c3/q11d.py
+fs73-comp-coxeter/work/q11c.py	2453	b-repo	overlap 23/33 best data/fs73/coxeter-c3/q11d.py
+fs73-comp-coxeter/work/q11d.out	166	a	A-head: data/fs73/coxeter-c3/q11d.out
+fs73-comp-coxeter/work/q11d.pid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-coxeter/work/q11d.py	1782	a	A-head: data/fs73/coxeter-c3/q11d.py
+fs73-comp-coxeter/work/run167.sh	293	b-repo	overlap 0/3 best
+fs73-comp-coxeter/work/s348.out	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-comp-coxeter/work/scan12.jsonl	47649	a	A-head: data/fs73/coxeter-c3/scan12.jsonl
+fs73-comp-coxeter/work/scan12.log	7	b-repo	overlap nolines best
+fs73-comp-coxeter/work/scan12.py	1313	a	A-head: data/fs73/coxeter-c3/scan12.py
+fs73-comp-coxeter/work/shapes.py	1697	a	A-head: data/fs73/coxeter-c3/shapes.py
+fs73-comp-coxeter/work/theta.py	3046	b-repo	overlap 5/32 best data/fs73/coxeter-c3/theta2.py
+fs73-comp-coxeter/work/theta167_348.json	1031	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/theta167_348_small.json	203	b-repo	overlap 0/1 best
+fs73-comp-coxeter/work/theta2.py	4823	a	A-head: data/fs73/coxeter-c3/theta2.py
+fs73-comp-coxeter/work/walls10.txt	304	a	A-head: data/fs73/coxeter-c3/walls10.txt
+fs73-comp-coxeter/work/walls1d.py	4108	a	A-head: data/fs73/coxeter-c3/walls1d.py
+fs73-comp-coxeter/work/walls2.py	2748	a	A-head: data/fs73/coxeter-c3/walls2.py
+fs73-comp-coxeter/work/walls_scan.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-comp-coxeter/work/walls_scan.py	1362	a	A-head: data/fs73/coxeter-c3/walls_scan.py
+fs73-comp-coxeter/work/walls_stats.py	678	b-repo	overlap 7/12 best data/fs73/coxeter-c3/walls1d.py
+fs73-comp-coxeter/work/zq.py	865	b-repo	overlap 0/12 best
+fs73-comp-debruijn/BRIEF.md	18522	a	successor (100/101 lines) in data/fs73/briefs/P3-competitor-brief-deBruijn.md
+fs73-comp-debruijn/FS73-C3-deBruijn.md	23158	a	A-head: plans/FS73-C3-deBruijn.md
+fs73-comp-debruijn/work/__pycache__/theta.cpython-314.pyc	4326	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-debruijn/work/__pycache__/theta_exact.cpython-314.pyc	5044	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-debruijn/work/__pycache__/theta_x.cpython-314.pyc	4420	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-debruijn/work/__pycache__/xlp.cpython-314.pyc	5777	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-comp-debruijn/work/ctrl11.out	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-comp-debruijn/work/ctrl_fs61.py	1004	a	A-head: data/fs73/c3-debruijn/ctrl_fs61.py
+fs73-comp-debruijn/work/dbg.py	544	b-repo	overlap 2/8 best data/fs73/c3-debruijn/theta_x.py
+fs73-comp-debruijn/work/k_Uc.json	909	a	A-head: data/fs73/c3-debruijn/k_Uc.json
+fs73-comp-debruijn/work/k_theta3.out	84	a	A-head: data/fs73/c3-debruijn/k_theta3.out
+fs73-comp-debruijn/work/k_theta3.py	257	a	A-head: data/fs73/c3-debruijn/k_theta3.py
+fs73-comp-debruijn/work/k_theta4.out	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-comp-debruijn/work/k_theta4.py	1324	a	A-head: data/fs73/c3-debruijn/k_theta4.py
+fs73-comp-debruijn/work/q11_U.json	558	a	A-head: data/fs73/c3-debruijn/q11_U.json
+fs73-comp-debruijn/work/q11_Uc.json	554	a	A-head: data/fs73/c3-debruijn/q11_Uc.json
+fs73-comp-debruijn/work/q11_theta.py	461	b-repo	overlap 0/10 best
+fs73-comp-debruijn/work/q11_theta3_points.json	464	a	A-head: data/fs73/c3-debruijn/q11_theta3_points.json
+fs73-comp-debruijn/work/q11_theta_exact.py	576	b-repo	overlap 4/10 best data/fs73/c3-debruijn/q11_theta_x.py
+fs73-comp-debruijn/work/q11_theta_x.py	592	a	A-head: data/fs73/c3-debruijn/q11_theta_x.py
+fs73-comp-debruijn/work/q11_units.py	612	a	A-head: data/fs73/c3-debruijn/q11_units.py
+fs73-comp-debruijn/work/q167.py	1359	a	A-head: data/fs73/c3-debruijn/q167.py
+fs73-comp-debruijn/work/q167_L21cc6506.json	2533	b-repo	overlap 0/1 best
+fs73-comp-debruijn/work/q167_L21cc6506.out	30	b-repo	overlap nolines best
+fs73-comp-debruijn/work/q167_Ld14c588b.json	1705	b-repo	overlap 0/1 best
+fs73-comp-debruijn/work/q167_Ld14c588b.out	30	b-repo	overlap nolines best
+fs73-comp-debruijn/work/theta.py	2063	b-repo	overlap 3/27 best tools/fplane.py
+fs73-comp-debruijn/work/theta_exact.py	2100	b-repo	overlap 11/25 best data/fs73/c3-debruijn/theta_x.py
+fs73-comp-debruijn/work/theta_x.py	1609	a	A-head: data/fs73/c3-debruijn/theta_x.py
+fs73-comp-debruijn/work/xlp.py	2558	a	A-head: data/fs73/c3-debruijn/xlp.py
+fs73-debruijn-modeling/build-domain.log	7711	b-repo	overlap 1/198 best data/m2/j15/build-stage4.log
+fs73-debruijn-modeling/build-experience.log	8266	b-repo	overlap 1/205 best data/m2/j15/build-stage4.log
+fs73-debruijn-modeling/build-obligation.log	8257	b-repo	overlap 1/205 best data/m2/j15/build-stage4.log
+fs73-debruijn-plan/__pycache__/klat.cpython-314.pyc	10729	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-debruijn-plan/abcm.txt	45196	b-repo	overlap 0/511 best
+fs73-debruijn-plan/aeghkm.txt	88546	b-repo	overlap 0/958 best
+fs73-debruijn-plan/build1.log	10308	b-repo	overlap 0/224 best
+fs73-debruijn-plan/build2.log	7397	b-repo	overlap 1/194 best data/m2/j15/build-stage4.log
+fs73-debruijn-plan/build2.pid	6	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-debruijn-plan/klat.py	3127	a	A-head: data/fs73/phase0/klat.py
+fs73-debruijn-plan/p1e.txt	69106	b-repo	overlap 0/622 best
+fs73-debruijn-plan/tight_check.py	1455	a	A-head: data/fs73/phase0/degrey_lattice_spectrum.py
+fs73-debruijn-plan/zb/q-050fe9f13f.json	33216	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-074e020e1a.json	17477	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-0d0745499c.json	37010	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-0d9d63f269.json	8310	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-126aa4213f.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-1945abd652.json	29890	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-28ee6c9911.json	317	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-30c48c3c5a.json	17018	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-30d6d010f4.json	2895	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-3dfc4ff7f0.json	5479	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-3ef7123f7a.json	76299	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-4381800fdf.json	9926	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-4a41f9afa2.json	319	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-4b98c502cd.json	319	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-54fde43b8c.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-57973d6501.json	317	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-5dfbdb5288.json	16204	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-641d3f92bd.json	20641	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-6528b86272.json	79825	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-6e9d82badd.json	319	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-705a76bae3.json	16105	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-7309c40fa1.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-77d270d37d.json	5479	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-79ce9d8e08.json	5466	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-7dc88fbea1.json	319	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-7f5562e989.json	317	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-82d6c0d2c5.json	30808	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-93db58790e.json	3247	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-95700e3760.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-9794e6a360.json	8609	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-9a098d5cbd.json	20055	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-9d783fa6e2.json	12393	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-9df8d54dc6.json	17476	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-9f5d2d1504.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-a50da75c2c.json	7773	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-a914ce710b.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-b0a00d64a3.json	6144	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-b2f712f5cd.json	26536	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-b53f1a8c6d.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-be7e8df6b3.json	13895	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-d75d7e0a39.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-d9c29be73a.json	182730	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-eb1c66af4c.json	10239	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-efe5bd1506.json	320	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-f7c6f1de0a.json	3514	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/q-fa7fac3a42.json	109706	b-repo	overlap 0/1 best
+fs73-debruijn-plan/zb/zq.py	1431	b-repo	overlap 0/15 best
+fs73-debruijn-plan/zb/zshow.py	740	b-repo	overlap 1/13 best tools/descent2.py
+fs73-implA/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	b-disk	overlap binary/skip best
+fs73-implA/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	b-disk	overlap binary/skip best
+fs73-implA/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	b-disk	overlap binary/skip best
+fs73-implA/censusK.log	2129	b-repo	overlap 0/13 best
+fs73-implA/censusK.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/confirm-502041-39829.cnf	27047914	b-disk	overlap binary/skip best
+fs73-implA/confirm-v.log	102	b-repo	overlap 0/1 best
+fs73-implA/confirm89.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-implA/confirm89.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/ctl-553239-19183.cnf	9495084	b-disk	overlap binary/skip best
+fs73-implA/force1.log	872	b-repo	overlap 0/12 best
+fs73-implA/force1.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/frc-733379-19183.cnf	8810046	b-disk	overlap binary/skip best
+fs73-implA/fs70selftest.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/harder_timing.py	784	b-repo	overlap 2/11 best scripts/regen-check.sh
+fs73-implA/periods.log	522	b-repo	overlap 0/4 best
+fs73-implA/periods.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/periods16.log	405	b-repo	overlap 0/2 best
+fs73-implA/queue-snapshot.sh	684	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-implA/queue.log	1648	b-repo	overlap 0/13 best
+fs73-implA/queue.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/queue.sh	684	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-implA/queue2-snapshot.sh	743	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-implA/queue2.leader	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA/queue2.log	313	b-repo	overlap 0/4 best
+fs73-implA/queue2.sh	743	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-implA/queue3-snapshot.sh	330	b-repo	overlap 1/4 best data/fs54/environment.md
+fs73-implA/queue3.log	179	b-repo	overlap 0/2 best
+fs73-implA/queue3.sh	330	b-repo	overlap 1/4 best data/fs54/environment.md
+fs73-implA/queue4-snapshot.sh	649	b-repo	overlap 1/5 best data/fs54/environment.md
+fs73-implA/queue4.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs73-implA/queue4.sh	649	b-repo	overlap 1/5 best data/fs54/environment.md
+fs73-implA/queue5-snapshot.sh	826	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-implA/queue5.log	617	b-repo	overlap 0/6 best
+fs73-implA/queue5.sh	826	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-implA/smallest.py	354	b-repo	overlap 0/5 best
+fs73-implA/st.log	2150	a	A-head: data/fs73/records/phase-P1b-selftest.log
+fs73-implA2/K-8Lambda-classes.json	1565620	b-repo	overlap 9/389 best data/fs73/census/K-8Lambda-classes.json
+fs73-implA2/P1g-L3-card.json	7052481	a	successor (32806/32806 lines) in data/fs73/census/P1g-L3-card.json
+fs73-implA2/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	b-disk	overlap binary/skip best
+fs73-implA2/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	b-disk	overlap binary/skip best
+fs73-implA2/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	b-disk	overlap binary/skip best
+fs73-implA2/card.log	3570	b-repo	overlap 0/21 best
+fs73-implA2/check-full.log	678	b-repo	overlap 0/4 best
+fs73-implA2/emit-v.log	498	b-repo	overlap 0/5 best
+fs73-implA2/emit-v.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA2/ident.py	1511	b-repo	overlap 3/20 best tools/fs81_d47.py
+fs73-implA2/n32.log	484	b-repo	overlap 0/3 best
+fs73-implA2/n32.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA2/rounds-v.log	2517	b-repo	overlap 0/37 best
+fs73-implA2/rounds-v.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implA2/stub-solver-unknown.sh	35	b-repo	overlap nolines best
+fs73-implA2/stub-solver-unsat.sh	42	b-repo	overlap 0/1 best
+fs73-implA2/w.cnf	632582	b-disk	overlap binary/skip best
+fs73-implA2/w.out	16	b-repo	overlap nolines best
+fs73-implA2/w.time	47	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implB/chain-run.sh	582	b-repo	overlap 1/9 best data/fs54/environment.md
+fs73-implB/chain.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implB/chain.sh	582	b-repo	overlap 1/9 best data/fs54/environment.md
+fs73-implB/pilot-screen.json	3997	b-repo	overlap 0/1 best
+fs73-implB/q167p.log	553	b-repo	overlap 0/8 best
+fs73-implB/selftest.log	1793	a	successor (17/20 lines) in data/fs73/records/phase-P2-selftest.log
+fs73-implB/selftest2.log	1735	a	A-head: data/fs73/records/phase-P2-selftest.log
+fs73-implB/tab-846671-4096-gap.cnf	4414485	b-disk	overlap binary/skip best
+fs73-implB/tab-877892-6561-gap.cnf	4136605	b-disk	overlap binary/skip best
+fs73-implB/tab-945900-279841-plain.cnf	274330942	b-disk	overlap binary/skip best
+fs73-implB/tab-947812-279841-plain.cnf	274330942	b-disk	overlap binary/skip best
+fs73-implB/table-K.log	1960	b-repo	overlap 0/7 best
+fs73-implB/table-K.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implB/table-K.pid	14	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implB/table-Q347.log	1653	b-repo	overlap 0/6 best
+fs73-implB/table-chain.log	6061	b-repo	overlap 0/27 best
+fs73-implC/agree2.py	1374	b-repo	overlap 5/24 best tools/fs73_q167.py
+fs73-implC/ball14.npz	39502365	b-disk	overlap binary/skip best
+fs73-implC/circ.log	298	b-repo	overlap 0/4 best
+fs73-implC/circ.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implC/circ1.py	1288	b-repo	overlap 2/19 best tools/fs73_q167.py
+fs73-implC/classify-23-first.jsonl	855	b-repo	overlap 0/1 best
+fs73-implC/classify-23-second.jsonl	915	b-repo	overlap 0/1 best
+fs73-implC/classify-43-first.jsonl	33123	b-repo	overlap 0/1 best
+fs73-implC/classify-43-second.jsonl	7516	b-repo	overlap 0/1 best
+fs73-implC/cover.log	2252	b-repo	overlap 0/18 best
+fs73-implC/extend.log	1642	b-repo	overlap 0/9 best
+fs73-implC/extend.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implC/fft1.py	753	b-repo	overlap 0/15 best
+fs73-implC/probe1.py	1017	b-repo	overlap 5/17 best tools/fs61_census.py
+fs73-implC/quot.log	297	b-repo	overlap 0/4 best
+fs73-implC/quot.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implC/quot2.log	2489	b-repo	overlap 0/36 best
+fs73-implC/quot2.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implD/K-sandwich.before.json	3247	a	A-history: data/fs73/census/K-sandwich.json
+fs73-implD/check-degrey.log	7578	b-repo	overlap 0/57 best
+fs73-implD/check-degrey.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implD/cls.py	870	b-repo	overlap 1/11 best data/fs79/comp-debruijn/tools/degrey_lang.py
+fs73-implD/colfiles.txt	5381	b-repo	overlap 0/83 best
+fs73-implD/est.py	491	b-repo	overlap 2/10 best tools/fs81_d47.py
+fs73-implD/export_block.py	3054	a	successor (34/36 lines) in tools/fs73_screen.py
+fs73-implD/inadm.py	1504	b-repo	overlap 1/20 best tools/rigidity_dial.py
+fs73-implD/price_balls.py	1245	b-repo	overlap 3/19 best data/fs70/records/phase-1f/arm1f_control.py
+fs73-implD/rich-stage1.log	7736	b-repo	overlap 0/87 best
+fs73-implD/rich-stage1.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implD/rich-stage2.log	4421	b-repo	overlap 0/42 best
+fs73-implD/rich-stage2.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implD/rich_block.py	14932	a	successor (154/156 lines) in tools/fs73_screen.py
+fs73-implD/rows_block.py	2960	a	successor (28/28 lines) in tools/fs73_screen.py
+fs73-implD/selftest.log	2279	a	successor (18/19 lines) in data/fs73/records/phase-P1b-selftest.log
+fs73-implD/summ.py	1233	b-repo	overlap 0/13 best
+fs73-implD/work/bed-colourings/degrey-bed-N4-2b4438f34ea81155.json.gz	268	b-disk	overlap binary/skip best
+fs73-implD/work/bed-colourings/degrey-bed-N4-2f59be7efc4d7161.json.gz	242	b-disk	overlap binary/skip best
+fs73-implD/work/bed-colourings/degrey-bed-N4-5b97e72814f8633f.json.gz	266	b-disk	overlap binary/skip best
+fs73-implD/work/stub-solver-unknown.sh	35	b-repo	overlap nolines best
+fs73-implD/work/stub-solver-unsat.sh	42	b-repo	overlap 0/1 best
+fs73-implE/BRIEF.md	7023	a	A-head: data/fs73/briefs/P3b-implementer-E-brief.md
+fs73-implE/__pycache__/explore.cpython-314.pyc	3812	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implE/__pycache__/frame.cpython-314.pyc	9026	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implE/__pycache__/frames.cpython-314.pyc	3993	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implE/b5.py	1571	b-repo	overlap 1/21 best tools/rigidity_dial.py
+fs73-implE/boxes.py	3088	b-repo	overlap 1/40 best data/fs86/comp-debruijn/cs2_tower.py
+fs73-implE/check_s420.sh	564	b-repo	overlap 0/4 best
+fs73-implE/explore.py	1160	b-repo	overlap 4/11 best data/fs73/coxeter-c3/certcheck.py
+fs73-implE/frame.py	2450	b-repo	overlap 5/30 best data/fs73/coxeter-c3/lllbb.py
+fs73-implE/frames.py	1465	b-repo	overlap 4/20 best data/fs73/coxeter-c3/theta2.py
+fs73-implE/mip.py	1344	b-repo	overlap 1/18 best tools/fs66_conj_edgecrit.py
+fs73-implE/mip2.py	1736	b-repo	overlap 0/22 best
+fs73-implE/mip2_167_348.npy	336	b-disk	overlap binary/skip best
+fs73-implE/mip2_59_30.npy	304	b-disk	overlap binary/skip best
+fs73-implE/mip_59_30.npy	304	b-disk	overlap binary/skip best
+fs73-implE/order_structured.json	568	a	A-head: data/fs73/q167/L21cc6506-order.json
+fs73-implE/plant/plant.json	219541908	b-disk	overlap binary/skip best
+fs73-implE/run_s420.sh	503	b-repo	overlap 0/4 best
+fs73-implE/runs/check_s420.log	1987	b-repo	overlap 16/38 best data/fs66/b1/scan-p23.log
+fs73-implE/runs/coxeter348.json	112	b-repo	overlap 0/1 best
+fs73-implE/runs/d11-from-data.json	4940982	b-repo	overlap 0/1 best
+fs73-implE/runs/plant.json	401	b-repo	overlap 0/1 best
+fs73-implE/runs/q11.json	4940982	b-repo	overlap 0/1 best
+fs73-implE/runs/q11.meta.json	986	b-repo	overlap 0/1 best
+fs73-implE/runs/q11.nodes.jsonl	4919128	b-repo	overlap 0/20843 best
+fs73-implE/runs/q11.state.json	1015	b-repo	overlap 0/1 best
+fs73-implE/runs/q348-point.json	898	a	A-head: data/fs73/q167/theta-controls/Ld14c588b-point.json
+fs73-implE/runs/q348.meta.json	549	b-repo	overlap 0/1 best
+fs73-implE/runs/q348.nodes.jsonl	5880043	b-disk	overlap 0/14130 best
+fs73-implE/runs/q348.state.json	2338	b-repo	overlap 0/1 best
+fs73-implE/runs/q59-point.json	726	a	A-head: data/fs73/q167/theta-controls/Ld65c8ee8-d59-point.json
+fs73-implE/runs/q59.meta.json	433	b-repo	overlap 0/1 best
+fs73-implE/runs/q59.nodes.jsonl	559585	b-repo	overlap 0/2342 best
+fs73-implE/runs/q59.state.json	923	b-repo	overlap 0/1 best
+fs73-implE/runs/s420.json	219541968	b-disk	overlap binary/skip best
+fs73-implE/runs/s420.json.gz	7739544	a	A-head: data/fs73/q167/L21cc6506-theta-tree.json.gz
+fs73-implE/runs/s420.log	2164	b-repo	overlap 8/36 best data/fs66/b1/scan-p23.log
+fs73-implE/runs/s420.meta.json	699	b-repo	overlap 0/1 best
+fs73-implE/runs/s420.nodes.jsonl	218936041	b-disk	overlap binary/skip best
+fs73-implE/runs/s420.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implE/runs/s420.pid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implE/runs/s420.state.json	728	b-repo	overlap 0/1 best
+fs73-implE/runs/struct-ctl.json	958261	b-repo	overlap 2/3 best data/fs73/q167/L21cc6506-theta-struct.json
+fs73-implE/runs/struct420-regen.json	2673706	a	A-head: data/fs73/q167/L21cc6506-theta-struct.json
+fs73-implE/runs/struct420-z.json	5734912	b-disk	overlap 2/3 best data/fs73/q167/L21cc6506-theta-struct.json
+fs73-implE/runs/struct420.json	2673706	a	A-head: data/fs73/q167/L21cc6506-theta-struct.json
+fs73-implE/slack.py	751	b-repo	overlap 1/13 best tools/rigidity_dial.py
+fs73-implE/thetaR.py	820	b-repo	overlap 1/13 best tools/rigidity_dial.py
+fs73-implF/BRIEF.md	6283	a	A-head: data/fs73/briefs/P4-implementer-F-brief.md
+fs73-implF/run-L3.log	3344	b-repo	overlap 8/21 best data/fs66/b1/scan-p23.log
+fs73-implF/run-L3.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-implF/run-cert.log	3276	b-repo	overlap 3/33 best data/fs73/census/P1g-L3-card.json
+fs73-implF/run-rest.log	4279	b-repo	overlap 8/31 best data/fs66/b1/scan-p23.log
+fs73-implK/Kempe.lean.good	37014	a	successor (438/440 lines) in Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/Kempe.orig.lean	23432	a	A-history: Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/axioms1.out	4542	b-repo	overlap 10/47 best data/m2/j15/axioms.log
+fs73-implK/axioms2.out	1874	b-repo	overlap 11/18 best data/m2/j15/axioms.log
+fs73-implK/axioms3.out	1874	b-repo	overlap 11/18 best data/m2/j15/axioms.log
+fs73-implK/build-plant.out	6847	b-repo	overlap 0/186 best
+fs73-implK/build1.out	6511	b-repo	overlap 1/182 best data/m2/j15/build-stage4.log
+fs73-implK/build2.out	6511	b-repo	overlap 1/182 best data/m2/j15/build-stage4.log
+fs73-implK/build3.out	6511	b-repo	overlap 1/182 best data/m2/j15/build-stage4.log
+fs73-implK/build4.out	6511	b-repo	overlap 1/182 best data/m2/j15/build-stage4.log
+fs73-implK/compact.py	2059	b-repo	overlap 21/28 best Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/inh.py	2360	b-repo	overlap 12/27 best Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/kempe_sec.py	2902	b-repo	overlap 16/34 best Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/lint-plant.out	440	b-repo	overlap 0/6 best
+fs73-implK/lint1.out	119	b-repo	overlap 0/2 best
+fs73-implK/lint2.out	76	b-repo	overlap 0/2 best
+fs73-implK/lint3.out	76	b-repo	overlap 0/2 best
+fs73-implK/lint4.out	76	b-repo	overlap 0/2 best
+fs73-implK/mv.py	348	b-repo	overlap 0/5 best
+fs73-implK/probe.lean	1542	a	successor (18/21 lines) in Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/t2.py	3257	a	successor (38/43 lines) in Proofs/HadwigerNelson/Kempe.lean
+fs73-implK/vac1.out	6014	b-repo	overlap 26/48 best data/m2/j14/vacuity.log
+fs73-implK/vac2.out	4839	b-repo	overlap 26/34 best data/m2/j14/vacuity.log
+fs73-implK/vac3.out	4839	b-repo	overlap 26/34 best data/m2/j14/vacuity.log
+fs73-implK/vacself.out	1229	b-repo	overlap 9/13 best data/m2/j14/vacuity-selftest.log
+fs73-implK/volt.py	1830	b-repo	overlap 13/24 best Proofs/HadwigerNelson/Kempe.lean
+fs73-owner/P3-advisor-brief.md	8770	owner	older owner-naming directory: not swept
+fs73-owner/P3-advisor-final.md	16365	owner	older owner-naming directory: not swept
+fs73-owner/P3-comp-coxeter-template.md	18447	owner	older owner-naming directory: not swept
+fs73-owner/P3-comp-debruijn-template.md	18440	owner	older owner-naming directory: not swept
+fs73-owner/P3-competitor-brief.md	16166	owner	older owner-naming directory: not swept
+fs73-owner/P3-poros-successor-prompt.md	2710	owner	older owner-naming directory: not swept
+fs73-owner/a1.txt	8162	owner	older owner-naming directory: not swept
+fs73-owner/a2.txt	1264	owner	older owner-naming directory: not swept
+fs73-owner/arch.txt	5796	owner	older owner-naming directory: not swept
+fs73-owner/audit-base.txt	8032	owner	older owner-naming directory: not swept
+fs73-owner/audit-dupes.txt	1264	owner	older owner-naming directory: not swept
+fs73-owner/bib.txt	280	owner	older owner-naming directory: not swept
+fs73-owner/blind-controls.md	1998	owner	older owner-naming directory: not swept
+fs73-owner/census-nosolver.txt	4499	owner	older owner-naming directory: not swept
+fs73-owner/census-slot.md	1581	owner	older owner-naming directory: not swept
+fs73-owner/cert-plant.txt	85	owner	older owner-naming directory: not swept
+fs73-owner/cert-run.txt	637	owner	older owner-naming directory: not swept
+fs73-owner/held-items.md	4633	owner	older owner-naming directory: not swept
+fs73-owner/ledgerb.txt	522	owner	older owner-naming directory: not swept
+fs73-owner/p1-relation.json.gz	164452	owner	older owner-naming directory: not swept
+fs73-owner/p2-range.json.gz	31729	owner	older owner-naming directory: not swept
+fs73-owner/p3-farkas.json.gz	164450	owner	older owner-naming directory: not swept
+fs73-owner/p4-unit-swap.json.gz	164452	owner	older owner-naming directory: not swept
+fs73-owner/p5-drop-value-subtree.json.gz	129799	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/K-8Lambda-classes-all.json.gz	29435	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/K-8Lambda-classes.json	56394	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/K-periods.jsonl	7778	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/K-rows.jsonl	126915	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/K-sandwich.json	4368	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/P1c-crosscheck.json	4105	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/P1g-L3-card.json	169161	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/README.md	14339	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/ROWS.md	75027	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/cert/t-16_8_8_0-R1.5/steps.jsonl	1327994	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/cert/t-16_8_8_0-R1.5/witness.cnf.gz	177013	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/cert/t-16_8_8_0-R1.5/witness.json	170812	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/cert/t-16_8_8_0-R1.5/witness.lrat.gz	56529133	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N10-2e7f834e98b3e579.json.gz	301	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N10-c8f03b323697ff8e.json.gz	317	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N10-fs70seed-66dd68b294b419df.json.gz	326	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-01ccb061cf2167f2.json.gz	420	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-429dab2ccf42b3fe.json.gz	408	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-5d2d2e08c31b11fd.json.gz	401	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-968efa1960713fb1.json.gz	389	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-bbe26cacbb18a8dc.json.gz	374	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N12-fs70seed-7be2e69c0e18f946.json.gz	383	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N14-16a97238d5787490.json.gz	465	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N14-73f56b0f2da2776b.json.gz	443	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N16-68a26676c838c437.json.gz	687	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N16-865b2ea8b15f4e29.json.gz	621	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N16-8eca0fe8b02eb957.json.gz	764	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N16-dece6f453b6f815b.json.gz	787	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N2-726286dd163b97d2.json.gz	229	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N2-ea24053b1da8093f.json.gz	227	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N2-fs70seed-4dcc74d0b3b87b16.json.gz	236	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-19511008dd442616.json.gz	1098	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-19ce54b2cb190090.json.gz	1131	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-1cce8665b13f9c30.json.gz	903	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-9b156b094162d7be.json.gz	1127	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-a283884c7f6073bf.json.gz	810	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N20-d47545be9a502792.json.gz	778	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N22-44e27bb6dd2d0096.json.gz	1289	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N22-8e2dbc33999f4116.json.gz	1110	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N24-38fa58428c4970f8.json.gz	2108	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N24-6e044c5a6a6f02b9.json.gz	2282	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N24-94d2aeeae46db762.json.gz	2185	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N24-ed1fefa497ec30fe.json.gz	2122	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N32-4a1e6723d2864f39.json.gz	5709	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N32-9ce954279d178653.json.gz	5560	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N32-ac916c9cc4d1974c.json.gz	5823	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N32-de9b03d262246b3a.json.gz	4546	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N4-2b4438f34ea81155.json.gz	263	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N4-2f59be7efc4d7161.json.gz	235	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N4-46ea4eb0733dc6ff.json.gz	245	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N4-5b97e72814f8633f.json.gz	260	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N4-fs70seed-d0addcd09a952cc6.json.gz	256	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N6-16788fa60ce79c2b.json.gz	251	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N6-2afb99ff670fe532.json.gz	255	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N6-fs70seed-5b10aba88d1bec47.json.gz	260	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-622e92028a4235a6.json.gz	317	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-912d0af44d55f492.json.gz	318	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-9520375dcf4f5ac8.json.gz	356	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-9a9a2c6a803cd73c.json.gz	304	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-ef2d1feefcab74f9.json.gz	314	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/degrey-N8-fs70seed-72b08f424a2e89f5.json.gz	315	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2-04f38bb52b96e826.json.gz	268	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2-ac49a3d90eb04e62.json.gz	303	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2-fs70seed-f9adff0593d36c2d.json.gz	302	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-1a7e9c93e66ecba3.json.gz	631	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-38025dc6b4b40714.json.gz	664	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-4caec2b5ec7312c7.json.gz	637	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-4f079ec424130b76.json.gz	636	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-8af8bdb0d50f43d6.json.gz	643	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11a-8e689dc99968d725.json.gz	634	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11b-845e1e28f691e21c.json.gz	613	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11b-911eee35edcd503b.json.gz	609	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11b-cbb74daac4b2ad33.json.gz	651	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11b-dbeac6e44b73586b.json.gz	600	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11c-00dd0478092d3986.json.gz	601	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11c-0b95c36427964ffe.json.gz	655	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11c-8025cd25eb92436c.json.gz	617	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11d-1f0d8b9d1848231c.json.gz	573	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11d-70abb92e906b5615.json.gz	570	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N2x11d-7f642b017d3dff41.json.gz	589	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-07894865c5893cfc.json.gz	864	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-1a1198872f1d9645.json.gz	945	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-29e6a8d6cf29de08.json.gz	923	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-2ca5bb738bee218d.json.gz	858	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-67f47d107f6cc4e6.json.gz	810	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-9af6ed41d09d278a.json.gz	1263	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-caa266bbe799a1d5.json.gz	1888	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu14-N4-fs70seed-66fb7f8a7de532ec.json.gz	839	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2-7080be1e351f267a.json.gz	271	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2-75afe44a15307efe.json.gz	270	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2-f1e7f08cd5265765.json.gz	310	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2-fs70seed-75afe44a15307efe.json.gz	279	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11a-2b594ca969b604e2.json.gz	630	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11a-2d3e1ec7b77f790b.json.gz	650	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11a-8f1ae8e31016f5de.json.gz	586	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11a-b5027ce1e4cca06d.json.gz	622	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11b-18f33b62899cfc69.json.gz	616	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11b-801904b6dc9bd6a3.json.gz	576	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11b-b82c10da2dd71e89.json.gz	576	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11b-f79d5bd3398f1ad4.json.gz	588	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11c-16689c00880d24ce.json.gz	644	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11c-76602e83aded5434.json.gz	607	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11c-87f3fe5912c53427.json.gz	658	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11c-e20658c6390506e2.json.gz	639	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11c-fda5b84b7226af58.json.gz	635	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11d-3db87aafbbe76808.json.gz	569	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11d-60022df47385ab2f.json.gz	631	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11d-75757045ddec4a11.json.gz	551	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N2x11d-bb1723731ecc9e89.json.gz	552	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N4-7ad4701cf1d02e79.json.gz	735	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N4-dbf8893c37e2ca5c.json.gz	1245	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N4-dcaecd3409e7fbb0.json.gz	1841	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu30-N4-fs70seed-e670f443c8341658.json.gz	1883	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2-7080be1e351f267a.json.gz	270	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2-75afe44a15307efe.json.gz	268	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2-f1e7f08cd5265765.json.gz	310	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2-fs70seed-75afe44a15307efe.json.gz	277	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11a-8de63b75e6c34592.json.gz	644	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11a-ab306b654854d6ee.json.gz	596	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11a-bbc0c64fc67bf47f.json.gz	638	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11a-cb24c7ef7c28f142.json.gz	638	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11b-76a4cc69a7a8ae87.json.gz	578	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11b-a3d07df04390ac7b.json.gz	585	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11b-b4bf9a1a34ba9c3c.json.gz	598	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11b-f73669502b47285e.json.gz	609	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11c-0f42c0c983dd2c0a.json.gz	589	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11c-8263ecd241375f06.json.gz	674	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11c-99ba2877a77d67fd.json.gz	615	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11c-ef7fd88a202c3f17.json.gz	605	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11d-72a9820043bfa373.json.gz	609	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11d-816ff3fb2758ec4b.json.gz	601	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11d-a662ac5119165ee3.json.gz	613	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N2x11d-efbc375c20f9a4c1.json.gz	611	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N4-511952cf1af59f9c.json.gz	691	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N4-733fca31efa73958.json.gz	1853	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N4-bdf03288c45819ea.json.gz	787	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N4-d17917bd63bfd42d.json.gz	781	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/colourings/tu42-N4-fs70seed-d17917bd63bfd42d.json.gz	790	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/lattice-degrey.json	1966	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/lattice-tu14.json	9478	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/lattice-tu30.json	46676	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/lattice-tu42.json	113038	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/data/fs73/census/rich-rows.jsonl	329784	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/tools/fs73_census_check.py	37923	owner	older owner-naming directory: not swept
+fs73-owner/plant-census/tools/fs73_cert_check.py	19624	owner	older owner-naming directory: not swept
+fs73-owner/plant-cert47-child.json	653060	owner	older owner-naming directory: not swept
+fs73-owner/plant-cert47-d335.json	653065	owner	older owner-naming directory: not swept
+fs73-owner/planted-witness.json	208689	owner	older owner-naming directory: not swept
+fs73-owner/state.md	55111	owner	older owner-naming directory: not swept
+fs73-owner/struct-check.txt	461	owner	older owner-naming directory: not swept
+fs73-owner/struct-plant-drop-last.json	1331356	owner	older owner-naming directory: not swept
+fs73-owner/v2-plant-base.json	4497338	owner	older owner-naming directory: not swept
+fs73-poros-P3/BRIEF.md	16365	a	A-head: data/fs73/briefs/P3-advisor-brief.md
+fs73-poros-P3/POROS-2026-09-23-fs73-competition.md	40585	a	A-head: plans/POROS-2026-09-23-fs73-competition.md
+fs73-poros-cert/cmpU.py	875	b-repo	overlap 3/15 best data/fs70/records/phase-1f/arm1f_control.py
+fs73-poros-cert/olat.py	4350	b-repo	overlap 4/61 best data/fs86/b2/lattice.py
+fs73-poros-plan/held-items.md	311	b-repo	overlap 0/3 best
+fs73-verifier/ask-89.log	102	b-repo	overlap 0/2 best
+fs73-verifier/ask-89.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/ask-eight_ninths-nb.json	1708	b-repo	overlap 0/12 best
+fs73-verifier/ask-harder.log	109	b-repo	overlap 0/2 best
+fs73-verifier/ask-harder.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/ask-harder_eight_thirds-nb.json	1741	b-repo	overlap 0/13 best
+fs73-verifier/ask-snap.sh	610	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-verifier/ask-v-cn.json	1651	b-repo	overlap 0/12 best
+fs73-verifier/ask-v.log	91	b-repo	overlap 0/2 best
+fs73-verifier/ask-v.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/ask.sh	610	b-repo	overlap 1/7 best data/fs54/environment.md
+fs73-verifier/ask2-snap.sh	564	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-verifier/ask2-snap2.sh	577	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-verifier/ask2-v-none-lingeling-7.json	894	b-repo	overlap 0/4 best
+fs73-verifier/ask2-v.log	137	b-repo	overlap 0/3 best
+fs73-verifier/ask2-v.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/ask2.sh	577	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-verifier/asks.jsonl	9120	a	successor (7/7 lines) in data/fs73/records/verify-P1d-asks.jsonl
+fs73-verifier/cnf-eight_ninths-nb-s20260923.cnf	29404644	b-disk	overlap binary/skip best
+fs73-verifier/cnf-four_ninths-nb-s20260923.cnf	29404644	b-disk	overlap binary/skip best
+fs73-verifier/cnf-harder_eight_thirds-nb-s20260923.cnf	29404644	b-disk	overlap binary/skip best
+fs73-verifier/cnf-two-cn-s20260923.cnf	29404643	b-disk	overlap binary/skip best
+fs73-verifier/cnf-two-nb-s20260923.cnf	29404644	b-disk	overlap binary/skip best
+fs73-verifier/cnf-v-cn-s20260923.cnf	29404642	b-disk	overlap binary/skip best
+fs73-verifier/cnf-v-none-s7.cnf	29407730	b-disk	overlap binary/skip best
+fs73-verifier/colouring-four_ninths-nb-s20260923.json	797957	b-repo	overlap 0/1 best
+fs73-verifier/colouring-two-nb-s20260923.json	797957	b-repo	overlap 0/1 best
+fs73-verifier/controls.json	5508	b-repo	overlap 2/12 best data/fs73/records/verify-P1d-quotient.json
+fs73-verifier/drat-trim/.git/HEAD	23	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/config	279	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/description	73	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/applypatch-msg.sample	478	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/commit-msg.sample	1972	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/fsmonitor-watchman.sample	4611	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/post-update.sample	189	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-applypatch.sample	424	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-commit.sample	1649	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-merge-commit.sample	416	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-push.sample	1374	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-rebase.sample	4898	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/pre-receive.sample	544	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/prepare-commit-msg.sample	1492	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/push-to-checkout.sample	2783	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/sendemail-validate.sample	2308	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/hooks/update.sample	3650	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/index	4044	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/info/exclude	240	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/logs/HEAD	205	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/logs/refs/heads/master	205	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/logs/refs/remotes/origin/HEAD	205	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.idx	2416	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.pack	7297909	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/objects/pack/pack-66a3e0723790687285db17903d51416b992d6c0d.rev	244	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/packed-refs	114	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/refs/heads/master	41	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/refs/remotes/origin/HEAD	32	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/.git/shallow	41	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/LICENSE	1184	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/Makefile	493	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/README.md	12939	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/compress.c	5146	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/decompress.c	3034	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/drat-trim	55776	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/drat-trim.c	59546	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/R_4_4_18.clrat.bz2	4388531	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/R_4_4_18.cnf	151575	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/R_4_4_18.drat.bz2	2779243	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-4-vars.cnf	106	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-4-vars.drat	78	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-4-vars.lrat	94	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-5-vars.cnf	103	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-5-vars.drat	117	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-5-vars.lrat	176	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-Schur.cnf	486	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-Schur.drat	32	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/example-Schur.drup	72	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-1.cnf	5272	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-1.drat	17019	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-1.lrat	45346	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-2.cnf	5304	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-2.drat	10959	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-2.lrat	27687	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-3.cnf	5292	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-3.drat	21562	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-3.lrat	55442	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-4.cnf	5241	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-4.drat	17577	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-4.lrat	43522	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-5.cnf	5279	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-5.drat	18171	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-100-5.lrat	46733	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-30-1.cnf	1480	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-30-1.drat	83	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-30-1.lrat	1352	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-2.cnf	2521	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-2.drat	2825	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-2.lrat	5014	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-3.cnf	2509	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-3.drat	2384	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/examples/uuf-50-3.lrat	4382	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/gapless.c	4260	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/lrat-check	22328	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/lrat-check.c	17682	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/drat-trim/run-examples	666	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/HEAD	21	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/config	266	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/description	73	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/applypatch-msg.sample	478	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/commit-msg.sample	1972	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/fsmonitor-watchman.sample	4611	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/post-update.sample	189	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-applypatch.sample	424	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-commit.sample	1649	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-merge-commit.sample	416	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-push.sample	1374	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-rebase.sample	4898	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/pre-receive.sample	544	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/prepare-commit-msg.sample	1492	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/push-to-checkout.sample	2783	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/sendemail-validate.sample	2308	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/hooks/update.sample	3650	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/index	4441	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/info/exclude	240	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/logs/HEAD	200	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/logs/refs/heads/main	200	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/logs/refs/remotes/origin/HEAD	200	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.idx	2696	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.pack	118609	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/objects/pack/pack-dc932a925b85d9568e06b838c13a2d4405945c7c.rev	284	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/packed-refs	112	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/refs/heads/main	41	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/refs/remotes/origin/HEAD	30	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.git/shallow	41	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/.gitignore	285	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/CHANGELOG	1030	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/CMakeLists.txt	1233	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/LICENSE	1072	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/README.md	6295	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/build/CMakeCache.txt	3330	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/build/CMakeFiles/cmake.check_cache	85	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/build/cmake.log	451	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/build/make.log	56	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/BoundedQueue.h	5767	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Constants.h	3208	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Dimacs.h	3295	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Makefile	109	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Solver.cc	68506	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Solver.h	33874	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/Solver.or	911112	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/SolverStats.h	4063	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/SolverTypes.h	20402	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/lcm.cc	17251	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/core/lcm.or	164672	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Alg.h	2818	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Alloc.h	4776	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Clone.h	166	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Heap.h	4755	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/IntTypes.h	1825	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Map.h	6957	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Queue.h	3166	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Sort.h	3280	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/Vec.h	5997	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/VecThreads.h	7670	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/XAlloc.h	1948	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/config.mk	204	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/mtl/template.mk	3239	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/ClausesBuffer.cc	9392	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/ClausesBuffer.h	5069	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/Main.cc	11658	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/Makefile	109	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/MultiSolvers.cc	24107	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/MultiSolvers.h	8640	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/ParallelSolver.cc	19948	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/ParallelSolver.h	6800	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SharedCompanion.cc	6579	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SharedCompanion.h	6123	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SolverCompanion.cc	3932	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SolverCompanion.h	3802	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SolverConfiguration.cc	7237	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/parallel/SolverConfiguration.h	3471	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/Main.cc	14955	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/Main.or	171384	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/Makefile	94	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/SimpSolver.cc	25948	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/SimpSolver.h	11760	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/SimpSolver.or	515968	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/depend.mk	6701	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/glucose_release	1203072	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/simp/make.log	353	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/Makefile	74	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/Options.cc	3810	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/Options.h	12150	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/Options.or	55920	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/ParseUtils.h	4943	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/System.cc	3141	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/System.h	2772	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/glucose/utils/System.or	13928	d	vendored solver source or build (glucose, drat-trim)
+fs73-verifier/orbits.json	2524	b-repo	overlap 0/15 best
+fs73-verifier/pcheck-89.log	90	b-repo	overlap 0/2 best
+fs73-verifier/pcheck-89.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/pcheck-eight_ninths-nb.json	1212	b-repo	overlap 0/15 best
+fs73-verifier/pcheck-harder.log	97	b-repo	overlap 0/2 best
+fs73-verifier/pcheck-harder.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/pcheck-harder_eight_thirds-nb.json	1215	b-repo	overlap 0/15 best
+fs73-verifier/pcheck-snap.sh	501	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-verifier/pcheck-v-cn.json	1181	b-repo	overlap 0/14 best
+fs73-verifier/pcheck-v.log	79	b-repo	overlap 0/2 best
+fs73-verifier/pcheck-v.pgid	7	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier/pcheck.sh	501	b-repo	overlap 1/6 best data/fs54/environment.md
+fs73-verifier/proofchecks.jsonl	3278	a	successor (3/3 lines) in data/fs73/records/verify-P1d-asks.jsonl
+fs73-verifier/q11.json	6618	a	A-head: data/fs73/records/verify-P2-q11.json
+fs73-verifier/q11/quot.cnf	14552	b-disk	overlap binary/skip best
+fs73-verifier/q11/u1-ask.cnf	5864	b-disk	overlap binary/skip best
+fs73-verifier/q11/u1-ask.drat	5689	a	A-head: data/fs73/records/verify-P2-q11/u1-ask.drat
+fs73-verifier/q11/u1-plain.cnf	5830	b-disk	overlap binary/skip best
+fs73-verifier/q11/u1-planted.cnf	5828	b-disk	overlap binary/skip best
+fs73-verifier/q11/u1-w.cnf	5839	b-disk	overlap binary/skip best
+fs73-verifier/q11/u2-ask.cnf	7521	b-disk	overlap binary/skip best
+fs73-verifier/q11/u2-ask.drat	8043	a	A-head: data/fs73/records/verify-P2-q11/u2-ask.drat
+fs73-verifier/q11/u2-plain.cnf	7480	b-disk	overlap binary/skip best
+fs73-verifier/q11/u2-planted.cnf	7482	b-disk	overlap binary/skip best
+fs73-verifier/q11/u2-w.cnf	7498	b-disk	overlap binary/skip best
+fs73-verifier/quotient.json	1251	a	A-head: data/fs73/records/verify-P1d-quotient.json
+fs73-verifier2/BRIEF.md	6463	a	A-head: data/fs73/briefs/P3b-verifier-V2-brief.md
+fs73-verifier2/b5.py	1879	a	successor (26/26 lines) in tools/fs73v2_b5.py
+fs73-verifier2/ballcolour.py	971	b-repo	overlap 1/15 best tools/embed.py
+fs73-verifier2/explore.py	1854	b-repo	overlap 7/27 best tools/fs73v2_b5.py
+fs73-verifier2/explore2.py	1671	b-repo	overlap 5/25 best tools/m56_export_791.py
+fs73-verifier2/greedy-final-cert.json	78417	b-repo	overlap 0/1 best
+fs73-verifier2/greedy-final.json	355	a	A-head: data/fs73/verify-v2/L21cc6506-sub-1vz-units.json
+fs73-verifier2/greedy-start-cert.json	78417	b-repo	overlap 0/1 best
+fs73-verifier2/greedy-start.json	355	a	A-head: data/fs73/verify-v2/L21cc6506-sub-1vz-units.json
+fs73-verifier2/greedy-trial-cert.json	714	b-repo	overlap 0/1 best
+fs73-verifier2/greedy-trial.json	338	b-repo	overlap 0/1 best
+fs73-verifier2/greedy.py	1242	b-repo	overlap 1/19 best tools/fs73_table.py
+fs73-verifier2/kernel.py	723	b-repo	overlap 0/11 best
+fs73-verifier2/min-1-v-z.json	355	a	A-head: data/fs73/verify-v2/L21cc6506-sub-1vz-units.json
+fs73-verifier2/plant-Ld14c588b-fake-empty.json	1408608	b-repo	overlap 0/1 best
+fs73-verifier2/rels-L21cc6506.json	2507	b-repo	overlap 0/1 best
+fs73-verifier2/rels-Ld14c588b.json	1334	b-repo	overlap 0/1 best
+fs73-verifier2/rels-Ld65c8ee8.json	8395	b-repo	overlap 0/1 best
+fs73-verifier2/run-basisonly.log	260	b-repo	overlap 0/4 best
+fs73-verifier2/sub-1-v-vb.json	346	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-v-z.json	355	a	A-head: data/fs73/verify-v2/L21cc6506-sub-1vz-units.json
+fs73-verifier2/sub-1-v-zb.json	361	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-v.json	231	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-vb-z.json	351	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-vb-zb.json	357	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-z-zb.json	366	b-repo	overlap 0/1 best
+fs73-verifier2/sub-1-z.json	236	b-repo	overlap 0/1 best
+fs73-verifier2/sub-v-vb-z.json	358	b-repo	overlap 0/1 best
+fs73-verifier2/sub-v-vb-zb.json	364	b-repo	overlap 0/1 best
+fs73-verifier2/sub-v-z-zb.json	373	b-repo	overlap 0/1 best
+fs73-verifier2/sub-v-z.json	243	b-repo	overlap 0/1 best
+fs73-verifier2/sub-vb-z-zb.json	369	b-repo	overlap 0/1 best
+fs73-verifier2/sub-z-zb.json	254	b-repo	overlap 0/1 best
+fs73-verifier2/subs-run.sh	526	b-repo	overlap 1/3 best data/fs54/environment.md
+fs73-verifier2/subs.log	928	b-repo	overlap 0/10 best
+fs73-verifier2/subs.pid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs73-verifier2/subs.sh	526	b-repo	overlap 1/3 best data/fs54/environment.md
+fs73-verifier2/units-L21cc6506.json	2097	b-repo	overlap 0/1 best
+fs73-verifier2/units-Ld14c588b.json	1562	b-repo	overlap 0/1 best
+fs73-verifier2/units-Ld65c8ee8.json	3030	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-L21cc6506-basisonly.json	2756599	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-L21cc6506.json	3414208	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-Ld14c588b.json	913	a	A-head: data/fs73/verify-v2/Ld14c588b-point.json
+fs73-verifier2/xbb-Ld65c8ee8.json	716720	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-v-vb.json	731	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-v-z.json	78417	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-v-zb.json	748	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-v.json	557	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-vb-z.json	741	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-vb-zb.json	78202	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-z-zb.json	731	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-1-z.json	563	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-v-vb-z.json	754	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-v-vb-zb.json	769	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-v-z-zb.json	740	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-v-z.json	576	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-vb-z-zb.json	742	b-repo	overlap 0/1 best
+fs73-verifier2/xbb-sub-z-zb.json	574	b-repo	overlap 0/1 best
+fs79-close/BRIEF.md	11127	a	A-head: data/fs79/briefs/CL-close-planner-brief.md
+fs79-close/CLAUDE.md.bak	247561	a	A-history: CLAUDE.md
+fs79-close/audit1.txt	8304	b-repo	overlap 0/97 best
+fs79-close/axioms.out	1845	b-repo	overlap 11/18 best data/m2/j15/axioms.log
+fs79-close/build.out	284	b-repo	overlap 0/4 best
+fs79-close/claude_edit.py	18394	b-repo	overlap 0/70 best
+fs79-close/fs_old.md	66176	a	A-history: plans/FRONTIER-STUBS.md
+fs79-close/g73.txt	2969	a	successor (19/22 lines) in CLAUDE.md
+fs79-close/row80.txt	5786	a	successor (1/1 lines) in LEDGER.md
+fs79-close/row81.txt	4333	b-repo	overlap 0/1 best
+fs79-close/rows.py	2480	b-repo	overlap 0/14 best
+fs79-close/vacuity.out	4727	b-repo	overlap 26/34 best data/m2/j14/vacuity.log
+fs79-comp-coxeter/BRIEF-Coxeter.md	39707	a	A-head: data/fs79/briefs/P2-competitor-brief-Coxeter.md
+fs79-comp-coxeter/FS79-C-Coxeter.md	33200	a	A-head: plans/FS79-C-Coxeter.md
+fs79-comp-coxeter/work/__pycache__/kper_additive.cpython-314.pyc	10303	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-coxeter/work/__pycache__/language.cpython-314.pyc	9509	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-coxeter/work/__pycache__/local_forms.cpython-314.pyc	6889	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-coxeter/work/__pycache__/missing_pairs.cpython-314.pyc	6129	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-coxeter/work/count_quot.py	2174	a	A-head: data/fs79/comp-coxeter/work/count_quot.py
+fs79-comp-coxeter/work/cubes_target.py	1959	a	A-head: data/fs79/comp-coxeter/work/cubes_target.py
+fs79-comp-coxeter/work/dconst.py	1044	a	A-head: data/fs79/comp-coxeter/work/dconst.py
+fs79-comp-coxeter/work/face_forms.py	3980	a	A-head: data/fs79/comp-coxeter/work/face_forms.py
+fs79-comp-coxeter/work/face_forms_ctl.py	4091	a	A-head: data/fs79/comp-coxeter/work/face_forms_ctl.py
+fs79-comp-coxeter/work/face_forms_ctl_nopar.py	4054	a	A-head: data/fs79/comp-coxeter/work/face_forms_ctl_nopar.py
+fs79-comp-coxeter/work/face_forms_nopar.py	3943	a	A-head: data/fs79/comp-coxeter/work/face_forms_nopar.py
+fs79-comp-coxeter/work/gap_probe.py	1727	a	A-head: data/fs79/comp-coxeter/work/gap_probe.py
+fs79-comp-coxeter/work/kper_additive.py	5010	a	A-head: data/fs79/comp-coxeter/work/kper_additive.py
+fs79-comp-coxeter/work/kper_linear.py	2435	a	A-head: data/fs79/comp-coxeter/work/kper_linear.py
+fs79-comp-coxeter/work/kper_orbits.out	606	a	A-head: data/fs79/comp-coxeter/work/kper_orbits.out
+fs79-comp-coxeter/work/kper_orbits.pgid	8	a	A-head: data/fs79/comp-coxeter/work/kper_orbits.pgid
+fs79-comp-coxeter/work/kper_orbits.py	5902	a	A-head: data/fs79/comp-coxeter/work/kper_orbits.py
+fs79-comp-coxeter/work/kper_orbits_lines.jsonl	375934	a	A-head: data/fs79/comp-coxeter/work/kper_orbits_lines.jsonl
+fs79-comp-coxeter/work/kper_orbits_reps.npy	1149568	a	A-head: data/fs79/comp-coxeter/work/kper_orbits_reps.npy
+fs79-comp-coxeter/work/kper_quot.py	2968	a	A-head: data/fs79/comp-coxeter/work/kper_quot.py
+fs79-comp-coxeter/work/language.py	3508	a	A-head: data/fs79/comp-coxeter/work/language.py
+fs79-comp-coxeter/work/language_np.out	469	a	A-head: data/fs79/comp-coxeter/work/language_np.out
+fs79-comp-coxeter/work/language_np.py	1955	a	A-head: data/fs79/comp-coxeter/work/language_np.py
+fs79-comp-coxeter/work/local_forms.py	3533	a	A-head: data/fs79/comp-coxeter/work/local_forms.py
+fs79-comp-coxeter/work/missing_pairs.py	2501	a	A-head: data/fs79/comp-coxeter/work/missing_pairs.py
+fs79-comp-coxeter/work/theta4_cell.py	1660	a	A-head: data/fs79/comp-coxeter/work/theta4_cell.py
+fs79-comp-coxeter/work/theta4_dim.py	2976	a	A-head: data/fs79/comp-coxeter/work/theta4_dim.py
+fs79-comp-coxeter/work/tri_control.py	2931	a	A-head: data/fs79/comp-coxeter/work/tri_control.py
+fs79-comp-coxeter/work/virtual_probe.py	1608	a	A-head: data/fs79/comp-coxeter/work/virtual_probe.py
+fs79-comp-debruijn/BRIEF-deBruijn.md	39672	a	A-head: data/fs79/briefs/P2-competitor-brief-deBruijn.md
+fs79-comp-debruijn/FS79-C-deBruijn.md	41391	a	A-head: plans/FS79-C-deBruijn.md
+fs79-comp-debruijn/runs/rank1_scan.jsonl	309738	a	A-head: data/fs79/comp-debruijn/runs/rank1_scan.jsonl
+fs79-comp-debruijn/runs/rank1_scan.log	20	a	A-head: data/fs79/comp-debruijn/runs/rank1_scan.log
+fs79-comp-debruijn/runs/rank1_scan.pgid	8	a	A-head: data/fs79/comp-debruijn/runs/rank1_scan.pgid
+fs79-comp-debruijn/tools/__pycache__/degrey_lang.cpython-314.pyc	4181	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-debruijn/tools/__pycache__/heights_edge.cpython-314.pyc	13459	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-debruijn/tools/__pycache__/lang_heights.cpython-314.pyc	3381	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-debruijn/tools/__pycache__/rank1_phases.cpython-314.pyc	12216	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-debruijn/tools/__pycache__/split_types.cpython-314.pyc	4971	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-comp-debruijn/tools/degrey_cosets.py	2654	a	A-head: data/fs79/comp-debruijn/tools/degrey_cosets.py
+fs79-comp-debruijn/tools/degrey_lang.py	1469	a	A-head: data/fs79/comp-debruijn/tools/degrey_lang.py
+fs79-comp-debruijn/tools/degrey_lang2.py	1290	a	A-head: data/fs79/comp-debruijn/tools/degrey_lang2.py
+fs79-comp-debruijn/tools/degrey_occ.pkl	209827	a	A-head: data/fs79/comp-debruijn/tools/degrey_occ.pkl
+fs79-comp-debruijn/tools/heights_edge.py	6337	a	A-head: data/fs79/comp-debruijn/tools/heights_edge.py
+fs79-comp-debruijn/tools/heights_k.py	1485	a	A-head: data/fs79/comp-debruijn/tools/heights_k.py
+fs79-comp-debruijn/tools/heights_lattices.py	955	a	A-head: data/fs79/comp-debruijn/tools/heights_lattices.py
+fs79-comp-debruijn/tools/lang_heights.py	1742	a	A-head: data/fs79/comp-debruijn/tools/lang_heights.py
+fs79-comp-debruijn/tools/q167_lang.py	4566	a	A-head: data/fs79/comp-debruijn/tools/q167_lang.py
+fs79-comp-debruijn/tools/rank1_phases.py	5774	a	A-head: data/fs79/comp-debruijn/tools/rank1_phases.py
+fs79-comp-debruijn/tools/rank1_scan.py	1315	a	A-head: data/fs79/comp-debruijn/tools/rank1_scan.py
+fs79-comp-debruijn/tools/rank1_search.py	631	a	A-head: data/fs79/comp-debruijn/tools/rank1_search.py
+fs79-comp-debruijn/tools/scan_summary.py	495	a	A-head: data/fs79/comp-debruijn/tools/scan_summary.py
+fs79-comp-debruijn/tools/split_iff.py	653	a	A-head: data/fs79/comp-debruijn/tools/split_iff.py
+fs79-comp-debruijn/tools/split_structure_check.py	1525	a	A-head: data/fs79/comp-debruijn/tools/split_structure_check.py
+fs79-comp-debruijn/tools/split_types.py	1911	a	A-head: data/fs79/comp-debruijn/tools/split_types.py
+fs79-comp-debruijn/tools/stripe_descent_check.py	1736	a	A-head: data/fs79/comp-debruijn/tools/stripe_descent_check.py
+fs79-modeling/c4.md	9811	a	successor (69/71 lines) in plans/FS79-invariant-question.md
+fs79-modeling/rank1_bench.py	1775	a	A-head: data/fs79/checks/modeling_rank1_bench.py
+fs79-modeling/rank1_states.py	3303	a	A-head: data/fs79/checks/modeling_rank1_states.py
+fs79-modeling/secC.md	32206	a	successor (242/252 lines) in plans/FS79-invariant-question.md
+fs79-owner/A-planner-brief.md	15574	owner	older owner-naming directory: not swept
+fs79-owner/A-planner-brief.sent.md	15583	owner	older owner-naming directory: not swept
+fs79-owner/A-poros-plan-brief.md	9293	owner	older owner-naming directory: not swept
+fs79-owner/P0-implementer-brief.md	15016	owner	older owner-naming directory: not swept
+fs79-owner/P0-implementer-brief.sent.md	15023	owner	older owner-naming directory: not swept
+fs79-owner/P1-modeling-brief.md	10789	owner	older owner-naming directory: not swept
+fs79-owner/P2-advisor-brief.md	49684	owner	older owner-naming directory: not swept
+fs79-owner/P2-competitor-brief-Coxeter.md	39707	owner	older owner-naming directory: not swept
+fs79-owner/P2-competitor-brief-deBruijn.md	39672	owner	older owner-naming directory: not swept
+fs79-owner/assemble.py	2457	owner	older owner-naming directory: not swept
+fs79-owner/audit.txt	8648	owner	older owner-naming directory: not swept
+fs79-owner/blind-controls.md	3279	owner	older owner-naming directory: not swept
+fs79-owner/frame-advisor-head.md	3458	owner	older owner-naming directory: not swept
+fs79-owner/frame-advisor-tail.md	6157	owner	older owner-naming directory: not swept
+fs79-owner/frame-competitor-head.md	1669	owner	older owner-naming directory: not swept
+fs79-owner/frame-competitor-tail.md	5558	owner	older owner-naming directory: not swept
+fs79-owner/l21_z4_check.py	3152	owner	older owner-naming directory: not swept
+fs79-owner/p0-status.md	560	owner	older owner-naming directory: not swept
+fs79-owner/p0-survivors.md	848	owner	older owner-naming directory: not swept
+fs79-owner/persona-Coxeter.md	856	owner	older owner-naming directory: not swept
+fs79-owner/persona-deBruijn.md	831	owner	older owner-naming directory: not swept
+fs79-owner/plants/add-2phi.json	215	owner	older owner-naming directory: not swept
+fs79-owner/plants/add-2phi.out	45	owner	older owner-naming directory: not swept
+fs79-owner/plants/k3-1344.json	357	owner	older owner-naming directory: not swept
+fs79-owner/plants/k3-2352.json	416	owner	older owner-naming directory: not swept
+fs79-owner/plants/k3-plant-420.json	407	owner	older owner-naming directory: not swept
+fs79-owner/plants/p3-genuine.out	204	owner	older owner-naming directory: not swept
+fs79-owner/plants/p3-plant-droprow.jsonl	22618	owner	older owner-naming directory: not swept
+fs79-owner/plants/p3-plant-droprow.out	50	owner	older owner-naming directory: not swept
+fs79-owner/plants/p3-plant-nconst.jsonl	23363	owner	older owner-naming directory: not swept
+fs79-owner/plants/p3-plant-nconst.out	204	owner	older owner-naming directory: not swept
+fs79-owner/plants/res-count.json	28088	owner	older owner-naming directory: not swept
+fs79-owner/plants/res-count.out	49	owner	older owner-naming directory: not swept
+fs79-owner/plants/res-rot1.json	28088	owner	older owner-naming directory: not swept
+fs79-owner/plants/res-rot1.out	37	owner	older owner-naming directory: not swept
+fs79-owner/rank1_check.py	3798	owner	older owner-naming directory: not swept
+fs79-owner/recheck167-snapshot.sh	987	owner	older owner-naming directory: not swept
+fs79-owner/recheck167.log	1380	owner	older owner-naming directory: not swept
+fs79-owner/recheck167.pgid	8	owner	older owner-naming directory: not swept
+fs79-owner/recheck167.py	2289	owner	older owner-naming directory: not swept
+fs79-owner/recheck167.sh	987	owner	older owner-naming directory: not swept
+fs79-owner/sec-c1.md	4518	owner	older owner-naming directory: not swept
+fs79-owner/sec-c2.md	15816	owner	older owner-naming directory: not swept
+fs79-owner/sec-c4.md	10073	owner	older owner-naming directory: not swept
+fs79-owner/st.txt	107419	owner	older owner-naming directory: not swept
+fs79-owner/state.md	7604	owner	older owner-naming directory: not swept
+fs79-p3/controls.log	2123	b-repo	overlap 5/29 best tools/fs79_p3_theta4.py
+fs79-p3/controls.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-p3/controls.py	1068	b-repo	overlap 4/19 best tools/fs79_p3_theta4.py
+fs79-p3/controls.sh	1036	b-repo	overlap 1/6 best data/fs54/environment.md
+fs79-p3/fulldim-witness.json	382	b-repo	overlap 0/1 best
+fs79-p3/k3/header.json	2620	a	A-head: data/fs79/p3/smoke-k3/header.json
+fs79-p3/k3/sub_0.json.gz	1787	a	A-head: data/fs79/p3/smoke-k3/sub_0.json.gz
+fs79-p3/k3/sub_1.json.gz	28961	a	A-head: data/fs79/p3/smoke-k3/sub_1.json.gz
+fs79-p3/pilot-current.txt	339	b-repo	overlap 0/2 best
+fs79-p3/pilot-rational,v,vb,z,zb.txt	344	b-repo	overlap 0/2 best
+fs79-p3/pilot-rational,z,zb,v,vb.txt	343	b-repo	overlap 0/2 best
+fs79-p3/pilot2-r,v2,vb,z,zb,v4.txt	339	b-repo	overlap 0/2 best
+fs79-p3/pilot2-r,v2,vb2,z2,zb2,rest.txt	349	b-repo	overlap 0/2 best
+fs79-p3/pilot_order.py	2302	b-repo	overlap 4/35 best tools/fs79_p3_theta4.py
+fs79-p3/plant4-cells.jsonl	43870	a	A-head: data/fs79/p3/plant-drop4-k4-cells.jsonl
+fs79-p3/plant4/header.json	2614	a	A-head: data/fs79/p3/plant-drop4-k4/header.json
+fs79-p3/plant4/sub_0.json.gz	475633	a	A-head: data/fs79/p3/plant-drop4-k4/sub_0.json.gz
+fs79-p3/plant4/sub_1.json.gz	712831	a	A-head: data/fs79/p3/plant-drop4-k4/sub_1.json.gz
+fs79-p3/smoke-cells.jsonl	20761	a	A-head: data/fs79/p3/smoke-k4-cells.jsonl
+fs79-p3/smoke/header.json	2620	a	A-head: data/fs79/p3/smoke-k4/header.json
+fs79-p3/smoke/sub_0.json.gz	475956	a	A-head: data/fs79/p3/smoke-k4/sub_0.json.gz
+fs79-p3/smoke/sub_1.json.gz	712032	a	A-head: data/fs79/p3/smoke-k4/sub_1.json.gz
+fs79-p3/tree-k4.log	32	b-repo	overlap 0/1 best
+fs79-p3/tree-k4.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-p3b/cal-1344.log	358	b-repo	overlap 0/1 best
+fs79-p3b/cal-1584.log	346	b-repo	overlap 0/1 best
+fs79-p3b/cal-2352.log	499	b-repo	overlap 0/3 best
+fs79-p3b/cal.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-p3b/find-10920.log	324	b-repo	overlap 0/1 best
+fs79-p3b/find-12600.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/find-14280.log	324	b-repo	overlap 0/1 best
+fs79-p3b/find-16800.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/find-21000.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/find-2328.log	322	b-repo	overlap 0/1 best
+fs79-p3b/find-2400.log	323	b-repo	overlap 0/1 best
+fs79-p3b/find-24360.log	324	b-repo	overlap 0/1 best
+fs79-p3b/find-2448.log	322	b-repo	overlap 0/1 best
+fs79-p3b/find-25200.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/find-29400.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/find-4200.log	323	b-repo	overlap 0/1 best
+fs79-p3b/find.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-p3b/k3-1344.json	531	a	A-head: data/fs79/p3b/witnesses/1344-theta3-cal.json
+fs79-p3b/k3-1584.json	563	a	successor (1/1 lines) in data/fs79/p3b/witnesses/2352-theta3-cal.json
+fs79-p3b/k3-2352.json	542	a	A-head: data/fs79/p3b/witnesses/2352-theta3-cal.json
+fs79-p3b/plant-control.txt	319	a	successor (4/4 lines) in data/fs79/p3b/checker-run.txt
+fs79-p3b/plant-theta-plus-eighth-0.json	409	b-repo	overlap 0/1 best
+fs79-p3b/plant-theta-plus-eighth-1.json	407	b-repo	overlap 0/1 best
+fs79-p3b/plant-theta-plus-eighth-2.json	409	b-repo	overlap 0/1 best
+fs79-p3b/plant-theta-plus-eighth-3.json	409	b-repo	overlap 0/1 best
+fs79-p3b/quot.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-p3b/run-cal.log	9	b-repo	overlap nolines best
+fs79-p3b/run-cal.sh	294	b-repo	overlap 1/3 best data/fs54/environment.md
+fs79-p3b/run-find.log	9	b-repo	overlap nolines best
+fs79-p3b/run-find.sh	309	b-repo	overlap 1/3 best data/fs54/environment.md
+fs79-p3b/run-quot.log	1199	b-repo	overlap 0/23 best
+fs79-p3b/run-quot.sh	309	b-repo	overlap 1/4 best data/fs54/environment.md
+fs79-p3b/run-upper.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-p3b/run-upper.sh	301	b-repo	overlap 1/3 best data/fs54/environment.md
+fs79-p3b/upper.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/ask-1380634-a.cnf	1109671	b-disk	overlap binary/skip best
+fs79-phase0/ask-1406470-a.cnf	1514992	b-disk	overlap binary/skip best
+fs79-phase0/ask-1416058-a.cnf	6093545	b-disk	overlap binary/skip best
+fs79-phase0/c23k4.log	1255	b-repo	overlap 0/18 best
+fs79-phase0/c23k4.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/c43.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-phase0/c43.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/chain-snapshot.sh	923	b-repo	overlap 2/11 best data/fs79/checks/recheck167.sh
+fs79-phase0/chain.log	38	b-repo	overlap 0/1 best
+fs79-phase0/chain.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/chain.sh	923	b-repo	overlap 2/11 best data/fs79/checks/recheck167.sh
+fs79-phase0/chain2-snapshot.sh	1116	b-repo	overlap 2/15 best data/fs79/checks/recheck167.sh
+fs79-phase0/chain2.log	33549	b-repo	overlap 0/476 best
+fs79-phase0/chain2.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/chain2.sh	1116	b-repo	overlap 2/15 best data/fs79/checks/recheck167.sh
+fs79-phase0/chain3-snapshot.sh	543	b-repo	overlap 2/10 best data/fs79/checks/recheck167.sh
+fs79-phase0/chain3.log	25423	b-repo	overlap 9/413 best data/fs81/phaseD/d47/screen-run-b4.log
+fs79-phase0/chain3.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/chain3.sh	543	b-repo	overlap 2/10 best data/fs79/checks/recheck167.sh
+fs79-phase0/cheap2.log	57020	b-repo	overlap 14/902 best data/fs81/phaseD/d47/screen-run-b1.log
+fs79-phase0/cheap2.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/checkall.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs79-phase0/checkall.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/checkall.sh	652	b-repo	overlap 1/9 best data/fs54/environment.md
+fs79-phase0/deep.log	2475	b-repo	overlap 3/44 best data/fs81/phaseD/d47/screen-run-b4.log
+fs79-phase0/deep.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/launch.sh	602	b-repo	overlap 1/6 best data/fs54/environment.md
+fs79-phase0/qpass.log	9777	b-repo	overlap 18/178 best data/fs81/phaseD/d47/screen-run-b5.log
+fs79-phase0/qpass.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/qpass.sh	303	b-repo	overlap 1/4 best data/fs54/environment.md
+fs79-phase0/qpass2.log	18985	b-repo	overlap 28/352 best data/fs81/phaseD/d47/screen-run-b1.log
+fs79-phase0/summ.py	2633	b-repo	overlap 1/34 best tools/m56_rr_defect.py
+fs79-phase0/sweep2520.log	14102	b-repo	overlap 0/87 best
+fs79-phase0/sweep2520.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-phase0/tab-1574123-10000-gap.cnf	11369413	b-disk	overlap binary/skip best
+fs79-plan/check/rank1.py	2134	a	A-head: data/fs79/checks/planner_rank1.py
+fs79-plan/pa/ax.py	1319	b-repo	overlap 3/21 best data/fs85/audit/zbmath_queries.py
+fs79-plan/pa/cgho-bg.txt	124129	b-repo	overlap 0/1416 best
+fs79-plan/pa/cgho-coh.txt	106219	b-repo	overlap 0/1156 best
+fs79-plan/pa/gho.txt	117113	b-repo	overlap 0/1284 best
+fs79-plan/pa/mn.txt	99414	b-repo	overlap 0/772 best
+fs79-plan/pa/mo-a.json	1492	b-repo	overlap 0/1 best
+fs79-plan/pa/mo-ac.json	615	b-repo	overlap 0/1 best
+fs79-plan/pa/mo-q.json	2500	b-repo	overlap 0/1 best
+fs79-plan/pa/mo-qc.json	4807	b-repo	overlap 0/1 best
+fs79-plan/pa/queries-arxiv.jsonl	2609	b-repo	overlap 0/39 best
+fs79-plan/pa/queries.jsonl	2744	b-repo	overlap 0/42 best
+fs79-plan/pa/zb.py	1917	b-repo	overlap 4/26 best data/fs91/j03/zbrev.py
+fs79-poros-comp/BRIEF-Poros.md	49684	a	A-head: data/fs79/briefs/P2-advisor-brief.md
+fs79-poros-comp/POROS-fs79-competition.md	35055	a	A-head: plans/POROS-2026-09-24-fs79-competition.md
+fs79-poros-comp/cgho-coh.txt	106219	b-repo	overlap 0/1156 best
+fs79-poros-comp/held-offer.txt	11042	a	A-head: data/fs79/checks/poros-competition/held-offer.txt
+fs79-poros-comp/p3/cube_parity_ctl.py	2417	a	A-head: data/fs79/checks/poros-competition/p3/cube_parity_ctl.py
+fs79-poros-comp/p3/cube_parityfree.py	3619	a	A-head: data/fs79/checks/poros-competition/p3/cube_parityfree.py
+fs79-poros-comp/pinned-1edge.txt	2861	a	A-head: data/fs79/checks/poros-competition/pinned-1edge.txt
+fs79-poros-plan/HELD-poros-fs79.md	3054	a	A-head: data/fs79/briefs/held-items-poros-plan-HP1-HP3.md
+fs79-poros-plan/POROS-fs79-plan.md	38664	a	A-head: plans/POROS-2026-09-23-fs79-plan.md
+fs79-poros-plan/__pycache__/rank1_bench.cpython-314.pyc	3991	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-poros-plan/__pycache__/rank1_density.cpython-314.pyc	8605	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs79-poros-plan/bench_recheck.py	1218	a	A-head: data/fs79/checks/bench_recheck.py
+fs79-poros-plan/rank1_bench.py	2091	a	A-head: data/fs79/checks/rank1_bench.py
+fs79-poros-plan/rank1_bench_tf.py	577	b-repo	overlap 1/8 best data/fs79/checks/rank1_bench.py
+fs79-poros-plan/rank1_density.py	3492	a	A-head: data/fs79/checks/rank1_density.py
+fs79-poros-plan/rank1_density_scan.py	981	a	A-head: data/fs79/checks/rank1_density_scan.py
+fs79-poros-plan/wall_check.py	3204	a	A-head: data/fs79/checks/wall_check.py
+fs81-close/BRIEF.md	12573	a	A-head: data/fs81/briefs/CL-close-planner-brief.md
+fs81-close/axioms.out	1915	b-repo	overlap 11/19 best data/m2/j15/axioms.log
+fs81-close/build.out	383	b-repo	overlap 0/5 best
+fs81-close/claude_edit1.py	6899	b-repo	overlap 0/57 best
+fs81-close/claude_edit2.py	8031	b-repo	overlap 0/50 best
+fs81-close/claude_edit3.py	7658	b-repo	overlap 29/45 best CLAUDE.md
+fs81-close/claude_edit4.py	7960	b-repo	overlap 0/34 best
+fs81-close/fs-old.md	70304	a	A-history: plans/FRONTIER-STUBS.md
+fs81-close/helpers.py	677	b-repo	overlap 0/10 best
+fs81-close/rerank.py	7880	b-repo	overlap 0/58 best
+fs81-close/rows.md	11092	a	successor (3/3 lines) in LEDGER.md
+fs81-close/tick.py	10923	b-repo	overlap 0/104 best
+fs81-close/vacuity.out	4798	b-repo	overlap 26/35 best data/m2/j14/vacuity.log
+fs81-modeling/BRIEF.md	9863	a	A-head: data/fs81/briefs/B-modeling-brief.md
+fs81-owner/__pycache__/mut_check.cpython-314.pyc	35369	owner	older owner-naming directory: not swept
+fs81-owner/k1-plant-basis-shear-table-unchanged.json	586	owner	older owner-naming directory: not swept
+fs81-owner/k1-plant-sublattice-basis.json	586	owner	older owner-naming directory: not swept
+fs81-owner/k2-faithful.out	989	owner	older owner-naming directory: not swept
+fs81-owner/k2-plant-drop-last-hint-q1.lrat.gz	39761082	owner	older owner-naming directory: not swept
+fs81-owner/k2-plant-drop-last-hint-q2.lrat.gz	39761080	owner	older owner-naming directory: not swept
+fs81-owner/k2-plant-drop-last-hint-q3.lrat.gz	39761076	owner	older owner-naming directory: not swept
+fs81-owner/mut_check.py	19549	owner	older owner-naming directory: not swept
+fs81-owner/mut_selftest.txt	4245	owner	older owner-naming directory: not swept
+fs81-owner/plant.py	1407	owner	older owner-naming directory: not swept
+fs81-owner/plant_vs_mutant.py	1499	owner	older owner-naming directory: not swept
+fs81-owner/slot_mutant_nocap.py	15742	owner	older owner-naming directory: not swept
+fs81-owner/slot_mutant_noledger.py	15722	owner	older owner-naming directory: not swept
+fs81-owner/slotdbg/ledger	0	owner	older owner-naming directory: not swept
+fs81-owner/slotdbg/ledger.lock	0	owner	older owner-naming directory: not swept
+fs81-owner/soifer.txt	1933139	owner	older owner-naming directory: not swept
+fs81-owner/struct_mutant_narrow.py	15860	owner	older owner-naming directory: not swept
+fs81-owner/struct_mutant_selftest.txt	985	owner	older owner-naming directory: not swept
+fs81-phase0/BRIEF.md	14424	a	A-head: data/fs81/briefs/P0-implementer-brief.md
+fs81-phase0/a167-cert.json	786	b-repo	overlap 0/1 best
+fs81-phase0/a167-units.json	328	b-repo	overlap 0/1 best
+fs81-phase0/a167.json	456	b-repo	overlap 0/1 best
+fs81-phase0/c11-cert.json	716745	b-repo	overlap 0/1 best
+fs81-phase0/c167-cert.json	81220	b-repo	overlap 0/1 best
+fs81-phase0/c167-units.json	339	b-repo	overlap 0/1 best
+fs81-phase0/c167.json	474	b-repo	overlap 0/1 best
+fs81-phase0/cmds.txt	169	b-repo	overlap 0/1 best
+fs81-phase0/configs-g2.log	21570	b-repo	overlap 0/33 best
+fs81-phase0/configs-g3.log	18968	b-repo	overlap 0/28 best
+fs81-phase0/configs-g4.log	12860	b-repo	overlap 0/19 best
+fs81-phase0/configs-g5.log	56503	b-repo	overlap 5/99 best tools/fs81_p0.py
+fs81-phase0/configs-g6.log	79036	b-repo	overlap 0/118 best
+fs81-phase0/configs.log	26687	b-repo	overlap 4/57 best tools/fs81_p0.py
+fs81-phase0/configs.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-phase0/controls.log	41979	b-repo	overlap 0/75 best
+fs81-phase0/controls.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-phase0/frozen_mutant_high.out	1249	b-repo	overlap 0/11 best
+fs81-phase0/frozen_mutant_high.py	13267	a	successor (149/150 lines) in tools/fs73v2_check.py
+fs81-phase0/frozen_mutant_low.out	1430	b-repo	overlap 0/11 best
+fs81-phase0/frozen_mutant_low.py	13267	a	successor (149/150 lines) in tools/fs73v2_check.py
+fs81-phase0/m_high.py	20935	a	successor (235/236 lines) in tools/fs81_theta_check.py
+fs81-phase0/m_low.py	20935	a	successor (235/236 lines) in tools/fs81_theta_check.py
+fs81-phase0/mutant_high.out	953	b-repo	overlap 0/9 best
+fs81-phase0/mutant_high.py	20155	a	successor (225/228 lines) in tools/fs81_theta_check.py
+fs81-phase0/mutant_low.out	866	b-repo	overlap 0/8 best
+fs81-phase0/mutant_low.py	20155	a	successor (225/228 lines) in tools/fs81_theta_check.py
+fs81-phase0/p02-children.pids	48	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-phase0/p03-struct.log	5052	b-repo	overlap 0/77 best
+fs81-phase0/p03.log	517	b-repo	overlap 0/2 best
+fs81-phase0/p03.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-phase0/recheck.out	69626	a	A-head: data/fs81/records/phase-P0-recheck.out
+fs81-phase0/selftest.out	4497	b-repo	overlap 0/39 best
+fs81-phase0/selftest2.out	5066	b-repo	overlap 0/39 best
+fs81-phase0/show.py	309	b-repo	overlap 0/2 best
+fs81-phase0/summary.md	12923	a	successor (42/42 lines) in data/fs81/records/phase-P0.md
+fs81-phase0/u11.json	876	b-repo	overlap 0/1 best
+fs81-phase0/xcheck23.log	322	b-repo	overlap 0/2 best
+fs81-phaseD/BRIEF.md	10852	a	A-head: data/fs81/briefs/D-implementer-brief.md
+fs81-phaseD/d1-ids.txt	595	a	A-head: data/fs81/phaseD/d47/screen-ids.txt
+fs81-phaseD/d47/ask-2167511-a.cnf	6093545	b-disk	overlap binary/skip best
+fs81-phaseD/d47/tab-2167510-38416-plain.cnf	82441140	b-disk	overlap binary/skip best
+fs81-phaseD/d47/tab-2167512-38416-plain.cnf	82441140	b-disk	overlap binary/skip best
+fs81-plan/BRIEF.md	18001	a	successor (117/118 lines) in data/fs81/briefs/A-planner-brief.md
+fs81-plan/devos.txt	13034	b-repo	overlap 0/138 best
+fs81-plan/fischer1990.txt	37978	b-repo	overlap 82/472 best data/m2/j17/excerpts/fischer1990-intro.txt
+fs81-plan/soifer.txt	2139000	b-repo	overlap 18/24120 best data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt
+fs81-plan/zb/an0974.json	3114	b-repo	overlap 0/1 best
+fs81-plan/zb/an1506.json	1506	b-repo	overlap 0/1 best
+fs81-plan/zb/ber1.json	320	b-repo	overlap 0/1 best
+fs81-plan/zb/ber2.json	35692	b-repo	overlap 0/1 best
+fs81-plan/zb/ber3.json	2586	b-repo	overlap 0/1 best
+fs81-plan/zb/bohr.json	1607	b-repo	overlap 0/1 best
+fs81-plan/zb/cc1.json	320	b-repo	overlap 0/1 best
+fs81-plan/zb/cc2.json	63943	b-repo	overlap 0/1 best
+fs81-plan/zb/chil.json	24124	b-repo	overlap 0/1 best
+fs81-plan/zb/circ1.json	2753	b-repo	overlap 0/1 best
+fs81-plan/zb/circ2.json	6886	b-repo	overlap 0/1 best
+fs81-plan/zb/dist1.json	320	b-repo	overlap 0/1 best
+fs81-plan/zb/fisch.json	85528	b-repo	overlap 0/1 best
+fs81-plan/zb/fur.json	319	b-repo	overlap 0/1 best
+fs81-plan/zb/jai.json	343692	b-repo	overlap 0/1 best
+fs81-plan/zb/jai2.json	241039	b-repo	overlap 0/1 best
+fs81-plan/zb/jau.json	73635	b-repo	overlap 0/1 best
+fs81-plan/zb/jau2.json	72411	b-repo	overlap 0/1 best
+fs81-plan/zb/lonely.json	31670	b-repo	overlap 0/1 best
+fs81-plan/zb/qf1.json	319	b-repo	overlap 0/1 best
+fs81-plan/zb/qf2.json	317	b-repo	overlap 0/1 best
+fs81-plan/zb/qf3.json	4324	b-repo	overlap 0/1 best
+fs81-plan/zb/qf4.json	3114	b-repo	overlap 0/1 best
+fs81-plan/zb/three.json	319	b-repo	overlap 0/1 best
+fs81-plan/zb/ud1.json	5204	b-repo	overlap 0/1 best
+fs81-plan/zb/ud2.json	21361	b-repo	overlap 0/1 best
+fs81-plan/zb/vo1.json	320	b-repo	overlap 0/1 best
+fs81-plan/zb/wood.json	317	b-repo	overlap 0/1 best
+fs81-plan/zb/zaks.json	22354	b-repo	overlap 0/1 best
+fs81-plan/zq.sh	942	b-repo	overlap 1/11 best data/fs85/comp-debruijn/zq.sh
+fs81-poros-plan/BRIEF.md	11353	a	A-head: data/fs81/briefs/A-poros-plan-brief.md
+fs81-poros-plan/HELD.md	4119	b-repo	overlap 0/35 best
+fs81-poros-plan/POROS-fs81-plan.md	24181	a	A-head: plans/POROS-2026-09-24-fs81-plan.md
+fs81-verifier/BRIEF.md	13911	a	A-head: data/fs81/briefs/C-verifier-brief.md
+fs81-verifier/c4/construct_cert.py	3382	b-repo	overlap 5/42 best tools/fs81_p0.py
+fs81-verifier/c4/d107-B-K2-construct.json	1569	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-A-K1.json	575	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-A-K1.rec.json	324	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-A-K2.json	850	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-A-K2.rec.json	325	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-A-K3-construct.json	1152	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-B-K1.json	609297	b-repo	overlap 0/1 best
+fs81-verifier/c4/d11-B-K1.rec.json	308	b-repo	overlap 0/1 best
+fs81-verifier/c4/d119-A-K2-construct.json	890	b-repo	overlap 0/1 best
+fs81-verifier/c4/d119-A-K2.rec.json	185	b-repo	overlap 0/1 best
+fs81-verifier/c4/d23-A-K1-construct.json	550	b-repo	overlap 0/1 best
+fs81-verifier/c4/d23-A-K1.json	782	b-repo	overlap 0/1 best
+fs81-verifier/c4/d23-A-K1.rec.json	312	b-repo	overlap 0/1 best
+fs81-verifier/c4/d23-A-K2.rec.json	180	b-repo	overlap 0/1 best
+fs81-verifier/c4/d35-A-K3-construct.json	1201	b-repo	overlap 0/1 best
+fs81-verifier/c4/d47-A-K1.json	779	b-repo	overlap 0/1 best
+fs81-verifier/c4/d47-A-K1.rec.json	312	b-repo	overlap 0/1 best
+fs81-verifier/c4/d491-B-K3-construct.json	2559	b-repo	overlap 0/1 best
+fs81-verifier/c4/d527-B-K3-construct.json	2562	b-repo	overlap 0/1 best
+fs81-verifier/c4/d59-A-K2.json	879	b-repo	overlap 0/1 best
+fs81-verifier/c4/d59-A-K2.rec.json	325	b-repo	overlap 0/1 best
+fs81-verifier/c4/k2.log	0	a	A-head: data/fs54/ladder/free-s1.done
+fs81-verifier/c4/k2.pgid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-verifier/c4/k2.pid	8	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs81-verifier/c4/run_trees.py	2022	b-repo	overlap 5/28 best data/fs70/records/phase-1f/arm1c.py
+fs81-verifier/fischer1990.txt	37978	b-repo	overlap 82/472 best data/m2/j17/excerpts/fischer1990-intro.txt
+fs81-verifier/fischer9_check.py	1599	b-repo	overlap 0/15 best
+fs81-verifier/fischer9_plant.py	1552	b-repo	overlap 0/14 best
+fs81-verifier/out/thetaR-band-hi.json	938	b-repo	overlap nolines best
+fs81-verifier/out/thetaR-band-lo.json	938	b-repo	overlap nolines best
+fs81-verifier/out/thetaR-drop-dir.json	1616	b-repo	overlap nolines best
+fs81-verifier/out/thetaR-none.json	1163	b-repo	overlap nolines best
+fs85-C-text.md	14378	a	successor (114/114 lines) in plans/FS85-rigidity-without-triangles.md
+fs85-C2-text.md	1226	a	successor (12/12 lines) in plans/FS85-rigidity-without-triangles.md
+fs85-audit/af2021.html	47314	b-repo	overlap 0/184 best
+fs85-audit/af2022.html	47314	b-repo	overlap 0/184 best
+fs85-audit/af2026.html	56109	c-present	/home/kooshi/source/library/notes/polymath16-algebraic-formulation-2018-snapshot-20260512.html
+fs85-audit/basic.txt	41834	c-text	text extraction of a paper
+fs85-audit/cdx.json	3	b-repo	overlap nolines best
+fs85-audit/cite/1808.09534.pdf	467810	c-pdf	paper PDF not byte-identical to a library file
+fs85-audit/cite/1808.09534.txt	62415	b-repo	overlap 0/616 best
+fs85-audit/cite/1809.00527.pdf	187252	c-pdf	paper PDF not byte-identical to a library file
+fs85-audit/cite/1809.00527.txt	46987	b-repo	overlap 0/521 best
+fs85-audit/cite/1910.14454.pdf	166519	c-pdf	paper PDF not byte-identical to a library file
+fs85-audit/cite/1910.14454.txt	44848	b-repo	overlap 0/452 best
+fs85-audit/cite/2401.12347.pdf	102854	c-present	/home/kooshi/source/library/pdf/arXiv-2401.12347-oravcova-sotak-integer-distance-graphs.pdf
+fs85-audit/cite/2401.12347.txt	16595	b-repo	overlap 0/177 best
+fs85-audit/crop.py	1175	b-repo	overlap 0/17 best
+fs85-audit/fig/fig11.png	500566	render	page/figure render
+fs85-audit/fig/fig12.png	368991	render	page/figure render
+fs85-audit/fig/fig56.png	320105	render	page/figure render
+fs85-audit/fig/p12-000.png	13290	render	page/figure render
+fs85-audit/fig/p12-001.png	340	render	page/figure render
+fs85-audit/fig/p12-002.png	17888	render	page/figure render
+fs85-audit/fig/p12-003.png	358	render	page/figure render
+fs85-audit/fig/p12-004.png	51412	render	page/figure render
+fs85-audit/fig/p12-005.png	505	render	page/figure render
+fs85-audit/fig/p12-006.png	13697	render	page/figure render
+fs85-audit/fig/p12-007.png	255	render	page/figure render
+fs85-audit/fig/p12-008.png	13322	render	page/figure render
+fs85-audit/fig/p12-009.png	255	render	page/figure render
+fs85-audit/fig/p12-010.png	13210	render	page/figure render
+fs85-audit/fig/p12-011.png	255	render	page/figure render
+fs85-audit/fig/p12-012.png	13547	render	page/figure render
+fs85-audit/fig/p12-013.png	255	render	page/figure render
+fs85-audit/fig/p12-014.png	12941	render	page/figure render
+fs85-audit/fig/p12-015.png	255	render	page/figure render
+fs85-audit/fig/p12-016.png	13300	render	page/figure render
+fs85-audit/fig/p12-017.png	255	render	page/figure render
+fs85-audit/fig/p12-018.png	12966	render	page/figure render
+fs85-audit/fig/p12-019.png	255	render	page/figure render
+fs85-audit/fig/p12-020.png	13119	render	page/figure render
+fs85-audit/fig/p12-021.png	255	render	page/figure render
+fs85-audit/fig/p78-000.png	7404	render	page/figure render
+fs85-audit/fig/p78-001.png	255	render	page/figure render
+fs85-audit/fig/p78-002.png	9876	render	page/figure render
+fs85-audit/fig/p78-003.png	255	render	page/figure render
+fs85-audit/fig/p78-004.png	11697	render	page/figure render
+fs85-audit/fig/p78-005.png	255	render	page/figure render
+fs85-audit/fig/p78-006.png	15088	render	page/figure render
+fs85-audit/fig/p78-007.png	255	render	page/figure render
+fs85-audit/fig/p78-008.png	10490	render	page/figure render
+fs85-audit/fig/p78-009.png	255	render	page/figure render
+fs85-audit/fig/p78-010.png	10555	render	page/figure render
+fs85-audit/fig/p78-011.png	255	render	page/figure render
+fs85-audit/fig/p78-012.png	10342	render	page/figure render
+fs85-audit/fig/p78-013.png	255	render	page/figure render
+fs85-audit/fig/p78-014.png	10425	render	page/figure render
+fs85-audit/fig/p78-015.png	255	render	page/figure render
+fs85-audit/img/t4-000.png	6023	render	page/figure render
+fs85-audit/img/t4-001.png	164	render	page/figure render
+fs85-audit/img/t4-002.png	16335	render	page/figure render
+fs85-audit/img/t4-003.png	32939	render	page/figure render
+fs85-audit/img/t4-004.png	682	render	page/figure render
+fs85-audit/img/t4-005.png	125321	render	page/figure render
+fs85-audit/img/t4-006.png	111028	render	page/figure render
+fs85-audit/img/t4-007.png	7746	render	page/figure render
+fs85-audit/img/t4-008.png	200	render	page/figure render
+fs85-audit/img/t4-009.png	65591	render	page/figure render
+fs85-audit/img/t4-010.png	32787	render	page/figure render
+fs85-audit/img/t4-011.png	633	render	page/figure render
+fs85-audit/img/t4-012.png	191804	render	page/figure render
+fs85-audit/img/t4-013.png	47325	render	page/figure render
+fs85-audit/img/t4-014.png	17318	render	page/figure render
+fs85-audit/img/t4-015.png	399	render	page/figure render
+fs85-audit/img/t4-016.png	125966	render	page/figure render
+fs85-audit/img/t4-017.png	11606	render	page/figure render
+fs85-audit/img/t4-018.png	282	render	page/figure render
+fs85-audit/img/t4-019.png	74291	render	page/figure render
+fs85-audit/img/t4-020.png	12914	render	page/figure render
+fs85-audit/img/t4-021.png	305	render	page/figure render
+fs85-audit/img/t4-022.png	105191	render	page/figure render
+fs85-audit/img/t4-023.png	22286	render	page/figure render
+fs85-audit/img/t4-024.png	465	render	page/figure render
+fs85-audit/img/t4-025.png	165712	render	page/figure render
+fs85-audit/img/t4-026.png	70094	render	page/figure render
+fs85-audit/img/t4-027.png	1087	render	page/figure render
+fs85-audit/img/t4-028.png	196994	render	page/figure render
+fs85-audit/img/t4-029.png	215112	render	page/figure render
+fs85-audit/ks.txt	31211	c-text	text extraction of a paper
+fs85-audit/kw.py	723	b-repo	overlap 0/11 best
+fs85-audit/nes.html	13161	b-repo	overlap 0/133 best
+fs85-audit/nes1973.pdf	437509	c-present	/home/kooshi/source/library/pdf/Nesetril1973-uniquely-colorable-graphs-without-short-cycles.pdf
+fs85-audit/nes1973.txt	10419	c-text	text extraction of a paper
+fs85-audit/oa-ks-cites.json	60553	b-repo	overlap 0/1 best
+fs85-audit/oa-ks.json	10789	b-repo	overlap 0/1 best
+fs85-audit/p11-11.png	459173	render	page/figure render
+fs85-audit/parts.txt	34718	c-text	text extraction of a paper
+fs85-audit/s1.png	397936	render	page/figure render
+fs85-audit/s2.png	465364	render	page/figure render
+fs85-audit/s3.png	463452	render	page/figure render
+fs85-audit/s4.png	451472	render	page/figure render
+fs85-audit/s5.png	473282	render	page/figure render
+fs85-audit/s6.png	453193	render	page/figure render
+fs85-audit/s7.png	91381	render	page/figure render
+fs85-audit/zb-full.out	198371	b-repo	overlap 0/768 best
+fs85-audit/zb.out	61507	b-repo	overlap 0/322 best
+fs85-audit/zbmath-raw/q00.json	17583	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q01.json	11127	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q02.json	9139	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q03.json	17217	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q04.json	116133	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q05.json	92127	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q06.json	88660	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q07.json	35223	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q08.json	17394	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q09.json	75478	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q10.json	75482	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q11.json	24880	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q12.json	1165256	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q13.json	338	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q14.json	2454	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q15.json	1950	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q16.json	24684	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q17.json	32934	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q18.json	28137	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q19.json	59042	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q20.json	60266	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q21.json	45614	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q22.json	150394	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q23.json	4919	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q24.json	15273	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q25.json	38404	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q26.json	15132	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q27.json	338	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q28.json	18823	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q29.json	130621	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q30.json	59349	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q31.json	46376	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q32.json	25352	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q33.json	11001	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q34.json	3090	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q35.json	335	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q36.json	75299	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q37.json	20443	b-repo	overlap 0/1 best
+fs85-audit/zbmath-raw/q38.json	89212	b-repo	overlap 0/1 best
+fs85-close/CLAUDE.orig.md	273416	a	A-history: CLAUDE.md
+fs85-close/axioms.log	1907	b-repo	overlap 11/19 best data/m2/j15/axioms.log
+fs85-close/bib.log	280	b-repo	overlap 0/5 best
+fs85-close/build.log	370	b-repo	overlap 1/5 best data/m2/j15/build-stage4.log
+fs85-close/edit_compress1.py	6978	b-repo	overlap 8/55 best CLAUDE.md
+fs85-close/edit_compress2.py	3713	b-repo	overlap 5/35 best CLAUDE.md
+fs85-close/edit_compress3.py	2498	b-repo	overlap 7/21 best CLAUDE.md
+fs85-close/edit_compress4.py	4514	b-repo	overlap 2/20 best CLAUDE.md
+fs85-close/edit_compress5.py	3717	b-repo	overlap 0/21 best
+fs85-close/edit_compress6.py	3519	b-repo	overlap 0/21 best
+fs85-close/edit_frontier.py	10832	b-repo	overlap 0/86 best
+fs85-close/edit_grok.py	5598	b-repo	overlap 3/39 best CLAUDE.md
+fs85-close/edit_grok2.py	4819	b-repo	overlap 7/27 best CLAUDE.md
+fs85-close/tick.py	603	b-repo	overlap 0/9 best
+fs85-close/vac.log	4790	b-repo	overlap 26/35 best data/m2/j14/vacuity.log
+fs85-close/vacst.log	1231	b-repo	overlap 9/13 best data/m2/j14/vacuity-selftest.log
+fs85-comp-coxeter/FS85-C-Coxeter.md	49988	a	A-head: plans/FS85-C-Coxeter.md
+fs85-comp-coxeter/ROUND2-PREAMBLE.md	4421	a	A-head: data/fs85/briefs/C-competitor-brief-coxeter-r2-preamble.md
+fs85-comp-coxeter/basic.txt	41834	b-repo	overlap 0/342 best
+fs85-comp-coxeter/klotz-sander-2017.pdf	261342	c-present	/home/kooshi/source/library/pdf/KlotzSander2017-uniquely-colorable-cayley.pdf
+fs85-comp-coxeter/ks.txt	31211	b-repo	overlap 0/354 best
+fs85-comp-coxeter/owner_C5_count.py	3376	a	A-head: data/fs85/owner-checks/fs85_C5_count.py
+fs85-comp-coxeter/parts.txt	32036	b-repo	overlap 0/411 best
+fs85-comp-coxeter/tools/__pycache__/census.cpython-314.pyc	4388	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/chir.cpython-314.pyc	1714	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/chir2.cpython-314.pyc	2251	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/efield.cpython-314.pyc	9177	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/fast.cpython-314.pyc	2476	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/lp6.cpython-314.pyc	7487	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/part2_rank1.cpython-314.pyc	5531	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/quot64.cpython-314.pyc	3954	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/spectral.cpython-314.pyc	5375	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/spectral5.cpython-314.pyc	3066	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/struct42.cpython-314.pyc	4945	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/__pycache__/zlin.cpython-314.pyc	4445	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-coxeter/tools/alt.py	856	a	A-head: data/fs85/comp-coxeter/tools/alt.py
+fs85-comp-coxeter/tools/alt2.py	1911	a	A-head: data/fs85/comp-coxeter/tools/alt2.py
+fs85-comp-coxeter/tools/analyse1.py	1128	a	A-head: data/fs85/comp-coxeter/tools/analyse1.py
+fs85-comp-coxeter/tools/analyse2.py	433	a	A-head: data/fs85/comp-coxeter/tools/analyse2.py
+fs85-comp-coxeter/tools/analyse3.py	1263	a	A-head: data/fs85/comp-coxeter/tools/analyse3.py
+fs85-comp-coxeter/tools/analyse4.py	818	a	A-head: data/fs85/comp-coxeter/tools/analyse4.py
+fs85-comp-coxeter/tools/census.py	1539	a	A-head: data/fs85/comp-coxeter/tools/census.py
+fs85-comp-coxeter/tools/chir.py	375	a	A-head: data/fs85/comp-coxeter/tools/chir.py
+fs85-comp-coxeter/tools/chir2.py	835	a	A-head: data/fs85/comp-coxeter/tools/chir2.py
+fs85-comp-coxeter/tools/chir5.py	879	a	A-head: data/fs85/comp-coxeter/tools/chir5.py
+fs85-comp-coxeter/tools/efield.py	2923	a	A-head: data/fs85/comp-coxeter/tools/efield.py
+fs85-comp-coxeter/tools/fast.py	652	a	A-head: data/fs85/comp-coxeter/tools/fast.py
+fs85-comp-coxeter/tools/lp2.pkl	436361	b-disk	overlap binary/skip best
+fs85-comp-coxeter/tools/lp2.py	2023	a	A-head: data/fs85/comp-coxeter/tools/lp2.py
+fs85-comp-coxeter/tools/lp3.py	1634	a	A-head: data/fs85/comp-coxeter/tools/lp3.py
+fs85-comp-coxeter/tools/lp4.py	739	a	A-head: data/fs85/comp-coxeter/tools/lp4.py
+fs85-comp-coxeter/tools/lp5.py	1594	a	A-head: data/fs85/comp-coxeter/tools/lp5.py
+fs85-comp-coxeter/tools/lp6.py	1842	a	A-head: data/fs85/comp-coxeter/tools/lp6.py
+fs85-comp-coxeter/tools/lp7.pkl	316447	b-disk	overlap binary/skip best
+fs85-comp-coxeter/tools/lp7.py	2138	a	A-head: data/fs85/comp-coxeter/tools/lp7.py
+fs85-comp-coxeter/tools/pairlinear.py	1247	a	A-head: data/fs85/comp-coxeter/tools/pairlinear.py
+fs85-comp-coxeter/tools/pairlinear2.py	1283	a	A-head: data/fs85/comp-coxeter/tools/pairlinear2.py
+fs85-comp-coxeter/tools/pairlinear3.py	3778	a	A-head: data/fs85/comp-coxeter/tools/pairlinear3.py
+fs85-comp-coxeter/tools/pairlinear3b.py	3436	a	A-head: data/fs85/comp-coxeter/tools/pairlinear3b.py
+fs85-comp-coxeter/tools/part2_circulant.py	2200	a	A-head: data/fs85/comp-coxeter/tools/part2_circulant.py
+fs85-comp-coxeter/tools/part2_rank1.py	2406	a	A-head: data/fs85/comp-coxeter/tools/part2_rank1.py
+fs85-comp-coxeter/tools/patch.py	1092	a	A-head: data/fs85/comp-coxeter/tools/patch.py
+fs85-comp-coxeter/tools/patch2.py	993	a	A-head: data/fs85/comp-coxeter/tools/patch2.py
+fs85-comp-coxeter/tools/pl5.py	1015	a	A-head: data/fs85/comp-coxeter/tools/pl5.py
+fs85-comp-coxeter/tools/plconsequences.py	2658	a	A-head: data/fs85/comp-coxeter/tools/plconsequences.py
+fs85-comp-coxeter/tools/quot64.py	1520	a	A-head: data/fs85/comp-coxeter/tools/quot64.py
+fs85-comp-coxeter/tools/restrict3.py	693	a	A-head: data/fs85/comp-coxeter/tools/restrict3.py
+fs85-comp-coxeter/tools/spectral.py	2344	a	A-head: data/fs85/comp-coxeter/tools/spectral.py
+fs85-comp-coxeter/tools/spectral2.py	577	a	A-head: data/fs85/comp-coxeter/tools/spectral2.py
+fs85-comp-coxeter/tools/spectral3.py	388	a	A-head: data/fs85/comp-coxeter/tools/spectral3.py
+fs85-comp-coxeter/tools/spectral4.py	1266	a	A-head: data/fs85/comp-coxeter/tools/spectral4.py
+fs85-comp-coxeter/tools/spectral5.py	986	a	A-head: data/fs85/comp-coxeter/tools/spectral5.py
+fs85-comp-coxeter/tools/spectrum.py	1257	a	A-head: data/fs85/comp-coxeter/tools/spectrum.py
+fs85-comp-coxeter/tools/struct42.py	1143	a	A-head: data/fs85/comp-coxeter/tools/struct42.py
+fs85-comp-coxeter/tools/sub5.py	1814	a	A-head: data/fs85/comp-coxeter/tools/sub5.py
+fs85-comp-coxeter/tools/task0.py	3754	a	A-head: data/fs85/comp-coxeter/tools/task0.py
+fs85-comp-coxeter/tools/zlin.py	1458	a	A-head: data/fs85/comp-coxeter/tools/zlin.py
+fs85-comp-debruijn/FS85-C-deBruijn.md	47895	a	A-head: plans/FS85-C-deBruijn.md
+fs85-comp-debruijn/basic.txt	41834	b-repo	overlap 0/342 best
+fs85-comp-debruijn/parts.txt	34718	b-repo	overlap 0/477 best
+fs85-comp-debruijn/tools/Lquot.py	2211	a	A-head: data/fs85/comp-debruijn/tools/Lquot.py
+fs85-comp-debruijn/tools/Lsub.py	2568	a	A-head: data/fs85/comp-debruijn/tools/Lsub.py
+fs85-comp-debruijn/tools/__pycache__/classes.cpython-314.pyc	6439	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-debruijn/tools/__pycache__/lam.cpython-314.pyc	7613	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-debruijn/tools/__pycache__/task0.cpython-314.pyc	9560	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-debruijn/tools/__pycache__/twoadic.cpython-314.pyc	4027	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs85-comp-debruijn/tools/anatomy.py	2224	a	A-head: data/fs85/comp-debruijn/tools/anatomy.py
+fs85-comp-debruijn/tools/classes.py	1984	a	A-head: data/fs85/comp-debruijn/tools/classes.py
+fs85-comp-debruijn/tools/g3.py	1960	a	A-head: data/fs85/comp-debruijn/tools/g3.py
+fs85-comp-debruijn/tools/gapA.py	2009	a	A-head: data/fs85/comp-debruijn/tools/gapA.py
+fs85-comp-debruijn/tools/gapA2.py	2583	a	A-head: data/fs85/comp-debruijn/tools/gapA2.py
+fs85-comp-debruijn/tools/lam.py	3095	a	A-head: data/fs85/comp-debruijn/tools/lam.py
+fs85-comp-debruijn/tools/periods.py	1457	a	A-head: data/fs85/comp-debruijn/tools/periods.py
+fs85-comp-debruijn/tools/route1.py	3617	a	A-head: data/fs85/comp-debruijn/tools/route1.py
+fs85-comp-debruijn/tools/spectrum.py	3158	a	A-head: data/fs85/comp-debruijn/tools/spectrum.py
+fs85-comp-debruijn/tools/stripes_read.py	2003	a	A-head: data/fs85/comp-debruijn/tools/stripes_read.py
+fs85-comp-debruijn/tools/task0.py	5148	a	A-head: data/fs85/comp-debruijn/tools/task0.py
+fs85-comp-debruijn/tools/task0_rot.py	2946	a	A-head: data/fs85/comp-debruijn/tools/task0_rot.py
+fs85-comp-debruijn/tools/torus_probe.py	1741	a	A-head: data/fs85/comp-debruijn/tools/torus_probe.py
+fs85-comp-debruijn/tools/twoadic.py	1905	a	A-head: data/fs85/comp-debruijn/tools/twoadic.py
+fs85-comp-debruijn/tools/weights_probe.py	1797	a	A-head: data/fs85/comp-debruijn/tools/weights_probe.py
+fs85-comp-debruijn/zq.json	1718	a	A-head: data/fs85/comp-debruijn/zq.json
+fs85-comp-debruijn/zq.sh	1044	a	A-head: data/fs85/comp-debruijn/zq.sh
+fs85-plan/BRIEF.md	12901	a	successor (102/103 lines) in data/fs85/briefs/A-planner-brief.md
+fs85-plan/basic.pdf	367177	c-present	/home/kooshi/source/library/pdf/arXiv-2609.03184-basic-uniquely-colorable-cayley.pdf
+fs85-plan/basic.txt	41834	b-repo	overlap 0/342 best
+fs85-plan/commit-msg.txt	1580	b-repo	overlap 0/3 best
+fs85-plan/commit-msg2.txt	1385	b-repo	overlap 0/3 best
+fs85-plan/haug.txt	17646	b-repo	overlap 0/146 best
+fs85-plan/zb/last.json	337	b-repo	overlap 0/1 best
+fs85-plan/zb/q.py	1041	b-repo	overlap 1/14 best data/fs85/comp-debruijn/zq.sh
+fs85-poros-comp/BRIEF-draft.md	20351	a	successor (129/129 lines) in data/fs85/briefs/C-advisor-brief.md
+fs85-poros-comp/BRIEF.md	24875	a	A-head: data/fs85/briefs/C-advisor-brief.md
+fs85-poros-comp/HELD-plan-advisor.md	13361	a	A-history: data/fs85/held/HELD-plan-advisor.md
+fs85-poros-comp/POROS-fs85-competition.md	66570	a	A-head: plans/POROS-2026-09-24-fs85-competition.md
+fs85-poros-comp/ROUND2-PREAMBLE.md	3236	a	A-head: data/fs85/briefs/C-advisor-r2-preamble.md
+fs85-poros-comp/card-C1-both.txt	7838	a	A-head: data/fs85/poros-comp/card-C1-both.txt
+fs85-poros-comp/chk_c6.py	2145	a	A-head: data/fs85/poros-comp/chk_c6.py
+fs85-poros-comp/chk_c8.py	2111	a	A-head: data/fs85/poros-comp/chk_c8.py
+fs85-poros-comp/chk_db7.gp	654	a	A-head: data/fs85/poros-comp/chk_db7.gp
+fs85-poros-comp/chk_db9_smith.py	1670	a	A-head: data/fs85/poros-comp/chk_db9_smith.py
+fs85-poros-comp/chk_g481.py	2440	a	A-head: data/fs85/poros-comp/chk_g481.py
+fs85-poros-comp/chk_g481_rot.py	1480	a	A-head: data/fs85/poros-comp/chk_g481_rot.py
+fs85-poros-comp/chk_parts_lattice.py	1415	a	A-head: data/fs85/poros-comp/chk_parts_lattice.py
+fs85-poros-comp/chk_r2c1.py	1084	a	A-head: data/fs85/poros-comp/chk_r2c1.py
+fs85-poros-comp/parts-hv.txt	34718	b-repo	overlap 0/477 best
+fs85-poros-plan/BRIEF.md	7749	a	A-head: data/fs85/briefs/A-poros-plan-brief.md
+fs85-poros-plan/HELD.md	13361	a	A-history: data/fs85/held/HELD-plan-advisor.md
+fs85-poros-plan/POROS-fs85-plan.md	21570	a	A-head: plans/POROS-2026-09-24-fs85-plan.md
+fs85-verifier/BRIEF.md	13050	a	A-head: data/fs85/briefs/V-verifier-brief.md
+fs85-verifier/RECORD.md	39242	a	A-history: plans/FS85-V-verification.md
+fs85-verifier/adversary.py	3418	a	A-head: data/fs85/verifier/adversary.py
+fs85-verifier/basics.py	1989	a	A-head: data/fs85/verifier/basics.py
+fs85-verifier/checks1.py	1636	a	A-head: data/fs85/verifier/checks1.py
+fs85-verifier/checks2.py	2747	a	A-head: data/fs85/verifier/checks2.py
+fs85-verifier/field.py	4012	a	A-head: data/fs85/verifier/field.py
+fs85-verifier/g481.py	2868	a	A-head: data/fs85/verifier/g481.py
+fs85-verifier/lattice.py	3211	a	A-head: data/fs85/verifier/lattice.py
+fs85-verifier/lemmaX_detail.py	1195	a	A-head: data/fs85/verifier/lemmaX_detail.py
+fs85-verifier/lemmaX_lines.py	3494	a	A-head: data/fs85/verifier/lemmaX_lines.py
+fs85-verifier/p15-15.png	130704	render	page/figure render
+fs85-verifier/parts.txt	34718	b-repo	overlap 0/477 best
+fs85-verifier/prop7_points.py	3962	a	A-head: data/fs85/verifier/prop7_points.py
+fs85-verifier/t4-000.png	6023	render	page/figure render
+fs85-verifier/t4-001.png	164	render	page/figure render
+fs85-verifier/t4-002.png	16335	render	page/figure render
+fs85-verifier/t4-003.png	32939	render	page/figure render
+fs85-verifier/t4-004.png	682	render	page/figure render
+fs85-verifier/t4-005.png	125321	render	page/figure render
+fs85-verifier/treeS.py	1582	a	A-head: data/fs85/verifier/treeS.py
+fs85-verifier/v1_enum.py	2852	a	A-head: data/fs85/verifier/v1_enum.py
+fs85-verifier/v3.py	1263	a	A-head: data/fs85/verifier/v3.py
+fs85-verifier/v4.py	1945	a	A-head: data/fs85/verifier/v4.py
+fs86-close/CLAUDE.pre-table.md	282164	a	successor (1878/1962 lines) in CLAUDE.md
+fs86-close/__pycache__/wsr.cpython-314.pyc	1220	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-close/axioms.log	1915	b-repo	overlap 11/19 best data/m2/j15/axioms.log
+fs86-close/build.log	370	b-repo	overlap 1/5 best data/m2/j15/build-stage4.log
+fs86-close/cm1.py	2503	b-repo	overlap 0/17 best
+fs86-close/cm2.py	4600	b-repo	overlap 0/20 best
+fs86-close/cm3.py	3625	b-repo	overlap 0/22 best
+fs86-close/cm4.py	2883	b-repo	overlap 0/11 best
+fs86-close/cm5.py	5027	b-repo	overlap 0/31 best
+fs86-close/cm6.py	1797	b-repo	overlap 0/15 best
+fs86-close/fails.txt	1171	b-repo	overlap 0/34 best
+fs86-close/fs.py	6803	b-repo	overlap 0/33 best
+fs86-close/ledgerB.py	11219	b-repo	overlap 0/73 best
+fs86-close/rows.py	16963	b-repo	overlap 0/39 best
+fs86-close/soifer.txt	1933139	b-repo	overlap 17/23026 best data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt
+fs86-close/tbl.py	1221	b-repo	overlap 0/17 best
+fs86-close/tick.py	5968	b-repo	overlap 0/42 best
+fs86-close/vac.log	4798	b-repo	overlap 26/35 best data/m2/j14/vacuity.log
+fs86-close/wsr.py	331	b-repo	overlap 0/6 best
+fs86-comp-coxeter/FS86-C-Coxeter.md	66127	a	A-history: plans/FS86-C-Coxeter.md
+fs86-comp-coxeter/SUCCESSOR-PREAMBLE.md	6050	a	A-head: data/fs86/comp-coxeter/SUCCESSOR-PREAMBLE.md
+fs86-comp-coxeter/bmk.txt	59305	b-repo	overlap 0/564 best
+fs86-comp-coxeter/c14/hyperbola_hoffman.py	1558	a	A-head: data/fs86/comp-coxeter/c14/hyperbola_hoffman.py
+fs86-comp-coxeter/cs2/__pycache__/exact.cpython-314.pyc	7896	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-comp-coxeter/cs2/__pycache__/tower.cpython-314.pyc	9983	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-comp-coxeter/cs2/exact.py	2929	a	A-head: data/fs86/comp-coxeter/cs2/exact.py
+fs86-comp-coxeter/cs2/hmin.py	1614	a	A-head: data/fs86/comp-coxeter/cs2/hmin.py
+fs86-comp-coxeter/cs2/mexp.py	2483	a	A-head: data/fs86/comp-coxeter/cs2/mexp.py
+fs86-comp-coxeter/cs2/sqrt3.py	1431	a	A-head: data/fs86/comp-coxeter/cs2/sqrt3.py
+fs86-comp-coxeter/cs2/tower.py	4377	a	A-head: data/fs86/comp-coxeter/cs2/tower.py
+fs86-comp-coxeter/madore.txt	55903	b-repo	overlap 152/592 best data/m2/j17/excerpts/madore2015-p5.1-5.4.txt
+fs86-comp-coxeter/zhang.txt	28676	b-repo	overlap 0/306 best
+fs86-comp-debruijn/1605.05929.pdf	648434	c-present	/home/kooshi/source/library/pdf/arXiv-1605.05929-kari-szabados-nivat-algebraic.pdf
+fs86-comp-debruijn/1605.05929.txt	105546	b-repo	overlap 0/1153 best
+fs86-comp-debruijn/2301.05232.pdf	316401	c-present	/home/kooshi/source/library/pdf/arXiv-2301.05232-herva-kari-perfect-colorings.pdf
+fs86-comp-debruijn/2301.05232.txt	86935	b-repo	overlap 0/889 best
+fs86-comp-debruijn/2409.14948.pdf	385658	c-present	/home/kooshi/source/library/pdf/arXiv-2409.14948-herva-kari-periodic-decompositions.pdf
+fs86-comp-debruijn/FS86-C-deBruijn.md	83027	a	A-history: plans/FS86-C-deBruijn.md
+fs86-comp-debruijn/SUCCESSOR-PREAMBLE.md	7596	a	A-head: data/fs86/comp-debruijn/SUCCESSOR-PREAMBLE.md
+fs86-comp-debruijn/cs2_tower.py	3251	a	A-head: data/fs86/comp-debruijn/cs2_tower.py
+fs86-comp-debruijn/nonreal_fields.py	897	a	A-head: data/fs86/comp-debruijn/nonreal_fields.py
+fs86-plan/__pycache__/units.cpython-314.pyc	4614	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-plan/__pycache__/units_fast.cpython-314.pyc	3916	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-plan/bib.out	280	b-repo	overlap 0/5 best
+fs86-plan/cover59.py	398	a	A-head: data/fs86/stageA/cover59.py
+fs86-plan/grr2017.txt	76335	b-repo	overlap 0/930 best
+fs86-plan/grr2020.txt	126110	b-repo	overlap 0/1497 best
+fs86-plan/hoff59.py	846	a	A-head: data/fs86/stageA/hoff59.py
+fs86-plan/index.py	924	a	A-head: data/fs86/stageA/index.py
+fs86-plan/inert.py	1135	a	A-head: data/fs86/stageA/inert.py
+fs86-plan/profile.py	1459	a	A-head: data/fs86/stageA/profile.py
+fs86-plan/q1.txt	775	b-repo	overlap 0/17 best
+fs86-plan/q2.txt	694	b-repo	overlap 0/15 best
+fs86-plan/q3.txt	200	b-repo	overlap 0/5 best
+fs86-plan/q4.txt	159	b-repo	overlap 0/3 best
+fs86-plan/rich.py	1942	a	A-head: data/fs86/stageA/rich.py
+fs86-plan/soifer.txt	2139000	b-repo	overlap 18/24120 best data/m2/j17/excerpts/soifer2024-ch11-OP11.1.txt
+fs86-plan/spec_checks.py	766	a	A-head: data/fs86/stageA/spec_checks.py
+fs86-plan/units.py	1655	a	A-head: data/fs86/stageA/units.py
+fs86-plan/units_fast.py	1427	a	A-head: data/fs86/stageA/units_fast.py
+fs86-plan/zb.py	1053	b-repo	overlap 0/12 best
+fs86-plan/zbfull.py	805	b-repo	overlap 0/9 best
+fs86-poros-comp/POROS-fs86-competition.md	43185	a	A-head: plans/POROS-2026-09-25-fs86-competition.md
+fs86-poros-comp/card-S2.txt	2234	a	A-head: data/fs86/held/card-S2.txt
+fs86-poros-comp/held-release.txt	5564	a	A-head: data/fs86/held/held-release.txt
+fs86-poros-plan/HELD.md	6743	a	A-head: data/fs86/held/HELD-plan-advisor.md
+fs86-poros-plan/POROS-fs86-plan.md	18822	a	A-head: plans/POROS-2026-09-25-fs86-plan.md
+fs86-poros-plan/chk.gp	611	a	A-head: data/fs86/poros-plan/chk.gp
+fs86-v-c/VERIFIER-C.md	30493	a	A-head: plans/FS86-V-C-verification.md
+fs86-v-c/zhang.txt	28676	b-repo	overlap 0/306 best
+fs86-v-d/VERIFIER-D.md	36680	a	A-head: plans/FS86-V-D-verification.md
+fs86-v-d/__pycache__/gamma27.cpython-314.pyc	6235	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs86-v-d/gamma27.out	508	a	A-head: data/fs86/v-d/gamma27.out
+fs86-v-d/gamma27.py	2836	a	A-head: data/fs86/v-d/gamma27.py
+fs86-v-d/k.txt	126169	b-repo	overlap 0/1462 best
+fs86-v-d/kuhlmann-tame-1304.0194.pdf	482051	c-present	/home/kooshi/source/library/pdf/arXiv-1304.0194-kuhlmann-tame-valued-fields.pdf
+fs86-v-d/vdc_709.gp	880	a	A-head: data/fs86/v-d/vdc_709.gp
+fs86-v-d/vdc_check2.gp	1292	a	A-head: data/fs86/v-d/vdc_check2.gp
+fs86-v-d/vdc_counterexample.gp	1828	a	A-head: data/fs86/v-d/vdc_counterexample.gp
+fs86-v-w/VERIFIER-W.md	41391	a	A-head: plans/FS86-V-W-verification.md
+fs86-v-w/wa_check.gp	1047	a	A-head: data/fs86/v-w/wa_check.gp
+fs86-v-w/wc0_check.py	2491	a	A-head: data/fs86/v-w/wc0_check.py
+fs86-v-x/VERIFIER-X.md	31901	a	A-head: plans/FS86-V-X-verification.md
+fs86-v-x/jp_check.py	7784	a	A-head: data/fs86/v-x/jp_check.py
+fs89-close/CLAUDE.md.orig	274970	a	A-history: CLAUDE.md
+fs89-close/edit1.py	5250	b-repo	overlap 4/27 best CLAUDE.md
+fs89-close/edit2.py	9276	b-repo	overlap 2/49 best CLAUDE.md
+fs89-close/edit3.py	1641	b-repo	overlap 0/13 best
+fs89-close/edit4.py	1328	b-repo	overlap 0/11 best
+fs89-close/fails.txt	432	b-repo	overlap 0/11 best
+fs89-close/lost.txt	17	b-repo	overlap nolines best
+fs89-close2/__pycache__/zq.cpython-314.pyc	3214	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs89-close2/axioms.log	1915	b-repo	overlap 11/19 best data/m2/j15/axioms.log
+fs89-close2/build.log	370	b-repo	overlap 1/5 best data/m2/j15/build-stage4.log
+fs89-close2/fs_head.md	83096	a	A-history: plans/FRONTIER-STUBS.md
+fs89-close2/oa.py	1379	b-repo	overlap 1/16 best data/fs91/j03/zbrev.py
+fs89-close2/vac.log	4798	b-repo	overlap 26/35 best data/m2/j14/vacuity.log
+fs89-close2/vacst.log	1302	b-repo	overlap 9/14 best data/m2/j14/vacuity-selftest.log
+fs89-close2/zq.py	1263	b-repo	overlap 4/17 best data/fs91/j03/zb.py
+fs89-close2/zr.py	356	b-repo	overlap 0/6 best
+fs89-close3/__pycache__/rep.cpython-314.pyc	1086	d	junk by type (bytecode, pid file, git internals, vendored source)
+fs89-close3/audit.txt	20938	b-repo	overlap 0/187 best
+fs89-close3/bcheck.txt	567	b-repo	overlap 0/2 best
+fs89-close3/bib.py	10322	b-repo	overlap 0/87 best
+fs89-close3/dupes.txt	934	b-repo	overlap 0/12 best
+fs89-close3/fs.py	2679	b-repo	overlap 0/21 best
+fs89-close3/notes.py	6146	b-repo	overlap 0/58 best
+fs89-close3/rep.py	438	b-repo	overlap 0/5 best
+fs89-close3/stub.py	6665	b-repo	overlap 0/56 best
+fs89-pa-berend/b83.txt	71464	c-text	text extraction of a paper
+fs89-pa-berend/berend.txt	111860	c-text	text extraction of a paper
+fs89-pa-berend/pg-01.png	221903	render	page/figure render
+fs89-pa-berend/pg-02.png	272633	render	page/figure render
+fs89-pa-berend/pg-03.png	227903	render	page/figure render
+fs89-pa-berend/pg-04.png	203636	render	page/figure render
+fs89-pa-berend/pg-05.png	258677	render	page/figure render
+fs89-pa-berend/pg-06.png	223778	render	page/figure render
+fs89-pa-berend/pg-07.png	256472	render	page/figure render
+fs89-pa-berend/pg-08.png	246607	render	page/figure render
+fs89-pa-berend/pg-09.png	231053	render	page/figure render
+fs89-pa-berend/pg-10.png	230138	render	page/figure render
+fs89-pa-berend/pg-11.png	196794	render	page/figure render
+fs89-pa-berend/pg-12.png	228479	render	page/figure render
+fs89-pa-berend/pg-13.png	262053	render	page/figure render
+fs89-pa-berend/pg-14.png	202101	render	page/figure render
+fs89-pa-berend/pg-15.png	194148	render	page/figure render
+fs89-pa-berend/pg-16.png	163653	render	page/figure render
+fs89-pa-berend/pg-17.png	269780	render	page/figure render
+fs89-pa-berend/pg-18.png	192404	render	page/figure render
+fs89-pa-berend/pg-19.png	262327	render	page/figure render
+fs89-pa-berend/pg-20.png	230809	render	page/figure render
+fs89-pa-berend/pg-21.png	235333	render	page/figure render
+fs89-pa-berend/pg-22.png	226452	render	page/figure render
+fs89-pa-berend/pg-23.png	218133	render	page/figure render
+fs89-pa-berend/pg-24.png	298925	render	page/figure render
+fs89-pa-berend/pg-25.png	257323	render	page/figure render
+fs89-pa-berend/pg-26.png	247337	render	page/figure render
+fs89-pa-berend/pg-27.png	289319	render	page/figure render
+fs89-pa-berend/pg-28.png	223031	render	page/figure render
+fs89-pa-berend/pg-29.png	274241	render	page/figure render
+fs89-pa-berend/pg-30.png	261969	render	page/figure render
+fs89-pa-berend/pg-31.png	240577	render	page/figure render
+fs89-pa-berend/q83-01.png	227643	render	page/figure render
+fs89-pa-berend/q83-02.png	289006	render	page/figure render
+fs89-pa-berend/q83-03.png	270397	render	page/figure render
+fs89-pa-berend/q83-04.png	240132	render	page/figure render
+fs89-pa-berend/q83-05.png	258528	render	page/figure render
+fs89-pa-berend/q83-06.png	221143	render	page/figure render
+fs89-pa-berend/q83-07.png	191542	render	page/figure render
+fs89-pa-berend/q83-08.png	224955	render	page/figure render
+fs89-pa-berend/q83-09.png	238199	render	page/figure render
+fs89-pa-berend/q83-10.png	214639	render	page/figure render
+fs89-pa-berend/q83-11.png	211100	render	page/figure render
+fs89-pa-berend/q83-12.png	235709	render	page/figure render
+fs89-pa-berend/q83-13.png	266273	render	page/figure render
+fs89-pa-berend/q83-14.png	233190	render	page/figure render
+fs89-pa-berend/q83-15.png	192952	render	page/figure render
+fs89-pa-berend/q83-16.png	232644	render	page/figure render
+fs89-pa-berend/q83-17.png	247340	render	page/figure render
+fs89-pa-berend/q83-18.png	164270	render	page/figure render
+fs89-pa-berend/q83-19.png	248702	render	page/figure render
+fs89-pa-berend/q83-20.png	235572	render	page/figure render
+fs89-pa-berend/q83-21.png	239701	render	page/figure render
+fs89-pa-berend/q83-22.png	279451	render	page/figure render
+fs89-pa-berend/q83-23.png	281167	render	page/figure render
+fs89-pa-berend/q83-24.png	257209	render	page/figure render
+fs89-pa-furst/berend-etds.txt	29935	c-text	text extraction of a paper
+fs89-pa-furst/furst.txt	152334	c-text	text extraction of a paper
+fs89-pa-furst/p-45.png	146437	render	page/figure render
+fs89-pa-furst/p45-prop.png	62732	render	page/figure render
+fs89-pa-furst/p45-prop2.png	34768	render	page/figure render
+fs89-pa-furst/p49-bib.png	76085	render	page/figure render
+fs89-pa-furst/q-45.png	127288	render	page/figure render
+fs89-pa-furst/r-47.png	148949	render	page/figure render
+fs89-pa-furst/r-48.png	157848	render	page/figure render
+fs89-pa-furst/s-49.png	103108	render	page/figure render
+fs89-plan/ax.py	699	b-repo	overlap 0/10 best
+fs89-plan/ax.xml	0	a	A-head: data/fs54/ladder/free-s1.done
+fs89-plan/berend-min.txt	29935	b-repo	overlap 0/313 best
+fs89-plan/hm.txt	33172	b-repo	overlap 0/382 best
+fs89-plan/t.pdf	5618	d	an HTML error page saved as .pdf
+fs89-plan/tran280.html	5416	b-repo	overlap 0/1 best
+fs89-plan/zb.py	1252	b-repo	overlap 0/16 best
+g1	280	b-repo	overlap 0/5 best
+g2	558	b-repo	overlap 0/2 best
+g27.gp	624	a	A-head: tools/crunch_j11_q27.gp
+g3	19127	b-repo	overlap 0/177 best
+g4	934	b-repo	overlap 0/12 best
+g5	5796	b-repo	overlap 0/26 best
+j01/addsec.py	4261	a	successor (36/42 lines) in plans/FS91-S0V-band-to-nine.md
+j01/b84.txt	111860	b-repo	overlap 0/1154 best
+k1.gp	750	a	A-head: data/fs91/j09/k1-pari.gp
+k2.log	1092	b-repo	overlap 0/14 best
+k3.log	205	b-repo	overlap 0/3 best
+k3s.log	169	b-repo	overlap 0/3 best
+km.txt	259344	c-text	text extraction of a paper
+lb.out	558	b-repo	overlap 0/2 best
+ledger82.txt	46824	a	successor (16/16 lines) in LEDGER.md
+libtxt/1-s2.0-0012365X88900490-main.txt	6135	c-text	text extraction of a paper
+libtxt/1-s2.0-0012365X9090033E-main.txt	10207	c-text	text extraction of a paper
+libtxt/1-s2.0-0012365X9090324B-main.txt	33555	c-text	text extraction of a paper
+libtxt/1-s2.0-0012365X93904818-main.txt	15741	c-text	text extraction of a paper
+libtxt/Berend1983-multi-invariant-sets-on-tori.txt	65516	c-text	text extraction of a paper
+libtxt/Berend1984-minimal-sets-on-tori.txt	24072	c-text	text extraction of a paper
+libtxt/Berend1984-multi-invariant-sets-compact-abelian-groups.txt	85257	c-text	text extraction of a paper
+libtxt/DeVosEtAl2007-circular-coloring-the-plane.txt	10373	c-text	text extraction of a paper
+libtxt/Furstenberg1967-disjointness-ergodic-theory-minimal-sets.txt	141100	c-text	text extraction of a paper
+libtxt/GreenwellLovasz1974-applications-of-product-colouring.txt	6	c-text	text extraction of a paper
+libtxt/HaynesMunday2013-arXiv-1303.1661.txt	23606	c-text	text extraction of a paper
+libtxt/KechrisMarks-descriptive-graph-combinatorics-2020.txt	236876	c-text	text extraction of a paper
+libtxt/KlotzSander2017-uniquely-colorable-cayley.txt	27570	c-text	text extraction of a paper
+libtxt/LaroseTardif2002-projectivity-independent-sets-powers-of-graphs.txt	21294	c-text	text extraction of a paper
+libtxt/Nesetril1973-uniquely-colorable-graphs-without-short-cycles.txt	9740	c-text	text extraction of a paper
+libtxt/Tardif2023-product-5-chromatic-graphs-can-be-4.txt	15414	c-text	text extraction of a paper
+libtxt/arXiv-0707.1177.txt	15843	c-text	text extraction of a paper
+libtxt/arXiv-0711.3508-vinh-explicit-ramsey-finite-euclidean.txt	30962	c-text	text extraction of a paper
+libtxt/arXiv-0712.3079-gvozdenovic-laurent-vallentin-block-diagonal-hierarchies.txt	31339	c-text	text extraction of a paper
+libtxt/arXiv-0801.1059-bachoc-nebe-oliveira-vallentin-lower-bounds-measurable-chromatic.txt	42726	c-text	text extraction of a paper
+libtxt/arXiv-0804.3036-hart-iosevich-koh-senger-uriartetuero-distance-graphs-coloring.txt	46075	c-text	text extraction of a paper
+libtxt/arXiv-0807.2689-vinh-kaleidoscopic-finite-euclidean.txt	16365	c-text	text extraction of a paper
+libtxt/arXiv-0808.1822-oliveira-vallentin-fourier-lp-distance-avoiding.txt	28082	c-text	text extraction of a paper
+libtxt/arXiv-1003.2588.txt	85573	c-text	text extraction of a paper
+libtxt/arXiv-1005.0658-wei-sum-of-two-integral-squares.txt	34185	c-text	text extraction of a paper
+libtxt/arXiv-1005.4959-gijswijt-mittelmann-schrijver-quadruple-code-bounds.txt	34350	c-text	text extraction of a paper
+libtxt/arXiv-1007.0797-zhang-independent-sets-direct-products.txt	19945	c-text	text extraction of a paper
+libtxt/arXiv-1007.2905-bachoc-gijswijt-schrijver-vallentin-invariant-sdp.txt	121903	c-text	text extraction of a paper
+libtxt/arXiv-1111.1015.txt	66656	c-text	text extraction of a paper
+libtxt/arXiv-1206.1934.txt	42285	c-text	text extraction of a paper
+libtxt/arXiv-1301.1054-bachoc-decorte-oliveira-vallentin-spectral-bounds-operator.txt	51627	c-text	text extraction of a paper
+libtxt/arXiv-1304.0194-kuhlmann-tame-valued-fields.txt	126169	c-text	text extraction of a paper
+libtxt/arXiv-1306.6050-schneider-silva.txt	29723	c-text	text extraction of a paper
+libtxt/arXiv-1308.5173-harangi-virag-independence-ratio-random-eigenvectors.txt	67469	c-text	text extraction of a paper
+libtxt/arXiv-1501.00168-keleti-matolcsi-oliveira-ruzsa-planar-sets-avoiding-unit-distances.txt	44452	c-text	text extraction of a paper
+libtxt/arXiv-1501.01647.txt	54717	c-text	text extraction of a paper
+libtxt/arXiv-1507.05300-bardestani-mallahi-karai-generalization-hadwiger-nelson.txt	41753	c-text	text extraction of a paper
+libtxt/arXiv-1507.05300-generalization-hadwiger-nelson.txt	41753	c-text	text extraction of a paper
+libtxt/arXiv-1509.03667.txt	17159	c-text	text extraction of a paper
+libtxt/arXiv-1509.07023-madore-hadwiger-nelson-over-fields.txt	49162	c-text	text extraction of a paper
+libtxt/arXiv-1511.02427-bardestani-mallahi-karai-structured-cayley-graphs.txt	36744	c-text	text extraction of a paper
+libtxt/arXiv-1512.04972.txt	67579	c-text	text extraction of a paper
+libtxt/arXiv-1601.04551-wrochna-square-free-graphs-are-multiplicative.txt	86228	c-text	text extraction of a paper
+libtxt/arXiv-1602.02531-litjens-polak-schrijver-nonbinary-quadruples.txt	30519	c-text	text extraction of a paper
+libtxt/arXiv-1605.05929-kari-szabados-nivat-algebraic.txt	84291	c-text	text extraction of a paper
+libtxt/arXiv-1701.06024-bardestani-mallahi-karai-polynomial-configurations-local-fields.txt	68196	c-text	text extraction of a paper
+libtxt/arXiv-1709.07317-baake-zeiner-geometric-enumeration.txt	226313	c-text	text extraction of a paper
+libtxt/arXiv-1801.08243-godsil-roberson-rooney-samal-varvitsiotis-vector-coloring-categorical-product.txt	111486	c-text	text extraction of a paper
+libtxt/arXiv-1801.08243.txt	111486	c-text	text extraction of a paper
+libtxt/arXiv-1802.06460.txt	28468	c-text	text extraction of a paper
+libtxt/arXiv-1804.09099-decorte-oliveira-vallentin-complete-positivity.txt	166532	c-text	text extraction of a paper
+libtxt/arXiv-1805.00157-exoo-ismailescu.txt	22554	c-text	text extraction of a paper
+libtxt/arXiv-1812.06045-delaat-machado-oliveira-vallentin-k-point-equiangular.txt	69212	c-text	text extraction of a paper
+libtxt/arXiv-1812.10725-chamizo-miatello-sums-of-squares.txt	52654	c-text	text extraction of a paper
+libtxt/arXiv-1903.11685-alon-briceno-chandgotia-magazinov-mixing.txt	38131	c-text	text extraction of a paper
+libtxt/arXiv-1907.00929-heule-529-trimming.txt	39601	c-text	text extraction of a paper
+libtxt/arXiv-1907.09751-dutour-madore-moustrou-vallentin-coloring-voronoi-lattices.txt	117855	c-text	text extraction of a paper
+libtxt/arXiv-1908.03880.txt	49313	c-text	text extraction of a paper
+libtxt/arXiv-1909.02708-manta-triangle-colorings-seven.txt	28346	c-text	text extraction of a paper
+libtxt/arXiv-1909.13177-exoo-ismailescu-6chromatic-two-distance.txt	11610	c-text	text extraction of a paper
+libtxt/arXiv-2010.12661-parts-human-verifiable.txt	32036	c-text	text extraction of a paper
+libtxt/arXiv-2010.12665-parts-509-minimization.txt	56838	c-text	text extraction of a paper
+libtxt/arXiv-2012.13558-wrochna-smaller-counterexamples-hedetniemi.txt	25748	c-text	text extraction of a paper
+libtxt/arXiv-2102.05529-haemers-ratio-bound.txt	10830	c-text	text extraction of a paper
+libtxt/arXiv-2103.02757.txt	39839	c-text	text extraction of a paper
+libtxt/arXiv-2106.05333.txt	28772	c-text	text extraction of a paper
+libtxt/arXiv-2106.11824-voronov-5chromatic.txt	38548	c-text	text extraction of a paper
+libtxt/arXiv-2108.07713.txt	30644	c-text	text extraction of a paper
+libtxt/arXiv-2201.00275.txt	42692	c-text	text extraction of a paper
+libtxt/arXiv-2201.04499.txt	63507	c-text	text extraction of a paper
+libtxt/arXiv-2205.12312.txt	43921	c-text	text extraction of a paper
+libtxt/arXiv-2206.12632.txt	25744	c-text	text extraction of a paper
+libtxt/arXiv-2206.12633.txt	13724	c-text	text extraction of a paper
+libtxt/arXiv-2206.12635.txt	26087	c-text	text extraction of a paper
+libtxt/arXiv-2207.14179-ambrus-csiszarik-matolcsi-varga-zsamboki-density-planar-sets.txt	57547	c-text	text extraction of a paper
+libtxt/arXiv-2209.15598.txt	27906	c-text	text extraction of a paper
+libtxt/arXiv-2211.04075-gangloff-hellouin-oprocha-block-gluing-hom-shifts.txt	90818	c-text	text extraction of a paper
+libtxt/arXiv-2301.05232-herva-kari-perfect-colorings.txt	75495	c-text	text extraction of a paper
+libtxt/arXiv-2303.06262-cervantes-krebs.txt	50338	c-text	text extraction of a paper
+libtxt/arXiv-2303.06272-cervantes-krebs-2.txt	72515	c-text	text extraction of a paper
+libtxt/arXiv-2303.09513.txt	41968	c-text	text extraction of a paper
+libtxt/arXiv-2303.14714-degrey-parts-lower-bounds.txt	6675	c-text	text extraction of a paper
+libtxt/arXiv-2303.14722-more-certainty-interval.txt	48365	c-text	text extraction of a paper
+libtxt/arXiv-2304.10163-voronov.txt	46910	c-text	text extraction of a paper
+libtxt/arXiv-2305.07770.txt	42695	c-text	text extraction of a paper
+libtxt/arXiv-2306.07108-cliques-repr-quadratic-forms.txt	58696	c-text	text extraction of a paper
+libtxt/arXiv-2308.16885-chromatic-spacetime.txt	24710	c-text	text extraction of a paper
+libtxt/arXiv-2311.10069.txt	41343	c-text	text extraction of a paper
+libtxt/arXiv-2401.04814-brittenham-pakianathan-euclidean-association-scheme.txt	56054	c-text	text extraction of a paper
+libtxt/arXiv-2401.12347-oravcova-sotak-integer-distance-graphs.txt	14009	c-text	text extraction of a paper
+libtxt/arXiv-2409.14948-herva-kari-periodic-decompositions.txt	60215	c-text	text extraction of a paper
+libtxt/arXiv-2410.11028-krebs-sankar-abelian-groups-without-3-chromatic-cayley-graphs.txt	37526	c-text	text extraction of a paper
+libtxt/arXiv-2411.01951-abrishami-et-al-periodic-colorings.txt	79663	c-text	text extraction of a paper
+libtxt/arXiv-2411.14087-shi-li-helleseth-ozbudak-generalized-zetterberg-covering-radius.txt	55863	c-text	text extraction of a paper
+libtxt/arXiv-2502.01958-maptype.txt	54432	c-text	text extraction of a paper
+libtxt/arXiv-2502.16078-zhu-survey-hedetniemi.txt	85489	c-text	text extraction of a paper
+libtxt/arXiv-2502.17678-equidistribution-rational-points-sphere.txt	70220	c-text	text extraction of a paper
+libtxt/arXiv-2503.01721-diameter-girth-repr.txt	60153	c-text	text extraction of a paper
+libtxt/arXiv-2507.10387-akhtari-vaaler-widmer-equidistribution-norm-one-CM.txt	43745	c-text	text extraction of a paper
+libtxt/arXiv-2507.21342-chandgotia-gangloff-hellouin-oprocha-undecidability-block-gluing-homshifts.txt	101267	c-text	text extraction of a paper
+libtxt/arXiv-2508.18793-abiad-hoffman-colorability.txt	45879	c-text	text extraction of a paper
+libtxt/arXiv-2510.11969-chandgotia-gangloff-hellouin-oprocha-cohomology-homshifts.txt	80012	c-text	text extraction of a paper
+libtxt/arXiv-2511.03028-cervantes-krebs-rank2.txt	31142	c-text	text extraction of a paper
+libtxt/arXiv-2511.10813-eng-harris-krebs-four-plane-unit-vectors-3-colorable.txt	39672	c-text	text extraction of a paper
+libtxt/arXiv-2601.07828-agoston-two-distance-range.txt	58266	c-text	text extraction of a paper
+libtxt/arXiv-2604.22705-planar-1-ended-periodic.txt	64589	c-text	text extraction of a paper
+libtxt/arXiv-2606.12325.txt	8171	c-text	text extraction of a paper
+libtxt/arXiv-2606.28157-ducz-varga-independence-ratio-below-quarter.txt	25793	c-text	text extraction of a paper
+libtxt/arXiv-2606.28157.txt	25793	c-text	text extraction of a paper
+libtxt/arXiv-2606.29415-rodis-rational-plane-unit-distance.txt	19529	c-text	text extraction of a paper
+libtxt/arXiv-2607.19995-costa-silva-filho-coordinate-fields-EI17-EI19.txt	83674	c-text	text extraction of a paper
+libtxt/arXiv-2608.04542v3-haugland-2131.txt	17646	c-text	text extraction of a paper
+libtxt/arXiv-2609.03184-basic-uniquely-colorable-cayley.txt	34708	c-text	text extraction of a paper
+libtxt/arXiv-cond-mat-9902295-moore-newman-four-state-triangular-potts-height.txt	64073	c-text	text extraction of a paper
+libtxt/arXiv-math-0203025-baake-grimm-note-on-shelling.txt	41723	c-text	text extraction of a paper
+libtxt/arXiv-math-0301021-baake-grimm-bravais-colourings.txt	37188	c-text	text extraction of a paper
+libtxt/arXiv-math-0511147-pleasants-baake-roth-planar-coincidences.txt	81368	c-text	text extraction of a paper
+libtxt/arXiv-math-ph-0212015-baake-grimm-combinatorial-quasicrystallography.txt	32765	c-text	text extraction of a paper
+libtxt/arXiv-math0407075-simonyi-tardos-local-chromatic-ky-fan.txt	94529	c-text	text extraction of a paper
+libtxt/arXiv-math0510092-vinh-unit-quadrance.txt	8792	c-text	text extraction of a paper
+libtxt/arXiv-math0606482-vinh-colouring-unit-quadrance.txt	11692	c-text	text extraction of a paper
+libtxt/axenovich-2014-chromatic-number-subsets-euclidean-plane.txt	26448	c-text	text extraction of a paper
+libtxt/cilleruelo-lattice-points-on-circles.txt	9121	c-text	text extraction of a paper
+libtxt/cohen-2000-advanced-topics-computational-number-theory.txt	1376401	c-text	text extraction of a paper
+libtxt/dcg-2005-exoo-epsilon-unit-distance-graphs.txt	11898	c-text	text extraction of a paper
+libtxt/evertse-1995-decomposable-form-equations.txt	95300	c-text	text extraction of a paper
+libtxt/fieker-jurk-pohst-1997-relative-norm-equations.txt	25766	c-text	text extraction of a paper
+libtxt/fischer-1990-connected-components-Q-sqrtN1-sqrtNd-congr-numer-72-pp213-221.txt	20781	c-text	text extraction of a paper
+libtxt/fischer-1994-planar-geometric-graph-chromatic-number-four-congr-numer-104-pp73-79.txt	19529	c-text	text extraction of a paper
+libtxt/hopkins-2018-representation-theoretic-independence-cayley-thesis.txt	81406	c-text	text extraction of a paper
+libtxt/jams-2004-coulson-chromatic-number-plane-tilings.txt	10483	c-text	text extraction of a paper
+libtxt/jcam-1996-medrano-myers-stark-terras-finite-analogues-euclidean.txt	34680	c-text	text extraction of a paper
+libtxt/jcta-1973-woodall-distances-realized-covering-plane.txt	35988	c-text	text extraction of a paper
+libtxt/krebs-2022-clique-numbers-unit-quadrance.txt	54359	c-text	text extraction of a paper
+libtxt/medrano-myers-stark-terras-1998-finite-euclidean-graphs-over-rings.txt	21257	c-text	text extraction of a paper
+libtxt/moorhouse-2010-chromatic-numbers-of-planes.txt	43289	c-text	text extraction of a paper
+libtxt/moorhouse-2010-colouring-the-plane-ebertfest-slides.txt	15738	c-text	text extraction of a paper
+libtxt/nagell-1962-number-of-representations-of-an-A-number.txt	19885	c-text	text extraction of a paper
+libtxt/naw-2021-heule-easier-variants.txt	21204	c-text	text extraction of a paper
+libtxt/peyre-2003-points-hauteur-bornee-topologie-adelique-JTNB.txt	58781	c-text	text extraction of a paper
+libtxt/pjm-1982-hales-straus-projective-colorings.txt	32681	c-text	text extraction of a paper
+libtxt/raigorodskii-borsuk-survey-RU.txt	121371	c-text	text extraction of a paper
+libtxt/ramsey-theory-yesterday-today-tomorrow-2010-soifer-ed.txt	473361	c-text	text extraction of a paper
+libtxt/rudnick-2018-lattice-points-on-circles-notes.txt	16572	c-text	text extraction of a paper
+libtxt/schaal-1965-sum-of-two-squares-totally-real.txt	12461	c-text	text extraction of a paper
+libtxt/sokolov-2018-chromatic-numbers-rational-spaces-mzm103-RU.txt	33806	c-text	text extraction of a paper
+libtxt/tardif-2008-hedetniemi-conjecture-40-years-later-GTN54.txt	44849	c-text	text extraction of a paper
+libtxt/vinh-2009-finite-euclidean-graphs-z2r-non-ramanujan-ajc43.txt	19486	c-text	text extraction of a paper
+libtxt/volume-33-paper-23.txt	4	c-text	text extraction of a paper
+libtxt/wormald-1979-4-chromatic-special-plane-drawing.txt	22036	c-text	text extraction of a paper
+libtxt/zanardo-zannier-1991-group-of-pythagorean-triples-number-fields-AMPA159.txt	15872	c-text	text extraction of a paper
+madore.txt	55903	c-text	text extraction of a paper
+moor.txt	20962	c-text	text extraction of a paper
+next-poros/BRIEF.md	6142	a	A-head: data/next-direction/poros-brief.md
+next-poros/POROS-next-direction.md	32907	a	A-head: chats-bak/229be71b-1af0-4601-bef0-f695943ce757/tool-results/biu5f80zi.txt
+ns.pdf	559415	c-pdf	paper PDF not byte-identical to a library file
+ns.txt	162866	c-text	text extraction of a paper
+pa-products/c1.png	41412	render	page/figure render
+pa-products/c2a.png	118556	render	page/figure render
+pa-products/c2b.png	147144	render	page/figure render
+pa-products/c2c.png	164831	render	page/figure render
+pa-products/c3a.png	83561	render	page/figure render
+pa-products/c3b.png	128592	render	page/figure render
+pa-products/c3t.png	56709	render	page/figure render
+pa-products/c5t.png	18676	render	page/figure render
+pa-products/gl-1.png	867626	render	page/figure render
+pa-products/gl-2.png	976863	render	page/figure render
+pa-products/gl-3.png	1301810	render	page/figure render
+pa-products/gl-4.png	1082765	render	page/figure render
+pa-products/gl-5.png	1206979	render	page/figure render
+pa-products/gl-6.png	415558	render	page/figure render
+pa-products/larose.json	382924	b-repo	overlap 0/1 best
+pa-products/lt.txt	24491	c-text	text extraction of a paper
+pa-products/z0996.05065.json	2095	b-repo	overlap 0/1 best
+pa-products/z1009.05121.json	2810	b-repo	overlap 0/1 best
+pa-products/z1020.05029.json	3457	b-repo	overlap 0/1 best
+pa-products/z1029.05133.json	446	b-repo	overlap 0/6 best
+pa-products/zh.txt	28676	c-text	text extraction of a paper
+pa-tardif/cr.json	7629	b-repo	overlap 0/1 best
+pa-tardif/hoff.py	1680	b-repo	overlap 0/24 best
+pa-tardif/p1-1.png	32836	render	page/figure render
+pa-tardif/p2-2.png	4929	render	page/figure render
+pa-tardif/q1-1.png	21597	render	page/figure render
+pa-tardif/q2-2.png	13859	render	page/figure render
+pa-tardif/r1-1.png	14773	render	page/figure render
+pa-tardif/t.txt	20623	c-text	text extraction of a paper
+pa-tardif/zhu.txt	96569	c-text	text extraction of a paper
+parts.txt	34718	c-text	text extraction of a paper
+plant.log	532	b-repo	overlap 0/9 best
+plant_badtrace.txt	266	a	successor (8/8 lines) in data/fs91/j02/additive-check-plants.txt
+plant_notsubgroup.txt	569	a	successor (11/11 lines) in data/fs91/j02/additive-check-plants.txt
+price.py	453	inflight	J18
+st2.txt	6860	a	A-worktree: data/m3/j18/swaptail.txt
+swaptail.py	2442	inflight	J18
+t.gp	337	b-repo	overlap 0/4 best
+tardif.txt	20623	c-text	text extraction of a paper
+zb.py	832	b-repo	overlap 0/8 best
+zhang.txt	28676	c-text	text extraction of a paper
+zhu.txt	96569	c-text	text extraction of a paper
+zhu2025.txt	85489	c-text	text extraction of a paper

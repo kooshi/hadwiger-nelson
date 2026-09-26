@@ -1,0 +1,10 @@
+import Mathlib
+#check @List.getD_eq_getElem?_getD
+#check @List.getD_cons_succ
+#check @List.getD_cons_zero
+#check @List.getD_nil
+#check @List.mem_of_getElem?
+#check @Finset.sum_apply
+#check @Fin.sum_univ_succ
+#check @List.all_eq_true
+#check @List.foldr_cons

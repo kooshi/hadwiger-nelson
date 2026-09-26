@@ -1,0 +1,6 @@
+  ok [FS-75]   +380 B  FS-75's row — the question cell (landed; next)
+  ok [FS-75]    +50 B  FS-75's row — the cost cell
+  ok [FS-75]    +49 B  FS-75's row — the status cell
+  ok [FS-75]   +225 B  FS-60's row — the question cell
+  ok [FS-75]    +27 B  FS-60's row — the status cell
+plans/FRONTIER-STUBS.md: 102,935 -> 103,666 bytes (+731) -> /home/kooshi/source/lean-dir/plans/FRONTIER-STUBS.md

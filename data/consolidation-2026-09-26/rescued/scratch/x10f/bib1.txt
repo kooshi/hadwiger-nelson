@@ -1,0 +1,8 @@
+bibliography: 394 keyed rows, 12 retired/alternate keys
+cited across the repository: 220 arXiv ids, 377 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 0
+
+bracketed keys cited but neither defined nor aliased: 0
+
+every cited work resolves to a row or a recorded alias

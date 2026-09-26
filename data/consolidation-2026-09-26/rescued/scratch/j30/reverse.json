@@ -1,0 +1,1982 @@
+{
+"FS-91": {
+"data/crunch-2026-09-25/reports/J01.md": [
+7,
+10
+],
+"data/crunch-2026-09-25/reports/J02.md": [
+9
+],
+"data/crunch-2026-09-25/reports/J03.md": [
+14
+],
+"plans/FS91-S0F-three-colours.md": [
+1,
+459
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+1,
+5
+],
+"plans/FS91-S0V-band-to-nine.md": [
+1,
+12,
+289
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+1
+],
+"plans/FS91-S1D-character.md": [
+1,
+3,
+385
+],
+"plans/FS91-S1D-one-prime.md": [
+1
+],
+"plans/FS91-S1D-six.md": [
+1
+],
+"plans/FS91-S1V-character.md": [
+1
+],
+"plans/FS91-S1V-six.md": [
+1
+],
+"plans/FS91-character-local-global.md": [
+1,
+3,
+589
+]
+},
+"row 95": {
+"data/crunch-2026-09-25/reports/J01.md": [
+7
+],
+"data/crunch-2026-09-25/reports/J03a.md": [
+14
+],
+"data/crunch-2026-09-25/reports/J07.md": [
+11
+],
+"plans/FS91-S0F-three-colours.md": [
+25,
+37,
+68
+],
+"plans/FS91-S0V-band-to-nine.md": [
+29,
+33,
+50,
+259,
+287,
+289
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+251
+],
+"plans/FS91-S1D-character.md": [
+19,
+320,
+378
+],
+"plans/FS91-S1D-one-prime.md": [
+80
+],
+"plans/FS91-S1V-character.md": [
+18,
+124,
+163,
+165,
+176
+],
+"plans/FS91-character-local-global.md": [
+436,
+544
+],
+"plans/M2-kernel-lane.md": [
+268
+]
+},
+"FS89-derivation": {
+"data/crunch-2026-09-25/reports/J01.md": [
+8
+],
+"data/crunch-2026-09-25/reports/J03a.md": [
+7
+],
+"plans/FS91-S0F-three-colours.md": [
+7,
+21
+],
+"plans/FS91-S0V-band-to-nine.md": [
+10,
+24,
+25,
+26,
+283
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+5,
+24,
+30,
+248
+],
+"plans/FS91-S1V-character.md": [
+27
+],
+"plans/FS91-character-local-global.md": [
+24
+]
+},
+"FS89-PA-berend1984": {
+"data/crunch-2026-09-25/reports/J01.md": [
+8
+],
+"plans/FS91-S0V-band-to-nine.md": [
+9,
+24,
+25,
+26,
+27,
+59,
+128,
+282
+]
+},
+"FS89-S1V-verification": {
+"data/crunch-2026-09-25/reports/J01.md": [
+9
+],
+"plans/FS91-S0V-band-to-nine.md": [
+52
+]
+},
+"FS89-S0B-band": {
+"data/crunch-2026-09-25/reports/J01.md": [
+9
+],
+"plans/FS91-S0V-band-to-nine.md": [
+52
+],
+"plans/FS91-S1D-one-prime.md": [
+21
+]
+},
+"FS81-T4": {
+"data/crunch-2026-09-25/reports/J02.md": [
+2
+],
+"plans/FS91-S0F-three-colours.md": [
+32,
+79,
+90,
+264,
+428
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+39,
+61,
+68,
+273
+]
+},
+"FS-82": {
+"data/crunch-2026-09-25/reports/J02.md": [
+6
+],
+"data/crunch-2026-09-25/reports/J03.md": [
+16,
+33
+],
+"data/crunch-2026-09-25/reports/J09.md": [
+8,
+10
+],
+"plans/FS91-S0F-three-colours.md": [
+26,
+51,
+53,
+316,
+354,
+361,
+451,
+456
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+255,
+257
+],
+"plans/FS91-character-local-global.md": [
+50,
+58,
+112,
+204,
+379,
+388,
+420
+]
+},
+"G55": {
+"data/crunch-2026-09-25/reports/J02.md": [
+6
+],
+"plans/FS91-S0F-three-colours.md": [
+27,
+291,
+316,
+450,
+453
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+18,
+35,
+138,
+154,
+167,
+171,
+198,
+208,
+212,
+226
+],
+"plans/FS91-S1D-character.md": [
+104
+],
+"plans/FS91-character-local-global.md": [
+37,
+303
+],
+"plans/M2-S1K-chain.md": [
+31,
+174
+],
+"plans/M2-S3K-unit-ring.md": [
+19,
+78,
+115
+],
+"plans/M2-kernel-lane.md": [
+25
+]
+},
+"G74": {
+"data/crunch-2026-09-25/reports/J02.md": [
+6
+],
+"data/crunch-2026-09-25/reports/J03.md": [
+2
+],
+"plans/FS91-S0F-three-colours.md": [
+316,
+451,
+453
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+254
+],
+"plans/FS91-character-local-global.md": [
+508
+]
+},
+"G48": {
+"data/crunch-2026-09-25/reports/J02.md": [
+6
+],
+"data/crunch-2026-09-25/reports/J06.md": [
+2
+],
+"plans/FS91-S0F-three-colours.md": [
+452
+],
+"plans/M2-kernel-lane.md": [
+419
+]
+},
+"FS-75": {
+"data/crunch-2026-09-25/reports/J02.md": [
+9
+],
+"data/crunch-2026-09-25/reports/J09.md": [
+10
+],
+"plans/FS91-S0F-three-colours.md": [
+457
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+259
+],
+"plans/M2-kernel-lane.md": [
+193
+]
+},
+"FS81-T2": {
+"data/crunch-2026-09-25/reports/J02.md": [
+9
+],
+"plans/FS91-S0F-three-colours.md": [
+24,
+40,
+77,
+230,
+251,
+264,
+458
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+153,
+166,
+171,
+194,
+198,
+199,
+210,
+231,
+282,
+312
+]
+},
+"G56": {
+"data/crunch-2026-09-25/reports/J03.md": [
+2
+],
+"data/crunch-2026-09-25/reports/J08.md": [
+7
+],
+"plans/FS91-S0F-three-colours.md": [
+83,
+166,
+288
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+129,
+138,
+154,
+165,
+171,
+194,
+198,
+206,
+282,
+325
+],
+"plans/FS91-S1D-character.md": [
+218,
+235,
+239,
+254,
+370
+],
+"plans/FS91-S1D-six.md": [
+106,
+152,
+328
+],
+"plans/FS91-S1V-character.md": [
+111,
+123,
+146,
+147,
+250,
+279,
+361
+],
+"plans/FS91-S1V-six.md": [
+22
+],
+"plans/M2-S1D-bridge.md": [
+42,
+375
+],
+"plans/M2-kernel-lane.md": [
+342
+]
+},
+"row 69": {
+"data/crunch-2026-09-25/reports/J03.md": [
+7
+],
+"data/crunch-2026-09-25/reports/J08.md": [
+7
+],
+"data/crunch-2026-09-25/reports/J11.md": [
+11
+],
+"plans/FS91-S1D-six.md": [
+37,
+95,
+97,
+152,
+213,
+334
+],
+"plans/FS91-S1V-six.md": [
+22
+],
+"plans/FS91-character-local-global.md": [
+308,
+309
+],
+"plans/M3-S1D-windows-five.md": [
+23,
+69,
+215
+]
+},
+"FS-39": {
+"data/crunch-2026-09-25/reports/J03.md": [
+34
+],
+"data/crunch-2026-09-25/reports/J04.md": [
+5,
+15
+],
+"data/crunch-2026-09-25/reports/J15.md": [
+11
+],
+"data/crunch-2026-09-25/reports/J17.md": [
+6
+],
+"plans/FS91-S0F-three-colours.md": [
+276
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+186,
+197,
+338
+],
+"plans/FS91-S1D-character.md": [
+195
+],
+"plans/FS91-character-local-global.md": [
+114
+],
+"plans/M2-S1D-bridge.md": [
+3,
+16,
+42,
+335,
+345,
+375,
+377
+],
+"plans/M2-S2K-route-c.md": [
+1,
+24,
+194,
+208,
+214,
+216
+],
+"plans/M2-kernel-lane.md": [
+1,
+5,
+6,
+9,
+99,
+192,
+351,
+407,
+419,
+503,
+530,
+537
+]
+},
+"FS89-CL2": {
+"data/crunch-2026-09-25/reports/J03a.md": [
+7
+],
+"data/crunch-2026-09-25/reports/J07.md": [
+11
+],
+"plans/FS91-S0F-three-colours.md": [
+21
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+216,
+250
+],
+"plans/FS91-S1D-character.md": [
+311,
+319,
+378
+]
+},
+"FS-89": {
+"data/crunch-2026-09-25/reports/J03a.md": [
+10
+],
+"data/crunch-2026-09-25/reports/J07.md": [
+8
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+26
+],
+"plans/FS91-S0V-band-to-nine.md": [
+5,
+28,
+279
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+33,
+34,
+37,
+91,
+93,
+118,
+168,
+240
+],
+"plans/FS91-S1D-character.md": [
+19,
+315
+],
+"plans/FS91-S1D-one-prime.md": [
+48,
+80
+],
+"plans/FS91-S1V-character.md": [
+23,
+27,
+45,
+257
+],
+"plans/FS91-character-local-global.md": [
+29,
+402,
+430
+],
+"plans/M3-exotic-colourings.md": [
+25
+]
+},
+"FS89-S1VB-14": {
+"data/crunch-2026-09-25/reports/J03a.md": [
+10
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+34
+]
+},
+"FS-47": {
+"data/crunch-2026-09-25/reports/J04.md": [
+2,
+16,
+19
+],
+"data/crunch-2026-09-25/reports/J07.md": [
+12
+],
+"plans/FS91-S1D-character.md": [
+385
+],
+"plans/M2-S1K-chain.md": [
+84
+],
+"plans/M2-S3K-unit-ring.md": [
+1,
+24
+],
+"plans/M2-kernel-lane.md": [
+1,
+6,
+11,
+22,
+28,
+36,
+42,
+56,
+65,
+70,
+76,
+78,
+85,
+90,
+96,
+109,
+111,
+171,
+177,
+196,
+202,
+209,
+268,
+298,
+388,
+391,
+395,
+502,
+506
+]
+},
+"G63": {
+"data/crunch-2026-09-25/reports/J04.md": [
+5
+],
+"data/crunch-2026-09-25/reports/J15.md": [
+8
+],
+"data/crunch-2026-09-25/reports/J17.md": [
+6
+],
+"plans/FS91-S0F-three-colours.md": [
+276
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+181,
+186,
+196,
+197,
+338,
+367
+],
+"plans/M2-S1D-bridge.md": [
+264,
+297,
+299,
+358
+],
+"plans/M2-S2K-route-c.md": [
+24,
+33,
+154,
+207
+],
+"plans/M2-kernel-lane.md": [
+347,
+474
+]
+},
+"row 57": {
+"data/crunch-2026-09-25/reports/J04.md": [
+7
+],
+"plans/FS91-S0F-three-colours.md": [
+288,
+289
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+180,
+195
+],
+"plans/M2-S1K-chain.md": [
+150
+],
+"plans/M2-S3K-unit-ring.md": [
+85
+],
+"plans/M2-kernel-lane.md": [
+329,
+366,
+396,
+512
+]
+},
+"FS-45": {
+"data/crunch-2026-09-25/reports/J04.md": [
+14
+],
+"data/crunch-2026-09-25/reports/J14.md": [
+12
+],
+"plans/FS91-S0F-three-colours.md": [
+27,
+280
+],
+"plans/M2-S1K-chain.md": [
+1,
+167,
+193,
+197,
+198
+],
+"plans/M2-kernel-lane.md": [
+1,
+5,
+9,
+21,
+537
+]
+},
+"FS-87": {
+"data/crunch-2026-09-25/reports/J04.md": [
+16
+],
+"plans/M2-S3K-unit-ring.md": [
+1
+],
+"plans/M2-kernel-lane.md": [
+1,
+5,
+10,
+22,
+51,
+53,
+104,
+105,
+106,
+108,
+110,
+199,
+200,
+203,
+204,
+207,
+389
+]
+},
+"FS73-T30": {
+"data/crunch-2026-09-25/reports/J06.md": [
+5
+],
+"plans/M3-S1A-rank-one.md": [
+37,
+40,
+43,
+143,
+312
+],
+"plans/M3-exotic-colourings.md": [
+20,
+413,
+545,
+582
+]
+},
+"FS79-T30": {
+"data/crunch-2026-09-25/reports/J06.md": [
+5
+],
+"plans/M3-S1A-rank-one.md": [
+37
+]
+},
+"FS-64": {
+"data/crunch-2026-09-25/reports/J06.md": [
+6,
+9
+],
+"data/crunch-2026-09-25/reports/J08.md": [
+7,
+9
+],
+"data/crunch-2026-09-25/reports/J21.md": [
+12
+],
+"plans/FS91-S1D-six.md": [
+331
+],
+"plans/M3-S1D-windows-five.md": [
+181,
+186
+],
+"plans/M3-exotic-colourings.md": [
+1,
+5,
+49,
+138,
+232,
+334,
+357,
+418,
+494
+]
+},
+"FS-76": {
+"data/crunch-2026-09-25/reports/J06.md": [
+9
+],
+"data/crunch-2026-09-25/reports/J18.md": [
+11
+],
+"plans/M3-S1A-rank-one.md": [
+1,
+34,
+369
+],
+"plans/M3-S1B-rank-one.md": [
+1
+],
+"plans/M3-exotic-colourings.md": [
+1,
+5,
+399
+]
+},
+"FS86-dB-H": {
+"data/crunch-2026-09-25/reports/J06.md": [
+11
+],
+"data/crunch-2026-09-25/reports/J18.md": [
+7
+],
+"plans/M3-S1A-rank-one.md": [
+14,
+43,
+142,
+335,
+368
+],
+"plans/M3-S1B-rank-one.md": [
+34
+],
+"plans/M3-exotic-colourings.md": [
+541
+]
+},
+"FS-66": {
+"data/crunch-2026-09-25/reports/J07.md": [
+2
+],
+"plans/FS91-S1D-character.md": [
+315,
+317,
+321,
+371,
+379
+],
+"plans/FS91-S1V-character.md": [
+166,
+176,
+177,
+200,
+209,
+215,
+255,
+363
+],
+"plans/FS91-S1V-six.md": [
+155
+],
+"plans/M3-S1D-windows-five.md": [
+103,
+157
+],
+"plans/M3-exotic-colourings.md": [
+61,
+488,
+583
+]
+},
+"FS-86": {
+"data/crunch-2026-09-25/reports/J07.md": [
+9
+],
+"plans/FS91-S1D-character.md": [
+284
+],
+"plans/FS91-character-local-global.md": [
+22
+],
+"plans/M3-exotic-colourings.md": [
+21
+]
+},
+"FS86-B1-LR": {
+"data/crunch-2026-09-25/reports/J07.md": [
+11
+],
+"plans/FS91-S0F-three-colours.md": [
+42,
+64
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+45,
+99,
+160,
+256,
+359
+],
+"plans/FS91-S1D-character.md": [
+111,
+187,
+384
+],
+"plans/FS91-S1V-character.md": [
+69,
+284
+],
+"plans/FS91-character-local-global.md": [
+29,
+447
+]
+},
+"FS-59": {
+"data/crunch-2026-09-25/reports/J08.md": [
+7,
+9
+],
+"plans/FS91-S1D-six.md": [
+331
+]
+},
+"G59": {
+"data/crunch-2026-09-25/reports/J08.md": [
+7
+],
+"plans/FS91-S0F-three-colours.md": [
+311
+],
+"plans/FS91-S1D-six.md": [
+328
+],
+"plans/M3-exotic-colourings.md": [
+24,
+60
+]
+},
+"G64": {
+"data/crunch-2026-09-25/reports/J08.md": [
+7
+],
+"plans/FS91-S1D-character.md": [
+381
+],
+"plans/FS91-S1D-six.md": [
+223,
+328
+],
+"plans/FS91-character-local-global.md": [
+21,
+408
+],
+"plans/M2-S1D-bridge.md": [
+286,
+288
+],
+"plans/M2-kernel-lane.md": [
+418
+]
+},
+"row 68": {
+"data/crunch-2026-09-25/reports/J08.md": [
+8
+],
+"plans/FS91-S1D-six.md": [
+17,
+37,
+152
+],
+"plans/FS91-character-local-global.md": [
+308
+]
+},
+"row 53": {
+"data/crunch-2026-09-25/reports/J08.md": [
+8
+],
+"plans/FS91-S1D-six.md": [
+17
+],
+"plans/FS91-S1V-six.md": [
+105
+]
+},
+"FS81-T6": {
+"data/crunch-2026-09-25/reports/J09.md": [
+8
+],
+"plans/FS91-S0F-three-colours.md": [
+360
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+157,
+331,
+372
+]
+},
+"FS-48": {
+"data/crunch-2026-09-25/reports/J09.md": [
+10
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+258
+]
+},
+"G54": {
+"data/crunch-2026-09-25/reports/J10.md": [
+5
+],
+"plans/FS91-S1D-character.md": [
+242,
+370
+],
+"plans/FS91-S1V-character.md": [
+250,
+307,
+359
+],
+"plans/FS91-character-local-global.md": [
+308
+],
+"plans/M3-exotic-colourings.md": [
+63
+]
+},
+"row 33": {
+"data/crunch-2026-09-25/reports/J11.md": [
+9
+],
+"plans/FS91-S1V-six.md": [
+251
+],
+"plans/M2-S1D-bridge.md": [
+24,
+200,
+279
+],
+"plans/M3-S1D-windows-five.md": [
+411
+],
+"plans/M3-exotic-colourings.md": [
+333,
+335
+]
+},
+"G4": {
+"data/crunch-2026-09-25/reports/J14.md": [
+2,
+12,
+13
+],
+"plans/M2-S1K-chain.md": [
+23,
+35,
+50,
+131,
+146,
+147,
+149,
+177,
+197
+],
+"plans/M2-S3K-unit-ring.md": [
+83,
+96
+],
+"plans/M2-kernel-lane.md": [
+386,
+429,
+469,
+511
+]
+},
+"FS-53": {
+"data/crunch-2026-09-25/reports/J17.md": [
+7
+],
+"plans/FS91-S1D-character.md": [
+317
+],
+"plans/FS91-S1V-character.md": [
+166,
+209,
+255
+],
+"plans/FS91-S1V-six.md": [
+155
+],
+"plans/M2-S1D-bridge.md": [
+42,
+389
+]
+},
+"FS-79": {
+"data/crunch-2026-09-25/reports/J18.md": [
+6,
+9
+],
+"plans/M3-S1A-rank-one.md": [
+14,
+34,
+39,
+142,
+173,
+261,
+268,
+330,
+335,
+345,
+370
+],
+"plans/M3-exotic-colourings.md": [
+19,
+35,
+372,
+373
+]
+},
+"row 92": {
+"data/crunch-2026-09-25/reports/J21.md": [
+7
+],
+"plans/FS91-character-local-global.md": [
+301
+],
+"plans/M3-S1D-windows-five.md": [
+471
+]
+},
+"FS86-CL1": {
+"data/crunch-2026-09-25/reports/J21.md": [
+7
+],
+"plans/M3-S1D-windows-five.md": [
+61,
+205,
+471
+],
+"plans/M3-exotic-colourings.md": [
+22,
+23,
+434,
+473
+]
+},
+"FS81-T3": {
+"plans/FS91-S0F-three-colours.md": [
+23,
+78,
+85,
+426,
+467
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+63,
+65,
+153,
+171,
+194,
+259,
+357
+],
+"plans/FS91-S0V-band-to-nine.md": [
+170
+]
+},
+"FS73-T22": {
+"plans/FS91-S0F-three-colours.md": [
+24,
+77
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+153,
+171,
+194
+],
+"plans/FS91-character-local-global.md": [
+29
+]
+},
+"FS73-derivation": {
+"plans/FS91-S0F-three-colours.md": [
+24
+],
+"plans/M3-S1A-rank-one.md": [
+37
+],
+"plans/M3-exotic-colourings.md": [
+20
+]
+},
+"row 63": {
+"plans/FS91-S0F-three-colours.md": [
+27,
+291
+],
+"plans/FS91-S1D-character.md": [
+300
+],
+"plans/FS91-character-local-global.md": [
+306,
+314
+],
+"plans/M2-S2K-route-c.md": [
+40,
+156
+],
+"plans/M2-kernel-lane.md": [
+267,
+314
+]
+},
+"row 52": {
+"plans/FS91-S0F-three-colours.md": [
+38,
+216,
+234,
+288,
+350
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+16,
+167,
+198,
+206,
+282,
+312
+]
+},
+"FS81-T5": {
+"plans/FS91-S0F-three-colours.md": [
+53
+]
+},
+"FS-81": {
+"plans/FS91-S0F-three-colours.md": [
+68,
+405
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+18,
+41
+]
+},
+"G44": {
+"plans/FS91-S0F-three-colours.md": [
+82,
+166
+],
+"plans/FS91-S1D-six.md": [
+152
+],
+"plans/FS91-S1V-six.md": [
+96,
+176
+]
+},
+"FS81-T1": {
+"plans/FS91-S0F-three-colours.md": [
+90
+],
+"plans/FS91-character-local-global.md": [
+29
+]
+},
+"row 82": {
+"plans/FS91-S0F-three-colours.md": [
+309,
+316,
+439,
+450
+],
+"plans/FS91-S0FV-three-colours-blind.md": [
+17,
+18,
+212,
+344
+]
+},
+"FS73-T40": {
+"plans/FS91-S0F-three-colours.md": [
+426
+]
+},
+"FS81-T7": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+60
+],
+"plans/FS91-character-local-global.md": [
+214
+]
+},
+"FS86-CL2": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+100,
+298
+],
+"plans/FS91-S1D-character.md": [
+26,
+111,
+350
+],
+"plans/FS91-S1V-character.md": [
+154
+],
+"plans/M2-kernel-lane.md": [
+111,
+202
+]
+},
+"FS81-derivation": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+158,
+256
+]
+},
+"FS-54": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+198
+],
+"plans/FS91-S1D-character.md": [
+239
+]
+},
+"G61": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+255
+]
+},
+"G38": {
+"plans/FS91-S0FV-three-colours-blind.md": [
+255
+],
+"plans/M2-kernel-lane.md": [
+267
+]
+},
+"FS89-rational-band": {
+"plans/FS91-S0V-band-to-nine.md": [
+6,
+28
+],
+"plans/FS91-S1D-one-prime.md": [
+18
+],
+"plans/FS91-S1V-character.md": [
+23
+],
+"plans/M2-kernel-lane.md": [
+5,
+27
+]
+},
+"FS89-close-inventory": {
+"plans/FS91-S0V-band-to-nine.md": [
+11
+]
+},
+"row 97": {
+"plans/FS91-S0V-band-to-nine.md": [
+42,
+50,
+115,
+265
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+251
+],
+"plans/FS91-character-local-global.md": [
+21,
+45,
+315
+]
+},
+"row 96": {
+"plans/FS91-S0V-band-to-nine.md": [
+50
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+251
+],
+"plans/FS91-S1D-character.md": [
+320,
+379
+],
+"plans/FS91-S1V-character.md": [
+22,
+162,
+165,
+169
+],
+"plans/FS91-S1V-six.md": [
+155,
+183
+],
+"plans/FS91-character-local-global.md": [
+21,
+306,
+409,
+453,
+554
+]
+},
+"FS89-S1VB-verification": {
+"plans/FS91-S0V-band-to-nine.md": [
+50,
+135,
+141
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+5,
+65,
+126
+]
+},
+"G1": {
+"plans/FS91-S0V-band-to-nine.md": [
+159,
+181,
+195,
+260
+],
+"plans/FS91-S0V2-SWm-second-reading.md": [
+272
+],
+"plans/FS91-S1D-character.md": [
+300
+],
+"plans/FS91-character-local-global.md": [
+306
+]
+},
+"FS89-S1VB-2": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+24
+]
+},
+"FS89-S1VB-4": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+25
+]
+},
+"FS89-S1VB-6": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+26
+]
+},
+"FS89-S1VB-7": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+27
+]
+},
+"FS89-PA-B2": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+29
+]
+},
+"FS89-D1-L4": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+37
+]
+},
+"FS89-D1-L2": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+118
+]
+},
+"G76": {
+"plans/FS91-S0V2-SWm-second-reading.md": [
+251
+],
+"plans/FS91-S1D-character.md": [
+380
+],
+"plans/FS91-S1D-six.md": [
+330
+]
+},
+"G71": {
+"plans/FS91-S1D-character.md": [
+6
+],
+"plans/FS91-S1D-six.md": [
+6
+],
+"plans/FS91-S1V-six.md": [
+76
+]
+},
+"row 88": {
+"plans/FS91-S1D-character.md": [
+23
+],
+"plans/FS91-S1V-character.md": [
+27
+],
+"plans/FS91-character-local-global.md": [
+303,
+314
+]
+},
+"row 89": {
+"plans/FS91-S1D-character.md": [
+177,
+301
+],
+"plans/FS91-S1V-character.md": [
+22,
+153
+],
+"plans/FS91-character-local-global.md": [
+305,
+452
+]
+},
+"FS86-LP": {
+"plans/FS91-S1D-character.md": [
+255
+],
+"plans/FS91-S1V-character.md": [
+308
+],
+"plans/M3-S1D-windows-five.md": [
+63
+]
+},
+"row 94": {
+"plans/FS91-S1D-character.md": [
+302
+],
+"plans/FS91-S1V-character.md": [
+22,
+159
+],
+"plans/FS91-character-local-global.md": [
+306,
+452
+],
+"plans/M3-exotic-colourings.md": [
+335
+]
+},
+"FS89-CL3": {
+"plans/FS91-S1D-character.md": [
+306,
+373
+]
+},
+"G30": {
+"plans/FS91-S1D-character.md": [
+354
+],
+"plans/M2-kernel-lane.md": [
+265,
+266
+]
+},
+"FS86-B1-LD": {
+"plans/FS91-S1D-character.md": [
+371
+]
+},
+"FS86-derivation": {
+"plans/FS91-S1D-character.md": [
+384
+],
+"plans/M3-S1D-windows-five.md": [
+60,
+471
+],
+"plans/M3-exotic-colourings.md": [
+22
+]
+},
+"FS89-S0B-T3": {
+"plans/FS91-S1D-one-prime.md": [
+18
+]
+},
+"FS89-S1D-derivation": {
+"plans/FS91-S1D-one-prime.md": [
+22
+]
+},
+"row 75": {
+"plans/FS91-S1D-six.md": [
+17,
+164
+],
+"plans/FS91-character-local-global.md": [
+23,
+312
+],
+"plans/M3-S1D-windows-five.md": [
+17,
+70,
+90,
+169,
+219,
+420,
+439
+]
+},
+"row 70": {
+"plans/FS91-S1D-six.md": [
+157,
+315
+],
+"plans/FS91-S1V-six.md": [
+164,
+249
+]
+},
+"G35": {
+"plans/FS91-S1D-six.md": [
+196
+]
+},
+"row 50": {
+"plans/FS91-S1D-six.md": [
+227
+],
+"plans/FS91-character-local-global.md": [
+309
+]
+},
+"row 79": {
+"plans/FS91-S1V-six.md": [
+251
+],
+"plans/FS91-character-local-global.md": [
+330
+]
+},
+"FS54-T2": {
+"plans/FS91-character-local-global.md": [
+28
+]
+},
+"FS-73": {
+"plans/FS91-character-local-global.md": [
+30
+]
+},
+"FS-68": {
+"plans/FS91-character-local-global.md": [
+117
+]
+},
+"FS-70": {
+"plans/FS91-character-local-global.md": [
+208
+],
+"plans/M2-kernel-lane.md": [
+190
+]
+},
+"G43": {
+"plans/FS91-character-local-global.md": [
+301
+],
+"plans/M3-exotic-colourings.md": [
+60,
+333
+]
+},
+"G50": {
+"plans/FS91-character-local-global.md": [
+304
+]
+},
+"G41": {
+"plans/FS91-character-local-global.md": [
+305
+]
+},
+"G66": {
+"plans/FS91-character-local-global.md": [
+312
+],
+"plans/M3-exotic-colourings.md": [
+61
+]
+},
+"FS-83": {
+"plans/FS91-character-local-global.md": [
+315
+]
+},
+"G21": {
+"plans/FS91-character-local-global.md": [
+323
+],
+"plans/M2-S1D-bridge.md": [
+106
+],
+"plans/M3-S1A-rank-one.md": [
+49,
+61,
+281
+],
+"plans/M3-S1B-rank-one.md": [
+54
+],
+"plans/M3-S1D-windows-five.md": [
+378
+],
+"plans/M3-exotic-colourings.md": [
+343
+]
+},
+"G51": {
+"plans/FS91-character-local-global.md": [
+426
+]
+},
+"FS39-T1": {
+"plans/M2-S1D-bridge.md": [
+174,
+296
+]
+},
+"FS62-T2": {
+"plans/M2-S1D-bridge.md": [
+277,
+279,
+288,
+342,
+354,
+410
+],
+"plans/M2-kernel-lane.md": [
+99,
+418,
+442
+]
+},
+"FS62-derivation": {
+"plans/M2-S1D-bridge.md": [
+410
+]
+},
+"row 45": {
+"plans/M2-S1K-chain.md": [
+150
+],
+"plans/M2-kernel-lane.md": [
+266
+],
+"plans/M3-S1A-rank-one.md": [
+41,
+155
+],
+"plans/M3-exotic-colourings.md": [
+331,
+557
+]
+},
+"FS85-derivation": {
+"plans/M2-kernel-lane.md": [
+23,
+85
+]
+},
+"FS-49": {
+"plans/M2-kernel-lane.md": [
+61,
+502
+]
+},
+"FS89-S0A-1": {
+"plans/M2-kernel-lane.md": [
+109,
+209
+]
+},
+"row 58": {
+"plans/M2-kernel-lane.md": [
+265
+]
+},
+"G46": {
+"plans/M2-kernel-lane.md": [
+280
+],
+"plans/M3-exotic-colourings.md": [
+330
+]
+},
+"row 23": {
+"plans/M2-kernel-lane.md": [
+282
+]
+},
+"row 32": {
+"plans/M2-kernel-lane.md": [
+304
+]
+},
+"FS-37": {
+"plans/M2-kernel-lane.md": [
+329
+]
+},
+"row 14": {
+"plans/M2-kernel-lane.md": [
+335
+]
+},
+"FS79-T35": {
+"plans/M3-S1A-rank-one.md": [
+35,
+39
+],
+"plans/M3-exotic-colourings.md": [
+453,
+536
+]
+},
+"FS79-derivation": {
+"plans/M3-S1A-rank-one.md": [
+35,
+36,
+37
+],
+"plans/M3-exotic-colourings.md": [
+20
+]
+},
+"FS79-T34": {
+"plans/M3-S1A-rank-one.md": [
+36
+],
+"plans/M3-S1B-rank-one.md": [
+34
+],
+"plans/M3-exotic-colourings.md": [
+469,
+553
+]
+},
+"row 86": {
+"plans/M3-S1A-rank-one.md": [
+42
+],
+"plans/M3-exotic-colourings.md": [
+332,
+565
+]
+},
+"FS85-dB2": {
+"plans/M3-S1A-rank-one.md": [
+42
+],
+"plans/M3-exotic-colourings.md": [
+246,
+300,
+317,
+414,
+545,
+581
+]
+},
+"FS79-C-deBruijn": {
+"plans/M3-S1A-rank-one.md": [
+143,
+262
+]
+},
+"FS73-T24": {
+"plans/M3-S1A-rank-one.md": [
+216,
+241
+],
+"plans/M3-S1B-rank-one.md": [
+34
+]
+},
+"FS85-dB1": {
+"plans/M3-S1B-rank-one.md": [
+34
+],
+"plans/M3-exotic-colourings.md": [
+565
+]
+},
+"FS86-Cx-C14": {
+"plans/M3-S1D-windows-five.md": [
+60
+],
+"plans/M3-exotic-colourings.md": [
+473
+]
+},
+"FS86-Cx-C9": {
+"plans/M3-S1D-windows-five.md": [
+73
+]
+},
+"FS66-T8": {
+"plans/M3-S1D-windows-five.md": [
+121,
+213
+]
+},
+"FS79-T6": {
+"plans/M3-exotic-colourings.md": [
+31,
+79
+]
+},
+"G13": {
+"plans/M3-exotic-colourings.md": [
+42,
+331
+]
+},
+"G24": {
+"plans/M3-exotic-colourings.md": [
+60,
+333,
+356
+]
+},
+"G27": {
+"plans/M3-exotic-colourings.md": [
+69
+]
+},
+"FS-80": {
+"plans/M3-exotic-colourings.md": [
+147
+]
+},
+"FS54-T5": {
+"plans/M3-exotic-colourings.md": [
+230
+]
+},
+"row 80": {
+"plans/M3-exotic-colourings.md": [
+330
+]
+},
+"row 66": {
+"plans/M3-exotic-colourings.md": [
+331
+]
+},
+"row 91": {
+"plans/M3-exotic-colourings.md": [
+331
+]
+},
+"G42": {
+"plans/M3-exotic-colourings.md": [
+331
+]
+},
+"row 71": {
+"plans/M3-exotic-colourings.md": [
+333
+]
+},
+"G22": {
+"plans/M3-exotic-colourings.md": [
+333,
+355
+]
+},
+"row 72": {
+"plans/M3-exotic-colourings.md": [
+334
+]
+},
+"G49": {
+"plans/M3-exotic-colourings.md": [
+343
+]
+},
+"row 19": {
+"plans/M3-exotic-colourings.md": [
+347
+]
+},
+"row 78": {
+"plans/M3-exotic-colourings.md": [
+372
+]
+}
+}

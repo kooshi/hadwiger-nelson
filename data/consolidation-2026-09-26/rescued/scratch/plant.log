@@ -1,0 +1,20 @@
+slot: admitted bash: mem 12 GiB (hard cap), cpus 0,1,2,3
+/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/Plant.lean:20:8: warning: declaration uses `sorry`
+/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/Plant.lean:27:89: error: unsolved goals
+case «0».«2»
+⊢ False
+
+case «1».«2»
+⊢ False
+
+case «2».«0»
+⊢ False
+
+case «2».«1»
+⊢ False
+
+case «2».«3»
+⊢ False
+
+case «3».«2»
+⊢ False

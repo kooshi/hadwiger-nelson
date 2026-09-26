@@ -1,0 +1,22 @@
+bibliography: 315 keyed rows, 12 retired/alternate keys
+cited across the repository: 195 arXiv ids, 315 bracketed keys
+
+arXiv ids cited but NOT in the bibliography: 3
+   arXiv:1809.02818   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   arXiv:2103.02757   first seen in plans/M2-S1D-bridge.md
+   arXiv:2201.00275   first seen in plans/M2-S1D-bridge.md
+
+bracketed keys cited but neither defined nor aliased: 11
+   [BCR1998]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [CohenMahboubi2012]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [EggletonErdosSkilton1985]   first seen in data/crunch-2026-09-25/reports/J30.md
+   [GoelPatilVerma2022]   first seen in data/crunch-2026-09-25/reports/J30.md
+   [KechrisMarks2020]   first seen in data/crunch-2026-09-25/reports/J21.md
+   [Lang1953]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [Marker2002]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [Poizat2000]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [WangKosheleva1998]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [Zapletal2022]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+   [Zhu1998]   first seen in plans/CRUNCH-2026-09-25-INDEX.md
+
+UNLOGGED PRIOR ART: 14

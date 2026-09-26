@@ -1,0 +1,2 @@
+slot: admitted lake: mem 8 GiB (hard cap), cpus 0,1,2,3
+/tmp/claude-1000/-home-kooshi-source-lean-dir/229be71b-1af0-4601-bef0-f695943ce757/scratchpad/MutHs1.lean:291:41: error(lean.unknownIdentifier): Unknown identifier `hs`
