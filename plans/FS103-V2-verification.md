@@ -292,3 +292,74 @@ step where the other classes enter … where integrality carries F1": **L3's pig
 
 Scope of this answer: it covers my derivation only. Whether a cleverer one-class selection could keep the density is not settled here. A
 positive answer would imply `α₁(ℝ²) ≤ m₁(ℝ²)` at a 6-thick field under MR. [hand, one mind]
+
+### 4.1′ The owner's follow-up: does L3's random threshold involve a second class? — No.
+
+- **The threshold serves continuity in probability.** The law of `m_j(0)` has at most countably many atoms. A threshold that sits on an
+  atom can break continuity in probability, so it must avoid the atoms. Two ways do this:
+  - my random `θ′ ~ Unif(θ, 1/k)`, independent of everything else;
+  - a fixed `θ′ ∈ (θ, 1/k)` chosen outside the atoms of `m₁(0), …, m_k(0)` — simpler, equally good.
+- **For one class, any `θ′ ≥ θ` works.** The set `{m > θ′}` is independent in `X` whatever the threshold.
+- **The upper end `1/k` is where the second class enters.** It is the pigeonhole value, and it guarantees that at every `x` some class's
+  fibre mass exceeds `θ′`. That coverage is the only cross-class step (§4.1).
+
+### 4.2 The sealed half, scored against my derivation
+
+**§0 I-MX.** My L3 is its form for colourings continuous in probability (CP), over a countably infinite product. The sealed half says that
+form is not an input; I derived it (after the logged slip, having seen I-MX's statement only). The two forms diverge in one step:
+- I-MX selects with the fixed threshold `λ*/(1+λ*)`. That is sound for Borel and measurable colourings.
+- In the CP format, the threshold must avoid the atoms of `m_j(0)`, or the selected colouring may fail continuity in probability. I-MX does
+  not need this, since it has no continuity requirement.
+
+**§A sub-claims.**
+
+| sub-claim | score |
+|---|---|
+| C-THKDEL | **agree** — it is my L3, with `H = L ⊗ ℝ` (the proof is written for any second-countable LCA `H`). `λ*(⊗ν_v) ≤ sup_v λ*(ν_v)`, with its line: a non-trivial character is non-trivial on finitely many factors, and the product of those coefficients is at most any one of them. Only "≤" is needed. The advisor's control checked: at `λ* = 1`, `θ = 1/2 = 1/k`, so L3 has no room for a threshold and stops. The values `χ(Cay(ℝ, {±1, ±√2})) = 2` and `χ_CP = 3` are both confirmed. **Lower:** odd elements `a + b√2` (`a + b` odd) accumulate at 0, and each flips the colour a.s., so continuity in probability fails for two colours. **Upper:** `⌊3·frac(0.4x + β)⌋` with `β` uniform, since `0.4` and `0.4√2 ≡ 0.5657` both lie strictly inside `(1/3, 2/3)` mod 1. **Found extra:** the threshold-atom step (above). |
+| C-EXTk | **agree** — it is my L2, over every real number field with `R = O′`, not only totally real ones. The extension is to all of `G_∅`, by L1 (b)'s density. Properness is proved on `cl ι(U)` by approximating `w` with `u_n ∈ U`. Both wrong-reason lines are avoided. |
+| C-APX | **agree** — (a) is my L-WA and (b) is my L1 (b)–(c). The wrong-reason line is avoided: the reason is named — the norm-one torus of `F(i)/F` is the conic `x² + y² = 1` with the rational point `(1, 0)`, so it is `F`-rational, and rational varieties satisfy weak approximation. Density in the infinite product follows from density at every finite set of places (product topology). |
+| C-MERGE-n | **agree for totally real `F`** — "⟹" by my L4 (the diagonal); "⟸" by pulling back along one coordinate's projection. **Found extra:** at a complex place, "⟸" fails by this route. No continuous additive map `ℂ² → ℝ²` sends the hyperbola `{(z, 1/z)}` into the circle (boundedness as `z → ∞` forces it to be 0). Only "⟹" is available there, and "⟹" is all that C-LB and C-F1-GEN use. |
+
+**§B wrong-reason lines.**
+- **C-LB (i)–(viii):** all avoided.
+  - (i) Nothing fenced was cited or read before stage 3, apart from row 109's statement (the logged slip).
+  - (ii) Deletion is by `λ* < 1/(k−1)` through the mixing inequality, never by an independence ratio.
+  - (iii) `max|λ|` is taken over all non-trivial characters, both signs (§2.1).
+  - (iv) There is one threshold for all places at once, from `sup_v` (Step 0).
+  - (v) The jointly measurable version is proved (L2).
+  - (vi) Fubini is applied per fixed edge `(x, x+w)` of `X`, over `Ω × K × T_K`, and yields properness at that edge a.s.
+  - (vii) The argument does not run on CTL-ABS: its compact factor carries the parity character with `λ* = 1`.
+  - (viii) The law of `m_j` is fixed through its `L²(P)`-Bochner-integral form (L3).
+- **C-635-PL:** avoided. I recorded 2 as ramified in `F` (`e = 2`), with its one place split in `L/F`. My reason is PARI's prime counts;
+  the advisor's reason (`ℚ₂(√635087) = ℚ₂(√7) = ℚ₂(i)`, as `635087 ≡ 7 ≡ −1 (mod 8)`) agrees.
+- **C-635-THK:** avoided. The ramified 635087 is included. The dyadic place is not stable, so it is not in the product. Weil is applied
+  only at `q ≡ 3 (mod 4)`.
+- **C-dG-PL:** avoided. Residue fields are read from `F_dG` itself (PARI; 11 has `f = 2`), and ramified primes are listed.
+- **C-S:** avoided — (d) names the transcendence gap, and (c) counts local fields, not residue fields.
+- **C-S (c), the registered expectation:** **agree** — infinite at full depth. I add two things: multiplicities are unbounded, and residue
+  sizes 3, 7, 11, 19, dyadic `Q ≤ 32` and ramified dyadic drop out, because their fields already have `χ ≤ L ≤ 5`.
+- **C-F1-GEN:**
+  - Line (1) is avoided. At `k = 7` I use `χ_CP ≤ 7` directly, never C-LB. At `F_dG`, 131 gives `0.168047 > 1/6`, so C-LB at 7 would be
+    wrong.
+  - Line (2) is avoided: MR and `λ* < 1/(k−1)` are both used.
+  - **Line (3) — "a chain valid for fields with complex places" — I dispute.** My chain is valid there, and I hold that this is correct,
+    not a wrong-reason sign. At a complex place, the only step that changes is L4, and it restricts to the compact real form (the circle
+    inside the hyperbola, as row 123 describes the complex-place step). No step needs the failing "⟸" of the merge. Every input — I-C′, R-U,
+    MR (row 120: every real number field with `R = O′`), strong and weak approximation — holds at any real number field. **For the owner:**
+    either the line guards against a merge "⟸" that my chain does not use, or it names a step I have missed. I cannot find one.
+
+**§C controls.**
+- **CTL-167-4: reproduced.** The stable places of ℚ(√167) start at 23: by Legendre, 3, 7, 11, 19, 31 are inert and 23, 43 split; 167 is
+  ramified and stable; the dyadic place is split. `sup λ* = 0.331695 < 1/3` at 23 — a margin of `0.0016`. So `N₄ = ∅`, and C-LB at 4 with
+  I-CP57 gives (B), hence `χ ≥ 5` given MR. This agrees with row 123.
+- **CTL-dG4: reproduced.** `sup λ* = 0.168 < 1/3`, so given MR, `χ(F_dG²) ≥ 5`, agreeing with I-DG5.
+- **CTL-K-4 = my K1: reproduced.**
+- **CTL-K7-6: agree.** `λ*(83) = 0.210818`: at least `1/5`, so not 6-thick, and below `1/4`, so 5-thick. The claim list's `0.217` is
+  Weil's bound. The chain stops at `N₆ ≠ ∅` and goes through at `k = 5`. "First stable place at 83" is taken from row 68 and G43, not
+  recomputed. At 3, 7 and 11 the residue degree in `K(√7)` is 2 (my Legendre check), and the dyadic place is split.
+- **CTL-K5-5: reproduced.** `λ*(11) = 0.476 ≥ 1/4`; the chain stops.
+- **CTL-167-5: agree.** `λ*(23) = 0.3317` and `λ*(43) = 0.2719` are both at least `1/4`. 47 is inert, and 59 splits with
+  `λ* = 0.248626 < 1/4` (a margin of `0.0014`). Row 110's "0.199119854095" at 59 is a different quantity (a ratio), not `λ*`.
+- **CTL-ABS: checked** (above).
+- **CTL-Q2 = my K4: reproduced.**
+- **CTL-FRAC:** §4.1.
