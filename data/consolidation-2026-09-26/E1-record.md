@@ -65,3 +65,26 @@ A passage moves only if its lesson is **stated elsewhere in `CLAUDE.md`** (then 
   connective words missing. FRONTIER-STUBS's rows are the fuller and newer (e.g. FS-62's carries Kooshi's 2026-09-26 target).
 
 Would-have-searched log: none (no search; every figure is exact arithmetic on committed files).
+
+## Stage 2 — SAVED: the tooling
+
+`tools/claude_md_fact_audit.py`, extended minimally:
+- **The corpus** is `CLAUDE.md` + `LEDGER.md` + `plans/GROKKING-INSTANCES.md` (new `--instances`, default that path; joined only where
+  the file exists, at the base revision as in the working tree, as the ledger already was). `--dupes` reads all three, so a passage left in
+  two places is counted. `corpus_files` is now module-level so the self-test runs the real joining code.
+- **`EXTERNAL_HOMES`** (token → file, reason): a *verified* allowance — the audit reads the named file and fails ("external home … lacks")
+  unless the token is there. For text whose home was never this corpus: the paths-forward rows ranked ≥ 30, authoritative in
+  `plans/FRONTIER-STUBS.md`. Empty until stage 3's frontier commit.
+- **Self-test plants** (`self_test_files`), each through the real file-joining code, each with its partner:
+
+| plant | must | result |
+|---|---|---|
+| a prose block moved to the instances file, verbatim | pass (partner) | passed |
+| the same move with a once-only number (1950) deleted from the instances copy | fail, "lost num" | fired: lost num token '1950' |
+| the same move with the instances file not joined | fail, "lost" | fired: lost num token '1950' |
+| the number dropped from the corpus, its external home holding it | pass (partner) | passed |
+| the number dropped, its external home lacking it | fail, "external home" | fired: external home … lacks num token '1950' |
+| the block left in both files | `--dupes` count rises | 10 → 11 |
+
+Gates at this commit: `--self-test --base 230ea964` PASS (15 plants); `--base 230ea964` PASS (corpus line printed; 0 external homes);
+`--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.

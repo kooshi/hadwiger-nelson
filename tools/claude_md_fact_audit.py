@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Fact audit for an edit of CLAUDE.md + LEDGER.md: which fact tokens were in the old version and are NOWHERE in the new one.
+"""Fact audit for an edit of CLAUDE.md + LEDGER.md + plans/GROKKING-INSTANCES.md: which fact tokens were in the old version and are NOWHERE in the new one.
 
 The corpus audited is CLAUDE.md followed by LEDGER.md (the novel-results ledger, extracted from CLAUDE.md § Frontier on
 2026-09-22; at a base revision where LEDGER.md does not exist the ledger is still inside CLAUDE.md and the corpus is that file
-alone, so an audit across the extraction sees every row survive).
+alone, so an audit across the extraction sees every row survive) and plans/GROKKING-INSTANCES.md (the second and later
+instances behind CLAUDE.md's rules, extracted 2026-09-26 by E1; joined the same way, only where it exists at that revision).
+A token may also leave the corpus for an EXTERNAL_HOMES file, which is then checked to hold it on every run.
 
 Usage (standard library only; run from the repository root):
 
@@ -291,6 +293,12 @@ ALLOW: dict[str, str] = {
     "Draw": "item 23's 'Part 1 alone Draw (K)', FS-85's week verdict; its home is plans/FS85-rigidity-without-triangles.md §R-close.2",
 }
 
+# token -> (file, reason): a token allowed to leave the corpus because it lives in that file, which the audit READS and must find it
+# in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
+# authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
+EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+}
+
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
 # "[PROTECTED — never compress …]" and is an ordinary paragraph (the budget line in it changes when Kooshi raises the budget).
 # Reviewed transitions of the gate-report sentence's (clean, purchases) counts, each with its gate log; printed on every run.
@@ -432,10 +440,12 @@ def section_bytes(text: str) -> list[tuple[str, int]]:
 STRONG = ("date", "bib", "code", "id", "row", "ref", "num", "tag", "chunk", "name")
 
 
-def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = None, show_words=False, quiet=False) -> list[str]:
+def audit(old: str, new: str, *, table=None, allow=None, homes=None, moves: str | None = None, show_words=False, quiet=False) -> list[str]:
     """Return the list of failures (empty = pass). Prints the report unless quiet."""
     say = (lambda *a: None) if quiet else print
     allow = ALLOW if allow is None else allow
+    homes = EXTERNAL_HOMES if homes is None else homes
+    home_text: dict[str, str] = {}
     fails: list[str] = []
     o_n, n_n = normalise(old, table), normalise(new, table)
     fo, fn = facts(o_n), facts(n_n)
@@ -447,7 +457,17 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
         lost = sorted(t for t in fo[cls] if t not in fn[cls] and t not in allow)
         if cls == "name":   # a name survives inside a bibliography key: Cranston in [CranstonRabern2015]
             lost = [t for t in lost if re.sub(r"['’]s$", "", t) not in n_n]
-        say(f"[{cls}] {len(fo[cls])} distinct before, {len(fn[cls])} after, LOST {len(lost)}")
+        homed = [t for t in lost if t in homes]
+        lost = [t for t in lost if t not in homes]
+        say(f"[{cls}] {len(fo[cls])} distinct before, {len(fn[cls])} after, LOST {len(lost)}, homed outside the corpus {len(homed)}")
+        for t in homed:
+            path = homes[t][0]
+            if path not in home_text:
+                home_text[path] = normalise(Path(path).read_text(encoding="utf-8"), table) if Path(path).exists() else ""
+            if t in home_text[path]:
+                say(f"    HOMED {cls}: {t!r} in {path}")
+            else:
+                fails.append(f"external home {path} lacks {cls} token {t!r}")
         for t in lost:
             say(f"    LOST {cls}: {t!r}  (was ×{fo[cls][t]})")
             fails.append(f"lost {cls} token {t!r}")
@@ -534,6 +554,9 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     say("\nnormalisations in force:")
     for pat, rep, why in (NORMALISE if table is None else table):
         say(f"  {pat!r} -> {rep!r}: {why}")
+    say(f"external homes in force: {len(homes)}")
+    for t, (path, why) in homes.items():
+        say(f"  {t!r} -> {path}: {why}")
     say(f"allowances in force: {len(allow)}")
     for t, why in allow.items():
         say(f"  {t!r}: {why}")
@@ -578,11 +601,72 @@ def self_test(text: str) -> int:
     if "ρ₆₃" not in text:
         print("  BAD  the re-spelling plants are vacuous: 'ρ₆₃' does not occur in the text under test")
         bad += 1
+    bad += self_test_files(text)
     print("SELF-TEST " + ("FAILED" if bad else "PASSED"))
     return 1 if bad else 0
 
 
-def dupes(text: str, n: int = 10) -> None:
+def self_test_files(text: str) -> int:
+    """The three-file corpus and the external homes, through the real file-joining code (E1, 2026-09-26): a block moved from the
+    main file to the instances file must pass; the same move with one of its facts deleted, or with the instances file not joined,
+    must fail for that reason; a block left in both must raise the --dupes count; an external home must hold its token."""
+    import tempfile
+    f = facts(normalise(text))
+    blocks = re.split(r"\n[ \t]*\n", text)
+    pick = None
+    for b in blocks:                      # an ordinary prose block holding a number that occurs once in the whole text
+        if b.lstrip().startswith(("#", "|", "* **G", "```")) or PROTECTED_TAG in b or "declared purchases" in b or re.search(r"\bG\d+\b", b):
+            continue
+        once = [t for t in re.findall(r"(?<![\w.])\d{4,}(?![\w.])", b) if f["num"][t] == 1 and text.count(t) == 1]
+        if once and len(b) > 200:
+            pick, token = b, once[0]
+            break
+    if pick is None:
+        print("  BAD  three-file plants: no ordinary block with a once-only number to move (the plants would be vacuous)")
+        return 1
+    main_moved = text.replace(pick, "moved: see the instances file", 1)
+    bad = 0
+    with tempfile.TemporaryDirectory() as d:
+        dm, di, dh = Path(d, "main.md"), Path(d, "instances.md"), Path(d, "home.md")
+        dm.write_text(main_moved, encoding="utf-8")
+
+        def run(name, inst, joined, needle, must_fail, homes=None):
+            di.write_text(inst, encoding="utf-8")
+            new = corpus_files(str(dm), "", str(di) if joined else str(Path(d, "absent.md")))
+            fails = audit(text, new, homes=homes or {}, quiet=True)
+            ok = bool(fails) == must_fail and (not must_fail or any(needle in x for x in fails))
+            print(f"  {'ok ' if ok else 'BAD'}  {name}: {'fired' if fails else 'passed'}" + (f" -- {fails[0]}" if fails else ""))
+            return not ok
+
+        bad += run(f"a block moved to the instances file, verbatim (partner)", pick, True, None, False)
+        bad += run(f"the same move with {token} deleted from the instances copy", pick.replace(token, "", 1), True, "lost num", True)
+        bad += run("the same move with the instances file NOT joined", pick, False, "lost", True)
+        dh.write_text("the home holds " + token + "\n", encoding="utf-8")
+        bad += run(f"{token} dropped from the corpus, its external home holding it (partner)", pick.replace(token, "", 1), True, None, False,
+                   homes={token: (str(dh), "self-test")})
+        dh.write_text("the home holds nothing\n", encoding="utf-8")
+        bad += run(f"{token} dropped, its external home lacking it", pick.replace(token, "", 1), True, "external home", True,
+                   homes={token: (str(dh), "self-test")})
+        di.write_text(pick, encoding="utf-8")
+        base_n = dupes(corpus_files(str(dm), "", str(Path(d, "absent.md"))), quiet=True)
+        Path(d, "main-both.md").write_text(text, encoding="utf-8")      # the block NOT cut from the main file
+        both_n = dupes(corpus_files(str(Path(d, "main-both.md")), "", str(di)), quiet=True)
+        ok = both_n > base_n
+        print(f"  {'ok ' if ok else 'BAD'}  a block left in both files raises --dupes: {base_n} -> {both_n}")
+        bad += not ok
+    return bad
+
+
+def corpus_files(main: str, ledger: str, instances: str = "") -> str:
+    """The corpus as the audit reads it from disk: the main file, then the ledger, then the instances file, each only if it exists."""
+    text = Path(main).read_text(encoding="utf-8")
+    for extra in (ledger, instances):
+        if extra and Path(extra).exists():
+            text += "\n\n" + Path(extra).read_text(encoding="utf-8")
+    return text
+
+
+def dupes(text: str, n: int = 10, quiet: bool = False) -> int:
     """List every run of n words that occurs twice or more, outside the PROTECTED regions, merged into maximal runs:
     the one-home-per-fact rule's tripwire at a milestone close (it sees literal retelling only, never paraphrase)."""
     for r in protected_regions(text):
@@ -608,9 +692,12 @@ def dupes(text: str, n: int = 10) -> None:
         else:
             i += 1
     total = sum(len(r.encode()) for r in runs)
+    if quiet:
+        return len(runs)
     print(f"{len(runs)} repeated runs of >= {n} words, {total:,} bytes in second and later tellings:")
     for r in sorted(runs, key=len, reverse=True):
         print(f"  {len(r.encode()):5,} B  {r[:150]}{'…' if len(r) > 150 else ''}")
+    return len(runs)
 
 
 def main() -> int:
@@ -619,17 +706,12 @@ def main() -> int:
     ap.add_argument("--old", help="read the old version from this file instead of git")
     ap.add_argument("--new", default="CLAUDE.md")
     ap.add_argument("--ledger", default="LEDGER.md", help="the ledger file joined to the corpus (missing = ledger inside CLAUDE.md)")
+    ap.add_argument("--instances", default="plans/GROKKING-INSTANCES.md", help="the instances file joined to the corpus (missing = not joined)")
     ap.add_argument("--moves", help="write the relocation map to this path")
     ap.add_argument("--words", action="store_true")
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--dupes", action="store_true", help="list literally repeated 10-word runs in the NEW file, then exit")
     a = ap.parse_args()
-
-    def corpus_files(main: str, ledger: str) -> str:
-        text = Path(main).read_text(encoding="utf-8")
-        if ledger and Path(ledger).exists():
-            text += "\n\n" + Path(ledger).read_text(encoding="utf-8")
-        return text
 
     def corpus_rev(rev: str) -> str | None:
         r = subprocess.run(["git", "show", f"{rev}:CLAUDE.md"], capture_output=True)
@@ -640,10 +722,13 @@ def main() -> int:
         r2 = subprocess.run(["git", "show", f"{rev}:{a.ledger}"], capture_output=True)
         if r2.returncode == 0:   # the ledger exists at that revision as its own file
             text += "\n\n" + r2.stdout.decode("utf-8")
+        r3 = subprocess.run(["git", "show", f"{rev}:{a.instances}"], capture_output=True)
+        if r3.returncode == 0:   # the instances file exists at that revision
+            text += "\n\n" + r3.stdout.decode("utf-8")
         return text
 
     if a.dupes:
-        dupes(corpus_files(a.new, a.ledger))
+        dupes(corpus_files(a.new, a.ledger, a.instances))
         return 0
     if a.old:
         old = Path(a.old).read_text(encoding="utf-8")
@@ -653,7 +738,8 @@ def main() -> int:
             return 2
     if a.self_test:
         return self_test(old)
-    new = corpus_files(a.new, a.ledger)
+    print(f"corpus: {a.new} + {a.ledger} + {a.instances} (each joined if present)")
+    new = corpus_files(a.new, a.ledger, a.instances)
     return 1 if audit(old, new, moves=a.moves, show_words=a.words) else 0
 
 
