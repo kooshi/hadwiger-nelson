@@ -151,3 +151,100 @@ unit-distance graph `Cay(E, U)` is a disjoint union of copies of `Cay(R, U)`, on
   the stable-place table below 400, eight level-one spectra, two level-2 spectra).
 - **Proposed correction** (for the front-page lane / plan owner): `plans/FS84-five-colours-47.md` §1.2's stable list "…, 47 (ramified), 59,
   …" → "…, 47 (ramified), 67, …" (59 is inert in ℚ(√47)).
+
+## Stage 2 — SAVED
+
+### 2.1 The Johnson reading (G50; read status per item)
+
+| key (proposed) | what was obtained | read status |
+|---|---|---|
+| Johnson 1996, *About two definitions of the fractional chromatic number*, Geombinatorics 5(3) (1996) 99–108, Zbl 0856.05036 | zbMATH review (Marek Kubale), `data/fs84/s1/zbmath-0856.05036.json`: the LP and set-colouring definitions of `χ_f` agree when `χ_f` is finite; open problems "with a particular emphasis on infinite graphs" | **review only**; the paper is in Geombinatorics, whose archive refuses scripted fetches |
+| Johnson 2000, *Infinite graphs and the fractional chromatic number: some recent surprises*, Zbl 0945.05021 | zbMATH review (Arthur T. White), `…-0945.05021.json`: answers the 1996 questions on `χ_f` of infinite graphs, "with emphasis on the relation between the fractional chromatic number of the full graph and the fractional chromatic number of finite subgraphs"; relies on Scheinerman–Ullman | **review only** (Geombinatorics; not obtainable by script) |
+| Johnson–Rodger 2005, *Coloring the vertices of a graph with measurable sets in a probability space*, European J. Combin. 26(2) (2005) 251–257, doi 10.1016/j.ejc.2004.01.004, Zbl 1059.05050 | metadata only: zbMATH gives no text ("contents unavailable due to conflicting licenses"); OpenAlex: open access (bronze) at ScienceDirect, no abstract, 3 citers, 4 references (`openalex-johnson-rodger-2005.json`) | **not read**: ScienceDirect blocks scripted fetches (memory note, paper-fetch routes). **Hand-off:** a browser save by Kooshi, filename `JohnsonRodger2005-measurable-set-colourings.pdf` |
+| Scheinerman–Ullman, *Fractional graph theory* (the textbook form, ch. 3) | the authors' free PDF (`ams.jhu.edu/ers/…/fgt.pdf`) answered with a Cloudflare challenge | **not read** |
+| `[MatolcsiEtAl2025]` (arXiv:2311.10069 v4, held) | §2 and Theorem 1's proof re-read here (pp. 3–6): the definitions of `χ_gf`, regular and aggregate functionals, the approximation property (7)–(8), `χ_f,0`, `α₁(ℝ²)`, the Følner blow-up | **§2–§3 up to Theorem 1's proof read** (this stage); the rest as recorded in the bibliography |
+
+What the reading changes: Johnson–Rodger's object — a vertex ↦ event map in a probability space, adjacent events disjoint — **is** S1b's
+`ι` with the invariance dropped (§2.3's `E_v = {I : v ∈ I}`); so the equality S1b-iii below, which holds with or without invariance for
+the finitary number, is plausibly their theorem or near it. **Prior-art debt:** not verified; "new" is not claimed for S1b-iii's
+invariance-free half.
+
+### 2.2 S1b — the invariant-measure equivalence
+
+*Setting.* `Γ` a graph on a countable vertex set `V`; `G` a countable group acting on `Γ` by automorphisms; `Col_k(Γ) ⊆ [k]^V` the proper
+`k`-colourings and `Ind(Γ) ⊆ {0,1}^V` the independent sets, both closed in the (compact, metrizable) product topology, `G` acting by
+`(g·c)(v) = c(g⁻¹v)`. For `G` transitive and `v₀ ∈ V`: `ι_G(Γ) = sup_ν ν{I : v₀ ∈ I}` over `G`-invariant Borel probability measures
+`ν` on `Ind(Γ)` (independent of `v₀` by transitivity).
+
+> **S1b-i.** If `G` is amenable: `Γ` is `k`-colourable ⟺ `Col_k(Γ)` carries a `G`-invariant Borel probability measure.
+>
+> **S1b-ii.** If `G` is amenable and transitive: `Γ` `k`-colourable ⟹ `ι_G(Γ) ≥ 1/k`.
+>
+> **S1b-W (the window form, S2's bridge).** If `G` is amenable: for every finite `W ⊆ V`, let `P_k(W)` be the set of probability vectors
+> `p` on `Col_k(Γ[W])` with `p_Y(σ) = p_{gY}(σ ∘ g⁻¹)` for all `Y ⊆ W`, `g ∈ G` with `gY ⊆ W`, and patterns `σ` on `Y` (`p_Y` the
+> marginal). If `P_k(W) = ∅` for one `W`, then `Γ` is not `k`-colourable. Conversely, `Γ` is `k`-colourable iff `P_k(W) ≠ ∅` for every `W`.
+>
+> **S1b-iii (the identities).** For `Γ = Cay(R, U)`, `R` a countable abelian group acting by translation, and every amenable `G` with
+> `R ≤ G ≤ Aut(Γ)`: `ι_G(Γ) = ι_R(Γ) = 1/χ_{f,0}(Γ) = 1/ρ(Γ) = 1/χ_{gf,G,0}(Γ)`, where `χ_{f,0} = sup` of `χ_f` over finite induced
+> subgraphs, `ρ = sup |H|/α(H)` (the Hall ratio), and `χ_{gf,G,0} = sup` over finite `H` of the `G`-geometric fractional chromatic number
+> (`[MatolcsiEtAl2025]`'s (6), with congruences restricted to elements of `G`). In particular **`ι_G = inf_H α(Γ[H])/|H|`**.
+
+**Proofs.**
+- *S1b-i.* ⟸: a probability measure needs `Col_k ≠ ∅`. ⟹: `Col_k` is a non-empty compact metrizable `G`-space. Fix `c ∈ Col_k` and
+  right Følner sets `F_n ⊂ G`; `μ_n = |F_n|⁻¹ Σ_{g∈F_n} δ_{g⁻¹·c}` has `‖h_*μ_n − μ_n‖ ≤ |F_n h⁻¹ Δ F_n|/|F_n| → 0`; any weak* limit
+  point is `G`-invariant (Banach–Alaoglu; equivalently Day's fixed-point theorem). ∎ Amenability is used only in ⟹.
+- *S1b-ii.* Average `μ` over the colour permutations `S_k` (they commute with `G`): `μ′` is `G`- and `S_k`-invariant. `Φ(c) = c⁻¹(1)` is
+  continuous and `G`-equivariant into `Ind`; `ν = Φ_*μ′` is `G`-invariant with `ν{v₀ ∈ I} = μ′{c(v₀) = 1} = 1/k`. ∎
+- *S1b-W.* If `Γ` is `k`-colourable, S1b-i's invariant `μ` has its `W`-marginal in `P_k(W)` (the consistency conditions are `μ`'s
+  invariance read on cylinders). Conversely, if every `P_k(W_n)` is non-empty along `W_n ↑ V`, a diagonal limit of the marginals is a
+  consistent family, so by Kolmogorov a measure on `Col_k(Γ)` exists — in particular `Col_k ≠ ∅` (no amenability needed there). ∎
+- *S1b-iii.* (a) `ι_R ≤ α(H)/|H|` for finite `H`: `E_ν|I ∩ H| = |H|·ι(ν)` and `|I ∩ H| ≤ α(H)`. So `ι_R ≤ 1/ρ`. (b) `ι_R ≥ 1/ρ`: with Følner
+  sets `F_n ⊂ R` and a maximum independent set `J_n` of `Γ[F_n]`, `μ_n = |F_n|⁻¹ Σ_{g∈F_n} δ_{J_n − g}` has `μ_n{0 ∈ I} = |J_n|/|F_n|
+  ≥ 1/ρ` and is asymptotically invariant; a limit point (the cylinder `{0 ∈ I}` is clopen) gives `ι_R ≥ 1/ρ`. (c) `ι_R ≤ 1/χ_f(H)` for
+  every finite `H`: `γ(S) = ι⁻¹ν{I ∩ H = S}` is a regular fractional colouring of `H` of weight `1/ι` (for every invariant `ν` with
+  `ι(ν) > 0`); so `χ_{f,0} ≤ 1/ι_R = ρ ≤ χ_{f,0}`: equality. The same `γ` is `G`-geometric when `ν` is `G`-invariant, so `ι_G ≤
+  1/χ_{gf,G,0} ≤ 1/χ_{f,0}`. (d) `ι_G ≥ 1/χ_{f,0}`, `G` amenable: with right Følner sets `F_n ⊂ G`, weights `m(v) = #{g ∈ F_n : g·v₀ = v}`
+  on `H_n = F_n·v₀`, and `J_n` independent in `Γ[H_n]` of maximum weight (`m(J_n) ≥ m(H_n)/χ_f(H_n)`, averaging an optimal fractional
+  colouring), `μ_n = |F_n|⁻¹ Σ_{g∈F_n} δ_{g⁻¹J_n}` has `μ_n{v₀ ∈ I} = m(J_n)/|F_n| ≥ 1/χ_{f,0}` and is asymptotically `G`-invariant. So
+  `1/χ_{f,0} ≤ ι_G ≤ 1/χ_{gf,G,0} ≤ 1/χ_{f,0}` and `ι_G ≤ ι_R = 1/χ_{f,0}`: every term is equal. ∎ (Step (d) is `[MatolcsiEtAl2025]`
+  Thm 1's Følner mechanism in measure form; (b) is their Thm 2's "large discrete cubes" in measure form. Neither needs the plane.)
+
+*Grades:* S1b-i, ii, W — [hand; standard (amenability ⟹ invariant measures); one derivation here]. S1b-iii — [hand; one derivation;
+its steps are MatolcsiEtAl's Thms 1–2 transposed to a countable group acting on a countable graph].
+
+### 2.3 Consequences at ℚ(√47)
+
+`R = ℤ[U]` is countable abelian; the isometries of `F²` that preserve `R` include `G_full = R ⋊ (U ⋊ ⟨c⟩)` (`z ↦ uz + t`, `z ↦ u·c(z) + t`)
+and the Galois flip `√47 ↦ −√47` (it preserves `U` and `R`); the group they generate is virtually abelian, hence amenable, and every
+congruence between subsets of a finite `H ⊆ R` lies in `G_full` (`t = y′ − uy ∈ R`).
+
+1. **ℚ(√47)² is four-colourable ⟺ it carries a translation-, rotation-, reflection- and Galois-invariant random proper four-colouring**
+   (S1b-i, per `R`-coset). *Inhabitants* (G30.5): the ⟸ side at `k = 5` — ρ₁₁'s pullback of a five-colouring of `Γ₁₁`, uniform over its
+   finite `G`-orbit (multiplication by `u` and `c` preserve the ideal `R ∩ 𝔓₁₁`, the flip moves it to the conjugate prime); the refusing
+   side at `k = 3` — row 82 (`χ(ℚ(√47)²) ≥ 4`): no invariant measure on `Col₃`.
+2. **S2's bridge (S1b-W):** an infeasible four-class window LP on any `R`-invariant lattice piece `Λ_M` (any finite window, any amenable
+   group of symmetries of `Cay(Λ_M, U_M)`) is a proof that `χ(ℚ(√47)²) ≥ 5`. A feasible one at `W` says nothing.
+3. **The single-class route, priced (P-int):** by S1b-iii, `ι(ℚ(√47)) = inf_H α(H)/|H|` over finite unit-distance graphs `H ⊆ ℚ(√47)²`.
+   So **`ι(ℚ(√47)) < 1/4` iff some finite `H ⊆ ℚ(√47)²` has `α(H) < |H|/4`, which would give `α₁(ℝ²) < 1/4` and `χ_{f,0}(ℝ²) > 4`, refuting
+   `[MatolcsiEtAl2025]`'s conjecture** "we conjecture that the following equalities hold: δCroft = m1(R2) and α1(R2) = 1/4" (arXiv:2311.10069
+   v4, §2, after (14)). The single-class averaged route at ℚ(√47) is therefore exactly as hard as that published conjecture's refutation;
+   P-int's 0.03 stands, now with a named reason.
+4. **Brackets:** `ι(ℚ(√47)) ≥ ρ_per(ℚ(√47)) ≥ α(Γ₁₁)/121 = 28/121 = 0.231405` (a periodic independent set gives an invariant measure; `α(Γ₁₁)
+   = 28` by FS-66: `28 ≤ α ≤ ⌊28.2043⌋`). And **`ρ_per(ℚ(√47)) = max_𝔓 r_𝔓` exactly** (S1a's steps 5–6 give `≤`; each single-place
+   quotient `R → A_{𝔓,m}` is an admissible `L`, `U ∩ L = ∅` since unit vectors map to units, giving `≥`), so
+   `ρ_per ∈ [28/121, h*(31)] = [0.231405, 0.249997]`. The true maximum is probably at 11 (the true ratios at 31, 43, 47 are near
+   `0.15, 0.14, 0.12` on G59's `c`-measurements, found sets only); proving it needs a certificate at 31 below `28/121` [not attempted: an
+   SDP certificate at 31 is a machine computation, post-ban at best].
+
+### 2.4 What S1b does not do
+
+- **Necessity of amenability** (plan §5.1's "adversarial member") is **not examined**: no non-amenable counterexample to S1b-i is exhibited.
+  The plan's sketch (a free-group Cayley tree) does not work as stated — a connected bipartite graph has exactly two proper 2-colourings and
+  the uniform measure on them is invariant under every automorphism group. Recorded, not repaired.
+- It proves nothing about `χ(ℚ(√47)²)`; it names the object an averaged certificate must refute and prices the single-class form.
+
+### 2.5 Stage 2 notes
+
+- FS-66's `cert-p19.json` re-check at `--m 4`: see §3's first line (it was still running at this save).
+- **Would have searched here:** would have sampled a large random ball of `Cay(R, U)` and computed its independence ratio to estimate `ι`;
+  instead derived `ι = inf α(H)/|H|` and priced the route against `[MatolcsiEtAl2025]`'s conjecture.
