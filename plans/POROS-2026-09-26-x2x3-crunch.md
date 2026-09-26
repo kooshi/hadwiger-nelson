@@ -237,3 +237,21 @@ get the slots; resume me by SendMessage at about 06:40 to read X01D's and X02D's
 
 ### Would have searched here (stage 5)
 - None.
+
+## Stage 6 — the launched briefs checked for blindness; EL2021 fetched — SAVED
+
+- **Blindness check (05:45).** I grepped `X01V`, `X02V` and `X05V`'s briefs for my sketch's distinctive terms (multiply through;
+  Poincaré; local injectivity; decompose on `R̂`; product formula; `T + A`; sketch). The only hit is `X01V`'s citation of row 98
+  (`Θ_k ⊆ T + A`), which is a held result and not my sketch. **All three are clean.** `X01D` and `X02D` carry my messages verbatim
+  as addenda, each marked "[reading, one mind] — write out or refute, never trust".
+- **EL2021 copy.** The path in J51's record, `data/fs100/j51/el2021.pdf`, does not exist, so I fetched arXiv 2101.11120v1 to
+  `data/crunch-2026-09-26-x2x3/poros/el2021-2101.11120.pdf`. I read pp. 1–3: Thm 1.2 and the definition of "totally irreducible",
+  both quoted verbatim to the planner. Thm 1.2 needs `α`-ergodic `µ`, which confirms that the PE-2 fix, decomposing on `R̂`, is needed.
+- **Simplification sent.** MR needs zero entropy for only one `u′`. Ergodic `µ ≠ m` gives `h_µ(u′) = 0` for an admissible `u′`, and
+  EF_F then applies. `Γ`'s total irreducibility needs only one generator whose powers all avoid the proper subfields of `L`.
+- **Companion skills.** I skimmed `poros-anomaly-hunt` and `poros-reframing` at their openings only. The reframing skill's test,
+  "a wall of given brick is a theorem, and its door is the hypothesis the situation does not satisfy", is this crunch's move exactly:
+  ×2×3's wall stands on a finitely generated multiplier set, and `U` fails that hypothesis.
+
+### Would have searched here (stage 6)
+- None: one arXiv fetch (literature).
