@@ -1827,8 +1827,8 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
   ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) — **all met** (rows 121, 123)"; "proven 4 in the kernel (row 119) and ≥ 5 at K0's grade (row 121)" →
   "proven 4 in the kernel (row 119) and ≥ 5 (row 123)".
 - **Item 10** → "**The conjecture's proved range** (G55; GPT Astra; rows 99, 123): χ(F²) = L(F) for every real number field with **L ≤ 5** — L ≤ 4
-  by row 99 [hand, three derivations], L = 5 given MR (row 120) by the class theorem and SP-Cor in every degree (row 123) [hand, two blind,
-  graded by field class]. Its exposed predictions are the target's (§ The mission): four for ℚ(√11) and ℚ(√23) (row 73), and five at ℚ(√47)
+  by row 99 [hand, three derivations], L = 5 given MR (row 120) by the class theorem and SP-Cor in every degree (row 123) [hand, every link two
+  derivations or more]. Its exposed predictions are the target's (§ The mission): four for ℚ(√11) and ℚ(√23) (row 73), and five at ℚ(√47)
   (row 121), ℚ(√143), ℚ(√311), ℚ(√335) and ℚ(√3,√5) (row 123) are met. With every residue level allowed, `L` is unchanged at 7, 11, 19, 23
   (row 75, G66)." (The 8/3-forcer clause over multiquadratic F ⊇ K is subsumed; keep it only if the front page wants the kernel-adjacent
   route named — it is the one route independent of MR.)
@@ -1854,6 +1854,7 @@ at this stage** (stop 07:50): every line below that they bear on says so, and a 
 - **G56's Do line:** add "an exception field of row 100 (a stable dyadic place ramified in `F(i)/F`) has `L = 2`: never scope a claim at `L ≥ 3` by
   that exception (row 123)". Optional precision: "(five refused by certificate everywhere but 31: rows 69–71)" → "(… rows 69–71; at 27 row 70's
   `α(Γ₂₇) ≤ 141 < 146`)" — X23D's "uncited 6 at 27" is **not** a debt: the source is row 70.
+- **G56 (X26B):** "4-colourable at Q = 2, 4, 8, 16, 32 (CaDiCaL, FS-54)" → "4-colourable at Q = 2, 4, 8, 16, 32 (CaDiCaL, FS-54; by an F₂-linear formula, X26B, and by no F₄-linear one at 4, 16)".
 - **G64:** "(row 52; the field-level step is row 57's gap, FS-47)" → "(row 52; row 57's gap is the kernel's, not the mathematics': the
   localisation at a prime is a DVR in every number field)".
 - **G76:** in "For colourings rigidity splits into invariant measures and transience …" add "; given MR, over the type-(B) fields every
