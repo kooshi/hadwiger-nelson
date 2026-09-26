@@ -36,3 +36,26 @@ No move in this job would have been a search. (The job is a gate script and its 
 - A related defect outside this job's reach (not edited: `scripts/vacuity.sh` needs no path option): `vacuity.sh
   --baseline` (lines 195–202) rewrites the baseline with a fixed six-line header and **no counts**, so the next plain run
   finds no recorded counts in the baseline. With the repair below, that becomes a loud failure instead of a quiet line.
+
+## Stage 2 — SAVED
+
+**The repair** (`scripts/gate_report.py`; `scripts/vacuity.sh` only to pass the new path).
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| The vacuity digest takes `CLAUDE.md` as a required fourth path; `scripts/vacuity.sh:141` passes `"${REPO}/CLAUDE.md"` | an optional path defaulting to the repository's `CLAUDE.md`, leaving `vacuity.sh` untouched | the caller names every file the digest reads, as `axioms.sh` already does; a stale caller of the old three-path form gets the usage text and exit 2, never a quiet default | high |
+| One line per recorded source: `recorded counts in <source>: match (9 of 9 compared)` or `RECORDED COUNTS ARE STALE in <source> — update it: …` | keep one combined line | a source is named on a "match" line only if it was read and compared, which is the brief's rule | high |
+| Every source must record all nine counts (`declarations`, `refutations-skipped`, `sites`, six verdicts), each exactly once, else it is unreadable | compare whatever keys are present (the old behaviour) | a partial record reported "match" on the counts it lacked | high |
+| `CLAUDE.md` is read inside its `## The gate` section only (to the next heading of level 1–3 outside a code fence); `## Trust ledger` likewise for the axiom sentence, which must occur exactly once there | search the whole flattened file (the old axioms behaviour) | the report names the section, so the section is what is read; a second copy of the sentence elsewhere can no longer be read silently | medium — if the counts are ever moved into a `###` subsection of § The gate, the digest fails loudly until the reader follows them |
+| An unreadable source prints `RECORDED COUNTS NOT COMPARED — could not read the counts in <source>: <why>`, the digest finishes, then `==> gate report: FAIL — …` and **exit 3** | exit 0 with a loud line (drift's policy) | a comparison that could not run is a check that could not run, which this repository fails (as `vacuity.sh` does on an untelescoped declaration); drift stays flagged-not-failed, unchanged | medium — the wrappers' own message on any nonzero exit still says "no digest could be built from this run's output", which is wrong for exit 3; the digest's FAIL line says so explicitly. Rewording the wrappers is held for the owner |
+| A baseline that does not exist is reported (`RECORDED COUNTS NOT COMPARED — … does not exist`) and not failed here | fail it | `vacuity.sh` fails on a missing baseline itself, and `--baseline` must be able to create one | high |
+
+Smoke run on the real inputs (the latest saved scan, `build/gate/vacuity/20260926T000121Z-315327.log`): baseline header
+"match (9 of 9 compared)"; "RECORDED COUNTS ARE STALE in CLAUDE.md § The gate — update it: declarations 6795 → 7051,
+refutations-skipped 278 → 304, sites 275 → 279, generic 253 → 257"; exit 0. Axioms on the latest saved audit: "RECORDED
+COUNT IS STALE in CLAUDE.md § Trust ledger — update it: 1034 clean → 1130"; exit 0. The old three-path call: exit 2.
+
+**Instrument note.** Before editing `scripts/vacuity.sh`, `pgrep -f` matched the shell running it (CLAUDE.md's
+self-match rule, in a checker's costume); the check that was used is `fuser` on the file's inode (exit 1: no holder),
+itself controlled on a scratch script that `bash` held open (exit 0). The edit was made on a copy and moved into place
+(new inode), so a running `bash` would have kept reading the old file.

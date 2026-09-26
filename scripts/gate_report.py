@@ -5,17 +5,28 @@
 and call this to print, from that file and the previous complete run's file:
 
 * every count the tool computed, including the ones the gate does not decide on;
-* whether those counts still match the ones the repository records (the vacuity baseline's header,
-  `CLAUDE.md` § Trust ledger) — a drifted record is flagged here, never failed;
+* whether those counts still match the ones the repository records, **one line per recorded source, and
+  a source is named on a "match" line only if it was read and every count it records was compared**:
+  the vacuity scan's nine counts against the baseline's header AND against `CLAUDE.md` § The gate; the
+  axiom audit's two against `CLAUDE.md` § Trust ledger. A drifted record is flagged here, never failed;
 * every row that changed since the previous complete run, which answers "which declarations are the new
   ones?" without a second scan.
 
-It decides nothing: pass and fail stay in the shell scripts. It does refuse, loudly and with exit status 2,
-output that is not the shape it reads — a per-site listing that disagrees with the scan's own totals, a
-missing accounting line — because a digest that silently printed less than the run computed would be the
-failure this file exists to remove.
+It decides nothing about the scan: pass and fail stay in the shell scripts. It refuses, loudly, in two
+cases, because each is a check that could not run:
 
-    gate_report.py vacuity <this run's log> <previous run's log, or ''> <baseline file>
+* exit 2 — the tool's output is not the shape it reads (a per-site listing that disagrees with the scan's
+  own totals, a missing accounting line): a digest that silently printed less than the run computed would
+  be the failure this file exists to remove;
+* exit 3 — a recorded source it compares against could not be read (its section is missing or doubled, a
+  count is missing or recorded twice). Until 2026-09-25 the vacuity digest printed "match" naming
+  `CLAUDE.md` § The gate, a file it never opened, while that section was four counts stale (J23bd, J32): a
+  comparison that could not run must never read as one that passed. The digest is printed in full first.
+
+A baseline that does not exist is reported and not failed here: `scripts/vacuity.sh` fails on a missing
+baseline itself, except when creating one with `--baseline`.
+
+    gate_report.py vacuity <this run's log> <previous run's log, or ''> <baseline file> <CLAUDE.md>
     gate_report.py axioms  <this run's log> <previous run's log, or ''> <CLAUDE.md>
 """
 from __future__ import annotations
@@ -27,11 +38,16 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 VERDICTS = ("vacuous", "stale", "declared", "witnessed", "generic", "unknown")
+COUNTS = ("declarations", "refutations-skipped", "sites", *VERDICTS)  # every count a vacuity record holds
 WARNING = re.compile(r"^\S+:\d+:\d+: (warning|error): ")
 
 
 class Malformed(Exception):
     """The tool's output does not have the shape this digest reads."""
+
+
+class Unreadable(Exception):
+    """A recorded source this digest compares against could not be read, so the comparison did not run."""
 
 
 def say(line: str = "") -> None:
@@ -73,19 +89,92 @@ def counts_of(run: dict) -> dict:
     return {**(run["scanned"] or {}), **(run["totals"] or {})}
 
 
-def recorded_vacuity(baseline):
+def claude_label(claude, section: str) -> str:
+    """`CLAUDE.md § <section>`, naming the file actually read whenever it is not the repository's own."""
+    label = f"CLAUDE.md § {section}"
+    return label if Path(claude).resolve() == REPO / "CLAUDE.md" else f"{label} (read from {rel(claude)})"
+
+
+def section_text(path, heading: str, label: str) -> str:
+    """The body of the one `## <heading>` section: up to the next heading of level 1–3 outside a code fence."""
+    if not Path(path).is_file():
+        raise Unreadable(f"could not read the counts in {label}: {rel(path)} does not exist")
+    lines, fenced, starts = lines_of(path), False, []
+    for i, line in enumerate(lines):
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        elif not fenced and line.rstrip() == f"## {heading}":
+            starts.append(i)
+    if len(starts) != 1:
+        raise Unreadable(f"could not read the counts in {label}: {len(starts)} '## {heading}' headings, not one")
+    body, fenced = [], False
+    for line in lines[starts[0] + 1:]:
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        elif not fenced and re.match(r"#{1,3} ", line):
+            break
+        body.append(line)
+    return "\n".join(body)
+
+
+def vacuity_counts(text: str, label: str) -> dict:
+    """All nine vacuity counts in `text`, each recorded exactly once — or `Unreadable`, never a partial dict.
+
+    A partial record would compare only the counts it holds and report "match" on the rest unread."""
+    found = re.findall(rf"(?<![\w-])({'|'.join(COUNTS)})=(\d+)", text)
+    seen = Counter(k for k, _ in found)
+    missing = [k for k in COUNTS if k not in seen]
+    doubled = sorted(k for k, n in seen.items() if n > 1)
+    if missing or doubled:
+        raise Unreadable(f"could not read the counts in {label}: "
+                         + "; ".join(([f"no {', '.join(missing)}"] if missing else [])
+                                     + ([f"{', '.join(doubled)} recorded more than once"] if doubled else [])))
+    return {k: int(v) for k, v in found}
+
+
+def recorded_in_baseline(baseline) -> dict | None:
+    """The baseline header's nine counts; `None` if there is no baseline (the shell gate fails on that itself)."""
     if not Path(baseline).is_file():
         return None
     header = "\n".join(line for line in lines_of(baseline) if line.startswith("#"))
-    keys = "declarations|refutations-skipped|sites|" + "|".join(VERDICTS)
-    return {k: int(v) for k, v in re.findall(rf"(?<![\w-])({keys})=(\d+)", header)}
+    return vacuity_counts(header, f"{rel(baseline)}'s header")
 
 
-def vacuity(cur_path: str, prev_path: str, baseline: str) -> None:
+def recorded_in_claude_gate(claude) -> dict:
+    """The nine counts `CLAUDE.md` § The gate records ("`declarations=… refutations-skipped=… sites=…`, …")."""
+    label = claude_label(claude, "The gate")
+    return vacuity_counts(section_text(claude, "The gate", label), label)
+
+
+TRUST = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
+
+
+def recorded_in_trust_ledger(claude) -> tuple[int, int]:
+    """(clean, purchases) from the one sentence of `CLAUDE.md` § Trust ledger that records the axiom audit."""
+    label = claude_label(claude, "Trust ledger")
+    found = TRUST.findall(re.sub(r"\s+", " ", section_text(claude, "Trust ledger", label)))
+    if len(found) != 1:
+        raise Unreadable(f"could not read the counts in {label}: {len(found)} sentences reading "
+                         "'current audit reads N clean and M declared purchases', not one")
+    return int(found[0][0]), int(found[0][1])
+
+
+def compare(label: str, recorded: dict, now: dict) -> None:
+    """One line for one recorded source: every count it records against this run's."""
+    drift = [f"{k} {recorded[k]} → {now.get(k)}" for k in recorded if now.get(k) != recorded[k]]
+    if drift:
+        say(f"RECORDED COUNTS ARE STALE in {label} — update it: " + ", ".join(drift))
+    else:
+        say(f"recorded counts in {label}: match ({len(recorded)} of {len(recorded)} compared)")
+
+
+def vacuity(cur_path: str, prev_path: str, baseline: str, claude: str) -> list[str]:
     run = read_vacuity(cur_path)
     if run["scanned"] is None or run["totals"] is None:
         raise Malformed("no '=== SCANNED ===' or '=== TOTALS ===' line: the scan did not report its accounting")
     now = counts_of(run)
+    if any(k not in now for k in ("declarations", "refutations-skipped")):
+        raise Malformed(f"the '=== SCANNED ===' line {run['scanned']} lacks declarations or refutations-skipped")
     per = Counter(line.split(" ", 2)[1].lower() for line in run["sites"])
     if len(run["sites"]) != now.get("sites") or any(per[v] != now.get(v) for v in VERDICTS):
         raise Malformed(f"{len(run['sites'])} SITE rows, by verdict {dict(per)}, disagree with the scan's "
@@ -103,18 +192,19 @@ def vacuity(cur_path: str, prev_path: str, baseline: str) -> None:
         for w in run["warnings"]:
             say(f"  {w}")
 
-    recorded = recorded_vacuity(baseline)
-    if recorded is None:
-        say(f"recorded counts: {rel(baseline)} does not exist")
-    elif not recorded:
-        say(f"recorded counts: none found in {rel(baseline)}'s header")
-    else:
-        drift = [f"{k} {recorded[k]} → {now[k]}" for k in recorded if now.get(k) != recorded[k]]
-        if drift:
-            say(f"RECORDED COUNTS ARE STALE — update {rel(baseline)}'s header and CLAUDE.md § The gate: "
-                + ", ".join(drift))
+    unreadable = []
+    for label, read in ((f"{rel(baseline)}'s header", lambda: recorded_in_baseline(baseline)),
+                        (claude_label(claude, "The gate"), lambda: recorded_in_claude_gate(claude))):
+        try:
+            recorded = read()
+        except Unreadable as e:
+            say(f"RECORDED COUNTS NOT COMPARED — {e}")
+            unreadable.append(str(e))
+            continue
+        if recorded is None:
+            say(f"RECORDED COUNTS NOT COMPARED — {rel(baseline)} does not exist (scripts/vacuity.sh fails on that)")
         else:
-            say(f"recorded counts ({rel(baseline)}'s header, CLAUDE.md § The gate): match")
+            compare(label, recorded, now)
 
     witnessed = sorted(line[len("SITE "):] for line in run["sites"] if line.startswith("SITE WITNESSED "))
     say(f"--- witnessed ({len(witnessed)}), with the evidence behind each ---")
@@ -142,6 +232,7 @@ def vacuity(cur_path: str, prev_path: str, baseline: str) -> None:
             if not added and not removed:
                 say("rows: none changed")
     say(f"every site and piece of evidence: rg '^(SITE|EVIDENCE) ' {rel(cur_path)}")
+    return unreadable
 
 
 # ---- axioms: scripts/Axioms.lean's `#print axioms` receipt --------------------------------------------
@@ -190,7 +281,7 @@ def axiom_set(axioms: tuple) -> str:
     return "[" + ", ".join(([f"{len(native)} native"] if native else []) + rest) + "]"
 
 
-def axioms(cur_path: str, prev_path: str, claude: str) -> None:
+def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
     records, warnings = read_axioms(cur_path)
     clean = [r for r in records if r[0] == "CLEAN"]
     purchased = [r for r in records if r[0] == "PURCHASED"]
@@ -218,28 +309,30 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> None:
         for w in warnings:
             say(f"  {w}")
 
-    flat = re.sub(r"\s+", " ", Path(claude).read_text(encoding="utf-8"))
-    m = re.search(r"current audit reads (\d+) clean and (\d+) declared purchases", flat)
-    if not m:
-        say("recorded count: not found in CLAUDE.md § Trust ledger "
-            "(it reads 'current audit reads N clean and M declared purchases')")
-    elif (int(m.group(1)), int(m.group(2))) != (len(with_axioms), len(purchased)):
-        pairs = ((int(m.group(1)), len(with_axioms), "clean"), (int(m.group(2)), len(purchased), "purchases"))
-        say("RECORDED COUNT IS STALE — update CLAUDE.md § Trust ledger: "
-            + ", ".join(f"{was} {label} → {now}" for was, now, label in pairs if was != now))
+    unreadable, label = [], claude_label(claude, "Trust ledger")
+    try:
+        was_clean, was_purchased = recorded_in_trust_ledger(claude)
+    except Unreadable as e:
+        say(f"RECORDED COUNT NOT COMPARED — {e}")
+        unreadable.append(str(e))
     else:
-        say("recorded count (CLAUDE.md § Trust ledger): match")
+        pairs = ((was_clean, len(with_axioms), "clean"), (was_purchased, len(purchased), "purchases"))
+        drift = [f"{was} {what} → {now}" for was, now, what in pairs if was != now]
+        if drift:
+            say(f"RECORDED COUNT IS STALE in {label} — update it: " + ", ".join(drift))
+        else:
+            say(f"recorded count in {label}: match (clean and purchases compared)")
 
     say("--- changes since the previous complete run ---")
     if not prev_path:
         say("no previous complete run on record; the next run is compared with this one")
-        return
+        return unreadable
     say(f"previous: {rel(prev_path)}")
     try:
         before_records, _ = read_axioms(prev_path)
     except Malformed as e:
         say(f"the previous run's output could not be read ({e}); nothing to compare")
-        return
+        return unreadable
     before = {r[1]: (r[0], r[2]) for r in before_records}
     after = {r[1]: (r[0], r[2]) for r in records}
 
@@ -254,17 +347,25 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> None:
         say(row)
     if not rows:
         say("no record appeared, disappeared or changed its axioms")
+    return unreadable
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) != 5 or argv[1] not in ("vacuity", "axioms"):
+    arity = {"vacuity": 6, "axioms": 5}
+    if len(argv) < 2 or argv[1] not in arity or len(argv) != arity[argv[1]]:
         print(__doc__)
         return 2
     try:
-        (vacuity if argv[1] == "vacuity" else axioms)(argv[2], argv[3], argv[4])
+        unreadable = (vacuity if argv[1] == "vacuity" else axioms)(*argv[2:])
     except Malformed as e:
         print(f"==> gate report: the output is not the shape this digest reads — {e}")
         return 2
+    if unreadable:
+        print("==> gate report: FAIL — a recorded source could not be read, so its comparison did not run "
+              "(the scan's own output is fine; the digest above is complete):")
+        for e in unreadable:
+            print(f"    {e}")
+        return 3
     return 0
 
 

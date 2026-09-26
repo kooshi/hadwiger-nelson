@@ -35,7 +35,8 @@
 # it, so the declaration count, or the names of two new sites, meant scanning again. The scan's complete
 # output is now saved under `build/gate/vacuity/` (`scripts/gate-log.sh`), and `scripts/gate_report.py`
 # prints the digest from that file: every count the scan computed and whether it still matches the counts
-# recorded in the baseline's header, the witnessed sites with the evidence behind each, and every site or
+# recorded in the baseline's header and in `CLAUDE.md` § The gate (each read, and each reported on its own
+# line; an unreadable one fails the digest, exit 3), the witnessed sites with the evidence behind each, and every site or
 # evidence row that changed since the previous complete run. The rows the gate decides on — declared,
 # vacuous, stale, unknown — follow in full, never cut at a column.
 set -uo pipefail
@@ -137,7 +138,7 @@ PREV="${GATE_PREV}"
 gate_log_complete
 
 # The digest: every count, the recorded counts, the witnessed sites, and what changed since the last run.
-if ! python3 "${REPO}/scripts/gate_report.py" vacuity "${GATE_LOG}" "${PREV}" "${BASELINE}"; then
+if ! python3 "${REPO}/scripts/gate_report.py" vacuity "${GATE_LOG}" "${PREV}" "${BASELINE}" "${REPO}/CLAUDE.md"; then
   echo "==> vacuity: FAIL — no digest could be built from this run's output (above). The scan's output"
   echo "    format is a contract, and a digest that silently printed less would be this gate failing open."
   kept
