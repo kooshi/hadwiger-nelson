@@ -9,11 +9,22 @@ inert, `Q = N v`) or a 2-colourable graph (dyadic, ramified: FS54-T2 (b)); `L(F)
 
 ## Theorems this phase proved
 
-(filled at stage 3)
+| id | statement | grade | address |
+|---|---|---|---|
+| X28D-P | odd local degree preserves *ramified* in `F_v(i)/F_v` at a dyadic place (closes FS54-T2's parity step, whose text says "local degree" where the proof needs ramification indices) | hand | Stage 1 |
+| X28D-S | `L(E) ≥ L(F)` for every finite extension `E ⊇ F` of real number fields: stable places of `E` lie over stable places of `F`, and each target of `E` contains (induced) or out-colours one of `F` | hand | §2.1 |
+| X28D-CP1 | CP-1 TRUE: a real number field with `L ≥ 3` has even degree; with a non-real embedding and `L ≥ 5`, even degree `≥ 4` | hand | §2.2 |
+| X28D-CP2 | CP-2 FALSE: `F = ℚ(√23, ∛2)`, signature `(2, 2)`, `L(F) = 5`; its totally real subfields `ℚ`, `ℚ(√23)` have `L = 2, 4` | hand + tools exact | §2.3; `tools/x28d_check.py` |
+| X28D-CP3 | CP-3 FALSE: `L` rises `4 → 5` in the cubic step `ℚ(√23) ⊂ ℚ(√23, ∛2)`; `χ` rises `3 → 4` unconditionally in the totally real cubic step `ℚ(√3) ⊂ ℚ(√3, 2cos(2π/7))` | hand + tools exact (the `χ` half rests on row 99 and G56's `U₈`) | §3.1 |
+| X28D-ODD | the true core of CP-3: an odd-degree extension preserves `L = 2` and `χ = 2` (FS54-T2 relative to any base) | hand | §3.2 |
+| X28D-CUBE | cube roots are impotent exactly where `μ₃` is absent: for `E = F(∛m)` and a stable place `v` with `ζ₃ ∉ F_v`, some `w | v` has `f(w|v) = 1` and odd local degree, so `w`'s target is `v`'s; hence `L(F(∛m)) = L(F)` whenever some place attaining `L(F)` has `ζ₃ ∉ F_v` (residue `𝔽_q`, `q ≡ 2 mod 3`; `𝔽₃` without `ζ₃`; dyadic of odd residue degree), and then `χ(F(∛m)²) = χ(F²)` unconditionally when `L(F) ≤ 4` (row 99) | hand | §3.2 |
 
 ## Would have searched here
 
-(filled as it happens)
+- Stage 2: a PARI `nflist` sweep over `(2,1)` quartics / `(2,2)` sextics for `L ≥ 5` with small subfields — not run; the field was
+  built from local conditions and PARI only checked it (§2.3).
+- Stage 3: a sweep over cubic extensions of `ℚ(√3)` for one that kills the `𝔽₃` place — not run; the cyclic cubic of conductor 7 was
+  chosen because 3 has order 3 in `(ℤ/7)ˣ/{±1}` (inert), and the pure cubics were excluded by X28D-CUBE before any computation.
 
 ## Stage 1 — SAVED
 
@@ -72,7 +83,7 @@ every real field with `L(F) ≥ 3`.
 (`L = 4`, `χ = 4`: row 73), and adjoin a cube root that is inert at 7 but cannot create a small target anywhere else.
 
 *Hand proof that `L(F) = 5`.* `F = ℚ(√23)(∛2)` has degree 6, signature `(2, 2)` (the real `∛2` gives two real embeddings, the complex
-cube roots four non-real ones). By CP-1's list only places above 2, 3, 7 can carry a target of `χ ≤ 4` (G59's rule; row 117):
+cube roots four non-real ones). Only places above 2, 3, 7 can carry a target of `χ ≤ 4` (G59's rule: residue `𝔽₃`, `𝔽₇`, dyadic ramified or inert of norm `≤ 32`; row 117):
 - **2:** `−23 ≡ 1 (mod 8)` is a square in `ℚ₂`, so `ℚ₂(√23) = ℚ₂(i)`; every completion of `F` above 2 contains `i`: **split**, no target.
 - **3:** `(23/3) = (2/3) = −1`, so `ℚ(√23)` has one place above 3 with completion `ℚ₉ = ℚ₃(i)`; every place of `F` above it is split.
 - **7:** `(23/7) = (2/7) = +1`, two places with completion `ℚ₇`; 2 is not a cube mod 7 (the cubes are `±1`) and `7 ∤ 6`, so
@@ -102,3 +113,74 @@ X23D/X23V, answering X25B-G1) and on MR's scope at a complex place. Unconditiona
 *Would have searched here (stage 2):* a PARI `nflist` sweep over signature-(2,1) quartics or `(2,2)` sextics for `L ≥ 5` with small
 subfields — **not run**; the field was built from the local conditions (a totally real `L = 4` base whose only small targets sit at a
 prime `q ≡ 1 (mod 3)`, plus a cube root that is a non-cube there), and PARI only checked it.
+
+## Stage 3 — SAVED
+
+### 3.1 CP-3 — FALSE [hand + tools exact]
+
+**(a) `L` is not preserved: `ℚ(√23) ⊂ ℚ(√23, ∛2)`, degree 3, `L`: `4 → 5`** (§2.3). Given MR and FS100-COR at a complex place
+(FS100-CX), `χ`: `4 → 5` as well; unconditionally only `4 ≤ χ ≤ 5` upstairs.
+
+**(b) `χ` is not preserved, unconditionally, in a totally real cubic step: `F = ℚ(√3) ⊂ E = ℚ(√3, 2cos(2π/7))`.** `χ(F²) = 3`
+(`[Fischer1990]` Thm 9, `d = 3 ≡ 3 (mod 12)`; row 99). In `E`: 3 is ramified in `ℚ(√3)` and inert in the cyclic cubic of conductor 7
+(3 has order 3 in `(ℤ/7)ˣ/{±1}`), so `E` has one place above 3, `e = 2`, `f = 3`, residue `𝔽₂₇` — **no prime of residue field `𝔽₃`**.
+`√3 ∈ E` gives triangles, so by the three-colour classification (row 99; G55's `√3` case: "`χ(F²) = 3 ⟺` some prime has residue field
+`𝔽₃`") **`χ(E²) ≥ 4`**. Upper: the one dyadic place (`e = 2`, `f = 3`) is inert in `E(i)` with `Q = 8`, target `U₈`, 4-colourable
+(G56, FS-54 [tools]), so `χ(E²) = L(E) = 4` (also row 99's `L ≤ 4` clause). *Exact check* (`data/fs100/x28d/check.out`): `E`'s
+polynomial `x⁶ − 2x⁵ − 18x⁴ + 54x³ + 11x² − 142x + 97`, 6 real roots; above 3 `[[2, 3, stable]]`; dyadic `["inert", 2, 3]`; small
+targets `["dyadic inert Q=8 (4)"]`; the base `ℚ(√3)` has `["dyadic inert Q=2 (4)", "stable F_3 place (3)"]`. Plant `--plant-cube3`
+(`∛2` for `2cos(2π/7)`) fires: the `𝔽₃` place survives (`[[6, 1, stable]]`) — as X28D-CUBE (§3.2) predicts.
+
+*Side finding, from the `--plant-real` output:* the **totally real** sextic `ℚ(√23, 2cos(2π/9))` has no target of `χ ≤ 4`
+(`data/fs100/x28d/plant-real.out`: `small=[]`; 7 is inert in the cyclic cubic of conductor 9), so `L ≥ 5` there too: the rise
+`4 → ≥ 5` in a cubic step over `ℚ(√23)` does not need a complex place. Not claimed beyond `L ≥ 5` (11 is inert in that cubic, so
+its value of `L` was not read).
+
+**Verdict: CP-3 FALSE**, on both halves, with an unconditional counterexample to the `χ` half.
+
+### 3.2 What of "cube roots are impotent" is true [hand]
+
+**X28D-ODD.** If `E/F` has odd degree and `L(F) = 2`, then `L(E) = χ(E²) = 2`. *Proof:* `L = 2` only at a dyadic ramified place `v`
+(every other target has `χ ≥ 3`: G59's rule); the local degrees above `v` sum to `[E:F]`, odd, so some `w | v` has odd local
+degree, and Lemma P keeps it ramified. ∎ With `F = ℚ` this is FS54-T2's corollary, and `ℚ(∛2)`'s plane is bipartite.
+
+**X28D-CUBE.** Let `m ∈ F^×` be a non-cube, `E = F(∛m)`, `v` a stable place of `F` with `ζ₃ ∉ F_v`. Then some `w | v` has
+`f(w|v) = 1` and odd local degree, so `w` is stable with `v`'s residue field and target. *Proof:* `E ⊗ F_v = F_v[x]/(x³ − m)`. If `m` is
+a cube in `F_v`, a factor of degree 1 exists. If not, `F_v(∛m)` has degree 3; were `f = 3`, it would be unramified, hence Galois over
+`F_v`, hence contain the ratio `ζ₃` of two roots, and `[F_v(ζ₃):F_v] ≤ 2` divides 3 — so `ζ₃ ∈ F_v`, contrary to hypothesis. So `f = 1`
+and the local degree is 1 or 3; Lemma S (ii) and Lemma P finish. ∎ `ζ₃ ∉ F_v` holds at every odd place with residue `𝔽_q`,
+`q ≡ 2 (mod 3)` (`𝔽₁₁`, `𝔽₂₃`, `𝔽₄₇`, …), at dyadic places of odd residue degree (`U₂`, `U₈`, `U₃₂`), and at a 3-adic place unless
+`F_v ⊇ ℚ₃(√−3)`.
+- **Corollary.** `L(F(∛m)) = L(F)` whenever some place attaining `L(F)` has `ζ₃ ∉ F_v`; then, by row 99, `χ(F(∛m)²) = χ(F²)`
+  **unconditionally** when `L(F) ≤ 4`, and given MR and FS100-CX when `L(F) = 5`. E.g. every `ℚ(√d, ∛m)` with `d ≡ 3, 7 (mod 12)` whose
+  `𝔽₃` place has `ζ₃ ∉ F_v` stays three-chromatic.
+- **Where cube roots are potent:** only at places with `ζ₃ ∈ F_v` — residue `𝔽_q`, `q ≡ 1 (mod 3)`: **`𝔽₇`** (the four-colour target),
+  **`𝔽₁₉`** (five), `U₄`, `U₁₆` (four) — and 3-adic places containing `√−3`. `ℚ(√23, ∛2)` is exactly this: its base's only small targets
+  are `𝔽₇` places and 2 is a non-cube mod 7.
+
+So Kooshi's recollection is right for `L = 2` (FS54-T2, any odd degree) and for pure cube roots at places without `ζ₃` (most of the
+small targets: `𝔽₃` without `√−3`, `𝔽₁₁`, the dyadic `U₂`, `U₈`, `U₃₂`); it is false at `𝔽₇` and `𝔽₁₉`, and false for general cubic
+extensions at every value of `L ≥ 3`.
+
+### 3.3 Consequences for the complex-place case of FS100-COR
+
+1. **The complex-place case is real and not reducible.** CP-2's field `ℚ(√23, ∛2)` has `L = 5`, a complex place, and no totally real
+   subfield with `L ≥ 5`; its `χ ≥ 5` (given MR) needs FS100-CX. And by X28D-CUBE's potency list, the pure-cube-root route produces such
+   fields exactly over bases whose small targets sit at `𝔽₇` / `𝔽₁₉` / `U₄` / `U₁₆`.
+2. **How much is free.** By CP-1, complex-place fields with `L ≥ 5` have even degree `≥ 4`; odd-degree complex-place fields
+   (`ℚ(∛2)`, any `F(∛m)` over an `L = 2` base) are bipartite and never enter COR's `L ≥ 5` clause. For `L ≤ 4` row 99 needs no MR at any
+   field. So COR's complex-place content is exactly: even degree `≥ 4`, `L ≥ 5`, complex place — nonempty (CP-2, `L = 5`).
+3. **Nothing here re-derives FS100-CX or MR at a complex place.** This job decides CP-1–CP-3 only.
+
+### 3.4 Proposed edits (for the front-page lane; not made here)
+
+- `LEDGER.md` § B: seven rows, X28D-P, S, CP1, CP2, CP3, ODD, CUBE, home `plans/FS100-X28D-derivation.md`.
+- `plans/FS54-derivation.md` T2: "odd local degree … `i ∉ F_𝔭` … giving case (b)" — the step needs ramification indices (Stage 1);
+  wording only, the corollary stands.
+- FS100-COR's scope sentence (`plans/FS100-derivation.md`): record that the complex-place case is inhabited and not reducible by
+  monotonicity (X28D-CP2), so FS100-CX is load-bearing there.
+- G43's Do line already warns "a larger field can lose a prime its subfield had"; X28D-S is its monotone form (`L` rises, never falls,
+  under extension) and X28D-CUBE says when a cube root is the step that loses it.
+
+*Prior art:* every step is standard local algebraic number theory (unramified extensions are Galois; Kummer; ramification indices
+multiply); the application to `L(F)` is this job's. No gate run (elementary; declared as a debt only if the owner wants one).
