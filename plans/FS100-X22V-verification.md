@@ -9,7 +9,6 @@ Working files `data/fs100/x22v/`; checks `tools/x22v_*.py`.*
 | id | statement (one line) | grade | where |
 |---|---|---|---|
 | X22V-C0 | over ℚ(√59), ℚ(√83), ℚ(√131) the unique dyadic place of `F` (`e = 2, f = 1`) is inert in `L = F(i)`, so none is a ramified stable dyadic place | [tools exact; controls ℚ(√5) ramified, ℚ(√167) split; plant fires] + [hand] | Stage 1 §1.3; `tools/x22v_c0.py`, `data/fs100/x22v/c0*.out` |
-
 | X22V-F1 | a finite positive `U`-invariant `E`-null measure on `R̂` has, given MR, Fourier coefficients 0 at every `y ≠ 0` | [hand] | §2.1 |
 | X22V-F2 | given MR, over a type-(B) field, every `R ⋊ U`-invariant probability on `X₄(F)` is carried by Pull (no T-B1) | [hand, one mind] | §2.1 |
 | X22V-R | given MR, over a type-(B) field, every four-colouring outside Pull is affinely transient; so row 88 ⟺ no affinely transient colouring | [hand, one mind] | §2.3, corrected §3.1 |
@@ -299,3 +298,28 @@ affinely transient colouring is transient; (c) for every `μ ∈ M′`, `lim inf
 ### Would-have-searched-here log (stage 3)
 
 (none: the stage is a write-up)
+
+## Stage 4 — SAVED (fallback: X22D's lemma statements, read after stage 3 was committed at 26921d37)
+
+Read: `plans/FS100-X22D-derivation.md` theorems table, its verdict table, and the statements of TR-ROT (§2.4) and C-4 (§3.3, first lines). No
+proofs opened.
+
+| claim / lemma | X22D | X22V (blind) | difference of truth |
+|---|---|---|---|
+| C-0 | TRUE [hand + tools exact] | TRUE [tools exact + hand] | none |
+| C-1 | GAP at TR-ROT; TRUE for `R ⋊ U`-invariant measures (X22D-QR) | GAP at the rotational step; TRUE on `M_Aff` (X22V-F2) | none — the same step, named independently |
+| TR-ROT vs my §3.1 (a)–(c) | "no translation-invariant random four-colouring `μ` with `μ(Pull) = 0` has every `U`-Følner average converge onto Pull" | (c): `lim inf` of `U`-averages of `P_μ(c(0) ≠ c(4u))` positive for every `μ ∈ M′` | none; TR-ROT is the cleaner form. My (a) is equivalent to Q-μ with no MR at all (Markov–Kakutani), so it restates the target rather than naming a step — a slip in §3.1's "equivalent-looking" line, corrected here |
+| X22D-RT | given MR, every translation-invariant random four-colouring is rotationally transient (bad rotated windows of `U`-upper-Banach-density 0) | derived in §2.2 item 1 in Følner form (every `U`-average limit is on Pull, by F2); the upper-Banach form follows because it holds along every Følner sequence and cylinders are clopen | none |
+| C-2 | ⟹ TRUE; ⟸ GAP; TRUE with rigid-motion transience (X22D-TRM: non-Pull windows of upper Banach density 0 in `R ⋊ U`) | ⟹ TRUE; ⟸ GAP; TRUE with affine transience (X22V-R: invariant measures of the `R ⋊ U`-orbit closure on Pull) | none: the two corrected forms are one statement through the clopen correspondence (R88-CL / `[BergelsonMoragues2021]` Thm 2.3, for the countable amenable group `R ⋊ U`; R88-CL is stated for abelian groups, so the transfer to `R ⋊ U` is a one-line citation owed) |
+| C-3 | GAP at TR-ROT; two of three links TRUE | GAP at Q-tr ⟹ row 88; T-B1 ⟺ row 88 ⟹ Q-tr TRUE | none |
+| C-4 | GAP at C4-S ("a transient colouring supplies no measure off Pull for Lemma Z, EF's pigeonhole or Lemma 3.1′") | GAP; X22V-T4, the same obstruction, with the spectral form (Pull's spectrum on the finite `D`) | none |
+| SEL-k | TRUE over every real number field given MR; spectrum on `T + A`; no Lemma C′ needed | TRUE given MR; spectrum on `T + A`; scope enters only through MR | none |
+| FL-K | TRUE (second mind); holds for translation-invariant `μ` over `𝒜_E`, every `k` | FLk at every `k` over `𝒜_∅` for translation-invariant `μ` — not blind (§1.5) | none; mine does not count as an independent check of FL-K |
+
+**Differences of truth: none.** Both minds reach the same verdict on all six claims and name the same missing step. The confirmation is
+route-dependent in one place worth flagging (J48's caveat, repeated): both use B⁺ (or its ingredients: Theorem C at `S = ∅` and gap-freeness)
+for the rotation-invariant half, so a flaw in B⁺'s application to non-ergodic measures would be shared; J48's BC-6 checked that point blind.
+
+### Would-have-searched-here log (stage 4)
+
+(none)
