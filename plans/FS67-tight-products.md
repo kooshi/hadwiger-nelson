@@ -638,3 +638,102 @@ at 50–60 digits (DC-3, twice), `UD(𝔽₉, 2)`'s exact spectrum and colouring
 `C₅`** by J27V's hand structure (FS67-C5); left at `C₇` (2,187 maps) and `K₃ × C₅` (`3^15` maps), with the generator image stated (G21), and a
 refusal there FALSE for DB-1's first clause only. **PB-2** (J27D: spectra of `[Tardif2023]`'s `Ω_w(K_m)` and `[Tardif2022frac]`'s factors once held)
 — its first step is not a search and needs no ban exemption: decide by hand, from `[Tardif2023]` §2 (held), whether `Ω_w(K_m)` is regular.
+
+### Stage 3 — SAVED (the drafts: LEDGER rows 114–115, § B lines, CLAUDE.md lines, BIBLIOGRAPHY rows; the stub re-aimed)
+
+*Numbering (the owner, relaying J41's reservation at commit `46938fe8`): the row-88 close holds rows 111–113 and stubs FS-97 to FS-99; FS-67's rows
+are **114–115**. FS-67 mints no new stub (its own is re-aimed). The derivation file gained one entry in this stage, **FS67-CL** (J40's clique
+class, checked here in one step): 20 entries.*
+
+#### R.8a `LEDGER.md` § A — rows 114 and 115 (drafts)
+
+| 114 | **The colourings of a product with a gap-free factor. FS67(G, k) — every `k`-colouring of `G × H`, for every connected `H` with `χ(H) > k`, comes from `G` — holds iff every `k`-colouring of `G` is gap-free and `χ(E_k(G)) ≤ k`, `E_k(G)` the improper part of the exponential graph `K_k^G`; for `G = K_k × X` (connected, uniquely `k`-colourable) it fails iff `X` has a Hedetniemi partner, so at every `k ≥ 4` it fails for some finite connected uniquely `k`-colourable `G`** (FS-67; `plans/FS67-derivation.md` FS67-DA1 to DA4, L1, GL, CL, and for three colours DB1R, W, DB1Z, C5). **[hand, two blind derivations (J27D; J27V); at `k ≥ 4` from `[Tardif2023]` Thm 1]** The negative at `k ≥ 4` is **a composition of print** — Duffus–Sands–Woodrow's `B(n) ⟹ H(n)` (`[Tardif2008]` §4.2; `[GodsilEtAl2020]` §1.3) with `[Tardif2023]` — made explicit by `K_k × X`, which needs neither DSW nor `[Shitov2019]`. FS67 holds for `G = K_k` (Greenwell–Lovász, re-derived by a selection on `E_k(K_k)`; `K_k^s` by iteration, PA-P3) and for every `G` whose vertices all lie in `k`-cliques. **Three colours** (`B(3)` widened to gap-free): a two-step winding `D_C` is constant on components of `K_3^G`; components with `D_C ≡ 0` for some odd walk `C` are 3-colourable (`[TardifWrochna2019]` §3, external); the loopless components with every `D_C ≠ 0`, present with edges at `G = C₅` and 3-colourable there by hand, are the named GAP both minds reached. A gap-free colouring is a fall (frozen) colouring; Csernák's "tight" is that, not Hoffman-tight. **Not claimed:** three colours; any Hoffman-tight counterexample. **Prior art (`plans/FS67-PA-close.md` Stage 2):** `B(n) ⟹ H(n)` in print; whether DSW's proof uses `K_n × X` undecided (DSW unread); the characterisation and L1 not found as sentences. | `plans/FS67-J27D-derivation.md` §Stages 2, 4; `plans/FS67-J27V-verification.md` §2.1–§2.5, §4.2; `tools/crunch_j27d_da.py`, `tools/crunch_j27d_db.py` | FS-67 (crunch 2026-09-25) |
+| 115 | **Mixing pins a product colouring. If `G` is `k`-gap-free (any graph, connected or not) and `H = Cay(A, T)`, `A` finite abelian, has `λ* < 1/(k−1)`, every proper `k`-colouring of `G × H` is pulled back from `G`, and the constant is sharp (`H = K_k`); for 1-walk-regular Hoffman-tight `G` the same holds against every connected `H` with `χv(H) > k`, and against `H` with `χv(H) = k < χ(H)` under `[GodsilEtAl2020]` Result 5's hypothesis** (FS-67; FS67-DC1, DC2, DC2S, DC3, DD1, DD2R, DD2N, T, DB2). **[hand, two blind derivations; DC-1 and DD-1 conditional on `[GodsilEtAl2020]` Results 1, 4, 5 (external, read)]** The proof is M3-J21-MX's selection (row 109) bootstrapped by gap-freedom: a contraction on the off-colour fibre measures, strict exactly below `1/(k−1)`. Hoffman-tight ⟹ gap-free (the ratio bound's equality case), so a Hoffman-tight counterexample, if any, lives in `H`'s gap regime `χv(H) ≤ k < χ(H)`; `K_k × X` is Hoffman-tight iff `μ_min(X) ≥ −d_X/(k−1)`, which names DD-2's missing ingredient, a regular Hedetniemi factor. **Residue planes as `H`** (`p ≡ 3 (mod 4)`, `p ≤ 103`): `Γ_p` meets both hypotheses at `k = 3` from `p = 11`, at `k = 4` from 23, at `k = 5` from 59; `Γ₇` meets neither. `UD(𝔽₉, 2)` is connected, Hoffman-tight and so 3-gap-free (as is every 3-adic level that is Hoffman-tight), hence every three-colouring of `UD(𝔽₉, 2) × Γ₁₁` comes from `UD(𝔽₉, 2)`. **Not claimed:** anything at `λ* ≥ 1/(k−1)`; Zhang's IS-imprimitive exception; the gap regime. **Prior art (`plans/FS67-PA-close.md` Stage 3):** partly in print — `G = K_k` is `[PakVilenchik2013]` Thm 3; DC-1 and DD-1 are the integral corollaries, not stated there, of `[GodsilEtAl2020]` Thm 4.16 (1), (3); arbitrary gap-free `G` not found (40 zbMATH queries, two databases); Lemma T is `[Haemers2021]` p. 4's equality case. | `plans/FS67-J27D-derivation.md` §Stages 3–5; `plans/FS67-J27V-verification.md` §2.6–§2.10, §4.3; `tools/crunch_j27d_dc.py`, `tools/crunch_j27v_dc3.py`, `tools/crunch_j27v_fq9.py` | FS-67 (crunch 2026-09-25) |
+
+#### R.8b `LEDGER.md` § B — twenty lines (drafts; `tools/fs71_ledger_b_check.py --strict` passes for FS67 once they are in)
+
+| FS67-DA1 | FS-67 | DA-1′: a `k`-colourable `G` that is not `k`-gap-free has, for every `H` with ≥ 2 vertices, a `k`-colouring of `G × H` not pulled back from `G` | hand (two derivations) | `plans/FS67-derivation.md` FS67-DA1 | stub (FS-67 D4) |
+| FS67-L1 | FS-67 | a gap-free proper colouring is an isolated looped vertex of `K_k^G`; a gap gives a second, adjacent one (frozen = isolated) | hand (two derivations) | `plans/FS67-derivation.md` FS67-L1 | stub (FS-67 D4) |
+| FS67-DA2 | FS-67 | DA-2′ (= PA-T6): `G` `k`-gap-free ⟹ (FS67(G, k) ⟺ `χ(E_k(G)) ≤ k`); FS67(G, k) ⟺ all colourings gap-free ∧ `χ(E_k(G)) ≤ k` | hand (two derivations) | `plans/FS67-derivation.md` FS67-DA2 | stub (FS-67 D4) |
+| FS67-GL | FS-67 | Greenwell–Lovász re-derived as FS67(K_k, k): "the least repeated colour" properly `k`-colours `E_k(K_k)` | hand (one mind; printed) | `plans/FS67-derivation.md` FS67-GL | stub (FS-67 D4) |
+| FS67-CL | FS-67 | FS67(G, k) for every `G` whose vertices all lie in `k`-cliques (GL Cor. 1 per clique) | hand (one mind, one-step check) | `plans/FS67-derivation.md` FS67-CL | stub (FS-67 D4) |
+| FS67-DA3 | FS-67 | DA-3: `K_k × X` (`X` connected, `χ(X) > k`) is connected, uniquely `k`-colourable, gap-free; FS67 fails for it ⟺ `X` has a Hedetniemi partner | hand (two derivations) | `plans/FS67-derivation.md` FS67-DA3 | stub (FS-67 D4) |
+| FS67-DA4 | FS-67 | DA-4: at every `k ≥ 4` FS67 fails for a finite connected uniquely `k`-colourable `G` (from `[Tardif2023]`); FS67 on that class ⟹ `H(k)` | hand (two derivations) | `plans/FS67-derivation.md` FS67-DA4 | declined |
+| FS67-DC1 | FS-67 | DC-1: 1-walk-regular `G` with `χv(G) = k` (Hoffman-tight), `H` connected, `χv(H) > k` ⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations; GRRSV external) | `plans/FS67-derivation.md` FS67-DC1 | declined |
+| FS67-DC2 | FS-67 | DC-2: `G` `k`-gap-free (any), `H = Cay(A, T)` finite abelian, `λ* < 1/(k−1)` ⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations) | `plans/FS67-derivation.md` FS67-DC2 | declined (finite-form candidate) |
+| FS67-DC2S | FS-67 | DC-2's constant is sharp: `H = K_k` has `λ* = 1/(k−1)` and a non-pullback colouring | hand (one mind) | `plans/FS67-derivation.md` FS67-DC2S | declined |
+| FS67-DC3 | FS-67 | DC-3: `Γ_p` meets DC-1/DC-2's `H`-hypothesis at `k = 3` from 11, `k = 4` from 23, `k = 5` from 59 (`p ≤ 103`); `Γ₃`, `Γ₇` never | tools (twice at three rows) | `plans/FS67-derivation.md` FS67-DC3 | declined |
+| FS67-DB1R | FS-67 | `χ(E_3(G)) ≤ 3` ⟺ every 3-colouring of `G × H` (`H` connected, `χ(H) > 3`) has a proper fibre | hand (two derivations) | `plans/FS67-derivation.md` FS67-DB1R | stub (FS-67 D4) |
+| FS67-W | FS-67 | Lemma W: the two-step winding `D_C = −6w₂^c` is constant on components of `K_3^G`, non-zero on proper colourings | hand (two derivations) | `plans/FS67-derivation.md` FS67-W | declined |
+| FS67-DB1Z | FS-67 | components of `E_3(G)` with `D_C ≡ 0` for some odd `C` are 3-colourable (TW §3 external) | hand (two derivations) | `plans/FS67-derivation.md` FS67-DB1Z | declined |
+| FS67-C5 | FS-67 | the non-zero-winding improper part of `E_3(C₅)`: a 2-regular graph with pendant leaves per class, 3-colourable | hand (one mind) | `plans/FS67-derivation.md` FS67-C5 | declined |
+| FS67-T | FS-67 | Lemma T: Hoffman-tight at `k` ⟹ every `k`-colouring balanced and gap-free (the ratio bound's equality case) | hand (one mind; classical) | `plans/FS67-derivation.md` FS67-T | stub (FS-51) |
+| FS67-DB2 | FS-67 | DB-2: `UD(𝔽₉, 2)` and every Hoffman-tight 3-adic level are connected and 3-gap-free | hand + tools (two derivations) | `plans/FS67-derivation.md` FS67-DB2 | declined |
+| FS67-DD1 | FS-67 | DD-1: equal `χv = k`, Result 5's hypothesis, `χ(H) > k` ⟹ every `k`-colouring of `G × H` pulled back | hand (two derivations; GRRSV external) | `plans/FS67-derivation.md` FS67-DD1 | declined |
+| FS67-DD2R | FS-67 | `K_k × X` (`X` regular) Hoffman-tight at `k` ⟺ `μ_min(X) ≥ −d_X/(k−1)`; DD-2 via `K_k × X` ⟺ such a Hedetniemi pair | hand (two derivations) | `plans/FS67-derivation.md` FS67-DD2R | declined |
+| FS67-DD2N | FS-67 | a Hoffman-tight counterexample's `H` is not a mixing abelian Cayley graph, and for 1-walk-regular `G` has `χv(H) ≤ k < χ(H)` | hand (J27D; halves checked by J27V) | `plans/FS67-derivation.md` FS67-DD2N | declined |
+
+#### R.8c `CLAUDE.md` lines (drafts; net **+2,397 bytes** of the 3,000 allowed)
+
+Measured by `data/fs67/j42/claude_md_drafts.py` against `CLAUDE.md` on disk at this stage (every anchor occurs exactly once; its plant, an
+absent G61 anchor, exits 1 — `claude-md-bytes-plant.out`); bytes per edit in `claude-md-bytes.out`. The front-page job re-measures against
+the file it edits. Every line uses "gap-free (fall)" or "Hoffman-tight", never "tight" alone (R.3 item 3). The drafts, verbatim
+(`data/fs67/j42/claude-md-drafts.txt`):
+
+```
+--- Paths forward row 9 (FS-67) [replace] anchor/old: «| 9 | FS-67 3-colourings of tight products — `plans/STUB-tight-product-colourings.md` | **re-aimed at FS-85's close to i …»
+NEW: «| 9 | FS-67 colourings of gap-free products — `plans/STUB-tight-product-colourings.md` | **Closed as a milestone at the crunch (rows 114–115), the stub re-aimed.** `G` gap-free (a fall colouring) at `k`, `H` connected, `χ(H) > k`: must every `k`-colouring of `G × H` come from `G`? Exactly when `χ(E_k(G)) ≤ k`; **no from four colours up** for some uniquely colourable `G` (a composition of print: Duffus–Sands–Woodrow's `B(k) ⟹ H(k)` with `[Tardif2023]`); yes against every mixing `H` (`λ* < 1/(k−1)`, sharp). **Left:** three colours (3-colour the non-zero-winding part of `E_3(G)`), a Hoffman-tight counterexample (a regular Hedetniemi factor with `μ_min ≥ −d/(k−1)`), Zhang's IS-imprimitive exception … | none; mechanism — G61 (3)'s 11 half now a theorem, its 7 half measured (G48, FS-64, FS-66) |»
+
+--- G54: products [insert-before] anchor/old: «**What it says about six:**»
+NEW: «**In a product, Hoffman-tight pulls back where the other factor mixes** (FS-67, rows 114–115): every colouring of a Hoffman-tight plane is gap-free — a fall colouring, which Csernák calls "tight", another sense of the word — and a gap-free `G` pulls back against every abelian Cayley `H` with `λ* < 1/(k−1)`, sharp at `K_k`; gap-freedom alone fails against some `H` from four colours up (`K_k × X`, `X` from a Hedetniemi pair), and whether Hoffman-tightness suffices is open — check the other factor's `λ*` before calling a product colouring local. »
+
+--- G61 (3) [replace] anchor/old: «(the general statement is FS-67, unproved, and false without gap-freedom)»
+NEW: «(at 11 a theorem: the plane is 3-gap-free and `Γ₁₁` mixes, `λ* < 1/2`, so every three-colouring of the product pulls back, rows 114–115; at 7, where `Γ₇` neither mixes nor has `χv > 3`, still measured; false without gap-freedom)»
+
+--- G72 count [insert-after] anchor/old: «**nine of nine**.»
+NEW: « **Tenth (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found: **ten of ten**.»
+
+--- G21 instance [insert-after] anchor/old: «an existence theorem paraphrased as a classification at four addresses (G77).»
+NEW: « **FS-67's two:** plants that could not fire — a tightness plant that left `λ_min` where it was, and a circle `x² + y² = 2` that built an isomorphic graph (every circle is a similarity image of the unit circle).»
+
+--- Frontier item 28 (new line after item 27) [insert-after] anchor/old: «ow question lives at nine places; nothing touches `χ_µ(ℝ²)`.»
+NEW: «
+28. **Colourings of products: mixing pins them, gap-freedom does not** (rows 114–115; FS-67, `plans/FS67-derivation.md`). A `k`-colouring of `G × H` must come from `G` exactly when `G`'s colourings are gap-free and the improper part of `K_k^G` is `k`-colourable; from four colours up that fails for some uniquely colourable `G` (a composition of print), and it holds whenever `H` mixes (G54). Three colours and Hoffman-tight `G` are open. Bearing on χ ≥ 6: none.»
+
+--- Prior-art position, Ours [insert-after] anchor/old: «the mixing selection and the windows at five over ℚ(√167) (rows 108–110);»
+NEW: « the product criterion `χ(E_k(G)) ≤ k` for gap-free `G`, its `K_k × X` form and the sharp mixing pullback for every gap-free `G` (rows 114–115; as far as the gate reached, Duffus–Sands–Woodrow 1985 unread);»
+
+--- Prior-art position, Not ours [insert-after] anchor/old: «its threshold beside `K_k` (`[PakVilenchik2013]`);»
+NEW: « Duffus–Sands–Woodrow's `B(n) ⟹ H(n)`, so with `[Tardif2023]` `B(n)` and `A(n)` fail for `n ≥ 4` (a composition of print), and the vector pullbacks under rows 114–115 (`[GodsilEtAl2020]` Thm 4.16);»
+
+--- Last updated [insert-after] anchor/old: «*Last updated: 2026-09-25 — »
+NEW: «**FS-67 closed** (rows 114–115; G21, G54, G61, G72 edited): the product question answered negatively from four colours up for gap-free factors, a sharp mixing pullback, three colours open; **Paid (theorem and no-go)** (`plans/FS67-tight-products.md` §R-close). »
+```
+
+**Why these and not a grokking of its own:** G54 is where a Hoffman-tight plane's behaviour lives, and G61 (3) carried the measured fact FS-67
+was minted to justify; one home per fact. Kooshi's "example invariant" observation (crunch post-close inventory row 25) is the crunch's to
+mint, not this close's.
+
+#### R.8d `BIBLIOGRAPHY.md` rows (drafts)
+
+**J40's proposals are adopted as written** (`plans/FS67-PA-close.md` Stage 5: `[Csernak2023]` new; `[GodsilEtAl2019]` new; updates to
+`[GodsilEtAl2020]`, `[AbiadEtAl2025]`, `[Haemers2021]`, `[DuffusSandsWoodrow1985]`; listing rows for the fall-colouring vocabulary and the idomatic
+titles), with the "papers for Kooshi" list (DSW 1985 and El-Zahar–Sauer 1985 first: each decides one open attribution). **Added from J27, J27D
+and J27V:**
+- `[GodsilEtAl2020]`: also read Results 1–5 and §1.2 (J27D), Thm 4.16 (1) (J27V); rests: FS67-DC1, FS67-DD1.
+- `[GodsilRobersonRooney2017]`: Cor. 4.10 read (J27D); rests: FS67-DC1's `χv` link.
+- `[TardifWrochna2019]`: §1–§3 read (J27D; §3's median homomorphism used, not re-derived); rests: FS67-W (the interleaved walk), FS67-DB1Z.
+- `[Tardif2023]`: Thm 1 and §2's construction read (J27D, J27V); rests: FS67-DA4, and DD-2's open regularity question (§2's `Ω_w(K_m)`).
+- `[Tardif2008]`: §4.2 re-read and Thm 3.2 (J27V, J40); rests: row 114's attribution of `B(n) ⟹ H(n)`, FS67-CL's scope.
+- `[GreenwellLovasz1974]`: rests: FS67-GL, FS67-DA3, FS67-CL. `[PakVilenchik2013]`: rests: FS67-DC2 (its `G = K_k` case).
+- `[ElZaharSauer1985]`: decides FS67-W / DB-1's attribution (J40); still not held.
+- **New, not held** (citations from J40 Stage 5): `[Tardif2006alg]` (Algorithms Combin. 26, Springer 2006, zbl 1114.05040; DB-1's second
+  decider), `[Tardif2022frac]` (Graphs Combin. 38 (2022) Paper 171, doi 10.1007/s00373-022-02576-x; DD-2's first reading), `[LaroseTardif2000]`
+  (Combinatorica 20 (2000) 531–544, doi 10.1007/s004930070006), `[SauerZhu1992]` (J. Graph Theory 16 (1992) 423–436, doi 10.1002/jgt.3190160504 —
+  the owner's brief's "Sauer 1992"), `[Sauer2001]` (Discrete Math. 229 (2001) 261–292, Elsevier open archive), `[Zhu1998]` (Taiwanese J. Math.
+  2(1) (1998) 1–24, free), `[DuffusSauer2005]` (Discrete Math. 300 (2005) 91–99, open archive).
+
+#### R.8e `plans/FRONTIER-STUBS.md` (draft) and the stub
+
+Row 9 (FS-67) takes the `CLAUDE.md` row above in its full form, **rank unchanged** (a re-rank is the front-page lane's). The stub file
+`plans/STUB-tight-product-colourings.md` is re-aimed in this stage (its new top section).

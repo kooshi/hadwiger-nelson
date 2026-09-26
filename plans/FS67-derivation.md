@@ -29,7 +29,8 @@ FS67-C5).
 
 **Who found what.** **J27** (the planner): the claim list and routes (§4.3, §5.1), graded [reading]. **J27D** (derivation): table rows `#1`–`#19`.
 **J27V** (blind verifier; blind phase stages 1–2; stage 3 from J27D's statements; stage 4 the divergence table): J27V-T1 to T10, the C₅ structure,
-the sharpness of DC-2, and the three DC-3 spot checks. **J42** (this close): no theorem; the file.
+the sharpness of DC-2, and the three DC-3 spot checks. **J40** (the close-time prior-art gate): FS67-CL, an observation, checked here in one step. **J42** (this close): no theorem of its own; the
+file, and FS67-CL's one-step check.
 
 **Notation, fixed once** (the plan's §4.1, verbatim): "Graphs are simple and loopless; `k ≥ 3`. A proper `k`-colouring `c` of `G` is *gap-free*
 if every closed neighbourhood `N[x]` meets all `k` colours. `G` is *`k`-gap-free* if it is `k`-colourable and every proper `k`-colouring of it is
@@ -95,6 +96,16 @@ re-aim (the jackpot "gap-freedom as the exact hypothesis" is dead at `k ≥ 4`);
 pending J40. The records: J27's §PA 3.1 calls it "prior art by composition" — `[Tardif2008]` §4.2's `B(n) ⟹ H(n)` (Duffus–Sands–Woodrow 1985)
 with `[Tardif2023]` (H(4) false) and `[Shitov2019]` gives `B(n)` false for every `n ≥ 4`; whether that consequence is stated in print is J40's
 question. *Kernel:* declined — rests on `[Tardif2023]`'s construction [external]; the reduction step alone is FS67-DA3's stub.
+
+**FS67-CL — the clique class (J40's observation, `plans/FS67-PA-close.md` Stage 2): FS67(G, k) holds for every graph `G` in which every vertex lies in a `k`-clique, the Burr–Erdős–Lovász class. [hand, one mind (J40, from GreenwellLovasz1974 Cor. 1 and Csernák 2023's Lemma 3.5, "not checked here beyond reading the two proofs it combines"); checked in one step by J42]**
+*Proof:* J40 Stage 2 ("GL Cor. 1 on each clique, glued along overlaps as in Csernák's Lemma 3.5"). The one step (J42's check): for a vertex
+`x` in a `k`-clique `Q`, `β` restricted to `Q × H ≅ K_k × H` is `σ_Q ∘ π₁` by GL Cor. 1 (`H` connected, `χ(H) > k`), so `x`'s fibre is constant;
+all fibres constant is a pullback (`H` has an edge). No gluing and no connectivity of `G` is needed. *Proof verdict:* closes. *Scope:* such a `G`,
+if `k`-colourable, is `k`-gap-free (each vertex sees the other `k − 1` colours in its clique); if not, the statement says `G × H` has no `k`-colouring,
+which is Burr–Erdős–Lovász's `χ(G × H) = min` for this class (`[Tardif2008]` Thm 3.2). *Rests on it:* the drafted ledger row 114 (a class where
+FS-67 holds with no spectral hypothesis, beside `K_k^s`, PA-P3). *Prior art:* J40 (verbatim): "a class J27D does not name"; its ingredients are
+`[GreenwellLovasz1974]` Cor. 1 and Csernák 2023 (arXiv:2303.06406) Lemma 3.5, whose Thm 3.6 is the `A(n)`-type neighbour; not searched as a
+statement. *Kernel:* stub (FS-67's D4; the smallest target of the family, given GL Cor. 1).
 
 ## §2. Spectral pullbacks: the strict regime
 

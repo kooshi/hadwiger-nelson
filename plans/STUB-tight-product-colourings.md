@@ -1,5 +1,56 @@
 # FS-67 — 3-colourings of a tight graph times a non-3-colourable one: do they all come from the tight factor?
 
+**Closed as a milestone, re-aimed (FS-67's close, 2026-09-25, crunch job J42; `plans/FS67-tight-products.md` §R-close first, then
+`plans/FS67-derivation.md`; draft ledger rows 114–115).** Words, fixed: *gap-free* colouring = a **fall** (frozen) colouring, every closed
+neighbourhood meets every colour; *Hoffman-tight* = `λ_min = −d/(k−1)` (G54). Csernák 2023's "tight" means gap-free, not Hoffman-tight; this
+stub's title means Hoffman-tight.
+
+**What is answered** (each by two blind derivations unless marked; addresses in the derivation file):
+- **The criterion** (FS67-DA1, DA2): every `k`-colouring of `G × H`, for every connected `H` with `χ(H) > k`, comes from `G` **iff** every
+  `k`-colouring of `G` is gap-free **and** `χ(E_k(G)) ≤ k`, `E_k(G)` the improper maps of the exponential graph `K_k^G`. A gap is enough to
+  fail (the minting's `C₅ × K₄`, generalised); for non-`k`-colourable `G` the statement is Hedetniemi's `H(k)` for `G`.
+- **Gap-freedom is not enough from four colours up** (FS67-DA3, DA4): `G = K_k × X` is connected and uniquely `k`-colourable, and fails
+  exactly when `X` has a Hedetniemi partner — so at every `k ≥ 4`, by `[Tardif2023]`. **This is a composition of print, not ours** (owner's
+  ruling, 2026-09-25): Duffus–Sands–Woodrow 1985's `B(n) ⟹ H(n)` (reported by `[Tardif2008]` §4.2 and `[GodsilEtAl2020]` §1.3) with
+  `[Tardif2023]` gives `B(n)` — and so `A(n)` — false for every `n ≥ 4`. It is not a `CLOSED-QUESTIONS.md` entry. Whether DSW's own proof
+  builds `K_n × X` is undecided until DSW is read (not held).
+- **It holds** for `G = K_k^s` (Greenwell–Lovász, PA-P3; FS67-GL) and for every `G` whose vertices all lie in `k`-cliques (FS67-CL, J40,
+  one mind).
+- **Mixing pins it, at every `k`, sharply** (FS67-DC2, DC2S): `G` `k`-gap-free (any graph) and `H = Cay(A, T)` finite abelian with
+  `λ* < 1/(k−1)` ⟹ every `k`-colouring of `G × H` comes from `G`; `H = K_k` shows `1/(k−1)` cannot be raised. For 1-walk-regular
+  Hoffman-tight `G`, against every connected `H` with `χv(H) > k` (FS67-DC1), and in the equal-`χv` case under `[GodsilEtAl2020]` Result 5
+  (FS67-DD1) — both conditional on GRRSV's vector theorems.
+- **The measured facts this stub was minted to justify:** `UD(𝔽₉, 2)` is connected, Hoffman-tight at three colours and so 3-gap-free
+  (FS67-DB2, FS67-T), and `Γ₁₁` mixes (`λ* = 0.476 < 1/2`, FS67-DC3): **FS-58's "rigid tensored with the residue plane at 11" is a theorem.**
+  At 7 it is not: `Γ₇` neither mixes (`λ* = 0.562`) nor has `χv > 3` (2.78) — it sits in the gap regime, where only the open three-colour
+  question below would decide it.
+
+**What is left — the re-aimed question.**
+1. **Three colours (DB-1, `B(3)` widened to gap-free).** Is `χ(E_3(G)) ≤ 3` for every connected non-bipartite `G`, hence the criterion for
+   every connected 3-gap-free `G`? Proved: the non-3-colourable case (El-Zahar–Sauer, relayed); a two-step winding `D_C` constant on every
+   component of `K_3^G` (Lemma W, FS67-W); every component with `D_C ≡ 0` for some odd walk is 3-colourable (FS67-DB1Z, `[TardifWrochna2019]`
+   §3 external). **The missing step, reached by two blind routes:** a 3-colouring of the loopless components of `E_3(G)` on which every
+   `D_C ≠ 0` (they exist, with edges, at `G = C₅`, where they are 3-colourable by hand, FS67-C5). Readings first: `[ElZaharSauer1985]` (where
+   non-3-colourability enters) and `[Tardif2006alg]` (an algorithm from a 3-colouring of a product to one of a factor) — neither held.
+2. **A Hoffman-tight counterexample at `k ≥ 4` (DD-2).** Via `K_k × X` it needs a Hedetniemi pair `(X, H)` with `X` connected, regular and
+   `μ_min(X) ≥ −d_X/(k−1)` (FS67-DD2R); any Hoffman-tight counterexample's `H` is outside the mixing regime and, for 1-walk-regular `G`, has
+   `χv(H) ≤ k < χ(H)` (FS67-DD2N). First step, by hand: is `[Tardif2023]`'s `Ω_w(K_m)` regular (its §2, held)? Then `[Tardif2022frac]` (not held).
+3. **Zhang's IS-imprimitive exception**: does GRRSV's "connected strictly complementary dual solution" hypothesis reach `[Zhang2012]` Thm
+   1.8's case (ii)? Routes at hand, never run: row 89's tightness split, R3a's pointwise tetrahedron splitting (row 85).
+
+**Post-ban stages (after 2026-10-01; not queued).** **PB-1**: an exact 3-colouring finder on `E_3(G)`'s non-zero-winding part at `G = C₇`
+(2,187 maps) and `K₃ × C₅` (`3^15` maps), generator image stated (G21); `C₅` is retired (FS67-C5); a refusal is FALSE for item 1's first
+clause only (neither graph is claimed 3-gap-free). **PB-2**: the spectrum of `Ω_w(K_m)` if item 2's hand step leaves it open, and of
+`[Tardif2022frac]`'s factors once held. **Not feasible as written:** the plan's PB on `UD(𝔽₉, 2)`, `U₄`, `U₃₂` — `E_k(G)` has `k^{|V(G)|}`
+vertices (`3^81`, `4^16`, `4^1024`).
+
+**Bearing on χ ≥ 6: none.** Mechanism only: the answer to "when must a colouring of a product be local at one factor" in the class where
+it is sharp (mixing factors), and a clean no-go (gap-freedom alone, from four colours up). **Provisional bearings:** G54 (tight ⟹ gap-free;
+the drafted product sentence), G61 (3), G71 (heights: Lemma W is the height read two steps at a time), G72 (the criterion came through the
+structural question), row 109 (the mixing selection this stub's DC-2 bootstraps).
+
+*The sections below are the stub's history at its earlier closes; §3's deliverables table is superseded by the list above.*
+
 **At M3's close:** for maps *into the Moser spindle* the answer is yes in print (`[TardifWrochna2019]` Thm 2, strong multiplicativity; found by M3's prior-art reader, `plans/M3-PA-mixing.md` Stage 2).
 
 **Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G76's mixing sentence (a factor leaves a product colouring when it mixes, not when its ratio is small, row 109).

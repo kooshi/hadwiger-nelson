@@ -1,0 +1,27 @@
+--- Paths forward row 9 (FS-67) [replace] anchor/old: «| 9 | FS-67 3-colourings of tight products — `plans/STUB-tight-product-colourings.md` | **re-aimed at FS-85's close to i …»
+NEW: «| 9 | FS-67 colourings of gap-free products — `plans/STUB-tight-product-colourings.md` | **Closed as a milestone at the crunch (rows 114–115), the stub re-aimed.** `G` gap-free (a fall colouring) at `k`, `H` connected, `χ(H) > k`: must every `k`-colouring of `G × H` come from `G`? Exactly when `χ(E_k(G)) ≤ k`; **no from four colours up** for some uniquely colourable `G` (a composition of print: Duffus–Sands–Woodrow's `B(k) ⟹ H(k)` with `[Tardif2023]`); yes against every mixing `H` (`λ* < 1/(k−1)`, sharp). **Left:** three colours (3-colour the non-zero-winding part of `E_3(G)`), a Hoffman-tight counterexample (a regular Hedetniemi factor with `μ_min ≥ −d/(k−1)`), Zhang's IS-imprimitive exception … | none; mechanism — G61 (3)'s 11 half now a theorem, its 7 half measured (G48, FS-64, FS-66) |»
+
+--- G54: products [insert-before] anchor/old: «**What it says about six:**»
+NEW: «**In a product, Hoffman-tight pulls back where the other factor mixes** (FS-67, rows 114–115): every colouring of a Hoffman-tight plane is gap-free — a fall colouring, which Csernák calls "tight", another sense of the word — and a gap-free `G` pulls back against every abelian Cayley `H` with `λ* < 1/(k−1)`, sharp at `K_k`; gap-freedom alone fails against some `H` from four colours up (`K_k × X`, `X` from a Hedetniemi pair), and whether Hoffman-tightness suffices is open — check the other factor's `λ*` before calling a product colouring local. »
+
+--- G61 (3) [replace] anchor/old: «(the general statement is FS-67, unproved, and false without gap-freedom)»
+NEW: «(at 11 a theorem: the plane is 3-gap-free and `Γ₁₁` mixes, `λ* < 1/2`, so every three-colouring of the product pulls back, rows 114–115; at 7, where `Γ₇` neither mixes nor has `χv > 3`, still measured; false without gap-freedom)»
+
+--- G72 count [insert-after] anchor/old: «**nine of nine**.»
+NEW: « **Tenth (FS-67):** the criterion `χ(E_k(G)) ≤ k` and the obstruction it names, a Hedetniemi pair in `E_k(G)`, through the structural question; the spectral pullback by extending a known tool; the three-colour selection not found: **ten of ten**.»
+
+--- G21 instance [insert-after] anchor/old: «an existence theorem paraphrased as a classification at four addresses (G77).»
+NEW: « **FS-67's two:** plants that could not fire — a tightness plant that left `λ_min` where it was, and a circle `x² + y² = 2` that built an isomorphic graph (every circle is a similarity image of the unit circle).»
+
+--- Frontier item 28 (new line after item 27) [insert-after] anchor/old: «ow question lives at nine places; nothing touches `χ_µ(ℝ²)`.»
+NEW: «
+28. **Colourings of products: mixing pins them, gap-freedom does not** (rows 114–115; FS-67, `plans/FS67-derivation.md`). A `k`-colouring of `G × H` must come from `G` exactly when `G`'s colourings are gap-free and the improper part of `K_k^G` is `k`-colourable; from four colours up that fails for some uniquely colourable `G` (a composition of print), and it holds whenever `H` mixes (G54). Three colours and Hoffman-tight `G` are open. Bearing on χ ≥ 6: none.»
+
+--- Prior-art position, Ours [insert-after] anchor/old: «the mixing selection and the windows at five over ℚ(√167) (rows 108–110);»
+NEW: « the product criterion `χ(E_k(G)) ≤ k` for gap-free `G`, its `K_k × X` form and the sharp mixing pullback for every gap-free `G` (rows 114–115; as far as the gate reached, Duffus–Sands–Woodrow 1985 unread);»
+
+--- Prior-art position, Not ours [insert-after] anchor/old: «its threshold beside `K_k` (`[PakVilenchik2013]`);»
+NEW: « Duffus–Sands–Woodrow's `B(n) ⟹ H(n)`, so with `[Tardif2023]` `B(n)` and `A(n)` fail for `n ≥ 4` (a composition of print), and the vector pullbacks under rows 114–115 (`[GodsilEtAl2020]` Thm 4.16);»
+
+--- Last updated [insert-after] anchor/old: «*Last updated: 2026-09-25 — »
+NEW: «**FS-67 closed** (rows 114–115; G21, G54, G61, G72 edited): the product question answered negatively from four colours up for gap-free factors, a sharp mixing pullback, three colours open; **Paid (theorem and no-go)** (`plans/FS67-tight-products.md` §R-close). »
