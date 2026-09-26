@@ -1,0 +1,7 @@
+F = Q(sqrt(-59)): dyadic places of F = 1, e_F = 1, f_F = 2; in L/F: RAMIFIED (stable) -- row 100's exception
+F = Q(sqrt(-83)): dyadic places of F = 1, e_F = 1, f_F = 2; in L/F: RAMIFIED (stable) -- row 100's exception
+F = Q(sqrt(-131)): dyadic places of F = 1, e_F = 1, f_F = 2; in L/F: RAMIFIED (stable) -- row 100's exception
+control Q(sqrt(5)): RAMIFIED (stable) -- row 100's exception (expected RAMIFIED (stable) -- row 100's exception)
+control Q(sqrt(167)): split (not stable) (expected split (not stable))
+C-0: NOT as claimed
+exit=1
