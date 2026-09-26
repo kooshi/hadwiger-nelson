@@ -165,6 +165,53 @@ above them), each a stale clause a close's correction replaced: `p = 2` (row 92'
 **Gates after the edit** (exit statuses read from the tools): fact audit `--base 543b51d5` exit 0, "AUDIT PASSED (0 failure(s))";
 `--dupes` exit 0, "11 repeated runs of >= 10 words"; `tools/check_architecture.py` exit 0, "RESULT: PASS";
 `tools/fs71_ledger_b_check.py` (non-strict) exit 1, "RESULT: FAIL (13)" — exactly the 13 ids stage 1 named, "§ B row … has no derivation
-entry" (J33's). `LEDGER.md` 277,393 → 335,0xx bytes (no budget on this file).
+entry" (J33's). `LEDGER.md` 277,393 → 335,132 bytes (no budget on this file).
 
 **Would have searched here (stage 2):** none.
+
+## Stage 3 — SAVED (`CLAUDE.md`)
+
+**Owner's rulings used here** (messages during stages 2–3): the five *Do*/killing-test drafts applied as drafted (M1 C24, C27, C28, C30; M2
+D-9c), each entry still ending in G67's form; **G55's status tag untouched**, D-8's sentence placed first in its body and phrased as the
+owner asked ("Of these kernel targets, in the kernel since M2: … (rows 103, 105); the rest named at M2's close remain targets — …", the
+remainder taken from M2's §R-close D-15 and D-17 and 4b, not from memory); **G63's tag and title as drafted** (kernel at `d = 2`, row 104;
+"pure transcendence"), with a reviewed ALLOW line naming row 104.
+
+**Applied by `data/crunch-2026-09-25/j24/claude_apply.py`** (M1's 33 pairs exec'd from `data/fs91/j23a/claude_md_drafts.py`; M2's 23 blocks
+parsed by `data/m2/j23b/claude_md_drafts.py`'s own parser; M3's block cut from its plan between its markers; every anchor must occur exactly
+once; `--plant` corrupts M1 C2's anchor and exits 1 — seen to fire), in order M1, M2, M3, with:
+- **Compositions left to J24:** the *Last updated* line (M1 C1 + M2 D-5 + M3's verdict from R3.5: Q1 not landed, Q2 landed in part); the
+  "Open milestones" line (M2 D-4/D-4b composed: none open; M1, M2, M3 CLOSED with their rows, grokkings and records; the three closed stubs'
+  addresses kept there); the re-rank preamble (M1 C11 widened to the three closes); G72's ordinals (seventh FS-91, eighth M2, ninth M3,
+  in place of M2's D-11 alone); "Rows 1–110 live in `LEDGER.md`"; "G1–G78 are stable".
+- **Merges:** FS-47's row = M2 D-17's rewrite with M1 C19's Lemma C/C′ clause inside it; FS-64's row = M1 C17 with its now-false clause "a
+  five-colour window over ℚ(√167) is untouched" replaced by M3's result (row 110, FS-96); G76 = M1 C31, then M3's sentence in the body
+  after the rigidity sentence (M3 said "before its *Do*"; the text just before G76's *Do* is its killing test, so the body is the place);
+  G77 (M1) then G78 (M3) before G51; items 25–26 (M1 C8) then item 27 (M3).
+- **D-1 re-worded so the gate can read it:** as drafted ("reads 1130 clean, 11 axiom-free and 5 declared purchases") it no longer matches
+  `scripts/gate_report.py`'s regex `current audit reads (\d+) clean and (\d+) declared purchases` (nor the fact audit's) — the gate would stop
+  reading the trust ledger. Now: "current audit reads 1130 clean and 5 declared purchases (and 11 axiom-free; 1,146 records at M2's close)".
+  Checked by importing `scripts/gate_report.py`: `recorded_in_trust_ledger` → `(1130, 5)`; `recorded_in_claude_gate` → declarations 7051,
+  refutations-skipped 304, sites 279, vacuous 0, stale 0, declared 3, witnessed 17, generic 257, unknown 2 — the counts of
+  `build/gate/vacuity/latest` (20260926T001203Z) exactly.
+- **Nothing from before lost (Kooshi's rule; the audit named each):** M2 D-9b's rewrite of G63 dropped `[Fischer1990]` Theorem 6's statement
+  and proof method and the name "Tarski–Seidenberg"; both kept in one added sentence and a respelling.
+- **One home per fact** (`--dupes` read 17 after the drafts): six new entries retold a ledger line word for word — G77 twice (row 100, § B
+  FS91-J07-6), G77's forbids-line (the stock phrase of G74/G76), G78 (row 108), item 27 (row 108), G63 (§ B J17-T6). Each reworded in the
+  grokking/item, content unchanged; `--dupes` back to 11.
+
+**The fact audit's reviewed tables** (`tools/claude_md_fact_audit.py`): 23 ALLOW entries, each a stale clause the closes' edits replaced,
+with its reason (U3 and 1/8 from FS-91's deleted row; FS81-T1–T5 from FS-75's re-aimed row; `(K(√7))` from FS-45's row; `F(t)²` from G63's
+old killing test; the gate counts 1034/6795/278/275/253 and their `=` forms; 1–94, G1–G76; the seven grouped ranks 32–36 … 51–53; G63's old
+tag); and a new reviewed table, `GATE_CHANGES`, for the one check ALLOW cannot reach — the gate sentence's (clean, purchases) counts must
+not change silently, so a change is admitted only as a listed transition with its gate log, printed on every run: `(1034, 5) → (1130, 5)`,
+J23b stage 0's log. `--self-test` exit 0, "SELF-TEST PASSED".
+
+**Bytes:** `CLAUDE.md` 275,608 → **286,449** (net +10,841; budget 300,000). By milestone: M1's 33 drafts +2,860 as measured by its own
+script; M2 +3,314 applied (its drafts +2,913, plus the composed open line and the two kept prior-art clauses); M3's parts +3,792 as its block
+measured, placed without additions but the renumbering and the FS-96 bearing cell; the compositions the rest. Each under 4,000.
+
+**Gates** (exit statuses read from the tools): fact audit `--base 543b51d5` exit 0, "AUDIT PASSED (0 failure(s))"; `--dupes` exit 0, "11
+repeated runs of >= 10 words".
+
+**Would have searched here (stage 3):** none.

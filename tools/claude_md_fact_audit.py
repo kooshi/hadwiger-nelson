@@ -63,6 +63,30 @@ ALLOW: dict[str, str] = {
     "p = 2": "row 92's 'C14.2 at `p = 2` … not checked' replaced by M3's correction (C14.2 (c) holds at `q = 2`, row 110); the check is done",
     "B′": "FS39-T1's § B kernel cell 'stub (FS-39 phase B′)' replaced by M2's kernel names (row 104); FS-39's stub banner keeps phase B′",
     "ℤ[U]/3ℤ[U]": "row 82's T6 parenthesis ('needs ℤ[U]/3ℤ[U] and is not settled') replaced by 'settled at FS-91, row 99' (FS91-J09-J4-T6)",
+    "U3": "FS-91's paths-forward row ('MS₄({5}) and U3 at one prime'), deleted when FS-91 closed; U3 is answered at every split prime (row 102), the stub keeps it",
+    "1/8": "FS-91's paths-forward row ('band 1/6 … and 1/8'), deleted when FS-91 closed; every band is answered on characters (row 98)",
+    "FS81-T1–T5": "FS-75's row, re-aimed at FS-91's close to S1 and no mixing (row 99); plans/STUB-three-colour-criterion-kernel.md keeps T4's leaves",
+    "(K(√7))": "FS-45's row's `five_le_chromaticNumber_planeOver (K(√7))`, replaced at M2's close by the kernel theorem's own name (row 103, SevenConditional)",
+    "F(t)²": "G63's old killing test ('a unit vector of `F(t)²` with a pole …'), replaced by the owner's ruling (J24 stage 2) with G67's forbids-form; G63's statement χ(F(t)²) = χ(F²) stays in row 104",
+    "1034": "the axiom audit's clean count, 1034 -> 1130 at M2's close (J23b stage 0, build/gate/axioms/20260925T232928Z-253944.log)",
+    "6795": "the vacuity gate's declaration count, 6795 -> 7051 at M2's close (J23b stage 0)",
+    "declarations=6795": "the same count, as the gate report prints it",
+    "278": "vacuity's refutations-skipped count, 278 -> 304 at M2's close",
+    "refutations-skipped=278": "the same count, as the gate report prints it",
+    "275": "vacuity's sites count, 275 -> 279 at M2's close",
+    "sites=275": "the same count, as the gate report prints it",
+    "253": "vacuity's generic count, 253 -> 257 at M2's close",
+    "generic=253": "the same count, as the gate report prints it",
+    "1–94": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–110 at the M1-M3 closes",
+    "G1–G76": "the stable-identifier range, extended to G1–G78 when G77 (M1) and G78 (M3) were minted (2026-09-25)",
+    "32–36": "a grouped rank in the paths-forward table, renumbered at the M1-M3 re-rank (55 rows)",
+    "37–39": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "40–43": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "44–45": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "46–48": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "49–50": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "51–53": "a grouped rank, renumbered at the M1-M3 re-rank",
+    "G63:[hand; prior art: `[Fischer1990]": "G63 re-graded at M2's close (owner's ruling, J24): kernel at d = 2 for every F ⊆ ℝ and t transcendental (row 104, Transcendental.lean); title 'pure transcendence'",
     # FS-89 close (2026-09-25).
     "plans/POROS-2026-09-25-fs86-next.md": "the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses",
     "plans/STUB-dyadic-rigidity-triangle-free.md": "the old open-milestones sentence (FS-86 closed; FS-89 chosen and re-posed over ℚ(i)), replaced at FS-89's close by FS-89's; plans/FRONTIER-STUBS.md's closed list and open paragraph keep both addresses",
@@ -220,6 +244,10 @@ ALLOW: dict[str, str] = {
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
 # "[PROTECTED — never compress …]" and is an ordinary paragraph (the budget line in it changes when Kooshi raises the budget).
+# Reviewed transitions of the gate-report sentence's (clean, purchases) counts, each with its gate log; printed on every run.
+GATE_CHANGES: dict[tuple, str] = {
+    (("1034", "5"), ("1130", "5")): "M2's close gate (J23b stage 0; build/gate/axioms/20260925T232928Z-253944.log): 1,146 records, 1,130 clean, 11 axiom-free, 5 purchases",
+}
 PROTECTED_TAG = "[PROTECTED — never compress, trim"
 GATE_RE = re.compile(r"current audit reads (\d+) clean and (\d+) declared purchases")
 MATH = set("αβγδεζηθικλμνξπρστυφχψωΓΔΘΛΞΠΣΦΨΩℚℝℤℂℕ𝔽𝔭𝔓√≤≥≠≡≈∈∉⊆⊂⊇⊄∣∤∀∃∧∨¬⟹⟸⟺→↦×·∞∅∩∪⌈⌉⌊⌋₀₁₂₃₄₅₆₇₈₉⁰¹²³⁴⁵⁶⁷⁸⁹ⁿ⁻⁺′̄±−½∑∏")
@@ -411,7 +439,7 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     go, gn = GATE_RE.search(re.sub(r"\s+", " ", old)), GATE_RE.search(re.sub(r"\s+", " ", new))
     if not gn:
         fails.append("the gate-report sentence no longer matches scripts/gate_report.py's regex")
-    elif go and go.groups() != gn.groups():
+    elif go and go.groups() != gn.groups() and (go.groups(), gn.groups()) not in GATE_CHANGES:
         fails.append(f"the gate-report counts changed: {go.groups()} -> {gn.groups()}")
     say(f"gate sentence: {gn.group(0) if gn else 'MISSING'}")
     # headings
@@ -458,6 +486,9 @@ def audit(old: str, new: str, *, table=None, allow=None, moves: str | None = Non
     say(f"allowances in force: {len(allow)}")
     for t, why in allow.items():
         say(f"  {t!r}: {why}")
+    say(f"gate-count transitions in force: {len(GATE_CHANGES)}")
+    for (a, b), why in GATE_CHANGES.items():
+        say(f"  {a} -> {b}: {why}")
     say("")
     for f in fails:
         say("FAIL:", f)
