@@ -7,6 +7,9 @@ import Mathlib.MeasureTheory.Integral.Bochner.ContinuousLinearMap
 import Mathlib.MeasureTheory.Integral.IntegrableOn
 import Mathlib.MeasureTheory.Constructions.Pi
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
+import Mathlib.NumberTheory.NumberField.Basic
+import Mathlib.NumberTheory.NumberField.InfinitePlace.TotallyRealComplex
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # X11K skeleton: `χ(ℚ(√47)²) = 5`, conditional on named hypotheses
@@ -323,6 +326,156 @@ theorem chromaticNumber_planeOver_sqrt47_eq_five (hBH : BochnerHerglotz (unitRin
     (hRU : I.RU) (hA : I.APlus0) (hPE : I.PE2) (hEF : I.EFPlus) :
     ((unitDistance ℂ).induce (planeOver F47)).chromaticNumber = 5 :=
   le_antisymm chromaticNumber_planeOver_sqrt47_le_five (I.five_le_chromaticNumber hBH hRU hA hPE hEF)
+
+
+/-! ## Part G: every real number field (X11K2's re-aim; X23D-COR, X23V §2.3–§2.4)
+
+The general claim: **given MR, `χ(F²) ≥ min(L(F), 5)` for every real number field `F`**, from SPC (J45's A⁺ and SP-Cor over every
+real number field where T-C(A) holds at `S = ∅`), CLS (T-C(A) at `S = ∅` ⟸ `L(F) ≥ 5`) and row 99 (`χ(F²) = L(F)` at `L ≤ 4`);
+and `χ(F²) = L(F)` for `L ≤ 5` where the upper half `χ(F²) ≤ L(F)` holds (row 52 at ring level; the field step is row 57's gap).
+
+**`L(F)` is stated with Mathlib's number-field API, not replaced by a substitute:** `L = F(i)` is the plane over `F` as a subfield
+of `ℂ` (`fieldI`); a *stable prime* is a maximal ideal of `𝓞 L` fixed by complex conjugation (a place of `F` not split in
+`F(i)`); its level-`m` target is the Cayley graph of `𝓞 L ⧸ P^m` on the elements `x` with `x·x̄ = 1`, `x̄` the induced involution
+(`levelTarget`; at `m = 1` it is `Γ_q`, `U_Q` or a bipartite graph as `P` is odd inert, dyadic inert or dyadic ramified); and
+`L(F)` is the infimum over stable primes of the level-one targets' chromatic numbers (`localBound`). T-C(A) at `S = ∅` is
+`TCA`: every stable prime's targets have independence ratio at most some `c < 1/4` at every level. -/
+
+section Every
+
+variable (F : Subfield ℝ)
+
+/-- **`L = F(i)`**, the plane over `F` as a subfield of `ℂ`: `(a + bi)⁻¹ = (a − bi)/(a² + b²)`. -/
+def fieldI : Subfield ℂ where
+  toSubring := Chain.planeOverSubring F
+  inv_mem' z hz := by
+    have hn : Complex.normSq z ∈ F := by
+      rw [Complex.normSq_apply]; exact F.add_mem (F.mul_mem hz.1 hz.1) (F.mul_mem hz.2 hz.2)
+    exact ⟨by rw [Complex.inv_re]; exact F.div_mem hz.1 hn, by rw [Complex.inv_im]; exact F.div_mem (F.neg_mem hz.2) hn⟩
+
+theorem mem_fieldI {z : ℂ} : z ∈ fieldI F ↔ z.re ∈ F ∧ z.im ∈ F := Iff.rfl
+
+theorem fieldI_conj : ∀ z ∈ fieldI F, (starRingEnd ℂ) z ∈ fieldI F := fun z hz =>
+  ⟨by simpa using hz.1, by simpa using F.neg_mem hz.2⟩
+
+/-- The ℚ-linear surjection `F × F → F(i)`, `(a, b) ↦ a + bi`. -/
+noncomputable def toFieldI : (F × F) →ₗ[ℚ] fieldI F where
+  toFun p := ⟨⟨p.1, p.2⟩, by simp, by simp⟩
+  map_add' _ _ := Subtype.ext (Complex.ext (by simp) (by simp))
+  map_smul' q p := Subtype.ext (Complex.ext (by simp [Rat.smul_def]) (by simp [Rat.smul_def]))
+
+theorem toFieldI_surjective : Function.Surjective (toFieldI F) := fun z =>
+  ⟨(⟨(z : ℂ).re, z.2.1⟩, ⟨(z : ℂ).im, z.2.2⟩), Subtype.ext (Complex.ext rfl rfl)⟩
+
+/-- `F(i)` is a number field when `F` is. -/
+instance [NumberField F] : NumberField (fieldI F) where
+  to_finiteDimensional := Module.Finite.of_surjective (toFieldI F) (toFieldI_surjective F)
+
+open NumberField
+
+/-- Complex conjugation on the ring of integers of `F(i)`. -/
+noncomputable def conjO : 𝓞 (fieldI F) →+* 𝓞 (fieldI F) := RingOfIntegers.mapRingHom (conjOn (fieldI_conj F))
+
+/-- **A stable prime of `F(i)`**: a maximal ideal of `𝓞 L` fixed by conjugation — a place of `F` that does not split in `F(i)`. -/
+structure StablePrime where
+  P : Ideal (𝓞 (fieldI F))
+  isMaximal : P.IsMaximal
+  comap_conj : P.comap (conjO F) = P
+
+variable {F}
+
+theorem StablePrime.le_comap (P : StablePrime F) (m : ℕ) : P.P ^ m ≤ (P.P ^ m).comap (conjO F) := by
+  calc P.P ^ m = (P.P.comap (conjO F)) ^ m := by rw [P.comap_conj]
+    _ ≤ _ := Ideal.le_comap_pow _ m
+
+/-- **The level-`m` residue target** at a stable prime: `Cay(𝓞 L ⧸ P^m, {x : x·x̄ = 1})`. -/
+def levelTarget (P : StablePrime F) (m : ℕ) : SimpleGraph (𝓞 (fieldI F) ⧸ P.P ^ m) :=
+  SimpleGraph.fromRel fun x y => (x - y) * Ideal.quotientMap (P.P ^ m) (conjO F) (P.le_comap m) (x - y) = 1
+
+variable (F)
+
+/-- **`L(F)`, the local bound**: the least chromatic number among the level-one residue targets of the stable primes
+(`CLAUDE.md` § Notation). -/
+noncomputable def localBound : ℕ∞ := ⨅ P : StablePrime F, (levelTarget P 1).chromaticNumber
+
+/-- **T-C(A) at `S = ∅`, class form** (X23D §1.3): every stable place has all-levels four-colour ratio `< 1/4` — some `c < 1/4`
+bounds `|I| / |𝓞 ⧸ P^m|` for every independent set `I` of every level's target. -/
+def TCA : Prop :=
+  ∀ P : StablePrime F, ∃ c : ℝ, c < 1 / 4 ∧ ∀ m : ℕ, 1 ≤ m → ∀ s : Finset (𝓞 (fieldI F) ⧸ P.P ^ m),
+    (levelTarget P m).IsIndepSet (s : Set _) → (s.card : ℝ) ≤ c * Nat.card (𝓞 (fieldI F) ⧸ P.P ^ m)
+
+variable {F}
+
+/-- **R88-TCA at `S = ∅`** (row 113; spectral form, X23D §1.3): "no translation-invariant Borel probability on `X₄(F)` has
+spectral measure carried by `T + A`" — here for the rotation-invariant ones SP-Cor uses (implied by the source). VACUITY NOTE
+(G30 item 7): like `APlus0`, it quantifies over `InvariantColouring`, empty exactly when `X₄(F) = ∅`; its content is its
+derivation from the class form, which never assumes that emptiness. -/
+def Interface.R88TCA (I : Interface F) : Prop :=
+  ∀ (μ : InvariantColouring F) (σ : Measure (Dual F)), IsTraceSpectral F μ.μ σ → σ I.TAᶜ ≠ 0
+
+/-- **A⁺ at `S = ∅` from R88-TCA** (J45: SI-3, SI-4, N2, then T-C(A) as a black box; field-free, X23V §2.3 "(lit)"). -/
+def Interface.APlusOfR88 (I : Interface F) : Prop := I.R88TCA → I.APlus0
+
+/-- **The count**: in the class, R88-TCA at `S = ∅` holds (X23D-TCA; J28D's route: the extension to `G_∅`, C14.2 (a) with ratio
+`m₁` at each archimedean factor, C14.3 over a finite product, Hoffman on the tail). [hand, X23D and X23V §2.3] **for totally real
+`F`**; at a complex place of `F` its archimedean factor needs Lemma X23V-CX / X23D-CX (restriction to a real form); X29C ruled it (two derivations) against
+X25B-G1: an upper bound on a factor's independence ratio survives removing edges, so `r(Cay(ℂ², {(a, a⁻¹)})) ≤ m₁ < 1/4`. -/
+def Interface.Count (I : Interface F) : Prop := TCA F → I.R88TCA
+
+/-- **THE HEADLINE (X11K2's re-aim, Kooshi's "every real" target): every real number field**, the complex-place step behind its
+own hypothesis (X23D-COR, X23V §2.4, X29C's ruling):
+`χ(F²) ≥ min(L(F), 5)` given
+- `hTR` — **the count for totally real `F`** (X23D-TCA; X23V §2.3);
+- `hCX` — **the count for `F` with a complex place** (Lemma X23V-CX; ruled by X29C: edge-removal monotonicity, formalizable, and
+  `m₁` external);
+- `hAP` — A⁺ from R88-TCA (J45, field-free); `hRU` — R-U (J45, every real number field);
+- `hMR` — in the class, **MR(F)** as PE-2 and EF_F⁺ (scope: row 100's exception, which `TCA F` excludes — a ramified stable dyadic
+  place has ratio `1/2`);
+- `hCLS` — **CLS**'s `⟸`: `L(F) ≥ 5 ⟹ TCA F` (X23D-CLS, X23V §2.2); `hRow99` — **row 99** at `L ≤ 4`; `hBH` — Herglotz–Bochner. -/
+theorem min_localBound_five_le_chromaticNumber [NumberField F] (hBH : BochnerHerglotz (unitRing F))
+    (I : Interface F) (hTR : NumberField.IsTotallyReal F → I.Count) (hCX : ¬ NumberField.IsTotallyReal F → I.Count)
+    (hAP : I.APlusOfR88) (hRU : I.RU) (hMR : TCA F → I.PE2 ∧ I.EFPlus) (hCLS : 5 ≤ localBound F → TCA F)
+    (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber) :
+    min (localBound F) 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+  by_cases h5 : 5 ≤ localBound F
+  · have hT := hCLS h5
+    have hC : I.Count := by
+      by_cases hr : NumberField.IsTotallyReal F
+      · exact hTR hr
+      · exact hCX hr
+    obtain ⟨hPE, hEF⟩ := hMR hT
+    exact min_le_of_right_le (I.five_le_chromaticNumber hBH hRU (hAP (hC hT)) hPE hEF)
+  · have h4 : localBound F ≤ 4 := Order.le_of_lt_succ (not_le.mp h5)
+    exact min_le_of_left_le (hRow99 h4)
+
+/-- **The staging form: every totally real number field.** `χ(F²) ≥ min(L(F), 5)`, given the count (X23D-TCA),
+A⁺ from R88-TCA and R-U (J45), MR(F) in the class (PE-2 over EL2021 Thm 1.2; EF_F⁺), CLS, row 99 at `L ≤ 4` and
+Herglotz–Bochner. The complex-place hypothesis of `..._of_complexStep` is discharged vacuously by `IsTotallyReal`. -/
+theorem min_localBound_five_le_chromaticNumber_of_totallyReal [NumberField F] [NumberField.IsTotallyReal F]
+    (hBH : BochnerHerglotz (unitRing F)) (I : Interface F) (hCount : I.Count) (hAP : I.APlusOfR88) (hRU : I.RU)
+    (hMR : TCA F → I.PE2 ∧ I.EFPlus) (hCLS : 5 ≤ localBound F → TCA F)
+    (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber) :
+    min (localBound F) 5 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber :=
+  min_localBound_five_le_chromaticNumber hBH I (fun _ => hCount)
+    (fun h => (h inferInstance).elim) hAP hRU hMR hCLS hRow99
+
+/-- **`χ(F²) = L(F)` for `L(F) ≤ 5`, every totally real number field**, given the headline's inputs and the upper half
+`χ(F²) ≤ L(F)` (row 52 at ring level; the field step is row 57's gap), named `hUpper`. -/
+theorem chromaticNumber_eq_localBound [NumberField F] [NumberField.IsTotallyReal F]
+    (hBH : BochnerHerglotz (unitRing F)) (I : Interface F) (hCount : I.Count) (hAP : I.APlusOfR88) (hRU : I.RU)
+    (hMR : TCA F → I.PE2 ∧ I.EFPlus) (hCLS : 5 ≤ localBound F → TCA F)
+    (hRow99 : localBound F ≤ 4 → localBound F ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber)
+    (hUpper : ((unitDistance ℂ).induce (planeOver F)).chromaticNumber ≤ localBound F) (hL : localBound F ≤ 5) :
+    ((unitDistance ℂ).induce (planeOver F)).chromaticNumber = localBound F :=
+  le_antisymm hUpper (by
+    have := min_localBound_five_le_chromaticNumber_of_totallyReal hBH I hCount hAP hRU hMR hCLS hRow99
+    rwa [min_eq_left hL] at this)
+
+end Every
+
+-- Spec for Part G.
+example : Complex.I ∈ fieldI (⊥ : Subfield ℝ) := ⟨by simp [zero_mem], by simp [one_mem]⟩
+example : ((1 : ℂ) + Complex.I) ∈ fieldI (⊥ : Subfield ℝ) := ⟨by simp [one_mem], by simp [one_mem]⟩
 
 /-! ## Spec -/
 

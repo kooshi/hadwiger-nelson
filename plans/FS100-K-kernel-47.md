@@ -274,6 +274,10 @@ candidate row for Rudin, *Fourier Analysis on Groups* (1.3.6, 1.4.3; not held he
   uniqueness), `q47`/`f47_le_q47` (`ℚ(√47) ⊆ {a + b√47}`), `z11`/`red` (`ℤ₍₁₁₎ → 𝔽₁₁`), `A`/`phi` (`a + b√47 ↦ a + 5b`), `zmod_key`,
   `eleven_dvd`, `int_descent`, `rat_descent`, `unit_mem_A` (every unit vector of `ℚ(√47)²` is 11-integral). File:
   `data/fs100/x11k/skeleton/SqrtFortySeven.lean`.
+- `X11K.fieldI` (`F(i)` as a subfield of `ℂ`) and `instance : NumberField (fieldI F)` for every number field `F ⊆ ℝ` [Lean, sorry-free,
+  stage 1R]; `X11K.min_localBound_five_le_chromaticNumber` (every real number field), `..._of_totallyReal`, `chromaticNumber_eq_localBound`
+  — compositions [Lean; sorry-dependent only through the skeleton's leaves L1 `exists_invariantColouring` and `posDef_corr`]. File:
+  `data/fs100/x11k/skeleton/Sqrt47.lean`, Part G.
 
 ## X11K2: Would-have-searched-here log
 
@@ -297,3 +301,64 @@ denominator (`(A ± 5B)² + (C ± 5E)² ≡ 0 (mod 11)` for both signs, and `x²
 valuation subring, no number-field API. **Plant:** replacing `√47 ↦ 5` by `↦ 4` (and `47 = 5²` by `47 = 4²`) is refused by
 `decide` at `forty_seven_eq` (scratch copy; the shipped file untouched). **Spec:** `√47 ↦ 5` under `phi`; `1/11 ∉ ℤ₍₁₁₎`,
 `1/2 ∈ ℤ₍₁₁₎`. **Price:** ~35k harness tokens, inside X11K's 40–60k.
+
+## X11K2 Stage 1R — SAVED (the re-aim: every real number field; owner's messages after stage 1)
+
+**The owner's messages, quoted.** Kooshi, via the owner: "The target for the Lean implementation should move to the more general "every
+real" claim." Then a scope note (state totally real first; the complex place behind its own named hypothesis, X25B-G1), then X29C's
+ruling (the restriction argument answers X25B-G1, two derivations; "Kooshi's "every real" target stands as stated").
+
+**Decision: `L(F)` is stated with Mathlib's number-field API, not replaced by a substitute** (Part G of
+`data/fs100/x11k/skeleton/Sqrt47.lean`, elaborates, exit 0, three `sorry` leaves as before):
+- `fieldI F` — `F(i)` as the `Subfield ℂ` of points of the plane over `F`; `instance : NumberField (fieldI F)` from `[NumberField F]`
+  (the ℚ-linear surjection `F × F → F(i)`); `conjO F` — conjugation on `𝓞 (fieldI F)` (`RingOfIntegers.mapRingHom (conjOn …)`).
+- `StablePrime F` — a maximal ideal `P` of `𝓞 (F(i))` with `P.comap conj = P` (a place of `F` not split in `F(i)`).
+- `levelTarget P m` — `Cay(𝓞 ⧸ P^m, {x : x·x̄ = 1})`, `x̄` the involution induced on the quotient (`Ideal.quotientMap`). At `m = 1` this
+  is `Γ_q`, `U_Q`, or a bipartite graph (`x̄ = x`, so `x² = 1`, `x = 1` in characteristic 2) as `P` is odd inert, dyadic inert, dyadic
+  ramified.
+- `localBound F := ⨅ P : StablePrime F, (levelTarget P 1).chromaticNumber` (`ℕ∞`); `TCA F` — every stable prime has some `c < 1/4`
+  bounding every independent set of every level's target by `c·|𝓞 ⧸ P^m|` (X23D §1.3's class form).
+- **Caveat, stated so nobody reads more in:** the derivation's `S_m` is the image of `U` mod `𝔓^m`; `levelTarget` uses the norm-one
+  elements of the quotient ring. They agree by smoothness of the norm-one torus (X23D §2.3: "the whole norm-one group mod `𝔓^m` by weak
+  approximation and smoothness of `𝕋`") — [hand], not in the kernel. No spec example evaluates `localBound` (no computable instance).
+
+**The headline, general** (`X11K.min_localBound_five_le_chromaticNumber`, every real number field `F`, `[NumberField F]`):
+`min (localBound F) 5 ≤ χ(F²)` given `hBH` (Herglotz–Bochner), an interface `I`, and seven named inputs:
+`hTR : IsTotallyReal F → I.Count` and `hCX : ¬ IsTotallyReal F → I.Count` (the count, R88-TCA@∅ from the class form — X23D-TCA; the
+complex place by Lemma X23V-CX, X29C's ruling), `hAP : I.R88TCA → I.APlus0` (J45's A⁺, field-free), `hRU` (R-U), `hMR : TCA F → I.PE2 ∧
+I.EFPlus` (MR(F) in the class, which excludes row 100's exception), `hCLS : 5 ≤ localBound F → TCA F` (CLS ⟸), `hRow99 : localBound F
+≤ 4 → localBound F ≤ χ(F²)` (row 99). **Staging form:** `..._of_totallyReal` (`[IsTotallyReal F]` discharges `hCX` vacuously).
+**Equality:** `chromaticNumber_eq_localBound` (totally real, `localBound F ≤ 5`, with the upper half `hUpper : χ(F²) ≤ localBound F`
+named). *Read aloud:* "for every real number field `F`, if Herglotz–Bochner holds on `ℤ[U]` and some `(E, TA, h)` satisfies R-U, A⁺
+from R88-TCA, the count in the class (split by whether `F` is totally real), MR in the class, and CLS and row 99 hold for the stated
+`L(F)`, then `χ(F²) ≥ min(L(F), 5)`." *Informal:* X23D-COR, "given MR and row 99: `χ(F²) ≥ min(L(F), 5)`, so `χ(F²) = L(F)` for `L ≤ 5`,
+every real number field outside the exception". They differ only as stage 3 of X11K records (the interface is abstract; the Lean
+certifies the composition), plus the `S_m` caveat above.
+
+**The ℚ(√47) corollary** stays as `chromaticNumber_planeOver_sqrt47_eq_five` (interface form). Deriving it from the general headline
+needs: `NumberField F47` (~5k, from `SqrtFortySeven.q47`'s normal form), and `5 ≤ localBound F47` — CTL at ℚ(√47), [hand + tools];
+in the kernel it needs every stable prime of `𝓞(ℚ(√47, i))` and its residue target (price: weeks — prime decomposition in a
+biquadratic ring of integers; Mathlib has Dedekind–Kummer for monogenic orders only). Leaf U is closed as its own module (stage 1),
+not yet as an instance of a general upper half.
+
+**The new dependency map's shape.**
+```
+H(F): min(L(F),5) ≤ χ(F²)                      [composition: Lean, sorry-dependent on L1, posDef_corr]
+├── L(F), TCA(F), StablePrime, levelTarget     [definitions: Lean, Mathlib API; the S_m caveat is hand]
+├── L ≥ 5 branch: hCLS (P: X23D-CLS — Weil X-WEIL, FS-66 certs, Lemma P, dyadic U_Q table)
+│   ├── count: hTR (P: J28D/X23D-TCA; C14.2(a) m₁ = X-AMB) · hCX (P: X23V-CX edge-removal monotonicity — formalizable; m₁ external)
+│   ├── hAP (P: SI-3, SI-4, N2 over X-ST), hRU (P: N1)
+│   ├── hMR (P: PE-2 over X-EL; EF_F⁺ over X-SMB) — node M (Lean, sorry-free)
+│   └── SP-Cor composition L6 (Lean) ── L1 (leaf, Markov–Kakutani) · posDef_corr (leaf) · X-BH
+└── L ≤ 4 branch: hRow99 (P: row 99, three derivations)
+Equality: + hUpper (row 52 in the kernel at ring level: `colorable_unitDistance_induce_of_valuationSubring`; the gap is row 57's —
+  a stable prime supplying a conj-stable valuation subring; `conj_mem_valuationSubringAtPrime` exists for Dedekind `O`)
+```
+**Price of the rest (guesses, to re-price from the first two leaves):** `hUpper` from row 52 + the stable-prime valuation subring,
+~40–80k; `posDef_corr` ~10–15k; L1 ~100–200k; the monotonicity half of `hCX` ~20k once the count is stated measure-theoretically (it is
+not yet: the count is an interface `Prop`); everything else months (entropy, spectral theory, N1's adelic dual).
+
+**Not done this slot: stage 2 (the gate into `Proofs/`) and stage 3 (`posDef_corr`)** — the budget went to the re-aim. The gate's
+plan stands: `SqrtFortySeven.lean` as `Proofs/HadwigerNelson/Instances/SqrtFortySeven.lean` (sorry-free now), and Part L's sorry-free
+declarations plus Part G's definitions (`fieldI`, its `NumberField` instance, `StablePrime`, `levelTarget`, `localBound`, `TCA`, the
+interface, node M, node L0) as one module; the headline stays in `data/` until L1 and `posDef_corr` close. Price: one build + ~25k.
