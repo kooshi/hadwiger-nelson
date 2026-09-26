@@ -51,3 +51,68 @@ messages' own words, and a removed-words count), with `CLAUDE.md`'s bytes before
 Out of scope, with the reason: `93f3d2eb` (09-02, "scrub the low-level fault vocabulary … the record does not need its forensics") — a
 deliberate removal of incident forensics before any budget existed; the G67 pass (09-22, seven batches) — additive (0–44 words removed a
 batch); every other commit — under 60 removed words, or a close that rewrote its own rows to current state.
+
+## Stage 2 — SAVED
+
+**The audit, commit by commit.** Candidate lists: `f1/cand/<commit>.txt` (every removed sentence with its survival scores; `f1/filt.py`
+shows the ones in grokkings and method sections). Verdict columns: *kind* = compression (C) or current-state rewrite (S); *grade* =
+intrinsic (I) or incidental (i); *action* = restored to `CLAUDE.md` (→CM), restored to `plans/GROKKING-INSTANCES.md` (→GI), or left
+(already elsewhere, or current-state). Ids R… and I… are the restorations of stage 3.
+
+| commit | removed passage (first words) | kind | grade | action |
+|---|---|---|---|---|
+| `c5e55f12` | G30 "Measurement generates; induction kills. The failure is never the measuring …"; "Sorted by provenance, the record is close to a clean dichotomy … Roughly 7-for-7 against 0-for-10"; "The rule this yields is NOT "measure less" …"; Kooshi's "catch-22" | C | I (the rule's evidence and its condition, Kooshi's words) | →CM R-G30a (the two claim lists →GI) |
+| `c5e55f12` | G30 "Falsifier: none needed; like G21 … the tally is falsifiable and should be re-sorted at every tenth milestone" | C | I (killing test; G30 has none today) | →CM R-G30a |
+| `c5e55f12` | G30 "prefer measurements that turn a DIAL (… informative in both directions …) over searches that hunt for a POSITIVE (whose null result is uninterpretable …); … so a zero reading bounds the instrument …" | C | I (the why of "prefer dials … calibrated beds") | →CM R-G30b |
+| `c5e55f12` | G30 mode 1 "write the escape clause to the same standard … protects it from hindsight bias but not from being false" | C | I (why) | →CM R-G30c; the P6 story →GI |
+| `c5e55f12` | G30 mode 2 "… "no seam-field object forces five" does not imply "no seam-field halo replaces a defect"" | C | I (only example) | →CM R-G30d; the P4b/P7 story →GI |
+| `c5e55f12` | G30 mode 3 "… converts one bug into two"; the "cost budget" defer message | C | I (why + only example) | →CM R-G30e; the rest →GI |
+| `c5e55f12` | G30 mode 4 ""derived, therefore ours" is exactly the inference this grokking forbids …"; "… where it can still change the work" | C | I (why) | →CM R-G30f; story →GI |
+| `c5e55f12` | G30 mode 6 "Every one of these readings is TRUE … the instrument answered and the question closed" | C | I (why) | →CM R-G30g; the thirteen-item list →GI |
+| `c5e55f12` | G30 ladder "The pattern: the project hits a wall in discipline N … the walls ARE the theorems …" | C | I (why of the ladder rule) | →CM R-G30h |
+| `c5e55f12` | G30 positive form "Rule: before spending days of compute on a conjecture, write it for an outside reader …" + its instance | C | I (a rule found nowhere today, with its only example) | →CM R-G30i |
+| `c5e55f12` | G30 fifth-mode story (ValuationLaw, the defence written and not run, vacuity.sh by machine) | C | i | →GI |
+| `c5e55f12` | G21 "… because a conservative test converts a *finding* into a *measurement of my own instrument*, silently …"; "… to say what a refusal therefore cannot mean"; "scope lines inside an artifact do not survive into summaries unless they are in the headline"; "Falsifier: none needed …" | C | I (why, condition, why, killing test) | →CM R-G21a |
+| `c5e55f12` | G21 instances: M35→M36; M45 (the seven virtual edges); M50 cast census; 2026-09-09 probes ×3; FS-28 controls ×2; M51 speedup | C | i | →GI |
+| `c5e55f12` | G46 corollary's last clause "read a search's failure as information about the search's genre, not about the objects"; "Falsifier for the rule: …" | C | I | →CM R-G46a; M58/M59 origin story →GI |
+| `c5e55f12` | G49 "(a) The check ran at the close, where it can only assign credit. Run at the opening it changes what the milestone is *for*"; "the gap was real, and it was a gap between literatures, not in them"; "Falsifier: three milestones running whose gate changes nothing …" | C | I (whys, killing test; G49 has a *Do* but no killing test) | →CM R-G49a; M58–M61 recognitions, FS-18 and FS-23 measurements →GI |
+| `c5e55f12` | G50 "the more expensive misses were not unsearched — they were unread …"; "search → record → rank → forget … it is a debt …"; "the cost of the scan is not the reason it keeps being skipped …" | C | I (the rule's whys) | →CM R-G50a; the six held-paper instances →GI |
+| `c5e55f12` | G51 "One attempt failing is a fact about the attempt."; "Falsifier: a second run of this shape in which the competitor and the advisor produce nothing …" | C | I (why; the core claim's killing test — today's tests the cost window only) | →CM R-G51a; the first run's evidence list →GI |
+| `c5e55f12` | § The gate: refutation skip's why, `STALE`'s and `GENERIC`'s whys, the load-bearing control's why | C | I (whys) | →CM R-gate; the gate's origin and first-run stories →GI |
+| `c5e55f12` | § Searching: "(Naming a hidden directory explicitly works; it is recursive discovery from `.` that skips it.)"; "`Nat.testBit_two_pow_sub_one` was reported missing here on exactly that error." | C | I (condition; only example) | →CM R-search; the measured blind spots and the other absence claims →GI |
+| `c5e55f12` | § kernel's cost model "This model predicted core's … LRAT checker cost to within 20% … which is why to trust it." | C | I (why) | →CM R-kernel |
+| `c5e55f12` | every Frontier, ledger-row, paths-forward and math-grokking narrative (≈ 500 k bytes); the math grokkings' old falsifiers | S | — | left: history, and every entry's killing test was re-authored by the G67 pass (2026-09-22); the math claims were already audited against `b54942aa` by `724d4411` and `3b813df1` |
+| `fc2775f2`, `34464cba` | G51 "… because the cost of being wrong has become the cost of having *been* wrong" | C | I (why of escalation) | →CM R2 |
+| `fc2775f2`, `34464cba` | filter "more material only adds to the set of colour differences and the certificate needs a value outside it" | C | I (why) | →CM R3 |
+| `fc2775f2` | "Reasoning finds the controls you thought about; planting finds the ones you did not." | C | I (why of "plant faults routinely") | →CM R4 |
+| `34464cba` | standard of evidence "a different *kind* of artifact, because twenty half-instance refutations are individually within reach of proof logging …"; "not at the write-up, or you will pay for evidence nothing rests on" | C | I (whys) | →CM R5, R6 |
+| `34464cba` | "… because a ruling that survives its bad evidence needs new grounds, not a quiet pass" | C | I (why) | →CM R7 |
+| `34464cba` | "A prediction whose target region the apparatus cannot enter is not a prediction, it is a formality that will read as a finding when it fails." | C | I (why of "both outcomes reachable") | →CM R8 |
+| `34464cba` | "… it is an unexplained failure that happens to agree with you" | C | I (why) | →CM R9 |
+| `34464cba` | "… because that third state is where this file's oldest failure mode hides" | C | I (why) | →CM R10 |
+| `34464cba` | "a confession can flatter, because *"I filed it under the wrong heading"* is tidier and more forgivable than what actually happened" | C | I (why) | →CM R11 |
+| `34464cba` | "… and treat a same-size edit inside one second as the case your caching cannot see" | C | I (condition) | →CM R12 |
+| `34464cba` | G52 "… and the shared centre pins the colour twist that might have repaired it (measured: **0 of 24** twists at either prime)" | C | I (a step of the mechanism) | →CM R13 |
+| `fc2775f2`, `34464cba` | G46/G51/§ standard-of-evidence "declined the credit" sentences; § Two machines "Corrected 2026-09-12 … 32 cores" and the struck figures; "The replay also showed the adaptive policy …"; "Third instance in one milestone of a decisive zero …" | C | i | →GI |
+| `fc2775f2`, `34464cba` | G7, G21, G31, G49, G53 and the rest of the gate-failure paragraphs (each kept in shorter words: checked sentence by sentence) | C | — | left: content intact |
+| `fc2775f2`, `34464cba`, `00923679`, `ce22f675`, `2f53a4ca` | Frontier, ledger rows 64–67, paths forward; G31/G43/G47/G48 claims FS-38 superseded | S | — | left |
+| `e803cf95`, `c9fee3f0`, `5802168f` | struck figures, a withdrawn self-diagnosis, the "inverted monotonicity" | S | — | left (corrections) |
+| `267b42f0`, `ece3905e`, `3779cb50`, `cf647b23`, `bc6e7c69`, `3fb7b69f`, `097eb9c8`, `85113d7b`, `4936e9f7`, `c47faa57` | G56/G59/G60/G61/G64 claims later corrected or superseded; row 71's Q(√167) detail | S | — | left |
+| `d0df4f82` | G58 "A decider is being asked to refute, which is the expensive direction and the wrong one for an existence claim." | C | I (why of "a FINDER, never a decider") | →CM R1 |
+| `d0df4f82` | G58 "A test whose informative outcome was never shown to be reachable …"; G64 "A fresh instance of this file's own rule …" | C | i | →GI |
+| `d0df4f82` | G56's correction record, G58's search words, G59's two-route narrative, row 68 and G64 tightened | S / C | — | left: correction trails (S), or content intact (C; row 68's rounding rule is in `LEDGER.md` row 68 in full) |
+| `f7f1433e`, `d6901249`, `f74ade25`, `d87fa955`, `10802f79`, `b441fb56`, `1f43ba40` | Frontier items re-pointed at their rows and grokkings; the grade legend hoisted to § Notation | C | — | left: fact-audited moves, nothing lost |
+| `b1fc5bbc` | rows 1–75 | C | — | left: verbatim in `LEDGER.md` (every removed sentence ≥ 0.8 there but four rows since rewritten to current state) |
+| `18ce5980`, `9ac6a758`, `df202277`, `3dcb8de8`, `2ac6a338` | G54's and G61's *Do* lines, G76, G50's FS-86 instance | S / C | — | left: rewritten to current state at each close, or kept in shorter words |
+| `de8bb61c` | G51's run records (FS-73, FS-79, FS-81, FS-85) and covert channels | C | i | left: in `plans/PROTOCOL-competitor-and-advisor.md` §3, as today's G51 says |
+| `0f4cf93a` | G63 "The paper had been in our bibliography, its row naming the theorem, for two weeks (G50)." | C | i | →GI (§G50) |
+| `0f4cf93a`, `15f5f37e` | G63's Remark-1 gap and Q-const rewritten after M2 | S | — | left |
+| J05 batches 1–7 | Frontier and paths-forward rows turned to pointers; G72's counts | C | — | left: J05's fact-audited moves; G72's counts in `GROKKING-INSTANCES.md` (E1) |
+| E1 `28caf446`, `dcf26687`, `f24b4f4e` | design (b) | C | — | verified passage by passage by E2; owner items 1–2 in stage 3 |
+
+**Counts.** Compression commits audited: 38 (table of stage 1). Intrinsic restorations: 13 from the 09-13 squeeze, 1 from the 09-21
+trim, 21 from the 09-10 narrative cut's method grokkings and sections — 35 passages to `CLAUDE.md`. Incidental passages lost and bound
+for `GROKKING-INSTANCES.md`: 11 groups. Current-state rewrites and incidentals already in plans or records: every other flagged sentence
+(≈ 2,600 of the detector's candidates, most of them the narrative cut's history).
+
+**Would have searched here:** none — no finite-witness search is needed for a history audit.
