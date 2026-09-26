@@ -1,0 +1,42 @@
+# J28D factor table (level one exact-float spectra; Lemma P above level one)
+
+## Q(sqrt 59) — type (B)
+p= 11 (split in F) lambda_min/d=-0.399646232 max|lambda|/d=0.476412726 Hoffman=0.285533746 margin(lambda_min/d + 1/3)=-6.631e-02 -> X (needs all-levels ratio < 1/4)
+p= 23 (split in F) lambda_min/d=-0.331695299 max|lambda|/d=0.331695299 Hoffman=0.249077473 margin(lambda_min/d + 1/3)=+1.638e-03 -> Y-prime (H*)
+p= 31 (split in F) lambda_min/d=-0.333328453 max|lambda|/d=0.333328453 Hoffman=0.249997255 margin(lambda_min/d + 1/3)=+4.880e-06 -> Y-prime (H*)
+p= 43 (split in F) lambda_min/d=-0.271868866 max|lambda|/d=0.271868866 Hoffman=0.213755422 margin(lambda_min/d + 1/3)=+6.146e-02 -> Y-prime (H*)
+p= 47 (split in F) lambda_min/d=-0.267635994 max|lambda|/d=0.275974250 Hoffman=0.211130005 margin(lambda_min/d + 1/3)=+6.570e-02 -> Y-prime (H*)
+p= 59 (ramified  ) lambda_min/d=-0.248626283 max|lambda|/d=0.248626283 Hoffman=0.199119854 margin(lambda_min/d + 1/3)=+8.471e-02 -> Y-prime (H*)
+p= 67 (split in F) lambda_min/d=-0.221422108 max|lambda|/d=0.221976141 Hoffman=0.181282217 margin(lambda_min/d + 1/3)=+1.119e-01 -> Y-prime (H*)
+
+## Q(sqrt 83) — type (B)
+p= 19 (split in F) lambda_min/d=-0.380486432 max|lambda|/d=0.380486432 Hoffman=0.275617654 margin(lambda_min/d + 1/3)=-4.715e-02 -> X (needs all-levels ratio < 1/4)
+p= 43 (split in F) lambda_min/d=-0.271868866 max|lambda|/d=0.271868866 Hoffman=0.213755422 margin(lambda_min/d + 1/3)=+6.146e-02 -> Y-prime (H*)
+p= 47 (split in F) lambda_min/d=-0.267635994 max|lambda|/d=0.275974250 Hoffman=0.211130005 margin(lambda_min/d + 1/3)=+6.570e-02 -> Y-prime (H*)
+p= 67 (split in F) lambda_min/d=-0.221422108 max|lambda|/d=0.221976141 Hoffman=0.181282217 margin(lambda_min/d + 1/3)=+1.119e-01 -> Y-prime (H*)
+p= 71 (split in F) lambda_min/d=-0.196844911 max|lambda|/d=0.220415895 Hoffman=0.164469857 margin(lambda_min/d + 1/3)=+1.365e-01 -> Y-prime (H*)
+
+## Q(sqrt 131) — type (B)
+p= 19 (split in F) lambda_min/d=-0.380486432 max|lambda|/d=0.380486432 Hoffman=0.275617654 margin(lambda_min/d + 1/3)=-4.715e-02 -> X (needs all-levels ratio < 1/4)
+p= 23 (split in F) lambda_min/d=-0.331695299 max|lambda|/d=0.331695299 Hoffman=0.249077473 margin(lambda_min/d + 1/3)=+1.638e-03 -> Y-prime (H*)
+p= 31 (split in F) lambda_min/d=-0.333328453 max|lambda|/d=0.333328453 Hoffman=0.249997255 margin(lambda_min/d + 1/3)=+4.880e-06 -> Y-prime (H*)
+p= 47 (split in F) lambda_min/d=-0.267635994 max|lambda|/d=0.275974250 Hoffman=0.211130005 margin(lambda_min/d + 1/3)=+6.570e-02 -> Y-prime (H*)
+p= 67 (split in F) lambda_min/d=-0.221422108 max|lambda|/d=0.221976141 Hoffman=0.181282217 margin(lambda_min/d + 1/3)=+1.119e-01 -> Y-prime (H*)
+p= 71 (split in F) lambda_min/d=-0.196844911 max|lambda|/d=0.220415895 Hoffman=0.164469857 margin(lambda_min/d + 1/3)=+1.365e-01 -> Y-prime (H*)
+
+## Q(sqrt 47) — type (A)
+p= 11 (split in F) lambda_min/d=-0.399646232 max|lambda|/d=0.476412726 Hoffman=0.285533746 margin(lambda_min/d + 1/3)=-6.631e-02 -> X (needs all-levels ratio < 1/4)
+p= 19 (split in F) lambda_min/d=-0.380486432 max|lambda|/d=0.380486432 Hoffman=0.275617654 margin(lambda_min/d + 1/3)=-4.715e-02 -> X (needs all-levels ratio < 1/4)
+p= 23 (split in F) lambda_min/d=-0.331695299 max|lambda|/d=0.331695299 Hoffman=0.249077473 margin(lambda_min/d + 1/3)=+1.638e-03 -> Y-prime (H*)
+p= 31 (split in F) lambda_min/d=-0.333328453 max|lambda|/d=0.333328453 Hoffman=0.249997255 margin(lambda_min/d + 1/3)=+4.880e-06 -> Y-prime (H*)
+p= 43 (split in F) lambda_min/d=-0.271868866 max|lambda|/d=0.271868866 Hoffman=0.213755422 margin(lambda_min/d + 1/3)=+6.146e-02 -> Y-prime (H*)
+p= 47 (ramified  ) lambda_min/d=-0.267635994 max|lambda|/d=0.275974250 Hoffman=0.211130005 margin(lambda_min/d + 1/3)=+6.570e-02 -> Y-prime (H*)
+p= 67 (split in F) lambda_min/d=-0.221422108 max|lambda|/d=0.221976141 Hoffman=0.181282217 margin(lambda_min/d + 1/3)=+1.119e-01 -> Y-prime (H*)
+
+## Q(sqrt 11) — control (stable 7)
+p=  7 (split in F) lambda_min/d=-0.561744901 max|lambda|/d=0.561744901 Hoffman=0.359690562 margin(lambda_min/d + 1/3)=-2.284e-01 -> X (needs all-levels ratio < 1/4)
+p= 11 (ramified  ) lambda_min/d=-0.399646232 max|lambda|/d=0.476412726 Hoffman=0.285533746 margin(lambda_min/d + 1/3)=-6.631e-02 -> X (needs all-levels ratio < 1/4)
+p= 19 (split in F) lambda_min/d=-0.380486432 max|lambda|/d=0.380486432 Hoffman=0.275617654 margin(lambda_min/d + 1/3)=-4.715e-02 -> X (needs all-levels ratio < 1/4)
+p= 43 (split in F) lambda_min/d=-0.271868866 max|lambda|/d=0.271868866 Hoffman=0.213755422 margin(lambda_min/d + 1/3)=+6.146e-02 -> Y-prime (H*)
+
+controls: H* fails at 7, 11, 19 and holds at 23, 31 — as B1's exact table says

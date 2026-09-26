@@ -1,0 +1,16 @@
+# J28D factor table (level one exact-float spectra; Lemma P above level one)
+
+## Q(sqrt 59) — type (B)
+Traceback (most recent call last):
+  File "/home/kooshi/source/lean-dir/tools/crunch_j28d_factors.py", line 60, in <module>
+    main()
+    ~~~~^^
+  File "/home/kooshi/source/lean-dir/tools/crunch_j28d_factors.py", line 48, in main
+    lo, hi = spectrum(p)
+             ~~~~~~~~^^^
+  File "/home/kooshi/source/lean-dir/tools/crunch_j28d_factors.py", line 22, in spectrum
+    pts = circle(p); d = p + 1; lo, hi = 1.0, -1.0
+  File "/home/kooshi/source/lean-dir/tools/crunch_j28d_factors.py", line 18, in circle
+    assert len(pts) == p + 1, f"circle over F_{p} has {len(pts)} points, expected {p+1}"
+           ^^^^^^^^^^^^^^^^^
+AssertionError: circle over F_11 has 10 points, expected 12
