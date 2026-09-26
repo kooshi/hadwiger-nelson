@@ -1,5 +1,7 @@
 # FS-45 — Chain, don't spindle: the unit-vector ring, the chain theorem, and the conjecture's five-level (STUB, 2026-09-14; minted from GPT Astra's response to the conjecture write-up)
 
+**Re-aimed at M2's close (2026-09-25):** D1–D3 are in the kernel (`LEDGER.md` row 103): the chain theorem over the graph induced on the chain's point set — not a `copyUnion`-style `chainUnion` as §3 D1 proposed, since shared points must be one vertex — in four forms and a ring form (FS-47's `1/δ ∈ ℤ[U_F]`); `χ(ℚ(√2,√3)²) ≥ 4`, with the 18-vertex list's refusal as a second oracle by the gadget algebra (no LRAT); `G4 → χ(K(√7)²) ≥ 5`. **Left:** phase C's certificate — a fresh LRAT of the 588-core's pinned refusal, fed to the kernel as its core (row 67's recipe) — a solver run, so **after the ban (2026-10-01)**, and then the unconditional `K(√7)` bound; `χ(ℚ(√2,√3)²) ≤ 4` by the dyadic residue colouring; G55's vertex bound `m(n − 1) + 1`. The {1, 2}-host consumer stays FS-49's.
+
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` (the proofs, §§1–2, 4–7)
 and `VERIFICATION.md` there (our read of each claim, and the two scripts that check the identities); `docs/local-global-tightness.md`
 (what was sent, with the definitions of `L(F)` and `R`); `plans/M56-arithmetic-of-tightness.md` §M1.7 L7 (our conjecture

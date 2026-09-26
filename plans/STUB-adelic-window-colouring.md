@@ -1,5 +1,11 @@
 # FS-64 — the adelic window colouring: a ceiling instrument that uses more than one place
 
+**Re-aimed at FS-91's close.** A single character needs eight colours over ℚ(√167) given CLG_7 (row 101), so the one-place, windowless case is closed at five, six and seven; the mixed window — several places, non-linear readings — is the whole remaining question.
+
+**At M3's close (2026-09-25):** at five colours over ℚ(√167) no window reads a finite set of places with no real place and none above 43; thick places are invisible, so every window question reduces to `S_red ⊆ {∞, 2, 3, 5, 7, 23, 29, 43, 61}`; with a real place and only thick finite places it is `χ_B(ℝ²) ≤ 5`. `plans/M3-derivation.md` §5–§6; `LEDGER.md` rows 109, next+2; follow-on FS-96 (`plans/STUB-windows-five-nonmixing.md`).
+
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G77 (the one-place, windowless case is a character colouring: existence only, row 100) and G76's five-colour mixing sentence (row 110).
+
 **At FS-89's close (2026-09-25):** this stub's one-place, windowless case — one character colouring the whole field (FS-83) — is closed at both exposed fields: no character four-colours ℚ(√47)'s plane and none five-colours ℚ(√167)'s (`LEDGER.md` row 96), since every four- and five-colour band character of a real field is torsion plus archimedean (row 95). With FS-86's row 92 (measurable windows over finitely many places cannot four-colour a type-(B) plane non-periodically), what is left of the five-colour aim over ℚ(√167) is a window colouring over **several** places that is not a character; it is untouched.
 
 **Re-aimed at FS-86's close (2026-09-25):** with any finite set of places and measurable windows it cannot four-colour a type-(B) plane non-periodically (row 92, C14), and over type (A) no such four-colouring exists (FS86-CL1); the five-colour aim at ℚ(√167) is untouched.

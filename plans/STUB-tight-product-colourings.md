@@ -1,5 +1,9 @@
 # FS-67 — 3-colourings of a tight graph times a non-3-colourable one: do they all come from the tight factor?
 
+**At M3's close:** for maps *into the Moser spindle* the answer is yes in print (`[TardifWrochna2019]` Thm 2, strong multiplicativity; found by M3's prior-art reader, `plans/M3-PA-mixing.md` Stage 2).
+
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G76's mixing sentence (a factor leaves a product colouring when it mixes, not when its ratio is small, row 109).
+
 **At FS-89's close (2026-09-25), from the Greenwell–Lovász / Larose–Tardif reading (`plans/PA-products-GL1974-LT2002.md` §4; PA-P1 to PA-P5, hand, filed there):**
 - **Settled for `G = K_k^s`** (`k ≥ 3`, `s ≥ 1`; PA-P3): for every connected `H` with `χ(H) > k`, of any cardinality and any `χ_f(H)`, the `k`-colourings of `K_k^s × H` are exactly `σ ∘ pr_i`, `i ≤ s` — `[GreenwellLovasz1974]` Theorem 1 iterated (`K_k^{s−1} × H` is connected by Weichsel's theorem, cited and not held, and its colourings are gap-free), and, by its zbMATH review, the main theorem of `[Larose2002]` (not held). Theorem 1's hypothesis on the factor that is not `K_n` is exactly gap-freedom (PA-P1). Among G54's tight residue targets this covers `Γ₃ = UD(𝔽₃, 2) ≅ K₃ × K₃` (by `(a, b) ↦ (a + b, a − b)`; the owner checked the 18 edges by script) and the dyadic `U₂ = Cay(𝔽₄, μ₃) = K₄`, with their direct powers (PA-P4) — **not** FS-58's `S₁ = UD(𝔽₉, 2)` (81 vertices, degree 8; `K₃⁴` has degree 16), not `U₃₂` or `U₄`, and no tower level ≥ 2. So D1's "closes as a citation" fires for that class only, and the stub stays open.
 - **§5.4's criterion at `G = K_k` is inside Greenwell–Lovász's proof** (PA-P2): Case 1 isolates the loops, and Case 2's `γ'` (a repeated value of a non-injective map) is a proper `k`-colouring of `E_k(K_k)` that colours each map within its own image — the shape a proof for a tight `G` must take; a candidate for D4's kernel form beside PA-T6.

@@ -1,5 +1,7 @@
 # FS-48 — Extensions of ℚ(√2,√3): the ℚ(√3,√d) table, explicit rhombus chains, and the fields where the three-colour theorem is non-constructive (STUB, 2026-09-14; Kooshi: explore derivations and extensions of the ℚ(√2,√3) result)
 
+**Re-aimed at FS-91's close.** Three colours are decided for every multiquadratic (indeed every real number) field: `χ = 3` iff non-bipartite and some prime above 3 has residue field `𝔽₃` (row 99). What remains is the four- and five-colour table.
+
 > **Re-aimed at FS-81's close (2026-09-24): extended to multiquadratic fields without √3** (close inventory item 28). FS-81's
 > theorem (`LEDGER.md` row 82) decides three colours over every multiquadratic field, with or without √3: residue degrees there are 1 or
 > 2, so FS81-T7's residual case cannot occur, and `χ(F²) ≥ 4` iff `1/3 ∈ ℤ[U_F]` and `F²` is not bipartite, `χ ≤ 3` when a prime above 3

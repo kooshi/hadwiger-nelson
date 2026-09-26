@@ -215,3 +215,34 @@ measured, placed without additions but the renumbering and the FS-96 bearing cel
 repeated runs of >= 10 words".
 
 **Would have searched here (stage 3):** none.
+
+## Stage 4 — SAVED (`plans/FRONTIER-STUBS.md`, the stubs, `CLOSED-QUESTIONS.md`)
+
+**`plans/FRONTIER-STUBS.md`**, by `data/crunch-2026-09-25/j24/frontier_apply.py` (every anchor exactly once; `--plant` corrupts the open
+line's anchor and exits 1 — seen to fire): the open line (none open; M1, M2, M3 CLOSED with rows, grokkings, verdicts and records); the
+re-rank preamble (a new paragraph above FS-89's: closed, answered, minted, re-aimed, moved); J24a's F2 pointer rewritten to current state
+(the sections "Where the 2026-09-25 work on this lives" stay as addresses); the table — FS-91, FS-83, FS-82 out, FS-92 … FS-96 in (seven
+columns each, composed from the closes' stub texts and the stubs' own solver lines), cell edits on FS-59, FS-84, FS-75, FS-80, FS-76, FS-87,
+FS-67, FS-64, FS-48, FS-45, FS-39, FS-47, FS-46, FS-69, FS-49 (question cells from M1 4.5, M2 4d, M3 R4.F and R5.1, J29; M2's price and
+solver cells for FS-87, FS-45, FS-39, FS-47; status cells record which close re-aimed each), 55 rows renumbered in stage 1's order; the
+closed list gains FS-91 (closed), FS-82 (closed), FS-83 (answered for falsifiers). **One contradiction resolved:** FS-64's question cell
+ended "a window over several places at five colours is still untouched", which M3's row 110 makes false; replaced by M1's banner sentence
+and M3's result (the FS-64 row of `CLAUDE.md` had the same clause, stage 3).
+
+**The stubs**, by `data/crunch-2026-09-25/j24/stubs_apply.py` (banners read from the plans, never retyped; placed under each title, the
+files' convention; `--plant` names a missing stub and exits 1 — seen to fire): 32 paragraphs in 25 stub files — M1 4.5's eleven banners
+(FS-91, FS-82, FS-83, FS-59, FS-64, FS-84, FS-75, FS-47, FS-48, FS-46, FS-39), M2 4e's five (FS-39, FS-45, FS-47, FS-87, FS-37), M3 R4.S's
+five (FS-76, FS-64, FS-59, FS-49 from R4.F, FS-69) and R5.1's FS-67 line, J29's two (FS-84's reframe, FS-80's ℚ(√47) target), and eight
+provisional-bearings lines carrying the new grokkings forward (WORKFLOW 9): G77 to FS-59, FS-64, FS-84, FS-76; G78 to FS-76, FS-80, FS-2;
+G76's new mixing sentence to FS-67, FS-69 (and FS-59, FS-64). The five new stubs numbered (FS-M1a–c → FS-92–94; "FS-(new)" → FS-95, FS-96;
+FS-95's "G77 (drafted at M3's close …)" → "G78 (minted at M3's close …)").
+
+**`CLOSED-QUESTIONS.md` §2.6** — `[Fischer1990]` §1's question, verbatim (J23p §C.4 item 1), as **a candidate, not fired**, gated on
+`[Johnson2000]` and `[Johnson2006]` being unread; our answer at its exact scope (rows 99, 100; CLG at existence scope); what is not
+answered; "not ours"; and J23p's items 2–3 recorded so that no one claims them (Manners's density question and Green's bounds not answered;
+Manners §5.5's assertion proved in band form on `R_{{p}}`, row 102).
+
+**Not mine, seen in the tree:** `plans/FS91-derivation.md` is modified in the working tree — J33's format repair in progress; not staged
+or committed here.
+
+**Would have searched here (stage 4):** none.

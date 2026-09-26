@@ -1,5 +1,7 @@
 # FS-2 — The Kempe classes of K-fabric's 4-colourings: what carries rigidity beyond the additive skeleton (STUB, 2026-09-06; re-aimed at the M57 close; scope note the same day)
 
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G78 (Kempe moves only relabel at frozen tails; FW rules out every Kempe-move invariant in rank one, row 108).
+
 > **Build triage 2026-09-08 (for Opus 5, `plans/BACKLOG-FOR-OPUS.md` MEASURE ONLY (the walk)):** see that file for the spec, the acceptance gate and the stop rule before starting; results go into a `## §B. Built` section here.
 
 > **SCOPE NOTE 2026-09-06 (the finite-plane bound, `reference/Chat-analysis/VERIFICATION.md`): every object this stub

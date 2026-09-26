@@ -1,7 +1,7 @@
-# FS-M1b — band rigidity from the pyjama theorem: one gluing step, an effective bound, density (stub)
+# FS-93 — band rigidity from the pyjama theorem: one gluing step, an effective bound, density (stub)
 
 *Minted 2026-09-25 at FS-91's close (crunch milestone M1) by its close planner (J23a, resumed as J23a2; de Bruijn, Opus 5.5), from the close
-gate's stub candidate (`plans/FS91-PA-close.md` §C.5, J23p). Number assigned by the front-page job (J24); until then "FS-M1b". Written for a
+gate's stub candidate (`plans/FS91-PA-close.md` §C.5, J23p). Number assigned by the front-page job (J24); numbered FS-93 there. Written for a
 session with zero conversation memory. Solver-free.*
 
 ## What is known, in plain words

@@ -1,7 +1,7 @@
-# STUB — FS-(new): windows at five colours over ℚ(√167) at the non-mixing places, and the null-set step (FS-64 at five, after M3)
+# STUB — FS-96: windows at five colours over ℚ(√167) at the non-mixing places, and the null-set step (FS-64 at five, after M3)
 
 *Minted 2026-09-25 at M3's close (crunch job J23c, from `plans/M3-close-inventory.md` rows 23 and 61, and the prior-art debt of row 22).
-The FS number is assigned by the front-page job. Read first: `plans/M3-derivation.md` §5–§6, `plans/M3-S1D-windows-five.md` §3,
+Numbered FS-96 by the front-page job (J24). Read first: `plans/M3-derivation.md` §5–§6, `plans/M3-S1D-windows-five.md` §3,
 `plans/M3-S1V-windows-five.md` §2.1 and §3.4. Solver column: **none until 2026-10-01** for the derivations; the `κ` questions below are
 finite and wait for the ban's end.*
 

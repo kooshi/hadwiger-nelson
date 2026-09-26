@@ -1,5 +1,11 @@
 # FS-84 — ℚ(√47): five colours, the conjecture's cheapest exposed prediction (stub; FS-59's sibling)
 
+**At FS-91's close.** No character four-colouring of ℚ(√47)'s plane, now through the class theorem with no certificate (C-47, row 100), and at every `L = 5` field by CLG-g's (g1): a four-colouring falsifying the five-clause is no character colouring.
+
+**J29's reframe (2026-09-25; `plans/FS84-five-colours-47.md`, its stages from 2026-10-01):** the survivors' `Θ₄` cell analysis can only colour a survivor (G71, row 96); a refusal needs a finite graph or a four-class averaged certificate; `χ(ℚ(√47)²) = 5` answers Soifer 55.1 and Moorhouse's ℚ(√47) question.
+
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G77 (no character four-colouring at any `L = 5` field, CLG-g's (g1)).
+
 **At FS-89's close (2026-09-25):** no **character** four-colouring of ℚ(√47)'s plane exists (`LEDGER.md` row 96; `plans/FS89-derivation.md` CL4; hand, given Lemma R and Weil), so a four-colouring falsifying the conjecture's five-clause here is a colouring no character gives (and, by FS-86's row 92, no measurable window over finitely many places). `χ(ℚ(√47)²) = 5` is not claimed; this stub's question is untouched. Now rank 4 in `plans/FRONTIER-STUBS.md`, above FS-83.
 
 **Re-aimed at FS-86's close (2026-09-25):** a four-colouring falsifying the conjecture's five-clause here cannot be a measurable window colouring over finitely many places with odd split places (row 92, FS86-CL1, one mind).

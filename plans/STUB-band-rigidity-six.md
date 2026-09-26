@@ -1,5 +1,7 @@
 # FS-91 — band rigidity at six colours, and at one prime (stub)
 
+**CLOSED 2026-09-25 (FS-91, crunch milestone M1).** Question 1 is answered at every band, on characters (row 98: the multi-digit sweep SW-m, two blind readings); U3, `MS₄({5})` and U5 are answered at every split prime (row 102: one prime fails for points, minimal sets and torsion orders); FS-83's `k ≥ 6` remainder is answered by the class theorem at existence scope (row 100), CLG-g's exception left to FS-92. Record: `plans/FS91-character-local-global.md` (its §R-close first) and `plans/FS91-derivation.md`. Successors: FS-92 (`plans/STUB-character-classification.md`), FS-93 (`plans/STUB-pyjama-gluing.md`), FS-94 (`plans/STUB-one-prime-minimal-sets.md`).
+
 *Minted 2026-09-25 at FS-89's close by the close planner (de Bruijn, Opus 5.5). Rank 2 in `plans/FRONTIER-STUBS.md` (the planner's
 proposal; Kooshi and a next-step advisor choose the next milestone). Written for a session with zero conversation memory. Solver-free.*
 

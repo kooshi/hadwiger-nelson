@@ -1,5 +1,9 @@
 # FS-69 — the all-levels certificate at 43: a smaller relaxation, not a bigger machine
 
+**At M3's close (2026-09-25):** `B₁(43) < 369.8` would also close ℚ(√167)'s finite-place window count at five (D1-43, `plans/M3-derivation.md` M3-J21-D1-43p, M3-J22-T10: Hoffman alone reads `0.2138`, the fibre-share maximum is strictly below).
+
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G76's mixing sentence and row 110 (43 is the one finite place the window count at five still needs).
+
 *Minted 2026-09-21 at FS-66's close, from Phase 2D's pricing (`plans/FS66-phase2-certificate.md` §R‴.8). Written for a reader with
 no conversation memory. Read beside: `LEDGER.md` row 75, G66, G56 (the window), G59; `plans/FS66-phase2-certificate.md` §F, §C, §R′,
 §R″, §R‴; `data/fs66/b1/SOUNDNESS.md`; `plans/STUB-fractional-wall.md` (FS-57), `plans/STUB-exact-independence-solver.md` (FS-65).*

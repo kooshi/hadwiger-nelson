@@ -1,7 +1,7 @@
-# FS-M1a — character colourings of a field plane: the classification question, and CLG-g's exception (stub)
+# FS-92 — character colourings of a field plane: the classification question, and CLG-g's exception (stub)
 
 *Minted 2026-09-25 at FS-91's close (crunch milestone M1) by its close planner (J23a, resumed as J23a2; de Bruijn, Opus 5.5). The stub
-number is assigned by the front-page job (J24), which numbers M1–M3's new stubs together; until then this stub is "FS-M1a". Written for a
+number is assigned by the front-page job (J24), which numbers M1–M3's new stubs together; numbered FS-92 there. Written for a
 session with zero conversation memory. Solver-free. Proposed rank: just below FS-64 in `plans/FRONTIER-STUBS.md` (the close planner's
 proposal; Kooshi chooses).*
 

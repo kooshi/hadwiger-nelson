@@ -1,5 +1,9 @@
 # FS-47 — The unit-vector ring in the kernel: prime inversion, the two-colour classification, and the five-level for every wall-broken field (STUB, 2026-09-14; Kooshi: kernel-check every single thing GPT Astra proved)
 
+**Re-aimed at FS-91's close.** The statement is Lemma C/C′ with no Galois hypothesis (row 100; FS91-J07-3, J07-4, J02-L2, J10-L1): `ℤ[U_F] = O′`, the ring integral at the stable primes, except possibly at a ramified stable dyadic place (which occurs at ℚ(√5), ℚ(√17), ℚ(α)); prime inversion is its corollary.
+
+**Re-aimed at M2's close (2026-09-25):** D3, prime inversion, is in the kernel in valuation form, with D5's `3/8 ∈ ℤ[U_{K(√7)}]` and the chain theorem in ring form (`LEDGER.md` row 105): Chevalley's domination replaces lying-over, so no number field is needed. **Left:** the number-field reading — the `σ`-stable valuation subrings of a number field with `p` in the maximal ideal are exactly its conjugation-stable primes above `p` — which is row 57's gap and the one lemma also missing under Theorem A's field form (G35, G43) and under ASTRA T7 beyond `K(√7)` (with FS-37); Lemma R at its corrected scope (the FS-86 re-aim above); D4; D6. Phase B's second inhabitant (`ℚ` at `p = 3`, the 'only if') was not built.
+
 **Re-aimed at FS-86's close (2026-09-25):** B1's Lemma R (`ℤ[U_F]` = elements integral at every stable prime) is the natural target, **at its corrected scope**: no stable prime ramified in `F(i)/F` (FS86-CL2; it fails at ℚ(√5), ℚ(√17)).
 
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/local-global-further-results.md` §§1, 2, 6 (Lemma 1.1,

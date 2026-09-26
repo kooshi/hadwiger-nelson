@@ -1,5 +1,7 @@
 # FS-49 — One gadget for six: a five-colour virtual edge at distance 2 over a 6-open field, with Exoo–Ismailescu's {1, 2} graph as host (STUB, 2026-09-14; from GPT Astra's `six-colour-research-directions.md` §1)
 
+**At M3's close:** its measurable analogue is posed in print — Mixon's 2018 criterion (Polymath16 fourth thread): a five-colour forced `{1,2}`-vertex at an irrational angle proves `χ_µ(ℝ²) ≥ 6`; windows over finitely many places of ℚ(√167) cannot supply it from thick places (row 110).
+
 *Read beside: `reference/ChatGPT-local-global-tightness-conjecture/six-colour-research-directions.md` §1 and `VERIFICATION.md`
 row 9; `plans/M49-two-distance-descent.md` (the two-distance dial, and the descent that replaced the seed's distance-2 edges one
 at a time), `plans/M63-phaseH4-sweep.md` (the arena's 1.3-billion-pair sweep, which already answers this stub's first test),

@@ -1,5 +1,7 @@
 # FS-82 — three colours at residue degree three: the one real number field class the three-colour theorem leaves open (stub)
 
+**CLOSED 2026-09-25 (FS-91).** For every real number field, `χ(F²) = 3` iff the plane is non-bipartite and some prime above 3 has residue field `𝔽₃` (row 99; S1 by three derivations, no mixing by two); so a field whose primes above 3 all have residue degree ≥ 3 is never three-chromatic, and `χ(ℚ(α,√7)²) = 4` (three derivations). **Correction:** this stub's "dyadic targets have `χ ≥ 4`" does not apply to ℚ(α,√7): its dyadic prime splits in `F(i)`, so it has no dyadic target.
+
 *Minted 2026-09-24 at FS-81's close, from `plans/FS81-derivation.md` T7 (the verifier's contrapositive and its residual case) and §5 R6.
 Solver needs: **none** (exact polytope trees and hand derivation; the week after FS-81's close bans SAT solvers).*
 

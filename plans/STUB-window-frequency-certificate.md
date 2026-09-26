@@ -1,5 +1,9 @@
 # FS-80 — a window-frequency certificate at four colours, kept small by the symmetry (stub)
 
+**J29 (2026-09-25; `plans/FS84-five-colours-47.md`):** ℚ(√47) is a target beside ℚ(√167) — its fractional cap `121/28 > 4`.
+
+**Provisional bearings, updated at the 2026-09-25 crunch's close (M1–M3):** G78 (in rank one the Kempe route cannot see a frozen wall — an averaged certificate is not a Kempe argument, row 108).
+
 > **Re-aimed at FS-85's close (2026-09-24).** On de Grey's lattice a **radius-1** averaged certificate cannot lift `120Λ` to `8Λ`: the 54
 > pair-correlation equalities admit a weight supported entirely off the 42 characters (FS85-C14, verified exactly; row 87). Radius ≥ 2
 > and joint four-class averaged certificates are untested (a float probe agrees; uncertified). Row 85's proof is **structure-derived and

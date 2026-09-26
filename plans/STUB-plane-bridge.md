@@ -1,5 +1,9 @@
 # FS-39 — The bridge: χ(ℝ²) is the supremum of χ(F²) over real number fields (STUB, 2026-09-13; minted by the Poros wall-breaking pass, card 3 of `plans/POROS-2026-09-13-wall-breaking.md`)
 
+**At FS-91's close.** S1 holds for every algebraic `F ⊆ ℝ` and every purely transcendental extension of one, with `L(F)` read over all `c`-stable valuation rings (row 99); a general transcendental `F` hits this stub's gap (finite generation not purely transcendental over an algebraic field).
+
+**Re-aimed at M2's close (2026-09-25):** phases A, B′, B0, B1 and C are in the kernel — route C (`LEDGER.md` row 104), and the bridge's C1, C2 (attained) and C4 conditional on the one named hypothesis `RealAlgebraicDescent`, with `ℝ` and `ℝ_alg` real closed, Lemma NP, C3 and C3⁺ (row 107; `plans/M2-derivation.md` § I.3, I.6, I.7). The bridge is `[Madore2015]` ¶5.4's, by Tarski — §3a's "the nearest thing we have … cited in prose only" undersold it — and the gate has run (`plans/M2-S1D-bridge.md` §1.3). §4's phase-B price ("one to two days") was wrong both ways: B0 and B1 took under half an hour each; B2 is months. **Left:** B2, `(∃T)` for `ℝ_alg ⊆ ℝ` in the kernel — a parametric one-variable elimination and a projection theorem; Artin–Lang is no cheaper (J17-T10) — a leaf, not a job; reading `[BendaPerles2000]` (ILL; the one source that can still score P-J17a); Q-const (G63); `χ(ℚ²) = 2` in the kernel (row 63), on which the value `χ(ℚ(L)²) = 2` and J17-T8 wait. §5's corollary uses that the supremum is attained, which holds because every value is at most 7.
+
 ## 1. Mission context, in plain language
 
 Since M58 every result of the programme is a statement about the unit-distance graph of a number field's plane F², and the

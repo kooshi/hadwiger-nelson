@@ -1,7 +1,6 @@
-# STUB — FS-(new): rank-one walls — frozen walls, the binary model, and the completion route (FS-76's rank one, after M3)
+# STUB — FS-95: rank-one walls — frozen walls, the binary model, and the completion route (FS-76's rank one, after M3)
 
-*Minted 2026-09-25 at M3's close (crunch job J23c, from `plans/M3-close-inventory.md` rows 33 and 45). The FS number is assigned by the
-front-page job. Read first: `plans/M3-derivation.md` §1–§4 and `plans/M3-S1B-rank-one.md` §2.8. Solver column: **none until 2026-10-01**
+*Minted 2026-09-25 at M3's close (crunch job J23c, from `plans/M3-close-inventory.md` rows 33 and 45). Numbered FS-95 by the front-page job (J24). Read first: `plans/M3-derivation.md` §1–§4 and `plans/M3-S1B-rank-one.md` §2.8. Solver column: **none until 2026-10-01**
 (the ban); the completion route's first step is an exact enumeration a derivation fixes, and waits for 2026-10-01 by the owner's ruling
 (inventory row 60).*
 
@@ -54,6 +53,6 @@ A derivation record with a "Theorems this phase proved" heading; for Q3 an exact
 
 ## Provisional bearings
 
-G77 (drafted at M3's close: rank-one inheritance is countable ⟹ finite; Kempe moves cannot see a frozen wall), G71 and G73 (four colours
+G78 (minted at M3's close: rank-one inheritance is countable ⟹ finite; Kempe moves cannot see a frozen wall), G71 and G73 (four colours
 have no height; certificates cell by cell are empty), G13/G42 (a fan gap or a finite Kempe component is entropy), G27 (reflection and the
 colour group), G21 (a scan's null measures its range), G51 (three minds met one wall), G72 (pose the structural form).

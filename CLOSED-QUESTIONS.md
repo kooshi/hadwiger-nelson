@@ -486,6 +486,32 @@ a union of `Λ`-cosets; nor Mixon's follow-up, that the ring has finitely many f
 count 9,120 (Hubai), the input (Parts), the stripes-from-no-triangle sketch (Gibbs), the renormalisation (Tao). **Ours:** the derivation
 on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-V6). **Not kernel-checked** (FS-87).
 
+### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate, not fired**: answered at `χ ≤ 3` and at `L(F) ≤ 4` over every real number field, and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
+
+> **Fischer** (`[Fischer1990]` §1, 1990, held and read): *"This still begs the general question, however, whether some algebraic
+> criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* The close gate of
+> FS-91 (`plans/FS91-PA-close.md` stage 3) also names it as Benda–Perles's question (`[Johnson2000]`'s problem (1)) and `[Soifer2024]`'s
+> Open Problem 11.6 — both addresses from the gate, not re-read here.
+
+**Our answer, at its exact scope** (`LEDGER.md` row 99; `plans/FS91-derivation.md` FS91-J02-T2, J02-T3, J09-J4; FS-91, hand, S1 by three
+derivations): for every real number field `F`, `χ(F²) ≤ 3` iff `L(F) ≤ 3`, and `χ(F²) = L(F)` whenever `L(F) ≤ 4`; a non-bipartite real
+number field's plane is three-chromatic iff some prime of `F` above 3 has residue field `𝔽₃`. For **character colourings** at every `k`
+(row 100, the class theorem, at existence scope and given band rigidity at every band, row 98): the plane has a character `k`-colouring
+iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **Not answered:** `χ(F²)` from `L(F) = 5` up — the conjecture's
+open range; that every character colouring is local at one place (proved at three colours and at HD1's fields only; FS-92); the general
+subfield of ℝ (S1 extends to every algebraic `F` and every purely transcendental extension of one, with `L(F)` read over all stable
+valuation rings, row 99). **Why a candidate, not fired:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
+`[Johnson2006]` — a status report and a compendium on exactly this question, both unread and waiting on Kooshi's fetch (`BIBLIOGRAPHY.md`
+§ R.4); no zbMATH gate on "no mixing" in the literature's words was run. **Not ours:** the question (Fischer; Benda–Perles); the real
+quadratic and `√3 ∈ F` cases (row 82; G55, GPT Astra); the additive case (`[Fischer1990]` Thm 9, which row 99 generalises). **Not
+kernel-checked** (FS-75).
+
+**Recorded so that no one claims them** (J23p §C.4): `[Manners2015]` Remark 5.4(i)'s density question (*"We know of no reason why the
+result could not be strengthened to give `Y = Â`"*) is not answered here — row 98 proves values near 0, not density; Green's request for
+quantitative bounds is `[KravitzLeng2025]`'s for the half ring, not ours (row 98's `N_k` is non-effective); and `[Manners2015]` §5.5's
+assertion that "the appropriate results are false for the smaller set `{θ₅^r : r ≥ 0}`" — an assertion, not a posed question — is proved
+here in band form on `R_{{p}}` (row 102).
+
 ## §3 — Adjacent and open
 
 *Questions others posed in writing that we have not answered but are unusually well placed to.*

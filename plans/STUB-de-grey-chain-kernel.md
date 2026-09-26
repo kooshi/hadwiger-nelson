@@ -1,5 +1,7 @@
 # FS-87 — de Grey's lattice in the kernel: the stripe lemma, Parts's trees, and `F = P = 8Λ` as a conditional theorem (stub)
 
+**Re-aimed at M2's close (2026-09-25):** target 1, the stripe lemma, is in the kernel in full (`Stripe.striped_of_proper_nt0`; `LEDGER.md` row 106), 447 lines with its controls, in 17 minutes against a 4–6 hour price; the triangle condition is used once, to make one line two-periodic, and the line-to-line step needs properness alone. **Next:** target 2, dB9's V1; then target 3, the checker for Parts's nine trees — price both from target 1's rate.
+
 **Re-aimed at FS-86's close (2026-09-25):** FS-86's kernel candidates join: `ℤ[T] = O` (FS86-W1, one paragraph over `ℤ₂[ζ₁₂]`), Theorem A by W's route (row 90: W1, row 78's certificate, D2-B's level-6 table), the K classification (row 89), C12.1 (row 93).
 
 *Minted 2026-09-24 at FS-85's close, from the kernel decisions filed in `plans/FS85-derivation.md` (FS85-V2-T5 "a good small kernel

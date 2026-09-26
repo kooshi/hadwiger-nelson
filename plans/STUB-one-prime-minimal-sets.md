@@ -1,8 +1,8 @@
-# FS-M1c — the minimal sets of the one-prime band set (stub)
+# FS-94 — the minimal sets of the one-prime band set (stub)
 
 *Minted 2026-09-25 at FS-91's close (crunch milestone M1) by its close planner (J23a, resumed as J23a2; de Bruijn, Opus 5.5), from J12's
 remarks (`plans/FS91-S1D-one-prime.md` §3.3; inventory item 123) and J13's route (`plans/FS91-S1V-one-prime.md` §2.5). Number assigned by the
-front-page job (J24); until then "FS-M1c". Written for a session with zero conversation memory. Solver-free.*
+front-page job (J24); numbered FS-94 there. Written for a session with zero conversation memory. Solver-free.*
 
 ## What is known, in plain words
 

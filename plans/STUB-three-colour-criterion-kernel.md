@@ -1,5 +1,7 @@
 # FS-75 — the three-colour criterion in the kernel, and `χ(ℚ(√167)²) ≥ 4` with it (stub)
 
+**Re-aimed at FS-91's close.** The kernel target is S1 over every real number field (J02-T2's chain: J02-L1, L2, L3, L4(a) and a finite sumset) and no mixing (FS91-J09-J4, J09's proposal); every leaf is finite algebra plus one character-sum bound (Weil above 243, exact below), with FS81-T2 and FS73-T22's ⟹ as the named hand inputs. Fallback: a checker for ℚ(α,√7)'s prime data (FS91-J02-C1) and FS-81's census certificates.
+
 > **Re-aimed at FS-81's close (2026-09-24).** The target is now **T4 for the whole family**, not one field. FS-81 proved at [hand, two
 > independent derivations] (`LEDGER.md` row 82; `plans/FS81-derivation.md` T1–T5) that `χ(ℚ(√d)²) ≥ 4` for every squarefree
 > `d ≡ 11 (mod 12)`, and the sharpest form is parametric: **the five listed layers `{vᵏ : |k| ≤ 2}·U₅` have empty `Θ₃`**, `v` the
