@@ -260,3 +260,35 @@ residue sizes, infinite as stated".
 **Stage 4 not started** (budget; the brief's stop rule). Nothing fenced has been opened after the slip logged in §1.1, so a resume can run
 stage 4 blind-clean: open `data/fs103/claims-sealed.md` (including the owner's added control), score it, then read the two fenced proofs of
 T-J39-3.
+
+## Stage 4 — scoring the sealed half and the fenced proofs (opened only after stage 3's commit e5d65927)
+
+### 4.1 CTL-FRAC first (the owner's addition): does my C-LB run on one colour class at a time? — **No. A second class enters at L3.**
+
+**Steps 1–2, L1, L2, L-WA and L4 do run one class at a time.** Take a rotation- and translation-invariant random independent set `I` of
+`Cay(R, U)` of density `δ`, with `p(x) = P(x ∈ I | 𝒜)`. The spectral measure of `1_I − δ` is `U`-invariant, and
+`∫_{R̂∖(T+A)} χ(u) dσ_I = −E[p(0)p(u)] ≤ 0`. So either (B) holds, and MR excludes it, or `{p > 0}` is an `𝒜`-measurable independent superset
+of `I` with spectrum on `T + A`. That superset extends to a CP random independent set `Ĩ` of `Cay(G, T_G) = X × Cay(K, T_K)`, of density
+`δ′ ≥ δ`. The `k`-colour Step 2 is these `k` computations summed over `j`. Its one cross-class use, "some support is non-empty at every
+`x`", holds class by class because `I_j ⊆ {p_j > 0}`.
+
+**L3 is where the classes meet.** Its selection `c″(x) = min{j : m_j(x) > θ′}` is defined at every `x` only because the fibre masses sum
+to one: `Σ_j m_j(x) = 1`, so `max_j m_j(x) ≥ 1/k > θ′`. The hypothesis `λ* < 1/(k−1)` is exactly `θ = λ*/(1 + λ*) < 1/k`, which is this
+pigeonhole value.
+
+For one class, the mixing inequality still makes `{x : m(x) > θ′}` independent in `X`. But the fibre mass `m` only has mean `δ′`, and it
+may sit at or below `θ` on a set of positive measure. So the selected set has density at least `(δ′ − θ)/(1 − θ)` and no more.
+- Example: at `F_dG`, `θ = 0.168047/1.168047 = 0.1439`.
+- From `δ = 1/4`, this gives a CP independent set of `UD(ℝ²)` of density at least `(0.25 − 0.1439)/0.8561 = 0.124`.
+- That says nothing against `m₁(ℝ²) ≤ 0.247`.
+
+If `m ≡ δ` were constant, the reader's condition `λ* < δ/(1−δ)` (that is, `θ < δ`) would contradict the edge constraint. That is why
+`m` must vary. Once it varies, the one-class transfer loses density.
+
+**So my derivation transfers colourings, not densities.** It gives no bound on `α₁(ℝ²)` against `m₁(ℝ²)`, and the published conjecture of
+`[AmbrusEtAl2023]` §4 and `[MatolcsiEtAl2025]` (Conjecture 1) is untouched by it. In the reader's words, the second class enters at "the
+step where the other classes enter … where integrality carries F1": **L3's pigeonhole `max_j m_j(x) ≥ 1/k`**, written in my stage 2a as
+"(defined: some `m_j ≥ 1/k`)".
+
+Scope of this answer: it covers my derivation only. Whether a cleverer one-class selection could keep the density is not settled here. A
+positive answer would imply `α₁(ℝ²) ≤ m₁(ℝ²)` at a 6-thick field under MR. [hand, one mind]
