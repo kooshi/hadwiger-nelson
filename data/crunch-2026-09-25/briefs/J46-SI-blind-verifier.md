@@ -22,7 +22,7 @@ Do not open:
 - `data/fs84/j45/`, and `tools/crunch_j45_*` and `tools/crunch_j36_*`;
 - the J45 brief;
 - the reports `data/crunch-2026-09-25/reports/J36.md`, `J37.md`, `J45.md`;
-- any `plans/POROS-2026-09-2*-wanted-poster-*.md`;
+- any `plans/POROS-2026-09-2*-wanted-poster-*.md` (until stage 3, when the ℚ(√47) one's §3.4 opens for W1's comparison);
 - `plans/FS84-close-inventory.md`;
 - the crunch index `plans/CRUNCH-2026-09-25-INDEX.md`;
 - the body of any commit whose subject starts "J36", "J37" or "J45".
@@ -51,6 +51,15 @@ random — must satisfy (SI) with equality."
 
 *(Quoted verbatim from its source, except the control line: the source reads "F2's noisy colourings over ℚ(√11)", naming a
 section of a fenced file, and the owner has replaced that name with a description of those colourings. Log this in your quotation check.)*
+
+**One more claim (W1), added by the owner before launch** — verbatim from a fenced record (a Poros session's §3.4); judge it blind like the
+others:
+
+"**T-J37-1.** Over ℚ(√47) there is no proper four-colouring of the form `c_t(x) = W(θ(x) + t)` with `θ ∈ R̂`, `W : ℝ/ℤ → {0,1,2,3}`
+Lebesgue measurable, and `c_t` proper for almost every `t ∈ ℝ/ℤ`."
+
+Its source says it rests on `LEDGER.md` row 98 and on T-C(A) at `S = ∅` (and so on `[AmbrusEtAl2023]` when `θ` has an archimedean part).
+You may use those as inputs; its proof is fenced. In stage 3 its comparison row is against `plans/POROS-2026-09-25-wanted-poster-47.md` §3.4.
 
 The notation is the Notation block of `plans/R88-derivation.md`. Some terms are not fixed there: the "trace spectral measure" (the sum
 over the three coordinates of the tetrahedral embedding's spectral measures) and the "`E_S`-factor" (the factor σ-algebra of the vectors
