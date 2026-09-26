@@ -68,7 +68,7 @@ P" (amenability and orbit-closure compactness are both needed; I expect both are
 **E8 — recommendation, before reading.** Default: a derivation job on EI-2 over the fields where four-colourings exist (ℚ(√11) first),
 with its falsifier named; ahead of it, J36-D's SI lemma, because the poster's sharp form rests on it at one mind.
 
-## Stage 2 — SAVED: quotation check and evidence inventory (read against Stage 1)
+## Stage 2 — SAVED: quotation check and inventory of the record (read against Stage 1)
 
 ### 2.1 Quotation check (standing rule 5)
 
@@ -83,17 +83,17 @@ with its falsifier named; ahead of it, J36-D's SI lemma, because the poster's sh
 
 ### 2.2 Evidence inventory
 
-- **Row 96, C-47** (`LEDGER.md` l.123; FS89-CL4; re-proved through CLG, row 100, J07-13 and J10-T5) — read against: E2, "a corollary of T-C(A)" — surprised: **yes.**
+- **Row 96, C-47** (`LEDGER.md` l.123; FS89-CL4; re-proved through CLG, row 100, J07-13 and J10-T5) — read against: E2, "a corollary of T-C(A)" — surprised: yes
   Row 96 rests on "Lemma R and Weil — fewer inputs than FS86-CL1 (no `[AmbrusEtAl2023]`, no FS-66, no Zhang)". It is not a corollary of
   T-C(A). A character colouring `⌊4θ⌋` with `θ ∉ E` has spectrum on `ℤθ ∖ 0`, and `ℤθ ∖ 0` misses `E` (a divisibility check: `E_S` is
   divisible and holds all torsion). So it lies **inside** T-C(A)'s evasive class, and row 95's band rigidity is what removes it. **Row 95 is
   the one theorem on the poster that reaches into the evasive class.**
 - **Row 92, the ℚ(√47) clause** (l.119) — read against: E2, "subsumed by T-C(A)" — surprised: no. T-C(A) is "FS86-CL1's count moved from
   measurable windows to invariant measures" (R88-TCA). The two share the count and `[AmbrusEtAl2023]`.
-- **S1a / S1V-4, not periodic** (`plans/FS84-S1-derivation.md` §1.4; S1V table) — read against: E2, "a corollary" — surprised: **partly.** It
+- **S1a / S1V-4, not periodic** (`plans/FS84-S1-derivation.md` §1.4; S1V table) — read against: E2, "a corollary" — surprised: yes (partly) It
   is logically a corollary, but its route is independent: "Does not rest on: `[AmbrusEtAl2023]`", two derivations. So "not periodic"
   survives a failure of the shared input.
-- **S1b-i, ii, iii** (§2.2 there; S1V-5) — read against: E1, "a GAP at translation-invariant scope" — surprised: **yes, twice.** (a) The
+- **S1b-i, ii, iii** (§2.2 there; S1V-5) — read against: E1, "a GAP at translation-invariant scope" — surprised: yes (a) The
   equivalence is proved: four-colourable ⟺ an invariant random four-colouring exists (two derivations for i–ii). (b) S1b-iii puts a **field**
   line on the poster that I had not listed: `ι(ℚ(√47)) = inf_H α(H)/|H|`, so a counterexample needs **every finite unit-distance graph in
   ℚ(√47)² to have independence ratio ≥ 1/4**. With Q5, ℝ² violates this; whether ℚ(√47)² does is open, and G60's cap (`χ_f(Γ₁₁) = 121/28 ≈
@@ -102,20 +102,21 @@ with its falsifier named; ahead of it, J36-D's SI lemma, because the poster's sh
   and 19, Lemma P, C14 window lemmas; the split dyadic step C14.2 (c) at `q = 2` rests on J28V's and M3's derivations.
 - **Row 75 and CLOSED-QUESTIONS §1.7** — read against: "no residue target at any depth" — surprised: no. §1.7 adds a posed question:
   Moorhouse's "What about `χ(ℚ(√47)²)`?".
-- **Row 84** (l.111) — read against: E1's "measured nulls" — surprised: **yes, in kind.** Besides the 25 survivors (nulls), it holds **102
+- **Row 84** (l.111) — read against: E1's "measured nulls" — surprised: yes Besides the 25 survivors (nulls), it holds **102
   certified four-colourable lattices**. These are positive facts about finitely generated pieces, which constrain nothing about a colouring
   of the whole ring. They matter as a control of a different kind (Stage 3, C4).
 - **Rows 97, 102** (one prime) — read against: E4, "no control exists" — surprised: no, after a check. At one split prime, band characters
   off `T + A` exist. But `ℤ[i][1/p]` is a cocompact lattice in `ℂ × ℚ_p²`, so every one of its characters is continuous at that place: they
   sit in `Fin_{{p}}`, not in the evasive class. They are controls for "reads a split place", not for "reads infinitely many".
-- **Row 98** (band rigidity at every band) — read against: nothing (not listed in E1) — surprised: **yes.** With Steinhaus it extends row 96
+- **Row 98** (band rigidity at every band) — read against: nothing (not listed in E1) — surprised: yes With Steinhaus it extends row 96
   from `⌊4θ⌋` to every measurable circle window `W(θ(x))` (Stage 3, T-J37-1).
 - **FS-84 §IQ** (`plans/FS84-five-colours-47.md` §4.1) — read against: E6 — surprised: no. It names "joint window frequencies" (the
   invariant measure) as the forced invariant, and "P-int′: five-chromatic with `χ_f ≤ 4`" as unscored.
 - **`plans/PA-ambrus2023-audit.md`** — read against: E7, "the shared input is the weak point" — surprised: no, and it is sharper than I
   expected. H4 (the Bessel obligation) is checked "in double precision … not interval-certified; worst margin 2.3·10⁻⁶".
-- **The conditions of the last reading** — J36 read T-C(A) in one session, with its brief's headline in hand. Its F2 already flagged the
-  literal headline, so its sharpenings were made against the right scope.
+- **The last reading's conditions** (J36) — read against: made under the brief's headline, it carries its scope — surprised: no.
+  (`plans/POROS-2026-09-25-infinitely-many-primes.md`.) J36 read T-C(A) with its brief's headline in hand, but its F2 already
+  flagged the literal headline, so its sharpenings were made against the right scope.
 
 ### 2.3 Would-have-searched-here log (Stages 1–2)
 
@@ -194,8 +195,8 @@ line.
   essentially; they do not show that infinitely many can.
 - **C3. The finite pieces** (an exact tally of seconds on the existing certificate log `data/fs81/phaseD/d47/K1-checker-run.txt`):
   - Row 84's 177 certified four-colourings of 102 finitely generated lattices over ℚ(√47) are of these kinds: 73 additive into ℤ/4; 11
-    periodic mod `4Λ` or `8Λ`; 36 residue at the ramified 47 and 4 at 67, each through an image of the circle smaller than the full residue
-    circle; 22 residue at the split primes 17, 37, 53 and 61; 31 linear forms (characters of the lattice, orders 4 to about `6·10¹⁰`).
+    periodic mod `4Λ` or `8Λ`; 36 residue at the ramified 47 (images of 8–20 of its 48 circle points) and 4 at a stable place above 67 (20 or 28 of 68), each through an image smaller than the full residue
+    circle; 22 residue at the split primes 17, 37, 53 and 61; 31 linear forms (characters of the lattice, orders 2 to about `3·10¹⁵`).
   - **Every kind dies in the whole ring by a theorem on the poster, or by the ring's arithmetic.** The dyadic kinds die because
     `1/2 ∈ R` (G35), the split-prime residues because `R` inverts those primes, the stable residues by P1 once the image fills the circle,
     and the linear forms by P3.
@@ -248,3 +249,188 @@ suffices). *Scope:* four colours, ℚ(√47), one character, any measurable wind
 closed at ℚ(√47). Row 96 closed the windowless case.
 *Not claimed:* rank ≥ 2 (J1); five colours (the count fails at the real place).
 *Control:* over ℚ(√11) the theorem must fail, and does: C9 is `⌊4θ⌋` with `θ ∈ T + A`, and step 5 fails there (the stable 7 has ratio `2/7`).
+
+## Stage 4 — SAVED: the name, the killing test, the example invariant, the recommendation, the ledgers
+
+### 4.1 In its discipline's words, and the queries a prior-art job should run (not run here)
+
+**The object.** `X₄(F)` is a **hom-shift** — the subshift of `{0,1,2,3}^R` of graph homomorphisms `Cay(R, U) → K₄` — on the countable
+abelian group `R`. `R` is not finitely generated; it is a ring of `S`-integers with `S` infinite. A translation-invariant measure on the
+hom-shift is an **invariant random proper colouring** (a *stationary colouring* in probability).
+
+**The gap, for a stranger.** *Does the four-colour hom-shift of this Cayley graph carry an invariant measure with no factor onto a proper
+colouring that is a model set — a measurable function of a cut-and-project scheme whose internal space is locally compact?*
+- The pure-point layer is the theory of **model sets and pure point dynamical spectrum**. There, pure point spectrum is characterised by
+  regular model sets (recalled, not read: Baake–Lenz–Moody 2007). The question becomes whether the internal space can be taken to be the
+  completion of `R` at finitely many places.
+- The continuous layer is **Furstenberg's ×p×q measure problem on an `S`-adic solenoid** (J36 F5), with `T` playing the finite orbits.
+
+**The example invariant in these words.** EI-2: "every invariant random proper four-colouring of a field plane factors onto a model-set
+colouring with locally compact internal space".
+
+**Queries**, each tagged with its discipline:
+1. *Aperiodic order:* "model set" & "pure point" & ("p-adic" | "adelic") & "internal space"; "Toeplitz" & "cut and project" & "S-integers";
+   Baake–Moody weighted and adelic model sets; Sing's p-adic internal spaces.
+2. *Symbolic dynamics:* "hom-shift" & "invariant measure" & "abelian group" (not ℤ^d); "frozen" & "proper colourings" & "non-finitely
+   generated".
+3. *Probability:* "finitely dependent" & "coloring" (Holroyd–Liggett; four-colourings of ℤ that are stationary but not block factors);
+   "factor of i.i.d." & "proper coloring" & "abelian".
+4. *Measure rigidity:* "S-adic solenoid" & "invariant measures" & "commuting automorphisms" (Einsiedler–Lindenstrauss 2003, Lindenstrauss's
+   survey); "×p ×q" & "S-integers" & "Fourier".
+5. *Descriptive combinatorics:* "Borel chromatic number" & "Cayley graph" & "countable abelian group" (Kechris–Marks survey, Weilacher);
+   whether a Borel or measurable four-colouring of `Cay(R, U)` with respect to a free action is a Borel-Hedetniemi instance (row 109's frame).
+6. *Fractional, for J2 and EI-F:* zbMATH `ab:"fractional chromatic number" & ab:"measurable" & ab:"unit distance"`; "independence ratio" &
+   "measurable independence" & "equal" (is `α₁(ℝ²) = m₁(ℝ²)` posed?); `[Johnson2000]` and Johnson 2000 (Geombinatorics 9(3)).
+7. *The question by name:* Moorhouse's "What about `χ(ℚ(√47)²)`?" — the citation graph of `[Moorhouse2010slides]` and of `[DuczVarga2026]`.
+
+### 4.2 The killing test
+
+**KT-1, cheapest and sharpest.**
+- *Target:* `[AmbrusEtAl2023]`'s continuous obligation H4. It is P4's, P5's and P7's one external, computer-assisted input, and it is
+  shared with row 92 and T-C.
+- *Current state:* checked "in double precision … not interval-certified; worst margin 2.3·10⁻⁶" (`plans/PA-ambrus2023-audit.md` Stage 3,
+  H4c).
+- *The test:* evaluate J26's own covering (`tools/j26_ambrus_check.py`'s points and derived Lipschitz constants) in ball arithmetic.
+  This is an exact check of an existing certificate, allowed under the ban, and costs minutes.
+- *If it fails,* the poster keeps P1–P3, P6 and P10 and loses every window and stationary line. The composition in §3.3 (a) would then
+  read "not residue, not periodic, not a character colouring" only.
+- *If it passes,* those three rows move from "external, double precision" to [cert] on their shared input.
+
+**KT-2, scope (already visible).** P7 does not say "reads infinitely many primes" (Q1). Only P9 does, at one mind, and P9 is being derived
+now by J45/J46. **Until J45/J46 land, the poster's sharpest line with two derivations is P7, and P7's literal content is cheap.** J36 F2's
+noise realises "carried by no `E_S`" over ℚ(√11). The content sits in P8/P9, at one mind.
+
+**KT-3, grade on the way.** The brief's "two independent derivations proved … whose spectrum reads infinitely many primes" merges P7's
+grade with P9's scope. Report them as two rows.
+
+### 4.3 Flip the poster: the example invariant
+
+**(a) EI-2, kept, with its first rung made testable.**
+- *The property* (J36 §4.1): "every translation-invariant four-colouring has a factor that is itself a proper four-colouring and is
+  continuous in probability at finitely many places".
+- *Every colouring we can prove exists carries it* (§3.3 (c), C1 and C3).
+- *Its shadow on the poster is P8* (T-C(A)⁺). P8's counterexample invariant is exactly EI-2's failure, by Lemma SI (one mind; J45/J46 are
+  deriving it).
+- *Held by all colourings, it empties the class:* with P7, `χ(ℚ(√47)²) = 5`.
+- *Restricted to ℚ(√47) it is the goal restated* (J36's caution). Its value lies in proving it where colourings exist: ℚ(√11), ℚ(√23), the
+  type-(B) fields, K.
+- **New here: its pure-point rung is Kronecker selection (J1),** a closed-set statement reachable by rows 95/98's method with no measure
+  rigidity. Rank one is P5. **So the part of EI-2 that avoids Furstenberg is named, and its first case is proved.**
+
+**(b) A second candidate, EI-F, the single-class form: *a field plane's invariant independence ratio is its largest local stationary
+ratio*, `ι(F²) = max(m₁(ℝ²), max_stable r_v)` (split places contributing 0).**
+- *The easy half:* `ι ≥ max_v r_v` always holds, because a local stationary independent set pulls back.
+- *The content is `ι ≤ max_v r_v`:* finite unit-distance graphs in `F²` witness every local ratio.
+- *Examples:* K, where `ι(K²) = 1/4 = r_𝔓` at the tight dyadic place, witnessed by a finite graph (`[MatolcsiEtAl2025]`'s `G27`; row 71).
+  ℚ(√11) and the type-(B) fields are untested: `ι ≥ 2/7` and `≥ 1/4` are the pullbacks, with no finite graph near them known.
+- *At ℚ(√47) it gives `ι ≤ 0.2499972 < 1/4`* (P2's local maximum), hence five, **by a finite graph** (S1b-iii). This is the strongest
+  possible outcome.
+- *Its shadow on the poster:* P10 with P7's count.
+- *It predicts, for `F = ℝ`, `α₁(ℝ²) = m₁(ℝ²) ≤ 0.2470`.* That is far below `[DuczVarga2026]`'s 1/4.0007. This is a sharp, checkable
+  prediction about finite plane graphs; `α₁ ≥ m₁` holds by averaging random congruent copies.
+- **Registered: EI-F true at ℚ(√47), 0.30.**
+
+**(c) Does the milestone's §IQ already name them?** Half, as J36 found for row 88.
+- FS-84's §IQ item 3 names the **carrier**, "the invariant random colouring's joint window frequencies", and the single-class **quantity**
+  `ι(F)`. It names neither **property**: the finite-place factor (EI-2) or the local maximum (EI-F).
+
+**(d) Does looking for an example invariant beat closing the gap directly?** Yes, for EI-2's pure-point rung. Closing the gap directly
+means the continuous layer, which is F5's Furstenberg wall.
+- *Kronecker selection is a closed-set question.* Its answer is informative either way. A proof closes FS-64's adelic windows at four
+  colours over ℚ(√47). A counterexample over ℚ(√11) — a two-character window colouring with no finite-place proper factor — is **the first
+  control the gap has ever had**.
+- *EI-F ranks second.* Its proof would need more than pair correlations (J28V C0; Hoffman's 0.2871 at the real place). Its natural test is
+  a finite-graph search, banned until 2026-10-01.
+- Confidence: medium that J1 is the better next derivation. It would change on a proof that Kronecker selection needs the same
+  equidistribution as the continuous layer.
+
+### 4.4 The card
+
+question: does-kronecker-selection-hold
+  evidence: `plans/POROS-2026-09-25-wanted-poster-47.md` §3.4 T-J37-1 (rank one closed via `LEDGER.md` row 98 + T-C(A)); §3.3 (b) the naive vector form is false (Θ = (θ₁, band θ₂)); row 109 mixing selection; §3.3 (c) no control anywhere
+  expected: an infinite-type coordinate of a measurable window colouring can always be deleted, because band rigidity (row 98) forbids it from being confined
+  ask: over a real field, if a measurable window W on T^n is proper for cl Θ(U), is there a proper window reading only Θ's T + A coordinates?
+  if yes: EI-2's pure-point rung lands; FS-64's adelic windows at four colours are closed over ℚ(√47); the gap is the continuous layer alone
+  if no: the witness is the first colouring with no finite-place proper factor — the control the poster lacks — and the ℚ(√47) counterexample's template
+  answered by: derivation
+  cost: one derivation job and a blind verifier, solver-free; about one crunch slot each
+  hunch: yes at n = 2 by an equidistribution of U-values for characters off E, but the needed Weyl-type bound is not in the records
+  falsifier: a character θ ∉ E of some real field's R whose U-values are neither band nor equidistributed along any averaging of U
+  rank: 1
+
+### 4.5 Recommendations (ranked, with the default)
+
+| rank | recommendation | alternative weighed | why this one | confidence |
+|---|---|---|---|---|
+| R1 | **KT-1:** ball-arithmetic re-evaluation of J26's H4 covering (a tools job, minutes, in-ban) | leave H4 in double precision | three poster rows, row 92 and T-C rest on it; it is the only external computer-assisted input; the cost is minutes | high that it passes; the value is the grade, not the answer |
+| R2 | **A derivation job on Kronecker selection (J1)**, after J45/J46; statement verbatim: "Let `F ⊆ ℝ` be a real number field, `R = ℤ[U_F]`, `n ≥ 1`, `Θ : R → T^n` a homomorphism and `W : T^n → {0,1,2,3}` measurable with `W(t) ≠ W(t + s)` for almost every `t` and every `s ∈ cl Θ(U)`. Prove or refute: there is a closed subgroup `K′ ⊆ T^n`, the closure of the image of `Θ`'s `(T + A(R_F))`-part, and a measurable `W′ : K′ → {0,1,2,3}` proper for the closure of that part's image of `U`. Rank one is T-J37-1. Control: over ℚ(√11) with `Θ = (θ_{C9}, θ₁)`, `θ₁ ∉ E`, W reading only the first coordinate must pass." | fold into J45/J46 | it is EI-2's rung that a closed-set method can reach; either answer is new | medium-low (0.4) that it is true as stated; changes on a character off `E` whose `U`-values admit no measure with small Fourier coefficients |
+| R3 | **A blind check of T-J37-1** (one-mind composition), added to J46's list or to the next verifier | leave it at one mind | cheap (five steps); it is a new poster row | high that it is true |
+| R4 | **A post-ban construction stub:** a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (Dúcz–Varga-type, triangle-free), proving five outright (P10); register **EI-F at ℚ(√47) (0.30)** and **EI-F for ℝ² (`α₁ = m₁`)** as predictions. Replaces S1's stale price (J36 R4; FS-84 inventory `1d6c4fc2`) | keep P-int at 0.03 | the price rested on a refuted conjecture; the route is now of unknown cost and is the only one that proves five by a finite object | medium on the ranking; 0.30 on EI-F |
+| R5 | **A reading debt:** a prior-art job on §4.1's queries 1, 4, 6 first (model sets over `S`-adic internal spaces; solenoid measure rigidity; `α₁` vs `m₁`) | skip | the pure-point layer may be a known characterisation; the continuous layer is a known open problem whose partial results (positive entropy) bound what a derivation can hope for | medium |
+
+**If Kooshi does nothing:**
+- J45/J46 derive J36's sketches (P8, P9).
+- FS-84's post-ban stages colour or refuse the ten minimal survivors. By C3 they can find only kinds of colouring that the limit kills, or
+  a refusal.
+- The poster, T-J37-1 and EI-F stay in this record.
+- The pure-point layer stays unnamed in the stubs.
+
+### 4.6 Evidence inventory (Stage 1 re-read) and the hunch ledger
+
+- `Stage 1 E2`, the expectation that T-C(A) subsumes rows 92, 96 and S1a — read against: §3.3 (d) — surprised: yes (row 95 and S1a are evidentially independent; row 95 is the only line inside the gap)
+- `Stage 1 E3`, gap not theorem — read against: §3.3 (a)–(b) — surprised: no (sharpened into two layers)
+- `Stage 1 E4`, no control — read against: §3.3 (c) — surprised: no (C3 added: the finite pieces' colourings are all of limit-killed kinds)
+- `Stage 1 E7`, the shared input as the killing test — read against: `plans/PA-ambrus2023-audit.md` H4c — surprised: no
+
+hunch: t-c-a-subsumes-the-rest
+  claim: rows 92 and 96 and the periodic half of S1 are corollaries of T-C(A), so the poster has one load-bearing theorem
+  basis: derived
+  falsifier: a row proved by a route not through a stationary-ratio count
+  registered: 2026-09-25
+  status: killed (by: row 96 rests on "Lemma R and Weil — fewer inputs than FS86-CL1"; S1a "Does not rest on: [AmbrusEtAl2023]"; row 95 excludes characters T-C(A) cannot see)
+
+hunch: the-gap-has-no-control
+  claim: no field or graph is known to carry a four-colouring with no finite-place proper factor
+  basis: read
+  falsifier: a record exhibiting such a colouring
+  registered: 2026-09-25
+  status: confirmed (by: §3.3 (c) C1–C3; the tally of `data/fs81/phaseD/d47/K1-checker-run.txt`)
+
+hunch: kronecker-selection-true
+  claim: a measurable window colouring over a real field can always drop its infinite-type coordinates
+  basis: analogy
+  falsifier: a two-character window four-colouring of some real field's plane with no proper window on its T + A part
+  registered: 2026-09-25
+  status: open
+
+hunch: ei-f-at-47
+  claim: ι(ℚ(√47)²) equals its largest local stationary ratio, so a finite H ⊂ ℚ(√47)² has α(H) < |H|/4
+  basis: analogy
+  falsifier: a derivation that ι(ℚ(√47)²) ≥ 1/4, or ι > max local ratio at any field
+  registered: 2026-09-25
+  status: open
+
+**Scored against Stage 1:**
+- E1 partly: it missed P10 and row 98's consequence.
+- E2 killed as above.
+- E3, E4 and E7 confirmed.
+- E5 partly: model sets name the pure-point layer better than Toeplitz does.
+- E6 confirmed for EI-2, with EI-F added as a second candidate.
+- E8 moved: J36-D is already queued as J45/J46, so R2 takes its place.
+
+### 4.7 Would-have-searched-here log (Stages 3–4)
+
+- Would have searched ℚ(√11) for a two-character window four-colouring with no finite-place factor (J1's falsifier). Instead: stated J1 as
+  a derivation (R2).
+- Would have sampled finite graphs in ℚ(√47)² for independence ratio below 1/4. Instead: EI-F registered and a post-ban stub proposed (R4).
+- The tally in §3.3 (c) C3 is a count over an existing certificate log (seconds), not a search.
+
+## Theorems this phase proved
+
+| id | statement | grade | address |
+|---|---|---|---|
+| T-J37-1 | over ℚ(√47) no proper four-colouring `x ↦ W(θ(x) + t)` exists (`θ ∈ R̂` any, `W` measurable, proper for a.e. `t`) | hand, one mind; composition of Steinhaus, row 98, T-C(A) at `S = ∅` | §3.4 |
+| T-J37-2 | if `θ ∉ E` then `ℤθ ∖ 0` misses `E` (each `E_S` is divisible and holds all torsion), so a character colouring off `E` lies in T-C(A)'s evasive class | hand, one mind | §2.2 (row 96 item) |
+| T-J37-3 | for an `R ⋊ U`-invariant `μ`, every atom of `σ_μ` is torsion (finite `U`-orbit; Levitz–Mott); so off `E` the averaged spectrum is atomless | hand, one mind | §3.3 (b) |
+| T-J37-4 | the naive vector band statement "`Θ(U)` avoids a neighbourhood of 0 in `T^n` ⟹ `Θ ∈ (T + A)^n`" is false for `n = 2` | hand, one line | §3.3 (b) |
+| T-J37-5 | row 84's 177 certified lattice colourings over ℚ(√47): 73 additive into ℤ/4, 11 periodic mod `4Λ`/`8Λ`, 40 residue at the stable 47 and 67 through a partial image, 22 residue at split 17, 37, 53, 61, 31 linear forms | tools exact (a count of an existing log) | §3.3 (c) C3 |
