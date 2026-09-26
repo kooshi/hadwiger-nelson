@@ -1552,6 +1552,8 @@ reading was a grandchild's summary (G50). **For the session that briefs:** the r
 reason. That this file is loaded is not enough — the brief is what an agent acts on, and the brief that caused this said "one
 planner" and never said the count included anything the planner might start. A head-count in a brief says so explicitly.
 
+**The crunch** — many agents from a job queue for a fixed block of hours, the owner coordinating by short reports, then the consolidation: `plans/PROTOCOL-crunch.md` (roles, runbook, standing rules, brief templates, both runs).
+
 ## The standard of evidence above rung B
 
 χ(ℝ²) ≥ 5 is a known theorem; a reader's default is to believe it. **χ(ℝ²) ≥ 6 would be new
