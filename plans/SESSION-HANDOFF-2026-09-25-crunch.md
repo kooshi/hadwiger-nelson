@@ -219,3 +219,13 @@ at ℚ(√47) the statement is equivalent to its own conclusion there, open at r
 TRUE. **Held until J51D reports:** re-aim stage 4 or close it as a no-go. **Owner slip:** a commit subject (3648d3a5) named the
 counterexample while J51D runs; logged in `plans/FS100-close-inventory.md`, and J51D's later FALSE verdicts get graded accordingly. J51D is
 fenced by message from J51V's files, the inventory and this handoff. **Running (2):** J51D, J52K.
+
+**Update ~00:25 — J51D done; FS-100's close-math (J53) launched.** J51D independently found the same counterexample (its prior, 0.80 FALSE,
+and its domain pass predate the owner's slip), proved KS-2 in general form, refuted KS-3 over every real field, and pinned the corrected
+statement (selection onto `E = T + A + Fin_S`) at a named density step; the two controls could not fail (a G21 slip of the plan). **Owner
+rulings:** KS-1 is recorded as refuted as stated, with the E-form as the corrected, open statement (alternative: treat it as a mis-statement
+and file nothing; why not: the uniform lemma was the stub's stage-4 statement, and its refutation by two minds is a result); K0 gets a
+one-step check inside the close-math, not a new job (alternative: a short blind job; why not: one mind + one-step check is the house form,
+FS67-CL); FS-100's round closes now and stage 4 is re-aimed in the stub (alternative: a second derivation round on the E-form tonight; why
+not: it is a GAP at a named step with its literature unread — the next slot's reading room). Brief `data/crunch-2026-09-25/briefs/J53-FS100-close-math.md`.
+**Running (2):** J52K, J53. Next: FS-75's close (J54) when J52K reports; then one front-page job for both milestones (J55).
