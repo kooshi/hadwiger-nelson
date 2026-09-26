@@ -237,3 +237,89 @@ actuals. A launch is one line: "Your brief is on disk: read `<path>` in full fir
   capped at 20 minutes.
 - **Kept out of the claim lists:** the advisor's sketch for EF_F (multiply through, one prime, recurrence at the split places). It is
   X01D's to write out or refute, and X01V is fenced from it.
+
+---
+
+## §7. Wave 3 — do the findings transfer to the other wanted posters? (planned 06:20; claim lists fixed 06:25, before any derivation)
+
+**Kooshi, verbatim (relayed 06:17):** *"We still have usage left for crunching. Do these findings transfer to the other wanted posters? Please
+continue the queue with asks about them."*
+
+**Where waves 1–2 left MR** (from the reports, `data/crunch-2026-09-26-x2x3/reports/`): EF_F⁺ is TRUE by two derivations (X01D; X12B blind,
+by its own route), and X01V's GAP at the multiplier step was absorbed by X12B's rational-unit-vector multipliers. PE-2 is TRUE by X02D and
+X02V blind, given EL2021 Thm 1.2 through (★); PE-1 as stated is FALSE. SP-Cor passed X05V blind. So **MR(F) holds for every real number
+field at [hand] grade, with the scope of row 100's exception** (a ramified stable dyadic place, where `R = O′` is not proved; X09C's audit).
+Every claim below is stated with that scope and asks whether its field is outside the exception. **"Given MR"** below means: given MR(F) at
+the grade and scope just described; each job names it as an input and does not re-derive it.
+
+**The posters** (`plans/STUB-measure-rigidity-three-fields.md` §2): ℚ(√47) at four colours (J37; now five, `[hand]`); the type-(B) fields
+ℚ(√59), ℚ(√83), ℚ(√131) at four (J38); ℚ(√167) at five (J39). The quoted theorems below are from that stub's §2, all
+"[hand, one mind; blind-checked TRUE by J48, stage 1]".
+
+### List X21 — ℚ(√167), and the `L ≥ 5` family (X21D derives; X21V verifies blind)
+
+Inputs quoted verbatim:
+- Row 117: "For `ℚ(√d)` real quadratic: every stable place of `ℚ(√d, i)` has all-levels four-colour ratio `< 1/4` ⟺ `d ≡ 47, 143, 167 (mod 168)`
+  ⟺ `L(ℚ(√d)) ≥ 5`; and over every real number field where T-C(A) holds at `S = ∅`, J45's A⁺ and SP-Cor hold with J45's proofs — so MR(F) ⟹
+  `χ(F²) ≥ 5` at ℚ(√143), ℚ(√311), ℚ(√335) as at ℚ(√47)."
+- K0 (list of `data/crunch-2026-09-25/briefs/J51V-FS100-kronecker-verifier.md`): "J45's A⁺ and SP-Cor hold, with the same proofs, over every
+  real quadratic field in T-C(A)'s class (so over ℚ(√143), ℚ(√311), ℚ(√335)), given T-C(A) there at `S = ∅`."
+- J48-N4cor (stub §2, under T-J39-4): "For every totally real `F` with `N₄(F) = ∅` — every stable place 4-thick — MR(F) ⟹ `χ(F²) ≥ 5`", and
+  J48-N4: "`N₄(ℚ(√167)) = ∅`: every stable place of ℚ(√167) is 4-thick, 23 by `0.331695… < 1/3` (margin `1.6·10⁻³`)".
+- T-J39-3, T-J39-1 and T-J39-5, verbatim in the stub's §2 (J39 block); J48's corrections there included.
+
+The claims:
+- **Q-0.** "Every real quadratic field `ℚ(√d)` with `d ≡ 7 (mod 8)` has no stable dyadic place, so it lies outside row 100's exception."
+- **A-1.** "Given MR, for every squarefree `d > 1` with `d ≡ 47, 143, 167 (mod 168)`: `χ(ℚ(√d)²) ≥ 5`."
+- **A-2.** "Given MR, for every such `d` with `L(ℚ(√d)) = 5`: `χ(ℚ(√d)²) = 5`. This includes ℚ(√47), ℚ(√143), ℚ(√311) and ℚ(√335)."
+- **A-3.** K0, as quoted above (a second mind on a one-mind input; X21V derives it blind).
+- **A-4.** "Given MR, `χ(ℚ(√167)²) ≥ 5` by J48-N4cor, independently of row 117 and K0."
+- **B-1.** "Given MR, at `F = ℚ(√167)`: `χ(F²) ≤ 5` iff `Y = UD(ℝ²) × G₂₃ × G₄₃` carries a CP five-colouring (T-J39-3 and T-J39-1 with MR(F)
+  discharged)."
+- **B-2.** "Given MR, if PL(23, 43) holds, then `χ(ℚ(√167)²) ≥ 6` iff `χ_CP(ℝ²) ≥ 6` (T-J39-5 (i), and (ii) with MR(F) discharged and J48's
+  correction)."
+- **B-3** (a question; the answer is a derivation or a GAP). "Name the weakest statement about `Y`'s factors (`UD(ℝ²)`, and `G₂₃`, `G₄₃` at full
+  depth) that implies 'Y has no CP five-colouring', and say whether any held result gives it: row 75 (five refused at 23 at every level), row 71
+  (five refused at 43 at level one), five-colour bounds on `m₁`-type densities of `ℝ²`."
+
+### List X22 — the type-(B) fields ℚ(√59), ℚ(√83), ℚ(√131) (X22D derives; X22V verifies blind)
+
+Inputs quoted verbatim: T-J38-2 and T-J38-3 (stub §2, J38 block); row 111: "`F(R) ≠ 0` iff every translation-invariant random four-colouring of
+the plane is a pullback from the tight place (Q-μ) and no colouring is transient — none whose orbit closure's invariant measures all live on
+the pullbacks without its being one (Q-tr)".
+
+The claims:
+- **C-0.** "ℚ(√59), ℚ(√83) and ℚ(√131) lie outside row 100's exception: their stable dyadic place is inert, not ramified, in `L/F`."
+- **C-1.** "Given MR, at `F ∈ {ℚ(√59), ℚ(√83), ℚ(√131)}`, Q-μ holds: every translation-invariant random four-colouring of `F²` is almost
+  surely a pullback from the tight place. T-B1 is not used."
+- **C-2.** "Given MR, at those fields: `F(R) ≠ 0` (row 88) iff Q-tr (no four-colouring is transient)."
+- **C-3.** "Given MR, at those fields: T-B1 ⟺ row 88 ⟺ Q-tr."
+- **C-4.** "Over ℚ(√59), no four-colouring of the plane is transient." (TRUE, FALSE, or GAP at a named step. It asks whether EF_F⁺'s method —
+  Lemma 3.1′, EF's pigeonhole against polynomially many rational unit-vector multipliers, Lemma Z's wandering shells — transfers from invariant
+  measures to a single colouring's orbit.)
+
+### List X23 — beyond quadratic fields (X23D derives; X23V verifies blind if a slot allows)
+
+- **D-1.** "Given MR, for every totally real number field `F` outside row 100's exception with `N₄(F) = ∅`: `χ(F²) ≥ 5`."
+- **D-C** (controls with known answers). "`N₄(K) ≠ ∅` for `K = ℚ(√3,√11)`, and `N₄(ℚ(√11)) ≠ ∅`, consistent with `χ = 4` at both."
+- **D-2.** "`ℚ(√3,√5)` lies outside row 100's exception, and either `N₄(ℚ(√3,√5)) = ∅` or it lies in T-C(A)'s class at `S = ∅` (every stable
+  place of `L` of all-levels four-colour ratio `< 1/4`, with J45's lemmas holding there). Hence, given MR, `χ(ℚ(√3,√5)²) = 5`."
+- **D-3.** "Among real quadratic fields, `N₄(ℚ(√d)) = ∅` holds for a proper subfamily of T-C(A)'s class, and fails at ℚ(√47)." (The J48 route
+  is the weaker-input route. Where it fails, the T-C(A) route is needed.)
+- **D-4.** "Among real biquadratic fields `ℚ(√a,√b)` with the wall broken (`CLAUDE.md` G35), those meeting D-1's hypothesis or T-C(A)'s class
+  at `S = ∅` are: [the job's derived list, with the finite search range fixed by a derivation before any computation]." (Its exact
+  enumeration is at the ban's edge: in only if a derivation fixes the finite set first, and it is logged.)
+
+### Queue rows (wave 3; stop time 12:30 UTC; close from 07:30)
+
+| id | model | kind | M | decides | inputs | output | deps | h | k | stop rule | spawns | pri | status |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| X21D | Opus | derivation | FS-100 s5 (w3) | list X21: ℚ(√167) ≥ 5, the family's five, six at ℚ(√167) as a CP question | rows 111, 117; the stub's §2; waves 1–2 records by statement | `plans/FS100-X21D-derivation.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X21V | Opus | blind verifier | FS-100 s5 (w3) | list X21, blind (A-3 = K0's blind second mind) | same, fenced from X21D | `plans/FS100-X21V-verification.md` | — | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X24R | Opus | reader | FS-100 s5 (w3) | the prior-art gate for MR and for the value `χ(ℚ(√47)²) = 5`; EL2021 §2; Sataev 1975; Huang 2017 | `BIBLIOGRAPHY.md`, `CLOSED-QUESTIONS.md` §1.7, §3 | `plans/FS100-X24R-prior-art.md` | — | 0.75 | 200 | 07:30 | none | P1 | ready |
+| X22D | Opus | derivation | FS-100 s5 (w3) | list X22: the type-(B) fields given MR — Q-μ, and row 88 as transience alone | T-J38-2/3, rows 88, 111, 112 | `plans/FS100-X22D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X22V | Opus | blind verifier | FS-100 s5 (w3) | list X22, blind | same, fenced | `plans/FS100-X22V-verification.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | ready |
+| X23D | Opus | derivation | FS-100 s5 (w3) | list X23: fields beyond quadratic; ℚ(√3,√5) | J48-N4cor, row 117, G35, G56 | `plans/FS100-X23D-derivation.md` | a free slot | 0.75 | 220 | 200k or 07:30 | none | P2 | ready |
+| X23V | Opus | blind verifier | FS-100 s5 (w3) | list X23, blind | same, fenced | `plans/FS100-X23V-verification.md` | X23D launched | 0.6 | 200 | 07:30 | none | P3 | ready |
+| X29C | Opus | close-math | FS-100 s5 (w3) | wave 3's close: derivation entries, §R-close (wave 3), drafts | wave-3 reports | `plans/FS100-three-field-lemma.md` | 07:30 | 0.3 | 150 | 07:50 | none | P2 | wait |
+| X30F | Opus | front-page | FS-100 s5 (w3) | applies X29C's drafts | X29C | the four front files | X29C | 0.25 | 150 | 08:05 | none | P2 | wait |
