@@ -1213,3 +1213,91 @@ the kernel" — X11K's lane is where the kernel starts.
   `χ(ℚ(√47)²) = 5` itself is owed before any such claim (G49; the zbMATH author listings of Moorhouse and Soifer, and the Polymath16 threads).
 
 **Would have searched here (stage 1b):** none.
+
+### Stage 2 — SAVED (the derivation file: `plans/FS100-derivation.md` §3, commit ce78623a)
+
+Seventeen entries (FS100-EFP, EFZ, PE1, HX1, PE2, MR, Q47, EFG, EFX, CE1, FR1, ED1, ED2, FLK, SPEC, FLH, and §K's stage-5 line), each with its
+statement, grade, proof address, what rests on it, prior art and kernel decision; the §G line "PE-lim … Owed" rewritten to point at FS100-PE2.
+
+### Stage 3 — SAVED (§G re-read; §PA sweep; §IQ, G72, G79; §5 scored; the verdict; the search log counted)
+
+**3.1 §G re-read (queue §3), against what happened.**
+
+| entry | extraction | paid? |
+|---|---|---|
+| G79 | the flip → FL-1, FL-2 | **paid as a result, not as a route**: the example invariant of an actual colouring's spectrum is now a theorem twice (FS100-FLK), and it located the consumer's exact need (FS100-FLH); it did not produce MR |
+| G72 | §IQ: entropy split and the quadrance profile | **paid**: entropy was the deciding invariant, split exactly as §IQ item 3 wrote it (PE-2; EF's pigeonhole against growth). §IQ was written after the recognition, so the credit is shared (3.3) |
+| G76 | MR as closed-set rigidity's measure half; the advisor's hyperbolic sketch | **paid**: EF_F⁺ is that half; §3's registered falsifiable item fired (3.4, item 7) |
+| G21 | EF-X and KC as controls | **paid three times**: KC exercised MR at `a = 2/21` with a witness at each field; EF-X explained why the conclusion is `T + A`, not finite support; and EF-X refuted CE-1's hypothesis (FS100-CE1). Plants: two could not fire at first (X01V's, X02V's), both caught by their own red runs |
+| G49, G50 | grep `BIBLIOGRAPHY.md` first | **paid and missed**: the recognition that decided the crunch came from the advisor's stage-0 zbMATH query; but EL2021 was re-fetched a third time, its path in four briefs was wrong (inventory 13, 21), and EL2021 §2 (adelic solenoids) is still unread where it may hold PE-2 |
+| G46 | classical names; Bekka–Francini | paid (the discharge from the statement: our group is a torus, not unipotent-generated) |
+| G51 | two minds per claim | **paid, and needed twice**: X01V's blind GAP was its own error, caught only by a non-blind read; the headline's second mind had to be bought after the plan (X12B) |
+| G60, G66 | FL-2's bound "of Hoffman type" | **bore more than was extracted — a 3.1 miss**: G60's body already holds "real: `J₀`'s −0.40276", the least local character mean at the real place, below `−1/3`. That number predicts FL-1's GAP before the run; §5 item 8 put FL-1 TRUE at 0.40 without it. X03D re-derived it as `Λ = 0.402759` |
+| G57 (grouped silent) | "finite witnesses … say nothing about invariant measures" | **missed**: G57 bears through the consumer — `χ(ℚ(√47)²) = 5` over a field without √3 answers Soifer 55.1's existence half (stage 1b). Neither §G nor §5's bearing line said so; it surfaced at the close |
+| row 100 (not listed) | — | **missed**: EF_F⁺'s adelic model needs `R = O′`, open at row 100's exception fields; the scope caveat surfaced only at the close |
+| G48, G55, G56, G59, G64 | through the consumer | paid as written (five at ℚ(√47); ≥ 5 at ℚ(√167); nothing on six) |
+
+**Forward propagation of the misses.** G60's entry wants its *Do* line to carry the number ("the real place's `J₀` minimum `−0.40276` is below
+`−1/3`: a one-sided spectral bound at `−1/k` for `k ≥ 3` fails at every real field before it is tried"); G57's *Do* line wants "a five over a
+field without √3 answers Soifer 55.1's existence half"; both are drafted in stage 4 for the front page.
+
+**3.2 §PA sweep — what the reading taught about the object** (WORKFLOW 9).
+1. **`U` is a multiplicative group of polynomial growth** (EF's hypothesis): `#{u : H(u) ≤ M} ≥ c·M^{1/[F:ℚ]}` through `U_ℚ` alone. Infinite rank is a
+   resource, not an obstacle: no finitely generated `Γ` has polynomial growth, and no finitely generated `Γ` acts irreducibly on `R̂` (FS100-T2), yet
+   together they give rigidity. **Promote to a grokking** (drafted as G80, stage 4).
+2. **The zero-entropy measures of the whole group live on the archimedean isometric leaves** (`T + A`, EF-X's circles). The real place is where
+   non-Haar invariant measures survive, and it is inside `E`: the "obstruction" G76's reading located at the real place is exactly `E`'s `A`-layer.
+3. **Total irreducibility of a finitely generated `Γ` is a subfield condition** (admissibility), and it genuinely fails for natural `Γ` (the Pell unit
+   at ℚ(√47)). The object has proper-subfield pieces a finite-rank argument must dodge (Lemma W).
+4. **Equidistribution is strictly stronger than rigidity here** (FS100-ED2): sparse split characters keep a non-zero Weyl limit. The Schoenberg
+   (radial positive-definite) reading of FR-1 is right, but averaging over `U_N` is not the route.
+5. **The hypothesis of the classical ℤ²-solenoid conjecture is false for our pieces** (FS100-CE1): isometric directions carry non-algebraic
+   zero-entropy measures, so MR was never reducible to the Katok–Spatzier question; it needed the whole group.
+
+**3.3 §IQ re-read, G72's count, G79's record.**
+- The structural form ("what does every invariant probability measure of a multiplicative group of polynomial growth … carry?") **is the question
+  the result answers**, and its named invariant (entropy, split into halves) is the one that decided it. But the recognition came first — the
+  advisor's zbMATH query in the discipline's words (G49), before §IQ was written — and the proofs extend two known tools (EF's pigeonhole; EL's
+  Thm 1.2). **G72's count: thirteenth, "from elsewhere — recognition at the prior-art gate, then two known tools extended"**; the structural form
+  produced the consumer statements (FS100-FLH) and the example invariant (FS100-FLK), not the headline. The first milestone whose headline did not
+  come through the structural question: **twelve of thirteen**.
+- **G79's record:** the headline came from an **example invariant** — entropy and growth, which every `U`-invariant measure carries — not from the
+  counterexample invariants the wanted posters set side by side (rows 96, 113, FS-100's §PA.3). The G79 flip on colourings (FL) returned a GAP. So:
+  "example invariant of the acting group (entropy against growth); the colouring flip GAP'd at QTCA_{1/3}". The fourth data point, the third
+  "example".
+
+**3.4 §5's expectations, scored once each** (P as registered at 05:50).
+
+| # | outcome registered | P | what happened | scored |
+|---|---|---|---|---|
+| 1 | Furstenberg's ×2×3 proved | < 0.001 | not touched; the project's version sidesteps it because `U` is large | as predicted |
+| 2 | MR lands: EF_F and PE-2 TRUE, each by two minds, no GAP | 0.08 | MR lands (FS100-MR); PE-2 two blind minds; EF_F⁺ two blind minds (X01D, X12B); one blind GAP on the way (X01V), withdrawn as its own error | **met** (the "no GAP" clause met only after the withdrawal) — a 0.08 outcome |
+| 3 | EF_F TRUE / GAP / FALSE | 0.30 / 0.55 / 0.15 | TRUE | the 0.30 outcome |
+| 4 | PE-2 TRUE by both / GAP / FALSE | 0.45 / 0.40 / 0.15 | TRUE by both | the 0.45 outcome |
+| 5 | PE-1 FALSE as written, TRUE corrected | 0.30 | exactly so, two counterexamples | met |
+| 6 | FR-1 TRUE; ED-1 TRUE; ED-2 GAP (FALSE with a counterexample: 0.15) | 0.95; 0.90; 0.75 | FR-1 TRUE; ED-1 TRUE where posed (ill-posed with a complex place); **ED-2 FALSE with an explicit character** | 2 of 3 as predicted; ED-2 the 0.15 outcome |
+| 7 | EF_F gives "carried by `T + A`" (G76's reading, falsifiable) | 0.20 | EF_F⁺'s conclusion is `T + A`, twice | met — the registered falsifier of G76's reading fired (stage 4 drafts G76) |
+| 8 | FL-1 TRUE as written (FL-2 with it: 0.8) | 0.40 | GAP at QTCA_{1/3}, two blind minds | not met (G60 predicted it: 3.1) |
+| 9 | the headline claimed at the close | 0.05 | claimed (stage 1b), at a hand grade | met — a 0.05 outcome |
+| 10 | every job reports by 06:55 | 0.60 | all eight (X01D–X05V, X12B, X13R) by 06:15 | met |
+
+Calibration: the four long-shots that fired (items 2, 3, 6's ED-2, 9) all sit on one mechanism the plan under-weighted: EF's growth hypothesis
+matching `U` exactly. The planner's and the advisor's estimates moved in the right direction as the reading deepened (the advisor 45 % → 80 %).
+
+**3.5 The verdict, in four parts.**
+- **The choice.** FS-100 stage 5 is **Paid (theorem)**: MR(F) for every real number field with `R = O′`, by Einsiedler–Fish plus Einsiedler–
+  Lindenstrauss, and with it **`χ(ℚ(√47)²) = 5`** [hand, the grade of stage 1b], the conjecture's cheapest exposed five-clause met. The flip is
+  **not landed** (GAP at QTCA_{1/3}); ED-2 is a no-go (FALSE).
+- **The alternative weighed.** "Paid (theorem), headline conditional": hold `= 5` back until the value's own prior-art gate and a kernel port. It
+  would have bought a cleaner novelty statement.
+- **Why this one won.** Item 8's rule is met as written (two blind minds on each half, SP-Cor checked blind), and the verdict labels score the
+  experiment, not the publication (Kooshi: "all novel knowledge is a success"). The novelty gate and the publication decision are held
+  separately for Kooshi (stage 1b); they do not change what was proved.
+- **Confidence.** High that the chain is sound as graded (every link two minds or more, EL2021 external); medium on "new" (EL2021 §2 unread;
+  the value's gate not run). What would change it: EL2021 §2 or a posers' listing holding PE-2 or the value (re-attribution, not retraction);
+  a defect found by X11K's kernel port (retraction of the affected link).
+
+**3.6 The "would have searched here" lines, counted.** Across the eleven records of the crunch (the six derivation and verification jobs, X12B,
+X13R, the advisor, the planner's queue, this close): **eleven moves** logged — X01D 1 (a PARI hunt over non-totally-real fields), X01V 2, X02D 2,
+X02V 2, X03D 2, X05V 2; X12B, X13R, the advisor and this close 0 (X12B's multiplier count and X13R's `U_N` enumeration logged at the ban's edge,
+extents fixed first). Each was replaced by a derivation plus one exact check of seconds. The ban cost the crunch nothing that a record names.
