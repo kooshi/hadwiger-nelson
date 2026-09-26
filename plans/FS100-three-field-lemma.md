@@ -187,7 +187,57 @@ Stages: 4 = Kronecker selection (J51D/J51V), 5 = MR and entropy (reading room), 
 
 ### §G.2 Rows (by mechanism)
 
-- 1–51 — silent, each: finite witnesses, cells, compulsion toolkit, descents (rows 1, 2, …, 51 walked one by one; none touches `R̂`, `U`-invariant measures or window colourings; no reason differs from "finite-object mechanism").
+- 1 — silent: two-circle colourability; a finite-object mechanism.
+- 2 — silent: seam identity; a finite-object mechanism.
+- 3 — silent: coverage ratchet; a finite-object mechanism.
+- 4 — silent: fan iff coverage; a finite-object mechanism.
+- 5 — silent: class-only graphs; a finite-object mechanism.
+- 6 — silent: 120° triangle; a finite-object mechanism.
+- 7 — silent: greedy colouring; a finite-object mechanism.
+- 8 — silent: balanced de Grey colouring; a finite-object mechanism.
+- 9 — silent: 120° compulsion; a finite-object mechanism.
+- 10 — silent: one-pivot cap; a finite-object mechanism.
+- 11 — silent: strip automaton; a finite-object mechanism.
+- 12 — silent: extension profile; a finite-object mechanism.
+- 13 — silent: negative knowledge, M17; a finite-object mechanism.
+- 14 — silent: pair-gluing; a finite-object mechanism.
+- 15 — silent: extension pressure; a finite-object mechanism.
+- 16 — silent: coupled automaton; a finite-object mechanism.
+- 17 — silent: gluing classification; a finite-object mechanism.
+- 18 — silent: near-relation; a finite-object mechanism.
+- 19 — silent: kill mechanism; a finite-object mechanism.
+- 20 — silent: pivot-triangle layer; a finite-object mechanism.
+- 21 — silent: registered statistics; a finite-object mechanism.
+- 22 — silent: matched ladder pair; a finite-object mechanism.
+- 23 — silent: four-ladder object; a finite-object mechanism.
+- 24 — silent: hexagram; a finite-object mechanism.
+- 25 — silent: field-wall identity; a finite-object mechanism.
+- 26 — silent: de Grey anatomy; a finite-object mechanism.
+- 27 — silent: quadrature law; a finite-object mechanism.
+- 28 — silent: 2-adic kill engine; a finite-object mechanism.
+- 29 — silent: stacking law; a finite-object mechanism.
+- 30 — silent: mechanism hunt; a finite-object mechanism.
+- 31 — silent: Act One carriers; a finite-object mechanism.
+- 32 — silent: six-programme; a finite-object mechanism.
+- 33 — silent: classical interval; a finite-object mechanism.
+- 34 — silent: coset chromatic number; a finite-object mechanism.
+- 35 — silent: coarse cells; a finite-object mechanism.
+- 36 — silent: scale non-monotone; a finite-object mechanism.
+- 37 — silent: gap atlas; a finite-object mechanism.
+- 38 — silent: gradient hunt; a finite-object mechanism.
+- 39 — silent: gap atlas, kernel; a finite-object mechanism.
+- 40 — silent: fine tail; a finite-object mechanism.
+- 41 — silent: limit lemma; a finite-object mechanism.
+- 42 — silent: arity floor; a finite-object mechanism.
+- 43 — silent: de Grey bracketed; a finite-object mechanism.
+- 44 — silent: two-distance dial; a finite-object mechanism.
+- 45 — silent: batch descent; a finite-object mechanism.
+- 46 — silent: copy unions; a finite-object mechanism.
+- 47 — silent: M53 residue colouring; a finite-object mechanism.
+- 48 — silent: critical-set localization; a finite-object mechanism.
+- 49 — silent: absorption; a finite-object mechanism.
+- 50 — silent: additive yardstick; a finite-object mechanism.
+- 51 — silent: additive rigidity; a finite-object mechanism.
 - 52 — bears: the finite-plane bound through a stable place → §1.4.
 - 53 — silent.
 - 54 — silent.
@@ -298,5 +348,88 @@ Stages: 4 = Kronecker selection (J51D/J51V), 5 = MR and entropy (reading room), 
 2. **G55 + G30** make the §PA check concrete: is `R̂` a solenoid in EL's sense, and is any finitely generated `Γ ⊂ U` totally irreducible on it.
 3. **G74 + rows 96, 98** give J51D its rank-one control and J51V a known positive; **G21's** shape rule adds a rank-two control.
 4. **G79 + G72** put EI-2, not MR, at §IQ's structural form, with MR its colouring-free shadow.
-5. Counts: grokkings 79 (bears 31, silent 48, falsifiable 0 — the falsifiable items are registered in §P from the stub's §4 and §PA);
-   rows 115 (bears 36, silent 79); method rules 36 (bears 16, silent 20).
+5. Counts: grokkings 79 (bears 24, silent 55, falsifiable 0 — the falsifiable items are registered in §P from the stub's §4 and §PA);
+   rows 115 (bears 27, silent 88); method rules 34 (bears 17, silent 17); counted mechanically.
+
+## Stage 3 — SAVED: §PA, the MR reading room cut to the card
+
+### §PA.1 The recognition, in the discipline's words
+
+`R = ℤ[U_F] = O′ ⊂ L = F(i)` (prime inversion, row 105; `O′` integral exactly at the stable primes) is torsion-free of rank `[L:ℚ] = 4`, so
+its Pontryagin dual `R̂` is **a solenoid in Einsiedler–Lindenstrauss's sense** — "a compact, connected, abelian group whose Pontryagin dual …
+can be embedded into a finite-dimensional vector space over Q" (EL2021 p. 2) — and `U` acts on it **by automorphisms** (multiplication). `U`
+is abelian of infinite rank; every non-torsion `u ∈ U` is isometric at both complex places of `L` and at every stable place, and expands at
+some split place. MR is **measure rigidity for an algebraic action of an infinite-rank abelian group on a 4-dimensional S-adic solenoid, S
+the (infinite) set of split primes, modulo the exceptional set `E`**; Kronecker selection is a question about **orbit closures of the
+diagonal action on `R̂ⁿ`**, i.e. topological self-joinings. Disciplines: ergodic theory of algebraic `ℤ^d`-actions (Schmidt; Rudolph,
+Johnson, Host, Katok–Spatzier, Einsiedler–Lindenstrauss) and topological rigidity (Furstenberg 1967, Berend, Z. Wang, Lindenstrauss–Wang).
+
+### §PA.2 What was fetched and read (G50: status per section)
+
+| work | how found | status |
+|---|---|---|
+| Einsiedler–Lindenstrauss, *Rigidity properties for commuting automorphisms on tori and solenoids*, arXiv 2101.11120v1 (2021; the full proof of the 2003 announcement) — "EL2021" | arXiv API, `au:Einsiedler AND au:Lindenstrauss AND abs:solenoid` | **§1 (pp. 1–3) read**: the definitions (solenoid, irreducible, totally irreducible, virtually cyclic), Thms 1.1–1.3, Cor. 1.4, the closed-set remark; §§2–9 **unread**. Copy `data/fs100/j51/el2021.pdf` (for `~/source/library/`) |
+| Einsiedler–Lindenstrauss, *Rigidity properties of ℤ^d-actions on tori and solenoids*, ERA-AMS 9 (2003) 99–110, Zbl 1068.37002 — "EL2003" | zbMATH `au:` pair | **author's summary only** (a claim, not a reading); the AMS PDF returned a bot-check page twice. EL2021 says Thm 1.2 is "[7, Thm. 1.1]", i.e. EL2003's |
+| Rudolph, *×2 and ×3 invariant measures and entropy*, ETDS 10 (1990), Zbl 0709.28013 | zbMATH | **review only**; the theorem as EL2021 Thm 1.1 quotes it |
+| A. Johnson, *Measures on the circle invariant under multiplication by a nonlacunary subsemigroup of the integers*, Israel J. Math. 77 (1992), Zbl 0790.28012 | zbMATH | **review only** (Theorem A: an invariant measure is Lebesgue or of entropy zero) |
+| Host, *Nombres normaux, entropie, translations*, Israel J. Math. (1995), Zbl 0839.11030 | zbMATH | **review only** (a normality criterion; EL2021 lists it as another proof of Rudolph–Johnson) |
+| Z. Wang, *Rigidity of commutative non-hyperbolic actions by toral automorphisms*, ETDS 32 (2012), Zbl 1278.37007 | EL2021's references | **author's summary only**: Berend's theorem **without** the expanding-direction condition — our isometric (archimedean) directions |
+| Lindenstrauss–Z. Wang, *Topological self-joinings of Cartan actions by toral automorphisms*, Duke 161 (2012), Zbl 1258.37031 | EL2021's references | **review only**: closed invariant sets of products — Kronecker selection's closed-set form |
+| Bekka–Francini, *Characters of algebraic groups over number fields*, GGD (2022), Zbl 1518.22005 | zbMATH `ab:"solenoid" & ab:"measure rigidity"` (1 hit) | **title and review's first lines only**; positive-type functions on `G(K)` via solenoid rigidity — by Bochner a `U`-invariant measure on `R̂` is a `U`-invariant positive-definite function on `R`, so it may be the closest in print. **Prior-art debt.** |
+| Berend 1983, 1984; Manners 2015 | held | read at FS-89/FS-91 (rows 95, 98) |
+
+**Negatives.** zbMATH `ab:"solenoid" & ab:"invariant measure" & (ab:"S-adic" | ab:"infinitely many primes" | ab:"S-integers")`: **0 hits**.
+Nothing found treats an **infinite-rank** acting group on a solenoid, or the **non-Noetherian** case (dual module not finitely generated over
+the acting group ring). EL2021 p. 3: "In the non-irreducible case, orbit closures, and closed invariant sets are much less understood."
+
+### §PA.3 The advisor's card, answered
+
+**First question — is the positive-entropy half of MR a theorem in print whose hypotheses hold here?** **Yes in part, with one named
+hypothesis failing and one lemma owed.**
+- `R̂` is a solenoid in EL's sense (above). ✓
+- **EL2021 Thm 1.2 (= EL2003 Thm 1.1) does not apply**: its hypothesis "totally irreducible" **fails for every finitely generated
+  `Γ ⊂ U`** — `ann(ℤ[Γ]) ⊂ R̂` is a proper, infinite, closed, `Γ`-invariant subgroup, because `ℤ[Γ] ⊆ O_L[1/N]` inverts finitely many primes
+  while `R = O′` inverts infinitely many, so `R/ℤ[Γ]` is infinite. [hand, one mind, two lines.] This is "the solenoid's form" of the card's
+  third branch: **the dual module is not finitely generated over any finitely generated subgroup's ring**. And EL is stated for `ℤ^d`, not
+  for `U`.
+- **EL2021 Thm 1.3 is the in-print statement that can apply** ("Let α be a ℤ^d-action (d ≥ 2) by automorphisms of a solenoid X. Suppose α
+  has no virtually cyclic factors …"): for `Γ` generated by two multiplicatively independent elements whose powers generate `L`, every
+  solenoid factor of `R̂` is `M̂` for a nonzero `Γ`-submodule `M ⊆ R` with `M ⊗ ℚ = L`, on which `Γ` acts by multiplication in `L`, not
+  virtually cyclically. [reading, one mind.] Its conclusion — finitely many `μ_j`, each invariant under a closed `Λ`-invariant subgroup `G_j`
+  and of zero entropy on `X/G_j` — is **relative to subgroups that may be totally disconnected** (`ann` of a finitely generated submodule),
+  whose factors `X/G_j` read finitely many places: the `Fin_S`-type part of `E` appears here as EL's zero-entropy factors.
+- **The lemma owed (PE-lim, not in print; searched):** for a `U`-invariant `μ` on `R̂` with `μ(E) = 0`, pass from Thm 1.3 at `Γ` to all of
+  `U` as `Γ ↑ U` — using that a `U`-invariant closed subgroup of `R̂` is `ann(I)` for an ideal `I` of the Dedekind ring `R`, hence finite or
+  all of `R̂` — to conclude: positive entropy for some `u` ⟹ `μ` is Haar.
+
+**Second question — does the four-colouring constraint force positive entropy?** **No theorem in print, and nothing known to be carried by
+the spectral measure forces it.** What properness puts on `σ_μ` is its Fourier values on `U` (`σ̂_μ(u) = −1/3`, the tetrahedral embedding,
+pair correlations only — G71's "one order too low"); a Fourier condition at the points of `U` does not bound entropy from below, and J46-8's
+SP equivalence turns **any** non-Haar `E`-null `U`-invariant `τ` into a witness, zero entropy included. [reading, one mind.] Whether the
+colouring process `μ` on `X₄(F)` (which carries more than `σ_μ`) forces positive entropy of `U` on its spectral measure is **open**, and no
+link between the two entropies is known here.
+
+**Branch taken: "the first yes, the second no"** — with the first yes conditional on PE-lim and on the Thm 1.3 hypothesis reading. **MR is
+its zero-entropy half plus PE-lim**; FS-100's MR route is a **reading room while ×2×3 stands**; the post-ban plan leads with P1's finite `H`.
+The hunch `mr-is-open-measure-rigidity` (J50) is **supported by a read citation**: EL2021 Thm 1.2's own dichotomy ("either µ = m_X … or the
+entropy … vanishes for all n") is the positive-entropy half and leaves zero entropy open, and total irreducibility fails here.
+
+**The swap question — is Kronecker selection's missing input the zero-entropy Furstenberg problem?** **No, on this reading.** The input J37
+names is "an equidistribution statement for the `U`-values of an infinite-type character"; it can be replaced by a **closed-set** statement
+(KS-sat, §S): the closure of `Θ(U)` in `Tⁿ` contains, over each point of its image in the (T + A)-factor, a full coset of the kernel of that
+factor map. Given KS-sat, a proper `W` gives a proper `W′` with **no measure at all** (the colours a.e. present on a fibre coset are disjoint
+from those on every adjacent fibre coset, so any measurable selection is proper). KS-sat is an orbit-closure (topological self-joining)
+statement for the diagonal `U`-action on `R̂ⁿ` — the closed-set half, where rows 95 and 98 succeeded (Berend with the rotated plane set
+aside, G76) — **not** the zero-entropy measure problem. Its risk, read: that action is not irreducible, where EL2021 says closed sets are
+"much less understood"; Lindenstrauss–Wang 2012 and Z. Wang 2012 are the nearest in print (unread). **So the derivation slot stays on stage 4.**
+
+### Theorems this phase proved
+
+- **J51-T2** — for every finitely generated `Γ ⊂ U_F` (`F` a real number field with infinitely many split places — every real field) the
+  `Γ`-action on `R̂` is not irreducible: `ann(ℤ[Γ])` is a proper infinite closed invariant subgroup. [hand, one mind] — §PA.3.
+- **J51-T3** — (the reduction behind the no-swap) KS-sat ⟹ Kronecker selection. [hand, one mind, sketch; J51D is to write it out, J51V to
+  check it as claim KS-2] — §PA.3, §S.
+
+### Would have searched here (stage 3)
+
+- None: every query was a literature query (zbMATH, arXiv, OpenAlex).
