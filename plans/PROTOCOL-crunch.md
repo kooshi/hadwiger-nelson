@@ -400,6 +400,88 @@ list of owner slips is `plans/CRUNCH-2026-09-25-queue.md` §8.5; run 2's invento
 | 26 | For a key claim, check one step yourself (a short script, a statement read against its source), never the record. | The owner re-derived J51V's counterexample and re-ran its tool; read `not_colorable_chain`'s and `inv_natCast_mem_unitRing_iff`'s statements against G55 and the plan; re-ran the gate after every kernel job. |
 | 27 | A crunch finds errors in earlier milestones; route them as "correction owed" lines, never as silent edits. | J03a found FS89-CL2 false as written (the archimedean characters must be `Hom_ℚ(F(i), ℝ) mod 1`), and the fix went to J07 as a deliverable. |
 
+## 8. The runs
+
+### 8.1 Run 1 — the 16-hour crunch (2026-09-25, into 2026-09-26)
+
+**Records:** the queue `plans/CRUNCH-2026-09-25-queue.md` (§1 the full protocol, §2 the table, §4 the skeletons, §5 expectations, §6 the
+advice, §8 the close); the index `plans/CRUNCH-2026-09-25-INDEX.md`; briefs `data/crunch-2026-09-25/briefs/`; reports
+`data/crunch-2026-09-25/reports/`; the handoff `plans/SESSION-HANDOFF-2026-09-25-crunch.md` (§7–§8 for the night after); the advisor
+`plans/POROS-2026-09-25-crunch-plan.md`.
+
+**Kooshi's opening words (verbatim):** "[…] I'd like an advisor and a
+planner to plan the next 16 hours (keep in mind each of your "week" estimates took just a few hours each). Basically, let's keep 4-5 agents
+spawned, and a list of jobs to churn through. Those jobs can spawn new jobs in the queue. I'll check in and compact you as needed so we can
+keep churning. […]
+We're still operating under the ban, and the crunch time won't start until the plan finishes and we compact. You'll act as orchestrator the
+whole time, and your context window is your budget, so lean towards spawning a Sonnet subagent for bookeeping or easy reads. Opus for
+everything else, and avoid filling up your context more than needed."
+
+| item | run 1 |
+|---|---|
+| clock (the owner's log) | launched after compaction ("You are clear to launch."); the queue closed by J25; Kooshi ended the crunch ("We're done with the crunch, so that cap is removed, …"); two post-crunch milestones ran overnight at a normal cap |
+| slots | 4–5; cut to 4 and later to 2 (Kooshi: "[…]") |
+| jobs | 60 reports before J25's own, 58 DONE or DONE on resumption (§8.1 there); eight clerk runs; three resumptions by fresh agents on the same brief (J10b, J22b, J23a2), each at the next unsaved stage |
+| milestones | three opened at once (M1 = FS-91, M2 the kernel lane, M3 exotic colourings), then row 88's question, FS-67 and FS-84 as closes freed the cap |
+| closed (verdicts from §8.3 there) | **M1 = FS-91**, rows 98–102, G77: Paid (theorem); **M2**, rows 103–107: Paid (kernel); **M3**, rows 108–110, G78: Q1 not landed, Q2 landed in part; **row 88's question**, rows 111–113: Paid (theorem), row 88 not landed; **FS-67**, rows 114–115: Paid (theorem and no-go). FS-84 opened and ran S1 and its blind verification; its later stages were post-ban. G79 minted (Kooshi's grokking). Stubs FS-92 to FS-100 minted |
+| grades of note | the conjecture at `L ≤ 4` for every real number field, [hand, two derivations] (J02, J09); the character local–global theorem given `H_k`, one derivation with 24 of 25 statements verified blind and one GAP (J07, J10); the kernel lane's chain theorem, stripe lemma, bridge (conditional on one named proposition) and Lemma NP, [kernel] (J14–J17K2) |
+| after the crunch, the same night | J05 compression (12,587 bytes freed; its 15,000 floor not landed); J50 (Poros) chose two milestones; **FS-100's in-ban round** (J51 plan, J51D and J51V: Kronecker selection refuted as stated by two minds, rows 116–118) and **FS-75's minimal instance** (J52 plan, J52K: `χ(ℚ(√167)²) ≥ 4` in the kernel in about 45 minutes against 4.5 hours planned, row 119), closed by J53/J53b, J54 and one front page, J55 |
+| expectations | 28 lines scored, 21 met, 7 missed, Brier 0.170; every miss was a success priced below even odds (§8.2 there) |
+| budgets | 33 jobs reported a harness count, summing to 9,616k against the plan's "roughly 9M" for everything; the rest reported only their own counts (§8.1 there). Over the replace line: J04 534k, J23a2 536k, J23b 574k, J24 550k |
+| retractions and refutations | no retraction tally was kept (a gap; keep one). Recorded: J09's own first route false at `q = 27`; FS89-CL2 false as written (J03a); J19-KC's clause 1 needs "a common period" (J20); J08-8's bound corrected (J11); the planner's cylinder lemma false (J21's NG1); KS-1 and KS-3, the planner's statements, refuted by two minds (J51D, J51V) |
+| slips | the owner's seven (§8.5 there), then two in the night (a budget commit before its audit passed; a commit subject naming a counterexample while J51D ran); agents: fence leaks at J08 and J51V, J31 outside `scripts/slot.py`, closers past their lines |
+| what it taught | §7 rules 7, 8, 10–13, 15, 16, 18–22, 24–27 |
+
+### 8.2 Run 2 — the ×2×3 crunch (2026-09-26, 10:26–12:38 UTC)
+
+**Records:** the queue `plans/CRUNCH-2026-09-26-x2x3-queue.md` (§1 deltas, §2 the fixed claim lists, §3 the reframe, §4 and §7 the tables,
+§5 expectations, §6 the advice); the index `plans/CRUNCH-2026-09-26-x2x3-INDEX.md`; briefs and reports under `data/crunch-2026-09-26-x2x3/`;
+the milestone's closes `plans/FS100-three-field-lemma.md` §R-close (stage 5), (stage 5, wave 3), (stage 5, wave 3b); the advisor
+`plans/POROS-2026-09-26-x2x3-crunch.md`.
+
+**Kooshi's words (verbatim):** "next, we'll do a short crunch run attacking the x2x3 problem"; "Quick crunch. 2 hours, 6 agent slots,
+CLAUDE.md unbounded temporarily so we don't need to compress on the fly. Launch a planner and a Poros advisor to lay out the queue attacking
+x2x3. Read up on the last crunch run for any additional details. You act as coordinator only, and preserve your context, so a subagent does
+bookkeeping runs."
+
+| time | event |
+|---|---|
+| 05:30 | planner, advisor, and a one-edit clerk (K0: the header's temporary budget line) launched |
+| 05:41–05:46 | claim lists fixed (§2); wave 1: X01D, X02D, X03D (derivations of three routes to MR), then X01V, X02V (blind), X05V (blind check of SP-Cor and the flip) |
+| 05:44 | the advisor's frame item: Einsiedler–Fish 2010 — so MR is likely not ×2×3-hard |
+| 05:55 | Kooshi's standing conditional ("If 47 lands at 5, …") |
+| 05:57–06:02 | X01V: GAP at the multiplier step; X01D: TRUE; the advisor resumed on the divergence; X01V's stage 4 withdraws its GAP |
+| 06:03 | X12B, a blind second derivation of EF_F⁺ |
+| 06:06–06:08 | X02V confirms PE-2 blind; the owner announces the headline and launches X11K (Lean) and X09C (close-math, early: every derivation had reported) |
+| 06:15 | X12B: EF_F⁺ TRUE blind — the headline rule met on its letter |
+| 06:18 | Kooshi: "We still have usage left for crunching. Do these findings transfer to the other wanted posters? Please continue the queue with asks about them." Planner and advisor resumed |
+| 06:22–06:43 | wave 3: X21D/V (ℚ(√167) and the `L ≥ 5` family), X23D/V (every real number field), X24R (prior-art gate), X22D/V (type-(B) fields), X25B and X26B (blind second derivations); 06:32 a seventh slot |
+| 06:25–06:39 | X10F applies waves 1–2 (rows 120–122) |
+| 06:48 | Kooshi: "The target for the Lean implementation should move to the more general "every real" claim." |
+| 06:52–07:14 | X27D/V (TR-ROT); X28D (the complex-place case, from Kooshi's pointer to cube roots); 07:01 slots cut to 4, "Existing jobs may continue." |
+| 07:04–07:38 | X29C closes wave 3; X30F applies rows 123–125; X11K3 gates the Lean lane (row 127); X31C folds TR-ROT (row 126); the owner re-runs every gate at 90abbea2 |
+
+| item | run 2 |
+|---|---|
+| jobs | 31 indexed by C1 (planner, advisor, clerk folds, 28 working jobs), with four clerk folds |
+| landed (`LEDGER.md` rows 120–127) | **row 120**, MR for every real number field with `R_F = O′`: "[hand; PE-2 two derivations blind to each other (X02D, X02V), EL2021 Thm 1.2 by statement … EF_F⁺ two derivations blind to each other (X01D, X12B) and a checking reading (X01V, after its blind GAP, withdrawn as its own error); MR a composition, three minds]"; **row 121**, `χ(ℚ(√47)²) = 5`, "[hand; the headline rule met (every half two blind minds, SP-Cor checked blind): …]"; **row 122**, where the other routes stop; **row 123**, "for every real number field `F`, `χ(F²) ≥ min(L(F), 5)`, so `χ(F²) = L(F)` whenever `L(F) ≤ 5`", "[hand + tools exact; MR row 120's grade (…); CLS three derivations — …]"; **rows 124–126**, the type-(B) fields given MR, six at ℚ(√167) as a question about the real plane, TR-ROT GAP at NA₀; **row 127**, the main clause through five in the kernel over named hypotheses, and `χ(ℚ(√47)²) ≤ 5` unconditionally [kernel]. G80 minted; FS-101 stub minted |
+| expectations (§5 there, scored by X10F) | the realised outcomes included the planner's 0.05 (the headline), 0.08 (MR landing, two minds each half) and 0.15 (ED-2 FALSE with an explicit character); item 8 (FL-1 as written, at 0.40) was scored "not met" |
+| budgets | planner 341k at hand-back (405k after wave 3) against 280k; advisor about 333k against 150k; X01D 321k, X01V 329k, X02V 323k, X03D 344k, X05V 289k, X11K 360k, X11K2 373k, X11K3 245k by the harness; the rest 75k–200k as reported (mostly own counts) |
+| retractions and refutations | X01V's GAP, withdrawn at its stage 4 as its own error; the advisor's sketch errors (its record §7.3); claim-list items refuted as results: EF-G (a) at ℚ(∛2), PE-1 as posed (two counterexamples), ED-2, CP-2 and CP-3 (X28D) |
+| slips | the owner's three (the 06:08 announcement; the flip's lost qualifiers; NA₀'s lost "positive"); planner and advisor over their lines; the advisor's committed PDFs; X26B outside `scripts/slot.py`; X09C's derivation entries malformed for the strict check (fixed mechanically by X10F); fence touches at X05V, X21V, X22V, X25B, each ruled (§7 rule 11) |
+| after it | the consolidation (§4), cap 3, 08:07–08:44 for C1–C3b, then D1, E1, E2, F1 and this protocol |
+| what it taught | §7 rules 1–7, 9, 11, 13, 14, 17, 19, 20, 23 |
+
+### 8.3 Reading the two runs together
+
+- **Both worked for the same reason:** every claim was fixed before it was derived, and every derivation had a blind mind beside it; the
+  owner never read a record. The unit of work was a claim, not a milestone.
+- **Both were under-priced in the same direction** (§7 rule 6). Register expectations anyway; the misses are the calibration.
+- **Both produced owner slips in the same two places:** paraphrase in a brief written fast, and an announcement or commit made before the
+  close would grade it. The rules that answer them are §7 rules 1, 3, 7 and 12.
+- **Confounds:** run 1 had sixteen hours and three concurrent milestones; run 2 had two hours and one milestone's lemma; run 2 inherited run
+  1's whole machinery (briefs, clerk, standing rules) and its planner wrote only deltas. One run each; the shapes are not yet separable.
+
 ## §R. Record (job P1)
 
 ### Stage 1 — SAVED (§0–§4: design, when to use it, roles, the run, the consolidation)
@@ -414,3 +496,10 @@ of it) — already past the brief's 350k hand-back line; a slip, reported. Would
 §5 merges the three STANDING-RULES files and marks each lesson folded in with ⁺. §7 holds 27 rules in five groups, each with its incident
 and address. §6 (templates) is stage 4 and will sit between them. Harness count at this save: about 405k by the counter. Would have
 searched here: nothing.
+
+### Stage 3 — SAVED (§8 the runs)
+
+Run 1 and run 2 each with clock, slots, jobs, what landed at what grade, expectations, budgets, retractions, slips and what each taught
+(pointing to §7's rules); §8.3 reads them together with the confounds. Grades are quoted from  rows 120, 121, 123 and 127 and
+from each queue's §8.3/§5; none is raised. Run 1 kept no retraction tally; that is said. Harness count at this save: about 420k by the
+counter. Would have searched here: nothing.
