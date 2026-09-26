@@ -98,3 +98,15 @@ Gates at this commit: `--self-test --base 230ea964` PASS (15 plants); `--base 23
 first application quoted 60 characters before each cut and titled §G72 with G72's full head, so two 10-word runs were told twice (`--dupes`
 10 → 12); reverted, the label cut to six words and the title shortened, re-applied: 10. Gates: `--base 230ea964` PASS (0 lost, 0
 dangling); `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.
+
+### 3b — SAVED: § Frontier's "Not ours" and ranks ≥ 30 (M9, M10)
+
+`moves.py apply F`. `CLAUDE.md` 291,174 → 282,106; `LEDGER.md` +4,755 (the list verbatim after the **Ours** paragraph, and the claim list's
+preamble sentence rewritten to current state — it said `CLAUDE.md` keeps "the whole **Not ours** list, which stays in context against
+misclaims"; it now says the list is here and that `CLAUDE.md`'s pointer says to read it before calling anything ours, which keeps the
+*why* as an instruction). The paths-forward table keeps rows 1–29 and one pointer row listing ranks 30–59 by identifier, in rank order.
+
+The fact audit then lost 30 tokens, every one from the cut rows: **24 are now `EXTERNAL_HOMES` → `plans/FRONTIER-STUBS.md`**, and the
+audit reads that file and finds each (24 `HOMED` lines); the other **6 are the grouped rank labels** (`38–42`, `46–49`, `50–51`, `52–54`,
+`55–56`, `57–59`), added to `ALLOW` with that reason, since FRONTIER-STUBS numbers those rows one per rank. Gates: `--base 230ea964` PASS;
+`--self-test` PASS; `--dupes` 10; `fs71_ledger_b_check --strict` PASS; `bib_audit` PASS; `check_architecture` PASS.

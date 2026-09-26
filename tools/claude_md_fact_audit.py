@@ -61,6 +61,13 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # E1, design (b) on CLAUDE.md (2026-09-26): paths-forward ranks >= 30 cut to one pointer row (their tokens: EXTERNAL_HOMES).
+    '38–42': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
+    '46–49': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
+    '50–51': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
+    '52–54': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
+    '55–56': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
+    '57–59': "a grouped rank label of the paths-forward table, cut with ranks >= 30 by E1; plans/FRONTIER-STUBS.md numbers those rows one per rank",
     # C3a, the claims sweep of the 2026-09-26 documentation consolidation (data/consolidation-2026-09-26/C3a-record.md).
     "K0's": "item 12's 'five at K0's grade (row 121)', a superseded pointer rewritten to its grade and address ('five at [hand], through MR (row 123)'); K0 stays in rows 117, 121 and 123",
     # X10F, the front page of FS-100 stage 5 (the ×2×3 crunch, 2026-09-26; X10F's record, data/fs100/x10f-record.md).
@@ -297,6 +304,28 @@ ALLOW: dict[str, str] = {
 # in (a verified allowance, unlike ALLOW). For text whose home was never this corpus -- e.g. paths-forward rows ranked >= 30, whose
 # authoritative rows are plans/FRONTIER-STUBS.md's (E1, 2026-09-26).
 EXTERNAL_HOMES: dict[str, tuple[str, str]] = {
+    '[Chow1993]': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'U < 308.17': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'forces_of_tight': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-arena-slack-census.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-certificate-at-43.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-distance-two-gadget.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-exact-independence-solver.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-fractional-wall.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-plane-bridge.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-rational-four-space-rigidity.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'plans/STUB-six-is-not-a-value.md': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'struction': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    '308.17': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    '9–23': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'Chow1993': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'G(ℚ⁴)': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'G–H2': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'v_𝔭(d²)': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    "¶5.4's": ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'α(Γ_q)': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'Nullstellensatz': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
+    'Zaks': ("plans/FRONTIER-STUBS.md", "a paths-forward row ranked >= 30, cut from CLAUDE.md by E1 (design (b), 2026-09-26); the stub's row in plans/FRONTIER-STUBS.md is authoritative"),
 }
 
 # The real tag reads "[PROTECTED — never compress, trim or paraphrase …]"; the header's RULE about the tag quotes it as
