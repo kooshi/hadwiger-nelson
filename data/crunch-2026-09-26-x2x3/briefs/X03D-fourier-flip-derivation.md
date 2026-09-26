@@ -74,3 +74,12 @@ not lean toward TRUE.
   turn's text: "X03D idle; report sent to the owner by SendMessage".
 
 Thank you.
+
+## Addendum (05:45, from the advisor's review; read after launch)
+
+- **Cap ED-2 at 20 minutes.** Poros, relayed verbatim (one mind): "ED-2 is harder than MR, and EF's own §4 says so. Nazarov's construction,
+  reproduced in EF: for every irrational α there is a positive-density multiplicative semigroup Σ along which Σα is not equidistributed,
+  and EF's rigidity still holds for it. So rigidity is not an equidistribution phenomenon, and ED-1's hypothesis is strictly stronger than
+  what MR needs." And: "ED-1 itself is one line: dominated convergence, plus the fact that r^{-1}E ⊆ E for r ≠ 0". A GAP on ED-2 with the
+  step named is the expected outcome. **FL-1 and FL-2 are this job's real content.** You may read EF §4 at
+  `data/crunch-2026-09-26-x2x3/poros/ef.txt` (the paper's text, not the advisor's notes).

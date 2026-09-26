@@ -65,3 +65,12 @@ not lean toward TRUE: a PE-2 that fails at the ergodic decomposition is as usefu
   turn's text: "X02D idle; report sent to the owner by SendMessage".
 
 Thank you.
+
+## Addendum (05:45, from the advisor's review; read after launch)
+
+- **PE-1's total irreducibility** (Poros, relayed verbatim): "PE-1's total irreducibility needs ℚ(Γ') = L for every finite-index Γ' ⊆ Γ,
+  not only for Γ. A power of u can land in another quadratic subfield of L, for example ℚ(i) or ℚ(√−47). Tell X02D to choose Γ so that this
+  cannot happen." If PE-1 as fixed is FALSE for some `Γ` of its stated kind for this reason, say so (that is a verdict on the claim as
+  written), and then prove the corrected form: `Γ` chosen so that no non-torsion element has a power in a proper subfield of `L`. Say also
+  whether every non-torsion `u ∈ U` still lies in some such `Γ` (PE-2 needs it, or needs a separate argument for `u` with a power in a
+  proper subfield).

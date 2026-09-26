@@ -97,3 +97,12 @@ GAP with the step named is a complete result. Do not lean toward TRUE.
   turn's text: "X01D idle; report sent to the owner by SendMessage".
 
 Thank you.
+
+## Addendum (05:45, from the advisor's review; read after launch)
+
+- **EF-G (b) has a two-line proof** (Poros, relayed verbatim, one mind): "U_ℚ ⊆ U_F, and for u ∈ U_ℚ we have H_L(u) = H_{ℚ(i)}(u)^{[F:ℚ]}.
+  So #U_N(F) ≥ #U_{N^{1/n}}(ℚ), where n = [F:ℚ]. Over ℚ this is the count of primitive Pythagorean triples with hypotenuse ≤ N, which is
+  about N/(2π). Hence the exponent is ≥ 1/[F:ℚ] > 0." Check it, and spend no more time there than that.
+- **EF-X is one line** (Poros): "Take the uniform measure on a circle in A. U is dense in S¹, so the measure is U-ergodic; it has zero
+  entropy and is not finitely supported." Check it, and move on. Your time belongs to EF_F. If your derivation gives the stronger conclusion
+  `μ(T + A) = 1`, record it as a separate, stronger statement beside EF_F.
