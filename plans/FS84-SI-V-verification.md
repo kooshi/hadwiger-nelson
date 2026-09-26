@@ -316,3 +316,74 @@ source says.)*
 
 **Scored against C0 (§1.3):** every verdict fell on the side given the larger probability, except (SI)'s equality "iff", which landed in
 its GAP column (0.55) with a TRUE repaired form, and (SP), whose TRUE (0.55) holds under the positive reading only.
+
+## Stage 3 — SAVED (the comparison)
+
+Opened after stage 2's commit (83508d72): J45's record `plans/FS84-SI-D-derivation.md` at its stage-5 hand-off (e86a579f; read: the
+theorem table, §1.2's (G2) statement, §5.1–§5.4), the Poros record §4.4, and the ℚ(√47) wanted poster §3.4.
+
+### 3.1 Quotation check, completed
+
+- **The claim list**: the brief's text equals the Poros record §4.4 character for character (whitespace-normalised, by script) up to the
+  control line, which is the one edit the owner declared. **But the edit widened the control** (a slip, logged): the source names F2,
+  whose recoloured set is `Z̄ = {θ = 0}` only (J45 §5.4's SI-C statement); the brief's description recolours *all* gapped points. For C9's
+  colouring that is **not a colouring**: my exact check (`tools/crunch_j46_g2.py`, plant fires; `data/fs84/j46/g2.out`) finds the 14 gapped
+  vertices (`2x + 3y ∈ {0, 5}`), all missing colour 3, with 28 directed adjacent pairs among them sharing it (between `k = 0` and `k = 5`),
+  so independent recolouring of all of them is improper with positive probability. `Z̄` (7 points) is independent and every point of it misses
+  colour 3. My R8 read the control as presupposing properness, so J46-9 covers F2 exactly and excludes the widened reading.
+- **W1**: the brief's text equals the wanted poster §3.4's statement verbatim.
+
+### 3.2 Divergence table, per claim
+
+| claim | J46 (blind) | J45 | truth | route | wording | independent? |
+|---|---|---|---|---|---|---|
+| SI inequality | TRUE, J46-2 | TRUE, SI-1/SI-3 | none | same shape: `P_S = E[·\|𝒜_S]`, Gram identity; J45 phrases the overlap as the collision probability of the relatively independent self-joining (the same number) | J45's "`h = E[g\|𝒜_S]`" in SI-1 names the projection, not the remainder — harmless there, since SI-1 is stated as an identity for the remainder's integral | yes: both blind, same natural route |
+| notation lemmas | J46-1: `G′_S` with `R̂_pro`; component uniqueness from (D) (R88-TC-ext's strong-approximation density) | N1/N2: the same `G′_S`; density of `R` in `G′_S` proved without strong approximation or Lemma R | none | **route differs** at density: mine cites (D); J45's needs neither (§5.2 item 4). J45's is the stronger form; my J46-7 and J46-8's remark inherit its independence of Lemma R through N1 | — | yes |
+| SI "clause" | vacuous (R5) | automatic (SI-2) | none | same one line | — | yes |
+| SI "⟹" | TRUE, J46-3 (min-support selection; list-assignment form) | TRUE, SI-4 (every selection) | none | same | — | yes |
+| SI "⟸" | **GAP** at "a factor colouring forces adjacent supports apart"; vacuous at ℚ(√47); ⟺ "factor contains a pullback ⟹ Pull" at type (B); window shape excluded (J46-4) | **GAP** at the same step; **over a (G2) field equivalent to universal equality at `S`** (SI-5), ℚ(√11) is (G2) | none | **J45's is sharper**: it turns the GAP into an equivalence with an open universal statement by a product construction; my blind route stalled before that. Re-derived below from the statement alone (§3.3) | the same named step, in two wordings | yes (blind); SI-5 now re-derived |
+| control | TRUE under "a.s. proper" (J46-9) | TRUE for F2 (SI-C), and `σ_μ(R̂∖E) > 0` | none | same (conditional independence + properness ⟹ disjoint supports); J45 fixes the example (C9, `Z̄`, fair bits), I fixed the hypothesis | the brief's description widens F2 (§3.1) | yes |
+| A⁺ | TRUE given T-C(A), J46-5 | TRUE, and constant in `u` for rotation-invariant `μ` | none | same | — | yes |
+| B⁺ | TRUE given T-C, D2-A; converse Pull ⟹ equality | TRUE, and equality ⟺ Pull ⟺ spectrum on `E_S` | none | same (a selection is a pullback; tight ⟹ gap-free ⟹ singleton supports) | — | yes |
+| R-U | TRUE, J46-7 (weak approximation, then disjoint translates at each `v ∈ S`) | TRUE, "wandering at each split place of `S`" | none | same | — | yes |
+| SP | TRUE (positive reading), J46-8: push by `r`, fix the sign with a `J₀`-negative archimedean circle | TRUE ("if" and "only if"), the same push and the same `J₀` circle | none | **identical construction**, reached independently | I call the literal signed reading ill-posed (its right side is trivially true); J45 restricts to `\|ν\|(E) = 0` | yes |
+| W1 | TRUE given row 98 and T-C(A), J46-10 | (not on J45's list) — source: wanted poster §3.4, one mind | none | **identical five steps** (continuity/Steinhaus, band, row 98, the placement measure, T-C(A) at `S = ∅`) | — | yes: mine blind; W1 is now two minds |
+
+**Differences of truth: none.** Differences of route: density (mine cites, J45 derives); SI "⟸" (J45's reduction is sharper). Differences of
+wording: the control's description (the brief's, not J45's); SP's signed reading.
+
+### 3.3 Re-derived from J45's statements alone (my blind route stalled on SI "⟸")
+
+- **SI-5 — TRUE** (re-derived). *If `F` satisfies (G2) at `S` and some `μ₂` has strict inequality at some `u₀`, then some `μ` has strict
+  inequality while its `E_S`-factor carries a proper equivariant `c′` with `c′(x) ∈ supp a(x)`.* My proof: rotate `c₂` by `v ∈ U` with
+  `π(v⁻¹u₀) = b̄ − ā` (`c₂(v ·)` is again an invariant proper colouring, `E_S` is `U`-invariant, and `Ū` is a group), so the overlap sits on an
+  edge `u` of residue `b̄ − ā`, at a colour `j₀`. Take `Φ = γ(π(·) + t)`, `t` uniform, and fair bits `ε`, all independent of `c₂`; set
+  `c(x) = m` if `π(x) + t ∈ {ā, b̄}`, `c₂(x) = j₀` and `ε_x = 1`, else `c(x) = Φ(x)`. Proper: two recoloured points are never adjacent
+  (`c₂` is proper), and a recoloured point has no `Φ`-neighbour of colour `m` (gapped with missing `m`). `Φ` is `σ(c)`-measurable (on each
+  residue class, the colour other than `m` that occurs — `ε = 0` occurs a.s.), torsion-spectral, so `c′ = Φ ∈ 𝒜_S(c)`, and
+  `P(c(x) = Φ(x) | ·) ≥ 1/2`. The `E_S`-factor of `(t, c₂, ε)` is `σ(t) ∨ 𝒜_S(c₂)` (SI-J, re-derived: `L²(t)` is spanned by torsion
+  eigenfunctions, `δ_ψ * σ_g` is carried by `E_S` iff `σ_g` is, and every non-constant `ε`-component is Haar-absolutely continuous, hence
+  `E_S`-null); given it, colour `m` has conditional probability `½ a^{(2)}_{j₀}` at both ends of the edge, positive with positive
+  probability; `𝒜_S(c)` is coarser, so its supports are larger and still overlap: strict inequality (J46-2). ∎ **Consequence:** over a
+  (G2) field, SI "⟸" for every `μ` ⟺ every `μ` has equality at `S` — J45's equivalence; the converse direction is trivial.
+- **G2-11 — TRUE** (exact, `tools/crunch_j46_g2.py`, independent of `tools/crunch_j45_gap7.py`, which I have not opened).
+- **SP-Cor — TRUE** (re-derived from its statement; not on the claim list). *Over ℚ(√47), given T-C(A) at `S = ∅`: if every finite positive
+  `U`-invariant `E`-null measure on `R̂` is a multiple of Haar, then `χ(ℚ(√47)²) ≥ 5`.* My proof: if a four-colouring exists, the affine group
+  `R ⋊ U` (solvable, so amenable) has an invariant probability `μ` on the compact `X₄`; then `σ_μ` is `U`-invariant, and so is
+  `τ = σ_μ|_{R̂∖E}` (`E` is `U`-invariant). By R-U (J46-7) `σ_μ(E ∖ E_∅) = 0`, so `∫ Re χ(1) dτ = ∫_{R̂∖E_∅} Re χ(1) dσ_μ`, which is the
+  same at every `u` (`U`-invariance) and strictly negative at some `u` by A⁺ at `S = ∅` (J46-5). So `τ` is positive, `U`-invariant,
+  `E`-null, with a negative coefficient at `1`: not a multiple of Haar. ∎ *(The affine-invariant `μ` is the step that makes `σ_μ`
+  `U`-invariant; I did not check whether J45 used it.)*
+
+### 3.4 Would-have-searched log (stage 3)
+
+5. *Would have* searched `Γ₇`'s four-colourings for adjacent gapped pairs sharing a missing colour. *Instead:* evaluated the one named
+   colouring completely (a finite set a statement fixed; logged at the ban's edge as an enumeration of one fixed object).
+
+### Theorems this phase proved (stage 3)
+
+| id | statement | grade | address |
+|---|---|---|---|
+| J46-11 | SI-5 re-derived: over a (G2) field, SI "⟸" for every `μ` ⟺ equality at `S` for every `μ` (with SI-J re-derived) | hand; from J45's statement | §3.3 |
+| J46-12 | C9's colouring of `Γ₇`: proper; 14 gapped vertices (`2x+3y ∈ {0,5}`), all missing 3, 28 directed adjacent pairs sharing it; `Z̄` independent | tools exact, plant fires | `tools/crunch_j46_g2.py` |
+| J46-13 | SP-Cor re-derived: given T-C(A) at `S = ∅`, `E`-null `U`-invariant measure rigidity on `R̂` would give `χ(ℚ(√47)²) ≥ 5` | hand; from J45's statement | §3.3 |

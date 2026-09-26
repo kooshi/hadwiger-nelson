@@ -1,0 +1,6 @@
+(a) proper: True;  plant (one vertex recoloured to a neighbour's colour) fires: True
+(b) gapped vertices: 14; their k = 2x+3y values: [0, 5]; missing-colour sets: [frozenset({3})]
+(c) directed adjacent gapped pairs sharing a missing colour: 28
+    their (k(v), k(w)) values: [(0, 5), (5, 0)]
+(d) Zbar = {k = 0}: 7 points, independent: True, each gapped missing colour 3: True
+ALL AS ASSERTED
