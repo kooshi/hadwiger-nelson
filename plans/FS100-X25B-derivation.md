@@ -3,9 +3,6 @@
 *Job X25B of the ×2×3 crunch (2026-09-26), Coxeter (Opus 5.5), brief `data/crunch-2026-09-26-x2x3/briefs/X25B-tca-class-blind-derivation.md`
 with `STANDING-RULES.md`. Working files `data/fs100/x25b/`. Stop 12:50 UTC.*
 
-## Theorems this phase proved
-
-*(filled at stage 3)*
 
 ## Stage 1 — SAVED
 
@@ -112,6 +109,95 @@ point of an edge-null planar set has no density point at distance 1: two density
 unit-distance pairs). (d) The strict `sup < 1/4` needed a tail argument; without the tail (infinitely many places each `< 1/4` accumulating at
 `1/4`) the proof would fail — the Weil tail excludes it.
 
+## Stage 3 — SAVED
+
+**Verdict on T1: TRUE**, all three equivalences, over its inputs (below). Exact checks `tools/x25b_t1_check.py` →
+`data/fs100/x25b/t1-check.out` (exit 0); plants `--plant1` (the 7-condition flipped: classes `[23, 71, 95]`, exit 1) and `--plant2` (31's
+Hoffman threshold moved by `10⁻³`: fails, exit 1), `data/fs100/x25b/t1-check--plant{1,2}.out`, each firing for its own cause.
+
+**Local facts used (standard).** For a real quadratic `F = ℚ(√d)` and a place `w` of `F`: `w` is stable (`L ⊗ F_w` a field) iff `i ∉ F_w`.
+(a) `p ≡ 1 (mod 4)`: `i ∈ ℚ_p ⊆ F_w`, never stable. (b) `p ≡ 3 (mod 4)` inert in `F`: `F_w = ℚ_{p²} ∋ i`, not stable. (c) `p ≡ 3 (mod 4)`
+split in `F` (`(d/p) = 1`): `F_w = ℚ_p`, stable, the local plane is the `p`-adic plane, tower `G_k = UD(ℤ/p^k, 2)`, level one `Γ_p`.
+(d) `p ≡ 3 (mod 4)`, `p | d`: `F_w` ramified, `i ∉ F_w`, `L_v/F_w` unramified with residue `𝔽_{p²}`; stable; the tower is `O_{L_v}/π^k`,
+level one `Cay(𝔽_{p²}, μ_{p+1}) ≅ Γ_p`. (e) Dyadic: `d ≡ 1 (8)` (split in `F`, `F_w = ℚ₂`, `L_v = ℚ₂(i)` ramified), `d ≡ 5 (8)`
+(`F_w = ℚ₄`, `L_v/F_w` ramified), `d ≡ 2 (4)` (`F_w = ℚ₂(√d)`; `L_v` has no unramified quadratic subfield, so ramified over `F_w`): each a
+ramified stable place, level one `K₂`-like (every unit vector `≡ 1`), ratio `≥ 1/2`; `d ≡ 3 (8)`: `F_w = ℚ₂(√3)`, `L_v ∋ √−3` unramified
+over `F_w`, stable, level one `Cay(𝔽₄, μ₃) = K₄`, ratio `≥ 1/4` (row 67's tight tower, exactly `1/4`); `d ≡ 7 (8)`: `−d ≡ 1 (8)` is a square,
+so `F_w = ℚ₂(i)`, not stable.
+
+**(⟹ of T1's first equivalence).** A stable place whose level-one graph has a proper `k`-colouring has all-levels ratio `≥ 1/k` (the
+largest class, pulled back). The dyadic cases other than `d ≡ 7 (8)` give `≥ 1/4` (e). At 3: `d ≡ 1 (3)` (case (c)) or `3 | d` (case (d))
+gives level one `Γ₃ = C₃ □ C₃`, three-coloured by `x + y mod 3`: ratio `≥ 1/3`. At 7: `(d/7) = 1` or `7 | d` gives `Γ₇`, `χ(Γ₇) = 4`; also
+`α(UD(ℤ/49, 2)) = 686` (row 75, cert), a level-two ratio `2/7`: ratio `≥ 1/4`. So all ratios `< 1/4` forces `d ≡ 7 (8)`, `d ≡ 2 (3)`,
+`(d/7) = −1`, which is `d ≡ 47, 143, 167 (mod 168)` (check (1)).
+
+**(⟸).** For `d` in those classes the stable places are exactly the `p ≡ 3 (4)`, `p ≥ 11`, with `(d/p) = 1` or `p | d` (2, 3, 7 are not
+stable by the congruences; (a), (b)). For each, the all-levels ratio is `< 1/4`:
+- **The new-level bound, split and ramified alike (my derivation of Lemma P's content in the case quadratic fields need).** In a tower
+  with `|G_k| = p^{2k}`, `|S_k| = (p + 1)p^{k−1}`, the fibre of `S_k → S_{k−1}` over `s` is `{s(1 + ϖ^{k−1}t) : t̄ ≡ −t}` (`ϖ = p`
+  unramified, `ϖ = π ∈ F_w` ramified — fixed by conjugation, so `N(1 + ϖ^{k−1}t) ≡ 1 + ϖ^{k−1}(t + t̄)`), `p` points on the line
+  `i𝔽_p` of the residue field. A primitive character restricted to `ϖ^{k−1}O/ϖ^k ≅ 𝔽_{p²}` is `x ↦ e(Tr(γx)/p)`, `γ ≠ 0`; its sum over the
+  fibre vanishes unless `Tr(γ s̄ t) = 0` on `i𝔽_p`, i.e. `γs̄ ∈ 𝔽_p`, which holds for at most the two residues `±s₀` of `μ_{p+1}`
+  (`μ_{p+1} ∩ 𝔽_p^× = {±1}`). So `|λ| ≤ 2p^{k−1}`, normalised `≤ 2/(p+1)` — the same at a ramified place as at a split one.
+- **Hence the fibre-share inequality at every stable place** (row 75's, whose proof uses only: level one `Γ_p`, equal fibres, the new-level
+  bound): `α(G_k) ≤ B₁(p)·p^{2(k−1)}`, and FS-66's certificates apply verbatim at ramified places. `4U < p²` at 11, 19, 23 (check (4):
+  `U/p² = 0.23309, 0.21471, 0.18523`); the frozen checker re-run on the 11 certificate this session: `CERTIFIED`, exit 0
+  (`data/fs100/x25b/fs66-check-p11.out`); at 19 the same checker was stopped by my own 110 s cap (under the two-minute no-slot line), at its step 4 of 7 (`fs66-check-p19.out`, exit 124) — not re-run; 19's and 23's CERTIFIED status is row 75's.
+- **Hoffman where it suffices:** at every level the normalised eigenvalues are the level-one ones and new-level ones `≤ 2/(p+1) < 1/3`
+  (check (5)), so the ratio is `< 1/4` iff level one has `τ_p < 1/3`: 23 (`τ = 0.331695`, margin `1.6·10⁻³`), 31 (`τ = 0.3333285`,
+  margin `4.88·10⁻⁶`) — check (2), with controls: Hoffman fails at 11 and 19 and reproduces row 88's 0.2855 and 0.2756; `p ≥ 43`
+  by Weil `|λ| ≤ 2√p` (check (3): `6√p < p + 1` from 34; fails at 31, so 31 needs the exact spectrum).
+
+**(the second equivalence, `L ≥ 5`).** `L(ℚ(√d))` is the least `χ` over the targets its stable places supply: a ramified dyadic place
+gives 2, the inert dyadic one (`d ≡ 3 (8)`, norm 2) gives `U₂ = K₄`, 4; an odd stable place gives `Γ_p` (level one), with `χ(Γ₃) = 3`,
+`χ(Γ₇) = 4` and `χ(Γ_p) ≥ 5` for `p ≥ 11` (11, 19: 5, row 52 and its companions; 23, 31: Hoffman `< 1/4` above; `≥ 43`: Weil). So `L ≥ 5`
+iff none of {a stable dyadic place, a stable place above 3, above 7} exists — the same three conditions. ∎
+
+**Membership read off:** 47, 143, 311 (`= 143 + 168`), 335 (`= 167 + 168`), 167 in the class; 59, 11, 83, 131 out (check (1)). Note
+ℚ(√143) has a *ramified* stable place above 11 (`143 = 11·13`): its ratio rests on FS-66's 11 certificate carried to the ramified tower,
+which the new-level bound above does; ℚ(√311), ℚ(√335) (`= 5·67`) and ℚ(√167) have ramified stable places at 311, 67 and 167 (Weil).
+
+## Differences from the prior derivations' visible outline (for the owner; I have not seen their proofs)
+
+- The product step: I use Zhang's *argument* transcribed to stationary random sets (X25B-PZ), valid for two continuous factors; the
+  outline I saw reads "`1 ≤ 4 max(α(Y′), r_X)`", which names the same inequality but not how it is justified.
+- I find a scope GAP the class statement's wording does not show: a real field with a complex place (X25B-G1). The class statement says
+  "every real field"; the ledger rows speak of real places and split places only.
+- For finite `S` with both `v, v̄ ∈ S`, I did not re-derive the pair factor's ratio 0 (C14.2 (c)); it is an input here.
+
+## Theorems this phase proved
+
+- **X25B-P** — Zhang's Prop. 1.7 for stationary random a.e.-independent sets in an LCA Cayley graph. [hand; one mind] §Stage 2.
+- **X25B-PZ** — the stationary ratio of a categorical product of two LCA Cayley graphs is at most the larger factor's (Zhang 2012 §2's
+  argument, measure form). [hand; one mind; the finite case is `[Zhang2012]` Thm 1.8's ratio half] §Stage 2.
+- **X25B-L1** — a profinite factor's stationary ratio in a product is at most the supremum over its finite levels (fibre shares above
+  `1/2` form an a.e.-independent set). [hand; one mind] §Stage 2.
+- **X25B-W** — `U` is dense in every finite product of local circles (Cayley parametrisation and weak approximation in `F`). [hand;
+  standard] §Stage 2.
+- **X25B-T** — TCA-cls at `S = ∅` over every totally real field in the class; for finite `S` given C14.2 (c) at pair factors. [hand; one
+  mind, blind to the prior proofs but not to their outline (fence log item 1); over R88-TC-ext's statement, `[AmbrusEtAl2023]`, Weil,
+  G54's scaling] §Stage 2.
+- **X25B-G1** — the step TCA-cls's "every real field" needs beyond totally real fields: the ratio of `Cay(ℂ², {(a, a⁻¹)})`. [GAP, named]
+- **X25B-T1** — FS100-T1, all three equivalences. [hand + tools exact (`tools/x25b_t1_check.py`, two plants fired); over FS-66's
+  certificates (11 re-checked CERTIFIED), row 75's `α(UD(ℤ/49,2)) = 686`, `χ(Γ₇) = 4`, `χ(Γ₁₁) = χ(Γ₁₉) = 5`, Weil] §Stage 3.
+- **X25B-LP** — the new-level bound `|λ| ≤ 2p^{k−1}` at a stable place of a real quadratic field ramified over `ℚ_p` (Lemma P's content in
+  that case), so FS-66's certificates apply there. [hand; one mind; Lemma P's own proof unread] §Stage 3.
+
+## Scores of the sealed priors
+
+- TCA-cls at `S = ∅` (0.80 TRUE as mathematics): TRUE over totally real fields, GAP by scope beyond — consistent. My 0.45 of reaching TRUE
+  with every step derived: reached over totally real fields; the expected GAP (the archimedean product) did not materialise — the
+  stationary Zhang count handles it; a different GAP (complex places) appeared.
+- Finite `S` (0.75): TRUE given one input — not derived in full.
+- T1 (0.85): TRUE. The ramified place above 11 at ℚ(√143) was the risk named; it closes by the new-level bound.
+
+## Proposed edits (for the front-page lane; I edit none of these files)
+
+- `LEDGER.md` row 113 / row 117 grade lines: "the class form — a second derivation, X25B, blind to the proofs (not to the outline);
+  TRUE over totally real fields, GAP at a complex place (X25B-G1)"; row 117: "T1 re-derived blind by X25B".
+- `plans/R88-derivation.md` R88-TCA: restrict "every real field" to "every totally real field", or name X25B-G1 as its open step.
+
 ## Would-have-searched-here log
 
 - Stage 2: none. Every step is a hand derivation; no enumeration was run or wanted.
+- Stage 3: none. The residue-class check is a complete enumeration of `ℤ/168` fixed by the derivation (at the ban's edge, logged as such); the spectra at 11–31 are four fixed sums, not a search.

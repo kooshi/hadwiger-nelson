@@ -1,0 +1,8 @@
+(1) classes mod 168: [47, 143, 167]
+    members 47,143,311,335,167 in; 59,11,83,131,23,71 out: OK
+(2) p=11: tau=0.399646232  tau-1/3=+6.631e-02  Hoffman ratio=0.285534
+(2) p=19: tau=0.380486432  tau-1/3=+4.715e-02  Hoffman ratio=0.275618
+(2) p=23: tau=0.331695299  tau-1/3=-1.638e-03  Hoffman ratio=0.249077
+(2) p=31: tau=0.333328453  tau-1/3=-4.880e-06  Hoffman ratio=0.249997
+ASSERTION: (2) FAILED at 31
+exit 1
