@@ -109,3 +109,29 @@ without keys; keys minted in the Rudolph/Johnson/Host row's combined form).
 launch note 3 named only the EF move; the rows say "held in the repository".
 
 **Would have searched here (stage 4):** none.
+
+## Stage 5 — SAVED (`CLAUDE.md`: X09C's 4.2 lines)
+
+Applied by script (the scratchpad's `claude.py`, every replacement asserted unique). **Bytes: 287,240 → 291,645** (no budget during the crunch;
+nothing compressed). Applied: the Last-updated line (FS-100 stage 5 first, "[hand], prior-art gate pending (X24R)"; the 2026-09-25 crunch, the
+in-ban round and FS-75 after it); § The mission (2) (exposed predictions: ℚ(√47) met, the K0 fields met at K0's grade, ℚ(√3,√5) open — its
+"four proven" keeps the original's citation "rows 73–74, G55"; ℚ(√167) "proven 4 in the kernel (row 119) and ≥ 5 at K0's grade (row 121)"; the
+testable range at L = 5 "ℚ(√3,√5) and FS-48's table"); § Publication, the candidate line after "**It has not fired.**" with launch note 2's
+"(pending, X24R)" (the default "It has not fired" stands); items 10, 12, 24, 27; new item 29; the prior-art position's "Not ours" (EF 2010, EL
+Thm 1.2); Paths forward (FS-84 answered and re-aimed per the owner's ruling — launch note 4 — with the re-aim's text in rank 4's row and a
+pointer in "Open milestones", which removed the one new duplicate run `--dupes` found; "Closed most recently" leads with FS-100 stage 5; rows
+1 FS-59, 3 FS-100, 4 FS-84, 8 FS-98, 12 FS-64, 13 FS-97); G48's proved range; G50's instance; G57's and G60's *Do* lines; G72's count (twelve of
+thirteen) and its thirteenth record; G76's reading demoted in MR's form (the claim kept, its refutation recorded, per the header's demotion rule)
+and its *Do*; G79's record; **G80** minted after G79; "G1–G80"; the ledger pointer "Rows 1–122".
+
+**Reviewed ALLOW lines** (added to `tools/claude_md_fact_audit.py`'s ALLOW table, in the J44/J55 precedent's form — the brief's gate names
+ALLOW lines, though the tool is not in its touch list; named here for the owner): `"G1–G79"` (the stable-identifier range, extended to G1–G80
+when G80 was minted) and `"1–119"` (the ledger pointer's range, extended to 1–122; the 1–115 precedent).
+
+**Gates:** `claude_md_fact_audit.py --base 447741b5` **exit 0, AUDIT PASSED** (LOST 0 in every class after the two allowances; dangling
+pointers none; 80 grokkings). `--dupes`: **7** runs, 492 bytes (the launch baseline).
+
+**Left (no draft, or beyond the drafts):** G48's *Falsifiers* sentence still reads "next the L = 5 fields where four is proven, ℚ(√47) first
+(FS-84; FS-81 priced it)" — stale since row 121, not drafted; the owner's call whether to rewrite it.
+
+**Would have searched here (stage 5):** none.

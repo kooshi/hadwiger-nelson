@@ -59,6 +59,9 @@ NORMALISE: list[tuple[str, str, str]] = [
 
 # token -> reason it may vanish. Keep this small and reviewed.
 ALLOW: dict[str, str] = {
+    # X10F, the front page of FS-100 stage 5 (the ×2×3 crunch, 2026-09-26; X10F's record, data/fs100/x10f-record.md).
+    "G1–G79": "the stable-identifier range, extended to G1–G80 when G80 (infinite rank is the resource) was minted at FS-100 stage 5's front page",
+    "1–119": "the ledger's row range in § The novel-results ledger's pointer, extended to 1–122 at FS-100 stage 5's close (the 1–115 precedent)",
     # J55, the front page of FS-100's in-ban round and FS-75's minimal instance (2026-09-26; the owner's rulings, J55's record).
     "7051": "the vacuity gate's declaration count, 7051 -> 7279 at FS-75's close (the owner's re-run, build/gate/vacuity/20260926T053434Z-866933.log)",
     "declarations=7051": "the same count, as the gate report prints it",
