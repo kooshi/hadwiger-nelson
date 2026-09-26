@@ -9,6 +9,19 @@ stage 3 is committed. Claims: `data/fs103/claims-f2.md` (statements only). Brief
 
 | id | statement (one line) | grade | where |
 |---|---|---|---|
+| B-D3 | for an `R ⋊ U`-invariant random independent set, with `g = E[1_I \| 𝒜_∅]`: `E[g(0)g(u)] = −∫_{R̂∖E} Re χ(1) dσ` for every `u ∈ U` (per class; R-U used) | [hand] | §2.1 D3 |
+| B-D4 | either `σ\|_{R̂∖E}` is an SP witness, or `J = {g > 0}` is an `𝒜_∅`-measurable invariant independent set of density `≥ δ` | [hand] | §2.1 D4–D5 |
+| B-D6 | a `{0,1}`-process on `R` with spectrum on `T + A` extends to a `G_∅`-stationary CP process proper at every fixed edge of `T_∅`; `T_∅` is the full product (the norm-one torus of `F(i)/F` is rational) | [hand] | §2.1 D6 |
+| B-FRAC | FS103-F-FRAC: given MR(F), `R_F = O′`: every `R ⋊ U`-invariant random independent set has density `≤ ρ(F)`; unconditionally `> ρ(F)` ⟹ SP witness | [hand; one mind blind + held C14.1–C14.3, J45-N1/N2, R-U] | §2.1 |
+| B-AMEN | `α₁(F²) = α_inv(F²)` for every real number field (no MR); `α_inv(F²) ≥ ρ(F)` (pullbacks; no MR) | [hand] | §2.1 "The equalities" |
+| B-TJ | FS103-F-TJ, both clauses, with `ϑ = λ*/(1 + λ*)` | [hand] | §2.2 |
+| B-ROUND | FS103-F-ROUND: the route gives `χ ≥ ⌈1/ρ⌉ ≤ 5`, `1/ρ ≤ 4.35987…` | [hand] | §2.3 |
+| B-635 | ℚ(√635087): `635087` prime, `≡ 15 (mod 16)` (dyadic place not stable); stable places below 2000 = 159, smallest `q = 103`, ramified 635087 stable (`L/F` inert); every stable place has `r_v ≤ 0.163300 < 0.22936` | [tools exact (PARI), two routes agreeing; plants fire] | §3.1, `tools/fs103_b_places.py`, `data/fs103/fs103-b/places*.out` |
+| B-31 | level-one Hoffman ratio of `Γ₃₁` = `0.249997254763781` (`1/4 − 2.74524·10⁻⁶`), `1/ratio = 4.0000439243` | [tools, 50-digit float, margin `10⁻¹¹`] | §3.3, same tool |
+| B-DV | FS103-F-DV: given MR(ℚ(√635087)), `α₁(ℝ²) = m₁(ℝ²)`, `f(n)/n → m₁(ℝ²)`, `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁(ℝ²)` | [hand + tools exact] | §3.2 |
+| B-CHIF | `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` (whole-plane, finitely many sets): open regularisation of a 1-avoiding set, then a finite grid of translates | [hand; one mind; likely folklore, MRVZ state only `1/δ_Croft`] | §3.2 (v) |
+| B-TF | FS103-F-TF, given MR(ℚ(√635087)) | [hand] | §3.4 |
+| B-47 | FS103-F-47, given MR(ℚ(√47)) | [hand + tools] | §3.3 |
 
 ## Stage 1 — SAVED (quotation check; controls written before deriving)
 
@@ -156,3 +169,78 @@ every field, so this route never gives six".
 ### 2.4 Would-have-searched-here log (stage 2)
 
 - None: every step is a derivation or a held lemma read by statement and proof.
+
+## Stage 3 — SAVED (DV, TF, 47, each link on its own; committed before opening anything fenced)
+
+**Verdicts.** **FS103-F-DV: TRUE given MR(ℚ(√635087))** [hand + tools exact; one mind blind]. **FS103-F-TF: TRUE given MR(ℚ(√635087))** [hand].
+**FS103-F-47: TRUE given MR(ℚ(√47))** [hand + tools]. No GAP found. MR at both fields is row 120's (in its scope: neither has a stable dyadic
+place, so no ramified one), which is where every one of these rests; nothing here re-proves or strengthens MR.
+
+### 3.1 The place list of ℚ(√635087) (`tools/fs103_b_places.py`, `data/fs103/fs103-b/places.out`, exit 0)
+
+- `635087` is prime; `635087 ≡ 7 (mod 8)`, `≡ 15 (mod 16)`, so `−635087 ≡ 1 (mod 8)` is a 2-adic square and `F_v = ℚ₂(√635087) = ℚ₂(i)` at the one
+  (ramified) dyadic place: **not stable**, so `R = O′` is not in doubt and MR's scope holds.
+- Stable places by two routes (A: `p ≡ 3 (mod 4)` with odd residue degree; B: PARI `idealprimedec` over `F` and over the absolute field of `L`,
+  a place stable iff one prime of `L` lies over it), agreeing at every prime below 2000: 159 stable places, smallest residue field `𝔽₁₀₃`
+  (103, 107, 127, 163, 191, 211, 239, 263, 271, 311, …, each split, two places), and the ramified `635087` (`L/F` inert there: PARI gives one prime
+  of `L` with `f = 2`). No stable place lies above `p < 103`.
+- Every stable place: `λ*_v ≤ 2√q/(q + 1)` (Weil at level one, I-WEIL; X26B-L1's `2/(q + 1)` above it), so `r_v ≤ λ*/(1 + λ*) ≤ 0.163300` (at
+  `q = 103`) `< 0.22936 ≤ m₁(ℝ²)`; above 2000, `< 0.0428`. **So `ρ(ℚ(√635087)) = m₁(ℝ²)`.**
+- Plants: `PLANT=1` flips route A's rule to `p ≡ 1 (mod 4)` — 292 disagreements, first at `p = 17` (route B: split in `L/F`), exit 1;
+  `PLANT=2` substitutes `d = 635083` — "not prime", exit 1. Each fires for its own reason (`places-plant1.out`, `places-plant2.out`).
+
+### 3.2 DV, link by link
+
+- **(i) FRAC at ℚ(√635087):** `α_inv(F²) ≤ ρ(F) = m₁` given MR (stage 2). *The object and `m₁`* (the brief's first bullet): the object is a
+  `G_∅`-stationary `{0,1}`-process continuous in probability (D6), with a jointly measurable version (Doob); a.s. its sample is an edge-null
+  measurable subset of `G_∅ = ℂ² × ∏ O_{L_w}` (two real places: `UD(ℝ²) × UD(ℝ²)`, ratio `m₁` by C14.3); its density points are independent at
+  every pair (D7), and the everywhere-1-avoiding sets are exactly those in `[DuczVarga2026]`'s definition of `m₁(ℝ²)`. Stationarity then gives
+  `P(0 ∈ J̃) ≤` the window ratio. No weaker notion (a.e.-avoiding, Borel, CP) enters the value: they all have sup density `m₁` (density points).
+- **(ii) `α₁(F²) ≤ α_inv(F²)`** (B-AMEN, Følner in `R` then Markov–Kakutani in `U`; no MR). So `α₁(F²) ≤ m₁`.
+- **(iii) `α₁(ℝ²) ≤ α₁(F²)`**: an infimum over a larger family.
+- **(iv) `m₁(ℝ²) ≤ α₁(ℝ²)`**: `[DuczVarga2026]` Claim 1 ("For any unit-distance graph G, m1 (R2 ) ≤ 1/χf (G)"), and directly: a periodic
+  1-avoiding set of density `d` (C14.2 (a)'s periodisation, `d → m₁`) under a uniform translation meets a finite `G` in `d|G|` points on average.
+  **So `α₁(ℝ²) = m₁(ℝ²)`.**
+- **(v) `f(n)/n → α₁(ℝ²)`**: `f(n)/n ≥ α₁(ℝ²)`, and `f(a + b) ≤ f(a) + f(b)` (two configurations placed far apart), so by Fekete
+  `lim f(n)/n = inf_n f(n)/n = α₁(ℝ²)`. **This is `[DuczVarga2026]` Conjecture 1's first clause in its own words: "f (n)/n = m1 (R2 ) + o(1)".**
+  Its second clause, "m1 (R2 ) = δCroft", is untouched.
+- **(vi) `χ_f,0(ℝ²) = χ_f(ℝ²) = 1/m₁`**: `χ_f,0 = 1/α₁` is `[MatolcsiEtAl2025]` Theorem 2 (read, proof checked: the discrete-cube averaging);
+  `χ_f,0 ≤ χ_f` is theirs; the upper bound `χ_f(ℝ²) ≤ 1/m₁(ℝ²)` for the **whole-plane** number (MRVZ: "it is not known whether equality holds",
+  and they state only `≤ 1/δCroft`) is B-CHIF: for a periodic 1-avoiding `A′` of density `d`, `A_r = {x : |A′ ∩ B(x, r)| > (1 − η)|B(x, r)|}`
+  (`η < 1/2`) is open and 1-avoiding (translate `B(x, r)` onto `B(y, r)` by `y − x`), of density `→ d` as `r → 0`; an inner finite union of
+  squares keeps it; a fine finite grid of translates covers every point with fraction `≥ d − ε`, uniformly. So all three equal `1/m₁ ≥
+  1/0.246989 = 4.048763…`. **The equality `χ_f,0(ℝ²) = χ_f(ℝ²)` — a question MRVZ state as unknown — is part of this conditional too**, a second
+  published question the claim answers (given MR); worth its own line at the close.
+- **Wrong-reason audit** (the flattering outcome): (a) *does the chain use `m₁ < 1/4` anywhere as a threshold?* No — D8 uses `max`; the K control
+  (`ρ = 1/4` exactly) would expose a threshold. (b) *Could `ρ(F)` undercount?* Only by a place or a product structure missed: the place list is
+  exact to 2000 and Weil above; `T_∅` is the full product (D6). (c) *Could the per-class selection lose the class?* `P(0 ∈ J) ≥ E[g(0)] = δ`
+  exactly. (d) *Is `m₁` the right real-place number?* Yes (D7). (e) The conclusion is conditional on MR at a degree-2 field, which row 120 holds
+  at [hand] with EL2021 Thm 1.2 by statement; any flaw in MR is the flaw here.
+
+### 3.3 FS103-F-47
+
+ℚ(√47): dyadic place not stable (`−47 ≡ 1 (mod 8)`); 3, 7 inert; stable places below 60: 11, 19, 23, 31, 43 (split), 47 (ramified). Held
+all-levels bounds: 11 — FS-66 `B₁ = 28.204320`, ratio `0.23309`; 19 — FS-66 `77.511742`, `0.21471`; 23 — level-one Hoffman `0.249077` (the tool;
+all levels, since new characters are `≥ −2/24`), or row 75's `97.984637/529 = 0.18523`; **31 — level-one Hoffman `0.249997254763781 = 1/4 −
+2.74524·10⁻⁶`** (new levels `≥ −2/32`, so all levels); 43 — `0.21376`; 47 — `0.21113` (level one; X26B-L1 above, any base ramification); `q ≥ 59`
+— Weil `≤ 0.2038`; real places `m₁ ≤ 0.246989`. So `ρ(ℚ(√47)) ≤ 1/4 − 2.74524·10⁻⁶` and **31 binds** among held bounds (the true `α(Γ₃₁)` ratio is
+likely lower; no certificate is held). Given MR(ℚ(√47)): `α₁(ℚ(√47)²) = ρ ≤ 1/4 − 2.745·10⁻⁶`, so `χ_f(ℚ(√47)²) = 1/ρ ≥ 4.0000439243 >
+4.0000439`, and some finite `G ⊂ ℚ(√47)²` has `χ_f(G) ≥ |G|/α(G) ≥ 4.0000439`; `√3 ∉ ℚ(√47)`, so `G` has no unit triangle (G57, `[Krebs2022]` Lemma
+5.1). **TRUE** [hand + tools].
+
+### 3.4 FS103-F-TF
+
+`√3 ∉ ℚ(√635087)` (`3·635087` is not a square: 635087 is a prime other than 3), so every finite unit-distance graph in `ℚ(√635087)²` is
+triangle-free; with 3.2 (ii) and `ρ = m₁`, for every `ε` some such graph has `α(G)/|G| ≤ m₁ + ε ≤ 0.246989 + ε`. **TRUE** given MR [hand].
+
+### 3.5 Reading record (G50; proposed `BIBLIOGRAPHY.md` status lines)
+
+- `[DuczVarga2026]` (held, `library/pdf/arXiv-2606.28157-ducz-varga-independence-ratio-below-quarter.pdf`): §1, §2.1, §2.2 (first paragraph), §3
+  (definitions) read here, 2026-09-26 — Conjecture 1 quoted verbatim in 1.1.
+- `[MatolcsiEtAl2025]` (held): §2 pp. 4–5 (definitions of `χ_f(ℝ²)`, `χ_f,0`, `α₁`, `ρ(ℝ²)`, `m₁`; the chain (14); their conjecture
+  "δCroft = m1 (R2 ) and α1 (R2 ) = 1/4") and §3 Theorem 2 with proof, re-read here. **Note for the close:** MRVZ write `ρ(ℝ²) = 1/α₁(ℝ²)` (the
+  finitary Hall ratio) — a clash with FS103-F's `ρ(F)` (an independence ratio); a write-up should rename one.
+
+### 3.6 Would-have-searched-here log (stage 3)
+
+- None. (The place list is a complete exact enumeration below a bound a derivation fixed, and Weil above it — not a search.)

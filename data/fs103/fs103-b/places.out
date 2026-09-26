@@ -1,0 +1,20 @@
+d = 635087: prime; d mod 8 = 7, d mod 16 = 15
+
+F = Q(sqrt 635087): stable places below 2000 (residue field sizes), ramified place 635087 included
+   [103, 103, 107, 107, 127, 127, 163, 163, 191, 191, 211, 211, 239, 239, 263, 263, 271, 271, 311, 311, 359, 359, 379, 379, 383, 383, 443, 443, 467, 467, 479, 479, 487, 487, 491, 491, 499, 499, 503, 503] ...
+   count = 159; smallest q = 103
+   Weil two-point bound, max over listed places: 0.163299639133; tail (q > 2000) < 0.0427865
+
+F = Q(sqrt 47): stable places below 2000 (residue field sizes), 
+   [11, 11, 19, 19, 23, 23, 31, 31, 43, 43, 47, 67, 67, 107, 107, 127, 127, 139, 139, 151, 151, 163, 163, 167, 167, 179, 179, 199, 199, 211, 211, 223, 223, 227, 227, 311, 311, 359, 359, 367] ...
+   count = 147; smallest q = 11
+   exact level-one Hoffman ratios for q < 60 (all levels: X26B-L1's 2/(q+1) is smaller):
+     q = 11: Hoffman 0.285533745970571  Weil two-point 0.35598995
+     q = 19: Hoffman 0.275617653960489  Weil two-point 0.30356777
+     q = 23: Hoffman 0.249077472586786  Weil two-point 0.28553701
+     q = 31: Hoffman 0.249997254763781  Weil two-point 0.25815213
+     q = 31: 1/4 - Hoffman = 2.74523621914e-6; 1/Hoffman = 4.00004392426184
+     q = 43: Hoffman 0.213755422119371  Weil two-point 0.22962278
+     q = 47: Hoffman 0.211130005323732  Weil two-point 0.22218471
+
+ALL CHECKS PASS
