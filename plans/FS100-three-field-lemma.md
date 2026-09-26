@@ -1157,3 +1157,59 @@ to each other, through (★), given EL2021 Thm 1.2 (external); EF_F⁺ one deriv
 blind to each other); SP-Cor three minds over two-mind inputs; T-C(A) at `S = ∅` two blind; the upper bound row 52, prior art]".
 
 **Would have searched here (stage 1):** none (reading and checking only).
+
+### Stage 1b — SAVED (X12B and X13R folded; the headline ruling applied)
+
+**X12B** (a blind second derivation of EF_F⁺; `plans/FS100-X12B-derivation.md`, report `data/crunch-2026-09-26-x2x3/reports/X12B.md`): **EF_F⁺
+TRUE [hand], blind to X01D.** Its brief's quotation of EF_F⁺ checked here against `plans/FS100-X01D-derivation.md` l. 194–195 (the item X12B
+held, the source being fenced for it): **verbatim match**. **Independence, checked:** its fence list was X01D's and X01V's records, the advisor's
+record and the X01 reports and briefs; its fence log reports none opened. The close inventory (item 24 names X01D's route in one line) was
+**not** on its fence list — a gap in the fence, logged as a slip of the brief — but X12B's route differs from X01D's in exactly the two steps
+item 24 names, which is evidence against contamination: (i) **the Diophantine step** — X12B divides at once, `ℓ = λ/(q₁ − q₂)`, bounds
+`|q₁ − q₂|_v` below at every place (`q₁ − q₂ = N/(c₁c₂)`, `0 ≠ N ∈ ℤ[i]`) and `ℓ`'s height polynomially, then stabilises `ℓ(X) = ℓ(X²)` by the
+product formula on `ℓ − ℓ′`; X01D cross-multiplies (`z = ℓ₁e₂ − ℓ₂e₁`) and divides only at `v*`; (ii) **the other places** — X12B's Lemma Z
+pushes `μ` along `L + Z_{P⁺} ≅ T × 𝔸_{S∖P⁺}` to the adelic part and reads `ord_w`, whose push-forward is a finite measure on `ℤ ∪ {∞}` invariant
+under `k ↦ k + h` (`u_w = α/ᾱ`, `(α) = w^h`); X01D uses leaves, finite `U`-orbits on `L/Λ` and wandering shells. Common to both: EF Lemmas 3.1–3.2
+transferred, `U_ℚ` as multipliers (every `q` a rotation at every archimedean place), one expanding set of places for `u*`, and `R = O′` for the
+adelic model — the architecture EF's paper and the brief's named hard point both suggest. **The owner's three targets, checked by the close
+(not blind):** step 1 (the Bowen atom is a union of `K_Q`-fibres over a thin box of the finite-dimensional `S`-adic solenoid `X_Q`; the
+lattice-vector-is-zero induction is X01D's Lemma 3.1′ (ii) in another coordinate system) — **valid**; step 5 (`1 = ∏_v|δ|_v ≤
+C′·X^{3b+2a|P⁺|}·X^{−K|P⁺| log ρ}`, false for `K` large; the order of choices in step 6 fixes `K` before `β` before `X′`) — **valid**; Lemma Z's
+`α/ᾱ` (`u_w ū_w = 1`; `ord_w(ᾱ) = 0` because `ᾱ` generates `w̄^h` and `w̄ ≠ w` at a split place; so `ord_w(u_w) = h`) — **valid**. One
+presentational thinness, not a gap: step 4's height bound `H′(ℓ) ≤ C(x̃)X^b` is stated per place; over the finitely many places where the
+multipliers are non-integral it needs the product formula for `q₁ − q₂` (as X01D's table does), which gives the same polynomial bound.
+X12B-E (`μ(E ∖ (T + A)) = 0` for every `U`-invariant finite `μ`) is **a third derivation of R-U** (J45; J46-7 blind), by the valuation argument.
+
+**X13R** (a non-blind reading of X03D §4; `plans/FS100-X13R-check.md`): **X03D-ED2 VALID, X03D-Z VALID** [hand], step by step; the "one classical
+input" named exactly (lattice-point counts of Gaussian integers in residue classes, Möbius for primitivity, Hilbert 90, CRT) and checked at
+`N = 100,000`; X03D-Z's unwritten measurability line supplied (Lusin–Souslin in the `S`-adic model). Corrections owed (wording) and three
+tool-defect items for `tools/x03d_weyl.py` (inventory, stage 4). **ED-2 and X03D-Z: [hand; one derivation (X03D) + a checking reading (X13R, not
+blind)].**
+
+**The headline ruling, applied (1.4's promotion clause fires).** EF_F⁺ is now **[hand; two derivations blind to each other (X01D; X12B), plus
+X01V's checking reading after its withdrawn blind GAP, the advisor's and the close's readings]**. PE-2 is two derivations blind to each other;
+X05V's blind check of SP-Cor passed. **Inventory item 8 is met: `χ(ℚ(√47)²) = 5` may be claimed**, at the grade
+
+> [hand; PE-2 two derivations blind to each other through (★), given EL2021 Thm 1.2 (external, in print; its proof in §§2–9, unread here);
+> EF_F⁺ two derivations blind to each other (X01D, X12B) and a checking reading (X01V); MR a composition, two minds; SP-Cor three minds over
+> inputs each held by two blind minds (N1, N2, R-U, A⁺: J45, J46); T-C(A) at `S = ∅` two blind (J28D, J28V); `χ ≤ 5` row 52 at 11, prior art].
+
+The four-part ruling of 1.4 stands as the rule (a checking reading after a withdrawn blind GAP is not a second mind); the headline passes it on
+X12B, not on X01V. The owner's 06:08 announcement is **confirmed** by the audit; what it must say to Kooshi is the grade above, not "proved in
+the kernel" — X11K's lane is where the kernel starts.
+
+**What the headline answers, found in `CLOSED-QUESTIONS.md` (held for the owner; the file is outside every lane's touch list):**
+- **Moorhouse's question by name** (§1.7, `[Moorhouse2010slides]`: *"What about `χ(ℚ(√47)²)`?"*): **5**.
+- **Soifer's Open Problem 55.1** (§3, `[Soifer2024]` ch. 55, *"Construct a triangle-free 5-chromatic unit-distance graph"*): the **existence**
+  half, **non-constructively** — `√3 ∉ ℚ(√47)`, so its plane has no unit triangles (G57), and de Bruijn–Erdős gives a finite subgraph that is not
+  four-colourable; none is exhibited. "Construct" and 55.2 (smallest order) stay open. FS85-dB4 (row 86) then gives a finite triangle-free
+  unit-distance graph with a four-colour forced pair, again non-constructively.
+- **Exoo–Ismailescu's smallest-subfield question** (§3): a quadratic field needs five, and ℚ(√47) is the first real quadratic one (every
+  `ℚ(√d)` with `d < 47` has `L ≤ 4`, and `χ = L` there, row 99).
+- **The local–global conjecture's cheapest exposed five-clause** (`CLAUDE.md` § The mission, item (2)): met.
+- **The publication rule** (`CLAUDE.md` § Publication, third bullet: "a result that answers a question the literature has independently and
+  repeatedly posed"): Moorhouse (2010) and Soifer (2019) posed it independently; whether it fires, and at what standard of evidence (the chain
+  is hand-graded, resting on an external theorem, and not yet in the kernel), is **Kooshi's call**. A prior-art gate on the value
+  `χ(ℚ(√47)²) = 5` itself is owed before any such claim (G49; the zbMATH author listings of Moorhouse and Soifer, and the Polymath16 threads).
+
+**Would have searched here (stage 1b):** none.
