@@ -28,6 +28,10 @@ baseline itself, except when creating one with `--baseline`.
 
     gate_report.py vacuity <this run's log> <previous run's log, or ''> <baseline file> <CLAUDE.md>
     gate_report.py axioms  <this run's log> <previous run's log, or ''> <CLAUDE.md>
+    gate_report.py header  <this run's log>
+
+`header` prints the vacuity baseline's two counts lines from a scan's saved output, in the form the reader
+above parses; `scripts/vacuity.sh --baseline` writes them, so a regenerated baseline always records its counts.
 """
 from __future__ import annotations
 
@@ -168,7 +172,8 @@ def compare(label: str, recorded: dict, now: dict) -> None:
         say(f"recorded counts in {label}: match ({len(recorded)} of {len(recorded)} compared)")
 
 
-def vacuity(cur_path: str, prev_path: str, baseline: str, claude: str) -> list[str]:
+def accounted(cur_path: str) -> tuple[dict, dict, Counter]:
+    """The scan's run, its counts and its evidence kinds — or `Malformed` if its accounting does not add up."""
     run = read_vacuity(cur_path)
     if run["scanned"] is None or run["totals"] is None:
         raise Malformed("no '=== SCANNED ===' or '=== TOTALS ===' line: the scan did not report its accounting")
@@ -183,7 +188,19 @@ def vacuity(cur_path: str, prev_path: str, baseline: str, claude: str) -> list[s
     m = re.match(r"evidence: (\d+) emptiness proof\(s\), (\d+) colourability witness\(es\)", run["evidence_line"] or "")
     if not m or (int(m.group(1)), int(m.group(2))) != (kinds["EMPTY"], kinds["WITNESS"]):
         raise Malformed(f"EVIDENCE rows {dict(kinds)} disagree with the scan's line {run['evidence_line']!r}")
+    return run, now, kinds
 
+
+def header(cur_path: str) -> list[str]:
+    """The baseline header's counts lines, from this scan — the form `recorded_in_baseline` reads."""
+    _, now, _ = accounted(cur_path)
+    print("#   " + "  ".join(f"{k}={now[k]}" for k in COUNTS[:3]))
+    print("#   " + " ".join(f"{k}={now[k]}" for k in VERDICTS))
+    return []
+
+
+def vacuity(cur_path: str, prev_path: str, baseline: str, claude: str) -> list[str]:
+    run, now, kinds = accounted(cur_path)
     say("scanned: " + "  ".join(f"{k}={now[k]}" for k in ("declarations", "refutations-skipped")))
     say("sites:   " + "  ".join(f"{k}={now[k]}" for k in ("sites", *VERDICTS)))
     say(f"evidence: {kinds['EMPTY']} emptiness proof(s), {kinds['WITNESS']} witness(es)")
@@ -351,12 +368,12 @@ def axioms(cur_path: str, prev_path: str, claude: str) -> list[str]:
 
 
 def main(argv: list[str]) -> int:
-    arity = {"vacuity": 6, "axioms": 5}
+    arity = {"vacuity": 6, "axioms": 5, "header": 3}
     if len(argv) < 2 or argv[1] not in arity or len(argv) != arity[argv[1]]:
         print(__doc__)
         return 2
     try:
-        unreadable = (vacuity if argv[1] == "vacuity" else axioms)(*argv[2:])
+        unreadable = {"vacuity": vacuity, "axioms": axioms, "header": header}[argv[1]](*argv[2:])
     except Malformed as e:
         print(f"==> gate report: the output is not the shape this digest reads — {e}")
         return 2

@@ -138,7 +138,19 @@ PREV="${GATE_PREV}"
 gate_log_complete
 
 # The digest: every count, the recorded counts, the witnessed sites, and what changed since the last run.
-if ! python3 "${REPO}/scripts/gate_report.py" vacuity "${GATE_LOG}" "${PREV}" "${BASELINE}" "${REPO}/CLAUDE.md"; then
+# Its exit status says which failure it is (read here directly, never through a pipe): 2, the scan's output
+# is not the shape the digest reads; 3, the digest is complete but a recorded count could not be read, so
+# the comparison with it did not run (J32, 2026-09-25).
+python3 "${REPO}/scripts/gate_report.py" vacuity "${GATE_LOG}" "${PREV}" "${BASELINE}" "${REPO}/CLAUDE.md"
+DIGEST=$?
+if [[ "${DIGEST}" -eq 3 ]]; then
+  echo "==> vacuity: FAIL — a recorded count could not be read (above), so the comparison with it did not run."
+  echo "    The scan itself is fine and its digest above is complete. The nine counts belong in the baseline's"
+  echo "    header and in CLAUDE.md § The gate; this run's, in the header's form:"
+  python3 "${REPO}/scripts/gate_report.py" header "${GATE_LOG}" | sed 's/^/      /'
+  kept
+  exit 1
+elif [[ "${DIGEST}" -ne 0 ]]; then
   echo "==> vacuity: FAIL — no digest could be built from this run's output (above). The scan's output"
   echo "    format is a contract, and a digest that silently printed less would be this gate failing open."
   kept
@@ -193,12 +205,24 @@ if [[ "${1:-}" == "--baseline" ]]; then
       exit 1
     fi
   fi
+  # The header records this run's nine counts, which every later run's digest compares against; a
+  # baseline written without them made the next run's comparison impossible (J32, 2026-09-25).
+  if ! COUNTS="$(python3 "${REPO}/scripts/gate_report.py" header "${GATE_LOG}")"; then
+    echo "${COUNTS}"
+    echo "==> vacuity: FAIL — --baseline refused: this run's counts could not be read for the new header (above)."
+    kept
+    exit 1
+  fi
   { echo "# Vacuity baseline — every (verdict, declaration) not yet resolved."
     echo "# The gate fails on any UNKNOWN not listed here. This file only ever SHRINKS,"
     echo "# and its target is EMPTY. VACUOUS and STALE can never appear here by construction:"
     echo "# they fail the gate outright, and deliberate emptiness is declared in the"
     echo "# declaration's own docstring (VACUITY DECLARED:) rather than suppressed in this file."
     echo "# Regenerate deliberately: scripts/vacuity.sh --baseline"
+    echo "#"
+    echo "# Counts to hold, because a silent change in them is this gate's own failure mode; written from"
+    echo "# this run's scan, and compared with every later run by scripts/gate_report.py:"
+    printf '%s\n' "${COUNTS}"
     grep -E '^UNKNOWN ' <<< "${RAW}" | sort -u
   } > "${BASELINE}"
   echo "==> vacuity: baseline written ($(grep -cE '^UNKNOWN ' "${BASELINE}") entries, UNKNOWN only)"

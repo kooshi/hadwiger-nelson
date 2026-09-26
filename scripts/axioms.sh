@@ -67,7 +67,17 @@ fi
 # printed from the saved file. The checks below still decide pass or fail; the digest only reports.
 PREV="${GATE_PREV}"
 gate_log_complete
-if ! python3 "${REPO}/scripts/gate_report.py" axioms "${GATE_LOG}" "${PREV}" "${REPO}/CLAUDE.md"; then
+# Its exit status says which failure it is: 2, the audit's output is not the shape the digest reads; 3, the
+# digest is complete but the recorded count could not be read, so the comparison did not run (J32).
+DIGEST=0
+python3 "${REPO}/scripts/gate_report.py" axioms "${GATE_LOG}" "${PREV}" "${REPO}/CLAUDE.md" || DIGEST=$?
+if [[ "${DIGEST}" -eq 3 ]]; then
+  echo "==> axioms: FAIL — the recorded count in CLAUDE.md § Trust ledger could not be read (above), so the"
+  echo "    comparison did not run. The audit itself is fine and its digest above is complete; the section must"
+  echo "    hold the sentence 'current audit reads N clean and M declared purchases' exactly once."
+  echo "    full output: ${GATE_LOG#"${REPO}"/}"
+  exit 1
+elif [[ "${DIGEST}" -ne 0 ]]; then
   echo "==> axioms: FAIL — no digest could be built from this run's output (above); it is saved at"
   echo "    ${GATE_LOG#"${REPO}"/}"
   exit 1

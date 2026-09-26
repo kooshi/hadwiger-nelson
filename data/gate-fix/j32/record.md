@@ -117,3 +117,21 @@ the front-page lane owns those counts. Counts unchanged against the previous com
    happened. A one-line rewording in each would make the wrappers exact.
 3. `tools/claude_md_fact_audit.py` keeps its own copy of the Trust-ledger sentence regex, searched over the whole file; it
    still matches, and nothing here depends on it.
+
+## Stage 5 — SAVED (the owner's ruling on the held item: "yes")
+
+The owner's ruling, verbatim: "have `scripts/vacuity.sh --baseline` write the counts line into the header it regenerates
+(read from the same run, so a regenerated baseline is never count-less), and fix the misleading message at
+`vacuity.sh:141` and `axioms.sh:70` so exit 3 says what it means (a recorded-count problem), not "no digest could be
+built"."
+
+| choice | alternative weighed | why this one | confidence |
+|---|---|---|---|
+| `gate_report.py header <scan log>` prints the two counts lines from the saved scan, after the same accounting checks the digest runs (factored into `accounted()`); `vacuity.sh --baseline` writes them into the regenerated header | extract `key=N` from the scan with `grep`/`sed` in the shell | the writer and the reader share one key list (`COUNTS`) in one file, so they cannot drift apart; a malformed scan is refused by the writer too | high |
+| Both wrappers read the digest's status into `DIGEST` (no pipe) and branch: 3 → "a recorded count could not be read … the scan itself is fine and its digest above is complete", and for vacuity this run's counts in the header's form; any other nonzero → the old "no digest could be built" message | one message covering both | each status says what it means, which is the ruling | high |
+| On exit 3 every mode fails, `--baseline` included; the message prints the counts lines to restore | let `--baseline` proceed past an exit 3 because it is about to rewrite the header | proceeding would pass a run whose `CLAUDE.md` side may be the unreadable one; the printed lines make the repair a paste, so nothing deadlocks | medium — if a count-less baseline is met often, letting `--baseline` proceed when only the baseline's header is unreadable would be the refinement |
+
+Edits made on copies and moved into place after `fuser` showed neither script held open (exit 1) and a `ps` listing
+showed no `vacuity.sh`/`axioms.sh` process. `gate_report.py header` on the fixture scan prints exactly the hand-written
+header's two lines (`#   declarations=7051  refutations-skipped=304  sites=279`, `#   vacuous=0 stale=0 declared=3
+witnessed=17 generic=257 unknown=2`), exit 0.
