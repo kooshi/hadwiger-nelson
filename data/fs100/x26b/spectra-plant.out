@@ -1,0 +1,27 @@
+q=   3 d=   2 lam_min=            -1.0 lam_min/d=          -0.5 Hoffman=  0.333333333333 h<1/4=False |lam|<=2sqrt(q):True trace=0.0
+q=   7 d=   6 lam_min=            -1.0 lam_min/d= -0.1666666667 Hoffman=  0.142857142857 h<1/4=True |lam|<=2sqrt(q):False trace=2.5659e-49
+q=  11 d=  10 lam_min=            -1.0 lam_min/d=          -0.1 Hoffman= 0.0909090909091 h<1/4=True |lam|<=2sqrt(q):False trace=6.8423e-49
+q=  19 d=  18 lam_min=            -1.0 lam_min/d=-0.05555555556 Hoffman= 0.0526315789474 h<1/4=True |lam|<=2sqrt(q):False trace=1.3685e-48
+q=  23 d=  22 lam_min=            -1.0 lam_min/d=-0.04545454545 Hoffman= 0.0434782608696 h<1/4=True |lam|<=2sqrt(q):False trace=6.8423e-49
+q=  27 d=  26 lam_min=            -1.0 lam_min/d=-0.03846153846 Hoffman=  0.037037037037 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+q=  31 d=  30 lam_min=            -1.0 lam_min/d=-0.03333333333 Hoffman= 0.0322580645161 h<1/4=True |lam|<=2sqrt(q):False trace=8.2107e-48
+q=  43 d=  42 lam_min=            -1.0 lam_min/d=-0.02380952381 Hoffman= 0.0232558139535 h<1/4=True |lam|<=2sqrt(q):False trace=5.4738e-48
+q=  47 d=  46 lam_min=            -1.0 lam_min/d=-0.02173913043 Hoffman= 0.0212765957447 h<1/4=True |lam|<=2sqrt(q):False trace=-2.7369e-47
+q=   2 d=   1 lam_min=            -1.0 lam_min/d=          -1.0 Hoffman=             0.5 h<1/4=False |lam|<=2sqrt(q):True trace=0.0
+q=   4 d=   3 lam_min=            -1.0 lam_min/d= -0.3333333333 Hoffman=            0.25 h<1/4=False |lam|<=2sqrt(q):True trace=0.0
+q=   8 d=   7 lam_min=            -1.0 lam_min/d= -0.1428571429 Hoffman=           0.125 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+q=  16 d=  15 lam_min=            -1.0 lam_min/d=-0.06666666667 Hoffman=          0.0625 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+q=  32 d=  31 lam_min=            -1.0 lam_min/d=-0.03225806452 Hoffman=         0.03125 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+q=  64 d=  63 lam_min=            -1.0 lam_min/d=-0.01587301587 Hoffman=        0.015625 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+q= 128 d= 127 lam_min=            -1.0 lam_min/d=-0.007874015748 Hoffman=       0.0078125 h<1/4=True |lam|<=2sqrt(q):False trace=0.0
+CONTROL OK   U_2 = K4: lam_min = -1
+CONTROL FAIL U_32: lam_min = -11 (G54, tight at 4)
+CONTROL FAIL U_64: lam_min = -15 (G56)
+CONTROL FAIL Gamma_31: lam_min + 32/3 = 1.5617e-4 (G54)
+CONTROL FAIL Gamma_7: lam_min/d = -0.5617 (R88)
+CONTROL FAIL Gamma_3 tight at 3: lam_min = -2 = -d/2
+CONTROL OK   every trace = 0
+level 2, ramified e=2, residue F_3: d=12 max|lam_new|/d=0.5 bound=0.5 ok=True lam_min/d(all)=-0.5
+level 2, ramified e=2, residue F_7: d=56 max|lam_new|/d=0.25 bound=0.25 ok=True lam_min/d(all)=-0.561744900929
+level 2, ramified e=2, residue F_2: d=6 max|lam_new|/d=0.333333333333 bound=0.333333 ok=True lam_min/d(all)=-0.333333333333
+FAILED: ['U_32: lam_min = -11 (G54, tight at 4)', 'U_64: lam_min = -15 (G56)', 'Gamma_31: lam_min + 32/3 = 1.5617e-4 (G54)', 'Gamma_7: lam_min/d = -0.5617 (R88)', 'Gamma_3 tight at 3: lam_min = -2 = -d/2']

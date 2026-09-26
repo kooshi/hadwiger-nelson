@@ -1,0 +1,7 @@
+Q=  2: F_4-hyperplanes avoiding mu_(Q+1): 1;  all F_2 codim-2 subspaces avoiding it: 1
+Q=  4: F_4-hyperplanes avoiding mu_(Q+1): 0;  all F_2 codim-2 subspaces avoiding it: 7
+Q=  8: F_4-hyperplanes avoiding mu_(Q+1): 6;  all F_2 codim-2 subspaces avoiding it: 24
+Q= 16: F_4-hyperplanes avoiding mu_(Q+1): 0;  all F_2 codim-2 subspaces avoiding it: 53
+Q= 32: F_4-hyperplanes avoiding mu_(Q+1): 6;  all F_2 codim-2 subspaces avoiding it: not enumerated
+CONTROL (Q=32 F_4-count = 11, G54): False
+FAILED
