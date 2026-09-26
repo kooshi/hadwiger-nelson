@@ -321,3 +321,59 @@ replaced by dropping the `βy` term, which fires; the docstring keeps the record
   (B) as ¬MR(ℚ(√11)), undecided.
 - The places tool enumerates `a` over all of `𝔽_{p²}^×` for `p ≤ 43`: a complete exact enumeration of a set whose extent the derivation
   fixed (norm classes); in, by rule 3's edge clause.
+
+## Stage 3 — SAVED (the comparison)
+
+*Opened after stage 2's commit (e848ad8c): the FS-100 stub §2.3 and §6.1; the poster records — J39 §3.1–§3.3, J38 §3.4, §3.5, §4.7, J37
+§3.3 (b) (the atom paragraph) and its theorems row; the reports J37, J38, J39, J47; a grep of J47's record. No commit body was read.*
+
+### 3.1 Quotation check, completed
+
+The brief's eight claim cells are **byte-identical** to the stub's §6.1 cells (a script compared them cell by cell). The stub's BC-1…BC-8
+cells agree verbatim with the poster records' statements (J39 §3.2 and §3.3 (e)–(f), J38 §3.4, §3.5, §4.7, J37's theorems table). The J39
+notation paragraph and MR(F) match (MR's wording is J38 §3.5 (iii)'s). **The ellipsis in T-J38-2 (iii)** hides: "where **MR(F)** is … (J45:
+MR(F) ⟺ no SP witness). Since `F(R) ≠ 0` gives `X₄ = Pull`, finite, hence T-B1:" — the converse half, which §2.7 supplied from R88-TA1.
+Nothing the claim needs was hidden.
+
+### 3.2 Divergence table
+
+| claim | truth (mine / poster) | route | wording | independent? |
+|---|---|---|---|---|
+| BC-1 | TRUE / TRUE | the same seven steps (SI at `k`, `S = ∅`, R-U, extension, random-threshold MX, diagonal merge; (⟸) by `R → Y`). **One substantive divergence, at J39's step 5:** J39 asserts "`R̂_prof = ∏_{stable w} O_{L_w}`" with no input. It needs **Lemma C** (torsion characters are stable-continuous) and is **false as stated wherever Lemma C′'s exception occurs** — a ramified stable dyadic place with `R̄₂` a proper finite-index subring (J10-T6 names ℚ(√5), ℚ(√17), ℚ(α)); ℚ(√5) is totally real. The theorem survives: `Ĝ` is then an open finite-index subgroup of the product and independent copies on its cosets extend the colouring (my L3). The stub's worry — "if the closure of `U` … is a proper subgroup of the product of circles" — does not arise (weak approximation at every finite set gives the full product of circles); the proper subgroup that can arise is the closure of `R`, the vertex group. Minor: J39's continuity reason "θ′ a.s. misses their values" is not the reason; the bounded density of `θ′` against `E|m_j(x) − m_j(x′)| → 0` is (J39 states that inequality too). J39 extends by Mackey's point realisation, I by limits in probability. | J39's "Weil makes all but finitely many small" needs the two-point bound at higher levels as well (J39's P1 has it) | blind, **same route**; the Lemma C/C′ repair is mine alone |
+| BC-2 | TRUE / TRUE | same (thickness table; CP merge). My interval-arithmetic tool reproduces J39's `0.331695, 0.271869, 0.248626` from independent code | "merging (J21-SL)": the CP merge is the diagonal homomorphism, elementary; SL (a measurable-window lemma) is not needed — harmless | blind, independent tool, same route |
+| BC-3 | TRUE / TRUE | **different last step.** Both get `N₄(ℚ(√167)) = ∅`, so `Y_{F,4} = UD(ℝ²)`. J39 refutes a CP four-colouring of `UD(ℝ²)` by `m₁ ≤ 0.2470` (`[AmbrusEtAl2023]`, external, computer-assisted); I refute it by de Grey's 1581-vertex graph (kernel-checked in this repository) through L4 | the stub's named check "does `m₁` apply to a CP class": **yes** — a jointly measurable version's class is a.s. edge-null, a.e. equal to a 1-avoiding set (R88-TC-reg), and reverse Fatou gives upper density `≥ 1/4` with positive probability; so J39's route closes too | blind; **independent last step**, with the weaker input |
+| BC-4 | TRUE / TRUE | same ((i) a pullback; (ii) MR, BC-1, BC-2, PL) | **the hypothesis "43's all-levels ratio is `< 1/5`" is used by neither proof** — J39's own proof of (ii) never invokes it. The stub's named check "(ii) needs that the 43 hypothesis makes `G₄₃` refuse five in the CP sense" is not borne out: J39 §3.3 (d) J2 shows its role is motivational (with it, PL is D2(a) with its ratio hypothesis met). Correction owed: drop it from T-J39-5 (ii), or state it as context. The corrected statement is stronger: given MR(ℚ(√167)) and PL(23, 43), `χ(ℚ(√167)²) ≥ 6 ⟺ χ_CP(ℝ²) ≥ 6` | blind, same route |
+| BC-5 | TRUE / TRUE | same (autocorrelation / Steinhaus → band → row 98 → Theorem C at `S = ∅`) | the stub's named check "from a measure carried by Pull to `c_t ∈ Pull` a.e.": the measure is the push-forward of Lebesgue measure under `t ↦ c_t`, and Pull is finite, so "carried" is "a.e. `t`" | blind, same route |
+| BC-6 | TRUE / TRUE | same (clopen Pull; T-C on `X′`; an `R ⋊ U`-invariant measure on `X′`, B⁺, R-U, SP-oi; the converse by R88-TA1) | the stub's named check "B⁺ applied to a non-ergodic `ν`": **B⁺ needs no ergodicity** — my L7 and J45's statement both hold for every translation-invariant `μ` | blind, same route |
+| BC-7 | TRUE / TRUE | same (J45-SP-Cor on T-C(A)'s class, T-J38-2's argument on S2) | "every four-colouring of `F²` is a pullback" is per `R`-coset of `F²` (§1.2); J38 does not say so. Both inherit the one-mind class forms of T-C and T-C(A) (R88 grade lines), which the poster's "[hand, one mind]" does not flag | blind, same route |
+| BC-8 | TRUE / TRUE | identical (finite orbit, finite-index stabiliser, `(u − 1)R`, Levitz–Mott) | J37's "Its stabiliser `u ≠ 1`" skips why the stabiliser contains some `u ≠ 1`: `U` is infinite and the stabiliser has finite index | blind, same route |
+
+**Summary.** Eight TRUE against eight TRUE: no difference of truth. Routes coincide everywhere except BC-3's last step (independent, with a
+kernel-checked input in place of an external computer-assisted one). The confirmation is therefore **route-dependent** for BC-1, BC-2,
+BC-4 to BC-8: both minds composed the same permitted lemmas (J45's SI, R-U, SP; R88's T-C, T-C(A); row 98; J21-MX) the same way, and a flaw
+common to those inputs would be common to both. Found by the blind route and absent from the posters: the Lemma C/C′ input at BC-1's step 5
+(and its false-as-stated equality), the redundancy of BC-4 (ii)'s 43 hypothesis, and the ergodicity worry's dissolution.
+
+### 3.3 C0 scored
+
+Every modal outcome was met (all TRUE). Mean probability on the realised outcome: `(0.70 + 0.80 + 0.80 + 0.80 + 0.75 + 0.75 + 0.70 + 0.90)/8
+= 0.775`. C0 followed one mental pass, so it partly measures that pass (G21); the GAP mass it carried on BC-1 (0.20) was placed on exactly the
+step where the divergence sits (the completion vs the stable places), which the pass had flagged.
+
+### 3.4 Corrections owed (proposed; the front-page lane decides)
+
+1. **T-J39-3, step 5** (J39 §3.2): replace "`R̂_prof = ∏_{stable w} O_{L_w}`" by "by Lemma C (FS91-J07-3) the profinite and stable
+   topologies on `R` agree, and by Lemma C′ (FS91-J07-4) `Ĝ = (L⊗ℝ) × R̂_prof` is an open subgroup of finite index of
+   `(L⊗ℝ) × ∏_{stable w} O_{L_w}`, equal to it unless a stable dyadic place is ramified in `L/F` with `R̄₂` proper (e.g. ℚ(√5)); in that
+   case extend by independent copies on the finitely many cosets." Add Lemmas C, C′ to T-J39-3's inputs. The theorem is unchanged.
+2. **T-J39-5 (ii)**: drop "43's all-levels ratio is `< 1/5`" (unused), or move it to a remark on PL's provability.
+3. **T-J39-4**: record the de Grey route beside the `m₁` route — the lower bound "MR(ℚ(√167)) ⟹ `χ ≥ 5`" then rests on no external
+   computer-assisted input; its only numerical input is the 23 margin `1.6·10⁻³` (now computed twice, independently, the second time in
+   rigorous interval arithmetic).
+4. **T-J38-3**: say "on each `R`-coset of `F²`", and flag that outside ℚ(√47) and type (B) it rests on the one-mind class forms of T-C and
+   T-C(A).
+5. **The stub's §6.1 named checks** for BC-4 and BC-6 can be closed as above (the 43 hypothesis is idle; B⁺ needs no ergodicity).
+
+### 3.5 Would-have-searched-here log (stage 3)
+
+- None.
