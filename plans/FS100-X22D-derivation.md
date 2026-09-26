@@ -15,6 +15,9 @@ One mind. A blind verifier, X22V, works on the same claims; no contact.*
 | X22D-RT | given MR, every translation-invariant random four-colouring is rotationally transient (non-Pull rotated windows have upper Banach density 0 in `U`); so Q-μ ⟺ TR-ROT, and T-B1 ⟹ TR-ROT | [hand, one mind] | Stage 2, §2.3 |
 | X22D-EF | for every number field and finite `S`, `H_{E_S}` and `H_E` are `L²` of rotation-invariant factors (`E_S` = the `τ_S`-continuous characters) | [hand, one mind; textbook ingredients] | Stage 2, §2.2 step 1 |
 | X22D-TRM | given MR, every four-colouring of a type-(B) plane outside Pull is rigid-motion-transient (non-Pull windows have upper Banach density 0 in `R ⋊ U`); so row 88 ⟺ "no rigid-motion-transient colouring" | [hand, one mind] | Stage 3, §3.1 |
+| X22D-SEL | SEL-k: given MR(F), for every real number field and every `k ≥ 2`, `F²` is `k`-colourable iff an `R ⋊ U`-invariant random `k`-colouring with spectrum on `E` (hence, by R-U, on `T + A`) exists; no Lemma C′, so row 100's exception is not needed beyond MR's own proof | [hand, one mind] | Stage 4, §4.2 |
+| X22D-FLK2 | X03D-FL-K re-derived (second mind); holds for translation-invariant `μ` over `𝒜_E` and at every `k` (same ratio) | [hand] | Stage 4, §4.1 |
+| X22D-SPC2 | at ℚ(√47): SEL-4 + R-U + T-C(A) at `S = ∅` re-derives J45's SP-Cor (MR ⟹ `χ ≥ 5`) by selection | [hand, one mind; a composition] | Stage 4, §4.2 |
 
 ## Stage 1 — SAVED (the quoted inputs, the quotation check, C0 per claim)
 
