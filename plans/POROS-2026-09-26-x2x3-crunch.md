@@ -435,3 +435,40 @@ hunch: six-at-167-does-not-move
 
 ### Would have searched here (stage 9)
 - None: the ℚ(√3,√5) check was exact Legendre symbols.
+
+## Stage 10 — the queue's §7 (fixed 06:25) reviewed — SAVED
+
+**§7 as fixed:**
+- X21: ℚ(√167) ≥ 5 and the `L ≥ 5` quadratic family. A-4 is J48-N4cor's independent route. B-1 and B-2 put six at ℚ(√167) as a
+  CP / `χ_CP(ℝ²)` question, posed as reductions, which is good.
+- X22: the type-(B) fields. C-1 is Q-μ given MR; C-4 asks about transience through the EF method.
+- X23: beyond quadratic. D-1 is the 4-thick route; D-2 is ℚ(√3,√5).
+- X24R: the prior-art gate.
+- MR is scoped to row 100's exception, a ramified stable dyadic place (X09C's audit), which was the right catch.
+
+**Pushes sent (06:24–06:27):**
+- (1) Add **D-5** (T-C(A) at S=∅ ⟺ `L ≥ 5` for every totally real `F`) and **D-6** (SP-Cor with J45's proofs over every totally real
+  `F` in the class, naming each step that uses degree 2). Their conjunction with MR is the main clause through five. My exact
+  ℚ(√3,√5) check went with it: D-2's only real risk is D-6's archimedean step at `n = 4`.
+- (2) Priorities: X23D to P1, X22V to P2, and X23V before X22V.
+- (3) A C-1 sketch for X22D only. **Corrected by me within minutes:** Hoffman-tightness alone does not give `a = 0`. The load-bearing
+  input is a density bound of `≤ 1/4` on invariant independent sets of the E-factor graph. That bound needs a max-over-factors
+  principle and a genuine archimedean density bound (m₁(ℝ²) ≤ 0.247 and its two-place product), because first moments give only
+  0.287. Retracted while free (G51).
+
+hunch: q-mu-from-mr (C-1)
+  claim: given MR, at ℚ(√59), ℚ(√83), ℚ(√131) every invariant four-colouring is a.s. a pullback from the tight place
+  basis: derived (R-U + FL-K + the density bound)
+  falsifier: an invariant set-valued proper colouring of the E-factor with `E|S| > 1`, i.e. a density above 1/4 at the two-real-place factor
+  registered: 2026-09-26
+  status: open — about 55 % (the archimedean product bound is the risk)
+
+hunch: c4-transience-gap
+  claim: C-4 (no transient four-colouring over ℚ(√59)) returns GAP; the EF method does not reach single non-invariant colourings
+  basis: derived (the tools are statements about invariant measures)
+  falsifier: X22D proving C-4
+  registered: 2026-09-26
+  status: open — about 85 %
+
+### Would have searched here (stage 10)
+- None.
