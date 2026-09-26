@@ -118,3 +118,112 @@ post-ban); FS-90 (Kooshi's grant, a search).
 ### Would have searched here
 
 - None in this stage.
+
+## Stage 3 — the recommendation — SAVED
+
+### 3.1 The two, ranked
+
+1. **FS-100 in-ban (candidate A) — brief J51.**
+   - **The choice:** the three-field lemma's milestone, run as Kooshi asked on 2026-09-25 (*"Write up the portrait of 4 in 47 as a full
+     milestone to be run at some point after the crunch"*, the stub's header): the reframe, with the MR reading room as its prior-art gate;
+     Kronecker selection derived and blind-verified in parallel; MR's two halves graded.
+   - **Alternative weighed:** FS-98's T-B1 (B). Why A wins: T-B1 has stalled at one named step with two minds, and even landed it closes row
+     88 only *given MR*. A's reading decides whether MR is attackable at all, which every one of the three posters waits on.
+   - **Confidence: high** that it is one of the two; **medium** on its landing. The fact that would change it: the planner's §PA finding that
+     Kronecker selection's missing equidistribution step is *itself* the zero-entropy Furstenberg problem. Then stage 4 is a reading room too,
+     and the planner should say so at the plan and re-aim the derivation slot at stage 6 (EI-2 over ℚ(√11)), where colourings exist.
+2. **FS-75's minimal instance, `χ(ℚ(√167)²) ≥ 4` in the kernel (candidate C) — brief J52.**
+   - **The choice:** the three-colour criterion's relation form, T41's 36-vector certificate and the embedding, composed into one kernel
+     theorem at the conjecture's widest-gap field; ℚ(√47)'s tree next if time allows.
+   - **Alternative weighed:** FS-87's targets 2–3 (D), whose rate is known and whose result is finite. Why C wins: J43's count shows no
+     field-level lower bound at either exposed field in the kernel, and C's leaf 1 is reusable for every `Θ₃` certificate the project holds.
+     D advances a result that is already settled by derivation and already had its hardest leaf kernel-checked (the stripe lemma).
+   - **Confidence: medium.** The fact that would change it: the planner's price of leaf 1 (the relation-form criterion) from its first two
+     leaves. Above about three hours of implementer time, run D instead. The J52 brief makes this swap the planner's call, recorded.
+
+**Default:** if Kooshi does nothing, J51 and J52 launch together once J05 (the `CLAUDE.md` compression) has committed, so both planners read
+the compressed file.
+
+**In parallel, not in series.**
+- **At three agents:**
+  - J51 and J52 run beside each other.
+  - Then FS-100's derivation and its blind verifier run beside FS-75's implementer. That is three agents.
+  - Then one close-math job each, or one joint job.
+  - Then one joint front-page pass.
+  - About 45 + 150 + 30 + 30 minutes: it fits four hours with little slack.
+- **At two agents:**
+  - FS-100's blind verifier has to wait for a slot, which adds about an hour.
+  - What gets cut, in order:
+    1. FS-75's ℚ(√47) instance;
+    2. FS-100's stage 5 beyond the reading;
+    3. the second close-math job, merged into the first.
+
+### 3.2 Two cards, written into the planners' briefs
+
+```markdown
+question: is-mr-attackable
+  evidence: `plans/STUB-measure-rigidity-three-fields.md` §3: "The zero-entropy half is open, as for ×2×3"; positive entropy "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)"; §6.3: "Rudolph 1990, A. Johnson 1992, Host 1995, Einsiedler–Lindenstrauss; none held"
+  expected: a one-mind reading that has never met its papers is right about the literature about half the time
+  ask: for the action of the unit-vector group `U` on `R̂`, is the positive-entropy half of MR a theorem in print whose hypotheses hold here, and does the four-colouring constraint force positive entropy?
+  if both yes: MR reduces to a published theorem plus one derived lemma; stage 5 becomes the milestone's main derivation, and five at ℚ(√47) is within reach in-ban
+  if the first yes, the second no: MR is exactly its zero-entropy half; FS-100's MR route is a reading room while ×2×3 stands, and the post-ban plan leads with P1's finite `H`
+  if the first no: the literature does not cover this action (infinite rank, or the solenoid's form); name the hypothesis that fails, which is the next stub
+  answered by: the J51 planner's §PA
+  cost: about 45 minutes of reading inside the planner's time box
+  hunch: first yes, second no
+  falsifier: a derivation that the proper-colouring constraint forces positive entropy of the spectral measure's `U`-action off `E`
+  rank: 1
+
+question: what-does-leaf-1-cost
+  evidence: `plans/STUB-three-colour-criterion-kernel.md`: "The ⟹ direction is the cost, **unpriced** — price it from its first two leaves"; the kernel lane's record: FS-87's target 1 "in 17 minutes against a 4–6 hour price"
+  expected: kernel leaves after an obligation pass close well under their price
+  ask: after the obligation pass, what do the relation-form criterion's first two leaves cost in the kernel?
+  if under about three hours in total: FS-75's minimal instance runs, with ℚ(√47) next
+  if over: FS-87's targets 2–3 run in the kernel slot instead, and leaf 1's price is FS-75's finding
+  answered by: the J52 planner's obligation pass
+  cost: the pass itself, about 20 minutes
+  rank: 2
+```
+
+### 3.3 The expectation scored, and the hunches
+
+- **The expectation (Stage 0) and the recommendation agree:** FS-100 plus a kernel milestone, in parallel. That agreement is the reason to
+  audit it (Bilalić): the first move found holds the eye. I tried for a "no" in three places:
+  - FS-100 lands nothing in four hours. **Answered:** its likely product is a graded reduction ("MR's zero-entropy half is ×2×3-hard here"),
+    which changes the post-ban plan. By Kooshi's rule a no-go counts.
+  - A derivation with better odds and real bearing exists. **Answered:** F, G and H have better or equal odds but no bearing on the
+    conjecture's open predictions.
+  - The kernel slot is depth on solid ground. **Answered:** it is, and it is chosen for that — beside a speculative milestone it is the
+    portfolio's likely landing, and J43's count names the gap it fills.
+- **What the reading changed:**
+  - the cap, from two to three;
+  - the kernel pick, sharpened from "the lane's top" to FS-75's minimal instance, by J43's count and by FS-75's relation form;
+  - FS-100's shape: stage 3 folded into the reframe;
+  - the check at ℚ(√143), ℚ(√311), ℚ(√335) added.
+
+```markdown
+hunch: mr-is-open-measure-rigidity
+  claim: MR(F) as FS-100 states it is at least as hard as a known open measure-rigidity problem (Furstenberg ×2×3 type), unless the stub's hypotheses supply the entropy or rank that the known theorems need
+  basis: prior
+  falsifier: the stub or its stage-2 record shows MR reduced to a published theorem whose hypotheses are met here
+  registered: 2026-09-26
+  status: open (supported, not confirmed, by the stub's J36 F5 reading, one mind with its literature "recalled, not read"; the J51 planner's §PA is the test)
+
+hunch: fs98-not-four-hours
+  claim: FS-98's T-B1 will not land in four hours
+  basis: read (`CLAUDE.md` § Paths forward row 8)
+  falsifier: the stub names a new input since row 111 that closes the step
+  registered: 2026-09-26
+  status: open (the FS-98 stub was not read; not scored)
+
+hunch: leaf-one-is-elementary
+  claim: FS-75's leaf 1 in relation form needs only a height on ℕ^m built along monotone paths, a winding constant in `x`, box averages and Bolzano–Weierstrass in `[1, 2]^m`, with no descent to `Λ` and no function-space compactness
+  basis: derived (my sketch, §1.2; one mind, unchecked)
+  falsifier: the J52 planner's obligation pass finds a step the sketch skips (the square-consistency induction on ℕ^m, or the O(|r|²/N) boundary bound) that costs more than the rest together
+  registered: 2026-09-26
+  status: open
+```
+
+### Would have searched here
+
+- None.
