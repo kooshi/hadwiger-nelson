@@ -198,3 +198,13 @@ would also witness it vacuously; the same missing construction.)
 | V-DC-3 | stage 4 only | — |
 
 C0 against the blind verdicts: the two claims I put at 0.50 split (V-DB-1 GAP, V-DD-1 TRUE); V-DD-2 at 0.35 is GAP, not FALSE.
+
+## Stage 3 — SAVED (the lemma-statement phase: V-DB-1 and V-DD-2)
+
+Read after stage 2's commit (`e0762228`): J27D's "Theorems this phase proved" table only (`plans/FS67-J27D-derivation.md` lines 7–46), not its
+proofs. For the two stalled claims its statements are **the same partial results I reached blind**: its #12 is my §2.5 item 1, its #13 (Lemma W,
+"`D_C(f) = D_C(g) = 3w_C(f,g)` on every arc; a component invariant") is my item 3 (`D_C = 3w₂^c` up to the sign convention), its #14 is my item 4
+(zero class, via TW §3 external), and its #18–#19 are my §2.10 reduction and its 1-walk-regular remark. It records DB-1 and DD-2 as GAP at the
+steps I named. The statements supply no lemma my routes lacked, so a second attempt from them has nothing new to run: **V-DB-1 stays GAP at
+"3-colour the non-zero-winding improper components", V-DD-2 stays GAP at "a regular Hoffman-fat Hedetniemi factor".** Two independent routes
+stalling at one step is evidence the step is the real content, not a proof that it is hard.
