@@ -1,0 +1,60 @@
+# J25 — the final front-page batch, and the crunch's close (record)
+
+*De Bruijn (Opus 5.5), 2026-09-26, crunch job J25, under `data/crunch-2026-09-25/briefs/J25-final-batch-and-crunch-close.md` (template
+`J44-front-page-row88-FS67.md`) and `STANDING-RULES.md`. HEAD at launch: `82dd14f8`. Touch list: the brief's "Rules"; no job record, Poros
+record, verification record or Lean file is touched.*
+
+## Theorems this phase proved
+
+None — a front-page pass and a queue close apply and score; they prove nothing.
+
+## Would have searched here
+
+None — bookkeeping and editing only.
+
+## Stage 1 — SAVED (quotation check; gates at launch; the edit list)
+
+### 1.1 Quotation check (standing rule 5)
+
+| # | in the brief | source | result |
+|---|---|---|---|
+| Q1 | "`m₁(ℝ²) ≤ 0.246989 < 0.2470` [cert + hand]" | `data/crunch-2026-09-25/reports/J49.md` INVENTORY 1: "m₁(ℝ²) ≤ 0.246989 < 0.2470 now [cert + hand]" | verbatim |
+| Q2 | "about 640,000 points" becomes 493,471 distinct points | `plans/FS100-KT1-ambrus-ball.md` §3.3: "§3.2's 'the value of `J₀` at about 640,000 points …' … the covering has **493,471** distinct points (about 646,000 evaluations …)" | agrees |
+| Q3 | "J26-T1's 'not interval-certified' is superseded by J49-T1/T2" | same §3.3: "J26-T1's 'H4 in double precision (… not interval-certified …)' … superseded by J49-T1/T2" | agrees |
+| Q4 | "the *Prior art:* / grade fields of FS86-Cx-C14 and FS86-CL1"; "the R88 entry that cites it" | J49 §3.3: "`plans/FS86-derivation.md` FS86-Cx-C14 and FS86-CL1, `LEDGER.md` § B's C14 line, `plans/R88-derivation.md` line 88" | agrees (R88's entry is the inputs paragraph at line 88) |
+| Q5 | "row 92 and row 112" | J49 §3.3 names row 92; J49's report INVENTORY 4 names "row 112" too | agrees |
+| Q6 | J48 "found BC-1 to BC-8 all TRUE, blind, with no difference of truth" | `reports/J48.md`: "BC-1..BC-8 all TRUE … blind, no difference of truth" | agrees |
+| Q7 | "T-J39-3 step 5 needs Lemma C and is repaired by a finite-index coset extension (the ℚ(√5) exception)"; "T-J39-5 (ii) drops the hypothesis on 43's ratio"; "T-J38-3 says 'per R-coset'" | `plans/FS100-BC-verification.md` §3.4 items 1, 2, 4 | agree; item 4 also asks to flag the one-mind class forms outside ℚ(√47) and type (B) — carried |
+| Q8 | "MR(F) ⟹ χ(F²) ≥ 5 for every totally real F with N₄(F) = ∅" | J48 §2.4, J48-N4cor: "For every totally real `F` with `N₄(F) = ∅` … MR(F) ⟹ `χ(F²) ≥ 5`" | verbatim in substance (J48's words kept in the stub) |
+| Q9 | "Register the prior for MR (X-MR), which no record gives, as 'unregistered: the FS-100 planner registers it at stage 0'" | FS-100 stub §4, X-MR: "**unregistered**: the opening registers one …"; J47's report: "X-MR's prior unregistered anywhere" | agrees; the wording is the brief's |
+| Q10 | FS-59: "the wording from post-close inventory row 42 verbatim" | row 42: "refusing five at ℚ(√167) (χ ≥ 6) needs χ_CP(ℝ²) ≥ 6 modulo MR, PL(23,43), FS-69; FS-59's own χ ≥ 5 waits only on MR (T-J39-4)" | used verbatim |
+| Q11 | FS-96: "J39's R3" | `plans/POROS-2026-09-25-wanted-poster-167.md` line 349: "(i) for existence the places are `{∞, 23, 43}`, modulo SP (the split places drop out, T-J39-1); (ii) GAP-1 does not arise in the CP format; (iii) GAP-2 is PL(23, 43), FS-67's Hedetniemi question in CP form (rows 114–115); (iv) its payoff is T-J39-5" | used verbatim |
+| Q12 | "FS-97 is absorbed into FS-100 (owner ruling on J47's proposal)" | FS-100 stub §9: "This stub proposes that FS-97 be absorbed into FS-100 … Held for the owner" | agrees; the ruling is the brief's |
+| Q13 | post-ban stages: FS-84's own; FS-90 (Y1); FS-64 (Y2); J37's R4 (EI-F); FS-67's PB-2; FS-100's P1 | Y1, Y2: `plans/FS86-row88-rigidity.md` §S.3 table and `plans/FS86-row88-close-inventory.md` rows 52–53 (Y2 is "χ_f(ℚ(√59)²) = 4 by an exact LP", FS-64's row); PB-2: `plans/FS67-tight-products.md` line 640; P1 = J37's R4: FS-100 stub §6.4; FS-84's S2–S4: `plans/FS84-five-colours-47.md` §4.2 | all exist; J37's R4 and FS-100's P1 are **one** stage (the stub: "P1 — J37's R4") — listed once in §8 |
+| Q14 | in-ban work left: FS-100 stages 0, 3, 4 (Kronecker selection, after the crunch per Kooshi), 5 and 6 | FS-100 stub §6 table; handoff §6: "Kronecker selection = FS-100 stage 4, after the crunch" | agrees |
+| Q15 | "`--dupes`: 13 or fewer" | at launch: 13 (below) | agrees |
+
+### 1.2 Gates at launch (HEAD `82dd14f8`; each exit read directly)
+
+| gate | exit | verdict |
+|---|---|---|
+| `tools/claude_md_fact_audit.py --base 82dd14f8` | 0 | AUDIT PASSED (0 failures) |
+| `--dupes` | 0 | 13 repeated runs, 910 bytes |
+| `tools/bib_audit.py` | 0 | every cited work resolves |
+| `tools/fs71_ledger_b_check.py --strict` | 0 | PASS (714 entries, 714 § B rows) |
+| `tools/check_architecture.py` | 0 | PASS |
+
+`CLAUDE.md` at launch: **295,923 bytes** (J44 left 294,994; J47's FS-100 row added the rest).
+
+### 1.3 The edit list
+
+- **Stage 2 — the Ambrus upgrade (A.1):** `LEDGER.md` rows 92, 112 and § B's FS86-Cx-C14 line; `plans/FS86-derivation.md` FS86-Cx-C14 and
+  FS86-CL1 grade brackets; `plans/R88-derivation.md` line 88; `BIBLIOGRAPHY.md` `[AmbrusEtAl2023]`'s role; `plans/PA-ambrus2023-audit.md`'s two
+  corrections. `CLAUDE.md` names no grade for the Ambrus input (it cites the paper only in the prior-art list, for the fractional blow-up):
+  nothing to upgrade there.
+- **Stage 3 — FS-100 and the re-aims (A.2, A.3):** the FS-100 stub (stages 1–2 done, J48's corrections, T-J39-4 on two routes, J48's
+  corollary, X-MR's wording, FS-97 absorbed); FS-59 (row 42 verbatim), FS-96 (J39's R3), FS-97 (banner); `plans/FRONTIER-STUBS.md` and
+  `CLAUDE.md` § Paths forward.
+- **Stage 4 — the inventory and the index (A.4, A.5).**
+- **Stage 5 — the crunch's close (Part B):** the queue's banner, §2 statuses, §8.
+- **Stage 6 — gates, report.**
