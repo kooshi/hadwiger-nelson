@@ -109,3 +109,27 @@ wherever it is used. C1's "Where the 2026-09-26 work on this lives" pointer bloc
 about field planes, FS-76 about `Cay(ℤ^r, S)`); FS-39 — the algebraic `χ(ℝ²) ≥ 5` needs no bridge (a subfield's plane is a subgraph);
 FS-49 and FS-44 — row 123 gives a value, no compulsion; FS-68 — X26B-L2 (the all-levels Hoffman ratio at ramified towers, row 123's
 grade) bears on the ratio, not on `α` exactly, so I left the stub for its own opening rather than stretch the reading.
+
+## Stage 4 — SAVED
+
+`CLAUDE.md`'s paths-forward table (brief item 3's mirror, within the budget). 298,945 → **299,462** bytes (+517; 538 under the 300,000
+budget). No other section touched.
+
+| location | old text (quoted) | new text | row / ruling |
+|---|---|---|---|
+| rank 1 | "\| 1 \| **FS-59 ℚ(√167): five colours** —" | "\| 1 \| **FS-59 ℚ(√167): six colours** —" (the question cell C3a wrote already says five is answered and six is left) | 123, 125 |
+| rank 11, FS-67, bearing | "none; mechanism — G61 (3)'s 11 half now a theorem, its 7 half measured" | "+ ; `PL_∃(23, 43)` is one conjunct of six at ℚ(√167) (row 125)" | 125 |
+| rank 14, FS-96, bearing | "speculative" | "speculative; given MR, exactly whether ℚ(√167)'s plane is five-colourable (row 125)" | 125 |
+| rank 14′ (new) | — | "\| 14′ \| **FS-102 the fallback write-up** — `plans/STUB-writeup-main-clause-five.md` \| rows 120–123 written up at [hand]; the publication rule half fires (§ Publication); `[Johnson2000]`, `[Johnson2006]` first (Kooshi, acquiring) \| none; Kooshi's fallback if the push toward six stalls \|" | owner ruling; § Publication |
+| rank 37, FS-62, bearing | "none" | "none; Kooshi's 2026-09-26 target names its S (§ The mission), so its rank is his call" | Kooshi's target |
+
+**Not mirrored (owed to the owner — outside this job's touch list or the budget):**
+- § Publication still reads "the fallback write-up above has no stub of its own"; it is now FS-102. Replacing that clause with "the fallback
+  write-up above is FS-102" also saves about 20 bytes. (Not the paths-forward table, so not mine to edit.)
+- The "Open milestones" paragraph's "Closed most recently" list does not name FS-84's closure beside the others (its first sentence does).
+- Rank 17 (FS-78), rank 26 (FS-60), rank 27 (FS-47), rank 35 (FS-69) and rank 5 (FS-75)'s new bearings are in `plans/FRONTIER-STUBS.md`
+  and the stubs only; the table's summaries there stay true, so I spent the remaining bytes on none of them.
+
+Gates after stage 4: `claude_md_fact_audit.py --base c4a716b4` **AUDIT PASSED (0 failures)**, exit 0, no ALLOW line added; `--dupes` 10
+repeated runs, identical to the launch base's list; `fs71_ledger_b_check.py --strict` PASS; `bib_audit.py` exit 0; `check_architecture.py`
+PASS.
