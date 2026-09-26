@@ -342,7 +342,7 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
    hyperplanes and of FS38-D2-B's "every colouring pulled back". The *infinite* (field-plane) form is not.
 3. **Closed-set rigidity for multiplicatively invariant sets** exists on tori and solenoids (Furstenberg; Berend, read; Yu 2022; MacVicar
    2023 in ℂ); **nothing lifts it to a shift of colourings** (the four symbolic-dynamics queries return nothing).
-4. **Measure rigidity** (Rudolph 1990, Johnson 1992 — `[Johnson1992]` is in the bibliography under another Johnson? not checked —
+4. **Measure rigidity** (Rudolph 1990, A. Johnson 1992 — not `[Johnson1992]`, which is P. D. Johnson Jr.'s two-colouring paper —
    Host 1995, Einsiedler–Lindenstrauss): not held; the positive-entropy theorems are what T-C′'s remainder would cite, and the zero-entropy
    case is Furstenberg's open measure conjecture — so Q-μ in full may contain an open problem (Poros's FS-86-next claim, carried).
 5. **Soifer 55.1 is open in the plane** as of the 2026 threads; ℝ³ and ℝ⁴ have triangle-free five- and six-chromatic graphs.
