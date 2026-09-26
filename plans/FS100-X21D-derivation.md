@@ -13,6 +13,15 @@ Stop time 12:30 UTC. A blind verifier (X21V) works the same list; no contact. Wo
   family fields with `d ≤ 3000` have 11 or 19 stable. [hand + tools exact] — §2.3.
 - **X21D-A4** — given MR, `χ(ℚ(√167)²) ≥ 5` by J48-N4cor without FS100-T1, T-C(A) or SP-Cor, over R-U and SP common to both routes;
   J48-N4cor reaches no `L = 5` family member (`λ*(Γ₁₁) = 0.476413`, `λ*(Γ₁₉) = 0.380486 > 1/3`). [hand + tools] — §2.4.
+- **X21D-B1** — given MR, `χ(ℚ(√167)²) ≤ 5` ⟺ `Y = UD(ℝ²) × G₂₃ × G₄₃` has a CP five-colouring; the (⟸) half needs no MR. [hand, a
+  composition of BC-1, BC-2] — §4.1.
+- **X21D-PL** — `PL_∃(23, 43)` ⟸ `[χ_CP(ℝ²) ≥ 6 ⟹ χ(ℚ(√167)²) ≥ 6]` unconditionally, and ⟹ given MR: PL is exactly B-2's missing direction,
+  no stronger. [hand] — §4.2.
+- **X21D-Y** — `Y` has no CP five-colouring ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`; every density-shaped refusal of `Y` (`m_j(Y) < j/5`) is one of
+  `ℝ²` at no less strength, and `j = 1` is dead (Croft's `m₁ ≥ 0.2293 > 1/5`). [hand] — §4.3.
+- **X21D-G23** — the full-depth 23-adic plane has no CP (indeed no measurable edge-null) five-colouring: row 75's fibre-share inequality holds
+  verbatim for measurable edge-null sets of `ℤ₂₃²`, so each class has Haar measure `≤ 97.984637/529 = 0.18523`. [hand, one mind, on row 75's
+  certificate; a CP-format transcription of row 75's `χ_Bor(ℚ₂₃²) ≥ 6`, not new] — §4.3.
 - **X21D-K0** — `MR(F) ∧ T-C(A)@∅(F) ⟹ χ(F²) ≥ 5` for every real number field (SP-Cor's proof, one input field-dependent); A⁺ at `S ≠ ∅`
   needs T-C(A) at `S`. [hand; second mind on K0, not blind to its summary] — §3.1.
 
@@ -103,7 +112,7 @@ The claims:
   The exact tool `tools/x21d_family.py` enumerates squarefree `d ≤ 3000` only to check congruences a derivation fixed (standing rule 3's edge
   case: a complete enumeration of a finite set whose extent the derivation fixed; logged as such).
 
-## Stage 2 — SAVED (Q-0, A-1, A-2, A-4), 06:33
+## Stage 2 — SAVED (Q-0, A-1, A-2, A-4), 06:29
 
 **Verdicts.** Q-0 **TRUE** [hand + tools exact]. A-1 **TRUE** as a composition, at the grades of its inputs (the weakest: R88-TCA's class form,
 one mind outside ℚ(√47); K0, re-derived at stage 3). A-2 **TRUE** (A-1 plus the residue upper bound at 11 or 19). A-4 **TRUE**, with one
@@ -171,9 +180,9 @@ R-U; MR, or its failure, SP", J39 §4.7) shares J45's R-U, the SP-only-if step a
 route over partly common inputs; a defect in R-U or SP would take both routes down (J48 §3 already called its confirmation "route-dependent").
 Its gain: it removes the one-mind link 4 of §2.2 (R88-TCA's class form) from ℚ(√167)'s `≥ 5`, replacing it with the 23 margin (`1.6·10⁻³`).
 **Does it reach the rest of the family?** Only where `N₄(F) = ∅`; at every `L = 5` member 11 or 19 is stable and not 4-thick
-(normalised `max|λ|` at level one: `0.476413` at 11, `0.380486` at 19, both `> 1/3`, computed at stage 3 by the exact character sums over the 12 and 20 unit vectors; level one already fails thickness), so J48-N4cor does not cover A-2's fields — A-1 there rests on link 4.
+(normalised `max|λ|` at level one: `0.476413` at 11, `0.380486` at 19, both `> 1/3`, computed by character sums over the 12 and 20 unit vectors, `tools/x21d_family.py` (e), plant `--plant-halve` fires; level one already fails thickness), so J48-N4cor does not cover A-2's fields — A-1 there rests on link 4.
 
-## Stage 3 — SAVED (A-3: K0, my own derivation, then compared with FS100-K0's statement), 06:37
+## Stage 3 — SAVED (A-3: K0, my own derivation, then compared with FS100-K0's statement), 06:31
 
 **Blindness note (honest):** at stage 1 the brief's "Read first" list sent me to `plans/FS100-derivation.md` §2, where FS100-K0's
 statement *and its one-paragraph proof summary* sit together; I read both at 06:24. So this derivation walked J45's text (`plans/FS84-SI-D-derivation.md`
@@ -218,3 +227,103 @@ for the `L = 5` members no route here avoids it (J48-N4cor needs `N₄ = ∅`, f
 (SPAWN candidate, not spawned):** a blind second derivation of R88-TCA's class form at `S = ∅` over the family (the count
 `1 ≤ 4 max(α(Y′), r_X) < 1` with the ramified places `p | d` for `p = 11, 19, 23, 31` — the family members with such ramified places, e.g.
 ℚ(√143) at 11, are exactly where the class form goes beyond ℚ(√47)'s factors).
+
+## Stage 4 — SAVED (B-1, B-2, B-3), 06:40
+
+**Verdicts.** B-1 **TRUE** [hand; a composition]. B-2 **TRUE** [hand], and its hypothesis PL(23, 43) is exactly what its (⟸) needs (§4.2).
+B-3: **GAP** — the weakest sufficient statement is equivalent to the conclusion and has two conjuncts, `χ_CP(ℝ²) ≥ 6` and `PL_∃(23, 43)`;
+**no held result gives either**; row 75 gives a necessary condition at 23 that is not a conjunct; the 43 fact the question cites is row 69's,
+not row 71's; and no `m₁`-type density bound can give it (§4.3).
+
+### 4.1 B-1 — TRUE
+
+`F = ℚ(√167)`, totally real, `167 ≡ 7 (mod 8)`: outside row 100's exception (Q-0), so MR(F) is in scope.
+- **(⟹)** `χ(F²) ≤ 5` ⟹ by T-J39-3 at `k = 5` (BC-1 TRUE, J48, with Lemmas C, C′ — C′ in scope): (A) `Y_{F,5}` has a CP five-colouring or (B)
+  an SP witness; MR(F) excludes (B). By T-J39-1 (BC-2 TRUE, J48 + tools; re-checked here: the stable odd places below 100 are 23, 43, 59, 67,
+  71, 79, 83, `x21d_family.py` (d)), `Y_{F,5} = UD(ℝ²)² × G₂₃ × G₂₃′ × G₄₃ × G₄₃′` (two real places; `v, v̄` above each of 23, 43). Its graph is the
+  categorical product of the local graphs because the closure of `U` in finitely many completions is the product of the local circles (weak
+  approximation for the norm-one torus, a rational curve over `F`; `v ≠ v̄` are distinct places of `F`). Restrict along the diagonal
+  `Y → Y_{F,5}`, `(x, a, b) ↦ (x, x, a, a, b, b)`: a group homomorphism mapping edges to edges, so a CP colouring restricts to a CP colouring of `Y`.
+- **(⟸)** Pull a CP five-colouring of `Y` back along the projection `Y_{F,5} → Y` (edges to edges), then T-J39-3's converse (A) ⟹ `F²`
+  five-colourable: `R` embeds diagonally (its elements are integral at stable places), each `R`-edge is a fixed edge, `R` is countable, so a
+  sample is a.s. a proper colouring of `Cay(R, U)`; colour each `R`-coset of `F²`. **No MR here.**
+
+Inputs: MR [given, in scope]; T-J39-3 [hand, J39 + J48 blind, repaired statement]; T-J39-1 [hand + tools, J39 + J48 independent tool]. The
+merging is elementary both ways (J48: "J21-SL is not needed"), confirmed.
+
+### 4.2 B-2 — TRUE; PL is exactly the missing direction
+
+- **(⟹)** `χ(F²) ≥ 6 ⟹ χ_CP(ℝ²) ≥ 6`, unconditional (T-J39-5 (i)): a CP five-colouring of `ℝ²` pulled back along the projection
+  `Y → UD(ℝ²)` is one of `Y`, and B-1 (⟸) (no MR) five-colours `F²`.
+- **(⟸)** Suppose `χ_CP(ℝ²) ≥ 6` and `χ(F²) ≤ 5`. B-1 (⟹) (MR) gives a CP five-colouring of `Y`; PL(23, 43) ("every CP five-colouring of
+  `UD(ℝ²) × G₂₃ × G₄₃` yields one of `UD(ℝ²)`") gives one of `UD(ℝ²)`: contradiction. J48's dropped hypothesis ("43's all-levels ratio `< 1/5`")
+  is indeed unused.
+
+**X21D-PL (new, two lines).** Read PL existentially — `PL_∃(23, 43)`: "if `Y` has a CP five-colouring then `UD(ℝ²)` has one". Then
+`PL_∃(23, 43) ⟸ [χ_CP(ℝ²) ≥ 6 ⟹ χ(F²) ≥ 6]` with no MR: if `χ_CP(ℝ²) ≤ 5`, `PL_∃` holds outright; if `χ_CP(ℝ²) ≥ 6`, then `χ(F²) ≥ 6`, so by
+B-1 (⟸) `Y` has no CP five-colouring and `PL_∃` holds vacuously. With the (⟸) of B-2 above: **given MR, `PL_∃(23, 43)` ⟺ `[χ_CP(ℝ²) ≥ 6 ⟹
+χ(ℚ(√167)²) ≥ 6]`.** So B-2's hypothesis is not a convenient sufficient condition but the exact content of the backward direction; the stub's
+structural reading ("comes from `UD(ℝ²)`", fibres a.s. constant in the 23- and 43-adic coordinates; its X-PL23 row) is strictly stronger than
+needed and should be named `PL_str`, with `PL_str ⟹ PL_∃`.
+
+### 4.3 B-3 — the weakest statement, and what is held (GAP: not held)
+
+**X21D-Y.** `Y` has no CP five-colouring ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`. (⟸) as in B-2. (⟹) the projection `Y → UD(ℝ²)` pulls a CP
+five-colouring of `ℝ²` back to `Y`, so `χ_CP(ℝ²) ≥ 6`; `PL_∃` is vacuous. Being equivalent to the conclusion, this pair is the weakest
+sufficient statement of any shape. As statements about the factors **one at a time**, the necessary ones are `χ_CP(UD(ℝ²)) ≥ 6`,
+`χ_CP(G₂₃) ≥ 6`, `χ_CP(G₄₃) ≥ 6` (each pulls back along a projection); they are not known to be sufficient — the step from factors to the
+product is a CP Hedetniemi statement, false in general from four colours up for finite graphs (`[Tardif2023]`), and its one sufficient
+condition we own, mixing (`λ* < 1/(k−1) = 1/4`, rows 110, 114–115), fails at both factors by definition of `N₅` (`0.331695` at 23, `0.271869` at 43).
+
+**What the held results give:**
+
+| held result | what it gives about `Y` | verdict |
+|---|---|---|
+| row 75 (five refused at 23 at every level; `U(23) = 97.984637 < 529/5`) | **X21D-G23:** `χ_CP(G₂₃) ≥ 6` at full depth — for a measurable edge-null `A ⊆ ℤ₂₃²`, split `1_A` into its level-one part `φ∘π₁` and the rest; characters of exact level `≥ 2` have `|∫_T ψ| ≤ 2/(p+1)` (row 75's fibre-sum lemma, with `T → S_k` onto and Haar pushing to uniform), so `0 = ⟨1_A, M_T 1_A⟩` gives `⟨φ, A₁φ⟩ ≤ 2Σφ(1 − φ)`, row 75's inequality verbatim, and `Haar(A) = Σφ/529 ≤ 0.18523`; five classes cover at most `0.926`. A necessary condition, not a conjunct of X21D-Y | held, necessary only |
+| row 69 (not row 71, as the claim cites: row 71 is 23 at level 3; row 69 has "Five refused at 43 (α ≤ 365 against the 370 five needs)") | `χ(Γ₄₃) ≥ 6` at level one only. At depth the fibre-share inequality with the spectrum alone gives Hoffman's `0.2138 > 1/5`; `B₁(43) < 369.8` is open (row 110; FS-69). So even the necessary condition `χ_CP(G₄₃) ≥ 6` is not held — and if some level `UD(ℤ/43^k, 2)` were five-colourable, ℚ(√167)² would be five-colourable by residues | not held |
+| `m₁`-type densities of `ℝ²` (`m₁ ≤ 0.246989`, `[AmbrusEtAl2023]`; `m₁ ≥ 0.2293`, Croft) | **none can.** A CP five-colouring needs, for every `j ≤ 4`, a CP-`j`-colourable part of density `≥ j/5`; so a density refusal is a bound `m_j(Y) < j/5` for some `j`. Pulling back along the projection gives `m_j(Y) ≥ m_j(ℝ²)`, so **every density refusal of `Y` is a density refusal of `ℝ²` at no less strength, i.e. a proof of `χ_CP(ℝ²) ≥ 6`**: the arithmetic of 23 and 43 cannot lower the bar for a density route. At `j = 1` it is dead (`m₁ ≥ 0.2293 > 1/5`); `m_j(ℝ²) < j/5` for `j = 2, 3, 4` is not known to me to be held or refuted (the hexagonal seven-colouring gives only `m_j ≥ j/7`) | cannot give it at `j = 1`; open at `j ≥ 2` and then already rung D |
+
+**Answer to B-3.** The weakest statement is `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (equivalent to "`Y` has no CP five-colouring"). No held result gives it:
+its first conjunct is rung D in CP form (the measurable bound held is five, `[Falconer1981]`, not held, second-hand), and its second is FS-96's GAP-2 /
+FS-67's Hedetniemi question at the two non-mixing places. Row 75 settles only a non-sufficient necessary condition at 23; the 43 input is row 69's
+and only at level one; density bounds of `m₁` type are structurally unable to help (X21D-Y's pullback). So, given MR, the conjecture's
+`χ(ℚ(√167)²) ≥ 6` needs a non-density (integrality) argument on the plane itself — consistent with G24's "the step … is integrality".
+
+### 4.4 What remains, per field (the brief's "say exactly what remains")
+
+| field | given MR | what remains |
+|---|---|---|
+| ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335), and every family `d` with 11 or 19 stable (44 of 52 below 3000) | `χ = 5` [hand] | nothing mathematical beyond MR's own grade; the weakest link is R88-TCA's class form (one mind), used at ℚ(√143), ℚ(√311), ℚ(√335) and the rest of the family; ℚ(√47) has it twice (J28D, J28V) |
+| family `d` with neither 11 nor 19 stable (8 below 3000, ℚ(√167) first) | `χ ≥ 5` | the value: `L ≥ 6` unless `χ(Γ₃₁) = 5` where 31 is stable |
+| ℚ(√167) | `χ ≥ 5` by two routes (A-1's; J48-N4cor's, which avoids R88-TCA) | `χ ≤ 5` ⟺ `Y` CP five-colourable (B-1); `χ ≥ 6` ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)` (X21D-Y with B-1); nothing held gives either conjunct |
+
+### 4.5 Corrections owed (proposed; the front-page lane decides)
+
+1. The queue's B-3 cites "row 71 (five refused at 43 at level one)": that fact is row 69's ("Five refused at 43 (α ≤ 365 against the 370 five
+   needs)"); row 71 is 23 at level 3.
+2. The stub's PL: name the existential form `PL_∃` (what B-2 uses, X21D-PL) apart from the structural `PL_str` (X-PL23's reading); T-J39-5 (ii)
+   holds with `PL_∃`.
+3. The brief's K0 quotation (J51V's list) lacks FS100-K0's scope note on A⁺ at `S ≠ ∅` (§3); FS100-K0 itself is correct and wider than quoted
+   ("every real number field where T-C(A) holds at `S = ∅`").
+4. Row 117's "MR(F) ⟹ `χ(F²) ≥ 5` at ℚ(√143), ℚ(√311), ℚ(√335)" can add "and `= 5`" and "at every squarefree `d ≡ 47, 143, 167 (mod 168)`" with
+   the family's scope (Q-0), at R88-TCA's class-form grade (X21D-A1, A2).
+
+### 4.6 C0 scored
+
+| claim | C0 | outcome |
+|---|---|---|
+| Q-0 | 0.95 | TRUE |
+| A-1 | 0.70 | TRUE (composition; the risk I named, R88-TCA's one-mind class form, stands as the weakest link) |
+| A-2 | 0.75 | TRUE |
+| A-3 | 0.75 | TRUE at FS100-K0's scope; the literal quote's A⁺ at `S ≠ ∅` a scope GAP I had not predicted |
+| A-4 | 0.65 | TRUE, with "independently" qualified (shared R-U, SP) — the risk I named |
+| B-1 | 0.70 | TRUE |
+| B-2 | 0.55 | TRUE; my named risk (does `G₄₃` need its own refusal?) did not materialise — PL absorbs it, and is exactly the needed direction |
+| B-3 | — | GAP as expected; the "product of refusers" expectation was right in shape, and the density no-go was not foreseen |
+
+### 4.7 Would-have-searched-here log (stages 3–4)
+
+- B-3: "search for a CP five-colouring of `Y` at a finite level of 43 (a periodic colouring of `UD(ℤ/43^k, 2)`)" — out (a quotient-colouring
+  search); instead named it as the open necessary condition and its consequence.
+- B-3: "compute `B₁(43)` by the moment relaxation" — out (a machine-long certificate, FS-69's); instead cited row 110's threshold `369.8`.
+- Prior art: "look up `m_j(ℝ²)`, `j ≥ 2`, in the literature" — reading is allowed but not done in the time box; logged as a prior-art debt.

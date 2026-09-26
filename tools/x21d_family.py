@@ -9,7 +9,10 @@ Checks, for squarefree d in [2, N]:
       (inert = Legendre symbol -1, by Euler's criterion; p inert in F with p = 3 (mod 4) means F_p contains i: not stable).
   (c) A-2's four fields: 11 is stable (split or ramified in F, residue field F_11) at 47, 143, 311, 335, each in the family.
   (d) Q(sqrt 167): the stable odd places below 100 (p = 3 mod 4, split or ramified), listed.
-Plants (each must make an assertion fail): --plant-dyadic (use d = 3 mod 8 as the dyadic test), --plant-legendre (flip (d/11)).
+  (e) A-4's reach: the level-one mixing constant max|lambda|/deg over non-trivial characters of Gamma_q exceeds 1/3 at q = 11, 19
+      (so a stable 11 or 19 is not 4-thick and J48-N4cor cannot reach an L = 5 family member). Float character sums; the margin is > 0.04.
+Plants (each must make an assertion fail): --plant-dyadic (use d = 3 mod 8 as the dyadic test), --plant-legendre (flip (d/11)),
+--plant-halve (normalise by 2*deg: the thickness assertion (e) must fail).
 Exit 0 = all assertions hold; 1 = an assertion failed (printed).
 """
 import sys
@@ -80,6 +83,15 @@ def main():
     st167 = [p for p in primes if stable_odd(167, p)]
     if st167[:3] != [23, 43, 59]:
         fails.append(f"(d) stable places of Q(sqrt167) below 60: {st167}")
+    import cmath, math
+    for q in (11, 19):
+        circ = [(x, y) for x in range(q) for y in range(q) if (x * x + y * y) % q == 1]
+        norm = len(circ) * (2 if "--plant-halve" in PLANT else 1)
+        lam = max(abs(sum(cmath.exp(2j * math.pi * (a * x + b * y) / q) for x, y in circ).real) / norm
+                  for a in range(q) for b in range(q) if (a, b) != (0, 0))
+        print(f"lambda*(Gamma_{q}) = {lam:.6f} (deg {len(circ)})")
+        if not lam > 1 / 3 + 0.04:
+            fails.append(f"(e) lambda*(Gamma_{q}) = {lam:.6f} not > 1/3")
     l5 = [d for d in fam if stable_odd(d, 11) or stable_odd(d, 19)]
     print(f"family (squarefree d <= {N}): {len(fam)} fields; first 12: {fam[:12]}")
     print(f"with 11 or 19 stable (L = 5): {len(l5)}; first 12: {l5[:12]}")
