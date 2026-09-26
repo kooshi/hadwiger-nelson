@@ -122,3 +122,35 @@ Departures, named:
 exit 0, AUDIT PASSED.
 
 **Would have searched here (stage 4):** none (Croft checked against a held paper, not searched).
+
+## Stage 5 — SAVED (`CLAUDE.md`: X29C's 4.2 lines; two reviewed ALLOW lines)
+
+Applied by script (the scratchpad's `claude5.py`; matching whitespace-insensitive across the file's line wraps, every match asserted unique).
+**Bytes: 291,645 → 295,586** (no budget during the crunch; nothing compressed). Applied: the Last-updated line (wave 3 leads; the waves-1–2
+sentence's "[hand], prior-art gate pending (X24R)" → "[hand]; prior-art gate negative (X24R)"); § The mission (2) (three replacements); items 10,
+18, 22, 24 (TR-ROT "under attack at the close: X27"), 29; the prior-art position's "Not ours" (`[LacaWarren2018]`; Croft's `m₁(ℝ²) ≥ 0.2293`
+with `[Croft1967]`, its row written at stage 4); Open milestones (wave 3 after FS-100 stage 5); the ranked table — FS-59 (rank 1), FS-100 (rank 3),
+**FS-101 new at rank 3′** (X29C: "rank: Kooshi's; default just below FS-100"; 3′ keeps every other rank number stable, as FS-97's row asks),
+FS-98 (rank 8, TR-ROT), FS-48 (rank 16), FS-72 (rank 20), each from X29C 4.6; G48 (proved range; the stale falsifier line, launch note 1);
+G54 (no integrality gap at four colours); G56 (the Do line's exception sentence; X26B's F₂-linear formula; the optional precision at 27 —
+row 70 checked to hold `141` and `146`); G64; G76 (the sentence and the Do's "never write 'row 88 ⟺ Q-tr'"); G79's record; G72's thirteenth
+clause (the count stays twelve of thirteen); G80's killing test; the ledger pointer "Rows 1–125".
+Departures, named:
+- **Item 10:** the draft leaves the 8/3-forcer clause to the front page ("keep it only if the front page wants the kernel-adjacent route named —
+  it is the one route independent of MR"): kept, as "over multiquadratic F ⊇ K with L ≤ 5 also by the chain theorem, given the measured 8/3
+  forcer — the one route independent of MR".
+- **FS-59's row:** the draft drops "J39's T-J39-5", which the fact audit then lists as lost; kept as "(row 125, which makes J39's T-J39-5 exact)".
+- **FS-100's row:** "the in-ban round's results stand (rows 116–118); FS-97 absorbed" and "stage 4′ moot for ℚ(√47)" kept from the current row
+  around the drafted text (current facts the draft does not supersede).
+
+**Reviewed ALLOW lines** (added to `tools/claude_md_fact_audit.py`'s ALLOW table, the X10F precedent):
+- `"1–122"` — the ledger pointer's row range, extended to 1–125 at this close (the 1–119 precedent).
+- `"73–74"` — § The mission (2)'s citation "(open, four proven: rows 73–74, G55)" for ℚ(√3,√5), superseded when five landed there (row 123);
+  rows 73–74 themselves stand in `LEDGER.md`.
+
+**Gates:** `claude_md_fact_audit.py --base 7eb4398c` **exit 0, AUDIT PASSED** (after the two allowances and the T-J39-5 pointer). `--dupes`:
+exit 0, **11 runs, 797 bytes** (7 runs, 492 bytes at launch). The four new runs: the `[Fischer1990]` §1 quotation in row 123's prior art (also
+held elsewhere); X24R's gate description in rows 121 and 123 (both X29C drafts); the milestone cell of rows 123–125; a § B grade cell. All are in
+drafts applied as written; none compressed (the brief: compress nothing).
+
+**Would have searched here (stage 5):** none.
