@@ -345,3 +345,46 @@ bookkeeping at the stable places.
 
 ### Would have searched here (stage 7)
 - None.
+
+## Stage 8 — X01D §3 read against X01V's GAP (owner's update, 06:0x) — SAVED
+
+**Read:** `plans/FS100-X01D-derivation.md` §3.0–§3.8, line by line, against 7.2. No job was messaged.
+
+**The owner's question.** Does X01D's pigeonhole, with `U_ℚ` multipliers and the two-scale product formula, keep the neighbourhood thin at
+the places outside `supp(u)`, with polynomially many multipliers?
+
+**The answer.** No, and it does not need to. That requirement is exactly what the two-scale product formula removes.
+- **Thin at one place only.** X01D thins at one expanding place `v*`. At every split `w ≠ v*` its error table has `|e|_w ≤ m(w)`, which is
+  fat and bounded by the multipliers' heights.
+- **The count.** The pigeonhole needs only `µ(vB) = µ(B)` and `#V_M ≥ c₀M^{1/[F:ℚ]}` (`V_M ⊂ U_ℚ`, primitive Pythagorean triples), so
+  the multipliers are polynomially many.
+- **The product formula.** At two scales, `z = ℓ₁e₂ − ℓ₂e₁ ∈ Λ` has `∏_v|z|_v ≤ (16ε)^{[L:ℚ]}·M^{3−K}·M⁶ < 1/C_Λ` at `K = 16`, so `z = 0`.
+  The fatness off `v*` costs `M⁶` (fixed exponent) against thinness `M^{3−K}` (free exponent).
+- **Where X01V's GAP sits.** It is in its item 2 ("the images are small: fails"), which carries over EF's requirement that the images be
+  small. That requirement belongs to the real-line Diophantine step and is not needed adelically. UZ never arises, because only the fixed
+  `u*`'s entropy is used, so `δ₀(u*)` and `X′` do not move with `M`.
+
+**Checked line by line, and correct as far as I can see:**
+- Lemma 3.1′'s local-injectivity induction. The correction `y′ ∈ Λ` is killed by Lemma PF, using an `ε` chosen from `u*`'s archimedean
+  moduli and its finite support.
+- The pigeonhole constants: `β = α/2K`, `δ^β = M^{−α/2}`.
+- The `z`-bounds, place by place, including `C_Λ` at the stable places.
+- Step 5's division: `|ℓ_j|_{v*} ≥ 4^{−[L:ℚ]/2}M_j^{−2}` by Lemma PF on `ℓ_j`, which gives `|x̃ − t|_{v*} ≤ 2^{[L:ℚ]}M_j^{3−K} → 0`.
+- The leaf disjointness, and the finite `U`-orbits on `L/Λ ≅ ⊕_{stable} L_w/Λ_w`.
+- Step 7's shells. `g = γ/σ(γ)` has `|g|_w ≠ 1`, the masses `ν_t(A_j)` are periodic in `j` with a finite sum, so every `ν_t(A_j)` is 0.
+
+**Two improvements on my 7.2, both correct:**
+- (i) One place `v*` suffices, with a one-sided refinement.
+- (ii) Every `v ∈ U_ℚ ⊂ ℚ(i)` has modulus 1 at **every** archimedean place of `L`, for any real `F`. So the counting and the separation
+  never meet an expanding archimedean multiplier. X01D's EF_F⁺ is stated for **every** real number field (with `v*` archimedean allowed),
+  which makes my 7.3 restriction to totally real `F` unnecessary for EF_F⁺. EF-G (a) stays FALSE off the totally real fields, as X01V
+  found, but EF_F⁺ does not use it.
+
+**My independence.** I am **not** an independent check: X01D's route is my sketch written out. The independent check is X01V's stage 4
+re-read. The question it must answer is whether its item 2 is required once the separation is done by the product formula over all places.
+
+hunch: ef-transfers-modulo-archimedean — **about 80 %**. The route is now written out by X01D, and I have checked it line by line. It
+still waits on a blind confirmation (X01V stage 4).
+
+### Would have searched here (stage 8)
+- None.
