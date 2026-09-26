@@ -175,3 +175,11 @@ The planners J51/J52 should launch after J05 lands (they read `CLAUDE.md`), or b
 **Update ~03:45 — standing authorization:** *"Please carry on with the remaining agents and milestones. […]"* So: on J50's report the **default two milestones run without waiting for his word** (record the choice and its four parts for him read); launch J51/J52 once J05 lands (or beside it if J05 runs long); run each milestone through planner → derivation + blind
 verifier → close-math → front page, **≤ 3 agents at once**. Still his and held for him: contacting outsiders, installs, budget
 raises, force-pushes, anything that breaks the ban (to 2026-10-01). On an unexplained crash: halt, and leave the report here.
+
+**Update ~04:00 — J50 done; the two milestones launched.** Poros recommends (record `plans/POROS-2026-09-26-next-two-milestones.md`):
+(1) **FS-100's in-ban stages** — the reframe with the measure-rigidity literature as §PA, then Kronecker selection derived and blind-verified
+in parallel (planner J51, plan `plans/FS100-three-field-lemma.md`); (2) **FS-75's minimal instance, `χ(ℚ(√167)²) ≥ 4` in the kernel** (planner
+J52, plan `plans/FS75-kernel-167.md`), swapping to FS-87's targets 2–3 if leaf 1 prices over ~3 h. **Owner decision (for Kooshi's):** launched both planners *beside* J05 rather than after it — alternative: wait ~45–60 min for J05's five remaining batches, as my
+earlier default said; why: both briefs handle a mid-compression read, and each planner reads a snapshot copy of `CLAUDE.md` taken at one
+commit, so the only thing waiting bought (a consistent read) is had without the idle hour; confidence high. **Running (3):** J05, J51, J52.
+Next: J51D + J51V (parallel), J52K, as slots free; then each milestone's close-math and front-page jobs.
