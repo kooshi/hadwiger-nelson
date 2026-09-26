@@ -1056,3 +1056,104 @@ among real quadratic fields (`k² ≤ 5` needs a two-colourable factor; those fi
 (a two-line corollary of FS100-X2B).
 
 **Would have searched here (stage 5):** none.
+
+---
+
+## §R-close (stage 5, the ×2×3 crunch) — the close (WORKFLOW step 9, the mathematics half; crunch job X09C, the close planner)
+
+*de Bruijn (Opus 5.5), 2026-09-26, from 11:07 UTC. Brief `data/crunch-2026-09-26-x2x3/briefs/X09C-close-math.md` with its standing rules and the
+owner's launch notes (06:07). Worked from `plans/FS100-x2x3-close-inventory.md` and the six records `plans/FS100-X01D-derivation.md`,
+`plans/FS100-X01V-verification.md`, `plans/FS100-X02D-derivation.md`, `plans/FS100-X02V-verification.md`, `plans/FS100-X03D-derivation.md`,
+`plans/FS100-X05V-verification.md`, with the queue `plans/CRUNCH-2026-09-26-x2x3-queue.md` and the advisor's record
+`plans/POROS-2026-09-26-x2x3-crunch.md`. Late jobs X12B (a blind second derivation of EF_F⁺) and X13R (a non-blind reading of ED-2 and X03D-Z) are
+folded in stage 4b if they report before the stop rule. No subagents; no search.*
+
+### Stage 1 — SAVED (quotation check; reconciliation; the ladder audited link by link; the headline ruling)
+
+**1.0 Quotation check (standing rule 5).** Checked against their sources: EF_F⁺ (X01D §3.0, verbatim below); inventory item 8 ("The headline
+cap [P-5]: "`χ(ℚ(√47)²) = 5`" may be claimed only if X01 and X02 land **and** X05V's blind check of SP-Cor passes. Otherwise the claim is "MR(F)
+given PE-2 and EF_F"."); queue §5 item 2 ("MR(F) lands: EF_F and PE-2 both TRUE, each by two minds, with no GAP"); the claim lists of queue §2
+(copied verbatim by every record, each record's own quotation check logged there); SP-Cor's inputs as X05V §1.2 quotes them from J45 §5.4. The
+brief's "EF_F and PE-2 are each TRUE by two minds" paraphrases item 8's "X01 and X02 land"; the gloss is the one queue §5 item 2 registers, so
+it is used. The owner's grade line (launch note 3) cites "χ ≤ 5 held (row 84)": row 84 holds the lower-side calibration; the upper half's home
+is **row 52** (the finite-plane bound at 11: `47 ≡ 3 ≡ 5² (mod 11)`, so 11 is usable of residue degree one, and `χ(Γ₁₁) = 5`), which
+`CLAUDE.md` item 10 cites as "a proven 4 ≤ χ ≤ 5". Logged as a correction of address, not of substance.
+
+> EF_F⁺ (X01D §3.0, verbatim): "For every real number field `F`: every `U`-invariant finite positive Borel measure `μ` on `R̂` such that
+> `h_μ(u*) = 0` for **one** non-torsion `u* ∈ U` satisfies `μ(R̂ ∖ (T + A)) = 0`. (No ergodicity; one element; the conclusion `T + A ⊆ E`.)"
+
+**1.1 Reconciliation, per claim** (D = derivation, V = verifier; "blind" = fenced from each other's records by brief).
+
+| claim | D's verdict | V's verdict | blind? | divergence and ruling |
+|---|---|---|---|---|
+| EF-G | X01D: (a) FALSE at ℚ(∛2), TRUE for totally real `F`; (b) TRUE | X01V: (a) FALSE at ℚ(∛2) (another `u`), TRUE totally real; (b) TRUE totally real, `#U_N = ∞` otherwise | yes | none of truth; two counterexamples. (b) is TRUE everywhere (an infinite `#U_N` makes the liminf `+∞`); X01V's "degenerate" is wording. Owner ruling (inventory 16): "totally real" where meant |
+| EF_F | X01D: TRUE via EF_F⁺ [one mind] | X01V stage 2 (blind): GAP at EF Lemma 3.2 (UZ); stage 4 (after reading X01D §3): VALID, GAP and X01V-T7 withdrawn | stage 2 yes, stage 4 no | **resolved, no difference of truth**: X01V's stage-2 premise (the multiplier images small at every place) is EF's Euclidean requirement, not the adelic one; the product formula needs only the product small (X01V §4.2 item 1). The close re-read X01D §3.1–3.8 step by step and found no failing line (1.3 below). Grade: 1.4 |
+| EF-MR | X01D: TRUE as an implication; "= 5" needs `χ ≤ 5` (unlisted) | X01V: TRUE as a conditional; the same unlisted input | yes | none; both name the upper bound |
+| EF-X | TRUE (archimedean circle) | TRUE (X01V-T4) | yes | none |
+| HX-1 | X02D: TRUE, elementary (no `R = O′`) | X02V: TRUE (ideals of finite index, FI); X01V's held two-line proof (not passed on, inventory 18) is X02V's | yes | none; three proofs of one line |
+| PE-1 | X02D: FALSE at ℚ(√47) (`Γ = ⟨v, u′⟩`, index-2 subgroup in ℚ(√−47)); PE-1′ TRUE for admissible `Γ` | X02V: FALSE at ℚ(√5) (index-2 subgroup in ℚ(i)), and Thm 1.2's **conclusion** fails there too; TRUE with (★) | yes | none; two counterexamples; admissibility = (★) word for word ("`ℚ(Γ′) = L` for every finite-index `Γ′`"); Lemma W is one construction found twice (`w = z/c(z)`, `(z) = 𝔓ʰ` at a totally split prime) |
+| PE-2 | X02D: TRUE given EL2021 Thm 1.2, via Lemma Γ (Γ-ergodic decomposition on `R̂`, permuted by `U`) and a second route (on `M̂_k`, consistency) | X02V: TRUE given EL2021 Thm 1.2, via `U`-ergodic reduction, `Γ`-ergodic decomposition on each `M̂_j`, uniqueness by Lemma H, consistency up the inverse system | yes | none; **two derivations blind to each other**, different routes, both applying Thm 1.2 only under (★) (checked: X02D §3.1 step 2 "By PE-1′ and E1"; X02V §2.3 step 2 "By PE-1′") |
+| CE-1 | X02D: TRUE only vacuously — its hypothesis (H) is FALSE for every real `F` (a rotation circle at a complex place over a real embedding) | X02V: TRUE, and stronger (`T` for `E`) | yes | **no difference in the implication; ruled for X02D on the hypothesis.** X02V's own strengthened conclusion ("every `U`-invariant `τ` with `τ(T) = 0` is a multiple of `m`") is refuted outright by EF-X's circle measure (atomless, `U`-invariant, carried by `A`, not Haar), so (HF) is false — X02D §4.2 reaches the same consistency check. **Correction owed:** X02V §3.2's "MR(F) … is no harder than that classical open question" is withdrawn: (HF) is not an open question but false, because of the isometric directions |
+| FR-1 | X03D: TRUE | X02V: TRUE | yes | none |
+| ED-1 | X03D: TRUE when `U_N` is finite (all totally real `F`); ill-posed with a complex place | X02V: TRUE totally real; ill-posed otherwise | yes | none |
+| ED-2 | X03D: FALSE, explicit `χ_{P′}` (sparse split primes), limit `∏(1 − 1/p) ≠ 0` [one mind, on one classical input] | none (X13R, a non-blind reading, launched 06:0x) | — | open to X13R; graded one mind here |
+| FL-1 | X03D: GAP (needs `σ̂_E(1) ≥ −(σ_E(R̂)+a)/3`; the spectral route needs `Λ ≤ 1/3`, and `Λ = 0.402759` at the real place over every real field) | X05V: GAP at clause (iii), missing QTCA_{1/3}; `J₀` below `−0.4027 < −1/3` | yes | none; one step, two wordings (X03D-FL-H ≡ X05V-5/6) |
+| FL-2 | X03D: GAP at the same step (FL-1 ⟹ FL-2 TRUE) | X05V: GAP at the same step | yes | none |
+| SP-Cor | (J45's; not re-derived by a D this crunch) | X05V: TRUE, blind re-derivation P0–P8 from lemma statements | yes (fenced from X03D) | none; now three minds (J45; J46-13 from its statement; X05V blind) |
+| KC | X01D §4.2: passes, breaks at T-C(A) at K and ℚ(√11) | X05V: TRUE, with the MR step exercised at `a = 2/21` on J45's F2 | yes | none; one wording fix (KC's "`T + Fin_S` plus Haar" → "`T + A`, or `T` plus Haar for the noisy ones"; X05V §2.2) |
+
+**Divergences open after reconciliation: none of truth.** ED-2 has one mind (X13R pending). Everything else agrees in truth; the differences are
+routes, counterexamples and wording, listed above.
+
+**1.2 The ladder to `χ(ℚ(√47)²) = 5`, link by link** (the owner's launch note 3; audited, not adopted).
+
+| link | statement | inputs it uses (named, none unlisted) | grade |
+|---|---|---|---|
+| L1 PE-2 | every `U`-invariant finite `τ` is `a·m + τ′`, `τ′` of zero entropy for every `u` | EL2021 Thm 1.2 by statement, applied only on `(M̂, Γ)` with `Γ` admissible (★); Lemma W (Chebotarev, class number); Lemma TI (Krull dimension one); ergodic decomposition, Jacobs, entropy of increasing factors, Fourier uniqueness (textbook). **No `R = O′`** (X02D-HX1) | [hand; two derivations blind to each other (X02D, X02V); E1 external, in print — EL2021 §§2–9, where its proof lives, unread] |
+| L2 EF_F⁺ | quoted in 1.0 | the adelic duality `R̂ ≅ W/R^∨` (Tate/Weil; X02V §2.4 Step B re-derives the same duality independently), **`R = O′`** (row 100's Lemma C′: unconditional except possibly at a ramified stable dyadic place — **none at ℚ(√47)**, whose dyadic place is split, `47 ≡ 7 (mod 8)`); Kronecker, the product formula, the class number; SMB + Jacobs + Egorov; Lehmer's count of Pythagorean triples for `#V_M`; Lusin–Souslin | [hand; one derivation (X01D) + non-blind line-by-line readings (X01V stage 4; the advisor, whose sketch it writes out; the close, 1.3)]; X12B pending |
+| L3 MR(F) | `PE-2 ∧ EF_F⁺ ⟹ MR(F)`: `τ = a·m + τ′`, `τ′ ≤ τ` carried by `T + A ⊆ E`, `τ(E) = 0`, so `τ′ = 0` | the non-torsion `(3+4i)/5 ∈ U_ℚ ⊆ U_F`. **MR does not need R-U** (Step 7 of EF_F⁺ re-derives R-U's mechanism internally), nor `m(E) = 0` | [hand; composition, two minds (X01D §4.1; X01V §2.4 and §4.3)] |
+| L4 SP-Cor | MR(ℚ(√47)) ⟹ `χ(ℚ(√47)²) ≥ 5` | P1 an `R ⋊ U`-invariant `μ` (amenability); N1, N2, **R-U** (P4), A⁺ at `S = ∅` (from SI-1, SI-3, SI-4, N2), T-C(A) at `S = ∅` | [hand; three minds: J45; J46-13 (from its statement); X05V blind]. Its inputs: **N1/N2 two blind minds** (J45; J46-1), **R-U two blind minds** (J45; J46-7), **A⁺ two blind minds** (J45; J46-5; re-derived a third time by X05V-2) |
+| L5 T-C(A) at `S = ∅` | R88-TCA at ℚ(√47) | row 112's inputs: FS-66's certificates at 11 and 19, `[AmbrusEtAl2023]`'s `m₁(ℝ²) ≤ 0.246989` (re-checked), the Hoffman table, Lemma P at the ramified 47, C14.2 (c) at `q = 2` for the split dyadic place (three derivations) | [hand; two derivations blind to each other (J28D, J28V); row 113] |
+| L6 `χ ≤ 5` | the plane at 11 | row 52's finite-plane bound (Theorem A's valuation-subring form in the kernel, row 57; the field-level step hand and in print, `[Madore2015]` Prop. 3.2, Cor. 3.4, `[Moorhouse2010]` §8.2) and `χ(Γ₁₁) = 5` (`[Moorhouse2010]` Table 6.1) | [hand + kernel over rings; prior art] |
+
+**No link breaks.** The two things the owner's grade line left out: (i) L2 uses `R = O′`, which holds at ℚ(√47) (and at ℚ(√143), ℚ(√311),
+ℚ(√335), ℚ(√167): all `≡ 7 (mod 8)`, dyadic place split) but is open at row 100's exception fields (ℚ(√5), ℚ(√17), ℚ(α)), so **EF_F⁺ and MR(F)
+"for every real number field" carry that exception** — X02D-LT names the same gap for its lemma; (ii) the inputs X05V called one-mind (R-U,
+N2) are two blind minds (J45 and J46), so inventory item 23's worry is discharged. The weakest link is L2, alone.
+
+**1.3 The close's own reading of L2** (not blind; recorded because the ruling below leans on it). X01D §3.1–3.8, re-derived line by line:
+Lemma PF (product formula, `C_Λ` at the finitely many stable places where `Λ = R^∨` is not integral); Step 0 (an expanding place `v*`, split or
+archimedean, by Kronecker); Lemma 3.1′ (the correction `y′ ∈ Λ` has product `< 1/C_Λ` by the choice of `ε`, so `y′ = 0`; Bowen atoms are
+`s^{−(n−1)}`-thin at `v*`; SMB's non-ergodic limit is the components' entropy, zero a.e. by Jacobs); Step 3 (`μ(vB) = μ(B)`, `#V_M ≥ c₀M^α`,
+`δ^β = M^{−α/2}`, so two images meet; the table's bounds, including `|e|_w ≤ m(w)` at split `w ≠ v*`); Step 4 (`z = ℓ₁e₂ − ℓ₂e₁ ∈ Λ`, bounds
+`(16ε)^{[L:ℚ]}`, `M^{3−K}`, `M⁶`, so `z = 0` at `K = 16`); Step 5 (one division, at `v*`, bounded below by Lemma PF for `ℓ_j` of height `≤ M_j²`;
+one `t` for all scales); Step 6 (disjoint injective leaves; `L/Λ ≅ ⊕_{stable} L_w/Λ_w`, finite `U`-orbits); Step 7 (shells `A_j` periodic under
+`g^k`, summable, so null). **No failing line.** The two places a failure would hide — a pigeonhole pair with `|ℓ|_{v*}` tiny (excluded by Lemma PF)
+and fatness at `w ≠ v*` (paid for polynomially) — are both handled. This reading is the fourth by a mind that had the route in front of it.
+
+**1.4 The headline ruling (inventory item 8), in four parts.**
+- **The choice.** A checking reading that follows a withdrawn blind GAP **does not count as the second mind** item 8 requires. EF_F⁺ is graded
+  **[hand; one derivation (X01D), checked line by line by three readers who had it in front of them (X01V stage 4, the advisor, the close), no
+  failing line; blind second derivation pending (X12B)]**. So at 06:15 item 8 is **not met on its letter**, and the strongest claim the
+  verdicts support is: **"EF_F⁺ ⟹ MR(F) for every real number field `F` with `R = O′` (PE-2 two minds), and ⟹ `χ(ℚ(√47)²) = 5`"** — the headline
+  **conditional on EF_F⁺**, EF_F⁺ at the grade above. **If X12B reports EF_F⁺ TRUE blind, item 8 is met** and the row is drafted unconditional
+  (stage 4 drafts both forms).
+- **The alternative weighed.** Count the checking reading as the second mind: a referee's line-by-line check that also located its own
+  earlier error for a reason the close verified is how ordinary mathematics accepts a proof. It would have bought the unconditional headline
+  now, matching the owner's 06:08 announcement.
+- **Why this one won.** (a) House precedent: row 117 grades a non-blind re-derivation "one mind (J51), re-derived by J51V (not blind)"; rows
+  112–113 reserve "two derivations blind to each other"; FS-89's verifier (G51), which closed from D's lemma *statements*, had less in front of it
+  than X01V, which read the proofs. (b) The rule's authors meant blind: queue §5 item 2 says "each by two minds, with no GAP", the advisor wrote at
+  its stage 8 "It still waits on a blind confirmation", and X01V's own caveat reads "it deserves a blind second derivation before it enters
+  `LEDGER.md` as more than one mind's". (c) G21: the decisive idea (Steps 4–5, the two-scale product formula) has one source, the advisor's
+  sketch; every mind since has read it and none has produced it; it is the result everyone in the crunch wanted. (d) The price is about 35 minutes
+  (X12B reports by 06:50).
+- **Confidence.** High on the grade (the precedent is explicit). On the mathematics, about 0.9 that EF_F⁺ is true. What would change the ruling:
+  X12B's report — TRUE blind promotes the headline to unconditional; a GAP or FALSE at a named step demotes it to the conditional form for good.
+
+**What the owner's 06:08 announcement needs** (held for the owner): the announcement stands as "lands, pending one blind confirmation of
+EF_F⁺ (X12B, 06:50)"; Kooshi should hear the grade in those words. **The ledger row's grade** (either form): "[hand; PE-2 two derivations blind
+to each other, through (★), given EL2021 Thm 1.2 (external); EF_F⁺ one derivation, three checking readings (or, after X12B: two derivations
+blind to each other); SP-Cor three minds over two-mind inputs; T-C(A) at `S = ∅` two blind; the upper bound row 52, prior art]".
+
+**Would have searched here (stage 1):** none (reading and checking only).
