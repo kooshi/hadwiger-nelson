@@ -170,3 +170,44 @@ every `k` and every totally real field and applied, so far, only at ℚ(√167),
   χ_CP(ℝ²) ≤ χ_m(ℝ²)`, and rung D still ⟺ `χ_CP(ℝ²) ≥ 6`, a statement at least as strong as `χ_m ≥ 6`. Either way rung D is the CP form.
 
 ## Stage 2 — SAVED
+
+## Stage 3 — R1's stage 1 read; advice sent
+
+**R1's stage 1** (`plans/RERANK-2026-09-26.md`, `85a8d9fc`) states the same collapse (its F1) and records the two derivations as blind to
+each other: R1 derived and sent it before my message of `75d3c4b2` arrived. My attack (stage 2) held steps 1–3 against the record. R1 ranks
+on FS100-BC's CP format: pairwise almost-sure properness, continuity in probability, no joint measurability. So F1 gives `χ(ℝ²) =
+χ_CP(ℝ²) ≤ χ_m(ℝ²)`, never `χ = χ_m`. Agreed.
+
+**R1's reading of "83 is not 6-thick"** checks out: Hoffman refuses six at `q` iff `|λ_min|/d < 1/5`. Six at 83 needed a certificate
+(row 68), so `λ*(83) ≥ 1/5`.
+
+**A quadratic instance of F1, computed here** (sympy, exact Legendre symbols; a number-theoretic enumeration, not a search for a
+witness). The smallest squarefree `d ≡ 7 (mod 8)` with every prime `p ≡ 3 (mod 4)`, `p ≤ 83`, inert in ℚ(√d) is **`d = 635087`**
+(prime). Its usable primes begin 103, 107, 127, 163, 191, and `2√103/104 = 0.1952 < 1/5` by Weil. `ℚ₂(√d) = ℚ₂(i)`, so the wall is
+broken and `R = O′`. So `N₅ = N₆ = ∅` at degree 2, where MR and T-J39-3 have been exercised; the next four are 823415, 1017623, 1598231
+and 1971119. De Grey's field (degree 16) adds MR's admissibility at degree 16, a sixteen-place merge and its stable-place list, all
+unexercised. Recommended: ℚ(√635087) as F1's checkable instance, de Grey's field as the statement.
+
+**Advice sent to R1** (SendMessage, after `85a8d9fc`):
+1. The quadratic instance above.
+2. FS-63 is not `χ_CP(ℝ²)`'s home: with `N_k = ∅` there are no p-adic factors and no model set. The home is measurable/Borel graph
+   combinatorics, harmonic analysis of distance-avoiding sets and invariant random colourings. F1's prior-art gate should be run in those
+   words.
+3. Make MR's hardening an explicit rank. Its external step and its two-mind steps are the collapse's weakest link. FS-100's leftovers
+   (TR-ROT, C-4) bear none.
+4. Agreed: FS-80 re-aimed to a window LP over stationary colourings is the averaged certificate `χ_CP ≥ 6` needs. It is post-ban unless
+   its shape is derived.
+5. A disagreement to record if R1 makes it: any window stub (FS-57, FS-65, FS-17, FS-69, FS-55) ranked above the `χ_CP` reading.
+
+**Hunch update.**
+
+```
+hunch: the-collapse-composes
+  claim: given MR, χ(ℝ²) = χ(ℚ(√3,√5,√7,√11)²) = χ_CP(ℝ²), from rows 110, 120, 124, 125 and G43 with no new idea
+  basis: read
+  falsifier: a step of T-J39-3's proof that fails with N_k(F) = ∅ over infinitely many thick places at k = 6; or a stable place of F_dG with λ* ≥ 1/5
+  registered: 2026-09-26
+  status: open (a second mind, R1, reached it blind; both attacks held it against the record; not yet verified by a derivation of its own)
+```
+
+## Stage 3 — SAVED
