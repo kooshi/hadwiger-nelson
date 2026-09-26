@@ -1,0 +1,57 @@
+[19:51] ZB 'ab:"zzqxnonsenseword"': 0 hits
+[19:51] ZB 'ab:"upper Banach density" & ab:"invariant measure" & ab:"amenable"': 0 hits
+[19:51] ZB 'ab:"forced periodicity"': 3 hits
+   2023 | Herva, Pyry, Kari, Jarkko | On forced periodicity of perfect colorings | 1526.37018 | summary
+   2025 | Pyry Herva, Jarkko Kari | Periodicity and local complexity of Delone sets | arXiv:2504.20709 | summary
+   2025 | Slunyaev, Alexey V. | Breathers of the nonlinear Schrödinger equation are coherent self-similar solutions | 1564.35240 | summary
+[19:51] ZB 'ab:"upper Banach density" & ab:"invariant"': 9 hits
+   2018 | Di Nasso, Mauro, Jin, Renling | Abstract densities and ideals of sets | 1423.11027 | summary
+   2008 | Pavlov, Ronnie | Some counterexamples in topological dynamics | 1161.37005 | review
+   2017 | Björklund, Michael, Bulinski, Kamil | Twisted patterns in large subsets of \(\mathbb{Z}^N\) | 1377.37014 | summary
+   2025 | Conant, Gabriel | Stable functions and Følner's theorem | 1581.43001 | review
+   2020 | Filipów, Rafał, Tryba, Jacek | Densities for sets of natural numbers vanishing on a given family | 1468.11030 | summary
+[19:51] ZB 'ab:"Banach density" & ab:"invariant measures" & ab:"orbit closure"': 0 hits
+[19:51] ZB 'ab:"correspondence principle" & ab:"amenable" & ab:"upper Banach density"': 2 hits
+   2021 | Bergelson, Vitaly, Moragues, Andreu Ferré | An ergodic correspondence principle, invariant means and applications | 1501.37009 | summary
+   2010 | Beiglböck, Mathias, Bergelson, Vitaly, Fish, Alexander | Sumset phenomenon in countable amenable groups | 1187.43002 | review
+[19:52] ZB 'ab:"measure center" & ab:"Banach density"': 1 hits
+   2015 | Yin, Jiandong, Wu, Weiling, Deng, Zhongshu | Complexities of proper positive upper Banach density recurrent points minimal systems for a semi-flow | 1349.37007 | summary
+[19:52] ZB 'ab:"measure center" & ab:"amenable"': 1 hits
+   2016 | Wang, Lijuan, Zhou, Yunhua | Measure center and minimal contracting center for amenable group actions | 1363.28019 | summary
+[19:52] ZB 'ab:"minimal center of attraction" & ab:"amenable"': 1 hits
+   2017 | Chen, Zhijing, Dai, Xiongping | Chaotic dynamics of minimal center of attraction of discrete amenable group actions | 1385.37038 | summary
+[19:52] ZB 'ab:"frozen" & ab:"coloring"': 13 hits
+   2001 | Culberson, J., Gent, I. | Frozen development in graph coloring | 0983.68145 | summary
+   2009 | Achlioptas, Dimitris, Ricci-Tersenghi, Federico | Random formulas have frozen variables | 1185.68508 | summary
+   2019 | Ayre, Peter, Greenhill, Catherine | Rigid colorings of hypergraphs and contiguity | 1420.05159 | summary
+   2015 | Hayes, Thomas P., Vera, Juan C., Vigoda, Eric | Randomly coloring planar graphs with fewer colors than the maximum degree | 1327.05304 | summary
+   2008 | Achlioptas, D. | Solution clustering in random satisfiability | 1189.82043 | summary
+   2008 | Kratica, Jozef, Kovačević-Vujčić, Vera, Čangalović, Mirjana | Computing strong metric dimension of some special classes of graphs by genetic algorithms | 1199.68546 | review
+[19:52] ZB 'ab:"invariant measures" & ab:"periodic orbits" & ab:"subshift" & ab:"coloring"': 0 hits
+[19:52] ZB 'ab:"proper colorings" & ab:"Z^d" & ab:"invariant measures"': 0 hits
+[19:53] ZB 'ab:"subshift" & ab:"every configuration is periodic"': 0 hits
+[19:53] ZB 'ab:"all configurations are periodic" & ab:"finite"': 1 hits
+   2018 | Guilhem Gamard | On the entropy of coverable subshifts | arXiv:1812.08022 | summary
+[19:53] ZB 'ab:"graph colorings" & ab:"invariant measures" & ab:"periodic"': 0 hits
+[19:53] ZB 'ab:"unit distance graph" & ab:"periodic coloring"': 0 hits
+[19:53] OA 'upper Banach density return times invariant measures orbit closure amenable group': 74 hits
+   1977 | Anatoly Katok, Ya. G. Sinaǐ, A. M. Stëpin | Theory of dynamical systems and general transformation groups with invariant measure | Journal of Mathematical Sciences | https://doi.org/10.1007/bf01223133
+   2008 | Misha Gromov | Entropy and isoperimetry for linear and non-linear group actions | Groups Geometry and Dynamics | https://doi.org/10.4171/ggd/48
+   2016 | Valerio Lucarini, Davide Faranda, Ana Cristina Moreira Freitas | Extremes and Recurrence in Dynamical Systems | arXiv (Cornell University) | https://doi.org/10.1002/9781118632321
+   2010 | Ν. H. Bingham, Adam J. Ostaszewski | Normed versus topological groups: Dichotomy and duality | Dissertationes Mathematicae | https://doi.org/10.4064/dm472-0-1
+   2019 | More about Michael Björklund, More about Alexander Fish | Approximate Invariance for Ergodic Actions of Amenable Groups | Discrete Analysis | https://doi.org/10.19086/da.8471
+   2022 | Łukasz Grabowski, András Máthé, Oleg Pikhurko | Measurable equidecompositions for group actions with an expansion property | Journal of the European Mathematical Soc | https://doi.org/10.4171/jems/1189
+[19:53] OA 'every invariant measure supported on periodic orbits proper colorings subshift abelian group': 22 hits
+   2019 | Tianyi Zheng | On rigid stabilizers and invariant random subgroups of groups of homeomorphisms | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.1901.04428
+   2024 | Siegfried Beckus, Tobias Hartnick, Felix Pogorzelski | Linear repetitivity beyond abelian groups | Ergodic Theory and Dynamical Systems | https://doi.org/10.1017/etds.2024.120
+   2024 | Nicanor Carrasco-Vargas | Translation-like actions by $\mathbb{Z}$, the subgroup membership problem, and Medvedev degrees of effective s | Groups Geometry and Dynamics | https://doi.org/10.4171/ggd/817
+   2017 | Eli Glasner, Michael G. Megrelishvili | Circularly ordered dynamical systems | Monatshefte für Mathematik | https://doi.org/10.1007/s00605-017-1134-y
+   2023 | Ville Salo | Conjugacy of transitive SFTs minus periodic points | Proceedings of the London Mathematical S | https://doi.org/10.1112/plms.12567
+   2024 | Nathalie Aubrun, Nicolás Bitar | Self-Avoiding Walks on Cayley Graphs Through the Lens of Symbolic Dynamics | The Electronic Journal of Combinatorics | https://doi.org/10.37236/13065
+[19:53] OA 'frozen colorings Cayley graph infinite degree': 33 hits
+   2007 | Thomas P. Hayes, Juan C. Vera, Eric Vigoda | Randomly coloring planar graphs with fewer colors than the maximum degree | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.0706.1530
+   2011 | Nayantara Bhatnagar, Juan C. Vera, Eric Vigoda | Reconstruction for Colorings on Trees | SIAM Journal on Discrete Mathematics | https://doi.org/10.1137/090755783
+   2018 | Naomi Nishimura | Introduction to Reconfiguration | Algorithms | https://doi.org/10.3390/a11040052
+   2011 | Efthymiou, Charilaos, Galanis, Andreas, Hayes, Thomas P. | Improved Strong Spatial Mixing for Colorings on Trees | arXiv (Cornell University) | https://doi.org/10.4230/lipics.approx-random.2019.48
+   2020 | Ron Peled, Yinon Spinka | Three lectures on random proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.2001.11566
+   2018 | Ron Peled, Yinon Spinka | Rigidity of proper colorings of $\mathbb{Z}^d$ | arXiv (Cornell University) | https://doi.org/10.48550/arxiv.1808.03597
