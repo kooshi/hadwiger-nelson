@@ -170,4 +170,4 @@ finitely generated unit groups on tori (open). A reviewer in operator algebras w
   one is in ℝ³ (de Grey, Geombinatorics 2026, Zbl 1581.05080).
 - **§3 (Exoo–Ismailescu's smallest subfield):** a quadratic field needing five would be of the least degree possible (ℚ's plane is
   two-chromatic), so "smallest" would be answered by degree; whether ℚ(√47) is the smallest *quadratic* one is a separate question
-  (ℚ(√d) with `d < 47` all have `χ ≤ 4`: `CLOSED-QUESTIONS.md` §1.7's classification, `L ≤ 4` below 47).
+  (every squarefree `d < 47` has `χ(ℚ(√d)²) ≤ 4` by `[Moorhouse2010slides]`: *"If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`"*).
