@@ -268,3 +268,64 @@ at `k ≥ 4`; equal ratio, IS-imprimitive; the gap regime), **V** (blind verifie
 4. **Moved the stub's D2 (small-case SAT) to PB**, post-ban, with its generator image to be written (G21).
 5. **The §S bearing statement changes** (G43, G55, G59, rows 75, 88): the programme's own products (residue targets at four colours) are in
    the strict regime by PA-T4, so FS-67's open remainder bears on no residue product at four colours; at five only through PA-T5's holes.
+
+## Stage 3 — SAVED (§PA, the prior-art gate; about 40 minutes, time-boxed)
+
+**Recognition (the query):** FS-67 is the question of *unique colourability of categorical products* — Duffus–Sands–Woodrow's `B(n)`
+generalised from uniquely colourable to gap-free factors — and, through `K_k^G`, of the *exponential graph's non-loop part*; its spectral
+home is *vector colourings of categorical products*. Searched in those words (zbMATH API, `data/fs67/j27/zb.sh`, outputs
+`data/fs67/j27/gate-{1,2,3}.out`), plus one web search, plus the held PDFs `[Tardif2008]`, `[Zhu2025]`, `[GodsilEtAl2020]`.
+
+### 3.1 Findings, ranked
+
+1. **The hierarchy FS-67 sits in is printed, and it kills the gap-free form at `k ≥ 4`.** `[Tardif2008]` §4.2, verbatim: "A(n): If G and H
+   are uniquely n-colorable, then each n-coloring of G × H is induced by a coloring of G or H. B(n): If G is uniquely n-colorable, H is
+   connected, and χ(H) > n, then G × H is uniquely n-colorable. In [17] it is proved that A(n) implies B(n) and B(n) implies H(n). It is also
+   conjectured that A(n) holds for all n." ([17] = Duffus–Sands–Woodrow, JGT 9 (1985) 487–495, not held; zbMATH review: "two conjectures,
+   both stronger than Hedetniemi's, which have to do with unique colorability, and which we show to hold in certain special cases".)
+   `B(n)` is FS-67 for uniquely `n`-colourable `G` (uniquely colourable ⟹ gap-free, §IQ). With `[Tardif2023]` (H(4) false) and `[Shitov2019]`,
+   **`B(n)` is false for every `n ≥ 4`**, so FS-67's gap-free form is false at every `k ≥ 4` — P-A is prior art by composition, and DA's job
+   is the explicit construction (`G = K_k × X`) and the index check (a web summary [external, source page not opened] states the implication
+   as `(B_n) ⇒ (C_{n+1})` with `C_n`: "χ(G) = χ(H) = n ⟹ χ(G × H) = n", which is Tardif's `H(n)` shifted by one — the same content; DA checks it).
+   **What stays open in print:** `A(3)`, `B(3)` ("only under additional restrictions, such as one of the factors being a complete graph", same
+   web summary) — DB's target.
+2. **The spectral home is `[GodsilEtAl2020]` (held; Results 2–5 read here, §1.1, `arXiv:1801.08243`).** Result 4, verbatim: "Let G and H be
+   graphs such that χv (G) < χv (H) and H is connected. If G admits a strictly complementary dual solution with strictly positive diagonal,
+   then every optimal vector coloring of G × H is induced by G." and "if G is 1-walk-regular and H is connected with χv (G) < χv (H), then all
+   of the optimal vector colorings of G × H are induced by G." A proper `k`-colouring of `G × H` is a simplex vector `k`-colouring, optimal when
+   `χv(G) = k` (Result 1: `χv(G × H) = min`), and a vector colouring induced by `G` with distinct simplex vectors is a pullback. **So FS-67 holds
+   for every 1-walk-regular `G` with `χv(G) = k` against every connected `H` with `χv(H) > k`, `H` not assumed vertex-transitive** [reading
+   until DC-1 is written; the link `χv(G) = 1 + d/|λ_min|` for 1-walk-regular `G` is `[GodsilRobersonRooney2017]`'s, held]. Its reach is the
+   strict regime (`χv ≤ χ_f`, so `χv(H) > k` forces `χ_f(H) > k`), and it is a different class from Zhang's (i) (arbitrary `H`, `G`
+   1-walk-regular). **Result 3** (equal `χv`: every optimal vector colouring a convex combination of the two induced ones iff `rk(G × H) =
+   rk(G) + rk(H)`) and **Result 5** are the vector form of the equal case — a DD route that needs no IS-primitivity.
+3. **`[PakVilenchik2013]` Thm 3** (via `plans/M3-PA-mixing.md` Stage 4, verbatim there): "Let H be an r-regular graph with λ < r/(k − 1). Then
+   G = Kk ⊗ H is uniquely k-colorable" — FS-67 at `G = K_k` with a spectral `H`; GRRSV Result 4 generalises it; J21-MX is the Hedetniemi-type
+   (not uniqueness) statement at the same threshold. DC-2 (the mixing bootstrap) is the integral, arbitrary-gap-free-`G` form.
+4. **`[Larose2002]`** (zbMATH review, verbatim): "If a connected graph G does not admit a homomorphism into K, where K is an odd cycle or a complete
+   graph of order at least 3, then, for every s ≥ 1, the graph G × K^s admits exactly s homomorphisms into K" — PA-P3 in print, and the same for
+   odd-cycle targets.
+5. **Three colours: `[ElZaharSauer1985]`'s argument and `[Tardif2006alg]`** ("a polynomial algorithm, which inputs a 3-coloring of a categorical
+   product of two graphs and outputs a 3-coloring of one of the factors", zbMATH review) are the routes for DB; neither is held. `[Zhu2025]` §4
+   states K₃'s multiplicativity without proof. The El-Zahar–Sauer colouring of `K_3^G` is the object DB must re-derive with `G` 3-colourable.
+6. **Neighbours by title, unread:** Zhu 1996/1999 (uniquely `H`-colourable graphs), Lai 1987/1989 (unique homomorphisms onto odd cycles),
+   Larose–Tardif 2000 (*Hedetniemi's conjecture and the retracts of a product of graphs*), Sauer 1992 (*An approach to Hedetniemi's conjecture*).
+
+### 3.2 Negatives (each measures its words, G21)
+
+`ab:"uniquely colorable" & ab:"categorical product"` 0; `ab:"uniquely colourable" & ab:"product"` 0; `ab:"Hedetniemi" & ab:"3-coloring" &
+ab:"product"` 0; `ab:"induced by" & ab:"coloring of one" & ab:"factor"` 0; `ab:"uniquely" & ab:"product" & ab:"Hedetniemi"` 1 (a proceedings
+volume). The author listing `au:"Tardif, Claude" & py:1995-2026` (73) was scanned by title: the four above are the only product-structure titles.
+
+### 3.3 What §PA taught us about our own object (WORKFLOW 9's sweep, done early)
+
+- **FS-67 at `k` contains Hedetniemi at `k`** (P-A′, DA-2): the question is not about tightness at all unless tightness is what excludes
+  `K_k × X`. The stub's D3 question ("is gap-freedom enough, or is the spectrum doing work?") is answered at `k ≥ 4` by print: gap-freedom is not
+  enough.
+- **"Pulled back from `G`" in vector language is "the Gram matrix is `M ⊗ J`"**, and GRRSV's rank criterion `rk(G × H) = rk(G)` is an exact
+  test for it in the strict regime — the invariant §IQ asks for, in the spectral regime.
+
+### 3.4 Prior-art debts (for the close)
+
+`[DuffusSandsWoodrow1985]` §3 (the special cases of A(n), B(n)), `[ElZaharSauer1985]`, `[Tardif2006alg]`, Larose–Tardif 2000, Sauer 1992 — none
+held; `[GodsilRobersonRooney2017]`'s χv-of-1-walk-regular statement to be quoted by DC-1 from the held copy. Bibliography rows proposed at the close.

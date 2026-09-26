@@ -1,0 +1,15 @@
+### ab:"uniquely" & ab:"product" & ab:"Hedetniemi" -> 1 hits
+- 1995 |  | Graph theory, combinatorics, algorithms and applications. Vol. 2. Proceedings of the seventh quadrennial international conference on the theory and applications of graphs, Kalamazoo, MI, USA, June 1-5, 1992 | [review] The articles of this volume will be reviewed individually. (Vol. 1 has been announced in Zbl 0834.00037; for the Proceedings of the Sixth Conference see Zbl 0831.05002 and Zbl 0787.05004).  
+### ab:"uniquely colorable" & ab:"categorical product" -> 0 hits
+### ab:"uniquely colourable" & ab:"product" -> 0 hits
+### ab:"uniquely" & ab:"direct product" & ab:"coloring" -> 2 hits
+- 1979 | Bollobas, Bela; Thomason, Andrew | Set colourings of graphs | 
+- 2021 | Anderson, David F.; Asir, T.; Badawi, Ayman; Chelvam, T. Tamizh | Graphs from rings | [review] This book is a very good survey of graphs defined on rings. The authors have collected results on almost all types of graphs related to rings. The book consists of ten chapters and an exhaustive bibliography of 443 items. The approach of the authors is ``historical''. They have tried to cover as many topics as poss
+### ab:"Duffus" & ab:"Woodrow" -> 3 hits
+- 2000 | Larose, Benoit; Tardif, Claude | Hedetniemi's conjecture and the retracts of a product of graphs | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+- 1985 | Welzl, Emo | Symmetric graphs and interpretations | [review] A graph H is an interpretation of a graph G if there exists a homomorphism from H to a subgraph of G. H is a proper interpretation of G, if H is an interpretation of G but not vice versa. It is known that for undirected graphs H and G, where H is a proper interpretation of G, there is always a graph B which can be squeezed (with respect to proper i
+- 1992 | Maltby, R. | A smallest-fibre-size to poset-size ratio approaching \({8 \over 15}\) | [review] Let \(P\) be a finite poset with no splitting elements and \(F\) be a fibre of \(P\) of minimal cardinality. There is the problem what is the greatest possible value of \(| F|/| P|\). \textit{D. Duffus}, \textit{H. A. Kierstead} and \textit{W. T. Trotter} [J. Comb. Theory, Ser. A 58, 158- 164 (1991; Zbl 0757.06001)
+### ab:"exponential graph" & ab:"uniquely" -> 2 hits
+- 2002 | Larose, Benoit | Strongly projective graphs | [review] \textit{D. Greenwell} and \textit{L. Lovász} [Acta Math. Acad. Sci. Hung. 25, 335-340 (1974; Zbl 0294.05108)] showed that, if a graph \(G\) is not \(n\)-colourable, then the product \(G\times K_{n}\) is uniquely \(n\)-colourable. This result is extended to higher powers. In fact, the following more general result is proved: If a connected graph \(G\) doe
+- 2005 | Daneshgar, Amir; Hajiabolhassan, Hossein | Unique list-colourability and the fixing chromatic number of graphs | [summary] zbMATH Open Web Interface contents unavailable due to conflicting licenses.
+### ab:"induced by" & ab:"coloring of one" & ab:"factor" -> 0 hits
