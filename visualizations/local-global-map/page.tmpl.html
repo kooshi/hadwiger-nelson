@@ -1,0 +1,490 @@
+<title>The Local–Global Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --surface:#f3f4f6; --card:#fbfbfc; --rule:#d9dce3; --rule-soft:#e8eaef;
+  --ink:#15171d; --ink-2:#4a4f5c; --ink-3:#858a97;
+  --k2:#4f86c6; --k3:#2f9e98; --k4:#6aa33a; --k5:#d59a1c; --k6:#dd6a2c; --k7:#c23a52; --k8:#7d2c61;
+  --shadow:#6f4fd0; --shadow-soft:rgba(111,79,208,.22); --shadow-door:rgba(111,79,208,.55);
+  --key:#16877f; --lock:#15171d; --crunch:#d0337a; --hl:rgba(255,196,0,.28);
+  --gridline:rgba(21,23,29,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface:#121419; --card:#1a1d24; --rule:#2e323c; --rule-soft:#232730;
+    --ink:#eceef3; --ink-2:#b4b9c6; --ink-3:#7d8392;
+    --k2:#6b9ee0; --k3:#3cb8b1; --k4:#86c24f; --k5:#e8b23a; --k6:#ef7f43; --k7:#e05570; --k8:#b1508f;
+    --shadow:#9b82f0; --shadow-soft:rgba(155,130,240,.25); --shadow-door:rgba(155,130,240,.6);
+    --key:#3cc2b8; --lock:#eceef3; --crunch:#ef5b9c; --hl:rgba(255,196,0,.18);
+    --gridline:rgba(236,238,243,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#121419; --card:#1a1d24; --rule:#2e323c; --rule-soft:#232730;
+  --ink:#eceef3; --ink-2:#b4b9c6; --ink-3:#7d8392;
+  --k2:#6b9ee0; --k3:#3cb8b1; --k4:#86c24f; --k5:#e8b23a; --k6:#ef7f43; --k7:#e05570; --k8:#b1508f;
+  --shadow:#9b82f0; --shadow-soft:rgba(155,130,240,.25); --shadow-door:rgba(155,130,240,.6);
+  --key:#3cc2b8; --lock:#eceef3; --crunch:#ef5b9c; --hl:rgba(255,196,0,.18);
+  --gridline:rgba(236,238,243,.08);
+}
+body{background:var(--surface);color:var(--ink);font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14.5px;line-height:1.5}
+.wrap{max-width:1420px;margin:0 auto;padding-inline:20px;padding-block:28px 60px}
+h1{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif;font-weight:600;font-size:clamp(26px,4.4vw,38px);letter-spacing:-.01em;line-height:1.1;margin:0 0 8px;text-wrap:balance}
+.lede{max-width:74ch;color:var(--ink-2);margin:0 0 18px}
+.lede b{color:var(--ink);font-weight:600}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+/* guided first view */
+.guide{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;margin:0 0 14px}
+.guide .step{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);white-space:nowrap}
+.guide p{margin:0;max-width:92ch}
+.guide .btns{display:flex;gap:6px}
+button,select{font:inherit;font-size:13px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:4px 10px;cursor:pointer}
+button:hover{border-color:var(--ink-3)}
+button:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--shadow);outline-offset:2px}
+button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:8px 0;border-bottom:1px solid var(--rule);margin-bottom:12px}
+.toolbar .grp{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.toolbar label{font-size:12px;color:var(--ink-3);margin-right:2px}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;align-items:start}
+@media (max-width:1180px){.main{grid-template-columns:minmax(0,1fr)}.legend{position:static!important;order:-1}}
+.boardwrap{overflow-x:auto;background:var(--card);border:1px solid var(--rule);border-radius:10px}
+svg text{font-family:"IBM Plex Sans",system-ui,sans-serif}
+.legend{position:sticky;top:64px;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;font-size:12.5px}
+.legend h3{font-size:12px;margin:10px 0 6px;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.legend h3:first-child{margin-top:0}
+.legend .row{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:center;margin:3px 0}
+.legend svg{display:block}
+.card{position:fixed;z-index:20;max-width:360px;background:var(--card);border:1px solid var(--rule);border-radius:9px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:10px 12px;font-size:13px;pointer-events:none}
+.card .what{font-weight:500;margin-bottom:6px}
+.card .g,.chip{display:inline-flex;gap:6px;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-2)}
+.card .src{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);margin-top:6px;word-break:break-word}
+.card .why{color:var(--ink-2);margin-top:6px}
+.panel{margin-top:18px;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:16px 18px}
+.panel h2{font-family:"IBM Plex Sans Condensed",sans-serif;font-size:22px;margin:0 0 4px;font-weight:600}
+.panel h4{margin:16px 0 6px;font-size:13px;font-family:"IBM Plex Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:500}
+.panel ul{margin:0;padding-left:18px}
+.panel li{margin:3px 0;max-width:110ch}
+.panel .src{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);cursor:copy}
+.panel .src:hover{color:var(--ink)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px 28px}
+.badge{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;border:1px solid var(--crunch);color:var(--crunch);border-radius:4px;padding:0 4px;margin-left:4px}
+.muted{color:var(--ink-3)}
+.foot{margin-top:22px;color:var(--ink-3);font-size:12.5px;max-width:110ch}
+.hit{cursor:pointer}
+.dim .mark:not(.keep){opacity:.12}
+.gfade{opacity:.1!important;pointer-events:none}
+.pulse{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+@media (max-width:640px){.guide{grid-template-columns:1fr}.wrap{padding-inline:16px}}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">Hadwiger–Nelson workspace · state after the crunch of 2026-09-25</p>
+  <h1>The Local–Global Map</h1>
+  <p class="lede">Every row is a <b>field</b>: the points of the plane whose coordinates lie in it. Across the row run its <b>places</b> — the real place, then the primes. Height inside a row is a <b>number of colours</b>, two at the floor to seven at the top. The <b>local–global conjecture</b> says the column past the horizon, the whole plane over the field, stands exactly as high as the lowest column before it. Hover anything for what it is, how solid it is, and where it is written down.</p>
+
+  <div class="guide" id="guide" role="region" aria-label="How to read this map">
+    <span class="step" id="gstep">1 / 6</span>
+    <p id="gtext"></p>
+    <div class="btns"><button id="gprev" type="button">Back</button><button id="gnext" type="button">Next</button><button id="gclose" type="button">Close</button></div>
+  </div>
+
+  <div class="toolbar" role="toolbar" aria-label="Filters and layers">
+    <div class="grp"><label for="fgrade">Show marks at least as solid as</label>
+      <select id="fgrade"><option value="6">anything (open included)</option><option value="5">a reading</option><option value="4">measured</option><option value="3">hand, one mind</option><option value="2">hand, two derivations</option><option value="1">certificate</option><option value="0">kernel only</option></select></div>
+    <div class="grp" id="kgrp"><label>Colours</label></div>
+    <div class="grp"><label for="ffam">Fields</label><select id="ffam"><option value="all">every group</option></select></div>
+    <div class="grp"><label>Layers</label>
+      <button type="button" id="lwalls" aria-pressed="true">Walls</button>
+      <button type="button" id="lshadows" aria-pressed="true">Shadows</button>
+      <button type="button" id="ldensity" aria-pressed="true">Theorem density</button>
+      <button type="button" id="lcrunch" aria-pressed="false">Changed 2026-09-25</button>
+      <button type="button" id="lreset">Reset</button></div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="boardwrap"><svg id="board" role="img" aria-label="The skyline board: fields by places, colours as height"></svg></div>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+    <aside class="legend" id="legend" aria-label="Legend"></aside>
+  </div>
+
+  <p class="foot" id="foot"></p>
+</div>
+<div class="card" id="card" hidden></div>
+
+<script>
+const FACTS = /*FACTS*/null;
+(function(){
+"use strict";
+const D = FACTS, NS = "http://www.w3.org/2000/svg";
+const GRADES = D.meta.grade_order;                       // kernel … open
+const GWORD = {"kernel":"kernel-checked","certificate":"certificate","hand-2":"hand proof, two derivations","hand-1":"hand proof, one mind","measured":"computed or measured","reading":"a reading","open":"open"};
+const GOPAC = {"kernel":1,"certificate":.92,"hand-2":.72,"hand-1":.45,"measured":.24,"reading":0,"open":0};
+const CRUNCH_SRC = ["plans/POROS-2026-09-25-wanted-poster-47.md","plans/POROS-2026-09-25-wanted-poster-59.md","plans/POROS-2026-09-25-wanted-poster-167.md","plans/POROS-2026-09-25-infinitely-many-primes.md","plans/STUB-measure-rigidity-three-fields.md","plans/FS100-KT1-ambrus-ball.md"];
+const byId = {}; for (const f of [...D.targets,...D.field_facts,...D.owned,...D.walls]) byId[f.id]=f;
+const isCrunch = f => !!f && ((f.scope && f.scope.row>=98) || CRUNCH_SRC.includes(f.src));
+const kcol = k => `var(--k${Math.max(2,Math.min(8,Math.round(k)))})`;
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function srcText(f){ if(!f) return ""; let s=f.src; if(f.scope&&f.scope.row) s+=` · row ${f.scope.row}`; if(f.scope&&f.scope.B) s+=` · § B ${f.scope.B}`; return s; }
+const ls = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
+
+// ---------------- geometry
+const U=7, ROWH=62, GH=26, LABW=214, COLW=31, HOR=46, GLW=64, TOP=86;
+const P = D.places; const px = {}; let x = LABW;
+P.forEach((p,i)=>{ if(i>0 && (P[i-1].kind!==p.kind) && !(P[i-1].kind==="p3"&&p.kind==="p3big")&&!(P[i-1].kind==="p1"&&p.kind==="p1big")) x+=8; px[p.id]=x+COLW/2; x+=COLW; });
+const XH0 = x+4, XH1 = x+4+HOR, XG = XH1+GLW/2, W = XH1+GLW+14;
+const yk = (top,k)=> top+ROWH-6-(Math.min(k,8.6)-1)*U;
+
+// ---------------- helpers for the model
+function tgtKey(pid, st){
+  if (st==="real") return "inf";
+  if (st==="ramified") return "2r"; if (st==="inert") return "2i";
+  if (st==="stable") return pid; return null;
+}
+function targetOf(f,pid){ const st=f.places[pid]; const key=tgtKey(pid,st); if(!key) return {st};
+  return {st,key,floor:byId[`t.${key}.floor`],cap:byId[`t.${key}.cap`]}; }
+function fieldModel(f){
+  const m={places:{},lo:byId[`f.${f.id}.lo`],hi:byId[`f.${f.id}.hi`]};
+  let best=null, pLo=99, pHi=99;
+  for(const p of P){ const t=targetOf(f,p.id); m.places[p.id]=t;
+    if(t.cap && (!best || t.cap.v<best.cap.v)) best={pid:p.id,cap:t.cap};
+    if(t.key && t.key!=="inf"){ const fl=t.floor?t.floor.v:(t.cap?t.cap.v:99); pLo=Math.min(pLo,fl); if(t.cap) pHi=Math.min(pHi,t.cap.v); } }
+  if(f.id==="R"){pLo=pHi=null}
+  m.pred = pLo===null?null:[Math.min(pLo,7),Math.min(pHi,7)];
+  m.best = best; m.gcap = m.hi || (best?best.cap:byId["f.all.hi7"]);
+  if(m.hi && best && best.cap.v<=m.hi.v && m.hi.id!=="f.all.hi7") m.best={pid:best.pid,cap:best.cap};
+  return m;
+}
+
+// ---------------- svg
+const svg = document.getElementById("board");
+function el(tag,attrs,parent,text){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); if(text!=null) e.textContent=text; (parent||svg).appendChild(e); return e; }
+const STATE = {grade:6,k:null,fam:"all",walls:true,shadows:true,density:true,crunch:false,followP:null,followF:null,guide:null};
+const MARKS = [];   // {node, grade, k, crunch, field, place, kind}
+const TABBABLE=new Set(["rowhead","colhead","ghost","door"]);
+function mark(node,info){ node.classList.add("mark","hit"); if(TABBABLE.has(info.kind)) node.setAttribute("tabindex","0"); MARKS.push(Object.assign({node},info)); node.__info=info; return node; }
+
+function solidity(g, color, node){  // fill opacity + edge by grade
+  const o=GOPAC[g]; node.setAttribute("fill",color); node.setAttribute("fill-opacity",o);
+  node.setAttribute("stroke",color); node.setAttribute("stroke-width", g==="certificate"?2.2:1.2);
+  if(g==="measured") node.setAttribute("stroke-dasharray","1.5 1.5");
+  if(g==="reading") node.setAttribute("stroke-dasharray","3 2");
+  if(g==="hand-1") node.setAttribute("stroke-dasharray","4 1.6");
+}
+function lockGlyph(g,x,y,broken){ // padlock (standing) or key (broken)
+  const grp=el("g",{transform:`translate(${x},${y})`},g);
+  if(!broken){ el("rect",{x:-3.5,y:-1,width:7,height:5.5,rx:1,fill:"var(--lock)"},grp); el("path",{d:"M-2,-1 v-2 a2,2 0 0 1 4,0 v2",fill:"none",stroke:"var(--lock)","stroke-width":1.2},grp); }
+  else { el("circle",{cx:-2,cy:1,r:2.2,fill:"none",stroke:"var(--key)","stroke-width":1.4},grp); el("path",{d:"M0.2,1 h4.5 M3.2,1 v2 M4.7,1 v1.6",stroke:"var(--key)","stroke-width":1.3,fill:"none"},grp); }
+  return grp;
+}
+
+function draw(){
+  svg.innerHTML=""; MARKS.length=0;
+  const defs=el("defs",{});
+  const pat=el("pattern",{id:"hatch",width:4,height:4,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"},defs);
+  el("rect",{width:4,height:4,fill:"var(--card)"},pat); el("line",{x1:0,y1:0,x2:0,y2:4,stroke:"var(--ink-3)","stroke-width":1.6},pat);
+  const unw=el("pattern",{id:"unworked",width:6,height:6,patternUnits:"userSpaceOnUse",patternTransform:"rotate(-45)"},defs);
+  el("line",{x1:0,y1:0,x2:0,y2:6,stroke:"var(--ink-3)","stroke-width":.7,"stroke-opacity":.6},unw);
+  const lg=el("linearGradient",{id:"fadeR",x1:0,x2:1,y1:0,y2:0},defs);
+  el("stop",{offset:"0","stop-color":"var(--shadow)","stop-opacity":.55},lg); el("stop",{offset:"1","stop-color":"var(--shadow)","stop-opacity":.12},lg);
+
+  const fields = D.fields.filter(f=> STATE.fam==="all" || f.group===STATE.fam);
+  let H = TOP; const rowsAt=[];
+  for(const g of D.groups){ const fs=fields.filter(f=>f.group===g.id); if(!fs.length) continue; rowsAt.push({g,top:H}); H+=GH; for(const f of fs){ rowsAt.push({f,top:H}); H+=ROWH; } }
+  H+=10; svg.setAttribute("viewBox",`0 0 ${W} ${H}`); svg.setAttribute("width",W); svg.setAttribute("height",H);
+
+  // header: lanes, columns, column density
+  const lanes=[["inf","inf","real"],["2","2","2"],["3","big","primes ≡ 3 (mod 4): a finite plane where the field allows"],["5","p1big","≡ 1 (mod 4): split in every field"]];
+  for(const [a,b,t] of lanes){ const x0=px[a]-COLW/2, x1=px[b]+COLW/2; el("line",{x1:x0+2,x2:x1-2,y1:14,y2:14,stroke:"var(--rule)"}); if(t.length>3) el("text",{x:(x0+x1)/2,y:10,"text-anchor":"middle","font-size":10.5,fill:"var(--ink-3)"},null,t); }
+  el("text",{x:(XH0+XH1)/2,y:10,"text-anchor":"middle","font-size":10.5,fill:"var(--ink-3)"},null,"horizon");
+  el("text",{x:XG,y:10,"text-anchor":"middle","font-size":10.5,fill:"var(--ink-3)"},null,"whole plane");
+  const pcount={}; for(const t of D.theorems){ if(STATE.crunch && !t.crunch) continue; for(const p of t.tags.place){ pcount[p]=(pcount[p]||0)+1; } }
+  for(const p of P){
+    const key = (p.kind==="p1"||p.kind==="p1big")?"p1":p.id; const n=pcount[key]||0; const cx=px[p.id];
+    if(STATE.density){ const h=Math.min(34,Math.sqrt(n)*3.2); if(n){ const r=el("rect",{x:cx-5,y:62-h,width:10,height:h,fill:"var(--ink-2)","fill-opacity":.55,rx:1.5}); mark(r,{kind:"coldens",pid:p.id,n,key}); } else { const r=el("rect",{x:cx-5,y:52,width:10,height:10,fill:"url(#unworked)",stroke:"var(--ink-3)","stroke-width":.5}); mark(r,{kind:"coldens",pid:p.id,n:0,key}); } }
+    const lab = p.id==="inf"?"∞":p.id==="big"?"103+":p.id==="p1big"?"…":p.id;
+    const t=el("text",{x:cx,y:78,"text-anchor":"middle","font-size":11.5,"font-family":"IBM Plex Mono, monospace",fill: STATE.followP===p.id?"var(--shadow)":"var(--ink)","font-weight":STATE.followP===p.id?600:400},null,lab);
+    mark(t,{kind:"colhead",pid:p.id});
+  }
+  // horizon band
+  el("rect",{x:XH0,y:TOP-4,width:HOR,height:H-TOP-6,fill:"var(--rule-soft)","fill-opacity":.6});
+  for(let i=0;i<5;i++) el("line",{x1:XH0+6+i*9,x2:XH0+6+i*9,y1:TOP-4,y2:H-10,stroke:"var(--rule)","stroke-dasharray":"2 4"});
+
+  for(const R of rowsAt){
+    if(R.g){ el("text",{x:10,y:R.top+17,"font-size":12,"font-weight":600,fill:"var(--ink-2)","font-family":"IBM Plex Sans Condensed, sans-serif"},null,R.g.label); el("line",{x1:10,x2:W-8,y1:R.top+GH-2,y2:R.top+GH-2,stroke:"var(--rule)"}); continue; }
+    drawRow(R.f,R.top);
+  }
+  applyFilters();
+}
+
+function drawRow(f,top){
+  const m=fieldModel(f); const g=el("g",{"data-field":f.id});
+  if(STATE.followF===f.id) el("rect",{x:4,y:top+1,width:W-8,height:ROWH-2,fill:"var(--hl)",rx:6},g);
+  if(STATE.followP) { const cx=px[STATE.followP]; el("rect",{x:cx-COLW/2+1,y:top,width:COLW-2,height:ROWH,fill:"var(--hl)"},g); }
+  // gridlines at 2..7
+  for(const k of [2,4,5,6,7]) el("line",{x1:LABW-4,x2:W-10,y1:yk(top,k),y2:yk(top,k),stroke:"var(--gridline)","stroke-width":k===6?1.4:1},g);
+  el("line",{x1:LABW-4,x2:W-10,y1:yk(top,1),y2:yk(top,1),stroke:"var(--rule)"},g);
+  // row label + density
+  const name=el("text",{x:12,y:top+22,"font-size":13.5,"font-weight":600,fill:"var(--ink)"},g,f.name.length>28?f.name.slice(0,27)+"…":f.name);
+  mark(name,{kind:"rowhead",field:f.id});
+  if(f.note){ el("text",{x:12,y:top+37,"font-size":10.5,fill:"var(--ink-3)"},g,f.note.length>36?f.note.slice(0,35)+"…":f.note); }
+  if(STATE.density){
+    const ts=D.theorems.filter(t=>t.tags.field.includes(f.id) && (!STATE.crunch||t.crunch)); let xx=12; const y=top+46;
+    if(!ts.length){ const r=el("rect",{x:12,y,width:60,height:6,fill:"url(#unworked)",stroke:"var(--ink-3)","stroke-width":.5},g); mark(r,{kind:"rowdens",field:f.id,n:0}); }
+    else { const byg={}; ts.forEach(t=>byg[t.grade]=(byg[t.grade]||0)+1); const scale=Math.min(1.6,170/ts.length);
+      for(const gr of GRADES){ const n=byg[gr]||0; if(!n) continue; const r=el("rect",{x:xx,y,width:Math.max(1.5,n*scale),height:6,fill:"var(--ink)","fill-opacity":Math.max(.12,GOPAC[gr]||.12)},g); mark(r,{kind:"rowdens",field:f.id,n:ts.length,grade:gr,gn:n}); xx+=Math.max(1.5,n*scale); }
+      el("text",{x:xx+4,y:y+6,"font-size":9.5,fill:"var(--ink-3)","font-family":"IBM Plex Mono, monospace"},g,ts.length); }
+  }
+  // places
+  for(const p of P){
+    const t=m.places[p.id], cx=px[p.id];
+    if(t.st==="split"){ const s=el("path",{d:`M${cx-6},${yk(top,1)-2} q6,-9 12,0`,fill:"none",stroke:"var(--ink-3)","stroke-width":1},g); mark(s,{kind:"split",field:f.id,pid:p.id,grade:"hand-1"}); continue; }
+    if(t.st==="unrecorded"){ const s=el("rect",{x:cx-5,y:yk(top,3),width:10,height:yk(top,1)-yk(top,3),fill:"url(#unworked)",stroke:"var(--ink-3)","stroke-width":.5,"stroke-dasharray":"2 2"},g); mark(s,{kind:"unrec",field:f.id,pid:p.id,grade:"open"}); continue; }
+    if(!t.key) continue;
+    const fl=t.floor, cp=t.cap;
+    const topK = fl?fl.v:(cp?cp.v:1);
+    if(fl){ const b=el("rect",{x:cx-5,y:yk(top,Math.min(fl.v,8.5)),width:10,height:yk(top,1)-yk(top,Math.min(fl.v,8.5)),rx:1.5},g); solidity(fl.grade,kcol(fl.v),b); mark(b,{kind:"floor",fact:fl,field:f.id,pid:p.id,grade:fl.grade,k:fl.v}); }
+    if(cp){
+      const kk=Math.min(cp.v,8.5); const y0=fl?yk(top,fl.v):yk(top,1);
+      if(!fl || cp.v>fl.v) el("line",{x1:cx,x2:cx,y1:y0,y2:yk(top,kk),stroke:"var(--ink-3)","stroke-width":1},g);
+      const isBest = m.best && m.best.pid===p.id;
+      if(isBest) el("circle",{cx,cy:yk(top,kk),r:7.5,fill:kcol(cp.v),"fill-opacity":.22,class:"pulse"},g);
+      const c=el("circle",{cx,cy:yk(top,kk),r:3.6,stroke:"var(--ink)","stroke-width":1.1},g); solidity(cp.grade,kcol(cp.v),c); c.setAttribute("stroke","var(--ink)");
+      mark(c,{kind:"cap",fact:cp,field:f.id,pid:p.id,grade:cp.grade,k:cp.v,best:isBest});
+      if(cp.v>8) el("text",{x:cx+6,y:yk(top,8.5)+3,"font-size":9,fill:"var(--ink-3)","font-family":"IBM Plex Mono, monospace"},g,cp.v);
+    }
+    if(!cp && fl && fl.v>=7){ el("path",{d:`M${cx-4},${yk(top,Math.min(fl.v,8.5))-3} l4,-4 l4,4`,fill:"none",stroke:"var(--ink-3)"},g); }
+  }
+  // character rings (above the plain colourings)
+  for(const ch of D.targets.filter(t=>t.id.startsWith("ch."))){ if(f.places[ch.place]!=="stable") continue; const cx=px[ch.place]; const v=ch.v==="∞"?8.6:Math.min(ch.v,8.6);
+    const r=el("circle",{cx,cy:yk(top,v),r:4.2,fill:"none",stroke:kcol(v),"stroke-width":1.4,"stroke-dasharray":ch.grade==="measured"?"1.5 1.5":null},g); mark(r,{kind:"char",fact:ch,field:f.id,pid:ch.place,grade:ch.grade,k:ch.v}); }
+  for(const o of D.owned.filter(o=>o.field===f.id)){
+    if(o.kind==="character"){ const r=el("circle",{cx:XG+18,cy:yk(top,8.6),r:4.2,fill:"none",stroke:"var(--k8)","stroke-width":1.4},g); mark(r,{kind:"owned",fact:o,field:f.id,grade:o.grade,k:o.v}); el("text",{x:XG+24,y:yk(top,8.6)+3,"font-size":9,fill:"var(--ink-3)","font-family":"IBM Plex Mono, monospace"},g,o.v); continue; }
+    const cx=px[o.place]; const d=el("rect",{x:cx+5,y:yk(top,o.v)-4.5,width:9,height:9,rx:2,fill:"var(--card)",stroke:"var(--ink)","stroke-width":1},g);
+    el("text",{x:cx+9.5,y:yk(top,o.v)+3,"text-anchor":"middle","font-size":7.5,fill:"var(--ink)"},g,o.kind==="additive"?"+":o.kind==="nonperiodic"?"~":"✓");
+    mark(d,{kind:"owned",fact:o,field:f.id,pid:o.place,grade:o.grade,k:o.v});
+  }
+  // global column
+  const lo=m.lo, gc=m.gcap;
+  // what linear/fractional instruments can prove (G38/G60): up to 4.36
+  el("rect",{x:XG-14,y:yk(top,4.36),width:28,height:yk(top,1)-yk(top,4.36),fill:"var(--rule-soft)"},g);
+  if(lo){ const b=el("rect",{x:XG-7,y:yk(top,lo.v),width:14,height:yk(top,1)-yk(top,lo.v),rx:2},g); solidity(lo.grade,kcol(lo.v),b); mark(b,{kind:"glo",fact:lo,field:f.id,grade:lo.grade,k:lo.v}); }
+  if(gc){ const y0=lo?yk(top,lo.v):yk(top,1); if(!lo||gc.v>lo.v) el("line",{x1:XG,x2:XG,y1:y0,y2:yk(top,gc.v),stroke:"var(--ink-3)","stroke-width":1.3},g);
+    const c=el("circle",{cx:XG,cy:yk(top,gc.v),r:4.4,stroke:"var(--ink)","stroke-width":1.2},g); solidity(gc.grade,kcol(gc.v),c); c.setAttribute("stroke","var(--ink)"); mark(c,{kind:"ghi",fact:gc,field:f.id,grade:gc.grade,k:gc.v,via:m.best});
+    if(m.best && m.best.pid!=="inf" && !m.hi) el("line",{x1:px[m.best.pid]+6,x2:XG-6,y1:yk(top,gc.v),y2:yk(top,gc.v),stroke:kcol(gc.v),"stroke-width":.8,"stroke-dasharray":"1 3","stroke-opacity":.8},g); }
+  if(m.pred){ const [a,b]=m.pred; const tri=el("path",{d:`M${XG-17},${yk(top,a)} l-5,-3.5 v7 z`,fill:"var(--ink-2)"},g); if(b>a) el("line",{x1:XG-19,x2:XG-19,y1:yk(top,a),y2:yk(top,b),stroke:"var(--ink-2)","stroke-width":1.4},g); mark(tri,{kind:"pred",field:f.id,pred:m.pred,grade:"hand-1"}); }
+  // walls
+  if(STATE.walls) drawWalls(f,top,m,g);
+  if(STATE.shadows) for(const sh of D.shadows.filter(s=>s.field===f.id || (s.id==="sh.59" && ["Q83","Q131"].includes(f.id)))) drawShadow(sh,f,top,g,m);
+}
+
+function drawWalls(f,top,m,g){
+  // the 2-adic wall, per row
+  const st=f.places["2"]; const w2=byId["w.2adic"]; const cx=px["2"]+COLW/2-1;
+  if(st==="ramified"||st==="inert"){ const l=el("line",{x1:cx,x2:cx,y1:yk(top,1),y2:yk(top,8.4),stroke:"var(--lock)","stroke-width":2},g); mark(l,{kind:"wall",fact:w2,field:f.id,standing:true,grade:w2.grade}); lockGlyph(g,cx,yk(top,8.4)-4,false); }
+  else if(st==="split"){ const l=el("line",{x1:cx,x2:cx,y1:yk(top,1),y2:yk(top,8.4),stroke:"var(--key)","stroke-width":1.6,"stroke-dasharray":"4 5"},g); mark(l,{kind:"wall",fact:w2,field:f.id,standing:false,grade:w2.grade}); if(f.rad && f.rad.includes(3)&&f.rad.includes(11)) lockGlyph(g,cx,yk(top,8.4)-4,true); }
+  // the real place refuses four (and only four)
+  if(f.places.inf==="real"){ const w=byId["w.real4"]; const c=px.inf; const l=el("line",{x1:c-9,x2:c+9,y1:yk(top,4),y2:yk(top,4),stroke:"var(--lock)","stroke-width":2.2},g); mark(l,{kind:"wall",fact:w,field:f.id,standing:true,grade:w.grade}); }
+  // the wall at six across the window and beyond
+  const w6=byId["w.six"];
+  for(const pid of ["23","27","31","43","47","59","67","71","79","83","big"]){ if(f.places[pid]!=="stable") continue; const c=px[pid]; const open=["23","27","31","43","47"].includes(pid);
+    const l=el("line",{x1:c-COLW/2+2,x2:c+COLW/2-2,y1:yk(top,6),y2:yk(top,6),stroke:open?"var(--k6)":"var(--lock)","stroke-width":open?1.6:2.2,"stroke-dasharray":open?"2 2.5":null},g); mark(l,{kind:"wall6",fact:w6,field:f.id,pid,open,grade:w6.grade}); }
+  // the 3-adic barrier: broken where row 82's slope gives four
+  const lo=m.lo; if(lo && lo.rule==="d ≡ 11 (mod 12)"){ const w=byId["w.3adic"]; const c=px["3"]; const l=el("line",{x1:c-9,x2:c+9,y1:yk(top,3.5),y2:yk(top,3.5),stroke:"var(--key)","stroke-width":1.6,"stroke-dasharray":"3 3"},g); mark(l,{kind:"wall",fact:w,field:f.id,standing:false,grade:w.grade}); lockGlyph(g,c+12,yk(top,3.5),true); }
+  // the tower does not drop (certified at 7, 11, 19, 23)
+  for(const pid of ["7","11","19","23"]) if(f.places[pid]==="stable"){ const w=byId["w.tower"]; const c=px[pid]; const t=el("path",{d:`M${c-5},${yk(top,1)+3.5} h10 M${c-3.5},${yk(top,1)+5.5} h7`,stroke:"var(--ink-2)","stroke-width":1},g); mark(t,{kind:"wall",fact:w,field:f.id,standing:true,grade:w.grade}); }
+  // characters stop at the window
+  // the horizon wall
+  const wh=byId["w.horizon"]; if(wh.where.rows.includes(f.id)){ const l=el("line",{x1:XH0+HOR/2,x2:XH0+HOR/2,y1:top+4,y2:yk(top,1),stroke:"var(--lock)","stroke-width":2.4},g); mark(l,{kind:"wall",fact:wh,field:f.id,standing:true,grade:wh.grade}); lockGlyph(g,XH0+HOR/2,top+6,false); }
+  // cell-local four-colour certificates, on the global column at 4.5
+  const wc=byId["w.cell"]; if(wc.where.rows.includes(f.id)){ const broken=f.id==="K"; const l=el("path",{d:`M${XG+10},${yk(top,4.5)} h12 M${XG+13},${yk(top,4.5)-3} v6 M${XG+19},${yk(top,4.5)-3} v6`,stroke:broken?"var(--key)":"var(--lock)","stroke-width":1.4,fill:"none","stroke-dasharray":broken?"2 2":null},g); mark(l,{kind:"wall",fact:wc,field:f.id,standing:!broken,grade:wc.grade}); }
+  // no in-field descent over K
+  const wd=byId["w.descent"]; if(f.id==="K"){ const l=el("line",{x1:XG-10,x2:XG+10,y1:yk(top,4.5),y2:yk(top,4.5),stroke:"var(--lock)","stroke-width":2.2},g); mark(l,{kind:"wall",fact:wd,field:f.id,standing:true,grade:wd.grade}); }
+  if(["K5","K7"].includes(f.id)){ lockGlyph(g,XG-24,yk(top,5),true); }
+}
+
+function drawShadow(sh,f,top,g,m){
+  const y=yk(top,sh.k), open=new Set(sh.open_places||[]);
+  const x0=px.inf-COLW/2+2, x1=XH0;
+  // carved: a thin dotted trace; open doors: full band
+  const t=el("line",{x1:x0,x2:x1,y1:y,y2:y,stroke:"var(--shadow)","stroke-width":1.3,"stroke-dasharray":"1 3.5"},g); mark(t,{kind:"shadow",sh,field:f.id,grade:"open",k:sh.k,crunch:true});
+  for(const pid of open){ if(f.places[pid]!=="stable"&&f.places[pid]!=="real") continue; const c=px[pid]; const d=el("rect",{x:c-COLW/2+2,y:y-4,width:COLW-4,height:8,rx:3,fill:"var(--shadow-door)"},g); mark(d,{kind:"door",sh,field:f.id,pid,grade:"open",k:sh.k,crunch:true}); }
+  const b=el("rect",{x:XH0,y:y-4,width:XG-8-XH0,height:8,fill:"url(#fadeR)"},g); mark(b,{kind:"shadow",sh,field:f.id,grade:"open",k:sh.k,crunch:true});
+  const gh=el("circle",{cx:XG,cy:y,r:5.4,fill:"var(--surface)",stroke:"var(--shadow)","stroke-width":1.6,"stroke-dasharray":"2.5 1.6"},g); mark(gh,{kind:"ghost",sh,field:f.id,grade:"open",k:sh.k,crunch:true});
+  el("text",{x:XG,y:y+3,"text-anchor":"middle","font-size":7.5,"font-weight":600,fill:"var(--shadow)"},g,"?");
+}
+
+// ---------------- filters
+function applyFilters(){
+  const gmax=+STATE.grade;
+  for(const mk of MARKS){
+    let off=false; const gi = mk.grade?GRADES.indexOf(mk.grade):0;
+    if(gi>gmax) off=true;
+    if(STATE.k!=null && mk.k!=null && Math.round(+mk.k)!==STATE.k && !(mk.k==="∞")) off=true;
+    if(STATE.crunch){ const cr = mk.crunch || isCrunch(mk.fact) || (mk.kind==="coldens"||mk.kind==="rowdens"||mk.kind==="colhead"||mk.kind==="rowhead"); if(!cr) off=true; }
+    mk.node.classList.toggle("gfade",off);
+  }
+}
+
+// ---------------- card
+const card=document.getElementById("card");
+function gchip(g){ const o=GOPAC[g]??0; return `<span class="chip"><svg width="12" height="12"><rect x="1" y="1" width="10" height="10" rx="2" fill="currentColor" fill-opacity="${o}" stroke="currentColor" ${g==="measured"?'stroke-dasharray="1.5 1.5"':g==="reading"?'stroke-dasharray="3 2"':g==="hand-1"?'stroke-dasharray="4 1.6"':''}/></svg>${esc(GWORD[g]||g)}</span>`; }
+function describe(i){
+  const f=i.field?D.fields.find(x=>x.id===i.field):null, fn=f?f.name:"";
+  const P_=i.pid?D.places.find(p=>p.id===i.pid):null;
+  switch(i.kind){
+    case "floor": return {what:`${fn}: ${i.fact.label.replace(/^the plane/,"the plane")} (${P_.label})`,g:i.fact.grade,src:srcText(i.fact),why:i.fact.graw?`The source grades it ${i.fact.graw}.`:""};
+    case "cap": return {what:`${fn}, ${P_.label}: ${i.fact.label}${i.best?" — the lowest colouring this field has anywhere, so it colours the whole plane over "+fn:""}`,g:i.fact.grade,src:srcText(i.fact),why:"A colouring of a place's finite plane pulls back to a colouring of the field's plane (Theorem A)."};
+    case "char": return {what:`${fn}, ${P_.label}: ${i.fact.label}`,g:i.fact.grade,src:srcText(i.fact),why:"Character colourings (x ↦ ⌊k·θ(x)⌋) sit above the plain colourings; in the window they need more than six."};
+    case "owned": return {what:`${fn}: ${i.fact.label}`,g:i.fact.grade,src:srcText(i.fact),why:i.fact.external?"In print; not re-checked here.":""};
+    case "split": return {what:`${fn}, ${P_.label}: a split place — the unit circle opens into a hyperbola, so there is no finite plane and no bound here`,g:"hand-1",src:"tools/viz_local_global_map_common.py (the place rule), checked against data/fplane/map.json",why:"Split places are where a colouring we do not own would have to read (the shadows)."};
+    case "unrec": return {what:`${fn}, ${P_.label}: not recorded — the record lists this field's places below 100 only, or only its plane at 7`,g:"open",src:"data/fplane/map.md",why:"Unworked here, not unknown in principle."};
+    case "glo": return {what:`${fn} needs at least ${i.fact.v} colours: ${i.fact.label}`,g:i.fact.grade,src:srcText(i.fact),why:i.fact.rule?`Rule checked by the checker: ${i.fact.rule}.`:""};
+    case "ghi": return {what:`${fn} can be coloured with ${i.fact.v}: ${i.fact.label||"the lowest colouring at any of its places"}${i.via&&i.fact.id.startsWith("t.")?` (through ${D.places.find(p=>p.id===i.via.pid).label})`:""}`,g:i.fact.grade,src:srcText(i.fact),why:"The gap between the bar and this dot is where the shadows live."};
+    case "pred": return {what:`The conjecture predicts ${i.pred[0]===i.pred[1]?i.pred[0]:i.pred[0]+" to "+i.pred[1]} for ${fn}: the lowest column before the horizon${i.pred[1]>=7?" (seven is the bold form's cap)":""}`,g:"reading",src:"CLAUDE.md G48 (the conjecture); computed from the columns on this row",why:"A finite refusal can only confirm it; only a whole-plane colouring can falsify it."};
+    case "wall": case "wall6": { const w=i.fact; const standing = i.kind==="wall6"?!i.open:i.standing; return {what:`${w.label} — ${standing?"standing":"broken here"}${i.kind==="wall6"?(i.open?" (a window plane: undecided)":" (six refused)"):""}`,g:w.grade,src:srcText(w),why: standing?`To get past it, you would need ${w.need}.`:`Broken by ${w.broke} [${w.broke_kind}].`}; }
+    case "shadow": case "door": case "ghost": return {what:`Nobody owns this: ${i.sh.title}.${i.kind==="door"?` The door at ${P_.label} is left open by the records.`:""}`,g:"open",src:i.sh.carves.map(c=>c.src).filter((v,j,a)=>a.indexOf(v)===j).join(" · "),why:`${i.sh.carves.length} formats carved away; what remains: ${i.sh.remains}. Click for the full poster.`};
+    case "rowdens": return {what:`${fn}: ${i.n} theorem${i.n===1?"":"s"} mention this field${i.gn?` — ${i.gn} of them ${GWORD[i.grade]}`:""}${STATE.crunch?" (crunch only)":""}`,g:i.grade||"open",src:"LEDGER.md rows and § B, tagged by the keyword rule",why:i.n?"Mentions, not coverage.":"No theorem names this field by the rule: unworked."};
+    case "coldens": return {what:`${P_?P_.label:i.pid}: ${i.n} theorem${i.n===1?"":"s"} mention ${i.key==="p1"?"the primes ≡ 1 (mod 4) (split everywhere)":"this place"}`,g:"open",src:"LEDGER.md rows and § B, tagged by the keyword rule",why:i.n?"Mentions, not coverage.":"No theorem names it by the rule: unworked."};
+    case "colhead": return {what:`${P_.label} — click to follow it down every field`,g:null,src:"",why:""};
+    case "rowhead": return {what:`${fn} — click to follow this field`,g:null,src:"",why:f.note||""};
+  }
+  return {what:i.kind};
+}
+function showCard(e,i){
+  const d=describe(i); card.innerHTML=`<div class="what">${esc(d.what)}</div>${d.g?gchip(d.g):""}${d.src?`<div class="src">${esc(d.src)}</div>`:""}${d.why?`<div class="why">${esc(d.why)}</div>`:""}${i.fact&&isCrunch(i.fact)||i.crunch?'<span class="badge">new 2026-09-25</span>':""}`;
+  card.hidden=false; const r=card.getBoundingClientRect(); let x=e.clientX+14,y=e.clientY+14; if(x+r.width>innerWidth-8) x=e.clientX-r.width-14; if(y+r.height>innerHeight-8) y=e.clientY-r.height-14; card.style.left=Math.max(8,x)+"px"; card.style.top=Math.max(8,y)+"px";
+}
+svg.addEventListener("mousemove",e=>{ const n=e.target.closest(".mark"); if(n&&n.__info) showCard(e,n.__info); else card.hidden=true; });
+svg.addEventListener("mouseleave",()=>card.hidden=true);
+svg.addEventListener("focusin",e=>{ const n=e.target.closest(".mark"); if(n&&n.__info){ const r=n.getBoundingClientRect(); showCard({clientX:r.right,clientY:r.bottom},n.__info);} });
+svg.addEventListener("focusout",()=>card.hidden=true);
+function activate(i){
+  if(i.kind==="colhead"||i.kind==="coldens"){ STATE.followP = STATE.followP===i.pid?null:i.pid; draw(); panelPlace(i.pid); return; }
+  if(i.sh){ panelField(i.field, i.sh); return; }
+  if(i.field){ STATE.followF=i.field; draw(); panelField(i.field); return; }
+}
+svg.addEventListener("click",e=>{ const n=e.target.closest(".mark"); if(n&&n.__info) activate(n.__info); });
+svg.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ const n=e.target.closest(".mark"); if(n&&n.__info){ e.preventDefault(); activate(n.__info);} } });
+
+// ---------------- the focus panel
+const panel=document.getElementById("panel");
+function srcSpan(f){ return `<span class="src" title="copy">${esc(srcText(f))}</span>`; }
+function factLi(label,f){ return `<li>${esc(label)} ${gchip(f.grade)} ${srcSpan(f)}${isCrunch(f)?'<span class="badge">new</span>':""}</li>`; }
+function panelField(fid, focusSh){
+  const f=D.fields.find(x=>x.id===fid), m=fieldModel(f), grp=D.groups.find(g=>g.id===f.group);
+  let h=`<p class="eyebrow">Following a field</p><h2>${esc(f.name)}</h2><p class="muted">${esc(grp.label)}${f.note?" · "+esc(f.note):""}</p><div class="cols"><div>`;
+  h+=`<h4>The whole plane over ${esc(f.name)}</h4><ul>`;
+  if(m.lo) h+=factLi(`needs at least ${m.lo.v}: ${m.lo.label}`,m.lo);
+  if(m.gcap) h+=factLi(`colourable with ${m.gcap.v}: ${m.gcap.label}`,m.gcap);
+  if(m.pred) h+=`<li>the conjecture predicts ${m.pred[0]===m.pred[1]?m.pred[0]:m.pred[0]+"–"+m.pred[1]} (the lowest column) ${gchip("reading")}</li>`;
+  h+=`</ul><h4>Its places</h4><ul>`;
+  for(const p of D.places){ const t=m.places[p.id]; if(t.st==="split"&&p.kind!=="p3"&&p.id!=="2") continue;
+    if(t.st==="split") h+=`<li>${esc(p.label)}: split — no finite plane ${gchip("hand-1")}</li>`;
+    else if(t.st==="unrecorded") h+=`<li>${esc(p.label)}: not recorded ${gchip("open")}</li>`;
+    else if(t.key){ h+=`<li>${esc(p.label)}: ${t.floor?`needs ≥ ${t.floor.v}`:""}${t.floor&&t.cap?", ":""}${t.cap?`a ${t.cap.v}-colouring exists`:""} ${t.floor?gchip(t.floor.grade):""}${t.cap&&(!t.floor||t.cap.grade!==t.floor.grade)?" "+gchip(t.cap.grade):""} <span class="src">${esc(srcText(t.floor||t.cap))}</span></li>`; } }
+  h+=`</ul>`;
+  const own=D.owned.filter(o=>o.field===fid); if(own.length){ h+=`<h4>Colourings we own, beyond the caps</h4><ul>`+own.map(o=>factLi(o.label,o)).join("")+`</ul>`; }
+  h+=`</div><div>`;
+  const shs=D.shadows.filter(s=>s.field===fid||(s.id==="sh.59"&&["Q83","Q131"].includes(fid)));
+  for(const sh of shs){ h+=`<h4>The shadow: ${esc(sh.title)}</h4><p>${esc(sh.why)}</p><p class="muted">Carved away, in order:</p><ol>`+sh.carves.map(c=>`<li>${esc(c.label)} ${gchip(c.grade)} ${srcSpan(c)}</li>`).join("")+`</ol><p><b>What remains:</b> ${esc(sh.remains)}. <span class="src">${esc(sh.remains_src.src)}</span></p><p><b>What would close it:</b> ${esc(sh.closes)}.</p>`; }
+  const ws=D.walls.filter(w=>(w.where.rows&&w.where.rows.includes(fid))||w.id==="w.2adic"||w.id==="w.real4");
+  h+=`<h4>Walls on this row</h4><ul>`+ws.map(w=>`<li><b>${esc(w.label)}</b> — ${w.v==="standing"?"standing":"broken or both"}. <span class="muted">To get past it: ${esc(w.need)}.${w.broke?` Broken by: ${esc(w.broke)} [${esc(w.broke_kind)}].`:""}</span> ${gchip(w.grade)} ${srcSpan(w)}</li>`).join("")+`</ul>`;
+  const ts=D.theorems.filter(t=>t.tags.field.includes(fid)).sort((a,b)=>GRADES.indexOf(a.grade)-GRADES.indexOf(b.grade));
+  h+=`<h4>${ts.length} theorems mention it (keyword rule)</h4>`;
+  h+= ts.length?`<ul>`+ts.slice(0,40).map(t=>`<li>${gchip(t.grade)} <span class="src">${esc(t.kind==="row"?"LEDGER.md row "+t.n:"LEDGER.md § B "+t.id)}</span>${t.crunch?'<span class="badge">new</span>':""} ${esc(t.text.slice(0,180))}${t.text.length>180?"…":""}</li>`).join("")+`</ul>${ts.length>40?`<p class="muted">…and ${ts.length-40} more.</p>`:""}`:`<p class="muted">None: this row is unworked by the rule.</p>`;
+  h+=`</div></div>`; panel.innerHTML=h; bindCopy();
+  if(focusSh) panel.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function panelPlace(pid){
+  const p=D.places.find(x=>x.id===pid); let h=`<p class="eyebrow">Following a place down every field</p><h2>${esc(p.label)}</h2><ul>`;
+  const byState={}; for(const f of D.fields){ const st=f.places[pid]; (byState[st]=byState[st]||[]).push(f.name); }
+  const WORD={stable:"a finite plane",split:"split — no finite plane",ramified:"ramified above 2 — the plane two-colours",inert:"inert above 2 — a four-colourable target",real:"the real place",absent:"no place with a residue field of this size",unrecorded:"not recorded",none:"none"};
+  for(const st in byState) h+=`<li><b>${esc(WORD[st]||st)}</b> in ${byState[st].length}: <span class="muted">${esc(byState[st].join(", "))}</span></li>`;
+  h+=`</ul>`;
+  const tg=D.targets.filter(t=>t.place===pid||(pid==="2"&&t.place&&t.place.startsWith("2")));
+  if(tg.length) h+=`<h4>Its finite plane</h4><ul>`+tg.map(t=>factLi(t.label,t)).join("")+`</ul>`;
+  const key=(p.kind==="p1"||p.kind==="p1big")?"p1":pid; const ts=D.theorems.filter(t=>t.tags.place.includes(key)).sort((a,b)=>GRADES.indexOf(a.grade)-GRADES.indexOf(b.grade));
+  h+=`<h4>${ts.length} theorems mention it (keyword rule)</h4><ul>`+ts.slice(0,30).map(t=>`<li>${gchip(t.grade)} <span class="src">${esc(t.kind==="row"?"LEDGER.md row "+t.n:"LEDGER.md § B "+t.id)}</span>${t.crunch?'<span class="badge">new</span>':""} ${esc(t.text.slice(0,160))}…</li>`).join("")+`</ul>`;
+  panel.innerHTML=h; bindCopy();
+}
+function bindCopy(){ panel.querySelectorAll(".src").forEach(s=>s.addEventListener("click",()=>{ const t=s.textContent; if(navigator.clipboard) navigator.clipboard.writeText(t).then(()=>{s.textContent="copied";setTimeout(()=>s.textContent=t,900)}).catch(()=>{ const r=document.createRange(); r.selectNodeContents(s); const sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }); })); }
+function panelIntro(){
+  const nT=D.theorems.length, nC=D.theorems.filter(t=>t.crunch).length;
+  panel.innerHTML=`<p class="eyebrow">Click a row, a column, a shadow or a wall</p><h2>What the map holds</h2><div class="cols"><div><ul>
+  <li>${D.fields.length-1} fields and the plane itself; ${D.places.length} places.</li>
+  <li>${D.targets.length} facts about finite planes, ${D.field_facts.length} about the fields' own values, ${D.owned.length} colourings beyond the caps, ${D.walls.length} walls, ${D.shadows.length} wanted posters.</li>
+  <li>${nT} theorems from the ledger, ${nC} of them minted in the crunch of 2026-09-25.</li></ul></div><div><ul>
+  <li>Every mark was re-read from its source by <span class="src">tools/viz_local_global_map_check.py</span>; a planted wrong grade or number makes it fail, naming the fact.</li>
+  <li>Grades are the source's own words, folded to seven solidity steps; a reading is never drawn solid.</li></ul></div></div>`; bindCopy();
+}
+
+// ---------------- legend
+function legend(){
+  const L=document.getElementById("legend");
+  const sw=(g,c="var(--ink-2)")=>{ const o=GOPAC[g]; const extra=g==="measured"?'stroke-dasharray="1.5 1.5"':g==="reading"?'stroke-dasharray="3 2"':g==="hand-1"?'stroke-dasharray="4 1.6"':''; const fill=`fill="${c}" fill-opacity="${o}"`; return `<svg width="24" height="16"><rect x="5" y="1" width="12" height="14" rx="2" ${fill} stroke="${c}" stroke-width="${g==="certificate"?2.2:1.2}" ${extra}/>${g==="open"?'<text x="11" y="12" text-anchor="middle" font-size="9" fill="var(--ink-3)">?</text>':""}</svg>`; };
+  let h=`<h3>How solid</h3>`+GRADES.map(g=>`<div class="row">${sw(g)}<span>${GWORD[g]}</span></div>`).join("");
+  h+=`<h3>Colours (height, and hue)</h3><div class="row" style="grid-template-columns:1fr"><svg width="220" height="18">${[2,3,4,5,6,7,8].map((k,i)=>`<rect x="${i*30}" y="2" width="28" height="12" rx="2" fill="${kcol(k)}"/><text x="${i*30+14}" y="11.5" text-anchor="middle" font-size="9.5" fill="#fff" font-family="IBM Plex Mono, monospace">${k===8?"8+":k}</text>`).join("")}</svg></div>`;
+  const g=(inner)=>`<svg width="24" height="22">${inner}</svg>`;
+  h+=`<h3>Marks</h3>
+  <div class="row">${g('<rect x="7" y="6" width="10" height="16" rx="1.5" fill="var(--k5)"/>')}<span><b>Bar</b>: fewer colours than its top are refused at that place</span></div>
+  <div class="row">${g('<line x1="12" x2="12" y1="20" y2="6" stroke="var(--ink-3)"/><circle cx="12" cy="6" r="3.6" fill="var(--k6)" stroke="var(--ink)"/>')}<span><b>Dot</b>: a colouring with this many exists — one we own. A thin line below it is the open gap</span></div>
+  <div class="row">${g('<circle cx="12" cy="11" r="7.5" fill="var(--k4)" fill-opacity=".25"/><circle cx="12" cy="11" r="3.6" fill="var(--k4)" stroke="var(--ink)"/>')}<span>The field's <b>best</b> colouring: the lowest dot in its row</span></div>
+  <div class="row">${g('<circle cx="12" cy="11" r="4.2" fill="none" stroke="var(--k8)" stroke-width="1.4"/>')}<span><b>Ring</b>: a character colouring (x ↦ ⌊k·θ(x)⌋) and how many colours it needs</span></div>
+  <div class="row">${g('<path d="M6,15 q6,-9 12,0" fill="none" stroke="var(--ink-3)"/>')}<span><b>Split place</b> (the literature's word): the circle is a hyperbola there, so no finite plane and no bound</span></div>
+  <div class="row">${g('<path d="M4,13 h16" stroke="var(--shadow)" stroke-width="1.3" stroke-dasharray="1 3.5"/><rect x="2" y="3" width="20" height="5" rx="2" fill="var(--shadow-door)"/>')}<span><b>Shadow</b>: a colouring nobody owns. Dotted where the records carve it away, solid where a door is left open, fading past the horizon</span></div>
+  <div class="row">${g('<circle cx="12" cy="11" r="5.4" fill="var(--surface)" stroke="var(--shadow)" stroke-width="1.6" stroke-dasharray="2.5 1.6"/><text x="12" y="14" text-anchor="middle" font-size="7.5" fill="var(--shadow)">?</text>')}<span>Where the shadow would land on the field's own value</span></div>
+  <div class="row">${g('<path d="M5,11 l-5,-3.5 v7 z" transform="translate(12,0)" fill="var(--ink-2)"/>')}<span>The conjecture's prediction: the lowest column</span></div>
+  <div class="row">${g('<rect x="4" y="4" width="16" height="16" fill="var(--rule-soft)"/>')}<span>What linear and fractional instruments can prove: up to 4.36</span></div>
+  <h3>Walls</h3>
+  <div class="row">${g('<line x1="12" x2="12" y1="2" y2="21" stroke="var(--lock)" stroke-width="2"/>')}<span><b>Standing</b>. Its card says what getting past it would take (a counterexample's invariant, G79)</span></div>
+  <div class="row">${g('<line x1="12" x2="12" y1="2" y2="21" stroke="var(--key)" stroke-width="1.6" stroke-dasharray="4 5"/>')}<span><b>Broken</b>. Its card names what broke it: an invariant every colouring carries, or a construction</span></div>
+  <div class="row">${g('<line x1="2" x2="22" y1="11" y2="11" stroke="var(--k6)" stroke-width="1.6" stroke-dasharray="2 2.5"/>')}<span>The line at six through a window plane: undecided</span></div>
+  <h3>Density</h3>
+  <div class="row">${g('<rect x="2" y="8" width="8" height="6" fill="var(--ink)"/><rect x="10" y="8" width="10" height="6" fill="var(--ink)" fill-opacity=".45"/>')}<span>Theorems that <b>mention</b> a field (under its name) or a place (above its column), shaded by grade</span></div>
+  <div class="row">${g('<rect x="4" y="6" width="16" height="10" fill="url(#unworked)" stroke="var(--ink-3)" stroke-width=".5"/>')}<span>No theorem mentions it: unworked</span></div>`;
+  L.innerHTML=h;
+}
+
+// ---------------- guided first view
+const STEPS=[
+  ["Each row is a field. Find ℚ(√47): the points whose coordinates use √47.", {f:"Q47"}],
+  ["A bar is a place's finite plane. At 11 the plane needs five colours, and a five-colouring exists (the dot on top). That colouring pulls back to the whole field.", {f:"Q47",p:"11"}],
+  ["Past the horizon stands the field itself: it needs at least 4 (the bar) and has a 5-colouring (the dot). The conjecture says it should equal the lowest column: five.", {f:"Q47",p:null,g:true}],
+  ["The violet dotted line at four is a four-colouring nobody owns. Every format near the columns is carved away; it survives only past the horizon — it would have to read infinitely many split places.", {f:"Q47",sh:true}],
+  ["Dark rules are standing walls, teal dashed ones are broken. The rule beside the column above 2 stands in ℚ(√59)'s row and is broken in ℚ(√47)'s.", {f:"Q59",p:"2"}],
+  ["Click a column number to follow that prime down every field, a field's name to see everything known about it, and use Changed 2026-09-25 to see the crunch.", {}],
+];
+function guide(i){
+  STATE.guide=i; const gEl=document.getElementById("guide");
+  if(i==null){ gEl.hidden=true; ls.set("lgm-guide","done"); STATE.followF=null; STATE.followP=null; draw(); return; }
+  gEl.hidden=false; document.getElementById("gstep").textContent=`${i+1} / ${STEPS.length}`; document.getElementById("gtext").textContent=STEPS[i][0];
+  const s=STEPS[i][1]; STATE.followF=s.f||null; STATE.followP=s.p||null; draw();
+  document.getElementById("gprev").disabled=i===0; document.getElementById("gnext").textContent=i===STEPS.length-1?"Done":"Next";
+}
+document.getElementById("gprev").onclick=()=>guide(Math.max(0,STATE.guide-1));
+document.getElementById("gnext").onclick=()=>guide(STATE.guide>=STEPS.length-1?null:STATE.guide+1);
+document.getElementById("gclose").onclick=()=>guide(null);
+
+// ---------------- toolbar
+const kg=document.getElementById("kgrp");
+for(const k of [null,2,3,4,5,6,7]){ const b=document.createElement("button"); b.type="button"; b.textContent=k==null?"all":k; b.setAttribute("aria-pressed",k==null?"true":"false"); b.onclick=()=>{ STATE.k=k; [...kg.querySelectorAll("button")].forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false")); applyFilters(); }; kg.appendChild(b); }
+const ffam=document.getElementById("ffam"); for(const g of D.groups){ const o=document.createElement("option"); o.value=g.id; o.textContent=g.label; ffam.appendChild(o); }
+ffam.onchange=()=>{ STATE.fam=ffam.value; draw(); };
+document.getElementById("fgrade").onchange=e=>{ STATE.grade=+e.target.value; applyFilters(); };
+for(const [id,key] of [["lwalls","walls"],["lshadows","shadows"],["ldensity","density"],["lcrunch","crunch"]]){ const b=document.getElementById(id); b.onclick=()=>{ STATE[key]=!STATE[key]; b.setAttribute("aria-pressed",STATE[key]?"true":"false"); draw(); }; }
+document.getElementById("lreset").onclick=()=>{ Object.assign(STATE,{grade:6,k:null,fam:"all",walls:true,shadows:true,density:true,crunch:false,followP:null,followF:null}); document.getElementById("fgrade").value="6"; ffam.value="all"; [...kg.querySelectorAll("button")].forEach((x,j)=>x.setAttribute("aria-pressed",j===0?"true":"false")); for(const id of ["lwalls","lshadows","ldensity"]) document.getElementById(id).setAttribute("aria-pressed","true"); document.getElementById("lcrunch").setAttribute("aria-pressed","false"); draw(); panelIntro(); };
+
+document.getElementById("foot").innerHTML=`Built ${esc(D.meta.built)} by crunch job ${esc(D.meta.job)} from <span class="mono">data/viz/local-global-map/facts.json</span>, re-read from its sources by <span class="mono">tools/viz_local_global_map_check.py</span>. Density counts are mentions found by a keyword rule over <span class="mono">LEDGER.md</span>, not coverage. The field list is every field the records name as an example, a test or a prediction — not every field. A measured null is never drawn as a refusal, and a reading is never drawn solid.`;
+legend(); panelIntro();
+if(ls.get("lgm-guide")==="done"){ document.getElementById("guide").hidden=true; draw(); } else guide(0);
+})();
+</script>

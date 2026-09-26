@@ -225,3 +225,18 @@ alone, recorded in the README.
   ℚ(√71), ℚ(√95), ℚ(√191), ℚ(√2351), ℚ(√4703) have one each. Places: above 2 — 115, the primes ≡ 1 (mod 4) — 62, 3 — 35, the real place
   — 32, 11 — 23, 7 — 20, 23 — 15; 31, 47, 59, 67, 83 have one to four.
 - **Would have searched here:** none. The only computation is the place rule, seconds, exact.
+
+## Stage 3 — SAVED: the page
+
+- `page.tmpl.html` (the page, with a `/*FACTS*/null` marker) + `build.py` (refuses to build unless the checker passes; inlines
+  `facts.json`) → `index.html`, 422 KB, self-contained (Google Fonts for IBM Plex, the project's existing visualization faces; no library).
+- The board: 32 rows × 22 places, 1048 × 2288 in its own horizontal-scroll container; legend sticky beside it on wide screens, above it
+  below 1180 px. Bars (proven floor), dots (colourings owned), the pulsing best dot per row, character rings, split-place hyperbolas,
+  unrecorded places hatched, the global column with the conjecture's prediction and the linear instruments' 4.36 band, eleven walls drawn
+  where §1.4 puts them, four shadows (dotted where carved, doors where the records leave them open, fading past the horizon to a "?" on the
+  field's own value).
+- Filters: grade floor, colour count, field group; layers: walls, shadows, density, "changed 2026-09-25". Follow a prime (column header) or a
+  field (row name); the focus panel lists every fact with its grade and copyable source. A six-step guided view opens once per viewer.
+- **Checks run** (one each, no loop): the script parses; one run against a stub DOM draws 2,190 SVG nodes with no exception. No browser
+  is installed here for a screenshot (`chromium`, `google-chrome` absent), so the visual look happens on the published page.
+- **Would have searched here:** none.
