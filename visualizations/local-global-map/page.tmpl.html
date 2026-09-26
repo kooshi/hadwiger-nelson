@@ -74,6 +74,11 @@ svg text{font-family:"IBM Plex Sans",system-ui,sans-serif}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4px 28px}
 .badge{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;border:1px solid var(--crunch);color:var(--crunch);border-radius:4px;padding:0 4px;margin-left:4px}
 .muted{color:var(--ink-3)}
+.howto{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:10px 16px;margin:0 0 12px}
+.howto summary{cursor:pointer;font-weight:600;font-family:"IBM Plex Sans Condensed",sans-serif;font-size:15px}
+.howto ol{margin:8px 0 2px;padding-left:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:4px 28px}
+.howto li{color:var(--ink-2);max-width:70ch}
+.howto b{color:var(--ink)}
 .foot{margin-top:22px;color:var(--ink-3);font-size:12.5px;max-width:110ch}
 .hit{cursor:pointer}
 .dim .mark:not(.keep){opacity:.12}
@@ -94,6 +99,18 @@ svg text{font-family:"IBM Plex Sans",system-ui,sans-serif}
     <p id="gtext"></p>
     <div class="btns"><button id="gprev" type="button">Back</button><button id="gnext" type="button">Next</button><button id="gclose" type="button">Close</button></div>
   </div>
+
+  <details class="howto" id="howto" open>
+    <summary>How to read this map</summary>
+    <ol>
+      <li><b>A row is a field</b> — the plane whose coordinates lie in it. Rows are grouped by what the primes above 2 and 3 do, then by the lowest column.</li>
+      <li><b>A column is a place.</b> Left: the real place (∞). Then the place above 2. Then the primes ≡ 3 (mod 4), where a field may have a <i>finite plane</i>. Then the primes ≡ 1 (mod 4), which are split in every field. Then the horizon — infinitely many places — and the whole plane over the field.</li>
+      <li><b>Height is colours.</b> A bar rises to the fewest colours that place's plane is proven to need; a dot sits where a colouring exists. Each dot is a colouring we own, and the lowest one colours the whole field.</li>
+      <li><b>The conjecture</b> says the last column should stand exactly at the lowest column (the small triangle). Where the bar and the dot of the last column differ, the answer is open — that is where the violet <b>shadows</b> live: colourings nobody owns, carved away format by format, running off past the horizon.</li>
+      <li><b>Walls</b> are no-go theorems. Dark and solid: standing; teal and dashed: broken, with what broke it. The dashed orange line at six crosses the window planes 23, 27, 31, 43, 47, where six is undecided.</li>
+      <li><b>Solidity is grade</b>: solid fill is kernel-checked, a double edge a certificate, lighter fills hand proofs, dotted outlines computed or measured, hollow a reading or open. The bars under each field's name count the theorems that mention it.</li>
+    </ol>
+  </details>
 
   <div class="toolbar" role="toolbar" aria-label="Filters and layers">
     <div class="grp"><label for="fgrade">Show marks at least as solid as</label>
