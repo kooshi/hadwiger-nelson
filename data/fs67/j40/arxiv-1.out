@@ -1,0 +1,10 @@
+== au:Tardif_C
+  total 0
+== abs:%22uniquely%20colorable%22+AND+abs:product
+  total 0
+== abs:%22uniquely%20colourable%22+AND+abs:product
+  total 1
+  2003 hep-ph/0305252v2 Matching NLO QCD and parton showers in heavy flavour production
+== abs:%22categorical%20product%22+AND+abs:uniquely
+  total 1
+  2023 2305.16524v3 Classical Distributive Restriction Categories

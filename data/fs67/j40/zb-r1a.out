@@ -1,0 +1,180 @@
+QUERY 'ab:"uniquely" & ab:"colorable" & ab:"product"': 4 hits
+  1999 | Zhu, Xuding | Construction of uniquely \(H\)-colorable graphs |  | 0937.05043
+  1979 | Bollobas, Bela; Thomason, Andrew | Set colourings of graphs |  | 0403.05038
+  2002 | Klavžar, Sandi; Yeh, Hong-Gwa | On the fractional chromatic number, the chromatic number, and graph products |  | 0999.05032
+  2007 |  | Discrete geometry, combinatorics and graph theory. 7th China-Japan conference, CJCDGCGT 2005, Tianji |  | 1115.68001
+
+QUERY 'ab:"uniquely" & ab:"colourable" & ab:"product"': 1 hits
+  2002 | Larose, Benoit | Strongly projective graphs |  | 1020.05029
+
+QUERY 'ab:"uniquely" & ab:"Hedetniemi"': 9 hits
+  1969 | Chartrand, G.; Geller, D. P. | On uniquely colorable planar graphs |  | 0175.50206
+  1976 | Bollobas, Bela; Sauer, Norbert | Uniquely colourable graphs with large girth |  | 0344.05115
+  1990 | Zelinka, Bohdan | Regular totally domatically full graphs |  | 0745.05065
+  1975 | Simoes-Pereira, J. M. S. | On graphs uniquely partitionable into n-degenerate subgraphs |  | 0308.05129
+  1985 | Borowiecki, Mieczysław; Michalak, Danuta | The independence graphs of hypergraphs and middle graphs |  | 0639.05049
+  2017 | Panda, B. S.; Pandey, Arti | On the complexity of minimum cardinality maximal uniquely restricted matching in graphs |  | 1496.68267
+  1995 |  | Graph theory, combinatorics, algorithms and applications. Vol. 2. Proceedings of the seventh quadren |  | 0839.00020
+  1985 | Michalak, Danuta | Strong independence graphs of hypergraphs and middle graphs |  | 0665.05048
+  1989 |  | Graph theory and its applications: East and West. Proceedings of the first China-USA international c |  | 0788.00046
+
+QUERY 'ab:"Greenwell" & ab:"Lovász"': 12 hits
+  1985 | Sachs, Horst | On colour critical graphs |  | 0578.05023
+  1974 | Wilson, Richard M. | Graph puzzles, homotopy, and the alternating group |  | 0285.05110
+  1999 | Zhu, Xuding | Construction of uniquely \(H\)-colorable graphs |  | 0937.05043
+  1983 | Sachs, Horst; Stiebitz, Michael | Construction of colour-critical graphs with given major-vertex subgraph |  | 0532.05029
+  2009 | Kun, Gábor; Larose, Benoit | Maximum stable sets in analogs of Kneser and complete graphs |  | 1207.05143
+  2008 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | 1147.03028
+  2011 | Burkert, Jeffrey; Johnson, Peter | Szlam's lemma: mutant offspring of a Euclidean Ramsey problem from 1973, with numerous applications |  | 1277.05162
+  2025 | Saravanan, M.; Kathiresan, KM. | On the independence graph of Hamming graph |  | 1562.05264
+  2002 | Larose, Benoit | Strongly projective graphs |  | 1020.05029
+  2024 | Csernák, Tamás | On proper colorings of functions. |  | None
+  2023 | Luo, Cong; Ma, Jie; Yang, Tianchi | On the maximum number of edges in \(k\)-critical graphs |  | 1551.05187
+  2023 | Tamás Csernák | Trivial coloring of Cartesian product of graphs |  | arXiv:2303.06406
+
+QUERY 'ab:"Greenwell" & ab:"Lovasz"': 12 hits
+  1985 | Sachs, Horst | On colour critical graphs |  | 0578.05023
+  1974 | Wilson, Richard M. | Graph puzzles, homotopy, and the alternating group |  | 0285.05110
+  1999 | Zhu, Xuding | Construction of uniquely \(H\)-colorable graphs |  | 0937.05043
+  1983 | Sachs, Horst; Stiebitz, Michael | Construction of colour-critical graphs with given major-vertex subgraph |  | 0532.05029
+  2009 | Kun, Gábor; Larose, Benoit | Maximum stable sets in analogs of Kneser and complete graphs |  | 1207.05143
+  2008 | zbMATH Open Web Interface contents unavailable due to conflicting licenses.; zbMATH Open Web Interface contents unavailable due to conflicting licenses. | zbMATH Open Web Interface contents unavailable due to conflicting licenses. |  | 1147.03028
+  2011 | Burkert, Jeffrey; Johnson, Peter | Szlam's lemma: mutant offspring of a Euclidean Ramsey problem from 1973, with numerous applications |  | 1277.05162
+  2025 | Saravanan, M.; Kathiresan, KM. | On the independence graph of Hamming graph |  | 1562.05264
+  2002 | Larose, Benoit | Strongly projective graphs |  | 1020.05029
+  2024 | Csernák, Tamás | On proper colorings of functions. |  | None
+  2023 | Luo, Cong; Ma, Jie; Yang, Tianchi | On the maximum number of edges in \(k\)-critical graphs |  | 1551.05187
+  2023 | Tamás Csernák | Trivial coloring of Cartesian product of graphs |  | arXiv:2303.06406
+
+QUERY 'ab:"fall coloring" & ab:"product"': 1 hits
+  2011 | Kumar, Chandra; Nicholas, T.; Somasundaram, S. | Fall coloring on product of cycles and powers |  | 1266.05037
+
+QUERY 'ab:"fall colouring"': 2 hits
+  2000 | Dunbar, J. E.; Hedetniemi, S. M.; Hedetniemi, S. T.; Jacobs, D. P. | Fall colorings of graphs |  | 0962.05020
+  2025 | Belavadi, Manoj; Cameron, Kathie; Hildred, Elias | Frozen colourings in \(2 K_2\)-free graphs |  | 1579.05061
+
+QUERY 'ab:"frozen" & ab:"coloring" & ab:"product"': 1 hits
+  2021 |  | Proceedings of the 53rd annual ACM SIGACT symposium on theory of computing, STOC '21, virtual, Italy |  | 1466.68018
+
+QUERY 'ab:"exponential graph" & ab:"coloring"': 0 hits
+
+QUERY 'ab:"idomatic" & ab:"product"': 3 hits
+  2020 | Goddard, Wayne; Henning, Michael A. | Independent domination, colorings and the fractional idomatic number of a graph |  | 1508.05125
+  2011 | Klavžar, Sandi; Mekiš, Gašper | On idomatic partitions of direct products of complete graphs |  | 1234.05177
+  2010 | Valencia-Pabon, Mario | Idomatic partitions of direct products of complete graphs |  | 1215.05136
+
+QUERY 'au:"Duffus, Dwight"': 65 hits
+  1981 | Duffus, Dwight; Rival, Ivan | A structure theory for ordered sets |  | 0459.06002
+  1977 | Duffus, Dwight; Rival, Ivan | Path length in the covering graph of a lattice |  | 0372.06005
+  1983 | Duffus, Dwight; Rival, Ivan | Graphs orientable as distributive lattices |  | 0513.06004
+  1979 | Duffus, Dwight; Rival, Ivan | Retracts of partially ordered sets |  | 0421.06002
+  1978 | Duffus, Dwight; Rival, Ivan | A logarithmic property for exponents of partially ordered sets |  | 0497.06004
+  1982 | Duffus, Dwight; Wille, Rudolf | Automorphism groups of function lattices |  | 0484.06001
+  1979 | Duffus, Dwight; Wille, Rudolf | A theorem on partially ordered sets of order-preserving mappings |  | 0417.06001
+  2003 | Duffus, Dwight | Obituary: Ivan Rival |  | 1089.01515
+  1980 | Duffus, Dwight; Poguntke, Werner; Rival, Ivan | Retracts and the fixed point problem for finite partially ordered sets |  | 0441.06003
+  2010 | Duffus, Dwight; Sands, Bill | On the size of maximal chains and the number of pairwise disjoint maximal antichains |  | 1203.06003
+  1987 | Duffus, Dwight; Sauer, Norbert | Fixed points of products and the strong fixed point property |  | 0651.06001
+  1996 | Duffus, Dwight; Sauer, Norbert | Lattices arising in categorial investigations of Hedetniemi's conjecture |  | 0853.06006
+  1990 | Duffus, Dwight; Winkler, Peter | On the number of k-realizations of an ordered set |  | 0728.06002
+  1991 | Aigner, Martin; Duffus, Dwight; Kleitman, Daniel J. | Partitioning a power set into union-free classes |  | 0790.05010
+  2024 | Dwight Duffus; Bill Sands | Covering Distributive Lattices by Intervals |  | arXiv:2401.15718
+  1995 | Duffus, Dwight; Lefmann, Hanno; Rödl, Vojtěch | Shift graphs and lower bounds on Ramsey numbers \(r_ k(l;r)\) |  | 0822.05047
+  1988 | Duffus, Dwight; Sands, Bill; Woodrow, Robert | Lexicographic matchings cannot form Hamiltonian cycles |  | 0657.05055
+  2011 | Duffus, Dwight; Frankl, Peter; Rödl, Vojtěch | Maximal independent sets in bipartite graphs obtained from Boolean lattices |  | 1203.05075
+  2013 | Duffus, Dwight; Frankl, Peter; Rödl, Vojtěch | Maximal independent sets in the covering graph of the cube |  | 1277.05087
+  1982 | Duffus, Dwight | Matching in modular lattices |  | 0479.06011
+  2018 | Duffus, Dwight; Kay, Bill; Rödl, Vojtěch | The minimum number of edges in uniform hypergraphs with property O |  | 1391.05188
+  2024 | Couceiro, Miguel; Duffus, Dwight | Algebras, graphs and ordered sets -- ALGOS 2020 \& the mathematical contributions of Maurice Pouzet |  | None
+  1978 | Duffus, D.; Rival, I. | Crowns in dismantlable partially ordered sets |  | 0421.06001
+  1978 | Duffus, Dwight; Rival, Ivan | Separable subsets of a finite lattice |  | 0422.06001
+  1984 | Duffus, Dwight; Pouzet, Maurice | Representing ordered sets by chains |  | 0554.06002
+  1980 | Duffus, Dwight; Rival, Ivan | A note on weak embeddings of distributive lattices |  | 0431.06009
+  1995 | Duffus, Dwight; Ginn, Mark; Rödl, Vojtěch | On the computational complexity of ordered subgraph recognition |  | 0834.68052
+  1999 | Duffus, Dwight; Sands, Bill | An inequality for the sizes of prime filters of finite distributive lattices |  | 0937.06004
+  2001 | Duffus, Dwight; Sands, Bill | Minimum sized fibres in distributive lattices |  | 1019.06002
+  2005 | Duffus, Dwight; Sands, Bill | Splitting numbers of grids |  | 1060.06005
+  2003 | Duffus, Dwight; Sands, Bill | Finite distributive lattices and the splitting property |  | 1090.06007
+  1991 | Duffus, Dwight; Kierstead, H. A.; Trotter, W. T. | Fibres and ordered set coloring |  | 0757.06001
+  1984 | Duffus, Dwight | Automorphisms and products of ordered sets |  | 0554.06004
+  2019 | Duffus, Dwight; Howard, David; Leader, Imre | The width of downsets |  | 1494.06001
+  1986 | Duffus, D. A.; Hanson, D. | Minimal k-saturated and color critical graphs of prescribed minimum degree |  | 0593.05040
+  1992 | Duffus, Dwight; Rodl, Vojtech; Sands, Bill; Woodrow, Robert | Enumeration of order preserving maps |  | 0766.06005
+  2006 | Duffus, Dwight; Rödl, Vojtěch; Sands, Bill; Sauer, Norbert | Chromatic numbers and homomorphisms of large girth hypergraphs |  | 1128.05020
+  2008 | Duffus, Dwight; Laflamme, Claude; Pouzet, Maurice | Retracts of posets: The chain-gap property and the selection property are independent |  | 1157.06001
+  1982 | Davey, B. A.; Duffus, D. | Exponentiation and duality |  | 0509.06001
+  1984 | Duffus, Dwight | Powers of ordered sets |  | 0561.06005
+  1996 | Duffus, D.; Goddard, T. | The complexity of the fixed point property |  | 0866.06002
+  1981 | Babai, L.; Duffus, D. | Dimension and automorphism groups of lattices |  | 0495.06002
+  1982 | Duffus, D.; Rival, I.; Winkler, P. | Minimizing setups for cycle-free ordered sets |  | 0497.06002
+  1981 | Duffus, D.; Pouzet, M.; Rival, I. | Complete ordered sets with no infinite antichains |  | 0466.06002
+  1980 | Duffus, D.; Rival, I.; Simonovits, M. | Spanning retracts of a partially ordered set |  | 0453.06003
+  1978 | Duffus, D.; Jonsson, B.; Rival, I. | Structure results for function lattices |  | 0381.06006
+  2015 | Duffus, Dwight; Thayer, Kyle | Symmetric chain decompositions of quotients by wreath products. |  | 1315.06003
+  1985 | Duffus, D.; Sands, B.; Woodrow, R. E. | On the chromatic number of the product of graphs |  | 0664.05019
+  2005 | Duffus, D.; Sauer, N. W. | Chromatic numbers and products |  | 1073.05025
+  2013 | Duffus, Dwight; Laflamme, Claude; Pouzet, Maurice; Woodrow, Robert | Convex sublattices of a lattice and a fixed point property. |  | 1319.06005
+  1990 | Duffus, D.; Sands, B.; Winkler, P. | Maximal chains and antichains in Boolean lattices |  | 0704.06001
+  2002 | Duffus, D.; Goddard, T. | Some progress on the Aharoni-Korman conjecture |  | 1004.06003
+  1998 | Duffus, Dwight; Łuczak, Tomasz; Rödl, Vojtěch; Ruciński, Andrzej | Endomorphisms of partially ordered sets |  | 0894.06001
+  2012 | Duffus, Dwight; McKibben-Sanders, Jeremy; Thayer, Kyle | Some quotients of chain products are symmetric chain orders |  | 1253.06002
+  1981 | Duffus, D.; Jacobson, M. S.; Gould, R. J. | Forbidden subgraphs and the Hamiltonian theme |  | 0466.05049
+  2000 | Duffus, D.; Goddard, T. | An ordered set of size \(\aleph_1\) with monochromatic maximal chains |  | 0970.06002
+  1996 | Duffus, D.; Goddard, T. | Products of chains with monochromatic maximal chains and antichains |  | 0865.06001
+  1991 | Duffus, D.; Sands, B.; Sauer, N.; Woodrow, R. E. | Two-colouring all two-element maximal antichains |  | 0742.06004
+  1978 | Davey, B. A.; Duffus, D.; Quackenbush, R. W.; Rival, I. | Exponents of finite simple lattices |  | 0391.06006
+  1998 | Duffus, D.; Łuczak, Tomasz; Rödl, Vojtěch | Biased positional games on hypergraphs |  | 0928.91011
+  1994 | Duffus, D. A.; Kierstead, H. A.; Snevily, H. S. | An explicit 1-factorization in the middle of the Boolean lattice |  | 0795.05111
+  1992 | Duffus, D.; Rodl, V.; Sauer, N.; Woodrow, R. | Coloring ordered sets to avoid monochromatic maximal chains |  | 0764.06002
+  2007 | Duffus, D.; Erdős, P. L.; Nešetřil, J.; Soukup, L. | Antichains in the homomorphism order of graphs. |  | 1199.06008
+  1989 | Bonnet, R.; Duffus, D.; Woodrow, R. E. | Coloring chains |  | 0689.06001
+  2010 |  | Special issue: 1st international conference on relations, orders and graphs: interaction with comput |  | 1215.68013
+
+QUERY 'au:"Woodrow, Robert E."': 46 hits
+  1979 | Woodrow, Robert E. | There are four countable ultrahomogeneous graphs without triangles |  | 0429.05044
+  1980 | Lachlan, A. H.; Woodrow, Robert E. | Countable ultrahomogeneous undirected graphs |  | 0471.03025
+  1984 | Sauer, Norbert; Woodrow, Robert E. | Finite cutsets and finite antichains |  | 0559.06002
+  1976 | Woodrow, Robert E. | A note on countable complete theories having three isomorphism types of countable models |  | 0373.02036
+  1978 | Woodrow, Robert E. | Theories with a finite number of countable models |  | 0434.03022
+  1989 | Milner, E. C.; Woodrow, Robert E. | On directed graphs with an independent covering set |  | 0689.05027
+  2004 | Hahn, Geňa; Ille, Pierre; Woodrow, Robert E. | Absorbing sets in arc-coloured tournaments |  | 1042.05049
+  2002 | Hahn, Geňa; Laviolette, François; Sauer, Norbert; Woodrow, Robert E. | On cop-win graphs |  | 1009.05085
+  2005 | Gibson, Peter C.; Pouzet, Maurice; Woodrow, Robert E. | Relational structures having finitely many full-cardinality restrictions |  | 1062.03044
+  1982 | Sands, B.; Sauer, N.; Woodrow, R. | On monochromatic paths in edge-coloured digraphs |  | 0488.05036
+  1985 | Duffus, D.; Sands, B.; Woodrow, R. E. | On the chromatic number of the product of graphs |  | 0664.05019
+  1991 | Hahn, Geňa; Milner, Eric C.; Woodrow, Robert E. | Infinite friendship graphs with infinite parameters |  | 0707.05058
+  1988 | Duffus, Dwight; Sands, Bill; Woodrow, Robert | Lexicographic matchings cannot form Hamiltonian cycles |  | 0657.05055
+  2016 | Boussaïri, Abderrahim; Ille, Pierre; Woodrow, Robert E. | Primitive bound of a 2-structure |  | 1350.05131
+  1990 | Brown, Jason I.; Kelly, David; Schönheim, J.; Woodrow, Robert E. | Graph coloring satisfying restraints |  | 0696.05024
+  2017 | Laflamme, C.; Pouzet, M.; Woodrow, R. | Equimorphy: the case of chains |  | 1417.06001
+  2019 | Ille, Pierre; Woodrow, Robert | Fractal graphs |  | 1417.05143
+  1998 | Fouquet, Jean-Luc; Hahn, Geňa; Tuza, Zsolt; Woodrow, Robert E. | On magnitude networks |  | 0957.68094
+  2011 | Ille, P.; Woodrow, R. E. | Decomposition tree of a lexicographic product of binary structures |  | 1244.05059
+  2009 | Ille, Pierre; Woodrow, Robert | Weakly partitive families on infinite sets |  | 1203.05013
+  1981 | Rose, Bruce I.; Woodrow, Robert E. | Ultrahomogeneous structures |  | 0481.03017
+  1993 | Sands, Bill; Woodrow, Robert E. | Problem sessions of the Banff conference on finite and infinite combinatorics in sets and logic |  | 0845.05095
+  1991 | Duffus, D.; Sands, B.; Sauer, N.; Woodrow, R. E. | Two-colouring all two-element maximal antichains |  | 0742.06004
+  2024 | Hahn, Geňa; Pouzet, Maurice; Woodrow, Robert | Siblings of countable cographs |  | 1568.05191
+  1983 | Woodrow, Robert E.; Knight, Julia F. | A complete theory with arbitrarily large minimality ranks |  | 0538.03026
+  2021 | Laflamme, Claude; Pouzet, Maurice; Sauer, Norbert; Woodrow, Robert | Siblings of an \(\aleph_0\)-categorical relational structure |  | 1477.03129
+  2017 | Belkhechine, Houmem; Ille, Pierre; Woodrow, Robert E. | Criticality of switching classes of reversible 2-structures labeled by an abelian group |  | 1354.05114
+  2021 | Laflamme, Claude; Pouzet, Maurice; Sauer, Norbert; Woodrow, Robert | The poset of copies for automorphism groups of countable relational structures |  | 1529.03217
+  1992 | Duffus, Dwight; Rodl, Vojtech; Sands, Bill; Woodrow, Robert | Enumeration of order preserving maps |  | 0766.06005
+  1997 | Sauer, Norbert W.; Woodrow, Robert; Rödl, Vojtěch | Chromatic Ramsey theory |  | 0868.05035
+  2013 | Cameron, Peter; Laflamme, Claude; Pouzet, Maurice; Tarzi, Sam | Overgroups of the automorphism group of the Rado graph |  | 1266.05052
+  2023 | Kalow, Davoud Abdi; Laflamme, Claude; Tateno, Atsushi; Woodrow, Robert | An example of Tateno disproving conjectures of Bonato-Tardif, Thomasse, and Tyomkyn |  | 1530.05028
+  2013 | Duffus, Dwight; Laflamme, Claude; Pouzet, Maurice; Woodrow, Robert | Convex sublattices of a lattice and a fixed point property. |  | 1319.06005
+  1992 | Duffus, D.; Rodl, V.; Sauer, N.; Woodrow, R. | Coloring ordered sets to avoid monochromatic maximal chains |  | 0764.06002
+  2007 | Hahn, G.; Ille, P.; Woodrow, R. E. | Intervals of Sabidussi graphs |  | 1166.05305
+  1992 | Macpherson, H. D.; Pouzet, M.; Woodrow, R. E. | Countable structures of given age |  | 0764.03011
+  1992 | Macpherson, Dugald; Woodrow, Robert | The permutation group induced on a moiety |  | 0746.20001
+  1992 | Pouzet, Maurice; Woodrow, Robert; Zaguia, Nejib | Generating boxes from ordered sets and graphs |  | 0774.06001
+  2013 | Barušs, Imants; Woodrow, Robert | A reduction theorem for the Kripke-Joyal semantics: forcing over an arbitrary category can always be |  | 1301.03033
+  2014 | Jasiński, Jakub; Laflamme, Claude; Thé, Lionel Nguyen Van; Woodrow, Robert | Ramsey precompact expansions of homogeneous directed graphs |  | 1305.05139
+  2021 | Aranda, Andres; Laflamme, Claude; Soukup, Daniel T.; Woodrow, Robert | A universal partition result for infinite homogeneous \(K_n\)-free and related graphs |  | 1455.05058
+  2019 | Laflamme, Claude; Aranda, Andres; Soukup, Daniel T.; Woodrow, Robert | Balanced independent sets in graphs omitting large cliques |  | 1416.05212
+  1989 | Bonnet, R.; Duffus, D.; Woodrow, R. E. | Coloring chains |  | 0689.06001
+  1994 |  | The lighter side of mathematics. Proceedings of the Eugène Strens memorial conference on recreationa |  | 0828.00001
+  1990 |  | Cycles and rays. Proceedings of the NATO Advanced Research Workshop on cycles and rays: basic struct |  | 0699.00016
+  1993 |  | Finite and infinite combinatorics in sets and logic. Proceedings of the NATO Advanced Study Institut |  | 0780.00039
+
