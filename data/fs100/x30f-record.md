@@ -178,3 +178,25 @@ Applied by scripts (the scratchpad's `fs6.py`, `stubs6.py`; every replacement as
 **Gates:** `fs71_ledger_b_check.py --strict` exit 0, PASS; `bib_audit.py` exit 0; `claude_md_fact_audit.py --base 7eb4398c` exit 0, AUDIT PASSED.
 
 **Would have searched here (stage 6):** none.
+
+## Stage 7 — SAVED (`CLOSED-QUESTIONS.md` §1.7, §3 (two entries), §2.6)
+
+Applied by script (the scratchpad's `cq7.py`; every replacement asserted unique), X29C 4.4 with X24R §3.4's texts verbatim:
+- **§1.7:** a paragraph before its **Status**: X24R's gate sentence verbatim, then the draft's "Our value: …" (row 121; row 123's family; `≥ 5`
+  at ℚ(√167); Moorhouse's own criterion; "less the type-(B) ones (row 124)"), then "The section's rule stands: nothing recorded as closed until
+  the two Johnson papers are read."
+- **§3, Exoo–Ismailescu's smallest subfield:** X24R's text verbatim, and "With `χ(ℚ(√47)²) = 5` (row 121), ℚ(√47) is the first real quadratic
+  field needing five" (X29C's "ℚ(√47) the first real quadratic").
+- **§3, Soifer 55.1:** after "**Still open.**": the value (row 121, [hand]), X24R's text verbatim, X29C's added sentence (ℚ(√143), ℚ(√311),
+  ℚ(√335) further triangle-free instances; ℚ(√3,√5) not, it has √3), and the owner's framing (launch note 1): "55.1's existence half is
+  answered, non-constructively; 55.1 as posed (construct one) and 55.2 stay open (FS-84's re-aim)".
+- **§2.6:** the heading gains "and at `L(F) = 5` given MR (row 123)"; "**Not answered:** `χ(F²)` from `L(F) = 5` up" → "from `L(F) = 6` up (the
+  lower bound stops at five)". Still "a candidate, not fired", gated on the two Johnson papers (unchanged).
+
+**Left (stale text in `CLOSED-QUESTIONS.md` that no draft touches):** §1.7's "Moorhouse's question about `ℚ(√47)` gets a bracket, not a value",
+"the value five is not claimed", "no real quadratic field is known to need five", "`ℚ(√167)` … is still at a proven three" and its Status line;
+§3 Exoo–Ismailescu's "all have degree 8" and "`4 ≤ χ(ℚ(√47)²) ≤ 5`"; §2.6's "Our answer" paragraph (no mention of row 123). A correction owed.
+
+**Gate:** `bib_audit.py` exit 0.
+
+**Would have searched here (stage 7):** none.

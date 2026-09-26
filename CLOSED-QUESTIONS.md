@@ -322,6 +322,8 @@ for a contrary claim:** `[Johnson2006]` (the compendium, which by `[Johnson2010]
 `G(ℚ(√m)², D)` for square-free integers `m > 1`"* — exactly these planes) and `[Johnson2000]`, the 2000 status report. After
 `[Fischer1994]`, no claim of novelty in this lineage should go out unread.
 
+**The value, and its prior-art gate** (FS-100 stage 5, 2026-09-26; `LEDGER.md` rows 121, 123). *"Prior-art gate for the value (X24R, 2026-09-26, `plans/FS100-X24R-prior-art.md` §2.1): no printed value of `χ(ℚ(√47)²)` and no printed five-colour lower bound for any real field without √3 were found in zbMATH (author listings of Moorhouse, Soifer, Exoo, Ismailescu, Fischer, Johnson, Madore, Manturov, Zaks, Chilakamarri, Chow, Jungreis–Reid; abstract searches), arXiv, the Polymath16 threads (held text and the live eighteenth thread to 2026-09-24) or `[Soifer2024]` chs. 11 and 55; `[Johnson2000]` and `[Johnson2006]` remain unread."* Our value: `χ(ℚ(√47)²) = 5` (row 121), and `= 5` at ℚ(√143), ℚ(√311), ℚ(√335), every real quadratic `ℚ(√d)` with `L = 5` (row 123); `≥ 5` at ℚ(√167). By `[Moorhouse2010slides]`'s own criterion (*"If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`"*) these are the fields his slides left open, less the type-(B) ones (row 124). The section's rule stands: nothing recorded as closed until the two Johnson papers are read.
+
 **Status:** `ℚ(√11)`'s lower bound kernel-checked; the other twelve tools-certified (their kernel forms are FS-60); the upper bounds hand /
 prior art. Not written up. `ℚ(√167)`, where the local–global conjecture predicts at least six, is not answered (FS-59).
 
@@ -486,7 +488,7 @@ a union of `Λ`-cosets; nor Mixon's follow-up, that the ring has finitely many f
 count 9,120 (Hubai), the input (Parts), the stripes-from-no-triangle sketch (Gibbs), the renormalisation (Tao). **Ours:** the derivation
 on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-V6). **Not kernel-checked** (FS-87).
 
-### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate, not fired**: answered at `χ ≤ 3` and at `L(F) ≤ 4` over every real number field, and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
+### 2.6 An algebraic criterion for the chromatic number of `F²`, `F ⊂ ℝ` of finite degree — **a candidate, not fired**: answered at `χ ≤ 3`, at `L(F) ≤ 4` over every real number field, and at `L(F) = 5` given MR (row 123), and for character colourings at every `k`; gated on `[Johnson2000]` and `[Johnson2006]`, unread
 
 > **Fischer** (`[Fischer1990]` §1, 1990, held and read): *"This still begs the general question, however, whether some algebraic
 > criterion can be found to determine the chromatic number of F² where F is a subfield of R, of finite degree over Q."* The close gate of
@@ -497,7 +499,7 @@ on `Λ`, its audit of Parts's trees, and the repair of the wiki's Prop. 7 (FS85-
 derivations): for every real number field `F`, `χ(F²) ≤ 3` iff `L(F) ≤ 3`, and `χ(F²) = L(F)` whenever `L(F) ≤ 4`; a non-bipartite real
 number field's plane is three-chromatic iff some prime of `F` above 3 has residue field `𝔽₃`. For **character colourings** at every `k`
 (row 100, the class theorem, at existence scope and given band rigidity at every band, row 98): the plane has a character `k`-colouring
-iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **Not answered:** `χ(F²)` from `L(F) = 5` up — the conjecture's
+iff some residue target has one, so `χ_char(F²)` is a minimum over targets. **Not answered:** `χ(F²)` from `L(F) = 6` up (the lower bound stops at five) — the conjecture's
 open range; that every character colouring is local at one place (proved at three colours and at HD1's fields only; FS-92); the general
 subfield of ℝ (S1 extends to every algebraic `F` and every purely transcendental extension of one, with `L(F)` read over all stable
 valuation rings, row 99). **Why a candidate, not fired:** the gate found no answer in print, but it is undecided on `[Johnson2000]` and
@@ -527,7 +529,7 @@ here in band form on `R_{{p}}` (row 102).
   `ℚ(√3,√11,√23)` (ledger rows 47, 52–53) — all have degree 8. Any field needing five must break the 2-adic
   wall (`CLAUDE.md` G1, G35), which screens candidates by congruence. The smallest candidates examined are quadratic:
   `4 ≤ χ(ℚ(√47)²) ≤ 5` (§1.7; the local–global conjecture predicts 5), and FS-81 screened ℚ(√47) at four colours without landing five
-  (`LEDGER.md` row 84; FS-84 carries it).
+  (`LEDGER.md` row 84; FS-84 carries it). **At FS-100 stage 5** (`LEDGER.md` rows 121, 123; [hand]; prior-art gate X24R, `plans/FS100-X24R-prior-art.md` §3.4, verbatim): *"a quadratic field needing five would be of the least degree possible (ℚ's plane is two-chromatic), so 'smallest' would be answered by degree; whether ℚ(√47) is the smallest *quadratic* one is a separate question (every squarefree `d < 47` has `χ(ℚ(√d)²) ≤ 4` by `[Moorhouse2010slides]`: 'If `d ≢ 47, 59 or 83 mod 84`, then `χ(K²) ≤ 4`')."* With `χ(ℚ(√47)²) = 5` (row 121), ℚ(√47) is the first real quadratic field needing five.
 - **A triangle-free 5-chromatic unit-distance graph, and one of the smallest order.** `[Soifer2024]` ch. 55, p. 699: **Open Problem
   55.1 (Soifer 2019)**, *"Construct a triangle-free 5-chromatic unit-distance graph"*, and **55.2**, one of the smallest order (found
   2026-09-24 by the algebra-week advisor, `plans/POROS-2026-09-24-algebra-week.md` §6.7; the text confirmed in the held PDF by the owner).
@@ -546,7 +548,7 @@ here in band form on `R_{{p}}` (row 102).
   excludes, at exact scope:** nothing on the yes side — no triangle-free pinning identity was found or ruled out; on the no side (which would not
   answer 55.1) every non-periodic four-colouring reading finitely much structure over those fields (rows 91–92). ℚ(√2,√3), which has triangles,
   is rigid given Heule's T721 (row 93), and bears on 55.1 only as the control. **FS-89 adds only to the no side** (`LEDGER.md` rows 95–96): no
-character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, and none four-colours ℚ(√47)'s plane; the yes side is untouched. **Still open.**
+character colouring over ℚ(√59), ℚ(√83), ℚ(√131) is non-periodic, and none four-colours ℚ(√47)'s plane; the yes side is untouched. **Still open.** **At FS-100 stage 5** (`LEDGER.md` rows 121, 123; [hand]): `χ(ℚ(√47)²) = 5`, so a finite triangle-free five-chromatic unit-distance graph over ℚ(√47) exists, none exhibited. On the gate (X24R, `plans/FS100-X24R-prior-art.md` §3.4, verbatim): *"if the value lands, the answer is to 55.1's **existence** question only — 55.1 reads 'Construct a triangle-free 5-chromatic unit-distance graph', and a field-level value gives a finite graph by de Bruijn–Erdős, not a construction. Nothing in print (to 2026-09-24) has a planar triangle-free five-chromatic unit-distance graph; the only five-chromatic triangle-free one is in ℝ³ (de Grey, Geombinatorics 2026, Zbl 1581.05080)."* ℚ(√143), ℚ(√311), ℚ(√335) give further triangle-free instances (no √3); ℚ(√3,√5)'s does not (it has √3). So 55.1's existence half is answered, non-constructively; 55.1 as posed (construct one) and 55.2 stay open (FS-84's re-aim).
 - **The smallest RING that admits a 5-chromatic single-distance graph.** `[Polymath16wikiMain]`, the main
   Polymath16 wiki page, under "Further questions", posted during the project's active period (2018) and
   unanswered in print since: *"If we view the plane as the complex plane, what is the smallest ring that
