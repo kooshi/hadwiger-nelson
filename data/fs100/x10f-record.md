@@ -86,3 +86,26 @@ from the plan file, never retyped). Departures from "apply exactly", each mechan
 pending, X24R".
 
 **Would have searched here (stage 3):** none.
+
+## Stage 4 — SAVED (`BIBLIOGRAPHY.md`; the file moves of inventory items 20–21)
+
+**File moves** (launch note 3): Einsiedler–Fish 2010 copied to
+`~/source/library/pdf/EinsiedlerFish2010-rigidity-measures-multiplicative-semigroup-polynomial-growth.pdf` (the library's `<Key>-<title-words>.pdf`
+convention, as its neighbours `EinsiedlerLindenstrauss2022-…`, `Berend1983-…`), md5 `fdb1e267…` identical to the source; then `git rm` of both
+`data/crunch-2026-09-26-x2x3/poros/einsiedler-fish-0804.3586.pdf` and `…/el2021-2101.11120.pdf` (the latter md5 `1a32060a…`, identical to the
+library's EL2021) in this stage's one commit. `ef.txt` left.
+
+**`BIBLIOGRAPHY.md`** (X09C 4.3): § A — `[EinsiedlerFish2010]` new (read in full; the library address); `[EinsiedlerLindenstrauss2022]` amended
+(Thm 1.2 on `M̂` under admissibility, row 120; §1 in full by X02D, pp. 1–3 by X02V; **§2 unread — a prior-art debt on PE-2**; §§3–9 unread;
+its role column's superseded "its Thm 1.3 is the in-print positive-entropy statement that can [reading, one mind; J51 §PA.3]" replaced, as row
+118 now says). § B (the library table) — the EF row added, the EL row's status brought into agreement with § A (rule 0b). § C —
+`[BekkaFrancini2022]` amended (Thm 1.1, Remark 1.2 (iii)–(iv) read by X03D; its hypothesis fails for `R ⋊ U`); new `[Huang2017]`,
+`[HuangLiShiXu2023]`, `[Sataev1975]`, `[Lindenstrauss2004]`, and one row `[LindWard1988]` / `[ChothiEverestWard1997]` (the draft named them
+without keys; keys minted in the Rudolph/Johnson/Host row's combined form).
+
+**Gate:** `bib_audit.py` **exit 0** — 0 arXiv ids and 0 keys unresolved (from 4 and 5 at launch).
+
+**Left:** Bekka–Francini's PDF (`data/fs100/x03d/bekka-francini-2002.07497.pdf`) and the Huang PDFs (`data/fs100/x01d/`) stay in the repository —
+launch note 3 named only the EF move; the rows say "held in the repository".
+
+**Would have searched here (stage 4):** none.
