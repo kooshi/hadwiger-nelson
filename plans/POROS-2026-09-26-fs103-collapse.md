@@ -121,6 +121,63 @@ hunch: mr-degree-16-is-the-thin-link
 
 ## Stage 1 — SAVED
 
+## Stage 4 — the comparison (V1 stages 1–3 at `d1864bd8`; V2 stages 1–4 at `e5d65927`, `accf865d`), on the owner's relay
+
+*Read: `plans/FS103-V1-verification.md` lines 1–328 (theorems, stages 1–3; its stage 4 not opened, V1 still working), and
+`plans/FS103-V2-verification.md` §2.3, stage 2b's C-FMT and C-CPM, stage 3's table, §4.1, §4.1′, and `data/fs103/reports/FS103-V2.md`. I did
+not contact either verifier.*
+
+**Agreements between V1 and V2**, each derivation blind to the other:
+- **C-LB is TRUE at every `k ≥ 2` with `N_k(F) = ∅`, with no MR and no T-J39-3.** The two routes are the same in shape:
+  - condition on the `T + A` factor (V1-L2, V2-L1);
+  - get either an SP witness or disjoint adjacent supports (V1-L3, V2 step 2);
+  - density by strong approximation;
+  - weak approximation for the circle (V1 by Hilbert 90, V2 by the rational curve);
+  - a jointly measurable version (V1 cites the classical theorem, V2 proves it);
+  - selection with a randomised threshold on the fibre masses;
+  - merge by the diagonal.
+  They differ in one place: V1 selects on the Δ_k-valued conditional law, while V2 first rounds to `c′ = min supp p`. Both are sound as read.
+- C-635-F1 and C-dG-F1 are TRUE given MR. The exact spectra agree: `0.192617` at 103 and `0.168047` at 131.
+- C-S (c) is not finite at full depth (my registered hunch, now confirmed by two minds). C-S (d) needs Q-const.
+- C-FMT (a) and (b) are TRUE. C-FMT (c), (d) and C-CPM are GAP, at the same steps in both records. C-MR16 was reached by neither.
+
+**Divergences:**
+1. **Scope (statement mismatch; not a gap).** V1 restricts to totally real `F` and says "complex places untreated". Its reason is that
+   V1-L6 "needs the compact factor mixing". That reason is wrong: V1-L6 allows any second-countable LCA `G₀` and any `S₀`, and only its
+   merge (V1-L8) is written for real places. V2's L4 supplies the missing merge. At a complex `v`, `a ↦ (a, ā)` embeds `ℂ` into
+   `L ⊗_F F_v ≅ ℂ × ℂ` and carries the unit circle into `T(F_v) = {(z, z⁻¹)}`. I checked this and believe it is right.
+   **My slip:** at stage 2 I endorsed "totally real" and the sealed wrong-reason line C-F1-GEN (3) for the wrong reason, reading
+   T-J39-3's "Not claimed" as "false". A second mind for the widening is cheap: one lemma, V2's L4, plus V1-L6 read at a non-compact
+   `S₀`. It has no bearing on the headline, which is totally real, and MR at complex places is itself unexercised (row 123).
+   Default: record it at one mind.
+2. **CTL-FRAC (agreement, not a divergence).** V2 locates integrality at L3's pigeonhole `max_j m_j(x) ≥ 1/k > θ′`. V1-L6 uses the same
+   step ("exists: `max_a m_x(a) ≥ 1/k > θ`"). V1's "sharp at `K_k`" is the other side of the same inequality: the hypothesis `λ* < 1/(k−1)`,
+   i.e. `λ*/(1+λ*) < 1/k`, is tight (`K_{k+1} × K_k`).
+3. **C-FMT (c) and C-CPM (a gap in their route, not in the claim).** Both verifiers take the Følner limit in `[k]^{ℝ²}` (pointwise), where
+   continuity in probability can fail along the sequence. A-E5 (stage 1) takes the limit in weak-* `L^∞(ℝ², Δ_k)` instead:
+   - every stationary random measurable function is continuous in probability (pathwise L¹-continuity of translation plus dominated
+     convergence, then mollify to a version defined at every point);
+   - properness passes to the limit because `1_B (σ * ·) 1_{B′}` is compact (`σ̂ = J₀ → 0`);
+   - a random threshold rounds `Δ_k` to `[k]`.
+   If A-E5 holds, then with no MR, `χ_CP(ℝ²) = χ_m⁰(ℝ²) ≤ χ_m(ℝ²)`: C-FMT (c) and C-CPM are TRUE and only (d) stays open. It is one mind,
+   mine, and it needs a second.
+4. **C-FMT (d) (agreed; a real gap).** Colouring the null set of non-density points is open in both records and in mine. This is the one
+   step between F1 and Falconer's `χ_m`.
+
+### Hunch ledger (status updates)
+
+- `f1-composes-at-635087`: **confirmed** by derivation. C-LB was derived by two minds blind to each other and to J39/J48; C-635-F1 was
+  assembled twice.
+- `chi-cp-is-null-tolerant-measurable`: open. Both verifiers reached GAP at the Følner step by the pointwise route; the weak-* route has not
+  been checked by a second mind.
+- `null-tolerance-question-not-in-print`: open (the gate's record is not read here).
+- `mr-degree-16-is-the-thin-link`: open (C-MR16 unreached).
+- `cs-family-not-finite-at-depth`: **confirmed** by two derivations (V1 and V2, stage 2b).
+- `sealed-lines-change-the-verdict-texture`: not tested. The lines were sealed, and the blind verifiers found the measurability and
+  stationarity pitfalls unaided.
+
+## Stage 4 — SAVED
+
 ## Theorems this phase proved
 
 | id | statement | grade | address |
