@@ -99,3 +99,145 @@ where it is the same computation; the owner should weight it as "re-derived afte
 ### 1.6 Would-have-searched-here log (stage 1)
 
 - Would have scanned small real quadratic fields for dyadic behaviour; instead the three fields and two named controls, fixed by the claim.
+
+## Stage 2 — SAVED (blind derivations: C-1 to C-4, SEL-k with FL-K)
+
+*Setting as `plans/R88-derivation.md` Notation and J45 §1.2: `X₄(F)` (more generally `X_k(F)`) the proper colourings of `Cay(R, U)`;
+`M_T` the translation-invariant Borel probabilities on it; `M_Aff ⊂ M_T` those also invariant under `c ↦ c(u·)`, `u ∈ U` (the group
+`R ⋊ U`); `X′ = X₄ ∖ Pull`; `𝒜_∅` the `E_∅ = T + A` factor (J45-N2), `p(x) = P(c(x) = · | 𝒜_∅)`, `h = E[g | 𝒜_∅]`; `m` Haar measure on `R̂`.
+Inputs used by statement only: MR(F); J45-N1, N2, SI-1 to SI-4, B⁺, R-U; T-A (R88-TA (i)–(vi)); R88-TA1; R88-B2-3; Theorem C (row 112)
+at `S = ∅`; T-J38-2.*
+
+### 2.1 Two facts every claim below uses
+
+**X22V-F1 (MR in Fourier form) [hand].** If `τ` is a finite positive `U`-invariant measure on `R̂`, then `τ̂(uy) = τ̂(y)` for all `u ∈ U`,
+`y ∈ R` (`τ̂(y) = ∫ χ(y) dτ = ∫ (u·χ)(y) dτ = ∫ χ(uy) dτ`). If moreover `τ(E) = 0`, MR gives `τ = b·m`, so `τ̂(y) = 0` for every `y ≠ 0`.
+(Haar is `E`-null: each `E_S` is Haar-null (J45-N1) and `E = ⋃_S E_S` is a countable union — `S` ranges over finite sets of the countably many
+split places.)
+
+**X22V-F2 (the rotation-invariant case of Q-μ) [hand, one mind]: given MR(F), over a type-(B) field, every `μ ∈ M_Aff` is carried by Pull.**
+*Proof.* Rotation-invariance of `μ` gives `σ̂_μ(uy) = E⟨g(0), g(uy)⟩ = E⟨g(0), g(y)⟩` (the law of `c(u·)` is the law of `c`), so `σ_μ` is
+`U`-invariant. R-U: `σ_μ(E ∖ (T + A)) = 0`. So `τ := σ_μ|_{R̂∖E} = σ_μ|_{R̂∖E_∅}`, `U`-invariant, positive, finite, `E`-null; by F1,
+`τ̂(u) = 0` for every `u ∈ U`. SI-3 at `S = ∅`: `∫_{R̂∖E_∅} Re χ(u) dσ_μ = −(4/3) P(c¹(0) = c²(u))`; the left side is `τ̂(u) = 0`. So equality
+holds at every `u`, and B⁺ (given Theorem C at `S = ∅`, row 112, and FS38-D2-A) gives: `μ` is carried by Pull. B⁺'s hypothesis is
+translation-invariance only (J45 §5.4: "equality at every `u` implies `μ` is carried by Pull"), so non-ergodic `μ` is covered (J48's BC-6
+checked exactly this). ∎ *Same thing, second form:* if `μ ∈ M_Aff` had `μ(X′) > 0`, then `μ|_{X′}/μ(X′) ∈ M_Aff` (X′ is `R ⋊ U`-invariant
+because Pull is, R88-TA (i)) and F2 applied to it is a contradiction. No closedness of `X′` is used.
+
+### 2.2 C-1 — the step of T-J38-2 that used T-B1, and whether MR with Theorem C replaces it
+
+**The step.** T-J38-2 (i): "`X′ = X₄(F) ∖ Pull` is closed" — true under T-B1 because Pull is a finite set of isolated points, hence open.
+It is used in (ii) for one thing: **to get an `R ⋊ U`-invariant probability on `X′`** from `X′ ≠ ∅` (an amenable group acting on the compact
+space `X′` has an invariant probability; without closedness `X′` is not compact). Everything after that — Theorem C on `X′`, SI, B⁺, the SP
+witness — needs only a measure `ν ∈ M_Aff` with `ν(X′) = 1`.
+
+**For measures that are already rotation-invariant, MR with Theorem C replaces it** (F2): no closedness is needed.
+
+**For a merely translation-invariant `μ`, it does not, and I find no replacement.** C-1 and Q-μ quantify over `M_T` (row 111: "every
+translation-invariant random four-colouring"). Take `μ ∈ M_T` with `μ(Pull) = 0`. MR speaks only about `U`-invariant measures on `R̂`, and
+`σ_μ` is not `U`-invariant. The two ways to make it so both fail:
+1. *Average the colouring measure.* `ν_n = |Φ_n|⁻¹ Σ_{u∈Φ_n} u_*μ` (Følner sets of the countable abelian group `U`); every weak-* limit
+   `ν ∈ M_Aff`, and F2 puts it on Pull. But `u_*μ(Pull) = μ(Pull) = 0` for every `u` and the limit may still have `ν(Pull) = 1`: `μ ↦ μ(Pull)` is
+   only upper semicontinuous (Pull closed; portmanteau gives `ν(Pull) ≥ limsup ν_n(Pull) = 0`, nothing more). It is continuous exactly when
+   Pull is clopen — T-B1. In the language of convex sets: `M′ = {μ ∈ M_T : μ(Pull) = 0}` is a `U`-invariant convex face, but a `G_δ`, not closed,
+   so Markov–Kakutani gives a `U`-fixed point only in its closure, which may lie in the face of Pull-measures.
+2. *Average the spectral measure.* `τ_μ = σ_μ|_{R̂∖E}` has `τ̂_μ(u) ≤ 0` for all `u` and `< 0` for some (SI-3 and B⁺'s contrapositive: `μ` is not
+   on Pull). Its `U`-averages converge weak-* to a `U`-invariant `τ̄`, but `E` is dense and not closed, so `τ̄` may charge `E`; MR then only says
+   `τ̄|_{R̂∖E} = b·m`, and `τ̄̂(1) = τ̄|_{T+A}^(1)` can be negative with no contradiction. And averaging loses the per-`u` strictness (it may hold only
+   on a Følner-null set of `u`).
+
+What a proof of C-1 would need, stated so it can be aimed at: **a continuous, affine, `U`-invariant functional on `M_T` that vanishes on the
+Pull-measures and is positive on `M′`** (then `Φ(ν) = lim Φ(ν_n) = Φ(μ) > 0` contradicts F2), or equivalently a proof that
+`lim_n |Φ_n|⁻¹ Σ_{u∈Φ_n} P_μ(c(0) ≠ c(4u)) > 0` for every `μ ∈ M′`. The pair statistic `P_μ(c(0) ≠ c(4))` is continuous and affine and
+vanishes on Pull (`4 ∈ 𝔓⁴ = 4O`), but it is not `U`-invariant, and its `U`-average is the quantity in question. This is exactly the obstruction
+`plans/R88-derivation.md` §G (T-C′) records: "the weak-* limit of `U`-averages can move mass onto Pull". **Not refuted either:** a FALSE would
+need a `μ ∈ M′`, i.e. a non-Pull colouring, which is row 88's "no" (R88-TA2 shape).
+
+**C-1, my verdict: GAP** at "a translation-invariant `μ` with `μ(Pull) = 0` has an `R ⋊ U`-invariant weak-* limit with `ν(Pull) < 1`" — the
+closedness of `X′`, i.e. T-B1. **TRUE for `M_Aff`** (F2), which is the rotation-invariant part of Q-μ, not Q-μ.
+
+### 2.3 C-2 — `F(R) ≠ 0` iff Q-tr, given MR
+
+(⟹) is R88-TA (iv) (unconditional). (⟸) needs, given Q-tr and MR, that every `μ ∈ M_T` is on Pull (R88-TA (iv): `F ≠ 0` iff Q-μ ∧ Q-tr).
+Q-tr gives: each non-Pull colouring has a translation-invariant measure on its orbit closure charging `X′` — a member of `M′` — and the
+question returns to §2.2's step with no new input: Q-tr is about translation orbit closures, and the missing step is rotational. **GAP at the
+same step.**
+
+**What MR does give, exactly (X22V-R, [hand, one mind]):** call `c ∉ Pull` *affinely transient* if every `R ⋊ U`-invariant probability on the
+closure of its `R ⋊ U`-orbit is carried by Pull. **Given MR(F), over a type-(B) field: `F(R) ≠ 0` iff no colouring is affinely transient.**
+*Proof.* (⟹) `F(R) ≠ 0` ⟹ `F(R) = P(R)` (finite-index ideal, R88-TA (ii)) ⟹ every colouring is periodic ⟹ a pullback (row 88, V3) ⟹ `X′ = ∅`.
+(⟸) If `F(R) = 0`, some `c ∉ Pull` exists (else `X₄ = Pull` and `4 ∈ F(R)`); `Y` = the closure of its `R ⋊ U`-orbit is compact and invariant;
+if `c` is not affinely transient, some `ν ∈ M_Aff` on `Y` has `ν(X′) > 0`, contradicting F2's second form. ∎ Affine transience and Q-tr's
+transience are not comparable in general (the `R ⋊ U`-orbit closure of a transient colouring contains limits of its rotations, which need not be
+transient; and a non-transient colouring can be affinely transient). So C-2 holds with "affinely transient" in place of "transient"; as stated it
+is GAP.
+
+### 2.4 C-3 — T-B1 ⟺ row 88 ⟺ Q-tr, given MR
+
+- T-B1 ⟹ row 88, given MR: T-J38-2 (iii) (input). Row 88 ⟹ T-B1: R88-TA1 ("`F(R) ≠ 0` ⟹ T-B1"; with `X₄ = Pull` finite every point is isolated).
+  So **T-B1 ⟺ row 88 given MR: TRUE** (inputs; my re-derivation of the ⟸ half is F2 plus the closedness step of §2.2).
+- Row 88 ⟹ Q-tr: R88-TA (iv). T-B1 ⟹ Q-tr: R88-TA1.
+- Q-tr ⟹ row 88 (or Q-tr ⟹ T-B1), given MR: **GAP**, C-2's (⟸).
+
+**C-3: GAP** at the last link (Q-tr ⟹ row 88). What is TRUE: given MR, row 88 ⟺ T-B1 ⟹ Q-tr, and row 88 ⟺ no affinely transient colouring.
+
+### 2.5 C-4 — "Over ℚ(√59), no four-colouring of the plane is transient" (twenty minutes, used)
+
+Unconditional as stated, and it is one of row 88's two halves (Q-tr; R88-TA (iv)). **The transfer of EF_F⁺'s method fails at one step, for
+all three of its tools at once:**
+
+**X22V-T4 [hand, one mind] — a transient colouring shows every measure method only Pull.** Let `c` be transient over a type-(B) field. (a) Every
+translation-invariant probability on its orbit closure is carried by Pull (definition). (b) Hence every Følner spectral measure of `c` — every
+weak-* limit of `|B_n|⁻¹ Σ_{x∈B_n} ⟨g(x), g(x + y)⟩` as a positive-definite function of `y`, `B_n` Følner in `R` — is the spectral measure of such a
+measure (the empirical measures `|B_n|⁻¹ Σ δ_{t·c}` have limit points in `M_T` on the orbit closure, and `μ ↦ σ̂_μ(y)` is continuous), so it is
+carried by `D := (R ∩ 𝔓⁴)^⊥`, the finitely many characters of `R/(R ∩ 𝔓⁴)` (every pullback is `𝔓⁴`-periodic). (c) `D` is finite, closed and
+`U`-invariant, so every `U`-average and every weak-* limit of `U`-averages of such measures is again carried by `D ⊂ T`. (d) So every `U`-invariant
+measure on `R̂` built from `c`'s statistics already satisfies EF_F⁺'s conclusion (carried by `T + A`) and MR's (its `E`-null part is 0): the method
+runs and returns no information about whether `c ∈ Pull`. ∎
+
+Tool by tool: **Lemma 3.1′ / EF's pigeonhole** needs a measure of zero entropy to act on; the only ones on offer are (d)'s, on `D`. **Lemma Z's
+wandering shells** (X12B-Z: "a finite measure on `ℤ ∪ {∞}` invariant under `k ↦ k + h` … gives `ℤ` measure 0") needs finite mass; for a single
+orbit there is no finite invariant mass off Pull (a shift-invariant *set* can be all of `ℤ`). **The polynomially many rational multipliers** are a
+counting device inside the pigeonhole and inherit its need for a measure. This is R88-B2-3's theorem in EF's vocabulary ("no measure argument
+(T-C's included) can reach" T-B2).
+
+**C-4: GAP** at "from 'every invariant measure of the orbit closure is on Pull' to '`c ∈ Pull`'" — which is Q-tr itself, so the method's transfer
+proves nothing, and C-4 stays as open as row 88. **Not FALSE either**: a transient colouring is a non-Pull colouring (R88-TA2), row 88's "no".
+**What a wrong-reason pass would look like** (the brief's question): (i) EF_F⁺ applied to `c`'s Følner or `U`-averaged spectral measure, concluding
+"carried by `T + A`, so by Theorem C `c` is a pullback" — the conclusion is about the measure, which is Pull's by transience, not about the point;
+(ii) Lemma Z applied to the defect set `{z : c(z) ≠ p(z)}` along `u_w`-shells, concluding positive density from "shells wander" — wandering proves
+zero mass for a finite invariant measure and says nothing about a set's density (T-B2's named step, "from propagation to positive density", R88
+§G); (iii) any argument whose last line is "so the orbit closure's invariant measures are on Pull", which is transience's hypothesis, not its
+negation.
+
+### 2.6 SEL-k, with FL-K derived (not blind; see §1.5)
+
+**X22V-FLk [hand; the `k = 4` case read before deriving, the general `k` derived here; exact check of the identities `tools/x22v_simplex.py`].**
+Let `e_0, …, e_{k−1}` be the regular simplex, `⟨e_i, e_j⟩ = (k/(k−1))δ_ij − 1/(k−1)`, `μ ∈ M_T` on `X_k(F)`, `σ = σ_μ` the trace spectral measure of
+`g(x) = e_{c(x)}`, `ν := σ|_{R̂∖E_∅}`, `(c¹, c²)` the relatively independent self-joining over `𝒜_∅`. Then for every `u ∈ U`:
+`ν̂(u) = −(k/(k−1)) P(c¹(0) = c²(u))` and `ν(R̂) = (k/(k−1)) P(c¹(0) ≠ c²(0))`. *Proof.* For probability vectors `p, q`:
+`⟨Σ p_i e_i, Σ q_j e_j⟩ = (k/(k−1))⟨p, q⟩ − 1/(k−1)` (`Σ p_i = Σ q_j = 1`). N2: the spectral projection onto `E_∅` is `E[· | 𝒜_∅]`, so
+`σ|_{E_∅}` has Fourier transform `E⟨h(0), h(y)⟩`. Properness: `σ̂(u) = −1/(k−1)`. So `ν̂(u) = −1/(k−1) − (k/(k−1))E⟨p(0), p(u)⟩ + 1/(k−1)`, and
+`E⟨p(0), p(u)⟩ = P(c¹(0) = c²(u))` by conditional independence; at `y = 0`, `ν(R̂) = 1 − E|h(0)|² = (k/(k−1))(1 − E⟨p(0), p(0)⟩)`. ∎ At `k = 4`,
+and when `μ ∈ M_Aff` (so `σ(E ∖ E_∅) = 0` by R-U and `ν = σ|_{R̂∖E}`), this is X03D-FL-K's statement. The check (`data/fs100/x22v/simplex.out`):
+the Gram matrix is PSD of rank `k − 1` with unit diagonal, and both identities hold on random finite joint laws with `c(0) ≠ c(u)`, `k = 2, …, 8`;
+the plant (off-diagonal `−1/k`) fails 149 times (`simplex-plant.out`).
+
+**SEL-k: TRUE, given MR [hand, one mind].** (⟸) A random `k`-colouring is a probability on the non-empty set `X_k(F)`; any point of its support
+`k`-colours `Cay(R, U)`, and `F²` is a disjoint union of translates of it. (⟹) If `X_k(F) ≠ ∅`, the amenable group `R ⋊ U` (metabelian) acting on
+the compact metrizable `X_k(F)` has an invariant probability `μ ∈ M_Aff`. By F1–F2's first lines (R-U, then MR), `ν = σ|_{R̂∖E} = σ|_{R̂∖E_∅}`
+is `b·m` and `ν̂(u) = 0`; by FLk, `P(c¹(0) = c²(u)) = 0` for every `u ∈ U`, i.e. `supp p(x) ∩ supp p(x + u) = ∅` a.s. (countably many edges). The
+selection `c′(x) = min supp p(x)` (SI-4 at `k` colours; versions chosen by `p(x)(ω) = p(0)(T_x ω)`) is an `𝒜_∅`-measurable, translation-equivariant,
+almost surely proper `k`-colouring. Its law `μ′` is translation-invariant; it is rotation-invariant because `μ` and `𝒜_∅` are (`E_∅` is
+`U`-invariant), so `p(ux)(ω) = p(x)(R_u ω)` and `c′(u·)` has the law of `c′`. Its spectral measure is that of `e_{c′(0)} ∈ L²(𝒜_∅)`, carried by
+`E_∅ = T + A ⊂ E` (N2). ∎ The route uses MR only as "no SP witness" (`ν̂(1) = 0`), which is MR by J46-8. **The named risk (FL-K, one mind) is
+not load-bearing beyond SI-3's identity at `k` colours**, which I re-derived and checked exactly. Scope: "outside row 100's exception" enters only
+through MR's scope; R-U, N1, N2 hold for every real number field. Reading: "`F²` has a translation-invariant random colouring" is read on `R`
+(countable), as in J45; on `F²` itself the uncountable translation group would need a different measurable set-up, and the claim should say `R`.
+
+### 2.7 Would-have-searched-here log (stage 2)
+
+- C-1: would have looked for a small non-Pull translation-invariant colouring measure by search on a finite quotient; instead named the missing
+  step and the functional that would close it. (No finite quotient could decide it anyway: periodic colourings are pullbacks.)
+- C-4: would have searched for transient colourings near a pullback with a sparse defect; instead proved the method's blindness (X22V-T4).
+- SEL-k: would have tried random joint laws in floating point; instead an exact rational check of the two identities with a plant.

@@ -1,0 +1,9 @@
+k=2: (a) FAILS: rank 2, psd True
+k=3: (a) FAILS: rank 3, psd True
+k=4: (a) FAILS: rank 4, psd True
+k=5: (a) FAILS: rank 5, psd True
+k=6: (a) FAILS: rank 6, psd True
+k=7: (a) FAILS: rank 7, psd True
+k=8: (a) FAILS: rank 8, psd True
+simplex identities: 149 FAILURES
+exit=1
