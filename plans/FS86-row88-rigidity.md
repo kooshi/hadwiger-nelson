@@ -770,3 +770,7 @@ Zaks 1989 (the ℚ⁴ control), Johnson 2000, *Infinite graphs and the fractiona
 Bergelson 1985 (optional).
 
 **Would have searched here (stage 3):** none.
+
+### Stage 4 — numbers reserved (written before the drafts, so FS-67's close can number after them)
+
+**`LEDGER.md` rows 111, 112, 113** (the last is **113**; FS-67's close numbers from 114). **Stubs FS-97, FS-98, FS-99** (the last is **FS-99**).
