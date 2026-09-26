@@ -1,0 +1,14 @@
+C1 Pell 48^2-47*7^2=1: ok
+C2 A^2+47 = 47*48^2: ok
+C3 v*conj(v) = 1: ok
+C4 v^2 = a + b*i*sqrt47, a,b rational: ok
+C5a v + 1/v = 329/(24 sqrt47): ok
+C5b v - 1/v = i/24: ok
+C6 u'*conj(u') = 1: ok
+C7a 7 | N(z'): FAIL
+C7b 7 split in Q(sqrt -47): ok
+C7c 7 does not divide z': ok
+C7d 7 does not divide N(z): ok
+C7e 3^2 || N(z) and 3 does not divide z: ok
+N(z) = {2: 8, 3: 2, 47: 1}  N(z') = {2: 8, 3: 2, 47: 1}
+RESULT: FAIL ["C7a 7 | N(z')"]
