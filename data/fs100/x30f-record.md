@@ -200,3 +200,17 @@ Applied by script (the scratchpad's `cq7.py`; every replacement asserted unique)
 **Gate:** `bib_audit.py` exit 0.
 
 **Would have searched here (stage 7):** none.
+
+## Stage 8 — SAVED (the queue plan's §7 statuses and banner; the final gates)
+
+`plans/CRUNCH-2026-09-26-x2x3-queue.md`: a second banner under X10F's, "**CLOSED (wave 3) by X30F**" (X27D/X27V's TR-ROT verdict folds with X31C;
+X11K3 still gating). §7's status cells set to final: X29C run → DONE, X30F wait → DONE, X26B run → DONE, X27D and X27V run → DONE (their
+reports exist at this stage; their verdict is X31C's fold, not this pass's), X11K2 run → STAGE 1R SAVED (its report's own status). Three rows the
+table lacked, added so every wave-3 job has a status: X28D (DONE; folded here), X11K3 (run at this close; FS-101's lane), X31C (wait; launches
+after X30F). Only the banner, the status cells, the three added rows and stage 6's marked "row 69" correction changed.
+
+**Final gates** (exit statuses read directly): `claude_md_fact_audit.py --base 7eb4398c` exit 0, AUDIT PASSED (two reviewed ALLOW lines, stage 5);
+`--dupes` exit 0, 11 runs, 797 bytes (7 and 492 at launch; the four new runs named at stage 5); `bib_audit.py` exit 0; `fs71_ledger_b_check.py
+--strict` exit 0, PASS (778 § B rows). **`CLAUDE.md`: 291,645 → 295,503 bytes.**
+
+**Would have searched here (stage 8):** none. **The whole pass:** no search; no solver; one exact read of a held PDF (Croft's citation).

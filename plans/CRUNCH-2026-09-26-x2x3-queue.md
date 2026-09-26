@@ -2,6 +2,9 @@
 
 > **CLOSED 2026-09-26 by X10F** (waves 1–2: §4's statuses final, §5 scored from `plans/FS100-three-field-lemma.md` §R-close (stage 5) 3.4;
 > the front page applied, `LEDGER.md` rows 120–122). §7's wave 3 was still running at this close and closes with X29C and X30F.
+>
+> **CLOSED (wave 3) by X30F** (2026-09-26: §7's statuses final; the front page applied from `plans/FS100-three-field-lemma.md` §R-close (stage 5,
+> wave 3), `LEDGER.md` rows 123–125). X27D and X27V's TR-ROT verdict folds with X31C; X11K3 was still gating at this close.
 
 *Planner: de Bruijn (Opus 5.5), from the owner's brief `data/crunch-2026-09-26-x2x3/briefs/PLN-x2x3-planner.md`. Advisor: Poros, whose
 record is `plans/POROS-2026-09-26-x2x3-crunch.md`. Items the advisor changed are marked **[P-n]**, and §6 records where I disagreed. The
@@ -339,13 +342,16 @@ P0–P8 (`plans/FS100-X05V-verification.md` §2.1); J48-N4cor (quoted in list X2
 | X22V | Opus | blind verifier | FS-100 s5 (w3) | list X22, blind | same, fenced | `plans/FS100-X22V-verification.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P2 | DONE |
 | X23D | Opus | derivation | FS-100 s5 (w3) | list X23: SP-Cor and the class for every real number field; ℚ(√3,√5) | SP-Cor, A⁺, X05V's P0–P8, row 117, J48-N4cor | `plans/FS100-X23D-derivation.md` | a free slot | 0.75 | 250 | 230k or 07:30 | none | P1 | DONE |
 | X23V | Opus | blind verifier | FS-100 s5 (w3) | list X23, blind | same, fenced | `plans/FS100-X23V-verification.md` | a free slot | 0.75 | 250 | 07:30 | none | P1 | DONE |
-| X29C | Opus | close-math | FS-100 s5 (w3) | wave 3's close: derivation entries, §R-close (wave 3), drafts | wave-3 reports | `plans/FS100-three-field-lemma.md` | 07:30 | 0.3 | 150 | 07:50 | none | P2 | run |
-| X30F | Opus | front-page | FS-100 s5 (w3) | applies X29C's drafts | X29C | the four front files | X29C | 0.25 | 150 | 08:05 | none | P2 | wait |
+| X29C | Opus | close-math | FS-100 s5 (w3) | wave 3's close: derivation entries, §R-close (wave 3), drafts | wave-3 reports | `plans/FS100-three-field-lemma.md` | 07:30 | 0.3 | 150 | 07:50 | none | P2 | DONE (report `reports/X29C.md`) |
+| X30F | Opus | front-page | FS-100 s5 (w3) | applies X29C's drafts | X29C | the four front files | X29C | 0.25 | 150 | 08:05 | none | P2 | DONE (report `reports/X30F.md`) |
 | X25B | — | blind derivation | FS-100 s5 (w3) | blind second derivation of R88-TCA's class form (owner-launched 06:39, per X21D's suggestion) | — | — | — | — | — | — | none | — | DONE |
-| X11K2 | Opus | kernel | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | run |
-| X26B | Opus | blind derivation | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | run |
-| X27D | Opus | derivation | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | run |
-| X27V | Opus | blind verifier | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | run |
+| X11K2 | Opus | kernel | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | STAGE 1R SAVED (report `reports/X11K2.md`; its gate continued by X11K3) |
+| X26B | Opus | blind derivation | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | DONE (report `reports/X26B.md`) |
+| X27D | Opus | derivation | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | DONE (report `reports/X27D.md`; its verdict folds with X31C) |
+| X27V | Opus | blind verifier | FS-100 s5 (w3) | — | — | — | — | — | — | — | — | — | DONE (report `reports/X27V.md`; its verdict folds with X31C) |
+| X28D | Opus | derivation | FS-100 s5 (w3) | the complex-place case of FS100-COR: CP-1–CP-3 (Kooshi's pointer to FS54-T2) | — | `plans/FS100-X28D-derivation.md` | — | — | — | 07:50 | none | — | DONE (report `reports/X28D.md`; folded by X30F) |
+| X11K3 | Opus | kernel | FS-100 s5 (w3) | gates X11K2's skeleton into `Proofs/` | — | — | — | — | — | — | — | — | run (still gating at this close; FS-101's lane) |
+| X31C | Opus | close-math + front-page | FS-100 s5 (w3) | the follow-on fold of X27D and X27V (TR-ROT) | X27D, X27V | — | X30F | — | — | — | none | — | wait (launches after X30F) |
 
 **Launch order when slots bind (06:25, with the advisor's ranking):** X24R, X23D, X23V, X22D, then X22V. X23 carries the largest gain: SP-Cor
 and the class for every field would give `χ(F²) ≥ min(L(F), 5)`. X22's real content is C-1; its C-4 is expected to be a GAP.
