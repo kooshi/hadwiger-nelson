@@ -20,12 +20,14 @@ about rational functions, not about `ℝ`: for every **formally real** field `F`
 coordinates lie in the valuation subring `B`, the plane splits into cosets of `B × B` with no unit edge between cosets,
 and reduction `B → F` on each coset (`cosetResidue`) carries a colouring of `F²` back to one of `F(t)²`.
 
-**Prior art.** The statement and its proof ("Setting x = 0 …") are `[Fischer1990]` Theorem 6 (Discrete Math. 81,
+**Prior art.** The statement and its proof ("Setting x = 0 …") are `[Fischer1990]` Theorem 6 (Discrete Math. 82,
 p. 188): *"Let α be a real number transcendental over the field F ⊂ ℝ. Then F^d can be k-colored (has an additive
-k-coloring) iff F(α)^d can be k-colored"*. The valuation form of the integrality step is `[Madore2015]` Prop. 3.2's
-mechanism. What is ours is the kernel form, stated for any formally real `F`, and the valuation lemma stated for any
-valuation subring whose residue ring has no square root of `−1` (it covers Theorem A's residue fields `𝔽_q`,
-`q ≡ 3 (mod 4)`, and the degree-one places of `plans/M2-S1D-bridge.md` C3′ alike).
+k-coloring) iff F(α)^d can be k-colored"*. The valuation lemma in its full generality — any valuation subring whose
+residue ring has no square root of `−1`, which covers Theorem A's residue fields `𝔽_q`, `q ≡ 3 (mod 4)`, and the
+degree-one places of `plans/M2-S1D-bridge.md` C3′ alike — is `[Madore2015]` Prop. 3.2 at `d = 2` (anisotropy of
+`z₁² + z₂²` over the residue field is exactly `−1` not being a square there): its proof's first step is the
+integrality lemma, and its coset representatives are the coset step. What is ours is the kernel form, stated for any
+formally real `F`.
 
 **What this does not prove.** Nothing here reaches a finitely generated real field that is not purely transcendental
 over a number field (`plans/M2-S1D-bridge.md` §2.3: `[Fischer1990]` Remark 1's first sentence is false), and nothing

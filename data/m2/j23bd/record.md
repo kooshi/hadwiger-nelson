@@ -44,3 +44,36 @@ residue ring has no square root of `−1`") is Madore's Prop. 3.2 at d = 2**, as
 - `scripts/vacuity-baseline.txt`'s header **does** record counts: "declarations=6795  refutations-skipped=278  sites=275" and
   "vacuous=0 stale=0 declared=3 witnessed=17 generic=253 unknown=2" — so it is brought to the gate's current counts in stage 2.
 - No other Lean file carries "Discrete Math. 81" (`grep -rn "Math\. 81" --include="*.lean" Proofs scripts`: the one line).
+
+## Stage 2 — SAVED: the edit and the gate
+
+**The diff** (`Proofs/HadwigerNelson/Transcendental.lean`, the module doc's "Prior art." paragraph only; no declaration touched):
+- "Discrete Math. 81," → "Discrete Math. 82,".
+- Removed: "The valuation form of the integrality step is `[Madore2015]` Prop. 3.2's mechanism. What is ours is the kernel form, stated
+  for any formally real `F`, and the valuation lemma stated for any valuation subring whose residue ring has no square root of `−1` (it
+  covers Theorem A's residue fields `𝔽_q`, `q ≡ 3 (mod 4)`, and the degree-one places of `plans/M2-S1D-bridge.md` C3′ alike)."
+- Added: "The valuation lemma in its full generality — any valuation subring whose residue ring has no square root of `−1`, which covers
+  Theorem A's residue fields `𝔽_q`, `q ≡ 3 (mod 4)`, and the degree-one places of `plans/M2-S1D-bridge.md` C3′ alike — is `[Madore2015]`
+  Prop. 3.2 at `d = 2` (anisotropy of `z₁² + z₂²` over the residue field is exactly `−1` not being a square there): its proof's first step
+  is the integrality lemma, and its coset representatives are the coset step. What is ours is the kernel form, stated for any formally
+  real `F`."
+
+`scripts/vacuity-baseline.txt`'s header: "declarations=6795  refutations-skipped=278  sites=275" → "declarations=7051  refutations-skipped=304
+sites=279"; "generic=253" → "generic=257" (the other five counts unchanged).
+
+**The gate** (desktop; every exit status read from the tool, outputs in this directory):
+- build: `scripts/slot.py --mem 60 --cpus 16 -- env MEMMAX=60G ./scripts/build.sh` exit 0; "build: OK — 178 of 178 batches, 4 module(s)
+  rebuilt, 0 module(s) with warnings, 3m39s" — rebuilt Transcendental, Bridge, NoParam, Proofs (`build.out`, `build.exit`).
+- axioms: exit 0; "audited: 1146 records — 1130 clean on the standard axioms, 11 axiom-free, 5 declared purchase(s)"; purchase ledgers
+  agree (`axioms.out`). Unchanged from J23b.
+- vacuity: exit 0; "declarations=7051  refutations-skipped=304", "sites=279  vacuous=0  stale=0  declared=3  witnessed=17  generic=257
+  unknown=2" (`vacuity.out`); after the header update, "recorded counts (scripts/vacuity-baseline.txt's header, CLAUDE.md § The gate):
+  match" (`vacuity-after-baseline.out`). Unchanged from J23b.
+- architecture: `tools/check_architecture.py` exit 0, "RESULT: PASS" (`arch.out`).
+
+**Found on the way (not fixed; outside the brief):**
+- *Tool defect*: `scripts/gate_report.py` lines 106–117 read only the baseline header, yet its line says "recorded counts
+  (scripts/vacuity-baseline.txt's header, CLAUDE.md § The gate): match" — `CLAUDE.md` line 1910 still records "declarations=6795
+  refutations-skipped=278" and the check never reads it. A check reporting on a file it did not read.
+- *Correction owed (front-page lane)*: `CLAUDE.md` § The gate's vacuity counts (6795/278/275, generic 253 → 7051/304/279, 257) and
+  § Trust ledger's "1034 clean" (→ 1130, as the axiom audit's own line says).
