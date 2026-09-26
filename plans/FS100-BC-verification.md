@@ -377,3 +377,7 @@ step where the divergence sits (the completion vs the stable places), which the 
 ### 3.5 Would-have-searched-here log (stage 3)
 
 - None.
+
+## Stage 4 — SAVED (the report)
+
+The report is `data/crunch-2026-09-25/reports/J48.md`, committed with this stage and sent to the owner by SendMessage.
