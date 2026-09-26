@@ -203,3 +203,11 @@ recast as a closed-set statement (KS-sat). Side result: ℚ(√143), ℚ(√311)
 d ≡ 47, 143, 167 mod 168, one mind). Owner rulings, each in the close inventory `plans/FS100-close-inventory.md` (opened a21fdf02): the
 modeling passes run at J51D's stage 1; KS-2 stays in the blind list (KS-3 states KS-sat anyway); J51's row-head reading of LEDGER § A
 accepted as a declared slip. **Running (3):** J52 (kernel planner), J51D, J51V.
+
+**Update ~04:45 — J52 done (plan `plans/FS75-kernel-167.md`); J52K launched.** No swap to FS-87: leaf 1's first seven lemmas closed on
+first elaboration and the whole 1,050-leaf certificate already checks under `decide +kernel` (19.4 CPU s, 6.04 GB). Finding: the certificate
+needs only an integer "winding" on the relation lattice, which any proper three-colouring supplies with no averaging or compactness. Owner
+rulings in `plans/FS75-close-inventory.md` (opened 35c82490): no swap; headline name `four_le_chromaticNumber_planeOver_sqrt167` kept (word
+spelling ambiguous at 167; statement shape identical to its siblings); ℚ(√47) after the gate only. **Running (3):** J51D, J51V, J52K.
+Next: on J51D + J51V, the owner reconciles verdicts (divergence table), then FS-100's close-math and front page; on J52K, the gate re-run
+by the owner, then FS-75's close and front page.
