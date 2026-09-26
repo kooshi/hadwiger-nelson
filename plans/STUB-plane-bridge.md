@@ -9,7 +9,8 @@
 ## 1. Mission context, in plain language
 
 Since M58 every result of the programme is a statement about the unit-distance graph of a number field's plane F², and the
-record turns them into statements about ℝ² by two classical facts stated in prose and nowhere proved, cited or formalized:
+record turns them into statements about ℝ² by two classical facts stated in prose and, when this stub was minted, nowhere proved, cited or
+formalized (since M2 both are in the kernel, the second as the named hypothesis `RealAlgebraicDescent`; `LEDGER.md` row 107):
 (i) de Bruijn–Erdős — χ(ℝ²) is the supremum of the chromatic numbers of its finite subgraphs; (ii) every finite
 unit-distance graph in ℝ² has a drawing with all coordinates in some real number field. Together they give
 χ(ℝ²) = sup_F χ(F²), which is what makes the local–global conjecture's bold form (`plans/M61-local-global-tightness.md:67-68`:
@@ -24,8 +25,8 @@ an injective drawing is not needed, since a non-injective one is still a homomor
 | fact | trust | where |
 |---|---|---|
 | the field results: Theorem B, the finite-plane bound, the sieve, M60, M61 | kernel / hand | rows 52–61 |
-| "de Bruijn–Erdős" invoked as prose | prose only | `plans/M61-local-global-tightness.md:13`, `plans/M35-k5-transfer.md:12`, `plans/M29-uncountable-pair.md:4`, `plans/PROGRAMME-ALGEBRAIC-PROOF.md` §4 |
-| the algebraic-drawing step | never stated | grep 2026-09-13 |
+| "de Bruijn–Erdős" invoked as prose | prose only until M2; since then kernel, through Mathlib's `SimpleGraph.nonempty_hom_of_forall_finite_subgraph_hom` | `plans/M61-local-global-tightness.md:13`, `plans/M35-k5-transfer.md:12`, `plans/M29-uncountable-pair.md:4`, `plans/PROGRAMME-ALGEBRAIC-PROOF.md` §4; `Proofs/HadwigerNelson/Bridge.lean` |
+| the algebraic-drawing step | never stated (grep 2026-09-13); since M2 stated as the named hypothesis `RealAlgebraicDescent`, the bridge in the kernel conditional on it (row 107); its proof is phase B2 | `Bridge.lean`, `RealClosed.lean` |
 | the lower-bound direction needs neither: a finite graph drawn in F ⊂ ℝ IS a subgraph of the plane's graph (`Instances/DeGrey`, `chromaticNumber_le_of_drawing` genre) | kernel | `Lift.lean` |
 
 ## 3. Derivations first
@@ -67,7 +68,7 @@ transcendence degree at all — it is an arithmetic invariant, and "other subfie
 deliverable by itself. It does **not** yet give (ii) for an arbitrary finitely generated `F ⊆ ℝ`: descending such a field needs a
 place whose residue field is again **formally real**, which is the theory of real places (Artin–Lang), not Tarski–Seidenberg.
 **So Route C trades one Mathlib gap for a different one** — and that is the point: the two gaps should be priced against each
-other before either route is committed to, and nobody has priced the real-places one.
+other before either route is committed to. M2 priced the real-places one: Artin–Lang is no cheaper (J17-T10; the head block).
 
 ***Prior art, found 2026-09-19 at FS-61's gate and read first-hand in the held PDF: the Lemma is `[Fischer1990]` Theorem 6*** —
 *"`F^d` can be k-colored (has an additive k-coloring) iff `F(α)^d` can"*, any dimension, proved by clearing denominators in `F[x]`
@@ -77,12 +78,12 @@ general (the function field of a curve of positive genus) — and then invokes d
 since 1990 and never correctly *proved* there; this stub's product is the repair — real places, or Tarski–Seidenberg — and the
 kernel form. B′ remains a fair half-day kernel theorem, credited to Fischer.
 
-## 3a. Prior-art gate (WORKFLOW 3.2) — owed, never run
+## 3a. Prior-art gate (WORKFLOW 3.2) — run at M2 (`plans/M2-S1D-bridge.md` §1.3)
 
-This stub predates its own gate. Before any of D2–D4 is written: search for the specialisation argument in the words of valuation
-theory and of real algebraic geometry (*real place*, *Artin–Lang homomorphism theorem*, *specialisation of a semialgebraic set*),
-and for the statement `χ(ℝ²) = sup over number fields` in the Hadwiger–Nelson literature — `[Madore2015]` ¶5.4 is the nearest thing
-we have and is cited in prose only.
+The gate this stub owed ran at M2, in the words of valuation theory and of real algebraic geometry (*real place*, *Artin–Lang
+homomorphism theorem*, *specialisation of a semialgebraic set*) and of the Hadwiger–Nelson literature. Its finding (row 107): "the
+bridge is `[Madore2015]` ¶5.4 with ¶1.3 (Tarski), noted by `[BendaPerles2000]` (unread), asserted in `[Soifer2024]` ch. 11 (Open
+Problem 11.1's comment), with a false step in `[Fischer1990]` Remark 1".
 
 ## 4. Phases
 
@@ -93,13 +94,17 @@ we have and is cited in prose only.
 | B′ | **D4's transcendence lemma in the kernel** — `chromaticNumber_planeOver_adjoin_transcendental_eq`, plus `χ(ℚ(π)²) = 2` as its named inhabitant | half a day; the two valuation lemmas already exist |
 | C | the corollary `chromaticNumber_plane_eq_iSup_numberField` and a rewrite of the prose sentences to cite it | an hour |
 
+**Status (M2, 2026-09-25; the head block):** A, B′ (route C, row 104), B0, B1 and C (C1, C2 and C4 conditional on
+`RealAlgebraicDescent`, row 107) are in the kernel; what is left of B is B2, `RealAlgebraicDescent` itself — months, not the one to
+two days priced above.
+
 **Phase order changed 2026-09-17:** run **B′ before B**, and price Route C's real-places gap against Route B's Tarski gap in the
 same sitting. B′ is cheap, standalone, and lands a statement worth having whichever route wins.
 
 ## 5. Bearing on 6, honestly
 
 None directly on finding a 6-forcer (D1). High on the honesty of every "χ(ℝ²) = …" sentence the programme writes after M58,
-and required by FS-20's paper. Cheap.
+and required by FS-20's paper. What is left, B2, is months (the head block).
 
 **Raised 2026-09-17, and the reason withdrawn 2026-09-19.** This stub was moved from rank 8–13 to rank 3 as a prerequisite of FS-62
 (`plans/STUB-six-is-not-a-value.md`), whose headline — *no subfield of ℝ has χ(F²) = 6* ⟺ *χ(ℝ²) ∈ {5, 7}* — turned out to hold in
@@ -109,7 +114,8 @@ and it belongs here as phase C's second corollary:**
 > **`χ(ℝ²) ≠ 6` ⟺ every real number field `F` with `χ(F²) = 6` has a finite real extension `F′` with `χ(F′²) = 7`.**
 
 (⟸: a number field attaining the plane's 6 has no such extension; ⟹: take the compositum with a number field holding a 7-chromatic
-graph. Both use the bridge.) The stub keeps rank 3 on phase B′ alone — a half-day kernel theorem whose two valuation lemmas exist.
+graph. Both use the bridge.) This corollary is C4, in the kernel since M2 conditional on `RealAlgebraicDescent` (row 107), and phase
+B′ is in the kernel (row 104); the stub's rank is `plans/FRONTIER-STUBS.md`'s.
 
 ## Where the 2026-09-25 work on this lives
 

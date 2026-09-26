@@ -3,7 +3,7 @@
 **At the 2026-09-26 re-rank (job R3; `plans/RERANK-2026-09-26.md` § Application — R3): rank 5 → 26 in `plans/FRONTIER-STUBS.md`.** A kernel port; none on six. Provisional bearings add: FS-103 (the collapse — F1, a candidate composition, not a result), FS-104 (`χ_CP(ℝ²)` at six), FS-105 (harden MR).
 
 > **Minimal instance landed and closed, 2026-09-26** (FS-75's minimal instance; plan and close `plans/FS75-kernel-167.md`, its
-> §R-close first; kernel record `plans/FS75-K-kernel-167.md`; register `plans/FS75-derivation.md`; `LEDGER.md` row 119, drafted).
+> §R-close first; kernel record `plans/FS75-K-kernel-167.md`; register `plans/FS75-derivation.md`; `LEDGER.md` row 119).
 > **`χ(ℚ(√167)²) ≥ 4` is in the kernel** — `four_le_chromaticNumber_planeOver_sqrt167`, standard three axioms, no native purchase, no
 > finite graph — from T41's 36-vector certificate (1,050 leaves, 12.2 CPU s). Three reusable pieces: `ThreeColour.nonempty_winding`
 > (the criterion's ⟹ in **winding form**: a colouring proper along `s` of any abelian group carries an additive `W` on the relation
@@ -34,7 +34,7 @@
 > `n` like configuration B's (FS81-T8); T8's norm-bound method should decide it in an afternoon. Solver needs: **none**. The text below
 > is the stub as minted at FS-73's close; its leaves 1–3 stand.
 
-*Minted 2026-09-23 at FS-73's close, from the kernel decisions of `plans/FS73-derivation.md` T22 (stub) and T39 (stub). Rank 3:
+*Minted 2026-09-23 at FS-73's close, from the kernel decisions of `plans/FS73-derivation.md` T22 (stub) and T39 (stub). Rank 3 at minting (now `plans/FRONTIER-STUBS.md`'s, 26 since the 2026-09-26 re-rank):
 none on six, high on trust — it moves the first bound above three at the conjecture's cheapest exposed prediction from a
 checker's word to the kernel's, and it is the kind of certificate Kooshi prefers to a large graph.*
 
@@ -44,7 +44,8 @@ FS-73 proved **χ(ℚ(√167)²) ≥ 4** (`LEDGER.md` row 79): the lattice `L21c
 three-colouring. The proof has two halves. **The criterion** (T22, its ⟹ direction; T42, V2's forward-lift form): a Cayley graph of
 a finitely generated torsion-free abelian group is three-colourable only if some character `θ` puts every generator in
 `[1/3, 2/3]` mod 1 — so an empty rotation set `Θ₃` refuses three colours. **The certificate** (T39): three independent exact trees,
-each with Farkas-vector leaves, each checked by a standalone Fraction-only checker, prove `Θ₃ = ∅`. Neither half is in the kernel.
+each with Farkas-vector leaves, each checked by a standalone Fraction-only checker, prove `Θ₃ = ∅`. Neither half was in the kernel at minting; both are since
+2026-09-26 for the minimal instance (row 119; the head block).
 Put both there, and compose them with the embedding into ℚ(√167)² — **without** the finite non-three-colourable graph, which is
 guaranteed by compactness and has never been exhibited.
 
@@ -107,7 +108,8 @@ kernel through `forces_iff_exists_finite`).
 
 ## Bearing on χ ≥ 6
 
-None directly. It puts the conjecture's falsification field's best lower bound in the kernel, and it is the first kernel
+None directly. It put the falsification field's kernel lower bound, four, in the kernel (row 119; five there is [hand], through MR,
+row 123), and it is the first kernel
 certificate type that refuses colourings of an infinite graph by a polytope rather than a finite graph by a resolution proof.
 
 ## Where the 2026-09-25 work on this lives

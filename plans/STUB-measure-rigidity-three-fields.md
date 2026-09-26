@@ -289,7 +289,8 @@ spectrum continuous, so this layer is not disjoint from the first: the first is 
 **SP's Furstenberg equivalence, at its verified grade** (§2.2): SP ⟺ ¬MR, **[hand, two derivations], positive reading** (J46-8 above). J36 F5's
 reading of it, [hand, one mind]: "**At type (A), T-C′'s colouring-free form is the zero-entropy Furstenberg-type rigidity problem for `U` acting
 on `R̂`, modulo `E`.**" The positive-entropy half "should be algebraic by Einsiedler–Lindenstrauss-type measure rigidity (recalled, not read)" — read at §1 by J51 (§PA.3): EL2021 Thm 1.2 never applies to finitely generated `Γ ⊂ U` (FS100-T2), Thm 1.3 can, modulo PE-lim;
-"The zero-entropy half is open, as for ×2×3." **At ℚ(√47) MR closes both layers at once** (SP-Cor); Kronecker selection closes layer 1 only.
+"The zero-entropy half is open, as for ×2×3." (Both halves landed at stage 5: PE-2 through Thm 1.2 on the finitely generated pieces `M̂`,
+applied only under admissibility, and EF_F⁺ — `LEDGER.md` row 120, [hand].) **At ℚ(√47) MR closes both layers at once** (SP-Cor); Kronecker selection closes layer 1 only.
 
 **The gap at the siblings** (for the instances): at type (B), J38's three pieces "transient; defect processes over a pullback, DP; J37's class
 verbatim" (J38's report), with MR ∧ T-B1 closing it (T-J38-2); at ℚ(√167) and five colours, J39's four pieces G-SP, G-∞, G-43, G-H (§3.3 (b)),
@@ -307,9 +308,9 @@ of which only G-SP is MR's.
 | X-KT1 | KT-1 passes | "high that it passes; the value is the grade, not the answer" | J37 §4.5 R1 | the ball-arithmetic evaluation finding a violated margin (§6 Stage 2) — **scored: met** (J49, certified; §7's failure clause does not fire) |
 | X-BC | the bundled blind check finds J39's steps 3 and 7 TRUE, 5 and 6 at risk | "high that 3 and 7 hold; medium on 5 and 6" | J39 §4.5 R2 | a FALSE or GAP at step 5 or 6 — **scored by J48:** BC-1 TRUE; steps 3, 6 and 7 hold; step 5 held after a repair of its statement (Lemma C and a finite-index extension, §2.3) |
 | X-PL23 | "every CP five-colouring of UD(ℝ²) × G₂₃ comes from UD(ℝ²)" | hunch, open | J39 §4.6 | "a CP five-colouring of UD(ℝ²) × G₂₃ with fibres not a.s. constant in the 23-adic coordinate, or a finite Hedetniemi failure with a factor of ratio < 1/5 and λ* ≈ 1/3" |
-| X-MR | MR(F) for every real quadratic `F` (uniform), or for ℚ(√47) alone | **unregistered: the FS-100 planner registers it at stage 0**, with its uninformative outcome and whether it is reachable (G21) | — | an SP witness over any real field (a `U`-invariant, positive, `E`-null measure with negative mean at 1) |
+| X-MR | MR(F) for every real quadratic `F` (uniform), or for ℚ(√47) alone | **unregistered: the FS-100 planner registers it at stage 0**, with its uninformative outcome and whether it is reachable (G21) | — | an SP witness over any real field (a `U`-invariant, positive, `E`-null measure with negative mean at 1) — **MR landed at stage 5** for every real number field with `R_F = O′` (row 120, [hand]) |
 | X-R1 | FS-97's (R1) "closes by a limit argument" (carried at FS-97's absorption) | 0.3 ("J41's prior, from the records only") | `plans/STUB-infinite-place-spectra.md` | written by J51 (plan §P): "a `U`-invariant `E`-null `τ` that is a weak* limit of measures carried by `Fin_S` and is not Haar" — unscored, carried |
-| P-EL | "EL2021 Thm 1.3's hypothesis holds for generic `Γ ⊂ U` on `R̂`" (plan §P) | 0.80 | `plans/FS100-three-field-lemma.md` §P | "a virtually cyclic solenoid factor" — unscored (stage 5 did not run), carried to §6.5 |
+| P-EL | "EL2021 Thm 1.3's hypothesis holds for generic `Γ ⊂ U` on `R̂`" (plan §P) | 0.80 | `plans/FS100-three-field-lemma.md` §P | "a virtually cyclic solenoid factor" — unscored (stage 5 went through Thm 1.2 on the pieces `M̂` under admissibility instead, row 120) |
 | X-KS′ | KS-sat_E at ℚ(√47) (stage 4′) | **unregistered: the next slot's planner registers it**, with its uninformative outcome (GAP at FS100-R's step, reachable) | — | an off-`E` family `Φ` and a neighbourhood `N` of 1 in `U` with `Φ(N)` not dense |
 
 ## 5. §IQ's seed (WORKFLOW 3.3)
@@ -329,19 +330,19 @@ of which only G-SP is MR's.
 
 ## 6. The shape of the milestone (a provisional outline for the planner)
 
-**Order as run:** Stage 0 → Stages 1 and 2 together → Stage 3's card → Stage 4 (the in-ban round, closed 2026-09-26). **Order for the next slot (owner ruling):** Stage 4′ (KS-sat_E at ℚ(√47)) → Stage 5 → Stage 6 only as the fallback; post-ban P1 leads from 2026-10-01.
+**Order as run:** Stage 0 → Stages 1 and 2 together → Stage 3's card → Stage 4 (the in-ban round, closed 2026-09-26). **Since then (the status blocks at the head):** stage 5 ran and landed MR (row 120); stage 4′ is moot for ℚ(√47) and kept only as a question about windows; P1's ℚ(√47) half is not pursued (FS-84 closed, Kooshi's ruling) and its ℚ(√3,√5) half is FS-72's lattice. The owner's order for the next slot after the in-ban round (Stage 4′ → Stage 5 → Stage 6 as the fallback; post-ban P1 leading) is §6.5's record.
 
 | stage | what | kind | the default if it does not land |
 |---|---|---|---|
 | 0 | **DONE (J51)** — the reframe: §G, §PA, §IQ (WORKFLOW 3.1–3.3) | re-grokking; prior-art gate | — |
 | 1 | **DONE (J48)** — the bundled blind check of the posters' one-mind theorems (§6.1) | blind verification | the posters' shared form stays one mind; ℚ(√47)'s route (SP-Cor) is unaffected |
 | 2 | **DONE, certified (J49)** — KT-1: `[AmbrusEtAl2023]`'s obligation H4 in ball arithmetic (§6.2) | tools, exact check of an existing certificate | the shared input stays "double precision … not interval-certified" |
-| 3 | **the card answered (J51 §PA.3); the reading owed (§6.5)** — the MR reading room: the prior-art gate on measure rigidity for this action, read before any derivation (G50) | reading | MR's status recorded as "open, with its nearest literature named" |
+| 3 | **the card answered (J51 §PA.3); the reading partly done at stage 5 (X24R: EL2021 §2 and §4.1–4.3, row 120); Thm 1.2's proof is FS-105's** — the MR reading room: the prior-art gate on measure rigidity for this action, read before any derivation (G50) | reading | MR's status recorded as "open, with its nearest literature named" |
 | 4 | **RUN (J51D, J51V): FALSE as stated; re-aimed as 4′** — Kronecker selection: a derivation and a blind check (§3's statement verbatim) | derivation + blind check | GAP with the missing equidistribution step named |
-| 4′ | **next slot, leads (owner ruling)** — KS-sat_E at ℚ(√47): FS100-R's density step (§6.5) | derivation + blind check | GAP at the named step, sharpened |
-| 5 | MR itself: uniform over real quadratic fields first, ℚ(√47) alone as the fallback; the entropy question | derivation, reading room unless a handle appears | a reduction theorem, or "open at the named Furstenberg-type step" |
+| 4′ | **moot for ℚ(√47) since stage 5 (MR closes the pure-point layer); kept as a question about windows** — KS-sat_E at ℚ(√47): FS100-R's density step (§6.5) | derivation + blind check | GAP at the named step, sharpened |
+| 5 | **DONE (the ×2×3 crunch, 2026-09-26): MR(F) for every real number field with `R_F = O′` (row 120, [hand])** — MR itself: uniform over real quadratic fields first, ℚ(√47) alone as the fallback; the entropy question | derivation, reading room unless a handle appears | a reduction theorem, or "open at the named Furstenberg-type step" |
 | 6 | **fallback only (owner ruling)** — EI-2 where colourings exist (ℚ(√11)): SI "⟸" as J45's equivalence (SI-5) | derivation | GAP, as now |
-| P1 | post-ban: J37's R4, a triangle-free Dúcz–Varga-type finite `H ⊂ ℚ(√47)²` (EI-F's route) | construction (finite-witness search) | EI-F's prediction unscored |
+| P1 | post-ban; **its ℚ(√47) half not pursued** (FS-84 closed, Kooshi's ruling; the ℚ(√3,√5) half is FS-72's lattice): J37's R4, a triangle-free Dúcz–Varga-type finite `H ⊂ ℚ(√47)²` (EI-F's route) | construction (finite-witness search) | EI-F's prediction unscored |
 
 ### 6.1 Stage 1 — the bundled blind check, its fixed claim list — DONE (J48, `plans/FS100-BC-verification.md`)
 
@@ -413,12 +414,12 @@ rows: P4, P5, P7, P8, P9.
 
 ### 6.4 Post-ban (from 2026-10-01)
 
-- **P1 — J37's R4 — leads the post-ban plan** (J50's card, branch "first yes, second no"): "a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (Dúcz–Varga-type, triangle-free), proving five outright (P10)". It scores X-EIF
+- **P1 — J37's R4 — not pursued over ℚ(√47)** (FS-84 closed, 2026-09-26: Kooshi, *"I'm not interested in taking the time to find a triangle free graph. That's incidental to the goal."*; five there is held at [hand], row 121). As written (J50's card, branch "first yes, second no"): "a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (Dúcz–Varga-type, triangle-free), proving five outright (P10)". It scores X-EIF
   and X-EIF-ℝ, and it replaces FS-84's stale P-int price (`plans/FS84-close-inventory.md` row 23). Its cost is unknown; price it before any run.
-- **FS-84's own post-ban stages stay in FS-84** — S4 (the colouring side), S2 (the four-class window LP) and S3 (the finite refusal): see
+- **FS-84's own post-ban stages** (not pursued; FS-84 is closed) — S4 (the colouring side), S2 (the four-class window LP) and S3 (the finite refusal): see
   `plans/FS84-five-colours-47.md` §4.2. They are cross-referenced here, not copied (§9).
 
-### 6.5 The next slot (after the in-ban round; owner rulings of 2026-09-26)
+### 6.5 The next slot (after the in-ban round; owner rulings of 2026-09-26) — superseded: stage 5 ran and landed MR (row 120); 4′ is moot for ℚ(√47); P1 over ℚ(√47) is not pursued
 
 1. **Stage 4′ — leads.** KS-sat_E at ℚ(√47), FS100-R's density step: for finitely generated `Φ` independent off `E` and a neighbourhood `N` of 1
    in `U` (topology of finitely many places), is `Φ(N)` dense? The named obstruction: `g ∈ N` is controlled at finitely many places, its poles
@@ -436,7 +437,7 @@ rows: P4, P5, P7, P8, P9.
 
 - **Not landed** is: Stage 5 ends without MR for any exposed field and Stage 4 ends without Kronecker selection proved or refuted, so neither
   gap layer closes and no colouring is exhibited in it. The report says "not landed" in those words. Stages 1–3 can land while the milestone
-  does not.
+  does not. (Did not fire: stage 5 landed MR, row 120.)
 - **What each null teaches:**
   - (Did not fire: J48.) Stage 1 FALSE at step 5 or 6 → the common form T-J39-3 is unproved; the three fields keep their own routes (J45 SP-Cor at ℚ(√47) and
     T-J38-2 at type (B) do not use it; T-J39-4 does, and falls back to T-C(A)'s class form at ℚ(√167), which J36 F7 read as "probably includes
@@ -465,7 +466,7 @@ rows: P4, P5, P7, P8, P9.
 
 ## 9. Its relation to FS-84, and to FS-97
 
-**FS-84 stays open**, holding its post-ban search stages (S4, S2, S3; `plans/FS84-five-colours-47.md` §4.2). **This milestone is the derivation
+**FS-84 is closed** (2026-09-26; its question answered by row 121, its post-ban search stages S4, S2, S3 — `plans/FS84-five-colours-47.md` §4.2 — not pursued, Kooshi's ruling). As written while it was open: **This milestone is the derivation
 route to the same question.** **No FS-84 stage moves here**: all of FS-84's remaining stages are searches or LPs on lattices, which is FS-84's
 route. J37's R4 (P1 above) is minted here, not moved; it supersedes FS-84's P-int price, as inventory row 23 already records. Both stubs carry
 this paragraph's substance.
@@ -512,7 +513,7 @@ T-J38-4 [tools exact] (row 34 of the post-close inventory): "tight dyadic tower 
 
 **None directly.** At ℚ(√47) a four-colouring falsifies the five-clause and a proof of five confirms it. At ℚ(√167), T-J39-5 converts the
 conjecture's "≥ 6" into the plane's measurable chromatic number, `χ_CP(ℝ²) ≥ 6`, given MR, PL(23, 43) and 43's depth: it locates six, and does
-not advance it. On the programme: MR is one lemma under three exposed predictions.
+not advance it. Since wave 3 (row 125, [hand]): "`Y` has none ⟺ `χ_CP(ℝ²) ≥ 6 ∧ PL_∃(23, 43)`", and "No held result gives either conjunct". On the programme: MR is one lemma under three exposed predictions.
 
 **Cost.** Stage 1, one verifier (about one crunch slot); Stage 2, minutes; Stage 3, a day of reading; Stage 4, one derivation and one verifier;
 Stage 5, unpriced — "a Furstenberg-type wall (J36 F5), so weeks at the least; a prior-art reading first" (J39 §4.4); P1, unpriced.
