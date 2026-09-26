@@ -144,3 +144,46 @@ reasoning.** Batches in order of risk: C1+C2 (batch 1), C3+C6 (batch 2), C4 (bat
 - Verdicts: fact audit `--base 2802fd78` **AUDIT PASSED (0 failure(s))**, exit 0; `--dupes` **7**, exit 0; `bib_audit.py` exit 0.
   ALLOW lines: none.
 - Bytes: 284,055 → **283,826** (−229; total −12,587).
+
+## Stage 3 — SAVED (the close)
+
+**Final:** `CLAUDE.md` 296,413 → **283,826 bytes** (−12,587, −4.2 %; 16,174 under the 300,000 budget). `LEDGER.md` 357,110 → 359,928
+(+2,818, the moved claim list). **The 15,000 floor is not landed**: 12,587 freed. Fact audit `--base 2802fd78`: **AUDIT PASSED (0
+failure(s))**, every class LOST 0, PROTECTED regions byte-identical, no dangling pointer. `--dupes` 13 → **7** (the seven left: three in
+`LEDGER.md` § B/rows, which this job only receives into; G60's reading and its killing test; G60 vs row 71 and G54 vs row 67, the row
+retelling the grokking; the mission's failure rule stated twice by Kooshi's target paragraph). `bib_audit.py` pass; `fs71_ledger_b_check.py
+--strict` PASS. **ALLOW lines added: none.** Commits: `1e924220` (stage 1), `179c6c5b`, `7b99ec62`, `2ed5750f`, `c62359f9`, `13b33932`,
+`b6d96724`, `17a8602e` (batches 1–7).
+
+**Why the floor was not reached.** The no-loss pool that touches no reasoning measured ~12.6 KB: the paths-forward table (−5,405), the
+Frontier items and close log (−6,187), G72's count (−~400), the Ours list's move (−2,501, net of its pointer), a few retold clauses. Every
+further candidate surveyed either holds tokens found nowhere else in the corpus (so it needs an ALLOW line the brief does not admit) or
+is reasoning or a scar: the method-instance lists in G21, G49, G50 are already one sharp lesson per instance; § Building and § "Make the
+gate fail" carry unique pids, counts and file names in every narrative; the grokkings' measured numbers (G31, G56's named fields, G59's
+`c` values, G65, G66) are in no ledger row, so the grokking is their only home.
+
+**Options for the remaining ~2,400 bytes (the owner's call):** (a) move G56's named fields (FS-54's enumeration, ~1 KB) and G31's arena
+counts (~300 B) into ledger rows, as `LEDGER.md`'s header rule says numbers and names belong there — it thins what the re-grokking reads
+in context; (b) compress the incident narratives of § Building's kill-by-PID paragraph and § "Make the gate fail" (~1.5 KB) — scars the
+budget rule protects; (c) accept 283,826 (16 KB of headroom, about three closes at their recent size).
+
+**What moved where:**
+| from `CLAUDE.md` | to |
+|---|---|
+| paths-forward rows' detail (rows 1–15, 16, 22, 23, 27, 29, 31, 34–36, 43–45) and the re-rank narrative | already in `plans/FRONTIER-STUBS.md`'s rows (checked phrase by phrase; FS-59's "robust to every level of the tower at 23" kept in `CLAUDE.md`) |
+| the Frontier items' retold mechanism (items 1–4, 8, 10–18, 20, 21, 24, 26–28) | the rows and grokkings each item points to (checked clause by clause, batches 3–5) |
+| the close log's per-close result summaries; the open-milestones paragraph's retold closes | Frontier items 24–28, § What the kernel holds; the Last-updated line |
+| the exposed-prediction list's second telling (item 10) | § The mission, the target paragraph (2) |
+| G72's running totals | one "eleven of eleven" list in G72 |
+| the prior-art position's **Ours** list after Theorems A and B | `LEDGER.md` § "The claim list", verbatim |
+
+**How to find what moved (five lines):**
+1. A paths-forward row's lost detail: its row in `plans/FRONTIER-STUBS.md` (authoritative), then the stub file the row names.
+2. A Frontier item's lost mechanism: the rows and G-entries in the item's own parenthesis.
+3. A close's results: the Last-updated line names the item (24–28) and the §R-close; the item names the rows.
+4. What is ours, row by row: `LEDGER.md` § "The claim list" (before § A); what is not ours stays in `CLAUDE.md`'s prior-art position.
+5. Anything else: `git log -p -- CLAUDE.md` from `2802fd78`; this record lists every batch's edits.
+
+**Held for the owner:** the Ours-list move (the brief's touch list says `LEDGER.md` receives "moved mechanism text"; revert `b6d96724` to
+undo it); the header's "with a compression pass to follow" is now stale (Kooshi's parenthetical, left for the owner); § Delegation says
+"at most three agents at once" while the owner's memory index records Kooshi's 2026-09-25 "Max 4 subagents for now" (not verified here).
