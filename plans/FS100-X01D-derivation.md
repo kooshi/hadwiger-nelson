@@ -17,6 +17,8 @@ claims; no contact. Working files: `data/fs100/x01d/`. Exact checks: `tools/x01d
 - **Lemma 3.1′** (one zero-entropy non-torsion `u*` ⟹ boxes thin at one expanding place `v*` carry mass `≥ δ^β` off a small set) — [hand], §3.3
 - **Lemma 3.2′ / Steps 3–5** (pigeonhole with `U_ℚ` multipliers + product formula ⟹ `x̃_{v*} ∈ L` for `μ`-a.e. `x`) — [hand], §3.4–3.6
 - **EF_F⁺** (one zero-entropy non-torsion `u` ⟹ `μ(R̂ ∖ (T + A)) = 0`, no ergodicity) and hence **EF_F** — [hand, one mind], §3.0–3.8
+- **EF-MR** (PE-2 + EF_F ⟹ MR(F); over ℚ(√47) with SP-Cor, T-C(A) at `S = ∅` and the held `χ ≤ 5`: `χ = 5`) — [hand], §4.1
+- **Corollary MR⟺PE**: for every real number field, MR(F) ⟺ PE-2(F), given R-U — [hand, one mind], §4.3
 
 ---
 
@@ -337,3 +339,98 @@ The result is the one the advisor predicted and the one that flatters the milest
 ### 3.11 Would-have-searched-here log
 
 - None in stage 3: the transfer is a derivation; the only computation was bookkeeping of exponents, done by hand in §3.5–3.6.
+
+---
+
+## Stage 4 — SAVED
+
+### 4.1 EF-MR
+
+**First half — TRUE** [hand; a composition]. *Hypotheses used:* PE-2(F) exactly as quoted in §1.1, and EF_F (or EF_F⁺). Let `τ` be a
+`U`-invariant finite positive measure with `τ(E) = 0`. PE-2 gives `τ = a·m + τ′`, `a ≥ 0`, `τ′` positive `U`-invariant with `h_{τ′}(u) = 0` for
+every `u`. `U` contains the non-torsion `(3+4i)/5 ∈ U_ℚ`. *Via EF_F⁺ (no decomposition):* `τ′(R̂ ∖ (T + A)) = 0`. *Via EF_F as stated:* `U` is
+countable, so `τ′/τ′(R̂)` has an ergodic decomposition `∫ μ_s dP(s)`; the `u`-ergodic decomposition of `τ′` is the integral of those of the
+`μ_s`, so Jacobs' formula gives `0 = h_{τ′}(u) = ∫ h_{μ_s}(u) dP`, hence `h_{μ_s}(u) = 0` for `P`-a.e. `s`, and EF_F gives `μ_s(E) = 1`.
+Either way `τ′` is carried by `E` (Borel: a countable union of σ-compact sets). But `τ′ ≤ τ` and `τ(E) = 0`, so `τ′ = 0` and `τ = a·m`: **MR(F)**.
+(`m(E) = 0` is not needed.)
+
+**Second half — TRUE, with one input the claim does not list** [hand; a composition]. Over ℚ(√47): MR (first half, given PE-2) and SP-Cor
+(`plans/FS84-SI-D-derivation.md` §4.2, quoted in §1.2 Q3; given T-C(A) at `S = ∅`, i.e. R88-TCA, `plans/R88-derivation.md` line 161) give
+`χ(ℚ(√47)²) ≥ 5`. **The equality also needs `χ(ℚ(√47)²) ≤ 5`**, which is not in the claim: it is the proven upper bound (`CLAUDE.md` § Where the
+problem stands, item 10: "a proven 4 ≤ χ ≤ 5"), from the usable residue plane at 11 (Theorem A, row 52, and `χ(Γ₁₁) = 5`). With it:
+`χ(ℚ(√47)²) = 5`.
+
+**The named inputs of "χ(ℚ(√47)²) = 5 via route (A)"**, graded: PE-2(ℚ(√47)) — **open** (X02's claim); EF_F — this record, [hand, one mind];
+SP-Cor — [hand]; T-C(A) at `S = ∅` over ℚ(√47) — [hand, two derivations blind to each other]; R-U (inside SP-Cor's proof) — held;
+`χ ≤ 5` — held.
+
+### 4.2 Control (c): the known four-colourings survive
+
+MR must be consistent with the four-colourings that exist: over K (Theorem B) and over ℚ(√11) (row 94's C9). EF_F⁺ + PE-2 give MR at K and at
+ℚ(√11) too (the derivation is uniform in `F`), so if the chain "MR ⟹ χ ≥ 5" ran there, a step would be wrong. It does not run, and it breaks
+exactly where the advisor predicted:
+
+| field | the known colourings' spectra | where SP-Cor's chain breaks | does anything here claim them Haar? |
+|---|---|---|---|
+| K = ℚ(√3,√11) | every four-colouring is, per coset, local at one dyadic place and `4R_K`-periodic (row 89): spectral measure carried by `T` | **T-C(A)**: K is outside R88-TCA's class — its stable dyadic place is Hoffman-tight at four colours, all-levels ratio exactly `1/4`, not `< 1/4`. Concretely `τ = σ_μ|_{R̂∖E} = 0` and `∫ Re χ(1) dτ = 0`, not `< 0`: A⁺ fails | **No.** `σ_μ(R̂ ∖ E) = 0`, MR returns `a = 0`; EF_F⁺ says zero-entropy measures lie on `T + A`, and these do |
+| ℚ(√11) | C9's colouring `⌊4θ⌋`, `θ` = a torsion character at the stable prime above 7 plus an archimedean linear term: spectral measure on `ℤθ ⊆ T + A` (rotation-averaged: on `Uθ ⊆ T + A`) | **T-C(A)**: the stable place above 7 has level-one ratio `α(Γ₇)/49 = 14/49 = 2/7 > 1/4` (and the tower does not lower it), so ℚ(√11) is outside the class; again `τ = 0` | **No**, same reason |
+
+So the control passes for the right reason: MR holds at both fields and is harmless there, because every known four-colouring's spectrum is
+carried by `E` (in fact by `T + A`); SP-Cor's field-specific input T-C(A) is what fails. **What a wrong-reason pass would look like:** a
+control that "passes" because EF_F⁺ was never applied at K (it applies uniformly), or because MR was checked only against Haar-like
+spectra; or a derivation that makes some non-`T + A` spectrum at K zero-entropy and then declares it Haar. None occurs: the argument's only
+conclusion about zero-entropy measures is `T + A`, which is exactly where these spectra live.
+
+### 4.3 A corollary the route yields: MR is exactly PE-2
+
+**Corollary MR⟺PE** [hand, one mind; given R-U]. For every real number field `F`: **MR(F) ⟺ PE-2(F).**
+*Proof.* ⟸ is §4.1. ⟹: given `τ`, split `τ = τ|_{R̂∖E} + τ|_E` (both `U`-invariant, `E` being `U`-invariant). MR gives `τ|_{R̂∖E} = a·m`. By
+R-U, `τ|_E` is carried by `T + A`; by Step 7's shells it is carried by `T + A_iso` (the archimedean coordinates on which all of `U` is isometric;
+all of `L_∞` when `F` is totally real); on each finite orbit of leaves a power `u^k` fixes every leaf and acts on it as a norm-preserving
+linear isometry, which preserves every closed ball, a compact metric space on which an isometry has zero entropy; so `h_{τ|_E}(u) = 0` for
+every `u`, and `τ = a·m + τ|_E` is PE-2's decomposition. ∎
+**What it means for FS-100:** row 118's "MR is its zero-entropy half plus an owed lemma PE-lim" becomes, given EF_F⁺, **"MR ⟺ PE-lim"**: the
+zero-entropy half is closed by Einsiedler–Fish's mechanism, and the whole remaining difficulty is the positive-entropy decomposition PE-2
+(route (B), X02). The honest statement of how hard MR is: exactly as hard as PE-2, and no harder.
+
+### 4.4 Verdicts (one line each)
+
+| claim | verdict | grade | where |
+|---|---|---|---|
+| EF-G | **FALSE** at (a): counterexample ℚ(∛2) (non-torsion norm-one unit, `H = 1`, `h_m > 0`); (a) TRUE for totally real `F`; (b) TRUE (infinite `#U_N` when `F` is not totally real) | [hand + tools] | §2.1 |
+| EF_F | **TRUE**, with the stronger EF_F⁺ (one element, no ergodicity, conclusion `T + A`) | [hand, one mind] | §3 |
+| EF-MR | **TRUE** as an implication; the second half also needs `χ(ℚ(√47)²) ≤ 5` (held, unlisted) | [hand] | §4.1 |
+| EF-X | **TRUE** (archimedean circle measures) | [hand] | §2.2 |
+
+C0 scored: EF-G predicted FALSE at 0.80 (won, for the predicted reason); EF_F predicted TRUE at 0.65 (won; the GAP mass sat on the planner's
+risk, which dissolved at the product formula); EF-MR TRUE at 0.55 (won, with the unlisted upper bound found); EF-X TRUE at 0.95 (won).
+
+### 4.5 Proposed edits (standing rule 7: I do not edit these files)
+
+- **`LEDGER.md`, a row (draft for the close):** "Einsiedler–Fish transfers to the unit-vector group: over every real number field, a
+  `U`-invariant finite measure on `R̂` with zero entropy for one non-torsion `u` is carried by `T + A` (EF_F⁺); so MR(F) ⟺ PE-2(F), and the
+  zero-entropy half of row 118 is closed. EF-G (a) is false off the totally real fields (ℚ(∛2)). [hand, one mind; X01V blind on the claim
+  list]" — `plans/FS100-X01D-derivation.md` §§3–4.
+- **Row 118's text:** "MR is its zero-entropy half plus an owed lemma PE-lim" → "MR ⟺ PE-lim, given EF_F⁺ (the zero-entropy half, by
+  Einsiedler–Fish's mechanism and the product formula)".
+- **G76** (its "For colourings rigidity splits into invariant measures and transience" sentence) and **G79**: FS-100's route (A) is an
+  example-invariant result? No — it is a structural (every-measure) statement found by transferring a known tool; record under G72's count as
+  "extending a known tool", not as a structural-question result.
+- **`BIBLIOGRAPHY.md` rows:**
+  - `[EinsiedlerFish2010]` M. Einsiedler, A. Fish, *Rigidity of measures invariant under the action of a multiplicative semigroup of
+    polynomial growth on T*, Ergodic Theory Dynam. Systems 30 (2010) 151–157, Zbl 1189.37005, arXiv:0804.3586 — FS-100 route (A): Lemmas 3.1–3.2
+    transfer to `U` on `R̂` (EF_F⁺) — held `data/crunch-2026-09-26-x2x3/poros/` — **read in full** (X01D, 2026-09-26).
+  - `[Huang2017]` H. Huang, *Fourier coefficients of ×p-invariant measures*, J. Mod. Dyn. 11 (2017) 551–562, Zbl 1402.37006, arXiv:1606.06078 —
+    names Sataev 1975 as EF's precursor; circle only — held `data/fs100/x01d/` — read §1, Remark 5.4, references.
+  - `[HuangLiShiXu2023]` H. Huang, H. Li, E. Shi, H. Xu, *Strongly independent matrices and rigidity of ×A-invariant measures on n-torus*,
+    Front. Math. 18 (2023) 153–166, Zbl 1537.37013, arXiv:1908.02611 — tori, Fourier method; not an S-adic EF — held `data/fs100/x01d/` — read §1.
+  - `[Sataev1975]` E. A. Sataev, *On measures invariant with respect to polynomial semigroups of circle transformations*, Uspekhi Mat. Nauk
+    30 (1975) no. 2, 203–204 — EF's Thm 1.2 first (per Huang) — **not held, unread**.
+  - Chothi–Everest–Ward 1997 (*S-integer dynamical systems: periodic points*, J. reine angew. Math. 489) and Lind–Ward 1988 (*Automorphisms
+    of solenoids and p-adic entropy*, ETDS 8): **cited from memory for EF-G (a′) only — a prior-art debt**; nothing in EF_F rests on them.
+
+### 4.6 Would-have-searched-here log (whole job)
+
+- Stage 2: would have hunted norm-one units over many non-totally-real fields by PARI; instead derived the rank count and checked one field
+  with a control and a plant.
+- Stages 3–4: none; derivation only.
