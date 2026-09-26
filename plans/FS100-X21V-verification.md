@@ -7,7 +7,17 @@ committed: X21D's record, data, brief and report, the advisor's record, X21D / "
 
 ## Theorems this phase proved
 
-*(filled at stage 3; one line per theorem, grade, address)*
+- **Q-0** — for real quadratic `ℚ(√d)`: no stable dyadic place ⟺ `d ≡ 7 (mod 8)`; so the family is outside row 100's exception. [hand + tools exact (PARI, `d < 400`)] — §2.0–2.1; `tools/x21v_checks.py` C1.
+- **Stable-place rule** — a stable odd place of a real quadratic field has residue `𝔽_p`, `p ≡ 3 (4)`, and exists iff `p | d` or `(d/p) = 1`. [hand + tools exact] — §2.0; C3.
+- **Class congruences** — `d ≡ 7 (8)`, `d ≡ 2 (3)`, `(d/7) = −1` ⟺ `d ≡ 47, 143, 167 (mod 168)` ⟺ no stable place at 2, 3 or 7. [hand + tools exact (complete enumeration mod 168)] — §2.4 step 1; C2.
+- **K0, blind (A-3)** — over every real number field: T-C(A) at `S` ⟹ A⁺ at `S`; T-C(A) at `S = ∅` ⟹ SP-Cor (MR ⟹ `χ ≥ 5`). [hand, second mind; J45's proofs walked] — §2.3.
+- **A-1** — given MR, `χ(ℚ(√d)²) ≥ 5` on the family. [hand; composition of row 117, R88-TCA's class form, K0, Q-0] — §2.4.
+- **A-2** — given MR, `χ = 5` where `L = 5`; `L = 5` at 47, 143, 311, 335 via a stable place above 11 of degree 1. [hand + tools exact + kernel lemma] — §2.5; C4.
+- **A-4** — given MR, `χ(ℚ(√167)²) ≥ 5` by J48-N4cor; `λ*(23) = 0.3316953`, margin `0.001638`, reproduced. [hand + tools float] — §2.6; C5.
+- **Lemma X21V-M (the merge)** — for any graph `G`, `G × G` has a CP `k`-colouring iff `G` does (projection; diagonal). [hand] — §2.7.
+- **B-1, B-2** — TRUE given inputs; **B-2 (i) re-derived with no input**: `χ(F²) ≤ χ_CP(ℝ²)` for every countable `F ⊆ ℝ`. [hand] — §2.7–2.8.
+- **Lemma X21V-B3a (projection) and its consequence** — "`Y` has no CP five-colouring" ⟹ `χ_CP(ℝ²) ≥ 6`; no one-point density bound can refuse five on `Y` (Croft). [hand] — §2.9.
+- **`χ_CP(G₂₃) ≥ 6` from row 75** — [hand, sketch] — §2.9 item 3.
 
 ## Stage 1 — SAVED (quotation check, the claims verbatim, C0)
 
@@ -262,3 +272,56 @@ homomorphism that is a group homomorphism). **So "`Y` has no CP five-colouring" 
   only the 168 residues mod 168, the extent fixed by the derivation (C2, a complete exact enumeration).
 - Would have searched for a CP five-colouring of `Y` or of `G₄₃`'s levels to "see" B-3; instead derived the projection lemma, which shows any
   refusal already implies `χ_CP(ℝ²) ≥ 6`.
+
+## Stage 3 — SAVED (the write-up; verdicts; committed before anything fenced is opened on purpose)
+
+### 3.1 Verdicts, per claim
+
+| claim | verdict | grade | the one-line reason | C0 |
+|---|---|---|---|---|
+| Q-0 | **TRUE** | [hand + tools exact] | `−d ≡ 1 (8)` makes `−1` a square in `ℚ₂(√d)`; converse too (§2.0–2.1) | 0.95 |
+| A-1 | **TRUE given its inputs** | [hand; composition] | class by C2 + row 117's ratios; T-C(A)@∅ by R88-TCA's class form; K0; MR in scope by Q-0 (§2.4). The control (§2.2) says the chain must stop at T-C(A)@∅ at ℚ(√23), ℚ(√31), ℚ(√59); it uses the class there and only there | 0.80 |
+| A-2 | **TRUE given A-1** | [hand + tools exact + kernel lemma] | upper bound by the valuation subring `O_{F,𝔭}` at a stable place of degree one; at 47, 143, 311, 335 that place lies above 11 (C4) (§2.5) | 0.75 |
+| A-3 (K0) | **TRUE, with a scope note** | [hand, second mind, blind] | A⁺ and SP-Cor use ℚ(√47) only through T-C(A); **A⁺ at a given `S` needs T-C(A) at that `S`**, so the literal "A⁺ … given T-C(A) at `S = ∅`" holds at `S = ∅` (all SP-Cor uses), and at every `S` over the class via R88-TCA's class form; "real quadratic" is unnecessary (§2.3) | 0.80 |
+| A-4 | **TRUE given its inputs** | [hand + tools float] | J48-N4 + J48-N4cor; the 23 margin reproduced; independent of row 117 and K0 in its inputs (mixing constants, not ratios; no FS-66, no T-C(A)) (§2.6) | 0.85 |
+| B-1 | **TRUE given its inputs** | [hand] | T-J39-3 at `k = 5` + T-J39-1 + MR; `N₅` re-checked (23, 43 not 5-thick; 59 thick by `1.4·10⁻³`); the merge re-derived as Lemma X21V-M (§2.7) | 0.80 |
+| B-2 | **TRUE given its inputs** | [hand] | (i) holds with no input (`χ(F²) ≤ χ_CP(ℝ²)`, restriction to a countable set); (ii) B-1 + PL; J48's dropped hypothesis confirmed unused (§2.8) | 0.80 |
+| B-3 | **GAP at `χ_CP(ℝ²) ≥ 6`** (a necessary condition; open) plus a product lemma | [hand] | projection makes `χ_CP(ℝ²) ≥ 6` necessary; densities are closed by Croft's `m₁ > 1/5`; row 75 gives `χ_CP(G₂₃) ≥ 6`, row 69 (not 71) only level one at 43 (§2.9) | 0.05 that a held result gives it — none does |
+
+**Differences of truth: none found.** Two wording notes (below) and one misattributed row number in the claim list.
+
+### 3.2 Corrections and notes owed (proposed; the front-page lane decides)
+
+1. **K0's wording** (J51V's list, row 117's "K0"): "J45's A⁺ and SP-Cor hold … given T-C(A) there at `S = ∅`" should read "**A⁺ at `S = ∅`** and
+   SP-Cor", or "A⁺ at each finite `S` given T-C(A) at that `S`". Row 117's own text already says this; the J51V brief's quotation does not.
+   And "every real quadratic field in T-C(A)'s class" may be widened to "every real number field where T-C(A) holds at `S = ∅`" (row 117's
+   phrasing), which the proof supports.
+2. **The queue's B-3** cites "row 71 (five refused at 43 at level one)"; that is **row 69**. Row 71 is five refused at 23.
+3. **Worth recording beside T-J39-5 (i):** it holds with no field input at all — `χ(F²) ≤ χ_CP(ℝ²)` for every countable `F ⊆ ℝ` (restrict a
+   CP colouring to `F²`); T-J39-3 is not needed for it.
+4. **Worth recording beside T-J39-1:** the merge of a conjugate pair, and of the two real places of a real quadratic field, is Lemma X21V-M
+   (projection one way, the diagonal the other); this is also why `Y_{F,k}` has one `UD(ℝ²)` factor for fields with several real places.
+5. **For FS-59 / FS-96's stubs (B-3):** "`Y` has no CP five-colouring" *implies* `χ_CP(ℝ²) ≥ 6`, so no statement about 23 and 43 alone,
+   and no one-point density bound (Croft's `m₁ ≥ 0.2293 > 1/5`), can ever give it; the 23 part of the necessary triple is held (row 75), the
+   43 part is FS-69.
+
+### 3.3 Slips (mine), recorded
+
+- **A fence touched, after stage 2 was committed.** At 06:35, a `grep -rn "Lemma P"` over `plans/R88-derivation.md plans/FS100-derivation.md`
+  printed two lines (131–132) that lie inside FS100-K0's entry below its statement — a list of each class field's T-C(A)-count inputs ("11
+  ramified at ℚ(√143) through Lemma P (ii); 11 and 19 split at ℚ(√311); 11 split at ℚ(√335); 23, 31 by Hoffman; the ramified 311 and 67 by
+  Weil + Lemma P") and the words "Proof verdict: closes at the stated". My A-3 derivation was committed at 06:34 (`3dbd51fc`) before the
+  grep; nothing in §2 was changed after it. The glimpse agrees with my C3 table (stable places of 143, 311, 335). The grep's other hits (FS100-T1
+  lines 118–125, R88) are unfenced.
+- **One commit without the attribution lines:** `c178ee5c` ("X21V: stage 2 (record)"); not amended (never amend).
+
+### 3.4 C0 scored
+
+Every claim landed TRUE (given its inputs) at priors 0.75–0.95, and B-3 landed as the GAP at 0.05 predicted. The risks named at C0 were
+real but did not change a truth value: A-3's `S`-quantifier (a wording note), A-2's field-level step (textbook for quadratic fields), B-1's
+merge (derived). **Audit of the flattering result** (standing rule 4): the one place a TRUE could be hiding a defect is A-1's step 2, R88-TCA's
+class form (one mind); the control (§2.2) shows the chain cannot pass without it, and I did not re-derive it — A-1 is exactly as strong as it.
+
+### 3.5 Would-have-searched-here log (stage 3)
+
+- (none)
