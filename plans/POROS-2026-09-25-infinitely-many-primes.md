@@ -70,3 +70,38 @@ autocorrelation** — every four-colouring we can exhibit (Theorem B's residue c
 Fischer's ℤ/4 colouring) has autocorrelation continuous for one dyadic place. The candidate example invariant is then a
 *finite-support law*: "every four-colouring's autocorrelation is continuous for a finite set of places", or, sharper, "every
 four-colouring is local at a tight place" — which is G76's locality, so T-C's structural form may already name it.
+
+## Stage 2 — SAVED: quotation check and the evidence inventory (read against Stage 1's expectations)
+
+### 2.1 Quotation check (standing rule 5)
+
+| # | quoted in the brief | source | result |
+|---|---|---|---|
+| Q1 | T-C, "Over a type-(B) field, every translation-invariant Borel probability measure … is carried by Pull." | `plans/FS86-row88-rigidity.md` §S.1 | **verbatim** (the brief omits the plan's trailing parenthetical on `Fin_S`, which is outside the quoted statement) |
+| Q2 | T-C(A), "Over ℚ(√47), no translation-invariant … carried by no `T + A + Fin_S`." | same | **verbatim** |
+| Q3 | "The derivation (J28D) states it for the whole class S2." | `plans/FS86-R88-D-derivation.md` l.14, §3.2 "Class (TC-class)" | agrees |
+| Q4 | CLG (not in quotation marks in the brief): "a band `k`-character exists iff one exists at a single stable place … never 'every character colouring is local'" | `plans/FS91-S1D-character.md` §3.1, verbatim there: "`Θ_k(R_F) ≠ ∅` if and only if some stable place `𝔓` of `F(i)` and some level `m ≥ 1` have a band `k`-character of `T_{𝔓,m}`" | agrees in substance, existence scope confirmed; **note:** §3.1 and §3.3 of that record carry "Correction owed" banners (`plans/FS91-S1V-character.md` §2.3, §3.1 item 19) which I did not read |
+| Q5 | S1: "periodic independence ratio below 1/4 by a margin of about 3·10⁻⁶ at the prime 31" | `plans/FS84-S1-derivation.md` S1a: `h*(31) = 0.2499972548…`, margin `2.745·10⁻⁶` | agrees |
+| Q6 | the owner's update on S1V (bound, 11 or 31 undecided, amenability load-bearing, one GAP) | `plans/FS84-S1V-verification.md` S1V-4, V1, S1V-5, V3 (ii) | agrees |
+
+### 2.2 Evidence inventory
+
+- `plans/FS86-row88-rigidity.md` §0, §PA, §IQ, §S, §P, §M, the plan — read against: E1's single-`S` scope, E2's product rule — surprised: no (§M.1 item 5 fixes a single `S` because "a union over all finite `S` has no single completion"; §IQ item 2 already says that at type (A) the measure form **is** the chromatic question)
+- `plans/FS86-R88-D-derivation.md` §3 and §5, J28D's proof of T-C and T-C(A) — read against: E2 (strong approximation plus a Zhang-type product count) and E4 (iv) (a 2-point hypothesis cannot license a use of Ambrus et al.) — surprised: yes, on E4 (iv). The hypothesis is 2-point, but C1–C2 turn it into **continuity in probability**, which extends the *whole process* to `G_S`; after that the argument is about genuine Borel colourings, so higher-order facts (`m₁ ≤ 0.2470`) apply legitimately. E2 confirmed: the count is "the stationary Zhang count" (C5), stable places absorbed by Hoffman, split places at ratio 0
+- J28D §5.1, T-C′ — read against: E3 (b), an entropy split — surprised: yes, at one sentence: "the spectral measure of a merely translation-invariant `μ` is not `U`-invariant; those theorems see only `U`-averages, which can carry mass onto Pull". **Pull is empty at type (A)**, so this objection does not apply to ℚ(√47) (Stage 3, F4)
+- `plans/FS86-R88-V-verification.md` §2.1–§2.2, J28V's blind derivations — read against: an independent route — surprised: partly. Same architecture (extension, regularisation, count), independent regularisation (C3) and tail factor (C4); shared inputs: `[AmbrusEtAl2023]`'s `m₁ ≤ 0.2470`, Coxeter's window lemmas C14.1/C14.3, FS-66 at 11 and 19. Its C0 remark ("any proof of T-C must use more of the colouring than its pair correlations", from FS86-dB-C0's archimedean positive-definite function) is the fact Stage 3's F5 turns into an equivalence. J28V's §Stage 5 (the independence discussion) was sampled only through its headings: **unread in full**
+- `plans/FS86-row88-PA-close.md` stages 3–4 and §6.6–6.7, J35's gate — read against: "not found in print" — surprised: no. Useful names: "translation-invariant strict vector 4-colouring" (Karger–Motwani–Sudan), "continuous in probability for the `S`-adic topology", Bardestani–Mallahi-Karai's hyperbola computation (the split places), Bachoc–DeCorte–Oliveira–Vallentin (measurable Hoffman). I do not duplicate it
+- `plans/FS84-S1-derivation.md` §2.2–§2.3, S1's invariant-measure section — read against: an invariant-measure form of four-colourability and a price for the single-class route — **surprised: yes.** §2.3 item 3 prices the route "`ι(ℚ(√47)) < 1/4`" as "exactly as hard as" refuting `[MatolcsiEtAl2025]`'s conjecture `α₁(ℝ²) = 1/4`. That conjecture was **already refuted** in the plane by `[DuczVarga2026]` (a 29-vertex unit-distance graph with independence ratio below 1/4; `BIBLIOGRAPHY.md` l.182, "read in full (2026-09-16)"). A `grep` finds no mention of it in S1, S1V, J28D, J28V or J35. Correction owed (Stage 4)
+- `plans/FS84-S1V-verification.md`, the theorem table — read against: the owner's summary — surprised: no
+- `plans/FS91-S1D-character.md` §3.1, §3.3, CLG and CLG-g — read against: an existence-only statement — surprised: no; CLG-g (g1) gives no exception at `k ≤ 5`. `plans/FS91-PA-close.md` ll.85–125 (M1's gate: Manners's pyjama lemma, Wang 2012, Einsiedler–Lindenstrauss 2022) — read against: nothing held on *measure* rigidity at zero entropy — surprised: no
+- `plans/M3-S1D-windows-five.md` §3.2–§3.4 (J21-MX, J21-RED) — read against: a deletion lemma for compact factors — **unread** (used only through the plan's and J28D's quotations; J28D records it did not use J21-MX)
+- `plans/STUB-adelic-window-colouring.md` (FS-64) — read against: a window over finitely many places — **unread in full** (used through `CLAUDE.md`'s table row 11)
+- the dog that did not bark: no record tests whether "carried by no `T + A + Fin_S`" is *hard to achieve* anywhere colourings exist — read against: a control field — surprised: yes, and it is Stage 3's F2
+
+### 2.3 Would-have-searched-here log
+
+- Would have searched for a `U`-invariant measure on the adelic solenoid with negative mean at 1. Instead derived that one exists iff a non-Haar invariant measure exists (Stage 3, F5).
+- Would have searched ℚ(√11) for a four-colouring whose spectrum is off every `T + A + Fin_S`. Instead wrote one down by formula (F2).
+- Would have searched a finite `H ⊂ ℚ(√47)²` with `α(H) < |H|/4` (the fractional route). Not run; its price is corrected in Stage 4.
+- Would have run a `Θ₄` tree and a colouring finder for a four-colourable unit-distance lattice with `Θ₄ = ∅` (EI-1's falsifier, Stage 4). Not run (ban); posed.
+- **One exact check of seconds** (the ban's edge; a derivation fixed the set): the band-`k` characters of `Γ₇` at level one, all 48 non-zero characters (`tools/crunch_j36_band7.py` → `data/crunch-2026-09-25/j36/band7.out`): 0 at `k = 3`, **8 at `k = 4`**, 8 at `k = 5`. The plant (`PLANT=1`, the band replaced by `[0, 1)`) fires: 48 at every `k`, exit 1. Use: `Γ₇` does not falsify EI-1 (Stage 4).
