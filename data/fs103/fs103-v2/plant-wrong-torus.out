@@ -1,0 +1,17 @@
+635087 prime=1, mod 8 = 7; primes p=3 mod 4 below 103: 13, inert in F: 13
+Q(sqrt635087): stable places below 1000 (p, e, f, q): 84 places over 42 primes
+  first stable primes: [103, 107, 127, 163, 191, 211, 239, 263, 271, 311, 359, 379]
+  DYADIC K 1 [[2, 1]]
+  DYADIC L 2 [[2, 1], [2, 1]]
+  ramified 635087: residue F_p, p mod 4 = 3 -> stable (odd, q = 3 mod 4)
+F_dG: stable places below 600 (p, e, f, q): 32 places over 2 primes
+  first stable primes: [131, 479]
+  above ramified p=3: [(2, 2, 1), (2, 2, 1), (2, 2, 1), (2, 2, 1)]  (stable iff q=p^f = 3 mod 4)
+  above ramified p=5: [(2, 2, 1), (2, 2, 1), (2, 2, 1), (2, 2, 1)]  (stable iff q=p^f = 3 mod 4)
+  above ramified p=7: [(2, 2, 1), (2, 2, 1), (2, 2, 1), (2, 2, 1)]  (stable iff q=p^f = 3 mod 4)
+  above ramified p=11: [(2, 2, 1), (2, 2, 1), (2, 2, 1), (2, 2, 1)]  (stable iff q=p^f = 3 mod 4)
+  DYADIC K 4 [[2, 2], [2, 2], [2, 2], [2, 2]]
+  DYADIC L 8 [[2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2], [2, 2]]
+q=103: max|lambda|/(q+1) = 1.000000; Weil 2sqrt(q)/(q+1) = 0.195171; new levels <= 2/(q+1) = 0.019231
+FAIL: q=103: exceeds Weil
+RESULT: FAIL (plant wrong-torus)
