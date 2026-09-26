@@ -1,0 +1,9 @@
+OK   [plans/FS67-J27D-derivation.md] "uniquely colorable graph"
+OK   [plans/FS67-J27D-derivation.md] expander
+OK   [plans/FS67-J27D-derivation.md] Lemma W
+OK   [plans/FS67-J27D-derivation.md] is a component invariant
+OK   [plans/FS67-J27D-derivation.md] DC-2 at `τ_k = 1/(k−1)`, `G` any `k`-gap-free graph
+OK   [plans/FS67-tight-products.md] In [17] it is proved that A(n) implies B(n) and B(n) implies H(n).
+OK   [plans/FS67-J27D-derivation.md] DA-4: FS67 fails for a finite connected uniquely `k`-colourable `G` at every `k ≥ 4`
+MISS [plans/FS67-J27D-derivation.md] "uniquely colourable" × "expander"
+missing=1
