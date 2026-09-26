@@ -130,6 +130,9 @@ def main():
         ("Q(sqrt23)", [23], False),
         ("Q(sqrt47)", [47], True),
         ("Q(sqrt3, sqrt5)", [3, 5], True),
+        # known-positive controls (chi >= 5 known unconditionally): Heule-510's field K(sqrt5), and K(sqrt7) (rho_63 arena, row 64)
+        ("K(sqrt5) = Q(sqrt3, sqrt5, sqrt11)", [3, 5, 11], True),
+        ("K(sqrt7) = Q(sqrt3, sqrt7, sqrt11)", [3, 7, 11], True),
     ]
     ok = True
     for name, gens, want in cases:

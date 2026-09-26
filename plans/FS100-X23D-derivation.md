@@ -5,7 +5,19 @@ it; stop time 12:30 UTC. No subagents; no finite-witness search (ban to 2026-10-
 
 ## Theorems this phase proved
 
-*(filled at each stage)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| X23D-CTL | T-C(A)@∅'s class fails at K, ℚ(√2,√3) (dyadic `U₂`), ℚ(√11) (`U₂`, 7), ℚ(√23) (7); holds at ℚ(√47), ℚ(√3,√5), K(√5), K(√7) | [hand + tools exact] | §2.2, `tools/x23d_class.py` |
+| X23D-G27 | `λ_min(Γ₂₇) = −8` exactly (spectrum on 728 characters listed); Hoffman ratio `2/9`; 27 is an H*-place | [tools exact; controls at Q = 2, 3, 32, 64; plants fire] | §2.1, `tools/x23d_norm_one_spectrum.py` |
+| X23D-LP2 | Lemma P at a dyadic inert stable place: primitive eigenvalues `\|λ\| ≤ Q^{m−1}` at level `m`, any `e(v\|2)` | [hand] | §2.3 |
+| X23D-LPq | Lemma P transcribed to residue field `𝔽_q`: `\|λ\| ≤ 2q^{m−1}` | [hand; a transcription] | §2.3 |
+| X23D-CLS | for every real number field: every stable place has all-levels ratio `< 1/4` ⟺ no stable level-one target has `χ ≤ 4` ⟺ `L(F) ≥ 5` (either reading of `L`) | [hand + tools exact; one mind] | §2.3 |
+| X23D-TCA | outside row 100's exception, in the class: no invariant probability on `X₄(F)` has spectrum on `T + A` (R88-TCA@∅, every degree; the archimedean step is C14.3's max, independent of `n`) | [hand; one mind; on J28D's route] | §3.2 |
+| X23D-CX | at a complex place, restricting the extended process to the real form `Δ_w = {(a, ā)}` turns the hyperbola factor into `UD(ℝ²)` | [hand; one mind; new] | §3.2 step 3′ |
+| X23D-SPC | outside the exception, in the class: A⁺@∅ and SP-Cor hold with J45's proofs; no step of J45 uses `[F:ℚ] = 2`; given MR, `χ(F²) ≥ 5` | [hand; one mind] | §3.1–§3.2 |
+| X23D-COR | given MR and row 99: `χ(F²) ≥ min(L(F), 5)`, so `χ(F²) = L(F)` for `L ≤ 5`, every real number field outside the exception | [hand] | §3.3 |
+| X23D-Q35 | ℚ(√3,√5) is outside the exception, in the class, `L = 5`; given MR, `χ(ℚ(√3,√5)²) = 5` | [hand + tools exact] | §4.1 |
+| X23D-D1 | `N₄(F) = ∅` ⟹ the class; given MR, `χ(F²) ≥ 5` | [hand] | §4.2 |
 
 ## Stage 1 — SAVED (the claims, quotation check, C0)
 
@@ -227,7 +239,7 @@ Then no translation-invariant Borel probability on `X₄(F)` has spectral measur
    colouring proper for `T` is proper for `T″ ⊆ T`.)
 5. **C4 (split) [hand].** `Y′` := the stable H*-places (every non-trivial character at every level has normalised eigenvalue `> −1/3`);
    `B` := the other stable places. By CLS-2, under the class hypothesis `B` is exactly the stable places with `q ∈ {11, 19}` — finitely many
-   (27 is H*: `−0.2857`; 23: `−0.3317`; 31: `1/3 − 1.6·10⁻⁴·…` (R88-TC-tab); `q ≥ 37` and dyadic `Q ≥ 64` by Weil; primitive characters by
+   (27 is H*: `−0.2857`; 23: `−0.3317`; 31: margin `+4.9·10⁻⁶` (R88-TC-tab); `q ≥ 37` and dyadic `Q ≥ 64` by Weil; primitive characters by
    Lemma P). *Degree:* J28D's factor table lists `B = {11, 19}` for ℚ(√47); for general `F`, `B ⊆ {v : q_v ∈ {11, 19}}` by CLS-2's complete
    list of usable `q` — **the table is the degree-2 step, replaced by CLS-2**. `Y′` is compact and Hoffman: `ν̂′(ξ) = ∏_v ν̂_v(ξ_v) ≥ −Λ_Y`
    with `Λ_Y = max_{v∈Y′} Λ_v < 1/3` (a maximum: `Λ_v ≤ 2√q/(q + 1) → 0`, finitely many places per `q`), so `α(Y′) ≤ Λ_Y/(1 + Λ_Y) < 1/4`.
@@ -265,3 +277,88 @@ every real number field outside row 100's exception.
 ### Would-have-searched-here log (stage 3)
 
 - None: every step is a walk of held derivations; no instance was sought.
+
+## Stage 4 — SAVED (Q35, D-1, the falsifier's fields; hand-off)
+
+**Verdicts. Q35: TRUE given MR** (and SPC, CLS), under the reading of 1.2 Q7 [hand + tools exact]: `χ(ℚ(√3,√5)²) = 5` given MR. **D-1: TRUE**
+given MR [hand], a sub-case of SPC (`N₄ = ∅` ⟹ the class, with `B = ∅`).
+
+### 4.1 Q35
+
+`F = ℚ(√3,√5)`, totally real, `n = 4` real places. (`tools/x23d_class.py`, `data/fs100/x23d/class.out`.)
+- **Outside row 100's exception:** `15 ≡ 7 (mod 8)`, so `−15` is a 2-adic square and `√15 = i·√−15`: `i ∈ F_v`, the dyadic place splits in
+  `L/F`, and no dyadic place is stable (the tool: "dyadic: split").
+- **Stable places** (reading Q7): the places above `p ≡ 3 (mod 4)` with `(3/p) = (5/p) = 1`, i.e. `p ≡ 11, 59 (mod 60)` (for `p ≡ 3 mod 4`,
+  `(3/p) = −(p/3)`), each with `e = f = 1`; below 200: **11, 59, 71, 131, 179, 191** — the advisor's list, re-derived. 3 is ramified with
+  residue field `𝔽₉` (`(5/3) = −1`), 5 is `≡ 1 (mod 4)`; 7, 19, 23, 31, 43, 47 have residue degree 2. So 3, 7, 19, 23, 31, 43, 47 are not
+  stable. **As worded** ("residue degree one in `L/ℚ(√3,√5)` … inert in `L/F`") the clause is self-contradictory (1.2 Q7); with "in `F/ℚ`" it
+  is TRUE.
+- **The class** (CLS): no stable `q ∈ {3, 7}`, no stable dyadic place, so every stable place has `r_v < 1/4` (11 by FS-66; 59, 71, … by
+  Weil + Lemma P). `B = {the four places above 11}`, `X = UD(ℝ²)^{×4} × ∏_{v|11} Cay(O_v, T_v)`, `r_X = max(m₁, 0.2331) < 1/4`.
+- **`L(F) = 5`:** the places above 11 have target `Γ₁₁`, `χ = 5`; every other stable target has `χ ≥ 5` (`q ≥ 59`, Hoffman).
+- **Conclusion:** SPC (totally real, step 3′ void) gives, given MR, `χ(F²) ≥ 5`; the place above 11 (valuation ring with residue field `𝔽₁₁`,
+  no `√−1`: `unitQuadrance_colorable_of_valuationSubring`, row 105; row 52) gives `χ(F²) ≤ χ(Γ₁₁) = 5`. **So `χ(ℚ(√3,√5)²) = 5` given MR.**
+- **What this touches:** `CLAUDE.md` item 18 records "**Not landed: five over ℚ(√3,√5)**" (FS-70; every lattice of rank ≤ 6 loose, the rank-8
+  one undecided, FS-72). Given MR, five over ℚ(√3,√5) holds, and by de Bruijn–Erdős some finite unit-distance graph over ℚ(√3,√5) is
+  five-chromatic. That is a **prediction** for the post-ban FS-72 (registered 4.4), not a result about any named lattice.
+
+### 4.2 D-1
+
+`N₄(F) = ∅` means every stable place is 4-thick (J48's term; J28D's H*: every non-trivial character at every level has normalised eigenvalue
+`> −1/3`). Then every stable place has Hoffman ratio `< 1/4` at every level, so `r_v < 1/4`: `F` is in the class, and SPC gives
+`χ(F²) ≥ 5` given MR (totally real: no step 3′). In SPC-TCA's count `B = ∅`, `X` is the `r₁` real places. **TRUE** [hand]. *Which fields:*
+no stable `q ∈ {3, 7, 11, 19}` (11 and 19 fail H*: `−0.3996`, `−0.3805`), no stable dyadic `Q ≤ 32` (`U₂` has `−1/3`; the others are
+four-colourable). *J48's own route* (a random copy of de Grey's 1581-vertex graph in `Y_{F,4} = UD(ℝ²)`) extends to `r₁` real places along the
+diagonal `v ↦ (v, …, v)`, since the diagonal of `(S¹)^{r₁}` lies in the connection set — **a reading**: J48's reduction to `Y_{F,4}` (J21-TH)
+is not re-walked here.
+
+### 4.3 The advisor's falsifier: a field with `L ≥ 5` and a known four-colouring — where one would have been expected
+
+None is known, and the known four-colourings of field planes all live where `L ≤ 4`: residue colourings (at `𝔽₃`, `𝔽₇`, a dyadic `U_Q`, `Q ≤ 32`,
+or a ramified dyadic place — CLS's four exceptional kinds), `[Fischer1994]`'s `ℤ/4` colouring (local at one dyadic place, G41; its fields are
+wall-standing, `L = 4`), and character colourings (row 100: at `k ≤ 5` only where `L ≤ k`). **Fields where a falsifier would have been expected:**
+1. **ℚ(√3,√5)** (4.1): FS-70 found every lattice of rank ≤ 6 over it four-colourable (periodic colourings local at primes of the lattices' CM
+   fields, not of `F`); COR says, given MR, the whole plane is not. The rank-8 `group:u3:2+w4` (FS-72) is the nearest open object.
+2. **ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335)** (`L = 5`, row 117): four is proven, five open; row 113's no-go already excludes finite-place spectra.
+3. **ℚ(√167)** and the `L ≥ 6` real quadratic fields: four proven (row 119, kernel).
+**Known-positive controls agreeing with COR** (`class.out`): **K(√5)** (Heule-510's field: in the class, `L = 5`, `χ = 5` a theorem) and
+**K(√7)** (in the class, first stable place 83; `χ ≥ 5` by the `ρ₆₃` arena, row 64). Both would have been falsifiers had they sat outside the
+class with `χ ≥ 5`, or inside it with a four-colouring; they do neither.
+
+### 4.4 Predictions registered (from this job; none can be tested during the ban)
+
+- **P-X23D-1** (from Q35, given MR): some finite unit-distance graph with coordinates in ℚ(√3,√5) is five-chromatic. Falsifier: a four-colouring
+  of ℚ(√3,√5)'s plane (which would refute MR or SPC).
+- **P-X23D-2** (from COR): no real number field with `L(F) ≥ 5` has a four-colourable plane. Falsifier: one such colouring, which by 4.3 must be
+  local at no place and have spectrum on no `T + A + Fin_S` (row 113's form, every field of the class, by SPC-TCA).
+
+### 4.5 Theorems this phase proved (also at the head)
+
+See the table at the head of this record.
+
+### 4.6 Corrections and proposals (the front-page lane decides)
+
+1. **Row 117's "Not claimed: … the class among fields of higher degree"** — now claimed at `[hand, one mind]` by CLS (every real number field);
+   propose a new row (see 4.7), not an edit of row 117.
+2. **R88-TCA's class form (J28D)** is stated for real fields with "the real places"; its C3 writes the connection set "over the real, stable
+   and `S` places". With a complex place, step 3′ (SPC-cx) is owed; propose its addition to R88-TCA's scope line.
+3. **G56's "floors 6, 6, 5, 6, 6"** at 23, 27, 31, 43, 47: at 27 the Hoffman floor alone is 4.5 (`λ_min = −8`); the 6 there must come from a
+   certificate — worth a one-line source in G56 (not checked here; I did not look for it).
+4. **Q35's wording** ("residue degree one in `L/ℚ(√3,√5)` that are inert in `L/F`") should read "in `F/ℚ`".
+5. **COR's wording** omits row 99 and MR.
+
+### 4.7 Proposed LEDGER row (text for the front-page lane)
+
+"**The local–global conjecture's main clause through five, given MR, for every real number field.** For every real number field `F`: every
+stable place of `F(i)` has all-levels four-colour ratio `< 1/4` ⟺ `L(F) ≥ 5` (CLS); and, outside row 100's exception, in that class A⁺ and
+SP-Cor hold with J45's proofs (SPC) — the archimedean step at `n` places is C14.3's max over factors, `m₁ < 1/4` per place, never first
+moments. So, given MR(F), `χ(F²) ≥ min(L(F), 5)` (with row 99 below five), and `χ(F²) = L(F)` whenever `L(F) ≤ 5`; e.g. `χ(ℚ(√3,√5)²) = 5`.
+[hand + tools exact, one mind (X23D); with a complex place one further step, restriction to the real form, one mind, and MR's own scope
+there.] Inputs: FS-66 at 11, 19 (Lemma P (ii) for ramified towers), Hoffman at 23, 27 (`λ_min(Γ₂₇) = −8`, exact), 31, Weil above 33.97,
+Lemma P transcribed to `𝔽_q` and to dyadic inert places, `[AmbrusEtAl2023]`, J28D's count, J45, row 99, row 100's Lemma C′. Not claimed: MR;
+anything at `L ≥ 6` beyond five."
+
+### Would-have-searched-here log (stage 4)
+
+- Would have searched for a five-chromatic finite graph over ℚ(√3,√5), or a four-colouring of its rank-8 lattice (FS-72). Instead: the
+  conditional derivation (4.1) and a registered prediction (P-X23D-1).
