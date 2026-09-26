@@ -155,3 +155,64 @@ suffices), but it is consumed only through M1, which is over X-EL.
   before any entropy node is formalized). No formalization of Einsiedler–Lindenstrauss, Einsiedler–Fish, Rudolph–Johnson or Host found;
   no Bochner theorem for groups found.
 - **Verdict:** nothing found formalizing the combination; the negative measures two searches' words (G21).
+
+### Stage 2 addendum (the owner's update, received during stage 2): EF_F⁺ has two derivations
+
+Node M2 (EF_F⁺) rests on **two derivations**: X01D (`plans/FS100-X01D-derivation.md` §3: SMB, local injectivity by the product formula,
+pigeonhole with `U_ℚ` multipliers, the two-scale identity, wandering shells) and **X12B, blind** (`plans/FS100-X12B-derivation.md`, verdict
+line 42: "The route is Einsiedler–Fish's Lemma 3.2 run at the places where `u*` expands, followed by a second step EF does not need (on `𝕋`
+there are no other places): a finite `U`-invariant measure on the non-compact adelic group of the remaining places must vanish at every
+finite split place. Neither step uses ergodicity."), plus X01V's checking reading. **The graph uses X12B's route**: its second step (Lemma Z)
+is R-U's wandering-set mechanism on the same adelic model of `R̂` (Tate duality, X12B §2.0), so it shares N1's infrastructure; its first
+step is Einsiedler–Fish Lemma 3.1–3.2, an entropy lemma of a held paper (X-SMB-level inputs either way). Both routes need
+Kolmogorov–Sinai entropy, which Mathlib lacks; neither is formalizable before X-SMB. M2's line in §D now reads: **P** [hand, two
+derivations: X01D; X12B blind] over X-SMB and (X12B) EF 2010 Lemmas 3.1–3.2.
+
+## Stage 3 — SAVED (the skeleton)
+
+**File:** `data/fs100/x11k/skeleton/Sqrt47.lean` (one file: a skeleton outside `Proofs/` cannot import a sibling). **Elaborates** under
+`scripts/slot.py --mem 12 --cpus 4 -- lake env lean …`, exit 0, log `data/fs100/x11k/sqrt47.log`: **7 `sorry` leaves**, every other
+declaration proved, the headline included.
+
+| declaration | node | status |
+|---|---|---|
+| `chromaticNumber_planeOver_sqrt47_le_five` | U | **proved** from U1–U3 (kernel) and the leaf `exists_residue11` |
+| `exists_residue11` | U4–U6 | leaf |
+| `unitVectors`, `unitRing` (`R = ℤ[U]` as `Subring.closure`), `X4`, `Dual` (`AddChar R Circle`, cylinder σ-algebra), `rot`, `RotInv`, `InvariantColouring`, `tetra`, `corr`, `IsTraceSpectral`, `PosDef` | notation | definitions |
+| `BochnerHerglotz` | X-BH | named `Prop`, docstring quotes the statement (Rudin; not from a held copy) |
+| `Interface` (`E`, `TA`, `h`, measurability, `TA ⊆ E`, `E` rotation-stable) with model `Interface.trivial` | the interface | structure + inhabitant |
+| `Interface.RU`, `.APlus0`, `.PE2`, `.EFPlus` | L4, L5, M1, M2 | named `Prop`s, docstrings quoting §5.4 / queue §2 / X01D line 194 |
+| `Interface.MR` (Fourier form) | M's conclusion | definition |
+| `Interface.mr_of_pe2_efPlus` | M | leaf |
+| `x4_nonempty_of_colorable` | L0 | leaf |
+| `exists_invariantColouring` | L1 | leaf (formalizable: Markov–Kakutani twice) |
+| `posDef_corr` | L2's input | leaf |
+| `rotInv_of_isTraceSpectral` | L3 | leaf |
+| `Interface.x4_eq_empty` | L6 (SP-Cor) | leaf |
+| `Interface.five_le_chromaticNumber` | L | **proved** from L0, L6, M |
+| `chromaticNumber_planeOver_sqrt47_eq_five` | H | **proved** from U and L |
+
+**The headline, read aloud against the informal claim.** *Lean:* "for `F = fieldOfRadicands {47}`: if Herglotz–Bochner (with uniqueness)
+holds on the ring `ℤ[U]`, and some rotation-stable measurable set `E` of characters of `ℤ[U]`, with a measurable subset `TA`, and some
+function `h` from measures and unit vectors to `[0, ∞]` satisfy R-U (`τ(E ∖ TA) = 0` for rotation-invariant finite `τ`), A⁺ at `S = ∅`
+(`∫_{TAᶜ} Re χ(1) dσ < 0` for the trace spectral measure of every translation- and rotation-invariant random proper four-colouring of
+`Cay(ℤ[U], U)`), PE-2 in consequence form (every rotation-invariant finite `τ` is an `E`-null part with vanishing Fourier coefficients off `0`
+plus a part with `h = 0` at every unit vector) and EF_F⁺ at every `u` (a rotation-invariant finite measure with `h = 0` at every unit vector
+is carried by `TA`), then the unit-distance graph on `ℚ(√47)²` has chromatic number exactly 5." *Informal claim:* "`χ(ℚ(√47)²) = 5`, given
+Einsiedler–Lindenstrauss 2021 Thm 1.2 and standard theorems (Bochner, spectral theorem, SMB, ergodic decomposition, Jacobs), and the
+project's [hand] lemmas." **Where they differ, stated so nobody reads more into the Lean than is there:**
+1. `E`, `TA`, `h` are **abstract**: the theorem certifies the *composition* (SP-Cor and MR ⟸ PE-2 ∧ EF_F⁺), valid for every choice. That the
+   arithmetic `E = ⋃_S (T + A + Fin_S)`, `TA = T + A` and Kolmogorov–Sinai entropy satisfy the four `Prop`s is the content of the [hand]
+   lemmas (R-U, A⁺, PE-2 over EL2021, EF_F⁺) and of N1, which the Lean does not see. The honest name for the hypothesis list is "the
+   chain's four project lemmas and one classical theorem", **not** "EL2021 Thm 1.2" alone: no hypothesis here is an external theorem stated
+   in its own terms except X-BH, because EL2021's own terms (entropy, solenoids) are not definable on the budget of this job.
+2. **VACUITY NOTE (G30 item 7).** `APlus0` quantifies over invariant random four-colourings, of which there are none exactly when the
+   conclusion holds, so the conclusion implies `APlus0`. This is the shape of R88-TCA itself ("no translation-invariant Borel probability on
+   `X₄(F)` has …"), and its content is its derivation from row 113, which never assumes emptiness. Every other hypothesis is about measures
+   on `R̂` (never empty: Haar), and `Interface.trivial` inhabits the structure.
+3. PE-2's `a·m` is recorded by the two properties used (`E`-null; Fourier coefficients vanish off `0`), and MR by its Fourier form: each is
+   implied by the source statement (Haar's coefficients vanish off `0`; `m(E) = 0` is N1), so the Lean hypotheses are **no stronger** than
+   the sources. EF_F⁺ is weakened to "zero entropy at every `u`" (the source needs one non-torsion `u*`): weaker, hence also implied.
+4. The upper half is unconditional once `exists_residue11` closes.
+
+**Spec examples:** `tetra 0 0 = 1`, `tetra 0 1 = -1/3`, `(Interface.trivial F47).E = ∅` (in the file).
