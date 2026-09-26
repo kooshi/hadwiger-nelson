@@ -227,3 +227,28 @@ T-B1 and T-B2 stalled at GAP, so stage 3 applied. At 2026-09-25, after stage 2's
 "Lemma statements for J28V"**. So there were no statements to re-derive, and nothing was re-derived here. The GAP verdicts on T-B1 and
 T-B2 stand as the blind phase left them. If J28D later posts lemma statements for T-B1 or T-B2, this stage can be re-opened on the owner's
 word (the statements only).
+
+## Stage 4 — SAVED (the divergence table; partial: J28D's record holds T-A only)
+
+Read after stage 3's commit: `plans/FS86-R88-D-derivation.md` in full as it stood (J28D's Stage 1 and Stage 2, 10.5 kB; T-A only; no T-C,
+T-C(A), T-B1 or T-B2 section yet). **So only T-A can be compared; the other four claims are pending J28D's later stages**, and this table
+must be completed when they are saved (about 40k of this job's budget remains for it).
+
+| # | claim | kind | J28D | mine (blind) | verdict |
+|---|---|---|---|---|---|
+| V1 | T-A overall | none (truth) | TRUE (i)–(vi) | TRUE (i)–(vi) | agree |
+| V2 | T-A (i), `τ` | scope, wording | repair: read `τ` as commuting with conjugation (≡ preserving `U`); automatic for type (B), `Gal ≅ V₄` | the same condition, stated as "preserving `R` gives `σ(U) = U` when `F/ℚ` is Galois (conjugation central)" | agree in substance; J28D's wording (commuting with conjugation) is the cleaner fix for the statement |
+| V3 | T-A (ii), finite index of a non-zero ideal | route | V2 (Lemma R) | rank argument: a non-zero ideal contains a non-zero integer `m` (minimal polynomial), and `\|R/mR\| ≤ m⁴`; no Lemma R | both valid; mine removes Lemma R from (ii) for every real `F` (J28V-7), which matters for S2 fields outside Lemma R's proved scope |
+| V4 | T-A (iv) ⟸ | route (order) | `F = 0` ⟹ a `c` with `c(0) ≠ c(4)`, not in Pull, not transient (Q-tr), so Q-μ fails | a `c ∉ Pull` is transient under Q-μ, against Q-tr, so `X₄ = Pull` | the same argument, contrapositive order |
+| V5 | T-A (v), the correspondence | none | Lemma CL proved in place, both directions | the same two directions | identical route |
+| V6 | Q-tr ⟹ T-B2 | route | via the pair orbit closure in `X₄ × Pull` (invariant measures carried by the diagonal) | via return times lying in finitely many translates of `D` (B2-a) | both valid |
+| V7 | a FALSE for T-B1 or T-B2 decides row 88 "no" | agreement, and a slip of mine | recorded (T-A2), with a coherence note on the plan's §P (FALSE priced 0.10 / 0.15 against P-decide "no" 0.02) | recorded (B1-b, B2-b) — **but my own C0 priced FALSE at 0.15 for each, the same incoherence** | agree on the math; the slip is mine (standing rule 4's selection risk in the other direction: priors not re-read against a consequence I had written in the same row) |
+| V8 | controls | agreement | ℚ(√11) outside T-A's hypotheses (the frame fails there); K per coset; ℚ(√2,√3) given T721 | consistent (§2.1's closing remark) | agree |
+| V9 | T-C's formats | agreement, found independently | §1.1 Q5 flags both obstacles before deriving: C14 reads `𝔓` at finite level only; C14′'s conull-`Ω` format differs from the edge-a.e. format a random extension produces | the same two obstacles met and repaired in the blind phase: C5 (compact tight factor, stationary count) and C3 (density-point regularisation to a conull `Ω`) | agree on the obstacles; whether J28D's repair matches mine is pending its §3 |
+
+**Pending (when J28D saves them):** T-C, T-C(A) (mine TRUE — compare the extension step, the regularisation, the compact tight factor and the
+tail); T-B1, T-B2 (mine GAP — compare any route J28D finds against B1-a–c and B2-a–e).
+
+### What the comparison changes in my verdicts
+Nothing so far: T-A TRUE is confirmed by an independent derivation with the same steps and one different route (V3). My slip (V7) is in
+the priors only.

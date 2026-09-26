@@ -7,8 +7,9 @@
 (2) The tail's normalised least eigenvalue a_v < 1/3: from a Hoffman ratio r, a = r/(1-r); at 31 r = 1/4 - 2.745e-6 gives
     a < 1/3; Weil's a <= 2 sqrt(p)/(p+1) < 1/3 for every p >= 37 (exact: 36 p < (p+1)^2 ... i.e. 4p*9 < (p+1)^2).
 (3) Split place at q = 2 (C14.2(c)'s integrals): I(b) = mean over units e mod 2^M of exp(2 pi i b e) for b = u/2^k:
-    k = 0 -> 1, k = 1 -> -1 (= -1/(q-1)), k >= 2 -> 0.  Exact via roots of unity in integers (sum of i^e etc. done with
-    Fractions on cos/sin of multiples of 2pi/2^k, which are exact for k <= 2 and checked by symmetry for k >= 3).
+    k = 0 -> 1, k = 1 -> -1 (= -1/(q-1)), k >= 2 -> 0.  FLOAT complex exponential sums over the units mod 2^12, compared
+    with those exact target values at tolerance 1e-9 (the targets are exact by symmetry: e -> e + 2^(k-1) negates each term
+    for k >= 2).  Grade: tools float with exact targets, not exact arithmetic.
 Planted faults: --plant flips the expectation in (1) at (59, 11), and in (3) at k = 2; each must make the script exit non-zero.
 """
 import sys
