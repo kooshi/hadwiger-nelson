@@ -123,3 +123,24 @@ from the base); `tools/bib_audit.py` exit 0 (the three new keys resolve); `tools
 **Simulation of the whole pass after the rulings:** `--dupes` 7; the fact audit PASS; `CLAUDE.md` 287,087 bytes.
 
 **Would have searched here (stage 2):** none.
+
+## Stage 3 — SAVED (`CLAUDE.md`)
+
+Applied by the application script (`--inplace --files CLAUDE.md`), byte-identical to the simulation; `CLAUDE.md` 283,904 → **287,087** bytes
+(+3,183). `git log fd285b33..HEAD -- CLAUDE.md` was empty before the edit (no other writer).
+- **FS-100** (J53b's twelve pairs, exactly, except item 27): items 10 and 27, G76 (body and *Do*), G21, G50 (with the owner's *Do*), G72 (the
+  total and the twelfth close), G79, the FS-100 and FS-64 Paths-forward rows, the Last-updated clause. **Item 27, by the owner's ruling (a)**, orients
+  and points instead of retelling row 116's mechanism: "**Kronecker windows at four colours** (row 116; FS-100): the selection onto `T + A` is
+  false as stated; at ℚ(√47) its `E`-form is the five-clause's pure-point layer, open at one density step."
+- **FS-75** (J54's nine pairs): What the kernel holds; Open milestones; the Last-updated clause (joined to FS-100's as one sentence, brief item
+  4); the FS-75 and FS-60 Paths-forward rows; G79; What compute actually helps; the trust-ledger sentence ("1193 clean and 5 declared purchases
+  (and 11 axiom-free; 1,209 records at FS-75's close)"); the vacuity counts ("`declarations=7279 refutations-skipped=309`").
+- **J55:** Open milestones — FS-75's clause names its theorem, and FS-100's in-ban round joins "Closed most recently" (rows 116–118;
+  `plans/FS100-derivation.md`; stage 4 re-aimed as 4′, which leads its next slot; the stub re-aimed); FS-84 stays the one open milestone with
+  its next stages from 2026-10-01; the ledger pointer reads "Rows 1–119".
+
+**Gates** (exit statuses read directly): `tools/claude_md_fact_audit.py --base fd285b33` exit 0, "AUDIT PASSED (0 failure(s))", gate sentence
+"current audit reads 1193 clean and 5 declared purchases", dangling pointers none; `--dupes` **7**; `tools/fs71_ledger_b_check.py --strict` exit
+0, PASS; `tools/bib_audit.py` exit 0; `tools/check_architecture.py` exit 0; `CLAUDE.md` 287,087 bytes (under 290,000).
+
+**Would have searched here (stage 3):** none.
