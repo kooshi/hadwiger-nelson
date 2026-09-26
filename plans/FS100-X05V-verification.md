@@ -5,7 +5,16 @@ it. Blind to X03D (fences in the brief). No subagents; no finite-witness search 
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| X05V-1 | SP-Cor, re-derived blind from J45's lemma statements (P0–P8): a four-colouring of ℚ(√47)'s plane gives a rotation-invariant `μ` whose `σ` contradicts MR + R-U + A⁺ at `S = ∅` | [hand; given N1, N2, R-U (J45) and R88-TCA at `S = ∅`] | §2.1, §2.3 |
+| X05V-2 | A⁺ at `S = ∅` from SI-1, SI-3, SI-4, N2 and R88-TCA at `S = ∅` (J45's statement, restricted) | [hand; given N2, R88-TCA] | §2.1 |
+| X05V-3 | KC: at K and at ℚ(√11) the chain P0–P7 goes through and stops at P8, exactly at T-C(A) (false there, witnessed); F2's noisy colouring has `σ = σ_D + (2/21)·m`, `σ_D` on `T` | [hand + tools exact (check 5, plants fire)] | §2.2 |
+| X05V-4 | FL-1's example invariant, corrected: `τ₀ := σ|_{R̂∖E}` is not a multiple of Haar, and `τ̂₀(u) = τ̂₀(1) = −(4/3)A < 0` for every `u ∈ U`, `A = Σ_j E[p_j(0)p_j(u)]` (constant in `u`) | [hand; given A⁺ at `S = ∅`, R-U, N2] | §3.1 |
+| X05V-5 | FL-1's inequality `τ̂(1) ≤ −τ(R̂)/3` is equivalent to `A ≥ (1 − B)/3 − a/4`, i.e. to `σ̂_E(1) ≥ −(σ_E(R̂) + a)/3` | [hand + tools exact (check 2a)] | §3.1 |
+| X05V-6 | no spectral route to X05V-5 at `a = 0`: for a `U`-invariant positive `ν` on `T + A`, `ν̂(1) ≥ λ_*·ν(R̂)` is sharp and `λ_* ≤ min J₀ < −0.4027 < −1/3`; the pointwise form fails | [hand + tools exact (checks 2b, 3, 4)] | §3.1 |
+| X05V-7 | for `κ > 0`, "every `U`-invariant `E`-null finite positive `τ ≠ 0` has `τ̂(1) > −κ·τ(R̂)`" (H_κ) plus QTCA_κ imply `χ(ℚ(√47)²) ≥ 5`; and H_κ for every `κ > 0` holds iff MR(ℚ(√47)) | [hand; the second half given SP-if] | §3.2 |
+| X05V-8 | MR ⟹ H_{1/3} (a Haar multiple `τ ≠ 0` has `τ̂(1) = 0`) | [hand] | §3.2 |
 
 ## Stage 1 — SAVED (quotation check, C0)
 
@@ -159,3 +168,95 @@ is a union over all of them) and **N2** (P8). Two remarks that the record should
 
 - Would have searched for a four-colouring of a control plane with a non-Haar `E`-null spectrum (to exercise P5 harder). Instead: used the
   two held explicit colourings (row 94, J45's F2) and computed their spectra by hand.
+
+## Stage 3 — SAVED (FL-1, FL-2, the write-up)
+
+### 3.1 FL-1
+
+Take a rotation-invariant `μ` over ℚ(√47) (FL-1's hypothesis) and `σ = σ_μ`. `σ_E` is forced: `σ_E = σ|_E` (both `a·m` and `τ` are
+`E`-null, `m(E) = 0` by N1). The split of `τ₀ := σ|_{R̂∖E}` into `a·m + τ` is **not unique**: any `a ∈ [0, a_max]` with `τ₀ − a·m ≥ 0`
+works, and "non-Haar" can be read "not a multiple of `m`" or "no Haar component left" (`a = a_max`). `a = 0` is always admissible once
+`τ₀` is not a Haar multiple. I score every clause under every reading; they agree except where said.
+
+- **(i) `τ ≠ 0`. TRUE** under every reading. P0–P4 and P6–P8 of §2.1 run without MR: if `τ₀ = a·m` then `∫_{R̂∖(T+A)} Re χ(u) dσ = 0`
+  for every `u`, against A⁺ at `S = ∅`. So `τ₀` is not a Haar multiple and every admissible `τ = τ₀ − a·m` is non-zero.
+- **(ii) `τ̂(u) = τ̂(1)`. TRUE.** `τ₀` is `U`-invariant (P2, P3), so is `τ`, and `τ̂(u) = ∫ (u·χ)(1) dτ = τ̂(1)`; `τ̂` is real (`σ`, `E`, `m`
+  are conjugation-symmetric).
+- **The sign, which FL-1 does not state but which is the example invariant: TRUE.** By R-U, `σ|_E = σ|_{T+A}`, which by N2 is the spectral
+  measure of `h = E[g | 𝒜]`; so `σ̂_E(u) = (4/3)A_u − 1/3`, `σ_E(R̂) = (4/3)B − 1/3` (check 1b), and
+  `τ̂(u) = τ̂₀(u) = −1/3 − σ̂_E(u) = −(4/3)A_u` (`m̂(u) = 0`). `A_u` is constant in `u` by (ii), and `> 0` by A⁺. So **`τ̂ ≡ −(4/3)A < 0`
+  on `U`**: an actual four-colouring's `E`-null spectrum is negatively correlated on the whole unit circle — the flip of G79, derived.
+- **(iii) `τ̂(1) ≤ −τ(R̂)/3`. GAP.** With `τ(R̂) = 1 − a − σ_E(R̂)`, check 2a gives
+  `τ̂(1) + τ(R̂)/3 = −(4/3)(A − (1 − B)/3 + a/4)`, so (iii) **is equivalent to `A ≥ (1 − B)/3 − a/4`**, i.e. to
+  `σ̂_E(1) ≥ −(σ_E(R̂) + a)/3`; at `a = 0` (admissible, and the hardest case) it is a Hoffman-type lower bound on the correlation of the
+  `E`-factor at unit distance. Name the missing step:
+
+  > **QTCA_κ** (not an input, not known to me): for every translation- and rotation-invariant random proper four-colouring of ℚ(√47)'s plane,
+  > `Σ_j E[p_j(0) p_j(u)] ≥ κ·(1 − Σ_j E[p_j(0)²])`, `p_j(x) = P(c(x) = j | 𝒜_∅)`. FL-1 (iii) at `a = 0` is QTCA_{1/3}.
+
+  What the inputs give is only `A > 0` (A⁺), with no uniform constant. Why the obvious routes stop:
+  - *Pointwise* the inequality is false: `p = (½,½,0,0)`, `q = (0,0,½,½)` give `A = 0 < (1 − ½)/3` (check 2b; the extremes `p` uniform and
+    `p` deterministic give equality, plants).
+  - *Spectrally* it is out of reach: `σ_E` is a `U`-invariant positive measure on `T + A = Ĝ_∅`, so `σ̂_E(1) = ∫ λ(χ) dσ_E` with
+    `λ(χ) = ∫_{Ū} χ(u) du`, and the only bound from `σ_E` alone is `σ̂_E(1) ≥ λ_*·σ_E(R̂)`, sharp. An archimedean character at one complex
+    place of `L`, frequency `|ξ| = 3.83/2π`, has `λ = J₀(3.83) ∈ [−0.402760, −0.402759]` (check 3, a rational enclosure; plant at `J₀(2)`
+    fires), and the stable places 11 and 19 of ℚ(√47) fail H* (R88-TC-tab: some character there has `λ/d ≤ −1/3`). So `λ_* < −1/3`: this is
+    the real place's Hoffman failure (`0.2871 > 1/4`) that R88-TC had to route around with the non-spectral `m₁ ≤ 0.2470`.
+  - *The shape of a would-be failure* (check 4): an `E`-part `h = s·v·cos(2π⟨ξ, x⟩ + φ)`, `|s| ≤ 1/3` (inside the tetrahedron), at the
+    `J₀`-minimising radius, violates (iii) by `(s²/2)(0.4027 − 1/3) > 0` at `a = 0`. T-C(A) does not exclude such an `E`-part: it excludes
+    only colourings whose *whole* spectrum is on `T + A + Fin_S`. Whether a proper four-colouring can carry it is the open content of QTCA.
+
+  **FL-1 cannot be FALSE by a counterexample short of a four-colouring of ℚ(√47)'s plane** (if `χ = 5` it is vacuously TRUE), so GAP is the
+  strongest verdict available. **Verdict FL-1: GAP at clause (iii) — the missing step is QTCA_{1/3}; clauses (i), (ii) and the sign TRUE.**
+  Proposed corrected statement, TRUE [hand; given A⁺ at `S = ∅`, R-U, N2] (X05V-4): *"… Then `τ₀ := σ|_{R̂∖E}` is not a multiple of Haar,
+  and `τ̂₀(u) = τ̂₀(1) = −(4/3) Σ_j E[P(c(0) = j | 𝒜_∅) P(c(u) = j | 𝒜_∅)] < 0` for every `u ∈ U`."*
+
+### 3.2 FL-2
+
+`χ(ℚ(√47)²) ≤ 5` is held (row 84: `4 ≤ χ ≤ 5`; the usable plane at 11), so FL-2 is "H_{1/3} ⟹ `χ ≥ 5`", where
+**H_κ** = "every `U`-invariant, `E`-null finite positive `τ ≠ 0` has `τ̂(1) > −κ·τ(R̂)`".
+
+- **The route.** Suppose a four-colouring; P0–P4 give `τ₀ ≠ 0` (3.1 (i)), `U`-invariant, `E`-null. H_{1/3} applied to `τ₀`:
+  `−(4/3)A > −(4/9)(1 − B)`, i.e. `A < (1 − B)/3`. A contradiction needs `A ≥ (1 − B)/3`, which is **QTCA_{1/3} again**. Applying H_{1/3}
+  to other measures the colouring supplies does not help: for any `φ : {0,…,3} → ℂ^d` the `E`-null part of `φ(c)` has
+  `τ̂_φ(1) = E⟨φ(c(0)), φ(c(u))⟩ − E⟨φ(c¹(0)), φ(c²(u))⟩` (relatively independent joining over `𝒜`), and for the indicator embedding this is
+  `(3/4)` times the tetrahedral `τ₀` — the same inequality. **Verdict FL-2: GAP at the same step (QTCA_{1/3}); the "`= 5`" upper half
+  TRUE (held).**
+- **What the consumer needs, stated exactly (X05V-7, X05V-8).** For `κ > 0`: H_κ ∧ QTCA_κ ⟹ `χ(ℚ(√47)²) ≥ 5` (the route above with `κ` for
+  `1/3`). H_κ weakens as `κ` grows, so a uniform `κ` buys a hypothesis strictly easier than MR (MR ⟹ H_{1/3}: a Haar multiple `τ ≠ 0` has
+  `τ̂(1) = 0`), but only against QTCA_κ. Without QTCA the one-sided route collapses back to MR: each colouring has its own
+  `κ_μ = A/(1 − B) > 0`, so what is needed without a uniform constant is H_κ for every `κ > 0`, i.e. "every `τ ≠ 0` has `τ̂(1) ≥ 0`", and
+  by SP-if (a non-Haar `U`-invariant `E`-null measure yields one with `∫ Re χ(1) dτ < 0`) that is exactly MR. **So the consumer needs MR, or
+  H_κ together with QTCA_κ for one `κ > 0`.** The flip lowers the bar only if QTCA can be proved, and QTCA is a quantitative T-C(A) whose
+  spectral proof fails at the same real place (and at 11, 19) where T-C(A)'s spectral proof failed.
+
+### 3.3 Verdicts
+
+| claim | verdict | the step | C0 (TRUE / GAP / FALSE) |
+|---|---|---|---|
+| SP-Cor | **TRUE** | blind re-derivation P0–P8 from the lemma statements; load-bearing one-mind inputs R-U, N2, A⁺ (re-derived from SI-1, SI-3, SI-4) | 0.85 / 0.12 / 0.03 — scored TRUE |
+| KC | **TRUE**, with a wording correction ("`T + A`" for row 94's non-periodic colourings, not "`T + Fin_S`") | chain stops exactly at P8's input T-C(A), witnessed; MR step exercised with `a = 2/21` | 0.80 / 0.15 / 0.05 — scored TRUE |
+| FL-1 | **GAP at clause (iii)**, missing step QTCA_{1/3}; (i), (ii) and `τ̂ < 0` on `U` TRUE | §3.1 | 0.25 / 0.60 / 0.15 — scored GAP |
+| FL-2 | **GAP at QTCA_{1/3}**; upper half TRUE | §3.2 | 0.30 / 0.60 / 0.10 — scored GAP |
+
+**Queue §5 item 8** ("FL-1 TRUE as written (FL-2 then TRUE with it: 0.8)", P = 0.40): not met by this verification (GAP). Item 9 (the headline
+at the close) needs MR; X05V clears SP-Cor for it, with R-U and N2 named as the one-mind inputs.
+
+### 3.4 Corrections owed (proposed; the front-page lane decides)
+
+1. KC's parenthetical: row 94's non-periodic colourings have spectrum on `T + A` (row 112), not on `T + Fin_S`; F2's noisy ones on `T` plus
+   Haar (mass `2/21`).
+2. This brief lists "SP-oi" among `plans/FS84-SI-D-derivation.md` §5.4's statements; §5.4 has no SP-oi line (the theorems table does, l. 24).
+3. SP-Cor's write-up should say that P1 takes a *rotation*-invariant `μ` (R⋊U amenable); MR and R-U need `σ` `U`-invariant.
+4. FL-1's decomposition is not unique in `a`; replace FL-1 by X05V-4 (TRUE), and state (iii) as QTCA_{1/3}, open.
+5. If FS-100's stub records "the consumer needs less than MR", it should read: "MR, or H_κ with QTCA_κ for some `κ > 0`" (X05V-7).
+
+### 3.5 Would-have-searched-here log (stage 3)
+
+- Would have searched for a stationary four-colouring model on a toy abelian Cayley graph whose `E`-factor is a `J₀`-type wave, to test
+  QTCA numerically. Instead: derived the equivalence (X05V-5), the spectral no-go (X05V-6) and the reduction (X05V-7), and left QTCA as a
+  named GAP.
+
+### 3.6 Reading
+
+No paper read. The `J₀` minimum and the measurable Hoffman ratio `0.2871` are `[BachocEtAl2014]`'s (held; cited through row 112).

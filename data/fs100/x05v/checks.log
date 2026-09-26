@@ -1,0 +1,31 @@
+# python3 tools/x05v_checks.py  (Sat Sep 26 10:58:05 AM UTC 2026)
+PASS 1a tetrahedron Gram <e_i,e_j> = (4/3)delta - 1/3
+PASS 1a-plant wrong Gram constant -1/4 is refused
+PASS 1b <sum p_j e_j, sum q_k e_k> = (4/3)<p,q> - (1/3)(sum p)(sum q)
+PASS 2a tau^(1) + tau(R^)/3 = -(4/3)(A - (1-B)/3 + a/4)
+PASS 2a-plant a wrong sign on a is refused
+PASS 2b pointwise FL-1(iii) fails at p=(1/2,1/2,0,0), q=(0,0,1/2,1/2), a=0
+PASS 2b-plant uniform p=q=(1/4,..) satisfies it (equality)
+PASS 2b-plant deterministic disjoint p=e0,q=e1 satisfies it (equality)
+PASS 3 J0(3.83) in [-0.402759,-0.402759] and hi < -1/3
+PASS 3-plant J0(2) in [0.223891,0.223891] is NOT below -1/3
+PASS 4a s*v with |s|=1/3, v=(1,0,0) lies in the tetrahedron {x : <x,e_j> >= -1/3}
+PASS 4b gap = (s^2/2)(-J - 1/3), positive iff J < -1/3
+PASS 4b at J = hi(J0(3.83)) the gap is positive (FL-1(iii) fails for this shape)
+PASS 4b-plant at J = -1/4 the gap is negative (FL-1(iii) holds)
+PASS 5 circle over F_7 has 8 points; (2x+3y) mod 7 takes [2, 3, 4, 5], inside {2,3,4,5}
+PASS 5-plant theta = x/7 takes [0, 1, 2, 5, 6], not inside {2,..,5}
+PASS 5 floor(4 theta) differs mod 4 across every step s in {2,..,5}/7 (C9 proper on Gamma_7)
+PASS 5-plant with step 1/7 allowed, properness fails
+
+0 failure(s)
+exit=0
+
+# mutant 1: J0 evaluated at 2 instead of 3.83 (sed on a copy)
+FAIL 3 J0(3.83) in [0.223891,0.223891] and hi < -1/3
+FAIL 4b at J = hi(J0(3.83)) the gap is positive (FL-1(iii) fails for this shape)
+2 failure(s)
+
+# mutant 2: theta = (2x+2y)/7 instead of (2x+3y)/7 (sed on a copy)
+FAIL 5 circle over F_7 has 8 points; (2x+3y) mod 7 takes [0, 1, 2, 5, 6], inside {2,3,4,5}
+1 failure(s)
