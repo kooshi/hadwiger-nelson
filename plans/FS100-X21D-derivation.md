@@ -5,7 +5,16 @@ Stop time 12:30 UTC. A blind verifier (X21V) works the same list; no contact. Wo
 
 ## Theorems this phase proved
 
-*(filled at each stage; one line per theorem, grade, address)*
+- **X21D-Q0** — for `d ≡ 7 (mod 8)`, `ℚ(√d)`'s one dyadic place splits in `ℚ(√d, i)` (`ℚ₂(√d) = ℚ₂(i)`); so the family is outside row 100's
+  exception and `R = O′` there. [hand + tools exact] — §2.1; `tools/x21d_family.py`.
+- **X21D-A1** — given MR (FS100-MR's scope), `χ(ℚ(√d)²) ≥ 5` for every squarefree `d ≡ 47, 143, 167 (mod 168)`. [hand, a composition; its
+  weakest input R88-TCA's class form, one mind] — §2.2.
+- **X21D-A2** — given MR, `χ(ℚ(√d)²) = 5` for every such `d` with `L = 5`; in particular at ℚ(√47), ℚ(√143), ℚ(√311), ℚ(√335); 44 of the 52
+  family fields with `d ≤ 3000` have 11 or 19 stable. [hand + tools exact] — §2.3.
+- **X21D-A4** — given MR, `χ(ℚ(√167)²) ≥ 5` by J48-N4cor without FS100-T1, T-C(A) or SP-Cor, over R-U and SP common to both routes;
+  J48-N4cor reaches no `L = 5` family member (`λ*(Γ₁₁) = 0.476413`, `λ*(Γ₁₉) = 0.380486 > 1/3`). [hand + tools] — §2.4.
+- **X21D-K0** — `MR(F) ∧ T-C(A)@∅(F) ⟹ χ(F²) ≥ 5` for every real number field (SP-Cor's proof, one input field-dependent); A⁺ at `S ≠ ∅`
+  needs T-C(A) at `S`. [hand; second mind on K0, not blind to its summary] — §3.1.
 
 ## The fixed claim list, copied verbatim (`plans/CRUNCH-2026-09-26-x2x3-queue.md` §7, first paragraph and list X21)
 
@@ -162,4 +171,50 @@ R-U; MR, or its failure, SP", J39 §4.7) shares J45's R-U, the SP-only-if step a
 route over partly common inputs; a defect in R-U or SP would take both routes down (J48 §3 already called its confirmation "route-dependent").
 Its gain: it removes the one-mind link 4 of §2.2 (R88-TCA's class form) from ℚ(√167)'s `≥ 5`, replacing it with the 23 margin (`1.6·10⁻³`).
 **Does it reach the rest of the family?** Only where `N₄(F) = ∅`; at every `L = 5` member 11 or 19 is stable and not 4-thick
-(normalised `|λ|` there exceeds 1/3; e.g. Weil-scale `2√11/12 ≈ 0.55`), so J48-N4cor does not cover A-2's fields — A-1 there rests on link 4.
+(normalised `max|λ|` at level one: `0.476413` at 11, `0.380486` at 19, both `> 1/3`, computed at stage 3 by the exact character sums over the 12 and 20 unit vectors; level one already fails thickness), so J48-N4cor does not cover A-2's fields — A-1 there rests on link 4.
+
+## Stage 3 — SAVED (A-3: K0, my own derivation, then compared with FS100-K0's statement), 06:37
+
+**Blindness note (honest):** at stage 1 the brief's "Read first" list sent me to `plans/FS100-derivation.md` §2, where FS100-K0's
+statement *and its one-paragraph proof summary* sit together; I read both at 06:24. So this derivation walked J45's text (`plans/FS84-SI-D-derivation.md`
+§2–§4) independently, but it is not blind to K0's summary. X21V's is the blind one.
+
+**Verdict. A-3 TRUE, with a scope reading of "A⁺":** SP-Cor holds with J45's proof over every real number field where T-C(A) holds at `S = ∅`
+(wider than K0's "every real quadratic field in T-C(A)'s class"; nothing quadratic is used); A⁺ holds **at `S = ∅`** with J45's proof given
+T-C(A)@∅. **Read literally — "J45's A⁺ … hold[s] … given T-C(A) there at `S = ∅`", A⁺ being J45's statement "for every … finite set `S` of
+split places" — it is a GAP at the step "T-C(A) at `S ≠ ∅`":** J45's proof of A⁺ at `S` invokes T-C(A) at that same `S`, and for a merely
+translation-invariant `μ` (A⁺'s scope) nothing reduces `S ≠ ∅` to `S = ∅` — R-U, which would (`σ_μ(E_S ∖ (T + A)) = 0`), needs `σ_μ`
+`U`-invariant, i.e. a rotation-invariant `μ`. The gap does not touch SP-Cor (which uses `S = ∅` only) and is closed for the class's fields by
+R88-TCA's class form at every finite `S` (J28D, one mind; a split dyadic `S`-place through C14.2 (c)). FS100-K0's own statement already carries
+exactly this scope note ("A⁺ at a finite `S ≠ ∅` needs T-C(A) at that `S`, which R88-TCA's class form supplies"); the brief's K0 quotation
+(J51V's claim list) lacks it. No correction to FS100-K0; the brief's quote is the narrower-sounding but literally-wider form.
+
+### 3.1 The derivation: SP-Cor's proof, every input, its field dependence
+
+Let `F` be a real number field, `R = ℤ[U] ⊂ L = F(i)`, `X₄(F)` the proper four-colourings (of `F²`, equivalently of `Cay(R, U)` on each
+`R`-coset, since every unit vector lies in `U ⊂ R`). Suppose `X₄(F) ≠ ∅`.
+
+| step | statement | input | field-dependent? |
+|---|---|---|---|
+| S1 | `X₄(F)` is compact metrizable (`F²` countable, Tychonoff, properness closed) and invariant under `R ⋊ U`, `c ↦ c(v· + y)` | — | no |
+| S2 | an `R ⋊ U`-invariant Borel probability `μ` exists | `R ⋊ U` abelian-by-abelian, hence amenable (Markov–Kakutani / Følner) | no |
+| S3 | with `h(c(0)) ∈ ℝ³` the tetrahedron vertex, `C(y) = E⟨h(c(0)), h(c(y))⟩ = ∫ χ(y) dσ_μ`; `C(vy) = C(y)` for `v ∈ U`, so `σ_μ` is `U`-invariant | Bochner on the discrete `R`; rotation invariance of `μ` (a rotation fixes 0) | no |
+| S4 | `σ_μ(E ∖ (T + A)) = 0` | R-U (J45 §4.1): N1 (b) density by weak approximation for the norm-one torus `x² + y² = 1` of `L/F` (a rational curve over every `F`) and the split-place contraction `u = z/z̄`, `(z) = 𝔓^h` | no — "every real number field" |
+| S5 | `E_∅ = T + A` | N1 (a): `R/NR` finite since `R` is torsion-free of rank `[L:ℚ]` | no |
+| S6 | `∫_{R̂∖E_∅} Re χ(1) dσ_μ < 0` | A⁺ at `S = ∅` with remark (ii): SI-1, SI-3 (the tetrahedral identity, `k = 4`), SI-4 (a selection is an `𝒜_∅`-measurable equivariant proper colouring), N2 (its spectral measure lies on `E_∅ = T + A`), **T-C(A) at `S = ∅` over `F`** forbids that; `U`-invariance of `σ_μ` (S3) makes the integral constant on `U`, so strict at `u = 1` | **only through T-C(A)@∅** |
+| S7 | `τ := σ_μ\|_{R̂∖E}` is finite, positive, `U`-invariant (`E` is `U`-invariant, N1 (b)), `τ(E) = 0`, and `∫ Re χ(1) dτ = ∫_{R̂∖E_∅} Re χ(1) dσ_μ < 0` (by S4, S5 the two restrictions differ by a `σ_μ`-null set) | S4–S6 | no |
+| S8 | `τ` is not a multiple of Haar (`∫ χ(1) dHaar = 0`, `1 ≠ 0` in `R`), contradicting MR(F) | — | no |
+
+So `MR(F) ∧ T-C(A)@∅(F) ⟹ χ(F²) ≥ 5` for **every** real number field `F` — no step uses that `F` is quadratic, that `d = 47`, or `R = O′`
+(MR's own scope needs `R = O′`, a separate input: Q-0 supplies it on the family). Not used: Lemma C, C′, strong approximation, FS-66, C14,
+`[AmbrusEtAl2023]` (they enter only through T-C(A)'s own proof). **Compared with FS100-K0's statement** ("J45's SP-Cor and A⁺ at `S = ∅`
+hold, with J45's proofs, over every real number field where T-C(A) holds at `S = ∅` … A⁺ at a finite `S ≠ ∅` needs T-C(A) at that `S`"):
+**identical**, including the scope note. Differences of truth: none.
+
+### 3.2 A second look at the one input K0 does not re-derive
+
+T-C(A)@∅ over the class (R88-TCA's class form, J28D, one mind) is where A-1 is weakest (§2.2 link 4). A-4's route removes it at ℚ(√167);
+for the `L = 5` members no route here avoids it (J48-N4cor needs `N₄ = ∅`, false wherever 11 or 19 is stable: §2.4). **Proposed next job
+(SPAWN candidate, not spawned):** a blind second derivation of R88-TCA's class form at `S = ∅` over the family (the count
+`1 ≤ 4 max(α(Y′), r_X) < 1` with the ramified places `p | d` for `p = 11, 19, 23, 31` — the family members with such ramified places, e.g.
+ℚ(√143) at 11, are exactly where the class form goes beyond ℚ(√47)'s factors).
