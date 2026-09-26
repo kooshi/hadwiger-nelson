@@ -1,0 +1,12 @@
+A pol=x^6 + 6*x^4 - 18*x^3 - 54*x^2 + 156*x - 94 deg=6 real_roots=2 dyad=["split", 6, 1] at3=[[3, 1, "stable"], [3, 1, "stable"]] at7=[[2, 3, "stable"]] at11=[[1, 2, "split"], [1, 2, "split"], [1, 2, "split"]] small=["stable F_3 place (3)", "stable F_3 place (3)"]
+A.base pol=x^2 - 7 deg=2 real_roots=2 dyad=["split", 2, 1] at3=[[1, 1, "stable"], [1, 1, "stable"]] at7=[[2, 1, "stable"]] at11=[[1, 2, "split"]] small=["stable F_3 place (3)", "stable F_3 place (3)", "stable F_7 place (4)"]
+B pol=x^6 - 2*x^5 - 18*x^4 + 54*x^3 + 11*x^2 - 142*x + 97 deg=6 real_roots=6 dyad=["inert", 2, 3] at3=[[2, 3, "stable"]] at7=[[3, 2, "split"]] at11=[[1, 3, "stable"], [1, 3, "stable"]] small=["dyadic inert Q=8 (4)"]
+B.base pol=x^2 - 3 deg=2 real_roots=2 dyad=["inert", 2, 1] at3=[[2, 1, "stable"]] at7=[[1, 2, "split"]] at11=[[1, 1, "stable"], [1, 1, "stable"]] small=["dyadic inert Q=2 (4)", "stable F_3 place (3)"]
+A.sub deg=1 totally_real=1 small=["dyadic ramified (chi<=2)", "stable F_3 place (3)", "stable F_7 place (4)"] pol=x
+A.sub deg=2 totally_real=1 small=["stable F_3 place (3)", "stable F_3 place (3)", "stable F_7 place (4)"] pol=x^2 - 7
+A.sub deg=3 totally_real=0 small=["dyadic ramified (chi<=2)", "stable F_3 place (3)"] pol=x^3 - 2
+A.sub deg=6 totally_real=0 small=["stable F_3 place (3)", "stable F_3 place (3)"] pol=x^6 + 6*x^4 - 18*x^3 - 54*x^2 + 156*x - 94
+B.sub3=[[2, 3, "stable"]] B.dyad=["inert", 2, 3]
+FAIL:
+  A: has a target of chi <= 4, so L(A) <= 4
+  A: no stable F_11 place (L(A) = 5 not witnessed)
