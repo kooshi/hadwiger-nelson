@@ -664,3 +664,28 @@ fetching or calling it unheld.
 `git rm` in this stage's commit. The bibliography draft names `[EinsiedlerLindenstrauss2022]`'s existing address.
 
 **Would have searched here (stage 2):** none — literature queries only.
+
+### Stage 3 — SAVED (the derivation file)
+
+`plans/FS100-derivation.md` files every theorem the round proved outside the kernel: **15 entries** covering J51's T1–T3 (T3 merged into
+FS100-KS2, the sketch written out), J51D's T1–T5, KS-3, R, C and the controls, and J51V's L0–L2, KS2, X1, X2, N1, EQ, K4, K5 and K0 — duplicates
+merged, one entry per theorem with every other id in its title. The card's answer, PE-lim, KS-1_E/KS-sat_E and the field form of P-sat1 are
+stated, not filed (the file's §G). Id spelling: `FS100-X2B` for J51V-X2 (b)–(d) (X2 (a) and (c) sit in FS100-X1).
+
+| verification | entries |
+|---|---|
+| two derivations, blind to each other | FS100-L0, FS100-KS2, FS100-KS3 (the counterexample), FS100-EQ (the implication and the equivalence), FS100-C45; FS100-CP (a) with the owner's check |
+| two derivations, one of them possibly informed in its write-up | FS100-X1 (ruling 2) |
+| one mind | FS100-X2B (J51V), FS100-N1 (J51V), FS100-T4, FS100-T5, FS100-R (J51D), FS100-T2 (J51); FS100-CP (b) in general; FS100-KS3's non-necessity clause; FS100-EQ's `E`-form |
+| one mind + checks | FS100-T1 (J51; J51V's partly blind re-derivation; J53's Legendre re-check); FS100-K0 (J51V; J53's one-step check; on R88-TCA's class form) |
+
+**Kernel decisions:** all fifteen declined, each with its reason in the entry; no stub route (the file's §K).
+
+**§ B lines (drafts for `LEDGER.md` § B, 15 lines):** `data/fs100/j53/ledger-b-draft.md`, reproduced in stage 5's drafts. Checked by
+`data/fs100/j53/check_b_draft.py` (J41's tool with the prefix changed): `tools/fs71_ledger_b_check.py`'s own parser and `--strict` check with the
+drafted lines appended to `LEDGER.md`'s text in memory, restricted to `FS100-` ids — **PASS, 15 entries, 15 lines, 0 failures, exit 0**
+(`check-b.out`; a first run caught two `*Proof verdict:*` fields broken across a line, fixed); the plant (one drafted line dropped) **FAILS, exit 1**
+(`check-b-plant.out`). The repository-wide `python3 tools/fs71_ledger_b_check.py --strict` reads **FAIL (15), exit 1** — exactly the fifteen
+`FS100-` ids, and nothing else (`repo-check.out`) — until a front-page job applies the § B lines.
+
+**Would have searched here (stage 3):** none — filing only.

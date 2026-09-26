@@ -1,0 +1,3 @@
+FAIL: entry FS100-L0 has no LEDGER.md § B row
+FS100 entries: 15; drafted lines: 14; failures: 1
+RESULT: FAIL
