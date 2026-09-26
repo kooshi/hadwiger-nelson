@@ -1,0 +1,42 @@
+(A) stable places below 400: rule [11, 19, 23, 31, 43, 47, 67, 107, 127, 139, 151, 163, 167, 179, 199, 211, 223, 227, 311, 359, 367]
+    PARI (E and F have equally many primes above p): [11, 19, 23, 31, 43, 47, 67, 107, 127, 139, 151, 163, 167, 179, 199, 211, 223, 227, 311, 359, 367]
+(B) q=  3 lambda_min(Gamma_q) = -2.000000000 (interval width 5.7e-40); tower Hoffman ratio L/(q+1+L) = 0.333333333; 1/4 - ratio = -8.3333e-02; below 1/4: False
+(B) q=  7 lambda_min(Gamma_q) = -4.493959207 (interval width 1.1e-39); tower Hoffman ratio L/(q+1+L) = 0.359690562; 1/4 - ratio = -1.0969e-01; below 1/4: False
+(B) q= 11 lambda_min(Gamma_q) = -4.795754778 (interval width 1.5e-39); tower Hoffman ratio L/(q+1+L) = 0.285533746; 1/4 - ratio = -3.5534e-02; below 1/4: False
+(B) q= 19 lambda_min(Gamma_q) = -7.609728632 (interval width 3.7e-39); tower Hoffman ratio L/(q+1+L) = 0.275617654; 1/4 - ratio = -2.5618e-02; below 1/4: False
+(B) q= 23 lambda_min(Gamma_q) = -7.960687187 (interval width 4.4e-39); tower Hoffman ratio L/(q+1+L) = 0.249077473; 1/4 - ratio = 9.2253e-04; below 1/4: True
+(B) q= 31 lambda_min(Gamma_q) = -10.666510494 (interval width 5.3e-39); tower Hoffman ratio L/(q+1+L) = 0.249997255; 1/4 - ratio = 2.7452e-06; below 1/4: True
+(B) q= 43 lambda_min(Gamma_q) = -11.962230123 (interval width 9.2e-39); tower Hoffman ratio L/(q+1+L) = 0.213755422; 1/4 - ratio = 3.6245e-02; below 1/4: True
+(B) q= 47 lambda_min(Gamma_q) = -12.846527722 (interval width 1.1e-38); tower Hoffman ratio L/(q+1+L) = 0.211130005; 1/4 - ratio = 3.8870e-02; below 1/4: True
+(C) FS-66 certificate p=11: U = 28.204320, U/p^2 = 0.233094 (< 1/4: True); sha256 683236677e0d
+(C) FS-66 certificate p=19: U = 77.511742, U/p^2 = 0.214714 (< 1/4: True); sha256 055f031d1e69
+(C) FS-66 certificate p=23: U = 97.984638, U/p^2 = 0.185226 (< 1/4: True); sha256 28cf189c83d2
+(D) Weil tail: q^2 - 34q + 1 > 0 for 34 <= q < 1e5: True (and for all q >= 34, as q(q-34)+1 >= 1)
+    first stable q above 47: 67; the tail (every stable q >= 67) is bounded by h(67) = 0.194033, h(q) = 2 sqrt q / (q + 1 + 2 sqrt q) decreasing
+(S1a) per stable place (below B), the all-levels ratio bound used:
+      q= 11: 0.233093554  [FS-66 certificate (all levels, links L1-L6)]
+      q= 19: 0.214713967  [FS-66 certificate (all levels, links L1-L6)]
+      q= 23: 0.185226158  [FS-66 certificate (all levels, links L1-L6)]
+      q= 31: 0.249997255  [Hoffman at level one + Lemma P (all levels)]
+      q= 43: 0.213755422  [Hoffman at level one + Lemma P (all levels)]
+      q= 47: 0.211130005  [Hoffman at level one + Lemma P (all levels)]
+      q= 67: 0.194033053  [Weil + Hoffman + Lemma P (all levels)]
+      q=107: 0.160761959  [Weil + Hoffman + Lemma P (all levels)]
+      q=127: 0.149721182  [Weil + Hoffman + Lemma P (all levels)]
+      q=139: 0.144147832  [Weil + Hoffman + Lemma P (all levels)]
+      q=151: 0.139182868  [Weil + Hoffman + Lemma P (all levels)]
+      q=163: 0.134721219  [Weil + Hoffman + Lemma P (all levels)]
+      q=167: 0.133331286  [Weil + Hoffman + Lemma P (all levels)]
+      q=179: 0.129417742  [Weil + Hoffman + Lemma P (all levels)]
+      q=199: 0.123627548  [Weil + Hoffman + Lemma P (all levels)]
+      q=211: 0.120520539  [Weil + Hoffman + Lemma P (all levels)]
+      q=223: 0.117646024  [Weil + Hoffman + Lemma P (all levels)]
+      q=227: 0.116734528  [Weil + Hoffman + Lemma P (all levels)]
+      q=311: 0.101564619  [Weil + Hoffman + Lemma P (all levels)]
+      q=359: 0.095237763  [Weil + Hoffman + Lemma P (all levels)]
+      q=367: 0.094297617  [Weil + Hoffman + Lemma P (all levels)]
+(S1a) binding place q=31: bound 0.249997255; 1/4 - bound = 2.7452e-06
+(E) ramified 47, level 2 (|V| = 47^4): |S_2| = 2256 (expect 2256); max|primitive| = 94.000000 vs 2q = 94; lambda_min(G_2) = -603.786803 vs 47 lambda_min(G_1) = -603.786803: PASS
+(E) inert 31, level 2 (|V| = 961^2): |S_2| = 992 (expect 992); max|primitive| = 61.999669 vs 2q = 62; lambda_min(G_2) = -330.661825 vs 31 lambda_min(G_1) = -330.661825: PASS
+ALL PASS: every stable place of Q(sqrt47) has all-levels ratio bound < 1/4; the sup is attained at the binding place q=31.
+1.04 s wall, 393720 KB
