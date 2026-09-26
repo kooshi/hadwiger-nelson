@@ -26,7 +26,7 @@ Everything is per `R`-coset (row 88's scope).
    `λ* < 1/(k−1)` can be deleted from a Borel `k`-colouring of a product"*, index §3.6) and J21-RED — one mind each, unverified.
 4. **The reframe's recognition** (§G.4, §IQ): `X₄(F)` is a compact space with an action of the amenable group `Aff_F`, and Pull is a
    finite invariant subset. Row 88's question is **whether Pull is all of it** — G76's closed-set frame, which FS-89 ran on characters
-   (`R̂`), lifted to colourings. It splits into two halves, each a named kind of statement: **(Q-μ)** every `Aff_F`-invariant probability
+   (`R̂`), lifted to colourings. It splits into two halves, each a named kind of statement: **(Q-μ)** every translation-invariant probability
    measure on `X₄(F)` is carried by Pull; **(Q-tr)** no non-pullback is *transient* (has every invariant measure on its orbit closure carried
    by Pull). Rows 91's no-gos (walls, half-space defects, patchworks) are partial answers to Q-tr; rows 92, 94 and 96 to Q-μ.
 
@@ -120,7 +120,7 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 - G69 — bears: rigidity decided on quotients prime by prime is V3/V4; density may cost infinitely more than rigidity → stage Y's price.
 - G70 — bears: over K the escape from the residue colouring is a monochromatic √3-pair, through hexagons of triangles; ℚ(√59) has no unit triangles, so that dichotomy has no analogue and rigidity is open → §IQ.
 - G71 — bears: four colours have no height or slope, so the invariant must be averaged, non-local or structure-derived → §IQ item 3.
-- G72 — bears (method): the three moves; move 3 (average over the symmetry) is `Aff_F`-invariant measures → §IQ.
+- G72 — bears (method): the three moves; move 3 (average over the symmetry) is translation-invariant measures, with the rotations acting on them → §IQ.
 - G73 — bears: cell-local certificates are empty or blind at four; second moments excluded (row 87, C0) → T-C must be pointwise/higher-order.
 - G74 — bears: layer gluing by relations over infinitely many layers is the template for T-C's Kronecker part → T-C.
 - G75 — falsifiable: registered as **P-G75″** (a triangle-free pinning identity on a type-(B) plane appears; C11 says it exists iff `F(R) ≠ 0`).
@@ -365,16 +365,16 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
    `(0, 4)` not forced — equivalently (row 78's `forces_iff_exists_finite`), is there no finite triangle-free unit-distance graph over ℚ(√59)
    forcing `(0, 4)`?
 2. **The structural form, about every four-colouring.** For every field `F` in S2 where row 88's frame holds, **is every closed `Aff_F`-invariant subset of `X₄(F)`
-   contained in Pull, and every `Aff_F`-invariant probability measure on `X₄(F)` carried by Pull?** It splits (T-A) into **Q-μ** (the
+   contained in Pull, and every translation-invariant probability measure on `X₄(F)` carried by Pull?** It splits (T-A) into **Q-μ** (the
    measures) and **Q-tr** (no *transient* colouring: none that is locally a pullback at Følner-almost every place without being one).
    *The class, and why the arithmetic cannot be stripped further:* with the arithmetic removed the answer is **no** — rank-one distance graphs
    have transient walls between rigid phases (row 80's T35), and ℚ(√11) has an invariant non-pullback colouring (C9, row 94) — so the class
    keeps exactly what those counterexamples lack: a rotation group acting with dense orbits at two or more primes (row 97: one prime lets
    heteroclinic characters through) and every factor but the tight one below 1/4. *At type (A)* (no tight place, Pull = ∅), Q-μ says
    `X₄(F)` carries no invariant measure, i.e. is empty — so there the measure form **is** the chromatic question (`χ(ℚ(√47)²) ≥ 5`).
-3. **The invariant it forces.** The **invariant measures on a colouring's orbit closure** (G72's move 3: average over `Aff_F`, amenable), and
+3. **The invariant it forces.** The **invariant measures on a colouring's orbit closure** (G72's move 3: average over the translations, amenable; the rotations act on what the average gives), and
    through them two numbers every colouring carries: its **spectral type** (the spectral measure `σ` of the tetrahedral embedding — a
-   `U`-invariant positive measure on `R̂` with `σ̂ = −1/3` on `U`; a pullback's lives on the dyadic least eigenspace) and its **transience**
+   positive measure on `R̂` with `σ̂ = −1/3` on `U`, `U`-invariant when the measure is; a pullback's lives on the dyadic least eigenspace) and its **transience**
    (the upper Banach density of the places where it is not locally a pullback). Second moments alone cannot decide (C0, row 87); the invariant
    is the whole invariant measure, of which the spectral type is the first reading.
 4. **Its route.** Derivation only. An exact computation may check a derived claim (a character sum, a membership, a ratio from an existing
@@ -393,20 +393,19 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 - **Pull**: the colourings `z ↦ γ(z mod 𝔓⁴)`, `γ` a proper four-colouring of row 67's `P₄`, `R → O/𝔓⁴` the reduction at the tight place.
 - **`Aff_F`**: the group of bijections `z ↦ t + u·τ(z)` of `R`, `t ∈ R`, `u ∈ U`, `τ` in the finite group generated by complex conjugation
   and the automorphisms of `F(i)` preserving `R`; it acts on `X₄(F)` by `(g·c)(z) = c(g⁻¹z)`.
-- **`F_μ(R)`** (resp. **`F^tr_μ(R)`**): the `δ ∈ R` with `μ{c : c(0) = c(δ)} = 1` for every `Aff_F`-invariant (resp. translation-invariant)
-  Borel probability measure `μ` on `X₄(F)`.
-- **Transient**: `c ∈ X₄(F) ∖ Pull` is transient if every `Aff_F`-invariant Borel probability measure on its `Aff_F`-orbit closure is
-  carried by Pull.
+- **`F_μ(R)`**: the `δ ∈ R` with `μ{c : c(0) = c(δ)} = 1` for every translation-invariant Borel probability measure `μ` on `X₄(F)`
+  (§M.1: `Aff_F`-invariance is not needed; the rotations enter only through push-forwards).
+- **Transient**: `c ∈ X₄(F) ∖ Pull` is transient if every translation-invariant Borel probability measure on its translation-orbit
+  closure is carried by Pull.
 - **Spectral measure, `T`, `A`, `Fin`**: as in FS86-dB-C (the spectral measure of the tetrahedral embedding of a translation-invariant
   random four-colouring; `T` torsion, `A` archimedean, `Fin` finitely many split components — D's `𝒳`, `plans/FS86-V-D-verification.md`).
 
 ### S.1 The target statements (verbatim; J28D proves or refutes, J28V verifies blind)
 
 - **T-A (the decomposition).** "Let `F` be a type-(B) field, or any real field in S2 for which row 88's frame holds (`F(R) ∈ {0, P(R)}`,
-  `P(R) = R ∩ 𝔓⁴`, every periodic four-colouring a pullback), and `X₄(F)`, Pull, `Aff_F`, `F_μ`, `F^tr_μ` as in §S.0. (i) Pull is finite,
-  closed and `Aff_F`-invariant. (ii) `F_μ(R)` and `F^tr_μ(R)` are ideals of `R`, each equal to `0` or to `P(R)`, and
-  `F(R) ⊆ F^tr_μ(R) ⊆ F_μ(R) ⊆ P(R)`. (iii) `F_μ(R) ≠ 0` if and only if (Q-μ) every `Aff_F`-invariant Borel probability measure on `X₄(F)`
-  is carried by Pull. (iv) `F(R) ≠ 0` if and only if (Q-μ) holds and (Q-tr) no colouring is transient. (v) A colouring
+  `P(R) = R ∩ 𝔓⁴`, every periodic four-colouring a pullback), and `X₄(F)`, Pull, `Aff_F`, `F_μ` as in §S.0. (i) Pull is finite,
+  closed and `Aff_F`-invariant. (ii) `F_μ(R)` is an ideal of `R`, equal to `0` or to `P(R)`, and `F(R) ⊆ F_μ(R) ⊆ P(R)`. (iii) `F_μ(R) ≠ 0`
+  if and only if (Q-μ) every translation-invariant Borel probability measure on `X₄(F)` is carried by Pull. (iv) `F(R) ≠ 0` if and only if (Q-μ) holds and (Q-tr) no colouring is transient. (v) A colouring
   `c ∈ X₄(F) ∖ Pull` is transient if and only if, for every finite `B ⊂ R`, the set `{t ∈ R : (t·c)|_B ∉ Pull|_B}` has upper Banach density
   zero in `R`. (vi) If every point of Pull is isolated in `X₄(F)`, then Q-tr holds, and so `F(R) = F_μ(R)`."
 - **T-B1 (isolation).** "Over a type-(B) field, every point of Pull is isolated in `X₄(F)`: for each `p ∈ Pull` there is a finite
@@ -414,10 +413,11 @@ J07's and J21's records) were read at their sections instead. Logged as a scope 
 - **T-B2 (defect propagation).** "Over a type-(B) field, if `c ∈ X₄(F)`, `p ∈ Pull` and `D = {z ∈ R : c(z) ≠ p(z)}` is non-empty, then `D`
   has positive upper Banach density in `R`."
 - **T-C (Theorem C over the real type-(B) fields).** "Over a type-(B) field, every translation-invariant Borel probability measure on
-  `X₄(F)` whose spectral measure is carried by `T + A + Fin` is carried by Pull."
+  `X₄(F)` whose spectral measure is carried by `T + A + Fin_S`, for some finite set `S` of split places, is carried by Pull." (`Fin_S`: the
+  characters continuous for the `S`-adic topology; §M.2 fixes `S` because a union over all finite `S` has no single completion.)
 - **T-C(A) (its type-(A) form).** "Over ℚ(√47), no translation-invariant Borel probability measure on `X₄(F)` has its spectral measure
-  carried by `T + A + Fin`; hence a four-colouring of ℚ(√47)'s plane, if one exists, has an invariant measure on its orbit closure whose
-  spectral measure charges characters outside `T + A + Fin`."
+  carried by `T + A + Fin_S` for a finite set `S` of split places; hence a four-colouring of ℚ(√47)'s plane, if one exists, has a
+  translation-invariant measure on its orbit closure whose spectral measure is carried by no `T + A + Fin_S`."
 - **T-C′ (the remainder, named, no truth claim).** State exactly what Q-μ needs beyond T-C — the invariant measures whose spectra charge
   characters reading infinitely many split places — and whether the colouring constraints force positive entropy for the `U`-action on
   `R̂` (Rudolph–Johnson, Host, Einsiedler–Lindenstrauss) or leave Furstenberg's zero-entropy measure question.
@@ -430,8 +430,10 @@ per-coset form) and ℚ(√2,√3) (in S2, with triangles; rigid given T721, row
 
 - **T-A** is dynamics plus row 88: `F_μ` is an ideal by G55's transport under `Aff_F` (pushforwards of an invariant measure are invariant);
   a non-zero ideal has finite index (V2), so a.s. periodic, so a.s. a pullback (V3–V4); (iv) by amenability of `Aff_F` (virtually
-  metabelian); (v) by weak-* limits of Følner averages (an `Aff_F`-average of a translation-invariant limit keeps its non-Pull mass, since
-  `X₄ ∖ Pull` is `Aff_F`-invariant); (vi): a translate converging to an isolated `p` equals `p` eventually.
+  metabelian); (v) by the clopen-cylinder correspondence — for a clopen cylinder `[w]`, the upper Banach density of `{t : t·c ∈ [w]}` is the maximum of
+  `μ[w]` over translation-invariant `μ` on the orbit closure — and Pull being finite (a colouring all of whose finite windows are pullback
+  windows is a pullback); (vi): a translate converging to an isolated `p` equals `p` eventually. **Do not average over `U`** to get
+  rotation-invariant measures: a weak-* limit can move mass onto the closed set Pull unless Pull is isolated (§M.1).
 - **T-C**, four steps: (1) a spectral measure on `T + A + Fin` makes `x ↦ P(c(0) ≠ c(x))` (`= 3(1 − σ̂(x))/4`) continuous for the topology of
   the completion `R̄` (archimedean × profinite at the stable places × finitely many split coordinates), so the process is continuous in
   probability; (2) it extends to a stationary random colouring of `Cay(R̄, Ū)`, proper almost everywhere, with a jointly measurable version
@@ -466,7 +468,7 @@ statements only.
 
 | id | prediction | p | outcomes reachable because |
 |---|---|---|---|
-| P-TA | T-A (i)–(vi) TRUE as stated | 0.90 | a defect in (v)'s Følner step or (ii)'s `F^tr_μ` dichotomy would show FALSE/GAP |
+| P-TA | T-A (i)–(vi) TRUE as stated | 0.90 | a defect in (v)'s correspondence step or (ii)'s dichotomy would show FALSE/GAP |
 | P-TC | T-C TRUE at its scope, verified blind | 0.40 | GAP 0.45 (step 2–3), FALSE 0.15 (a random non-pullback of that spectral type by formula) |
 | P-TCA | T-C(A) TRUE given T-C's steps | 0.40 | tied to T-C; CL1's count is the only extra step |
 | P-TB1 | T-B1 (isolation) | TRUE 0.15 / FALSE 0.10 / GAP 0.75 | FALSE by a converging family of non-pullbacks; TRUE by the half-space limit |
@@ -477,3 +479,59 @@ statements only.
 | P-controls | the controls read as §S.1 says (ℚ(√11) Q-μ false; ℚ(√2,√3) both hold) | 0.95 | a control reading otherwise is a defect in T-A |
 | P-G75″ | a triangle-free pinning identity on a type-(B) plane appears | 0.03 | C11: it exists iff `F(R) ≠ 0` |
 | P-log | each job logs ≥ 3 would-have-searched lines | 0.70 | — |
+
+## Stage 5 — SAVED (§M, §X, the two briefs, the report)
+
+## §M. The modeling passes (WORKFLOW 6; `debruijn-domain-modeling` then `debruijn-obligation-modeling`, invoked fresh on §S.1)
+
+### M.1 Domain pass — what changed
+
+1. **`Aff_F`-invariance was incidental in T-A; removed.** The rotations are needed only to make `F_μ` an ideal, and push-forwards of a
+   *translation*-invariant measure by `u ∈ U` are translation-invariant (`u` normalises the translations). So `F_μ` is defined with
+   translation-invariant measures, the two versions `F^tr_μ ⊆ F^Aff_μ` collapse to one, and Q-μ, Q-tr and transience are stated with
+   translation-invariant measures and translation-orbit closures.
+2. **A defect in the first route note, caught here:** "an `Aff_F`-average keeps the non-Pull mass" is false in general — a weak-* limit can
+   move mass onto the closed set Pull (portmanteau gives `μ(Pull) ≥ lim sup`, not equality) unless Pull is isolated (T-B1). Corrected in §S.2.
+3. **Transience's density form rests on one named lemma:** for a clopen cylinder `[w]` of a subshift over a countable amenable group, the upper
+   Banach density of the visit set equals the maximum of `μ[w]` over invariant `μ` on the orbit closure — standard (Furstenberg's
+   correspondence and its converse); cited, not re-derived, in J28D's brief.
+4. **The unsampled member:** T-A's hypotheses are inhabited by ℚ(√59) itself (`X₄ ⊇ Pull ≠ ∅`); the adversarial member for "Q-tr is free"
+   is row 80's rank-one wall — outside the class, which is why the class keeps the rotations.
+5. **`Fin` was ill-posed as a union** (found in the obligation pass, applied here): characters with finitely many split components, `S`
+   varying, are not continuous for any one completion, so T-C and T-C(A) fix a finite set `S` of split places.
+
+### M.2 Obligation pass — the proofs as named local obligations (prove / assume / test)
+
+- **T-A**: A1 Pull finite, closed, invariant (one dyadic prime in `F(i)` for `d ≡ 3 mod 8`, so Galois preserves it); A2 `F_μ` a subgroup
+  (a.s. transitivity + translation invariance) and `U`-stable (push-forward), hence an ideal; A3 non-zero ⟹ finite index (V2) ⟹ a.s.
+  periodic (countable intersection) ⟹ a.s. pullback (V3–V4); A4 `F_μ ⊆ P` by the uniform measure on a periodic colouring's finite
+  translation orbit; A5 (iii) from A3; A6 (iv) by an invariant measure on any non-empty closed invariant set (`R` countable amenable);
+  A7 (v) from M.1 item 3 and Pull finite (a colouring all of whose windows are pullback windows is a pullback, by compactness); A8 (vi).
+  *Assume:* V2–V4 (row 88). *Test:* the controls of §S.1.
+- **T-C**: C1 each character of `T + A + Fin_S` is continuous for the topology `τ_S` of `G_S = ℂ² × ∏_stable O_v × ∏_{v∈S} F(i)_v`, so
+  `σ̂` is `τ_S`-continuous (dominated convergence) and `P(c(0) ≠ c(x)) = 3(1 − σ̂(x))/4` is continuous; C2 the finite-dimensional laws
+  extend continuously from `R` (dense in `G_S` — an obligation, by weak approximation) to `G_S`, giving a `G_S`-stationary random colouring
+  with a jointly measurable version; C3 for every `w` in the closure `Ū` (= the product of local circles, CLG-c), `P(c̃(x) = c̃(x + w)) = 0`,
+  so by Fubini almost every sample is proper off a null set (C14′'s format); C4 delete, in **one** application of J21-MX, the product of all
+  compact factors with `λ* < 1/3` (a product's `λ*` is at most its largest factor's), each factor's `λ*` derived (level one `≤ 2√q/(q+1)`,
+  new levels `≤ 2/(p+1)`, the ramified place by Lemma P); C5 row 92's C14 on what is left (real places by `m₁ ≤ 0.2470`, the remaining odd
+  stable places by V3's all-levels ratios, `S` at ratio 0, the tight dyadic place) — almost every sample is a pullback off a null set;
+  **C6 the null set misses `R` almost surely** (stationarity: `P(x ∈ N) = 0` for each `x`, and `R` is countable), so the original colouring
+  is a pullback almost surely. *Assume:* C14 with `[AmbrusEtAl2023]`, J21-MX (one mind, "given"), FS-66 at 11 and 19, weak approximation.
+  *Test (seconds, exact):* `λ*` of `Γ_q` at level one for ℚ(√59)'s stable `q ≤ 47` and at the ramified 59 — which factors are deletable.
+  *Mutation audit:* at ℚ(√11) the statement must fail (C9's colouring has spectral type `T + A`), and it fails at C5 (the stable 7's ratio
+  2/7 > 1/4) — the one hypothesis whose deletion breaks the proof is the one the control violates.
+- **T-C(A)**: C1–C4 unchanged; C5 by CL1's count (no tight place; every factor below 1/4).
+- **T-B2**: the local obligation is the propagation lemma — `z ∈ D`, `c(z) = j` ⟹ `z + {s ∈ U : p(z + s) = j} ⊆ D` (one line: `c(z + s) ≠ j =
+  p(z + s)`); the global claim needs **B2-growth**: iterated, colour-dependent propagation along `U`'s residue classes reaches positive upper
+  Banach density. **T-B1**: the local obligation is the re-centring limit; its named obstacle is the exhaustion (§S.2).
+
+## §X. The planner's would-have-searched log
+
+- Would have run a solver on "a four-colouring of a ball of ℚ(√59)'s lattice agreeing with a pullback on a patch and differing somewhere"
+  (a finite shadow of T-B1). Instead: posed T-B1 and T-B2 as derivations with the propagation lemma derived by hand.
+- Would have searched for a triangle-free forcer of `(0, 4)`. Instead: stage Y1, dated after 2026-10-01, priced by G65's band.
+- Would have computed χ_gf of layered configurations over ℚ(√59) by LP. Instead: stage Y2, post-ban, with the configurations to be fixed by
+  a derivation first.
+- Would have scanned sample random colourings for C0-type spectra. Instead: T-C's continuity-in-probability route, which kills them by
+  derivation if it closes.
