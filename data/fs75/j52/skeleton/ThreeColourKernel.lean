@@ -37,8 +37,9 @@ def relMap (s : Fin m → A) : (Fin m → ℤ) →+ A where
   map_zero' := by simp
   map_add' r r' := by simp [add_smul, Finset.sum_add_distrib]
 
-/-- `3·min_{x ∈ [1/3, 2/3]^m} r·x = Σ_j min(r_j, 2r_j)`: the box minimum, scaled to stay in `ℤ`. -/
-def boxMin (r : Fin m → ℤ) : ℤ := ∑ j, min (r j) (2 * r j)
+/-- **The least rise along `r`**: `Σ_j min(r_j, 2r_j) = |r⁺| − 2|r⁻|`, the least height change of a word pair
+`(r⁺, r⁻)` whose steps lie in `{1, 2}`; equal to `3·min_{x ∈ [1/3, 2/3]^m} r·x`, the box minimum of the relation form. -/
+def minRise (r : Fin m → ℤ) : ℤ := ∑ j, min (r j) (2 * r j)
 
 /-- **A winding of `s`**: an additive functional on the relation lattice bounded below by the box — the relation
 form of a point of `Θ₃` (for `x ∈ Θ₃`'s relation form, `W r = r·x`), with no real numbers. -/
@@ -46,7 +47,7 @@ structure Winding (s : Fin m → A) where
   /-- The functional. -/
   toHom : (relMap s).ker →+ ℤ
   /-- The box bound, `Σ_j min(r_j, 2r_j) ≤ 3·W(r)`. -/
-  boxMin_le : ∀ r : (relMap s).ker, boxMin (r : Fin m → ℤ) ≤ 3 * toHom r
+  minRise_le : ∀ r : (relMap s).ker, minRise (r : Fin m → ℤ) ≤ 3 * toHom r
 
 /-- A colouring `c : A → ZMod 3` is **proper along `s`** when every generator step changes the colour — exactly
 properness on `addCayley (Set.range s)`. -/
@@ -162,7 +163,7 @@ theorem wind_add {c} (hc : ProperAlong s c) {u v u' v' : Fin m → ℕ}
 theorem wind_cast {c} (hc : ProperAlong s c) {u v : Fin m → ℕ} (huv : wsum s (word u) = wsum s (word v)) (a : A) :
     ((wind s c a u v : ℤ) : ZMod 3) = 0 := sorry
 
-theorem boxMin_le_wind (r : Fin m → ℤ) (a : A) : boxMin r ≤ wind s c a (posPart r) (negPart r) := sorry
+theorem minRise_le_wind (r : Fin m → ℤ) (a : A) : minRise r ≤ wind s c a (posPart r) (negPart r) := sorry
 
 end Lift
 
@@ -226,7 +227,7 @@ def lincomb : List ℤ → List (List ℤ) → List ℤ
   | _, _ => []
 
 /-- `Σ_j min(q_j, 2q_j)`. -/
-def boxMinL (q : List ℤ) : ℤ := (q.map fun x => min x (2 * x)).sum
+def minRiseL (q : List ℤ) : ℤ := (q.map fun x => min x (2 * x)).sum
 
 /-- The children's constraints of a branch on `r` over `lo..hi`. -/
 def eqRun (r : List ℤ) : ℤ → ℕ → List Con
@@ -243,7 +244,7 @@ def leafOk (path : List Con) (mults : List (ℕ × ℤ)) : Bool :=
   mults.all (fun pm => decide (pm.1 < path.length) && ((path.getD pm.1 ⟨[], 0, true⟩).isEq || decide (0 ≤ pm.2))) &&
     let Q := mults.foldr (fun pm acc => addL (smulL pm.2 (path.getD pm.1 ⟨[], 0, true⟩).coef) acc) []
     let P := (mults.map fun pm => pm.2 * (path.getD pm.1 ⟨[], 0, true⟩).rhs).sum
-    decide (3 * P < boxMinL Q)
+    decide (3 * P < minRiseL Q)
 
 mutual
 /-- Walk the tree; every constraint is derived from `(r, lo, hi)`, none is stated by the certificate. -/
@@ -306,57 +307,68 @@ example : ({ tinyK4 with tree := .branch 0 1 1 [.leaf [(0, 1)], .leaf [(0, 1)]] 
 
 end ThetaCert
 
-/-! ## §4 Leaf 3: the lattice in the plane over `ℚ(√167)` -/
+/-! ## §4 Leaf 3: a certificate's lattice in the plane over any real field holding `√d` -/
 
-namespace Sqrt167
+namespace ThetaPlane
 
 open ThreeColour ThetaCert
 
-/-- `F = ℚ(√167)`. -/
-noncomputable abbrev F : Subfield ℝ := SquareClass.fieldOfRadicands {167}
-
-/-- `(a, b, c, e) ↦ ((a + b√167)/420, (c + e√167)/420)`, read off the first four coordinates; additive, and not
-required to be injective. -/
-noncomputable def iota : (ℕ → ℤ) →+ ℂ where
-  toFun v := ⟨((v 0 : ℝ) + v 1 * Real.sqrt 167) / 420, ((v 2 : ℝ) + v 3 * Real.sqrt 167) / 420⟩
+/-- `(a, b, c, e) ↦ ((a + b√d)/D, (c + e√d)/D)`, read off the first four coordinates; additive, and not required to
+be injective. -/
+noncomputable def iota (d D : ℕ) : (ℕ → ℤ) →+ ℂ where
+  toFun v := ⟨((v 0 : ℝ) + v 1 * Real.sqrt d) / D, ((v 2 : ℝ) + v 3 * Real.sqrt d) / D⟩
   map_zero' := sorry
   map_add' := sorry
 
-theorem iota_mem (v : ℕ → ℤ) : iota v ∈ planeOver F := sorry
+theorem iota_mem {d D : ℕ} {F : Subfield ℝ} (hF : Real.sqrt d ∈ F) (v : ℕ → ℤ) : iota d D v ∈ planeOver F := sorry
 
-/-- The two integer identities make a unit vector: `a² + 167b² + c² + 167e² = 420²` and `ab + ce = 0`. -/
-theorem norm_iota {v : ℕ → ℤ} (h1 : v 0 ^ 2 + 167 * v 1 ^ 2 + v 2 ^ 2 + 167 * v 3 ^ 2 = 420 ^ 2)
-    (h2 : v 0 * v 1 + v 2 * v 3 = 0) : ‖iota v‖ = 1 := sorry
-
-/-- The unit test on one listed vector, as a `Bool`. -/
-def unitOk (u : List ℤ) : Bool :=
-  u.getD 0 0 ^ 2 + 167 * u.getD 1 0 ^ 2 + u.getD 2 0 ^ 2 + 167 * u.getD 3 0 ^ 2 == 420 ^ 2 &&
+/-- The unit test on one listed vector, as a `Bool`: `a² + d·b² + c² + d·e² = D²` and `ab + ce = 0`. -/
+def unitOk (d D : ℕ) (u : List ℤ) : Bool :=
+  u.getD 0 0 ^ 2 + d * u.getD 1 0 ^ 2 + u.getD 2 0 ^ 2 + d * u.getD 3 0 ^ 2 == (D : ℤ) ^ 2 &&
     u.getD 0 0 * u.getD 1 0 + u.getD 2 0 * u.getD 3 0 == 0
 
-/-- **T41's 36 vectors** `{1, v, z}·U_R` (18 ± pairs), `v = (83 + i√167)/84` the type-M rotation `n = 42`, and the
-1,050-leaf tree of `data/fs73/verify-v2/L21cc6506-sub-1vz-empty.json.gz`, multipliers scaled to integers per leaf.
-Emitted by the implementer's `tools/j52k_emit.py`; the skeleton holds a stand-in. -/
-def cert167 : Cert := sorry
+/-- The two integer identities make a unit vector. -/
+theorem norm_iota {d D : ℕ} (hD : D ≠ 0) {v : ℕ → ℤ}
+    (h1 : v 0 ^ 2 + d * v 1 ^ 2 + v 2 ^ 2 + d * v 3 ^ 2 = (D : ℤ) ^ 2) (h2 : v 0 * v 1 + v 2 * v 3 = 0) :
+    ‖iota d D v‖ = 1 := sorry
 
-theorem cert167_units : cert167.units.all unitOk = true := sorry -- `decide +kernel`
-theorem cert167_check : cert167.check = true := sorry            -- `decide +kernel`
+/-- A three-colouring of the plane over `F ∋ √d` pulls back to a colouring proper along the certificate's units. -/
+theorem properAlong_of_colorable {d D : ℕ} (hD : D ≠ 0) {F : Subfield ℝ} (hF : Real.sqrt d ∈ F) (c : Cert)
+    (hu : c.units.all (unitOk d D) = true) (h : ((unitDistance ℂ).induce (planeOver F)).Colorable 3) :
+    ∃ col : (ℕ → ℤ) → ZMod 3, ProperAlong c.gen col := sorry
 
-/-- The pulled-back colouring is proper along the 36 vectors. -/
-theorem properAlong_of_colorable (h : ((unitDistance ℂ).induce (planeOver F)).Colorable 3) :
-    ∃ col : (ℕ → ℤ) → ZMod 3, ProperAlong cert167.gen col := sorry
+/-- **The consumer.** A passing certificate whose units are unit vectors of `ℚ(√d)²` with denominator `D` proves
+`χ(F²) ≥ 4` for every real field `F` holding `√d`. One line per field: FS-60's quadratic witnesses, ℚ(√47)'s tree
+(if it is in this format), the 60-vector control. -/
+theorem four_le_chromaticNumber_of_cert {d D : ℕ} (hD : D ≠ 0) (c : Cert) (hu : c.units.all (unitOk d D) = true)
+    (hc : c.check = true) {F : Subfield ℝ} (hF : Real.sqrt d ∈ F) :
+    4 ≤ ((unitDistance ℂ).induce (planeOver F)).chromaticNumber := by
+  have key : ¬ ((unitDistance ℂ).induce (planeOver F)).Colorable 3 := fun h => by
+    obtain ⟨col, hcol⟩ := properAlong_of_colorable hD hF c hu h
+    exact c.not_properAlong hc col hcol
+  simpa using add_one_le_chromaticNumber_iff_not_colorable.mpr key
+
+end ThetaPlane
+
+/-! ## §5 Leaf 4: ℚ(√167) -/
+
+namespace Sqrt167
+
+/-- **T41's 36 vectors** `{1, v, z}·U_R` (18 ± pairs; `v = (83 + i√167)/84`, the type-M rotation `n = 42`) and the
+1,050-leaf tree of `data/fs73/verify-v2/L21cc6506-sub-1vz-empty.json.gz`, multipliers scaled to integers per leaf by
+`tools/j52_intcert.py --emit-lean` (untrusted; the kernel re-checks). The skeleton holds a stand-in. -/
+def cert : ThetaCert.Cert := sorry
+
+theorem cert_units : cert.units.all (ThetaPlane.unitOk 167 420) = true := sorry -- `decide +kernel`
+theorem cert_check : cert.check = true := sorry                                  -- `decide +kernel`, 19.4 CPU s measured
 
 end Sqrt167
 
-/-! ## §5 Leaf 4: the headline -/
-
-open Sqrt167 in
-/-- **`χ(ℚ(√167)²) ≥ 4`** (row 79 in the kernel): the 36 unit vectors `{1, v, z}·U_R` have no winding, so the plane
+/-- **`χ(ℚ(√167)²) ≥ 4`** (row 79 in the kernel): the 36 unit vectors `{1, v, z}·U_R` carry no winding, so the plane
 over `ℚ(√167)` has no proper three-colouring. No finite graph is built; standard three axioms, no native purchase. -/
 theorem four_le_chromaticNumber_planeOver_sqrt167 :
-    4 ≤ ((unitDistance ℂ).induce (planeOver (SquareClass.fieldOfRadicands {167}))).chromaticNumber := by
-  have key : ¬ ((unitDistance ℂ).induce (planeOver F)).Colorable 3 := fun h => by
-    obtain ⟨col, hcol⟩ := properAlong_of_colorable h
-    exact cert167.not_properAlong cert167_check col hcol
-  simpa using add_one_le_chromaticNumber_iff_not_colorable.mpr key
+    4 ≤ ((unitDistance ℂ).induce (planeOver (SquareClass.fieldOfRadicands {167}))).chromaticNumber :=
+  ThetaPlane.four_le_chromaticNumber_of_cert (by norm_num) Sqrt167.cert Sqrt167.cert_units Sqrt167.cert_check
+    (SquareClass.sqrt_mem_fieldOfRadicands rfl)
 
 end HadwigerNelson

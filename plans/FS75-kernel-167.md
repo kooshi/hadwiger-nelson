@@ -397,7 +397,7 @@ kernel port; no mathematics is claimed new except the form of the criterion the 
 | 1 | permutation induction | `List.Perm` with `nil`/`cons`/`swap`/`trans` (`induction h` works), `Perm.recOnSwap'`, `perm_middle` | core `Init/Data/List/Perm.lean` |
 | 1 | mod-3 to equality | `ZMod.intCast_eq_intCast_iff'`, `ZMod.intCast_zmod_eq_zero_iff_dvd` | Mathlib `Data/ZMod/Basic.lean` |
 | 1 | `r = r⁺ − r⁻` | `Int.toNat_sub_toNat_neg : ↑n.toNat - ↑(-n).toNat = n` | core `Init/Data/Int/Order.lean` |
-| 1 | word counts | `List.perm_iff_count`, `List.count_flatMap`, `List.count_replicate` (for `word_add_perm` by counts) | core / Mathlib |
+| 1 | word counts | `List.perm_iff_count`, `List.count_flatMap`, `List.count_replicate` (for `word_add_perm` by counts); for `wsum_word`, `Finset.sum_list_map_count` (the additive form of `prod_list_map_count`); **`List.sum_flatMap` is not held under that name** (grep, stage 3) | core `Init/Data/List/{Perm,Count}.lean`; Mathlib `Algebra/BigOperators/Group/Finset/Basic.lean:561` |
 | 1 | compactness (**not needed**, 1.3) | `IsCompact.tendsto_subseq` exists | Mathlib `Topology/Sequences.lean:298` |
 | 1 | the house's `addCayley` API | `addCayleyMap`, `addCayleyColoring`, `unitQuadrance_eq_addCayley` | `LocalGlobal.lean` |
 | 2 | the checker pattern | `CayleyCertificate.Cert.check`/`sound`, `NarrowCert`: a `Bool` over literal data, soundness via `List.all_eq_true` | `CayleyCertificate.lean`, `NarrowFan.lean` |
@@ -503,7 +503,8 @@ return `false` under `decide +kernel`; the 36-vector certificate passes (S.0). T
 - 2e the leaf: `leafOk path mults` and `Good W path` give `boxMin Q ≤ 3·W(Q) ≤ 3P < boxMinL Q = boxMin Q` — false.
 - 2f the walk: **mutual structural recursion on the nested `Tree`** (theorems `checkTree_sound` / `checkKids_sound` mirroring `checkTree` /
   `checkKids`; Lean 4.32 accepts nested structural recursion in theorems), `checkKids` pairing each child with its constraint.
-  **The one real risk of the milestone**; the fallback is `Tree.rec` with an explicit `motive_2` for `List Tree`.
+  **The one real risk of the milestone** — de-risked at stage 3: a mutual pair of theorems by nested structural recursion on this `Tree`
+  elaborates (scratch test, not committed); the fallback is `Tree.rec` with an explicit `motive_2` for `List Tree`.
 
 **Leaf 3.** `iota` additive (`Complex.ext`, `push_cast`, `ring`); `iota_mem` (`sqrt_mem_fieldOfRadicands`, subfield closure under the
 integer operations and division by 420); `norm_iota` (`Chain.norm_eq_one_of_sq`, `Real.sq_sqrt`, `linear_combination` of the two integer
@@ -532,3 +533,81 @@ Not checked here (`data/fs73/` is read-only and the question is J52K's first ste
 ### Would have searched here (§S)
 
 - None. The certificate was re-checked, transformed exactly (integer scaling per leaf) and emitted; no new certificate was produced.
+
+## Stage 4 — SAVED
+
+## §P — registered predictions (before J52K runs; both outcomes of each are reachable)
+
+| id | claim | probability | the informative outcome | the uninformative one, and why it is reachable |
+|---|---|---|---|---|
+| P-elem | leaf 1 closes with no analysis: no Følner sets, compactness, Bolzano–Weierstrass, Farkas lemma, descent or torsion-freeness — only `List.Perm`, `ZMod 3`, `omega`, `Finset` sums (1.3) | 0.90 | an analytic lemma is needed after all — 1.3 skipped a step (J50's hunch `leaf-one-is-elementary`'s falsifier, sharpened) | met — reachable if the additivity or decomposition step in S.3 1f–1g fails |
+| P-tree | the nested-`Tree` soundness closes by mutual structural recursion, without the `Tree.rec` fallback | 0.80 | the fallback is needed (the recursion is accepted but the proof's IH shape fights it) | met |
+| P-price | J52K lands the headline sorry-free, gate green, within 2.5 hours of wall clock | 0.70 | it takes longer — which leaf, named, is the finding | met |
+| P-check | J52K's `cert_check` in the real module reproduces §S.0's 19.4 CPU s within ±25 % and stays under 8 GB | 0.85 | a different cost in the module (elaboration of the literal, or the build's options) | met |
+| P-47fmt | ℚ(√47)'s 2,997-node tree (FS73-T26) is **not** in V2's relation-branching format (653 KB for 2,997 nodes reads like a `θ`-space tree) | 0.60 | it is in V2's format, and ℚ(√47)'s `≥ 4` becomes a one-line instance | it is not, and ℚ(√47) needs another checker |
+| P-60 | the 60-vector certificate (30,344 leaves, 29× the leaves) checks in one module inside a 60 GB slot | 0.40 | it does — the checker scales as a control | memory or time forces a split (the kernel cost model: literal size) |
+
+**Measured before registration, not a prediction:** the 1,050-leaf check passes under `decide +kernel` in 19.4 CPU s and 6.04 GB (§S.0); leaf
+1's children 1a–1d closed on the first elaboration (§S.0). J50's hunch `leaf-one-is-elementary` is **supported and sharpened** by S.0 and 1.3: its
+claim needed "a height on ℕ^m … box averages and Bolzano–Weierstrass"; the obligation pass removes the averages and the compactness too. Its
+falsifier did not fire; the hunch's status moves from open to supported (one mind; J52K's stage 2 is the test).
+
+## §M — the modeling passes (each freshly invoked with the Skill tool, in order domain → obligation → experience)
+
+**Domain (`debruijn-domain-modeling`).**
+- *The cut:* the relation lattice, the winding, and step-properness are intrinsic; the dimension 4, the denominator 420, the span `Λ`, injectivity
+  of `iota` and torsion-freeness are incidental to the ⟹ direction and are gone from the statements (the ambient group is `ℕ → ℤ`, read with
+  zero padding, so certificates of any dimension share one type).
+- *Placement:* `Winding` bundles its functional with its bound (they never travel apart); `ProperAlong` is a `Prop` beside the colouring;
+  `Cert.check` is a `Bool` whose only `Prop` face is the soundness theorem, so no drifting `Bool`/`Prop` pair.
+- *Ugliness read:* the `{c}` re-binding in the lift lemmas is deliberate (the section's `c` is explicit for the definitions; a lemma needing
+  properness takes `c` from `hc`); the balanced-pair hypothesis `wsum (word u) = wsum (word v)` threaded through four lemmas is the relation
+  condition in the form the proofs consume, kept.
+- *The next lemma for free:* the stub's next leaf (S1 over number fields, FS81-T2) needs the real point `x`; it states in this vocabulary as
+  `Winding s → ∃ x ∈ [1/3, 2/3]^m, ∀ r ∈ ker, r·x ∈ ℤ` (finite LP duality from `minRise_le`), a separate lemma with no restatement of anything
+  here. The model passes.
+
+**Obligation (`debruijn-obligation-modeling`).**
+- *Additivity, strengthened:* instead of constructing the common part `t` of two decompositions, a lemma `wind_eq_of_sub_eq` (balanced pairs with
+  the same integer difference have the same winding: `u + v' = u' + v`, then `wind_add_diag` twice) makes `map_add` two lines.
+- *Divisibility:* state `3 * W r = wind …` once; every downstream arithmetic step is then `omega`.
+- *The walk:* `checkKids_sound` carries "some constraint in the remaining list holds" (an existential, not an index), so the nested recursion is
+  structural and coverage is a separate lemma about `childCons`.
+- *The leaf:* one induction over the multiplier list with a tupled conclusion (`Q` in the kernel ∧ `Q.length ≤ m` ∧ `W.ext Q ≤ P`) — the
+  accumulator's type is the invariant.
+- *Prove / test / assume:* prove the three reusable theorems and the headline; test `tinyK4` and its plants, the inhabitant, a plant on the real
+  certificate; assume nothing beyond the standard three axioms.
+- *Mutation audit (in J52K's brief):* delete `hs` from `nonempty_winding_of_colorable` and the sign guard from `leafOk`; each proof must break.
+
+**Experience (`debruijn-experience-modeling`).**
+- *Renamed* `boxMin` → `minRise` (with `minRise_le`, `minRise_le_wind`, `minRiseL`): the value is `|r⁺| − 2|r⁻|`, three times the box minimum,
+  and the old name needed its docstring to say so.
+- *Generalised the transfer* to any `(d, D)` and any real field holding `√d`: `ThetaPlane.iota d D`, `unitOk d D`, `norm_iota`,
+  `properAlong_of_colorable`, and the consumer **`ThetaPlane.four_le_chromaticNumber_of_cert`** — the next consumers (ℚ(√47)'s tree if in
+  format, the 60-vector control, FS-60's thirteen quadratic witnesses) are one line each, and the headline is itself one line.
+- *The headline's name* is the stub's (`four_le_chromaticNumber_planeOver_sqrt167`), kept though its siblings spell the radicand in words
+  (`…_eleven`, `…_two_three`): the stub fixed it and the brief quotes it; no alias minted.
+- *Docstrings* state what is *not* built (no finite graph, no `θ`), so a reader does not go looking for it.
+
+## §X — would have searched here
+
+- None. Every exact computation checked or transformed the existing certificate (the frozen checker re-run; the integer scaling; the kernel check
+  of the emitted literal); nothing was searched and no new certificate was produced. The one move declined: re-running V2's finder for a smaller
+  60-vector certificate as the scaling control — the existing 30,344-leaf one is the control (P-60).
+
+## Theorems this phase proved
+
+- **The winding form of the criterion's ⟹ direction** (1.3): a colouring of an abelian group proper along `s` carries an additive `W` on
+  `ker(r ↦ Σ r_j • s_j)` with `Σ_j min(r_j, 2r_j) ≤ 3W(r)`; and a V2 relation-branching certificate with integer multipliers leaves no such `W`.
+  [hand, one mind; its first seven lemmas (children 1a–1d) kernel-checked in the skeleton, not yet in `Proofs/`] — `plans/FS75-kernel-167.md`
+  §1.3, §S.3; `data/fs75/j52/skeleton/ThreeColourKernel.lean`. It is FS73-T42's steps 1–3 without its averaging, no novelty claimed.
+- **T41's certificate in integer form passes the skeleton's checker in the kernel** [kernel, in a scratch module — not committed as a module; the
+  module is J52K's] — 19.4 CPU s, §S.0; `tools/j52_intcert.py` (exact mirror, six plants each refused for its own reason, restore verified).
+- **`tinyK4`**: `S = {1, 2, 3}` in `ℤ` has no winding, by a five-leaf certificate [hand; its `check` kernel-checked in the skeleton] — §S.2.
+
+## Edits proposed for the front-page lane (not made here)
+
+- `plans/STUB-three-colour-criterion-kernel.md`: under "Shape", item 1 — the kernel needs only the winding form; averages and compactness are
+  needed for the full criterion (FS81-T2's route), not for any relation-branching certificate. Its status: "open; J52K running" once launched.
+- `plans/FRONTIER-STUBS.md` row FS-75: the same one line.
+- `BIBLIOGRAPHY.md`: nothing new.
