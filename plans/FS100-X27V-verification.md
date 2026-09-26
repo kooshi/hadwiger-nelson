@@ -230,3 +230,48 @@ COL-E; an argument must use the group structure of `R̂` or the colouring. [hand
 ### 3.5 Would have searched here (stage 3)
 
 - None.
+
+## Stage 4 — SAVED (fallback: X27D's lemma statements, read after stage 3 was committed at 9feb1e73)
+
+Read at 12:09–12:13 UTC: `plans/FS100-X27D-derivation.md` — its theorems table, the stage-2 statement blocks (§2.1–§2.6), its audit (§2.7)
+and "why the method stops" paragraph. **Disclosed:** two short proofs were on screen while reading statements (X27D-L0's four-line proof;
+(S4)'s two-line proof), and one row of X27D's stage-3 flip table (line 249, `δ_μ = 1 − σ_μ(T₄)` "lower only"), seen after my stage 3 was
+committed. Nothing else of X27D's proofs, tools or data was opened.
+
+### 4.1 X27D's statements, checked one by one against my own derivation (`T₄` = my `D`; `I` = my `4R`)
+
+| X27D statement | my counterpart | check |
+|---|---|---|
+| X27D-EQ: given MR, TR-ROT ⟺ Q-μ ⟺ `M′ = ∅` | X27V-EQ | **agree**, same route |
+| X27D-L0: `μ` carried by Pull iff `σ_μ(T₄) = 1` | used in X27V-R1 (I routed ⟸ through row 88's V3) | **agree**; X27D's route is shorter and better: an `I`-periodic proper colouring factors through `R/I` and is a pullback by definition, so V3 is not needed |
+| X27D-PC: given MR, `U`-averages of `σ_μ|_B` (`B` Borel, `U`-invariant) converge onto `T₄` with mass `σ_μ(B)`, along every Følner sequence | my "collapse" and X27V-R2's last clause (`B = R̂ ∖ E`) | **TRUE**, re-derived: the two parts over `B`, `Bᶜ` are positive and sum to a limit carried by `T₄`, so each is; mass is kept on compact `R̂` |
+| X27D-TA: given MR, `σ_μ((T + A) ∖ T₄) = 0` | X27V-TA | **agree** (same mechanism: finite torsion orbits and archimedean annuli are compact, `U`-invariant, `T₄`-disjoint) |
+| X27D-SPL: a finite measure on `E_S`-characters with a non-zero component at a split `v ∈ S` is carried to a multiple of Haar along some Følner sequence | X27V-FS steps 1–3 (I proved the weaker "the average of `χ(4u)` tends to 0 uniformly on compact pieces", along an averaging scheme) | **TRUE in substance and stronger than mine**: my step 2 works with `4` replaced by any `y ≠ 0` (`y_w ≠ 0`), which gives every non-trivial Fourier coefficient → 0, i.e. a Haar limit; covering all of `B^{(j)}_{S,v}` needs a diagonal choice of ranges, which dominated convergence allows. That the averaging can be a Følner **sequence** (not only a scheme) I did not check; nothing downstream needs it, since X22D-RT covers both |
+| X27D-E: given MR, `σ_μ|_E = σ_μ|_{T₄}` | X27V-TA + X27V-FS | **agree** — found independently, blind, by the same two mechanisms (isometric places keep compact orbits away from `T₄`; a split place expands and the Ramanujan-type sum over `O_v^×` kills the phase). The shared inputs, and so the shared risks: X22D-QR = X22V-F2, and weak approximation for the conic |
+| X27D-ATT (S1) `σ_μ = σ|_{T₄} + ρ₀`, `ρ₀` `E`-null, mass `δ > 0` | X27V-R2 | **agree** |
+| (S1) "Haar-singular" (table line) | not in mine | **TRUE**, re-derived: an absolutely continuous part `f·m` averages under `U` to `(∫f)·m` (mean ergodic theorem; `U` has no finite orbit on `R ∖ {0}`, so it acts ergodically on `(R̂, m)`), which is not carried by `T₄` |
+| (S2) `ρ₀` is `T₄`-attracted; `ρ₀`-a.e. character attracted along a subsequence of any given Følner sequence | X27V-R2; my X27V-PM on why the per-point form is weaker | **TRUE** (L¹ ⟹ a.e. along a subsequence, over the countable family `min(1, k·dist(·, T₄))`) |
+| (S3) `p(x) = P(c(x) = · | 𝒜_E)` is `I`-periodic; `ρ̂₀(u) = −(4/3)P(c¹(0) = c²(u))` depends only on `u mod I` | not in mine | **TRUE**, re-derived: `h = P_E g` has spectral measure `σ|_E = σ|_{T₄}`, so `‖h(· + i) − h‖² = 2∫(1 − Re χ(i)) dσ_h = 0` for `i ∈ I`; `p` is affine in `h`; then FL-K (X22D-FLK2) and `I`-periodicity of `p` give the second clause. **New to me and useful**: a counterexample is a random colouring over an exactly `𝔓⁴`-periodic conditional law |
+| (S4) `f(z) = P(c(0) ≠ c(z))` on `I` subadditive, symmetric, `ρ̂₀ = δ − (4/3)f` on `I`, `f ≢ 0`, Banach-negligible on every circle `U·y` | X22D-RT's window form, X27V-R2 | **agree** |
+| NA₀: "No nonzero finite positive `E`-null measure on `R̂` is `T₄`-attracted under `U`"; given MR, NA₀ ⟹ TR-ROT ⟺ Q-μ | COL-E (restricted to `E`-null remainders of colourings' spectra) | **agree on the wall; the two named steps differ in strength.** NA₀ ⟹ COL-E, and given MR COL-E ⟺ Q-μ (COL-E is the exact equivalent, NA₀ a sufficient condition that might be false while Q-μ holds — X27D says the converse is not claimed, consistently). NA₀ is pure dynamics of `U ↷ R̂`, which is the better form to hand to the home discipline |
+| X27D-FL: given MR, a concave, `U`-invariant, upper semicontinuous `Q ≥ 0` vanishing on Pull-measures vanishes on `M_T`; witnesses the flip iff `M′ = ∅`; without MR proves TR-ROT | X27V-F2 | **agree** |
+| X27D-FLit: the flip as worded is TRUE with an affine, weak-* continuous window-defect series, not rotation-invariant | X27V-F1 (a distance function) | **agree**; X27D's witness is better (affine as well as continuous): `Σ_k 2^{−k} P(c|_{B_k} ∉ Pull|_{B_k})` is zero on Pull-measures and positive on `M′` (cylinders are clopen; `c ∈ Pull` iff every window is a Pull window, Pull finite) |
+
+**Differences of truth: none.** Every X27D statement I checked is TRUE by my own derivation or re-derivation; the two records reached the
+same verdict (TR-ROT GAP; given MR, TR-ROT = Q-μ; the `E`-part dies; the wall is an `E`-null remainder attracted to the finite `D = T₄`), and
+the same flip verdicts, blind.
+
+### 4.2 A correction to my own stage 3 (recorded here, not by editing a saved stage)
+
+Stage 3's verdict table says "Closed-set rigidity handles single characters" and §2.3 says rows 95, 98 and Bergelson–Moragues "give it
+**for points**". **That is an over-claim.** What I proved is only the conditional: *if* the orbit closure of `χ ∉ T + A` carries an invariant
+measure off `D`, some scheme carries `δ_χ` off `D`. That the orbit closure does carry one is **not** proved here: rows 95 and 98 are band
+rigidity (orbits avoiding a band), not a classification of closed invariant sets, and X27D's homoclinic remark shows the rank-one analogue
+**fails** for points (a homoclinic point of a hyperbolic toral automorphism is attracted to `0` along every Følner sequence of `ℤ`). So the
+single-character case of COL-E/NA₀ is itself open, a higher-rank (non-lacunary, product-formula) statement, and X27V-PM is a second,
+independent obstruction on top of it. The verdict (GAP) is unchanged; the named step's description is corrected to: *single characters —
+open (a higher-rank homoclinic question); measures — open, and not reducible to points in general (X27V-PM).*
+
+### 4.3 Would have searched here (stage 4)
+
+- None.
