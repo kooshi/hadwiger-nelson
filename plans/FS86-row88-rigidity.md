@@ -605,3 +605,168 @@ applies the § B lines — for these 19 ids, and at the time of this stage also 
 same tree (not this job's).
 
 **Would have searched here (stage 2):** none — filing only.
+
+### Stage 3 — SAVED (the re-reads, the predictions, the verdict, the tallies, the ban measurement)
+
+#### 3.1 The §G re-read (WORKFLOW 9: which extractions paid; which entry should have borne and was not used)
+
+**Paid** — the extraction reached a derivation step or a verdict:
+
+| entry | what it did in the milestone |
+|---|---|
+| G13, row 4 | gap-freeness of the tight `P₄` is the propagation step of both T-C routes (J28D C7, J28V C6) and the "8 of 24 residue classes" of R88-B2-1 |
+| G21 | the decomposition's halves were kept apart (measures vs transience); the verifier's list was fixed first (J28V's quotation check: identical); T-A2's coherence note is G21's selection lesson turned on the priors |
+| G27 | the Galois flip joined `Aff_F`, and its use needed the scope repair (`τ` commuting with conjugation) both minds reached |
+| G30 | failure modes 5 and 7: the controls read as inhabitants (ℚ(√11) outside, K and ℚ(√2,√3) inside); the ladder entered ergodic theory of amenable actions (measure centres, Furstenberg correspondence) |
+| G43 | R88-TC-tab's hard places (11, 19) are the sieve's usable planes |
+| G46 | naming the object classically — a compact colouring space with an amenable action — is what J35's gate found in print (measure centre, frozen, expansive subdynamics) |
+| G48 | T-C is the colouring-level Hasse principle on the spectral class `T + A + Fin_S`; T-C(A) its type-(A) form |
+| G49, G50 | two gates (J28's, J35's); J35 read `[BergelsonMoragues2021]`, `[ChenDai2017]`, `[LevitzMott1972]` and BMK §3.2 in full sections; the measure-rigidity papers stay unheld |
+| G51 | one derivation agent and one blind verifier: two routes over common inputs for T-C and T-C(A); the same named step for both gaps |
+| G53 | the count is a density count (each class exactly 1/4 at Hoffman equality) |
+| G54 | "slack at the field level, so spectra cannot pin" — exactly why T-C runs through `m₁`; the mutation audit (Hoffman's 0.2871 flips the count's sign) is G54 in one line |
+| G55 | `F_μ` is an ideal by push-forward along the rotations (T-A (ii)) |
+| G60 | T-A (ii) is G60's sandwich `F ⊆ F_μ ⊆ P` at the field level |
+| G66, row 75 | FS-66's certificates at 11 and 19 are the non-Hoffman inputs of both routes |
+| G71, G72, G73 | the invariant is averaged (invariant measures), higher-order (`m₁`, not second moments — J28V's C0 remark shows the two-point route cannot work over a real field) |
+| G76 | the frame lifted from `R̂` to `X₄`; P-real scored; its reading narrowed (drafts, stage 4) |
+
+**Bore and was not used by either derivation** (the extraction was sound but the route went elsewhere): **G7** and **G62** (the rotation `n = 15`
+and the layers `b·U₅`: the proofs went through completions, not layers); **G74** (layer gluing: replaced by an extension to `G_S` and a count);
+**G11, G15, G39, G57, G65, G69** (stage Y only: post-ban, not run). None is a defect; each is stage Y's or a route not taken.
+
+**Should have borne and was marked silent — one miss, a new 3.1 instance:** **G44** (Kloosterman control) was marked "silent: Kloosterman control of
+large planes", but Weil's bound is an input of both T-C routes — J28D's `2√p/(p+1) < 1/3` from `p = 37` (§3.2 C4) and J28V's exact form
+`36p < (p+1)²` from `p = 34` (§2.1 C4, R88-J28V-3) put every large stable place into the tight factor or the tail. **The miss's shape:** an entry
+read by its headline object ("large planes") rather than by its inequality, which is what the milestone used. G44's *Do* line reads "at any new prime
+compute the spectrum first"; a draft that adds "a stable place of a field plane past `p = 37` is below `1/3` by Weil and never needs its own
+certificate" is in stage 4.
+
+**Two mis-extractions, corrected in the records (the plan's §S.2, recorded here since this job may touch §R-close only):** (a) the plan's
+T-C route used **J21-MX** (row 109) to delete compact factors; J28D §3.1: "J21-MX … returns a selected colouring `φ` of the other factors; it says
+nothing about the structure of `c` itself" — the plan read the lemma by its conclusion's shape, not its quantifier (G30 failure mode 2). (b) The
+plan relied on **C14 and C14′** (row 92) as black boxes; both records found, independently (J28V §4 row V9), that C14 reads the tight place at a
+finite level only and C14′'s conull-`Ω` format is not the edge-a.e. format a random extension produces. J28D replaced both by a stationary count
+(R88-TC-count); J28V repaired the format by regularisation (R88-J28V-2). **Inventory rows 45, 46:** the §S.2 correction is this paragraph; the §P
+correction is in 3.4.
+
+**Forward propagation of new grokking lines** (the drafts in stage 4 edit G76 rather than mint a new entry): G76's edit bears on **FS-84**
+(T-C(A): a four-colouring of ℚ(√47)'s plane has spectrum on no `T + A + Fin_S`), **FS-64** (every window and every finite-type random colouring of a
+type-(B) plane is a pullback; its four-colour remainder is T-C′), **FS-90** (Y1, the yes side's finite witness), **FS-59** (J41's reading, from row 92's "Not claimed", which is about the same count: at five colours the count fails at the real place,
+`m₁ ≥ 0.229 > 1/5`, so T-C says nothing at ℚ(√167); stated so FS-59's line is not widened), and
+the two new stubs (T-C′, the ultrametric step). Each stub's provisional-bearings line is written in stage 4.
+
+#### 3.2 The §IQ re-read and G72's count
+
+§IQ's structural form was "is every closed `Aff_F`-invariant subset of `X₄(F)` contained in Pull, and every translation-invariant probability measure
+carried by Pull?", with the invariant named in advance: the invariant measures on a colouring's orbit closure, read first through their **spectral
+type**, and **transience**. **What came through it:** T-A is the structural form made exact (the split into Q-μ and Q-tr, with `F ⊆ F_μ ⊆ P`);
+T-C answers Q-μ on the spectral class `T + A + Fin_S` — the invariant §IQ named (spectral type) found and decisive there; T-C(A) is §IQ item 5's
+type-(A) instance. **What did not:** Q-tr's invariant (transience, isolation) was named and not found — T-B1 and T-B2 stop at one step each. The
+method of T-C extends FS-86's tools (Theorem C's spectral classes, C14's count) from windows to invariant measures; the question it answers came
+from the structural form. **G72's count: tenth (row 88) — through the structural question; Q-μ's invariant found on `T + A + Fin_S`, Q-tr's not:
+ten of ten.** *Numbering note:* FS-67's close runs in parallel and may also claim "tenth"; the front-page job orders the two.
+
+#### 3.3 The §PA sweep (what the milestone learned about what its object IS)
+
+1. **Q-tr is "every orbit closure's measure centre lies in Pull"** (J35 §Stage 2, §6.7): transience is the literature's measure-centre condition
+   (Wang–Zhou 2016 for amenable actions; `[ChenDai2017]` Lemma 1.2 in Følner-relative form), and T-A (v)'s engine is the Furstenberg correspondence
+   (`[BergelsonMoragues2021]`). → the drafted G76 line and row 111's mechanism.
+2. **Every pullback is frozen** (`[AlonEtAl2021]`'s definition fits R88-B2-1 verbatim; their criteria need bounded degree and are silent on
+   `Cay(R, U)`). → row 111's partials.
+3. **[reading] T-B1's ultrametric obstruction is expansive subdynamics' archimedean/non-archimedean split** (J35 §Stage 5; Boyle–Lind,
+   Einsiedler–Lind–Miles: vocabulary, not a transferable theorem). → a stub (stage 4), with its killing test.
+4. **C14.2 (c) is `[BardestaniMallahiKarai2017]` §3.2 in window form** — held since FS-58 and recognised there as "the published local form of FS-58
+   D6", never carried to the lemma that uses it: **a G49 instance** (a held paper read for one question is prior art for another). → the *Prior art:*
+   field in `plans/FS86-derivation.md` (stage 4) and a G49 draft line.
+5. **J28V-7 is `[LevitzMott1972]` Thm 2.3** (finite norm property of every subring of a number field). → R88-J28V-7.
+6. **The ℚ⁴ control** (J28 §PA.3): Zaks 1989 on `G(ℚ⁴)` is the one printed structural statement about *every* four-colouring of a rational
+   unit-distance graph (every colour everywhere dense; triangle-full; Benda–Perles's dyadic quaternion residue colours it). → a stub (stage 4).
+7. **A method finding about the instrument** (J35 §Stage 3, §Stage 4; inventory row 79): zbMATH's `ab:` field searches review and summary text, so it
+   can never hit a record whose text is withheld ("contents unavailable due to conflicting licenses" — BMK 2017, Chen–Dai 2017, `[PeledSpinka2023]`);
+   a zero from an `ab:` query measures the reviewed literature only, and all-field, `ti:` and `au:` queries are needed beside it; the author wildcard
+   `au:"Johnson, Peter D.*"` works where the name form returns 0. → a draft line for G49 (WORKFLOW 3.2 item 8 is the natural home; WORKFLOW is not
+   this job's file, so the draft names it for the front page).
+8. **J35's CLOSED-QUESTIONS verdict: none** — the milestone answers no question found posed in print (row 88 undecided; `[Ellenberg2018]` at `k = 4`,
+   Soifer 55.1, BMK's Question 1 and Zaks's ℚ⁴ structure neither answered nor re-posed).
+
+#### 3.4 Predictions, scored once
+
+| id | registered by | prediction (p) | outcome | p(outcome) |
+|---|---|---|---|---|
+| P-TA | plan §P | T-A (i)–(vi) TRUE as stated (0.90) | TRUE, with the `τ` scope repair | 0.90 |
+| P-TC | plan §P | T-C TRUE at its scope, verified blind (0.40) | TRUE, two derivations over type (B) | 0.40 |
+| P-TCA | plan §P | T-C(A) TRUE given T-C's steps (0.40) | TRUE, two derivations over ℚ(√47) | 0.40 |
+| P-TB1 | plan §P | TRUE 0.15 / FALSE 0.10 / GAP 0.75 | GAP | 0.75 |
+| P-TB2 | plan §P | TRUE 0.30 / FALSE 0.15 / GAP 0.55 | GAP | 0.55 |
+| P-decide | plan §P | yes 0.01 / no 0.02 / neither 0.97 | neither | 0.97 |
+| P-truth | plan §P | `F(R_{ℚ(√59)}) ≠ 0` (0.35) | unscorable | — |
+| P-real | plan §P | G76's reading fails on `T + A + Fin` (0.40) | **won**: the real place is an input (`m₁ < 1/4`) on every `T + A + Fin_S` | 0.40 |
+| P-controls | plan §P | the controls read as §S.1 says (0.95) | met (J28D §Stage 2, §3.4; J28V §2.1's closing remark) | 0.95 |
+| P-G75″ | plan §G.1, §P | a triangle-free pinning identity on a type-(B) plane appears (0.03) | did not appear | 0.97 |
+| P-log | plan §P | each job logs ≥ 3 would-have-searched lines (0.70) | met by the plan's two jobs (J28D 3 + one ban's-edge note, J28V 5) | 0.70 |
+| C0 J28D | J28D §1.2 | T-A TRUE 0.90; T-C TRUE 0.55; T-C(A) TRUE 0.50; T-B1 GAP 0.94; T-B2 GAP 0.89 | all five on their favoured outcome | mean 0.756 |
+| C0 J28V | J28V §1.2 | T-A TRUE 0.88; T-C GAP 0.55 (TRUE 0.35); T-C(A) GAP 0.55 (TRUE 0.35); T-B1 GAP 0.75; T-B2 GAP 0.65 | T-A, T-B1, T-B2 on the favoured outcome; T-C and T-C(A) came TRUE against a favoured GAP | mean 0.596 |
+
+The plan's ten scorable predictions average **0.699** on the outcome. **What the table says:** the planner and the blind verifier both priced
+T-C's GAP highest at the step both named in advance (the passage from the random extension to C14's hypotheses), and both routes crossed it — J28D by
+a new stationary count, J28V by a regularisation — so a foreseen obstacle, named before deriving, was repairable twice. **The §P correction owed
+(inventory row 46), recorded here:** P-TB1's and P-TB2's FALSE masses (0.10, 0.15) were incoherent with P-decide "no" (0.02), since a FALSE for either
+is a non-pullback (R88-TA2); a coherent registration puts each FALSE at most 0.02. J28V's C0 repeated the incoherence (0.15 each). Scored as
+registered.
+
+#### 3.5 The verdict, in four parts
+
+- **The choice: Paid (theorem); row 88 not landed.** The milestone's registered deliverables landed — T-A (the decomposition) and T-C and T-C(A) (the
+  measure theorem and its ℚ(√47) form), each by two blind derivations at the scopes filed — and its question stayed undecided with two gaps pinned at
+  named steps, as registered (P-decide "neither" 0.97; P-TB1 and P-TB2 GAP favoured).
+- **The alternative weighed: "Not landed"**, on the ground that the milestone is named for row 88's question and did not answer it. It would buy a
+  headline that cannot be misread as progress on `F(R)`.
+- **Why the choice won:** the verdict label scores the experiment (Kooshi: "All novel knowledge is a success"), and the experiment the plan registered
+  priced the question's decision at 0.03 and staked its deliverables on T-A, T-C and T-C(A); calling that "not landed" misreports what was bought.
+  "Row 88 not landed" stays in the label so the main question's state is in the first words.
+- **Confidence: medium-high.** It drops if a defect is found in the inputs both T-C routes share — C14.1–C14.3 (two derivations at FS-86), or
+  `[AmbrusEtAl2023]`'s certificate (re-checked by J26, not by an independent kernel) — since the two routes are independent only above those inputs.
+
+#### 3.6 The honesty tally (slips, owner errors, retractions)
+
+| who | what | where | caught by |
+|---|---|---|---|
+| J28 | G16/G70 first said ℚ(√59) has no √3-pairs (it has no unit triangles; distance-√3 pairs can exist) | plan §G.1 | J28 itself, stage 1 |
+| J28 | the first route note averaged over `U` "keeping non-Pull mass" (false: weak-* limits can move mass onto the closed Pull unless it is isolated); `Fin` ill-posed as a union | plan §M.1 | J28's modeling passes |
+| J28 | the report promised 45 inventory lines and held 41 | `reports/J28.md` | the clerk |
+| J28 | the plan's T-C route transplanted J21-MX by its conclusion's shape and C14/C14′ by their statements' formats | plan §S.2 | J28D §3.1; J28V §4 row V9 (independently) |
+| J28D | budget: harness ≈ 448k at stage 3's save against the 420k hand-back; stages 4–5 written tersely | `reports/J28D.md` | J28D itself |
+| J28V | its C0 priced FALSE at 0.15 for T-B1 and T-B2, the incoherence J28D had flagged | J28V §1.2, §4 row V7 | J28V itself, stage 4 |
+| J28V | `tools/crunch_j28v_facts.py`'s docstring called check (3) exact (a float sum against exact targets) | commit 88eb2243 | J28V itself, fixed and re-run |
+| J28V | its report says STAGE 4 SAVED; its record's stage 5 (the four pending divergence rows) was committed later with no report update | `reports/J28V.md` vs 9262898f | J41 (this close) |
+| owner | J35's brief widened L-B2-2 ("every archimedean-bounded subset", where the statement is `z + kU`; J28D's proof does give the wider form) | J35 §1.1 | J35's quotation check |
+| owner | J41's brief called T-C "over the whole class S2 … two derivations blind to each other"; the blind second derivation is over type (B) only | this section, stage 1 Q2 | J41's quotation check |
+| clerk | J28V's 11 and J35's 6 report lines, and every HELD line, were not logged in the inventory | inventory rows 51–80 | J41 |
+| sequencing | J28V's lemma phase (its stage 3) found no lemma statements (J28D had saved only T-A); the phase ran at J28V's stage 5 instead | J28V §Stage 3 | J28V, recorded |
+
+**Retractions, all inside the free window** (G51): J28's two (the `U`-average, the `Fin` union) before any job ran; J28D's route change (§3.1) before
+its derivation; J28V's docstring. None cost a committed claim. No verdict of either record was retracted after the other's was read (J28V §Stage 5:
+"Nothing. Every verdict stands").
+
+#### 3.7 The ban measurement (the "would have searched here" log, across the milestone)
+
+| job | lines | what each would have searched; what was done instead |
+|---|---|---|
+| J28 (plan §X) | 4 | a solver on a ball of ℚ(√59)'s lattice agreeing with a pullback on a patch (T-B1's finite shadow) → T-B1, T-B2 posed as derivations; a triangle-free forcer of `(0, 4)` → stage Y1, dated; `χ_gf` of layered configurations by LP → stage Y2, dated; sampled random colourings for C0-type spectra → T-C's route |
+| J28D | 3 (+1 at the ban's edge) | lattice-ball colourings agreeing with a pullback on a patch → derivations; an LP estimate of the stationary ratio at the real place → C14.2 (a) through regularisation; the pinned bootstrap on `R_N` by computer → its number-theoretic obstruction named. **At the edge:** the factor table, a complete enumeration over a set a derivation fixed |
+| J28V | 5 | a finite quotient searched for a random non-pullback with spectrum on `T + A + Fin_S` → the extension lemma, which turns any such object into a window colouring C14's count forbids; an exact window-frequency LP for T-C(A) → the count, derived; a SAT search on a `Λ₅₁₀` ball for converging non-pullbacks → GAP with reductions; a lattice quotient searched for a sparse defect → B2-a–e; numerical least eigenvalues at every stable place → the exact table, Weil exactly, Lemma P (an exact Legendre check of seconds) |
+| J35 | 0 | a gate: literature queries only |
+| J41 | 0 | bookkeeping and drafting |
+
+**Twelve lines and one edge note.** Every line was replaced by a derivation or by a named obstruction; none of the searches could have decided row 88
+(a finite witness for T-B1's or T-B2's FALSE is a non-pullback, priced 0.02). **The ban's clearest return:** J28V's first line — the falsifier search
+for T-C became the extension lemma, and the extension lemma is half of T-C's proof. **Held for Kooshi, post-ban (from 2026-10-01):** **Y1** — a
+triangle-free forcer of `(0, 4)` in a number field inside `ℚ₂(√3)` (row 90's T1; FS-90's grant, carried into FS-90's re-aim); **Y2** — `χ_f(ℚ(√59)²)`
+by an exact LP on derivation-fixed layered configurations (carried into FS-64's re-aim). Neither was briefed; both are Kooshi's call.
+
+**Also held for Kooshi (browser fetches, J35 §6.4):** Sally–Taibleson 1966 (decides whether BMK's vanishing step covers residue characteristic 2),
+Zaks 1989 (the ℚ⁴ control), Johnson 2000, *Infinite graphs and the fractional chromatic number* (Geombinatorics 9(3); could pose T-C(A)'s question),
+Bergelson 1985 (optional).
+
+**Would have searched here (stage 3):** none.
