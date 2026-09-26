@@ -120,3 +120,38 @@ into a **composition layer** (L0, L3, L6, M — formalizable now once the deep n
 **deep layer**: every P-node under it sits on at least one X-node Mathlib lacks entirely (entropy, spectral measures, Bochner, ergodic
 decomposition) or on the adelic topology `τ′_S` (N1). The cheapest P-node that is *not* over an X-node is **M1c at ℚ(√47)** (Dirichlet
 suffices), but it is consumed only through M1, which is over X-EL.
+
+## Stage 2 — SAVED (the reframe, kernel-sized: §G and §PA; a kernel milestone has no §IQ)
+
+### §G — what bears on the lane (one line each; entries not listed are silent: they concern search, forcing or construction, none of which a kernel port of a derived chain does)
+
+| entry | verdict | what it changes |
+|---|---|---|
+| G35 / G43 (Theorem A is kernel over rings; the field-level step is row 57's gap) | **bears** | node U: avoid the gap for one field by an **elementary descent at 11** (U6), as Theorem B avoided valuation theory by a parity descent (row 57) — no number-field machinery, no valuation subring |
+| G63 ("one lemma under two methods") | **bears** | reuse `unitQuadrance_colorable_of_subring` (U2), the lemma under both Theorem A's finite places and `t = 0` |
+| G44 / G56 (usable primes; residue degree) | **bears** | 11 is usable for ℚ(√47): `47 ≡ 3 ≡ 5² (mod 11)`, `11 ≡ 3 (mod 4)`; the colouring is `φ : a + b√47 ↦ a + 5b` |
+| G48 (the conjecture; `L(F)`) | **bears** | the headline is the five-clause at ℚ(√47): `L = 5` from 11 (upper), `χ ≥ 5` the chain (lower); read the statement against this at stage 3 |
+| G30 items 5 and 7 (a theorem over an empty domain; a hypothesis implied by the conclusion's emptiness) | **bears** | the lower half is stated over an **interface** of named hypotheses; each structure hypothesis ships a model, and the headline's hypotheses must be ones the true mathematics satisfies — never a bundle that is empty or that implies `X₄ = ∅` outright |
+| G21 (a control must be reachable; the plant must fire) | **bears** | every `tools/x11k_*.py` check gets a plant watched firing |
+| G76, rows 112–113 | **bears** | L5e's inputs are row 112's (X-AMB, FS-66's certificates, Weil, approximation, Lemma P, Zhang's count); at `S = ∅` C14.2 (c) is not one |
+| G79 (example invariants) | **bears (method)** | SP-Cor's σ_μ is an example invariant (the spectrum of an actual colouring); the kernel lane ports it, and the close records it as such |
+| row 105 (prime inversion in valuation form, kernel) | **bears (cross-check)** | U6 is the easy half of "no stable prime above 11 inverts": unit vectors are 11-integral; the kernel's valuation form is not reused because U avoids valuation subrings |
+| row 118 and inventory item 5 (EL2021 "never applies" on `R̂`) | **bears** | X-EL's scope in the map is `M̂` for finitely generated `ℤ[Γ]`-submodules (M1b), never `R̂` |
+| row 119 (FS-75) | **bears** | the headline's shape is row 119's: `((unitDistance ℂ).induce (planeOver (SquareClass.fieldOfRadicands {47}))).chromaticNumber` |
+| § What compute helps (M2, FS-75: kernel leaves priced high; grep Mathlib by shape at the skeleton) | **bears** | the stage-1 prices are provisional; re-price from the first two leaves closed |
+| G72 / §IQ | silent | a kernel milestone (WORKFLOW 3.3 exempts it) |
+
+### §PA — is the combination formalized anywhere? (ten minutes)
+
+- **Mathlib** (grep of `.lake/packages/mathlib`, this session): no Kolmogorov–Sinai entropy, no Shannon–McMillan–Breiman, no ergodic
+  decomposition, no Bochner/Herglotz for groups (only `Measure.ext_of_charFun` on inner-product spaces), no Markov–Kakutani, no
+  compactness of the dual of a discrete group (`Topology/Algebra/PontryaginDual.lean` has local compactness only). **Has:** Følner filters
+  (`MeasureTheory/Group/FoelnerFilter.lean`), Dirichlet's theorem (`Nat.infinite_setOf_prime_and_eq_mod`), the product formula
+  (`NumberField.prod_abs_eq_one`), the class number (`NumberField.classNumber`), `Nat.Prime.irrational_sqrt`.
+- **Community** (two web searches, "Lean 4 formalization Kolmogorov-Sinai entropy measure rigidity Mathlib ergodic theory project";
+  "Lean Mathlib Bochner theorem positive definite functions locally compact abelian group Pontryagin duality formalization"): one
+  project, `github.com/marcmorningstar/lean4-ergodic-theory`, whose issue #13 describes "Kolmogorov–Sinai entropy of a system as a
+  supremum over partitions" as done and the relative theory as requested — **seen in a search listing only, not read** (G50: to open
+  before any entropy node is formalized). No formalization of Einsiedler–Lindenstrauss, Einsiedler–Fish, Rudolph–Johnson or Host found;
+  no Bochner theorem for groups found.
+- **Verdict:** nothing found formalizing the combination; the negative measures two searches' words (G21).
