@@ -8,7 +8,16 @@ claims; I have not contacted it and have not opened its files.*
 
 ## Theorems this phase proved
 
-*(filled at stage 3)*
+| id | statement (one line) | grade | where |
+|---|---|---|---|
+| J51V-L0 | `T + A` is pure in `R̂`; so `K̂′` is a direct summand of `ℤⁿ` and `Θ = (Φ, B)` after a unimodular change of basis, `K′ ≅ cl Φ(R)` | [hand] | §2.0 |
+| J51V-KS2 | KS-2: under KS-sat, any measurable selection from the essential colours on the `K₀`-cosets is a proper `W′` on `K′` | [hand] | §2.3 |
+| J51V-X1 | over ℚ, `Θ = (θ + ψ_w, θ + ψ_w̄)` (`θ` the dyadic parity, `ψ_w, ψ_w̄` the two primes above 5) and `W = 2⌊2t₁⌋ + ⌊2t₂⌋` satisfy KS-1's hypothesis with `K̂′ = 0`: KS-1 and KS-3 are FALSE | [hand + tools exact] | §2.4, §2.5; `tools/j51v_cross.py` |
+| J51V-X2 | the same over every real number field with a stable dyadic place ramified in `L/F`; the `k²`-colour analogue of KS-1 fails over every real number field; `0 ∉ cl Θ(U)` forces no non-zero `m·Θ` into `T + A` (no naive vector band rigidity) | [hand] | §2.4 |
+| J51V-N1 | KS-1 holds at `n = 1` over every real number field, given row 98 | [hand] | §2.4 |
+| J51V-EQ | over any real number field where T-C(A) holds at `S = ∅`, KS-1 at `F` ⟺ X at `F`; X holds for `Θ ∈ Eⁿ` given T-C(A) at every finite `S`, and at `n = 1` given row 98 | [hand] | §2.6 |
+| J51V-K4, K5 | the controls KS-4, KS-5 hold (KS-5 with "image" read "closure of the image") | [hand + tools exact (C5)] | §2.1, §2.2 |
+| J51V-K0 | J45's SP-Cor and A⁺ at `S = ∅` hold with J45's proofs over every real number field where T-C(A) holds at `S = ∅`; ℚ(√143), ℚ(√311), ℚ(√335) are in T-C(A)'s class | [hand; membership tools exact, not blind] | §2.7; `tools/j51v_class.py` |
 
 ## Stage 1 — SAVED (quotation check, fence log, C0)
 
@@ -213,3 +222,57 @@ Legendre work was done before the breach.)
   (2, 3)), and `forget-seven` aimed at ℚ(√11) (already out through its stable dyadic place). Both replaced by plants that fire; both kept in the
   tools' docstrings.
 - The fence breach of §1.2.
+
+## Stage 3 — SAVED (the write-up; committed before anything fenced is opened)
+
+### 3.1 Verdicts, per claim (the fixed list)
+
+| claim | verdict | grade | the one-line reason |
+|---|---|---|---|
+| KS-4 (control) | **TRUE** | [hand + tools exact] | `W` factors through `π = p₁`; `θ_{C9}(U) ⊆ [1/4, 3/4]` |
+| KS-5 (control) | **TRUE**, with "image" read "closure of the image" | [hand] | `K̂′ = ℤ × 0` after the basis change; `W` factors |
+| KS-2 | **TRUE** | [hand] | Fubini over `K₀`-cosets: adjacent cosets' essential colour sets are disjoint |
+| KS-1 | **FALSE** — counterexample over ℚ (J51V-X1) | [hand + tools exact] | a proper four-colouring of ℚ² whose `T + A` information sits only inside non-`(T + A)` components, so `K′ = {0}`; TRUE at `n = 1` (J51V-N1) |
+| KS-3 | **FALSE** — the same example; also `(ψ_w, ψ_w̄)` alone | [hand + tools exact] | at a split place the torus `y ↦ (y, y⁻¹)` shows two characters only a cross |
+| KS-C | **TRUE as an implication** (the step KS-1 at ℚ(√47) ∧ T-C(A)@∅ ⟹ X is valid); **hollow**: KS-1 is false as stated, and at ℚ(√47) KS-1 ⟺ X (J51V-EQ) | [hand] | the pulled-down colouring's spectrum is on `{m·Θ : m ∈ K̂′} ⊆ T + A` |
+| K0 | **TRUE**, with a scope note | [hand; membership not blind] | no step of A⁺ or SP-Cor reads ℚ(√47) except through T-C(A); A⁺ at a finite `S` needs T-C(A) at that `S` |
+
+**What stays open, stated once.** X ("no four-colouring of ℚ(√47)'s plane of the form `x ↦ W(Θ(x) + t)`") is proved for `Θ ∈ Eⁿ` (T-C(A) at a
+finite `S`) and for `n = 1` (row 98 + T-C(A)@∅); for `n ≥ 2` with a combination outside `E` it is open, and no uniform selection lemma can close
+it — any proof must use ℚ(√47)'s arithmetic, as T-C(A)'s count does.
+
+### 3.2 The mechanism, in the discipline's words [reading, from J51V-X1/X2]
+
+At a place split in `L/F` the two primes above it see complementary halves of the norm-one torus, so `x ↦ (ψ_w(x), ψ_w̄(x))` sends every unit
+vector into the cross `(T × 0) ∪ (0 × T)`. Composed with a band character `θ`, `Cay(R, U)` maps homomorphically into the Cayley graph on `T²` with
+connection set `(I × T) ∪ (T × I)`, `I = cl θ(U)` — which is the **co-normal (disjunctive) product** `Cay(T, I) ∗ Cay(T, I)` — and a co-normal
+product is `χ(G)²`-colourable. So colourings "local at no place" in KS-1's quotient sense exist cheaply wherever `χ(G)² ≤ k`; at four colours that
+needs a bipartite `G`, i.e. a bipartite plane. *Killing test of the reading that this is the only cheap mechanism:* a four-colouring of the form
+`W(Θ(x) + t)` over a field with no two-colour `T + A` character and `K̂′` too small to carry it — which at ℚ(√47) would falsify the conjecture.
+
+### 3.3 C0 scored (the first-read column)
+
+KS-1: modal TRUE (0.55) — **lost** (FALSE). KS-2: TRUE (0.85) — met. KS-3: TRUE/FALSE tied (0.35/0.35) — FALSE. KS-4, KS-5: TRUE (0.92, 0.88) —
+met. KS-C: TRUE (0.75) — met, but the substance (circularity) was not in the prior. K0: TRUE (0.80) — met. The two misses are the two claims that
+quantify over every field, every `n` and every `Θ`; the split-place torus was the whole difference.
+
+### 3.4 Corrections owed and proposals (the front-page lane decides)
+
+1. **The Kronecker selection, as KS-1 states it, is false** (J51V-X1); FS-100's stage 4 cannot finish the pure-point layer at ℚ(√47) by a uniform
+   lemma. The stub's §2.3 table cell "Kronecker selection — finishes the pure-point layer" (ℚ(√47) column) should read: the `E`-part is finished by
+   T-C(A) at finite `S` directly, rank one by row 98 with T-C(A)@∅; the rank `≥ 2` non-`E` part is open, and at ℚ(√47) the selection is equivalent
+   to it (J51V-EQ).
+2. **The controls KS-4 and KS-5 cannot see KS-1's failure** (their `W` factors through `π`). J51V-X1 is the missing control: a `W` that reads the
+   non-`(T + A)` coordinates. Any future formulation of a selection should be run against it (and against its `k²` form, J51V-X2 (b), at five
+   colours: `k = 2` gives four colours ≤ five).
+3. **Row 98's "Not claimed" list** could add: no naive vector form — `0 ∉ cl Θ(U)` does not force a non-zero `m·Θ` into `T + A` (J51V-X2 (c)).
+4. KS-5's wording: "the image of `θ_{C9}`" → "the closure of the image of `θ_{C9}`, via the first coordinate".
+5. K0's scope: "given T-C(A) there at `S = ∅`" yields SP-Cor and A⁺ at `S = ∅`; J45's full A⁺ needs T-C(A) at every finite `S` (J28D's class form).
+6. The brief's input list: SP-oi is not in J45 §5.4 (it is in J45's theorems table and §4.2); row 105 does not state `R = O′` (Lemma C′ does).
+7. **G21 / method:** two plants that could not fire (§2.9); and a fence breached by a broad `grep plans/*.md` (§1.2) — a blind job's searches
+   should exclude the fenced files by name.
+
+### 3.5 Stage 4 (the fallback) — not triggered
+
+Stage 2 reached a verdict on every claim; nothing stalled, so J51D's lemma statements were not read. Nothing fenced was opened on purpose at any
+stage.
