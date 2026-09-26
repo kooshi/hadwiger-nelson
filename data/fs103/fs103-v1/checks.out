@@ -1,0 +1,28 @@
+PASS d=635087 prime and = 7 mod 8 (dyadic place split in L/F)
+PASS first stable primes of Q(sqrt635087): [103, 107, 127, 163, 191] (claim: 103, 107, 127, 163, 191)
+PASS every p = 3 mod 4 below 103 inert
+PASS ramified place 635087: residue F_635087, 635087 = 3 mod 4, so stable
+PASS 3d not a square: sqrt3 not in F (no unit triangle)
+PASS control Q(sqrt167): first stable [23, 43, 59], dyadic split
+   lambda*(Gamma_3) level one = 0.500000000   Weil 2sqrt(p)/(p+1) = 0.866025
+   lambda*(Gamma_7) level one = 0.561744901   Weil 2sqrt(p)/(p+1) = 0.661438
+   lambda*(Gamma_11) level one = 0.476412726   Weil 2sqrt(p)/(p+1) = 0.552771
+   lambda*(Gamma_19) level one = 0.380486432   Weil 2sqrt(p)/(p+1) = 0.435890
+   lambda*(Gamma_23) level one = 0.331695299   Weil 2sqrt(p)/(p+1) = 0.399653
+   lambda*(Gamma_31) level one = 0.333328453   Weil 2sqrt(p)/(p+1) = 0.347985
+   lambda*(Gamma_43) level one = 0.271868866   Weil 2sqrt(p)/(p+1) = 0.298065
+   lambda*(Gamma_47) level one = 0.275974250   Weil 2sqrt(p)/(p+1) = 0.285652
+   lambda*(Gamma_59) level one = 0.248626283   Weil 2sqrt(p)/(p+1) = 0.256038
+   lambda*(Gamma_67) level one = 0.221976141   Weil 2sqrt(p)/(p+1) = 0.240746
+   lambda*(Gamma_71) level one = 0.220415895   Weil 2sqrt(p)/(p+1) = 0.234060
+   lambda*(Gamma_79) level one = 0.213774060   Weil 2sqrt(p)/(p+1) = 0.222205
+   lambda*(Gamma_83) level one = 0.210818187   Weil 2sqrt(p)/(p+1) = 0.216915
+   lambda*(Gamma_103) level one = 0.192617200   Weil 2sqrt(p)/(p+1) = 0.195171
+   lambda*(Gamma_107) level one = 0.187135067   Weil 2sqrt(p)/(p+1) = 0.191557
+   lambda*(Gamma_127) level one = 0.171641886   Weil 2sqrt(p)/(p+1) = 0.176085
+PASS controls: Gamma_11 0.476413, Gamma_19 0.380486
+PASS control: Gamma_59 Hoffman ratio 0.199119854095 (row 110)
+PASS 103, 107, 127 and Weil at q >= 103 below 1/5
+PASS F_dG stable primes below 600 (unramified): [131, 479]
+PASS ramified 3, 7, 11: residue field F_{p^2} (5 mod 3, 3 mod 7, 7 mod 11 non-residues)
+FAILURES: 0

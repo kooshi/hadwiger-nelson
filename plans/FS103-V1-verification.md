@@ -58,3 +58,127 @@ opened before stage 3's commit.*
 ### 1.3 Would-have-searched-here log
 
 *(none yet)*
+
+## Stage 2a — SAVED (the load-bearing claim C-LB, derived blind)
+
+*Inputs used, each by statement only: I-RU, I-C′ (`R = O′`), I-WEIL, I-CP57 (controls), I-MR (only where marked "given MR"). Not used:
+I-SEL, I-EXT4 (re-derived below in the form needed, at `k` colours and `S = ∅`), I-MX (sealed; my selection lemma is my own), I-MERGE
+(its needed direction is one line, V1-L8). Classical tools named at use: Bochner–Herglotz on discrete and on second-countable LCA groups,
+strong approximation for `𝔾_a`, weak approximation for the norm-one torus (via Hilbert 90), existence of a jointly measurable modification of
+a process continuous in probability on a separable metric index set, Parseval on a compact metrizable abelian group.*
+
+**Setting.** `F` totally real of degree `d`, outside row 100's exception, so `R = O′` (I-C′): the elements of `L` integral at every stable
+prime. Stable places of `F`: odd `v` whose residue field is `𝔽_q`, `q ≡ 3 (mod 4)` (then `L_w/F_v` is unramified quadratic, residue
+field `𝔽_{q²}`; for odd `v`, `i ∈ F_v` iff `−1` is a square in the residue field, by Hensel), and dyadic `v` with `L_w/F_v` inert (the
+ramified case is the exception). `G_∅ := (L ⊗ ℝ) × K`, `K := ∏_{w stable} O_w` (compact metrizable), `T_∅ := ∏_{v|∞} S¹ × ∏_w T_w`, `T_w`
+the norm-one group of `L_w` (`⊆ O_w^×`, since `|u|_w = |ū|_w` at a conjugation-fixed `w`); `L ⊗ ℝ = ℂ^d` because `F` is totally real, so
+`Cay(G_∅, T_∅) = UD(ℝ²)^{×d} × ∏_w Cay(O_w, T_w)` (categorical). `ν := ⊗_w ν_w`, `ν_w` Haar on `T_w`.
+
+**V1-L0 (invariant random colouring).** If `F²` is `k`-colourable, `[k]^R` carries an `R ⋊ U`-invariant probability `μ` on proper
+`k`-colourings of `Cay(R, U)`. *Proof.* `R ⋊ U` (affine maps `x ↦ ux + r`) is countable and solvable, hence amenable; it preserves the
+closed set of proper colourings (`u⁻¹(x + w − r) − u⁻¹(x − r) = u⁻¹w ∈ U`); average the orbit of one colouring over a Følner sequence and take
+a weak-* limit. ∎
+
+**V1-L1 (spectral measure).** With `g(x) = e_{c(x)}` (simplex, `⟨e_a, e_b⟩ = (k/(k−1))δ_ab − 1/(k−1)`), `r(x) := E⟨g(0), g(x)⟩` is positive
+definite, real and even, `r(0) = 1`; Herglotz gives `σ` on `R̂` with `r(x) = ∫ χ(x) dσ`, total mass 1, symmetric; rotation invariance of `μ`
+gives `r(ux) = r(x)`, hence `u_*σ = σ` for `(u·χ)(r) = χ(ur)`; properness gives `r(w) = −1/(k−1)` for `w ∈ U`, in particular
+`∫ χ(1) dσ = −1/(k−1)`. ∎
+
+**V1-L2 (the `T + A` factor).** Let `H := {f ∈ L²(μ) : σ_f(R̂ ∖ (T + A)) = 0}` (spectral measures for the Koopman translation action). Then
+(a) `T + A` is exactly the set of restrictions to `R` of characters of `G_∅` (so Borel, σ-compact, `U`-invariant); (b) `f ∈ H` iff
+`y ↦ f∘τ_y` is continuous at 0 in `L²` for the `G_∅`-topology on `R`; (c) `H = L²(𝓕)` for a translation-invariant sub-σ-algebra `𝓕`, so the
+spectral projection onto `T + A` is `E[· | 𝓕]`. *Proof.* (a) `R/nR = O′/nO′ ≅ ∏_{w stable, w|n} O_w/nO_w` (`O′` integral exactly at the
+stable primes), so the torsion characters are the restrictions of `K̂ = ⊕_w Ô_w`; the archimedean ones are the restrictions of
+`(L⊗ℝ)^`; sums give `Ĝ_∅`'s restrictions (a countable union of translates of an image of `ℝ^{2d}`). `u` acts on `G_∅` by a homeomorphism
+(multiplication; `u ∈ O_w^×` at stable `w`), so the set is `U`-invariant. (b) ⟹: `‖f∘τ_y − f‖² = 2∫(1 − Re χ(y)) dσ_f → 0` by dominated
+convergence, each `χ ∈ T + A` being `G_∅`-continuous (`G_∅` metrizable, sequences suffice). ⟸: `φ(y) = ⟨f∘τ_y, f⟩` is positive definite and
+`G_∅`-continuous on `R`, hence uniformly continuous (`|φ(x) − φ(y)|² ≤ 2φ(0)(φ(0) − Re φ(x − y))`), so it extends to the closure of `R` in
+`G_∅`, a closed subgroup, positive definite there; Bochner there and Pontryagin extension of its characters to `G_∅` put `σ_f` on the
+restrictions of `Ĝ_∅`, i.e. on `T + A` by (a) (uniqueness of Fourier–Stieltjes transforms on the discrete `R`). (c) The bounded elements of
+`H` with `G_∅`-continuous orbit form a unital `*`-algebra (`‖(fh)∘τ_y − fh‖ ≤ ‖f‖_∞‖h∘τ_y − h‖ + ‖h‖_∞‖f∘τ_y − f‖`), closed under
+bounded `L²` limits (uniformly in `y`, since `τ_y` is unitary), so it is `L^∞(𝓕)` for the σ-algebra `𝓕` it generates; every `f ∈ H` is an
+`L²` limit of Lipschitz truncations of its real and imaginary parts, which keep a continuous orbit and are bounded, so `H = L²(𝓕)`;
+`τ_y` commutes with spectral projections, so `𝓕` is translation-invariant. ∎
+
+**V1-L3 (the dichotomy — C-LB's two cases).** Put `τ := σ|_{R̂∖(T+A)}` and `p_x(a) := P(c(x) = a | 𝓕)`. Then `τ` is a `U`-invariant finite
+positive measure with `τ(E) = 0`, and `∫ χ(1) dτ ≤ 0`. **Either** `∫ Re χ(1) dτ < 0` — case (B) — **or** `∫ χ(1) dτ = 0`, and then
+`Σ_a p_x(a) p_{x+u}(a) = 0` a.s. for every `x ∈ R`, `u ∈ U` (the conditional colour laws at adjacent vertices have disjoint supports).
+*Proof.* `U`-invariance: restriction of the `U`-invariant `σ` to the `U`-invariant Borel set `R̂ ∖ (T + A)`. `τ(E) = σ(E ∖ (T + A)) = 0` by
+**I-RU** (applied to the finite `U`-invariant `σ`) — the one place R-U is used, and it is what makes (B)'s witness `E`-null rather than
+merely `(T + A)`-null. By V1-L2 (c), `ḡ(x) := E[g(x) | 𝓕] = Σ_a p_x(a) e_a` is the spectral projection of `g(x)` onto `T + A`, so
+`E⟨ḡ(0), ḡ(u)⟩ = ∫_{T+A} χ(u) dσ = ∫_{T+A} χ(1) dσ` (`U`-invariance of `σ|_{T+A}`). For probability vectors `p, q`,
+`⟨Σ p_a e_a, Σ q_b e_b⟩ = (k/(k−1))Σ_a p_a q_a − 1/(k−1) ≥ −1/(k−1)`. Hence `∫ χ(1) dτ = −1/(k−1) − ∫_{T+A} χ(1) dσ ≤ 0`, with equality iff
+`E Σ_a p_0(a) p_u(a) = 0`; stationarity moves `0` to any `x`. ∎
+
+**V1-L4 (density).** `R` is dense in `G_∅`, and `U` is dense in `T_∅`. *Proof.* Strong approximation for `L` omitting one split prime `w₀`:
+an adelic basic open set prescribing `L ⊗ ℝ` to within `ε`, finitely many stable residues modulo `𝔭^n`, and integrality at every other
+finite place `≠ w₀` contains some `x ∈ L`; such `x` is integral at every stable prime, so `x ∈ O′ = R`. For `U`: by Hilbert 90
+`U = {y/ȳ : y ∈ L^×}`; weak approximation makes `L^×` dense in `∏_{v∈S} (L ⊗ F_v)^×` for every finite `S`, and `y ↦ y/ȳ` maps
+`(L ⊗ F_v)^×` continuously onto the local norm-one group (local Hilbert 90; `S¹` at a real place), so `U` is dense in every finite
+sub-product of `T_∅`, hence in `T_∅` (product topology). ∎
+
+**V1-L5 (extension; I-EXT4's form at `k` colours, `S = ∅`).** In case (not B), `p` extends to a `G_∅`-stationary, `Δ_k`-valued process `p̃`,
+continuous in probability, with a jointly measurable version, such that `Σ_a p̃_z(a) p̃_{z+t}(a) = 0` a.s. for every `z ∈ G_∅`, `t ∈ T_∅`.
+*Proof.* Each `p_·(a)` is `(E[1_{c(0)=a} | 𝓕])∘τ_x`, in `H`, so `‖p_y − p_0‖₂ → 0` as `y → 0` in `G_∅` (V1-L2 (b)), uniformly in the base
+point by stationarity; for `z ∈ G_∅` take `y_n → z` in `R` (V1-L4): `p_{y_n}` is Cauchy in `L²`, set `p̃_z` its limit (a probability vector
+a.s.). Finite-dimensional laws are limits of translates, so `p̃` is `G_∅`-stationary. For `z`, `t ∈ T_∅`, take `y_n → z` in `R`, `u_n → t`
+in `U`: `(p,q) ↦ Σ_a p_a q_a` is bounded bilinear, so `E Σ_a p̃_z(a) p̃_{z+t}(a) = lim E Σ_a p_{y_n}(a) p_{y_n+u_n}(a) = 0`. Jointly
+measurable version: the classical theorem for processes continuous in probability on a separable metric index set. ∎
+
+**V1-L6 (selection over a mixing compact factor).** Let `G₀` be a second-countable LCA group, `S₀ ⊆ G₀`, `K` compact metrizable abelian,
+`ν` a symmetric probability on `T_K ⊆ K`, `λ* := sup_{ξ ∈ K̂∖0} |ν̂(ξ)| < 1/(k−1)`. If `p̃` is a jointly measurable, `G₀ × K`-stationary,
+continuous-in-probability `Δ_k`-valued process with `Σ_a p̃_z(a) p̃_{z+(s,t)}(a) = 0` a.s. for every `z`, `s ∈ S₀`, `t ∈ T_K`, then
+`Cay(G₀, S₀)` carries a CP `k`-colouring. *Proof.* Fibre masses `m_x(a) := ∫_K p̃_{(x,h)}(a) dh`, `Σ_a m_x(a) = 1`. **Edge inequality:** for
+`s ∈ S₀`, Fubini (joint measurability) turns the a.s. statements into: a.s., `∫∫ φ(h) ψ(h + t) dh dν(t) = 0` for `φ = p̃_{(x,·)}(a)`,
+`ψ = p̃_{(x+s,·)}(a)`, `[0,1]`-valued with means `α = m_x(a)`, `β = m_{x+s}(a)`. Parseval on `K`:
+`0 = αβ + Σ_{ξ≠0} \overline{φ̂(ξ)} ψ̂(ξ) ν̂(ξ) ≥ αβ − λ*‖φ − α‖₂‖ψ − β‖₂ ≥ αβ − λ*√(α(1−α)β(1−β))`, so, if `α, β > 0`,
+`√((α/(1−α))(β/(1−β))) ≤ λ*`. Since `λ* < 1/(k−1)`, `λ*/(1 + λ*) < 1/k`; fix `λ*/(1+λ*) < θ₁ < θ₂ < 1/k`. **Randomised threshold:** draw
+`θ` uniform on `[θ₁, θ₂]`, independent, and set `f(x) :=` the least `a` with `m_x(a) ≥ θ` (exists: `max_a m_x(a) ≥ 1/k > θ`). *Proper at
+every edge:* `f(x) = f(x+s) = a` gives `α, β ≥ θ`, so `√(·) ≥ θ/(1−θ) > λ*`, contradicting the edge inequality, which holds a.s.; so
+`P(f(x) = f(x+s)) = 0`. *Continuous in probability:* `f(x) ≠ f(y)` needs `θ` between `m_x(a)` and `m_y(a)` for some `a`, so
+`P(f(x) ≠ f(y)) ≤ Σ_a E|m_x(a) − m_y(a)|/(θ₂ − θ₁) ≤ Σ_a E|p̃_{(x,0)}(a) − p̃_{(y,0)}(a)|/(θ₂ − θ₁) → 0` (stationarity in `K`).
+*Translation-invariant:* the joint law of finitely many `m_x` is determined by `p̃`'s finite-dimensional laws (each `m_x(a)` is the `L²`
+limit of `N⁻¹Σ_{j≤N} p̃_{(x,H_j)}(a)`, `H_j` i.i.d. Haar, independent; error `≤ N^{−1/2}`), and those are `G₀`-invariant; `θ` is independent.
+∎ **Sharp:** `ν` uniform on `ℤ/k ∖ 0`, `K = ℤ/k`, has `λ* = 1/(k−1)`, and `K_{k+1} × K_k` is `k`-colourable while `K_{k+1}` is not — the
+strict inequality is used exactly at `θ₁ > λ*/(1+λ*)`.
+
+**V1-L7 (thickness is uniform).** If every stable place is `k`-thick (D-THK (c)), then `λ*(K, ν) = sup_w λ*_w < 1/(k−1)`. *Proof.* A
+non-trivial character of `K` is `⊗_w ξ_w` with finitely many `ξ_w ≠ 1`, and `ν̂ = ∏_w ν̂_w(ξ_w)`, so `|ν̂| ≤ λ*_{w₀}` for any `w₀` with
+`ξ_{w₀} ≠ 1`; hence `λ*(K,ν) = sup_w λ*_w`. By I-WEIL every odd stable `w` of residue field `𝔽_q` has `λ*_w ≤ max(2√q/(q+1), 2/(q+1)) → 0`,
+and dyadic stable places are finitely many, so the sup is a maximum over finitely many places, each `< 1/(k−1)`. ∎
+
+**V1-L8 (merging real places).** A CP `k`-colouring `f` of `UD(ℝ²)^{×d}` gives one of `UD(ℝ²)`: `x ↦ f(x, …, x)`. *Proof.* The diagonal
+is a continuous group homomorphism `ℝ² → ℝ^{2d}` carrying `S¹` into `(S¹)^d`; invariance, continuity in probability and properness at
+each fixed edge all pull back. ∎ (This is I-MERGE's needed direction; the converse is projection. Both are one line; I-MERGE as held is
+not needed.)
+
+**Theorem V1-LB (C-LB).** For every totally real `F` outside row 100's exception and every `k ≥ 2` with `N_k(F) = ∅`: if `F²` is
+`k`-colourable, then either (A) `UD(ℝ²)` carries a CP `k`-colouring, or (B) some `U`-invariant finite positive `τ` on `R̂` has `τ(E) = 0` and
+`∫ Re χ(1) dτ < 0`. **No MR.** *Proof.* V1-L0, L1; V1-L3 gives (B) or disjoint supports; in the second case V1-L5 extends to
+`Cay(G_∅, T_∅)`, V1-L6 with `G₀ = L ⊗ ℝ = ℝ^{2d}`, `S₀ = (S¹)^d`, `K = ∏_w O_w`, `ν = ⊗ν_w` (V1-L7 supplies `λ* < 1/(k−1)`) gives a CP
+`k`-colouring of `UD(ℝ²)^{×d}`, and V1-L8 gives (A). ∎ **General form (same proof, `N_k(F)` arbitrary):** select only over
+`K_thick = ∏_{w ∉ N_k} O_w`; (A) becomes "`UD(ℝ²) × ∏_{w∈N_k(F)} Cay(O_w, T_w)` carries a CP `k`-colouring" (diagonal merge on the real
+factors only), which is D-NY's `Y_{F,k}` with the compact pieces in place of `Cay(L_w, T_w)` — equivalent for CP colourability (`Cay(L_w, T_w)`
+is a union of `O_w`-cosets, each a copy of `Cay(O_w, T_w)`; restrict one way, independent copies over the countably many cosets the other).
+**Given MR(F): (B) is impossible** (`τ = a·Haar` and `∫ χ(1) dHaar = 0`, `χ ↦ χ(1)` being a non-trivial character of the compact group
+`R̂` since `1 ≠ 0` in `R`), so `k`-colourability of `F²` gives (A).
+
+**Where each hypothesis is used.** *Totally real:* V1-L6's `G₀ = ℝ^{2d}` with edge set `(S¹)^d`; a complex place would put its norm-one
+group, a non-compact `ℂ^×`, in `T_∅`, and neither V1-L6 (needs the compact factor mixing) nor V1-L8 handles it — the claim's scope is
+right to exclude it. *Outside the exception:* `R = O′` in V1-L2 (a) and V1-L4 (with `R ≠ O′` the closure of `R` is a proper subgroup of
+`∏ O_w` and V1-L6's product structure is lost). *`N_k(F) = ∅`:* V1-L7. *I-RU:* only V1-L3's `τ(E) = 0`. *Rotation invariance:* only V1-L1's
+`U`-invariance of `σ` (hence of `τ`, and `∫_{T+A} χ(u) dσ = ∫_{T+A} χ(1) dσ`).
+
+**The controls, run.** (K1) ℚ(√167) at `k = 4`: stable places 23, 43, 59, … (PARI, `data/fs103/fs103-v1/places.gp`; dyadic split,
+`dyadic.gp`), level-one `λ*(Γ₂₃) = 0.331695 < 1/3` (`tools/fs103_v1_checks.py`), higher levels `≤ 2/24`: `N₄ = ∅`, so V1-LB with MR and
+I-CP57's `χ_CP ≥ 5` gives `χ(ℚ(√167)²) ≥ 5` — row 123's / FS100-167's second route, **reproduced**. (K2) ℚ(√11) at `k = 4`: the dyadic place is
+stable inert with level-one piece `U₂ = Cay(𝔽₄, 𝔽₄^×) = K₄`, `λ* = 1/3` exactly; the split 7 gives `Γ₇`, `λ* = 0.5617`; the ramified 11
+gives `Γ₁₁`, `0.4764` — `N₄ ≠ ∅`, the chain **stops** at V1-L7/L6 (and at the dyadic factor exactly at the sharpness case `K_4`), and the
+general form's (A) — `UD(ℝ²) × ∏_{N₄} Cay(O_w, T_w)` CP-4-colourable — **holds**, by the residue colouring at the dyadic place pulled back
+and randomly translated: consistent with `χ(ℚ(√11)²) = 4` (row 73). (Secondary, ℚ(√47): `N₄ ∋` the split 11, `λ* = 0.476`; the general form
+leaves `UD(ℝ²) × G₁₁`, whose CP 4-colourings are excluded by the product ratio bound (`m₁ < 1/4` and `G₁₁`'s ratio `< 1/4`) — the SP-Cor
+route of rows 121, 123, not re-derived here.) **Wrong-reason lines (stage 1) avoided:** (i) V1-L2 (c); (ii) V1-L4, L5; (iii) I-RU in V1-L3;
+(iv) V1-L6 uses full-depth `K̂`, strictness, and stops at `K₄`; (v) no MR in V1-LB.
+
+**Verdict C-LB: TRUE** at `k = 4, 5, 6` (indeed every `k ≥ 2`), as stated and with no MR. [hand; one mind (this derivation), blind to the
+two held proofs of T-J39-3; exact checks tools-grade].
