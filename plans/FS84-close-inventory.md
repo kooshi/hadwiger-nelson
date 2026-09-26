@@ -18,3 +18,10 @@
 | 13 | slip | FS-66 p19 re-check (9 min, <1 GiB, 1 thread) ran without scripts/slot.py | plans/FS84-S1-derivation.md §3 first line | open |
 | 14 | tool defect | first S1c plant could not fire (tested parity, margin 1/4); replaced by the order-4 point, fired | plans/FS84-S1-derivation.md §3.2 | open |
 | 15 | stub to re-aim | S1d's next step: odd girth and short odd-cycle orbits of Cay(Λ₂₄₀, U₂₄₀) to fix the window W, then its count (an exact computation, ban's edge) | plans/FS84-S1-derivation.md §4.1 | open |
+| 16 | result | V1 blind second derivation, AmbrusEtAl-free; a sharper Lemma P (new characters \|λ\| ≤ 2p^⌈m/2⌉, ramified places too); 31's margin certified by an exact Sturm count on an integer polynomial | plans/FS84-S1V-verification.md §V1; tools/fs84_s1v_ratio_check.py (plants fire) | open |
+| 17 | result | amenability is load-bearing in S1b-i: an F₂-graph, 6-colourable, whose 6-colourings map equivariantly onto ∂F₂ (closes the deriver's §2.4 open item) | plans/FS84-S1V-verification.md §V2 | open |
+| 18 | correction owed | plan §5.2 a4 says "The sup is attained at 31"; it should say the bound binds at 31 and the supremum is attained at 11 or 31, undecided. S1e (i) needs "Γ four-colourable" added | plans/FS84-S1V-verification.md §2.1 D2, §2.3 | open |
+| 19 | correction owed | the brief's V3 does not quote plan §M.1: it is the planner's own text, and its compactness half paraphrases plan §G's R96 line ("finitely generated" became "saturated") | plans/FS84-S1V-verification.md §2.0 | open |
+| 20 | prediction scored | P-S1a (two AmbrusEtAl-free derivations, 0.85): met | plans/FS84-S1V-verification.md §2.1 D1 | open |
+| 21 | ruling | S1V's held item (look for a four-colourable unit-distance lattice with Θ₄ = ∅) not pursued as a job; passed to the ℚ(√59) wanted-poster session (J38) as a candidate control | owner | open |
+| 22 | owner slip | the S1V brief's V3 paraphrased the plan (R96 line: "finitely generated" became "saturated"); a brief must quote | FS84-S1V report; plans/FS84-S1V-verification.md §2.0 | open |
