@@ -262,3 +262,38 @@ build plus ~20k.
 **Proposed for the front page** (the front-page lane decides): a `LEDGER.md` § B line for the [hand] Dirichlet sharpening of Lemma W at
 ℚ(√47); a stub for the kernel lane's next slot (the three leaves, then the gate for U, then the entropy decision); a `BIBLIOGRAPHY.md`
 candidate row for Rudin, *Fourier Analysis on Groups* (1.3.6, 1.4.3; not held here, cited by statement for X-BH).
+
+---
+
+# X11K2 — the kernel lane's next slot (brief `data/crunch-2026-09-26-x2x3/briefs/X11K2-lean-47-gate-and-upper-bound.md`)
+
+## X11K2: Theorems this phase proved
+
+- `SqrtFortySeven.chromaticNumber_planeOver_sqrt47_le_five` — **`χ(ℚ(√47)²) ≤ 5`, unconditional** [Lean, standard three axioms,
+  sorry-free; `lake env lean`, gated at stage 2]; with `exists_residue11` (node U4–U6), `coords_unique` (the normal form's
+  uniqueness), `q47`/`f47_le_q47` (`ℚ(√47) ⊆ {a + b√47}`), `z11`/`red` (`ℤ₍₁₁₎ → 𝔽₁₁`), `A`/`phi` (`a + b√47 ↦ a + 5b`), `zmod_key`,
+  `eleven_dvd`, `int_descent`, `rat_descent`, `unit_mem_A` (every unit vector of `ℚ(√47)²` is 11-integral). File:
+  `data/fs100/x11k/skeleton/SqrtFortySeven.lean`.
+
+## X11K2: Would-have-searched-here log
+
+- (none — statement and proof work only; the one finite check is `decide` over the 121 points of `𝔽₁₁²`, whose extent the
+  derivation fixed)
+
+## X11K2 Stage 1 — SAVED (leaf U: `χ(ℚ(√47)²) ≤ 5` unconditional)
+
+**Quotation check (standing rule 5).** The brief's two kernel lines ("Build only as `scripts/slot.py --mem 60 --cpus 16 -- env
+MEMMAX=60G ./scripts/build.sh`, never `lake build`" and "You are the only kernel job running") match X11K's brief verbatim. The
+owner's mid-slot message quotes Kooshi: "The target for the Lean implementation should move to the more general "every real"
+claim." — owner-supplied, not checkable here; handled at stage 1R below.
+
+**Closed:** leaf U as a standalone module `data/fs100/x11k/skeleton/SqrtFortySeven.lean` (namespace
+`HadwigerNelson.SqrtFortySeven`), elaborated under `scripts/slot.py --mem 12 --cpus 4 -- lake env lean …`: exit 0, no warning,
+log `data/fs100/x11k/sqrt47u.log`; `#print axioms` on `chromaticNumber_planeOver_sqrt47_le_five` and `exists_residue11`:
+`[propext, Classical.choice, Quot.sound]` (4.0 CPU s, 3.4 GB). **Route, as priced by X11K (U4–U6):** the normal form by a subfield
+`{a + b√47}` closed under inverses through the norm form (`norm_eq_zero` from `Nat.Prime.irrational_sqrt`); coordinates by choice
+with uniqueness; `A` = the elements with 11-integral coordinates; the descent over ℤ by strong induction on the common
+denominator (`(A ± 5B)² + (C ± 5E)² ≡ 0 (mod 11)` for both signs, and `x² + y² ≡ 0 ⟹ x ≡ y ≡ 0` by `decide` on 121 cases). No
+valuation subring, no number-field API. **Plant:** replacing `√47 ↦ 5` by `↦ 4` (and `47 = 5²` by `47 = 4²`) is refused by
+`decide` at `forty_seven_eq` (scratch copy; the shipped file untouched). **Spec:** `√47 ↦ 5` under `phi`; `1/11 ∉ ℤ₍₁₁₎`,
+`1/2 ∈ ℤ₍₁₁₎`. **Price:** ~35k harness tokens, inside X11K's 40–60k.
